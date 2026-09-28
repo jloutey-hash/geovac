@@ -7,8 +7,9 @@
 % GeoVac series. Siblings: Paper 38 (SU(2) propinquity convergence),
 % Paper 39 (tensor-product propinquity convergence), Paper 40
 % (universal 4/pi rate constant on compact Lie groups), Paper 42
-% (Tomita-Takesaki / four-witness Riemannian closure), Paper 43
-% (Lorentzian extension of the four-witness theorem).
+% (Tomita-Takesaki modular structure; finite 2pi period, automatic for
+% the posited integer-spectrum generator -- no finite-cutoff four-witness
+% identification, 2026-09-28), Paper 43 (its Krein-carrier extension).
 %
 % Status: first draft, May 2026, post-Sprint-L3a-1 (2026-05-17). Built
 % from internal sprint memos:
@@ -184,16 +185,20 @@ strongest single quantitative alignment between GeoVac and the
 published Connes--vS framework as of the Round-2 sprint
 (\texttt{debug/wh1\_round2\_propagation\_memo.md}, 2026-05-03).
 
-The companion Paper~43~\cite{paper43} of the present author closes
-the four-witness Wick-rotation theorem
+The companion Paper~43~\cite{paper43} of the present author carries
+the modular construction associated with the four-witness Wick-rotation
+theorem
 (Hartle--Hawking~\cite{hartle_hawking1976},
 Sewell~\cite{sewell1982},
 Bisognano--Wichmann~\cite{bisognano_wichmann1976},
-Unruh~\cite{unruh1976}) at the operator-system level on the
+Unruh~\cite{unruh1976}) to the
 Lorentzian Krein spectral triple at signature $(3, 1)$ in the
 Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018} classification
 at $(m, n) = (4, 6)$, with the modular Hamiltonian and Tomita
-structure on a hemispheric wedge. Paper~43 takes the operator-system
+structure on a hemispheric wedge.  Its $2\pi$ period closure is
+automatic for the posited integer-spectrum generator and does not
+identify the four-witness theorem at finite cutoff (withdrawn
+2026-09-28, following Paper~42). Paper~43 takes the operator-system
 substrate as input;\ the present paper constructs it.
 
 \subsection{What this paper does}
@@ -325,9 +330,11 @@ foundation on which a future propinquity argument would be built.
 
 \subsection{Why this is a separate paper from Paper~43}
 
-Paper~43~\cite{paper43} closes the four-witness Wick-rotation theorem
-at the \emph{modular-Hamiltonian} level on a hemispheric wedge of the
-Lorentzian Krein space, using the same Krein construction
+Paper~43~\cite{paper43} works at the \emph{modular-Hamiltonian} level
+on a hemispheric wedge of the Lorentzian Krein space (an automatic
+period closure of a posited generator, not a finite-cutoff
+identification of the four-witness theorem;\ 2026-09-28), using the
+same Krein construction
 $\Krein_{\nmax, \Nt}$, Lorentzian Dirac $\DL$, and BBB axiom audit at
 $(m, n) = (4, 6)$ as the present paper. The Paper~43 results
 (integer spectrum of the geometric BW-$\alpha$ generator, $\beta$-%
@@ -1249,7 +1256,9 @@ of those constructions is at the level of expectation values on
 $\Op^{L, W}_{\nmax, \Nt}$:\ the cross-witness collapse of
 Paper~43~\S~6 (Cor.~8.1) is the statement that the trace functional
 $A \mapsto \Tr_{\Krein_{W_L}}(\rho_W^L \cdot A)$ on $\Op^{L, W}$ is
-identical across all four physical witness instantiations. The
+identical across all four physical witness instantiations --- by
+construction, since they share one generator and differ only in the
+label $\kappa_g$. The
 present paper's contribution is to identify the carrier of this
 construction as the wedge restriction of the natural Lorentzian
 truncated operator system, completing the bottom-up picture.
@@ -1484,8 +1493,8 @@ Krein-positive restriction).
 
 \medskip\noindent
 \textbf{Position in the GeoVac Lorentzian arc.} Together with
-Paper~43~\cite{paper43} (the four-witness Wick-rotation theorem at
-the Lorentzian Krein-wedge level) and the prospective Sprint L3b
+Paper~43~\cite{paper43} (the modular construction at the Lorentzian
+Krein-wedge level) and the prospective Sprint L3b
 continuum closure, the present paper constitutes the operator-system
 substrate of the GeoVac Lorentzian extension at the level the
 framework can currently reach. Paper~43 does not supersede the
@@ -1716,8 +1725,8 @@ DOI via Zenodo.
 \bibitem[Loutey, internal Paper~42]{paper42}
 J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated
-$SU(2)$ spectral triples: four-witness Wick-rotation literal
-identification at finite cutoff},
+$SU(2)$ spectral triples: the four-witness $2\pi$ period at finite
+cutoff},
 \newblock GeoVac internal preprint, papers/standalone (2026),
 DOI via Zenodo.
 

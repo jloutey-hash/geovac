@@ -16,7 +16,7 @@ from typing import List, Tuple, Dict
 
 class GeometricLattice:
     """
-    TOPOLOGICAL QUANTUM LATTICE - "The Lattice is Truth"
+    QUANTUM LATTICE on the (n, l, m) Gel'fand-Tsetlin labels.
 
     Nodes represent quantum states |n, l, m⟩ where:
     - n: principal quantum number (n ≥ 1)
@@ -29,11 +29,28 @@ class GeometricLattice:
 
     Node Weights (DIAGONAL) represent POTENTIAL ENERGY:
     - For state (n,l,m) near nucleus with charge Z: weight = -Z/n²
-    - This IS the potential energy, encoded as graph topology!
+    - This is a topological diagonal encoding of the potential (a
+      self-loop weight), not a spatial integral.
 
-    CRITICAL PRINCIPLE:
-    ALL PHYSICS COMES FROM THE GRAPH. The Hamiltonian solver is "dumb" -
-    it just diagonalizes H = scale*(D - A + W) where W are node weights.
+    SCOPE (corrected 2026-09-25, PI-directed re-pricing; see Papers 0/7
+    and CLAUDE.md S1). This edge set is what AtomicSolver's legacy
+    hamiltonian='graph' mode diagonalizes as H = kappa*(D - A + W). No
+    edge here ever changes l (angular edges fix (n, l), radial edges fix
+    (l, m)), so D - A is the direct sum of max_n disconnected l-blocks
+    and does NOT converge, under any rescaling, to the S^3
+    Laplace-Beltrami operator (tests/test_graph_s3_nonconvergence.py):
+    that operator's heat kernel is everywhere positive, while this
+    graph's heat kernel is exactly zero between l-blocks. The continuum
+    S^3 Laplace-Beltrami operator instead acts on these same (n, l, m)
+    labels as the diagonal SO(4) Casimir L^2 + A^2 = n^2 - 1 -- an exact
+    statement about the label set and its degeneracies, not a property
+    of this graph's D - A spectrum. The matching scale kappa = -1/16
+    maps this graph's extremal eigenvalue (band edge 8 = 2*d_max) to the
+    hydrogen ground state -1/2 by construction; that match is an
+    Observation, not a derivation, and does not extend to the
+    excited-state (Rydberg) ladder -- the 'graph' Hamiltonian's excited
+    states are non-physical. For the physical spectrum use
+    AtomicSolver(hamiltonian='exact'), i.e. diag(-Z^2/(2 n^2)).
 
     Attributes:
     -----------
@@ -186,9 +203,14 @@ class GeometricLattice:
         Weight = 1/(n₁*n₂) creates n-dependent coupling that encodes
         the Coulomb potential directly in graph topology. States near
         the nucleus (low n) have stronger coupling.
-        
-        This makes D - A have eigenvalues scaling as -1/n² without
-        adding a separate potential term.
+
+        This does NOT make D - A converge to a -1/n² (Rydberg-like)
+        continuum spectrum: the edge set never changes l, so D - A
+        splits into max_n disconnected l-blocks with spectrum algebraic
+        in [0, 8] regardless of weighting mode
+        (tests/test_graph_s3_nonconvergence.py). This is a topological
+        edge-weighting scheme, not a derivation of the hydrogen
+        spectrum from the graph.
         
         Binary Mode (hybrid):
         ---------------------
@@ -216,10 +238,14 @@ class GeometricLattice:
         """
         Compute diagonal node weights = POTENTIAL ENERGY as graph topology.
 
-        CRITICAL PRINCIPLE: "The Lattice is Truth"
-        =========================================
-        In spectral graph theory, the potential is NOT an external operator.
-        It is the DIAGONAL WEIGHT (self-loop) of the graph.
+        SCOPE (diagonal weight only; corrected 2026-09-25, see the class
+        docstring and CLAUDE.md S1): in this legacy graph model
+        (AtomicSolver hamiltonian='graph') the diagonal self-loop weight
+        W carries the -Z/n² potential term; the D - A part is a
+        topological edge scheme that does NOT converge to a continuum
+        kinetic operator (tests/test_graph_s3_nonconvergence.py). This
+        docstring describes W alone, not a claim that D - A + W
+        reproduces the physical hydrogen spectrum.
 
         For a hydrogen-like atom with nuclear charge Z:
             Node weight for state (n, l, m) = -Z/n²

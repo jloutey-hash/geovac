@@ -148,8 +148,8 @@ certify a closed immersion (Theorem~\ref{thm:injection_g4}).
 The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 
 \medskip
-\noindent\emph{Cosmic-Galois injection.} We close the
-\emph{injection direction} $\Ustar_{GV} \to
+\noindent\emph{Cosmic-Galois comparison homomorphism.} We close the
+\emph{comparison direction} $\Ustar_{GV} \to
 \mathcal{U}_{4} \rtimes SL_{2}$ into the (abelianization of the)
 unipotent radical of the level-4 motivic Galois group
 $\mathcal{G}_{4} = \mathcal{G}_{\mathrm{MT}(\Z[i, 1/2])}$ of
@@ -262,9 +262,9 @@ finite-cutoff reconstruction in Sections~\ref{sec:tc2a_equality}
 (abelian factor), \ref{sec:tc2b_sl2_equality} ($SL_{2}$ factor),
 \ref{sec:tc2c_higher_cutoff} (higher cutoffs), and
 \ref{sec:tc2d_cofiltered_coherence} (cofiltered coherence).
-Section~\ref{sec:injection_g4} closes the cosmic-Galois injection
-direction $\Ustar_{GV} \to \mathcal{U}_{4} \rtimes
-SL_{2}$ into the (abelianization of the) unipotent radical of the
+Section~\ref{sec:injection_g4} closes the comparison in the
+$\Ustar_{GV} \to \mathcal{U}_{4} \rtimes
+SL_{2}$ direction into the (abelianization of the) unipotent radical of the
 level-4 motivic Galois group $\mathcal{G}_{4}$
 (Theorem~\ref{thm:injection_g4}).
 Section~\ref{sec:verification} catalogues the
@@ -1156,14 +1156,15 @@ mixed-Tate period ring $F(s)$ of $\Ginf$.
 \end{corollary}
 
 % =====================================================================
-\section{The level-4 cosmic-Galois injection}\label{sec:injection_g4}
+\section{The level-4 cosmic-Galois comparison homomorphism}\label{sec:injection_g4}
 % =====================================================================
 
 The per-cutoff equality of Corollary~\ref{cor:inverse_limit} identifies
 the Tannakian dual $\Aut^{\otimes}(\fibfun)^{(\infty)}$ with
 $\Ga^{\infty} \rtimes SL_{2}$ as a pro-algebraic group, but does not
 yet compare it to a published motivic-Galois target. This section
-closes that comparison in the \emph{injection direction}:\ we
+closes that comparison in the $\Ustar_{GV} \to \mathcal{U}_{4}$
+direction:\ we
 exhibit an explicit homomorphism of pro-algebraic groups
 $\Phi^{\mathrm{inj}}:\ \Ustar_{GV} = \Ga^{\infty} \rtimes SL_{2}
 \rightarrow \mathcal{U}_{4} \rtimes SL_{2}$ onto the \emph{abelianized}
@@ -1241,9 +1242,9 @@ $\Z[i, 1/2]$ (Paper~55 \S 6 role-disjointness lemma);\ this is the
 period content of $\mathcal{G}_{4}$ at the levels reachable by
 \textsc{GeoVac}'s natural three-bullet partition.
 
-\subsection{The injection theorem}\label{sec:injection_theorem}
+\subsection{The comparison homomorphism theorem}\label{sec:injection_theorem}
 
-\begin{theorem}[Level-4 cosmic-Galois injection]\label{thm:injection_g4}
+\begin{theorem}[Level-4 cosmic-Galois comparison homomorphism]\label{thm:injection_g4}
 The period map $\pi$ of Definition~\ref{def:period_map} dualises to a
 homomorphism of pro-algebraic groups
 \[
@@ -1410,7 +1411,7 @@ realises inside $\MT(\Z[i, 1/2])$.
 \end{remark}
 
 \begin{remark}[Reading-A abelianization at depth 1]\label{rem:reading_a_at_depth_1}
-The injection of Theorem~\ref{thm:injection_g4} sees only the
+The comparison homomorphism of Theorem~\ref{thm:injection_g4} sees only the
 \emph{abelianization} of $\mathcal{U}_{4}$:\ the image
 $\Phi^{\mathrm{inj}}(\Ga^{\infty})$ sits inside the depth-1 part
 $\mathrm{gr}^{1}_{D} \mathcal{U}_{4}$, since the GeoVac primitive
@@ -1429,8 +1430,8 @@ $\Phi^{\mathrm{inj}}$ sees on the unipotent side.
 \end{remark}
 
 \begin{remark}[Honest scope --- partiality]\label{rem:injection_honest_scope}
-Three honest caveats refine the partial nature of the injection
-(Track C scoping memo, end-of-day 2026-06-06 synthesis):
+Three honest caveats refine the partial nature of the comparison
+homomorphism (Track C scoping memo, end-of-day 2026-06-06 synthesis):
 \begin{itemize}
 \item \emph{M1 and M2 column collapse.} On the M1 column the period
 ring is $\Q[\pi, \pi^{-1}]$, 1-dimensional per primitive generator
@@ -1463,8 +1464,8 @@ rank to $2$ (Remark~\ref{rem:m3_parity_rank},
 \texttt{tests/test\_paper56\_m3\_parity\_rank.py}), capped there. Since
 $2 \ll N$, $\Phi^{\mathrm{inj}}$ still realises the \emph{abelianized}
 image (Reading~A) on all three columns.
-\item \emph{Depth-blindness on the GeoVac side.} The injection is
-constructed at depth 1 (linear combinations of single Hurwitz
+\item \emph{Depth-blindness on the GeoVac side.} The comparison
+homomorphism is constructed at depth 1 (linear combinations of single Hurwitz
 values). \textsc{GeoVac}'s primitive Hopf algebra cannot detect
 shuffle / deconcatenation structure (Reading A,
 Section~\ref{sec:open_na1}), so the map cannot be promoted to a
@@ -1605,7 +1606,7 @@ $\nmax$ & $N(\nmax)$ & C1 & C2 & C3 & C4 & Total \\
 \bottomrule
 \end{tabular}
 \caption{Closed-form bit-exact residual counts for the level-4
-cosmic-Galois injection panel at every finite cutoff
+cosmic-Galois comparison-homomorphism panel at every finite cutoff
 $\nmax \in \{1, 2, 3, 4\}$. The sum over the production grid
 $\{2, 3, 4\}$ contributes $2{,}904$ residuals to the master
 verification panel (Table~\ref{tab:verification});\ the C4 row counts
@@ -1630,7 +1631,7 @@ cofiltered coherence of TC-2d
 
 \subsection{The natural realisation is Hodge / Hodge-de-Rham}\label{sec:open_g4_hodge}
 
-The injection $\Phi^{\mathrm{inj}}$ of Theorem~\ref{thm:injection_g4}
+The comparison homomorphism $\Phi^{\mathrm{inj}}$ of Theorem~\ref{thm:injection_g4}
 realises the \emph{image} of the abelianization
 $(U^*_{GV})^{\mathrm{ab}}$ inside $\mathcal{U}_4^{\mathrm{ab}} \rtimes
 SL_2$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself, and the
@@ -1671,7 +1672,7 @@ input;\ GeoVac supplies none of it.  Categorically, those
 realisations are unreachable from GeoVac's data.
 \end{enumerate}
 
-The level-$4$ injection $\Phi^{\mathrm{inj}}: U^*_{GV} \to
+The level-$4$ comparison homomorphism $\Phi^{\mathrm{inj}}: U^*_{GV} \to
 \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ of
 Theorem~\ref{thm:injection_g4} is therefore to be read as an
 \emph{abelianized} Hodge / Hodge-de-Rham homomorphism (Reading~A; not a
@@ -1903,7 +1904,7 @@ the generic Hain--Brown locus remains open.
 
 \subsection{The equality direction is long-range}\label{sec:equality_multi_year}
 
-Theorem~\ref{thm:injection_g4} closes the \emph{injection direction}
+Theorem~\ref{thm:injection_g4} closes the \emph{comparison direction}
 of the conjecture in Section~\ref{sec:open_g4}. The complementary
 \emph{equality direction} --- whether $\Phi^{\mathrm{inj}}$ is
 surjective onto $\mathcal{G}_{4}$ at the depth-graded level (or
@@ -1946,9 +1947,9 @@ TC-2a & Finite-cutoff equality on abelian factor at $\nmax = 2$ & 16 \\
 TC-2b & $SL_{2}$-factor equality (Sym$^{2}$ + det + decomp + dim) & 17 \\
 TC-2c & Per-cutoff equality at $\nmax = 3, 4$ ($\Phi$-recovery + dim + $\eta_{T}$) & 73 \\
 TC-2d & Cofiltered coherence (panel + transitivity + group-hom) & 243 \\
-G4-Inj & Level-4 injection (C1 + C2 + C3 + C4 at $\nmax = 2$) & 261 \\
-G4-Inj & Level-4 injection at $\nmax = 3$ (C1 + C2 + C3 + C4) & 789 \\
-G4-Inj & Level-4 injection at $\nmax = 4$ (C1 + C2 + C3 + C4) & 1854 \\
+G4-Inj & Level-4 comparison homomorphism (C1 + C2 + C3 + C4 at $\nmax = 2$) & 261 \\
+G4-Inj & Level-4 comparison homomorphism at $\nmax = 3$ (C1 + C2 + C3 + C4) & 789 \\
+G4-Inj & Level-4 comparison homomorphism at $\nmax = 4$ (C1 + C2 + C3 + C4) & 1854 \\
 \midrule
 \textbf{Total bit-exact zero residuals} & & \textbf{5{,}864} \\
 \bottomrule
@@ -1957,7 +1958,7 @@ G4-Inj & Level-4 injection at $\nmax = 4$ (C1 + C2 + C3 + C4) & 1854 \\
 $5{,}864$ bit-exact zero residuals across the four pro-system
 sub-tracks (PS-1/2/3/4), the six Tannakian-foundation sub-tracks
 (TC-1a/b/c/d/e/f), the four converse-direction sub-tracks
-(TC-2a/b/c/d), and the level-4 cosmic-Galois injection panel
+(TC-2a/b/c/d), and the level-4 cosmic-Galois comparison-homomorphism panel
 extended to every finite cutoff in the production grid
 $\nmax \in \{2, 3, 4\}$ (G4-Inj $\times 3$). All residuals computed
 in $\texttt{sympy}$-rational arithmetic;\ no floating-point steps
@@ -2046,8 +2047,8 @@ of that comparison would require a rank-$N$ M3 period map, which Theorem~\ref{th
 refutes;\ the $\chi_{-4}$ vertex parity caps the rank at $2$.)
 
 \begin{quote}
-\textbf{Theorem (cosmic-Galois injection, this paper).}\ The
-injection direction is an \emph{abelianized homomorphism}
+\textbf{Theorem (cosmic-Galois comparison homomorphism, this paper).}\ The
+comparison direction is an \emph{abelianized homomorphism}
 $\Ustar_{GV} \rightarrow \mathcal{U}_4 \rtimes SL_2$ --- \emph{not}
 an injective closed immersion (the M3 column is rank~$2$, capped,
 $\ll N$) --- realising the abelianized image as a closed subgroup at the
@@ -2070,14 +2071,14 @@ $\Phi^{\mathrm{inj}}(\Ustar_{GV}) = \mathcal{U}_{4}^{\mathrm{ab}}
 depth $\ge 2$ is realised by some \textsc{GeoVac} observable.
 \end{quote}
 
-The injection direction is now a theorem
+The comparison direction is now a theorem
 (Section~\ref{sec:injection_g4}). The equality / exhaustion
 direction is the long-range forward research question:\ no
 depth-$\ge 2$ level-4 cyclotomic MZV has yet been observed in any
 \textsc{GeoVac} computation. Whether this is because we have not
 looked, or because \textsc{GeoVac} is structurally a strict
 sub-pro-algebraic group of $\mathcal{U}_{4}^{\mathrm{ab}}$, is the
-named open content past injection (Remark
+named open content past the comparison homomorphism (Remark
 \ref{rem:injection_honest_scope} delimits scope).
 
 A common framing slip worth flagging:\ the two groups are related by a
@@ -2368,7 +2369,7 @@ The Goncharov--Deligne 2005 result establishes the faithful action of
 the motivic Galois group $\mathcal{G}_{\mathrm{MT}(\mathcal{O}_N[1/N])}$
 on the motivic fundamental group
 $\pi_1^{\mathrm{mot}}(\mathbb{G}_m - \mu_N)$, used here as the
-injection-direction backbone for the level-4 period comparison.
+comparison-direction backbone for the level-4 period comparison.
 
 \bibitem{cartier_milnor_moore}
 J.~W.~Milnor and J.~C.~Moore, \emph{On the structure of Hopf algebras},

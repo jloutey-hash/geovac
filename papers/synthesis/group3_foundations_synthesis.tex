@@ -46,7 +46,7 @@ the exchange constant taxonomy, the angular sparsity theorem, the
 Bargmann--Segal lattice, and the universal/Coulomb partition, together
 with the \emph{reconvergence} node where these threads cohere (two-body
 selection rules from the tensor-product triple, the period
-classification, the Tannakian substrate and cosmic-Galois injection, and
+classification, the Tannakian substrate and cosmic-Galois comparison homomorphism, and
 the forced/free seam)---into a single coherent narrative.  The arc has a
 dependency structure worth naming:\ a single taproot (the packing
 construction, made physical by the Fock $S^3$ projection) fans out into
@@ -168,7 +168,7 @@ GeoVac is not a new foundation for quantum mechanics, and the
 synthesis presented in this paper does not assert ontological priority
 of either the discrete or the continuum description.
 
-The Group~3 (foundations) arc comprises eleven papers, organized by a
+The Group~3 (foundations) arc comprises twelve papers, organized by a
 single dependency structure.  \emph{The taproot:} Paper~0
 \cite{loutey_paper0} states the packing axiom and derives the angular
 quantum numbers as packing indices; Paper~7~\cite{loutey_paper7} makes
@@ -190,10 +190,12 @@ universal/Coulomb partition in spectral-triple language.  \emph{The
 reconvergence} (where the branches loop back to a unified foundational
 statement, \S\ref{sec:reconvergence}):\ Paper~54~\cite{loutey_paper54} derives two-body
 selection rules from the tensor-product triple, Paper~55~\cite{loutey_paper55} classifies
-every GeoVac period as cyclotomic mixed-Tate at level $\le 4$,
+the transcendentals that have appeared in GeoVac spectral data as
+cyclotomic mixed-Tate at level $\le 4$,
 Paper~56~\cite{loutey_paper56} constructs the cosmic-Galois comparison map $U^*_{\mathrm{GV}}
 \to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (a homomorphism, not a closed immersion), and Paper~57~\cite{loutey_paper57}
-catalogues the forced/free seam.  An $O(V)$ time-evolution engine
+catalogues the forced/free seam;\ Paper~61~\cite{loutey_paper61}
+develops the arithmetic of the elliptic layer (\S\ref{sec:reconvergence}).  An $O(V)$ time-evolution engine
 (Paper~6~\cite{loutey_paper6}, now an archived standalone tool)
 supplies the dynamical demonstration---an integrator check run on the
 labelled legacy graph model, not on physical hydrogen
@@ -205,7 +207,7 @@ Four headline structural results organize the rest of this synthesis.
 unit-$S^3$ Laplace--Beltrami operator to the Schr\"odinger equation is
 verified symbolically (Paper~7~\cite{loutey_paper7});
 \textbf{[WALL]} the discrete Fock graph's edge Laplacian does not
-converge to that operator:\ the one proved spectral statement ---
+converge to that operator:\ the proved spectral-bound statement ---
 the saturation of the bipartite bound, \textbf{[INTERNAL THEOREM]}
 closed form with rate $C/n_{\max}^2$ (Paper~0~\S VI) --- is a grid band
 edge, and the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence]
@@ -252,23 +254,26 @@ surface maximizes entropy and is therefore isotropic.
 
 \medskip
 
-\textbf{[SYMBOLIC PROOF]} Applied to concentric isotropic shells in two dimensions, these axioms
-force the area-proportional state count on shell~$k$ to be $2k - 1$.
+\textbf{[SYMBOLIC PROOF]} Given concentric isotropic shells in two dimensions with linearly
+spaced radii and area-proportional state counting (choices the axioms
+motivate but do not force, Paper~0), the angular state count on
+shell~$k$ is $2k - 1$.
 The shell capacities $\{1, 3, 5, 7, \ldots\}$ are isomorphic to the
 spherical harmonic basis $Y_{lm}$ under the identification $l = k - 1$
 and $m = -l, \ldots, +l$.  The angular quantum numbers $(l, m)$ and
 the per-shell degeneracy $2l + 1$ thus emerge from the packing
-geometry alone, without invoking the Schr\"odinger equation or the
+geometry and these counting choices, without invoking the Schr\"odinger equation or the
 angular momentum operators $\hat{L}^2$, $\hat{L}_z$.
 
 \textbf{[OBSERVATION]} The principal quantum number~$n$ enters as a cumulative grouping of
 the first $n$ shells, producing the count
 $\sum_{k=1}^{n} (2k - 1) = n^2$.  Paper~0 is careful to flag that this
 grouping is natural but not uniquely forced by the two axioms.
-Similarly, the factor of two corresponding to spin multiplicity arises
-from the orientability of the compactified packing manifold ($S^2$),
-which the paper presents as a structural correspondence rather than a
-derivation.  The strong claim is the angular sector $(l, m)$; the
+Similarly, the factor of two in the per-shell count, set by the binary
+initialization (with the orientability of the compactified packing
+manifold $S^2$ as a heuristic reading), corresponds in counting to spin
+multiplicity, which the paper presents as a structural correspondence
+rather than a derivation.  The strong claim is the angular sector $(l, m)$; the
 other identifications are framed as structural correspondences.
 
 \subsection*{From the packing to the graph}
@@ -332,7 +337,7 @@ Schr\"odinger equation.  Its persistent match to known atomic
 structure---the Rydberg quantum-number labels, the chemical
 periodicity of multi-electron atoms (Paper~16~\cite{loutey_paper16}, outside the
 foundations group), nuclear magic numbers under a harmonic-oscillator
-basis (Paper~23~\cite{loutey_paper23}, applications group)---is therefore evidence that
+basis (Paper~23~\cite{loutey_paper23}, group~4)---is therefore evidence that
 quantum-mechanical structure is consistent with a discrete
 combinatorial label structure, rather than a tautology.  We present this as
 the \emph{structural fit} between the packing construction and known
@@ -451,9 +456,10 @@ $\lambda_n = -(n^2 - 1)$ to the hydrogenic Rydberg series
 $E_n = -Z^2 / (2 n^2)$.  The dimensionless label set carries no scale;
 the Rydberg energy is injected exclusively at the projection step.  This
 separation between dimensionless topology and dimensional projection
-is the \emph{dimensionless vacuum} viewpoint of Paper~7: the
-calibration content of physical observables is concentrated entirely in
-the focal-length parameter $p_0$.
+is the \emph{dimensionless vacuum} viewpoint of Paper~7: all physical
+dimensions enter exclusively through the energy-shell constraint, i.e.\
+the focal-length parameter $p_0$ (the calibration $\pi$ content enters
+separately, through the $k = 0$ volume slot of \S\ref{sec:exchange}).
 
 \subsection*{Scale-freedom of the substrate and its reflection in conformal field theory}
 \label{sec:cft_reflection}
@@ -472,7 +478,7 @@ transformations.  The standard examples include free massless scalars
 and fermions on round $S^d$, where the partition functions
 $Z_{S^d}^{\text{CFT}}$ are computable in closed form and reproduce
 universal coefficients (e.g.\ the F-theorem constant
-$F_{S^d}$~\cite{klebanov_pufu_safdi2011}).
+$F_{S^3}$~\cite{klebanov_pufu_safdi2011}).
 
 GeoVac's substrate exhibits an analogous property at the
 \emph{geometric / mathematical} layer, prior to physics.  The packing
@@ -522,8 +528,7 @@ quantum field theory living on a substrate.  But the framework's
 ability to reproduce continuum CFT-on-sphere partition functions
 bit-exactly (recently demonstrated for the conformally coupled scalar
 and Camporesi--Higuchi Dirac on $S^3$ and $S^5$ in the operator-algebra
-arc, outside the foundations scope of this synthesis but cross-referenced
-in the open-questions section below) is consistent with the
+arc, outside the foundations scope of this synthesis;\ Paper~50) is consistent with the
 substrate-side scale-freedom established here; no mechanism is claimed.
 The substrate is the right kind of mathematical object to host
 scale-free physics, which is a reading of the parallel, not an
@@ -531,15 +536,17 @@ explanation of it.
 
 \subsection*{Multi-electron extension to $S^{3N-1}$}
 
-Paper~7~\cite{loutey_paper7} and Paper~21~\cite{loutey_paper21}
+Paper~7~\cite{loutey_paper7} and the archived Paper~21~\cite{loutey_paper21}
 extend the construction to $N$-electron atoms by replacing $S^3$ with
 the unit sphere $S^{3N-1} \subset \mathbb{R}^{3N}$ under the
-$SO(3N)$ rotation group.  The single-electron Fock projection becomes
+$SO(3N)$ rotation group (the label-set generalisation is
+\textbf{[PRIOR ART]}, standard hyperspherical-harmonic theory;\ Paper~7
+retires the $N > 1$ graph-limit conjecture).  The single-electron Fock projection becomes
 a multi-electron hyperspherical projection, and the $N$-fermion
 antisymmetry condition on $S^{3N-1}$ reads as a representation-theoretic
 constraint on the angular sector.  The chemical periodicity of the
 periodic table emerges from the $S_N$ subgroup of $SO(3N)$ acting on
-the hyperspherical angular basis (see Paper~16, applications group,
+the hyperspherical angular basis (see Paper~16, group~4,
 outside the foundations scope of this synthesis).
 
 \textbf{[SYMBOLIC PROOF]} A particular consequence of the $S^3$ projection is the closed-form
@@ -549,8 +556,9 @@ formula for $V_{ee}$ on $S^3$ in Paper~7 for $s$-orbital pairs.  More
 generally, all single-center Slater $F^k$ integrals reduce to exact
 rationals in arithmetic over $\mathbb{Q}$ (the hypergeometric Slater
 engine, \texttt{geovac/hypergeometric\_slater.py}, which is not part
-of Paper~7's derivation).  The single-center two-electron problem
-is thus closed in rational arithmetic; transcendentals appear only at
+of Paper~7's derivation).  The single-center two-electron
+\emph{matrix elements} are thus closed in rational arithmetic (exactness
+of the integrals, not accuracy of the truncated problem); transcendentals appear only at
 the projection-to-energy step (see Section~\ref{sec:exchange}).
 
 \subsection*{What Paper~7 does and does not claim}
@@ -573,7 +581,7 @@ diagonal $SO(4)$ Casimir; (b)
 the systematic symbolic verification of the conformal transformation
 chain; (c) the framing of physical scales as confined to the
 energy-shell projection; (d) the computational consequence that
-$O(V)$ sparse Hamiltonian-matrix eigenvalue problems can replace
+near-linear (measured $V^{1.07}$) sparse Hamiltonian-matrix eigenvalue problems can replace
 continuous integration.  (The label set itself is \textbf{[PRIOR ART]},
 standard $SO(4)$ representation theory;\ the new content of item~(a) is
 the wall.)  Paper~7's explicit statement that its results are
@@ -618,28 +626,28 @@ ERI densities reproduced in Table~\ref{tab:eri_density}.
 
 \begin{table}[t]
 \centering
-\caption{Pair-diagonal angular ERI density $D_{\mathrm{pd}}(l_{\max})$
-from Paper~22 (per-pair $m_a=m_c$, $m_b=m_d$), which holds only for
-axially-symmetric or $m$-decoupled bases.  \emph{The composed pipeline
-realizes the physically-correct global-$M_L$ Coulomb density
-$D(l_{\max})$, not this one} --- $\sim\!4\times$ larger ($8.52\%$ at
-$l_{\max}=2$, $6.06\%$ at $l_{\max}=3$; Paper~22 Table).  The
+\caption{Angular ERI densities from Paper~22 (Theorem~3):\ the
+physically-correct global-$M_L$ Coulomb density $D(l_{\max})$
+($m_a + m_b = m_c + m_d$), which \emph{the composed pipeline realizes},
+and the pair-diagonal density $D_{\mathrm{pd}}(l_{\max})$ (per-pair
+$m_a=m_c$, $m_b=m_d$), which holds only for axially-symmetric or
+$m$-decoupled bases and is shown for comparison.  The
 ``realizes'' attribution was corrected 2026-08-30:\ the production
 enumerator returned $D_{\mathrm{pd}}$ only because of the wrong-sign-$q$
 coefficient bug fixed on 2026-08-29.  Both are universal across Coulomb,
 harmonic oscillator, Woods--Saxon, square well, and Yukawa
 potentials.}
 \label{tab:eri_density}
-\begin{tabular}{c c}
+\begin{tabular}{c c c}
 \toprule
-$l_{\max}$ & $D_{\mathrm{pd}}(l_{\max})$ \\
+$l_{\max}$ & $D(l_{\max})$ (realized) & $D_{\mathrm{pd}}(l_{\max})$ \\
 \midrule
-$0$ & $100\%$ \\
-$1$ & $7.81\%$ \\
-$2$ & $2.76\%$ \\
-$3$ & $1.44\%$ \\
-$4$ & $0.90\%$ \\
-$5$ & $0.62\%$ \\
+$0$ & $100\%$ & $100\%$ \\
+$1$ & $14.84\%$ & $7.81\%$ \\
+$2$ & $8.52\%$ & $2.76\%$ \\
+$3$ & $6.06\%$ & $1.44\%$ \\
+$4$ & $4.83\%$ & $0.90\%$ \\
+$5$ & $3.99\%$ & $0.62\%$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -685,7 +693,8 @@ $51\times$ to $317\times$ equal-qubit advantage in Pauli-term count
 over published Gaussian baselines (H$_2$O, $n_{\max} = 1$--$3$; the
 retired pair-diagonal rule gave $O(Q^{2.5})$ and
 $51\times$--$1712\times$).  The structural reason for this advantage is the
-Gaunt-selection-rule sparsity quantified in Table~\ref{tab:eri_density};
+Gaunt-selection-rule sparsity quantified by the realized density
+$D(l_{\max})$ of Table~\ref{tab:eri_density};
 the foundations-paper statement is the theorem itself, not the
 specific molecular benchmarks.
 
@@ -722,7 +731,9 @@ time steps in the live graph-model regression ($n_{\max} = 10$, 385 states);\ Pa
 $\mathrm{H}_2$ benchmark reported machine precision over $10^4$ steps
 (archived measurement).
 
-\textbf{[MEASURED]} The applications demonstrated in Paper~6 are: (a) broadband molecular
+The applications demonstrated in Paper~6 are (tiers per item: only (b) is a
+live \textbf{[MEASURED]} result;\ (a), (c) and (d) are archived
+measurements, reported as historical record without live backing): (a) broadband molecular
 spectroscopy from a single delta-kick propagation on the superseded
 LCAO bridged-graph H$_2$ model (Paper~6), recovering 20 of that
 model's 35 dipole-active transitions with $0.16\%$ mean error
@@ -736,8 +747,11 @@ tests the integrator, not hydrogen spectroscopy); (c) molecular
 dynamics with nuclei coupled to graph forces via Velocity Verlet,
 conserving total energy to $0.0003\%$ (archived Paper~6, on the
 superseded LCAO graph-concatenation construction whose potential
-surface has no equilibrium, FCI-M); (d) NVT-ensemble Langevin dynamics with stable
-thermal vibrations at 300~K.  Only (b) and the unitarity benchmark
+surface has no equilibrium, FCI-M); (d) NVT-ensemble Langevin dynamics at
+300~K on the same superseded LCAO construction (the ``stable thermal
+vibrations'' originally reported cannot be vibrations about an
+equilibrium that construction does not have, so this item is historical
+only).  Only (b) and the unitarity benchmark
 carry live regression backing (see the provenance note above).
 
 Paper~6 is not a foundational claim in the same sense as Papers 7, 18,
@@ -748,9 +762,9 @@ ladder operators $T_\pm, L_\pm$ reproduce the Rydberg quantum numbers on
 interior shells, Paper~1) and the dynamical statement
 required for any quantum-chemistry application (a sparse Hamiltonian on
 the labels supports time evolution at the same $O(V)$ cost;\ the live
-demonstration uses the graph model, not physical hydrogen).  Without Paper~6's dynamics
-engine, GeoVac would be limited to eigenvalue problems; with it, the
-framework supports sparse time propagation.
+demonstration uses the graph model, not physical hydrogen).  Paper~6's
+dynamics engine demonstrates that the framework's sparse Hamiltonians
+support sparse time propagation.
 
 %% ========================================================================
 \section{The Bargmann--Segal Lattice and the Coulomb/HO Asymmetry}
@@ -799,7 +813,7 @@ pointer level.
 \medskip
 
 This is the structural dual of the Fock rigidity theorem of Paper~23
-(applications group), which states that the $S^3$ stereographic
+(group~4), which states that the $S^3$ stereographic
 projection $p_0 = \sqrt{-2 E_n}$ maps a one-electron central-field
 Hamiltonian onto the free Laplacian on $S^3$ if and only if the
 spectrum is $l$-independent within each $n$-shell, a property unique
@@ -924,12 +938,14 @@ fifth (spectral-action gravity) comes from Paper~51; the sixth
 seven stand:\ the first (spectrum-computing role of $L_0$) is withdrawn
 (2026-09-25), because the $S^3$ graph Laplacian does not converge to the
 $S^3$ Laplacian and is spectrally inert, as on $S^5$.  Of the standing
-layers, the second, fourth, fifth and sixth stratify along one
-operator-order divide (the seventh, CM/Hodge arithmetic, was never placed
-on it):\ the
+layers, the second (calibration $\pi$) stratifies along an
+operator-order divide (Paper~31):\ the
 Coulomb side uses a second-order Riemannian Laplacian with a nonlinear
 stereographic projection, and the HO side uses a first-order
 complex-analytic Euler operator with a linear-affine Bargmann projection.
+The fourth to seventh layers are not placed on that divide by the owner
+papers (the fifth turns on sphere dimension, the Dirac operator on
+$S^{2m+1}$, rather than operator order).
 The third (Wilson gauge with natural matter coupling) is decided instead
 by representation theory:\ on $S^3 = \mathrm{SU}(2)$ matter and links
 share a representation (argued, not yet constructed), while on $S^5$
@@ -980,7 +996,7 @@ $\kappa = -1/16$ coincides (an Observation, not a derivation;\ $\kappa$
 only matches the graph's band edge);\ $\pi$ entering through the
 $k = 0$ volume slot of the master Mellin engine (historically named the
 Hopf-base measure), $\text{Vol}(S^2)/4 = \pi$, identifying as the $a_0^2$ Seeley--DeWitt
-coefficient on the spinor bundle.  This is the source of calibration
+coefficient on the unit $S^3$.  This is the source of calibration
 $\pi$ in the Coulomb sector.
 
 \item \textbf{Embedding.}  Single transcendental seeds introduced by
@@ -996,8 +1012,8 @@ extrapolation $\sim -A/(l_{\max} + 2)^4$ is the standard treatment.
 equation $P(R, \mu) = 0$ with coefficients in a known field extension,
 where pointwise diagonalization is a computational convenience rather
 than a mathematical necessity.  The Level-3 adiabatic potential curves
-$\mu(R)$ on the hyperspherical fiber bundle live in
-$\mathbb{Q}(\pi, \sqrt{2})[R]$.
+$\mu(R)$ on the hyperspherical fiber bundle are algebraic over a
+polynomial ring whose coefficients lie in $\mathbb{Q}(\pi, \sqrt{2})$.
 
 \item \textbf{Composition.}  The accuracy cost of factorizing a full
 $N$-electron wavefunction into composed coordinates:\ the factorization
@@ -1022,8 +1038,9 @@ external input.
 \textbf{[OBSERVATION]} The taxonomy is falsifiable: the claim is that the transcendental
 content of any GeoVac observable is determined entirely by the type of
 projection linking the compact discrete description to the
-non-compact coordinate system.  No observable has been identified that
-violates the taxonomy; recent work on bound-state QED in the
+non-compact coordinate system.  Paper~18 itself extends the six tiers
+with odd-zeta and spinor-intrinsic entries, so the taxonomy has grown
+rather than been violated; recent work on bound-state QED in the
 hydrogen-Lamb-shift sprint has confirmed that the framework-native
 one-loop contributions sit cleanly in the calibration and flow sectors
 of Paper~34's classification, with the Drake--Swainson structural
@@ -1046,16 +1063,21 @@ indexes three sub-mechanisms by the integer operator order
 $k \in \{0, 1, 2\}$:
 
 \begin{itemize}
-\item \textbf{M1 ($k = 0$).}  Trivial heat kernel collapses to the
-unit-radius sphere-volume quotient $2\,\text{Vol}(S^2)/\text{Vol}(S^3) = 4/\pi$ (numerically $\text{Vol}(S^2)/\pi^2$; not the Hopf fibration's base-to-total ratio, corrected 2026-09-03).  This is the
+\item \textbf{M1 ($k = 0$).}  Trivial heat kernel collapses to a
+sphere-volume quotient:\ $4/\pi = \text{Vol}(S^2)/\pi^2$ in the
+dual-Coxeter normalisation, twice the unit-radius quotient
+$\text{Vol}(S^2)/\text{Vol}(S^3) = 2/\pi$ (not the Hopf fibration's base-to-total ratio, corrected 2026-09-03).  This is the
 signature of all calibration-$\pi$ content in the Coulomb sector and
 appears as the leading constant in the GeoVac state-space Gromov--Hausdorff convergence
 rate.
 
 \item \textbf{M2 ($k = 2$).}  Standard Seeley--DeWitt expansion of
-$\mathrm{Tr}\,e^{-t D^2}$.  Produces $\sqrt{\pi}\,\mathbb{Q} \oplus
-\pi^2 \,\mathbb{Q}$ at every integer $s$ via Jacobi $\theta$-inversion
-on the half-integer-shifted Dirac spectrum.
+$\mathrm{Tr}\,e^{-t D^2}$.  Its heat-kernel coefficients, via Jacobi
+$\theta$-inversion on the half-integer-shifted Dirac spectrum, carry
+$\Gamma$-factor powers of $\sqrt{\pi}$;\ the spectral-zeta values it
+produces lie in the pure-Tate even-weight ring
+$\bigoplus_k \pi^{2k}\mathbb{Q}$ (Paper~55).  The two statements concern
+different objects and are not in conflict.
 
 \item \textbf{M3 ($k = 1$).}  Mellin transform of
 $\mathrm{Tr}(D \cdot e^{-t D^2})$.  Produces the quarter-integer
@@ -1080,7 +1102,7 @@ record.
 
 \textbf{[OBSERVATION]} A particularly clean operational consequence of the taxonomy is the
 two-layer architecture made explicit by Paper~34 (catalogue paper,
-applications group): the bare combinatorial graph (Layer~1:\ labels,
+group~6): the bare combinatorial graph (Layer~1:\ labels,
 rational entries, algebraic eigenvalues) versus a finite family of named projections
 (Layer~2) that add specific variables, dimensions, and transcendentals
 when the graph is mapped to a physical observable.  Paper~34
@@ -1106,8 +1128,16 @@ Connes~\cite{connes_book1994} and the graph-spectral-triple lineage of
 Marcolli and van Suijlekom~\cite{marcolli_vs2014, perez_sanchez2024}:
 $\mathcal{A}$ is an algebra of functions on the Fock-projected
 discrete graph, $\mathcal{H}$ is a Hilbert space of scalar and spinor
-states, and $D$ is a Dirac operator inherited from the
+states, and $D$ is a Dirac operator carrying the
 Camporesi--Higuchi spectrum on $S^3$~\cite{camporesi_higuchi1996}.
+One caution on which $D$:\ the diagonal spectral form $D_{\mathrm{GV}}$
+(the Camporesi--Higuchi eigenvalues placed on the diagonal of the
+$|n, \kappa, m_j\rangle$ basis) commutes with $\pi(\mathcal{A})$, which is
+diagonal in the same basis, so $[D_{\mathrm{GV}}, \pi(f)] = 0$ and that
+triple carries no metric.  The metric, and with it the ``Dirac-dependent
+sector'' below, rests on the truthful, non-diagonal Camporesi--Higuchi
+Dirac operator of Paper~38~\cite{loutey_paper38}, not on the diagonal
+form (corrected 2026-09-28).
 
 \subsection*{The A/D split}
 
@@ -1121,7 +1151,7 @@ These transfer free across central potentials.  Examples:
 \begin{itemize}
 \item Angular sparsity (Paper~22): ERI density $D(l_{\max})$ depends
 only on the spherical-harmonic angular factorization.
-\item Composed scaling (Paper~14, applications group): the
+\item Composed scaling (Paper~14, group~4): the
 exactly $Q$-linear Pauli-term count of composed-geometry qubit
 encodings ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis)
 depends on the Gaunt selection rules.
@@ -1148,9 +1178,10 @@ geometry to $S^3$; HO rigidity (Paper~24;\ conditional on the imported
 $SU(3)$-closure converse) pins the HO geometry to
 $H^2(S^5)$ with $(N, 0)$ symmetric irreps.
 \item The candidate fine-structure-constant combination
-$K = \pi(B + F - \Delta)$ of Paper~2: lives entirely in the
-Coulomb-specific sector by its dependence on the Camporesi--Higuchi
-Dirac spectrum on $S^3$.
+$K = \pi(B + F - \Delta)$ of Paper~2 (an Observation):\ lives in the
+Coulomb-specific sector through the volume-slot $\pi$ on $S^3$
+(Paper~31);\ of its three ingredients only $\Delta$ uses the Dirac
+degeneracy.
 \end{itemize}
 
 \subsection*{Why the partition matters operationally}
@@ -1223,12 +1254,13 @@ interaction---the correct statement that free particles do not interact.
 \textbf{[MEASURED]} Gauging via the inner fluctuation of the truncated operator-system
 algebra produces a genuine, non-factorizable two-body interaction
 (connected fraction $77\%$ at $n_{\max} = 2$, falling to $32\%$ at $n_{\max} = 3$---
-cutoff-sensitive, like the radial Pearson coefficient below).  \textbf{[PANEL-VERIFIED]} Its angular structure is
+cutoff-sensitive, and measured at only two cutoffs).  \textbf{[PANEL-VERIFIED]} Its angular structure is
 exactly what the universal sector predicts:\ $100\%$ $m$-conserving,
 $100\%$ Gaunt-compatible, pure $k = 0$ monopole at both tested cutoffs.
 Its radial weights, however, are \emph{not} proportional to the Coulomb
 $1/r_{12}$ kernel (Pearson $r = 0.41$--$0.58$, \emph{decreasing} with
-$n_{\max}$---structural, not finite-size).  This delineates the
+$n_{\max}$;\ Paper~54 reads this as structural rather than finite-size,
+an inference from the same two cutoffs).  This delineates the
 partition at the two-body level:\ the algebra $\mathcal{A}$ determines
 \emph{which} channels couple (angular selection rules, universal across
 central potentials by Paper~22), and the Dirac operator / metric
@@ -1243,11 +1275,17 @@ chordal-distance identity (Paper~7), not through the spectral action.
 \subsection{Periods (Paper~55)}
 The master Mellin engine of Paper~18 indexes the framework's
 $\pi$-content by operator order $k \in \{0, 1, 2\}$ in
-$\mathcal{M}[\mathrm{Tr}(D^k e^{-t D^2})]$.  \textbf{[INTERNAL THEOREM]} Paper~55 completes this
-engine into a period-theoretic statement:\ every transcendental that
-has appeared in a GeoVac spectral observable---integer powers of $\pi$,
+$\mathcal{M}[\mathrm{Tr}(D^k e^{-t D^2})]$.  Paper~55 completes this
+engine into a period-theoretic statement.  \textbf{[INTERNAL THEOREM]}
+The Mellin-slot ring inclusions below are theorems;\ the scope statement
+that they exhaust GeoVac's spectral data is a census
+(\textbf{[OBSERVATION]}) of the transcendentals that have appeared in
+GeoVac \emph{spectral} observables---it does not cover the non-spectral
+chemistry integrals, e.g.\ the embedding seed $e^a E_1(a)$ or the
+genus-one three-centre period of Paper~59 below.  That census comprises
+integer powers of $\pi$,
 odd zeta values $\zeta(2k{+}1)$, Catalan $G = \beta(2)$ and
-Dirichlet-$\beta$ values, and a depth-$k$ loop tower---sits in
+Dirichlet-$\beta$ values, and a depth-$k$ loop tower, all of which sit in
 cyclotomic mixed-Tate periods at level $\le 4$ over $\mathbb{Z}[i, 1/2]$,
 stratified by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
 (pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$
@@ -1257,15 +1295,15 @@ specialized to the static $S^3$ sub-case), and $M_3 \subset \mathcal{MT}(\mathbb
 $\le 4$ (cyclotomic mixed-Tate, via Hurwitz zeta at quarter-integer
 shifts and the Deligne--Glanois descent~\cite{glanois2015}; the vertex-parity-as-$\chi_{-4}$
 correspondence of Paper~28~\cite{loutey_paper28}).  This is the period-theoretic completion of
-the $\mathcal{A}/D$ partition:\ the universal sector's transcendentals
-are pinned to named cyclotomic mixed-Tate rings rather than chased
+the $\mathcal{A}/D$ partition:\ the Coulomb- ($D$-)sector spectral
+transcendentals are pinned to named cyclotomic mixed-Tate rings rather than chased
 indefinitely.  (Discipline check folded in here:\ the constant
 $S_{\min}$, long carried as ``PSLQ-irreducible,'' is now resolved as
 $S_{\min} \in \mathbb{Q}[\pi^2, \ln 2, \zeta(3), \zeta(5)]$ in closed
 form---the prior label was a basis-coverage artifact.)
 
-\subsection{The Tannakian substrate and the cosmic-Galois injection
-(Paper~56)}
+\subsection{The Tannakian substrate and the cosmic-Galois comparison
+homomorphism (Paper~56)}
 If the framework's periods all live in a single named period ring, the
 natural categorical home is a motivic Galois group.  \textbf{[PANEL-VERIFIED]} Paper~56 assembles,
 bit-exact on rational panels (thousands of zero residuals across
@@ -1276,14 +1314,17 @@ rigid representation category, a faithful exact $\otimes$-fiber functor,
 and an explicit inclusion of the candidate cosmic-Galois group
 $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3N} \rtimes SL_2$ into
 $\mathrm{Aut}^{\otimes}(\omega)$.  \textbf{[INTERNAL THEOREM]} The load-bearing result is the
-\emph{cosmic-Galois injection}:\ a homomorphism (not a closed
-immersion --- the M3 column is rank~2, its parity-blind per-sector restriction
-rank~1, both $\ll N$, under Reading~A; Paper~56)
+\emph{cosmic-Galois comparison homomorphism}
 $U^*_{\mathrm{GV}} \rightarrow \mathcal{U}_4^{\mathrm{ab}}
-\rtimes SL_2$ of the framework's finite-cutoff Galois group into the
+\rtimes SL_2$ from the framework's finite-cutoff Galois group to the
 abelianization of the unipotent radical of the level-4 motivic Galois
 group $\mathcal{G}_4 = \mathcal{G}_{\mathrm{MT}(\mathbb{Z}[i, 1/2])}$
-(Deligne 2010, Glanois 2015).  The comparison target is the
+(Deligne 2010, Glanois 2015).  It is \emph{not injective}:\ its image
+has rank~2 (the M3 column;\ rank~1 for M1, M2 and for the parity-blind
+per-sector restriction), far below the sector count $N$, so it factors
+through the abelianization and is neither an injection nor a closed
+immersion (Paper~56, which calls it the ``injection'' in its theorem
+name;\ the map it proves is this low-rank comparison map).  The comparison target is the
 \emph{level-4} group, not Brown's $\mathcal{G}_{\mathrm{MT}(\mathbb{Z})}$:\
 Eskandari--Murty--Nemoto 2025 place Catalan $G$ at level~4 (mixed Tate
 over $\mathbb{Q}(i)$).  That $G$ is \emph{not} a period of $\mathrm{MT}(\mathbb{Z})$
@@ -1295,11 +1336,12 @@ Two scope qualifiers are essential and stated honestly:\ (i) GeoVac
 bit-exact at the JLO entire-cyclic-cocycle level at depth~2, so the
 image lands in $\mathcal{U}_4^{\mathrm{ab}} \cong \mathbb{G}_a^\infty$
 rather than the full free non-abelian unipotent; (ii) \emph{infinite-cutoff
-equality is not claimed}---the injection direction is closed at theorem
-grade at finite cutoff, while the converse equality on depth-$\ge 2$
-content is the named deep forward question.
+equality is not claimed}---the comparison homomorphism and its
+abelianized image are closed at theorem grade at finite cutoff, while the
+converse equality on depth-$\ge 2$ content is the named deep forward
+question.
 
-\emph{The elliptic layer (Papers~59 and~61~\cite{loutey_paper59,loutey_paper61}).}  The injection above lands in the
+\emph{The elliptic layer (Papers~59 and~61~\cite{loutey_paper59,loutey_paper61}).}  The comparison homomorphism above lands in the
 \emph{mixed-Tate} (genus-zero) cosmic Galois;\ the elliptic (genus-one) layer
 that Paper~56 reaches for---a Hain--Brown mixed-elliptic-motive
 target~\cite{hain2014,brown2014_mmv}---came
@@ -1355,9 +1397,10 @@ generic modular locus.
 \subsection{The forced/free seam (Paper~57)}
 \textbf{[OBSERVATION]} The reconvergence closes with an observations paper that consolidates,
 across the corpus, the boundary between what the framework forces and
-what it consumes.  Paper~57 catalogues the forced entries (graph
-spectrum---the closed-form grid spectrum, not the hydrogen ladder, which
-is the Casimir $n^2 - 1$ on the labels---the $S^3$ outer manifold, the gauge group $U(1) \times SU(2)
+what it consumes.  Paper~57 catalogues the forced entries (the
+label-set spectrum $n^2 - 1$, carried on the labels as the $SO(4)$
+Casimir---not the graph Laplacian's grid band edge, which Paper~57 records
+as matched rather than forced---the $S^3$ outer manifold, the gauge group $U(1) \times SU(2)
 \times SU(3)$ from Bertrand $\times$ Hopf-tower truncation, the master
 Mellin engine, two-term-exact gravity), the single admitted-not-forced
 entry (the quaternionic factor $\mathbb{H}$), and the calibration
@@ -1376,16 +1419,15 @@ distinct families:\ a multi-focal composition family (the framework can
 build it but cannot autonomously pick a number) and an inner-factor
 input-data family (categorical to the outer-factor mechanism; lives
 elsewhere by structure).  This is the foundational reconvergence:\ the
-period classification (Paper~55) and the Tannakian injection (Paper~56)
+period classification (Paper~55) and the Tannakian comparison homomorphism (Paper~56)
 place theorem-grade boundaries around the empirical forced/free
 observation---with the $\mathcal{A}/D$ partition (Paper~31) supplying the
 spectral-triple language rather than a further theorem---
 though Paper~57 holds the forcing-iff-property principle itself open as
 a preliminary observation (it is an observations paper, not a theorem
 paper).  The
-framework's identity is precisely this seam---it maps the structural
-skeleton of quantum mechanics (the compact, Peter--Weyl, discrete
-regime) and consumes, rather than generates, the continuum calibration
+framework's identity is precisely this seam---it maps the compact,
+Peter--Weyl, discrete skeleton of the systems it treats and consumes, rather than generates, the continuum calibration
 data the skeleton does not reach.
 
 %% ========================================================================
@@ -1398,7 +1440,7 @@ questions open.
 
 \subsection*{The $\alpha$ combination rule}
 
-Paper~2~\cite{loutey_paper2_alpha} (observations group) presents the
+Paper~2~\cite{loutey_paper2_alpha} (group~5, QED/gauge) presents the
 candidate combination
 \begin{equation}
 K = \pi (B + F - \Delta), \qquad K \stackrel{?}{=} \alpha^{-1},
@@ -1409,7 +1451,7 @@ the packing exponent $d_{\max} = 4$, and $\Delta = 1/40$ is the
 inverse Dirac mode count $g_3^{\text{Dirac}}(S^3) = 2(n+1)(n+2)|_{n=3}$.
 Each ingredient now has a structurally identified spectral home;
 twelve mechanisms have been eliminated as candidate single-principle
-derivations of the sum~\cite{loutey_paper18}.  The combination rule
+derivations of the sum~\cite{loutey_paper2_alpha}.  The combination rule
 itself remains an \emph{Observation} at the rule level (never a
 conjecture or derivation, per the project's hard rule):\ there is no
 first-principles derivation explaining why the additive combination of
@@ -1447,8 +1489,8 @@ $\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$.  Within
 the foundations arc, Paper~24's Coulomb/HO asymmetry (six standing layers)
 documents structural obstructions to such a construction at the
 NCG-framework level.  The operator-algebra arc (Group~1) has formally
-named this as a frontier-of-field open problem; no published framework
-currently supports the cross-manifold tensor product.
+named this as a frontier-of-field open problem; we are not aware of a
+construction that supports this cross-manifold tensor product.
 
 \subsection*{The multi-focal composition wall}
 
@@ -1467,7 +1509,7 @@ sharpen the open-question boundary of the framework.
 
 \subsection*{The elliptic layer of the cosmic Galois}
 
-\textbf{[OPEN]} Paper~56's cosmic-Galois injection lands in the mixed-Tate (genus-zero) group
+\textbf{[OPEN]} Paper~56's cosmic-Galois comparison homomorphism lands in the mixed-Tate (genus-zero) group
 $\mathcal{G}_4$;\ the elliptic (genus-one) layer it reaches for---the
 Hain--Brown mixed-elliptic-motive target over $M_{1,1}$---came back negative,
 because GeoVac's periods are $\mathbb{Q}(i)$-CM-pure rather than generically
@@ -1657,13 +1699,13 @@ GeoVac Paper~0 (2026).
 
 \bibitem{loutey_paper1}
 J.~Loutey,
-``The Geometric Atom: Atomic Structure as a Packing Problem,''
+``The Geometric Atom: the Hydrogen State Space as a Label Lattice,''
 GeoVac Paper~1 (2026).
 
 \bibitem{loutey_paper2_alpha}
 J.~Loutey,
 ``The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration,''
-GeoVac Paper~2 (Observations, 2026).
+GeoVac Paper~2 (group~5, 2026).
 
 \bibitem{loutey_paper6}
 J.~Loutey,

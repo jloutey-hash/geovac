@@ -329,7 +329,7 @@
 | SO(3) m-reflection forced zero in Connes metric | 32 | §III rem:connes_distance | Synthesis |
 | 1:2:3 rational distance structure at n_max=2 (50√3 fingerprint) | 32 | §III rem:connes_distance | Synthesis |
 | Tomita-Takesaki modular structure on truncated SU(2) spectral triples | 42 | All | Standalone |
-| Four-witness Wick-rotation literal identification at finite cutoff | 42 | §1, §5-§7 | Standalone |
+| Four-witness 2π period at finite cutoff (automatic for integer-spectrum K; BW identification OPEN) | 42 | §1, §5-§7 | Standalone |
 | BW-α geometric modular Hamiltonian K_α = J_polar (integer spectrum) | 42 | §5 (Theorem 5.4) | Standalone |
 | BW-γ Tomita-Takesaki modular Hamiltonian K_TT = -log Δ (polar decomposition) | 42 | §6 (Theorem 6.3) | Standalone |
 | BW-α/BW-γ flow conjugacy σ_t^TT = σ_{-t}^α | 42 | §7 (Theorem 7.1) | Standalone |

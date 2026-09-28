@@ -7,6 +7,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.4] - 2026-09-28
+
+**Patch. /qa trunk FULL #9 (unseeded, PI-invoked) = FAIL; RESEARCH-GRADE not earned. PI approved every recommendation, and this entry is that remediation.** Every LARGE finding was verified by the PM against text, code or a re-run before it was accepted. The keystone mathematics held under independent re-derivation: the P38 theorem and its 4/π and 2/π constants, the L5 refutation, P32's Forced-Count of 32 (two routes), the sign triple and prop = 2, and P7's wall, Casimir, λ_max and F⁰.
+
+### The run
+- **Deterministic gates (C5, C10–C24):** PASS.
+- **Code dimension:** FAIL. P7 has 1 LARGE, P32 has 3, P38 has 2; P0 and P1 are sound.
+- **Claims dimension:** FAIL (P1 title and α; P32 gauge and Lorentzian items).
+- **Citations:** FAIL (the paper credited Leimbach–van Suijlekom with a rate they do not give).
+- **Completeness critic:** FAIL. P32's `prop:odd` contradicted its own measured grading; 14 SMALL; the DoD's status line was stale.
+
+### LARGE findings closed
+- **Paper 32 diagonal triple.** D_GV and π(f) are both diagonal, so [D_GV, π(f)] ≡ 0. The triple is spectral, not metric; the metric role belongs to the non-diagonal Camporesi–Higuchi Dirac of Paper 38.
+  - `prop:odd` is split: the continuum is odd; the finite truncation is even (σ_x⊗1). There is no KO label at finite cutoff.
+  - The order-zero/one failures are now reported as growing ([MEASURED]: 0.055 → 0.079 → 0.096; 63/86/92%), not as a decaying artifact.
+  - E6 is demoted from a theorem to an Observation. Its Fact 2 was false because the rationals lie in both sub-rings.
+- **Finite four-witness "literal identification" demoted corpus-wide (owner: Paper 42).**
+  - `modular_hamiltonian.py` posits K = 2J_z. That K has integer spectrum, so σ₂π = id for any operator, the four witnesses are the same K relabelled, and the Tomita step is circular. A non-Bisognano–Wichmann K passed all 18 tests.
+  - What stands: a trivial [SYMBOLIC] fact. Deriving K from a wedge-restricted CH state is OPEN. The continuum statement is prior art.
+  - Paper 42 is retitled "…the four-witness 2π period at finite cutoff".
+  - Citers edited: P31, P32, P34, P35, P38, P43, P44, P45, P50, P52 and the group1 synthesis.
+  - Paper 50's "CHM identification at finite cutoff" theorem becomes an Observation (an analogy). It had also used a GH distance between spectral triples as an operator convergence rate; that is withdrawn.
+  - Module scope note added.
+- **Paper 38.**
+  - **A1:** one substrate description throughout. The true CH window's band envelope is N ≤ 2n_max (was 2n_max−1), with `lem:band_injectivity` re-proved for the top band. The theorem uses only the true window and stands.
+  - **A2, confirmed by an independent construction** (`debug/p38_true_ch_window.py`, which builds D and diagonalizes it; it agrees with the reviewer's direct eigenspace build). On the true window the Dirac-commutator kernel is exactly the scalars (dim O = 5, 30, 91 at n_max = 1–3). The "Dirac seminorm degenerates" motivation belonged to the doubled Fock model only; it is corrected at five loci. Convergence directly in the Dirac seminorm is [OPEN].
+  - L3 now has a compression proof ([INTERNAL THEOREM]); `prop:limit_identification` is stated up to isometry; the normalisation is stated in `eq:main_thm`; the Leimbach–vS rate attribution is removed.
+- **Paper 7.** New `tests/test_paper7_fock_kernel.py`: exact sympy checks of the S³ Coulomb-kernel eigenvalue 2π²/n (n ≤ 4, all l), the quantization p₀ = Z/n with E never an input, and φ_n = Ω²C ∝ the hydrogen momentum wavefunction. Stage 3 is now genuinely [SYMBOLIC PROOF]; 2π² = Vol(S³) is tagged. Also:
+  - a new slow He n_max=5 pin (−48.74 mHa shift, 1.928%);
+  - H₂⁺ now cites Paper 11's machine-precision result;
+  - the Li ²S correction (ν ≥ 2, not 1) is dated in the paper.
+- **Paper 1.** Retitled "The Geometric Atom: the Hydrogen State Space as a Label Lattice"; the `\thanks` subtitle and the "information capacity" phrase are dropped. α now "approximately satisfies" (Observation). The impedance route is recorded as tried and superseded. 18 bibitems swept.
+- **Paper 56.** The non-injective Φ^inj is renamed "comparison homomorphism" (19 loci).
+
+### SMALL findings closed
+About 60, across P0, P1, P7, P32, P38, the group3 synthesis and `geovac/lattice.py` docstrings. Examples:
+- H₂ at Level 2 in P0;
+- R_{nl};
+- the nested commutator is 0.32, not ≈0.35;
+- the HO spectrum is N+3/2;
+- the B normalisation;
+- the §VIII theorems are tiered;
+- the claim-matrix Paper 1 rows are relabelled "labels only".
+
+### Gates
+- **Five new C16 entries**, fire-tested 26/26 before install: `finite-four-witness-literal-identification`, `order-zero-one-decaying-artifact`, `e6-no-single-mechanism-theorem`, `diagonal-commutator-lipschitz`, `truncation-inherits-odd`. `alpha-cubic-stated-as-law` is widened to the Paper 1 wording. All dependents are stamped.
+- **Guards, fire-tested separately from the fix that wrote them:**
+  - The kernel test fired on a wrong Gegenbauer index, a wrong Coulomb prefactor and wrong kernels. The squared-kernel plant coincides at (2,0), giving π² for both, and is caught at n = 1.
+  - The He pin fired on a hop leaking back into the physical one-body term.
+- **`trunk.done.md`:** the status line is corrected, the run is recorded, and two pre-registered extensions are added: C7 (which object converges) and C8 (the P32 finite axiom table).
+- **`fire_test.py`:** now takes a per-target lock. Two concurrent reviewers had corrupted a target; the lock is tested for stale takeover, a live holder, and release.
+- **Results:** all gates PASS; C10 59/59 compile; 409 tests pass.
+
+### Owed
+- **Guard pass (a separate unit):**
+  - order-zero growth;
+  - [D_GV, π(f)] ≡ 0;
+  - σ_x grading;
+  - a documented-trivial four-witness guard;
+  - pins for P32 numerics;
+  - B = 42;
+  - a true-window P38 freeze;
+  - a basis-free rewrite of `test_trunk_qa_splitting.py`.
+- **P50/P45/P52 dependents flagged for review:** the P45 Q1 convention branch rests on a posited generator; the Pythagorean 1/π² M1 tagging.
+- **PI item — Paper 16's "universal ν = N−2":** `ν_min = N − λ₁` counts S_N symmetry only. Li ²S needs ν ≥ 2 (the ν = 1 harmonics have L = 1 and odd parity), and L261 reads the fully polarized state as spatially symmetric, which looks backwards. Not edited; it needs a careful check.
+- **Next run:** a DELTA on this remediation, then FULL #10.
+
 ## [v5.17.3] - 2026-09-28
 
 **Patch. The list-closing pass for the final /qa trunk re-check. All deterministic gates PASS corpus-wide. The next trunk run should be the FULL certifying run (PI-invoked).**

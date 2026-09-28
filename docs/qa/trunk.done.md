@@ -27,6 +27,9 @@
 > | DELTA #11 | 2026-09-06 | CLEAN-DELTA (FULL #7 remediation + guard pass + C21 closure all verified; 3/3 dimensions clean) -> unlocks FULL #8 |
 > | FULL #8 | 2026-09-06 | FAIL (certifying; 2 SMALL, 0 LARGE; fresh adversary caught 2 pre-existing P1 s/p paraphrase zombies FULL #7 missed) -> remediated + C16-backstopped same day; C21 symbolic-fraction constants owed |
 > | DELTA #12 | 2026-09-06 | DEFECTS (claims CLEAN; C21 symbolic instrument built but its tight-match was inert -> guard fixed + fire-tested) -> FULL #8 remediation + C21-on-trunk verified |
+> | DELTA #13 (claim-impact) | 2026-09-27/28 | DEFECTS (~19 LARGE, one family: graph/κ credited with the hydrogen spectrum) -> v5.17.1 |
+> | re-checks #1–#3 | 2026-09-28 | DEFECTS each (residue paraphrases, then ~13 LARGE pre-existing debt) -> v5.17.2, list-closing pass v5.17.3 |
+> | FULL #9 | 2026-09-28 | FAIL (unseeded; ~15 LARGE + ~35 SMALL; RESEARCH-GRADE NOT earned). Keystone mathematics SOUND. LARGE cluster: P32's diagonal finite triple ([D,π(f)]≡0) and its consequences; finite four-witness "literal identification" trivial (K=2J_z); order-zero/one residuals grow; E6 proof; P38 substrate A1/A2; P7 Stage-3 tier; P1 title/α. PI approved all recommendations; remediation in progress |
 >
 > **No run has produced PASS.** Only a FULL run can, and the last four FULL
 > runs each found material defects — several *introduced by the previous
@@ -52,7 +55,9 @@
 > file supplies only trunk-specific scope + deltas. C1–C13, the verdict rule,
 > the review-dimensions map, and the hard rules live in `criteria.md`.
 
-> **STATUS: FROZEN — certified PASS** (`/qa trunk` run #4, 8/8 seeds, v4.16.2).
+> **STATUS: NOT CERTIFIED; RESEARCH-GRADE NOT earned** (FULL #9, 2026-09-28 = FAIL).
+> The historical "certified PASS" (run #4, 8/8 seeds, v4.16.2, 2026-06) is superseded
+> by every run since; see the banner.
 
 **Scope:** Papers **0, 1, 7** (group3 foundations) + **32, 38** (group1
 operator-algebras) + the **group3 foundations synthesis**. The trunk is the
@@ -95,9 +100,38 @@ re-prices everything above it.
     claim-impact reviewer covers paraphrases.
   - **Also in claim-impact scope:** WH3's graph-limit leg, and Coulomb/HO Layer 1
     (withdrawn: 7 catalogued, 6 standing), wherever trunk papers restate them.
+- **C7 extension — which object converges (pre-registered 2026-09-28 after FULL #9,
+  PI-approved; applies from the next run).** Paper 38's convergence theorem is about
+  the **true Camporesi–Higuchi truncation** (Dirac eigenspaces up to the cutoff), not
+  the doubled Fock spin-orbital space. **LARGE:** any live locus that describes the
+  convergent object inconsistently with the proof, or that motivates the translation
+  seminorm by a Dirac-seminorm degeneracy that does not hold on the true window.
+- **C8 extension — Paper 32's finite axiom table (pre-registered 2026-09-28 after
+  FULL #9, PI-approved; applies from the next run).** The finite triple's audited
+  status is a headline. **LARGE:** any live locus asserting that the diagonal
+  spectral form D_GV carries a metric or a nonzero commutator with π(A); that the
+  finite truncation is odd (it is even via chirality doubling; no KO label at finite
+  cutoff); that the order-zero/one failures decay; that the finite four-witness 2π
+  period is a literal identification of a Bisognano–Wichmann modular flow (it is a
+  trivial symbolic fact, K = 2J_z); or the E6 "no single mechanism" statement at
+  any tier above Observation. C16 backstops: `diagonal-commutator-lipschitz`,
+  `truncation-inherits-odd`, `order-zero-one-decaying-artifact`,
+  `finite-four-witness-literal-identification`, `e6-no-single-mechanism-theorem`.
 - **No branch-specific C14+.**
 
 ## Change log
+- 2026-09-28 (v5.17.3, FULL #9) — **FAIL; RESEARCH-GRADE NOT earned.** Unseeded;
+  standing calibration record cited. Dimensions: deterministic PASS (C5, C10–C24);
+  code FAIL (P7 1 LARGE, P32 3 LARGE, P38 2 LARGE; P0/P1 sound); claims FAIL
+  (P1 title/α/"unexplored"; P32 gauge/Lorentzian); citations FAIL (Leimbach–van
+  Suijlekom credited with a rate they do not give); completeness FAIL (P32 prop:odd
+  contradicts its own measured grading; 14 SMALL; this DoD's status line was stale).
+  Every LARGE verified by the PM against text or code. Keystone mathematics SOUND
+  (P38 theorem and constants, L5 refutation; P32 Forced-Count 32 by two routes, sign
+  triple, prop = 2; P7 wall, Casimir, λ_max, F⁰). PI approved every recommendation
+  (P32 rescope, P38 A2 independent build first, P7 kernel test, E6 → Observation,
+  P1 retitle, the two DoD extensions above). Instrument fix: `fire_test.py` now
+  takes a per-target lock (two concurrent reviewers had corrupted a target).
 - 2026-09-27/28 (v5.17.0 → v5.17.1) — **claim-impact DELTA (unseeded) = DEFECTS;
   RESEARCH-GRADE NOT earned** (about 19 LARGE, about 16 SMALL). Dimensions:
   - deterministic: green, after a C20 fix;

@@ -79,6 +79,62 @@ def _invalidate_bytecode(target: str) -> None:
                     pass
 
 
+def _pid_alive(pid: int) -> bool:
+    if pid <= 0:
+        return False
+    if os.name == "nt":
+        import ctypes
+        h = ctypes.windll.kernel32.OpenProcess(0x1000, False, pid)
+        if not h:
+            return False
+        code = ctypes.c_ulong()
+        ctypes.windll.kernel32.GetExitCodeProcess(h, ctypes.byref(code))
+        ctypes.windll.kernel32.CloseHandle(h)
+        return code.value == 259  # STILL_ACTIVE
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
+    return True
+
+
+def _acquire_lock(lock: str, timeout: float = 3600.0) -> None:
+    """Take an exclusive per-target lock, waiting for a live holder."""
+    import time
+    start = time.time()
+    warned = False
+    while True:
+        try:
+            fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(fd, str(os.getpid()).encode())
+            os.close(fd)
+            return
+        except FileExistsError:
+            try:
+                holder = int(io.open(lock).read().strip() or 0)
+            except (OSError, ValueError):
+                holder = 0
+            if not _pid_alive(holder):
+                try:
+                    os.remove(lock)
+                except OSError:
+                    pass
+                continue
+            if not warned:
+                print(f"  waiting: target locked by live fire_test PID {holder}")
+                warned = True
+            if time.time() - start > timeout:
+                raise SystemExit(f"ERROR: timed out waiting for {lock}")
+            time.sleep(2.0)
+
+
+def _release_lock(lock: str) -> None:
+    try:
+        os.remove(lock)
+    except OSError:
+        pass
+
+
 def _apply(text: str, plants: list[tuple[str, str]], where: str) -> str:
     for old, new in plants:
         if old == new:
@@ -116,7 +172,19 @@ def run(test_path: str, plants: list[tuple[str, str]],
     if selector:
         cmd += ["-k", selector]
 
-    shutil.copy(target, backup)
+    # Per-target exclusive lock (added 2026-09-28, /qa trunk FULL).  Two
+    # reviewers fire-testing the SAME file concurrently corrupted it: the
+    # second run's backup copied the first run's MUTATED bytes, then restored
+    # them.  A unique backup name would not fix that -- only serialising
+    # access to the target does.  A lock whose owning PID is dead is stale and
+    # is taken over.
+    lock = target + ".firetest.lock"
+    _acquire_lock(lock)
+    try:
+        shutil.copy(target, backup)
+    except BaseException:
+        _release_lock(lock)
+        raise
     try:
         src = io.open(target, encoding="utf-8").read()
         io.open(target, "w", encoding="utf-8", newline="\n").write(
@@ -131,6 +199,7 @@ def run(test_path: str, plants: list[tuple[str, str]],
     finally:
         shutil.move(backup, target)
         _invalidate_bytecode(target)
+        _release_lock(lock)
 
     fired = proc.returncode != 0
     tail = [l for l in proc.stdout.splitlines() if l.strip()][-1:]

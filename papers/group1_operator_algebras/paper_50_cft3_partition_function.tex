@@ -6,7 +6,7 @@
 % structurally distinct calculations:
 %   (A) spectral-zeta side -> universal F-theorem coefficient
 %   (B) wedge KMS state side -> boundary-dimension log scaling
-%   (C) modular Hamiltonian side -> CHM integer-spectrum identification
+%   (C) modular Hamiltonian side -> CHM analogy (identification OPEN, 2026-09-28)
 %
 % Substantive new structural content:
 %   1. Master Mellin engine verified on independent (non-GeoVac-internal)
@@ -49,6 +49,7 @@
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem{observation}[theorem]{Observation}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -106,11 +107,13 @@ the free Camporesi--Higuchi Dirac ($F_{D} = \tfrac{\log 2}{4} +
 \tfrac{3\zeta(3)}{8\pi^{2}}$); \emph{(B)} the wedge KMS entropy
 $S(\rhoW) \sim 2\log\nmax$ extracts the wedge boundary dimension
 $\dim(\partial W) = 2$ as a degeneracy log on the lowest $\Kalpha$
-shell; \emph{(C)} the framework's modular Hamiltonian $\Kalpha =
-J_{\mathrm{polar}}$ identifies, at finite cutoff, with the continuum
-Casini--Huerta--Myers hemisphere modular Hamiltonian, with
-GH-convergence rate inherited from~\cite{paper38} (and the
-signature-agnostic product-carrier rate of~\cite{paper45}). The
+shell; \emph{(C)} the framework's wedge generator $\Kalpha =
+J_{\mathrm{polar}}$ (a posited rotation generator, not derived from a
+state) shares its integer spectrum and $2\pi$-periodic flow with the
+continuum Casini--Huerta--Myers hemisphere modular Hamiltonian;\ this
+is a structural \emph{analogy}, and the identification of $\Kalpha$ as
+the modular Hamiltonian of a wedge-restricted state is \textbf{[OPEN]}
+(2026-09-28;\ see~\cite{paper42}). The
 scalar/Dirac partition functions decompose orthogonally under the
 master Mellin engine of~\cite{paper18}: $F_{D} + 2 F_{s} = \log(2)/2$
 isolates the M2 (Seeley--DeWitt) sector, $F_{D} - 2 F_{s} =
@@ -122,10 +125,11 @@ to~\cite{klebanov_pufu_safdi2011} and are not new; the present paper's
 contributions are (i) their bit-exact reproduction from the discrete
 truncated spectral triple, (ii) the orthogonal M2/M3 dual-basis
 decomposition (Theorem~\ref{thm:mellin_decomp}), and (iii) the
-finite-cutoff identification of the framework's modular Hamiltonian
-with the CHM hemisphere operator at GH-convergence rate inherited
-from~\cite{paper38} (signature-agnostic product-carrier rate
-in~\cite{paper45}).
+wedge-KMS entropy extraction of $\dim(\partial W)$. The CHM comparison
+(C) is recorded as an analogy only;\ an earlier version claimed a
+finite-cutoff identification at GH-convergence rate, which is withdrawn
+(2026-09-28): $\Kalpha$ is posited, and a GH distance between spectral
+triples does not bound the convergence of one operator to another.
 The bulk-side identifications
 (Ryu--Takayanagi minimum surfaces, JLMS bulk-modular reconstruction,
 AdS$_{4}$ / H$^{4}$ dual geometry) are blocked at the framework's
@@ -142,12 +146,14 @@ operator-system truncation of the Camporesi--Higuchi spectral
 triple~\cite{camporesi_higuchi1996} on the round $\sthree$. Its
 modular structure on the hemispheric wedge has been developed across
 Papers~42--49~\cite{paper42, paper43, paper44, paper45, paper46,
-paper47, paper48, paper49}: the four-witness Wick-rotation theorem
-closes at the operator-system level (Riemannian, finite cutoff) via
-the geometric BW-$\alpha$ generator $\Kalpha = J_{\mathrm{polar}}$
-with integer spectrum, and via the Tomita--Takesaki BW-$\gamma$
-modular operator on the GNS Hilbert--Schmidt space; the modular flow
-$\sigma_{2\pi}(\Op) = \Op$ closes bit-exactly. The Lorentzian
+paper47, paper48, paper49}: with the posited geometric BW-$\alpha$
+generator $\Kalpha = J_{\mathrm{polar}}$ (integer spectrum) and the
+Tomita--Takesaki BW-$\gamma$ modular operator of the Gibbs state built
+from it, the flow closes, $\sigma_{2\pi}(\Op) = \Op$, bit-exactly ---
+automatically, for any integer-spectrum generator, so this is not a
+finite-cutoff identification of the four-witness Wick-rotation theorem
+(withdrawn 2026-09-28;\ deriving the generator from a
+Camporesi--Higuchi wedge state is open, Paper~42). The Lorentzian
 \emph{propinquity} extension to signature $(3,1)$ is descoped:\
 Paper~45~\cite{paper45} proves a degeneracy theorem (the natural
 Lorentzian-propinquity seminorm vanishes identically, closing that
@@ -197,14 +203,15 @@ appear in $S(\rhoW)$, demonstrating that the framework's spectral-zeta
 side and wedge KMS state side encode \emph{different} continuum
 observables on the same modular state.
 
-\item \textbf{Casini--Huerta--Myers identification}
-(Sec.~\ref{sec:chm}): the framework's modular Hamiltonian $\Kalpha$
-identifies, at finite cutoff, with the continuum CHM hemisphere
-modular Hamiltonian $K_{\mathrm{cont}} = 2\pi \int_{H_{+}} \xi \cdot
-T^{00}\, d\Omega$~\cite{casini_huerta_myers2011}; convergence
-$\Kalpha \to K_{\mathrm{cont}}$ as $\nmax \to \infty$ is bounded by
-the Paper~38 GH-convergence rate $\Lambda \le C_{3} \cdot
-\gamma_{\nmax}$ with $\gamma_{\nmax} \sim (4/\pi)\log(\nmax)/\nmax$.
+\item \textbf{Casini--Huerta--Myers analogy}
+(Sec.~\ref{sec:chm}): the framework's posited wedge generator
+$\Kalpha$ shares integer spectrum and $2\pi$-periodic flow with the
+continuum CHM hemisphere modular Hamiltonian $K_{\mathrm{cont}} = 2\pi
+\int_{H_{+}} \xi \cdot T^{00}\, d\Omega$~\cite{casini_huerta_myers2011}.
+\textbf{[OPEN]}:\ identifying $\Kalpha$ as a modular Hamiltonian
+(deriving it from a wedge-restricted state) and any operator-level
+convergence $\Kalpha \to K_{\mathrm{cont}}$;\ the Paper~38 GH rate
+concerns the spectral triples, not this operator.
 \end{enumerate}
 
 \paragraph{Bulk-side scope.}
@@ -611,7 +618,7 @@ framework reproduces boundary observables on the same wedge KMS
 state, but cannot independently construct a bulk dual against which
 to compare via RT.
 
-\section{Casini--Huerta--Myers identification}
+\section{Casini--Huerta--Myers analogy}
 \label{sec:chm}
 
 \subsection{Continuum CHM hemisphere modular Hamiltonian}
@@ -632,7 +639,7 @@ flow~\cite{bisognano_wichmann1976}; the eigenvalues of
 $K_{\mathrm{cont}}$ in the single-particle basis are $2\pi J$ for
 integer $J = 1, 2, 3, \dots$.
 
-\subsection{Framework identification}
+\subsection{Framework wedge generator}
 
 The framework's wedge modular Hamiltonian (Paper~42 Def~5.1) is
 \[
@@ -651,11 +658,12 @@ bit-exactly at every tested $\nmax$~\cite{paper42}. The odd-integer
 spectrum, the multiplicities, and the $2\pi$ closure are verified
 from the live BW construction in \texttt{tests/test\_paper50\_wedge\_kms.py}.
 
-\begin{theorem}[CHM identification at finite cutoff]
+\begin{observation}[CHM analogy at finite cutoff]
 \label{thm:chm_identification}
-The framework's modular Hamiltonian $\Kalpha$ at finite $\nmax$ is
-the operator-system-level analog of the continuum CHM modular
-Hamiltonian $K_{\mathrm{cont}}$ of~(\ref{eq:K_chm}), with:
+\textbf{[SYMBOLIC]} (the first three items) / \textbf{[OPEN]} (the
+identification). The framework's posited wedge generator $\Kalpha$ at
+finite $\nmax$ is a structural analog of the continuum CHM modular
+Hamiltonian $K_{\mathrm{cont}}$ of~(\ref{eq:K_chm}):
 
 \begin{itemize}
 \item Both spectra integer-valued in canonical $(2\pi)^{-1}$ units.
@@ -663,38 +671,35 @@ Hamiltonian $K_{\mathrm{cont}}$ of~(\ref{eq:K_chm}), with:
 \item The framework's odd-integer spectrum $\{1, 3, \dots, 2\nmax - 1\}$
 corresponds to the half-integer Casimir grading of the
 wedge-preserving Killing field on the Weyl spinor sector.
-\item Convergence $\Kalpha \to K_{\mathrm{cont}}$ as $\nmax \to
-\infty$ holds in the van~Suijlekom state-space Gromov--Hausdorff
-distance at rate
-\[
-d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_{3} \cdot \gamma_{\nmax}
-\]
-with $C_{3} \to 1$ and $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
-\nmax$ inherited from Paper~38~\cite{paper38} (the signature-agnostic
-product-carrier rate of~\cite{paper45} extends it to the temporal
-factor).
 \end{itemize}
-\end{theorem}
+The integer spectrum and the $2\pi$ period are automatic for any
+integer-spectrum rotation generator~\cite{paper42}, so they do not
+single out a modular Hamiltonian. What is \emph{not} established:\ that
+$\Kalpha$ is the modular Hamiltonian of a wedge-restricted
+Camporesi--Higuchi state (the open falsifier of~\cite{paper42}), and
+any convergence $\Kalpha \to K_{\mathrm{cont}}$ as operators. The
+state-space Gromov--Hausdorff convergence of the spectral triples
+(\cite{paper38}, rate $(4/\pi)\log\nmax/\nmax$) is a statement about
+the triples, not about this operator;\ an earlier version of this item
+used it as an operator convergence rate, which is withdrawn
+(2026-09-28).
+\end{observation}
 
-\begin{proof}[Proof sketch]
+\noindent\emph{Basis of the analogy.}
 The wedge-preserving Killing field of the round $\sthree$ rotates
-the spinor harmonics by their $m_{j}$ eigenvalue; the canonical
-$2\pi$-period of the rotation gives the integer $2 m_{j}$ spectrum
-in the canonical normalization. The framework's truncation
-$\Kalpha = J_{\mathrm{polar}}$ acts on the projected wedge
-sub-space $P_{\Wedge} \Hilb_{\mathrm{GV}}^{\nmax}$ with exactly
-the same $2 m_{j}$ eigenvalues, restricted to the multiplicities
-allowed by the truncation. Convergence in the state-space
-Gromov--Hausdorff distance follows from~\cite{paper38}.
-\end{proof}
+the spinor harmonics by their $m_{j}$ eigenvalue, giving the integer
+$2 m_{j}$ spectrum. The framework's $\Kalpha = J_{\mathrm{polar}}$
+acts on the projected wedge sub-space $P_{\Wedge}
+\Hilb_{\mathrm{GV}}^{\nmax}$ with the same $2 m_{j}$ eigenvalues,
+restricted to the multiplicities allowed by the truncation.
 
 \section{Bulk-side scope}
 \label{sec:bulk_blocked}
 
 The three boundary-side observables (Sec.~\ref{sec:partition},
-Sec.~\ref{sec:wedge_kms}, Sec.~\ref{sec:chm}) all reproduce or
-identify their continuum CFT$_{3}$-on-$\sthree$ analogs at finite
-cutoff. The corresponding \emph{bulk-side} identifications --- AdS$_{4}$
+Sec.~\ref{sec:wedge_kms}, Sec.~\ref{sec:chm}) reproduce (A, B) or
+parallel (C, an analogy with the identification open) their continuum
+CFT$_{3}$-on-$\sthree$ analogs at finite cutoff. The corresponding \emph{bulk-side} identifications --- AdS$_{4}$
 gravity, JLMS bulk-modular reconstruction, RT minimum surfaces,
 holographic entanglement entropy --- are blocked at the framework's
 existing infrastructure.
@@ -966,7 +971,7 @@ Operation & Continuum analog & Ring \\
 \midrule
 $-\tfrac{1}{2}\zeta'_{\Delta}(0)$ (Theorem~\ref{thm:scalar_bitexact}) & F-theorem coefficient & M2 + M3 \\
 $-\Tr[\rhoW \log \rhoW]$ (Prop.~\ref{prop:F_vs_S_decomposition}) & Wedge boundary dimension & ring-free \\
-$\mathrm{spec}(\Kalpha)$ (Theorem~\ref{thm:chm_identification}) & CHM modular Hamiltonian & ring-free \\
+$\mathrm{spec}(\Kalpha)$ (Observation~\ref{thm:chm_identification}) & CHM modular Hamiltonian & ring-free \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -997,9 +1002,10 @@ Hurwitz machinery that may not reduce to the framework's MR-B
 Jacobi-$\vartheta_{2}$ closed form. Whether the framework can match
 the squashed case is open.
 
-\item \textbf{State-space-GH-rate convergence statement.} Theorem~\ref{thm:chm_identification}
-states convergence at the state-space Gromov--Hausdorff level
-(inherited from Paper~38). A quantitative
+\item \textbf{State-space-GH-rate convergence statement.} The
+spectral triples converge at the state-space Gromov--Hausdorff level
+(Paper~38);\ Observation~\ref{thm:chm_identification} does not inherit
+an operator-level rate from this (withdrawn 2026-09-28). A quantitative
 rate for the partition-function-side convergence $|F_{\nmax} -
 F^{\KPS}| \le C \cdot \gamma_{\nmax}$ with explicit $C$ requires a
 Mellin-domain version of the Berezin-reconstruction framework of
@@ -1337,7 +1343,7 @@ GeoVac internal preprint, 2026.
 GeoVac internal preprint, 2026.
 
 \bibitem{paper42} J.~Loutey,
-\emph{Paper~42: Tomita--Takesaki modular structure on truncated $SU(2)$ spectral triples: four-witness Wick-rotation literal identification at finite cutoff},
+\emph{Paper~42: Tomita--Takesaki modular structure on truncated $SU(2)$ spectral triples: the four-witness $2\pi$ period at finite cutoff},
 GeoVac internal preprint, 2026.
 
 \bibitem{paper43} J.~Loutey,

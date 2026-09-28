@@ -22,18 +22,19 @@
 
 \begin{abstract}
 \textbf{[SYMBOLIC PROOF]} We show that the angular momentum quantum numbers $(\ell, m)$ emerge
-from a purely geometric construction: uniform-density packing of
+from a geometric construction: uniform-density packing of
 distinguishable states on concentric isotropic shells in two
 dimensions.  Starting from two axioms---discrete binary
 distinguishability and geometric indifference (maximum entropy)---the
 construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
 isomorphic to the spherical harmonic basis $Y_{\ell m}$ with
-$\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  The principal quantum
-\textbf{[OBSERVATION]} number~$n$ corresponds to a cumulative grouping of the first~$n$
-shells, producing the $n^2$ orbital count, but this grouping is not
-forced by the axioms alone.  Similarly, a factor of~2 arises from the
-orientability of the compactified packing manifold ($S^2$),
-corresponding to spin multiplicity.  When the packing is interpreted
+$\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  \textbf{[OBSERVATION]}
+The principal quantum number~$n$ corresponds to a cumulative grouping
+of the first~$n$ shells, producing the $n^2$ orbital count, but this
+grouping is not forced by the axioms alone.  Similarly, the per-shell
+count carries a factor of~2 from the binary initialization
+($N_{\mathrm{init}} = 2$), which we read as corresponding to spin
+multiplicity (a counting correspondence, not a derivation of spin).  When the packing is interpreted
 as a graph, its Laplacian splits into $\ell$-blocks (the edges change
 $n$ or $m$, never $\ell$) and so does not converge to the $S^3$
 Laplacian---the spinless node set is the exact $S^3$ label set, on which
@@ -48,15 +49,17 @@ failed is the spectral bound, not the target the scale is matched to.
 The per-shell spectrum $E_n = -Z^2/(2n^2)$ is not a function of the
 graph Laplacian: it follows from the diagonal Casimir $n^2-1$ on the
 labels through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This angular cross-section recurs across the
-natural geometries of the Geometric Vacuum series to the extent each
-retains the corresponding symmetry:\ the full $(\ell, m)$ labeling with
-degeneracy $2\ell+1$ at the one-centre levels ($S^3$ for hydrogen,
-hyperspherical coordinates for helium), in the angular channels of the
-molecule-frame hyperspherical treatment, and in each fiber of the
-composed bundles;\ at the two-centre prolate-spheroidal level only $m$
-survives exactly, $\ell$ being replaced by a separation index that
-reduces to it only in the united-atom limit.  This is Paper~0 in the
-series.
+natural geometries of the Geometric Vacuum series as a basis
+label:\ the full $(\ell, m)$ labeling, with $2\ell+1$ states per~$\ell$,
+labels the basis on $S^3$ for hydrogen, the per-electron partial waves
+of the hyperspherical treatment of helium, the angular channels of the
+molecule-frame hyperspherical treatment, and each fiber of the composed
+bundles ($\ell$ is a \emph{conserved} quantum number only for the
+one-electron atom;\ elsewhere it is a channel label coupled by Gaunt
+coefficients);\ in the two-centre prolate-spheroidal geometry only $m$
+survives as a label, because the $\eta$-separation replaces $\ell$ by a
+separation index that reduces to it only in the united-atom limit.  This
+is Paper~0 in the series.
 \end{abstract}
 
 \maketitle
@@ -103,29 +106,32 @@ of the paper.
 \textbf{[OBSERVATION]} \noindent\textbf{Structural correspondences.}  The principal quantum
 number~$n$ arises when one groups the first $n$ shells cumulatively,
 yielding the count $\sum_{k=1}^{n}(2k-1) = n^2$.  This grouping is
-natural but not uniquely forced by the axioms.  The factor of~2 (spin
-multiplicity) arises from the orientability of the compactified
-packing manifold: conformally compactifying the plane to $S^2$
-introduces two orientations, corresponding to a $\mathbb{Z}_2$
-\textbf{[OBSERVATION]} doubling.  The identification of this doubling with
-spin-$\tfrac{1}{2}$ is a structural correspondence, not a derivation
-from the axioms.
+natural but not uniquely forced by the axioms.  The factor of~2 in the
+per-shell count comes from the binary initialization
+($N_{\mathrm{init}} = 2$);\ the compactified packing manifold $S^2$ is
+also orientable (two orientations, a $\mathbb{Z}_2$), which offers a
+second, heuristic reading of the same factor.  \textbf{[OBSERVATION]}
+The identification of this factor of~2 with spin-$\tfrac{1}{2}$
+multiplicity is a counting correspondence, not a derivation from the
+axioms.
 
 \medskip
 
 \textbf{[OBSERVATION]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
 sector constructed here recurs inside the natural geometries of the
-Geometric Vacuum (GeoVac) series wherever the corresponding symmetry
-survives.  The full $(\ell, m)$ labeling with degeneracy $2\ell+1$
-appears on $S^3$ for hydrogen~\cite{paper7}, in the per-electron
-angular factors of the hyperspherical coordinates for He~\cite{paper13},
-in the angular channels of the molecule-frame hyperspherical
-coordinates for H$_2$~\cite{paper15}, and in each fiber of the composed
-bundles for LiH~\cite{paper17}.  In the prolate spheroidal coordinates
-for H$_2^+$~\cite{paper11} only $m$ is exact:\ the two-centre potential
-breaks SO(3) to axial SO(2), and the $\eta$-equation's node count
+Geometric Vacuum (GeoVac) series as a basis label.  The full $(\ell, m)$
+labeling, with $2\ell+1$ states per~$\ell$, appears on $S^3$ for
+hydrogen~\cite{paper7} (where $\ell$ is also conserved), in the
+per-electron angular factors of the hyperspherical coordinates for
+He~\cite{paper13}, in the angular channels of the molecule-frame
+hyperspherical treatment of H$_2$~\cite{paper15}, and in each fiber of
+the composed bundles for LiH~\cite{paper17};\ in the multi-electron and
+two-centre cases $\ell$ is a channel label coupled by Gaunt coefficients,
+not a conserved quantum number.  In the prolate spheroidal coordinates
+for H$_2^+$ and H$_2$~\cite{paper11,paper12} only $m$ is a label:\ the
+$\eta$-separation replaces $\ell$ by a separation index whose node count
 correlates with $\ell$ only in the united-atom limit.  Where it
-survives, the full geometry separates into a system-specific radial or
+appears, the full geometry separates into a system-specific radial or
 hyperradial part and an angular cross-section whose labeling is the
 packing derived here.  This recurrence is the reason the packing
 construction is foundational to the series rather than merely a
@@ -296,8 +302,8 @@ momentum labeling $(\ell, m)$.
 \subsection{The angular capacity of shell $k$}
 
 The factor of $2(2k-1)$ in Eq.~\eqref{eq:Nk} factorizes into a
-global factor of~2---whose origin in the initialization condition and
-manifold orientability is analyzed in
+global factor of~2---whose origin in the initialization condition (and
+a heuristic orientability reading) is analyzed in
 Sec.~\ref{sec:correspondences}---and an angular capacity per shell:
 \begin{equation}
   N_k^{\mathrm{angular}} = 2k - 1
@@ -326,12 +332,15 @@ representation of SO(3).  The $2k-1$ angular positions on shell~$k$
 are in one-to-one correspondence with the magnetic quantum numbers
 $m = -\ell, \ldots, +\ell$.
 
-\textbf{[SYMBOLIC PROOF]} This is not a coincidence that must be checked case by case: it is an
+\textbf{[SYMBOLIC PROOF]} The equality of counts need not be checked case by case: it is an
 algebraic identity.  The area formula
 (Eq.~\ref{eq:annular-area}) forces the annular area of shell~$k$ to
 be proportional to $2k-1$, which is the dimension of the
-$(k{-}1)$-th irreducible representation of SO(3).  The packing
-\textbf{[SYMBOLIC PROOF]} construction therefore generates the complete angular momentum basis
+$(k{-}1)$-th irreducible representation of SO(3).  (The identity
+establishes equal counts for every $k$;\ it is not a mechanism linking
+planar area to SO(3), and the bijection of positions with $m$ values is
+a labelling choice.)  The packing construction therefore generates the
+complete angular momentum label set
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$ as a direct
 consequence of uniform density on isotropic shells.
 
@@ -408,19 +417,23 @@ traces back to two sources:
   propagates through all subsequent shells via the uniform-density
   condition.
 
-\item \textbf{Orientability.}  When the flat packing plane is
-  conformally compactified to the Riemann sphere
-  $S^2 \cong \mathbb{C}^*$, the resulting manifold is orientable: it
-  admits two distinct normal directions (inward and outward).  This
-  orientability provides a natural $\mathbb{Z}_2$ doubling of the
-  state space.  Mathematically, tracking this orientation lifts the
-  symmetry group from SO(3) to its double cover SU(2).
+\item \textbf{Orientability (a heuristic reading).}  When the flat
+  packing plane is conformally compactified to the Riemann sphere
+  $S^2 \cong \mathbb{C} \cup \{\infty\} = \mathbb{CP}^1$, the resulting
+  manifold is orientable: it admits two orientations (inward and
+  outward normals), a $\mathbb{Z}_2$ that can be read as a doubling of
+  the state space.  This $\mathbb{Z}_2$ is the orientation class,
+  relating O(3) to SO(3);\ it is \emph{not} the spin double cover
+  SU(2)$\to$SO(3), which comes from $\pi_1(\mathrm{SO}(3)) = \mathbb{Z}_2$
+  (corrected 2026-09-28:\ an earlier sentence said tracking the
+  orientation lifts SO(3) to SU(2)).  The arithmetic factor of~2 is the
+  initialization above;\ orientability supplies no additional factor.
 \end{enumerate}
 
-\textbf{[OBSERVATION]} The identification of this $\mathbb{Z}_2$ doubling with the
-spin-$\tfrac{1}{2}$ degree of freedom is consistent with the
-mathematical structure: orientability on $S^2$ and spinor
-representations of SU(2) both produce a factor of~2.  However, the
+\textbf{[OBSERVATION]} The identification of this factor of~2 with the
+spin-$\tfrac{1}{2}$ degree of freedom is a counting correspondence:\
+the initialization doubling and the spinor representation of SU(2)
+both produce a factor of~2.  However, the
 packing construction does not derive the spin angular momentum algebra
 $[\hat{S}_i, \hat{S}_j] = i\epsilon_{ijk}\hat{S}_k$ or the
 eigenvalue $s(s+1)$.  The correspondence is between the \emph{counting}
@@ -459,10 +472,11 @@ The packing construction of Sec.~\ref{sec:construction} produces a
 recurring $(\ell, m)$ angular labeling.  In the subsequent papers of
 the GeoVac series, this angular sector appears as a structural factor
 inside the natural geometries used for quantum chemistry calculations,
-to the extent each geometry retains the corresponding symmetry:\ the
-full $(\ell, m)$ labeling with degeneracy $2\ell+1$ at Levels~1, 3 and~4
-and in each Level-5 fiber, but only $m$ at the two-centre Level~2.
-Where it survives, the full geometry of each system separates into a
+as a basis label:\ the full $(\ell, m)$ labeling, with $2\ell+1$ states
+per~$\ell$, at Levels~1, 3 and~4 and in each Level-5 fiber ($\ell$
+conserved only at Level~1, a Gaunt-coupled channel label elsewhere), but
+only $m$ at the two-centre Level~2, where the prolate separation replaces
+$\ell$.  Where it appears, the full geometry of each system separates into a
 system-specific radial (or hyperradial) coordinate and the angular
 cross-section derived here.
 
@@ -478,15 +492,15 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
   & $S^3$ (Fock projection)
   & $Y_{\ell m}$ on $S^2 \subset S^3$
   & \cite{paper7} \\
-2 & H$_2^+$ (2-center, 1$e$)
+2 & H$_2^+$, H$_2$ (2-center, 1--2$e$)
   & Prolate spheroidal
   & $m$ exact; $\ell$-like index from $\eta$-separation
-  & \cite{paper11} \\
+  & \cite{paper11,paper12} \\
 3 & He (1-center, 2$e$)
   & Hyperspherical
   & $Y_{\ell m}$ per electron in fiber
   & \cite{paper13} \\
-4 & H$_2$ (2-center, 2$e$)
+4 & H$_2$ (2-center, 2$e$)$^{\ast}$
   & Mol-frame hyperspherical
   & $Y_{\ell m}$ angular channels
   & \cite{paper15} \\
@@ -496,11 +510,15 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
   & \cite{paper17} \\
 \bottomrule
 \end{tabular}
-\caption{The $(\ell, m)$ angular cross-section inside each natural
-  \textbf{[OBSERVATION]} geometry of the GeoVac series.  At Levels~1, 3, 4 and in each
-  Level-5 fiber the coordinate system separates into a system-specific
-  radial part and the full $(\ell, m)$ labeling constructed in this
-  paper;\ at the two-centre Level~2 only $m$ is exact.}
+\caption{\textbf{[OBSERVATION]} The $(\ell, m)$ angular cross-section
+  inside each natural geometry of the GeoVac series.  At Levels~1, 3, 4
+  and in each Level-5 fiber the coordinate system separates into a
+  system-specific radial part and the full $(\ell, m)$ labeling
+  constructed in this paper (a basis label;\ conserved only at
+  Level~1);\ at the two-centre Level~2 only $m$ is a label.
+  $^{\ast}$H$_2$'s natural geometry is Level~2 (prolate spheroidal,
+  Paper~12);\ Level~4 is its structural $N$-electron hyperspherical
+  treatment.}
 \label{tab:cross-section}
 \end{table}
 
@@ -508,8 +526,9 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
 Fock's 1935 stereographic projection~\cite{fock1935} maps the hydrogen
 momentum-space problem onto the three-sphere~$S^3$.  The eigenstates
 of the Laplace--Beltrami operator on $S^3$ are hyperspherical
-harmonics, which decompose as $Y_{n\ell m} = R_n(\chi) \,
-Y_{\ell m}(\theta, \phi)$.  The angular factor $Y_{\ell m}$ is
+harmonics, which decompose as $Y_{n\ell m} = R_{n\ell}(\chi) \,
+Y_{\ell m}(\theta, \phi)$ (the radial factor depends on $\ell$,
+$R_{n\ell} \propto \sin^\ell\chi\, C^{\ell+1}_{n-\ell-1}(\cos\chi)$).  The angular factor $Y_{\ell m}$ is
 precisely the per-shell structure of the packing, with $\ell = k - 1$.
 The packing's node set is exactly the label set of these harmonics
 (the Peter--Weyl truncation of $L^2(S^3)$), on which
@@ -519,20 +538,27 @@ verifies Fock's conformal chain from that continuum operator onward.
 The graph's edge Laplacian does \emph{not} converge to it
 (Sec.~\ref{sec:graph}).
 
-\textbf{Level~2: H$_2^+$ on prolate spheroids.}
-For one-electron diatomics, the natural geometry is the prolate
+\textbf{Level~2: H$_2^+$ and H$_2$ on prolate spheroids.}
+For diatomics, the natural geometry is the prolate
 spheroidal coordinate system $(\xi, \eta, \phi)$, in which the
-Schr\"odinger equation separates.  The azimuthal quantum number~$m$
+one-electron Schr\"odinger equation separates;\ it is also H$_2$'s
+natural geometry, where a prolate-spheroidal CI with exact algebraic
+integrals recovers \textbf{[MEASURED]} $99.97\%$ of the H$_2$
+dissociation energy ($0.053$~mHa) with explicit $r_{12}$ correlation,
+and $99.81\%$ ($0.32$~mHa) with a re-based orbital CI
+(Paper~12~\cite{paper12}).  The azimuthal quantum number~$m$
 survives exactly as the quantum number of the $\phi$-equation
 ($e^{im\phi}$), directly inheriting the packing's angular slot
 labeling.  The quantum number~$\ell$ is no longer exactly conserved in
 the two-center problem: it is replaced by a separation parameter from
 the $\eta$-equation that reduces to~$\ell$ in the united-atom limit.
 The angular structure is recognizably descended from the $(\ell, m)$
-packing---$m$ is exact---but it is not the same degeneracy pattern:\
-the two-center potential breaks the full SO(3) symmetry to axial SO(2),
-lifting the $(2\ell+1)$-fold degeneracy, and the $\eta$-node count
-correlates with $\ell$ only in the united-atom limit.
+packing---$m$ is exact---but $\ell$ is no longer a label:\ the prolate
+$\eta$-separation replaces it by a separation index whose node count
+correlates with $\ell$ only in the united-atom limit (the lifting of the
+$(2\ell+1)$-fold degeneracy by the axial potential is common to every
+two-centre problem, Level~4 included;\ what is specific to Level~2 is
+that the separated coordinates carry no $\ell$ label at all).
 Paper~11~\cite{paper11} constructs a discrete lattice in these
 coordinates.
 
@@ -546,12 +572,14 @@ a fiber bundle: the base space is the hyperradius, and the fiber is
 the angular manifold.
 
 \textbf{Level~4: H$_2$ in molecule-frame hyperspherical coordinates.}
-For two-electron diatomics, the geometry combines the molecular axis
-(internuclear separation~$R$) with the hyperspherical treatment of the
-two electrons.  The angular channels are labeled by $(\ell, m)$
-quantum numbers that determine the multichannel expansion.
+The structural $N$-electron treatment of two-electron diatomics
+combines the molecular axis (internuclear separation~$R$) with the
+hyperspherical treatment of the two electrons.  The angular channels
+are labeled by per-electron $(\ell, m)$ channel labels, coupled by the
+two-centre potential, that determine the multichannel expansion.
 \textbf{[MEASURED]} Paper~15~\cite{paper15} recovers 96.0\% of the H$_2$ dissociation
-energy using this geometry.
+energy using this geometry;\ H$_2$'s natural geometry, and its best
+result, is the prolate Level~2 above.
 
 \textbf{Level~5: LiH via composed geometries.}
 For core--valence systems, the total geometry is a fiber bundle
@@ -564,18 +592,20 @@ LiH and BeH$^+$.
 \medskip
 
 \textbf{[OBSERVATION]} The recurrence of the angular sector across the five levels is not
-imposed by hand, and it is not uniform: it tracks the symmetry each geometry retains
-($m$ exactly wherever axial symmetry survives; $\ell$ exactly
-wherever the full SO(3) does---the two-center problem breaks SO(3)
-to axial SO(2), replacing $\ell$ by a separation index, as \S V
-records).  The packing construction provides the combinatorial
+imposed by hand, and it is not uniform:\ $m$ is an exact label wherever
+axial symmetry survives;\ $\ell$ is an exact \emph{basis} label (with
+$2\ell+1$ states per $\ell$) wherever the separated coordinates carry an
+angular $S^2$ factor---Levels~1, 3, 4 and each Level-5 fiber---but a
+\emph{conserved} quantum number only where the full SO(3) survives
+(Level~1);\ at Level~2 the prolate separation replaces $\ell$ by a
+separation index.  The packing construction provides the combinatorial
 substrate for this angular factor.
 
 \subsection{The node structure as combinatorial invariant}
 \label{sec:combinatorial_invariant}
 
 The preceding survey reveals a structural feature that merits explicit
-\textbf{[OBSERVATION]} comment.  The discrete quantum-number set
+comment.  \textbf{[OBSERVATION]} The discrete quantum-number set
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$---with its
 degeneracy $2\ell + 1$ and selection rules---appears inside several
 conformally distinct continuum geometries.  The five geometries catalogued in
@@ -586,10 +616,11 @@ coordinates are non-compact with coordinate singularities at the foci;
 the hyperspherical manifold $S^5$ is compact but five-dimensional (for two electrons); the
 composed fiber bundle is a product of manifolds with different
 dimensionalities at each level.  Levels~1, 3 and~4, and each fiber of
-Level~5, share the full $(\ell, m)$ node structure with its labeling,
-degeneracies, and angular momentum coupling rules;\ the two-centre
-Level~2 shares only the $m$ label, its $\eta$-separation index
-reducing to $\ell$ only in the united-atom limit.
+Level~5, share the full $(\ell, m)$ node structure as a basis labeling,
+with its $2\ell+1$ count and angular momentum coupling rules ($\ell$
+conserved only at Level~1);\ the two-centre Level~2 shares only the $m$
+label, its $\eta$-separation index reducing to $\ell$ only in the
+united-atom limit.
 
 This invites a comparison with a standard universality argument
 familiar from statistical mechanics and lattice field theory, where many
@@ -624,17 +655,16 @@ Whether one regards the discrete or continuum description as more
 fundamental is a choice of interpretation, not a consequence of the
 mathematics.
 
-An analogy to isospectral manifolds is apt.  Kac's celebrated
-question---``Can one hear the shape of a drum?''---established that
-different Riemannian geometries can share spectral data (the answer, as
-Gordon, Webb, and Wolpert showed, is no: non-isometric manifolds can be
-isospectral).  \textbf{[OBSERVATION]} The present result differs in a specific sense:
-the geometries in Table~\ref{tab:cross-section} share a labeled node
-structure---quantum number assignments and per-shell degeneracies,
-with the $(\ell, m)$ selection rules shared exactly wherever the
-corresponding symmetry survives ($m$ in every row; $\ell$ in every
-row except the two-center Level~2, where SO(3) breaks to axial
-SO(2)).  The spectra themselves differ across rows; what is shared is
+An analogy to isospectral manifolds is apt.  Kac asked whether one
+can hear the shape of a drum~\cite{kac1966};\ Milnor~\cite{milnor1964}
+had already exhibited isospectral, non-isometric flat tori, and Gordon,
+Webb and Wolpert~\cite{gww1992} answered Kac's question negatively for
+planar domains.  \textbf{[OBSERVATION]} The present result differs in a
+specific sense:\ the geometries in Table~\ref{tab:cross-section} share
+a labeled node structure---quantum number assignments and per-shell
+state counts, with the $(\ell, m)$ selection rules shared as basis
+labels ($m$ in every row; $\ell$ in every row except the two-center
+Level~2, where the prolate separation replaces it).  The spectra themselves differ across rows; what is shared is
 combinatorial structure, which is richer than a list of eigenvalues
 and different in kind from isospectrality.
 
@@ -747,12 +777,15 @@ $\min_\ell\bigl[4\sin^2\frac{\pi}{2(n_{\max}-\ell)} + 4\sin^2\frac{\pi}{2(2\ell+
 \end{equation}
 attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  Every finite sample lies \emph{below} $C$ (verified at all $591$
 integer cutoffs $10 \le n_{\max} \le 600$) --- $C_{n} = 42.61$ at
-$n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so a finite sample
-always understates $C$.  The approach is \emph{not} monotone, however:\ there
+$n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so every sample
+checked understates $C$ (a measured one-sided pattern, not proved for all
+$n_{\max}$).  The approach is \emph{not} monotone, however:\ there
 are $195$ decreasing steps in that range, e.g.\ $C_{20} = 40.7285 >
 C_{21} = 40.6470$ (corrected 2026-09-04;\ ``monotone from below'' was asserted
-from a doubling grid that happens to be monotone).  It is the one-sided bound,
-not monotonicity, that makes every sample an understatement, and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
+from a doubling grid that happens to be monotone).  It is the one-sided pattern,
+not monotonicity, that makes every checked sample an understatement (the
+591-cutoff scan, the $C_{20} > C_{21}$ step and the $n_{\max} = 1000$ value
+are re-derived but not pinned by a test), and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
 Finally, with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
 ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
@@ -811,7 +844,8 @@ the graph Laplacian in the archived Paper~6~\cite{paper6} (superseded).
 
 \item[$\checkmark$] The structural correspondences $n \leftrightarrow$
   cumulative grouping and spin multiplicity $\leftrightarrow$
-  orientability, with their proper epistemic status identified.
+  the initialization factor of~2 (a counting correspondence), with
+  their proper epistemic status identified.
 \end{itemize}
 
 \subsection{What the construction does not provide}
@@ -822,8 +856,9 @@ the graph Laplacian in the archived Paper~6~\cite{paper6} (superseded).
   $n^2 - 1$ acting diagonally on the labels, with the energy shell
   $p_0^2 = -2E$), not from the graph Laplacian, whose spectrum lies in
   $[0, 8]$;\ the matched kinetic scale $K_{\mathrm{vac}}$ fixes only the
-  extremal eigenvalue, and its value is an Observation rather than a
-  derivation (Papers~1, 7).
+  extremal eigenvalue (its value is matched, and its coincidence with
+  the Fock-Jacobian factor $1/16$ is an Observation rather than a
+  derivation;\ Papers~1, 7).
 
 \item[$\times$] Wavefunctions $R_{n\ell}(r)$ or
   $Y_{\ell m}(\theta, \phi)$ in their functional form.  The packing
@@ -871,7 +906,7 @@ SO(4) dynamical symmetry that explains the ``accidental''
 $n^2$~degeneracy.  Bargmann~\cite{bargmann1936} derived the same
 symmetry algebraically.  Barut and Kleinert~\cite{barut1967}
 extended the symmetry analysis to transition probabilities via
-noncompact dynamical groups.  Biedenharn~\cite{biedenharn1981}
+noncompact dynamical groups.  Biedenharn and Louck~\cite{biedenharn1981}
 provided a comprehensive treatment of the angular momentum algebra
 underlying the $(\ell, m)$ structure.
 
@@ -890,15 +925,17 @@ degeneracy counting of the \emph{kinematic} structure of quantum
 mechanics.  It does not produce the \emph{dynamics}:
 the Hamiltonian, the energy spectrum, or time evolution.  This
 separation is a feature of the construction, not a limitation.  It
-shows that the angular quantum numbers are determined by geometry
-alone, independently of the specific force law or potential.
+shows that, given the construction's choices (Sec.~\ref{sec:correspondences}),
+the angular quantum-number labels follow from geometry and counting,
+independently of the specific force law or potential.
 
 In the GeoVac series, dynamics enter through the Coulomb problem's
 continuum structure, not through a limit of the graph Laplacian.
 Paper~7~\cite{paper7} verifies Fock's conformal equivalence between the
-hydrogen problem and the Laplace--Beltrami operator on~$S^3$, with the
-$1/r$ Coulomb potential emerging as the coordinate distortion from
-stereographic projection rather than an independent force law;\ the
+hydrogen problem and the Laplace--Beltrami operator on~$S^3$, under
+which the $1/r$ Coulomb potential can equivalently be described as the
+coordinate distortion of the stereographic projection (a dual
+description, not a claim that either reading is prior);\ the
 packing's (spinless) node set is the label set of that operator's
 harmonics, on which $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal
 $SO(4)$ Casimir $n^2 - 1$.  The graph
@@ -918,8 +955,8 @@ $[\hat{L}_i, \hat{L}_j] = i\epsilon_{ijk}\hat{L}_k$ is a consequence
 of rotational symmetry regardless of whether one arrives at it through
 operator theory or geometric packing.  What the construction
 demonstrates is that the \emph{state-counting} aspect of angular
-momentum---the degeneracy $2\ell + 1$---has a purely geometric
-derivation.
+momentum---the degeneracy $2\ell + 1$---has a geometric--combinatorial
+derivation, given the construction's structural choices.
 
 
 %% ================================================================
@@ -939,29 +976,39 @@ or any specific physical system.
 
 The principal quantum number~$n$ corresponds to cumulative grouping of
 the first~$n$ shells, yielding $n^2$ orbital states.  The factor of~2
-corresponds to the orientability of the compactified packing manifold.
+in the per-shell count, set by the binary initialization, corresponds
+in counting to spin multiplicity.
 These are structural correspondences---genuine mathematical
 observations that match hydrogen's quantum numbers---but they depend
 on identifications beyond what the two axioms alone determine.
 
 The $(\ell, m)$ angular sector constructed here recurs as the
 angular cross-section inside the natural geometries of the GeoVac
-series wherever their symmetry retains it---in full on $S^3$ for
-single-electron atoms~\cite{paper7}, in the hyperspherical and
-molecule-frame hyperspherical treatments, and in each fiber of the
+series as a basis label---in full on $S^3$ for
+single-electron atoms~\cite{paper7} (where $\ell$ is also conserved),
+as Gaunt-coupled channel labels in the hyperspherical and
+molecule-frame hyperspherical treatments and in each fiber of the
 composed bundles for core--valence molecules~\cite{paper17};\ only
-through $m$ in the two-centre prolate geometry.  The computational framework of the series
+through $m$ in the two-centre prolate geometry, where the separation
+replaces $\ell$.  The computational framework of the series
 is built on this label set, on Fock's continuum projection, and on the
 natural geometries in which each problem separates---not on the graph
 Laplacian and its kinetic scale, whose spectrum is a two-dimensional
 grid band structure and does not carry the hydrogen ladder (\S VI).
-It has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
-\textbf{[MEASURED]} LiH, and BeH$^+$, with $5.3\%$ for the LiH equilibrium
-geometry in the composed Level~5 treatment (BeH$^+$ is markedly worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
-pseudopotential; HeH$^+$ is treated at a fixed bond length and recovers
-93\% of $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent
-2D-variational solver; Paper~17), benchmarked against
-exact and experimental values.
+It has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$, LiH, and
+BeH$^+$, benchmarked against exact and experimental values.
+\textbf{[MEASURED]} H$_2$ reaches $99.97\%$ of $D_e$ ($0.053$~mHa) in
+its natural prolate geometry with explicit $r_{12}$ correlation
+(Paper~12~\cite{paper12});\ in that same prolate engine the HeH$^+$
+equilibrium bond length converges to $-0.5\%$ (Paper~12);\ the LiH
+equilibrium geometry is $+0.2\%$ in an all-electron prolate treatment
+with an analytic core (Paper~19~\cite{paper19}) and $5.3\%$ in the
+composed Level~5 treatment (Paper~17), where BeH$^+$ is markedly worse
+($R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
+pseudopotential) and HeH$^+$ at fixed bond length recovers 93\% of
+$D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent
+2D-variational solver.  These inherited figures are owned, and
+test-backed or not, by the cited papers.
 
 
 \section*{Acknowledgments}
@@ -1012,6 +1059,12 @@ J.~Loutey,
 Spheroidal Lattices,''
 GeoVac Paper~11 (2026).
 
+\bibitem{paper12}
+J.~Loutey,
+``Algebraic Two-Electron Integrals on the Prolate Spheroidal
+Lattice,''
+GeoVac Paper~12 (2026).
+
 \bibitem{paper13}
 J.~Loutey,
 ``The Hyperspherical Lattice: Two-Electron Atoms as Coupled
@@ -1030,10 +1083,31 @@ J.~Loutey,
 BeH$^+$ from Discrete Graph Topology,''
 GeoVac Paper~17 (2026).
 
+\bibitem{paper19}
+J.~Loutey,
+``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian Integrals
+and Coupled Composition,''
+GeoVac Paper~19 (2026).
+
 \bibitem{paper1}
 J.~Loutey,
-``The Geometric Atom: Atomic Structure as a Packing Problem,''
+``The Geometric Atom: the Hydrogen State Space as a Label Lattice,''
 GeoVac Paper~1 (2026).
+
+\bibitem{kac1966}
+M.~Kac,
+``Can One Hear the Shape of a Drum?,''
+\textit{Amer. Math. Monthly} \textbf{73}, 1 (1966).
+
+\bibitem{milnor1964}
+J.~Milnor,
+``Eigenvalues of the Laplace Operator on Certain Manifolds,''
+\textit{Proc. Natl. Acad. Sci. USA} \textbf{51}, 542 (1964).
+
+\bibitem{gww1992}
+C.~Gordon, D.~L.~Webb, and S.~Wolpert,
+``One Cannot Hear the Shape of a Drum,''
+\textit{Bull. Amer. Math. Soc.} \textbf{27}, 134 (1992).
 \bibitem{paper6}
 J.~Loutey,
 ``$O(N)$ Quantum Dynamics and Molecular Spectroscopy via Spectral Graph Theory,''

@@ -1,5 +1,16 @@
 """Modular Hamiltonian K on the truncated Camporesi-Higuchi spectral triple.
 
+SCOPE NOTE (2026-09-28, /qa trunk FULL #9; supersedes the framing below).
+K_geometric is POSITED as J_polar (= 2 J_z, integer spectrum), not derived
+from a state.  Its 2pi period closure holds for ANY operator (see
+_build_geometric_K_boost), the four witnesses are the same K with kappa_g
+relabelled, and the BW-gamma Tomita step recovers K by construction
+(rho_W = e^{-K}/Z).  So the verdict labels STRONG_IDENTIFICATION /
+UNIFIED_STRONG below are module labels for "the automatic closure held",
+NOT an identification of a Bisognano-Wichmann modular flow.  Deriving K
+from a wedge-restricted Camporesi-Higuchi state is the open falsifier
+(Paper 42, O0).  The historical docstring text is kept unchanged.
+
 Sprint L1 (2026-05-16): build the modular Hamiltonian K_{n_max} from a
 Tomita-Takesaki polar decomposition of the modular S-operator on a
 wedge-restricted KMS state of the truncated operator system, and verify

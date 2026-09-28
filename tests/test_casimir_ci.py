@@ -1005,33 +1005,34 @@ class TestFCIAHybridHe:
 
     @pytest.mark.slow
     def test_graph_native_he_nmax5(self):
-        """Graph-native He n_max=5 = -2.896476 Ha (0.2496%), more accurate than grid.
+        """Regression pin of the RETIRED hop-augmented model at n_max=5.
 
-        Exact float-algebraic Slater integrals remove the grid truncation
-        error, dropping the n_max=5 error from 0.349% (grid) to 0.2496%.
-        Marked slow: the n_max=5 graph-native build is ~2 min (266-config
-        FCI with exact-rational/float R^k evaluation per matrix element).
-
-        NO-TEST (deliberate): the FCI-A 0.19% headline is at n_max=7, whose
-        graph-native build is computationally impractical for CI (the
-        config count and exact-integral cost both blow up). It is left
-        uncovered by design rather than faked; the n_max=5 = 0.25% point
-        below establishes the graph-native-beats-grid trend the headline
-        extends.
+        ``build_graph_native_fci`` with its legacy default h1_method='hybrid'
+        adds a (1/16)*A off-diagonal graph hop to the exact diagonal
+        -Z^2/(2n^2).  That hop is NOT part of helium's Hamiltonian (in the
+        k=Z hydrogenic basis T + V_ne is exactly diagonal), so the value
+        pinned here, -2.896476 Ha (0.2496% from exact), is the ground state
+        of a hop-augmented MODEL, not a helium result and not a variational
+        bound on helium (retired 2026-09-25; Papers 7, 13).  He's physical
+        Hamiltonian in the same basis gives 1.928% at n_max=5 (pinned in
+        tests/test_he_physical_hamiltonian.py); the hop lowers the energy by
+        48.74 mHa, more than He's whole correlation energy.  Kept so the
+        legacy default stays bit-reproducible.  Marked slow (~2 min).
         """
         H = build_graph_native_fci(Z=2, n_max=5)
         assert H.shape == (266, 266)
         E0 = float(np.linalg.eigvalsh(H)[0])
-        # Recompute-pin on the actual graph-native value.
+        # Recompute-pin on the hop-model value.
         assert abs(E0 - (-2.896476)) < 1e-3, (
-            f"He n_max=5 graph-native: E={E0:.6f}, expected -2.896476 ± 1e-3"
+            f"He n_max=5 hop model: E={E0:.6f}, expected -2.896476 ± 1e-3"
         )
-        # ~0.25% accuracy, beating the 0.349% grid result, variationally bounded.
         error_pct = abs(E0 - self.E_HE_EXACT) / abs(self.E_HE_EXACT) * 100
         assert 0.20 < error_pct < 0.30, (
-            f"He n_max=5 graph-native error {error_pct:.4f}% outside "
-            f"(0.20%, 0.30%) — expected ~0.2496%"
+            f"He n_max=5 hop-model offset {error_pct:.4f}% outside "
+            f"(0.20%, 0.30%) — expected ~0.2496% (a model value, not He)"
         )
+        # Numerically above exact at this cutoff; NOT a variational statement
+        # about helium (the hop model is a different Hamiltonian).
         assert E0 > self.E_HE_EXACT, (
-            f"He n_max=5 graph-native E={E0:.6f} violates variational bound"
+            f"He n_max=5 hop model E={E0:.6f} dropped below exact He"
         )

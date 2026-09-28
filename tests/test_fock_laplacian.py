@@ -199,10 +199,9 @@ def test_s3_eigenvalue_ground_state(radial_symbols):
     result = s3_radial_laplacian(cos_chi, p, omega)
     result = sp.simplify(result)
 
-    # Expected eigenvalue: -p₀²(n²-1) = -3p₀² for n=2
-    # But our S³ has radius 1/p₀, so Δ on the unit sphere gives -(n²-1)
-    # and on radius-R sphere gives -(n²-1)/R² = -p₀²(n²-1).
-    # Let's just check proportionality: result = λ · cos_chi
+    # Expected eigenvalue on the UNIT S³ (Paper 7: p₀ fixes the chart, not
+    # the radius): -(n²-1) = -3 for n=2.  Check proportionality first:
+    # result = λ · cos_chi
     eigenvalue = sp.simplify(sp.cancel(result / cos_chi))
 
     # eigenvalue should be a function of p0 only (constant in p)
@@ -376,18 +375,17 @@ def test_n3_eigenvalue(radial_symbols):
 
 def test_eigenvalue_to_energy_mapping():
     """
-    Verify the algebraic identity connecting S³ eigenvalues to
-    hydrogen energy levels (in atomic units, m=1, e=1, ℏ=1):
+    DEFINITIONAL check (Paper 7 appendix item 18): the energy-shell
+    relation p₀² = -2E rearranged.  It builds p₀² from E_n = -1/(2n²) and
+    recovers E_n, so it would pass for ANY E_n = f(n); it does not derive
+    the Rydberg formula.  The sphere is the UNIT S³ for every p₀ (Paper 7
+    Sec. III; p₀ is a focal length, not a radius), with eigenvalues
+    λ_n = -(n²-1).  The product λ_n·p₀² = -(n²-1)/n² computed below is
+    bookkeeping only.
 
-        E_n = -1/(2n²)
-
-    Fock's mapping gives S³ eigenvalues λ_n = -(n²-1)/R² where
-    R = 1/p₀ and p₀² = -2mE = 1/n² (atomic units). Therefore:
-
-        λ_n = -(n²-1) · p₀² = -(n²-1)/n²
-
-    This test verifies the algebraic chain from S³ spectrum to
-    Rydberg formula.
+    The non-definitional content -- p₀ = Z/n forced by the S³ Coulomb
+    kernel eigenvalue 2π²/n, with E_n never an input -- is verified in
+    tests/test_paper7_fock_kernel.py.
     """
     n = sp.Symbol('n', positive=True, integer=True)
 
@@ -397,11 +395,8 @@ def test_eigenvalue_to_energy_mapping():
     # Energy shell parameter
     p0_sq = -2 * E_n  # = 1/n²
 
-    # S³ eigenvalue (on sphere of radius R = 1/p₀ = n)
+    # Unit-S³ eigenvalue -(n²-1) times the energy-shell p₀² (bookkeeping)
     lambda_n = -(n**2 - 1) * p0_sq  # = -(n²-1)/n²
-
-    # The eigenvalue equation on S³ is: Δ_{S³} Ψ = λ_n Ψ
-    # This encodes the FULL hydrogen spectrum through pure geometry.
 
     # Verify: λ_n = -(1 - 1/n²)
     expected = -(1 - 1 / n**2)

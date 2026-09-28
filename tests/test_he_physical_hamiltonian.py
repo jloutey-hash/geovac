@@ -209,3 +209,30 @@ def test_paper27_gamma_surface_physical_nmax3():
     assert g == pytest.approx(2.321, abs=2e-3)
     assert loc == pytest.approx(1.979, abs=1e-3)
     assert loc < 2.0
+
+
+# ---------------------------------------------------------------------------
+# Paper 7 appendix "Note added v2.6.0": hop-vs-physical shift + physical error
+# ---------------------------------------------------------------------------
+
+@pytest.mark.slow
+def test_paper7_he_nmax5_hop_shift_and_physical_error():
+    """Paper 7 appendix pin at n_max = 5 (266 singlet M_L=0 configurations).
+
+    The retired (1/16)A hop lowers the fixed-k=Z He energy by 48.74 mHa
+    relative to He's physical Hamiltonian (same basis, same rational Slater
+    integrals); the physical error is 1.928% above exact.  The ladder
+    (2.422, 2.094, 1.981, 1.928, 1.899 % at n_max = 2..6) makes the printed
+    n_max = 7 value (1.88%, shift 48.3 mHa) the continuation of this pin.
+    Measured independently by the 2026-09-28 trunk-FULL code review.
+    """
+    H_hop = build_graph_native_fci(Z=2, n_max=5)                 # legacy hybrid
+    H_phys = build_graph_native_fci(Z=2, n_max=5, h1_method='exact')
+    assert H_phys.shape == (266, 266)
+    E_hop, E_phys = _e0(H_hop), _e0(H_phys)
+    shift_mha = 1e3 * (E_hop - E_phys)
+    assert shift_mha == pytest.approx(-48.74, abs=0.02)
+    assert _pct(E_phys) == pytest.approx(1.928, abs=2e-3)
+    assert E_phys > E_HE and E_phys > E_HF_LIMIT_HE     # variational, above HF
+    # the hop shift exceeds He's whole correlation energy (42.0 mHa)
+    assert -shift_mha > 1e3 * (E_HF_LIMIT_HE - E_HE)

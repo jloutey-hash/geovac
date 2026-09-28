@@ -882,7 +882,7 @@ verified here only for $\SU(2)$.
 \label{sec:modular}
 % =====================================================================
 
-\subsection{The four-witness Wick-rotation theorem (Paper~42)}
+\subsection{The four-witness $2\pi$ period at finite cutoff (Paper~42)}
 
 The Wick rotation between Euclidean and Lorentzian field theory is
 classically formulated through four equivalent presentations on a
@@ -906,17 +906,27 @@ Wick-rotation arguments.  On a curved background like $\sthree$ they
 are not obviously equivalent, and at finite cutoff (operator-system
 level) they require separate construction.
 
-Paper~42 \cite{paper42} establishes the four-witness theorem at the
-operator-system level on the truncated Camporesi--Higuchi spectral
-triple $\Tcal_{\nmax}$ via two structurally independent but
-operator-action conjugate constructions:
+Paper~42 \cite{paper42} does \emph{not} establish the four-witness
+theorem at the operator-system level (an earlier reading that it did,
+at every finite cutoff, is withdrawn, 2026-09-28).  It sets up the
+finite-cutoff ingredients on the truncated Camporesi--Higuchi spectral
+triple $\Tcal_{\nmax}$ with a \emph{posited} generator, and records
+two readings of one flow --- conjugate by construction, not
+independent.  Every closure below is elementary [SYMBOLIC]:\ the
+period closure holds for \emph{any} integer-spectrum generator and any
+operator, the Tomita step returns the generator the Gibbs state was
+built from, and the witnesses agree because they share one generator
+with $\kappa_g$ relabelled.  The continuum four-witness statement is
+prior art;\ deriving the wedge modular Hamiltonian from a
+Camporesi--Higuchi state is open (Paper~42, O0).
 
-\begin{theorem}[Paper~42, BW-$\alpha$ geometric realisation]
+\begin{theorem}[Paper~42, BW-$\alpha$ period closure;\ {[SYMBOLIC]},
+automatic for integer spectrum]
 \label{thm:bw_alpha}
 For each $\nmax \in \{2, 3, 4, 5\}$, there exists a wedge projection
 $P_{W} = \tfrac{1}{2}(I + R_{\mathrm{polar}})$ on $P_{\nmax}\HGV$
-(bit-exact idempotent and Hermitian) and a geometric modular
-Hamiltonian
+(bit-exact idempotent and Hermitian), and for the posited geometric
+generator
 \begin{equation}
 K_{\alpha}^{W} \;=\; J_{\mathrm{polar}}
 \quad \text{(rotation generator preserving } W),
@@ -925,11 +935,13 @@ K_{\alpha}^{W} \;=\; J_{\mathrm{polar}}
 with integer spectrum $\{\text{two}\, m_{j}\}$ on the full-Dirac basis.
 The modular flow satisfies $\sigma_{2\pi}(O) = O$ bit-exact (residual
 $O(\sqrt{\dim \Hilb} \cdot \varepsilon_{\mathrm{machine}})$) for the
-four witnesses BW, Hartle--Hawking, Sewell, Unruh, with cross-witness
-collapse residual identically zero.
+four witness instantiations BW, Hartle--Hawking, Sewell, Unruh, with
+cross-witness residual identically zero (by construction:\ one
+generator, $\kappa_g$ relabelled).
 \end{theorem}
 
-\begin{theorem}[Paper~42, BW-$\gamma$ Tomita--Takesaki realisation]
+\begin{theorem}[Paper~42, BW-$\gamma$ Tomita--Takesaki reading;\
+{[SYMBOLIC]}, Tomita's theorem for a Gibbs state]
 \label{thm:bw_gamma}
 On the Krein-GNS Hilbert--Schmidt space
 $\Hilb_{\mathrm{GNS}} = M_{\dim W}(\C)$ with KMS state
@@ -948,11 +960,10 @@ categorically distinct from the Connes $J_{\mathrm{GV}}$ (KO-dim $3$,
 $J^{2} = -I$).
 \end{theorem}
 
-\paragraph{Load-bearing scope finding (Paper~42~\S 7.2).}
-A key derived structural finding is that the canonical local
-Hamiltonian for the $\beta = 2\pi$ Tomita--Takesaki KMS state is
-$H_{\mathrm{local}} = K_{\alpha}^{W} / \beta$ rather than the
-intrinsic Camporesi--Higuchi Dirac operator $\DCH$.  The intrinsic
+\paragraph{Operator-level contrast (Paper~42~\S 7.2).}
+The local Hamiltonian $H_{\mathrm{local}} = K_{\alpha}^{W} / \beta$ is
+a posit, not derived;\ it is contrasted with the intrinsic
+Camporesi--Higuchi Dirac operator $\DCH$.  The intrinsic
 $\DCH$ has half-integer spectrum, so its operator-level period lift is
 $e^{i \cdot 2\pi \cdot \DCH} = -I$ (the spinor double-cover sign),
 whereas the odd-integer $K_{\alpha}^{W}$ lifts to $+I$.  The
@@ -960,16 +971,16 @@ whereas the odd-integer $K_{\alpha}^{W}$ lifts to $+I$.  The
 generator (a global scalar cancels in the conjugation), so the
 distinction is at the operator level, not the flow-closure level:\
 only $K_{\alpha}^{W}$ lifts the period to the identity operator.
-Spectral-action (Chamseddine--Connes
-\cite{chamseddine_connes2010}) and thermal-time (Connes--Rovelli)
-paradigms point to different generators on the wedge KMS state.
+Which generator (if either) a Camporesi--Higuchi wedge state actually
+selects is open (Paper~42, O0).
 This is the open question O3 of Paper~42~\S 10, sharpened in
 Paper~43 to the signature-independence statement below.
 
 \subsection{Lorentzian extension at finite cutoff (Paper~43)}
 
-Paper~43 \cite{paper43} extends the four-witness theorem to the
-Lorentzian Krein space at signature $(3,1)$, built via the
+Paper~43 \cite{paper43} carries the same construction to the
+Lorentzian Krein space at signature $(3,1)$ (automatic and
+signature-blind;\ not a finite-cutoff four-witness theorem), built via the
 Bizi--Brouder--Besnard prescription \cite{bizi_brouder_besnard2018}
 at $(m,n) = (4,6)$ in the Peskin--Schroeder chiral basis, with
 Lorentzian Dirac
@@ -980,8 +991,8 @@ Lorentzian Dirac
 \end{equation}
 per van~den~Dungen 2016 Proposition 4.1 \cite{vandungen2016}.
 
-\begin{theorem}[Paper~43~\S 5--\S 7, Lorentzian four-witness
-at finite cutoff]
+\begin{theorem}[Paper~43~\S 5--\S 7, Krein-carrier period closure
+at finite cutoff;\ {[SYMBOLIC]}, automatic]
 \label{thm:lorentzian_four_witness}
 At every tested $(\nmax, \Nt) \in \{1, 2, 3\} \times \{1, 11, 21\}$,
 the Krein-level analogues of \eqref{eq:k_alpha} and
@@ -1003,8 +1014,8 @@ bit-identically.
 \end{itemize}
 \end{theorem}
 
-\paragraph{Signature-independence of the load-bearing scope.}
-The deepest structural finding of Paper~43 is that the
+\paragraph{Signature-independence of the operator-level contrast.}
+A finding of Paper~43 is that the
 ``$H_{\mathrm{local}} \ne D_{W}^{L}$'' statement is
 \emph{signature-independent} at the Riemannian reduction.  At
 $\Nt = 1$ the residual norm $\|H_{\mathrm{local}} - D_{W}^{L}\|_{F}$
@@ -1023,7 +1034,9 @@ $\DL$ has more content than $\DGV$, so the gap between
 $H_{\mathrm{local}}$ (modular-Hamiltonian generator) and $D_{W}^{L}$
 (spectral-action object) widens with temporal cutoff.  This refines
 the Paper~42~\S 10 open question O3 from
-``open about signature-dependence'' to a deeper structural feature.
+``open about signature-dependence'' to a signature-independent
+property of the posited construction (not evidence about which
+generator a Camporesi--Higuchi wedge state selects).
 
 \subsection{Pythagorean HS-orthogonality and the $1/\pi^{2}$
 signature}
@@ -1062,10 +1075,12 @@ D(n) = \frac{n(n+1)(n+2)(2n+1)(2n+3)}{20}.
 
 The closed form \eqref{eq:hs_closed_form} is PSLQ-verified at
 $100$ digits with coefficient ceiling $10^{6}$ at $18$ panel cells.
-The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ is the same
-$M_{1}$ ($k = 0$ volume-slot) signature
-\eqref{eq:gamma_asymptote} that appears in the Paper~38 GH
-convergence rate constant $4/\pi$.  This crosswiring between
+The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ enters
+through $H_{\mathrm{local}} = \kappa_g K_{\alpha}^{W}/(2\pi)$, i.e.\
+through the posited $\beta = 2\pi/\kappa_g$;\ it is tagged to the
+$M_{1}$ ($k = 0$ volume-slot) sector on that basis, and no identity
+with the $M_1$ content of the Paper~38 rate constant $4/\pi$
+\eqref{eq:gamma_asymptote} is established.  This crosswiring between
 sections \ref{sec:gh} and \ref{sec:modular} is taken up systematically
 in \S\ref{sec:mellin}.
 
@@ -1853,9 +1868,11 @@ Paper~50 is the twelfth math.OA standalone in the arc.
 % =====================================================================
 
 The arc closes the convergence side of the operator-algebra story on
-the Riemannian / spatial side (Paper~38, unconditional) and the
-modular-Hamiltonian side at the operator-system level on Riemannian
-(Paper~42) and Lorentzian (Paper~43) backgrounds;\ the Lorentzian
+the Riemannian / spatial side (Paper~38, unconditional).  On the
+modular-Hamiltonian side, Papers~42 and 43 record automatic
+finite-cutoff period closures of a posited generator on Riemannian and
+Krein backgrounds;\ deriving that generator from a Camporesi--Higuchi
+wedge state is open (2026-09-28).  The Lorentzian
 \emph{convergence} question is left open by Paper~45's annihilation
 theorem.  Several questions remain open.
 
@@ -2182,8 +2199,8 @@ truncations of compact semisimple Lie groups with bi-invariant metric},
 \bibitem[Loutey, internal Paper~42]{paper42}
 J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated
-$\SU(2)$ spectral triples:\ four-witness Wick-rotation literal
-identification at finite cutoff},
+$\SU(2)$ spectral triples:\ the four-witness $2\pi$ period at finite
+cutoff},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~43]{paper43}

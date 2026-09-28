@@ -86,14 +86,19 @@ distance~\cite{vs2021_jgp}, with explicit rate
 d_{\mathrm{GH}} \le \gamma_{\nmax}
 = (4/\pi + o(1)) \log \nmax / \nmax
 \)
-in the dual-Coxeter normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note).
+in the dual-Coxeter normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note). The bound $d_{\mathrm{GH}} \le \gamma_{\nmax}$ and $\gamma_{\nmax} \to 0$ are proved;\ the asymptotic constant is \textbf{[INTERNAL THEOREM + MEASURED]}:\ derived, with its two logarithmic sub-coefficients pinned by doubling estimators (Appendix~\ref{app:stein_weiss}).
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
 on the continuum and whose kernel at every finite cutoff is exactly
-the scalars (the truthful Dirac-commutator seminorm itself
-degenerates at finite cutoff;\ \textbf{[PANEL-VERIFIED]} a remark quantifies
-this on a finite panel of cutoffs). The proof
+the scalars. (\textbf{[MEASURED]} On the true Camporesi--Higuchi
+window the Dirac-commutator seminorm also has kernel exactly the
+scalars at $\nmax \le 3$, by two independent constructions;\ the
+degeneracy reported in earlier versions belongs to a doubled Fock
+model, Remark~\ref{rem:dirac_degeneracy}. Whether the convergence can be
+proved directly in the Dirac seminorm is \textbf{[OPEN]};\ the proof
+uses the translation seminorm because its compression estimates
+close.) The proof
 is a compression/lifted-state argument in the pattern of the
 compact-metric-group theorem of
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}, with
@@ -101,23 +106,25 @@ self-contained proofs:\ the dual map evaluates conjugated operators
 against the central spectral Fej\'er vector state, which embeds
 \emph{exactly} into the spinor window via the
 $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ block decomposition
-$V_j \otimes (V_{j \pm 1/2})$ of the Camporesi--Higuchi eigenspaces,
+$V_j \otimes (V_{j \pm 1/2})$ of the Camporesi--Higuchi eigenspaces
+(the truncated Hilbert space is the span of complete eigenspaces;\ \S\ref{sec:truncations}),
 and both almost-inverse defects collapse to Fej\'er smoothing — one
 on functions, one as operator conjugation-averaging — at the common
 moment $\gamma_{\nmax}$. The contribution relative to the scalar
-theory:\ the spinor-window transport, per-band multiplicity-one
-injectivity on the chirality-doubled multiplier system, the
+theory:\ the spinor-window transport, per-band injectivity of the
+compression on the Camporesi--Higuchi window (bands $N \le 2\nmax$), the
 closed-form rate moment, and the $4/\pi$ asymptotic constant.
-Supporting structure is organized in five lemmas (the fifth since withdrawn 2026-09-03):\ (L1$'$) a truncated operator
-system on the full chirality-doubled spinor bundle;\ (L2)
+Supporting structure is organized in five lemmas (the fifth since withdrawn 2026-09-03):\ (L1$'$) \textbf{[PANEL-VERIFIED]} a
+finite-distance statement on a doubled computational model of the
+truncated operator system (not used by the theorem;\ \S\ref{sec:truncations});\ (L2)
 \textbf{[INTERNAL THEOREM + MEASURED]} a positive
 central spectral Fej\'er kernel on $\SU(2)$ with closed-form
 mass-concentration moment and Stein--Weiss-type quantitative rate
-$\gamma_n \sim (4/\pi)\log n / n$ (dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$);\ (L3) \textbf{[PANEL-VERIFIED]} a
+$\gamma_n \sim (4/\pi)\log n / n$ (dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$);\ (L3) \textbf{[INTERNAL THEOREM]} a
 Lipschitz comparison bound
 $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
-$C_3 = 1$ (verified on a finite harmonic panel rather than proved in
-general, and \emph{not} used by the unconditional theorem);\ (L4) a
+$C_3 = 1$, by compression from the continuum identity (proof replaced
+2026-09-28;\ \emph{not} used by the unconditional theorem);\ (L4) a
 Berezin map (convolution form) that is positive,
 contractive, an approximate identity, and L3-compatible;\ (L5, since \emph{withdrawn} 2026-09-03: the bound is established by the
 unconditional lifted-state theorem, not this approximation-pair assembly).
@@ -125,13 +132,15 @@ unconditional lifted-state theorem, not this approximation-pair assembly).
 asymptotic constant is a quotient of sphere volumes ---
 $4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple},
 $2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and \emph{not} the Hopf
-fibration's base-to-total ratio (\S\ref{sec:L2}) --- exhibiting the expected one-log slowdown of the
-non-abelian SU(2) rate relative to the
-Leimbach--van~Suijlekom~\cite{leimbach_vs2024} torus rate $O(1/\nmax)$.
+fibration's base-to-total ratio (\S\ref{sec:L2}). The $\log\nmax$
+factor is the first-moment logarithm of the Fej\'er (Ces\`aro-1)
+kernel, which the circle's Fej\'er kernel already carries
+(Remark~\ref{rem:circle_fejer});\ it is a property of the kernel, not a
+non-abelian slowdown.
 State-space Gromov--Hausdorff convergence of scalar truncations for
-\emph{all} compact metric groups — including $\SU(2)$ — is
+compact metric groups with bi-invariant metric — including $\SU(2)$ — is
 established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\
-the residual contribution here is the chirality-doubled
+the residual contribution here is the
 Camporesi--Higuchi spinor substrate, the closed-form rate moment, and
 the explicit $4/\pi$ asymptotic constant. The construction supplies
 quantitative metric data for almost-commutative spectral-triple
@@ -165,8 +174,9 @@ is realised on the Toeplitz operator system on $S^1$. They left
 explicit convergence to the continuum in a quantitative quantum
 Gromov--Hausdorff distance as an open question, deferring it to
 ``elsewhere.'' The convergence itself, at the state-space level, is
-established in van~Suijlekom~\cite{vs2021_jgp} for the circle and
-sphere, and for \emph{all compact metric groups} by
+established in van~Suijlekom~\cite{vs2021_jgp} for the circle
+(spectral and Fourier truncations) and for matrix algebras converging to
+$S^2$, and for compact metric groups with bi-invariant metric by
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
 residual contribution of the present paper is therefore the spinor
 substrate, the closed-form rate moment, and the explicit $4/\pi$
@@ -174,12 +184,12 @@ constant — not the existence of convergence for $\SU(2)$ scalars.
 
 The flat-structure case has been worked out in several subsequent
 papers. Hekkelman~\cite{hekkelman2022} treated the circle $S^1$
-with the Toeplitz/Fej\'er kernel reconstruction. Leimbach and
+(GH convergence of the state spaces of the Toeplitz truncations). Leimbach and
 van~Suijlekom~\cite{leimbach_vs2024}
-proved state-space GH convergence of truncated tori with explicit rate
-$O(1/\Lambda)$, using the standard
-Schur-multiplier characterisation of the abelian-compact-group Fej\'er
-mechanism. A complementary line of work treats
+proved state-space GH convergence of spectral truncations of tori ---
+qualitatively, with no explicit rate --- using ball truncations, a
+spectral Fej\'er kernel (the square of the spherical Dirichlet kernel)
+and a Bo\.zejko--Fendler-type transference. A complementary line of work treats
 \emph{Berezin--Toeplitz} reconstruction on $S^2$, using the K\"ahler
 structure of the coadjoint orbit (see~\cite{ucp_maps_2024} and
 references therein). All of these results address flat
@@ -222,12 +232,13 @@ unconditional under the translation-seminorm metrization of
 operator on the unit round $\sthree$ in the spinor harmonic basis
 of Camporesi--Higuchi~\cite{camporesi_higuchi1996}, with spectrum
 $\sigma(\DCH) = \{\pm(n + 1/2) : n \in \N\}$ on each chirality
-sector.\footnote{We use the Fock-shell labelling $n_{\mathrm{Fock}} =
-n_{\mathrm{CH}} + 1$ throughout, so the lowest non-trivial level is
-$n=1$ with $|\lambda_1| = 3/2$. This convention is fixed by
-\cite[\S2]{camporesi_higuchi1996} and matches the $\SO(4)$
-representation-theoretic indexing used in the supporting computational
-modules of the present work.} Let $\Tcal_{\nmax} =
+sector.\footnote{Camporesi and Higuchi give the spectrum
+$\pm(n_{\mathrm{CH}} + 3/2)$, $n_{\mathrm{CH}} \ge 0$
+\cite[\S3]{camporesi_higuchi1996};\ we relabel $n = n_{\mathrm{CH}} + 1$
+(a convention of the present work, not of~\cite{camporesi_higuchi1996}),
+so the lowest level is $n=1$ with $|\lambda_1| = 3/2$, matching the
+$\SO(4)$ representation-theoretic indexing used in the supporting
+computational modules.} Let $\Tcal_{\nmax} =
 (\Op_{\nmax}, \Hilb_{\nmax}, D_{\nmax})$ denote its truncation at
 cutoff $\nmax$, where $\Op_{\nmax}$ is the truncated operator system
 in the sense of Connes--van~Suijlekom and $D_{\nmax}$ is the
@@ -248,7 +259,8 @@ metrization of \S~\ref{sec:named_gaps}, with explicit rate
    \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr)
    \quad\text{(dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)},
 \end{equation}
-where $\gamma_{\nmax}$ is the mass-concentration
+(the asymptotic constant is \textbf{[INTERNAL THEOREM + MEASURED]},
+Lemma~\ref{lem:L2}(d.ii)), where $\gamma_{\nmax}$ is the mass-concentration
 moment of the central spectral Fej\'er kernel on $\SU(2)$ given by
 Lemma~\ref{lem:L2}. The unconditional statement is
 Theorem~\ref{thm:main_unconditional}, whose bound is
@@ -257,8 +269,8 @@ theorem's display now states that bound (until 2026-09-04 it carried a
 $C_3 = 1$ factor inherited from the withdrawn Lemma~\ref{lem:L5} route).
 \textbf{[OBSERVATION]} The asymptotic constant is $4/\pi$ in the
 dual-Coxeter normalisation of \S\ref{sec:ch_triple} and $2/\pi$ on the
-unit $\sthree$;\ it is the sphere-volume quotient $2\Vol(S^2)/\Vol(\sthree)$ for
-unit-radius spheres --- though not the Hopf base-to-total ratio (see the
+unit $\sthree$;\ the unit-$\sthree$ value is the sphere-volume quotient $\Vol(S^2)/\Vol(\sthree)$ of
+unit-radius spheres, and the dual-Coxeter value is twice it --- though neither is the Hopf base-to-total ratio (see the
 volume-ratio note in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ (the $d_1 = d/2$ metric of \S\ref{sec:ch_triple}), the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
 \end{theorem}
 
@@ -274,11 +286,13 @@ Wen--Avery 3-Y integral~\cite{avery_wen_avery1986, paper7} to
 control the multiplier matrices in the truncated basis, and depends on
 the $\SO(4)$ selection rule
 $|n - n'| + 1 \le N \le n + n' - 1$ for non-vanishing 3-Y matrix
-elements. Third, the Berezin reconstruction map on $\SU(2)$ does not
+elements (this was the route of earlier versions;\ since 2026-09-28
+Lemma~\ref{lem:L3} is proved by compression from the continuum identity,
+and the 3-Y structure enters only supporting computations). Third, the Berezin reconstruction map on $\SU(2)$ does not
 arise from a K\"ahler structure (the round $\sthree$ has no compatible
 almost-complex structure), so we use the central-Fej\'er-kernel
 spectral form directly, which is the natural non-K\"ahler analog of
-the Connes--van~Suijlekom $S^1$ Fej\'er reconstruction.
+van~Suijlekom's $S^1$ Fej\'er reconstruction~\cite{vs2021_jgp}.
 
 The asymptotic constant in \eqref{eq:main_rate} carries
 geometric content, and its value is normalisation-dependent (2026-09-03):\
@@ -304,7 +318,7 @@ Krein wedge documented in the companion Lorentzian-extension paper
 appearance of this constant in
 the state-space GH rate is therefore not an isolated occurrence:\ the
 rate at which
-the framework recovers its continuum limit carries the same
+the truncated triples converge to their continuum limit carries the same
 transcendental signature that the framework's heat-kernel machinery
 imprints on its bulk observables.  No derivation links the two
 appearances;\ the shared value is the whole of the evidence.
@@ -312,10 +326,11 @@ appearances;\ the shared value is the whole of the evidence.
 \paragraph{Outline.}
 Section~\ref{sec:setup} sets up the round $\sthree$
 Camporesi--Higuchi spectral triple, its truncations, and the Peter--Weyl
-basis. Section~\ref{sec:lemmas} proves lemmas L1$'$--L4;\ Lemma~\ref{lem:L5}
+basis. Section~\ref{sec:lemmas} states lemmas L1$'$--L4 and proves or
+panel-verifies each (tiers inline);\ Lemma~\ref{lem:L5}
 is \emph{withdrawn} [retracted 2026-09-05: l5-assembly-listed-as-live-contribution].
-Each surviving lemma is self-contained:\ Lemma~\ref{lem:L1prime} treats the
-chirality-doubled operator system substrate; Lemma~\ref{lem:L2} the central
+Each surviving lemma is self-contained:\ Lemma~\ref{lem:L1prime} treats a
+doubled computational model of the substrate (\S\ref{sec:truncations}); Lemma~\ref{lem:L2} the central
 spectral Fej\'er kernel and its quantitative rate; Lemma~\ref{lem:L3} the
 Lipschitz comparison bound with $C_3 = 1$; Lemma~\ref{lem:L4} the
 Berezin reconstruction. Section~\ref{sec:main_theorem} assembles the
@@ -332,9 +347,13 @@ Both gaps that conditioned earlier formulations of the main theorem
 are closed by one reframing:\ metrize the truncated state space by
 the \emph{left-translation Lipschitz seminorm} rather than by the
 truthful-Dirac commutator seminorm. On the continuum the two agree
-exactly (Lemma~\ref{lem:continuum_lip});\ at finite cutoff the
-translation seminorm is non-degenerate while the Dirac-commutator
-seminorm is not (Remark~\ref{rem:dirac_degeneracy}). All proofs in
+exactly (Lemma~\ref{lem:continuum_lip});\ at finite cutoff both are
+non-degenerate on the true Camporesi--Higuchi window
+(Remark~\ref{rem:dirac_degeneracy}). The translation seminorm is used
+because its compression and lifted-state estimates close, not because
+the Dirac seminorm fails;\ an earlier version of this sentence said the
+Dirac seminorm degenerates at finite cutoff, which holds only for the
+doubled Fock model (corrected 2026-09-28). All proofs in
 this subsection are self-contained;\ the kernel quantities
 $\KS_{\nmax}$, $Z_{\nmax}$, $\gamma_{\nmax}$ are those of
 \S~\ref{sec:L2} below (forward references).
@@ -386,7 +405,7 @@ $\tfrac12$ of \eqref{eq:seminorm_normalisation} follows.
 \end{proof}
 
 \begin{lemma}[per-band injectivity]\label{lem:band_injectivity}
-For $1 \le N \le 2\nmax - 1$ let $E_N \subset C^\infty(\sthree)$ be
+For $1 \le N \le 2\nmax$ let $E_N \subset C^\infty(\sthree)$ be
 the degree-$(N{-}1)$ harmonic band ($\dim E_N = N^2$), an irreducible
 $\mathrm{SO}(4)$-module of type $V_{(N-1)/2} \otimes V_{(N-1)/2}$.
 The compression $\iota_N : E_N \to B(\Hilb_{\nmax})$,
@@ -397,15 +416,29 @@ $f \mapsto P_{\nmax} M_f P_{\nmax}$, is injective.
 $\iota_N$ is $\mathrm{SO}(4)$-equivariant for the conjugation action
 (rotations implemented on $\Hilb_{\nmax}$ commute with $P_{\nmax}$).
 Since $E_N$ is irreducible, $\iota_N$ is either zero or injective
-(Schur). It is nonzero:\ every multiplier matrix $\Mat_{NLM}$ with
-$N \le 2\nmax - 1$ is nonzero, by non-vanishing of the stretched
-$3$-$Y$ matrix element within the top kept shell (Wen--Avery
-closed form~\cite{avery_wen_avery1986});\ \textbf{[PANEL-VERIFIED]}
-verified
-symbolically/numerically for every band at $\nmax \le 5$, where the
-per-band rank additionally equals the full $N^2$
-(\texttt{debug/p38\_g1g2\_band\_diagnostics.py}, frozen in
-\texttt{tests/test\_p38\_action\_seminorm.py}).
+(Schur). It is nonzero. For $N \le 2\nmax - 1$:\ by
+Lemma~\ref{lem:lifted_state}(a) every $\phi \otimes \chi$ with $\phi$ in
+the scalar window $\bigoplus_{j \le (\nmax-1)/2} V_j \otimes V_j$ lies in
+$\Hilb_{\nmax}$, and $\langle \psi \otimes \chi, M_f\, \phi \otimes
+\chi\rangle = \int \bar\psi f \phi$;\ the products $\psi\bar\phi$ span
+every band $N \le 2\nmax - 1$ (Clebsch--Gordan series of matrix
+coefficients), so $\iota_N(f) = 0$ forces $f \perp E_N$, i.e.\ $f = 0$.
+For the top band $N = 2\nmax$:\ the block of $M_f$ between the top
+positive shell $V_{(\nmax-1)/2} \otimes V_{\nmax/2}$ and the top negative
+shell $V_{\nmax/2} \otimes V_{(\nmax-1)/2}$ factors by Wigner--Eckart
+into a left Clebsch--Gordan coefficient with $J = j_1 + j_2$ and a
+stretched $6j$ coefficient on the right, both non-zero.
+Conversely every band $N \ge 2\nmax + 1$ compresses to zero:\ each kept
+eigenspace $V_j \otimes V_K$ has $j + K \le \nmax - \tfrac12$, so a
+spin-$J$ multiplier connecting two of them needs $J \le \min(j_1 + j_2,
+K_1 + K_2) \le \nmax - \tfrac12$. \textbf{[MEASURED]} Two independent
+constructions of the true window (2026-09-28) give per-band rank $N^2$
+for every $N \le 2\nmax$, rank $0$ above, and $\dim \Op_{\nmax} = 5, 30,
+91$ at $\nmax = 1, 2, 3$. (The frozen test
+\texttt{tests/test\_p38\_action\_seminorm.py} checks per-band rank on the
+doubled computational model of \S\ref{sec:truncations}, whose envelope
+is $N \le 2\nmax - 1$;\ it does not see the top band. A true-window
+freeze is owed.)
 \end{proof}
 
 \begin{proposition}[kernel condition on the truthful substrate]
@@ -415,8 +448,9 @@ $L_{\nmax}(T) = 0$ if and only if $T \in \C 1$.
 
 \begin{proof}
 $L_{\nmax}(T) = 0$ means $\rho_g(T) = T$ for all $g$. Write $T =
-P_{\nmax} M_f P_{\nmax}$ with $f$ band-limited to $N \le 2\nmax - 1$
-(every element of $\Op_{\nmax}$ has this form). Then $P_{\nmax}
+P_{\nmax} M_f P_{\nmax}$ with $f$ band-limited to $N \le 2\nmax$
+(every element of $\Op_{\nmax}$ has this form, bands $N \ge 2\nmax + 1$
+compressing to zero by Lemma~\ref{lem:band_injectivity}). Then $P_{\nmax}
 M_{\lambda_g f - f} P_{\nmax} = 0$;\ left translation preserves each
 harmonic band, so $\lambda_g f - f$ is band-limited and
 Lemma~\ref{lem:band_injectivity} gives $\lambda_g f = f$ for all
@@ -483,7 +517,8 @@ $\KS_{\nmax}$;\ \textbf{[MEASURED]} verified to machine precision
 ($\le 3 \times
 10^{-16}$;\ the $\nmax=2$ scalar window is frozen in
 \texttt{tests/test\_p38\_action\_seminorm.py}, the across-bands sprint check
-recorded in the CHANGELOG).
+recorded in the CHANGELOG;\ a spinor-window freeze is owed --- the
+identity itself is proved above).
 \end{proof}
 
 \begin{theorem}[Main theorem, unconditional;\ \textbf{[INTERNAL THEOREM]}]
@@ -500,6 +535,9 @@ in the dual-Coxeter normalisation of Lemma~\ref{lem:L2}, i.e.\
 $\gamma_{\nmax} = 2\int \KS_{\nmax}\, d_{\mathrm{round}}\, dg$ on the
 unit $\sthree$, where the same bound reads $(2/\pi)\log\nmax/\nmax$
 (2026-09-03 convention note; the theorem holds in either normalisation).
+The inequality and $\gamma_{\nmax} \to 0$ are proved;\ the asymptotic
+constant is \textbf{[INTERNAL THEOREM + MEASURED]}
+(Lemma~\ref{lem:L2}(d.ii), Appendix~\ref{app:stein_weiss}).
 \end{theorem}
 
 \begin{proof}
@@ -554,19 +592,33 @@ with the same single-moment bound, is due to
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
 contribution here is the spinor-window transport (the exact-fit
 inclusion of Lemma~\ref{lem:lifted_state}(a)), per-band
-multiplicity-one injectivity on the chirality-doubled system, the
+injectivity of the compression on the Camporesi--Higuchi window, the
 closed-form rate moment, and the $4/\pi$ asymptotic constant. All
 assembly steps above are proved self-contained.
 \end{remark}
 
-\begin{remark}[degeneracy of the Dirac-commutator seminorm]
+\begin{remark}[the Dirac-commutator seminorm:\ doubled model versus true window]
 \label{rem:dirac_degeneracy}
-\textbf{[MEASURED]} The truthful chirality-diagonal commutator seminorm
-$\opnorm{[\DCH, \cdot]}$ on $\Op_{\nmax}$ has kernel strictly larger
+\textbf{[MEASURED]} \emph{On the true Camporesi--Higuchi window}
+(complete Dirac eigenspaces up to the cutoff, the object of the main
+theorem) the kernel of $a \mapsto [D, a]$ on $\Op_{\nmax}$ is exactly
+the scalars at $\nmax = 1, 2, 3$ ($\dim \Op_{\nmax} = 5, 30, 91$), so
+the Dirac-commutator seminorm \emph{is} a norm on $\Op_{\nmax}/\mathbb{C}\mathbb{1}$
+there. Two independent constructions agree (one builds the eigenspaces
+by coupling, one builds $D = 2\sigma\cdot J_R + 3/2$ as a matrix and
+diagonalizes it;\ 2026-09-28);\ a frozen test is owed. Whether the
+Gromov--Hausdorff convergence can be proved in this seminorm directly
+is \textbf{[OPEN]}.
+\emph{On the doubled Fock spin-orbital model} used by the code and by
+Lemma~L1$'$, the chirality-diagonal commutator seminorm
+$\opnorm{[\DCH, \cdot]}$ has kernel strictly larger
 than the scalars at the cutoffs measured ($10/14$ multipliers at
 $\nmax = 2$, $26/55$ at $\nmax = 3$, bit-exact;\ every top-band
-multiplier compresses shell-diagonally), so it does not metrize the
-truncated state space.  (The frozen falsifier exercises the
+multiplier compresses shell-diagonally), so it does not metrize that
+model's state space. Earlier versions of this paper read this model
+degeneracy as a property of the truncated spectral triple and used it
+to motivate the translation seminorm;\ that reading is withdrawn
+(2026-09-28).  (The frozen falsifier exercises the
 $\nmax = 2$ counts;\ the $\nmax = 3$ counts are measured but not
 frozen.) An engineered off-diagonal modification of
 $\DCH$ restores its kernel condition ($1/14$, $1/55$) but is no
@@ -586,7 +638,9 @@ a dual-reach argument resting on that conflation. A verification
 pass (2026-06-09;\ repository \texttt{CHANGELOG}, v3.106.0) produced
 an intermediate conditional form;\ the present unconditional form
 (2026-06-10) follows from the translation-seminorm reframing of this
-subsection. The companion Lorentzian paper proves the related
+subsection. (The reframing was motivated by a Dirac-seminorm
+degeneracy later found to belong to the doubled Fock model only;\
+Remark~\ref{rem:dirac_degeneracy}.) The companion Lorentzian paper proves the related
 $K^{+}$-compression degeneracy theorem.
 \end{remark}
 
@@ -640,7 +694,11 @@ a choice of radius, because it is the rule under which the rate
 constant of Theorem~\ref{thm:main} is comparable across groups:\
 Paper~40~\cite{paper40_unified} uses the same normalisation for the
 whole compact connected semisimple class, so the present paper is
-exactly its rank-1 case.  (Until 2026-09-03 this subsection declared
+exactly its rank-1 case.  Any uniform rule would do that;\ this one
+is the corpus's own convention and \emph{not} the field-standard one:\
+Kac's normalised form $(\theta|\theta) = 2$ gives $\mathrm{Cas}(\mathrm{ad})
+= 2h^\vee$, radius $\sqrt2$ and constant $2\sqrt2/\pi$, so $4/\pi$ is
+convention-dependent.  (Until 2026-09-03 this subsection declared
 the unit sphere while the moment $\gamma_{\nmax}$ of
 Lemma~\ref{lem:L2} was computed against $\chi$;\ the two differ by the
 factor $2$ above, and the bound was correspondingly stated with a
@@ -683,9 +741,16 @@ is $\tfrac{1}{2}\DCH$.  It acts on the spinor harmonics
 \end{equation}
 with $n \in \N_{\ge 1}$, $l \in \{0, 1, \ldots, n-1\}$, $j = l + 1/2$,
 $m_j \in \{-j, -j+1, \ldots, j\}$, and chirality $\chi \in \{+1, -1\}$
-\cite[\S 2]{camporesi_higuchi1996}. The degeneracy of the level
+\cite[\S 3]{camporesi_higuchi1996}. The degeneracy of the level
 $n$ on each chirality sector is $n(n+1)$; the total degeneracy
-including both chiralities is $2n(n+1)$.
+including both chiralities is $2n(n+1)$.  \emph{What the labels are
+(2026-09-28).}  Under $\SU(2)_L \times \SU(2)_R$ the level-$n$
+eigenspaces are $V_{(n-1)/2} \otimes V_{n/2}$ ($\chi = +1$) and
+$V_{n/2} \otimes V_{(n-1)/2}$ ($\chi = -1$)
+(Lemma~\ref{lem:lifted_state}(a));\ $(j, m_j)$ label their decomposition
+under the diagonal $\SU(2)$, $j$ running over $\tfrac12, \ldots, n -
+\tfrac12$, and $l := j - \tfrac12$ is bookkeeping.  $\chi$ is the sign of
+the eigenvalue, $\operatorname{sign}(\DCH)$ (not a grading, see below).
 
 We then form the Camporesi--Higuchi spectral triple
 \begin{equation}
@@ -738,6 +803,34 @@ Hilbert space has dimension
 The truncated Dirac operator is $D_{\nmax} = P_{\nmax} \DCH P_{\nmax}$,
 which (since $\DCH$ is diagonal in the basis above) acts as
 $\chi (n+1/2)$ on each kept basis vector.
+
+\paragraph{Substrate:\ the true window and the computational model
+(2026-09-28).}  $\Hilb_{\nmax}$ is the span of the \emph{complete}
+Camporesi--Higuchi eigenspaces with $n \le \nmax$, i.e.\ $|\lambda| \le
+\nmax + \tfrac12$ (Lemma~\ref{lem:lifted_state}(a));\ it is invariant
+under left translation.  A scalar multiplier $M_f = f \otimes 1$ does
+\emph{not} preserve $\operatorname{sign}(\DCH)$:\ $P_{\nmax} M_f
+P_{\nmax}$ has blocks coupling positive and negative levels (at $\nmax
+= 1$ the whole band $N = 2$ lives in them), and it is non-zero exactly on
+the bands $N \le 2\nmax$ (Lemma~\ref{lem:band_injectivity}).
+\textbf{[MEASURED]} $\dim \Op_{\nmax} = 5, 30, 91$ at $\nmax = 1, 2,
+3$, the sum of $N^2$ over $N \le 2\nmax$ (two independent constructions,
+2026-09-28).  The supporting code module and Lemma~\ref{lem:L1prime}
+use a different, \emph{doubled} model:\ two copies of the
+non-relativistic Fock spin-orbital space $(n, l, j = l + \tfrac12, m_j)$
+with $M_f = M_f^{\mathrm{Weyl}} \oplus M_f^{\mathrm{Weyl}}$,
+Eq.~\eqref{eq:multiplier_block_diagonal}.  It has the same labels and
+dimensions, but it is not $\SU(2)_L$-invariant, it omits the
+sign-mixing blocks, and it reaches only $N \le 2\nmax - 1$ (at $\nmax =
+1$ its operator system is the scalars).  The main theorem uses only the
+true window:\ Lemma~\ref{lem:lifted_state},
+Lemma~\ref{lem:band_injectivity} and
+Proposition~\ref{prop:kernel_condition} are statements about it, and
+Theorem~\ref{thm:main_unconditional} is unaffected by the model.
+Quantities measured on the model --- Lemma~\ref{lem:L1prime}, the
+multiplier-rank test of \texttt{tests/test\_p38\_action\_seminorm.py},
+and the kernel counts of Remark~\ref{rem:dirac_degeneracy} --- are
+model quantities, not window quantities.
 
 Following Connes--van~Suijlekom~\cite[\S 3]{connes_vs2021}, the
 \emph{truncated operator system} is
@@ -797,14 +890,15 @@ integral on $S^2$, with the $\SO(4)$ selection rule
 $|n-n'|+1 \le N \le n+n'-1$ enforcing the truncation
 $|n-n'| < N$ on the radial channel and the
 standard $S^2$ Gaunt selection rule on the angular channel. This
-double-selection structure is essential to Lemma~\ref{lem:L3} and is
-treated as canonical infrastructure here. Closed-form values used in
+double-selection structure entered the pre-2026-09-28 proof of
+Lemma~\ref{lem:L3} and is treated as canonical infrastructure here. Closed-form values used in
 internal numerical verifications appear in the supporting code module
 \texttt{geovac/so4\_three\_y\_integral.py} (R3.1, May 2026).}.
 
-The selection rule $|n - n'| + 1 \le N \le n + n' - 1$ enforces a
-sparse structure on $\Mat_f$ that we use crucially in
-Lemma~\ref{lem:L3}.
+The selection rule $|n - n'| + 1 \le N \le n + n' - 1$ (stated for
+the scalar Fock orbitals) enforces a sparse structure on $\Mat_f$;\
+the pre-2026-09-28 proof of Lemma~\ref{lem:L3} used it, the present
+proof does not.
 
 % =====================================================================
 \section{The five lemmas}\label{sec:lemmas}
@@ -815,7 +909,9 @@ Lemma~\ref{lem:L3}.
 \label{sec:L1prime}
 % ---------------------------------------------------------------------
 
-The chirality-doubled spinor bundle $\Sigma = \Sigma_+ \oplus \Sigma_-$
+This subsection concerns the doubled computational model of
+\S\ref{sec:truncations}, not the true window.  In that model the
+chirality-doubled bundle $\Sigma = \Sigma_+ \oplus \Sigma_-$
 gives the truncated Hilbert space the structure
 $\Hilb_{\nmax} = \Hilb^+_{\nmax} \oplus \Hilb^-_{\nmax}$, with each
 chirality block carrying a Weyl-sector multiplier matrix
@@ -826,12 +922,12 @@ multiplier $\Mat_f$ is therefore block-diagonal in chirality:
    \quad\text{on}\quad \Hilb^+_{\nmax} \oplus \Hilb^-_{\nmax}.
 \end{equation}
 
-\begin{lemma}[L1$'$:\ chirality-doubled operator system substrate;\
-\textbf{[SYMBOLIC + MEASURED]}]
+\begin{lemma}[L1$'$:\ doubled-model operator system;\
+\textbf{[PANEL-VERIFIED]}]
 \label{lem:L1prime}
-The operator system $\Op_{\nmax}$ inherits from
+In the doubled model the operator system inherits from
 \eqref{eq:multiplier_block_diagonal} a chirality block-diagonal
-structure. The truncated Connes distance
+structure (on the true window it does not;\ \S\ref{sec:truncations}). The truncated Connes distance
 \begin{equation}\label{eq:connes_distance_def}
    d_{\Tcal_{\nmax}}(\varphi, \psi)
    \;=\; \sup\bigl\{\,|\varphi(M) - \psi(M)| \;:\;
@@ -860,19 +956,19 @@ with the four-point Pearson correlation between distance and Fock-graph
 hop distance taking the value $-0.2501$ at $\nmax = 3$;\ no frozen
 test in the repository backs this correlation value.\footnote{The
 numerical correlation value is recorded in the internal computation
-log; the structural finiteness is the load-bearing input for
-Lemma~\ref{lem:L5}, and is robust under operator-norm perturbations of
+log; the structural finiteness was used by the withdrawn
+Lemma~\ref{lem:L5} route, and is robust under operator-norm perturbations of
 $D$ that preserve the SU(2) selection rules.}
 
 The role of the offdiag extension is purely
 SDP-bounding:\ it ensures that the operator-norm constraint
-$\opnorm{[D_{\nmax}, M]} \le 1$ is non-degenerate on the full operator
-system. The truthful $\DCH$ (without offdiag couplings) is what
+$\opnorm{[D_{\nmax}, M]} \le 1$ is non-degenerate on the doubled
+model's operator system (on the true window the truthful Dirac already
+is, Remark~\ref{rem:dirac_degeneracy}). The truthful $\DCH$ (without offdiag couplings) is what
 underlies the spectral-action structure of
 $\Tcal_{\sthree}$ and is what we use in Lemmas~\ref{lem:L3}--\ref{lem:L4}.
-The two operators are related by a bounded compact perturbation, and
-the state-space GH bound of Theorem~\ref{thm:main_intro} is robust under
-this choice.
+The main theorem does not use a Dirac-commutator metrization, so
+this choice does not enter it.
 \end{proof}
 
 \begin{remark}\label{rem:offdiag}
@@ -881,8 +977,8 @@ $\{\gamma_5, D^{\mathrm{offdiag}}_{\nmax}\} = 0$, whereas the truthful
 $\DCH$ does. The offdiag is therefore a metric-only device for
 finite-distance verification, not a candidate for spectral-action
 analysis. The truthful $\DCH$ is what enters
-\eqref{eq:CH_spectrum} and what we use throughout the state-space GH
-convergence proof.
+\eqref{eq:CH_spectrum};\ the state-space GH convergence proof
+(Theorem~\ref{thm:main_unconditional}) uses no Dirac commutator.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -892,8 +988,8 @@ convergence proof.
 
 We construct the central spectral Fej\'er kernel
 $\KS_{\nmax} \in C(\SU(2))$ that plays the role of the
-abelian-compact-group Fej\'er kernel in Connes--van~Suijlekom
-\cite[\S 3]{connes_vs2021} but with the natural-coefficient Plancherel
+circle Fej\'er kernel in van~Suijlekom's reconstruction~\cite{vs2021_jgp}
+but with the natural-coefficient Plancherel
 weights forced by the Peter--Weyl bijection $n = 2j + 1$.
 
 \begin{definition}[Central spectral Fej\'er kernel]\label{def:central_fejer}
@@ -1095,10 +1191,12 @@ here; the $\sin^2(\chi/2)$ conjugacy-class weight and the
 $\sqrt{2j+1}$ Plancherel weight of Definition~\ref{def:central_fejer}
 together change both the kernel and the constant, while preserving
 the leading $\log n / n$ behaviour that the Ces\`aro-1 (Fej\'er)
-first moment already has on the circle. The one-log slowdown quoted
-in the abstract is relative to the Leimbach--van~Suijlekom torus
-rate $O(1/\nmax)$~\cite{leimbach_vs2024}, not relative to the circle
-Fej\'er first moment.
+first moment already has on the circle.  The $\log n$ factor is
+therefore a property of the kernel, not a non-abelian slowdown.  (An
+earlier version compared it with a torus rate $O(1/\nmax)$ attributed
+to Leimbach--van~Suijlekom~\cite{leimbach_vs2024};\ that paper proves
+convergence without an explicit rate, and the comparison is withdrawn,
+2026-09-28.)
 \end{remark}
 
 \begin{remark}[The volume ratio behind the constant]
@@ -1126,7 +1224,7 @@ operator norm of the commutator $[\DCH, \Mat_f]$ in terms of the
 classical Lipschitz norm of $f$ on the round $\sthree$.
 
 \begin{lemma}[L3:\ Lipschitz comparison, truthful $\DCH$ on $\sthree$;\
-\textbf{[PANEL-VERIFIED]}]
+\textbf{[INTERNAL THEOREM]}]
 \label{lem:L3}
 For every $f \in C^\infty(\sthree)$ and every $\nmax \ge 1$,
 \begin{equation}\label{eq:L3_main}
@@ -1140,93 +1238,34 @@ $\norm{\nabla f}_{L^\infty}^2 = (\partial_\chi f)^2 + \sin^{-2}\chi\,
 is taken in the standard polar parametrisation.
 \end{lemma}
 
-\noindent Frozen falsifier:\
+\noindent Panel check (on the doubled model of \S\ref{sec:truncations}):\
 \texttt{tests/test\_r25\_l3\_lipschitz\_bound.py}
 (\texttt{test\_eq\_l3\_main\_inequality},
 \texttt{test\_l3\_C3\_uniform\_in\_n\_max}).
 
 \begin{proof}
-The truthful $\DCH$ is diagonal in the basis
-$\{\psi_{n, l, m_j, \chi}\}$ with eigenvalue $\chi(n + 1/2)$, so
-\begin{equation}\label{eq:commutator_shell_diff}
-   \bigl[\DCH, \Mat_f\bigr]_{(n', l', m'_j, \chi'),\,(n, l, m_j, \chi)}
-   \;=\; \delta_{\chi, \chi'}\,\chi\,(n - n')\,(\Mat_f^{\mathrm{Weyl}})
-   _{(n', l', m'_j),\,(n, l, m_j)}.
-\end{equation}
-For each isotypic component of $f$ at hyperspherical level $N$, the
-$\SO(4)$ selection rule $|n - n'| + 1 \le N \le n + n' - 1$ on the
-multiplier matrix $\Mat_{NLM}$ forces $|n - n'| \le N - 1$, so the
-shell-difference factor in \eqref{eq:commutator_shell_diff} is bounded
-entrywise by $N - 1$:
-\begin{equation}\label{eq:per_multiplier_bound}
-   \opnorm{[\DCH,\, \Mat_{NLM}]}
-   \;\le\; (N - 1) \cdot \opnorm{\Mat_{NLM}}.
-\end{equation}
-
-The Laplace--Beltrami spectrum on $\sthree$ at level $N$ is $-(N^2 -1)$,
-so the round-$\sthree$ Lipschitz norm of a unit-normalised harmonic
-$Y^{(3)}_{NLM}$ scales as
-\begin{equation}\label{eq:lip_scaling}
-   \norm{\nabla Y^{(3)}_{NLM}}_{L^\infty}
-   \;\sim\; \sqrt{N^2 - 1}\;\cdot\;\Vert \Mat_{NLM}\Vert_{\mathrm{rel}},
-\end{equation}
-where \textbf{[PANEL-VERIFIED]} the relative-multiplier-norm prefactor
-is bounded above by $1$
-on the unit-normalised panel\footnote{This is verified numerically on
-the test panel $\{Y^{(3)}_{NLM} : 2 \le N \le 4\}$ in supporting
-computations only; a general proof of the inequality
-$\norm{\nabla Y}_{L^\infty} \le \sqrt{N^2-1}\,\Vert \Mat_{NLM}\Vert_{\mathrm{rel}}$
-is open (the natural Sobolev route needs $H^s$ with $s > 3/2$ on
-$\sthree$, not $H^1$, so the low-harmonic smoothness must enter
-quantitatively).  Because $C_3 \le 1$ is derived through
-\eqref{eq:lip_scaling}, the $C_3 \le 1$ statement is
-panel-verified on the stated test set rather than proved in general;
-the unconditional main theorem does not use Lemma L3 and is
-unaffected.}.
-
-Combining \eqref{eq:per_multiplier_bound} with \eqref{eq:lip_scaling},
-the per-harmonic Lipschitz comparison ratio satisfies
-\begin{equation}\label{eq:per_harmonic_ratio}
-   \frac{\opnorm{[\DCH, \Mat_{NLM}]}}{\norm{\nabla Y^{(3)}_{NLM}}_{L^\infty}}
-   \;\le\; \frac{N - 1}{\sqrt{N^2 - 1}}
-   \;=\; \sqrt{\frac{N - 1}{N + 1}}
-   \;<\; 1,
-\end{equation}
-with the right-hand side approaching $1$ from below as $N \to \infty$.
-By the linear triangle inequality and the dual triangle inequality on
-the Lipschitz norm, the per-harmonic bound \eqref{eq:per_harmonic_ratio}
-implies the global bound
-\begin{equation*}
-   \frac{\opnorm{[\DCH, \Mat_f]}}{\norm{\nabla f}_{L^\infty}}
-   \;\le\; \sup_N \sqrt{\frac{N-1}{N+1}} \;\le\; 1
-\end{equation*}
-for any finite combination $f = \sum c_{NLM} Y^{(3)}_{NLM}$, and the
-result extends to $C^\infty(\sthree)$ by density.
+Here $\Mat_f = P_{\nmax} M_f P_{\nmax}$.  Since $[\DCH, P_{\nmax}] = 0$,
+$[\DCH, \Mat_f] = P_{\nmax}[\DCH, M_f]P_{\nmax}$, and compression
+contracts operator norms, so $\opnorm{[\DCH, \Mat_f]} \le
+\opnorm{[\DCH, M_f]} = \norm{\nabla f}_{L^\infty}$, the last equality
+being the continuum identity \eqref{eq:seminorm_normalisation} (Connes'
+formula on a closed spin manifold:\ $[\DCH, M_f]$ is Clifford
+multiplication by $df$).  This holds for every $f$ and every $\nmax$.
 \end{proof}
 
-\begin{remark}
-\textbf{[PANEL-VERIFIED]} The bound $C_3 = 1$ is approached as
-$N \to \infty$ and is strictly below $1$ at every finite cutoff
-$\nmax$;\ we do not claim it is attained.  Specifically,
-$C_3(\nmax) \le \sup_{N \le \nmax} \sqrt{(N-1)/(N+1)}
-= \sqrt{(\nmax - 1)/(\nmax + 1)}$ on the sub-envelope $N \le \nmax$
---- the multiplier substrate in fact reaches $N \le 2\nmax - 1$
-(Definition~\ref{def:berezin}), so the per-cutoff values listed next
-bound the sub-envelope only.  That value is $0$ at $\nmax = 1$,
-$1/\sqrt{3} \approx 0.577$ at $\nmax = 2$, $1/\sqrt{2} \approx 0.707$
-at $\nmax = 3$, $\sqrt{3/5} \approx 0.775$ at $\nmax = 4$, and so on.
-Taking the supremum over the full substrate range instead would give
-$\sqrt{1 - 1/\nmax}$.  \emph{That expression must not be substituted
-here without a measurement.}  It is textually identical to a constant
-retired in 2026-06 (Papers~45/46): the \emph{operator-norm}-normalised
-envelope $\opnorm{[D_{\mathrm{GV}}, \Mat]}/\opnorm{\Mat} \le
-\sqrt{1-1/\nmax}$, which is false on the operator system.  The bound
-\eqref{eq:per_harmonic_ratio} above is normalised by
-$\norm{\nabla Y}_{L^\infty}$, not by $\opnorm{\Mat}$, and is a
-different statement that survives that retraction.  The correct
-gradient-normalised per-cutoff envelope is an open measurement, not an
-inference from the substrate range;\ the load-bearing conclusion
-$C_3 \le 1$ is unaffected either way.
+\begin{remark}[the constant is sharp in the limit;\ earlier proof
+withdrawn]
+Since $P_{\nmax} \to 1$ strongly, $\opnorm{P_{\nmax}[\DCH,
+M_f]P_{\nmax}} \to \opnorm{[\DCH, M_f]}$, so $C_3 = 1$ cannot be
+lowered uniformly in $\nmax$.  Until 2026-09-28 this lemma carried a
+per-harmonic proof asserting the ratio
+$\opnorm{[\DCH, \Mat_{NLM}]}/\norm{\nabla Y^{(3)}_{NLM}}_{L^\infty} \le
+\sqrt{(N-1)/(N+1)} < 1$ at every cutoff, with per-cutoff values and a
+``tight because of $\SO(4)$ sparsity'' reading.  That inequality is
+false (for $N = 2$ the ratio tends to $1$, not $1/\sqrt3$, by the limit
+just stated), two of its steps ran the wrong way, and the per-cutoff
+values and the sparsity reading are withdrawn with it.  The conclusion
+$C_3 = 1$ stands on the compression proof above.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -1248,7 +1287,9 @@ $f = \sum c_{NLM} Y^{(3)}_{NLM}$. (A sum form weighted by the mass distribution 
 place of $\sigma_{\nmax}(N)$ would not be unital —
 $B(\mathbf{1}) = Z^{-1} I$ — and would fail the approximate-identity
 property maximally at $f = \mathbf{1}$. Note the image reaches
-multiplier labels up to the achievable envelope $N \le 2\nmax - 1$.)
+multiplier labels up to $N \le 2\nmax - 1$, the support of
+$\sigma_{\nmax}$ --- one band below the window's envelope $N \le
+2\nmax$, Lemma~\ref{lem:band_injectivity}.)
 \end{definition}
 
 \begin{lemma}[L4:\ properties of the Berezin reconstruction]\label{lem:L4}
@@ -1261,9 +1302,9 @@ is positive semi-definite.
 \item[(c)] (Approximate identity.)
 $\opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}
 \le \gamma_{\nmax} \cdot \norm{\nabla f}_{L^\infty}$.
-\item[(d)] (Compatibility with L3.) \textbf{[PANEL-VERIFIED]}
+\item[(d)] (Compatibility with L3.)
 $\opnorm{[\DCH, B_{\nmax}(f)]} \le \norm{\nabla f}_{L^\infty}$
-(inherits the panel scope of Lemma~\ref{lem:L3} through $C_3 = 1$).
+(via Lemma~\ref{lem:L3}).
 \end{enumerate}
 \end{lemma}
 
@@ -1369,8 +1410,8 @@ open check.
 % ---------------------------------------------------------------------
 
 A remark on framework before assembling. In Latr\'emoli\`ere's
-quantum Gromov--Hausdorff propinquity for metric spectral
-triples~\cite{latremoliere2016, latremoliere_metric_st_2017}, the
+Gromov--Hausdorff propinquity for metric spectral
+triples~\cite{latremoliere_metric_st_2017}, the
 distance is an infimum over tunnels carried by quantum metric spaces
 with quantum isometries, under hypotheses (Leibniz Lip-norms on
 C$^{*}$-algebras;\ kernel condition) not established for the
@@ -1427,11 +1468,10 @@ $\mathrm{height}_B$, see below)}.
 \emph{Reach.} By L4(c), $\mathrm{reach}_B \le
 \gamma_{\nmax}\cdot \norm{\nabla f}_{L^\infty} \le
 \gamma_{\nmax}$ on the unit Lipschitz ball
-$\{\Lipnorm{f} \le 1\}$, where \textbf{[PANEL-VERIFIED]} we have used
-L3 to convert
-$\norm{\nabla f}_{L^\infty} \le \Lipnorm{f}$ with constant $C_3 = 1$,
-so this route --- unlike Theorem~\ref{thm:main_unconditional} ---
-carries Lemma~\ref{lem:L3}'s panel scope.
+$\{\Lipnorm{f} \le 1\}$, where $\norm{\nabla f}_{L^\infty} =
+\Lipnorm{f}$ by \eqref{eq:seminorm_normalisation} (an identity;\ an
+earlier version appealed to Lemma~\ref{lem:L3}'s then-panel scope here,
+which was unnecessary).
 \textbf{(Dissolved.)} The dual estimate is no longer needed:\
 Theorem~\ref{thm:main_unconditional} obtains the distance bound via
 the lifted-state map, whose almost-inverse defect is the conjugation
@@ -1444,11 +1484,13 @@ which is why no forward bound could supply it.) The pair $(B_{\nmax},
 P_{\nmax})$ retains its role as the explicit forward-reconstruction
 refinement.
 
-\emph{Height.} The height constituent is modeled on the propinquity
-for metric spectral triples \cite{latremoliere_metric_st_2017}, which
-measures the Lipschitz-distortion of the tunnel maps with respect to the
-Lipschitz seminorms, \emph{not} the operator norm of the maps
-themselves. Specifically,
+\emph{Height.} The height constituent is a GeoVac-defined
+approximation quantity, loosely modelled on the height and reach of
+bridges in~\cite{latremoliere2016};\ it is not a quantity of the
+spectral propinquity~\cite{latremoliere_metric_st_2017}, whose tunnels
+are built from quantum isometries and so carry no Lipschitz distortion.
+It compares Lipschitz seminorms rather than operator norms.
+Specifically,
 \begin{equation}\label{eq:height_B_definition}
    \mathrm{height}_B
    \;:=\; \sup_{\Lipnorm{f} \le 1}
@@ -1499,17 +1541,13 @@ Theorem~\ref{thm:main} stands, by that route, and the WH1 keystone with it.
 \end{proof}
 
 \begin{remark}[On the height term]\label{rem:height_definition}
-The height in \eqref{eq:height_B_definition} is the
-spectral-triple-level analog of the height in
-Latr\'emoli\`ere~\cite[\S 4]{latremoliere_metric_st_2017}, which
-measures the Lipschitz-seminorm-comparison error introduced by the
-tunnel maps. The naive bound $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}
-\le 2\pi$ (from L4(b) plus the $\sthree$ diameter in the dual-Coxeter
-metric) is not the relevant
-height for the spectral-triple propinquity:\ the operator norm of
-$B_{\nmax}(f)$ enters the height for the quantum compact metric
-space propinquity \cite{latremoliere2016} but not for the spectral
-triple version taken as the model here. Until 2026-09-03 the reduction
+The height in \eqref{eq:height_B_definition} is a GeoVac-defined
+approximation constituent, loosely modelled on the height/reach of
+bridges in~\cite{latremoliere2016};\ it is not a quantity defined in
+the spectral propinquity~\cite{latremoliere_metric_st_2017}.  The naive
+bound $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty} \le 2\pi$ (from
+L4(b) plus the $\sthree$ diameter in the dual-Coxeter metric) is not
+the relevant quantity here. Until 2026-09-03 the reduction
 of the height to $\gamma_{\nmax}$ [retracted 2026-09-04: l5-height-bound-achieved] via the
 Lipschitz-comparison form was presented as what gives the rate-controlled
 bound of Theorem~\ref{thm:main};\ that reduction is refuted
@@ -1534,19 +1572,26 @@ metrization of \S~\ref{sec:named_gaps}:
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
    \;\le\; \gamma_{\nmax}, \qquad
    \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax}
-   + O\!\bigl(1/\nmax\bigr).
+   + O\!\bigl(1/\nmax\bigr)
+   \quad\text{(dual-Coxeter metric of \S\ref{sec:ch_triple})},
 \end{equation}
-\textbf{[OBSERVATION]} The asymptotic constant is the sphere-volume
-quotient $2\Vol(S^2)/\Vol(\sthree)$ at unit radius (numerically
-$\Vol(S^2)/\pi^2$);\ it is \emph{not} the Hopf fibration's base-to-total
-ratio, whose base carries half the radius (\S\ref{sec:L2}, volume-ratio
-note). \textbf{[PANEL-VERIFIED]} A uniform bound
+equivalently $(2/\pi)\log\nmax/\nmax + O(1/\nmax)$ on the unit
+$\sthree$;\ the asymptotic constant is \textbf{[INTERNAL THEOREM +
+MEASURED]} (Lemma~\ref{lem:L2}(d.ii)).
+\textbf{[OBSERVATION]} On the unit $\sthree$ the asymptotic constant is
+the sphere-volume quotient $\Vol(S^2)/\Vol(\sthree) = 2/\pi$ of
+unit-radius spheres;\ the dual-Coxeter constant $4/\pi$ is twice that
+quotient (numerically $\Vol(S^2)/\pi^2$).  Neither is the Hopf
+fibration's base-to-total ratio, whose base carries half the radius
+(\S\ref{sec:L2}, volume-ratio note). \textbf{[PANEL-VERIFIED]} A uniform bound
 $\gamma_{\nmax} \le 6 \log \nmax / \nmax$
 holds for all $\nmax \ge 2$.
 \end{theorem}
 
 \begin{proof}
-Lemma~\ref{lem:L1prime} supplies the operator-system substrate;
+Lemma~\ref{lem:lifted_state} and Proposition~\ref{prop:kernel_condition}
+supply the operator-system substrate on the true window
+(Lemma~\ref{lem:L1prime} concerns the doubled computational model);
 Lemma~\ref{lem:L2} the central spectral Fej\'er kernel with closed-form
 $\gamma_{\nmax}$ and asymptotic rate; Lemma~\ref{lem:L3} the Lipschitz
 comparison constant $C_3 = 1$; Lemma~\ref{lem:L4} the Berezin
@@ -1571,25 +1616,26 @@ A companion proposition identifies the state-space GH limit explicitly.
 
 \begin{proposition}[Limit identification]
 \label{prop:limit_identification}
-\textbf{[INTERNAL THEOREM]} The state-space GH limit of the sequence
-$(\Tcal_{\nmax})_{\nmax \ge 1}$ is
+\textbf{[INTERNAL THEOREM]} Up to isometry, the state-space GH limit
+of the sequence $(\Tcal_{\nmax})_{\nmax \ge 1}$ is
 \begin{equation*}
    \lim_{\nmax \to \infty} S(\Op_{\nmax})
-   \;=\; \bigl(P(\sthree),\; d_{\mathrm{Wass}}\bigr),
+   \;=\; \bigl(P(\sthree),\; W_d\bigr),
 \end{equation*}
 where $P(\sthree)$ is the space of Borel probability measures on
-$\sthree$ and $d_{\mathrm{Wass}}$ is the Wasserstein--Kantorovich
-distance with respect to the round-$\sthree$ geodesic distance.
+$\sthree$ and $W_d$ is the Wasserstein--Kantorovich distance with
+respect to the dual-Coxeter geodesic distance $d$ of
+\S\ref{sec:ch_triple};\ on the unit $\sthree$, $W_{d_1} = W_d/2$.
 \end{proposition}
 
-\begin{proof}[Proof sketch]
-Theorem~\ref{thm:main} guarantees $\Lambda(\Tcal_{\nmax},
-\Tcal_{\sthree}) \to 0$ in the state-space GH distance, so the limit
-is the continuum state space. By Kantorovich--Rubinstein duality, the
-Connes distance on $\Tcal_{\sthree}$ coincides with
-$d_{\mathrm{Wass}}$ on $P(\sthree)$. The L4(c) approximate-identity
-property pins this to the actual limit (rather than an isometry
-class). This is the same limit identification as in
+\begin{proof}
+Theorem~\ref{thm:main_unconditional} gives GH distance $\le
+\gamma_{\nmax} \to 0$ to $(S(C(\sthree)), \mathrm{MK}_L)$, and a GH
+limit of compact metric spaces is unique up to isometry. States of
+$C(\sthree)$ are the probability measures, and $L = \mathrm{Lip}_d$
+(Lemma~\ref{lem:continuum_lip}), so by Kantorovich--Rubinstein duality
+$\mathrm{MK}_L = W_d$. (The unit-metric Connes distance of $\DCH$ gives
+$W_{d_1} = W_d/2$, a different, homothetic metric.) This is the same limit identification as in
 van~Suijlekom~\cite{vs2021_jgp} and
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025} for the
 scalar case.
@@ -1602,10 +1648,11 @@ scalar case.
 \subsection{Why $\SU(2)$ was harder than the torus}\label{sec:why_su2}
 
 The flat-torus result of Leimbach--van~Suijlekom~\cite{leimbach_vs2024}
-proceeds by Schur multiplier analysis on the abelian dual $\Z^d$,
-where the Fej\'er kernel is a tensor product of one-dimensional
-Fej\'er kernels and the cb-norm is computed via the standard
-abelian-group identity $\Vert T\Vert_{\mathrm{cb}} = \norm{\widehat{T}}_\infty$.
+works on the abelian dual $\Z^d$ with ball truncations, a spectral
+Fej\'er kernel that is the square of the spherical Dirichlet kernel
+(not a product of circle Fej\'er kernels), and a
+Bo\.zejko--Fendler-type transference, and proves convergence without an
+explicit rate.
 Three substantive complications arise on $\SU(2)$:
 
 \textbf{(i) Non-abelian Peter--Weyl.} On $\SU(2)$ the Plancherel
@@ -1626,26 +1673,27 @@ almost-complex structure. $\sthree = \SU(2)$ has no such structure
 (this is the standard fact that $\sthree$ has trivial tangent bundle
 but no integrable almost-complex structure). The natural alternative
 is the central-spectral-Fej\'er-kernel form
-\eqref{eq:B_def}, which is the abelian-compact-group analog
-of the Connes--van~Suijlekom~\cite{connes_vs2021} Fej\'er
+\eqref{eq:B_def}, which is the analog
+of van~Suijlekom's~\cite{vs2021_jgp} Fej\'er
 reconstruction on $S^1$, lifted to the non-abelian setting via the
 Peter--Weyl decomposition.
 
-\textbf{(iii) The $\SO(4)$ selection rule.} \textbf{[OBSERVATION]} The
-Lipschitz comparison
-\eqref{eq:per_multiplier_bound} is as tight as it is because of the
-multiplier
-sparsity enforced by the $\SO(4)$ selection rule on the Avery 3-Y
-integral;\ we do not prove the bound is attained. The torus analog has no comparable sparsity:\ on $\T^d$,
-multiplier matrices are full Toeplitz matrices, and the Lipschitz
-comparison ratio is bounded by the
-top mode index $|k|$ rather than by the cleaner
-$\sqrt{(N-1)/(N+1)}$ form.
+\textbf{(iii) The $\SO(4)$ selection rule (reading withdrawn
+2026-09-28).} Earlier versions read the Lipschitz comparison as tight
+``because of'' the multiplier sparsity of the $\SO(4)$ selection rule,
+with per-harmonic ratio $\sqrt{(N-1)/(N+1)}$, and contrasted it with the
+torus.  That per-harmonic inequality is false (Lemma~\ref{lem:L3},
+remark), and the reading and the torus contrast are withdrawn:\ $C_3 = 1$
+follows by compression on any closed spin manifold, with no sparsity
+input.
 
-The cumulative effect is that the SU(2) rate is one log factor slower
-than the torus rate ($\log n / n$ vs $1 / n$). This is the standard
-slowdown of non-abelian compact groups relative to flat tori in
-Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} In the dual-Coxeter normalisation the
+The $\log n$ factor in $\gamma_n$ is the first-moment logarithm of the
+Fej\'er (Ces\`aro-1) kernel, which the circle already carries
+(Remark~\ref{rem:circle_fejer});\ it reflects the kernel choice, not
+non-abelianness.  (Earlier versions called it the standard one-log
+non-abelian slowdown relative to a torus rate $O(1/n)$;\
+Leimbach--van~Suijlekom state no such rate, and the comparison is
+withdrawn, 2026-09-28.) \textbf{[OBSERVATION]} In the dual-Coxeter normalisation the
 asymptotic constant $4/\pi$ is twice the circle Fej\'er first-moment
 constant $2/\pi$; on the unit $\sthree$ the two coincide, the factor
 $2$ being the metric scale (Remark~\ref{rem:circle_fejer},
@@ -1704,8 +1752,9 @@ Hardy-sector first-order complex Euler operator
 construction~\cite{paper24} which does not fit standard NCG Dirac
 axioms. The two factors live in different categories of NCG
 construction, and there is no published prescription for tensoring
-them. We have flagged this elsewhere as the four-layer
-Coulomb/HO asymmetry resurfacing at the spectral-triple level. A
+them. We have flagged this elsewhere as the Coulomb/HO asymmetry of
+Paper~24 (seven layers catalogued, six standing) resurfacing at the
+spectral-triple level. A
 proper Riemannian--Hardy propinquity theory is not in the literature
 and would require new framework development beyond the scope of the
 present paper.
@@ -1716,7 +1765,9 @@ present paper.
 asymptotic constant $4/\pi$ in $\gamma_{\nmax} \sim
 (4/\pi) \log \nmax / \nmax$ but not the next-order constant.
 \textbf{[MEASURED]} Numerical doubling-estimator data suggests
-$\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(1/\nmax)$ with
+$\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(\log\nmax/\nmax)$
+(a fit gives the next coefficient $\approx -0.64$, consistent with the
+${\sim}1.85\times$ rather than $2\times$ residual shrink per doubling) with
 $b \approx 4.10$, whose closed form is undetermined at the level of
 the present analysis.
 
@@ -1740,19 +1791,17 @@ in~\cite{paper2}.
 
 \textbf{(ii) Lorentzian extension.} The Camporesi--Higuchi spectral
 triple is Riemannian, with KO-dimension $3 \pmod 8$. On the
-Riemannian side, the modular-Hamiltonian structure of the truncations
-is closed at the operator-system level:\ \textbf{[MEASURED]} the
-modular Hamiltonian on
-$\mathcal{T}_{\nmax}$ satisfies the period closure
-$\sigma_{2\pi}(O) = O$ bit-exactly at $\nmax \in \{2, 3, 4, 5\}$ for
-the hemispheric-wedge-restricted state and all four physical
-witnesses (Bisognano--Wichmann, Hartle--Hawking, Sewell, Unruh), in
-both the geometric realization ($K = J_{\mathrm{polar}}$, integer
-spectrum, so $e^{i \cdot 2\pi n} = 1$ exactly) and the
-Tomita--Takesaki realization ($K_{\mathrm{TT}} = -\log\Delta$ on the
-GNS Hilbert--Schmidt space), which are flow-conjugate,
-$\sigma_t^{\mathrm{TT}} = \sigma_{-t}^{\alpha}$;\ see the four-witness
-companion paper~\cite{paper42} and \cite{paper32}~\S~VIII.F. \textbf{[OPEN]} The
+Riemannian side, the finite-cutoff ``period closure''
+$\sigma_{2\pi}(O) = O$ reported in the four-witness companion
+paper~\cite{paper42} (and \cite{paper32}~\S~VIII.F) is a trivial
+symbolic fact, not a modular-theoretic result:\ the generator used there
+is $K = 2J_z$ ($= J_{\mathrm{polar}}$), which has integer spectrum, so
+$e^{2\pi i K} = 1$ and $\sigma_{2\pi}$ is the identity for \emph{every}
+operator $O$;\ the four ``witnesses'' are the same $K$ with the surface
+gravity relabelled, and nothing in the computation identifies a
+Bisognano--Wichmann modular flow of a wedge-restricted state (that test
+was not run).  % [retracted 2026-09-28: finite-four-witness-literal-identification]
+\textbf{[OPEN]} The
 genuinely Lorentzian extension at signature $(3, 1)$ via Krein-space
 spectral triples is \emph{open}, and is now known to be obstructed
 along its most natural route:\ compressing a Krein-self-adjoint
@@ -1768,9 +1817,10 @@ Dirac).
 \textbf{(iii) Higher-rank compact non-abelian cases.} The present
 proof transcribes mechanically to $\SU(n)$ for $n \ge 3$ at the
 algebraic level (Peter--Weyl, central characters, Plancherel weights)
-but the Lipschitz comparison estimate
-\eqref{eq:lip_scaling} requires a higher-rank version of the
-Avery 3-Y integral and the corresponding selection rule.
+but, as originally posed, the Lipschitz comparison estimate was
+thought to require a higher-rank version of the
+Avery 3-Y integral and the corresponding selection rule (the
+compression proof of Lemma~\ref{lem:L3}, 2026-09-28, needs neither).
 
 \emph{Update (2026-05-16):} this open question has been resolved by
 Paper~40~\cite{paper40_unified}, which generalises
@@ -1921,7 +1971,7 @@ which is the asymptotic of Lemma~\ref{lem:L2}(d.ii).
 
 \paragraph{Numerical verification.}
 \textbf{[MEASURED]} The closed form
-$n \gamma_n = (4/\pi) \log n + b + O(1/n)$ with
+$n \gamma_n = (4/\pi) \log n + b + O(\log n/n)$ with
 $b \approx 4.109$ has been verified to high precision against the
 sum-rule \eqref{eq:gamma_closed_form_repeat} at $n \in \{2, \ldots,
 1000\}$, with the doubling estimator $a_n := (2n \gamma_{2n} - n
@@ -2097,6 +2147,7 @@ J.~Loutey,
 the Framework into the Marcolli--van~Suijlekom Gauge-Network Lineage},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
+% [retracted 2026-09-28: finite-four-witness-literal-identification] -- title retained as published; the finite-cutoff identification it names is a trivial integer-spectrum fact (see Open question (ii)).
 \bibitem[Loutey, internal Paper~42]{paper42}
 J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated

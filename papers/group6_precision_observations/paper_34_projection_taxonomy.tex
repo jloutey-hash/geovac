@@ -2515,14 +2515,15 @@ alone, and the published Hartle--Hawking / Sewell / Bisognano--Wichmann
 / Unruh chain identifies that $2\pi$ with the Lorentzian-side
 modular-flow / Lorentz-boost orbit period.
 
-\textbf{Sprint L1 closure (2026-05-16):\ literal identification at
-operator-system level (Riemannian).}\ The L1-named falsifier
+\textbf{Sprint L1 (2026-05-16; demoted 2026-09-28):\ an automatic
+period closure, not an identification.}\ The L1-named falsifier
 (``compute the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$
 for a wedge-restricted Camporesi--Higuchi state, verify
-$\sigma_{2\pi} = $ identity at finite $n_{\max}$'') is now closed
-positively at the strongest level.  Sprint L1
+$\sigma_{2\pi} = $ identity at finite $n_{\max}$'') remains
+\emph{open}.  Sprint L1
 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
-Paper~32~\S~VIII.F) constructs $K$ on the truncated CH spectral triple
+Paper~32~\S~VIII.F, Paper~42~\cite{paper42}) \emph{posits} $K$ on the
+truncated CH spectral triple
 via the hemispheric-wedge BW-$\alpha$ geometric realization
 ($K = J_{\mathrm{polar}}$ with integer spectrum $\mathrm{two\_m}_j$
 on the full-Dirac basis) and verifies the period closure
@@ -2534,9 +2535,14 @@ $O(\sqrt{\dim_H} \cdot \varepsilon_{\mathrm{machine}})$).
 Cross-witness collapse is bit-exact (max consistency residual
 $= 0.0$ at every $n_{\max}$):\ the period closure is independent
 of $\kappa_g$ because $\mathrm{e}^{\mathrm{i}\cdot 2\pi \cdot n} = 1$
-for integer spectrum.  This lifts the four-witness Wick-rotation
-theorem from ``structural correspondence'' to ``literal identification
-at the operator-system level (Riemannian)'' at every finite cutoff.
+for integer spectrum.  That is exactly why the result carries no
+identification:\ the closure holds for \emph{any} integer-spectrum
+generator and any $O$, the state is built from the posited $K$, and
+the four witnesses are the same $K$ with $\kappa_g$ relabelled.  An
+earlier reading of this as lifting the four-witness theorem to an
+identification at the operator-system level at every finite cutoff is
+withdrawn (2026-09-28;\ Paper~42).  The continuum four-witness
+statement is prior art and unaffected.
 The Lorentzian extension to signature $(3, 1)$ via the
 Bizi--Brouder--Besnard~2018 Krein-space spectral triple remains the
 named Sprint L2 follow-up (a substantial open program per the
@@ -2552,7 +2558,9 @@ decomposition $S = J_{\mathrm{TT}} \Delta^{1/2}$ on the GNS
 Hilbert-Schmidt space $H_{\mathrm{GNS}} = M_{\dim_W}(\mathbb{C})$,
 verify $\sigma_{2\pi}^{\mathrm{TT}}(O) = O$ bit-exactly at the
 operator-action level for all four witnesses at $n_{\max} \in \{2, 3,
-4, 5\}$. Verdict:\ \emph{UNIFIED\_STRONG closure}. Maximum Tomita-level
+4, 5\}$. Module label:\ UNIFIED\_STRONG (not an identification
+verdict;\ the Gibbs state is built from the posited $K$, so Tomita's
+theorem returns it, and the check is circular). Maximum Tomita-level
 residual: $1.09\times 10^{-16}$ ($n_{\max}=2$) through $4.79\times
 10^{-15}$ ($n_{\max}=5$).  The BW-$\alpha$ and BW-$\gamma$ flows are
 operator-action-level conjugates of each other ($\sigma_t^{\mathrm{TT}}
@@ -2560,11 +2568,9 @@ operator-action-level conjugates of each other ($\sigma_t^{\mathrm{TT}}
 period $t = 2\pi$).  The state-dependent $J_{\mathrm{TT}}(X) =
 \rho^{1/2} X^* \rho^{-1/2}$ verifies $J_{\mathrm{TT}}^2 = +I$ at the
 full Tomita level (not just the canonical $U = I$ sanity case).  The
-honest scope above is therefore tightened:\ literal identification at
-the operator-system level (Riemannian) holds via \emph{both} the
-geometric BW-$\alpha$ \emph{and} the Tomita-Takesaki BW-$\gamma$
-constructions, not just one.  The L1 ``BW-$\alpha$-only'' caveat is
-removed.
+two readings are the same flow (conjugate by construction), so the
+second adds no independent evidence;\ no identification at the
+operator-system level holds via either (2026-09-28).
 
 Two further scope distinctions are required.
 First, \emph{Wick rotation is not the full Lorentzian extension.}
@@ -4513,10 +4519,11 @@ identification.  The principal Track~D operator-level falsifier
 triple for a wedge-restricted state) covers all three
 Wick-rotation faces (Hawking, BW, Unruh) simultaneously, since the
 chain runs through the same KMS-Tomita-Takesaki algebra in every case;
-\textbf{Sprint L1 closure (2026-05-16) lifts the structural correspondence to literal
-identification at the operator-system level (Riemannian)} via the
+Sprint L1 (2026-05-16) does \emph{not} run that falsifier:\ its
 machine-precision $\sigma_{2\pi}(O) = O$ closure at $n_{\max} \in
-\{2, 3, 4, 5\}$ (see row below and Paper~32~\S~VIII.F). \\
+\{2, 3, 4, 5\}$ is automatic for the posited integer-spectrum
+generator (see row below, Paper~32~\S~VIII.F and Paper~42;\
+identification reading withdrawn 2026-09-28). \\
 Modular periodicity $\sigma_{2\pi}(O) = O$ on $\mathcal{T}_{n_{\max}}$ &
 \S~\ref{sec:proj_wick_rotation} (Wick rotation) at
 $\beta = 2\pi / \kappa_g$;\ four-witness collapse to canonical BW &
@@ -4531,10 +4538,11 @@ every tested $n_{\max} \in \{2, 3, 4, 5\}$ for all four physical
 witnesses (BW, HH, Sew, Unruh).  Residual scales as machine precision
 $O(\sqrt{\dim \mathcal{H}_{n_{\max}}} \cdot
 \varepsilon_{\mathrm{machine}})$;\ cross-witness collapse is bit-exact
-(max consistency residual $= 0.0$).  Row is a machinery-witness for
-the L1 falsifier closure, not a precision match.  Lifts the
-four-witness Wick-rotation theorem from structural correspondence
-to literal identification at the operator-system level (Riemannian).
+(max consistency residual $= 0.0$, by construction).  Row is a
+machinery-witness only, not a precision match and not a closure of the
+L1 falsifier:\ the closure is automatic for any integer-spectrum
+generator, so it identifies no Bisognano--Wichmann flow (withdrawn
+2026-09-28;\ Paper~42).
 Lorentzian extension to signature $(3, 1)$ via BBB Krein lift is the
 named Sprint L2 follow-up (a substantial open program per the
 Sprint L0 audit).
@@ -4567,12 +4575,12 @@ $S(s \to \infty) = \log(n_{\mathrm{equator}})$ at $n_{\max} = 7$.
 The $s$-parameter scan across $s \in \{0.01, \dots, 2\pi\}$ shows
 power-law exponents $\alpha \in [0.64, 0.72]$, never close to $2$ or
 $3$ --- no temperature regime produces polynomial scaling.  Structural
-implication:\ the operator-system truncation preserves the four-witness
-Wick-rotation theorem (period closure, KMS, $J^2$ signatures) but does
-NOT preserve continuum QFT vacuum entanglement.  The Bekenstein--Hawking
-area law and the modular-Hamiltonian period closure are structurally
-distinct features;\ the framework captures the latter and not the
-former.  Consistent with the structural-skeleton-scope pattern
+implication:\ on the operator-system truncation the posited
+modular construction has the elementary period closure, KMS form and
+$J^2$ signatures (automatic, not a finite-cutoff four-witness
+identification;\ 2026-09-28) but does NOT reproduce continuum QFT
+vacuum entanglement.  The Bekenstein--Hawking area law and the
+automatic period closure are structurally distinct features.  Consistent with the structural-skeleton-scope pattern
 (Sprint H1, LS-8a, HF-3/4/5, multi-focal wall, W3).  Named follow-on
 candidate:\ \texttt{BH-Phase0-route-A} (sprint-scale)
 testing the reduced density matrix of the GeoVac Dirac ground state
@@ -9175,8 +9183,8 @@ on the Lorentzian Krein side was named there as the principal Sprint L1
 target (Riemannian side) and Sprint L2-E target (Lorentzian side).
 Sprint L2-E (\verb|geovac/modular_hamiltonian_lorentzian.py|,
 Paper~32~\S~VIII.E.E
-\cite{paper32}) closes the Lorentzian-side identification at finite
-cutoff:\ on $\mathcal{K}_{n_{\max}, N_t} = \mathcal{H}_{\rm GV}^{n_{\max}}
+\cite{paper32}) carries the Riemannian construction to the Krein side
+at finite cutoff (not an identification):\ on $\mathcal{K}_{n_{\max}, N_t} = \mathcal{H}_{\rm GV}^{n_{\max}}
 \otimes \mathbb{C}^{N_t}$ at signature $(3, 1)$, with the Lorentzian
 wedge $W_L = P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$ and the
 BW choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$, the Krein-space
@@ -9186,19 +9194,19 @@ $\sigma_t^{L, \mathrm{TT}} = \sigma_{-t}^{L, \alpha}$, and six-witness
 collapse all at residual $\leq 4 \times 10^{-16}$ across
 $(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.  At $N_t = 1$
 the construction reduces bit-identically to Paper~42's Riemannian
-closure~\cite{paper42} (the $N_t = 1$ slice), on the same compact KMS
-$\beta = 2\pi$ circle.  The
-structural finding that survives:\ Paper~42~\S~7.2 ``$H_{\mathrm{local}}
-\neq D_W$'' open question O3 is \textbf{signature-INDEPENDENT at the
+construction~\cite{paper42} (the $N_t = 1$ slice), on the same compact KMS
+$\beta = 2\pi$ circle;\ as there, the closures are automatic for the
+posited integer-spectrum generator and identify no Bisognano--Wichmann
+flow (2026-09-28).  The finding that survives:\ Paper~42~\S~7.2
+``$H_{\mathrm{local}} \neq D_W$'' is \textbf{signature-independent at the
 Riemannian limit} ($\|H_{\mathrm{local}} - D_L^W\|_F|_{N_t=1}$ equals
-the Riemannian-side residual bit-exact at every tested $n_{\max}$);\
-the spectral-action--vs--modular-Hamiltonian generator distinction is
-a deeper structural feature of the framework, not a peculiarity of
-the round-$S^3$ Riemannian truncation.  \emph{Status (2026-06):} the
+the Riemannian-side residual bit-exact at every tested $n_{\max}$) ---
+an elementary property of the posited construction, not evidence about
+which generator a Camporesi--Higuchi wedge state selects.  \emph{Status (2026-06):} the
 ``literal identification at the Krein operator-system level'' reading is
 \textbf{withdrawn} --- the Paper~45 $K^+$-annihilation theorem
 (2026-06-09) and the compact-boost closure (2026-06-19) show the
-truncated BW boost $K = \mathrm{diag}(2m_j)$ has integer spectrum
+posited truncated boost-class generator $K = \mathrm{diag}(2m_j)$ has integer spectrum
 ($\mathrm{e}^{2\pi\mathrm{i}K} = I$ bit-exact), so the period closure is
 the compact KMS $\beta = 2\pi$ circle and the Lorentzian signature is
 metrically invisible at finite cutoff (Euclidean/convention; see the
@@ -9965,28 +9973,28 @@ $5$ EUCLIDEAN\_SPECIFIC, $2$ MIXED.  Full per-projection table at
 Sig/Op partition at Paper~31~\S~8~\cite{paper31}.
 
 \medskip
-\noindent\textit{Sprint L1 closure (2026-05-16):\ Riemannian
-operator-system identification verified.}  The principal Sprint L1
+\noindent\textit{Sprint L1 (2026-05-16; demoted 2026-09-28):\
+Riemannian period closure, automatic --- no identification.}  The
+principal Sprint L1
 falsifier --- ``compute the modular Hamiltonian $K$ on
 $\mathcal{T}_{n_{\max}}$ for a wedge-restricted Camporesi--Higuchi
 state, verify $\sigma_{2\pi}(O) = O$ at finite $n_{\max}$'' ---
-is now closed at the strongest level on the Riemannian side
+remains \emph{open} on the Riemannian side
 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
-Paper~32~\S~VIII.F).  Sprint L1 constructs $K$ via the
+Paper~32~\S~VIII.F, Paper~42).  Sprint L1 posits $K$ via the
 hemispheric-wedge BW-$\alpha$ geometric realization
 ($K = J_{\mathrm{polar}}$ with integer spectrum on the full-Dirac
 basis), verifies the period closure $\sigma_{2\pi}(O) = O$ bit-exactly
 at $n_{\max} \in \{2, 3, 4, 5\}$ for all four physical witnesses (BW,
 HH, Sew, Unruh), with cross-witness collapse bit-exact (residuals
 match across witnesses at machine precision; period closure is
-independent of $\kappa_g$).  This lifts the four-witness Wick-rotation
-theorem from ``structural correspondence'' to ``literal identification
-at the operator-system level (Riemannian)'' at every finite cutoff.
-(This Riemannian period-closure survives the 2026-06 descope of the
-\emph{Lorentzian} ``literal identification at the Krein level'' reading
---- see the status update in \S~\ref{sec:proj_wick_rotation} --- because
-$\sigma_{2\pi} = $ identity is precisely the compact KMS $\beta = 2\pi$
-circle; only the Lorentzian-signature promotion was withdrawn.)
+independent of $\kappa_g$ --- by construction, since the witnesses
+share one generator).  The closure is automatic for any
+integer-spectrum generator, so it does not identify the four-witness
+theorem at the operator-system level;\ the earlier reading that it
+did, at every finite cutoff, is withdrawn (2026-09-28, Paper~42),
+following the 2026-06 withdrawal of the Lorentzian (Krein-level)
+reading.  The elementary period closure itself stands as computed.
 \S~\ref{sec:proj_wick_rotation} honest-scope paragraph updated;
 \S~\ref{sec:offprecision} new ``Modular periodicity'' row added as
 machinery-witness for the closure.
@@ -10002,9 +10010,10 @@ Nieuviarts~2025 twisted-spectral-triple morphism is the named trigger
 that may shorten this budget if it applies cleanly to $S^3 =
 \mathrm{SU}(2)$).  Expected outcome (per Sprint L0 prediction):
 M3 trivializes at $(3, 1)$ but M1 stays, so the four-witness theorem
-extends to Lorentzian.  Sprint L1's Riemannian closure is the
-prerequisite that confirms the operator-system identification is
-sound before lifting signature.
+extends to Lorentzian.  Its Riemannian prerequisite --- a modular
+Hamiltonian \emph{derived} from a wedge-restricted Camporesi--Higuchi
+state --- is itself still open:\ Sprint L1's period closure is
+automatic for a posited generator (2026-09-28, Paper~42).
 
 % Source: Sprint Lorentz-Boost-Scoping (May 2026, Track B); refines
 % synthesis pass §7 Hunt 4 REQUIRES-EXTENSION verdict with
@@ -10811,8 +10820,8 @@ J.~Loutey, ``State-space Gromov--Hausdorff convergence of truncated Camporesi--H
 
 \bibitem{paper42}
 J.~Loutey, ``Tomita--Takesaki Modular Structure on Truncated SU(2)
-Spectral Triples: Four-Witness Wick-Rotation Literal Identification
-at Finite Cutoff,'' GeoVac project, May 2026.
+Spectral Triples: the Four-Witness $2\pi$ Period at Finite Cutoff,''
+GeoVac project, May 2026.
 
 \end{thebibliography}
 
