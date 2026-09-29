@@ -47,8 +47,10 @@ $K_{\mathrm{vac}} = -1/16$ the extremal eigenvalue reaches the hydrogen
 ground-state energy---matched, not derived: the content that could have
 failed is the spectral bound, not the target the scale is matched to.
 The per-shell spectrum $E_n = -Z^2/(2n^2)$ is not a function of the
-graph Laplacian: it follows from the diagonal Casimir $n^2-1$ on the
-labels through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This angular cross-section recurs across the
+graph Laplacian, nor of the diagonal Casimir $n^2-1$ on the labels
+alone:\ in Fock's continuum projection the eigenvalue $2\pi^2/n$ of
+the $S^3$ Coulomb kernel forces the focal length $p_0 = Z/n$, and the
+energy shell $p_0^2 = -2E$ then gives $E_n$ (Paper~7).  \textbf{[OBSERVATION]} This angular cross-section recurs across the
 natural geometries of the Geometric Vacuum series as a basis
 label:\ the full $(\ell, m)$ labeling, with $2\ell+1$ states per~$\ell$,
 labels the basis on $S^3$ for hydrogen, the per-electron partial waves
@@ -736,8 +738,10 @@ where $K_{\mathrm{vac}} = -1/16$ is the kinetic scale factor.  It
 matches only the graph's extremal eigenvalue (a band edge,
 $\lambda_{\max} \to 8$) to the hydrogen ground-state energy $-1/2$;
 it does not carry the rest of the graph spectrum onto the Rydberg
-ladder, whose per-shell energies follow from $n^2-1$ on the labels
-through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
+ladder, whose per-shell energies come from Fock's continuum
+projection:\ the $S^3$ Coulomb kernel's eigenvalue $2\pi^2/n$ forces
+$p_0 = Z/n$, and the energy shell $p_0^2 = -2E$ then gives $E_n$
+(Paper~7;\ the label Casimir $n^2-1$ alone does not).  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
 quantity of the Fock projection (Paper~7~\cite{paper7}): the squared
 coupling between adjacent $n$-shells in the Gegenbauer eigenbasis of the
 $S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$ (Paper~7,
@@ -817,7 +821,8 @@ The conformal equivalence between the hydrogen problem and the
 Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
 \textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
-of that continuum chain (the graph Laplacian is not a discretization of
+of that continuum chain, and an exact kernel-eigenvalue test carries its
+non-definitional energy step, $p_0 = Z/n$ (the graph Laplacian is not a discretization of
 it; see above).  Paper~1~\cite{paper1} develops the operator algebra
 on these labels (the $SU(1,1)\times SU(2)$ ladder operators, exact on
 interior shells, with the Rydberg energies imposed through the energy
@@ -852,9 +857,10 @@ the graph Laplacian in the archived Paper~6~\cite{paper6} (superseded).
 
 \begin{itemize}
 \item[$\times$] Energy eigenvalues $E_n = -1/(2n^2)$.  These come
-  from Fock's continuum projection and the $SO(4)$ algebra (the Casimir
-  $n^2 - 1$ acting diagonally on the labels, with the energy shell
-  $p_0^2 = -2E$), not from the graph Laplacian, whose spectrum lies in
+  from Fock's continuum projection (the eigenvalue $2\pi^2/n$ of the
+  $S^3$ Coulomb kernel forces $p_0 = Z/n$ on the shell where the
+  $SO(4)$ Casimir is $n^2 - 1$, and the energy shell $p_0^2 = -2E$
+  converts it to $E_n$;\ Paper~7), not from the graph Laplacian, whose spectrum lies in
   $[0, 8]$;\ the matched kinetic scale $K_{\mathrm{vac}}$ fixes only the
   extremal eigenvalue (its value is matched, and its coincidence with
   the Fock-Jacobian factor $1/16$ is an Observation rather than a
@@ -1000,7 +1006,8 @@ BeH$^+$, benchmarked against exact and experimental values.
 \textbf{[MEASURED]} H$_2$ reaches $99.97\%$ of $D_e$ ($0.053$~mHa) in
 its natural prolate geometry with explicit $r_{12}$ correlation
 (Paper~12~\cite{paper12});\ in that same prolate engine the HeH$^+$
-equilibrium bond length converges to $-0.5\%$ (Paper~12);\ the LiH
+equilibrium bond length reaches $-0.5\%$ at $l_{\max} = 3$ (from
+$-4.5\%$ at $l_{\max} = 2$;\ Paper~12);\ the LiH
 equilibrium geometry is $+0.2\%$ in an all-electron prolate treatment
 with an analytic core (Paper~19~\cite{paper19}) and $5.3\%$ in the
 composed Level~5 treatment (Paper~17), where BeH$^+$ is markedly worse

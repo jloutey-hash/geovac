@@ -671,6 +671,167 @@ REGISTRY = [
         },
     },
     {
+        "id": "energy-follows-from-casimir-via-shell",
+        # MIRROR-direction staleness: Paper 7 Stage 3 now PROVES p0 = Z/n from the S^3 Coulomb-kernel
+        # eigenvalue 2pi^2/n (tests/test_paper7_fock_kernel.py). Summaries still say E_n 'follows from
+        # n^2-1 through the energy shell' (crediting the label Casimir; P7's own Stage 3 denies it) or that
+        # the energies are 'imposed' (understating P7). Paper 1's 'imposed map' wording about ITS OWN
+        # operators is correct and is not in scope. Registered 2026-09-28, DELTA #14.
+        "pattern": r"follows?\s+(instead\s+)?from\s+(the\s+diagonal\s+Casimir\s+)?\$?n\^2\s*-\s*1\$?[^.]{0,60}energy\s+shell|imposed\s+energy-shell\s+map|are\s+an\s+imposed\s+map\s+from\s+\$?n\$?\s+through\s+Fock",
+        "exempt_if_nearby": withdrawal_marker("energy-follows-from-casimir-via-shell"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #14; PI-approved remediation).",
+        "files": [
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "p56-injection-theorem-live",
+        # Paper 56's level-4 map (thm label injection_g4 kept) is a comparison HOMOMORPHISM, not
+        # injective (rank-2 M3 column). Citers still say 'the injection theorem ... \hookrightarrow'.
+        # Registered 2026-09-28, DELTA #14.
+        "pattern": r"injection\s+theorem|cosmic-Galois\s+injection\b",
+        "exempt_if_nearby": withdrawal_marker("p56-injection-theorem-live"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #14; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group3_foundations/paper_56_tannakian_substrate.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "dirac-seminorm-degeneracy-motivation",
+        # Paper 38 (owner) assigns the 10/14, 26/55 Dirac-commutator kernel counts to the DOUBLED Fock
+        # model; on the true CH window the kernel is the scalars (n_max <= 3). Citers still present the
+        # counts as a failure of 'the truthful chirality-diagonal CH Dirac' that the translation seminorm
+        # resolves. Registered 2026-09-28, DELTA #14.
+        "pattern": r"fails\}?\s+for\s+the\s+truthful\s+chirality-diagonal",
+        "exempt_if_nearby": withdrawal_marker("dirac-seminorm-degeneracy-motivation"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #14; PI-approved remediation).",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "p50-chm-integer-spectrum",
+        # Paper 50 described the continuum Casini-Huerta-Myers hemisphere modular Hamiltonian as having
+        # integer spectrum 2pi J and '2pi-periodic' flow, and tagged 'both spectra integer-valued'
+        # [SYMBOLIC]. The continuum modular Hamiltonian generates a boost-like flow with continuous spectrum
+        # (P45 Q1 leg (a) says the same); only the Euclidean rotation generator has integer spectrum.
+        # Introduced by the v5.17.4 remediation. Registered 2026-09-28, DELTA #14.
+        "pattern": r"Both\s+spectra\s+integer-valued|in\s+the\s+single-particle\s+basis\s+are\s+\$?2\\pi\s*J",
+        "exempt_if_nearby": withdrawal_marker("p50-chm-integer-spectrum"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #14; PI-approved remediation).",
+        "files": [
+            "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "l3-per-harmonic-ratio-bound",
+        # The per-harmonic L3 bound (N-1)/sqrt(N^2-1) -> 1 is FALSE (Paper 38 owner; L3 now proved by
+        # compression, C3 = 1, [INTERNAL THEOREM]). Paper 32 still states the old bound.
+        # Registered 2026-09-28, DELTA #14.
+        "pattern": r"\(N\s*-\s*1\)\s*/\s*\\sqrt\{N\^2\s*-\s*1\}",
+        "exempt_if_nearby": withdrawal_marker("l3-per-harmonic-ratio-bound"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #14; PI-approved remediation).",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "p16-nu-universal-n-minus-2",
+        # Paper 16's 'universal ground-state angular quantum number nu = N-2' (nu_min = N - lambda_1).
+        # Verified false 2026-09-28 by two routes (S_N character generating function; Young-symmetrizer
+        # brute force) + O(3) check: the true rule is the Pauli filling nu_min = E(n_up) + E(n_down),
+        # degree d holding (d+1)(d+2)/2 functions. N-2 holds only for the lowest spin with N <= 8; Ne
+        # singlet is 10; S = N/2 is spatially ANTISYMMETRIC with large nu (not 0); Li 2S (L=0 even) needs 2;
+        # large N grows ~ (3N)^{4/3}/4. mu_free = 2(N-2)(N-1), '4 units per pair', nu/(3N-2) -> 1/3 fall with it.
+        "pattern": r"universal\s+(result|angular\s+quantum\s+number)\s+\$?\\?nu\s*=\s*N\s*-\s*2|\\boxed\{\\nu\s*=\s*N\s*-\s*2\}|\\nu_\{\\min\}\s*=\s*N\s*-\s*\\lambda_1|Laughlin-like\s+state\s+with\s+no\s+Pauli|exactly~?\s*4\s+units|\(N-2\)/\(3N-2\)\s*\\to\s*1/3|\\nu\s*=\s*135|\\nu\s*=\s*N\s*-\s*2\$?\s+is\s+independent\s+of\s+the\s+spin|supplies\s+the\s+universal\s+angular",
+        "exempt_if_nearby": withdrawal_marker("p16-nu-universal-n-minus-2"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-28 (FULL #9 open-items pass; PI-directed).",
+        "files": [
+            "papers/group4_quantum_computing/paper_16_periodicity.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "geovac/atomic_classifier.py",
+        ],
+        "cited_by": {
+            "papers/group4_quantum_computing/paper_16_periodicity.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- OWNER: eq:nu_min = Pauli filling (two routes + O(3)); Lemma 1; mu_free, tables, N=137 (570/279,015), S=N/2, Cr fixed; tests/test_paper16_nu_min.py",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- eq rewritten to nu_min = E(n_up)+E(n_down); classifier nu described as metadata",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- L647 'S_N-only Pauli-filling count of Paper 16'",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- L1598 spin diagram vs conjugate spatial irrep corrected",
+        },
+    },
+    {
+        "id": "pythagorean-inv-pi2-as-m1-output",
+        # The Pythagorean HS-orthogonality residual's 1/pi^2 was read as an M1 (Mellin k=0, Hopf-base
+        # measure) output 'predicted' by the case-exhaustion theorem and as 'the same M1 signature' as P38's
+        # 4/pi. It enters only through the posited beta = 2pi/kappa_g (H_local = K/beta): the continuum KMS
+        # period imported as a normalisation and squared. The orthogonality is a chirality-parity identity
+        # independent of beta. Retired 2026-09-28 (four-witness demotion follow-on).
+        "pattern": r"exactly\s+the\s+M1\s+output|same\s+\$?1/\\pi\^2\$?\s+factor\s+reappears|predicts\s+the\s+exact\s+M1\s+ring|two\s+appearances\s+of\s+the\s+same\s+\$?k\s*=\s*0\$?\s+volume|Pythagorean[^.]{0,120}M1\s+signature|\$?1/\\pi\^2\$?\s+master-Mellin-engine|lives\s+entirely\s+in\s+the\s+master\s+Mellin\s+engine\s+M1|class\s+of\s+the\s+\$?k\s*=\s*0\$?\s+volume\s+slot",
+        "exempt_if_nearby": withdrawal_marker("pythagorean-inv-pi2-as-m1-output"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-28 (FULL #9 open-items pass; PI-directed).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- rem:pythagorean_m1_closure: 1/pi^2 = posited beta squared, not M1; L2215 witness list",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- L314-324 link withdrawn; 'therefore not isolated' -> 'a reading'",
+            "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- tagging sentence",
+            "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- 10.2 intro, 'Transcendental tag' para, N_t>1 para, O4",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- two Born-rule loci",
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- false '4/pi sets the 1/pi^2 prefactor' removed",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- witness list",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- witness-table row daggered class-only",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- abstract, 8.x, Mellin section, T5, G3(iv), concluding remark",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 open-items pass; PM-verified gate 0 live) -- witness mention",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
         "id": "finite-four-witness-literal-identification",
         # The finite-cutoff 'four-witness literal identification' (Paper 42 owner; P32/P34/P31/P38/
         # P43/P50/P52 citers). geovac/modular_hamiltonian.py sets K = diag(2 m_j): an integer-spectrum
@@ -678,7 +839,7 @@ REGISTRY = [
         # witnesses are the same K with kappa_g relabelled. A trivial SYMBOLIC fact; it identifies no
         # Bisognano-Wichmann modular flow. The real falsifier (K from a wedge-restricted CH state) was
         # never run. Retired 2026-09-28, /qa trunk FULL (PI-approved).
-        "pattern": r"strongest\s+possible\s+level|literal\s+identification\s+(at|of)\s+(the\s+)?(operator[- ]system|finite\s+cutoff|four-witness)|Wick-rotation\s+literal\s+identification|to\s+``literal\s+identification|lift\S*\s+(\S+\s+){0,8}to\s+``?literal\s+identification",
+        "pattern": r"strongest\s+possible\s+level|literal\s+identification\s+(at|of)\s+(the\s+)?(operator[- ]system|finite\s+cutoff|four-witness)|Wick-rotation\s+literal\s+identification|to\s+``literal\s+identification|lift\S*\s+(\S+\s+){0,8}to\s+``?literal\s+identification|four-witness\s+modular-Hamiltonian\s+identification|close\s+the\s+four-witness",
         "exempt_if_nearby": withdrawal_marker("finite-four-witness-literal-identification"),
         "severity": "fail",
         "scope": "trunk group1 group3 group6 synthesis",
@@ -700,6 +861,7 @@ REGISTRY = [
             "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 remediation; PM-verified gate 0 live) -- sec 8.1 retitled + rewritten, scope paragraph, bibitem",
             "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 remediation; PM-verified gate 0 live) -- header, L188-197/328-331/1249/1487, bibitem",
             "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 remediation; PM-verified gate 0 live) -- L211/450, Remark 1522, 8.1, Q1 generator labelled posited, bibitem",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
         },
     },
     {
@@ -708,18 +870,21 @@ REGISTRY = [
         # artifact' ('residuals should decay'). Measured: max residual 0.055 -> 0.079 -> 0.096 and failing
         # fraction 63% -> 86% -> 92% (n_max 2,3,4); fixed degree-1 generators approach a nonzero limit.
         # Retired 2026-09-28, /qa trunk FULL.
-        "pattern": r"residuals\s+should\s+decay|finite-resolution\s+artifacts?\s+of\s+the\s+same\s+class|Fails\s+at\s+\$?n_\{?\\max\}?\s*\\ge\s*2\$?\s*\(artifact\)|structural-artifact\s+reading\s+of\s+Connes",
+        "pattern": r"residuals\s+should\s+decay|finite-resolution\s+artifacts?\s+of\s+the\s+same\s+class|Fails\s+at\s+\$?n_\{?\\max\}?\s*\\ge\s*2\$?\s*\(artifact\)|structural-artifact\s+reading\s+of\s+Connes|finite-resolution\s+artifacts?\s+of\s+the\s+truncated|expected\s+to\s+vanish\s+in\s+the\s+GH\s+limit",
         "exempt_if_nearby": withdrawal_marker("order-zero-one-decaying-artifact"),
         "severity": "fail",
         "scope": "trunk group1 group3 group6 synthesis",
         "note": "Registered 2026-09-28 (/qa trunk FULL; PI-approved remediation).",
         "files": [
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
         ],
         "cited_by": {
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 remediation; PM-verified gate 0 live) -- audit item 5 + Reading + Net status + tables: residuals grow (0.055/0.079/0.096), [MEASURED]",
+            "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex": "ARCHIVED 2026-09-28 (PI decision): moved to papers/archive/; surviving content is Paper 42 sec. 11 (rem:order_zero_one corrected there)",
         },
     },
     {
@@ -729,7 +894,7 @@ REGISTRY = [
         # 'mixes M1 and M2' is false. Fact 1 invokes the [CONDITIONAL] case-exhaustion theorem unscoped.
         # Only the empirical Fact 3 survives -> Observation. Adjacent to the S13.5 K prohibition.
         # Retired 2026-09-28, /qa trunk FULL (PI-approved).
-        "pattern": r"\\begin\{theorem\}\[No\s+single-mechanism|mixes\s+\$?M_1\$?\s+and\s+\$?M_2|mixes\s+outputs\s+of\s+\$?M_2",
+        "pattern": r"\\begin\{theorem\}\[No\s+single-mechanism|mixes\s+\$?M_1\$?\s+and\s+\$?M_2|mixes\s+outputs\s+of\s+\$?M_2|eight\}?\s+theorem-grade|thm:no\\?_single\\?_mechanism\\?_K",
         "exempt_if_nearby": withdrawal_marker("e6-no-single-mechanism-theorem"),
         "severity": "fail",
         "scope": "trunk group1 group3 group6 synthesis",
@@ -741,6 +906,8 @@ REGISTRY = [
         ],
         "cited_by": {
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 remediation; PM-verified gate 0 live) -- thm -> obs:no_single_mechanism_K + rem:e6_scope",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #14 remediation; PM-verified gate 0 live corpus-wide)",
         },
     },
     {
@@ -765,6 +932,9 @@ REGISTRY = [
         "id": "truncation-inherits-odd",
         # Paper 32 prop:odd: 'The truncation inherits the same statement' (no grading at finite n_max).
         # The same paper measures one: gamma_GV = sigma_x (x) 1 anticommutes with D and commutes with
+        # [2026-09-28 scope note: this holds for the chirality-doubled MODEL; the TRUE CH window that
+        # converges is odd like the continuum (commutant of O = scalars, n_max <= 3, two routes). The
+        # retired wording is retired because P32 applied it to its model triple, which is even.]
         # pi(A) (chirality doubling), so the finite triple is EVEN. Odd holds for the continuum factor only.
         # Retired 2026-09-28, /qa trunk FULL.
         "pattern": r"truncation\s+inherits\s+the\s+same\s+statement|Z\}?_2\$?-grading\s*&\s*Absent\s+\(odd\)\s*&\s*Absent",

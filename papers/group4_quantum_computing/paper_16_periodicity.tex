@@ -36,12 +36,22 @@ hypersphere $S^{3N-1}$.  The angular kinetic energy is the
 $\mathrm{SO}(3N)$ Casimir operator with eigenvalue
 $\mufree = \nu(\nu + 3N - 2)/2$.  Fermionic antisymmetry restricts
 the spatial wavefunction to a specific $S_N$ irreducible
-representation---the conjugate of the spin Young diagram---whose
-first-column length $\lambda_1$ fixes the minimum angular quantum
-number $\nu = N - \lambda_1$.  For all atoms with ground-state spin
-$S < N/2$, the spatial irrep has $\lambda_1 = 2$, giving the
-universal result $\nu = N - 2$ and $\mufree = 2(N-2)(N-1)$.  This
-formula, combined with the structure of the $S_N$ irrep, yields a
+representation---the conjugate of the spin Young diagram
+$[n_\uparrow, n_\downarrow]$, a diagram with two columns of heights
+$n_\uparrow$ and $n_\downarrow$.  The minimum angular quantum number
+compatible with it is the Pauli filling count
+$\nu_{\min} = E(n_\uparrow) + E(n_\downarrow)$, where $E(m)$ sums the
+$m$ lowest one-particle polynomial degrees and degree $d$ holds
+$(d+1)(d+2)/2$ polynomials.  We prove this for all $N$ and $S$ from
+Schur--Weyl duality (it extends the known filled-shell rule of the
+hyperspherical Fermi-gas literature to open shells and arbitrary spin)
+and corroborate it by an exact character count for all spins through
+$N = 12$ and by brute force for $N = 3, 4$.  It depends on the spin,
+equals $N-2$ exactly when both columns lie in the first two oscillator
+shells ($1 \le n_\downarrow \le n_\uparrow \le 4$; at lowest spin, for
+$2 \le N \le 8$), and grows as $N^{4/3}$; the ground-state orbital
+angular momentum and parity can raise it further (lithium's ${}^2S$
+needs $\nu = 2$, not~1).  The $S_N$ irrep structure yields a
 classification of atoms into five types---A (trivial), B~(noble gas),
 C~(alkali), D~(alkaline earth), E~(open shell)---that recasts the periodic
 table's group structure in representation-theoretic language.  The periodic law
@@ -50,9 +60,10 @@ $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$ within each
 period.  This classification maps onto, rather than predicts, the
 known periodic table structure; its value lies in providing a
 unified group-theoretic framework for a pattern that is usually
-described empirically.  In the per-pair limit, $\mufree$
-contributes exactly~4 units of angular momentum per antisymmetric
-electron pair as $N \to \infty$.  We show that the topological
+described empirically.  (An earlier version of this paper claimed a
+universal $\nu = N-2$, $\mufree = 2(N-2)(N-1)$, and a limit of
+4~units per electron pair; all three are withdrawn,
+Sec.~\ref{sec:nu_gs}.)  We show that the topological
 structure ($\nu$, $\mufree$) is smooth through $Z = 1/\alpha \approx
 137$ and that the Dirac instability is a \emph{metric} singularity on
 $S^{3N-1}$, not a topological one.
@@ -88,11 +99,13 @@ on the spatial part of the $N$-electron wavefunction on the
 hypersphere $S^{3N-1}$.  The key results are:
 
 \begin{enumerate}
-  \item The ground-state angular quantum number is universally $\nu =
-    N - 2$ for atoms with spin $S < N/2$ (Sec.~\ref{sec:framework}).
-  \item The Pauli centrifugal cost $\mufree = 2(N-2)(N-1)$ grows
-    quadratically, contributing exactly~4 units per electron pair in
-    the large-$N$ limit (Sec.~\ref{sec:mu_formula}).
+  \item The minimum angular quantum number compatible with the spin
+    is the Pauli filling count $\nu_{\min} = E(n_\uparrow) +
+    E(n_\downarrow)$, which depends on $N$ and $S$ but not on $Z$
+    (Sec.~\ref{sec:framework}).
+  \item The Pauli centrifugal cost $\mufree = \nu_{\min}(\nu_{\min} +
+    3N-2)/2$ grows as $N^{8/3}$, faster than the number of electron
+    pairs (Sec.~\ref{sec:mu_formula}).
   \item The shape of the $S_N$ irrep classifies atoms into chemical
     types that recast the group structure of the periodic table in
     representation-theoretic language
@@ -129,6 +142,18 @@ important to distinguish them from the new contributions.
     factorizations of antisymmetric wavefunctions is textbook
     material~\cite{Weyl1946, FultonHarris1991}.
 
+  \item \textbf{Minimal hyperangular momentum of filled oscillator
+    shells.}  For $N$ non-interacting fermions in an isotropic
+    oscillator, the ground state is a hyperspherical harmonic whose
+    degree equals the total number of oscillator quanta; for filled
+    shells this is stated and proved as Theorem~1 of
+    Rittenhouse, Cavagnero, von Stecher and Greene~\cite{Rittenhouse2006},
+    together with the large-$N$ law $(3N)^{4/3}/4$.  The related nuclear
+    method of $K$ harmonics compares such hyperspherical states with the
+    translation-invariant shell model~\cite{SmirnovShitikova1977} (there
+    in $3(A-1)$ Jacobi coordinates); we have read only that review's
+    abstract and do not attribute the rule to it.
+
   \item \textbf{The Casimir eigenvalue formula.}  The expression
     $\mufree = \nu(\nu + 3N - 2)/2$ follows directly from the
     standard $\mathrm{SO}(3N)$ representation theory.
@@ -142,22 +167,23 @@ important to distinguish them from the new contributions.
 \subsection{New contributions}
 
 \begin{enumerate}
-  \item \textbf{The universal $\nu = N - 2$ result.}  Theorem~1 shows
-    that, for all ground-state atoms with $S < N/2$, the spatial
-    irrep has first-column length $\lambda_1 = 2$, yielding the
-    universal angular quantum number $\nu = N - 2$ and $\mufree =
-    2(N-2)(N-1)$.  This specific identification appears to be new.
+  \item \textbf{The minimum angular quantum number.}  The minimum
+    $\nu$ compatible with the spin is the Pauli filling count of
+    Eq.~(\ref{eq:nu_min}) (Theorem~2), together with the effect of the
+    ground-state $L$ and parity (Table~\ref{tab:nu_verified}).  The
+    filling count is the oscillator-quanta count of $N$ non-interacting
+    fermions in a three-dimensional isotropic harmonic oscillator; for
+    filled shells the rule is known~\cite{Rittenhouse2006}.  The
+    contribution here is the spin-resolved, open-shell statement as an
+    $S_N$-irrep result with a two-line Schur--Weyl proof, and its
+    tabulation for atomic ground states on $S^{3N-1}$.  (An earlier
+    version claimed a universal $\nu = N-2$ as new; that claim is
+    withdrawn.)
 
   \item \textbf{The five-type classification (A/B/C/D/E).}  The
     observation that the $S_N$ irrep shape naturally partitions atoms
     into types that map onto the periodic table's group structure
     provides a group-theoretic reformulation of the empirical pattern.
-
-  \item \textbf{The per-pair angular momentum limit.}  The result that
-    $\mufree / \binom{N}{2} \to 4$ as $N \to \infty$---each
-    antisymmetric electron pair contributes exactly~4 units of
-    angular momentum---connects the periodic pattern to a
-    quantitative angular momentum budget.
 
   \item \textbf{The Dirac instability as metric vs.\ topological
     singularity.}  The analysis showing that $\nu$, $\mufree$, and
@@ -222,46 +248,156 @@ where $n_\uparrow = N/2 + S$ and $n_\downarrow = N/2 - S$.  By
 Schur--Weyl duality~\cite{Weyl1946, FultonHarris1991}, the spatial
 irrep is the \emph{conjugate} (transposed) Young diagram.
 
-\noindent\textbf{Theorem 1} (Universal $\lambda_1$).
+\noindent\textbf{Lemma 1} (Two-column spatial diagram).
 \label{thm:lambda1}
-\textit{For any $N$-electron atom with ground-state spin $S < N/2$, the
-spatial Young diagram has first-column length $\lambda_1 = 2$.}
+\textit{For an $N$-electron state of total spin $S$, the spatial Young
+diagram has at most two columns, of heights $n_\uparrow = N/2 + S$ and
+$n_\downarrow = N/2 - S$.  Equivalently, it has $n_\downarrow$ rows of
+length~2 and $2S$ rows of length~1.}
 
 \medskip\noindent\textit{Proof.}
-The spin diagram has two rows: $[n_\uparrow, n_\downarrow]$ with
-$n_\downarrow \geq 1$ (since $S < N/2$ implies $n_\downarrow > 0$).
-The conjugate diagram has $n_\downarrow$ columns of height~2 and
-$n_\uparrow - n_\downarrow = 2S$ columns of height~1.  Therefore the
-first column has height $\lambda_1 = 2$, independent of $S$ (provided
-$S < N/2$). \hfill$\square$
+The spin diagram $[n_\uparrow, n_\downarrow]$ has at most two rows
+(spin-$\tfrac12$ Schur--Weyl duality); transposition exchanges rows and
+columns. \hfill$\square$
 
-\subsection{The ground-state angular quantum number}
+\noindent For $S < N/2$ the first \emph{row} has length~2; the diagram's
+first \emph{column} has height $n_\uparrow$, which does depend on $S$.
+For $S = N/2$ the spatial diagram is the single column $[1^N]$: the
+fully \emph{antisymmetric} irrep.
+% [retracted 2026-09-28: p16-nu-universal-n-minus-2] The former
+% Theorem 1 ("Universal lambda_1") stated that for S < N/2 the spatial
+% diagram has "first-column length lambda_1 = 2", and treated S = N/2 as
+% "lambda_1 = N, nu = 0 ... completely symmetric in space ... the
+% Laughlin-like state with no Pauli nodes". The S = N/2 spatial state is
+% fully antisymmetric and has nu_min = E(N) > 0.
+
+\subsection{The minimum angular quantum number}
 \label{sec:nu_gs}
 
-The minimum $\nu$ compatible with a given $S_N$ irrep is determined by
-the constraint that the hyperspherical harmonic $Y_\nu$ must transform
-in that irrep under particle permutations.  For the spatial irrep with
-first-column length $\lambda_1$, the minimum angular excitation
-is~\cite{Avery2000}:
+The minimum $\nu$ compatible with a given $S_N$ irrep is the lowest
+degree $K$ of a harmonic homogeneous polynomial on $\mathbb{R}^{3N}$
+(a hyperspherical harmonic of degree~$K$ on $S^{3N-1}$) whose $S_N$
+content contains that irrep.  Order the one-particle monomials on
+$\mathbb{R}^3$ by degree; degree $d$ holds $g_d = (d+1)(d+2)/2 = 1, 3,
+6, 10, \ldots$ of them, and let $E(m)$ be the sum of the degrees of the
+$m$ lowest, i.e.
 \begin{equation}
-  \nu_{\min} = N - \lambda_1.
+  E(m) = 3\binom{d+2}{4} + d\,\bigl(m - \tbinom{d+2}{3}\bigr),
+  \qquad \tbinom{d+2}{3} \le m < \tbinom{d+3}{3}.
+  \label{eq:E_of_m}
+\end{equation}
+
+\noindent\textbf{Theorem 2} (Pauli filling count).
+\textit{For every $N \ge 1$ and every total spin $S$, the lowest degree
+of a harmonic polynomial on $\mathbb{R}^{3N}$ carrying the spatial
+irrep of Lemma~\ref{thm:lambda1} is}
+\begin{equation}
+  \nu_{\min}(N, S) = E(n_\uparrow) + E(n_\downarrow).
   \label{eq:nu_min}
 \end{equation}
 
-By Theorem~\ref{thm:lambda1}, all atoms with $S < N/2$ have
-\begin{equation}
-  \boxed{\nu = N - 2}
-  \label{eq:nu_universal}
-\end{equation}
-as their ground-state angular quantum number.  This is a
-\emph{universal} result: it depends only on the electron count $N$,
-not on the nuclear charge $Z$, the spin $S$ (provided $S < N/2$), or
-any details of the electron configuration.
+\medskip\noindent\textit{Proof.}
+Let $W = \mathbb{C}[x,y,z] = \bigoplus_d W_d$ be the graded
+one-particle polynomial space, $\dim W_d = g_d$.  The polynomials on
+$\mathbb{R}^{3N}$ are $W^{\otimes N}$, with $S_N$ permuting the
+factors.  By Schur--Weyl duality (applied degree by degree to the
+finite-dimensional truncations)~\cite{FultonHarris1991}, the
+multiplicity space of the $S_N$ irrep $\lambda$ in $W^{\otimes N}$ is
+the Schur module $\mathbb{S}_\lambda W$, whose graded dimension is the
+Schur function $s_\lambda$ evaluated on the degree grading, i.e.\ a sum
+over semistandard tableaux $T$ of shape $\lambda$ filled with basis
+monomials of $W$ of $t^{\deg T}$, with $\deg T$ the total degree of the
+entries.  Every coefficient is a nonnegative count, so the lowest
+degree at which $\lambda$ occurs is $\min_T \deg T$, with no
+cancellation.  Entries strictly increase down each column, so a column
+of height $h$ holds $h$ distinct monomials and has degree at least
+$E(h)$; filling every column with the lowest monomials in order
+(rows then weakly increase) attains this bound.  For the two-column
+spatial diagram of Lemma~\ref{thm:lambda1}, of heights $n_\uparrow$
+and $n_\downarrow$, the lowest degree is therefore
+$E(n_\uparrow) + E(n_\downarrow)$.  Finally, polynomials of degree $K$
+decompose as harmonics of degree $K$ plus $\bigl(\sum_i r_i^2\bigr)$
+times polynomials of degree $K-2$, and $\sum_i r_i^2$ is
+$S_N$-invariant; since $\lambda$ is absent in degree $K-2$ at the
+lowest degree $K$, it occurs there among the harmonics.
+\hfill$\square$
 
-The sole exception is the maximally polarized state $S = N/2$ (all
-spins parallel), which has $\lambda_1 = N$ and $\nu = 0$.  This state
-is completely symmetric in space and carries zero angular momentum---it
-is the Laughlin-like state with no Pauli nodes.
+\noindent Equivalently, $\nu_{\min}$ is the minimum number of oscillator
+quanta of $N$ non-interacting spin-$\tfrac12$ fermions of spin $S$ in a
+three-dimensional isotropic oscillator, filled separately for the two
+spin columns; for filled shells this is Theorem~1 of
+Ref.~\cite{Rittenhouse2006}.  \emph{Evidence tier: symbolic proof
+(above), corroborated computationally}: (A)~the exact character
+generating function $(1-t^2)\,\frac{1}{N!}\sum_{\sigma}
+\chi_{\tilde\lambda}(\sigma) \prod_{c}(1-t^{|c|})^{-3}$ (product over
+the cycles of $\sigma$; characters by Murnaghan--Nakayama) reproduces
+Eq.~(\ref{eq:nu_min}) for every spin through $N = 12$; (B)~the rank of
+the Young symmetrizer on explicit monomials, an independent route with
+no characters, agrees for $N = 3, 4$.  Backing:
+\texttt{tests/test\_paper16\_nu\_min.py}.
+
+Three consequences.  (i)~$\nu_{\min}$ depends on $N$ and $S$ but not
+on $Z$.  (ii)~Since $E(m) = m-1$ exactly for $1 \le m \le 4$ (the first
+two shells) and $E(m) > m-1$ for $m = 0$ and $m \ge 5$, $\nu_{\min} =
+N-2$ holds exactly when $1 \le n_\downarrow \le n_\uparrow \le 4$.  At
+the lowest spin that is $2 \le N \le 8$; it also covers higher spins
+in that range (e.g.\ carbon's ${}^3P$, $N = 6$, $S = 1$).  From $N = 9$
+at lowest spin each electron in the third shell costs two units, in
+the fourth three, and $\nu_{\min} \simeq (3N)^{4/3}/4$ at large
+$N$~\cite{Rittenhouse2006}.  (iii)~Raising the spin at fixed $N$ never
+lowers $\nu_{\min}$ and generally raises it (nitrogen: 5, 6, 7, 9 for
+$S = \tfrac12, \tfrac32, \tfrac52, \tfrac72$).  \textit{Proof of
+(iii):} $E(m+1) - E(m)$ is the degree of the $(m+1)$-th monomial, which
+is nondecreasing in $m$ ($E$ is convex).  Raising $S$ by one moves one
+box from the $n_\downarrow$ column to the $n_\uparrow$ column, changing
+$\nu_{\min}$ by $[E(n_\uparrow + 1) - E(n_\uparrow)] -
+[E(n_\downarrow) - E(n_\downarrow - 1)] \ge 0$, because $n_\uparrow + 1
+> n_\downarrow$.
+
+The $S_N$ count ignores the ground state's orbital angular momentum
+$L$ and parity.  Imposing them (replace $(1-t^c)^{-3}$ by
+$\det(1 - t^c g^c)^{-1}$ and average over $g \in \mathrm{O}(3)$) can
+raise $\nu_{\min}$ further: the degree-1 harmonics carrying lithium's
+$[2,1]$ irrep are the coordinates themselves, $L = 1$ and odd parity
+(${}^2P$), so the ${}^2S$ ground state needs $\nu = 2$.
+Table~\ref{tab:nu_verified} lists both counts for $N = 2$--$12$.
+
+\begin{table}[h]
+\centering
+\caption{Minimum angular quantum number for the Hund's-rule ground
+terms, $N = 2$--$12$.  $\nu_{\min}^{S_N}$: spin (spatial irrep) only,
+Eq.~(\ref{eq:nu_min}); $\nu_{\min}^{L,\pi}$: additionally the ground
+term's $L$ and parity (exact $S_N \times \mathrm{O}(3)$ character
+count).  The last column is the withdrawn rule $N-2$.}
+\label{tab:nu_verified}
+\begin{tabular}{llccc}
+\toprule
+Atom & Term & $\nu_{\min}^{S_N}$ & $\nu_{\min}^{L,\pi}$ & $N-2$ \\
+\midrule
+He & ${}^1S^e$ &  0 &  0 &  0 \\
+Li & ${}^2S^e$ &  1 &  2 &  1 \\
+Be & ${}^1S^e$ &  2 &  2 &  2 \\
+B  & ${}^2P^o$ &  3 &  3 &  3 \\
+C  & ${}^3P^e$ &  4 &  4 &  4 \\
+N  & ${}^4S^o$ &  6 &  7 &  5 \\
+O  & ${}^3P^e$ &  7 &  8 &  6 \\
+F  & ${}^2P^o$ &  8 &  9 &  7 \\
+Ne & ${}^1S^e$ & 10 & 10 &  8 \\
+Na & ${}^2S^e$ & 12 & 12 &  9 \\
+Mg & ${}^1S^e$ & 14 & 14 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% [retracted 2026-09-28: p16-nu-universal-n-minus-2] Former text:
+% "For the spatial irrep with first-column length lambda_1, the minimum
+% angular excitation is [Avery2000]: nu_min = N - lambda_1. By Theorem 1,
+% all atoms with S < N/2 have \boxed{nu = N - 2} as their ground-state
+% angular quantum number. This is a universal result: it depends only on
+% the electron count N, not on the nuclear charge Z, the spin S (provided
+% S < N/2), or any details of the electron configuration."
+% The Avery attribution is also withdrawn: the rule N - lambda_1 is false
+% for N >= 9 (and spin-dependent from N = 7), so it cannot be sourced.
 
 %% ========================================================================
 %% III. THE mu_free FORMULA
@@ -270,17 +406,23 @@ is the Laughlin-like state with no Pauli nodes.
 \section{The $\mufree$ Formula}
 \label{sec:mu_formula}
 
-Substituting $\nu = N - 2$ into Eq.~(\ref{eq:casimir}):
-\begin{align}
-  \mufree &= \frac{\nu(\nu + 3N - 2)}{2}
-           = \frac{(N-2)(N - 2 + 3N - 2)}{2} \notag \\
-          &= \frac{(N-2)(4N-4)}{2}
-           = \boxed{2(N-2)(N-1)}.
+Substituting $\nu_{\min}$ of Eq.~(\ref{eq:nu_min}) into
+Eq.~(\ref{eq:casimir}):
+\begin{equation}
+  \mufree = \frac{\nu_{\min}(\nu_{\min} + 3N - 2)}{2}.
   \label{eq:mu_formula}
-\end{align}
+\end{equation}
 
 This is the \emph{Pauli centrifugal cost}: the minimum angular kinetic
-energy imposed by fermionic antisymmetry on $S^{3N-1}$.
+energy imposed by fermionic antisymmetry (at spin $S$) on $S^{3N-1}$.
+It reduces to $2(N-2)(N-1)$ only where $\nu_{\min} = N-2$, i.e.\ when
+$1 \le n_\downarrow \le n_\uparrow \le 4$ (at lowest spin,
+$2 \le N \le 8$).
+% [retracted 2026-09-28: p16-nu-universal-n-minus-2] Former boxed result
+% mu_free = 2(N-2)(N-1) for all S < N/2, with limits mu_free/N^2 -> 2,
+% mu_free/binom(N,2) -> 4 ("each antisymmetric electron pair contributes
+% exactly 4 units of angular momentum", eq:per_pair), and
+% nu/(3N-2) -> 1/3 "monotonically from below".
 
 \subsection{Asymptotic behavior}
 \label{sec:asymptotic}
@@ -289,24 +431,16 @@ Several limits of Eq.~(\ref{eq:mu_formula}) are physically
 informative:
 
 \begin{enumerate}
-  \item \textbf{Per-electron scaling.}  $\mufree / N^2 = 2 - 6/N +
-    4/N^2 \to 2$ as $N \to \infty$.
+  \item \textbf{Growth.}  With $\nu_{\min} \simeq (3N)^{4/3}/4$,
+    $\mufree \simeq \nu_{\min}^2/2$ grows as $N^{8/3}$: faster than
+    the $N^2$ of the number of electron pairs.  The Pauli cost per
+    pair, $\mufree/\binom{N}{2}$, therefore grows without bound (as
+    $N^{2/3}$); it does not approach a constant.
 
-  \item \textbf{Per-pair scaling.}  The number of electron pairs is
-    $\binom{N}{2} = N(N-1)/2$.  The Pauli cost per pair is
-    \begin{equation}
-      \frac{\mufree}{\binom{N}{2}}
-        = \frac{4(N-2)}{N} \longrightarrow 4
-        \quad (N \to \infty).
-      \label{eq:per_pair}
-    \end{equation}
-    Each antisymmetric electron pair contributes exactly~4 units
-    of angular momentum to the ground-state Casimir.
-
-  \item \textbf{Excitation fraction.}  The ratio $\nu/(3N-2) =
-    (N-2)/(3N-2) \to 1/3$ monotonically from below.  The ground state
-    always sits at approximately one-third of the natural angular
-    scale of the sphere, regardless of $N$.
+  \item \textbf{Excitation fraction.}  The ratio $\nu_{\min}/(3N-2)$
+    also grows as $N^{1/3}$ (0.50 at Ar, 1.30 at Og); the ground
+    state does not sit at a fixed fraction of the sphere's natural
+    angular scale.
 
   \item \textbf{Fractional ionization cost.}  Removing one electron
     changes the sphere dimension by $3/(3N-1) \to 0$.  For heavy
@@ -319,28 +453,32 @@ the periodic table.
 
 \begin{table}[h]
 \centering
-\caption{Ground-state hyperspherical parameters for neutral atoms
-($S < N/2$).  $\nu = N-2$, $\mufree = 2(N-2)(N-1)$, and the asymptotic
-ratios $\mufree/N^2 \to 2$, $\mufree/\binom{N}{2} \to 4$,
-$\nu/(3N-2) \to 1/3$.}
+\caption{Hyperspherical parameters for neutral atoms at the
+Hund's-rule ground spin, $S_N$ (spin) constraint only:
+$\nu_{\min}$ from Eq.~(\ref{eq:nu_min}), $\mufree$ from
+Eq.~(\ref{eq:mu_formula}).  For $N \le 12$ the $\nu_{\min}$ values are
+exact character counts (Table~\ref{tab:nu_verified}); for $N \ge 18$
+they are Eq.~(\ref{eq:nu_min}) with $S = 0$.  Imposing the ground
+term's $L$ and parity can raise $\nu_{\min}$ (Li: 2, $\mufree = 9$;
+N: 7, $\mufree = 91$).}
 \label{tab:mu_values}
 \begin{tabular}{lrrrrrc}
 \toprule
-Atom & $N$ & $S^{3N-1}$ & $\nu$ & $\mufree$ & $\mufree/N^2$ & Type \\
+Atom & $N$ & $S^{3N-1}$ & $\nu_{\min}$ & $\mufree$ & $\mufree/N^2$ & Type \\
 \midrule
 H     &   1 & $S^2$    &   0 &       0 & 0.00 & A \\
 He    &   2 & $S^5$    &   0 &       0 & 0.00 & B \\
 Li    &   3 & $S^8$    &   1 &       4 & 0.44 & C \\
 Be    &   4 & $S^{11}$ &   2 &      12 & 0.75 & D \\
-N     &   7 & $S^{20}$ &   5 &      60 & 1.22 & E \\
-Ne    &  10 & $S^{29}$ &   8 &     144 & 1.44 & B \\
-Na    &  11 & $S^{32}$ &   9 &     180 & 1.49 & C \\
-Mg    &  12 & $S^{35}$ &  10 &     220 & 1.53 & D \\
-Ar    &  18 & $S^{53}$ &  16 &     544 & 1.68 & B \\
-Kr    &  36 & $S^{107}$&  34 &   2380 & 1.84 & B \\
-Xe    &  54 & $S^{161}$&  52 &   5512 & 1.89 & B \\
-Rn    &  86 & $S^{257}$&  84 &  14280 & 1.93 & B \\
-Og    & 118 & $S^{353}$& 116 &  27144 & 1.95 & B \\
+N     &   7 & $S^{20}$ &   6 &      75 & 1.53 & E \\
+Ne    &  10 & $S^{29}$ &  10 &     190 & 1.90 & B \\
+Na    &  11 & $S^{32}$ &  12 &     258 & 2.13 & C \\
+Mg    &  12 & $S^{35}$ &  14 &     336 & 2.33 & D \\
+Ar    &  18 & $S^{53}$ &  26 &    1014 & 3.13 & B \\
+Kr    &  36 & $S^{107}$&  78 &    7176 & 5.54 & B \\
+Xe    &  54 & $S^{161}$& 146 &   22338 & 7.66 & B \\
+Rn    &  86 & $S^{257}$& 290 &   79170 & 10.7 & B \\
+Og    & 118 & $S^{353}$& 456 &  184224 & 13.2 & B \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -352,9 +490,9 @@ Og    & 118 & $S^{353}$& 116 &  27144 & 1.95 & B \\
 \section{Structure Type Classification}
 \label{sec:classification}
 
-While $\nu = N - 2$ and $\mufree = 2(N-2)(N-1)$ are universal, the
-\emph{shape} of the $S_N$ irrep varies with the electron
-configuration.  This shape encodes the internal structure of the
+Beyond the numbers $\nu_{\min}$ and $\mufree$, which depend only on
+$N$ and $S$, the \emph{shape} of the $S_N$ irrep varies with the
+electron configuration.  This shape encodes the internal structure of the
 atom---how the $N$~electrons partition into core and valence.
 
 We define five structure types based on the spatial Young diagram:
@@ -362,7 +500,7 @@ We define five structure types based on the spatial Young diagram:
 \subsection{Type A: Trivial ($N = 1$)}
 
 The hydrogen atom has a single electron.  The trivial irrep $[1]$ of
-$S_1$ gives $\lambda_1 = 1$, $\nu = 0$, $\mufree = 0$.  There is no
+$S_1$ gives $\nu_{\min} = 0$, $\mufree = 0$.  There is no
 Pauli constraint.  The wavefunction lives on $S^2$ (a single
 electron's angular space).
 
@@ -496,8 +634,8 @@ and structure types.  The 10-electron series
 \begin{equation}
   \text{Ne},\ \text{Na}^+,\ \text{Mg}^{2+},\ \text{Al}^{3+},\ \ldots
 \end{equation}
-all have the Type~B spatial irrep $[2,2,2,2,2]$ with $\nu = 8$ and
-$\mufree = 144$.  Their chemistry differs only through the nuclear
+all have the Type~B spatial irrep $[2,2,2,2,2]$ with $\nu_{\min} = 10$
+and $\mufree = 190$.  Their chemistry differs only through the nuclear
 charge~$Z$, which enters at Level~2.  This cleanly separates
 \emph{topology} (same for the series) from \emph{potential} (varies
 with $Z$).
@@ -528,12 +666,14 @@ geometrically less disruptive than removing one from $S^5$ (He).
 The preceding analysis reveals a clean two-level separation:
 
 \begin{itemize}
-  \item \textbf{Level 1 (Topological).}  The quantities $\nu$,
-    $\mufree$, the $S_N$ irrep, and the structure type depend only
-    on the electron count $N$ and the total spin $S$.  They are
-    independent of $Z$, the orbital angular momenta, and all
-    details of the electron--electron interaction.  They are
-    \emph{universal}.
+  \item \textbf{Level 1 (Topological).}  The quantities
+    $\nu_{\min}$ and $\mufree$ in their $S_N$-only form
+    (Eq.~(\ref{eq:nu_min})), the $S_N$ irrep, and the structure type
+    depend only on the electron count $N$ and the total spin $S$.
+    They are independent of $Z$ and of all details of the
+    electron--electron interaction.  (Adding the ground term's $L$
+    and parity, Table~\ref{tab:nu_verified}, is still
+    $Z$-independent but no longer a function of $N$ and $S$ alone.)
 
   \item \textbf{Level 2 (Perturbative/Metric).}  The binding energy,
     ionization energy, electron configuration, and Hund's rules all
@@ -543,11 +683,16 @@ The preceding analysis reveals a clean two-level separation:
 \end{itemize}
 
 An important consequence: \emph{Hund's first rule is not a topological
-effect.}  Since $\lambda_1 = 2$ for all spatial irreps with $S < N/2$,
-the angular quantum number $\nu = N - 2$ is independent of the spin
-value.  The preference for high-spin ground states (Hund's first rule)
-enters through the perturbative Coulomb and exchange integrals at
-Level~2, not through a reduction of $\nu$ at Level~1.
+effect.}  Level~1 does see the spin, but in the \emph{opposite}
+direction: raising $S$ at fixed $N$ never lowers $\nu_{\min}$ and
+generally raises it (Eq.~(\ref{eq:nu_min}); nitrogen's ${}^4S$ has
+$\nu_{\min} = 6$ against~5 for a doublet).  The preference for
+high-spin ground states therefore enters through the Coulomb exchange
+integrals at Level~2, which must overcome a larger Level-1 angular
+cost.
+% [retracted 2026-09-28: p16-nu-universal-n-minus-2] Former text: "Since
+% lambda_1 = 2 for all spatial irreps with S < N/2, the angular quantum
+% number nu = N - 2 is independent of the spin value."
 
 \subsection{The Dirac limit as metric singularity}
 \label{sec:dirac_limit}
@@ -562,10 +707,15 @@ nucleus):
 \end{equation}
 Does this ``Dirac dive'' have a topological signature on $S^{3N-1}$?
 
-At $N = 137$: $\nu = 135$, $\mufree = 36{,}720$, and $\nu/(3N-2) =
-0.3301$.  All formulas are perfectly smooth.  The excitation fraction
-approaches $1/3$ from below with no singularity, no phase transition,
-and no special structure at $N = 137$.
+At $N = 137$ (lowest spin, $S = \tfrac12$): $\nu_{\min} = 570$ and
+$\mufree = 279{,}015$ from Eqs.~(\ref{eq:nu_min})
+and~(\ref{eq:mu_formula}).  These are integers given by a
+piecewise-linear filling formula in $N$ whose only structure is the
+oscillator shell closures ($N = 2, 8, 20, 40, 70, 112, 168, \ldots$ for
+the singlet); nothing happens at $N = 137$.
+% [retracted 2026-09-28: p16-nu-universal-n-minus-2] Former values at
+% N = 137: nu = 135, mu_free = 36,720, nu/(3N-2) = 0.3301 "approaches
+% 1/3 from below".
 
 The Dirac instability is instead a \emph{metric} effect.  The
 non-relativistic Fock projection yields the round metric on $S^3$.
@@ -615,8 +765,8 @@ non-relativistic $S_N$ representation theory:
   \item \textbf{Dirac instability, finite nucleus} ($Z \sim 170$):
     spontaneous $e^+e^-$ pair creation from the vacuum.
 \end{enumerate}
-The SO$(3N)$ topology predicts no limit: $\mufree = 2(N-2)(N-1)$ is
-defined for all $N$.  The physical end of the periodic table is set by
+The SO$(3N)$ topology predicts no limit: $\mufree$ of
+Eq.~(\ref{eq:mu_formula}) is defined for all $N$.  The physical end of the periodic table is set by
 nuclear physics ($Z \lesssim 130$), not by electronic topology.
 
 %% ========================================================================
@@ -643,17 +793,25 @@ The transition metals (Type~E) have partially filled $d$-shells with
 ground-state spins $S \geq 1$.  The ``anomalous'' configurations of
 Cr~($[\mathrm{Ar}]\,3d^5\,4s^1$, $S = 3$) and
 Cu~($[\mathrm{Ar}]\,3d^{10}\,4s^1$, $S = 1/2$) are often cited as
-evidence for exchange stabilization.  In the present framework, both
-the ``expected'' and ``anomalous'' configurations of Cr have
-$\nu = 22$ and $\mufree = 1012$---the topological Level~1 cannot
-distinguish them.  The anomaly lives entirely at Level~2, in the
-exchange pair count: the half-filled $3d^5\,4s^1$ configuration has
-141~exchange pairs versus 136 for $3d^4\,4s^2$, a difference of~5
-that tips the energetic balance.
+evidence for exchange stabilization.  In the present framework
+Level~1 sees only $N$ and $S$: the ``expected'' $3d^4\,4s^2$ ($S = 2$)
+has $\nu_{\min} = 42$ and the ``anomalous'' $3d^5\,4s^1$ ($S = 3$) has
+$\nu_{\min} = 43$ (Eq.~(\ref{eq:nu_min})), so the topological cost
+\emph{disfavors} the observed high-spin configuration.  The anomaly
+is decided at Level~2, by exchange: the half-filled
+$3d^5\,4s^1$ configuration has 141~exchange pairs versus 136 for
+$3d^4\,4s^2$, a difference of~5.  The pair count itself depends only
+on $(n_\uparrow, n_\downarrow)$; what is Level~2 is the exchange
+energy each pair contributes, which tips the energetic balance
+against the Level-1 cost.
+% [retracted 2026-09-28: p16-nu-universal-n-minus-2] Former text: "both
+% the expected and anomalous configurations of Cr have nu = 22 and
+% mu_free = 1012 -- the topological Level 1 cannot distinguish them."
 
 This confirms that Hund's first rule is a \emph{perturbative} effect
 (exchange stabilization in the Coulomb interaction) rather than a
-\emph{topological} one (angular momentum reduction on $S^{3N-1}$).
+\emph{topological} one: the Level-1 angular cost on $S^{3N-1}$ rises,
+not falls, with spin.
 More broadly, the actual chemistry---which electron configuration wins
 energetically---is determined by exchange, correlation, and
 orbital-dependent Coulomb effects that operate below the resolution of
@@ -710,9 +868,15 @@ theory of fermionic wavefunctions on the hypersphere $S^{3N-1}$.  The
 key results are:
 
 \begin{enumerate}
-  \item The ground-state angular quantum number $\nu = N - 2$ is
-    universal for $S < N/2$, yielding the Pauli centrifugal cost
-    $\mufree = 2(N-2)(N-1)$.
+  \item The minimum angular quantum number compatible with spin $S$
+    is the Pauli filling count $\nu_{\min} = E(n_\uparrow) +
+    E(n_\downarrow)$ (Theorem~2, proved for all $N$ and $S$ by
+    Schur--Weyl duality, extending the known filled-shell
+    rule~\cite{Rittenhouse2006}), which equals $N-2$ exactly when
+    $1 \le n_\downarrow \le n_\uparrow \le 4$ (at lowest spin,
+    $2 \le N \le 8$); the ground
+    term's $L$ and parity can raise it (Li ${}^2S$: 2).  The Pauli
+    centrifugal cost $\mufree$ grows as $N^{8/3}$.
 
   \item The shape of the $S_N$ spatial irrep classifies atoms into
     types (A/B/C/D/E) that recast the chemical group structure in
@@ -723,7 +887,8 @@ key results are:
     \mathrm{B}$ within each period.
 
   \item Hund's first rule and configuration anomalies (Cr, Cu) are
-    Level~2 perturbative effects, invisible to the Level~1 topology.
+    Level~2 perturbative effects; the Level~1 cost rises with spin,
+    so exchange must overcome it.
 
   \item The Dirac instability at $Z\alpha \to 1$ is a metric
     singularity on $S^{3N-1}$, not a topological one; the
@@ -770,6 +935,16 @@ V.~Fock,
 J.~Avery,
 \emph{Hyperspherical Harmonics and Generalized Sturmians}
 (Kluwer, Dordrecht, 2000).
+
+\bibitem{Rittenhouse2006}
+S.~T.~Rittenhouse, M.~J.~Cavagnero, J.~von Stecher, and C.~H.~Greene,
+``Hyperspherical description of the degenerate Fermi gas: $s$-wave
+interactions,'' \emph{Phys.\ Rev.\ A} \textbf{74}, 053624 (2006),
+arXiv:cond-mat/0607340.
+
+\bibitem{SmirnovShitikova1977}
+Yu.~F.~Smirnov and K.~V.~Shitikova, ``Method of $K$ harmonics and the
+shell model,'' \emph{Sov.\ J.\ Part.\ Nucl.} \textbf{8}, 344 (1977).
 
 \bibitem{Weyl1946}
 H.~Weyl,

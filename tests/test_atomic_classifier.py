@@ -117,34 +117,24 @@ class TestQuantumNumbers:
     def test_period(self, Z: int, period: int) -> None:
         assert classify_atom(Z).period == period
 
+    # nu = lowest-spin Pauli-filling count (Paper 16 eq:nu_min, corrected
+    # 2026-09-28): E(ceil(N/2)) + E(floor(N/2)), degree d holding (d+1)(d+2)/2
+    # functions. Values computed BY HAND, not from the code. The retracted
+    # 'universal nu = N-2' agrees only through N = 8; N = 9, 10 reject it.
     @pytest.mark.parametrize("Z, nu", [
-        (1, 0),   # N=1, nu = max(1-2, 0) = 0
-        (2, 0),   # N=2, nu = max(2-2, 0) = 0
-        (3, 1),   # N=3, nu = 1
-        (4, 2),   # N=4, nu = 2
-        (5, 3),
-        (6, 4),
-        (7, 5),
-        (8, 6),
-        (9, 7),
-        (10, 8),
+        (1, 0), (2, 0), (3, 1), (4, 2), (5, 3), (6, 4), (7, 5), (8, 6),
+        (9, 8),    # F: E(5)+E(4) = 5+3   (N-2 would give 7)
+        (10, 10),  # Ne: E(5)+E(5) = 10   (N-2 would give 8)
     ])
     def test_nu(self, Z: int, nu: int) -> None:
         assert classify_atom(Z).nu == nu
 
-    # mu_free = SO(3N) Casimir nu(nu+3N-2)/2 = 2(N-2)(N-1) for nu=N-2
-    # (Paper 16 eq:mu_formula); N=Z for neutral atoms.
+    # mu_free = SO(3N) Casimir nu(nu+3N-2)/2 (Paper 16 eq:mu_formula); N=Z.
     @pytest.mark.parametrize("Z, mu_free", [
-        (1, 0.0),
-        (2, 0.0),
-        (3, 4.0),     # 2*(1)(2)
-        (4, 12.0),    # 2*(2)(3)
-        (5, 24.0),    # 2*(3)(4)
-        (6, 40.0),    # 2*(4)(5)
-        (7, 60.0),    # 2*(5)(6)
-        (8, 84.0),    # 2*(6)(7)
-        (9, 112.0),   # 2*(7)(8)
-        (10, 144.0),  # 2*(8)(9)
+        (1, 0.0), (2, 0.0), (3, 4.0), (4, 12.0), (5, 24.0), (6, 40.0),
+        (7, 60.0), (8, 84.0),
+        (9, 132.0),   # 8*33/2   (retracted 2(N-2)(N-1) gave 112)
+        (10, 190.0),  # 10*38/2  (retracted gave 144)
     ])
     def test_mu_free(self, Z: int, mu_free: float) -> None:
         assert classify_atom(Z).mu_free == pytest.approx(mu_free)

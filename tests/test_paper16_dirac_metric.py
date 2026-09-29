@@ -14,9 +14,22 @@ import math
 ALPHA = 1.0 / 137.036  # fine-structure constant (paper §VI uses Z*alpha)
 
 
+def _nu_min(N: int) -> int:
+    """Paper 16 eq:nu_min (corrected 2026-09-28): lowest-spin Pauli filling,
+    E(ceil(N/2)) + E(floor(N/2)), degree d holding (d+1)(d+2)/2 functions."""
+    def e(m: int) -> int:
+        tot, d = 0, 0
+        while m > 0:
+            k = min(m, (d + 1) * (d + 2) // 2)
+            tot, m, d = tot + k * d, m - k, d + 1
+        return tot
+    return e((N + 1) // 2) + e(N // 2)
+
+
 def _mu_free(N: int) -> int:
-    """Paper 16 eq:mu_formula: SO(3N) Casimir at nu = N-2."""
-    return 2 * (N - 2) * (N - 1)
+    """Paper 16 eq:mu_formula: SO(3N) Casimir nu(nu+3N-2)/2 at nu = nu_min."""
+    nu = _nu_min(N)
+    return nu * (nu + 3 * N - 2) // 2
 
 
 def _delta_1s(Z: int) -> float:
@@ -27,11 +40,11 @@ def _delta_1s(Z: int) -> float:
 
 def test_mu_free_smooth_through_Z137() -> None:
     """Quantum-number side is smooth at N=137 (no singularity): the integer formula
-    gives nu=135, mu_free=36720, nu/(3N-2)=0.3301 (paper §VI), finite and exact."""
+    gives nu=570, mu_free=279,015 (paper §VI, corrected 2026-09-28), finite and exact.
+    Rejects the retracted nu = N-2 = 135 / mu_free = 36,720."""
     N = 137
-    assert N - 2 == 135                      # nu
-    assert _mu_free(N) == 36720              # paper §VI value (2*135*136)
-    assert abs((N - 2) / (3 * N - 2) - 0.3301) < 1e-4  # excitation fraction -> 1/3 from below
+    assert _nu_min(N) == 570                 # E(69) + E(68) = 288 + 282
+    assert _mu_free(N) == 279015             # 570 * 979 / 2
 
 
 def test_mu_free_monotone_finite_across_Z137() -> None:
@@ -58,4 +71,4 @@ def test_metric_diverges_while_topology_does_not() -> None:
     quantum numbers (mu_free) stay finite/integer -- metric singularity, not topological."""
     assert _delta_1s(137) > _delta_1s(79) > _delta_1s(29)   # metric blows up
     assert _delta_1s(137) > 1.0e3                           # ...and by MAGNITUDE (local self-sufficiency)
-    assert _mu_free(137) == 36720 and isinstance(_mu_free(137), int)  # topology untouched
+    assert _mu_free(137) == 279015 and isinstance(_mu_free(137), int)  # topology untouched

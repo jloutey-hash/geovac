@@ -184,8 +184,10 @@ and 2024. Hekkelman~\cite{hekkelman2022} treated the circle $S^1$ using
 Toeplitz/Fej\'er reconstruction. Leimbach and
 van~Suijlekom~\cite{leimbach_vs2024} extended the analysis to flat
 tori $T^d$, proving
-state-space Gromov--Hausdorff convergence of truncated tori with
-explicit rate $O(1/\Lammax)$, using the standard Schur multiplier
+state-space Gromov--Hausdorff convergence of truncated tori (they
+state no explicit rate; an earlier version of this paper attributed
+an $O(1/\Lammax)$ rate to them, withdrawn 2026-09-28), using the
+standard Schur multiplier
 characterisation of the abelian-compact-group Fej\'er mechanism. A
 complementary K\"ahler line of
 work~\cite{rieffel2023, hawkins2000} treats Berezin--Toeplitz
@@ -1058,9 +1060,12 @@ form and measured against the $\SU(2)$ value:\
 $\sqrt{\dim V_\pi}$ Plancherel weighting in
 Definition~\ref{def:central_fejer_general} produces a Ces\`aro-$2$-style
 spectral kernel rather than the unweighted Ces\`aro-$1$ Dirichlet kernel
-of~\cite{leimbach_vs2024}, which is what gives the $\log \Lammax /
-\Lammax$ rate (rather than the $1/\Lammax$ rate of the abelian torus
-in~\cite{leimbach_vs2024}). \textbf{[OBSERVATION]} Both constants are
+of~\cite{leimbach_vs2024}.  (An earlier version said this weighting
+is what gives the $\log \Lammax / \Lammax$ rate, ``rather than the
+$1/\Lammax$ rate of the abelian torus'' in~\cite{leimbach_vs2024};
+that reference states no such rate, and the logarithm is already
+carried by the circle's Fej\'er kernel, Paper~38
+Remark~rem:circle\_fejer, so the contrast is withdrawn, 2026-09-28.) \textbf{[OBSERVATION]} Both constants are
 of the form $2\Vol(\text{base})/\Vol(\text{group})$
 ($2\Vol(S^0)/\Vol(S^1) = 2/\pi$; $2\Vol(S^2)/\Vol(\SU(2)) = 4/\pi$);
 the universality across the semisimple class is the statement that

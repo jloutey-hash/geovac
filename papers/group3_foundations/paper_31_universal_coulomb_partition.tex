@@ -895,14 +895,19 @@ that are not Coulomb-specific because they live in the
 Concretely, deformations of the form
 \[
 D \mapsto D + c \cdot \mathbb{1}_{\mathcal{H}},
-\quad c \in \mathbb{C},
+\quad c \in \mathbb{R},
 \]
-or, equivalently, additive shifts of the squared spectrum
-$D^2 \mapsto D^2 + c \cdot \mathbb{1}$, leave every Connes axiom
-unchanged: bounded commutators $[D + c\mathbb{1}, a] = [D, a]$,
-the order-one condition, the real structure $J$, the
-$\gamma$-grading, and the $\mathrm{KO}$-dimension are all
-preserved.  Such deformations are
+or additive shifts of the squared spectrum
+$D^2 \mapsto D^2 + c \cdot \mathbb{1}$, leave the metric data
+unchanged: self-adjointness (for real $c$), the bounded commutators
+$[D + c\mathbb{1}, a] = [D, a]$, and the order-one condition are all
+preserved.  They do \emph{not} preserve every Connes axiom.  An even
+grading is broken, since $\{\gamma, D + c\mathbb{1}\} = 2c\,\gamma
+\neq 0$ for $c \neq 0$ (relevant to Paper~32's chirality-doubled model
+truncation, which is even;\ the true Camporesi--Higuchi window is odd);
+and because $J$ is antilinear, $J c = \bar c J$, so the real-structure
+relation $J D = \varepsilon D J$ survives the shift only for real $c$
+and only when $\varepsilon = +1$.  Such deformations are
 \emph{formally $D$-touching but functionally universal}: they
 support the introduction of a physical scalar parameter without
 engaging any potential-specific structure.

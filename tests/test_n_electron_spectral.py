@@ -101,7 +101,7 @@ class TestSO12Spectrum:
             assert _so_d_degeneracy(12, nu) > _so_d_degeneracy(6, nu)
 
     def test_so12_minimum_nu_singlet(self):
-        """Singlet [2,2] has nu_min = 2 (from Paper 16: N - lambda_1 = 4 - 2)."""
+        """Singlet [2,2] has nu_min = 2 (Paper 16 eq:nu_min: E(2) + E(2) = 1 + 1)."""
         # The lowest allowed SO(12) eigenvalue for singlet
         mu_min = casimir_eigenvalue(4, 2)
         assert mu_min == 12.0

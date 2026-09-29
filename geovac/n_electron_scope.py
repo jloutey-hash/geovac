@@ -393,7 +393,7 @@ def so12_casimir_spectrum(nu_max: int = 10) -> List[Dict]:
     mu_free(nu) = nu * (nu + 10) / 2
 
     The ground state for S=0 (singlet, [2,2] spatial irrep) has
-    nu_min = N - lambda_1 = 4 - 2 = 2 (from Paper 16).
+    nu_min = E(2)+E(2) = 1+1 = 2 (Paper 16 Pauli filling).
 
     So the lowest allowed free eigenvalue is:
     mu_free(2) = 2 * 12 / 2 = 12
@@ -640,7 +640,7 @@ def pauli_exclusion_analysis() -> Dict[str, str]:
             'larger angular Hilbert space.'
         ),
         'minimum_nu': (
-            'From Paper 16: nu_min = N - lambda_1 = 4 - 2 = 2 for singlet [2,2]. '
+            'From Paper 16 (Pauli filling): nu_min = E(2)+E(2) = 1+1 = 2 for singlet [2,2]. '
             'The mu_free = 2*(2+10)/2 = 12 provides a "Pauli centrifugal barrier" '
             'that effectively keeps the 4 electrons from collapsing to the same '
             'spatial region. This is the group-theoretic encoding of the exclusion '

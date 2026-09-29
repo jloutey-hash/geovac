@@ -1761,14 +1761,18 @@ Deligne 2010~\cite{deligne2010};\ the audit verifies the common spin
 cause and the same-field identity, not the motivic result.
 \end{remark}
 
-\begin{remark}[Thermal time realises the Hodge circle;\ $\mu_4$ at the
+\begin{remark}[The posited wedge flow realises the Hodge circle;\ $\mu_4$ at the
 quarter-periods]
 \label{rem:kms_hodge_circle}
 The Hodge circle of Proposition~\ref{prop:hodge_cm_point} is not only abstractly
-present in the substrate --- it is the compact thermal-time flow.  On the
-$j=\tfrac12$ doublet the modular generator of the truncated Bisognano--Wichmann
-wedge analysis is $K=\mathrm{diag}(2m_j)$, with integer spectrum, so
-$e^{2\pi iK}=\mathbf 1$ exactly (the KMS $\beta=2\pi$ circle).  Transported to
+present in the substrate --- it is the compact flow of the posited
+wedge generator.  On the
+$j=\tfrac12$ doublet the wedge generator of the truncated modular analysis
+(Paper~42) is the posited $K=\mathrm{diag}(2m_j)=2J_z$, with integer spectrum, so
+$e^{2\pi iK}=\mathbf 1$ exactly --- an automatic $2\pi$ closure;\ its
+identification with a Bisognano--Wichmann modular flow of a
+wedge-restricted state, and hence with a KMS $\beta=2\pi$ circle, is open
+(Paper~42).  Transported to
 the Kramers frame $U$ (the eigenframe of $J$), the flow \emph{is} the Hodge
 circle, $U\,e^{itK}\,U^{\dagger} = \cos t\,\mathbf 1 + \sin t\,J$;\ in
 particular $J$ is the flow's $\beta/4$ quarter-period point, the four
@@ -1776,16 +1780,16 @@ quarter-periods are $\{\mathbf 1, J, -\mathbf 1, -J\}\cong\mu_4$ --- the
 conductor $4=|\mathrm{disc}\,\Q(i)|$ is the order of the flow's torsion point
 --- and the half-period separates the sectors:\ $e^{i\pi K}=-\mathbf 1$ on the
 spinor doublet (half-integer $m_j$;\ the spin double cover, visible inside the
-thermal circle) versus $+\mathbf 1$ on any integer-$l$ scalar sector, which
+compact circle) versus $+\mathbf 1$ on any integer-$l$ scalar sector, which
 factors through $\mu_2$ and stays pure-Tate
 (Remark~\ref{rem:qi_triangulation}).  All statements are exact
 (\texttt{tests/test\_paper56\_kms\_hodge\_circle.py}).  Three qualifications
 keep this an Observation.  First, any two maximal tori of $SU(2)$ are
 conjugate, and both halves of the statement are separately classical (the Hodge
 circle of a CM elliptic curve generates the norm-$1$ torus;\ the
-Bisognano--Wichmann flow is KMS at $\beta=2\pi$);\ the content is the
-identification of the program's two \emph{specific}, independently derived
-operators, and the location of the arithmetic data ($\mu_4$ torsion, spinor
+continuum Bisognano--Wichmann flow is KMS at $\beta=2\pi$, prior art);\ the
+content is the identification of the program's two \emph{specific}
+operators --- one of them posited, not derived from a state --- and the location of the arithmetic data ($\mu_4$ torsion, spinor
 sign) at canonical points of the flow.  Second, compactness alone does not
 produce $\Q(i)$:\ the scalar sector also generates a compact circle yet its
 periods are pure-Tate over $\Q$.  The discriminating datum is, however,
@@ -1810,7 +1814,8 @@ conductor-$4$ periods, while the CM \emph{Hodge structure} additionally needs
 the $\pm$-paired rational carrier
 (\texttt{tests/test\_paper24\_hardy\_circle\_arithmetic.py}).  Third,
 the $2\pi$-closure re-reads an already-registered structural fact (the
-compactness of the truncated boost);\ it is a consistency statement, not
+compactness of the finite-cutoff flow, Paper~45;\ the finite generator is
+not the continuum boost);\ it is a consistency statement, not
 independent evidence.  We have not found this flow-level identification in the
 literature:\ the closest structures are the labelling of extremal
 $\mathrm{KMS}_\infty$ states by complex-multiplication points in the

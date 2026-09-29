@@ -78,8 +78,8 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 38 `paper_38_su2_propinquity_convergence.tex` | **KEYSTONE** | **Unconditional** state-space GH convergence at rate (4/π)·log n/n (2026-06-10) |
 | 39 `paper_39_tensor_propinquity_convergence.tex` | ACTIVE | Tensor-product convergence (two focal lengths) |
 | 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate universal across compact connected semisimple Lie groups (retitled 2026-09-02; a circle factor carries 2/π) |
-| 42 `paper_42_modular_hamiltonian_four_witness.tex` | ACTIVE | Four-witness Wick-rotation theorem at finite cutoff (Riemannian) |
-| 43 `paper_43_lorentzian_extension.tex` | ACTIVE | Krein (3,1) extension at finite cutoff; Pythagorean orthogonality with 1/π² M1 signature |
+| 42 `paper_42_modular_hamiltonian_four_witness.tex` | ACTIVE | Tomita–Takesaki modular structure on truncated SU(2): finite 2π period closure, automatic for the posited integer-spectrum generator (no finite-cutoff four-witness identification; O0 open). §11 = Krein (3,1) carrier extension, absorbed from the archived Paper 43 |
+| 43 `paper_43_lorentzian_extension.tex` | **ARCHIVED 2026-09-28** | Tombstone. Krein (3,1) carrier extension, absorbed into **Paper 42 §11** (`sec:lorentzian_closure`). Both headlines withdrawn (finite period closure automatic; its 1/π² is the posited β = 2π/κ_g squared). See the Archive table below and `docs/retired_papers.md`. |
 | 44 `paper_44_lorentzian_operator_system.tex` | ACTIVE | Lorentzian operator-system substrate; prop = 2 |
 | 45 `paper_45_lorentzian_propinquity.tex` | **DESCOPED** | Main theorem withdrawn (K⁺ seminorm ≡ 0, annihilation theorem); spatial statement unconditional; product-carrier S³×S¹ convergence rebuilt in the action-seminorm framework (2026-06-10, signature-agnostic) |
 | 46--49 | **ARCHIVED 2026-09-14** | The strong-form Lorentzian tail. Moved to `archive/`; see the Archive table below and `docs/retired_papers.md`. Paper 45 stays: it is descoped but load-bearing (five healthy dependents, including Paper 38). |
@@ -146,6 +146,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 10 `paper_10_nuclear_lattice.tex` | Early nuclear draft |
 | `paper_18_exchange_constants_v1.tex` | Superseded by current Paper 18 |
 | 21 `paper_21_geometric_vacuum_synthesis.tex` | Superseded by the two group syntheses |
+| 43 `paper_43_lorentzian_extension.tex` | **Archived 2026-09-28.** Both headlines withdrawn. *Survives* (in Paper 42 §11): Krein carrier, (4,6) axiom audit, period closure [SYMBOLIC], six-witness by construction, chirality-parity HS orthogonality. |
 | 46 `paper_46_strong_form_lorentzian_propinquity.tex` | **Archived 2026-09-14.** Strong-form construction descoped (degenerate seminorm). *Survives:* Lemma 3.2, the degeneracy diagnosis. |
 | 47 `paper_47_two_rate_hybrid_convergence.tex` | **Archived 2026-09-14.** Propinquity arrow descoped. *Survives:* the norm-resolvent arrow and the three-carrier identification. |
 | 48 `paper_48_krein_ms_bridge.tex` | **Archived 2026-09-14.** Metric-level theorems open pending a repair the register records as closed. *Survives:* the bridge's categorical design. |

@@ -1592,11 +1592,13 @@ antisymmetry is implemented \emph{jointly} on spatial and spin
 indices.\\
 \textbf{Variables introduced:} the irrep tableau $\lambda$ itself
 (a discrete combinatorial label; equivalently a partition of $N$).
-For $N=2$: $\lambda \in \{[2],\,[1,1]\}$ (triplet vs singlet under
-spatial-spin coupling).  For $N=4$ closed shell: $\lambda = [2,2]$
+For $N=2$: $\lambda \in \{[2],\,[1,1]\}$ (singlet vs triplet under
+spatial-spin coupling: symmetric spatial with the singlet,
+antisymmetric spatial with the triplet).  For $N=4$ closed shell: $\lambda = [2,2]$
 is the spin-singlet sector (Paper~17 §VIII, Track AJ).  For general
-$N$ with total spin $S$: $\lambda_1 = N/2 + S$ and
-$\lambda_2 = N/2 - S$ (Paper~16 convention).\\
+$N$ with total spin $S$ the spin diagram is $[N/2 + S,\, N/2 - S]$
+and the spatial irrep $\lambda$ is its conjugate (two columns, of
+heights $N/2 + S$ and $N/2 - S$;\ Paper~16, Lemma~1).\\
 \textbf{Dimension introduced:} \emph{none}.  $P_\lambda$ is an
 orthogonal projection on the $N$-particle Hilbert space; it does not
 introduce a new physical scale, focal length, or coordinate.  The
@@ -1615,13 +1617,15 @@ $\mathbb{Z}/N!$, making it the cleanest example of a
 \textbf{Used in:} all $N \geq 2$ computations in the framework, at
 multiple levels of explicitness:
 \begin{itemize}
-\item \textbf{Level 3 (He, $N=2$).}  Singlet $[1,1]$ vs triplet $[2]$
-spatial-spin coupling is the projection that splits the He $1^1 S$
-ground state from the $2^3 S$ first excited state.  Spatial-spin
-coupling for two electrons with total spin $S \in \{0, 1\}$ yields
-$\lambda_\text{spatial} = [1,1]$ for $S=0$ (antisymmetric spatial,
-symmetric spin: singlet) and $\lambda_\text{spatial} = [2]$ for
-$S=1$ (symmetric spatial, antisymmetric spin: triplet).
+\item \textbf{Level 3 (He, $N=2$).}  Singlet (spatial $[2]$) vs
+triplet (spatial $[1,1]$) spatial-spin coupling is the projection that
+splits the He $1^1 S$ ground state from the $2^3 S$ first excited
+state.  Spatial-spin coupling for two electrons with total spin
+$S \in \{0, 1\}$ yields $\lambda_\text{spatial} = [2]$ for $S=0$
+(symmetric spatial, antisymmetric spin: singlet) and
+$\lambda_\text{spatial} = [1,1]$ for $S=1$ (antisymmetric spatial,
+symmetric spin: triplet), the conjugates of the spin diagrams
+$[1,1]$ and $[2]$.
 \item \textbf{Level 4N (LiH, $N=4$).}  The $S_4$ $[2,2]$ Young
 diagram projection is the character-based projector onto the
 closed-shell singlet sector of the 4-electron mol-frame
@@ -2505,15 +2509,22 @@ Euclidean Rindler $\eta_E$-circle~\cite{unruh1976}.  Sprint
 Unruh-pendant reproduces this verbatim with the same M1 mechanism,
 sympy residual zero, lowest bosonic Matsubara mode $= a$, lowest
 fermionic mode $= a/2 = \pi T_U$.
-All four faces reproduce the shared $2\pi$ from the framework's
-M1 Hopf-base measure on the same $S^1$ factor; the published
-Wick-rotation prescription supplies the bridge to the Lorentzian-side
-modular-flow / boost-orbit vocabulary in each case.\\
-\textbf{Honest scope.}  The framework demonstrably reproduces
-$\beta = 2\pi / \kappa_g$ on all four Wick-rotation faces from M1
-alone, and the published Hartle--Hawking / Sewell / Bisognano--Wichmann
-/ Unruh chain identifies that $2\pi$ with the Lorentzian-side
-modular-flow / Lorentz-boost orbit period.
+All four faces share the same $2\pi$, the circumference of the
+Euclidean $S^1$ factor; the published Wick-rotation prescription
+supplies the bridge to the Lorentzian-side modular-flow / boost-orbit
+vocabulary in each case.\\
+\textbf{Honest scope.}  The sympy checks reproduce the published
+identities $\beta = 2\pi / \kappa_g$ on all four Wick-rotation faces,
+with the $2\pi$ read as the period of the compactified Euclidean time
+circle (a temporal-compactification $\pi$ in the sense of Paper~35);
+the published Hartle--Hawking / Sewell / Bisognano--Wichmann / Unruh
+chain identifies that $2\pi$ with the Lorentzian-side modular-flow /
+Lorentz-boost orbit period.  This is a consistency reproduction of the
+continuum chain, not a derivation of $\beta$ from M1:\ at finite cutoff
+the generator and $\beta = 2\pi/\kappa_g$ are posited, not computed
+(Paper~42;\ Paper~32~\S~VIII.F, where the $1/\pi^2$ of the
+Pythagorean residual is likewise the posited $\beta$ squared, not an
+M1 output).
 
 \textbf{Sprint L1 (2026-05-16; demoted 2026-09-28):\ an automatic
 period closure, not an identification.}\ The L1-named falsifier
@@ -2757,9 +2768,9 @@ Files:\ \verb|geovac/modular_hamiltonian_lorentzian.py|,
 \verb|tests/test_modular_hamiltonian_lorentzian.py| (74 fast + 3 slow,
 all pass), \verb|debug/l2_e_modular_hamiltonian_lorentzian_memo.md|.
 Paper~32~\S~VIII.E.E and Paper~42~\S~11 carry the synthesis
-writeup;\ Paper~43 (Lorentzian-extension math.OA standalone, outlined
-in \verb|papers/group1_operator_algebras/paper_43_lorentzian_extension_outline.md|)
-is the natural Zenodo deposit for the standalone math.OA form.
+writeup;\ the former standalone Paper~43 (Lorentzian-extension math.OA
+paper) was archived 2026-09-28 (\verb|papers/archive/|), and its
+surviving content is now Paper~42~\S~11.
 
 \subsection{Apparatus identity / state-side reduction}
 \label{sec:proj_apparatus_identity}
@@ -3001,7 +3012,7 @@ rule follows from the Hilbert-space + GNS combination via Gleason's
 theorem (1957) and the standard projection-measure formalism.  The
 attempt of 2026-05-26 to derive a non-Gleason / non-standard Born
 expression from §III.28 plus Pythagorean orthogonality
-(Paper~43~\S~10.2) plus the master Mellin engine
+(Paper~42~\S~11.7, formerly Paper~43~\S~10.2) plus the master Mellin engine
 (Paper~32~\S~VIII) returned the same Born expression by all three
 routes, indicating that the framework is structurally consistent
 with Gleason but does not reach further than Gleason at the
@@ -3016,9 +3027,9 @@ multi-loop QED counterterms (LS-8a renormalization gap), the
 probability-weighting structure of measurement is external to the
 substrate, not derivable from the packing axiom + Fock projection +
 spectral-triple data.  The Pythagorean orthogonality theorem of
-Paper~43~\S~10.2 contributes a decoherence-flavored constraint on
+Paper~42~\S~11.7 contributes a decoherence-flavored constraint on
 \emph{which observables} the apparatus's preferred basis selects (the
-centralizer of $H_{\mathrm{local}}$ in $\mathcal{A}_W$) but does not
+centralizer of the posited $H_{\mathrm{local}}$ in $\mathcal{A}_W$) but does not
 modify the Born probability assignment.  This is a closed structural
 position, not an open question; the framework is in the Wigner /
 calibration-tier camp on Born rule rather than the Deutsch--Wallace /
@@ -4526,7 +4537,7 @@ generator (see row below, Paper~32~\S~VIII.F and Paper~42;\
 identification reading withdrawn 2026-09-28). \\
 Modular periodicity $\sigma_{2\pi}(O) = O$ on $\mathcal{T}_{n_{\max}}$ &
 \S~\ref{sec:proj_wick_rotation} (Wick rotation) at
-$\beta = 2\pi / \kappa_g$;\ four-witness collapse to canonical BW &
+$\beta = 2\pi / \kappa_g$;\ four-witness coincidence (by construction) &
 $1.8\times 10^{-16}$ at $n_{\max}=2$ rising to
 $1.6\times 10^{-15}$ at $n_{\max}=5$ (machine precision) & C &
 Sprint L1 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
@@ -10299,11 +10310,16 @@ and does not claim to.  What the framework \emph{does} contribute to
 the measurement-problem literature is the operator-algebraic
 realization with Pythagorean orthogonality
 $\langle H_{\mathrm{local}}, D_W^L\rangle_{\mathrm{HS}} = 0$
-(Paper~43~\S~10.2, formal theorem with $1/\pi^2$ master Mellin
-engine $M_1$ signature):\ a concrete realization of relational-QM-style
-measurement structure where the modular (observer-defined) generator
-and the spectral-action (substrate) generator decouple at the
-Hilbert--Schmidt inner-product level.  This is novel as a theorem;
+(Paper~42~\S~11.7, formerly Paper~43~\S~10.2;\ an elementary chirality-parity identity whose only
+transcendental, $1/\pi^2$, is the square of the posited normalisation
+$\beta = 2\pi/\kappa_g$ imported from the continuum KMS period ---
+not a computed $M_1$ output, and not shown to share the $M_1$ signature
+of the Paper~38 $4/\pi$;\ re-tiered 2026-09-28):\ a concrete realization
+of relational-QM-style measurement structure where a \emph{posited}
+modular-type (observer-defined) generator --- not derived from a state,
+Paper~42 O0 --- and the spectral-action (substrate) generator decouple at
+the Hilbert--Schmidt inner-product level.  It is a theorem about these
+two chosen operators;
 it is not novel as a Born rule derivation.  The honest contribution
 of the framework on this question is therefore a positional
 clarification:\ Born rule is calibration data in the same sense that

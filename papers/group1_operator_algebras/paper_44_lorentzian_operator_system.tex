@@ -9,7 +9,8 @@
 % (universal 4/pi rate constant on compact Lie groups), Paper 42
 % (Tomita-Takesaki modular structure; finite 2pi period, automatic for
 % the posited integer-spectrum generator -- no finite-cutoff four-witness
-% identification, 2026-09-28), Paper 43 (its Krein-carrier extension).
+% identification, 2026-09-28); its Sec. 11 absorbs the former Paper 43
+% (Krein-carrier extension; archived 2026-09-28).
 %
 % Status: first draft, May 2026, post-Sprint-L3a-1 (2026-05-17). Built
 % from internal sprint memos:
@@ -185,7 +186,8 @@ strongest single quantitative alignment between GeoVac and the
 published Connes--vS framework as of the Round-2 sprint
 (\texttt{debug/wh1\_round2\_propagation\_memo.md}, 2026-05-03).
 
-The companion Paper~43~\cite{paper43} of the present author carries
+Section~11 of the companion Paper~42~\cite{paper42} (which absorbs the
+former Paper~43, archived 2026-09-28) carries
 the modular construction associated with the four-witness Wick-rotation
 theorem
 (Hartle--Hawking~\cite{hartle_hawking1976},
@@ -198,7 +200,7 @@ at $(m, n) = (4, 6)$, with the modular Hamiltonian and Tomita
 structure on a hemispheric wedge.  Its $2\pi$ period closure is
 automatic for the posited integer-spectrum generator and does not
 identify the four-witness theorem at finite cutoff (withdrawn
-2026-09-28, following Paper~42). Paper~43 takes the operator-system
+2026-09-28). That section takes the operator-system
 substrate as input;\ the present paper constructs it.
 
 \subsection{What this paper does}
@@ -213,8 +215,8 @@ We define and study the natural Lorentzian extension
    \;\subset\; \Bcal(\Krein_{\nmax, \Nt})
 \end{equation}
 on the Krein space
-$\Krein_{\nmax, \Nt} = \HGV^{\nmax} \otimes \C^{\Nt}$ of Paper~43
-\S~\ref{sec:krein_space} (Sprint L2-B). Here $\HGV^{\nmax}$ is the
+$\Krein_{\nmax, \Nt} = \HGV^{\nmax} \otimes \C^{\Nt}$ of Paper~42
+\S~11.1 (Sprint L2-B). Here $\HGV^{\nmax}$ is the
 chirality-doubled Camporesi--Higuchi~\cite{camporesi_higuchi1996}
 spinor space at Fock cutoff $\nmax$, with
 $\dim_\C \HGV^{\nmax} = \tfrac{2}{3}\nmax(\nmax + 1)(\nmax + 2)
@@ -328,15 +330,15 @@ prospective Lorentzian-propinquity convergence program at finite
 cutoff;\ it does not close the propinquity itself. The substrate is the
 foundation on which a future propinquity argument would be built.
 
-\subsection{Why this is a separate paper from Paper~43}
+\subsection{Relation to the Krein-carrier section of Paper~42}
 
-Paper~43~\cite{paper43} works at the \emph{modular-Hamiltonian} level
+Paper~42~\S~11~\cite{paper42} works at the \emph{modular-Hamiltonian} level
 on a hemispheric wedge of the Lorentzian Krein space (an automatic
 period closure of a posited generator, not a finite-cutoff
 identification of the four-witness theorem;\ 2026-09-28), using the
 same Krein construction
 $\Krein_{\nmax, \Nt}$, Lorentzian Dirac $\DL$, and BBB axiom audit at
-$(m, n) = (4, 6)$ as the present paper. The Paper~43 results
+$(m, n) = (4, 6)$ as the present paper. Those results
 (integer spectrum of the geometric BW-$\alpha$ generator, $\beta$-%
 independent wedge KMS state, Tomita--Takesaki polar decomposition,
 flow conjugacy, six-witness collapse) operate at the level of
@@ -351,22 +353,22 @@ propagation-number invariant is independent of any wedge structure or
 modular flow:\ it is a statement about the multiplicative closure of
 the operator system as a whole, and its envelope-dependence at the
 Weyl-doubled vs full $\Bcal(\Krein)$ level is a separate structural
-feature not visible in Paper~43's hemispheric-wedge analysis.
-Conceptually, Paper~43 is the analog of computing modular data on a
+feature not visible in the hemispheric-wedge analysis of Paper~42~\S~11.
+Conceptually, that analysis is the analog of computing modular data on a
 specific algebra (here the wedge-restricted operator system); the
 present paper is the analog of constructing the algebra itself
 together with its envelope-relative structural invariants.
 Computationally, the two papers share their lower layers
 (\texttt{geovac/krein\_space\_construction.py},
 \texttt{geovac/lorentzian\_dirac.py},
-\texttt{geovac/connes\_axiom\_audit\_31.py}) but Paper~43 does not
+\texttt{geovac/connes\_axiom\_audit\_31.py}) but the Paper~42 Krein-wedge construction does not
 import \texttt{geovac/operator\_system\_lorentzian.py} (the Sprint
 L3a-1 module) and vice versa.
 
 \subsection{Outline}
 
 Section~\ref{sec:setup} recalls the Krein-space construction at
-$(m, n) = (4, 6)$ from Paper~43 and fixes notation.
+$(m, n) = (4, 6)$ from Paper~42~\S~11 and fixes notation.
 Section~\ref{sec:op_system} defines the Lorentzian truncated operator
 system $\Op^L$, proves $*$-closure and identity-membership, and
 discusses the multiplier bookkeeping.
@@ -377,7 +379,7 @@ propagation theorem.
 Section~\ref{sec:krein_positivity} establishes the trivial
 Krein-positive restriction.
 Section~\ref{sec:witness} exhibits the witness pair.
-Section~\ref{sec:wedge} connects to the Paper~43 hemispheric wedge.
+Section~\ref{sec:wedge} connects to the Krein hemispheric wedge of Paper~42~\S~11.3.
 Section~\ref{sec:open} states open questions and the recommended
 first Sprint L3b move.
 Section~\ref{sec:conclusion} concludes.
@@ -389,8 +391,8 @@ Section~\ref{sec:conclusion} concludes.
 
 Sections~\ref{sec:krein}--\ref{sec:bbb} recall the data of the
 Lorentzian Krein spectral triple from
-Paper~43~\cite{paper43}~\S~3 (Sprints L2-B/C/D). The reader familiar
-with Paper~43 may skim or skip these subsections.
+Paper~42~\cite{paper42}~\S\S~11.1--11.2 (Sprints L2-B/C/D). The reader
+familiar with that section may skim or skip these subsections.
 
 \subsection{The Krein space $\Krein_{\nmax, \Nt}$}\label{sec:krein}
 
@@ -402,7 +404,7 @@ Fix a Fock cutoff $\nmax \in \N$ and a temporal grid size $\Nt \in
 \end{equation}
 where $\HGV^{\nmax}$ is the chirality-doubled Camporesi--Higuchi
 spinor space at cutoff $\nmax$
-(Paper~32~\S~III~\cite{paper32}, Paper~43~\S~3.1) with basis labelled
+(Paper~32~\S~III~\cite{paper32}, Paper~42~\S~11.1) with basis labelled
 $\bigl(n_{\mathrm{fock}}, l, 2 m_j, \mathrm{chirality}\bigr)$ in the
 \texttt{FullDiracLabel} convention. The spatial dimension is
 \begin{equation}\label{eq:dim_spatial}
@@ -429,7 +431,7 @@ Peskin--Schroeder chiral basis (West-coast metric $\eta =
 \mathrm{diag}(+, -, -, -)$). The basic Krein-space axioms
 $\JL^2 = +I$, $\JL^\dagger \JL = I$, $\JL^\dagger = \JL$, and the
 splitting $\Krein = \Krein^+ \oplus \Krein^-$ into $\pm 1$-eigenspaces
-of $\JL$ are verified bit-exactly in Sprint L2-B (Paper~43~\S~3.1).
+of $\JL$ are verified bit-exactly in Sprint L2-B (Paper~42~\S~11.1).
 
 \subsection{The Lorentzian Dirac $\DL$}\label{sec:lor_dirac}
 
@@ -448,11 +450,11 @@ $g_n^{\mathrm{Dirac}} = 2(n+1)(n+2)$ on each chirality) and
 $\partial_t$ is the centered finite-difference operator on the
 uniform grid \eqref{eq:t_grid} with Dirichlet zero boundary
 conditions. The sign $i^t = +i$ is structurally forced by
-Krein-self-adjointness $\DL^\times = \DL$ (Paper~43~\S~3.2,
+Krein-self-adjointness $\DL^\times = \DL$ (Paper~42~\S~11.1,
 \texttt{geovac/lorentzian\_dirac.py}). At $\Nt = 1$, $\partial_t = 0$
 and $\DL = i\DGV$ reduces to the Riemannian Camporesi--Higuchi
 Dirac up to a global imaginary scaling that drops out of all
-load-bearing falsifiers (Paper~43~\S~3.2).
+load-bearing falsifiers (Paper~42~\S~11.1).
 
 \subsection{The BBB axiom audit at $(m, n) = (4, 6)$}\label{sec:bbb}
 
@@ -469,7 +471,7 @@ at $(m, n) = (4, 6)$, with primitive signs (BBB Table~1)
 The lift of the Cl$(3,1)$ charge-conjugation matrix $U_4 = i\gamma^2$
 to $\Krein$ is $\JL = J_{L, \mathrm{spatial}} \otimes K_t$ with $K_t$
 the identity-unitary times complex conjugation on $\C^{\Nt}$
-(Paper~43~\S~3.3, \texttt{geovac/connes\_axiom\_audit\_31.py}). The
+(Paper~42~\S~11.2, \texttt{geovac/connes\_axiom\_audit\_31.py}). The
 four BBB-predicted-sign axioms
 \begin{equation}\label{eq:bbb_axioms}
    \JL^2 = +I, \quad
@@ -479,9 +481,9 @@ four BBB-predicted-sign axioms
 \end{equation}
 pass bit-exactly (Frobenius residual $= 0.0$ in float64) at every
 tested $(\nmax, \Nt) \in \{1, 2, 3\} \times \{1, 11, 21\}$
-(Paper~43~\S~3.3). The non-load-bearing universal BBB axiom
+(Paper~42~\S~11.2). The non-load-bearing universal BBB axiom
 $\{\gamma^5, \DL\} = 0$ \emph{fails} on truthful $\DGV$ for the
-reason described in Paper~43~\S~9.3:\ this is a known structural
+reason described in Paper~42~\S~11.2:\ this is a known structural
 feature (chirality-diagonal Camporesi--Higuchi Dirac in the
 Peskin--Schroeder chiral basis), not a bug, and is preserved by the
 present construction without affecting any of its load-bearing
@@ -1039,7 +1041,7 @@ matrix
    \;=\; \begin{pmatrix} 0 & I_{\dim_\Weyl} \\
                           I_{\dim_\Weyl} & 0 \end{pmatrix}
 \]
-in the same decomposition (Paper~43~\S~3.1, Peskin--Schroeder chiral
+in the same decomposition (Paper~42~\S~11.1, Peskin--Schroeder chiral
 basis). Direct computation:
 \[
    \gamma^0 \cdot (M_W \oplus M_W)
@@ -1179,10 +1181,10 @@ which is the data of record.
 \end{remark}
 
 % =====================================================================
-\section{Connection to the Paper~43 hemispheric wedge}\label{sec:wedge}
+\section{Connection to the Krein hemispheric wedge of Paper~42}\label{sec:wedge}
 % =====================================================================
 
-Paper~43~\cite{paper43} works with the Krein hemispheric wedge
+Paper~42~\cite{paper42}~\S~11.3 works with the Krein hemispheric wedge
 \begin{equation}\label{eq:W_L_def}
    W_L \;:=\; P_W^{\spat} \otimes P_{t \ge 0}
    \;\subset\; \Bcal(\Krein_{\nmax, \Nt}),
@@ -1202,7 +1204,7 @@ $\Krein_{W_L} := P_{W_L} \Krein \cap P_{W_L} \Krein$ of dimension
    \;=\; \dim_\C \Krein_W^{\spat} \cdot \dim_\C \mathrm{range}(P_{t \ge 0})
    \;=\; \tfrac{1}{2} \dim_\spat \cdot \lceil \Nt / 2 \rceil
 \end{equation}
-(Paper~43~\S~4.1; for the symmetric grid, $\dim_\C \mathrm{range}(P_{t
+(Paper~42~\S~11.3; for the symmetric grid, $\dim_\C \mathrm{range}(P_{t
 \ge 0}) = \lceil \Nt / 2 \rceil$).
 
 \begin{proposition}[Wedge-restricted operator-system data]
@@ -1236,7 +1238,7 @@ $\dim_{W_L}$.
 \begin{proof}
 The wedge projection is a direct application of the
 \texttt{LorentzianWedge} construction from
-\texttt{geovac/modular\_hamiltonian\_lorentzian.py} (Paper~43~\S~4.1).
+\texttt{geovac/modular\_hamiltonian\_lorentzian.py} (Paper~42~\S~11.3).
 The wedge-restricted matrix is computed by index-restriction:
 $(P_{W_L} A P_{W_L})|_{i, j \in W_L} = A_{i, j}$ for indices $i, j$
 in the wedge basis-index set. The linear-span dimension is computed by
@@ -1246,15 +1248,15 @@ documented in
 test\_restrict\_to\_lorentzian\_wedge\_*}.
 \end{proof}
 
-\begin{remark}[Paper~43 modular content reads on the wedge-restricted
+\begin{remark}[Krein-wedge modular content reads on the wedge-restricted
 operator system]
 \label{rem:wedge_paper43}
-Paper~43~\cite{paper43} constructs the wedge KMS state $\rho_W^L$
+Paper~42~\cite{paper42}~\S~11 constructs the wedge KMS state $\rho_W^L$
 and the modular Hamiltonians $K_L^\alpha$ and $K_L^{\TT}$ at the
 matrix level on $\Krein_{W_L}$. The natural operator-system reading
 of those constructions is at the level of expectation values on
 $\Op^{L, W}_{\nmax, \Nt}$:\ the cross-witness collapse of
-Paper~43~\S~6 (Cor.~8.1) is the statement that the trace functional
+Paper~42 (Theorem~11.9(d)) is the statement that the trace functional
 $A \mapsto \Tr_{\Krein_{W_L}}(\rho_W^L \cdot A)$ on $\Op^{L, W}$ is
 identical across all four physical witness instantiations --- by
 construction, since they share one generator and differ only in the
@@ -1264,7 +1266,7 @@ construction as the wedge restriction of the natural Lorentzian
 truncated operator system, completing the bottom-up picture.
 
 This identification does \emph{not} immediately imply that the
-Paper~43 modular flow extends to a flow on the operator system
+Krein-wedge modular flow extends to a flow on the operator system
 itself (in the sense of an automorphism group of $\Op^L$), because
 $\Op^L$ is not multiplicatively closed and ``automorphism'' does not
 literally apply. The natural Lorentzian-propinquity-style replacement
@@ -1329,10 +1331,12 @@ it would have inherited is withdrawn, so an assembly route can no longer
 inherit a reach/height bookkeeping.  Second, and more decisively, the
 compactification it recommends is now understood to be the obstruction
 rather than the device:\ Paper~45's $K^{+}$ annihilation theorem shows
-the natural Krein-positive compression fails structurally, and the
-truncated Bisognano--Wichmann boost has \emph{integer} modular spectrum,
-so the finite-cutoff modular flow is a compact $\beta = 2\pi$ circle and
-every Lipschitz/boost seminorm built on it is signature-blind.  Replacing
+the natural Krein-positive compression fails structurally, and every
+finite-cutoff generator has a flow with compact closure (Paper~42's
+posited generator, which has \emph{integer} spectrum and is not identified
+with the Bisognano--Wichmann boost at finite cutoff, gives a compact
+$2\pi$ circle), so every Lipschitz/boost seminorm built on it is
+signature-blind.  Replacing
 $\R_t$ by $S^1_T$ therefore buys tractability at the cost of the very
 structure being sought.  The general form of the obstruction:\ signature
 is a non-compact phenomenon, while quantum-metric convergence is a
@@ -1493,12 +1497,12 @@ Krein-positive restriction).
 
 \medskip\noindent
 \textbf{Position in the GeoVac Lorentzian arc.} Together with
-Paper~43~\cite{paper43} (the modular construction at the Lorentzian
+Paper~42~\S~11~\cite{paper42} (the modular construction at the Lorentzian
 Krein-wedge level) and the prospective Sprint L3b
 continuum closure, the present paper constitutes the operator-system
 substrate of the GeoVac Lorentzian extension at the level the
-framework can currently reach. Paper~43 does not supersede the
-present paper, nor vice versa:\ Paper~43 establishes the
+framework can currently reach. Neither supersedes the other:
+\ Paper~42~\S~11 establishes the
 modular-Hamiltonian content on a hemispheric wedge; the present
 paper establishes the operator-system content on the full Krein
 space and its envelope-relative structural invariants. Both are
@@ -1515,7 +1519,7 @@ Gromov--Hausdorff level (unconditional, rate constant $4/\pi$); Paper~40~\cite{p
 compact-Lie-group family with rate constant $4/\pi$. The Lorentzian
 analog of Paper~38 (continuum Lorentzian propinquity on
 $\sthree \times \R$) remains open. The present paper, together with
-Paper~43~\cite{paper43}, establishes the finite-cutoff substrate from
+Paper~42~\S~11~\cite{paper42}, establishes the finite-cutoff substrate from
 which any such convergence argument would proceed.
 
 % =====================================================================
@@ -1727,14 +1731,6 @@ J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated
 $SU(2)$ spectral triples: the four-witness $2\pi$ period at finite
 cutoff},
-\newblock GeoVac internal preprint, papers/standalone (2026),
-DOI via Zenodo.
-
-\bibitem[Loutey, internal Paper~43]{paper43}
-J.~Loutey,
-\newblock \emph{Lorentzian extension of the four-witness
-Wick-rotation theorem on truncated $S^3 \times \mathbb{R}$ spectral
-triples at finite cutoff},
 \newblock GeoVac internal preprint, papers/standalone (2026),
 DOI via Zenodo.
 

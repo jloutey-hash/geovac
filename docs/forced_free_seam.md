@@ -62,7 +62,7 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | C5 | $\chi_{-4}$ identity $D_{\rm even} - D_{\rm odd} = 2^{s-1}(\beta(s) - \beta(s-2))$ | **F** | Paper 28 §IV; vertex-parity Hurwitz | Periods | 1 | M3 | dimensionless |
 | C6 | $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$ | **F** | Sprint Mixed-Tate; Paper 55 | Periods | 1 | M3 | dimensionless |
 | C7 | Universal propinquity rate $4/\pi$ | **F** | WH1 PROVEN; Paper 38 + Paper 40 (rank-invariant across compact Lie groups) | OA | 1 | M1 | dimensionless |
-| C8 | Pythagorean orthogonality $\langle H_{\rm local}, D_W^L\rangle_{\rm HS} = 0$ | **F** | Bit-exact; Paper 43 §10.2 | OA | 1 | M1 | dimensionless |
+| C8 | Pythagorean orthogonality $\langle H_{\rm local}, D_W^L\rangle_{\rm HS} = 0$ | **F** | Bit-exact; Paper 42 §11.7 Thm 11.14 (former Paper 43 §10.2, archived 2026-09-28); β-independent chirality-parity identity — its residual's 1/π² is the posited β squared, not an M1 output | OA | 1 | M1 (class only; re-tiered 2026-09-28) | dimensionless |
 | C9 | $S_{\min} = 8\pi^2\ln 2 - \tfrac{2}{3}\pi^4\ln 2 - 3\pi^2\zeta(3) + \tfrac{1}{2}\pi^4\zeta(3) - \tfrac{5}{2}\pi^2\zeta(5) + \tfrac{\pi^6}{4} - \tfrac{3}{2}\pi^4 - \tfrac{\pi^8}{96}$ | **F** | Paper 28 (identified 2026-06-11; prior "irreducible" = basis-coverage artifact) | Periods | >1 | M3 | dimensionless |
 
 ## D. Gravity

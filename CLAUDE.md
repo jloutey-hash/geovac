@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.17.4 (September 28, 2026)
+**Version:** v5.17.6 (September 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -26,7 +26,7 @@ GeoVac is a discretization framework that exploits the natural geometry of separ
 
 **Quantum simulation positioning:** The classical solver investigation (v2.0.6-23) characterized what the natural-geometry hierarchy can and cannot achieve for ground-state PES; the primary computational value proposition is quantum simulation. The composed architecture produces qubit Hamiltonians whose Pauli count is EXACTLY linear in Q across molecules at fixed basis — N_Pauli = 27.90 x Q universal (main-group; 30.03 d-block), vs O(Q^3.9-4.3) Gaussian system-size scaling — with 51x-317x fewer Pauli terms at equal qubits (identity-included on both sides, 1126/22; the earlier 54x mixed conventions, corrected 2026-09-28, PI-authorized) (H2O, n_max=1-3), structural Gaunt sparsity compatible with all downstream optimizations (tapering, grouping, tensor factorization), and a 37-system library (35 composed molecules + He + H2) across three periodic-table rows. The within-molecule basis exponent is 3.17 (universal across all systems, small-basis fit; local slope rises toward ~3.8 by n_max=4 — the linearity in Q, not the basis exponent, is the load-bearing advantage). Position for VQE/NISQ (Pauli count, QWC groups) rather than fault-tolerant QPE; composed LiH is near parity with minimal-basis STO-3G on raw counts (838 Pauli @ Q30 vs 907 raw; 3.0x MORE than the 276 reduced; 1-norm 1.007x, 34.5 vs 34.3 Ha) — the decisive wins are the exact Q-linearity and the 76x cc-pVDZ reduction. (All numbers under the exact global-M_L rule, corrected 2026-08-29 — the prior 11.10xQ / O(Q^2.5) / 51x-1712x / 334 / 190x line was measured under the retired pair-diagonal sign error; see debug/sprint_eri_evaluator_defects_memo.md.) Full track-by-track chronicle: `docs/development_frontier_archive.md` + CHANGELOG.
 
-**General composed builder foundation:** Paper 16 (Chemical Periodicity as S_N Representation Theory) provides the group-theoretic foundation for the general composed builder's atomic classification. The structure types (A/B/C/D/E), the universal angular quantum number ν = N−2, and the recursive core-valence decomposition are all derived from S_N representation theory and implemented in `atomic_classifier.py`.
+**General composed builder foundation:** Paper 16 (Chemical Periodicity as S_N Representation Theory) provides the group-theoretic foundation for the general composed builder's atomic classification. The structure types (A/B/C/D/E), the minimum angular quantum number ν_min = E(n↑)+E(n↓) (the Pauli-filling count; the earlier "universal ν = N−2" holds only for the lowest spin with N ≤ 8 and was retracted 2026-09-28, PI-authorized), and the recursive core-valence decomposition are all derived from S_N representation theory and implemented in `atomic_classifier.py`.
 
 **PK limitation and research path:** The composed framework's PK pseudopotential is the accuracy bottleneck (5.3-26% R_eq error); six modification attempts failed (Section 3). The balanced coupled Hamiltonian (Papers 19/20) is the PK-free alternative: cross-center V_ne via multipole expansion with exact Gaunt termination; LiH 4e FCI reaches 0.20% energy at n_max=3 with structural R_eq drift (~8.8%) — energy converges excellently, geometry drifts; optimal for single-point quantum simulation at fixed geometries. Resource anchor: composed LiH 838 Pauli vs STO-3G 907 vs cc-pVDZ 63,519 (exact rule, 2026-08-29). Chronicle: `docs/development_frontier_archive.md`.
 
@@ -112,6 +112,8 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk DELTA #14 = DEFECTS, remediated (2026-09-28, v5.17.6):** summaries lagging corrected owners (incl. mirror direction); Paper 43 ARCHIVED into P42 §11; P16 ν_min a theorem + prior art. See CHANGELOG v5.17.6.
+- **FULL #9 open items closed (2026-09-28, v5.17.5, PI-directed):** Paper 16 ν=N−2 RETRACTED → Pauli-filling ν_min (two routes; Ne=10); 8 guards fire-tested; Pythagorean 1/π² not M1. See CHANGELOG v5.17.5.
 - **/qa trunk FULL #9 = FAIL, remediated (2026-09-28, v5.17.4, PI-approved):** P32 diagonal triple spectral-not-metric; finite four-witness demoted corpus-wide (P42 retitled); P38 A2 confirmed; P7 kernel test. Paper 16 ν=N−2 flagged (PI). See CHANGELOG v5.17.4.
 - **Trunk list-closing pass (2026-09-28, v5.17.3):** final re-check's ~13 LARGE closed gate-first (4 C16 entries); PI rulings applied (α approx./Observation, p-value, Δ-sign reading, P0/P7 titles); P34 III.5 real test. Next: trunk FULL run. See CHANGELOG v5.17.3.
 - **/qa trunk re-check = DEFECTS, round-2 remediated (2026-09-28, v5.17.2):** ~10 LARGE residue paraphrases (<0.1% cells, Paper 8 SO(4) covariance, P31/P36/P13); C16/C17 widened; 51× not 54× (identity convention). Round 3 (whole-paper fix-mode) + final re-check: family retired; ~13 LARGE pre-existing debt → list-closing pass, then trunk FULL run. See CHANGELOG v5.17.2.
@@ -530,7 +532,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 **Always load** (framework identity): Paper 0 (packing axiom, K = −1/16) · 1 (spectral graph methods) · 7 (S³ proof, 18 symbolic proofs) · 14 (qubit encoding headline) · 16 (S_N periodicity) · 22 (angular sparsity theorem) · 23 (nuclear hub, Fock rigidity) · 24 (Bargmann-Segal S⁵, Coulomb/HO asymmetry) · 27 (entropy as projection) · 31 (universal/Coulomb partition) · 32 (the spectral triple; §VIII theorems).
 
-**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42–50, 52, 53; foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35.
+**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42, 44, 45, 50, 52, 53 (43 and 46–49 archived; 43's surviving content is Paper 42 §11); foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35.
 
 **GUARDRAIL papers** — MUST load before any investigation in their domain (trigger words and protocol in §3.5): Papers 8–9 (single-center / unified-basis / shared-exponent molecular — Sturmian structural theorem), FCI-M (graph-concatenation molecular), Track DF record (nested hyperspherical).
 
@@ -538,14 +540,14 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 | Folder | Audience | Papers (.tex) |
 |:-------|:---------|:-------------:|
-| `papers/group1_operator_algebras/` | math.OA / NCG | 16 |
-| `papers/group2_quantum_chemistry/` | quantum chemists | 11 |
+| `papers/group1_operator_algebras/` | math.OA / NCG | 11 |
+| `papers/group2_quantum_chemistry/` | quantum chemists | 12 |
 | `papers/group3_foundations/` | mathematical physicists | 12 |
 | `papers/group4_quantum_computing/` | QC / NISQ / VQE | 4 |
 | `papers/group5_qed_gauge/` | HEP / gauge theory | 8 |
 | `papers/group6_precision_observations/` | precision AMO | 4 |
-| `papers/synthesis/` | cross-group narratives + field guide | 3 |
-| `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) | 7 |
+| `papers/synthesis/` | cross-group narratives + field guide | 7 |
+| `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) + retired (43, 46–49; `docs/retired_papers.md`) | 12 |
 
 ### Live status flags every agent must know
 

@@ -121,7 +121,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
    Woods–Saxon). Any claim that GeoVac *predicts* nuclear structure is MATERIAL.
 
 5. **Periodicity honesty (Paper 16).** The four-type ($A/B/C/D$) classification and
-   $\nu=N-2$ **map onto, rather than predict, the known periodic table** — stated as such
+   $\nu_{\min}=E(n_\uparrow)+E(n_\downarrow)$ (corrected 2026-09-28; the universal $\nu=N-2$ is retracted) **map onto, rather than predict, the known periodic table** — stated as such
    (no claim that GeoVac *derives* the periodic law). The Dirac instability is a **metric**
    singularity on $S^{3N-1}$, not a topological one; the topology is smooth through
    $Z=1/\alpha$. No fitted parameter (the $v_{ls}$, $d_{\ell\ell}$ in Paper 23 are literature
@@ -147,7 +147,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     $54\times$–$317\times$ (retired: "two-or-more orders of magnitude / 51×–1712×"); the
     "$d$-block sparser" claim **REVERSES** ($30.03 > 27.90$); matched-qubit-not-accuracy caveat
     MANDATORY.
-  - **Paper 16:** $\mu_{\rm free}=\nu(\nu+3N-2)/2$ (SO(3N) Casimir); $\nu=N-2$ universal for
+  - **Paper 16:** $\mu_{\rm free}=\nu(\nu+3N-2)/2$ (SO(3N) Casimir); [2026-09-28: the universal $\nu=N-2$ is RETRACTED; C16 `p16-nu-universal-n-minus-2`; the headline is now the Pauli-filling $\nu_{\min}$] $\nu=N-2$ universal for
     $S<N/2$; **5 atom types A/B/C/D/E** (FIXED 2026-06-28 — abstract+§IV synced to the Table+
     conclusion+code; was a stale "4"); **"maps onto, rather than predicts"**; Dirac instability =
     metric (not topological) singularity, smooth through $Z=1/\alpha$.

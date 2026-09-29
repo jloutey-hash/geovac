@@ -165,9 +165,11 @@ the value is exactly $\bigl(2-2\cos\frac{\pi}{n_{\max}-1}\bigr)/3$
 $1.65\%$ and $2.58\%$.  What \emph{is}
 verified (\texttt{tests/test\_paper1\_block\_spectrum.py},
 \texttt{test\_trunk\_qa\_degree\_table.py};\ the older
-\texttt{test\_trunk\_qa\_splitting.py} takes a raw-eigenvector argmax,
-which is basis-dependent inside degenerate eigenspaces, so it is not
-counted as backing --- flagged 2026-09-28) is therefore:\ higher-$l$
+\texttt{test\_trunk\_qa\_splitting.py} took a raw-eigenvector argmax,
+which is basis-dependent inside degenerate eigenspaces --- flagged
+2026-09-28 and rewritten the same day to the basis-free
+$\|P_\lambda e_{\mathrm{node}}\|^2$ rule, so it now counts as backing)
+is therefore:\ higher-$l$
 states have higher connectivity ($D_{2p} > D_{2s}$) on the CG
 construction, and on the binary lattice the $s/p$ splitting decays,
 strongly oscillating, to below $1\%$ by $n_{\max} = 30$.  The specific
@@ -203,11 +205,13 @@ see the conditioning caveat above;
 \texttt{tests/test\_paper1\_block\_spectrum.py} pins the on-branch closed
 form, the $28$/$29$/$30$ values, the conditioning and the
 CG-construction non-decay;\ the off-branch values at $n_{\max} = 5$--$10$,
-$20$ and $25$ are pinned by no test, and
-\texttt{tests/test\_trunk\_qa\_splitting.py} is basis-dependent and not
-counted as backing (2026-09-28); the list printed before
-2026-09-03---$13\%$, $16\%$, $0.3\%$, $0.005\%$---did not reproduce at
-$n_{\max} = 5$, $20$ or $30$.)
+$20$ and $25$, and every value on this list, are now pinned by
+\texttt{tests/test\_trunk\_qa\_splitting.py}, rewritten 2026-09-28 to the
+basis-free $\|P_\lambda e_{\mathrm{node}}\|^2$ rule (invariant under a
+rotation of the eigenbasis inside a degenerate eigenspace, unlike the
+raw-eigenvector argmax it replaces) and so counted as backing; the list
+printed before 2026-09-03---$13\%$, $16\%$, $0.3\%$, $0.005\%$---did not
+reproduce at $n_{\max} = 5$, $20$ or $30$.)
 
 The splitting does not decay monotonically; it \emph{oscillates} at
 intermediate resolutions.  \textbf{[INTERNAL THEOREM]} \emph{The oscillation
@@ -374,9 +378,10 @@ Possible extensions include:
 \begin{enumerate}
 \item departing from the Condon--Shortley phase convention (which makes
   the $L_\pm$ matrix elements real and non-negative, as used above), e.g.\
-  by omitting its $(-1)^m$ factor, which flips the sign of alternate
-  $L_\pm$ matrix elements (convention-dependent, yielding discrete
-  $\{0,\pi\}$ phases);
+  by omitting its $(-1)^m$ factor on $m \ge 0$, which flips the sign of
+  every $L_\pm$ matrix element between two $m \ge 0$ states (of every
+  $L_\pm$ element, if the factor is dropped for all $m$)
+  (convention-dependent, yielding discrete $\{0,\pi\}$ phases);
 \item A $U(1)$ gauge extension---attaching phase factors
   $e^{i f(n,l,m)}$ to the transition operators---which would produce
   continuously varying curvature;
@@ -512,7 +517,7 @@ Incorporating electromagnetic interactions would require photon degrees of freed
 
 \textbf{An earlier route, superseded.}  An earlier version of this section conjectured that $\alpha$ emerges as a ``symplectic impedance'' --- a ratio of action densities between the electron paraboloid and a helical photon fiber.  That route was tried:\ on the paraboloid lattice it reached $6.2\times10^{-5}$ relative error only with a \emph{fitted} helical pitch, and it has been superseded (Paper~2~\cite{companion_alpha} records the attempt and its supersession);\ it is not an open, unexplored route. \textbf{[OBSERVATION]} The companion paper~\cite{companion_alpha} records a different, parameter-free numerical observation:\ $\alpha$ approximately satisfies (to $8.8\times10^{-8}$ relative;\ an Observation, not a law) the cubic
 $\alpha^3 - K\alpha + 1 = 0$ with $K = \pi(B + F - \Delta)$ built from three
-spectral quantities on $S^3$.  The combination rule is an Observation only, with no first-principles derivation;\ the companion paper reads $\alpha$ as a projection constant, not derivable from any single principle.
+spectral quantities on $S^3$.  The combination rule is an Observation only, with no first-principles derivation;\ the companion paper's working hypothesis reads $\alpha$ as a projection constant, not derivable from any single principle.
 
 \textbf{Outlook:}
 
@@ -565,7 +570,7 @@ This CG-magnitude construction is used only for the \S III comparison with the w
 
 For the scaling measurement only, a sparse CSR build with the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}, $\sigma = -1.0$, lowest 20 eigenvalues) was used; \textbf{[MEASURED]} the sparse-eigenvalue timing is guarded sub-quadratic and the adjacency nonzero count near-linear (measured exponent $1.07$ over $n_{\max} = 5$--$30$) by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fits; the frozen bounds are $< 1.8$ on timing and $< 1.15$ on the nonzero count).
 
-State identification was performed by computing, for each distinct eigenvalue $\lambda$ of the full spectrum, the eigenspace projection $\|P_\lambda\,|n,l,m\rangle\|^2$ of each target node, and selecting the eigenvalue with maximal projection (basis-free;\ an argmax over the components of individual eigenvectors is not well defined when eigenvalues are degenerate across $l$-blocks --- corrected 2026-09-28).
+State identification was performed by computing, for each distinct eigenvalue $\lambda$ of the full spectrum, the eigenspace projection $\|P_\lambda\,|n,l,m\rangle\|^2$ of each target node, and selecting the eigenvalue with maximal projection (basis-free;\ an argmax over the components of individual eigenvectors is not well defined when eigenvalues are degenerate across $l$-blocks --- corrected 2026-09-28; pinned, including its invariance under a rotation of the eigenbasis inside a degenerate eigenspace, by \texttt{tests/test\_trunk\_qa\_splitting.py}).
 
 \subsection{Log-Holonomy Calculation}
 

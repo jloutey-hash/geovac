@@ -143,8 +143,8 @@ established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\
 the residual contribution here is the
 Camporesi--Higuchi spinor substrate, the closed-form rate moment, and
 the explicit $4/\pi$ asymptotic constant. The construction supplies
-quantitative metric data for almost-commutative spectral-triple
-constructions hosted on $\sthree$~\cite{marcolli_vs2014}.
+quantitative metric data for the commutative ($\sthree$) factor of
+almost-commutative spectral-triple constructions hosted on $\sthree$~\cite{marcolli_vs2014}.
 \end{abstract}
 
 \bigskip\noindent
@@ -311,12 +311,13 @@ master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
 $k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant in
 \eqref{eq:main_rate} ($2/\pi$ on the unit $\sthree$; $4/\pi$ in the
 dual-Coxeter normalisation) sits in the $k=0$ sub-case (M1, the
-volume slot) of that classification; the same $1/\pi^2$ factor reappears
-in the Pythagorean Hilbert--Schmidt orthogonality corollary on the
-Krein wedge documented in the companion Lorentzian-extension paper
-(Paper~43~\cite{paper43}). \textbf{[OBSERVATION]} The
+volume slot) of that classification. (An earlier version said the
+same $1/\pi^2$ factor reappears in the Pythagorean orthogonality% [retracted 2026-09-28: pythagorean-inv-pi2-as-m1-output]
+corollary (now Paper~42~\cite{paper42}~\S 11.7, Paper~43 archived);\ that $1/\pi^2$ is the posited
+KMS normalisation $\beta = 2\pi/\kappa_g$ squared, not an M1 output,
+and the link is withdrawn, 2026-09-28.) \textbf{[OBSERVATION]} The
 appearance of this constant in
-the state-space GH rate is therefore not an isolated occurrence:\ the
+the state-space GH rate is a reading, not a derivation:\ the
 rate at which
 the truncated triples converge to their continuum limit carries the same
 transcendental signature that the framework's heat-kernel machinery
@@ -347,8 +348,11 @@ Both gaps that conditioned earlier formulations of the main theorem
 are closed by one reframing:\ metrize the truncated state space by
 the \emph{left-translation Lipschitz seminorm} rather than by the
 truthful-Dirac commutator seminorm. On the continuum the two agree
-exactly (Lemma~\ref{lem:continuum_lip});\ at finite cutoff both are
-non-degenerate on the true Camporesi--Higuchi window
+exactly (Lemma~\ref{lem:continuum_lip});\ at finite cutoff the
+translation seminorm has kernel exactly the scalars at every $\nmax$
+(Proposition~\ref{prop:kernel_condition}), and on the true
+Camporesi--Higuchi window the Dirac seminorm is \textbf{[MEASURED]} to
+have kernel exactly the scalars at $\nmax \le 3$
 (Remark~\ref{rem:dirac_degeneracy}). The translation seminorm is used
 because its compression and lifted-state estimates close, not because
 the Dirac seminorm fails;\ an earlier version of this sentence said the
@@ -437,8 +441,9 @@ for every $N \le 2\nmax$, rank $0$ above, and $\dim \Op_{\nmax} = 5, 30,
 91$ at $\nmax = 1, 2, 3$. (The frozen test
 \texttt{tests/test\_p38\_action\_seminorm.py} checks per-band rank on the
 doubled computational model of \S\ref{sec:truncations}, whose envelope
-is $N \le 2\nmax - 1$;\ it does not see the top band. A true-window
-freeze is owed.)
+is $N \le 2\nmax - 1$;\ it does not see the top band. The true-window
+freeze is \texttt{tests/test\_p38\_true\_ch\_window.py}, which pins the
+top band $N = 2\nmax$ together with the rest.)
 \end{proof}
 
 \begin{proposition}[kernel condition on the truthful substrate]
@@ -606,7 +611,9 @@ the scalars at $\nmax = 1, 2, 3$ ($\dim \Op_{\nmax} = 5, 30, 91$), so
 the Dirac-commutator seminorm \emph{is} a norm on $\Op_{\nmax}/\mathbb{C}\mathbb{1}$
 there. Two independent constructions agree (one builds the eigenspaces
 by coupling, one builds $D = 2\sigma\cdot J_R + 3/2$ as a matrix and
-diagonalizes it;\ 2026-09-28);\ a frozen test is owed. Whether the
+diagonalizes it;\ 2026-09-28);\ the matrix construction is frozen in
+\texttt{tests/test\_p38\_true\_ch\_window.py} at $\nmax = 1, 2, 3$, and
+the coupling construction is recorded but not frozen. Whether the
 Gromov--Hausdorff convergence can be proved in this seminorm directly
 is \textbf{[OPEN]}.
 \emph{On the doubled Fock spin-orbital model} used by the code and by
@@ -768,7 +775,9 @@ Paper~32 already carries this reading (``KO-3 is the label of the odd
 continuum GV factor;\ $\sthree$ carries no chirality'') from the 2026-09-02
 adjudication;\ that sweep did not reach this paper.  The unitary real
 structure $J$ given by charge conjugation and the Lipschitz seminorm enter as
-expected.  Because
+expected (on the truncations $J$ keeps its continuum signs but the
+order-zero and order-one conditions do not survive;\ see
+\S\ref{sec:truncations}).  Because
 $\DCH$ is the unit-metric Dirac operator while $d$ is the dual-Coxeter
 distance, the two differ by the same factor $2$:
 \begin{equation}\label{eq:seminorm_normalisation}
@@ -814,8 +823,11 @@ P_{\nmax}$ has blocks coupling positive and negative levels (at $\nmax
 = 1$ the whole band $N = 2$ lives in them), and it is non-zero exactly on
 the bands $N \le 2\nmax$ (Lemma~\ref{lem:band_injectivity}).
 \textbf{[MEASURED]} $\dim \Op_{\nmax} = 5, 30, 91$ at $\nmax = 1, 2,
-3$, the sum of $N^2$ over $N \le 2\nmax$ (two independent constructions,
-2026-09-28).  The supporting code module and Lemma~\ref{lem:L1prime}
+3$, the sum of $N^2$ over $N \le 2\nmax$ (two independent constructions
+agree, 2026-09-28;\ the matrix construction is regression-pinned in
+\texttt{tests/test\_p38\_true\_ch\_window.py}, which also freezes the
+Dirac spectrum $\pm(n + 3/2)$ with multiplicity $(n+1)(n+2)$ per sign on
+the same window).  The supporting code module and Lemma~\ref{lem:L1prime}
 use a different, \emph{doubled} model:\ two copies of the
 non-relativistic Fock spin-orbital space $(n, l, j = l + \tfrac12, m_j)$
 with $M_f = M_f^{\mathrm{Weyl}} \oplus M_f^{\mathrm{Weyl}}$,
@@ -827,6 +839,39 @@ true window:\ Lemma~\ref{lem:lifted_state},
 Lemma~\ref{lem:band_injectivity} and
 Proposition~\ref{prop:kernel_condition} are statements about it, and
 Theorem~\ref{thm:main_unconditional} is unaffected by the model.
+\textbf{[MEASURED]} \emph{Real structure on the true window}
+(2026-09-28;\ \texttt{tests/test\_true\_window\_real\_structure.py}, two
+independent constructions agreeing pair by pair to $10^{-10}$).  In the
+left-invariant frame, spinors $L^2(\SU(2)) \otimes \mathbb{C}^2$ with
+basis $e^j_{mm's} = \sqrt{2j+1}\,D^j_{mm'} \otimes e_s$ and
+$\DCH = 2\sigma\cdot J_R + \tfrac32$, the charge conjugation
+$J\psi = (i\sigma_y)\overline{\psi}$ acts as $e^j_{mm's} \mapsto
+(-1)^{m-m'}(i\sigma_y)_{s's}\,e^j_{-m,-m',s'}$ composed with complex
+conjugation.  It commutes with $\DCH$, so it preserves
+$\Hilb_{\nmax}$, and there $J^2 = -1$, $J\DCH = +\DCH J$ (the KO-$3$
+signs) and $J\Op_{\nmax}J^{-1} = \Op_{\nmax}$ hold exactly at
+$\nmax \le 4$.  The truncation is \emph{odd}, like the continuum:\ the
+commutant of $\Op_{\nmax}$ is the scalars at $\nmax \le 3$ (its unital
+algebra is all of $B(\Hilb_{\nmax})$), so no $\mathbb{Z}_2$-grading
+exists;\ the even grading of Paper~32's chirality-doubled model is a
+property of that model.  The signs are forced:\ the antiunitaries intertwining
+$\DCH$ and the isometry generators are one phase per irreducible block,
+all with $J^2 = -1$, and none anticommutes with $\DCH$.  The order-zero
+and order-one conditions $[a, Jb^*J^{-1}] = 0$ and
+$[[\DCH, a], Jb^*J^{-1}] = 0$ \emph{fail}, from $\nmax = 1$, with
+residuals that grow:\ on the degree-one generators the operator-norm
+residual is $1/2, 5/9, 11/16, 19/25$ (order zero) and
+$3/4, 7/9, 13/16, 21/25$ (order one) at $\nmax = 1$--$4$, increasing
+toward the generators' sup-norm scale $1$.  The mechanism is exact:\
+$J(PfP)^*J^{-1} = PfP$, so order zero is
+$[PfP, PgP] = Pg(1-P)fP - Pf(1-P)gP$, a Toeplitz boundary term that
+vanishes on every Dirac level more than $\max(N_a, N_b) - 1$ below the
+top (the shell-difference rule $|n - n'| \le N - 1$), and likewise at
+order one with $f$ replaced by $c(df)$.  These failures belong to the
+finite truncation and do not touch
+Theorem~\ref{thm:main_unconditional}, which uses neither condition;\
+the full audit, with the model comparison, is in
+Paper~32~\cite{paper32} (axiom audit, item~6).
 Quantities measured on the model --- Lemma~\ref{lem:L1prime}, the
 multiplier-rank test of \texttt{tests/test\_p38\_action\_seminorm.py},
 and the kernel counts of Remark~\ref{rem:dirac_degeneracy} --- are
@@ -964,7 +1009,7 @@ The role of the offdiag extension is purely
 SDP-bounding:\ it ensures that the operator-norm constraint
 $\opnorm{[D_{\nmax}, M]} \le 1$ is non-degenerate on the doubled
 model's operator system (on the true window the truthful Dirac already
-is, Remark~\ref{rem:dirac_degeneracy}). The truthful $\DCH$ (without offdiag couplings) is what
+is, measured at $\nmax \le 3$, Remark~\ref{rem:dirac_degeneracy}). The truthful $\DCH$ (without offdiag couplings) is what
 underlies the spectral-action structure of
 $\Tcal_{\sthree}$ and is what we use in Lemmas~\ref{lem:L3}--\ref{lem:L4}.
 The main theorem does not use a Dirac-commutator metrization, so
@@ -972,9 +1017,14 @@ this choice does not enter it.
 \end{proof}
 
 \begin{remark}\label{rem:offdiag}
-The offdiag extension does \emph{not} satisfy
-$\{\gamma_5, D^{\mathrm{offdiag}}_{\nmax}\} = 0$, whereas the truthful
-$\DCH$ does. The offdiag is therefore a metric-only device for
+The offdiag extension does \emph{not} anticommute with the
+chirality-doubling grading $\gamma_{\mathrm{GV}} = \sigma_x \otimes
+\mathbb{1}$ of the doubled finite model (Paper~32~\cite{paper32}),
+whereas the truthful $\DCH$ does (\texttt{geovac/chirality\_grading.py},
+\texttt{audit\_chirality\_grading}).  That grading exists only on the
+doubled model:\ on the continuum $\sthree$ (odd, KO-dimension $3$) there
+is no grading, and $\operatorname{sign}(\DCH)$ commutes with $\DCH$
+(\S\ref{sec:ch_triple}). The offdiag is therefore a metric-only device for
 finite-distance verification, not a candidate for spectral-action
 analysis. The truthful $\DCH$ is what enters
 \eqref{eq:CH_spectrum};\ the state-space GH convergence proof
@@ -1708,8 +1758,10 @@ sentence stated the constant as ``identical on both sides''; withdrawn
 \label{sec:marcolli_vs}
 
 The convergence theorem
-\ref{thm:main} provides the metric foundation for almost-commutative
-spectral triple constructions hosted on $\sthree$. The
+\ref{thm:main} provides the metric statement for the commutative
+($\sthree$) factor of almost-commutative spectral triple constructions
+hosted on $\sthree$;\ convergence of the almost-commutative extension
+itself is open (below). The
 Marcolli--van~Suijlekom gauge-network
 framework~\cite{marcolli_vs2014}, with the
 Perez-Sanchez~\cite{perez_sanchez2025} continuum-limit
@@ -2216,13 +2268,6 @@ E.~M.~Stein and G.~Weiss,
 A.~Zygmund,
 \newblock \emph{Trigonometric Series, Vol.~I and II},
 \newblock 3rd ed., Cambridge Univ.~Press, 2002.
-
-\bibitem[Loutey, internal Paper~43]{paper43}
-J.~Loutey,
-\newblock \emph{Lorentzian extension of the four-witness Wick-rotation
-theorem on truncated $\sthree \times \R$ spectral triples at finite
-cutoff},
-\newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \end{thebibliography}
 

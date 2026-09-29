@@ -7,6 +7,153 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.6] - 2026-09-28
+
+**Patch. /qa trunk DELTA #14 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). Paper 43 ARCHIVED (merged into Paper 42 §11, PI decision). Paper 16's corrected rule is now a theorem, with prior art credited.** v5.17.5 was never tagged; this checkpoint carries both entries.
+
+### The run
+- **Verdict:** DEFECTS, with about 16 LARGE and about 43 SMALL. Every LARGE was verified in the frozen worktree.
+- **Clean dimensions:**
+  - deterministic: all 14 gates;
+  - citations: 0 LARGE;
+  - code for P7/P16 and the classifier: 0 LARGE. All numbers were re-derived by a second route, and 10/10 plants fired.
+- **Dominant class:** a correction applied in the owner document had not reached every locus that summarizes it. This includes the *mirror* direction: Paper 7 was strengthened (p₀ = Z/n is forced by the Coulomb-kernel eigenvalue), while the summaries still said the energies were "imposed" or "follow from n²−1 through the shell".
+- **Guard defect:** one guard could not fail. The s/p splitting guard rotated only inside clusters built with the tolerance it guarded; DEG_TOL 1e-8 → 1e-16 left 19/19 green, and the PM reproduced this.
+- **A defect introduced by v5.17.4's own remediation:** Paper 50's continuum CHM was described as having integer spectrum.
+
+### Gate-first
+- **Five new C16 entries**, each discriminating two ways (30/30 checks):
+  - `energy-follows-from-casimir-via-shell` (the mirror class);
+  - `p56-injection-theorem-live`;
+  - `dirac-seminorm-degeneracy-motivation`;
+  - `p50-chm-integer-spectrum`;
+  - `l3-per-harmonic-ratio-bound`.
+- **Four entries widened:** `finite-four-witness-literal-identification`, `order-zero-one-decaying-artifact`, `e6-no-single-mechanism-theorem`, `pythagorean-inv-pi2-as-m1-output`.
+- **Result:** the gate enumerated 25 live loci; 0 remain corpus-wide. All dependents are stamped (Paper 43's as archived).
+
+### Paper 43 archived (first retirement recommended by QA; PI decision)
+- **Why:** both headlines were gone (the finite four-witness extension is automatic for the posited generator; the Pythagorean 1/π² is the posited β² and not M1).
+- **What survives, in Paper 42 §11:**
+  - the Krein carrier and the (4,6) axiom audit;
+  - the automatic Krein period closure, [SYMBOLIC];
+  - the six-witness statement, by construction;
+  - H_local signature independence, now with a proof;
+  - the Pythagorean orthogonality as a β-independent chirality-parity identity, Thm 11.14;
+  - `rem:order_zero_one`, corrected: the residuals GROW.
+- **Bookkeeping:**
+  - `docs/retired_papers.md` gains a SUCCESSOR-COVERED row with trigger terms.
+  - `INDEX.md` keeps a tombstone; P42's own row is fixed.
+  - The outline `.md` is moved to the archive.
+  - All citers are repointed: P24, P32, P34, P38, P44, P45, P50, P51, P52, P55, P57, P18, the group1 synthesis, the field guide, and docs.
+- **Paper 50 is kept:** its F-theorem reproduction and M2/M3 split stand. The CHM section is restated as an analogy with the *Euclidean* rotation generator only; the continuum modular Hamiltonian has continuous spectrum. It is retitled "…partition function and wedge KMS entropy", and 3 bibitems are swept.
+
+### Remediation (all LARGE, and SMALLs on sight)
+- **P32 (owner consistency with P38):**
+  - The converging object is the true CH window; the finite-cutoff axiom measurements are labelled model measurements.
+  - 10/14 and 26/55 are counts for the doubled model; the Dirac-seminorm convergence route is OPEN.
+  - `rem:gh_limit_id` follows P38 (up to isometry).
+  - L3 is restated as C₃ = 1 by compression, [INTERNAL THEOREM]; the false per-harmonic bound is withdrawn.
+  - The Pythagorean remark is internally consistent.
+  - The M3 "prediction" is recorded as falsified.
+  - `thm:axiom_complete` is retitled "State-space limit identification".
+  - The measured order-condition ratio is no longer extrapolated.
+- **P38:** Dirac non-degeneracy is [MEASURED] at n_max ≤ 3; `rem:offdiag` grading fixed; the AC claim is scoped.
+- **P0 / P7 / group3 synthesis:** the energy-origin family now reads "kernel forces p₀ = Z/n, the shell then gives E_n". The eq:chain box is fixed. The general-n eigenvalue is tagged [PRIOR ART] (Fock 1935, Funk–Hecke). The H₂⁺ backing is attributed honestly. The conformal weight and the Li table are fixed.
+- **P1:** the Condon–Shortley phase statement is corrected.
+- **P16:**
+  - eq:nu_min is now **Theorem 2**, proved by Schur–Weyl: the minimum-weight semistandard tableau, s_λ with nonnegative coefficients, and harmonicity via Σr².
+  - The exact condition is ν_min = N−2 iff 1 ≤ n↓ ≤ n↑ ≤ 4 (this replaces a false "only lowest spin").
+  - Monotonicity in S is proved from the convexity of E.
+  - Prior art credited: Rittenhouse, Cavagnero, von Stecher & Greene, PRA 74, 053624 (2006), Thm 1 (the filled-shell case, verified against the source). Smirnov–Shitikova is cited cautiously (only its abstract was read).
+- **Outside the trunk:**
+  - field guide and P57: E6 now "seven theorem-grade + one Observation";
+  - P55: "comparison homomorphism";
+  - P24 and P56: the posited 2J_z circle;
+  - P45 Q1: the interpretive step tagged as argued;
+  - P34: singlet spatial [2];
+  - P31: D + c𝟙 breaks an even grading;
+  - P39 and P40: no Leimbach–van Suijlekom rate;
+  - P51: finite truncation even, no KO label.
+- **Guards (a separate pass; every plant fired):**
+  - the splitting guard's rotation clusters are now built with an independent LOOSE_TOL, plus a gap-window test (the PM re-ran the 1e-16 plant: FIRED);
+  - the modular test no longer locks in the STRONG label;
+  - diagonal-triple: the n_max=1 case is labelled vacuous and the σ_z-commutes-with-D check is added;
+  - P38 Route B, sampled Wigner-D, is frozen with a cross-route agreement test;
+  - P16: production classifier compared with the character count at all spins, and L/π rows added for N = 10–12.
+- **CLAUDE.md §6:** the paper map is updated (43 and 46–49 archived; folder counts corrected).
+
+### Follow-on: real structure on the TRUE window (PI-directed, same day)
+The corpus had measured J and the order conditions only on the model objects. Now measured on the true Camporesi–Higuchi window that Paper 38's theorem is about, by two independent routes (Clebsch–Gordan and sampled Wigner-D, agreeing per pair to 1e-14):
+- **J.** J = U K, with U e^j_{mm's} = (−1)^{m−m'}(iσ_y)_{s's} e^j_{−m,−m',s'}, i.e. pointwise spinor conjugation twisted by iσ_y.
+  - J² = −1, JD = +DJ and J O J⁻¹ = O hold exactly for n_max ≤ 4.
+  - The signs (ε, ε′) = (−,+) are **forced**: the equivariant antiunitaries are one phase per block, all with J² = −1, and none anticommutes with D.
+- **Order zero and order one fail from n_max = 1 and grow.**
+  - Order zero, failing pairs: 12/25, 572/900, 5842/8281, 30462/41616.
+  - Fixed degree-1 generators: 1/2, 5/9, 11/16, 19/25 → toward 1.
+  - The residual is relatively worse than on the model.
+  - Mechanism, exact: a Toeplitz boundary term Pg(1−P)fP − Pf(1−P)gP, supported on the top Dirac levels only.
+- **The true window is ODD, like the continuum.**
+  - The commutant of O is the scalars at n_max = 1, 2, 3. Independently, the algebra generated by the sampled O is all of B(H) (16, 256, 1600), so by Burnside the commutant is the scalars.
+  - So no grading exists there. The "even finite truncation" of Paper 32 prop:odd(b) is a property of the chirality-doubled model.
+  - Paper 32 prop:odd gains part (c); the axiom table gets a separate true-window grading row; the abstract is scoped.
+  - Papers 38, 51 and 31 are scoped (model even, true window odd). The C16 `truncation-inherits-odd` note is scoped too: the retired wording was retired because Paper 32 applied it to its even model triple.
+- **Other changes:**
+  - `thm:axiom_complete` retitled "State-space limit identification".
+  - New `tests/test_true_window_real_structure.py` (22 tests, fire-tested 4/4 by the PM) and `debug/true_window_real_structure.py`.
+  - 3 claim-matrix rows.
+
+### Verification
+- All 14 gates PASS; C10 compiles the whole corpus.
+- 651 tests pass, 12 skipped.
+
+## [v5.17.5] - 2026-09-28
+
+**Patch. The FULL #9 open items, closed (PI-directed): Paper 16's "universal ν = N−2" retracted and replaced by the verified Pauli-filling rule; the guard pass written and fire-tested; the three four-witness dependents reviewed. The Pythagorean 1/π² is no longer read as an M1 output.**
+
+### Paper 16: ν = N−2 retracted (a headline correction)
+- **Verified false, by two independent routes.** Route A is an S_N character generating function (Murnaghan–Nakayama). Route B is Young-symmetrizer ranks on explicit monomials. An O(3) brute force adds the L=0, even-parity checks.
+- **The rule that holds:** ν_min(N,S) = E(n↑) + E(n↓), where E(m) is the sum of the m lowest one-particle polynomial degrees and degree d holds (d+1)(d+2)/2 functions. This is the 3D-oscillator filling count.
+  - N−2 holds only for the lowest spin with N ≤ 8.
+  - The Ne singlet is 10, not 8.
+  - The fully polarized state is spatially *antisymmetric* with a large ν, not "ν = 0, spatially symmetric".
+  - Li ²S (L=0, even parity) needs 2.
+  - At large N, ν grows as ~(3N)^{4/3}/4.
+  - Falling with it: μ_free = 2(N−2)(N−1), "4 units per pair", ν/(3N−2) → 1/3, and the Cr ν = 22. N = 137 is now 570 / 279,015.
+- **Paper 16 remediated.** eq:nu_min, Lemma 1, tables, abstract and conclusion. The Avery 2000 attribution is removed (the text could not be checked). New `tests/test_paper16_nu_min.py` (18 tests).
+- **Citers fixed:**
+  - group4 synthesis;
+  - Paper 7 L647;
+  - Paper 34 L1598 (it had described the spin diagram as if it were the spatial irrep).
+- **Code.** `atomic_classifier.py` now computes ν by `pauli_filling_nu_min` at the lowest spin; it had used max(N−2, 0). This is metadata only: no Hamiltonian reads it. `n_electron_scope.py` comments updated.
+- **Tests.** The classifier tests are re-pinned to hand-computed values. They were fire-tested against the retracted rule planted back in, and fired. `test_paper16_dirac_metric.py` is re-pinned to 570 / 279,015.
+- **Records.** Claim matrix and group4 DoD updated. C16 entry `p16-nu-universal-n-minus-2`: 13/13 discrimination checks, dependents stamped.
+
+### Four-witness dependents (reviewed)
+- **Paper 45 Q1 is split.**
+  - "Euclidean at every finite cutoff" is unconditional: any finite generator's flow has compact closure.
+  - The Wick-rotation / KMS-circle reading is conditional on the open derivation of K.
+  - Citers in P43, P44 and the group1 synthesis are aligned.
+- **Pythagorean 1/π².** It enters only through the posited β = 2π/κ_g, i.e. the continuum KMS period imported as a normalisation and squared. It is not an M1 Mellin output, and it is not "the same signature as P38's 4/π". The orthogonality itself is a chirality-parity identity independent of β.
+  - Fixed in P32 (`rem:pythagorean_m1_closure`, witness list), P38, P42, P43, P34, P51, P18, P55 and both syntheses.
+  - New C16 entry `pythagorean-inv-pi2-as-m1-output`: 7/7 discrimination checks, dependents stamped.
+- **Paper 52:** the continuum-only narrowing is confirmed correct; the abstract and one bullet are scoped.
+
+### Guard pass (separate from the fixes; each fire-tested against a named wrong answer)
+Eight guards, all FIRED:
+1. `test_paper32_order_condition_growth.py`: rejects "residuals decay"; reproduces 124/196, 2594/3025, 17970/19600.
+2. `test_paper32_diagonal_triple.py`, commutator check: rejects a nonzero [D_GV, π(f)].
+3. `test_paper32_diagonal_triple.py`, grading check: rejects an odd finite truncation (σ_x → σ_z).
+4. `test_modular_period_closure_automatic.py`: documents that a non-Bisognano–Wichmann integer K passes too.
+5. `test_paper32_composition_pins.py`: pins the nested commutator 0.3204, Z=1 irreducibility, the bend sweep, H₂O apex charges, the mirror π-sources and the rhombus endpoints.
+6. `test_paper32_B_normalisation.py`: pins B = 42 against the unhalved 84.
+7. `test_p38_true_ch_window.py`: the true-window freeze; rejects the old 2n_max−1 envelope and a kernel larger than the scalars.
+8. `test_trunk_qa_splitting.py`, rewritten basis-free. The old argmax rule was basis-dependent: a rotation inside a degenerate eigenspace moved n_max=7 from 0.65% to about 1550%. The new rule reproduces all printed values, and the n_max=30 endpoint is pinned to 1e-3.
+
+The guards are cited at their paper loci. The "not pinned" / "test owed" phrases in P32, P38 and P1 are updated, and the claim matrix gains rows.
+
+### Verification
+All 14 deterministic gates PASS (C5, C10-C22, C24); C10 compiles 59/59 papers with 0 undefined references; 541 tests pass, 8 skipped. CLAUDE.md §1.5's Paper 16 sentence was corrected under PI authorization.
+
 ## [v5.17.4] - 2026-09-28
 
 **Patch. /qa trunk FULL #9 (unseeded, PI-invoked) = FAIL; RESEARCH-GRADE not earned. PI approved every recommendation, and this entry is that remediation.** Every LARGE finding was verified by the PM against text, code or a re-run before it was accepted. The keystone mathematics held under independent re-derivation: the P38 theorem and its 4/π and 2/π constants, the L5 refutation, P32's Forced-Count of 32 (two routes), the sign triple and prop = 2, and P7's wall, Casimir, λ_max and F⁰.

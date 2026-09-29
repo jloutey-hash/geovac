@@ -26,7 +26,7 @@ Date: April 2026
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Dict, Optional, Tuple
 
 
 # ---------------------------------------------------------------------------
@@ -556,10 +556,16 @@ class AtomClassification:
     Z_eff_valence : float
         Effective nuclear charge seen by valence electrons.
     nu : int
-        Angular quantum number N - 2 (Paper 16).
+        Minimum hyperspherical angular quantum number at the LOWEST spin
+        (S = 0 or 1/2): the S_N-only Pauli-filling count of Paper 16
+        (eq:nu_min), see ``pauli_filling_nu_min``.  Hund's-rule spin and
+        the ground term's L/parity can raise it (Paper 16 tab:nu_verified).
+        Metadata only -- no Hamiltonian reads it.  (Before 2026-09-28 this
+        was max(N-2, 0), the retracted "universal nu = N-2", which is
+        wrong from N = 9 on at lowest spin.)
     mu_free : float
         Pauli centrifugal cost = SO(3N) Casimir nu*(nu+3N-2)/2
-        = 2(N-2)(N-1) for nu=N-2 (Paper 16 eq:mu_formula).
+        (Paper 16 eq:mu_formula).
     pk_params : Optional[Dict[str, float]]
         Phillips-Kleinman parameters {'A': float, 'B': float}, or None.
     pk_source : str
@@ -652,6 +658,33 @@ def pk_params_from_formulas(
     return {'A': A, 'B': B}
 
 
+def pauli_filling_nu_min(n_up: int, n_down: int) -> int:
+    """Minimum degree of a harmonic polynomial on R^{3N} carrying the spatial
+    S_N irrep conjugate to the spin diagram [n_up, n_down] (Paper 16 eq:nu_min).
+
+    nu_min = E(n_up) + E(n_down), where E(m) is the sum of the m lowest
+    one-particle polynomial degrees and degree d holds (d+1)(d+2)/2
+    functions (the 3D-oscillator shell count).  S_N symmetry only; the
+    ground term's L and parity can raise it.
+    """
+    def _e(m: int) -> int:
+        total, d = 0, 0
+        while m > 0:
+            take = min(m, (d + 1) * (d + 2) // 2)
+            total += take * d
+            m -= take
+            d += 1
+        return total
+    return _e(n_up) + _e(n_down)
+
+
+def _lowest_spin_nu_mu(N: int) -> Tuple[int, float]:
+    """(nu_min, mu_free) at the lowest spin S = (N mod 2)/2."""
+    nu = pauli_filling_nu_min((N + 1) // 2, N // 2)
+    mu_free = nu * (nu + 3 * N - 2) / 2.0 if nu > 0 else 0.0
+    return nu, mu_free
+
+
 def classify_atom(Z: int) -> AtomClassification:
     """Classify atom by nuclear charge Z for composed geometry.
 
@@ -678,8 +711,7 @@ def classify_atom(Z: int) -> AtomClassification:
     # Z=57-86 (lanthanides + 5d + 6p), Z > 86 (actinides etc.)
     if Z not in _ATOM_DATA:
         N = Z  # neutral atom
-        nu = max(N - 2, 0)
-        mu_free = nu * (nu + 3 * N - 2) / 2.0 if nu > 0 else 0.0
+        nu, mu_free = _lowest_spin_nu_mu(N)
 
         if 39 <= Z <= 54:
             note = (
@@ -725,8 +757,7 @@ def classify_atom(Z: int) -> AtomClassification:
 
     data = _ATOM_DATA[Z]
     N = Z  # neutral atom
-    nu = max(N - 2, 0)
-    mu_free = nu * (nu + 3 * N - 2) / 2.0 if nu > 0 else 0.0
+    nu, mu_free = _lowest_spin_nu_mu(N)
 
     # Determine PK parameters
     pk_source = data['pk_source']

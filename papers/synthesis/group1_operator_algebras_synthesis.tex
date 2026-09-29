@@ -133,10 +133,12 @@ compact connected semisimple Lie groups $G_{1}, \ldots, G_{k}$, the
 k-fold tensor product converges (state-space GH) at the universal
 $4/\pi$ rate with Lipschitz comparison constant $C_3^{(k)} \le
 \sqrt{k}$ (only the $k\le2$ cases are proved).  The constant
-$4/\pi$ identifies, in both Riemannian (Paper~38) and Lorentzian
-(Paper~43~\S 10.2) settings, as the $M_{1}$ ($k = 0$ volume-slot)
-signature of the master Mellin engine catalogued by the
-case-exhaustion theorem of Paper~32~\S\,VIII.  Five further papers (48, 49, 50, 52, 53) extend the arc;\ Papers~48--50 are recorded in
+$4/\pi$ of the Riemannian rate (Paper~38) identifies as the $M_{1}$
+($k = 0$ volume-slot) signature of the master Mellin engine catalogued by
+the case-exhaustion theorem of Paper~32~\S\,VIII;\ the $1/\pi^{2}$ of the
+Lorentzian HS-orthogonality (Paper~42~\S 11.7) is \emph{not} shown to be
+the same signature --- it is the square of the posited normalisation
+$\beta = 2\pi/\kappa_g$ (re-tiered 2026-09-28).  Five further papers (48, 49, 50, 52, 53) extend the arc;\ Papers~48--50 are recorded in
 \S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Papers~52--53 are summarized at the end of this abstract;\ metric-level
 claims among them descoped by Paper~45's degeneracy theorem are
 reported here in corrected form.  \textbf{[ARCHIVED 2026-09-14]}
@@ -147,7 +149,14 @@ convention.  Nothing in the account below is retracted by that move, and each
 of the four retains content that is \emph{not} refuted---Lemma~3.2's degeneracy
 diagnosis, the norm-resolvent arrow, the bridge's categorical design, and the
 cocycle-deficit algebra respectively.  Paper~45 itself remains live and
-load-bearing.  See \texttt{docs/retired\_papers.md}. Paper~50 reproduces
+load-bearing.  See \texttt{docs/retired\_papers.md}.
+\textbf{[ARCHIVED 2026-09-28]} Paper~43 has likewise been archived:\ both
+of its headline readings were withdrawn (the finite-cutoff period closure is
+automatic, and its $1/\pi^{2}$ is the posited $\beta = 2\pi/\kappa_g$
+squared), and its surviving content --- the Krein carrier, the $(4,6)$
+axiom audit, the Krein-carrier period closure, the six-witness statement
+by construction, and the chirality-parity HS-orthogonality --- now lives in
+Paper~42~\S 11, to which every Paper~43 reference below is repointed. Paper~50 reproduces
 the Klebanov--Pufu--Safdi sphere F-theorem bit-exactly from the
 framework spectrum; Paper~52 frames the spectral-truncation convergence
 as a ``Category III'' discretization correspondence (the framework's
@@ -209,9 +218,10 @@ systems on natural geometries.  When the geometry is the round
 $\sthree = \SU(2)$, the framework produces a sequence of finite
 truncations whose continuum limit is the Camporesi--Higuchi
 spectral triple of the round three-sphere
-\cite{camporesi_higuchi1996}.  The present paper synthesizes the nine
+\cite{camporesi_higuchi1996}.  The present paper synthesizes the eight
 documents in the project's operator-algebra group:
-Papers~\cite{paper29,paper32,paper38,paper39,paper40_unified,paper42,paper43,paper44,paper45}.
+Papers~\cite{paper29,paper32,paper38,paper39,paper40_unified,paper42,paper44,paper45}
+(the former Paper~43 is now Paper~42~\S 11).
 Together they form a self-contained research thread in mathematical
 operator algebras with four headline results.
 
@@ -974,11 +984,12 @@ only $K_{\alpha}^{W}$ lifts the period to the identity operator.
 Which generator (if either) a Camporesi--Higuchi wedge state actually
 selects is open (Paper~42, O0).
 This is the open question O3 of Paper~42~\S 10, sharpened in
-Paper~43 to the signature-independence statement below.
+Paper~42~\S 11.6 to the signature-independence statement below.
 
-\subsection{Lorentzian extension at finite cutoff (Paper~43)}
+\subsection{Lorentzian extension at finite cutoff (Paper~42~\S 11)}
 
-Paper~43 \cite{paper43} carries the same construction to the
+Paper~42~\S 11~\cite{paper42} (which absorbs the former Paper~43, archived
+2026-09-28) carries the same construction to the
 Lorentzian Krein space at signature $(3,1)$ (automatic and
 signature-blind;\ not a finite-cutoff four-witness theorem), built via the
 Bizi--Brouder--Besnard prescription \cite{bizi_brouder_besnard2018}
@@ -991,7 +1002,7 @@ Lorentzian Dirac
 \end{equation}
 per van~den~Dungen 2016 Proposition 4.1 \cite{vandungen2016}.
 
-\begin{theorem}[Paper~43~\S 5--\S 7, Krein-carrier period closure
+\begin{theorem}[Paper~42, Theorem~11.9, Krein-carrier period closure
 at finite cutoff;\ {[SYMBOLIC]}, automatic]
 \label{thm:lorentzian_four_witness}
 At every tested $(\nmax, \Nt) \in \{1, 2, 3\} \times \{1, 11, 21\}$,
@@ -1015,12 +1026,12 @@ bit-identically.
 \end{theorem}
 
 \paragraph{Signature-independence of the operator-level contrast.}
-A finding of Paper~43 is that the
+A finding of Paper~42~\S 11.6 is that the
 ``$H_{\mathrm{local}} \ne D_{W}^{L}$'' statement is
 \emph{signature-independent} at the Riemannian reduction.  At
 $\Nt = 1$ the residual norm $\|H_{\mathrm{local}} - D_{W}^{L}\|_{F}$
 on the Lorentzian Krein wedge equals the Riemannian-side value at
-every $\nmax$ (Paper~43~\S 7.1):
+every $\nmax$ (Paper~42, Theorem~11.11):
 \begin{equation*}
 \|H_{\mathrm{local}}|_{(3,1),\Nt=1} - D_{L}^{W}|_{\Nt=1}\|_{F}
 \;=\;
@@ -1041,12 +1052,12 @@ generator a Camporesi--Higuchi wedge state selects).
 \subsection{Pythagorean HS-orthogonality and the $1/\pi^{2}$
 signature}
 
-Paper~43~\S 10.2 records a Pythagorean refinement of the modular vs
+Paper~42~\S 11.7 records a Pythagorean refinement of the modular vs
 spectral-action gap.  Let $\langle \cdot, \cdot \rangle_{\mathrm{HS}}$
 denote the Hilbert--Schmidt inner product on the wedge operator
 algebra.
 
-\begin{corollary}[Paper~43~\S 10.2, HS-orthogonality on the
+\begin{corollary}[Paper~42, Theorem~11.14 and Corollary~11.15, HS-orthogonality on the
 Lorentzian wedge]
 \label{cor:hs_orthogonality}
 For every $\kappa_{g} > 0$ and every panel cell
@@ -1077,25 +1088,25 @@ The closed form \eqref{eq:hs_closed_form} is PSLQ-verified at
 $100$ digits with coefficient ceiling $10^{6}$ at $18$ panel cells.
 The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ enters
 through $H_{\mathrm{local}} = \kappa_g K_{\alpha}^{W}/(2\pi)$, i.e.\
-through the posited $\beta = 2\pi/\kappa_g$;\ it is tagged to the
-$M_{1}$ ($k = 0$ volume-slot) sector on that basis, and no identity
-with the $M_1$ content of the Paper~38 rate constant $4/\pi$
-\eqref{eq:gamma_asymptote} is established.  This crosswiring between
-sections \ref{sec:gh} and \ref{sec:modular} is taken up systematically
-in \S\ref{sec:mellin}.
+through the posited $\beta = 2\pi/\kappa_g$ --- the continuum KMS period
+imported as a normalisation, an input rather than a computed output.  It
+lies in the algebraic class $\pi^{-2}\Q$ of the $M_{1}$ ($k = 0$
+volume-slot) sector, but no Mellin mechanism producing it is shown and no
+identity with the $M_1$ content of the Paper~38 rate constant $4/\pi$
+\eqref{eq:gamma_asymptote} is established (re-tiered 2026-09-28;\ see
+\S\ref{sec:mellin}).
 
 \paragraph{Subspace decomposition.}
-The mechanism is the orthogonal decomposition of the operator
-algebra $B(\Krein_{W})$ into a diagonal subspace (where
-$H_{\mathrm{local}} = K_{\alpha}^{W}/\beta$ lives, since
-$K_{\alpha}^{W}$ has eigenvalues $\text{two}\,m_{j}$ on the full-Dirac
-basis) and an off-diagonal subspace with $\Delta n = \pm 1$ (where
-$D_{W}^{L}$ lives, since the Camporesi--Higuchi Dirac intertwines
-$\pm m_{j}$ chirality partners at adjacent shells).  Formal
-operator-theoretic proof of this decomposition is named as
-Paper~43 open question O4; the PSLQ-verified Pythagorean closed form
-\eqref{eq:hs_closed_form} is empirically sharp at $100$ digits
-and $18$ panel cells.
+The mechanism is a wedge-chirality parity argument:\
+$H_{\mathrm{local}} = K_{\alpha}^{W}/\beta$ (eigenvalues
+$\text{two}\,m_{j}$, chirality-independent) is even under the wedge
+chirality grading, while $D_{W}^{L}$ has a chirality-odd temporal factor
+and a chirality-even but sign-paired spatial factor, so both HS inner
+products vanish.  The formal proof is Paper~42's
+Theorem~11.14 (\S\ref{sec:closures_pythagorean}
+below);\ it is $\beta$-independent, so the $1/\pi^{2}$ plays no role in
+it.  The PSLQ-verified closed form \eqref{eq:hs_closed_form} is
+empirically sharp at $100$ digits and $18$ panel cells.
 
 % =====================================================================
 \section{Lorentzian propinquity}
@@ -1253,15 +1264,18 @@ Theorem~\ref{thm:p45_main} closes the natural device;\ the
 Lorentzian convergence question itself remains open \emph{at the
 continuum / non-compact level}.  The \emph{finite-cutoff} metric
 question is now understood structurally (Paper~45~\S\,open~Q1,
-2026-06):\ the truncated Bisognano--Wichmann boost is \emph{compact}
-(the modular generator has integer spectrum, $e^{2\pi i K} = I$ at every
-finite cutoff $\Rightarrow$ the modular flow is the $2\pi$-periodic KMS
-circle, not a non-compact boost).  A compact circle carries only a
-Euclidean (forward-triangle) metric --- which is why the forward chain
-inequality is the only universal direction and every Lipschitz / boost
-seminorm is signature-blind --- so the finite-cutoff quantum metric is
-Euclidean and the Lorentzian signature is the Wick rotation $t \to it$
-of that circle, a convention rather than a finite-cutoff metric.  The
+2026-06;\ re-tiered 2026-09-28):\ every finite-cutoff generator, posited
+or derived, generates a flow with compact closure, never a non-compact
+boost.  A compact flow carries only a Euclidean (forward-triangle)
+structure --- which is why the forward chain inequality is the only
+universal direction and every Lipschitz / boost seminorm is
+signature-blind --- so the finite-cutoff quantum metric is Euclidean,
+unconditionally.  For Paper~42's \emph{posited} generator the spectrum is
+integer ($e^{2\pi i K} = I$), so its flow is a $2\pi$-periodic circle;\
+reading that circle as the KMS circle of the truncated
+Bisognano--Wichmann boost, and the Lorentzian signature as its Wick
+rotation $t \to it$ (a convention rather than a finite-cutoff metric), is
+conditional on Paper~42's open O0.  The
 genuine reverse-triangle Lorentzian signature requires the non-compact
 continuum ($n_{\max} \to \infty$, type-III) limit, which is the sense in
 which the question remains open.  This is the metric-level dual of the
@@ -1304,12 +1318,15 @@ data).
 % =====================================================================
 
 The most striking structural observation that emerges from reading
-the arc is that the same transcendental signatures appear in
-\emph{different} settings.  The constant $4/\pi$ of Paper~38 and the
-constant $1/\pi^{2}$ of Paper~43~\S 10.2 are not numerical
-coincidences: they are two appearances of the same $k = 0$ volume
-mechanism (historically named ``Hopf-base measure''), the $M_{1}$ sub-case of the master Mellin engine
-catalogued in Paper~32~\S 8.
+the arc is that transcendental signatures of the same algebraic class
+recur across settings.  The constant $4/\pi$ of Paper~38 is the $k = 0$
+volume mechanism (historically named ``Hopf-base measure''), the $M_{1}$
+sub-case of the master Mellin engine catalogued in Paper~32~\S 8.  The
+constant $1/\pi^{2}$ of Paper~42~\S 11.7 lies in the same ring
+$\pi^{-2}\Q$ but is \emph{not} shown to arise from that mechanism:\ it is
+the square of the posited normalisation $\beta = 2\pi/\kappa_g$
+(re-tiered 2026-09-28;\ an earlier version of this paragraph called the two
+constants ``two appearances of the same'' mechanism).
 
 \subsection{The $\pi$-source case-exhaustion theorem (Paper~32~\S 8)}
 
@@ -1369,18 +1386,21 @@ single-positive-root Euler--Catalan sum
 produces the $\pi^{2}$ in the denominator, and the Hopf bundle
 $\sthree \to S^{2}$ produces $\Vol(S^{2}) = 4\pi$ in the numerator.
 
-\subsection{$M_{1}$ in the Lorentzian HS-orthogonality}
+\subsection{The $1/\pi^{2}$ of the Lorentzian HS-orthogonality (re-tiered)}
 
 The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ in the
-Pythagorean closed form \eqref{eq:hs_closed_form} is the same
-$M_{1}$ signature \emph{at the operator-system level}: the
-Krein wedge BW choice $H_{\mathrm{local}} = K_{\alpha}^{W}/(2\pi)$
-introduces a factor of $1/(2\pi)$ from the modular-circle
-circumference, which squared gives $1/(4\pi^{2})$ in
-$\|H_{\mathrm{local}}\|^{2}$.  The volume factor $4/\pi$
-of Paper~38 and the $1/\pi^{2}$ of Paper~43 are two manifestations
-of the same $\Vol(S^{2}) = 4\pi$ identity in the master Mellin
-engine.
+Pythagorean closed form \eqref{eq:hs_closed_form} has a single, explicit
+source:\ the Krein wedge BW choice $H_{\mathrm{local}} =
+K_{\alpha}^{W}/\beta$ with the \emph{posited} $\beta = 2\pi/\kappa_g$
+introduces a factor $1/(2\pi)$ (at $\kappa_g = 1$), which squared gives
+$1/(4\pi^{2})$.  That $2\pi$ is the continuum KMS/Bisognano--Wichmann
+period imported as a normalisation (Paper~42;\ the finite-cutoff generator
+is posited, not derived from a state, O0 open) --- a
+temporal-compactification $\pi$ in the sense of Paper~35, entering as
+input.  It is in the algebraic class of $M_1$, but it is \emph{not} shown
+to be the same $M_{1}$ signature as the $4/\pi$ of Paper~38, and no
+$\Vol(S^{2}) = 4\pi$ identity links them;\ an earlier version of this
+subsection asserted both (withdrawn 2026-09-28).
 
 \paragraph{Why this matters.}
 The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
@@ -1391,10 +1411,10 @@ the state-space GH rate.  The fact that these two abstractly-different
 levels agree on the same signature is non-trivial: it identifies the
 metric geometry of the GeoVac spectral triple as carrying the same
 M$_{1}$ signature that the abstract Mellin engine catalogues.
-Abstract taxonomy meets concrete state-space GH rates.  Paper~43~\S 10.2
-takes this further: the Lorentzian Pythagorean decomposition at the
-operator-system level carries the same M$_{1}$ signature again, this
-time on the operator algebra of the Krein wedge.
+Abstract taxonomy meets concrete state-space GH rates.  (Paper~42~\S 11.7's
+Lorentzian Pythagorean decomposition does \emph{not} extend this:\ its
+$1/\pi^{2}$ is the imported normalisation of the posited generator, not a
+computed $M_1$ output.)
 
 % =====================================================================
 % =====================================================================
@@ -1509,10 +1529,10 @@ level.
 Paper~47~\S 6 also establishes a \emph{three-carrier identification}:\
 the periodic compact $\sthree \times \Sone_{T}$ (Paper~45 substrate),
 the bounded Dirichlet $\sthree \times [-T/2, T/2]$
-(Paper~43 / Sprint L2-B/E substrate), and the non-compact
+(Paper~42~\S 11 / Sprint L2-B/E substrate), and the non-compact
 $\sthree \times \R_{t}$ (Paper~47 limit) all converge in norm-resolvent
 sense to the same physical Lorentzian Dirac as $T \to \infty$.  This
-resolves the apparent tension between Paper~43's bounded-interval
+resolves the apparent tension between Paper~42~\S 11's bounded-interval
 architecture (chosen to preserve causal structure / no CTCs via
 Geroch's theorem) and Paper~45's periodic-compact architecture (chosen
 to enable Latr\'emoli\`ere propinquity machinery on a compact
@@ -1537,18 +1557,18 @@ spatial rate formula), not an operator-level convergence, so it does not
 upgrade the descoped L3c-$\alpha$ panel to an established Lorentzian
 result.
 
-\subsection{Pythagorean orthogonality formal proof (Paper 43 §10.2 promotion)}
+\subsection{Pythagorean orthogonality formal proof (Paper~42~\S 11.7)}
 \label{sec:closures_pythagorean}
 
-Paper~43~\S 11~O4 named a formal proof of the diagonal/off-diagonal
+The former Paper~43 (open question O4) named a formal proof of the diagonal/off-diagonal
 subspace-decomposition mechanism behind the L2-F.1 (2026-05-17)
 empirical observation $\langle H_{\mathrm{local}}, \DL^{W}
 \rangle_{\mathrm{HS}} = 0$ as a follow-on.  The formal proof landed on
 2026-05-23 via a $\Z_{2}$ wedge-chirality parity argument and is now
-recorded in Paper~43~\S 10.2 as a formal theorem.
+recorded in Paper~42~\S 11.7 (Theorem~11.14) as a formal theorem.
 
 The argument has three structural inputs from
-Papers~42/43/44~\cite{paper42,paper43,paper44}:\
+Papers~42/44~\cite{paper42,paper44}:\
 (I1) the wedge chirality grading $\Pi_{W}$ (BBB Krein-chirality
 $\gamma^{5}$ restricted to the wedge) is a unitary self-adjoint
 involution;\
@@ -1696,8 +1716,9 @@ accessible theorems on the GeoVac hemispheric wedge, including:
 (T3) bit-exact panel inheritance --- the
 $\Lambda(2,3) = 2.0746$, $\Lambda(3,5) = 1.6101$, $\Lambda(4,7) = 1.3223$
 panel of Paper~45 would transport verbatim; (T5) synthetic Pythagorean
-orthogonality with the $1/\pi^{2}$ master Mellin engine $M_{1}$
-signature as the inverse-squared bridge cover slab-period; and
+orthogonality with the $1/\pi^{2}$ prefactor (the posited-normalisation
+$1/\beta^{2}$ of Paper~42~\S 11.7, not a computed $M_{1}$ output;\ re-tiered
+2026-09-28) as the inverse-squared bridge cover slab-period; and
 (T6) a proposed G2 metric-level \emph{route} for the GeoVac wedge
 specifically, via the bridge $\to$ MS pLGH workaround.  This last item
 is the most substantive design content of Paper~48:\ it offers a
@@ -1931,7 +1952,8 @@ because the Bargmann tower $(N,0)$ irreps have $N$-dependent
 dimensions and no uniform-rep matter sector); and (iv) modular-
 Hamiltonian structure of the wedge KMS state (Coulomb-side admits the
 Krein wedge HS-orthogonality of Corollary~\ref{cor:hs_orthogonality}
-with closed-form $M_{1}$ prefactor; the Hardy-sector side does not
+with closed-form prefactor $1/\beta^{2}$ of the posited normalisation;
+the Hardy-sector side does not
 admit the construction at all).  Closing G3 requires new
 NCG-framework machinery to bridge Riemannian and Hardy-sector spectral
 triples in a single tensor product; we make no claim about whether
@@ -1973,13 +1995,13 @@ degeneracy theorem (the natural Lorentzian-propinquity seminorm
 vanishes identically), and what survives on the temporal factor is
 Paper~45's signature-agnostic product-carrier rate (not a Lorentzian
 convergence).  The metric geometry of
-the truncated triples carries the same M$_{1}$ ($k = 0$ volume-slot)
-signature ($4/\pi$ in the Riemannian rate, $1/\pi^{2}$ in the
-Lorentzian Pythagorean closed form) that the abstract
+the truncated triples carries the M$_{1}$ ($k = 0$ volume-slot)
+signature ($4/\pi$ in the Riemannian rate) that the abstract
 $\pi$-source case-exhaustion theorem (Theorem~\ref{thm:pi_source})
-identifies at the spectral-triple level.  The cross-arc
-identification of these signatures is the deepest structural
-observation of the corpus.
+identifies at the spectral-triple level.  (The $1/\pi^{2}$ of the
+Lorentzian Pythagorean closed form, formerly counted as a second
+appearance, is the imported normalisation of a posited generator and is
+not shown to share that signature;\ re-tiered 2026-09-28.)
 
 % =====================================================================
 % Bibliography
@@ -2201,12 +2223,6 @@ J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated
 $\SU(2)$ spectral triples:\ the four-witness $2\pi$ period at finite
 cutoff},
-\newblock GeoVac internal preprint (2026), DOI via Zenodo.
-
-\bibitem[Loutey, internal Paper~43]{paper43}
-J.~Loutey,
-\newblock \emph{Lorentzian extension of the four-witness
-Wick-rotation theorem at finite cutoff},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~44]{paper44}

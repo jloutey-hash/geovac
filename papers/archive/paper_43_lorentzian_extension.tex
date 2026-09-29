@@ -1,4 +1,19 @@
 % =====================================================================
+% ARCHIVED 2026-09-28 (PI decision). SUCCESSOR: Paper 42,
+% Sec. "Krein-carrier extension at finite cutoff" (label
+% sec:lorentzian_closure). Both headlines were lost in the 2026-09-28
+% /qa trunk cycle: the finite four-witness closure is the automatic
+% integer-spectrum closure (K = 2 J_z; sigma_2pi = id for any operator),
+% and the Pythagorean 1/pi^2 is the posited beta = 2 pi / kappa_g
+% squared, not an M1 output. rem:order_zero_one below is also wrong:
+% the order-zero/one failures GROW with cutoff (Paper 32), they are not
+% artifacts expected to vanish. Surviving content (Krein carrier,
+% Lorentzian Dirac, (4,6) audit, period closure [SYMBOLIC], six-witness
+% by construction, HS orthogonality as a chirality-parity identity, M3
+% convention finding) lives in Paper 42. Register: docs/retired_papers.md.
+% This file is kept unedited below this block as the historical record.
+% =====================================================================
+% =====================================================================
 % Paper 43 (standalone): Lorentzian extension of the four-witness
 % Wick-rotation theorem on truncated $S^3 \times \R$ spectral triples
 % via Bizi--Brouder--Besnard Krein-space spectral triples at signature
@@ -98,6 +113,17 @@ and editorial decisions are the author's responsibility.}}
 \maketitle
 
 \begin{abstract}
+\noindent\fbox{\parbox{0.95\linewidth}{\textbf{Archived 2026-09-28.}
+This paper is superseded by Paper~42, Section ``Krein-carrier extension at
+finite cutoff'', which carries its surviving content with current tiers.
+Its two headline readings are withdrawn:\ the finite-cutoff period closure
+is automatic for any integer-spectrum generator and identifies no
+four-witness or Bisognano--Wichmann flow, and the $1/\pi^2$ of the
+Hilbert--Schmidt residual is the posited $\beta = 2\pi/\kappa_g$ squared,
+not a master-Mellin-engine output.  Remark~\ref{rem:order_zero_one} is
+also withdrawn:\ the order-zero/one failures grow with the cutoff.}}
+
+\medskip
 The four-witness Wick-rotation theorem
 (Hartle--Hawking~\cite{hartle_hawking1976}, Sewell~\cite{sewell1982},
 Bisognano--Wichmann~\cite{bisognano_wichmann1976},
@@ -157,7 +183,10 @@ compression annihilates the spatial Dirac, and result~(i) above is
 itself the mechanism --- an \emph{integer} modular spectrum makes the
 finite-cutoff modular flow a compact $\beta = 2\pi$ circle rather than a
 non-compact boost, so every Lipschitz/boost seminorm built on it is
-signature-blind.  This is consistent with, and explains, the present
+signature-blind (the load-bearing part is compactness, which holds for
+\emph{any} finite-cutoff generator, posited or derived;\ the exact $2\pi$
+period and its KMS reading are specific to the posited generator and
+conditional on Paper~42's open O0, Paper~45~Q1).  This is consistent with, and explains, the present
 paper's own main structural finding that the residual is
 \emph{signature-independent}.  The bit-exact closures below stand as
 computed;\ what does not follow from them is a metric statement about
@@ -1427,9 +1456,10 @@ bit-exact signature-independence of the residual at $\Nt = 1$. A
 post-L2-E PSLQ probe (\texttt{debug/h\_local\_residual\_pslq\_memo.md},
 2026-05-17) identified the structural mechanism behind that
 signature-independence: the residual decomposes as a Pythagorean
-sum, with one summand in the master Mellin engine M1 ring
-(Paper~32~\S~VIII; Vol$(S^1)^2 = (2\pi)^2$ Hopf-base measure
-signature) and one summand purely rational.
+sum, with one summand carrying the factor
+$1/\beta^{2} = \kappa_g^{2}/(4\pi^{2})$ of the posited normalisation
+$\beta = 2\pi/\kappa_g$ and one summand purely rational (the
+transcendental is tagged in the paragraph ``Transcendental tag'' below).
 
 \begin{corollary}[Pythagorean orthogonality of $H_{\mathrm{local}}$
 and $\DL^W$]\label{cor:pythagorean_orthogonality}
@@ -1464,7 +1494,8 @@ recompute-from-framework backing
 (\texttt{tests/test\_paper43\_pythagorean\_hs\_orthogonality.py}) checks
 $\Frob{H_{\mathrm{local}}}^2 \cdot 4\pi^2 = S(\nmax)$ and
 $\Frob{\DL^W}^2 = D(\nmax)$ against the live wedge operators --- i.e.\
-$1/\pi^2$ is the sole transcendental in the residual.
+$1/\pi^2$ is the sole transcendental in the residual, and it enters only
+through $1/\beta^{2}$.
 The rational coefficients $S, D$ are recognisable as cumulative
 wedge-Casimir traces:\ $S(\nmax)/4 = \sum_{\mathrm{wedge}} m_j^2$ is
 the squared angular-momentum trace around the Hopf axis, and
@@ -1521,23 +1552,33 @@ temporal-derivative content $i\gamma^0 \otimes \partial_t$ in
 $\DL$ enters the off-diagonal subspace, not the diagonal one, so
 the orthogonality is preserved. The $\Nt > 1$ residual increment
 is a pure-rational shift driven by the finite-difference grid
-spacing;\ no new transcendentals are introduced. The master
-Mellin engine M1 ring is closed under the $\Nt > 1$ extension.
+spacing;\ no new transcendentals are introduced (the only one remains
+the $1/\beta^{2}$ of the posited normalisation).
 
-\paragraph{Master Mellin engine reading.}
-The residual sits entirely in the M1 sector of
-Paper~32~\S~VIII / Paper~18~\S~III.7's master Mellin engine:\ the
-sole transcendental is $1/\pi^2 = 1/\Vol(S^1)^2$, the squared
-Hopf-base-measure signature. This is structurally a $k = 0$
-instantiation of the case-exhaustion theorem, where the orthogonal
-pair of cumulative Casimir traces ($S$ in the $K_\alpha$ sector,
-$D$ in the $D_W$ sector) decompose into two non-overlapping
-subspaces of the wedge operator algebra. The residual does
-\emph{not} join the framework's irreducible-but-natural list
-($K = \pi(B + F - \Delta)$, Sprint~MR-C $L_2$ next-order
-constant $c \approx 4.10932\ldots$, $S_{\mathrm{full}}(\mathrm{GS})$,
-Wolfenstein parameters);\ it is fully decomposable in M1, with
-explicit polynomial-in-$\nmax$ coefficients.
+\paragraph{Transcendental tag (re-tiered 2026-09-28).}
+The sole transcendental in the residual is $1/\pi^2$, and its source is
+explicit:\ $H_{\mathrm{local}} = K_\alpha^W/\beta$ with the \emph{posited}
+$\beta = 2\pi/\kappa_g$, the continuum Bisognano--Wichmann/KMS period
+imported as a normalisation (Paper~42). In Paper~18/Paper~34 terms it is
+the $2\pi$ of a thermal (temporal-compactification) circle
+(Paper~35) entering as \emph{input} and squared by the Frobenius norm ---
+not an output of any spectral computation on the truncated triple. What
+Theorem~\ref{thm:pythagorean_formal} proves is $\beta$-independent:\ the
+HS-orthogonality is a chirality-parity identity that holds for every
+rescaling of $K_\alpha^W$, and $S$, $D$ are cumulative wedge traces. The
+residual lies in $\Q[\nmax] \oplus \pi^{-2}\Q[\nmax]$, the algebraic class
+of the M1 sector of the master Mellin engine (Paper~32~\S~VIII), but no
+Mellin mechanism producing it is exhibited and it is \emph{not} shown to be
+the same M1 signature as the $4/\pi$ of the Paper~38 rate constant. An
+earlier version of this paragraph read it as the squared Hopf-base measure
+$1/\Vol(S^1)^2$ and as a $k = 0$ instantiation of the case-exhaustion
+theorem;\ that reading is withdrawn (2026-09-28), because the $2\pi$ is the
+posited $\beta$, not a computed volume. The residual does \emph{not} join
+the framework's irreducible-but-natural list ($K = \pi(B + F - \Delta)$,
+Sprint~MR-C $L_2$ next-order constant $c \approx 4.10932\ldots$,
+$S_{\mathrm{full}}(\mathrm{GS})$, Wolfenstein parameters);\ it is fully
+decomposable, with explicit polynomial-in-$\nmax$ coefficients and one
+normalisation-imported $\pi^{-2}$.
 
 \paragraph{Formal proof (Sprint Pythagorean Orthogonality, 2026-05-23).}
 The structural sketch above promotes to a formal theorem via a
@@ -2036,14 +2077,15 @@ sub-machine precision at every panel cell.
 The Lorentzian-side analog of Paper~38~\cite{paper38}'s qualitative-rate
 state-space GH convergence remains open \emph{at the continuum / non-compact
 level}. The \emph{finite-cutoff} side is now understood structurally
-(Paper~45~\cite{paper45}\,\S\,open~Q1, 2026-06):\ the posited
-truncated boost-class generator is \emph{compact} (the generator
-$K = \mathrm{diag}(2m_{j})$ has integer spectrum, so $e^{2\pi i K} = I$ at
-every finite cutoff and the modular flow is the $2\pi$-periodic KMS circle,
-not a non-compact boost). A compact circle carries only a Euclidean
-(forward-triangle) metric, so at every finite cutoff the quantum metric is
-Euclidean and the Lorentzian signature is the Wick rotation $t \to it$ of
-that circle --- a convention, not a finite-cutoff metric. This is precisely
+(Paper~45~\cite{paper45}\,\S\,open~Q1, 2026-06;\ re-tiered 2026-09-28):\
+every finite-cutoff generator, posited or derived, generates a flow with
+compact closure, never a non-compact boost, so at every finite cutoff the
+quantum metric is Euclidean (forward triangle) --- unconditionally. For the
+posited $K = \mathrm{diag}(2m_{j})$ the spectrum is integer, so
+$e^{2\pi i K} = I$ and the flow is a $2\pi$-periodic circle;\ reading that
+circle as the KMS circle of the truncated Bisognano--Wichmann boost, and the
+Lorentzian signature as its Wick rotation $t \to it$ (a convention, not a
+finite-cutoff metric), is conditional on Paper~42's open O0. This is precisely
 \emph{why} the open continuum closure \emph{requires a non-compact extension}
 (below):\ the reverse-triangle Lorentzian signature lives only in the
 non-compact ($n_{\max} \to \infty$, type-III) limit. No Lorentzian
@@ -2077,17 +2119,19 @@ Section~\ref{sec:pythagorean_orthogonality}
 the residual to a structural Pythagorean identity:\
 $H_{\mathrm{local}}$ and $\DL^W$ live in mutually-orthogonal
 Hilbert--Schmidt subspaces of $\mathcal{B}(\Hilb_W)$, with the
-squared residual decomposing in the master Mellin engine M1 ring.
+squared residual decomposing into a rational part plus the
+$1/\beta^{2}$ of the posited normalisation.
 The diagonal/off-diagonal subspace decomposition is now
 \textbf{formally closed} by Theorem~\ref{thm:pythagorean_formal}
 (added 2026-05-23 via the Sprint Pythagorean Orthogonality
 formal-proof closure documented in
 \texttt{debug/sprint\_pythagorean\_orthogonality\_proof\_memo.md}):\
 a $\mathbb{Z}_{2}$ wedge-chirality grading $\Pi_{W}$ exists with
-$H_{\mathrm{local}}$ even and $\DL^{W}$ odd, and the
-HS-orthogonality follows directly from the cyclicity-of-trace /
-unitary-conjugation argument
-(Lemma~\ref{lem:parity_HS}). The bit-exact L2-F.1 numerical
+$H_{\mathrm{local}}$ even and $\DL^{W}$ of mixed parity (temporal factor
+odd, spatial factor even and chirality sign-paired), and the
+HS-orthogonality follows from the cyclicity-of-trace /
+unitary-conjugation argument (Lemma~\ref{lem:parity_HS}) together with
+the chirality-pairing cancellation (Lemma~\ref{lem:pairing_HS}). The bit-exact L2-F.1 numerical
 panel at 18 cells is empirical corroboration of the now-algebraic
 identity, not finite-cutoff bound noise.
 The deeper question --- which generator a Camporesi--Higuchi wedge

@@ -342,13 +342,21 @@ dynamics live on $S^{3N-1}$ and the angular kinetic energy is the
 $\mathrm{SO}(3N)$ Casimir operator with eigenvalue
 $\mu_{\mathrm{free}} = \nu(\nu + 3N - 2)/2$.  Fermionic antisymmetry
 restricts the spatial wavefunction to the $S_N$ irreducible
-representation conjugate to the spin Young diagram, whose first-column
-length $\lambda_1$ fixes the minimum angular quantum number
-$\nu = N - \lambda_1$.  For every atom with ground-state spin $S<N/2$ the
-spatial irrep has $\lambda_1=2$, giving the universal result
+representation conjugate to the spin Young diagram
+$[n_\uparrow, n_\downarrow]$.  The minimum angular quantum number is
+the Pauli-filling count
 \begin{equation}
-\nu = N-2,\qquad \mu_{\mathrm{free}} = 2(N-2)(N-1).
+\nu_{\min}(N,S) = E(n_\uparrow) + E(n_\downarrow),\qquad
+\mu_{\mathrm{free}} = \nu_{\min}(\nu_{\min} + 3N - 2)/2,
 \end{equation}
+where $E(m)$ is the sum of the $m$ lowest one-particle polynomial
+degrees, degree $d$ holding $(d+1)(d+2)/2$ functions (Paper~16, verified
+by two independent routes, \texttt{tests/test\_paper16\_nu\_min.py}).  It
+equals $N-2$ only for the lowest spin with $N \le 8$;\ the Ne singlet has
+$\nu_{\min} = 10$, and the fully polarized state is spatially
+antisymmetric with a large $\nu_{\min}$.  An earlier version of this
+paragraph stated a universal $\nu = N-2$ and $\mu_{\mathrm{free}} =
+2(N-2)(N-1)$, both withdrawn 2026-09-28.
 
 This produces a five-type classification of atoms---A (trivial), B
 (noble gas), C (alkali), D (alkaline earth), E (open shell)---and recasts
@@ -356,8 +364,9 @@ the periodic law as the repetition of the $S_N$ irrep sequence
 $\mathrm{C}\to\mathrm{D}\to\mathrm{E}\to\mathrm{B}$ within each period.
 The classification is implemented in \texttt{atomic\_classifier.py},
 which refines the open-shell type~E into a $p$-block dispatch (E) and a
-separate $d$-block dispatch (F) for the composed builder, and supplies
-the universal angular quantum number $\nu = N-2$.
+separate $d$-block dispatch (F) for the composed builder.  (Its
+$\nu$/$\mu_{\mathrm{free}}$ metadata fields are descriptive only; no
+Hamiltonian or library number depends on them.)
 
 \paragraph{Honest framing.}
 The classification \emph{maps onto, rather than predicts}, the known

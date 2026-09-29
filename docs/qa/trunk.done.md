@@ -120,6 +120,19 @@ re-prices everything above it.
 - **No branch-specific C14+.**
 
 ## Change log
+- 2026-09-28 (v5.17.5 working tree, DELTA #14, claim-impact, unseeded) — **DEFECTS;
+  RESEARCH-GRADE NOT earned.** ~16 LARGE + ~43 SMALL, every LARGE PM-verified in the
+  frozen worktree. Dimensions: deterministic PASS (all 14 gates); citations CLEAN of
+  LARGE (0 LARGE / 5 SMALL); code — P7/P16/classifier CLEAN (0 LARGE, all numbers
+  re-derived by a second route, 10/10 plants fired), guard pass 1 LARGE (the rewritten
+  s/p splitting guard cannot see a wrong cluster tolerance: DEG_TOL 1e-8 -> 1e-16 left
+  19/19 green, PM-reproduced); claims P0/1/7 1 LARGE family; claims P32/38 5 LARGE + 1
+  pre-existing candidate; synthesis 2 LARGE; claim-impact 7 LARGE. Dominant class: a
+  correction applied in the owner (P7 Stage 3 kernel, P38 true window / A2, P32
+  sections, P16, P56) not yet propagated to every locus that summarizes it — including
+  the mirror direction (owner STRENGTHENED, summaries kept "imposed"). One LARGE is a
+  remediation error of this cycle (P50's CHM "both spectra integer-valued" is false for
+  the continuum modular Hamiltonian). List brought to the PI per the standing agreement.
 - 2026-09-28 (v5.17.3, FULL #9) — **FAIL; RESEARCH-GRADE NOT earned.** Unseeded;
   standing calibration record cited. Dimensions: deterministic PASS (C5, C10–C24);
   code FAIL (P7 1 LARGE, P32 3 LARGE, P38 2 LARGE; P0/P1 sound); claims FAIL

@@ -398,11 +398,18 @@ Witness & Source & M1 factor & Tate weight \\
 $\Vol(S^2)/4 = \pi$ & Paper~25~\S~II.1~\cite{loutey_paper25} (Hopf base) & $\pi$ & $+1$ \\
 $4/\pi$ (asymptotic state-space GH rate) & Paper~38~\S~L2~\cite{loutey_paper38} & $\pi^{-1}$ & $-1$ \\
 $4/\pi$ (universal across compact Lie groups) & Paper~40 Thm 1~\cite{loutey_paper40} & $\pi^{-1}$ & $-1$ \\
-$1/\pi^2$ (Pythagorean orthogonality prefactor) & Paper~43~\S~10.2~\cite{loutey_paper43} & $\pi^{-2}$ & $-2$ \\
+$1/\pi^2$ (Pythagorean prefactor; posited $1/\beta^2$, class only$^{\dagger}$) & Paper~42~\S~11.7~\cite{loutey_paper42} & $\pi^{-2}$ & $-2$ \\
 $1/\pi^2$ (F-theorem cross-product) & Paper~50 Thm 3.4~\cite{loutey_paper50} & $\pi^{-2}$ & $-2$ \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\noindent$^{\dagger}$The Paper~42~\S~11.7 entry (the Krein-carrier
+extension, formerly Paper~43) is the square of the posited
+normalisation $\beta = 2\pi/\kappa_g$ of a finite-cutoff generator that is
+not derived from a state;\ it witnesses membership in $\Q[\pi,\pi^{-1}]$
+only, not an M1 mechanism, and is not shown to share the signature of the
+$4/\pi$ rows (re-tiered 2026-09-28).
 
 Every entry is $q \cdot \pi^n$ for $q \in \Q$ and $n \in \Z$ with
 $|n| \le 2$ on the empirical witnesses logged so far.  The K-formula
@@ -1388,11 +1395,13 @@ shuffle-Hopf / deconcatenation-pair signature.
 
 \textbf{No empirical demand} from the JLO probe for the beyond-sprint-scale
 follow-on to cofree-cocommutative shuffle Hopf algebra $T(V)$
-enrichment of the substrate.  The injection theorem
-$U^*_{\mathrm{GV}} \hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$
-of Paper~56 (Theorem~\texttt{thm:injection\_g4}, 2026-06-06) is
-the structurally correct statement:\ GeoVac is the abelianised
-image, not a partial achievement.
+enrichment of the substrate.  The comparison homomorphism
+$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$
+of Paper~56 (Theorem~\texttt{thm:injection\_g4}, 2026-06-06;\ \emph{not}
+injective --- the M3 column has rank~$2$, far below the sector count) is
+the structurally correct statement:\ it factors through the
+abelianization, and GeoVac realises the abelianised image, not a
+partial achievement.
 
 Two open questions remain.  (i) Non-commutative inner-factor
 enrichment of $\mathcal{A}$ would expose Reading B content sitting
@@ -1401,10 +1410,11 @@ theorem (Paper~32~\cite{loutey_paper32} \S~VIII.C;
 \texttt{memory/sprint\_h1\_positive\_thin.md}) already classifies
 the inner factor as calibration data, not autonomously generated
 by the GeoVac outer triple, so the non-commutative enrichment
-question is not a sprint-scale follow-on.  (ii) The equality
-direction $\Phi^{\mathrm{inj}}$ surjective onto
-$\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (Paper~56, 2026-06-06)
-remains the named open forward research question, testable
+question is not a sprint-scale follow-on.  (ii) How large the image of
+the comparison homomorphism $\Phi^{\mathrm{inj}}$ is inside
+$\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (Paper~56, 2026-06-06) ---
+since the map is not injective, this is a question about its image,
+not an isomorphism --- remains the named open forward research question, testable
 by exhausting GeoVac's M3 sector at depth $\ge 2$ for level-$4$
 cyclotomic motivic MZVs.  Today's verdict eliminates one structural
 ambiguity (primitive vs shuffle) on the GeoVac side without
@@ -3296,9 +3306,10 @@ J.~Loutey, ``State-space Gromov--Hausdorff convergence of spectral
 truncations of compact semisimple Lie groups with bi-invariant metric,'' GeoVac
 corpus Paper~40 (2026).
 
-\bibitem{loutey_paper43}
-J.~Loutey, ``Lorentzian extension of the four-witness Wick-rotation
-theorem at finite cutoff,'' GeoVac corpus Paper~43 (2026).
+\bibitem{loutey_paper42}
+J.~Loutey, ``Tomita--Takesaki modular structure on truncated $SU(2)$
+spectral triples:\ the four-witness $2\pi$ period at finite cutoff,''
+GeoVac corpus Paper~42 (2026).
 
 \bibitem{loutey_paper50}
 J.~Loutey, ``Boundary CFT$_3$-on-$\sthree$ observables on the

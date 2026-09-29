@@ -115,30 +115,21 @@ class TestQuantumNumbersRow2:
         """All second-row atoms are period 3."""
         assert classify_atom(Z).period == 3
 
+    # nu = lowest-spin Pauli-filling count (Paper 16 eq:nu_min, corrected
+    # 2026-09-28): E(ceil(N/2)) + E(floor(N/2)), degree d holding (d+1)(d+2)/2
+    # functions. Values computed BY HAND, not from the code. The retracted
+    # 'universal nu = N-2' agrees only through N = 8; N = 9, 10 reject it.
     @pytest.mark.parametrize("Z, nu", [
-        (11, 9),    # 11 - 2
-        (12, 10),   # 12 - 2
-        (13, 11),
-        (14, 12),
-        (15, 13),
-        (16, 14),
-        (17, 15),
-        (18, 16),
+        (11, 12), (12, 14), (13, 16), (14, 18),
+        (15, 20), (16, 22), (17, 24), (18, 26),
     ])
     def test_nu(self, Z: int, nu: int) -> None:
         assert classify_atom(Z).nu == nu
 
-    # mu_free = SO(3N) Casimir nu(nu+3N-2)/2 = 2(N-2)(N-1) for nu=N-2
-    # (Paper 16 eq:mu_formula); N=Z for neutral atoms.
+    # mu_free = nu(nu+3N-2)/2 (Paper 16 eq:mu_formula); N=Z.
     @pytest.mark.parametrize("Z, mu_free", [
-        (11, 2.0 * 9 * 10),    # 180.0
-        (12, 2.0 * 10 * 11),   # 220.0
-        (13, 2.0 * 11 * 12),   # 264.0
-        (14, 2.0 * 12 * 13),   # 312.0
-        (15, 2.0 * 13 * 14),   # 364.0
-        (16, 2.0 * 14 * 15),   # 420.0
-        (17, 2.0 * 15 * 16),   # 480.0
-        (18, 2.0 * 16 * 17),   # 544.0
+        (11, 258.0), (12, 336.0), (13, 424.0), (14, 522.0),
+        (15, 630.0), (16, 748.0), (17, 876.0), (18, 1014.0),
     ])
     def test_mu_free(self, Z: int, mu_free: float) -> None:
         assert classify_atom(Z).mu_free == pytest.approx(mu_free)
@@ -198,8 +189,8 @@ class TestSupportRow2:
         """Z=19 returns correct N_electrons and nu."""
         c = classify_atom(19)
         assert c.N_electrons == 19
-        assert c.nu == 17  # 19 - 2
-        assert c.mu_free == pytest.approx(2.0 * 17 * 18)  # 612 = 2(N-2)(N-1)
+        assert c.nu == 28  # E(10)+E(9) = 15+13 (retracted N-2 gave 17)
+        assert c.mu_free == pytest.approx(1162.0)  # 28*83/2
 
 
 # ---------------------------------------------------------------------------
@@ -219,8 +210,8 @@ class TestDataclassRow2:
         assert c.n_core_electrons == 10
         assert c.n_valence_electrons == 1
         assert c.Z_eff_valence == pytest.approx(1.0)
-        assert c.nu == 9
-        assert c.mu_free == pytest.approx(180.0)  # 2*9*10 = 2(N-2)(N-1)
+        assert c.nu == 12   # E(6)+E(5) = 7+5
+        assert c.mu_free == pytest.approx(258.0)  # 12*43/2
         assert c.pk_params is None
         assert c.pk_source == 'frozen_core'
         assert c.core_config == '1s2 2s2 2p6'
@@ -240,8 +231,8 @@ class TestDataclassRow2:
         assert c.n_core_electrons == 10
         assert c.n_valence_electrons == 8
         assert c.Z_eff_valence == pytest.approx(8.0)
-        assert c.nu == 16
-        assert c.mu_free == pytest.approx(544.0)  # 2*16*17 = 2(N-2)(N-1)
+        assert c.nu == 26   # E(9)+E(9) = 13+13
+        assert c.mu_free == pytest.approx(1014.0)  # 26*78/2
         assert c.pk_params is None
         assert c.pk_source == 'frozen_core'
         assert c.core_config == '1s2 2s2 2p6'
@@ -258,14 +249,15 @@ class TestDataclassRow2:
 # ---------------------------------------------------------------------------
 
 class TestHeavyRowFormulaPath:
-    """nu = N-2 and mu_free = 2(N-2)(N-1) on the fallback path, pinned to
-    the Paper 16 tab:mu_values heavy rows."""
+    """Lowest-spin Pauli-filling nu and mu_free on the fallback path, pinned to
+    the corrected Paper 16 tab:mu_values heavy rows (retracted N-2 values:
+    34/52/84/116)."""
 
     @pytest.mark.parametrize("Z, nu, mu_free", [
-        (36, 34, 2380.0),    # Kr
-        (54, 52, 5512.0),    # Xe (fallback: not in _ATOM_DATA)
-        (86, 84, 14280.0),   # Rn (fallback)
-        (118, 116, 27144.0), # Og
+        (36, 78, 7176.0),      # Kr: 2*E(18) = 2*39
+        (54, 146, 22338.0),    # Xe (fallback): 2*E(27) = 2*73
+        (86, 290, 79170.0),    # Rn (fallback): 2*E(43) = 2*145
+        (118, 456, 184224.0),  # Og: 2*E(59) = 2*228
     ])
     def test_heavy_row(self, Z: int, nu: int, mu_free: float) -> None:
         c = classify_atom(Z)

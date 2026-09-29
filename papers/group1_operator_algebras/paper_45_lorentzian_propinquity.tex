@@ -14,7 +14,8 @@
 % rate constant on compact Lie groups), Paper 42 (Tomita-Takesaki
 % modular structure; finite 2pi period automatic for the posited
 % generator, no finite-cutoff four-witness identification, 2026-09-28),
-% Paper 43 (its Krein-carrier extension), Paper 44
+% Paper 42 Sec. 11 (its Krein-carrier extension; former Paper 43,
+% archived 2026-09-28), Paper 44
 % (Lorentzian operator-system substrate).
 %
 % Status: first draft, May 2026, post-Sprint-L3b-2 closure
@@ -208,9 +209,9 @@ that the leg's most natural device fails structurally --- following the math.OA 
 Gromov--Hausdorff convergence on $\SU(2)$, on tensor products of $\SU(2)$ triples at
 distinct focal lengths, and on general compact Lie groups with
 bi-invariant metric) and the Lorentzian extensions
-Papers~42--44~\cite{paper42,paper43,paper44} (Tomita--Takesaki modular
-structure on Riemannian truncations;\ its extension to the
-Lorentzian Krein wedge;\ operator-system
+Papers~42 and~44~\cite{paper42,paper44} (Tomita--Takesaki modular
+structure on Riemannian truncations, with its extension to the
+Lorentzian Krein wedge in Paper~42~\S~11;\ operator-system
 substrate of the Lorentzian Krein spectral triple at finite cutoff).
 
 The dominant blocker for transferring quantum Gromov--Hausdorff
@@ -414,7 +415,7 @@ annihilation theorem, dissects the failure of the compression
 assembly, and states the spatial convergence statement.
 \S~\ref{sec:numerical} presents the rate-formula panel and the
 $\Nt = 1$ reduction. \S~\ref{sec:discussion} discusses the four-witness
-Wick-rotation connection (Paper~42/43), states the reopened open
+Wick-rotation connection (Paper~42, including its \S~11), states the reopened open
 questions, and positions the work against Mondino--S\"amann.
 Appendix~\ref{app:plancherel} records the symbolic Plancherel
 calculation for the joint Fej\'er symbol.
@@ -449,13 +450,14 @@ vdD~\cite{vandungen2016}, BBB~\cite{bizi_brouder_besnard2018}).
 The canonical choice $T = 2\pi$ matches the
 Bisognano--Wichmann~\cite{bisognano_wichmann1976} modular period at
 unit surface gravity, the period of the posited modular generator of
-Papers~42--43~\cite{paper42,paper43}. The proof of the main theorem
+Paper~42~\cite{paper42} (including its Krein-carrier \S~11). The proof of the main theorem
 holds for any $T > 0$;\ explicit dependence on $T$ enters the
 $\Uone$ factor of the joint mass-concentration moment as $O(T/\Nt)$.
 
 \subsection{Krein space and fundamental symmetry}\label{sec:krein_space}
 
-Per Paper~43~\cite{paper43}\S~2 / Paper~44~\cite{paper44}\S~2, the
+Per Paper~42~\cite{paper42}\S~11.1 (Definition~11.1, Proposition~11.2) /
+Paper~44~\cite{paper44}\S~2, the
 Krein space is
 \begin{equation}\label{eq:Krein_def}
    \Krein_{\nmax,\Nt} \;:=\; \HGV^{\nmax} \otimes \C^{\Nt},
@@ -479,7 +481,7 @@ West-coast assigns $(m, n) = (s + t, t - s \bmod 8) = (4, 6)$ via
 BBB~\cite{bizi_brouder_besnard2018} Table~3, fixing
 $\epsilon = +1, \epsilon'' = -1, \kappa = -1, \kappa'' = +1$. These
 signs were verified bit-exact at finite cutoff in
-Paper~43~\S~5~\cite{paper43}.
+Paper~42~\S~11.2~\cite{paper42} (Theorem~11.5, Proposition~11.7).
 
 \subsection{Lorentzian Dirac operator}\label{sec:lorentzian_dirac}
 
@@ -508,7 +510,8 @@ the chiral basis, $\partial_{t}^{\dagger} = -\partial_{t}$, and
 $\JL^{2} = +I$ combine to give the stated identity. The sign $i^{t} =
 +i$ in (\ref{eq:DL_def}) is forced by this requirement (an opposite
 sign would give an anti-Krein-self-adjoint $\DL$);\ see
-Paper~43~\S~3~\cite{paper43} for the explicit derivation.
+Paper~42~\S~11.1~\cite{paper42} (Definition~11.3, Proposition~11.4) for
+the explicit derivation.
 
 \subsection{Truncated Lorentzian operator system}\label{sec:op_system}
 
@@ -713,7 +716,7 @@ $\HGV^{\nmax}$ (Frobenius residual $0.0$ in float64).
 \end{lemma}
 
 \begin{proof}
-(a)--(c) are direct from the construction and Paper~43~\S~2,3,5.
+(a)--(c) are direct from the construction and Paper~42~\S~11.1--11.2.
 (d) is Paper~44~\S~3 (via the structural identity $\dim((\Op^{L})^{2})
 = \dim_{\Weyl}^{2} \cdot \Nt$ on the Weyl-doubled envelope).
 (e) follows from $[\gamma^{0}, M^{\spat}] = 0$ (chirality-swap acts
@@ -1639,7 +1642,7 @@ which it cannot detect. A falsifier with actual teeth for this
 construction is the operator-level seminorm check of
 Corollary~\ref{cor:annihilation_numerics}, which detects the failure
 immediately. The corresponding $\Nt = 1$ reductions in Paper~42
-(Tomita--Takesaki construction) and Paper~43 (Lorentzian Dirac) are
+(Tomita--Takesaki construction, and the Lorentzian Dirac of its \S~11) are
 genuinely operator-level.
 
 \subsection{Asymptotic rate consistency}\label{sec:asymp_consistency}
@@ -1666,12 +1669,12 @@ Sewell~\cite{sewell1982},
 Bisognano--Wichmann~\cite{bisognano_wichmann1976},
 Unruh~\cite{unruh1976}), via the geometric BW-$\alpha$ and
 Tomita--Takesaki BW-$\gamma$ readings of a posited generator on a
-hemispheric wedge;\ Paper~43~\cite{paper43} carries it to the Krein
-wedge.  Their $2\pi$ period closures are automatic for an
+hemispheric wedge;\ its \S~11 (the former Paper~43, archived 2026-09-28)
+carries it to the Krein wedge.  Their $2\pi$ period closures are automatic for an
 integer-spectrum generator and do not identify the four-witness theorem
 at finite cutoff (withdrawn 2026-09-28).
 
-Papers~42/43's elementary modular-structure statements are unaffected
+Paper~42's elementary modular-structure statements are unaffected
 by the degeneracy. The convergence leg
 of the arc, by contrast, is \emph{not closed}:\ the present paper
 proves that the natural device for it cannot work
@@ -1707,34 +1710,50 @@ than diminishes the contrast.
 \item[(Q1)] \textbf{The reopened target:\ a Lorentzian/Krein
 quantum-metric convergence theorem.}
 \textbf{Resolved on the convention branch (2026-06-19), with a structural
-reason.} The accumulated evidence below (operator Lipschitz seminorm
-signature-blind; boost-seminorm $Q$ a grading not a signature; the forward
-chain inequality the only universal state-level direction) has a single
-mechanism:\ \emph{the truncated Bisognano--Wichmann-type generator is compact}
-(the generator is Paper~42's \emph{posited} one, not derived from a
-state;\ its identification with the boost at finite cutoff is withdrawn,
-2026-09-28). The
-generator $K = \mathrm{diag}(2m_{j})$ has integer (odd) spectrum,
-so $e^{2\pi i K} = \mathbb{1}$ bit-exact at every finite cutoff (verified
+reason;\ re-tiered 2026-09-28 into a generator-independent leg and a leg
+conditional on Paper~42's open O0.} The accumulated evidence below (operator
+Lipschitz seminorm signature-blind; boost-seminorm $Q$ a grading not a
+signature; the forward chain inequality the only universal state-level
+direction) has a single mechanism, compactness of the finite-cutoff flow, and
+it splits into two legs of different tier.
+\emph{(a) Generator-independent.} \emph{[SYMBOLIC, elementary]:}\ any finite-cutoff
+generator --- Paper~42's posited one, or a modular Hamiltonian \emph{derived}
+from a wedge-restricted Camporesi--Higuchi state were O0 closed --- is a
+finite Hermitian matrix, so $t \mapsto e^{itK}$ has discrete spectrum and
+compact closure (a torus in the unitary group), never a non-compact boost with
+continuous spectrum. This leg uses no identification of a finite generator
+with the Bisognano--Wichmann boost. \emph{[ARGUED, not proved]:}\ the
+interpretive step that the conclusion below rests on --- that a compact flow
+carries only a \emph{Euclidean} (forward-triangle) structure, and that
+the \emph{reverse}-triangle Lorentzian proper time (the Wick rotation
+$t \to it$, SO(2) $\to$ SO(1,1)) requires the \emph{non-compact} continuum
+boost (continuous spectrum, type III), i.e.\ the $n_{\max} \to \infty$ limit
+that the finite-cutoff propinquity framework approaches but never reaches ---
+is a structural argument supported by the accumulated evidence, not a
+theorem;\ only the compactness of $e^{itK}$ carries the [SYMBOLIC] tag.
+\emph{(b) Specific to the posited generator.} Paper~42's
+$K = \mathrm{diag}(2m_{j})$ has integer (odd) spectrum, so
+$e^{2\pi i K} = \mathbb{1}$ bit-exact at every finite cutoff (verified
 $n_{\max}=2..5$, falsifier \texttt{tests/test\_lorentzian\_toeplitz\_kplus.py})
---- the modular flow is a $2\pi$-periodic rotation, the KMS $\beta=2\pi$
-circle, not a non-compact boost (forced:\ finite Hermitian $\Rightarrow$
-discrete spectrum $\Rightarrow$ compact flow). A compact circle carries only a
-\emph{Euclidean} (forward-triangle) metric; its Wick rotation $t \to it$
-(SO(2) $\to$ SO(1,1)) is what produces the \emph{reverse}-triangle Lorentzian
-proper time. So the Lorentzian signature requires the \emph{non-compact}
-continuum boost (continuous spectrum, type III):\ under the continuum
-range-normalization $K/\max|\mathrm{spec}|$ the spectral spacing $\to 0$
-and the flow period $\to \infty$ monotonically as $n_{\max} \to \infty$, so
-de-compactification --- and with it the reverse triangle --- is \emph{strictly}
-the $n_{\max} \to \infty$ limit that the finite-cutoff propinquity framework
-approaches but never reaches. \textbf{Conclusion:}\ at every finite cutoff the
-quantum metric is Euclidean (forward triangle, the only universal direction);
-the Lorentzian signature is the Wick rotation of the compact $2\pi$-circle ---
-a choice of contour (convention), not a truncation-level metric object. This
-is the metric-level dual of the WH7 reading (compactness $\Rightarrow$
-discreteness $\Rightarrow$ the $\pi/\beta$ of the KMS circle). The detailed
-failure analysis that this mechanism explains follows.
+and its flow is exactly a $2\pi$-periodic circle;\ under the range
+normalisation $K/\max|\mathrm{spec}|$ the spectral spacing $\to 0$ and the
+period $\to \infty$ monotonically as $n_{\max} \to \infty$. That this circle
+is the truncated Bisognano--Wichmann boost, and that its period is the KMS
+$\beta = 2\pi$ of a wedge state, is \emph{not} established at finite cutoff
+(the generator is posited, not derived from a state;\ withdrawn as an
+identification 2026-09-28, Paper~42 O0). A derived generator need not have
+commensurate spectrum:\ its flow would then be quasi-periodic on a torus
+rather than one circle, leg~(a) would be unchanged, and leg~(b)'s ``$2\pi$
+circle'' would not apply literally. \textbf{Conclusion:}\ at every finite
+cutoff the quantum metric is Euclidean (forward triangle, the only universal
+direction) --- independently of O0, via leg~(a) (whose compactness half is
+[SYMBOLIC] and whose Euclidean-only reading is argued). The sharper reading --- the
+Lorentzian signature is the Wick rotation of the compact KMS $2\pi$-circle,
+a choice of contour (convention) rather than a truncation-level metric object, % [retracted 2026-09-28: finite-four-witness-literal-identification]
+and the metric-level dual of the WH7 reading (compactness $\Rightarrow$
+discreteness $\Rightarrow$ the $\pi/\beta$ of the KMS circle) --- is
+\emph{conditional} on the open O0 identification. The detailed failure
+analysis that this mechanism explains follows.
 The degeneracy theorem collapses the former ``weak-form vs
 strong-form'' split into a single open problem, with a sharper
 specification supplied by the failure analysis. Any viable construction must simultaneously:\
@@ -1806,10 +1825,11 @@ the boost candidate (driver
 full reachable multiplier system of rank $55$, boost $K = 2J_{z}$ in
 Paper~42's doubled \texttt{two\_m\_j} convention) returns four exact
 structural facts:\
-(a) $\sigma_{2\pi}(F) = F$ at $10^{-15}$ for every system element, and
+(a) $\sigma_{2\pi}(F) = F$ at $10^{-15}$ for every system element
+(automatic for the integer-spectrum posited $K$), and
 at \emph{half} period the bit-exact band-parity grading
 $\sigma_{\pi}(F) = (-1)^{2b} F$ — a finite-cutoff spin--statistics
-shadow of the modular flow;\
+grading carried by the posited flow;\
 (b) the boost-alone kernel is the \emph{structured middle} between the
 two known failure modes:\ $\dim \ker(\mathrm{ad}_{K}) = 9 =
 \sum_{b \in \{0,1,2\}} (2b+1)$, exactly the boost-invariant
@@ -2045,9 +2065,12 @@ forced structural statement (Krein-self-adjointness plus compression
 leaves no freedom), and the spatial convergence statement determines
 rate expressions on the $\sthree$ factor at finite cutoff. Neither
 determines calibration data (Yukawa selection, inner-factor
-parameters), which are external input. The selection of $T = 2\pi$ is
-structurally tied to the Bisognano--Wichmann modular period via
-Paper~43;\ the construction itself works for any $T > 0$.
+parameters), which are external input. The selection of $T = 2\pi$
+matches the continuum Bisognano--Wichmann modular period at unit surface
+gravity (and the automatic period of Paper~42's posited
+integer-spectrum generator, which is not identified with the
+Bisognano--Wichmann boost at finite cutoff);\ it is a convention, and the
+construction itself works for any $T > 0$.
 
 % =====================================================================
 \section*{Acknowledgments}
@@ -2424,14 +2447,6 @@ DOI via Zenodo.
 J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated
 $SU(2)$ spectral triples: the four-witness $2\pi$ period at finite
-cutoff},
-\newblock GeoVac internal preprint, papers/standalone (2026),
-DOI via Zenodo.
-
-\bibitem[Loutey, internal Paper~43]{paper43}
-J.~Loutey,
-\newblock \emph{Lorentzian extension of the four-witness Wick-rotation
-theorem on truncated $S^3 \times \mathbb{R}$ spectral triples at finite
 cutoff},
 \newblock GeoVac internal preprint, papers/standalone (2026),
 DOI via Zenodo.
