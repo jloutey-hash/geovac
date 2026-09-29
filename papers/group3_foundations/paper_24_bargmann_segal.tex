@@ -57,10 +57,15 @@ harmonic oscillator's linear complex-analytic projection.
 
 Fock's 1935 stereographic projection~\cite{fock1935} turns the
 momentum-space hydrogen Schr\"odinger equation into a rotation-invariant
-integral equation on the three-sphere $S^3$, whose kernel
-$1/|\omega - \omega'|^2$ is zonal with eigenvalue $2\pi^2/n$ on the
-degree-$(n-1)$ harmonics (the eigenfunctions of $\Delta_{S^3}$);\ that
-eigenvalue forces $p_0 = Z/n$ (it is not a free-particle problem).  Paper~0~\cite{paper0} built a lattice on this
+integral equation on the three-sphere $S^3$.  Hydrogen's bound states
+are the $S^3$ harmonics --- the eigenfunctions of $\Delta_{S^3}$ --- and
+on them the bound-state Hamiltonian is
+$H = -\tfrac{Z^2}{2}\,(1 - \Delta_{S^3})^{-1}$, i.e.\
+$E_n = -Z^2/(2(C+1))$ with $C = n^2 - 1$.  The kernel
+$1/|\omega - \omega'|^2$ is zonal and proportional to
+$(1 - \Delta_{S^3})^{-1/2}$, with eigenvalue $2\pi^2/n$ on the
+degree-$(n-1)$ harmonics;\ that eigenvalue fixes $p_0 = Z/n$.  The
+kernel is not the Green's function of $\Delta_{S^3}$.  Paper~0~\cite{paper0} built a lattice on this
 construction: nodes labeled by quantum numbers $(n, l, m)$---exactly
 the label set of the $S^3$ harmonics, on which the Laplace--Beltrami
 operator acts as the diagonal $SO(4)$ Casimir $n^2 - 1$---and edges
@@ -660,8 +665,9 @@ fourth layer at the level of the (posited) wedge generator:
 \item Layer~4: Pythagorean orthogonality of the posited wedge
   generator and the wedge Dirac on the hemispheric wedge (its
   Bisognano--Wichmann identification is open, Paper~42;
-  Coulomb-specific; on the $S^5$ Hardy sector the natural analog
-  operands are not orthogonal).
+  Coulomb-specific [ARGUED]:\ on the $S^5$ Hardy sector the natural
+  analog operands are not orthogonal, a comparison of chosen analog
+  operators rather than a theorem).
 \item Layer~5: spectral-action gravity termination
   (Paper~51). The CH Dirac spectral action on $S^{2m+1}$ terminates
   at exactly $(m{+}1)$ power-law terms; only $S^3$ ($m=1$) gives
@@ -767,9 +773,14 @@ $D_W^L$ splits into a temporal part $i\gamma^0 \otimes \partial_t$ that is
 odd under the wedge chirality grading and a spatial part that is
 chirality-\emph{diagonal} and sign-paired (eigenvalues
 $\chi\,(n_{\mathrm{fock}} + \tfrac12)$), so the $\chi = \pm 1$
-contributions cancel pair by pair in the trace.  Both operators are
+contributions of the spatial part cancel pair by pair in the trace,
+while the temporal part $i\gamma^0 \otimes \partial_t$ contributes
+nothing because it is chirality-odd.  Both operators are
 diagonal in the spatial labels;\ what the identity uses is the sign
-pairing, not a diagonal/off-diagonal split.  The closed-form residual (Paper~42 Corollary~11.15) carries
+pairing of the spatial part and the chirality-oddness of the temporal
+part, not a diagonal/off-diagonal split.  The closed-form residual,
+which holds at $N_t = 1$ (Paper~42 Corollary~11.15;\ the orthogonality
+itself holds at every $N_t$), carries
 its only transcendental through the posited normalisation:\ the
 $1/\pi^2$ is $1/\beta^2$ at $\beta = 2\pi$, the square of the
 temporal-compactification $\pi$ of Paper~35, not an output of the
@@ -782,7 +793,7 @@ master Mellin engine:
 with $S$ and $D$ pure rationals in $n_{\max}$ (cumulative wedge
 Casimir traces).
 
-\paragraph{Why the fourth layer fails on the $S^5$ Hardy sector.}
+\paragraph{Why the fourth layer fails on the $S^5$ Hardy sector [ARGUED].}
 The orthogonality proof (Paper~42 Theorem~11.14) uses three
 ingredients:\ a chirality grading with $\pm$-paired eigenspaces, a
 generator independent of that grading, and a first-order operator that
@@ -867,8 +878,10 @@ Supporting memos:
 The Fock projection rigidity theorem of Paper~23~\cite{paper23}
 states that the $S^3$ Fock projection $p_0 = \sqrt{-2 E_n}$ maps
 a one-electron central-field Hamiltonian onto a rotation-invariant
-($\mathrm{SO}(4)$) integral equation on $S^3$, zonal and diagonal on
-the harmonics (not a free-particle $\Delta_{S^3}$ problem), if and only if the spectrum is $l$-degenerate within each
+($\mathrm{SO}(4)$) integral equation on $S^3$ whose eigenfunctions are
+the $S^3$ harmonics (the eigenfunctions of $\Delta_{S^3}$;\ the kernel is
+proportional to $(1 - \Delta_{S^3})^{-1/2}$, not the Green's function of
+$\Delta_{S^3}$), if and only if the spectrum is $l$-degenerate within each
 $n$-shell, which is unique to the Coulomb potential by
 $\mathrm{SO}(4)$ symmetry.
 

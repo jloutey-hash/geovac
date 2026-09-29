@@ -428,18 +428,22 @@ def test_route_b_commutant_and_algebra(n_max):
     """Paper 32 prop:odd(c), SECOND route: the sampled-function construction
     (Route B -- no Clebsch-Gordan code) gives commutant = scalars, grading
     space {0}, and the unital algebra it generates is all of B(H) (dimension
-    d^2 = 16, 256 by explicit word closure; reached at word length 4).  Rejects a commutant result that holds
-    only for the Clebsch-Gordan build: zeroing Route B's blocks that mix
-    positive and negative Dirac levels (the doubled-model defect) gives
-    commutant 2 and a block-diagonal algebra of dimension < d^2."""
+    d^2 = 16, 256 by explicit word closure; the span stops growing after
+    words of length 4 at both n_max, asserted).  Rejects a commutant result
+    that holds only for the Clebsch-Gordan build.  (Measured, not asserted
+    here: at n_max = 2, zeroing Route B's blocks that mix positive and
+    negative Dirac levels -- the doubled-model defect -- gives commutant 2 and
+    a block-diagonal algebra of dimension < d^2; at n_max = 1 the same
+    zeroing gives commutant 5 / algebra dim 1 instead.)"""
     R = _route_b_build(n_max)
     Ts, Dc = R["Ts"], R["Dc"]
     d = Dc.shape[0]
     assert d == {1: 4, 2: 16}[n_max]
     comm, grad = _commutant_and_grading_dims(Ts, Dc)
     assert comm == 1 and grad == 0, (comm, grad)
-    dim_alg, _ = _generated_algebra_rank(Ts)
+    dim_alg, word_len = _generated_algebra_rank(Ts)
     assert dim_alg == d * d, dim_alg
+    assert word_len == 4, word_len
 
 
 # ---------------------------------------------------------------- Route C
@@ -531,7 +535,9 @@ def test_route_c_polynomial_window(n_max):
     4 / 16, dim O = 5 / 30, commutant = scalars, grading space {0}, J^2 = -1,
     J D = +D J (and NOT -D J), J O J^{-1} = O.  Rejects the commutant result
     being an artifact of Wigner-D / Clebsch-Gordan machinery shared by
-    Routes A and B: zeroing this route's sign-mixing blocks gives commutant 2."""
+    Routes A and B.  (Measured, not asserted here: at n_max = 2, zeroing this
+    route's sign-mixing blocks gives commutant 2; at n_max = 1 it gives
+    commutant 5 / algebra dim 1.)"""
     C = _route_c_build(n_max)
     Dc, Jw, Ts = C["Dc"], C["Jw"], C["Ts"]
     d = Dc.shape[0]

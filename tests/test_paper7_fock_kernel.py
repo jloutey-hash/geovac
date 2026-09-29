@@ -221,3 +221,55 @@ def test_fock_eigenfunction_is_hydrogen_momentum_wavefunction(n: int, l: int) ->
     ratio = sp.simplify(phi_ft / phi_fock)
     assert sp.diff(ratio, p).simplify() == 0, (n, l, ratio)
     assert ratio != 0
+
+
+# -----------------------------------------------------------------------------
+# (d) H is a function of Delta_{S^3}: the PI-approved Fock/Delta statement
+# -----------------------------------------------------------------------------
+def s3_casimir_magnitude(Y: sp.Expr) -> sp.Expr:
+    r"""C with Delta_{S^3} Y = -C Y, computed FROM THE HARMONIC.
+
+    For a function on R^4, r^2 Delta_{R^4} f = r^2 d_r^2 f + 3 r d_r f
+    + Delta_{S^3} f and r d_r = E (Euler operator sum_i x_i d_i), so
+        Delta_{S^3} f = |x|^2 Delta_{R^4} f - E(E + 2) f.
+    Evaluated at the generic point W (|W| = 1); no n is used.
+    """
+    def euler(f: sp.Expr) -> sp.Expr:
+        return sp.expand(sum(x * sp.diff(f, x) for x in XS))
+
+    lap_s3 = sp.expand(R2 * laplacian4(Y) - euler(euler(Y)) - 2 * euler(Y))
+    at = dict(zip(XS, W))
+    Yw = Y.subs(at)
+    assert Yw != 0
+    ratio = sp.simplify(lap_s3.subs(at) / Yw)
+    # Eigenfunction check: Delta_{S^3} Y is proportional to Y as a polynomial.
+    assert sp.expand(lap_s3 - ratio * Y) == 0
+    return -ratio
+
+
+@pytest.mark.parametrize("n,l", CASES)
+def test_kernel_and_energy_are_functions_of_delta_s3(n: int, l: int) -> None:
+    r"""Paper 7 Fock/Delta statement (PI-approved, /qa trunk DELTA #16).
+
+    With C = the Delta_{S^3} eigenvalue magnitude of the SAME harmonic
+    (computed from Y by s3_casimir_magnitude, not typed as n^2 - 1):
+      (i)  the Coulomb-kernel eigenvalue is lambda_K = 2 pi^2 (1 + C)^{-1/2};
+      (ii) the energy from the solved p0 is E = -(Z^2/2) (1 + C)^{-1},
+    i.e. the hydrogen Hamiltonian is a function of Delta_{S^3}.
+
+    Wrong answers rejected: a kernel that is Delta_{S^3}'s Green's function
+    (eigenvalue proportional to 1/C, or (1+C)^{-1}: exponent -1 instead of
+    -1/2); an energy that is not this function of C (e.g. -(Z^2/2)/C or
+    -(Z^2/2)(1+C)^{-1/2}).  n = 1 (C = 0) makes a 1/C form blow up.
+    """
+    Z, p0 = sp.symbols('Z p0', positive=True)
+    Y = fock_harmonic(n, l)
+    C = s3_casimir_magnitude(Y)
+    assert C.is_rational and C >= 0
+    lam_K = sp.simplify(kernel_apply(Y) / Y.subs(dict(zip(XS, W))))
+    assert sp.simplify(lam_K - 2 * sp.pi**2 * (1 + C)**sp.Rational(-1, 2)) == 0, (n, l, C, lam_K)
+    coupling = -coulomb_ft_prefactor()                       # = Z/(2 pi^2)
+    sol = sp.solve(sp.Eq(p0, coupling * lam_K), p0)
+    assert len(sol) == 1
+    E = sp.simplify(-sol[0]**2 / 2)
+    assert sp.simplify(E + Z**2 / 2 / (1 + C)) == 0, (n, l, C, E)

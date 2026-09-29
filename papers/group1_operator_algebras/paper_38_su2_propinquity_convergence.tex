@@ -143,8 +143,11 @@ established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\
 the residual contribution here is the
 Camporesi--Higuchi spinor substrate, the closed-form rate moment, and
 the explicit $4/\pi$ asymptotic constant. The construction supplies
-quantitative metric data for the commutative ($\sthree$) factor of
-almost-commutative spectral-triple constructions hosted on $\sthree$~\cite{marcolli_vs2014}.
+quantitative convergence data toward the continuum target $\sthree$,
+the commutative factor that almost-commutative spectral-triple
+constructions hosted on $\sthree$~\cite{marcolli_vs2014} take as input;\
+convergence of an almost-commutative structure itself is not treated
+here and is \textbf{[OPEN]}.
 \end{abstract}
 
 \bigskip\noindent
@@ -828,8 +831,10 @@ P_{\nmax}$ has blocks coupling positive and negative levels (at $\nmax
 the bands $N \le 2\nmax$ (Lemma~\ref{lem:band_injectivity}).
 \textbf{[MEASURED]} $\dim \Op_{\nmax} = 5, 30, 91$ at $\nmax = 1, 2,
 3$, the sum of $N^2$ over $N \le 2\nmax$ (two independent constructions
-agree, 2026-09-28;\ the matrix construction is regression-pinned in
-\texttt{tests/test\_p38\_true\_ch\_window.py}, which also freezes the
+agree, 2026-09-28;\ both routes are frozen in
+\texttt{tests/test\_p38\_true\_ch\_window.py} --- Route~A, the matrix
+construction, at $\nmax = 1$--$3$, and Route~B together with the
+agreement of the two routes at $\nmax = 1, 2$ --- which also freezes the
 Dirac spectrum $\pm(n + 3/2)$ with multiplicity $(n+1)(n+2)$ per sign on
 the same window).  The supporting code module and Lemma~\ref{lem:L1prime}
 use a different, \emph{doubled} model:\ two copies of the
@@ -854,8 +859,12 @@ $J\psi = (i\sigma_y)\overline{\psi}$ acts as $e^j_{mm's} \mapsto
 (-1)^{m-m'}(i\sigma_y)_{s's}\,e^j_{-m,-m',s'}$ composed with complex
 conjugation.  It commutes with $\DCH$, so it preserves
 $\Hilb_{\nmax}$, and there $J^2 = -1$, $J\DCH = +\DCH J$ (the KO-$3$
-signs) and $J\Op_{\nmax}J^{-1} = \Op_{\nmax}$ hold exactly (test-pinned at
-$\nmax \le 4$).  The truncation is \emph{odd},
+signs) and $J\Op_{\nmax}J^{-1} = \Op_{\nmax}$ hold exactly for this
+closed-form $J$ (test-pinned at $\nmax \le 4$;\ the equivariant
+antiunitaries form a $2\nmax$-dimensional family of block phases,
+test-pinned at $\nmax \le 2$, and the tests check
+$J\Op_{\nmax}J^{-1} = \Op_{\nmax}$ for the closed form only).
+The truncation is \emph{odd} (measured, $\nmax \le 3$),
 like the continuum:\ the commutant of $\Op_{\nmax}$ is the scalars at
 $\nmax \le 3$ (test-pinned;\ at $\nmax = 1, 2$ two further routes in
 the same file --- a sampled-function construction, whose generated
@@ -1578,7 +1587,8 @@ of Lipschitz seminorms, which would require a second-order modulus.
 \emph{Scope of the withdrawal.}  What falls is this lemma and the L5 route to
 Theorem~\ref{thm:main}.  Theorem~\ref{thm:main_unconditional} is untouched:\ it
 uses only reach-type estimates and no height constituent, so the convergence
-statement --- and with it the WH1 keystone --- stands on that route.  A
+statement --- and with it the commutative-factor leg of the WH1
+keystone --- stands on that route.  A
 height-controlled assembly for this pair is an open problem.
 
 \emph{The assembly this proof used to close with is withdrawn with the
@@ -1595,7 +1605,9 @@ whose third and fourth arguments are the refuted $\mathrm{height}_B \le
 survives is Theorem~\ref{thm:main_unconditional}, which bounds the same
 state-space GH distance by $\gamma_{\nmax}$ using reach-type estimates alone
 and no height constituent --- so the \emph{statement} of
-Theorem~\ref{thm:main} stands, by that route, and the WH1 keystone with it.
+Theorem~\ref{thm:main} stands, by that route, and the commutative-factor
+leg of the WH1 keystone with it (convergence of the almost-commutative
+structure is open, \S\ref{sec:marcolli_vs}).
 \end{proof}
 
 \begin{remark}[On the height term]\label{rem:height_definition}
@@ -1766,10 +1778,10 @@ sentence stated the constant as ``identical on both sides''; withdrawn
 \label{sec:marcolli_vs}
 
 The convergence theorem
-\ref{thm:main} provides the metric statement for the commutative
-($\sthree$) factor of almost-commutative spectral triple constructions
-hosted on $\sthree$;\ convergence of the almost-commutative extension
-itself is open (below). The
+\ref{thm:main} is a statement about the continuum target $\sthree$ ---
+the commutative factor that almost-commutative spectral triple
+constructions hosted on $\sthree$ take as input;\ convergence of the
+almost-commutative extension itself is open (below). The
 Marcolli--van~Suijlekom gauge-network
 framework~\cite{marcolli_vs2014}, with the
 Perez-Sanchez~\cite{perez_sanchez2025} continuum-limit
@@ -1917,6 +1929,14 @@ $C_3(G) = 1$ at all ranks follows from the PRV-summand bound (Kumar
 closure for the interior summands, as proved in Paper~40 \S 3.3
 (Lemma~L3 there; the attribution to a 1990 Vinberg paper carried no
 locator and is withdrawn, 2026-09-03).
+
+\textbf{(iv) Beyond the commutative factor, and beyond the translation
+seminorm.} \textbf{[OPEN]} Theorem~\ref{thm:main_unconditional} proves
+state-space convergence of the commutative factor on the true window
+under the translation seminorm.  Convergence in the Dirac-commutator
+seminorm, and convergence of an almost-commutative (gauge-network,
+$\mathcal{A} \otimes M_n(\mathbb{C})$) structure built on it
+(\S\ref{sec:marcolli_vs}), are not proved here.
 
 % =====================================================================
 \appendix

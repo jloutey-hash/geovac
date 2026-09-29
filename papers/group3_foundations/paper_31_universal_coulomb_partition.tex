@@ -765,7 +765,7 @@ Feature & Coulomb $S^3$ & HO $S^5$ \\
 $L_0$ computes spectrum (withdrawn 2026-09-25) & -- & -- \\
 Calibration $\pi$ & $\checkmark$ & -- \\
 Wilson gauge with natural matter coupling & $\checkmark$ (SU(2), argued) & -- \\
-Modular-Hamiltonian Pythagorean (Paper~24~\S V) & $\checkmark$ & -- \\
+Posited-wedge-generator Pythagorean (Paper~24~\S V) & $\checkmark$ & -- (argued) \\
 Gravity termination (Paper~51~\cite{paper51} G4-5a) & $\checkmark$ (pure Einstein) & -- \\
 \hline
 Abelian U(1) Wilson--Hodge & $\checkmark$ & $\checkmark$ \\
@@ -983,7 +983,8 @@ Several extensions are not yet placed in the partition framework:
   partition and is treated in
   Section~\ref{sec:signature_partition}, which classifies
   Paper~34's twenty-eight projections by their transfer behavior
-  under the Riemannian $(3, 0) \to$ Lorentzian $(3, 1)$ extension.
+  under the Riemannian $(s, t) = (3, 0) \to$ Lorentzian $(s, t) = (3, 1)$
+  extension ($s$ space, $t$ time dimensions).
 \end{itemize}
 
 %=================================================================
@@ -993,14 +994,20 @@ Several extensions are not yet placed in the partition framework:
 
 The $\mathcal{A}/D$ partition organizes GeoVac results across
 \emph{central potentials} at fixed Riemannian signature
-$(m, n) = (3, 0)$ in the Bizi--Brouder--Besnard
-classification~\cite{bizi_brouder_besnard2018}.  A structurally parallel
+$(s, t) = (3, 0)$ (three space, no time dimensions).  In the
+Bizi--Brouder--Besnard classification~\cite{bizi_brouder_besnard2018},
+which labels a signature by $(m, n) = (t + s,\, t - s) \bmod 8$ (their
+p.~3, arXiv v2 numbering), this is $(m, n) = (3, 5)$ ($n = -3 \bmod 8$,
+in their Clifford sign convention;\ Connes' KO-dimension~3 corresponds),
+and the Lorentzian signature $(s, t) = (3, 1)$ is $(m, n) = (4, 6)$
+(their Table~3).  Below, bare pairs $(3, 0)$ and $(3, 1)$ denote
+$(s, t)$.  A structurally parallel
 partition organizes the same results across \emph{signatures}:\
 which features of the framework transfer cleanly from Euclidean $(3, 0)$
 to Lorentzian $(3, 1)$, and which require Krein-space machinery,
 Lorentzian-native heat-trace formalism, or a Lorentzian analog of the
 van~Suijlekom state-space Gromov--Hausdorff distance used in
-Paper~38~\cite{paper38} for the WH1 PROVEN result.  The signature partition is the structural sibling
+Paper~38~\cite{paper38} for WH1's commutative-factor convergence result.  The signature partition is the structural sibling
 of the central-potential partition that is the main topic of this
 paper; both partitions arise from the same Connes spectral-triple data
 $(\mathcal{A}, \mathcal{H}, D)$.
@@ -1056,8 +1063,11 @@ extension:
   single Euclidean time circle inherits a Lorentzian reading at no
   structural cost at the metric-functional level;\ literal
   operator-system identification is the named Sprint L1 target
-  (computing the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$,
-  verifying $\sigma_{i \cdot 2\pi} = $ identity at finite $n_{\max}$).
+  (computing the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$
+  of a wedge-restricted Camporesi--Higuchi state, then verifying
+  $\sigma_{i \cdot 2\pi} = $ identity at finite $n_{\max}$;\ still open,
+  Paper~42 O0 --- the finite $K = 2J_z$ of Paper~42 is posited, and
+  its period closure is automatic).
   Four of the twenty-eight projections sit here:\ the observation /
   temporal-window projection of Paper~34~\S~III.15, the vector-photon
   promotion of Paper~34~\S~III.11, the gauge-choice projection of
@@ -1104,7 +1114,7 @@ degrees:
 \begin{description}
 \item[B1\@.] \emph{Lorentzian propinquity.}  The van~Suijlekom
   state-space Gromov--Hausdorff distance used in Paper~38~\cite{paper38}
-  for the WH1 PROVEN result---and the Latr\'emoli\`ere propinquity
+  for WH1's commutative-factor convergence result---and the Latr\'emoli\`ere propinquity
   family more broadly---is purely Riemannian as of May~2026
   (Latr\'emoli\`ere, Toyota, Hekkelman--McDonald,
   Leimbach--van~Suijlekom).  Constructing
@@ -1114,7 +1124,7 @@ degrees:
   this budget significantly via the twist-morphism mechanism if the
   construction applies to $S^3 = \mathrm{SU}(2)$ (odd-dimension caveat
   to verify in Sprint L2).
-\item[B2\@.] \emph{Krein-space spectral triple at $(m, n) = (3, 1)$.}
+\item[B2\@.] \emph{Krein-space spectral triple at signature $(s, t) = (3, 1)$, BBB $(m, n) = (4, 6)$.}
   Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018} provides
   the most concrete prescription:\ Hilbert space replaced by Krein
   space carrying fundamental symmetry $\mathcal{J}^2 = I$;\
@@ -1149,21 +1159,28 @@ sprint-of-2026-05-07 pattern crystallization) survives the $(3, 1)$
 extension at $75\%$ of the projection dictionary
 (\textsc{transfers freely}~$+$~\textsc{wick-map free}, 21 of 28).
 
-\subsection{The trivial closure at $(3, 1)$}
+\subsection{The predicted trivial closure at $(3, 1)$ (tested:\ falsified)}
 \label{sec:sig_trivial_closure}
 
-A non-trivial structural prediction follows from the BBB sign table
-at $(m, n) = (3, 1)$:\ the M3 sub-mechanism of the master Mellin
+The Sprint L0 audit drew a structural prediction from the BBB sign
+table at Lorentzian signature $(s, t) = (3, 1)$, i.e.\ BBB
+$(m, n) = (4, 6)$:\ that the M3 sub-mechanism of the master Mellin
 engine (vertex-parity Hurwitz / Dirichlet-$L$ content in
 Camporesi-Higuchi vertex sums~\cite{paper28}) becomes structurally
-empty on chirality-symmetric spectrum.  The $(3, 1)$ entry in
-BBB Table~2 flips the $\{J, \gamma_5\}$ anticommutation structure,
-which removes the asymmetry that drives the half-integer-Hurwitz
-content of M3.  This would simplify the master Mellin engine's
-three-mechanism partition (Paper~32~\S~VIII case-exhaustion theorem)
-to a two-mechanism partition on the Lorentzian side, with M1 and M2
-remaining and M3 trivializing.  This is a Sprint L2 prediction worth
-verifying as a structural consistency check.
+empty on chirality-symmetric spectrum, because the BBB signs there
+(their Table~1 and eq.~(3)) make $J$ anticommute with the chirality,
+which was expected to remove the asymmetry that drives the
+half-integer-Hurwitz content of M3.  That would have reduced the master
+Mellin engine's three-mechanism partition (Paper~32~\S~VIII
+case-exhaustion theorem) to two on the Lorentzian side.  \emph{Tested
+and falsified (Sprint L2-D;\ Paper~42~\S~11.8, Paper~34):}\ under the
+$n_{\mathrm{Fock}}$-parity convention that accesses Paper~28's M3
+content, the vertex-parity difference on the chirality-symmetric
+$(3, 1)$ truncation is bit-identical to the Riemannian value, so M3
+does not trivialise;\ under a chirality-pairing convention the
+difference vanishes only tautologically and does not access M3.  M3 is
+sectional in $n_{\mathrm{Fock}}$-parity, not in spacetime signature,
+and the case-exhaustion classification is unchanged.
 
 \subsection{Sequencing recommendation}
 \label{sec:sig_sequencing}
@@ -1193,8 +1210,9 @@ sequence:
 \item[Sprint L2 (a substantial program).]  BBB Krein lift and Connes axiom audit
   at $(3, 1)$.  Gates:\ blocker B2.  Refines the five
   \textsc{euclidean specific} rows and the two \textsc{mixed} rows to
-  definitive classifications.  Predicts M3 trivialization on
-  chirality-symmetric spectrum (consistency check).
+  definitive classifications.  Predicted M3 trivialization on
+  chirality-symmetric spectrum (consistency check;\ tested and
+  falsified, \S\ref{sec:sig_trivial_closure}).
 \item[Sprint L3 (long-range).]  Lorentzian propinquity construction
   (blocker B1).  Load-bearing only if Sprint L1 / L2 closure requires
   Lorentzian Latr\'emoli\`ere propinquity to take the GH limit at
@@ -1242,11 +1260,13 @@ four witnesses agree by construction (an earlier reading of it as an
 identification at the operator-system level is withdrawn, 2026-09-28;\
 deriving $K$ from a Camporesi--Higuchi wedge state is open).  The
 Sprint L2-E Krein period closure
-(Paper~32 \S~VIII.E.E) is likewise automatic and signature-blind at
-finite cutoff --- the posited generator is compact ($e^{2\pi i K}=I$
-on its integer spectrum), so the closed period is the Euclidean
-KMS $\beta = 2\pi$ circle and the Lorentzian signature is metrically
-invisible (Euclidean/convention).  The strong ``literal
+(Paper~32 \S~VIII.E.E) is likewise automatic at finite cutoff ---
+the posited generator is compact ($e^{2\pi i K}=I$ on its integer
+spectrum;\ [SYMBOLIC]), so its flow is a $2\pi$ circle.  That the
+Lorentzian signature is therefore metrically invisible at finite cutoff
+(the Euclidean-only reading) is [ARGUED] and generator-independent;
+reading the circle as the Wick-rotated KMS $\beta = 2\pi$ circle is
+conditional on Paper~42's open O0.  The strong ``literal
 identification'' reading of Sprint L2-E (2026-05-17) was withdrawn
 2026-06 (see Paper~34~\S~III.29 and Paper~45).
 \item Five \textsc{euclidean specific} projections were carried to the
@@ -1256,8 +1276,9 @@ $D_L = i^t \, \not{\!\!D}_{g_r}$ per van~den~Dungen 2016 Prop~4.1, and
 Connes axiom audit at BBB $(m, n) = (4, 6)$ are constructed, and the
 Krein period-closure identities close bit-exactly at every tested
 $(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.  These
-identities are \emph{signature-blind}, however (the same compact-boost
-mechanism as above), so they do \emph{not} constitute a Lorentzian
+identities are \emph{signature-blind}, however (the same compactness
+mechanism as above;\ the signature-blindness reading is [ARGUED]), so
+they do \emph{not} constitute a Lorentzian
 literal identification;\ the genuine Lorentzian propinquity extension
 (blocker B1) remains open at Sprint L3 scope.
 \item Two \textsc{mixed} projections (Wilson plaquette \#10, Breit
@@ -1281,10 +1302,14 @@ operator-system / finite-cutoff level neither closure is established:\
 the \emph{Riemannian} period closure is automatic for a posited
 generator (the derivation of the wedge modular Hamiltonian from a
 Camporesi--Higuchi state is open, Paper~42), and the
-\emph{Lorentzian} closure is additionally blocked --- the
-truncated modular flow is the compact KMS $\beta = 2\pi$ circle, so
-Lorentzian signature is metrically invisible at any finite cutoff
-(Euclidean/convention), and the genuine Lorentzian extension (Sprint
+\emph{Lorentzian} closure is additionally blocked --- the flow of the
+posited finite generator $K = 2J_z$ (its Bisognano--Wichmann
+identification is open, Paper~42 O0) is compact, a $2\pi$ circle
+[SYMBOLIC];\ that Lorentzian signature is therefore metrically
+invisible at any finite cutoff (the Euclidean-only reading) is [ARGUED]
+and generator-independent, while the reading of that circle as the
+Wick-rotated KMS $\beta = 2\pi$ circle is conditional on O0.  The
+genuine Lorentzian extension (Sprint
 L3, blocker B1) remains open as major NCG-mathematics work (see
 Paper~34~\S~III.29, Paper~45).  The headline structural finding of
 the verification chain:\ Paper~42 \S~7.2 ``$H_{\mathrm{local}} \neq D_W$''
@@ -1353,10 +1378,11 @@ case, is not yet established.
 \subsection{Does the partition predict $\alpha$?}
 
 The fine-structure constant Observation
-$K = \pi(B + F - \Delta) = \alpha^{-1}$~\cite{paper2_alpha} sits in
+$K = \pi(B + F - \Delta) \approx \alpha^{-1}$~\cite{paper2_alpha} sits in
 the potential-specific Coulomb sector by the partition framework.
-The headline observation matches CODATA at
-$8.8 \times 10^{-8}$~\cite{paper2_alpha}, but the combination rule
+The headline observation matches CODATA to $4.8\times 10^{-7}$ for
+$K$ itself and to $8.8 \times 10^{-8}$ through the root of the cubic
+$1/\alpha = K - \alpha^2$~\cite{paper2_alpha}, but the combination rule
 itself remains a numerical observation without first-principles
 derivation~\cite{curve_fit_audit}.  The Sprint~5 investigation of
 $S^5$ analogs~\cite{paper25} confirmed that no analogous combination

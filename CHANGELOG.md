@@ -7,6 +7,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.8] - 2026-09-29
+
+**Patch. /qa trunk DELTA #16 (claim-impact, unseeded) = DEFECTS, remediated by family sweeps (PI-approved). About 12 LARGE (down from about 13). Code and citations were clean; every LARGE was framing.**
+
+### PI rulings applied (2026-09-29)
+- **Fock ↔ Δ_{S³}: the v5.17.6/7 overcorrection is reversed.**
+  - Hydrogen's bound states ARE the S³ harmonics (Δ_{S³} eigenfunctions).
+  - The bound-state Hamiltonian is a function of Δ_{S³}: H = −(Z²/2)(1−Δ_{S³})⁻¹, i.e. E_n = −Z²/(2(C+1)) with C = n²−1.
+  - The Coulomb kernel ∝ (1−Δ_{S³})^{−1/2} has eigenvalue 2π²/n, which fixes p₀ = Z/n. It is the restriction of the R⁴ Green's function, not the Green's function of Δ_{S³}.
+  - The "not a free-particle problem" / "Δ is not the link" wording is withdrawn.
+  - Where it now reads this way: P0, P1, P7, P24, the group3 synthesis. Backed by `test_kernel_and_energy_are_functions_of_delta_s3`.
+- **WH1 is scoped to the commutative factor.**
+  - Paper 38 proves state-space GH convergence of the commutative factor on the TRUE Camporesi–Higuchi window.
+  - Convergence of the almost-commutative / gauge-network structure is OPEN, and so is convergence in the Dirac seminorm.
+  - The CLAUDE.md WH1 status line is replaced; the old line is archived in `docs/wh_register_history.md`.
+  - P32 and P38 each gain an OPEN question on this. The bare "WH1 PROVEN" is replaced corpus-wide (P31, P34, P42, P52, P57).
+- **Family sweeps with gate entries** replace locus-by-locus fixes.
+
+### Family sweeps (four; gate-first)
+- **Four C16 entries:**
+  - three new: `fock-delta-overcorrection`, `k-equals-alpha-inverse-to-cubic-precision`, `bbb-mn-signature-mislabel`;
+  - two widened: `alpha-cubic-stated-as-law` and `posited-k-as-truncated-bw-boost`.
+  - Every discrimination check passes.
+- **Sweep B (P32/P38):**
+  - The rate is tiered: the bound and γ→0 are proved; the displayed (4/π) log n/n is [INTERNAL THEOREM + MEASURED].
+  - The grading claim is scoped: "odd (measured, n_max ≤ 3)".
+  - The P38 J clause now says what the tests pin. J O J⁻¹ = O is pinned for the closed-form J at n_max ≤ 4; the 2n_max-dimensional phase family is pinned at n_max ≤ 2.
+  - The "random block phases fail" sentence is withdrawn, because only a reviewer fire test showed it.
+- **Sweep C (modular / Lorentzian, P24, P31):**
+  - K_α is a posited generator everywhere (O0 open).
+  - Compactness is separated from the K⁺ theorem.
+  - The signature-blind reading is split: the Euclidean-only leg is [ARGUED] and generator-independent; the Wick/KMS leg is conditional on O0.
+  - BBB: (m,n) = (t+s, t−s) mod 8; Riemannian (0,3) → (3,5); Lorentzian (1,3) → (4,6). The M3 (3,1) prediction is recorded as tested and falsified.
+  - The P24 S⁵ comparison is [ARGUED].
+- **Sweep D (K rule, P50, P16, field guide):**
+  - K = π(B+F−Δ) = 137.036064 matches α⁻¹ to 4.8×10⁻⁷.
+  - 8.8×10⁻⁸ is the accuracy of the cubic's root (1/α = K − α²), not of K. The physical α only approximately satisfies the cubic.
+  - Covered: P2, P18, P55, the group5 synthesis. P18's transcendence Observation now concerns the root α_K.
+- **Paper 50 finding: the entropy constant is not a Bisognano–Wichmann value.**
+  - K_α = 2J_z, so the adjoint flow already closes at t = π.
+  - ρ_W = e^{−K}/Z is the unit-β Gibbs state, not BW-normalised.
+  - S(e^{−bK}) = 2 log n + b coth b − log(2 sinh b) + O(1/n). The slope 2 is b-independent. The BW-normalised (b = π) constant would be 0.0136, not 0.458.
+  - New `rem:bw_normalisation`.
+- **P16:** prior art moved into the key results. The Cavagnero 1986 title was verified against the APS record.
+- **P55:** 4/π relabelled as convention-dependent. The "Hopf-base measure" label is withdrawn as a misnomer (the constant is a unit-sphere volume quotient). "Theorem L2" corrected to "Lemma L2".
+
+### Guards (separate pass; both plants FIRED)
+- `test_paper50_wedge_kms.py::test_b_family_entropy_constant`: rejects "the constant is b-independent / BW-normalised".
+- `::test_adjoint_flow_closes_at_pi`: rejects "the minimal period is 2π".
+- Claim-matrix rows 233/234 were stale ("dim(∂W)", "CHM identification Thm"). They are corrected, and a new row is added.
+
+### Pre-checkpoint self-check (standing rule)
+- **One fresh claims reviewer re-derived all the new mathematics correctly.** It found 1 LARGE:
+  - 8.8×10⁻⁸ was still credited to K itself at 5 loci: P2 (the claim's owner), P25 ×2, P31 ("K = α⁻¹"), and the field guide.
+  - The C16 entry was widened gate-first (6/6 fire, 5/5 silent), then fixed.
+- **Six SMALLs fixed:**
+  - Bare "WH1 PROVEN" at 7 loci.
+  - P34 said Paper 38 uses the Latrémolière propinquity; it uses van Suijlekom's state-space GH distance.
+  - P18's "not shown to be exact" is now "shown not to be".
+  - P16's abstract and key-results list disagreed on what is new; they now agree.
+  - P18 said "Coulomb perturbs the free Laplacian on S³"; reworded.
+  - P2's "7 decimal digits" is now "about 7 significant figures".
+- **Not changed:** "maps the Coulomb problem onto the free Laplacian on S³" (Fock's own phrasing) stays at P2/P23/P31/P32 and the group2 synthesis, as loose, not false.
+
+### Verification
+- All 14 gates PASS; C10 whole corpus (58 papers, zero undefined references).
+- C16: 118/118 entries, all dependents stamped.
+- Touched tests pass: `test_paper50_wedge_kms`, `test_paper7_fock_kernel`, `test_true_window_real_structure`, and the 18 symbolic S³ proofs.
+- C24 advisory unchanged (P52/P53 DRAFT, no dependents: finish or drop, not archive).
+
 ## [v5.17.7] - 2026-09-29
 
 **Patch. /qa trunk DELTA #15 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). First round run under the new pre-checkpoint self-check, which caught 4 LARGE + 11 SMALL before the next DELTA.**

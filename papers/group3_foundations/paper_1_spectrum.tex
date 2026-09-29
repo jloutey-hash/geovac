@@ -387,9 +387,13 @@ Possible extensions include:
   $\theta = 0$. A convention change cannot produce a geometric phase
   (\emph{corrected 2026-09-28;} the item previously claimed discrete
   $\{0,\pi\}$ phases). Genuine routes are:
-\item A $U(1)$ gauge extension---attaching phase factors
-  $e^{i f(n,l,m)}$ to the transition operators---which would produce
-  continuously varying curvature;
+\item A $U(1)$ gauge extension---attaching phases $e^{i\theta_e}$ to
+  the \emph{edges} (the transition operators) with nonzero net flux
+  $\sum_{e \in \partial P} \theta_e \neq 0$ through some plaquette
+  $P$---which would produce continuously varying curvature (phases
+  that depend only on the node labels, $e^{i f(n,l,m)}$ at each
+  endpoint, are a rephasing of the basis and give zero holonomy, as in
+  the item above);
 \item An adiabatic Berry connection from eigenstates of a
   parameter-dependent Hamiltonian (as in the hyperspherical $P_{\mu\nu}(R)$
   connection of Ref.~\cite{paper13}).
@@ -575,7 +579,7 @@ This CG-magnitude construction is used only for the \S III comparison with the w
 
 For the scaling measurement only, a sparse CSR build with the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}, $\sigma = -1.0$, lowest 20 eigenvalues) was used; \textbf{[MEASURED]} the sparse-eigenvalue timing is guarded sub-quadratic and the adjacency nonzero count near-linear (measured exponent $1.07$ over $n_{\max} = 5$--$30$) by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fits; the frozen bounds are $< 1.8$ on timing and $< 1.15$ on the nonzero count).
 
-State identification was performed by computing, for each distinct eigenvalue $\lambda$ of the full spectrum, the eigenspace projection $\|P_\lambda\,|n,l,m\rangle\|^2$ of each target node, and selecting the eigenvalue with maximal projection (basis-free;\ an argmax over the components of individual eigenvectors is not well defined when eigenvalues are degenerate across $l$-blocks --- corrected 2026-09-28; pinned, including its invariance under a rotation of the eigenbasis inside a degenerate eigenspace, by \texttt{tests/test\_trunk\_qa\_splitting.py}).
+State identification was performed by computing, for each distinct eigenvalue $\lambda$ of the full spectrum, the eigenspace projection $\|P_\lambda\,|n,l,m\rangle\|^2$ of each target node, and selecting the eigenvalue with maximal projection (basis-free;\ an argmax over the components of individual eigenvectors is not well defined when eigenvalues are degenerate across $l$-blocks --- corrected 2026-09-28; pinned by \texttt{tests/test\_trunk\_qa\_splitting.py}, which checks invariance under a rotation of the eigenbasis inside a degenerate eigenspace on the fast grid, $n_{\max} = 6$--$18$;\ at $n_{\max} = 20, 25, 30$ it checks instead that the eigenvalue clustering is cleanly separated from numerical noise and that the printed values are stable across clustering tolerances).
 
 \subsection{Log-Holonomy Calculation}
 

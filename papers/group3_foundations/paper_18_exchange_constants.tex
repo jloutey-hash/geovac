@@ -63,7 +63,9 @@ Paper~2~\cite{loutey_paper2} have structurally independent
 spectral homes (finite Casimir trace, infinite Dirichlet series at
 the packing exponent, Dirac mode degeneracy on the spinor bundle),
 each in a distinct cell of the three-axis grid.  The combination
-rule $K = \alpha^{-1}$ remains a numerical observation
+rule---$K$ matches $\alpha^{-1}$ to $4.8\times10^{-7}$ relative, and
+$\alpha$ approximately satisfies the cubic $\alpha^3 - K\alpha + 1 = 0$
+to $8.8\times10^{-8}$---remains a numerical Observation
 without first-principles derivation.
 
 A complementary \textbf{Observation (structural incommensurability)}
@@ -1023,8 +1025,10 @@ raw spectrum or its square, and this single distinction generates the
 first axis of the three-axis classification.
 
 \paragraph{Interaction deforms the heat kernel.}
-The Coulomb potential $V = -Z/r$ perturbs the free Laplacian on~$S^3$.
-In the heat kernel framework, the perturbed trace
+A potential $V$ added to a free operator $A$ deforms its heat kernel.
+(On $S^3$ the Coulomb term is not such a perturbation:\ Fock's
+projection absorbs it, making the bound-state Hamiltonian a function of
+$\Delta_{S^3}$, Paper~7.)  In the heat kernel framework, the perturbed trace
 $\operatorname{Tr}(e^{-t(A + V)})$ has an asymptotic expansion whose
 Seeley--DeWitt coefficients $a_k(A + V)$ differ from the free
 coefficients $a_k(A)$ by terms involving the potential and its
@@ -2737,7 +2741,8 @@ If this identification is correct, then the combination rule
 $K = \pi(B + F - \Delta)$ is not arbitrary numerology but an
 instance of the same spectral-geometric exchange that produces
 the energy-shell scale $p_0$ at Level~1 and $e^a E_1(a)$ at Level~2.
-The exchange constant for the Hopf bundle is $K$ itself---the
+On that (unproven) reading, the exchange constant for the Hopf
+bundle would be $K$ itself---the
 ``cost'' of projecting the $S^3$ electron state space through
 the $S^1$ gauge fiber onto the $S^2$ photon base, measured
 in units of coupling strength.
@@ -2771,17 +2776,25 @@ combination rule is an instance of the exchange constant pattern
 rather than numerology.
 \end{observation}
 
-\begin{observation}[$\alpha$ is likely transcendental]
-The fine structure constant $\alpha$ is a root of the cubic
-$\alpha^3 - K\alpha + 1 = 0$, where $K$ involves $\pi$ and
-$\zeta(2) = \pi^2/6$.  Roots of polynomials with transcendental
+\begin{observation}[The cubic's root is likely transcendental]
+% [retracted 2026-09-29: alpha-cubic-stated-as-law] -- earlier wording stated
+% the physical alpha as an exact root of the cubic; it is not (Observation, 8.8e-8).
+The physical fine structure constant only \emph{approximately}
+satisfies the cubic $\alpha^3 - K\alpha + 1 = 0$ (to
+$8.8\times10^{-8}$ relative, far outside the experimental
+uncertainty, so the cubic is not an exact law), where $K$ involves
+$\pi$ and $\zeta(2) = \pi^2/6$.  The statement here therefore
+concerns the cubic's smallest positive root $\alpha_K$, not the
+physical $\alpha$.  Roots of polynomials with transcendental
 coefficients \textit{can} be algebraic (e.g., $x^2 - \pi x +
 \pi(\pi - 1) = 0$ has the algebraic root $x = 1$), but this
 requires special cancellations that are generically absent.
 Since $K$ is a non-trivial combination of $\pi$ and $\pi^2$
 with rational coefficients, it is overwhelmingly likely
-(though not proven) that $\alpha$ is transcendental---consistent
-with its role as a spectral-geometric exchange constant.
+(though not proven) that $\alpha_K$ is transcendental.  Nothing
+about the transcendence of the physical $\alpha$ follows unless the
+combination rule were exact, which it is shown not to be (the residual
+far exceeds the experimental uncertainty).
 \end{observation}
 
 \subsection{Three-tier structure of the combination rule}
@@ -2927,7 +2940,11 @@ generator simultaneously producing $B$, $F$, and $\Delta$.
 \label{obs:k_rule}
 The additive combination $K = \pi(B + F - \Delta)$, with the three
 components characterized by Theorem~\ref{thm:k_decomposition},
-equals $\alpha^{-1}$ to $8.8 \times 10^{-8}$.  No first-principles
+matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$ relative
+($K = 137.036064$ vs.\ $\alpha^{-1} = 137.035999$); the smallest
+positive root of the cubic $\alpha^3 - K\alpha + 1 = 0$, i.e.\
+$1/\alpha = K - \alpha^2$, matches to $8.8\times10^{-8}$, so the
+physical $\alpha$ approximately satisfies that cubic.  No first-principles
 derivation of the combination is known.  In the lattice gauge
 language of Paper~25~\cite{loutey_paper25} and the non-abelian SU(2)
 extension of Paper~30~\cite{loutey_paper30}, $K/\pi$ has the shape
@@ -2991,7 +3008,8 @@ candidate set tested).  The remaining structural question is no
 longer a derivation question about any single component: it is a
 question about why the \emph{additive} combination
 $B + F - \Delta$, multiplied by the overall factor $\omega_2 = \pi$,
-equals $\alpha^{-1}$ to $8.8 \times 10^{-8}$.  That is a question
+approximately equals $\alpha^{-1}$ (to $4.8 \times 10^{-7}$; to
+$8.8\times10^{-8}$ through the cubic's root).  That is a question
 about the conspiracy of three categorically different objects---a
 finite sum, an infinite Dirichlet series, and a boundary
 product---rather than the specialization of a single generator.
@@ -3621,7 +3639,7 @@ quarter-integer Hurwitz shift.  The classification is $R$-independent:
 $D(s,R)/R^s$ is a structural invariant, and Weyl's law preserves the
 even/odd-$s$ discriminant in the flat-space limit.
 
-\paragraph{Theorem 3 (three independent spectral homes for $K$).}
+\paragraph{Theorem 3 (three independent spectral homes for $B$, $F$, $\Delta$).}
 The three components of Paper~2's $K = \pi(B + F - \Delta)$ have
 structurally independent spectral origins:
 $B$ a finite Casimir trace on the scalar Laplacian at $n_{\max}=3$;
@@ -3629,9 +3647,9 @@ $F = D_{n^2}(d_{\max}) = \zeta_R(2)$ an infinite Dirichlet series
 of Fock degeneracies at the packing exponent;
 $\Delta^{-1} = g_3^{\mathrm{Dirac}} = 40$ a finite Dirac mode
 degeneracy on the spinor bundle.  No common generator produces all
-three.  The combination rule $K = \alpha^{-1}$
-(Observation~\ref{obs:k_rule}) remains a numerical observation
-without first-principles derivation.
+three.  The combination rule $K \approx \alpha^{-1}$
+(to $4.8\times10^{-7}$; Observation~\ref{obs:k_rule}) remains a
+numerical Observation without first-principles derivation.
 
 \paragraph{Observation (structural incommensurability).}
 The three theorems share a meta-pattern: framework observables that

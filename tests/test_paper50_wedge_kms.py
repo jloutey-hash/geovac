@@ -208,3 +208,44 @@ def test_s_deformation_limits(n_max):
     S_sinf = _entropy_from_diag(k, s=40.0)
     assert abs(S_s0 - math.log(dim_W)) < 1e-3
     assert abs(S_sinf - math.log(n_eq)) < 1e-6
+
+# ===========================================================================
+# rem:bw_normalisation -- K_alpha = 2 J_z; the b-family of Gibbs states
+# (guard pass, 2026-09-29, /qa trunk DELTA #16)
+# ===========================================================================
+
+def _b_family_constant(b: float) -> float:
+    """Closed-form n_max -> infinity constant of S(e^{-bK}/Z) - 2 log n_max."""
+    return b / math.tanh(b) - math.log(2.0 * math.sinh(b))
+
+
+@pytest.mark.parametrize("b", [0.5, 1.0, math.pi])
+def test_b_family_entropy_constant(b):
+    """S(rho_b) = 2 log n_max + b coth b - log(2 sinh b) + O(1/n_max) for
+    rho_b = e^{-bK_alpha}/Z.  Rejects: 'the constant coth 1 - log(2 sinh 1)
+    is b-independent / the Bisognano-Wichmann-normalised value' (at the BW
+    normalisation b = pi the constant is 0.0136..., not 0.4584...)."""
+    errs = [abs(_analytic_entropy(n, b) - 2.0 * math.log(n) - _b_family_constant(b))
+            for n in (1000, 4000)]
+    assert errs[1] < 1e-3, f"b={b}: residual {errs[1]:.2e}"
+    assert errs[1] < errs[0], "residual must shrink with n_max"
+    if b == math.pi:
+        assert abs(_b_family_constant(b) - 0.0136246) < 1e-6
+        assert abs(_b_family_constant(b) - CHM_CONSTANT) > 0.4
+
+
+@pytest.mark.parametrize("n_max", [2, 3, 4])
+def test_adjoint_flow_closes_at_pi(n_max):
+    """spec K_alpha = odd integers (K_alpha = 2 J_z): Ad e^{i pi K} = id while
+    e^{i pi K} = -1 (the spinor sign), so the adjoint flow's minimal period
+    is pi, half the 2pi the paper's closure statement uses.  Rejects:
+    'the minimal period of the modular-type flow is 2pi'."""
+    k = _wedge_K_diag(n_max)
+    ki = np.rint(k).astype(int)
+    assert np.allclose(k, ki, atol=1e-10) and np.all(ki % 2 == 1)
+    u = np.exp(1j * math.pi * k)
+    assert np.allclose(u, -1.0, atol=1e-10)
+    phase = np.exp(1j * math.pi * (k[:, None] - k[None, :]))
+    assert np.allclose(phase, 1.0, atol=1e-10)
+    half = np.exp(1j * (math.pi / 2) * (k[:, None] - k[None, :]))
+    assert not np.allclose(half, 1.0, atol=1e-6)

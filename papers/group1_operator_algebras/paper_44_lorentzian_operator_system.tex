@@ -196,8 +196,10 @@ Bisognano--Wichmann~\cite{bisognano_wichmann1976},
 Unruh~\cite{unruh1976}) to the
 Lorentzian Krein spectral triple at signature $(3, 1)$ in the
 Bizi--Brouder--Besnard~\cite{bizi_brouder_besnard2018} classification
-at $(m, n) = (4, 6)$, with the modular Hamiltonian and Tomita
-structure on a hemispheric wedge.  Its $2\pi$ period closure is
+at $(m, n) = (4, 6)$, with a posited wedge generator (its
+Bisognano--Wichmann identification is open, Paper~42 O0) and the
+Tomita structure of the Gibbs state built from it on a hemispheric
+wedge.  Its $2\pi$ period closure is
 automatic for the posited integer-spectrum generator and does not
 identify the four-witness theorem at finite cutoff (withdrawn
 2026-09-28). That section takes the operator-system
@@ -332,7 +334,9 @@ foundation on which a future propinquity argument would be built.
 
 \subsection{Relation to the Krein-carrier section of Paper~42}
 
-Paper~42~\S~11~\cite{paper42} works at the \emph{modular-Hamiltonian} level
+Paper~42~\S~11~\cite{paper42} works at the level of a \emph{posited
+wedge generator} (a modular-Hamiltonian candidate;\ its
+Bisognano--Wichmann identification is open, Paper~42 O0)
 on a hemispheric wedge of the Lorentzian Krein space (an automatic
 period closure of a posited generator, not a finite-cutoff
 identification of the four-witness theorem;\ 2026-09-28), using the
@@ -343,8 +347,8 @@ $(m, n) = (4, 6)$ as the present paper. Those results
 independent wedge KMS state, Tomita--Takesaki polar decomposition,
 flow conjugacy, six-witness collapse) operate at the level of
 \emph{specific operators} on the Krein space:\ the wedge projector,
-the modular operator $\Delta$, the modular Hamiltonian $K_L^\alpha$
-and $K_L^{\TT}$. They do not directly study the linear span of all
+the modular operator $\Delta$, the posited generator $K_L^\alpha$
+and the Tomita generator $K_L^{\TT}$ of the Gibbs state built from it. They do not directly study the linear span of all
 spatial-times-temporal multipliers as a $*$-closed subspace of
 $\Bcal(\Krein)$.
 
@@ -1253,7 +1257,9 @@ test\_restrict\_to\_lorentzian\_wedge\_*}.
 operator system]
 \label{rem:wedge_paper43}
 Paper~42~\cite{paper42}~\S~11 constructs the wedge KMS state $\rho_W^L$
-and the modular Hamiltonians $K_L^\alpha$ and $K_L^{\TT}$ at the
+from the posited generator $K_L^\alpha$ (its Bisognano--Wichmann
+identification is open, Paper~42 O0), together with the Tomita
+generator $K_L^{\TT}$ of that Gibbs state, at the
 matrix level on $\Krein_{W_L}$. The natural operator-system reading
 of those constructions is at the level of expectation values on
 $\Op^{L, W}_{\nmax, \Nt}$:\ the cross-witness collapse of
@@ -1267,7 +1273,7 @@ construction as the wedge restriction of the natural Lorentzian
 truncated operator system, completing the bottom-up picture.
 
 This identification does \emph{not} immediately imply that the
-Krein-wedge modular flow extends to a flow on the operator system
+Krein-wedge flow of the posited generator extends to a flow on the operator system
 itself (in the sense of an automorphism group of $\Op^L$), because
 $\Op^L$ is not multiplicatively closed and ``automorphism'' does not
 literally apply. The natural Lorentzian-propinquity-style replacement
@@ -1279,7 +1285,7 @@ theorem, 2026-06-09;\ see the status note in
 \end{remark}
 
 % =====================================================================
-\section{Open questions and Sprint L3b outlook}\label{sec:open}
+\section{Open questions (and the descoped Sprint L3b outlook)}\label{sec:open}
 % =====================================================================
 
 This paper closes the operator-system substrate at finite cutoff. The
@@ -1336,18 +1342,22 @@ it would have inherited is withdrawn, so an assembly route can no longer
 inherit a reach/height bookkeeping.  Second, and more decisively, the
 compactification it recommends is now understood to be the obstruction
 rather than the device:\ Paper~45's $K^{+}$ annihilation theorem shows
-the natural Krein-positive compression fails structurally, and every
-finite-cutoff generator has a flow with compact closure (Paper~42's
+the natural Krein-positive compression fails structurally, and,
+separately, every finite-cutoff generator has a flow with compact
+closure [SYMBOLIC] (Paper~42's
 posited generator, which has \emph{integer} spectrum and is not identified
 with the Bisognano--Wichmann boost at finite cutoff, gives a compact
-$2\pi$ circle), so every Lipschitz/boost seminorm built on it is
-signature-blind.  Replacing
+$2\pi$ circle);\ that every Lipschitz/boost seminorm built on it is
+therefore signature-blind is [ARGUED] (Paper~45 Q1;\ generator-independent,
+while its Wick-rotation/KMS-circle reading is conditional on Paper~42's
+open O0).  Replacing
 $\R_t$ by $S^1_T$ therefore buys tractability at the cost of the very
-structure being sought.  The general form of the obstruction:\ signature
-is a non-compact phenomenon, while quantum-metric convergence is a
-finite-dimensional-approximant phenomenon, and finite-dimensionality
+structure being sought.  The general form of the obstruction [ARGUED]:\
+signature is a non-compact phenomenon, while quantum-metric convergence
+is a finite-dimensional-approximant phenomenon, and finite-dimensionality
 forces discrete spectrum --- so \emph{every} finite truncation
-compactifies the modular flow.  The remaining routes are not better
+compactifies the generator's flow (whether or not that flow is a
+modular flow is Paper~42's open O0).  The remaining routes are not better
 seminorms:\ they are moving signature to the state/modular level, or
 adopting a genuinely Lorentzian distance notion (time-separation /
 Lorentzian length spaces) rather than a metric one.
@@ -1356,7 +1366,8 @@ Lorentzian length spaces) rather than a metric one.
 
 \textbf{Question.} What is the natural Wasserstein--Kantorovich
 state-space distance on the Krein-positive states of $\Op^L$, and
-does it converge under the Sprint L3b construction?
+does it converge under a compactified-temporal construction (the
+Sprint L3b route, descoped;\ \S\ref{sec:open_propinquity})?
 
 Proposition~\ref{prop:krein_positivity_trivial} shifts the
 Krein-positivity question from the operator-substrate to the state
@@ -1383,7 +1394,9 @@ construction explicitly bypasses this by working directly with the
 van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1 lift to a
 Krein space, which has no parity-dimension restriction. If the
 Nieuviarts construction were extended to odd dimensions, it would
-provide an alternative substrate for the Sprint L3b program;\ as it
+provide an alternative substrate for a Lorentzian convergence program
+(the Sprint L3b program itself is descoped,
+\S\ref{sec:open_propinquity});\ as it
 stands, the BBB Krein-construction path of the present paper is the
 only path available.
 

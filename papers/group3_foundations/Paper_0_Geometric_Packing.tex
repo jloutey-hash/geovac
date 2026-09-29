@@ -536,7 +536,12 @@ The packing's node set is exactly the label set of these harmonics
 (the Peter--Weyl truncation of $L^2(S^3)$), on which
 $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal $SO(4)$ Casimir
 $n^2 - 1$;\ Paper~7~\cite{paper7}
-verifies Fock's conformal chain from that continuum operator onward.
+verifies Fock's conformal chain from that continuum operator onward
+(under it the hydrogen bound-state Hamiltonian is the function
+$H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of that operator, its scale fixed by the
+eigenvalue $2\pi^2/n$ of Fock's $S^3$ Coulomb kernel;\ that
+non-definitional step is tested for $n \le 4$, general $n$ being
+Fock's).
 The graph's edge Laplacian does \emph{not} converge to it
 (Sec.~\ref{sec:graph}).
 
@@ -640,7 +645,8 @@ We state this as a mathematical observation, not a metaphysical claim.
 The conformal equivalences between each continuum operator and
 standard quantum mechanics are not established uniformly across the
 hierarchy.  For the $S^3$ embedding the lattice's labels are the
-operator's eigenbasis labels, and
+operator's eigenbasis labels, the hydrogen bound-state Hamiltonian is
+the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of that operator (Fock), and
 \textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic checks of Fock's
 continuum projection chain (a graph-to-continuum
 \emph{operator} convergence is not part of it:\ the edge Laplacian does
@@ -819,7 +825,8 @@ is carried by the node labels, not approximated by mesh refinement.
 
 The conformal equivalence between the hydrogen problem and the
 Laplace--Beltrami operator on the unit~$S^3$ (via
-Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
+Fock's stereographic projection, under which the bound-state Hamiltonian
+is the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of that operator) is developed in Paper~7~\cite{paper7},
 \textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
 of that continuum chain, and an exact kernel-eigenvalue test carries its
 non-definitional energy step, $p_0 = Z/n$ (the graph Laplacian is not a discretization of
@@ -939,7 +946,8 @@ independently of the specific force law or potential.
 In the GeoVac series, dynamics enter through the Coulomb problem's
 continuum structure, not through a limit of the graph Laplacian.
 Paper~7~\cite{paper7} verifies Fock's conformal equivalence between the
-hydrogen problem and the Laplace--Beltrami operator on~$S^3$, under
+hydrogen problem and the Laplace--Beltrami operator on~$S^3$ (the
+bound-state Hamiltonian being $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$), under
 which the $1/r$ Coulomb potential can equivalently be described as the
 coordinate distortion of the stereographic projection (a dual
 description, not a claim that either reading is prior);\ the

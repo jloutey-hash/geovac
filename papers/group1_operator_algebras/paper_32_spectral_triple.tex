@@ -110,7 +110,8 @@ $\mathrm{Spin}(3) = \mathrm{SU}(2)$) and $J_{\mathrm{GV}} D_{\mathrm{GV}}
 $(\epsilon, \epsilon') = (-1, +1)$ of the continuum $S^3$ factor
 ($\mathrm{KO}$-dimension~$3$ mod~$8$~\cite{connes1995}).  The continuum
 factor is odd, and so is the true Camporesi--Higuchi window that
-converges (the commutant of its operator system is the scalars); only
+converges (measured, $n_{\max} \le 3$:\ the commutant of its operator
+system is the scalars); only
 the chirality-doubled Fock/Weyl \emph{model} truncation is even, via the
 chirality-doubling grading $\gamma_{\mathrm{GV}} = \sigma_x \otimes
 \mathbb{1}$, with sign triple $(-,+,+)$ and no $\mathrm{KO}$ label
@@ -154,8 +155,9 @@ residuals that grow with the cutoff, on the Fock/Weyl model of the
 operator system and on the true window alike (on the true window as a
 boundary term of the compression).  The Fock/Weyl model truncation is
 even (chirality doubling; sign triple $(-,+,+)$, no $\mathrm{KO}$
-label);\ the true window is odd, like the continuum (its operator
-system generates all of $B(\mathcal{H})$, so it admits no grading), and
+label);\ the true window is odd (measured, $n_{\max} \le 3$), like
+the continuum (its operator system generates all of $B(\mathcal{H})$,
+so it admits no grading), and
 there the pair $(\varepsilon, \varepsilon') = (-,+)$ is forced by
 equivariance;\ the residual open
 items are catalogued in Sec.~\ref{sec:open}.
@@ -255,7 +257,7 @@ $|K - 1/\alpha|/(1/\alpha)$ is $4.77 \times 10^{-7}$).
 
 \paragraph{Internal register.}  This paper makes explicit the
 spectral-triple framing already operating informally in the working
-hypothesis register (kept as \S 1.7 of the repository's \texttt{CLAUDE.md}; the sprint, track and door codenames used throughout this paper are chronicle anchors into that file and the repository \texttt{CHANGELOG.md}; WH1 ``PROVEN'' --- unconditional as of 2026-06-10, Paper~38~\cite{loutey_paper38}).
+hypothesis register (kept as \S 1.7 of the repository's \texttt{CLAUDE.md}; the sprint, track and door codenames used throughout this paper are chronicle anchors into that file and the repository \texttt{CHANGELOG.md}; WH1's commutative-factor leg --- state-space convergence of the round-$S^3$ truncations on the true window --- proved unconditionally as of 2026-06-10, Paper~38~\cite{loutey_paper38};\ convergence of the almost-commutative structure is \textbf{[OPEN]}).
 Papers continue under the rhetoric rule of \S 1.5: dual-description
 framing, no ontological priority claims, lead with computational
 results.
@@ -979,15 +981,16 @@ sense of~\cite{connes1995}: $\mathcal{A}_{\mathrm{GV}}$ is unital and
 involutive, $\pi: \mathcal{A}_{\mathrm{GV}} \to
 \mathcal{B}(\mathcal{H}_{\mathrm{GV}})$ is a faithful
 $*$-representation, $D_{\mathrm{GV}}$ is self-adjoint with bounded
-commutators.  \textbf{[INTERNAL THEOREM]} The continuum limit
-$n_{\max} \to \infty$ recovers the canonical spectral triple of the unit
-Riemannian spin three-sphere $S^3$ with the Camporesi--Higuchi Dirac
-operator \emph{for the operator-system representative on the true
-Camporesi--Higuchi window}
+commutators.  \textbf{[INTERNAL THEOREM]} As
+$n_{\max} \to \infty$ the state spaces converge to that of the canonical
+spectral triple of the unit Riemannian spin three-sphere $S^3$ with the
+Camporesi--Higuchi Dirac operator \emph{for the operator-system
+representative on the true Camporesi--Higuchi window}
 $\mathcal{T}_{n_{\max}} = (\mathcal{O}^{\mathrm{CH}}_{n_{\max}}, \mathcal{H}_{n_{\max}}, D_{n_{\max}})$ of
 Theorem~\ref{thm:gh_convergence} (van~Suijlekom's state-space
 Gromov--Hausdorff distance, translation-seminorm metrization, limit
-identified up to isometry); neither the Fock/Weyl model
+identified up to isometry;\ the target's spectral-triple properties are
+inputs, not outputs, of the convergence); neither the Fock/Weyl model
 $\mathcal{O}_{n_{\max}}$ of the axiom audit nor the diagonal
 (gauge-network) representative
 $\mathcal{A}_{\mathrm{GV}} = \mathbb{C}^{V_{\mathrm{Fock}}}$ of
@@ -1353,7 +1356,7 @@ Sec.~\ref{sec:K_decomposition} discussion.)
 with the Camporesi--Higuchi Dirac operator is \emph{odd}: it carries no
 $\mathbb{Z}_2$-grading commuting with $C^\infty(S^3)$ and
 anticommuting with the Dirac operator.
-(b)~The \emph{finite} truncation
+(b)~The \emph{chirality-doubled model} truncation
 $(\mathcal{A}_{\mathrm{GV}}, \mathcal{H}_{\mathrm{GV}},
 D_{\mathrm{GV}})$ is \emph{even}:\ the chirality-doubling operator
 $\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}$ (exchanging the
@@ -1427,7 +1430,7 @@ QED-on-$S^3$ computations use.
 \toprule
 Axiom & Status at finite $n_{\max}$ & Status in continuum limit \\
 \midrule
-Order zero (faithful $*$-rep) & Holds rigorously & Holds rigorously \\
+Faithful $*$-representation  & Holds rigorously & Holds rigorously \\
 Bounded commutators           & Holds ($[D,\pi(a)] = 0$ on $\mathcal{A}_{\mathrm{GV}}$) & Holds rigorously \\
 Compact resolvent             & Auto (finite dim) & Holds (CH summability) \\
 Finite summability            & Auto              & $3^+$-summable \\
@@ -1466,7 +1469,7 @@ open), and on the true window they fail from $n_{\max} = 1$ and grow,
 as a boundary term of the compression;\ the chirality-doubled model
 truncation is even (Proposition~\ref{prop:odd}(b)), with sign triple
 $(-, +, +)$ and no KO label at finite cutoff, while the true window is
-odd (Proposition~\ref{prop:odd}(c)).  A finite-cutoff Krein-carrier sign
+odd (measured, $n_{\max} \le 3$;\ Proposition~\ref{prop:odd}(c)).  A finite-cutoff Krein-carrier sign
 audit at BBB $(m, n) = (4, 6)$ (signature-blind; the Lorentzian
 programme is descoped, Paper~45) is recorded in
 Table~\ref{tab:axiom_audit_lorentzian} below.}
@@ -1543,8 +1546,8 @@ truthful Camporesi--Higuchi $D_{\mathrm{GV}}$:\ this is a structural
 feature of GeoVac, not a bug, and is the load-bearing scope finding
 of Sprint L2-D.  Resolution path R1+R2 (truthful for axioms requiring
 $JD = +DJ$, offdiag CH for axioms requiring $\{\chi, D\} = 0$) mirrors
-the Riemannian-side R3.5/Paper~42 trade.  WH1 PROVEN
-(Theorem~\ref{thm:gh_convergence}) is NOT re-opened by these results;
+the Riemannian-side R3.5/Paper~42 trade.  The commutative-factor
+convergence theorem of WH1 (Theorem~\ref{thm:gh_convergence}) is NOT re-opened by these results;
 the sign audit neither extends the framework to Lorentzian signature
 nor re-tests its Riemannian foundation.}
 \label{tab:axiom_audit_lorentzian}
@@ -1605,7 +1608,7 @@ convergence.
 parameters or empirical
 inputs.  It is a statement about the continuum limit only:\ at finite
 cutoff the true-window truncation is odd like its limit
-(Proposition~\ref{prop:odd}(c)), only the chirality-doubled model being
+(measured, $n_{\max} \le 3$;\ Proposition~\ref{prop:odd}(c)), only the chirality-doubled model being
 even (Proposition~\ref{prop:odd}(b)), and the
 Fock/Weyl model of the operator system fails order zero and order one,
 as does the true window, by a boundary term of the compression
@@ -2550,7 +2553,7 @@ manifold, with $k \in \{0, 1, 2\}$ selecting the sub-mechanism.
 \begin{remark}[Status of $K = \pi(B + F - \Delta)$]
 \label{rem:K_under_theorem}
 \textbf{[OBSERVATION]} Paper~2's combination $K = \pi(B+F-\Delta) \approx 1/\alpha$ matches
-its target at $8.8 \times 10^{-8}$ (post-correction;\ $4.77\times10^{-7}$ raw).  Under
+its target at $4.77\times10^{-7}$ (raw;\ $8.8 \times 10^{-8}$ through the cubic's root after the $\alpha^2$ correction).  Under
 Theorem~\ref{thm:pi_source_case_exhaustion}, $K$'s chain
 (Fock~$\circ$~Hopf$\circ$~spinor) engages M1 (the explicit prefactor $\pi$,
 identified by Sprint~A as $\mathrm{Vol}(S^2)/4$~\cite{paper2}) and M2
@@ -3846,11 +3849,18 @@ $\le \gamma$ outright; the abandoned-route Lipschitz constant was $C_3 = 1$)
 $\gamma_{n_{\max}}$ is the L2 mass-concentration moment of the central
 spectral Fej{\'e}r kernel on SU(2).  The asymptotic rate
 $\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$ (dual-Coxeter normalisation, $\mathrm{Cas}(\mathrm{ad}) = h^\vee$;\ equivalently $2/\pi$ on the unit $S^3$ this paper declares, and $2\sqrt2/\pi$ under the field-standard Kac form --- the constant scales with the metric)
-is proven unconditionally in Paper~38~\cite{loutey_paper38}
-(main theorem, translation-seminorm metrization, 2026-06-10, stated
-there as $(4/\pi + o(1))\log n_{\max}/n_{\max}$;\ the $O(1/n_{\max})$
-refinement is derived in its appendix); the
-small-$n$ closed forms are consistent with it.
+is \textbf{[INTERNAL THEOREM + MEASURED]} in
+Paper~38~\cite{loutey_paper38} (main theorem, translation-seminorm
+metrization, 2026-06-10, stated there as $(4/\pi + o(1))\log
+n_{\max}/n_{\max}$;\ derived, with its two logarithmic sub-coefficients
+pinned by doubling estimators in its appendix):\ what is proved
+unconditionally is the bound $d_{\mathrm{GH}} \le \gamma_{n_{\max}}$ and
+$\gamma_{n_{\max}} \to 0$, while the uniform bound $\gamma_{n_{\max}} \le
+6\log n_{\max}/n_{\max}$ ($n_{\max} \ge 2$) is \textbf{[PANEL-VERIFIED]};
+the small-$n$ closed forms are consistent with it.  Convergence in the
+Dirac-commutator seminorm, and of the almost-commutative
+(gauge-network, $\mathcal{A} \otimes M_n$) structure, is
+\textbf{[OPEN]}.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -3955,7 +3965,7 @@ finite-band, so the unit-Lipschitz ball contains $f$ with $B_{n_{\max}}(f) =
 simply where $\gamma_{n_{\max}}$ falls below~$1$.  This paragraph read ``this
 neither confirms nor contradicts L5\ldots\ an open check'' until then.
 \textbf{Scope:} Paper~38's unconditional theorem uses no height constituent
-and is untouched, so the convergence statement and the WH1 keystone stand.  What the module reports as the bound is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
+and is untouched, so the convergence statement and the WH1 keystone's commutative-factor leg stand.  What the module reports as the bound is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
 1.322$ (these are the L2 moments $\gamma_2, \gamma_3, \gamma_4$, not
 independent measurements; ratio $0.637$).  Module
 \texttt{geovac/gh\_convergence.py} packages the assembly (48 unit
@@ -4036,13 +4046,20 @@ d_{D_{n_{\max}}})$ via the withdrawn L4/L5 assembly;\ withdrawn
 2026-09-28.)
 \end{remark}
 
-\begin{remark}[WH1 keystone closure]
+\begin{remark}[WH1 keystone:\ the commutative factor]
 \label{rem:wh1_proven}
-Theorem~\ref{thm:gh_convergence} closes the WH1 keystone (working-hypothesis register).
-\textbf{[INTERNAL THEOREM]} The structural claim of WH1 --- that GeoVac is an almost-commutative
-spectral triple with Connes--van Suijlekom truncations converging to
-the round-$S^3$ spectral triple --- is now \emph{proved} with the
-explicit rate $(4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$ (dual-Coxeter normalisation, $\mathrm{Cas}(\mathrm{ad}) = h^\vee$;\ equivalently $2/\pi$ on the unit $S^3$ this paper declares, and $2\sqrt2/\pi$ under the field-standard Kac form --- the constant scales with the metric) (Paper~38), on the true Camporesi--Higuchi window under the translation-seminorm metrization.  The L3 constant $C_3 = 1$ holds for every $f$ and every $n_{\max}$ by compression (Paper~38, Lemma~L3, \textbf{[INTERNAL THEOREM]});\ the earlier per-harmonic route to it, and the reading of the Track-A ``torsion-and-curvature correction'' as spectral-gap quantization, are withdrawn (2026-09-28). The
+Theorem~\ref{thm:gh_convergence} closes the commutative-factor leg of the WH1 keystone (working-hypothesis register).
+\textbf{[INTERNAL THEOREM]} The Connes--van Suijlekom truncations of
+the commutative factor --- the round-$S^3$ Camporesi--Higuchi triple ---
+are proved to converge in state-space Gromov--Hausdorff distance
+($d_{\mathrm{GH}} \le \gamma_{n_{\max}} \to 0$).  \textbf{[OPEN]} The
+structural claim of WH1 as a whole --- that GeoVac is an
+almost-commutative spectral triple whose truncations, including the
+gauge-network $\mathcal{A} \otimes M_n(\mathbb{C})$ structure, converge
+--- is \emph{not} proved:\ convergence of the almost-commutative
+structure is open, as is convergence in the Dirac-commutator seminorm.
+\textbf{[INTERNAL THEOREM + MEASURED]} The displayed rate is
+$(4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$ (dual-Coxeter normalisation, $\mathrm{Cas}(\mathrm{ad}) = h^\vee$;\ equivalently $2/\pi$ on the unit $S^3$ this paper declares, and $2\sqrt2/\pi$ under the field-standard Kac form --- the constant scales with the metric) (Paper~38), on the true Camporesi--Higuchi window under the translation-seminorm metrization.  The L3 constant $C_3 = 1$ holds for every $f$ and every $n_{\max}$ by compression (Paper~38, Lemma~L3, \textbf{[INTERNAL THEOREM]});\ the earlier per-harmonic route to it, and the reading of the Track-A ``torsion-and-curvature correction'' as spectral-gap quantization, are withdrawn (2026-09-28). The
 remaining open questions (Higgs-gap analysis on the four-way $S^3$
 coincidence; the order-zero and order-one conditions of the real
 structure at finite $n_{\max}$ --- the KO sign pair itself is settled,
@@ -4133,8 +4150,8 @@ holds by construction);\
 Paper~24~\S 5.3 Coulomb/HO asymmetry (seven catalogued, six standing; the structural
 finding that the Pythagorean orthogonality is $S^3$-specific to
 the construction --- the $S^5$ Hardy sector has no clean analog,
-joining the modular-Hamiltonian level as a further Coulomb/HO
-asymmetry layer alongside calibration $\pi$ and Wilson matter
+adding the Pythagorean orthogonality for the posited wedge generator
+as a further Coulomb/HO asymmetry layer alongside calibration $\pi$ and Wilson matter
 coupling;\ the spectrum-computing-$L_0$ layer once listed here is
 withdrawn, 2026-09-25).
 \end{remark}
@@ -4749,7 +4766,7 @@ electroweak unification, requiring identification of the GV
 chirality grading $\gamma_{\mathrm{GV}}$ with the SM weak-isospin
 chirality) is \emph{not} closed by H1.  In our construction
 $\gamma_{\mathrm{GV}}$ is the chirality-doubling grading
-$\sigma_x \otimes \mathbb{1}$ of the finite truncation
+$\sigma_x \otimes \mathbb{1}$ of the chirality-doubled model truncation
 (Proposition~\ref{prop:odd}(b);\ not $\operatorname{sign}(D_{\mathrm{GV}})$,
 which commutes with $D_{\mathrm{GV}}$), while the SM weak-isospin chirality is a separate
 $\mathbb{Z}_2$-grading on the matter sector of $\mathcal{H}_F$.
@@ -6859,7 +6876,9 @@ $\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ with
 $k \in \{0, 1, 2\}$: M1 (Hopf-base measure), M2 (Seeley--DeWitt
 heat-kernel coefficients), M3 (vertex-parity Hurwitz / Dirichlet-$L$
 content).  The GH-convergence theorem
-(Theorem~\ref{thm:gh_convergence}) closes WH1 on the Riemannian side;
+(Theorem~\ref{thm:gh_convergence}) closes WH1's commutative-factor
+leg on the Riemannian side (the almost-commutative structure's
+convergence is open);
 the Bisognano--Wichmann reading
 (Remark~\ref{rem:bisognano_wichmann_reading}, with Unruh pendant) is a
 structural correspondence alongside it, whose operator-level falsifier
@@ -6930,8 +6949,8 @@ $n_{\mathrm{Fock}}$-parity, not in spacetime signature
 (\S~\ref{sec:l2d_axiom_audit_31}).
 
 \paragraph{What this does and does not change.}
-The Riemannian case-exhaustion theorem stands;\ WH1 PROVEN
-(Theorem~\ref{thm:gh_convergence}) stands.  The L0 audit is a
+The Riemannian case-exhaustion theorem stands;\ the commutative-factor
+convergence theorem of WH1 (Theorem~\ref{thm:gh_convergence}) stands.  The L0 audit is a
 documentation-level extension that classifies the framework's transfer
 behavior under signature change without re-deriving any of the
 Riemannian results.  The falsifier it names would deepen the
@@ -7045,7 +7064,7 @@ equals $J_{\mathrm{spatial}}$ as numpy arrays
 (Frobenius difference $= 0.0$).  This confirms that the
 Camporesi--Higuchi spatial spinor bundle is structurally compatible
 with the Cl$(3, 1)$ gamma-matrix embedding in the West-coast chiral
-basis;\ WH1 PROVEN
+basis;\ the commutative-factor convergence theorem of WH1
 (Theorem~\ref{thm:gh_convergence}) is not re-opened by this result.
 Source:\ \verb|debug/l2_b_krein_construction_memo.md|, raw data
 \verb|debug/data/l2_b_krein_construction.json|, implementation
@@ -7320,7 +7339,7 @@ verify the analog of Paper~42's $\sigma_{2\pi}(O) = O$ at the
 operator-system level on the Krein space.  The resolution choice
 R1 (truthful $D_{\mathrm{GV}}$, preserves Riemannian-limit recovery)
 versus R2 (offdiag CH, satisfies BBB axiom~(v)) is recommended to be
-tested in parallel.  WH1 PROVEN
+tested in parallel.  The commutative-factor convergence theorem of WH1
 (Theorem~\ref{thm:gh_convergence}) is not re-opened by these results.
 
 % -------------------------------------------------------------------
@@ -7430,11 +7449,14 @@ $\mathrm{Vol}(S^1)$ (master Mellin engine $k = 0$, M1) classifies that
 posited value and is not an output of the case-exhaustion theorem.  The closure holds at every Krein cutoff because
 the chosen generator has integer spectrum, and it is
 \emph{signature-blind} (withdrawn 2026-09-03, per the 2026-07-04
-retirement recorded in the C16 registry):\ the truncated boost is
-compact (integer spectrum, $e^{2\pi i K} = \mathbb{1}$), the period
-closure is the compact KMS $\beta = 2\pi$ circle, and the $(3,1)$ label
-is a carrier choice that the closure cannot distinguish from the
-Euclidean one (Papers 45/47; WH7).  An earlier version of this
+retirement recorded in the C16 registry):\ the finite generator
+$K = 2J_z$ is \emph{posited}, not derived as a truncated boost, and its
+flow is compact (integer spectrum, $e^{2\pi i K} = \mathbb{1}$);\ the
+period closure is the compact $\beta = 2\pi$ circle, and the $(3,1)$
+label is a carrier choice that the closure cannot distinguish from the
+Euclidean one (Papers 45/47; WH7).  \textbf{[ARGUED]} The
+Euclidean-only reading of the closure;\ a Wick/KMS reading is
+conditional on Paper~42's open question O0~\cite{paper42}.  An earlier version of this
 paragraph read the closure as an operator-level identification of the
 four-witness statement at finite cutoff; that reading is retired.% [retracted 2026-09-28: finite-four-witness-literal-identification]
 
@@ -7479,9 +7501,11 @@ continuum (GH-limit) limit.  No published Lorentzian quantum-metric
 convergence construction exists as of May~2026
 (Latr\'emoli\`ere 2017/2026 and Hekkelman--McDonald 2024 are strictly
 Riemannian), and the framework's own attempt was DESCOPED on
-2026-06-09 by the $K^+$ annihilation theorem (Paper~45):\ the truncated
-boost is compact, so no Lorentzian metric statement is available at
-finite cutoff (updated 2026-09-03; an earlier version named this as the
+2026-06-09 by the $K^+$ annihilation theorem (Paper~45):\ the finite
+generator $K = 2J_z$ is posited and its flow is compact, so no
+Lorentzian metric statement is available at finite cutoff (the
+Euclidean-only reading is \textbf{[ARGUED]};\ a Wick/KMS reading is
+conditional on Paper~42's O0) (updated 2026-09-03; an earlier version named this as the
 Sprint L3 target).  The Sprint L2-D structural finding (BBB universal
 $\chi D = -D\chi$ fails on truthful $D_{\mathrm{GV}}$) is preserved
 in L2-E:\ the wedge construction is $K_L^{\alpha, W}$-driven and does
@@ -7838,7 +7862,7 @@ remains the original empirical claim of Paper~2.
 \end{observation}
 
 This is part of what the working hypothesis WH1 in the project register
-rests on (working-hypothesis register, WH1 ``PROVEN'' as of 2026-06-10): the structural
+rests on (working-hypothesis register;\ its commutative-factor convergence leg proved as of 2026-06-10, the almost-commutative structure's convergence open): the structural
 framing is in the published lineage; the empirical claim is not
 duplicated.
 
@@ -7889,8 +7913,8 @@ three relations the finite-versus-limit question is closed in favour of
 finite-$n_{\max}$ exactness.  No KO-dimension label is attached at
 finite cutoff:\ the chirality-doubled model truncation is even
 (Proposition~\ref{prop:odd}(b)) with sign triple $(-, +, +)$, the true
-window that converges is odd like the continuum
-(Proposition~\ref{prop:odd}(c)) with only the pair
+window that converges is odd like the continuum (measured,
+$n_{\max} \le 3$;\ Proposition~\ref{prop:odd}(c)) with only the pair
 $(\varepsilon, \varepsilon') = (-, +)$ defined, and the KO-3 label
 belongs to the continuum factor.  \textbf{[MEASURED]}
 \textbf{[OPEN]} The order-zero and order-one conditions on the
@@ -7943,6 +7967,15 @@ rank-2 fiber that produces the Breit retarded integrals.  Paper~30's
 $\mathrm{SU}(2)$ result is rank~1 (vector); rank~2 (tensor) is a
 distinct extension; the answer is unknown.
 
+\paragraph{Q6.  Convergence beyond the commutative factor.}
+\textbf{[OPEN]}  Theorem~\ref{thm:gh_convergence} proves state-space
+convergence of the commutative factor on the true window, under the
+translation seminorm.  Two convergence statements are not proved:\ the
+same convergence in the Dirac-commutator seminorm, and convergence of
+the almost-commutative (gauge-network, $\mathcal{A} \otimes
+M_n(\mathbb{C})$) structure that WH1 names
+(Remark~\ref{rem:wh1_proven}).
+
 % ===================================================================
 \section{Conclusion}
 \label{sec:conclusion}
@@ -7956,9 +7989,12 @@ Theorem~\ref{thm:axiom_complete}).  The diagonal triple is a spectral,
 not a metric, object ($[D_{\mathrm{GV}}, \pi(a)] = 0$); the metric
 role and the continuum limit belong to the operator-system
 representative on the true Camporesi--Higuchi window (Paper~38),
-metrized by the left-translation seminorm (Dirac-seminorm convergence
-\textbf{[OPEN]}).  At finite cutoff, on the Fock/Weyl model objects,
-the three $J$-relations hold exactly, the truncation is even
+metrized by the left-translation seminorm:\ convergence of that
+commutative factor is proved (explicit asymptotic rate
+\textbf{[INTERNAL THEOREM + MEASURED]}), while Dirac-seminorm
+convergence and convergence of the almost-commutative structure are
+\textbf{[OPEN]} (Q6).  At finite cutoff, on the Fock/Weyl model objects,
+the three $J$-relations hold exactly, the model truncation is even
 (sign triple $(-, +, +)$, no KO label), and order zero and order one
 fail with residuals that grow with the cutoff (\textbf{[MEASURED]},
 mechanism open);\ on the true window the three $J$-relations also hold
@@ -7976,7 +8012,7 @@ an observation.  \textbf{[OBSERVATION]} The Coulomb/HO asymmetry of Paper~31 is 
 statement that the GeoVac triple's continuum limit is one specific real
 odd $\mathrm{KO}$-dimension-3 triple, not a generic class
 (Observation~\ref{obs:pi_coulomb}); its true-window truncation is odd
-like the limit, and only the chirality-doubled model truncation is even
+like the limit (measured, $n_{\max} \le 3$), and only the chirality-doubled model truncation is even
 (Proposition~\ref{prop:odd}).
 
 Four things this paper did not do.  It did not derive $\alpha$;

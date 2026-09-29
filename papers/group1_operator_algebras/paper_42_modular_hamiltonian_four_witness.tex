@@ -162,8 +162,8 @@ O0 for the Bisognano--Wichmann generator;\ Paper~45 Q1).  The mechanism is visib
 in this paper's own result~(i):\ the posited wedge generator has
 \emph{integer} spectrum, so the
 finite-cutoff flow is a compact $\beta = 2\pi$ circle rather
-than a non-compact boost, and every Lipschitz/boost seminorm built on
-it is signature-blind.  The finite-cutoff closures reported below stand
+than a non-compact boost [SYMBOLIC], and on the argued reading [ARGUED]
+every Lipschitz/boost seminorm built on it is signature-blind.  The finite-cutoff closures reported below stand
 as computed;\ what does not follow from them is a metric statement
 about \emph{signature}, or an identification of the posited generator
 with a Bisognano--Wichmann boost.
@@ -388,11 +388,13 @@ paper, and footnotes the Nieuviarts NO-GO on direct twist-morphism
 emergence for odd-dim $\sthree$. Section~\ref{sec:bw_at_finite_cutoff}
 sets up the hemispheric wedge $P_W$, the KMS state at $\beta = 2\pi$
 on the wedge sub-algebra, and the unified surface-gravity normalisation.
-Section~\ref{sec:geometric_construction} constructs the geometric
-BW-$\alpha$ modular Hamiltonian $K_\alpha = J_{\mathrm{polar}}$ and
+Section~\ref{sec:geometric_construction} constructs the posited geometric
+BW-$\alpha$ generator $K_\alpha = J_{\mathrm{polar}}$ (its
+identification as a modular Hamiltonian is open, O0) and
 proves the automatic period closure Theorem~\ref{thm:bw_alpha}.
 Section~\ref{sec:tt_construction} constructs the Tomita--Takesaki
-BW-$\gamma$ modular Hamiltonian $K_{\TT} = -\log \Delta$ via polar
+BW-$\gamma$ modular Hamiltonian $K_{\TT} = -\log \Delta$ of the Gibbs
+state built from that posited generator, via polar
 decomposition on the GNS Hilbert--Schmidt space, distinguishes
 $J_{\TT}$ ($J^2 = +I$) from the Connes $J_{\mathrm{GV}}$ ($J^2 = -I$),
 and proves Theorem~\ref{thm:bw_gamma} (the same closure, read through
@@ -627,9 +629,11 @@ stereographic, spectral action, Camporesi--Higuchi spinor lift) all
 require a full Krein-space lift to extend cleanly to signature
 $(3, 1)$.
 
-The present paper does not address signature $(3, 1)$. It operates
+Sections~\ref{sec:setup}--\ref{sec:conclusion} do not address signature
+$(3, 1)$ (the Krein carrier of \S\ref{sec:lorentzian_closure} does, at
+finite cutoff). They operate
 entirely on the Riemannian Camporesi--Higuchi triple at signature
-$(3, 0)$ and records the modular-period identity inside that framework.
+$(3, 0)$ and record the modular-period identity inside that framework.
 The Sprint L0 audit identified an operator-system test of the
 Wick-rotation projection at signature $(3, 0)$ --- a modular
 Hamiltonian computed from a wedge-restricted Camporesi--Higuchi state
@@ -876,7 +880,8 @@ sub-range.
 
 \subsection{The geometric modular flow}\label{sec:alpha_flow}
 
-The geometric BW-$\alpha$ modular flow on the wedge sub-operator-system
+The geometric BW-$\alpha$ flow (a modular flow only if O0 identifies
+$K_\alpha^W$ as a modular Hamiltonian) on the wedge sub-operator-system
 $\Op_{W, \nmax}$ is the inner-derivation flow
 \begin{equation}\label{eq:alpha_flow}
    \sigma_t^{\alpha}(O)
@@ -1630,25 +1635,31 @@ and the associated Hilbert--Schmidt GNS construction.
 
 \paragraph{Lorentzian signature and Krein-space spectral triples.}
 The proper Lorentzian extension of the present construction would
-require a Krein-space spectral triple at signature $(3, 1)$, for which
+require a Krein-space spectral triple at Lorentzian signature (one time
+and three space dimensions), for which
 the canonical reference is
 Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}. The
 Bizi--Brouder--Besnard classification organises spectral triples of
 metric signature $(t, s)$ ($t$ time and $s$ space dimensions) by pairs
-$(m, n) = (t + s,\, t - s) \bmod 8$ (their p.~3),
+$(m, n) = (t + s,\, t - s) \bmod 8$ (their p.~3;\ all BBB table,
+equation and page numbers in this paper follow arXiv:1611.07062 v2),
 where $m$ alone is the metric dimension, and the underlying Connes axiom
 signs determine the Krein-space structure.
 The Riemannian Camporesi--Higuchi triple has $(t, s) = (0, 3)$ (three
-spatial directions);\ the
+spatial directions), which gives $(m, n) = (3, -3 \bmod 8) = (3, 5)$
+--- this is BBB's Clifford sign convention;\ Connes' KO-dimension~3
+corresponds to it;\ the
 Lorentzian extension, one time and three space dimensions, has
 $(t, s) = (1, 3)$, which gives $(m, n) = (4, -2 \bmod 8) = (4, 6)$, their
-Table~3 entry $(4, 6)$. The Bizi--Brouder--Besnard signs there (their
+Table~3 entry $(4, 6)$.  (Elsewhere in this paper a bare signature pair
+$(3, 0)$ or $(3, 1)$ is written in the order $(s, t)$, space first;\ it is
+never a BBB $(m, n)$ label.) The Bizi--Brouder--Besnard signs there (their
 Table~1 and eq.~(3)) make $J$ anticommute with the chirality, which leads to the
 present author's Sprint L0 prediction that the M3 sub-mechanism of
-the master Mellin engine trivialises at $(3, 1)$ on chirality-symmetric
+the master Mellin engine trivialises at $(t, s) = (1, 3)$ on chirality-symmetric
 spectrum (\texttt{debug/lorentzian\_l0\_audit\_memo.md} \S 3).
 The Krein-space lift and the replication of the present modular
-construction at $(3, 1)$ are carried out at finite cutoff in
+construction at $(t, s) = (1, 3)$ are carried out at finite cutoff in
 \S\ref{sec:lorentzian_closure};\ the M3 prediction there turns out to be
 convention-dependent (\S\ref{sec:m3_convention}).  A continuum
 Lorentzian analog of the Latr\'emoli\`ere propinquity remains absent from
@@ -1735,14 +1746,21 @@ counterpart of the lattice test of Zhang~\emph{et~al.}~\cite{zhu_casini2020},
 and it is the question on which any finite-cutoff four-witness claim
 would rest.
 
-\textbf{(O1) Lorentzian extension at signature $(3, 1)$.}
-The natural next step is to replicate the present operator-system
+\textbf{(O1) Lorentzian extension at signature $(t, s) = (1, 3)$}
+[finite-cutoff part carried out;\ continuum part descoped].
+As drafted, O1 proposed to replicate the present operator-system
 construction on a Bizi--Brouder--Besnard Krein-space spectral triple
-at $(3, 1)$, verify the Sprint L0 prediction that M3 trivialises but
-M1 stays under the BBB sign flip (their Table~1 and eq.~(3)), and produce the genuine
-Lorentzian KMS-Tomita-Takesaki theorem inside the framework. The
-obstruction --- a deep frontier --- is the absence of a Lorentzian
-propinquity in the published literature.
+at BBB $(m, n) = (4, 6)$, to verify the Sprint L0 prediction that M3
+trivialises but M1 stays under the BBB signs (their Table~1 and
+eq.~(3)), and to produce a Lorentzian KMS--Tomita--Takesaki theorem
+inside the framework.  The replication was carried out at finite cutoff
+(\S\ref{sec:lorentzian_closure});\ the M3 prediction was falsified
+under the $n_{\mathrm{fock}}$-parity convention
+(\S\ref{sec:m3_convention});\ the Krein period closures are automatic
+for the posited generator and yield no Lorentzian KMS--Tomita--Takesaki
+theorem;\ and the continuum-propinquity leg was descoped
+(Paper~45~\cite{paper45}).  The progress record below is kept as
+history.
 
 \emph{Progress update (Sprints L2-B/C/D, 2026-05-16).}
 The Hilbert-space and Lorentzian-Dirac levels of the $(3, 1)$
@@ -1775,7 +1793,7 @@ commutes with $\gamma^5$;\ \S\ref{sec:bbb_axiom_finding}).  This is structurally
 analogous to the Riemannian-side R3.5/present-paper trade between
 truthful CH (correct for axioms requiring $JD = +DJ$) and offdiag CH
 (correct for SDP-bounding Connes-distance constructions).  The
-construction does \emph{not} re-open WH1 PROVEN
+construction does \emph{not} re-open WH1's commutative-factor convergence result
 (Paper~38~\cite{paper38}); the Krein construction is an extension on
 top of the Riemannian foundation, not a re-test of it.  An
 operator-system-level identification of the four-witness theorem at
@@ -2184,10 +2202,12 @@ flow.  (a) and (b) hold for \emph{any} integer-spectrum generator and
 from the generator, so it is circular as a check on the generator;\ (d)
 holds because the six witnesses share one generator.  The closure is
 also \emph{signature-blind}:\ the posited boost-class generator is
-compact (integer spectrum), so its flow is a $\beta = 2\pi$ circle
-rather than a non-compact boost, and the $(3, 1)$ label is a carrier
-choice the closure cannot distinguish from the Euclidean one (Paper~45's
-$K^+$ theorem~\cite{paper45};\ WH7).  The former Paper~43 read (a)--(d)
+compact (integer spectrum, [SYMBOLIC]), so its flow is a $\beta = 2\pi$
+circle rather than a non-compact boost, and on the argued reading
+[ARGUED] the $(3, 1)$ label is a carrier choice the closure cannot
+distinguish from the Euclidean one (WH7;\ this compactness argument is
+separate from Paper~45's $K^+$ annihilation theorem~\cite{paper45},
+which concerns the Krein-positive compression).  The former Paper~43 read (a)--(d)
 as an operator-system analog of the four-witness theorem at signature
 $(3, 1)$;\ that reading is withdrawn (2026-09-28).  The finite-cutoff
 test that would bear on it is the Riemannian O0 of \S\ref{sec:conclusion}.
@@ -2381,9 +2401,10 @@ latremoliere_metric_st_2017} is absent from the literature
 (Toyota~\cite{toyota2023}, Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
 farsi_latremoliere2025}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b}
 are Riemannian), and the framework's attempt was descoped on 2026-06-09
-(Paper~45's $K^+$ annihilation theorem:\ the posited boost-class
-generator is compact, so no Lorentzian metric statement is available at
-finite cutoff for it).  The
+(Paper~45's $K^+$ annihilation theorem:\ the natural Krein-positive
+compression fails structurally).  Separately, the posited boost-class
+generator is compact [SYMBOLIC];\ that no Lorentzian metric statement is
+therefore available at finite cutoff for it is [ARGUED] (Paper~45 Q1).  The
 Nieuviarts twist morphism~\cite{nieuviarts2025a, nieuviarts2025b_proceedings}
 is restricted to even dimension and does not apply to $\sthree$.
 \item The construction uses truthful $\DGV$ (resolution R1 of

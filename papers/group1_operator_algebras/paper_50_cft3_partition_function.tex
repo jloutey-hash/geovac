@@ -110,11 +110,15 @@ the free Camporesi--Higuchi Dirac ($F_{D} = \tfrac{\log 2}{4} +
 \tfrac{3\zeta(3)}{8\pi^{2}}$); \emph{(B)} the wedge KMS entropy has the exact
 asymptotic $S(\rhoW) = 2\log\nmax + (\coth 1 - \log(2\sinh 1)) +
 O(1/\nmax)$, whose slope $2$ is the exponent of the $\sim\nmax^{2}$
-degeneracy of the lowest shell of the posited generator $\Kalpha$ (an
+degeneracy of the lowest shell of the posited generator $\Kalpha$ (the
+slope is independent of the inverse temperature; the constant is the
+unit-$\beta$ value, and $\rhoW$ is not the Bisognano--Wichmann-normalised
+state, which would be $e^{-\pi\Kalpha}/Z$ since $\Kalpha = 2J_{z}$;\ an
 earlier reading of this $2$ as the dimension of the entangling surface
 is withdrawn:\ for a CFT$_{3}$ that surface is a circle); \emph{(C)} the framework's wedge generator $\Kalpha =
 J_{\mathrm{polar}}$ (a posited rotation generator, not derived from a
-state) shares its integer spectrum and $2\pi$-periodic flow with the
+state) shares a discrete integer spectrum and closure at rotation angle
+$2\pi$ (its adjoint flow closes at $t = \pi$, since $\Kalpha = 2J_{z}$) with the
 \emph{Euclidean} rotation generator whose Wick rotation is the
 continuum Casini--Huerta--Myers modular Hamiltonian of a hemispherical
 cap of the spatial $S^{2}$ (the latter itself generates a boost-like flow with continuous spectrum);\ this
@@ -278,9 +282,13 @@ $\Op_{\nmax} = P_{\nmax} \Acal P_{\nmax}$ in the
 Connes--van~Suijlekom framework~\cite{connes_vs2021}. Convergence
 $\Op_{\nmax} \to \Op_{\sthree}$ in van~Suijlekom's state-space
 Gromov--Hausdorff distance holds at rate $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
-\nmax$~\cite{paper38}; the rate constant $4/\pi$ is the M1
-Hopf-base-measure signature of the master Mellin
-engine~\cite{paper18}.
+\nmax$~\cite{paper38}; the rate constant $4/\pi$ is stated in the
+corpus's dual-Coxeter normalisation ($\mathrm{Cas}(\mathrm{ad}) =
+h^{\vee}$, under which the $SU(2)$ geodesic distance is
+the rotation angle) and is convention-dependent, not canonical:\ on the unit
+$\sthree$ the same bound reads $2/\pi = \mathrm{Vol}(S^{2})/\mathrm{Vol}(\sthree)$,
+the volume quotient that carries its M1 content in the master Mellin
+engine~\cite{paper18} (the earlier ``Hopf-base'' label is a misnomer).
 
 \subsection{Wedge KMS state}
 
@@ -294,8 +302,10 @@ wedge generator (its identification as a modular Hamiltonian is open) is
 where $J_{\mathrm{polar}}$ is the rotation generator preserving the
 wedge, with integer eigenvalues $2m_{j} \in \{1, 3, 5, \dots,
 2\nmax - 1\}$ and multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k +
-1)$ for $k = 0, \dots, \nmax - 1$. The wedge KMS state at canonical
-BW normalization is
+1)$ for $k = 0, \dots, \nmax - 1$. The wedge state used throughout is
+the unit-$\beta$ Gibbs state of $\Kalpha$ (not the
+Bisognano--Wichmann-normalised state;\ see
+Remark~\ref{rem:bw_normalisation})
 \[
 \rhoW = \frac{e^{-\Kalpha}}{Z}, \qquad Z = \Tr_{\Hilb_{W}}\bigl(e^{-\Kalpha}\bigr).
 \]
@@ -491,8 +501,9 @@ not an independent prediction of CFT physics.
 
 \subsection{The framework's wedge KMS entropy}
 
-The von Neumann entropy of the wedge KMS state $\rhoW$ at canonical
-BW normalization $\beta = 2\pi$ is computed directly by
+The von Neumann entropy of the wedge state $\rhoW = e^{-\Kalpha}/Z$
+(unit inverse temperature for $\Kalpha$;\ not the Bisognano--Wichmann
+normalisation, Remark~\ref{rem:bw_normalisation}) is computed directly by
 diagonalizing $\Kalpha$ and applying $S(\rhoW) = -\Tr[\rhoW \log
 \rhoW]$ (recomputed from the live BW construction, the slope-$2$
 scaling, the $\coth 1 - \log(2\sinh 1)$ constant, and the area-law
@@ -525,7 +536,7 @@ which is withdrawn (2026-09-28):\ for a CFT$_{3}$ the entangling surface
 of a hemispherical cap is a circle $S^{1}$, not a two-sphere. The
 additive constant lives in the Boltzmann-base ring (functions of $e$
 via $\coth 1$, $\sinh 1$, tied to the integer spacing
-$\Delta\Kalpha = 2$ at $\beta = 2\pi$); it carries no master Mellin
+$\Delta\Kalpha = 2$ at unit $\beta$); it carries no master Mellin
 engine transcendental, consistent with
 Prop.~\ref{prop:F_vs_S_decomposition}. A PSLQ search against the
 F-theorem ring $\{1, \log 2, \zeta(3)/\pi^{2}\}$ at coefficient
@@ -534,14 +545,17 @@ F-coefficient lie in disjoint rings, sharpening
 Prop.~\ref{prop:F_vs_S_decomposition} from ``F absent from $S(\rhoW)$''
 to ``the state-side constant admits no integer relation with the
 spectral-zeta ring up to coefficient ceiling $10^{8}$'' (a strong
-numerical disjointness, not a proof of ring non-membership; the
-structural argument that $S$ is a log of an integer, hence ring-free,
-is the independent support).
+numerical disjointness, not a proof of ring non-membership).  The
+structural support is separate for the two terms:\ the leading
+$2\log\nmax$ is the logarithm of an integer degeneracy, hence ring-free;
+the additive constant is \emph{not} the logarithm of an integer, but a
+closed-form function of $e$ alone ($\coth 1$, $\sinh 1$), i.e.\ in the
+Boltzmann-base ring by construction.
 
 \subsection{Mechanism: degeneracy log on the lowest $\Kalpha$ shell}
 
 The $\Kalpha$ spectrum is bounded above by $2\nmax - 1$ at finite
-cutoff. At BW canonical normalization, the per-state weight at
+cutoff. In $\rhoW$ (unit $\beta$), the per-state weight at
 $\Kalpha = 1$ (the lowest shell) is $e^{-1}/Z$, while at $\Kalpha = 3$
 it drops to $e^{-3}/Z$, a factor of $e^{-2} \approx 0.135$ suppression
 per shell. The partition function is therefore dominated by the
@@ -663,9 +677,10 @@ Lorentzian theory $\xi$ generates a \emph{boost-like} conformal flow.
 That $K_{\mathrm{cont}}$ has continuous spectrum and that the cap
 algebra is of type~III are not statements of CHM or of
 Bisognano--Wichmann;\ they are standard facts of algebraic quantum field
-theory (local algebras are type~III$_{1}$
-factors~\cite{buchholz_dantoni_fredenhagen1987}, and the modular spectrum
-of a type~III$_{1}$ factor is the whole positive half-line). The
+theory (under standard conditions local algebras are type~III$_{1}$
+factors~\cite{buchholz_dantoni_fredenhagen1987}, and for a type~III$_{1}$
+factor Connes' invariant $S(\mathcal{M})$, the intersection of the
+modular spectra, is the whole half-line $[0, \infty)$). The
 Bisognano--Wichmann $2\pi$ is a KMS parameter, not a periodicity of the
 real-time flow. Only the \emph{Euclidean} continuation of this flow has
 discrete spectrum and a periodic flow:\ the Euclidean section is
@@ -688,12 +703,39 @@ truncated Camporesi--Higuchi spectral triple. Its spectrum is
 \mathrm{spec}(\Kalpha) = \{2 m_{j} : m_{j} = 1/2, 3/2, \dots, (2\nmax - 1)/2\}
 = \{1, 3, 5, \dots, 2\nmax - 1\},
 \]
-integer-valued in the canonical $(2\pi)^{-1}$ rescaling, with
-multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k + 1)$. The
-modular flow $\sigma_{2\pi}(\Op) = \Op$ closes
+integer-valued ($\Kalpha = 2J_{z}$), with
+multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k + 1)$. The posited
+modular flow $\sigma_{t} = \mathrm{Ad}\,e^{it\Kalpha}$ satisfies
+$\sigma_{2\pi}(\Op) = \Op$
 bit-exactly at every tested $\nmax$~\cite{paper42}. The odd-integer
 spectrum, the multiplicities, and the $2\pi$ closure are verified
 from the live BW construction in \texttt{tests/test\_paper50\_wedge\_kms.py}.
+
+\begin{remark}[Normalisation of $\Kalpha$ and of $\rhoW$]
+\label{rem:bw_normalisation}
+Since $\mathrm{spec}(\Kalpha) = \{2m_{j}\}$, $\Kalpha = 2J_{z}$, where
+$J_{z}$ generates rotations by angle $\theta$ about the wedge axis
+($e^{-i\theta J_{z}}$). Three consequences. (i) The adjoint flow
+$\mathrm{Ad}\,e^{it\Kalpha}$ already closes at $t = \pi$:\ differences
+of odd integers are even. The $2\pi$ closure above holds but is twice
+the minimal period;\ the unitary $e^{it\Kalpha}$ itself first returns
+to $1$ at $t = 2\pi$ (it is $-1$ at $t = \pi$, the spinor sign). In the
+rotation-angle parameter $\theta = 2t$ the adjoint flow closes at
+$\theta = 2\pi$, which is the Euclidean periodicity matched in
+Observation~\ref{thm:chm_identification}. (ii) A state normalised as in
+Bisognano--Wichmann, with KMS parameter $2\pi$ in the rotation angle,
+would be $e^{-2\pi J_{z}}/Z = e^{-\pi\Kalpha}/Z$, not
+$\rhoW = e^{-\Kalpha}/Z$;\ $\rhoW$ is the unit-$\beta$ Gibbs state of
+$\Kalpha$ (inverse temperature $2$ in rotation-angle units). (iii) For
+$\rho_{b} = e^{-b\Kalpha}/Z$ one has $Z \simeq \nmax^{2}/(2\sinh b)$ and
+$\langle\Kalpha\rangle \to \coth b$, so
+$S(\rho_{b}) = 2\log\nmax + b\coth b - \log(2\sinh b) + O(1/\nmax)$:
+the slope-$2$ headline is independent of $b$, while the constant
+$\coth 1 - \log(2\sinh 1)$ of~(\ref{eq:S_W_fit}) is the $b = 1$ value
+and is \emph{not} a Bisognano--Wichmann-normalised quantity (at
+$b = \pi$ the constant would be $\pi\coth\pi - \log(2\sinh\pi) =
+0.0136\ldots$).
+\end{remark}
 
 \begin{observation}[CHM analogy at finite cutoff]
 \label{thm:chm_identification}
@@ -708,13 +750,17 @@ itself, which has continuous spectrum:
 \item $\Kalpha$ has odd-integer spectrum;\ the Euclidean rotation
 generator, in the same $2J$ normalisation, has discrete (integer)
 spectrum (continuum statement, prior art).
-\item Each generates a flow closing at $2\pi$;\ for the continuum this
+\item Each generates a flow closing at rotation angle $2\pi$ (for
+$\Kalpha = 2J_{z}$ the adjoint flow closes at $t = \pi$;
+Remark~\ref{rem:bw_normalisation});\ for the continuum this
 is the Euclidean periodicity that the Lorentzian modular flow of
 $K_{\mathrm{cont}}$ exhibits only as its KMS parameter
-$\beta = 2\pi$.
+$\beta = 2\pi$. The state $\rhoW$ used in Sec.~\ref{sec:wedge_kms} is
+not normalised to that $\beta$.
 \item The framework's odd-integer spectrum $\{1, 3, \dots, 2\nmax - 1\}$
 corresponds to the half-integer Casimir grading of the
-wedge-preserving Killing field on the Weyl spinor sector.
+wedge-preserving Killing field on the (two-component, 3d) Dirac
+spinor sector.
 \end{itemize}
 The integer spectrum and the $2\pi$ period are automatic for any
 integer-spectrum rotation generator~\cite{paper42}, so they do not
@@ -1237,14 +1283,17 @@ characterized by:
 \item the ``bulk'' replaced by a discrete spectral-triple substrate
 (operator-system level, finite cutoff);
 \item the ``correspondence'' replaced by state-space GH convergence in
-the continuum limit (Paper~38's five-lemma proof);
+the continuum limit (Paper~38's unconditional lifted-state proof);
 \item boundary CFT data emerging from spectral asymptotics
 (zeta-function derivatives at zero), not from holographic reconstruction.
 \end{itemize}
 
-In one sentence: \emph{the framework is the discrete spectral-triple
-realization of the boundary CFT$_{3}$-on-$\sthree$ partition function
-data and modular structure, distinguished from AdS/CFT and dS/CFT by
+In one sentence: \emph{the framework's discrete spectral triple
+reproduces the boundary CFT$_{3}$-on-$\sthree$ F-theorem coefficients
+bit-exactly and yields a wedge-state entropy that counts a lowest-shell
+degeneracy, while its modular side is an analogy only (the
+identification of $\Kalpha$ as a modular Hamiltonian is open);\ it is
+distinguished from AdS/CFT and dS/CFT by
 absence of any bulk gravitational theory and presence of a
 state-space-GH-convergence ``correspondence'' between operator-algebraic
 discretization levels}. This is not a new holographic correspondence
@@ -1297,8 +1346,9 @@ M-engine readings of standard spectral-action calculations on
 $\sthree$, $S^{5}$, and higher.
 
 \item \textbf{Lorentzian-side observables.} The catalogue here is
-boundary-side Riemannian. The Lorentzian extension (Papers~42-49)
-provides modular Hamiltonian, Pythagorean orthogonality, and
+boundary-side Riemannian. The Lorentzian papers (Paper~42; Papers~46--49,
+now archived or descoped) posited a wedge modular Hamiltonian (its
+identification remains open) and studied Pythagorean orthogonality and
 twin-paradox-as-quantum-information structures. Cataloguing
 Lorentzian-side CFT observables (thermal partition functions on
 $\sthree \times \mathbb{R}_{t}$, Rindler-wedge entropies, etc.) is a

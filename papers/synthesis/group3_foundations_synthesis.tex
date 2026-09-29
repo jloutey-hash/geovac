@@ -55,10 +55,12 @@ and forced/free nodes, where the scattered structural findings cohere
 into one statement about what the framework forces and what it consumes.  Four headline structural results frame the
 program: \textbf{[SYMBOLIC PROOF]} (a) the conformal chain \emph{from the
 continuum operator onward} --- the unit-$S^3$ Laplace--Beltrami operator, its
-integer spectrum, and the energy-shell projection --- audited by a suite of 18
+integer spectrum, and the energy-shell projection, under which the hydrogen
+bound-state Hamiltonian is $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ --- audited by a suite of 18
 symbolic checks, with the non-definitional energy step (the $S^3$
 Coulomb kernel's eigenvalue $2\pi^2/n$ forcing $p_0 = Z/n$) carried by
-the exact kernel-eigenvalue test of Paper~7;\ \textbf{[WALL]} the discrete Fock graph's edge
+the exact kernel-eigenvalue test of Paper~7 ($n \le 4$;\ general $n$ is
+Fock's);\ \textbf{[WALL]} the discrete Fock graph's edge
 Laplacian does \emph{not} converge to that operator (it splits into
 $n_{\max}$ disconnected $l$-blocks with an $n_{\max}$-dimensional
 kernel);\ what is exact is its label set, on which the operator is the
@@ -92,8 +94,9 @@ synthesis).  We present
 GeoVac as a discretization framework that exploits natural geometry,
 not as a new foundation for quantum mechanics: the discrete label
 lattice and the continuous Laplace--Beltrami operator are dual descriptions
-linked by an exact Peter--Weyl label identification, with Fock's proven
-conformal projection linking the operator to the Schr\"odinger equation,
+linked by an exact Peter--Weyl label identification, with Fock's
+conformal projection linking the operator to the Schr\"odinger equation
+(the bound-state Hamiltonian is $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$),
 and the interpretive question of
 which description is more fundamental is left open.  The framework's
 concrete computational advantages---$O(V)$ sparsity, angular momentum
@@ -117,8 +120,10 @@ presupposes a continuous configuration space and treats the
 Schr\"odinger operator $-\tfrac{1}{2}\nabla^2 + V(r)$ as the
 fundamental object.  For the hydrogen atom in particular, Fock showed
 in 1935~\cite{fock1935} that the momentum-space Schr\"odinger equation
-maps by stereographic projection onto the free Laplacian on the unit
-three-sphere $S^3$.  This observation has been developed extensively
+maps by stereographic projection onto the unit three-sphere $S^3$:\ the
+bound states become the hyperspherical harmonics (the eigenfunctions of
+the Laplace--Beltrami operator $\Delta_{S^3}$), and the bound-state
+Hamiltonian becomes the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of that operator.  This observation has been developed extensively
 by Bargmann~\cite{bargmann1936}, Bander and Itzykson~\cite{bander_itzykson1966},
 Avery~\cite{avery_book1989}, Aquilanti and
 co-workers~\cite{aquilanti_caligiana2002}, and others working in the
@@ -151,8 +156,9 @@ legitimately means that the nodes, $n^2$ per shell, are the
 Gel'fand--Tsetlin labels of the Peter--Weyl truncation of $L^2(S^3)$,
 on which $-\Delta_{S^3}$ is the diagonal $SO(4)$ Casimir $n^2 - 1$.  The
 discrete labels and the continuous operator are linked by this exact
-Peter--Weyl label identification, with Fock's proven conformal
-projection linking the operator to the Schr\"odinger equation, and we present them throughout as dual descriptions of
+Peter--Weyl label identification, with Fock's conformal
+projection linking the operator to the Schr\"odinger equation
+($H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$), and we present them throughout as dual descriptions of
 the same physics; the interpretive question of ontological priority is
 explicitly left to the reader.
 
@@ -212,7 +218,10 @@ earlier single-document synthesis (Paper~21~\cite{loutey_paper21}).
 Four headline structural results organize the rest of this synthesis.
 \textbf{(H1)} \textbf{[SYMBOLIC PROOF]} The conformal chain from the
 unit-$S^3$ Laplace--Beltrami operator to the Schr\"odinger equation is
-verified symbolically (Paper~7~\cite{loutey_paper7});
+audited symbolically (Paper~7~\cite{loutey_paper7}):\ Fock's projection
+makes the bound-state Hamiltonian the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of
+that operator, its scale $p_0 = Z/n$ fixed by the kernel eigenvalue
+$2\pi^2/n$ (tested exactly for $n \le 4$;\ general $n$ is Fock's);
 \textbf{[WALL]} the discrete Fock graph's edge Laplacian does not
 converge to that operator:\ the proved spectral-bound statement ---
 the saturation of the bipartite bound, \textbf{[INTERNAL THEOREM]}
@@ -370,7 +379,9 @@ framing of Paper~7 governs the discussion.
 
 The theoretical foundation of GeoVac is the conformal equivalence,
 established in Paper~7~\cite{loutey_paper7}, between the \emph{continuum}
-unit-$S^3$ Laplace--Beltrami operator and the Fock projection.  The
+unit-$S^3$ Laplace--Beltrami operator and the hydrogen Schr\"odinger
+problem, carried by the Fock projection (the bound-state Hamiltonian is
+$H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$).  The
 discrete Fock graph's role is its label set, on which minus that
 operator is the diagonal $SO(4)$ Casimir exactly;\ that the graph's edge Laplacian
 has that operator as its continuum limit is \emph{false} (it splits
@@ -381,10 +392,10 @@ states the result and explains its operational role.
 \subsection*{The Fock projection and the chordal distance identity}
 
 \textbf{[SYMBOLIC PROOF]} Fock's 1935 construction~\cite{fock1935} writes the momentum-space
-hydrogen Schr\"odinger equation
+hydrogenic (nuclear charge $Z$) Schr\"odinger equation
 \begin{equation}
-\left[ \frac{p^2}{2} - E \right] \psi(\mathbf{p})
-- \frac{1}{2\pi^2} \int \frac{\psi(\mathbf{p}')}{|\mathbf{p} - \mathbf{p}'|^2}\,
+\left[ \frac{p^2}{2} - E \right] \varphi(\mathbf{p})
+- \frac{Z}{2\pi^2} \int \frac{\varphi(\mathbf{p}')}{|\mathbf{p} - \mathbf{p}'|^2}\,
 \mathrm{d}^3 p' = 0
 \end{equation}
 and applies the stereographic projection
@@ -407,14 +418,19 @@ p_0\, \Psi(\boldsymbol{\omega}) = \frac{Z}{2\pi^2}\int_{S^3}
 on the degree-$(n-1)$ harmonics its eigenvalue is $2\pi^2/n$ (Fock 1935,
 an instance of Funk--Hecke; tested exactly for $n \le 4$ in Paper~7), and
 this is what forces the focal length $p_0 = Z/n$ and hence
-$E_n = -Z^2/(2n^2)$.  The quantization therefore comes from the Coulomb
-kernel's eigenvalue, not from the curvature.  The Laplace--Beltrami
-statement is a separate fact about the same functions:\ the degree-$(n-1)$
-harmonics are the eigenfunctions of $-\Delta_{S^3}$ with eigenvalue
-$n^2 - 1$, an integer spectrum fixed by the round unit-sphere geometry
-(the metric, not merely the topology, Paper~7);\ it labels the shells but
-is not, by itself, the link to the Schr\"odinger equation (Paper~7 says so
-explicitly).
+$E_n = -Z^2/(2n^2)$.  The Laplace--Beltrami operator carries the same
+content in operator form:\ the degree-$(n-1)$ harmonics are the
+eigenfunctions of $-\Delta_{S^3}$ with eigenvalue $C = n^2 - 1$ (the
+$SO(4)$ Casimir;\ an integer spectrum fixed by the round unit-sphere
+geometry, the metric and not merely the topology, Paper~7), so the
+kernel acts as $2\pi^2(1-\Delta_{S^3})^{-1/2}$ and the bound-state
+Hamiltonian is the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$,
+$E_n = -Z^2/(2(C+1))$.  This is the precise sense in which Fock's
+projection makes $\Delta_{S^3}$ equivalent to the Schr\"odinger problem
+(the standard ``free motion on $S^3$'' reading).  The kernel is not the
+Green's function of $\Delta_{S^3}$ (that behaves like $1/d$, with
+eigenvalues $\propto 1/(n^2-1)$);\ it is the restriction to $S^3$ of the
+Green's function of the $\mathbb{R}^4$ Laplacian (Paper~7).
 
 \subsection*{The 18 symbolic proofs}
 
@@ -859,7 +875,8 @@ pointer level.
 This is the structural dual of the Fock rigidity theorem of Paper~23
 (group~4), which states that the $S^3$ stereographic
 projection $p_0 = \sqrt{-2 E_n}$ maps a one-electron central-field
-Hamiltonian onto the free Laplacian on $S^3$ if and only if the
+Hamiltonian onto a function of the Laplace--Beltrami operator on $S^3$
+(its bound states onto the $S^3$ harmonics) if and only if the
 spectrum is $l$-independent within each $n$-shell, a property unique
 to $-Z/r$ by $SO(4)$ symmetry.  Together the two rigidity theorems
 (the HO one conditional on the imported $SU(3)$-closure converse)
@@ -994,7 +1011,8 @@ $S^3$ Laplacian and is spectrally inert, as on $S^5$.  Of the standing
 layers, the second (calibration $\pi$) stratifies along an
 operator-order divide (Paper~31):\ the
 Coulomb side uses a second-order Riemannian Laplacian with a nonlinear
-stereographic projection, and the HO side uses a first-order
+stereographic projection (the hydrogen Hamiltonian being the function
+$H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of it), and the HO side uses a first-order
 complex-analytic Euler operator with a linear-affine Bargmann projection.
 The fourth to seventh layers are not placed on that divide by the owner
 papers (the fifth turns on sphere dimension, the Dirac operator on
@@ -1591,15 +1609,23 @@ The Group~3 foundations arc of GeoVac establishes a small set of
 structural results that together provide a coherent discretization of
 non-relativistic quantum mechanics on natural geometries.
 \textbf{[SYMBOLIC PROOF]} The conformal chain from the unit-$S^3$
-Laplace--Beltrami operator onward is verified symbolically
-(Paper~7~\cite{loutey_paper7}); \textbf{[WALL]} the discrete Fock
+Laplace--Beltrami operator onward is audited symbolically
+(Paper~7~\cite{loutey_paper7}:\ Fock's projection makes the bound-state
+Hamiltonian $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, its non-definitional
+kernel-eigenvalue step tested exactly for $n \le 4$, general $n$
+Fock's); \textbf{[WALL]} the discrete Fock
 graph's edge Laplacian does \emph{not} converge to that operator (it
 splits into $n_{\max}$ disconnected $l$-blocks with an
 $n_{\max}$-dimensional kernel), while the label set is exact, carrying
 $-\Delta_{S^3}$ as the diagonal $SO(4)$ Casimir $n^2 - 1$;\ and
 \textbf{[INTERNAL THEOREM]} the state-space GH convergence of the spinor
-spectral truncations is proved with explicit rate in
-Paper~38~\cite{loutey_paper38}; \textbf{[INTERNAL THEOREM]} the
+spectral truncations---the commutative $S^3$ factor, on the true
+Camporesi--Higuchi window (the almost-commutative extension is
+\textbf{[OPEN]})---is proved in Paper~38~\cite{loutey_paper38}:\ the
+bound and $\gamma_{n_{\max}} \to 0$ are proved, the displayed
+$(4/\pi)\log n_{\max}/n_{\max}$ rate is \textbf{[INTERNAL THEOREM +
+MEASURED]}, and the uniform $6\log n_{\max}/n_{\max}$ bound is
+\textbf{[PANEL-VERIFIED]}; \textbf{[INTERNAL THEOREM]} the
 angular sparsity of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}); the 3D harmonic oscillator admits a
 bit-exactly $\pi$-free discrete encoding on $H^2(S^5)$
@@ -1636,8 +1662,8 @@ label-set/Casimir correspondence together with Fock's conformal
 equivalence.
 The discrete label lattice and the continuous operator are dual
 descriptions linked by an exact Peter--Weyl label identification, with
-Fock's proven conformal projection linking the operator to the
-Schr\"odinger equation, and the interpretive question is left open.
+Fock's conformal projection linking the operator to the
+Schr\"odinger equation ($H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$), and the interpretive question is left open.
 
 The open questions catalogued in Section~\ref{sec:open} are
 substantive but do not destabilize the structural results of the

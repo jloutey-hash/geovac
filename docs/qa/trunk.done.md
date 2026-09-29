@@ -110,7 +110,7 @@ re-prices everything above it.
   FULL #9, PI-approved; applies from the next run).** The finite triple's audited
   status is a headline. **LARGE:** any live locus asserting that the diagonal
   spectral form D_GV carries a metric or a nonzero commutator with π(A); that the
-  finite truncation is odd (it is even via chirality doubling; no KO label at finite
+  chirality-doubled MODEL truncation is odd (it is even via chirality doubling), or that the TRUE window (the converging object) is even (it is odd: commutant of O = scalars; rescoped 2026-09-29 after DELTA #16, PI-approved); no KO label at finite
   cutoff); that the order-zero/one failures decay; that the finite four-witness 2π
   period is a literal identification of a Bisognano–Wichmann modular flow (it is a
   trivial symbolic fact, K = 2J_z); or the E6 "no single mechanism" statement at
@@ -120,6 +120,25 @@ re-prices everything above it.
 - **No branch-specific C14+.**
 
 ## Change log
+- 2026-09-29 (v5.17.7 @ ba34fc8, DELTA #16, claim-impact, unseeded) — **DEFECTS;
+  RESEARCH-GRADE NOT earned.** ~12 LARGE (16 -> 13 -> 12). Code CLEAN (0 LARGE; every
+  new guard fires; the n_max=4 J O J^-1 guard rejects a block-phased J that passes the
+  sign tests); citations CLEAN (0 LARGE; Rittenhouse/Cavagnero/FdlR/BBB/BDF/CHM all
+  confirmed from primary sources). LARGE by family: (1) Fock <-> Delta_{S^3} framing
+  (P7 roadmap, P0 x2, synthesis x5) -- PM finding: the v5.17.6/7 wording "not a
+  free-particle problem / Delta is not the link" OVERCORRECTED DELTA #15's genuine
+  Green's-function defect (H_bound = -(Z^2/2)(1-Delta_{S^3})^{-1}; eigenstates are
+  the S^3 harmonics; the kernel ~ (1-Delta)^{-1/2} fixes p0) -- PI decision; (2) P32
+  rate tier (thm:gh_convergence "proven unconditionally") and rem:wh1_proven
+  (structural AC claim "proved"; only the commutative factor converges) -- WH1
+  wording, PI decision; (3) P18 K "equals alpha^-1 to 8.8e-8" (true gap 4.8e-7; 8.8e-8
+  is the cubic root) and "alpha is a root of the cubic" (pre-existing); (4) P50
+  one-sentence summary "realizes ... modular structure"; (5) group1 synthesis HS
+  closed form stated at N_t = 11 (owner: N_t = 1 only); P34 live falsified M3
+  prediction; P34/P31 BBB (3,0)/(3,1) residue; P42 abstract untagged signature-blind
+  clause. INSTRUMENT: this file's C8 extension ("LARGE: asserting the finite
+  truncation is odd") now contradicts the owner (true window odd) -- rescope owed
+  after the run (criteria frozen during it).
 - 2026-09-28 (v5.17.6 @ 83b731c, DELTA #15, claim-impact, unseeded) — **DEFECTS;
   RESEARCH-GRADE NOT earned.** ~13 LARGE + ~40 SMALL (down from ~16 at DELTA #14),
   every LARGE PM-verified. Mathematics all CONFIRMED: P16 Theorem 2 proof SOUND (a third

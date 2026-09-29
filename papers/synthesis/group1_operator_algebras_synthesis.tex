@@ -289,7 +289,7 @@ On truncated $\SU(2)\times \Uone_{T}$ Krein spectral triples
 $\Tcal^{L}_{\nmax,\Nt,T}$ built via the Bizi--Brouder--Besnard
 \cite{bizi_brouder_besnard2018} signature $(3,1)$ data at
 $(m,n) = (4,6)$, the natural $K^{+}$-restricted weak-form
-Lorentzian propinquity target bound is
+Lorentzian propinquity target bound would be
 \begin{equation}
 \Lprop(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold})
 \;\le\; C_3^{\mathrm{joint}} \cdot \gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
@@ -947,7 +947,8 @@ K_{\alpha}^{W} \;=\; J_{\mathrm{polar}}
 \label{eq:k_alpha}
 \end{equation}
 with integer spectrum $\{\text{two}\, m_{j}\}$ on the full-Dirac basis.
-The modular flow satisfies $\sigma_{2\pi}(O) = O$ bit-exact (residual
+The conjugation flow it generates (a modular flow only if Paper~42's
+open O0 identifies it) satisfies $\sigma_{2\pi}(O) = O$ bit-exact (residual
 $O(\sqrt{\dim \Hilb} \cdot \varepsilon_{\mathrm{machine}})$) for the
 four witness instantiations BW, Hartle--Hawking, Sewell, Unruh, with
 cross-witness residual identically zero (by construction:\ one
@@ -994,8 +995,8 @@ Paper~42~\S 11.6 to the signature-independence statement below.
 
 Paper~42~\S 11~\cite{paper42} (which absorbs the former Paper~43, archived
 2026-09-28) carries the same construction to the
-Lorentzian Krein space at signature $(3,1)$ (automatic and
-signature-blind;\ not a finite-cutoff four-witness theorem), built via the
+Lorentzian Krein space at signature $(3,1)$ (automatic, and
+signature-blind on the argued reading [ARGUED];\ not a finite-cutoff four-witness theorem), built via the
 Bizi--Brouder--Besnard prescription \cite{bizi_brouder_besnard2018}
 at $(m,n) = (4,6)$ in the Peskin--Schroeder chiral basis, with
 Lorentzian Dirac
@@ -1048,7 +1049,8 @@ every $\nmax$ (Paper~42, Theorem~11.11):
 At $\Nt > 1$ the Lorentzian residual is refined upward by the
 temporal-derivative content of $\DL$: the spectral-action object
 $\DL$ has more content than $\DGV$, so the gap between
-$H_{\mathrm{local}}$ (modular-Hamiltonian generator) and $D_{W}^{L}$
+$H_{\mathrm{local}}$ (the posited generator;\ its modular-Hamiltonian
+identification is open, Paper~42 O0) and $D_{W}^{L}$
 (spectral-action object) widens with temporal cutoff.  This refines
 the Paper~42~\S 10 open question O3 from
 ``open about signature-dependence'' to a signature-independent
@@ -1076,9 +1078,11 @@ $w \in \{\mathrm{BW}, \mathrm{HH}_{1}, \mathrm{HH}_{2},
 \qquad (\text{bit-exact}),
 \label{eq:hs_orthogonal}
 \end{equation}
-and the residual norm has the closed form
+and, at $\Nt = 1$ only (Paper~42 Corollary~11.15;\ the orthogonality
+\eqref{eq:hs_orthogonal} holds on every cell), the residual norm has
+the closed form
 \begin{equation}
-\|H_{\mathrm{local}} - D_{W}^{L}\|_{F}^{2}
+\|H_{\mathrm{local}} - D_{W}^{L}\|_{F}^{2}\big|_{\Nt = 1}
 \;=\;
 \frac{\kappa_{g}^{2}}{4\pi^{2}}\,S(n)
 \;+\; D(n),
@@ -1106,7 +1110,7 @@ identity with the $M_1$ content of the Paper~38 rate constant $4/\pi$
 \eqref{eq:gamma_asymptote} is established (re-tiered 2026-09-28;\ see
 \S\ref{sec:mellin}).
 
-\paragraph{Subspace decomposition.}
+\paragraph{Chirality-parity mechanism.}
 The mechanism is a wedge-chirality parity argument:\
 $H_{\mathrm{local}} = K_{\alpha}^{W}/\beta$ (eigenvalues
 $\text{two}\,m_{j}$, chirality-independent) is even under the wedge
@@ -1115,7 +1119,7 @@ and a chirality-even but sign-paired spatial factor, so both HS inner
 products vanish.  The formal proof is Paper~42's
 Theorem~11.14 (\S\ref{sec:closures_pythagorean}
 below);\ it is $\beta$-independent, so the $1/\pi^{2}$ plays no role in
-it.  The closed form \eqref{eq:hs_closed_form} is [MEASURED]:\
+it.  The closed form \eqref{eq:hs_closed_form}, stated at $\Nt = 1$, is [MEASURED]:\
 PSLQ-identified at $\nmax \le 6$ and test-recomputed at $\nmax \le 4$.
 
 % =====================================================================

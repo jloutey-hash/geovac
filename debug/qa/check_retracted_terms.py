@@ -671,6 +671,69 @@ REGISTRY = [
         },
     },
     {
+        "id": "fock-delta-overcorrection",
+        # v5.17.6/7 OVERCORRECTED DELTA #15's genuine Green's-function defect into 'not a free-particle
+        # problem' / 'Delta_{S^3} is not the link'. Exact statement (PI-approved 2026-09-29): hydrogen's bound
+        # states are the S^3 harmonics (Delta_{S^3} eigenfunctions); H_bound = -(Z^2/2)(1-Delta_{S^3})^{-1}, i.e.
+        # E_n = -Z^2/(2(C+1)), C = n^2-1; the kernel ~ (1-Delta)^{-1/2} (eigenvalue 2pi^2/n) fixes p0 = Z/n; the
+        # kernel is NOT Delta's Green's function. Registered 2026-09-29, DELTA #16.
+        "pattern": r"not\s+a\s+free-particle|is\s+not\s+what\s+links|not,\s+by\s+itself,\s+the\s+link",
+        "exempt_if_nearby": withdrawal_marker("fock-delta-overcorrection"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #16 family sweeps; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "k-equals-alpha-inverse-to-cubic-precision",
+        # K = pi(B+F-Delta) = 137.036064 vs alpha^-1 = 137.035999: relative gap 4.8e-7. 8.8e-8 is the accuracy
+        # of the CUBIC root (1/alpha = K - alpha^2), not of K. Registered 2026-09-29, DELTA #16.
+        "pattern": r"\(B\s*\+\s*F\s*-\s*\\Delta\)[^.]{0,200}equals\s+\$?\\alpha\^\{-1\}\$?\s+to\s+\$?8\.8|combination\s+rule(?:(?!cubic|root|4\.8|4\.77)[^.]){0,160}?8\.8|B\s*\+\s*F\s*-\s*\\Delta\s*(?:\\right)?\)(?:(?!cubic|root|4\.8|4\.77)[^.]){0,200}?(?:reproduces|matches|match)\s(?:(?!cubic|root|4\.8|4\.77)[^.]){0,80}?8\.8|Delta\s*\)\s*=\s*\\alpha\^\{-1\}",
+        "exempt_if_nearby": withdrawal_marker("k-equals-alpha-inverse-to-cubic-precision"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #16 family sweeps; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 self-check remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 self-check remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 self-check remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 self-check remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 self-check remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "bbb-mn-signature-mislabel",
+        # Bizi-Brouder-Besnard (arXiv:1611.07062 p.3): m = t+s, n = t-s (mod 8). Riemannian S^3 (t,s)=(0,3) is
+        # (m,n) = (3,5); Lorentzian (t,s)=(1,3) is (4,6). Writing the signature as '(m,n) = (3,0)' / '(3,1)'
+        # conflates (s,t) with BBB's (m,n). Registered 2026-09-29, DELTA #16.
+        "pattern": r"\(m,\s*n\)\s*=\s*\(3,\s*[01]\)",
+        "exempt_if_nearby": withdrawal_marker("bbb-mn-signature-mislabel"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #16 family sweeps; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
         "id": "coulomb-kernel-as-laplacian-green-function",
         # Paper 7 called 1/|n-n'|^2 on S^3 'the Green's function of the Laplace-Beltrami operator'. It is
         # not: its proved eigenvalue 2pi^2/n (tests/test_paper7_fock_kernel.py) makes it proportional to
@@ -768,7 +831,7 @@ REGISTRY = [
         "id": "posited-k-as-truncated-bw-boost",
         # The finite K = diag(2 m_j) is POSITED; calling it 'the truncated Bisognano-Wichmann boost
         # generator' asserts the OPEN identification (Paper 42 O0). Registered 2026-09-28, DELTA #15.
-        "pattern": r"truncated\s+Bisognano--Wichmann\s+boost|Bisognano--Wichmann\s+boost\s+generator\s+\$?K\s*=",
+        "pattern": r"truncated\s+Bisognano--Wichmann\s+boost|Bisognano--Wichmann\s+boost\s+generator\s+\$?K\s*=|truncated\s+modular\s+flow\s+is|the\s+truncated\s+boost\s+is",
         "exempt_if_nearby": withdrawal_marker("posited-k-as-truncated-bw-boost"),
         "severity": "fail",
         "scope": "trunk group1 group3 group6 synthesis",
@@ -782,6 +845,8 @@ REGISTRY = [
             "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
             "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
             "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #16 family sweeps; PM-verified gate 0 live corpus-wide)",
         },
     },
     {
@@ -1111,7 +1176,7 @@ REGISTRY = [
         # accidental', and the Delta sign as 'the (-1)^F grading, not an ad hoc sign choice'.
         # PI 2026-09-28: approximately satisfies (Observation); p-value restated; sign 'consistent with'.
         # Residual 8.8e-8 vs CODATA ~1.5e-10: excluded as an exact law at ~600 sigma. S13.5-adjacent.
-        "pattern": r"physical\s+\$?\\?alpha\$?\s+satisfies|fine\s+structure\s+constant\s+satisfies\s+the\s+cubic|unlikely\s+to\s+be\s+accidental|distinguishes\s+the\s+formula\s+from\s+numerology|not\s+an\s+ad\s+hoc\s+sign\s+choice|sign\s+on\s+\$?\\?Delta\$?[^.]{0,60}is\s+the\s+standard|\\?alpha\$?\s+satisfies\s+the\s+cubic",
+        "pattern": r"physical\s+\$?\\?alpha\$?\s+satisfies|fine\s+structure\s+constant\s+satisfies\s+the\s+cubic|unlikely\s+to\s+be\s+accidental|distinguishes\s+the\s+formula\s+from\s+numerology|not\s+an\s+ad\s+hoc\s+sign\s+choice|sign\s+on\s+\$?\\?Delta\$?[^.]{0,60}is\s+the\s+standard|\\?alpha\$?\s+satisfies\s+the\s+cubic|\\alpha\$?\s+is\s+a\s+root\s+of\s+the\s+cubic|combination\s+rule\s+\$?K\s*=\s*\\alpha\^\{-1\}",
         "exempt_if_nearby": withdrawal_marker("alpha-cubic-stated-as-law"),
         "severity": "fail",
         "scope": "trunk group2 group3 group5 synthesis",
