@@ -1,12 +1,21 @@
-"""Paper 43 §5.2 — Pythagorean HS-orthogonality of H_local and D_W (permanent backing).
+"""Paper 42 §11.7 (sec:pythagorean_orthogonality) — Pythagorean HS-orthogonality
+of H_local and D_W (permanent backing): Theorem 11.14 (thm:pythagorean_formal) and
+Corollary 11.15 (cor:pythagorean_orthogonality, eq:pythagorean_residual).
 
-Backfill of the §5.2 coverage gap surfaced by the v4.43.0 /qa code dimension: the
-numerical panel behind the corollary <H_local, D_W>_HS = 0 (and the Pythagorean
+Provenance: this content was Paper 43 §5.2 / Lemma 5.5; Paper 43 is ARCHIVED
+(merged into Paper 42 §11, 2026-09-28, docs/retired_papers.md).  The file name
+keeps its historical `paper43` stem so existing claim-matrix references resolve.
+
+Backfill of the coverage gap surfaced by the v4.43.0 /qa code dimension: the
+numerical panel behind <H_local, D_W>_HS = 0 (and the Pythagorean
 ||H_local - D_W||_F^2 = ||H_local||_F^2 + ||D_W||_F^2) had no tests/ regression —
-only the in-paper Lemma 5.5 proof (chirality-pairing) plus a now-archived debug
-driver.  This RECOMPUTES the panel from the live machinery and asserts the claim.
+only the in-paper chirality-pairing proof (now Paper 42 Lemma 11.13,
+lem:pairing_HS) plus a now-archived debug driver.  This RECOMPUTES the panel from
+the live machinery and asserts the claim (7 cells: Riemannian n_max = 2, 3, 4 and
+Lorentzian (n_max, N_t) = (2,1), (3,1), (2,3), (3,3); the closed form directly at
+n_max = 1..4 -- no PSLQ is run here).
 
-Mechanism (Lemma 5.5): on the hemispheric wedge, H_local = K_alpha^W / beta is
+Mechanism (Paper 42 Lemma 11.13 / Theorem 11.14): on the hemispheric wedge, H_local = K_alpha^W / beta is
 diagonal and chirality-INDEPENDENT, while D_W = Pi_W * |D_W| with Pi_W the
 chirality grading (Tr Pi_W = 0).  For each (n_fock, l, |m_j|) the chi = +1 and
 chi = -1 states share the same H_local eigenvalue, so the diagonal sum
@@ -123,7 +132,7 @@ def test_pythagorean_hs_orthogonality_lorentzian(n_max, N_t):
 
 
 # --------------------------------------------------------------------------
-# §5.2 closed form (eq:pythagorean_residual): r^2 = kappa_g^2 S(n)/(4 pi^2) + D(n),
+# Paper 42 Cor 11.15 closed form (eq:pythagorean_residual): r^2 = kappa_g^2 S(n)/(4 pi^2) + D(n),
 # S(n), D(n) pure rationals -> 1/pi^2 is the SOLE transcendental in the residual.
 # Recompute-from-framework backing for the PSLQ {r^2, 1, 1/pi^2} claim.
 # --------------------------------------------------------------------------
@@ -142,8 +151,9 @@ def test_pythagorean_residual_closed_form(n_max):
     """||H_local||^2 = kappa_g^2 S(n)/(4 pi^2) and ||D_W||^2 = D(n), with S,D pure
     rationals. With kappa_g=1 (BW): ||H_local||^2 * 4 pi^2 must equal the rational
     S(n) exactly (-> the 1/pi^2 is the only transcendental in the H piece), and
-    ||D_W||^2 must equal the rational D(n). This backs the §5.2 closed form and the
-    PSLQ {r^2, 1, 1/pi^2} integer-relation claim from the live wedge operators."""
+    ||D_W||^2 must equal the rational D(n). This backs the Paper 42 Cor 11.15
+    closed form (and hence the {r^2, 1, 1/pi^2} integer relation) directly from the
+    live wedge operators at n_max = 1..4; no PSLQ is run."""
     mh = for_bisognano_wichmann(n_max=n_max, axis="hopf")   # kappa_g = 1, beta = 2*pi
     H_local = mh.restrict_K_alpha_to_wedge() / mh.beta
     D_W = mh.restrict_to_wedge_block(mh.D)                  # ||D_L^W|| = ||D_GV^W|| at N_t=1

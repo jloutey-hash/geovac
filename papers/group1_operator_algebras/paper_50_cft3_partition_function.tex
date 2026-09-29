@@ -2,10 +2,10 @@
 % Paper 50 (standalone): Boundary CFT_3-on-S^3 observables on the
 % truncated GeoVac spectral triple.
 %
-% Three complementary observables on the same wedge KMS state via three
+% Three complementary observables on the same truncated spectral triple via three
 % structurally distinct calculations:
 %   (A) spectral-zeta side -> universal F-theorem coefficient
-%   (B) wedge KMS state side -> boundary-dimension log scaling
+%   (B) wedge KMS state side -> entropy slope 2 = lowest-K-shell degeneracy exponent
 %   (C) modular Hamiltonian side -> CHM analogy (identification OPEN, 2026-09-28)
 %
 % Substantive new structural content:
@@ -27,7 +27,8 @@
 %   debug/ads_track_a_findings_memo.md
 %   debug/ads_unified_synthesis_memo.md
 %
-% Honest scope: boundary-side CFT_3-on-S^3 reproduction; bulk side
+% Honest scope: (A) boundary F-coefficients computed from operator
+% spectra; (B) wedge entropy = a degeneracy count; (C) an analogy.  Bulk side
 % (JLMS, RT, AdS_4 / H^4 reconstruction) BLOCKED at framework's
 % existing infrastructure (Class-1 calibration-external; Sprint RH-B
 % 2026-04-17 closed S^3 -> H^3 Wick rotation as clean dead end).
@@ -94,24 +95,29 @@ and editorial decisions are the author's responsibility.}}
 \maketitle
 
 \begin{abstract}
-We exhibit three complementary boundary-side CFT$_{3}$-on-$\sthree$
-observables on the truncated GeoVac spectral triple, each computed
-from the same wedge KMS state $\rhoW = e^{-\Kalpha}/Z$ via a
-structurally distinct operation: \emph{(A)} the universal F-theorem
+We exhibit three complementary boundary-side quantities, framed by
+standard CFT$_{3}$-on-$\sthree$ calculations, on the truncated GeoVac
+spectral triple, each obtained by
+a structurally distinct operation --- (A) from the spectra of the
+truncated scalar and Dirac operators, (B) from the wedge KMS state
+$\rhoW = e^{-\Kalpha}/Z$ built from a posited wedge generator, (C) by
+comparing that generator with a continuum one: \emph{(A)} the universal F-theorem
 coefficient $F_{\sthree}$, extracted via the spectral-zeta derivative
 $-\tfrac{1}{2}\zeta'_{\Delta}(0)$, reproduces the Klebanov--Pufu--Safdi
 (2011) continuum value bit-exactly for both the conformally coupled
 scalar ($F_{s} = \tfrac{\log 2}{8} - \tfrac{3\zeta(3)}{16\pi^{2}}$) and
 the free Camporesi--Higuchi Dirac ($F_{D} = \tfrac{\log 2}{4} +
-\tfrac{3\zeta(3)}{8\pi^{2}}$); \emph{(B)} the wedge KMS entropy
-$S(\rhoW) \sim 2\log\nmax$ extracts the wedge boundary dimension
-$\dim(\partial W) = 2$ as a degeneracy log on the lowest $\Kalpha$
-shell; \emph{(C)} the framework's wedge generator $\Kalpha =
+\tfrac{3\zeta(3)}{8\pi^{2}}$); \emph{(B)} the wedge KMS entropy has the exact
+asymptotic $S(\rhoW) = 2\log\nmax + (\coth 1 - \log(2\sinh 1)) +
+O(1/\nmax)$, whose slope $2$ is the exponent of the $\sim\nmax^{2}$
+degeneracy of the lowest shell of the posited generator $\Kalpha$ (an
+earlier reading of this $2$ as the dimension of the entangling surface
+is withdrawn:\ for a CFT$_{3}$ that surface is a circle); \emph{(C)} the framework's wedge generator $\Kalpha =
 J_{\mathrm{polar}}$ (a posited rotation generator, not derived from a
 state) shares its integer spectrum and $2\pi$-periodic flow with the
 \emph{Euclidean} rotation generator whose Wick rotation is the
-continuum Casini--Huerta--Myers hemisphere modular Hamiltonian (the
-latter itself generates a boost-like flow with continuous spectrum);\ this
+continuum Casini--Huerta--Myers modular Hamiltonian of a hemispherical
+cap of the spatial $S^{2}$ (the latter itself generates a boost-like flow with continuous spectrum);\ this
 is a structural \emph{analogy} with the Euclidean generator only, and the identification of $\Kalpha$ as
 the modular Hamiltonian of a wedge-restricted state is \textbf{[OPEN]}
 (2026-09-28;\ see~\cite{paper42}). The
@@ -125,8 +131,9 @@ The F-theorem values themselves are due
 to~\cite{klebanov_pufu_safdi2011} and are not new; the present paper's
 contributions are (i) their bit-exact reproduction from the discrete
 truncated spectral triple, (ii) the orthogonal M2/M3 dual-basis
-decomposition (Theorem~\ref{thm:mellin_decomp}), and (iii) the
-wedge-KMS entropy extraction of $\dim(\partial W)$. The CHM comparison
+decomposition (Theorem~\ref{thm:mellin_decomp}), and (iii) the exact
+large-$\nmax$ asymptotic of the wedge-KMS entropy, a lowest-shell
+degeneracy count. The CHM comparison
 (C) is recorded as an analogy only;\ an earlier version claimed a
 finite-cutoff identification at GH-convergence rate, which is withdrawn
 (2026-09-28): $\Kalpha$ is posited, and a GH distance between spectral
@@ -170,8 +177,8 @@ geometric interpretation.
 
 The present paper turns from the math.OA structural content of the
 modular machinery to its \emph{physics-side observables}. We ask
-whether the framework's wedge KMS state $\rhoW$, evaluated on
-boundary observables corresponding to standard CFT$_{3}$-on-$\sthree$
+whether the truncated spectral triple --- its spectra, and the wedge
+KMS state $\rhoW$ built on it --- evaluated on boundary observables corresponding to standard CFT$_{3}$-on-$\sthree$
 calculations, reproduces the known continuum values, and whether the
 resulting structural pattern exhibits any genuinely new content
 beyond a numerical match.
@@ -198,20 +205,23 @@ physics observables.
 
 \item \textbf{Wedge KMS entropy structural classification}
 (Sec.~\ref{sec:wedge_kms}): the von Neumann entropy of $\rhoW$ scales
-as $S(\rhoW) \sim 2 \log \nmax$, with the slope $2 = \dim(\partial
-\Wedge)$ identifying the wedge boundary dimension as a degeneracy
-log on the lowest $\Kalpha$ shell. The F-coefficient does \emph{not}
+as $S(\rhoW) \sim 2 \log \nmax$;\ the slope $2$ is the exponent of the
+$\nmax(\nmax+1) \sim \nmax^{2}$ degeneracy of the lowest shell of the
+posited generator $\Kalpha$ \textbf{[MEASURED]} (degeneracy count,
+checked against direct diagonalisation) --- a property of the
+truncation, not a continuum geometric dimension. The F-coefficient does \emph{not}
 appear in $S(\rhoW)$, demonstrating that the framework's spectral-zeta
-side and wedge KMS state side encode \emph{different} continuum
-observables on the same modular state.
+side and wedge KMS state side encode \emph{different}
+quantities on the same truncated triple.
 
 \item \textbf{Casini--Huerta--Myers analogy}
 (Sec.~\ref{sec:chm}): the framework's posited wedge generator
 $\Kalpha$ shares integer spectrum and $2\pi$-periodic flow with the
-Euclidean rotation generator about the entangling surface, whose Wick
-rotation is the continuum CHM hemisphere modular Hamiltonian
+Euclidean rotation generator about the entangling circle, whose Wick
+rotation is the continuum CHM modular Hamiltonian of a hemispherical
+cap $H_{+}$ of the spatial $S^{2}$,
 $K_{\mathrm{cont}} = 2\pi \int_{H_{+}} \xi \cdot T^{00}\,
-d\Omega$~\cite{casini_huerta_myers2011};\ $K_{\mathrm{cont}}$ itself
+dA$~\cite{casini_huerta_myers2011};\ $K_{\mathrm{cont}}$ itself
 generates a boost-like flow with continuous spectrum, so the analogy is
 with the Euclidean generator only.
 \textbf{[OPEN]}:\ identifying $\Kalpha$ as a modular Hamiltonian
@@ -276,8 +286,8 @@ engine~\cite{paper18}.
 
 The hemispheric wedge $W$ corresponds, in the truncated full-Dirac
 basis, to the half-space with $m_{j} > 0$ along the
-wedge-fixing axis. Per~\cite{paper42} Def~5.1, the BW-$\alpha$
-modular Hamiltonian on the wedge is
+wedge-fixing axis. Per~\cite{paper42} Def~5.1, the posited BW-$\alpha$
+wedge generator (its identification as a modular Hamiltonian is open) is
 \[
 \Kalpha = J_{\mathrm{polar}}
 \]
@@ -507,9 +517,12 @@ relation $[-1, 1, -1, -1]$ against $\{C_\infty, \coth 1, \log 2, \log
 \sinh 1\}$). The windowed least-squares slope climbs monotonically
 $1.94 \to 2.00005$ as the fit window moves to $\nmax \in [350,
 2000]$; the original $1.94$ is a small-$\nmax$ artifact of a sequence
-converging to exactly $2$. The slope $2 = \dim(\partial W) =
-\dim(S^{2}_{\mathrm{equator}})$ identifies the wedge boundary
-dimension as a degeneracy log on the lowest $\Kalpha$ shell. The
+converging to exactly $2$. The slope $2$ is the exponent of the
+lowest-shell degeneracy $n_{\mathrm{eq}} = \nmax(\nmax + 1)$ of the
+posited generator $\Kalpha$ (mechanism below) \textbf{[MEASURED]};\ an
+earlier version read it as the dimension of the entangling surface,
+which is withdrawn (2026-09-28):\ for a CFT$_{3}$ the entangling surface
+of a hemispherical cap is a circle $S^{1}$, not a two-sphere. The
 additive constant lives in the Boltzmann-base ring (functions of $e$
 via $\coth 1$, $\sinh 1$, tied to the integer spacing
 $\Delta\Kalpha = 2$ at $\beta = 2\pi$); it carries no master Mellin
@@ -529,16 +542,16 @@ is the independent support).
 
 The $\Kalpha$ spectrum is bounded above by $2\nmax - 1$ at finite
 cutoff. At BW canonical normalization, the per-state weight at
-$\Kalpha = 1$ (the equator shell) is $e^{-1}/Z$, while at $\Kalpha = 3$
+$\Kalpha = 1$ (the lowest shell) is $e^{-1}/Z$, while at $\Kalpha = 3$
 it drops to $e^{-3}/Z$, a factor of $e^{-2} \approx 0.135$ suppression
 per shell. The partition function is therefore dominated by the
-equator shell of multiplicity $n_{\mathrm{eq}} = \nmax(\nmax + 1)
+lowest shell of multiplicity $n_{\mathrm{eq}} = \nmax(\nmax + 1)
 \sim \nmax^{2}$:
 \[
 Z \approx n_{\mathrm{eq}} \cdot e^{-1} \approx 0.368\, \nmax^{2},
 \]
 giving effective probability $p_{\mathrm{eq}} \approx 1/n_{\mathrm{eq}}$
-per equator state, and hence
+per lowest-shell state, and hence
 \[
 S(\rhoW) \approx -n_{\mathrm{eq}} \cdot p_{\mathrm{eq}} \log p_{\mathrm{eq}}
 = \log n_{\mathrm{eq}} \approx 2 \log \nmax.
@@ -546,16 +559,15 @@ S(\rhoW) \approx -n_{\mathrm{eq}} \cdot p_{\mathrm{eq}} \log p_{\mathrm{eq}}
 The two asymptotic limits in $s$-deformation $\rho(s) = e^{-s
 \Kalpha}/Z$, $s \to 0^{+}$ (maximally mixed on $\Hilb_{W}$, giving
 $S \to \log \dim \Hilb_{W}$) and $s \to \infty$ (maximally mixed on
-the equator shell, giving $S \to \log n_{\mathrm{eq}}$), are
+the lowest shell, giving $S \to \log n_{\mathrm{eq}}$), are
 saturated bit-exactly~\cite{debug:bh_phase0}.
 
 \subsection{Structural decomposition: F is in the spectral-zeta side, not the state side}
 
 \begin{proposition}[F vs $S(\rhoW)$ live in different sectors]
 \label{prop:F_vs_S_decomposition}
-The framework's wedge KMS state $\rhoW$ admits two structurally
-distinct calculational operations that extract different continuum
-observables:
+The truncated spectral triple admits two structurally distinct
+calculational operations that extract different quantities:
 
 \begin{itemize}
 \item \textbf{Spectral-zeta side:} the analytic continuation
@@ -566,15 +578,16 @@ The transcendental signature is in the master Mellin engine M2/M3
 ring $\Q \cdot \log 2 \oplus \Q \cdot \zeta(3)/\pi^{2}$.
 
 \item \textbf{Wedge KMS state side:} the von Neumann entropy
-$S(\rhoW) = -\Tr[\rhoW \log \rhoW]$ extracts the wedge boundary
-dimension $\dim(\partial W)$ via degeneracy log on the lowest
-$\Kalpha$ shell, with leading scaling $\dim(\partial W) \cdot \log
-\nmax$. The result is ring-free (a logarithm of an integer).
+$S(\rhoW) = -\Tr[\rhoW \log \rhoW]$ extracts the lowest-shell
+degeneracy of the posited generator $\Kalpha$, with leading scaling
+$2 \log \nmax$ (the degeneracy grows as $\nmax^{2}$). The leading term
+is ring-free (a logarithm of an integer).
 \end{itemize}
 
-The two operations act on the same modular state $\rhoW$ but extract
-\emph{categorically different} continuum observables: the universal
-F-coefficient versus the wedge boundary dimension. The F-coefficient
+The two operations act on the same truncated triple (the first on its
+spectra, the second on the wedge state $\rhoW$ built from it) but extract
+\emph{categorically different} quantities: the universal
+F-coefficient versus a lowest-shell degeneracy count. The F-coefficient
 does \emph{not} appear in $S(\rhoW)$.
 \end{proposition}
 
@@ -620,41 +633,52 @@ framework invariants.
 
 These three blockers are not in tension with the boundary-side
 results of Sec.~\ref{sec:partition} or Sec.~\ref{sec:chm}: the
-framework reproduces boundary observables on the same wedge KMS
-state, but cannot independently construct a bulk dual against which
-to compare via RT.
+F-coefficients of Sec.~\ref{sec:partition} are computed from the
+operator spectra (not from the wedge state), the wedge entropy is a
+lowest-shell degeneracy count, and the CHM comparison is an analogy;\
+none of these requires, and the framework cannot independently construct,
+a bulk dual against which to compare via RT.
 
 \section{Casini--Huerta--Myers analogy}
 \label{sec:chm}
 
 \subsection{Continuum CHM hemisphere modular Hamiltonian}
 
-The Casini--Huerta--Myers
-formula~\cite{casini_huerta_myers2011} for the continuum modular
-Hamiltonian of a hemisphere of $\sthree$ in free CFT$_{3}$ is
+For a CFT$_{3}$ the Lorentzian spatial slice is a two-sphere, and the
+Casini--Huerta--Myers construction~\cite{casini_huerta_myers2011} (valid
+for any CFT, not only free ones) gives the modular Hamiltonian of the
+vacuum restricted to a hemispherical cap $H_{+} \subset S^{2}$ as
 \begin{equation}
-K_{\mathrm{cont}} = 2\pi \int_{H_{+}} \xi(x) \cdot T^{00}(x)\, d\Omega(x),
+K_{\mathrm{cont}} = 2\pi \int_{H_{+}} \xi(x) \cdot T^{00}(x)\, dA(x),
 \label{eq:K_chm}
 \end{equation}
 where $\xi$ is the conformal Killing vector field preserving the causal
-development of the hemisphere (vanishing on the entangling surface
-$S^{2}_{\mathrm{equator}}$), and $T^{00}$ is the local energy density.
-In the Lorentzian theory $\xi$ generates a \emph{boost-like} conformal
-flow:\ $K_{\mathrm{cont}}$ has continuous spectrum, the hemisphere
-algebra is of type~III, and the CHM map identifies the modular flow with
-time translation on $\R \times H^{2}$ in a thermal state at
-$\beta = 2\pi$~\cite{casini_huerta_myers2011, bisognano_wichmann1976}.
-The Bisognano--Wichmann $2\pi$ is a KMS parameter, not a periodicity of
-the real-time flow. Only the \emph{Euclidean} continuation of this flow ---
-the rotation about the entangling surface in the Euclidean section ---
-has discrete spectrum and a periodic flow, closing at angle $2\pi$;\ the
-KMS $\beta = 2\pi$ is exactly that Euclidean periodicity. The comparison
+development of the cap (vanishing on the entangling surface
+$\partial H_{+} = S^{1}$, the boundary circle of the cap), and $T^{00}$
+is the local energy density. The CHM map sends the cap's causal
+development conformally to $\R \times H^{2}$, carrying the restricted
+vacuum to a thermal state at $\beta = 2\pi$ (in units of the curvature
+radius)~\cite{casini_huerta_myers2011, bisognano_wichmann1976}. In the
+Lorentzian theory $\xi$ generates a \emph{boost-like} conformal flow.
+That $K_{\mathrm{cont}}$ has continuous spectrum and that the cap
+algebra is of type~III are not statements of CHM or of
+Bisognano--Wichmann;\ they are standard facts of algebraic quantum field
+theory (local algebras are type~III$_{1}$
+factors~\cite{buchholz_dantoni_fredenhagen1987}, and the modular spectrum
+of a type~III$_{1}$ factor is the whole positive half-line). The
+Bisognano--Wichmann $2\pi$ is a KMS parameter, not a periodicity of the
+real-time flow. Only the \emph{Euclidean} continuation of this flow has
+discrete spectrum and a periodic flow:\ the Euclidean section is
+(conformally) $\sthree$, and the continued flow is the rotation of
+$\sthree$ that fixes a great circle (the Euclidean image of the
+entangling circle), closing at angle $2\pi$;\ the KMS $\beta = 2\pi$ is
+exactly that Euclidean periodicity. The comparison
 below is with this Euclidean rotation generator, not with
 $K_{\mathrm{cont}}$ itself.
 
 \subsection{Framework wedge generator}
 
-The framework's wedge modular Hamiltonian (Paper~42 Def~5.1) is
+The framework's posited wedge generator (Paper~42 Def~5.1) is
 \[
 \Kalpha = J_{\mathrm{polar}},
 \]
@@ -718,9 +742,10 @@ restricted to the multiplicities allowed by the truncation.
 \label{sec:bulk_blocked}
 
 The three boundary-side observables (Sec.~\ref{sec:partition},
-Sec.~\ref{sec:wedge_kms}, Sec.~\ref{sec:chm}) reproduce (A, B) or
-parallel (C, an analogy with the identification open) their continuum
-CFT$_{3}$-on-$\sthree$ analogs at finite cutoff. The corresponding \emph{bulk-side} identifications --- AdS$_{4}$
+Sec.~\ref{sec:wedge_kms}, Sec.~\ref{sec:chm}) reproduce a continuum
+CFT$_{3}$-on-$\sthree$ value (A), give an exact finite-cutoff degeneracy
+asymptotic (B), or parallel a continuum object (C, an analogy with the
+identification open). The corresponding \emph{bulk-side} identifications --- AdS$_{4}$
 gravity, JLMS bulk-modular reconstruction, RT minimum surfaces,
 holographic entanglement entropy --- are blocked at the framework's
 existing infrastructure.
@@ -980,10 +1005,9 @@ findings in full.
 
 \subsection{Unified picture}
 
-The framework's wedge KMS state $\rhoW = e^{-\Kalpha}/Z$ supports
-three structurally distinct calculational operations, each
-extracting a different continuum CFT$_{3}$-on-$\sthree$ boundary
-observable:
+The truncated spectral triple, with the wedge KMS state
+$\rhoW = e^{-\Kalpha}/Z$ built on it, supports three structurally
+distinct calculational operations:
 
 \begin{center}
 \begin{tabular}{lll}
@@ -991,7 +1015,7 @@ observable:
 Operation & Continuum analog & Ring \\
 \midrule
 $-\tfrac{1}{2}\zeta'_{\Delta}(0)$ (Theorem~\ref{thm:scalar_bitexact}) & F-theorem coefficient & M2 + M3 \\
-$-\Tr[\rhoW \log \rhoW]$ (Prop.~\ref{prop:F_vs_S_decomposition}) & Wedge boundary dimension & ring-free \\
+$-\Tr[\rhoW \log \rhoW]$ (Prop.~\ref{prop:F_vs_S_decomposition}) & none claimed (lowest-shell degeneracy of $\Kalpha$) & ring-free \\
 $\mathrm{spec}(\Kalpha)$ (Observation~\ref{thm:chm_identification}) & Euclidean CHM rotation generator (analogy) & ring-free \\
 \bottomrule
 \end{tabular}
@@ -1000,8 +1024,9 @@ $\mathrm{spec}(\Kalpha)$ (Observation~\ref{thm:chm_identification}) & Euclidean 
 The spectral triples on which all three are computed converge as
 $\nmax \to \infty$ in the van~Suijlekom state-space Gromov--Hausdorff
 distance per~\cite{paper38} (with the signature-agnostic product-carrier
-rate of~\cite{paper45} on the temporal factor). For the first two rows the
-continuum values are reproduced;\ the third row is an analogy with the
+rate of~\cite{paper45} on the temporal factor). For the first row the
+continuum value is reproduced;\ the second row is a finite-cutoff
+degeneracy count with no continuum identification claimed;\ the third row is an analogy with the
 Euclidean rotation generator only, and no operator convergence
 $\Kalpha \to K_{\mathrm{cont}}$ is claimed (Observation~\ref{thm:chm_identification}).
 
@@ -1311,8 +1336,9 @@ of~\cite{cardy1988, jafferis_klebanov_pufu_safdi2011,
 klebanov_pufu_safdi2011, beccaria_tseytlin2017,
 lei_van_leuven2024} --- with a load-bearing structural finding
 (the master Mellin engine verification on independent physics
-data) plus two bit-exact reproductions (partition function, wedge
-boundary dimension) and one analogy (the posited wedge generator
+data) plus a bit-exact reproduction (partition function), an exact
+entropy asymptotic (the lowest-shell degeneracy of the posited
+generator), and one analogy (the posited wedge generator
 against the Euclidean rotation generator of the CHM construction;\ the
 identification with a modular Hamiltonian is open).
 
@@ -1456,6 +1482,10 @@ JHEP \textbf{05} (2011) 036, arXiv:1102.0440.
 \bibitem{bisognano_wichmann1976} J.~J.~Bisognano and E.~H.~Wichmann,
 \emph{On the duality condition for quantum fields},
 J.~Math.~Phys.\ \textbf{17} (1976), 303--321.
+
+\bibitem{buchholz_dantoni_fredenhagen1987} D.~Buchholz, C.~D'Antoni, and
+K.~Fredenhagen, \emph{The universal structure of local algebras},
+Commun.\ Math.\ Phys.\ \textbf{111} (1987), 123--135.
 
 \bibitem{ryu_takayanagi2006} S.~Ryu and T.~Takayanagi,
 \emph{Holographic derivation of entanglement entropy from AdS/CFT},

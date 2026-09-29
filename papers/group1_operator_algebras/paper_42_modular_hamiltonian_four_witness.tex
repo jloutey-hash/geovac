@@ -156,8 +156,11 @@ $\beta = 2\pi/\kappa_g$ squared.  Its \emph{continuum}
 open frontier when this paper was drafted;\ that is
 \textbf{superseded} (2026-06, Paper~45~\cite{paper45}):\ the natural
 device fails structurally, and the chase is closed on the convention
-branch.  The mechanism is visible in this paper's own result~(i):\ the
-truncated modular Hamiltonian has \emph{integer} spectrum, so the
+branch (an [ARGUED] reading:\ its Euclidean-only leg is
+generator-independent, its Wick-rotation/KMS-circle leg is conditional on
+O0 for the Bisognano--Wichmann generator;\ Paper~45 Q1).  The mechanism is visible
+in this paper's own result~(i):\ the posited wedge generator has
+\emph{integer} spectrum, so the
 finite-cutoff flow is a compact $\beta = 2\pi$ circle rather
 than a non-compact boost, and every Lipschitz/boost seminorm built on
 it is signature-blind.  The finite-cutoff closures reported below stand
@@ -1630,13 +1633,17 @@ The proper Lorentzian extension of the present construction would
 require a Krein-space spectral triple at signature $(3, 1)$, for which
 the canonical reference is
 Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}. The
-Bizi--Brouder--Besnard classification organises spectral triples by
-pairs $(m, n) \in (\Z/8)^2$ where $m + n$ is the metric dimension and
-the underlying Connes axiom signs determine the Krein-space structure.
-The Riemannian Camporesi--Higuchi triple sits at $(3, 0)$;\ the
-Lorentzian extension would sit at $(3, 1)$. The
-Bizi--Brouder--Besnard Table~2 signs at $(3, 1)$ flip the
-$\{J, \gamma_5\}$ anticommutation relation, which leads to the
+Bizi--Brouder--Besnard classification organises spectral triples of
+metric signature $(t, s)$ ($t$ time and $s$ space dimensions) by pairs
+$(m, n) = (t + s,\, t - s) \bmod 8$ (their p.~3),
+where $m$ alone is the metric dimension, and the underlying Connes axiom
+signs determine the Krein-space structure.
+The Riemannian Camporesi--Higuchi triple has $(t, s) = (0, 3)$ (three
+spatial directions);\ the
+Lorentzian extension, one time and three space dimensions, has
+$(t, s) = (1, 3)$, which gives $(m, n) = (4, -2 \bmod 8) = (4, 6)$, their
+Table~3 entry $(4, 6)$. The Bizi--Brouder--Besnard signs there (their
+Table~1 and eq.~(3)) make $J$ anticommute with the chirality, which leads to the
 present author's Sprint L0 prediction that the M3 sub-mechanism of
 the master Mellin engine trivialises at $(3, 1)$ on chirality-symmetric
 spectrum (\texttt{debug/lorentzian\_l0\_audit\_memo.md} \S 3).
@@ -1732,7 +1739,7 @@ would rest.
 The natural next step is to replicate the present operator-system
 construction on a Bizi--Brouder--Besnard Krein-space spectral triple
 at $(3, 1)$, verify the Sprint L0 prediction that M3 trivialises but
-M1 stays under the BBB Table~2 sign flip, and produce the genuine
+M1 stays under the BBB sign flip (their Table~1 and eq.~(3)), and produce the genuine
 Lorentzian KMS-Tomita-Takesaki theorem inside the framework. The
 obstruction --- a deep frontier --- is the absence of a Lorentzian
 propinquity in the published literature.
@@ -1755,10 +1762,13 @@ Dirichlet zero BC (structurally forced for anti-Hermiticity and
 Krein-self-adjointness), verifying Krein-self-adjointness
 $D_L^\times = D_L$ and Riemannian-limit recovery $D_L|_{N_t = 1} =
 i D_{\rm GV}$ bit-exactly across the same panel.  Sprint L2-D
-(\texttt{geovac/connes\_axiom\_audit\_31.py}) verifies four of the
-six BBB-predicted axioms at $(m, n) = (4, 6)$ bit-exactly
+(\texttt{geovac/connes\_axiom\_audit\_31.py}) verifies the four
+BBB-predicted sign relations at $(m, n) = (4, 6)$ bit-exactly
 ($J_L^2 = +I$, $\{J_L, \gamma^5\} = 0$, $\{J_L, \eta\} = 0$,
-$J_L D_L = +D_L J_L$); the fifth axiom $\{\gamma^5, D_L\} = 0$ is a
+$J_L D_L = +D_L J_L$;\ Theorem~\ref{thm:connes_audit}), while the
+order-zero and order-one conditions fail at finite cutoff
+(Remark~\ref{rem:order_zero_one}) and the universal axiom
+$\{\gamma^5, D_L\} = 0$ is a
 \emph{structural finding}, failing on the truthful Camporesi--Higuchi
 Dirac (which is chirality-diagonal in the chiral basis and therefore
 commutes with $\gamma^5$;\ \S\ref{sec:bbb_axiom_finding}).  This is structurally
@@ -1774,13 +1784,18 @@ question O0) was the named Sprint L2-E target, still open beyond
 sprint scale due to the absence of a published Lorentzian
 propinquity.  O1 status remains OPEN \emph{at the continuum /
 non-compact level}; the Hilbert-space and Dirac-operator levels are now
-closed at finite cutoff.  The \emph{metric}-level finite-cutoff question
-is now understood structurally (Paper~45~\S\,open~Q1,
-2026-06):\ the posited truncated boost-class generator is compact (integer
-spectrum, $e^{2\pi i K} = I$), so the finite-cutoff quantum metric is
-Euclidean and the Lorentzian signature is the Wick rotation of the KMS
-circle --- a convention, with the genuine reverse-triangle signature
-confined to the non-compact continuum limit.
+closed at finite cutoff.  On the \emph{metric}-level finite-cutoff
+question (Paper~45~\S\,open~Q1) only the compactness half is established
+[SYMBOLIC]:\ the posited boost-class generator is compact (integer
+spectrum, $e^{2\pi i K} = I$).  The further reading has two legs,
+priced separately.  (a)~That the finite-cutoff quantum metric is
+Euclidean, with the genuine reverse-triangle signature confined to the
+non-compact continuum limit, is [ARGUED] and \emph{generator-independent}:\
+it does not depend on which generator a wedge state selects.
+(b)~That the Lorentzian signature is the Wick rotation of the KMS circle,
+a convention, is [ARGUED] and \emph{conditional on O0}:\ it applies to
+the Bisognano--Wichmann generator only if $K$ is derived from a
+wedge-restricted Camporesi--Higuchi state, which is open.
 
 \textbf{(O2) Non-tracial wedge states.}
 The closure rests on the Gibbs structure
@@ -2010,10 +2025,12 @@ grading on $\Krein$ is $\gamma^5_{\Krein} := \gamma^5_{\mathrm{spatial}}
 \label{sec:bbb_audit}
 
 The Bizi--Brouder--Besnard classification of indefinite spectral triples
-by $(m, n) = (t + s, t - s) \bmod 8$ places Lorentzian $(3, 1)$
-West-coast at $(m, n) = (4, 6)$ (their Table~3), with primitive signs
+by $(m, n) = (t + s, t - s) \bmod 8$ (their p.~3) places the Lorentzian
+signature with one time and three space dimensions, $(t, s) = (1, 3)$, at
+$(m, n) = (4, -2 \bmod 8) = (4, 6)$ (their Table~3 entry $(4, 6)$), with
+primitive signs
 $\varepsilon = +1$, $\varepsilon'' = -1$, $\kappa = -1$, $\kappa'' = +1$
-(their Table~1).  The real structure is the lift of the $\Cl(3, 1)$
+(their Table~1 and eq.~(3)).  The real structure is the lift of the $\Cl(3, 1)$
 charge conjugation $U_4 = i\gamma^2 = (i\sigma_y)_{\mathrm{chir}}
 \otimes (i\sigma^2)_{\mathrm{spin}}$,
 \begin{equation}\label{eq:JL_def}
@@ -2208,7 +2225,8 @@ larger wedge) invisible at $\Nt = 1$.
 {[SYMBOLIC]}]\label{thm:h_local_sig_independent}
 At $\Nt = 1$,
 $\Frob{H_{\mathrm{local}} - \DL^W} = \Frob{H_{\mathrm{local}} - D_W^{\mathrm{GV}}}$,
-with values $2.1332$, $6.5275$, $13.854$ at $\nmax = 1, 2, 3$.
+with values $2.1332$, $6.5275$, $13.854$ at $\nmax = 1, 2, 3$ for
+$\kappa_g = 1$ ($\beta = 2\pi$).
 \end{theorem}
 
 \begin{proof}
@@ -2224,8 +2242,13 @@ $\Frob{H_{\mathrm{local}}}^2 + \Frob{D_W^{\mathrm{GV}}}^2$.
 The \S\ref{sec:derived_hamiltonian} / O3 distinction between the wedge
 Dirac and the posited generator therefore persists verbatim at
 signature $(3, 1)$ at the Riemannian limit, for the elementary reason in
-the proof.  At $\Nt > 1$ the Lorentzian residual grows (roughly as
-$\sqrt{N_{t,+}}$) from the temporal-derivative content of $\DL$, which
+the proof.  At $\Nt > 1$ the Lorentzian residual grows with the temporal
+resolution [MEASURED;\ a PM measurement of 2026-09-28 at
+$\nmax = 1, 2, 3$, $\Nt \le 41$, $T_{\max} = 1$, outside the declared test
+panel and not test-backed]:\ at $\kappa_g = 1$ the finite-difference
+$\partial_t$ term comes to dominate and the growth approaches $\Nt^{3/2}$
+(residual ratio $\approx 2.8$ per doubling at $\nmax = 1$, lower at
+$\nmax = 2, 3$ where the spatial part is larger) --- from the temporal-derivative content of $\DL$, which
 $\KL^{\alpha, W}/\beta$ cannot capture.  This is a property of the posited
 construction;\ it does not show which generator a Camporesi--Higuchi
 wedge state selects (O0, open).
@@ -2301,14 +2324,17 @@ expanding the norm:\ $S = \Frob{\KL^{\alpha, W}}^2 =
 4\sum_{\mathrm{wedge}} m_j^2$ is the cumulative wedge angular-momentum
 trace and $D = \Frob{\DL^W}^2 = \sum_{\mathrm{wedge}}
 (n_{\mathrm{fock}} + \tfrac12)^2$ the squared-Dirac trace.
-The two polynomial closed forms are [MEASURED]:\ verified at
-$\nmax = 1, \ldots, 6$ (PSLQ at 100 digits on $\{r^2, 1, 1/\pi^2\}$) and
-recomputed from the live wedge operators in
-\texttt{tests/test\_paper43\_pythagorean\_hs\_orthogonality.py}, which
-also checks the orthogonality across 13 panel cells (Riemannian
-$\nmax = 2, \ldots, 5$ and nine Lorentzian cells, max residual
-$4\times10^{-15}$) and across the six witnesses at $\nmax \le 3$ (max
-$8.9\times10^{-16}$).  The decomposition persists at $\Nt > 1$, the
+The two polynomial closed forms are [MEASURED]:\ in the original
+measurement they were identified at $\nmax = 1, \ldots, 6$ (PSLQ at 100
+digits on $\{r^2, 1, 1/\pi^2\}$), and the orthogonality was measured
+across a larger panel and across the six witnesses at $\nmax \le 3$ (max
+$8.9\times10^{-16}$);\ neither the PSLQ step nor the six-witness check is
+in the regression suite.  The backing test
+\texttt{tests/test\_paper43\_pythagorean\_hs\_orthogonality.py} recomputes
+the closed forms from the live wedge operators at $\nmax = 1, \ldots, 4$
+($\kappa_g = 1$) and checks the orthogonality on 7 cells (Riemannian
+$\nmax = 2, 3, 4$;\ Lorentzian $(\nmax, \Nt) = (2,1), (3,1), (2,3),
+(3,3)$, tolerance $10^{-12}$).  The decomposition persists at $\Nt > 1$, the
 temporal-derivative contribution adding only to the rational part.
 
 \paragraph{Transcendental tag.}
@@ -2355,8 +2381,9 @@ latremoliere_metric_st_2017} is absent from the literature
 (Toyota~\cite{toyota2023}, Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
 farsi_latremoliere2025}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b}
 are Riemannian), and the framework's attempt was descoped on 2026-06-09
-(Paper~45's $K^+$ annihilation theorem:\ the truncated boost is compact,
-so no Lorentzian metric statement is available at finite cutoff).  The
+(Paper~45's $K^+$ annihilation theorem:\ the posited boost-class
+generator is compact, so no Lorentzian metric statement is available at
+finite cutoff for it).  The
 Nieuviarts twist morphism~\cite{nieuviarts2025a, nieuviarts2025b_proceedings}
 is restricted to even dimension and does not apply to $\sthree$.
 \item The construction uses truthful $\DGV$ (resolution R1 of
@@ -2694,7 +2721,7 @@ triples},
 \bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
 M.~Leimbach and W.~D.~van~Suijlekom,
 \newblock \emph{Gromov--Hausdorff convergence of spectral truncations
-of the torus},
+for tori},
 \newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
 
 \bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}

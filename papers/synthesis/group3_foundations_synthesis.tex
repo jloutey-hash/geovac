@@ -177,7 +177,8 @@ single dependency structure.  \emph{The taproot:} Paper~0
 quantum numbers as packing indices; Paper~7~\cite{loutey_paper7} makes
 it physical, verifying the conformal equivalence with the unit $S^3$ via
 a suite of 18 symbolic checks (ten of the eighteen limiting-case or definitional)
-plus an exact test that the $S^3$ Coulomb kernel's eigenvalue
+plus an exact test (for $n \le 4$;\ general $n$ is Fock 1935, a
+Funk--Hecke instance) that the $S^3$ Coulomb kernel's eigenvalue
 $2\pi^2/n$ forces the focal length $p_0 = Z/n$,
 and extending to the
 multi-electron $S^{3N-1}$ setting.  \emph{The fan-out} (the framework's
@@ -222,7 +223,14 @@ $n_{\max}$ modulo $3$ (the convergence reading, an Observation until
 2026-09-25, is withdrawn;\ the label set is exact), while
 \textbf{[INTERNAL THEOREM]} the state-space Gromov--Hausdorff
 convergence of the spinor spectral truncations is proved
-unconditionally with rate $(\gvq{l2_rate_4_over_pi}{4/\pi})\log n_{\max}/n_{\max}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
+unconditionally:\ the distance is bounded by a closed-form Fej\'er
+moment $\gamma_{n_{\max}}$ that vanishes in the limit.  The theorem
+statement also displays its asymptotic rate,
+$\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$, with the constant
+$\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
+tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and
+numerics-pinned) and a uniform bound $\gamma_{n_{\max}} \le 6\log n_{\max}/n_{\max}$
+\textbf{[PANEL-VERIFIED]}
 (Paper~38~\cite{loutey_paper38}).  \textbf{(H2)} \textbf{[INTERNAL THEOREM]} The angular sparsity
 density of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}): a structural theorem of
@@ -388,15 +396,25 @@ p_0 = \sqrt{-2 E},
 which maps $\mathbf{p} \in \mathbb{R}^3$ onto the unit three-sphere
 $\mathbf{u} \in S^3 \subset \mathbb{R}^4$.  The Coulomb kernel
 $1/|\mathbf{p} - \mathbf{p}'|^2$ becomes the inverse-square chordal
-distance on $S^3$, and the integral equation reduces to the eigenvalue
-problem
+distance on $S^3$, and with $\varphi = \Omega^2\Psi$ the integral equation
+reduces to the $S^3$ integral equation
 \begin{equation}
--\Delta_{S^3}\, \Psi_n = (n^2 - 1)\, \Psi_n,
+p_0\, \Psi(\boldsymbol{\omega}) = \frac{Z}{2\pi^2}\int_{S^3}
+\frac{\Psi(\boldsymbol{\omega}')}{|\boldsymbol{\omega}-\boldsymbol{\omega}'|^2}\,
+\mathrm{d}\Omega'
 \end{equation}
-free-particle motion on the unit sphere.  The Coulomb potential is
-absorbed into the curvature of the sphere; the integer spectrum is
-fixed by the round unit-sphere geometry (the metric, not merely the
-topology, Paper~7).
+(Paper~7).  The kernel is zonal, so it is diagonal on the $S^3$ harmonics;
+on the degree-$(n-1)$ harmonics its eigenvalue is $2\pi^2/n$ (Fock 1935,
+an instance of Funk--Hecke; tested exactly for $n \le 4$ in Paper~7), and
+this is what forces the focal length $p_0 = Z/n$ and hence
+$E_n = -Z^2/(2n^2)$.  The quantization therefore comes from the Coulomb
+kernel's eigenvalue, not from the curvature.  The Laplace--Beltrami
+statement is a separate fact about the same functions:\ the degree-$(n-1)$
+harmonics are the eigenfunctions of $-\Delta_{S^3}$ with eigenvalue
+$n^2 - 1$, an integer spectrum fixed by the round unit-sphere geometry
+(the metric, not merely the topology, Paper~7);\ it labels the shells but
+is not, by itself, the link to the Schr\"odinger equation (Paper~7 says so
+explicitly).
 
 \subsection*{The 18 symbolic proofs}
 
@@ -449,10 +467,13 @@ the diagonal $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$
 (same test, built from the generators).  What is a theorem on the
 operator-algebra side is a statement about a different object:\ \textbf{[INTERNAL THEOREM]} for the spinor (Dirac)
 spectral truncations it is an unconditional
-van~Suijlekom state-space Gromov--Hausdorff convergence at rate
-$(4/\pi)\log n_{\max}/n_{\max}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form) under the
+van~Suijlekom state-space Gromov--Hausdorff convergence, bounded by a
+closed-form Fej\'er moment $\gamma_{n_{\max}} \to 0$ (proved), under the
 translation-seminorm metrization (Paper~38~\cite{loutey_paper38},
-operator-algebra arc), with the $4/\pi$ constant
+operator-algebra arc);\ the theorem statement displays the asymptotic
+rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
+tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and numerics-pinned;\
+the uniform $6\log n_{\max}/n_{\max}$ bound is \textbf{[PANEL-VERIFIED]}), with the $4/\pi$ constant
 universal across compact connected semisimple Lie groups
 (Paper~40~\cite{loutey_paper40}: rigorous at rank~1, a rank-uniform
 analytical proof a named gap; a circle factor carries $2/\pi$); the
@@ -913,8 +934,9 @@ The Coulomb $S^3$ side admits a hemispheric-wedge KMS state with
 closed-form Hilbert--Schmidt orthogonality between the posited modular
 Hamiltonian (generator $2J_z$) and the wedge-restricted Dirac operator.
 The prefactor $1/\pi^2$ of its closed-form residual is a
-temporal-compactification $\pi$ in the sense of Paper~35:\ it is the
-square of the posited normalisation $\beta = 2\pi/\kappa_g$, not Mellin
+temporal-compactification $\pi$ in the sense of Paper~35:\ it enters
+through $1/\beta^2 = \kappa_g^2/(4\pi^2)$, the posited normalisation
+$\beta = 2\pi/\kappa_g$ imported and squared by the Frobenius norm, not Mellin
 content, and it is not an instance of the master engine's volume slot
 (re-tiered 2026-09-28;\ the orthogonality itself is a chirality-parity
 identity independent of $\beta$, Paper~32); the HO

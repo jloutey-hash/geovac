@@ -43,8 +43,10 @@ compatible with it is the Pauli filling count
 $\nu_{\min} = E(n_\uparrow) + E(n_\downarrow)$, where $E(m)$ sums the
 $m$ lowest one-particle polynomial degrees and degree $d$ holds
 $(d+1)(d+2)/2$ polynomials.  We prove this for all $N$ and $S$ from
-Schur--Weyl duality (it extends the known filled-shell rule of the
-hyperspherical Fermi-gas literature to open shells and arbitrary spin)
+Schur--Weyl duality (the minimal-quanta statement for non-interacting
+particles in an oscillator is prior art, Theorem~1 of Rittenhouse et
+al.; what is new is the spin-resolved $S_N$ formulation, its proof and
+the atomic tabulation)
 and corroborate it by an exact character count for all spins through
 $N = 12$ and by brute force for $N = 3, 4$.  It depends on the spin,
 equals $N-2$ exactly when both columns lie in the first two oscillator
@@ -142,13 +144,25 @@ important to distinguish them from the new contributions.
     factorizations of antisymmetric wavefunctions is textbook
     material~\cite{Weyl1946, FultonHarris1991}.
 
-  \item \textbf{Minimal hyperangular momentum of filled oscillator
-    shells.}  For $N$ non-interacting fermions in an isotropic
-    oscillator, the ground state is a hyperspherical harmonic whose
-    degree equals the total number of oscillator quanta; for filled
-    shells this is stated and proved as Theorem~1 of
-    Rittenhouse, Cavagnero, von Stecher and Greene~\cite{Rittenhouse2006},
-    together with the large-$N$ law $(3N)^{4/3}/4$.  The related nuclear
+  \item \textbf{Minimal hyperangular momentum of non-interacting
+    oscillator states.}  For any non-interacting set of $N$ particles
+    in an isotropic oscillator, the ground state is a hyperspherical
+    harmonic whose degree equals the total number of oscillator quanta.
+    This is Theorem~1 of Rittenhouse, Cavagnero, von Stecher and
+    Greene~\cite{Rittenhouse2006}, stated there for arbitrary $N$ (the
+    filled-shell restriction enters only their interaction calculation),
+    with the proof credited to Cavagnero~\cite{Cavagnero1986} and
+    developed in their Appendix~B, together with the large-$N$ law
+    $(3N)^{4/3}/4$.  Applied to the two spin species separately it
+    already gives the Pauli filling count at fixed $S_z$.  The nuclear
+    hyperspherical-harmonics literature treats the same minimal degree
+    for fermions carrying spin and isospin:\ Fabre de la Ripelle,
+    Sofianos and Adam~\cite{FabreDeLaRipelle2004} state that the minimal
+    degree of the antisymmetric harmonic polynomial is the sum of
+    $2n_j + \ell_j$ over the occupied oscillator states, and apply it to
+    closed- and open-shell nuclei.  Closely related statements appear in
+    earlier $K$-harmonics work (e.g.\ Ref.~\cite{FabreDeLaRipelle1983});
+    we have not verified their content here.  The related nuclear
     method of $K$ harmonics compares such hyperspherical states with the
     translation-invariant shell model~\cite{SmirnovShitikova1977} (there
     in $3(A-1)$ Jacobi coordinates); we have read only that review's
@@ -172,11 +186,15 @@ important to distinguish them from the new contributions.
     Eq.~(\ref{eq:nu_min}) (Theorem~2), together with the effect of the
     ground-state $L$ and parity (Table~\ref{tab:nu_verified}).  The
     filling count is the oscillator-quanta count of $N$ non-interacting
-    fermions in a three-dimensional isotropic harmonic oscillator; for
-    filled shells the rule is known~\cite{Rittenhouse2006}.  The
-    contribution here is the spin-resolved, open-shell statement as an
-    $S_N$-irrep result with a two-line Schur--Weyl proof, and its
-    tabulation for atomic ground states on $S^{3N-1}$.  (An earlier
+    fermions in a three-dimensional isotropic harmonic oscillator, and
+    the general minimal-quanta statement is prior art (Theorem~1
+    of~\cite{Rittenhouse2006};\ for nuclei with spin and isospin,
+    \cite{FabreDeLaRipelle2004}).  The contribution here is narrower:\
+    the spin-resolved statement as an $S_N$-irrep result (fixed total
+    spin $S$, through the conjugate two-column diagram, rather than
+    fixed spin species), its short Schur--Weyl proof, its tabulation for
+    atomic ground states on $S^{3N-1}$, and the correction of the earlier
+    $\nu = N-2$ rule.  (An earlier
     version claimed a universal $\nu = N-2$ as new; that claim is
     withdrawn.)
 
@@ -203,8 +221,10 @@ important to distinguish them from the new contributions.
 \label{sec:config}
 
 Consider $N$ electrons in a central potential $V(r_1, \ldots, r_N)$.
-After extracting the center-of-mass motion, the configuration space is
-$\mathbb{R}^{3N}$.  Introducing hyperspherical coordinates
+With the nucleus fixed, the electronic configuration space is
+$\mathbb{R}^{3N}$ (removing the $N$-particle centre of mass instead
+would leave $\mathbb{R}^{3N-3}$, the Jacobi-coordinate case of the
+nuclear $K$-harmonics literature).  Introducing hyperspherical coordinates
 $(R, \hat{\Omega})$ where $R = \sqrt{\sum_i r_i^2}$ is the
 hyperradius and $\hat{\Omega} \in S^{3N-1}$ collects $3N-1$ angular
 variables, the kinetic energy separates as~\cite{Avery2000,
@@ -325,8 +345,9 @@ lowest degree $K$, it occurs there among the harmonics.
 \noindent Equivalently, $\nu_{\min}$ is the minimum number of oscillator
 quanta of $N$ non-interacting spin-$\tfrac12$ fermions of spin $S$ in a
 three-dimensional isotropic oscillator, filled separately for the two
-spin columns; for filled shells this is Theorem~1 of
-Ref.~\cite{Rittenhouse2006}.  \emph{Evidence tier: symbolic proof
+spin columns; at fixed spin species this count is Theorem~1 of
+Ref.~\cite{Rittenhouse2006} (stated there for any non-interacting set
+of $N$ particles).  \emph{Evidence tier: symbolic proof
 (above), corroborated computationally}: (A)~the exact character
 generating function $(1-t^2)\,\frac{1}{N!}\sum_{\sigma}
 \chi_{\tilde\lambda}(\sigma) \prod_{c}(1-t^{|c|})^{-3}$ (product over
@@ -871,8 +892,9 @@ key results are:
   \item The minimum angular quantum number compatible with spin $S$
     is the Pauli filling count $\nu_{\min} = E(n_\uparrow) +
     E(n_\downarrow)$ (Theorem~2, proved for all $N$ and $S$ by
-    Schur--Weyl duality, extending the known filled-shell
-    rule~\cite{Rittenhouse2006}), which equals $N-2$ exactly when
+    Schur--Weyl duality;\ the minimal-quanta statement for
+    non-interacting particles is prior
+    art~\cite{Rittenhouse2006, FabreDeLaRipelle2004}), which equals $N-2$ exactly when
     $1 \le n_\downarrow \le n_\uparrow \le 4$ (at lowest spin,
     $2 \le N \le 8$); the ground
     term's $L$ and parity can raise it (Li ${}^2S$: 2).  The Pauli
@@ -941,6 +963,20 @@ S.~T.~Rittenhouse, M.~J.~Cavagnero, J.~von Stecher, and C.~H.~Greene,
 ``Hyperspherical description of the degenerate Fermi gas: $s$-wave
 interactions,'' \emph{Phys.\ Rev.\ A} \textbf{74}, 053624 (2006),
 arXiv:cond-mat/0607340.
+
+\bibitem{Cavagnero1986}
+M.~J.~Cavagnero, \emph{Phys.\ Rev.\ A} \textbf{33}, 2877 (1986)
+(cited as the source of the proof of Theorem~1 in
+Ref.~\cite{Rittenhouse2006}).
+
+\bibitem{FabreDeLaRipelle2004}
+M.~Fabre de la Ripelle, S.~A.~Sofianos, and R.~M.~Adam,
+``Method for solving the many-body bound state nuclear problem,''
+arXiv:nucl-th/0410016 (2004).
+
+\bibitem{FabreDeLaRipelle1983}
+M.~Fabre de la Ripelle, ``The potential harmonic expansion method,''
+\emph{Ann.\ Phys.\ (N.Y.)} \textbf{147}, 281 (1983).
 
 \bibitem{SmirnovShitikova1977}
 Yu.~F.~Smirnov and K.~V.~Shitikova, ``Method of $K$ harmonics and the

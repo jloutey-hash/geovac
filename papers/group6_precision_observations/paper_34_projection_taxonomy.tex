@@ -2733,7 +2733,7 @@ Substantive structural finding:\ Paper~42~\S~7.2 open
 question O3 (``$H_{\mathrm{local}} \neq D_W$'') is
 \textbf{signature-INDEPENDENT at the Riemannian limit} and refined
 upward at $N_t > 1$ by temporal-derivative content (the gap between
-the spectral-action object and the modular-Hamiltonian generator
+the spectral-action object and the posited wedge generator
 widens with temporal cutoff).  \textbf{Net status (as computed, May~2026):} the period-closure
 identities $\sigma_{2\pi}^{L}(O) = O$ hold bit-exactly at every tested
 $(n_{\max}, N_t)$, and the $N_t = 1$ slice reduces to Paper~42's
@@ -2743,26 +2743,34 @@ Riemannian construction.
 reading is WITHDRAWN).}\ The subsequent Paper~45 $K^+$-annihilation
 theorem (2026-06-09) and the compact-boost closure (2026-06-19) show
 that these period-closure identities do \emph{not} constitute a
-Lorentzian metric identification at finite cutoff.  The truncated
-Bisognano--Wichmann boost generator $K = \mathrm{diag}(2m_j)$ has
+Lorentzian metric identification at finite cutoff.  The posited
+boost-class generator $K = \mathrm{diag}(2m_j)$ (its identification with
+the Bisognano--Wichmann boost is open, Paper~42 O0) has
 \emph{integer} spectrum, so $\mathrm{e}^{2\pi\mathrm{i}K} = I$
-bit-exactly at every finite cutoff:\ the modular flow is the compact
-KMS $\beta = 2\pi$ \emph{circle}, not a non-compact boost, and a
-compact circle carries only a Euclidean (forward-triangle) metric.
+bit-exactly at every finite cutoff [SYMBOLIC]:\ its flow is a compact
+$\beta = 2\pi$ \emph{circle}, not a non-compact boost.  That a compact
+flow carries only a Euclidean (forward-triangle) metric is [ARGUED]
+(Paper~45 open Q1), not proved.
 The Krein $K^+$ compression is signature-blind (the restricted
 Lipschitz seminorm is unchanged under a temporal Wick involution), so
 the Lorentzian \emph{signature} is metrically invisible to any
 finite-cutoff seminorm;\ the Lorentzian reverse-triangle requires the
 non-compact continuum boost (continuous spectrum), reached only as
-$n_{\max}\to\infty$.  The finite-cutoff statement is therefore
-Euclidean/convention, and the earlier ``literal identification at the
+$n_{\max}\to\infty$.  The reading of the finite-cutoff statement as
+Euclidean, with the Lorentzian signature the Wick rotation of the KMS
+circle (a convention), is therefore [ARGUED], and for the
+Bisognano--Wichmann generator it is \emph{conditional} on O0 (deriving
+$K$ from a wedge-restricted Camporesi--Higuchi state;\ Paper~45 Q1).
+The earlier ``literal identification at the
 Krein operator-system level'' and ``genuine Lorentzian extension''
 framing is withdrawn (Paper~45 descope; the group1 synthesis
 honest-scope note).  What survives is the norm-resolvent /
 period-closure computation, read as the compact-side KMS statement.
 No published finite-cutoff Lorentzian propinquity construction exists.  Cross-manifold W2b
 ($\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$) is
-structurally distinct from the $(3, 1)$ extension closed here and
+structurally distinct from the $(3, 1)$ Krein extension treated here
+(descoped at the metric level;\ its Euclidean/convention reading argued
+and conditional on O0) and
 remains open per Paper~32~\S~VIII.D ``frontier-of-field framing.''
 Files:\ \verb|geovac/modular_hamiltonian_lorentzian.py|,
 \verb|tests/test_modular_hamiltonian_lorentzian.py| (74 fast + 3 slow,
@@ -4524,8 +4532,8 @@ Unruh 1976~\cite{unruh1976}), the framework's M1 $2\pi$ on
 $S^1_{\eta_E}$ IS the modular-flow / boost-orbit period of the
 accelerated observer.  See Paper~32~§VIII
 \texttt{rem:bisognano\_wichmann\_reading} (Unruh paragraph) and
-Paper~35 \S~VIII \texttt{subsec:unruh\_pendant} for the framework-level
-identification.  The principal Track~D operator-level falsifier
+Paper~35 \S~VIII \texttt{subsec:unruh\_pendant} for the
+metric-functional reading (operator level open, Paper~42 O0).  The principal Track~D operator-level falsifier
 ($\sigma_{i\cdot 2\pi} = $ identity on the truncated metric spectral
 triple for a wedge-restricted state) covers all three
 Wick-rotation faces (Hawking, BW, Unruh) simultaneously, since the
@@ -4541,7 +4549,7 @@ $\beta = 2\pi / \kappa_g$;\ four-witness coincidence (by construction) &
 $1.8\times 10^{-16}$ at $n_{\max}=2$ rising to
 $1.6\times 10^{-15}$ at $n_{\max}=5$ (machine precision) & C &
 Sprint L1 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
-2026-05-16) constructs the modular Hamiltonian $K$ on the truncated
+2026-05-16) constructs a posited wedge generator $K$ (O0 open) on the truncated
 Camporesi--Higuchi spectral triple $\mathcal{T}_{n_{\max}}$ via the
 hemispheric-wedge BW-$\alpha$ geometric realization $K = J_{\mathrm{polar}}$
 and verifies the period closure $\sigma_{2\pi}(O) = O$ bit-exactly at
@@ -4577,10 +4585,10 @@ $S(\rho_W) \approx \log(n_{\mathrm{equator}})$ where
 $n_{\mathrm{equator}} = n_{\max}(n_{\max}+1)$ is the count of states
 with smallest $|m_j| = 1/2$;\ the BW canonical state is effectively
 maximally mixed on the lowest-$K_\alpha$ shell with exponentially
-suppressed higher-shell contributions.  The slope $\approx 2 =
-\dim(\partial W) = \dim S^2_{\mathrm{equator}}$ matches the boundary
-dimension, giving a Cardy--Calabrese-flavor log entropy along the
-$d = 2$ boundary, NOT a BH area-law $S \sim A/(4G)$.  Asymptotic
+suppressed higher-shell contributions.  The slope $\approx 2$ is the
+exponent of the lowest shell's $n_{\max}(n_{\max}+1)$ degeneracy (a
+two-dimensional-boundary reading is withdrawn, Paper~50):\ a degeneracy
+log, NOT a BH area-law $S \sim A/(4G)$.  Asymptotic
 limits saturate bit-exactly:\ $S(s \to 0^+) = \log(\dim W)$ and
 $S(s \to \infty) = \log(n_{\mathrm{equator}})$ at $n_{\max} = 7$.
 The $s$-parameter scan across $s \in \{0.01, \dots, 2\pi\}$ shows
@@ -9217,11 +9225,13 @@ which generator a Camporesi--Higuchi wedge state selects.  \emph{Status (2026-06
 ``literal identification at the Krein operator-system level'' reading is
 \textbf{withdrawn} --- the Paper~45 $K^+$-annihilation theorem
 (2026-06-09) and the compact-boost closure (2026-06-19) show the
-posited truncated boost-class generator $K = \mathrm{diag}(2m_j)$ has integer spectrum
+posited boost-class generator $K = \mathrm{diag}(2m_j)$ has integer spectrum
 ($\mathrm{e}^{2\pi\mathrm{i}K} = I$ bit-exact), so the period closure is
-the compact KMS $\beta = 2\pi$ circle and the Lorentzian signature is
-metrically invisible at finite cutoff (Euclidean/convention; see the
-status update in \S~\ref{sec:proj_wick_rotation}).  What survives is the
+a compact $\beta = 2\pi$ circle and the Lorentzian signature is
+metrically invisible to the finite-cutoff seminorm (the Euclidean/convention
+reading is [ARGUED] and, for the Bisognano--Wichmann generator,
+conditional on Paper~42's open O0;\ see the status update in
+\S~\ref{sec:proj_wick_rotation}).  What survives is the
 period-closure computation as a compact-side KMS statement.  No
 finite-cutoff Lorentzian propinquity construction exists.
 

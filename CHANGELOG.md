@@ -7,6 +7,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.7] - 2026-09-29
+
+**Patch. /qa trunk DELTA #15 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). First round run under the new pre-checkpoint self-check, which caught 4 LARGE + 11 SMALL before the next DELTA.**
+
+### The run (DELTA #15)
+- **Verdict:** DEFECTS, about 13 LARGE and 40 SMALL (down from about 16). Every LARGE was PM-verified.
+- **All mathematics confirmed:**
+  - P16 Theorem 2's proof is SOUND, with a third independent route (dual Jacobi–Trudi).
+  - The true-window oddness, J relations and order-zero values were reproduced by a third construction (polynomials on R⁴, no Wigner-D or Clebsch–Gordan code).
+  - The P42 §11 merge proofs are SOUND.
+  - Citations: 0 LARGE, and no fabricated IDs.
+- **About a third of the LARGE were introduced by the PM's own v5.17.6 remediation:**
+  - an unscoped "finite truncation is even" (×6) after finding the true window odd;
+  - the second oddness route cited to a test that did not contain it;
+  - the P50 CHM restatement, which mixed CFT₃ and CFT₄ geometry.
+
+### Gate-first
+- **Seven new C16 entries** (21/21 discrimination checks):
+  - `coulomb-kernel-as-laplacian-green-function`
+  - `finite-truncation-even-unscoped`
+  - `dw-off-diagonal-wedge-basis`
+  - `central-multiplier-cb-norm-2-over-n`
+  - `lvs-torus-rate-attribution`
+  - `posited-k-as-truncated-bw-boost`
+  - `p50-cft3-entangling-s2`, later widened to the unbraced `S^2_{\mathrm{equator}}` spelling, which it had missed at P32 and P34.
+- **Result:** 22 live loci found; 0 remain; all dependents stamped (C16: 115 entries).
+
+### Remediation (all LARGE, and SMALLs on sight)
+- **P7:**
+  - The Coulomb kernel on S³ is not the Green's function of Δ_{S³}. It is the zonal kernel with eigenvalue 2π²/n, ∝ (1−Δ)^{−1/2} (the restriction of the R⁴ Green's function).
+  - Every "free particle on S³" / "equivalent to the Laplace–Beltrami operator" locus now says: rotation-invariant integral equation, kernel eigenvalue forces p₀ = Z/n. This covers the abstract, intro, prior-art list and Stage 2.
+- **Group3 synthesis:** §s3 rewritten the same way. The P38 rate is tiered accurately: the bound and γ→0 are proved; the displayed 4/π log n/n is [INTERNAL THEOREM + MEASURED]; the uniform 6 log n/n bound is [PANEL-VERIFIED]. The 1/β² algebra is fixed.
+- **P1:** a Condon–Shortley sign change cannot make a Berry phase (it is a diagonal rephasing). Mirror residue fixed: the energies are fixed by the kernel.
+- **P32:**
+  - Model truncation even vs true window odd, at every locus.
+  - `thm:GV_triple` scope clause fixed; retracted cb-norm 2/(n+1) → 1.
+  - D_W is chirality-diagonal (Paper 42 Thm 11.14).
+  - Oddness provenance: three routes, now all in the tests.
+  - J relations test-pinned at n_max ≤ 4.
+  - s_GV = sign(D_GV) distinguished from γ_GV = σ_x⊗1.
+  - Raw labels replaced.
+- **P38:** §marcolli_vs — convergence concerns the true window, not the gauge-network representative (which is [OPEN]); gauge content is [OBSERVATION]; "antiunitary J".
+- **P42:**
+  - D_W mechanism corrected.
+  - BBB convention: m = t+s, n = t−s; (t,s) = (1,3) → (4,6), Table 3; signs from Table 1 / eq. (3).
+  - O1 legs split: the Euclidean-only reading is [ARGUED] and generator-independent; the Wick/KMS reading is conditional on O0.
+  - The test attribution now says the test runs 7 cells.
+  - The N_t^{3/2} growth law is PM-measured and tagged.
+  - Thm 11.11 states κ_g = 1.
+- **P24:** D_W diagonal. Obstruction 2 re-argued on sign pairing (S³) vs the strictly positive Euler operator N+3/2 (S⁵); the choice of S⁵ analog is [ARGUED]. The generator is labelled posited.
+- **P45 / P34 / P35 / group1 synthesis:** the posited K is no longer "the truncated BW boost"; the Wick-rotation reading is conditional on O0. The group1 synthesis's Leimbach–vS rate is removed.
+- **P44:** L3b descoped at every locus.
+- **P50:**
+  - CFT₃ geometry (cap in S², entangling circle, Euclidean S³ rotation fixing a great circle, CHM → R×H²).
+  - "Type III / continuous spectrum" cited to Buchholz–D'Antoni–Fredenhagen 1987 (verified), not CHM.
+  - Headline (B) rescoped: the entropy slope 2 is the exponent of the lowest-shell degeneracy n_max(n_max+1); the "dim(∂W) = 2" reading is withdrawn.
+  - Kept (A).
+- **P16 prior art, reworded (verified from source):**
+  - Rittenhouse, Cavagnero, von Stecher & Greene 2006 Theorem 1 holds for ANY non-interacting N (proof: Cavagnero, PRA 33, 2877 (1986)).
+  - Fabre de la Ripelle, Sofianos & Adam (nucl-th/0410016) cover open shells (L_m = Σ(2n_j+ℓ_j)).
+  - P16's own contribution is the spin-resolved S_N formulation, its Schur–Weyl proof, the atomic tabulation, and the correction of ν = N−2.
+  - The setup now says nucleus-fixed R^{3N}.
+- **Also fixed:**
+  - P55: comparison homomorphism; Thm 3.1.
+  - P57 and field guide: E6 an Observation; Forced-Count forces the moduli dimension; Group 1 = 11 papers.
+  - P18: 1/π² dropped from the M1 witnesses.
+  - P39 / P40 / P42: Leimbach–vS title "for tori".
+  - group4 synthesis: the exact condition 1 ≤ n↓ ≤ n↑ ≤ 4.
+
+### Guards (separate pass; every plant FIRED)
+- **Oddness:** Route B (sampled) commutant and alg(O) = B(H) at n_max = 1, 2, plus a third Route C (polynomials on R⁴).
+- **J relations:** pinned at n_max = 4 (dim O = 204).
+- **Splitting guard, slow grid:** a gap check with a noise/genuine-gap separation. It found that the genuine gap at n_max = 25 is only 3.17e-8, about 3× DEG_TOL. The printed values are pinned stable for clustering tolerances 1e-12 to 1e-6.
+- **Stale test docstrings** fixed.
+
+### Process
+- **New standing rule** (`memory/feedback_precheckpoint_selfcheck.md`, PI-approved): after each fix wave, before `/checkpoint`, run one fresh claims reviewer over the changed hunks plus summary surfaces. Its first run caught 4 LARGE (J "pinned 1–3" when the tests pin 1–4; P34 withdrew then restated a reading in one sentence; three leftover P7 "free particle" loci; the P42 BBB (t,s) arithmetic) and 11 SMALL. All fixed.
+- **Build debt:** P34's 820-line `[h]` float table (~L3947–4769) is at TeX's maximum dimension. Any added text inside it breaks the compile; convert to `longtable` (`docs/qa/trunk.debt.md`).
+
 ## [v5.17.6] - 2026-09-28
 
 **Patch. /qa trunk DELTA #14 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). Paper 43 ARCHIVED (merged into Paper 42 §11, PI decision). Paper 16's corrected rule is now a theorem, with prior art credited.** v5.17.5 was never tagged; this checkpoint carries both entries.

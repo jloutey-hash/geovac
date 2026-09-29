@@ -120,6 +120,26 @@ re-prices everything above it.
 - **No branch-specific C14+.**
 
 ## Change log
+- 2026-09-28 (v5.17.6 @ 83b731c, DELTA #15, claim-impact, unseeded) — **DEFECTS;
+  RESEARCH-GRADE NOT earned.** ~13 LARGE + ~40 SMALL (down from ~16 at DELTA #14),
+  every LARGE PM-verified. Mathematics all CONFIRMED: P16 Theorem 2 proof SOUND (a third
+  independent route, dual Jacobi-Trudi); the true-window oddness, J relations and
+  order-zero values reproduced by a third construction (polynomials on R^4, no Wigner/CG
+  code); P42 §11 merge proofs SOUND; citations 0 LARGE, no fabricated IDs. Dimensions:
+  deterministic PASS; citations 0 LARGE; code 1 LARGE (provenance: the second "route" for
+  the true-window oddness was cited to a test that does not contain it -- PM's own
+  error); claims P32/38 3 LARGE + 1 in doubt (unscoped "finite truncation is even" x6
+  after the true window was found odd -- PM's own propagation miss; thm:GV_triple scope
+  clause garbled; retracted cb-norm 2/(n+1) live; P38 §marcolli_vs gauge-network
+  anchor); claims P0/1/7+synthesis 2 LARGE (synthesis §s3 pre-remediation Stage-3
+  account; P7 calls the Coulomb kernel the Green's function of Delta_{S^3}, contradicted
+  by its own 2pi^2/n eigenvalue); claim-impact 6 LARGE (P24 'D_W off-diagonal' after
+  P42 corrected it; P45 Q1 conditionality not mirrored in P42/P34; P50 CHM geometry
+  CFT3 vs CFT4 (S^2 vs S^1 entangling surface) undercutting headline (B); P42 test
+  attribution 13 cells vs 7; group1 synthesis LvS O(1/n) rate; P16 novelty over-credited
+  vs Rittenhouse Thm 1 (any non-interacting N) and the K-harmonics Young-scheme
+  literature). Dominant class again: a correction not yet propagated to every locus
+  that restates it -- now largely inside the remediation's own new content.
 - 2026-09-28 (v5.17.5 working tree, DELTA #14, claim-impact, unseeded) — **DEFECTS;
   RESEARCH-GRADE NOT earned.** ~16 LARGE + ~43 SMALL, every LARGE PM-verified in the
   frozen worktree. Dimensions: deterministic PASS (all 14 gates); citations CLEAN of

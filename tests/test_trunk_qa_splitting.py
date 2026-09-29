@@ -187,6 +187,55 @@ def test_printed_values_n_max_20_25():
 
 
 @pytest.mark.slow
+@pytest.mark.parametrize("n_max", [20, 25, 30])
+def test_deg_tol_gap_window_slow_values(n_max):
+    """The slow printed values (4.1 % at 20, 1.8 % at 25, 0.39 % at 30) rest on
+    DEG_TOL too, so the noise << DEG_TOL < genuine-gap check is repeated here.
+
+    Measured 2026-09-28 (/qa DELTA #15 guard pass), and why this is NOT a copy
+    of the fast-grid test: the fast test's LOOSE_TOL = 1e-7 split and its
+    100 x DEG_TOL margin do not hold at these cutoffs.  At n_max = 25 two
+    GENUINELY distinct eigenvalues (0.3971727246 and 0.3971727563, from
+    different l-blocks, 13 and 24) sit 3.17e-8 apart -- only ~3 x DEG_TOL, and
+    inside LOOSE_TOL, so LOOSE_TOL-clusters would wrongly merge them; at
+    n_max = 30 the smallest genuine gap is 4.3e-7 (~43 x DEG_TOL).  So here
+    noise and genuine gaps are separated by NOISE_CUT = 1e-10 (numerical noise
+    <= ~1e-13, genuine >= 3e-8 at every cutoff measured), and the load-bearing
+    check is the one the printed value actually needs: it is IDENTICAL for
+    every clustering tolerance from 1e-12 to 1e-6 (measured: 1.7757 % and
+    0.39080 % unchanged across that range).
+    Rejects: a DEG_TOL below the noise (1e-16 splits numerically-degenerate
+    eigenspaces) and a DEG_TOL above a genuine gap."""
+    global DEG_TOL
+    NOISE_CUT = 1e-10
+    L, i2s, i2p = _laplacian(n_max)
+    w, v = np.linalg.eigh(L)
+    del L
+    g = np.diff(w)
+    noise = g[g < NOISE_CUT]
+    genuine = g[g >= NOISE_CUT]
+    assert noise.max() < 1e-12, f"n_max={n_max}: split-degeneracy noise {noise.max():.2e}"
+    assert genuine.min() > 1e-8, f"n_max={n_max}: genuine gap {genuine.min():.2e}"
+    assert 1e3 * noise.max() < DEG_TOL, (
+        f"n_max={n_max}: DEG_TOL={DEG_TOL:.0e} does not clear the noise {noise.max():.2e}")
+    assert genuine.min() > DEG_TOL, (
+        f"n_max={n_max}: genuine gap {genuine.min():.2e} not above DEG_TOL={DEG_TOL:.0e}")
+    assert _clusters(w) == _clusters(w, NOISE_CUT)
+    ref = _proxy(w, v, i2s, i2p)
+    assert _matches_printed(100 * ref, PRINTED[n_max]), f"n_max={n_max}: {100*ref:.3f}%"
+    saved = DEG_TOL
+    try:
+        for tol in (1e-12, 1e-10, 1e-9, 1e-7, 1e-6):
+            DEG_TOL = tol
+            got = _proxy(w, v, i2s, i2p)
+            assert abs(got - ref) < 1e-12, (
+                f"n_max={n_max}: splitting moved with the clustering tolerance "
+                f"({tol:.0e}: {100*got:.5f}% vs {100*ref:.5f}%)")
+    finally:
+        DEG_TOL = saved
+
+
+@pytest.mark.slow
 def test_endpoint_n_max_30_is_the_on_branch_closed_form():
     """n_max = 30 (9455 nodes, minutes): 0.39 %, within 1e-3 absolute of the
     printed value and equal to (2 - 2 cos(pi/29))/3."""

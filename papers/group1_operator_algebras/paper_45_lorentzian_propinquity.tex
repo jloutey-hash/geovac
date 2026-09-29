@@ -468,8 +468,11 @@ truncated at the $\nmax$-th Fock shell, of dimension
 \begin{equation}\label{eq:H_GV_dim}
    \dim\HGV^{\nmax} \;=\; \tfrac{2}{3}\,\nmax(\nmax+1)(\nmax+2),
 \end{equation}
-and $\C^{\Nt}$ is the $\Nt$-mode Fourier truncation of
-$L^{2}(\SoneT)$. The fundamental symmetry is
+and $\C^{\Nt}$ is, in the present paper, the $\Nt$-mode Fourier
+truncation of $L^{2}(\SoneT)$.  (Paper~42~\S~11.1 uses a different
+temporal slot:\ a bounded uniform grid of $\Nt$ points on
+$[-T_{\max}, T_{\max}]$, explicitly \emph{not} compactified;\ the Krein
+axioms below do not depend on that choice.) The fundamental symmetry is
 \begin{equation}\label{eq:J_def}
    \JL \;=\; \JL^{\spat} \otimes I_{\Nt},
 \end{equation}
@@ -481,7 +484,9 @@ West-coast assigns $(m, n) = (s + t, t - s \bmod 8) = (4, 6)$ via
 BBB~\cite{bizi_brouder_besnard2018} Table~3, fixing
 $\epsilon = +1, \epsilon'' = -1, \kappa = -1, \kappa'' = +1$. These
 signs were verified bit-exact at finite cutoff in
-Paper~42~\S~11.2~\cite{paper42} (Theorem~11.5, Proposition~11.7).
+Paper~42~\S~11.2~\cite{paper42} (Theorem~11.5);\ the BBB universal
+anticommutation $\{\chi, D\} = 0$ \emph{fails} on the truthful
+Camporesi--Higuchi Dirac there (Proposition~11.7).
 
 \subsection{Lorentzian Dirac operator}\label{sec:lorentzian_dirac}
 
@@ -1709,9 +1714,9 @@ than diminishes the contrast.
 \begin{enumerate}
 \item[(Q1)] \textbf{The reopened target:\ a Lorentzian/Krein
 quantum-metric convergence theorem.}
-\textbf{Resolved on the convention branch (2026-06-19), with a structural
-reason;\ re-tiered 2026-09-28 into a generator-independent leg and a leg
-conditional on Paper~42's open O0.} The accumulated evidence below (operator
+\textbf{Resolved on the convention branch [ARGUED] (2026-06-19), with a
+structural reason;\ re-tiered 2026-09-28 into a generator-independent leg
+and a leg conditional on Paper~42's open O0.} The accumulated evidence below (operator
 Lipschitz seminorm signature-blind; boost-seminorm $Q$ a grading not a
 signature; the forward chain inequality the only universal state-level
 direction) has a single mechanism, compactness of the finite-cutoff flow, and
@@ -1738,7 +1743,8 @@ $n_{\max}=2..5$, falsifier \texttt{tests/test\_lorentzian\_toeplitz\_kplus.py})
 and its flow is exactly a $2\pi$-periodic circle;\ under the range
 normalisation $K/\max|\mathrm{spec}|$ the spectral spacing $\to 0$ and the
 period $\to \infty$ monotonically as $n_{\max} \to \infty$. That this circle
-is the truncated Bisognano--Wichmann boost, and that its period is the KMS
+is the flow of the Bisognano--Wichmann boost at finite cutoff, and that its
+period is the KMS
 $\beta = 2\pi$ of a wedge state, is \emph{not} established at finite cutoff
 (the generator is posited, not derived from a state;\ withdrawn as an
 identification 2026-09-28, Paper~42 O0). A derived generator need not have

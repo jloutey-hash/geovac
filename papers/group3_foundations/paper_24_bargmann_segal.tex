@@ -55,9 +55,12 @@ harmonic oscillator's linear complex-analytic projection.
 \section{Introduction}
 %================================================================
 
-Fock's 1935 stereographic projection~\cite{fock1935} maps the
-hydrogen Schr\"odinger equation onto the free Laplacian on the
-three-sphere $S^3$.  Paper~0~\cite{paper0} built a lattice on this
+Fock's 1935 stereographic projection~\cite{fock1935} turns the
+momentum-space hydrogen Schr\"odinger equation into a rotation-invariant
+integral equation on the three-sphere $S^3$, whose kernel
+$1/|\omega - \omega'|^2$ is zonal with eigenvalue $2\pi^2/n$ on the
+degree-$(n-1)$ harmonics (the eigenfunctions of $\Delta_{S^3}$);\ that
+eigenvalue forces $p_0 = Z/n$ (it is not a free-particle problem).  Paper~0~\cite{paper0} built a lattice on this
 construction: nodes labeled by quantum numbers $(n, l, m)$---exactly
 the label set of the $S^3$ harmonics, on which the Laplace--Beltrami
 operator acts as the diagonal $SO(4)$ Casimir $n^2 - 1$---and edges
@@ -634,7 +637,7 @@ symmetry group naturally acts on a Riemannian manifold rather
 than a complex one).
 
 %================================================================
-\subsection{Fourth layer: modular-Hamiltonian Pythagorean
+\subsection{Fourth layer: wedge-generator Pythagorean
 orthogonality}
 \label{sec:asymmetry_layer4}
 %================================================================
@@ -644,7 +647,7 @@ the original three layers of the Coulomb/HO asymmetry: the spectrum-computing
 role of $L_0$ (Coulomb-specific as catalogued;\ withdrawn 2026-09-25), the calibration~$\pi$
 (Coulomb-specific), and Wilson gauge with natural matter coupling
 (Coulomb-specific).  Sprints L2-E + L2-F.1 (May~2026) identified a
-fourth layer at the modular-Hamiltonian / wedge level:
+fourth layer at the level of the (posited) wedge generator:
 
 \begin{itemize}\setlength{\itemsep}{2pt}
 \item Layer~1: spectrum-computing role of $L_0$ [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
@@ -654,9 +657,11 @@ fourth layer at the modular-Hamiltonian / wedge level:
 \item Layer~3: Wilson lattice gauge with natural matter coupling
   (Coulomb-specific, via Papers~25, 30; $S^5$ is gauge-only per
   Sprint~ST-SU3).
-\item Layer~4: modular-Hamiltonian Pythagorean
-  orthogonality on the hemispheric wedge (Coulomb-specific; $S^5$
-  Hardy sector has no clean analog).
+\item Layer~4: Pythagorean orthogonality of the posited wedge
+  generator and the wedge Dirac on the hemispheric wedge (its
+  Bisognano--Wichmann identification is open, Paper~42;
+  Coulomb-specific; on the $S^5$ Hardy sector the natural analog
+  operands are not orthogonal).
 \item Layer~5: spectral-action gravity termination
   (Paper~51). The CH Dirac spectral action on $S^{2m+1}$ terminates
   at exactly $(m{+}1)$ power-law terms; only $S^3$ ($m=1$) gives
@@ -679,7 +684,7 @@ fourth layer at the modular-Hamiltonian / wedge level:
   tower (the \emph{angular} weight;\ the zero-point $\tfrac32$ is a
   different, metaplectic half-integer --- see the Layer-7 companion
   note below).  This propagates the Coulomb/HO asymmetry from the
-  modular-Hamiltonian level (Layer~4) and the spectral-action level
+  wedge-generator level (Layer~4) and the spectral-action level
   (Layer~5) to the master Mellin engine level, naming a
   CH-substrate-specific structural prerequisite for the cosmic-Galois
   $U^*$ enrichment program (Paper~55~\S~subsec:open\_m2\_m3).
@@ -746,8 +751,8 @@ local Hamiltonian $H_{\mathrm{local}} := K^{\alpha, W}_L / \beta$ built
 from the \emph{posited} integer-spectrum wedge generator (its
 identification with the Bisognano--Wichmann boost is open, Paper~42)
 and the wedge-restricted Lorentzian Dirac
-$D_W^L$ live in mutually-orthogonal Hilbert--Schmidt subspaces of
-the wedge operator algebra:
+$D_W^L$ are Hilbert--Schmidt orthogonal (a chirality-parity
+identity):
 \[
    \langle H_{\mathrm{local}}, D_W^L \rangle_{\mathrm{HS}} \;=\; 0
 \]
@@ -757,9 +762,14 @@ generator with $\kappa_g$ relabelled;\ Paper~42 Theorem~11.14).  This
 chirality-parity identity holds because
 $H_{\mathrm{local}}$ is diagonal in the unfolded wedge spinor basis
 (eigenvalues $\mathrm{two\_m}_j > 0$, the rotation generator around
-the Hopf axis) and $D_W^L$ is off-diagonal in the same basis (it
-intertwines $\pm m_j$ chirality partners via the wedge basis
-change).  The closed-form residual (Paper~42 Corollary~11.15) carries
+the Hopf axis) and independent of the chirality $\chi = \pm 1$, while
+$D_W^L$ splits into a temporal part $i\gamma^0 \otimes \partial_t$ that is
+odd under the wedge chirality grading and a spatial part that is
+chirality-\emph{diagonal} and sign-paired (eigenvalues
+$\chi\,(n_{\mathrm{fock}} + \tfrac12)$), so the $\chi = \pm 1$
+contributions cancel pair by pair in the trace.  Both operators are
+diagonal in the spatial labels;\ what the identity uses is the sign
+pairing, not a diagonal/off-diagonal split.  The closed-form residual (Paper~42 Corollary~11.15) carries
 its only transcendental through the posited normalisation:\ the
 $1/\pi^2$ is $1/\beta^2$ at $\beta = 2\pi$, the square of the
 temporal-compactification $\pi$ of Paper~35, not an output of the
@@ -773,12 +783,13 @@ with $S$ and $D$ pure rationals in $n_{\max}$ (cumulative wedge
 Casimir traces).
 
 \paragraph{Why the fourth layer fails on the $S^5$ Hardy sector.}
-The Pythagorean structure requires the $S^3$ confluence of
-first-order $D_{\mathrm{GV}}$ \emph{and} second-order
-$\Delta_{\mathrm{LB}}$ coexisting on a parallelizable spinor
-bundle with half-integer Hopf-axis wedge.  On the Bargmann--Segal
-Hardy sector $H^2(S^5)$ this confluence is structurally absent.
-Four named obstructions:
+The orthogonality proof (Paper~42 Theorem~11.14) uses three
+ingredients:\ a chirality grading with $\pm$-paired eigenspaces, a
+generator independent of that grading, and a first-order operator that
+is sign-paired under it ($D = \Pi\,|D|$).  On $S^3$ the
+Camporesi--Higuchi spinor bundle supplies all three.  On the
+Bargmann--Segal Hardy sector $H^2(S^5)$ the grading and the sign pairing
+are absent.  Four named obstructions:
 
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item \emph{No spinor sector on the $(N, 0)$ tower.}  The
@@ -786,15 +797,22 @@ Four named obstructions:
   bosonic (integer $m_l$); the Hardy sector has no half-integer
   weight content, hence no spinor lift compatible with the
   Bargmann transform.
-\item \emph{No second-order vs.\ first-order distinction with a
-  separate Dirac.}  The HO's spectrum-computing role is played by
-  the first-order Euler operator $\hat{N} + 3/2$ on the Hardy
-  sector, which \emph{is} the Hamiltonian.  There is no
-  ``$D_W^L$'' sitting beside a Laplacian the way $D_{\mathrm{GV}}$
-  sits beside $\Delta_{\mathrm{LB}}$ on $S^3$; the operands of the
-  Pythagorean comparison collapse to two diagonal operators in
-  the same subspace, and the inner product is generically
-  nonzero.
+\item \emph{No sign-paired first-order operator.}  The HO's
+  first-order operator is the Euler operator $\hat{N} + 3/2$ on the
+  Hardy sector, which \emph{is} the Hamiltonian, and it is strictly
+  positive:\ there is no $\pm$-partner for its eigenvalues and no
+  grading to pair them (obstruction~1;\ Layer~6).  Diagonality is
+  \emph{not} the discriminator --- on $S^3$ both operands are diagonal
+  too.  The discriminator is the sign pairing:\ taking the natural
+  analog operands, the BW-analog generator
+  $K^{\alpha, W} = \mathrm{diag}(2 m_l > 0)$ and $\hat{N} + 3/2$, both
+  are diagonal with strictly positive entries on the wedge, so
+  $\langle K^{\alpha, W}, \hat{N} + \tfrac32\rangle_{\mathrm{HS}}
+  = \sum_{\mathrm{wedge}} 2 m_l\,(N + \tfrac32) > 0$ at every cutoff,
+  where on $S^3$ the $\chi$-paired terms cancel.  The positivity is
+  elementary;\ the choice of these two operands as the $S^5$ analog is
+  [ARGUED] (the Hardy sector has no canonical wedge Dirac) and is not
+  separately test-backed.
 \item \emph{No half-integer wedge.}  The natural BW-analog
   generator $K^{\alpha, W} = \mathrm{diag}(2 m_l > 0)$ has
   \emph{even}-integer spectrum, so the modular period closes at
@@ -807,26 +825,29 @@ Four named obstructions:
   compared here.
 \item \emph{Coulomb/HO category mismatch resurfaces.}  The
   layer-2/3 asymmetry already documented above propagates to
-  the modular-Hamiltonian level: every structural ingredient
-  Pythagorean orthogonality requires (spinor bundle + half-integer
-  wedge + second-order $\Delta$ alongside first-order $D$) is the
+  the wedge-generator level: every structural ingredient
+  Pythagorean orthogonality requires (spinor bundle with a
+  chirality grading + a sign-paired first-order $D$;\ and, for the
+  $2\pi$ period, a half-integer wedge) is the
   Coulomb-side outcome of layers~2--3 (layer~1 is withdrawn).
 \end{enumerate}
 
 These four obstructions are the same blocker that prevents the
 cross-manifold tensor product $\mathcal{T}_{S^3} \otimes
 \mathcal{T}_{\mathrm{Hardy}(S^5)}$ at the AC-extension level
-(Paper~32~\S~VIII.C G4b), now showing up at the modular-Hamiltonian
+(Paper~32~\S~VIII.C G4b), now showing up at the wedge-generator
 level as a sibling obstruction rather than a new one.  The
 Coulomb/HO asymmetry (seven layers catalogued, six standing after the
 2026-09-25 withdrawal of the spectrum-computing layer) is consistent
-across calibration, gauge-matter coupling, modular structure,
+across calibration, gauge-matter coupling, posited wedge-generator structure,
 spectral-action gravity termination, master-Mellin chirality
 factorization, and Hodge-circle arithmetic.
 
 \paragraph{Honest scope.}  The HS-orthogonality is empirically
-demonstrated and structurally explained via the diagonal /
-off-diagonal subspace decomposition.  A formal proof at general
+demonstrated, and it is a chirality-parity identity (an earlier version
+of this section explained it by a diagonal/off-diagonal subspace
+decomposition;\ withdrawn 2026-09-28, since the spatial wedge Dirac is
+chirality-diagonal and sign-paired).  A formal proof at general
 $(n_{\max}, N_t)$ and every $\beta$ is now given in Paper~42
 Theorem~11.14 (\S~11.7):\ the orthogonality is an elementary
 chirality-parity identity about two chosen operators, independent of
@@ -845,8 +866,9 @@ Supporting memos:
 
 The Fock projection rigidity theorem of Paper~23~\cite{paper23}
 states that the $S^3$ Fock projection $p_0 = \sqrt{-2 E_n}$ maps
-a one-electron central-field Hamiltonian onto the free Laplacian
-on $S^3$ if and only if the spectrum is $l$-degenerate within each
+a one-electron central-field Hamiltonian onto a rotation-invariant
+($\mathrm{SO}(4)$) integral equation on $S^3$, zonal and diagonal on
+the harmonics (not a free-particle $\Delta_{S^3}$ problem), if and only if the spectrum is $l$-degenerate within each
 $n$-shell, which is unique to the Coulomb potential by
 $\mathrm{SO}(4)$ symmetry.
 

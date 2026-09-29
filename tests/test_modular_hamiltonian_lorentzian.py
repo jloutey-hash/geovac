@@ -315,10 +315,12 @@ def test_h_local_verdict_at_N_t_1_matches_riemannian(n_max):
     """At N_t = 1, the Lorentzian H_local-vs-D_L_W residual EQUALS the
     Riemannian H_local-vs-D_W residual bit-exactly.
 
-    THE HEADLINE STRUCTURAL FINDING (§9 of memo): Paper 42 §7.2 O3
-    holds at (3, 1) as a signature-INDEPENDENT baseline at the Riemannian
-    reduction. The framework's intrinsic Dirac is NOT the right local
-    Hamiltonian for the BW vacuum at beta = 2*pi at either signature.
+    Paper 42 §7.2 O3 holds at (3, 1) as a signature-INDEPENDENT baseline at
+    the Riemannian reduction (D_L = i D_GV at N_t = 1 and H_local is real).
+    Per Paper 42 (the O3 discussion and §11.7), this is a property of the
+    posited construction -- a statement about two CHOSEN operators -- and does
+    not show that the intrinsic Dirac is the "wrong" modular generator; which
+    generator a Camporesi-Higuchi wedge state selects remains open (O0).
     """
     lmh = for_bisognano_wichmann_lorentzian(n_max=n_max, N_t=1, T_max=1.0)
     verdict = lmh.h_local_verdict_at_3_1()

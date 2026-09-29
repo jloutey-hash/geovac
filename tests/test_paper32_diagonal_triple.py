@@ -10,7 +10,11 @@ Claims guarded (papers/group1_operator_algebras/paper_32_spectral_triple.tex):
       NON-diagonal multipliers of the truncated operator system O_{n_max},
       where the commutators are nonzero.
       WRONG ANSWER REJECTED: a nonzero commutator on the diagonal
-      representative (e.g. a non-diagonal D_GV, or a non-diagonal pi(f)).
+      representative (e.g. a D_GV coupling DIFFERENT Fock nodes, or a
+      non-diagonal pi(f)).  NOT rejected by (A): a non-diagonal D_GV that
+      mixes only the two chirality copies of the SAME node -- pi(f) is
+      chirality-blind, so it still commutes; that case is caught by the
+      anticommutator test of (B) (test_gamma_anticommutes_with_D_GV).
 
   (B) Proposition prop:odd(b): gamma_GV = sigma_x (x) 1 (exchanging the two
       chirality copies) is a self-adjoint involution that commutes with
@@ -72,7 +76,12 @@ def test_diagonal_commutator_vanishes(n_max):
     n_max >= 2 only: at n_max = 1 there is a single Fock node, so pi(f) is a
     scalar multiple of 1 and the commutator vanishes for ANY D (vacuous; see
     test_n_max_1_case_is_vacuous).  Here pi(f) is required to be genuinely
-    non-scalar, so a non-diagonal D_GV cannot pass."""
+    non-scalar, so a D_GV with any entry between DIFFERENT Fock nodes cannot
+    pass.  It does NOT reject every non-diagonal D_GV: pi(f) is blind to the
+    chirality label, so a D mixing the two chirality copies of the same
+    (n, l, m_j) still commutes with it (/qa DELTA #15 plant: D + 0.1 x
+    same-label chirality swap stays green here).  That case is rejected by
+    test_gamma_anticommutes_with_D_GV, which the same plant FIRES."""
     basis = full_dirac_basis(n_max)
     D = camporesi_higuchi_full_dirac_matrix(basis)
     rng = np.random.default_rng(n_max)

@@ -671,6 +671,141 @@ REGISTRY = [
         },
     },
     {
+        "id": "coulomb-kernel-as-laplacian-green-function",
+        # Paper 7 called 1/|n-n'|^2 on S^3 'the Green's function of the Laplace-Beltrami operator'. It is
+        # not: its proved eigenvalue 2pi^2/n (tests/test_paper7_fock_kernel.py) makes it proportional to
+        # (1 - Delta_{S^3})^{-1/2}; a Green's function of Delta_{S^3} goes like 1/d on a 3-manifold and has
+        # eigenvalues ~1/(n^2-1). (It is the restriction of the R^4 Laplacian's Green's function.)
+        # Registered 2026-09-28, DELTA #15.
+        "pattern": r"Green's\s+function\s+for\s+the\s+Laplace|free-particle\s+Green's\s+function\s+on",
+        "exempt_if_nearby": withdrawal_marker("coulomb-kernel-as-laplacian-green-function"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "finite-truncation-even-unscoped",
+        # Only Paper 32's chirality-doubled MODEL truncation is even; the TRUE Camporesi-Higuchi window
+        # that converges is ODD like the continuum (commutant of O = scalars). Unscoped 'the finite
+        # truncation is even' is false for the converging object. Registered 2026-09-28, DELTA #15.
+        "pattern": r"(the\s+)?finite\s+truncation\s+is\s+even|cutoff\s+the\s+truncation\s+is\s+even|J\$?-relations;\s+an\s+even",
+        "exempt_if_nearby": withdrawal_marker("finite-truncation-even-unscoped"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "dw-off-diagonal-wedge-basis",
+        # The wedge Dirac D_W is chirality-DIAGONAL and sign-paired, not off-diagonal (Paper 42 §11.7,
+        # proof of Thm 11.14). The old 'diagonal/off-diagonal subspace decomposition' mechanism is
+        # withdrawn; the orthogonality is a chirality-parity identity. Registered 2026-09-28, DELTA #15.
+        "pattern": r"D_W\^\{?L\}?\$?\s+(is\s+)?off-diagonal",
+        "exempt_if_nearby": withdrawal_marker("dw-off-diagonal-wedge-basis"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "docs/topic_to_paper_lookup.md",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_24_bargmann_segal.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "docs/topic_to_paper_lookup.md": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "central-multiplier-cb-norm-2-over-n",
+        # The central-multiplier cb-norm is ||T_K||_cb = 1; 2/(n_max+1) is the mass-distribution maximum,
+        # not a cb-norm (Paper 32 rem:gh_status_caveat (i); Paper 38). Registered 2026-09-28, DELTA #15.
+        "pattern": r"_\{\\mathrm\{cb\}\}\s*=\s*2/",
+        "exempt_if_nearby": withdrawal_marker("central-multiplier-cb-norm-2-over-n"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "lvs-torus-rate-attribution",
+        # Leimbach-van Suijlekom (Adv. Math. 439, 2024) state NO explicit rate (Thm 3.10: gamma -> 0 only);
+        # the log is already in the circle's Fejer kernel. Registered 2026-09-28, DELTA #15.
+        "pattern": r"Leimbach--van~?Suijlekom\s+torus\s+rate",
+        "exempt_if_nearby": withdrawal_marker("lvs-torus-rate-attribution"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "posited-k-as-truncated-bw-boost",
+        # The finite K = diag(2 m_j) is POSITED; calling it 'the truncated Bisognano-Wichmann boost
+        # generator' asserts the OPEN identification (Paper 42 O0). Registered 2026-09-28, DELTA #15.
+        "pattern": r"truncated\s+Bisognano--Wichmann\s+boost|Bisognano--Wichmann\s+boost\s+generator\s+\$?K\s*=",
+        "exempt_if_nearby": withdrawal_marker("posited-k-as-truncated-bw-boost"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
+        "id": "p50-cft3-entangling-s2",
+        # For a CFT_3 (Lorentzian R x S^2, Euclidean S^3) a hemisphere's entangling surface is a CIRCLE
+        # (S^1); the Euclidean rotation fixes a great circle. 'S^2_equator' is the CFT_4 picture, and the
+        # 'dim(dW) = 2' reading of Paper 50 headline (B)'s entropy slope falls with it (the 2 is the
+        # ~n_max^2 degeneracy of the lowest K shell). Registered 2026-09-28, DELTA #15.
+        "pattern": r"S\^\{?2\}?_\{\\mathrm\{equator\}\}",
+        "exempt_if_nearby": withdrawal_marker("p50-cft3-entangling-s2"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group6 synthesis",
+        "note": "Registered 2026-09-28 (/qa trunk DELTA #15; PI-approved remediation).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-28 (DELTA #15 remediation; PM-verified gate 0 live corpus-wide)",
+        },
+    },
+    {
         "id": "energy-follows-from-casimir-via-shell",
         # MIRROR-direction staleness: Paper 7 Stage 3 now PROVES p0 = Z/n from the S^3 Coulomb-kernel
         # eigenvalue 2pi^2/n (tests/test_paper7_fock_kernel.py). Summaries still say E_n 'follows from

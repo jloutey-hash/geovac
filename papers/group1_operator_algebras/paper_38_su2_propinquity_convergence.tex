@@ -337,7 +337,9 @@ Lipschitz comparison bound with $C_3 = 1$; Lemma~\ref{lem:L4} the
 Berezin reconstruction. Section~\ref{sec:main_theorem} assembles the
 main theorem via the lifted-state route. Section~\ref{sec:discussion} discusses the role of the
 $4/\pi$ constant, the Marcolli--van~Suijlekom~\cite{marcolli_vs2014}
-gauge-network framework that the result anchors, the obstruction to
+gauge-network framework (for which the result supplies a continuum
+target rather than an anchor of its diagonal representative), the
+obstruction to
 extending the proof to the holomorphic-sector $S^5$ Bargmann--Segal
 case, and open questions.
 
@@ -609,11 +611,13 @@ assembly steps above are proved self-contained.
 theorem) the kernel of $a \mapsto [D, a]$ on $\Op_{\nmax}$ is exactly
 the scalars at $\nmax = 1, 2, 3$ ($\dim \Op_{\nmax} = 5, 30, 91$), so
 the Dirac-commutator seminorm \emph{is} a norm on $\Op_{\nmax}/\mathbb{C}\mathbb{1}$
-there. Two independent constructions agree (one builds the eigenspaces
-by coupling, one builds $D = 2\sigma\cdot J_R + 3/2$ as a matrix and
-diagonalizes it;\ 2026-09-28);\ the matrix construction is frozen in
-\texttt{tests/test\_p38\_true\_ch\_window.py} at $\nmax = 1, 2, 3$, and
-the coupling construction is recorded but not frozen. Whether the
+there. Two independent constructions agree, both frozen in
+\texttt{tests/test\_p38\_true\_ch\_window.py}:\ Route~A builds the
+multipliers by Clebsch--Gordan coupling and $D = 2\sigma\cdot J_R + 3/2$
+as a matrix (frozen at $\nmax = 1, 2, 3$);\ Route~B samples the
+Wigner-$D$ matrix coefficients with no Clebsch--Gordan code (frozen at
+$\nmax = 1, 2$, where the two routes are asserted to agree band by
+band). Whether the
 Gromov--Hausdorff convergence can be proved in this seminorm directly
 is \textbf{[OPEN]}.
 \emph{On the doubled Fock spin-orbital model} used by the code and by
@@ -773,7 +777,7 @@ $\sthree$ the label $\mathrm{diag}(+1,-1)$ is $\operatorname{sign}(D)$, which
 \emph{commutes} with $D$ and is therefore not a $\mathbb{Z}_2$ grading.
 Paper~32 already carries this reading (``KO-3 is the label of the odd
 continuum GV factor;\ $\sthree$ carries no chirality'') from the 2026-09-02
-adjudication;\ that sweep did not reach this paper.  The unitary real
+adjudication;\ that sweep did not reach this paper.  The antiunitary real
 structure $J$ given by charge conjugation and the Lipschitz seminorm enter as
 expected (on the truncations $J$ keeps its continuum signs but the
 order-zero and order-one conditions do not survive;\ see
@@ -841,7 +845,8 @@ Proposition~\ref{prop:kernel_condition} are statements about it, and
 Theorem~\ref{thm:main_unconditional} is unaffected by the model.
 \textbf{[MEASURED]} \emph{Real structure on the true window}
 (2026-09-28;\ \texttt{tests/test\_true\_window\_real\_structure.py}, two
-independent constructions agreeing pair by pair to $10^{-10}$).  In the
+independent constructions agreeing pair by pair to $10^{-10}$ at
+$\nmax = 1, 2$).  In the
 left-invariant frame, spinors $L^2(\SU(2)) \otimes \mathbb{C}^2$ with
 basis $e^j_{mm's} = \sqrt{2j+1}\,D^j_{mm'} \otimes e_s$ and
 $\DCH = 2\sigma\cdot J_R + \tfrac32$, the charge conjugation
@@ -849,11 +854,14 @@ $J\psi = (i\sigma_y)\overline{\psi}$ acts as $e^j_{mm's} \mapsto
 (-1)^{m-m'}(i\sigma_y)_{s's}\,e^j_{-m,-m',s'}$ composed with complex
 conjugation.  It commutes with $\DCH$, so it preserves
 $\Hilb_{\nmax}$, and there $J^2 = -1$, $J\DCH = +\DCH J$ (the KO-$3$
-signs) and $J\Op_{\nmax}J^{-1} = \Op_{\nmax}$ hold exactly at
-$\nmax \le 4$.  The truncation is \emph{odd}, like the continuum:\ the
-commutant of $\Op_{\nmax}$ is the scalars at $\nmax \le 3$ (its unital
-algebra is all of $B(\Hilb_{\nmax})$), so no $\mathbb{Z}_2$-grading
-exists;\ the even grading of Paper~32's chirality-doubled model is a
+signs) and $J\Op_{\nmax}J^{-1} = \Op_{\nmax}$ hold exactly (test-pinned at
+$\nmax \le 4$).  The truncation is \emph{odd},
+like the continuum:\ the commutant of $\Op_{\nmax}$ is the scalars at
+$\nmax \le 3$ (test-pinned;\ at $\nmax = 1, 2$ two further routes in
+the same file --- a sampled-function construction, whose generated
+unital algebra is all of $B(\Hilb_{\nmax})$, and an independent
+polynomial construction on $\mathbb{R}^4$ --- corroborate it),
+so no $\mathbb{Z}_2$-grading exists;\ the even grading of Paper~32's chirality-doubled model is a
 property of that model.  The signs are forced:\ the antiunitaries intertwining
 $\DCH$ and the isometry generators are one phase per irreducible block,
 all with $J^2 = -1$, and none anticommutes with $\DCH$.  The order-zero
@@ -1767,23 +1775,32 @@ framework~\cite{marcolli_vs2014}, with the
 Perez-Sanchez~\cite{perez_sanchez2025} continuum-limit
 correction, builds finite spectral triples from algebra-valued data on
 graphs;
-\textbf{[INTERNAL THEOREM]} the present convergence result identifies
-one such construction --- the
-Connes--van~Suijlekom truncation of $\Tcal_{\sthree}$ --- as
-metric-asymptotically the round-$\sthree$ Camporesi--Higuchi
-geometry. This anchors the gauge-network framework to a continuum
-geometry whose Dirac spectrum is independently known and whose
-spectral-action expansion is computable.
+\textbf{[INTERNAL THEOREM]} the present convergence result concerns
+the Connes--van~Suijlekom operator-system truncation of
+$\Tcal_{\sthree}$ on the true Camporesi--Higuchi window, which it
+identifies as metric-asymptotically the round-$\sthree$
+Camporesi--Higuchi geometry. That truncation is \emph{not} the diagonal
+(gauge-network) representative $\mathbb{C}^{V_{\mathrm{Fock}}}$ of
+Paper~32, which is not the object that converges (Paper~32, scope
+clause of its GeoVac-triple theorem);\ the result therefore does not
+anchor the gauge-network construction itself. It supplies a continuum
+target --- a geometry whose Dirac spectrum is independently known and
+whose spectral-action expansion is computable --- against which a
+gauge-network construction on $\sthree$ can be compared;\ whether any
+such construction converges to it is \textbf{[OPEN]}.
 
 The natural next question --- whether the almost-commutative extension
 $\Tcal_{\sthree} \otimes \Tcal_F$ for a finite spectral triple
 $\Tcal_F$ admits an analogous convergence statement --- is open.
-\textbf{[MEASURED]} Inner-fluctuation analysis of the truncated AC
-extension at finite
-$\nmax$ has been carried out in supporting work by the present
-author and reproduces the expected gauge content under the
-Marcolli--van~Suijlekom mechanism (\texttt{tests/test\_almost\_commutative.py},
-Sprint H1; Paper~32 \S\,Sprint H1), but the present paper restricts
+\textbf{[OBSERVATION]} Inner-fluctuation analysis of the truncated AC
+extension at finite $\nmax$ has been carried out in supporting work by
+the present author on the chirality-doubled Fock model of the operator
+system (not the true window);\ the nonzero gauge-piece norms are
+measured, and the gauge piece is read as the expected $U(1)$ and
+$\mathrm{SU}(2)$ content under the Marcolli--van~Suijlekom mechanism,
+but an operator-level identification with the gauge-network link
+variables is not established (\texttt{tests/test\_almost\_commutative.py},
+Sprint H1; Paper~32 \S\,Sprint H1), and the present paper restricts
 attention to the geometric (single-factor) state-space GH statement.
 
 \subsection{Obstruction to a Riemannian--Hardy tensor product}

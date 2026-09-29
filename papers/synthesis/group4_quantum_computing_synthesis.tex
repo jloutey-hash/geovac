@@ -350,9 +350,16 @@ the Pauli-filling count
 \mu_{\mathrm{free}} = \nu_{\min}(\nu_{\min} + 3N - 2)/2,
 \end{equation}
 where $E(m)$ is the sum of the $m$ lowest one-particle polynomial
-degrees, degree $d$ holding $(d+1)(d+2)/2$ functions (Paper~16, verified
-by two independent routes, \texttt{tests/test\_paper16\_nu\_min.py}).  It
-equals $N-2$ only for the lowest spin with $N \le 8$;\ the Ne singlet has
+degrees, degree $d$ holding $(d+1)(d+2)/2$ functions (Paper~16
+Theorem~2, proved for all $N$ and $S$ by Schur--Weyl duality and
+corroborated by two independent computational routes,
+\texttt{tests/test\_paper16\_nu\_min.py};\ the minimal-quanta statement
+for non-interacting particles is prior art, Theorem~1 of Rittenhouse,
+Cavagnero, von Stecher and Greene 2006, and Paper~16's contribution is
+the spin-resolved $S_N$ formulation, its proof and the atomic
+tabulation).  It equals $N-2$ exactly when
+$1 \le n_\downarrow \le n_\uparrow \le 4$ (at lowest spin,
+$2 \le N \le 8$;\ also, e.g., carbon's ${}^3P$);\ the Ne singlet has
 $\nu_{\min} = 10$, and the fully polarized state is spatially
 antisymmetric with a large $\nu_{\min}$.  An earlier version of this
 paragraph stated a universal $\nu = N-2$ and $\mu_{\mathrm{free}} =

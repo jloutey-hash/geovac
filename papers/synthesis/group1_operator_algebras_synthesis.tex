@@ -658,10 +658,14 @@ dual-Coxeter normalisation and equal to it on the unit $\sthree$, so
 the factor $2$ is the metric scale rather than a signature of the
 group (Paper~38, Remark ``Connection to the circle Fej\'er estimate'';
 re-priced 2026-09-03).
-The expected one-log slowdown of the non-abelian SU(2) rate compared
-with the Leimbach--van~Suijlekom torus rate $O(1/\nmax)$
-\cite{leimbach_vs2024} is precisely the $\log n$ factor in
-\eqref{eq:gamma_asymptote}.
+The $\log n$ factor in \eqref{eq:gamma_asymptote} is not a
+non-abelian slowdown:\ it is already present in the circle Fej\'er
+kernel (Paper~38;\ Paper~40).  Leimbach--van~Suijlekom
+\cite{leimbach_vs2024} prove Gromov--Hausdorff convergence of spectral
+truncations for tori without stating an explicit rate, so there is no
+published torus rate to compare against (an earlier version of this
+synthesis attributed an $O(1/\nmax)$ torus rate to them;\ withdrawn
+2026-09-28).
 
 \subsection{Lemma L3: Lipschitz comparison with $C_{3} = 1$}
 
@@ -1009,8 +1013,9 @@ At every tested $(\nmax, \Nt) \in \{1, 2, 3\} \times \{1, 11, 21\}$,
 the Krein-level analogues of \eqref{eq:k_alpha} and
 \eqref{eq:bw_alpha_gamma_conjugacy} hold bit-exact:
 \begin{itemize}\setlength\itemsep{0pt}
-\item[(i)] The geometric Lorentzian modular Hamiltonian
-$K_{L}^{\alpha,W} = J_{\mathrm{polar}}|_{W_{L}}$ has integer
+\item[(i)] The posited Lorentzian wedge generator
+$K_{L}^{\alpha,W} = J_{\mathrm{polar}}|_{W_{L}}$ (its
+Bisognano--Wichmann identification is open, Paper~42 O0) has integer
 spectrum on the Krein hemispheric wedge.
 \item[(ii)] The Krein-Tomita modular operator $\Delta_{L}$ admits a
 polar decomposition $S = J_{L,\mathrm{TT}} \cdot \Delta_{L}^{1/2}$;
@@ -1018,7 +1023,8 @@ the Tomita modular Hamiltonian $K_{L}^{\mathrm{TT}}$ has integer
 spectrum.
 \item[(iii)] $\sigma_{2\pi}^{L,\alpha}(O) = O$ and
 $\sigma_{2\pi}^{L,\mathrm{TT}}(a) = a$ bit-exact, with cross-witness
-collapse residual zero.
+collapse residual zero by construction (the witnesses share one
+generator, differing only in $\kappa_g$, which cancels).
 \item[(iv)] At $\Nt = 1$, the Lorentzian construction reduces to the
 Riemannian one of Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma}
 bit-identically.
@@ -1084,8 +1090,12 @@ D(n) = \frac{n(n+1)(n+2)(2n+1)(2n+3)}{20}.
 \end{equation}
 \end{corollary}
 
-The closed form \eqref{eq:hs_closed_form} is PSLQ-verified at
-$100$ digits with coefficient ceiling $10^{6}$ at $18$ panel cells.
+The closed form \eqref{eq:hs_closed_form} was identified by PSLQ at
+$100$ digits (coefficient ceiling $10^{6}$) at $\nmax = 1, \ldots, 6$ in
+the original measurement;\ that PSLQ step is not in the regression
+suite.  The backing test recomputes $S$ and $D$ from the live wedge
+operators at $\nmax = 1, \ldots, 4$ and checks the orthogonality on 7
+cells (Paper~42 Corollary~11.15).
 The $1/\pi^{2}$ prefactor on $\|H_{\mathrm{local}}\|^{2}$ enters
 through $H_{\mathrm{local}} = \kappa_g K_{\alpha}^{W}/(2\pi)$, i.e.\
 through the posited $\beta = 2\pi/\kappa_g$ --- the continuum KMS period
@@ -1105,8 +1115,8 @@ and a chirality-even but sign-paired spatial factor, so both HS inner
 products vanish.  The formal proof is Paper~42's
 Theorem~11.14 (\S\ref{sec:closures_pythagorean}
 below);\ it is $\beta$-independent, so the $1/\pi^{2}$ plays no role in
-it.  The PSLQ-verified closed form \eqref{eq:hs_closed_form} is
-empirically sharp at $100$ digits and $18$ panel cells.
+it.  The closed form \eqref{eq:hs_closed_form} is [MEASURED]:\
+PSLQ-identified at $\nmax \le 6$ and test-recomputed at $\nmax \le 4$.
 
 % =====================================================================
 \section{Lorentzian propinquity}
@@ -1263,17 +1273,18 @@ restricted-seminorm check of Theorem~\ref{thm:p45_main}.
 Theorem~\ref{thm:p45_main} closes the natural device;\ the
 Lorentzian convergence question itself remains open \emph{at the
 continuum / non-compact level}.  The \emph{finite-cutoff} metric
-question is now understood structurally (Paper~45~\S\,open~Q1,
+question has a structural argument (Paper~45~\S\,open~Q1,
 2026-06;\ re-tiered 2026-09-28):\ every finite-cutoff generator, posited
 or derived, generates a flow with compact closure, never a non-compact
-boost.  A compact flow carries only a Euclidean (forward-triangle)
-structure --- which is why the forward chain inequality is the only
-universal direction and every Lipschitz / boost seminorm is
-signature-blind --- so the finite-cutoff quantum metric is Euclidean,
-unconditionally.  For Paper~42's \emph{posited} generator the spectrum is
+boost [SYMBOLIC].  That a compact flow carries only a Euclidean
+(forward-triangle) structure --- which is why the forward chain
+inequality is the only universal direction and every Lipschitz / boost
+seminorm is signature-blind --- is [ARGUED], so the finite-cutoff
+quantum metric is Euclidean independently of O0 but on an argued, not
+proved, step.  For Paper~42's \emph{posited} generator the spectrum is
 integer ($e^{2\pi i K} = I$), so its flow is a $2\pi$-periodic circle;\
-reading that circle as the KMS circle of the truncated
-Bisognano--Wichmann boost, and the Lorentzian signature as its Wick
+reading that circle as the KMS circle of the Bisognano--Wichmann boost at
+finite cutoff, and the Lorentzian signature as its Wick
 rotation $t \to it$ (a convention rather than a finite-cutoff metric), is
 conditional on Paper~42's open O0.  The
 genuine reverse-triangle Lorentzian signature requires the non-compact
@@ -1561,7 +1572,9 @@ result.
 \label{sec:closures_pythagorean}
 
 The former Paper~43 (open question O4) named a formal proof of the diagonal/off-diagonal
-subspace-decomposition mechanism behind the L2-F.1 (2026-05-17)
+subspace-decomposition mechanism (a mechanism since withdrawn:\ the
+spatial wedge Dirac is chirality-diagonal, and the proof is a
+chirality-parity identity) behind the L2-F.1 (2026-05-17)
 empirical observation $\langle H_{\mathrm{local}}, \DL^{W}
 \rangle_{\mathrm{HS}} = 0$ as a follow-on.  The formal proof landed on
 2026-05-23 via a $\Z_{2}$ wedge-chirality parity argument and is now
@@ -1573,7 +1586,7 @@ Papers~42/44~\cite{paper42,paper44}:\
 $\gamma^{5}$ restricted to the wedge) is a unitary self-adjoint
 involution;\
 (I2) $[\Pi_{W}, H_{\mathrm{local}}] = 0$ (even parity of the
-geometric BW-$\alpha$ generator $K_{\alpha}^{W} = J_{\mathrm{polar}}^{W}$
+posited BW-$\alpha$ generator $K_{\alpha}^{W} = J_{\mathrm{polar}}^{W}$
 under wedge chirality);\
 (I3) the wedge-restricted Lorentzian Dirac $\DL^{W}$ has \emph{mixed}
 parity --- its temporal factor is $\Pi_{W}$-\emph{odd}
@@ -1592,8 +1605,8 @@ $\Tr(A^{\dagger} B) = \Tr(A^{\dagger} \cdot (-B)) = -\Tr(A^{\dagger} B)$
 $\chi$-independent and $B = \Pi|B|$ even and sign-paired,
 $\Tr(A^{\dagger} B)$ cancels pairwise across the $\chi = \pm1$ partners
 (this kills the spatial factor).  The bit-exact L2-F.1 numerical panel
-at 18 cells is empirical corroboration of the now-algebraic identity at
-machine precision.  (An earlier one-line ``$\DL^{W}$ is $\Pi_{W}$-odd''
+and the 7-cell regression test are empirical corroboration of the
+now-algebraic identity at machine precision.  (An earlier one-line ``$\DL^{W}$ is $\Pi_{W}$-odd''
 statement was corrected to this mixed-parity form, 2026-06-23, after the
 chirality-pairing test showed $\DGV^{W}$ is chirality-diagonal hence
 $\Pi_{W}$-even.)
@@ -2106,7 +2119,7 @@ F.~Latr\'emoli\`ere,
 \bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
 M.~Leimbach and W.~D.~van~Suijlekom,
 \newblock \emph{Gromov--Hausdorff convergence of spectral
-truncations of the torus},
+truncations for tori},
 \newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
 
 \bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}

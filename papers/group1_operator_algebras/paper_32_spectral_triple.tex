@@ -109,7 +109,9 @@ $\mathrm{Spin}(3) = \mathrm{SU}(2)$) and $J_{\mathrm{GV}} D_{\mathrm{GV}}
 = +D_{\mathrm{GV}} J_{\mathrm{GV}}$, the signs
 $(\epsilon, \epsilon') = (-1, +1)$ of the continuum $S^3$ factor
 ($\mathrm{KO}$-dimension~$3$ mod~$8$~\cite{connes1995}).  The continuum
-factor is odd; the \emph{finite} truncation is even, via the
+factor is odd, and so is the true Camporesi--Higuchi window that
+converges (the commutant of its operator system is the scalars); only
+the chirality-doubled Fock/Weyl \emph{model} truncation is even, via the
 chirality-doubling grading $\gamma_{\mathrm{GV}} = \sigma_x \otimes
 \mathbb{1}$, with sign triple $(-,+,+)$ and no $\mathrm{KO}$ label
 attached at finite cutoff.  \textbf{[MEASURED]} On the Fock/Weyl
@@ -207,9 +209,10 @@ metric, object, since its diagonal $D_{\mathrm{GV}}$ commutes with the
 diagonal algebra, the metric role belonging to the operator-system
 representative on the true Camporesi--Higuchi window (Paper~38);
 audit the standard Connes axioms one by one, separating
-what holds at finite cutoff (the three $J$-relations; an even
-truncation) from what holds only in the continuum limit (oddness;
-order zero and order one, which fail at finite cutoff on the Fock/Weyl
+what holds at finite cutoff (the three $J$-relations; oddness on
+the true window, which the chirality-doubled model replaces by an even
+grading) from what holds only in the continuum limit (order zero and
+order one, which fail at finite cutoff on the Fock/Weyl
 model of the operator system and on the true window) (Sec.~\ref{sec:axiom_audit}); read
 Papers~25, 28, 30, and~31 as structural sub-sectors of the resulting
 structure (Sec.~\ref{sec:subsectors}); read the Paper~2 combination
@@ -418,7 +421,7 @@ and negative Dirac levels, and reaches only the bands $N \le 2n_{\max}-1$;
 its quantities are model quantities, not window quantities (Paper~38,
 \S\,Truncations).  On the true window the Dirac-commutator kernel is
 exactly the scalars at $n_{\max} \le 3$ (Paper~38,
-Remark~rem:dirac\_degeneracy), and the real-structure audit is repeated
+remark on the Dirac-commutator seminorm), and the real-structure audit is repeated
 on it in item~6 of Sec.~\ref{sec:axiom_audit};\ its propagation number
 is not measured.
 \end{remark}
@@ -740,7 +743,7 @@ unbounded.  This is the spinor analog of the round-3
 spinor \emph{model}, not of the truncated Camporesi--Higuchi triple:\ on
 the true window (complete Dirac eigenspaces) the Dirac-commutator
 kernel is exactly the scalars at $n_{\max} \le 3$ (Paper~38,
-Remark~rem:dirac\_degeneracy; \texttt{tests/test\_p38\_true\_ch\_window.py}).
+remark on the Dirac-commutator seminorm; \texttt{tests/test\_p38\_true\_ch\_window.py}).
 An earlier version called the $n$-degeneracy ``structural''
 (withdrawn 2026-09-28).
 \textbf{(ii)} \emph{Under a CH+offdiag perturbation that lifts
@@ -985,12 +988,12 @@ $\mathcal{T}_{n_{\max}} = (\mathcal{O}^{\mathrm{CH}}_{n_{\max}}, \mathcal{H}_{n_
 Theorem~\ref{thm:gh_convergence} (van~Suijlekom's state-space
 Gromov--Hausdorff distance, translation-seminorm metrization, limit
 identified up to isometry); neither the Fock/Weyl model
-$\mathcal{O}_{n_{\max}}$ of the axiom audit nor the diagonal representative
-$\mathcal{A}_{\mathrm{GV}} = \mathbb{C}^{V_{\mathrm{Fock}}}$ used for the
-axiom audit above is the gauge-network convention of
-Remark~\ref{rem:operator_system} and is \emph{not} the object that
-converges (Corollary~\ref{cor:structural_specificity} places it on the
-comparator side of the Connes--van~Suijlekom distinction; scope clause
+$\mathcal{O}_{n_{\max}}$ of the axiom audit nor the diagonal
+(gauge-network) representative
+$\mathcal{A}_{\mathrm{GV}} = \mathbb{C}^{V_{\mathrm{Fock}}}$ of
+Remark~\ref{rem:operator_system}, used for the axiom audit above, is
+the object that converges (Corollary~\ref{cor:structural_specificity}
+places the diagonal representative on the comparator side of the Connes--van~Suijlekom distinction; scope clause
 added 2026-09-03).
 \end{theorem}
 
@@ -1220,7 +1223,7 @@ pointwise complex conjugation of the spinor
 ($\overline{D^j_{mm'}} = (-1)^{m-m'} D^j_{-m,-m'}$) twisted by
 $i\sigma_y$, which reverses $J_R$ and $\sigma$ and so fixes
 $\sigma\cdot J_R$.  It commutes with $D$, hence preserves the window,
-and $J^2 = -\mathbb{1}$, $JD = +DJ$ hold exactly at $n_{\max} = 1$--$4$.
+and $J^2 = -\mathbb{1}$, $JD = +DJ$ hold exactly (test-pinned at $n_{\max} = 1$--$4$).
 The signs are not a phase convention:\ the antiunitaries intertwining
 $D$ and the isometry generators ($J_L$, $J_R + \sigma/2$) form a
 family of one phase per irreducible block (dimension $2n_{\max}$),
@@ -1267,8 +1270,15 @@ a boundary term of the compression --- full operator norm, shrinking
 weight --- not a bulk non-commutativity.  Two independent constructions
 (Clebsch--Gordan multipliers with the closed-form $J$;\ sampled Wigner-$D$
 functions with $J$ obtained from pointwise conjugation of the sampled
-basis) agree pair by pair to $10^{-10}$ at $n_{\max} = 1$--$3$
-(\texttt{tests/test\_true\_window\_real\_structure.py}).
+basis) agree pair by pair to $10^{-10}$ at $n_{\max} = 1, 2$
+(\texttt{tests/test\_true\_window\_real\_structure.py}).  Test-pinned
+there:\ the $J$-relations (with $\dim\mathcal{O} = 5, 30, 91, 204$) at
+$n_{\max} = 1$--$4$, the order tables at $n_{\max} = 1$--$3$,
+the degree-1 residuals at $n_{\max} = 1$--$4$, and the boundary strip at
+$n_{\max} = 2, 3$;\ the $n_{\max} = 4$ order-zero/one table row,
+the degree-1 values at $n_{\max} = 5, 6$, the Hilbert--Schmidt weights
+and the strip check at $n_{\max} = 4, 5$ are measured in the audit
+driver, not test-pinned.
 \end{enumerate}
 
 \paragraph{Reading of the order-condition failures.}  The
@@ -1312,8 +1322,8 @@ The Sprint WH1-Connes Step~2 audit closes this question
 Dirac}: $J^2 = -\mathbb{1}$, $JD = +DJ$, and
 $J \mathcal{O} J^{-1} = \mathcal{O}$ all hold with bit-exact zero
 residual at every finite $n_{\max} \in \{1, 2, 3\}$ on both the Weyl
-and full-Dirac (chirality-doubled) model sectors, and at
-$n_{\max} = 1$--$4$ on the true Camporesi--Higuchi window, where the
+and full-Dirac (chirality-doubled) model sectors, and on the true
+Camporesi--Higuchi window (test-pinned at $n_{\max} = 1$--$4$), where the
 signs are forced by equivariance (item~6).  It does \emph{not} close it
 for the order-zero and order-one conditions (involving the
 abelian-multiplication identity that defines the classical limit of the
@@ -1376,29 +1386,35 @@ $n_{\max} \le 3$ together with $J\gamma = +\gamma J$
 which also contrasts the diagonal $\sigma_z \otimes \mathbb{1}$
 candidate, which commutes with $D_{\mathrm{GV}}$ instead of
 anticommuting).  \textbf{[SYMBOLIC PROOF + MEASURED]}
-(c)~\textbf{[MEASURED]} Two independent routes at $n_{\max} = 1, 2, 3$
-($\dim \mathcal{H} = 4, 16, 40$):\ the commutant of
+(c)~\textbf{[MEASURED]} At $n_{\max} = 1, 2, 3$
+($\dim \mathcal{H} = 4, 16, 40$) the commutant of
 $\mathcal{O}^{\mathrm{CH}}_{n_{\max}}$ (the null space of
 $X \mapsto [X, a]$ over a basis of $\mathcal{O}^{\mathrm{CH}}$) has
-dimension $1$, and the unital algebra generated by the sampled-function
-construction of $\mathcal{O}^{\mathrm{CH}}$ is all of
-$B(\mathcal{H})$ (dimension $16, 256, 1600$), so by Burnside's theorem
-its commutant is the scalars.  A scalar cannot anticommute with the
-invertible $D$, so the grading space is $\{0\}$
-(\texttt{tests/test\_true\_window\_real\_structure.py}).  On the true
+dimension $1$ (Peter--Weyl construction,
+\texttt{tests/test\_true\_window\_real\_structure.py}).  Two further
+routes in the same test file corroborate it at $n_{\max} = 1, 2$:\ the
+sampled-function construction of $\mathcal{O}^{\mathrm{CH}}$, whose
+commutant is again the scalars and whose generated unital algebra is
+all of $B(\mathcal{H})$ (dimension $16, 256$, so by Burnside's theorem
+its commutant is the scalars;\ dimension $1600$ at $n_{\max} = 3$ is
+computed outside the test), and an independent polynomial construction
+on $S^3 \subset \mathbb{R}^4$ (no Wigner-$D$, Clebsch--Gordan or
+sampling code).  At $n_{\max} = 3$ the oddness rests on the Peter--Weyl
+route.  A scalar cannot anticommute with
+the invertible $D$, so the grading space is $\{0\}$.  On the true
 window only the pair $(\varepsilon, \varepsilon') = (-,+)$ is defined,
 and it is forced by equivariance (audit item~6).
 \end{proof}
 
-The finite triple therefore carries the sign triple
-$(\varepsilon, \varepsilon', \varepsilon'') = (-, +, +)$, and, per the
-rule stated in \S\ref{sec:higgs_h1}, \emph{no} KO-dimension label is
-attached at finite cutoff:\ the continuum factor is KO-3 (odd), the
-finite grading reads as the KO-4 column, and any single label at
-finite cutoff is a convention.  The grading is a doubling artefact of
-the finite chirality-labelled basis, not a chirality of $S^3$; it is
-absent in the continuum limit, where the odd description is the
-correct one.  Odd-dimensional spectral triples construct their
+The chirality-doubled model triple of~(b) therefore carries the sign
+triple $(\varepsilon, \varepsilon', \varepsilon'') = (-, +, +)$, and,
+per the rule stated in \S\ref{sec:higgs_h1}, \emph{no} KO-dimension
+label is attached at finite cutoff:\ the continuum factor is KO-3
+(odd), the model's grading reads as the KO-4 column, and any single
+label at finite cutoff is a convention.  The grading is a doubling
+artefact of the chirality-labelled model basis, not a chirality of
+$S^3$; it is absent on the true window~(c) and in the continuum limit,
+where the odd description is the correct one.  Odd-dimensional spectral triples construct their
 spectral action from $|D|$ rather than from $D^2$ projected onto
 chirality eigenspaces, which is the structure that Paper~28's
 QED-on-$S^3$ computations use.
@@ -1422,7 +1438,7 @@ $JD = +DJ$ (truthful CH)      & Holds exactly $\forall n_{\max}$ & Holds \\
 $J \mathcal{O} J^{-1} = \mathcal{O}$  & Holds exactly $\forall n_{\max}$ & Holds \\
 Order zero, $\mathcal{O}_{n_{\max}}$ (model) & Fails, $n_{\max}\ge 2$ (grows) & Holds \\
 Order one, $\mathcal{O}_{n_{\max}}$ (model)  & Fails, $n_{\max}\ge 2$ & Holds \\
-$J^2$, $JD$, $J\mathcal{O}J^{-1}$ (true window) & Hold exactly, $n_{\max} \le 4$ & Holds \\
+$J^2$, $JD$, $J\mathcal{O}J^{-1}$ (true window) & Hold exactly, $n_{\max} \le 4$ (pinned) & Holds \\
 Order zero (true window) & Fails, $n_{\max}\ge 1$ (grows; boundary term) & Holds \\
 Order one (true window)  & Fails, $n_{\max}\ge 1$ (grows; boundary term) & Holds \\
 $\mathbb{Z}_2$-grading (model) & Even ($\sigma_x \otimes \mathbb{1}$) & Absent (odd) \\
@@ -1447,9 +1463,10 @@ Proposition~\ref{prop:reality}); \textbf{[MEASURED]} order zero and
 order one on the model fail with residuals that grow (order zero over
 $n_{\max} = 2, 3, 4$, order one over $n_{\max} = 2, 3$;\ mechanism
 open), and on the true window they fail from $n_{\max} = 1$ and grow,
-as a boundary term of the compression;\ the finite truncation is
-even (Proposition~\ref{prop:odd}(b)), with sign triple $(-, +, +)$ and
-no KO label at finite cutoff.  A finite-cutoff Krein-carrier sign
+as a boundary term of the compression;\ the chirality-doubled model
+truncation is even (Proposition~\ref{prop:odd}(b)), with sign triple
+$(-, +, +)$ and no KO label at finite cutoff, while the true window is
+odd (Proposition~\ref{prop:odd}(c)).  A finite-cutoff Krein-carrier sign
 audit at BBB $(m, n) = (4, 6)$ (signature-blind; the Lorentzian
 programme is descoped, Paper~45) is recorded in
 Table~\ref{tab:axiom_audit_lorentzian} below.}
@@ -1578,7 +1595,7 @@ The state spaces of the true-window truncations
 state-space Gromov--Hausdorff distance under the translation seminorm,
 to the state space $(P(S^3), W_d)$ of the canonical spectral triple of
 the unit Riemannian spin three-sphere with the Camporesi--Higuchi Dirac
-operator, up to isometry (Paper~38, Proposition~prop:limit\_identification).
+operator, up to isometry (Paper~38, limit-identification proposition).
 That target triple is real, odd, and of $\mathrm{KO}$-dimension~$3$;\
 these are classical properties of the target, not outputs of the
 convergence.
@@ -1587,7 +1604,9 @@ convergence.
 \textbf{[INTERNAL THEOREM]} This is a structural theorem; no fitting
 parameters or empirical
 inputs.  It is a statement about the continuum limit only:\ at finite
-cutoff the truncation is even (Proposition~\ref{prop:odd}(b)) and the
+cutoff the true-window truncation is odd like its limit
+(Proposition~\ref{prop:odd}(c)), only the chirality-doubled model being
+even (Proposition~\ref{prop:odd}(b)), and the
 Fock/Weyl model of the operator system fails order zero and order one,
 as does the true window, by a boundary term of the compression
 (Table~\ref{tab:axiom_audit}, audit items~5--6).  The audit in
@@ -3863,7 +3882,10 @@ mass-concentration moment $\gamma_{n_{\max}} \to 0$ (closed-form
 algebraic values $\gamma_2, \gamma_3, \gamma_4$, monotone decrease),
 Plancherel symbol $\hat{K}_{n_{\max}}(N) = N/Z_{n_{\max}}$ on the
 Fock-shell index, and central-multiplier cb-norm
-$\|T_K\|_{\mathrm{cb}} = 2/(n_{\max}+1)$ on the central subalgebra
+$\|T_K\|_{\mathrm{cb}} = 1$ on the central subalgebra (the smoothing map
+is unital completely positive;\ the value $2/(n_{\max}+1)$ recorded by
+the original sprint is the mass-distribution maximum, not a cb-norm,
+Remark~\ref{rem:gh_status_caveat}(i);\ corrected 2026-09-28)
 (Bo{\.z}ejko--Fendler / Pisier 2001 Ch.~8 transcription).
 
 \item[\textbf{L3}] (Paper~38, Lemma~L3): \textbf{[INTERNAL THEOREM]}
@@ -3944,7 +3966,7 @@ $\gamma$ by construction), integrating with the L1${}'$--L4 modules verbatim.
 
 \begin{remark}[Status and named gaps (2026-06-09)]
 \label{rem:gh_status_caveat}
-Three gaps in the five-lemma proof chain behind
+Four gaps in the five-lemma proof chain behind
 Theorem~\ref{thm:gh_convergence} are named here.
 (i)~The L2 cb-norm statement conflated the kernel's Plancherel
 \emph{mass distribution} with its convolution-\emph{multiplier symbol}:
@@ -3970,7 +3992,7 @@ $1/14$, $1/55$ for the engineered offdiag Dirac, are counts on the
 \emph{doubled Fock model} of Remark~\ref{rem:operator_system}, not on the
 truncated Camporesi--Higuchi triple:\ on the true window the
 Dirac-commutator kernel is exactly the scalars at $n_{\max} \le 3$
-(\textbf{[MEASURED]}, Paper~38, Remark~rem:dirac\_degeneracy;\
+(\textbf{[MEASURED]}, Paper~38, remark on the Dirac-commutator seminorm;\
 \texttt{tests/test\_p38\_true\_ch\_window.py}).  An earlier version of
 this item read the model counts as a failure of the Dirac seminorm on
 the truncated triple (withdrawn 2026-09-28).  Items (ii) and (iii) are
@@ -3989,14 +4011,16 @@ Camporesi--Higuchi eigenspaces), and both almost-inverse defects are
 Fej\'er smoothings at the common moment $\gamma_{n_{\max}}$ --- no
 partial inverse or transference estimate remains.
 \textbf{[INTERNAL THEOREM]} The convergence
-theorem is unconditional in van~Suijlekom's state-space framework at
-rate $(4/\pi + o(1))\log n_{\max}/n_{\max}$ in the dual-Coxeter
-normalisation of $\gamma_{n_{\max}}$ ($2/\pi$ on the unit $S^3$).
+theorem is unconditional in van~Suijlekom's state-space framework,
+bounded by $\gamma_{n_{\max}} \to 0$;\ \textbf{[INTERNAL THEOREM +
+MEASURED]} its asymptotic rate is $(4/\pi + o(1))\log n_{\max}/n_{\max}$
+in the dual-Coxeter normalisation of $\gamma_{n_{\max}}$ ($2/\pi$ on
+the unit $S^3$), the tier Paper~38 gives the constant.
 \end{remark}
 
 \begin{remark}[Limit identification]
 \label{rem:gh_limit_id}
-\textbf{[INTERNAL THEOREM]} Paper~38 (Proposition~prop:limit\_identification)
+\textbf{[INTERNAL THEOREM]} Paper~38 (its limit-identification proposition)
 identifies the state-space limit, \emph{up to isometry}, as
 $(P(S^3), W_d)$:\ the unconditional theorem gives GH convergence of the
 true-window state spaces, metrized by the Monge--Kantorovich metric of
@@ -4057,7 +4081,7 @@ and the squared residual decomposes as a Pythagorean sum:
 \]
 with $S, D \in \mathbb{Q}[n_{\max}]$ given by cumulative wedge
 Casimir traces (Paper~42~\S 11.7,
-Cor.~cor:pythagorean\_orthogonality therein).  The sole
+Cor.~11.15 therein).  The sole
 transcendental in the residual is $1/\pi^2$ (corrected 2026-09-03 from
 ``$= 1/\mathrm{Vol}(S^1)^2$'', which is false arithmetic:\
 $\mathrm{Vol}(S^1) = 2\pi$, so that quantity is $1/(4\pi^2)$ --- the displayed
@@ -4084,25 +4108,28 @@ it as a fourth M1 instantiation and as a prediction of the engine
 (withdrawn 2026-09-28).
 
 The orthogonality holds for all six modular witnesses
-(Paper~42~\cite{paper42}~Cor.~cor:single\_construction;\
+(Paper~42~\cite{paper42}, the corollary on the single operator-system construction;\
 Paper~42~\S 11.7), via $\kappa_g$-linearity of $H_{\mathrm{local}}$
 and $\kappa_g$-independence of $D_W^L$ --- by construction, since the
-witnesses share one posited $K$.  The structural mechanism
-is the diagonal/off-diagonal subspace decomposition of
-$\mathcal{B}(\mathcal{H}_W)$:\ $H_{\mathrm{local}}$ is real and
-diagonal in the unfolded wedge spinor basis (eigenvalues
-$\mathrm{two\_m}_j$), $D_W^L$ is off-diagonal in the same basis
-(intertwines $\pm m_j$ chirality partners).  A formal proof of the
-subspace decomposition at general $(n_{\max}, N_t)$ is a named
-follow-on;\ the empirical verification across the 18-cell
-six-witness panel is strong evidence the decomposition is
-structural rather than coincidental.
+witnesses share one posited $K$.  The mechanism is a
+chirality-parity identity, proved in general (Paper~42, Thm.~11.14 and
+Cor.~11.15):\ in the unfolded wedge spinor basis $H_{\mathrm{local}}$
+is real, diagonal and independent of the chirality $\chi$ (eigenvalues
+$\mathrm{two\_m}_j$), while the wedge Dirac is chirality-diagonal with
+$\chi$-paired eigenvalues of opposite sign, so the pairs cancel in the
+trace.  (An earlier version described the wedge Dirac as off-diagonal
+in this basis and left the general proof as a named follow-on;\ both
+corrected 2026-09-28.)  The regression test
+(\texttt{tests/test\_paper43\_pythagorean\_hs\_orthogonality.py}) checks
+$7$ cells --- Riemannian $n_{\max} = 2, 3, 4$ and Lorentzian
+$(n_{\max}, N_t) = (2,1), (3,1), (2,3), (3,3)$ --- not the $18$ an
+earlier version cited.
 
 \emph{Cross-references.}\ Paper~42~\S 11.7
-Cor.~cor:pythagorean\_orthogonality (closed form and
-witness-universality);\ Paper~42~\S 8
-Rem.~rem:pythagorean\_underlies\_collapse (the
-six-witness-collapse statement at the inner-product level);\
+Cor.~11.15 (closed form and witness-universality);\ Paper~42~\S 8,
+the Hilbert--Schmidt orthogonality remark (which states that the
+orthogonality does \emph{not} underlie the six-witness agreement, which
+holds by construction);\
 Paper~24~\S 5.3 Coulomb/HO asymmetry (seven catalogued, six standing; the structural
 finding that the Pythagorean orthogonality is $S^3$-specific to
 the construction --- the $S^5$ Hardy sector has no clean analog,
@@ -4150,9 +4177,12 @@ $S(s \to \infty) = \log(n_{\mathrm{equator}})$ (cold, lowest shell
 only).  The BW canonical $s = 1$ sits between, closer to the cold
 limit.
 
-The slope $\approx 2$ equals $\dim(\partial W) = \dim S^2_{\mathrm{equator}}$
-(the dimension of the wedge boundary manifold), giving a
-Cardy--Calabrese-style log entropy along the $d = 2$ boundary.  This
+The slope $\approx 2$ is the exponent of the $n_{\max}(n_{\max}+1)$
+degeneracy of the lowest shell of the posited generator
+\textbf{[MEASURED]};\ an earlier reading of it as
+$\dim(\partial W) = 2$ (a two-dimensional entangling surface) is
+withdrawn, since for a CFT$_3$ the entangling surface of a
+hemispherical cap is a circle (Paper~50, 2026-09-28).  This
 is structurally weaker than the QFT Bekenstein--Hawking area-law
 $S \sim A \cdot \Lambda^2 / 4$, which would scale as a power of the
 UV cutoff times the boundary dimension.
@@ -4574,16 +4604,18 @@ realized via $J$).  The 8 by 8 finite Dirac is $D_F =
 \mathrm{block\_diag}(M, \bar{M})$ where the matter-sector $M$ is the
 4 by 4 Yukawa-Dirac with off-diagonal $L \leftrightarrow R$ block
 $Y = \mathrm{diag}(y_\nu, y_e)$.  The combined Dirac is $D =
-D_{\mathrm{GV}} \otimes \mathbb{1}_F + \gamma_{\mathrm{GV}} \otimes
-D_F$ with $\gamma_{\mathrm{GV}} = \mathrm{sign}(D_{\mathrm{GV}})$
+D_{\mathrm{GV}} \otimes \mathbb{1}_F + s_{\mathrm{GV}} \otimes
+D_F$ with $s_{\mathrm{GV}} = \mathrm{sign}(D_{\mathrm{GV}})$
 (Track~2 closure):\ this commutes with $D_{\mathrm{GV}}$ on the
-truthful CH Dirac.  \textbf{[SYMBOLIC + MEASURED]} The combined real structure is $J = J_{\mathrm{GV}}
+truthful CH Dirac, and is \emph{not} the chirality-doubling grading
+$\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}$ of
+Proposition~\ref{prop:odd}(b) used below.  \textbf{[SYMBOLIC + MEASURED]} The combined real structure is $J = J_{\mathrm{GV}}
 \otimes J_F$ with $J_F$ swapping matter and antimatter via complex
 conjugation; matter-antimatter doubling makes $J_F^2 = +\mathbb{1}$
 and $J_F D_F = +D_F J_F$ (the KO-dim~6 signs of $\mathcal{A}_F$ in the
 Connes--Marcolli convention).  The signs of the combined $J$ follow
 factor by factor:\ $J^2 = J_{\mathrm{GV}}^2 \otimes J_F^2 =
--\mathbb{1}$, and since $\gamma_{\mathrm{GV}} =
+-\mathbb{1}$, and since $s_{\mathrm{GV}} =
 \mathrm{sign}(D_{\mathrm{GV}})$ is a function of $D_{\mathrm{GV}}$,
 $J D J^{-1} = D$, i.e.\ $J D = +D J$.  The combined sign pair
 $(\varepsilon, \varepsilon') = (-, +)$ is the sign pair of the GV factor,
@@ -4616,10 +4648,12 @@ $\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}$
 (\texttt{geovac/chirality\_grading.py}), extended as
 $\gamma_{\mathrm{GV}} \otimes \mathbb{1}_F$, squares to one,
 anticommutes with the combined $D$ and commutes with $J$ bit-exactly
-at $n_{\max} \le 3$, so the finite combined triple is \emph{even} with
+at $n_{\max} \le 3$, so the finite combined triple built on the
+chirality-doubled model is \emph{even} with
 $(\varepsilon, \varepsilon', \varepsilon'') = (-, +, +)$, the KO-4
 column, i.e.\ the sign triple of that column (measured 2026-09-02; pinned in the same test).  We therefore
-attach \emph{no} KO-dimension label to the finite truncation and
+attach \emph{no} KO-dimension label to the finite model truncation
+(the true window carries no grading, Proposition~\ref{prop:odd}(c)) and
 record the measured sign triple $(-, +, +)$ instead (PI direction,
 2026-09-02):\ the continuum factor is KO-3 and the finite grading reads
 as KO-4, so any single label at finite cutoff is a convention, not a
@@ -4636,7 +4670,7 @@ sectors.}  For $\omega = \sum_i a_i [D, b_i]$ with $a_i, b_i \in
 \omega = \underbrace{\sum_i a_i^{\mathrm{GV}} [D_{\mathrm{GV}},
 b_i^{\mathrm{GV}}] \otimes a_i^F b_i^F}_{\text{gauge piece}} +
 \underbrace{\sum_i a_i^{\mathrm{GV}} b_i^{\mathrm{GV}}
-\gamma_{\mathrm{GV}} \otimes a_i^F [D_F, b_i^F]}_{\text{Higgs
+s_{\mathrm{GV}} \otimes a_i^F [D_F, b_i^F]}_{\text{Higgs
 piece}}.
 \end{equation}
 
@@ -5208,11 +5242,12 @@ The product works as an involution; the \emph{difference} does not.
 $\gamma_5$ is a well-defined $\mathbb{Z}_2$ operator, but it is a
 \emph{grading of $D$} only for the production $\gamma_{\mathrm{GV}} =
 \sigma_x \otimes \mathbb{1}$ at vanishing Yukawa: with
-$\gamma_{\mathrm{GV}} = \mathrm{sign}(D_{\mathrm{GV}})$ one has
+$s_{\mathrm{GV}} = \mathrm{sign}(D_{\mathrm{GV}})$ in its place one has
 $\|\{\gamma_5, D\}\|_F = 17, 52, 110$ at $n_{\max} = 1, 2, 3$, and with
 the production grading $4.7, 9.3, 14.8$ at $Y \ne 0$ (two distinct
 operators carried the name $\gamma_{\mathrm{GV}}$ in this section;
-disambiguated 2026-09-03).  $\gamma_{\mathrm{GV}}$ and $\gamma_F$ do not
+disambiguated 2026-09-03, the sign operator renamed $s_{\mathrm{GV}}$ as
+in the Higgs section).  $\gamma_{\mathrm{GV}}$ and $\gamma_F$ do not
 identify across the tensor product.
 
 \paragraph{Verdict:\ NEGATIVE on $S^3$ alone.}  The two chirality
@@ -5425,7 +5460,7 @@ operator-system commutator with residual $0$ (\texttt{tests/test\_standard\_mode
 the gauge census still returns $\mathrm{U}(1) \times \mathrm{SU}(2)
 \times \mathrm{SU}(3)$ at $n_{\max} = 2$ (colour now read from the
 antiquark block); and the combined grading
-$\gamma_{\mathrm{GV}} \otimes \gamma_F$ built from $\gamma_{\mathrm{GV}} =
+$s_{\mathrm{GV}} \otimes \gamma_F$ built from $s_{\mathrm{GV}} =
 \mathrm{sign}(D_{\mathrm{GV}})$ does \emph{not} anticommute with $D$
 ($\|\{\gamma, D\}\|_F = 34, 104, 220$ at $n_{\max} = 1, 2, 3$), so the
 ``no finite-resolution degradation'' reading is withdrawn; with the
@@ -5505,8 +5540,8 @@ The almost-commutative factorization $D^2 = D_{\mathrm{GV}}^2 \otimes 1
 + 1 \otimes D_F^2$ (the cross term vanishes by chirality
 anticommutation \emph{for the graded product} $D = D_{\mathrm{GV}} \otimes
 1 + \gamma_{\mathrm{GV}} \otimes D_F$ with $\{\gamma_{\mathrm{GV}},
-D_{\mathrm{GV}}\} = 0$; for the module's $\gamma_{\mathrm{GV}} =
-\mathrm{sign}(D_{\mathrm{GV}})$ the cross term is $2|D_{\mathrm{GV}}|
+D_{\mathrm{GV}}\} = 0$; for the module's $s_{\mathrm{GV}} =
+\mathrm{sign}(D_{\mathrm{GV}})$ in its place the cross term is $2|D_{\mathrm{GV}}|
 \otimes D_F \ne 0$, norms $4.3, 13.2, 28.0$ at $n_{\max} = 1, 2, 3$;
 scoped 2026-09-03) factorizes the master Mellin engine into an
 \emph{outer} ring --- the M1/M2/M3 transcendentals of the GeoVac
@@ -7852,9 +7887,12 @@ $J\mathcal{O}J^{-1} = \mathcal{O}$ bit-exactly at every $n_{\max}$
 examined in the audit (\texttt{test\_real\_structure}), so for these
 three relations the finite-versus-limit question is closed in favour of
 finite-$n_{\max}$ exactness.  No KO-dimension label is attached at
-finite cutoff:\ the finite truncation is even
-(Proposition~\ref{prop:odd}(b)) with sign triple $(-, +, +)$, and the
-KO-3 label belongs to the continuum factor.  \textbf{[MEASURED]}
+finite cutoff:\ the chirality-doubled model truncation is even
+(Proposition~\ref{prop:odd}(b)) with sign triple $(-, +, +)$, the true
+window that converges is odd like the continuum
+(Proposition~\ref{prop:odd}(c)) with only the pair
+$(\varepsilon, \varepsilon') = (-, +)$ defined, and the KO-3 label
+belongs to the continuum factor.  \textbf{[MEASURED]}
 \textbf{[OPEN]} The order-zero and order-one conditions on the
 Fock/Weyl model of the operator-system representative fail at finite
 $n_{\max}$ with residuals that grow with the cutoff (order zero over
@@ -7868,7 +7906,7 @@ confined to the top Dirac levels (audit item~6,
 mechanism on the model, and the sense (if any) in which the continuum
 identities are recovered --- on the true window the norm residual does
 not decay, while its normalised Hilbert--Schmidt weight falls over
-$n_{\max} = 2$--$5$.
+$n_{\max} = 2$--$5$ (measured in the audit driver, not test-pinned).
 
 \paragraph{Q3.  KO-dimension and the four-way coincidence.}  \textbf{[OPEN]}  Working
 hypothesis WH4 asks: is the four-way $S^3$ coincidence (Sec.~\ref{sec:intro})
@@ -7937,7 +7975,8 @@ structurally distinct sectors of the same triple
 an observation.  \textbf{[OBSERVATION]} The Coulomb/HO asymmetry of Paper~31 is the
 statement that the GeoVac triple's continuum limit is one specific real
 odd $\mathrm{KO}$-dimension-3 triple, not a generic class
-(Observation~\ref{obs:pi_coulomb}); its finite truncation is even
+(Observation~\ref{obs:pi_coulomb}); its true-window truncation is odd
+like the limit, and only the chirality-doubled model truncation is even
 (Proposition~\ref{prop:odd}).
 
 Four things this paper did not do.  It did not derive $\alpha$;
