@@ -1536,10 +1536,11 @@ but places each term inside a named motivic home.
 
 \subsection{Canonical example 2:\ Paper 50 F-theorem coefficients}
 
-Paper~50~\cite{loutey_paper50} computes the boundary-CFT$_3$
-F-theorem coefficients on the truncated $\sthree$ spectral triple
-for the conformally-coupled scalar and the free Camporesi--Higuchi
-Dirac:
+Paper~50~\cite{loutey_paper50} re-derives, in closed Hurwitz form,
+the boundary-CFT$_3$ F-theorem coefficients of Klebanov--Pufu--Safdi
+from the full (untruncated) continuum $\sthree$ spectra of the
+conformally-coupled scalar and the free Camporesi--Higuchi Dirac (the
+finite cutoff never enters;\ these are continuum values):
 \begin{align}
 \label{eq:paper50_Fs}
 F_s &= \frac{\log 2}{8} - \frac{3\,\zeta(3)}{16\pi^2}, \\
@@ -1557,12 +1558,19 @@ between M1 and M3:
     and $1/\pi^2 \in M_1$ at Tate weight $-2$ depth $0$.  Combined
     Tate weight $+1$, matching $\log 2$.
 \end{itemize}
+\emph{Labelling note (2026-09-29).} Paper~50 now uses these labels,
+following Paper~18's period-ring stratification, after correcting an
+earlier M2 label for $\log 2$;\ in its Dirac computation $\log 2$ enters
+through the $2^{s}$ factor of the half-integer Hurwitz identity.
+
 The match in Tate weight between the two summands of $F_s$ and $F_D$
 is the internal consistency of a weight-$1$ period;\ if the cancellations
 required a weight mismatch, the F-theorem coefficient could not be
 single-valued in the cyclotomic-mixed-Tate framework.
 
-Paper~50 Theorem~3.5 isolates the M3 and M1$\times$M3 sectors via the
+Paper~50's dual-basis decomposition theorem
+(\texttt{thm:mellin\_decomp}) isolates the two sectors --- M3 and
+M1$\times$M3 --- via the
 orthogonal projection
 \begin{align}
 \label{eq:Fproj_m3}
@@ -1623,7 +1631,7 @@ Pure single-mechanism & all factors from one slot & Paper~38 rate & $M_1$ alone 
 \end{tabular}
 \end{center}
 
-The dual-basis projection of Paper~50 Theorem~3.5 demonstrates the
+The dual-basis projection of Paper~50 (\texttt{thm:mellin\_decomp}) demonstrates the
 operational utility of joint-engagement bookkeeping:\ linear
 combinations of physical observables that isolate one mechanism (or
 one cross-product) at a time make the projective content of each
@@ -3316,8 +3324,9 @@ spectral triples:\ the four-witness $2\pi$ period at finite cutoff,''
 GeoVac corpus Paper~42 (2026).
 
 \bibitem{loutey_paper50}
-J.~Loutey, ``Boundary CFT$_3$-on-$\sthree$ observables on the
-truncated GeoVac spectral triple,'' GeoVac corpus Paper~50 (2026).
+J.~Loutey, ``Boundary CFT$_3$-on-$\sthree$ observables and the
+GeoVac spectral triple:\ partition function and wedge KMS entropy,''
+GeoVac corpus Paper~50 (2026).
 
 \bibitem{loutey_paper51}
 J.~Loutey, ``Gravity arc on the discrete $\sthree$ spectral triple,''

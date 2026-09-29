@@ -138,8 +138,8 @@ $4/\pi$ of the Riemannian rate (Paper~38) identifies as the $M_{1}$
 the case-exhaustion theorem of Paper~32~\S\,VIII;\ the $1/\pi^{2}$ of the
 Lorentzian HS-orthogonality (Paper~42~\S 11.7) is \emph{not} shown to be
 the same signature --- it is the square of the posited normalisation
-$\beta = 2\pi/\kappa_g$ (re-tiered 2026-09-28).  Five further papers (48, 49, 50, 52, 53) extend the arc;\ Papers~48--50 are recorded in
-\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Papers~52--53 are summarized at the end of this abstract;\ metric-level
+$\beta = 2\pi/\kappa_g$ (re-tiered 2026-09-28).  Further papers (48, 49, 50, 53) extend the arc;\ Papers~48--50 are recorded in
+\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Paper~53 is summarized at the end of this abstract (Paper~52 is archived);\ metric-level
 claims among them descoped by Paper~45's degeneracy theorem are
 reported here in corrected form.  \textbf{[ARCHIVED 2026-09-14]}
 Papers~46--49 have since been moved to \texttt{papers/archive/}:\ the model
@@ -156,15 +156,24 @@ automatic, and its $1/\pi^{2}$ is the posited $\beta = 2\pi/\kappa_g$
 squared), and its surviving content --- the Krein carrier, the $(4,6)$
 axiom audit, the Krein-carrier period closure, the six-witness statement
 by construction, and the chirality-parity HS-orthogonality --- now lives in
-Paper~42~\S 11, to which every Paper~43 reference below is repointed. Paper~50 reproduces
-the Klebanov--Pufu--Safdi sphere F-theorem bit-exactly from the
-framework spectrum; Paper~52 frames the spectral-truncation convergence
-as a ``Category III'' discretization correspondence (the framework's
-analog of holography, at the state-space GH level); and Paper~53 treats
-the first non-homogeneous carrier --- the disk-with-cone --- where the
-finite disk is obstructed by its Dirichlet boundary and convergence is
-recovered only on the boundaryless plane (Bochner--Riesz, rate
-$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$).
+Paper~42~\S 11, to which every Paper~43 reference below is repointed. Paper~50
+re-derives the Klebanov--Pufu--Safdi sphere F-theorem values in closed
+Hurwitz form from the full continuum spectra (the finite truncation never
+enters, so this is a re-derivation of known continuum values, not a
+finite-cutoff result);\ an earlier positioning paper that read the
+truncation convergence as a non-holographic ``correspondence'' producing
+these values is archived (2026-09-29), its content superseded by a short
+not-holographic remark in Paper~50 (the framework has no bulk); and Paper~53
+proves state-space convergence of the spectral truncations of the flat plane
+$\mathbb{R}^{2}$ (a positive squared-window reconstruction, rate
+$\gamma_{1}\Lambda^{-1/2}$;\ the four compression/lift facts
+and the GH bound on the named state classes \textbf{[INTERNAL THEOREM]}, their
+canonicity open), leaving the
+disk-with-cone open:\ its earlier ``Dirichlet-boundary obstruction'' was a
+floating-point artifact at $\rho = R$, its Bochner--Riesz kernel is negative
+somewhere (so that reconstruction is not positive), and the cone has no
+translation group (all withdrawn
+2026-09-29).
 Paper~48 constructs Krein-pointed proper quantum metric spaces and a
 bridge functor to the Mondino--S\"amann synthetic-Lorentzian
 pre-length spaces;\ the metric-level inheritance is descoped and the
@@ -175,18 +184,19 @@ operator-algebraic dual of the twin paradox, with the deficit
 quantified by Datta's max-divergence chain inequality;\ the
 $\Lambda$-inheritance is descoped while the cocycle-deficit algebra
 survives.
-Paper~50 demonstrates bit-exact reproduction of CFT-on-sphere
-partition functions on
-$\sthree$ and $\sfive$ via the framework's existing Hurwitz machinery,
-revealing a master Mellin engine $M_{2}$/$M_{3}$ orthogonal
-decomposition of the (scalar, Dirac) sector and a log~3 cancellation
-theorem on $\sfive$.  These closures position the arc against the
-larger CFT/AdS lineage:\ the framework's substrate-level
+Paper~50 evaluates the standard zeta-regularised CFT-on-sphere
+free energies on $\sthree$ and $\sfive$ from the continuum spectra in
+closed Hurwitz form (re-deriving known values), exhibiting an
+orthogonal $\log 2$ / $\zeta(3)/\pi^{2}$ decomposition of the continuum
+(scalar, Dirac) values (an $M_{3}$-ring period and an $M_{1}\times M_{3}$
+cross-product in the master Mellin engine's period-ring stratification)
+and a log~3 cancellation theorem on $\sfive$.
+Because these values are computed from the continuum spectra, they are
+not evidence from the truncated triple;\ the framework's substrate-level
 scale-freedom---packing diameter $d_{0}$ cancels out, scales enter
-only through the Fock focal length $p_{0}$---is the structural
-reflection of the scale-invariance that conformal field theory
-embodies at the physics level, and explains why the framework
-naturally hosts CFT-on-sphere observables bit-exactly.  This
+only through the Fock focal length $p_{0}$---parallels the
+scale-invariance of conformal field theory, but does not explain these
+closures.  This
 synthesis gathers the statements, sketches the load-bearing proofs,
 and exhibits the structural relationships between the papers; no
 new theorems are introduced.
@@ -1806,17 +1816,22 @@ OSLPLS state-space coordinates remains a named open question
 pre-length-space extension is the separate named open question Q2$'$,
 partially addressed by the OSLPLS containment (Paper~49~\S 10).
 
-\subsection{Bit-exact CFT-on-sphere partition functions and the
-master Mellin engine $M_{2}$/$M_{3}$ orthogonal decomposition
+\subsection{Closed-form CFT-on-sphere partition functions and their
+orthogonal $\log 2$ / $\zeta(3)/\pi^{2}$ decomposition
 (Paper 50)}
 \label{sec:closures_post_49}
 
-Paper~50~\cite{paper50} demonstrates that the framework's existing
-Hurwitz-zeta machinery (used throughout Papers~38--47 for spectral
-sums on the Camporesi--Higuchi tower) reproduces continuum
-CFT-on-sphere partition functions \emph{bit-exactly}, via a closed-form
-combination of $\zeta'(-2)$, $\zeta'(-4)$, $\zeta(3)$, $\zeta(5)$,
-$\log 2$, and $\pi$ identified by PSLQ at 80--100 digit precision.
+Paper~50~\cite{paper50} evaluates the standard zeta-regularised
+CFT-on-sphere free energies with the framework's closed Hurwitz-zeta
+forms (used throughout Papers~38--47 for spectral sums on the
+Camporesi--Higuchi tower), applied to the full, untruncated continuum
+spectra --- the same sums Klebanov--Pufu--Safdi evaluate.  The finite
+cutoff $n_{\max}$ never enters, and the state-space GH convergence of the
+truncations plays no role in the values:\ this is an independent
+closed-form re-derivation of known continuum values, via a combination
+of $\zeta'(-2)$, $\zeta'(-4)$, $\zeta(3)$, $\zeta(5)$, $\log 2$, and
+$\pi$ identified symbolically or by high-precision PSLQ (digit counts as
+reported in Paper~50).
 
 \paragraph{Bit-exact match on $\sthree$.}
 For the conformally coupled scalar and Camporesi--Higuchi Dirac on
@@ -1831,26 +1846,35 @@ F_{\mathrm{Dirac}}^{\sthree}
 \approx 0.21896
 \qquad\text{(symbolic Hurwitz expansion)}.
 \end{align*}
-These reproduce the Klebanov--Pufu--Safdi values
-\cite{klebanov_pufu_safdi2011} bit-exactly.
+These agree bit-exactly with the Klebanov--Pufu--Safdi values
+\cite{klebanov_pufu_safdi2011}, which are prior art.  The framework has
+no bulk, so none of this is holographic (Paper~50's closing remark).
 
 \paragraph{Orthogonal decomposition and log~3 cancellation theorem
 on $\sfive$.}
-On the $(\text{scalar}, \text{Dirac})$ sector, the framework reveals
-an orthogonal decomposition:
+On the $(\text{scalar}, \text{Dirac})$ sector, the continuum values
+decompose orthogonally:
 \begin{equation*}
-F_{D} + 2 F_{s} = \frac{\log 2}{2} \quad (M_{2}\text{ sector}),
+F_{D} + 2 F_{s} = \frac{\log 2}{2} \quad (\log 2\text{ sector}),
 \qquad
-F_{D} - 2 F_{s} = \frac{3 \zeta(3)}{4 \pi^{2}} \quad (M_{3}\text{ sector}).
+F_{D} - 2 F_{s} = \frac{3 \zeta(3)}{4 \pi^{2}} \quad (\zeta(3)/\pi^{2}\text{ sector}).
 \end{equation*}
+Following Paper~18's period-ring stratification, $\log 2$ is a level-2
+cyclotomic period in $M_{3}$'s ring (entering through the $2^{s}$ factor
+of the half-integer Hurwitz identity) and $\zeta(3)/\pi^{2}$ is an
+$M_{1}\times M_{3}$ cross-product;\ no Seeley--DeWitt ($M_{2}$) content
+appears.  An earlier labelling of $\log 2$ as $M_{2}$ is withdrawn
+(2026-09-29).
 On $\sfive$, the pattern extends:
-$F_{\mathrm{scalar}}^{\sfive} = -\log(2)/32 - \zeta(3)/(32\pi^{2})
-+ 15\zeta(5)/(64\pi^{4})$ (PSLQ relation $[32, -2, -2, 15]$),
+$F_{\mathrm{scalar}}^{\sfive} = -\log(2)/128 - \zeta(3)/(128\pi^{2})
++ 15\zeta(5)/(256\pi^{4})$ (PSLQ relation $[32, -2, -2, 15]$),
 $F_{\mathrm{Dirac}}^{\sfive} = -(3\log 2)/128 - 5\zeta(3)/(128\pi^{2})
-- 15\zeta(5)/(256\pi^{4})$.  The log~3 contributions that arise from
-zero-mode boundary structure in the minimal-scalar variant cancel
-algebraically against M$_{2}$-sector identities (Paper~50~Theorem~7.2),
-restricting the substrate-natural ring to $\log 2 \cdot \Q + \zeta(3)/
+- 15\zeta(5)/(256\pi^{4})$.  The $\log 3$ contributions from the
+$(2/3)^{s}$ term of the half-integer Hurwitz function
+$\zeta_{H}(s, 5/2)$ in the Dirac spectral zeta cancel exactly through
+the Dirac multiplicity polynomial (Paper~50's $\log 3$ cancellation
+theorem;\ $\log 3$, a level-3 cyclotomic period, would lie outside
+$M_{3}$'s level-$\le 4$ ring), restricting the substrate-natural ring to $\log 2 \cdot \Q + \zeta(3)/
 \pi^{2} \cdot \Q + \zeta(5)/\pi^{4} \cdot \Q$ on $\sfive$.
 
 \paragraph{$S^{7}$--$S^{11}$ ladder closure.}
@@ -1868,7 +1892,7 @@ Paper~50~\S 8, Erratum).
 The S$^{3}$ and S$^{5}$ closures are recorded in Paper~50~\S 9 as the
 first two entries of a running catalogue of master-Mellin-engine
 appearances on the physics side.  Paper~50 also flags structural
-correspondences to other M$_{2}$-sector results in the QFT literature,
+correspondences to M$_{2}$-sector results in the QFT literature,
 including Henningson--Skenderis holographic Weyl
 anomaly~\cite{henningson_skenderis1998} (M$_{2}$ Seeley--DeWitt
 content), TT-bar / cutoff AdS \cite{hartman_etal2019}, and the
@@ -1878,10 +1902,11 @@ as new derivations.
 
 \paragraph{Structural reading: scale-freedom on substrate
 $\leftrightarrow$ scale-invariance in physics.}
-The bit-exact CFT closures on $\sthree$ and $\sfive$ are structurally
-explained by the framework's substrate-level scale-freedom:\ the
-GeoVac packing axiom outputs a graph whose Laplacian eigenvalues are
-pure rationals $n^{2} - 1$, the multiplicities are integers, the
+The closed-form CFT values on $\sthree$ and $\sfive$ are computed
+from the continuum spectra, so they are not evidence from the discrete
+substrate;\ what follows is a parallel, not an explanation.  The GeoVac
+label lattice carries the diagonal SO(4) Casimir with pure-integer
+eigenvalues $n^{2} - 1$, the multiplicities are integers, the
 Wigner-symbol couplings are exact rationals, and the packing diameter
 $d_{0}$ \emph{cancels out} of every spectral quantity.  Physical scales
 enter only through the Fock projection focal length $p_{0}$, which is
@@ -1890,11 +1915,10 @@ the geometric reflection of the same principle that conformal field
 theory~\cite{klebanov_pufu_safdi2011} embodies on the physics side:\
 a CFT has no preferred length scale at the level of its action and
 observables; the GeoVac graph has no preferred length scale at the
-level of its eigenvalues and matrix elements.  The framework's
-ability to host continuum CFT-on-sphere observables bit-exactly
-reflects this structural alignment.  This is \emph{not} a claim that
-GeoVac \emph{is} a CFT; it is a structural reflection that explains
-\emph{why} the framework reproduces what it does.  (The substrate-side
+level of its eigenvalues and matrix elements.  This is \emph{not} a
+claim that GeoVac \emph{is} a CFT, nor that the substrate explains the
+Paper~50 values (they are continuum zeta determinants);\ it is a
+structural parallel only.  (The substrate-side
 account of this principle is developed in the Group~3 foundations
 synthesis~\cite{geovac_g3_synthesis}.)
 
@@ -2288,9 +2312,8 @@ thermal-time stack across distinct KMS states},
 
 \bibitem[Loutey, internal Paper~50]{paper50}
 J.~Loutey,
-\newblock \emph{Bit-exact CFT-on-sphere partition functions on
-$\sthree$ and $\sfive$ from the master Mellin engine
-$M_{2}$/$M_{3}$ orthogonal decomposition},
+\newblock \emph{Boundary CFT$_{3}$-on-$\sthree$ observables and the
+GeoVac spectral triple:\ partition function and wedge KMS entropy},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, Group 3 synthesis(2026)]{geovac_g3_synthesis}

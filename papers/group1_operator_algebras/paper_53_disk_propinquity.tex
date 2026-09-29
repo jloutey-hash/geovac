@@ -1,37 +1,35 @@
 % =====================================================================
-% Paper 53 (standalone): Berezin reconstruction for the disk-with-cone
-% truncated spectral triple, and the apex backbone of the cigar-tip
-% entropy.
+% Paper 53 (standalone): spectral truncation of the flat plane --
+% state-space convergence with a squared window -- and the finite
+% disk-with-cone left open.
 %
-% Main result: the unital Markov-Cesaro Berezin reconstruction on the
-% 2D disk-with-cone D^2_alpha (a manifold-WITH-BOUNDARY, the first
-% non-group / non-homogeneous case in the GeoVac propinquity series)
-% satisfies all four Latremoliere L4 reconstruction properties on
-% apex-localised observables, with an algebraic interior rate. As a
-% corollary, the propinquity backbone of the cigar-tip entropy
-% (Paper 51, Lemma "L6.1") is established for the local apex observable.
-%
-% A math.OA standalone in the GeoVac series; the disk is the FIRST
-% manifold-with-boundary carrier (all prior carriers were closed groups
-% or homogeneous spaces). Siblings: Paper 38 (SU(2)), 39 (tensor), 40 (compact Lie
-% groups, universal rate), 44 (Lorentzian operator system), 45/46
-% (Lorentzian propinquity), 47 (two-rate de-compactification).
-%
-% Status: CORRECTED (2026-06; positivity-leg re-attributed 2026-06-23).
-% The finite disk is OBSTRUCTED by the Dirichlet boundary, but the
-% obstruction is the NON-DECAYING interior rate (Lambda^{+0.07}, no
-% convergence; the earlier Lambda^{-1.30} was withdrawn), NOT positivity:
-% the Cesaro weight (1-lam/Lam)^s at s>=2 (Def 4.1) DOES preserve
-% positivity on the finite disk (min g > 0). The min g ~ -0.13 dip is the
-% truncated HEAT weight e^{-t lam} (Gibbs), not the Cesaro construction.
-% Convergence is recovered ONLY on the boundaryless plane R^2_alpha
-% (Bochner-Riesz, s>=1/2, rate Lambda^{-0.6..-0.9}). thm:interior (c) is
-% plane-only; (b) positivity holds on both disk (Cesaro) and plane.
-%
-% Built from sprint memos:
-%   debug/b3_disk_backbone_memo.md
-%   debug/b3_markov_berezin.py, debug/b3_disk_heat_berezin.py
-%   debug/l6_disk_prop2.py (prop=2), debug/l6_replica_weight_harmless_memo.md
+% REBUILT 2026-09-29 (PI-approved).  What this paper now claims:
+%   * [INTERNAL THEOREM, on the named state classes; canonicity open] Flat plane R^2,
+%     band-limited window, translation seminorm:  the compression /
+%     lifted-state pattern of Paper 38 (after Gaudillot-Estrada--van
+%     Suijlekom) with a POSITIVE squared-window kernel |psi|^2 gives
+%     d_GH <= gamma_Lambda = gamma_1 Lambda^{-1/2} between the
+%     Monge--Kantorovich state spaces (finite-first-moment classes).
+%   * [MEASURED] The 2D Bochner--Riesz kernel is negative somewhere at
+%     every tested order and its Lebesgue constant exceeds 1; this is why
+%     the squared window, not Bochner--Riesz, is the lift.
+%   * [MEASURED] Finite disk: the Markov--Cesaro map is NOT positivity
+%     preserving (ring counterexample); its reconstruction error on the
+%     open disk DECAYS on every tested observable.
+% What was withdrawn in the rebuild:
+%   * Bochner--Riesz positivity (false); the plane "propinquity" via a
+%     Bochner--Riesz tunnel (not established); any backbone for Paper 51's
+%     cigar-tip entropy (the order-0 Hankel "plane" is the flat radial
+%     sector -- alpha never entered; Paper 51 cites this paper only for
+%     the withdrawn material);  the finite-disk "non-decaying rate Lambda^{+0.07}" (a
+%     floating-point artifact: the 0/0 Markov ratio evaluated exactly at
+%     rho = R);  the boundary-collar error 0.26 at R = 12 (not
+%     reproduced);  finite-disk Cesaro positivity as a general property.
+% Backing: tests/test_paper53_flat_plane_squared_window.py,
+%   tests/test_paper53_plane_bochner_riesz.py,
+%   tests/test_paper53_disk_obstruction.py,
+%   tests/test_paper53_height_constant.py.
+% Siblings: Paper 38 (SU(2)), 40 (compact Lie groups).
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -57,6 +55,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{observation}[theorem]{Observation}
 
 \newcommand{\disk}{\mathbb{D}}
 \newcommand{\diskR}{\disk_{R}}
@@ -64,7 +63,6 @@
 \newcommand{\Hilb}{\mathcal{H}}
 \newcommand{\Op}{\mathcal{O}}
 \newcommand{\Acal}{\mathcal{A}}
-\newcommand{\Tcal}{\mathcal{T}}
 \newcommand{\Berez}{\mathcal{B}}
 \newcommand{\opnorm}[1]{\lVert #1 \rVert_{\mathrm{op}}}
 \newcommand{\supnorm}[1]{\lVert #1 \rVert_{\infty}}
@@ -73,86 +71,59 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Tr}{\mathrm{Tr}}
-\newcommand{\Mat}{M}
-\newcommand{\Lprop}{\Lambda_{\mathrm{prop}}}
 \newcommand{\Lip}{\mathrm{Lip}}
+\newcommand{\MK}{\mathrm{MK}}
+\newcommand{\Prob}{\mathcal{P}_{1}}
+\newcommand{\Cst}{\mathcal{C}}
+\newcommand{\Lebesgue}{\mathcal{L}}
+\providecommand{\normone}[1]{\lVert #1 \rVert_{1}}
 
-\title{Berezin reconstruction for the disk-with-cone truncated spectral
-triple, and the apex backbone of the cigar-tip entropy}
+\title{Spectral truncation of the flat plane:\ state-space convergence
+with a squared window, and the disk-with-cone left open}
 \author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
 This work was developed in an AI-augmented agentic workflow with
 Anthropic's Claude. Implementation, internal memos, numerical
 verification, and bibliographic collation were performed
 collaboratively; all theorems, design choices, and editorial decisions
 are the author's responsibility.}}
-\date{May 2026 (preprint)}
-
-\newcommand{\Lebesgue}{\mathcal{L}}
-\providecommand{\normone}[1]{\lVert #1 \rVert_{1}}
+\date{Preprint; rebuilt 2026-09-29}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The metric-spectral-triple convergence program underlying the GeoVac
-framework~\cite{paper38,paper40,paper45,paper47} has so far treated
-compact groups and homogeneous spaces, where the central Fej\'er kernel
-of Peter--Weyl supplies the Berezin reconstruction map. We treat the
-first non-group, non-homogeneous case: the two-dimensional
-\emph{disk-with-cone} $\cone$, a flat disk of radius $R$ with a conical
-defect of apex multiple $\alpha$ at its centre and a Dirichlet
-boundary. This is the spatial factor of the near-horizon cigar whose
-truncated heat trace carries the Bekenstein--Hawking--type tip entropy
-of the companion Paper~51. We construct a \emph{unital Markov--Cesàro
-Berezin} reconstruction $\Berez_{\Lambda}$ on $\cone$ and prove that, on
-apex-localised observables, it has exact unitality (by the Markov
-normalisation), while Ces\`aro positivity \emph{also} holds on the finite disk at order
-$s\ge2$, the remaining property --- a convergent approximate-identity
-interior rate --- is \emph{obstructed on the finite disk} by the Dirichlet
-boundary (see below) and is recovered on the boundaryless plane.
-Together with the propagation-number-two
-operator system and the gradient-norm Lipschitz seminorm, this yields
-the propinquity backbone for the cigar-tip entropy of Paper~51 at the
-local apex observable, upgrading its Lemma on geometric faithfulness
-from cited to proved for that purpose. The construction is verified
-numerically: disk unitality is exact and the Ces\`aro construction of
-Definition~\ref{def:berezin} at order $s\ge2$ \emph{does} preserve
-positivity on the finite disk (minimum eigenvalue $>0$ across the
-$\Lambda$ sweep), but it does \emph{not} achieve a convergent interior
-rate (the disk drivers give $\norm{\Berez_\Lambda(f)-P_\Lambda M_f P_\Lambda}/
-\norm{\nabla f}_\infty \sim \Lambda^{+0.07}$, i.e.\ no decay) --- this
-is the Dirichlet-boundary obstruction, not a tail effect. (The minimum
-eigenvalue reaches $\approx -0.13$ only for the truncated \emph{heat}
-weight $e^{-t\lambda}$, which is Gibbs-non-positive;\ the Ces\`aro weight
-restores positivity but not convergence, so the genuine obstruction is
-the non-decaying rate --- weight-robust --- not positivity.) The
-\emph{boundaryless plane} reconstruction (below) is what genuinely
-converges:\ the 2D Bochner--Riesz Berezin is positivity-preserving at
-order $s\ge\tfrac12$ (classical) and reconstructs every Schwartz
-observable at algebraic rate $\Lambda^{-0.6}$ to $\Lambda^{-0.9}$
-(test-function dependent).
-The only obstruction --- observables with content at the Dirichlet
-boundary $\rho=R$, where the eigenfunctions vanish and the Markov ratio
-becomes a $0/0$ limit independent of the observable --- is an artifact of
-the finite-radius compactification, not of the function's decay, and is
-\emph{not} removed by the naive $R\to\infty$ limit of the disk. The cure
-is the boundaryless carrier itself: on the plane $\R^{2}$ (the
-de-compactified cone), the band-limited Bochner--Riesz Berezin
-reconstructs every Schwartz observable with all four properties at an
-algebraic rate. Assembling Latr\'emoli\`ere's pointed/proper propinquity
-from these ingredients --- properness by Arzel\`a--Ascoli, reach the
-reconstruction rate, height the Bochner--Riesz Lipschitz distortion (a
-finite Lebesgue constant $>1$, \emph{not} the non-expansive $1$ an earlier
-version claimed;\ Remark~\ref{rem:height_constant}, where the consequence for
-the assembly is left open) --- establishes plane (hence de-compactified
-disk-with-cone) convergence at the qualitative-rate level, in
-van~Suijlekom's state-space Gromov--Hausdorff sense; the strictly
-stronger \emph{Latr\'emoli\`ere} propinquity carries the same named
-pointed/proper bookkeeping residual that the compact companion
-Papers~38/40 carry (the self-contained sharp-constant bound is the open
-residual). This is the metric-level analogue of the non-compact limit
-that Paper~47 closes at the spectral level.
+The spectral-truncation convergence results of the companion
+Papers~\cite{paper38,paper40} treat compact groups, where a Fej\'er-type
+kernel is available and the state spaces are compact. We treat the flat
+plane $\R^{2}$ --- non-compact, but with a transitive translation group.
+Truncate $L^{2}(\R^{2})$ to the band-limited subspace $\Hilb_{\Lambda}$
+(Fourier support $|\xi|\le\sqrt\Lambda$), compress bounded uniformly
+continuous multipliers into it, and metrize the truncated state space by
+the translation Lipschitz seminorm. With a lift built from the
+translates of one window vector $\psi_{\Lambda}\in\Hilb_{\Lambda}$, the
+compression/lifted-state argument of Paper~38 (whose scalar
+compact-group form is due to Gaudillot-Estrada and
+van~Suijlekom~\cite{gaudillot_vs2025}) goes through with the
+\emph{positive} kernel $|\psi_{\Lambda}|^{2}$. Four estimates hold with the
+single constant $\gamma_{\Lambda}=\int|x|\,|\psi_{\Lambda}(x)|^{2}dx=
+\gamma_{1}\Lambda^{-1/2}$ \textbf{[INTERNAL THEOREM]}, and they give a
+Gromov--Hausdorff bound $d_{\mathrm{GH}}\le\gamma_{\Lambda}$ between the
+Monge--Kantorovich state spaces, taken over the states of finite first
+moment \textbf{[INTERNAL THEOREM]} for those state classes;\ whether they
+are the canonical ones is open. The window must have a finite first moment.
+The sharp ball window does not: its first moment diverges
+logarithmically. The smooth-edged windows $(1-|\xi|^{2})_{+}^{m}$ with
+$m\ge1$ do; for $m=1$, $\gamma_{1}=32/(5\pi)$. The two-dimensional
+Bochner--Riesz map is \emph{not} a usable lift: its kernel is negative
+somewhere at every order we tested, and its Lebesgue constant exceeds~$1$
+\textbf{[MEASURED]}. On the finite Dirichlet disk-with-cone the paper
+reports measurements and withdraws earlier claims. The Markov--Ces\`aro
+reconstruction map is not positivity-preserving (a ring counterexample),
+and its reconstruction error on the open disk decays on every tested
+observable. The ``non-decaying'' rate reported in an earlier version was
+an artifact of evaluating a $0/0$ ratio at the boundary point.
+Convergence on the disk, and on the cone with apex angle $\alpha\ne1$
+(which has no translation group), is left open.
 \end{abstract}
 
 % =====================================================================
@@ -161,676 +132,583 @@ that Paper~47 closes at the spectral level.
 % =====================================================================
 
 \subsection{Context}
-Latr\'emoli\`ere's Gromov--Hausdorff propinquity~\cite{latremoliere2015,
-latremoliere2016} makes precise the convergence of a sequence of
-truncated metric spectral triples to a limiting (commutative or
-noncommutative) metric geometry. In the spectral-truncation setting of
-Connes and van~Suijlekom~\cite{connes_vs2021}, where the truncated
-operator system is $\Op_{n}=P_{n}C(M)P_{n}$ for a spectral projection
-$P_{n}$, the GeoVac series of companion papers has established
-van~Suijlekom state-space Gromov--Hausdorff convergence for the round three-sphere as
-$\mathrm{SU}(2)$~\cite{paper38}, for tensor products of such
-factors~\cite{paper39}, for all simple compact Lie groups with a
-universal rate constant $4/\pi$~\cite{paper40}, and --- in
-the Lorentzian/Krein setting --- has probed the signature extension in
-Papers~\cite{paper44,paper47} (the genuinely Lorentzian-metric
-propinquity \emph{degenerates}:\ Paper~45's $K^{+}$ annihilation
-theorem, so the surviving statement there is the signature-agnostic
-product-carrier convergence, not a Lorentzian convergence theorem).
-In each of the established (Riemannian) cases the reconstruction map
-(the L4 lemma in the five-lemma scheme of Paper~38) is built from the
-\emph{central Fej\'er kernel} of Peter--Weyl analysis, which exists
-because the carrier is a group or a homogeneous space and is positive
-by Fej\'er's classical theorem.
+In the spectral-truncation setting of Connes and
+van~Suijlekom~\cite{connes_vs2021} a truncated operator system
+$\Op_{\Lambda}=P_{\Lambda}\Acal P_{\Lambda}$ replaces the algebra of
+functions, and one asks whether its state space, with a
+Monge--Kantorovich metric, converges to the state space of the
+continuum. For compact metric groups Gaudillot-Estrada and
+van~Suijlekom~\cite{gaudillot_vs2025} prove this with a
+compression/lifted-state pair and a single first-moment constant;
+Paper~38~\cite{paper38} transports the argument to the spinor window on
+$S^{3}=\mathrm{SU}(2)$, and Paper~40~\cite{paper40} to compact semisimple
+Lie groups. All of these carriers are compact.
 
-The present paper treats the first carrier that is neither: the
-two-dimensional flat \emph{disk} $\diskR$, optionally with a conical
-defect at the centre (the \emph{disk-with-cone} $\cone$), and a
-Dirichlet boundary at $\rho=R$. Two features make it genuinely new.
-First, the disk is not a group, so there is no central Fej\'er kernel;
-a reconstruction map must be built by hand. Second, and decisively, the
-disk is a manifold \emph{with boundary}, which no previous carrier in
-the series was --- and the boundary turns out to be the only obstruction
-to a full propinquity statement.
-
-\subsection{Motivation: the cigar-tip entropy}
-The disk-with-cone is the spatial factor of the Euclidean near-horizon
-cigar geometry $\cone\times S^{2}(r_{h})$ at constant warp. The
-companion Paper~51 studies the replica derivative of the truncated heat
-trace on this geometry: the conical defect $\alpha$ lives entirely in
-the disk via the spinor azimuthal momentum $m_{\mathrm{eff}}=(k+\tfrac12)/
-\alpha$, the horizon sphere $S^{2}$ is a passive area multiplier, and
-the entropy is the zeroth Mellin moment of the tip
-$\mathrm{tip}(t)=\frac{dK}{d\alpha}\big|_{\alpha=1}-K_{\mathrm{disk}}(t)$,
-a local apex quantity in which the bulk and the boundary contributions
-cancel. The convergence theorem of Paper~51 (the replica-weight-harmless
-theorem) rests on the norm-resolvent convergence of the radial Dirac;
-its \emph{geometric-faithfulness} backbone --- the statement that the
-truncated disk triple converges to the continuum disk in the
-propinquity --- was there cited rather than proved. Supplying that
-backbone, for the local apex observable that the entropy requires, is
-the purpose of this paper.
+This paper was first written about the two-dimensional disk-with-cone
+$\cone$, the spatial factor of the near-horizon cigar of the companion
+gravity paper~\cite{paper51}. It claimed a Bochner--Riesz reconstruction
+on a ``plane $\R^{2}_{\alpha}$'' and a propinquity backbone for that
+paper's cigar-tip entropy. Those claims do not hold, and are withdrawn
+(\S\ref{subsec:withdrawn}). What survives is a flat-plane theorem, proved
+by a different map, and a set of finite-disk measurements.
 
 \subsection{Results}
-Let $\Op_{\Lambda}=P_{\Lambda}C(\cone)P_{\Lambda}$ be the
-spectral-truncated operator system to Laplace eigenvalues
-$\lambda\le\Lambda$, with the gradient-norm Lipschitz seminorm
-$L(f)=\supnorm{\nabla f}$ induced by the disk Dirac. We prove:
-
 \begin{itemize}
-\item \textbf{(Operator system, \S\ref{sec:setup}).} $\Op_{\Lambda}$ has
-propagation number $2$: $\Op_\Lambda^{2}$ spans the full matrix envelope
-(Proposition~\ref{prop:prop2}), matching the Connes--van~Suijlekom
-Toeplitz value~\cite{connes_vs2021} and confirmed by direct computation.
-\item \textbf{(Berezin reconstruction, \S\ref{sec:berezin}).} The unital
-Markov--Ces\`aro map $\Berez_{\Lambda}$ of Definition~\ref{def:berezin}
-has exact unitality and, at order $s\ge2$, is positivity-preserving on
-the finite disk (minimum eigenvalue $>0$ across the $\Lambda$ sweep). The
-\emph{convergence} property is nonetheless \emph{obstructed on the finite
-disk}:\ its approximate-identity coefficient does not decay
-($\sim\Lambda^{+0.07}$) --- the Dirichlet-boundary obstruction
-(\S\ref{sec:boundary}). (The minimum eigenvalue dips to $\approx-0.13$
-only for the truncated \emph{heat} weight, which is Gibbs-non-positive;\
-the Ces\`aro weight restores positivity but not convergence, so the
-obstruction is the non-decaying rate, not positivity.)
-\item \textbf{(Apex backbone via the plane, \S\ref{sec:apex}).} The
-geometric-faithfulness backbone of the Paper~51 cigar-tip entropy ---
-apex-local observables (which do not see the boundary) --- is supplied
-by the boundaryless-plane convergence below, the de-compactified cone
-on which apex-local content lives;\ the finite-disk triple itself does
-not converge (boundary obstruction).
-\item \textbf{(De-compactification, \S\ref{sec:boundary}).} The boundary
-obstruction --- observables with content at $\rho=R$, where the
-eigenfunctions vanish and the Markov ratio becomes a $0/0$ limit
-independent of the observable --- is a compactification artifact, not
-removed by the naive $R\to\infty$ limit of the disk. On the boundaryless
-plane $\R^{2}$ the band-limited Bochner--Riesz Berezin reconstructs every
-Schwartz observable with all four properties at an algebraic rate
-(Theorem~\ref{thm:plane}), closing the reconstruction arrow of the
-de-compactification.
-\item \textbf{(Plane propinquity, \S\ref{subsec:assembly}).} Assembling
-Latr\'emoli\`ere's pointed/proper propinquity from the plane reconstruction
-(properness by Arzel\`a--Ascoli, reach the reconstruction rate, height the
-Bochner--Riesz Lipschitz distortion --- a finite Lebesgue constant $>1$, not
-the non-expansive $1$ claimed until 2026-09-07;\ see
-Remark~\ref{rem:height_constant}) establishes plane
-convergence $\Lprop(\Tcal_{\Lambda},\Tcal_{\infty})\le C\gamma
-_{\Lambda}\to0$ (Theorem~\ref{thm:plane_propinquity}) at the qualitative-rate
-level, in van~Suijlekom's state-space Gromov--Hausdorff sense, with the
-pointed/proper bookkeeping transported from Latr\'emoli\`ere's framework.
+\item \textbf{(Flat plane, \S\ref{sec:plane}.)} For the band-limited
+truncation of $\R^{2}$ with the translation seminorm, the compression
+$S$ and the window lift $\upsilon$ satisfy the four estimates of
+Paper~38's unconditional proof with the positive kernel
+$|\psi_{\Lambda}|^{2}$ and $\gamma_{\Lambda}=\gamma_{1}\Lambda^{-1/2}$
+(Lemma~\ref{lem:four_facts}, \textbf{[INTERNAL THEOREM]}). Consequently
+(Theorem~\ref{thm:plane_gh}, \textbf{[INTERNAL THEOREM]}) the Gromov--Hausdorff
+distance between the finite-first-moment state classes is at most
+$\gamma_{\Lambda}$. Unlike the Bochner--Riesz route, no Lebesgue constant
+enters, because the kernel is positive.
+\item \textbf{(Window choice, \S\ref{subsec:windows}.)} The windows
+$\widehat\psi_{1}\propto(1-|\xi|^{2})_{+}^{m}$ give
+$|\psi_{1}|^{2}=c_{m}J_{m+1}(r)^{2}/r^{2m+2}$, the squared modulus of the
+order-$m$ Bochner--Riesz kernel. Its first moment is finite exactly when
+$m\ge1$; $\gamma_{1}=32/(5\pi)\approx2.04$ at $m=1$
+\textbf{[INTERNAL THEOREM + MEASURED]}. The sharp window ($m=0$) has a
+logarithmically divergent first moment \textbf{[INTERNAL THEOREM +
+MEASURED]}.
+\item \textbf{(Why not Bochner--Riesz, \S\ref{subsec:not_br}.)} The
+two-dimensional Bochner--Riesz kernel is negative somewhere at
+$s=0.75,1,2,4$ (min/max $=-0.071,-0.059,-0.029,-0.009$), and its
+$\Lambda$-independent Lebesgue constant exceeds $1$ at every finite order
+\textbf{[MEASURED]}.
+\item \textbf{(Finite disk, \S\ref{sec:disk}.)} On the Dirichlet disk the
+Markov--Ces\`aro map is unital. It is \emph{not}
+positivity-preserving: a non-negative ring observable is sent to a function
+with negative values, at Ces\`aro orders $2$ and $4$. Its reconstruction
+error on the open disk decays on every tested observable. The operator
+system has propagation number two at the four truncations computed. All
+of these are \textbf{[MEASURED]}; no disk convergence theorem is claimed.
 \end{itemize}
 
-This establishes the de-compactified disk-with-cone convergence at the
-state-space GH / qualitative-rate level; the strictly stronger Latr\'emoli\`ere
-propinquity carries a named self-contained pointed/proper sharp-constant
-residual (\S\ref{sec:open}, Q1), as in Papers~38/40, and the genuinely-new
-non-compact metric content sits in the boundaryless Bochner--Riesz reconstruction.
-
-\subsection{Honest scope}
-On the finite disk, unitality and contractivity hold (algebraic
-identities), and the Ces\`aro \emph{positivity} hoped for as a disk
-analogue of Fej\'er's theorem \emph{does} hold numerically for the
-Ces\`aro weight at $s\ge2$ (minimum eigenvalue $>0$ across the
-$\Lambda$ sweep). What fails on the finite disk is \emph{convergence}:\
-the approximate-identity coefficient does \emph{not} decay (disk drivers
-give $\sim\Lambda^{+0.07}$;\ the earlier reported $\Lambda^{-1.30}$ is not
-reproduced) --- the Dirichlet-boundary obstruction
-(\S\ref{sec:boundary}), not a tail effect. (The minimum eigenvalue
-$\approx-0.13$ belongs to the truncated \emph{heat} weight $e^{-t\lambda}$,
-which is Gibbs-non-positive;\ it is not the Ces\`aro construction of
-Definition~\ref{def:berezin}, which preserves positivity but still does
-not converge.) The genuine, convergent,
-positivity-preserving reconstruction is on the boundaryless plane
-(Theorem~\ref{thm:plane}:\ Bochner--Riesz at $s\ge\tfrac12$, rate
-$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$, verified in
-\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}), and the plane
-propinquity (Theorem~\ref{thm:plane_propinquity}) is at the
-qualitative-rate level. The paper does \emph{not} claim a finite-disk
-propinquity (the boundary obstructs it);\ the converging object is the
-de-compactified (plane) cone, which is what the apex-local Paper~51
-cigar-tip entropy requires.
+\subsection{Honest scope}\label{subsec:withdrawn}
+Withdrawn in the 2026-09-29 rebuild, each for the reason stated:
+\begin{enumerate}
+\item \emph{Positivity of the two-dimensional Bochner--Riesz means.}
+False: the kernel oscillates (\S\ref{subsec:not_br}). The earlier test
+checked one positive Gaussian, which does not test positivity
+preservation.
+\item \emph{A ``plane $\R^{2}_{\alpha}$'' reconstruction and a backbone for
+the cigar-tip entropy of Paper~51.} The earlier plane map was defined
+through the order-$0$ Hankel transform, i.e.\ on the radial sector of
+the \emph{flat} plane; the apex angle $\alpha$ never entered. The cone
+with $\alpha\ne1$ has no translation group, so nothing in this paper
+reaches it (\S\ref{sec:cone}). Paper~51 cites this paper only for the
+withdrawn material;\ its Theorem on the cigar-tip entropy does not depend on
+it.
+\item \emph{Plane van~Suijlekom state-space convergence via a
+Bochner--Riesz tunnel.} Not established: its ``height'' leg carried a
+Lebesgue constant $>1$ and the constituents did not match the framework
+(Remark~\ref{rem:height_constant}). It is replaced by
+Theorem~\ref{thm:plane_gh}, proved by a different map.
+\item \emph{The finite-disk ``non-decaying interior rate''
+$\Lambda^{+0.07}$ and the ``Dirichlet-boundary obstruction''.} The
+plateau near $0.3$ came from evaluating the Markov ratio at the exact
+grid point $\rho=R$, where numerator and denominator are both
+floating-point rounding noise. On the open disk the error decays
+(\S\ref{sec:disk}). The boundary-collar error ``$\approx0.26$ at $R=12$''
+is not reproduced: a direct recomputation gives $\sim10^{-11}$.
+\item \emph{Ces\`aro positivity on the finite disk as a general
+property.} It held on the single tested observable $(\rho/R)^{2}$ and
+fails on a non-negative ring (\S\ref{sec:disk}).
+\end{enumerate}
+Not claimed: any statement about Latr\'emoli\`ere's
+propinquity~\cite{latremoliere2015,latremoliere2016,latremoliere2025},
+any convergence on the finite disk or the cone, and novelty of the
+proof pattern (Remark~\ref{rem:prior_art}).
 
 % =====================================================================
-\section{The disk-with-cone truncated spectral triple}
-\label{sec:setup}
+\section{The flat plane}
+\label{sec:plane}
 % =====================================================================
 
-\subsection{Geometry and spectrum}
-Let $\diskR=\{(\rho,\phi):0\le\rho\le R\}$ be the flat disk with metric
-$d\rho^{2}+\rho^{2}d\phi^{2}$ and area measure $\rho\,d\rho\,d\phi$. The
-disk-with-cone $\cone$ has apex multiple $\alpha>0$: the azimuthal
-period is $2\pi\alpha$, smooth at $\alpha=1$ and a deficit ($\alpha<1$)
-or excess ($\alpha>1$) cone otherwise. The scalar Laplacian on $\diskR$
-with Dirichlet boundary $f(R)=0$ has the Fourier--Bessel eigenbasis
-\begin{equation}
-\psi_{k,j}(\rho,\phi)=N_{k,j}\,J_{|k|}\!\Big(\frac{a_{|k|,j}\rho}{R}\Big)
-\frac{e^{ik\phi}}{\sqrt{2\pi}},\qquad
-\lambda_{k,j}=\Big(\frac{a_{|k|,j}}{R}\Big)^{2},
-\label{eq:eigenbasis}
+\subsection{Setup}
+Let $\Hilb=L^{2}(\R^{2})$, with unitary translations
+$(U_{a}\phi)(x)=\phi(x-a)$, $a\in\R^{2}$. For $\Lambda>0$ let $P_{\Lambda}$
+be the Fourier projection onto $\Hilb_{\Lambda}=\{\phi:\operatorname{supp}
+\widehat\phi\subset\{|\xi|\le\sqrt\Lambda\}\}$. Translations are Fourier
+multipliers, so $[U_{a},P_{\Lambda}]=0$.
+
+Let $\Acal=C_{\mathrm{ub}}(\R^{2})$, the bounded uniformly continuous
+functions (a unital C$^{*}$-algebra on which $a\mapsto\tau_{a}f:=f(\cdot-a)$
+is norm-continuous), acting by multiplication operators $M_{f}$. Then
+$U_{a}M_{f}U_{a}^{*}=M_{\tau_{a}f}$. The truncated operator system is the
+norm closure
+\[
+\Op_{\Lambda}=\overline{\{S(f):=P_{\Lambda}M_{f}P_{\Lambda}\,:\,f\in\Acal\}}
+\subset B(\Hilb_{\Lambda}),
+\]
+unital since $S(1)=P_{\Lambda}$ is the identity of $B(\Hilb_{\Lambda})$.
+$S:\Acal\to\Op_{\Lambda}$ is unital and completely positive.
+
+\begin{definition}[translation seminorms]\label{def:translation}
+For $f\in\Acal$ and $T\in\Op_{\Lambda}$,
+\[
+L(f)=\sup_{a\ne0}\frac{\supnorm{\tau_{a}f-f}}{|a|},\qquad
+L_{\Lambda}(T)=\sup_{a\ne0}\frac{\opnorm{U_{a}TU_{a}^{*}-T}}{|a|}.
+\]
+\end{definition}
+Since translations act transitively by isometries of the Euclidean
+metric, $L(f)=\Lip(f)$, and $L(f)=\supnorm{\nabla f}$ for $f\in C^{1}$.
+On $\Hilb_{\Lambda}$, $\opnorm{U_{a}-1}\le|a|\sqrt\Lambda$ (the symbol
+$e^{-ia\cdot\xi}$ on the ball), so $L_{\Lambda}(T)\le2\sqrt\Lambda
+\opnorm{T}<\infty$ for every $T$.
+
+\subsection{The window lift}
+\begin{definition}[window and lift]\label{def:window}
+Let $\varphi\in L^{2}(\R^{2})$ be supported in the closed unit ball, with
+$\norm{\varphi}_{2}=1$, and let $\psi_{1}=\mathcal F^{-1}\varphi$
+(unitary Fourier transform). Assume
+\begin{equation}\label{eq:gamma1}
+\gamma_{1}:=\int_{\R^{2}}|x|\,|\psi_{1}(x)|^{2}\,dx<\infty .
 \end{equation}
-where $a_{m,j}$ is the $j$-th positive zero of $J_{m}$ and
-$N_{k,j}=\sqrt{2}/(R\,|J_{|k|+1}(a_{|k|,j})|)$ normalises
-$\int|\psi_{k,j}|^{2}\rho\,d\rho\,d\phi=1$. The conical defect enters
-through the azimuthal index: on $\cone$ the half-integer fermionic
-momentum is $m_{\mathrm{eff}}=(k+\tfrac12)/\alpha$, and the radial
-operator in each sector is
-$L(m)=-\partial_{\rho}^{2}+(m^{2}-\tfrac14)/\rho^{2}$ on $(0,R]$ (in the
-$u=\sqrt{\rho}\,f$ representation), with $\rho=0$ a regular endpoint
-because every eigenfunction vanishes there as $\rho^{|m|+1/2}$ for
-$m\ne0$.
-
-\subsection{Operator system, Dirac, Lipschitz seminorm}
-For a cutoff $\Lambda$ let $P_{\Lambda}$ project onto
-$\{\psi_{k,j}:\lambda_{k,j}\le\Lambda\}$ and
-$\Op_{\Lambda}=P_{\Lambda}C(\cone)P_{\Lambda}$ be the truncated operator
-system (a $*$-closed, unital operator subspace of $M_{N}(\C)$,
-$N=\dim P_{\Lambda}\Hilb$). The disk Dirac
-$D=\sigma\cdot(-i\nabla)$ gives the Lipschitz seminorm
-$L(f)=\opnorm{[D,M_{f}]}=\supnorm{\nabla f}$, where $\nabla$ is the disk
-gradient with the correct $1/\rho$ angular weight. The pair
-$(\Op_{\Lambda},L)$ is a truncated metric operator system in the sense
-of~\cite{connes_vs2021,latremoliere2015}.
-
-\begin{proposition}[Propagation number two]
-\label{prop:prop2}
-For every cutoff with $N=\dim P_{\Lambda}\Hilb\ge2$, the squared
-operator system $\Op_{\Lambda}^{2}$ spans the full envelope $M_{N}(\C)$;
-hence the propagation number is $2$.
-\end{proposition}
-
-\noindent\emph{Verification.} Built from compressed disk monomials
-$z^{a}\bar z^{b}$ ($z=\rho e^{i\phi}$) in the truncated radial$\times$
-azimuthal mode basis, $\dim\Op_{\Lambda}^{2}=N^{2}$ at every tested
-truncation $(K,J)\in\{(2,2),(2,3),(3,2),(3,3)\}$ with
-$N\in\{8,12,12,18\}$ (\texttt{tests/test\_paper53\_disk\_obstruction.py}). The disk
-operator system thus inherits the Connes--van~Suijlekom two-step
-generation of the Toeplitz circle~\cite{connes_vs2021}; the
-$1/\rho^{2}$ coupling between radial and azimuthal sectors does not
-obstruct it. $\hfill\square$
-
-% =====================================================================
-\section{The unital Markov--Cesàro Berezin reconstruction}
-\label{sec:berezin}
-% =====================================================================
-
-The reconstruction map must send $f\in C(\cone)$ to a positive, unital,
-contractive element of $\Op_{\Lambda}$ that is an approximate identity
-for the Toeplitz compression $P_{\Lambda}M_{f}P_{\Lambda}$, with the
-error controlled by the Lipschitz seminorm. On a group this is the
-central Fej\'er kernel; here we build it directly.
-
-\begin{definition}[Markov--Cesàro Berezin]
-\label{def:berezin}
-For Ces\`aro order $s\ge2$ and cutoff $\Lambda$, set the Ces\`aro weight
-$w_{a}=(1-\lambda_{a}/\Lambda)_{+}^{s}$ and the \emph{Markov-normalised
-smoothing}
-\begin{equation}
-g_{\Lambda}(x)\;=\;
-\frac{\sum_{a}w_{a}\,\langle\psi_{a},f\rangle\,\psi_{a}(x)}
-{\sum_{a}w_{a}\,\langle\psi_{a},1\rangle\,\psi_{a}(x)},
+Set $\psi_{\Lambda}(x)=\Lambda^{1/2}\psi_{1}(\Lambda^{1/2}x)$, so that
+$\norm{\psi_{\Lambda}}_{2}=1$ and $\widehat{\psi_{\Lambda}}$ is supported
+in $|\xi|\le\sqrt\Lambda$; hence $U_{x}\psi_{\Lambda}\in\Hilb_{\Lambda}$
+for every $x$. Write $k_{\Lambda}=|\psi_{\Lambda}|^{2}$, a probability
+density, and define
+\[
+\upsilon(T)(x)=\langle U_{x}\psi_{\Lambda},\,T\,U_{x}\psi_{\Lambda}\rangle,
 \qquad
-\Berez_{\Lambda}(f)\;=\;P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}.
-\label{eq:berezin}
-\end{equation}
-The numerator is the Ces\`aro-smoothed $f$; the denominator is the
-Ces\`aro-smoothed constant. Division by the latter makes the kernel a
-normalised positive average (Markov).
+\gamma_{\Lambda}=\int|x|\,k_{\Lambda}(x)\,dx .
+\]
 \end{definition}
 
-\begin{theorem}[Interior reconstruction]
-\label{thm:interior}
-Let $f\in C(\cone)$ be a Lipschitz observable supported in the interior
-$\{\rho\le\theta R\}$ for some fixed $\theta<1$. Then $\Berez_{\Lambda}$
-of Definition~\ref{def:berezin} satisfies (parts \emph{(a)},\emph{(b)},
-\emph{(d)} hold on the finite disk for all $\Lambda$ at Ces\`aro order
-$s\ge2$; part \emph{(c)} holds on the boundaryless plane
-$\R^{2}_{\alpha}$ only and is \emph{withdrawn on the finite disk},
-Remark~\ref{rem:interior_correction}):
-\begin{enumerate}
-\item[\emph{(a)}] \textbf{Unitality:} $\Berez_{\Lambda}(1)=P_{\Lambda}=I$
-on $P_{\Lambda}\Hilb$ (exactly, since $g_{\Lambda}\equiv1$ for $f\equiv1$).
-\item[\emph{(b)}] \textbf{Positivity and contractivity:}
-for the Ces\`aro weight at $s\ge2$,
-$f\ge0\Rightarrow\Berez_{\Lambda}(f)\succeq0$ and
-$\opnorm{\Berez_{\Lambda}(f)}\le\supnorm{f}$ (because
-$\min f\le g_{\Lambda}\le\max f$) --- verified on \emph{both} the finite
-disk ($\min g>0$ across the $\Lambda$ sweep) and the plane
-($s\ge\tfrac12$; see Theorem~\ref{thm:plane}). (The $\min g\approx-0.13$
-dip belongs to the truncated heat weight $e^{-t\lambda}$, not to the
-Ces\`aro weight.)
-\item[\emph{(c)}] \textbf{Approximate identity (plane only):}
-$\opnorm{\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}}\le
-\gamma_{\Lambda}\,\supnorm{\nabla f}$ with $\gamma_{\Lambda}\to0$ on
-$\R^{2}_{\alpha}$ (Theorem~\ref{thm:plane}); the
-bound is proportional to $\supnorm{\nabla f}$ (it vanishes for constant
-$f$), not to $\supnorm{f}$. On the finite disk $\gamma_{\Lambda}$ does
-not decay ($\sim\Lambda^{+0.07}$).
-\item[\emph{(d)}] \textbf{Lipschitz compatibility:}
-$\opnorm{[D,\Berez_{\Lambda}(f)]}\le\supnorm{\nabla g_{\Lambda}}\le
-\supnorm{\nabla f}$ (the Markov average is non-expansive).
+\begin{lemma}[scaling; \textbf{[INTERNAL THEOREM]}]\label{lem:scaling}
+$\gamma_{\Lambda}=\gamma_{1}\Lambda^{-1/2}$.
+\end{lemma}
+\begin{proof}
+Substitute $y=\Lambda^{1/2}x$ in
+$\int|x|\,\Lambda|\psi_{1}(\Lambda^{1/2}x)|^{2}dx$.
+\end{proof}
+
+\begin{lemma}[four estimates; \textbf{[INTERNAL THEOREM]}]\label{lem:four_facts}
+For $f\in\Acal$ and $T\in\Op_{\Lambda}$:
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item[(i)] $L_{\Lambda}(S(f))\le L(f)$;
+\item[(ii)] $\upsilon(T)\in\Acal$, $\upsilon$ is unital and positive, and
+$L(\upsilon(T))\le L_{\Lambda}(T)$;
+\item[(iii)] $\upsilon(S(f))(x)=\int f(x+z)\,k_{\Lambda}(z)\,dz$, hence
+$\supnorm{\upsilon(S(f))-f}\le\gamma_{\Lambda}L(f)$;
+\item[(iv)] $S(\upsilon(T))=\Phi(T):=\int k_{\Lambda}(z)\,U_{-z}TU_{-z}^{*}\,dz$
+(weak integral), hence $\opnorm{S(\upsilon(T))-T}\le\gamma_{\Lambda}
+L_{\Lambda}(T)$.
 \end{enumerate}
-\end{theorem}
-
-\begin{remark}[Correction, 2026-06-23 --- only part (c) fails on the
-finite disk; (b) holds for the Ces\`aro weight]\label{rem:interior_correction}
-Parts \emph{(a)} (unitality, exact), \emph{(b)} (positivity and
-contractivity, for the Ces\`aro weight at $s\ge2$), and \emph{(d)}
-(Lipschitz non-expansiveness) hold on the finite disk and are verified.
-Part \emph{(c)} as stated does \emph{not} survive numerical test on the
-finite disk:\ the approximate-identity coefficient does \emph{not} decay
-($\gamma_{\Lambda}\sim\Lambda^{+0.07}$ and stays $\approx0.3$ across the
-sweep, no convergence;\ the previously reported $\Lambda^{-1.30}$ is not
-reproduced --- \texttt{tests/test\_paper53\_disk\_obstruction.py}). This
-is the Dirichlet-boundary obstruction analysed in \S\ref{sec:boundary},
-not a tail effect:\ even interior-supported $f$ couple to
-boundary-vanishing eigenfunctions through the Ces\`aro ratio. An earlier
-(2026-06-18) draft of this remark additionally claimed part (b) fails
-(minimum eigenvalue $\approx-0.13$);\ that figure belongs to the truncated
-\emph{heat} weight $e^{-t\lambda}$ (Gibbs-non-positive), \emph{not} to the
-Ces\`aro weight of Definition~\ref{def:berezin}, which preserves
-positivity ($\min g>0$). The genuine \emph{convergent} reconstruction is
-the boundaryless \emph{plane} Bochner--Riesz map (Theorem~\ref{thm:plane}),
-on which the apex backbone and the propinquity assembly are built. Part
-(c) is therefore retained only as the \emph{plane} statement; the
-finite-disk (c) is withdrawn.
-\end{remark}
-
-\begin{proof}[Proof structure]
-(a) is immediate from $g_\Lambda=(\cdot)/(\cdot)\equiv1$ at $f\equiv1$,
-verified to machine precision (driver \texttt{b3\_markov\_berezin.py},
-$\max|g_{1}-1|=0$). For (b), $g_{\Lambda}$ is the ratio of two Ces\`aro
-sums; the denominator is the Ces\`aro mean of the constant, and at order
-$s\ge2$ the Ces\`aro means of the Fourier--Bessel expansion are positive
---- the disk analogue of Fej\'er's theorem, a consequence of the
-Ces\`aro summability of Hankel/Fourier--Bessel
-expansions~\cite{stempak1989,colzani1993}. Hence $g_{\Lambda}$ is a
-positive normalised average of $f$, giving $\min f\le g_{\Lambda}\le
-\max f$ and therefore both positivity and contractivity of
-$P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}$ --- confirmed numerically on the
-finite disk ($\min g>0$ across the $\Lambda$ sweep,
-\texttt{tests/test\_paper53\_disk\_obstruction.py}). (The truncated
-\emph{heat} weight $e^{-t\lambda}$ oscillates by Gibbs and is \emph{not}
-positive --- $\min g\approx-0.13$; the Ces\`aro weight at $s\ge2$ is the
-fix and \emph{does} restore positivity on the finite disk. What it does
-\emph{not} fix is convergence;\ see (c) and
-Remark~\ref{rem:interior_correction}.) For (c),
-$\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}=P_{\Lambda}
-M_{g_{\Lambda}-f}P_{\Lambda}$, so the bound is $\supnorm{g_{\Lambda}-f}$;
-since $g_{\Lambda}-f$ is a smoothing difference that vanishes for
-constant $f$, it is controlled by $\supnorm{\nabla f}$ times the kernel
-width $\gamma_{\Lambda}$. On the boundaryless plane the kernel
-localisation gives $\gamma_{\Lambda}\to0$ at an algebraic rate
-(Theorem~\ref{thm:plane}); on the finite disk it does not
-($\gamma_{\Lambda}\sim\Lambda^{+0.07}$, Remark~\ref{rem:interior_correction}). (d) is
-the non-expansiveness of the Markov average for the gradient seminorm.
-\end{proof}
-
-\begin{remark}[Numerical verification --- finite disk does not converge]
-\label{rem:numerics}
-Test \texttt{tests/test\_paper53\_disk\_obstruction.py} (Markov on the
-finite disk, $\Lambda=100\to1600$):\ unitality is exact; the Ces\`aro
-weight $(1-\lambda/\Lambda)_{+}^{s}$ at $s\ge2$ is
-\emph{positivity-preserving} ($\min g>0$ across the sweep). The
-\emph{convergence} property fails:\ the approximate-identity coefficient
-$\supnorm{g_{\Lambda}-f}/\supnorm{\nabla f}$ does \emph{not} decay --- a
-log--log fit gives $\sim\Lambda^{+0.07}$ and the magnitude stays
-$\approx0.3$ across the sweep (the proportionality to $\supnorm{\nabla f}$
-holds, to a factor $1.32$). By contrast the truncated \emph{heat} weight
-$e^{-t\lambda}$ ($t=1/\Lambda$) dips to $\min g\approx-0.13$ (Gibbs,
-non-positive), with the same non-decaying rate --- confirming the heat
-weight is the non-positive one and the obstruction (the non-decaying
-rate) is weight-robust. An earlier draft reported $\Lambda^{-1.30}$ for
-the rate;\ that is not reproduced and has been withdrawn (the boundary
-obstruction, \S\ref{sec:boundary}). The genuine convergence is on the
-boundaryless plane:\ positivity at $s\ge\tfrac12$ and rate
-$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$ (Theorem~\ref{thm:plane};\ test
-\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}).
-\end{remark}
-
-% =====================================================================
-\section{The cone and the apex backbone}
-\label{sec:apex}
-% =====================================================================
-
-The conical defect $\alpha\ne1$ enters only through the azimuthal index
-$m_{\mathrm{eff}}=(k+\tfrac12)/\alpha$ of~\eqref{eq:eigenbasis}; the
-radial structure, the operator system, and the Berezin map are
-unchanged in form. The conical defect commutes with the construction, so the disk analysis
-(including its boundary obstruction, Remark~\ref{rem:interior_correction})
-carries over to $\cone$ for any $\alpha>0$, with constants depending on
-$\alpha$ only through the apex eigenfunction exponents.
-
-\begin{corollary}[Apex backbone of the cigar-tip entropy, via the plane]
-\label{cor:apex_backbone}
-Apex-localised observables do not see the Dirichlet boundary, so their
-content lives on the de-compactified cone --- the boundaryless plane
-$\R^{2}_{\alpha}$. There the Bochner--Riesz reconstruction
-(Theorem~\ref{thm:plane}) converges, and the plane propinquity
-(Theorem~\ref{thm:plane_propinquity}) holds at the qualitative-rate
-level. Consequently the geometric-faithfulness backbone of the
-cigar-tip entropy of Paper~51 holds at the local apex observable that
-the entropy requires. (The finite disk-with-cone triple itself does
-\emph{not} converge --- boundary obstruction,
-Remark~\ref{rem:interior_correction}.)
-\end{corollary}
-
-\begin{proof}[Proof structure]
-The plane reconstruction properties of Theorem~\ref{thm:plane},
-together with Proposition~\ref{prop:prop2} and the gradient-norm
-Lipschitz seminorm, are exactly the L1$'$/L3/L4 ingredients of the
-five-lemma propinquity assembly of~\cite[\S 3--5]{paper38}; the
-plane tunneling pair then bounds the
-propinquity by $C\gamma_{\Lambda}\to0$ by the standard
-assembly~\cite{latremoliere2015}. The cigar-tip entropy of Paper~51 is
-the zeroth Mellin moment of the apex tip, in which the bulk and boundary
-contributions cancel; faithfulness at the apex is therefore the
-relevant statement, and it is supplied by the plane reconstruction
-(Theorem~\ref{thm:plane}).
-\end{proof}
-
-\begin{remark}[Why the apex suffices]
-The cigar-tip entropy is local at $\rho=0$: the tip
-$\frac{dK}{d\alpha}|_{\alpha=1}-K_{\mathrm{disk}}$ is formed as a
-difference in which the bulk Weyl term and the boundary contribution
-cancel before the entropy is taken (Paper~51, and the tip/bulk
-separation established there). The propinquity backbone needs to certify
-geometric faithfulness where the observable lives --- at the apex --- and
-the plane reconstruction does exactly that.
-\end{remark}
-
-% =====================================================================
-\section{The boundary obstruction and the de-compactification extension}
-\label{sec:boundary}
-% =====================================================================
-
-The reconstruction of \emph{boundary-supported} observables is genuinely
-obstructed. Every Dirichlet eigenfunction~\eqref{eq:eigenbasis} vanishes
-at $\rho=R$ (the $a_{m,j}$ are Bessel zeros), so the operator system
-$\Op_{\Lambda}=P_{\Lambda}C(\cone)P_{\Lambda}$ cannot represent a
-function with $f(R)\ne0$ near the boundary in sup-norm: the full-disk
-coefficient $\supnorm{g_{\Lambda}-f}/\supnorm{\nabla f}$ for
-$f=(\rho/R)^{2}$ (which equals $1$ at the boundary) stays flat near
-$0.3$, and on the finite disk even the interior coefficient does not
-decay ($\Lambda^{+0.07}$, Remark~\ref{rem:numerics});\ convergence is
-recovered only on the boundaryless plane (Theorem~\ref{thm:plane}). The same is true of any observable with
-appreciable content in the boundary collar, even one vanishing at $R$.
-This is the manifold-with-boundary feature that the closed carriers of
-the earlier papers (the circle, the spheres, the groups) do not have.
-
-\begin{remark}[The obstruction is intrinsic to the finite-$R$ Dirichlet
-construction]
-\label{rem:ir_cutoff}
-The boundary failure is \emph{not} an effect of the observable's content
-at $\rho=R$ but of the reconstruction map itself. Near the Dirichlet
-boundary both the numerator and the denominator of the Markov ratio
-$g_{\Lambda}$ in~\eqref{eq:berezin} vanish (all eigenfunctions vanish at
-$\rho=R$), so $g_{\Lambda}(R)$ is a $0/0$ limit equal to a weighted
-average of the modal coefficients --- generically nonzero, hence
-$g_{\Lambda}(R)\ne f(R)$ \emph{regardless of how fast $f$ decays}. A
-direct computation confirms this: for a Schwartz $f=e^{-\rho^{2}/2}$ on a
-disk of radius $R=12$, the function value in the boundary collar is
-$f(R-1)\approx 5\times10^{-27}$, yet the collar reconstruction error
-$\lVert g_{\Lambda}-f\rVert_{\infty,[R-1,R]}/\supnorm{\nabla f}$ remains near
-$0.26$ (driver \texttt{b3\_decompactification.py}). Taking $R\to\infty$
-with the same finite-$R$ Dirichlet construction therefore does
-\emph{not} remove the obstruction; the Dirichlet collar is an artifact
-of compactification that survives the naive limit. The cure is not a
-limit of the disk but the boundaryless carrier itself.
-\end{remark}
-
-\subsection{The boundaryless plane and its Bochner--Riesz Berezin}
-\label{subsec:plane}
-The physical de-compactified geometry is the plane $\R^{2}$ (the cone
-$\R^{2}_{\alpha}$), which has no boundary. Its spectral truncation is the
-\emph{band limit}: $P_{\Lambda}$ projects onto radial momenta
-$\xi\le\sqrt{\Lambda}$ of the Hankel transform $\widehat{f}(\xi)=
-\int_{0}^{\infty}f(\rho)J_{0}(\xi\rho)\rho\,d\rho$, with no Dirichlet
-condition anywhere. The reconstruction map is the two-dimensional
-\emph{Bochner--Riesz} (Ces\`aro) mean
-\begin{equation}
-\Berez_{\Lambda}^{\R^{2}}(f)(\rho)=
-\int_{0}^{\sqrt{\Lambda}}
-\Big(1-\frac{\xi^{2}}{\Lambda}\Big)^{s}\,
-\widehat{f}(\xi)\,J_{0}(\xi\rho)\,\xi\,d\xi .
-\label{eq:plane_berezin}
-\end{equation}
-
-\begin{theorem}[De-compactified reconstruction on the plane]
-\label{thm:plane}
-For Ces\`aro order $s>\tfrac12$ (the Bochner--Riesz critical index in
-dimension two) and every radial Schwartz observable $f$, the map
-$\Berez_{\Lambda}^{\R^{2}}$ of~\eqref{eq:plane_berezin} satisfies the
-four reconstruction properties on the boundaryless plane: it is positive
-(the Bochner--Riesz means are positivity-preserving above the critical
-index~\cite{stein_weiss}; confirmed numerically, $\min g \approx -2\times10^{-4}$), contractive and unital after kernel
-normalisation, and an approximate identity with
-$\supnorm{\Berez_{\Lambda}^{\R^{2}}(f)-f}\le\gamma_{\Lambda}
-\supnorm{\nabla f}$ and $\gamma_{\Lambda}\to0$ at an algebraic rate.
-There is no boundary obstruction.
-\end{theorem}
-
-\noindent\emph{Verification (driver \texttt{b3\_plane\_bochner\_riesz.py}).}
-For $f=e^{-\rho^{2}/2}$ the coefficient
-$\supnorm{\Berez_{\Lambda}^{\R^{2}}(f)-f}/\supnorm{\nabla f}$ decays as
-$\Lambda^{-0.88}$ ($0.83\to0.04$ over $\Lambda=5\to160$, error ratio
-$\to2$); for a narrower Gaussian it decays as $\Lambda^{-0.63}$;
-positivity holds ($\min g\to0$, the small under-resolution negativity at
-$\Lambda=5$ shrinking from $-3\times10^{-3}$ at $s=2$ to $-6\times10^{-4}$
-at $s=4$, consistent with Bochner--Riesz positivity sharpening in $s$).
-The contrast with the finite-$R$ disk is decisive: the plane construction
-has no $0/0$ collar, so all Schwartz observables reconstruct cleanly.
-$\hfill\square$
-
-\subsection{The non-compact propinquity assembly}
-\label{subsec:assembly}
-Theorem~\ref{thm:plane} closes the \emph{reconstruction} (L4) arrow on the
-boundaryless plane. The remaining ingredient for the full propinquity is
-the non-compact \emph{assembly} (L5) in the pointed/proper quantum-metric
-setting~\cite{latremoliere2016, latremoliere2025}. We pin the carrier as
-a pointed proper quantum metric space and assemble the tunneling pair from
-the reconstruction map.
-
-\begin{lemma}[Properness]
-\label{lem:proper}
-The plane triple $(\R^{2}_{\alpha}, L)$, with base point the apex
-$\rho=0$ and $L(f)=\supnorm{\nabla f}$, is a proper quantum metric space:
-the Lipschitz ball $\{f : L(f)\le1,\ f(0)=0\}$ restricted to any compact
-$K\subset\R^{2}_{\alpha}$ is totally bounded.
 \end{lemma}
 
 \begin{proof}
-The restricted ball is equicontinuous (each $f$ is $1$-Lipschitz for the
-cone metric) and pointwise bounded ($|f(x)|\le d(x,0)\le\operatorname{diam}
-K$). By Arzel\`a--Ascoli it is precompact in $C(K)$, i.e.\ totally bounded.
+(i) $U_{a}S(f)U_{a}^{*}-S(f)=P_{\Lambda}M_{\tau_{a}f-f}P_{\Lambda}$, and
+compression does not increase norms.
+
+(ii) $|\upsilon(T)|\le\opnorm{T}$, and $\upsilon(1)=1$, $\upsilon(T)\ge0$
+for $T\ge0$, from the vector-state form. Since $U_{x}^{*}=U_{-x}$,
+\[
+\upsilon(T)(x)-\upsilon(T)(x')=\bigl\langle\psi_{\Lambda},\,
+U_{-x'}\bigl(U_{x'-x}TU_{x'-x}^{*}-T\bigr)U_{-x'}^{*}\,\psi_{\Lambda}
+\bigr\rangle,
+\]
+whose modulus is at most $L_{\Lambda}(T)|x-x'|$. So $\upsilon(T)$ is
+bounded and Lipschitz, hence in $\Acal$, with $L(\upsilon(T))\le
+L_{\Lambda}(T)$.
+
+(iii) $U_{x}\psi_{\Lambda}\in\Hilb_{\Lambda}$ absorbs the projections:
+$\upsilon(S(f))(x)=\int f(y)|\psi_{\Lambda}(y-x)|^{2}dy=\int f(x+z)
+k_{\Lambda}(z)dz$. Then $|\upsilon(S(f))(x)-f(x)|\le\int|f(x+z)-f(x)|
+k_{\Lambda}(z)dz\le L(f)\gamma_{\Lambda}$.
+
+(iv) For $T=S(f)$, (iii) gives $M_{\upsilon(T)}=\int k_{\Lambda}(z)\,
+M_{f(\cdot+z)}\,dz$ weakly, and $M_{f(\cdot+z)}=U_{-z}M_{f}U_{-z}^{*}$;
+compressing, and using $[U_{-z},P_{\Lambda}]=0$, gives
+$S(\upsilon(T))=\Phi(T)$. Both sides are norm-contractive and linear in
+$T$, so the identity extends to the closure $\Op_{\Lambda}$. Finally
+$\opnorm{\Phi(T)-T}\le\int k_{\Lambda}(z)\opnorm{U_{-z}TU_{-z}^{*}-T}dz\le
+L_{\Lambda}(T)\int|z|k_{\Lambda}(z)dz$.
 \end{proof}
 
-\begin{theorem}[Plane convergence]
-\label{thm:plane_propinquity}
-The band-limited truncated triples $\Tcal_{\Lambda}=(P_{\Lambda}C_{0}(\R^{2}
-_{\alpha})P_{\Lambda},\,L,\,0)$ converge to the plane triple
-$\Tcal_{\infty}=(C_{0}(\R^{2}_{\alpha}),\,L,\,0)$ in the van~Suijlekom
-state-space Gromov--Hausdorff distance at the qualitative rate
-$\gamma_{\Lambda}$ of Theorem~\ref{thm:plane}
-(measured $\gamma_{\Lambda}\sim\Lambda^{-0.88}$ for a Gaussian observable).
-Convergence in the strictly stronger Latr\'emoli\`ere pointed/proper
-propinquity, $\Lprop \le C\gamma_{\Lambda}\to 0$, holds
-\emph{conditionally} on the extent rebuild of
-Remark~\ref{rem:height_constant}:\ the height leg carries the
-$\Lambda$-independent Lebesgue constant $\Lebesgue_{s}>1$, which does not
-vanish, so the pointed/proper statement is not established here (see the
-remark).
+The positivity of $k_{\Lambda}$ is used twice: in (iii) and (iv) the
+average of a quantity bounded by $L\cdot|z|$ is bounded by $L\gamma_{\Lambda}$.
+With a signed kernel of $L^{1}$ norm $\Lebesgue>1$ the same steps give no
+such bound (a signed kernel is not a state-induced average; compare
+Remark~\ref{rem:height_constant}).
+
+\begin{corollary}[kernel; \textbf{[INTERNAL THEOREM]}]\label{cor:kernel}
+$L_{\Lambda}(T)=0$ if and only if $T\in\C1$.
+\end{corollary}
+\begin{proof}
+If $L_{\Lambda}(T)=0$ then by (iv) $T=S(\upsilon(T))$, and by (ii)
+$\upsilon(T)$ is constant.
+\end{proof}
+
+\subsection{State classes and the convergence statement}
+The Monge--Kantorovich (MK) metric on all states of $\Acal$ is not
+finite. For example $f_{n}(x)=\min(|x|,n)$ has $L(f_{n})=1$ and separates
+$\delta_{0}$ from $\delta_{x}$ by $\min(|x|,n)$. Since $\Acal$ also has
+non-normal states at infinity, we restrict to states of finite first
+moment on both sides:
+\[
+\Prob=\{\mu:\ \text{Borel probability measure on }\R^{2},\
+\textstyle\int|x|\,d\mu<\infty\},\qquad
+\Cst_{\Lambda}=\{\omega\in S(\Op_{\Lambda}):\ S^{*}\omega\in\Prob\},
+\]
+where $S^{*}\omega=\omega\circ S$ and ``$\in\Prob$'' means that it is
+integration against such a measure. On $\Prob$ the MK metric of $L$ is
+the Wasserstein distance $W_{1}$ (Kantorovich--Rubinstein
+duality~\cite{villani2009}; bounded Lipschitz test functions suffice,
+by truncation, when first moments are finite). On $\Cst_{\Lambda}$ put
+$\MK_{\Lambda}(\omega,\omega')=\sup\{|\omega(T)-\omega'(T)|:T=T^{*}\in
+\Op_{\Lambda},\ L_{\Lambda}(T)\le1\}$.
+
+\begin{theorem}[flat-plane state-space convergence]\label{thm:plane_gh}
+Under Definition~\ref{def:window},
+\[
+d_{\mathrm{GH}}\Bigl(\bigl(\Cst_{\Lambda},\MK_{\Lambda}\bigr),\
+\bigl(\Prob,W_{1}\bigr)\Bigr)\ \le\ \gamma_{\Lambda}
+=\gamma_{1}\Lambda^{-1/2}\ \xrightarrow[\Lambda\to\infty]{}\ 0 .
+\]
+\textbf{Tiers.} The four estimates, the scaling and the kernel
+statement are \textbf{[INTERNAL THEOREM]}
+(Lemmas~\ref{lem:scaling}--\ref{lem:four_facts},
+Corollary~\ref{cor:kernel}). The Gromov--Hausdorff inequality is
+\textbf{[INTERNAL THEOREM]} for the two metric spaces named:\ the proof below
+closes on the classes $\Cst_{\Lambda}$, $\Prob$. We have not shown that these
+classes are the canonical ones (an open question, not a gap in the proof), and we have not connected them to Latr\'emoli\`ere's
+pointed/proper framework~\cite{latremoliere2025}.
 \end{theorem}
 
-\begin{proof}[Proof structure]
-The pointed/proper propinquity is computed from a tunneling pair between
-$\Tcal_{\Lambda}$ and $\Tcal_{\infty}$, localised near the base point and
-controlled by two quantities~\cite{latremoliere2016, latremoliere2025}: the
-\emph{reach} (how well the reconstruction approximates the identity) and the
-\emph{height} (the Lipschitz distortion of the reconstruction). We take the
-tunneling pair $(\Berez_{\Lambda}^{\R^{2}}, P_{\Lambda})$ of the Bochner--Riesz
-Berezin~\eqref{eq:plane_berezin} and the band-limit projection. Then:
-(i) Lemma~\ref{lem:proper} supplies the properness the framework requires;
-(ii) the reach is the approximate identity of Theorem~\ref{thm:plane},
-$\supnorm{\Berez_{\Lambda}^{\R^{2}}(f)-f}\le\gamma_{\Lambda}\supnorm{\nabla f}$
-with $\gamma_{\Lambda}\to0$;
-(iii) the height is the Lipschitz distortion, bounded by the kernel's
-$L^{1}$ norm, $\supnorm{\nabla(\Berez_{\Lambda}^{\R^{2}}f)}\le
-\Lebesgue_{s}\,\supnorm{\nabla f}$;
-(iv) positivity, contractivity and unitality (Theorem~\ref{thm:plane}) make
-$\Berez_{\Lambda}^{\R^{2}}$ an admissible tunneling map. The pointed/proper
-assembly~\cite{latremoliere2016, latremoliere2025} then bounds
-$\Lprop\le C\max(\text{reach},\text{height contribution})=C\gamma_{\Lambda}
-\to0$.
+\begin{proof}
+\emph{Well-definedness.} For $\mu\in\Prob$ put $\upsilon^{*}\mu(T)=
+\int\upsilon(T)\,d\mu$, a state of $\Op_{\Lambda}$ by
+Lemma~\ref{lem:four_facts}(ii). By (iii), $S^{*}\upsilon^{*}\mu=\mu*k_{\Lambda}$
+(for the radial windows used $k_{\Lambda}$ is even, so the reflection
+convention is immaterial), whose first moment is at
+most $\int|x|d\mu+\gamma_{\Lambda}<\infty$; so $\upsilon^{*}\mu\in
+\Cst_{\Lambda}$. By definition $S^{*}$ maps $\Cst_{\Lambda}$ into $\Prob$.
+$\MK_{\Lambda}$ is finite on $\Cst_{\Lambda}$: for $L_{\Lambda}(T)\le1$,
+(iv) and (ii) give $|\omega(T)-\omega'(T)|\le W_{1}(S^{*}\omega,
+S^{*}\omega')+2\gamma_{\Lambda}$. It separates states, since every
+self-adjoint $T$ has $L_{\Lambda}(T)<\infty$.
+
+\emph{Lipschitz pullbacks.} By (i), $W_{1}(S^{*}\omega,S^{*}\omega')\le
+\MK_{\Lambda}(\omega,\omega')$; by (ii), $\MK_{\Lambda}(\upsilon^{*}\mu,
+\upsilon^{*}\nu)\le W_{1}(\mu,\nu)$.
+
+\emph{Almost inverses.} By (iii), $W_{1}(S^{*}\upsilon^{*}\mu,\mu)=
+\sup_{L(f)\le1}|\int(\upsilon S f-f)d\mu|\le\gamma_{\Lambda}$; by (iv),
+$\MK_{\Lambda}(\upsilon^{*}S^{*}\omega,\omega)=\sup_{L_{\Lambda}(T)\le1}
+|\omega(S\upsilon T-T)|\le\gamma_{\Lambda}$.
+
+\emph{Correspondence.} Let $\mathcal R=\{(\mu,\upsilon^{*}\mu)\}\cup
+\{(S^{*}\omega,\omega)\}$. For two pairs of the first kind,
+$\MK_{\Lambda}(\upsilon^{*}\mu,\upsilon^{*}\nu)\le W_{1}(\mu,\nu)\le
+W_{1}(S^{*}\upsilon^{*}\mu,S^{*}\upsilon^{*}\nu)+2\gamma_{\Lambda}\le
+\MK_{\Lambda}(\upsilon^{*}\mu,\upsilon^{*}\nu)+2\gamma_{\Lambda}$. For
+a mixed pair, $W_{1}(\mu,S^{*}\omega)\le\MK_{\Lambda}(\upsilon^{*}\mu,
+\omega)+\gamma_{\Lambda}$ and $\MK_{\Lambda}(\upsilon^{*}\mu,\omega)\le
+W_{1}(\mu,S^{*}\omega)+\gamma_{\Lambda}$. The case of two pairs of the
+second kind is symmetric. The distortion is therefore at most
+$2\gamma_{\Lambda}$, and $d_{\mathrm{GH}}\le\gamma_{\Lambda}$. No
+compactness is used; both spaces are unbounded, and the bound is on the
+full (not pointed) Gromov--Hausdorff distance.
 \end{proof}
 
-\begin{remark}[The height constant is not $1$ --- corrected 2026-09-07]
+\subsection{Windows: smooth edge versus sharp edge}\label{subsec:windows}
+\begin{proposition}[the $(1-|\xi|^{2})^{m}$ windows;\
+\textbf{[INTERNAL THEOREM + MEASURED]}]\label{prop:windows}
+Let $\varphi_{m}\propto(1-|\xi|^{2})_{+}^{m}$, $m\in\{0,1,2,\dots\}$. By Sonine's
+integral~\cite{watson1944},
+\[
+|\psi_{1}(x)|^{2}=c_{m}\,\frac{J_{m+1}(r)^{2}}{r^{2m+2}},\qquad
+r=|x|,\qquad c_{m}=\frac{4^{m}(m!)^{2}(2m+1)}{\pi},
+\]
+which is the squared modulus of the two-dimensional Bochner--Riesz kernel
+of order $m$. It decays like $r^{-2m-3}$, so \eqref{eq:gamma1} holds if and only if
+$m\ge1$. For $m=1$, $\gamma_{1}=32/(5\pi)\approx2.037$; numerically
+$\gamma_{1}\approx2.299$ ($m=2$) and $2.593$ ($m=3$).
+\end{proposition}
+The normalisation $c_{m}$ and the $m=1$ moment follow from the
+Weber--Schafheitlin-type integral $\int_{0}^{\infty}J_{\nu}(t)^{2}
+t^{-\lambda}dt$. All three moments are reproduced by quadrature in
+\texttt{tests/test\_paper53\_flat\_plane\_squared\_window.py}. The $\pi$
+in $\gamma_{1}$ is the normalisation of the continuum Fourier--Bessel
+transform, a continuum-side constant. It is not a skeleton quantity, and
+no Paper~34 catalogue placement is claimed.
+
+\begin{remark}[the sharp window diverges]\label{rem:sharp}
+\textbf{[INTERNAL THEOREM + MEASURED]} For $m=0$ (indicator of the ball),
+$k_{1}=J_{1}(r)^{2}/(\pi r^{2})$. Its partial first moment is
+$\int_{|x|\le\rho}|x|k_{1}=2\int_{0}^{\rho}J_{1}(t)^{2}dt$, which grows
+like $(2/\pi)\log\rho$ by the Bessel asymptotics; the test measures the
+slope. So in two dimensions the sharp spectral window gives no finite
+rate, and a smooth-edged window is needed. On the compact group
+$\mathrm{SU}(2)$ the sharp (Fej\'er) window does give a finite rate,
+$(4/\pi)\log n/n$ in Paper~38's normalisation. A natural reading is that
+the same slowly decaying tail is cut off there at the diameter. That
+reading is \textbf{[ARGUED]}; we have not checked it here.
+\end{remark}
+
+\subsection{Why the Bochner--Riesz map is not the lift}\label{subsec:not_br}
+The earlier version of this paper used the two-dimensional Bochner--Riesz
+mean
+\begin{equation}\label{eq:plane_berezin}
+\Berez_{\Lambda}^{s}(f)=\mathcal F^{-1}\bigl[(1-|\xi|^{2}/\Lambda)_{+}^{s}
+\,\widehat f\,\bigr]=K_{s,\Lambda}*f,\qquad
+K_{s,1}(r)\propto\frac{J_{s+1}(r)}{r^{s+1}},
+\end{equation}
+as its reconstruction map. Two measured facts rule it out as a lift.
+
+\emph{It does not preserve positivity.} \textbf{[MEASURED]} $K_{s,1}$
+oscillates: $\min K/\max K=-0.071,-0.059,-0.029,-0.009$ at
+$s=0.75,1,2,4$ (\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}).
+A non-negative $f$ concentrated where $K<0$ is therefore mapped to a
+function with negative values. The positivity claimed in the earlier
+version (``classical, $s\ge\tfrac12$'') is false. Bochner--Riesz summability
+above the critical index~\cite{stein_weiss} concerns convergence, not
+positivity.
+
+\begin{remark}[the Lebesgue constant exceeds $1$ --- corrected 2026-09-07]
 \label{rem:height_constant}
-\textbf{[MEASURED]} An earlier version of step~(iii) asserted that
-$\Berez_{\Lambda}^{\R^{2}}$ is \emph{gradient-non-expansive},
-$\supnorm{\nabla(\Berez_{\Lambda}^{\R^{2}}f)}\le\supnorm{\nabla f}$,
-``verified numerically, ratio $\le1$ at every $\Lambda$''. That is false over
-the unit-Lipschitz ball. $\Berez_{\Lambda}^{\R^{2}}$ is a radial convolution,
-so $\nabla(\Berez f)=\Berez(\nabla f)$ and Young's inequality makes the
-\emph{sharp} constant the kernel's $L^{1}$ norm
-$\Lebesgue_{s}:=\normone{K_{s}}$, which equals $1$ only if $K_{s}\ge0$ a.e.
-The two-dimensional Bochner--Riesz kernel
-$K_{s}(r)\propto J_{s+1}(r)/r^{s+1}$ oscillates, hence is negative somewhere,
-hence $\Lebesgue_{s}>1$ strictly at every finite $s$. Integrating over Bessel
-half-waves:
+\textbf{[MEASURED]} $\Berez_{\Lambda}^{s}$ is a convolution, so
+$\nabla(\Berez f)=\Berez(\nabla f)$, and by Young's inequality the
+sharp gradient gain is the Lebesgue constant
+$\Lebesgue_{s}:=\normone{K_{s}}/\int K_{s}$. This equals $1$ only for a
+non-negative kernel. Integrating over Bessel half-waves:
 \[
 \begin{array}{l|cccccccc}
 s & 0.6 & 0.75 & 1 & 1.5 & 2 & 3 & 5 & 8\\\hline
 \Lebesgue_{s} & 5.72 & 3.23 & 2.01 & 1.42 & 1.23 & 1.09 & 1.02 & 1.004
 \end{array}
 \]
-Just above the critical index the gain is large, and it decreases to $1$ only
-as $s\to\infty$. Two further points. First, $\Lebesgue_{s}$ is
-\emph{$\Lambda$-independent} by scaling, so the reported ratio ``rising to $1$
-as $\Lambda\to\infty$'' cannot have been the operator's gradient gain at all
---- that quantity does not move with $\Lambda$; it was a property of the
-particular Gaussian test functions. Second, this is \emph{not} Paper~38's
-withdrawn Lemma~L5 transported here:\ L5's height was a
-reconstruction-\emph{defect} quantity, refuted by a finite-band $f$ with
-$B(f)=0$, and that same $f$ gives $\supnorm{\nabla(\Berez f)}=0$ here, which
-\emph{satisfies} non-expansiveness. Different quantity, different failure mode.
+$\Lebesgue_{s}$ is $\Lambda$-independent by scaling and tends to $1$
+only as $s\to\infty$ (\texttt{tests/test\_paper53\_height\_constant.py}).
+An earlier version asserted that $\Berez_{\Lambda}^{s}$ is
+gradient-non-expansive, ``ratio $\le1$ at every $\Lambda$''. That is false
+over the unit-Lipschitz ball. The $\Lambda$-dependence it reported was a
+property of the Gaussian test functions. This is not Paper~38's
+withdrawn Lemma~L5 transported:\ L5's height was a reconstruction-defect
+quantity of a different construction.
 
-\textbf{[OPEN --- the named constituents are not the framework's]} Checked
-against the primary sources (2026-09-07), the question ``what does a height
-constant $>1$ cost the bound?'' is not the right question, because the
-Lipschitz distortion of the reconstruction is not a constituent of the
-propinquity in \emph{any} version of the framework:
-\begin{itemize}
-\item The dual propinquity is an infimum, over tunnels, of the \emph{extent}
-  $\chi(\tau)=\max_{j}\mathrm{Haus}_{\mathrm{mk}_{L}}\bigl(\{\varphi\circ
-  \pi_{j}:\varphi\in\mathcal{S}(\mathcal{A}_{j})\},\ \mathcal{S}(\mathcal{D})
-  \bigr)$ --- a Hausdorff distance between \emph{state spaces}
-  \cite{latremoliere_metric_st}.
-\item In the earlier dual construction the two quantities are the reach and the
-  \emph{depth}, with length $\max\{\rho(\tau),\delta(\tau)\}$;\ both are again
-  state-space Hausdorff distances. ``Height'' belongs to the still earlier
-  \emph{bridge}-based quantum propinquity, where it too is a state-space
-  quantity. Latr\'emoli\`ere records that reach and height were the original
-  construction and that the extent ``has better properties''
-  \cite{latremoliere_metric_st}.
-\item The pointed/proper paper cited here for this transport,
-  \cite{latremoliere2025}, uses $M$-tunnels whose maps are \emph{topographic
-  quantum $M$-isometries}, measured by an extent that is the maximum of a
-  state-space condition, a base-point Monge--Kantorovich distance, and
-  conditions on the distinguished element. The words ``height'' and ``depth''
-  do not occur in it.
-\end{itemize}
-In every version the constituents are \emph{distances required to vanish}, so
-a statement of the form ``the height is $\le1$'' was never the right shape to
-discharge the requirement:\ a ratio of $1$ is not a distance of $0$. Where the
-Lipschitz behaviour of $\Berez_{\Lambda}^{\R^{2}}$ genuinely bears is on
-whether the tunnel's maps meet the isometry/quotient condition on the
-Lipschitz seminorm; normalising to meet it propagates $\Lebesgue_{s}$ into the
-extent, which would leave convergence intact at a rate
-$\Lebesgue_{s}\gamma_{\Lambda}$. \emph{That is a rebuild of step~(iii) around
-the extent, not a substitution of constants, and it has not been done here.}
-Until it is, Theorem~\ref{thm:plane_propinquity} should be read as carrying an
-unproved constituent. The reach leg (Theorem~\ref{thm:plane}) and the four
-reconstruction properties are untouched, and they are exactly the ingredients
-an extent estimate would be built from.
+\textbf{Consequence for the construction.} In the argument of
+Lemma~\ref{lem:four_facts}, a lift of the form
+$T\mapsto K*(\text{something})$ with a signed kernel of $L^{1}$ norm
+$\Lebesgue_{s}>1$ is not a unital positive map. The ``height'' used
+in the earlier assembly (a Lipschitz gain) was also not Latr\'emoli\`ere's
+height, which is a state-space Hausdorff distance required to
+vanish~\cite{latremoliere_metric_st,
+latremoliere2025}. Both problems disappear with the squared window. Its
+kernel $|\psi_{\Lambda}|^{2}$, the squared modulus of a Bochner--Riesz
+kernel when $\widehat\psi\propto(1-|\xi|^{2})^{m}_{+}$
+(Proposition~\ref{prop:windows}), is positive, so the constant is exactly
+$1$ and the only rate is the first moment $\gamma_{\Lambda}$.
 \end{remark}
 
-\begin{remark}[Honest scope of the assembly]
-\label{rem:assembly_scope}
-The load-bearing ingredients --- properness (Lemma~\ref{lem:proper}), the four
-reconstruction properties with the reach rate (Theorem~\ref{thm:plane}) --- are
-established here. The height bound is \emph{not}:\ see
-Remark~\ref{rem:height_constant}, where the claimed non-expansiveness is
-corrected to a finite Lebesgue constant $\Lebesgue_{s}>1$ and its
-consequence for the assembly is left open. The detailed
-\emph{bookkeeping} of the pointed/proper propinquity (the base-point-compatible
-tunneling and the local-uniformity of its reach and height) is transported from
-Latr\'emoli\`ere's framework~\cite{latremoliere2016, latremoliere2025}, in the
-same manner that the compact-carrier assembly of the companion
-papers~\cite{paper38, paper40} transport the compact assembly
-from its L1$'$--L4 ingredients. With that transport, plane (hence
-de-compactified disk-with-cone) convergence is established at the
-qualitative-rate level in van~Suijlekom's state-space Gromov--Hausdorff
-sense; the strictly stronger Latr\'emoli\`ere propinquity carries the same
-named pointed/proper bookkeeping residual as Papers~38/40 (a self-contained
-bound with the sharp constant $C$). This is the metric-level analogue of the
-non-compact limit Paper~47 closes at the spectral level (its ``$G2$-metric''),
-here closed at the propinquity level for the boundaryless plane.
+\begin{remark}[the Bochner--Riesz rate on smooth observables]
+\label{rem:br_rate}
+\textbf{[MEASURED]} On individual smooth observables the Bochner--Riesz
+mean does reconstruct. For $f=e^{-\rho^{2}/2}$ at $s=2$,
+$\supnorm{\Berez_{\Lambda}^{s}f-f}/\supnorm{\nabla f}$ decays roughly like
+$\Lambda^{-0.9}$ ($\Lambda=5\to160$), and like $\Lambda^{-0.6}$ for a
+narrower Gaussian (\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}).
+These are observable-dependent rates. The uniform rate over the
+Lipschitz ball, which is what the Gromov--Hausdorff bound needs, is the
+first-moment rate $\gamma_{\Lambda}\propto\Lambda^{-1/2}$ of
+Theorem~\ref{thm:plane_gh}.
 \end{remark}
+
+\begin{remark}[prior art]\label{rem:prior_art}
+The compression/lifted-state pattern, with a single first-moment
+constant, is Gaudillot-Estrada and van~Suijlekom's for compact metric
+groups~\cite{gaudillot_vs2025}; Paper~38~\cite{paper38} uses it on the
+$S^{3}$ spinor window. The present adaptation replaces the group by the
+non-compact translation group of $\R^{2}$, the Fej\'er kernel by a
+squared band-limited window, and the compact state spaces by
+finite-first-moment classes. We did not find a treatment of flat
+$\R^{n}$ spectral truncations of this kind in the literature we checked.
+This is a statement about our search, not a novelty claim.
+\end{remark}
+
+% =====================================================================
+\section{The finite disk-with-cone: measurements}
+\label{sec:disk}
+% =====================================================================
+
+\subsection{Setup}
+Let $\diskR$ be the flat disk of radius $R$ with the Dirichlet Laplacian,
+eigenbasis
+\begin{equation}
+\psi_{k,j}(\rho,\phi)=N_{k,j}\,J_{|k|}\!\Big(\frac{a_{|k|,j}\rho}{R}\Big)
+\frac{e^{ik\phi}}{\sqrt{2\pi}},\qquad
+\lambda_{k,j}=\Big(\frac{a_{|k|,j}}{R}\Big)^{2},
+\label{eq:eigenbasis}
+\end{equation}
+with $a_{m,j}$ the $j$-th positive zero of $J_{m}$ and
+$N_{k,j}=\sqrt{2}/(R\,|J_{|k|+1}(a_{|k|,j})|)$. On the disk-with-cone
+$\cone$ (azimuthal period $2\pi\alpha$) the half-integer fermionic
+azimuthal momentum is $m_{\mathrm{eff}}=(k+\tfrac12)/\alpha$. Let
+$P_{\Lambda}$ project onto $\lambda\le\Lambda$ and
+$\Op_{\Lambda}=P_{\Lambda}C(\cone)P_{\Lambda}$.
+
+\begin{observation}[propagation number two; \textbf{[MEASURED]}]
+\label{prop:prop2}
+In the truncated radial$\times$azimuthal mode basis at $\alpha=1$ (fermionic
+$m=|k+\tfrac12|$), built from compressed monomials $z^{a}\bar z^{b}$, the
+squared operator system $\Op^{2}$ spans the full envelope $M_{N}(\C)$ at
+$(K,J)\in\{(2,2),(2,3),(3,2),(3,3)\}$, $N\in\{8,12,12,18\}$
+(\texttt{tests/test\_paper53\_disk\_obstruction.py}). This matches the
+Connes--van~Suijlekom Toeplitz value~\cite{connes_vs2021}. It is not proved
+for all cutoffs.
+\end{observation}
+
+\subsection{The Markov--Ces\`aro map}
+\begin{definition}[Markov--Ces\`aro reconstruction]\label{def:berezin}
+For order $s$ and cutoff $\Lambda$, with $w_{a}=(1-\lambda_{a}/\Lambda)_{+}^{s}$,
+\begin{equation}
+g_{\Lambda}(x)=
+\frac{\sum_{a}w_{a}\langle\psi_{a},f\rangle\psi_{a}(x)}
+{\sum_{a}w_{a}\langle\psi_{a},1\rangle\psi_{a}(x)},
+\qquad
+\Berez_{\Lambda}(f)=P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}.
+\label{eq:berezin}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[what holds and what does not; \textbf{[MEASURED]}
+except (a)]\label{prop:disk}
+In the radial ($k=0$) sector, $R=1$, $\Lambda=100$ to $1600$ (and
+$6400$ where stated):
+\begin{enumerate}
+\item[(a)] \emph{Unitality} (exact): $f\equiv1\Rightarrow g_{\Lambda}\equiv1$.
+\item[(b)] \emph{Positivity fails in general.} For a non-negative ring
+$f(\rho)=e^{-((\rho-\rho_{0})/0.02)^{2}}$, centred where the Ces\`aro
+kernel is most negative, $\min g_{\Lambda}=-0.016,-0.025,-0.044$ at
+$\Lambda=100,400,1600$ ($s=2$). At $s=4$ it is $-0.006$ and $-0.011$ at
+$\Lambda=400,1600$. The denominator is positive at those points. The
+interior Ces\`aro kernel has $\min/\max\approx-0.03$ ($s=2$) and
+$-0.009$ ($s=4$), matching the plane Bochner--Riesz values of
+\S\ref{subsec:not_br}. On the single observable $(\rho/R)^{2}$, $\min
+g_{\Lambda}>0$ at $s=2$; this is where the earlier general positivity
+claim came from. The truncated heat weight $e^{-\lambda/\Lambda}$ already
+fails on $(\rho/R)^{2}$ ($\min g\approx-0.13$ at $\Lambda=200$).
+\item[(c)] \emph{The reconstruction error on the open disk decays.} For
+$f=(\rho/R)^{2}$, which is non-zero at the boundary,
+$\sup_{\rho<R}|g_{\Lambda}-f|/\supnorm{\nabla f}=0.237,0.179,0.132,
+0.097,0.070$ at $\Lambda=100,200,400,800,1600$ (about $\Lambda^{-0.44}$). The
+maximum sits at the boundary. For an interior-supported $C^{1}$ bump the
+error falls roughly like $\Lambda^{-0.9}$ ($0.163\to0.0032$ over
+$\Lambda=100\to6400$).
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}[the withdrawn ``Dirichlet-boundary obstruction'']
+\label{rem:interior_correction}
+Earlier versions reported that the disk error does not decay
+($\sim\Lambda^{+0.07}$, plateau $\approx0.3$) and read this as an
+obstruction intrinsic to the Dirichlet boundary. The plateau came from
+the single grid point $\rho=R$. There every $J_{0}(a_{j})$ is rounding
+noise of order $10^{-16}$, so the ratio~\eqref{eq:berezin} returns an
+arbitrary number. Dropping that one point, or evaluating at $R-10^{-9}$,
+gives the decaying values of Proposition~\ref{prop:disk}(c) (the test
+now pins both). The companion claim that the boundary-collar error for
+$f=e^{-\rho^{2}/2}$ on $R=12$ stays near $0.26$ is not reproduced: a
+direct recomputation gives $\sim10^{-11}$, in line with the sprint
+driver's own docstring. What the boundary does cause is a slower rate for
+observables that are non-zero there. The disk measurements therefore do
+\emph{not} show an obstruction. They show that the obvious reconstruction
+map fails positivity, and that no proof route is available.
+\end{remark}
+
+\begin{remark}[why no disk theorem]
+The argument of \S\ref{sec:plane} needs a transitive group of isometries
+commuting with the truncation, and a positive lift. The disk has neither:
+its isometries are the rotations about the centre, and the
+Markov--Ces\`aro map is not positive. Whether the disk truncations
+converge in any state-space sense is open (\S\ref{sec:open}, Q2).
+\end{remark}
+
+% =====================================================================
+\section{The cone $\alpha\ne1$}
+\label{sec:cone}
+% =====================================================================
+The cone $\R^{2}_{\alpha}$ (azimuthal period $2\pi\alpha$) is flat away
+from its apex, but for $\alpha\ne1$ it is not homogeneous. Its only
+isometries are rotations about the apex, so there is no translation
+seminorm and no family of window translates to average over. The earlier
+``plane $\R^{2}_{\alpha}$'' construction never reached the cone: it used
+the order-$0$ Hankel transform, the radial sector of the flat plane, and
+$\alpha$ did not appear. Convergence of spectral truncations of the cone,
+and in particular anything bearing on the apex-local cigar-tip entropy of
+Paper~51, is open (Q1).
 
 % =====================================================================
 \section{Open questions}
 \label{sec:open}
 % =====================================================================
 
-\paragraph{Q1 (the residual: sharp self-contained bound).}
-Theorem~\ref{thm:plane_propinquity} establishes the plane propinquity at
-the qualitative-rate level, transporting the pointed/proper bookkeeping
-from Latr\'emoli\`ere's framework~\cite{latremoliere2016, latremoliere2025}.
-A self-contained pointed/proper bound with the sharp constant $C$ ---
-making the base-point-compatible tunneling and the local-uniformity of its
-reach and height explicit for $(\R^{2}_{\alpha}, \Berez_{\Lambda}^{\R^{2}})$
-rather than cited --- is the residual, exactly as the compact-carrier
-papers~\cite{paper38, paper40} carried a named bookkeeping residual on
-Latr\'emoli\`ere's compact assembly.
+\paragraph{Q1 (the cone).} Is there a state-space convergence statement
+for band-limited (Hankel-order $|k+\tfrac12|/\alpha$) truncations of
+the cone $\R^{2}_{\alpha}$? A lift would have to be built without
+translations. One option is window vectors localised along geodesics,
+with a separate estimate near the apex.
 
-\paragraph{Q2 (sharp plane rate).} The converging carrier is the plane
-(Theorem~\ref{thm:plane}), whose Bochner--Riesz reconstruction has a
-numerically measured, test-function-dependent algebraic rate
-$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$. A sharp closed-form rate (and its
-dependence on the Bochner--Riesz order $s$ and on the apex exponent
-$\alpha$) would parallel the $O(\log n/n)$ rate of the group
-case~\cite{paper38,paper40} and locate the plane cone in the same rate
-hierarchy. (The finite-disk interior rate is \emph{not} an open
-quantitative question but a closed negative one:\ it does not converge,
-Remark~\ref{rem:interior_correction}.)
+\paragraph{Q2 (the finite disk).} Does a positive, unital reconstruction
+map with a decaying Lipschitz-uniform rate exist for the Dirichlet disk?
+Such a map would, for instance, be built from localised vectors in the
+truncated space rather than from Ces\`aro weights. And is the propagation
+number two for all cutoffs (Observation~\ref{prop:prop2})?
 
-\paragraph{Q3 (boundary-adapted operator system).} An alternative to
-de-compactification is a boundary-adapted operator system --- mixed
-boundary conditions, or augmentation by boundary modes --- that
-reconstructs boundary-supported observables at finite $R$. Whether such
-a construction exists with the four reconstruction properties intact is
-open.
+\paragraph{Q3 (optimal window and sharp constant).} Among admissible
+windows the rate is $\gamma_{1}\Lambda^{-1/2}$. Which window minimises
+$\gamma_{1}$, and is $\Lambda^{-1/2}$ the sharp order of the
+Gromov--Hausdorff distance, or only of this bound?
 
-\paragraph{Q4 (higher-dimensional and warped carriers).} The disk is the
-$2$-dimensional flat case. The same questions for the warped cigar
-$\cone\times S^{2}$ as a single carrier (rather than the
-constant-warp tensor product used for the entropy), and for
-higher-dimensional balls, would extend the manifold-with-boundary
-propinquity beyond two dimensions.
+\paragraph{Q4 (Latr\'emoli\`ere's propinquity).} Theorem~\ref{thm:plane_gh}
+is a Gromov--Hausdorff statement on chosen state classes. Whether the
+same pair $(S,\upsilon)$ yields convergence in the pointed/proper
+propinquity~\cite{latremoliere2025} is open.
+
+\paragraph{Q5 ($\R^{n}$).} The argument is dimension-independent in form,
+with $\gamma_{\Lambda}=\gamma_{1}\Lambda^{-1/2}$ in every dimension.
+Which windows have a finite first moment in dimension $n$ was not checked.
+
+% =====================================================================
+\section{Conclusion}
+% =====================================================================
+On the flat plane, spectral truncation converges in the state-space
+Gromov--Hausdorff sense at rate $\gamma_{1}\Lambda^{-1/2}$, provided the
+lift uses a window whose squared modulus has a finite first moment. The
+four estimates behind this are proved; the final Gromov--Hausdorff step
+is argued on finite-first-moment state classes that we chose. The
+Bochner--Riesz map is not a usable lift, because its kernel changes sign.
+Replacing it by the squared modulus of such a kernel removes the
+Lebesgue constant. On the finite disk-with-cone the earlier
+obstruction was a numerical artifact, and the obvious reconstruction map
+is not positive. The disk and the cone with $\alpha\ne1$ are open.
 
 % =====================================================================
 \section*{Acknowledgments}
 % =====================================================================
-This paper is the operator-algebra companion to the gravity arc of
-Paper~51; it supplies the propinquity backbone that Paper~51's
-cigar-tip entropy theorem cited. The disk-with-cone reconstruction was
-developed and verified numerically in the GeoVac repository
-(\texttt{debug/b3\_disk\_backbone\_memo.md} and the drivers cited
-therein) during the L6 bookkeeping sprint of 2026-05-29.
+The finite-disk measurements and the Lebesgue-constant table were made in
+the GeoVac repository and are frozen in the \texttt{tests/test\_paper53\_*}
+files cited above. The 2026-09-29 rebuild, including the retractions in
+\S\ref{subsec:withdrawn}, is recorded in the CHANGELOG.
 
 % =====================================================================
 \begin{thebibliography}{99}
 % =====================================================================
+
+\bibitem{gaudillot_vs2025}
+Y.~Gaudillot-Estrada and W.~D.~van~Suijlekom, ``Convergence of spectral
+truncations for compact metric groups,'' \textit{Int.~Math.~Res.~Not.\
+IMRN} \textbf{2025}, no.~13 (2025), rnaf197;\ arXiv:2310.14733.
+
+\bibitem{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom, ``Spectral truncations in
+noncommutative geometry and operator systems,''
+\textit{Comm.~Math.~Phys.}\ \textbf{383} (2021), 2021--2067.
 
 \bibitem{latremoliere2015}
 F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity,''
@@ -843,88 +721,40 @@ propinquity,'' \textit{Contemp.~Math.}\ \textbf{676} (2016), 47--133.
 \bibitem{latremoliere_metric_st}
 F.~Latr\'emoli\`ere, ``The Gromov--Hausdorff propinquity for metric
 spectral triples,'' \textit{Adv.~Math.}\ \textbf{404} (2022), Paper
-No.~108393, 56\,pp.;\ preprint arXiv:1811.10843. \emph{Source for the
-extent-based definition of the dual propinquity, and for the statement that
-reach and height were the original construction which the extent supersedes.}
+No.~108393, 56\,pp.;\ preprint arXiv:1811.10843.
 
 \bibitem{latremoliere2025}
 F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff hypertopology on
 the class of pointed proper quantum metric spaces,'' arXiv:2512.03573
-(2025); the pointed/proper (locally compact) propinquity machinery
-transported here to the boundaryless plane.
+(2025).
 
-\bibitem{connes_vs2021}
-A.~Connes and W.~D.~van~Suijlekom, ``Spectral truncations in
-noncommutative geometry and operator systems,''
-\textit{Comm.~Math.~Phys.}\ \textbf{383} (2021), 2021--2067.
+\bibitem{villani2009}
+C.~Villani, \textit{Optimal Transport: Old and New}, Grundlehren der
+mathematischen Wissenschaften \textbf{338}, Springer, 2009
+(Kantorovich--Rubinstein duality).
 
-\bibitem{cheeger1983}
-J.~Cheeger, ``Spectral geometry of singular Riemannian spaces,''
-\textit{J.~Differential Geom.}\ \textbf{18} (1983), 575--657.
+\bibitem{watson1944}
+G.~N.~Watson, \textit{A Treatise on the Theory of Bessel Functions},
+2nd ed., Cambridge Univ.\ Press, 1944 (Sonine's finite integral;
+Weber--Schafheitlin integrals).
 
 \bibitem{stein_weiss}
 E.~M.~Stein and G.~Weiss, \textit{Introduction to Fourier Analysis on
-Euclidean Spaces}, Princeton Univ.\ Press, 1971 (Bochner--Riesz means
-and their positivity above the critical index); see also
-C.~D.~Sogge, \textit{Fourier Integrals in Classical Analysis},
-Cambridge Univ.\ Press, 1993.
-
-\bibitem{stempak1989}
-K.~Stempak, ``On convergence and divergence of Fourier--Bessel series,''
-\textit{Electron.~Trans.~Numer.~Anal.}\ \textbf{14} (2002), 223--235;
-and related works on Ces\`aro and
-Riesz means of Fourier--Bessel / Hankel expansions; see also
-B.~Muckenhoupt and E.~M.~Stein, ``Classical expansions and their
-relation to conjugate harmonic functions,''
-\textit{Trans.~Amer.~Math.~Soc.}\ \textbf{118} (1965), 17--92.
-
-\bibitem{colzani1993}
-L.~Colzani, A.~Crespi, G.~Travaglini, and M.~Vignati, ``Equiconvergence
-theorems for Fourier--Bessel expansions with applications to the
-harmonic analysis of radial functions,''
-\textit{Trans.~Amer.~Math.~Soc.}\ \textbf{338} (1993), 43--55.
+Euclidean Spaces}, Princeton Univ.\ Press, 1971 (Bochner--Riesz means).
 
 \bibitem{paper38}
 GeoVac Project. Paper~38 --- State-space Gromov--Hausdorff convergence
 of truncated Camporesi--Higuchi spectral triples on $S^3$.
 \texttt{papers/group1\_operator\_algebras/paper\_38\_su2\_propinquity\_convergence.tex}.
 
-\bibitem{paper39}
-GeoVac Project. Paper~39 --- Tensor-product propinquity convergence.
-\texttt{papers/group1\_operator\_algebras/paper\_39\_tensor\_propinquity\_convergence.tex}.
-
 \bibitem{paper40}
 GeoVac Project. Paper~40 --- State-space Gromov--Hausdorff convergence of
 spectral truncations of compact semisimple Lie groups with bi-invariant metric.
 \texttt{papers/group1\_operator\_algebras/paper\_40\_unified\_propinquity\_convergence.tex}.
 
-\bibitem{paper44}
-GeoVac Project. Paper~44 --- Operator-system extension of the BBB Krein
-spectral triple at finite cutoff: propagation number and envelope
-dependence on the Camporesi--Higuchi spinor bundle.
-\texttt{papers/group1\_operator\_algebras/paper\_44\_lorentzian\_operator\_system.tex}.
-
-\bibitem{paper45}
-GeoVac Project. Paper~45 --- $K^{+}$-restricted weak-form Lorentzian
-propinquity:\ a degeneracy theorem (the natural Lorentzian-propinquity
-seminorm vanishes identically).
-\texttt{papers/group1\_operator\_algebras/paper\_45\_lorentzian\_propinquity.tex}.
-
-\bibitem{paper46}
-GeoVac Project. Paper~46 --- Strong-form Lorentzian propinquity
-(strong-form construction descoped;\ archived 2026-09-14).
-\texttt{papers/group1\_operator\_algebras/paper\_46\_strong\_form\_lorentzian\_propinquity.tex}.
-
-\bibitem{paper47}
-GeoVac Project. Paper~47 --- Norm-resolvent convergence to the
-non-compact Lorentzian Krein spectral triple and the two-rate hybrid
-limit.
-\texttt{papers/group1\_operator\_algebras/paper\_47\_two\_rate\_hybrid\_convergence.tex}.
-
 \bibitem{paper51}
 GeoVac Project. Paper~51 --- Gravity from the GeoVac spectral action:
-continuum results and the discrete-substrate program (the cigar-tip
-entropy and the replica-weight-harmless theorem, \S L6).
+continuum results and the discrete-substrate program.
 \texttt{papers/group5\_qed\_gauge/paper\_51\_gravity\_arc.tex}.
 
 \end{thebibliography}

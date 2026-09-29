@@ -7,6 +7,88 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.9] - 2026-09-29
+
+**Patch. The two DRAFT math.OA papers resolved (PI-approved): Paper 52 ARCHIVED, Paper 50 corrected in place, Paper 53 REBUILT. Along the way, a documented negative result was found to be a floating-point artifact and withdrawn.**
+
+### Paper 52 archived (SUCCESSOR-COVERED by Paper 50)
+- **Its thesis failed.** It was a "Category III" positioning paper arguing that Paper 38's state-space GH convergence is the mechanism producing boundary CFT3 data. But Paper 50's Klebanov–Pufu–Safdi F-values are the standard zeta-regularised determinants of the FULL continuum spectra (n = 0..∞). The finite truncation never enters, and GH convergence plays no role in them.
+- **Moves:** the paper is in `papers/archive/`; there is a row in `docs/retired_papers.md` and a tombstone in INDEX.
+- **Counts:** CLAUDE.md §6 now shows group1 = 10 papers and the archive = 13.
+
+### Paper 50 corrected in place and retitled
+- **New title:** "Boundary CFT3-on-S3 observables and the GeoVac spectral triple: partition function and wedge KMS entropy". The bibitems in P32, P55, P57 and the group1 synthesis are updated to match.
+- **Item (A)** is now an independent closed-form Hurwitz re-derivation of the known continuum values, with the truncation never entering. Tiers: scalar [NUMERICAL + PSLQ], Dirac [SYMBOLIC].
+- **Item (B)**, the wedge entropy, is correctly placed on the truncated triple.
+- **Category III** is cut to a short "Not holographic" remark.
+- **Other fixes:**
+  - The S⁷ entry now cites the general-d formula of Giombi–Klebanov (JHEP 03 (2015) 117, verified); it previously said "framework-generated".
+  - "first connecting the math.OA arc to physics" is withdrawn.
+  - A duration-language sentence is removed.
+- **Gate entry:** `p50-kps-from-truncated-triple` (7/7 fire, 4/4 silent).
+
+### Paper 53 rebuilt: "Spectral truncation of the flat plane: state-space convergence with a squared window, and the disk-with-cone left open"
+- **The PM diagnostic found three false claims.**
+  - The 2D Bochner–Riesz map is not positivity-preserving: its kernel has min/max −0.071, −0.059, −0.029, −0.009 at s = 0.75, 1, 2, 4. The old test checked a single Gaussian.
+  - The "plane R²_α" was the flat radial sector; α never entered.
+  - The cone (α ≠ 1) has no translation group.
+- **Prior-art check.** Gaudillot-Estrada–van Suijlekom (IMRN 2025) cover compact metric groups, and related work covers tori, quantum groups and polynomial-growth discrete groups. We found no flat-ℝⁿ treatment ("not found in the literature we checked", no novelty claim).
+- **New theorem `thm:plane_gh`.** It is the Paper 38 compression/lifted-state pattern with a POSITIVE squared-window kernel |ψ_Λ|², so the height is exactly 1 and no Lebesgue constant enters.
+  - The rate is γ_Λ = γ₁Λ^{−1/2}, with γ₁ = 32/(5π) for the window (1−|ξ|²)_+. This was confirmed independently by the PM (2.03716) and by the self-check (Weber–Schafheitlin).
+  - The sharp window's first moment diverges logarithmically.
+  - Facts (i)–(iv) and the GH bound on the named finite-first-moment state classes are [INTERNAL THEOREM]. The GH bound was upgraded from [ARGUED] after the self-check re-derived the proof by hand. Canonicity of the classes is open.
+- **The disk "Dirichlet obstruction" (Λ^{+0.07}) was a FLOATING-POINT ARTIFACT.** It came from evaluating the 0/0 Markov ratio exactly at the grid point ρ = R.
+  - Off that point the error decays: agent 0.237 → 0.070 (~Λ^{−0.44}); PM with independent code 0.47 → 0.27 → 0.14.
+  - The Markov–Cesàro map is also not positivity-preserving (ring counterexample, reproduced by the PM).
+  - Disk and cone are OPEN.
+- **§3 ledger:** a RE-INTERPRETATION entry WITHDRAWS the "naive de-compactification of the finite-R Dirichlet disk" negative (append-only; CLAUDE.md §3 index row added).
+- **Status:** DRAFT → ACTIVE.
+- **Gate entry:** `p53-bochner-riesz-positivity-and-apex-backbone` (10/10 fire, 7/7 silent after widening).
+
+### Paper 51 (dependent found during the rebuild)
+- **`lem:L6_backbone` is now [OPEN].** The earlier "upgraded from cited to proved" rested on Cesàro positivity at s ≥ 2, an interior rate Λ^{−1.30}, and the boundary obstruction; all three are withdrawn. The "only sub-piece not transported" and "write-up away" framings are corrected.
+- **Theorem `thm:L6` does not use the lemma** (the self-check verified this against its proof). The cigar-tip entropy result stands.
+
+### Cross-paper: M-label conflict RESOLVED (PI delegated the call to the PM's recommendation)
+- **The conflict.** Papers 50 and 55 tagged the F-value summands differently. The corpus's own authority settles it: Paper 18's period-ring stratification (eq. `m_engine_period_stratification`) puts M2 inside ⊕_k π^{2k}·ℚ, which is pure Tate with no log 2 and no ζ(3).
+- **The resolution.**
+  - log 2 is a level-2 cyclotomic period, which puts it in M3's ring. In Paper 50's own Dirac computation it enters through the 2^s factor of the half-integer Hurwitz identity, the M3 mechanism.
+  - ζ(3)/π² is M1×M3.
+  - Paper 55 had it right, and Paper 50's "log 2 = M2 (Seeley–DeWitt)" is WITHDRAWN.
+- **Paper 50's `thm:mellin_decomp`** is now the "log 2 / ζ(3)/π² orthogonal decomposition": no M2 content appears in the F values. The identities themselves are unchanged. The "first application to non-GeoVac-internal values" sentence is kept with the corrected labels.
+- **Paper 50's S⁵ remark:** log 3 is a level-3 period, outside M3's level-≤4 ring.
+- **Gate:** C16 entry `p50-log2-as-m2` (7/7 fire, 5/5 silent), with 5 dependents stamped. The "open discrepancy" notes added earlier the same day in P55, P18 and P32 are resolved.
+- **Also fixed (agent, PM-verified):**
+  - The group1 synthesis stated the S⁵ conformal-scalar F at 4× its value (the /32 coefficients). It now reads −log2/128 − ζ(3)/(128π²) + 15ζ(5)/(256π⁴) ≈ −5.742×10⁻³, matching P50 and Giombi–Klebanov.
+  - The synthesis misattributed the S⁵ log 3 cancellation (it is the Dirac (2/3)^s term).
+  - Paper 50's S⁵ proof sketch attributed log 2 to ζ′_R(0), which would also bring in log π. It is now attributed to the resummed Hurwitz tail.
+- **Still open, not fixed (PI):** Paper 50 labels the S⁵ spinor "Weyl" (L892/939/941/1054) while stating there is no Weyl projection in odd dimension (L297/358). The code's degeneracy (n+1)(n+2)(n+3)(n+4)/12 is a quarter of the full 4-component Dirac count. The correct label (Weyl, symplectic-Majorana, or per-component normalization) is a physics question; it is recorded here, not guessed.
+- **Not changed, flagged:** P50 L1239 and the synthesis give an "M2 heat-kernel ring √π·ℚ ⊕ π²·ℚ", which differs from Paper 18's M2 ⊂ ⊕π^{2k}ℚ. It concerns heat-trace coefficients, not the F values.
+
+### Zenodo / public site (PI-delegated call)
+- The viz paper pages (`viz/public/papers/*.html`) are GENERATED from the Zenodo manifest by `debug/build_paper_pages.py`, so they mirror the published DOI records. They are deliberately NOT hand-edited: that would desynchronise the site from its DOI records.
+- At the next Zenodo release (PI action), regenerate the manifest and pages together. Papers 50 (new title and abstract), 52 (archived) and 53 (new title and abstract) all need the refresh.
+- The 2/π sharp-window coincidence stays out of the papers (nothing claims it; likely the shared Bessel/Fejér averaging factor).
+
+### Guards (agent; separate pass; 11 plants, all FIRED)
+- `test_paper53_flat_plane_squared_window.py` (new): kernel vs an independent Hankel transform, closed-form moments, exponent −1/2, fact (iii), sharp-window log slope.
+- `test_paper53_plane_bochner_riesz.py`: the positivity test is replaced by `test_bochner_riesz_kernel_is_negative_somewhere`.
+- `test_paper53_disk_obstruction.py`: rebuilt; it pins the ρ = R artifact and the ring non-positivity.
+
+### Pre-checkpoint self-check
+- **Result:** 0 LARGE. The proof of P53 was re-derived by hand and is sound; thm:L6's independence is verified.
+- **6 SMALL + 5 NIT, all fixed.**
+  - SMALLs: P53 said "P51 does not cite this paper" while P51 now cites it; P51 had three stale "backbone nearly done" loci and no tier in the lemma head; P50 residue ("first connecting…", "generates", "framework-generated"); tier wording ("proves" vs [ARGUED]), resolved by the upgrade.
+  - NITs: the reflection convention; integer m; the height-remark wording; P55 label attribution; the synthesis PSLQ digit count.
+- **Not audited, not in any paper:** the sharp-window log slope 2/π equals P38's unit-S³ constant.
+
+### Verification
+- All 14 gates PASS; C10 whole corpus (57 papers).
+- C16: 120/120 entries, all dependents stamped.
+- C24: 0 retirement candidates.
+- Tests pass: all `test_paper53_*` (--slow) and `test_paper50_*`.
+- **Not edited (PI):** Zenodo metadata (`debug/data/zenodo_*.json`) and the viz HTML still carry Paper 50's old title.
+
 ## [v5.17.8] - 2026-09-29
 
 **Patch. /qa trunk DELTA #16 (claim-impact, unseeded) = DEFECTS, remediated by family sweeps (PI-approved). About 12 LARGE (down from about 13). Code and citations were clean; every LARGE was framing.**

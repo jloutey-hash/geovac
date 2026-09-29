@@ -1,27 +1,35 @@
-"""Paper 53 — finite-disk OBSTRUCTION + prop:prop2 (permanent backing).
+"""Paper 53, Sec. 'The finite disk-with-cone: measurements' (prop:disk, prop:prop2).
 
-Backfill of the two Paper-53 coverage gaps surfaced by the v4.43.0 /qa code
-dimension (the disk-obstruction NEGATIVES and the prop:prop2 Proposition had
-backing only under debug/archive/, which is pruning-scheduled).  These tests
-RECOMPUTE the paper's own constructions from scratch and assert the *current*
-(corrected, 2026-06) claims:
+REBUILT 2026-09-29.  Earlier versions of this file asserted two claims that are
+now WITHDRAWN in the paper:
 
-  (1) The finite disk-with-cone is OBSTRUCTED by its Dirichlet boundary, but the
-      obstruction is the NON-DECAYING interior approximation rate (weight-robust,
-      ~Λ^{+0.07}, plateaus ~0.3), NOT positivity.  The Cesàro weight (1-λ/Λ)_+^s
-      at s>=2 (Def 4.1) PRESERVES positivity on the disk (min g > 0); only the
-      truncated HEAT weight e^{-tλ} fails positivity (Gibbs, min g ≈ −0.13).  The
-      non-decaying rate is what pivots the paper to the boundaryless plane (where
-      it decays Λ^{-0.6..-0.9}).  (Corrected 2026-06-23: the positivity leg was
-      previously mis-attributed to the Cesàro construction; the −0.13 dip is the
-      heat weight.  Was test_disk_markov_berezin_positivity_fails.)
+  * "the Cesaro weight s>=2 PRESERVES positivity on the finite disk" -- it was
+    checked on ONE observable, (rho/R)^2.  A non-negative ring observable is
+    mapped to a function with negative values (prop:disk (b)).
+  * "the interior approximation rate does NOT decay (Lambda^{+0.07}, plateau
+    ~0.3)" -- the plateau came from evaluating the 0/0 Markov ratio at the exact
+    grid point rho = R, where every J_0(a_j) is ~1e-16 rounding noise.  On the
+    open disk the error DECAYS (prop:disk (c), rem:interior_correction).
 
-  (2) prop:prop2 — the assembled disk operator system O_n = P_n C(disk) P_n has
-      propagation number 2: O² already fills the full M_N(C) envelope at every
-      tested (K,J).  Computed via the live geovac.operator_system machinery.
-      (Porting debug/archive/gravity_arc/l6_disk_prop2.py.)
+What this file asserts now, each against a named wrong answer:
 
-The plane-convergence POSITIVE results live in test_paper53_plane_bochner_riesz.py.
+  (1) test_disk_cesaro_not_positivity_preserving -- a non-negative ring f has
+      min g < 0 at s = 2 (and s = 4) while the denominator stays positive.
+      Rejects: "Cesaro s>=2 is positivity-preserving on the disk".
+  (2) test_disk_rho2_positive_and_heat_negative -- on (rho/R)^2 the Cesaro g
+      stays positive (the single-observable fact the old claim rested on) and
+      the heat weight dips below -0.10 at Lambda = 200.  Rejects: a drift of
+      those two measured values.
+  (3) test_disk_open_disk_error_decays -- sup over rho < R of |g - f|/|grad f|
+      decays (fitted exponent < -0.3; last < half of first) for (rho/R)^2 and
+      for an interior bump.  Rejects: "the finite-disk error does not decay"
+      (the withdrawn Lambda^{+0.07} obstruction).
+  (4) test_disk_plateau_is_the_boundary_point_artifact -- including the exact
+      point rho = R reproduces the old plateau (no decay), and moving that one
+      point to R - 1e-9 removes it.  Pins the diagnosis of the retraction.
+
+(5) prop:prop2 -- O^2 fills M_N(C) at four truncations (propagation number 2),
+    via the live geovac.operator_system machinery.  [MEASURED], not all cutoffs.
 """
 
 from __future__ import annotations
@@ -37,13 +45,11 @@ R = 1.0
 
 
 # --------------------------------------------------------------------------
-# (1) Finite-disk Berezin — the OBSTRUCTION is the NON-DECAYING interior rate
-#     (weight-robust), NOT positivity.  Cesàro (Def 4.1) preserves positivity;
-#     only the heat weight fails it.  k=0 (radial) sector: f=(ρ/R)² is radial.
+# Finite-disk Markov-Cesaro map, radial (k=0) sector.
 # --------------------------------------------------------------------------
 def _k0_modes(Jmax: int, Lam: float):
-    """k=0 Dirichlet radial modes R_j(ρ)=√2/(R|J_1(a_j)|)·J_0(a_j ρ/R),
-    normalized ∫_0^R R_j² ρ dρ = 1; eigenvalue λ_j=(a_j/R)²; keep λ_j ≤ Λ."""
+    """k=0 Dirichlet radial modes R_j(rho)=sqrt2/(R|J_1(a_j)|) J_0(a_j rho/R),
+    normalized int_0^R R_j^2 rho drho = 1; eigenvalue (a_j/R)^2 <= Lambda."""
     modes = []
     for a in jn_zeros(0, Jmax):
         lam = (a / R) ** 2
@@ -52,103 +58,129 @@ def _k0_modes(Jmax: int, Lam: float):
     return modes
 
 
-def _Rj(rho, a, norm):
-    return norm * jv(0, a * rho / R)
+def _ratio_parts(f_fn, modes, weight, rho, nquad: int = 1200):
+    """Numerator and denominator of the Markov ratio g = num/den."""
+    xg, wg = leggauss(nquad)
+    s = 0.5 * R * (xg + 1.0)
+    ws = 0.5 * R * wg
+    num = np.zeros_like(rho, dtype=float)
+    den = np.zeros_like(rho, dtype=float)
+    fs = f_fn(s)
+    for (a, lam, norm) in modes:
+        Rj_s = norm * jv(0, a * s / R)
+        cf = np.sum(Rj_s * fs * s * ws)
+        c1 = np.sum(Rj_s * s * ws)
+        w = weight(lam)
+        Rj_rho = norm * jv(0, a * rho / R)
+        num += w * cf * Rj_rho
+        den += w * c1 * Rj_rho
+    return num, den
 
 
 def _smooth_ratio(f_fn, modes, weight, rho):
-    """Markov smoothed ratio g = (Σ w_a<R_a,f>R_a)/(Σ w_a<R_a,1>R_a) on the
-    disk, for an arbitrary spectral weight w_a = weight(λ_a)."""
-    xg, wg = leggauss(600)
-    s = 0.5 * R * (xg + 1.0)
-    ws = 0.5 * R * wg
-    num = np.zeros_like(rho)
-    den = np.zeros_like(rho)
-    for (a, lam, norm) in modes:
-        Rj_s = _Rj(s, a, norm)
-        cf = np.sum(Rj_s * f_fn(s) * s * ws)   # <R_j, f>
-        c1 = np.sum(Rj_s * 1.0 * s * ws)       # <R_j, 1>
-        w = weight(lam)
-        Rj_rho = _Rj(rho, a, norm)
-        num += w * cf * Rj_rho
-        den += w * c1 * Rj_rho
+    num, den = _ratio_parts(f_fn, modes, weight, rho)
     return num / den
 
 
 def _heat_weight(Lam):
-    """Truncated heat weight w_a = e^{-t λ_a}, t = 1/Λ (Gibbs-non-positive)."""
     return lambda lam: np.exp(-(1.0 / Lam) * lam)
 
 
 def _cesaro_weight(Lam, s=2):
-    """Cesàro weight w_a = (1 - λ_a/Λ)_+^s of Def 4.1 (positivity-preserving)."""
     return lambda lam: max(0.0, (1.0 - lam / Lam)) ** s
 
 
-def test_disk_cesaro_positivity_holds_heat_fails():
-    """Positivity leg (corrected 2026-06-23): the Cesàro weight (Def 4.1) at
-    s>=2 PRESERVES positivity on the finite disk (min g > 0); the truncated
-    HEAT weight e^{-tλ} fails it (min g ≈ −0.13, Gibbs).  So positivity is NOT
-    the disk obstruction — the −0.13 dip belongs to the heat weight, not the
-    Cesàro construction."""
-    f1 = lambda r: (r / R) ** 2
-    rho = np.linspace(1e-4, R, 2000)
-    Jmax = 80
-    Lambdas = [100.0, 200.0, 400.0, 800.0, 1600.0]
-
-    cesaro_mins, heat_mins = [], []
-    for Lam in Lambdas:
-        modes = _k0_modes(Jmax, Lam)
-        g_c = _smooth_ratio(f1, modes, _cesaro_weight(Lam, s=2), rho)
-        g_h = _smooth_ratio(f1, modes, _heat_weight(Lam), rho)
-        cesaro_mins.append(float(g_c.min()))
-        heat_mins.append(float(g_h.min()))
-
-    # Cesàro (Def 4.1) PRESERVES positivity on the disk: min g > 0 at every Λ.
-    assert min(cesaro_mins) > 0.0, (
-        f"Cesàro s=2 must preserve positivity (min g > 0); got per-Lambda mins "
-        f"{[round(m,4) for m in cesaro_mins]}"
-    )
-    # the HEAT weight does NOT: it dips to ≈ −0.13 (the Gibbs failure).
-    assert min(heat_mins) < -0.05, (
-        f"heat weight should fail positivity (min g < -0.05); got "
-        f"{[round(m,4) for m in heat_mins]}"
-    )
-    # specifically the Λ=200 heat cell reproduces the paper's min g ≈ −0.13.
-    assert heat_mins[1] < -0.10, (
-        f"heat Lambda=200 min g = {heat_mins[1]:.4f}, expected < -0.10"
-    )
+def _ring(rho0: float, width: float = 0.02):
+    return lambda r: np.exp(-(((r - rho0) / width) ** 2))
 
 
-def test_disk_interior_rate_does_not_decay():
-    """The genuine finite-disk OBSTRUCTION (weight-robust): the
-    approximate-identity coefficient does NOT decay toward 0 — it plateaus
-    ~0.3 across the Λ sweep, for BOTH the Cesàro and heat weights.  This is the
-    Dirichlet-boundary obstruction that pivots the paper to the plane (where the
-    rate decays Λ^{-0.6..-0.9})."""
-    f1 = lambda r: (r / R) ** 2
-    gradf1 = 2.0 / R
-    rho = np.linspace(1e-4, R, 2000)
-    Jmax = 80
-    Lambdas = [100.0, 200.0, 400.0, 800.0, 1600.0]
+def _most_negative_kernel_radius(modes, weight) -> float:
+    """sigma in (0, 0.9] where K(rho ~ 0, sigma) = sum_a w_a R_a(0) R_a(sigma)
+    is most negative (the ring is placed there)."""
+    sig = np.linspace(1e-3, 0.9, 900)
+    K = np.zeros_like(sig)
+    for (a, lam, norm) in modes:
+        K += weight(lam) * norm * jv(0, 0.0) * norm * jv(0, a * sig / R)
+    return float(sig[np.argmin(K)])
 
-    for name in ("cesaro", "heat"):
-        e1s = []
-        for Lam in Lambdas:
-            modes = _k0_modes(Jmax, Lam)
-            w = _cesaro_weight(Lam, s=2) if name == "cesaro" else _heat_weight(Lam)
-            g = _smooth_ratio(f1, modes, w, rho)
-            e1s.append(float(np.max(np.abs(g - f1(rho))) / gradf1))
-        # no decay: the coefficient stays bounded away from 0 (plateaus ~0.3),
-        # i.e. it does NOT approach 0 like the plane's Λ^{-0.6..-0.9}.
-        assert min(e1s) > 0.15, (
-            f"{name}: interior rate must NOT decay (e1 plateaus, min > 0.15); "
-            f"got e1={[round(e,4) for e in e1s]}"
+
+_OPEN_RHO = np.linspace(1e-4, R - 1e-6, 3000)
+
+
+@pytest.mark.parametrize("s,Lams", [(2, (100.0, 400.0, 1600.0)), (4, (400.0, 1600.0))])
+def test_disk_cesaro_not_positivity_preserving(s, Lams):
+    """prop:disk (b): a non-negative ring is sent to a function with negative values."""
+    for Lam in Lams:
+        modes = _k0_modes(400, Lam)
+        w = _cesaro_weight(Lam, s=s)
+        rho0 = _most_negative_kernel_radius(modes, w)
+        num, den = _ratio_parts(_ring(rho0), modes, w, _OPEN_RHO[_OPEN_RHO <= 0.9])
+        g = num / den
+        i = int(np.argmin(g))
+        assert den[i] > 0.1, f"s={s} Lam={Lam}: denominator not positive at the min ({den[i]})"
+        assert g[i] < -1e-3, (
+            f"s={s} Lam={Lam}: ring f>=0 gave min g = {g[i]:.5f}; a positive map "
+            "would give g >= 0 -- the paper says the Cesaro map is NOT positive"
         )
-        # and the last value is not an order of magnitude below the first.
-        assert e1s[-1] > 0.5 * e1s[0], (
-            f"{name}: e1 must not converge; first={e1s[0]:.4f}, last={e1s[-1]:.4f}"
-        )
+
+
+def test_disk_rho2_positive_and_heat_negative():
+    """prop:disk (b): on (rho/R)^2 the Cesaro g stays positive; heat dips < -0.10."""
+    f1 = lambda r: (r / R) ** 2
+    ces, heat = [], []
+    for Lam in (100.0, 200.0, 400.0, 800.0, 1600.0):
+        modes = _k0_modes(80, Lam)
+        ces.append(float(_smooth_ratio(f1, modes, _cesaro_weight(Lam, 2), _OPEN_RHO).min()))
+        heat.append(float(_smooth_ratio(f1, modes, _heat_weight(Lam), _OPEN_RHO).min()))
+    assert min(ces) > 0.0, f"Cesaro on (rho/R)^2: mins {ces}"
+    assert heat[1] < -0.10, f"heat Lambda=200 min g = {heat[1]:.4f}, expected < -0.10"
+
+
+def _open_disk_errors(f_fn, grad, Lams, rho):
+    errs = []
+    for Lam in Lams:
+        modes = _k0_modes(400, Lam)
+        g = _smooth_ratio(f_fn, modes, _cesaro_weight(Lam, 2), rho)
+        errs.append(float(np.max(np.abs(g - f_fn(rho))) / grad))
+    return errs
+
+
+_BUMP = lambda r: np.where(r < 0.6, np.cos(np.pi * r / 1.2) ** 2, 0.0)
+
+_DECAY_CASES = {
+    "rho2": (lambda r: (r / R) ** 2, 2.0, (100.0, 200.0, 400.0, 800.0, 1600.0)),
+    "interior_bump": (_BUMP, np.pi / 1.2, (100.0, 400.0, 1600.0, 6400.0)),
+}
+
+
+@pytest.mark.parametrize("name", list(_DECAY_CASES))
+def test_disk_open_disk_error_decays(name):
+    """prop:disk (c): on the open disk the reconstruction error DECAYS."""
+    f_fn, grad, Lams = _DECAY_CASES[name]
+    errs = _open_disk_errors(f_fn, grad, Lams, _OPEN_RHO)
+    slope = float(np.polyfit(np.log(Lams), np.log(errs), 1)[0])
+    assert slope < -0.3, f"{name}: open-disk error must decay; slope {slope:.3f}, errs {errs}"
+    assert errs[-1] < 0.5 * errs[0], f"{name}: errs {errs}"
+
+
+def test_disk_plateau_is_the_boundary_point_artifact():
+    """rem:interior_correction: the old plateau is the single point rho = R."""
+    f1 = lambda r: (r / R) ** 2
+    Lams = (100.0, 400.0, 1600.0)
+    with_R = np.linspace(1e-4, R, 2000)          # the old grid, endpoint included
+    moved = with_R.copy()
+    moved[-1] = R - 1e-9                          # the same grid, one point moved
+    e_with, e_moved = [], []
+    for Lam in Lams:
+        modes = _k0_modes(80, Lam)
+        w = _cesaro_weight(Lam, 2)
+        e_with.append(float(np.max(np.abs(_smooth_ratio(f1, modes, w, with_R) - f1(with_R))) / 2.0))
+        e_moved.append(float(np.max(np.abs(_smooth_ratio(f1, modes, w, moved) - f1(moved))) / 2.0))
+    # old grid: no decay (the withdrawn plateau)
+    assert min(e_with) > 0.15, f"old-grid plateau not reproduced: {e_with}"
+    # one point moved: decays
+    assert e_moved[-1] < 0.5 * e_moved[0], f"moved-point errors do not decay: {e_moved}"
+    assert e_moved[-1] < 0.1, f"moved-point error at Lambda=1600: {e_moved[-1]}"
 
 
 # --------------------------------------------------------------------------

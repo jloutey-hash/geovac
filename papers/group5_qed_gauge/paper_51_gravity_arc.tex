@@ -2318,10 +2318,13 @@ same rate.
 \end{theorem}
 
 The proof rests on three lemmas, one per layer of the charter architecture. The
-first two are transported (the propinquity backbone and the norm-resolvent
-heat-trace rate); the third is the new content.
+first is argued by transport and is \textbf{[OPEN]} at its disk-with-cone
+factor (the propinquity backbone, see the Grade paragraph); the second is
+transported (the norm-resolvent heat-trace rate); the third is the new
+content. The convergence statement of Theorem~\ref{thm:L6} does not use the
+first.
 
-\begin{lemma}[Layer 1: propinquity backbone]
+\begin{lemma}[Layer 1: propinquity backbone; \textbf{[OPEN]}]
 \label{lem:L6_backbone}
 For each fixed $\alpha$ near $1$, the truncated constant-warp metric spectral
 triples $\mathcal{T}_{n,\alpha}$ converge to the continuum tip triple
@@ -2339,9 +2342,10 @@ Connes--van~Suijlekom Toeplitz operator system (\cite{paper44}, Prop.~4.2,
 prop$=2$); the radial interval is the bounded-interval operator system with the
 apex centrifugally screened (Lemma~\ref{lem:L6_rate}); the $S^2$ factor is
 Berezin--Toeplitz (Hawkins, as in Paper~38 L4); the tensor assembly is
-\textsc{pure\_tensor} (Paper~45). The only sub-piece not transported verbatim is
-the screened radial apex, a regular Sturm--Liouville endpoint
-(Lemma~\ref{lem:L6_rate}); the prop$=2$ property of the assembled disk operator
+\textsc{pure\_tensor} (Paper~45). This transport is \textbf{[ARGUED]} and does
+not close:\ the disk-with-cone factor is genuinely new (the $1/\rho^2$ term
+couples radial and azimuthal parts, and it is not a group), and no
+reconstruction map for it is established (see the Grade paragraph); the prop$=2$ property of the assembled disk operator
 system is confirmed by direct computation below. The backbone is
 \emph{undifferentiated}: it certifies geometric faithfulness at each $\alpha$,
 not the replica derivative.
@@ -2469,8 +2473,9 @@ $z^a\bar z^b$ ($z=\rho e^{i\phi}$), has propagation number $2$ at all tested
 truncations $(K,J)\in\{(2,2),(2,3),(3,2),(3,3)\}$: $O^2$ spans the full
 $M_N(\mathbb{C})$ envelope (\texttt{debug/l6\_disk\_prop2.py}). The disk
 backbone inherits the Connes--van Suijlekom 2-step-generating property of the
-Toeplitz $S^1$ (\cite{paper44}, Prop.~4.2) by direct computation, confirming the
-fixed-$\alpha$ propinquity backbone transports.
+Toeplitz $S^1$ (\cite{paper44}, Prop.~4.2) by direct computation. This
+confirms propagation number $2$ only;\ the backbone itself is
+\textbf{[OPEN]}.
 
 \paragraph{Structural error cancellation.} The per-eigenvalue convergence rate of
 the discrete radial Laplacian is $O(a^1)$ (verified:
@@ -2505,11 +2510,11 @@ sequence~\eqref{eq:L6_dominating} controls the mode series and its
 $\alpha$-derivatives uniformly), which is proved here, together with the
 Theorem~\ref{thm:L6} assembly (uniform $C^1$ convergence $\Rightarrow$ $\lim_n$
 commutes with $d/d\alpha$; joint rate $=$ heat-trace rate). The two supporting
-lemmas: Lemma~\ref{lem:L6_backbone} (propinquity backbone) is proved for the
-apex/gravity purpose (prop$=2$ confirmed by direct computation, and the interior
-L4 reconstruction verified below via the unital Markov--Cesàro Berezin at rate
-$\Lambda^{-1.30}$ -- which is all the local tip entropy requires), with the full
-disk propinquity for all of $C(\mathrm{disk})$ deferred to a math.OA companion;
+lemmas: Lemma~\ref{lem:L6_backbone} (propinquity backbone) is \textbf{[OPEN]}
+--- prop$=2$ is confirmed by direct computation, but no reconstruction map for
+the disk-with-cone factor is established (see the next paragraph and
+Paper~53~\cite{paper53}, which proves convergence only on the flat plane and
+leaves the disk and the cone open);
 Lemma~\ref{lem:L6_rate} (norm-resolvent rate) cites Paper~47. Every load-bearing claim is additionally
 verified numerically, and the proof's analytical dominating exponent
 $c(\delta)\to t/R^2$ matches the measured envelope slope. L6 is a Layer-2
@@ -2535,37 +2540,30 @@ $1/6 = 0.166667$ -- agreement to $-0.006\%$ and $-0.05\%$. The continuum
 replica derivative $dK/d\alpha|_1$ is the G4-4c Sommerfeld--Cheeger spinor-cone
 value $1/6$; the earlier $-1.4\%$ residual was an artifact of an order-$2$
 Richardson on an $O(a)$ sequence. Both sub-pieces are thus closed, with the
-boundary-placement diagnosis correcting an earlier ``apex-edge'' guess. The one
-remaining transport at citation level is the full $L1'$--$L5$ assembly of the
-$D^2_\alpha\otimes S^2$ backbone (Lemma~\ref{lem:L6_backbone}), a Papers-45-style
-write-up that would upgrade it from cited to proved; it does not affect the
-Theorem~\ref{thm:L6} convergence statement. A de-risking attempt sharpened this
-remaining piece: the genuinely-new factor is the 2D disk-with-cone itself (a
+boundary-placement diagnosis correcting an earlier ``apex-edge'' guess. The
+$D^2_\alpha\otimes S^2$ backbone (Lemma~\ref{lem:L6_backbone}) remains
+\textbf{[OPEN]}:\ no reconstruction map for the disk-with-cone factor is known;
+it does not affect the Theorem~\ref{thm:L6} convergence statement. A
+de-risking attempt located the difficulty: the genuinely-new factor is the 2D disk-with-cone itself (a
 manifold-with-boundary, not a pure radial$\otimes$azimuthal tensor, since the
 $1/\rho^2$ term couples them, and not a group, so the central-Fejér
 reconstruction does not transport); the unital Markov-normalized Cesàro--Berezin map
 $B_n(f)=P_n M_{g}P_n$, $g=(\sum_a w_a\langle\psi_a,f\rangle\psi_a)/
 (\sum_a w_a\langle\psi_a,1\rangle\psi_a)$ with Cesàro weight
-$w_a=(1-\lambda_a/\Lambda)^s_+$, satisfies all four L4 properties \emph{in the
-interior}: unitality exactly ($B_n(1)=I$ by the Markov normalisation),
-positivity and contractivity at Cesàro order $s\ge2$ (the truncated heat weight
-oscillates by Gibbs; the Cesàro mean is the disk analogue of Fejér's theorem),
-and the approximate identity $\propto\|\nabla f\|$ converging at the interior
-rate $\Lambda^{-1.30}$. The only obstruction is the boundary $\rho=R$, where the
-Dirichlet modes vanish ($J_0$-zeros) and the sup-norm reconstruction cannot
-represent boundary-supported content -- the genuine manifold-with-boundary
-feature that closed manifolds lack. Two consequences, with two different scopes.
-\emph{For the gravity backbone (Lemma~\ref{lem:L6_backbone}), B3 closes:} the L6
-entropy is a local apex quantity (the tip cancels the bulk and the boundary
-alike, \S\ref{sec:g4_3}), so the backbone needs faithfulness only at the apex,
-which the interior L4 supplies; the IR boundary is irrelevant to the tip, and
-Lemma~\ref{lem:L6_backbone} is upgraded from cited to proved for this purpose.
-\emph{As a stand-alone NCG theorem (the full disk propinquity for all of
-$C(\mathrm{disk})$), the boundary is removed only in the $R\to\infty$ (plane)
-limit} -- the same de-compactification handled at norm-resolvent level by
-Paper~47, here a genuine two-rate ($\Lambda\to\infty$, $R\to\infty$) analysis on
-the disk. The interior lemma is in hand; that two-rate assembly is the core of a
-dedicated math.OA companion.
+$w_a=(1-\lambda_a/\Lambda)^s_+$, is exactly unital, but it is \emph{not}
+positivity-preserving:\ a non-negative ring observable reconstructs with
+negative values at Cesàro order $s=2$ and $s=4$ (Paper~53~\cite{paper53},
+\textbf{[MEASURED]}). An earlier version of this paragraph claimed interior
+positivity at $s\ge2$ (checked only on one observable), an interior rate
+$\Lambda^{-1.30}$, and a boundary obstruction at $\rho=R$;\ the rate was
+withdrawn earlier, and the boundary obstruction was a floating-point
+artifact of evaluating the $0/0$ Markov ratio exactly at $\rho=R$ (off that
+point the error decays). All three are withdrawn (2026-09-29), and with them
+the earlier statement that Lemma~\ref{lem:L6_backbone} was upgraded from cited
+to proved. The lemma is \textbf{[OPEN]}:\ Paper~53 proves state-space
+convergence only on the flat plane (by a positive squared-window
+reconstruction and translation invariance), and the cone $\alpha\ne1$ has no
+translation group. Theorem~\ref{thm:L6} does not depend on it.
 
 % =====================================================================
 \section{Discussion: structural-skeleton-scope reading}
@@ -2880,6 +2878,12 @@ GeoVac Project. Paper 44 -- Operator-system extension of the BBB Krein
 spectral triple at finite cutoff: propagation number and envelope
 dependence.
 \texttt{papers/group1\_operator\_algebras/paper\_44\_lorentzian\_operator\_system.tex}.
+
+\bibitem{paper53}
+GeoVac Project. Paper 53 -- Spectral truncation of the flat plane:\
+state-space convergence with a squared window, and the disk-with-cone left
+open.
+\texttt{papers/group1\_operator\_algebras/paper\_53\_disk\_propinquity.tex}.
 
 \bibitem{camporesi_higuchi1996}
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac

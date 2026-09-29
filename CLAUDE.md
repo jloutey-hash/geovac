@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.17.8 (September 29, 2026)
+**Version:** v5.17.9 (September 29, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Drafts 52/53 resolved (2026-09-29, v5.17.9, PI-approved):** P52 archived (KPS values are continuum; truncation never enters); P50 corrected; P53 rebuilt: flat-plane GH theorem, disk obstruction was a float artifact (negative withdrawn); P51 backbone OPEN; P50 log 2 relabelled M3-ring per P18. See CHANGELOG v5.17.9.
 - **/qa trunk DELTA #16 = DEFECTS, remediated (2026-09-29, v5.17.8, PI-approved):** ~12 LARGE, framing only; family sweeps; Fock/Δ overcorrection reversed; WH1 scoped to commutative factor; K 4.8e-7 (8.8e-8 = cubic root). See CHANGELOG v5.17.8.
 - **/qa trunk DELTA #15 = DEFECTS, remediated (2026-09-29, v5.17.7):** ~13 LARGE (a third PM-introduced); math all confirmed; new pre-checkpoint self-check caught 4 more LARGE. See CHANGELOG v5.17.7.
 - **/qa trunk DELTA #14 = DEFECTS, remediated (2026-09-28, v5.17.6):** summaries lagging corrected owners (incl. mirror direction); Paper 43 ARCHIVED into P42 §11; P16 ν_min a theorem + prior art. See CHANGELOG v5.17.6.
@@ -434,6 +435,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | g_Vee speedup by algebra instead of sparsity: pair-space cancellation route + γ-series one-kernel route (2026-09-25) | 2 | Cancellation lever ≤9% of cost; γ-series converges exactly but ~100× dearer. The wall is sparsity (TREE4 dense field), cure = O(nnz) rewrite. See `docs/failed_approaches_ledger.md`. |
 | Multi-geminal expansion / quadratic F² term for the LiH r₁₂ marriage gap (2026-09-26) | 2 | Gap was geminal SHAPE (Kato cusp), not count: one e^{−2r} geminal closes it; k≥2 saturates at +1.4 mHa; F² worth 0.013 mHa. See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the CUSP-2 row (2026-09-25): its 'Z_c≈1.84 graph-validity boundary' was the non-physical (1/16)A hop; physical He has no Z_c. The negative result (Schwartz tail does not help) stands | 0 | See `docs/failed_approaches_ledger.md`. |
+| RE-INTERPRETATION of the Dirichlet-disk row (2026-09-29): the 'boundary obstruction' was a float artifact at the exact grid point ρ=R (0/0 Markov ratio); off it the error decays. Negative WITHDRAWN; disk + cone OPEN | 0 | See `docs/failed_approaches_ledger.md`. |
 
 ---
 
@@ -534,7 +536,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 **Always load** (framework identity): Paper 0 (packing axiom, K = −1/16) · 1 (spectral graph methods) · 7 (S³ proof, 18 symbolic proofs) · 14 (qubit encoding headline) · 16 (S_N periodicity) · 22 (angular sparsity theorem) · 23 (nuclear hub, Fock rigidity) · 24 (Bargmann-Segal S⁵, Coulomb/HO asymmetry) · 27 (entropy as projection) · 31 (universal/Coulomb partition) · 32 (the spectral triple; §VIII theorems).
 
-**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42, 44, 45, 50, 52, 53 (43 and 46–49 archived; 43's surviving content is Paper 42 §11); foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35.
+**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42, 44, 45, 50, 53 (43, 46–49 and 52 archived; 43's surviving content is Paper 42 §11, 52's a remark in Paper 50); foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35.
 
 **GUARDRAIL papers** — MUST load before any investigation in their domain (trigger words and protocol in §3.5): Papers 8–9 (single-center / unified-basis / shared-exponent molecular — Sturmian structural theorem), FCI-M (graph-concatenation molecular), Track DF record (nested hyperspherical).
 
@@ -542,14 +544,14 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 | Folder | Audience | Papers (.tex) |
 |:-------|:---------|:-------------:|
-| `papers/group1_operator_algebras/` | math.OA / NCG | 11 |
+| `papers/group1_operator_algebras/` | math.OA / NCG | 10 |
 | `papers/group2_quantum_chemistry/` | quantum chemists | 12 |
 | `papers/group3_foundations/` | mathematical physicists | 12 |
 | `papers/group4_quantum_computing/` | QC / NISQ / VQE | 4 |
 | `papers/group5_qed_gauge/` | HEP / gauge theory | 8 |
 | `papers/group6_precision_observations/` | precision AMO | 4 |
 | `papers/synthesis/` | cross-group narratives + field guide | 7 |
-| `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) + retired (43, 46–49; `docs/retired_papers.md`) | 12 |
+| `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) + retired (43, 46–49, 52; `docs/retired_papers.md`) | 13 |
 
 ### Live status flags every agent must know
 

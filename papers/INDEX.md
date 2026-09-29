@@ -83,9 +83,9 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 44 `paper_44_lorentzian_operator_system.tex` | ACTIVE | Lorentzian operator-system substrate; prop = 2 |
 | 45 `paper_45_lorentzian_propinquity.tex` | **DESCOPED** | Main theorem withdrawn (K⁺ seminorm ≡ 0, annihilation theorem); spatial statement unconditional; product-carrier S³×S¹ convergence rebuilt in the action-seminorm framework (2026-06-10, signature-agnostic) |
 | 46--49 | **ARCHIVED 2026-09-14** | The strong-form Lorentzian tail. Moved to `archive/`; see the Archive table below and `docs/retired_papers.md`. Paper 45 stays: it is descoped but load-bearing (five healthy dependents, including Paper 38). |
-| 50 `paper_50_cft3_partition_function.tex` | ACTIVE | Bit-exact F-theorem match on S³ and S⁵ (Klebanov–Pufu–Safdi) |
-| 52 `paper_52_category_iii_correspondence.tex` | DRAFT | Positioning: spectral-triple discretization as Category III (non-holographic) |
-| 53 `paper_53_disk_propinquity.tex` | DRAFT | First manifold-with-boundary carrier; plane Bochner–Riesz reconstruction |
+| 50 `paper_50_cft3_partition_function.tex` | ACTIVE | Closed-form Hurwitz re-derivation of the Klebanov–Pufu–Safdi F-theorem values on S³ and S⁵ from the continuum spectra (the truncation does not enter); M2/M3 split; wedge-entropy degeneracy count |
+| 52 `paper_52_category_iii_correspondence.tex` | **ARCHIVED 2026-09-29** | Tombstone. "Category III" positioning paper; its thesis (GH convergence as the mechanism producing boundary CFT data) failed: the KPS values are a continuum computation the truncation never enters. Surviving not-holographic remark lives in **Paper 50**. See the Archive table below and `docs/retired_papers.md`. |
+| 53 `paper_53_disk_propinquity.tex` | ACTIVE (rebuilt 2026-09-29) | State-space convergence of the flat plane's spectral truncations via a positive squared-window reconstruction (rate γ₁Λ^−½; [INTERNAL THEOREM] on the named state classes, canonicity open); disk-with-cone left open (the earlier disk obstruction was a float artifact at ρ = R) |
 
 ## Group 2 — Quantum chemistry (`group2_quantum_chemistry/`)
 
@@ -146,6 +146,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 10 `paper_10_nuclear_lattice.tex` | Early nuclear draft |
 | `paper_18_exchange_constants_v1.tex` | Superseded by current Paper 18 |
 | 21 `paper_21_geometric_vacuum_synthesis.tex` | Superseded by the two group syntheses |
+| 52 `paper_52_category_iii_correspondence.tex` | **Archived 2026-09-29.** Positioning thesis withdrawn (the boundary CFT data is a continuum computation; GH convergence does not produce it). *Survives* (in Paper 50): the short not-holographic remark (no bulk, no dictionary). |
 | 43 `paper_43_lorentzian_extension.tex` | **Archived 2026-09-28.** Both headlines withdrawn. *Survives* (in Paper 42 §11): Krein carrier, (4,6) axiom audit, period closure [SYMBOLIC], six-witness by construction, chirality-parity HS orthogonality. |
 | 46 `paper_46_strong_form_lorentzian_propinquity.tex` | **Archived 2026-09-14.** Strong-form construction descoped (degenerate seminorm). *Survives:* Lemma 3.2, the degeneracy diagnosis. |
 | 47 `paper_47_two_rate_hybrid_convergence.tex` | **Archived 2026-09-14.** Propinquity arrow descoped. *Survives:* the norm-resolvent arrow and the three-carrier identification. |

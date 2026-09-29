@@ -304,3 +304,22 @@ Schwartz-tail correction does not help; only its stated mechanism is replaced. R
 
 ### Multi-geminal linear expansion / quadratic F^2 term as the lever for the LiH marriage gap (2026-09-26)
 | Multi-geminal linear expansion and quadratic F^2 term for the LiH r12 marriage | 2 | Hypothesis (after the pi marriage reached -8.0435 vs VMC-Pade -8.047) that the gap was the single-geminal / linear-in-F ansatz. VMC linear-method test on the trunc-1e-2 pi reference: the gap is geminal SHAPE, not count -- r e^{-gamma r} delivers about half the Kato e-e cusp at its variational amplitude, a single e^{-2r} geminal closes the whole gap to Pade (-8.04781 vs -8.04244), extra geminals saturate at +1.4 mHa by k=2, and F^2 adds 0.013 mHa. Lesson: choose a cusp-correct short-range (Slater-type) geminal before adding geminals. Record: `debug/lih_multigeminal_*.py`, `debug/data/multigeminal_vmc.log`; CHANGELOG v5.16.0. |
+
+---
+
+### RE-INTERPRETATION of "Naive de-compactification of the finite-R Dirichlet disk (Paper 53 B3)" (2026-09-29) | 0 (correction; the negative is WITHDRAWN)
+
+The B3 row concluded that the finite-R Dirichlet disk carries a boundary obstruction that R→∞ does not remove
+("collar error stays ~0.26"), and Paper 53 later restated it as a non-decaying interior rate Λ^{+0.07}.
+RE-INTERPRETED 2026-09-29 (Paper 53 rebuild, PI-approved): the obstruction was a floating-point artifact of
+evaluating the 0/0 Markov–Cesàro ratio g = num/den EXACTLY at the grid point ρ = R, where J_0(a_j) is ~1e-16
+rounding noise. Moving that one point off the boundary, the sup error decays (agent: 0.237 → 0.070 over
+Λ = 100 → 1600, ~Λ^{-0.44}; PM independent code, f = ρ²: 0.47 → 0.27 → 0.14, the same exponent), and the
+collar error does not reproduce (~1e-11). The negative result itself is WITHDRAWN: no disk obstruction is
+established; the disk (and the cone α ≠ 1) is OPEN. A separate defect surfaced in the same pass: the
+Markov–Cesàro map is NOT positivity-preserving (a non-negative ring reconstructs negative at s = 2 and s = 4);
+the earlier positivity claim was checked only on f = (ρ/R)². What stands: state-space convergence on the
+FLAT plane by a positive squared-window reconstruction (Paper 53 thm:plane_gh, facts [INTERNAL THEOREM], GH
+step [ARGUED]). Record: Paper 53 (rebuilt), Paper 51 lem:L6_backbone → [OPEN], tests
+`tests/test_paper53_disk_obstruction.py` (pins the ρ = R artifact), `tests/test_paper53_flat_plane_squared_window.py`;
+CHANGELOG v5.17.9.

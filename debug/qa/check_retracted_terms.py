@@ -671,6 +671,77 @@ REGISTRY = [
         },
     },
     {
+        "id": "p50-log2-as-m2",
+        # Paper 50 labelled log 2 an M2 (Seeley-DeWitt) transcendental and its F_D + 2F_s = log(2)/2 combination
+        # 'the M2 sector'. Paper 18's period-ring stratification puts M2 inside (+)_k pi^{2k} Q (pure Tate, no log 2,
+        # no zeta(3)); log 2 is a level-2 cyclotomic period (M3's ring) and zeta(3)/pi^2 is M1 x M3, as Paper 55 had it.
+        # In Paper 50's own Dirac computation log 2 enters through the 2^s factor of the half-integer Hurwitz
+        # identity (its own M3 mechanism). Registered 2026-09-29 (PI-approved: adopt Paper 18's stratification).
+        "pattern": r"isolates\s+(the\s+)?M2\b|\\log\s*2\$?\s*\(an\s+M2\s+transcendental|M2--M3\s+orthogonal\s+decomposition|orthogonal\s+(\$?M_?\{?2\}?\$?)\s*/\s*\$?M_?\{?3\}?\$?\s+(dual-basis\s+)?decomposition|M_\{2\}\$/\$M_\{3\}\$\s+orthogonal\s+decomposition|log\(2\)/2\$?\s*\(M2",
+        "exempt_if_nearby": withdrawal_marker("p50-log2-as-m2"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (M-label reconciliation, PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": "remediated + summary surfaces reread 2026-09-29 (M-label reconciliation per Paper 18 period-ring stratification; PM-verified S5 value; gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated + summary surfaces reread 2026-09-29 (M-label reconciliation per Paper 18 period-ring stratification; PM-verified S5 value; gate 0 live)",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-29 (M-label reconciliation per Paper 18 period-ring stratification; PM-verified S5 value; gate 0 live)",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-29 (M-label reconciliation per Paper 18 period-ring stratification; PM-verified S5 value; gate 0 live)",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (M-label reconciliation per Paper 18 period-ring stratification; PM-verified S5 value; gate 0 live)",
+        },
+    },
+    {
+        "id": "p53-bochner-riesz-positivity-and-apex-backbone",
+        # Paper 53: (1) the 2D Bochner-Riesz kernel J_{s+1}(r)/r^{s+1} oscillates, so it is negative somewhere
+        # at EVERY finite order (min/max -0.07, -0.06, -0.03, -0.009 at s = 0.75, 1, 2, 4) and the BR map is
+        # NOT positivity-preserving -- the paper's own rem:height_constant said so while thm:plane and the
+        # abstract claimed classical positivity. (2) The 'plane' is the flat radial sector (order-0 Hankel);
+        # the cone R^2_alpha has no translation group, so no apex backbone for Paper 51 is supplied (and
+        # Paper 51 never cited it). Registered 2026-09-29 (PI-approved rebuild).
+        "pattern": r"Bochner--?Riesz\S*\s+(\S+\s+){0,6}positivity-preserving|Bochner--?Riesz\s+means\s+are\s+positivity|kernel\s+is\s+positive\s+for\s+s\s*>=\s*1/2|propinquity\s+backbone\s+for\s+the\s+cigar-tip|upgrading\s+its\s+Lemma\s+on\s+geometric\s+faithfulness|supplies\s+the\s+propinquity\s+backbone|upgraded\s+from\s+cited\s+to\s+proved\s+for\s+this\s+purpose|obstructed\s+by\s+(its|the)\s+Dirichlet\s+boundary|positivity\s+and\s+contractivity\s+at\s+Ces|which\s+the\s+interior\s+L4\s+supplies",
+        "exempt_if_nearby": withdrawal_marker("p53-bochner-riesz-positivity-and-apex-backbone"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (Paper 53 rebuild; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "tests/test_paper53_plane_bochner_riesz.py",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_53_disk_propinquity.tex": "remediated + summary surfaces reread 2026-09-29 (P53 rebuild; P51 lem:L6_backbone -> OPEN; PM-reviewed; gate 0 live)",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (P53 rebuild; P51 lem:L6_backbone -> OPEN; PM-reviewed; gate 0 live)",
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex": "remediated + summary surfaces reread 2026-09-29 (P53 rebuild; P51 lem:L6_backbone -> OPEN; PM-reviewed; gate 0 live)",
+        },
+    },
+    {
+        "id": "p50-kps-from-truncated-triple",
+        # Paper 50's 'bit-exact KPS' theorems sum the FULL continuum conformal-scalar and CH Dirac spectra
+        # (n = 0..inf) with standard zeta regularisation -- exactly Klebanov-Pufu-Safdi's computation. The
+        # finite truncation never enters, and state-space GH convergence plays no role in the F values, so
+        # 'reproduced from the discrete truncated triple' and the Category III 'correspondence mechanism'
+        # thesis (Paper 52, archived) are retired. Registered 2026-09-29 (PI-approved correct-in-place).
+        "pattern": r"reproduction\s+from\s+the\s+discrete\s+truncated|discrete\s+spectral\s+triple\s+reproduces|from\s+the\s+spectra\s+of\s+the\s+truncated\s+scalar|spectral\s+asymptotics\s+of\s+the\s+discrete\s+spectral\s+triple|F-theorem\s+coefficients\s+on\s+the\s+truncated|Category\s+III''?\s+discretization\s+correspondence|State-space\s+GH\s+convergence\s+at\s+rate\s+\$4/\\pi\$\}",
+        "exempt_if_nearby": withdrawal_marker("p50-kps-from-truncated-triple"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (Paper 50 correct-in-place + Paper 52 archive; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": "remediated + summary surfaces reread 2026-09-29 (P50 correct-in-place; PM-reviewed abstract + not-holographic para; gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated + summary surfaces reread 2026-09-29 (P50 correct-in-place; PM-reviewed abstract + not-holographic para; gate 0 live)",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (P50 correct-in-place; PM-reviewed abstract + not-holographic para; gate 0 live)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (P50 correct-in-place; PM-reviewed abstract + not-holographic para; gate 0 live)",
+        },
+    },
+    {
         "id": "fock-delta-overcorrection",
         # v5.17.6/7 OVERCORRECTED DELTA #15's genuine Green's-function defect into 'not a free-particle
         # problem' / 'Delta_{S^3} is not the link'. Exact statement (PI-approved 2026-09-29): hydrogen's bound
