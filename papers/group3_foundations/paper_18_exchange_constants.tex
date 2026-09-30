@@ -1550,7 +1550,7 @@ direct identification of $\pi = \mathrm{Vol}(S^2)/4$ as a weight-$1$
 Tate period (Kontsevich--Zagier 2001).  Every M1 witness logged
 across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25
 Hopf bundle base measure); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
-(Paper~38 §L2 asymptotic state-space GH rate); $4/\pi$ (Paper~40 Thm~1
+(Paper~38 §L2 asymptotic state-space GH rate;\ dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$); $4/\pi$ (Paper~40 Thm~1
 universal rate constant across compact connected semisimple Lie groups); $1/\pi^2$ inside
 $-3\zeta(3)/(16\pi^2)$ (Paper~50 §3 F-theorem, an M1$\times$M3
 cross-product;\ a continuum Klebanov--Pufu--Safdi value that Paper~50
@@ -2804,8 +2804,11 @@ rational coefficients, hence transcendental (Lindemann). $\square$
 (The mechanism is specific:\ roots of polynomials with transcendental
 coefficients \textit{can} be algebraic --- e.g.\ $x^2 - \pi x + (\pi-1)
 = (x-1)(x-\pi+1)$ has the root $x = 1$ --- but that needs the
-$\pi$-dependence to cancel at the root, which cannot happen here since
-$K$ multiplies $\alpha_K \neq 0$.)
+$\pi$-dependence to cancel at the root.  That cannot happen here:\ in
+$x^3 - Kx + 1$ the transcendental $\pi$ enters only through the single
+coefficient $K$, the other coefficients being rational, so an algebraic
+root $x_0 \neq 0$ would force $K = (x_0^3 + 1)/x_0$ to be algebraic;\ in
+the example $\pi$ enters two coefficients, and they cancel at $x = 1$.)
 
 \subsection{Three-tier structure of the combination rule}
 \label{sec:alpha_three_tier}
@@ -2900,9 +2903,9 @@ itself remains an Observation.
 
 \begin{theorem}[Three independent spectral homes for $B$, $F$, $\Delta$]
 \label{thm:k_decomposition}
-Let $K = \pi(B + F - \Delta)$ be the combination of
-Paper~2~\cite{loutey_paper2} with $B = 42$, $F = \pi^2/6$,
-$\Delta = 1/40$.  The three components have structurally independent
+Let $B = 42$, $F = \pi^2/6$ and $\Delta = 1/40$ be the three
+ingredients of Paper~2's combination rule~\cite{loutey_paper2} (an
+Observation;\ Observation~\ref{obs:k_rule} below).  The three components have structurally independent
 spectral origins on the Fock-projected $S^3$ label set:
 \begin{enumerate}
 \item[(B)] $B = \sum_{n=1}^{3} \sum_{l=0}^{n-1} (2l{+}1)\,l(l{+}1)

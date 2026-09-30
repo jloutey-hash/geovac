@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.17.10 (September 29, 2026)
+**Version:** v5.17.11 (September 29, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk DELTA #18 = DEFECTS, remediated (2026-09-29, v5.17.11, PI-approved):** 5 LARGE (12→8→5), one-sentence unmoved-locus residue; code + citations clean; self-check caught a noise-pinning guard. See CHANGELOG v5.17.11.
 - **/qa trunk DELTA #17 = DEFECTS, remediated (2026-09-29, v5.17.10, PI-approved):** 8 LARGE (12→8), all unmoved-locus residue; code + citations clean; cubic's root α_K proved transcendental (not physical α). See CHANGELOG v5.17.10.
 - **Drafts 52/53 resolved (2026-09-29, v5.17.9, PI-approved):** P52 archived (KPS values are continuum; truncation never enters); P50 corrected; P53 rebuilt: flat-plane GH theorem, disk obstruction was a float artifact (negative withdrawn); P51 backbone OPEN; P50 log 2 relabelled M3-ring per P18. See CHANGELOG v5.17.9.
 - **/qa trunk DELTA #16 = DEFECTS, remediated (2026-09-29, v5.17.8, PI-approved):** ~12 LARGE, framing only; family sweeps; Fock/Δ overcorrection reversed; WH1 scoped to commutative factor; K 4.8e-7 (8.8e-8 = cubic root). See CHANGELOG v5.17.8.

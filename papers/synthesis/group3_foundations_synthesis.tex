@@ -225,7 +225,7 @@ $2\pi^2/n$ (tested exactly for $n \le 4$;\ general $n$ is Fock's);
 \textbf{[WALL]} the discrete Fock graph's edge Laplacian does not
 converge to that operator:\ the proved spectral-bound statement ---
 the saturation of the bipartite bound, \textbf{[INTERNAL THEOREM]}
-closed form with rate $C/n_{\max}^2$ (Paper~0~\S VI) --- is a grid band
+closed form with rate $C_{\mathrm{sat}}/n_{\max}^2$ (Paper~0~\S VI) --- is a grid band
 edge, and the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence]
 was withdrawn as evidence on 2026-09-03, its size tracking the residue of
 $n_{\max}$ modulo $3$ (the convergence reading, an Observation until
@@ -318,8 +318,9 @@ element $N = -2[T_+, T_-]$ returns $n$ for $n < n_{\max}$ (not on the
 truncated top shell), and the $SU(2)$ Casimir returns $l(l+1)$;\ on
 every shell the $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$
 is exact on the labels.  The energies $E_n = -1/(2n^2)$ are not an
-output of these operators or of the graph (Paper~1 imposes them as a
-map from $n$);\ in Paper~7's continuum chain the eigenvalue $2\pi^2/n$
+output of the ladder operators or of the graph (Paper~1 imposes them as a
+map from $n$);\ the Casimir yields them only through the function
+$E_n = -Z^2/(2(C+1))$, $C = n^2-1$, that Fock's kernel fixes (Paper~7);\ in Paper~7's continuum chain the eigenvalue $2\pi^2/n$
 of Fock's $S^3$ Coulomb kernel forces $p_0 = Z/n$, and the energy shell
 $p_0^2 = -2E$ then gives $E_n$.  At the algebraic level the discrete and continuous
 descriptions therefore agree on the quantum-number skeleton, while the
@@ -504,7 +505,7 @@ conformal-transformation chain, not a convergence statement, and the
 graph-side \emph{operator} convergence is refuted. The
 saturation of the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
 \emph{is} a theorem --- \textbf{[INTERNAL THEOREM]} closed form with rate
-$C/n_{\max}^2$, $C = \gvq{saturation_c}{42.7397}\ldots$ (Paper~0~\S VI), a
+$C_{\mathrm{sat}}/n_{\max}^2$, $C_{\mathrm{sat}} = \gvq{saturation_c}{42.7397}\ldots$ (Paper~0~\S VI), a
 Dirichlet band edge of the grid blocks --- and the frozen
 test \texttt{tests/test\_paper7\_graph\_convergence.py} pins it together
 with the block structure of the lattice Laplacian;\ neither is operator

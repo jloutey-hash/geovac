@@ -432,13 +432,18 @@ def test_route_b_commutant_and_algebra(n_max):
     words of length 4 at both n_max, asserted).  Rejects a commutant result
     that holds only for the Clebsch-Gordan build.
 
-    NEGATIVE CONTROL -- DOCSTRING-ONLY, NOT ASSERTED.  Nothing in this file
-    checks that the commutant test can return anything other than 1.  The
-    control is: zero Route B's blocks that mix positive and negative Dirac
-    levels (the doubled-model defect).  Measured (re-run 2026-09-29):
-    n_max = 2 gives commutant 2, grading 0, algebra dim 128 < d^2 = 256;
-    n_max = 1 gives commutant 5, grading 8, algebra dim 1.  Promoting this to
-    an assertion is cheap and is owed to a guard pass."""
+    NEGATIVE CONTROL -- ASSERTED (promoted 2026-09-29).  Zeroing Route B's
+    blocks that mix positive and negative Dirac levels (the doubled-model
+    defect; Dc is diagonal in Route B's eigenbasis, so the mask is the sign
+    pattern of its diagonal) must NOT pass the same checks:  n_max = 2 gives
+    commutant 2, grading 0, algebra dim 128 < d^2 = 256 (this row carries
+    the control).  At n_max = 1 every multiplier mixes the sign sectors, so the
+    masked system collapses to the scalars (algebra dim 1); only that is
+    asserted -- the commutant/grading counts there are SVD-noise on a
+    (near-)zero matrix and are NOT pinned (the earlier (5, 8, 1) pin froze an
+    artifact: grading <= commutant in exact arithmetic).  This proves the
+    commutant and algebra-rank checks can return something other than 1 / d^2
+    on this build, so the true-window pass is not vacuous."""
     R = _route_b_build(n_max)
     Ts, Dc = R["Ts"], R["Dc"]
     d = Dc.shape[0]
@@ -448,6 +453,16 @@ def test_route_b_commutant_and_algebra(n_max):
     dim_alg, word_len = _generated_algebra_rank(Ts)
     assert dim_alg == d * d, dim_alg
     assert word_len == 4, word_len
+    # negative control: the doubled model (sign-mixing blocks zeroed)
+    assert np.abs(Dc - np.diag(np.diag(Dc))).max() < 1e-12
+    sgn = np.sign(np.diag(Dc).real)
+    Tz = Ts * (sgn[:, None] == sgn[None, :])
+    comm_z, grad_z = _commutant_and_grading_dims(Tz, Dc)
+    dim_z, _ = _generated_algebra_rank(Tz)
+    if n_max == 1:
+        assert dim_z == 1, dim_z
+    else:
+        assert (comm_z, grad_z, dim_z) == (2, 0, 128), (comm_z, grad_z, dim_z)
 
 
 # ---------------------------------------------------------------- Route C

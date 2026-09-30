@@ -783,6 +783,100 @@ REGISTRY = [
         },
     },
     {
+        "id": "posited-k-is-bw-local-hamiltonian",
+        # 'D_W is NOT the right local Hamiltonian for the BW vacuum; H_local := K_alpha/beta is' asserts the posited
+        # generator IS the BW vacuum's Hamiltonian; its beta = 2pi Gibbs state is rho_W, and whether that is a BW vacuum
+        # is OPEN (Paper 42 O0). Registered DELTA #18.
+        "pattern": r"right\s+local\s+Hamiltonian\s+for\s+the\s+BW\s+vacuum",
+        "exempt_if_nearby": withdrawal_marker("posited-k-is-bw-local-hamiltonian"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #18; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "energies-not-output-of-casimir",
+        # 'The energies are not an output of these operators' next to the SO(4) Casimir (and P1's 'Casimir built from
+        # them ... not an output') retires the Casimir from the energies; on the labels E_n = -Z^2/(2(C+1)) through the
+        # function Fock's kernel fixes. Registered DELTA #18 (sibling of energy-not-function-of-casimir).
+        "pattern": r"not\s+an\s+output\s+of\s+these\s+operators|imposed\s+energy-shell\s+map\s+of\s+\$n\$,\s+not\s+an\s+output\.",
+        "exempt_if_nearby": withdrawal_marker("energies-not-output-of-casimir"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #18; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "k-defined-inside-theorem",
+        # A Theorem environment that opens by defining K = pi(B+F-Delta) (P18 thm:k_decomposition) puts the combination
+        # rule under a Theorem label; state the three ingredients and keep K (an Observation) outside. Registered DELTA #18
+        # (twin of k-match-inside-theorem).
+        "pattern": r"\\begin\{theorem\}[^\n]*\n(?:\\label\{[^}]*\}\s*\n)?\s*Let\s+\$K\s*=",
+        "exempt_if_nearby": withdrawal_marker("k-defined-inside-theorem"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #18; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "framework-is-boost-physics",
+        # 'the temperature mechanism IS already Lorentz-boost physics' / 'already does (more) boost-class physics': the
+        # framework's posited generator shares the 2pi period of the BW boost orbit; identifying it with a boost is OPEN
+        # (Paper 42 O0). Registered DELTA #18.
+        "pattern": r"IS\s+already\s+Lorentz-boost|already\s+does\s+(more\s+)?(Lorentz-)?boost-class\s+physics|already\s+captures\s+the\s+Lorentz-boost",
+        "exempt_if_nearby": withdrawal_marker("framework-is-boost-physics"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #18; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "m2-ring-sqrtpi-at-integer-s",
+        # M2 at integer s is the pure-Tate ring (+)_k pi^{2k} Q; the sqrt(pi) slot is populated only at half-integer s
+        # (Paper 28 remark; Paper 18 sec. III.7: overall sqrt(pi) x (+) pi^{2k} Q for heat-kernel coefficients).
+        # 'zeta_{D^2}(s) in/constrained to sqrt(pi) Q (+) pi^2 Q' at integer s is false (zeta_{D^2}(2) = pi^2 - pi^4/12).
+        # Registered DELTA #18.
+        "pattern": r"(constrained\s+to|\\in|coefficients|residual\s+is)\s+\$?\\sqrt\{?\\pi\}?\s*\\cdot\s*(\\mathbb\{Q\}|\\Q)\s*\\oplus\s*\\pi\^\{?2\}?\s*\\cdot\s*(\\mathbb\{Q\}|\\Q)",
+        "exempt_if_nearby": withdrawal_marker("m2-ring-sqrtpi-at-integer-s"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #18; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group5_qed_gauge/paper_28_qed_s3.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #18; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "cubic-root-transcendence-understated",
         # The cubic's root alpha_K is PROVABLY transcendental: alpha^3 - K alpha + 1 = 0 gives K = alpha^2 + 1/alpha,
         # so algebraic alpha_K would make K algebraic; but K = (1679/40) pi + pi^3/6 is a nonconstant Q-polynomial in pi

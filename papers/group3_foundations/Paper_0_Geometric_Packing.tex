@@ -782,22 +782,22 @@ Each block's top eigenvalue is $4 + 2\cos\frac{\pi}{n_{\max}-\ell} + 2\cos\frac{
 $\min_\ell\bigl[4\sin^2\frac{\pi}{2(n_{\max}-\ell)} + 4\sin^2\frac{\pi}{2(2\ell+1)}\bigr]$;\ minimising its leading form $\pi^2[(n_{\max}-\ell)^{-2} + (2\ell+1)^{-2}]$ under the block constraint gives the constant in closed form,
 \begin{equation}
   2 d_{\max} - \lambda_{\max}
-  \;=\; \frac{C}{n_{\max}^{2}} + o\bigl(n_{\max}^{-2}\bigr),
+  \;=\; \frac{C_{\mathrm{sat}}}{n_{\max}^{2}} + o\bigl(n_{\max}^{-2}\bigr),
   \qquad
-  C \;=\; \frac{\pi^{2}}{4}\bigl(2 + 2^{1/3}\bigr)^{2}\bigl(1 + 2^{-2/3}\bigr)
+  C_{\mathrm{sat}} \;=\; \frac{\pi^{2}}{4}\bigl(2 + 2^{1/3}\bigr)^{2}\bigl(1 + 2^{-2/3}\bigr)
   \;=\; \gvq{saturation_c}{42.7397}\ldots,
   \label{eq:saturation_rate}
 \end{equation}
-attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  Every finite sample lies \emph{below} $C$ (verified at all $591$
-integer cutoffs $10 \le n_{\max} \le 600$) --- $C_{n} = 42.61$ at
+attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  Every finite sample lies \emph{below} $C_{\mathrm{sat}}$ (verified at all $591$
+integer cutoffs $10 \le n_{\max} \le 600$) --- $C_{\mathrm{sat},n} = 42.61$ at
 $n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so every sample
-checked understates $C$ (a measured one-sided pattern, not proved for all
+checked understates $C_{\mathrm{sat}}$ (a measured one-sided pattern, not proved for all
 $n_{\max}$).  The approach is \emph{not} monotone, however:\ there
-are $195$ decreasing steps in that range, e.g.\ $C_{20} = 40.7285 >
-C_{21} = 40.6470$ (corrected 2026-09-04;\ ``monotone from below'' was asserted
+are $195$ decreasing steps in that range, e.g.\ $C_{\mathrm{sat},20} = 40.7285 >
+C_{\mathrm{sat},21} = 40.6470$ (corrected 2026-09-04;\ ``monotone from below'' was asserted
 from a doubling grid that happens to be monotone).  It is the one-sided pattern,
 not monotonicity, that makes every checked sample an understatement (the
-591-cutoff scan, the $C_{20} > C_{21}$ step and the $n_{\max} = 1000$ value
+591-cutoff scan, the $C_{\mathrm{sat},20} > C_{\mathrm{sat},21}$ step and the $n_{\max} = 1000$ value
 are re-derived but not pinned by a test), and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
 Finally, with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
@@ -805,7 +805,7 @@ ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
 convergence of the spectral bound is the content; the reproduction of
 the target is not.  \textbf{[WALL]} Nor is that bound an $S^3$ quantity:\
 $8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid, and
-$C$ is a Dirichlet band edge.  The load-bearing obstruction is the
+$C_{\mathrm{sat}}$ is a Dirichlet band edge.  The load-bearing obstruction is the
 kernel dimension:\ because the $\ell$-blocks are disconnected, the
 Laplacian on the spinless $(n,\ell,m)$ node set has
 $\dim\ker L = n_{\max}$ at every cutoff, whereas $\Delta_{S^3}$ has a

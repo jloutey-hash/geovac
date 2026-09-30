@@ -10,7 +10,7 @@
 %     Suijlekom) with a POSITIVE squared-window kernel |psi|^2 gives
 %     d_GH <= gamma_Lambda = gamma_1 Lambda^{-1/2} between the
 %     Monge--Kantorovich state spaces (finite-first-moment classes).
-%   * [INTERNAL THEOREM] The 2D Bochner--Riesz kernel is negative somewhere at
+%   * [PRIOR ART, classical] The 2D Bochner--Riesz kernel is negative somewhere at
 %     every order (J_{s+1} changes sign) and its Lebesgue constant exceeds 1
 %     (int K = 1); the numerical table is [MEASURED] illustration.  This is why
 %     the squared window, not Bochner--Riesz, is the lift.
@@ -118,7 +118,7 @@ logarithmically. The smooth-edged windows $(1-|\xi|^{2})_{+}^{m}$ with
 $m\ge1$ do; for $m=1$, $\gamma_{1}=32/(5\pi)$. The two-dimensional
 Bochner--Riesz map is \emph{not} a usable lift: its kernel is negative
 somewhere at every order, and its Lebesgue constant exceeds~$1$
-\textbf{[INTERNAL THEOREM]}. On the finite Dirichlet disk-with-cone the paper
+\textbf{[PRIOR ART]} (both classical facts~\cite{stein_weiss}, with a one-line argument recorded here). On the finite Dirichlet disk-with-cone the paper
 reports measurements and withdraws earlier claims. The Markov--Ces\`aro
 reconstruction map is not positivity-preserving (a ring counterexample),
 and its reconstruction error on the open disk decays on every tested
@@ -177,7 +177,7 @@ MEASURED]}.
 \item \textbf{(Why not Bochner--Riesz, \S\ref{subsec:not_br}.)} The
 two-dimensional Bochner--Riesz kernel is negative somewhere, and its
 $\Lambda$-independent Lebesgue constant exceeds $1$, at every finite order
-\textbf{[INTERNAL THEOREM]}. The sizes are measured: min/max
+\textbf{[PRIOR ART]} (classical~\cite{stein_weiss}). The sizes are measured: min/max
 $=-0.071,-0.059,-0.029,-0.009$ at $s=0.75,1,2,4$ \textbf{[MEASURED]}.
 \item \textbf{(Finite disk, \S\ref{sec:disk}.)} On the Dirichlet disk the
 Markov--Ces\`aro map is unital. It is \emph{not}
@@ -475,7 +475,9 @@ K_{s,1}(r)\propto\frac{J_{s+1}(r)}{r^{s+1}},
 \end{equation}
 as its reconstruction map. Two facts rule it out as a lift.
 
-\emph{It does not preserve positivity.} \textbf{[INTERNAL THEOREM]}
+\emph{It does not preserve positivity.} \textbf{[PRIOR ART]}
+(classical:\ the Bessel-kernel formula for the Fourier transform of a
+radial function~\cite{stein_weiss}, recorded here)
 $J_{s+1}$ has infinitely many positive zeros and changes sign at each of
 them, so $K_{s,1}\propto J_{s+1}(r)/r^{s+1}$ is negative somewhere for
 every order $s$. The sizes are \textbf{[MEASURED]}:
@@ -493,7 +495,7 @@ $\Berez_{\Lambda}^{s}$ is a convolution, so
 $\nabla(\Berez f)=\Berez(\nabla f)$, and by Young's inequality the
 sharp gradient gain is the Lebesgue constant
 $\Lebesgue_{s}:=\normone{K_{s}}/\int K_{s}$. This equals $1$ only for a
-non-negative kernel. \textbf{[INTERNAL THEOREM]} (a classical fact about
+non-negative kernel. \textbf{[PRIOR ART]} (a classical fact about
 Bochner--Riesz means~\cite{stein_weiss}, recorded here) $\Lebesgue_{s}>1$ at every
 finite order:\ $\int K_{s}=\widehat{K_{s}}(0)=1$ because the mean is unital,
 and $K_{s}$ is negative on a set of positive measure (above), so
@@ -784,7 +786,9 @@ Weber--Schafheitlin integrals).
 
 \bibitem{stein_weiss}
 E.~M.~Stein and G.~Weiss, \textit{Introduction to Fourier Analysis on
-Euclidean Spaces}, Princeton Univ.\ Press, 1971 (Bochner--Riesz means).
+Euclidean Spaces}, Princeton Univ.\ Press, 1971, Ch.~IV (Fourier
+transforms of radial functions;\ the Bessel-kernel formula) and Ch.~VII
+(Bochner--Riesz summability).
 
 \bibitem{paper38}
 GeoVac Project. Paper~38 --- State-space Gromov--Hausdorff convergence

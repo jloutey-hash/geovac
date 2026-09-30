@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.11] - 2026-09-29
+
+**Patch. /qa trunk DELTA #18 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 5 LARGE (12 → 8 → 5); code and citations CLEAN.**
+
+### The run
+- **5 LARGE.** Each is a single sentence at an unmoved locus of a changed claim:
+  - P32 L7486 says K_α/β "is" the local Hamiltonian of the BW vacuum.
+  - The group3 synthesis (L320) and P1 (L414) say the energies are "not an output of these operators" right next to the Casimir.
+  - P18 `thm:k_decomposition` defines K inside a Theorem, the twin of P2's fix.
+  - P34 says "the temperature mechanism IS already Lorentz-boost physics" and "already does boost-class physics".
+- **Code CLEAN.**
+  - Richardson (4e(4n) − e(n))/3 was verified to leave only a 1/n² residual, so the tolerance catches an offset of about 5.6e-6.
+  - The P M_g P test builds the Galerkin compression, and its pinned values match the paper verbatim.
+- **Citations CLEAN.** Checked against primary texts:
+  - Rieffel, Mem. AMS 168, Theorem 2.3, is exactly the covariant-symbol first-moment bound.
+  - The BBB odd-m extension is a fair description (their whole construction is even-dimensional).
+  - Giombi–Klebanov: F_f is per Dirac component.
+  - Rittenhouse Theorem 1 holds for any non-interacting N (their proof credit is to Cavagnero).
+
+### Remediation (gate-first)
+- **Five new C16 entries** (all discriminate; 9 live loci → 0; 8 dependents stamped): `posited-k-is-bw-local-hamiltonian`, `energies-not-output-of-casimir`, `k-defined-inside-theorem`, `framework-is-boost-physics`, `m2-ring-sqrtpi-at-integer-s`. The last is narrowed so that Paper 28's correct "√π slot only at half-integer s" clarification stays silent.
+- **The five LARGE, one fix each:**
+  - P32: ρ_W is the β = 2π Gibbs state of the posited generator; whether it is a BW vacuum is open (O0).
+  - Group3 synthesis and P1: the Casimir yields E_n through Fock's function.
+  - P18: the theorem opens with B, F, Δ, and K stays outside as an Observation.
+  - P34: "shares the 2π period of the BW boost orbit (an analogy; O0 open)", and "Hopf-base measure" becomes "k = 0 volume slot".
+- **M2 ring.** At integer s it is the pure-Tate ring ⊕π^{2k}ℚ; heat-kernel coefficients are √π × ⊕π^{2k}ℚ (P28, P35 ×2, P57). One of these loci printed ζ_{D²}(2) = π² − π⁴/12 on the very next line.
+- **SMALL sweep:**
+  - The saturation constant is renamed C_sat in P0, P7 and the group3 synthesis; the Casimir keeps C.
+  - The group1 synthesis sentence on P53 is corrected.
+  - P18 gets the 4/π convention caveat.
+  - P50:
+    - the key becomes `beccaria_bekaert_tseytlin2014`, and its tensor row is marked "adjacent";
+    - the Dirac theorem now says "agrees symbolically";
+    - the Giombi–Klebanov per-component note is added.
+  - P42 now says "BW witness".
+  - P2 `thm:three_homes` now points at eq:K.
+  - The α_K proof parenthetical is sharpened in P2 and P18: π enters the cubic only through K, so an algebraic root would make K = (x₀³+1)/x₀ algebraic. The counterexample works only because π enters two coefficients.
+  - P53 credits Stein–Weiss. P16 credits Rittenhouse Theorem 1 to Cavagnero's proof.
+  - P32 now says "K matches at 5×10⁻⁷ (the cubic's root at 10⁻⁷)".
+- **Guards (fire-tested):**
+  - The cubic test uses a save/restore precision fixture and gains a new test of the one-coefficient mechanism.
+  - The doubled-model negative control in `test_true_window_real_structure.py` is now ASSERTED.
+
+### Pre-checkpoint self-check: 1 LARGE + 5 SMALL, all fixed
+- **LARGE.** P34 L10184 still said the M1 result "already captures the Lorentz-boost / BW content". It now says it matches the BW 2π period as an analogy, with O0 open, and the gate entry is widened to catch the phrasing.
+- **SMALLs:**
+  - P34's falsifier (b) wording was overcorrected; fixed.
+  - Another P34 "Hopf-base measure" label is renamed.
+  - The group3 synthesis still had a leftover C → C_sat at L508.
+  - P28's G2 coefficients sit in π⁻²ℚ after the (4π)^{−d/2} normalisation; now stated.
+  - **A new guard pinned SVD noise.** At n_max = 1 it asserted (commutant, grading, algebra) = (5, 8, 1), but grading ≤ commutant in exact arithmetic. The masked system collapses to the scalars there, so the guard now asserts only dim = 1 at n_max = 1 and keeps the full (2, 0, 128) control at n_max = 2 (fire-tested).
+- **NITs:**
+  - The classical Bochner–Riesz facts in P53 are re-tiered [PRIOR ART] (Stein–Weiss), with the claim-matrix row to match.
+  - The P50 S⁵ Dirac note now names the open Weyl-normalisation question.
+- **Open follow-up, not done:** a corpus sweep of the remaining "Hopf-base measure" labels in P34 (L537, 762, 783, 2231, 2371, 2451, 4500, 4524, 9959) and elsewhere. The label is a known misnomer.
+
+### Verification
+- All 14 gates PASS; C10 whole corpus (57 papers); C16 133/133.
+- Touched tests pass, including the 18 symbolic S³ proofs.
+
 ## [v5.17.10] - 2026-09-29
 
 **Patch. /qa trunk DELTA #17 (claim-impact, unseeded; panel re-run after a login expiry killed the first dispatch) = DEFECTS, remediated (PI-approved). 8 LARGE (down from 12); code and citations CLEAN; Paper 53's rebuilt proof re-derived by two reviewers.**

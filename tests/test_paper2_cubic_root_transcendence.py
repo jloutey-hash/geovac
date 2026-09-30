@@ -12,7 +12,16 @@ Rejects: a wrong expansion of K, a root that does not satisfy the cubic, and the
 retired counterexample.  Nothing here concerns the physical alpha.
 """
 import mpmath as mp
+import pytest
 import sympy as sp
+
+
+@pytest.fixture(autouse=True)
+def _mp_dps_hermetic():
+    """Restore mpmath precision after each test (mp.dps is global state)."""
+    saved = mp.mp.dps
+    yield
+    mp.mp.dps = saved
 
 
 def test_K_is_nonconstant_rational_polynomial_in_pi():
@@ -24,7 +33,7 @@ def test_K_is_nonconstant_rational_polynomial_in_pi():
 
 
 def test_root_satisfies_K_equals_alpha_sq_plus_inverse():
-    mp.mp.dps = 50
+    mp.mp.dps = 50  # restored by the autouse fixture
     K = mp.pi * (42 + mp.pi**2 / 6 - mp.mpf(1) / 40)
     a = mp.findroot(lambda x: x**3 - K * x + 1, mp.mpf(1) / 137)
     assert a > 0 and abs(a**3 - K * a + 1) < mp.mpf(10) ** -45
@@ -40,3 +49,18 @@ def test_printed_counterexample_and_retired_one():
     assert sp.simplify(good.subs(x, 1)) == 0
     retired = x**2 - pi * x + pi * (pi - 1)
     assert sp.simplify(retired.subs(x, 1)) != 0
+
+
+def test_pi_enters_one_coefficient_of_cubic_two_of_counterexample():
+    """The proof's mechanism: in x^3 - Kx + 1 only the x-coefficient carries pi,
+    so an algebraic root x0 != 0 forces K = (x0^3+1)/x0 algebraic; in the
+    counterexample pi enters two coefficients, which cancel at x = 1."""
+    x, pi = sp.symbols("x"), sp.pi
+    K = pi * (42 + pi**2 / 6 - sp.Rational(1, 40))
+    cubic = sp.Poly(x**3 - K * x + 1, x).all_coeffs()
+    carriers = [c for c in cubic if sp.sympify(c).has(pi)]
+    assert len(carriers) == 1 and sp.expand(carriers[0] + K) == 0
+    x0 = sp.Symbol("x0", nonzero=True)
+    assert sp.simplify(sp.solve(x0**3 - sp.Symbol("k") * x0 + 1, sp.Symbol("k"))[0] - (x0**3 + 1) / x0) == 0
+    ce = sp.Poly(x**2 - pi * x + (pi - 1), x).all_coeffs()
+    assert sum(1 for c in ce if sp.sympify(c).has(pi)) == 2
