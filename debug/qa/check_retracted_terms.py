@@ -783,6 +783,64 @@ REGISTRY = [
         },
     },
     {
+        "id": "hopf-base-measure-label",
+        # The M1 mechanism's name 'Hopf-base measure' is a misnomer: M1 is the k=0 VOLUME SLOT of the master
+        # Mellin engine (Paper 18 sec. III.7), not a Hopf base-to-total ratio, and the 4/pi GH-rate constant is the
+        # unit-sphere volume quotient (convention-dependent), not a Hopf-base quantity. Swept corpus-wide 2026-09-29
+        # (77 loci, 16 papers); one explained historical mention in Paper 18 carries the marker. Genuine geometry
+        # ('a quarter of the area of the Hopf base S^2') stays silent. Registered DELTA #19 (PI-approved).
+        "pattern": r"Hopf[- ](?:base|bundle)\s+(?:measure|volume)|Hopf[- ]measure|quarter\s+of\s+the\s+area\s+of\s+the\s+Hopf\s+base",
+        "exempt_if_nearby": withdrawal_marker("hopf-base-measure-label"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #19 label sweep; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "framework-2pi-is-boost-period",
+        # IDEA-LEVEL: any sentence whose subject is the framework / its projection / M1 / 'this 2pi' and which says it IS the
+        # modular-flow / boost-orbit period or the Wick-rotated image of the BW mechanism. The framework's M1 2pi MATCHES that
+        # period (an analogy); identifying the framework's generator with a boost is OPEN (Paper 42 O0). Continuum statements
+        # (Sewell: the cigar KMS state IS the boost modular flow; Unruh) are correct and stay silent. Registered DELTA #19.
+        "pattern": r"(?:framework's|projection's|\bM1\b|this\s+\$2\\pi\$)[^.;]{0,140}?\bIS\s+(?:the\s+)?(?:Lorentzian\s+)?(?:period\s+of\s+the\s+)?(?:modular|Lorentz|boost|Wick)|is\s+the\s+Wick-rotated\s+image\s+of\s+the\s+(?:Bisognano|modular)|\\textbf\{The\s+structural\s+identification\.\}",
+        "exempt_if_nearby": withdrawal_marker("framework-2pi-is-boost-period"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #19, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-29 (DELTA #19 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated 2026-09-29 (DELTA #19 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated 2026-09-29 (DELTA #19 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "sqrtpi-ring-anywhere",
+        # IDEA-LEVEL: the two-term ring sqrt(pi) Q (+) pi^2 Q anywhere. At integer s the values are pure-Tate (+)_k pi^{2k} Q
+        # (Paper 28 T9); heat-kernel coefficients are sqrt(pi) x (+) pi^{2k} Q (Paper 18 sec. III.7). The one correctly scoped
+        # mention (Paper 28's half-integer-s remark) carries a withdrawal marker. Registered DELTA #19.
+        "pattern": r"\\sqrt\{?\\pi\}?\s*(?:\\cdot|\\,)?\s*(?:\\mathbb\{Q\}|\\Q)\s*\\oplus\s*\\pi\^\{?2\}?",
+        "exempt_if_nearby": withdrawal_marker("sqrtpi-ring-anywhere"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #19, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-29 (DELTA #19 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-29 (DELTA #19 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "posited-k-is-bw-local-hamiltonian",
         # 'D_W is NOT the right local Hamiltonian for the BW vacuum; H_local := K_alpha/beta is' asserts the posited
         # generator IS the BW vacuum's Hamiltonian; its beta = 2pi Gibbs state is rho_W, and whether that is a BW vacuum

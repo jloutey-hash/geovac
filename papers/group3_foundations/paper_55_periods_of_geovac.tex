@@ -94,7 +94,7 @@ operator-order slot $k \in \{0, 1, 2\}$ of the master Mellin engine
 $\Mcal[\Tr(D^k e^{-tD^2})]$ on the discrete Camporesi--Higuchi
 $\sthree$ spectral triple:
 \begin{itemize}
-  \item $k = 0$ (Hopf-base measure $\Vol(S^2)/4 = \pi$):\
+  \item $k = 0$ (volume slot, $\Vol(S^2)/4 = \pi$):\
     $M_1 \subset \Q[\pi, \pi^{-1}]$, the localised pure-Tate algebra
     at $\pi$, depth $0$.
   \item $k = 2$ (Seeley--DeWitt coefficients):\
@@ -212,7 +212,7 @@ triple~\cite{camporesi_higuchi1996}.  The structure is:
 \toprule
 $k$ & Sub-mechanism & Period-ring home & Source \\
 \midrule
-$0$ & M1 (Hopf-base measure) & $\Q[\pi, \pi^{-1}]$ & this paper \S\ref{sec:m1} \\
+$0$ & M1 (volume slot) & $\Q[\pi, \pi^{-1}]$ & this paper \S\ref{sec:m1} \\
 $2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ pure Tate & \cite{fathizadeh_marcolli2016} + this paper \S\ref{sec:m2} \\
 $1$ & M3 (vertex parity / Hurwitz / Dirichlet $L$) & $\MT(\Z[i, 1/2])$ at level $\le 4$ & \cite{deligne2010, glanois2015} + this paper \S\ref{sec:m3} \\
 \bottomrule
@@ -325,10 +325,10 @@ Every appearance of $\pi$ in any closed-form GeoVac spectral
 observable arises from one (or more) of the three named sub-mechanisms
 $M_1, M_2, M_3$:
 \begin{itemize}
-  \item $M_1$:\ Hopf-base measure factor $\Vol(S^2)/4 = \pi$ on the
-    Hopf bundle $\sthree \to S^2$;
+  \item $M_1$:\ $k = 0$ volume slot $\Vol(S^2)/4 = \pi$ (a quarter of the unit-sphere area $\Vol(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$) of the Hopf bundle $\sthree \to S^2$);
   \item $M_2$:\ Seeley--DeWitt heat-kernel coefficient
-    $a_k(D^2) \in \pi\cdot\Q$ in the asymptotic expansion of
+    $a_k(D^2)$ (in $\bigoplus_k \pi^{2k}\cdot\Q$ after the standard $\sqrt{\pi}$
+    heat-trace normalisation) in the asymptotic expansion of
     $\Tr\,e^{-tD^2}$;
   \item $M_3$:\ vertex-restricted Dirichlet-$L$ content via Hurwitz at
     quarter-integer shifts in the parity decomposition of $D(s)$.
@@ -350,7 +350,7 @@ Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016},
 Deligne~\cite{deligne2010}, and Glanois~\cite{glanois2015}.
 
 % =====================================================================
-\section{M1:\ the Hopf-base measure sub-mechanism}
+\section{M1:\ the volume-slot sub-mechanism}
 \label{sec:m1}
 % =====================================================================
 
@@ -371,8 +371,8 @@ $\in \Z$.
 \end{theorem}
 
 \begin{proof}
-By construction, the M1 mechanism is the Hopf-base measure factor
-$\Vol(S^2)/4 = \pi$ on the Hopf bundle $\sthree \to S^2$
+By construction, the M1 mechanism is the $k = 0$ volume factor
+$\Vol(S^2)/4 = \pi$ (a quarter of the unit-sphere area $\Vol(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$)) on the Hopf bundle $\sthree \to S^2$
 (Paper~25~\S~II.1,~\cite{loutey_paper25}).  As a period in the
 Kontsevich--Zagier framework, $\pi$ has the canonical representation
 $\pi = \tfrac{1}{2i}\oint_{|z|=1} dz/z$, a Tate weight-$1$ period of
@@ -381,7 +381,7 @@ corpus is a $\Q$-linear combination of integer powers of this period
 (witnesses tabulated below);\ no M1 closed form has produced
 transcendentals outside $\Q[\pi, \pi^{-1}]$.  The depth-$0$
 property follows from the absence of iterated integration in the
-Hopf-measure step:\ M1 acts as a single multiplicative factor, not as
+volume-slot step:\ M1 acts as a single multiplicative factor, not as
 a Mellin convolution.  The localisation at $\pi^{-1}$ accommodates the
 inverse-period witnesses $4/\pi$ and $1/\pi^2$, which are not
 periods in the strict Kontsevich--Zagier sense but sit naturally in
@@ -422,7 +422,7 @@ content of the K-formula.
 
 Unlike M2 (which depends on the volume-normalisation convention for
 the spectral action --- see \S\ref{sec:m2} below), the M1 ring is
-convention-free.  The reason:\ the Hopf-base measure is itself a
+convention-free.  The reason:\ the $k = 0$ volume slot is itself a
 volume integral, not a heat-kernel asymptotic coefficient at $t \to 0^+$.
 There is no choice of dimensional rescaling to absorb or expose; the
 factor $\pi$ appears directly.  This convention-freeness is the
@@ -683,8 +683,8 @@ $\bigoplus_k \pi^{2k}\cdot\Q$.  At the spectral-zeta-at-integer-$s$
 level (which is convention-free), the values lie in
 $\Q[\pi^2]$;\ the $\sqrt\pi$ slot is populated only at half-integer
 $s$, where the values match the leading heat-trace poles.  This
-reconciles Paper~28 Theorem~1 (T9, $\sqrt\pi\cdot\Q \oplus \pi^2\cdot\Q$
-two-term ring) with the pure-Tate classification at integer $s$.
+reconciles Paper~28 Theorem~1 (T9:\ $\bigoplus_k \pi^{2k}\cdot\Q$ at integer $s$;\ the
+$\sqrt\pi$ slot is populated only at half-integer $s$) with the pure-Tate classification at integer $s$.
 
 % =====================================================================
 \section{M3:\ vertex parity, Hurwitz at quarter-integer shifts, and
@@ -1446,7 +1446,7 @@ M_2 = \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
 M_1 \cap \MT(\Z[i, 1/2]) = \Q[\pi].
 \end{equation}
 A given period value $\pi^{2k}$ can be reached by M1 (as an integer
-power of the Hopf-base measure), by M2 (as a Seeley--DeWitt
+power of the $k = 0$ volume factor), by M2 (as a Seeley--DeWitt
 coefficient at order $k$), or by M3 (as an even-weight Brown MZV
 inside the un-restricted Dirac Dirichlet).  The Mellin slot index
 $k$ is the structural label that distinguishes the three readings;\
@@ -1504,7 +1504,7 @@ B = 42, \;\; F = \zeta(2) = \tfrac{\pi^2}{6}, \;\; \Delta = \tfrac{1}{40},
 contains exactly one elementary spectral object from each of the
 three Mellin slots, plus a rational scalar:
 \begin{itemize}
-  \item The explicit prefactor $\pi$ is the Hopf-base measure from
+  \item The explicit prefactor $\pi$ is the $k = 0$ volume factor from
     M1, Tate weight $+1$, depth $0$.
   \item $B = 42$ is a rational Casimir trace at the $k = 0$ scalar
     sub-mechanism (the rational core of M1), Tate weight $0$,
@@ -1527,7 +1527,7 @@ The constant $K$ sits in $\Q[\pi]$ at weight $\le 3$, in
 $M_1 \cdot (M_0 \oplus M_2)$.  This is the canonical \emph{additive}
 joint engagement:\ one representative per Mellin slot summed inside
 a single linear combination, with the dominant term $\pi^3/6$
-recognisable as the M1$\times$M2 cross-product of Hopf-base measure
+recognisable as the M1$\times$M2 cross-product of the $k = 0$ volume factor
 and scalar Seeley--DeWitt evaluation at $s = 2$.  The empirical
 near-equality $K \approx \alpha^{-1}$ (to $4.8 \times 10^{-7}$ relative;
 the cubic's root $1/\alpha = K - \alpha^2$ matches to $8.8\times10^{-8}$)
@@ -1608,7 +1608,7 @@ $2\sqrt2/\pi$.  In every normalization it is an algebraic multiple of an
 M1 volume ratio (numerator $\Vol(S^2) = 4\pi$, Tate weight $+1$;\
 denominator a power of $\pi$), so no M2 or M3 content enters at any
 step of the state-space GH convergence argument.  (Earlier versions
-called $\Vol(S^2)$ here the ``Hopf-base measure'';\ that label is a
+attributed $\Vol(S^2)$ here to the Hopf base;\ that label is a
 misnomer --- the constant is the unit-sphere volume quotient
 $\Vol(S^2)/\Vol(S^3)$ up to the normalization factor, not a
 Hopf-base integration --- and is withdrawn.)  The period content of the rate
@@ -2159,7 +2159,7 @@ $\mathcal{M}[\phi_0^{\mathrm{odd}}(1; t)](s) = \Gamma(s) \cdot
 this transform sharpens the three sub-mechanisms into three
 categorically different extraction points:\ $M_1$ at the
 spectral-dimension pole $s = d/2 = 3/2$ as a continuum residue
-(leading coefficient $\sqrt{\pi}/2$ supplies the Hopf-base measure
+(leading coefficient $\sqrt{\pi}/2$ supplies the $k = 0$ volume-slot
 $\pi$);\ $M_2$ at integer-$s$ regular points of the same transform
 (continuum closed forms reproduce the Q5'-CH-2 panel verbatim);\
 $M_3$ in the $\eta$-style pairing
@@ -2768,7 +2768,7 @@ classifications) is either pure-Tate $\pi^{2k}\mathbb{Q}$ (M2) or
 odd-Riemann $\zeta(\mathrm{odd})\mathbb{Q}$ (M3);\ both sit in MT$(\mathbb{Q}, 1)$.
 The Paper 18 \S III.7 master Mellin engine partition aligns bit-exactly
 with the MT depth/weight grading at integer-shifted $\zeta$ values:\
-M1 ($\pi$, Hopf-base measure, depth 0 weight 2), M2 ($\pi^{2k}$,
+M1 ($\pi$, volume slot, depth 0 weight 2), M2 ($\pi^{2k}$,
 Seeley--DeWitt, depth 0 weight $2k$), M3 ($\zeta(\mathrm{odd})$,
 vertex-parity-Hurwitz, depth 1 weights $3, 5, \dots$). The cosmic-Galois
 $U^*$ acts on $\chi, \eta$ trivially (depth 0 fixed-points), on the

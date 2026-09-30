@@ -437,7 +437,7 @@ def test_route_b_commutant_and_algebra(n_max):
     defect; Dc is diagonal in Route B's eigenbasis, so the mask is the sign
     pattern of its diagonal) must NOT pass the same checks:  n_max = 2 gives
     commutant 2, grading 0, algebra dim 128 < d^2 = 256 (this row carries
-    the control).  At n_max = 1 every multiplier mixes the sign sectors, so the
+    the control; the n_max = 1 row only rejects a MISSING mask).  At n_max = 1 every multiplier mixes the sign sectors, so the
     masked system collapses to the scalars (algebra dim 1); only that is
     asserted -- the commutant/grading counts there are SVD-noise on a
     (near-)zero matrix and are NOT pinned (the earlier (5, 8, 1) pin froze an
@@ -463,6 +463,23 @@ def test_route_b_commutant_and_algebra(n_max):
         assert dim_z == 1, dim_z
     else:
         assert (comm_z, grad_z, dim_z) == (2, 0, 128), (comm_z, grad_z, dim_z)
+
+
+def test_grading_leg_can_return_nonzero():
+    """The grading leg of _commutant_and_grading_dims is exercised on a system
+    with a KNOWN nonzero answer (no physics test pins a nonzero grading):
+    operators 1, 1 (x) A, 1 (x) B (A, B generic Hermitian 2x2) with D = sigma_z (x) 1.
+    Commutant = M_2 (x) 1 (dim 4); grading = span{sigma_x, sigma_y} (x) 1 (dim 2).
+    Rejects a helper whose grading count is stuck at 0 (the true-window
+    grading == 0 assertions would then be vacuous)."""
+    rng = np.random.default_rng(7)
+    A = rng.standard_normal((2, 2)) + 1j * rng.standard_normal((2, 2))
+    B = rng.standard_normal((2, 2)) + 1j * rng.standard_normal((2, 2))
+    A, B = A + A.conj().T, B + B.conj().T
+    I2 = np.eye(2)
+    Ts = np.array([np.eye(4), np.kron(I2, A), np.kron(I2, B)])
+    D = np.kron(np.diag([1.0, -1.0]), I2)
+    assert _commutant_and_grading_dims(Ts, D) == (4, 2)
 
 
 # ---------------------------------------------------------------- Route C

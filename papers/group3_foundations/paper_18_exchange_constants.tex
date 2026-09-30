@@ -1130,7 +1130,7 @@ M_1 \subset \mathbb{Q}[\pi, \pi^{-1}], \qquad
 M_2 \subset \bigoplus_{k \ge 0} \pi^{2k}\cdot\mathbb{Q}, \qquad
 M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2]) \text{ at level } \le 4,
 \end{equation}
-indexed by the operator-order slot $k$.  M1 (Hopf-base measure
+indexed by the operator-order slot $k$.  M1 ($k = 0$ volume slot,
 $\mathrm{Vol}(S^2)/4 = \pi$) generates the localised pure-Tate algebra
 at $\pi$;\ M2 (Seeley--DeWitt heat-kernel coefficients) inherits the
 Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016} mixed-Tate
@@ -1162,7 +1162,7 @@ The Mellin engine reading admits a sharper structural statement.  The
 spectral-triple framing of GeoVac (Paper~32) admits a candidate
 case-exhaustion theorem (Paper~32 Theorem on $\pi$-source
 case-exhaustion): every $\pi$ in a GeoVac observable arises from one
-of three named mechanisms M1 (Hopf-base measure), M2 (Seeley--DeWitt
+of three named mechanisms M1 ($k = 0$ volume slot), M2 (Seeley--DeWitt
 heat-kernel coefficient), or M3 (vertex-topology Hurwitz Dirichlet
 $L$-content).  Track~TS-E3's falsification sweep against three
 candidate fourth mechanisms (continuum gravity, anomaly classes,
@@ -1176,6 +1176,7 @@ of a single master mechanism} parameterized by operator order:
 \end{equation}
 The three sub-cases correspond to:\ $k = 0$ (trivial heat kernel on a
 sphere collapses to a volume factor $\mathrm{Vol}(S^d)$, recovering
+% [retracted 2026-09-29: hopf-base-measure-label] -- historical name, explained
 M1 --- the historical name ``Hopf-base measure'' denotes this $k = 0$ volume
 slot and \emph{not} a base-to-total ratio of the Hopf fibration, a
 distinction that matters wherever the name is read as a ratio
@@ -1189,7 +1190,7 @@ exchange constants; under the case-exhaustion theorem, it is the
 \emph{master} $\pi$-injecting mechanism, with operator order $k$
 selecting the sub-mechanism.  The first-vs.\ second-order axis named
 above (motivic weight) is exactly the $k = 1$ vs.\ $k = 2$ split; the
-$k = 0$ free-Mellin case is the Hopf-base measure singled out by Paper~25.
+$k = 0$ free-Mellin case is the volume slot singled out by Paper~25.
 
 \paragraph{Mechanism-as-domain sharpening (Sprint MR-A/B/C, May~2026).}
 The master Mellin engine reading admits a further refinement when read
@@ -1267,7 +1268,7 @@ The index $k \in \{0, 1, 2\}$ classifies both the M-mechanism and
 the natural domain of observable from which its signature can be
 extracted:
 \begin{itemize}
-  \item $k = 0$ (M1, Hopf-base measure): state-space GH rates;
+  \item $k = 0$ (M1, volume slot): state-space GH rates;
     signature $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the SU(2) Fej{\'e}r
     asymptote (dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$) (L2 sprint quantitative-rate theorem).
   \item $k = 2$ (M2, Seeley--DeWitt): heat-kernel and spectral-action
@@ -1299,7 +1300,7 @@ Source memos: \texttt{debug/mr\_\{a,b,c\}\_*\_memo.md}, data
 Sprint Q5'-Stage1-2b (June~2026,
 \texttt{debug/sprint\_q5p\_2b\_phi0\_mellin\_memo.md}) sharpens the
 $M_1$ sub-mechanism's $\pi$ injection further:\ on a compact
-3-dimensional spectral triple, the Hopf-base measure $\pi$ enters
+3-dimensional spectral triple, the $k = 0$ volume-slot $\pi$ enters
 the formal Mellin transform $\Gamma(s) \cdot \zeta_{D^2}(s)$
 specifically at the spectral-dimension pole $s = d/2 = 3/2$ via the
 Weyl-law short-time leading
@@ -1492,7 +1493,7 @@ ring;\ which $\pi^{2k}\cdot\mathbb{Q}$ slot is accessed by a given
 observable is fixed by the Mellin slot exponent at which the
 heat-kernel trace is evaluated.  The M1 slot $k = 0$ is degenerate
 in this sense:\ the trivial heat kernel collapses to the
-Hopf-base measure $\mathrm{Vol}(S^d)$, and the period ring
+volume factor $\mathrm{Vol}(S^d)$, and the period ring
 $\mathbb{Q}[\pi, \pi^{-1}]$ has no internal Mellin-slot stratification
 to select.  The operator-vs.-slot distinction is therefore
 non-trivial for M2 and M3 (whose period rings have internal weight
@@ -1526,14 +1527,14 @@ selects which period ring element is accessed.
 
 \paragraph{Compact / non-compact partition of the $4/\pi$ rate
 (Sprint M-Z, May 2026).}
-The master Mellin engine's $M_1$ Hopf-base measure mechanism produces
+The master Mellin engine's $M_1$ (volume slot) mechanism produces
 the $4/\pi$ rate constant (dual-Coxeter normalisation; $2/\pi$ on the
 unit $S^3$) in the state-space Gromov--Hausdorff convergence of Paper~38 (compact $SU(2)$ truncation) and in the universal rate
 theorem of Paper~40 (compact connected semisimple Lie groups with
 bi-invariant metric; a circle factor carries $2/\pi$).  Sub-sprint M-Z (modular propinquity
 investigation, 2026-05-23) flagged a structural reason why this rate
 does \emph{not} transport to non-compact Coulomb (Sturmian basis on
-$L^2(\mathbb{R}^3)$): the Hopf-base measure mechanism is compact-Lie-quotient
+$L^2(\mathbb{R}^3)$): the $k = 0$ volume-slot mechanism is compact-Lie-quotient
 specific; Sturmian's continuum content dilutes the Plancherel weight
 to 1, killing the localization that drives the
 $\log n / n$ rate on $SU(2)$.  A rigorous non-compact analog of
@@ -1548,8 +1549,7 @@ pure-Tate sub-ring $\mathbb{Q}[\pi, \pi^{-1}]$ of mixed Tate periods
 over $\mathbb{Q}$, at depth $0$ and Tate weight $\in \mathbb{Z}$, by
 direct identification of $\pi = \mathrm{Vol}(S^2)/4$ as a weight-$1$
 Tate period (Kontsevich--Zagier 2001).  Every M1 witness logged
-across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25
-Hopf bundle base measure); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
+across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25;\ a quarter of the unit-sphere area $\mathrm{Vol}(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$)); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
 (Paper~38 §L2 asymptotic state-space GH rate;\ dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$); $4/\pi$ (Paper~40 Thm~1
 universal rate constant across compact connected semisimple Lie groups); $1/\pi^2$ inside
 $-3\zeta(3)/(16\pi^2)$ (Paper~50 §3 F-theorem, an M1$\times$M3
@@ -1580,7 +1580,7 @@ TS-E3 is the discrete first Chern number of the Hopf U(1) bundle on the
 finite Fock-projected $S^3$ graph: under the master Mellin engine reading,
 the discrete $c_1$ should be \emph{integer-valued} on any finite cutoff,
 because the construction engages no continuous integration step (no
-Hopf-base measure, no heat-kernel trace, no Mellin transform), and
+$k = 0$ volume factor, no heat-kernel trace, no Mellin transform), and
 therefore none of M1, M2, M3.  Both physically natural $U(1)$
 phase conventions (Condon--Shortley canonical, all phases zero; and Z$_2$
 alternating, $\phi = \pi$ on $L_\pm$ edges) yield exactly $c_1 = 0$ at

@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.12] - 2026-09-29
+
+**Patch. /qa trunk DELTA #19 (claim-impact, unseeded) = DEFECTS, remediated with an idea-level gate approach (PI-approved). 4 LARGE (12 → 8 → 5 → 4); code and citations CLEAN.**
+
+### The run
+- **4 LARGE, in two families.** Both are twins of the prior round's fixes, left at loci that had not moved:
+  - The framework's M1 2π "IS the modular-flow / boost-orbit period". Loci: P34 L2655 (with "no extension required"), P35 (heading "The structural identification" at L1015, and L1152), P32 L3693/3736, and lower-weight copies at P34 L752, L4540 and L10269.
+  - The retired √πℚ ⊕ π²ℚ ring. Loci: P32 L2617, where it is arithmetically wrong (the coefficient −2m²π²√π is not in π²ℚ), and P55 L686, which misattributes it to T9.
+- **Code: CLEAN.**
+  - The doubled-model control is genuine at n_max = 2; the n_max = 1 row rejects only a missing mask.
+  - No test ever exercised a nonzero grading. That is not a false positive, since grading 0 follows from commutant = scalars, but it was a coverage gap.
+- **Citations: CLEAN.**
+  - Giombi–Klebanov's F_f is per component, so ×4 is exact for S⁵.
+  - Rittenhouse's Theorem 1 is credited to its proof in Cavagnero 1986, their Ref. 15.
+  - The BBT 2014 rename is confirmed.
+  - Stein–Weiss chapters are confirmed; sections were not reachable.
+
+### Approach change: gate the idea, not the phrase (PI-approved)
+- **Why.** Every LARGE in the last three rounds reappeared in new words at another locus: "IS boost physics" → "captures the boost content" → "IS the period". Each round's phrase-level gate caught only the old wording.
+- **`framework-2pi-is-boost-period`.** Fires on any sentence whose subject is the framework, its projection, M1 or "this 2π" and which says it IS the modular-flow / boost period or the Wick image of BW.
+  - All 10 corpus hits were swept to "matches … (an analogy; identifying the generator with a boost is open, Paper 42's O0)".
+  - The continuum theorems (Sewell: the cigar KMS state IS the boost modular flow; Unruh) stay and are deliberately silent.
+  - P35's heading is renamed "The structural correspondence".
+- **`sqrtpi-ring-anywhere`.** Fires on the two-term ring anywhere. Paper 28's correctly scoped half-integer-s remark carries a withdrawal marker.
+- **`hopf-base-measure-label`.** The deferred label sweep, now done:
+  - About 77 loci in 16 papers now name M1 the "k = 0 volume slot" or "volume factor".
+  - The 4/π rate is described as the convention-dependent unit-sphere volume quotient.
+  - Genuine Hopf geometry is kept.
+  - One explained historical mention in P18 carries a marker.
+  - The gate then caught two line-wrapped survivors the grep sweep had missed; it was widened to "Hopf measure" variants after the self-check.
+- **SMALLs.**
+  - C_sat in the group3 synthesis.
+  - K precision in P51 and P35.
+  - P45: "posited generator (the boost candidate)" and ker ad_K.
+  - P32: S³ is the Hopf *total* space; the H_local wording; the oddness scope in the abstract.
+  - P34: the T9 attribution; the thm:dimensional_consistency row; "identification" → "correspondence" in cross-references.
+  - P28: G2 coefficients lie in π⁻²ℚ.
+  - P40: the self-contradicting "Hopf-base volume quotient", plus a second retired 4/π reading at L2132.
+  - P42: the M2 ring.
+- **New guard.** `test_grading_leg_can_return_nonzero` uses a synthetic system (1, 1⊗A, 1⊗B; D = σ_z⊗1). Its commutant is M₂⊗1 (dim 4) and its grading is span{σ_x, σ_y}⊗1 (dim 2). Fire-tested: a grading count stuck at 0 FIRED. The n_max = 1 control row is documented as rejecting only a missing mask, and the claim-matrix row is corrected.
+
+### Pre-checkpoint self-check: 0 LARGE, no overcorrection, 6 SMALL fixed
+- **A PM-seeded error.** "a quarter of the area of the Hopf base S²" is false under the corpus's own convention (P42: the Hopf map S³(r) → S²(r/2)). For the unit S³, π is the WHOLE area of S²(½). Fixed at 6 loci to "a quarter of the unit-sphere area Vol(S²) = 4π (equivalently the full area of the Hopf base S²(½) of the unit S³)".
+- "Hopf measure" variants swept (7 loci; gate widened).
+- P42's M2 ring corrected.
+- P55 L331 said a_k(D²) ∈ πℚ, which is wrong: the normalised coefficients are 4π² and −2π². It now reads "⊕π^{2k}ℚ after the √π normalisation".
+- P34 cross-references now say "correspondence".
+- P45: ker ad_K.
+
+### Verification
+- All 14 gates PASS; C10 whole corpus (57 papers); C16 136/136.
+- Touched tests pass, including the 18 symbolic S³ proofs.
+
 ## [v5.17.11] - 2026-09-29
 
 **Patch. /qa trunk DELTA #18 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 5 LARGE (12 → 8 → 5); code and citations CLEAN.**

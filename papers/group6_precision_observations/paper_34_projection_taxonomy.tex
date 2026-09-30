@@ -457,7 +457,7 @@ realization), all atomic energy computations.
 treated as a candidate observable in Paper~2's Observation).\\
 \textbf{Dimension introduced:} dimensionless.\\
 \textbf{Transcendental signature:} $\pi = \mathrm{Vol}(S^2)/4$
-(Hopf measure factor; Sprint~A $\alpha$-PI identification).\\
+(volume-slot factor; Sprint~A $\alpha$-PI identification).\\
 \textbf{Used in:} Paper~2 (fine-structure Observation), Paper~25
 (Wilson--Hodge gauge structure), Paper~30 (SU(2) Wilson sibling).
 
@@ -534,7 +534,7 @@ projection is the $k=2$ sub-case of the master Mellin engine of
 Paper~32~\S~VIII and Paper~18~\S~III.7:\ the proper-time integration
 $\int_0^\infty dt\, f(t)\,\mathrm{Tr}\,e^{-tD^2}$ that converts $D$-spectral
 data to physical observables.  The same Mellin technology applied
-at $k=0$ to $\mathrm{Tr}\,e^{-tD^2}$ recovers the M1 Hopf-base measure
+at $k=0$ to $\mathrm{Tr}\,e^{-tD^2}$ recovers the M1 ($k = 0$ volume slot)
 content (\S~\ref{sec:proj_hopf} and \S~\ref{sec:proj_vector_photon}),
 and applied at $k=1$ recovers the M3 vertex-parity Hurwitz content
 (composed with \S~\ref{sec:proj_spinor} and vertex restriction;
@@ -547,8 +547,9 @@ present entry (Sprint~3 Track~12 scoping verdict, 2026-05-15;
 \texttt{debug/sprint3\_drafts/track\_12\_heat\_kernel\_regularization\_scoping\_memo.md}).
 The $\alpha$-power index $n$ in iterated applications of this projection
 counts loop order; per-iteration transcendental content is the
-$\sqrt{\pi}\cdot\mathbb{Q}$ ring at the heat-kernel level (T9 theorem,
-Paper~28) and the $1/(4\pi)$ vector-photon Hopf-base calibration per
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ ring of the integer-$s$ zeta values
+(T9 theorem, Paper~28;\ the heat-kernel $\sqrt{\pi}$ prefactor is a
+normalisation, not ring content) and the $1/(4\pi)$ vector-photon Hopf-base calibration per
 loop (\S~\ref{sec:proj_vector_photon} in Coulomb gauge, \S~\ref{sec:proj_gauge_choice}).
 The finite parts of $\alpha^n$ observables are framework-native at every
 $n$; UV-divergent multi-loop integrands are reproduced structurally
@@ -749,9 +750,10 @@ Bisognano--Wichmann reading.\ Under the standard Wick-rotation chain
 (Hartle--Hawking 1976~\cite{hartle_hawking1976};
  Sewell 1982~\cite{sewell1982};
  Bisognano--Wichmann 1976~\cite{bisognano_wichmann1976}),
-the temporal-window projection's $\beta$ IS the period of the
+the temporal-window projection's $\beta$ matches the period of the
 modular-flow / Lorentz-boost orbit on a wedge or static-exterior
-algebra:\ Bisognano--Wichmann establishes that the modular automorphism
+algebra (an analogy;\ identifying the framework's generator with a boost
+is open, Paper~42's O0):\ Bisognano--Wichmann establishes that the modular automorphism
 of the algebra of observables localized in a Rindler wedge, with
 respect to the vacuum state, IS the unitary representation of the
 Lorentz boost subgroup that maps the wedge to itself; Sewell 1982
@@ -759,7 +761,7 @@ generalizes this to globally hyperbolic Lorentzian manifolds with
 bifurcate Killing horizons, including Schwarzschild at
 $\beta_{\mathrm{cigar}} = 8\pi M$.  Sprint TD Track~4
 (\texttt{debug/sprint\_td\_track4\_memo.md}, May 2026) reproduces this
-$\beta = 8\pi M$ from the framework's M1 Hopf-base measure /
+$\beta = 8\pi M$ from the framework's M1 ($k = 0$ volume slot) /
 $\mathrm{Vol}(S^1_\tau)$ mechanism alone.  Track~D
 (\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May 2026)
 documents the structural correspondence between the framework-side
@@ -780,7 +782,7 @@ C, $M$ external Einstein-equations input, machinery-witness only); the
 Unruh pendant (\texttt{debug/unruh\_pendant\_memo.md}, May 2026,
 a sprint-scale follow-up to Track~D) closes the Track~D~\S 5.4 flag with
 $T_U = a/(2\pi)$ as the third Wick-rotation witness via the same M1
-Hopf-base measure / $\mathrm{Vol}(S^1)$ mechanism (Hawking--Sewell--BW--Unruh
+($k = 0$ volume slot) / $\mathrm{Vol}(S^1)$ mechanism (Hawking--Sewell--BW--Unruh
 four-witness chain).  See Paper~32~§VIII Remark on the
 Bisognano--Wichmann reading and Paper~35~§VIII for the framework-level
 structural correspondence.  This is a structural correspondence, not a
@@ -2228,8 +2230,7 @@ categorically different transcendental content:
 Papers~28, 30, and 33 --- the vector-photon construction's per-loop
 factor is $1/(4\pi) = \mathrm{Vol}(S^2)/(4 \cdot 4\pi^2)$, identified
 in Paper~33~\S~VI as the $S^2$ Weyl exchange constant of the Hopf
-base (the same Hopf-base measure $\pi = \mathrm{Vol}(S^2)/4$ that
-appears in the M1 master-Mellin sub-mechanism, per Paper~32~\S~VIII
+base (the same factor $\pi = \mathrm{Vol}(S^2)/4$, a quarter of the unit-sphere area $\mathrm{Vol}(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$), that appears as the $k = 0$ volume slot in the M1 master-Mellin sub-mechanism, per Paper~32~\S~VIII
 and Paper~18~\S~III.7).  The intermediate transcendental content sits
 cleanly in the calibration $\pi$-tier of Paper~18.
 \item In Lorenz gauge, the retarded propagator structure would produce
@@ -2368,7 +2369,7 @@ that appears in Coulomb gauge is the same calibration $\pi$-content
 identified by Paper~33~\S~VI as the $S^2$ Weyl exchange constant.
 Under the master-Mellin reading of Paper~32~\S~VIII and
 Paper~18~\S~III.7, this calibration $\pi$ is the M1 sub-mechanism
-signature ($\mathrm{Vol}(S^2)/4$, the Hopf-base measure).  A
+signature ($\mathrm{Vol}(S^2)/4$, the $k = 0$ volume slot).  A
 Lorenz-gauge calculation, if performed, would produce different
 intermediate $\pi$-content (retardation kernels rather than static
 Hopf-base normalisations) but would necessarily land on the same
@@ -2448,7 +2449,7 @@ dimension-preserving class as Sturmian reparameterization
 (\S~\ref{sec:proj_sturmian}) and the gauge-choice projection
 (\S~\ref{sec:proj_gauge_choice}).\\
 \textbf{Transcendental signature:} $2\pi \cdot \mathbb{Q}$ via
-$\mathrm{Vol}(S^1)$ on the Euclidean time circle (Hopf-base measure /
+$\mathrm{Vol}(S^1)$ on the Euclidean time circle ($k = 0$ volume slot /
 M1 sub-mechanism of the master Mellin engine; see Paper~32~\S~VIII
 Remark on the Bisognano--Wichmann reading and Paper~35~\S~VIII for
 the framework-level structural correspondence).  Critically:\ this
@@ -2466,7 +2467,7 @@ Lorentzian observables (Hawking radiation, Unruh thermal bath,
 Bisognano--Wichmann modular flow) from the same Euclidean data.
 Both surface the M1 $2\pi$ on the same $S^1$ factor;
 the structural reading of what that $2\pi$ \emph{means} differs:\
-a Hopf-bundle measure factor on the Riemannian side; a
+a volume factor on the Riemannian side;\ by analogy, a
 modular-flow / Lorentz-boost orbit period on the Lorentzian side
 via the published Wick-rotation prescription.\\
 \textbf{Used in:} the Hawking-temperature off-precision catalogue
@@ -2654,8 +2655,9 @@ The structural-correspondence-not-literal-identification verdict
 crystallizes the framework's position on Lorentzian physics in
 general:\ at the metric functional level (specifically the M1
 $2\pi = \mathrm{Vol}(S^1)$ signature on a Wick-rotated time circle),
-the framework's Euclidean output IS the Lorentzian modular-flow /
-boost-orbit period, with no extension required.  At the
+the framework's Euclidean output matches the Lorentzian modular-flow /
+boost-orbit period under the published Wick-rotation chain (an analogy;\
+identifying the framework's generator with a boost is open, Paper~42's O0).  At the
 operator-system level (Tomita--Takesaki modular automorphism acting
 on the truncated algebra at finite $n_{\max}$, Krein-space
 representation, frame-level Lorentz-boost between truncated metric
@@ -2692,9 +2694,9 @@ Cross-references:\ Paper~32~\S~VIII Remark on the Bisognano--Wichmann
 reading documents the spectral-triple-side statement and the
 case-exhaustion-theorem context; Paper~35~\S~VIII subsection on the
 Bisognano--Wichmann reading of the temporal-window projection
-develops the cigar identification at Hartle--Hawking
+develops the cigar correspondence at Hartle--Hawking
 $\beta = 8\pi M$; Paper~35~\S~VIII subsection on the Unruh pendant
-develops the Rindler-wedge identification at $\beta = 2\pi / a$;
+develops the Rindler-wedge correspondence at $\beta = 2\pi / a$;
 \S~\ref{sec:proj_observation} carries the original
 Bisognano--Wichmann reading footnote on the temporal-window
 projection.  The structural ground for the present \S~\ref{sec:proj_wick_rotation}
@@ -2849,7 +2851,7 @@ correlation entropies $S_\mathrm{full}(\mathrm{He}) =
 0.040811051\ldots$, $S_\mathrm{full}(\mathrm{Li}^+) =
 0.011211717\ldots$, and $S_\mathrm{full}(\mathrm{He},\, n_{\max}{=}4)
 = 0.041879430\ldots$ to 150 dps, then ran PSLQ at 100 dps against a
-$12{,}312$-form mechanical basis spanning the M1 (Hopf-base measure),
+$12{,}312$-form mechanical basis spanning the M1 ($k = 0$ volume slot),
 M2 (Seeley--DeWitt $\sqrt{\pi}$), and M3 (vertex-parity Hurwitz)
 sub-rings plus algebraic and rational control classes.  Result: zero
 hits across all three systems.  Stress tests at coefficient ceiling
@@ -3195,7 +3197,7 @@ piecewise-smooth at Level~4 \\
 Gauge choice (Coulomb / Lorenz / Feynman) &
 none (selection of representative) & preserves &
 gauge-dependent at intermediate-propagator level
-($1/(4\pi)$ per loop in Coulomb gauge = M1 Hopf-base measure);
+($1/(4\pi)$ per loop in Coulomb gauge = M1 volume slot);
 gauge-invariant on physical observables (Ward identity) \\
 Wick rotation / signature change &
 signature (Euclidean $\leftrightarrow$ Lorentzian; binary discrete
@@ -4497,7 +4499,7 @@ Fock $\circ$ observation/temporal-window
 machinery-witness only & C &
 Sprint TD Track~4 (\texttt{debug/sprint\_td\_track4\_memo.md},
 May~2026) reproduces $\beta = 8\pi M$ from the framework's M1
-Hopf-base measure / $\mathrm{Vol}(S^1_\tau)$ mechanism alone (sympy
+($k = 0$ volume slot) / $\mathrm{Vol}(S^1_\tau)$ mechanism alone (sympy
 residual zero on $\beta = 4M\cdot 2\pi$ cigar regularity, $T_H =
 \kappa_g/(2\pi)$, lowest bosonic Matsubara mode $1/(4M) = \kappa_g$
 surface gravity).  $M$ is external Einstein-equations input, not a
@@ -4511,7 +4513,7 @@ orbit period via the standard Wick-rotation chain (Hartle--Hawking
 Bisognano--Wichmann 1976~\cite{bisognano_wichmann1976}).  See
 Paper~32~§VIII Remark on the Bisognano--Wichmann reading; Paper~35
 \S~VIII Bisognano--Wichmann subsection for the framework-level
-identification.  Operator-level
+correspondence.  Operator-level
 literal identification ($\sigma_{i\cdot 2\pi} = $ identity on the
 truncated metric spectral triple) is the principal Track~D
 falsifier, a follow-up beyond sprint scale. \\
@@ -4521,7 +4523,7 @@ Fock $\circ$ observation/temporal-window
 machinery-witness only & C &
 Unruh pendant (\texttt{debug/unruh\_pendant\_memo.md}, May~2026,
 a sprint-scale pendant follow-up to Track~D) reproduces $\beta_U = 2\pi/a$
-from the framework's M1 Hopf-base measure /
+from the framework's M1 ($k = 0$ volume slot) /
 $\mathrm{Vol}(S^1_{\eta_E})$ mechanism alone (sympy residual zero on
 $T_U$, lowest non-zero bosonic Matsubara mode equals $a$ --- the Unruh
 analog of Hawking's surface gravity --- and lowest fermionic
@@ -4537,8 +4539,8 @@ the unified Wick-rotation chain (Hartle--Hawking
 1976~\cite{hartle_hawking1976}; Sewell 1982~\cite{sewell1982};
 Bisognano--Wichmann 1976~\cite{bisognano_wichmann1976};
 Unruh 1976~\cite{unruh1976}), the framework's M1 $2\pi$ on
-$S^1_{\eta_E}$ IS the modular-flow / boost-orbit period of the
-accelerated observer.  See Paper~32~§VIII
+$S^1_{\eta_E}$ matches the modular-flow / boost-orbit period of the
+accelerated observer (an analogy).  See Paper~32~§VIII
 \texttt{rem:bisognano\_wichmann\_reading} (Unruh paragraph) and
 Paper~35 \S~VIII \texttt{subsec:unruh\_pendant} for the
 metric-functional reading (operator level open, Paper~42 O0).  The principal Track~D operator-level falsifier
@@ -9010,7 +9012,7 @@ is falsified.  Files:
 
 \item \textbf{Mechanically-generated basis sweep.}  The hand-curated
 30-form basis was replaced by a mechanically generated 21,448-form
-basis: combinations of M1/M2/M3 seeds (Hopf-base measures, Hurwitz
+basis: combinations of M1/M2/M3 seeds ($k = 0$ volume-slot factors, Hurwitz
 shifts, Catalan~$G$, Dirichlet~$\beta$, $\zeta_R$ at integer points)
 with small-integer rational prefactors and small algebraic factors
 ($\sqrt{2},\sqrt{3},\sqrt{5},\varphi$), plus a pure-rational control
@@ -9329,7 +9331,7 @@ the constituent $P_i$:
 \]
 The catalogue rows of \S~\ref{sec:catalog} satisfy this consistency
 check across all eight fully-tagged entries with non-trivial chains
-(Lamb shift, $K = \pi(B + F - \Delta)$, Stefan-Boltzmann, He CI,
+(Lamb shift, the Paper~2 $\alpha$ Observation row, Stefan-Boltzmann, He CI,
 hydrogen $E_n$, scalar/Dirac spatial Casimir, Uehling VP).
 \end{theorem}
 
@@ -9956,8 +9958,8 @@ Camporesi--Higuchi Dirac mode degeneracy with no Hopf invocation
 (Phase~4H SM-D); and the Hopf-quotient graph at $n_{\max} = 3$ does
 not encode $K$ through any independent spectral invariant beyond
 a Casimir relabeling (Phase~4B $\alpha$-D).  The outer $\pi$
-prefactor of $K$ \emph{is} identified with the Hopf-base measure
-(Sprint~A $\alpha$-PI), but this is already counted as the Hopf
+prefactor of $K$ \emph{is} identified with the $k = 0$ volume slot
+$\mathrm{Vol}(S^2)/4$ (Sprint~A $\alpha$-PI), but this is already counted as the Hopf
 projection in the depth-3 chain.  Under-counting is therefore not
 the mechanism.  Combined with the K-CC clean negative on a unified
 Connes--Chamseddine spectral-action source, twelve mechanisms total
@@ -10267,8 +10269,9 @@ verified Wick-rotation chain
 (Hartle--Hawking~1976~\cite{hartle_hawking1976};
  Sewell~1982~\cite{sewell1982};
  Bisognano--Wichmann~1976~\cite{bisognano_wichmann1976}) this $2\pi$
-IS the modular-flow / Lorentz-boost orbit period of a stationary
-observer outside the Schwarzschild horizon.  Verdict:\ \emph{structural
+matches the modular-flow / Lorentz-boost orbit period of a stationary
+observer outside the Schwarzschild horizon (an analogy;\ the boost
+identification of the framework's generator is open, Paper~42's O0).  Verdict:\ \emph{structural
 correspondence}, not literal identification (the operator-level
 statement $\sigma_{i\cdot 2\pi} = $ identity on the truncated metric
 spectral triple $\mathcal{T}_{n_{\max}}$ is the principal Track~D
