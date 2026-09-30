@@ -7,6 +7,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.10] - 2026-09-29
+
+**Patch. /qa trunk DELTA #17 (claim-impact, unseeded; panel re-run after a login expiry killed the first dispatch) = DEFECTS, remediated (PI-approved). 8 LARGE (down from 12); code and citations CLEAN; Paper 53's rebuilt proof re-derived by two reviewers.**
+
+### The run
+- **Verdict:** 8 LARGE. Every one is a retired form still live at a locus whose bytes did not change:
+  1. Paper 0's abstract says E_n is "not a function of the Casimir".
+  2. The group3 synthesis abstract speaks of "the framework's reproduction" of CFT values.
+  3. Paper 32 gives "the α observation at 8.8×10⁻⁸" (×3).
+  4. Paper 32's BW section calls K_α a "boost-class generator" and "the operator-system analog of the BW vacuum" (×3).
+  5. INDEX still carries the Paper 50 "M2/M3 split" and Paper 2 "matches at 8.8×10⁻⁸".
+  6. Paper 2 says "α is a root of a polynomial over ℚ(π)".
+  7. The Paper 16 novelty claim survives in its body and in the group4 synthesis.
+  8. Paper 2 puts the K match inside `thm:three_homes` (touches §13.5).
+- **Code:** 0 LARGE. 138 tests pass and every aimed fire-test FIRED. The reviewer also verified that the disk non-positivity holds at the operator level (P M_g P has negative eigenvalues).
+- **Citations:** 0 LARGE. Giombi–Klebanov eq. 2.1 covers S⁷, and Gaudillot-Estrada–van Suijlekom Prop. 14 is the lifted-state bound.
+- **Paper 53 (first review):** the proof and every constant were re-derived; 0 LARGE.
+
+### Remediation (gate-first; three disjoint sweeps)
+- **C16 entries:** six new, plus one widened (`alpha-cubic-stated-as-law`, now catching "a root of a polynomial").
+  - New: `energy-not-function-of-casimir`, `framework-reproduces-continuum-cft`, `alpha-observation-at-cubic-precision`, `posited-k-boost-class-bw-vacuum`, `p16-spin-resolved-formulation-as-new`, `k-match-inside-theorem`.
+  - Result: 26 live loci → 0; 12 dependents stamped.
+- **Trunk:**
+  - Paper 0's abstract now states E_n = −Z²/(2(C+1)) on the labels.
+  - The "Casimir alone" family (P7, P0, P1 including its conclusion, group3 synthesis) now says the Casimir yields E_n through Fock's function.
+  - Paper 32: α precision split; the BW section uses "posited" generator and "unit-β state"; oddness is scoped in its Proposition; the BBB bibitem title is fixed.
+  - The group3 synthesis scopes WH1 to the commutative factor.
+  - Paper 38's abstract now states the proved bound first, then the tiered constant.
+- **Branch:**
+  - INDEX rows fixed.
+  - Paper 2:
+    - Its "Algebraic structure" section now concerns the cubic's root α_K.
+    - `thm:three_homes` keeps only the three homes plus "no common generator"; the match moves to `obs:cross_sector`, and the theorem statement no longer displays K.
+  - Paper 16 novelty is now the proof route plus the tabulation; the fixed-S form is a restatement. The Rittenhouse clause is corrected.
+  - Papers 34, 35 and 42 use "posited generator" and "unit-β Gibbs state"; "BW canonical" witness labels become "BW witness".
+  - BBB (3,5) is described as "formally extended to odd m".
+  - Paper 50:
+    - Theorem titles now match their tiers, and "bit-exact" is removed where only PSLQ-level.
+    - The 4/π convention caveat is added.
+    - The √π heat-trace normalisation is separated from the M2 ring ⊕π^{2k}ℚ (also in P18, where one wrong ζ_{D²} ring statement is corrected).
+    - The S⁵ reference column cites Giombi–Klebanov, and the Maxwell rows show "---".
+    - The S⁵ scalar theorem is tiered, and the archived Papers 48/49 are no longer presented as live.
+  - Paper 51: the proof-uses-two-lemmas contradiction is fixed. Paper 55: the single-mechanism wording is fixed.
+- **Paper 53:**
+  - Bochner–Riesz negativity and ‖K_s‖₁ > 1 are now [INTERNAL THEOREM], credited as classical (Stein–Weiss).
+  - The GH step is stated as "proved on the chosen classes"; facts (i), (ii), (iv) and the identity half of (iii) are marked proof-only.
+  - The Rieffel credit is added (Mem. AMS 168, 2004), confirmed from the primary text.
+  - P M_g P is negative at s=2 for every Λ tested; at s=4 it is negative at Λ=1600 and positive at Λ=400, and the paper states that.
+  - Two printed values are corrected: −0.044 → −0.045 and 0.132 → 0.133.
+  - Paper 51 is now described as citing it for the live results.
+- **Tests (every plant FIRED):**
+  - The b-family entropy test now uses a Richardson combination (tolerance 5e-6).
+  - Paper 50's F-theorem test asserts F_D + 2F_s = log 2/2, and its stale docstrings are fixed.
+  - The Paper 53 disk test pins the printed values and adds the operator-level P M_g P assertion.
+  - Claim-matrix rows are corrected, and a Paper 7 H = f(Δ) row is added.
+- **PM catch:** sweep B's new Paper 2 counterexample of an algebraic root with transcendental coefficients was false; it is replaced by (x−1)(x−π+1).
+
+### Pre-checkpoint self-check: 3 LARGE + 6 SMALL, all fixed
+- **The cubic's root α_K is PROVABLY transcendental.** α_K³ − Kα_K + 1 = 0 gives K = α_K² + 1/α_K. K = (1679/40)π + π³/6 is a nonconstant ℚ-polynomial in π, hence transcendental (Lindemann), so α_K cannot be algebraic.
+  - Papers 2 and 18 said "likely (though not proven)"; both now carry a [SYMBOLIC] Proposition with the proof. Nothing follows for the physical α, and the combination rule stays an Observation.
+  - Paper 18's twin also still had the false counterexample and "π²" for π³.
+  - New C16 entry `cubic-root-transcendence-understated`.
+  - New guard `tests/test_paper2_cubic_root_transcendence.py` (fire-tested: a wrong coefficient FIRED; the retired counterexample FIRED).
+- **The group1 synthesis body** still said "bit-exact"; fixed.
+- **SMALLs:** Paper 50's S⁵ tier; the archived Papers 48/49 no longer presented as live; "BW canonical" witness labels; Paper 51 "supporting"; K no longer displayed in the Paper 2 theorem; the Stein–Weiss credit.
+
+### Verification
+- All 14 gates PASS; C10 whole corpus (57 papers).
+- C16: 128/128 entries.
+- Touched tests pass, including the 18 symbolic S³ proofs.
+
 ## [v5.17.9] - 2026-09-29
 
 **Patch. The two DRAFT math.OA papers resolved (PI-approved): Paper 52 ARCHIVED, Paper 50 corrected in place, Paper 53 REBUILT. Along the way, a documented negative result was found to be a floating-point artifact and withdrawn.**

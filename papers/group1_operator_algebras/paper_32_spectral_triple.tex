@@ -73,8 +73,10 @@ continuum limit is Yang--Mills without Higgs), and inside the
 Connes--van~Suijlekom spectral-truncation
 program~\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024,vansuijlekom2024_ksystems}.  Every
 structural ingredient of the GeoVac construction has published
-precedent; what is not duplicated is the $\alpha$ observation at
-$8.8 \times 10^{-8}$ (Paper~2~\cite{paper2}) from a discrete spectral
+precedent; what is not duplicated is the $\alpha$ observation
+($K = \pi(B + F - \Delta)$ matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$;\
+the root of the cubic $1/\alpha = K - \alpha^2$ matches to
+$8.8 \times 10^{-8}$;\ Paper~2~\cite{paper2}) from a discrete spectral
 construction.
 \textbf{[OBSERVATION]}
 (2)~\emph{Sub-sector identification.}  Paper~28's QED on~$S^3$ is the
@@ -172,9 +174,10 @@ items are catalogued in Sec.~\ref{sec:open}.
 
 Across the thirty-two papers (0--31) preceding this one, the GeoVac framework
 has carried four distinct strands.  Strand~1 is the Fock projection
-$p_0 = \sqrt{-2E_n}$ that maps the hydrogenic Hamiltonian onto the
-free Laplacian on the unit three-sphere, whose continuum eigenvalues
-are $\lambda_n = -(n^2 - 1)$; the graph nodes carry the quantum-number
+$p_0 = \sqrt{-2E_n}$ that maps the hydrogenic Hamiltonian onto a function of the
+Laplace--Beltrami operator~$\Delta$ on the unit three-sphere,
+$H = -\tfrac{Z^2}{2}(1-\Delta)^{-1}$, where $\Delta$ has continuum eigenvalues
+$\lambda_n = -(n^2 - 1)$; the graph nodes carry the quantum-number
 labels $(n, l, m_l)$, not that spectrum (Paper~7).  Strand~2 is the Hopf bundle
 $S^1 \to S^3 \to S^2$ that organizes the discrete edge structure into
 ladder operators with $U(1)$ phase content (Papers~2, 25).  Strand~3
@@ -1365,7 +1368,7 @@ involution that commutes with $\pi(\mathcal{A}_{\mathrm{GV}})$ and
 anticommutes with $D_{\mathrm{GV}}$.
 (c)~The \emph{true} Camporesi--Higuchi window of
 Theorem~\ref{thm:gh_convergence} (complete Dirac eigenspaces, the object
-that converges) is \emph{odd}, like the continuum:\ at
+that converges) is \emph{odd} (measured, $n_{\max} \le 3$), like the continuum:\ at
 $n_{\max} = 1, 2, 3$ the commutant of its operator system
 $\mathcal{O}^{\mathrm{CH}}_{n_{\max}}$ is the scalars, so no
 $\mathbb{Z}_2$-grading commutes with $\mathcal{O}^{\mathrm{CH}}$ and
@@ -1416,7 +1419,7 @@ label is attached at finite cutoff:\ the continuum factor is KO-3
 (odd), the model's grading reads as the KO-4 column, and any single
 label at finite cutoff is a convention.  The grading is a doubling
 artefact of the chirality-labelled model basis, not a chirality of
-$S^3$; it is absent on the true window~(c) and in the continuum limit,
+$S^3$; it is absent on the true window~(c) (measured, $n_{\max} \le 3$) and in the continuum limit,
 where the odd description is the correct one.  Odd-dimensional spectral triples construct their
 spectral action from $|D|$ rather than from $D^2$ projected onto
 chirality eigenspaces, which is the structure that Paper~28's
@@ -4168,7 +4171,10 @@ Hartle--Hawking and Unruh \emph{temperatures} via the M1 mechanism
 natural follow-up question is whether the same construction also
 reproduces the Bekenstein--Hawking \emph{entropy} $S_{BH} = A/(4G)$ at
 finite cutoff via the von Neumann entropy of the wedge KMS state
-$\rho_W = e^{-K_\alpha^W}/Z$.  Sprint~BH-Phase0
+$\rho_W = e^{-K_\alpha^W}/Z$ (the unit-$\beta$ Gibbs state of the
+posited integer-spectrum generator $K_\alpha^W = 2J_z$, not
+BW-normalised:\ that would be $e^{-\pi K_\alpha^W}/Z$,
+Paper~50~\cite{loutey_paper50}).  Sprint~BH-Phase0
 (\texttt{debug/bh\_phase0\_diagnostic\_memo.md}, 2026-05-22) tests
 this directly at $n_{\max} \in \{2, 3, 4, 5, 6, 7\}$.
 
@@ -4186,13 +4192,13 @@ naive Bekenstein--Hawking area-law $S \sim n_{\max}^2$ would predict.
    \qquad n_{\mathrm{equator}} = n_{\max}\,(n_{\max} + 1),
 \]
 where $n_{\mathrm{equator}}$ is the count of wedge states with smallest
-$|m_j| = 1/2$ (the equator analog).  The BW canonical state is
+$|m_j| = 1/2$ (the equator analog).  The unit-$\beta$ state ($s = 1$) is
 effectively the maximally mixed state on the lowest-$K_\alpha$ shell,
 with exponentially suppressed contributions $\sim e^{-(2k+1)}$ from
 shells $k = 1, 2, \dots$.  The two asymptotic limits saturate
 bit-exactly:\ $S(s \to 0) = \log(\dim W)$ (hot, maximally mixed) and
 $S(s \to \infty) = \log(n_{\mathrm{equator}})$ (cold, lowest shell
-only).  The BW canonical $s = 1$ sits between, closer to the cold
+only).  The unit-$\beta$ state ($s = 1$) sits between, closer to the cold
 limit.
 
 The slope $\approx 2$ is the exponent of the $n_{\max}(n_{\max}+1)$
@@ -6858,7 +6864,8 @@ the lineage placement is correct, and the W2a/W2b walls are the lineage's
 own open problems, not GeoVac's separate concerns.  This is consistent
 with Observation~\ref{obs:lineage} (each structural ingredient has
 published precedent;\ what is not duplicated is the $\alpha$
-observation at $8.8 \times 10^{-8}$).  The W1 walls remain GeoVac-side
+observation:\ $K$ matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$, and the
+root of the cubic $1/\alpha = K - \alpha^2$ matches to $8.8 \times 10^{-8}$).  The W1 walls remain GeoVac-side
 because they are about the architectural extension of the present
 triple to multi-particle real-space coupling, which the SM-style almost-commutative
 construction does not address.
@@ -7575,7 +7582,7 @@ reflection involution on the spinor basis;\ $P_W^2 = P_W$ and
 $P_W^* = P_W$ are bit-exact (no smoothing needed; the reflection is
 an exact involution on the discrete basis).
 \item \textbf{Unit normalisation (U-1):}\ natural rapidity units
-$\kappa_g = 1$ for the canonical BW witness;\ the four witnesses
+$\kappa_g = 1$ for the BW witness;\ the four witnesses
 parameterize as Hartle--Hawking $\kappa_g = 1/(4M)$, Unruh
 $\kappa_g = a$, Sewell $\kappa_g = 1/(4M)$.
 \item \textbf{Construction:}\ the BW-$\alpha$ ``geometric realization''
@@ -7637,7 +7644,7 @@ tested $n_{\max}$ between BW ($\kappa_g = 1$), HH at $M = 1$ ($\kappa_g
 = 1/4$), HH at $M = 2$ ($\kappa_g = 1/8$), Sewell at $M = 1$
 ($\kappa_g = 1/4$), Unruh at $a = 1$ ($\kappa_g = 1$), and Unruh at
 $a = 2$ ($\kappa_g = 2$).  The period closure is independent of
-$\kappa_g$ because the chosen K\_boost has integer spectrum:
+$\kappa_g$ because the posited generator $K_\alpha^W = 2J_z$ has integer spectrum:
 $\mathrm{e}^{\mathrm{i}\cdot 2\pi \cdot n} = 1$ for any integer $n$.
 The four labels collapse to a single test at the unit normalisation
 U-1, by construction.
@@ -7714,10 +7721,14 @@ operator-action level for the same five generators tested by BW-$\alpha$.
 
 The construction uses the natural local Hamiltonian $H_{\mathrm{local}}
 := K_{\alpha}^W / \beta$ on the wedge sub-algebra (so $\beta
-H_{\mathrm{local}} = K_{\alpha}^W$ is the wedge-restricted boost-class
-generator with integer spectrum $\mathrm{two\_m}_j$); this matches the
-operator-system analog of the Wightman BW vacuum $\rho_W \propto
-e^{-2\pi K_{\mathrm{boost}}}$ on the Rindler wedge.
+H_{\mathrm{local}} = K_{\alpha}^W = 2J_z$ is a \emph{posited}
+integer-spectrum generator, spectrum $\mathrm{two\_m}_j$, chosen by
+analogy with the Wightman BW vacuum $\propto e^{-2\pi K_{\mathrm{boost}}}$
+on the Rindler wedge;\ its identification as a BW modular Hamiltonian is
+open, Paper~42's O0~\cite{paper42}).  The wedge state
+$\rho_W = e^{-K_\alpha^W}/Z$ is the unit-$\beta$ Gibbs state, not
+BW-normalised:\ since $K_\alpha^W = 2J_z$, the BW-normalised state would be
+$e^{-\pi K_\alpha^W}/Z$ (Paper~50~\cite{loutey_paper50}).
 
 \emph{Result (UNIFIED\_STRONG --- a bit-exact $\sigma_{2\pi}=\mathrm{id}$ compact-period closure, signature-blind, not a metric strengthening):}\ at every tested $n_{\max} \in \{2, 3,
 4, 5\}$ for all six witness instantiations (BW, HH$_{M=1}$, HH$_{M=2}$,
@@ -7787,8 +7798,10 @@ Remark~\ref{rem:bisognano_wichmann_reading} remains open).
 
 \emph{Honest scope.}\ The unified closure rests on the choice
 $H_{\mathrm{local}} = K_{\alpha}^W / \beta$, which makes the wedge KMS
-state the operator-system analog of the Wightman BW vacuum $\rho_W
-\propto e^{-2\pi K_{\mathrm{boost}}}$.  An alternative choice
+state the unit-$\beta$ Gibbs state $\rho_W = e^{-K_\alpha^W}/Z$ of a
+posited generator chosen by analogy with the Wightman BW vacuum
+$\propto e^{-2\pi K_{\mathrm{boost}}}$ (not BW-normalised, which would be
+$e^{-\pi K_\alpha^W}/Z$;\ the BW identification is Paper~42's open O0).  An alternative choice
 $H_{\mathrm{local}} = D_W$ (wedge-restricted Camporesi--Higuchi Dirac)
 has half-integer spectrum, so its operator-level period lift is
 $e^{i 2\pi D_W} = -I$ (the spinor double cover) rather than the $+I$ of
@@ -7857,9 +7870,11 @@ precedent: finite almost-commutative spectral triples
 triples (\cite{marcolli_vs2014,perez_sanchez2024}), spectral
 truncations (\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024}), and
 the Standard Model spectral action (\cite{chamseddine_connes1997_2008}).
-What is not duplicated in the literature is the $\alpha$ observation at
-$8.8 \times 10^{-8}$ from a discrete spectral construction; that
-remains the original empirical claim of Paper~2.
+What is not duplicated in the literature is the $\alpha$ observation
+($K$ matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$;\ the root of the cubic
+$1/\alpha = K - \alpha^2$ matches to $8.8 \times 10^{-8}$) from a discrete
+spectral construction; that remains the original empirical Observation
+of Paper~2.
 \end{observation}
 
 This is part of what the working hypothesis WH1 in the project register
@@ -8290,7 +8305,7 @@ entanglement properties of quantum field theory,''
 
 \bibitem{bizi_brouder_besnard2018}
 N.~Bizi, C.~Brouder, and F.~Besnard,
-``Space and time dimensions of algebras with application to
+``Space and time dimensions of algebras with applications to
 Lorentzian noncommutative geometry and quantum electrodynamics,''
 \textit{J.~Math.~Phys.}\ \textbf{59}, 062303 (2018), arXiv:1611.07062.
 

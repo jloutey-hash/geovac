@@ -10,6 +10,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{observation}{Observation}
+\newtheorem{proposition}{Proposition}
 \newtheorem{conjecture}{Conjecture}
 \newcommand{\gvq}[2]{#2}% numeric-registry key (debug/qa/numeric_registry.py); renders the literal only
 
@@ -1210,8 +1211,10 @@ admits a Jacobi $\vartheta_2$ modular decomposition
    \sum_{m \ge 1} (-1)^m \sqrt{\pi}\, e^{-m^2 \pi^2 / t}
      \left[ t^{-3/2} - 2 m^2 \pi^2 t^{-5/2} - \tfrac{1}{2} t^{-1/2}\right]
 \end{equation}
-verified to $> 100$ digits at every tested $t$. Every coefficient sits
-in the M2 ring $\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$;
+verified to $> 100$ digits at every tested $t$. Every coefficient is
+an overall $\sqrt{\pi}$ (the standard heat-trace normalisation, from the
+$(4\pi t)^{-3/2}$ prefactor) times an element of the pure-Tate M2 ring
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$;
 the modular exponent is exactly $\pi^2$. The leading prefactor
 $2\pi^{5/2}$, the subleading $-\sqrt{\pi}\,t$, and the $\tfrac{1}{2}\sqrt{\pi}\,t^2$
 correction at the next order are all in M2.
@@ -1266,9 +1269,10 @@ extracted:
 \begin{itemize}
   \item $k = 0$ (M1, Hopf-base measure): state-space GH rates;
     signature $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the SU(2) Fej{\'e}r
-    asymptote (L2 sprint quantitative-rate theorem).
+    asymptote (dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$) (L2 sprint quantitative-rate theorem).
   \item $k = 2$ (M2, Seeley--DeWitt): heat-kernel and spectral-action
-    convergence; signature $\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2 \cdot \mathbb{Q}$
+    convergence; signature $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ (after
+    the standard $\sqrt{\pi}$ heat-trace normalisation is divided out)
     throughout the modular residual~\eqref{eq:dirac_modular_residual}.
   \item $k = 1$ (M3, vertex-topology Hurwitz): vertex-restricted
     parity-character spectral sums; signature Dirichlet $\beta(s)$
@@ -1818,8 +1822,8 @@ diverges).  At the packing exponent $s = 4$, by contrast,
 \end{equation}
 purely $\pi^{\text{even}}$---consistent with Theorem~\ref{thm:operator_order}
 below (squaring the spectrum maps every odd-power Dirichlet sum to an
-even power, and $\zeta_{D^2}(s)$ lies in $\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2\cdot\mathbb{Q}$
-at integer $s$).  The half-integer eigenvalue $|\lambda_n| = n + 3/2$
+even power, and $\zeta_{D^2}(s)$ lies in the pure-Tate ring
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ at positive integer $s$).  The half-integer eigenvalue $|\lambda_n| = n + 3/2$
 is essential: naive substitution of an integer~$m$ for the eigenvalue
 would predict an even-$s$ odd-zeta witness, contradicting Theorem~1
 part~(2) and Paper~28~\cite{loutey_paper28} Theorem~5 / Eq.~(43).
@@ -2777,7 +2781,7 @@ combination rule is an instance of the exchange constant pattern
 rather than numerology.
 \end{observation}
 
-\begin{observation}[The cubic's root is likely transcendental]
+\begin{proposition}[The cubic's root is transcendental]
 % [retracted 2026-09-29: alpha-cubic-stated-as-law] -- earlier wording stated
 % the physical alpha as an exact root of the cubic; it is not (Observation, 8.8e-8).
 The physical fine structure constant only \emph{approximately}
@@ -2786,17 +2790,22 @@ $8.8\times10^{-8}$ relative, far outside the experimental
 uncertainty, so the cubic is not an exact law), where $K$ involves
 $\pi$ and $\zeta(2) = \pi^2/6$.  The statement here therefore
 concerns the cubic's smallest positive root $\alpha_K$, not the
-physical $\alpha$.  Roots of polynomials with transcendental
-coefficients \textit{can} be algebraic (e.g., $x^2 - \pi x +
-\pi(\pi - 1) = 0$ has the algebraic root $x = 1$), but this
-requires special cancellations that are generically absent.
-Since $K$ is a non-trivial combination of $\pi$ and $\pi^2$
-with rational coefficients, it is overwhelmingly likely
-(though not proven) that $\alpha_K$ is transcendental.  Nothing
-about the transcendence of the physical $\alpha$ follows unless the
-combination rule were exact, which it is shown not to be (the residual
-far exceeds the experimental uncertainty).
-\end{observation}
+physical $\alpha$.  \textbf{[SYMBOLIC]} $\alpha_K$ is
+transcendental.  Nothing about the transcendence of the physical
+$\alpha$ follows unless the combination rule were exact, which it is
+shown not to be (the residual far exceeds the experimental
+uncertainty);\ the combination rule remains an Observation.
+\end{proposition}
+\emph{Proof.} From $\alpha_K^3 - K\alpha_K + 1 = 0$ and $\alpha_K\neq0$,
+$K = \alpha_K^2 + 1/\alpha_K$. If $\alpha_K$ were algebraic, so would
+be $K$. But $K = \pi(B+F-\Delta) = \tfrac{1679}{40}\,\pi +
+\tfrac{1}{6}\,\pi^{3}$ is a nonconstant polynomial in $\pi$ with
+rational coefficients, hence transcendental (Lindemann). $\square$
+(The mechanism is specific:\ roots of polynomials with transcendental
+coefficients \textit{can} be algebraic --- e.g.\ $x^2 - \pi x + (\pi-1)
+= (x-1)(x-\pi+1)$ has the root $x = 1$ --- but that needs the
+$\pi$-dependence to cancel at the root, which cannot happen here since
+$K$ multiplies $\alpha_K \neq 0$.)
 
 \subsection{Three-tier structure of the combination rule}
 \label{sec:alpha_three_tier}

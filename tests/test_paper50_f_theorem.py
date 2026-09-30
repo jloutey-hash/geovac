@@ -1,17 +1,20 @@
 """Genuine F-theorem test for Paper 50 (CFT3 partition function), Thm 3.4
-(``thm:scalar_bitexact`` + ``thm:dirac_bitexact``): the framework's S^3
-spectral-zeta zeta'(0) reproduces the Klebanov-Pufu-Safdi (2011) continuum
-free energies bit-exactly.
+(``thm:scalar_bitexact`` + ``thm:dirac_bitexact``): the S^3 spectral-zeta
+zeta'(0), computed from the CONTINUUM S^3 spectrum (the truncation never
+enters -- every sum runs to infinity and is analytically continued),
+reproduces the Klebanov-Pufu-Safdi (2011) continuum free energies
+bit-exactly.
 
 WHY THIS EXISTS.  Before v4.21.x the only "F-theorem" coverage was the LITERAL
 cross-product ``F_D - 2 F_s`` in ``tests/test_paper55_m1_pure_tate.py`` (a Paper
 55 test), which types the KPS F-values in as constants and never computes them
-from the framework spectrum -- a false-positive backing flagged by the group1
-Bite-A code review.  This test COMPUTES F from the GeoVac S^3 spectrum
+from the spectrum -- a false-positive backing flagged by the group1
+Bite-A code review.  This test COMPUTES F from the continuum S^3 spectrum
 (degeneracy + eigenvalue -> analytic continuation -> zeta'(0)), so a wrong
-framework spectrum would now be caught.
+spectrum would now be caught.  (It is a continuum computation: no finite
+n_max truncation enters, so it tests the spectrum, not the truncation.)
 
-FRAMEWORK SPECTRUM (the input under test):
+CONTINUUM SPECTRUM (the input under test; the truncation never enters):
   conformally coupled scalar on unit S^3:
       lambda_l = (l+1/2)(l+3/2) = (l+1)^2 - 1/4,  deg = (l+1)^2,  l >= 0
       [ -Delta eigenvalue l(l+2) plus conformal mass R/8 = 3/4 ]
@@ -21,6 +24,9 @@ FRAMEWORK SPECTRUM (the input under test):
 KPS continuum (Klebanov-Pufu-Safdi, arXiv:1105.4598):
   F_s = log2/8 - 3 zeta(3)/(16 pi^2)  =  -1/2 zeta'_scalar(0)   ~ 0.0638071
   F_D = log2/4 + 3 zeta(3)/( 8 pi^2)  =       zeta'_Dirac(0)    ~ 0.2189595
+
+Period content: log 2 lies in the M3 ring; zeta(3)/pi^2 is M1 x M3 content
+(the 1/pi^2 from M1, zeta(3) from M3).
 """
 
 import mpmath as mp
@@ -67,7 +73,7 @@ def _F_D_kps() -> mp.mpf:
 # ---------------------------------------------------------------------------
 # Spectrum ties: the analytic continuations reproduce the direct spectral sums
 # where those converge (Re s large).  This pins the continuation to the
-# framework's S^3 spectrum, not an abstract zeta.
+# continuum S^3 spectrum, not an abstract zeta.
 # ---------------------------------------------------------------------------
 
 def test_scalar_continuation_matches_direct_spectral_sum():
@@ -99,18 +105,18 @@ def test_dirac_continuation_matches_direct_spectral_sum():
 
 
 # ---------------------------------------------------------------------------
-# F-theorem: framework zeta'(0) == KPS continuum, bit-exact
+# F-theorem: continuum-spectrum zeta'(0) == KPS continuum, bit-exact
 # ---------------------------------------------------------------------------
 
 def test_scalar_F_theorem_bit_exact_kps():
-    """F_s = -1/2 zeta'_scalar(0) computed from the framework spectrum equals
+    """F_s = -1/2 zeta'_scalar(0) computed from the continuum spectrum equals
     the KPS value log2/8 - 3 zeta(3)/(16 pi^2) to the precision floor."""
     F_s = scalar_F_theorem()
     assert abs(F_s - _F_s_kps()) < mp.mpf(10) ** (-40)
 
 
 def test_dirac_F_theorem_bit_exact_kps():
-    """F_D = zeta'_Dirac(0) computed from the framework spectrum equals the KPS
+    """F_D = zeta'_Dirac(0) computed from the continuum spectrum equals the KPS
     value log2/4 + 3 zeta(3)/(8 pi^2) to the precision floor."""
     F_D = dirac_F_theorem()
     assert abs(F_D - _F_D_kps()) < mp.mpf(10) ** (-40)
@@ -148,11 +154,17 @@ def test_closed_form_coeffs_match_shipped_function():
 
 
 def test_F_theorem_cross_product_consistency():
-    """Sanity: the framework F-values reproduce the Paper 55 W5 cross-product
-    F_D - 2 F_s = 3 zeta(3)/(4 pi^2) (the 1/pi^2 M1 witness) -- now from
-    COMPUTED F-values rather than literals."""
+    """Sanity: the computed F-values reproduce the Paper 55 W5 cross-product
+    F_D - 2 F_s = 3 zeta(3)/(4 pi^2) (zeta(3)/pi^2: M1 x M3 content) -- now
+    from COMPUTED F-values rather than literals -- and the complementary
+    combination F_D + 2 F_s = log(2)/2 (the M3-ring log 2 part alone, the
+    zeta(3)/pi^2 parts cancelling).  The pair separates the two period
+    components: a wrong log-2 coefficient breaks the sum, a wrong zeta(3)
+    coefficient breaks the difference."""
     cross = dirac_F_theorem() - 2 * scalar_F_theorem()
     assert abs(cross - 3 * mp.zeta(3) / (4 * mp.pi ** 2)) < mp.mpf(10) ** (-40)
+    total = dirac_F_theorem() + 2 * scalar_F_theorem()
+    assert abs(total - mp.log(2) / 2) < mp.mpf(10) ** (-40)
 
 
 # ---------------------------------------------------------------------------
@@ -160,7 +172,7 @@ def test_F_theorem_cross_product_consistency():
 # resurrection of the pruned ads_track_a_s5 driver, which surfaced a factor-4
 # multiplicity bug in the ORIGINAL scalar computation (deg=4 at n=0 vs the
 # correct standard S^5 harmonic count 1).  The PAPER value (deg 1,6,20) is
-# correct; these tests recompute from the framework S^5 spectrum and confirm it.
+# correct; these tests recompute from the continuum S^5 spectrum and confirm it.
 # ---------------------------------------------------------------------------
 
 def _Fs_S5_kps() -> mp.mpf:
@@ -172,7 +184,7 @@ def _FD_S5_paper() -> mp.mpf:
 
 
 def test_s5_scalar_degeneracy_is_standard_harmonic_count():
-    """The framework S^5 conformal-scalar multiplicity is the standard S^5
+    """The continuum S^5 conformal-scalar multiplicity is the standard S^5
     harmonic count 1, 6, 20 at n=0,1,2 (prefactor 1/12, NOT the resurrected
     driver's buggy 1/3 which gives 4 at n=0)."""
     for n, expect in ((0, 1), (1, 6), (2, 20)):
@@ -180,7 +192,7 @@ def test_s5_scalar_degeneracy_is_standard_harmonic_count():
 
 
 def test_s5_scalar_F_theorem_matches_paper_closed_form():
-    """F_s^{S5} computed from the S^5 spectrum equals the paper closed form
+    """F_s^{S5} computed from the continuum S^5 spectrum equals the paper closed form
     -log2/128 - zeta(3)/128pi^2 + 15 zeta(5)/256pi^4, and is decisively NOT the
     4x-larger value the pruned memo reported (the resurrection finding)."""
     F_s = scalar_F_theorem_s5()

@@ -1343,9 +1343,14 @@ generating the wedge KMS state. This is a construction-level choice,
 not a derivation:\ we wrote down the wedge KMS state as $\rho_W =
 e^{-K_\alpha^W}/Z$ rather than (say) $\rho_W = e^{-\beta D_W}/Z$ for
 the wedge-restricted Camporesi--Higuchi Dirac. The motivation is
-structural (we want the modular Hamiltonian's period to match the
-canonical BW $\beta = 2\pi$), but it is \emph{a} choice of local
-Hamiltonian, not the unique choice.
+structural (we want the modular flow to close with period $2\pi$, as
+the Bisognano--Wichmann flow does), but it is \emph{a} choice of local
+Hamiltonian, not the unique choice.  The generator $K_\alpha^W = 2J_z$
+is \emph{posited}, and $\rho_W = e^{-K_\alpha^W}/Z$ is its unit-$\beta$
+Gibbs state, not the Bisognano--Wichmann-normalised state, which (KMS
+parameter $2\pi$ in the rotation angle) would be
+$e^{-2\pi J_z}/Z = e^{-\pi K_\alpha^W}/Z$ (Paper~50, remark on the
+normalisation of $K_\alpha$ and $\rho_W$).
 
 Two remarks place the choice;\ neither derives it:
 
@@ -1355,7 +1360,8 @@ on the Rindler wedge is the boost generator $K_{\mathrm{boost}}$, and
 the Wightman vacuum restricted to the wedge algebra is the Gibbs state
 $\rho_W = e^{-2\pi K_{\mathrm{boost}}}/Z$ at inverse temperature
 $\beta = 2\pi$. Our choice $H_{\mathrm{local}} = K_\alpha^W / \beta$
-copies this \emph{form}:\ $\beta H_{\mathrm{local}} = K_\alpha^W$, with
+copies this \emph{form} (not its normalisation, see above):\
+$\beta H_{\mathrm{local}} = K_\alpha^W$, with
 the spatial rotation generator around the Hopf-base axis standing in
 for the boost, and $\rho_W = e^{-K_\alpha^W}/Z$.  In the continuum the
 Gibbs form is a \emph{theorem} about the vacuum;\ here it is the
@@ -1443,7 +1449,7 @@ relabelled, and $\kappa_g$ drops out by construction.  This is not a
 finite-cutoff statement about the four witnesses.
 
 We have verified this numerically at $\nmax \in \{2, 3, 4, 5\}$ across
-the six witness instantiations (BW canonical at $\kappa_g = 1$;
+the six witness instantiations (BW witness at $\kappa_g = 1$;
 Hartle--Hawking at $M = 1$, $\kappa_g = 1/4$; Hartle--Hawking at
 $M = 2$, $\kappa_g = 1/8$; Sewell at $M = 1$, $\kappa_g = 1/4$;
 Unruh at $a = 1$, $\kappa_g = 1$; Unruh at $a = 2$, $\kappa_g = 2$).
@@ -1466,7 +1472,7 @@ is the following corollary.
 \caption{Cross-witness consistency at the BW-$\alpha$ level
 (left columns) and at the BW-$\gamma$ Tomita level (right columns).
 Cross-consistency residual is the difference between the period
-residual of each witness and the BW canonical period residual at the
+residual of each witness and the BW-witness period residual at the
 same $\nmax$:\ exactly $0$ across all six witnesses
 at every tested $\nmax$. Source data:\
 \texttt{debug/data/l1\_modular\_hamiltonian\_results.json},
@@ -1647,7 +1653,8 @@ where $m$ alone is the metric dimension, and the underlying Connes axiom
 signs determine the Krein-space structure.
 The Riemannian Camporesi--Higuchi triple has $(t, s) = (0, 3)$ (three
 spatial directions), which gives $(m, n) = (3, -3 \bmod 8) = (3, 5)$
---- this is BBB's Clifford sign convention;\ Connes' KO-dimension~3
+--- this is BBB's formula extended formally to odd $m$ (their tables
+cover even $m, n$ only);\ Connes' KO-dimension~3
 corresponds to it;\ the
 Lorentzian extension, one time and three space dimensions, has
 $(t, s) = (1, 3)$, which gives $(m, n) = (4, -2 \bmod 8) = (4, 6)$, their
@@ -1804,7 +1811,7 @@ propinquity.  O1 status remains OPEN \emph{at the continuum /
 non-compact level}; the Hilbert-space and Dirac-operator levels are now
 closed at finite cutoff.  On the \emph{metric}-level finite-cutoff
 question (Paper~45~\S\,open~Q1) only the compactness half is established
-[SYMBOLIC]:\ the posited boost-class generator is compact (integer
+[SYMBOLIC]:\ the posited generator $K_\alpha = 2J_z$ is compact (integer
 spectrum, $e^{2\pi i K} = I$).  The further reading has two legs,
 priced separately.  (a)~That the finite-cutoff quantum metric is
 Euclidean, with the genuine reverse-triangle signature confined to the
@@ -2201,7 +2208,7 @@ flow.  (a) and (b) hold for \emph{any} integer-spectrum generator and
 \emph{any} operator;\ (c) is Tomita's theorem for a Gibbs state built
 from the generator, so it is circular as a check on the generator;\ (d)
 holds because the six witnesses share one generator.  The closure is
-also \emph{signature-blind}:\ the posited boost-class generator is
+also \emph{signature-blind}:\ the posited generator is
 compact (integer spectrum, [SYMBOLIC]), so its flow is a $\beta = 2\pi$
 circle rather than a non-compact boost, and on the argued reading
 [ARGUED] the $(3, 1)$ label is a carrier choice the closure cannot
@@ -2402,7 +2409,7 @@ latremoliere_metric_st_2017} is absent from the literature
 farsi_latremoliere2025}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b}
 are Riemannian), and the framework's attempt was descoped on 2026-06-09
 (Paper~45's $K^+$ annihilation theorem:\ the natural Krein-positive
-compression fails structurally).  Separately, the posited boost-class
+compression fails structurally).  Separately, the posited
 generator is compact [SYMBOLIC];\ that no Lorentzian metric statement is
 therefore available at finite cutoff for it is [ARGUED] (Paper~45 Q1).  The
 Nieuviarts twist morphism~\cite{nieuviarts2025a, nieuviarts2025b_proceedings}
@@ -2470,7 +2477,7 @@ Witness factories \texttt{for\_bisognano\_wichmann},
 \texttt{for\_hartle\_hawking}, \texttt{for\_sewell},
 \texttt{for\_unruh} instantiate
 \texttt{ModularHamiltonian} with witness-specific $\kappa_g$ values:\
-BW canonical ($\kappa_g = 1$), HH ($\kappa_g = 1/(4M)$),
+BW witness ($\kappa_g = 1$), HH ($\kappa_g = 1/(4M)$),
 Unruh ($\kappa_g = a$). Each factory returns a
 \texttt{ModularHamiltonian} object whose period-closure verifier
 returns the label \texttt{STRONG\_IDENTIFICATION} at every tested

@@ -2,6 +2,8 @@
 \usepackage{amsmath,amssymb,graphicx,xcolor}
 \usepackage{amsthm} % for theorem environment used in §IV (three-homes theorem)
 \newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+\newtheorem{proposition}{Proposition}
 
 \begin{document}
 
@@ -326,7 +328,7 @@ invariants. Their convergence at a single finite integer is stronger
 support for the selection of $n_{\max} = 3$ than any one alone. It
 does not, however, derive the combination rule
 $K = \pi(B + F - \Delta)$ itself, which remains a numerical observation
-per Theorem~\ref{thm:three_homes}.
+(Observation~\ref{obs:cross_sector}).
 
 
 \subsection{Fiber $S^1$: Spectral zeta function}
@@ -572,9 +574,10 @@ does not unify them:
 The combined verdict of Phases 4B--4I is stated in the following
 summary.
 
-\begin{theorem}[Three homes, structural mystery]\label{thm:three_homes}
-The three ingredients of the combination rule $K = \pi(B + F - \Delta)$
-have the following canonical spectral homes on $S^3$:
+\begin{theorem}[Three homes]\label{thm:three_homes}
+The three ingredients $B$, $F$, $\Delta$ of the combination rule
+(an Observation;\ Eq.~\eqref{eq:cubic}) have the following canonical
+spectral homes on $S^3$:
 \begin{itemize}
   \item[$(B)$] Finite truncated Casimir trace on the scalar
     Laplace--Beltrami spectrum at the selection cutoff $m = 3$, with
@@ -589,14 +592,22 @@ These three objects live in two different spectral sectors of $S^3$ (the
 scalar and spinor Laplace--Beltrami sectors); they are three different
 object types (finite trace, infinite Dirichlet series, single-level
 degeneracy); and no spectral construction on $S^3$ simultaneously
-generates all three. The K combination rule is therefore a
-\emph{cross-sector sum} with three separate algebraic origins, and its
-approximate validity (to $4.8\times 10^{-7}$ for $K$ itself;\ to
-$8.8\times 10^{-8}$ through the cubic's root) is a structural mystery
-in the sense that the sum $B + F - \Delta$ comes within that margin of
-$\alpha^{-1}/\pi$ through no
-currently known common-generator mechanism.
+generates all three.
 \end{theorem}
+
+\begin{observation}[Cross-sector sum]\label{obs:cross_sector}
+% [retracted 2026-09-29: k-match-inside-theorem] -- the numerical match of
+% the combination rule previously sat inside the theorem environment; it is
+% an Observation and is stated here, outside the theorem.
+The combination rule $K = \pi(B + F - \Delta)$ is therefore a
+\emph{cross-sector sum} of three ingredients with separate algebraic
+origins. Its approximate validity (to $4.8\times 10^{-7}$ for $K$
+itself;\ to $8.8\times 10^{-8}$ through the cubic's root) is a
+structural mystery, in the sense that the sum $B + F - \Delta$ comes
+within that margin of $\alpha^{-1}/\pi$ through no currently known
+common-generator mechanism. This is a numerical observation, not a
+consequence of Theorem~\ref{thm:three_homes}.
+\end{observation}
 
 Theorem~\ref{thm:three_homes} is a structural statement about how each
 ingredient arises, not a proof of Eq.~(\ref{eq:K}). The combination
@@ -1256,16 +1267,31 @@ strengthens the conclusion that the integer Casimir trace $B = 42$---not
 the spectral determinant---is the correct object for the base invariant.
 
 
-\subsection{Algebraic structure of $\alpha$}
+\subsection{Algebraic structure of the cubic's root}
 
-The formula implies that $\alpha$ is algebraic over the field
-$\mathbb{Q}(\pi)$, since $\zeta(2) = \pi^2/6$. That is,
-$\alpha$ is a root of a polynomial whose coefficients are rational
-functions of $\pi$ alone. If the relation held exactly, this would
-suggest a constraint on $\alpha$ far tighter than the Standard Model
-currently imposes, and that $\alpha$ is transcendental (since $\pi$
-is); the $8.8\times10^{-8}$ residual, however, is far larger than the
-experimental uncertainty, so the relation is not an exact law.
+% [retracted 2026-09-29: alpha-cubic-stated-as-law] -- earlier wording made
+% the physical alpha algebraic over Q(pi) and inferred transcendence from
+% that membership; the statement concerns the cubic's root only.
+\begin{proposition}[The cubic's root is transcendental]
+\textbf{[SYMBOLIC]} The physical fine structure constant only
+\emph{approximately} satisfies the cubic of Eq.~(\ref{eq:cubic}) (to
+$8.8\times10^{-8}$ relative, far outside the experimental uncertainty),
+so the cubic is not an exact law, and this statement concerns the
+cubic's smallest positive root $\alpha_K$, not the physical $\alpha$:
+$\alpha_K$ is algebraic over $\mathbb{Q}(\pi)$ and transcendental over
+$\mathbb{Q}$. Nothing follows for the physical $\alpha$, and the
+combination rule remains an Observation.
+\end{proposition}
+\emph{Proof.} From $\alpha_K^3 - K\alpha_K + 1 = 0$ and $\alpha_K\neq0$,
+$K = \alpha_K^2 + 1/\alpha_K$. If $\alpha_K$ were algebraic, so would
+be $K$. But $K = \pi(B+F-\Delta) = \tfrac{1679}{40}\,\pi +
+\tfrac{1}{6}\,\pi^{3}$ is a nonconstant polynomial in $\pi$ with
+rational coefficients, hence transcendental (Lindemann). $\square$
+(The mechanism is specific:\ roots of polynomials with transcendental
+coefficients \textit{can} be algebraic --- e.g.\ $x^2 - \pi x + (\pi-1)
+= (x-1)(x-\pi+1)$ has the root $x = 1$ --- but that needs the
+$\pi$-dependence to cancel at the root, which cannot happen here since
+$K$ multiplies $\alpha_K \neq 0$.)
 
 
 \subsection{$S^3$ specificity}\label{sec:s3_specificity}

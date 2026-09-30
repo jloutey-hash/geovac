@@ -9,11 +9,18 @@ Two load-bearing headlines that were previously NO-TEST (debug-memo-only):
     g(2k+1) = (n_max - k)(n_max - k + 1), and generates a 2*pi-periodic
     modular flow.
 
-  Gap 3 (sec:wedge_kms): the von Neumann entropy of rho_W = exp(-K_alpha)/Z
-    at canonical BW normalization scales as
+  Gap 3 (sec:wedge_kms): the von Neumann entropy of the unit-beta Gibbs
+    state rho_W = exp(-K_alpha)/Z (beta = 1 in the units where spec K_alpha
+    is the odd integers -- NOT the Bisognano-Wichmann normalisation, which is
+    beta = pi for K_alpha = 2 J_z; see rem:bw_normalisation and the b-family
+    test below) scales as
         S(rho_W) = 2 log n_max + (coth 1 - log(2 sinh 1)) + O(1/n_max),
-        coth 1 - log(2 sinh 1) = 0.458448...,
-    with slope -> 2 = dim(partial W); the area-law fit S ~ n_max^2 is rejected.
+        coth 1 - log(2 sinh 1) = 0.458448...
+    The slope 2 is the growth exponent of the lowest-shell degeneracy
+    g(1) = n_max(n_max+1) ~ n_max^2 (the Gibbs weight concentrates on the
+    lowest shells, so S ~ log g(1)); it is a counting fact about the
+    truncation, not a dimension of a wedge boundary.  The area-law fit
+    S ~ n_max^2 is rejected.
 
 Everything is RECOMPUTED from the live modular_hamiltonian machinery
 (for_bisognano_wichmann -> restrict_K_alpha_to_wedge), not read from the
@@ -170,7 +177,9 @@ def test_asymptotic_constant_converges_to_coth():
 @pytest.mark.slow
 def test_slope_converges_to_2():
     """Windowed least-squares slope of S vs log n_max climbs to ~2 at large
-    n_max (slope = dim(partial W) = 2)."""
+    n_max: the growth exponent of the lowest-shell degeneracy
+    g(1) = n_max(n_max+1) ~ n_max^2 on which the unit-beta Gibbs state
+    concentrates (a counting fact, not a boundary dimension)."""
     ns = np.arange(350, 2001, 50, dtype=float)
     S = np.array([_analytic_entropy(int(n)) for n in ns])
     A = np.column_stack([np.log(ns), np.ones_like(ns)])
@@ -225,10 +234,14 @@ def test_b_family_entropy_constant(b):
     rho_b = e^{-bK_alpha}/Z.  Rejects: 'the constant coth 1 - log(2 sinh 1)
     is b-independent / the Bisognano-Wichmann-normalised value' (at the BW
     normalisation b = pi the constant is 0.0136..., not 0.4584...)."""
-    errs = [abs(_analytic_entropy(n, b) - 2.0 * math.log(n) - _b_family_constant(b))
-            for n in (1000, 4000)]
-    assert errs[1] < 1e-3, f"b={b}: residual {errs[1]:.2e}"
-    assert errs[1] < errs[0], "residual must shrink with n_max"
+    # signed residual e(n) = S - 2 log n - C(b) = c/n + O(1/n^2); Richardson
+    # (4 e(4000) - e(1000))/3 cancels the 1/n term (measured |.| <= 6.3e-7
+    # at b = 0.5, 1, pi), so a +4e-4 error in C(b) is caught at every b.
+    e = {n: _analytic_entropy(n, b) - 2.0 * math.log(n) - _b_family_constant(b)
+         for n in (1000, 4000)}
+    rich = (4.0 * e[4000] - e[1000]) / 3.0
+    assert abs(rich) < 5e-6, f"b={b}: Richardson residual {rich:.2e}"
+    assert abs(e[4000]) < abs(e[1000]), "residual must shrink with n_max"
     if b == math.pi:
         assert abs(_b_family_constant(b) - 0.0136246) < 1e-6
         assert abs(_b_family_constant(b) - CHM_CONSTANT) > 0.4

@@ -109,8 +109,9 @@ from a posited wedge generator, (C) by
 comparing that generator with a continuum one: \emph{(A)} the universal F-theorem
 coefficient $F_{\sthree}$, the standard zeta-regularised determinant
 $-\tfrac{1}{2}\zeta'_{\Delta}(0)$ of the continuum spectrum, is
-re-derived in closed Hurwitz form and agrees bit-exactly with the
-Klebanov--Pufu--Safdi (2011) values for both the conformally coupled
+re-derived in closed Hurwitz form and agrees with the
+Klebanov--Pufu--Safdi (2011) values (symbolically for the Dirac, to
+61 digits with PSLQ identification for the scalar) for both the conformally coupled
 scalar ($F_{s} = \tfrac{\log 2}{8} - \tfrac{3\zeta(3)}{16\pi^{2}}$) and
 the free Camporesi--Higuchi Dirac ($F_{D} = \tfrac{\log 2}{4} +
 \tfrac{3\zeta(3)}{8\pi^{2}}$) --- an independent re-derivation of known
@@ -191,8 +192,9 @@ quantum-metric convergence remains an open target. What survives is
 the norm-resolvent non-compact-carrier closure~\cite{paper47} at the
 spectral level and Paper~45's signature-agnostic product-carrier rate.
 The Krein--Mondino--S\"amann bridge~\cite{paper48} and the
-OSLPLS strong-form bridge~\cite{paper49} provide the synthetic-Lorentzian
-geometric interpretation.
+OSLPLS strong-form bridge~\cite{paper49} proposed a synthetic-Lorentzian
+geometric interpretation;\ both are descoped and archived (see the
+closing section).
 
 The present paper turns from the math.OA structural content of the
 modular machinery to its \emph{physics-side observables}. We ask
@@ -214,10 +216,10 @@ structural decomposition theorem:
 \item \textbf{Partition function re-derivation}
 (Sec.~\ref{sec:partition}): the universal F-theorem coefficient,
 evaluated as the zeta-regularised determinant of the full continuum
-spectrum in closed Hurwitz form, agrees \emph{bit-exactly} with the
+spectrum in closed Hurwitz form, agrees with the
 Klebanov--Pufu--Safdi (2011)~\cite{klebanov_pufu_safdi2011} values for
-both the conformally coupled scalar and the free Camporesi--Higuchi
-Dirac on the round $\sthree$. This is an independent re-derivation of
+both the conformally coupled scalar (to 61 digits, PSLQ-identified) and
+the free Camporesi--Higuchi Dirac (symbolically) on the round $\sthree$. This is an independent re-derivation of
 known values, not a finite-cutoff result:\ the truncation $\nmax$
 never enters.
 
@@ -391,7 +393,7 @@ Hurwitz-asymptotic expansion
 with $g_{k}(s) = \tbinom{s + k - 1}{k} / 4^{k}$ the
 binomial-like coefficient.
 
-\subsection{Bit-exact match: scalar}
+\subsection{Closed-form match: scalar}
 \label{subsec:scalar_match}
 
 Differentiating~(\ref{eq:zeta_scalar_expansion}) at $s = 0$ and using
@@ -404,7 +406,7 @@ expressible in $\pi^{2k - 2} \cdot \Q$ for $k \ge 2$:
 \label{eq:zeta_prime_scalar}
 \end{equation}
 
-\begin{theorem}[Bit-exact scalar partition function]
+\begin{theorem}[Closed-form scalar partition function (numerical + PSLQ)]
 \label{thm:scalar_bitexact}
 \textbf{[NUMERICAL, 61 digits + PSLQ;\ value prior art~\cite{klebanov_pufu_safdi2011}]}
 The zeta-derivative of the continuum conformal-scalar
@@ -412,7 +414,8 @@ spectrum~(\ref{eq:zeta_scalar_expansion}) satisfies
 \begin{equation}
 F_{s} := -\tfrac{1}{2}\,\zeta'_{\Delta}(0) = \frac{\log 2}{8} - \frac{3\zeta(3)}{16\pi^{2}} = F_{s}^{\KPS},
 \end{equation}
-in bit-exact agreement with~(\ref{eq:Fs_KPS}).
+in agreement with~(\ref{eq:Fs_KPS}) to 61 digits, with the closed form
+identified by PSLQ.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -431,7 +434,7 @@ which is exactly the claimed identity. See driver
 for full computation.
 \end{proof}
 
-\subsection{Bit-exact match: Dirac}
+\subsection{Closed-form match: Dirac}
 \label{subsec:dirac_match}
 
 Differentiating~(\ref{eq:DDirac_closed_form}) symbolically at $s = 0$,
@@ -445,7 +448,7 @@ D'_{\mathrm{Dirac}}(0)
 = \frac{3\zeta(3)}{8\pi^{2}} + \frac{\log 2}{4}.
 \end{align}
 
-\begin{theorem}[Bit-exact Dirac partition function]
+\begin{theorem}[Closed-form Dirac partition function (symbolic)]
 \label{thm:dirac_bitexact}
 \textbf{[SYMBOLIC;\ value prior art~\cite{klebanov_pufu_safdi2011}]}
 The zeta-derivative of the continuum Camporesi--Higuchi Dirac
@@ -895,10 +898,11 @@ zeta-regularised evaluation of these untruncated spectra produces partition func
 values in a closed-form ring extending~\cite{klebanov_pufu_safdi2011}'s
 S$^{3}$ ring by one $\zeta(5)/\pi^{4}$ generator.
 
-\subsection{Bit-exact closed forms on $S^{5}$}
+\subsection{Closed forms on $S^{5}$ (PSLQ-identified)}
 
 \begin{theorem}[Conformally coupled scalar on $S^{5}$]
 \label{thm:scalar_S5}
+\textbf{[NUMERICAL, 200 dps + PSLQ; value prior art]}
 The zeta-derivative of the continuum conformal-scalar spectrum on
 round unit $S^{5}$ satisfies
 \begin{equation}
@@ -924,7 +928,7 @@ $\zeta_{S^{5}}^\text{conf}(0) = 0$; the derivative
 \end{equation}
 converges geometrically in $k$. PSLQ at 200~dps and $k_{\max} = 100$
 finds the integer relation $[32, -2, -2, 15]$ (applied to
-$4\,\zeta'_{S^{5}}(0)$) bit-exactly identifying
+$4\,\zeta'_{S^{5}}(0)$), identifying
 \begin{equation}
 \zeta'_{S^{5}}(0) = \frac{\log 2}{64} + \frac{\zeta(3)}{64\pi^{2}}
 - \frac{15\,\zeta(5)}{128\pi^{4}}.
@@ -1037,7 +1041,7 @@ on round $S^{d}$ ($d$ odd) lies in the ring
 \{\zeta(2k+1)/\pi^{2k} : k = 1, \dots, (d-1)/2\}
 \]
 of dimension $(d-1)/2 + 1$ (top atom $\zeta(d)/\pi^{d-1}$). This is
-verified bit-exactly at $S^{3}$, $S^{5}$
+verified (symbolically or by PSLQ identification) at $S^{3}$, $S^{5}$
 (Theorems~\ref{thm:scalar_S5},~\ref{thm:dirac_S5}), and --- by direct
 high-precision computation (Door~1 graduation, 2026-06-03; $260$ dps,
 frozen basis, reconstruction error $\lesssim 10^{-261}$, decoy-controlled)
@@ -1147,8 +1151,8 @@ exhibit the orthogonal $\log 2$ / $\zeta(3)/\pi^{2}$ decomposition of
 Theorem~\ref{thm:mellin_decomp}. Does the same projection structure
 extend to higher-spin partition functions on $\sthree$, in
 particular the Maxwell ($p = 1$ form) and graviton ($p = 2$) cases?
-The Maxwell partition function on round $\sthree$ has known closed
-forms~\cite{beccaria_tseytlin2017}; evaluating it by the same closed
+The Maxwell partition function on round $\sthree$ is the natural
+next case;\ evaluating it by the same closed
 Hurwitz machinery (and testing whether the dual-basis decomposition extends)
 is a natural follow-up.
 
@@ -1196,12 +1200,12 @@ System & Continuum reference & Framework status & M-engine reading \\
 \midrule
 Free scalar (conformal) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M3-ring + M1$\times$M3 \\
 Free Dirac (CH) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M3-ring + M1$\times$M3 \\
-Free scalar (conformal) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M3-ring + M1$\times$M3 extended \\
-Free Dirac (CH) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M3-ring + M1$\times$M3 extended \\
+Free scalar (conformal) on $S^{5}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} & DONE Sec.~\ref{sec:s5_extension} & M3-ring + M1$\times$M3 extended \\
+Free Dirac (CH) on $S^{5}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} & DONE Sec.~\ref{sec:s5_extension} & M3-ring + M1$\times$M3 extended \\
 Free scalar (conformal) on $S^{7}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} & DONE (in-ring $\mathcal{R}_{7}$, $\geq 200$ dps; Erratum to Rem~\ref{rem:general_d_conjecture}) & M3-ring + M1$\times$M3 extended \\
 \midrule
-Free Maxwell on $\sthree$ & 3D scalar duality~\cite{beccaria_tseytlin2017} & open: $\sthree$ Maxwell-scalar duality gives same as scalar & expected M3-ring + M1$\times$M3 \\
-Free Maxwell on $S^{5}$ & BT~\cite{beccaria_tseytlin2017} & TODO; needs transverse 1-form Hodge spectrum & open \\
+Free Maxwell on $\sthree$ & --- & open: $\sthree$ Maxwell-scalar duality gives same as scalar & expected M3-ring + M1$\times$M3 \\
+Free Maxwell on $S^{5}$ & --- & TODO; needs transverse 1-form Hodge spectrum & open \\
 Free higher-rank tensor ($p \ge 2$) on $S^{d}$ & BT~\cite{beccaria_tseytlin2017}, Anninos & TODO; needs $\mathrm{SO}(d+1)$ rep theory & open \\
 Free (non-)minimal scalar (zero mode) on $S^{d}$ & --- & open: $m{=}2$ edge correction introduces $\log 3 + \log 5$ at $S^{5}$ & ring extension needed \\
 Squashed $\sthree$ partition function & JKPS, Hama-Hosomichi-Lee & open: deformed half-integer Hurwitz not in MR-B Jacobi-$\vartheta_{2}$ closed form & may require new structural mechanism \\
@@ -1228,16 +1232,21 @@ The Connes--Chamseddine spectral action~\cite{chamseddine_connes1997}
 $\mathrm{Tr}\,f(D/\Lambda)$, on any almost-commutative spectral triple,
 has heat-kernel expansion coefficients given by Seeley--DeWitt
 coefficients $a_{k}(D^{2})$. For the GeoVac spectral triple on round
-$\sthree$, the Seeley--DeWitt coefficients of $\DCH^{2}$ are exact in
-$\sqrt{\pi}\cdot\Q$ with no higher coefficients (Paper~28~\cite{paper28},
-Sprint MR-B closed form, two-term-exact theorem). The spectral action
-therefore lives in the M2 ring of the master Mellin engine
-(Paper~18~\cite{paper18} \S III.7).
+$\sthree$, the Seeley--DeWitt coefficients of $\DCH^{2}$ are exact,
+with no higher coefficients (Paper~28~\cite{paper28},
+Sprint MR-B closed form, two-term-exact theorem);\ they carry an
+overall $\sqrt{\pi}$ from the heat-trace prefactor
+$\mathrm{Vol}(\sthree)(4\pi t)^{-3/2}$, and once that standard
+normalisation is divided out they lie in the pure-Tate M2 ring
+$\bigoplus_{k}\pi^{2k}\cdot\Q$ of the master Mellin engine
+(Paper~18~\cite{paper18} \S III.7). The spectral action
+therefore lives in the M2 sector.
 
 \textbf{Structural classification.} Both the Henningson--Skenderis
 holographic Weyl anomaly and the Connes--Chamseddine spectral action
 sit in the master Mellin engine's M2 sub-mechanism (Seeley--DeWitt
-heat-kernel ring $\sqrt{\pi}\cdot\Q \oplus \pi^{2}\cdot\Q$). This is a
+heat-kernel ring $\bigoplus_{k}\pi^{2k}\cdot\Q$, after the standard
+$\sqrt{\pi}$ heat-trace normalisation is divided out). This is a
 shared heat-kernel \emph{classification}, not a computed identity: both
 are heat-kernel-trace observables ($\mathcal{M}[\mathrm{Tr}\,e^{-tD^{2}}]$
 at operator order $k = 2$), the HS quantity computed on the bulk-gravity
@@ -1245,7 +1254,9 @@ side and the CC quantity on the finite spectral triple. The framework
 does not compute the HS holographic anomaly; the content is the
 taxonomic placement of both in the M2 ring. The framework's
 discrete-cutoff realization (Paper~38~\cite{paper38} state-space GH
-convergence at rate $4/\pi$) is the operator-system-level home of the
+convergence at the displayed rate $(4/\pi)\log n/n$, in the
+dual-Coxeter convention;\ $2/\pi$ on the unit $\sthree$) is the
+operator-system-level home of the
 CC side.
 
 This is the framework's most direct contact point with established

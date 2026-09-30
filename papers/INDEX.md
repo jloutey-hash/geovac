@@ -83,7 +83,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 44 `paper_44_lorentzian_operator_system.tex` | ACTIVE | Lorentzian operator-system substrate; prop = 2 |
 | 45 `paper_45_lorentzian_propinquity.tex` | **DESCOPED** | Main theorem withdrawn (K⁺ seminorm ≡ 0, annihilation theorem); spatial statement unconditional; product-carrier S³×S¹ convergence rebuilt in the action-seminorm framework (2026-06-10, signature-agnostic) |
 | 46--49 | **ARCHIVED 2026-09-14** | The strong-form Lorentzian tail. Moved to `archive/`; see the Archive table below and `docs/retired_papers.md`. Paper 45 stays: it is descoped but load-bearing (five healthy dependents, including Paper 38). |
-| 50 `paper_50_cft3_partition_function.tex` | ACTIVE | Closed-form Hurwitz re-derivation of the Klebanov–Pufu–Safdi F-theorem values on S³ and S⁵ from the continuum spectra (the truncation does not enter); M2/M3 split; wedge-entropy degeneracy count |
+| 50 `paper_50_cft3_partition_function.tex` | ACTIVE | Closed-form Hurwitz re-derivation of the Klebanov–Pufu–Safdi F-theorem values on S³ and S⁵ from the continuum spectra (the truncation does not enter); orthogonal log 2 / ζ(3)/π² split (M3-ring / M1×M3); wedge-entropy degeneracy count |
 | 52 `paper_52_category_iii_correspondence.tex` | **ARCHIVED 2026-09-29** | Tombstone. "Category III" positioning paper; its thesis (GH convergence as the mechanism producing boundary CFT data) failed: the KPS values are a continuum computation the truncation never enters. Surviving not-holographic remark lives in **Paper 50**. See the Archive table below and `docs/retired_papers.md`. |
 | 53 `paper_53_disk_propinquity.tex` | ACTIVE (rebuilt 2026-09-29) | State-space convergence of the flat plane's spectral truncations via a positive squared-window reconstruction (rate γ₁Λ^−½; [INTERNAL THEOREM] on the named state classes, canonicity open); disk-with-cone left open (the earlier disk obstruction was a float artifact at ρ = R) |
 
@@ -117,7 +117,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
-| 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α at 8.8×10⁻⁸; combination rule labeled an **Observation**, never derived (12 mechanisms eliminated) |
+| 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α to 4.8×10⁻⁷ (the cubic's root to 8.8×10⁻⁸); combination rule labeled an **Observation**, never derived (12 mechanisms eliminated) |
 | 25 `paper_25_hopf_gauge_structure.tex` | OBSERVATION | Hopf graph as discrete lattice-gauge structure |
 | 28 `paper_28_qed_s3.tex` | ACTIVE | QED on S³: 5 theorems; S_min irreducible at 200 digits |
 | 30 `paper_30_su2_wilson.tex` | ACTIVE | SU(2) Wilson gauge on S³ = SU(2); Paper 25 is its maximal torus |

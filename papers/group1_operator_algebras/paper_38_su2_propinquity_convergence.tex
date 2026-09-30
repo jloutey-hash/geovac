@@ -81,12 +81,12 @@ Connes--van~Suijlekom
 truncations of the round $\sthree = \SU(2)$ Camporesi--Higuchi
 spectral triple converge to the continuum spectral triple in
 van~Suijlekom's state-space Gromov--Hausdorff
-distance~\cite{vs2021_jgp}, with explicit rate
+distance~\cite{vs2021_jgp}:\ the bound $d_{\mathrm{GH}} \le \gamma_{\nmax}$, with $\gamma_{\nmax}$ the mass-concentration moment of the central spectral Fej\'er kernel on $\SU(2)$, and $\gamma_{\nmax} \to 0$ are proved.  The displayed rate
 \(
-d_{\mathrm{GH}} \le \gamma_{\nmax}
+\gamma_{\nmax}
 = (4/\pi + o(1)) \log \nmax / \nmax
 \)
-in the dual-Coxeter normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note). The bound $d_{\mathrm{GH}} \le \gamma_{\nmax}$ and $\gamma_{\nmax} \to 0$ are proved;\ the asymptotic constant is \textbf{[INTERNAL THEOREM + MEASURED]}:\ derived, with its two logarithmic sub-coefficients pinned by doubling estimators (Appendix~\ref{app:stein_weiss}).
+(dual-Coxeter normalisation of the $\SU(2)$ metric;\ equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note) is \textbf{[INTERNAL THEOREM + MEASURED]}:\ derived, with its two logarithmic sub-coefficients pinned by doubling estimators (Appendix~\ref{app:stein_weiss}).
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
@@ -255,17 +255,20 @@ restriction of $\DCH$ to $\Hilb_{\nmax} = P_{\nmax} L^2(\sthree,
 Unconditionally, the truncated triples $\Tcal_{\nmax}$ converge to
 $\Tcal_{\sthree}$ in van~Suijlekom's state-space Gromov--Hausdorff
 distance~\cite{vs2021_jgp}, under the translation-seminorm
-metrization of \S~\ref{sec:named_gaps}, with explicit rate
+metrization of \S~\ref{sec:named_gaps}:\ the bound
+$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$ and
+$\gamma_{\nmax} \to 0$ are proved, where $\gamma_{\nmax}$ is the
+mass-concentration moment of the central spectral Fej\'er kernel on
+$\SU(2)$ given by Lemma~\ref{lem:L2};\ its displayed asymptotic rate,
+whose constant is \textbf{[INTERNAL THEOREM + MEASURED]}
+(Lemma~\ref{lem:L2}(d.ii)), is
 \begin{equation}\label{eq:main_rate}
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
    \;\le\; \gamma_{\nmax}, \qquad
    \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr)
-   \quad\text{(dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)},
+   \quad\text{(dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)}.
 \end{equation}
-(the asymptotic constant is \textbf{[INTERNAL THEOREM + MEASURED]},
-Lemma~\ref{lem:L2}(d.ii)), where $\gamma_{\nmax}$ is the mass-concentration
-moment of the central spectral Fej\'er kernel on $\SU(2)$ given by
-Lemma~\ref{lem:L2}. The unconditional statement is
+The unconditional statement is
 Theorem~\ref{thm:main_unconditional}, whose bound is
 $\le \gamma_{\nmax}$ outright and does not invoke $C_3$;\ the main
 theorem's display now states that bound (until 2026-09-04 it carried a

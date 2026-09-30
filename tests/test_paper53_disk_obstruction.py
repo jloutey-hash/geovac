@@ -267,3 +267,100 @@ def test_disk_operator_system_prop2(K, J, N):
     assert dims[1] == N * N, (
         f"(K={K},J={J}) O² should fill M_{N}(C) envelope {N*N}; got {dims[1]}"
     )
+
+
+# --------------------------------------------------------------------------
+# Guard pass (/qa trunk DELTA #17): the printed prop:disk (b)/(c) numbers,
+# the interior Cesaro kernel ratios, and the operator-level non-positivity
+# of P M_g P, each pinned to the precision the paper prints.
+# --------------------------------------------------------------------------
+def _ring_ratio_min(s: int, Lam: float) -> float:
+    modes = _k0_modes(400, Lam)
+    w = _cesaro_weight(Lam, s=s)
+    rho0 = _most_negative_kernel_radius(modes, w)
+    num, den = _ratio_parts(_ring(rho0), modes, w, _OPEN_RHO[_OPEN_RHO <= 0.9])
+    return float((num / den).min())
+
+
+# printed in prop:disk (b): min g on the ring
+_PRINTED_RING_MIN = {(2, 100.0): -0.016, (2, 400.0): -0.025, (2, 1600.0): -0.045,
+                     (4, 400.0): -0.006, (4, 1600.0): -0.011}
+
+
+@pytest.mark.parametrize("key", list(_PRINTED_RING_MIN))
+def test_disk_printed_ring_minima(key):
+    """prop:disk (b) printed min g values, to 3 decimals.  Rejects a drift of any
+    printed value (e.g. the earlier -0.044 at s=2, Lambda=1600; measured -0.0448)."""
+    s, Lam = key
+    assert round(_ring_ratio_min(s, Lam), 3) == _PRINTED_RING_MIN[key]
+
+
+def test_disk_printed_heat_and_rho2_errors():
+    """prop:disk (b) heat min ~ -0.13 at Lambda=200; prop:disk (c) errors
+    0.237, 0.179, 0.133, 0.097, 0.070 (exponent -0.44) and bump 0.163 -> 0.0032
+    (exponent roughly -0.9)."""
+    f1 = lambda r: (r / R) ** 2
+    heat = float(_smooth_ratio(f1, _k0_modes(80, 200.0), _heat_weight(200.0), _OPEN_RHO).min())
+    assert round(heat, 2) == -0.13
+    f_fn, grad, Lams = _DECAY_CASES["rho2"]
+    errs = _open_disk_errors(f_fn, grad, Lams, _OPEN_RHO)
+    assert [round(e, 3) for e in errs] == [0.237, 0.179, 0.133, 0.097, 0.070]
+    assert round(float(np.polyfit(np.log(Lams), np.log(errs), 1)[0]), 2) == -0.44
+    f_fn, grad, Lams = _DECAY_CASES["interior_bump"]
+    errs = _open_disk_errors(f_fn, grad, Lams, _OPEN_RHO)
+    assert round(errs[0], 3) == 0.163 and round(errs[-1], 4) == 0.0032
+    assert abs(float(np.polyfit(np.log(Lams), np.log(errs), 1)[0]) + 0.9) < 0.1
+
+
+@pytest.mark.parametrize("s,printed", [(2, -0.03), (4, -0.009)])
+def test_disk_interior_cesaro_kernel_ratio(s, printed):
+    """prop:disk (b): interior Cesaro kernel K(0, sigma) has min/max ~ -0.03 (s=2),
+    -0.009 (s=4) -- the plane Bochner-Riesz values.  Rejects: a non-negative
+    kernel, or a drift of the printed ratios."""
+    Lam = 1600.0
+    modes = _k0_modes(800, Lam)
+    w = _cesaro_weight(Lam, s=s)
+    sig = np.linspace(1e-4, 0.9, 20000)
+    K = sum(w(lam) * nrm * nrm * jv(0, a * sig / R) for (a, lam, nrm) in modes)
+    ratio = float(K.min() / K.max())
+    assert ratio < 0.0
+    d = 2 if s == 2 else 3
+    assert round(ratio, d) == printed, f"s={s}: min/max {ratio:.5f}"
+
+
+def _pmgp_min_eig(s: int, Lam: float, nquad: int = 1200) -> float:
+    """Smallest eigenvalue of P M_g P in the k=0 sector, g = Markov-Cesaro
+    reconstruction of the non-negative ring."""
+    modes = _k0_modes(400, Lam)
+    w = _cesaro_weight(Lam, s=s)
+    rho0 = _most_negative_kernel_radius(modes, w)
+    xg, wg = leggauss(nquad)
+    x = 0.5 * R * (xg + 1.0)
+    wx = 0.5 * R * wg
+    num, den = _ratio_parts(_ring(rho0), modes, w, x)
+    g = num / den
+    B = np.array([nrm * jv(0, a * x / R) for (a, lam, nrm) in modes])
+    M = (B * (g * x * wx)) @ B.T
+    return float(np.linalg.eigvalsh(M)[0])
+
+
+# printed in prop:disk (b): smallest eigenvalue of the compressed operator
+_PRINTED_PMGP = {(2, 100.0): -0.0034, (2, 400.0): -0.0022, (2, 1600.0): -0.0022,
+                 (4, 1600.0): -0.00044, (4, 400.0): 0.0015}
+
+
+@pytest.mark.parametrize("key", list(_PRINTED_PMGP))
+def test_disk_compressed_operator_not_positive(key):
+    """prop:disk (b), operator level: B_Lambda(f) = P M_g P has a negative
+    eigenvalue for a non-negative f (except s=4, Lambda=400, printed positive).
+    Rejects: 'the failure is pointwise only; the compressed operator stays
+    positive'."""
+    s, Lam = key
+    lam_min = _pmgp_min_eig(s, Lam)
+    printed = _PRINTED_PMGP[key]
+    d = 5 if abs(printed) < 1e-3 else 4
+    assert round(lam_min, d) == printed, f"s={s} Lam={Lam}: {lam_min:.6f}"
+    if printed < 0:
+        assert lam_min < 0.0
+    # quadrature-converged: doubling the nodes moves it by < 1e-9
+    assert abs(_pmgp_min_eig(s, Lam, nquad=2400) - lam_min) < 1e-9

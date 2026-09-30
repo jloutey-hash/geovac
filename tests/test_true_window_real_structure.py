@@ -430,11 +430,15 @@ def test_route_b_commutant_and_algebra(n_max):
     space {0}, and the unital algebra it generates is all of B(H) (dimension
     d^2 = 16, 256 by explicit word closure; the span stops growing after
     words of length 4 at both n_max, asserted).  Rejects a commutant result
-    that holds only for the Clebsch-Gordan build.  (Measured, not asserted
-    here: at n_max = 2, zeroing Route B's blocks that mix positive and
-    negative Dirac levels -- the doubled-model defect -- gives commutant 2 and
-    a block-diagonal algebra of dimension < d^2; at n_max = 1 the same
-    zeroing gives commutant 5 / algebra dim 1 instead.)"""
+    that holds only for the Clebsch-Gordan build.
+
+    NEGATIVE CONTROL -- DOCSTRING-ONLY, NOT ASSERTED.  Nothing in this file
+    checks that the commutant test can return anything other than 1.  The
+    control is: zero Route B's blocks that mix positive and negative Dirac
+    levels (the doubled-model defect).  Measured (re-run 2026-09-29):
+    n_max = 2 gives commutant 2, grading 0, algebra dim 128 < d^2 = 256;
+    n_max = 1 gives commutant 5, grading 8, algebra dim 1.  Promoting this to
+    an assertion is cheap and is owed to a guard pass."""
     R = _route_b_build(n_max)
     Ts, Dc = R["Ts"], R["Dc"]
     d = Dc.shape[0]

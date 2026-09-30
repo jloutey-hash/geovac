@@ -10,8 +10,9 @@
 %     Suijlekom) with a POSITIVE squared-window kernel |psi|^2 gives
 %     d_GH <= gamma_Lambda = gamma_1 Lambda^{-1/2} between the
 %     Monge--Kantorovich state spaces (finite-first-moment classes).
-%   * [MEASURED] The 2D Bochner--Riesz kernel is negative somewhere at
-%     every tested order and its Lebesgue constant exceeds 1; this is why
+%   * [INTERNAL THEOREM] The 2D Bochner--Riesz kernel is negative somewhere at
+%     every order (J_{s+1} changes sign) and its Lebesgue constant exceeds 1
+%     (int K = 1); the numerical table is [MEASURED] illustration.  This is why
 %     the squared window, not Bochner--Riesz, is the lift.
 %   * [MEASURED] Finite disk: the Markov--Cesaro map is NOT positivity
 %     preserving (ring counterexample); its reconstruction error on the
@@ -20,8 +21,9 @@
 %   * Bochner--Riesz positivity (false); the plane "propinquity" via a
 %     Bochner--Riesz tunnel (not established); any backbone for Paper 51's
 %     cigar-tip entropy (the order-0 Hankel "plane" is the flat radial
-%     sector -- alpha never entered; Paper 51 cites this paper only for
-%     the withdrawn material);  the finite-disk "non-decaying rate Lambda^{+0.07}" (a
+%     sector -- alpha never entered; Paper 51 now cites this paper for the
+%     live results only -- flat-plane-only convergence and Markov--Cesaro
+%     non-positivity -- and its thm:L6 does not depend on it);  the finite-disk "non-decaying rate Lambda^{+0.07}" (a
 %     floating-point artifact: the 0/0 Markov ratio evaluated exactly at
 %     rho = R);  the boundary-collar error 0.26 at R = 12 (not
 %     reproduced);  finite-disk Cesaro positivity as a general property.
@@ -115,8 +117,8 @@ The sharp ball window does not: its first moment diverges
 logarithmically. The smooth-edged windows $(1-|\xi|^{2})_{+}^{m}$ with
 $m\ge1$ do; for $m=1$, $\gamma_{1}=32/(5\pi)$. The two-dimensional
 Bochner--Riesz map is \emph{not} a usable lift: its kernel is negative
-somewhere at every order we tested, and its Lebesgue constant exceeds~$1$
-\textbf{[MEASURED]}. On the finite Dirichlet disk-with-cone the paper
+somewhere at every order, and its Lebesgue constant exceeds~$1$
+\textbf{[INTERNAL THEOREM]}. On the finite Dirichlet disk-with-cone the paper
 reports measurements and withdraws earlier claims. The Markov--Ces\`aro
 reconstruction map is not positivity-preserving (a ring counterexample),
 and its reconstruction error on the open disk decays on every tested
@@ -173,17 +175,18 @@ $m\ge1$; $\gamma_{1}=32/(5\pi)\approx2.04$ at $m=1$
 logarithmically divergent first moment \textbf{[INTERNAL THEOREM +
 MEASURED]}.
 \item \textbf{(Why not Bochner--Riesz, \S\ref{subsec:not_br}.)} The
-two-dimensional Bochner--Riesz kernel is negative somewhere at
-$s=0.75,1,2,4$ (min/max $=-0.071,-0.059,-0.029,-0.009$), and its
-$\Lambda$-independent Lebesgue constant exceeds $1$ at every finite order
-\textbf{[MEASURED]}.
+two-dimensional Bochner--Riesz kernel is negative somewhere, and its
+$\Lambda$-independent Lebesgue constant exceeds $1$, at every finite order
+\textbf{[INTERNAL THEOREM]}. The sizes are measured: min/max
+$=-0.071,-0.059,-0.029,-0.009$ at $s=0.75,1,2,4$ \textbf{[MEASURED]}.
 \item \textbf{(Finite disk, \S\ref{sec:disk}.)} On the Dirichlet disk the
 Markov--Ces\`aro map is unital. It is \emph{not}
 positivity-preserving: a non-negative ring observable is sent to a function
 with negative values, at Ces\`aro orders $2$ and $4$. Its reconstruction
 error on the open disk decays on every tested observable. The operator
 system has propagation number two at the four truncations computed. All
-of these are \textbf{[MEASURED]}; no disk convergence theorem is claimed.
+of these are \textbf{[MEASURED]}, except unitality, which is exact; no disk
+convergence theorem is claimed.
 \end{itemize}
 
 \subsection{Honest scope}\label{subsec:withdrawn}
@@ -198,9 +201,11 @@ the cigar-tip entropy of Paper~51.} The earlier plane map was defined
 through the order-$0$ Hankel transform, i.e.\ on the radial sector of
 the \emph{flat} plane; the apex angle $\alpha$ never entered. The cone
 with $\alpha\ne1$ has no translation group, so nothing in this paper
-reaches it (\S\ref{sec:cone}). Paper~51 cites this paper only for the
-withdrawn material;\ its Theorem on the cigar-tip entropy does not depend on
-it.
+reaches it (\S\ref{sec:cone}). Paper~51 now cites this paper for its
+live results only:\ that the convergence proved here is for the flat plane
+alone, and that the finite-disk Markov--Ces\`aro map is not positive. Its
+convergence theorem for the cigar-tip entropy does not depend on this
+paper.
 \item \emph{Plane van~Suijlekom state-space convergence via a
 Bochner--Riesz tunnel.} Not established: its ``height'' leg carried a
 Lebesgue constant $>1$ and the constituents did not match the framework
@@ -330,6 +335,15 @@ $\opnorm{\Phi(T)-T}\le\int k_{\Lambda}(z)\opnorm{U_{-z}TU_{-z}^{*}-T}dz\le
 L_{\Lambda}(T)\int|z|k_{\Lambda}(z)dz$.
 \end{proof}
 
+\emph{Test coverage.} Facts (i), (ii) and (iv), and the identity half
+$\upsilon(S(f))=f*k_{\Lambda}$ of (iii), are proof-only:\ no operator-level
+computation checks them. The numerical check
+(\texttt{tests/test\_paper53\_flat\_plane\_squared\_window.py}) covers the
+convolution inequality $\supnorm{f*k_{\Lambda}-f}\le\gamma_{\Lambda}L(f)$
+only. It uses $f=|x-x_{0}|$, which is Lipschitz but unbounded and so lies
+outside $C_{\mathrm{ub}}$ (the inequality does not use boundedness, and
+there it is attained), and the bounded Lipschitz $f=\sin x_{1}$.
+
 The positivity of $k_{\Lambda}$ is used twice: in (iii) and (iv) the
 average of a quantity bounded by $L\cdot|z|$ is bounded by $L\gamma_{\Lambda}$.
 With a signed kernel of $L^{1}$ norm $\Lebesgue>1$ the same steps give no
@@ -383,10 +397,10 @@ pointed/proper framework~\cite{latremoliere2025}.
 \begin{proof}
 \emph{Well-definedness.} For $\mu\in\Prob$ put $\upsilon^{*}\mu(T)=
 \int\upsilon(T)\,d\mu$, a state of $\Op_{\Lambda}$ by
-Lemma~\ref{lem:four_facts}(ii). By (iii), $S^{*}\upsilon^{*}\mu=\mu*k_{\Lambda}$
-(for the radial windows used $k_{\Lambda}$ is even, so the reflection
-convention is immaterial), whose first moment is at
-most $\int|x|d\mu+\gamma_{\Lambda}<\infty$; so $\upsilon^{*}\mu\in
+Lemma~\ref{lem:four_facts}(ii). By (iii), $S^{*}\upsilon^{*}\mu$ is the law of $x+z$ with
+$x\sim\mu$ and $z\sim k_{\Lambda}$ independent, so its first moment is at
+most $\int|x|d\mu+\int|z|k_{\Lambda}(z)dz=\int|x|d\mu+\gamma_{\Lambda}<\infty$
+(the triangle inequality; no symmetry of $k_{\Lambda}$ is used); so $\upsilon^{*}\mu\in
 \Cst_{\Lambda}$. By definition $S^{*}$ maps $\Cst_{\Lambda}$ into $\Prob$.
 $\MK_{\Lambda}$ is finite on $\Cst_{\Lambda}$: for $L_{\Lambda}(T)\le1$,
 (iv) and (ii) give $|\omega(T)-\omega'(T)|\le W_{1}(S^{*}\omega,
@@ -459,10 +473,13 @@ mean
 \,\widehat f\,\bigr]=K_{s,\Lambda}*f,\qquad
 K_{s,1}(r)\propto\frac{J_{s+1}(r)}{r^{s+1}},
 \end{equation}
-as its reconstruction map. Two measured facts rule it out as a lift.
+as its reconstruction map. Two facts rule it out as a lift.
 
-\emph{It does not preserve positivity.} \textbf{[MEASURED]} $K_{s,1}$
-oscillates: $\min K/\max K=-0.071,-0.059,-0.029,-0.009$ at
+\emph{It does not preserve positivity.} \textbf{[INTERNAL THEOREM]}
+$J_{s+1}$ has infinitely many positive zeros and changes sign at each of
+them, so $K_{s,1}\propto J_{s+1}(r)/r^{s+1}$ is negative somewhere for
+every order $s$. The sizes are \textbf{[MEASURED]}:
+$\min K/\max K=-0.071,-0.059,-0.029,-0.009$ at
 $s=0.75,1,2,4$ (\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}).
 A non-negative $f$ concentrated where $K<0$ is therefore mapped to a
 function with negative values. The positivity claimed in the earlier
@@ -472,11 +489,17 @@ positivity.
 
 \begin{remark}[the Lebesgue constant exceeds $1$ --- corrected 2026-09-07]
 \label{rem:height_constant}
-\textbf{[MEASURED]} $\Berez_{\Lambda}^{s}$ is a convolution, so
+$\Berez_{\Lambda}^{s}$ is a convolution, so
 $\nabla(\Berez f)=\Berez(\nabla f)$, and by Young's inequality the
 sharp gradient gain is the Lebesgue constant
 $\Lebesgue_{s}:=\normone{K_{s}}/\int K_{s}$. This equals $1$ only for a
-non-negative kernel. Integrating over Bessel half-waves:
+non-negative kernel. \textbf{[INTERNAL THEOREM]} (a classical fact about
+Bochner--Riesz means~\cite{stein_weiss}, recorded here) $\Lebesgue_{s}>1$ at every
+finite order:\ $\int K_{s}=\widehat{K_{s}}(0)=1$ because the mean is unital,
+and $K_{s}$ is negative on a set of positive measure (above), so
+$\normone{K_{s}}>\int K_{s}=1$ (for $s\le\tfrac12$, $K_{s}\notin L^{1}$ and
+$\Lebesgue_{s}=\infty$). \textbf{[MEASURED]} illustration, integrating over
+Bessel half-waves:
 \[
 \begin{array}{l|cccccccc}
 s & 0.6 & 0.75 & 1 & 1.5 & 2 & 3 & 5 & 8\\\hline
@@ -498,7 +521,7 @@ $T\mapsto K*(\text{something})$ with a signed kernel of $L^{1}$ norm
 $\Lebesgue_{s}>1$ is not a unital positive map. The ``height'' used
 in the earlier assembly (a Lipschitz gain) was also not Latr\'emoli\`ere's
 height, which is a state-space Hausdorff distance required to
-vanish~\cite{latremoliere_metric_st,
+tend to zero along a convergent sequence~\cite{latremoliere_metric_st,
 latremoliere2025}. Both problems disappear with the squared window. Its
 kernel $|\psi_{\Lambda}|^{2}$, the squared modulus of a Bochner--Riesz
 kernel when $\widehat\psi\propto(1-|\xi|^{2})^{m}_{+}$
@@ -520,6 +543,15 @@ Theorem~\ref{thm:plane_gh}.
 \end{remark}
 
 \begin{remark}[prior art]\label{rem:prior_art}
+The template is Rieffel's~\cite{rieffel2004}:\ for coadjoint orbits of
+compact Lie groups he pairs the Berezin covariant symbol (the
+coherent-state expectation, our $\upsilon$) with its adjoint, the
+contravariant-symbol quantization, and bounds the Berezin transform by
+$\gamma=\int\rho(e,y)\,h_{P}(y)\,dy$, the first moment of the
+coherent-state transition probability $h_{P}(y)\propto|\langle
+U_{y}\xi,\xi\rangle|^{2}$ (his Theorem~2.3). Our $\gamma_{\Lambda}$ is the
+same quantity for the translates of $\psi_{\Lambda}$; in place of his
+contravariant symbol we use the compression $S$.
 The compression/lifted-state pattern, with a single first-moment
 constant, is Gaudillot-Estrada and van~Suijlekom's for compact metric
 groups~\cite{gaudillot_vs2025}; Paper~38~\cite{paper38} uses it on the
@@ -584,18 +616,24 @@ $6400$ where stated):
 \item[(a)] \emph{Unitality} (exact): $f\equiv1\Rightarrow g_{\Lambda}\equiv1$.
 \item[(b)] \emph{Positivity fails in general.} For a non-negative ring
 $f(\rho)=e^{-((\rho-\rho_{0})/0.02)^{2}}$, centred where the Ces\`aro
-kernel is most negative, $\min g_{\Lambda}=-0.016,-0.025,-0.044$ at
+kernel is most negative, $\min g_{\Lambda}=-0.016,-0.025,-0.045$ at
 $\Lambda=100,400,1600$ ($s=2$). At $s=4$ it is $-0.006$ and $-0.011$ at
 $\Lambda=400,1600$. The denominator is positive at those points. The
 interior Ces\`aro kernel has $\min/\max\approx-0.03$ ($s=2$) and
 $-0.009$ ($s=4$), matching the plane Bochner--Riesz values of
-\S\ref{subsec:not_br}. On the single observable $(\rho/R)^{2}$, $\min
+\S\ref{subsec:not_br}. The failure is also operator-level:\ the
+compressed operator $\Berez_{\Lambda}(f)=P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}$,
+restricted to the $k=0$ sector, has smallest eigenvalue
+$-0.0034,-0.0022,-0.0022$ at $\Lambda=100,400,1600$ ($s=2$) and $-0.00044$
+at $\Lambda=1600$ ($s=4$; at $s=4$, $\Lambda=400$ it is positive,
+$+0.0015$), so $\Berez_{\Lambda}$ sends a positive $f$ to a non-positive
+operator. On the single observable $(\rho/R)^{2}$, $\min
 g_{\Lambda}>0$ at $s=2$; this is where the earlier general positivity
 claim came from. The truncated heat weight $e^{-\lambda/\Lambda}$ already
 fails on $(\rho/R)^{2}$ ($\min g\approx-0.13$ at $\Lambda=200$).
 \item[(c)] \emph{The reconstruction error on the open disk decays.} For
 $f=(\rho/R)^{2}$, which is non-zero at the boundary,
-$\sup_{\rho<R}|g_{\Lambda}-f|/\supnorm{\nabla f}=0.237,0.179,0.132,
+$\sup_{\rho<R}|g_{\Lambda}-f|/\supnorm{\nabla f}=0.237,0.179,0.133,
 0.097,0.070$ at $\Lambda=100,200,400,800,1600$ (about $\Lambda^{-0.44}$). The
 maximum sits at the boundary. For an interior-supported $C^{1}$ bump the
 error falls roughly like $\Lambda^{-0.9}$ ($0.163\to0.0032$ over
@@ -618,7 +656,7 @@ direct recomputation gives $\sim10^{-11}$, in line with the sprint
 driver's own docstring. What the boundary does cause is a slower rate for
 observables that are non-zero there. The disk measurements therefore do
 \emph{not} show an obstruction. They show that the obvious reconstruction
-map fails positivity, and that no proof route is available.
+map fails positivity, so no proof route is available from this map.
 \end{remark}
 
 \begin{remark}[why no disk theorem]
@@ -680,8 +718,9 @@ Which windows have a finite first moment in dimension $n$ was not checked.
 On the flat plane, spectral truncation converges in the state-space
 Gromov--Hausdorff sense at rate $\gamma_{1}\Lambda^{-1/2}$, provided the
 lift uses a window whose squared modulus has a finite first moment. The
-four estimates behind this are proved; the final Gromov--Hausdorff step
-is argued on finite-first-moment state classes that we chose. The
+four estimates behind this are proved, and so is the final
+Gromov--Hausdorff step, on the finite-first-moment state classes we chose
+(their canonicity is open). The
 Bochner--Riesz map is not a usable lift, because its kernel changes sign.
 Replacing it by the squared modulus of such a kernel removes the
 Lebesgue constant. On the finite disk-with-cone the earlier
@@ -704,6 +743,11 @@ files cited above. The 2026-09-29 rebuild, including the retractions in
 Y.~Gaudillot-Estrada and W.~D.~van~Suijlekom, ``Convergence of spectral
 truncations for compact metric groups,'' \textit{Int.~Math.~Res.~Not.\
 IMRN} \textbf{2025}, no.~13 (2025), rnaf197;\ arXiv:2310.14733.
+
+\bibitem{rieffel2004}
+M.~A.~Rieffel, ``Matrix algebras converge to the sphere for quantum
+Gromov--Hausdorff distance,'' \textit{Mem.~Amer.~Math.~Soc.}\ \textbf{168}
+(2004), no.~796, 67--91;\ arXiv:math/0108005.
 
 \bibitem{connes_vs2021}
 A.~Connes and W.~D.~van~Suijlekom, ``Spectral truncations in

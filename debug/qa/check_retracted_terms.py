@@ -671,6 +671,139 @@ REGISTRY = [
         },
     },
     {
+        "id": "energy-not-function-of-casimir",
+        # Paper 0 abstract said E_n 'is not a function of ... the diagonal Casimir n^2-1 on the labels alone',
+        # contradicting its corrected body: on the labels E_n = -Z^2/(2(C+1)), C = n^2-1, i.e. H = -(Z^2/2)(1-Delta)^{-1},
+        # the function fixed by Fock's kernel eigenvalue 2pi^2/n (PI-approved 2026-09-29). Registered DELTA #17.
+        "pattern": r"not\s+a\s+function\s+of\s+the\s+graph\s+Laplacian,\s+nor\s+of\s+the\s+diagonal\s+Casimir",
+        "exempt_if_nearby": withdrawal_marker("energy-not-function-of-casimir"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #17; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "framework-reproduces-continuum-cft",
+        # Crediting 'the framework' with reproducing continuum CFT-on-sphere observables: Paper 50's F values are
+        # continuum zeta determinants the truncation never enters (v5.17.9). Registered DELTA #17.
+        "pattern": r"framework's\s+reproduction\s+of\s+continuum\s+CFT|closures:[^.]{0,120}bit-exact\s+CFT-on-sphere",
+        "exempt_if_nearby": withdrawal_marker("framework-reproduces-continuum-cft"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #17; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "alpha-observation-at-cubic-precision",
+        # 'the alpha observation at 8.8e-8' / 'alpha reproduced to 8.8e-8': K matches alpha^-1 to 4.8e-7; 8.8e-8 is the
+        # precision of the cubic's root. Registered DELTA #17 (sibling of k-equals-alpha-inverse-to-cubic-precision).
+        "pattern": r"\\alpha\$?\s+observation\s+at\s+\$?8\.8|\\alpha\$?\s*---?\s*\$?\\alpha\$?\s+reproduced|\\alpha\$\s+reproduced\s+to\s+\$?8\.8|number---\$\\alpha\$\s+reproduced",
+        "exempt_if_nearby": withdrawal_marker("alpha-observation-at-cubic-precision"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #17; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "posited-k-boost-class-bw-vacuum",
+        # K_alpha^W = 2J_z is POSITED (O0 open); calling it the 'wedge-restricted boost-class generator', 'the chosen
+        # K_boost', or the wedge KMS state 'the operator-system analog of the Wightman BW vacuum', or rho_W = e^{-K}/Z
+        # 'the BW canonical state', is retired: rho_W is the unit-beta Gibbs state; BW-normalised would be e^{-pi K}/Z
+        # (Paper 50 rem:bw_normalisation). Registered DELTA #17.
+        "pattern": r"boost-class\s+generator|operator-system\s+analog\s+of\s+the\s+Wightman\s+BW\s+vacuum|chosen\s+K\\?_\\?\{?boost|BW\s+canonical\s+(state|\$?s\s*=|\$?\\beta)",
+        "exempt_if_nearby": withdrawal_marker("posited-k-boost-class-bw-vacuum"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #17; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+            "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "p16-spin-resolved-formulation-as-new",
+        # Paper 16's minimal-quanta nu_min is prior art (Rittenhouse et al. 2006 Thm 1, proof Cavagnero 1986; Fabre de la
+        # Ripelle et al.); the fixed-S S_N-irrep statement is the same count as fixed (n_up, n_down). What is new is the
+        # S_N/Schur-Weyl proof route and the atomic tabulation. Registered DELTA #17.
+        "pattern": r"contribution\s+is\s+(\S+\s+){0,3}the\s+spin-resolved\s+\$?S_N\$?\s+formulation|narrower:\\?\s*the\s+spin-resolved\s+statement",
+        "exempt_if_nearby": withdrawal_marker("p16-spin-resolved-formulation-as-new"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #17; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group4_quantum_computing/paper_16_periodicity.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "k-match-inside-theorem",
+        # Paper 2 thm:three_homes ('Three homes, structural mystery') placed the empirical K ~ alpha^-1 agreement inside
+        # a Theorem environment (touches the sec. 13.5 Observation-only rule). The theorem keeps the three spectral homes
+        # and the no-common-generator statement; the approximate match moves to an Observation. Registered DELTA #17.
+        "pattern": r"\\begin\{theorem\}\[Three\s+homes,\s+structural\s+mystery\]",
+        "exempt_if_nearby": withdrawal_marker("k-match-inside-theorem"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (/qa trunk DELTA #17; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "cubic-root-transcendence-understated",
+        # The cubic's root alpha_K is PROVABLY transcendental: alpha^3 - K alpha + 1 = 0 gives K = alpha^2 + 1/alpha,
+        # so algebraic alpha_K would make K algebraic; but K = (1679/40) pi + pi^3/6 is a nonconstant Q-polynomial in pi
+        # (Lindemann). The earlier 'likely (though not proven)' understated it, and its counterexample
+        # x^2 - pi x + pi(pi-1) = 0 is false at x = 1 ((pi-1)^2 != 0). Nothing follows for the physical alpha.
+        # Registered 2026-09-29 (DELTA #17 self-check; PI-delegated).
+        "pattern": r"\\pi\s*\(\s*\\pi\s*-\s*1\s*\)\s*=\s*0|\(though\s+not\s+proven\)|root\s+is\s+likely\s+transcendental",
+        "exempt_if_nearby": withdrawal_marker("cubic-root-transcendence-understated"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-29 (DELTA #17 self-check).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated 2026-09-29 (DELTA #17 self-check; one-line Lindemann proof, PM-verified; gate 0 live)",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated 2026-09-29 (DELTA #17 self-check; one-line Lindemann proof, PM-verified; gate 0 live)",
+        },
+    },
+    {
         "id": "p50-log2-as-m2",
         # Paper 50 labelled log 2 an M2 (Seeley-DeWitt) transcendental and its F_D + 2F_s = log(2)/2 combination
         # 'the M2 sector'. Paper 18's period-ring stratification puts M2 inside (+)_k pi^{2k} Q (pure Tate, no log 2,
@@ -1247,7 +1380,7 @@ REGISTRY = [
         # accidental', and the Delta sign as 'the (-1)^F grading, not an ad hoc sign choice'.
         # PI 2026-09-28: approximately satisfies (Observation); p-value restated; sign 'consistent with'.
         # Residual 8.8e-8 vs CODATA ~1.5e-10: excluded as an exact law at ~600 sigma. S13.5-adjacent.
-        "pattern": r"physical\s+\$?\\?alpha\$?\s+satisfies|fine\s+structure\s+constant\s+satisfies\s+the\s+cubic|unlikely\s+to\s+be\s+accidental|distinguishes\s+the\s+formula\s+from\s+numerology|not\s+an\s+ad\s+hoc\s+sign\s+choice|sign\s+on\s+\$?\\?Delta\$?[^.]{0,60}is\s+the\s+standard|\\?alpha\$?\s+satisfies\s+the\s+cubic|\\alpha\$?\s+is\s+a\s+root\s+of\s+the\s+cubic|combination\s+rule\s+\$?K\s*=\s*\\alpha\^\{-1\}",
+        "pattern": r"physical\s+\$?\\?alpha\$?\s+satisfies|fine\s+structure\s+constant\s+satisfies\s+the\s+cubic|unlikely\s+to\s+be\s+accidental|distinguishes\s+the\s+formula\s+from\s+numerology|not\s+an\s+ad\s+hoc\s+sign\s+choice|sign\s+on\s+\$?\\?Delta\$?[^.]{0,60}is\s+the\s+standard|\\?alpha\$?\s+satisfies\s+the\s+cubic|\\alpha\$?\s+is\s+a\s+root\s+of\s+the\s+cubic|combination\s+rule\s+\$?K\s*=\s*\\alpha\^\{-1\}|\\alpha\$\s+is\s+(algebraic\s+over|a\s+root\s+of\s+a\s+polynomial)",
         "exempt_if_nearby": withdrawal_marker("alpha-cubic-stated-as-law"),
         "severity": "fail",
         "scope": "trunk group2 group3 group5 synthesis",
@@ -1261,7 +1394,7 @@ REGISTRY = [
             "papers/synthesis/group3_foundations_synthesis.tex",
         ],
         "cited_by": {
-            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- abstract, eq:selfconsistent, L409 sign reading, ~L826 conditional, L917/L1182 p-value, conclusion",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + summary surfaces reread 2026-09-29 (DELTA #17 sweeps A/B/C; PM-verified gate 0 live)",
             "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L2690 approximately; L3701 sign reading + conditional",
             "papers/synthesis/group5_qed_gauge_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L57, L320, L338",
             "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L1411 plain sum 4.8e-7 vs root 8.8e-8",
