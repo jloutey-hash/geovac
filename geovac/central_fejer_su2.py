@@ -498,9 +498,10 @@ def gamma_rate(
     gamma_{n_max} := integral_{SU(2)} K_{n_max}(g) d_round(e, g) dg
                    = (1 / pi) integral_{0}^{2 pi} K(chi) chi sin^2(chi/2) d chi.
 
-    Here d_round(e, g) = chi (the rotation angle is the round-S^3
-    geodesic distance from the identity to a class representative on
-    unit S^3). The conjugacy-class Haar measure is sin^2(chi/2)/pi d chi.
+    Here d_round(e, g) = chi (the rotation angle chi in [0, 2 pi] is the
+    geodesic distance from the identity in the dual-Coxeter metric,
+    Cas(ad) = h^vee, i.e. on the radius-2 S^3; on the unit S^3 the distance
+    is chi/2 and the rate constant halves, 4/pi -> 2/pi -- Paper 38). The conjugacy-class Haar measure is sin^2(chi/2)/pi d chi.
 
     Args:
         n_max: cutoff. n_max >= 1.

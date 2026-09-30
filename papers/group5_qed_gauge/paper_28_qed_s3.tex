@@ -31,8 +31,8 @@ spectrum with SO(4) vertex selection rules.  Eight structural results
 emerge.
 (1)~\textbf{T9 theorem:} the spectral zeta function of the squared
 Dirac operator $D^2$ is a two-term polynomial in $\pi^2$ with rational
-coefficients at every integer~$s$; no odd-zeta content appears
-(Theorem~\ref{thm:T9}).
+coefficients at every integer~$s$, with no odd-zeta content there
+(half-integer $s \ge 5/2$ carries odd zeta values;\ Theorem~\ref{thm:T9}).
 (2)~\textbf{Even/odd parity discriminant:} operator order (2nd vs 1st)
 is the primary transcendental discriminant---even $s$ produces
 $\pi^{\mathrm{even}}$, odd $s$ produces $\zeta(3)$, $\zeta(5)$, etc.
@@ -290,8 +290,11 @@ $S^3$ satisfies
 where $\lambda(2k) = (1 - 2^{-2k})\,\zeta_R(2k)
 = \mathrm{rational} \times \pi^{2k}$.
 At every integer~$s \ge 1$, $\zeta_{D^2}(s)$ is a two-term polynomial
-in $\pi^2$ with rational coefficients.  No odd-zeta content appears
-at any~$s$.
+in $\pi^2$ with rational coefficients;\ no odd-zeta content appears
+at any integer $s \ge 1$.  The statement is an integer-$s$ one:\ at
+half-integer $s \ge 5/2$ the same formula~\eqref{eq:T9} carries odd zeta
+values (e.g.\ $\zeta_{D^2}(5/2) = 14\,\zeta(3) - \tfrac{31}{2}\,\zeta(5)$),
+and $s = 1/2, 3/2$ are simple poles with rational residues.
 \end{theorem}
 
 \begin{proof}
@@ -307,14 +310,22 @@ integers.  Each odd-integer sum is $\lambda(2k) = (1-2^{-2k})\zeta_R(2k)$
 with the first three odd values ($m=1$) added or subtracted to correct
 the lower limit.  By the Euler--Bernoulli formula,
 $\zeta_R(2k) = (-1)^{k+1} (2\pi)^{2k} B_{2k} / (2\cdot (2k)!)$,
-so $\lambda(2k) = \mathrm{rational} \times \pi^{2k}$.  Odd-zeta values
-$\zeta_R(2k+1)$ never appear because the squared spectrum converts every
-odd power to an even power.
+so $\lambda(2k) = \mathrm{rational} \times \pi^{2k}$.  At integer $s$
+both arguments $2s-2$ and $2s$ are even, so odd-zeta values
+$\zeta_R(2k+1)$ cannot appear;\ at half-integer $s \ge 5/2$ both
+arguments are odd and $\ge 3$, so $\lambda(2s-2)$, $\lambda(2s)$ are
+rational multiples of odd zeta values (at $s = 1/2, 3/2$ an argument
+equals $1$, a pole;\ at negative half-integer $s$ the values
+$\zeta(1-2k) = -B_{2k}/(2k)$ are rational).
 \end{proof}
 
 \noindent\textbf{Verification:} Symbolic identity confirmed in
 \texttt{sympy} for $s = 1, \ldots, 10$.  Numerical agreement to
-$10^{-60}$ at $s = 2, \ldots, 20$.
+$10^{-60}$ at $s = 2, \ldots, 20$.  The integer-$s$ closed forms at
+$s = 2, 3$ and the half-integer value
+$\zeta_{D^2}(5/2) = 14\,\zeta(3) - \tfrac{31}{2}\,\zeta(5)$ are checked
+against the direct spectral sum in
+\texttt{tests/test\_paper28\_t9\_half\_integer.py}.
 
 \begin{table}[h]
 \centering
@@ -332,23 +343,29 @@ $s$ & $\zeta_{D^2}(s)$ \\
 \end{tabular}
 \end{table}
 
-\begin{remark}[$\sqrt{\pi}$ slot at half-integer $s$ vs integer $s$:\
-clarification (Sprint Mixed-Tate Test, June 2026)]
-% [retracted 2026-09-29: sqrtpi-ring-anywhere] -- correctly scoped mention (half-integer s only)
-The two-term ring
-$\sqrt{\pi}\cdot\mathbb{Q} \oplus \pi^2\cdot\mathbb{Q}$ that arises
-in heat-kernel-side analyses of $\zeta_{D^2}$ is populated only at
-\emph{half-integer} $s$ ($s = 1/2, 3/2, \ldots$), corresponding to
-the leading heat-trace poles where the spinor-fiber-dimension factor
-$\sqrt{\pi}$ enters before the standard
-$(4\pi)^{-d/2}$ volume normalization. At integer $s \ge 1$ the
-$\sqrt{\pi}$ slot is exactly empty (Table~\ref{tab:D2_values}
-above), and the values are pure $\pi^{2k}\cdot\mathbb{Q}$. After
+\begin{remark}[Where $\sqrt{\pi}$ lives:\ heat-trace coefficients,
+not $\zeta_{D^2}$ (Sprint Mixed-Tate Test, June 2026; corrected
+2026-09-30)]
+The $\sqrt{\pi}$ met in heat-kernel-side analyses of $\zeta_{D^2}$
+does not live in the spectral zeta function at any $s$.  It lives only
+in the heat-trace coefficients:\ the short-time expansion
+$\mathrm{Tr}\,e^{-tD^2} \sim \tfrac{\sqrt{\pi}}{2}\,t^{-3/2}
+- \tfrac{\sqrt{\pi}}{4}\,t^{-1/2}$ carries the $(4\pi t)^{-3/2}$-type
+prefactor of an odd-dimensional heat kernel, and the Mellin transform
+$\zeta_{D^2}(s) = \Gamma(s)^{-1}\int_0^\infty t^{s-1}\,
+\mathrm{Tr}\,e^{-tD^2}\,dt$ divides each coefficient by $\Gamma(s)$ at
+its pole.  At $s = 3/2$ this gives the residue
+$(\sqrt{\pi}/2)/\Gamma(3/2) = 1$, and at $s = 1/2$ the residue
+$(-\sqrt{\pi}/4)/\Gamma(1/2) = -1/4$:\ both rational.  Away from the
+poles, the values at half-integer $s \ge 5/2$ are odd-zeta combinations
+(Theorem~\ref{thm:T9}), not multiples of $\sqrt{\pi}$.  At integer
+$s \ge 1$ the values are pure $\pi^{2k}\cdot\mathbb{Q}$
+(Table~\ref{tab:D2_values} above). After
 the standard Connes--Chamseddine volume normalization (multiplication
-by $(4\pi)^{d/2}$ with $d=3$), the heat-trace coefficients also
-cleanly enter $\mathbb{Q}[\pi^2]$:\ Paper~51~\cite{paper51} Cor.~2.1
+of the heat-trace coefficients by $(4\pi)^{d/2}$ with $d=3$), the
+coefficients also cleanly enter $\mathbb{Q}[\pi^2]$:\ Paper~51~\cite{paper51} Cor.~2.1
 gives $a_0^{D^2} = 4\pi^2$, $a_1^{D^2} = -2\pi^2$, $a_k = 0$ for
-$k \ge 2$. The GeoVac $S^3$ M2 sub-mechanism is therefore mixed-Tate
+$k \ge 2$. At integer $s$ the GeoVac $S^3$ M2 sub-mechanism is therefore mixed-Tate
 over $\mathbb{Q}$ in the F--M sense (Paper~32~\cite{paper32}
 \S~VIII Corollary), in the strictly smaller pure-Tate sub-ring
 $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$.

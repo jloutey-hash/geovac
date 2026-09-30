@@ -81,8 +81,8 @@ def test_spectral_gearing_is_exactly_two_not_177():
 def test_frobenius_gearing_does_not_converge_to_177():
     """Frobenius-norm gearing drifts MONOTONICALLY DOWN with n_max
     (1.84 @10 -> 1.77 @15 -> 1.74 @20 -> 1.70 @30): it passes THROUGH 1.77 near
-    n_max=15 but keeps decreasing toward ~1.70, so it does NOT converge to
-    1.77. Document the drift (DOWNGRADE signal for the '~1.77 convergence').
+    n_max=15 and keeps decreasing (1.70 at 30) toward its exact limit
+    2*sqrt(6)/3 = 1.633, so it does NOT converge to 1.77. Document the drift (DOWNGRADE signal for the '~1.77 convergence').
     """
     ratios = {}
     for max_n in (10, 20, 30):

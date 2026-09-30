@@ -187,7 +187,9 @@ constant — not the existence of convergence for $\SU(2)$ scalars.
 
 The flat-structure case has been worked out in several subsequent
 papers. Hekkelman~\cite{hekkelman2022} treated the circle $S^1$
-(GH convergence of the state spaces of the Toeplitz truncations). Leimbach and
+(GH convergence of the pure state spaces of the Toeplitz truncations;\
+state-space convergence for the circle is van~Suijlekom's
+2021 result~\cite{vs2021_jgp}). Leimbach and
 van~Suijlekom~\cite{leimbach_vs2024}
 proved state-space GH convergence of spectral truncations of tori ---
 qualitatively, with no explicit rate --- using ball truncations, a
@@ -281,12 +283,15 @@ volume-ratio note in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\ga
 \end{theorem}
 
 The proof structure parallels the abelian Leimbach--van~Suijlekom
-torus argument but requires substantively more machinery on three
-fronts. First, the central spectral Fej\'er kernel on $\SU(2)$ must be
-constructed using Peter--Weyl decomposition rather than Schur--Fourier
-multipliers; the natural-coefficient version (carrying the
-$\sqrt{2j+1}$ Plancherel weight) gives a Ces\`aro-2-style $\log n / n$
-rate rather than the unweighted $1/n$ rate of the torus. Second, the
+torus argument but requires more machinery on two fronts (a third,
+listed second below, belonged to earlier versions). First, the central
+spectral Fej\'er kernel on $\SU(2)$ must be constructed using
+Peter--Weyl decomposition rather than Schur--Fourier multipliers;\ the
+natural-coefficient version (carrying the $\sqrt{2j+1}$ Plancherel
+weight) is a Ces\`aro-1 (Fej\'er) kernel whose first moment is of
+order $\log n / n$ --- the logarithm is already present for the
+circle's Fej\'er kernel and is a property of the kernel, not a
+non-abelian slowdown. Second, the
 Lipschitz comparison estimate on the round $\sthree$ requires the
 Wen--Avery 3-Y integral~\cite{avery_wen_avery1986, paper7} to
 control the multiplier matrices in the truncated basis, and depends on
@@ -642,8 +647,10 @@ $\DCH$ restores its kernel condition ($1/14$, $1/55$) but is no
 longer needed for the main theorem. Frozen falsifier for the kernel
 counts:\
 \texttt{tests/test\_p45\_kplus\_degeneracy.py::test\_spatial\_kernel\_condition\_truthful\_vs\_offdiag}
-(\texttt{tests/test\_p38\_action\_seminorm.py} backs the injectivity and
-smoothing premises, not these counts; pointer corrected 2026-09-03).
+(\texttt{tests/test\_p38\_true\_ch\_window.py} backs the injectivity
+premise on the true window, and \texttt{tests/test\_p38\_action\_seminorm.py}
+the smoothing identity;\ neither backs these counts;\ pointers corrected
+2026-09-03 and 2026-09-30).
 \end{remark}
 
 \begin{remark}[history]\label{rem:history38}
@@ -678,7 +685,7 @@ strictly stronger \emph{Gromov--Hausdorff propinquity for metric
 spectral triples} of
 Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}
 (Adv.~Math. \textbf{404} (2022), Paper No.~108393, preprint
-\texttt{arXiv:1811.10843}, 2017) --- the spectral-triple-level
+\texttt{arXiv:1811.10843}, 2018) --- the spectral-triple-level
 extension of the dual Gromov--Hausdorff propinquity of
 \cite{latremoliere2015} (J.~Math.~Pures Appl. \textbf{103} (2015))
 and of the original Gromov--Hausdorff propinquity for quantum compact
@@ -713,7 +720,7 @@ Paper~40~\cite{paper40_unified} uses the same normalisation for the
 whole compact connected semisimple class, so the present paper is
 exactly its rank-1 case.  Any uniform rule would do that;\ this one
 is the corpus's own convention and \emph{not} the field-standard one:\
-Kac's normalised form $(\theta|\theta) = 2$ gives $\mathrm{Cas}(\mathrm{ad})
+Kac's normalised form $(\theta|\theta) = 2$~\cite{kac1990} gives $\mathrm{Cas}(\mathrm{ad})
 = 2h^\vee$, radius $\sqrt2$ and constant $2\sqrt2/\pi$, so $4/\pi$ is
 convention-dependent.  (Until 2026-09-03 this subsection declared
 the unit sphere while the moment $\gamma_{\nmax}$ of
@@ -1281,7 +1288,7 @@ constant coincides numerically with
 Read as the unit-sphere quotient $\Vol(S^2)/\Vol(\sthree)$ rather than as a
 Hopf base-to-total ratio, the constant still carries pure volume content, and is one of
 the natural transcendentals on $\SU(2)$ that survives at the
-leading-order rate of any Cesaro-2-style averaging procedure.
+leading order of the central Fej\'er kernel's first moment.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -1443,12 +1450,12 @@ proceeds via the holomorphic Toeplitz form on a Hardy space. Since
 $\sthree = \SU(2)$ admits no compatible almost-complex structure
 (it is parallelisable but not K\"ahler), the natural analog is the
 central-spectral-Fej\'er-kernel form, which is the
-abelian-compact-group version
+compact-group (class-function) version
 of the same idea applied to the conjugacy-class measure on $\SU(2)$.
 The K\"ahler analog on $S^2 = \SU(2)/U(1)$ via Berezin--Toeplitz on
 the Hopf base has been worked out independently
-(see~\cite{ucp_maps_2024} and references therein) and is consistent
-with the present construction in the appropriate fibration limit.
+(see~\cite{ucp_maps_2024} and references therein);\ we have not
+checked its relation to the present construction.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -2209,12 +2216,12 @@ F.~Latr\'emoli\`ere,
 \newblock \emph{The dual Gromov--Hausdorff propinquity},
 \newblock J.~Math.~Pures Appl. \textbf{103} (2015), 303--351.
 
-\bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
+\bibitem[Latr\'emoli\`ere(2022)]{latremoliere_metric_st_2017}
 F.~Latr\'emoli\`ere,
 \newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
 triples},
 \newblock Adv.~Math. \textbf{404} (2022), Paper No.~108393, 56pp;
-\newblock preprint arXiv:1811.10843, 2017.
+\newblock preprint arXiv:1811.10843, 2018.
 
 \bibitem[Latr\'emoli\`ere(2016)]{latremoliere2016}
 F.~Latr\'emoli\`ere,
@@ -2239,12 +2246,16 @@ J.~Loutey,
 the Framework into the Marcolli--van~Suijlekom Gauge-Network Lineage},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
-% [retracted 2026-09-28: finite-four-witness-literal-identification] -- title retained as published; the finite-cutoff identification it names is a trivial integer-spectrum fact (see Open question (ii)).
+\bibitem[Kac(1990)]{kac1990}
+V.~G.~Kac,
+\newblock \emph{Infinite-Dimensional Lie Algebras}, 3rd ed.
+\newblock Cambridge University Press, 1990.
+
 \bibitem[Loutey, internal Paper~42]{paper42}
 J.~Loutey,
 \newblock \emph{Tomita--Takesaki modular structure on truncated
-$SU(2)$ spectral triples: four-witness Wick-rotation literal
-identification at finite cutoff},
+$SU(2)$ spectral triples:\ the four-witness $2\pi$ period at finite
+cutoff},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~45]{paper45}
@@ -2276,8 +2287,7 @@ bound (Kumar 1988) with a Brauer--Klimyk interior closure.
 J.~Loutey,
 \newblock \emph{The Fine Structure Constant as a Spectral Coincidence
 on the Hopf Fibration},
-\newblock GeoVac internal preprint, papers/observations (2026),
-DOI via Zenodo.
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~7]{paper7}
 J.~Loutey,

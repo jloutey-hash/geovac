@@ -7,6 +7,137 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.14] - 2026-09-30
+
+**Patch. /qa trunk FULL run #10 (certifying, unseeded) = FAIL, remediated (PI-approved). 10 LARGE, none a mathematical defect in a keystone; every keystone re-derived independently.**
+
+### The run
+- Ten Opus reviewers were dispatched: claims ×2, synthesis, citations ×2, and code ×5 (one per paper). A completeness critic followed. The PM verified every LARGE against the files.
+- **Codes and citations for Papers 0, 1 and 7: 0 LARGE.** Keystones re-derived by independent routes:
+  - P38's bound d ≤ γ, and the constant 4/π, fitted to 6 digits (A = 1.273237) on genuinely computed sums;
+  - 2π²/n to n = 12 by Funk–Hecke;
+  - C_sat = 42.7397;
+  - the block spectrum (to 3e-14);
+  - the forced count;
+  - B = 42;
+  - the Casimir ladder −17/480, −31/60480, −17/3840.
+- **The 10 LARGE:**
+  1. P38 intro still made the withdrawn torus-rate comparison ("Cesàro-2-style").
+  2. The WH1 falsifier `test_p38_action_seminorm.py` runs on the doubled model, which cannot see the top band. P38, the claim-test matrix and CLAUDE.md named it as the injectivity backing; the true backing is `test_p38_true_ch_window.py`.
+  3. P32 printed the Berezin map in the N/Z, N ≤ n_max form that P38 shows is not unital.
+  4. P32 still listed the retracted 1:2:3 grouping and the "trend toward correlation" as robust. It also printed 86.6020 as 50√3; 50√3 = 86.6025.
+  5. P32 said "categorically disjoint" rings. That is the withdrawn strong form, and it is false as stated: both rings contain ℚ.
+  6. P32 asserted Catalan's G is irrational, which is open.
+  7. P32 printed F = ζ_{Δ_{S³}}(2). That sum is 0.885; F = ζ_{1−Δ}(2).
+  8. P32's case-exhaustion step (iii)⇒(i) fails for M3: at s = 2 its output is G − ½, with no π.
+  9. P32 claimed "seven theorem-grade non-selection results". All are proof-by-argument, one has an empirical leg, and Forced-Count is a dimension count.
+  10. The group3 synthesis stated the T9 ring without its integer-s scope.
+- **About 60 SMALL.** Examples:
+  - The P7 master formula is standard Fourier–Parseval, now [PRIOR ART].
+  - The P0 block spectrum is the textbook path-graph spectrum, now credited.
+  - The Pearson "≤ 0.81" was stale since the ERI-evaluator fix; it is now 0.846/0.796 in P31, P32 and P57.
+  - P1's "curvature of the weight function" is a discrete gradient.
+  - WH3 internal-register language is out of the synthesis.
+  - A Hawkins attribution was changed to the unit-disk Berezin–Toeplitz setting.
+  - Latrémolière 2026 "closes" is now "addresses".
+  - The P38 Paper 42 bibitem now carries the current title, and a Kac bibitem was added.
+  - Stale test and module docstrings were fixed.
+
+### Remediation
+- **Gate-first.** 11 new idea-level C16 entries were added (149 total), each discrimination-tested:
+  - torus-rate-cesaro2-p38
+  - p32-connes-placeholder-findings
+  - categorically-disjoint-rings
+  - catalan-irrationality-asserted
+  - f-as-zeta-of-laplacian
+  - m3-output-carries-pi
+  - theorem-grade-non-selection
+  - m2-spectral-zeta-unscoped
+  - p38-falsifier-doubled-model
+  - pearson-081-stale
+  - berezin-mass-distribution-weight
+- **Mirror sweeps** carried the fixes into P18, P31, P40, P55, P57 and the field guide.
+  - P55 Theorem 4.1 is now scoped to integer s.
+  - P57's classification is marked [CONDITIONAL], and its gauge group is an organizing reading plus an adopted axiom.
+  - P40's kernel is Cesàro-1. Its C₃ ≤ 1 now rests on the compression proof.
+- **Guard pass** (separate step; every guard fire-tested):
+  - `tests/test_paper32_f_zeta_and_m3_scope.py` (new).
+  - `test_order_one_counts_pinned_and_grow` pins the order-one counts 43/196 → 1337/3025 that P32 had printed but never asserted.
+  - `tests/test_paper7_label_set.py` (new).
+  - `test_linear_radial_spacing_is_required`.
+
+### Pre-checkpoint self-check: 5 LARGE sibling loci + 7 SMALL, all fixed
+- **P32's theorem statement** still said "equivalent". It is now (i)⇔(ii), (ii)⇒(iii), and a scoped converse.
+- **P57:**
+  - the classification was still unscoped;
+  - the gauge group was still "autonomously generated";
+  - the retired discreteness↔compactness biconditional was still live.
+- **P40's 2Vol(base)/Vol(group) Observation** contradicted P38.
+- **P18** still claimed a disjoint ring.
+- **The claims reviewer's "ζ(odd) is not M3" SMALL was wrong.** It contradicts the owner, Paper 55 (ζ(3) ∈ M3 ∩ MT(ℤ)), so that edit was reverted.
+
+### Run notes and owed items
+- **Fire-test interference.** One reviewer fire-tested a shared test file while another ran it; this caused one transient failure. The tree is clean. Fire tests go on copies from now on.
+- **P32's slow Lorentzian panel** timed out with two uncaptured failures. Recorded as INCOMPLETE, not a defect.
+- **Owed:** re-audit P40's per-summand L3 route against P38's 2026-09-28 withdrawal of its per-harmonic route.
+
+### Verification
+- All 14 gates PASS. C10 covers the whole corpus (57 papers). C16 149/149.
+- 261 touched tests pass, including the 18 symbolic S³ proofs.
+
+## [v5.17.13] - 2026-09-30
+
+**Patch. /qa trunk DELTA #20 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 4 LARGE (count plateaued at 4). Two of the three families PRE-DATE the remediation, so per PI direction the next round is a trunk FULL run, not DELTA #21.**
+
+### The run
+- **(1) Hopf-base M1 label in wordings the v5.17.12 gate missed.**
+  - P32 `obs:pi_coulomb` said "the S² Hopf-base Weyl constant".
+  - The group1 synthesis said "the Hopf bundle produces Vol(S²) = 4π". That is false: the Hopf base S²(½) of the unit S³ has area π.
+- **(2) Paper 28 T9, the OWNER theorem, was false at half-integer s.**
+  - It said "no odd-zeta content at any s" and that "the √π slot is populated at half-integer s".
+  - PM check: the direct spectral sum at s = 5/2 equals 14ζ(3) − (31/2)ζ(5) to 30 digits. Half-integer values carry odd zeta values, never √π.
+  - The prior round had copied the √π clause into P34 and P55.
+- **(3) "From M1 alone".** Ten loci (P32, P34, P35) presented GeoVac as deriving the Hawking/Unruh β. P34's own honest-scope sentence says the opposite: β is posited at finite cutoff and M comes from the Einstein equations.
+- **Code: CLEAN.** The grading guard is sound; its commutator/anticommutator sign blind spot is noted below.
+- **Citations: CLEAN.** Confirmed: BW 1975/76, Sewell 1982, Unruh 1976, Hartle–Hawking 1976, and the Hopf submersion S³(r) → S²(r/2).
+- **Why a FULL run next.** The LARGE count stopped falling (5 → 4 → 4) because each DELTA's widening claim-impact sweep now excavates adjacent PRE-EXISTING debt: an owner-theorem error, and long-standing M1-alone phrasing. A FULL run does that excavation comprehensively and is the only shape that can certify.
+
+### Remediation (gate-first)
+- **C16 entries:**
+  - New `t9-half-integer-claims`.
+  - New `m1-alone-derives-hawking-beta` (idea-level; widened after the self-check to "from the same M1" / "M1 mechanism … reproduces").
+  - `hopf-base-measure-label` widened to any "Hopf-base <attribute>", "M1 Hopf-base", and "Hopf bundle … produces Vol".
+  - Result: 28 live loci → 0; dependents stamped (C16 138/138). The withdrawn quote in P32 L4121 is marked.
+- **P28 T9 rewritten as an INTEGER-s theorem.** It gives the parity reason, and adds: odd zeta at half-integer s ≥ 5/2; poles at s = ½, 3/2 with rational residues −¼ and 1; and the remark "Where √π lives".
+  - That remark gives the heat trace √π/2·t^{−3/2} − √π/4·t^{−1/2}, the √π removed by Γ(s), and normalised a₀ = 4π², a₁ = −2π².
+  - All of this was PM-verified by hand via the half-integer Poisson sum, and mirrored in P55.
+  - The P55 normalisation chain was made consistent (dim_S = 4 gives 8π²; P28/P51's two-component convention gives 4π²).
+- **M1-alone.** P32, P34 (about 10 loci) and P35 now read: the M1 (k = 0) volume slot re-expresses, or is consistent with, the continuum β = 8πM, T_H and β_U = 2π/a, with M external and β posited. This is a consistency check, not a derivation. Continuum theorems keep "IS".
+- **Sewell** is scoped to spacetimes admitting the analytic continuation, with Kay–Wald 1991 cited (Phys. Rep. 207, 49) and the printed year fixed to 1982. "The KMS state IS the modular flow" now says the modular flow of the KMS state is the Killing flow.
+- **SMALLs:**
+  - Remaining Hopf-base labels (P32, P7, P2, P34, P35, the g1/g6 syntheses). P33's "Hopf base area 4π" is corrected: S²(½) has area π, and 1/(4π) is a radius-independent solid-angle normalisation.
+  - P45: "boost" naming of K removed.
+  - P2: the improvement is ~700× (via the cubic's root) and ~130× (for K). P2's garbled "area is a quotient" sentence is fixed, and a₀ = √π is scoped to the four-component normalisation.
+  - P55: M1 at weight 1.
+  - P18: the factor chain is corrected.
+  - P42: test count is 70/66/4.
+  - The group3 synthesis a₀² clause is dropped.
+  - P34's "every π" list is softened, with embedding-tier routes named.
+  - The "√π·ℚ half" wording is removed in P34 and P60.
+  - The half-integer odd-zeta claim is scoped to s ≥ 5/2, since at negative half-integers ζ(1−2k) is rational.
+- **Guards (all fire-tested):**
+  - `tests/test_paper28_t9_half_integer.py` (new): closed forms at s = 2, 3; half-integer odd zeta at 5/2 (31/2 → 15/2 FIRED); poles and heat-trace coefficients (a wrong a₁ FIRED; a √π-valued residue FIRED).
+  - The synthetic grading test now also checks D + ½ (grading 0). A commutator-for-anticommutator swap FIRED.
+
+### Pre-checkpoint self-check: 2 LARGE + 6 SMALL, all fixed
+- **LARGE:** two M1-alone stragglers, P32 L3722 and P34 L10281; the gate was widened.
+- **SMALLs:** as listed above (the s ≥ 5/2 scope, the P33 area, the P34 "every π", the √π-half residue, P2, the test coverage).
+- **The mathematics** (T9, residues, heat trace, the P55 chain, the P18 factors) was confirmed independently.
+
+### Verification
+- All 14 gates PASS; C10 whole corpus (57 papers); C16 138/138.
+- Touched tests pass, including the 18 symbolic S³ proofs.
+
 ## [v5.17.12] - 2026-09-29
 
 **Patch. /qa trunk DELTA #19 (claim-impact, unseeded) = DEFECTS, remediated with an idea-level gate approach (PI-approved). 4 LARGE (12 → 8 → 5 → 4); code and citations CLEAN.**

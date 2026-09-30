@@ -471,7 +471,9 @@ def test_grading_leg_can_return_nonzero():
     operators 1, 1 (x) A, 1 (x) B (A, B generic Hermitian 2x2) with D = sigma_z (x) 1.
     Commutant = M_2 (x) 1 (dim 4); grading = span{sigma_x, sigma_y} (x) 1 (dim 2).
     Rejects a helper whose grading count is stuck at 0 (the true-window
-    grading == 0 assertions would then be vacuous)."""
+    grading == 0 assertions would then be vacuous), and -- via the shifted D
+    whose spectrum is not +/- paired -- a helper that tests commutation instead of
+    anticommutation."""
     rng = np.random.default_rng(7)
     A = rng.standard_normal((2, 2)) + 1j * rng.standard_normal((2, 2))
     B = rng.standard_normal((2, 2)) + 1j * rng.standard_normal((2, 2))
@@ -480,6 +482,9 @@ def test_grading_leg_can_return_nonzero():
     Ts = np.array([np.eye(4), np.kron(I2, A), np.kron(I2, B)])
     D = np.kron(np.diag([1.0, -1.0]), I2)
     assert _commutant_and_grading_dims(Ts, D) == (4, 2)
+    # sign check: D + 1/2 has no +/- paired spectrum, so NOTHING anticommutes with it
+    # (grading 0), while a helper that used the commutator instead would return 2.
+    assert _commutant_and_grading_dims(Ts, D + 0.5 * np.eye(4)) == (4, 0)
 
 
 # ---------------------------------------------------------------- Route C

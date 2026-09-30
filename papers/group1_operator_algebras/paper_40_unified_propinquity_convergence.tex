@@ -95,6 +95,8 @@ For each cutoff $\Lammax > 0$, let
 $\Tcal_\Lammax = (\Op_\Lammax, \Hilb_\Lammax, P_\Lammax \Dop_G P_\Lammax)$
 denote the Connes--van~Suijlekom spectral truncation obtained by
 projection onto irreducibles with Casimir~$\le \Lammax^2$. We prove that
+(for $\SU(2)$;\ for general $G$ conditionally on the per-group
+spin-window decomposition, see below)
 $\Tcal_\Lammax$ converges to $\Tcal_G$ in van~Suijlekom's state-space
 Gromov--Hausdorff distance for metric spectral triples, with
 \begin{equation*}
@@ -1058,17 +1060,21 @@ Fej\'er estimate'', where the circle constant is computed in closed
 form and measured against the $\SU(2)$ value:\
 \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}). The
 $\sqrt{\dim V_\pi}$ Plancherel weighting in
-Definition~\ref{def:central_fejer_general} produces a Ces\`aro-$2$-style
-spectral kernel rather than the unweighted Ces\`aro-$1$ Dirichlet kernel
-of~\cite{leimbach_vs2024}.  (An earlier version said this weighting
+Definition~\ref{def:central_fejer_general} produces the central
+Fej\'er-type (squared-Dirichlet, Ces\`aro-$1$) spectral kernel, the
+compact-group analogue of the spectral Fej\'er kernel
+% [retracted 2026-09-30: torus-rate-cesaro2-p38] -- quoted withdrawn label
+of~\cite{leimbach_vs2024} (an earlier ``Ces\`aro-$2$-style'' label is
+withdrawn, 2026-09-30, following Paper~38).  (An earlier version said this weighting
 is what gives the $\log \Lammax / \Lammax$ rate, ``rather than the
 $1/\Lammax$ rate of the abelian torus'' in~\cite{leimbach_vs2024};
 that reference states no such rate, and the logarithm is already
 carried by the circle's Fej\'er kernel, Paper~38
-Remark~rem:circle\_fejer, so the contrast is withdrawn, 2026-09-28.) \textbf{[OBSERVATION]} Both constants are
-of the form $2\Vol(\text{base})/\Vol(\text{group})$
-($2\Vol(S^0)/\Vol(S^1) = 2/\pi$; $2\Vol(S^2)/\Vol(\SU(2)) = 4/\pi$);
-the universality across the semisimple class is the statement that
+Remark~rem:circle\_fejer, so the contrast is withdrawn, 2026-09-28.)  No common
+``$2\Vol(\text{base})/\Vol(\text{group})$'' form is claimed (Paper~38):\
+on the unit-radius spheres the $\SU(2)$ quotient
+$\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$ equals the circle constant, and $4/\pi$
+is its dual-Coxeter value;\ the universality across the semisimple class is the statement that
 every simple factor sees the rank-$1$ ($\SU(2)$) constant through the
 Plancherel $\times$ Vandermonde cancellation, discussed further in
 \S\ref{sec:universal}. (An earlier version of this remark stated the
@@ -1192,7 +1198,15 @@ behaviour for $\SU(2)$.
 \subsubsection{Analytical proof of (INT) at low rank, on PRV summands,
 and structural reduction at all ranks}\label{sec:L3_analytical}
 
-\paragraph{Status of the rigorous coverage.} Four classes of summands
+\paragraph{Status of the rigorous coverage.} The bound $C_3(G) \le 1$
+itself follows directly by compression, as in Paper~38 Lemma~L3:\ the
+truncation projection commutes with the Dirac operator and contracts
+operator norms, so $\norm{[D, P M_f P]} \le \norm{[D, M_f]} =
+\norm{\nabla f}_{L^\infty}$ for every $f$, independently of the
+per-summand route below (Paper~38 withdrew its own per-harmonic route
+on 2026-09-28;\ the per-summand route here has not been re-audited
+against that withdrawal, so the coverage statements that follow are
+subject to it).  Four classes of summands
 $\sigma \subset \pi \otimes \pi'^*$ are now rigorously covered at all
 ranks:\ (i) the trivial-$\lambda$ case, (ii) the Cartan-product
 summand, (iii) \emph{all PRV (Parthasarathy--Ranga

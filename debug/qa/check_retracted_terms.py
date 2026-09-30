@@ -783,13 +783,240 @@ REGISTRY = [
         },
     },
     {
+        "id": "t9-half-integer-claims",
+        # Paper 28 T9 is an INTEGER-s theorem: zeta_{D^2}(s) = 2^{2s-1}[lambda(2s-2) - lambda(2s)] in (+)_k pi^{2k} Q at integer
+        # s. At half-integer s it carries ODD zeta values (zeta_{D^2}(5/2) = 14 zeta(3) - (31/2) zeta(5), PM-verified to 30
+        # digits) and never sqrt(pi); sqrt(pi) lives only in the heat-trace coefficients a_k before division by Gamma(s).
+        # Retires 'no odd-zeta content at any s' and 'the sqrt(pi) slot is populated only at half-integer s'. DELTA #20.
+        "pattern": r"No\s+odd-zeta\s+content\s+appears\s+at\s+any\s*~?\s*\$s\$|populated\s+only\s+at\s+(?:\\emph\{)?half-integer|slot\s+is\s+populated\s+only\s+at",
+        "exempt_if_nearby": withdrawal_marker("t9-half-integer-claims"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #20, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group5_qed_gauge/paper_28_qed_s3.tex": "remediated 2026-09-30 (DELTA #20 idea-level sweeps X/Y; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-30 (DELTA #20 idea-level sweeps X/Y; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated 2026-09-30 (DELTA #20 idea-level sweeps X/Y; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "m1-alone-derives-hawking-beta",
+        # IDEA-LEVEL: that the framework's M1 mechanism (alone) produces / reproduces beta = 8 pi M, T_H, beta_U or the shared
+        # 2pi. M comes from the Einstein equations and at finite cutoff the generator and beta are POSITED (P34's own honest
+        # scope: 'a consistency reproduction of the continuum chain, not a derivation of beta from M1'). Correct: the M1 volume
+        # slot re-expresses / is consistent with the continuum value. Registered DELTA #20 (PI-approved).
+        "pattern": r"M1[^.]{0,120}?\balone\b|M1\s+mechanism\s+produces\s+\$\\beta|reproduc\w*\s+(?:this\s+)?\$?\\beta(?:_\{?\w+\}?)?\s*=\s*[^$]{0,20}\$?\s+from\s+(?:the\s+)?(?:framework's\s+)?M1|reproduc\w*[^.]{0,40}?\$T_[HU]\b[^.]{0,80}?\bfrom\s+(?:the\s+)?(?:framework's\s+)?M1|reproduc\w*\s+a\s+shared\s+\$2\\pi|from\s+the\s+same\s+M1|M1\s+mechanism[^.]{0,60}?\breproduces",
+        "exempt_if_nearby": withdrawal_marker("m1-alone-derives-hawking-beta"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #20, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (DELTA #20 idea-level sweeps X/Y; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated 2026-09-30 (DELTA #20 idea-level sweeps X/Y; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated 2026-09-30 (DELTA #20 idea-level sweeps X/Y; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "torus-rate-cesaro2-p38",
+        # Paper 38's kernel is Cesaro-1 (Fejer); its log n/n moment is a kernel property already present on the circle, and Leimbach-van Suijlekom state no torus rate. Retires 'Cesaro-2-style log n/n rate rather than the unweighted 1/n rate of the torus'. FULL #10.
+        "pattern": r"rate\s+of\s+(?:the\s+)?torus|unweighted\s+\$1\s*/\s*n\$\s+rate|Ces\\`?aro-2|Cesaro-2",
+        "exempt_if_nearby": withdrawal_marker("torus-rate-cesaro2-p38"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": "remediated 2026-09-30 (FULL #10 mirror check; PM-verified gate 0 live)",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "p32-connes-placeholder-findings",
+        # Paper 32 R3.1 retracts the n_max=2 1:2:3 rational grouping (placeholder artifact) and the 'trend toward correlation' reading (sign flips under physical values); they survived as live 'robust' findings. FULL #10.
+        "pattern": r"trend\s+is\s+weakly\s+toward\s+correlation|rational\s+ratios\s+at\s+\$n_\{\\max\}\s*=\s*2\$\)\s+are\s+robust|group\s+into\s+ratios\s+\$1\s*:\s*2\s*:\s*3\$",
+        "exempt_if_nearby": withdrawal_marker("p32-connes-placeholder-findings"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "categorically-disjoint-rings",
+        # The inner-factor ring 'categorically disjoint' from M1/M2/M3 is the withdrawn strong form ('provably disjoint', 2026-09-03) and false as stated (both contain Q); Observation-level: shares no generator. FULL #10.
+        "pattern": r"categorically\s+disjoint\s+from\s+(?:where|the\s+outer|M1|\$?M_?1)|\\emph\{categorically\s+disjoint\}\s+from|forced\s+to\s+a\s+sub-ring\s+categorically",
+        "exempt_if_nearby": withdrawal_marker("categorically-disjoint-rings"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/synthesis/geovac_field_guide.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "catalan-irrationality-asserted",
+        # The irrationality of Catalan's G is open; 'Apery-style irrationality of Catalan G' asserted it and made an M1/M3 separation look proved. FULL #10.
+        "pattern": r"irrationality\s+of\s+Catalan|Catalan(?:'s)?\s+(?:\$G\$\s+)?is\s+irrational",
+        "exempt_if_nearby": withdrawal_marker("catalan-irrationality-asserted"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "f-as-zeta-of-laplacian",
+        # F = pi^2/6 = zeta_{1-Delta}(2) = sum n^2 n^-4; zeta_{-Delta}(2) = sum_{n>=2} n^2/(n^2-1)^2 = 0.885 is not F. Retires 'F equals zeta_{Delta_{S^3}}(2)'. FULL #10.
+        "pattern": r"equals\s+\$\\zeta_\{\\Delta_\{S\^3\}\}\(2\)|F\s*=\s*\\zeta_\{\\Delta_\{S\^3\}\}\(2\)",
+        "exempt_if_nearby": withdrawal_marker("f-as-zeta-of-laplacian"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "m3-output-carries-pi",
+        # M3's closed form beta(s)-beta(s-2) at s=2 gives G - 1/2, with no pi; so 'each mechanism's own output carries pi' is false and the case-exhaustion (iii)=>(i) leg holds only for M1/M2. FULL #10.
+        "pattern": r"[Ee]ach\s+mechanism's\s+own\s+output\s+carries|every\s+mechanism[^.]{0,30}carries\s+\$\\pi",
+        "exempt_if_nearby": withdrawal_marker("m3-output-carries-pi"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "theorem-grade-non-selection",
+        # The Paper 32 VIII non-selection results are all [PROOF-BY-ARGUMENT] (one with an empirical leg), and the Forced-Count Theorem is a dimension count, not a non-selection result. Retires 'theorem-grade non-selection results' / 'fully theorem-bound'. FULL #10.
+        "pattern": r"theorem-grade\s+non-selection|at\s+theorem-grade\s+level|fully\s+theorem-bound|\btheorem-bound\s+at",
+        "exempt_if_nearby": withdrawal_marker("theorem-grade-non-selection"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/synthesis/geovac_field_guide.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "m2-spectral-zeta-unscoped",
+        # Paper 28 T9 / Paper 55 M2: spectral-zeta values lie in (+)_k pi^{2k} Q only at INTEGER s (half-integer s >= 5/2 carries odd zeta). The synthesis stated it unscoped. FULL #10.
+        "pattern": r"spectral-zeta\s+values\s+it\s+produces\s+lie|zeta\s+values\s+(?:it\s+)?produces?\s+lie\s+in\s+the\s+pure-Tate",
+        "exempt_if_nearby": r"integer|" + withdrawal_marker("m2-spectral-zeta-unscoped"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "p38-falsifier-doubled-model",
+        # test_p38_action_seminorm.py's T1 checks per-band rank on the DOUBLED model and cannot see the top band; the true-window injectivity premise is backed by test_p38_true_ch_window.py. FULL #10.
+        "pattern": r"action\\_seminorm\.py\}\s+backs\s+the\s+injectivity",
+        "exempt_if_nearby": withdrawal_marker("p38-falsifier-doubled-model"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "pearson-081-stale",
+        # After the 2026-08-29 ERI-evaluator fix the best resolvent Pearson values are 0.846 (n_max=2) and 0.796 (n_max=3), asserted in tests/test_paper31_two_body.py; '<= 0.81' and '0.81 / 0.75' are retired. FULL #10.
+        "pattern": r"Pearson[^.]{0,40}?\\le\s*0\.81|Pearson\s+correlation\s+\(\$0\.81\$|\$0\.81\$\s+at\s*\n?\s*\$n_\{\\max\}\s*=\s*2\$,\s*\$0\.75\$",
+        "exempt_if_nearby": r"retired|" + withdrawal_marker("pearson-081-stale"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "berezin-mass-distribution-weight",
+        # Paper 38: the Berezin map with the mass distribution N/Z over N <= n_max is not unital (B(1) = Z^-1 I); the correct weight is the multiplier symbol sigma(N) over N <= 2n_max-1. Paper 32 still printed the N/Z form as current. FULL #10.
+        "pattern": r"Plancherel\s+symbol\s+\$\\hat\{K\}_\{n_\{\\max\}\}\(N\)\s*=\s*N/Z|\\sum_\{N\s*\\le\s*n_\{\\max\}\}\\sum_\{L,M\}\s*\\hat\{K\}",
+        "exempt_if_nearby": withdrawal_marker("berezin-mass-distribution-weight"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #10, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #10 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "hopf-base-measure-label",
         # The M1 mechanism's name 'Hopf-base measure' is a misnomer: M1 is the k=0 VOLUME SLOT of the master
         # Mellin engine (Paper 18 sec. III.7), not a Hopf base-to-total ratio, and the 4/pi GH-rate constant is the
         # unit-sphere volume quotient (convention-dependent), not a Hopf-base quantity. Swept corpus-wide 2026-09-29
         # (77 loci, 16 papers); one explained historical mention in Paper 18 carries the marker. Genuine geometry
         # ('a quarter of the area of the Hopf base S^2') stays silent. Registered DELTA #19 (PI-approved).
-        "pattern": r"Hopf[- ](?:base|bundle)\s+(?:measure|volume)|Hopf[- ]measure|quarter\s+of\s+the\s+area\s+of\s+the\s+Hopf\s+base",
+        "pattern": r"Hopf[- ](?:base|bundle)\s+(?:measure|volume)|Hopf[- ]measure|quarter\s+of\s+the\s+area\s+of\s+the\s+Hopf\s+base|Hopf[- ]base[- ](?:Weyl|coefficient|calibration|family|constant|measure)|M1\s+Hopf[- ]base|Hopf/\$S\^3\$-measure|Hopf\s+bundle[^.]{0,60}?produces\s+\$?\\(?:Vol|mathrm\{Vol\})|Hopf[- ]bundle\s+topological\s+measure|Hopf-base\s+solid-angle",
         "exempt_if_nearby": withdrawal_marker("hopf-base-measure-label"),
         "severity": "fail",
         "scope": "trunk group1 group3 group4 group5 group6 synthesis",

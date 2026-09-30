@@ -413,10 +413,11 @@ def test_order_zero_weyl(n_max):
 
     The residual scales as the SO(4) Wigner-3j coupling strengths
     between Fock shells (which are O(1) numbers, not O(epsilon) small).
-    The order-zero failure is therefore a finite-resolution artifact
-    of the truncation -- it should disappear in the n_max -> infinity
-    limit by the GH-convergence theorem (which IS the recovery of
-    classical commuting multiplications).
+    Paper 32 (2026-09) MEASURES the order-zero failure GROWING with
+    n_max (failing fraction 63% -> 86% -> 92% at n_max = 2, 3, 4); the
+    older reading that it is a finite-resolution artifact which the
+    GH-convergence theorem removes is refuted. This test pins only that
+    the failure is present.
     """
     op_sys = SpinorTruncatedOperatorSystem(n_max)
     J = build_J_weyl(n_max)
@@ -429,7 +430,7 @@ def test_order_zero_weyl(n_max):
         # Structural failure expected; document it
         assert not ok, (
             f"n_max={n_max} order-zero is expected to FAIL "
-            f"(finite-resolution artifact); got ok={ok}"
+            f"(measured to grow, Paper 32); got ok={ok}"
         )
         n_fail = len(failures)
         max_res = max(r for _, _, r in failures)
@@ -456,7 +457,7 @@ def test_order_zero_full_dirac(n_max):
     else:
         assert not ok, (
             f"n_max={n_max} order-zero is expected to FAIL "
-            f"(finite-resolution artifact); got ok={ok}"
+            f"(measured to grow, Paper 32); got ok={ok}"
         )
         n_fail = len(failures)
         max_res = max(r for _, _, r in failures)
@@ -493,7 +494,7 @@ def test_order_one_full_dirac_truthful(n_max):
     else:
         assert not ok, (
             f"n_max={n_max} order-one is expected to FAIL "
-            f"(finite-resolution artifact); got ok={ok}"
+            f"(measured to grow, Paper 32); got ok={ok}"
         )
         n_fail = len(failures)
         max_res = max(r for _, _, r in failures)

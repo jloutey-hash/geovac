@@ -58,7 +58,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 |:------|:------:|:----------|
 | 0 `Paper_0_Geometric_Packing.tex` | **KEYSTONE** | The packing axiom; K = −1/16; nodes are quantum numbers |
 | 1 `paper_1_spectrum.tex` | **KEYSTONE** | Spectral graph theory; O(N) eigenvalue methods |
-| 7 `Paper_7_Dimensionless_Vacuum.tex` | **KEYSTONE** | S³ conformal equivalence, 18 symbolic proofs — most-cited paper in the corpus |
+| 7 `Paper_7_Dimensionless_Vacuum.tex` | **KEYSTONE** | S³ conformal equivalence, 18 symbolic checks (ten limiting-case/definitional/non-discriminating); graph→S³ convergence a WALL — most-cited paper in the corpus |
 | 18 `paper_18_exchange_constants.tex` | ACTIVE | Transcendental taxonomy; master Mellin engine M1/M2/M3 |
 | 22 `paper_22_angular_sparsity.tex` | **KEYSTONE** | Potential-independent angular sparsity theorem (underwrites the Pauli scaling) |
 | 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (7 catalogued, 6 standing) |
@@ -75,7 +75,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 |:------|:------:|:----------|
 | 29 `paper_29_ramanujan_hopf.tex` | ACTIVE | Hopf graphs are Ramanujan; graph-RH is a finite-size statement |
 | 32 `paper_32_spectral_triple.tex` | **KEYSTONE** | The GeoVac spectral triple; Connes axiom audit; §VIII case-exhaustion + non-selection theorems |
-| 38 `paper_38_su2_propinquity_convergence.tex` | **KEYSTONE** | **Unconditional** state-space GH convergence at rate (4/π)·log n/n (2026-06-10) |
+| 38 `paper_38_su2_propinquity_convergence.tex` | **KEYSTONE** | **Unconditional** state-space GH convergence of the true-window truncations (commutative factor; 2026-06-10); displayed rate (4/π)·log n/n in the dual-Coxeter normalisation (2/π on the unit S³) is [INTERNAL THEOREM + MEASURED] |
 | 39 `paper_39_tensor_propinquity_convergence.tex` | ACTIVE | Tensor-product convergence (two focal lengths) |
 | 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate universal across compact connected semisimple Lie groups (retitled 2026-09-02; a circle factor carries 2/π) |
 | 42 `paper_42_modular_hamiltonian_four_witness.tex` | ACTIVE | Tomita–Takesaki modular structure on truncated SU(2): finite 2π period closure, automatic for the posited integer-spectrum generator (no finite-cutoff four-witness identification; O0 open). §11 = Krein (3,1) carrier extension, absorbed from the archived Paper 43 |

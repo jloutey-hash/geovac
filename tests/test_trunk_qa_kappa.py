@@ -199,7 +199,8 @@ def test_bridge_matching_eight_is_two_times_coordination_not_fock_jacobian():
     #    There is no map carrying d_max=4 (coordination of the binary graph)
     #    onto Omega(0)=2 (conformal factor) that is forced by the construction.
     #    Concretely: perturb the energy target OR the coordination and the
-    #    matching kappa moves, while the geometric c^2(n,0) is rigidly 1/16.
+    #    matching kappa moves, while the geometric c^2(n,0) is rigidly 1/4
+    #    (so 1/16 = c^2/4 = 1/Omega^4(0) is fixed).
     #    => They are independent; the agreement is a numerical coincidence.
 
     # (a) geometric side is target-INDEPENDENT (no E_target appears):

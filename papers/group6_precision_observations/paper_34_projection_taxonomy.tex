@@ -107,8 +107,9 @@ In the other language, GeoVac is a discrete spectral triple in the
 Marcolli--van~Suijlekom lineage of graph-spectral-triple
 constructions (Paper~32), with a heat-kernel expansion that
 reproduces the QED $\beta$-function at one loop (Paper~28) and
-recovers seven of eight QED selection rules with a single Hopf-base
-calibration constant $1/(4\pi)$ per loop (Paper~33).
+recovers seven of eight QED selection rules with a single
+calibration constant $1/(4\pi)$ per loop (the unit-$S^2$ Weyl /
+two-dimensional heat-kernel normalisation; Paper~33).
 
 These two languages are not in conflict, and we have not been able
 to choose between them, because they are descriptions of two
@@ -549,8 +550,8 @@ The $\alpha$-power index $n$ in iterated applications of this projection
 counts loop order; per-iteration transcendental content is the
 $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ ring of the integer-$s$ zeta values
 (T9 theorem, Paper~28;\ the heat-kernel $\sqrt{\pi}$ prefactor is a
-normalisation, not ring content) and the $1/(4\pi)$ vector-photon Hopf-base calibration per
-loop (\S~\ref{sec:proj_vector_photon} in Coulomb gauge, \S~\ref{sec:proj_gauge_choice}).
+normalisation, not ring content) and the $1/(4\pi)$ vector-photon calibration (the
+unit-$S^2$ Weyl normalisation) per loop (\S~\ref{sec:proj_vector_photon} in Coulomb gauge, \S~\ref{sec:proj_gauge_choice}).
 The finite parts of $\alpha^n$ observables are framework-native at every
 $n$; UV-divergent multi-loop integrands are reproduced structurally
 (LS-8a verdict, Paper~36~\S~VII) but their counterterm-renormalized
@@ -757,12 +758,15 @@ is open, Paper~42's O0):\ Bisognano--Wichmann establishes that the modular autom
 of the algebra of observables localized in a Rindler wedge, with
 respect to the vacuum state, IS the unitary representation of the
 Lorentz boost subgroup that maps the wedge to itself; Sewell 1982
-generalizes this to globally hyperbolic Lorentzian manifolds with
-bifurcate Killing horizons, including Schwarzschild at
-$\beta_{\mathrm{cigar}} = 8\pi M$.  Sprint TD Track~4
-(\texttt{debug/sprint\_td\_track4\_memo.md}, May 2026) reproduces this
-$\beta = 8\pi M$ from the framework's M1 ($k = 0$ volume slot) /
-$\mathrm{Vol}(S^1_\tau)$ mechanism alone.  Track~D
+extends this to spacetimes with bifurcate Killing horizons, including
+Schwarzschild at $\beta_{\mathrm{cigar}} = 8\pi M$ (for spacetimes
+admitting the requisite analytic continuation;\ the rigorous general
+result is Kay--Wald 1991~\cite{kay_wald1991}).  Sprint TD Track~4
+(\texttt{debug/sprint\_td\_track4\_memo.md}, May 2026) checks that this
+continuum $\beta = 8\pi M$ is consistent with, and re-expressed by, the
+framework's M1 ($k = 0$ volume slot) / $\mathrm{Vol}(S^1_\tau)$ reading;\
+it does not derive it:\ $M$ comes from the Einstein equations, and
+$\beta$ is posited by horizon regularity.  Track~D
 (\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May 2026)
 documents the structural correspondence between the framework-side
 $2\pi$ and the Lorentzian-side modular-flow / boost-orbit period.
@@ -781,9 +785,10 @@ off-precision row in \S~\ref{sec:offprecision} (error class
 C, $M$ external Einstein-equations input, machinery-witness only); the
 Unruh pendant (\texttt{debug/unruh\_pendant\_memo.md}, May 2026,
 a sprint-scale follow-up to Track~D) closes the Track~D~\S 5.4 flag with
-$T_U = a/(2\pi)$ as the third Wick-rotation witness via the same M1
-($k = 0$ volume slot) / $\mathrm{Vol}(S^1)$ mechanism (Hawking--Sewell--BW--Unruh
-four-witness chain).  See Paper~32~§VIII Remark on the
+$T_U = a/(2\pi)$ as the third Wick-rotation witness, re-expressed by the
+same M1 ($k = 0$ volume slot) / $\mathrm{Vol}(S^1)$ reading ($a$ external;\
+a consistency check on the continuum Hawking--Sewell--BW--Unruh
+four-witness chain, not a derivation of $\beta$).  See Paper~32~§VIII Remark on the
 Bisognano--Wichmann reading and Paper~35~§VIII for the framework-level
 structural correspondence.  This is a structural correspondence, not a
 literal identification: the operator-level statement
@@ -2473,10 +2478,11 @@ via the published Wick-rotation prescription.\\
 \textbf{Used in:} the Hawking-temperature off-precision catalogue
 row in \S~\ref{sec:offprecision} (error class C, $M$ external
 Einstein-equations input, machinery-witness only); Sprint TD Track~4's
-reproduction of $T_H = 1/(8\pi M)$ on the Euclidean Schwarzschild
-cigar from M1 alone; Sprint Unruh-pendant's reproduction of
-$T_U = a/(2\pi)$ on the Euclidean Rindler wedge from the same M1
-mechanism; the structural-correspondence reading of
+consistency check that the continuum $T_H = 1/(8\pi M)$ on the
+Euclidean Schwarzschild cigar (with $M$ external and $\beta$ posited)
+is re-expressed by the M1 ($k = 0$ volume slot) reading; Sprint
+Unruh-pendant's parallel check for $T_U = a/(2\pi)$ on the Euclidean
+Rindler wedge; the structural-correspondence reading of
 $\beta = 2\pi / (\text{surface gravity})$ that unifies Hawking,
 Sewell, Bisognano--Wichmann, and Unruh as four faces of a single
 Wick-rotation theorem.  Any future framework-side observable whose
@@ -2484,14 +2490,16 @@ physical interpretation requires Lorentzian signature (Wightman-class
 expectation value of a real-time-ordered operator product, KMS state
 on a Lorentzian wedge algebra, real-time Schwinger--Keldysh closed
 time contour) consumes this projection.\\
-\textbf{Empirical anchor:} the four-witness Wick-rotation theorem,
-each face reproducing a shared $2\pi = \mathrm{Vol}(S^1)$ from the
-M1 mechanism:
+\textbf{Empirical anchor:} the four-witness Wick-rotation theorem
+(a continuum result), each face carrying a shared
+$2\pi = \mathrm{Vol}(S^1)$ that the M1 ($k = 0$ volume slot) reading
+re-expresses (the continuum values are inputs to that reading, not
+outputs of it):
 (i)~Hawking temperature $T_H = 1/(8\pi M) = \kappa_g / (2\pi)$ on the
 Euclidean Schwarzschild cigar, with surface gravity
 $\kappa_g = 1/(4M)$~\cite{hartle_hawking1976};
-Sprint~TD Track~4 reproduces this from M1 with sympy residual zero
-on all three identities $\beta = 8\pi M$, $T_H = \kappa_g/(2\pi)$,
+Sprint~TD Track~4 checks this against the M1 reading with sympy
+residual zero on all three identities $\beta = 8\pi M$, $T_H = \kappa_g/(2\pi)$,
 $\beta = 4M \cdot 2\pi$;
 (ii)~Sewell's identification of the Hartle--Hawking thermal state
 restricted to the Schwarzschild exterior as a KMS state at
@@ -2507,7 +2515,7 @@ $\sigma_{i \cdot 2\pi} = $ identity forced by Tomita--Takesaki KMS;
 observer at proper acceleration $a$, derived in the same Wick-rotation
 construction with $\beta_{\mathrm{Rindler}} = 2\pi / a$ on the
 Euclidean Rindler $\eta_E$-circle~\cite{unruh1976}.  Sprint
-Unruh-pendant reproduces this verbatim with the same M1 mechanism,
+Unruh-pendant checks this against the same M1 reading,
 sympy residual zero, lowest bosonic Matsubara mode $= a$, lowest
 fermionic mode $= a/2 = \pi T_U$.
 All four faces share the same $2\pi$, the circumference of the
@@ -3288,11 +3296,18 @@ the source spectrum.  Paper~35 verifies this explicitly for the
 Klein-Gordon spectrum on $S^3 \times \mathbb{R}$.
 \item \emph{Calibration $2\pi \cdot \mathbb{Q}$ tier (temporal subtype)}
 $\leftrightarrow$ observation / temporal-window projection.  This is
-the categorical home of $\pi$ in the framework: every $\pi$ that
-appears in a GeoVac observable can be traced to either (a)~a Hopf-base
-calibration~$\pi$ (Hopf bundle / vector-photon promotion), (b)~a
-spectral-action $\sqrt{\pi}\cdot\mathbb{Q}$ (heat-kernel coefficient),
-or (c)~a temporal Matsubara $2\pi/\beta$ (this projection).  The
+the categorical home of $\pi$ in the framework: the $\pi$ in the
+spectral and temporal observables catalogued here traces to one of (a)~an M1 ($k = 0$ volume slot) volume factor (e.g.\
+$\mathrm{Vol}(S^3) = 2\pi^2$, or the vector-photon $1/(4\pi)$
+unit-$S^2$ Weyl normalisation), (b)~spectral-action even-zeta content
+$\pi^{2k}\cdot\mathbb{Q}$ at integer~$s$ (the $\sqrt{\pi}$ of the
+heat-trace coefficients is a normalisation removed by $\Gamma(s)$, not
+ring content), (c)~the M3 vertex-parity Hurwitz / Dirichlet-$L$
+channel (\S~\ref{sec:proj_spinor} with vertex restriction), or
+(d)~a temporal Matsubara $2\pi/\beta$ (this projection);\ $\pi$ also
+enters through embedding-tier routes outside this list (e.g.\ the
+Feynman-parameter denominators of the Lorenz-gauge computation, and the
+genus-one elliptic periods of the embedding tier).  The
 Casimir constant on $S^3 \times S^1_\beta$ is the cleanest
 illustration: spatial-only Casimir is $1/240$ (rational, no $\pi$);
 adding $S^1_\beta$ injects $\pi$ exactly through the Matsubara
@@ -4498,8 +4513,8 @@ Fock $\circ$ observation/temporal-window
 (\S~\ref{sec:proj_observation}) at $\beta = 8\pi M$ &
 machinery-witness only & C &
 Sprint TD Track~4 (\texttt{debug/sprint\_td\_track4\_memo.md},
-May~2026) reproduces $\beta = 8\pi M$ from the framework's M1
-($k = 0$ volume slot) / $\mathrm{Vol}(S^1_\tau)$ mechanism alone (sympy
+May~2026) checks the posited $\beta = 8\pi M$ against the M1
+($k = 0$) / $\mathrm{Vol}(S^1_\tau)$ reading; not a derivation (sympy
 residual zero on $\beta = 4M\cdot 2\pi$ cigar regularity, $T_H =
 \kappa_g/(2\pi)$, lowest bosonic Matsubara mode $1/(4M) = \kappa_g$
 surface gravity).  $M$ is external Einstein-equations input, not a
@@ -4522,9 +4537,9 @@ Fock $\circ$ observation/temporal-window
 (\S~\ref{sec:proj_observation}) at $\beta_U = 2\pi/a$ &
 machinery-witness only & C &
 Unruh pendant (\texttt{debug/unruh\_pendant\_memo.md}, May~2026,
-a sprint-scale pendant follow-up to Track~D) reproduces $\beta_U = 2\pi/a$
-from the framework's M1 ($k = 0$ volume slot) /
-$\mathrm{Vol}(S^1_{\eta_E})$ mechanism alone (sympy residual zero on
+a sprint-scale pendant follow-up to Track~D) checks the posited
+$\beta_U = 2\pi/a$ against the M1 ($k = 0$) /
+$\mathrm{Vol}(S^1_{\eta_E})$ reading; not a derivation (sympy residual zero on
 $T_U$, lowest non-zero bosonic Matsubara mode equals $a$ --- the Unruh
 analog of Hawking's surface gravity --- and lowest fermionic
 Matsubara mode equals $a/2 = \pi T_U$).  Wick-rotation construction:\
@@ -8966,7 +8981,7 @@ On 2026-05-08 evening, a conversational sprint produced candidate
 spectral-zeta identifications of all four CKM Wolfenstein parameters
 with master-Mellin-engine M1 and M2 ring elements:
 $\lambda^2 \approx 1/\mathrm{Vol}(S^3) = 1/(2\pi^2)$ and
-$\bar\rho \approx 1/(2\pi)$ in the M1 Hopf-base family;
+$\bar\rho \approx 1/(2\pi)$ in the M1 ($k = 0$ volume slot) family;
 $\bar\eta \approx (\ln 2)/2 = -\zeta'(0,1/2)$ and
 $A^2 \approx \ln 2$ in the M2 chirality family.  The four-form fit
 gave 7 hits at $<1\%$ in a hand-curated 30-form prespecified basis
@@ -9154,7 +9169,7 @@ rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}
 8 & Wigner $3j$ angular coupling & T.F. & H & SU(2) rep theory; canonical universal sector. \\
 9 & Wigner $D$ rotation & T.F. & H & Spatial rotations; SU(2). \\
 10 & Wilson plaquette & M. & M & Combinatorial vocab T.F.; Marcolli-vS $=$ YM E.S. \\
-11 & Vector-photon promotion & W.M.F. & M & $1/(4\pi)$ per loop $=$ M1 Hopf-base. \\
+11 & Vector-photon promotion & W.M.F. & M & $1/(4\pi)$ per loop $=$ M1 volume factor (unit-$S^2$ Weyl). \\
 12 & Mol-frame hyperspherical & T.F. & MH & Angular separation on $\mathcal{A}$. \\
 13 & Drake--Swainson asymptotic subtraction & T.F. & H & Central tier (Paper~31 TS-C); signature-blind. \\
 14 & Rest-mass & T.F. & H & $D^2 \to D^2 + m^2\mathbb{1}$ central; signature-blind. \\
@@ -9876,8 +9891,8 @@ what makes it interesting as a slot rather than a relabel:\ the
 finite-section truncation prices $\pi^2$ (M2, the $\pi^2\cdot\mathbb{Q}$
 half --- the Kac--Murdock--Szeg\H{o} constant, obtainable with no Bessel
 function present at all), while the symbol's asymptotics at the opposite
-pole price $(2\pi)^{-1/2}$ and a $\pi/4$ branch phase (M2, the
-$\sqrt\pi\cdot\mathbb{Q}$ half).  Paper~60 \S~molecular;\ CHANGELOG
+pole price $(2\pi)^{-1/2}$ and a $\pi/4$ branch phase (an M2-side
+$\sqrt{\pi}$-type normalisation, not ring content at integer $s$).  Paper~60 \S~molecular;\ CHANGELOG
 v5.11.4.  This does not disturb the Sprint~3 completeness verdict above,
 which is scoped to the master Mellin engine's \emph{accounting}:\ the
 content here is M2 on both sides, so what candidate~(e) would add is a
@@ -10093,19 +10108,21 @@ would be a structural extension, not a projection refinement.
 $2\pi$ period.}  The Bisognano--Wichmann theorem~\cite{bisognano_wichmann1976}
 identifies the modular flow of a vacuum state restricted to a
 Rindler wedge with the unitary representation of Lorentz boosts
-preserving the wedge.  Sewell~1980~\cite{sewell1980} extends this
-to Schwarzschild geometry: the KMS state at $\beta = 8\pi M$ on the
-Euclidean cigar IS the modular flow of the Lorentz boost (more
-precisely, the Killing flow generated by the timelike Killing
-vector outside the horizon).  Sprint~TD Track~4 reproduced
-$T_H = 1/(8\pi M)$ on the Euclidean Schwarzschild cigar via the
-master Mellin engine $M_1$ ($k = 0$ volume-slot) mechanism, with
-$\beta = 8\pi M$ forced by regularity at $r = 2M$.  Under the
+preserving the wedge.  Sewell~1982~\cite{sewell1982} extends this
+to Schwarzschild geometry (given the requisite analytic continuation;\
+the rigorous general result is Kay--Wald 1991~\cite{kay_wald1991}):
+the modular flow of the Hartle--Hawking KMS state at
+$\beta = 8\pi M$ IS the Killing flow generated by the timelike Killing
+vector outside the horizon (the Schwarzschild analogue of the wedge
+boost).  Sprint~TD Track~4 checked that the continuum
+$T_H = 1/(8\pi M)$ on the Euclidean Schwarzschild cigar is re-expressed
+by the master Mellin engine $M_1$ ($k = 0$ volume-slot) reading, with
+$M$ external and $\beta = 8\pi M$ posited by regularity at $r = 2M$.  Under the
 Bisognano--Wichmann reading, \textbf{the $2\pi$ in $\beta = 2\pi/\kappa_g$
 (or in the Unruh formula $\beta = 2\pi/a$ for a Rindler observer at
 acceleration $a$) IS the period of the boost orbit, and the
 framework's $M_1$ ($k = 0$ volume-slot) signature is the same $2\pi$.}
-Sprint~TD Track~4's reproduction of the Hawking temperature therefore
+Sprint~TD Track~4's consistency check on the Hawking temperature therefore
 matches that period;\ it is not shown to be an instantiation of
 Lorentz-boost / modular-flow physics, since identifying the framework's
 generator with a boost is open (Paper~42's O0) and its $2\pi$ closure is
@@ -10263,8 +10280,9 @@ May~2026) recommended a sprint-scale documentation deliverable
 (Candidate~A) on the Bisognano--Wichmann reading of Sprint~TD
 Track~4.  Track~D~(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md},
 May~2026) delivered Candidate~A:\ five-section structural analysis
-documenting that the framework's M1 mechanism on the cigar's
-$S^1_\tau$ factor reproduces $\beta = 8\pi M$, and that under the
+documenting that the framework's M1 ($k = 0$ volume-slot) reading on
+the cigar's $S^1_\tau$ factor re-expresses the posited $\beta = 8\pi M$
+(a consistency check, not a derivation), and that under the
 verified Wick-rotation chain
 (Hartle--Hawking~1976~\cite{hartle_hawking1976};
  Sewell~1982~\cite{sewell1982};
@@ -10298,8 +10316,8 @@ admissibility.
 
 The Unruh pendant~(\texttt{debug/unruh\_pendant\_memo.md}, May~2026,
 pendant follow-up to Track~D) added the flat-space face
-$T_U = a/(2\pi)$ from the same M1 mechanism with $\beta_U = 2\pi/a$,
-completing the Hawking--Sewell--BW--Unruh four-witness chain at the
+$T_U = a/(2\pi)$, re-expressed by the same M1 reading with the
+continuum $\beta_U = 2\pi/a$ as input ($a$ external), completing the Hawking--Sewell--BW--Unruh four-witness chain at the
 framework's M1 sub-mechanism level (cf.~Paper~32~§VIII Unruh
 extension to \texttt{rem:bisognano\_wichmann\_reading} and
 Paper~35~\S~VIII \texttt{subsec:unruh\_pendant}).  The
@@ -10715,6 +10733,12 @@ induced thermal states,'' \textit{Annals of Physics}\ \textbf{141},
 % Year corrected by Track D verification pass (May 2026): earlier
 % version of this entry had 1980 (carried over from Track B scoping
 % memo); the actual publication year is 1982.
+
+\bibitem{kay_wald1991}
+B.~S.~Kay and R.~M.~Wald, ``Theorems on the uniqueness and thermal
+properties of stationary, nonsingular, quasifree states on spacetimes
+with a bifurcate Killing horizon,'' \textit{Physics Reports}\
+\textbf{207}, 49--136 (1991).
 
 \bibitem{sewell1980}
 % Backward-compatibility alias for the same Sewell 1982 reference.

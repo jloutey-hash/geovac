@@ -25,7 +25,8 @@
 from a geometric construction: uniform-density packing of
 distinguishable states on concentric isotropic shells in two
 dimensions.  Starting from two axioms---discrete binary
-distinguishability and geometric indifference (maximum entropy)---the
+distinguishability and geometric indifference (maximum entropy)---and
+the construction's structural choices (motivated, not forced), the
 construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
 isomorphic to the spherical harmonic basis $Y_{\ell m}$ with
 $\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  \textbf{[OBSERVATION]}
@@ -650,7 +651,8 @@ hierarchy.  For the $S^3$ embedding the lattice's labels are the
 operator's eigenbasis labels, the hydrogen bound-state Hamiltonian is
 the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of that operator (Fock), and
 \textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic checks of Fock's
-continuum projection chain (a graph-to-continuum
+continuum projection chain (ten of them limiting-case, definitional or
+non-discriminating) (a graph-to-continuum
 \emph{operator} convergence is not part of it:\ the edge Laplacian does
 not converge to $\Delta_{S^3}$, Sec.~\ref{sec:graph}).  At the other
 levels only the angular channel structure carries the packing labels
@@ -773,6 +775,9 @@ $n_{\max} = 30$)
 \texttt{tests/test\_paper7\_graph\_convergence.py}; 2026-09-03
 correction of an earlier ``within each $(\ell,m)$ sector'' statement).
 \textbf{[INTERNAL THEOREM]} The saturation has a closed-form rate.  Because no edge changes $\ell$, the Laplacian is block diagonal in $\ell$ and each block is the grid graph $P_{n_{\max} - \ell} \times P_{2\ell+1}$ (radial $\times$ azimuthal paths), so the whole spectrum is
+\textbf{[PRIOR ART]} the textbook Laplacian spectrum of a Cartesian
+product of path graphs (the block identification and the constant
+$C_{\mathrm{sat}}$ below are this paper's)
 \begin{equation}
   \operatorname{spec}(L) = \Bigl\{\, 2 - 2\cos\frac{j\pi}{n_{\max}-\ell}
   \;+\; 2 - 2\cos\frac{k\pi}{2\ell+1} \,\Bigr\},

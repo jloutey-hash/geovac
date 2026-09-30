@@ -94,3 +94,21 @@ def test_could_have_failed_wrong_identity():
     wrong = sp.simplify((sp.pi * d0 * k - sp.pi * d0 * (k - 1)) / (sp.pi * d0))
     assert wrong == 1                          # constant -> NOT 2k-1
     assert sp.simplify(wrong - (2 * k - 1)) != 0
+
+
+def test_linear_radial_spacing_is_required():
+    """Paper 0 (lines ~460 and ~900, [OBSERVATION]): the 2k-1 capacity needs
+    LINEAR radial spacing r_k = k d0.  For power-law radii r_k = k^p d0 the
+    annulus capacity (area in units of the unit disk) is k^{2p} - (k-1)^{2p};
+    it equals 2k - 1 for every k only at p = 1.  (FULL #10, 2026-09-30: the
+    older 'could-have-failed' control above swaps area for a perimeter law,
+    which is not an alternative spacing, so this claim had no test.)
+    WRONG ANSWER REJECTED: a non-linear spacing (p = 1/2, 3/2, 2) that still
+    gives 2k - 1."""
+    k = sp.symbols("k", positive=True, integer=True)
+    def capacity(p):
+        return sp.expand(k ** (2 * p) - (k - 1) ** (2 * p))
+    assert sp.simplify(capacity(sp.Integer(1)) - (2 * k - 1)) == 0
+    for p in (sp.Rational(1, 2), sp.Rational(3, 2), sp.Integer(2)):
+        diffs = [sp.nsimplify(capacity(p).subs(k, kk)) - (2 * kk - 1) for kk in (2, 3, 4)]
+        assert any(d != 0 for d in diffs), (p, diffs)

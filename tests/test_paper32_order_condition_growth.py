@@ -11,7 +11,8 @@ Weyl sector) prints:
   * max-abs residual 5.5e-2 -> 7.9e-2 -> 9.6e-2 at n_max = 2, 3, 4;
   * on a FIXED set of generators (the degree-1 harmonics, N = 2) the
     operator-norm residual runs 0.051, 0.068, 0.076, 0.081 at n_max = 2..5,
-    approaching a nonzero limit (~0.21 of the growing generator norm).
+    with ratio to the growing generator norm 0.225 -> 0.208, still
+    drifting; whether it tends to a nonzero limit is NOT established.
 
 WRONG ANSWER REJECTED: "the residuals decay as n_max -> infinity" (the
 finite-resolution-artifact reading an earlier version of the paper inferred
@@ -109,3 +110,39 @@ def test_fixed_generator_residual_n_max_5():
     assert abs(r5 - FIXED_GEN_PRINTED[5]) < 1e-3, f"n_max=5 residual {r5:.4f}"
     assert r5 > r4
     assert 0.19 < r5 / g5 < 0.23
+
+
+# Paper 32 audit item 5 (model order one, full-Dirac, truthful CH):
+# 43/196 failing at n_max = 2 (max residual 1.0e-1), 1337/3025 at n_max = 3
+# (2.0e-1).  Paper 32 states both counts are regression-pinned here and that
+# order one GROWS over n_max = 2, 3 (FULL #10, 2026-09-30: these were
+# printed but never asserted, and n_max = 3 was never run).
+ORDER_ONE_PRINTED = {2: (43, 196, 1.0e-1), 3: (1337, 3025, 2.0e-1)}
+
+
+def _order_one(n_max: int):
+    from geovac.full_dirac_operator_system import (
+        FullDiracTruncatedOperatorSystem, camporesi_higuchi_full_dirac_matrix)
+    from geovac.real_structure import build_J_full_dirac, verify_order_one
+    op = FullDiracTruncatedOperatorSystem(n_max)
+    D = camporesi_higuchi_full_dirac_matrix(op.basis)
+    J = build_J_full_dirac(n_max)
+    ok, failures = verify_order_one(J, op.multiplier_matrices, D, tol=1e-9)
+    n_total = len(op.multiplier_matrices) ** 2
+    max_res = max((r for _, _, r in failures), default=0.0)
+    return len(failures), n_total, max_res
+
+
+def test_order_one_counts_pinned_and_grow():
+    """Model order-one counts match the printed 43/196 and 1337/3025, and both
+    the failing fraction and the max residual INCREASE from n_max = 2 to 3.
+    WRONG ANSWER REJECTED: 'order one fails only at the smallest cutoff and
+    recovers' (a decaying count or residual)."""
+    rows = {n: _order_one(n) for n in (2, 3)}
+    for n, (nf, nt, mr) in rows.items():
+        pf, pt, pmr = ORDER_ONE_PRINTED[n]
+        assert nt == pt, f"n_max={n}: {nt} pairs, paper prints {pt}"
+        assert nf == pf, f"n_max={n}: {nf} failing, paper prints {pf}"
+        assert abs(mr - pmr) < 5e-3, f"n_max={n}: max residual {mr:.4e} vs printed {pmr}"
+    assert rows[2][0] / rows[2][1] < rows[3][0] / rows[3][1]
+    assert rows[2][2] < rows[3][2]
