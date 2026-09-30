@@ -1010,6 +1010,97 @@ REGISTRY = [
         },
     },
     {
+        "id": "case-exhaustion-equivalence-or-complete",
+        # Paper 32's pi-source case-exhaustion is [CONDITIONAL]: (ii)=>(iii) argued over the first fifteen Paper 34 projections, (i)<=>(ii) empirical, and the converse (iii)=>(i) WITHDRAWN (M2 at half-integer s and M3 at s=4 give pi-free values). Retires 'the following are equivalent', 'shown equivalent', 'stated and proven', 'the classification is complete', 'every appearance of pi in any ... observable', 'subsumes the prediction'. DELTA #21.
+        "pattern": r"finite\s+composition\s+of\s+GeoVac\s+projections[\s\S]{0,250}?following\s+are\s+equivalent|are\s+shown\s+equivalent|stated\s+and\s+proven\s+in\s+Paper~32|classification\s+is\s+complete|Every\s+appearance\s+of\s+\$\\pi\$\s+in\s+any|subsumes\s+the\s+prediction",
+        "exempt_if_nearby": withdrawal_marker("case-exhaustion-equivalence-or-complete"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #21, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/synthesis/geovac_field_guide.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "cb-norm-mass-distribution-conflation",
+        # The central smoothing maps are UCP, cb-norm 1; (2j+1)/Z is the mass distribution, not the multiplier symbol; 2/(n+1) and 4/[(n_a+1)(n_b+1)] are mass-distribution maxima, not cb-norms. Widens central-multiplier-cb-norm-2-over-n (which could not see the \cbnorm macro). DELTA #21.
+        "pattern": r"\\cbnorm\{[^$]{0,40}?\s*(?:\\;)?\s*=\s*(?:\\;)?\s*(?:\\frac\{[24]\}|[24]\s*/)|Plancherel\s+symbol\s+on\s+the\s+Avery|joint\s+Plancherel\s+symbol|joint\s+cb-norms?\s+(?:are|decreases|is\s+one\s+order)",
+        "exempt_if_nearby": withdrawal_marker("cb-norm-mass-distribution-conflation"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #21, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "discreteness-is-compactness-biconditional",
+        # Retired 2026-09-06: compactness FORCES discreteness; the converse is false (discrete spectrum = compact resolvent; Paper 24's oscillator on non-compact R^3). DELTA #21 found the biconditional live in a synthesis abstract and in Paper 57.
+        "pattern": r"discreteness\s+is\s+compactness|\\emph\{Discreteness\}\s*\$\\leftrightarrow\$\s*\\emph\{compactness\}",
+        "exempt_if_nearby": withdrawal_marker("discreteness-is-compactness-biconditional"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #21, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group6_precision_observations_synthesis.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "paper7-18-proofs-independent",
+        # Paper 7's 18 sympy items are CHECKS of Fock's continuum chain, ten of them limiting-case, definitional or non-discriminating; never 'independent proofs'. DELTA #21.
+        "pattern": r"18\s+independent\s+proofs|18\s+symbolic\s+proofs|18/18\s+symbolic\s+proofs|The\s+18\s+symbolic\s+proofs",
+        "exempt_if_nearby": withdrawal_marker("paper7-18-proofs-independent"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #21, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "f-evaluation-on-scalar-laplacian",
+        # F = pi^2/6 = zeta_{1-Delta}(2); 'the Fock-Dirichlet evaluation at s = 2 on the scalar Laplacian' is zeta_{-Delta}(2) = 0.885. Sibling of f-as-zeta-of-laplacian. DELTA #21.
+        "pattern": r"evaluation\s+at\s+\$s\s*=\s*2\$\s+on\s+the\s+scalar\s+Laplacian",
+        "exempt_if_nearby": withdrawal_marker("f-evaluation-on-scalar-laplacian"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #21, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-30 (DELTA #21 idea-level sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "hopf-base-measure-label",
         # The M1 mechanism's name 'Hopf-base measure' is a misnomer: M1 is the k=0 VOLUME SLOT of the master
         # Mellin engine (Paper 18 sec. III.7), not a Hopf base-to-total ratio, and the 4/pi GH-rate constant is the

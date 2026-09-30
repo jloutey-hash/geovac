@@ -906,7 +906,11 @@ uniform-density, concentric packing with linearly spaced radii
 ($r_k = k d_0$, so the $k$-th annulus has area proportional to
 $k^2 - (k-1)^2 = 2k - 1$) produces the angular capacity $2k - 1$ per
 shell;\ the linear spacing is required --- other radial spacings change
-the per-shell capacity.
+the per-shell capacity.  \textbf{[SYMBOLIC PROOF]} Conversely, capacity
+$2k - 1$ for every $k$ with $r_0 = 0$ forces $r_k = k d_0$:\ the
+condition $r_k^2 - r_{k-1}^2 = (2k-1) d_0^2$ telescopes to
+$r_k^2 = \sum_{j \le k} (2j-1)\, d_0^2 = k^2 d_0^2$
+(\texttt{tests/test\_trunk\_qa\_annular.py}).
 
 
 %% ================================================================

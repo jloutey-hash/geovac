@@ -112,3 +112,17 @@ def test_linear_radial_spacing_is_required():
     for p in (sp.Rational(1, 2), sp.Rational(3, 2), sp.Integer(2)):
         diffs = [sp.nsimplify(capacity(p).subs(k, kk)) - (2 * kk - 1) for kk in (2, 3, 4)]
         assert any(d != 0 for d in diffs), (p, diffs)
+
+
+def test_capacity_2k_minus_1_forces_linear_radii():
+    """Paper 0 [SYMBOLIC PROOF] (DELTA #21 upgrade): with r_0 = 0, the
+    condition r_k^2 - r_{k-1}^2 = (2k - 1) d0^2 for every k telescopes to
+    r_k^2 = k^2 d0^2, i.e. r_k = k d0 uniquely (r_k > 0).
+    WRONG ANSWER REJECTED: a telescoped sum other than k^2 (e.g. a wrong
+    per-shell capacity 2k + 1 would give k^2 + 2k)."""
+    j, k, d0 = sp.symbols("j k d0", positive=True, integer=True)
+    rk2 = sp.summation((2 * j - 1) * d0**2, (j, 1, k))
+    assert sp.simplify(rk2 - k**2 * d0**2) == 0
+    r = sp.symbols("r", positive=True)
+    sol = sp.solve(sp.Eq(r**2, rk2), r)
+    assert len(sol) == 1 and sp.simplify(sol[0] - k * d0) == 0

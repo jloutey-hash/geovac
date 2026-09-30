@@ -412,7 +412,7 @@ loutey_paper32, loutey_paper55}:
 Slot $k$ & Mechanism & Period-ring home & Source \\
 \midrule
 $k = 0$ & M1 (volume slot) & $\Q[\pi, \pi^{-1}]$ & Paper~55 \S 3 \\
-$k = 2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ & Paper~55 \S 4 \\
+$k = 2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ (integer $s$) & Paper~55 \S 4 \\
 $k = 1$ & M3 (vertex parity / Hurwitz / Dirichlet $L$) & $\MT(\Z[i, 1/2])$ at level $\le 4$ & Paper~55 \S 5 \\
 \bottomrule
 \end{tabular}
@@ -427,11 +427,12 @@ on the discrete Camporesi--Higuchi $\sthree$ spectral triple, with
 operator-order index $k \in \{0, 1, 2\}$ selecting which mechanism
 produces which kind of transcendental.
 
-\paragraph{The classification is complete.}
+\paragraph{The classification is conditional.}
 Paper~32~\S~VIII~\cite{loutey_paper32} contains a
-\emph{case-exhaustion theorem}:\ every appearance of $\pi$ in any
-closed-form GeoVac spectral observable arises from one of M1, M2, or
-M3.  No fourth mechanism has been found despite specific searches.
+\emph{case-exhaustion theorem} (\textbf{[CONDITIONAL]}):\ every
+appearance of $\pi$ in a chain of the first fifteen Paper~34
+projections arises from one of M1, M2, or M3 (argued case by case;\
+the converse, that engaging a mechanism forces $\pi$, is withdrawn).  No fourth mechanism has been found despite specific searches.
 Paper~55~\cite{loutey_paper55} promotes this from a partition theorem
 to a period-theoretic classification:\ every transcendental observed
 in the corpus sits in cyclotomic mixed-Tate periods at level $\le 4$
@@ -567,13 +568,13 @@ meta-theorem deciding forcedness in general is open, see below):
     mixing.
 \end{itemize}
 
-These three theorems collectively pin the seam:\ values are free,
+These three results collectively pin the seam:\ values are free,
 relations are forced.  This is the
 project's most operationally useful structural reading.
 
 \paragraph{Theorem-bounding the seam (June 2026).}  The forced/free seam
-discipline above was sharpened into a set of named structural theorems
-in June 2026.  Paper~57
+discipline above was sharpened into a set of named structural results
+(proof-by-argument) in June 2026.  Paper~57
 catalogues sixty named entries across nine domains (35 forced, 1
 admitted-not-forced, 24 calibration) and tests a
 ``packing-reachability'' discriminator (P5);\ its $98.3\%$ agreement

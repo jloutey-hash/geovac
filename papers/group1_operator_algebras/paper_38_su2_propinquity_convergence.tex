@@ -133,8 +133,8 @@ asymptotic constant is a quotient of sphere volumes ---
 $4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple},
 $2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and \emph{not} the Hopf
 fibration's base-to-total ratio (\S\ref{sec:L2}). The $\log\nmax$
-factor is the first-moment logarithm of the Fej\'er (Ces\`aro-1)
-kernel, which the circle's Fej\'er kernel already carries
+factor is the first-moment logarithm of the Fej\'er-type
+(squared-Dirichlet;\ on the circle, the Ces\`aro-1 Fej\'er) kernel, which the circle's Fej\'er kernel already carries
 (Remark~\ref{rem:circle_fejer});\ it is a property of the kernel, not a
 non-abelian slowdown.
 State-space Gromov--Hausdorff convergence of scalar truncations for
@@ -288,7 +288,8 @@ listed second below, belonged to earlier versions). First, the central
 spectral Fej\'er kernel on $\SU(2)$ must be constructed using
 Peter--Weyl decomposition rather than Schur--Fourier multipliers;\ the
 natural-coefficient version (carrying the $\sqrt{2j+1}$ Plancherel
-weight) is a Ces\`aro-1 (Fej\'er) kernel whose first moment is of
+weight) is a Fej\'er-type (squared-Dirichlet) kernel --- on the
+circle, the Ces\`aro-1 Fej\'er kernel --- whose first moment is of
 order $\log n / n$ --- the logarithm is already present for the
 circle's Fej\'er kernel and is a property of the kernel, not a
 non-abelian slowdown. Second, the
@@ -449,7 +450,8 @@ Conversely every band $N \ge 2\nmax + 1$ compresses to zero:\ each kept
 eigenspace $V_j \otimes V_K$ has $j + K \le \nmax - \tfrac12$, so a
 spin-$J$ multiplier connecting two of them needs $J \le \min(j_1 + j_2,
 K_1 + K_2) \le \nmax - \tfrac12$. \textbf{[MEASURED]} Two independent
-constructions of the true window (2026-09-28) give per-band rank $N^2$
+constructions of the true window (2026-09-28;\ the second, Route~B,
+at $\nmax \le 2$) give per-band rank $N^2$
 for every $N \le 2\nmax$, rank $0$ above, and $\dim \Op_{\nmax} = 5, 30,
 91$ at $\nmax = 1, 2, 3$. (The frozen test
 \texttt{tests/test\_p38\_action\_seminorm.py} checks per-band rank on the
@@ -649,7 +651,7 @@ counts:\
 \texttt{tests/test\_p45\_kplus\_degeneracy.py::test\_spatial\_kernel\_condition\_truthful\_vs\_offdiag}
 (\texttt{tests/test\_p38\_true\_ch\_window.py} backs the injectivity
 premise on the true window, and \texttt{tests/test\_p38\_action\_seminorm.py}
-the smoothing identity;\ neither backs these counts;\ pointers corrected
+the smoothing identity;\ neither backs these model kernel counts;\ pointers corrected
 2026-09-03 and 2026-09-30).
 \end{remark}
 
@@ -901,7 +903,8 @@ the full audit, with the model comparison, is in
 Paper~32~\cite{paper32} (axiom audit, item~6).
 Quantities measured on the model --- Lemma~\ref{lem:L1prime}, the
 multiplier-rank test of \texttt{tests/test\_p38\_action\_seminorm.py},
-and the kernel counts of Remark~\ref{rem:dirac_degeneracy} --- are
+and the model kernel counts ($1/14$, $1/55$) of
+Remark~\ref{rem:dirac_degeneracy} --- are
 model quantities, not window quantities.
 
 Following Connes--van~Suijlekom~\cite[\S 3]{connes_vs2021}, the
@@ -1267,8 +1270,8 @@ derivation of the $\SU(2)$ constant from the circle constant is given
 here; the $\sin^2(\chi/2)$ conjugacy-class weight and the
 $\sqrt{2j+1}$ Plancherel weight of Definition~\ref{def:central_fejer}
 together change both the kernel and the constant, while preserving
-the leading $\log n / n$ behaviour that the Ces\`aro-1 (Fej\'er)
-first moment already has on the circle.  The $\log n$ factor is
+the leading $\log n / n$ behaviour that the Fej\'er (on the circle,
+Ces\`aro-1) first moment already has there.  The $\log n$ factor is
 therefore a property of the kernel, not a non-abelian slowdown.  (An
 earlier version compared it with a torus rate $O(1/\nmax)$ attributed
 to Leimbach--van~Suijlekom~\cite{leimbach_vs2024};\ that paper proves
@@ -1768,7 +1771,7 @@ follows by compression on any closed spin manifold, with no sparsity
 input.
 
 The $\log n$ factor in $\gamma_n$ is the first-moment logarithm of the
-Fej\'er (Ces\`aro-1) kernel, which the circle already carries
+Fej\'er-type (squared-Dirichlet) kernel, which the circle already carries
 (Remark~\ref{rem:circle_fejer});\ it reflects the kernel choice, not
 non-abelianness.  (Earlier versions called it the standard one-log
 non-abelian slowdown relative to a torus rate $O(1/n)$;\

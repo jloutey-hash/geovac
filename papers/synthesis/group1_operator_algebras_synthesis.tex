@@ -623,16 +623,17 @@ j_{\max} = (\nmax-1)/2,
 Z_{\nmax} = \frac{\nmax(\nmax+1)}{2}.
 \label{eq:fejer_kernel}
 \end{equation}
-The Plancherel symbol on the Avery--Wen--Avery basis is
-$\widehat{K}(j) = (2j+1)/Z_{\nmax}$ for $j \le j_{\max}$.  The
-cb-norm of the associated Herz--Schur multiplier acting on the
-group $C^{*}$-algebra is
+The kernel's mass distribution on the Avery--Wen--Avery basis is
+$(2j+1)/Z_{\nmax}$ for $j \le j_{\max}$;\ it is \emph{not} the
+multiplier symbol $\sigma_{\nmax}$ (Paper~38).  The associated central
+smoothing map is unital completely positive, so its cb-norm is
 \begin{equation}
-\cbnorm{S_{K_{\nmax}}} \;=\; \frac{2}{\nmax + 1}
-\;=\; O\!\bigl(1/\nmax\bigr),
+\cbnorm{S_{K_{\nmax}}} \;=\; 1
 \label{eq:cb_norm}
 \end{equation}
-via the Bo\.zejko--Fendler central-multiplier equality
+(the value $2/(\nmax+1)$ printed here before 2026-09-30 is the
+mass-distribution maximum, not a cb-norm), consistent with the
+Bo\.zejko--Fendler central-multiplier equality
 \cite{bozejko_fendler1991} on amenable compact groups (Pier
 \cite{pier1984}; Paulsen \cite{paulsen2002}; Pisier
 \cite{pisier2001}).
@@ -1358,9 +1359,13 @@ constants ``two appearances of the same'' mechanism).
 
 \begin{theorem}[Paper~32~\S 8, $\pi$-source case-exhaustion]
 \label{thm:pi_source}
-Let $\mathcal{C}$ be any finite composition of GeoVac projections
-applied to a Layer-1 datum on $(\AGV, \HGV, \DGV)$ or its
-Bargmann--Segal sibling triple.  The following are equivalent:
+\textbf{[CONDITIONAL]} Let $\mathcal{C}$ be any finite composition of
+the first fifteen Paper~34 projections applied to a Layer-1 datum on
+$(\AGV, \HGV, \DGV)$ or its Bargmann--Segal sibling triple.  Then
+(i)$\Leftrightarrow$(ii) (empirical, Paper~35) and (ii)$\Rightarrow$(iii)
+(case-by-case argument);\ the converse (iii)$\Rightarrow$(i) is
+withdrawn (2026-09-30:\ M2 at half-integer $s$ and M3 at $s = 4$ give
+$\pi$-free values):
 \begin{itemize}\setlength\itemsep{0pt}
 \item[(i)] $\mathcal{C}$(datum) contains a transcendental of the form
 $\pi^{k}$ for $k \in \Q$;
@@ -1378,7 +1383,7 @@ volume quotient (convention-dependent:\ $4/\pi$ dual-Coxeter, $2/\pi$ on the uni
 $\sqrt{\pi}$ via heat-kernel coefficients on the Camporesi--Higuchi
 Dirac spectrum on $\sthree$ (Paper~28 Theorem~T9:
 $\zeta_{D^{2}}(s)$ is polynomial in $\pi^{2}$ with rational
-coefficients at every integer $s$);
+coefficients at every integer $s$, odd zeta at half-integer $s \ge 5/2$);
 \item[$M_{3}$] (\emph{vertex-topology Dirichlet $L$}):\
 Catalan $G$ and $\beta(s)$ via quarter-integer Hurwitz shifts in
 two-loop sunset vertices.
@@ -1402,8 +1407,9 @@ selects $M_{2}$.
 
 The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} carries the
 $M_{1}$ ($k = 0$ volume) signature.  This is not a derived
-observation; it is forced by the Plancherel-weight $\times$
-Vandermonde-Jacobian cancellation theorem (Paper~40~\S 3.2) which
+observation; it follows from the Plancherel-weight $\times$
+Vandermonde-Jacobian cancellation mechanism (Paper~40~\S 3.2;\
+rigorous at rank~1, proof-sketch tier at higher rank) which
 leaves only the rank-1 ($\SU(2)$) constant after the
 $\prod_{\alpha > 0}$ products cancel.  Equivalently, the
 single-positive-root Euler--Catalan sum

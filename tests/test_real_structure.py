@@ -416,7 +416,8 @@ def test_order_zero_weyl(n_max):
     Paper 32 (2026-09) MEASURES the order-zero failure GROWING with
     n_max (failing fraction 63% -> 86% -> 92% at n_max = 2, 3, 4); the
     older reading that it is a finite-resolution artifact which the
-    GH-convergence theorem removes is refuted. This test pins only that
+    GH-convergence theorem removes is not supported (the
+    fixed-generator ratio is still drifting; the limit is not established). This test pins only that
     the failure is present.
     """
     op_sys = SpinorTruncatedOperatorSystem(n_max)

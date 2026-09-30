@@ -213,7 +213,7 @@ triple~\cite{camporesi_higuchi1996}.  The structure is:
 $k$ & Sub-mechanism & Period-ring home & Source \\
 \midrule
 $0$ & M1 (volume slot) & $\Q[\pi, \pi^{-1}]$ & this paper \S\ref{sec:m1} \\
-$2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ pure Tate & \cite{fathizadeh_marcolli2016} + this paper \S\ref{sec:m2} \\
+$2$ & M2 (Seeley--DeWitt) & $\bigoplus_k \pi^{2k}\cdot\Q$ pure Tate (integer $s$) & \cite{fathizadeh_marcolli2016} + this paper \S\ref{sec:m2} \\
 $1$ & M3 (vertex parity / Hurwitz / Dirichlet $L$) & $\MT(\Z[i, 1/2])$ at level $\le 4$ & \cite{deligne2010, glanois2015} + this paper \S\ref{sec:m3} \\
 \bottomrule
 \end{tabular}
@@ -316,14 +316,16 @@ structurally distinct outputs:
 
 \subsection{The case-exhaustion theorem}
 
-Paper~32 \S~VIII Theorem~\ref{thm:case_exhaustion}
-(\cite{loutey_paper32}) establishes:
+Paper~32 \S~VIII (\cite{loutey_paper32}) states, \textbf{[CONDITIONAL]}
+(the direction below is argued case by case over the first fifteen
+Paper~34 projections;\ its converse is withdrawn):
 \begin{theorem}[Case-exhaustion of $\pi$-sources on the discrete
 $\sthree$ spectral triple]
 \label{thm:case_exhaustion}
-Every appearance of $\pi$ in any closed-form GeoVac spectral
-observable arises from one (or more) of the three named sub-mechanisms
-$M_1, M_2, M_3$:
+Every appearance of $\pi$ in a chain of the first fifteen Paper~34
+projections arises from one (or more) of the three named
+sub-mechanisms $M_1, M_2, M_3$ (not every output of a mechanism carries
+$\pi$):
 \begin{itemize}
   \item $M_1$:\ $k = 0$ volume slot $\Vol(S^2)/4 = \pi$ (a quarter of the unit-sphere area $\Vol(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit-$S^3$ Hopf bundle $\sthree \to S^2$));
   \item $M_2$:\ Seeley--DeWitt heat-kernel coefficient
@@ -1444,10 +1446,11 @@ advancing the equality direction itself.
 
 The three sub-mechanisms M1, M2, M3 are role-disjoint at the Mellin
 slot index $k \in \{0, 1, 2\}$:\ each \emph{elementary spectral
-object} of GeoVac is produced by exactly one Mellin slot of
-$\Tr(D^k e^{-tD^2})$ at one operator order $k$.  This is a structural
-property of the master Mellin engine, inherited from the
-case-exhaustion theorem (Theorem~\ref{thm:case_exhaustion}).
+object} of GeoVac is read as produced by one Mellin slot of
+$\Tr(D^k e^{-tD^2})$ at one operator order $k$ (composite observables
+typically engage several;\ Paper~32).  This is a reading of the master
+Mellin engine, organised by the conditional case-exhaustion theorem
+(Theorem~\ref{thm:case_exhaustion}), not a consequence of it.
 
 The corresponding period rings $M_1, M_2, M_3$, however, are not
 set-theoretically disjoint.  The nesting structure is
@@ -1523,8 +1526,10 @@ three Mellin slots, plus a rational scalar:
   \item $B = 42$ is a rational Casimir trace at the $k = 0$ scalar
     sub-mechanism (the rational core of M1), Tate weight $0$,
     depth $0$.
-  \item $F = \zeta(2) = \pi^2/6$ is the Fock-Dirichlet evaluation at
-    $s = 2$ on the scalar Laplacian, accessed via the M2 Mellin
+  \item $F = \zeta(2) = \pi^2/6$ is the Fock-Dirichlet evaluation
+    $\zeta_{1-\Delta_{S^3}}(2) = \sum_n n^2 \cdot n^{-4}$ (the shifted
+    scalar Laplacian $1 - \Delta$, eigenvalue $n^2$;\ not $\zeta_{-\Delta}(2)
+    \approx 0.885$), accessed via the M2 Mellin
     slot at $k = 2$ (Seeley--DeWitt at integer $s$;\
     cf.\ Paper~28 Theorem~1, \cite{loutey_paper28}), Tate weight
     $+2$, depth $0$.
@@ -1540,7 +1545,7 @@ K \;=\; \pi B - \pi\Delta + \pi F \;=\; \underbrace{\pi(B - \Delta)}_{\text{weig
 The constant $K$ sits in $\Q[\pi]$ at weight $\le 3$, in
 $M_1 \cdot (M_0 \oplus M_2)$.  This is the canonical \emph{additive}
 joint engagement:\ one representative per Mellin slot summed inside
-a single linear combination, with the dominant term $\pi^3/6$
+a single linear combination, with the transcendental-weight-3 term $\pi^3/6$ (numerically small, ${\approx}5.2$ of $K \approx 137$)
 recognisable as the M1$\times$M2 cross-product of the $k = 0$ volume factor
 and scalar Seeley--DeWitt evaluation at $s = 2$.  The empirical
 near-equality $K \approx \alpha^{-1}$ (to $4.8 \times 10^{-7}$ relative;

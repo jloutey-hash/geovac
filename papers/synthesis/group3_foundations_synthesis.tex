@@ -55,7 +55,7 @@ and forced/free nodes, where the scattered structural findings cohere
 into one statement about what the framework forces and what it consumes.  Four headline structural results frame the
 program: \textbf{[SYMBOLIC PROOF]} (a) the conformal chain \emph{from the
 continuum operator onward} --- the unit-$S^3$ Laplace--Beltrami operator, its
-integer spectrum, and the energy-shell projection, under which the hydrogen
+integer spectrum (\textbf{[PRIOR ART]}, checked for $n \le 4$), and the energy-shell projection, under which the hydrogen
 bound-state Hamiltonian is $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ --- audited by a suite of 18
 symbolic checks, with the non-definitional energy step (the $S^3$
 Coulomb kernel's eigenvalue $2\pi^2/n$ forcing $p_0 = Z/n$) carried by
@@ -436,13 +436,13 @@ Green's function of $\Delta_{S^3}$ (that behaves like $1/d$, with
 eigenvalues $\propto 1/(n^2-1)$);\ it is the restriction to $S^3$ of the
 Green's function of the $\mathbb{R}^4$ Laplacian (Paper~7).
 
-\subsection*{The 18 symbolic proofs}
+\subsection*{The 18 symbolic checks}
 
 \textbf{[SYMBOLIC PROOF]} Paper~7~\cite{loutey_paper7} verifies the conformal-equivalence chain
 through a suite of 18 symbolic checks implemented in \texttt{sympy}
-(Paper~7 flags several of them as limiting-case or definitional
-substitutions rather than logically independent theorems).
-The proofs cover the stereographic projection formulas, the unit
+(Paper~7 flags ten of them as limiting-case, definitional or
+non-discriminating rather than logically independent theorems).
+The checks cover the stereographic projection formulas, the unit
 sphere constraint, the chordal distance identity, the conformal factor
 identity, the conformal Laplacian transformation law, the integer
 eigenvalue spectrum, and the (definitional) eigenvalue-to-energy
@@ -1375,7 +1375,7 @@ odd zeta values $\zeta(2k{+}1)$, Catalan $G = \beta(2)$ and
 Dirichlet-$\beta$ values, and a depth-$k$ loop tower, all of which sit in
 cyclotomic mixed-Tate periods at level $\le 4$ over $\mathbb{Z}[i, 1/2]$,
 stratified by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
-(pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$
+(pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$ at integer $s$
 (pure-Tate even-weight, depth~0, a strict refinement of the
 Fathizadeh--Marcolli classification~\cite{fathizadeh_marcolli2016}
 specialized to the static $S^3$ sub-case), and $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
@@ -1414,8 +1414,9 @@ immersion (Paper~56's theorem is titled the level-4 cosmic-Galois
 ``comparison homomorphism'';\ only its label and the symbol
 $\Phi^{\mathrm{inj}}$ keep the older ``injection'' name).  The comparison target is the
 \emph{level-4} group, not Brown's $\mathcal{G}_{\mathrm{MT}(\mathbb{Z})}$:\
-Eskandari--Murty--Nemoto~\cite{eskandari_murty_nemoto2025} place Catalan $G$ at level~4 (mixed Tate
-over $\mathbb{Q}(i)$).  That $G$ is \emph{not} a period of $\mathrm{MT}(\mathbb{Z})$
+Eskandari--Murty--Nemoto~\cite{eskandari_murty_nemoto2025} construct a motive with period $G$ that
+is mixed Tate over $\mathbb{Q}(i)$ but not over $\mathbb{Q}$;\ the level-4 placement is the classical
+$G = \mathrm{Im}\,\mathrm{Li}_2(i)$ in Deligne's $N = 4$ setting.  That $G$ is \emph{not} a period of $\mathrm{MT}(\mathbb{Z})$
 is expected but not proven, so this motivates the refinement rather than
 forcing it.
 Two scope qualifiers are essential and stated honestly:\ (i) GeoVac
@@ -1490,7 +1491,7 @@ what it consumes.  Paper~57 catalogues the forced entries (the
 label-set spectrum $n^2 - 1$, carried on the labels as the $SO(4)$
 Casimir---not the graph Laplacian's grid band edge, which Paper~57 records
 as matched rather than forced---the $S^3$ outer manifold, the gauge group $U(1) \times SU(2)
-\times SU(3)$ from Bertrand $\times$ Hopf-tower truncation, the master
+\times SU(3)$ from Bertrand $\times$ Hopf-tower truncation (an organizing reading plus an adopted axiom, not a derivation), the master
 Mellin engine, two-term-exact gravity), the single admitted-not-forced
 entry (the quaternionic factor $\mathbb{H}$), and the calibration
 entries (Yukawa values, generation count, cutoff moments, atomic
@@ -1746,7 +1747,7 @@ J.\ Geom.\ Phys.\ \textbf{20}, 1 (1996).
 
 \bibitem{deligne2010}
 P.~Deligne, \emph{Le groupe fondamental unipotent motivique de
-$\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6, 8$}, Publ.\ Math.\ IH\'ES
+$\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6$ ou $8$}, Publ.\ Math.\ IH\'ES
 \textbf{112} (2010) 101--141.
 
 \bibitem{eskandari_murty_nemoto2025}

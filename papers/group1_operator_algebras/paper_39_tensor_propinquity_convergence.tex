@@ -614,17 +614,18 @@ The joint central kernel $\KS^{(a,b)}$ has the following properties:
 \item[(a)] (Positivity and unit mass.)
 $\KS^{(a,b)}(g_1, g_2) \ge 0$ on $\SU(2) \times \SU(2)$, and
 $\int (\KS^{(a,b)})\,dg_1\,dg_2 = 1$ in the product Haar measure.
-\item[(b)] (Plancherel factorization.) The joint Plancherel symbol
-factorizes:
+\item[(b)] (Mass-distribution factorization.) The joint mass
+distribution factorizes:
 $\widehat{\KS}^{(a,b)}(j_1, j_2) = \widehat{\KS}^{(a)}(j_1) \cdot
-\widehat{\KS}^{(b)}(j_2)$, with each factor the closed-form
+\widehat{\KS}^{(b)}(j_2)$, with each factor
 $\widehat{\KS}^{(\bullet)}(j) = (2j+1)/Z_{\nmax,\bullet}$ for
-$j \le j_{\max,\bullet}$ and zero otherwise.
-\item[(c)] (Cb-norm factorization.)
-$\cbnorm{T_{\KS^{(a,b)}}}^{\mathrm{cent}} =
-\cbnorm{T_{\KS^{(a)}}}^{\mathrm{cent}} \cdot
-\cbnorm{T_{\KS^{(b)}}}^{\mathrm{cent}}
-= 4 / [(\nmaxa + 1)(\nmaxb + 1)]$.
+$j \le j_{\max,\bullet}$ and zero otherwise (the kernel's mass
+distribution, not its multiplier symbol;\ Paper~38).
+\item[(c)] (Cb-norm.) The joint central smoothing map is unital
+completely positive, so $\cbnorm{T_{\KS^{(a,b)}}} = 1$.  The joint
+mass-distribution maximum factorizes as
+$4 / [(\nmaxa + 1)(\nmaxb + 1)]$;\ it is not a cb-norm (corrected
+2026-09-30 from a lemma stating it as one).
 \item[(d)] (Subadditive joint mass concentration.) Define
 $\gamma^{(a,b)}_{\nmaxa, \nmaxb} := \int \KS^{(a,b)}(g_1, g_2)\,
 d_{\sthree \times \sthree}\bigl((e,e), (g_1, g_2)\bigr)\,dg_1\,dg_2$.
@@ -640,20 +641,16 @@ Then
 \begin{proof}
 \textbf{(a)} The product of two non-negative unit-mass kernels is a
 non-negative unit-mass kernel under the product Haar measure.
-\textbf{(b)} The Plancherel decomposition of $L^2(G_1 \times G_2)$ is
-the product of the two single-factor Plancherel decompositions, and
-convolution by a central function on a product of compact groups acts
-diagonally on each isotypic component as the product of single-factor
-Fourier coefficients.
-\textbf{(c)} The Bo{\.z}ejko--Fendler equality
-$\cbnorm{T_K} = \norm{\widehat{K}}_{\ell^\infty}$ for
-central convolutions on amenable compact groups
-\cite{bozejko_fendler1991, pisier2003} extends to product kernels via
-the standard tensor-product cb-norm identity
-$\cbnorm{A \otimes B} = \cbnorm{A}
-\cbnorm{B}$ on the minimal tensor product
-\cite[Ch.~8]{pisier2003}. Substituting the single-factor result
-\cite[Lemma~3.4(c)]{loutey_paper38} gives the displayed value.
+\textbf{(b)} The product kernel is a product of central functions, so
+its expansion in the irreducible characters of $G_1 \times G_2$
+(products of single-factor characters) has coefficients that are
+products of the single-factor ones;\ in particular the Plancherel
+masses $(2j_1+1)(2j_2+1)/(Z_{\nmax,a} Z_{\nmax,b})$ multiply.
+\textbf{(c)} Convolution by a positive unit-mass kernel is unital
+and completely positive, and a unital completely positive map has
+cb-norm $1$ (Paulsen);\ the single-factor statement is Paper~38's.
+The mass-distribution maximum is the product of the single-factor
+maxima $2/(\nmax + 1)$ by (b).
 \textbf{(d)} The product Riemannian metric on $\sthree \times \sthree$
 satisfies the triangle inequality $d_{\sthree \times \sthree}((e,e),
 (g_1, g_2)) \le d_{\sthree}(e, g_1) + d_{\sthree}(e, g_2)$ at every
@@ -662,10 +659,13 @@ applying Fubini gives \eqref{eq:gamma_joint_subadditive}.
 \end{proof}
 
 \begin{remark}\label{rem:cb_norm_rate}
-Property (c) shows that the joint cb-norm is one order faster than the
-single-factor rate: $\cbnorm{T_{\KS^{(a,b)}}} =
-O(1/(\nmaxa \nmaxb))$ vs.\ single-factor $O(1/\nmax)$. This is the
-structural reason joint convergence is well-behaved.
+The joint mass-distribution maximum decays as
+$O(1/(\nmaxa \nmaxb))$, one order faster than the single-factor
+$O(1/\nmax)$;\ this is a property of the kernel's mass distribution,
+not of any cb-norm (the smoothing maps have cb-norm $1$), and no
+convergence statement below uses it.  (An earlier version read it as
+a cb-norm rate and as the structural reason joint convergence is
+well-behaved;\ withdrawn 2026-09-30.)
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -1265,13 +1265,11 @@ $\gamma_{\nmax}$ inherit from~\cite[Lemma~3.4]{loutey_paper38}:
    \gamma_4 \approx 1.3223.
 \]
 
-\paragraph{Joint cb-norm.} By Lemma~\ref{lem:L2-T}(c), the joint
-cb-norms are exact rationals:
-$\cbnorm{T^{(2,2)}} = 4/9$,
-$\cbnorm{T^{(2,3)}} = 1/3$,
-$\cbnorm{T^{(3,3)}} = 1/4$,
-$\cbnorm{T^{(3,4)}} = 1/5$,
-$\cbnorm{T^{(4,4)}} = 4/25$.
+\paragraph{Joint mass-distribution maximum.} By
+Lemma~\ref{lem:L2-T}(c), the joint mass-distribution maxima (not
+cb-norms, which equal $1$) are exact rationals:\
+$4/9$ at $(2,2)$, $1/3$ at $(2,3)$, $1/4$ at $(3,3)$, $1/5$ at
+$(3,4)$, $4/25$ at $(4,4)$.
 
 \paragraph{Joint Lipschitz comparison constant.} By
 Lemma~\ref{lem:L3-T} (tight triangle bound), the diagonal sequence is
@@ -1305,7 +1303,7 @@ factor $2$ reach contribution of Lemma~\ref{lem:L5-T}.
 \begin{tabular}{ccccccc}
 \toprule
 $(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
-$\cbnorm{T^{(a,b)}}$ & $\Lambda^{\mathrm{fact}}$ &
+mass max & $\Lambda^{\mathrm{fact}}$ &
 $C_3^{(2)}$ & $\Lambda^{\mathrm{full}}$ \\
 \midrule
 $(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $1.000$ & $4.149$ \\
@@ -1353,13 +1351,11 @@ $\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) \approx
 $5.845/7.942$, the factor cancelling), with the (now increasing) $C_3^{(2)}$
 factor partially offsetting the $\max(\gamma)$ decrease.
 
-\item \emph{Joint cb-norm decreases as $1/(\nmaxa \nmaxb)$.}
-$\cbnorm{T^{(2,2)}} = 4/9 \approx 0.444$ vs.\
-$\cbnorm{T^{(4,4)}} = 4/25 = 0.16$, an exact factor of
-$9/25 = 0.36$ reduction matching the closed form of
-Lemma~\ref{lem:L2-T}(c). The asymptotic order
-$O(1/(\nmaxa \nmaxb))$ is one order faster than the single-factor
-cb-norm $O(1/\nmax)$.
+\item \emph{Joint mass-distribution maximum decreases as
+$1/(\nmaxa \nmaxb)$.}  $4/9 \approx 0.444$ at $(2,2)$ vs.\
+$4/25 = 0.16$ at $(4,4)$, an exact factor of $9/25 = 0.36$ matching
+Lemma~\ref{lem:L2-T}(c) (a mass-distribution quantity;\ the cb-norms
+are $1$).
 
 \item \emph{Test count.} The supporting computational module
 \texttt{geovac/gh\_convergence\_tensor.py} ($\sim 1881$ lines) and
@@ -1737,7 +1733,7 @@ F.~Latr\'emoli\`ere,
 \newblock \emph{The Gromov--Hausdorff propinquity for metric spectral
 triples},
 \newblock Adv.~Math. \textbf{404} (2022), Paper No.~108393, 56pp;
-\newblock preprint arXiv:1811.10843, 2017.
+\newblock preprint arXiv:1811.10843, 2018.
 
 \bibitem[Latr\'emoli\`ere(2016)]{latremoliere2018}
 F.~Latr\'emoli\`ere,

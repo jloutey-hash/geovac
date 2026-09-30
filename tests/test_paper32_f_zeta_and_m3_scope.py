@@ -53,6 +53,7 @@ def _beta(s):
 
 
 def test_m3_output_at_s2_carries_no_pi():
+    # PSLQ evidence, not proof (Catalan's G is not known to be irrational).
     assert abs(_beta(0) - mp.mpf(1) / 2) < mp.mpf(10) ** -40
     assert abs(_beta(2) - mp.catalan) < mp.mpf(10) ** -40
     s = 2
@@ -65,3 +66,40 @@ def test_m3_output_at_s2_carries_no_pi():
             continue
         rel = mp.pslq([m3, mp.pi**k, mp.mpf(1)], maxcoeff=10**6, maxsteps=10**5)
         assert rel is None or rel[0] == 0, (k, rel)
+
+
+def _no_small_pi_relation(x):
+    """PSLQ EVIDENCE (not proof) that x is not q1*pi^k + q2 for k = -4..4
+    with coefficients up to 1e6."""
+    for k in range(-4, 5):
+        if k == 0:
+            continue
+        rel = mp.pslq([x, mp.pi**k, mp.mpf(1)], maxcoeff=10**6, maxsteps=10**5)
+        if rel is not None and rel[0] != 0:
+            return False
+    return True
+
+
+def test_converse_withdrawn_m3_convergent_witness_s4():
+    """DELTA #21 (2026-09-30): the converse (iii)=>(i) is WITHDRAWN.  M3's
+    closed form 2^{s-1}(beta(s) - beta(s-2)) at the CONVERGENT point s = 4
+    (the s = 2 value needs analytic continuation) is 8(beta(4) - G): checked
+    against the direct Dirichlet sums, and PSLQ finds no small pi relation.
+    WRONG ANSWER REJECTED: an M3 output at s = 4 that is q*pi^k + r."""
+    direct_b4 = mp.nsum(lambda n: (-1) ** n / (2 * n + 1) ** 4, [0, mp.inf])
+    assert abs(direct_b4 - _beta(4)) < mp.mpf(10) ** -40
+    m3 = 8 * (_beta(4) - mp.catalan)
+    assert abs(m3 - mp.mpf(2) ** 3 * (_beta(4) - _beta(2))) < mp.mpf(10) ** -40
+    assert _no_small_pi_relation(m3)
+
+
+def test_converse_withdrawn_m2_half_integer_witness():
+    """DELTA #21: M2's spectral zeta (Paper 28 T9) at half-integer s = 5/2 is
+    14 zeta(3) - (31/2) zeta(5) -- no pi -- so engaging M2 does not force pi.
+    Computed from the Dirac spectrum |lambda| = n + 3/2, deg 2(n+1)(n+2).
+    WRONG ANSWER REJECTED: an M2 spectral-zeta value at half-integer s with a
+    small pi relation (i.e. 'M2 always injects pi')."""
+    s = mp.mpf(5) / 2
+    z = mp.nsum(lambda n: 2 * (n + 1) * (n + 2) * (n + mp.mpf(3) / 2) ** (-2 * s), [0, mp.inf])
+    assert abs(z - (14 * mp.zeta(3) - mp.mpf(31) / 2 * mp.zeta(5))) < mp.mpf(10) ** -30
+    assert _no_small_pi_relation(z)

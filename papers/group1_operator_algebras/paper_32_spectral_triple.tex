@@ -625,9 +625,9 @@ Three structural findings emerged at the placeholder convention:
    $n_{\max} = 2$ grouped into ratios $1 : 2 : 3$ (specifically
    $28.87 : 57.73 : 86.60$), with $86.60 \approx 50\sqrt{3} = 86.6025$.  This rational/algebraic
    structure is lost at $n_{\max} = 3$ as the SDP gains degrees of
-   freedom.  We log this as an algebraic fingerprint of the truncated
-   metric at small cutoff;\ under physical values it does not
-   persist (Remark~\ref{rem:r31_r32_update}).
+   freedom.  Under physical values the $1{:}2{:}3$ grouping does not
+   persist, though the $50\sqrt{3}$ entry does
+   (Remark~\ref{rem:r31_r32_update}).
 
 \item \textbf{Non-monotonicity in the Fock-graph distance.}  Pearson
    correlation between $d_D(\phi_v, \phi_w)$ and the combinatorial
@@ -682,16 +682,18 @@ grouping at $n_{\max} = 2$, the absolute distance values and the
 non-monotonicity diagnostic are not (Remark~\ref{rem:r31_r32_update}).  See
 \texttt{debug/wh1\_round3\_connes\_distance\_memo.md} for the full
 record.  Caveats (1) and (2) above are subsequently closed in
-Remark~\ref{rem:r31_r32_update}; one of the three structural
-findings is retracted there as a placeholder artifact.
+Remark~\ref{rem:r31_r32_update}, where two of the three structural
+findings (the $1{:}2{:}3$ grouping and the trend-toward-correlation
+reading) are retracted as placeholder artifacts.
 \end{remark}
 
 \begin{remark}[R3.1+R3.2 closure of round-3 caveats]
 \label{rem:r31_r32_update}
 \textbf{[OBSERVATION]} Two of the three caveats above have been closed in subsequent
 sub-sprints (continuation of the same dispatch on 2026-05-03), and
-one of the three structural findings has been retracted as a
-placeholder artifact.
+two of the three structural findings (the $1{:}2{:}3$ grouping and the
+trend-toward-correlation reading) have been retracted as placeholder
+artifacts.
 
 \paragraph{R3.1 (Avery--Wen--Avery integral, placeholder $\to$
 physical).}  The placeholder for $I_{n N n'}^{l L l'}$ is replaced
@@ -1472,9 +1474,11 @@ isometry, and does not by itself deliver these properties.  At finite $n_{\max}$
 the three $J$-relations hold exactly (the rows marked
 $\forall\, n_{\max}$ additionally follow from the construction of
 Proposition~\ref{prop:reality}); \textbf{[MEASURED]} order zero and
-order one on the model fail with residuals that grow (order zero over
-$n_{\max} = 2, 3, 4$, order one over $n_{\max} = 2, 3$;\ mechanism
-open), and on the true window they fail from $n_{\max} = 1$ and grow,
+order one on the model fail and the failure grows (order zero in
+residual and failing fraction over $n_{\max} = 2, 3, 4$;\ order one in
+failing fraction, $22\% \to 44\%$ over $n_{\max} = 2, 3$;\ normalised
+by the generator norms its max residual is nearly flat, a measurement
+not frozen in the tests;\ mechanism open), and on the true window they fail from $n_{\max} = 1$ and grow,
 as a boundary term of the compression;\ the chirality-doubled model
 truncation is even (Proposition~\ref{prop:odd}(b)), with sign triple
 $(-, +, +)$ and no KO label at finite cutoff, while the true window is
@@ -2346,9 +2350,9 @@ where such continuous integrations occur are anchored to three named
 mechanisms of the present triple.  \textbf{[CONDITIONAL]} We state the
 case-exhaustion below and give its proof sketch;\ the
 (i)$\Leftrightarrow$(ii) leg rests on the empirical Paper~35
-verification rather than on a proof, and the (iii)$\Rightarrow$(i) leg
-holds only for chains engaging M1 or M2 (M3 by itself need not
-introduce $\pi$;\ see the proof sketch).
+verification rather than on a proof, and the converse
+(iii)$\Rightarrow$(i) is withdrawn (2026-09-30):\ no mechanism is
+known to put $\pi$ into every one of its outputs (proof sketch).
 
 \begin{theorem}[$\pi$-Source Case-Exhaustion]
 \label{thm:pi_source_case_exhaustion}
@@ -2358,9 +2362,8 @@ composition of projections drawn from the Paper~34 list~\cite{paper34}
 $(\mathcal{A}_{\mathrm{GV}}, \mathcal{H}_{\mathrm{GV}},
 D_{\mathrm{GV}})$ or its Bargmann--Segal sibling triple.  The
 following hold:\ (i)$\Leftrightarrow$(ii) (the empirical leg) and
-(ii)$\Rightarrow$(iii);\ conversely, (iii)$\Rightarrow$(i) for chains
-engaging M1 or M2, modulo cancellation (a chain engaging only M3 need
-not contain $\pi$, proof sketch):
+(ii)$\Rightarrow$(iii).  The converse (iii)$\Rightarrow$(i) does
+\emph{not} hold in general (proof sketch):
 \begin{enumerate}
 \setlength\itemsep{0pt}
 \item[(i)] The converged value $\mathcal{C}(\mathrm{datum})$ contains a
@@ -2384,7 +2387,8 @@ or its higher-rank analogues~\cite{paper25,paper30}.
 introduces $\sqrt{\pi}$ via heat-kernel coefficients on the
 Camporesi--Higuchi Dirac spectrum on unit~$S^3$ (Paper~28
 Theorem~T9~\cite{paper28}: $\zeta_{D^2}(s)$ is a two-term polynomial
-in $\pi^2$ with rational coefficients at every integer $s \ge 1$).
+in $\pi^2$ with rational coefficients at every integer $s \ge 1$;\ at
+half-integer $s \ge 5/2$ it carries odd zeta values instead).
 The sub-mechanism for the spinor sector is the half-integer Hurwitz
 $\zeta(s, 3/2)$.
 \item[\textbf{M3}] (vertex-topology Dirichlet $L$-content):\
@@ -2423,18 +2427,22 @@ projections are tagged in
 more of M1/M2/M3, with closed-form identification for each (Paper~25
 for M1, Paper~28 T9 theorem for M2, Paper~28 Theorem~3 for M3).
 
-(iii)~$\Rightarrow$~(i) is closed-form for each mechanism:\ M1's
-$\mathrm{Vol}(S^2)/4 = \pi$ identity, M2's $a_0(S^3) = \sqrt{\pi}$
-heat-kernel identity, M3's $\beta(s) - \beta(s-2)$ closed form via
-the $\chi_{-4}$ Dirichlet character.  M1's and M2's outputs carry
-$\pi$;\ M3's need not:\ at even $s$ its closed form gives
-$\beta(2) - \beta(0) = G - \tfrac12$ ($s = 2$) and $\beta(4) - G$
-($s = 4$), with no $\pi$ (Catalan's $G$ is not known to lie in
-$\mathbb{Q}[\pi]$), so a chain engaging only M3 need not satisfy~(i).
-For chains engaging M1 or M2 the converged value contains $\pi$
-\emph{unless} the $\pi$-contributions cancel in the composition, so
-this leg holds only modulo cancellation and is not a proof that $\pi$
-survives in every such chain (M3 scope corrected 2026-09-30).
+The converse (iii)~$\Rightarrow$~(i) is withdrawn (2026-09-30):\
+engaging a mechanism does not force $\pi$ into the converged value.
+M1 has a rational core ($B = 42$, Paper~55);\ the spinor spectral
+zeta of M2's sub-mechanism at half-integer $s$ carries no known $\pi$,
+e.g.\ $\zeta_{D^2}(5/2) = 14\,\zeta(3) - \tfrac{31}{2}\,\zeta(5)$
+(Paper~28 T9;\ this lies outside the pure-Tate M2 ring, which is
+scoped to Seeley--DeWitt coefficients and integer $s$);\ M3's
+convergent closed form at $s = 4$ gives
+$2^{3}(\beta(4) - \beta(2)) = 8(\beta(4) - G)$, with no known $\pi$
+(none of $\zeta(3)$, $\zeta(5)$, $G$, $\beta(4)$ is known to lie in
+$\mathbb{Q}[\pi]$, nor proved not to).  What remains
+closed-form is the forward identification per mechanism:\ M1's
+$\mathrm{Vol}(S^2)/4 = \pi$ and M2's heat-kernel $a_0(S^3) = \sqrt{\pi}$
+carry $\pi$ where those specific quantities enter.  (Earlier versions
+asserted the converse for every mechanism, then for M1 and M2 only;\
+both are withdrawn.)
 \end{proof}
 
 \begin{corollary}[M1 sub-mechanism lies in the localised pure-Tate
@@ -2547,7 +2555,8 @@ natural QED observables.  Combined with
 Corollary~\ref{cor:m2_mixed_tate}, the master Mellin engine of
 Theorem~\ref{thm:pi_source_case_exhaustion} now has a complete
 period-theoretic stratification:\ M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2
-in the pure-Tate sub-ring $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, and
+(Seeley--DeWitt coefficients and integer-$s$ values) in the pure-Tate
+sub-ring $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, and
 M3 in $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.  Specific
 motivic identification of irreducible constants at depth $\ge 2$
 ($S_{\min}$, $S^{(3)}$, $\ldots$) within the Deligne--Glanois basis
@@ -2689,8 +2698,8 @@ branching forces $l$-parity $\equiv N$-parity, and neither
 reproduces the CH-1 even-$j$ zeros).  The $\omega^{\mathrm{tri}}$
 enrichment program of Paper~55~\cite{loutey_paper55}~\S~subsec:open\_m2\_m3 correctly
 targets the CH triple as substrate; the case-exhaustion
-classification~\ref{thm:pi_source_case_exhaustion} remains
-universal in scope but its bit-exact \emph{finite-cutoff} witness
+classification~\ref{thm:pi_source_case_exhaustion} keeps its
+stated scope (conditional, first fifteen projections) but its bit-exact \emph{finite-cutoff} witness
 form is CH-substrate-specific.  This places a sixth layer on the
 Coulomb/HO asymmetry of Paper~24~\S~V.  Source:
 \texttt{debug/sprint\_q5p\_s5\_falsifier\_memo.md}.
@@ -3590,7 +3599,7 @@ both sit in $\mathrm{MT}(\mathbb{Q}, 1)$, which embeds in
 $\mathrm{MT}(\mathbb{Z}[i, 1/2], 4)$ trivially. The Paper 18 \S III.7
 M1/M2/M3 master Mellin engine partition aligns bit-exactly with the
 standard MT depth/weight grading at integer-shifted $\zeta$ values:\
-$k = 0$ M1 (volume slot, depth 0, weight 2 in $\pi$), $k = 2$ M2
+$k = 0$ M1 (volume slot, depth 0, weight 1 in $\pi$), $k = 2$ M2
 (Seeley--DeWitt, depth 0, weight $2k'$ in $\pi^{2k'}$), $k = 1$ M3
 (vertex-parity-Hurwitz, depth 1, weight $2k'+1$ in $\zeta(2k'+1)$,
 its odd-$\zeta$ sub-sector;\ Paper~55).
@@ -3616,7 +3625,8 @@ the Bernoulli ladder and the functional-equation reading of the two-layer
 split (Sprint GB, 2026-05-29)]
 \label{rem:bernoulli_ladder}
 The case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion} classifies
-the $\pi$-content of every GeoVac observable as
+(conditionally, for chains of the first fifteen Paper~34 projections)
+the $\pi$-content as
 $\mathcal{M}[\mathrm{Tr}(D^k\, e^{-tD^2})]$. The companion question is
 where the framework's \emph{rational} coefficients come from. A
 diagnostic on the gravity sector's small rationals places them on a single
@@ -5322,8 +5332,8 @@ $\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$.  They cannot be
 identified by any standard NCG sign convention because, by
 construction, $\gamma_{\mathrm{GV}}$ acts as identity on
 $\mathcal{H}_F$ and $\gamma_F$ acts as identity on
-$\mathcal{H}_{\mathrm{GV}}$;\ no basis change on the tensor product
-turns one into the other.  Electroweak chirality co-location does
+$\mathcal{H}_{\mathrm{GV}}$:\ they are different operators, acting
+on different tensor factors.  Electroweak chirality co-location does
 not close on $S^3$ alone.
 
 \paragraph{The G2--G3 corollary.}  Sprint~H1 left G2 (Higgs as inner
@@ -6676,7 +6686,8 @@ grading axiom $\{\gamma_F, D_F\} = 0$:\ for all odd $k$, $\mathrm{Tr}(D_F^k
 Dirichlet $L$) vanishes on the inner factor.  This is the structural
 reason F1 (Yukawa values) and F4--F7 (Higgs VEV, CKM, PMNS, neutrino
 masses) live outside the master Mellin engine's structural skeleton:\
-the inner-factor period ring shares no generator with the rings the
+the inner-factor Yukawa values occupy the M1/M2 slots but through
+$y_i$-tied generators, which share no generator with the rings the
 framework's outer-factor mechanism generates (an Observation-level
 reading;\ the rings are not disjoint, since both contain
 $\mathbb{Q}$).
@@ -6925,8 +6936,9 @@ under signature extension (Sprint L0, May 2026)}
 % -------------------------------------------------------------------
 
 The case-exhaustion theorem
-(Theorem~\ref{thm:pi_source_case_exhaustion}) classifies every $\pi$
-in a finite chain of Paper~34 projections as engaging one of three
+(Theorem~\ref{thm:pi_source_case_exhaustion}, \textbf{[CONDITIONAL]},
+first fifteen Paper~34 projections) classifies every $\pi$ in such a
+chain as engaging one of three
 sub-mechanisms of a master Mellin engine
 $\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ with
 $k \in \{0, 1, 2\}$: M1 ($k = 0$ volume slot), M2 (Seeley--DeWitt

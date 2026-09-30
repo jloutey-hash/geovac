@@ -7,6 +7,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.15] - 2026-09-30
+
+**Patch. /qa trunk DELTA #21 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). ~10 LARGE loci in 6 families; no keystone math defect. The π-source case-exhaustion converse (iii)⇒(i) is WITHDRAWN (PI decision).**
+
+### The run
+- Four Opus reviewers, one per dimension: claims on the diff, a corpus-wide claim-impact sweep by idea, code on the new guards, and citations on the new attributions. The PM verified every LARGE against the files.
+- **Code and citations came back clean.**
+  - Code: every new guard fired under its planted wrong answer.
+  - The re-pointed WH1 falsifier genuinely asserts the true window's top band N = 2n_max.
+  - Citations: 0 LARGE. Every new attribution was grounded, including the Parseval form and the P28 heat trace, which were re-derived.
+- **The six LARGE families:**
+  1. **The π-source case-exhaustion was restated as a proven, complete equivalence** in four places: the group1 synthesis theorem, P35 ("stated and proven… shown equivalent"), P55 (an untiered theorem covering "any closed-form GeoVac spectral observable"), and the field guide ("The classification is complete").
+  2. **The FULL #10 re-scope was itself wrong.** M2's spinor spectral zeta at half-integer s is a second witness with no known π: ζ_{D²}(5/2) = 14ζ(3) − 31/2 ζ(5).
+  3. **A retired cb-norm survived.** The group1 synthesis still printed the cb-norm as 2/(n+1) and called the mass distribution the "Plancherel symbol". P39 Lemma L2-T (b)/(c), its remark and two tables stated 4/[(n_a+1)(n_b+1)] as a cb-norm. A UCP map has cb-norm 1, and no P39 bound used these numbers.
+  4. **P55 described F** as "the Fock-Dirichlet evaluation at s = 2 on the scalar Laplacian", which is ≈ 0.885, not π²/6.
+  5. **The retired biconditional "discreteness is compactness"** survived in the group6 synthesis abstract and body.
+  6. **P11 said "18 independent proofs".**
+- **Why the count rose.** The claim-impact reviewer searched by idea across the whole corpus. It reached pre-existing restatements that no byte-diff or earlier round had touched.
+
+### Remediation
+- **Case-exhaustion (PI decision).** The converse (iii)⇒(i) is withdrawn outright rather than carved a third time.
+  - The theorem is now (i)⇔(ii), which is empirical (Paper 35), plus (ii)⇒(iii), argued case by case over the first fifteen Paper 34 projections. It is tagged [CONDITIONAL].
+  - Witnesses that no mechanism puts π into every output:
+    - M1's rational core, B = 42;
+    - M2's spinor zeta at half-integer s;
+    - M3 at the convergent point s = 4, where the closed form gives 8(β(4) − G).
+  - These witnesses carry "no known π". None of ζ(3), ζ(5), G or β(4) is proved to lie outside ℚ[π].
+  - The scope was applied everywhere the theorem is restated: P32, the group1 synthesis, P55, P35, the field guide, P42, P34, P18 and P50.
+- **cb-norm:**
+  - The group1 synthesis cb-norm is now 1.
+  - P39 Lemma L2-T is rewritten: (b) is the mass distribution, (c) says cb-norm 1 with the maxima labelled "not a cb-norm".
+  - The remark claiming a faster joint cb-norm rate is withdrawn. The table column is now "mass max".
+- **F, compactness and the 18 checks.** F = ζ_{1−Δ}(2) in P55; "compactness forces discreteness" in the group6 synthesis; "18 checks" in P11.
+- **~35 SMALL fixed on sight:**
+  - M2 is scoped to integer s in the P55, field guide and group3 synthesis tables and in P24, and its odd-ζ mechanism sentence is scoped in P18.
+  - The "theorem" label is dropped for the non-selection results in P57 and the field guide.
+  - In P57 the gauge group moves out of "autonomously generates" and is admitted under an organizing reading plus an adopted axiom (also P57 §2, P57 §7, and the group3 and group5 syntheses).
+  - "Disjoint rings" becomes a PSLQ-null wording in P34 and P50.
+  - Paper 2: F is ½ζ_{S¹}(1), the k > 0 modes. The value, and hence K, is unchanged. The same fix went into the group5 synthesis.
+  - The "Cesàro-1" label is restricted to the circle (P38, P40).
+  - EMN is now correctly framed as mixed Tate over ℚ(i). The level-4 placement is credited to Deligne's N = 4 setting. Deligne's title now includes "ou".
+  - arXiv:1811.10843 is dated 2018 in P39 and P42.
+  - P32 now counts two retracted Connes-distance findings, not one, and M1's π is Tate weight 1.
+  - P32's order-one growth is stated as the failing fraction (22% → 44%).
+  - P18's sibling normalisations are tagged [OBSERVATION].
+  - P31 now cites Paper 24's actual caveat.
+  - Claim-test matrix rows fixed, including a self-inflicted one: the Forced-Count test collects 7, not 47.
+- **Gates.** Five new idea-level C16 entries (154 total), all discrimination-tested:
+  - case-exhaustion-equivalence-or-complete
+  - cb-norm-mass-distribution-conflation (it widens the old entry, which could not see the `\cbnorm` macro)
+  - discreteness-is-compactness-biconditional
+  - paper7-18-proofs-independent
+  - f-evaluation-on-scalar-laplacian
+- **Guard pass (fire-tested).** The converse-withdrawal witnesses `test_converse_withdrawn_m3_convergent_witness_s4` and `test_converse_withdrawn_m2_half_integer_witness` are PSLQ evidence, labelled as such. Paper 0's "capacity 2k−1 forces r_k = k·d₀" is upgraded [OBSERVATION] → [SYMBOLIC PROOF], backed by a new telescoping test.
+
+### Pre-checkpoint self-check: 0 LARGE, 10 SMALL sibling loci, all fixed
+- The new M2 witness contradicted "M2 is pure-Tate" at P32 and P56. M2 is now scoped to Seeley–DeWitt coefficients and integer s.
+- P32's "universal in scope" and "every GeoVac observable" are now scoped to the first fifteen projections.
+- P34's PSLQ "disjoint classes" is reworded as evidence, not proof.
+- P50 no longer calls its reading a "corollary" of the case-exhaustion theorem.
+- P57's remaining gauge-group siblings were fixed.
+- The group5 synthesis now describes F as half ζ_{S¹}(1).
+- P39's Lemma (b) proof now argues the mass distribution.
+- P55's "exactly one Mellin slot" is now a reading, not a consequence.
+- "No known π" replaces "π-free".
+
+### Verification
+- All 14 gates PASS. C10 covers the whole corpus (57 papers). C16 154/154.
+- Touched tests pass, including the 18 symbolic S³ proofs.
+
 ## [v5.17.14] - 2026-09-30
 
 **Patch. /qa trunk FULL run #10 (certifying, unseeded) = FAIL, remediated (PI-approved). 10 LARGE, none a mathematical defect in a keystone; every keystone re-derived independently.**

@@ -20,8 +20,9 @@ satisfies (to $8.8\times10^{-8}$ relative; an Observation) the cubic
 equation $\alpha^3 - K\alpha + 1 = 0$, where the coefficient
 $K = \pi(42 + \pi^2/6 - 1/40) = 137.036064$ is constructed from
 spectral invariants of the Hopf fibration $S^1 \to S^3 \to S^2$: the
-degeneracy-weighted Casimir trace of the $S^2$ base ($B = 42$), the
-spectral zeta function of the $S^1$ fiber ($F = \zeta(2) = \pi^2/6$),
+degeneracy-weighted Casimir trace of the $S^2$ base ($B = 42$), half the
+spectral zeta function of the $S^1$ fiber at $s = 1$, i.e.\ its $k > 0$
+modes ($F = \zeta(2) = \pi^2/6$),
 and a boundary correction from the $S^3$ total space
 ($\Delta = 1/40$). The selection principle $B/N = \dim(S^3) = 3$ is
 proven algebraically to select $n_{\max} = 3$ uniquely. The resulting
@@ -340,9 +341,9 @@ is
   \zeta_{S^1}(s) = 2\sum_{k=1}^{\infty} k^{-2s}
                  = 2\,\zeta_R(2s),
 \end{equation}
-where $\zeta_R$ is the Riemann zeta function. At $s = 1$:
+where $\zeta_R$ is the Riemann zeta function. At $s = 1$, $\zeta_{S^1}(1) = 2\zeta_R(2)$, and $F$ is its $k > 0$ half:
 \begin{equation}\label{eq:fiber}
-  F = \zeta_R(2) = \frac{\pi^2}{6}.
+  F = \tfrac12\,\zeta_{S^1}(1) = \zeta_R(2) = \frac{\pi^2}{6}.
 \end{equation}
 This is the zeta-regularized spectral invariant of the photon gauge
 phase circle. Equivalently, $F$ is a Dirichlet series of the Fock
@@ -735,7 +736,7 @@ established results elsewhere in the GeoVac framework:
 
 \begin{itemize}
   \item \textbf{Paper~7 (S$^{3}$ scalar proof chain):} the 18 symbolic
-    proofs of Paper~7 validate the scalar Laplace--Beltrami on $S^{3}$
+    checks of Paper~7 validate the scalar Laplace--Beltrami on $S^{3}$
     as the geometric home of the Coulomb spectrum. $B$ and $F$ both
     live on this sector, reinforcing that Paper~7's $S^{3}$ machinery
     is the ingredient-generating geometry for two of the three pieces
