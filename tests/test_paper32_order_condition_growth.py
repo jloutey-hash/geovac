@@ -97,7 +97,8 @@ def test_fixed_generator_residual_does_not_decay():
     assert rs[0] < rs[1] < rs[2], f"fixed-generator residual does not grow: {rs}"
     # not decaying to zero: bounded below by the n_max=2 value at every cutoff
     assert min(rs) >= 0.05
-    # ratio to the (growing) generator norm settles near 0.21, not toward 0
+    # ratio to the (growing) generator norm stays near 0.21 through n_max=4
+    # (still drifting; the limit is not established), not heading to 0
     ratio4 = vals[4][0] / vals[4][1]
     assert 0.19 < ratio4 < 0.23, f"residual/generator-norm at n_max=4 = {ratio4:.3f}"
 

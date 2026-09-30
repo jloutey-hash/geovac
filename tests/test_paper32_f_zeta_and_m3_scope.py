@@ -10,11 +10,14 @@
     WRONG ANSWER REJECTED: "F = zeta_{Delta_{S^3}}(2)" -- the Delta sum is
     pinned to 0.884967... and asserted != pi^2/6.
 
-(2) The pi-source case-exhaustion theorem's (iii) => (i) leg: M3's closed
-    form 2^{s-1}(beta(s) - beta(s-2)) (Paper 28 Theorem 3) at s = 2 is
-    2 (G - 1/2), since beta(0) = 1/2 -- Catalan's G and a rational, no pi.
-    So "each mechanism's own output carries pi" is false for M3, and the
-    leg holds only for chains engaging M1 or M2.
+(2) The pi-source case-exhaustion theorem's converse (iii) => (i) is
+    WITHDRAWN (DELTA #21, 2026-09-30; an intermediate FULL #10 re-scope to
+    'M1 or M2 only' is also retired).  Witnesses: M1's rational core B = 42
+    (proven); M2's spinor zeta at half-integer s and M3 at s = 2 (analytic
+    continuation) and s = 4 (convergent) -- no KNOWN pi.  The PSLQ helper
+    below is EVIDENCE only and its scope is narrow: it tests q1*pi^k + q2
+    for integer k in [-4, 4]; it is blind to sqrt(pi), polynomials in pi,
+    and products of pi with other constants.
 
     WRONG ANSWER REJECTED: an M3 output at s = 2 that is a rational
     multiple of a power of pi (tested against pi^k, k = -4..4, with small

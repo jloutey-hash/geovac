@@ -1101,6 +1101,25 @@ REGISTRY = [
         },
     },
     {
+        "id": "code-layer-mass-max-labelled-cb-norm",
+        # DELTA #22: the cb-norm correction (central smoothing maps are UCP, cb-norm 1; 2/(n_max+1) and
+        # 4/((n_a+1)(n_b+1)) are Plancherel MASS maxima) had not reached tests/ and geovac/. Identifiers
+        # containing cb_norm are kept for API stability; prose/docstrings may not call the mass max a cb-norm.
+        "pattern": r"cb-norm\s*(?:is\s+)?(?::|=)?\s*(?:2\s*/\s*\(n_max|4\s*/\s*\(\(n_a|2/\(n_max|decreas)|Cesaro-2\s+cb-norm|central-multiplier\s+cb-norm\s*:?\s*(?:2|4)\s*/",
+        "exempt_if_nearby": withdrawal_marker("code-layer-mass-max-labelled-cb-norm"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #22, code-layer gate; PI-approved).",
+        "files": [
+            "tests/*.py",
+            "geovac/*.py",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "remediated 2026-09-30 (DELTA #22 code-layer sweep; PM-verified gate 0 live)",
+            "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": "remediated 2026-09-30 (DELTA #22 code-layer sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "hopf-base-measure-label",
         # The M1 mechanism's name 'Hopf-base measure' is a misnomer: M1 is the k=0 VOLUME SLOT of the master
         # Mellin engine (Paper 18 sec. III.7), not a Hopf base-to-total ratio, and the 4/pi GH-rate constant is the

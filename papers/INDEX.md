@@ -74,7 +74,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
 | 29 `paper_29_ramanujan_hopf.tex` | ACTIVE | Hopf graphs are Ramanujan; graph-RH is a finite-size statement |
-| 32 `paper_32_spectral_triple.tex` | **KEYSTONE** | The GeoVac spectral triple; Connes axiom audit; §VIII case-exhaustion + non-selection theorems |
+| 32 `paper_32_spectral_triple.tex` | **KEYSTONE** | The GeoVac spectral triple; Connes axiom audit; §VIII case-exhaustion [CONDITIONAL; converse withdrawn] + non-selection results (proof-by-argument) |
 | 38 `paper_38_su2_propinquity_convergence.tex` | **KEYSTONE** | **Unconditional** state-space GH convergence of the true-window truncations (commutative factor; 2026-06-10); displayed rate (4/π)·log n/n in the dual-Coxeter normalisation (2/π on the unit S³) is [INTERNAL THEOREM + MEASURED] |
 | 39 `paper_39_tensor_propinquity_convergence.tex` | ACTIVE | Tensor-product convergence (two focal lengths) |
 | 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate universal across compact connected semisimple Lie groups (retitled 2026-09-02; a circle factor carries 2/π) |

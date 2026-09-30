@@ -364,7 +364,7 @@ def test_plancherel_symbol_circle_N_t_1():
 
 
 def test_joint_cb_norm():
-    """Joint cb-norm = SU(2) cb-norm * U(1) cb-norm = 2/(n_max+1) * 1."""
+    """Joint mass maximum = SU(2) mass maximum * U(1) factor 1 = 2/(n_max+1) (not a cb-norm; the cb-norm is 1)."""
     cb = joint_cb_norm(3, 5)
     assert cb == sp.Rational(2, 4)
 

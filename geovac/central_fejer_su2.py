@@ -87,11 +87,13 @@ L^2_{cent}(SU(2)) are
     hat{K}_{n_max}(j) = (2j + 1) / Z_{n_max} * indicator(j <= j_max).
 
 This is Eq. (3.1) of the scoping memo. The kernel acts on each Peter-Weyl
-block V_j by the scalar hat{K}(j); on the central subalgebra it is
-abelian, so the cb-norm equals the L^infty norm of the symbol:
+block V_j by the scalar hat{K}(j).  [Historical text, corrected
+2026-09-30:] the value
 
-    ||S_K||_cb = ||K||_Fou,cb (central) = ||hat{K}||_infty
-              = (2 j_max + 1) / Z_{n_max} = O(1 / n_max).
+    (2 j_max + 1) / Z_{n_max} = 2 / (n_max + 1) = O(1 / n_max)
+
+is the Plancherel MASS maximum, not ||S_K||_cb; convolution by a positive
+unit-mass kernel is UCP, so ||S_K||_cb = 1 (central_multiplier_cb_norm_true).
 
 This is the "abelianization" that makes Schur-Fourier transference go
 through on the central subalgebra (the SU(2) analog of Leimbach-vS

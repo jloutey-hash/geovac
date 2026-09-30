@@ -73,7 +73,7 @@ and U(1) factors:
     PSD by the standard 〈psi | P g P | psi〉 = ∫ g |P psi|^2 >= 0.
 
 (2) Contractivity.  ||B^{joint}(f)||_op <= ||f||_infty.  Direct corollary
-    of Sub-sprint B (joint cb-norm = 2/(n_max+1) <= 1) and the standard
+    of Sub-sprint B (joint mass maximum (not a cb-norm; that is 1) = 2/(n_max+1) <= 1) and the standard
     factorization ||P(K*f)P||_op <= ||K*f||_infty <= ||K||_{L^1} ||f||_infty
     = ||f||_infty (K^{joint} is normalized on the product Haar measure).
 

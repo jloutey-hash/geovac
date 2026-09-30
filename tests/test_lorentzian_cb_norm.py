@@ -1,22 +1,24 @@
-"""Tests for L3b-2 sub-sprint B: joint Schur multiplier cb-norm.
+"""Tests for L3b-2 sub-sprint B: joint Schur multiplier mass maximum.
+
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
 
 Verifies the closed-form bound
 
-    ||S_K^joint||_cb = ||S_K^SU(2)||_cb * ||S_K^U(1)||_cb = 2/(n_max + 1) * 1
-                    = 2/(n_max + 1)
+    mass_max(joint) = mass_max(SU(2)) * mass_max(U(1)) = 2/(n_max + 1) * 1
+                    = 2/(n_max + 1)      [historically written as ||.||_cb]
 
 at panel cells (n_max, N_t) in {(2,3), (2,5), (3,3), (3,5), (4,3), (4,5)}.
 
 Eight test functions covering:
 
-  1. SU(2) factor matches Paper 38 cb-norm bit-identically.
+  1. SU(2) factor matches Paper 38 mass maximum bit-identically.
   2. U(1) factor cb-norm = 1 (the closed-form constant).
-  3. Joint cb-norm = product of factor cb-norms (factorization).
+  3. Joint mass maximum = product of factor mass maxima (factorization).
   4. Panel cells against closed-form bound 2/(n_max + 1).
   5. Asymptotic rate 2/(n_max + 1) = O(1/n_max) verified monotonically.
   6. U(1) cb-norm cross-check via Plancherel symbol max-norm.
   7. Joint Plancherel symbol factorization exact in sympy.
-  8. The joint cb-norm depends only on n_max, not on N_t.
+  8. The joint mass maximum depends only on n_max, not on N_t.
 
 Companion to debug/l3b_2_sub_sprint_B_cb_norm_memo.md and
 debug/l3b_2_sub_sprint_B_compute.py.
@@ -46,25 +48,25 @@ PANEL_CELLS = [(2, 3), (2, 5), (3, 3), (3, 5), (4, 3), (4, 5)]
 
 
 # ---------------------------------------------------------------------------
-# Test 1: SU(2) factor matches Paper 38 cb-norm bit-identically
+# Test 1: SU(2) factor matches Paper 38 mass maximum bit-identically
 # ---------------------------------------------------------------------------
 
 
 class TestSU2FactorPaper38Consistency:
-    """SU(2) cb-norm matches Paper 38 Lemma L2(c) closed form 2/(n_max+1)."""
+    """SU(2) mass maximum matches Paper 38 Lemma L2(c) closed form 2/(n_max+1)."""
 
     @pytest.mark.parametrize("n_max", [1, 2, 3, 4, 5, 6, 8, 10, 20, 50])
     def test_su2_cb_norm_closed_form(self, n_max):
-        """||S_K^SU(2)||_cb = 2/(n_max + 1) exactly."""
+        """SU(2) mass maximum = 2/(n_max + 1) exactly (not a cb-norm)."""
         result = cb_su2(n_max)
         expected = Rational(2, n_max + 1)
         assert result == expected, (
-            f"SU(2) cb-norm at n_max={n_max}: got {result}, expected {expected}"
+            f"SU(2) mass maximum at n_max={n_max}: got {result}, expected {expected}"
         )
 
     @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
     def test_su2_cb_norm_attained_at_jmax(self, n_max):
-        """The cb-norm equals Plancherel symbol at j = j_max."""
+        """The mass maximum equals Plancherel symbol at j = j_max."""
         j_max = Rational(n_max - 1, 2)
         symbol_at_jmax = plancherel_su2(n_max, j_max)
         cb = cb_su2(n_max)
@@ -115,16 +117,16 @@ class TestU1FactorCBNorm:
 
 
 # ---------------------------------------------------------------------------
-# Test 3: Joint cb-norm = product of factor cb-norms (factorization)
+# Test 3: Joint mass maximum = product of factor mass maxima (factorization)
 # ---------------------------------------------------------------------------
 
 
 class TestJointCBNormFactorization:
-    """Joint cb-norm factorizes as product of SU(2) and U(1) factors."""
+    """Joint mass maximum factorizes as product of SU(2) and U(1) factors."""
 
     @pytest.mark.parametrize("n_max,N_t", PANEL_CELLS)
     def test_joint_eq_product_of_factors(self, n_max, N_t):
-        """||S_K^joint||_cb = ||S_K^SU(2)||_cb * ||S_K^U(1)||_cb."""
+        """Joint mass maximum = product of factor mass maxima."""
         joint = joint_cb_norm(n_max, N_t)
         su2 = cb_su2(n_max)
         u1 = cb_norm_circle(N_t)
@@ -150,11 +152,11 @@ class TestJointCBNormFactorization:
 
 
 class TestPanelCellsAgainstBound:
-    """At each panel cell, joint cb-norm equals 2/(n_max + 1) exactly."""
+    """At each panel cell, joint mass maximum equals 2/(n_max + 1) exactly."""
 
     @pytest.mark.parametrize("n_max,N_t", PANEL_CELLS)
     def test_joint_eq_bound(self, n_max, N_t):
-        """||S_K^joint||_cb = 2/(n_max + 1)."""
+        """Joint mass maximum = 2/(n_max + 1)."""
         result = joint_cb_norm(n_max, N_t)
         expected = Rational(2, n_max + 1)
         assert result == expected, (
@@ -185,7 +187,7 @@ class TestPanelCellsAgainstBound:
 
 
 class TestAsymptoticRate:
-    """Joint cb-norm decreases monotonically to 0 as n_max -> infinity."""
+    """Joint mass maximum decreases monotonically to 0 as n_max -> infinity."""
 
     def test_monotone_decreasing(self):
         """At fixed N_t, joint_cb_norm is strictly decreasing in n_max."""
@@ -212,7 +214,7 @@ class TestAsymptoticRate:
 
     def test_asymptote_zero(self):
         """joint_cb_norm -> 0 as n_max -> infinity."""
-        # At n_max = 10000, the cb-norm should be very small
+        # At n_max = 10000, the mass maximum should be very small
         val = joint_cb_norm(10000, 5)
         assert float(val) < 1e-3, (
             f"At n_max=10000: cb={val}={float(val):.6f}, expected < 1e-3"
@@ -292,12 +294,12 @@ class TestPlancherelFactorizationExact:
 
 
 # ---------------------------------------------------------------------------
-# Test 8: Joint cb-norm depends only on n_max, not on N_t
+# Test 8: Joint mass maximum depends only on n_max, not on N_t
 # ---------------------------------------------------------------------------
 
 
 class TestJointCBNormNtIndependence:
-    """At fixed n_max, joint cb-norm is constant in N_t (it equals 2/(n_max+1))."""
+    """At fixed n_max, joint mass maximum is constant in N_t (it equals 2/(n_max+1))."""
 
     @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
     def test_joint_cb_norm_independent_of_Nt(self, n_max):

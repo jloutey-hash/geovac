@@ -1,5 +1,7 @@
 """Joint compact x compact central Fejer kernel on SU(2) x U(1).
 
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
+
 Sprint L3b first move (2026-05-17): the joint central spectral Fejer
 kernel for the compact-temporal Lorentzian propinquity foundation.
 The construction is the tensor product
@@ -11,7 +13,7 @@ where:
   - K^{SU(2)}_{n_max} is the SU(2) central Fejer kernel from
     `geovac.central_fejer_su2`, with Plancherel symbol
     hat{K}^{SU(2)}(j) = (2j+1) / Z^{SU(2)}_{n_max} for j <= j_max,
-    and cb-norm 2/(n_max+1) (Paper 38 L2).
+    and mass maximum 2/(n_max+1) (Paper 38 L2).
 
   - K^{U(1)}_{N_t, T} is the standard Fejer kernel on the circle
     S^1_T of circumference T, with Plancherel symbol
@@ -46,10 +48,11 @@ This module provides the joint kernel construction and computes
 gamma^{joint} at low (n_max, N_t, T) panel.  It does NOT:
 
   - Establish a propinquity bound (that's the L1'-L5 program).
-  - Prove the joint Schur multiplier cb-norm equals the product of
-    factor cb-norms (this is the abelianization argument that goes
-    through on the central subalgebra; we accept it via the standard
-    Bozejko-Fendler / Paper 38 L2 argument).
+  - Prove the joint Schur multiplier mass maximum equals the product of
+    factor mass maxima (elementary: the maximum of a product of
+    nonnegative factor symbols; no multiplier theorem is needed. The
+    earlier Bozejko-Fendler appeal is withdrawn -- that result concerns
+    discrete groups).
   - Establish a quantitative rate constant (the Paper 38 4/pi
     asymptote on SU(2) is preserved; the U(1) factor gives a 1/N_t
     rate by standard Fejer-on-the-circle, so the joint rate is
@@ -75,7 +78,7 @@ API
       Numerical gamma^{joint}(n_max, N_t, T) via mpmath integration.
 
   joint_cb_norm(n_max, N_t)
-      Product of factor cb-norms: 2/(n_max+1) * 1.
+      Product of factor mass maxima: 2/(n_max+1) * 1.
 
   joint_plancherel_symbol(n_max, N_t, j, k)
       hat{K}^{joint}(j, k) = hat{K}^{SU(2)}(j) * hat{K}^{U(1)}(k).
@@ -233,16 +236,16 @@ def joint_plancherel_symbol(
 
 
 def joint_cb_norm(n_max: int, N_t: int) -> sp.Rational:
-    """cb-norm of the joint kernel = product of factor cb-norms.
+    """mass maximum of the joint kernel = product of factor mass maxima.
 
-    By the abelianization argument (Bozejko-Fendler central Schur
-    multipliers on amenable compact groups, applied factor-wise on
-    the SU(2) x U(1) central subalgebra), the cb-norm of the joint
-    Schur multiplier equals the product of factor cb-norms:
+    The joint mass distribution is the product of the factor ones, so
+    its maximum is the product of factor maxima (elementary):
 
-        ||S_{K^{joint}}||_cb = ||S_{K^{SU(2)}}||_cb * ||S_{K^{U(1)}}||_cb
-                             = (2 / (n_max + 1)) * 1
-                             = 2 / (n_max + 1).
+        mass_max(joint) = mass_max(SU(2)) * mass_max(U(1))
+                        = (2 / (n_max + 1)) * 1
+                        = 2 / (n_max + 1).
+
+    This is NOT a cb-norm: the joint smoothing map is UCP, cb-norm 1.
     """
     cb_su2 = Rational(2, n_max + 1)
     cb_u1 = cb_norm_circle(N_t)

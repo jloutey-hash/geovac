@@ -226,7 +226,7 @@ class TestMainTheoremPanel:
         assert b.qualitative_rate_only
 
     def test_bound_cb_norm_matches(self):
-        """The Lambda^L bound carries the correct cb-norm = 2/(n_max+1)."""
+        """The Lambda^L bound carries the correct mass maximum (not a cb-norm; that is 1) = 2/(n_max+1)."""
         b = compute_lorentzian_propinquity_bound(n_max=3, N_t=5)
         assert b.cb_norm_joint == pytest.approx(2.0 / 4.0)  # 1/2
 

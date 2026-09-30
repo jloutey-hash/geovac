@@ -1,5 +1,7 @@
 """Tests for geovac/gh_convergence_tensor.py (Phase C-W2b-easy).
 
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
+
 Per CLAUDE.md Section 13.4a, every equation in the L5-T proof memo
 (debug/multifocal_phase_c_w2b_easy_memo.md) has a corresponding unit
 test here.
@@ -7,7 +9,7 @@ test here.
 Coverage of the five-lemma tensor extension:
   - L1'-T: joint operator system O_a (X) O_b is well-defined; joint
     dimension factorizes; joint propagation number bounded.
-  - L2-T:  joint Plancherel symbol factorizes; joint cb-norm 4/((n_a+1)(n_b+1));
+  - L2-T:  joint Plancherel symbol factorizes; joint mass maximum 4/((n_a+1)(n_b+1));
     subadditive joint mass-concentration.
   - L3-T:  joint Lipschitz comparison constant; factorized panel C_3=1;
     full operator system C_3<=2.
@@ -171,7 +173,7 @@ class TestL1PrimeTensor:
 
 
 class TestL2TCbNorm:
-    """Joint central-multiplier cb-norm: 4 / ((n_a+1)(n_b+1))."""
+    """Joint central-multiplier mass maximum: 4 / ((n_a+1)(n_b+1))."""
 
     def test_cb_norm_at_22(self):
         cb = joint_cb_norm_central(2, 2)
@@ -206,7 +208,7 @@ class TestL2TCbNorm:
             assert sp.simplify(cb_joint - cb_a * cb_b) == 0
 
     def test_cb_norm_decreases_with_n(self):
-        """cb-norm is decreasing in both n_a and n_b."""
+        """mass maximum is decreasing in both n_a and n_b."""
         cb_22 = float(joint_cb_norm_central(2, 2))
         cb_33 = float(joint_cb_norm_central(3, 3))
         cb_44 = float(joint_cb_norm_central(4, 4))
@@ -1051,3 +1053,41 @@ class TestR1R2SlowConvergence:
         for nb in [(2,2), (3,3), (4,4), (5,5), (10,10), (50,50), (100,100)]:
             c = c3_full_pythagorean_bound(*nb)
             assert c <= np.sqrt(2.0) + 1e-12
+
+
+def test_joint_smoothing_map_is_ucp_cb_norm_one():
+    """Paper 39 Lemma L2-T(c) (corrected 2026-09-30): the joint central
+    smoothing map is convolution by K_a(g1) K_b(g2).  A positive kernel of
+    unit mass gives a unital completely positive map, and a UCP map has
+    cb-norm ||T(1)|| = 1 (Paulsen, Prop. 3.6).  Both premises are checked on
+    the ACTUAL kernel |D|^2 / Z by an independent route: unit mass by
+    numerically integrating K against the conjugacy-class Haar measure
+    (1/pi) sin^2(chi/2) dchi on [0, 2 pi] (so a wrong Z is caught, however
+    Z is defined), positivity by sampling.  The joint mass-distribution
+    maximum 4/((n_a+1)(n_b+1)) is asserted to be a DIFFERENT number.
+    WRONG ANSWERS REJECTED: a mis-normalised kernel (mass != 1, i.e. the
+    map is not unital and its cb-norm is not 1), and reading the mass
+    maximum as the cb-norm.  (Rebuilt after the DELTA #22 self-check found
+    the first version near-tautological.)"""
+    import mpmath
+    import sympy as sp
+    from geovac.central_fejer_su2 import (
+        central_fejer_kernel_su2, verify_pointwise_positivity,
+        central_multiplier_cb_norm_true,
+    )
+    chi = sp.Symbol("chi", real=True)
+    mpmath.mp.dps = 30
+    mass = {}
+    for n in (2, 3, 4):
+        f = sp.lambdify(chi, central_fejer_kernel_su2(n, chi), modules="mpmath")
+        mass[n] = mpmath.quad(lambda c: f(c) * mpmath.sin(c / 2) ** 2 / mpmath.pi,
+                              [0, mpmath.pi, 2 * mpmath.pi])
+        assert abs(mass[n] - 1) < mpmath.mpf(10) ** -20, (n, mass[n])
+        assert verify_pointwise_positivity(n)
+        assert central_multiplier_cb_norm_true(n) == 1
+    for n_a, n_b in [(2, 2), (2, 3), (3, 4), (4, 4)]:
+        joint_mass = mass[n_a] * mass[n_b]            # Fubini: product kernel
+        assert abs(joint_mass - 1) < mpmath.mpf(10) ** -20
+        mass_max = joint_cb_norm_central(n_a, n_b)    # historical name
+        assert mass_max == sp.Rational(4, (n_a + 1) * (n_b + 1))
+        assert abs(float(mass_max) - float(joint_mass)) > 0.5

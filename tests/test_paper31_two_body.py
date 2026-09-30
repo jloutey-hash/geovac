@@ -20,8 +20,8 @@ Two constructions are pinned:
          0.41 (n_max=3), decreasing with n_max
 
   2. Resolvent construction V^res_abcd = sum_NLM M[a,c] conj(M[d,b]) w(N):
-       - Dirac resolvent w=1/(N+1/2)^2: Pearson 0.81 (n_max=2),
-         0.75 (n_max=3)
+       - Dirac resolvent w=1/(N+1/2)^2: Pearson 0.846 (n_max=2),
+         0.796 (n_max=3) (0.81/0.75 retired by the 2026-08-29 ERI fix)
        - Laplacian resolvent w=1/(N^2-1): essentially uncorrelated
          (the N=1 zero mode of Delta_{S^3} kills the dominant (1s,1s) term)
        - 100% m-conservation for every weighting

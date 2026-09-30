@@ -494,7 +494,7 @@ class LorentzianPropinquityBound:
     n_max, N_t, T : truncation parameters
     gamma_joint_su2, gamma_joint_u1, gamma_joint_L1 : Sub-sprint C joint gamma
     c_lipschitz_joint : Sub-sprint A joint Lichnerowicz
-    cb_norm_joint : Sub-sprint B joint cb-norm = 2/(n_max+1)
+    cb_norm_joint : Sub-sprint B joint mass maximum (not a cb-norm; that is 1) = 2/(n_max+1)
     reach_B_panel : empirical max reach_B over the joint panel
     reach_B_bound : theoretical bound = C_3 * gamma^joint
     height_B_panel : empirical max height_B over the joint panel

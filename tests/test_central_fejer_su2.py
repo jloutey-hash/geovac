@@ -1,5 +1,7 @@
 """Tests for the SU(2) central spectral Fejer kernel (R2.5 lemma L2).
 
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
+
 Verifies the six sub-tasks of the L2 sprint:
 
   (a) symbolic verification of kernel positivity, normalization, centrality
@@ -515,14 +517,14 @@ class TestCentralMultiplierCBNorm:
         assert central_multiplier_cb_norm(n_max) == expected
 
     def test_mass_max_decay(self):
-        # Decay as 2/(n+1), so cb-norm * (n+1) = 2 constant
+        # Decay as 2/(n+1), so mass maximum * (n+1) = 2 constant
         for n in [1, 2, 3, 5, 10]:
             cb = central_multiplier_cb_norm(n)
             assert cb * (n + 1) == 2
 
 
 class TestCentralMultiplierCBNormMatchesPlancherelMax:
-    """The cb-norm equals max_j hat{K}(j); verify constructively."""
+    """The mass maximum equals max_j hat{K}(j); verify constructively."""
 
     @pytest.mark.parametrize("n_max", [1, 2, 3, 4, 5])
     def test_cb_norm_is_plancherel_max(self, n_max):
@@ -532,7 +534,7 @@ class TestCentralMultiplierCBNormMatchesPlancherelMax:
 
 
 class TestCentralMultiplierCBNormCesaro:
-    """Cesaro-2 cb-norm decays at the same O(1/n) rate."""
+    """Cesaro-weighted mass maximum decays at the same O(1/n) rate."""
 
     @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
     def test_cesaro_cb_norm_decreasing(self, n_max):

@@ -1,11 +1,13 @@
 """Tests for geovac/gh_convergence.py (R2.5 Lemma L5).
 
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
+
 Per CLAUDE.md Section 13.4a, every equation in the L5 proof memo
 (debug/r25_l5_proof_memo.md) has a corresponding unit test here.
 
 Coverage:
   - TunnelingPair construction at n_max in {1, 2, 3, 4}.
-  - L1'-L4 metadata propagation: gamma rate, cb-norm, Lipschitz constant
+  - L1'-L4 metadata propagation: gamma rate, mass maximum, Lipschitz constant
     are populated correctly from the underlying modules.
   - Berezin and truncation map application.
   - reach_B, height_B, height_P bound checks.
@@ -78,7 +80,7 @@ class TestTunnelingPairConstruction:
         pair = TunnelingPair.build(1, gamma_prec=20)
         assert pair.n_max == 1
         assert pair.op_sys.n_max == 1
-        # Z_1 = 1, so cb-norm = 2/(1+1) = 1
+        # Z_1 = 1, so mass maximum = 2/(1+1) = 1
         assert pair.cb_norm_central == sp.Rational(1)
         # gamma_1 has a closed form: integral over [0, 2pi] of
         # |chi_0|^2 * chi * sin^2(chi/2)/pi dchi = pi
@@ -87,7 +89,7 @@ class TestTunnelingPairConstruction:
     def test_build_n2(self, pair_n2: TunnelingPair):
         assert pair_n2.n_max == 2
         assert pair_n2.op_sys.n_max == 2
-        # cb-norm = 2/(2+1) = 2/3
+        # mass maximum = 2/(2+1) = 2/3
         assert pair_n2.cb_norm_central == sp.Rational(2, 3)
         # gamma_2 = pi - 64*sqrt(2)/(27*pi) ~ 2.0746
         expected = float(sp.pi - 64 * sp.sqrt(2) / (27 * sp.pi))
@@ -333,7 +335,7 @@ class TestPropinquityBound:
         # gamma_2 ~ 2.07
         assert bound.gamma_n_max > 1.5
         assert bound.gamma_n_max < 2.5
-        # cb-norm = 2/3
+        # mass maximum = 2/3
         assert bound.cb_norm_central == pytest.approx(2.0 / 3.0, rel=1e-9)
         # propinquity bound = C_3 * gamma_2 = 1 * 2.07 = 2.07
         assert bound.propinquity_bound == pytest.approx(
@@ -346,7 +348,7 @@ class TestPropinquityBound:
         # gamma_3 ~ 1.61
         assert bound.gamma_n_max > 1.3
         assert bound.gamma_n_max < 1.9
-        # cb-norm = 1/2
+        # mass maximum = 1/2
         assert bound.cb_norm_central == pytest.approx(1.0 / 2.0, rel=1e-9)
 
     def test_compute_at_n_max_4(self):
@@ -599,7 +601,7 @@ class TestInfrastructureIntegration:
         assert pair_n2.gamma_rate_value == pytest.approx(gamma_l2, rel=1e-9)
 
     def test_cb_norm_matches_l2_module(self, pair_n2: TunnelingPair):
-        """The cb-norm in TunnelingPair matches L2's central_multiplier_cb_norm."""
+        """The mass maximum in TunnelingPair matches L2's central_multiplier_cb_norm."""
         from geovac.central_fejer_su2 import central_multiplier_cb_norm
         cb_l2 = central_multiplier_cb_norm(2)
         assert pair_n2.cb_norm_central == cb_l2

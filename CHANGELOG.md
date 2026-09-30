@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.16] - 2026-09-30
+
+**Patch. /qa trunk DELTA #22 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 1 LARGE, down from 10: the cb-norm correction had not reached the code layer. The π-source converse is restored to "withdrawn: not established".**
+
+### The run
+- **Four Opus reviewers: 0 LARGE from claims, claim-impact and citations.**
+  - Claims: every corrected result re-derived; the K tripwire is clean.
+  - Claim-impact: all nine changed claims came back clean corpus-wide by idea.
+  - Citations: EMN/Deligne, Paulsen and Paper 2's F were checked against primary sources.
+- **The one LARGE (code).** The tests and geovac modules behind Papers 39 and 45 still labelled the Plancherel mass maximum 2/(n+1) and 4/((n_a+1)(n_b+1)) a cb-norm, contradicting the papers' "cb-norm = 1". Papers 38, 39 and 40 establish cb-norm = 1 because the smoothing map is UCP. Paper 39's new joint cb-norm = 1 had no test.
+- **About 25 SMALL**, mostly summary surfaces that did not move with their owners, stale test docstrings, and a withdrawn Bożejko–Fendler appeal still live at two loci.
+- **PI rulings:**
+  - The gauge group stays in Paper 57's forced bucket, "relative to the adopted Upgrade B axiom".
+  - The [SYMBOLIC PROOF] tag on Paper 7's 18 checks stays.
+
+### Remediation
+- **Gate first.** A new code-layer C16 entry `code-layer-mass-max-labelled-cb-norm` scans tests/ and geovac/ (155 entries total). On its first run it found 4 mislabelled loci the reviewer had not listed.
+- **Code layer.**
+  - Docstrings, comments, formula lines and test prose were relabelled across about 13 files.
+  - Identifiers are kept for API stability, and module docstrings now carry a NAMING NOTE.
+  - Bożejko–Fendler justifications in code are withdrawn: the result concerns discrete groups, and a product of mass maxima is elementary.
+- **Papers:**
+  - Bożejko–Fendler is withdrawn in the group1 synthesis, P32 and P39; Paulsen Prop. 3.6 is cited in P39 with a new bibitem.
+  - P18: F is half ζ_{S¹}(1) at three loci.
+  - P55's abstract says "indexes", not "uniquely identifies".
+  - P35's section title changes from "Promotion…" to "Anchoring in the spectral triple (conditional)".
+  - Case-exhaustion scope residue fixed in the group1 synthesis, P32 and P55.
+  - P45's table header and caption now read "mass max".
+  - P57 says "forced relative to the adopted Upgrade B axiom" at L77, at L347 and in the 35-count, mirrored in the group3 synthesis.
+  - P50, P56, the field guide and the INDEX P32 row were also brought into line.
+- **Tests and matrix:**
+  - Three stale docstrings fixed; the Pearson test now reads 0.846/0.796.
+  - The PSLQ helper's narrow scope is stated.
+  - The order-one "normalised residual" row is marked unbacked.
+- **Guard.** `test_joint_smoothing_map_is_ucp_cb_norm_one` (Paper 39 Lemma L2-T(c)).
+
+### Pre-checkpoint self-check: 1 LARGE + 7 SMALL, all fixed
+- **The LARGE was my own overclaim.** I had called M1's rational core B = 42 a "proven witness", so that the converse "does not hold in general". B being rational is proven. B being an M1 output is Paper 55's tagging convention, not a proof. The converse is restored to "withdrawn: not established" in P32, the group1 synthesis and the matrix row.
+- **The first joint guard was near-tautological.** It computed Σ(2j+1)/Z, which equals 1 by the definition of Z. It was rebuilt to integrate the actual kernel |D|²/Z against the conjugacy-class Haar measure, and fire-tested on three wrong answers (a doubled Z, a mis-normalised kernel, the mass maximum read as the cb-norm).
+- **SMALLs:**
+  - formula lines still written as ‖·‖_cb;
+  - residual Bożejko–Fendler in code;
+  - P39 L1405;
+  - P45 caption;
+  - P50 "live outside";
+  - P57 "can and cannot appear".
+
+### Verification
+- All 14 gates PASS. C10 covers the whole corpus (57 papers). C16 155/155.
+- Touched tests: 483 passed, 19 skipped. The four docstring-edited files were re-run separately.
+
 ## [v5.17.15] - 2026-09-30
 
 **Patch. /qa trunk DELTA #21 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). ~10 LARGE loci in 6 families; no keystone math defect. The π-source case-exhaustion converse (iii)⇒(i) is WITHDRAWN (PI decision).**

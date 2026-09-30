@@ -1,5 +1,7 @@
 """Tensor-product propinquity convergence on S^3 x S^3 (Phase C-W2b-easy).
 
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
+
 This module extends the single-factor GH-convergence theorem of Paper 38
 (see ``geovac/gh_convergence.py``) to a tensor product of two truncated
 Camporesi-Higuchi spectral triples on S^3 at distinct focal lengths
@@ -96,7 +98,7 @@ holds in our specific case, sharpening the bound.
 L2 (joint central spectral Fejer).  The single-factor central Fejer
 kernel on SU(2) has Plancherel symbol
     hat{K}_{n_max}(j) = (2j+1) / Z_{n_max},   j <= j_max,
-with Z_{n_max} = n_max(n_max+1)/2 and cb-norm 2/(n_max+1).
+with Z_{n_max} = n_max(n_max+1)/2 and mass maximum 2/(n_max+1).
 The tensor extension is the product kernel
     K^{(a,b)}(g_1, g_2) := K^{(a)}(g_1) K^{(b)}(g_2)   on SU(2) x SU(2),
 with joint Plancherel symbol
@@ -106,9 +108,10 @@ The joint mass-concentration moment satisfies
                            <= 2 max(gamma_{n_a}, gamma_{n_b}),
 following from the triangle inequality for the joint distance
 d_{S^3 x S^3}((e,e), (g_1, g_2)) <= d(e, g_1) + d(e, g_2). The joint
-cb-norm on the central subalgebra is the product:
-    ||T_{K^{(a,b)}}||_cb = ||hat{K}^{(a)}||_inf * ||hat{K}^{(b)}||_inf
-                         = 4 / ((n_a+1)(n_b+1))   = O(1/(n_a n_b)).
+mass maximum is the product of the factor mass maxima:
+    mass_max^{(a,b)} = mass_max^{(a)} * mass_max^{(b)}
+                     = 4 / ((n_a+1)(n_b+1))   = O(1/(n_a n_b))
+(not a cb-norm: the joint smoothing map is UCP, cb-norm 1).
 
 L3 (joint Lipschitz comparison).  Single-factor C_3 = 1. The
 Connes-Marcolli Leibniz rule gives
@@ -119,9 +122,9 @@ so for f, g of unit Lipschitz norm in their respective factors:
 giving joint C_3^{(2)} <= 2 in general. On the FACTORIZED observable
 panel where both ||g||_inf, ||f||_inf <= 1 (normalized panel), the
 factorized panel C_3 = max(1, 1) = 1 in the supremum sense, with
-sharper bookkeeping showing factorized panel C_3 = 1 exactly via the
-Bozejko-Fendler-style separation argument applied to each factor
-separately.
+sharper bookkeeping showing factorized panel C_3 = 1 exactly by
+applying the single-factor compression bound (Paper 38 L3) to each
+factor separately.
 
 L4 (joint Berezin reconstruction).  Single-factor B_{n_max}: C(S^3) ->
 O_{n_max} positivity, contractivity, approximate identity. Joint
@@ -175,10 +178,10 @@ propinquity bound and the factor-by-factor inheritance of L1', L2, L4.
 What this run closes:
   - L1'-T (joint operator system): symbolic verification + numerical
     check at (n_a, n_b) = (2, 2) and (2, 3).
-  - L2-T (joint Plancherel symbol, joint cb-norm, joint gamma): closed
+  - L2-T (joint Plancherel symbol, joint mass maximum, joint gamma): closed
     form, factorized via product Plancherel.
   - L3-T (joint Lipschitz, factorized panel C_3 <= 1): closed form via
-    Leibniz; full operator system C_3 <= 2 via Bozejko-Fendler.
+    Leibniz; full operator system C_3 <= 2 via the triangle bound.
   - L4-T (joint Berezin): factor-by-factor inheritance, all four
     properties verified on a 5-function product panel.
   - L5-T (joint propinquity bound): assembly with rate
@@ -186,9 +189,9 @@ What this run closes:
     (n_a, n_b) in {(2,2), (2,3), (3,3), (3,4), (4,4)}.
 
 What remains for follow-up:
-  - Joint L3 on the FULL (not factorized) operator system: symbolic
-    Bozejko-Fendler product cb-norm verification beyond the factorized
-    panel is sketched but not proved exhaustively. The factorized panel
+  - Joint L3 on the FULL (not factorized) operator system: a
+    verification beyond the factorized panel is sketched but not proved
+    exhaustively (the earlier Bozejko-Fendler framing is withdrawn). The factorized panel
     case gives C_3 = 1; the full operator system case gives the triangle
     bound C_3 >= 1 -> sqrt(2). (An earlier "tighten to C_3 = 1 + o(1)"
     Pythagorean plan was WITHDRAWN 2026-06-18 as operator-norm-false,
@@ -239,7 +242,8 @@ strictly outside the published frontier.]
 C. Farsi & F. Latremoliere, "Collapse in noncommutative geometry,"
 arXiv:2404.00240 (2024). [Products with one abelian factor.]
 
-(Bozejko-Fendler product cb-norm.)
+(Bozejko-Fendler -- cited historically; withdrawn as support here: the
+result concerns multipliers, and the cb-norm of the UCP smoothing map is 1.)
 M. Bozejko & G. Fendler, "Herz-Schur multipliers and completely bounded
 multipliers of the Fourier algebra of a locally compact group," Boll.
 Un. Mat. Ital. A 3 (1984) 297-302.
@@ -584,14 +588,14 @@ def joint_cb_norm_central(n_a: int, n_b: int) -> sp.Rational:
     Plancherel), the cb-norm of the product convolution operator
     T_{K^{(a,b)}} = T_{K^{(a)}} (X) T_{K^{(b)}} factorizes:
 
-        ||T_{K^{(a,b)}}||_cb = ||T_{K^{(a)}}||_cb * ||T_{K^{(b)}}||_cb
-                             = (2 / (n_a + 1)) * (2 / (n_b + 1))
-                             = 4 / ((n_a + 1)(n_b + 1)).
+        [historical: printed as ||T_{K^{(a,b)}}||_cb; the value is the
+         joint MASS maximum]
+        mass_max^{(a,b)} = (2 / (n_a + 1)) * (2 / (n_b + 1))
+                         = 4 / ((n_a + 1)(n_b + 1)).
 
-    This is the Bozejko-Fendler product cb-norm equality applied to the
-    central subalgebra of an amenable compact group; the two-factor case
-    follows from the standard tensor-product cb-norm identity for
-    completely bounded multipliers (Pisier 2001 Ch. 8 Theorem 4).
+    (The original Bozejko-Fendler / Pisier justification is withdrawn:
+    the product of mass maxima is elementary, and the true cb-norm of the
+    UCP smoothing map is 1.)
 
     The asymptotic order is O(1 / (n_a * n_b)).
 
@@ -1068,7 +1072,7 @@ class TensorTunnelingPair:
     joint_dim : int
         Joint Hilbert space dimension N_a * N_b.
     cb_norm_joint : sp.Rational
-        Joint central-multiplier cb-norm: 4 / ((n_a+1)(n_b+1)).
+        Joint central-multiplier mass maximum: 4 / ((n_a+1)(n_b+1)).
     """
 
     n_max_a: int
@@ -1092,7 +1096,7 @@ class TensorTunnelingPair:
         """Construct the joint tunneling pair at cutoffs (n_a, n_b).
 
         Each single-factor TunnelingPair is built via TunnelingPair.build,
-        and the joint cb-norm is computed in closed form via
+        and the joint mass maximum is computed in closed form via
         joint_cb_norm_central.
 
         Args:
@@ -1191,7 +1195,7 @@ class TensorPropinquityBound:
     gamma_a, gamma_b : float
         Single-factor gamma rates (lambda-rescaled).
     cb_norm_joint : float
-        Joint central cb-norm 4 / ((n_a+1)(n_b+1)).
+        Joint central mass maximum 4 / ((n_a+1)(n_b+1)).
     c_lipschitz_factorized : float
         Joint C_3 on the factorized panel (= 1 by Leibniz).
     c_lipschitz_full : float
@@ -1557,7 +1561,7 @@ def tensor_L2_central_fejer(
     Verifies:
       (a) Joint Plancherel symbol factorizes: hat{K}_{joint}(j_a, j_b)
           = hat{K}^{(a)}(j_a) hat{K}^{(b)}(j_b).
-      (b) Joint cb-norm: ||T_K_joint||_cb = (2/(n_a+1)) (2/(n_b+1))
+      (b) Joint mass maximum: max K_joint-hat = (2/(n_a+1)) (2/(n_b+1))
           = 4 / ((n_a+1)(n_b+1)).
       (c) Subadditive joint mass-concentration: gamma_joint <= gamma_a + gamma_b.
 

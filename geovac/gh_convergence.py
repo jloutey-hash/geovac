@@ -1,5 +1,7 @@
 """State-space Gromov-Hausdorff assembly (Lemma L5) for the GeoVac S^3 spectral triple.
 
+NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
+
 CONVENTION (2026-09-03): the distance controlled here is van Suijlekom's
 state-space Gromov-Hausdorff distance (Paper 38); Latremoliere's propinquity
 for metric spectral triples is NOT claimed (dual reach = named gap).  The
@@ -39,8 +41,8 @@ converge to the round-S^3 triple as n_max -> infinity:*
 [2/(n_max+1) is the Plancherel MASS maximum, not a cb-norm -- the true
 ||T_K||_cb is 1, retired identification 2026-09-03] --
 explicit state-space GH constant assembled from L3 (C_3 = 1, the Lipschitz
-comparison) and L2 (||K||_cb = 2/(n_max+1) on the central subalgebra,
-the Bozejko-Fendler symbol-side estimate), and gamma_{n_max} the L2
+comparison) and L2 (the mass maximum 2/(n_max+1) -- not a cb-norm;
+the Bozejko-Fendler framing is withdrawn), and gamma_{n_max} the L2
 mass-concentration moment, whose rate gamma_{n_max} = (c + o(1)) log n / n
 is proven unconditionally in Paper 38 (translation-seminorm metrization,
 2026-06-10); the constant c is metric-convention dependent -- 4/pi in the
@@ -107,8 +109,8 @@ L1'--L4 supply each piece:
       faster than gamma_{n_max} on Lipschitz f):
       || M_f - sigma B(f) ||_op <= gamma_{n_max} * ||f||_Lip
       where sigma is the natural inclusion (B's left-inverse on
-      the central subalgebra, via Bozejko-Fendler symbol invertibility
-      L2(g)).
+      the central subalgebra, via invertibility of the kernel's
+      Fourier coefficients, L2(g)).
 
   - height_B  (Lipschitz-distortion of the tunnel map; SEE ERRATUM BELOW):
       Per Paper 38 (papers/standalone/paper_38_su2_propinquity_convergence.tex
@@ -163,8 +165,9 @@ Honest scope of the bound
 =========================
 
 (i) The bound is derived for SCALAR multipliers (the test functions
-    f in C^infty(S^3)) in the central subalgebra, where Bozejko-Fendler
-    cb-norm equality holds.  Non-central f are handled by the L4 spectral
+    f in C^infty(S^3)) in the central subalgebra (the earlier appeal to a
+    Bozejko-Fendler cb-norm equality is withdrawn; the smoothing map is
+    UCP with cb-norm 1).  Non-central f are handled by the L4 spectral
     form of B (which absorbs them; see L4 memo Section 2.3 for the
     centrality discussion).
 
@@ -320,7 +323,7 @@ class TunnelingPair:
     c_lipschitz : float
         The L3 Lipschitz comparison constant C_3 = 1.
     cb_norm_central : sp.Rational
-        The L2 central-multiplier cb-norm 2/(n_max+1) (exact rational).
+        The L2 central-multiplier mass maximum 2/(n_max+1) (exact rational).
     gamma_rate : float
         The L2 mass-concentration moment gamma_{n_max} (numerical).
     """
@@ -580,7 +583,7 @@ class PropinquityBound:
     c_lipschitz : float
         L3 Lipschitz comparison constant C_3 = 1.
     cb_norm_central : float
-        L2 central-multiplier cb-norm 2/(n_max+1).
+        L2 central-multiplier mass maximum 2/(n_max+1).
     reach_B_panel : float
         Empirical max reach over the L4 test panel.
     reach_B_bound : float

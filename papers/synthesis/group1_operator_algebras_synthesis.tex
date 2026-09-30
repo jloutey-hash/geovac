@@ -523,9 +523,10 @@ or transcendental quantity appears anywhere in the Ihara
 polynomials, in any of the tested factorizations
 (Paper~29~\S 5.4~\cite{paper29}, Corollary on integer-algebraicity).
 This is the graph-spectral analog of the
-$\pi$-source case-exhaustion theorem (Paper~32~\S 8): both say that
-$\pi$ enters only through specific named mechanisms ($k = 0$ volume
-slot; spectral action; vertex-parity Hurwitz character), never in the bare
+$\pi$-source case-exhaustion theorem (Paper~32~\S 8, \textbf{[CONDITIONAL]},
+first fifteen Paper~34 projections): both say that, where $\pi$ appears,
+it enters through specific named mechanisms ($k = 0$ volume slot;
+spectral action; vertex-parity Hurwitz character), never in the bare
 combinatorial data.  Second, the Hashimoto-spectrum Poisson
 statistics (Paper~29~\S 6.3) are categorically distinct from the
 GUE-like statistics seen on the spectral-zeta side of the framework,
@@ -632,11 +633,9 @@ smoothing map is unital completely positive, so its cb-norm is
 \label{eq:cb_norm}
 \end{equation}
 (the value $2/(\nmax+1)$ printed here before 2026-09-30 is the
-mass-distribution maximum, not a cb-norm), consistent with the
-Bo\.zejko--Fendler central-multiplier equality
-\cite{bozejko_fendler1991} on amenable compact groups (Pier
-\cite{pier1984}; Paulsen \cite{paulsen2002}; Pisier
-\cite{pisier2001}).
+mass-distribution maximum, not a cb-norm):\ convolution by a
+positive unit-mass kernel is unital completely positive, and a UCP map
+has cb-norm $1$ (Paulsen~\cite{paulsen2002}, Prop.~3.6).
 
 \paragraph{The asymptotic constant $4/\pi$.}
 The mass-concentration moment $\gamma_{\nmax}$ of the kernel
@@ -1324,8 +1323,8 @@ substantial open NCG-math problem.
 \item[(G2)] \textbf{De-compactification $T \to \infty$.}  The temporal
 factor is compactified to $\Uone_{T}$ with finite radius $T$.
 De-compactification to non-compact $\R_{t}$ is a separate program
-(internal Sprint L3c) requiring renormalisation of the cb-norm bound
-and reach moment.
+(internal Sprint L3c) requiring renormalisation of the
+mass-concentration moment and reach moment.
 \item[(G3)] \textbf{Cross-manifold $\Tcal_{\sthree} \otimes
 \Tcal_{\mathrm{Hardy}(\sfive)}$.}  Blocked at the NCG-framework level
 by the Riemannian-vs-Hardy-sector asymmetry recorded in Paper~24~\S V
@@ -1364,8 +1363,8 @@ the first fifteen Paper~34 projections applied to a Layer-1 datum on
 $(\AGV, \HGV, \DGV)$ or its Bargmann--Segal sibling triple.  Then
 (i)$\Leftrightarrow$(ii) (empirical, Paper~35) and (ii)$\Rightarrow$(iii)
 (case-by-case argument);\ the converse (iii)$\Rightarrow$(i) is
-withdrawn (2026-09-30:\ M2 at half-integer $s$ and M3 at $s = 4$ give
-$\pi$-free values):
+withdrawn as not established (2026-09-30:\ M2 at half-integer $s$ and
+M3 at $s = 4$ give values with no known $\pi$):
 \begin{itemize}\setlength\itemsep{0pt}
 \item[(i)] $\mathcal{C}$(datum) contains a transcendental of the form
 $\pi^{k}$ for $k \in \Q$;
@@ -1443,7 +1442,9 @@ The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
 can appear in evaluations of GeoVac projection chains.  The constant
 $4/\pi$ of Paper~38 is a \emph{metric-geometry-level} statement about
 the state-space GH rate.  The fact that these two abstractly-different
-levels agree on the same signature is non-trivial: it identifies the
+levels agree on the same signature is a consistency check within one
+normalisation (in Kac's normalisation the constant is $2\sqrt2/\pi$, so
+the agreement is convention-dependent): it identifies the
 metric geometry of the GeoVac spectral triple as carrying the same
 M$_{1}$ signature that the abstract Mellin engine catalogues.
 Abstract taxonomy meets concrete state-space GH rates.  (Paper~42~\S 11.7's
