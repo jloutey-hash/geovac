@@ -1,5 +1,7 @@
 """Joint compact x compact central Fejer kernel on SU(2) x U(1).
 
+HYBRID NOTE (DELTA #23, 2026-09-30): the SU(2) x U(1) 'joint' value 2/(n_max+1) * 1 pairs the SU(2) Plancherel MASS maximum with the U(1) Fejer SYMBOL maximum (1); per Paper 45 it is a hybrid that is neither a mass maximum (that is 2/(n_max+1) * N_t^-1) nor a cb-norm (that is 1). It is kept only to reproduce the historical sub-sprint B numbers.
+
 NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
 
 Sprint L3b first move (2026-05-17): the joint central spectral Fejer
@@ -48,11 +50,10 @@ This module provides the joint kernel construction and computes
 gamma^{joint} at low (n_max, N_t, T) panel.  It does NOT:
 
   - Establish a propinquity bound (that's the L1'-L5 program).
-  - Prove the joint Schur multiplier mass maximum equals the product of
-    factor mass maxima (elementary: the maximum of a product of
-    nonnegative factor symbols; no multiplier theorem is needed. The
-    earlier Bozejko-Fendler appeal is withdrawn -- that result concerns
-    discrete groups).
+  - Interpret the historical joint hybrid value (SU(2) mass maximum
+    times U(1) symbol maximum; Paper 45: neither a mass maximum nor a
+    cb-norm).  The earlier Bozejko-Fendler appeal is withdrawn -- that
+    result concerns discrete groups.
   - Establish a quantitative rate constant (the Paper 38 4/pi
     asymptote on SU(2) is preserved; the U(1) factor gives a 1/N_t
     rate by standard Fejer-on-the-circle, so the joint rate is
@@ -78,7 +79,8 @@ API
       Numerical gamma^{joint}(n_max, N_t, T) via mpmath integration.
 
   joint_cb_norm(n_max, N_t)
-      Product of factor mass maxima: 2/(n_max+1) * 1.
+      Historical hybrid: SU(2) mass maximum * U(1) symbol maximum
+      = 2/(n_max+1) * 1 (neither a mass maximum nor a cb-norm; Paper 45).
 
   joint_plancherel_symbol(n_max, N_t, j, k)
       hat{K}^{joint}(j, k) = hat{K}^{SU(2)}(j) * hat{K}^{U(1)}(k).
@@ -222,7 +224,14 @@ def cb_norm_circle(N_t: int) -> sp.Rational:
 def joint_plancherel_symbol(
     n_max: int, N_t: int, j: Rational, k: int
 ) -> sp.Rational:
-    """Joint Plancherel symbol hat{K}^{joint}(j, k) of K^{SU(2)} (x) K^{U(1)}.
+    """Historical 'joint Plancherel symbol' of K^{SU(2)} (x) K^{U(1)} -- a HYBRID.
+
+    It multiplies the SU(2) Plancherel MASS (2j+1)/Z by the U(1) Fejer
+    multiplier SYMBOL, so (Paper 45) it is neither the joint mass
+    distribution nor the joint multiplier symbol.  (Its U(1) support
+    convention, |k| <= (N_t-1)/2, also differs from Paper 45 Lemma L2(b)'s
+    |k| <= N_t - 1; the maximum, 1, is the same.)  Kept to reproduce the
+    historical numbers.
 
     By the tensor-product construction,
 
@@ -236,16 +245,16 @@ def joint_plancherel_symbol(
 
 
 def joint_cb_norm(n_max: int, N_t: int) -> sp.Rational:
-    """mass maximum of the joint kernel = product of factor mass maxima.
+    """Historical sub-sprint B 'joint cb-norm' value -- a HYBRID (Paper 45).
 
-    The joint mass distribution is the product of the factor ones, so
-    its maximum is the product of factor maxima (elementary):
+        hybrid = mass_max(SU(2)) * symbol_max(U(1))
+               = (2 / (n_max + 1)) * 1
+               = 2 / (n_max + 1).
 
-        mass_max(joint) = mass_max(SU(2)) * mass_max(U(1))
-                        = (2 / (n_max + 1)) * 1
-                        = 2 / (n_max + 1).
-
-    This is NOT a cb-norm: the joint smoothing map is UCP, cb-norm 1.
+    It pairs the SU(2) Plancherel MASS maximum with the U(1) Fejer SYMBOL
+    maximum, so it is neither the joint mass maximum (2/(n_max+1) * 1/N_t)
+    nor a cb-norm (the joint smoothing map is UCP, cb-norm 1).  Kept only
+    to reproduce historical numbers.
     """
     cb_su2 = Rational(2, n_max + 1)
     cb_u1 = cb_norm_circle(N_t)

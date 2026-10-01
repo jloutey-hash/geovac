@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.17] - 2026-09-30
+
+**Patch. /qa trunk DELTA #23 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 1 LARGE + 1 borderline, both residue of the PM's own previous fixes rather than corpus debt. Mathematics clean.**
+
+### The run
+- **Three Opus reviewers:** claims on the diff; claim-impact over papers and code, which also covered citations; and code. Every touched test passed (465 passed, 19 skipped).
+- **LARGE.** P32 L2431 (the keystone proof sketch) and P35 L846 said "engaging a mechanism does not force π". That states the converse is *false*, against the DELTA #22 ruling that it is "not established". The same inversion appeared in two more places: P55's theorem box, and a test docstring calling B = 42 "(proven)".
+- **Borderline LARGE.** The DELTA #22 relabel called the SU(2)×U(1) value 2/(n+1)·1 a "joint mass maximum" at about 6 code and test loci. Paper 45 states this value is a **hybrid**: the SU(2) mass maximum times the U(1) symbol maximum, neither a mass maximum nor a cb-norm.
+- **About 18 SMALL:**
+  - residual cb-norm / "Plancherel symbol" conflation in `berezin_reconstruction` (which implements the withdrawn N/Z map), the `central_fejer_su2` header, the Cesàro-2 "cb-norm" test and `gh_convergence`;
+  - Bożejko–Fendler still credited at 5 code loci, at P40 L2067, and in orphaned bibitems in P39 and P45;
+  - P57 L347 "witness derivation" for the gauge group;
+  - the group1 synthesis calling 4/π "the unit-sphere volume quotient" (it is twice that quotient);
+  - a claim-matrix row calling Paper 35's prediction a "structural corollary";
+  - the joint-UCP guard's positivity leg, which sampled 17 points and could be evaded by an aliased negative lobe.
+- **Unrelated.** One Lorentzian test took 382 s and was not marked slow.
+
+### Remediation
+- **Gate first.** Three new idea-level C16 entries scan papers, tests and code. There are now 158 entries; all were discrimination-tested and have 0 live hits:
+  - pi-source-converse-stated-false
+  - lorentzian-hybrid-labelled-mass-max
+  - bozejko-fendler-as-support
+- **Papers:**
+  - "is not known to force π" in P32 and P35;
+  - P55's converse now reads "not established", and B = 42 is labelled a tagging convention;
+  - P57 L347 now says "organizing reading plus the adopted Upgrade B axiom, not a derivation";
+  - P40 drops its Bożejko–Fendler label, and the orphan bibitems are removed from P39, P45 and the group1 synthesis;
+  - the group1 synthesis now says 4/π is twice Vol(S²)/Vol(S³), with the M1 tag a convention-dependent reading;
+  - P32 "(see the proof sketch)";
+  - the matrix row now says Paper 35's theorem "anchors" the prediction.
+- **Code:**
+  - The hybrid is labelled as such throughout, including `joint_plancherel_symbol`. That function's U(1) support convention differs from P45 Lemma L2(b); this is flagged, and the maximum (1) is the same.
+  - `berezin_reconstruction` gets a HISTORICAL NOTE.
+  - The `central_fejer_su2` header now separates the mass m(j) from the multiplier symbol σ(j) = c_j/(2j+1).
+  - The Cesàro-2 value is relabelled as a mass maximum.
+  - Bożejko–Fendler credits are relabelled: C₃ ≤ 2 is the Leibniz estimate, and the "UCP partial inverse" is a withdrawn premise.
+- **Guard.** The positivity check is now ‖K‖_{L¹} = 1 by quadrature, which is equivalent to K ≥ 0 for a unit-mass kernel. It fires on the exact aliasing kernel that escaped before.
+- **Two slow tests** are marked `@slow`.
+
+### Pre-checkpoint self-check: 0 LARGE, 4 SMALL + 3 NIT, all fixed
+- A regex in my own relabel had turned "joint mass maximum" into "joint hybrid value" inside the new hybrid docstring.
+- Lorentzian field docstrings and "Compare cb-norms" comments.
+- The `joint_plancherel_symbol` hybrid note.
+- Residual Bożejko–Fendler in `central_fejer_su2`.
+- An orphan bibitem in the synthesis.
+- The self-check also confirmed the maths behind three changes: σ(j) = c_j/(2j+1), ‖K‖_{L¹} = 1 ⇔ K ≥ 0, and no dangling `\cite` after the bibitems were dropped.
+
+### Verification
+- All 14 gates PASS. C10 covers the whole corpus (57 papers). C16 158/158.
+- Touched tests pass.
+
 ## [v5.17.16] - 2026-09-30
 
 **Patch. /qa trunk DELTA #22 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 1 LARGE, down from 10: the cb-norm correction had not reached the code layer. The π-source converse is restored to "withdrawn: not established".**

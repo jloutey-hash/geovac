@@ -1120,6 +1120,60 @@ REGISTRY = [
         },
     },
     {
+        "id": "pi-source-converse-stated-false",
+        # The pi-source converse (iii)=>(i) is WITHDRAWN as NOT ESTABLISHED: no mechanism output is PROVED pi-free (B = 42's M1 tag is a Paper 55 convention). Retires 'does not force pi', 'not every output of a mechanism carries pi', 'B = 42 ... proven witness'. DELTA #23.
+        "pattern": r"does\s+not\s+force\s+\$?\\?pi|not\s+every\s+output\s+of\s+a\s+mechanism\s+carries|proven\s+witness|B\s*=\s*42\s*\n?\s*\(proven\)",
+        "exempt_if_nearby": withdrawal_marker("pi-source-converse-stated-false"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #23, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "tests/*.py",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (DELTA #23 sweep; PM-verified gate 0 live)",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated 2026-09-30 (DELTA #23 sweep; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-09-30 (DELTA #23 sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "lorentzian-hybrid-labelled-mass-max",
+        # Paper 45: the SU(2) x U(1) value 2/(n_max+1)*1 pairs the SU(2) MASS maximum with the U(1) SYMBOL maximum -- a hybrid, neither a mass maximum (2/(n_max+1)/N_t) nor a cb-norm (1). DELTA #22 had mislabelled it 'joint mass maximum'. DELTA #23.
+        "pattern": r"mass_max\(U\(1\)\)|[Jj]oint\s+mass\s+maximum\s*(?:=|\(not)",
+        "exempt_if_nearby": withdrawal_marker("lorentzian-hybrid-labelled-mass-max"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #23, idea-level gate; PI-approved).",
+        "files": [
+            "tests/*.py",
+            "geovac/*.py",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": "remediated 2026-09-30 (DELTA #23 sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "bozejko-fendler-as-support",
+        # Bozejko-Fendler (Arch. Math. 57, 1991) concerns DISCRETE groups; it supports neither the compact-group central kernel, nor a cb-norm equality, nor the C_3 <= 2 Leibniz bound, nor a UCP partial inverse. Withdrawn as support corpus-wide (P32/P40/P39/group1 synthesis/code). DELTA #23.
+        "pattern": r"Bo\S{0,6}?ejko--?Fendler\s+(?:central\s+kernel|estimate\b|bound\b|symbol-side|product\s+cb-norm\s+formula|central-multiplier\s+equality)|generic\s+Bozejko-Fendler|conservative\s+Bozejko-Fendler",
+        "exempt_if_nearby": r"withdrawn|mislabel|historical|discrete groups|retired|" + withdrawal_marker("bozejko-fendler-as-support"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk DELTA #23, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "tests/*.py",
+            "geovac/*.py",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": "remediated 2026-09-30 (DELTA #23 sweep; PM-verified gate 0 live)",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "remediated 2026-09-30 (DELTA #23 sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "hopf-base-measure-label",
         # The M1 mechanism's name 'Hopf-base measure' is a misnomer: M1 is the k=0 VOLUME SLOT of the master
         # Mellin engine (Paper 18 sec. III.7), not a Hopf base-to-total ratio, and the 4/pi GH-rate constant is the

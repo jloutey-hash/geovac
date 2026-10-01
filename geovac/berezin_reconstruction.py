@@ -1,5 +1,7 @@
 """Berezin-type reconstruction map B_{n_max}: C(S^3) -> O_{n_max} (R2.5 Lemma L4).
 
+HISTORICAL NOTE (DELTA #23, 2026-09-30): this module implements the sprint-R2.5 L4 map weighted by the kernel's MASS distribution N/Z over N <= n_max.  Paper 38 shows that map is not unital (B(1) = Z^-1 I) and is not the convolution form P(K*f)P (they are different operators); the corrected Berezin map uses the multiplier symbol sigma(N) over N <= 2 n_max - 1.  The smoothing map has cb-norm 1 (UCP).  The module is kept to reproduce the historical numbers; names containing 'Plancherel symbol' / 'cb_norm' are historical.
+
 This module realizes Lemma L4 of the GH-convergence proof shape laid out in
 `debug/track_ts_a_gh_convergence_memo.md` Section 5.4. It constructs the
 Berezin-type reconstruction map
@@ -22,7 +24,7 @@ The L2 central spectral Fejer kernel (sprint R2.5/L2,
 
     K_{n_max}(g) = Z_{n_max}^{-1} | sum_{j <= j_max} sqrt(2j+1) chi_j(g) |^2
 
-has Plancherel symbol on the central subalgebra L^2_{cent}(SU(2))
+has Plancherel mass distribution on the central subalgebra L^2_{cent}(SU(2))
 
     hat{K}_{n_max}(j) = (2j + 1) / Z_{n_max}    for j <= j_max,
                       = 0                      for j  > j_max,
@@ -31,7 +33,7 @@ with Z_{n_max} = n_max(n_max + 1)/2 and j_max = (n_max - 1)/2.
 
 Under the Peter-Weyl bijection n = 2j + 1 (verified to be the Fock-shell
 index, see `geovac/so4_three_y_integral.py` and `central_fejer_su2.py`),
-the Plancherel symbol on Fock shell N is
+the mass distribution on Fock shell N is
 
     hat{K}_{n_max}(N) := hat{K}_{n_max}(j = (N-1)/2)
                      = N / Z_{n_max}    for N <= n_max,
@@ -55,8 +57,9 @@ constructed in `geovac/operator_system.py::build_multiplier_matrix` (using
 the Avery-Wen-Avery 3-Y integral on S^3).
 
 This is the canonical "reconstruction" of f as an operator-system element
-weighted by the L2 Plancherel symbol. Equivalently, B_{n_max} is the
-composition
+weighted by the L2 mass distribution.  [Historical claim, withdrawn by
+Paper 38: the two forms below are different operators.]  Equivalently,
+B_{n_max} was read as the composition
 
     B_{n_max} : f |--> P_{n_max} (K_{n_max} * f) P_{n_max}
 
@@ -99,7 +102,7 @@ since K_{n_max} is a probability density on SU(2). Compression P(.)P does
 not increase operator norm: || P g P ||_op <= || g ||_op = || g ||_infty
 on multiplication operators by Sobolev / Cauchy-Schwarz.
 
-(c) Approximate identity (rate controlled by L2 cb-norm)
+(c) Approximate identity (historical; rate via the L2 moment gamma)
 --------------------------------------------------------
 
 For f in C^infty(S^3),
@@ -113,8 +116,8 @@ P_{n_max} M_f P_{n_max} is the unweighted compression of f to O_{n_max}.
 This is the L^infty-to-operator-norm comparison form needed for Track A's
 Latremoliere quantum GH propinquity bound (L5).
 
-Equivalently, on the central subalgebra Z(C(SU(2))), the cb-norm equality
-of L2(g) gives the symbol-side estimate
+[Historical, withdrawn:] on the central subalgebra Z(C(SU(2))), a
+cb-norm equality of L2(g) was taken to give the symbol-side estimate
 
     || (id - B_{n_max}) f ||_op  <=  || id - hat{K}_{n_max} ||_{l^infty}
                                        * || f ||_{C(SU(2))}
@@ -242,7 +245,7 @@ from geovac.r25_l3_lipschitz_bound import (
 
 @dataclass(frozen=True)
 class PlancherelSymbol:
-    """Holder for the L2 Plancherel symbol hat{K}_{n_max}(j_N) = N / Z_{n_max}.
+    """Holder for the L2 mass distribution N / Z_{n_max} (historically called the Plancherel symbol).
 
     Wraps central_fejer_su2.plancherel_symbol with a Fock-shell-indexed
     accessor `weight_for_shell(N)` returning the EXACT sympy Rational
@@ -284,8 +287,9 @@ class PlancherelSymbol:
     def linfty_norm(self) -> sp.Rational:
         """|| hat{K}_{n_max} ||_{l^infty} = max weight = n_max / Z_{n_max}.
 
-        From central_fejer_su2.central_multiplier_cb_norm: this equals
-        2 / (n_max + 1). Returned as exact sympy Rational.
+        This is the mass maximum (historical function name
+        central_fejer_su2.central_multiplier_cb_norm; not a cb-norm): it
+        equals 2 / (n_max + 1). Returned as exact sympy Rational.
         """
         return sp.Rational(2, self.n_max + 1)
 
@@ -312,7 +316,7 @@ class BerezinReconstruction:
     op_sys : TruncatedOperatorSystem
         The Connes-vS truncated operator system on the scalar Fock basis.
     plancherel : PlancherelSymbol
-        The L2 Plancherel symbol weights hat{K}(N) = N / Z_{n_max}.
+        The L2 mass-distribution weights N / Z_{n_max} (historical name).
     label_to_idx : dict (N, L, M) -> int
         Maps a multiplier label to its index in op_sys.multiplier_matrices.
     """

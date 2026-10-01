@@ -882,9 +882,11 @@ class LimitIdentification:
     is established.  The argument is standard (Rieffel 1999/2004,
     D'Andrea-Lizzi-Martinetti 2014) and uses:
 
-      1. The L4 Berezin map B has a UCP partial inverse (the
-         Bozejko-Fendler symbol-side estimate L2(g)) which preserves
-         positivity in both directions.
+      1. [WITHDRAWN premise] The L4 Berezin map B was assumed to have a
+         UCP partial inverse via a 'Bozejko-Fendler symbol-side estimate
+         L2(g)'.  Paper 32 records this dual estimate as a withdrawn named
+         gap and Paper 45 records the bounded partial inverse as invalid;
+         the unconditional Paper 38 theorem does not use it.
 
       2. The compositions sigma B and B sigma converge to the identity
          on Lipschitz functions (the L4(c) approximate-identity rate).

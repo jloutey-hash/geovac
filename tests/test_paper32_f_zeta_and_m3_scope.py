@@ -12,9 +12,10 @@
 
 (2) The pi-source case-exhaustion theorem's converse (iii) => (i) is
     WITHDRAWN (DELTA #21, 2026-09-30; an intermediate FULL #10 re-scope to
-    'M1 or M2 only' is also retired).  Witnesses: M1's rational core B = 42
-    (proven); M2's spinor zeta at half-integer s and M3 at s = 2 (analytic
-    continuation) and s = 4 (convergent) -- no KNOWN pi.  The PSLQ helper
+    'M1 or M2 only' is also retired) as NOT ESTABLISHED (not proved false).
+    Candidate witnesses: M2's spinor zeta at half-integer s and M3 at s = 2
+    (analytic continuation) and s = 4 (convergent) -- no KNOWN pi.  (B = 42's
+    M1 'rational core' tag is a Paper 55 convention, not a witness.)  The PSLQ helper
     below is EVIDENCE only and its scope is narrow: it tests q1*pi^k + q2
     for integer k in [-4, 4]; it is blind to sqrt(pi), polynomials in pi,
     and products of pi with other constants.
@@ -98,7 +99,7 @@ def test_converse_withdrawn_m3_convergent_witness_s4():
 
 def test_converse_withdrawn_m2_half_integer_witness():
     """DELTA #21: M2's spectral zeta (Paper 28 T9) at half-integer s = 5/2 is
-    14 zeta(3) - (31/2) zeta(5) -- no pi -- so engaging M2 does not force pi.
+    14 zeta(3) - (31/2) zeta(5) -- no KNOWN pi -- so engaging M2 is not known to force pi.
     Computed from the Dirac spectrum |lambda| = n + 3/2, deg 2(n+1)(n+2).
     WRONG ANSWER REJECTED: an M2 spectral-zeta value at half-integer s with a
     small pi relation (i.e. 'M2 always injects pi')."""

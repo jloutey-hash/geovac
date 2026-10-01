@@ -1,11 +1,14 @@
-"""Tests for L3b-2 sub-sprint B: joint Schur multiplier mass maximum.
+"""Tests for L3b-2 sub-sprint B: joint hybrid value.
+
+HYBRID NOTE (DELTA #23, 2026-09-30): the SU(2) x U(1) 'joint' value 2/(n_max+1) * 1 pairs the SU(2) Plancherel MASS maximum with the U(1) Fejer SYMBOL maximum (1); per Paper 45 it is a hybrid that is neither a mass maximum (that is 2/(n_max+1) * N_t^-1) nor a cb-norm (that is 1). It is kept only to reproduce the historical sub-sprint B numbers.
 
 NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
 
 Verifies the closed-form bound
 
-    mass_max(joint) = mass_max(SU(2)) * mass_max(U(1)) = 2/(n_max + 1) * 1
-                    = 2/(n_max + 1)      [historically written as ||.||_cb]
+    hybrid = mass_max(SU(2)) * symbol_max(U(1)) = 2/(n_max + 1) * 1
+           = 2/(n_max + 1)      [historically written as ||.||_cb; per Paper 45
+                                 neither a mass maximum nor a cb-norm]
 
 at panel cells (n_max, N_t) in {(2,3), (2,5), (3,3), (3,5), (4,3), (4,5)}.
 
@@ -13,12 +16,12 @@ Eight test functions covering:
 
   1. SU(2) factor matches Paper 38 mass maximum bit-identically.
   2. U(1) factor cb-norm = 1 (the closed-form constant).
-  3. Joint mass maximum = product of factor mass maxima (factorization).
+  3. Joint hybrid value = SU(2) mass maximum times U(1) symbol maximum (factorization).
   4. Panel cells against closed-form bound 2/(n_max + 1).
   5. Asymptotic rate 2/(n_max + 1) = O(1/n_max) verified monotonically.
   6. U(1) cb-norm cross-check via Plancherel symbol max-norm.
-  7. Joint Plancherel symbol factorization exact in sympy.
-  8. The joint mass maximum depends only on n_max, not on N_t.
+  7. Historical 'joint Plancherel symbol' (a Paper 45 hybrid: SU(2) mass x U(1) symbol) factorizes exactly in sympy.
+  8. The joint hybrid value depends only on n_max, not on N_t.
 
 Companion to debug/l3b_2_sub_sprint_B_cb_norm_memo.md and
 debug/l3b_2_sub_sprint_B_compute.py.
@@ -66,7 +69,7 @@ class TestSU2FactorPaper38Consistency:
 
     @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
     def test_su2_cb_norm_attained_at_jmax(self, n_max):
-        """The mass maximum equals Plancherel symbol at j = j_max."""
+        """The SU(2) mass maximum is the mass distribution (2j+1)/Z at j = j_max."""
         j_max = Rational(n_max - 1, 2)
         symbol_at_jmax = plancherel_su2(n_max, j_max)
         cb = cb_su2(n_max)
@@ -117,16 +120,16 @@ class TestU1FactorCBNorm:
 
 
 # ---------------------------------------------------------------------------
-# Test 3: Joint mass maximum = product of factor mass maxima (factorization)
+# Test 3: Joint hybrid value = SU(2) mass maximum times U(1) symbol maximum (factorization)
 # ---------------------------------------------------------------------------
 
 
 class TestJointCBNormFactorization:
-    """Joint mass maximum factorizes as product of SU(2) and U(1) factors."""
+    """Joint hybrid value factorizes as product of SU(2) and U(1) factors."""
 
     @pytest.mark.parametrize("n_max,N_t", PANEL_CELLS)
     def test_joint_eq_product_of_factors(self, n_max, N_t):
-        """Joint mass maximum = product of factor mass maxima."""
+        """Joint hybrid value = SU(2) mass maximum times U(1) symbol maximum."""
         joint = joint_cb_norm(n_max, N_t)
         su2 = cb_su2(n_max)
         u1 = cb_norm_circle(N_t)
@@ -152,11 +155,11 @@ class TestJointCBNormFactorization:
 
 
 class TestPanelCellsAgainstBound:
-    """At each panel cell, joint mass maximum equals 2/(n_max + 1) exactly."""
+    """At each panel cell, joint hybrid value equals 2/(n_max + 1) exactly."""
 
     @pytest.mark.parametrize("n_max,N_t", PANEL_CELLS)
     def test_joint_eq_bound(self, n_max, N_t):
-        """Joint mass maximum = 2/(n_max + 1)."""
+        """Joint hybrid value = 2/(n_max + 1)."""
         result = joint_cb_norm(n_max, N_t)
         expected = Rational(2, n_max + 1)
         assert result == expected, (
@@ -187,7 +190,7 @@ class TestPanelCellsAgainstBound:
 
 
 class TestAsymptoticRate:
-    """Joint mass maximum decreases monotonically to 0 as n_max -> infinity."""
+    """Joint hybrid value decreases monotonically to 0 as n_max -> infinity."""
 
     def test_monotone_decreasing(self):
         """At fixed N_t, joint_cb_norm is strictly decreasing in n_max."""
@@ -214,7 +217,7 @@ class TestAsymptoticRate:
 
     def test_asymptote_zero(self):
         """joint_cb_norm -> 0 as n_max -> infinity."""
-        # At n_max = 10000, the mass maximum should be very small
+        # At n_max = 10000, the hybrid value should be very small
         val = joint_cb_norm(10000, 5)
         assert float(val) < 1e-3, (
             f"At n_max=10000: cb={val}={float(val):.6f}, expected < 1e-3"
@@ -261,7 +264,7 @@ class TestU1CBNormCrossCheckViaMaxNorm:
 
 
 # ---------------------------------------------------------------------------
-# Test 7: Joint Plancherel symbol factorization exact in sympy
+# Test 7: historical 'joint Plancherel symbol' (hybrid) factorization exact in sympy
 # ---------------------------------------------------------------------------
 
 
@@ -294,12 +297,12 @@ class TestPlancherelFactorizationExact:
 
 
 # ---------------------------------------------------------------------------
-# Test 8: Joint mass maximum depends only on n_max, not on N_t
+# Test 8: Joint hybrid value depends only on n_max, not on N_t
 # ---------------------------------------------------------------------------
 
 
 class TestJointCBNormNtIndependence:
-    """At fixed n_max, joint mass maximum is constant in N_t (it equals 2/(n_max+1))."""
+    """At fixed n_max, joint hybrid value is constant in N_t (it equals 2/(n_max+1))."""
 
     @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
     def test_joint_cb_norm_independent_of_Nt(self, n_max):

@@ -580,8 +580,8 @@ def joint_cb_norm_central(n_a: int, n_b: int) -> sp.Rational:
     the value returned, 2/(n_a+1) * 2/(n_b+1), is the product of the single-
     factor mass maxima, not a cb-norm -- the true ||T_K||_cb is 1 on each
     factor (central_fejer_su2.central_multiplier_cb_norm_true).  The name
-    and the "Bozejko-Fendler product cb-norm" wording below are kept only
-    for the pinned tests;  nothing downstream may read this as a norm.
+    is kept only for the pinned tests (the Bozejko-Fendler justification
+    once given here is withdrawn);  nothing downstream may read this as a norm.
     Original docstring:  Joint central-multiplier cb-norm of the product kernel on SU(2)^2.
 
     On the central subalgebra Z(C(SU(2) x SU(2))) ~= L^infty(j_1, j_2;
@@ -1309,7 +1309,8 @@ def compute_tensor_propinquity_bound(
     The full-operator-system bound reported in this field is the
     conservative
         Lambda <= C_3^{(2),full} * max(gamma_a, gamma_b) = 2 max(gamma_a, gamma_b)
-    Bozejko-Fendler estimate.  NOTE (2026-06-18 correction): the earlier
+    Leibniz estimate ||g||_inf + ||f||_inf (once mislabelled
+    'Bozejko-Fendler').  NOTE (2026-06-18 correction): the earlier
     "tighten to 1" follow-up was the *withdrawn* Pythagorean direction;
     the correct comparison constant is the triangle bound
     C_3^{(2)} <= sqrt(2) (see c3_full_triangle_bound).  The paper's
@@ -1627,7 +1628,7 @@ def tensor_L3_lipschitz(
         WITHDRAWN 2026-06-18 as false -- the operator-norm Pythagorean
         identity fails on the real CH harmonics; see
         c3_full_pythagorean_bound and Paper 39 Remark.)
-        The conservative <= 2 bound (legacy, generic Bozejko-Fendler) is
+        The conservative <= 2 bound (legacy Leibniz estimate) is
         retained for cross-check.
 
     Triangle bound (corrected 2026-06-18): the SU(2) x SU(2) graded Leibniz

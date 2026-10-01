@@ -9,7 +9,7 @@ Verifies the six sub-tasks of the L2 sprint:
   (c) closed-form Dirichlet-Fejer integral on SU(2)
   (d) Cesaro-2 sharpening
   (e) Plancherel symbol on the Avery-Wen-Avery / so4_three_y_integral basis
-  (f) Bozejko-Fendler central-multiplier transcription
+  (f) Central-multiplier mass maximum (historically 'Bozejko-Fendler transcription')
 
 Per CLAUDE.md Section 13.4a (equation verification protocol), every equation
 appearing in the L2 proof memo (debug/r25_l2_proof_memo.md) has a
@@ -457,7 +457,7 @@ class TestPeterWeylBijection:
 
 
 # ---------------------------------------------------------------------------
-# Sub-task L2-6: Bozejko-Fendler central-multiplier transcription
+# Sub-task L2-6: central-multiplier mass maximum (historically 'Bozejko-Fendler transcription')
 # ---------------------------------------------------------------------------
 
 
@@ -538,6 +538,8 @@ class TestCentralMultiplierCBNormCesaro:
 
     @pytest.mark.parametrize("n_max", [2, 3, 4, 5])
     def test_cesaro_cb_norm_decreasing(self, n_max):
+        # historical name: this is the Cesaro-2 MASS maximum (in (0, 1));
+        # the cb-norm of the (UCP) Cesaro-2 smoothing map is 1.
         cb = central_multiplier_cb_norm_cesaro(n_max)
         assert 0 < cb < 1
 

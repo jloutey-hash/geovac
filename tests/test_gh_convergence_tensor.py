@@ -104,7 +104,7 @@ class TestLipschitzConstants:
         assert C_LIPSCHITZ_TENSOR_FACTORIZED == 1.0
 
     def test_full_is_two(self):
-        """C_3^{(2),full} <= 2 conservative Bozejko-Fendler bound."""
+        """C_3^{(2),full} <= 2 conservative Leibniz bound (once mislabelled Bozejko-Fendler)."""
         assert C_LIPSCHITZ_TENSOR_FULL == 2.0
 
     def test_full_geq_factorized(self):
@@ -628,7 +628,7 @@ class TestTriangleC3Bound:
     """C_3^{(2),full} <= sqrt(((N_a-1)+(N_b-1))^2 / (N_a^2+N_b^2-2)) -> sqrt(2).
 
     Corrected 2026-06-18 (/qa group1 Bite B-3). The conservative
-    C_3^{(2),full} <= 2 (generic Bozejko-Fendler) tightens to the TIGHT
+    C_3^{(2),full} <= 2 (legacy Leibniz estimate) tightens to the TIGHT
     operator-norm triangle bound on the two Connes-Marcolli Leibniz
     terms.  An earlier draft claimed a PYTHAGOREAN refinement
     sqrt(((N_a-1)^2+(N_b-1)^2)/(...)) < 1; that is false (graded
@@ -1080,9 +1080,15 @@ def test_joint_smoothing_map_is_ucp_cb_norm_one():
     mass = {}
     for n in (2, 3, 4):
         f = sp.lambdify(chi, central_fejer_kernel_su2(n, chi), modules="mpmath")
-        mass[n] = mpmath.quad(lambda c: f(c) * mpmath.sin(c / 2) ** 2 / mpmath.pi,
-                              [0, mpmath.pi, 2 * mpmath.pi])
+        haar = lambda c: mpmath.sin(c / 2) ** 2 / mpmath.pi
+        mass[n] = mpmath.quad(lambda c: f(c) * haar(c), [0, mpmath.pi, 2 * mpmath.pi])
         assert abs(mass[n] - 1) < mpmath.mpf(10) ** -20, (n, mass[n])
+        # Positivity, checked as ||K||_{L^1} = 1: for a unit-mass kernel this
+        # is EQUIVALENT to K >= 0 a.e., and it is ||T|| itself.  (Replaces a
+        # 17-point sampling check that an aliased negative lobe evaded --
+        # DELTA #23 code review.)
+        l1 = mpmath.quad(lambda c: abs(f(c)) * haar(c), mpmath.linspace(0, 2 * mpmath.pi, 41))
+        assert abs(l1 - 1) < mpmath.mpf(10) ** -12, (n, l1)
         assert verify_pointwise_positivity(n)
         assert central_multiplier_cb_norm_true(n) == 1
     for n_a, n_b in [(2, 2), (2, 3), (3, 4), (4, 4)]:

@@ -72,9 +72,8 @@ and U(1) factors:
     non-negativity on a compact group product.  Compression-of-PSD is
     PSD by the standard 〈psi | P g P | psi〉 = ∫ g |P psi|^2 >= 0.
 
-(2) Contractivity.  ||B^{joint}(f)||_op <= ||f||_infty.  Direct corollary
-    of Sub-sprint B (joint mass maximum (not a cb-norm; that is 1) = 2/(n_max+1) <= 1) and the standard
-    factorization ||P(K*f)P||_op <= ||K*f||_infty <= ||K||_{L^1} ||f||_infty
+(2) Contractivity.  ||B^{joint}(f)||_op <= ||f||_infty.  It follows from
+    ||P(K*f)P||_op <= ||K*f||_infty <= ||K||_{L^1} ||f||_infty
     = ||f||_infty (K^{joint} is normalized on the product Haar measure).
 
 (3) Approximate identity.  ||B^{joint}(f) - P^{joint} M_f P^{joint}||_op

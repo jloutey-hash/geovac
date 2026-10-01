@@ -110,7 +110,7 @@ class TestPlancherelSymbol:
             assert P.linfty_norm() == sp.Rational(2, n_max + 1)
 
     def test_linfty_norm_matches_central_fejer(self) -> None:
-        """Cross-check with central_fejer_su2.central_multiplier_cb_norm."""
+        """Cross-check with central_fejer_su2.central_multiplier_cb_norm (historical name: the mass maximum, not a cb-norm)."""
         for n_max in range(1, 8):
             P = PlancherelSymbol(n_max=n_max)
             assert P.linfty_norm() == central_multiplier_cb_norm(n_max)
@@ -495,8 +495,8 @@ class TestApproximateIdentity:
         to 1 (so the OVERALL Berezin trace is preserved).
         """
         # We don't enforce monotonicity here -- the test is just that
-        # the residual is finite and well-defined. The L2 cb-norm
-        # bound is the right convergence statement, not pointwise residual.
+        # the residual is finite and well-defined. The gamma-moment bound
+        # (Paper 38) is the right convergence statement, not pointwise residual.
         for n_max in [2, 3, 4]:
             B = BerezinReconstruction(n_max=n_max)
             res, _ = B.approximate_identity_residual(constant_function())

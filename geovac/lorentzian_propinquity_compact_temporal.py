@@ -235,7 +235,8 @@ class LorentzianTunnelingPair:
     c_lipschitz_joint : float
         Joint Lichnerowicz constant per Sub-sprint A.
     cb_norm_joint : sp.Rational
-        Joint Schur multiplier cb-norm per Sub-sprint B.
+        Sub-sprint B historical hybrid 2/(n_max+1) (Paper 45: neither a mass
+        maximum nor a cb-norm; field name historical).
     gamma_joint_su2 : float
         SU(2) factor of gamma^joint.
     gamma_joint_u1 : float
@@ -439,7 +440,7 @@ class LorentzianTunnelingPair:
         joint_gamma = self.gamma_joint_su2
         residual = abs(paper38_gamma - joint_gamma)
 
-        # Compare cb-norms
+        # Compare the historical hybrid values (field name 'cb')
         paper38_cb = central_multiplier_cb_norm(self.n_max)
         joint_cb_su2_factor = sp.Rational(2, self.n_max + 1)
         cb_match = (paper38_cb == joint_cb_su2_factor)
@@ -494,7 +495,7 @@ class LorentzianPropinquityBound:
     n_max, N_t, T : truncation parameters
     gamma_joint_su2, gamma_joint_u1, gamma_joint_L1 : Sub-sprint C joint gamma
     c_lipschitz_joint : Sub-sprint A joint Lichnerowicz
-    cb_norm_joint : Sub-sprint B joint mass maximum (not a cb-norm; that is 1) = 2/(n_max+1)
+    cb_norm_joint : Sub-sprint B historical hybrid 2/(n_max+1) (Paper 45: neither a mass maximum nor a cb-norm)
     reach_B_panel : empirical max reach_B over the joint panel
     reach_B_bound : theoretical bound = C_3 * gamma^joint
     height_B_panel : empirical max height_B over the joint panel
@@ -747,7 +748,7 @@ def verify_riemannian_limit_at_N_t_1(
     paper38_gamma = paper38_bound.gamma_n_max
     residual = abs(joint_gamma_su2 - paper38_gamma)
 
-    # Compare cb-norms (joint cb is sympy Rational; Paper 38 stored as float)
+    # Compare the historical hybrid values (field 'cb' is sympy Rational; Paper 38 stored as float)
     expected_cb = sp.Rational(2, n_max + 1)
     cb_match = (
         pair.cb_norm_joint == expected_cb
@@ -785,7 +786,7 @@ class LorentzianFiveLemmaStatus:
     """
 
     L1_prime: str = "DONE (L3b foundation + L3a-1, 2026-05-17)"
-    L2: str = "DONE (Sub-sprint B joint cb-norm, 2026-05-17)"
+    L2: str = "DONE (Sub-sprint B joint hybrid value -- historically 'cb-norm', 2026-05-17)"
     L3: str = "DONE (Sub-sprint A joint Lichnerowicz, 2026-05-17)"
     L4: str = "DONE (Sub-sprint C joint Berezin, 2026-05-18)"
     L5: str = "DONE (Sub-sprint D propinquity assembly, 2026-05-18)"

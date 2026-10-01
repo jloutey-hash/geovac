@@ -258,6 +258,7 @@ class TestRiemannianLimitRecovery:
         assert details["gamma_residual"] == 0.0  # bit-exact
         assert details["cb_match"]
 
+    @pytest.mark.slow  # 119-382 s (DELTA #23)
     def test_riemannian_limit_n_max_3(self):
         """At n_max=3, N_t=1: gamma matches Paper 38 bit-exact."""
         match, details = verify_riemannian_limit_at_N_t_1(n_max=3)
@@ -265,6 +266,7 @@ class TestRiemannianLimitRecovery:
         assert details["gamma_residual"] == 0.0
         assert details["cb_match"]
 
+    @pytest.mark.slow  # 119-382 s (DELTA #23)
     def test_riemannian_limit_n_max_4(self):
         """At n_max=4, N_t=1: gamma matches Paper 38 bit-exact."""
         match, details = verify_riemannian_limit_at_N_t_1(n_max=4)

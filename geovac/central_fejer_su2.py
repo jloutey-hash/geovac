@@ -81,13 +81,15 @@ The fourth (the only nontrivial property) is
 Plancherel symbol
 -----------------
 
-The Fourier coefficients of K_{n_max} on the central subalgebra
-L^2_{cent}(SU(2)) are
+The kernel's Plancherel MASS on block j is
 
-    hat{K}_{n_max}(j) = (2j + 1) / Z_{n_max} * indicator(j <= j_max).
+    m_{n_max}(j) = (2j + 1) / Z_{n_max} * indicator(j <= j_max)
 
-This is Eq. (3.1) of the scoping memo. The kernel acts on each Peter-Weyl
-block V_j by the scalar hat{K}(j).  [Historical text, corrected
+(Eq. (3.1) of the scoping memo, historically written hat{K}(j) and called
+the 'Fourier coefficient').  It is NOT the multiplier symbol: convolution
+by K acts on each Peter-Weyl block V_j by the scalar sigma(j) =
+c_j / (2j + 1), c_j the character coefficient of K including its Z^-1
+(Paper 38 writes sigma = c_j / ((2j+1) Z) with c_j excluding it).  [Historical text, corrected
 2026-09-30:] the value
 
     (2 j_max + 1) / Z_{n_max} = 2 / (n_max + 1) = O(1 / n_max)
@@ -95,9 +97,10 @@ block V_j by the scalar hat{K}(j).  [Historical text, corrected
 is the Plancherel MASS maximum, not ||S_K||_cb; convolution by a positive
 unit-mass kernel is UCP, so ||S_K||_cb = 1 (central_multiplier_cb_norm_true).
 
-This is the "abelianization" that makes Schur-Fourier transference go
-through on the central subalgebra (the SU(2) analog of Leimbach-vS
-Lemma 3.5).
+[Historical:] this was read as the "abelianization" making Schur-Fourier
+transference go through on the central subalgebra (the SU(2) analog of
+Leimbach-vS Lemma 3.5).  No multiplier theorem is needed for what is used
+here: convolution by a positive unit-mass kernel is UCP, cb-norm 1.
 
 Cesaro-2 sharpening
 -------------------
@@ -152,11 +155,14 @@ Spaces," Princeton 1971, Sec. I.1 (Cesaro / Fejer kernel asymptotics).
 
 G. Pisier, "Similarity Problems and Completely Bounded Maps," Lecture
 Notes in Math. 1618, Springer, 2nd ed. 2001 (Chapter 8: central
-multipliers and Bozejko-Fendler equality on amenable groups).
+multipliers).
 
 M. Bozejko and G. Fendler, "Herz-Schur multipliers and completely bounded
 multipliers of the Fourier algebra of a locally compact group," Boll.
-Un. Mat. Ital. A (6) 3 (1984) 297-302.
+Un. Mat. Ital. A (6) 3 (1984) 297-302.  [Historical citation: a multiplier
+identity is not needed for the cb-norm used here -- the central smoothing
+map is UCP, so its cb-norm is 1 (Paulsen, Prop. 3.6) -- and the value
+2/(n_max+1) once quoted from it is the Plancherel MASS maximum.]
 
 Companion: debug/r25_l2_central_kernel_scoping_memo.md (the scoping
 specification this module realizes).
@@ -668,7 +674,7 @@ def kernel_l2_norm_squared(n_max: int) -> sp.Rational:
 
 
 # ---------------------------------------------------------------------------
-# Bozejko-Fendler central-multiplier transcription
+# Central-multiplier mass maximum (historically 'Bozejko-Fendler transcription')
 # ---------------------------------------------------------------------------
 
 
@@ -720,7 +726,9 @@ def central_multiplier_cb_norm_true(n_max: int) -> sp.Rational:
 
 
 def central_multiplier_cb_norm_cesaro(n_max: int) -> sp.Rational:
-    """cb-norm of the Cesaro-2 central multiplier.
+    """Mass maximum of the Cesaro-2 kernel (historical name; NOT a cb-norm:
+    the Cesaro-2 kernel is a positive unit-mass kernel, so its convolution
+    is UCP with cb-norm 1).
 
     For the Cesaro-2 kernel,
         hat{K}^{(2)}(j) = (2j+1)(1 - 2j/(n+1))^2 / Z^{(2)}_{n_max}.
