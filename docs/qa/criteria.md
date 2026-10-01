@@ -20,10 +20,16 @@
 ## RESEARCH-GRADE status: no open LARGE defects (added 2026-09-27, PI-directed)
 
 PASS is the publish bar. **RESEARCH-GRADE** is the keep-researching bar. A target
-holds it when its **most recent FULL run, or claim-impact DELTA run,** had:
-(a) every gating dimension exercised;
-(b) every deterministic gate green;
-(c) **zero verified LARGE findings** (SMALL findings allowed).
+holds it when its **most recent FULL run, or claim-search DELTA run,** had:
+(a) every gating dimension exercised (for a claim-search DELTA, every dimension its
+    scope rule dispatches -- claims always, code and citations only when `tests/`,
+    `geovac/` or a bibliography changed; an undispatched dimension is out of the
+    DELTA's scope, not unexercised);
+(b) every deterministic gate green, **including C25** (the claim registry);
+(c) **zero verified OWNER-LARGE findings** (SMALL findings allowed), and every
+    SURFACE-LARGE finding fixed and converted into a C25 or C16 entry that
+    would have caught it (revised 2026-09-30, PI-directed; see "OWNER-LARGE vs
+    SURFACE-LARGE" below).
 
 **LARGE vs SMALL (grading of MATERIAL findings).** A MATERIAL finding is
 **LARGE** if any of the following holds; otherwise it is **SMALL**.
@@ -41,7 +47,32 @@ non-headline number, citation metadata, a stale cross-reference, a caveat
 misplaced but present, or a secondary paraphrase that does not flip a tier.
 **When in doubt, grade LARGE.**
 
-**Why it exists (measured).** Most recent runs found zero LARGE defects, and many of
+**OWNER-LARGE vs SURFACE-LARGE (added 2026-09-30, PI-directed).** Every LARGE
+finding is further located:
+- **OWNER-LARGE** — the defect is in the document that *owns* the claim: its
+  statement, proof, tier, scope, or the validity of its backing test; or a
+  headline number wrong at its source. These block RESEARCH-GRADE.
+- **SURFACE-LARGE** — the owner is right and a *restatement* of it is not: a
+  summary surface (abstract, conclusion, synthesis, INDEX, claims register),
+  a citing paper, a docstring, or a test comment states the claim stronger,
+  staler or unscoped relative to its owner. These are fixed on sight **and
+  converted into a gate entry** — a C25 claim-registry entry (missing
+  qualifier / overclaim, the mirror direction) or a C16 entry (a retired
+  phrasing). Once converted and the gates are green, a SURFACE-LARGE does not
+  block RESEARCH-GRADE.
+
+*Why, measured.* FULL #9, #10 and #11 each re-derived every keystone of the
+trunk and found **no mathematical defect in an owner** — yet each returned
+5–13 LARGE, nearly all a restatement drifting from a corrected owner, and a
+large share introduced by the previous round's own remediation (DELTA #21–#23).
+Requiring a sampled LLM panel to find *zero* paraphrase slips across ~60
+documents is not a stopping rule: it measures the panel's sampling rather than
+the corpus, and the loop (fix → DELTA → new paraphrase → fix) does not
+terminate. The split moves restatement drift from "the panel must not find
+any" to "every one found becomes a deterministic check", which is the shape
+that already retired the number-drift class (C17, C21).
+
+**Why it exists (measured, as of 2026-09-27).** Most runs up to then found zero LARGE defects, and many of
 the SMALL findings were introduced by the previous round's own remediation
 (qa.md, "Remediated text is not clean text"). A binary PASS/FAIL turns "fix SMALLs →
 re-run → find new SMALLs" into an unbounded loop. RESEARCH-GRADE ends that loop at
@@ -52,7 +83,7 @@ cannot be fixed on sight is recorded as debt, for example one needing a computat
 a PI decision, or an external source.
 
 **Rules.**
-1. **Earned only by a FULL run or a claim-impact DELTA, never a byte-diff
+1. **Earned only by a FULL run or a claim-search DELTA, never a byte-diff
    DELTA.** FULL #6 found 2 LARGE zombies right after a clean byte-delta.
 2. **Stamped.** The target's `.done.md` carries one line,
    `**RESEARCH-GRADE:** YYYY-MM-DD @ <commit-sha> (<run id>)`, and the target row in
@@ -525,16 +556,36 @@ is probably the certifying run" four times. Run shapes are therefore:
   **first cert** of a fresh target, and the **final certifying pass**. Only a
   full run can produce **PASS** (an unexercised dimension still forces
   INCONCLUSIVE — unchanged).
-- **Delta-verification run** — after any FAIL→remediation. Scope = the git
-  diff since the last reviewed run: one reviewer per **affected** dimension;
-  the changed loci **pasted into the prompt** with surrounding context
-  (paste-don't-point — the reviewer does not re-read 3,000-line papers to see
-  20 lines); in `seeded` mode **≥1 seed planted in the diff** per dispatched
-  agent (calibration still per-agent); deterministic gates still run
-  **whole-target** (they are
-  free and guard the unchanged surface). Verdict: **CLEAN-DELTA / DEFECTS** —
-  a delta run can never produce PASS; **a clean delta is the precondition for
-  firing the full certifying run.** Skip the completeness-critic on deltas.
+- **Delta-verification run = claim-search DELTA** (reshaped 2026-09-30,
+  PI-directed). After any FAIL→remediation. The unit of review is the
+  **claim**, not the byte-diff:
+  1. **Deterministic gates whole-target** (free), C25 included.
+  2. **Owner read in full.** One claims reviewer (Opus) reads **in full**
+     every owner paper whose bytes changed (chunk ≤ 3 papers), against the
+     criteria — the remediation-introduced class lives inside these files,
+     and a pasted hunk hides the sentence two paragraphs away that the hunk
+     now contradicts.
+  3. **Claim search, one reviewer per changed claim family.** For every claim
+     whose meaning or status moved (re-tier, scope, withdrawal,
+     strengthening), the reviewer gets the owner's *current* statement
+     **pasted in**, plus the C25 reading list
+     (`check_claim_registry.py --mentions <id>`; families not yet registered
+     are registered first — gate-first). It reads **every listed locus in
+     context**, then searches the corpus **by idea** (papers, syntheses, front
+     door, `tests/`, `geovac/` docstrings) for unlisted paraphrases, and
+     reports each locus as FAITHFUL / STRONGER / STALE / UNSCOPED. Every
+     STRONGER / STALE / UNSCOPED locus becomes a SURFACE-LARGE (or SMALL),
+     and every pattern it reveals is added to the claim's C25 entry.
+  4. **Code and citation reviewers only if `tests/`/`geovac/` or a
+     bibliography changed.** No separate byte-diff reviewer.
+  Verdict: **CLEAN-DELTA / DEFECTS** — a delta run can never produce PASS;
+  **a clean delta is the precondition for firing the full certifying run.**
+  Skip the completeness-critic on deltas. *Why the reshape:* DELTAs #21–#23
+  each found the LARGE in a *restatement* of the claim the previous round had
+  just corrected; the byte-diff reviewer saw the corrected owner and passed
+  it, and the claim-impact reviewer was one generalist reading broadly. A
+  per-claim reviewer holding the owner's exact current wording and an
+  exhaustive locus list is the specific instrument for that class.
 - **Rationale:** text that survived a calibrated panel does not lose its
   verification by sitting unchanged; the deterministic layer (now including
   the C16 zombie registry and the C17 headline-number registry) guards the
@@ -599,6 +650,15 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-09-30 — **RESEARCH-GRADE stop rule revised; DELTA reshaped to claim search;
+  C25 added** (PI-directed, after FULL #11; MINOR bump v5.18.0). LARGE is split
+  into OWNER-LARGE (blocks) and SURFACE-LARGE (fixed + converted into a C25/C16
+  entry; does not block once the gates are green). The delta-verification run
+  becomes a claim-search DELTA: owner papers whose bytes changed are read in
+  full, and one reviewer per changed claim family works from the owner's
+  pasted statement plus the C25 `--mentions` locus list. New deterministic
+  gate C25 (claim registry; claims as linked objects, the mirror direction C16
+  cannot see).
 - 2026-07-05 — **Rule 13 sharpened to the tiered strict form + cold-reader dimension
   added** (synthesis.done.md criterion 6; PI direction). The field guide must be fully
   self-contained (no workflow apparatus outside its disclosure section); a conventions
@@ -942,3 +1002,38 @@ automatable. Retirement is a PI decision.
 Self-test: `--selftest` proves all five probes fire against synthetic defects,
 not against real debt, so it keeps working once the debt is cleared.
 
+## C25 -- claim registry: claims as linked objects (added 2026-09-30, PI-directed)
+
+**Artifact:** `debug/qa/claim_registry.py` -- each load-bearing claim with its
+owner file, an owner anchor, the owner's tier, the **qualifier** every
+restatement must carry, and the **overclaim** wording no restatement may use.
+**Gate:** `debug/qa/check_claim_registry.py` (also `--selftest`; mirror
+`tests/test_claim_registry.py`, which fire-tests every check on synthetic
+roots holding the retired wording).
+
+What it FAILs on:
+1. **Owner drift** -- the owner no longer carries its anchor + tier (the
+   registry may never silently disagree with the paper it points at).
+2. **Front door** -- any line of `papers/INDEX.md` or `docs/claims_register.md`
+   that mentions a claim without its qualifier, or with its overclaim
+   (negated mentions and `old→new` transition records are exempt).
+3. **Annotated loci** -- `\gvc{<id>}{<text>}` (LaTeX; renders `<text>`, like
+   `\gvq`) and `<!-- gvc:<id> -->` (Markdown) are explicit citations of a
+   claim and are held to the same rule; an unknown id fails.
+
+What it reports: `--mentions <id>` (the claim-search DELTA reading list, with
+`!!` on loci lacking the qualifier within two lines) and `--changed-since`.
+
+*Why.* C16 is a blocklist: it catches a known-bad phrasing re-surfacing. It is
+blind to the **mirror direction** -- a restatement that is merely missing its
+owner's scope ("Paper 38 ... (unconditional)" with no "commutative factor"),
+or keeps an old tier ("case-exhaustion ... INTERNAL THEOREM" after the owner
+became CONDITIONAL). That direction was recorded as owed in 2026-09-04 and is
+the dominant LARGE class of FULL #9-#11. On its first run C25 found four such
+defects on the two front-door files, all of which FULL #11 had graded.
+
+**MAINTENANCE RULE (hard).** When a claim's tier, scope or status changes,
+edit its registry entry FIRST, run C25, fix every locus it names, then hand
+`--mentions <id>` to the DELTA. Every SURFACE-LARGE a run finds is converted
+into a registry pattern (or a C16 entry) before the run is closed -- that
+conversion is what lets SURFACE-LARGE stop blocking RESEARCH-GRADE.

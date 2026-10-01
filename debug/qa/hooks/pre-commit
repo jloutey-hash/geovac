@@ -18,6 +18,9 @@
 #   * C16  check_retracted_terms.py --gate <group>  -- resurrected retracted
 #          claim (scoped to the changed paper groups; whole-corpus C16 is slow).
 #   * C17  check_headline_numbers.py --gate <group>  -- wrong headline value.
+#   * C25  check_claim_registry.py -- claim restated on a front-door surface or at a
+#          \gvc / gvc: annotated locus without its owner's qualifier, or with
+#          its overclaim (fires when papers, front-door docs or the registry change).
 #   * py_compile on every staged .py -- the f-string / syntax / test-docstring
 #          corruption class C19 (papers only) does not cover.
 #
@@ -49,6 +52,11 @@ if [ -n "$tex" ]; then
 		run "C16 retracted-term (scope $g)" python debug/qa/check_retracted_terms.py --gate "$g"
 		run "C17 headline-number (scope $g)" python debug/qa/check_headline_numbers.py --gate "$g"
 	done
+fi
+
+fd=$(printf '%s\n' "$staged" | grep -E '^(papers/.*\.tex|papers/INDEX\.md|docs/claims_register\.md|debug/qa/claim_registry\.py)$')
+if [ -n "$fd" ]; then
+	run "C25 claim-registry" python debug/qa/check_claim_registry.py
 fi
 
 if [ -n "$py" ]; then

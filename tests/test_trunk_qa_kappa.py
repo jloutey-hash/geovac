@@ -242,4 +242,5 @@ def test_no_derivation_connects_omega_jacobian_to_graph_spectrum():
     # appears in the geometric route; Omega never appears in the matching
     # route. The "derivation" asserted in Paper 7 is an identification of
     # two independently-1/16 numbers, not a mechanistic bridge.
-    assert True  # documentation assertion; the real content is above
+    # (No assertion can test the ABSENCE of a bridge; the two numerical
+    # checks above are this test's whole content.)

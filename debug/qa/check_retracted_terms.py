@@ -1120,6 +1120,92 @@ REGISTRY = [
         },
     },
     {
+        "id": "p38-uniform-bound-panel-verified",
+        # Paper 38 Lemma L2(d.iii): gamma_n <= 6 log n / n is a FINITE-RANGE monotonicity check, [MEASURED], not proved for all n_max. Retires restatements tagging it [PANEL-VERIFIED] or stating it for all n_max >= 2. FULL #11 self-check.
+        "pattern": r"6\s*(?:\\,)?\s*\\log\s*\\?n(?:max|_\{\\max\})[^.;]{0,80}?PANEL-VERIFIED|PANEL-VERIFIED\]\}\s*A\s+uniform\s+bound",
+        "exempt_if_nearby": withdrawal_marker("p38-uniform-bound-panel-verified"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #11 pre-checkpoint self-check; idea-level gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-09-30 (FULL #11 self-check sweep; PM-verified gate 0 live)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated 2026-09-30 (FULL #11 self-check sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "p1-higher-l-more-connections",
+        # Paper 1: on the binary label lattice the node degree depends on m and on which shell neighbours exist, not monotonically on l (n=3 interior: l=0,1,2 -> 2, 3-4, 2-3); only D_{2p,m=0}=3 > D_{2s}=2 holds. Retires 'higher l => more connections' / 'high-l states occupy higher-degree nodes'. FULL #11.
+        "pattern": r"higher\s+angular\s+momentum\s+\$?l?\$?\s*have\s+\\textit\{more\s+connections|high\s+angular\s+momentum\s+states\s+occupy\s+higher-degree|higher-l\s+(states|nodes)\s+have\s+more\s+connections",
+        "exempt_if_nearby": withdrawal_marker("p1-higher-l-more-connections"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #11, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+        ],
+        "cited_by": {
+        },
+    },
+    {
+        "id": "p7-he-bracket-denied",
+        # Paper 7: the fixed-k CI (1.88% above exact) and the cusp-corrected 0.004% (a Schwartz extrapolation lying marginally BELOW exact, Paper 13) DO bracket the exact He energy. Retires 'both methods sit above the exact value, so they do not bracket it'. FULL #11.
+        "pattern": r"do\s+not\s+bracket\s+it|both\s+methods\s+sit\s+above\s+the\s+exact",
+        "exempt_if_nearby": withdrawal_marker("p7-he-bracket-denied"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #11, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+        ],
+        "cited_by": {
+        },
+    },
+    {
+        "id": "p7-parseval-credited-to-s3",
+        # Paper 7: the single-integral F^0 master formula is the standard Fourier-Parseval form of the Coulomb integral, rewritten in the stereographic variable t = q/(2Z) [PRIOR ART]; the single-integral structure is Parseval's, not a consequence of S^3 geometry. Retires restatements crediting the Fock projection / S^3 with it. FULL #11.
+        "pattern": r"key\s+structural\s+finding\s+is\s+that\s+Eq\.?~?\\eqref\{eq:f0_s3\}|Fock\s+projection\s+converts\s+position-space\s+double|derives\s+the\s+two-electron\s+repulsion\s+integral\s+as\s+a\s+density-overlap\s+integral\s+on",
+        "exempt_if_nearby": withdrawal_marker("p7-parseval-credited-to-s3"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #11, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+        ],
+        "cited_by": {
+        },
+    },
+    {
+        "id": "inner-algebra-mostly-forced",
+        # Paper 32 Door 4: the inner algebra C+H+M3(C) is an organizing reading (Bertrand x complex-Hopf tower, n<=3) plus the adopted Upgrade B axiom: factor count and the C, M3(C) summands are FIXED UNDER THAT READING, H is admitted but not forced, the rings share no generator (no 'disjointness'), and the seam is Observation-level. Retires 'mostly forced', 'relative theorem of necessity', 'disjointness forbids selection', 'the one inner datum the construction does reach'. FULL #11.
+        "pattern": r"mostly\s+forced|relative\s+theorem\s+of\s+necessity|(?:disjointness|seam)(?:\s+already)?\s+forbids\s+selection|inner\s+datum\s+the\s+construction\s+does\s+reach|inner\s+algebra\s+structure\s+is\s+(?:mostly\s+)?forced",
+        "exempt_if_nearby": withdrawal_marker("inner-algebra-mostly-forced"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-09-30 (/qa trunk FULL #11, idea-level gate; PI-approved).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated 2026-09-30 (FULL #11 sweep; PM-verified gate 0 live)",
+        },
+    },
+    {
         "id": "pi-source-converse-stated-false",
         # The pi-source converse (iii)=>(i) is WITHDRAWN as NOT ESTABLISHED: no mechanism output is PROVED pi-free (B = 42's M1 tag is a Paper 55 convention). Retires 'does not force pi', 'not every output of a mechanism carries pi', 'B = 42 ... proven witness'. DELTA #23.
         "pattern": r"does\s+not\s+force\s+\$?\\?pi|not\s+every\s+output\s+of\s+a\s+mechanism\s+carries|proven\s+witness|B\s*=\s*42\s*\n?\s*\(proven\)",

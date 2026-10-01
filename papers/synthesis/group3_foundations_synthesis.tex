@@ -80,7 +80,7 @@ arithmetic at every finite cutoff; \textbf{[OBSERVATION]} (d) the framework's re
 cleanly along an A/D partition---an algebra-only universal sector that
 transfers free across central potentials, and a Dirac-operator-specific
 sector containing the spectrum, the calibration $\pi$, and the
-candidate fine-structure-constant combination of Paper~2~\cite{loutey_paper2}.  \textbf{[OBSERVATION]} A structural reading we make explicit in this synthesis is that
+candidate fine-structure-constant combination of Paper~2~\cite{loutey_paper2_alpha}.  \textbf{[OBSERVATION]} A structural reading we make explicit in this synthesis is that
 the framework's substrate-level scale-freedom---the packing diameter
 $d_{0}$ cancelling out of every spectral quantity, and physical
 scales entering only through the Fock-projection focal length
@@ -240,10 +240,10 @@ is proved unconditionally:\ the distance is bounded by a closed-form Fej\'er
 moment $\gamma_{n_{\max}}$ that vanishes in the limit.  The theorem
 statement also displays its asymptotic rate,
 $\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$, with the constant
-$\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
+$\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form~\cite{kac_infinite1990})
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and
 numerics-pinned) and a uniform bound $\gamma_{n_{\max}} \le 6\log n_{\max}/n_{\max}$
-\textbf{[PANEL-VERIFIED]}
+\textbf{[MEASURED]} (a finite-range check)
 (Paper~38~\cite{loutey_paper38}).  \textbf{(H2)} \textbf{[PRIOR ART mechanism;\ explicit densities new]} The angular sparsity
 density of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}): a structural theorem of
@@ -492,9 +492,9 @@ van~Suijlekom state-space Gromov--Hausdorff convergence, bounded by a
 closed-form Fej\'er moment $\gamma_{n_{\max}} \to 0$ (proved), under the
 translation-seminorm metrization (Paper~38~\cite{loutey_paper38},
 operator-algebra arc);\ the theorem statement displays the asymptotic
-rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
+rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form~\cite{kac_infinite1990})
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and numerics-pinned;\
-the uniform $6\log n_{\max}/n_{\max}$ bound is \textbf{[PANEL-VERIFIED]}), with the $4/\pi$ constant
+the uniform $6\log n_{\max}/n_{\max}$ bound is \textbf{[MEASURED]}, a finite-range check), with the $4/\pi$ constant
 universal across compact connected semisimple Lie groups
 (Paper~40~\cite{loutey_paper40}: rigorous at rank~1, a rank-uniform
 analytical proof a named gap; a circle factor carries $2/\pi$); the
@@ -618,10 +618,13 @@ $SO(3N)$ acting on the hyperspherical angular basis, mapping onto,
 rather than predicting, the known table (see Paper~16, group~4,
 outside the foundations scope of this synthesis).
 
-\textbf{[SYMBOLIC PROOF]} A particular consequence of the $S^3$ projection is the closed-form
+\textbf{[PRIOR ART;\ SYMBOLIC PROOF]} The classical closed-form
 single-center two-electron repulsion integral
-$F^0(\text{1s}, \text{1s}) = \gvq{slater_f0_1s}{5Z/8}$, derived from the density-overlap
-formula for $V_{ee}$ on $S^3$ in Paper~7 for $s$-orbital pairs.  More
+$F^0(\text{1s}, \text{1s}) = \gvq{slater_f0_1s}{5Z/8}$ is re-derived from the density-overlap
+formula of Paper~7 for $s$-orbital pairs --- the standard Fourier--Parseval
+form of the Coulomb integral, written in the stereographic variable
+$t = q/(2Z)$ (the single-integral structure is Parseval's, not the $S^3$
+geometry's).  More
 generally, all single-center Slater $F^k$ integrals reduce to exact
 rationals in arithmetic over $\mathbb{Q}$ (the hypergeometric Slater
 engine, \texttt{geovac/hypergeometric\_slater.py}, which is not part
@@ -765,8 +768,11 @@ architecture across the molecular library
 $51\times$ to $317\times$ equal-qubit advantage in Pauli-term count
 over published Gaussian baselines (H$_2$O, $n_{\max} = 1$--$3$; the
 retired pair-diagonal rule gave $O(Q^{2.5})$ and
-$51\times$--$1712\times$).  The structural reason for this advantage is the
-Gaunt-selection-rule sparsity quantified by the realized density
+$51\times$--$1712\times$).  The structural reasons for this advantage are
+the composed architecture's block decomposition (each electron group's
+integrals live in its own block, so the term count adds across blocks,
+which is what makes it linear in $Q$) together with the
+Gaunt-selection-rule sparsity inside each block, quantified by the realized density
 $D(l_{\max})$ of Table~\ref{tab:eri_density};
 the foundations-paper statement is the theorem itself, not the
 specific molecular benchmarks.
@@ -1518,8 +1524,8 @@ classification is a census, \textbf{[OBSERVATION]})---with the $\mathcal{A}/D$ p
 spectral-triple language rather than a further theorem---
 though Paper~57 holds the forcing-iff-property principle itself open as
 a preliminary observation (it is an observations paper, not a theorem
-paper).  The
-framework's identity is precisely this seam---it maps the compact,
+paper).  Read this
+way, the framework maps the compact,
 Peter--Weyl, discrete skeleton of the systems it treats and consumes, rather than generates, the continuum calibration
 data the skeleton does not reach.
 
@@ -1644,7 +1650,7 @@ Camporesi--Higuchi window (the almost-commutative extension is
 bound and $\gamma_{n_{\max}} \to 0$ are proved, the displayed
 $(4/\pi)\log n_{\max}/n_{\max}$ rate is \textbf{[INTERNAL THEOREM +
 MEASURED]}, and the uniform $6\log n_{\max}/n_{\max}$ bound is
-\textbf{[PANEL-VERIFIED]}; \textbf{[PRIOR ART mechanism;\ explicit
+\textbf{[MEASURED]} (a finite-range check); \textbf{[PRIOR ART mechanism;\ explicit
 densities new]} the angular sparsity of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}); the 3D harmonic oscillator admits a
 bit-exactly $\pi$-free discrete encoding on $H^2(S^5)$
@@ -1812,6 +1818,11 @@ J.~Loutey,
 ``The Geometric Atom: the Hydrogen State Space as a Label Lattice,''
 GeoVac Paper~1 (2026).
 
+\bibitem{kac_infinite1990}
+V.~G. Kac,
+\textit{Infinite Dimensional Lie Algebras}, 3rd ed.
+(Cambridge University Press, Cambridge, 1990).
+
 \bibitem{loutey_paper2_alpha}
 J.~Loutey,
 ``The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration,''
@@ -1864,10 +1875,6 @@ I.~R.~Klebanov, S.~S.~Pufu, B.~R.~Safdi,
 \textit{Journal of High Energy Physics} \textbf{10} (2011) 038,
 arXiv:1105.4598.
 
-\bibitem{loutey_paper2}
-J.~Loutey,
-``The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration,''
-GeoVac Paper~2 (2026).
 \bibitem{loutey_paper14}
 J.~Loutey,
 ``Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory,''

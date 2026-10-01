@@ -1,0 +1,156 @@
+"""The GeoVac claim registry -- load-bearing CLAIMS as linked objects.
+
+WHY THIS EXISTS (2026-09-30, PI-directed after /qa trunk FULL #11)
+------------------------------------------------------------------
+The numeric registry (``numeric_registry.py`` + C21) made number drift nearly
+extinct by turning numbers into linked objects with one owner.  Claims never
+got the same treatment, and the measured cost is large: across DELTAs #13-#23
+and FULLs #9-#11 the dominant LARGE class was a single shape --
+
+    a claim is corrected (re-tiered, scoped, withdrawn) in its OWNER, and a
+    restatement elsewhere keeps the old strength or drops the new qualifier.
+
+C16 (``check_retracted_terms.py``) is a BLOCKLIST: it names known-bad
+phrasings and refuses to let them re-surface.  It cannot see the MIRROR
+direction -- a restatement that is merely missing the owner's scope
+qualifier ("Paper 38 ... (unconditional)" with no "commutative factor";
+"case-exhaustion ... INTERNAL THEOREM" when the owner says CONDITIONAL).
+That is what this registry adds: each claim declares its owner, its
+current tier, the QUALIFIER every restatement must carry, and the
+OVERCLAIM wording no restatement may use.
+
+WHAT THE GATE (C25, ``check_claim_registry.py``) DOES
+-----------------------------------------------------
+  1. Owner check -- the owner still carries the anchor and its tier tag
+     (a registry that drifted from its owner is itself a defect).
+  2. Front-door surfaces (``FRONT_DOOR``: the INDEX and the claims register,
+     which newcomers are told to read first) -- every line that mentions a
+     claim must carry its qualifier and must not carry its overclaim.  FAIL.
+  3. Annotated loci -- ``\\gvc{<id>}{<text>}`` in LaTeX (renders <text>, like
+     ``\\gvq``) and ``<!-- gvc:<id> -->`` in Markdown are explicit citations
+     of a claim; the annotated text is held to the same rule.  FAIL.
+  4. ``--mentions <id>`` -- every locus, corpus-wide (papers, syntheses,
+     front-door docs, tests, geovac docstrings), that mentions the claim,
+     with whether its qualifier is nearby.  This is the READING LIST a
+     claim-search DELTA reviewer works from (qa.md, DELTA shape).
+  5. ``--changed-since YYYY-MM-DD`` -- the claims whose status moved; the
+     DELTA's claim-impact set is nominated from here.
+
+MAINTENANCE RULE
+----------------
+When a claim's tier, scope or status changes: edit its entry HERE FIRST
+(``tier``, ``qualifier``, ``overclaim``, ``changed``), run C25, fix every
+front-door / annotated locus it names, then hand ``--mentions <id>`` to the
+DELTA.  Never register a claim whose owner text you have not read; the
+``owner_anchor`` + ``owner_tier`` pair is checked every run so the registry
+cannot silently disagree with the paper it points at.
+
+Patterns are Python regexes, matched case-insensitively against a LINE
+(Markdown front-door rows are single lines) or against the annotated span.
+"""
+from __future__ import annotations
+
+FRONT_DOOR = [
+    "papers/INDEX.md",
+    "docs/claims_register.md",
+]
+
+P32 = "papers/group1_operator_algebras/paper_32_spectral_triple.tex"
+P38 = "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex"
+P7 = "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex"
+P0 = "papers/group3_foundations/Paper_0_Geometric_Packing.tex"
+P2 = "papers/group5_qed_gauge/paper_2_alpha.tex"
+P55 = "papers/group3_foundations/paper_55_periods_of_geovac.tex"
+
+CLAIMS = {
+    "pi-source-case-exhaustion": dict(
+        statement="Every pi in a chain of the first fifteen Paper 34 projections engages M1/M2/M3: "
+                  "(i)<=>(ii) empirical (Paper 35) + (ii)=>(iii) case by case; the converse "
+                  "(iii)=>(i) is withdrawn as NOT ESTABLISHED.",
+        owner=P32, owner_anchor=r"label\{thm:pi_source_case_exhaustion\}",
+        owner_tier=r"\[CONDITIONAL\]", tier="CONDITIONAL",
+        mention=r"case[- ]exhaustion|pi-source|π-source",
+        qualifier=r"CONDITIONAL|conditional|first fifteen|first 15|III\.1",
+        overclaim=r"INTERNAL THEOREM|following are equivalent|classification is complete|"
+                  r"stated and proven|does not force|every appearance of .{0,10}pi.{0,10} in any",
+        changed="2026-09-30"),
+    "wh1-p38-gh-convergence": dict(
+        statement="Truncations of the TRUE Camporesi-Higuchi window converge to the round-S^3 triple "
+                  "in state-space GH (translation seminorm): COMMUTATIVE FACTOR ONLY; the almost-"
+                  "commutative extension and Dirac-seminorm convergence are OPEN.",
+        owner=P38, owner_anchor=r"Unconditional|unconditional",
+        owner_tier=r"\[INTERNAL THEOREM", tier="INTERNAL THEOREM",
+        mention=r"Paper[~ ]?38\b.{0,60}convergence|discrete.?→.?continuum convergence|"
+                r"state-space G(romov|H).{0,40}convergence",
+        qualifier=r"commutative",
+        overclaim=r"almost-commutative.{0,40}(proved|proven)|graph.{0,30}converges? to",
+        changed="2026-09-29"),
+    "p38-rate-constant": dict(
+        statement="The displayed rate (4/pi) log n/n is [INTERNAL THEOREM + MEASURED] in the dual-"
+                  "Coxeter normalisation (2/pi unit S^3; 2 sqrt2/pi Kac).",
+        owner=P38, owner_anchor=r"4/\\pi",
+        owner_tier=r"INTERNAL THEOREM \+ MEASURED", tier="INTERNAL THEOREM + MEASURED",
+        mention=r"4/π.{0,40}log|\(4/\\pi\)|4/π\)·log|rate .{0,15}4/π|c = 4/π",
+        qualifier=r"MEASURED",
+        overclaim=r"4/π (is )?canonical",
+        changed="2026-09-03"),
+    "graph-s3-wall": dict(
+        statement="The lattice edge Laplacian D-A does NOT converge to Delta_{S^3} (n_max disconnected "
+                  "l-blocks; WALL); what is exact is the (n,l,m) label set + diagonal SO(4) Casimir.",
+        owner=P7, owner_anchor=r"\[WALL\]",
+        owner_tier=r"\[WALL\]", tier="WALL",
+        mention=r"graph Laplacian|edge Laplacian|D\s*[−-]\s*A\b",
+        qualifier=r"not|WALL|disconnected|refuted|wall|band edge|block",
+        overclaim=r"converges to (the )?(S|Δ|\\Delta)|reproduces the (hydrogen|Rydberg)",
+        changed="2026-09-25"),
+    "k-combination-rule": dict(
+        statement="K = pi(B + F - Delta) ~ alpha^-1 is an OBSERVATION (numerical coincidence); never "
+                  "conjecture, derivation, prediction or theorem (CLAUDE.md 13.5).",
+        owner=P2, owner_anchor=r"Observation",
+        owner_tier=r"Observation", tier="OBSERVATION",
+        mention=r"π\(B ?\+ ?F|\\pi\(B ?\+ ?F|combination rule",
+        qualifier=r"Observation|OBSERVATION|coincidence",
+        overclaim=r"\bTHEOREM\b|\bCONJECTURE\b|is derived|derives K",
+        changed="2026-06-14"),
+    "sm-gauge-group-upgrade-b": dict(
+        statement="U(1) x SU(2) x SU(3) (and the inner algebra C+H+M3(C)) is FORCED ONLY RELATIVE TO "
+                  "the adopted Upgrade B axiom, via an organizing reading -- not a derivation.",
+        owner=P32, owner_anchor=r"admitted but not forced",
+        owner_tier=r"adopted axiom", tier="ORGANIZING READING + ADOPTED AXIOM",
+        mention=r"U\(1\)\s*(?:[×x]|\\times)\s*\\?(?:mathrm\{)?SU\(2\)|inner algebra|"
+                r"\\mathbb\{C\}\s*\\oplus\s*\\mathbb\{H\}|Upgrade~?B",
+        qualifier=r"Upgrade|organizing reading|adopted|not a derivation|admitted",
+        overclaim=r"mostly forced|derived from the packing|construction does reach|autonomously generat|"
+                  r"relative theorem of necessity|disjointness forbids",
+        changed="2026-09-30"),
+    "central-smoothing-cb-norm": dict(
+        statement="The central smoothing maps are UCP, so their cb-norm is 1; 2/(n_max+1) (and "
+                  "4/((n_a+1)(n_b+1))) are Plancherel MASS maxima, not cb-norms.",
+        owner=P38, owner_anchor=r"cb",
+        owner_tier=r"\\cbnorm\{|cb-norm", tier="INTERNAL THEOREM",
+        mention=r"cb-norm",
+        qualifier=r".",
+        overclaim=r"cb-norm\s*(=|is)?\s*2\s*/|cb-norm .{0,25}(decay|O\(1/n)",
+        changed="2026-09-30"),
+    "m2-ring-integer-s": dict(
+        statement="M2's pure-Tate ring (+)_k pi^{2k} Q holds for Seeley-DeWitt coefficients and "
+                  "spectral-zeta values at INTEGER s; half-integer s >= 5/2 carries odd zeta.",
+        owner=P55, owner_anchor=r"label\{thm:m2_mixed_tate\}",
+        owner_tier=r"integer", tier="THEOREM (integer s)",
+        mention=r"pure-Tate even-weight|⊕.?π\^\{?2k|\\bigoplus_k \\pi\^\{2k\}",
+        qualifier=r"integer|Seeley|SD coeff",
+        overclaim=r"at (any|every) s\b|half-integer s.{0,20}pure-Tate",
+        changed="2026-09-30"),
+    "paper7-symbolic-checks": dict(
+        statement="Paper 7's sympy suite is 18 CHECKS of Fock's continuum chain (ten limiting-case, "
+                  "definitional or non-discriminating), not 18 independent proofs.",
+        owner=P7, owner_anchor=r"18 symbolic checks",
+        owner_tier=r"ten of", tier="SYMBOLIC (checks)",
+        mention=r"\b18\b.{0,20}symbolic|symbolic.{0,20}\b18\b",
+        qualifier=r"check|limiting|definitional",
+        overclaim=r"18 (independent )?(symbolic )?proofs|18/18 symbolic proofs|independent proofs",
+        changed="2026-09-30"),
+}
+
+TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",
+             "OBSERVATION", "CONJECTURE", "RETRACTED", "PROOF-BY-ARGUMENT", "PRIOR ART", "WALL", "OPEN"]

@@ -8,7 +8,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 1. `synthesis/geovac_field_guide.tex` — what GeoVac is, as a story (10 pp)
 2. [`docs/claims_register.md`](../docs/claims_register.md) — every headline claim + its verification tier + falsifier
 3. `group3_foundations/Paper_7_Dimensionless_Vacuum.tex` — the S³ equivalence (the theoretical foundation)
-4. `group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` — the discrete→continuum convergence theorem (unconditional)
+4. `group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` — convergence of the true-window Camporesi–Higuchi truncations to the round-S³ triple (state-space GH; unconditional for the commutative factor — the almost-commutative extension is open) <!-- gvc:wh1-p38-gh-convergence -->
 5. `group4_quantum_computing/paper_14_qubit_encoding.tex` — the headline computational result
 
 ## Status legend
@@ -35,7 +35,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 
 | Target | Papers | QA status |
 |:-------|:-------|:----------|
-| trunk | 0, 1, 7, 32, 38 + group3 synthesis | OWED — graph→S³ re-pricing (v5.16.0) |
+| trunk | 0, 1, 7, 32, 38 + group3 synthesis | NOT RESEARCH-GRADE — FULL #11 (v5.17.17) found 5 LARGE, remediation in progress; graph→S³ re-pricing carried through FULL #10–#11 |
 | group1 | 29, 39, 40, 42–50, 52, 53 + group1 synthesis | OWED |
 | group2 | 8, 11, 12, 13, 15, 17, 19, FCI-A, FCI-M, 58, 59, 60 | OWED — He retirement, Paper 11 label, LiH −8.049 (v5.16.0) |
 | group3 | 18, 22, 24, 31, 54, 55, 56, 57, 61 + group3 synthesis | OWED |

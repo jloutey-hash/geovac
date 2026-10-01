@@ -78,7 +78,8 @@ class TestSU2FactorPaper38Consistency:
         )
 
     def test_su2_cb_norm_product_eq_2(self):
-        """(n_max + 1) * cb_norm = 2 exactly at every n_max."""
+        """(n_max + 1) * mass maximum = 2 exactly at every n_max (legacy name cb_su2;
+        the map is UCP, so its true cb-norm is 1)."""
         for n_max in range(1, 51):
             product = (n_max + 1) * cb_su2(n_max)
             assert product == Rational(2), (

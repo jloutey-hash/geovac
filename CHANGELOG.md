@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.18.0] - 2026-09-30
+
+**MINOR (automatic: the `/qa` skill changed). Claims become linked objects (new gate C25); the RESEARCH-GRADE stop rule splits LARGE into OWNER-LARGE and SURFACE-LARGE; DELTA becomes a claim-search DELTA. Also carries the /qa trunk FULL #11 remediation (PI-approved).**
+
+### Why the instrument changed
+- Full runs #9, #10 and #11 each re-derived every keystone and found **no mathematical defect in an owner paper**, yet each returned 5-13 LARGE. Nearly all were restatements drifting from a corrected owner, and DELTAs #21-#23 found their LARGE in the PM's own prior fixes. Requiring a sampled panel to find zero paraphrase slips was not a stopping rule.
+- The numeric registry (C21) had already retired the number-drift class by making numbers linked objects. Claims had no equivalent, and C16 (a blocklist) cannot see the **mirror direction**: a restatement that merely drops its owner's scope or keeps an old tier.
+
+### Added
+- **C25 claim registry** (`debug/qa/claim_registry.py`, gate `debug/qa/check_claim_registry.py`, mirror `tests/test_claim_registry.py`, 8 tests, every check fire-tested on synthetic roots). Each claim declares owner, owner anchor + tier, the qualifier every restatement must carry, and the overclaim wording none may use. FAILs on owner drift, on front-door lines (`papers/INDEX.md`, `docs/claims_register.md`) and on `\gvc{id}{...}` / `<!-- gvc:id -->` annotated loci; `--mentions <id>` is the DELTA reading list. 9 claims seeded. **First run found 4 real defects** on the front door, all FULL #11 findings (claims-register rows 8 and 17, INDEX L11, the stale trunk QA cell).
+- C25 in the pre-commit hook and the gate runner.
+
+### Changed (`.claude/commands/qa.md`, `docs/qa/criteria.md`)
+- **RESEARCH-GRADE:** LARGE is located as OWNER-LARGE (in the claim's owner: statement, proof, tier, scope, backing test, or a headline wrong at source; blocks) or SURFACE-LARGE (owner right, restatement wrong; fixed on sight and **converted into a C25 or C16 entry**; does not block once the gates are green).
+- **DELTA = claim-search DELTA:** deterministic gates whole-target; every owner paper whose bytes changed read IN FULL; one reviewer per changed claim family, working from the owner's pasted current statement plus the C25 `--mentions` list, searching by idea for unlisted paraphrases; code/citation reviewers only if tests/geovac or a bibliography changed.
+
+### FULL #11 (certifying, unseeded) = FAIL; remediated
+- **5 LARGE**, no keystone math defect:
+  1. P7: "both methods sit above the exact value, so they do not bracket it" — false; the 0.004% figure is a Schwartz extrapolation below exact (Paper 13), so with the fixed-k CI they bracket it.
+  2. P7: three summary restatements credited S^3 with the single-integral F^0 formula, which is Fourier-Parseval [PRIOR ART] (the owner paragraph already said so).
+  3. P32 Door-4 cluster: "mostly forced", "relative theorem of necessity", "disjointness forbids selection", "the one inner datum the construction does reach" — now an organizing reading plus the adopted Upgrade B axiom, H admitted not forced.
+  4. P1: "[PANEL-VERIFIED] higher l has more connections" — false; degree depends on m and shell neighbours and peaks at l=1 (n=3 at n_max=4: 2, 3-4, 2-3). Now [MEASURED].
+  5. claims_register row 17: case-exhaustion INTERNAL THEOREM -> CONDITIONAL, converse withdrawn.
+- Gate-first: 4 idea-level C16 entries (plus 1 from the self-check, 163 total; discrimination-tested; 0 live): `p1-higher-l-more-connections`, `p7-he-bracket-denied`, `p7-parseval-credited-to-s3`, `inner-algebra-mostly-forced`.
+- **~60 SMALL fixed on sight**, among them: P32 CODATA edition behind the 0.25% pi^3 alpha^3 match (CODATA 2022 gives 1.1986e-5, 0.52% *below*), prop=infinity is not CvS Def. 2.39 (which gives the intrinsic value 1), the U(1) Wilson row is not the N_c=1 limit, G3 closed negative, "decouple exactly" scoped to the one constructed D_F, Forced-Count "three routes" corrected, chi_{-4} "IS" Deligne-Glanois softened, "complete stratification" scoped; P38 4/pi = twice the volume quotient, refuted Berezin-pair refinement no longer framed as live, tunnel "heights" labelled GeoVac-defined, (d.iii) [MEASURED], L4 tagged, M1 slot = Paper 55 convention; P7 prior art no longer "central results", Casimir halving convention stated, 2s "nodes" -> form-factor zeros, p_0 two scales, c^2 tier, wrong companion cite; P0 ten (not "several") non-discriminating checks, linear spacing stated, HeH+ figure -> Paper 15; P1 "bit-exact" -> 1e-9 tolerance, tag split; synthesis F^0 credited, Q-linearity = block decomposition + Gaunt, duplicate Paper 2 bibitem merged. New citations: Malkin-Man'ko (1965) and Fronsdal (1967) for SO(4,2) priority (P0/P1/P7), de Broglie, Brouwer-Haemers, Kac, Hekkelman-McDonald now J. Funct. Anal. 289(12) 111154 (P38/P39; all verified).
+- Code: `lattice_spectrum.lambda_max_from_operator` now refuses an operator with off-block weight (its blockwise top would be wrong); kappa T4 `assert True` removed; legacy `cb_norm_*` JSON keys joined by `mass_max_*` + `true_cb_norm_joint`; P38 falsifier docstring re-scoped to the doubled-model companion; two test names/docstrings relabelled.
+- Debt: P32's 19 bibitem-less inline attributions (`docs/qa/trunk.debt.md`; blocked on primary-source verification).
+- Guard pass (separate, fire-tested): `tests/test_trunk_qa_full11_guards.py`.
+
+### Pre-checkpoint self-check
+- Pre-checkpoint self-check (fresh Opus claims reviewer on the diff + summary surfaces): 4 LARGE + 5 SMALL + 7 NIT, all in the PM's own remediation, all fixed -- (1) P0 conclusion made the linear spacing a consequence of the 2k-1 capacity it is an input to (circular; now input + converse); (2) the (d.iii) re-tier left P38's main-theorem statement and 4 restatements (P32, synthesis x3) at [PANEL-VERIFIED] for all n_max -- now [MEASURED] finite-range, new C16 entry p38-uniform-bound-panel-verified; (3) the P32 Door-4 fix contradicted the unchanged seam paragraph ('free because it generates its own ring', 'the seam already forbids selection') -- reworded to an Observation-level reading, C16 pattern widened; (4) claims_register row 16 still gave K's match as 8.8e-8 (that is the cubic's root; K is 4.8e-7). SMALL: the P38 M1 'tagging convention' insertion was transplanted from the B = 42 fix and misattributed to Paper 55 (reverted to its M1 witness table); P7 'own results' framing; Hekkelman-McDonald metadata unified across P32/P38/P39; criteria/qa wording (claim-search DELTA; 'every gating dimension' defined for a DELTA's dispatched scope; stale 'most runs found zero LARGE' dated); the P1 guard now asserts the printed minima and the top-shell truncation. The reviewer confirmed the He bracket, the Parseval re-crediting, the degree values, L4's [INTERNAL THEOREM] tier, prop = infinity vs CvS Def. 2.39 and the K tripwire clean.
+
+### Verification
+- All 15 gates PASS (C25 new); C10 whole corpus (57 papers). Touched tests pass.
+
 ## [v5.17.17] - 2026-09-30
 
 **Patch. /qa trunk DELTA #23 (claim-impact, unseeded) = DEFECTS, remediated (PI-approved). 1 LARGE + 1 borderline, both residue of the PM's own previous fixes rather than corpus debt. Mathematics clean.**

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.17.17 (September 30, 2026)
+**Version:** v5.18.0 (September 30, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa instrument: claim registry C25 + OWNER/SURFACE-LARGE stop rule + claim-search DELTA; trunk FULL #11 = FAIL, remediated (2026-09-30, v5.18.0, PI-directed):** 5 LARGE, no owner math defect; C25 found 4 front-door defects on run one. See CHANGELOG v5.18.0.
 - **/qa trunk DELTA #23 = DEFECTS, remediated (2026-09-30, v5.17.17, PI-approved):** 1 LARGE + 1 borderline, both PM-fix residue ('does not force π'; P45 hybrid mislabel); 3 C16 gates; guard aliasing escape closed. See CHANGELOG v5.17.17.
 - **/qa trunk DELTA #22 = DEFECTS, remediated (2026-09-30, v5.17.16, PI-approved):** 1 LARGE (10 -> 1): cb-norm label in tests/geovac; code-layer C16 gate; π-source converse 'not established', not false. See CHANGELOG v5.17.16.
 - **/qa trunk DELTA #21 = DEFECTS, remediated (2026-09-30, v5.17.15, PI-approved):** ~10 LARGE (idea-level sweep reached old restatements); π-source converse (iii)⇒(i) WITHDRAWN; P39 cb-norm = 1. See CHANGELOG v5.17.15.

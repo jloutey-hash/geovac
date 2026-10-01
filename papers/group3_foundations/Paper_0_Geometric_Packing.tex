@@ -776,7 +776,7 @@ $n_{\max} = 30$)
 correction of an earlier ``within each $(\ell,m)$ sector'' statement).
 \textbf{[INTERNAL THEOREM]} The saturation has a closed-form rate.  Because no edge changes $\ell$, the Laplacian is block diagonal in $\ell$ and each block is the grid graph $P_{n_{\max} - \ell} \times P_{2\ell+1}$ (radial $\times$ azimuthal paths), so the whole spectrum is
 \textbf{[PRIOR ART]} the textbook Laplacian spectrum of a Cartesian
-product of path graphs (the block identification and the constant
+product of path graphs~\cite{brouwer_haemers2012} (the block identification and the constant
 $C_{\mathrm{sat}}$ below are this paper's)
 \begin{equation}
   \operatorname{spec}(L) = \Bigl\{\, 2 - 2\cos\frac{j\pi}{n_{\max}-\ell}
@@ -793,7 +793,7 @@ $\min_\ell\bigl[4\sin^2\frac{\pi}{2(n_{\max}-\ell)} + 4\sin^2\frac{\pi}{2(2\ell+
   \;=\; \gvq{saturation_c}{42.7397}\ldots,
   \label{eq:saturation_rate}
 \end{equation}
-attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  Every finite sample lies \emph{below} $C_{\mathrm{sat}}$ (verified at all $591$
+attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  \textbf{[MEASURED]} Every sample checked lies \emph{below} $C_{\mathrm{sat}}$ (all $591$
 integer cutoffs $10 \le n_{\max} \le 600$) --- $C_{\mathrm{sat},n} = 42.61$ at
 $n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so every sample
 checked understates $C_{\mathrm{sat}}$ (a measured one-sided pattern, not proved for all
@@ -835,7 +835,7 @@ The conformal equivalence between the hydrogen problem and the
 Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection, under which the bound-state Hamiltonian
 is the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of that operator) is developed in Paper~7~\cite{paper7},
-\textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
+\textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (ten of them limiting-case, definitional or non-discriminating) validates the conformal geometry
 of that continuum chain, and an exact kernel-eigenvalue test carries its
 non-definitional energy step, $p_0 = Z/n$ (the graph Laplacian is not a discretization of
 it; see above).  Paper~1~\cite{paper1} develops the operator algebra
@@ -925,12 +925,14 @@ The connection between geometry and quantum mechanics has been
 recognized since the earliest days of quantum theory.
 Bohr~\cite{bohr1913} imposed quantization as a geometric constraint
 (angular momentum $L = n\hbar$ on circular orbits, later reinterpreted
-by de~Broglie as an integer number of wavelengths around the orbit).
+by de~Broglie~\cite{debroglie1925} as an integer number of wavelengths around the orbit).
 Fock~\cite{fock1935} discovered that the hydrogen momentum-space
 problem maps onto $S^3$ via stereographic projection, revealing the
 SO(4) dynamical symmetry that explains the ``accidental''
 $n^2$~degeneracy.  Bargmann~\cite{bargmann1936} derived the same
-symmetry algebraically.  Barut and Kleinert~\cite{barut1967}
+symmetry algebraically.  Malkin and Man'ko~\cite{malkin_manko1965} and
+Fronsdal~\cite{fronsdal1967} introduced the conformal group $SO(4,2)$ as
+hydrogen's dynamical group, and Barut and Kleinert~\cite{barut1967}
 extended the symmetry analysis to transition probabilities via
 noncompact dynamical groups.  Biedenharn and Louck~\cite{biedenharn1981}
 provided a comprehensive treatment of the angular momentum algebra
@@ -997,7 +999,9 @@ uniform-density packing on isotropic shells: shell~$k$ carries
 $2k - 1$ angular slots, isomorphic to the spherical harmonic basis
 $Y_{\ell m}$ with $\ell = k - 1$.  This result follows from two
 axioms (binary distinguishability and geometric indifference) together
-with natural structural choices (concentric shells, uniform density).
+with natural structural choices (concentric shells with linearly
+spaced radii $r_k = k\,d_0$, uniform density;\ conversely, capacity
+$2k - 1$ for every $k$ forces that spacing).
 It is independent of the Schr\"odinger equation, operator postulates,
 or any specific physical system.
 
@@ -1033,7 +1037,8 @@ equilibrium geometry is $+0.2\%$ in an all-electron prolate treatment
 with an analytic core (Paper~19~\cite{paper19}) and $5.3\%$ in the
 composed Level~5 treatment (Paper~17), where BeH$^+$ is markedly worse
 ($R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
-pseudopotential) and HeH$^+$ at fixed bond length recovers 93\% of
+pseudopotential);\ and in the mol-frame hyperspherical treatment
+(Paper~15~\cite{paper15}) HeH$^+$ at fixed bond length recovers 93\% of
 $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent
 2D-variational solver.  These inherited figures are owned, and
 test-backed or not, by the cited papers.
@@ -1058,6 +1063,25 @@ V.~Bargmann,
 ``Zur Theorie des Wasserstoffatoms: Bemerkungen zur gleichnamigen
 Arbeit von V.~Fock,''
 \textit{Z. Phys.} \textbf{99}, 576 (1936).
+
+\bibitem{malkin_manko1965}
+I.~A. Malkin and V.~I. Man'ko,
+``Symmetry of the hydrogen atom,''
+JETP Lett. \textbf{2}, 146 (1965).
+
+\bibitem{fronsdal1967}
+C.~Fronsdal,
+``Infinite multiplets and the hydrogen atom,''
+Phys. Rev. \textbf{156}, 1665 (1967).
+
+\bibitem{debroglie1925}
+L.~de~Broglie,
+``Recherches sur la th\'eorie des quanta,''
+Ann. Phys. (Paris) \textbf{3}, 22 (1925).
+
+\bibitem{brouwer_haemers2012}
+A.~E. Brouwer and W.~H. Haemers,
+\textit{Spectra of Graphs} (Springer, New York, 2012).
 
 \bibitem{barut1967}
 A.~O.~Barut and H.~Kleinert,

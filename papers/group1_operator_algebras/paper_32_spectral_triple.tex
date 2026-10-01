@@ -257,8 +257,9 @@ sectors of the triple, $K = \pi(B + F - \Delta)$, satisfies, after subtraction o
 Sprint-A correction~$\alpha^2$, a residual
 $K - 1/\alpha - \alpha^2 \approx 1.2 \times 10^{-5}$ corresponding to
 a post-correction relative residual of $8.8\times 10^{-8}$ that
-matches~$\pi^3\alpha^3$ to within 0.25\% (the raw match
-$|K - 1/\alpha|/(1/\alpha)$ is $4.77 \times 10^{-7}$).
+matches~$\pi^3\alpha^3$ to within 0.25\% (CODATA~2018 $\alpha$;\ the raw match
+$|K - 1/\alpha|/(1/\alpha)$ is $4.77 \times 10^{-7}$;\ CODATA~2022 gives
+$4.76 \times 10^{-7}$ raw and $8.75 \times 10^{-8}$ for the cubic's root).
 
 \paragraph{Internal register.}  This paper makes explicit the
 spectral-triple framing already operating informally in the working
@@ -579,8 +580,9 @@ intrinsic $C^*$-envelope.  In the ambient-envelope reading, the
 $M_N(\mathbb{C})$ envelope has dimension $N^2$ for $N \ge 2$ but
 $\dim(A_{\mathrm{circ}, N}^k) = N$ for every $k$ (commutativity is
 preserved under self-products), so no finite $k$ achieves
-saturation; $\mathrm{prop} = \infty$ by Connes--van~Suijlekom
-Definition~2.39.  See
+saturation; $\mathrm{prop} = \infty$ in this ambient-envelope
+extension of Connes--van~Suijlekom's Definition~2.39 (their definition
+uses the $C^*$-envelope, which here gives the intrinsic value $1$).  See
 \texttt{debug/wh1\_round3\_falsification\_memo.md} (2026-05-03) for
 the full record, including the verbatim Connes--van~Suijlekom Outlook~\S6
 contrast (lines 2611--2618 of arXiv:2004.14115v2) between
@@ -779,8 +781,8 @@ cutoff we can reach.  The third caveat above (no GH comparison
 on the full state space) remains the natural next move; whether
 the metric becomes monotone in the GH limit via a Kantorovich--
 Wasserstein lift to mixed states requires Peter--Weyl on
-$\mathrm{SU}(2)$ (genuinely new NCG mathematics; deferred by
-Connes \& van~Suijlekom 2021 three times).  The $S^3$ GH
+$\mathrm{SU}(2)$ (left open in the outlook of Connes \&
+van~Suijlekom 2021).  The $S^3$ GH
 convergence itself is no longer unpublished:\ the scalar case is
 closed by
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_estrada_vs2025}
@@ -2093,7 +2095,7 @@ Language}
 % ===================================================================
 
 Paper~2~\cite{paper2} observed the numerical coincidence
-$K = \pi(B + F - \Delta) \approx 1/\alpha$ at $4.77 \times 10^{-7}$ (raw;\ $8.8 \times 10^{-8}$ after the Sprint-A $\alpha^2$ correction), with
+$K = \pi(B + F - \Delta) \approx 1/\alpha$ at $4.77 \times 10^{-7}$ (raw;\ the $8.8 \times 10^{-8}$ figure is the match of the root of Paper~2's cubic $1/\alpha = K - \alpha^2$, not of $K$ itself), with
 \[
    B = \gvq{b_casimir}{42}, \quad F = \gvq{f_fock_dirichlet}{\tfrac{\pi^2}{6}}, \quad \Delta = \gvq{delta_dirac}{\tfrac{1}{40}},
 \]
@@ -2160,7 +2162,10 @@ does not derive $\alpha$; it makes precise where the obstruction is.
 \label{rem:sprint_A}
 \textbf{[MEASURED]} Sprint~A (April~2026, working-hypothesis register) verified at 80~dps that the
 post-cubic residual $K - 1/\alpha - \alpha^2 = 1.2079 \times 10^{-5}$
-matches $\pi^3 \alpha^3 = 1.2049 \times 10^{-5}$ to within 0.25\%.
+matches $\pi^3 \alpha^3 = 1.2049 \times 10^{-5}$ to within 0.25\%
+(CODATA~2018 $\alpha$;\ with the CODATA~2022 value the residual is
+$1.1986 \times 10^{-5}$, $0.52\%$ \emph{below} $\pi^3\alpha^3$, so the
+agreement is not stable at this level across editions).
 The structural reading is $\pi^3 = \mathrm{Vol}(S^5)$, hinting at a
 contribution from the Bargmann--Segal $S^5$ HO sector
 (Paper~24~\cite{paper24}) at higher order.  This is a structural
@@ -2551,13 +2556,14 @@ selected by (i) un-restricted vs vertex-restricted summation, and
       periods at depth $k = $ loop order in $\mathcal{MT}$ at level
       $\le 4$.
 \end{itemize}
-The vertex-parity-as-$\chi_{-4}$ Dirichlet character mechanism IS the
-Deligne--Glanois Galois descent from level $4$ to level $2$
+The vertex-parity-as-$\chi_{-4}$ Dirichlet character mechanism is read as
+an instance of the Deligne--Glanois Galois descent from level $4$ to level $2$
 (the $N' = 2 \mid N = 4$ instance of Glanois~\cite{glanois2015} Cor.~1.2) realised on the framework's
 natural QED observables.  Combined with
 Corollary~\ref{cor:m2_mixed_tate}, the master Mellin engine of
-Theorem~\ref{thm:pi_source_case_exhaustion} now has a complete
-period-theoretic stratification:\ M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2
+Theorem~\ref{thm:pi_source_case_exhaustion} now has a
+period-theoretic stratification over the cases it treats (the theorem is
+\textbf{[CONDITIONAL]} and scoped to the first fifteen projections):\ M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2
 (Seeley--DeWitt coefficients and integer-$s$ values) in the pure-Tate
 sub-ring $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, and
 M3 in $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.  Specific
@@ -2667,7 +2673,8 @@ The reading is therefore: the index $k \in \{0, 1, 2\}$ classifies
 \emph{both} the sub-mechanism and the natural domain of observable
 from which its transcendental signature can be extracted. The
 case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion}
-classifies \emph{which} transcendentals appear; the domain partition
+(\textbf{[CONDITIONAL]}, first fifteen projections) tags \emph{which}
+transcendentals appear in the cases it covers; the domain partition
 refines to \emph{which observables} can produce them. Sprint MR-C
 extracted the L2 next-order constant $c = 4.10932146748987562042\ldots$
 to $22$ verified decimal digits (an earlier Richardson-extrapolated
@@ -3904,7 +3911,7 @@ n_{\max}/n_{\max}$;\ derived, with its two logarithmic sub-coefficients
 pinned by doubling estimators in its appendix):\ what is proved
 unconditionally is the bound $d_{\mathrm{GH}} \le \gamma_{n_{\max}}$ and
 $\gamma_{n_{\max}} \to 0$, while the uniform bound $\gamma_{n_{\max}} \le
-6\log n_{\max}/n_{\max}$ ($n_{\max} \ge 2$) is \textbf{[PANEL-VERIFIED]};
+6\log n_{\max}/n_{\max}$ ($n_{\max} \ge 2$) is \textbf{[MEASURED]} (a finite-range check, not proved for all $n_{\max}$);
 the small-$n$ closed forms are consistent with it.  Convergence in the
 Dirac-commutator seminorm, and of the almost-commutative
 (gauge-network, $\mathcal{A} \otimes M_n$) structure, is
@@ -4377,11 +4384,12 @@ $\tfrac{1}{4 N_c}$ in the rightmost column is the weak-coupling
 expansion coefficient of the Wilson action $S_W = \beta \sum_P \bigl(
 1 - \tfrac{1}{N_c} \mathrm{Re}\,\mathrm{tr}\,U_P \bigr)$ around the
 trivial vacuum, in the standard normalisation
-$\mathrm{tr}(T^a T^b) = \tfrac{1}{2} \delta^{ab}$.  \textbf{[SYMBOLIC + MEASURED]} The three rows
+$\mathrm{tr}(T^a T^b) = \tfrac{1}{2} \delta^{ab}$.  \textbf{[SYMBOLIC + MEASURED]} The two non-abelian rows
 verify this coefficient independently:\ Paper~30~\S 5.2 and
-Sprint~ST-SU3~\S 4 to machine precision; the abelian Paper~25
-case is the trivial $N_c = 1$ limit of either non-abelian
-construction.}
+Sprint~ST-SU3~\S 4 to machine precision; the abelian Paper~25 row is
+a separate $U(1)$ construction whose coefficient $\tfrac14$ coincides
+with the formula at $N_c = 1$ --- it is not a limit of the
+non-abelian ones ($\mathrm{SU}(1)$ is trivial).}
 \label{tab:unified_gauge}
 \end{table}
 
@@ -4860,7 +4868,8 @@ spectral-action computation; deferred to Track~1 R2.5~L4
 closure for the rigorous interpretation), does \emph{not} include
 the SM color factor $M_3(\mathbb{C})$ (deferred per
 Sec.~\ref{sec:unified_gauge} G4), and does \emph{not} identify the
-GV and weak-isospin chiralities (G3 stays open).  Per the project's
+GV and weak-isospin chiralities (that identification is what
+Sprint~G3 closed in the negative, \S\ref{sec:g3}).  Per the project's
 rhetoric rule, no claim is made that GeoVac contains the Higgs:\ the
 claim is that it admits a Higgs given an imposed Yukawa, and that
 the Yukawa is not derived from GeoVac structure.
@@ -5206,7 +5215,10 @@ tracks (memos
 \texttt{debug/g3c\_tensor\_chirality\_memo.md}).  Track~G3-A
 constructed
 $\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}_w$ on the
-R3.5 full Dirac operator system at $n_{\max} \in \{1, 2, 3\}$, with
+R3.5 full Dirac operator system --- the chirality-doubled model, not
+the true Camporesi--Higuchi window, whose truncation is odd and carries
+no such grading (Proposition~\ref{prop:odd}) --- at
+$n_{\max} \in \{1, 2, 3\}$, with
 $w = \mathrm{spinor\_dim}(n_{\max})$ and the basis ordering
 $[\chi = +1, \chi = -1]$ from \texttt{full\_dirac\_basis}.  All three
 $\mathbb{Z}_2$-grading axioms are bit-exact at every tested
@@ -5398,7 +5410,8 @@ recourse to the $S^5$ Bargmann construction.  Predicted
 outcome:\ \emph{positive-thin}, in the exact sense of Sprints~H1
 and~G3.  Inner fluctuations decompose into a gauge-1-form sector
 (recovering $U(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$ at the
-operator level, with the abelian and $\mathrm{SU}(2)$ parts already
+operator level \emph{for the admitted} $\mathcal{A}_F$ --- an organizing
+reading plus the adopted Upgrade~B axiom, not a derivation --- with the abelian and $\mathrm{SU}(2)$ parts already
 verified by H1) plus a Higgs sector that is non-trivial whenever the
 Yukawa-Dirac off-diagonal blocks are imposed.  The G2--G3 corollary
 applies verbatim:\ G4a defines the construction, but no GeoVac
@@ -5551,8 +5564,10 @@ Inner fluctuations decompose into
 $\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$
 gauge 1-forms plus a Higgs scalar that is non-trivial whenever the
 Yukawa-Dirac off-diagonal blocks are imposed and identically zero
-otherwise.  Matter-antimatter and lepton-quark cross-sectors decouple
-exactly.  \textbf{[PANEL-VERIFIED]} The predicted POSITIVE-THIN verdict is confirmed:
+otherwise.  In the one $D_F$ the module constructs, the
+matter--antimatter and lepton--quark cross-sectors decouple exactly;\ the
+general admissible $D_F$ does not (Theorem~\ref{thm:forced_count}: twelve
+of the sixteen real Majorana moduli are lepton--antiquark entries).  \textbf{[PANEL-VERIFIED]} The predicted POSITIVE-THIN verdict is confirmed:
 the construction admits the full SM gauge content with imposed
 Yukawa, hypercharge, and generation choices, and the GeoVac data is
 silent on each of those choices.
@@ -5633,17 +5648,17 @@ rings share no generator: the $\eta$-trivialization
 ($\{\gamma_F, D_F\} = 0$ annihilates the odd-$k$ heat traces that
 would couple them), together with the G3 commuting-$\mathbb{Z}_2$
 result, leaves the inner Yukawa ring sharing no generator with any forced
-outer ring. This is the precise content of the structural-skeleton
+outer ring (none beyond $\mathbb{Q}$). This is the precise content of the structural-skeleton
 scope (\S 1.5 of the project guidelines): the bone (the forced,
 integer/rational skeleton) and the calibration data (free) live in
-rings sharing no generator, and the Yukawa is free \emph{because}
-it generates its own ring --- a quantity cannot be derived from a ring
-it generates. The reading also explains, after the fact, why the H1,
-W3, and Koide attempts to select the Yukawa all returned clean
-negatives: each probed \emph{inside} the almost-commutative category,
-where the seam already forbids selection.
+rings sharing no generator beyond $\mathbb{Q}$, and one reading (an
+Observation, not a derivation) is that the Yukawa sits on the free side
+because it generates its own ring.  That reading is consistent with the
+H1, W3, and Koide attempts to select the Yukawa all returning clean
+negatives:\ each probed \emph{inside} the almost-commutative category,
+on the free side of the seam.
 
-\paragraph{The inner algebra structure is mostly forced (Door~4b,
+\paragraph{The inner algebra shape under the Hopf-tower reading (Door~4b,
   2026-06-01).} The seam places the Yukawa \emph{values} on the free
 side; it does \emph{not} place the inner \emph{algebra structure}
 there. \textbf{[PANEL-VERIFIED]} A finite-algebra enumeration shows that among all finite
@@ -5734,10 +5749,11 @@ structural theorem that the AC tensor product
 $\mathcal{H} = \mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$ transfers
 the rung-$n$ sphere's division-algebra structure to a constraint on
 $\mathcal{H}_F$'s inner algebra. This theorem is sprint-reachable and
-paper-level; if it closes, the inner-algebra status upgrades from
-``mostly forced with the $\mathbb{H}$-vs-$M_2(\mathbb{C})$ fork closed
-by literature import (CCM second-order condition)'' to ``mostly forced
-with the fork closed by a GeoVac-coherent geometric criterion,'' leaving
+paper-level; if it closes, the $n = 2$ real form would move from
+``admitted, with $\mathbb{H}$ imported from the literature (CCM
+second-order condition)'' to ``selected by a GeoVac-coherent geometric
+criterion'' --- still relative to the Hopf-tower organizing reading and
+the adopted Upgrade~B axiom, not a derivation --- leaving
 only the generation count, the inner KO-dimension, and the Yukawa values
 outside the forcing. Source:
 \texttt{debug/door4d\_division\_algebra\_sphere\_memo.md}.
@@ -5847,21 +5863,26 @@ of $\mathcal{H}_F$. It is empty:\ Paper~0's entire multiplicity inventory
 is the $2\ell+1$ angular slots (odd, and \emph{growing} with $\ell$,
 hence not a generation-universal multiplicity) together with a single
 $\mathbb{Z}_2$ already consumed by spin; no constant factor of three
-appears anywhere. This promotes the structural-skeleton scope from an
-observation to a \emph{relative theorem of necessity} for the
-$N_{\mathrm{gen}}$/inner-KO-dimension residue, and gives a single
-structural reason the H1, W3, and Koide selection attempts failed:\ all
-probed inside the almost-commutative category, on the side of the seam
-where the disjointness forbids selection and the packing axiom has no
-reach. The qualifier ``relative'' is load-bearing:\ the statement
+appears anywhere. This sharpens the structural-skeleton scope for the
+$N_{\mathrm{gen}}$/inner-KO-dimension residue into a \emph{relative
+non-emission statement} \textbf{[PROOF-BY-ARGUMENT]}:\ the current
+packing construction emits no such multiplicity. It offers one
+structural reading of why the H1, W3, and Koide selection attempts
+failed:\ all probed inside the almost-commutative category, on the free
+side of the seam (an Observation-level partition;\ the period rings on
+its two sides share no generator beyond $\mathbb{Q}$, which records the
+partition rather than forbidding selection), where the packing axiom has no reach. The qualifier ``relative'' is load-bearing:\ the statement
 forecloses the residue for the \emph{current} packing construction, not
 for every conceivable discrete one. Lifting it would require a
 \emph{sibling axiom} that emits fiber multiplicities --- a new primitive
 Paper~0 does not contain --- recorded as the open (long-range) direction
 with no present handle. The inner \emph{algebra shape} $\mathbb{C}
-\oplus \mathbb{H} \oplus M_3(\mathbb{C})$ is the one inner datum the
-construction does reach (Door~4b/4d, via the Hopf tower and Hurwitz's
-classification); the residue it cannot reach is precisely the
+\oplus \mathbb{H} \oplus M_3(\mathbb{C})$ is reached only relative to an
+organizing reading:\ under the Bertrand $\times$ complex-Hopf-tower
+reading plus the adopted Upgrade~B axiom (Door~4b/4d, via the Hopf tower
+and Hurwitz's classification) the factor count and the $\mathbb{C}$ and
+$M_3(\mathbb{C})$ summands are fixed, while $\mathbb{H}$ at $n = 2$ is
+admitted, not forced;\ outside that reading the residue is precisely the
 multiplicity- and real-structure-valued data. Source:\
 \texttt{debug/seam\_packing\_scoping\_memo.md}.
 
@@ -5913,8 +5934,10 @@ geometry):
 \end{equation}
 \textbf{[SYMBOLIC + MEASURED]} The endpoint $32$ is computed with a linear
 $*$-representation of $\mathcal{A}_F$ on $\mathbb{C}^{32}$ (particles
-colour-blind, $M_3(\mathbb{C})$ acting on antiquarks; three independent
-linear-algebra routes agree, singular-value gap $12.4$ vs $10^{-13}$;
+colour-blind, $M_3(\mathbb{C})$ acting on antiquarks; the CCM algebra
+basis and ten random generic algebra elements give the same null space
+through one null-space routine, stable across tolerances, singular-value
+gap $12.4$ vs $10^{-13}$;
 \texttt{tests/test\_trunk\_qa\_forced\_count\_moduli.py}).  Its projection
 onto the $16$-dimensional matter sector has rank $16$ --- the \emph{full}
 lepton $2\times2$ and quark-flavour $2\times2 \otimes \mathbb{1}_3$ blocks, of
@@ -5990,7 +6013,7 @@ axiom of Door~4e, which selects $\mathbb{H}$ at $n = 2$ as an
 \emph{adopted axiom}, not a derivation (the Door~4 record is
 partial-door; Door~4c found $\mathbb{H}$ admitted but not forced); (3)
 is the standard real-spectral-triple axiom set; (2) is the one external
-input, recorded by the Direction 2 paragraph as packing-unreachable in
+input beyond the adopted axiom in (1), recorded by the Direction 2 paragraph as packing-unreachable in
 the current Paper 0 construction.
 \end{proof}
 
@@ -6140,9 +6163,9 @@ structural-skeleton boundary at the canonical-representation level.
 
 \textbf{[CONDITIONAL]} Paper~57 \S 6.1 (the Forced/Free Seam observations paper) records
 this theorem as the C3 closure of the empirical Direction 2 / Read 2
-NO-GO scopings, and as one of three proof-by-argument non-selection
-results in the corpus (alongside H1 Yukawa non-selection and the
-Forced-Count Theorem).
+NO-GO scopings, and as a proof-by-argument non-selection result
+alongside H1 Yukawa non-selection (the Forced-Count Theorem, listed
+with them there, is a dimension count, not a non-selection result).
 \end{remark}
 
 % -------------------------------------------------------------------
@@ -7572,10 +7595,11 @@ stays open~\cite{paper42}.
 
 \paragraph{Honest scope.}
 Closure is at finite $n_{\max}$ and finite $N_t$, NOT in the
-continuum (GH-limit) limit.  No published Lorentzian quantum-metric
-convergence construction exists as of May~2026
-(Latr\'emoli\`ere 2017/2026 and Hekkelman--McDonald 2024 are strictly
-Riemannian), and the framework's own attempt was DESCOPED on
+continuum (GH-limit) limit.  We know of no published Lorentzian
+quantum-metric convergence construction (the propinquity constructions
+of Latr\'emoli\`ere~\cite{latremoliere2021dual,latremoliere2026} and the
+spectral-truncation work of Hekkelman--McDonald~\cite{hekkelman_mcdonald2024}
+are Riemannian), and the framework's own attempt was DESCOPED on
 2026-06-09 by the $K^+$ annihilation theorem (Paper~45):\ the finite
 generator $K = 2J_z$ is posited and its flow is compact, so no
 Lorentzian metric statement is available at finite cutoff (the
@@ -7642,10 +7666,11 @@ Sprint L1 implements the locked architectural decisions of L1-A
 (\texttt{debug/l1\_witness\_spec\_memo.md}):
 
 \begin{itemize}
-\item \textbf{Wedge (W1):}\ hemispheric $P_W$ on $S^3$ aligned with
-the Hopf-base axis, defined as $P_W = (1/2)(I + R_{\mathrm{polar}})$
-where $R_{\mathrm{polar}}: m_j \mapsto -m_j$ is the equatorial
-reflection involution on the spinor basis;\ $P_W^2 = P_W$ and
+\item \textbf{Wedge (W1):}\ the projector $P_W = (1/2)(I + R_{\mathrm{polar}})$
+onto the $+1$ eigenspace of the involution
+$R_{\mathrm{polar}}: m_j \mapsto -m_j$ on the spinor basis (called
+``hemispheric'' in the L1 memos;\ it is a symmetry-sector projector, not
+a restriction to a spatial hemisphere of $S^3$);\ $P_W^2 = P_W$ and
 $P_W^* = P_W$ are bit-exact (no smoothing needed; the reflection is
 an exact involution on the discrete basis).
 \item \textbf{Unit normalisation (U-1):}\ natural rapidity units
@@ -7906,7 +7931,8 @@ Yang--Mills without Higgs) at the data level, together with three
 GeoVac-original structural extensions:\ the forced-graph claim
 (Bertrand's theorem $\times$ Fock projection forces $S^3$), the
 master Mellin engine $\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$ at
-$k \in \{0,1,2\}$ classifying the framework's transcendentals, and
+$k \in \{0,1,2\}$ tagging the framework's transcendentals (a
+\textbf{[CONDITIONAL]} case-check over the first fifteen projections), and
 the cosmic-Galois layer $U^*$ constructed in Paper~56~\cite{loutey_paper56}.  MvS 2014
 does not predict a Tannakian dual;\ the $U^*$ sits on top of the
 gauge-network scaffolding as additional structure, not as an MvS
@@ -8201,8 +8227,8 @@ arXiv:2111.13865.
 E.-M.~Hekkelman and E.~A.~McDonald,
 ``A noncommutative integral on spectrally truncated spectral triples,
 and a link with quantum ergodicity,''
-\textit{J.~Funct.~Anal.}\ (2025, published online, ScienceDirect
-PII S0022123625003362); arXiv:2412.00628.
+\textit{J.~Funct.~Anal.}\ \textbf{289}(12), 111154 (2025);
+arXiv:2412.00628.
 
 \bibitem{vansuijlekom2024_ksystems}
 W.~D.~van~Suijlekom,

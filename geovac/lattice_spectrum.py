@@ -175,17 +175,28 @@ def lambda_max_from_operator(L, states) -> float:
     """
     from scipy.sparse.linalg import eigsh
 
+    sparse = hasattr(L, "tocsr")
+    total = float(abs(L).sum()) if sparse else float(np.abs(np.asarray(L)).sum())
+    inblock = 0.0
     best = -np.inf
     for _l, sel in sorted(block_index(states).items()):
         if sel.size == 0:
             continue
-        sub = L[sel][:, sel] if hasattr(L, "tocsr") else np.asarray(L)[np.ix_(sel, sel)]
+        sub = L[sel][:, sel] if sparse else np.asarray(L)[np.ix_(sel, sel)]
+        inblock += float(abs(sub).sum()) if sparse else float(np.abs(sub).sum())
         if sel.size <= 3:
             dense = sub.toarray() if hasattr(sub, "toarray") else sub
             top = float(np.max(np.linalg.eigvalsh(dense)))
         else:
             top = float(eigsh(sub, k=1, which="LA")[0][0])
         best = max(best, top)
+    # The blockwise top is the global top ONLY if L has no off-block weight.
+    # Check it on the operator actually passed, rather than assume it.
+    if abs(total - inblock) > 1e-12 * max(1.0, total):
+        raise ValueError(
+            "L carries off-block (l-changing) weight "
+            f"{total - inblock:.3e}; the blockwise top eigenvalue is invalid"
+        )
     return float(best)
 
 

@@ -4,16 +4,20 @@ Guards the two load-bearing facts of the translation-seminorm
 framework (Paper 38 §sec:named_gaps; sprint memo
 debug/sprint_p38_g1g2_phaseA_memo.md):
 
-  T1. Per-band injectivity (premise of the kernel proposition):
-      on the chirality-doubled spinor multiplier system, every
-      harmonic band N <= 2 n_max - 1 has full vec-rank N^2.
+  T1. Per-band injectivity on the chirality-doubled MODEL (a companion
+      check, not the theorem's premise):  on the chirality-doubled spinor
+      multiplier system, every harmonic band N <= 2 n_max - 1 has full
+      vec-rank N^2.  The kernel proposition's premise lives on the TRUE
+      Camporesi-Higuchi window and is backed by
+      tests/test_p38_true_ch_window.py (re-pointed 2026-09-30).
   T2. The lifted-state smoothing identity (scalar sector, exact):
       upsilon(P M_f P)(g) = sigma_J f(g) with sigma the unit-step
       Clebsch-Gordan multiplier symbol — checked on the SU(2)
       Peter-Weyl window j <= 1/2 (the n_max = 2 scalar window),
       where sigma = (1, sqrt(2)/3, 2/9), the published values.
 
-If T1 ever fails the kernel proposition's premise is wrong; if T2
+If T1 ever fails the doubled-model companion is wrong (the true-window
+premise is tested separately); if T2
 fails the dual map's structural identity (and with it the
 almost-inverse bookkeeping of the unconditional theorem) is wrong.
 """

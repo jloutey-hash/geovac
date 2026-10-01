@@ -527,7 +527,9 @@ class TestCentralMultiplierCBNormMatchesPlancherelMax:
     """The mass maximum equals max_j hat{K}(j); verify constructively."""
 
     @pytest.mark.parametrize("n_max", [1, 2, 3, 4, 5])
-    def test_cb_norm_is_plancherel_max(self, n_max):
+    def test_legacy_cb_norm_value_is_plancherel_mass_max(self, n_max):
+        # The legacy function name says 'cb_norm'; its value is the Plancherel
+        # MASS maximum.  The map is UCP, so its true cb-norm is 1.
         cb = central_multiplier_cb_norm(n_max)
         plancherel_max = max(plancherel_symbol(n_max, j) for j in _j_values(n_max))
         assert cb == plancherel_max

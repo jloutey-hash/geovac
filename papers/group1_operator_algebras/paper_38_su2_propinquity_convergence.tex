@@ -124,14 +124,14 @@ $\gamma_n \sim (4/\pi)\log n / n$ (dual-Coxeter normalisation; $2/\pi$ on the un
 Lipschitz comparison bound
 $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
 $C_3 = 1$, by compression from the continuum identity (proof replaced
-2026-09-28;\ \emph{not} used by the unconditional theorem);\ (L4) a
-Berezin map (convolution form) that is positive,
+2026-09-28;\ \emph{not} used by the unconditional theorem);\ (L4)
+\textbf{[INTERNAL THEOREM]} a Berezin map (convolution form) that is positive,
 contractive, an approximate identity, and L3-compatible;\ (L5, since \emph{withdrawn} 2026-09-03: the bound is established by the
 unconditional lifted-state theorem, not this approximation-pair assembly).
 \textbf{[OBSERVATION]} The
-asymptotic constant is a quotient of sphere volumes ---
-$4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple},
-$2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and \emph{not} the Hopf
+asymptotic constant is set by a quotient of sphere volumes ---
+$2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and twice that,
+$4/\pi$, in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} --- and \emph{not} the Hopf
 fibration's base-to-total ratio (\S\ref{sec:L2}). The $\log\nmax$
 factor is the first-moment logarithm of the Fej\'er-type
 (squared-Dirichlet;\ on the circle, the Ces\`aro-1 Fej\'er) kernel, which the circle's Fej\'er kernel already carries
@@ -311,7 +311,7 @@ geometric content, and its value is normalisation-dependent (2026-09-03):\
 in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} the constant
 is $4/\pi$, which coincides numerically with $\Vol(S^2)/\pi^2$ for
 $\Vol(S^2) = 4\pi$;\ on the unit $\sthree$ it is $2/\pi$, the factor $2$
-being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- what places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Separately, \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
+being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- which places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ (Paper~55's M1 witness table) --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Separately, \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
 first-moment constant of the classical Fej\'er kernel on the circle
 (Remark~\ref{rem:circle_fejer}). This is the volume factor that the $k = 0$ (trivial)
 heat kernel on the round $\sthree$ leaves behind --- the $k = 0$
@@ -597,16 +597,17 @@ $d_{\mathrm{GH}} \le \gamma_{\nmax}$. The rate is
 Lemma~\ref{lem:L2}(d.ii)--(d.iii). \qedhere
 \end{proof}
 
-\begin{remark}[no inverse estimate;\ the Berezin pair as refinement]
+\begin{remark}[no inverse estimate;\ the Berezin map]
 \label{rem:no_inverse}
 Both almost-inverse defects in the proof are Fej\'er smoothings at
 the same moment $\gamma_{\nmax}$ --- one on functions, one as the
 conjugation average $\Phi$ --- so no partial-inverse or transference
 estimate is required anywhere:\ the dual-reach gap of earlier
 formulations is dissolved rather than closed. The Berezin map
-$B_{\nmax}$ of Definition~\ref{def:berezin} (Lemmas~L4--L5) remains
-as an explicit forward-reconstruction refinement;\ it is no longer
-load-bearing for the distance bound. The scalar $C(G)$ case of this
+$B_{\nmax}$ of Definition~\ref{def:berezin} (Lemma~L4) remains as an
+explicit forward reconstruction;\ the pair refinement built on it
+(Lemma~L5) is \emph{refuted as stated} (its height constituents fail,
+\S\ref{sec:L5}), and neither is load-bearing for the distance bound. The scalar $C(G)$ case of this
 compression/lifted-state pattern, for general compact metric groups
 with the same single-moment bound, is due to
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
@@ -1162,7 +1163,7 @@ MEASURED]} $\displaystyle
 \lim_{\nmax \to \infty} \frac{\nmax\,\gamma_{\nmax}}{\log \nmax}
 \;=\; \frac{4}{\pi}.
 $
-\item[(d.iii)] (Uniform bound.) \textbf{[PANEL-VERIFIED]}
+\item[(d.iii)] (Uniform bound.) \textbf{[MEASURED]}
 $\gamma_{\nmax} \le 6\,\log \nmax / \nmax$
 for all $\nmax \ge 2$ (established through a monotonicity statement
 checked on a finite range of $\nmax$, not proved for all $\nmax$).
@@ -1211,7 +1212,7 @@ computed in Appendix~\ref{app:stein_weiss}, Step~3:
 \end{equation*}
 which gives $\gamma_n = (4/\pi) \log n / n + O(1/n)$.
 
-For (d.iii), \textbf{[PANEL-VERIFIED]} the function
+For (d.iii), \textbf{[MEASURED]} the function
 $n \mapsto n \gamma_n / \log n$ is
 monotonically decreasing for $n \ge 3$ (verified on the sample $n \in
 \{3, 4, 5, 7, 10, 15, 20, 30, 50, 100, 200, 500, 1000\}$ by the frozen
@@ -1287,7 +1288,7 @@ constant coincides numerically with
    \;=\; \frac{\Vol(S^2)}{\pi^2}
    \;=\; \frac{4\pi}{\pi^2}.
 \end{equation*}
-\emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- what places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.
+\emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- which places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ (Paper~55's M1 witness table) --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.
 Read as the unit-sphere quotient $\Vol(S^2)/\Vol(\sthree)$ rather than as a
 Hopf base-to-total ratio, the constant still carries pure volume content, and is one of
 the natural transcendentals on $\SU(2)$ that survives at the
@@ -1373,7 +1374,7 @@ $\sigma_{\nmax}$ --- one band below the window's envelope $N \le
 \end{definition}
 
 \begin{lemma}[L4:\ properties of the Berezin reconstruction]\label{lem:L4}
-The map $B_{\nmax}: C^\infty(\sthree) \to \Op_{\nmax}$ has the
+\textbf{[INTERNAL THEOREM]} The map $B_{\nmax}: C^\infty(\sthree) \to \Op_{\nmax}$ has the
 following four properties:
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item[(a)] (Positivity.) If $f \ge 0$ on $\sthree$, then $B_{\nmax}(f)$
@@ -1512,8 +1513,9 @@ approximation estimates the pair supplies. The truncated-side
 Monge--Kantorovich metric is non-degenerate unconditionally under the
 translation-seminorm metrization
 (Proposition~\ref{prop:kernel_condition});\ the distance bound itself
-is Theorem~\ref{thm:main_unconditional}, and the pair below supplies
-the explicit forward-reconstruction refinement.
+is Theorem~\ref{thm:main_unconditional}.  The pair below was proposed
+as an explicit forward-reconstruction refinement;\ it is refuted as
+stated and recorded for the record.
 
 \begin{lemma}[L5:\ Berezin-pair refinement of the forward
 direction;\ \textbf{[REFUTED AS STATED --- withdrawn 2026-09-03]}]\label{lem:L5}
@@ -1532,7 +1534,9 @@ Lemma~\ref{lem:L2}(d).
 \end{lemma}
 
 \begin{proof}
-The four constituents a Latr\'emoli\`ere tunnel would require are:
+The four constituents of the assembly (named after, but not
+identical to, the reach and height of a Latr\'emoli\`ere tunnel;\ the
+heights here are GeoVac-defined, see \emph{Height} below) are:
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item $\mathrm{reach}_B
 := \sup_{\Lipnorm{f} \le 1}
@@ -1666,9 +1670,10 @@ the sphere-volume quotient $\Vol(S^2)/\Vol(\sthree) = 2/\pi$ of
 unit-radius spheres;\ the dual-Coxeter constant $4/\pi$ is twice that
 quotient (numerically $\Vol(S^2)/\pi^2$).  Neither is the Hopf
 fibration's base-to-total ratio, whose base carries half the radius
-(\S\ref{sec:L2}, volume-ratio note). \textbf{[PANEL-VERIFIED]} A uniform bound
+(\S\ref{sec:L2}, volume-ratio note). \textbf{[MEASURED]} A uniform bound
 $\gamma_{\nmax} \le 6 \log \nmax / \nmax$
-holds for all $\nmax \ge 2$.
+holds on the finite range checked (Lemma~\ref{lem:L2}(d.iii));\ it is not
+proved for all $\nmax \ge 2$.
 \end{theorem}
 
 \begin{proof}
@@ -1678,8 +1683,8 @@ supply the operator-system substrate on the true window
 Lemma~\ref{lem:L2} the central spectral Fej\'er kernel with closed-form
 $\gamma_{\nmax}$ and asymptotic rate; Lemma~\ref{lem:L3} the Lipschitz
 comparison constant $C_3 = 1$; Lemma~\ref{lem:L4} the Berezin
-reconstruction with the four properties a Latr\'emoli\`ere
-tunneling pair would require; and---in the \emph{withdrawn} route only---Lemma~\ref{lem:L5} the assembly into the
+reconstruction (positive, contractive, an approximate identity, and
+L3-compatible --- the forward-map properties, not a tunnel);\ and---in the \emph{withdrawn} route only---Lemma~\ref{lem:L5} the assembly into the
 state-space GH bound.
 
 \emph{Which route establishes this.}  Not the L5 assembly:\ its two height
@@ -1932,7 +1937,7 @@ rank-dependent as anticipated
 above:\ the rate constant $4/\pi$ (dual-Coxeter normalisation) is reported \emph{universal} across
 the
 class, by a Plancherel-weight $\times$ Vandermonde-Jacobian
-cancellation theorem (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at rank~$1$
+cancellation argument (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at rank~$1$
 ($\SU(2)$, the present paper), with the rank-$\ge 2$ leg corroborated
 on reduced panels and a fully rank-uniform analytical proof recorded
 as a named gap in Paper~40. \textbf{[INTERNAL THEOREM]}
@@ -2202,11 +2207,11 @@ Dirac operators associated with an analytic path of Riemannian
 metrics},
 \newblock arXiv:2504.11715, 2025.
 
-\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+\bibitem[Hekkelman \& McDonald(2025)]{hekkelman_mcdonald2024b}
 E.~Hekkelman and E.~McDonald,
 \newblock \emph{A noncommutative integral on spectrally truncated
 spectral triples, and a link with quantum ergodicity},
-\newblock J. Funct. Anal., to appear (2025), arXiv:2412.00628.
+\newblock J. Funct. Anal. \textbf{289}(12) (2025) 111154, arXiv:2412.00628.
 
 \bibitem[Toyota(2023)]{toyota2023}
 R.~Toyota,

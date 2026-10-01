@@ -34,20 +34,20 @@ This equation presupposes a continuous, flat Euclidean space $\mathbb{R}^3$ and 
 
 Yet a remarkable observation, first made by Fock in 1935 \cite{fock1935}, suggests a fundamentally different perspective. Fock showed that when hydrogen is analyzed in momentum space, the Schr\"odinger equation acquires an unexpected geometric structure. The momentum-space integral equation, with its $1/|\mathbf{p} - \mathbf{p}'|^2$ kernel (the Fourier transform of the Coulomb potential), can be mapped by stereographic projection onto the three-sphere $S^3$. On $S^3$, the Coulomb problem becomes a rotation-invariant integral equation whose kernel $1/|\boldsymbol{\omega} - \boldsymbol{\omega}'|^2$ is zonal, with eigenvalue $2\pi^2/n$ on the degree-$(n-1)$ hyperspherical harmonics (the eigenfunctions of $\Delta_{S^3}$);\ that eigenvalue forces the focal length $p_0 = Z/n$. Since the degree-$(n-1)$ harmonics are the eigenfunctions of $\Delta_{S^3}$ with eigenvalue $-(n^2-1)$, the kernel acts on them as $2\pi^2(1-\Delta_{S^3})^{-1/2}$, and the bound-state Hamiltonian is itself a function of $\Delta_{S^3}$, $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ ($E_n = -Z^2/(2(C+1))$, $C = n^2-1$):\ this is the precise sense of the standard ``free motion on $S^3$'' reading. The kernel is not the Green's function of $\Delta_{S^3}$ (that behaves like $1/d$, with eigenvalues $\propto 1/(n^2-1)$);\ it is the restriction to $S^3$ of the $\mathbb{R}^4$ Laplacian's Green's function (Section~\ref{sec:discussion}). In Fock's formulation the $1/r$ potential appears as a projection effect of that curved geometry viewed in flat coordinates---an equivalent description, not a claim that either one is more fundamental.
 
-This observation was developed further by Bargmann \cite{bargmann1936}, who connected the hidden $SO(4)$ symmetry of hydrogen to the isometry group of $S^3$, and by Barut and Kleinert \cite{barut1967}, who extended the symmetry to the full conformal group $SO(4,2)$. The mathematical structure has been thoroughly studied in the context of dynamical symmetry groups \cite{bander1966,biedenharn1981}. However, these results are typically presented as mathematical curiosities---elegant reformulations of a solved problem---rather than as a source of exploitable computational structure.
+This observation was developed further by Bargmann \cite{bargmann1936}, who connected the hidden $SO(4)$ symmetry of hydrogen to the isometry group of $S^3$, and by Malkin and Man'ko~\cite{malkin_manko1965}, Fronsdal~\cite{fronsdal1967} and Barut and Kleinert~\cite{barut1967}, who extended the symmetry to the conformal group $SO(4,2)$. The mathematical structure has been thoroughly studied in the context of dynamical symmetry groups \cite{bander1966,biedenharn1981}, and the Coulomb-Sturmian and hyperspherical-harmonic literature has long exploited it computationally (e.g.\ Avery~\cite{avery1989}).
 
 In this paper we emphasize that structural content. The $S^3$ representation carries exact discrete structure --- the labels, degeneracies and selection rules of the $S^3$ harmonics --- that can be exploited computationally, independently of any reading of which description is physically prior. Our starting point is the GeoVac framework \cite{loutey_paper0,loutey_paper1}, which indexes the hydrogen state space by a discrete label graph: nodes label the quantum states $|n, l, m\rangle$, edges connect labels related by the $L_\pm$ and $T_\pm$ ladder operators, and the Hamiltonian matrices built on that label set are sparse (Section~\ref{sec:graph} states exactly which of the graph's properties carry $S^3$ content and which do not). This discrete lattice is \textit{intrinsically dimensionless}---it is a pure combinatorial topology with no inherent length, time, or energy scales.
 
-The central results of this paper are one spectral-bound statement (proved in closed form), one wall (the edge Laplacian does not converge to $\Delta_{S^3}$) and two symbolic ones:
+Its central results are one spectral-bound statement (proved in closed form, Paper~0~\S VI) and one wall (the edge Laplacian does not converge to $\Delta_{S^3}$);\ items~2 and~3 are classical facts it builds on, re-verified symbolically:
 \begin{enumerate}
 \item \textbf{[INTERNAL THEOREM]} The top Laplacian eigenvalue of the discrete graph saturates its bipartite bound, $\lambda_{\max} \to 2 d_{\max} = 8$, at the closed-form rate $(C_{\mathrm{sat}} + o(1))/n_{\max}^2$ (Paper~0~\S VI;\ measured through $n_{\max} = 30$ and $70$).  \textbf{[WALL]} This is the band edge of two-dimensional grid graphs, not an indication of $S^3$:\ $L$ splits into $n_{\max}$ disconnected $l$-blocks and does not converge to $\Delta_{S^3}$ (see New Contributions item~1).  What is exact is the label set:\ the nodes $(n,l,m)$ index the Peter--Weyl truncation of $L^2(S^3)$, on which $-\Delta_{S^3} = \mathbf{L}^2 + \mathbf{A}^2$ acts as the diagonal $SO(4)$ Casimir.  \emph{Corrected 2026-09-03/04 and 2026-09-25:} this item previously asserted the convergence as \textbf{[MEASURED]}, then read it as an \textbf{[OBSERVATION]}.
-\item \textbf{[SYMBOLIC PROOF]} The Laplace-Beltrami operator on this unit sphere produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$, carrying no physical dimensions.
+\item \textbf{[PRIOR ART;\ SYMBOLIC PROOF]} The Laplace-Beltrami operator on this unit sphere produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$, carrying no physical dimensions.
 \item \textbf{[SYMBOLIC PROOF]} The dimensionful Rydberg spectrum $E_n = -Z^2/(2n^2)$ enters only through the energy-shell constraint $p_0^2 = -2E$, which serves as a projection parameter mapping $S^3$ coordinates to flat $\mathbb{R}^3$ coordinates; the value $p_0 = Z/n$ is forced by the eigenvalue $2\pi^2/n$ of Fock's $S^3$ Coulomb kernel (Section~\ref{sec:energy_shell}; \textbf{[PRIOR ART]} the eigenvalue holds for every $n$, Fock 1935 / Funk--Hecke;\ verified in exact arithmetic for $n \le 4$, all $l < n$, one real harmonic per $l$, with $E_n$ never an input, \texttt{tests/test\_paper7\_fock\_kernel.py}).  The rearrangement $E_n = -p_0^2/2$ by itself is definitional.
 \end{enumerate}
 
 These claims are supported by a suite of 18 symbolic checks, implemented in \texttt{sympy} and verified computationally, that audit the algebraic steps of the conformal transformation chain (several are limiting-case or definitional substitutions rather than logically independent theorems), together with the kernel-eigenvalue and eigenfunction checks of \texttt{tests/test\_paper7\_fock\_kernel.py}, which carry the non-definitional part of the energy step.
 
-The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} states the operator equivalence:\ through Fock's integral equation the bound-state Hamiltonian is the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of the $S^3$ Laplacian, its scale $p_0 = Z/n$ fixed by the kernel eigenvalue (Section~\ref{sec:energy_shell});\ the local conformal-Laplacian identity recorded there is bookkeeping, and its appendix check is non-discriminating. Section~\ref{sec:vee_s3} derives the two-electron repulsion integral as a density-overlap integral on $S^3$. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
+The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} states the operator equivalence:\ through Fock's integral equation the bound-state Hamiltonian is the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of the $S^3$ Laplacian, its scale $p_0 = Z/n$ fixed by the kernel eigenvalue (Section~\ref{sec:energy_shell});\ the local conformal-Laplacian identity recorded there is bookkeeping, and its appendix check is non-discriminating. Section~\ref{sec:vee_s3} rewrites the two-electron repulsion integral in its standard Fourier--Parseval form, in the stereographic variable $t = q/(2Z)$, as a density-overlap integral \textbf{[PRIOR ART]}. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
 
 
 %% ========================================================================
@@ -66,7 +66,7 @@ The following results are well-established in the mathematical physics literatur
 
 \item \textit{Bargmann (1936)} \cite{bargmann1936}: The hidden $SO(4)$ symmetry of hydrogen corresponds to the isometry group of $S^3$. The integer spectrum $\lambda_n = -(n^2 - 1)$ follows from the representation theory of $SO(4)$.
 
-\item \textit{Barut and Kleinert (1967)} \cite{barut1967,barut1967b}: The full conformal group $SO(4,2)$ acts as the dynamical symmetry group of hydrogen, connecting $S^3$ to the non-compact spectrum-generating algebra.
+\item \textit{Malkin and Man'ko (1965), Fronsdal (1967), Barut and Kleinert (1967)} \cite{malkin_manko1965,fronsdal1967,barut1967,barut1967b}: The full conformal group $SO(4,2)$ acts as the dynamical symmetry group of hydrogen, connecting $S^3$ to the non-compact spectrum-generating algebra.
 \end{itemize}
 
 The stereographic projection formulas (Eqs.~\ref{eq:stereo_spatial}--\ref{eq:stereo_fourth}), the unit sphere constraint (Eq.~\ref{eq:unit_sphere}), the chordal distance identity (Eq.~\ref{eq:chordal}), the conformal Laplacian relation (Eq.~\ref{eq:conformal_laplacian}), and the integer eigenvalue spectrum (Eq.~\ref{eq:s3_spectrum}) are all known results. Our symbolic checks in the Appendix verify these identities; they do not claim to derive them for the first time.
@@ -76,7 +76,7 @@ The stereographic projection formulas (Eqs.~\ref{eq:stereo_spatial}--\ref{eq:ste
 The following are the specific new contributions:
 
 \begin{enumerate}
-\item \textbf{Discrete graph: label lattice, not a discretization (non-convergence).} \textbf{[WALL]} The GeoVac discrete paraboloid lattice---with nodes $(n, l, m)$ and edges generated by $L_\pm, T_\pm$ operators---is \emph{not} a discretization whose continuum limit is the Laplace-Beltrami operator on unit $S^3$ (an earlier version of this item read it as one, as an \textbf{[OBSERVATION]}; re-tiered 2026-09-25). Its edges never change $l$, so $L = D - A$ (binary production default and the $1/(n_i n_j)$ option alike) is the direct sum of $n_{\max}$ disconnected grid graphs $P_{n_{\max}-l} \times P_{2l+1}$ with free ends:\ $\dim\ker L = n_{\max}$ where $\Delta_{S^3}$ has a single zero mode (\texttt{tests/test\_graph\_s3\_nonconvergence.py});\ this kernel count is the load-bearing obstruction.  (The graph heat kernel $e^{-tL}$ also vanishes identically between blocks;\ reading that as a statement about the continuum heat kernel would need a node-to-point identification this paper does not make, so it corroborates rather than carries the argument.)  This wall is the new content of the item. \textbf{[PRIOR ART]} What \emph{is} exact, at every cutoff, is the label set:\ the nodes $(n, l, m)$, $n^2$ per shell, are the Gel'fand--Tsetlin labels of the Peter--Weyl truncation of $L^2(S^3)$, and on them $-\Delta_{S^3}$ acts as the diagonal $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$ ($\mathbf{A}$ the energy-normalized Runge--Lenz vector), with multiplicity $n^2$ on every shell including the top one (standard $SO(4)$ representation theory~\cite{pauli1926,bargmann1936}, the shells being complete irreducible representations; built from the generators and checked in the same test). On the label lattice $\Delta_{S^3}$ is a node weight, not an edge Laplacian. What is \textbf{[MEASURED]} of $L$ itself through $n_{\max} = 30$ (\texttt{tests/test\_paper7\_graph\_convergence.py}; \texttt{tests/test\_trunk\_qa\_splitting.py}, Paper~1) is: (i) \textbf{[INTERNAL THEOREM]} the top Laplacian eigenvalue of the production lattice saturates the bipartite bound, $\lambda_{\max} \to 2 d_{\max} = 8$ --- the $\ell$-block grid structure makes the spectrum closed form, so this is proved rather than sampled --- (6.618 at $n_{\max} = 5$, 7.954 at 30), at the closed-form rate $(C_{\mathrm{sat}} + o(1))/n_{\max}^2$ with $C_{\mathrm{sat}} = \tfrac{\pi^2}{4}(2+2^{1/3})^2(1+2^{-2/3}) = \gvq{saturation_c}{42.7397}\ldots$ that the $\ell$-block grid structure supplies (every finite sample understates $C_{\mathrm{sat}}$ --- verified at all $591$ integer cutoffs $10 \le n_{\max} \le 600$, Paper~0~\S VI --- so the $n_{\max} = 320$ sample $42.6$ printed here before 2026-09-03 understated it;\ the reason is a one-sided pattern (every sample tested lies below $C_{\mathrm{sat}}$ --- measured, not proved), \emph{not} monotonicity --- the approach is not monotone, Paper~0~\S VI, corrected 2026-09-04) (Paper~0~\S VI:\ each $\ell$-block is the grid graph $P_{n_{\max}-\ell} \times P_{2\ell+1}$, so the spectrum is closed form), so that with the matched scale $\kappa = -1/16$ the extremal eigenvalue $\kappa\lambda_{\max}$ approaches $-1/2$ \emph{by construction}---the content is the saturation, not the target; (ii) the $2s/2p$ node-amplitude proxy on the binary lattice decays, oscillating, to $0.39\%$ at $n_{\max} = 30$ (a proxy, not a spectral gap:\ the $\ell$-blocks are disconnected and the mode selection is a near-tie --- Paper~1 \S III conditioning caveat). The $\lambda_{\max}$ mode lives in a mid-$l$ block with negligible weight on the $1s$ node (the $l = 0$ block alone saturates only $\lambda_{\max} \to 4$), and $8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid, carrying no $S^3$ information (the constant $C_{\mathrm{sat}}$ is a Dirichlet band edge); the spectrum of $\kappa L$ is confined to $[-1/2, 0]$, so no level-by-level Rydberg ladder is reproduced. The operator convergence $L \to \Delta_{S^3}$ is therefore not merely unestablished but false (2026-09-25; earlier corrections of 2026-09-03 had already withdrawn a backing note that presented the matched target $-1/2$ as the measured quantity).
+\item \textbf{Discrete graph: label lattice, not a discretization (non-convergence).} \textbf{[WALL]} The GeoVac discrete paraboloid lattice---with nodes $(n, l, m)$ and edges generated by $L_\pm, T_\pm$ operators---is \emph{not} a discretization whose continuum limit is the Laplace-Beltrami operator on unit $S^3$ (an earlier version of this item read it as one, as an \textbf{[OBSERVATION]}; re-tiered 2026-09-25). Its edges never change $l$, so $L = D - A$ (binary production default and the $1/(n_i n_j)$ option alike) is the direct sum of $n_{\max}$ disconnected grid graphs $P_{n_{\max}-l} \times P_{2l+1}$ with free ends:\ $\dim\ker L = n_{\max}$ where $\Delta_{S^3}$ has a single zero mode (\texttt{tests/test\_graph\_s3\_nonconvergence.py});\ this kernel count is the load-bearing obstruction.  (The graph heat kernel $e^{-tL}$ also vanishes identically between blocks;\ reading that as a statement about the continuum heat kernel would need a node-to-point identification this paper does not make, so it corroborates rather than carries the argument.)  This wall is the new content of the item. \textbf{[PRIOR ART]} What \emph{is} exact, at every cutoff, is the label set:\ the nodes $(n, l, m)$, $n^2$ per shell, are the Gel'fand--Tsetlin labels of the Peter--Weyl truncation of $L^2(S^3)$, and on them $-\Delta_{S^3}$ acts as the diagonal $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$ ($\mathbf{A}$ the energy-normalized Runge--Lenz vector), with multiplicity $n^2$ on every shell including the top one (standard $SO(4)$ representation theory~\cite{pauli1926,bargmann1936}, the shells being complete irreducible representations; built from the generators and checked in the same test). On the label lattice $\Delta_{S^3}$ is a node weight, not an edge Laplacian. What is \textbf{[MEASURED]} of $L$ itself through $n_{\max} = 30$ (\texttt{tests/test\_paper7\_graph\_convergence.py}; \texttt{tests/test\_trunk\_qa\_splitting.py}, Paper~1) is: (i) \textbf{[INTERNAL THEOREM]} the top Laplacian eigenvalue of the production lattice saturates the bipartite bound, $\lambda_{\max} \to 2 d_{\max} = 8$ --- the $\ell$-block grid structure makes the spectrum closed form, so this is proved rather than sampled --- (6.618 at $n_{\max} = 5$, 7.954 at 30), at the closed-form rate $(C_{\mathrm{sat}} + o(1))/n_{\max}^2$ with $C_{\mathrm{sat}} = \tfrac{\pi^2}{4}(2+2^{1/3})^2(1+2^{-2/3}) = \gvq{saturation_c}{42.7397}\ldots$ that the $\ell$-block grid structure supplies (\textbf{[MEASURED]} every sample checked understates $C_{\mathrm{sat}}$ --- all $591$ integer cutoffs $10 \le n_{\max} \le 600$, Paper~0~\S VI --- so the $n_{\max} = 320$ sample $42.6$ printed here before 2026-09-03 understated it;\ the reason is a one-sided pattern (every sample tested lies below $C_{\mathrm{sat}}$ --- measured, not proved), \emph{not} monotonicity --- the approach is not monotone, Paper~0~\S VI, corrected 2026-09-04) (Paper~0~\S VI:\ each $\ell$-block is the grid graph $P_{n_{\max}-\ell} \times P_{2\ell+1}$, so the spectrum is closed form), so that with the matched scale $\kappa = -1/16$ the extremal eigenvalue $\kappa\lambda_{\max}$ approaches $-1/2$ \emph{by construction}---the content is the saturation, not the target; (ii) the $2s/2p$ node-amplitude proxy on the binary lattice decays, oscillating, to $0.39\%$ at $n_{\max} = 30$ (a proxy, not a spectral gap:\ the $\ell$-blocks are disconnected and the mode selection is a near-tie --- Paper~1 \S III conditioning caveat). The $\lambda_{\max}$ mode lives in a mid-$l$ block with negligible weight on the $1s$ node (the $l = 0$ block alone saturates only $\lambda_{\max} \to 4$), and $8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid, carrying no $S^3$ information (the constant $C_{\mathrm{sat}}$ is a Dirichlet band edge); the spectrum of $\kappa L$ is confined to $[-1/2, 0]$, so no level-by-level Rydberg ladder is reproduced. The operator convergence $L \to \Delta_{S^3}$ is therefore not merely unestablished but false (2026-09-25; earlier corrections of 2026-09-03 had already withdrawn a backing note that presented the matched target $-1/2$ as the measured quantity).
 
 \item \textbf{Explicit symbolic verification.} \textbf{[SYMBOLIC PROOF]} The 18 symbolic checks (Appendix~\ref{app:tests}) provide a machine-verified algebraic audit of the conformal transformation chain (ten of the eighteen checks are definitional, limiting-case or non-discriminating rather than logically independent theorems). While the underlying identities are known, this systematic verification in \texttt{sympy} is new and provides a reproducible computational check.
 
@@ -154,7 +154,7 @@ A direct algebraic computation confirms that the image lies on the unit sphere:
 \sum_{i=1}^{4} n_i^2 = \frac{4p_0^2 p^2 + (p^2 - p_0^2)^2}{(p^2 + p_0^2)^2} = 1.
 \label{eq:unit_sphere}
 \end{equation}
-This identity holds for \textit{all} values of $p_0 > 0$. The parameter $p_0$ does not change the target manifold; it only changes which point in $\mathbb{R}^3$ maps to the south pole. \textbf{[SYMBOLIC PROOF]} This is our first key result:
+This identity holds for \textit{all} values of $p_0 > 0$. The parameter $p_0$ does not change the target manifold; it only changes which point in $\mathbb{R}^3$ maps to the south pole. \textbf{[SYMBOLIC PROOF]} This classical property of stereographic projection, re-verified here, is the starting point:
 
 \medskip
 \noindent\textit{The stereographic projection always produces the unit $S^3$, regardless of $p_0$. The intrinsic geometry of the target manifold has no physical scale.}
@@ -455,8 +455,9 @@ Substituting into Eq.~\eqref{eq:rho2s}:
   \label{eq:phi2s}
 \end{equation}
 This is \emph{not} constant on $S^3$---it has zeros at
-$t^2 = (3 \pm 1)/16$, corresponding to nodes in the $2s$ radial
-wavefunction. The integral evaluates to
+$t^2 = (3 \pm 1)/16$ --- zeros of the $2s$ density form factor in
+the momentum transfer, a consequence of the $2s$ radial node rather than
+a one-to-one image of it (the $2s$ wavefunction has one radial node). The integral evaluates to
 \begin{align}
   F^0(1s,2s) &= \frac{4Z}{\pi} \int_0^\infty
   \frac{1 - 12t^2 + 32t^4}{(t^2+1)^2 (4t^2+1)^4} \, dt \nonumber\\
@@ -482,7 +483,9 @@ $5\pi/32$, $17\pi/324$, $77\pi/2048$ in exact arithmetic, reproducing
 \subsection{Structural Result: Node Property vs.\ Edge Property}
 \label{sec:node_vs_edge}
 
-The key structural finding is that
+The structural reading (of a \textbf{[PRIOR ART]} formula:\ the
+single-integral structure is Parseval's, and the $S^3$ variable only
+renames it) is that
 Eq.~\eqref{eq:f0_s3} is a \emph{single} integral over one $S^3$
 coordinate (the momentum transfer $t$), not a double integral over
 two independent $S^3$ points. Each orbital $a$ contributes a density
@@ -522,7 +525,9 @@ point.
 
 \subsection{Natural Projection Scales}
 
-Each shell has a natural Fock projection scale:
+Each shell has a natural density form-factor scale, written $p_0$
+here although it is $2Z/n$ --- twice the energy-shell focal length $Z/n$
+of Section~\ref{sec:energy_shell} (the symbol names two scales):
 \begin{equation}
   n = 1: \quad p_0 = 2Z \qquad\text{(denominator } q^2 + 4Z^2\text{)} \,,
 \end{equation}
@@ -543,10 +548,11 @@ The density-overlap formula~\eqref{eq:f0_s3} has three implications
 for the computational framework:
 
 \begin{enumerate}
-  \item \textbf{Exact Slater integrals on $S^3$.}
-    The Fock projection converts position-space double radial integrals
-    into single rational-function integrals on $S^3$, which can be
-    evaluated in closed form via partial fractions.
+  \item \textbf{Exact Slater integrals in the stereographic variable.}
+    Fourier--Parseval (not the $S^3$ geometry) converts the position-space
+    double radial integrals into single integrals \textbf{[PRIOR ART]};\ in
+    the stereographic variable $t = q/(2Z)$ their integrands are rational
+    functions, which can be evaluated in closed form via partial fractions.
 
   \item \textbf{Label-lattice implementation.}
     On the label lattice, each node (orbital label) should
@@ -584,7 +590,9 @@ dynamics reduces to the Laplace--Beltrami operator on the unit
 $S^{3N-1}$, whose isometry group is $\mathrm{SO}(3N)$.
 
 The eigenvalues of the grand angular momentum operator $\Lambda^2$
-on $S^{3N-1}$ are the $\mathrm{SO}(3N)$ Casimir eigenvalues:
+on $S^{3N-1}$ enter here as the eigenvalues of $\Lambda^2/2$ (the kinetic
+convention), half the $\mathrm{SO}(3N)$ Casimir eigenvalues
+$\nu(\nu + 3N - 2)$ of $-\Delta_{S^{3N-1}}$:
 \begin{equation}
   \mu_{\mathrm{free}}(\nu) = \frac{\nu(\nu + 3N - 2)}{2},
   \quad \nu = 0, 1, 2, \ldots
@@ -627,7 +635,7 @@ so the $N = 3, 4$ rows are not the ground-state channel.}
 \end{table}
 
 For hydrogen ($N = 1$), $S^2$ recovers the familiar angular momentum
-eigenvalues $l(l+1)/2$ and the $\mathrm{SO}(3)$ rotation group, while
+eigenvalues $l(l+1)/2$ (the same halved convention) and the $\mathrm{SO}(3)$ rotation group, while
 $S^3$ (from the full 3D problem including the radial Fock projection)
 gives the $\mathrm{SO}(4)$ hydrogen symmetry of Section~\ref{sec:conformal}.
 For helium ($N = 2$), the angular manifold is $S^5$ with
@@ -729,7 +737,7 @@ Three features of the projection merit emphasis:
 
 \subsection{Relation to the Coulomb Potential}
 
-A frequently asked question is: where does the $1/r$ Coulomb potential come from? In the standard formulation, $V(r) = -1/r$ is an input to the Schr\"odinger equation. As Fock showed~\cite{fock1935}, in the $S^3$ formulation it is an \textit{output} of the conformal projection.
+A frequently asked question is: where does the $1/r$ Coulomb potential come from? In the standard formulation, $V(r) = -1/r$ is an input to the Schr\"odinger equation. As Fock showed~\cite{fock1935}, in the $S^3$ formulation it appears instead as the flat-coordinate image of the chordal-distance kernel --- an equivalent description, neither one prior.
 
 The mechanism is the chordal distance identity, Eq.~\eqref{eq:chordal}. On $S^3$ the relevant kernel is the inverse-square chordal distance $1/|\mathbf{n} - \mathbf{n}'|^2$, the restriction to the sphere of the Green's function of the flat $\mathbb{R}^4$ Laplacian. On $S^3$ itself it is the zonal kernel with eigenvalue $2\pi^2/n$ on the degree-$(n-1)$ harmonics (Eq.~\eqref{eq:kernel_eigenvalue}), i.e.\ proportional to $(1-\Delta_{S^3})^{-1/2}$;\ it is \emph{not} the Green's function of the Laplace--Beltrami operator, which on a three-manifold is singular like $1/d$ rather than $1/d^2$ and has eigenvalues $\propto 1/(n^2-1)$, divergent at $n = 1$. (\emph{Corrected 2026-09-28:} this paragraph previously called the kernel that Green's function.) Under stereographic projection, this kernel becomes
 \begin{equation}
@@ -754,7 +762,7 @@ kind $U_{n-1}(\cos\chi)$, whose three-term recurrence $\cos\chi\,U_{n-1}
 = \tfrac12 U_n + \tfrac12 U_{n-2}$ gives a normalized transition
 amplitude of $1/2$ between adjacent shells.  The squared inter-shell
 coupling of $\cos\chi$ in the Gegenbauer eigenbasis is
-\textbf{[SYMBOLIC + MEASURED]}
+\textbf{[PROOF-BY-ARGUMENT + MEASURED]}
 \begin{equation}
   c^2(n,l) \;:=\; \bigl|\langle n{+}1, l\,|\cos\chi|\,n, l\rangle\bigr|^2
   \;=\; \frac{1}{4}\!\left[ 1 - \frac{l(l+1)}{n(n+1)} \right],
@@ -813,7 +821,7 @@ $1/16$-prefactor formula).  The coupling itself is now derived
 
 \subsection{Limitations}
 
-Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. \textbf{[INTERNAL THEOREM]} Third, two rates \emph{are} proved: the saturation deficit $8 - \lambda_{\max} = (C_{\mathrm{sat}} + o(1))/n_{\max}^2$ with $C_{\mathrm{sat}} = \gvq{saturation_c}{42.7397}\ldots$ (Paper~0~\S VI), and the $s/p$ proxy's $O(n_{\max}^{-2})$ on $n_{\max} \equiv 0 \pmod 3$, $O(n_{\max}^{-1})$ otherwise (Paper~1~\S III). Neither is a rate for an operator convergence $L \to \Delta_{S^3}$, which does not hold ($L$ splits into $n_{\max}$ disconnected $l$-blocks;\ corrected 2026-09-04 and 2026-09-25).  The rigorous state-space Gromov--Hausdorff convergence of the scalar truncations for compact metric groups (including $\mathrm{SU}(2) = S^3$) is established by Gaudillot-Estrada and van Suijlekom~\cite{gaudillot_vs2025}; for the truncated Camporesi--Higuchi spectral triple on $S^3$~\cite{camporesi_higuchi1996}, Paper~38 of this series~\cite{loutey_paper38} proves state-space Gromov--Hausdorff convergence under translation-seminorm metrization for this commutative ($S^3$) factor on the true Camporesi--Higuchi window (convergence of the almost-commutative extension is \textbf{[OPEN]} there):\ the bound $d_{\mathrm{GH}} \le \gamma_n$ and $\gamma_n \to 0$ are proved;\ the displayed rate $(4/\pi + o(1))\log n/n$ in the dual-Coxeter normalization ($2/\pi$ on the unit $S^3$) is \textbf{[INTERNAL THEOREM + MEASURED]} (derived, with its sub-coefficients pinned numerically);\ and the uniform bound $\gamma_n \le 6\log n/n$ is \textbf{[PANEL-VERIFIED]}.
+Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as a Dirac operator on $S^3$ (the Camporesi--Higuchi operator~\cite{camporesi_higuchi1996} is one candidate;\ no fine-structure calculation is made in this series' spectral-triple paper~\cite{loutey_paper38}). \textbf{[INTERNAL THEOREM]} Third, two rates \emph{are} proved: the saturation deficit $8 - \lambda_{\max} = (C_{\mathrm{sat}} + o(1))/n_{\max}^2$ with $C_{\mathrm{sat}} = \gvq{saturation_c}{42.7397}\ldots$ (Paper~0~\S VI), and the $s/p$ proxy's $O(n_{\max}^{-2})$ on $n_{\max} \equiv 0 \pmod 3$, $O(n_{\max}^{-1})$ otherwise (Paper~1~\S III). Neither is a rate for an operator convergence $L \to \Delta_{S^3}$, which does not hold ($L$ splits into $n_{\max}$ disconnected $l$-blocks;\ corrected 2026-09-04 and 2026-09-25).  The rigorous state-space Gromov--Hausdorff convergence of the scalar truncations for compact metric groups (including $\mathrm{SU}(2) = S^3$) is established by Gaudillot-Estrada and van Suijlekom~\cite{gaudillot_vs2025}; for the truncated Camporesi--Higuchi spectral triple on $S^3$~\cite{camporesi_higuchi1996}, Paper~38 of this series~\cite{loutey_paper38} proves state-space Gromov--Hausdorff convergence under translation-seminorm metrization for this commutative ($S^3$) factor on the true Camporesi--Higuchi window (convergence of the almost-commutative extension is \textbf{[OPEN]} there):\ the bound $d_{\mathrm{GH}} \le \gamma_n$ and $\gamma_n \to 0$ are proved;\ the displayed rate $(4/\pi + o(1))\log n/n$ in the dual-Coxeter normalization ($2/\pi$ on the unit $S^3$) is \textbf{[INTERNAL THEOREM + MEASURED]} (derived, with its sub-coefficients pinned numerically);\ and the uniform bound $\gamma_n \le 6\log n/n$ is \textbf{[MEASURED]} (a finite-range check).
 
 \subsection{Concluding Remarks}
 
@@ -865,6 +873,16 @@ Phys. Rev. \textbf{156}, 1541--1545 (1967).
 A.~O. Barut and H. Kleinert,
 ``Current operators and Majorana equation for the hydrogen atom from dynamical groups,''
 Phys. Rev. \textbf{157}, 1180 (1967).
+
+\bibitem{malkin_manko1965}
+I.~A. Malkin and V.~I. Man'ko,
+``Symmetry of the hydrogen atom,''
+JETP Lett. \textbf{2}, 146 (1965).
+
+\bibitem{fronsdal1967}
+C.~Fronsdal,
+``Infinite multiplets and the hydrogen atom,''
+Phys. Rev. \textbf{156}, 1665 (1967).
 
 \bibitem{bander1966}
 M. Bander and C. Itzykson,
@@ -1038,7 +1056,11 @@ an earlier printing halved the one-body sum and gave $-11/8$).
 $E^* = -729/256$~Ha is also an exact rational.
 A 2D variational solver treating hyperradius and hyperangle
 simultaneously (Paper~13, Note added v2.6.0) achieves 0.004\% with
-cusp correction; both methods sit above the exact value, so they
-do not bracket it.
+cusp correction --- but that figure is a Schwartz cusp
+\emph{extrapolation} lying marginally \emph{below} the exact energy
+(non-variational; the properly variational raw figure is $0.022\%$ at
+$l_{\max} = 7$, Paper~13).  With the fixed-$k$ CI above it, the two
+therefore bracket the exact energy, the lower side by an extrapolation
+rather than a bound.
 
 \end{document}

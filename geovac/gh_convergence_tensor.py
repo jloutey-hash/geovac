@@ -1603,6 +1603,12 @@ def tensor_L2_central_fejer(
         "cb_norm_joint": str(cb_joint),
         "cb_factorizes": cb_factorizes,
         "cb_norm_joint_float": float(cb_joint),
+        # The 'cb_norm_*' keys are legacy names kept for compatibility: their
+        # values are Plancherel MASS maxima.  The maps are UCP, cb-norm 1.
+        "mass_max_a": str(cb_a),
+        "mass_max_b": str(cb_b),
+        "mass_max_joint": str(cb_joint),
+        "true_cb_norm_joint": 1,
         "gamma_a": gamma_a,
         "gamma_b": gamma_b,
         "gamma_joint_subadditive_bound": gamma_subadd,
