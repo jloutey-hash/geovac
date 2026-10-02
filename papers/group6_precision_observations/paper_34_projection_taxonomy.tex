@@ -2048,8 +2048,8 @@ because $V^\text{coupling}(\rho)$ carries piecewise $\rho$-dependence
 inherited from the two-center nuclear charge function.\\
 \textbf{Used in:} Paper~13 (He hyperspherical, $l_\text{max}=2$--$7$
 coupled-channel convergence to $0.022\%$ raw at $l_\text{max}=7$,
-$0.004\%$ with Schwartz cusp correction at $l_\text{max}=4$ via the 2D
-variational solver, Track~DI v2.6.0); Paper~15 (H$_2$ Level~4,
+$0.004\%$ with a Schwartz cusp extrapolation at $l_\text{max}=4$ on the 2D
+solver --- non-variational, marginally below exact --- Track~DI v2.6.0); Paper~15 (H$_2$ Level~4,
 $96.0\%$ $D_e$ at $l_\text{max}=6$ $\sigma+\pi$ with 61 coupled
 channels); Paper~17 (composed-geometry diatomics and polyatomics,
 where the Level~3 and Level~4 coupled-channel solvers run on each
@@ -3973,12 +3973,25 @@ projection promotion.  Remediated by adding the missing projection
 to Layer~2.
 \end{itemize}
 
-\begin{table}[h]
-\centering\small
-\begin{tabular}{p{3.8cm} p{2.5cm} p{1.5cm} p{1.4cm} p{4.5cm}}
+{\small
+\begin{longtable}{p{3.8cm} p{2.5cm} p{1.5cm} p{1.4cm} p{4.5cm}}
+\caption{Off-precision matches with error-source classification.
+Residual error is the absolute relative deviation from the standard
+physics value.  Source codes: T (truncation), B (basis quality),
+A (approximation order), C (calibration mismatch), S (structural
+floor).  Combinations indicate multiple independent contributions
+to residual error.  This table is a complement to
+Sec.~\ref{sec:catalog}; together they document the full empirical
+profile of the framework.}
+\label{tab:offprecision}\\
 \toprule
 Match & Projection(s) & Residual & Source & Notes \\
 \midrule
+\endfirsthead
+\toprule
+Match & Projection(s) & Residual & Source & Notes \\
+\midrule
+\endhead
 He ground state (fixed-$k=Z$ hydrogenic CI, physical Hamiltonian) & Fock + Sturmian &
 $1.88\%$ at $n_\text{max}=7$ & S & Floor = missing continuum of the
 fixed-$k$ bound-state basis (above the HF limit).  The earlier
@@ -3986,8 +3999,8 @@ fixed-$k$ bound-state basis (above the HF limit).  The earlier
 graph-validity-boundary'' reading used a non-physical $+\tfrac{1}{16}$ [retracted 2026-09-25: he-graph-native-hop-headline]
 one-body graph hop and are withdrawn (2026-09-25; Paper~13). \\
 He ground state (2D variational + cusp) & Fock + spectral cusp &
-$0.022\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1; cusp-corrected
-$0.004\%$ at $\ell_\text{max}=4$. \\
+$0.022\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1 (variational); a cusp
+extrapolation gives $0.004\%$ at $\ell_\text{max}=4$ (non-variational, marginally below exact). \\
 He ground state (Hylleraas r$_{12}$, $\omega_{\max}=4$) & Fock $\circ$
 explicit r$_{12}$ correlation
 & $-0.016$~mHa = $0.0006\%$ vs Drake NR at 22 basis functions & T &
@@ -4787,17 +4800,8 @@ fm vs CREMA-extracted $1.67824(13)(82)$ fm), SE bracket recoil-mixing
 $+41\%$).  Source memo:
 \texttt{debug/mu\_he4\_lamb\_autopsy\_track\_b\_memo.md}. \\
 \bottomrule
-\end{tabular}
-\caption{Off-precision matches with error-source classification.
-Residual error is the absolute relative deviation from the standard
-physics value.  Source codes: T (truncation), B (basis quality),
-A (approximation order), C (calibration mismatch), S (structural
-floor).  Combinations indicate multiple independent contributions
-to residual error.  This table is a complement to
-Sec.~\ref{sec:catalog}; together they document the full empirical
-profile of the framework.}
-\label{tab:offprecision}
-\end{table}
+\end{longtable}
+}
 
 \begin{remark}[Error sources are projection-specific]
 \label{rem:err_sources}

@@ -1516,7 +1516,7 @@ def verify_cross_witness_collapse(
 
 
 # ---------------------------------------------------------------------------
-# Propinquity rate cross-check (M1 Hopf-base signature)
+# Propinquity rate cross-check (4/pi rate constant; 'Hopf-base' label retired)
 # ---------------------------------------------------------------------------
 
 
@@ -1529,9 +1529,10 @@ def propinquity_rate_check(n_max: int, tol: float = 1e-10) -> dict:
     geovac.central_fejer_su2 (which controls the propinquity convergence
     rate per Paper 38).
 
-    This is the cross-check linking L1 (modular convergence) to L2
-    (metric-spectral-triple convergence) via the M1 Hopf-base measure
-    signature 4/pi.
+    Historical: this was read as a cross-check linking L1 (modular
+    convergence) to L2 (metric-spectral-triple convergence) via the shared
+    value 4/pi.  Paper 42 withdrew that link (2026-09-28); the shared value is
+    a coincidence of readings, and the 'Hopf-base' label is retired.
 
     Returns dict with per-n_max residuals and L2 gamma_n values.
     """

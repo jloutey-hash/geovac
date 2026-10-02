@@ -104,9 +104,11 @@ Ramanujan \emph{at small sizes} --- a finite-size graph-RH Observation
 Paper~29~\S7), with integer-algebraic Ihara zeros (Paper~29).  Second, the
 Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
 continuum spectral triple $\Tcal_{\sthree}$ in the van~Suijlekom
-state-space Gromov--Hausdorff sense at quantitative rate
-$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_3 \gamma_{\nmax}$
-with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38; dual-Coxeter
+state-space Gromov--Hausdorff sense --- for the commutative ($S^3$)
+factor on the true Camporesi--Higuchi window;\ convergence of the
+almost-commutative extension is \textbf{[OPEN]} --- at quantitative rate
+$d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$
+with asymptotic constant $4/\pi$ (Paper~38; \textbf{[INTERNAL THEOREM + MEASURED]};\ dual-Coxeter
 normalisation of the $\SU(2)$ metric --- $2/\pi$ on the unit $S^3$,
 the constant scaling with the metric, 2026-09-03).
 Third, the rate constant $4/\pi$ is universal across the class of
@@ -133,9 +135,11 @@ compact connected semisimple Lie groups $G_{1}, \ldots, G_{k}$, the
 k-fold tensor product converges (state-space GH) at the universal
 $4/\pi$ rate with Lipschitz comparison constant $C_3^{(k)} \le
 \sqrt{k}$ (only the $k\le2$ cases are proved).  The constant
-$4/\pi$ of the Riemannian rate (Paper~38) identifies as the $M_{1}$
-($k = 0$ volume-slot) signature of the master Mellin engine catalogued by
-the case-exhaustion theorem of Paper~32~\S\,VIII;\ the $1/\pi^{2}$ of the
+$4/\pi$ of the Riemannian rate (Paper~38) is read --- convention-dependently
+(dual-Coxeter normalisation) and as a reading, not a derivation --- as the
+$M_{1}$ ($k = 0$ volume-slot) signature of the master Mellin engine, whose
+case-exhaustion (Paper~32~\S\,VIII) is \textbf{[CONDITIONAL]} and does not
+itself cover GH rates;\ the $1/\pi^{2}$ of the
 Lorentzian HS-orthogonality (Paper~42~\S 11.7) is \emph{not} shown to be
 the same signature --- it is the square of the posited normalisation
 $\beta = 2\pi/\kappa_g$ (re-tiered 2026-09-28).  Further papers (48, 49, 50, 53) extend the arc;\ Papers~48--50 are recorded in
@@ -256,13 +260,12 @@ The Connes--van~Suijlekom truncations
 $\Tcal_{\nmax} = (\Op_{\nmax}, \HGV, \DGV)$ of the
 $\SU(2)$ Camporesi--Higuchi spectral triple converge to the continuum
 triple $\Tcal_{\sthree}$ in the van~Suijlekom state-space
-Gromov--Hausdorff sense~\cite{latremoliere_metric_st_2017,
-latremoliere2018}, with
+Gromov--Hausdorff sense (for the commutative factor on the true window;\
+the almost-commutative extension is \textbf{[OPEN]}), with
 \begin{equation}
-\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
-\;\le\; C_3 \cdot \gamma_{\nmax},
+d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
+\;\le\; \gamma_{\nmax},
 \qquad
-C_3 = 1, \qquad
 \gamma_{\nmax} \sim \frac{4}{\pi}\,\frac{\log \nmax}{\nmax}
 \quad (\nmax \to \infty).
 \label{eq:headline_2}
@@ -571,8 +574,8 @@ n \,\gamma_{n} \;\sim\; (4/\pi)\,\log n
 \qquad (n \to \infty).
 \label{eq:gh_rate_constant}
 \end{equation}
-A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$ holds
-for all $n \ge 2$.
+\textbf{[MEASURED]} A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$
+holds on the checked range of $n \ge 2$ (not proved for all $n$).
 \end{theorem}
 
 The proof rests on four supporting lemmas L1$'$, L2, L3, L4 of
@@ -1439,16 +1442,16 @@ subsection asserted both (withdrawn 2026-09-28).
 
 \paragraph{Why this matters.}
 The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
-\emph{spectral-triple-level} statement about which transcendentals
-can appear in evaluations of GeoVac projection chains.  The constant
+\emph{spectral-triple-level} statement about where $\pi$ can enter
+chains of the first fifteen Paper~34 projections (\textbf{[CONDITIONAL]}).  The constant
 $4/\pi$ of Paper~38 is a \emph{metric-geometry-level} statement about
 the state-space GH rate.  The fact that these two abstractly-different
 levels agree on the same signature is a consistency check within one
 normalisation (in Kac's normalisation the constant is $2\sqrt2/\pi$, so
-the agreement is convention-dependent): it identifies the
-metric geometry of the GeoVac spectral triple as carrying the same
-M$_{1}$ signature that the abstract Mellin engine catalogues.
-Abstract taxonomy meets concrete state-space GH rates.  (Paper~42~\S 11.7's
+the agreement is convention-dependent): the metric geometry of the
+GeoVac spectral triple is \emph{read} as carrying the same M$_{1}$
+signature that the abstract Mellin engine catalogues --- a reading, not a
+derivation, since the case-exhaustion does not cover GH rates.  (Paper~42~\S 11.7's
 Lorentzian Pythagorean decomposition does \emph{not} extend this:\ its
 $1/\pi^{2}$ is the imported normalisation of the posited generator, not a
 computed $M_1$ output.)
@@ -2040,10 +2043,13 @@ to complete the state-side dictionary.
 
 \paragraph{Concluding remark.}
 The structural identification of GeoVac as an almost-commutative
-spectral triple in the Marcolli--van~Suijlekom lineage is proved at
-the state-space Gromov--Hausdorff level by Paper~38 (Riemannian,
-single factor), extended by Paper~39 (tensor product, state-space GH)
-and Paper~40 (compact connected semisimple Lie groups).  The Lorentzian
+spectral triple in the Marcolli--van~Suijlekom lineage rests, at the
+state-space Gromov--Hausdorff level, on Paper~38, which proves the
+commutative ($S^3$) factor only (convergence of the almost-commutative
+extension is \textbf{[OPEN]});\ it is extended by Paper~39 (tensor product,
+state-space GH) and Paper~40 (compact connected semisimple Lie groups;\
+for general $G$ conditionally on the per-group spin-window
+decomposition).  The Lorentzian
 K$^{+}$-weak-form extension is \emph{descoped}:\ Paper~45 proves a
 degeneracy theorem (the natural Lorentzian-propinquity seminorm
 vanishes identically), and what survives on the temporal factor is
@@ -2136,7 +2142,7 @@ E.~Hekkelman,
 E.~Hekkelman and E.~McDonald,
 \newblock \emph{A noncommutative integral on spectrally truncated
 spectral triples, and a link with quantum ergodicity},
-\newblock J.~Funct.~Anal., to appear (2025);
+\newblock J.~Funct.~Anal. \textbf{289}(12) (2025) 111154;
 \newblock arXiv:2412.00628.
 
 \bibitem[Latr\'emoli\`ere(2018/2023)]{latremoliere_metric_st_2017}

@@ -80,7 +80,7 @@ The following are the specific new contributions:
 
 \item \textbf{Explicit symbolic verification.} \textbf{[SYMBOLIC PROOF]} The 18 symbolic checks (Appendix~\ref{app:tests}) provide a machine-verified algebraic audit of the conformal transformation chain (ten of the eighteen checks are definitional, limiting-case or non-discriminating rather than logically independent theorems). While the underlying identities are known, this systematic verification in \texttt{sympy} is new and provides a reproducible computational check.
 
-\item \textbf{Scale-invariance framing.} We articulate the ``dimensionless vacuum'' perspective: the observation that the conformal factor $\Omega$ always produces the \textit{unit} $S^3$ regardless of $p_0$, and that all physical dimensions enter exclusively through the energy-shell constraint. \textbf{[OBSERVATION]} While implicit in Fock's original treatment, this framing---and its implications for the GeoVac computational approach---has not, to our knowledge, been stated explicitly in the literature.
+\item \textbf{Scale-invariance framing (organizing use only).} We articulate the ``dimensionless vacuum'' perspective: the observation that the conformal factor $\Omega$ always produces the \textit{unit} $S^3$ regardless of $p_0$, and that all physical dimensions enter exclusively through the energy-shell constraint. \textbf{[PRIOR ART]} The property itself is Fock's, and it is explicit in the group-theoretic literature:\ Bander and Itzykson rescale momentum by $\sqrt{2\mu|E|}$ and project onto the \emph{unit} sphere (bound states) or unit hyperboloid (scattering)~\cite{bander1966,bander1966b}.  What this paper adds is only its use as an organizing principle for the GeoVac label-set approach.
 
 \item \textbf{Computational methodology.} \textbf{[MEASURED]} The practical consequence: replacing continuous integration with sparse Hamiltonian-matrix eigenvalue problems whose operator size is near-linear in $V$ (adjacency nonzeros scale as $V^{1.07}$; the timing is guarded sub-quadratic, Paper~1).  What this paper supplies to that approach is the exact label set $(n,l,m)$ and the selection rules it carries, together with Fock's continuum equivalence;\ it does \emph{not} supply an equivalence between the edge Laplacian and $\Delta_{S^3}$ (item 1).
 \end{enumerate}
@@ -122,7 +122,7 @@ This dimensionlessness is not accidental. Its $S^3$ content lies in the \emph{no
 
 The node set of $\mathcal{G}$ is exactly the label set $(n,l,m)$, $n^2$ per shell, of the Peter--Weyl truncation of $L^2(S^3)$ at $n \le n_{\max}$, at every cutoff. On these labels the Laplace--Beltrami operator acts exactly:\ $-\Delta_{S^3} = \mathbf{L}^2 + \mathbf{A}^2$ is the diagonal $SO(4)$ Casimir $n^2 - 1$ (a node weight). \textbf{[WALL]} The edge Laplacian $L$ does \emph{not} converge to $\Delta_{S^3}$ as $n_{\max} \to \infty$:\ it preserves $l$, splits into $n_{\max}$ disconnected blocks (kernel dimension $n_{\max}$ against $\Delta_{S^3}$'s one zero mode), and its one saturating spectral feature, $\lambda_{\max} \to 8$, is the band edge of two-dimensional grids (New Contributions, item 1; the $s/p$ proxy below, whose size tracks the residue of $n_{\max}$ modulo $3$, was withdrawn as evidence 2026-09-03;\ the convergence reading printed here as an \textbf{[OBSERVATION]} until 2026-09-25 is re-tiered to this wall).
 
-At finite $n_{\max}$, the graph Laplacian exhibits discretization artifacts: the $2s$/$2p$ node-amplitude proxy reaches $37\%$ at $n_{\max} = 5$ on the binary production lattice (the splitting is strongly non-monotone: $12.7\%$, $0.65\%$, $15.6\%$, $5.1\%$ and $1.7\%$ at $n_{\max} = 6, 7, 8, 9, 10$, then $4.1\%$ at $20$ and $0.39\%$ at $30$; measured 2026-09-03), \textbf{[INTERNAL THEOREM]} set by the residue of $n_{\max}$ modulo $3$ \cite{loutey_paper1};\ the ``differential connectivity between pole ($l = 0$) and equatorial ($l > 0$) nodes'' account printed here before 2026-09-04 is withdrawn [retracted 2026-09-04: sp-splitting-aliasing-mechanism] on the same ground as the ``spectral aliasing'' account --- the sectors' degrees do differ ($D_{2p} > D_{2s}$), but the $l$-blocks are disconnected components, so no operator acts across them to lift a degeneracy, and a degree difference is not a mechanism for the proxy. However, this splitting oscillates and decays systematically:
+At finite $n_{\max}$, the graph Laplacian exhibits discretization artifacts: the $2s$/$2p$ node-amplitude proxy reaches $37\%$ at $n_{\max} = 5$ on the binary production lattice (the splitting is strongly non-monotone: $12.7\%$, $0.65\%$, $15.6\%$, $5.1\%$ and $1.7\%$ at $n_{\max} = 6, 7, 8, 9, 10$, then $4.1\%$ at $20$ and $0.39\%$ at $30$; measured 2026-09-03), \textbf{[INTERNAL THEOREM]} set by the residue of $n_{\max}$ modulo $3$ \cite{loutey_paper1};\ the ``differential connectivity between pole ($l = 0$) and equatorial ($l > 0$) nodes'' account printed here before 2026-09-04 is withdrawn [retracted 2026-09-04: sp-splitting-aliasing-mechanism] on the same ground as the ``spectral aliasing'' account --- the sectors' degrees do differ ($D_{2p,\,m=0} = 3 > D_{2s} = 2$;\ the $m = \pm1$ nodes tie), but the $l$-blocks are disconnected components, so no operator acts across them to lift a degeneracy, and a degree difference is not a mechanism for the proxy. However, this splitting oscillates and decays systematically:
 \begin{equation}
 \Delta E_{2s\text{-}2p}(n_{\max}) \to 0 \quad \text{as} \quad n_{\max} \to \infty,
 \end{equation}
@@ -444,8 +444,9 @@ Then
 \end{equation}
 
 In angular coordinates ($t = \tan u$, $dt = du/\cos^2 u$),
-the integrand becomes $\cos^6 u$, showing that the $1s$ density
-is \emph{constant} on $S^3$ (up to the conformal Jacobian).
+the integrand becomes $\cos^6 u$:\ the $1s$ form factor is
+$\Phi_{1s} = \cos^4 u \propto \Omega^2$, a power of the conformal factor
+(a renaming in the stereographic variable, not a constant density).
 
 \subsubsection{$1s$--$2s$ verification (critical test)}
 
@@ -517,8 +518,8 @@ $2s$--$2s$ & $77Z/512$ & $5Z/8$ & 4.2 \\
 \end{tabular}
 \end{center}
 The chordal ansatz is calibrated to reproduce $F^0(1s,1s)$ exactly
-(because the $1s$ density is constant on $S^3$, making a single point
-adequate), but overestimates $F^0(1s,2s)$ by a factor of~30.
+(because the $1s$ form factor is a pure power of the conformal factor,
+so a single point suffices), but overestimates $F^0(1s,2s)$ by a factor of~30.
 The fundamental reason is that the $2s$ density function has nodes
 and oscillations on $S^3$ that cannot be captured by a single coordinate
 point.
@@ -749,7 +750,7 @@ which, when Fourier transformed to position space, yields the $1/r$ Coulomb pote
 
 The results of this paper bear on the GeoVac framework's computational approach through the label set, not through the edge Laplacian (whose continuum-limit reading is withdrawn, New Contributions item 1). The exact correspondence between the nodes and the $S^3$ harmonics accounts for the following:
 
-\textbf{[PANEL-VERIFIED]} \textit{Label exactness:} The algebraic operators reproduce the quantum numbers exactly:\ the radial ladder $T_\pm$ generates an $SU(1,1)$ algebra whose Cartan element $N = -2[T_+, T_-]$ returns $n$ on interior shells (Paper~1; the top shell $n_{\max}$ is truncated), and the angular $L_\pm$ generate $SU(2)$ with $L^2 = \ell(\ell+1)$.  These are the $SU(1,1)\times SU(2)$ dynamical-symmetry operators, which are distinct from the $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$ ($\mathbf{A}$ the energy-normalized Runge--Lenz vector;\ Pauli~\cite{pauli1926}, Bargmann~\cite{bargmann1936}) that $-\Delta_{S^3}$ is on the labels.  The Rydberg energies are not an output of the ladder operators, and the Casimir yields them only through a function that Fock's projection fixes:\ the eigenvalue $2\pi^2/n$ of Fock's $S^3$ Coulomb kernel forces $p_0 = Z/n$ and the energy shell $p_0^2 = -2E$ then gives $E_n$ (Stage~3;\ on the labels $E_n = -Z^2/(2(C+1))$ with $C = n^2 - 1$, i.e.\ $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, the Casimir alone not fixing the function), and the matched scale $\kappa$ fixes only the graph's band edge, an observation and not a derivation (below).
+\textbf{[MEASURED]} \textit{Label exactness:} The algebraic operators reproduce the quantum numbers to $10^{-9}$ in floating point (Paper~1):\ the radial ladder $T_\pm$ generates an $SU(1,1)$ algebra whose Cartan element $N = -2[T_+, T_-]$ returns $n$ on interior shells (Paper~1; the top shell $n_{\max}$ is truncated), and the angular $L_\pm$ generate $SU(2)$ with $L^2 = \ell(\ell+1)$.  These are the $SU(1,1)\times SU(2)$ dynamical-symmetry operators, which are distinct from the $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$ ($\mathbf{A}$ the energy-normalized Runge--Lenz vector;\ Pauli~\cite{pauli1926}, Bargmann~\cite{bargmann1936}) that $-\Delta_{S^3}$ is on the labels.  The Rydberg energies are not an output of the ladder operators, and the Casimir yields them only through a function that Fock's projection fixes:\ the eigenvalue $2\pi^2/n$ of Fock's $S^3$ Coulomb kernel forces $p_0 = Z/n$ and the energy shell $p_0^2 = -2E$ then gives $E_n$ (Stage~3;\ on the labels $E_n = -Z^2/(2(C+1))$ with $C = n^2 - 1$, i.e.\ $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, the Casimir alone not fixing the function), and the matched scale $\kappa$ fixes only the graph's band edge, an observation and not a derivation (below).
 
 \textbf{[INTERNAL THEOREM]} \textit{Discretization artifacts:} The $s/p$ node-amplitude proxy at finite $n_{\max}$ has a closed-form value on $n_{\max} \equiv 0 \ (\mathrm{mod}\ 3)$ and decays as $n_{\max} \to \infty$, but its size is set by that residue rather than by boundary effects;\ the ``spectral aliasing'' account is withdrawn [retracted 2026-09-04: sp-splitting-aliasing-mechanism] (2026-09-03), the $\ell$-blocks being disconnected.
 
@@ -825,7 +826,7 @@ Several caveats apply. First, the single-electron framework of Sections~\ref{sec
 
 \subsection{Concluding Remarks}
 
-Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. The scale invariance of this sphere---the fact that it is intrinsically the \textit{unit} $S^3$ regardless of the energy-shell parameter---is implicit in Fock's treatment and in the later hyperspherical literature;\ we state it here as an explicit organizing principle. We have articulated this scale-invariance property and \textbf{[WALL]} recorded that the GeoVac discrete graph Laplacian does \emph{not} converge to the same $S^3$ structure:\ it splits into $n_{\max}$ disconnected $l$-blocks, and its saturation $\lambda_{\max}\to 2d_{\max}$ is a grid band edge (the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence] was withdrawn as evidence on 2026-09-03, and the convergence reading itself on 2026-09-25).  What the graph shares exactly with the $S^3$ harmonics is their label set, on which $-\Delta_{S^3} = \mathbf{L}^2 + \mathbf{A}^2$ is the diagonal $SO(4)$ Casimir;\ the conformal chain from the continuum operator onward is what is audited symbolically (its non-definitional step, the kernel eigenvalue that fixes $p_0 = Z/n$ and makes the Hamiltonian the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, is tested in exact arithmetic for $n \le 4$;\ general $n$ is Fock's, \textbf{[PRIOR ART]}).
+Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. The scale invariance of this sphere---the fact that it is intrinsically the \textit{unit} $S^3$ regardless of the energy-shell parameter---is Fock's, and is explicit in Bander and Itzykson's rescaling of momentum onto the unit sphere and hyperboloid~\cite{bander1966,bander1966b};\ we use it here as an organizing principle. We have articulated this scale-invariance property and \textbf{[WALL]} recorded that the GeoVac discrete graph Laplacian does \emph{not} converge to the same $S^3$ structure:\ it splits into $n_{\max}$ disconnected $l$-blocks, and its saturation $\lambda_{\max}\to 2d_{\max}$ is a grid band edge (the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence] was withdrawn as evidence on 2026-09-03, and the convergence reading itself on 2026-09-25).  What the graph shares exactly with the $S^3$ harmonics is their label set, on which $-\Delta_{S^3} = \mathbf{L}^2 + \mathbf{A}^2$ is the diagonal $SO(4)$ Casimir;\ the conformal chain from the continuum operator onward is what is audited symbolically (its non-definitional step, the kernel eigenvalue that fixes $p_0 = Z/n$ and makes the Hamiltonian the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, is tested in exact arithmetic for $n \le 4$;\ general $n$ is Fock's, \textbf{[PRIOR ART]}).
 
 Within this mathematical equivalence, the wave equation can be viewed as a continuous, dimensionful projection of a dimensionless structure whose discrete skeleton is the label set $(n,l,m)$. The Coulomb potential emerges as the coordinate distortion created by the stereographic flattening, and the energy levels emerge from the energy-shell constraint that parameterizes the projection, the Coulomb kernel's eigenvalue $2\pi^2/n$ fixing that parameter to $p_0 = Z/n$ on each shell.
 
@@ -888,6 +889,11 @@ Phys. Rev. \textbf{156}, 1665 (1967).
 M. Bander and C. Itzykson,
 ``Group theory and the hydrogen atom (I),''
 Rev. Mod. Phys. \textbf{38}, 330--345 (1966).
+
+\bibitem{bander1966b}
+M. Bander and C. Itzykson,
+``Group theory and the hydrogen atom (II),''
+Rev. Mod. Phys. \textbf{38}, 346--358 (1966).
 
 \bibitem{biedenharn1981}
 L.~C. Biedenharn and J.~D. Louck,
@@ -1051,7 +1057,7 @@ convergence floor.
 At $n_{\max} = 1$ (a single node, so no edges and no hop), the fixed-$k$ CI energy reduces to
 \textbf{[SYMBOLIC PROOF]} $E = -Z^2 + 5Z/8 = -11/4$~Ha for $Z = 2$, an exact rational
 (two one-body terms $-Z^2/2$ plus the repulsion $F^0(1s,1s) = 5Z/8$;
-an earlier printing halved the one-body sum and gave $-11/8$).
+an earlier printing halved the total and gave $-11/8$).
 \textbf{[SYMBOLIC PROOF]} The variationally optimized single-exponent result $k^* = 27/16$,
 $E^* = -729/256$~Ha is also an exact rational.
 A 2D variational solver treating hyperradius and hyperangle

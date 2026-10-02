@@ -609,7 +609,8 @@ class TestKernelAtIdentity:
 #
 # Theorem (debug/r25_l2_quantitative_rate_memo.md):
 #   (i)   lim n*gamma_n / log(n) = 4/pi   (asymptotic constant)
-#   (ii)  gamma_n <= 6 log(n)/n for all n >= 2   (uniform bound)
+#   (ii)  gamma_n <= 6 log(n)/n on the checked range of n >= 2 (uniform bound;
+#         [MEASURED], a finite-range check, not proved for all n)
 #   (iii) For C > 4/pi, exists N_0(C) such that gamma_n <= C log(n)/n for n >= N_0
 
 

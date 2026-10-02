@@ -237,7 +237,7 @@ Level & System & Natural geometry & Best accuracy & Paper \\
 \midrule
 1 & H (1-center, 1e) & $\sthree$ (Fock) & exact on the labels (diagonal Casimir $n^2-1$); graph $\lambda_{\max}$ matched by construction & 7 \\
 2 & H$_2^+$ (2-center, 1e) & Prolate spheroid & machine precision & 11 \\
-3 & He (1-center, 2e) & Hyperspherical & $0.004\%$ (cusp-corrected;\ raw variational $0.022\%$;\ $1.88\%$ fixed-$k$ hydrogenic CI at $n_{\max}=7$) & 13 \\
+3 & He (1-center, 2e) & Hyperspherical & $0.022\%$ (raw, variational);\ $0.004\%$ cusp extrapolation (non-variational, marginally below exact);\ $1.88\%$ fixed-$k$ hydrogenic CI at $n_{\max}=7$) & 13 \\
 4 & H$_2$ (2-center, 2e) & Mol-frame hyperspherical & $96.0\%$ $D_e$ (cusp-corrected;\ prolate spheroidal reaches $99.97\%$ / $0.053$~mHa via explicit-$r_{12}$ CI, Paper 12) & 15 \\
 5 & LiH (composed) & Composed (Level 3 $\otimes$ Level 4) & $5.3\%$ $R_{\mathrm{eq}}$ & 17 \\
 \bottomrule
@@ -305,15 +305,17 @@ $\times$ Fock projection), the master Mellin engine, and the
 cosmic-Galois layer $U^*$ (Paper~56).
 \end{quote}
 
-This claim was checked, not assumed --- and then re-checked.  A
+Its metric part was checked, not assumed --- and then re-checked, for
+the commutative ($S^3$) factor only:\ convergence of the gauge-network /
+almost-commutative structure the claim names is \textbf{[OPEN]}.  A
 Gromov--Hausdorff convergence theorem on truncated
 Camporesi--Higuchi spectral triples~\cite{loutey_paper38} (Paper~38)
-gives the quantitative statement, in van~Suijlekom's state-space
+gives the quantitative statement for that factor, in van~Suijlekom's state-space
 Gromov--Hausdorff framework (adjacent to, but distinct from, the
 Latr\'emoli\`ere propinquity~\cite{latremoliere2017}), with rate
 \begin{equation}
 \label{eq:propinquity_rate}
-\Lambda_{n_{\max}} \le C_3 \cdot \gamma_{n_{\max}},
+d_{\mathrm{GH}} \le \gamma_{n_{\max}},
 \qquad \gamma_{n_{\max}} \sim
 \frac{4}{\pi}\,\frac{\log n_{\max}}{n_{\max}}
 \xrightarrow{n_{\max} \to \infty} 0,
@@ -433,9 +435,8 @@ Paper~32~\S~VIII~\cite{loutey_paper32} contains a
 appearance of $\pi$ in a chain of the first fifteen Paper~34
 projections arises from one of M1, M2, or M3 (argued case by case;\
 the converse, that engaging a mechanism forces $\pi$, is withdrawn).  No fourth mechanism has been found despite specific searches.
-Paper~55~\cite{loutey_paper55} promotes this from a partition theorem
-to a period-theoretic classification:\ every transcendental observed
-in the corpus sits in cyclotomic mixed-Tate periods at level $\le 4$
+Paper~55~\cite{loutey_paper55} adds a period-theoretic census:\ every
+transcendental identified in the corpus sits in cyclotomic mixed-Tate periods at level $\le 4$
 over $\Z[i, 1/2]$ (Kontsevich--Zagier~\cite{kontsevich_zagier2001},
 Brown~\cite{brown2012}, Deligne~\cite{deligne2010},
 Glanois~\cite{glanois2015}, Fathizadeh--Marcolli
@@ -443,14 +444,16 @@ Glanois~\cite{glanois2015}, Fathizadeh--Marcolli
 classifications;\ each piece of GeoVac's data is placed inside one of
 their named period rings).
 
-\paragraph{What was a zoo became a classified program.}
+\paragraph{What was a zoo became a catalogued program.}
 Early in its development the project produced transcendentals through ad-hoc
 calculations and was uncertain whether different appearances of $\pi$
-or $\zeta(2)$ were ``the same'' or ``different.''  Today every
-transcendental observation has a named motivic home, indexed by which
-slot of \eqref{eq:master_mellin} produced it.  The classification
-makes the operational question --- ``what kind of transcendental can
-appear from \emph{this} calculation?'' --- algorithmic.
+or $\zeta(2)$ were ``the same'' or ``different.''  Today the
+transcendentals in its census have named motivic homes, read against the
+slot of \eqref{eq:master_mellin} that produced them --- a census and a
+reading, not a classification:\ the case-exhaustion behind it is
+\textbf{[CONDITIONAL]} on the first fifteen projections.  Within that scope
+the operational question --- ``what kind of transcendental can appear
+from \emph{this} calculation?'' --- has a first answer.
 
 \paragraph{A note on periods.}  A period in the sense of
 Kontsevich--Zagier 2001~\cite{kontsevich_zagier2001} is a complex
@@ -555,7 +558,7 @@ meta-theorem deciding forcedness in general is open, see below):
   \item The Forced-Count Theorem (Paper~32~\S~VIII):\ given the
     algebra selection (an organizing reading plus an adopted axiom),
     the canonical SM representation with $N_{\mathrm{gen}}$ imported,
-    and the real-spectral-triple axioms, the framework forces the
+    and the real-spectral-triple axioms, these inputs fix the
     \emph{dimension} of the $D_F$ moduli space, not the points within
     it.
   \item The Yukawa Non-Selection Theorem (Paper~32~\S~VIII):\ the framework's

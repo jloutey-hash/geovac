@@ -1978,6 +1978,7 @@ def gh_tensor_theorem_statement() -> str:
         "The cross-Stein-Weiss term survives as a unit-norm panel "
         "quantity and no longer enters the rate. "
         "The asymptotic constant on each "
-        "factor is 4/pi (the M1 Hopf-base measure signature; Paper 38 + "
+        "factor is 4/pi (dual-Coxeter; read as the M1 volume-slot value, the "
+        "'Hopf-base' label retired; Paper 38 + "
         "Sprint MR-A/B/C)."
     )

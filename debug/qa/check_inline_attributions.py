@@ -72,6 +72,7 @@ NOT_AUTHORS = MONTHS | {
     "Noted", "Noted", "RETRACTED", "Recounted", "Retracted", "Withdrawn",
     "Diagnosed", "Corrected", "Sourced", "Resolved", "Flagged", "Scoped",
     "Promoted", "Demoted", "Reviewed", "Certified", "Applied", "Fixed",
+    "Clarified", "Until",
 }
 
 
@@ -203,6 +204,13 @@ def main() -> int:
         prev_set = set(prev) if isinstance(prev, list) else None
         new_base[rel] = tags
         flag, added = "", []
+        if prev_set is None and tags and not update:
+            # An UNBASELINED paper was previously ungated: its attributions
+            # could never fail (measured 2026-10-02: 52 of 57 papers, ~100
+            # unresolved tags, every gated PASS outside group6 vacuous).  It
+            # now FAILs until it is baselined with --update-baseline.
+            flag = "  *** UNBASELINED -- run --update-baseline to record it ***"
+            failed.append((rel, tags))
         if prev_set is not None:
             added = sorted(set(tags) - prev_set)
             gone = len(prev_set - set(tags))

@@ -30,7 +30,10 @@ Let
     (`geovac/full_dirac_operator_system.py`), and D_{n_max} the truthful
     Camporesi-Higuchi Dirac restricted to the truncation.
 
-**Theorem L5 (GH convergence on S^3).** *In the van Suijlekom state-space
+**[WITHDRAWN 2026-09-03 -- historical record] Theorem L5 (GH convergence on S^3).**
+(Lemma L5's assembly is refuted as stated: its height constituents fail. Paper 38's
+unconditional theorem bounds d_GH <= gamma_{n_max} by reach-type estimates alone,
+on the true Camporesi-Higuchi window, for the commutative factor.) *In the van Suijlekom state-space
 Gromov-Hausdorff distance (NOT the strictly-stronger Latremoliere propinquity,
 whose dual-reach step is a named gap), the truncated triples T_{n_max}
 converge to the round-S^3 triple as n_max -> infinity:*
@@ -61,7 +64,7 @@ Lipschitz, approximate identity at rate gamma_{n_max}), and P_{n_max}
 the standard truncation projection.  The pair satisfies all four
 properties of a Latremoliere tunneling pair (UCP, Lipschitz-contractive
 on each direction, approximate identity in both round-trips), and the
-propinquity bound follows.
+propinquity bound was claimed to follow [withdrawn: the height legs are refuted].
 
 Mathematical structure
 ======================
@@ -154,7 +157,7 @@ reach_B and height_B, both bounded by gamma_{n_max}.
 WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: height_B is not
 bounded by gamma_{n_max} -- it is identically 1.  The rate is driven by
 the reach constituents alone, at the same value.  The composite
-propinquity bound is
+propinquity bound (withdrawn L5 form) was
 
     Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}
                               =  gamma_{n_max}  ->  0,
@@ -713,7 +716,8 @@ def compute_propinquity_bound(
         if hB_op > height_B_op_norm_max:
             height_B_op_norm_max = hB_op
 
-    # Theoretical bound: reach_B <= C_3 * gamma_{n_max} on the unit
+    # Theoretical bound (from the withdrawn L5 bookkeeping; the reach leg
+    # itself survives): reach_B <= C_3 * gamma_{n_max} on the unit
     # Lipschitz ball.  Empirical reach_B_max may exceed this on the
     # specific panel (which is not normalized to ||f||_Lip = 1; it has
     # individual Y^{(3)}_NLM with Lipschitz norms |grad Y|_inf
@@ -965,8 +969,11 @@ class FiveLemmaStatus:
 
 
 def gh_theorem_statement() -> str:
-    """Return the formal Theorem L5 statement for inclusion in papers."""
+    """Return the WITHDRAWN Theorem L5 statement (historical record only; refuted
+    2026-09-03 -- do not include in papers).  The live result is Paper 38's
+    unconditional theorem d_GH <= gamma_{n_max}."""
     return (
+        "[WITHDRAWN 2026-09-03 -- historical record; refuted as stated] "
         "Theorem L5 (GH convergence on S^3). Let T_S3 = (C_inf(S^3), "
         "L^2(S^3, Sigma), D_CH) be the round-S^3 metric spectral triple "
         "with Camporesi-Higuchi Dirac, and let T_{n_max} = (O_{n_max}, "
@@ -974,15 +981,17 @@ def gh_theorem_statement() -> str:
         "cutoff n_max with the truthful Camporesi-Higuchi Dirac. Then "
         "the truncated triples converge to T_S3 in van Suijlekom's "
         "state-space Gromov-Hausdorff distance Lambda:\n\n"
-        "  Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}  ->  0 "
+        "  Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}  ->  0  [withdrawn L5 form] "
         "as  n_max -> infinity,\n\n"
         "where C_3 = 1 is the L3 Lipschitz comparison constant on the "
         "unit S^3, and gamma_{n_max} is the L2 mass-concentration "
         "moment of the central spectral Fejer kernel K_{n_max} on SU(2). "
         "The tunneling pair (B_{n_max}, P_{n_max}) is the L4 Berezin "
         "reconstruction map paired with the truncation projection. "
-        "The rate gamma_{n_max} = (c + o(1)) log n / n is proven "
-        "unconditionally (Paper 38, translation-seminorm metrization); "
+        "The live bound d_GH <= gamma_{n_max} holds unconditionally "
+        "(Paper 38, translation-seminorm metrization; commutative factor); "
+        "its rate gamma_{n_max} = (c + o(1)) log n / n is "
+        "[INTERNAL THEOREM + MEASURED]; "
         "the constant c is metric-convention dependent: 4/pi in the "
         "dual-Coxeter normalisation Cas(ad) = h^v (the corpus's declared "
         "rule), 2/pi on the unit round S^3, 2 sqrt(2)/pi under the "

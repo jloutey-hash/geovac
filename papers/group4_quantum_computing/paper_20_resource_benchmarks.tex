@@ -72,7 +72,7 @@ screened cross-center, explicit-core Hartree--Fock --- with no interior PES
 minimum at the qubit-Hamiltonian level. We document this scope boundary
 empirically in \S\ref{subsec:scope_boundary}; the framework's
 primary value proposition is structural sparsity with quantitative
-truncation-convergence rates (Paper~38 state-space GH convergence), not energy-accuracy
+truncation-convergence rates (Paper~38 state-space GH convergence of the truncated $S^3$ triple, not of the molecular Hamiltonians), not energy-accuracy
 parity with CCSD(T) on second-row systems.  The \texttt{hamiltonian()}
 registry covers 37 systems (35 composed molecules spanning
 $Z=1$--56, H through Ba, plus the He and H$_2$ reference atoms),
@@ -612,7 +612,7 @@ $\lambda = \sum_j |c_j|$, which determines the Trotter step
 count.\footnote{%
 The GH-convergence theorem on the GeoVac spectral
 triple~\cite{GeoVac_Paper38} (van Suijlekom state-space Gromov--Hausdorff
-distance $\Lambda(T_{n_{\max}}, T_{S^3}) \le C_3 \gamma_{n_{\max}}$ with
+distance $d_{\mathrm{GH}}(T_{n_{\max}}, T_{S^3}) \le \gamma_{n_{\max}}$ with
 $\gamma_{n_{\max}} \to 0$) admits a single-particle
 Lipschitz-distortion \emph{heuristic} estimate
 $\|H_\infty - H_{n_{\max}}\|_{\rm op}
@@ -1038,35 +1038,36 @@ designed to interoperate with external correlation engines
 to know anything about GeoVac's internal spectral-triple
 construction.  Three additions ship in this release.
 
-\paragraph{GH-convergence-derived basis-truncation rate.}
+\paragraph{GH bound of the truncated $S^3$ triple, carried as metadata.}
 Every \texttt{GeoVacHamiltonian} returned by the public API
 carries a metadata field \texttt{propinquity\_bound} (legacy field name;
 the bound itself is the van Suijlekom state-space Gromov--Hausdorff
 convergence estimate of Paper~38) that
 evaluates the closed-form
-$\Lambda \le C_3 \cdot \gamma_{n_{\max}}$ from
+$d_{\mathrm{GH}} \le \gamma_{n_{\max}}$ from
 \cite{GeoVac_Paper38} (Paper~38, the van Suijlekom
 state-space Gromov--Hausdorff convergence theorem) at the cutoff $n_{\max}$
 used to build the Hamiltonian.  The L2 central-Fejér sum-rule
 gives $\gamma_{n_{\max}=2,3,4} = 2.0746 / 1.6101 / 1.3223$
-with asymptotic rate $4/\pi = \mathrm{Vol}(S^2)/\pi^2$, the $k = 0$
-volume signature of the master Mellin engine M1
-(see~\cite{GeoVac_Paper18}).  The constant is a quotient of
-\emph{unit-radius} sphere volumes and is \emph{not} the Hopf
+with asymptotic rate $4/\pi = \mathrm{Vol}(S^2)/\pi^2$, read (an
+Observation-level reading, not a derivation) as the $k = 0$ volume
+signature of the master Mellin engine M1 (see~\cite{GeoVac_Paper18}).  The constant is twice the quotient of
+\emph{unit-radius} sphere volumes $\mathrm{Vol}(S^2)/\mathrm{Vol}(S^3) = 2/\pi$ and is \emph{not} the Hopf
 base-to-total ratio (misnomer retired 2026-09-03);\ it is quoted here in
 the dual-Coxeter normalisation of the $\mathrm{SU}(2)$ metric, and reads
-$2/\pi$ on the unit round $S^3$.  This is, to our
-knowledge, the first quantitative basis-truncation \emph{convergence-rate}
-estimate exposed at a chemistry-consumer API---a proven state-space GH
-metric rate, \emph{not} a direct energy-error bound (the operator-to-energy
+$2/\pi$ on the unit round $S^3$.  It is the GH bound of the truncated
+$S^3$ Camporesi--Higuchi triple, carried as metadata at a
+chemistry-consumer API --- a state-space GH metric rate for that triple
+(the bound proved, its displayed constant \textbf{[INTERNAL THEOREM + MEASURED]}),
+\emph{not} a rate for the molecular Hamiltonians and \emph{not} a direct energy-error bound (the operator-to-energy
 lift is a loose heuristic that overshoots by 3--4 orders of magnitude; see
 the Trotter-budget footnote).
 The rate is system-independent (it is a property of the
 spectral-triple truncation, not of the chemistry content),
 so chemistry consumers reading the metadata see the same
-``the operator is within state-space GH distance $\gamma_{n_{\max}}$ of the
-$n_{\max}\to\infty$ limit'' message (a convergence rate, not a direct
-energy-error bound) regardless of which molecule they are running.
+``the truncated $S^3$ triple is within state-space GH distance
+$\gamma_{n_{\max}}$ of its $n_{\max}\to\infty$ limit'' message (a property
+of the triple, not a direct energy-error bound for the Hamiltonian) regardless of which molecule they are running.
 
 \paragraph{FCIDUMP export.}  The \texttt{GeoVacHamiltonian}
 class now exposes a \texttt{to\_fcidump(filename)} method that

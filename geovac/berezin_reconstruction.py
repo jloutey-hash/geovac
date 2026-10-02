@@ -108,7 +108,7 @@ on multiplication operators by Sobolev / Cauchy-Schwarz.
 For f in C^infty(S^3),
 
     || B_{n_max}(f) - P_{n_max} M_f P_{n_max} ||_op
-        <=  C_3 * gamma_{n_max} * || nabla f ||_infty,
+        <=  C_3 * gamma_{n_max} * || nabla f ||_infty,   (C_3 = 1; Lemma L4(c); the L5 pair built on it is withdrawn)
 
 where gamma_{n_max} -> 0 by L2 part (e), C_3 = 1 by L3, and
 P_{n_max} M_f P_{n_max} is the unweighted compression of f to O_{n_max}.

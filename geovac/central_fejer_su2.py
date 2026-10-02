@@ -977,8 +977,9 @@ def asymptotic_rate_constant() -> sp.Expr:
 def quantitative_rate_bound(n_max: int, C: float = 6.0) -> float:
     """Explicit upper bound on gamma_{n_max} of the form C * log(n_max) / n_max.
 
-    Theorem 1(ii) of the quantitative-rate memo: gamma_n <= 6 log(n) / n
-    holds for all n >= 2. For C > 4/pi (Theorem 1(iii)), the bound holds
+    Item (ii) of the quantitative-rate memo: gamma_n <= 6 log(n) / n,
+    [MEASURED] on a finite checked range of n >= 2 -- not proved for all n
+    (Paper 38 Lemma L2(d.iii)). For C > 4/pi (Theorem 1(iii)), the bound holds
     for n >= N_0(C); use N0_for_constant(C) to get the threshold.
 
     Args:

@@ -70,20 +70,24 @@ CLAIMS = {
         owner=P32, owner_anchor=r"label\{thm:pi_source_case_exhaustion\}",
         owner_tier=r"\[CONDITIONAL\]", tier="CONDITIONAL",
         mention=r"case[- ]exhaustion|pi-source|π-source",
-        qualifier=r"CONDITIONAL|conditional|first fifteen|first 15|III\.1",
+        qualifier=r"\bconditional\b|first fifteen|first 15|III\.1",
         overclaim=r"INTERNAL THEOREM|following are equivalent|classification is complete|"
-                  r"stated and proven|does not force|every appearance of .{0,10}pi.{0,10} in any",
+                  r"stated and proven|does not force|every appearance of .{0,10}pi.{0,10} in any|"
+                  r"complete (period-theoretic |period-ring )?stratification|classif(ies|y) the transcendentals|"
+                  r"which transcendentals can appear|identifies as the \$?M_?\{?1",
         changed="2026-09-30"),
     "wh1-p38-gh-convergence": dict(
         statement="Truncations of the TRUE Camporesi-Higuchi window converge to the round-S^3 triple "
                   "in state-space GH (translation seminorm): COMMUTATIVE FACTOR ONLY; the almost-"
                   "commutative extension and Dirac-seminorm convergence are OPEN.",
-        owner=P38, owner_anchor=r"Unconditional|unconditional",
-        owner_tier=r"\[INTERNAL THEOREM", tier="INTERNAL THEOREM",
+        owner=P38, owner_anchor=r"label\{thm:main_unconditional\}",
+        owner_tier=r"\[INTERNAL THEOREM", tier="INTERNAL THEOREM", owner_window=3,
         mention=r"Paper[~ ]?38\b.{0,60}convergence|discrete.?→.?continuum convergence|"
                 r"state-space G(romov|H).{0,40}convergence",
-        qualifier=r"commutative",
-        overclaim=r"almost-commutative.{0,40}(proved|proven)|graph.{0,30}converges? to",
+        qualifier=r"(?<!almost-)(?<!almost )\bcommutative\b",
+        overclaim=r"almost-commutative[^.;]{0,40}\b(is|are|been)\s+(proved|proven)|"
+                  r"\b(proves|proved)\s+(the\s+)?(convergence\s+(of|for)\s+the\s+)?almost-commutative|"
+                  r"graph.{0,30}converges? to|\\le\s*C_\{?3\}?\s*(\\cdot\s*)?\\gamma",
         changed="2026-09-29"),
     "p38-rate-constant": dict(
         statement="The displayed rate (4/pi) log n/n is [INTERNAL THEOREM + MEASURED] in the dual-"
@@ -106,11 +110,11 @@ CLAIMS = {
     "k-combination-rule": dict(
         statement="K = pi(B + F - Delta) ~ alpha^-1 is an OBSERVATION (numerical coincidence); never "
                   "conjecture, derivation, prediction or theorem (CLAUDE.md 13.5).",
-        owner=P2, owner_anchor=r"Observation",
-        owner_tier=r"Observation", tier="OBSERVATION",
+        owner=P2, owner_anchor=r"label\{obs:cross_sector\}",
+        owner_tier=r"numerical observation", tier="OBSERVATION", owner_window=12,
         mention=r"π\(B ?\+ ?F|\\pi\(B ?\+ ?F|combination rule",
         qualifier=r"Observation|OBSERVATION|coincidence",
-        overclaim=r"\bTHEOREM\b|\bCONJECTURE\b|is derived|derives K",
+        overclaim=r"\b(conjecture|prediction)\b|(?-i:\b(?:rule|K)\b)[^.;]{0,40}\b(is|as)\s+(a\s+)?theorem(?![-\w])|is derived|derives K",
         changed="2026-06-14"),
     "sm-gauge-group-upgrade-b": dict(
         statement="U(1) x SU(2) x SU(3) (and the inner algebra C+H+M3(C)) is FORCED ONLY RELATIVE TO "
@@ -126,10 +130,10 @@ CLAIMS = {
     "central-smoothing-cb-norm": dict(
         statement="The central smoothing maps are UCP, so their cb-norm is 1; 2/(n_max+1) (and "
                   "4/((n_a+1)(n_b+1))) are Plancherel MASS maxima, not cb-norms.",
-        owner=P38, owner_anchor=r"cb",
-        owner_tier=r"\\cbnorm\{|cb-norm", tier="INTERNAL THEOREM",
+        owner=P38, owner_anchor=r"UCP map has cb-norm",
+        owner_tier=r"exactly \$1\$", tier="INTERNAL THEOREM", owner_window=2,
         mention=r"cb-norm",
-        qualifier=r".",
+        qualifier=r"\b1\b|UCP|unital completely positive|mass max|legacy",
         overclaim=r"cb-norm\s*(=|is)?\s*2\s*/|cb-norm .{0,25}(decay|O\(1/n)",
         changed="2026-09-30"),
     "m2-ring-integer-s": dict(
@@ -138,7 +142,7 @@ CLAIMS = {
         owner=P55, owner_anchor=r"label\{thm:m2_mixed_tate\}",
         owner_tier=r"integer", tier="THEOREM (integer s)",
         mention=r"pure-Tate even-weight|⊕.?π\^\{?2k|\\bigoplus_k \\pi\^\{2k\}",
-        qualifier=r"integer|Seeley|SD coeff",
+        qualifier=r"(?<!half-)(?<!half )\binteger\b|Seeley|SD coeff",
         overclaim=r"at (any|every) s\b|half-integer s.{0,20}pure-Tate",
         changed="2026-09-30"),
     "paper7-symbolic-checks": dict(
@@ -149,6 +153,51 @@ CLAIMS = {
         mention=r"\b18\b.{0,20}symbolic|symbolic.{0,20}\b18\b",
         qualifier=r"check|limiting|definitional",
         overclaim=r"18 (independent )?(symbolic )?proofs|18/18 symbolic proofs|independent proofs",
+        changed="2026-09-30"),
+    "p7-parseval-f0": dict(
+        statement="The single-integral F^0 density-overlap formula is the standard Fourier-Parseval form "
+                  "of the Coulomb integral written in the stereographic variable t = q/(2Z) [PRIOR ART]; "
+                  "the single-integral structure is Parseval's, not a consequence of S^3 geometry.",
+        owner=P7, owner_anchor=r"Fourier--Parseval",
+        owner_tier=r"\[PRIOR ART", tier="PRIOR ART",
+        mention=r"density[- ]overlap|single integral over one|F\^0.{0,40}S\^3|Slater integrals on \$S\^3",
+        qualifier=r"Parseval|PRIOR ART|prior art|stereographic variable",
+        overclaim=r"key structural finding|Fock projection converts|consequence of the \$?S\^3",
+        changed="2026-09-30"),
+    "he-bracket": dict(
+        statement="The He fixed-k CI (1.88% above exact) and the cusp-corrected 0.004% (a Schwartz "
+                  "extrapolation marginally BELOW exact, non-variational) bracket the exact energy; the "
+                  "properly variational 2D figure is 0.022% raw.",
+        owner="papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+        owner_anchor=r"marginally below", owner_tier=r"non-variational", tier="MEASURED",
+        mention=r"0\.004\s*\\?%",
+        qualifier=r"extrapolat|non-variational|below the exact|below exact",
+        overclaim=r"do not bracket|variational 0\.004|0\.004\s*\\?%[^.;]{0,30}variational bound",
+        changed="2026-09-30"),
+    "p1-degree-not-monotone-l": dict(
+        statement="On the binary label lattice node degree depends on m and on which shell neighbours "
+                  "exist, not monotonically on l (2p m=0 -> 3 > 2s = 2 = 2p m=+-1) [MEASURED].",
+        owner="papers/group3_foundations/paper_1_spectrum.tex",
+        owner_anchor=r"monotone in \$l\$", owner_tier=r"\[MEASURED\]", tier="MEASURED",
+        mention=r"(higher|high)[- ](angular momentum|\$?l\$?)[^.;]{0,40}(degree|connect)|more connections",
+        qualifier=r"not monotone|m = 0|m=0|not\} monotone",
+        overclaim=r"more connections|occupy higher-degree",
+        changed="2026-09-30"),
+    "p38-uniform-bound": dict(
+        statement="gamma_n <= 6 log n / n is a finite-range monotonicity check [MEASURED], not proved for "
+                  "all n_max.",
+        owner=P38, owner_anchor=r"6\s*(\\,)?\s*\\log", owner_tier=r"\[MEASURED\]", tier="MEASURED",
+        mention=r"6\s*(\\,)?\s*\\log\s*\\?n|6 log n",
+        qualifier=r"MEASURED|finite[- ]range|not proved",
+        overclaim=r"PANEL-VERIFIED|holds for all",
+        changed="2026-09-30"),
+    "k-match-precision": dict(
+        statement="K = pi(B + F - Delta) itself matches 1/alpha to 4.77e-7 (raw, CODATA 2018); the "
+                  "8.8e-8 figure is the root of Paper 2's cubic 1/alpha = K - alpha^2, not K.",
+        owner=P2, owner_anchor=r"label\{obs:cross_sector\}", owner_tier=r"cubic's root", tier="OBSERVATION",
+        mention=r"8\.8\s*(×|\\times)\s*10|8\.8e-8",
+        qualifier=r"cubic|root|\\alpha\^2|α²|K\s*[−-]\s*\\?alpha",
+        overclaim=r"\bK\s*(=\s*(π|\\pi)\s*\(B[^)]*\)\s*)?match(es)?\s*(1/α|1/\\alpha|\$1/\\alpha\$)?\s*to\s*\$?8\.8",
         changed="2026-09-30"),
 }
 

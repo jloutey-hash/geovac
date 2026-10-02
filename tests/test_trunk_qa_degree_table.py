@@ -24,9 +24,10 @@ FINDINGS (reported honestly):
   own stated operators. DOWNGRADE the sec:III degree table.
 
   What DOES reproduce from the construction (and is honestly backable):
-   - p-states have strictly higher weighted degree than s-states at the same n
-     (D_2p > D_2s), i.e. higher-l = higher connectivity. The QUALITATIVE
-     differential-connectivity claim survives; the specific NUMBERS do not.
+   - the m = 0 p-states have strictly higher weighted degree than s-states at
+     the same n (D_2p > D_2s, D_3p > D_3s). The degree is NOT monotone in l once
+     m != 0 nodes are counted (3d m=+-2 = 3.23 < 3p m=0 = 5.41); the specific
+     NUMBERS of the old table do not reproduce.
 """
 
 from __future__ import annotations

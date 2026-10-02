@@ -567,6 +567,8 @@ class TestTheoremStatement:
     def test_statement_carries_the_unconditional_rate_not_the_retired_caveat(self):
         s = gh_theorem_statement()
         assert "unconditionally" in s and "Paper 38" in s
+        # the rate constant is [INTERNAL THEOREM + MEASURED], not "proven" outright
+        assert "INTERNAL THEOREM + MEASURED" in s and "is proven" not in s
         assert "not rigorously proved" not in s and "Track C" not in s
         assert "2/pi" in s and "4/pi" in s          # convention-labelled constant
 

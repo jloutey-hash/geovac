@@ -21,9 +21,33 @@ ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE)
 import claim_registry as R  # noqa: E402
 
-GVC_TEX = re.compile(r"\\gvc\{([a-z0-9-]+)\}\{((?:[^{}]|\{[^{}]*\})*)\}")
+GVC_OPEN = re.compile(r"\\gvc\{([a-z0-9-]+)\}\{")
 GVC_MD = re.compile(r"<!--\s*gvc:([a-z0-9-]+)\s*-->")
-NEGATION = re.compile(r"\b(not|never|no|nor|neither|rather than|instead of|withdrawn|retired)\b[^.;|]*$", re.I)
+# A negation exempts an overclaim only when it is ADJACENT to it ("not a conjecture",
+# "never derived", "rather than a theorem").  The earlier window rule ("not" anywhere in
+# the 24 chars before) let "not only checked but INTERNAL THEOREM" and "no: K is
+# derived" through (DELTA #24 code review).
+_LIST = r"(?:[\w-]+(?:,|\s+or|\s+nor)\s+){0,4}"
+_Q = "[\"'`\u201c\u2018]*"
+NEGATION = re.compile(r"(\b(?:not|never|nor)\s+(?:(?:a|an|the|be|been|is|are|was|were)\s+)?" + _LIST + _Q +
+                      r"|\bno\s+longer\s+(?:(?:a|an|the)\s+)?" + _Q +
+                      r"|\b(?:rather\s+than|instead\s+of)\s+(?:(?:a|an|the)\s+)?" + _LIST + _Q + r")$", re.I)
+ARROW = re.compile(r"\s*(→|->|-->|\\to\b|\$\\to\$)\s*")
+OWNER_WINDOW = 8
+
+
+def gvc_spans(t: str):
+    """Yield (id, span, start) for every \\gvc{id}{span}, braces balanced to any depth.
+    An unterminated \\gvc yields span None so the caller can report it."""
+    for m in GVC_OPEN.finditer(t):
+        depth, i = 1, m.end()
+        while i < len(t) and depth:
+            if t[i] == "\\" and i + 1 < len(t):
+                i += 2
+                continue
+            depth += {"{": 1, "}": -1}.get(t[i], 0)
+            i += 1
+        yield m.group(1), (t[m.end():i - 1] if depth == 0 else None), m.start()
 
 MENTION_GLOBS = ["papers/group*/*.tex", "papers/synthesis/*.tex", "papers/INDEX.md",
                  "docs/claims_register.md", "docs/claim_test_matrix.md",
@@ -39,22 +63,41 @@ def _c(p: str) -> re.Pattern:
     return re.compile(p, re.I)
 
 
+def _norm(span: str) -> str:
+    """Strip LaTeX formatting wrappers and ties so "\\emph{not}~a theorem" reads
+    "not a theorem" and "mostly \\textbf{forced}" reads "mostly forced"."""
+    span = re.sub(r"\\(?:emph|textbf|textit|textrm|mathrm|text)\{", "", span)
+    span = re.sub(r"(?<!\\)[{}]", "", span)
+    return span.replace("~", " ")
+
+
 def check_text_span(cid: str, span: str) -> list[str]:
     """Hold one restatement span to the claim's rule; return problems."""
     c = R.CLAIMS[cid]
     probs = []
+    # strip LaTeX formatting wrappers so "mostly \textbf{forced}" reads "mostly forced"
+    span = _norm(span)
     if not _c(c["qualifier"]).search(span):
         probs.append(f"missing qualifier /{c['qualifier']}/")
-    for m in _c(c["overclaim"]).finditer(span):
-        # a NEGATED overclaim ("not a conjecture", "never derived") is the corrected form
-        if NEGATION.search(span[max(0, m.start() - 24):m.start()]):
-            continue
-        # a tier TRANSITION record ("conjecture→observation downgrade") is history, not a claim
-        if re.match(r"\s*(→|->|-->|\\to\b|\$\\to\$)", span[m.end():m.end() + 8]):
-            continue
-        probs.append(f"overclaim '{m.group(0)}'")
-        break
+    m = first_live_overclaim(cid, span)
+    if m:
+        probs.append(f"overclaim '{m}'")
     return probs
+
+
+def first_live_overclaim(cid: str, span: str):
+    c = R.CLAIMS[cid]
+    for m in _c(c["overclaim"]).finditer(span):
+        # an ADJACENT negation ("not a conjecture", "never derived") is the corrected form
+        if NEGATION.search(span[max(0, m.start() - 40):m.start()]):
+            continue
+        # a tier TRANSITION record is history only when the arrow points AT the current
+        # tier ("conjecture→observation"); "INTERNAL THEOREM -> now proven" is not
+        a = ARROW.match(span, m.end())
+        if a and _c(c["qualifier"]).match(span, a.end()):
+            continue
+        return m.group(0)
+    return None
 
 
 def owner_checks() -> list[str]:
@@ -70,9 +113,17 @@ def owner_checks() -> list[str]:
         if not hits:
             out.append(f"[{cid}] owner anchor /{c['owner_anchor']}/ not found in {c['owner']}")
             continue
-        ok = any(_c(c["owner_tier"]).search("\n".join(lines[max(0, i - 40):i + 40])) for i in hits)
-        if not ok:
-            out.append(f"[{cid}] owner tier /{c['owner_tier']}/ not within 40 lines of the anchor in {c['owner']}")
+        w = c.get("owner_window", OWNER_WINDOW)
+        wins = [_norm("\n".join(lines[max(0, i - w):i + w + 1])) for i in hits]
+        if not any(_c(c["owner_tier"]).search(x) for x in wins):
+            out.append(f"[{cid}] owner tier /{c['owner_tier']}/ not within {w} lines of the anchor in {c['owner']}")
+        # the owner must not itself carry the overclaim next to its anchor (a registry that
+        # only checks a tier word is present cannot see the owner drifting STRONGER)
+        for x in wins:
+            bad = first_live_overclaim(cid, x)
+            if bad:
+                out.append(f"[{cid}] owner carries its own overclaim '{bad}' near the anchor in {c['owner']}")
+                break
     return out
 
 
@@ -97,11 +148,13 @@ def annotation_checks() -> list[str]:
         for f in sorted(glob.glob(os.path.join(ROOT, g))):
             rel = os.path.relpath(f, ROOT).replace("\\", "/")
             t = _read(rel)
-            for m in GVC_TEX.finditer(t):
-                cid, span = m.group(1), m.group(2)
-                ln = t.count("\n", 0, m.start()) + 1
+            for cid, span, start in gvc_spans(t):
+                ln = t.count("\n", 0, start) + 1
                 if cid not in R.CLAIMS:
                     out.append(f"[unknown id '{cid}'] {rel}:{ln}")
+                    continue
+                if span is None:
+                    out.append(f"[{cid}] {rel}:{ln}: unterminated \\gvc annotation")
                     continue
                 for p in check_text_span(cid, span):
                     out.append(f"[{cid}] {rel}:{ln}: annotated span: {p}")
@@ -149,6 +202,29 @@ def selftest() -> int:
         "p38-rate-constant": ("rate (c) log n/n with c = 4/π | INTERNAL THEOREM (unconditional)",
                               "rate (c) log n/n with c = 4/π | INTERNAL THEOREM + MEASURED"),
     }
+    # The exact strings that ESCAPED the first version (DELTA #24 code review): each must fire.
+    escapes = [
+        ("pi-source-case-exhaustion", "case-exhaustion theorem (unconditional): every pi engages M1/M2/M3"),
+        ("wh1-p38-gh-convergence", "Paper 38 proves convergence for the almost-commutative extension (unconditional)"),
+        ("m2-ring-integer-s", "pure-Tate even-weight ring holds at every half-integer s"),
+        ("pi-source-case-exhaustion", "case-exhaustion (first fifteen) -- not only checked but INTERNAL THEOREM"),
+        ("k-combination-rule", "the combination rule is an observation? no: K is derived from the spectral action"),
+        ("pi-source-case-exhaustion", "case-exhaustion [CONDITIONAL] upgraded: INTERNAL THEOREM -> now proven"),
+    ]
+    for cid, bad in escapes:
+        if not check_text_span(cid, bad):
+            print(f"SELFTEST FAIL: {cid} escaped: {bad}")
+            ok = False
+    # history records that must stay silent
+    for cid, good in [("k-combination-rule", "combination rule: an Observation (conjecture→observation downgrade 2026-06-14)"),
+                      ("k-combination-rule", "the combination rule is an Observation, never a derivation, conjecture, prediction or theorem"),
+                      ("k-combination-rule", "combination rule: an Observation; \\emph{not}~a conjecture"),
+                      ("k-combination-rule", "an Observation; the Mellin slot k is a theorem-grade index elsewhere"),
+                      ("wh1-p38-gh-convergence", "Paper 38: commutative-factor convergence leg proved as of 2026-06-10, the almost-commutative structure's convergence open"),
+                      ("k-combination-rule", "K = π(B+F−Δ) is an Observation rather than a theorem")]:
+        if check_text_span(cid, good):
+            print(f"SELFTEST FAIL: {cid} fired on corrected text: {good} -> {check_text_span(cid, good)}")
+            ok = False
     for cid, (bad, good) in probes.items():
         if not check_text_span(cid, bad):
             print(f"SELFTEST FAIL: {cid} did not fire on: {bad}")
@@ -156,10 +232,12 @@ def selftest() -> int:
         if check_text_span(cid, good):
             print(f"SELFTEST FAIL: {cid} fired on corrected text: {good} -> {check_text_span(cid, good)}")
             ok = False
-    # annotation parser
-    m = GVC_TEX.search(r"x \gvc{pi-source-case-exhaustion}{the \emph{conditional} case-exhaustion} y")
-    if not (m and m.group(1) == "pi-source-case-exhaustion" and "conditional" in m.group(2)):
-        print("SELFTEST FAIL: \\gvc parser"); ok = False
+    # annotation parser: nested braces are parsed, not silently skipped
+    spans = list(gvc_spans(r"x \gvc{sm-gauge-group-upgrade-b}{the \emph{mostly \textbf{forced}} inner algebra} y"))
+    if not (spans and spans[0][1] and "forced" in spans[0][1] and check_text_span(spans[0][0], spans[0][1])):
+        print("SELFTEST FAIL: \\gvc nested-brace parser"); ok = False
+    if list(gvc_spans(r"\gvc{k-combination-rule}{unterminated"))[0][1] is not None:
+        print("SELFTEST FAIL: unterminated \\gvc not reported"); ok = False
     print("SELFTEST", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 

@@ -38,7 +38,7 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 
 The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with all downstream optimizations (tapering, grouping, tensor factorization). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
 
-**Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 1.44% regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 592 Pauli, He-4 16 qubits / 712 Pauli); the conformal machinery does not.
+**Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 828 Pauli); the conformal machinery does not.
 
 **The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. Calibration π is Coulomb-specific, not a generic feature of quantum discretization.
 
@@ -48,7 +48,7 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 
 Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc consists of fourteen standalone papers in `papers/group1_operator_algebras/`:
 
-- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2), explicit 4/π rate — **unconditional** (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
+- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2), explicit 4/π rate (dual-Coxeter normalisation; [INTERNAL THEOREM + MEASURED]) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window; the almost-commutative extension is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
 - **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
 - **Papers 46–49** Lorentzian metric-level claims built on the retracted quantity carry Status notes; the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive as stated
 - **Paper 50** Bit-exact F-theorem match on S³ + S⁵ (Klebanov–Pufu–Safdi)
@@ -186,12 +186,12 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **16** | **Chemical Periodicity** | **S_N representation theory, atomic classifier** |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H₂⁺ to machine precision |
-| **12** | Algebraic V_ee | Neumann expansion; H₂ 99.09% D_e (\|m\|≤1), 92.4% σ-only |
-| **13** | Hyperspherical Lattice | He 0.004%, fiber bundle, algebraic structure |
+| **12** | Algebraic V_ee | Neumann expansion; H₂ 99.97% D_e (explicit r₁₂, 0.053 mHa), 99.81% re-based CI, 92.4% σ-only |
+| **13** | Hyperspherical Lattice | He 0.022% (variational) / 0.004% (cusp extrapolation, non-variational), fiber bundle, algebraic structure |
 | **15** | Level 4 Geometry | H₂ 96.0% D_e, HeH⁺ 93.1% |
 | **17** | Composed Geometries | LiH 5.3%, BeH₂ 11.7%, ab initio PK |
 | **18** | Exchange Constants | Weyl-Selberg taxonomy, π-free graph principle |
-| **22** | **Angular Sparsity Theorem** | **Potential-independent ERI density (1.44% at l_max=3)** |
+| **22** | **Angular Sparsity Theorem** | **Potential-independent ERI density (6.06% at l_max=3, global-M_L rule)** |
 | **24** | **Bargmann-Segal Lattice** | **π-free HO discretization on S⁵ Hardy space** |
 | FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
 | **19** | Balanced Coupled | 0.20% energy, PK-free, 3-molecule census |
@@ -205,7 +205,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **32** | **Spectral Triple** | **Explicit construction; eight theorem-grade non-selection results in §VIII** |
 | 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
 | 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
-| **38** | **SU(2) state-space GH convergence** | **Unconditional; 4/π rate; compression/lifted-state proof, translation seminorm (see claims register)** |
+| **38** | **SU(2) state-space GH convergence** | **Unconditional for the commutative factor; 4/π rate (dual-Coxeter); compression/lifted-state proof, translation seminorm (see claims register)** |
 | 39, 40 | Tensor / Unified convergence | Rate-constant universality across compact Lie groups |
 | 42, 43 | Modular Hamiltonian / Lorentzian extension | Four-witness Wick-rotation; Krein-(3,1) extension |
 | **45** | **Lorentzian degeneracy theorem** | **K⁺ compression annihilates the spatial Dirac; earlier convergence claim retracted 2026-06-09** |

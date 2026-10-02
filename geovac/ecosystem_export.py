@@ -14,25 +14,27 @@ Convenience entry point::
     from geovac.ecosystem_export import hamiltonian
     H = hamiltonian('LiH', R=3.015, l_max=2)
     print(H.n_terms, H.one_norm)
-    print(H.propinquity_bound)  # Paper 38 basis-truncation error estimate
+    print(H.propinquity_bound)  # Paper 38 S^3-triple GH bound (not a Hamiltonian error bound)
     qiskit_op  = H.to_qiskit()
     pl_op      = H.to_pennylane()
     of_op      = H.to_openfermion()
 
 Propinquity-bound metadata
 --------------------------
-Every ``GeoVacHamiltonian`` carries a basis-truncation error estimate
-``propinquity_bound`` derived from Paper 38's main theorem (Thm.~\\ref{thm:main},
-arXiv:2505.xxxxx, Zenodo 2026-05-07).  For the truncated Camporesi--Higuchi
-spectral triple at cutoff ``max_n``,
+Every ``GeoVacHamiltonian`` carries the metadata value ``propinquity_bound``
+(legacy name), Paper 38's main-theorem bound (Thm.~\\ref{thm:main}, Zenodo
+2026-05-07) for the truncated Camporesi--Higuchi spectral triple on S^3 at
+cutoff ``max_n`` -- the commutative factor's state-space GH distance, NOT an
+error bound for the molecular Hamiltonian:
 
-    Lambda(T_{max_n}, T_{S^3}) <= C_3 * gamma_{max_n}
+    d_GH(T_{max_n}, T_{S^3}) <= gamma_{max_n}
 
-with ``C_3 = 1`` (Lemma L3, sharp at all cutoffs) and ``gamma_{max_n}`` the
+with ``gamma_{max_n}`` the
 central spectral Fejer mass-concentration moment on SU(2) (Lemma L2).  The
 asymptotic rate ``gamma_{max_n} ~ (4/pi) log(max_n) / max_n`` carries the
-M1 Hopf-base measure signature ``4/pi = Vol(S^2)/pi^2`` (master Mellin engine,
-Paper 18 §III.7).  See ``geovac.central_fejer_su2.gamma_n_via_sum_rule`` for
+constant ``4/pi = Vol(S^2)/pi^2`` (dual-Coxeter normalisation), which an
+Observation-level reading places in the M1 volume slot of the master Mellin
+engine (Paper 18 §III.7; the 'Hopf-base' label is retired).  See ``geovac.central_fejer_su2.gamma_n_via_sum_rule`` for
 the closed-form sum-rule evaluator.
 
 This is metadata only: the Pauli coefficients of the qubit Hamiltonian are
@@ -198,7 +200,7 @@ class GeoVacHamiltonian:
         """Metadata dict (system, R, l_max, propinquity bound, etc.).
 
         Includes ``propinquity_bound`` (Paper 38 Thm.~\\ref{thm:main}
-        basis-truncation error estimate) if ``max_n`` is recorded in
+        S^3-triple GH bound, not a Hamiltonian error bound) if ``max_n`` is recorded in
         the underlying metadata.
         """
         meta = dict(self._metadata)
@@ -214,7 +216,7 @@ class GeoVacHamiltonian:
 
     @property
     def propinquity_bound(self) -> float:
-        """Paper 38 basis-truncation error estimate (qualitative-rate).
+        """Paper 38 state-space GH bound for the truncated S^3 triple (qualitative-rate).
 
         Returns van Suijlekom's STATE-SPACE Gromov--Hausdorff upper bound
         (corrected 2026-09-04: this said "the Latrémolière quantum
@@ -222,9 +224,9 @@ class GeoVacHamiltonian:
         that distance is strictly stronger and its dual-reach step is a
         named gap, Paper 38 / Paper 40 Remark on L2)
 
-            Lambda(T_{max_n}, T_{S^3}) <= C_3 * gamma_{max_n}
+            d_GH(T_{max_n}, T_{S^3}) <= gamma_{max_n}
 
-        with ``C_3 = 1`` (sharp at every cutoff; Lemma L3) and
+        (commutative factor; the withdrawn L5 form carried a factor C_3 = 1) with
         ``gamma_{max_n}`` the central spectral Fejer mass-concentration
         moment on SU(2) (Lemma L2), evaluated in closed form via
         ``geovac.central_fejer_su2.gamma_n_via_sum_rule``.

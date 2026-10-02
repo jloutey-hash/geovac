@@ -50,7 +50,7 @@ The operator weights are the standard $SU(2)$ ladder matrix elements \cite{biede
 
 \subsection{Quantum-Number Reproduction}
 
-The critical test of this algebra is spectroscopic: do the operators reproduce the quantum numbers that label the Rydberg formula? \textbf{[PANEL-VERIFIED]} They do, on interior shells:\ the operators return $n$ ($n < n_{\max}$) and $\ell(\ell+1)$ bit-exactly, and the Rydberg energies
+The critical test of this algebra is spectroscopic: do the operators reproduce the quantum numbers that label the Rydberg formula? \textbf{[MEASURED]} They do, on interior shells:\ the operators return $n$ ($n < n_{\max}$) and $\ell(\ell+1)$ to $10^{-9}$ in floating point, and the Rydberg energies
 \begin{equation}
 E_n = -\frac{1}{2n^2} \quad (\text{Hartree atomic units}),
 \label{eq:rydberg}
@@ -107,7 +107,7 @@ The degree matrix $D$ is \textit{not rotationally invariant}. The weighted degre
 \text{Equator (2p):} \quad & D_{(2,1,0)} = 3.416,
 \end{align}
 \emph{historical values that reproduce under no current construction} (flagged inline 2026-09-28;\ the binary production lattice gives $D_{2s} = 2$, $D_{2p} = 3$, the CG-magnitude rebuild $1.93$ and $3.83$ --- see the \S III QA note and Table~\ref{tab:degrees}).
-\textbf{[MEASURED]} The degree is \emph{not} monotone in $l$. On the binary production lattice a node's degree counts its $L_\pm$ neighbours (two for interior $m$, one at $|m| = l$, none for $l = 0$) plus its $T_\pm$ neighbours $(n \pm 1, l, m)$ that exist; so $D_{2p,\,m=0} = 3 > D_{2s} = 2 = D_{2p,\,m=\pm1}$, while in an interior shell the degree peaks at $l = 1$ and falls again for the highest $l$ ($n = 3$ at $n_{\max} = 4$:\ $l = 0, 1, 2 \to 2,\ 3$--$4,\ 2$--$3$), and the top shell is lowered by truncation. A higher degree means a higher on-site entry in the Laplacian formulation;\ it does not couple the $l$-blocks, which are disconnected components, so it is not a mechanism for the $s/p$ proxy (that reading withdrawn 2026-09-03;\ \S III).
+\textbf{[MEASURED]} On the binary production lattice the degree is \emph{not} monotone in $l$ (nor is it on the CG construction of \S III once $m \ne 0$ nodes are counted:\ $3d_{m=\pm2}$ $3.23 < 3p_{m=0}$ $5.41$). A node's degree counts its $L_\pm$ neighbours (two for interior $m$, one at $|m| = l$, none for $l = 0$) plus its $T_\pm$ neighbours $(n \pm 1, l, m)$ that exist; so $D_{2p,\,m=0} = 3 > D_{2s} = 2 = D_{2p,\,m=\pm1}$, while in an interior shell the maximum degree rises from $l = 0$, holds at its plateau value from $l = 1$ to $l = n-2$, and drops at $l = n-1$ ($n = 3$ at $n_{\max} = 4$:\ $l = 0, 1, 2 \to 2,\ 3$--$4,\ 2$--$3$;\ $n = 5$ at $n_{\max} = 6$:\ maxima $2, 4, 4, 4, 3$), and the top shell is lowered by truncation. A higher degree means a higher on-site entry in the Laplacian formulation;\ it does not couple the $l$-blocks, which are disconnected components, so it is not a mechanism for the $s/p$ proxy (that reading withdrawn 2026-09-03;\ \S III).
 
 \subsection{The Splitting as Discretization Artifact}
 
@@ -169,9 +169,9 @@ verified (\texttt{tests/test\_paper1\_block\_spectrum.py},
 which is basis-dependent inside degenerate eigenspaces --- flagged
 2026-09-28 and rewritten the same day to the basis-free
 $\|P_\lambda e_{\mathrm{node}}\|^2$ rule, so it now counts as backing)
-is therefore:\ higher-$l$
-states have higher connectivity ($D_{2p} > D_{2s}$) on the CG
-construction, and on the binary lattice the $s/p$ splitting decays,
+is therefore:\ on the CG construction the $m = 0$ nodes satisfy
+$D_{2p} > D_{2s}$ and $D_{3p} > D_{3s}$ (in neither construction is the
+degree monotone in $l$ once $m \ne 0$ nodes are counted), and on the binary lattice the $s/p$ splitting decays,
 strongly oscillating, to below $1\%$ by $n_{\max} = 30$.  The specific
 CG-construction figures are retained as illustrative of that
 construction only. \emph{This caveat applies wherever these figures
@@ -596,7 +596,7 @@ verified numerically; its closed form decays as $n^{-1}$ asymptotically (no fitt
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Historical values --- not reproduced by any current construction} (flagged 2026-09-03).  These figures are retained to document the original calculation;\ the production binary lattice gives \emph{integer} degrees --- $D_{2s} = 2$ and $D_{2p} = 3$ exactly, every edge weight being $1$ --- while the CG construction gives $0.7071$, $1.9319$, $3.8284$, $2.9568$, $5.4096$, $6.1237$, of which only the $3d$ row here reproduces.  (Corrected 2026-09-04:\ this caption assigned the CG values $1.9$ and $3.8$ to the binary lattice, inverting the separation it was written to enforce.)  What survives is the \emph{qualitative} ordering $D_{2p} > D_{2s}$, which both constructions share.  Weighted node degrees for select quantum states. The non-integer values arise from weighted sums of transition matrix elements (see Appendix~\ref{app:berry}).}
+\caption{\textbf{Historical values --- not reproduced by any current construction} (flagged 2026-09-03).  These figures are retained to document the original calculation;\ the production binary lattice gives \emph{integer} degrees --- $D_{2s} = 2$ and $D_{2p} = 3$ exactly, every edge weight being $1$ --- while the CG construction gives $0.7071$, $1.9319$, $3.8284$, $2.9568$, $5.4096$, $6.1237$, of which only the $3d$ row here reproduces.  (Corrected 2026-09-04:\ this caption assigned the CG values $1.9$ and $3.8$ to the binary lattice, inverting the separation it was written to enforce.)  What survives is the \emph{qualitative} ordering $D_{2p,\,m=0} > D_{2s}$, which both constructions share (on the binary lattice the $m = \pm1$ nodes tie with $2s$).  Weighted node degrees for select quantum states. The non-integer values arise from weighted sums of transition matrix elements (see Appendix~\ref{app:berry}).}
 \begin{tabular}{cccc}
 \hline
 State $(n,l,m)$ & Weighted Degree $D_{ii}$ & Type & Laplacian eigenvalue (historical) \\

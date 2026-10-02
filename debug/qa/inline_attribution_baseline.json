@@ -62,7 +62,6 @@
     "Schwartz~1961",
     "Theodosiou~1984",
     "The~2014",
-    "Until~2026",
     "Vanderhaeghen~2014",
     "Walls~2003",
     "Wijngaarden--Holuj--Drake~2000",
@@ -76,5 +75,160 @@
   ],
   "papers/synthesis/group6_precision_observations_synthesis.tex": [
     "Fock~1935"
-  ]
+  ],
+  "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex": [
+    "Mizuno--Sato~2004",
+    "Setyadi--Storm~2022"
+  ],
+  "papers/group1_operator_algebras/paper_32_spectral_triple.tex": [],
+  "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": [],
+  "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": [],
+  "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": [],
+  "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": [
+    "Bisognano--Wichmann~1976",
+    "Bizi--Brouder--Besnard~2018",
+    "Dungen~2016",
+    "Hartle--Hawking~1976",
+    "Sewell~1982",
+    "Unruh~1976"
+  ],
+  "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex": [
+    "Dungen~2016",
+    "Nieuviarts~2025",
+    "Suijlekom~2024"
+  ],
+  "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": [
+    "AMS~2016",
+    "Bizi--Brouder--Besnard~2018",
+    "Dungen~2016",
+    "Suijlekom~2021"
+  ],
+  "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": [
+    "BBT~2014"
+  ],
+  "papers/group1_operator_algebras/paper_53_disk_propinquity.tex": [
+    "The~2026"
+  ],
+  "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex": [
+    "MEASURED~2026"
+  ],
+  "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex": [
+    "AUDITED~2026",
+    "MEASURED~2026",
+    "PROGRESS~2026",
+    "SCOPE~2026",
+    "VALIDATED~2026"
+  ],
+  "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": [
+    "MEASURED~2026",
+    "SCOPE~2026"
+  ],
+  "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex": [
+    "UNRECONCILED~2026"
+  ],
+  "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex": [],
+  "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex": [
+    "Clementi--Roetti~1974",
+    "MEASURED~2026",
+    "Martin~2003",
+    "Martin~2018",
+    "Measured~2026",
+    "VALIDATED~2026"
+  ],
+  "papers/group2_quantum_chemistry/paper_58_abelian_residue.tex": [],
+  "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex": [],
+  "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": [],
+  "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex": [],
+  "papers/group2_quantum_chemistry/paper_fci_atoms.tex": [],
+  "papers/group2_quantum_chemistry/paper_fci_molecules.tex": [],
+  "papers/group3_foundations/Paper_0_Geometric_Packing.tex": [],
+  "papers/group3_foundations/paper_18_exchange_constants.tex": [
+    "Clementi--Raimondi~1963",
+    "Kontsevich--Zagier~2001",
+    "MEASURED~2026",
+    "Morgan~1992",
+    "SCOPE~2026"
+  ],
+  "papers/group3_foundations/paper_1_spectrum.tex": [],
+  "papers/group3_foundations/paper_22_angular_sparsity.tex": [],
+  "papers/group3_foundations/paper_24_bargmann_segal.tex": [],
+  "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": [
+    "Dungen~2016"
+  ],
+  "papers/group3_foundations/paper_54_tensor_product_two_body.tex": [],
+  "papers/group3_foundations/paper_55_periods_of_geovac.tex": [
+    "Connes--Cuntz~1988",
+    "Connes--Marcolli~2007",
+    "Connes~1994",
+    "Deligne--Milne~1982",
+    "Deligne~1990",
+    "Hochschild~1981",
+    "Pimsner--Voiculescu~1980",
+    "Pimsner~1997",
+    "Sweedler~1969",
+    "Waterhouse~1979"
+  ],
+  "papers/group3_foundations/paper_56_tannakian_substrate.tex": [
+    "MvS~2014"
+  ],
+  "papers/group3_foundations/paper_57_forced_free_seam.tex": [
+    "Bochniak--Sitarz~2025",
+    "CCM~2007",
+    "Clementi--Raimondi~1963",
+    "Connes~2006",
+    "Devastato--Lizzi~2013",
+    "Krajewski~1998"
+  ],
+  "papers/group3_foundations/paper_61_bessel_moment_periods.tex": [],
+  "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": [],
+  "papers/group4_quantum_computing/paper_14_qubit_encoding.tex": [
+    "Restated~2026"
+  ],
+  "papers/group4_quantum_computing/paper_16_periodicity.tex": [],
+  "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex": [
+    "Suijlekom~2014"
+  ],
+  "papers/group4_quantum_computing/paper_23_nuclear_shell.tex": [],
+  "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": [],
+  "papers/group5_qed_gauge/paper_28_qed_s3.tex": [
+    "Camporesi~1990",
+    "Fursaev--Miele~1996",
+    "Ikeda--Taniguchi~1978"
+  ],
+  "papers/group5_qed_gauge/paper_2_alpha.tex": [],
+  "papers/group5_qed_gauge/paper_30_su2_wilson.tex": [],
+  "papers/group5_qed_gauge/paper_33_qed_selection_rules.tex": [],
+  "papers/group5_qed_gauge/paper_36_bound_state_qed.tex": [
+    "CREMA~2010"
+  ],
+  "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": [
+    "BMK~1977"
+  ],
+  "papers/group5_qed_gauge/paper_51_gravity_arc.tex": [],
+  "papers/synthesis/geovac_field_guide.tex": [
+    "Deligne--Milne~1982"
+  ],
+  "papers/synthesis/group1_operator_algebras_synthesis.tex": [
+    "ARCHIVED~2026",
+    "Bisognano--Wichmann~1976",
+    "Datta~2009",
+    "Dungen~2016",
+    "Hartle--Hawking~1976",
+    "IMRN~2025",
+    "Kumar~1988",
+    "Moghaddam~2020",
+    "Sewell~1982",
+    "Suijlekom~2014",
+    "Suijlekom~2021",
+    "Unruh~1976",
+    "Vinberg~1990"
+  ],
+  "papers/synthesis/group2_quantum_chemistry_synthesis.tex": [
+    "Superseded~2026"
+  ],
+  "papers/synthesis/group3_foundations_synthesis.tex": [],
+  "papers/synthesis/group4_quantum_computing_synthesis.tex": [
+    "Greene~2006"
+  ],
+  "papers/synthesis/group5_qed_gauge_synthesis.tex": []
 }

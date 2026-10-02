@@ -1122,8 +1122,10 @@ Sec.~\ref{sec:taxonomy}.
 \paragraph{Period-ring stratification of the master Mellin engine
 (June 2026 closure).}
 The master Mellin engine partition $\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$
-with $k \in \{0, 1, 2\}$ admits a complete period-theoretic
-stratification, established by three companion sprints in June~2026
+with $k \in \{0, 1, 2\}$ admits a period-theoretic stratification over
+the cases the conditional case-exhaustion theorem treats (first fifteen
+Paper~34 projections;\ M2 for Seeley--DeWitt coefficients and integer
+$s$), established by three companion sprints in June~2026
 (memos \texttt{debug/sprint\_m1\_pure\_tate\_memo.md},
 \texttt{debug/sprint\_mixed\_tate\_test\_memo.md},
 \texttt{debug/sprint\_m3\_cyclotomic\_mixed\_tate\_memo.md}):
@@ -1151,8 +1153,9 @@ framework's natural QED observables.
 Paper~32 §VIII Corollaries \texttt{cor:m1\_pure\_tate},
 \texttt{cor:m2\_mixed\_tate}, and \texttt{cor:m3\_cyclotomic\_mixed\_tate}
 state the case-exhaustion-theorem-level consequences.  Every
-transcendental that has appeared in GeoVac spectral data has a named
-motivic home indexed by the Mellin slot~$k$;\ the remainder of this
+transcendental in the census of GeoVac spectral data has a named motivic
+home (a census, not a classification;\ indexing by the Mellin slot~$k$ is
+a reading, which the half-integer M2 values with odd zeta strain);\ the remainder of this
 subsection walks the master-mechanism reading
 (\S\,master-mechanism), the mechanism-as-domain sharpening
 (\S\,domain-partition), the witness panels for the three period-ring
@@ -1227,9 +1230,9 @@ correction at the next order are all in M2.
 
 Sprint MR-A computed the natural Dirac analog of the SU(2) scalar
 central Fej{\'e}r state-space GH rate. The scalar baseline (L2 sprint,
-2026-05-06) had pinned the asymptote rigorously to
-$\lim_{n \to \infty} n \gamma_n / \log n = 4/\pi$ with explicit uniform
-bound $\gamma_n \le 6\,(\log n)/n$ for $n \ge 2$ (dual-Coxeter
+2026-05-06) had pinned the asymptote to
+$\lim_{n \to \infty} n \gamma_n / \log n = 4/\pi$ (\textbf{[INTERNAL THEOREM + MEASURED]}) with a uniform
+bound $\gamma_n \le 6\,(\log n)/n$ checked on a finite range (\textbf{[MEASURED]}) (dual-Coxeter
 normalisation of the $\mathrm{SU}(2)$ metric, the rule
 $\mathrm{Cas}(\mathrm{ad}) = h^\vee$ under which the geodesic distance is the
 rotation angle;\ $2/\pi$ on the unit $S^3$, Paper~38, 2026-09-03).  The
@@ -1273,8 +1276,9 @@ The index $k \in \{0, 1, 2\}$ classifies both the M-mechanism and
 the natural domain of observable from which its signature can be
 extracted:
 \begin{itemize}
-  \item $k = 0$ (M1, volume slot): state-space GH rates;
-    signature $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the SU(2) Fej{\'e}r
+  \item $k = 0$ (M1, volume slot): volume-slot normalizations;\ the
+    state-space GH-rate constant shares the value (a reading, not a
+    derivation, Paper~38):\ $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the SU(2) Fej{\'e}r
     asymptote (dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$) (L2 sprint quantitative-rate theorem).
   \item $k = 2$ (M2, Seeley--DeWitt): heat-kernel and spectral-action
     convergence; signature $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ (after
@@ -1388,9 +1392,10 @@ contaminate the SD coefficients (M3 lives at $k=1$ in
 $\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$, M2 at $k=2$).  Together
 with the companion Paper~32~\S~VIII corollaries
 \texttt{cor:m2\_mixed\_tate} and \texttt{cor:m3\_cyclotomic\_mixed\_tate},
-the master Mellin engine now has a complete period-theoretic
-stratification:\ M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2 in
-$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, M3 in
+the master Mellin engine now has a period-theoretic stratification over
+the cases it treats (\textbf{[CONDITIONAL]}, first fifteen projections):\
+M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2 (Seeley--DeWitt coefficients and
+integer $s$) in $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, M3 in
 $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.
 
 \paragraph{M3 sectional convention refinement (Sprint L2-D, May 2026).}
@@ -1570,8 +1575,8 @@ $\beta = 2\pi/\kappa_g$, not an M1 output;\ re-tiered 2026-09-28.)  Combined wit
 closures (Sprint Mixed-Tate Test placing M2 in
 $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, and Sprint M3 Cyclotomic
 Mixed-Tate placing M3 in $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
-$\le 4$), the master Mellin engine of \S~III.7 has a complete
-period-theoretic stratification indexed by the Mellin slot
+$\le 4$), the master Mellin engine of \S~III.7 has a period-theoretic
+stratification over the cases treated (\textbf{[CONDITIONAL]}) indexed by the Mellin slot
 $k \in \{0, 1, 2\}$:
 \begin{equation*}
 M_1 \subset \mathbb{Q}[\pi, \pi^{-1}], \quad
@@ -3194,8 +3199,8 @@ the algebraic curve, producing a transcendental number.
 On the $S^3 \times S^3$ product space (Level~3 FCI), the same
 energy can in principle be computed without $\mu(R)$: the
 Hamiltonian matrix has entries given by Gaunt integrals (rational)
-and the Slater $F^0$ direct Coulomb integrals (algebraic on $S^3$,
-Paper~7 Sec.~VI).  The FCI result ($\gvq{he_gn_phys_n7_pct}{1.88}\%$ at
+and the Slater $F^0$ direct Coulomb integrals (exact rationals,
+classical;\ Parseval form in Paper~7 Sec.~V).  The FCI result ($\gvq{he_gn_phys_n7_pct}{1.88}\%$ at
 $n_{\max}=7$ with the physical Hamiltonian; an earlier sub-percent
 figure belonged to a withdrawn hop-augmented model) demonstrates that
 the correlated energy \emph{can} be approximated within the

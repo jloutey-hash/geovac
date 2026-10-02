@@ -359,7 +359,7 @@
 | Speed regression | < 10% | Performance control |
 | Paper 2 cubic root 1/α | 137.036011 (above CODATA, 8.8e-8) | Table II/abstract value correction (mpmath) |
 | Paper 2 §VIII.D identity (k=0) | B_formal/N=d, root m=2 | Summation-index correction (sympy) |
-| Propinquity bound γ_{n_max=2,3,4} | 2.0746 / 1.6101 / 1.3223 (system-independent) | Paper 38 main theorem evaluation on `GeoVacHamiltonian.propinquity_bound` metadata; first quantitative basis-truncation error estimate at chemistry-consumer API (Target A, v3.85.0) |
+| Propinquity bound γ_{n_max=2,3,4} | 2.0746 / 1.6101 / 1.3223 (system-independent) | Paper 38 main theorem evaluation on `GeoVacHamiltonian.propinquity_bound` metadata: the state-space GH bound d_GH <= gamma for the truncated S^3 triple, exposed at the chemistry-consumer API (Target A, v3.85.0) -- not an error bound for the molecular Hamiltonian |
 | FCIDUMP LiH composed n_max=2 round-trip | max\|h_1 diff\| = 0.0, max\|eri diff\| = 0.0 | `to_fcidump()` / `read_fcidump()` bit-exactness (P1, v3.85.0) |
 | FCIDUMP 7-system sample (LiH/BeH₂/H₂O/NaH/KH/MgH₂/CaH₂) | < 1e-10 relative | Multi-system round-trip integrity (P1, v3.85.0) |
 | LiH composed n_max=2 R=3.015 bohr qubit FCI | −14.143 Ha at Q=30, 333 Pauli | Publication-grade headline from FCIDUMP→DMRG path (R3-A, v3.85.0) |

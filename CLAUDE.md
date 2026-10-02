@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.18.0 (September 30, 2026)
+**Version:** v5.18.1 (October 2, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk DELTA #24 (first claim-search DELTA) = DEFECTS, remediated (2026-10-02, v5.18.1, PI-approved):** 5 OWNER + ~20 SURFACE LARGE, no math defect; C25 hardened; 17 C16 entries swept 85 loci. See CHANGELOG v5.18.1.
 - **/qa instrument: claim registry C25 + OWNER/SURFACE-LARGE stop rule + claim-search DELTA; trunk FULL #11 = FAIL, remediated (2026-09-30, v5.18.0, PI-directed):** 5 LARGE, no owner math defect; C25 found 4 front-door defects on run one. See CHANGELOG v5.18.0.
 - **/qa trunk DELTA #23 = DEFECTS, remediated (2026-09-30, v5.17.17, PI-approved):** 1 LARGE + 1 borderline, both PM-fix residue ('does not force π'; P45 hybrid mislabel); 3 C16 gates; guard aliasing escape closed. See CHANGELOG v5.17.17.
 - **/qa trunk DELTA #22 = DEFECTS, remediated (2026-09-30, v5.17.16, PI-approved):** 1 LARGE (10 -> 1): cb-norm label in tests/geovac; code-layer C16 gate; π-source converse 'not established', not false. See CHANGELOG v5.17.16.
@@ -272,7 +273,7 @@ it is a PI call.
 
 | System | Result | Method | Paper |
 |:-------|:-------|:-------|:-----:|
-| He (atom) | 0.004% (cusp); 0.022% (raw) | 2D variational, cusp l_max=4 / raw l_max=7 | 13 |
+| He (atom) | 0.022% (raw, variational); 0.004% (cusp extrapolation, non-variational, marginally below exact) | 2D variational, raw l_max=7 / Schwartz cusp extrapolation l_max=4 | 13 |
 | He (fixed-k CI, physical H) | 1.88% (n_max=7), above the HF limit (continuum-incomplete basis) | Zero-parameter k=Z hydrogenic CI, exact integrals. The 0.216% "graph-native" figure is RETIRED (2026-09-25): it added a non-physical (1/16)A one-body hop | 13 |
 | H⁻ | Bound, +2.15% above exact (variational) | Fixed-k CI, physical H. The "over-binds 21%" and "Z_c≈1.84 boundary" were hop artifacts (retired 2026-09-25) | 13 |
 | PsH | 4.1% | Level 3, sign-flipped charge | 13 |
@@ -516,7 +517,7 @@ The core organizational principle of the project. Each electron configuration ha
 | 1 | H (1-center, 1e) | S3 (Fock) | lambda_max -> 2 d_max = 8; deficit 0.57% at n_max = 30 (a spectral *bound*, not an accuracy: E_0 = kappa*lambda_max by construction) | 7 |
 | 2 | H2+ (2-center, 1e) | Prolate spheroid | machine precision (spectral; reference-limited) | 11 |
 | 2 | H2 (2-center, 2e) | Prolate spheroid | 99.97% D_e (0.053 mHa) via explicit-r₁₂ CI with exact algebraic integrals (v5.14.10); 99.81% (0.32 mHa) at α=1.40 and 99.77% (0.41 mHa) fixed-α — re-based CI (v5.13.9) | 12 |
-| 3 | He (1-center, 2e) | Hyperspherical | 0.004% (2D var, cusp l_max=4); 0.022% (raw l_max=7); 1.88% (fixed-k=Z hydrogenic CI, physical Hamiltonian, n_max=7; the 0.216% graph-native figure is retired, a hop-augmented model, not He) | 13 |
+| 3 | He (1-center, 2e) | Hyperspherical | 0.022% (raw l_max=7, variational); 0.004% (cusp extrapolation l_max=4, non-variational, marginally below exact); 1.88% (fixed-k=Z hydrogenic CI, physical Hamiltonian, n_max=7; the 0.216% graph-native figure is retired, a hop-augmented model, not He) | 13 |
 
 *Level 3 note:* The previous 0.05% result used the FD adiabatic solver (lucky error cancellation, non-variational). The adiabatic coupled-channel solver converges to a structural floor of 0.19-0.20% (v2.0.8). The 2D variational solver (Track DI, v2.6.0) breaks this floor: raw 0.022% at l_max=7 (tensor-product Laguerre × Gegenbauer basis, 8000 dim), cusp-corrected 0.004% at l_max=4. The 2D solver treats R and α simultaneously, capturing non-adiabatic R-α correlation that the adiabatic approximation misses. l_max convergence is monotonic; the per-channel angular basis (n_basis=40 Gegenbauer functions) is the convergence bottleneck, not partial-wave truncation.
 | 4 | H2 (2-center, 2e), hyperspherical treatment | Mol-frame hyperspherical | 96.0% D_e — structural N-electron precursor to 4N/5; H2's *natural* geometry is Level 2 (prolate), see note | 15 |

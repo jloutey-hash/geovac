@@ -205,9 +205,9 @@ Paper~31~\cite{loutey_paper31} states the $\mathcal{A}/D$
 universal/Coulomb partition in spectral-triple language.  \emph{The
 reconvergence} (where the branches loop back to a unified foundational
 statement, \S\ref{sec:reconvergence}):\ Paper~54~\cite{loutey_paper54} derives two-body
-selection rules from the tensor-product triple, Paper~55~\cite{loutey_paper55} classifies
-the transcendentals that have appeared in GeoVac spectral data as
-cyclotomic mixed-Tate at level $\le 4$,
+selection rules from the tensor-product triple, Paper~55~\cite{loutey_paper55} places
+the transcendentals in the census of GeoVac spectral data in
+cyclotomic mixed-Tate periods at level $\le 4$,
 Paper~56~\cite{loutey_paper56} constructs the cosmic-Galois comparison map $U^*_{\mathrm{GV}}
 \to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (a homomorphism, not a closed immersion), and Paper~57~\cite{loutey_paper57}
 catalogues the forced/free seam;\ Paper~61~\cite{loutey_paper61}
@@ -240,7 +240,7 @@ is proved unconditionally:\ the distance is bounded by a closed-form Fej\'er
 moment $\gamma_{n_{\max}}$ that vanishes in the limit.  The theorem
 statement also displays its asymptotic rate,
 $\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$, with the constant
-$\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form~\cite{kac_infinite1990})
+$\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and
 numerics-pinned) and a uniform bound $\gamma_{n_{\max}} \le 6\log n_{\max}/n_{\max}$
 \textbf{[MEASURED]} (a finite-range check)
@@ -492,7 +492,7 @@ van~Suijlekom state-space Gromov--Hausdorff convergence, bounded by a
 closed-form Fej\'er moment $\gamma_{n_{\max}} \to 0$ (proved), under the
 translation-seminorm metrization (Paper~38~\cite{loutey_paper38},
 operator-algebra arc);\ the theorem statement displays the asymptotic
-rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form~\cite{kac_infinite1990})
+rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and numerics-pinned;\
 the uniform $6\log n_{\max}/n_{\max}$ bound is \textbf{[MEASURED]}, a finite-range check), with the $4/\pi$ constant
 universal across compact connected semisimple Lie groups
@@ -582,7 +582,7 @@ the level of its action and observables; GeoVac's label set, with the
 matrix elements built on it, is a mathematical object with no preferred
 length scale.  CFT scale-invariance is the physics side of the
 principle; the dimensionless label set is the substrate side.
-The two converge structurally because they realise the same
+The two converge structurally in that they realise the same
 property---scale-freedom---at different layers of description, and the
 Fock projection that connects them is the conformal map that
 implements the scale-free-to-scale-bearing transition.
@@ -669,7 +669,8 @@ papers.
 %% ========================================================================
 
 The angular sparsity theorem of Paper~22~\cite{loutey_paper22} is the
-foundations-side statement of the structural mechanism behind GeoVac's
+foundations-side statement of one of the two structural mechanisms (with
+the composed block decomposition) behind GeoVac's
 exactly $Q$-linear composed Pauli-term count
 ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis, Paper~14~\cite{loutey_paper14}) at
 the qubit-encoding level.  The
@@ -1071,7 +1072,7 @@ measurement.
 \item \textbf{Algebraic (no exchange constant).}  Content native to the
 discrete label set and graph: algebraic eigenvalues (the graph's matrix
 entries are rational), integer multiplicities, exact-rational
-Slater $F^k$ integrals on $S^3$.  $\pi$-free in arithmetic over
+single-centre Slater $F^k$ integrals (rational arithmetic over $\mathbb{Q}$).  $\pi$-free in arithmetic over
 $\mathbb{Q}$.
 
 \item \textbf{Intrinsic.}  Weyl constants $\pi^{d/2}$ fixed by a
@@ -1156,9 +1157,9 @@ sphere-volume quotient:\ $4/\pi = \text{Vol}(S^2)/\pi^2$ in the
 dual-Coxeter normalisation, twice the unit-radius quotient
 $\text{Vol}(S^2)/\text{Vol}(S^3) = 2/\pi$ (not the Hopf fibration's base-to-total ratio, corrected 2026-09-03).  It is one
 source of calibration-$\pi$ content in the Coulomb sector (M2
-supplies the $\pi^{2k}$ of the spectral action) and
-appears as the leading constant in the GeoVac state-space Gromov--Hausdorff convergence
-rate.
+supplies the $\pi^{2k}$ of the spectral action);\ the leading constant of
+the GeoVac state-space Gromov--Hausdorff rate shares its value (a reading,
+not a derivation, Paper~38).
 
 \item \textbf{M2 ($k = 2$).}  Standard Seeley--DeWitt expansion of
 $\mathrm{Tr}\,e^{-t D^2}$.  Its heat-kernel coefficients, via Jacobi
@@ -1180,9 +1181,9 @@ The master Mellin engine reading is that M1, M2, M3 are not three
 independent mechanisms but three sub-cases of the same Mellin
 transform on the GeoVac spectral triple, indexed by which power of the
 Dirac operator appears in the trace.  Each sub-mechanism has a
-characteristic domain of observable: M1 governs state-space Gromov--Hausdorff
-convergence rates and volume-slot
-normalizations, M2 governs
+characteristic domain of observable: M1 tags volume-slot
+normalizations (the GH-rate constant shares its value, a reading, not a
+derivation, Paper~38), M2 governs
 heat-kernel and spectral-action coefficients, and M3 governs
 vertex-restricted parity-character observables.  Mixing the operator
 order of the question with the operator order of the answer produces
@@ -1247,7 +1248,8 @@ only on the spherical-harmonic angular factorization.
 \item Composed scaling (Paper~14, group~4): the
 exactly $Q$-linear Pauli-term count of composed-geometry qubit
 encodings ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis)
-depends on the Gaunt selection rules.
+depends on the composed block decomposition and, within blocks, the
+Gaunt selection rules.
 \item Selection rules: $\Delta l = \pm 1$, $\Delta m = 0, \pm 1$ for
 dipole transitions; the $3j$-triangle inequality at every vertex of
 the two-body integral.

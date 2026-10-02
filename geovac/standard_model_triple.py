@@ -47,7 +47,10 @@ The inner fluctuation omega = sum a_i [D, b_i] decomposes into:
 PREDICTED VERDICT: POSITIVE-THIN
 =================================
 
-Construction works, SM gauge group recovered. BUT: Yukawa, hypercharge
+Construction works: the SM gauge group is recovered FROM THE IMPOSED A_F
+(an organizing reading plus the adopted Upgrade B axiom, not a derivation;
+the GV-side SU(2)_L identification was refuted by Sprint G3 -- the labels
+above are the finite-factor CCM labelling only). BUT: Yukawa, hypercharge
 assignments, chirality assignment, and generation count are imposed
 inputs (Paper 18 calibration tier), not GeoVac-derived. This is the
 G2-G3 corollary generalized: the framework is SM-consistent, not
