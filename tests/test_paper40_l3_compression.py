@@ -10,7 +10,9 @@ Sharpness: P -> 1 strongly, so the compressed norm tends to ||[D, M]||.
 What these tests reject:
   * "the bound holds for ANY projection" -- a projection NOT commuting with D
     can make ||[PDP, PMP]|| exceed ||[D, M]|| (test_hypothesis_is_load_bearing);
-  * "the identity [D_P, PMP] = P[D,M]P holds without [D,P] = 0";
+  * "the bound survives without [D,P] = 0" (rejected by exhibiting bound
+    failure; the identity [D_P, PMP] = P[D,M]P itself is not tested
+    separately, and no non-abelian group instance is computed);
   * "the constant can be lowered below 1 uniformly in the cutoff" -- on the
     circle (the simplest compact Lie group, D = -i d/dtheta, f = cos) the
     compressed norm climbs to ||f'||_inf = 1 (test_sharpness_on_circle).

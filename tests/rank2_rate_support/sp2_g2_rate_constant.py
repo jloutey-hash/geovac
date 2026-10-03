@@ -3,7 +3,8 @@
 Discriminator test between two competing conjectures for the leading constant
 c(G) in gamma_Lambda(G) ~ c(G) * log(Lambda) / Lambda on a compact Lie group G:
 
-  Conjecture A (rank-invariant): c(G) = 4/pi for every compact Lie group.
+  Conjecture A (rank-invariant): c(G) = 4/pi for every compact simple Lie group
+  (several simple factors: open, Paper 40 2026-10-02).
   Conjecture B (Weyl-formula):   c(G) = 2 |W(G)| / pi^rank(G).
 
 Both agree at SU(2) (|W|=2, rank=1): 4/pi. They differ at higher rank.

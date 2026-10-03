@@ -362,7 +362,10 @@ def discrete_fiber_volume(n_max: int) -> float:
 
 def discrete_base_area(n_max: int) -> float:
     """
-    Discrete approximation to the Hopf base area Vol(S²) = 4π.
+    Discrete approximation to the unit-sphere area Vol(S²) = 4π.
+
+    (The base points are projected onto the UNIT S²; the Hopf base of the
+    unit S³ is S²(1/2), of area π, so 4π is not the Hopf-base area.)
 
     Uses the convex hull solid angle of projected base points on S².
 

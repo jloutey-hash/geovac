@@ -1,15 +1,19 @@
 """Genuine backing for Paper 40's universal 4/pi rate constant.
 
 WHAT IS ROBUST (and tested here, DEFAULT-collected):
-  * rank-1 (SU(2)): the rate constant is 4/pi exactly -- the doubling
-    estimator of the closed-form sum-rule converges to 4/pi (production
-    code geovac.central_fejer_su2, also the Paper 38 keystone).
-  * general-G C_3 <= 1 (the L3 / Dirac-triangle keystone): for SU(3), Sp(2)
-    and G2, |D(lambda) - D(lambda')| <= sqrt(C(sigma)) for every sigma in
+  * rank-1 (SU(2)): the doubling estimator of the closed-form sum-rule
+    converges to 4/pi (production code geovac.central_fejer_su2; Paper 38's
+    rate constant, [INTERNAL THEOREM + MEASURED]).
+  * the general-G Dirac-triangle inequality (DT): for SU(3), Sp(2) and G2,
+    |D(lambda) - D(lambda')| <= sqrt(C(sigma)) for every sigma in
     lambda (x) lambda'^* across a reduced dominant-weight panel (fail_count = 0,
-    sup ratio < 1).  This is the general-rank content the universality rides on;
-    it was previously verified only by an UNCALLED driver on a pruning-scheduled
-    path (fixed v4.44.0 -- /qa group1 batch3 Flavor-B backfill).
+    sup ratio < 1).  (DT) is a representation-theoretic inequality; it is NOT
+    a check of the Lipschitz constant C_3 (= 1 by compression, Paper 40 Lemma
+    L3) and the 4/pi universality does not ride on it (an earlier header
+    called it "the L3 / Dirac-triangle keystone ... the content the
+    universality rides on"; withdrawn 2026-10-02).  It was previously
+    verified only by an UNCALLED driver on a pruning-scheduled path (fixed
+    v4.44.0 -- /qa group1 batch3 Flavor-B backfill).
   * rank-2 machinery correctness: the generic compact-Lie Weyl-integration
     used for SU(3)/Sp(2)/G2 integrates Haar to 1.0.
   * the A-over-B discrimination (G2, |W|=12): the extracted rate constant sits
@@ -40,7 +44,7 @@ import pytest
 # ---------------------------------------------------------------------------
 
 def test_su2_rate_constant_is_4_over_pi():
-    """SU(2) doubling estimator a_n -> 4/pi (the rigorous rank-1 case)."""
+    """SU(2) doubling estimator a_n -> 4/pi (the derived rank-1 case)."""
     from geovac.central_fejer_su2 import doubling_estimator
     import mpmath as mp
     target = 4 / mp.pi
@@ -135,7 +139,7 @@ def test_rank2_weyl_integration_haar_normalized(_rank2):
 
 @pytest.mark.slow
 def test_general_G_dirac_triangle_full_panel(_rank2):
-    """Comprehensive general-G C_3<=1 on the VALIDATED group-specific
+    """Comprehensive general-G Dirac-triangle inequality (DT; not a C_3 check) on the VALIDATED group-specific
     Casimir-appropriate panels (SU(3) p+q<=5, Sp(2) a+b<=3, G2 a+b<=2 -- the
     bounds the original driver validated ALL-PASS; G2 irreps grow fast, so its
     panel is the smallest).  fail_count = 0, sup ratio < 1 on each.

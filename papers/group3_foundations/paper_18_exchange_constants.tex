@@ -44,7 +44,10 @@ them with Weyl--Selberg exchange constants of spectral geometry.  The
 falsifiable claim: the transcendental content of any GeoVac
 observable is determined entirely by the type of projection
 linking the compact discrete description to the non-compact
-coordinate system.
+coordinate system (this strong, observable-indexed form is under
+strain from the H$_2$ dissociation energy and is not reconciled with
+the body's weaker, route-indexed Claim~4;\ see
+Sec.~\ref{sec:observable_classification}).
 
 Beyond the basis-level catalog, three theorems classify the
 spectral content of operators on round~$S^3$:
@@ -52,7 +55,8 @@ spectral content of operators on round~$S^3$:
 of transcendental class---the squared Dirac operator $D^2$ produces
 $\pi^{\mathrm{even}}$ exclusively at every integer~$s$, while the
 first-order Dirac operator~$D$ produces odd-zeta content
-$\zeta_R(2k{+}1) \perp \mathbb{Q}(\pi)$ at odd~$s$;
+$\zeta_R(2k{+}1)$ at odd~$s$ (conjecturally outside $\mathbb{Q}(\pi)$;\
+Ap\'ery proved only that $\zeta_R(3)$ is irrational);
 \textbf{(Theorem~2)} the full classification is three-axis,
 adding bundle type (scalar vs.\ spinor, modulating coefficients
 only) and diagram topology (free vs.\ vertex-restricted, introducing
@@ -60,8 +64,7 @@ Dirichlet $L$-values $G = \beta(2)$, $\beta(4)$ through the
 quarter-integer Hurwitz shift);
 \textbf{(Theorem~3)} the three components of the
 fine-structure-constant combination $K = \pi(B + F - \Delta)$ of
-Paper~2~\cite{loutey_paper2} have structurally independent
-spectral homes (finite Casimir trace, infinite Dirichlet series at
+Paper~2~\cite{loutey_paper2} have spectral homes of distinct type (finite Casimir trace, infinite Dirichlet series at
 the packing exponent, Dirac mode degeneracy on the spinor bundle),
 each in a distinct cell of the three-axis grid.  The combination
 rule---$K$ matches $\alpha^{-1}$ to $4.8\times10^{-7}$ relative, and
@@ -76,7 +79,8 @@ of the GeoVac zeta) resolve under structural analysis into objects
 from different cells of the three-axis grid.  No further unification
 is currently visible.  The taxonomy is read (a census and a reading,
 not a classification) in terms of Mellin transforms of heat kernels: the free heat kernel produces
-$\pi^{\mathrm{even}}$, the interaction-deformed kernel produces
+$\pi^{\mathrm{even}}$ in its integer-$s$ spectral-zeta values (for
+$\Delta_{\mathrm{LB}}$ and $D^2$), the interaction-deformed kernel produces
 $L$-content via vertex parity, and operator order determines whether
 the Mellin integrand samples squared or raw eigenvalues.
 The taxonomy is $R$-independent, persisting in the flat-space
@@ -117,7 +121,8 @@ compact-to-non-compact projection that produces them.  This yields a
 falsifiable structural claim: the transcendental content of any GeoVac
 observable is determined entirely by the type of projection linking
 the compact discrete description to the non-compact coordinate system
-(Claim~4, Sec.~\ref{sec:observable_classification}).
+(Claim~4, Sec.~\ref{sec:observable_classification};\ the body states
+a weaker, route-indexed form, and the two are not reconciled).
 
 The simplest instance is already visible in Paper~0's packing
 construction~\cite{loutey_paper0}.  Axiom~2 (geometric indifference)
@@ -1011,8 +1016,9 @@ integers, and the Euler--Bernoulli formula for $\zeta_R(2k)$ maps every
 term to $\text{rational} \times \pi^{2k}$.  This is the content of the
 T9 theorem (Paper~28, Theorem~1~\cite{loutey_paper28}):
 $\zeta_{D^2}(s)$ is a two-term polynomial in $\pi^2$ at every
-integer~$s$.  At integer $s$ no odd-zeta value can appear because the
-squaring operation has removed the odd-power structure from the Mellin
+integer~$s$.  At integer $s$ no odd-zeta value can appear because
+$\zeta_{D^2}(s) = D(2s)$ samples only even arguments:\ the squaring
+operation has removed the odd-power structure from the Mellin
 integrand;\ at half-integer $s \ge 5/2$ odd zeta values do appear
 (Paper~28).
 
@@ -1023,7 +1029,8 @@ both even and odd powers of the spectral parameter, and the parity
 discriminant (Paper~28, Theorem~2~\cite{loutey_paper28}) follows
 directly: at even~$s$, both constituent Hurwitz zeta terms are
 Bernoulli-type ($\pi^{\text{even}}$); at odd~$s$, both involve
-genuinely independent odd-zeta values.  The operator order---first
+odd-zeta values, conjecturally independent of $\pi$ (period
+conjecture).  The operator order---first
 versus second---determines whether the Mellin transform samples the
 raw spectrum or its square, and this single distinction generates the
 first axis of the three-axis classification.
@@ -1052,7 +1059,7 @@ perturbative expansion of this effect.  At each order $p$ in
 $(Z\alpha)^{2p}$, the coefficients $c_p(n)$ involve generalized
 harmonic numbers $H_{n-1}^{(r)}$, which are partial Euler sums that
 access the full Euler--Zagier multiple zeta value (MZV) algebra.  The
-free heat kernel produces only $\pi^{\text{even}}$ (Bernoulli); the
+free heat kernel produces only $\pi^{\text{even}}$ at integer $s$ (Bernoulli); the
 Coulomb interaction opens the door to odd-zeta values ($\zeta_R(3)$
 at $p = 2$, $\zeta_R(5)$ and $\zeta_R(7)$ at $p = 3$, and so on)
 and to products of zeta values at higher orders.
@@ -1064,7 +1071,7 @@ This maps directly onto the exchange constant taxonomy:
   \item \textbf{Calibration tier} ($\pi$, $\zeta_R(2)$;\ the matched
     $\kappa$ is rational and is not a Mellin output):
     Mellin transform of the \emph{free} heat kernel on the compact
-    manifold $\to$ $\pi^{\text{even}}$ exclusively.
+    manifold $\to$ $\pi^{\text{even}}$ exclusively at integer $s$.
   \item \textbf{Embedding tier} (cusp, $1/r_{12}$, Sommerfeld $D_p$):
     Mellin transform of the \emph{interaction-deformed} heat kernel
     $\to$ the full MZV algebra.
@@ -1257,7 +1264,7 @@ no asymptotic decay exists to PSLQ. The L2 scalar rate decay is in
 fact an integer$\times$half-integer interference effect; removing the
 integer-spin sector kills it. This is consistent with the M1 reading
 when the relevant sub-bundle lacks $\chi_0$, and its presence in the
-scalar case is what the rigorous $4/\pi$ asymptote records.
+scalar case is what the derived $4/\pi$ asymptote records.
 
 Sprint MR-C extracted the L2 next-order constant $c$ in
 $n \cdot \gamma_n^{\rm scalar} \sim (4/\pi)\log(n) + c + O(\log(n)/n)$
@@ -1299,7 +1306,7 @@ index of the mechanism (``vertex parity'') produces structural
 degeneracy: this is exactly what MR-A measured. MR-C's negative is
 consistent with the same reading: the L2 subleading constant is
 downstream (via a Stein--Weiss IBP) of the M1-read rate constant, not a direct
-$\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$, and the predictive
+$\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$, and the
 engine does not commit to the rings of derivative quantities along
 subsequent analytical pipelines. Within each domain the engine
 organizes the observed values (for $k = 0$ the GH-rate domain is itself
@@ -1331,7 +1338,8 @@ L2 state-space GH asymptote
 $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ of Paper~38 (Lemma~L2;\ dual-Coxeter,
 convention-dependent), and the $k = 0$ volume-slot normalization
 $\mathrm{Vol}(S^2)/4 = \pi$ of \S~III.2 are \textbf{[OBSERVATION]}
-sibling normalisations of the $M_1$ volume slot,
+read as normalisations of the $M_1$ volume slot (for the GH-rate entry a
+reading, not a derivation;\ Paper~38),
 linked in a chain by exact factors with no spectral-data input:\
 $\pi = (\pi^2/4)\cdot(4/\pi)$ and
 $\sqrt{\pi}/2 = (\pi^{3/2}/8)\cdot(4/\pi)$.  The M2 continuum panel at integer
@@ -1455,7 +1463,9 @@ the Mellin slot exponent at which it is probed:
     \S\,M3-diagonal-collapse Theorem on
     $M_3^{\gamma_P}$ closed form):
     closed form
-    $M_3^{\gamma_P}(s) = 2^{2s - 3}\,(\beta(2s - 1) - \beta(2s - 3))$,
+    $M_3^{\gamma_P}(s) = 2^{2s - 2}\,(\beta(2s - 1) - \beta(2s - 3))$
+    with $g_n = 2(n+1)(n+2)$ (the form $2^{2s-3}(\cdots)$ of Paper~55 is
+    the per-chirality multiplicity $(n+1)(n+2)$;\ corrected 2026-10-03),
     landing in $\bigoplus_k \pi^{2k+1}\cdot\mathbb{Q}$ via the
     Euler-number closed form
     $\beta(2k + 1) \in \pi^{2k + 1}\cdot\mathbb{Q}$.  This is
@@ -1493,7 +1503,10 @@ exponent.  Cross-reference Paper~55~\cite{loutey_paper55}
 \S\,M3-diagonal-collapse and \S\,M3-Galois-descent for the
 explicit pure-Tate vs.\ level-$4$ demonstration, including the
 NA-1 diagonal-collapse identity
-$J(s_1, s_2) = M_3^{\gamma_P}(s_1 + s_2 - 1)$ on the
+$J(s_1, s_2) = M_3^{\gamma_P}(s_1 + s_2 - 1)$ (in Paper~55's
+per-chirality normalisation $g_n = (n+1)(n+2)$ and $s$-convention;\ with
+this paper's $g_n = 2(n+1)(n+2)$ and $r$-convention it is
+$\tfrac12 M_3^{\gamma_P}(r = 2(s_1+s_2) - 3)$) on the
 Camporesi--Higuchi diagonal substrate.
 
 An identical operator-vs.-slot reading is available for M2 (the
@@ -1545,7 +1558,7 @@ selects which period ring element is accessed.
 The $4/\pi$ rate constant (dual-Coxeter normalisation; $2/\pi$ on the
 unit $S^3$) of the state-space Gromov--Hausdorff convergence of Paper~38
 (compact $SU(2)$ truncation), reported universal in Paper~40 (compact
-connected semisimple Lie groups with bi-invariant metric; rigorous at
+connected simple Lie groups with bi-invariant metric; derived at
 rank~1;\ a circle factor carries $2/\pi$), shares its value with the
 master Mellin engine's $M_1$ (volume slot) content --- a reading, not a
 derivation (Paper~38).  Sub-sprint M-Z (modular propinquity
@@ -1568,8 +1581,8 @@ direct identification of $\pi = \mathrm{Vol}(S^2)/4$ as a weight-$1$
 Tate period (Kontsevich--Zagier 2001).  Every M1 witness logged
 across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25;\ a quarter of the unit-sphere area $\mathrm{Vol}(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$)); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
 (Paper~38 §L2 asymptotic state-space GH rate;\ dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$;\ its M1 placement a reading); $4/\pi$ (Paper~40 Thm~1
-rate constant, reported universal across compact connected semisimple Lie
-groups, rigorous at rank~1); $1/\pi^2$ inside
+rate constant, reported universal across compact connected simple Lie
+groups, derived at rank~1); $1/\pi^2$ inside
 $-3\zeta(3)/(16\pi^2)$ (Paper~50 §3 F-theorem, an M1$\times$M3
 cross-product;\ a continuum Klebanov--Pufu--Safdi value that Paper~50
 re-derives, not a finite-cutoff GeoVac output) --- is a $\mathbb{Q}$-linear combination of $\pi^n$
@@ -1856,8 +1869,9 @@ constants carry even-zeta or $\pi^{\text{even}}$ content arising from
 second-order Riemannian operators through Jacobi-$\theta$ inversion;
 the odd-zeta $\zeta_R(3)$ enters through the first-order Dirac operator
 via half-integer Hurwitz-zeta identities at \emph{odd} $s$, and is
-$\mathbb{Q}$-linearly independent of $\zeta_R(2)$ by Ap\'ery's
-theorem.  Within Paper~2's $K = \pi(B + F - \Delta)$, the odd-zeta tier
+conjecturally $\mathbb{Q}$-linearly independent of $\zeta_R(2)$ (open:\
+Ap\'ery's theorem gives the irrationality of $\zeta_R(3)$, not its
+independence from $\pi^2$).  Within Paper~2's $K = \pi(B + F - \Delta)$, the odd-zeta tier
 is a byproduct rather than a summand: $\zeta_R(3)$ is structurally
 present on $S^3$ without participating in $K$.
 
@@ -1987,16 +2001,21 @@ decomposition
            - \tfrac{2^s - 1}{2}\,\zeta_R(s),
   \qquad s \in \mathbb{Z}_{\ge 2}.
 \end{equation}
-At even~$s$ both terms are $\pi^{\mathrm{even}}$; at odd $s \ge 3$
-the terms are $\mathbb{Q}$-linearly independent of $\pi$
-(Ap\'ery~1978 for $\zeta_R(3)$; Goncharov--Zagier framework for
-higher odd zetas).  In particular $D(4) = 6\zeta_R(2) - \tfrac{15}{2}\zeta_R(4)
+At even~$s$ both terms are $\pi^{\mathrm{even}}$; at odd $s \ge 5$
+(at $s = 3$ the $\zeta_R(1)$ pole makes $D(3)$ diverge) the terms are odd zeta values, conjecturally independent of $\pi$
+(the standard period conjecture;\ Ap\'ery~1978 proves only that
+$\zeta_R(3)$ is irrational, and Goncharov--Zagier frame the
+expectation).  In particular $D(4) = 6\zeta_R(2) - \tfrac{15}{2}\zeta_R(4)
 = \pi^2 - \pi^4/12$ is $\pi^{\mathrm{even}}$, while the first odd-zeta
 witness is $D(5) = 14\,\zeta_R(3) - \tfrac{31}{2}\zeta_R(5)$, carrying
-odd-zeta content not present in any value of $\zeta_{D^2}$.
+odd-zeta content not present in any integer-$s$ value of $\zeta_{D^2}$
+(since $\zeta_{D^2}(s) = D(2s)$, it is the half-integer value
+$\zeta_{D^2}(5/2)$).
 \end{enumerate}
 Operator order---first vs.\ second---is therefore the primary
-transcendental discriminant on round~$S^3$.  Bundle type modulates
+transcendental discriminant on round~$S^3$ (the separation of the two
+classes is conditional on the period conjecture, $\zeta_R(2k{+}1) \notin
+\mathbb{Q}(\pi)$).  Bundle type modulates
 degeneracies, eigenvalue lattices, and rational coefficients, but
 not the transcendental class.
 \end{theorem}
@@ -2011,8 +2030,9 @@ Eq.~(\ref{eq:zeta_d2}).  Bernoulli's formula $\zeta_R(2k) =
 \mathrm{rational} \times \pi^{2k}$ then closes the case.  For~(2):
 regrouping the same Camporesi--Higuchi sum without squaring keeps the
 half-integer shift, producing the Hurwitz combination of
-Eq.~(\ref{eq:hurwitz_discriminant}); squaring maps odd-power spectral
-sums to even-power sums, structurally eliminating the $\zeta_R(2k{+}1)$
+Eq.~(\ref{eq:hurwitz_discriminant}); at integer $s$ squaring maps
+odd-power spectral sums to even-power sums ($\zeta_{D^2}(5/2) = D(5)$
+keeps them), structurally eliminating the $\zeta_R(2k{+}1)$
 visible in the unsquared sum and reducing the (2nd-order,~spinor) cell
 to scalar calibration.  Computational verification:\ \texttt{tests/test\_qed\_vacuum\_polarization.py}
 checks Eq.~(\ref{eq:zeta_d2}) symbolically and against a direct
@@ -2030,8 +2050,10 @@ tiers:
   \item \textbf{First-order operators:} odd-zeta content
     ($\zeta_R(3), \zeta_R(5), \ldots$) plus spinor coupling content
     ($\alpha^2$, $\gamma$).
-  \item \textbf{Second-order operators:} $\pi^{\text{even}}$ exclusively,
-    on both scalar and spinor bundles.
+  \item \textbf{Second-order operators} ($\Delta_{\mathrm{LB}}$, $D^2$):
+    $\pi^{\text{even}}$ exclusively at integer $s$, on both scalar and
+    spinor bundles (not every second-order operator:\ $\nabla^*\nabla$
+    fails, Paper~28).
   \item \textbf{Basis and composition tiers:} embedding,
     algebraic-implicit, and composition constants
     (operator-independent).
@@ -2044,9 +2066,9 @@ $H^2(S^5)$, the Dirac operator on $S^3$) have $\pi$-free spectra
 in rational arithmetic.
 
 \paragraph{Motivic weight and operator order.}
-The operator-order discriminant---second-order operators produce
-$\pi^{\text{even}}$ content, first-order operators produce odd-zeta
-content---has a natural interpretation in the theory of mixed Tate
+The operator-order discriminant---the second-order operators
+$\Delta_{\mathrm{LB}}$ and $D^2$ produce $\pi^{\text{even}}$ at integer
+$s$, first-order operators produce odd-zeta content at odd $s \ge 5$---has a natural interpretation in the theory of mixed Tate
 motives over $\mathrm{Spec}(\mathbb{Z})$.  In this framework
 (Goncharov~\cite{goncharov1999}, Zagier~\cite{zagier1994}), the Riemann
 zeta value $\zeta_R(n)$ is a \emph{period} of the mixed Tate motive
@@ -2054,9 +2076,10 @@ $\mathfrak{M}(n) = \mathbb{Q}(-n)$ of weight~$n$.  Even zeta values
 $\zeta_R(2k) = \text{rational} \times \pi^{2k}$ are periods of motives
 that factor through the de~Rham cohomology of even-dimensional compact
 manifolds (the Bernoulli formula).  Odd zeta values $\zeta_R(2k{+}1)$
-are periods of genuinely independent motives: they do not reduce to
-powers of~$\pi$, and $\zeta_R(3)$ in particular is irrational (Ap\'ery
-1978) and conjectured algebraically independent from~$\pi$.
+are periods of motives expected (by the period conjecture) to be
+independent:\ they are expected not to reduce to powers of~$\pi$;\
+$\zeta_R(3)$ is proved irrational (Ap\'ery 1978) and conjectured
+algebraically independent from~$\pi$.
 
 The GeoVac operator-order discriminant maps onto this motivic
 partition:
@@ -2069,7 +2092,7 @@ partition:
     & even ($2k$) & $\zeta_R(2k) = \text{rat} \cdot \pi^{2k}$
     & $F = \zeta_R(2)$, $\mathrm{Vol}(S^3)$, $a_2$ \\
   1st ($D$)
-    & odd ($2k{+}1$) & $\zeta_R(2k{+}1) \perp \mathbb{Q}(\pi)$
+    & odd ($2k{+}1$) & $\zeta_R(2k{+}1)$ (conj.\ $\notin \mathbb{Q}(\pi)$)
     & D3: $\zeta_R(3)$ in Dirac Dirichlet \\
   \hline
 \end{tabular}
@@ -2083,21 +2106,32 @@ Eq.~\ref{eq:dirac_zeta3_witness}), hyperbolic 3-manifold volumes
 (Petermann~\cite{petermann1957}; Sommerfield~\cite{sommerfield1957}),
 and Chern--Simons theory / algebraic K-theory
 ($K_5(\mathbb{Z})$ regulator).  The common thread is~$S^3$ or its
-quotients.  Zagier's dimension conjecture~\cite{zagier1994} gives
-$d_3 = 1$: $\zeta_R(3)$ is the unique independent transcendental
+quotients.  Zagier's dimension conjecture~\cite{zagier1994} predicts
+$d_3 = 1$:\ $\zeta_R(3)$ would be the unique independent transcendental
 at weight~3, consistent with its single appearance in the GeoVac
 Dirac sector.
 
-The connection to QED loop order is structurally predicted by the
-motivic correspondence.  The T9 theorem
-(Eq.~\ref{eq:zeta_d2}) guarantees that $\zeta_R(3)$ cannot enter through
-any single trace of a squared propagator $D^{-2s}$---i.e., at one loop.
+\textbf{[OBSERVATION]} The connection to QED loop order is read (a
+reading, consistent with the known QED coefficients, not a derivation)
+from the motivic correspondence.  The T9 theorem
+(Eq.~\ref{eq:zeta_d2}) guarantees that a single trace of a squared
+propagator $D^{-2s}$ at integer $s$ lands in $\bigoplus_k \pi^{2k}\mathbb{Q}$, so
+$\zeta_R(3)$ cannot enter those values, granted the conjecture
+$\zeta_R(3) \notin \mathbb{Q}[\pi^2]$.  It does enter the one-loop
+\emph{determinant}:\ $\zeta'_{D^2}(0) = 3\zeta_R(3)/(4\pi^2) + \tfrac12\ln 2$ (twice the
+Klebanov--Pufu--Safdi free-fermion $F$;\ functional determinants on
+round spheres generally carry $\zeta(\mathrm{odd})$ and $\log 2$), so the
+statement below concerns integer-$s$ zeta values and the flat-space QED
+coefficients, not every one-loop quantity on $S^3$.
 It enters at two loops, where irreducible products of first-order
 propagators $D^{-1} \otimes D^{-1}$ produce odd motivic weight.  The
 operator-order discriminant thus determines the \emph{loop order} at
-which new transcendental content first appears: one loop accesses only
-even-weight motives ($\pi^{2k}$); two loops access odd-weight motives
-($\zeta_R(3)$, $\zeta_R(5)$, \ldots).
+which new transcendental content first appears, on this reading: one
+loop, in the integer-$s$ zeta values and the flat-space $a_e$
+coefficient, accesses only even-weight motives ($\pi^{2k}$); two loops access
+odd-weight motives ($\zeta_R(3)$, $\zeta_R(5)$, \ldots).  The QED
+coefficients were known before the reading was made, so their agreement
+is a consistency check, not a verified prediction.
 
 The even/odd Hurwitz spectral zeta of the first-order Dirac operator
 (Eq.~\ref{eq:hurwitz_discriminant} of Theorem~\ref{thm:operator_order})
@@ -2109,15 +2143,14 @@ odd-zeta witness on the CH spinor bundle is
 Eq.~\eqref{eq:dirac_zeta3_witness}: $D(5) = 14\,\zeta_R(3) -
 \tfrac{31}{2}\,\zeta_R(5)$.  At even~$s$ the spectral sum is purely
 $\pi^{\text{even}}$; at odd $s \ge 5$, the $\zeta_R(s{-}2)$ and
-$\zeta_R(s)$ terms are independently transcendental.  The QED vacuum
-polarization at one loop involves the Seeley--DeWitt coefficients
-$a_0$, $a_1$, $a_2$ of~$D^2$, which by
-Eq.~(\ref{eq:zeta_d2}) are purely $\pi^{\text{even}}$; the
+$\zeta_R(s)$ terms are conjecturally algebraically independent
+transcendentals (the transcendence of $\zeta(3)$ and the irrationality
+of $\zeta(5)$ are open).  The integer-$s$ spectral zeta values of $D^2$ are
+purely $\pi^{\text{even}}$ by Eq.~(\ref{eq:zeta_d2}); the
 Schwinger~\cite{schwinger1948} result $a_e^{(1)} = \alpha/(2\pi)$
-is a single power of~$\pi$, consistent with one-loop = even motivic
-weight.  At two loops, $\zeta_R(3)$ appears in the electron $g{-}2$
+carries no odd zeta value.  At two loops, $\zeta_R(3)$ appears in the electron $g{-}2$
 (Petermann~\cite{petermann1957}; Sommerfield~\cite{sommerfield1957}), consistent with
-the discriminant's prediction that odd-weight content requires
+the discriminant's reading that odd-weight content requires
 irreducible products of first-order propagators.
 
 This motivic interpretation refines the compactness thesis of
@@ -2152,25 +2185,28 @@ $D_{\text{even}} + D_{\text{odd}} = D(4) = \pi^2 - \pi^4/12$---the
 Dirichlet content is invisible without vertex restriction.  The
 mechanism is the Hurwitz quarter-shift: even-$n$ modes involve
 $\zeta(s, 3/4)$ and odd-$n$ modes $\zeta(s, 5/4)$, whose difference
-is $4^s \beta(s)$ (a Dirichlet $L$-value), while their sum reduces
-to Riemann zeta ($\pi^{\text{even}}$).
+is $4^s(1 - \beta(s))$ (exposing the Dirichlet $L$-value
+$\beta(s) = L(s, \chi_{-4})$), while their sum reduces
+to Riemann zeta ($\pi^{\text{even}}$ at even $s$).
 
 We promote this to a theorem.
 
 \begin{theorem}[Three-axis classification of $S^3$ spectral
 transcendentals]
 \label{thm:three_axis}
-The transcendental content of any spectral functional formed
-from the Camporesi--Higuchi Dirac operator $D$, the conformal
-scalar Laplacian $\Delta_{\mathrm{LB}}$, and a vertex coupling
-on round~$S^3$ is determined by three independent axes:
+The transcendental content of the integer-$s$ spectral-zeta values and
+vertex-restricted Dirichlet sums formed from the Camporesi--Higuchi
+Dirac operator $D$, the scalar Laplace--Beltrami operator $\Delta_{\mathrm{LB}}$ (spectrum $n^2 - 1$),
+and a vertex coupling on round~$S^3$ (determinants and half-integer $s$
+excluded) is determined by three independent axes:
 \begin{enumerate}
 \item[(A1)] \emph{Operator order} (first vs.\ second).
 By Theorem~\ref{thm:operator_order}, second-order operators
 ($\Delta_{\mathrm{LB}}$, $D^2$) produce $\pi^{\mathrm{even}}$
-content exclusively; first-order operators ($D$) produce odd-zeta
-content $\zeta_R(2k{+}1)$ that is $\mathbb{Q}$-linearly independent
-of $\pi$.
+spectral-zeta values exclusively at integer $s$ (half-integer $s$ and
+determinants excluded); first-order operators ($D$) produce odd-zeta
+content $\zeta_R(2k{+}1)$ at odd $s \ge 5$, conjecturally independent of
+$\pi$ (period conjecture).
 \item[(A2)] \emph{Bundle type} (scalar vs.\ spinor).
 Modulates rational coefficients, eigenvalue lattices, and
 degeneracies within the same transcendental class fixed by
@@ -2180,7 +2216,8 @@ cell is degenerate with scalar calibration.
 Vertex parity selection rules from $\gamma^\mu$ couplings
 ($n_1 + n_2 + n_\gamma$ odd) project the Dirichlet sum onto
 quarter-integer Hurwitz shifts $\zeta(s, 3/4)$, $\zeta(s, 5/4)$
-whose difference is $4^s \beta(s) = 4^s L(s, \chi_{-4})$.  This
+whose difference is $4^s(1 - \beta(s))$, exposing
+$\beta(s) = L(s, \chi_{-4})$.  This
 introduces Dirichlet $L$-values---Catalan's constant
 $G = \beta(2)$, $\beta(4)$, and higher---that are absent from
 unrestricted free-propagator sums.
@@ -2201,7 +2238,9 @@ $g_n^{\mathrm{Dirac}} = 2(n+1)(n+2)$ produces only rational
 coefficient shifts relative to the scalar $g_n^{\mathrm{scalar}} =
 (n+1)^2$ counterpart---both yield $\pi^{\mathrm{even}}$ at every
 integer~$s \ge 2$.  A3 follows from the Hurwitz quarter-shift
-identities $\zeta(s, 5/4) - \zeta(s, 3/4) = -4^s \beta(s)$ applied
+identities $\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$ and
+$\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$ (so
+$\zeta(s, 5/4) - \zeta(s, 3/4) = 4^s(\beta(s) - 1)$) applied
 to the vertex-parity-restricted sum, giving
 Eqs.~(\ref{eq:d_even4})--(\ref{eq:d_odd4}); the unrestricted sum is
 $D_{\mathrm{even}}(s) + D_{\mathrm{odd}}(s) = D(s)$, in which $G$
@@ -2321,11 +2360,12 @@ $(2/3)\,R^3 p_{\max}^3$, verifying the spectral-to-momentum
 correspondence.  The even/odd $s$-parity discriminant persists at
 every~$R$: $D(s_{\text{even}},R)/R^s$ is $\pi^{\text{even}}$;
 $D(s_{\text{odd}},R)/R^s$ contains odd-zeta.  The \emph{same}
-transcendental constants---$\zeta_R(3)$, $G$, $\beta(4)$---that
-appear in the $S^3$ spectral sums also appear in flat-space
-two-loop QED (Petermann~\cite{petermann1957};
-Sommerfield~\cite{sommerfield1957}), confirming that curvature
-modifies rational coefficients but not the transcendental class.
+odd zeta value $\zeta_R(3)$ that appears in the $S^3$ spectral sums
+also appears in flat-space two-loop QED (Petermann~\cite{petermann1957};
+Sommerfield~\cite{sommerfield1957});\ $G$ and $\beta(4)$ are $S^3$
+vertex-parity content and do not appear in the flat-space $a_e$ through
+three loops, so the overlap is $\zeta(\mathrm{odd})$ and
+$\pi^{\mathrm{even}}$ only.
 An honest limitation: matching the full Petermann--Sommerfield
 coefficient $a_2 = -197/144 + \pi^2/12 + 3\zeta_R(3)/4
 - \pi^2 \ln 2 / 2$ requires diagram-specific computation
@@ -2847,7 +2887,8 @@ for $\Delta$. We observe that the three terms appear to occupy
 three categorically distinct tiers of the exchange-constant
 taxonomy rather than specializing a single common generator. We
 summarize the four structural findings below; none of them alters
-the Observation-level status of Paper~2's cubic identity.
+the Observation-level status of Paper~2's cubic relation (an approximate
+relation, not an identity).
 
 \paragraph{1. A $\kappa$--$B$ identity from the Fock weight.}
 The Fock projection of the hydrogenic basis onto $S^3$ carries a
@@ -2918,7 +2959,7 @@ on the shell lattice (per-shell Casimir, state count, Laplacian
 eigenvalue, $l$-max weight) produces an exact hit at any integer
 $s$ in the range $[3, 12]$.
 
-\paragraph{3. Three independent spectral homes (Theorem 3).}
+\paragraph{3. Three spectral homes of distinct type (Theorem 3).}
 Combining the $\kappa$--$B$ identity (\ref{eq:kappa_B_identity})
 with the Dirichlet identity (\ref{eq:F_dirichlet}) and the
 Paper~2 canonical form
@@ -2926,12 +2967,14 @@ $1/\Delta = |\lambda_{n_{\max}}|\, N(n_{\max}{-}1)$, we promote the
 three-tier structure to a theorem; the additive combination rule
 itself remains an Observation.
 
-\begin{theorem}[Three independent spectral homes for $B$, $F$, $\Delta$]
+\begin{theorem}[Three spectral homes of distinct type for $B$, $F$, $\Delta$]
 \label{thm:k_decomposition}
 Let $B = 42$, $F = \pi^2/6$ and $\Delta = 1/40$ be the three
 ingredients of Paper~2's combination rule~\cite{loutey_paper2} (an
-Observation;\ Observation~\ref{obs:k_rule} below).  The three components have structurally independent
-spectral origins on the Fock-projected $S^3$ label set:
+Observation;\ Observation~\ref{obs:k_rule} below).  The three components have spectral origins of
+distinct type on the Fock-projected $S^3$ label set (distinct type, not
+a proof that no common generator exists;\ that is an empirical record,
+Paper~2):
 \begin{enumerate}
 \item[(B)] $B = \sum_{n=1}^{3} \sum_{l=0}^{n-1} (2l{+}1)\,l(l{+}1)
 = 42$ is a \emph{finite} Casimir trace of the scalar
@@ -2944,7 +2987,7 @@ algebraic class: transcendental, in $\mathbb{Q}\cdot\pi^2$.
 \item[($\Delta$)] $\Delta^{-1} = |\lambda_{n_{\max}}|\,
 N(n_{\max}{-}1) = 8 \cdot 5 = g_{n=3}^{\mathrm{Dirac}} = 40$ is the
 \emph{boundary} product at the truncation edge---equivalently the
-single-chirality Camporesi--Higuchi Dirac mode degeneracy at
+two-component (both-sign) Camporesi--Higuchi Dirac mode degeneracy $g_3^{\mathrm{Dirac}}$ at
 $n_{\mathrm{CH}} = 3$; algebraic class: rational, finite, on the
 \emph{spinor} bundle.
 \end{enumerate}
@@ -2992,11 +3035,11 @@ extension of Paper~30~\cite{loutey_paper30}, $K/\pi$ has the shape
 of a finite-cutoff spectral-action coefficient (matter trace +
 gauge-fiber zeta + Dirac boundary mode count), but the equality with
 $\alpha^{-1}$ is an empirical observation, not a theorem.
-The supertrace analysis on unit~$S^3$ (Paper~28~\cite{loutey_paper28},
-Sprint~2 Q-tracks) confirms that all three components are invisible
-to the perturbative Connes--Chamseddine asymptotic expansion---$K/\pi$
-lives in the non-perturbative sector if it lives in any
-spectral-action sector at all.
+None of the three components is a Seeley--DeWitt coefficient of the
+perturbative Connes--Chamseddine expansion (the T9 obstruction).  An
+earlier inference that $K/\pi$ therefore lives in the non-perturbative
+sector rested on a supertrace vanishing that is withdrawn (Note on the
+Seeley--DeWitt comparison, end of the paper).
 \end{observation}
 
 \paragraph{4. Negative results on candidate mechanisms.}
@@ -3476,7 +3519,7 @@ decomposes into:
 \end{enumerate}
 
 \textit{Heat kernel test.}  The Seeley--DeWitt coefficients on unit
-$S^3$ ($a_0 = 2\pi^2$, $a_1 = 2\pi^2$, $a_2 = \pi^2$) produce no
+$S^3$ (scalar Laplacian, $(4\pi)^{3/2}$-normalised:\ $a_0 = 2\pi^2$, $a_1 = 2\pi^2$, $a_2 = \pi^2$) produce no
 ratio matching $1/16$; neither does the Weyl counting function
 $N(\Lambda) \sim \Lambda^{3/2}/3$ or the spectral zeta.  The conformal
 coupling $c_3 = 1/8$ for $d=3$ numerically equals $1/\lambda_{\max}$,
@@ -3661,18 +3704,24 @@ On round~$S^3$, the squared Dirac operator $D^2$ has spectral zeta
 $\zeta_{D^2}(s) = 2^{2s-1}[\lambda(2s{-}2) - \lambda(2s)]$ which is
 a polynomial in~$\pi^2$ at every integer~$s \ge 2$
 (Eq.~\ref{eq:zeta_d2}); the first-order Dirac operator has
-spectral zeta containing odd-zeta content
-$\zeta_R(2k{+}1) \perp \mathbb{Q}(\pi)$ at odd~$s$
+spectral zeta containing odd-zeta content $\zeta_R(2k{+}1)$ at
+odd~$s$, conjecturally outside $\mathbb{Q}(\pi)$
 (Eq.~\ref{eq:hurwitz_discriminant}).  Operator order is the primary
-transcendental discriminant; bundle type modulates rational
-coefficients only.  Loop-order prediction (verified): no odd-zeta
-at one loop (Schwinger~\cite{schwinger1948}, $a_e^{(1)} = \alpha/2\pi$);
+transcendental discriminant (conditional on the period conjecture);
+bundle type modulates rational
+coefficients only.  Loop-order reading (consistent with the known
+coefficients, not a prediction made in advance): no odd zeta in the
+one-loop flat-space $a_e$ (Schwinger~\cite{schwinger1948},
+$a_e^{(1)} = \alpha/2\pi$) or in the integer-$s$ values of $\zeta_{D^2}$
+(the one-loop determinant $\zeta'_{D^2}(0)$ does carry $\zeta(3)$);
 $\zeta_R(3)$ at two loops (Petermann~\cite{petermann1957};
 Sommerfield~\cite{sommerfield1957}).
 
 \paragraph{Theorem 2 (three-axis classification).}
-The transcendental content of any spectral functional on round~$S^3$
-is determined by three independent axes:
+The transcendental content of the integer-$s$ spectral-zeta values on
+round~$S^3$ is determined by three independent axes (determinants and
+half-integer $s$ are outside the statement;\ the operator-order
+separation is conditional on the period conjecture):
 (A1)~operator order (1st vs.\ 2nd) via Theorem~\ref{thm:operator_order};
 (A2)~bundle type (scalar vs.\ spinor) modulating coefficients;
 (A3)~diagram topology (free vs.\ vertex-restricted) introducing
@@ -3681,9 +3730,9 @@ quarter-integer Hurwitz shift.  The taxonomy is $R$-independent:
 $D(s,R)/R^s$ is a structural invariant, and Weyl's law preserves the
 even/odd-$s$ discriminant in the flat-space limit.
 
-\paragraph{Theorem 3 (three independent spectral homes for $B$, $F$, $\Delta$).}
+\paragraph{Theorem 3 (three spectral homes of distinct type for $B$, $F$, $\Delta$).}
 The three components of Paper~2's $K = \pi(B + F - \Delta)$ have
-structurally independent spectral origins:
+spectral origins of distinct type:
 $B$ a finite Casimir trace on the scalar Laplacian at $n_{\max}=3$;
 $F = D_{n^2}(d_{\max}) = \zeta_R(2)$ an infinite Dirichlet series
 of Fock degeneracies at the packing exponent;
@@ -3751,20 +3800,23 @@ cusp (withdrawn 2026-09-14) nor a small-$Z$ graph-validity boundary [retracted 2
 (withdrawn 2026-09-25).  FCI basis invariance holds for either one-body
 operator and bears on neither reading.  See Paper~13, Sec.\ ``Conclusion.''
 
-\paragraph{Note added v2.26.1 (Seeley--DeWitt cancellation).}
-On unit $S^{3}$, the Seeley--DeWitt coefficient ratio
-$a_{k}^{D^{2}} / a_{k}^{\Delta_{\mathrm{LB}}} = 4 = \dim(S)$
-at every order $k$, where $S$ denotes the spinor bundle.  This ratio
-is exact: the asymptotic mode density of the Camporesi--Higuchi Dirac
-spectrum is $g_{n}^{\mathrm{Dirac}} \sim 4n^{2}$, four times the
-scalar density $n^{2}$, and the SD expansion depends only on this
-asymptotic density.  As a consequence, the perturbative
-Connes--Chamseddine supertrace
-$\mathrm{Str}[f(D^{2}/\Lambda^{2})] \equiv
- \mathrm{Tr}_{S}[f] - \tfrac{1}{4}\mathrm{Tr}_{D}[f]$
-vanishes identically in the asymptotic expansion.  The three
-ingredients of $K/\pi = B + F - \Delta$ are all invisible to the
-SD expansion: $B$ is a finite Casimir trace, $F$ is an arithmetic
+\paragraph{Note added v2.26.1 (Seeley--DeWitt comparison;\ corrected
+2026-10-02).}
+% [retracted 2026-10-02: sd-ratio-four] -- quoted withdrawn claim below
+An earlier version of this note stated that on unit $S^{3}$ the
+Seeley--DeWitt ratio of $D^{2}$ to $\Delta_{\mathrm{LB}}$ is
+$\dim(S)$ at every order, so that the perturbative Connes--Chamseddine
+supertrace vanishes identically in the asymptotic expansion.  That is
+withdrawn:\ the exact heat traces are
+$\mathrm{Tr}\,e^{-tD^{2}} = (\sqrt\pi/2)\,t^{-3/2} - (\sqrt\pi/4)\,t^{-1/2}$
+(Camporesi--Higuchi spectrum $\pm(n+\tfrac32)$ with multiplicity
+$(n+1)(n+2)$ each, up to exponentially small terms) and
+$\mathrm{Tr}\,e^{-t\Delta_{\mathrm{LB}}} = e^{t}(\sqrt\pi/4)\,t^{-3/2}$
+(every coefficient non-zero), so the coefficient ratio is $2$ at order
+$0$, $-1$ at order $1$ and $0$ beyond.  The mode densities fix only the
+leading coefficient.  What survives is that the three
+ingredients of $K/\pi = B + F - \Delta$ are not Seeley--DeWitt
+coefficients (the T9 obstruction, Paper~2): $B$ is a finite Casimir trace, $F$ is an arithmetic
 Dirichlet series, and $\Delta^{-1} = 40$ is the Dirac mode degeneracy
 $g_3^{\mathrm{Dirac}}$ at $n_{\mathrm{CH}} = 3$ (the Euler--Maclaurin
 upper boundary term of the mode-count sum is half of it, $20$;\
@@ -3773,9 +3825,9 @@ Paper~2).  The sign on $\Delta$ in the combination rule $K = \pi(B + F -
 derivation): $B$ and $F$ are
 scalar-sector (bosonic) quantities that enter with $(+)$, while
 $\Delta$ is a spinor-sector (fermionic) quantity that enters with
-$(-)$.  If it lives in any spectral-action sector at all, $K/\pi$ lives
-\emph{entirely} in the non-perturbative sector of the
-spectral-action supertrace on~$S^{3}$.
+$(-)$.  (The former conclusion that $K/\pi$ lives entirely in the
+non-perturbative sector of the supertrace rested on the withdrawn
+vanishing and is withdrawn with it.)
 
 \begin{acknowledgments}
 Computational implementation and documentation drafting were

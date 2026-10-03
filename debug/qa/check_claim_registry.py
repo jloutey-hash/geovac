@@ -242,6 +242,12 @@ def selftest() -> int:
                                "the GH rate constant shares its value with M1 (a reading, not a derivation)"),
         "p55-census-scope": ("all of GeoVac's transcendentals sit in mixed-Tate periods: the engine classification",
                              "every transcendental in the census of S^3 spectral data sits in mixed-Tate periods"),
+        "lipschitz-c3-compression": ("the joint Lipschitz comparison constant C_3^{(2)} \\le \\sqrt2 $ of the route",
+                                     "the joint Lipschitz comparison constant C_3^{(2)} = 1, by compression"),
+        "p39-state-space-not-propinquity": ("Paper~39 closes that gap in the tensor-product case",
+                                            "Paper~39 proves the tensor-product case at the state-space GH level"),
+        "p45-rates-spatial": ("Paper~45 propinquity proof gives the rate O(T/\\Nt)",
+                              "Paper~45 proves a degeneracy theorem; its spatial rate is the surviving statement"),
     }
     missing = set(R.CLAIMS) - set(probes) - {"pi-source-case-exhaustion"} | (set(probes) - set(R.CLAIMS))
     if missing - {"pi-source-case-exhaustion"}:

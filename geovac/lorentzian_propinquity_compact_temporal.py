@@ -51,7 +51,7 @@ in the K^+-restricted weak-form Lorentzian Latremoliere propinquity:*
 
 *as (n_max, N_t) -> (oo, oo), where C_3^joint <= 1 is the joint
 Lichnerowicz constant from Sub-sprint A (asymptotically tight -> 1^-)
-and gamma^joint = O(log n_max / n_max + 1/N_t) is the joint mass-
+and gamma^joint = O(log n_max / n_max + T log N_t / N_t) is the joint mass-
 concentration moment from Sub-sprint C.*
 
 The tunneling pair is
@@ -64,8 +64,8 @@ the operator level (L3a-1 finding + Sub-sprint C §6), so the K^+
 restriction is well-defined.
 
 The Riemannian-limit recovery at N_t = 1: the K^+-restricted bound
-reduces bit-exactly to Paper 38's SU(2) propinquity bound at every
-n_max.  This is the load-bearing falsifier.
+reduces bit-exactly to Paper 38's SU(2) state-space GH bound at every
+n_max (Paper 38 proves state-space GH, not propinquity).  This is the load-bearing falsifier.
 
 Honest scope (load-bearing for any math.OA reviewer)
 ====================================================
@@ -110,8 +110,9 @@ References
   Latremoliere, "The Gromov-Hausdorff propinquity for metric spectral
   triples," Trans. AMS 368 (2016) 365-411; arXiv:1811.10843.
 
-  Loutey, J. "GeoVac Paper 38: SU(2) propinquity convergence on the
-  Camporesi-Higuchi spectral triple," Zenodo 2026.
+  Loutey, J. "GeoVac Paper 38: State-space Gromov-Hausdorff convergence of
+  truncated Camporesi-Higuchi spectral triples on S^3" (state-space GH,
+  not propinquity), Zenodo 2026.
 
   Loutey, J. "GeoVac Paper 43: Lorentzian extension of the four-witness
   Wick-rotation theorem," Zenodo 2026.
@@ -410,8 +411,8 @@ class LorentzianTunnelingPair:
         """Verify the bit-exact Riemannian-limit recovery at N_t = 1.
 
         Per memo §5 Lemma 5.1: at N_t = 1 the K^+-restricted weak-form
-        propinquity bound reduces bit-exactly to Paper 38's SU(2)
-        propinquity bound at every n_max.
+        bound reduces bit-exactly to Paper 38's SU(2) state-space GH
+        bound at every n_max (not a propinquity bound).
 
         Mechanism:
           - U(1) Fejer kernel collapses to uniform Haar at N_t=1, with
@@ -836,7 +837,7 @@ def lorentzian_theorem_statement() -> str:
         "What SURVIVES (signature-agnostic, NOT a Lorentzian claim): the "
         "product-carrier S^3 x S^1 truncations converge to the continuum in "
         "van Suijlekom STATE-SPACE Gromov-Hausdorff distance at the additive "
-        "rate gamma_SU(2) + gamma_U(1) = O(log n_max / n_max + T/N_t), the "
+        "rate gamma_SU(2) + gamma_U(1) = O(log n_max / n_max + T log N_t / N_t), the "
         "SU(2) factor's leading constant being 4/pi (Paper 38 L2 Stein-Weiss); "
         "this is a Euclidean product-carrier statement, and reduces to "
         "Paper 38's Riemannian SU(2) state-space GH bit-exactly at N_t = 1.\n\n"

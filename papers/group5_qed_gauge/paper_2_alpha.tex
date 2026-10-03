@@ -408,7 +408,9 @@ a shape-level structural hint, not a derivation.
 $K = \pi(B + F - \Delta)$ has a cleaner reading: in the
 Connes--Chamseddine spectral-action framework, the
 \emph{supertrace} $\mathrm{Str} = \mathrm{Tr}_{S} - \mathrm{Tr}_{D}/4$
-assigns opposite signs to bosonic (scalar Laplace--Beltrami) and
+(the $1/4$ is a leading-order normalisation only;\ at the exact $S^3$
+traces the bracket does not cancel beyond order zero, Paper~18, and the
+sign reading below does not depend on it) assigns opposite signs to bosonic (scalar Laplace--Beltrami) and
 fermionic (Dirac) contributions via the standard $(-1)^{F}$ grading.
 $B$ and $F$ are both scalar-sector objects (finite Casimir trace and
 Fock-degeneracy Dirichlet series, respectively) and enter with~$(+)$.
@@ -673,10 +675,11 @@ factorizes as a mixture of two homogeneity classes,
 \end{equation}
 and at $s = 4$ the $m^2$ subchannel produces $2\zeta(2) = 2F$ (the
 scalar F content) while the $m$ subchannel produces $2\zeta(3)$ (a
-channel absent from the scalar degeneracy). By Apéry's theorem and
-standard zeta-independence results, $\zeta_R(2)$ and $\zeta_R(3)$ are
-$\mathbb{Q}$-linearly independent, so no rational combination of
-Dirac-sector Dirichlet series collapses to a rational multiple of $F$.
+channel absent from the scalar degeneracy). $\zeta_R(2)$ and
+$\zeta_R(3)$ are conjecturally $\mathbb{Q}$-linearly independent (open:\
+Apéry's theorem gives only the irrationality of $\zeta_R(3)$);\ granting
+that, no rational combination of Dirac-sector Dirichlet series collapses
+to a rational multiple of $F$.
 The only way to isolate $F$ from the Dirac Dirichlet series is to
 subtract the $2\zeta(3)$ channel by hand, which is equivalent to
 projecting onto the $m^2$ sub-weight, i.e.\ returning to the scalar
@@ -791,18 +794,21 @@ Structurally, $\zeta(3)$ has the following features within the
 framework:
 
 \begin{itemize}
-  \item It is transcendental of unknown arithmetic type (Apéry 1978
-    proved irrationality; algebraic independence from $\pi$ is open).
-  \item It is not reachable from any scalar Laplace--Beltrami spectral
-    construction on odd-dimensional spheres, as established in Phase~4E
-    track~$\alpha$-I: round-sphere spectral invariants produce
+  \item It is irrational (Apéry 1978);\ its transcendence and its
+    algebraic independence from $\pi$ are open.
+  \item It is not reachable as an additive term alongside a rational
+    from scalar Laplace--Beltrami spectral constructions on
+    odd-dimensional spheres, as found in Phase~4E track~$\alpha$-I:
+    round-sphere spectral invariants produce
     integer powers of $\pi$ in volumes, pure rationals in Seeley--DeWitt
     coefficients and heat-kernel expansions, and $\zeta_{R}(\text{odd})
     + \log 2$ in spectral determinants, but $\pi^{2}$ and $\zeta(3)$
     never appear \emph{additively alongside a rational}.
-  \item It appears for the first time in the framework in
-    Eq.~(\ref{eq:D_dirac_zeta3}) as the weight-$m$ subchannel of a
-    first-order spectral operator at the packing exponent.
+  \item It first appears additively alongside $\pi^2$ (i.e.\ alongside $F$) in the framework in
+    Eq.~(\ref{eq:D_dirac_zeta3}) as the weight-$m$ subchannel of the
+    Dirac degeneracy series in the integer Fock label $m$ at the packing
+    exponent (the Camporesi--Higuchi series $D(4)$ carries no $\zeta(3)$;\
+    it first appears at $D(5)$).
 \end{itemize}
 
 This suggests — and we flag for future work — that the Paper~18
@@ -839,23 +845,19 @@ natural stopping point. The program has achieved:
   \item Identification of $\zeta(3)$ as a new framework transcendental
     in the Dirac sector, distinct from the Riemann-zeta-at-even-integer
     content of the scalar sector.
-  \item The Seeley--DeWitt cancellation theorem (supertrace sprint,
-    2026): on unit $S^{3}$, the asymptotic Dirac mode density is
-    $g_{n}^{\mathrm{Dirac}} \sim 4n^{2}$ while the scalar density is
-    $g_{n}^{\mathrm{scalar}} = n^{2}$, giving a universal ratio
-    $a_{k}^{D^{2}} / a_{k}^{\Delta_{\mathrm{LB}}} = 4 = \dim(S)$
-    at every Seeley--DeWitt order $k$, where $S$ is the spinor bundle.
-    The perturbative Connes--Chamseddine supertrace
-    $\mathrm{Str}[f(D^{2}/\Lambda^{2})]$ therefore vanishes identically
-    in the asymptotic expansion.  All three ingredients of
-    $K/\pi = B + F - \Delta$ are invisible to the perturbative spectral
-    action: $B$ is a finite Casimir trace, $F$ is an arithmetic
+  \item The three ingredients of $K/\pi = B + F - \Delta$ are not
+    Seeley--DeWitt coefficients of the perturbative spectral action
+    (the T9 obstruction): $B$ is a finite Casimir trace, $F$ is an arithmetic
     Dirichlet series, and $\Delta$ is a Dirac mode-count boundary quantity
     ($\Delta^{-1} = g_3^{\mathrm{Dirac}}$, twice the Euler--Maclaurin
-    boundary term).
-    If it lives in any spectral-action sector at all, $K/\pi$ lives
-    \emph{entirely} in the non-perturbative sector of the
-    spectral-action supertrace.
+    boundary term).  (An earlier ``Seeley--DeWitt cancellation
+    theorem'' --- a coefficient ratio of $\dim(S)$ at every order and a
+    vanishing perturbative supertrace --- is withdrawn, 2026-10-02:\ the
+    exact $S^3$ heat traces give ratios $2$, $-1$, $0,\ldots$;\ Paper~18,
+    Note on the Seeley--DeWitt comparison.  The conclusion that $K/\pi$
+    lives entirely in the non-perturbative sector rested on it and is
+    withdrawn with it.)
+% [retracted 2026-10-02: sd-ratio-four]
 \end{enumerate}
 
 The program has \emph{not} achieved a derivation of Eq.~(\ref{eq:K})
@@ -1162,7 +1164,10 @@ cubic $2\Lambda^3 - \Lambda = 4(K/\pi)/\sqrt{\pi}$ with Cardano
 closed form
 $\Lambda = \sqrt[3]{A + \sqrt{A^2 - 1/216}}
 + \sqrt[3]{A - \sqrt{A^2 - 1/216}}$,
-$A = 2(B + F - \Delta)/\sqrt{\pi}$, yielding
+$A = (B + F - \Delta)/\sqrt{\pi}$ (half the right-hand side of the
+monic form $\Lambda^3 - \Lambda/2 = 2(B+F-\Delta)/\sqrt{\pi}$;\ an earlier
+version printed $2(B+F-\Delta)/\sqrt{\pi}$, a typo that did not enter the
+value below), yielding
 $\Lambda_\infty = 3.710245\ldots$ (50~dps).
 A sharp cutoff at this~$\Lambda$ includes exactly
 $40 = \Delta^{-1}$~modes, connecting the spectral action to the

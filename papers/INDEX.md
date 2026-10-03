@@ -77,7 +77,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 32 `paper_32_spectral_triple.tex` | **KEYSTONE** | The GeoVac spectral triple; Connes axiom audit; §VIII case-exhaustion [CONDITIONAL; converse withdrawn] + non-selection results (proof-by-argument) |
 | 38 `paper_38_su2_propinquity_convergence.tex` | **KEYSTONE** | **Unconditional** state-space GH convergence of the true-window truncations (commutative factor; 2026-06-10); displayed rate (4/π)·log n/n in the dual-Coxeter normalisation (2/π on the unit S³) is [INTERNAL THEOREM + MEASURED] |
 | 39 `paper_39_tensor_propinquity_convergence.tex` | ACTIVE | Tensor-product convergence (two focal lengths) |
-| 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate reported universal across compact connected semisimple Lie groups -- rigorous at rank 1, rank ≥ 2 panel-corroborated, general G conditional on the spin-window decomposition (retitled 2026-09-02; a circle factor carries 2/π) |
+| 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate reported universal across compact connected simple Lie groups -- derived at rank 1, rank ≥ 2 panel-corroborated, general G conditional on the spin-window decomposition (retitled 2026-09-02; a circle factor carries 2/π) |
 | 42 `paper_42_modular_hamiltonian_four_witness.tex` | ACTIVE | Tomita–Takesaki modular structure on truncated SU(2): finite 2π period closure, automatic for the posited integer-spectrum generator (no finite-cutoff four-witness identification; O0 open). §11 = Krein (3,1) carrier extension, absorbed from the archived Paper 43 |
 | 43 `paper_43_lorentzian_extension.tex` | **ARCHIVED 2026-09-28** | Tombstone. Krein (3,1) carrier extension, absorbed into **Paper 42 §11** (`sec:lorentzian_closure`). Both headlines withdrawn (finite period closure automatic; its 1/π² is the posited β = 2π/κ_g squared). See the Archive table below and `docs/retired_papers.md`. |
 | 44 `paper_44_lorentzian_operator_system.tex` | ACTIVE | Lorentzian operator-system substrate; prop = 2 |
@@ -119,7 +119,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 |:------|:------:|:----------|
 | 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α to 4.8×10⁻⁷ (the cubic's root to 8.8×10⁻⁸); combination rule labeled an **Observation**, never derived (12 mechanisms eliminated) |
 | 25 `paper_25_hopf_gauge_structure.tex` | OBSERVATION | Hopf graph as discrete lattice-gauge structure |
-| 28 `paper_28_qed_s3.tex` | ACTIVE | QED on S³: 5 theorems; S_min irreducible at 200 digits |
+| 28 `paper_28_qed_s3.tex` | ACTIVE | QED on S³: 5 theorems; S_min identified in closed form (the earlier 'irreducible at 200 digits' was a basis-coverage artifact) |
 | 30 `paper_30_su2_wilson.tex` | ACTIVE | SU(2) Wilson gauge on S³ = SU(2); Paper 25 is its maximal torus |
 | 33 `paper_33_qed_selection_rules.tex` | OBSERVATION | 1+6+1 partition of QED selection rules |
 | 36 `paper_36_bound_state_qed.tex` | ACTIVE | Hydrogen Lamb shift at −0.534% at one loop, no fits; two-loop wall named |

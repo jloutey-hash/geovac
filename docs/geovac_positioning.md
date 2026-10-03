@@ -6,17 +6,15 @@ GeoVac is a discretization framework that exploits the natural geometry of quant
 
 ## The Headline Numbers
 
-Head-to-head Pauli term counts, GeoVac composed encoding vs Gaussian Jordan-Wigner:
-
-| System | GeoVac Q | GeoVac Pauli | Gaussian basis | Gaussian Pauli | Advantage |
-|--------|:---:|:---:|--------|:---:|:---:|
-| He | 10 | 118 | cc-pVDZ (10 qubits) | 156 | 1.3× |
-| He | 28 | 2,659 | cc-pVTZ (28 qubits) | 21,607 | 8.1× |
-| LiH | 30 | 334 | Trenev et al. | 17,065 | 51× |
-| BeH₂ | 50 | 556 | Trenev et al. | 256,000 | 460× |
-| H₂O | 70 | 778 | Trenev et al. | 1.33M | 1,712× |
-
-30 molecules tested (3 periodic table rows + multi-center + transition metals). Universal scaling: N_Pauli = 11.11 × Q across all composed systems. Gaussian Jordan-Wigner scaling is Q^3.9-4.3.
+**Figures withdrawn 2026-10-02 (/qa trunk DELTA #26).** The table that stood
+here (LiH 334, BeH₂ 556, H₂O 778 Pauli terms; "N_Pauli = 11.11 × Q"; He
+counts) was measured under the retired pair-diagonal ERI rule (a wrong-sign
+bug, corrected 2026-08-29) and before the He one-body hop was removed
+(2026-09-25). Current values live in Paper 14 (authoritative) and the numeric
+registry (`composed_coeff`, `lih_composed_pauli`, `lih_sto3g_raw`,
+`lih_ccpvdz_pauli`, `lih_composed_lambda`). Under the exact rule the Pauli
+count is exactly linear in Q across molecules, composed LiH is near parity
+with STO-3G on raw counts, and the decisive reduction is against cc-pVDZ.
 
 ## Why It's Sparse
 
@@ -26,27 +24,21 @@ GeoVac's composed architecture assigns each electron group (core pair, bond pair
 
 ### Near-term / VQE
 
-For variational algorithms on near-term hardware, the dominant cost is the measurement budget: the number of distinct Pauli terms times the number of shots per term. GeoVac's 190x-720x reduction in Pauli terms translates directly to a proportional reduction in total measurements. This advantage is complementary to measurement optimization techniques (qubit-wise commuting grouping, classical shadows, derandomization) -- GeoVac reduces the number of terms those techniques have to work with.
+For variational algorithms on near-term hardware, the dominant cost is the measurement budget: the number of distinct Pauli terms times the number of shots per term. GeoVac's reduction in Pauli terms (values: Paper 14) translates directly to a proportional reduction in total measurements. This advantage is complementary to measurement optimization techniques (qubit-wise commuting grouping, classical shadows, derandomization) -- GeoVac reduces the number of terms those techniques have to work with.
 
 Note on comparisons: density fitting (DF) and tensor hypercontraction (THC) are powerful Gaussian-basis compression techniques, but they target block-encoding representations for fault-tolerant algorithms. They do not reduce the number of Pauli terms in a Jordan-Wigner Hamiltonian. GeoVac's Pauli term advantage is against raw Jordan-Wigner encoding, which is the representation used by VQE and other near-term variational methods.
 
-1-norm data (relevant for shot budgets and Trotter bounds):
-- He at Q=10: 11.29 Ha (vs Gaussian cc-pVDZ 42.95 Ha, 3.8x advantage)
-- He at Q=28: 78.36 Ha (vs Gaussian cc-pVTZ 530.47 Ha, 6.8x advantage)
-- He atomic 1-norm scaling: Q^1.69
-- LiH at Q=30: 33.26 Ha (electronic-only; PK classical correction: +4.08 Ha)
-- BeH2 at Q=50: 354.89 Ha
-- H2O at Q=70: 361 Ha (electronic-only; PK classical correction resolves the 28,053 Ha total)
+1-norm data (relevant for shot budgets and Trotter bounds): see Paper 14 and the numeric registry (the per-system 1-norms once listed here predate the 2026-08-29 exact rule and the 2026-09-25 He correction).
 
 ### Fault-tolerant / QPE
 
-GeoVac's 1-norm scaling (Q^1.69 for atoms) and commutator-based Trotter bounds (Q^1.47, 7x fewer Trotter steps at Q=60) suggest competitive resource estimates for fault-tolerant quantum phase estimation. However, block-encoding circuits for the GeoVac Hamiltonian structure have not yet been built. This is a concrete collaboration opportunity: the composed block-diagonal structure should map naturally to LCU or QROM encodings, but the circuit construction and resource estimation remain open.
+GeoVac's 1-norm scaling and commutator-based Trotter bounds (exponents in Paper 14; the figures once quoted here predate the 2026-08-29 exact rule) suggest competitive resource estimates for fault-tolerant quantum phase estimation. However, block-encoding circuits for the GeoVac Hamiltonian structure have not yet been built. This is a concrete collaboration opportunity: the composed block-diagonal structure should map naturally to LCU or QROM encodings, but the circuit construction and resource estimation remain open.
 
 ## Honest Limitations
 
 GeoVac's classical accuracy is substantially below production quantum chemistry. The best classical results are H2 at 99.97% dissociation energy (explicit-r12 CI in prolate coordinates, Paper 12), LiH equilibrium bond length at 5.3% error, BeH2 at 11.7%, and H2O at 19.4% -- compared to sub-0.1% for Gaussian methods with correlating basis sets. For atoms, the 2D variational solver reaches 0.022% for He (variational), and a Schwartz cusp extrapolation 0.004% (non-variational, marginally below exact; zero free parameters). The framework's library covers 35 composed molecules across 3 periodic table rows. The value proposition is structural sparsity for quantum simulation, not classical accuracy.
 
-Note on H2O 1-norm: The Phillips-Kleinman pseudopotential (PK) is a one-body operator whose energy contribution can be computed classically from the 1-RDM measured during VQE, with zero additional quantum circuits. This quantum-classical partitioning (v2.0.29) reduces the H2O quantum Hamiltonian 1-norm from 28,053 Ha to 361 Ha (78x reduction), with no approximation. The partitioned 1-norms across all composed systems are comparable: LiH 33 Ha, BeH2 355 Ha, H2O 361 Ha.
+Note on H2O 1-norm: The Phillips-Kleinman pseudopotential (PK) is a one-body operator whose energy contribution can be computed classically from the 1-RDM measured during VQE, with zero additional quantum circuits. This quantum-classical partitioning (v2.0.29) removes the PK contribution from the quantum 1-norm with no approximation. Current partitioned 1-norms: Paper 14/20 and the numeric registry (the per-system figures once quoted here predate the 2026-08-29 exact rule).
 
 ## Try It
 
@@ -56,7 +48,7 @@ pip install "geovac-hamiltonians @ git+https://github.com/jloutey-hash/geovac.gi
 
 ```python
 from geovac_hamiltonians import hamiltonian
-H = hamiltonian("LiH")  # 334 Pauli terms, 30 qubits
+H = hamiltonian("LiH")  # 30 qubits; Pauli count: Paper 14
 print(f"{H.n_terms} Pauli terms, {H.n_qubits} qubits")
 qiskit_op = H.to_qiskit()  # SparsePauliOp for VQE
 ```

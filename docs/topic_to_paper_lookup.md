@@ -79,9 +79,9 @@
 | Bond sphere theory | 8-9 | All | Core |
 | Sturmian structural theorem | 8-9 | Sec IV | Core |
 | SO(4) selection rules | 8-9 | Sec III | Core |
-| Fine structure alpha (Hopf bundle) | 2 | Sec 3-5 | Conjecture |
-| Hopf fibration spectral invariants | 2 | Sec 3 | Conjecture |
-| Cubic self-consistency (alpha) | 2 | Sec 4 | Conjecture |
+| Fine structure alpha (Hopf bundle) | 2 | Sec 3-5 | Observation |
+| Hopf fibration spectral invariants | 2 | Sec 3 | Observation |
+| Cubic self-consistency (alpha) | 2 | Sec 4 | Observation |
 | Spectral dimension d_s | 3 | Sec 4 | Conjecture |
 | Holographic entropy S | 3 | Sec 5 | Conjecture |
 | Central charge c | 3 | Sec 6 | Conjecture |
@@ -115,7 +115,7 @@
 | Multi-center molecules | 14, 20 | — | Core |
 | Multi-center isostructural invariance | 14 | — | Core |
 | Nuclear scaling (Pauli vs atoms) | 14, 20 | — | Core |
-| Composed linear scaling law (11.11×Q) | 14 | — | Core |
+| Composed linear scaling law (exactly linear in Q; registry `composed_coeff`) | 14 | — | Core |
 | 6j recoupling sparsity | 14 | Sec III.D | Core |
 | Nested hyperspherical encoding | 14 | Sec IV.M | Core |
 | Composed factorization necessity (nested validation) | 17 | Sec VIII.C | Core |
@@ -127,7 +127,7 @@
 | S³ proof chain (synthesis) | 21 | Sec III | Synthesis |
 | N-electron S^(3N-1) (synthesis) | 21 | Sec IV | Synthesis |
 | Exchange constant taxonomy (synthesis) | 21 | Sec V | Synthesis |
-| Hopf α conjecture (synthesis) | 21 | Sec VI | Synthesis |
+| Hopf α observation (synthesis; archived Paper 21) | 21 | Sec VI | Synthesis |
 | Atomic spectra research program | 21 | Sec VII | Synthesis |
 | Graph-native CI (He) | 7, 13, 18 | Note added v2.6.0 | Core |
 | FCI basis invariance | 7, 13, 18 | Note added v2.6.0 | Core |
@@ -183,16 +183,16 @@
 | DUCC downfolding (core potential) | 17, 18 | — | Core |
 | PK l_max divergence root cause | 17, 18 | — | Core |
 | Energy graph for V_ee on S³ (characterization) | 18 | Note added v2.9.1 | Core |
-| Dirac-on-S³ infrastructure (Camporesi-Higuchi spectrum, spinor harmonics) | 2 (§IV rewrite), 23 | — | Conjecture/Applications |
-| Camporesi-Higuchi spectrum on S³ | 2, 23 | §IV | Conjecture |
-| Spinor spherical harmonics on S³ | 2 | §IV | Conjecture |
-| π-free certificate for Dirac-on-S³ | 2 | §IV | Conjecture |
-| Orduz Hopf-equivariant Dirac decomposition | 2 | §IV | Conjecture |
-| 20⊕20 charge-parity split of Δ⁻¹ | 2 | §IV | Conjecture |
-| ζ(3) in the Dirac sector at s = d_max | 2 | §IV.5 (new) | Conjecture |
-| Odd-zeta vs even-zeta content (spinor vs scalar Laplacian) | 2 | §IV.5 | Conjecture |
-| Three-homes theorem for B, F, Δ | 2 | §IV.1 (new) | Conjecture |
-| Cross-sector structural coincidence (K combination rule) | 2 | §IV.6 | Conjecture |
+| Dirac-on-S³ infrastructure (Camporesi-Higuchi spectrum, spinor harmonics) | 2 (§IV rewrite), 23 | — | Observation/Applications |
+| Camporesi-Higuchi spectrum on S³ | 2, 23 | §IV | Observation |
+| Spinor spherical harmonics on S³ | 2 | §IV | Observation |
+| π-free certificate for Dirac-on-S³ | 2 | §IV | Observation |
+| Orduz Hopf-equivariant Dirac decomposition | 2 | §IV | Observation |
+| 20⊕20 charge-parity split of Δ⁻¹ | 2 | §IV | Observation |
+| ζ(3) in the Dirac sector at s = d_max | 2 | §IV.5 (new) | Observation |
+| Odd-zeta vs even-zeta content (spinor vs scalar Laplacian) | 2 | §IV.5 | Observation |
+| Three-homes theorem for B, F, Δ | 2 | §IV.1 (new) | Observation |
+| Cross-sector structural coincidence (K combination rule) | 2 | §IV.6 | Observation |
 | Dirac Fock rigidity (deferred) | 23 | — | Applications |
 | First-order vs second-order spectral operators (π content) | 24 | §IV-V | Core |
 | Spinor composed encoding (Tier 2) | 14 | §V (new) | Core |
@@ -222,9 +222,9 @@
 | Operator-order transcendental discriminant | 18, 24 | §IV, §V | Core |
 | Dirac fine-structure formula | 14 | §V | Core |
 | Kramers-Pasternak direct integration | 14, 18 | §V, §IV | Core |
-| One-loop QED vacuum polarization on S³ | 18 | §IV (new) | Core |
+| Vacuum polarization Π = 1/(48π²) (standard flat-space value, entered; not from S³ data) | 28 | §One-Loop Vacuum Structure | Core |
 | Seeley-DeWitt heat kernel coefficients | 18 | §IV | Core |
-| QED beta function from spectral data | 18 | §IV | Core |
+| QED beta function (standard flat-space value, entered; not from S³ spectral data) | 28 | §V | Core |
 | Motivic weight and operator order | 18 | §IV (new) | Core |
 | ζ(3) as period of Q(−3) | 18 | §IV | Core |
 | Zagier dimension conjecture | 18 | §IV | Core |

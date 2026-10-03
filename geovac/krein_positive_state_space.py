@@ -36,7 +36,9 @@ This module provides:
   (iv) The Wick-rotated Hilbert-space inner product on K^+: at the K^+
        cone, the Krein product <psi, J phi> reduces to a positive-definite
        inner product, so K^+ carries a genuine Hilbert-space structure
-       on which standard propinquity machinery applies.
+       on which standard quantum-metric machinery would apply -- but
+       Paper 45 shows the K^+-compressed Lipschitz seminorm is degenerate,
+       so no propinquity convergence follows (withdrawn 2026-06-09).
 
 Honest scope
 ============

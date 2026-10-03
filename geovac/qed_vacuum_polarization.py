@@ -1,9 +1,11 @@
-"""One-loop QED vacuum polarization on S³ from Dirac spectral data.
+"""One-loop QED vacuum polarization on S³: Dirac spectral data plus the
+standard flat-space constants.
 
 Computes the Seeley-DeWitt heat kernel coefficients a_0, a_1, a_2 for
-the squared Dirac operator D² on the unit three-sphere S³, extracts the
-vacuum polarization coefficient, and verifies that it reproduces the
-standard QED beta function β(α) = 2α²/(3π).
+the squared Dirac operator D² on the unit three-sphere S³.  The vacuum
+polarization coefficient 1/(48π²) and the beta function β(α) = 2α²/(3π)
+are the standard flat-space values, returned as constants (they are not
+computed from the S³ data here).
 
 Physics
 -------
@@ -16,8 +18,9 @@ where D is the Dirac operator and the spectral zeta function is
     ζ_{D²+m²}(s) = Σ_n g_n (λ_n² + m²)^{-s}.
 
 On S³ of radius R, the Camporesi-Higuchi spectrum gives squared
-eigenvalues λ_n² = (n + 3/2)²/R² with degeneracy g_n = 2(n+1)(n+2)
-for the full 4-component Dirac spinor.
+eigenvalues λ_n² = (n + 3/2)²/R² with degeneracy 2(n+1)(n+2) per
+2-component spinor (both signs), i.e. 4(n+1)(n+2) for the 4-component
+convention (dim_S = 4) used below.
 
 The Seeley-DeWitt (heat kernel) expansion encodes local geometric
 invariants.  The a_2 coefficient, when the Dirac operator is minimally
@@ -33,16 +36,19 @@ Transcendental taxonomy (Paper 18)
 ----------------------------------
 - a_0 involves Vol(S³) = 2π² — calibration π (second-order operator,
   Riemannian volume form).
-- a_1 involves R_scalar/6 = 1/R² — rational on unit S³.
+- a_1 involves (6E + R_scalar)/6 = -R_scalar/12 — rational times
+  the volume on unit S³.
 - a_2 vacuum polarization coefficient 1/(48π²) — calibration π
   (second-order operator, gauge-field coupling).
-- ζ'(0) involves the full spectral sum — only π^{even} content at
-  one loop.  No odd-zeta (ζ(3), ζ(5), ...) appears.
+- ζ'(0) (the one-loop determinant) is NOT π^{even}:
+  ζ'_{D²}(0) = 3ζ(3)/(4π²) + (ln 2)/2 (twice the Klebanov-Pufu-Safdi
+  free-fermion F).  Corrected 2026-10-02 (/qa trunk DELTA #26): an earlier
+  docstring said no odd zeta appears at one loop.
 
 The T9 theorem (squared Dirac spectral zeta, Tier 3) guarantees that
 ζ_{D²}(s) at every integer s is a polynomial in π² with rational
-coefficients.  This is confirmed here: one-loop QED on S³ is entirely
-within the even-zeta calibration tier of Paper 18's taxonomy.
+coefficients; that statement covers the integer-s zeta values only, not
+the determinant.
 
 References
 ----------
@@ -96,8 +102,8 @@ def _dim_dirac_spinor_3d() -> int:
 
     For the standard QED computation we use the 4-component Dirac
     spinor (matching 4D Minkowski reduction where the S³ is a spatial
-    slice), giving dim = 4.  This matches the g_n = 2(n+1)(n+2)
-    degeneracy from dirac_s3.py with sector="dirac".
+    slice), giving dim = 4, i.e. twice the 2-component degeneracy
+    g_n = 2(n+1)(n+2) of dirac_s3.py with sector="dirac".
 
     Note: In 3D Euclidean space, the irreducible spinor is 2-component.
     But when treating S³ as the spatial part of 4D spacetime (as in
@@ -118,7 +124,8 @@ def seeley_dewitt_coefficients_s3(
     for D² (squared Dirac operator) on S³ of radius R.
 
     The heat kernel expansion for a second-order Laplace-type operator
-    P = D² + E on a d-dimensional closed manifold is
+    P = -(∇² + E) on a d-dimensional closed manifold (Vassilevich's sign
+    convention) is
 
         K(t) = Tr exp(-tP) ~ (4πt)^{-d/2} Σ_{k≥0} a_k(P) t^k
 
@@ -130,22 +137,33 @@ def seeley_dewitt_coefficients_s3(
 
         a_0 = (4π)^{-d/2} · dim_S · Vol(M)
 
-        a_1 = (4π)^{-d/2} · dim_S · ∫ (R_scalar/6) dvol
+        a_1 = (4π)^{-d/2} · (1/6) ∫ tr(6E + R_scalar) dvol
 
-        a_2 = (4π)^{-d/2} · dim_S · (1/360) ∫ [
-            5 R_scalar² - 2 |Ric|² + 2 |Riem|² - 30 R_scalar E + 60 E²
-        ] dvol
+        a_2 = (4π)^{-d/2} · (1/360) ∫ tr[
+            60 R_scalar E + 180 E² + 5 R_scalar² - 2 |Ric|² + 2 |Riem|²
+            + 30 Ω_ij Ω^ij ] dvol
 
-    where dim_S = tr(I) is the fiber dimension of the spinor bundle,
-    E is the endomorphism (curvature coupling), and R_scalar, Ric, Riem
-    are the scalar curvature, Ricci tensor, and Riemann tensor.
+    (constant-curvature space form: the derivative terms vanish), where
+    dim_S = tr(I) is the fiber dimension of the spinor bundle, E is the
+    endomorphism, Ω is the spin-connection curvature, and R_scalar, Ric,
+    Riem are the scalar curvature, Ricci tensor, and Riemann tensor.
 
-    For the FREE Dirac operator on S³ (no gauge field), E is the
-    Lichnerowicz endomorphism:
+    For the FREE Dirac operator on S³ (no gauge field), the Lichnerowicz
+    formula D² = ∇*∇ + R_scalar/4 = -(∇² - R_scalar/4) gives
 
-        D² = ∇*∇ + R_scalar/4   (Lichnerowicz formula)
+        E = -R_scalar/4 = -3/(2R²) on S³,
 
-    so E = R_scalar/4 = 3/(2R²) on S³.
+    and tr(Ω_ij Ω^ij) = -(dim_S/8) |Riem|².
+
+    Corrected 2026-10-02 (/qa trunk DELTA #26): an earlier version used
+    E = +R_scalar/4, dropped E from a_1, and omitted the Ω term, returning
+    a_1 = sqrt(pi), a_2 = sqrt(pi)/8 on the unit S³.  The exact
+    Camporesi--Higuchi heat trace (eigenvalues ±(n+3/2), multiplicity
+    (n+1)(n+2) per sign per 2-component spinor) is two-term exact,
+    Tr e^{-tD²} = (sqrt(pi)/2) t^{-3/2} - (sqrt(pi)/4) t^{-1/2} per
+    2-component spinor, so with dim_S = 4 the coefficients are
+    a_0 = sqrt(pi), a_1 = -sqrt(pi)/2, a_2 = 0; the corrected formulas
+    reproduce exactly these.
 
     For unit S³ (R=1): R_scalar = 6, |Ric|² = R_ij R^ij = 3·(2)² = 12,
     |Riem|² = R_ijkl R^ijkl = 12 (on S³).
@@ -174,8 +192,10 @@ def seeley_dewitt_coefficients_s3(
     Ric_sq = Integer(12) / R**4
     Riem_sq = Integer(12) / R**4
 
-    # Lichnerowicz endomorphism: D² = ∇*∇ + R_scalar/4
-    E_lich = R_sc / 4  # = 3/(2R²)
+    # Lichnerowicz: D² = ∇*∇ + R_scalar/4 = -(∇² + E) with E = -R_scalar/4
+    E_lich = -R_sc / 4  # = -3/(2R²)
+    # Spin-connection curvature: tr(Ω_ij Ω^ij) = -(dim_S/8) |Riem|²
+    tr_Omega_sq = -dim_S * Riem_sq / 8
 
     # Prefactor: (4π)^{-d/2} for d=3
     prefactor = (4 * pi)**(-d / 2)  # = (4π)^{-3/2}
@@ -183,15 +203,16 @@ def seeley_dewitt_coefficients_s3(
     # a_0 = (4π)^{-d/2} · dim_S · Vol
     a0 = prefactor * dim_S * vol
 
-    # a_1 = (4π)^{-d/2} · dim_S · (R_scalar/6) · Vol
-    # (On a constant-curvature manifold, ∫ R_scalar dvol = R_scalar · Vol)
-    a1 = prefactor * dim_S * (R_sc / 6) * vol
+    # a_1 = (4π)^{-d/2} · (1/6) · tr(6E + R_scalar) · Vol
+    # (On a constant-curvature manifold the integrands are constant.)
+    a1 = prefactor * dim_S * (6 * E_lich + R_sc) / 6 * vol
 
-    # a_2 = (4π)^{-d/2} · dim_S · (1/360) · [
-    #   5 R_sc² - 2 |Ric|² + 2 |Riem|² - 30 R_sc E + 60 E² ] · Vol
-    integrand_a2 = (5 * R_sc**2 - 2 * Ric_sq + 2 * Riem_sq
-                    - 30 * R_sc * E_lich + 60 * E_lich**2)
-    a2 = prefactor * dim_S * Rational(1, 360) * integrand_a2 * vol
+    # a_2 = (4π)^{-d/2} · (1/360) · tr[60 R E + 180 E² + 5 R² - 2|Ric|²
+    #        + 2|Riem|² + 30 Ω²] · Vol   (traced integrand)
+    integrand_a2 = (dim_S * (60 * R_sc * E_lich + 180 * E_lich**2
+                             + 5 * R_sc**2 - 2 * Ric_sq + 2 * Riem_sq)
+                    + 30 * tr_Omega_sq)
+    a2 = prefactor * Rational(1, 360) * integrand_a2 * vol
 
     return {
         'a0': sp.simplify(a0),
@@ -440,20 +461,20 @@ def classify_transcendental_content() -> Dict[str, str]:
 
     where λ(2k) = (1 - 2^{-2k}) · ζ_R(2k) = rational · π^{2k}.
 
-    This means no odd-zeta content (ζ(3), ζ(5), ...) appears at
-    one loop. Odd-zeta content is expected at two loops (from the
-    weight-m subchannel of the Dirac degeneracy — see Track D3).
+    This means no odd-zeta content (ζ(3), ζ(5), ...) appears in the
+    integer-s values ζ_{D²}(s).  The one-loop DETERMINANT does carry it:
+    ζ'_{D²}(0) = 3ζ(3)/(4π²) + (ln 2)/2.
     """
     return {
         'a_0': 'calibration_pi (Vol(S³) = 2π², second-order Riemannian volume)',
-        'a_1': 'rational (R_scalar = 6/R², curvature is algebraic on S³)',
+        'a_1': 'rational x Vol (R/6 + E = -1/2 on unit S³; curvature is algebraic on S³)',
         'a_1_times_vol': 'calibration_pi (rational × Vol(S³) = rational × 2π²)',
-        'a_2_curvature': 'calibration_pi (rational combinations of curvature invariants × Vol)',
-        'a_2_gauge': 'calibration_pi (1/(48π²), vacuum polarization coefficient)',
-        'beta_function': 'calibration_pi (2α²/(3π), one-loop QED)',
+        'a_2_curvature': 'zero on S³ (two-term exactness; curvature + spin-curvature terms cancel)',
+        'a_2_gauge': 'calibration_pi (1/(48π²), entered flat-space vacuum polarization coefficient)',
+        'beta_function': 'calibration_pi (2α²/(3π), entered flat-space one-loop QED value)',
         'zeta_D2_all_s': 'calibration_pi_only (π^{2k} at every integer s, T9 theorem)',
-        'zeta_prime_0': 'calibration_pi (functional determinant, Barnes zeta)',
-        'odd_zeta_at_one_loop': 'ABSENT (structural theorem, not numerical observation)',
+        'zeta_prime_0': 'M3 content: zeta\'_{D^2}(0) = 3 zeta(3)/(4 pi^2) + (ln 2)/2 (one-loop determinant)',
+        'odd_zeta_at_one_loop': 'ABSENT from zeta_{D^2}(s) at integer s (T9); PRESENT in the one-loop determinant zeta\'(0)',
         'odd_zeta_at_two_loops': 'EXPECTED (ζ(3) from Dirac weight-m subchannel, Track D3)',
     }
 
@@ -516,7 +537,8 @@ def verify_a0_from_spectral_sum(n_max: int = 200) -> Dict[str, float]:
 
 
 def verify_no_odd_zeta_one_loop() -> Dict[str, sp.Expr]:
-    """Structural verification that one-loop QED on S³ has no odd-zeta.
+    """Structural verification that ζ_{D²}(s) at integer s has no odd zeta
+    (the one-loop determinant ζ'_{D²}(0) does: 3ζ(3)/(4π²) + (ln 2)/2).
 
     The T9 theorem states:
 
@@ -531,9 +553,9 @@ def verify_no_odd_zeta_one_loop() -> Dict[str, sp.Expr]:
     Therefore ζ_{D²}(s) at integer s is a polynomial in π² with
     rational coefficients. No ζ_R(odd) = ζ(3), ζ(5), ... appears.
 
-    The Seeley-DeWitt coefficients a_k are determined by the pole
-    structure and finite parts of ζ_{D²}(s), so they inherit this
-    π^{even}-only structure at one loop.
+    (The Seeley-DeWitt coefficients are residues of ζ_{D²}(s), here
+    √π × Q in the (4π)^{-3/2} normalisation; ζ'_{D²}(0) is a finite part
+    and is not π^{even}.)
 
     Returns
     -------

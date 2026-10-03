@@ -60,11 +60,11 @@ For each entry we record three properties to be tested in the paper §5 candidat
 |---|------|:------:|---------------------|--------|:--:|:--:|:--:|
 | C1 | Master Mellin engine $\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$, $k \in \{0,1,2\}$ | **F** (CONDITIONAL) | Case-exhaustion theorem, [CONDITIONAL], first fifteen Paper 34 projections; converse withdrawn as not established; Paper 32 §VIII | Periods | 1 | meta | dimensionless |
 | C2 | M1 prefactor = $\mathrm{Vol}(S^2)/4 = \pi$ | **F** | Unit-sphere volume slot (the "Hopf-base measure" label is retired) | Periods | 1 | M1 | dimensionless |
-| C3 | Seeley–DeWitt $a_0 = a_1 = \sqrt\pi$, $a_2 = \sqrt\pi/8$ on $S^3$ | **F** | Closed form; Paper 28 T9 | Periods | 1 | M2 | dimensionless |
+| C3 | Seeley–DeWitt (Dirac, 4-spinor) $a_0 = \sqrt\pi$, $a_1 = -\sqrt\pi/2$, $a_{k\ge2} = 0$ on $S^3$ (corrected 2026-10-02 from $a_0 = a_1 = \sqrt\pi$, $a_2 = \sqrt\pi/8$, a production sign error) | **F** | Closed form; Paper 28 (two-term exactness) | Periods | 1 | M2 | dimensionless |
 | C4 | $\zeta_{D^2}(s) = 2^{2s-1}[\lambda(2s-2) - \lambda(2s)]$ | **F** | T9 theorem; Paper 28 | Periods | 1 | M2 | dimensionless |
 | C5 | $\chi_{-4}$ identity $D_{\rm even} - D_{\rm odd} = 2^{s-1}(\beta(s) - \beta(s-2))$ | **F** | Paper 28 §IV; vertex-parity Hurwitz | Periods | 1 | M3 | dimensionless |
 | C6 | $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$ | **F** | Sprint Mixed-Tate; Paper 55 | Periods | 1 | M3 | dimensionless |
-| C7 | State-space GH rate constant $4/\pi$ (dual-Coxeter; $2/\pi$ unit $S^3$) | **F** | Paper 38, commutative factor on the true window, [INTERNAL THEOREM + MEASURED] (not propinquity); Paper 40 reports it universal over compact semisimple groups (rigorous at rank 1; general-G convergence conditional on the spin-window decomposition); its M1 placement is a reading | OA | 1 | M1 (reading) | dimensionless |
+| C7 | State-space GH rate constant $4/\pi$ (dual-Coxeter; $2/\pi$ unit $S^3$) | **F** | Paper 38, commutative factor on the true window, [INTERNAL THEOREM + MEASURED] (not propinquity); Paper 40 reports it universal over compact simple groups (derived at rank 1; general-G convergence conditional on the spin-window decomposition); its M1 placement is a reading | OA | 1 | M1 (reading) | dimensionless |
 | C8 | Pythagorean orthogonality $\langle H_{\rm local}, D_W^L\rangle_{\rm HS} = 0$ | **F** | Bit-exact; Paper 42 §11.7 Thm 11.14 (former Paper 43 §10.2, archived 2026-09-28); β-independent chirality-parity identity — its residual's 1/π² is the posited β squared, not an M1 output | OA | 1 | M1 (class only; re-tiered 2026-09-28) | dimensionless |
 | C9 | $S_{\min} = 8\pi^2\ln 2 - \tfrac{2}{3}\pi^4\ln 2 - 3\pi^2\zeta(3) + \tfrac{1}{2}\pi^4\zeta(3) - \tfrac{5}{2}\pi^2\zeta(5) + \tfrac{\pi^6}{4} - \tfrac{3}{2}\pi^4 - \tfrac{\pi^8}{96}$ | **F** | Paper 28 (identified 2026-06-11; prior "irreducible" = basis-coverage artifact) | Periods | >1 | M3 | dimensionless |
 
@@ -151,7 +151,7 @@ Total: 60 entries across nine domains.
 
 Looking at the table cold, before §5's formal principle test:
 
-- **Multi-focal depth (MF)** is the strongest single predictor. Every multi-focal-composition wall entry (G1–G6, plus E6, E7, E8, F1, F4, F5, F6, F7, D5, D6) sits at MF > 1. Every gauge / spectral / forced entry sits at MF = 1, with one exception: C9 (the two-loop S_min period) is tagged MF > 1.
+- **Multi-focal depth (MF)** is the strongest single predictor. Every multi-focal-composition entry (G1–G6, plus E6, E7, E8, F1, F4, F5, F6, F7, D5, D6, I1; 17 entries) sits at MF > 1. Every gauge / spectral / forced entry sits at MF = 1, with one exception: C9 (the two-loop S_min period) is tagged MF > 1.
 - **Period class (P)** (from the [CONDITIONAL] case-exhaustion, first fifteen projections) tracks the C-side multi-focal walls cleanly (all at "outside") but is the wrong axis for forced gauge content — the M1 tag is about the *prefactor* in the case-exhaustion theorem, not a *forcing mechanism* for gauge content.
 - **Dimensional character (Dim)** correlates partially: most dimensionful entries sit on the C side, but D2 ($S_{\rm BH}$ / $G_N$) is F and dimensionful, while F2, F3, F5, F6 (N_gen, KO-dim, CKM, PMNS) are dimensionless and C.
 

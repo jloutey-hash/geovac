@@ -371,13 +371,10 @@ def test_production_dirac_a1():
     a_1_per_unit_vol = R/6 - R/4 = -R/12 = -6/12 = -1/2 on unit S^3.
     Then bare = -dim_S/2 * Vol = -2 * 2*pi^2 = -4 pi^2.
 
-    BUT the production code on line 188 hard-codes
-        a1 = prefactor * dim_S * (R_sc / 6) * vol
-    which OMITS the -E term. We document this as a known production
-    code subtlety; the issue is that the production code does NOT
-    use the standard Vassilevich a_1 formula for D^2 with the
-    Lichnerowicz endomorphism. This is a separate issue for Paper 28
-    / vacuum polarization purposes (where a_2 is the key term).
+    The production code omitted the E term until 2026-10-02 (it
+    returned sqrt(pi)); that was a bug, now fixed, and the production
+    a_1 is the standard Vassilevich value with prefactor:
+    (4 pi)^{-3/2} * (-4 pi^2) = -sqrt(pi)/2.
 
     For our purposes here, we ONLY check that the heat-trace
     closed-form derivation works for the SCALAR Laplacian, which is
@@ -385,10 +382,9 @@ def test_production_dirac_a1():
     to compute a_1 for the SCALAR Laplacian.
     """
     coeffs = seeley_dewitt_coefficients_s3()
-    # Production a_1 (R_scalar/6 * Vol * prefactor * dim_S):
-    # = (4 pi)^{-3/2} * 4 * 1 * 2 pi^2 = sqrt(pi)
-    # (note R_scalar/6 = 1 on unit S^3).
-    expected_production_a1 = sp.sqrt(pi)
+    # Production a_1 = (4 pi)^{-3/2} * dim_S * (R/6 + E) * Vol
+    # = (4 pi)^{-3/2} * 4 * (-1/2) * 2 pi^2 = -sqrt(pi)/2.
+    expected_production_a1 = -sp.sqrt(pi) / 2
     assert sp.simplify(coeffs['a1'] - expected_production_a1) == 0
 
 

@@ -180,17 +180,13 @@ def test_witness_a1_dirac_vol_normalized():
             = -2 pi^2                                          [Paper 55]
         a_k = 0           for k >= 2 (two-term exactness, Paper 51 Cor 2.1).
 
-    NOTE on production code: qed_vacuum_polarization.seeley_dewitt_coefficients_s3
-    computes Vassilevich-Branson-Gilkey a_2 using the curvature polynomial
-    (5R^2 - 2|Ric|^2 + 2|Riem|^2 - 30 R E + 60 E^2)/360 with Lichnerowicz
-    E = R/4 — this is the SECOND HEAT-KERNEL COEFFICIENT in the standard
-    spectral-action sense, which is NOT the same as a_1 in Paper 51's
-    asymptotic-coefficient indexing (the indexing shifts by one because
-    Paper 51 indexes by t-power not by HK-coefficient order). The Vassilevich
-    a_0 and a_1 in the production code use the Lichnerowicz formula and DO
-    NOT reproduce the asymptotic K(t) expansion directly. The witnesses in
-    Paper 55 are the ASYMPTOTIC heat-trace coefficients (Paper 51 Cor 2.1
-    closed form), not the Vassilevich curvature polynomial output; this test
+    NOTE on production code (corrected 2026-10-02): an earlier note here
+    explained a mismatch between the production coefficients and this
+    closed form as an indexing shift.  It was a bug in the production
+    function (E = +R/4 instead of -R/4, E dropped from a_1, spin-curvature
+    term missing from a_2); fixed, the production values (dim_S = 4) are
+    a_0 = sqrt(pi), a_1 = -sqrt(pi)/2, a_2 = 0, twice the 2-component
+    closed form below with the (4 pi)^{-3/2} prefactor.  This test still
     verifies the asymptotic-coefficient identification independently.
     """
     # Asymptotic Dirac heat trace coefficients (Paper 51 Cor 2.1):

@@ -4,7 +4,8 @@ Validates:
 - Seeley-DeWitt coefficients a_0, a_1, a_2 on unit S³
 - Vacuum polarization coefficient = 1/(48π²)
 - QED beta function β(α) = 2α²/(3π)
-- No odd-zeta content at one loop (structural, T9 theorem)
+- No odd-zeta content in zeta_{D^2}(s) at integer s (structural, T9 theorem;
+  the one-loop determinant zeta'_{D^2}(0) does carry zeta(3))
 - Spectral zeta sum convergence
 - T9 theorem cross-check at s = 2, 3
 """
@@ -46,8 +47,12 @@ class TestSeeleyDeWittS3:
         assert self.coeffs['R_scalar'] == Integer(6)
 
     def test_lichnerowicz_endomorphism(self):
-        """E_Lich = R_scalar/4 = 3/2 on unit S³."""
-        assert sp.simplify(self.coeffs['E_lich'] - Rational(3, 2)) == 0
+        """E = -R_scalar/4 = -3/2 on unit S³ (D² = -(∇² + E), Vassilevich sign).
+
+        Corrected 2026-10-02: the earlier +3/2 was the sign error that made
+        the production a_1, a_2 wrong.
+        """
+        assert sp.simplify(self.coeffs['E_lich'] + Rational(3, 2)) == 0
 
     def test_dim_spinor(self):
         """dim(spinor) = 4 for 4-component Dirac."""
@@ -63,12 +68,14 @@ class TestSeeleyDeWittS3:
         assert sp.simplify(a0 - expected) == 0
 
     def test_a1_value(self):
-        """a_1 = (4π)^{-3/2} · 4 · (6/6) · 2π² = (4π)^{-3/2} · 8π².
+        """a_1 = (4π)^{-3/2} · 4 · (R/6 + E) · 2π² = √π · (1 - 3/2) = -√π/2.
 
-        This is a_0 · (R_scalar/6) = √π · 1 = √π.
+        Matches the exact Camporesi--Higuchi trace (two copies of
+        (√π/2) t^{-3/2} - (√π/4) t^{-1/2}).  The pre-2026-10-02 value √π
+        dropped E.
         """
         a1 = self.coeffs['a1']
-        expected = sqrt(pi)
+        expected = -sqrt(pi) / 2
         assert sp.simplify(a1 - expected) == 0
 
     def test_a2_curvature_invariants(self):
@@ -80,30 +87,27 @@ class TestSeeleyDeWittS3:
         assert self.coeffs['Riem_sq'] == Integer(12)
 
     def test_a2_integrand(self):
-        """Verify the a_2 curvature integrand on unit S³.
+        """The traced a_2 integrand vanishes on unit S³.
 
-        5·36 - 2·12 + 2·12 - 30·6·(3/2) + 60·(9/4)
-        = 180 - 24 + 24 - 270 + 135 = 45
+        tr(1)·(60·6·(-3/2) + 180·9/4 + 5·36 - 2·12 + 2·12) + 30·tr(Ω²)
+        = 4·45 + 30·(-4·12/8) = 180 - 180 = 0.
         """
         integrand = self.coeffs['integrand_a2']
-        expected = Integer(45)
-        assert sp.simplify(integrand - expected) == 0
+        assert sp.simplify(integrand) == 0
 
     def test_a2_value(self):
-        """a_2 = (4π)^{-3/2} · 4 · (1/360) · 45 · 2π².
+        """a_2 = 0: the Dirac heat trace on S³ is two-term exact.
 
-        = (4π)^{-3/2} · 4 · (1/8) · 2π² = (4π)^{-3/2} · π²
-        = π² / (8π^{3/2}) = √π / 8.
+        The pre-2026-10-02 value √π/8 came from E = +R/4 and a missing
+        spin-curvature term.
         """
-        a2 = self.coeffs['a2']
-        expected = sqrt(pi) / 8
-        assert sp.simplify(a2 - expected) == 0
+        assert sp.simplify(self.coeffs['a2']) == 0
 
     def test_a0_a1_a2_ratio(self):
-        """Check a_0 : a_1 : a_2 = 1 : 1 : 1/8 on unit S³."""
+        """a_0 : a_1 : a_2 = 1 : -1/2 : 0 on unit S³."""
         a0, a1, a2 = self.coeffs['a0'], self.coeffs['a1'], self.coeffs['a2']
-        assert sp.simplify(a0 - a1) == 0
-        assert sp.simplify(a2 / a0 - Rational(1, 8)) == 0
+        assert sp.simplify(a1 / a0 + Rational(1, 2)) == 0
+        assert sp.simplify(a2) == 0
 
 
 class TestSeeleyDeWittRadiusScaling:
@@ -128,18 +132,11 @@ class TestSeeleyDeWittRadiusScaling:
         ratio = sp.simplify(a1 / a1_unit)
         assert sp.simplify(ratio - R) == 0
 
-    def test_a2_scales_as_R_inv1(self):
-        """a_2 scales as 1/R on unit S³.
-
-        The integrand is quartic in curvature (~ 1/R⁴), times Vol (~ R³),
-        so a_2 ~ R⁻¹.
-        """
+    def test_a2_vanishes_at_every_radius(self):
+        """a_2 = 0 at every radius (two-term exactness is scale-free)."""
         R = Symbol('R', positive=True)
         coeffs = seeley_dewitt_coefficients_s3(R=R)
-        a2 = coeffs['a2']
-        a2_unit = seeley_dewitt_coefficients_s3(R=Integer(1))['a2']
-        ratio = sp.simplify(a2 / a2_unit)
-        assert sp.simplify(ratio - 1 / R) == 0
+        assert sp.simplify(coeffs['a2']) == 0
 
 
 # -----------------------------------------------------------------------
@@ -198,7 +195,7 @@ class TestVacuumPolarization:
 # -----------------------------------------------------------------------
 
 class TestNoOddZeta:
-    """Structural test: one-loop QED on S³ has no odd-zeta content."""
+    """Structural test: zeta_{D^2}(s) at integer s has no odd-zeta content."""
 
     def test_zeta_D2_s2_no_odd_zeta(self):
         """ζ_{D²}(2) = π² - π⁴/12: no ζ(3)."""
@@ -248,7 +245,7 @@ class TestNoOddZeta:
             )
 
     def test_classification_odd_zeta_absent(self):
-        """Transcendental classification confirms odd-zeta absence."""
+        """Classification records odd-zeta absence from integer-s zeta_{D^2} values."""
         classification = classify_transcendental_content()
         assert 'ABSENT' in classification['odd_zeta_at_one_loop']
 
@@ -317,10 +314,10 @@ class TestPaper18Taxonomy:
         assert sp.simplify(a0 - sp.sqrt(pi)) == 0
 
     def test_a1_rational_on_unit_s3(self):
-        """a_1/a_0 = R_scalar/6 = 1 on unit S³ — rational."""
+        """a_1/a_0 = R_scalar/6 + E = 1 - 3/2 = -1/2 on unit S³ — rational."""
         coeffs = seeley_dewitt_coefficients_s3()
         ratio = sp.simplify(coeffs['a1'] / coeffs['a0'])
-        assert ratio == 1
+        assert ratio == Rational(-1, 2)
 
     def test_a2_coefficient_calibration_pi(self):
         """Vacuum polarization 1/(48π²) is calibration-tier π."""

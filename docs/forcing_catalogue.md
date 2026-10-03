@@ -1,6 +1,6 @@
 # The Forcing Catalogue
 
-> **[Historical document, dated 2026-06-01 onward; superseded wording.]** Superseded for the forced-vs-free question by `docs/forced_free_seam.md` and Paper 57; current standing (Paper 32 §VIII): the gauge group and inner algebra are fixed only relative to the Bertrand × Hopf-tower organizing reading plus the adopted Upgrade B axiom (ℍ admitted, not forced); the seam is an Observation-level reading (it records the partition, it does not forbid selection); the π-source case-exhaustion is [CONDITIONAL] over the first fifteen Paper 34 projections (converse withdrawn as not established); the Paper 38 bound is d_GH ≤ γ (no C₃ factor), commutative factor only; 4/π is reported universal over compact semisimple groups (rigorous at rank 1); the cb-norm of the central smoothing is 1; no common generator of B, F, Δ is an empirical record. Phrases below such as 'forbids selection', 'mostly FORCED', 'closes the n=2 fork', 'proven' for these items are historical.
+> **[Historical document, dated 2026-06-01 onward; superseded wording.]** Superseded for the forced-vs-free question by `docs/forced_free_seam.md` and Paper 57; current standing (Paper 32 §VIII): the gauge group and inner algebra are fixed only relative to the Bertrand × Hopf-tower organizing reading plus the adopted Upgrade B axiom (ℍ admitted, not forced); the seam is an Observation-level reading (it records the partition, it does not forbid selection); the π-source case-exhaustion is [CONDITIONAL] over the first fifteen Paper 34 projections (converse withdrawn as not established); the Paper 38 bound is d_GH ≤ γ (no C₃ factor), commutative factor only; 4/π is reported universal over compact simple groups (derived at rank 1); the cb-norm of the central smoothing is 1; no common generator of B, F, Δ is an empirical record. Phrases below such as 'forbids selection', 'mostly FORCED', 'closes the n=2 fork', 'proven' for these items are historical.
 
 *Bit-exact rigidities, and what they have not yet been asked to force.*
 
@@ -286,11 +286,11 @@ Two findings about the corpus as a whole, independent of any single door:
 
 ### F-4. Master Mellin engine: M1/M2/M3 = 𝓜[Tr(D^k·e^{−tD²})], k∈{0,1,2}
 - **Where:** Paper 18 §III.7, Paper 32 §VIII; `mellin_engine_domain_partition.md`
-- **Rigidity:** proven-theorem (case-exhaustion)
+- **Rigidity:** conditional case-exhaustion theorem (Paper 32 §VIII, [CONDITIONAL]) plus a census
 - **Filed as:** organizing principle
-- **Crack:** memory says the engine is "predictive *within* each domain." Has each
+- **Crack:** an earlier note called the engine "predictive within each domain" (withdrawn 2026-10-02: it classifies, it has not predicted). Has any
   domain's prediction actually been *extracted*, or only the classification stated?
-  M1↔propinquity rates, M2↔heat-kernel, M3↔vertex-parity — is there an un-computed
+  M1↔GH rates (a reading), M2↔heat-kernel, M3↔vertex-parity — is there an un-computed
   observable in any one domain the engine already determines?
 - **Probe:** `OPEN` — per-domain: list what the engine predicts but we haven't computed.
 
@@ -298,8 +298,8 @@ Two findings about the corpus as a whole, independent of any single door:
 - **Where:** Paper 38; `wh1_proven.md`, `l2_quantitative_rate_4_over_pi.md`
 - **Rigidity:** proven-theorem for the bound (Paper 38, state-space GH, not propinquity; the C₃·γ form is withdrawn); the 4/π rate is [INTERNAL THEOREM + MEASURED] and convention-dependent (dual-Coxeter), and 4/π = Vol(S²)/π² is *read as* the M1 signature (a reading, not a derivation)
 - **Filed as:** prediction (the "something new")
-- **Crack:** 4/π is reported universal across compact connected semisimple Lie groups (Paper 40; rigorous at rank 1, a circle factor carries 2/π). Universality
-  is a forcing. Does the rate constant carry a *physical* prediction (a convergence
+- **Crack:** 4/π is reported universal across compact connected simple Lie groups (Paper 40; derived at rank 1, numerically supported and fit-sensitive at rank ≥ 2; for several simple factors the constant is open; a circle factor carries 2/π). Universality
+  is a numerically supported regularity, forced only at rank 1. Does the rate constant carry a *physical* prediction (a convergence
   speed that maps to an observable), or is it purely internal math?
 - **Probe:** `OPEN`.
 
@@ -373,7 +373,7 @@ Two findings about the corpus as a whole, independent of any single door:
 
 ## E. Chemistry / quantum computing / nuclear
 
-### F-12. Nuclear magic numbers from the packing skeleton
+### F-12. HO shell closures (N+1)(N+2)(N+3)/3 from the packing skeleton (the physical magic numbers also need a fitted spin-orbit strength)
 - **Where:** Paper 23
 - **Rigidity:** integer (shell closures)
 - **Filed as:** prediction
@@ -383,7 +383,7 @@ Two findings about the corpus as a whole, independent of any single door:
   "where does integer rigidity poke through into a measurable" has never been done.
 - **Probe:** `SCOPED` — this is the romantic-ending hunt. Systematic residue scan.
 
-### F-13. Pauli count = 11.11 × Q, universal across 28 molecules; isostructural invariance
+### F-13. Pauli count exactly linear in Q across molecules (registry `composed_coeff`; the 11.11 × Q once here is a retired pair-diagonal figure); isostructural invariance
 - **Where:** Paper 14; CLAUDE.md §1.5
 - **Rigidity:** exact-rational / integer (coefficient stable to ±0.1)
 - **Filed as:** prediction
@@ -392,7 +392,7 @@ Two findings about the corpus as a whole, independent of any single door:
   a conserved structural quantity shared by isostructural molecules?
 - **Probe:** `OPEN`.
 
-### F-14. Angular sparsity 1.44% depends only on l_max, not V(r)
+### F-14. Angular sparsity depends only on l_max, not V(r) (value in Paper 22; the 1.44% once here is a retired pair-diagonal figure)
 - **Where:** Paper 22 (potential-independent sparsity theorem)
 - **Rigidity:** proven-theorem
 - **Filed as:** prediction (universal)
@@ -453,7 +453,7 @@ rows are the priority re-read (see meta-finding 2).
 - sector-wise Mellin map: tip↔φ(0), EH↔φ(1), Λ_cc↔φ(2) — proven — prediction
 
 ### QED / gauge (30 found)
-- α³−Kα+1=0, K=π(42+π²/6−1/40) — exact-rational — OBSERVATION *(the combination rule is an Observation, never conjecture/prediction/derived — §13.5 hard prohibition; this row previously carried both prohibited tiers, fixed 2026-08-28)*
+- α³−Kα+1≈0 (holds to 8.8e-8, not exactly; K is transcendental), K=π(42+π²/6−1/40) — numerical — OBSERVATION *(the combination rule is an Observation, never conjecture/prediction/derived — §13.5 hard prohibition; this row previously carried both prohibited tiers, fixed 2026-08-28)*
 - B=42 / F=π²/6 / Δ=1/40 three spectral homes; no common generator (12 mechanisms) — proven — negative-with-structure
 - Σ(n_ext=0)=0 self-energy structural zero — proven — check
 - ζ_{D²}(s)=2^{2s−1}[λ(2s−2)−λ(2s)] (π^even only, T9) — proven — check
@@ -473,26 +473,26 @@ rows are the priority re-read (see meta-finding 2).
 - [corrected 2026-10-02] C₃^{(2)}(n,n)=√(n/(n+2)); C₃^op=√(1−1/n_max) — WITHDRAWN (rested on Paper 38's false per-harmonic bound); the joint and single-factor constants are 1, by compression (Papers 38/39/40)
 - [corrected 2026-09-30] 2/(n_max+1) is the Plancherel mass maximum, not a cb-norm (the smoothing maps are UCP, cb-norm 1) — exact-rational
 - Riemannian-limit recovery at N_t=1 bit-exact; panel 2.0746/1.6101/1.3223 — bit-exact — prediction *(load-bearing falsifier)*
-- universal rate 4/π rank-invariant (read as the M1 signature, a reading) — rigorous at rank 1, numerically supported (fit-sensitive) at rank ≥ 2 (Paper 40)
+- universal rate 4/π rank-invariant (read as the M1 signature, a reading) — derived at rank 1, numerically supported (fit-sensitive) at rank ≥ 2 (Paper 40)
 - [D_L, a_s⊗a_t]=i[D_GV,a_s]⊗a_t (time Lipschitz-invisible) — bit-exact — prediction
 - KO-dim 3 mod 8; order-zero fails 5–8% (finite-res artifact); offdiag breaks JD=+DJ (resid 2) — proven — negative-with-structure
 
 ### Foundations / exchange constants (31 found)
 - κ=−1/16 coincides with 1/Ω⁴(0) of the Fock projection (OBSERVATION — matched, never derived; see memory/kappa_observation_not_derived.md) — exact-rational — check
 - g_n=n² shell degeneracy; SO(6) Casimir ν(ν+4)/2 — exact-rational — prediction
-- Fock coupling c²(n,l)=(1/16)[1−l(l+1)/(n(n+1))]; c²(4,3)=1/40=Δ — closed-form — prediction
+- Fock coupling c²(n,l)=(1/4)[1−l(l+1)/(n(n+1))] (corrected 2026-09-03; the earlier 1/16 prefactor and c²(4,3)=1/40=Δ are withdrawn — c²(4,3)=1/10, and Δ=(2/5)/Ω⁴(0) is an Observation) — closed-form — check
 - Bargmann π-free at N_max=5 (56 nodes, 165 edges, 0 irrationals) — π-free — prediction
 - HO spectrum E_N=ℏω(N+3/2) exact, π-free (linear projection) — π-free — prediction
-- Seeley–DeWitt a₀=a₁=√π, a₂=√π/8 on unit S³ — closed-form — prediction
+- Seeley–DeWitt (4-spinor) a₀ = √π, a₁ = −√π/2, a₂ = 0 on unit S³ (corrected 2026-10-02 from a₀=a₁=√π, a₂=√π/8, a sign error) — closed-form — check
 - HO rigidity theorem (3D iso HO unique with SU(3) on S⁵) — proven — prediction
 - Ollivier–Ricci κ_OR≡0 on S³ graph (κ lives in Fock interface, not discrete curvature) — proven — negative-with-structure
 - case-exhaustion: every π ∈ {M1, M2, M3} — proven — prediction
 - CH modular residual ε(t): all coeffs in √π·ℚ ⊕ π²·ℚ — closed-form — prediction
 
 ### Chemistry / QC / nuclear (22 found)
-- O(Q^3.15) atomic Pauli scaling — proven — prediction
-- N_Pauli=11.10×Q exact (38 molecules); 9.23×Q for d-blocks — exact-rational — prediction
-- isostructural invariance NaH=KH=239; CO=N₂=F₂=1111 — proven — check
+- atomic Pauli scaling exponent — measured — see Paper 14 (the figure once here was measured under the retired pair-diagonal rule)
+- N_Pauli exactly linear in Q across molecules (registry `composed_coeff`, main-group; `composed_coeff_d`, d-block, denser) under the exact global-M_L rule (2026-08-29; the 11.10×Q / 9.23×Q figures once here are retired) — exact-rational — check
+- isostructural invariance of Pauli support (NaH = KH, CO = N₂ = F₂; counts in Paper 14 under the exact rule) — proven — check
 - split-region Legendre terminates exactly at L_max=2·l_max — proven — prediction
 - Sturmian structural theorem H∝S → R-independent eigenvalues — proven — (guardrail)
 - Fock projection rigidity (S³ unique to −Z/r; HO/Woods-Saxon excluded) — proven — prediction

@@ -9,8 +9,11 @@ this file. Tests cover:
   - Lipschitz norm closed forms / numerical sup checks for low harmonics.
   - Per-multiplier commutator structure on the truthful CH Dirac.
   - Bound check ratios for the natural test panel at n_max in {2, 3, 4}
-    confirming C_3 <= 1 numerically.
-  - Theoretical bound (N - 1) / sqrt(N^2 - 1) inequality.
+    (a numerical panel; C_3 = 1 itself is proved by compression, Paper 38
+    Lemma L3, and this file is not its backing).
+  - RECORD of the withdrawn per-harmonic envelope (N - 1) / sqrt(N^2 - 1)
+    (withdrawn 2026-09-28: an entrywise bound read as an operator-norm
+    bound); its arithmetic is checked, it is not a bound on C_3.
   - Scalar-Dirac fallback path.
 """
 
@@ -305,7 +308,8 @@ class TestL3BoundCheck:
 
 
 class TestTheoreticalBound:
-    """The theoretical bound (N-1)/sqrt(N^2-1) approaches 1 from below."""
+    """RECORD (withdrawn 2026-09-28): arithmetic of the former per-harmonic
+    envelope (N-1)/sqrt(N^2-1).  Not a bound on C_3 (= 1 by compression)."""
 
     def test_theoretical_bound_below_one(self):
         """For all N >= 2, (N-1)/sqrt(N^2-1) <= 1."""
@@ -332,7 +336,8 @@ class TestTheoreticalBound:
         ratio = 2 / math.sqrt(8)
         expected = 1 / math.sqrt(2)
         assert ratio == pytest.approx(expected, abs=1e-12)
-        # And matches our observed C_3 at n_max = 3.
+        # (An earlier comment said this "matches our observed C_3 at
+        # n_max = 3"; the panel ratio is not C_3, which is 1 by compression.)
         assert ratio == pytest.approx(0.7071, abs=1e-3)
 
 
@@ -515,9 +520,11 @@ class TestEquationVerification:
                     )
 
     def test_eq_theoretical_bound(self):
-        """Eq. (L3-thm): C_3(n_max) <= max_{N <= n_max} (N-1)/sqrt(N^2-1).
-
-        Verified for n_max in {2, 3}.
+        """RECORD of the withdrawn "Eq. (L3-thm)" envelope: the panel
+        ratio stays under max_{N <= n_max} (N-1)/sqrt(N^2-1) on the natural
+        test panel at n_max in {2, 3}.  The panel ratio is not the
+        operator-norm constant C_3 (= 1 by compression, Paper 38 Lemma L3),
+        and this check backs no paper claim.
         """
         for n_max in [2, 3]:
             op = FullDiracTruncatedOperatorSystem(n_max)

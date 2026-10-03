@@ -245,11 +245,11 @@
 | Kramers-Pasternak matches Hellmann-Feynman ⟨1/r⟩ | < 1e-10 | Direct integration matches all-state HF formula |
 | Kramers-Pasternak ⟨r⁰⟩ = 1 normalization | exact | Normalization integral equals 1 for all states |
 | Seeley-DeWitt a₀ on unit S³ | √π (exact sympy) | Heat kernel coefficient from Dirac D² spectrum |
-| Seeley-DeWitt a₁ on unit S³ | √π (exact sympy) | Curvature correction (R_scalar/6 = 1) |
-| Seeley-DeWitt a₂ on unit S³ | √π/8 (exact sympy) | Vacuum polarization coefficient source |
-| Vacuum polarization coefficient | 1/(48π²) (exact) | Standard Dirac fermion VP from S³ spectral data |
-| β(α) QED one-loop | 2α²/(3π) (exact) | Reproduces standard QED beta function |
-| No odd-zeta at one loop | structural theorem | T9 guarantees ζ_{D²}(s) is polynomial in π² |
+| Seeley-DeWitt a₁ on unit S³ | −√π/2 (exact sympy; corrected 2026-10-02 from √π, a sign error) | Curvature correction (R/6 + E = −1/2) |
+| Seeley-DeWitt a₂ on unit S³ | 0 (exact; two-term exactness; corrected 2026-10-02) | `tests/test_sd_coefficients_vs_spectrum.py` (independent spectral route) |
+| Vacuum polarization coefficient | 1/(48π²) (exact) | Standard flat-space Dirac fermion VP (entered, not computed from S³ data; Paper 28) |
+| β(α) QED one-loop | 2α²/(3π) (exact) | Standard flat-space value, entered (Paper 28) |
+| ζ_{D²}(s) at integer s is a polynomial in π² | structural theorem (T9) | the one-loop determinant ζ'_{D²}(0) = 3ζ(3)/(4π²) + (ln 2)/2 does carry odd zeta |
 | D_even(4) decomposition | π²/2 − π⁴/24 − 4G + 4β(4) (PSLQ 80 digits) | Vertex parity exposes Catalan G and Dirichlet β(4) |
 | D_odd(4) opposite sign | π²/2 − π⁴/24 + 4G − 4β(4) (PSLQ 80 digits) | Opposite Dirichlet content in odd-n sub-sum |
 | D_even(4) + D_odd(4) cancellation | = D(4) to 1e-60 | Dirichlet L-values cancel in full (unrestricted) sum |
@@ -282,7 +282,7 @@
 | c₂ cross-invariant 8-digit match | |c₂_cross - c₂_apparent| < 2e-8 | Paper 2↔28 bridge verification |
 | c₂ symbolic identity | 19/100 - 41π²/25200 (exact sympy) | Rational+π² decomposition |
 | c₃ from n_int=0..50 | -5.946(3)×10⁻⁷ at 200.9 sigma | Nonzero; expansion does not terminate at c₂ |
-| c₂ T9 consistency | rational + rational·π² only | One-loop π^{even} constraint |
+| c₂ ansatz | rational + rational·π² (PSLQ ansatz; not a T9 consequence) | T9 constrains integer-s ζ_{D²} values only |
 | Paper 28 theorem count | ≥ 4 theorems with proofs | Q-4 exit criterion |
 | D₅ c₅(n) exact match n=1..15 | rational equality | Sommerfeld closed-form verification |
 | D₅ PSLQ decomposition | residual < 1e-190 | Weight-9 MZV decomposition |

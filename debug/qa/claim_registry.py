@@ -102,8 +102,8 @@ CLAIMS = {
         owner_tier=r"INTERNAL THEOREM \+ MEASURED", tier="INTERNAL THEOREM + MEASURED",
         mention=r"4/π.{0,40}log|\(4/\\pi\)|4/π\)·log|rate .{0,15}4/π|c = 4/π",
         qualifier=r"MEASURED",
-        overclaim=r"4/π (is )?canonical",
-        changed="2026-09-03"),
+        overclaim=r"4/π (is )?canonical|rigorous\s+(?:at\s+)?rank|rigorous\s+rank-1|rigorous\s+\$?4/",
+        changed="2026-10-02"),
     "graph-s3-wall": dict(
         statement="The lattice edge Laplacian D-A does NOT converge to Delta_{S^3} (n_max disconnected "
                   "l-blocks; WALL); what is exact is the (n,l,m) label set + diagonal SO(4) Casimir.",
@@ -210,13 +210,17 @@ CLAIMS = {
         statement="Paper 40 generalises Paper 38 to compact connected semisimple Lie groups "
                   "unconditionally at rank 1 and, for general G, conditionally on the per-group "
                   "spin-window decomposition; scalar compact-group convergence is Gaudillot-Estrada--"
-                  "van Suijlekom's.",
+                  "van Suijlekom's. The 4/pi universality is reported for SIMPLE G only (derived at "
+                  "rank 1, numerically supported at rank >= 2); for several simple factors the constant "
+                  "is open (semisimple corollary withdrawn 2026-10-02).",
         owner="papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
         owner_anchor=r"(?<!un)conditionally on the per-group", owner_tier=r"for general \$G\$", tier="CONDITIONAL",
         mention=r"Paper~?\s?40\b[^.;]{0,120}(generali[sz]|compact|semisimple|universal)|all\s+(simple\s+)?compact\s+(connected\s+)?(semisimple\s+)?Lie\s+groups",
         qualifier=r"condition|rank[~ ]?1|rank 1|spin-window|named gap",
         overclaim=r"resolved by\s+Paper[~\s]?40|closed it on the universal|settled by the present author|"
-                  r"machinery to all simple compact|closes it positively|was closed in\s+Paper[~\s]?40",
+                  r"machinery to all simple compact|closes it positively|was closed in\s+Paper[~\s]?40|"
+                  r"universal\s+(?:across|over)\s+(?:the\s+)?compact\s+(?:connected\s+)?(?:\*\*)?semisimple|"
+                  r"rigorous\s+(?:at\s+)?rank",
         changed="2026-10-02"),
     "p1-ladder-exact": dict(
         statement="Paper 1's ladder operators reproduce n on INTERIOR shells and l(l+1) on every shell "
@@ -265,6 +269,48 @@ CLAIMS = {
         overclaim=r"We show that the answer is affirmative|across the entire GeoVac corpus|full classification|"
                   r"engine classification|classification of the transcendentals|"
                   r"all of GeoVac'?s\s+transcendentals sit",
+        changed="2026-10-02"),
+    "lipschitz-c3-compression": dict(
+        statement="The Lipschitz comparison constant is C_3 = 1 at every cutoff, by compression: single factor "
+                  "(Paper 38), every rank (Paper 40), and jointly on the Clifford-doubled S^3 x S^3 module "
+                  "(Paper 39, C_3^(2) = 1; k-fold sketch C_3^(k) = 1). It is a constant of the abandoned "
+                  "(B,P) route, not a rate constant of the lifted-state theorems; the per-summand "
+                  "Dirac-triangle / PRV analysis is not a check of it; per-irrep C_3 values are withdrawn.",
+        owner="papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+        owner_anchor=r"The sharp statement is by compression on the", owner_tier=r"\[INTERNAL THEOREM\]",
+        tier="INTERNAL THEOREM", owner_window=1,
+        mention=r"C_\{?3\}?\^\{\(2\)\}|C_\{?3\}?\^\{\(k\)\}|C_3\(G\)|Lipschitz comparison constant",
+        qualifier=r"compression|=\s*1|abandoned|withdrawn|not a rate constant|record",
+        overclaim=r"C_3\^\{\(2\)\}\s*\\le\s*\\sqrt\s*\{?2\}?\s*(\$|\(Lemma|\\eqref\{eq:C3_2_full\}\) belongs)|"
+                  r"asymptotic-tight \$?C_3|C_3\s*\\to\s*1\^-|\\nearrow\s*\\sqrt|independent per-summand check|"
+                  r"genuine \$?\\sqrt\{?k",
+        changed="2026-10-02"),
+    "p39-state-space-not-propinquity": dict(
+        statement="Paper 39 proves van Suijlekom state-space GH convergence of the truncated S^3 x S^3 "
+                  "Camporesi-Higuchi tensor triple by the lifted-state route, d_GH <= gamma^(ab) <= "
+                  "gamma_a + gamma_b with constant 1; Latremoliere propinquity is not claimed and the "
+                  "propinquity question stays open.",
+        owner="papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+        owner_anchor=r"the object established is van~Suijlekom", owner_tier=r"state-space",
+        tier="INTERNAL THEOREM", owner_window=1,
+        mention=r"Paper~?\s?39[^.;]{0,120}(converg|tensor|closes|closed|propinquity)|"
+                r"tensor-product (state-space|propinquity)",
+        qualifier=r"state-space|Gromov|\bGH\b|not claimed|abandoned|stays open|lifted-state",
+        overclaim=r"closes that gap|propinquity of Paper~?39|Open prior to this work|"
+                  r"Tensor-product propinquity convergence for|Paper 39 closes the same-manifold",
+        changed="2026-10-02"),
+    "p45-rates-spatial": dict(
+        statement="Paper 45 proves a degeneracy theorem (the K^+-compressed Lorentzian seminorm vanishes), "
+                  "not a propinquity convergence; its surviving spatial statement is d_GH <= gamma_SU "
+                  "(constant 1); the product carrier converges at the additive rate gamma_SU + gamma_U; "
+                  "the circle Fejer rate is O(T log N_t / N_t); its panel column is the spatial rate.",
+        owner="papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+        owner_anchor=r"Our main theorem", owner_tier=r"fails structurally",
+        tier="INTERNAL THEOREM (degeneracy) + spatial statement", owner_window=1,
+        mention=r"Paper~?\s?45[^.;]{0,120}(rate|converg|propinquity|panel|proof)",
+        qualifier=r"degenera|spatial|additive|state-space|descoped|withdrawn|retracted|not a",
+        overclaim=r"Paper~?\s?45 propinquity proof|O\(T/\\Nt\)|SU\(2\) factor dominates the joint rate|"
+                  r"standard Latr\S*\s+propinquity",
         changed="2026-10-02"),
 }
 

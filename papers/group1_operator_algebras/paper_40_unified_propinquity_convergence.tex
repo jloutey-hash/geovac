@@ -10,7 +10,7 @@
 % substrate (unconditional for SU(2); for general G conditional on the
 % per-group spin-window lifted-state decomposition, rem:correction_L2;
 % NOT Latremoliere propinquity, which remains a named gap) and identifies
-% the universal rate constant 4/pi on the semisimple class.
+% the universal rate constant 4/pi on the simple groups (several simple factors: open).
 %
 % Status: first draft, May 2026, post-prerequisite-sprint closure (2026-05-15).
 % Built from internal supporting memos:
@@ -101,14 +101,16 @@ $\Tcal_\Lammax$ converges to $\Tcal_G$ in van~Suijlekom's state-space
 Gromov--Hausdorff distance for metric spectral triples, with
 \begin{equation*}
    d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; \gamma_\Lammax(G),
+   \;\le\; \gamma_\Lammax(G) \;\to\; 0,
    \qquad
-   \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax} + O(1/\Lammax),
+   \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax} + O(1/\Lammax)
+   \ \ \text{for simple } G,
 \end{equation*}
 with constant~$1$ from the lifted-state route of Paper~38 (the
 Lipschitz comparison constant $C_3(G) = 1$ of Lemma~\ref{lem:L3} enters
-only the withdrawn approximation-pair route). The asymptotic rate constant $4/\pi$ is
-\emph{universal} across the class:\ it is independent of the rank of $G$,
+only the withdrawn approximation-pair route). For compact connected \emph{simple}
+$G$ the asymptotic rate constant $4/\pi$ is
+\emph{universal}:\ it is independent of the rank of $G$,
 the order of the Weyl group $W(G)$, and the explicit Lie-type of $G$, in
 the dual-Coxeter normalisation of the bi-invariant inner product.  The
 value of the constant scales with the metric normalisation (a distance
@@ -135,7 +137,8 @@ refuted (Lemma~\ref{lem:L5}, corrected 2026-09-04).
 a derivation) as the $k=0$ volume-slot content of a master Mellin engine
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple;\ the
 universality of $4/\pi$ extends the value so read from a single group to
-the class (rigorous at rank~$1$; numerically supported, with a
+the simple groups (derived at rank~$1$, [INTERNAL THEOREM + MEASURED];
+numerically supported, with a
 fit-sensitive extraction, at rank~$\ge 2$, where the robust content is the discrimination of $4/\pi$
 from the Weyl-formula alternative and a fully rank-uniform analytical
 proof is a named gap, see Remark~\ref{rem:correction_L2} and the status
@@ -150,7 +153,9 @@ underlying even the state-space~GH statement is verified only for
 $\SU(2)$, so for general $G$ the convergence is conditional on that
 per-group spin-window decomposition;\ the closed-form rate
 $\gamma_\Lammax(G)$ and the universal $4/\pi$ constant (the genuine new
-content) are unaffected.
+content) are unaffected.  For semisimple $G$ with more than one simple
+factor the leading constant is open:\ a corollary asserting $4/\pi$ there
+is withdrawn (2026-10-02, Remark~\ref{cor:general_compact_connected}).
 \end{abstract}
 
 \bigskip\noindent
@@ -240,9 +245,9 @@ no rate.}
 \paragraph{What this paper does.}
 We close the gap between Paper~38 and~\cite{gaudillot_estrada_vs2025} on
 the semisimple sub-class of Class~1 (compact connected semisimple Lie
-groups; a central torus factor carries the circle constant $2/\pi$ and
-is excluded, see the Scope note inside
-Corollary~\ref{cor:general_compact_connected}).
+groups; the universal constant is stated for the simple groups, and a
+central torus factor carries the circle constant $2/\pi$ and is
+excluded, see Remark~\ref{cor:general_compact_connected}).
 
 \begin{theorem}[Main theorem; cf.~\S\ref{sec:main_theorem}]
 \label{thm:main_intro}
@@ -253,16 +258,19 @@ in van~Suijlekom's state-space Gromov--Hausdorff distance, with
 explicit rate
 \begin{equation}\label{eq:main_intro}
    d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; \gamma_\Lammax(G), \qquad
+   \;\le\; \gamma_\Lammax(G) \;\to\; 0, \qquad
    \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax}
-   + O\!\bigl(1/\Lammax\bigr),
+   + O\!\bigl(1/\Lammax\bigr) \ \ \text{for simple } G,
 \end{equation}
 with constant~$1$ from the lifted-state route of Paper~38 (the
 Lipschitz comparison constant $C_3(G) = 1$ of Lemma~\ref{lem:L3} enters
 only the withdrawn approximation-pair route), where
 $\gamma_\Lammax(G)$ is the mass-concentration moment of the central
 spectral Fej\'er kernel on $G$ given by Lemma~\ref{lem:L2}. The
-asymptotic rate constant $4/\pi$ is \emph{universal} across the class.
+displayed asymptotic form is stated for simple $G$, where the rate
+constant $4/\pi$ is \emph{universal}; for several simple factors only the
+bound and $\gamma_\Lammax(G) \to 0$ survive
+(Remark~\ref{cor:general_compact_connected}).
 \emph{Scope of the hypothesis:} the statement is unconditional for
 $G = \SU(2)$;\ for general $G$ it is conditional on the per-group
 spin-window decomposition underlying the lifted-state construction
@@ -292,13 +300,14 @@ $G_2$ extracted $1.177$, within $7.6\%$ of $4/\pi$ versus $51.6\%$ of
 $24/\pi^2 \approx 2.432$. Cross-group ratios are convention-independent
 and confirm the same verdict; see~\S\ref{sec:universal} for details.}.
 The universality is therefore not an artifact of $\SU(2)$ but, at the
-tier of Theorem~\ref{thm:main}(ii) (rigorous at rank~1, numerically
-supported at higher rank), a class-wide property of compact semisimple
-Lie groups with bi-invariant metric (a central $U(1)$ factor carries the circle constant $2/\pi$
-instead; see the scope note inside
-Corollary~\ref{cor:general_compact_connected}).
+tier of Theorem~\ref{thm:main}(ii) (derived at rank~1, numerically
+supported at higher rank), a property of the compact connected simple
+Lie groups with bi-invariant metric (for several simple factors the
+constant is open, and a central $U(1)$ factor carries the circle constant
+$2/\pi$; see Remark~\ref{cor:general_compact_connected}).
 
-The universality of $4/\pi$ is rigorous at rank~$1$ ($\SU(2)$:\
+The universality of $4/\pi$ is derived at rank~$1$ ([INTERNAL THEOREM
++ MEASURED]; $\SU(2)$:\
 Paper~38~\cite{paper38}, with the closed-form sum-rule of \S\ref{sec:L2}
 verified to $4/\pi$ by the doubling estimator in
 \texttt{geovac/central\_fejer\_su2.py}). For general $G$ the
@@ -342,7 +351,7 @@ $k = 0$ slice of the spectral-action heat-kernel Mellin transform
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the canonical Riemannian spectral
 triple. The class-wide universality of $4/\pi$ reported here (at the
 tier of Theorem~\ref{thm:main}(ii)) says that the value so read is
-rank-invariant across the semisimple class:\
+rank-invariant across the simple groups:\
 whatever the group, the central spectral Fej\'er kernel sees the
 rank-$1$ ($\SU(2)$) asymptotic analysis of Paper~38 through
 Peter--Weyl rather than through the global geometry of the
@@ -360,8 +369,8 @@ Casimir-cutoff form. Section~\ref{sec:lemmas} proves lemmas L1$'$--L4
 and records the fifth:
 \S\ref{sec:L1prime}~the chirality-doubled operator system substrate;
 \S\ref{sec:L2}~the central spectral Fej\'er kernel and its quantitative
-rate (Stein--Weiss type $\log \Lammax / \Lammax$ with universal
-constant $4/\pi$); \S\ref{sec:L3}~the Lipschitz comparison, proved by compression (the
+rate (Stein--Weiss type $\log \Lammax / \Lammax$, with universal
+constant $4/\pi$ on simple $G$); \S\ref{sec:L3}~the Lipschitz comparison, proved by compression (the
 earlier Dirac-triangle analysis retained as representation-theoretic
 statements, proved on special summands and panel-verified on the rest);
 \S\ref{sec:L4}~the Berezin reconstruction; and \S\ref{sec:L5}~the
@@ -385,8 +394,9 @@ Throughout, $G$ denotes a compact connected \emph{semisimple} Lie group
 of rank $r \ge 1$, with Lie algebra $\mathfrak g$ and chosen maximal
 torus $T \subset G$ of dimension $r$.  (Semisimplicity is where the
 dual-Coxeter normalisation below is defined; a central $U(1)$ factor
-would carry the circle constant $2/\pi$ rather than $4/\pi$, see the
-scope note inside Corollary~\ref{cor:general_compact_connected}.) We equip $G$ with a bi-invariant Riemannian metric
+would carry the circle constant $2/\pi$ rather than $4/\pi$, and for
+several simple factors the constant is open;\ see
+Remark~\ref{cor:general_compact_connected}.) We equip $G$ with a bi-invariant Riemannian metric
 arising from an $\mathrm{Ad}$-invariant inner product
 $\langle\,\cdot\,,\,\cdot\,\rangle$ on $\mathfrak g$. For a simple Lie
 algebra, this inner product is unique up to scale; we fix the
@@ -651,12 +661,12 @@ universal $4/\pi$ rate}\label{sec:L2}
 We construct the central spectral Fej\'er kernel
 $\KS_\Lammax \in C(G)$ generalising Paper~38's SU(2)
 kernel~\cite[Def.~2.1]{paper38} to arbitrary compact $G$, and pin its
-mass-concentration moment to a class-wide universal asymptotic
+mass-concentration moment, for simple $G$, to a universal asymptotic
 $4/\pi \cdot \log \Lammax/\Lammax$.
 
 \paragraph{Status of the universality result.} The asymptotic
-universality of $4/\pi$ is \emph{rigorous at rank~$1$}
-($\SU(2)$, Paper~38) and \emph{numerically supported} (fit-sensitive extraction) across
+universality of $4/\pi$ is \emph{derived at rank~$1$}
+($\SU(2)$, Paper~38, [INTERNAL THEOREM + MEASURED]) and \emph{numerically supported} (fit-sensitive extraction) across
 $\SU(3)$, $\Sp(2)$, $G_2$ (and a rank-$3$ datapoint $\SU(4)$);
 Theorem~\ref{thm:universal_constant} below. For general $G$ the
 \emph{Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
@@ -733,9 +743,15 @@ with $d_G$ the bi-invariant geodesic distance on $G$. Then
    \;=\; \frac{4}{\pi} \cdot \frac{\log \Lammax}{\Lammax}
    \;+\; O\!\bigl(1/\Lammax\bigr)
 \end{equation}
-\emph{universally:} the leading rate constant $4/\pi$ is independent of
-the rank of $G$, the order of the Weyl group $W(G)$, and the explicit
-Lie-type of $G$, in the dual-Coxeter normalisation.
+for compact connected \emph{simple} $G$, \emph{universally:} the
+leading rate constant $4/\pi$ is independent of the rank of $G$, the
+order of the Weyl group $W(G)$, and the explicit Lie-type of $G$, in the
+dual-Coxeter normalisation.  (Tier:\ that of
+Theorem~\ref{thm:universal_constant_analytical} --- derived at rank~$1$,
+[INTERNAL THEOREM + MEASURED], Paper~38; a proof sketch, numerically
+supported with a fit-sensitive extraction, at rank~$\ge 2$.)  For
+semisimple $G$ with more than one simple factor the leading constant is
+open (Remark~\ref{cor:general_compact_connected}).
 \end{enumerate}
 \end{lemma}
 
@@ -805,7 +821,8 @@ leading-order Stein--Weiss
 asymptotic of $T_\Lammax(G)/Z_\Lammax$ is computed by Abel--Plana
 applied to the Cartan-integration form of the sum-rule, yielding
 $\gamma_\Lammax(G) = (4/\pi) \cdot (\log \Lammax)/\Lammax +
-O(1/\Lammax)$ uniformly across $G$.
+O(1/\Lammax)$ uniformly across simple $G$ (at sketch level at
+rank~$\ge 2$).
 \end{proof}
 
 \begin{remark}[Correction note (2026-06-09)]\label{rem:correction_L2}
@@ -857,8 +874,9 @@ Definition~\ref{def:central_fejer_general} satisfies
    \;=\; \frac{4}{\pi} \cdot \frac{\log \Lammax}{\Lammax}
    \;+\; O\!\bigl(1/\Lammax\bigr),
 \end{equation}
-with the leading coefficient $4/\pi$ universal across all $G$. (Tier:\
-rigorous at rank~$1$, Paper~38; at rank~$\ge 2$ this is established as a
+with the leading coefficient $4/\pi$ universal across all simple $G$.
+(Tier:\ derived at rank~$1$, Paper~38, [INTERNAL THEOREM + MEASURED]; at
+rank~$\ge 2$ what is given is a
 proof sketch supplying the mechanism, the fully rank-uniform write-up
 being a named gap --- see the proof below and the status note in
 \S\ref{sec:L2}.)
@@ -867,7 +885,7 @@ being a named gap --- see the proof below and the status note in
 \begin{proof}[Proof sketch (mechanism; a fully rank-uniform
 write-up is a named gap)]
 The argument proceeds in three steps; at rank~$1$ it reduces to the
-rigorous Paper~38 Appendix~A computation, and at rank~$\ge 2$ it is
+Paper~38 Appendix~A computation, and at rank~$\ge 2$ it is
 given here at sketch level (the detailed Abel--Plana bookkeeping is
 not reproduced).
 
@@ -928,8 +946,9 @@ the backing test); the extraction is fit-sensitive, so the robust
 conclusion is Reading~A over Reading~B rather than the exact value.
 \end{proof}
 
-\paragraph{Numerical confirmation.} The analytical universality
-theorem is confirmed numerically as follows.
+\paragraph{Numerical corroboration.} The proof-sketch mechanism is
+corroborated numerically as follows (fit-sensitive extraction; the
+robust content is Reading~A over Reading~B).
 
 \begin{theorem}[Universality of the rate constant; numerical
 confirmation]\label{thm:universal_constant}
@@ -957,7 +976,7 @@ compute-budget; see Remark~\ref{rem:su4_compute} \\
 \end{center}
 At ranks $r = 1, 2$, the deviations are within the Stein--Weiss fit
 bias at the test panel size, and the convention-independent
-cross-group ratios $c(G_1)/c(G_2) \to 1$ confirm the universality.
+cross-group ratios $c(G_1)/c(G_2)$ are consistent with universality.
 At rank~$r = 3$ ($\SU(4)$), the extracted constant is noisier
 ($29.3\%$ off) because the rank-$3$ Weyl integration is genuinely
 $3$-dimensional, with per-row cost increasing by roughly an order
@@ -990,17 +1009,17 @@ at a $6.8\times$ gap.
 
 \begin{remark}[Compute scaling at rank~$3$]\label{rem:su4_compute}
 The $\SU(4)$ extraction is consistent with the analytical universality
-theorem (Theorem~\ref{thm:universal_constant_analytical}) but does
-not independently confirm it as cleanly as the rank-$2$ panel did.
+mechanism (Theorem~\ref{thm:universal_constant_analytical}, a proof
+sketch at rank~$\ge 2$) but corroborates it less cleanly than the
+rank-$2$ panel did.
 Two factors degrade the extraction: (i) the rank-$3$ Weyl integration
 is genuinely $3$-dimensional, increasing per-row compute cost by
 roughly an order of magnitude over rank~$2$ and capping the practical
 panel at $\Lammax^2 = 300$; (ii) the pre-asymptotic structure is
 stronger at rank~$3$ than at rank~$2$, making the leading-order
-extraction more sensitive to the fit form. The analytical theorem
-explains why this noisier extraction remains consistent with the
-universal $4/\pi$:\ the noise is in the extraction, not in the
-underlying rate. See~\cite{su4_rate_memo} for the detailed analysis.
+extraction more sensitive to the fit form. If the proof-sketch
+mechanism is right, the noise is in the extraction, not in the
+underlying rate;\ the panel alone does not decide this. See~\cite{su4_rate_memo} for the detailed analysis.
 \end{remark}
 
 \begin{remark}[Empirical $A$-error asymmetry at rank~$2$]
@@ -1008,9 +1027,9 @@ underlying rate. See~\cite{su4_rate_memo} for the detailed analysis.
 The extracted constants at rank~$2$ show an asymmetry that the
 analytical universality theorem does not immediately predict:\
 $\Sp(2)$ shows $14.6\%$ $A$-error while $G_2$ shows $7.6\%$, despite
-both groups being rank~$2$ with similar panel sizes. The analytical
-theorem states that the true value is $4/\pi$ for both, so this
-$\sim 2\times$ deviation gap is fit bias from the subleading-aware
+both groups being rank~$2$ with similar panel sizes. Under the
+proof-sketch mechanism the true value is $4/\pi$ for both, and this
+$\sim 2\times$ deviation gap would then be fit bias from the subleading-aware
 Stein--Weiss form on a finite panel. Two contributing factors:\
 (i) $\Sp(2)$ has $|W| = 8$ while $G_2$ has $|W| = 12$, so the
 $1/|W|$ Weyl-integration prefactor in the sum-rule decomposition
@@ -1020,7 +1039,7 @@ $\prod_{\alpha > 0} |1 - e^{i\alpha(t)}|^2$ has six positive-root
 factors versus $\Sp(2)$'s four, sharpening the localisation of
 $K_\Lammax$ near the identity and improving the
 asymptotic-regime overlap with the fit form. Neither factor
-contradicts the analytical universality theorem; they reflect the
+contradicts the proof-sketch mechanism; they reflect the
 expected dependence of finite-cutoff fit precision on
 $G$-specific harmonic-analysis weights. The cross-group ratio
 $c(\Sp(2))/c(G_2) = 1.087/1.177 = 0.924$ moves toward unity as the
@@ -1028,44 +1047,46 @@ panel grows, consistent with both groups landing at $4/\pi$ in the
 asymptotic limit.
 \end{remark}
 
-\begin{corollary}[Extension to compact connected semisimple
-$G$]\label{cor:general_compact_connected}
-The universal rate constant $c(G) = 4/\pi$ in
-Theorem~\ref{thm:universal_constant_analytical} extends from compact
-connected simple $G$ to compact connected semisimple $G$ (finite
-quotients of products of simple factors) via factor-wise
-cancellation.
+\begin{remark}[Several simple factors:\ the leading constant is
+open]\label{cor:general_compact_connected}
+\emph{Withdrawn 2026-10-02.} An earlier version of this paper stated, as
+a corollary, that $c(G) = 4/\pi$ extends from simple to semisimple $G$
+``via factor-wise cancellation'', arguing that on $G_1 \times G_2$ the
+kernel factors, the moment is additive, and the constants combine as
+$c(G_1)/2 + c(G_2)/2 = 4/\pi$.  Each step fails.  The Casimir cutoff
+% [retracted 2026-10-02: p40-semisimple-universality] -- quoted withdrawn argument
+$\Cas_1(\pi_1) + \Cas_2(\pi_2) \le \Lammax^2$ is a joint window, so the
+kernel is not the product of the single-factor kernels at cutoff
+$\Lammax$; and even for a product kernel the first moment of
+$d = (d_1^2 + d_2^2)^{1/2}$ is not additive --- it lies strictly
+between $\max_i \int d_i$ and $\sum_i \int d_i$.  Paper~39 measures the
+second fact on the same-manifold product $\SU(2) \times \SU(2)$:\ at
+cutoffs $(2,2)$ its joint moment is about $0.74$ of the sum of the two
+factor moments, about $1.5$ times one factor's
+(\texttt{tests/test\_paper39\_lifted\_state.py}).  No value of the
+leading constant is asserted for semisimple $G$ with more than one
+simple factor.  What survives for such $G$ is the bound
+$d_{\mathrm{GH}} \le \gamma_\Lammax(G)$ of Theorem~\ref{thm:main}, at
+that theorem's tier, with $\gamma_\Lammax(G) \to 0$ (sketch:\ the
+Casimir window is a ball in the weight lattice whose boundary shells
+carry a vanishing share of $Z_\Lammax$, so the multiplier symbol of
+$\KS_\Lammax$ tends to $1$ on each fixed irreducible, the kernel tends
+weak-$*$ to $\delta_e$, and its moment of the continuous function
+$d_G(e,\cdot)$ tends to $0$);\ the rate is not established here.
 
-\begin{proof}[Sketch] On a product $G_1 \times G_2$ with bi-invariant
-metric, the central spectral Fej\'er kernel factors as
-$K_\Lammax^{G_1 \times G_2}(g_1, g_2) = K_\Lammax^{G_1}(g_1) \cdot
-K_\Lammax^{G_2}(g_2)$ (Peter--Weyl decomposition is multiplicative on
-the product), and the Weyl integration formula factors correspondingly.
-The mass-concentration moment $\gamma_\Lammax$ is additive across
-factors via the squared geodesic distance
-$d^2_{G_1 \times G_2}((g_1, g_2), e) = d^2_{G_1}(g_1, e) +
-d^2_{G_2}(g_2, e)$. Each factor's contribution receives the
-Plancherel $\times$ Vandermonde cancellation independently, giving
-$c(G_1)/2 + c(G_2)/2 = (4/\pi)/2 + (4/\pi)/2 = 4/\pi$ for the
-combined factor (the factor of $2$ arises from the equal-weighting
-of factors in the additive distance squared). Iterating across the
-simple factors gives the universal rate constant on the full
-semisimple product.
-\end{proof}
-
-\emph{Scope (2026-09-02).} An earlier version of this corollary
+\emph{Scope (2026-09-02).} An earlier version of the withdrawn corollary
 extended the statement to $G_{\mathrm{ss}} \times T^k$ with a central
 torus factor, on the ground that ``the rank-$1$ constant is $4/\pi$ on
 each circle''. That ground is false:\ on a circle factor the central
 Fej\'er kernel reduces to the classical Fej\'er kernel, whose
 probability-normalised first moment is $(2/\pi)\log n / n$ --- half the
 $\SU(2)$ value (Paper~38, Remark ``Connection to the circle Fej\'er
-estimate''; \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}). Under
-the factor-wise argument above the product constant would then depend
+estimate''; \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}). Even
+under the withdrawn factor-wise argument the product constant would depend
 on the mix of simple and circle factors rather than being universal,
 so the torus-factor extension is withdrawn; no value is asserted here
 for $c(G_{\mathrm{ss}} \times T^k)$.
-\end{corollary}
+\end{remark}
 
 \begin{remark}[Relation to the circle Fej\'er constant]
 \label{rem:stein_weiss_general}
@@ -1093,8 +1114,8 @@ Remark~rem:circle\_fejer, so the contrast is withdrawn, 2026-09-28.)  No common
 ``$2\Vol(\text{base})/\Vol(\text{group})$'' form is claimed (Paper~38):\
 on the unit-radius spheres the $\SU(2)$ quotient
 $\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$ equals the circle constant, and $4/\pi$
-is its dual-Coxeter value;\ the universality across the semisimple class is the statement that
-every simple factor sees the rank-$1$ ($\SU(2)$) constant through the
+is its dual-Coxeter value;\ the universality across the simple groups is the statement that
+each of them sees the rank-$1$ ($\SU(2)$) constant through the
 Plancherel $\times$ Vandermonde cancellation, discussed further in
 \S\ref{sec:universal}. (An earlier version of this remark stated the
 circle constant as $4/\pi$ and the $\SU(2)$ constant as ``preserved
@@ -1358,8 +1379,8 @@ of Proposition~\ref{prop:dt_verification}.)
 in~\cite{dirac_triangle_memo}]
 Part~(a) is the
 Parthasarathy--Ranga Rao--Varadarajan conjecture, proved by
-Kumar~\cite{kumar1988} (and independently by Mathieu and Polo
-in~\cite{mathieu1989, polo1994}). Part~(b) follows from the standard
+Kumar~\cite{kumar1988} (and independently by
+Mathieu~\cite{mathieu1989}). Part~(b) follows from the standard
 dominance-order fact~\cite[\S13]{humphreys1972}:\ for
 any element $v$ of the Cartan subalgebra and any
 $w \in W$, the dominant image $\overline{w \cdot v}$ in the closed
@@ -1960,9 +1981,9 @@ for $\SU(2)$; for general $G$ conditional on the per-group spin-window
 lifted-state decomposition of Remark~\ref{rem:correction_L2}):
 \begin{equation}\label{eq:main_thm_general}
    d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; \gamma_\Lammax(G), \qquad
+   \;\le\; \gamma_\Lammax(G) \;\to\; 0, \qquad
    \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax}
-   + O\!\bigl(1/\Lammax\bigr),
+   + O\!\bigl(1/\Lammax\bigr) \ \ \text{for simple } G,
 \end{equation}
 where:
 \begin{enumerate}\setlength{\itemsep}{2pt}
@@ -1972,15 +1993,19 @@ Lipschitz comparison constant $C_3(G) = 1$ of Lemma~\ref{lem:L3}
 approximation-pair route (corrected 2026-10-02:\ an earlier display
 read $C_3(G)\cdot\gamma_\Lammax(G)$, which the lifted-state route does
 not supply).
-\item[(ii)] The leading rate constant $4/\pi$ is \emph{universal}
-across the class:\ independent of the rank of $G$, the order of the
-Weyl group $W(G)$, and the explicit Lie-type of $G$, in the
-dual-Coxeter normalisation. (Tier:\ rigorous at rank~1; for general
+\item[(ii)] For simple $G$ the displayed asymptotic holds and its
+leading rate constant $4/\pi$ is \emph{universal}:\ independent of the
+rank of $G$, the order of the Weyl group $W(G)$, and the explicit
+Lie-type of $G$, in the dual-Coxeter normalisation. (Tier:\ derived at
+rank~1, [INTERNAL THEOREM + MEASURED]; for general simple
 $G$ a proof-sketch mechanism numerically supported (fit-sensitive
 extraction) at rank~2 plus a rank-3 datapoint, the fully rank-uniform
 analytical proof being a
 named gap --- see Theorem~\ref{thm:universal_constant_analytical} and
-\S\ref{sec:L2}.)
+\S\ref{sec:L2}.)  For semisimple $G$ with more than one simple factor
+the bound holds at the same tier with $\gamma_\Lammax(G) \to 0$, but the
+leading constant and the rate are open
+(Remark~\ref{cor:general_compact_connected}).
 \end{enumerate}
 \end{theorem}
 
@@ -2004,7 +2029,9 @@ independent proof.  The bound~\eqref{eq:L5_bound_general} holds on the
 lifted-state route inherited from Paper~38 --- UCP compression plus the
 conjugation average, using no Berezin map, no partial inverse and hence no
 height term --- and combining it with the asymptotic
-rate~\eqref{eq:universal_rate} gives~\eqref{eq:main_thm_general}.
+rate~\eqref{eq:universal_rate} (simple $G$) or with $\gamma_\Lammax(G) \to 0$
+(Remark~\ref{cor:general_compact_connected}, several simple factors)
+gives~\eqref{eq:main_thm_general}.
 \end{proof}
 
 \begin{proposition}[Limit identification]\label{prop:limit_id_general}
@@ -2036,7 +2063,7 @@ spectral triples $\Tcal_\Lammax$ converge to $\Tcal_{\SU(N)}$ in
 van~Suijlekom's state-space Gromov--Hausdorff distance at the universal rate
 $\gamma_\Lammax = (4/\pi)\log\Lammax/\Lammax + O(1/\Lammax)$
 \emph{at the tier of Theorem~\ref{thm:main}}:\ the rate constant is
-rigorous at rank~1 ($\SU(2)$) and numerically supported at rank~$\ge 2$
+derived at rank~1 ($\SU(2)$) and numerically supported at rank~$\ge 2$
 (fit-sensitive extraction;\ its discrimination from the Weyl-formula
 alternative is the robust part),
 and for $N\ge 3$ the convergence is conditional on the per-group
@@ -2044,8 +2071,10 @@ spin-window decomposition verified there for $\SU(2)$.
 \end{corollary}
 
 \begin{corollary}[$\Spin(n)$]\label{cor:spin}
-For $G = \Spin(n)$ with $n \ge 3$ and the bi-invariant metric in the
-dual-Coxeter normalisation ($\Cas(\mathrm{ad}) = n - 2$), the
+For $G = \Spin(n)$ with $n \ge 5$ (simple;\ $\Spin(3) = \SU(2)$ is
+Corollary~\ref{cor:paper38_recovery}, and $\Spin(4) = \SU(2) \times \SU(2)$
+has two simple factors, so its constant is open) and the bi-invariant
+metric in the dual-Coxeter normalisation ($\Cas(\mathrm{ad}) = n - 2$), the
 truncated triples converge at the universal rate, at the tier of
 Theorem~\ref{thm:main} (conditional on the per-group spin-window
 decomposition;\ rate constant numerically supported at rank~$\ge 2$,
@@ -2075,10 +2104,11 @@ asymptotic constant $4/\pi = \Vol(S^2)/\pi^2$.
 The corollaries are all immediate consequences of
 Theorem~\ref{thm:main}; the only $G$-dependent input is the choice of
 dual-Coxeter normalisation in the bi-invariant Killing form, which is
-canonical.
+fixed in advance by the declared rule~\eqref{eq:dual_coxeter} (not the
+field-standard normalisation; \S\ref{sec:compact_lie}).
 
 % =====================================================================
-\section{The rate constant is universal (rigorous at rank 1): structural interpretation}
+\section{The rate constant is universal on simple groups (derived at rank 1): structural interpretation}
 \label{sec:universal}
 % =====================================================================
 
@@ -2108,7 +2138,7 @@ memo~\cite{unified_gh_scoping_memo}:
 
 \paragraph{Reading A (rank-invariant).}
 The constant is rank-invariant:\ $c(G) = 4/\pi$ for every compact
-connected semisimple Lie group $G$ in the dual-Coxeter normalisation,
+connected simple Lie group $G$ in the dual-Coxeter normalisation,
 regardless of rank or
 $|W|$.
 
@@ -2143,7 +2173,7 @@ $\times$ Vandermonde cancellation}\label{sec:why_universal}
 
 Universality is not expected to be coincidental. The following cancellation theorem
 (Theorem~\ref{thm:universal_constant_analytical} above) is the
-proposed mechanism --- rigorous at rank~$1$ (Paper~38 Appendix~A) and
+proposed mechanism --- derived at rank~$1$ (Paper~38 Appendix~A) and
 given as a proof sketch at rank~$\ge 2$, where it is corroborated
 numerically (the fully rank-uniform write-up is a named gap).
 
@@ -2196,7 +2226,7 @@ withdrawn 2026-09-02.)
 \paragraph{Structural reading.} The central spectral Fej\'er kernel
 sees the rank-$1$ ($\SU(2)$) asymptotic analysis through
 Peter--Weyl, \emph{not} through the global geometry of $G/T$.
-Whichever compact semisimple Lie group you build the kernel on, the Plancherel
+Whichever compact simple Lie group you build the kernel on, the Plancherel
 weight $\sqrt{\dim V_\pi}$ and the Vandermonde Jacobian
 $|\Delta(t)|^2$ both have $\prod_{\alpha > 0}$ structure tied to the
 same root system, and they cancel against each other at leading order
@@ -2210,8 +2240,8 @@ This cancellation is the natural structural origin of Reading~A
 (rank-invariant $c(G) = 4/\pi$). Reading~B (Weyl-formula
 $c(G) = 2|W(G)|/\pi^r$) would require the Weyl-group order to imprint
 multiplicatively on the leading-order rate, which the cancellation
-theorem forbids and which the empirical extraction at $\Sp(2)$ and
-$G_2$ falsifies independently with margin $33\%$ and $52\%$
+mechanism (a proof sketch at rank~$\ge 2$) excludes and which the
+empirical extraction at $\Sp(2)$ and $G_2$ disfavours independently with margin $33\%$ and $52\%$
 respectively (Theorem~\ref{thm:universal_constant}).
 
 \subsection{Identification with the master Mellin engine}\label{sec:master_mellin}
@@ -2237,8 +2267,8 @@ base-to-total ratio.
 
 Under that reading, the universality of $4/\pi$ in
 Theorem~\ref{thm:main}(ii) is the rank-invariance of the $k = 0$
-volume-slot value, extended from a single group (Paper~38) to the class
-at the tier of Theorem~\ref{thm:main}(ii):\ rigorous at rank~$1$,
+volume-slot value, extended from a single group (Paper~38) to the simple
+groups at the tier of Theorem~\ref{thm:main}(ii):\ derived at rank~$1$,
 numerically supported (and fit-sensitive) at rank~$2$, with one rank-$3$
 datapoint. The GeoVac-internal scoping
 memo~\cite{unified_gh_scoping_memo} originally proposed this
@@ -2281,9 +2311,10 @@ Cesaro-moment sub-tier.
 
 The Plancherel $\times$ Vandermonde cancellation theorem
 (Theorem~\ref{thm:universal_constant_analytical}) supplies the
-\emph{mechanism} for $c(G) = 4/\pi$ at all ranks --- rigorous at
-rank~$1$, a proof sketch at rank~$\ge 2$ (the fully rank-uniform
-write-up is a named gap). Empirically, we have verified this at
+\emph{mechanism} for $c(G) = 4/\pi$ on simple $G$ at all ranks ---
+derived at rank~$1$, a proof sketch at rank~$\ge 2$ (the fully
+rank-uniform write-up is a named gap). Empirically, it is corroborated
+(fit-sensitive extraction) at
 $\SU(2)$ (analytical, Paper~38), $\SU(3)$ ($c = 1.243$, $2.4\%$
 $A$-error), $\Sp(2)$ ($c = 1.087$, $14.6\%$ $A$-error), and $G_2$
 ($c = 1.177$, $7.6\%$ $A$-error). At $\SU(4)$ (rank $3$), the
@@ -2303,10 +2334,10 @@ still favours Reading~A (consistency with $c = 4/\pi$) over Reading~B
 (consistency with the Weyl-formula candidate $c(\SU(4)) =
 48/\pi^3 \approx 1.548$) by a small margin ($4.6\%$ in
 r.s.s.). The $\SU(4)$ extraction is therefore consistent with the
-analytical universality theorem but does not independently confirm it
+proof-sketch universality mechanism but does not independently confirm it
 as cleanly as $\Sp(2)$ and $G_2$ at rank~$2$ did.
 
-The decisive empirical falsification of Reading~B remains the $91\%$
+The strongest empirical evidence against Reading~B remains the $91\%$
 $A$-vs-$B$ gap at $G_2$. The $\SU(4)$ data adds a third rank,
 contributing to the cross-group consistency check, but does not
 contribute decisively to the discriminator on its own. Detailed
@@ -2405,8 +2436,8 @@ Connes--van~Suijlekom paradigm common with the present paper. We expect
 that the non-commutative integral of \cite{hekkelman_mcdonald2024b}
 admits a class-wide compact-Lie-group extension under the same
 Peter--Weyl machinery used here, with the rate constant $4/\pi$
-appearing as the leading Szeg\"o-type asymptotic (on the semisimple
-class). The detailed
+appearing as the leading Szeg\"o-type asymptotic (on the simple
+groups). The detailed
 generalisation is open and would constitute a Szeg\"o companion to
 the present convergence theorem.
 

@@ -94,7 +94,7 @@ Tracks which matrix elements at each level are computed algebraically vs numeric
 | Dirac-Coulomb radial ⟨r^{-3}⟩ (|κ|≥2) | algebraic | Kramers-Pasternak direct integration. p₁/₂ (|κ|=1, n_r≥1) limitation: sympy integral does not converge for near-singular integrand. (v2.18.1) |
 | Darwin + mass-velocity α⁴ corrections | algebraic | Closed-form rationals in (Z, n, l) times α²; verified Dirac formula exact. (T8, v2.12.0) |
 | Breit retarded radial R^k_BP(n₁l₁,n₂l₂;n₃l₃,n₄l₄) | algebraic | Exact Fraction/sympy arithmetic via r_<^k / r_>^{k+3} kernel; Z³ scaling verified; `geovac/breit_integrals.py`. (v2.18.0) |
-| Seeley-DeWitt coefficients a₀, a₁, a₂ on S³ | algebraic | Exact sympy Rational on unit S³ (a₀=a₁=√π, a₂=√π/8). `geovac/qed_vacuum_polarization.py`. (v2.18.2) |
+| Seeley-DeWitt coefficients a₀, a₁, a₂ on S³ | algebraic | Exact sympy on unit S³ (4-spinor): a₀ = √π, a₁ = −√π/2, a₂ = 0 (corrected 2026-10-02 from a₀=a₁=√π, a₂=√π/8, a sign error). `geovac/qed_vacuum_polarization.py`. (v2.18.2) |
 | QED vertex even/odd Dirac split D_even(s), D_odd(s) | algebraic | Exact Hurwitz zeta at quarter-integer shifts: D_even via ζ(s,3/4), D_odd via ζ(s,5/4). At s=4: D_even = π²/2 − π⁴/24 − 4G + 4β(4), D_odd = π²/2 − π⁴/24 + 4G − 4β(4). PSLQ-verified at 80 digits. `geovac/qed_vertex.py`. (v2.19.1) |
 | Screened ⟨1/r³⟩ from FrozenCore Z_eff(r) | numerical-required | Radial Schrodinger equation with Z_eff(r)/r potential solved on uniform grid (FD, eigh_tridiagonal). ⟨1/r³⟩ = ∫\|u\|²/r³ dr from normalized wavefunction. Enhancement 12-144× over hydrogenic at Z_eff=2 for Ca/Sr/Ba 2p. `geovac/neon_core.py` (screened_r3_inverse, screened_xi_so). (v2.19.4) |
 

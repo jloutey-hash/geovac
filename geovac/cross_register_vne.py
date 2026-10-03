@@ -75,7 +75,8 @@ References
 * Phase B-W1a-diag memo (debug/multifocal_b_w1a_diag_memo.md) -- the
   algebraic backbone derivation.
 * Phase C-W2b-easy memo (debug/multifocal_phase_c_w2b_easy_memo.md) --
-  the tensor-product propinquity NCG framework this operator lives in.
+  the tensor-product NCG framework this operator lives in (Paper 39 proves
+  state-space GH convergence; propinquity is not claimed).
 
 Author: GeoVac Development Team (Phase C-W1a-physics)
 Date: May 2026

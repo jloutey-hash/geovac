@@ -55,9 +55,11 @@ gamma^{joint} at low (n_max, N_t, T) panel.  It does NOT:
     cb-norm).  The earlier Bozejko-Fendler appeal is withdrawn -- that
     result concerns discrete groups.
   - Establish a quantitative rate constant (the Paper 38 4/pi
-    asymptote on SU(2) is preserved; the U(1) factor gives a 1/N_t
-    rate by standard Fejer-on-the-circle, so the joint rate is
-    O(log n_max / n_max + 1 / N_t) by L'Hopital comparison).
+    asymptote on SU(2) is preserved; the U(1) factor gives the classical
+    Fejer-on-the-circle rate (T/pi^2) log N_t / N_t -- the circle's first
+    moment carries a logarithm too, Paper 38 rem:circle_fejer; an earlier
+    note said 1/N_t, withdrawn 2026-10-02 -- so the joint additive rate is
+    O(log n_max / n_max + T log N_t / N_t)).
 
 What it provides is a NUMERICAL panel of gamma^{joint} values at
 (n_max, N_t, T) cells, with the factorization structure made explicit
@@ -308,8 +310,10 @@ def gamma_rate_circle(
     At N_t = 1: K^{U(1)} = 1/T (constant Haar), and the integral gives
     gamma = T/4 (mean of |theta| under uniform on circle of circumference T).
 
-    Asymptotic: gamma^{U(1)}(N_t, T) ~ C T / N_t  as N_t -> infinity
-    (standard Fejer-on-the-circle rate).
+    Asymptotic: gamma^{U(1)}(N_t, T) ~ (T/pi^2) log N_t / N_t as
+    N_t -> infinity (classical Fejer-on-the-circle first moment,
+    (2/pi) log N/N in the angle, rescaled by T/(2 pi); an earlier
+    docstring said C T / N_t, withdrawn 2026-10-02).
 
     Parameters
     ----------

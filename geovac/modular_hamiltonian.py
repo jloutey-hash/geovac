@@ -1526,8 +1526,8 @@ def propinquity_rate_check(n_max: int, tol: float = 1e-10) -> dict:
     If the modular flow has "soft" identification at finite n_max, the
     residual ||sigma_{2*pi}(O) - O||_F should scale with the L2 central
     Fejer mass-concentration moment gamma_{n_max} from
-    geovac.central_fejer_su2 (which controls the propinquity convergence
-    rate per Paper 38).
+    geovac.central_fejer_su2 (which controls the state-space GH
+    convergence rate per Paper 38; propinquity is not claimed).
 
     Historical: this was read as a cross-check linking L1 (modular
     convergence) to L2 (metric-spectral-triple convergence) via the shared

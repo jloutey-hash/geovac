@@ -55,7 +55,13 @@ def _kron3(a, b, c):
 
 
 def test_simple_tensor_constant_one() -> None:
-    """F = sin x sin y: ||grad F||_inf = 1; the triangle route would allow 2."""
+    """F = sin x sin y: ||grad F||_inf = 1; the triangle route would allow 2.
+
+    Limitation (DELTA #26 code review): for this F the L1 and L2 gradient
+    suprema coincide, so this test does NOT detect a missing Clifford pair
+    (deleting sigma_1/sigma_2 keeps it green); that load is carried by
+    test_anticommutation_is_load_bearing.
+    """
     prev = 0.0
     for K in (4, 8, 16):
         D, _cos, sin, I = _factor(K)

@@ -111,8 +111,10 @@ $d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$
 with asymptotic constant $4/\pi$ (Paper~38; \textbf{[INTERNAL THEOREM + MEASURED]};\ dual-Coxeter
 normalisation of the $\SU(2)$ metric --- $2/\pi$ on the unit $S^3$,
 the constant scaling with the metric, 2026-09-03).
-Third, the rate constant $4/\pi$ is universal across the class of
-compact connected semisimple Lie groups with bi-invariant metric --- rigorous at
+Third, the rate constant $4/\pi$ is reported universal across the
+compact connected simple Lie groups with bi-invariant metric (for several
+simple factors it is open;\ Paper~40 withdrew its semisimple corollary,
+2026-10-02) --- derived at
 rank~1, numerically supported (fit-sensitive extraction) at rank~2 for
 general $G$, with the rank-uniform analytical proof a named gap --- via a
 Plancherel-weight
@@ -133,8 +135,8 @@ de-compactification limit $T \to \infty$ survives at the
 norm-resolvent / spectral level.  A
 master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
 Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
-compact connected semisimple Lie groups $G_{1}, \ldots, G_{k}$, the
-k-fold tensor product converges (state-space GH) at the $4/\pi$ rate
+compact connected simple Lie groups $G_{1}, \ldots, G_{k}$, the
+k-fold tensor product converges (state-space GH) with per-factor $4/\pi$ rates
 reported universal in Paper~40 (proved only for $\SU(2)$ and
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ the general-$G$ $k = 1$ case is conditional on the
@@ -288,10 +290,10 @@ discussed in detail in \S\ref{sec:gh}--\S\ref{sec:mellin} below
 \paragraph{Headline 3: the rate constant $4/\pi$ is reported universal
 across compact simple Lie groups.}
 For any simple compact Lie group $G$ with bi-invariant metric (so
-$G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
-E_{7}, E_{8}\}$), the Plancherel-weight $\times$ Vandermonde-Jacobian
-cancellation theorem (Paper~40~\S 3.2~\cite{paper40_unified}) leaves
-exactly the rank-1 ($\SU(2)$) constant $4/\pi$ of Paper~38 Appendix~A
+$G \in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
+E_{7}, E_{8}\}$), the proposed Plancherel-weight $\times$ Vandermonde-Jacobian
+cancellation mechanism (Paper~40~\S 3.2~\cite{paper40_unified};\ a proof
+sketch at rank~$\ge 2$) leaves exactly the rank-1 ($\SU(2)$) constant $4/\pi$ of Paper~38 Appendix~A
 from each positive root direction's Euler--Catalan asymptote, in the
 dual-Coxeter normalisation.  The Lipschitz comparison constant
 $C_{3} = 1$ (which enters only the withdrawn approximation-pair route)
@@ -300,7 +302,7 @@ after Kumar (1988), applied to the dominant image of the tensor product
 $V_{\lambda} \otimes V_{\lambda'}^{*}$, concerns representation-theoretic
 inequalities, proved on special summands and panel-verified on the rest,
 not this bound).  \emph{Tier:}\ this universality
-is rigorous at rank~1 ($\SU(2)$) and, for general $G$, is a
+is derived at rank~1 ($\SU(2)$) and, for general $G$, is a
 proof-sketch mechanism (the Plancherel$\times$Vandermonde cancellation)
 numerically supported, with a fit-sensitive extraction, at rank~2
 ($\SU(3),\mathrm{Sp}(2),G_{2}$) with one rank-3 datapoint; a fully rank-uniform analytical proof is a named gap
@@ -355,8 +357,9 @@ hekkelman2022,
 toyota2023,
 farsi_latremoliere2024,farsi_latremoliere2025,
 leimbach_vs2024}.  All these earlier convergence results
-are strictly Riemannian (and almost all are on flat structures
-$S^{1}$, $\T^{d}$, $S^{2}$ Berezin--Toeplitz).  The Paper~38
+are Riemannian or discrete-group (Toyota's are for discrete groups of
+polynomial growth), and almost all of the Riemannian ones are on flat
+structures ($S^{1}$, $\T^{d}$, $S^{2}$ Berezin--Toeplitz).  The Paper~38
 $\SU(2)$ result and the Paper~40 generalisation (for general $G$
 conditional on the per-group spin-window decomposition) are non-abelian
 non-flat instances at quantitative rate (Paper~38 unconditional as of
@@ -873,12 +876,14 @@ spin-window decomposition).
 \label{thm:universal_rate}
 Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
 with bi-invariant metric (each simple factor
-$\in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4},
+$\in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4},
 E_{6}, E_{7}, E_{8}\}$).  The truncated (Kostant-Dirac) triples
 $\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the van~Suijlekom
-state-space Gromov--Hausdorff sense with the same asymptotic rate constant as
-\eqref{eq:gh_rate_constant}: namely $4/\pi$, in the dual-Coxeter
-normalisation (rigorous at rank~1;\ numerically supported, with a
+state-space Gromov--Hausdorff sense;\ for \emph{simple} $G$ with the same
+asymptotic rate constant as \eqref{eq:gh_rate_constant} (for several
+simple factors the constant is open, Paper~40, 2026-10-02):\ namely
+$4/\pi$, in the dual-Coxeter
+normalisation (derived at rank~1;\ numerically supported, with a
 fit-sensitive extraction, at rank $\ge 2$, a rank-uniform proof being a
 named gap).  The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
 rank, by compression.  For general $G$ the convergence is conditional on a
@@ -888,7 +893,7 @@ per-group spin-window decomposition (verified for $\SU(2)$).
 \paragraph{Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation.}
 The rate-constant universality of Theorem~\ref{thm:universal_rate}
-rests on a structural identity (a proof-sketch mechanism, rigorous at
+rests on a structural identity (a proof-sketch mechanism, derived at
 rank~1) which we record because it is the deepest algebraic content of
 the universality.  In the central spectral
 Fej\'er kernel on $G$,
@@ -1375,7 +1380,8 @@ of the GeoVac corpus (a four-layer Coulomb/HO asymmetry); this is
 the Coulomb-side claim only.
 \item[(G4)] \textbf{Inner-factor calibration data.}  Higgs / Yukawa
 selection question of the Connes--Marcolli SM construction;
-orthogonal to the present convergence theorem, addressed by
+orthogonal to Paper~45's results (a degeneracy theorem plus the
+surviving spatial statement), addressed by
 Paper~32~\S 8.C verdict POSITIVE-THIN (construction admits Higgs
 structurally, but no autonomous Yukawa selection from the present
 data).
@@ -1451,7 +1457,7 @@ The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} carries the
 $M_{1}$ ($k = 0$ volume) signature, a convention-dependent reading.
 The value's universality across the class follows from the
 Plancherel-weight $\times$ Vandermonde-Jacobian cancellation mechanism (Paper~40~\S 3.2;\
-rigorous at rank~1, proof-sketch tier at higher rank) which
+derived at rank~1, proof-sketch tier at higher rank) which
 leaves only the rank-1 ($\SU(2)$) constant after the
 $\prod_{\alpha > 0}$ products cancel.  Equivalently, the
 single-positive-root Euler--Catalan sum
@@ -1618,9 +1624,9 @@ $\sthree \times \R_{t}$ (Paper~47 limit) all converge in norm-resolvent
 sense to the same physical Lorentzian Dirac as $T \to \infty$.  This
 resolves the apparent tension between Paper~42~\S 11's bounded-interval
 architecture (chosen to preserve causal structure / no CTCs via
-Geroch's theorem) and Paper~45's periodic-compact architecture (chosen
-to enable Latr\'emoli\`ere propinquity machinery on a compact
-carrier).  Both are valid compact approximations to the same physical
+Geroch's theorem) and Paper~45's periodic-compact architecture (chosen,
+originally, to enable Latr\'emoli\`ere propinquity machinery on a compact
+carrier --- a route since closed by Paper~45's degeneracy theorem).  Both are valid compact approximations to the same physical
 Lorentzian Dirac.
 
 A numerical-verification panel (Sprint L3c-$\alpha$.2, 2026-05-23) at
@@ -1725,18 +1731,18 @@ retracted, so neither C16 nor a \texttt{cited\_by} list can see it.
 \textbf{(v) Master theorem --- universal compact-Lie-group factors
 (sketch).}
 Combining the k-fold extension with the $4/\pi$ rate reported universal
-in Paper~40~\cite{paper40_unified} (rigorous at rank~1;\ general-$G$
+in Paper~40~\cite{paper40_unified} (derived at rank~1;\ general-$G$
 convergence conditional) gives the expected multi-factor form (Paper~39 \S6(v))
 
 \begin{equation}\label{eq:master_theorem}
-\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
+d_{\mathrm{GH}}^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
 \;\le\; \sum_{j=1}^{k} \gamma^{G_{j}}_{n_{j}},
 \qquad
 C_{3}^{(k)} = 1,
 \end{equation}
 
-for arbitrary $k \ge 1$ and compact connected semisimple Lie groups
+for arbitrary $k \ge 1$ and compact connected simple Lie groups
 $G_{1}, \ldots, G_{k}$ with bi-invariant metrics (Paper~40's class; a
 central torus factor is excluded --- Paper~40 asserts no value for
 $c(G_{\mathrm{ss}} \times T^{k})$). \emph{Correction
@@ -1744,8 +1750,9 @@ $c(G_{\mathrm{ss}} \times T^{k})$). \emph{Correction
 $k$-\textbf{independent} constant $\sup_j C_3^{G_j}(n_j)$ resting on the
 false Pythagorean identity;\ the $k$-independent constant $1$ now comes
 from compression (each $G_j$ factor by Paper~40's left-equivariance
-argument). The joint rate then inherits the $4/\pi$
-asymptotic; but this multi-factor / general-$G$ form is a
+argument). Each summand $\gamma^{G_j}$ then carries the $4/\pi$
+asymptotic (the joint leading constant is open for several factors,
+Paper~40); but this multi-factor / general-$G$ form is a
 \textbf{sketch} (proved only for $k=1$, $\SU(2)$ and $k=2$,
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ $k=1$ for general $G$ is conditional;\ $C_3^{(k)}$ is the
@@ -2269,7 +2276,7 @@ Spaces},
 \newblock Princeton Math.~Ser.~32, Princeton Univ.~Press, 1971.
 
 \bibitem[Toyota(2023)]{toyota2023}
-M.~Toyota,
+R.~Toyota,
 \newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
 truncations for groups with polynomial growth},
 \newblock arXiv:2309.13469, 2023.

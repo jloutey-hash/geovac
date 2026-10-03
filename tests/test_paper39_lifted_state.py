@@ -93,6 +93,15 @@ def test_joint_moment_sandwich(n_a: int, n_b: int) -> None:
     assert g_ab < g_a + g_b - 1e-3, (g_ab, g_a, g_b)
 
 
+@pytest.fixture(autouse=True)
+def _restore_mp_dps():
+    """Restore mpmath's GLOBAL precision after each test (xdist workers are
+    shared; a raised dps contaminated a PSLQ test, 2026-10-03)."""
+    old = mpmath.mp.dps
+    yield
+    mpmath.mp.dps = old
+
+
 def test_joint_moment_independent_route() -> None:
     """Pin gamma^(ab) at (2,2) by a second, independent route: adaptive 2-D
     mpmath quadrature of the product-Riemannian (L2) distance against the

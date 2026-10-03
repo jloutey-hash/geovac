@@ -113,8 +113,9 @@ For f in C^infty(S^3),
 where gamma_{n_max} -> 0 by L2 part (e), C_3 = 1 by L3, and
 P_{n_max} M_f P_{n_max} is the unweighted compression of f to O_{n_max}.
 
-This is the L^infty-to-operator-norm comparison form needed for Track A's
-Latremoliere quantum GH propinquity bound (L5).
+This is the L^infty-to-operator-norm comparison form the (withdrawn) L5
+approximation-pair route needed; Paper 38 proves state-space GH by the
+lifted-state route, and propinquity is not claimed.
 
 [Historical, withdrawn:] on the central subalgebra Z(C(SU(2))), a
 cb-norm equality of L2(g) was taken to give the symbol-side estimate

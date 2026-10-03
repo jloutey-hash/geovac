@@ -1,6 +1,7 @@
 """Three-loop QED on S^3: probing depth-3 multiple zeta values.
 
-At one loop, QED on S^3 produces only pi^{even} (T9 theorem, squared Dirac).
+At one loop, the integer-s values zeta_{D^2}(s) are pi^{even} only (T9 theorem,
+squared Dirac); the one-loop determinant zeta'_{D^2}(0) carries zeta(3).
 At two loops, the first-order Dirac structure exposes zeta(3), zeta(5), and
 the vertex topology introduces Catalan G = beta(2) and Dirichlet beta(4).
 
@@ -650,22 +651,24 @@ def classify_three_loop_transcendentals() -> Dict[str, str]:
             "produces even/odd Hurwitz shifts at quarter-integer lattice. "
             "Two vertices create a NESTED parity filtration: even-even, "
             "even-odd, odd-even, odd-odd subcases. The nested Hurwitz "
-            "structure could produce depth-2 Dirichlet L-values (G, beta(4)) "
+            "structure could produce depth-1 Dirichlet L-values (G, beta(4)) "
             "from the vertex topology, as at two loops."
         ),
         "cg_weighted_three_loop": (
             "EXPECTED: The SO(4) CG channel count creates min(n1,n2) and "
             "min(n2,n3) weights at the two vertices, producing a nested "
-            "min-weighted sum. At two loops, the single min-weight produced "
-            "depth-2 multiple Hurwitz zeta outside standard bases. At three "
-            "loops, the nested min-weights are expected to produce depth-3 "
-            "multiple Hurwitz zeta values."
+            "min-weighted sum. At two loops S_min is identified at realized "
+            "depth <= 1 (Paper 28; the earlier 'depth-2 outside standard bases' "
+            "reading was a basis-coverage artifact); at three loops S^(3) is "
+            "identified at realized depth <= 2."
         ),
         "depth_k_prediction": (
-            "At k loops with vertex restrictions and CG weights, expect "
-            "depth-k multiple zeta values. One loop: depth-1 (pi^{even}). "
-            "Two loops: depth-2 (unidentified multiple Hurwitz). "
-            "Three loops: depth-3 predicted."
+            "At k loops with vertex restrictions and CG weights (Paper 28 "
+            "Prop. depth_k): one loop, integer-s traces of D^2 are pi^{even} "
+            "(T9); two loops (sunset vertex restriction adds G, beta(4)), S_min identified "
+            "at realized depth <= 1; three loops, S^(3) identified at realized "
+            "depth <= 2 (sole depth-2 constant zeta(5,3)). The earlier "
+            "'depth-k predicted' reading is superseded."
         ),
         "flat_space_connection": (
             "In flat-space QED, three-loop corrections involve zeta(3), zeta(5), "

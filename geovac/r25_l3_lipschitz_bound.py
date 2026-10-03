@@ -57,10 +57,10 @@ For every f in C^infty(S^3) and every n_max >= 1,
 
     ||[D_CH, M_f]||_op   <=   C_3 * ||nabla f||_infty
 
-with C_3 a finite constant independent of f and of n_max. We prove
-C_3 = 1 numerically on the natural spherical-harmonic test panel at
-n_max in {2, 3, 4} (lemma holds in the strong sense ratio <= 1, see
-§Numerical verification below).
+with C_3 a finite constant independent of f and of n_max. C_3 = 1 is
+proved by compression (Paper 38 Lemma L3); this module computes panel
+ratios on the natural spherical-harmonic test panel at n_max in
+{2, 3, 4} as a numerical check (ratio <= 1), not as the proof.
 
 The single multiplicative constant C_3 is "benign" in the sense of the
 master memo §5.3: it depends only on the unit-S^3 geometry and on the

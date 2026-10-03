@@ -210,7 +210,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
 | 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
 | **38** | **SU(2) state-space GH convergence** | **Unconditional for the commutative factor; 4/π rate (dual-Coxeter); compression/lifted-state proof, translation seminorm (see claims register)** |
-| 39, 40 | Tensor / Unified convergence | Same-manifold tensor case; 4/π reported universal over compact semisimple groups (rigorous at rank 1; fit-sensitive at rank ≥ 2; general-G convergence conditional) |
+| 39, 40 | Tensor / Unified convergence | Same-manifold tensor case; 4/π reported universal over compact simple groups (derived at rank 1; fit-sensitive at rank ≥ 2; general-G convergence conditional) |
 | 42 | Modular Hamiltonian | Finite-cutoff modular structure; Krein-(3,1) carrier in §11 (Paper 43 archived into it) |
 | **45** | **Lorentzian degeneracy theorem** | **K⁺ compression annihilates the spatial Dirac; earlier convergence claim retracted 2026-06-09** |
 | 46–49 | Lorentzian metric arc (archived) | Archived 2026-09-14; norm-resolvent arrow + cocycle-deficit algebra survive |

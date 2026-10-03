@@ -2,15 +2,16 @@ r"""Asymptotic-rate verification for Paper 45's surviving spatial rate (Rem rem:
 
 Paper: ``papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex''
 
-Surviving spatial state-space-GH rate (Paper 45's Lorentzian Lambda^L is
-SU(2) x U(1)_T Krein spectral triples, Paper 45 Theorem~\\ref{thm:main},
-Eq. eq:main_bound):
+Surviving spatial state-space-GH rate.  Paper 45's main theorem is a
+DEGENERACY theorem (the K^+-compressed Lorentzian seminorm vanishes); the
+convergence form once displayed here,
 
-   Lambda^L(T^L_{n_max,N_t,T}, T^L_M)
-       <= C_3^joint(n_max, N_t) * gamma^joint_{n_max,N_t,T}
-       ->_{(n_max, N_t) -> (oo, oo)} 0,
+   Lambda^L <= C_3^joint * gamma^joint -> 0,
 
-with the asymptotic-rate sharpening (Paper 45 Remark~\\ref{rem:asymp_rate};
+is WITHDRAWN (retracted 2026-06-09; Paper 45 thm:main is not a
+convergence theorem).  What survives is the spatial statement
+d_GH <= gamma^SU (constant 1, Paper 38's lifted-state route), with the
+asymptotic-rate sharpening (Paper 45 Remark~\\ref{rem:asymp_rate};
 Paper 38 Section L2; Paper 40 Section 3.2):
 
    lim_{n_max -> oo} n_max * gamma^SU_{n_max} / log(n_max) = 4 / pi.
@@ -57,7 +58,7 @@ where the asymptote is approached more closely).
 Per CLAUDE.md Section 13.4a, each numerical claim verified here corresponds
 to a specific paper equation:
 
-  - Theorem~\\ref{thm:main} (monotone decrease) -> test_lambda_monotone_*
+  - the surviving spatial rate (monotone decrease) -> test_lambda_monotone_*
   - Remark~\\ref{rem:asymp_rate} (4/pi leading constant) -> test_4_over_pi_*
   - Honest scope (asymptote approached from above) -> test_above_asymptote
 """
@@ -122,11 +123,15 @@ class TestPanelMonotoneDecrease:
             )
 
     def test_lambda_equals_gamma_su2_at_panel(self):
-        """At every buildable cell, Lambda_bound = gamma_joint_su2 (because
-        C_3 <= 1 makes height term sub-dominant; height_P = 0).
+        """At every buildable cell, the module's reported bound equals
+        gamma_joint_su2.
 
-        This is the load-bearing identity that justifies using gamma_rate
-        directly for the n_max in {2,3,4,5,6} sweep.
+        This is an identity of the module's bookkeeping (it reports the
+        maximum of terms whose largest is gamma_su2), not a height-control
+        argument: the earlier rationale "C_3 <= 1 makes the height term
+        sub-dominant; height_P = 0" is withdrawn (height_P = 0 is refuted,
+        and the approximation-pair route is abandoned).  It justifies using
+        gamma_rate directly for the n_max in {2,3,4,5,6} sweep.
         """
         for (n_max, N_t) in FULL_PAIR_CELLS:
             b = compute_lorentzian_propinquity_bound(n_max=n_max, N_t=N_t)

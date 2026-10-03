@@ -34,8 +34,9 @@ Dirac operator $D^2$ is a two-term polynomial in $\pi^2$ with rational
 coefficients at every integer~$s$, with no odd-zeta content there
 (half-integer $s \ge 5/2$ carries odd zeta values;\ Theorem~\ref{thm:T9}).
 (2)~\textbf{Even/odd parity discriminant:} operator order (2nd vs 1st)
-is the primary transcendental discriminant---even $s$ produces
-$\pi^{\mathrm{even}}$, odd $s$ produces $\zeta(3)$, $\zeta(5)$, etc.
+is the primary transcendental discriminant (conditional on the period
+conjecture, $\zeta(2k{+}1) \notin \mathbb{Q}(\pi)$)---even $s$ produces
+$\pi^{\mathrm{even}}$, odd $s \ge 5$ produces $\zeta(3)$, $\zeta(5)$, etc.
 (Theorem~\ref{thm:parity}).
 (3)~\textbf{$\chi_{-4}$ identity:}
 $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
@@ -59,9 +60,10 @@ new irreducibles.  The two-loop $S_{\min}$ decomposes exactly into
 Hoffman double $t$-values (classical periods of $\MT(\Z[1/2])$; the
 prior ``PSLQ-irreducible'' claim was a basis-coverage artifact);
 the three-loop $S^{(3)} = 31.5726\ldots$ (rigorous bracket
-$[31.57063, 31.57300]$) has realized depth $\le 2$ on every identified
-component: the catalogued depth-2 generators $t(5,1)$, $t(5,3)$,
-$t(7,1)$ enter at coefficients $\pm\tfrac12$, and nothing new is minted
+$[31.57063, 31.57300]$) has realized depth $\le 2$: the catalogued depth-2 generators $t(5,1)$, $t(5,3)$,
+$t(7,1)$ enter the components at coefficients $\pm\tfrac12$ and cancel
+in the total, where the sole surviving depth-2 constant is
+$\zeta(5,3) \in \MT(\Z)$
 (Proposition~\ref{prop:depth_k}, Sec.~\ref{subsec:s3_closure}).
 (7)~\textbf{$\zeta(3)$ complementarity:} the degeneracy-weighted
 fine-structure shell sum $\mathcal{S}(n) = n(5n-4)/2$ and the Dirac
@@ -80,11 +82,11 @@ order, while exactly $\max(0, \lfloor(2p{-}5)/2\rfloor)$ products
 survive (Observations~\ref{obs:euler_cancel},~\ref{obs:product_rule}).
 The cancellation mechanism is the $n^2$ Fock degeneracy --- the same
 weighting that produces $F = \zeta(2) = D_{n^2}(4)$ in Paper~2.
-However, PSLQ confirms that Paper~2's $K = \pi(B + F - \Delta)$ is NOT
-a $\mathbb{Q}$-linear combination of $D_2, \ldots, D_6$: the
-spectral-action ingredients of $K$ inhabit the $\pi$-polynomial ring of
-Theorem~\ref{thm:T9}, while the Sommerfeld sums carry irreducible
-odd-zeta from the Euler--Zagier MZV algebra.
+However, PSLQ finds no small-coefficient $\mathbb{Q}$-linear relation
+between Paper~2's $K = \pi(B + F - \Delta)$ and $D_2, \ldots, D_6$:\ $K$
+lies in $\mathbb{Q}[\pi]$ ($B$ a rational Casimir trace, $F = \zeta(2)$,
+$\Delta$ rational), while the Sommerfeld sums carry odd-zeta content from
+the Euler--Zagier MZV algebra.
 A complementary \emph{graph-native} formulation
 (Sec.~\ref{sec:graph_native_qed}) computes all one-loop diagrams as
 finite matrix traces on the GeoVac Fock graph, requiring no infinite
@@ -186,9 +188,10 @@ consistency checks are frozen in
 \texttt{tests/test\_qed\_flat\_limit.py}.
 
 The central finding is that the $S^3$ spectral geometry produces the
-\emph{same} transcendental constants that appear in flat-space
-perturbative QED---$\zeta(3)$, $\zeta(5)$, Catalan's~$G$, Dirichlet
-$\beta(4)$---through a purely geometric mechanism (operator order plus
+odd zeta values that appear in flat-space perturbative QED---$\zeta(3)$,
+$\zeta(5)$---together with vertex-parity content specific to $S^3$
+(Catalan's~$G$, Dirichlet $\beta(4)$, which do not appear in the
+flat-space $a_e$ through three loops), through a purely geometric mechanism (operator order plus
 vertex topology), together with multi-loop constants that climb the
 depth filtration of the classical level-2 (alternating) MZV ring:\ the
 two-loop $S_{\min}$ is identified in closed form in
@@ -427,9 +430,17 @@ functional equation. Source:
 \label{thm:parity}
 At even integer $s$, the Dirac Dirichlet series $D(s)$ is purely
 $\pi^{\mathrm{even}}$.  At odd integer $s$, $D(s)$ involves
-$\zeta_R(s{-}2)$ and $\zeta_R(s)$ (odd-zeta values).  Operator order
-(2nd vs 1st) is the primary transcendental discriminant: second-order
-operators produce $\pi^{\mathrm{even}}$ exclusively; first-order
+$\zeta_R(s{-}2)$ and $\zeta_R(s)$ (odd-zeta values;\ $s \ge 5$, since
+$\zeta_R(1)$ is a pole).  Operator order (2nd vs 1st) is the primary
+transcendental discriminant, conditional on the period conjecture
+$\zeta(2k{+}1) \notin \mathbb{Q}(\pi)$:\ the second-order operators
+$\Delta_{\mathrm{LB}}$ and $D^2$ produce
+$\pi^{\mathrm{even}}$ exclusively at integer $s$ (this holds for $\Delta_{\mathrm{LB}}$ and $D^2$, with spectra $n^2 - 1$
+and $(n+3/2)^2$, whose partial fractions have rational poles;\ it is not a property of every second-order operator ---
+the spinor connection Laplacian $\nabla^*\nabla = D^2 - 3/2$ has
+$\zeta_{\nabla^*\nabla}(2) = \tfrac{1}{12}\bigl(14\,\pi\tan(\tfrac{\pi\sqrt6}{2})/\sqrt6
++ 5\pi^2\sec^2(\tfrac{\pi\sqrt6}{2})\bigr)$, outside $\mathbb{Q}[\pi^2]$) (their spectral
+determinants are not covered:\ $\zeta'_{D^2}(0) = 3\zeta_R(3)/(4\pi^2) + \tfrac12\ln 2$); first-order
 operators produce odd-zeta values at odd~$s$.
 \end{theorem}
 
@@ -441,9 +452,11 @@ At even~$s$, both $\zeta_R(s{-}2)$ and $\zeta_R(s)$ are Bernoulli-type:
 $\zeta_R(2k) = (-1)^{k+1} (2\pi)^{2k} B_{2k} / (2 \cdot (2k)!)
 = \mathrm{rational} \times \pi^{2k}$.  At odd~$s$, both
 $\zeta_R(s{-}2)$ and $\zeta_R(s)$ are genuine odd-zeta values
-($\zeta(3)$, $\zeta(5)$, \ldots) that are $\mathbb{Q}$-linearly
-independent of all $\pi^{2k}$ by Ap\'ery's theorem and its
-extensions~\cite{apery1979,rivoal2000}.
+($\zeta(3)$, $\zeta(5)$, \ldots), conjecturally $\mathbb{Q}$-linearly
+independent of all $\pi^{2k}$ (open:\ Ap\'ery's theorem gives the
+irrationality of $\zeta(3)$ and Rivoal's infinitely many irrational odd
+zeta values~\cite{apery1979,rivoal2000};\ neither gives independence
+from $\pi$).
 \end{proof}
 
 \begin{table}[h]
@@ -460,7 +473,7 @@ $s$ & $D(s)$ & Class \\
 7 & $62\,\zeta(5) - \tfrac{127}{2}\,\zeta(7)$ & odd-zeta \\
 8 & $2\pi^6/15 - 17\pi^8/1260$ & $\pi^{\mathrm{even}}$ \\
 9 & $254\,\zeta(7) - \tfrac{511}{2}\,\zeta(9)$ & odd-zeta \\
-10 & $17\pi^8/315 - 31\pi^{10}/4725$ & $\pi^{\mathrm{even}}$ \\
+10 & $17\pi^8/315 - 31\pi^{10}/5670$ & $\pi^{\mathrm{even}}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -476,7 +489,7 @@ Schwinger--Rosner vertex correction~\cite{rosner1967}.
 
 \begin{theorem}[$\chi_{-4}$ identity]
 \label{thm:chi4}
-For every integer $s \ge 2$,
+For every integer $s \ge 2$ (the even/odd spectral sums converge for $s \ge 4$;\ at $s = 2, 3$ by Hurwitz continuation),
 \begin{equation}
   D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)
     \;=\; 2^{s-1}\bigl(\beta(s) - \beta(s{-}2)\bigr),
@@ -489,8 +502,8 @@ where $\beta(s) = L(s, \chi_{-4})$ is the Dirichlet beta function.
 Express $D_{\mathrm{even}}(s)$ and $D_{\mathrm{odd}}(s)$ via Hurwitz
 zeta at quarter-integer shifts.  With $m = n + 3/2$ and full
 degeneracy $g_n = 2(n+1)(n+2) = 2(m^2 - 1/4)$, the even-$n$
-eigenvalues are $m = 2(2k + 3/4)$ and the odd-$n$ ones
-$m = 2(2k + 5/4)$, $k \ge 0$, so
+eigenvalues are $m = 2(k + 3/4)$ and the odd-$n$ ones
+$m = 2(k + 5/4)$, $k \ge 0$, so
 $D_{\mathrm{even}}(s) = 2^{-(s-3)} \zeta(s{-}2, 3/4)
                        - 2^{-(s+1)} \zeta(s, 3/4)$
 and
@@ -582,8 +595,8 @@ The transcendental content of any QED spectral sum on $S^3$ is
 classified by three independent axes:
 \begin{enumerate}
 \item \textbf{Operator order.}
-      Second-order ($D^2$) $\to$ $\pi^{\mathrm{even}}$ (Theorem~\ref{thm:T9});
-      first-order ($|D|$) $\to$ odd-zeta (Theorem~\ref{thm:parity}).
+      Second-order ($D^2$) $\to$ $\pi^{\mathrm{even}}$ at integer $s$ (Theorem~\ref{thm:T9});
+      first-order ($|D|$) $\to$ odd-zeta at odd $s \ge 5$ (Theorem~\ref{thm:parity}).
 \item \textbf{Bundle type.}
       Scalar vs spinor modulates coefficients but not the
       transcendental class (Paper~18 Sec~IV).
@@ -1010,9 +1023,15 @@ Subtracting the leading term $c_1 x = 0.08$ and dividing by~$x^2$:
   = 0.173942291220598 \pm 10^{-12}.
   \label{eq:c2_apparent}
 \end{equation}
-By the T9 theorem (Theorem~\ref{thm:T9}), one-loop quantities on~$S^3$
-are polynomials in~$\pi^2$ with rational coefficients; hence
-$c_2 = a + b\pi^2$ for rationals~$a$, $b$.
+We take $c_2 = a + b\pi^2$ for rationals~$a$, $b$ as a PSLQ ansatz.
+(T9, Theorem~\ref{thm:T9}, constrains only the integer-$s$ values of
+$\zeta_{D^2}$;\ it does not constrain every one-loop quantity on $S^3$ ---
+the one-loop determinant $\zeta'_{D^2}(0) = 3\zeta(3)/(4\pi^2) + \tfrac12\ln 2$
+is a counterexample, and so (by a PSLQ identification, Sec.~\ref{sec:self_energy};\
+no regression test pins it) is the one-loop self-energy $\Sigma(1)$,
+reported to carry Catalan $G$;\ beyond one loop, so
+are the vertex-parity-restricted sums of Theorem~3 (two-loop sunset),
+which carry $G$ and $\beta(4)$ --- so the ansatz is not a T9 consequence.)
 
 PSLQ identification against the Paper~2 spectral invariants $B = 42$,
 $F = \pi^2/6$, $\Delta = 1/40$~\cite{paper2} yields
@@ -1038,8 +1057,7 @@ through three bilinear combinations:
 \end{equation}
 The numerator $2 - B\Delta - F\Delta - F/B
   = \frac{19}{20} - \frac{41\pi^2}{5040}$
-is rational plus a single~$\pi^2$ term, consistent with the T9
-constraint.  The denominator~5 is a simple integer.
+is rational plus a single~$\pi^2$ term, as the ansatz assumes.  The denominator~5 is a simple integer.
 
 \medskip
 \noindent\textbf{High-precision $c_3$ extraction.}
@@ -1061,7 +1079,7 @@ per five internal levels at $n_{\mathrm{int}}=50$, so the true asymptote
 lies near $-5.95$ to $-5.97 \times 10^{-7}$.  The ratio
 $|c_3 x^3| / |c_2 x^2| \approx 5.4 \times 10^{-6}$ confirms the
 expansion is rapidly converging but \emph{does not} terminate at
-second order.  PSLQ identification against the T9 basis
+second order.  PSLQ identification against the Paper-2 invariant basis
 $\{1, \pi^2, \pi^4, B\Delta, F\Delta, F/B, c_2, c_2^2, c_1 c_2,
 \Delta, \Delta^2, B\Delta^2, F\Delta^2, F^2/B\}$
 at $n_{\mathrm{int}}=50$ finds no relation with integer coefficients
@@ -1086,9 +1104,9 @@ $n_{\mathrm{ext}} = 1$, where $j = 1/2$ is the unique sector.
 \noindent\textbf{Paper~2 invariants in $c_2$: a numerical coincidence,
 not a derivation.}
 Since $\alpha$ cancels in the ratio $F_2/[\alpha/(2\pi)]$, $c_2$ is a
-pure geometric invariant of the Dirac spectral sum on~$S^3$, and the
-T9 theorem (Theorem~\ref{thm:T9}) constrains it to the form
-$a + b\pi^2$ with rationals~$a, b$.  The PSLQ identification
+pure geometric invariant of the Dirac spectral sum on~$S^3$, fitted in
+the ansatz form $a + b\pi^2$ with rationals~$a, b$ (an ansatz, not a T9
+consequence;\ see above).  The PSLQ identification
 (Eq.~\ref{eq:c2_identification}) writes $a$ and $b$ as a small-integer
 combination of $B$, $F$, $\Delta$, but this should be read with
 caution.
@@ -1104,7 +1122,7 @@ conclusive.
 
 Second, and decisively: the \emph{same} form does not predict $c_3$.
 Eq.~\eqref{eq:c3_numerical} measures $c_3 = -5.946(3)\times 10^{-7}$ at
-$200\sigma$, and the extended T9 basis
+$200\sigma$, and the extended Paper-2 invariant basis
 $\{1, \pi^2, \pi^4, B\Delta, F\Delta, F/B, c_2, c_2^2, c_1 c_2,
 \Delta, \Delta^2, B\Delta^2, F\Delta^2, F^2/B\}$ admits no
 PSLQ relation at integer coefficients bounded by $10^4$.  A genuine
@@ -1130,21 +1148,30 @@ Computation scripts: \texttt{debug/g2\_c2\_verification.py},
 % ===================================================================
 
 The one-loop QED effective action involves traces of $D^2$.
-The Seeley--DeWitt heat kernel expansion on unit $S^3$ gives
+The Seeley--DeWitt heat kernel expansion on unit $S^3$ (four-component
+spinors;\ the printed values include the $(4\pi)^{-3/2}$ prefactor) gives
 \begin{equation}
-  a_0 = a_1 = \sqrt{\pi}, \qquad a_2 = \sqrt{\pi}/8
+  a_0 = \sqrt{\pi}, \qquad a_1 = -\sqrt{\pi}/2, \qquad a_k = 0 \ (k \ge 2)
   \label{eq:seeley_dewitt}
 \end{equation}
-(exact in \texttt{sympy}, computed from the Dirac spectral data).
-The vacuum polarization coefficient and QED beta function follow:
+(exact in \texttt{sympy}, from the Vassilevich curvature polynomials with
+the Lichnerowicz endomorphism $E = -R/4$;\ twice the two-component
+closed form~\eqref{eq:sd_two_term} below).  An earlier version printed
+$a_0 = a_1 = \sqrt{\pi}$, $a_2 = \sqrt{\pi}/8$, produced by a sign error
+in the production coefficient function (corrected 2026-10-02, with the
+function;\ \texttt{tests/test\_qed\_vacuum\_polarization.py}).
+The standard flat-space one-loop vacuum polarization coefficient and QED
+beta function are
 \begin{equation}
   \Pi = \frac{1}{48\pi^2}, \qquad
   \beta(\alpha) = \frac{2\alpha^2}{3\pi}.
   \label{eq:one_loop}
 \end{equation}
-Both reproduce the standard flat-space one-loop QED results from
-$S^3$ spectral data alone, confirming the flat-space limit of the
-spectral framework at one loop.
+These are the standard flat-space values, entered here rather than
+computed from the $S^3$ data (an earlier version said they were
+reproduced from $S^3$ spectral data alone;\ the code returns the
+standard constants).  They are consistent with the flat-space limit,
+since the gauge-field term of the four-dimensional $a_2$ is local.
 
 \subsection{SD two-term exactness for the Dirac heat kernel}
 
@@ -1176,7 +1203,9 @@ depressed cubic
 with Cardano closed form
 $\Lambda = \sqrt[3]{A + \sqrt{A^2 - 1/216}}
          + \sqrt[3]{A - \sqrt{A^2 - 1/216}}$,
-where $A = 2(B + F - \Delta)/\sqrt{\pi} \approx 24.611$.  This yields
+where $A = (B + F - \Delta)/\sqrt{\pi} \approx 24.610$ (an earlier version
+printed a spurious factor $2$;\ the value $\Lambda_\infty$ below used the
+correct $A$).  This yields
 $\Lambda_{\infty} = 3.7102454679060528505$ (50~dps).  At this cutoff,
 a sharp spectral truncation includes exactly
 $40 = \Delta^{-1}$ modes ($n = 0, 1, 2$), since
@@ -2781,9 +2810,13 @@ reverses the argument order).
 \label{prop:depth_k}
 At $k$ loops on $S^3$ with vertex restrictions and CG weights:
 \begin{itemize}
-\item $k = 1$: $\pi^{\mathrm{even}}$ only
-      (Theorem~\ref{thm:T9}, proven).
-\item $k = 2$: $S_{\min}$ is an identified element of $\MT(\Z[1/2])$
+\item $k = 1$: free (unrestricted) integer-$s$ traces of $D^2$
+      (equivalently $D(s)$ at even $s$) give $\pi^{\mathrm{even}}$ only
+      (Theorem~\ref{thm:T9}, proven);\ vertex-restricted one-loop
+      quantities need not (the self-energy $\Sigma(1)$ is PSLQ-identified as carrying $G$).
+\item $k = 2$ (vertex-parity sums):\ the two-loop sunset vertex
+      restriction brings $G$ and $\beta(4)$ ($\beta(4)$ first enters here among the identified quantities;\ the $\chi_{-4}$ theorem).
+\item $k = 2$ (CG-weighted):\ $S_{\min}$ is an identified element of $\MT(\Z[1/2])$
       at level~2.  The depth is \emph{bounded} by 2 (the nesting depth
       of the min-weight double sum) but the content decomposes into
       Hoffman double $t$-values, which are classical period-ring
@@ -2957,10 +2990,10 @@ recovers the scalar Laplacian sector exactly, closing the chain
 from the packing construction through $S^3$ and the Dirac operator
 to the fine-structure Dirichlet series.
 
-This is Theorem~\ref{thm:T9} expressed in physical terms:
-the $D^2$ spectral zeta is even-zeta only \emph{because} the
-fine-structure energy distribution and the Dirac mode counting
-are transcendentally complementary.
+This is an analogue, in the fine-structure sector, of T9's
+integer-$s$ statement (Theorem~\ref{thm:T9}) --- not T9 itself, which
+concerns the half-integer spectrum $n + 3/2$, whereas the complementarity
+above is a sum over integer $n$ with $g = 2n(n+1)$.
 Paper~18's taxonomy predicted this separation: calibration
 ($\pi^{\mathrm{even}}$ from the second-order curvature $R/8$) versus
 spinor-intrinsic (mixed zeta from the first-order quantum defect).
@@ -3161,15 +3194,17 @@ all-orders Sommerfeld cancellation pattern explain why Paper~2's
 $K = \pi(B + F - \Delta)$ has pure $\pi$-content?
 
 PSLQ at 200~dps tests whether $K/\pi$ is a rational linear combination
-of $\{D_2, D_3, D_4, D_5, D_6, 1\}$.  The result is \emph{null}: $K/\pi$ is
-not in the $\mathbb{Q}$-span of the Sommerfeld sums through sixth order.
-$K$ inhabits a different algebraic space from the $D_p$.
+of $\{D_2, D_3, D_4, D_5, D_6, 1\}$.  The result is \emph{null}:\ no
+relation with coefficients below the PSLQ height bound at 200~dps (a null
+search excludes small-coefficient relations only, not membership in the
+$\mathbb{Q}$-span).
+$K \in \mathbb{Q}[\pi]$, while the $D_p$ carry $\zeta(\mathrm{odd})$ and
+hence (conditional on the period conjecture) lie outside it.
 
-The structural reason: $K$ is composed of spectral-action ingredients ---
-$B$ (truncated Casimir trace), $F = \zeta(2)$ (Fock Dirichlet at $s = 4$),
-$\Delta^{-1} = g_3^{\text{Dirac}}$ (Dirac mode count) --- all of which
-live in the spectral-zeta world where Theorem~\ref{thm:T9} guarantees
-$\pi$-polynomial content.  The Sommerfeld $D_p$, by contrast, are sums of
+The structural reading: $K$ is composed of $B$ (a rational truncated
+Casimir trace), $F = \zeta(2)$ (Fock Dirichlet at $s = 4$) and
+$\Delta^{-1} = g_3^{\text{Dirac}}$ (a Dirac mode count), so
+$K \in \mathbb{Q}[\pi]$ (directly, not via T9).  The Sommerfeld $D_p$, by contrast, are sums of
 \emph{physical energy coefficients} dressed with harmonic numbers
 $H_{n-1}^{(r)}$, which access the full Euler--Zagier MZV ring including
 irreducible odd-zeta at every order.
@@ -3179,8 +3214,9 @@ the $n^2$ Fock degeneracy that generates $F = \zeta(2)$ simultaneously
 drives the systematic expulsion of $\zeta(2) \times \zeta(\text{odd})$
 products from the Sommerfeld sums.  The Fock degeneracy organizes both
 $K$ (through $F$) and the $D_p$ (through the cancellation pattern),
-but the operator/energy distinction prevents $K$ from being a
-Sommerfeld functional.
+but (conditional on the period conjecture) the operator/energy
+distinction keeps $K$ from being a Sommerfeld functional;\ no
+small-coefficient relation was found.
 
 % ===================================================================
 \section{Flat-Space Consistency}
@@ -3198,9 +3234,10 @@ $N(n_{\max}) = 2(n_{\max}+1)(n_{\max}+2)(n_{\max}+3)/3$ matches the
 Weyl prediction $(2/3)R^3 p_{\max}^3$ with $O(1/n_{\max})$
 convergence.
 
-The \emph{same} transcendental constants---$\zeta(3)$, Catalan~$G$,
-Dirichlet $\beta(4)$---appear in both the $S^3$ spectral sums and
-flat-space two-loop QED~\cite{rosner1967,laporta1996}.
+$\zeta(3)$ appears in both the $S^3$ spectral sums and flat-space
+two-loop QED~\cite{rosner1967,laporta1996};\ Catalan~$G$ and Dirichlet
+$\beta(4)$ are $S^3$ vertex-parity content, absent from the flat-space
+$a_e$ through three loops.
 Coefficient matching for the full Petermann--Sommerfield two-loop
 anomalous magnetic moment $a_2 = 197/144 + \pi^2/12 + 3\zeta(3)/4 -
 \pi^2\ln 2/2$~\cite{petermann1957,sommerfield1957} requires matching
@@ -4541,9 +4578,9 @@ $n_{\mathrm{int}}=50$ extraction (Sec.~\ref{sec:curvature_coefficients})
 gives $c_3 = -5.946(3) \times 10^{-7}$ at $200.9\,\sigma$, confirming the
 expansion does not terminate at second order; the ratio
 $|c_3 x^3| / |c_2 x^2| \approx 5.4 \times 10^{-6}$ indicates rapid but
-non-terminating convergence.  The T9 theorem constrains $c_3$ to lie in
-the $\pi^{\mathrm{even}}$-polynomial ring; its closed-form identification
-remains open.
+non-terminating convergence.  Its closed-form identification remains
+open (a $\pi^{\mathrm{even}}$-polynomial form is an ansatz, not a T9
+consequence).
 
 The 5-point mode-dependent curve
 (Table~\ref{tab:mode_dependence}) reveals that the anomalous moment on
@@ -4586,11 +4623,10 @@ hydrogen spectrum.  The product survival rule --- $\zeta(2) \times
 $\max(0, \lfloor(2p{-}5)/2\rfloor)$ products surviving --- is verified
 through $D_6$ and driven by the same $n^2$ Fock degeneracy that produces
 $F = \zeta(2)$ in Paper~2~\cite{paper2}.
-Despite this structural link, PSLQ confirms that $K/\pi$ does not lie in
-the $\mathbb{Q}$-span of $\{D_2, \ldots, D_6\}$: the spectral-action
-ingredients of $K$ inhabit a $\pi$-polynomial ring
-(Theorem~\ref{thm:T9}), while the Sommerfeld sums carry irreducible
-odd-zeta content from the Euler--Zagier MZV algebra at every order.
+Despite this structural link, PSLQ finds no small-coefficient relation
+placing $K/\pi$ in the $\mathbb{Q}$-span of $\{D_2, \ldots, D_6\}$:\ $K$
+lies in $\mathbb{Q}[\pi]$, while the Sommerfeld sums carry odd-zeta
+content from the Euler--Zagier MZV algebra at every order.
 The operator/energy distinction --- spectral zeta versus physical
 energy coefficients --- is the structural separation between $K$ and
 the $D_p$.
@@ -4693,8 +4729,8 @@ of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
       nonzero at $200.9\,\sigma$.  The curvature expansion does not
       terminate at second order; the ratio $|c_3 x^3|/|c_2 x^2|
       \approx 5.4 \times 10^{-6}$ shows rapid but non-terminating
-      convergence.  The closed-form identification of $c_3$ in the T9
-      $\pi^{\mathrm{even}}$-polynomial ring remains open.
+      convergence.  The closed-form identification of $c_3$ (a
+      $\pi^{\mathrm{even}}$-polynomial ansatz) remains open.
 \item The multi-$n_{\mathrm{ext}}$ extraction of curvature coefficients
       requires Wigner--Eckart decomposition into multipole form factors
       for higher-$j$ sectors.  At $n_{\mathrm{ext}} \ge 2$, the $j = 1/2$

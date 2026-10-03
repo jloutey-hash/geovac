@@ -1952,8 +1952,9 @@ class FiveLemmaStatusTensor:
     L1prime_T: str = "DONE (tensor_L1prime, factor-by-factor + Kronecker prop)"
     L2_T: str = "DONE (tensor_L2_central_fejer, closed-form factorization)"
     L3_T: str = (
-        "DONE (tensor_L3_lipschitz, factorized panel C_3=1; "
-        "full O_sys C_3 = 1 by compression (Paper 39 L3-T); the earlier "
+        "DONE (C_3^(2) = 1 by compression on the Clifford-doubled module, "
+        "Paper 39 L3-T; tensor_L3_lipschitz only compares a factorized panel "
+        "against the record formula and computes nothing about compression; the earlier "
         "SU(2)xSU(2) Pythagorean refinement (C_3<1, =1+o(1)) was "
         "WITHDRAWN 2026-06-18 as operator-norm-false; state-space GH)"
     )

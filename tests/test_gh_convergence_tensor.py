@@ -11,8 +11,10 @@ Coverage of the five-lemma tensor extension:
     dimension factorizes; joint propagation number bounded.
   - L2-T:  joint Plancherel symbol factorizes; joint mass maximum 4/((n_a+1)(n_b+1));
     subadditive joint mass-concentration.
-  - L3-T:  joint Lipschitz comparison constant; factorized panel C_3=1;
-    full operator system C_3<=2.
+  - L3-T:  joint Lipschitz comparison constant C_3^(2) = 1 by compression
+    on the Clifford-doubled module (Paper 39); the factorized-panel value and
+    the former full-operator-system bound C_3<=2 are records of the abandoned
+    (B,P) route.
   - L4-T:  joint Berezin reconstruction inherits L4(a)-(d) factor-by-factor.
   - L5-T:  joint propinquity bound; convergence to zero.
 
@@ -637,8 +639,9 @@ class TestTriangleC3Bound:
     sqrt(((N_a-1)^2+(N_b-1)^2)/(...)) < 1; that is false (graded
     anticommutation does not give operator-norm orthogonality -- verified
     maximally violated on the actual harmonics in
-    test_paper39_triangle_tight.py).  The correct bound is the triangle
-    one (record function: 1 at (2,2), rising toward sqrt(2)).
+    test_paper39_triangle_tight.py).  The triangle form was the corrected
+    bound of the abandoned (B,P) route (record function: 1 at (2,2), rising
+    toward sqrt(2)); the live constant is C_3^(2) = 1 by compression.
     """
 
     def test_bound_at_22_equals_one(self):
@@ -690,8 +693,9 @@ class TestTriangleC3Bound:
             assert c <= np.sqrt(2.0) + 1e-12, f"bound {c} > sqrt(2) at {nb}"
 
     def test_exceeds_one_beyond_22(self):
-        """The (corrected) bound EXCEEDS 1 for cutoffs beyond (2,2)
-        -- the opposite of the withdrawn Pythagorean '< 1' claim."""
+        """RECORD: the abandoned-route triangle bound EXCEEDS 1 for cutoffs
+        beyond (2,2) -- the opposite of the withdrawn Pythagorean '< 1'
+        claim.  (Not the live constant, which is 1 by compression.)"""
         for nb in [(3, 3), (4, 4), (5, 5), (10, 10), (100, 100)]:
             c = c3_full_pythagorean_bound(*nb)
             assert c > 1.0, f"corrected bound {c} should exceed 1 at {nb}"

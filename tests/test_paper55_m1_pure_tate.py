@@ -78,7 +78,7 @@ def _compute_witnesses(dps: int):
         "W2_propinquity_4_over_pi": (
             mp.mpf(4) / pi,                # Paper 38 L2 asymptotic rate
             -1,
-            "Paper 38 L2 rate; Paper 40 rate constant (reported universal, compact semisimple; M1 placement a reading)",
+            "Paper 38 L2 rate; Paper 40 rate constant (reported universal, compact simple; M1 placement a reading)",
         ),
         "W4_pythagorean_1_over_pi2": (
             mp.mpf(1) / pi**2,             # Paper 43 sec 10.2 prefactor

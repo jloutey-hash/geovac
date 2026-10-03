@@ -23,8 +23,8 @@ verification coverage on all 28 named Paper 34 projections.
 Projections covered HERE (6 of 28):
   §III.2  Hopf bundle (sec:proj_hopf)             — Vol(S^2)/4 = pi (M1)
   §III.6  Spectral action (sec:proj_spectral_action)
-                                                  — a_0 = a_1 = sqrt(pi),
-                                                    a_2 = sqrt(pi)/8 (T9)
+                                                  — a_0 = sqrt(pi), a_1 = -sqrt(pi)/2,
+                                                    a_k = 0 for k >= 2 (two-term exact)
   §III.7  Camporesi--Higuchi spinor (sec:proj_spinor)
                                                   — |lambda_n| = n + 3/2,
                                                     g_n = 2(n+1)(n+2)
@@ -119,7 +119,8 @@ def test_paper34_III2_hopf_measure_factor():
 def test_paper34_III6_seeley_dewitt_a0_a1_a2_on_S3():
     """Paper 34 §III.6 (sec:proj_spectral_action): transcendental signature
     'sqrt(pi) * Q Seeley--DeWitt coefficients on unit S^3
-    (a_0 = a_1 = sqrt(pi), a_2 = sqrt(pi)/8); resulting observable
+    (a_0 = sqrt(pi), a_1 = -sqrt(pi)/2, a_k = 0 for k >= 2; corrected
+    2026-10-02 from a_0 = a_1 = sqrt(pi), a_2 = sqrt(pi)/8); resulting observable
     coefficients are pi^{2k} * Q at one loop (T9 theorem, Paper 28).'
 
     Verifies the explicit closed-form a_0, a_1, a_2 returned by
@@ -135,10 +136,10 @@ def test_paper34_III6_seeley_dewitt_a0_a1_a2_on_S3():
     # Paper 34 stated values
     assert sp.simplify(coeffs['a0'] - sp.sqrt(sp.pi)) == 0, \
         f"a_0 = {coeffs['a0']} != sqrt(pi)"
-    assert sp.simplify(coeffs['a1'] - sp.sqrt(sp.pi)) == 0, \
-        f"a_1 = {coeffs['a1']} != sqrt(pi)"
-    assert sp.simplify(coeffs['a2'] - sp.sqrt(sp.pi) / 8) == 0, \
-        f"a_2 = {coeffs['a2']} != sqrt(pi)/8"
+    assert sp.simplify(coeffs['a1'] + sp.sqrt(sp.pi) / 2) == 0, \
+        f"a_1 = {coeffs['a1']} != -sqrt(pi)/2"
+    assert sp.simplify(coeffs['a2']) == 0, \
+        f"a_2 = {coeffs['a2']} != 0"
 
     # Volume of S^3 (used as the heat-kernel measure)
     assert sp.simplify(coeffs['vol'] - 2 * sp.pi ** 2) == 0, \
@@ -146,7 +147,7 @@ def test_paper34_III6_seeley_dewitt_a0_a1_a2_on_S3():
 
     # Numerical cross-check
     assert math.isclose(float(coeffs['a0']), math.sqrt(math.pi), rel_tol=1e-15)
-    assert math.isclose(float(coeffs['a2']), math.sqrt(math.pi) / 8, rel_tol=1e-15)
+    assert float(coeffs['a2']) == 0.0
 
 
 # ----------------------------------------------------------------------------

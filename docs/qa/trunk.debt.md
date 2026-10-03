@@ -4,10 +4,15 @@ SMALL findings that could not be fixed on sight (criteria.md RESEARCH-GRADE).
 
 ## Open
 
+- 2026-10-03 (DELTA #26) — Paper 40 PRV upgrade owed: (INT) holds on every PRV summand at all ranks (Cas(sigma) = |sigma|^2 + 2<sigma,rho> >= |lambda + w lambda'^*|^2 >= |lambda - lambda'|^2); sound by inspection, needs an exact-arithmetic test before it replaces the v5.19.0 'rests on panels' caveat.
+- 2026-10-03 (DELTA #26 code review) — `tests/test_paper39_lifted_state.py` T2 hardcodes sigma_J rather than computing it from `central_fejer_kernel_su2`; a guard improvement, separate pass.
+- 2026-10-03 (DELTA #26 self-check #10) — Paper 28's 'Sigma(1) carries Catalan G' rests on an unrecorded-precision PSLQ at 50 dps with no regression test (now labelled as such in the text); coverage gap.
+- 2026-10-03 (DELTA #26) — five of the ten new C16 entries use vocabulary exemptions (e.g. 'corrected', 'withdrawn') rather than the per-entry `[retracted ...]` token the registry now prefers; convert when next touched.
+- 2026-10-03 (DELTA #26) — `viz/public/papers/*.html` (incl. group5 synthesis L29) still carries the pre-DELTA-#26 wording (standing PI-gated generated-layer item).
 - 2026-10-02 (DELTA #25, qa.md rule 3) — `README.md` carries its headline figures as bare values (~30: Pauli coefficients, equal-qubit ratios, LiH 838 / 907 / 276, 1-norms, nuclear 688 / 828 / 710, H2 99.97%, LiH +0.2% / −8.0490, He 1.88%, H2O 19.4%, ...). Under the new rule they should point at numeric-registry keys or the owner paper (Markdown `<!-- gvq:key -->` or a pointer); every value was re-sourced against its owner in this round, so this is a conversion, not a correctness debt. Blocked on extending C21 to read Markdown annotations (it reads `.tex` only), so the pointers can be checked rather than merely written.
 
 - 2026-10-02 (DELTA #25 self-check #15, out of scope) — Paper 39 states the elementary triangle bound for the displayed $D_{a,b}$ that the same paper calls unrealisable ($\gamma_a = 0$); the bound is trivially true there, but the 'tight at top-shell harmonics' test context (the code's graded multipliers) should be named.
-- 2026-10-02 (self-check #15, out of scope) — Paper 55's M1 table source cell still reads '(Hopf base)' (label retired corpus-wide at DELTA #19).
+- **[CLOSED 2026-10-03, DELTA #26]** 2026-10-02 (self-check #15, out of scope) — Paper 55's M1 table source cell still reads '(Hopf base)' (label retired corpus-wide at DELTA #19). Now '(quarter unit-sphere area)'.
 - 2026-10-02 (self-check #15, out of scope) — Paper 34 ~L1856 keeps H2 96.0% as the Level-4 anchor (legitimate for Level 4; not the corpus-best H2 figure, which is Level 2).
 - 2026-10-02 (DELTA #25 loop scope note) — rounds #12-#14 read whole summary surfaces (group1/3/4 syntheses, field guide, README, one-pager, claims register) and found pre-existing debt each time, all fixed. **Not yet read in full under the new cite-don't-paraphrase rule:** the group2, group5 and group6 syntheses and docs/geovac_positioning.md. Owed to the next FULL run.
 - 2026-10-02 (standing, PI-gated) — `viz/public/papers/*.html` is a stale generated layer rebuilt from the Zenodo manifest (declared gap since paper_60 FULL); every DELTA #25 correction is absent from it.

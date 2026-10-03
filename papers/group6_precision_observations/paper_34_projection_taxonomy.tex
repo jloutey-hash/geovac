@@ -105,8 +105,8 @@ quantum numbers, edges from selection rules, eigenvalues that
 predict atomic and molecular spectra (Paper~14, Paper~17, Paper~20).
 In the other language, GeoVac is a discrete spectral triple in the
 Marcolli--van~Suijlekom lineage of graph-spectral-triple
-constructions (Paper~32), with a heat-kernel expansion that
-reproduces the QED $\beta$-function at one loop (Paper~28) and
+constructions (Paper~32), with a heat-kernel expansion into which the
+standard flat-space one-loop QED $\beta$-function is entered (Paper~28) and
 recovers seven of eight QED selection rules with a single
 calibration constant $1/(4\pi)$ per loop (the unit-$S^2$ Weyl /
 two-dimensional heat-kernel normalisation; Paper~33).
@@ -524,12 +524,15 @@ $\Lambda^2$.\\
 gauge sector included).\\
 \textbf{Dimension introduced:} energy via $\Lambda$.\\
 \textbf{Transcendental signature:} $\sqrt{\pi} \times \mathbb{Q}$
-Seeley--DeWitt coefficients on unit $S^3$ ($a_0 = a_1 = \sqrt{\pi}$,
-$a_2 = \sqrt{\pi}/8$); resulting observable coefficients are
-$\pi^{2k} \times \mathbb{Q}$ at one loop (T9 theorem, Paper~28).\\
+Seeley--DeWitt coefficients on unit $S^3$ ($a_0 = \sqrt{\pi}$,
+$a_1 = -\sqrt{\pi}/2$, $a_k = 0$ for $k \ge 2$;\ corrected 2026-10-02
+from $a_0 = a_1 = \sqrt{\pi}$, $a_2 = \sqrt{\pi}/8$, a sign error in the
+production function, Paper~28); the integer-$s$ spectral-zeta values are
+$\pi^{2k} \times \mathbb{Q}$ (T9 theorem, Paper~28;\ the one-loop
+determinant carries $\zeta(3)$).\\
 \textbf{Used in:} Paper~28 (QED on $S^3$), Paper~32 (spectral triple
-synthesis), sprint LS-1 (Uehling shift $-27.13$ MHz from
-$\Pi = 1/(48\pi^2)$).\\
+synthesis), sprint LS-1 (Uehling shift $-27.13$ MHz from the entered
+flat-space $\Pi = 1/(48\pi^2)$).\\
 \textbf{Structural reading (master Mellin engine framing).}  This
 projection is the $k=2$ sub-case of the master Mellin engine of
 Paper~32~\S~VIII and Paper~18~\S~III.7:\ the proper-time integration
@@ -2929,13 +2932,14 @@ combinations of the spectral-side master-Mellin transcendentals.\\
 state-side projection; the natural continuations
 (mutual information, conditional entropy, fidelity, trace distance,
 relative entropy $S(\rho \| \sigma)$, Wasserstein--Kantorovich
-distance on the state space $P(\mathcal{H})$ of Paper~38's propinquity
-machinery) are not enumerated here.  The structural status of those
+distance on the state space $P(\mathcal{H})$ of Paper~38's state-space
+Gromov--Hausdorff framework;\ propinquity is not claimed) are not
+enumerated here.  The structural status of those
 candidate projections is named in the open-question section
 (\S~\ref{sec:open}, candidate state-side enumeration); operationally,
 they have appeared in the framework only as scaffolding inside
 specific calculations (Paper~26 bipartite entanglement, Paper~38
-Wasserstein--Kantorovich identification of the propinquity limit) and
+Wasserstein--Kantorovich identification of the state-space GH limit) and
 have not yet been promoted to dictionary entries with their own
 focal-length variable / dimension / transcendental tagging.  The
 state-side dictionary should be read as deliberately opened in this
@@ -3008,7 +3012,7 @@ operationally in Sprint~TD Track~2.
 Paper~38's Wasserstein--Kantorovich state space $P(S^3)$
 (Proposition~``Limit identification'') is the natural metric
 container for the state-side complement of the dictionary.  In the
-$n_{\max} \to \infty$ propinquity limit, the truncated spectral
+$n_{\max} \to \infty$ state-space Gromov--Hausdorff limit (propinquity is not claimed), the truncated spectral
 triple $\mathcal{T}_{n_{\max}}$ converges to $\mathcal{T}_{S^3}$ with
 the round-$S^3$ Wasserstein--Kantorovich distance as the metric on
 its state space.  This identifies a clean future-direction target:
@@ -3678,11 +3682,11 @@ energy & rational & exact symbolic \\
 $Z, \alpha$ & energy & $(Z\alpha)^2{\cdot}\mathbb{Q}$ & exact symbolic \\
 Dirac fine-structure formula ($n\le 4$) & spinor lift $\circ$ Fock &
 $Z, \alpha$ & energy & $(Z\alpha)^2{\cdot}\mathbb{Q}$ & exact \\
-$\Pi = 1/(48\pi^2)$ VP coefficient & spectral action &
+$\Pi = 1/(48\pi^2)$ VP coefficient & entered (flat-space; Paper~28) &
 $\Lambda, \alpha$ & dimensionless & $\pi^2{\cdot}\mathbb{Q}$ &
-exact symbolic \\
-$\beta(\alpha) = 2\alpha^2/(3\pi)$ one-loop & spectral action &
-$\alpha$ & dimensionless & $\pi{\cdot}\mathbb{Q}$ & exact symbolic \\
+entered constant \\
+$\beta(\alpha) = 2\alpha^2/(3\pi)$ one-loop & entered (flat-space; Paper~28) &
+$\alpha$ & dimensionless & $\pi{\cdot}\mathbb{Q}$ & entered constant \\
 $D^2$ heat kernel SD coefficients & spectral action & $\Lambda$ &
 energy & $\sqrt{\pi}{\cdot}\mathbb{Q}$ & exact symbolic \\
 $F = \zeta_R(2) = D_{n^2}(d_\text{max})$ & Fock + Dirichlet at
@@ -3715,7 +3719,7 @@ Stefan-Boltzmann $\pi^2/90$ on $S^3 \times S^1_\beta$ (high-$T$) &
 Fock $+$ observation/temporal-window $+$ spectral action
 ($\zeta$-regularization) & $T$ or $\beta$ & energy density &
 $\pi^2 \cdot \mathbb{Q}$ & exact symbolic \\
-Uehling shift $-27.13$ MHz at 2$S$ & spectral action $\circ$ Fock &
+Uehling shift $-27.13$ MHz at 2$S$ & entered $\Pi$ (flat-space) $\circ$ Fock &
 $Z, \alpha$ & energy & $\pi^2{\cdot}\mathbb{Q}$ & $<1\%$ \\
 21~cm hyperfine $A_\text{HF} = 1418.84$ MHz Bohr-Fermi (HF-1, $+$ external
 $g_p$) & spinor lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass
@@ -4151,7 +4155,7 @@ $g_e = 2$ (no anomalous moment).  Residual is $\approx a_e \approx
 21~cm $A_\text{HF} = 1420.488$ MHz (HF-2, $+a_e$ Schwinger, $+$ external
 $g_p$) & HF-1 chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A
 & Schwinger
-asymptote $a_e = \alpha/(2\pi)$ derived structurally on Dirac graph;
+asymptote $a_e = \alpha/(2\pi)$ recovered in the continuum flat-space limit $F_2/[\alpha/(2\pi)] \to 1$ (Paper~28;\ the graph-native $F_2$ stays $O(1)$ above it);
 \textbf{Parker--Toms first-order curvature correction $c_1 = R/12 = 1/2$
 verified at $0.5\%$ precision against the spectral sum}, no fits.  See
 Paper~28 (curvature coefficients).  Residual $+58$ ppm is
@@ -10252,10 +10256,10 @@ state-side projections for future enumeration:
 \emph{fidelity} $F(\rho, \sigma) = \mathrm{Tr}\sqrt{\sqrt{\rho}\sigma\sqrt{\rho}}$,
 \emph{Wasserstein--Kantorovich distance} on the state space
 $P(\mathcal{H})$ identified by Paper~38 as the natural metric
-container for the propinquity limit.  These candidates have appeared
+container for the state-space GH limit.  These candidates have appeared
 in the framework only as scaffolding inside specific calculations
 (Paper~26 bipartite entanglement; Paper~38 Wasserstein--Kantorovich
-identification of the propinquity limit) and have not been promoted
+identification of the state-space GH limit) and have not been promoted
 to dictionary entries.  Whether the state-side admits its own
 internal sub-mechanism partition analogous to the spectral-side M1 /
 M2 / M3 split (and if so, whether the four-mechanism structure ---

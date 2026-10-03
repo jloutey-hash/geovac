@@ -296,7 +296,9 @@ import math
 
 
 def test_propinquity_bound_finite_and_positive(hamiltonian_cache) -> None:
-    """The Paper 38 propinquity bound is finite and positive at max_n=2."""
+    """The `propinquity_bound` field (a reference value, the Paper 38
+    state-space GH moment; propinquity is not claimed) is finite and
+    positive at max_n=2."""
     H = hamiltonian_cache('LiH')
     bound = H.propinquity_bound
     assert math.isfinite(bound), f"propinquity_bound = {bound} is not finite"

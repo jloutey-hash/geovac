@@ -45,9 +45,11 @@ action (encoded in the LS-7 prefactor).
 
 NORMALIZATION DERIVATION
 ------------------------
-For Dirac on unit S^3, the heat-kernel expansion gives Seeley-DeWitt
-coefficients a_0 = a_1 = sqrt(pi), a_2 = sqrt(pi)/8 (Paper 28
-section curvature_coefficients).  The iterated CC spectral action at
+For Dirac on unit S^3 (4-component spinors), the heat-kernel expansion is
+two-term exact, a_0 = sqrt(pi), a_1 = -sqrt(pi)/2, a_k = 0 for k >= 2
+(Paper 28; corrected 2026-10-02 from a_0 = a_1 = sqrt(pi),
+a_2 = sqrt(pi)/8, which came from a sign error in the production
+coefficient function).  None of these values enters the code below.  The iterated CC spectral action at
 order (alpha/pi)^2 absorbs two factors of the photon Schwinger phase
 space (each contributing 1/pi via the proper-time integration), giving
 the universal (alpha/pi)^2 prefactor.

@@ -1,4 +1,6 @@
-"""State-space Gromov-Hausdorff assembly (Lemma L5) for the GeoVac S^3 spectral triple.
+"""State-space Gromov-Hausdorff machinery for the GeoVac S^3 spectral triple (the
+withdrawn Lemma L5 assembly, kept as a historical record; the live result is
+Paper 38's lifted-state theorem).
 
 NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
 
@@ -7,15 +9,16 @@ state-space Gromov-Hausdorff distance (Paper 38); Latremoliere's propinquity
 for metric spectral triples is NOT claimed (dual reach = named gap).  The
 vocabulary "tunneling pair" below is orientation only.
 
-This module realizes Lemma L5 of the WH1 / R2.5 GH-convergence proof shape
+This module realized Lemma L5 (withdrawn) of the WH1 / R2.5 GH-convergence proof shape
 (see ``debug/track_ts_a_gh_convergence_memo.md`` Section 5). It is the
 final lemma of a five-lemma roadmap; the analytical content has been
 supplied by L1' (offdiag CH operator system substrate, R3.5), L2 (central
 spectral Fejer kernel on SU(2)), L3 (Lipschitz comparison constant
-$C_3 = 1$), and L4 (Berezin-type reconstruction map B_{n_max}).  L5 is the
-*bookkeeping* layer: assemble the L1'--L4 ingredients into a Latremoliere
-quantum Gromov-Hausdorff propinquity tunneling pair (B, P) and read off
-the propinquity bound.
+$C_3 = 1$), and L4 (Berezin-type reconstruction map B_{n_max}).  L5 was
+the *bookkeeping* layer of the WITHDRAWN approximation-pair route: assemble
+the L1'--L4 ingredients into a pair (B, P) and read off a bound.  That route
+is abandoned (dual reach a named gap, both heights refuted); Paper 38's
+theorem uses the lifted-state route, and propinquity is not claimed.
 
 Statement of the theorem
 ========================
@@ -46,13 +49,14 @@ converge to the round-S^3 triple as n_max -> infinity:*
 explicit state-space GH constant assembled from L3 (C_3 = 1, the Lipschitz
 comparison) and L2 (the mass maximum 2/(n_max+1) -- not a cb-norm;
 the Bozejko-Fendler framing is withdrawn), and gamma_{n_max} the L2
-mass-concentration moment, whose rate gamma_{n_max} = (c + o(1)) log n / n
-is proven unconditionally in Paper 38 (translation-seminorm metrization,
-2026-06-10); the constant c is metric-convention dependent -- 4/pi in the
-dual-Coxeter normalisation Cas(ad) = h^v used by
-`central_fejer_su2.gamma_rate`, 2/pi on the unit round S^3, and 2 sqrt(2)/pi
-under the field-standard rule (theta|theta) = 2, which gives Cas(ad) = 2 h^v.
-That rule is the corpus's declared one, so 4/pi is not canonical
+mass-concentration moment.  Paper 38 proves the bound d <= gamma and
+gamma -> 0 unconditionally (translation-seminorm metrization, 2026-06-10);
+the displayed rate gamma_{n_max} = (c + o(1)) log n / n is
+[INTERNAL THEOREM + MEASURED].  The constant c is metric-convention
+dependent -- 4/pi in the dual-Coxeter normalisation Cas(ad) = h^v (the
+corpus's declared rule) used by `central_fejer_su2.gamma_rate`, 2/pi on the
+unit round S^3, and 2 sqrt(2)/pi under the field-standard rule
+(theta|theta) = 2, which gives Cas(ad) = 2 h^v; so 4/pi is not canonical
 (tests/test_p38_metric_convention.py, 2026-09-03).*
 
 The tunneling pair is
@@ -177,17 +181,19 @@ Honest scope of the bound
 (ii) The QUALITATIVE rate gamma_{n_max} -> 0 is rigorous (L2 closed-form
      gamma_2, gamma_3, gamma_4 are explicit algebraic numbers, monotone
      decreasing).  The QUANTITATIVE rate O(log n / n) is consistent with
-     but not rigorously proved by the small-n closed forms; this is L2's
-     quantitative item was CLOSED by Paper 38 (unconditional rate,
-     2026-06-10).  The L5 bound carries that rate; the constant depends
-     on the metric normalisation (see the module docstring).
+     but not rigorously proved by the small-n closed forms; L2's
+     quantitative item was later CLOSED by Paper 38 (displayed rate
+     [INTERNAL THEOREM + MEASURED], 2026-06-10).  The lifted-state bound carries that rate (the L5
+     approximation-pair route is withdrawn); the constant depends on the
+     metric normalisation (see the module docstring).
 
 (iii) The distance actually established is van Suijlekom's state-space
       GH distance; Latremoliere's propinquity is a strictly stronger
       target not claimed here (its dual-reach hypothesis is unverified).
 
-(iv) The L5 theorem proves convergence in the propinquity, NOT
-     identification of the limit with the round-S^3 Wasserstein-
+(iv) Paper 38's lifted-state theorem proves state-space GH convergence
+     (not propinquity; the L5 route is withdrawn), NOT identification of
+     the limit with the round-S^3 Wasserstein-
      Kantorovich metric.  The latter is a SEPARATE statement (Track A
      master memo Theorem 5.5, "limit identification") which uses
      Kantorovich-Rubinstein duality + the fact that convex limits of
@@ -872,18 +878,20 @@ def verify_convergence_to_zero(
 
 @dataclass
 class LimitIdentification:
-    """Companion result: identification of the propinquity limit.
+    """Companion result: identification of the state-space GH limit.
 
-    The L5 theorem proves Lambda(T_{n_max}, T_S3) -> 0 in van
-    Suijlekom's state-space Gromov-Hausdorff distance.  A separate
+    Paper 38's lifted-state theorem proves d_GH(T_{n_max}, T_S3) -> 0 in
+    van Suijlekom's state-space Gromov-Hausdorff distance (the L5
+    approximation-pair route is withdrawn).  A separate
     question is: what is the LIMIT object?  The natural candidate is the
     round-S^3 spectral triple T_S3 itself, NOT the Wasserstein-Kantorovich
     state space.
 
     The limit identification with the Wasserstein-Kantorovich metric
     on the state space (P(S^3), d_Wass) follows from
-    Kantorovich-Rubinstein duality once L5's propinquity convergence
-    is established.  The argument is standard (Rieffel 1999/2004,
+    Kantorovich-Rubinstein duality once state-space GH convergence is
+    established (Paper 38's lifted-state route; propinquity is not
+    claimed, and the L5 approximation-pair route is withdrawn).  The argument is standard (Rieffel 1999/2004,
     D'Andrea-Lizzi-Martinetti 2014) and uses:
 
       1. [WITHDRAWN premise] The L4 Berezin map B was assumed to have a
@@ -900,7 +908,8 @@ class LimitIdentification:
          Wasserstein-Kantorovich metric d_Wass against round S^3 geodesic
          distance.
 
-    Putting these together: the propinquity limit of T_{n_max} is T_S3,
+    Putting these together: the state-space GH limit of T_{n_max} is T_S3
+    (propinquity is not claimed),
     and its state space with the operator-system Connes distance is
     isometric to (P(S^3), d_Wass).
 
@@ -945,7 +954,7 @@ class FiveLemmaStatus:
     L2: str = "DONE (R2.5/L2, 2026-05-04)"
     L3: str = "DONE (R2.5/L3, 2026-05-04)"
     L4: str = "DONE (R2.5/L4, 2026-05-06)"
-    L5: str = "DONE (R2.5/L5, 2026-05-06)"
+    L5: str = "WITHDRAWN (2026-09-03; Paper 38 uses the lifted-state route)"
 
     def all_done(self) -> bool:
         return all(s.startswith("DONE") for s in [

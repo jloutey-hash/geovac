@@ -78,7 +78,7 @@ and U(1) factors:
 
 (3) Approximate identity.  ||B^{joint}(f) - P^{joint} M_f P^{joint}||_op
     <= gamma^{joint}_{n_max, N_t, T} ||nabla^{joint} f||_infty, with the
-    joint gamma rate gamma^{joint} = O(log n_max / n_max + 1 / N_t)
+    joint gamma rate gamma^{joint} = O(log n_max / n_max + T log N_t / N_t)
     from L3b first move §5 (factor-additive in either L^1 or L^2 joint
     metric, both -> 0 in the joint limit).
 
@@ -154,8 +154,9 @@ Per CLAUDE.md §13.4a, every equation has a corresponding unit test in
 References
 ==========
 
-  Loutey, J. "GeoVac Paper 38: SU(2) propinquity convergence on the
-  Camporesi-Higuchi spectral triple," Zenodo 2026; §L4 Berezin
+  Loutey, J. "GeoVac Paper 38: State-space Gromov-Hausdorff convergence of
+  truncated Camporesi-Higuchi spectral triples on S^3" (state-space GH,
+  not propinquity), Zenodo 2026; §L4 Berezin
   reconstruction.
 
   Sub-sprint A memo: debug/l3b_2_sub_sprint_A_lichnerowicz_memo.md
