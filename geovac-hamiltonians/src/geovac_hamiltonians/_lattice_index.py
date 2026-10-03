@@ -54,7 +54,7 @@ from scipy.integrate import quad
 
 from geovac_hamiltonians._lattice import GeometricLattice
 
-KINETIC_SCALE: float = -1.0 / 16.0   # Universal topological constant
+KINETIC_SCALE: float = -1.0 / 16.0   # matched energy scale kappa (an Observation, Papers 0/7)
 
 
 # ---------------------------------------------------------------------------
@@ -2240,7 +2240,7 @@ class MolecularLatticeIndex:
     fci_method : str
         FCI assembly method ('auto', 'direct', or 'matrix')
     kinetic_scale : float
-        Universal kinetic scale factor (default -1/16)
+        Matched energy scale kappa (default -1/16; an Observation, Papers 0/7)
     cross_atom_vee : bool or str
         Cross-atom V_ee mode: True = all (n,l) pairs (default),
         's_only' = s-orbital pairs only (v0.9.11), False = disabled.

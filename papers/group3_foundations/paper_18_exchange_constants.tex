@@ -176,7 +176,7 @@ with degeneracy $g_n = n^2$~\cite{loutey_paper7}.  The physical
 hydrogen energy levels $E_n = -1/(2n^2)$ are related by the
 energy-shell constraint $p_0^2 = -2E$, which acts as a
 stereographic focal length projecting $S^3$ onto flat
-$\mathbb{R}^3$.  The universal kinetic scale factor
+$\mathbb{R}^3$.  The matched energy scale (an Observation, Papers~0/7)
 \begin{equation}
   \kappa = -\frac{1}{16}
   \label{eq:kappa}
@@ -1236,13 +1236,14 @@ $2\pi^{5/2}$, the subleading $-\sqrt{\pi}\,t$, and the $\tfrac{1}{2}\sqrt{\pi}\,
 correction at the next order are all in M2.
 
 Sprint MR-A computed the natural Dirac analog of the SU(2) scalar
-central Fej{\'e}r state-space GH rate. The scalar baseline (L2 sprint,
-2026-05-06) had pinned the asymptote to
+central Fej{\'e}r moment, which bounds the state-space GH distance
+(Paper~38;\ a kernel constant, not the convergence rate, since a tapered
+amplitude gives $O(1/n)$). The scalar baseline (L2 sprint) had pinned the asymptote to
 $\lim_{n \to \infty} n \gamma_n / \log n = 4/\pi$ (\textbf{[INTERNAL THEOREM + MEASURED]}) with a uniform
 bound $\gamma_n \le 6\,(\log n)/n$ checked on a finite range (\textbf{[MEASURED]}) (dual-Coxeter
 normalisation of the $\mathrm{SU}(2)$ metric, the rule
 $\mathrm{Cas}(\mathrm{ad}) = h^\vee$ under which the geodesic distance is the
-rotation angle;\ $2/\pi$ on the unit $S^3$, Paper~38, 2026-09-03).  The
+rotation angle;\ $2/\pi$ on the unit $S^3$, Paper~38).  The
 constant is the sphere-volume quotient
 $\mathrm{Vol}(S^2)/\mathrm{Vol}(S^3) = 2/\pi$ for unit-radius spheres
 (twice that in the dual-Coxeter normalisation), which is consistent with
@@ -1260,7 +1261,7 @@ derivation;\ Paper~38). The Dirac analog instead obtained the
 structural identity $\gamma_n^{\rm Dirac} = \pi$ for every $n_{\max} \ge 1$:
 the half-integer-only Peter--Weyl truncation cannot span the constant
 function $\chi_0$, so the kernel does not localize at the identity, and
-no asymptotic decay exists to PSLQ. The L2 scalar rate decay is in
+no asymptotic decay exists to PSLQ. The scalar Fej\'er moment's decay is in
 fact an integer$\times$half-integer interference effect; removing the
 integer-spin sector kills it. This is consistent with the M1 reading
 when the relevant sub-bundle lacks $\chi_0$, and its presence in the
@@ -1268,9 +1269,7 @@ scalar case is what the derived $4/\pi$ asymptote records.
 
 Sprint MR-C extracted the L2 next-order constant $c$ in
 $n \cdot \gamma_n^{\rm scalar} \sim (4/\pi)\log(n) + c + O(\log(n)/n)$
-($c = 4.1093214674898756204229\ldots$, 22 verified decimal digits;
-the original 80-digit extraction was float-contaminated from digit 12,
-see Paper~38's open-questions record), and ran PSLQ
+($c = 4.1093214674898756204229\ldots$, 22 verified decimal digits), and ran PSLQ
 at coefficient ceiling $10^4$ against M1, M2, M3 and the extended
 ring $\{\gamma_E, \log 2, G, \zeta(3)\}$. No identification was
 returned.
@@ -1284,9 +1283,10 @@ derivation) as indexing both the M-mechanism and the natural domain of
 observable from which its signature can be extracted:
 \begin{itemize}
   \item $k = 0$ (M1, volume slot): volume-slot normalizations;\ the
-    state-space GH-rate constant shares the value (a reading, not a
-    derivation, Paper~38):\ $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the SU(2) Fej{\'e}r
-    asymptote (dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$) (L2 sprint quantitative-rate theorem).
+    SU(2) Fej{\'e}r-moment constant shares the value (a reading, not a
+    derivation, Paper~38):\ $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
+    (dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$), a kernel
+    constant and not the GH convergence rate.
   \item $k = 2$ (M2, Seeley--DeWitt): heat-kernel and spectral-action
     convergence; signature $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ (after
     the standard $\sqrt{\pi}$ heat-trace normalisation is divided out)
@@ -1305,12 +1305,12 @@ Mixing the index of the question (e.g.\ ``state-space GH rate'') with the
 index of the mechanism (``vertex parity'') produces structural
 degeneracy: this is exactly what MR-A measured. MR-C's negative is
 consistent with the same reading: the L2 subleading constant is
-downstream (via a Stein--Weiss IBP) of the M1-read rate constant, not a direct
+downstream (via a Stein--Weiss IBP) of the M1-read Fej\'er constant, not a direct
 $\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$, and the
 engine does not commit to the rings of derivative quantities along
 subsequent analytical pipelines. Within each domain the engine
-organizes the observed values (for $k = 0$ the GH-rate domain is itself
-a reading, not a derivation;\ Paper~38).
+organizes the observed values (for $k = 0$ the domain is the Fej\'er
+kernel's moment, read as M1, not the GH rate;\ Paper~38).
 Source memos: \texttt{debug/mr\_\{a,b,c\}\_*\_memo.md}, data
 \texttt{debug/data/mr\_\{a,b,c\}\_*.json}.
 
@@ -1328,17 +1328,17 @@ in the continuum analytic-continuation step.  This localizes the
 $M_1$ sub-mechanism's natural domain to the non-integer
 spectral-dimension residue of the cochain-level Mellin transform.
 The same-day continuum follow-on (Sprint Q5'-Stage1-2b-continuum,
-\texttt{debug/sprint\_q5p\_continuum\_mellin\_memo.md}) closes the
-$M_1$ identification at theorem grade:\ the continuum spectral zeta
+\texttt{debug/sprint\_q5p\_continuum\_mellin\_memo.md}) computes the
+Mellin residue exactly:\ the continuum spectral zeta
 $\zeta_{D^2}^{\mathrm{cont}}(s) = 2\,\zeta(2s - 2, 3/2) - \tfrac{1}{2}\,\zeta(2s, 3/2)$
 has a simple pole at $s = 3/2$ with bit-exact meromorphic residue $1$,
 so $\Gamma(s)\,\zeta_{D^2}^{\mathrm{cont}}(s)$ has Mellin residue
 $\Gamma(d/2) = \sqrt{\pi}/2$ at $s = d/2$.  This coefficient, the
-L2 state-space GH asymptote
+L2 Fej\'er-moment constant
 $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ of Paper~38 (Lemma~L2;\ dual-Coxeter,
 convention-dependent), and the $k = 0$ volume-slot normalization
 $\mathrm{Vol}(S^2)/4 = \pi$ of \S~III.2 are \textbf{[OBSERVATION]}
-read as normalisations of the $M_1$ volume slot (for the GH-rate entry a
+read as normalisations of the $M_1$ volume slot (for the Fej\'er entry a
 reading, not a derivation;\ Paper~38),
 linked in a chain by exact factors with no spectral-data input:\
 $\pi = (\pi^2/4)\cdot(4/\pi)$ and
@@ -1427,7 +1427,7 @@ therefore tied to the $n_{\mathrm{Fock}}$-parity sector choice of
 the truncation, not to the signature of the underlying spectral
 triple.  This refinement does not change the master Mellin engine
 domain reading above (M1 $\leftrightarrow$ volume-slot normalizations,
-the GH-rate constant sharing the value as a reading;
+the Fej\'er-moment constant sharing the value as a reading;
 M2 $\leftrightarrow$ heat-kernel and spectral-action convergence,
 M3 $\leftrightarrow$ vertex-restricted parity-character spectral
 sums); it sharpens the parity-convention-dependence of the M3
@@ -1465,7 +1465,7 @@ the Mellin slot exponent at which it is probed:
     closed form
     $M_3^{\gamma_P}(s) = 2^{2s - 2}\,(\beta(2s - 1) - \beta(2s - 3))$
     with $g_n = 2(n+1)(n+2)$ (the form $2^{2s-3}(\cdots)$ of Paper~55 is
-    the per-chirality multiplicity $(n+1)(n+2)$;\ corrected 2026-10-03),
+    the per-chirality multiplicity $(n+1)(n+2)$),
     landing in $\bigoplus_k \pi^{2k+1}\cdot\mathbb{Q}$ via the
     Euler-number closed form
     $\beta(2k + 1) \in \pi^{2k + 1}\cdot\mathbb{Q}$.  This is
@@ -1553,22 +1553,23 @@ is projected onto its diagonal in the spectral basis before any
 period content is read off, and only the slot exponent~$s$ then
 selects which period ring element is accessed.
 
-\paragraph{Compact / non-compact partition of the $4/\pi$ rate
-(Sprint M-Z, May 2026).}
-The $4/\pi$ rate constant (dual-Coxeter normalisation; $2/\pi$ on the
-unit $S^3$) of the state-space Gromov--Hausdorff convergence of Paper~38
-(compact $SU(2)$ truncation), reported universal in Paper~40 (compact
+\paragraph{Compact / non-compact partition of the $4/\pi$ Fej\'er
+constant (Sprint M-Z, May 2026).}
+The Fej\'er-moment constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the
+unit $S^3$) of the bound in Paper~38's state-space Gromov--Hausdorff
+convergence (compact $SU(2)$ truncation;\ a kernel constant, not the
+convergence rate), reported universal in Paper~40 (compact
 connected simple Lie groups with bi-invariant metric; derived at
 rank~1;\ a circle factor carries $2/\pi$), shares its value with the
 master Mellin engine's $M_1$ (volume slot) content --- a reading, not a
 derivation (Paper~38).  Sub-sprint M-Z (modular propinquity
-investigation, 2026-05-23) flagged a structural reason why this rate
+investigation, 2026-05-23) flagged a structural reason why this constant
 does \emph{not} transport to non-compact Coulomb (Sturmian basis on
 $L^2(\mathbb{R}^3)$): the $k = 0$ volume-slot reading is compact-Lie-quotient
 specific; Sturmian's continuum content dilutes the Plancherel weight
-to 1, killing the localization that drives the
-$\log n / n$ rate on $SU(2)$.  A rigorous non-compact analog of
-the Paper~38 / Paper~40 rate remains an open question; Latr\'emoli\`ere
+to 1, killing the localization behind the Fej\'er moment on $SU(2)$.
+A rigorous non-compact analog of the Paper~38 / Paper~40 bound remains
+an open question; Latr\'emoli\`ere
 2018~\cite{latremoliere2018} establishes existence of a complete
 propinquity metric on the inductive-limit construction but not a rate.
 Source: \texttt{debug/sprint\_modular\_propinquity\_mZ\_bethe\_log\_memo.md}.
@@ -1580,10 +1581,10 @@ over $\mathbb{Q}$, at depth $0$ and Tate weight $\in \mathbb{Z}$, by
 direct identification of $\pi = \mathrm{Vol}(S^2)/4$ as a weight-$1$
 Tate period (Kontsevich--Zagier 2001).  Every M1 witness logged
 across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25;\ a quarter of the unit-sphere area $\mathrm{Vol}(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$)); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
-(Paper~38 §L2 asymptotic state-space GH rate;\ dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$;\ its M1 placement a reading); $4/\pi$ (Paper~40 Thm~1
-rate constant, reported universal across compact connected simple Lie
+(Paper~38 §L2 Fej\'er-moment constant;\ dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$;\ its M1 placement a reading); $4/\pi$ (Paper~40 Thm~1
+Fej\'er-moment constant, reported universal across compact connected simple Lie
 groups, derived at rank~1); $1/\pi^2$ inside
-$-3\zeta(3)/(16\pi^2)$ (Paper~50 §3 F-theorem, an M1$\times$M3
+$-3\zeta(3)/(16\pi^2)$ (the $\zeta(3)$ term of the free-scalar F-value, Paper~50 §3, an M1$\times$M3
 cross-product;\ a continuum Klebanov--Pufu--Safdi value that Paper~50
 re-derives, not a finite-cutoff GeoVac output) --- is a $\mathbb{Q}$-linear combination of $\pi^n$
 for $n \in \mathbb{Z}$.  (The $1/\pi^2$ prefactor of the Pythagorean
@@ -2595,10 +2596,11 @@ question: GeoVac's machinery says where $A_F$'s Dirichlet ring
 sits in the taxonomy but does not pick out which finite spectral
 triple realizes it.
 
-\paragraph{Open question:\ a second packing axiom for inner-factor data.}
-The Paper~0 packing axiom forces the outer spectral triple's
-discrete labels $(n, l, m, s)$ and the $S^3$ topology, but is silent
-on inner-factor content $A_F$.  Sprint H1's $\mathcal{A}_{\mathrm{GV}}
+\paragraph{Open question:\ an axiom for inner-factor data.}
+The Paper~0 packing construction motivates the outer labels $(l, m)$
+(with $n$ and $s$ recorded there as Observations), and $S^3$ enters
+through Fock's projection;\ neither says anything about inner-factor
+content $A_F$.  Sprint H1's $\mathcal{A}_{\mathrm{GV}}
 \otimes (\mathbb{C} \oplus \mathbb{H})$ extension produces a Higgs
 sector for any non-zero Yukawa~$Y$, but no GeoVac data couples to
 that selection (the Sprint G3 commuting-$\mathbb{Z}_2$ theorem

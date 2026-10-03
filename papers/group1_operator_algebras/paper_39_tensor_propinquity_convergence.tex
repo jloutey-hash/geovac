@@ -165,7 +165,7 @@ truncations of any compact metric group, products such as
 $\SU(2)\times\SU(2)$ included, converge by
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}, with no Dirac
 operator and no rate):\ for $\SU(2)$ with an
-explicit rate $(c + o(1))\log\nmax/\nmax$~\cite{loutey_paper38}, and
+explicit Fej\'er-kernel bound $(c + o(1))\log\nmax/\nmax$~\cite{loutey_paper38}, and
 for the flat torus qualitatively (Leimbach--van~Suijlekom state no
 explicit rate). A natural and
 operationally important next question is whether the convergence
@@ -319,8 +319,9 @@ operator on a Hardy sector and does not fit
 standard NCG Dirac axioms. There is no published prescription for
 tensoring a Riemannian spinor Dirac with a Hardy-sector first-order
 complex operator in the propinquity framework, and the obstruction is
-the four-layer Coulomb/HO asymmetry of~\cite{paper24}~\S V resurfacing
-at the spectral-triple level. A separate variant ---
+the Coulomb/HO asymmetry of~\cite{paper24}~\S V (seven layers
+catalogued, six standing) resurfacing at the spectral-triple level. A
+separate variant ---
 $\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Riem}}$ with both factors
 Riemannian --- is mathematically clean (KO-arithmetic $3+5=8\equiv
 0\pmod 8$) but requires propinquity convergence for the rank-2
@@ -1484,8 +1485,8 @@ does not fit standard NCG Dirac axioms (KO-dimension is not
 classically defined in this setting). The two factors live in
 different categories of NCG construction, and there is no published
 prescription for tensoring them. We have flagged this elsewhere as the
-four-layer Coulomb/HO asymmetry of~\cite{paper24}~\S V resurfacing at
-the spectral-triple level. Neither the Bargmann transform nor the
+Coulomb/HO asymmetry of~\cite{paper24}~\S V (seven layers catalogued,
+six standing) resurfacing at the spectral-triple level. Neither the Bargmann transform nor the
 Kustaanheimo--Stiefel transformation provides a bridge: the former is
 a unitary intertwiner of operators on Hilbert spaces, not a unitary
 equivalence of spectral triples, and the latter operates at the
@@ -1502,13 +1503,13 @@ $\sthree$ with the round Riemannian $S^5$ spinor Dirac. KO-arithmetic
 is clean ($3 + 5 = 8 \equiv 0 \pmod 8$), and this object is a
 textbook Connes--Marcolli construction. But state-space GH convergence
 (the sense \cite{loutey_paper38} proves;\ propinquity is a further open
-gap) for $\Tcal_{S^5}^{\mathrm{Riem}}$ alone --- the rank-2 Spin(6)
-analog of \cite{loutey_paper38} --- requires a fresh five-lemma
-analysis: a higher-rank version of the Avery 3-Y integral, the
-corresponding $\SO(6)$ selection rule, and a rank-2 central spectral
-Fej\'er kernel. We expect analogous $\log n / n$-rate convergence
-with rank-dependent constants, but the detailed analysis is open and
-is itself a separate paper.
+gap) for $\Tcal_{S^5}^{\mathrm{Riem}}$ alone --- the
+$S^5 = \mathrm{Spin}(6)/\mathrm{Spin}(5)$ analog of \cite{loutey_paper38},
+on a homogeneous space rather than a group --- requires a central
+spectral Fej\'er kernel adapted to that quotient and a spin-window
+lifted state (the compression proof of the Lipschitz comparison needs
+no 3-Y integral or selection rule);\ Paper~40's group theorem does not
+cover it, and the analysis is open and is itself a separate paper.
 
 \subsection{Significance for the multi-focal-composition program}
 \label{sec:significance}
@@ -1529,8 +1530,8 @@ structural application is left for a separate paper.
 % =====================================================================
 
 \paragraph{(i) Quantitative rate at small $\nmax$.} Theorem~\ref{thm:main}
-inherits the single-factor asymptotic rate
-$\gamma_n \sim (4/\pi) \log n / n$ from~\cite{loutey_paper38}; the
+inherits the single-factor Fej\'er-kernel bound
+$\gamma_n \sim (4/\pi) \log n / n$ from~\cite{loutey_paper38} (a tapered amplitude gives $O(1/n)$ on $\SU(2)$ \textbf{[MEASURED]}); the
 quantitative rate at small $\nmax$ remains the open follow-up to
 \cite[\S 5(i)]{loutey_paper38}, parallel to single-factor Track~C in
 the GeoVac internal record. The joint rate inherits the same
@@ -1609,8 +1610,8 @@ of~\cite{loutey_paper38} (unconditionally for $\SU(2)$;\ for general $G$
 conditionally on the per-group spin-window decomposition) to compact
 connected semisimple Lie groups $G$
 with bi-invariant metric (a circle factor carries the circle constant) and
-reports the rate constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38, 2026-09-03)
-as \emph{universal} across the simple groups of that class (for semisimple groups with several simple factors the constant is open;\ Paper~40 withdrew its semisimple corollary, 2026-10-02) via a Plancherel-weight $\times$
+reports the Fej\'er-moment constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38)
+as \emph{universal} across the simple groups of that class (for semisimple groups with several simple factors the constant is open) via a Plancherel-weight $\times$
 Vandermonde-Jacobian cancellation (derived at rank~1).
 
 Combining the $k$-fold extension (item~(iii) above) with the
@@ -1628,8 +1629,8 @@ C_{3}^{(k)} \;=\; 1,
 for any $k \ge 1$ and compact connected simple Lie groups
 $G_{1}, \ldots, G_{k}$ with bi-invariant metrics, where
 the per-factor L3 constant is $1$ at every cutoff (Paper~40~\cite{paper40_unified},
-by compression;\ an earlier per-cutoff ``$C_3 \to 1^-$'' is withdrawn) and
-$\gamma^{G_{j}}_{n_{j}}$ is the per-factor general-$G$ rate at the
+by compression) and
+$\gamma^{G_{j}}_{n_{j}}$ is the per-factor general-$G$ Fej\'er moment, with the
 universal $(4/\pi) \log n_{j} / n_{j}$ asymptote. \emph{Correction
 (2026-06-18):} an earlier draft boxed this as a closed ``master
 theorem'' with a $k$-\textbf{independent} constant $\sup_j
@@ -1861,7 +1862,7 @@ truncations of compact semisimple Lie groups with bi-invariant metric},
 the present tensor-product paper, DOI via Zenodo.
 \newblock Generalizes \cite{loutey_paper38} from $\SU(2)$ to compact
 connected semisimple Lie groups (for general $G$ conditionally on the
-per-group spin-window decomposition); rate constant $4/\pi$ derived at
+per-group spin-window decomposition); Fej\'er-moment constant $4/\pi$ derived at
 rank~1 and numerically supported at rank~$\ge 2$ (the extraction is
 fit-sensitive;\ a rank-uniform symbolic proof is a named gap); Lipschitz comparison constant
 $C_3 = 1$ at every rank, by compression.

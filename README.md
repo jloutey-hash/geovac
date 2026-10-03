@@ -48,14 +48,14 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 
 Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc lives in `papers/group1_operator_algebras/` and its synthesis; highlights:
 
-- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2), explicit 4/π rate (dual-Coxeter normalisation; [INTERNAL THEOREM + MEASURED]) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window; the almost-commutative extension is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
+- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2) (Paper 38, main theorem: Fejér-kernel bound with constant 4/π, a kernel constant; O(1/n) [MEASURED] with a tapered amplitude) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window; the almost-commutative extension is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
 - **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
 - **Papers 46–49** (Lorentzian metric-level claims built on the retracted quantity) are archived in `papers/archive/` (2026-09-14; see `docs/retired_papers.md`); the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive
 - **Paper 50** Re-derives the Klebanov–Pufu–Safdi continuum F-theorem values on S³ + S⁵ in closed Hurwitz form (continuum spectra; the truncation never enters)
 - **Paper 56** Tannakian reconstruction closed at finite cutoff (5,864 bit-exact zero residuals); infinite-cutoff motivic-Galois identification open
 - **Paper 55** A census of the S³ spectral-zeta and heat-trace transcendentals: they sit in pure-Tate / level-4 cyclotomic mixed-Tate rings (chemistry seeds, spectral determinants and Paper 61's elliptic period lie outside the census)
 
-The "C-arc closure" sprints of June 2026 placed seven proof-by-argument results (the Forced-Count dimension count and non-selection results) and one Observation (Paper 32 §VIII) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
+The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count, non-selection results and Observations in Paper 32 §VIII (tally there) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
 
 ### Claims and verification status
 
@@ -206,11 +206,11 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | 8-9 | Bond Sphere + Sturmian | Structural theorem (guardrail), SO(4) selection rules |
 | 25, 28, 30 | Hopf gauge / QED on S³ / SU(2) Wilson | Discrete lattice-gauge structure on the Hopf graph |
 | 29 | Ramanujan Hopf | Graph-RH for GeoVac Hopf graphs; Ihara zeta closed forms |
-| **32** | **Spectral Triple** | **Explicit construction; seven proof-by-argument non-selection results and one Observation in §VIII** |
+| **32** | **Spectral Triple** | **Explicit construction; §VIII non-selection results and Observations (tally in the paper)** |
 | 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
 | 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
-| **38** | **SU(2) state-space GH convergence** | **Unconditional for the commutative factor; 4/π rate (dual-Coxeter); compression/lifted-state proof, translation seminorm (see claims register)** |
-| 39, 40 | Tensor / Unified convergence | Same-manifold tensor case; 4/π reported universal over compact simple groups (derived at rank 1; fit-sensitive at rank ≥ 2; general-G convergence conditional) |
+| **38** | **SU(2) state-space GH convergence** | **Unconditional for the commutative factor; compression/lifted-state proof, translation seminorm (see claims register)** |
+| 39, 40 | Tensor / Unified convergence | Same-manifold tensor case; 4/π Fejér-moment constant reported universal over compact simple groups (derived at rank 1; fit-sensitive at rank ≥ 2; general-G convergence conditional) |
 | 42 | Modular Hamiltonian | Finite-cutoff modular structure; Krein-(3,1) carrier in §11 (Paper 43 archived into it) |
 | **45** | **Lorentzian degeneracy theorem** | **K⁺ compression annihilates the spatial Dirac; earlier convergence claim retracted 2026-06-09** |
 | 46–49 | Lorentzian metric arc (archived) | Archived 2026-09-14; norm-resolvent arrow + cocycle-deficit algebra survive |

@@ -326,7 +326,8 @@ class TestReachAndHeight:
 
 
 class TestPropinquityBound:
-    """The L5 Latremoliere propinquity bound."""
+    """Quantities of the withdrawn L5 assembly -- not a propinquity bound (the
+    state-space GH bound is Paper 38's lifted-state theorem)."""
 
     def test_compute_at_n_max_2(self):
         bound = compute_propinquity_bound(2)

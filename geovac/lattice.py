@@ -27,14 +27,15 @@ class GeometricLattice:
     - Angular transitions: m ↔ m±1 (within same n, l)
     - Radial transitions: n ↔ n±1 (within same l, m)
 
-    Node Weights (DIAGONAL) represent POTENTIAL ENERGY:
-    - For state (n,l,m) near nucleus with charge Z: weight = -Z/n²
-    - This is a topological diagonal encoding of the potential (a
-      self-loop weight), not a spatial integral.
+    Node weights (diagonal attribute, not used by AtomicSolver):
+    - For state (n,l,m) with nuclear charge Z: weight = -Z/n²
+    - An n-dependent label weight; it is not the hydrogenic level energy
+      -Z²/(2n²) and does not encode the Coulomb potential.
 
     SCOPE (corrected 2026-09-25, PI-directed re-pricing; see Papers 0/7
     and CLAUDE.md S1). This edge set is what AtomicSolver's legacy
-    hamiltonian='graph' mode diagonalizes as H = kappa*(D - A + W). No
+    hamiltonian='graph' mode diagonalizes as H = kappa*Z^2*(D - A) (the node
+    weights W are not part of it). No
     edge here ever changes l (angular edges fix (n, l), radial edges fix
     (l, m)), so D - A is the direct sum of max_n disconnected l-blocks
     and does NOT converge, under any rescaling, to the S^3
@@ -140,8 +141,8 @@ class GeometricLattice:
         
         Edge Weighting:
         - Binary mode (topological_weights=False): weight = 1.0
-        - Topological mode (topological_weights=True): weight = 1/(n₁*n₂)
-          to encode Coulomb potential in graph structure
+        - Topological mode (topological_weights=True): weight = 1/(n₁*n₂),
+          an n-dependent weighting (it does not encode the Coulomb potential)
         """
         n_states = len(self.states)
         
@@ -200,9 +201,8 @@ class GeometricLattice:
         
         Topological Mode (pure geometric):
         ----------------------------------
-        Weight = 1/(n₁*n₂) creates n-dependent coupling that encodes
-        the Coulomb potential directly in graph topology. States near
-        the nucleus (low n) have stronger coupling.
+        Weight = 1/(n₁*n₂) creates an n-dependent coupling, stronger at
+        low n.
 
         This does NOT make D - A converge to a -1/n² (Rydberg-like)
         continuum spectrum: the edge set never changes l, so D - A
@@ -227,8 +227,7 @@ class GeometricLattice:
             Edge weight for adjacency matrix
         """
         if self.topological_weights:
-            # Topological puncture: weight ∝ 1/(n₁*n₂)
-            # This encodes the 1/r potential in the graph structure
+            # n-dependent weighting: weight ∝ 1/(n₁*n₂)
             return 1.0 / (n1 * n2)
         else:
             # Binary (uniform) weights
@@ -236,47 +235,19 @@ class GeometricLattice:
 
     def _compute_node_weights(self) -> None:
         """
-        Compute diagonal node weights = POTENTIAL ENERGY as graph topology.
+        Compute the diagonal node-weight attribute W, -Z/n² per state.
 
-        SCOPE (diagonal weight only; corrected 2026-09-25, see the class
-        docstring and CLAUDE.md S1): in this legacy graph model
-        (AtomicSolver hamiltonian='graph') the diagonal self-loop weight
-        W carries the -Z/n² potential term; the D - A part is a
-        topological edge scheme that does NOT converge to a continuum
-        kinetic operator (tests/test_graph_s3_nonconvergence.py). This
-        docstring describes W alone, not a claim that D - A + W
-        reproduces the physical hydrogen spectrum.
-
-        For a hydrogen-like atom with nuclear charge Z:
-            Node weight for state (n, l, m) = -Z/n²
-
-        This IS the potential energy V = -Z/r, encoded topologically through
-        the quantum number n. The spatial scaling r = n²/Z is IMPLICIT in
-        the Bohr model - we don't need explicit coordinates!
-
-        The Hamiltonian solver will use:
-            H = kinetic_scale * (D - A + W)
-
-        where W = diag(node_weights) encodes the potential.
-
-        Physical Interpretation:
-        -----------------------
-        - Low n states (close to nucleus): Large negative weight (strong binding)
-        - High n states (far from nucleus): Small negative weight (weak binding)
-        - Nuclear charge Z: Scales the binding strength
-
-        Examples:
-        - Hydrogen (Z=1, n=1): weight = -1/1 = -1.0 Ha
-        - Helium (Z=2, n=1):   weight = -2/1 = -2.0 Ha (twice as strong!)
-        - H⁻ (Z=1, n=2):       weight = -1/4 = -0.25 Ha (weakly bound)
-
-        This is PURE TOPOLOGY - no coordinates, no distance calculations!
+        W is an n-dependent label weight stored on the lattice.  It is not
+        the hydrogenic level energy -Z²/(2n²), it is not the potential
+        V = -Z/r, and AtomicSolver's legacy graph mode does not use it
+        (that mode diagonalizes kappa*Z^2*(D - A)).  The D - A part does not
+        converge to a continuum kinetic operator
+        (tests/test_graph_s3_nonconvergence.py).
         """
         self.node_weights = np.zeros(self.num_states)
 
         for i, (n, l, m) in enumerate(self.states):
-            # Topological potential energy: -Z/n²
-            # This encodes the Coulomb attraction through quantum numbers alone
+            # n-dependent label weight -Z/n²
             self.node_weights[i] = -self.nuclear_charge / (n**2)
 
     @property

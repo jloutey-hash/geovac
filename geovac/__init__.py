@@ -82,7 +82,7 @@ __all__ = [
 ]
 
 # Package metadata
-UNIVERSAL_KINETIC_SCALE = -1/16  # Universal topological constant (-0.0625)
+UNIVERSAL_KINETIC_SCALE = -1/16  # matched energy scale kappa (an Observation, Papers 0/7; -0.0625)
 EXPERIMENTAL_HELIUM_ENERGY = -2.90338583  # Hartree (NIST reference)
 
 # Physical constants validated by H/He+/H2+ convergence analysis

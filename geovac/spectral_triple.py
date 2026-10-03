@@ -82,7 +82,7 @@ Implementation
   Lambda carries the chirality-signed Camporesi-Higuchi eigenvalues
   chi * (n_fock + 1/2) and A_graph is the E1 dipole adjacency from
   DiracLattice.  All entries are exact sympy Rationals.  kappa = -1/16
-  is the universal topological constant from Paper 0.
+  is the matched energy scale of Papers 0/7 (an Observation, not derived).
 
 - gamma: the chirality grading, diagonal with chi_i in {+1, -1}
   (kappa < 0 -> chi = +1; kappa > 0 -> chi = -1).
@@ -130,8 +130,8 @@ class FockSpectralTriple:
         n_max=2 gives dim=16; n_max=3 gives dim=40.
     kappa : sympy.Rational, optional
         The off-diagonal hopping strength in D = Lambda + kappa * A.
-        Default: Rational(-1, 16) (the universal topological constant
-        from Paper 0).
+        Default: Rational(-1, 16) (the matched energy scale of Papers 0/7,
+        an Observation).
     j_type : str, optional
         Type of real structure J to build.  'permutation' (default)
         gives J^2 = +I and JD = DJ.  'kramers' gives J^2 = -I but

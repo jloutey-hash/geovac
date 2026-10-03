@@ -28,7 +28,7 @@ the S^3 Coulomb kernel, and is verified here without inputting E_n.
     (3,0), (2,1).
 
 Transcendental tag (Paper 18 / Paper 34): 2 pi^2 = Vol(S^3) -- the n = 1
-kernel eigenvalue IS the S^3 volume (Hopf/S^3-measure pi, asserted below).
+kernel eigenvalue IS the S^3 volume (asserted below).
 It cancels exactly against the 1/(2 pi^2) of the Fourier-transformed Coulomb
 kernel, so p0 = Z/n is rational.
 """

@@ -480,7 +480,7 @@ REGISTRY = [
         # role of L_0" on S^3, and Paper 31 has three independent discriminators.  Withdrawn
         # 2026-09-25/26 with the graph->S^3 re-pricing: L_0 is spectrally inert on both spheres.
         # The Wilson layer survives, re-scoped to representation theory (claims review, verdict B).
-        "pattern": r"three independent discriminators|matter-propagator role for the node Laplacian|spectrum-computing role of \$?L_0\$?(?![^.]{0,80}withdrawn)|seven asymmetry layers|current count is seven layers|seven layers in the current count|Yes \(eigenvalues = spectrum\)|nontrivial on the gauge side|along the same\s+operator-order divide|U\(1\) only \(Sprint~?5 negative\)",
+        "pattern": r"modular-?\s*Hamiltonian\s+structure\s+of\s+the\s+wedge\s+KMS\s+state|four-layer\s+Coulomb/HO\s+asymmetry|three independent discriminators|matter-propagator role for the node Laplacian|spectrum-computing role of \$?L_0\$?(?![^.]{0,80}withdrawn)|seven asymmetry layers|current count is seven layers|seven layers in the current count|Yes \(eigenvalues = spectrum\)|nontrivial on the gauge side|along the same\s+operator-order divide|U\(1\) only \(Sprint~?5 negative\)",
         "exempt_if_nearby": withdrawal_marker("coulomb-ho-layer1-and-three-discriminators"),
         "severity": "fail",
         "scope": "trunk group1 group3 group5 synthesis",
@@ -1621,7 +1621,7 @@ REGISTRY = [
         # unit-sphere volume quotient (convention-dependent), not a Hopf-base quantity. Swept corpus-wide 2026-09-29
         # (77 loci, 16 papers); one explained historical mention in Paper 18 carries the marker. Genuine geometry
         # ('a quarter of the area of the Hopf base S^2') stays silent. Registered DELTA #19 (PI-approved).
-        "pattern": r"Hopf[- ](?:base|bundle)\s+(?:measure|volume)|Hopf[- ]measure|quarter\s+of\s+the\s+area\s+of\s+the\s+Hopf\s+base|Hopf[- ]base[- ](?:Weyl|coefficient|calibration|family|constant|measure)|M1\s+Hopf[- ]base|Hopf/\$S\^3\$-measure|Hopf\s+bundle[^.]{0,60}?produces\s+\$?\\(?:Vol|mathrm\{Vol\})|Hopf[- ]bundle\s+topological\s+measure|Hopf-base\s+solid-angle",
+        "pattern": r"Hopf[- ](?:base|bundle)\s+(?:measure|volume)|Hopf[- ]measure|quarter\s+of\s+the\s+area\s+of\s+the\s+Hopf\s+base|Hopf[- ]base[- ](?:Weyl|coefficient|calibration|family|constant|measure)|M1\s+Hopf[- ]base|Hopf/\$?S\^\{?3\}?\$?-measure|Hopf\s+bundle[^.]{0,60}?produces\s+\$?\\(?:Vol|mathrm\{Vol\})|Hopf[- ]bundle\s+topological\s+measure|Hopf-base\s+solid-angle",
         "exempt_if_nearby": withdrawal_marker("hopf-base-measure-label"),
         "severity": "fail",
         "scope": "trunk group1 group3 group4 group5 group6 synthesis",
@@ -6517,6 +6517,178 @@ REGISTRY = [
             "docs/forcing_catalogue.md",
             "geovac/*.py",
             "tests/*.py",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "single-cutoff-as-proof-by-argument",
+        # FULL #12: Paper 32's single-cutoff spectral action is true by stipulation (an
+        # OBSERVATION after inspection); the multi-loop corollary rests on an unargued
+        # premise (on-shell scheme a candidate counterexample) and is CONDITIONAL. The
+        # C-arc tally is six proof-by-argument results, not seven.
+        "pattern": r"seven\s+(?:\\emph\{)?proof-by-argument|single-cutoff\s+spectral\s+action\s+theorem|"
+                   r"closes\s+(?:the\s+)?multi-loop\s+QED\s+renormali[sz]ation\s+sub-sector|"
+                   r"single-cutoff\s+machinery\s+cannot\s+produce",
+        "exempt_if_nearby": withdrawal_marker("single-cutoff-as-proof-by-argument"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/claims_register.md",
+            "docs/claim_test_matrix.md",
+            "docs/forced_free_seam.md",
+            "docs/forcing_catalogue.md",
+        ],
+        "cited_by": {"papers/group3_foundations/paper_57_forced_free_seam.tex": "reviewed 2026-10-03 (FULL #12 remediation; self-check rounds 1-2 read the tally sections in full)",
+                     "papers/synthesis/geovac_field_guide.tex": "reviewed 2026-10-03 (FULL #12 remediation; self-check rounds 1-2 read the tally sections in full)"},
+    },
+    {
+        "id": "spatial-wall-angular-reproduced",
+        # FULL #12: Paper 54 backs Gaunt + m-conservation structurally and a PURE k = 0
+        # monopole at n_max in {2,3} only -- the k >= 1 multipoles of Coulomb are absent,
+        # so 'angular structure (incl. monopole hierarchy) autonomously reproduced' is false.
+        "pattern": r"monopole\s+(?:structure|hierarchy)[^.;]{0,80}(?:reproduc|forced)|"
+                   r"angular\s+structure\s+(?:is\s+)?forced|reproduces\s+angular\s+structure|"
+                   r"angular\s+content\s+is\s+forced",
+        "exempt_if_nearby": withdrawal_marker("spatial-wall-angular-reproduced"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/claims_register.md",
+            "docs/claim_test_matrix.md",
+            "docs/forced_free_seam.md",
+            "docs/forcing_catalogue.md",
+        ],
+        "cited_by": {"papers/group3_foundations/paper_57_forced_free_seam.tex": "reviewed 2026-10-03 (FULL #12 remediation; self-check rounds 1-2 read the tally sections in full)"},
+    },
+    {
+        "id": "ko-dim-alternatives-unexhibited",
+        # FULL #12: thm:ko_dim_non_selection proves non-selection only; alternative inner
+        # data with another KO-dimension satisfying every axiom are NOT exhibited (OPEN).
+        "pattern": r"each\s+producing\s+a\s+valid\s+GeoVac|alternative\s+(?:KO-dim\w*|specifications)[^.;]{0,100}each\s+consistent|"
+                   r"different\s+inner\s+KO-dim\w*\s+signatures,\s+each",
+        "exempt_if_nearby": withdrawal_marker("ko-dim-alternatives-unexhibited"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/claims_register.md",
+            "docs/claim_test_matrix.md",
+            "docs/forced_free_seam.md",
+            "docs/forcing_catalogue.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "polar-generator-preserves-wedge",
+        # FULL #12: K = 2J_z anticommutes with R_polar, so P_W (2J_z) P_W = 0; it does NOT
+        # preserve the 'hemispheric' wedge. K_alpha^W (Paper 42 Def 5.1) is a diagonal
+        # RELABELLING (two_m_j on the m_j > 0 states), not a restriction of 2J_z.
+        "pattern": r"e\^\{-2\\pi\s*J_\{?z\}?\}/Z\s*=\s*e\^\{-\\pi|(?:rotation|boost)\s+generator\s+(?:preserving|that\s+preserves)\s+the\s+(?:hemispheric\s+)?wedge|"
+                   r"wedge-preserving\s+\$?SO\(2\)|rotation\s+around\s+the\s+Hopf-base\s+axis\s+preserves\s+the\s+wedge|"
+                   r"generator\s+around\s+the\s+wedge\s+axis|its\s+wedge\s+restriction\s+\$?\\KL|"
+                   r"inheriting\s+integer\s+eigenvalues|which\s+preserves\s+the\s+wedge\s+by\s+construction|"
+                   r"K_alpha\s+restricted\s+to\s+the\s+wedge|"
+                   r"K_\\?\{?\\?alpha\}?\^\{?(?:\\alpha,\s*)?W\}?\s*=\s*(?:\\mathrm\{diag\}\(2\s*m_j\)\s*=\s*)?2\s*J_z|"
+                   r"K_alpha\^W\s*=\s*2J_z|wedge-preserving\s+boost\s+is\s+played|"
+                   r"wedge-block\s+restriction\s+of\s+K_alpha|K_alpha\s+restricted\s+to\s+wedge|"
+                   r"natural\s+local\s+Hamiltonian\s+for\s+the\s+wedge",
+        "exempt_if_nearby": withdrawal_marker("polar-generator-preserves-wedge"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "geovac/*.py",
+            "tests/*.py",
+            "docs/claim_test_matrix.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "w1c-tooling-addressable",
+        # FULL #12: W1c was BUILT and the NaH PES still fails (W1d/W1e); calling it mechanical/tooling-addressable suppressed a negative.
+        "pattern": r"three\s+walls\s+are\s+tooling-addressable|PES\s+extension\s+is\s+mechanical|closing\s+W1a/b/c\s+is\s+internal-effort|W1c[^.;]{0,80}not\s+implemented",
+        "exempt_if_nearby": withdrawal_marker("w1c-tooling-addressable"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/claims_register.md",
+            "docs/forced_free_seam.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/forcing_catalogue.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "g4a-live-path",
+        # FULL #12: G4a is BUILT and CLOSED positive-thin; it is not the live/remaining electroweak path.
+        "pattern": r"G4a\s+is\s+the\s+only\s+sprint-scale|only\s+sprint-scale\s+path[^.;]{0,60}G4a|remaining\s+electroweak-unification\s+path\s+is\s+G4a|G4a\s+remains\s+worth\s+pursuing|G4a\s+the\s+remaining",
+        "exempt_if_nearby": withdrawal_marker("g4a-live-path"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/claims_register.md",
+            "docs/forced_free_seam.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/forcing_catalogue.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "three-homes-structurally-independent",
+        # FULL #12: Paper 2's three spectral homes are of DISTINCT TYPE, not 'structurally independent'
+        # (B and Delta are rationals lying in every Mellin sub-ring; the exclusive-sub-ring argument fails).
+        "pattern": r"three\s+structurally\s+independent\s+(?:objects|projections|spectral)|each\s+have\s+an\s+independent\s+spectral\s+home|three\s+independent\s+spectral\s+homes",
+        "exempt_if_nearby": withdrawal_marker("three-homes-structurally-independent"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/claims_register.md",
+            "docs/forced_free_seam.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "kappa-universal-topological-constant",
+        # FULL #12 (PI decision 3): kappa = -1/16 is the matched energy scale, an OBSERVATION
+        # (Papers 0/7), not a 'universal topological constant'.
+        "pattern": r"universal\s+(?:topological|kinetic)\s+(?:constant|scale)",
+        "exempt_if_nearby": withdrawal_marker("kappa-universal-topological-constant"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #12, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "geovac/*.py",
+            "geovac-hamiltonians/src/geovac_hamiltonians/*.py",
+            "docs/claims_register.md",
+            "docs/forced_free_seam.md",
+            "README.md",
         ],
         "cited_by": {},
     },

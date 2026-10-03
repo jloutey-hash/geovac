@@ -216,8 +216,8 @@ def selftest() -> int:
         "central-smoothing-cb-norm": ("the cb-norm = 2/(n_max+1) decays", "the cb-norm is 1 (UCP)"),
         "k-combination-rule": ("K = pi(B + F - Delta), a CONJECTURE of Paper 2",
                                "K = π(B + F − Δ): an Observation (not a conjecture or derivation)"),
-        "p38-rate-constant": ("rate (c) log n/n with c = 4/π | INTERNAL THEOREM (unconditional)",
-                              "rate (c) log n/n with c = 4/π | INTERNAL THEOREM + MEASURED"),
+        "p38-rate-constant": ("the convergence rate is (4/π) log n/n | INTERNAL THEOREM + MEASURED",
+                              "the Fejér moment is (4/π) log n/n [INTERNAL THEOREM + MEASURED]; the distance is O(1/n) [MEASURED]"),
         "graph-s3-wall": ("the graph Laplacian converges to Δ on S^3",
                           "the graph Laplacian does not converge to Δ (WALL; disconnected l-blocks)"),
         "p7-parseval-f0": ("the density-overlap formula is a key structural finding of S^3",
@@ -274,6 +274,10 @@ def selftest() -> int:
         ("central-smoothing-cb-norm", "the cb-norm of the smoothing, 2/(n_max+1), vanishes"),
         ("p38-uniform-bound", "6 log n/n [MEASURED], valid for every n_max (proved)"),
         ("k-match-precision", "K agrees with 1/alpha to 8.8e-8 (the cubic is irrelevant)"),
+        # FULL #12 (2026-10-03): 4/pi presented as the convergence rate, with "Fejer" present elsewhere
+        ("p38-rate-constant", "the Fejér kernel aside, the GH rate is (4/π) log n/n"),
+        ("p38-rate-constant", "the rate at which the truncated triples converge (Fejér) carries the transcendental signature"),
+        ("m1-gh-rate-reading", "the state-space GH rate sits in the M1 slot (a reading)"),
     ]
     for cid, bad in escapes:
         if not check_text_span(cid, bad):

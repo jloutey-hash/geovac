@@ -313,7 +313,7 @@ Gromov--Hausdorff convergence theorem on truncated
 Camporesi--Higuchi spectral triples~\cite{loutey_paper38} (Paper~38)
 gives the quantitative statement for that factor, in van~Suijlekom's state-space
 Gromov--Hausdorff framework (adjacent to, but distinct from, the
-Latr\'emoli\`ere propinquity~\cite{latremoliere2017}), with rate
+Latr\'emoli\`ere propinquity~\cite{latremoliere2017}), with the bound
 \begin{equation}
 \label{eq:propinquity_rate}
 d_{\mathrm{GH}} \le \gamma_{n_{\max}},
@@ -321,11 +321,14 @@ d_{\mathrm{GH}} \le \gamma_{n_{\max}},
 \frac{4}{\pi}\,\frac{\log n_{\max}}{n_{\max}}
 \xrightarrow{n_{\max} \to \infty} 0,
 \end{equation}
-with the constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the
-unit $S^3$) reported universal across compact connected simple Lie
+where $\gamma_{n_{\max}}$ is the first moment of the central Fej\'er kernel,
+whose constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the
+unit $S^3$) is reported universal across compact connected simple Lie
 groups (derived at rank~1, numerically supported, with a fit-sensitive
 extraction, at higher ranks;
-the rank-uniform proof is a named gap)~\cite{loutey_paper40}.
+the rank-uniform proof is a named gap)~\cite{loutey_paper40}.  A tapered
+amplitude gives a measured $O(1/n_{\max})$ on SU(2), so $4/\pi$ is the
+kernel's constant, not the convergence rate (Paper~38, main theorem).
 Paper~38's theorem is unconditional in
 van~Suijlekom's state-space framework, via a translation-seminorm
 metrization (the kernel condition is proved on the truthful
@@ -333,7 +336,7 @@ substrate;\ the dual direction uses an exact-fit spinor lifted state,
 and both almost-inverse defects are Fej\'er smoothings at the same
 moment).  See Paper~38~\S~1 and the claims register,
 \texttt{docs/claims\_register.md}.
-The rate constant reads $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the
+The Fej\'er constant reads $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ in the
 dual-Coxeter normalisation and $2/\pi = \mathrm{Vol}(S^2)/\mathrm{Vol}(\mathrm{SU}(2))$
 on the unit $S^3$ --- read (a reading, not a derivation;\ Paper~38) as
 the $k = 0$ volume factor of the master Mellin engine (a quotient of
@@ -595,14 +598,16 @@ independent discriminator --- the packing-reachable tag is the
 forced/free label by construction (Paper~57 \S6.1), and the genuine
 discriminator signal is the two-family (multi-focal composition
 vs.\ inner-factor input-data) decomposition.  Paper~32~\S~VIII
-consolidates seven proof-by-argument results (Forced-Count,
-H1 Yukawa, $N_{\mathrm{gen}}$, KO-dimension, single-cutoff spectral
-action, spatial-composition wall, and the cutoff function as external
-test-function data), spanning three sectors (inner-factor structural
-skeleton, multi-focal composition, gravity), plus one Observation in
-the $\alpha$-combination sector (no-single-mechanism-$K$, demoted
-2026-09-28).  The seam's entries in those three sectors are thus
-theorem-bound, while the $\alpha$ sector rests on an Observation;\ but Paper~57 remains an observations paper --- the
+consolidates six proof-by-argument results (Forced-Count,
+H1 Yukawa, $N_{\mathrm{gen}}$, KO-dimension, spatial-composition wall,
+and the cutoff function as external test-function data), spanning
+three sectors (inner-factor structural skeleton, multi-focal
+composition, gravity), plus two Observations:\ the single-cutoff
+spectral action (true by stipulation;\ its renormalization corollary
+conditional) and no-single-mechanism-$K$ in the $\alpha$-combination
+sector (Paper~32 \S VIII).  The seam's entries in those sectors are
+thus argument-bound except the renormalization entries and the
+$\alpha$ sector;\ but Paper~57 remains an observations paper --- the
 meta-theorem that would decide forcedness \emph{without} first locating
 a witness derivation is still open, with a partial Bohr-site answer
 (Paper~57's Bohr-site dichotomy: forced $=$ site property, calibration
@@ -622,7 +627,7 @@ section gives one-line summaries.
 \begin{itemize}
   \item \textbf{Group~1 --- Operator algebras / NCG} ($11$ papers).
     Math.OA arc.  Headline:\ unconditional SU(2) state-space
-    Gromov--Hausdorff convergence with explicit $4/\pi$ rate
+    Gromov--Hausdorff convergence
     (Paper~38, translation-seminorm metrization);\ the Lorentzian degeneracy theorem
     (Paper~45) closing the natural Lorentzian route and stating the
     repaired target;\ Paper~42's modular structure (its $2\pi$ period is
@@ -779,8 +784,7 @@ observations).  The per-paper entries below are the second step.
     History remark records a withdrawn earlier convergence
     claim);\ Paper~32 is the explicit spectral triple
     construction with Connes axiom audit and the \S~VIII C-arc
-    closure of seven proof-by-argument results plus one
-    Observation.  Paper~42 (with the former Paper~43 as its \S~11)
+    closure (Paper~32, Remark on the C-arc terminal state).  Paper~42 (with the former Paper~43 as its \S~11)
     gives the finite $2\pi$ period as an automatic closure of a posited
     generator, with the Bisognano--Wichmann identification open;\
     Paper~47's norm-resolvent arrow stands;\

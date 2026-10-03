@@ -491,10 +491,10 @@ class TomitaModularStructure:
     Outcome 1 closure (PI's prior, verified by this class)
     ------------------------------------------------------
 
-    For the BW canonical setup at beta = 2*pi with the wedge-restricted
-    Gibbs state ρ_W = e^{-K_α^W}/Z (where K_α^W = K_alpha restricted
-    to the wedge, the BW-alpha geometric generator with integer
-    spectrum two_m_j), the natural choice H_local := K_alpha^W / beta
+    For the posited setup at beta = 2*pi with the wedge
+    Gibbs state ρ_W = e^{-K_α^W}/Z (where K_α^W is the diagonal relabelling
+    of restrict_K_alpha_to_wedge, integer spectrum two_m_j -- not a
+    restriction of K_alpha, whose wedge compression is zero), the choice H_local := K_alpha^W / beta
     makes:
 
         K_TT = [beta H_local, ·] = ad(K_alpha^W).
@@ -503,8 +503,8 @@ class TomitaModularStructure:
 
         sigma_t^TT(a) = e^{-it K_alpha^W} a e^{+it K_alpha^W}.
 
-    At t = 2*pi, K_alpha^W has integer spectrum on the wedge (inherited
-    from the integer spectrum of K_alpha = J_polar on H_full), so:
+    At t = 2*pi, K_alpha^W has integer spectrum on the wedge (by its
+    definition as the two_m_j relabelling), so:
 
         sigma_{2*pi}^TT(a) = e^{-i 2*pi n_m} a e^{+i 2*pi n_m} = a
 
@@ -739,7 +739,7 @@ class TomitaModularStructure:
         Parameters
         ----------
         K_alpha_W : ndarray of shape (dim_W, dim_W)
-            BW-alpha geometric generator restricted to wedge.
+            the diagonal wedge relabelling K_alpha^W (not a restriction of K_alpha).
         beta : float
             Inverse temperature (must match self.beta).
         a : ndarray of shape (dim_W, dim_W)
@@ -792,7 +792,9 @@ class ModularHamiltonian:
     Two construction modes:
 
     1. BW-alpha (geometric): K = -kappa_g * J_polar where J_polar is the
-       integer-spectrum rotation generator preserving the wedge.
+       integer-spectrum polar rotation generator.  It does NOT preserve the
+       wedge: it anticommutes with R_polar, so P_W J_polar P_W = 0; the wedge
+       operator K_alpha^W is a separate relabelling (restrict_K_alpha_to_wedge).
        Spectrum is integer (or half-integer) so the modular flow
        sigma_{2*pi}(O) = e^{i*2*pi*K/kappa_g} O e^{-i*2*pi*K/kappa_g}
        closes exactly to identity when kappa_g = 1 and K has integer
@@ -1004,11 +1006,14 @@ class ModularHamiltonian:
         return indices
 
     def restrict_K_alpha_to_wedge(self) -> np.ndarray:
-        """Build K_alpha_W = wedge-block restriction of K_alpha to dim_W x dim_W.
+        """Build K_alpha_W, the diagonal wedge RELABELLING (two_m_j on the wedge states).
 
-        We change basis to a wedge-adapted basis (symmetric / antisymmetric
-        combinations of |+m_j, ...> and |-m_j, ...>) and extract the
-        +1-eigenspace block.
+        It is not a restriction of K_alpha: the wedge compression of K_alpha is
+        zero (shown below).
+
+        Why not the compression: in the wedge-adapted basis (symmetric /
+        antisymmetric combinations of |+m_j, ...> and |-m_j, ...>) the
+        +1-eigenspace block of K_alpha vanishes, as computed below.
 
         Construction
         ------------
@@ -1031,7 +1036,7 @@ class ModularHamiltonian:
         Alternative: define K_alpha^W as the wedge-eigenvalue label
         (two_m_j on the |+m_j> half of the pair, treated as the wedge-
         coordinate). This is the "unfolded" K_alpha on the wedge which
-        does have integer spectrum two_m_j and is the natural local
+        does have integer spectrum two_m_j; it is the POSITED local
         Hamiltonian for the wedge KMS state.
 
         Returns
@@ -1240,7 +1245,7 @@ class ModularHamiltonian:
     ) -> np.ndarray:
         """BW-alpha flow on wedge-block operator a_W: e^{itK_W} a_W e^{-itK_W}.
 
-        K_alpha_W is the wedge-block restriction (diagonal in our basis).
+        K_alpha_W is the diagonal wedge relabelling (diagonal in our basis).
         """
         K_diag = np.diag(K_alpha_W)
         if np.linalg.norm(K_alpha_W - np.diag(K_diag)) < 1e-12:

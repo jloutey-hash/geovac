@@ -122,12 +122,13 @@ O(1/\nmax)$, whose slope $2$ is the exponent of the $\sim\nmax^{2}$
 degeneracy of the lowest shell of the posited generator $\Kalpha$ (the
 slope is independent of the inverse temperature; the constant is the
 unit-$\beta$ value, and $\rhoW$ is not the Bisognano--Wichmann-normalised
-state, which would be $e^{-\pi\Kalpha}/Z$ since $\Kalpha = 2J_{z}$;\ an
-earlier reading of this $2$ as the dimension of the entangling surface
-is withdrawn:\ for a CFT$_{3}$ that surface is a circle); \emph{(C)} the framework's wedge generator $\Kalpha =
-J_{\mathrm{polar}}$ (a posited rotation generator, not derived from a
-state) shares a discrete integer spectrum and closure at rotation angle
-$2\pi$ (its adjoint flow closes at $t = \pi$, since $\Kalpha = 2J_{z}$) with the
+state, which would be $e^{-\pi\Kalpha}/Z$ since $\Kalpha$ carries the
+values of $2J_{z}$;\ the $2$ is not the dimension of the entangling
+surface, which for a CFT$_{3}$ is a circle); \emph{(C)} the framework's wedge generator $\Kalpha$
+(a posited relabelling built from the polar rotation generator
+$J_{\mathrm{polar}} = 2J_z$, not derived from a state) shares a discrete
+integer spectrum and closure at rotation angle $2\pi$ (its adjoint flow
+closes at $t = \pi$) with the
 \emph{Euclidean} rotation generator whose Wick rotation is the
 continuum Casini--Huerta--Myers modular Hamiltonian of a hemispherical
 cap of the spatial $S^{2}$ (the latter itself generates a boost-like flow with continuous spectrum);\ this
@@ -176,7 +177,8 @@ modular structure on the hemispheric wedge has been developed across
 Papers~42 and~44--49~\cite{paper42, paper44, paper45, paper46,
 paper47, paper48, paper49} (the Krein-carrier extension, formerly
 Paper~43, is now Paper~42~\S~11): with the posited geometric BW-$\alpha$
-generator $\Kalpha = J_{\mathrm{polar}}$ (integer spectrum) and the
+generator $\Kalpha$ (the diagonal wedge relabelling built from
+$J_{\mathrm{polar}}$;\ integer spectrum) and the
 Tomita--Takesaki BW-$\gamma$ modular operator of the Gibbs state built
 from it, the flow closes, $\sigma_{2\pi}(\Op) = \Op$, bit-exactly ---
 automatically, for any integer-spectrum generator, so this is not a
@@ -307,14 +309,14 @@ defines the operator system
 $\Op_{\nmax} = P_{\nmax} \Acal P_{\nmax}$ in the
 Connes--van~Suijlekom framework~\cite{connes_vs2021}. Convergence
 $\Op_{\nmax} \to \Op_{\sthree}$ in van~Suijlekom's state-space
-Gromov--Hausdorff distance holds at rate $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
-\nmax$~\cite{paper38}; the rate constant $4/\pi$ is stated in the
+Gromov--Hausdorff distance holds with the Fej\'er-kernel bound $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
+\nmax$~\cite{paper38} (a tapered amplitude gives $O(1/\nmax)$ \textbf{[MEASURED]}); the constant $4/\pi$ is stated in the
 corpus's dual-Coxeter normalisation ($\mathrm{Cas}(\mathrm{ad}) =
 h^{\vee}$, under which the $SU(2)$ geodesic distance is
 the rotation angle) and is convention-dependent, not canonical:\ on the unit
 $\sthree$ the same bound reads $2/\pi = \mathrm{Vol}(S^{2})/\mathrm{Vol}(\sthree)$,
 the volume quotient that carries its M1 content in the master Mellin
-engine~\cite{paper18} (the earlier ``Hopf-base'' label is a misnomer).
+engine~\cite{paper18}.
 The partition-function values of Sec.~\ref{sec:partition} use the
 untruncated ($n = 0, 1, 2, \dots$) spectra and do not depend on this
 truncation;\ the truncation enters only the wedge-state side
@@ -322,15 +324,17 @@ truncation;\ the truncation enters only the wedge-state side
 
 \subsection{Wedge KMS state}
 
-The hemispheric wedge $W$ corresponds, in the truncated full-Dirac
-basis, to the half-space with $m_{j} > 0$ along the
-wedge-fixing axis. Per~\cite{paper42} Def~5.1, the posited BW-$\alpha$
+The hemispheric wedge $W$ is $P_W = \tfrac12(I + R_{\mathrm{polar}})$,
+the $+1$ eigenspace of the reflection $m_j \mapsto -m_j$
+(\cite{paper42}), whose basis states are labelled by their $m_j > 0$
+component. Per~\cite{paper42} Def~5.1, the posited BW-$\alpha$
 wedge generator (its identification as a modular Hamiltonian is open) is
 \[
-\Kalpha = J_{\mathrm{polar}}
+\Kalpha = \mathrm{diag}(2 m_j) \ \text{on the wedge states, built from } J_{\mathrm{polar}} = 2J_z,
 \]
-where $J_{\mathrm{polar}}$ is the rotation generator preserving the
-wedge, with integer eigenvalues $2m_{j} \in \{1, 3, 5, \dots,
+where $J_{\mathrm{polar}}$ is the polar rotation generator, used on the
+wedge through the diagonal relabelling of Paper~42 Def~5.1 (it does not
+preserve the wedge);\ $\Kalpha$ has integer eigenvalues $2m_{j} \in \{1, 3, 5, \dots,
 2\nmax - 1\}$ and multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k +
 1)$ for $k = 0, \dots, \nmax - 1$. The wedge state used throughout is
 the unit-$\beta$ Gibbs state of $\Kalpha$ (not the
@@ -752,15 +756,17 @@ $K_{\mathrm{cont}}$ itself.
 
 The framework's posited wedge generator (Paper~42 Def~5.1) is
 \[
-\Kalpha = J_{\mathrm{polar}},
+\Kalpha = \mathrm{diag}(2 m_j) \ \text{on the wedge states},
 \]
-the rotation generator of the wedge-preserving $SO(2)$ on the
-truncated Camporesi--Higuchi spectral triple. Its spectrum is
+a relabelling built from the polar-axis rotation generator
+$J_{\mathrm{polar}} = 2J_z$ on the truncated Camporesi--Higuchi spectral
+triple (which itself anticommutes with the wedge reflection, so its
+compression to the wedge is zero). Its spectrum is
 \[
 \mathrm{spec}(\Kalpha) = \{2 m_{j} : m_{j} = 1/2, 3/2, \dots, (2\nmax - 1)/2\}
 = \{1, 3, 5, \dots, 2\nmax - 1\},
 \]
-integer-valued ($\Kalpha = 2J_{z}$), with
+integer-valued (the values of $2J_{z}$ on the wedge states), with
 multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k + 1)$. The posited
 modular flow $\sigma_{t} = \mathrm{Ad}\,e^{it\Kalpha}$ satisfies
 $\sigma_{2\pi}(\Op) = \Op$
@@ -770,9 +776,10 @@ from the live BW construction in \texttt{tests/test\_paper50\_wedge\_kms.py}.
 
 \begin{remark}[Normalisation of $\Kalpha$ and of $\rhoW$]
 \label{rem:bw_normalisation}
-Since $\mathrm{spec}(\Kalpha) = \{2m_{j}\}$, $\Kalpha = 2J_{z}$, where
-$J_{z}$ generates rotations by angle $\theta$ about the wedge axis
-($e^{-i\theta J_{z}}$). Three consequences. (i) The adjoint flow
+$\Kalpha$ carries the values $2m_j$ of $2J_{z}$, where $J_{z}$
+generates rotations by angle $\theta$ about the polar axis
+($e^{-i\theta J_{z}}$);\ on the wedge it is the relabelling of
+\cite{paper42} Def~5.1, not a restriction of $2J_z$. Three consequences. (i) The adjoint flow
 $\mathrm{Ad}\,e^{it\Kalpha}$ already closes at $t = \pi$:\ differences
 of odd integers are even. The $2\pi$ closure above holds but is twice
 the minimal period;\ the unitary $e^{it\Kalpha}$ itself first returns
@@ -781,7 +788,8 @@ rotation-angle parameter $\theta = 2t$ the adjoint flow closes at
 $\theta = 2\pi$, which is the Euclidean periodicity matched in
 Observation~\ref{thm:chm_identification}. (ii) A state normalised as in
 Bisognano--Wichmann, with KMS parameter $2\pi$ in the rotation angle,
-would be $e^{-2\pi J_{z}}/Z = e^{-\pi\Kalpha}/Z$, not
+would be $e^{-\pi\Kalpha}/Z$ (the same relabelling applied to
+$e^{-2\pi J_{z}}$), not
 $\rhoW = e^{-\Kalpha}/Z$;\ $\rhoW$ is the unit-$\beta$ Gibbs state of
 $\Kalpha$ (inverse temperature $2$ in rotation-angle units). (iii) For
 $\rho_{b} = e^{-b\Kalpha}/Z$ one has $Z \simeq \nmax^{2}/(2\sinh b)$ and
@@ -808,16 +816,15 @@ itself, which has continuous spectrum:
 generator, in the same $2J$ normalisation, has discrete (integer)
 spectrum (continuum statement, prior art).
 \item Each generates a flow closing at rotation angle $2\pi$ (for
-$\Kalpha = 2J_{z}$ the adjoint flow closes at $t = \pi$;
+$\Kalpha$, carrying the values of $2J_{z}$, the adjoint flow closes at $t = \pi$;
 Remark~\ref{rem:bw_normalisation});\ for the continuum this
 is the Euclidean periodicity that the Lorentzian modular flow of
 $K_{\mathrm{cont}}$ exhibits only as its KMS parameter
 $\beta = 2\pi$. The state $\rhoW$ used in Sec.~\ref{sec:wedge_kms} is
 not normalised to that $\beta$.
 \item The framework's odd-integer spectrum $\{1, 3, \dots, 2\nmax - 1\}$
-corresponds to the half-integer Casimir grading of the
-wedge-preserving Killing field on the (two-component, 3d) Dirac
-spinor sector.
+corresponds to the half-integer $m_j$ grading of the polar rotation
+Killing field on the (two-component, 3d) Dirac spinor sector.
 \end{itemize}
 The integer spectrum and the $2\pi$ period are automatic for any
 integer-spectrum rotation generator~\cite{paper42}, so they do not
@@ -826,20 +833,19 @@ $\Kalpha$ is the modular Hamiltonian of a wedge-restricted
 Camporesi--Higuchi state (the open falsifier of~\cite{paper42}), and
 any convergence $\Kalpha \to K_{\mathrm{cont}}$ as operators. The
 state-space Gromov--Hausdorff convergence of the spectral triples
-(\cite{paper38}, rate $(4/\pi)\log\nmax/\nmax$) is a statement about
-the triples, not about this operator;\ an earlier version of this item
-used it as an operator convergence rate, which is withdrawn
-(2026-09-28).
+(\cite{paper38}, Fej\'er-kernel bound $(4/\pi)\log\nmax/\nmax$) is a statement about
+the triples, not about this operator.
 \end{observation}
 
 \noindent\emph{Basis of the analogy.}
-The wedge-preserving Killing field of the round (Euclidean) $\sthree$ ---
+The polar rotation Killing field of the round (Euclidean) $\sthree$ ---
 the Euclidean rotation generator, not the Lorentzian boost-like
 $K_{\mathrm{cont}}$ --- rotates the spinor harmonics by their $m_{j}$ eigenvalue, giving the integer
-$2 m_{j}$ spectrum. The framework's $\Kalpha = J_{\mathrm{polar}}$
-acts on the projected wedge sub-space $P_{\Wedge}
-\Hilb_{\mathrm{GV}}^{\nmax}$ with the same $2 m_{j}$ eigenvalues,
-restricted to the multiplicities allowed by the truncation.
+$2 m_{j}$ spectrum. The framework's wedge operator carries the same
+$2 m_{j}$ values on the projected wedge sub-space $P_{\Wedge}
+\Hilb_{\mathrm{GV}}^{\nmax}$, restricted to the multiplicities allowed by
+the truncation, by the relabelling of Paper~42 Def~5.1 rather than by
+restricting $J_{\mathrm{polar}}$.
 
 \section{Bulk-side scope}
 \label{sec:bulk_blocked}
@@ -870,7 +876,7 @@ structural dead end: the continuation supplies no natural discrete
 subgroup $\Gamma \subset SO(3,1)$ selectable from framework
 invariants.
 
-\item Sprint L3e-P3 (2026-05-23) found that Paper~38's $4/\pi$ rate
+\item Sprint L3e-P3 (2026-05-23) found that Paper~38's $4/\pi$ Fej\'er-moment constant
 does \emph{not} transport to the non-compact Coulomb setting,
 suggesting that any discrete-to-bulk convergence statement would
 require a non-compact rate analog that is itself an open NCG-math
@@ -1256,7 +1262,7 @@ side and the CC quantity on the finite spectral triple. The framework
 does not compute the HS holographic anomaly; the content is the
 taxonomic placement of both in the M2 ring. The framework's
 discrete-cutoff realization (Paper~38~\cite{paper38} state-space GH
-convergence at the displayed rate $(4/\pi)\log n/n$, in the
+convergence, with the Fej\'er-kernel bound $(4/\pi)\log n/n$ in the
 dual-Coxeter convention;\ $2/\pi$ on the unit $\sthree$) is the
 operator-system-level home of the
 CC side.
@@ -1355,7 +1361,7 @@ state-space GH convergence machinery to simple compact Lie groups
 (for general $G$ conditionally on the per-group spin-window decomposition). A natural
 catalogue extension is CFT-on-$G$ partition functions for various
 $G$ (heat-kernel zeta on $\mathrm{SU}(3)$, $\mathrm{Sp}(2)$, etc.)
-where the framework's GH-rate constant $4/\pi$ is reported universal
+where the framework's Fej\'er-moment constant $4/\pi$ is reported universal
 (Paper~40;\ derived at rank~1) but the
 specific transcendental ring may differ.
 
@@ -1397,7 +1403,7 @@ The previous eleven established operator-algebraic legitimacy of the
 framework's discrete-spectral-triple truncation and the spectral-truncation
 convergence theory at the Riemannian and tensor-product levels and, for
 compact connected semisimple Lie groups (conditionally, for general $G$;\
-the universal rate constant for the simple ones), together with the norm-resolvent
+the universal Fej\'er-moment constant for the simple ones), together with the norm-resolvent
 non-compact-carrier closure at the spectral level.  The Lorentzian
 \emph{propinquity} levels---strong-form Lorentzian (Paper~46) and both
 synthetic-Lorentzian bridges (Papers~48, 49)---are \emph{descoped} by

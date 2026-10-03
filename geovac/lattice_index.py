@@ -56,7 +56,7 @@ try:
 except ImportError:
     from lattice import GeometricLattice
 
-KINETIC_SCALE: float = -1.0 / 16.0   # Universal topological constant
+KINETIC_SCALE: float = -1.0 / 16.0   # matched energy scale kappa (an Observation, Papers 0/7)
 
 
 class LatticeIndex:

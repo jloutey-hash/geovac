@@ -607,7 +607,9 @@ MEASURED = {
         aliases={42.74: "2 dp", 42.739654: "6 dp", 42.6: "n_max=320 finite sample (understates)"}),
     "l2_rate_4_over_pi": dict(
         value=1.2732395447351628,  # 4/pi at full precision (tight symbolic match)
-        convention="constant: asymptotic GH-convergence rate 4/pi (n_max*gamma_n/log n_max) "
+        convention="constant: asymptotic constant of the central FEJER kernel's first moment "
+                   "(n_max*gamma_n/log n_max), a kernel constant and NOT the GH convergence rate "
+                   "(a tapered amplitude gives O(1/n), Paper 38, 2026-10-03), "
                    "in the dual-Coxeter (rotation-angle) metric; 2/pi on the unit S^3; "
                    "2*sqrt2/pi under Kac's basic form -- CONVENTION-DEPENDENT, not canonical",
         q=None,

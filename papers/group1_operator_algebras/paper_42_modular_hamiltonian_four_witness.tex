@@ -9,7 +9,7 @@
 %
 % Math.OA / J. Geom. Phys. style; companion to Paper 38 (SU(2)
 % state-space GH convergence on Camporesi-Higuchi truncated triples) and
-% Paper 40 (4/pi rate constant reported universal on compact simple Lie groups).
+% Paper 40 (4/pi Fejer-moment constant reported universal on compact simple Lie groups).
 %
 % Status: first draft, May 2026, post-Sprint-L0 / L1 / L1-tighten
 % closure (2026-05-16). Built from internal sprint memos:
@@ -112,10 +112,11 @@ coordinates. That continuum statement is prior art and is not
 re-proved here. We study its finite-cutoff \emph{period} on the
 Connes--van~Suijlekom~\cite{connes_vs2021} truncated
 Camporesi--Higuchi~\cite{camporesi_higuchi1996} spectral triple
-$\Tcal_{\nmax}$, with a hemispheric wedge and a posited generator
-$K_\alpha^W = \mathrm{diag}(2m_j) = 2J_z$, the doubled rotation
-generator about the polar axis. Because $2J_z$ has integer spectrum,
-$e^{2\pi i K_\alpha^W} = I$, and the conjugation flow closes,
+$\Tcal_{\nmax}$, with a hemispheric wedge and a posited wedge generator
+$K_\alpha^W = \mathrm{diag}(2m_j)$ on the $m_j > 0$ wedge states, a
+relabelling built from the doubled polar rotation generator $2J_z$ (whose
+own compression to the wedge is zero). Because $K_\alpha^W$ has integer
+spectrum, $e^{2\pi i K_\alpha^W} = I$, and the conjugation flow closes,
 $\sigma_{2\pi}(O) = O$, for \emph{every} operator $O$ --- an elementary
 fact [SYMBOLIC] that holds for any integer-spectrum generator
 whatsoever and therefore does not single out a Bisognano--Wichmann
@@ -135,9 +136,7 @@ what they are. We also record the operator-level distinction between
 $2J_z$ ($e^{2\pi i K} = +I$) and the wedge-restricted
 Camporesi--Higuchi Dirac (half-integer spectrum, $e^{2\pi i D_W} = -I$,
 the spinor double-cover sign;\ the conjugation flow closes for both).
-An earlier version of this paper read these closures as lifting the
-four-witness theorem to a ``literal identification'' at the % [retracted 2026-09-28: finite-four-witness-literal-identification]
-operator-system level;\ that reading is withdrawn (2026-09-28). The
+The
 genuine finite-cutoff question --- \emph{derive} $K$ as the modular
 Hamiltonian of a wedge-restricted Camporesi--Higuchi state, rather than
 posit it --- is [OPEN]. The Lorentzian extension to signature $(3, 1)$ via
@@ -289,10 +288,10 @@ the state was built from $K_\alpha^W$, the Tomita construction is
 circular as a check on $K_\alpha^W$.  (iii)~The witness agreement is
 by construction:\ the six instantiations share $K_\alpha^W$ and differ
 only in the label $\kappa_g$, which cancels in $\beta H_{\mathrm{local}}$.
-The generator $K_\alpha^W = \mathrm{two}\_m_j$ (odd integers in
-$\{-(2l+1), \ldots, +(2l+1)\}$) is a \emph{rotation} generator on the
-Riemannian $\sthree$, chosen, not derived, to play the role of the
-boost.  The continuum four-witness statement
+The generator $K_\alpha^W = \mathrm{two}\_m_j$ (the positive odd
+integers $\le 2l+1$ on the wedge states) is a relabelling built from
+the polar \emph{rotation} generator on the Riemannian $\sthree$, chosen,
+not derived, to play the role of the boost.  The continuum four-witness statement
 ($\beta = 2\pi/\kappa_g$;\
 \cite{bisognano_wichmann1976, hartle_hawking1976, sewell1982, unruh1976})
 is prior art and is unaffected;\ its finite-cutoff counterpart ---
@@ -417,7 +416,7 @@ computational verification protocol and the supporting module
 Appendix~\ref{app:framework_crossref} cross-references the result to
 the present author's broader framework
 (Paper~38~\cite{paper38} for state-space Gromov--Hausdorff convergence;\
-Paper~40~\cite{paper40_unified} for the $4/\pi$ rate constant
+Paper~40~\cite{paper40_unified} for the $4/\pi$ Fej\'er-moment constant
 reported universal over compact simple groups (derived at rank~1);\ Paper~32~\S~VIII for the master Mellin engine
 case-exhaustion theorem and the four-witness theorem's M1
 sub-mechanism reading).
@@ -540,10 +539,11 @@ distance with explicit rate
    \gamma_{\nmax} \;=\; \frac{4 \log \nmax}{\pi \, \nmax}
                        \;+\; O(1/\nmax),
 \end{equation}
-(commutative factor, true window) with asymptotic rate
+(commutative factor, true window) with Fej\'er-moment
 constant $4/\pi = \Vol(S^2)/\pi^2$ (in the dual-Coxeter normalisation
 of the $\SU(2)$ metric;\ $2/\pi$ on the unit round $\sthree$, the
-constant scaling with the metric). It is read (an Observation-level
+constant scaling with the metric;\ a tapered amplitude gives
+$d_{\mathrm{GH}} = O(1/\nmax)$ \textbf{[MEASURED]}, Paper~38). It is read (an Observation-level
 reading, not a derivation) as carrying the $k = 0$ volume content of the M1
 sub-mechanism of the master Mellin engine.  It is
 \emph{not} the Hopf fibration's base-to-total ratio and not an
@@ -551,11 +551,9 @@ $\SU(2)/U(1)$ Haar quotient:\ the Hopf map is a Riemannian submersion
 $S^3(r) \to S^2(r/2)$, whose ratio is neither $4/\pi$ nor $2/\pi$;\ the
 constant is twice the quotient of \emph{unit-radius} sphere volumes,
 $\Vol(S^2)/\Vol(\sthree) = 2/\pi$.  (The $k = 0$ Mellin slot is a volume slot;\ Paper~25's
-$\Vol(S^2)/4 = \pi$ is a quarter of the unit-sphere area $\Vol(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$);\ what
-was retired on 2026-09-03 is reading the rate constant as a
-base-to-total ratio.  Paper~38, volume-ratio note.)
+$\Vol(S^2)/4 = \pi$ is a quarter of the unit-sphere area $\Vol(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$).  Paper~38, volume-ratio note.)
 The M1 reading is on $\sthree$ (the Paper~32~\S~VIII case-exhaustion,
-\textbf{[CONDITIONAL]}, does not itself cover GH rates;\ the rate is
+\textbf{[CONDITIONAL]}, does not itself cover GH rates;\ the Fej\'er-moment bound is
 generalised to compact connected semisimple Lie groups in
 Paper~40~\cite{paper40_unified}, for general $G$ conditionally on the
 per-group spin-window decomposition; a circle factor carries the circle constant). The lemmas L1' / L2 / L3 / L4
@@ -574,7 +572,7 @@ finite-cutoff bit-exact identity, not a limit statement. The
 state-space Gromov--Hausdorff convergence~\eqref{eq:paper38_main}
 enters only as a
 \emph{consistency} sanity check (Section~\ref{sec:tt_construction});
-it does not link the modular period to the metric-side rate constant.
+it does not link the modular period to the metric-side Fej\'er-moment constant.
 
 % =====================================================================
 \section{Lorentzian-readiness audit and Riemannian scope}
@@ -743,9 +741,8 @@ scoping (\texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}
 (W3) the pendant-vertex-free subgraph of the scalar Fock graph.
 Candidate W1 is the cleanest Riemannian-side analog of the Wightman
 Rindler wedge (a region bounded by a horizon of codimension 1 in the
-underlying manifold), and it carries a natural Killing-preserving
-structure (the rotation around the Hopf-base axis preserves the
-wedge boundary). Candidates W2 and W3 are graph-topological
+underlying manifold);\ the polar rotation generator does \emph{not}
+preserve it (it anticommutes with $R_{\mathrm{polar}}$). Candidates W2 and W3 are graph-topological
 projections rather than spatial-region restrictions, and their modular
 structure either degenerates (W2) or has no clear ``localised in a
 half-region'' interpretation (W3). The present paper proceeds with W1
@@ -830,9 +827,10 @@ them.
 
 The first construction on $\Tcal_{\nmax}$ is the geometric
 BW-$\alpha$ generator, obtained by \emph{positing} that the role of the
-wedge-preserving boost is played by the spatial rotation generator
-around the Hopf-base axis.  On the Riemannian $\sthree$ there is no
-boost;\ the rotation generator is a stand-in, not an identification.
+boost is played by a relabelling built from the spatial rotation
+generator about the polar axis (which itself does not preserve the
+wedge, Definition~\ref{def:K_alpha_W}).  On the Riemannian $\sthree$
+there is no boost;\ the construction is a stand-in, not an identification.
 
 \subsection{The geometric generator}\label{sec:K_alpha_W}
 
@@ -846,7 +844,9 @@ space $\Hilb_W = P_W \Hilb_{\nmax}$ is the operator
 \end{equation}
 acting on each wedge basis state $\psi_{n, l, |m_j|, \chi}$ (with
 $m_j$ chosen positive on the wedge $P_W$) by multiplication by
-$\mathrm{two}\_m_j$, the doubled $m$-quantum-number.
+$\mathrm{two}\_m_j$, the doubled $m$-quantum-number.  It is a
+relabelling, not the compression $P_W (2J_z) P_W$:\ $2J_z$ anticommutes
+with $R_{\mathrm{polar}}$, so that compression is zero.
 \end{definition}
 
 \begin{remark}[Why $\mathrm{two}\_m_j$ rather than $m_j$]
@@ -1348,11 +1348,12 @@ e^{-K_\alpha^W}/Z$ rather than (say) $\rho_W = e^{-\beta D_W}/Z$ for
 the wedge-restricted Camporesi--Higuchi Dirac. The motivation is
 structural (we want the modular flow to close with period $2\pi$, as
 the Bisognano--Wichmann flow does), but it is \emph{a} choice of local
-Hamiltonian, not the unique choice.  The generator $K_\alpha^W = 2J_z$
-is \emph{posited}, and $\rho_W = e^{-K_\alpha^W}/Z$ is its unit-$\beta$
+Hamiltonian, not the unique choice.  The generator $K_\alpha^W$ (the
+relabelling of Definition~\ref{def:K_alpha_W}) is \emph{posited}, and $\rho_W = e^{-K_\alpha^W}/Z$ is its unit-$\beta$
 Gibbs state, not the Bisognano--Wichmann-normalised state, which (KMS
 parameter $2\pi$ in the rotation angle) would be
-$e^{-2\pi J_z}/Z = e^{-\pi K_\alpha^W}/Z$ (Paper~50, remark on the
+$e^{-\pi K_\alpha^W}/Z$, the same relabelling applied to
+$e^{-2\pi J_z}$ (Paper~50, remark on the
 normalisation of $K_\alpha$ and $\rho_W$).
 
 Two remarks place the choice;\ neither derives it:
@@ -1537,9 +1538,9 @@ acceleration of the Rindler observer) enters only through the label
 $\kappa_g$, which the construction never uses.  The $2\pi$ of the
 period closure comes from the integer spectrum of the posited $2J_z$;\
 it is \emph{not} shown here to be the same $2\pi$ as the M1 volume
-factor of the Paper~38 rate constant~\eqref{eq:paper38_main}, and an
-earlier version's reading of the closure as the operator-system
-realisation of the M1 sub-mechanism is withdrawn (2026-09-28).
+factor of the Paper~38 Fej\'er-moment constant~\eqref{eq:paper38_main}, and the
+closure is not the operator-system
+realisation of the M1 sub-mechanism.
 The metric-functional-level reading
 (\cite[Rem.~rem:bisognano\_wichmann\_reading]{paper32}, Sprint TD
 Track 4, Sprint Unruh-pendant), which matches the framework's $2\pi$
@@ -1710,7 +1711,8 @@ is original NCG-mathematics work, not algorithmic.
 We have set up, on the truncated Camporesi--Higuchi spectral triple
 $\Tcal_{\nmax}$, a hemispheric wedge $P_W$ aligned with the Hopf-base
 axis, a wedge Gibbs state built from the posited generator
-$K_\alpha^W = \mathrm{diag}(2m_j) = 2J_z$, and the corresponding
+$K_\alpha^W = \mathrm{diag}(2m_j)$ on the wedge states (a relabelling, not
+a restriction of $2J_z$), and the corresponding
 GNS/Tomita construction.  What holds is elementary and [SYMBOLIC]:\
 the period closure $\sigma_{2\pi}(O) = O$
 (Theorems~\ref{thm:bw_alpha}, \ref{thm:bw_gamma}), automatic for any
@@ -1889,10 +1891,10 @@ fourth layer of the Paper~24~\S~5.3~\cite{paper24} Coulomb/HO asymmetry.
 \textbf{(O4) Higher-rank compact non-abelian extensions.}
 Paper~40~\cite{paper40_unified} extends the Paper~38 state-space
 Gromov--Hausdorff convergence theorem to compact connected semisimple Lie
-groups with bi-invariant metric (for general $G$ conditionally on the per-group spin-window decomposition;\ rate constant derived at rank~1;\ a circle factor carries the circle constant). The natural extension of the present paper would
+groups with bi-invariant metric (for general $G$ conditionally on the per-group spin-window decomposition;\ Fej\'er-moment constant derived at rank~1;\ a circle factor carries the circle constant). The natural extension of the present paper would
 verify that the geometric BW-$\alpha$ generator analog on higher-rank
-groups (e.g., $K_\alpha^W = J_z$ with $J_z$ the Cartan generator
-along the wedge-defining direction) still has integer spectrum on the
+groups (e.g., a relabelling built from a Cartan generator along the
+wedge-defining direction) still has integer spectrum on the
 spinor harmonic basis.  Since any integer-weight Cartan generator
 closes automatically, that extension would be as elementary as the
 present one;\ the substantive higher-rank question is the analog of O0.
@@ -1909,14 +1911,10 @@ not claim Latr\'emoli\`ere propinquity) extended to mixed Riemannian /
 Hardy-sector spectral triples. This is also open.
 
 \paragraph{Final remark on the M1 master Mellin engine.}
-An earlier version of this paper closed by identifying the $2\pi$ of
-the modular period with the $2\pi$ of the M1 volume content of the
-Paper~38 state-space-GH rate constant, ``at the operator-system level
-at every finite cutoff''.  That identification is withdrawn
-(2026-09-28).  The period of the present construction is $2\pi$
+The period of the present construction is $2\pi$
 because the posited generator has integer spectrum;\ that is the
 generic fact $e^{2\pi i n} = 1$, which says nothing about the
-Paper~38 rate constant or about Bisognano--Wichmann.  The M1 reading
+Paper~38 Fej\'er-moment constant or about Bisognano--Wichmann.  The M1 reading
 of the four-witness $2\pi$ remains at the metric-functional level
 (Paper~32~\S~VIII), where it was before.
 
@@ -2155,9 +2153,10 @@ idempotent, $\dim W_L = \tfrac12\dim\Hilb_{\mathrm{GV}}^{\nmax}\cdot
 \end{definition}
 
 The generator is $\KL^\alpha := K_\alpha \otimes I_{\Nt}$ with
-$K_\alpha$ of Definition~\ref{def:K_alpha_W}; its wedge restriction
-$\KL^{\alpha, W}$ is diagonal with the positive odd integers
-$\mathrm{two}\_m_j$ as eigenvalues.  Under the Bisognano--Wichmann choice
+$K_\alpha$ of Definition~\ref{def:K_alpha_W};\ its wedge operator
+$\KL^{\alpha, W} := K_\alpha^W \otimes I$ on $W_L$ (the relabelling of
+Definition~\ref{def:K_alpha_W}, not a compression) is diagonal with the
+positive odd integers $\mathrm{two}\_m_j$ as eigenvalues.  Under the Bisognano--Wichmann choice
 $H_{\mathrm{local}} := \KL^{\alpha, W}/\beta$ the wedge Gibbs state
 \begin{equation}\label{eq:rho_WL}
    \rho_W^L := e^{-\beta H_{\mathrm{local}}}/Z = e^{-\KL^{\alpha, W}}/Z
@@ -2380,7 +2379,7 @@ of any spectral computation on the truncated triple.  The residual lies
 in $\Q[\nmax] \oplus \pi^{-2}\Q[\nmax]$, the algebraic class of the M1
 sector of the master Mellin engine (Paper~32~\S~VIII), but no Mellin
 mechanism producing it is exhibited, and it is not the M1 content of the
-Paper~38 rate constant.  The former Paper~43 read it as the squared
+Paper~38 Fej\'er-moment constant.  The former Paper~43 read it as the squared
 volume factor $1/\Vol(S^1)^2$ and a $k = 0$ instance of the
 case-exhaustion theorem;\ withdrawn (2026-09-28).
 
@@ -2544,25 +2543,25 @@ lemmas of Paper~38 supply the metric-side analytic infrastructure
 that the present paper builds on;\ Paper~38's fifth lemma (the
 propinquity assembly) was withdrawn on 2026-09-03 and its convergence
 theorem is carried by the lifted-state construction, which the present
-paper does not depend on either way. The state-space GH rate constant
-$4/\pi = \Vol(S^2)/\pi^2$ is read (a reading, not a derivation;\
+paper does not depend on either way. The Fej\'er-moment constant
+$4/\pi = \Vol(S^2)/\pi^2$ of that bound is read (a reading, not a derivation;\
 Paper~38) as carrying the $k = 0$ M1 volume content;\ the
 period closure of the present
 Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma} is driven instead by
 the integer spectrum of the posited generator, and no link between the
-two is claimed (withdrawn 2026-09-28).
+two is claimed.
 
 \paragraph{Paper~40 (\cite{paper40_unified}, universal $4/\pi$ on
 compact simple Lie groups).}
 The Paper~38 state-space Gromov--Hausdorff convergence extends to compact
 connected semisimple Lie groups with bi-invariant metric (for general $G$
 conditionally on the per-group spin-window decomposition;\ a circle factor
-carries the circle constant), with the rate constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38, 2026-09-03)
-reported universal across the simple groups of that class (for semisimple groups with several simple factors the constant is open;\ Paper~40 withdrew its semisimple corollary, 2026-10-02) via the Plancherel-weight $\times$
+carries the circle constant), with the Fej\'er-moment constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38)
+reported universal across the simple groups of that class (for semisimple groups with several simple factors the constant is open) via the Plancherel-weight $\times$
 Vandermonde-Jacobian cancellation (Paper~40~\S~3.2; derived at rank~1). The
 modular structure of the present paper plausibly extends to the
 higher-rank cases (Section~\ref{sec:conclusion} O4); the integer
-spectrum of the posited rotation generator $K_\alpha^W$ on the spinor
+spectrum of the posited wedge generator $K_\alpha^W$ on the spinor
 harmonic basis is a property of $\SU(2)$ (where the half-integer
 weights double to integers), and the higher-rank analog requires
 verifying that the relevant Cartan generator along the wedge axis

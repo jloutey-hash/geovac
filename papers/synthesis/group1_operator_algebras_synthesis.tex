@@ -106,15 +106,14 @@ Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
 continuum spectral triple $\Tcal_{\sthree}$ in the van~Suijlekom
 state-space Gromov--Hausdorff sense --- for the commutative ($S^3$)
 factor on the true Camporesi--Higuchi window;\ convergence of the
-almost-commutative extension is \textbf{[OPEN]} --- at quantitative rate
-$d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$
-with asymptotic constant $4/\pi$ (Paper~38; \textbf{[INTERNAL THEOREM + MEASURED]};\ dual-Coxeter
-normalisation of the $\SU(2)$ metric --- $2/\pi$ on the unit $S^3$,
-the constant scaling with the metric, 2026-09-03).
-Third, the rate constant $4/\pi$ is reported universal across the
+almost-commutative extension is \textbf{[OPEN]} --- with the Fej\'er-kernel bound
+$d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$,
+$\gamma_{\nmax} \sim (4/\pi)\log\nmax/\nmax$, and a measured $O(1/\nmax)$ under a
+tapered amplitude (Paper~38, main theorem;\ $4/\pi$ in the dual-Coxeter
+normalisation of the $\SU(2)$ metric, $2/\pi$ on the unit $S^3$).
+Third, the Fej\'er-moment constant $4/\pi$ is reported universal across the
 compact connected simple Lie groups with bi-invariant metric (for several
-simple factors it is open;\ Paper~40 withdrew its semisimple corollary,
-2026-10-02) --- derived at
+simple factors it is open) --- derived at
 rank~1, numerically supported (fit-sensitive extraction) at rank~2 for
 general $G$, with the rank-uniform analytical proof a named gap --- via a
 Plancherel-weight
@@ -136,21 +135,21 @@ norm-resolvent / spectral level.  A
 master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
 Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
 compact connected simple Lie groups $G_{1}, \ldots, G_{k}$, the
-k-fold tensor product converges (state-space GH) with per-factor $4/\pi$ rates
-reported universal in Paper~40 (proved only for $\SU(2)$ and
+k-fold tensor product converges (state-space GH) with per-factor Fej\'er-moment
+bounds, constant $4/\pi$ reported universal in Paper~40 (proved only for $\SU(2)$ and
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ the general-$G$ $k = 1$ case is conditional on the
 per-group spin-window decomposition;\ the joint Lipschitz constant
 $C_3^{(k)} = 1$, by compression, belongs to the abandoned
-approximation-pair route).  The constant
-$4/\pi$ of the Riemannian rate (Paper~38) is read --- convention-dependently
+approximation-pair route).  The Fej\'er-moment constant
+$4/\pi$ (Paper~38) is read --- convention-dependently
 (dual-Coxeter normalisation) and as a reading, not a derivation --- as the
 $M_{1}$ ($k = 0$ volume-slot) signature of the master Mellin engine, whose
-case-exhaustion (Paper~32~\S\,VIII) is \textbf{[CONDITIONAL]} and does not
-itself cover GH rates;\ the $1/\pi^{2}$ of the
+case-exhaustion (Paper~32~\S\,VIII) is \textbf{[CONDITIONAL]};\ the reading
+concerns the kernel's constant, not the GH rate;\ the $1/\pi^{2}$ of the
 Lorentzian HS-orthogonality (Paper~42~\S 11.7) is \emph{not} shown to be
 the same signature --- it is the square of the posited normalisation
-$\beta = 2\pi/\kappa_g$ (re-tiered 2026-09-28).  Further papers (48, 49, 50, 53) extend the arc;\ Papers~48--50 are recorded in
+$\beta = 2\pi/\kappa_g$.  Further papers (48, 49, 50, 53) extend the arc;\ Papers~48--50 are recorded in
 \S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Paper~53 is summarized at the end of this abstract (Paper~52 is archived);\ metric-level
 claims among them descoped by Paper~45's degeneracy theorem are
 reported here in corrected form.  \textbf{[ARCHIVED 2026-09-14]}
@@ -184,9 +183,7 @@ canonicity open), leaving the
 disk-with-cone open:\ the finite-disk Markov--Ces\`aro reconstruction map is
 not positive;\ the plane Bochner--Riesz lift is not positive either (its
 kernel is negative somewhere, which is why the squared window is used);\ and
-the cone has no translation group.  The earlier disk ``Dirichlet-boundary
-obstruction'' was a floating-point artifact at $\rho = R$ (withdrawn
-2026-09-29).
+the cone has no translation group.
 Paper~48 constructs Krein-pointed proper quantum metric spaces and a
 bridge functor to the Mondino--S\"amann synthetic-Lorentzian
 pre-length spaces;\ the metric-level inheritance is descoped and the
@@ -263,7 +260,7 @@ content appears in the Ihara polynomial factorizations
 Ihara factorizations of \S5).
 
 \paragraph{Headline 2: Riemannian state-space Gromov--Hausdorff
-convergence with explicit rate $4/\pi$.}
+convergence, with a Fej\'er-kernel bound of constant $4/\pi$.}
 The Connes--van~Suijlekom truncations
 $\Tcal_{\nmax} = (\Op_{\nmax}, \HGV, \DGV)$ of the
 $\SU(2)$ Camporesi--Higuchi spectral triple converge to the continuum
@@ -278,16 +275,19 @@ d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \quad (\nmax \to \infty).
 \label{eq:headline_2}
 \end{equation}
-The asymptotic constant is the sphere-volume quotient
+Here $\gamma_{\nmax}$ is the first moment of the central Fej\'er kernel;\ a
+tapered amplitude gives a measured $O(1/\nmax)$, so $4/\pi$ is the kernel's
+constant, not the convergence rate (Paper~38, main theorem).  That constant is
+the sphere-volume quotient
 $2\Vol(S^{2})/\Vol(\sthree)$ at unit radius (numerically $\Vol(S^{2})/\pi^{2}$)
 --- read (a reading, not a derivation;\ Paper~38) as the $k = 0$ volume
 factor of the master Mellin engine, not the Hopf
 fibration's base-to-total ratio (Paper~38, volume-ratio note;\ the fibration is
-$S^{1} \to \sthree \to S^{2}$, corrected 2026-09-03) --- and is
+$S^{1} \to \sthree \to S^{2}$) --- and is
 discussed in detail in \S\ref{sec:gh}--\S\ref{sec:mellin} below
 (Paper~38~\cite{paper38}, Theorems~3.4 and 4.1).
 
-\paragraph{Headline 3: the rate constant $4/\pi$ is reported universal
+\paragraph{Headline 3: the Fej\'er-moment constant $4/\pi$ is reported universal
 across compact simple Lie groups.}
 For any simple compact Lie group $G$ with bi-invariant metric (so
 $G \in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
@@ -306,7 +306,7 @@ is derived at rank~1 ($\SU(2)$) and, for general $G$, is a
 proof-sketch mechanism (the Plancherel$\times$Vandermonde cancellation)
 numerically supported, with a fit-sensitive extraction, at rank~2
 ($\SU(3),\mathrm{Sp}(2),G_{2}$) with one rank-3 datapoint; a fully rank-uniform analytical proof is a named gap
-(Paper~40~\S L2), and the per-group rate-constant extractions are
+(Paper~40~\S L2), and the per-group constant extractions are
 fit-sensitive.
 
 \paragraph{Headline 4: the Lorentzian propinquity route is closed by a
@@ -588,8 +588,9 @@ d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \quad (\nmax \to \infty),
 \label{eq:gh_su2}
 \end{equation}
-with constant~$1$ from the lifted-state route and \textbf{[INTERNAL
-THEOREM + MEASURED]} asymptotic constant $4/\pi$:
+with constant~$1$ from the lifted-state route, where $\gamma_{n}$ is the
+first moment of the central Fej\'er kernel~\eqref{eq:fejer_kernel}, with
+\textbf{[INTERNAL THEOREM + MEASURED]} asymptotic constant $4/\pi$:
 \begin{equation}
 n \,\gamma_{n} \;\sim\; (4/\pi)\,\log n
 \qquad (n \to \infty).
@@ -597,6 +598,9 @@ n \,\gamma_{n} \;\sim\; (4/\pi)\,\log n
 \end{equation}
 \textbf{[MEASURED]} A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$
 holds on the checked sample of $n \ge 2$ (not proved for all $n$).
+\textbf{[MEASURED]} With a Ces\`aro-tapered amplitude in place of the
+Fej\'er one, $d_{\mathrm{GH}} = O(1/\nmax)$ (proof and optimal constant
+\textbf{[OPEN]});\ $4/\pi$ is the Fej\'er kernel's constant, not the rate.
 \end{theorem}
 
 The proof is the \emph{lifted-state} construction, which uses the L2
@@ -662,7 +666,7 @@ mass-distribution maximum, not a cb-norm):\ convolution by a
 positive unit-mass kernel is unital completely positive, and a UCP map
 has cb-norm $1$ (Paulsen~\cite{paulsen2002}, Prop.~3.6).
 
-\paragraph{The asymptotic constant $4/\pi$.}
+\paragraph{The Fej\'er-moment constant $4/\pi$.}
 The mass-concentration moment $\gamma_{\nmax}$ of the kernel
 admits an exact closed-form sum rule whose asymptotics are fixed by
 an Euler--Maclaurin analysis of two logarithmic sub-coefficients
@@ -682,26 +686,23 @@ The constant is the sphere-volume quotient
 $\Vol(S^{2})/\Vol(\sthree) = 2/\pi$ at unit radius, twice that in
 the dual-Coxeter normalisation.  Both spheres have radius~$1$, so this is
 \emph{not} the Hopf fibration's base-to-total ratio (that base is
-$S^{2}(1/2)$ and the ratio is $1/(2\pi)$;\ Paper~38, volume-ratio note,
-2026-09-03).  Concretely $\Vol(S^{2}) = 4\pi$ and
+$S^{2}(1/2)$ and the ratio is $1/(2\pi)$;\ Paper~38, volume-ratio note).  Concretely $\Vol(S^{2}) = 4\pi$ and
 $\pi^{2} = \Vol_1(\SU(2))/2$, so that $4/\pi = 2\Vol(S^{2})/\Vol_1(\SU(2))$ in
 the dual-Coxeter normalisation; on the unit $\sthree$ the constant is
 the plain Haar ratio $\Vol(S^{2})/\Vol(\SU(2)) = 2/\pi$, the factor $2$
-being the metric scale (Paper~38, 2026-09-03).
+being the metric scale (Paper~38).
 The classical Fej\'er kernel on $\T^{1}$ has probability-normalised
 first-moment constant $2/\pi$ --- half the $\SU(2)$ value in the
 dual-Coxeter normalisation and equal to it on the unit $\sthree$, so
 the factor $2$ is the metric scale rather than a signature of the
-group (Paper~38, Remark ``Connection to the circle Fej\'er estimate'';
-re-priced 2026-09-03).
+group (Paper~38, Remark ``Connection to the circle Fej\'er estimate'').
 The $\log n$ factor in \eqref{eq:gamma_asymptote} is not a
 non-abelian slowdown:\ it is already present in the circle Fej\'er
-kernel (Paper~38;\ Paper~40).  Leimbach--van~Suijlekom
+kernel (Paper~38;\ Paper~40), and a tapered amplitude removes it
+(Paper~38).  Leimbach--van~Suijlekom
 \cite{leimbach_vs2024} prove Gromov--Hausdorff convergence of spectral
 truncations for tori without stating an explicit rate, so there is no
-published torus rate to compare against (an earlier version of this
-synthesis attributed an $O(1/\nmax)$ torus rate to them;\ withdrawn
-2026-09-28).
+published torus rate to compare against.
 
 \subsection{Lemma L3: Lipschitz comparison with $C_{3} = 1$}
 
@@ -821,7 +822,7 @@ small cutoffs (values of the bound, not computed distances):
 \label{eq:numerical_lambda}
 \end{equation}
 with $\gamma_{4}/\gamma_{2} = 0.637$.  These are monotone decreasing
-on this range and consistent with the $O(\log \nmax / \nmax)$ rate.
+on this range and consistent with the $O(\log \nmax / \nmax)$ Fej\'er-moment asymptote.
 
 \subsection{Tensor extension (Paper~39)}
 \label{sec:tensor_extension}
@@ -835,7 +836,7 @@ $\lambda_{a} \ne \lambda_{b}$ \cite{paper39}.  The result is an
 Gromov--Hausdorff distance with bound
 $\Lambda \le \gamma^{(ab)} \le \lambda_a\gamma_{n_a} +
 \lambda_b\gamma_{n_b}$, \emph{leading constant $1$}, for the spinor
-(Camporesi--Higuchi) tensor triple with an explicit rate and the
+(Camporesi--Higuchi) tensor triple with an explicit bound and the
 KO-dimension-6 real structure of its limit (the scalar state-space case
 of $\SU(2)\times\SU(2)$ is covered by Gaudillot-Estrada and
 van~Suijlekom;\ the cross-manifold case stays open, Paper~32).
@@ -863,7 +864,7 @@ $C_3^{(2)}<1$ was withdrawn as false;\ the triangle bound on the two
 Leibniz terms is tight term by term and gives only $\sqrt 2$.)
 
 % =====================================================================
-\section{The universality of the rate constant $4/\pi$}
+\section{The universality of the Fej\'er-moment constant $4/\pi$}
 \label{sec:universality}
 % =====================================================================
 
@@ -872,27 +873,28 @@ from $\SU(2)$ to compact connected semisimple Lie groups with
 bi-invariant metric (for general $G$ conditionally on the per-group
 spin-window decomposition).
 
-\begin{theorem}[Paper~40, universal rate constant]
+\begin{theorem}[Paper~40, universal Fej\'er-moment constant]
 \label{thm:universal_rate}
 Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
 with bi-invariant metric (each simple factor
 $\in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4},
 E_{6}, E_{7}, E_{8}\}$).  The truncated (Kostant-Dirac) triples
 $\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the van~Suijlekom
-state-space Gromov--Hausdorff sense;\ for \emph{simple} $G$ with the same
-asymptotic rate constant as \eqref{eq:gh_rate_constant} (for several
-simple factors the constant is open, Paper~40, 2026-10-02):\ namely
+state-space Gromov--Hausdorff sense;\ for \emph{simple} $G$ the Fej\'er-type
+moment has the same asymptotic constant as \eqref{eq:gh_rate_constant} (for several
+simple factors the constant is open, Paper~40):\ namely
 $4/\pi$, in the dual-Coxeter
 normalisation (derived at rank~1;\ numerically supported, with a
 fit-sensitive extraction, at rank $\ge 2$, a rank-uniform proof being a
-named gap).  The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
+named gap);\ whether a tapered amplitude gives $O(1/\nmax)$ for general
+$G$ is \textbf{[OPEN]}.  The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
 rank, by compression.  For general $G$ the convergence is conditional on a
 per-group spin-window decomposition (verified for $\SU(2)$).
 \end{theorem}
 
 \paragraph{Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation.}
-The rate-constant universality of Theorem~\ref{thm:universal_rate}
+The constant's universality in Theorem~\ref{thm:universal_rate}
 rests on a structural identity (a proof-sketch mechanism, derived at
 rank~1) which we record because it is the deepest algebraic content of
 the universality.  In the central spectral
@@ -938,7 +940,7 @@ step Paper~38 refuted at rank~1, so they are not a check of $C_{3}$.
 The state-space Gromov--Hausdorff convergence (without rate and
 without Dirac) at the same generality was proved by
 Gaudillot-Estrada--van~Suijlekom (IMRN 2025, paper rnaf197).
-Paper~40 provides the missing rate constant, the Lipschitz spinor
+Paper~40 provides the Fej\'er-moment bound and its constant, the Lipschitz spinor
 bound, and the asymptotic tightness on the state-space GH substrate;
 the further step from state-space GH to spectral-triple-level
 Latr\'emoli\`ere propinquity (the dual-reach step) is a conceded named
@@ -1161,8 +1163,8 @@ through the posited $\beta = 2\pi/\kappa_g$ --- the continuum KMS period
 imported as a normalisation, an input rather than a computed output.  It
 lies in the algebraic class $\pi^{-2}\Q$ of the $M_{1}$ ($k = 0$
 volume-slot) sector, but no Mellin mechanism producing it is shown and no
-identity with the $M_1$ content of the Paper~38 rate constant $4/\pi$
-\eqref{eq:gamma_asymptote} is established (re-tiered 2026-09-28;\ see
+identity with the $M_1$ content of the Paper~38 Fej\'er-moment constant $4/\pi$
+\eqref{eq:gamma_asymptote} is established (see
 \S\ref{sec:mellin}).
 
 \paragraph{Chirality-parity mechanism.}
@@ -1274,7 +1276,7 @@ O\!\bigl(\log \nmax / \nmax \;+\; T\log\Nt / \Nt\bigr)
 \label{eq:p45_rate}
 \end{equation}
 survives as a well-defined closed form;\ its spatial leg
-$\gamma^{\SU(2)}$ is the rate of the unconditional \emph{spatial} statement
+$\gamma^{\SU(2)}$ is the bound of the unconditional \emph{spatial} statement
 (Paper~38, constant $1$), the temporal factor being a metrically invisible
 spectator.
 
@@ -1376,7 +1378,8 @@ mass-concentration moment and reach moment.
 \item[(G3)] \textbf{Cross-manifold $\Tcal_{\sthree} \otimes
 \Tcal_{\mathrm{Hardy}(\sfive)}$.}  Blocked at the NCG-framework level
 by the Riemannian-vs-Hardy-sector asymmetry recorded in Paper~24~\S V
-of the GeoVac corpus (a four-layer Coulomb/HO asymmetry); this is
+of the GeoVac corpus (the Coulomb/HO asymmetry:\ seven layers
+catalogued, six standing); this is
 the Coulomb-side claim only.
 \item[(G4)] \textbf{Inner-factor calibration data.}  Higgs / Yukawa
 selection question of the Connes--Marcolli SM construction;
@@ -1394,14 +1397,12 @@ data).
 
 The most striking structural observation that emerges from reading
 the arc is that transcendental signatures of the same algebraic class
-recur across settings.  The constant $4/\pi$ of Paper~38 is read (a
+recur across settings.  The Fej\'er-moment constant $4/\pi$ of Paper~38 is read (a
 reading, not a derivation) as the $k = 0$ volume content, the $M_{1}$
 sub-case of the master Mellin engine catalogued in Paper~32~\S 8.  The
 constant $1/\pi^{2}$ of Paper~42~\S 11.7 lies in the same ring
 $\pi^{-2}\Q$ but is \emph{not} shown to arise from that mechanism:\ it is
-the square of the posited normalisation $\beta = 2\pi/\kappa_g$
-(re-tiered 2026-09-28;\ an earlier version of this paragraph called the two
-constants ``two appearances of the same'' mechanism).
+the square of the posited normalisation $\beta = 2\pi/\kappa_g$.
 
 \subsection{The $\pi$-source case-exhaustion theorem (Paper~32~\S 8)}
 
@@ -1412,7 +1413,7 @@ the first fifteen Paper~34 projections applied to a Layer-1 datum on
 $(\AGV, \HGV, \DGV)$ or its Bargmann--Segal sibling triple.  Then
 (i)$\Leftrightarrow$(ii) (empirical, Paper~35) and (ii)$\Rightarrow$(iii)
 (case-by-case argument);\ the converse (iii)$\Rightarrow$(i) is
-withdrawn as not established (2026-09-30:\ M2 at half-integer $s$ and
+not established (M2 at half-integer $s$ and
 M3 at $s = 4$ give values with no known $\pi$):
 \begin{itemize}\setlength\itemsep{0pt}
 \item[(i)] $\mathcal{C}$(datum) contains a transcendental of the form
@@ -1425,7 +1426,7 @@ spectral-triple mechanisms,
 \begin{itemize}\setlength\itemsep{0pt}
 \item[$M_{1}$] (\emph{$k = 0$ volume slot}):\
 $\pi = \Vol(S^{2})/4$, a quarter of the unit-sphere area $\Vol(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit-$S^3$
-Hopf bundle $S^{1} \to \sthree \to S^{2}$);\ the $4/\pi$ rate constant is twice the unit-sphere
+Hopf bundle $S^{1} \to \sthree \to S^{2}$);\ the $4/\pi$ Fej\'er-moment constant is twice the unit-sphere
 volume quotient $\Vol(S^2)/\Vol(\sthree) = 2/\pi$ (convention-dependent:\ $4/\pi$ dual-Coxeter, $2/\pi$ on the unit $\sthree$);
 \item[$M_{2}$] (\emph{Seeley--DeWitt}):\
 $\sqrt{\pi}$ via heat-kernel coefficients on the Camporesi--Higuchi
@@ -1451,10 +1452,12 @@ M_{3}$ are sub-cases of a single master Mellin-engine mechanism
 where $k = 0$ selects $M_{1}$, $k = 1$ selects $M_{3}$, and $k = 2$
 selects $M_{2}$.
 
-\subsection{$M_{1}$ in the Riemannian GH rate}
+\subsection{$M_{1}$ in the Fej\'er-moment constant}
 
-The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} carries the
-$M_{1}$ ($k = 0$ volume) signature, a convention-dependent reading.
+The Fej\'er-moment constant $4/\pi$ in \eqref{eq:gh_rate_constant} carries the
+$M_{1}$ ($k = 0$ volume) signature, a convention-dependent reading;\ it says
+nothing about the GH rate, which a tapered amplitude makes $O(1/\nmax)$
+(Paper~38).
 The value's universality across the class follows from the
 Plancherel-weight $\times$ Vandermonde-Jacobian cancellation mechanism (Paper~40~\S 3.2;\
 derived at rank~1, proof-sketch tier at higher rank) which
@@ -1490,14 +1493,14 @@ subsection asserted both (withdrawn 2026-09-28).
 The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
 \emph{spectral-triple-level} statement about where $\pi$ can enter
 chains of the first fifteen Paper~34 projections (\textbf{[CONDITIONAL]}).  The constant
-$4/\pi$ of Paper~38 is a \emph{metric-geometry-level} statement about
-the state-space GH rate.  The fact that these two abstractly-different
+$4/\pi$ of Paper~38 is a \emph{kernel-level} statement about the
+Fej\'er moment that bounds the state-space GH distance.  The fact that these two abstractly-different
 levels agree on the same signature is a consistency check within one
 normalisation (in Kac's normalisation the constant is $2\sqrt2/\pi$, so
-the agreement is convention-dependent): the metric geometry of the
+the agreement is convention-dependent): the Fej\'er kernel on the
 GeoVac spectral triple is \emph{read} as carrying the same M$_{1}$
 signature that the abstract Mellin engine catalogues --- a reading, not a
-derivation, since the case-exhaustion does not cover GH rates.  (Paper~42~\S 11.7's
+derivation.  (Paper~42~\S 11.7's
 Lorentzian Pythagorean decomposition does \emph{not} extend this:\ its
 $1/\pi^{2}$ is the imported normalisation of the posited generator, not a
 computed $M_1$ output.)
@@ -1730,7 +1733,7 @@ retracted, so neither C16 nor a \texttt{cited\_by} list can see it.
 
 \textbf{(v) Master theorem --- universal compact-Lie-group factors
 (sketch).}
-Combining the k-fold extension with the $4/\pi$ rate reported universal
+Combining the k-fold extension with the Fej\'er-moment constant $4/\pi$ reported universal
 in Paper~40~\cite{paper40_unified} (derived at rank~1;\ general-$G$
 convergence conditional) gives the expected multi-factor form (Paper~39 \S6(v))
 
@@ -1745,20 +1748,15 @@ C_{3}^{(k)} = 1,
 for arbitrary $k \ge 1$ and compact connected simple Lie groups
 $G_{1}, \ldots, G_{k}$ with bi-invariant metrics (Paper~40's class; a
 central torus factor is excluded --- Paper~40 asserts no value for
-$c(G_{\mathrm{ss}} \times T^{k})$). \emph{Correction
-(2026-06-18):} this was boxed as a closed ``master theorem'' with a
-$k$-\textbf{independent} constant $\sup_j C_3^{G_j}(n_j)$ resting on the
-false Pythagorean identity;\ the $k$-independent constant $1$ now comes
+$c(G_{\mathrm{ss}} \times T^{k})$). The $k$-independent constant $1$ comes
 from compression (each $G_j$ factor by Paper~40's left-equivariance
-argument). Each summand $\gamma^{G_j}$ then carries the $4/\pi$
+argument). Each summand $\gamma^{G_j}$ carries the Fej\'er-moment $4/\pi$
 asymptotic (the joint leading constant is open for several factors,
 Paper~40); but this multi-factor / general-$G$ form is a
 \textbf{sketch} (proved only for $k=1$, $\SU(2)$ and $k=2$,
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ $k=1$ for general $G$ is conditional;\ $C_3^{(k)}$ is the
-approximation-pair route's constant, not a rate constant). (An earlier
-version printed the rate as $\max_j\gamma^{G_j}_{n_j}$, below the proved
-$k=2$ bound;\ withdrawn 2026-10-02.)
+approximation-pair route's constant, not a rate constant).
 
 The master-theorem sketch subsumes Papers~\cite{paper38}
 ($k = 1$, $G = \SU(2)$), \cite{paper40_unified}
@@ -2058,20 +2056,20 @@ to the Mondino--S\"amann synthetic Lorentzian GH program
 \Tcal_{\mathrm{Hardy}(\sfive)}$ (G3, Coulomb-side claim only).}
 The natural tensor product of the Coulomb $\sthree$ spectral triple
 with the Bargmann--Segal Hardy-sector spectral triple on $\sfive$
-\cite{paper24} is blocked at the NCG-framework level by a four-layer
-asymmetry recorded in Paper~24~\S V.  The four layers are:
-(i) spectrum-computing role of $L_{0}$ (Coulomb-side only, by Paper~23
-Fock rigidity);
+\cite{paper24} is blocked at the NCG-framework level by the Coulomb/HO
+asymmetry recorded in Paper~24~\S V (seven layers catalogued, six
+standing;\ its first layer, a spectrum-computing role for $L_0$, is
+withdrawn).  The standing layers that bear on it include:
 (ii) calibration $\pi$ (Coulomb-side only);
 (iii) non-abelian Wilson gauge with natural matter coupling (both
 sides have Wilson, only Coulomb-side has natural matter coupling
 because the Bargmann tower $(N,0)$ irreps have $N$-dependent
-dimensions and no uniform-rep matter sector); and (iv) modular-
-Hamiltonian structure of the wedge KMS state (Coulomb-side admits the
-Krein wedge HS-orthogonality of Corollary~\ref{cor:hs_orthogonality}
-with closed-form prefactor $1/\beta^{2}$ of the posited normalisation;
-the Hardy-sector side does not
-admit the construction at all).  Closing G3 requires new
+dimensions and no uniform-rep matter sector); and (iv) Pythagorean
+orthogonality of the posited wedge generator (Coulomb-side:\ the Krein
+wedge HS-orthogonality of Corollary~\ref{cor:hs_orthogonality} with
+closed-form prefactor $1/\beta^{2}$ of the posited normalisation;\ on the
+Hardy sector the natural analog operands are not orthogonal,
+\textbf{[ARGUED]}).  Closing G3 requires new
 NCG-framework machinery to bridge Riemannian and Hardy-sector spectral
 triples in a single tensor product; we make no claim about whether
 this is achievable.
@@ -2114,14 +2112,14 @@ K$^{+}$-weak-form extension is \emph{descoped}:\ Paper~45 proves a
 degeneracy theorem (the natural Lorentzian-propinquity seminorm
 vanishes identically), and what survives on the temporal factor is
 Paper~45's signature-agnostic product-carrier rate (not a Lorentzian
-convergence).  The Riemannian rate constant $4/\pi$ of the truncated
-triples is read (a reading, not a derivation;\ Paper~38) as M$_{1}$
-($k = 0$ volume-slot) content;\ the $\pi$-source case-exhaustion
+convergence).  The Fej\'er-moment constant $4/\pi$ of the truncated
+triples' bound is read (a reading, not a derivation;\ Paper~38) as M$_{1}$
+($k = 0$ volume-slot) content;\ it is the kernel's constant, not the
+convergence rate, and the $\pi$-source case-exhaustion
 theorem (Theorem~\ref{thm:pi_source}, \textbf{[CONDITIONAL]}) does not
 itself cover GH rates.  (The $1/\pi^{2}$ of the
-Lorentzian Pythagorean closed form, formerly counted as a second
-appearance, is the imported normalisation of a posited generator and is
-not shown to share that signature;\ re-tiered 2026-09-28.)
+Lorentzian Pythagorean closed form is the imported normalisation of a
+posited generator and is not shown to share that signature.)
 
 % =====================================================================
 % Bibliography

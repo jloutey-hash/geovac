@@ -87,7 +87,8 @@ the SMALL findings were introduced by the previous round's own remediation
 (qa.md, "Remediated text is not clean text"). A binary PASS/FAIL turns "fix SMALLs →
 re-run → find new SMALLs" into an unbounded loop. RESEARCH-GRADE ends that loop at
 the point where research can safely continue. **SMALL findings are fixed on sight,
-like NITs, whenever possible** (PI correction, 2026-09-27). What ends the loop is
+like NITs, whenever possible** (PI correction, 2026-09-27; **superseded inside a
+cert cycle by the edit bar, 2026-10-03 -- see "Incremental certification and the edit bar"**). What ends the loop is
 that a SMALL fix does **not** trigger another verification run. Only a SMALL that
 cannot be fixed on sight is recorded as debt, for example one needing a computation,
 a PI decision, or an external source.
@@ -98,7 +99,10 @@ a PI decision, or an external source.
 2. **Stamped.** The target's `.done.md` carries one line,
    `**RESEARCH-GRADE:** YYYY-MM-DD @ <commit-sha> (<run id>)`, and the target row in
    `papers/INDEX.md` shows the same status.
-3. **SMALLs are fixed on sight; the residue stays visible.** Fix every SMALL finding
+3. **SMALLs: the edit bar governs (2026-10-03).** Inside a cert cycle a SMALL is
+   fixed only if a LARGE fix already opens its unit; the rest go to the `## SMALL
+   sweep` list and are fixed in one scheduled sweep. *Previous rule, kept for the
+   record:* fix every SMALL finding
    in the remediation pass, as with NITs, and do not schedule a re-run to verify
    those fixes. (The deterministic gates still run, and the next *scheduled* run
    covers the fixed text as recently changed.) A SMALL that cannot be fixed on
@@ -552,6 +556,88 @@ After the panel, a one-agent **completeness-critic** names un-verified regions;
 re-dispatch a focused reviewer for any gap. A full find→fix→re-scan
 loop-until-dry is reserved for the *final* pre-certification convergence run.
 
+## Incremental certification and the edit bar (2026-10-03, PI-directed after FULL #12)
+
+**Measured driver.** By FULL #9-#12 the code dimension had stopped finding owner
+defects (every keystone re-derived clean, run after run) and citations were
+converging the same way, yet both were re-run in full every time. The prose
+churn had three sources, and only the first was review doing its job: (1) real
+discoveries (rare); (2) restatement multiplicity -- one claim restated at 10-40
+loci, so every owner correction became a corpus hunt (most of DELTA #26's ten
+self-check rounds); (3) self-inflicted surface -- every fix added a hedge or an
+"an earlier version said X" note, which restates the retired claim and is new
+prose for the next reviewer (a round-9 LARGE was introduced by the fix itself).
+And because an 8,000-line paper is sampled differently by each FULL panel, each
+FULL found debt nobody had read before.
+
+**1. Stamps, per unit, keyed to content.** `debug/qa/cert_stamps.py` splits a
+target into UNITS -- `prose:` (one `\section` / `\subsection` chunk; the part
+before the first `\section` is `front`), `cite:` (bibliography + every `\cite`
+line), `code:` (the paper's backing tests + the `geovac` modules they import) --
+and records, per unit, the content hash a review certified (`docs/qa/stamps/<target>.json`).
+A unit needs review when it is NEW, CHANGED, or CLAIM-MOVED (its text did not
+move but a C25 claim it mentions, or a C16 entry citing its paper, changed status
+after the stamp), plus a deterministic AUDIT sample of 10% of the CURRENT units
+(min 2 per dimension). Hashes ignore line endings and trailing whitespace.
+
+**2. A FULL run is incremental.** The deterministic gates still run whole-target.
+The LLM dimensions review exactly the units `cert_stamps.py --target <t> --plan`
+names: code reviewers only for `code:` units in the plan, citation reviewers only
+for `cite:` units, claims/synthesis reviewers read the listed `prose:` units **in
+full** (the enumeration mandate applies inside each unit). The completeness-critic
+checks that every unit is either in the plan or carries a current stamp. A first
+cert (no stamps) is therefore an ordinary whole-target FULL. **An AUDIT unit that
+yields a LARGE means the stamps are leaking:** record it in the run line, and the
+next run doubles the audit fraction (`--plan` takes the fraction from the record by
+hand; or run with every unit treated as NEW). PASS and RESEARCH-GRADE require every
+unit to carry a current stamp at the end of the run.
+
+**3. Stamping.** After the run's LARGE findings are remediated AND the self-check
+loop has returned zero LARGE, stamp the units the run reviewed whose text the
+remediation left unchanged: `--stamp --run "<run id>" --unchanged-since <reviewed sha>`.
+Remediated units stay unstamped and are reviewed (and stamped) by the next run --
+remediated text is not clean text, and the self-check is a claims-only check, not a
+certification review. Units with open LARGE are excluded (`--exclude`). A stamp means
+"reviewed; no open LARGE" -- SMALLs live in the debt file, not in the stamp.
+
+**4. The edit bar (replaces "SMALLs fixed on sight" inside a cert cycle).**
+  - **Only a LARGE opens a unit.** During a cert cycle (from a run's findings to
+    its stamp), paper, synthesis, docstring and front-door text changes only to fix
+    a LARGE. A SMALL inside a unit that a LARGE fix already opens is fixed in the
+    same edit (that unit is re-reviewed anyway). Every other SMALL goes to the
+    `## SMALL sweep` list in `docs/qa/<target>.debt.md` and is fixed in one scheduled
+    sweep outside the cert cycle; the swept units then show CHANGED and are reviewed
+    by the next run. Mechanical fixes a deterministic gate demands (C19, C21, a broken
+    `\ref`) are exempt -- they carry no prose judgment.
+  - **Delete, don't hedge.** A withdrawn or false claim is removed, or replaced by
+    the true statement. No "an earlier version stated...", "(corrected 2026-...)",
+    "[withdrawn]", "formerly", or retraction-marker text in papers, syntheses,
+    docstrings or front-door docs: the record of a withdrawal is the CHANGELOG entry
+    and the C16 entry's note (git and Zenodo hold the old text). Existing history
+    notes are removed from any paragraph a fix edits; the rest of a large unit's
+    history notes go in the SMALL sweep or the chronicle relocation (item 5),
+    not in a sweep of their own.
+    Chronicle records (CLAUDE.md §1.7/§3, the failed-approaches ledger, the WH
+    history, CHANGELOG) keep their history -- that is their job.
+  - **Minimal diff.** A fix changes the fewest sentences that make the unit true.
+    Remediation adds no new explanatory paragraphs, caveat blocks or remarks; new
+    content is research and enters outside a cert cycle.
+
+**5. Summary surfaces point; they do not paraphrase (hardens families rule 3).**
+When a fix touches a restatement of a load-bearing claim on a summary surface
+(abstract, conclusion, synthesis, field guide, README, INDEX, claims register,
+another paper, a `docs/` page, a docstring), the restatement is converted -- never
+re-paraphrased -- to a pointer ("Paper 38, Thm. 1") or to `\gvc{id}{...}` /
+`<!-- gvc:id -->` text held to its C25 entry (define `\newcommand{\gvc}[2]{#2}` in
+the preamble when first used). No build-time insertion of a canonical sentence, for
+the reason numeric-registry rule 5 rejects build-time numbers: the sentence around
+it would not update.
+
+**Honest ceiling.** A stamp certifies the unit's text against the claims as they
+stood; CLAIM-MOVED catches a moved claim only where the C25 `mention` pattern or a
+C16 `cited_by` reaches. A paraphrase neither reaches stays CURRENT -- which is what
+the AUDIT sample and rule 5 exist to bound.
+
 ## Run shapes: full runs vs delta-verification runs (2026-07-02, PI direction)
 
 **The cost meta-lesson (seven group4 cycles):** the gate was priced as full
@@ -660,6 +746,12 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-10-03 — **Incremental certification + edit bar** (PI-directed after FULL #12;
+  MINOR bump v5.20.0): per-unit content-hash stamps (`cert_stamps.py`); a FULL reviews
+  only NEW/CHANGED/CLAIM-MOVED units plus a 10% audit sample; only a LARGE opens a
+  unit inside a cert cycle (SMALLs batch to a sweep); delete, don't hedge; summary
+  surfaces point rather than paraphrase. Section: "Incremental certification and
+  the edit bar".
 - 2026-10-02 — **Remediation completeness rule** (PI-approved after DELTA #25;
   MINOR bump v5.19.0): family closure before a LARGE counts as fixed; the
   pre-checkpoint self-check loops to zero LARGE with fresh reviewers; summary

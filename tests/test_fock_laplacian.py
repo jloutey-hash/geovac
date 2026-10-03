@@ -2,11 +2,14 @@
 Symbolic verification: Laplace-Beltrami operator on S³ in the radial (l=0) sector.
 
 We work exclusively in the 1D radial momentum coordinate p, avoiding
-multivariate chain rules that cause sympy to hang. The key result:
+multivariate chain rules that cause sympy to hang. What is checked:
 
     The S³ Laplacian acting on a conformally weighted wavefunction
-    Φ(p) = Ω(p)² · φ(p) produces exactly the structure of the
-    momentum-space Schrödinger equation for hydrogen (l=0).
+    Φ(p) = Ω(p)² · φ(p) is a second-order operator in φ with rational
+    coefficients (a non-discriminating structural check, Paper 7), and
+    the S³ harmonics carry the eigenvalue -(n²-1).  The equivalence with
+    the momentum-space Schrödinger equation is Fock's (1935); its
+    non-definitional content is backed by tests/test_paper7_fock_kernel.py.
 
 Mathematical chain:
     Flat R³ Laplacian  →[conformal scaling by Ω²]→  Curved S³ Laplacian
@@ -215,19 +218,21 @@ def test_s3_eigenvalue_ground_state(radial_symbols):
 
 
 # ============================================================================
-# Test 5: THE KEY TEST — S³ Laplacian on Ω²·φ decomposes cleanly
+# Test 5: S³ Laplacian on Ω²·φ has rational coefficients (non-discriminating)
 # ============================================================================
 
 def test_s3_laplacian_conformal_decomposition(radial_symbols):
     """
-    THE CENTRAL RESULT: Apply Δ_{S³} to the conformally weighted
-    wavefunction Φ(p) = Ω²(p) · φ(p) and verify it decomposes as:
+    Non-discriminating structural check (Paper 7): apply Δ_{S³} to the
+    conformally weighted wavefunction Φ(p) = Ω²(p) · φ(p) and verify it
+    decomposes as:
 
         Δ_{S³}[Ω² φ] = Ω² · [ Ω⁻² Δ_flat(Ω² φ) + connection terms ]
 
     which, after Leibniz expansion and simplification, yields a
-    second-order ODE in φ(p) whose structure matches the radial
-    momentum-space Schrödinger equation for hydrogen.
+    second-order ODE in φ(p) with rational coefficients.  Any rational
+    conformal weight would pass; this does not by itself establish the
+    Schrödinger equation.
 
     Specifically, we verify that all terms are expressible as
     rational functions of p times {φ, φ', φ''} — no leftover
@@ -276,8 +281,9 @@ def test_s3_laplacian_conformal_decomposition(radial_symbols):
 
 def test_schrodinger_eigenvalue_from_s3(radial_symbols):
     """
-    Verify the complete eigenvalue equation by plugging in the known
-    n=2, l=0 hydrogen momentum-space wavefunction.
+    Despite the name, this checks the S³ eigenvalue -(n²-1) on the Fock
+    image of the known n=2, l=0 hydrogen momentum-space wavefunction; it
+    does not derive the Schrödinger eigenvalue.
 
     In momentum space, the hydrogen ground state (n=1) wavefunction is:
         φ₁(p) ∝ 1/(p² + p₀²)²

@@ -1,10 +1,14 @@
 """Krein-level modular Hamiltonian on the hemispheric wedge of S^3 x R.
 
-Sprint L2-E (2026-05-16): re-derive the Paper 42 unified-strong four-witness
-Wick-rotation theorem at the Krein level on a hemispheric wedge of
-S^3 x R at signature (3, 1).  This is the Lorentzian-side companion of
-geovac.modular_hamiltonian (which closes the Riemannian-side BW-alpha
-and BW-gamma constructions of Paper 42 at finite n_max).
+Sprint L2-E (2026-05-16): the Krein-carrier version of Paper 42's finite
+period closure on a "hemispheric" wedge of S^3 x R (Krein signature
+(3, 1)).  SCOPE: what this module verifies is the 2*pi period closure of a
+POSITED integer-spectrum generator, which holds for every operator because
+the spectrum is integer; it identifies no Bisognano-Wichmann modular flow,
+no boost, and no Lorentzian modular Hamiltonian (Paper 42; Paper 45
+descope).  The verdict string "STRONG_IDENTIFICATION_LORENTZIAN" is a
+legacy label for "all period-closure residuals below tolerance".  This is
+the Krein-side companion of geovac.modular_hamiltonian.
 
 Architecture (locked decisions from Sprint L2-A scoping memo Section 4.7,
 5.4 and Sprint L2-F falsifier catalogue Section 3 L2E-FALS-1/2/3):
@@ -24,17 +28,14 @@ Architecture (locked decisions from Sprint L2-A scoping memo Section 4.7,
   is included in the wedge (with weight 1) and the structural results
   are independent of this convention at the period-closure level.
 
-  Boost generator K_L_alpha:
+  Posited generator K_L_alpha (no boost is constructed):
 
       K_L_alpha  =  K_alpha^W (x) I_{N_t}
 
-  where K_alpha^W is the Paper 42 BW-alpha geometric generator
-  (diag(two_m_j) on the wedge), and the temporal slot acts as identity.
-  This is the natural Killing-vector-preserving choice: the spatial
-  rotation around the Hopf-base axis preserves the wedge and is
-  insensitive to the temporal slot (the Lorentzian boost acts on the
-  spacetime wedge via the spatial rotation generator at the Riemannian
-  level after Wick rotation).  Integer spectrum is preserved.
+  where K_alpha^W is Paper 42 Def 5.1: diag(two_m_j) on the wedge states, a
+  RELABELLING, not a restriction -- the polar rotation generator 2J_z
+  anticommutes with the wedge reflection R_polar, so P_W (2J_z) P_W = 0.
+  The temporal slot acts as identity.  Integer spectrum is preserved.
 
   Wedge KMS state at beta = 2*pi (BW canonical):
 
@@ -1261,7 +1262,7 @@ def verify_cross_witness_collapse_lorentzian(
     # Pick a sample test operator from the spatial multiplier basis.
     # At n_max = 1 the truncated operator system has only the identity;
     # in that case, build a structurally-faithful test multiplier as the
-    # K_alpha_W generator itself (which preserves the wedge by construction).
+    # K_alpha_W relabelling itself (diagonal on the wedge states by construction).
     op_sys = FullDiracTruncatedOperatorSystem(n_max=n_max)
     O_spatial = None
     for label, M in op_sys.basis_matrices:

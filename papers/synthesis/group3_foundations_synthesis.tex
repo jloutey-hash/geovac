@@ -238,14 +238,13 @@ $n_{\max}$ modulo $3$ (the convergence reading, an Observation until
 convergence of the spinor spectral truncations (the commutative $S^3$
 factor, true window;\ the almost-commutative extension \textbf{[OPEN]})
 is proved unconditionally:\ the distance is bounded by a closed-form Fej\'er
-moment $\gamma_{n_{\max}}$ that vanishes in the limit.  The theorem
-statement also displays its asymptotic rate,
+moment $\gamma_{n_{\max}}$ that vanishes in the limit.  For the Fej\'er
+kernel,
 $\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$, with the constant
 $\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
-tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and
-numerics-pinned) and a uniform bound $\gamma_{n_{\max}} \le 6\log n_{\max}/n_{\max}$
-\textbf{[MEASURED]} (a finite-range check)
-(Paper~38~\cite{loutey_paper38}).  \textbf{(H2)} \textbf{[PRIOR ART mechanism;\ explicit densities new]} The angular sparsity
+tiered \textbf{[INTERNAL THEOREM + MEASURED]};\ the constant is the
+kernel's, not the convergence rate, since a tapered amplitude gives a
+\textbf{[MEASURED]} $O(1/n_{\max})$ (Paper~38~\cite{loutey_paper38}, main theorem).  \textbf{(H2)} \textbf{[PRIOR ART mechanism;\ explicit densities new]} The angular sparsity
 density of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}): a structural theorem of
 spherical-fermion bases, not a Coulomb-specific accident.
@@ -492,10 +491,11 @@ almost-commutative extension \textbf{[OPEN]}) it is an unconditional
 van~Suijlekom state-space Gromov--Hausdorff convergence, bounded by a
 closed-form Fej\'er moment $\gamma_{n_{\max}} \to 0$ (proved), under the
 translation-seminorm metrization (Paper~38~\cite{loutey_paper38},
-operator-algebra arc);\ the theorem statement displays the asymptotic
-rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
+operator-algebra arc);\ the Fej\'er moment behaves as
+$(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and numerics-pinned;\
-the uniform $6\log n_{\max}/n_{\max}$ bound is \textbf{[MEASURED]}, a finite-range check), with the $4/\pi$ constant
+a kernel constant, not the convergence rate:\ a tapered amplitude gives a
+\textbf{[MEASURED]} $O(1/n_{\max})$), with the $4/\pi$ Fej\'er-moment constant
 reported universal across compact connected simple Lie groups
 (Paper~40~\cite{loutey_paper40}: derived at rank~1, fit-sensitive at rank~$\ge 2$, a rank-uniform
 analytical proof a named gap, the general-$G$ convergence itself
@@ -975,17 +975,19 @@ matter coupling needs a CG intertwiner on every link.  The layer is a
 statement about Wilson gauge with natural matter coupling, not about
 pure gauge.
 
-\item \textbf{Modular-Hamiltonian structure of the wedge KMS state.}
+\item \textbf{Pythagorean orthogonality of the posited wedge generator.}
 The Coulomb $S^3$ side admits a hemispheric-wedge KMS state with
-closed-form Hilbert--Schmidt orthogonality between the posited modular
-Hamiltonian (generator $2J_z$) and the wedge-restricted Dirac operator.
+closed-form Hilbert--Schmidt orthogonality between the posited wedge
+generator (the diagonal relabelling of Paper~42 Def.~5.1, built from
+$2J_z$;\ its modular-Hamiltonian identification is open) and the
+wedge-restricted Dirac operator.
 The prefactor $1/\pi^2$ of its closed-form residual is a
 temporal-compactification $\pi$ in the sense of Paper~35:\ it enters
 through $1/\beta^2 = \kappa_g^2/(4\pi^2)$, the posited normalisation
 $\beta = 2\pi/\kappa_g$ imported and squared by the Frobenius norm, not Mellin
 content, and it is not an instance of the master engine's volume slot
-(re-tiered 2026-09-28;\ the orthogonality itself is a chirality-parity
-identity independent of $\beta$, Paper~32); the HO
+(the orthogonality itself is a chirality-parity identity independent of
+$\beta$, Paper~32); the HO
 Bargmann side has no clean analog.  This is the
 operator-algebra-side reading of the asymmetry; for full
 details see the operator-algebra arc (Group~1).
@@ -1134,12 +1136,14 @@ the finite Dirac operator $D_F$;\ Paper~36 records the counterterms as
 external input.
 \end{enumerate}
 
-\textbf{[OBSERVATION]} The taxonomy is falsifiable: the claim is that the transcendental
-content of any GeoVac observable is determined entirely by the type of
-projection linking the compact discrete description to the
-non-compact coordinate system.  Paper~18 itself extends the six tiers
-with odd-zeta and spinor-intrinsic entries, so the taxonomy has grown
-rather than been violated; recent work on bound-state QED in the
+\textbf{[OBSERVATION]} The taxonomy sorts the transcendentals
+observed so far by the projection that introduced them.  Its strong
+form --- that the projection type alone determines the transcendental
+content of any GeoVac observable --- is not established:\ Paper~18 has
+extended the six tiers with odd-zeta and spinor-intrinsic entries as new
+cases appeared, and the spinor connection Laplacian's spectral zeta
+value $\zeta_{\nabla^*\nabla}(2)$ lies outside $\mathbb{Q}[\pi^2]$ (Paper~28), a case the original tiers did
+not anticipate.  Recent work on bound-state QED in the
 hydrogen-Lamb-shift sprint has confirmed that the framework-native
 one-loop contributions sit cleanly in the calibration and flow sectors
 of Paper~34's classification, with the Drake--Swainson structural
@@ -1165,11 +1169,11 @@ $k \in \{0, 1, 2\}$:
 \item \textbf{M1 ($k = 0$).}  Trivial heat kernel collapses to a
 sphere-volume quotient:\ $4/\pi = \text{Vol}(S^2)/\pi^2$ in the
 dual-Coxeter normalisation, twice the unit-radius quotient
-$\text{Vol}(S^2)/\text{Vol}(S^3) = 2/\pi$ (not the Hopf fibration's base-to-total ratio, corrected 2026-09-03).  It is one
+$\text{Vol}(S^2)/\text{Vol}(S^3) = 2/\pi$ (not the Hopf fibration's base-to-total ratio).  It is one
 source of calibration-$\pi$ content in the Coulomb sector (M2
-supplies the $\pi^{2k}$ of the spectral action);\ the leading constant of
-the GeoVac state-space Gromov--Hausdorff rate shares its value (a reading,
-not a derivation, Paper~38).
+supplies the $\pi^{2k}$ of the spectral action);\ the Fej\'er-moment
+constant of Paper~38 shares its value (a reading, not a derivation;\ a
+kernel constant, not the convergence rate).
 
 \item \textbf{M2 ($k = 2$).}  Standard Seeley--DeWitt expansion of
 $\mathrm{Tr}\,e^{-t D^2}$.  Its heat-kernel coefficients, via Jacobi
@@ -1192,7 +1196,7 @@ independent mechanisms but three sub-cases of the same Mellin
 transform on the GeoVac spectral triple, indexed by which power of the
 Dirac operator appears in the trace.  Each sub-mechanism has a
 characteristic domain of observable: M1 tags volume-slot
-normalizations (the GH-rate constant shares its value, a reading, not a
+normalizations (the Fej\'er-moment constant shares its value, a reading, not a
 derivation, Paper~38), M2 governs
 heat-kernel and spectral-action coefficients, and M3 governs
 vertex-restricted parity-character observables.  Mixing the operator
@@ -1569,7 +1573,7 @@ derivations of the sum~\cite{loutey_paper2_alpha}.  The combination rule
 itself remains an \emph{Observation} at the rule level (never a
 conjecture or derivation, per the project's hard rule):\ there is no
 first-principles derivation explaining why the additive combination of
-three structurally independent objects approximately equals
+three objects with spectral homes of distinct type approximately equals
 $\alpha^{-1}$ (the plain sum $K$ matches $\alpha^{-1}$ to
 $4.8\times10^{-7}$ relative; the $8.8 \times 10^{-8}$ agreement is that
 of Paper~2's self-consistency root $\alpha^{-1}+\alpha^{2}=K$).  The synthesis treats this as an open structural
@@ -1610,13 +1614,13 @@ construction that supports this cross-manifold tensor product.
 
 \textbf{[OPEN]} The framework's composition rules for multiple Fock-style projections
 constitute an active research direction.  The internal taxonomy
-labels three sub-walls: W1 (within-framework architectural gaps:
+labels three sub-walls: W1 (within-framework sub-walls:
 cross-register coordinate operators, magnetization-distribution
 operators, frozen-core cross-center screening), W2 (multi-loop UV/IR
 composition and cross-manifold extensions), and W3 (inner-factor
-calibration data, discussed above).  W1a/b/c have been closed at the
-first-pass level by the Phase~C work documented in the applications
-group; W2a (multi-loop renormalization) remains open at the
+calibration data, discussed above).  W1c has been built without
+closing the chemistry wall it targeted (the W1d/W1e residual, Paper~32);\
+W1a/b are architectural gaps; W2a (multi-loop renormalization) remains open at the
 field-theory frontier of the operator-algebra arc.  None of these
 walls falsify the foundations as presented in this synthesis; they
 sharpen the open-question boundary of the framework.
@@ -1662,10 +1666,9 @@ $-\Delta_{S^3}$ as the diagonal $SO(4)$ Casimir $n^2 - 1$;\ and
 spectral truncations---the commutative $S^3$ factor, on the true
 Camporesi--Higuchi window (the almost-commutative extension is
 \textbf{[OPEN]})---is proved in Paper~38~\cite{loutey_paper38}:\ the
-bound and $\gamma_{n_{\max}} \to 0$ are proved, the displayed
-$(4/\pi)\log n_{\max}/n_{\max}$ rate is \textbf{[INTERNAL THEOREM +
-MEASURED]}, and the uniform $6\log n_{\max}/n_{\max}$ bound is
-\textbf{[MEASURED]} (a finite-range check); \textbf{[PRIOR ART mechanism;\ explicit
+bound and $\gamma_{n_{\max}} \to 0$ are proved (Paper~38, main theorem:\ the
+Fej\'er moment is $(4/\pi)\log n_{\max}/n_{\max}$, \textbf{[INTERNAL THEOREM +
+MEASURED]};\ a tapered amplitude gives a \textbf{[MEASURED]} $O(1/n_{\max})$); \textbf{[PRIOR ART mechanism;\ explicit
 densities new]} the angular sparsity of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}); the 3D harmonic oscillator admits a
 bit-exactly $\pi$-free discrete encoding on $H^2(S^5)$

@@ -81,21 +81,21 @@ Connes--van~Suijlekom
 truncations of the round $\sthree = \SU(2)$ Camporesi--Higuchi
 spectral triple converge to the continuum spectral triple in
 van~Suijlekom's state-space Gromov--Hausdorff
-distance~\cite{vs2021_jgp}:\ the bound $d_{\mathrm{GH}} \le \gamma_{\nmax}$, with $\gamma_{\nmax}$ the mass-concentration moment of the central spectral Fej\'er kernel on $\SU(2)$, and $\gamma_{\nmax} \to 0$ are proved.  The displayed rate
+distance~\cite{vs2021_jgp}:\ the bound $d_{\mathrm{GH}} \le \gamma_{\nmax}$, with $\gamma_{\nmax}$ the mass-concentration moment of the central spectral Fej\'er kernel on $\SU(2)$, and $\gamma_{\nmax} \to 0$ are proved.  For that kernel
 \(
 \gamma_{\nmax}
 = (4/\pi + o(1)) \log \nmax / \nmax
 \)
-(dual-Coxeter normalisation of the $\SU(2)$ metric;\ equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note) is \textbf{[INTERNAL THEOREM + MEASURED]}:\ derived, with its two logarithmic sub-coefficients pinned by doubling estimators (Appendix~\ref{app:stein_weiss}).
+(dual-Coxeter normalisation of the $\SU(2)$ metric;\ $2/\pi$ on the unit round $\sthree$) is \textbf{[INTERNAL THEOREM + MEASURED]} (Appendix~\ref{app:stein_weiss}).  The proof uses the Fej\'er amplitude only as a real central amplitude in the spinor window, so any such amplitude gives the same bound with its own moment;\ \textbf{[MEASURED]} a Ces\`aro-tapered amplitude gives $d_{\mathrm{GH}} = O(1/\nmax)$.  The constant $4/\pi$ therefore belongs to the Fej\'er kernel, not to the convergence rate;\ a proof of the $O(1/\nmax)$ rate and its optimal constant are \textbf{[OPEN]}.
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
 on the continuum and whose kernel at every finite cutoff is exactly
 the scalars. (\textbf{[MEASURED]} On the true Camporesi--Higuchi
 window the Dirac-commutator seminorm also has kernel exactly the
-scalars at $\nmax \le 3$, by two independent constructions;\ the
-degeneracy reported in earlier versions belongs to a doubled Fock
-model, Remark~\ref{rem:dirac_degeneracy}. Whether the convergence can be
+scalars at $\nmax \le 3$, by two independent constructions (the second
+at $\nmax \le 2$);\ on a doubled Fock model it does not,
+Remark~\ref{rem:dirac_degeneracy}. Whether the convergence can be
 proved directly in the Dirac seminorm is \textbf{[OPEN]};\ the proof
 uses the translation seminorm because its compression estimates
 close.) The proof
@@ -112,9 +112,9 @@ and both almost-inverse defects collapse to Fej\'er smoothing — one
 on functions, one as operator conjugation-averaging — at the common
 moment $\gamma_{\nmax}$. The contribution relative to the scalar
 theory:\ the spinor-window transport, per-band injectivity of the
-compression on the Camporesi--Higuchi window (bands $N \le 2\nmax$), the
-closed-form rate moment, and the $4/\pi$ asymptotic constant.
-Supporting structure is organized in five lemmas (the fifth since withdrawn 2026-09-03):\ (L1$'$) \textbf{[PANEL-VERIFIED]} a
+compression on the Camporesi--Higuchi window (bands $N \le 2\nmax$), and the
+closed-form Fej\'er moment.
+Supporting structure is organized in four lemmas:\ (L1$'$) \textbf{[PANEL-VERIFIED]} a
 finite-distance statement on a doubled computational model of the
 truncated operator system (not used by the theorem;\ \S\ref{sec:truncations});\ (L2)
 \textbf{[INTERNAL THEOREM + MEASURED]} a positive
@@ -126,23 +126,22 @@ $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
 $C_3 = 1$, by compression from the continuum identity (proof replaced
 2026-09-28;\ \emph{not} used by the unconditional theorem);\ (L4)
 \textbf{[INTERNAL THEOREM]} a Berezin map (convolution form) that is positive,
-contractive, an approximate identity, and L3-compatible;\ (L5, since \emph{withdrawn} 2026-09-03: the bound is established by the
-unconditional lifted-state theorem, not this approximation-pair assembly).
+contractive, an approximate identity, and L3-compatible.
 \textbf{[OBSERVATION]} The
-asymptotic constant equals (numerically) a quotient of sphere volumes ---
+Fej\'er constant equals (numerically) a quotient of sphere volumes ---
 $2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and twice that,
 $4/\pi$, in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} --- and \emph{not} the Hopf
 fibration's base-to-total ratio (\S\ref{sec:L2}). The $\log\nmax$
 factor is the first-moment logarithm of the Fej\'er-type
 (squared-Dirichlet;\ on the circle, the Ces\`aro-1 Fej\'er) kernel, which the circle's Fej\'er kernel already carries
-(Remark~\ref{rem:circle_fejer});\ it is a property of the kernel, not a
-non-abelian slowdown.
+(Remark~\ref{rem:circle_fejer});\ it is a property of the kernel, not of
+the convergence, and a tapered amplitude removes it \textbf{[MEASURED]}.
 State-space Gromov--Hausdorff convergence of scalar truncations for
 compact metric groups with bi-invariant metric — including $\SU(2)$ — is
 established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\
 the residual contribution here is the
-Camporesi--Higuchi spinor substrate, the closed-form rate moment, and
-the explicit $4/\pi$ asymptotic constant. The construction supplies
+Camporesi--Higuchi spinor substrate and the closed-form Fej\'er
+moment. The construction supplies
 quantitative convergence data toward the continuum target $\sthree$,
 the commutative factor that almost-commutative spectral-triple
 constructions hosted on $\sthree$~\cite{marcolli_vs2014} take as input;\
@@ -182,8 +181,8 @@ established in van~Suijlekom~\cite{vs2021_jgp} for the circle
 $S^2$, and for compact metric groups with bi-invariant metric by
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
 residual contribution of the present paper is therefore the spinor
-substrate, the closed-form rate moment, and the explicit $4/\pi$
-constant — not the existence of convergence for $\SU(2)$ scalars.
+substrate and the closed-form Fej\'er moment --- not the existence of
+convergence for $\SU(2)$ scalars.
 
 The flat-structure case has been worked out in several subsequent
 papers. Hekkelman~\cite{hekkelman2022} treated the circle $S^1$
@@ -225,8 +224,7 @@ For the most natural physically motivated non-K\"ahler compact case
 convergence is covered by the compact-metric-group theorem of
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ what
 remains distinctive is the \emph{Dirac spectral triple} version on
-the Camporesi--Higuchi spinor substrate, with explicit closed-form
-rate.
+the Camporesi--Higuchi spinor substrate, with an explicit rate.
 
 \textbf{[INTERNAL THEOREM]} The present paper treats that case;\ the
 theorem is
@@ -261,9 +259,8 @@ metrization of \S~\ref{sec:named_gaps}:\ the bound
 $\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$ and
 $\gamma_{\nmax} \to 0$ are proved, where $\gamma_{\nmax}$ is the
 mass-concentration moment of the central spectral Fej\'er kernel on
-$\SU(2)$ given by Lemma~\ref{lem:L2};\ its displayed asymptotic rate,
-whose constant is \textbf{[INTERNAL THEOREM + MEASURED]}
-(Lemma~\ref{lem:L2}(d.ii)), is
+$\SU(2)$ given by Lemma~\ref{lem:L2}, whose asymptotics are
+\textbf{[INTERNAL THEOREM + MEASURED]} (Lemma~\ref{lem:L2}(d.ii)):
 \begin{equation}\label{eq:main_rate}
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
    \;\le\; \gamma_{\nmax}, \qquad
@@ -271,69 +268,40 @@ whose constant is \textbf{[INTERNAL THEOREM + MEASURED]}
    \quad\text{(dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)}.
 \end{equation}
 The unconditional statement is
-Theorem~\ref{thm:main_unconditional}, whose bound is
-$\le \gamma_{\nmax}$ outright and does not invoke $C_3$;\ the main
-theorem's display now states that bound (until 2026-09-04 it carried a
-$C_3 = 1$ factor inherited from the withdrawn Lemma~\ref{lem:L5} route).
-\textbf{[OBSERVATION]} The asymptotic constant is $4/\pi$ in the
-dual-Coxeter normalisation of \S\ref{sec:ch_triple} and $2/\pi$ on the
-unit $\sthree$;\ the unit-$\sthree$ value is the sphere-volume quotient $\Vol(S^2)/\Vol(\sthree)$ of
-unit-radius spheres, and the dual-Coxeter value is twice it --- though neither is the Hopf base-to-total ratio (see the
-volume-ratio note in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ (the $d_1 = d/2$ metric of \S\ref{sec:ch_triple}), the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
+Theorem~\ref{thm:main_unconditional}, which also shows that the Fej\'er
+amplitude is one admissible choice among the real central amplitudes in
+the window:\ \textbf{[MEASURED]} a Ces\`aro-tapered amplitude gives
+$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) = O(1/\nmax)$, so the constant
+$4/\pi$ in \eqref{eq:main_rate} is the Fej\'er kernel's, not the rate of
+convergence.  The constant is $4/\pi$ in the dual-Coxeter normalisation
+of \S\ref{sec:ch_triple} (distance = rotation angle $\chi$) and $2/\pi$
+on the unit $\sthree$ (distance $\chi/2$);\ the theorem holds in either
+normalisation (\texttt{tests/test\_p38\_metric\_convention.py}).
 \end{theorem}
 
 The proof structure parallels the abelian Leimbach--van~Suijlekom
-torus argument but requires more machinery on two fronts (a third,
-listed second below, belonged to earlier versions). First, the central
-spectral Fej\'er kernel on $\SU(2)$ must be constructed using
+torus argument and differs on two fronts. First, the central
+spectral Fej\'er kernel on $\SU(2)$ is constructed using
 Peter--Weyl decomposition rather than Schur--Fourier multipliers;\ the
 natural-coefficient version (carrying the $\sqrt{2j+1}$ Plancherel
 weight) is a Fej\'er-type (squared-Dirichlet) kernel --- on the
 circle, the Ces\`aro-1 Fej\'er kernel --- whose first moment is of
-order $\log n / n$ --- the logarithm is already present for the
-circle's Fej\'er kernel and is a property of the kernel, not a
-non-abelian slowdown. Second, the
-Lipschitz comparison estimate on the round $\sthree$ requires the
-Wen--Avery 3-Y integral~\cite{avery_wen_avery1986, paper7} to
-control the multiplier matrices in the truncated basis, and depends on
-the $\SO(4)$ selection rule
-$|n - n'| + 1 \le N \le n + n' - 1$ for non-vanishing 3-Y matrix
-elements (this was the route of earlier versions;\ since 2026-09-28
-Lemma~\ref{lem:L3} is proved by compression from the continuum identity,
-and the 3-Y structure enters only supporting computations). Third, the Berezin reconstruction map on $\SU(2)$ does not
+order $\log n / n$, a property of the kernel that the circle's Fej\'er
+kernel shares. Second, the Berezin reconstruction map on $\SU(2)$ does not
 arise from a K\"ahler structure (the round $\sthree$ has no compatible
 almost-complex structure), so we use the central-Fej\'er-kernel
 spectral form directly, which is the natural non-K\"ahler analog of
 van~Suijlekom's $S^1$ Fej\'er reconstruction~\cite{vs2021_jgp}.
 
-The asymptotic constant in \eqref{eq:main_rate} carries
-geometric content, and its value is normalisation-dependent (2026-09-03):\
-in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} the constant
-is $4/\pi$, which coincides numerically with $\Vol(S^2)/\pi^2$ for
-$\Vol(S^2) = 4\pi$;\ on the unit $\sthree$ it is $2/\pi$, the factor $2$
-being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- on which an \textbf{[OBSERVATION]}-level reading places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ (the engine's case-exhaustion is \textbf{[CONDITIONAL]}, Paper~32) --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Separately, \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
-first-moment constant of the classical Fej\'er kernel on the circle
-(Remark~\ref{rem:circle_fejer}). \textbf{[OBSERVATION]} We read it (a reading, not a derivation) as the volume factor that the $k = 0$ (trivial)
-heat kernel on the round $\sthree$ leaves behind --- the $k = 0$
-volume slot of the master Mellin engine, a quotient of unit-sphere volumes
-rather than the Hopf fibration's base-to-total ratio (\S\ref{sec:L2}) ---
-that slot being one of the three sub-mechanisms of a
-master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
-$k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant in
-\eqref{eq:main_rate} ($2/\pi$ on the unit $\sthree$; $4/\pi$ in the
-dual-Coxeter normalisation) is read as sitting in the $k=0$ sub-case (M1, the
-volume slot) of that classification. (An earlier version said the
-same $1/\pi^2$ factor reappears in the Pythagorean orthogonality% [retracted 2026-09-28: pythagorean-inv-pi2-as-m1-output]
-corollary (now Paper~42~\cite{paper42}~\S 11.7, Paper~43 archived);\ that $1/\pi^2$ is the posited
-KMS normalisation $\beta = 2\pi/\kappa_g$ squared, not an M1 output,
-and the link is withdrawn, 2026-09-28.) \textbf{[OBSERVATION]} The
-appearance of this constant in
-the state-space GH rate is a reading, not a derivation:\ the
-rate at which
-the truncated triples converge to their continuum limit carries the same
-transcendental signature that the framework's heat-kernel machinery
-imprints on its bulk observables.  No derivation links the two
-appearances;\ the shared value is the whole of the evidence.
+\textbf{[OBSERVATION]} On the unit $\sthree$ the Fej\'er constant
+$2/\pi$ coincides numerically with the unit-sphere volume quotient
+$\Vol(S^2)/\Vol(\sthree)$ (not the Hopf base-to-total ratio,
+\S\ref{sec:L2}) and with the first-moment constant of the circle's
+Fej\'er kernel (Remark~\ref{rem:circle_fejer}).  We read the volume
+quotient (a reading, not a derivation) as the volume slot of the master Mellin engine
+$\Tr (D^k e^{-tD^2})$ at $k = 0$ (M1)~\cite{paper18}.  The reading
+concerns the Fej\'er kernel's constant;\ it says nothing about the rate
+of convergence, which a tapered amplitude makes $O(1/\nmax)$.
 
 \paragraph{Outline.}
 Section~\ref{sec:setup} sets up the round $\sthree$
@@ -346,8 +314,8 @@ doubled computational model of the substrate (\S\ref{sec:truncations}); Lemma~\r
 spectral Fej\'er kernel and its quantitative rate; Lemma~\ref{lem:L3} the
 Lipschitz comparison bound with $C_3 = 1$; Lemma~\ref{lem:L4} the
 Berezin reconstruction. Section~\ref{sec:main_theorem} assembles the
-main theorem via the lifted-state route. Section~\ref{sec:discussion} discusses the role of the
-$4/\pi$ constant, the Marcolli--van~Suijlekom~\cite{marcolli_vs2014}
+main theorem via the lifted-state route. Section~\ref{sec:discussion} discusses the
+Fej\'er constant, the Marcolli--van~Suijlekom~\cite{marcolli_vs2014}
 gauge-network framework (for which the result supplies a continuum
 target rather than an anchor of its diagonal representative), the
 obstruction to
@@ -357,8 +325,7 @@ case, and open questions.
 \subsection{The unconditional theorem:\ compression and lifted
 states under the translation seminorm}\label{sec:named_gaps}
 
-Both gaps that conditioned earlier formulations of the main theorem
-are closed by one reframing:\ metrize the truncated state space by
+We metrize the truncated state space by
 the \emph{left-translation Lipschitz seminorm} rather than by the
 truthful-Dirac commutator seminorm. On the continuum the two agree
 exactly (Lemma~\ref{lem:continuum_lip});\ at finite cutoff the
@@ -368,9 +335,7 @@ Camporesi--Higuchi window the Dirac seminorm is \textbf{[MEASURED]} to
 have kernel exactly the scalars at $\nmax \le 3$
 (Remark~\ref{rem:dirac_degeneracy}). The translation seminorm is used
 because its compression and lifted-state estimates close, not because
-the Dirac seminorm fails;\ an earlier version of this sentence said the
-Dirac seminorm degenerates at finite cutoff, which holds only for the
-doubled Fock model (corrected 2026-09-28). All proofs in
+the Dirac seminorm fails. All proofs in
 this subsection are self-contained;\ the kernel quantities
 $\KS_{\nmax}$, $Z_{\nmax}$, $\gamma_{\nmax}$ are those of
 \S~\ref{sec:L2} below (forward references).
@@ -555,8 +520,24 @@ $\gamma_{\nmax} = 2\int \KS_{\nmax}\, d_{\mathrm{round}}\, dg$ on the
 unit $\sthree$, where the same bound reads $(2/\pi)\log\nmax/\nmax$
 (2026-09-03 convention note; the theorem holds in either normalisation).
 The inequality and $\gamma_{\nmax} \to 0$ are proved;\ the asymptotic
-constant is \textbf{[INTERNAL THEOREM + MEASURED]}
+constant of the Fej\'er moment is \textbf{[INTERNAL THEOREM + MEASURED]}
 (Lemma~\ref{lem:L2}(d.ii), Appendix~\ref{app:stein_weiss}).
+
+\emph{Other amplitudes.}  Lemma~\ref{lem:lifted_state} and the proof
+below use the Fej\'er amplitude only as a real central amplitude in the
+window:\ for any $h_a = \sum_{j \le J} a_j \chi_j$ with real $a_j$,
+(a)--(c) hold verbatim with $|h_a|^2/\sum_j a_j^2$ in place of
+$\KS_{\nmax}$, so $d_{\mathrm{GH}} \le \gamma(a) := \int d(e, g)\,
+|h_a(g)|^2\, dg / \sum_j a_j^2$.  \textbf{[MEASURED]} The Ces\`aro taper
+$a_j = \sqrt{2j+1}\,(1 - 2j/(\nmax+1))$ gives
+$\nmax\,\gamma(a) = 6.35, 6.60, 6.75, 6.82, 6.86$ at
+$\nmax = 25, 50, 100, 200, 400$, below the Fej\'er moment at each
+(\texttt{gamma\_rate(use\_cesaro=True)} in
+\texttt{geovac/central\_fejer\_su2.py};\ independent-route check
+\texttt{tests/test\_p38\_tapered\_amplitude.py}):\ the state-space GH distance is
+$O(1/\nmax)$ on this evidence, a proof is owed, and the optimal constant
+is \textbf{[OPEN]}.  The constant $4/\pi$ is the Fej\'er amplitude's, not
+the convergence rate's.
 \end{theorem}
 
 \begin{proof}
@@ -601,8 +582,7 @@ Lemma~\ref{lem:L2}(d.ii). \qedhere
 Both almost-inverse defects in the proof are Fej\'er smoothings at
 the same moment $\gamma_{\nmax}$ --- one on functions, one as the
 conjugation average $\Phi$ --- so no partial-inverse or transference
-estimate is required anywhere:\ the dual-reach gap of earlier
-formulations is dissolved rather than closed. The Berezin map
+estimate is required anywhere. The Berezin map
 $B_{\nmax}$ of Definition~\ref{def:berezin} (Lemma~L4) remains as an
 explicit forward reconstruction;\ the pair refinement built on it
 (Lemma~L5) is \emph{refuted as stated} (its height constituents fail,
@@ -612,8 +592,8 @@ with the same single-moment bound, is due to
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
 contribution here is the spinor-window transport (the exact-fit
 inclusion of Lemma~\ref{lem:lifted_state}(a)), per-band
-injectivity of the compression on the Camporesi--Higuchi window, the
-closed-form rate moment, and the $4/\pi$ asymptotic constant. All
+injectivity of the compression on the Camporesi--Higuchi window, and the
+closed-form Fej\'er moment. All
 assembly steps above are proved self-contained.
 \end{remark}
 
@@ -639,10 +619,8 @@ $\opnorm{[\DCH, \cdot]}$ has kernel strictly larger
 than the scalars at the cutoffs measured ($10/14$ multipliers at
 $\nmax = 2$, $26/55$ at $\nmax = 3$, bit-exact;\ every top-band
 multiplier compresses shell-diagonally), so it does not metrize that
-model's state space. Earlier versions of this paper read this model
-degeneracy as a property of the truncated spectral triple and used it
-to motivate the translation seminorm;\ that reading is withdrawn
-(2026-09-28).  (The frozen falsifier exercises the
+model's state space; it is not a property of the truncated spectral
+triple.  (The frozen falsifier exercises the
 $\nmax = 2$ counts;\ the $\nmax = 3$ counts are measured but not
 frozen.) An engineered off-diagonal modification of
 $\DCH$ restores its kernel condition ($1/14$, $1/55$) but is no
@@ -651,23 +629,7 @@ counts:\
 \texttt{tests/test\_p45\_kplus\_degeneracy.py::test\_spatial\_kernel\_condition\_truthful\_vs\_offdiag}
 (\texttt{tests/test\_p38\_true\_ch\_window.py} backs the injectivity
 premise on the true window, and \texttt{tests/test\_p38\_action\_seminorm.py}
-the smoothing identity;\ neither backs these model kernel counts;\ pointers corrected
-2026-09-03 and 2026-09-30).
-\end{remark}
-
-\begin{remark}[history]\label{rem:history38}
-An earlier draft of this paper (May 2026;\ repository history and the
-corresponding Zenodo deposit) stated the main theorem in the
-Latr\'emoli\`ere propinquity (a formulation since withdrawn), with a Lemma~L2 that conflated the
-kernel's Plancherel mass distribution with its multiplier symbol and
-a dual-reach argument resting on that conflation. A verification
-pass (2026-06-09;\ repository \texttt{CHANGELOG}, v3.106.0) produced
-an intermediate conditional form;\ the present unconditional form
-(2026-06-10) follows from the translation-seminorm reframing of this
-subsection. (The reframing was motivated by a Dirac-seminorm
-degeneracy later found to belong to the doubled Fock model only;\
-Remark~\ref{rem:dirac_degeneracy}.) The companion Lorentzian paper proves the related
-$K^{+}$-compression degeneracy theorem.
+the smoothing identity;\ neither backs these model kernel counts).
 \end{remark}
 
 % =====================================================================
@@ -716,33 +678,19 @@ manifold with every distance halved, and we write $d_1 = d/2$ and
 $\Vol_1(\sthree) = 2\pi^2$ when that comparison is needed.
 
 We fix the metric by this representation-theoretic rule, rather than by
-a choice of radius, because it is the rule under which the rate
-constant of Theorem~\ref{thm:main} is comparable across groups:\
+a choice of radius, because it is the rule under which the Fej\'er
+constant of Lemma~\ref{lem:L2} is comparable across groups:\
 Paper~40~\cite{paper40_unified} uses the same normalisation for the
 whole compact connected semisimple class, so the present paper is
 exactly its rank-1 case.  Any uniform rule would do that;\ this one
 is the corpus's own convention and \emph{not} the field-standard one:\
 Kac's normalised form $(\theta|\theta) = 2$~\cite{kac1990} gives $\mathrm{Cas}(\mathrm{ad})
 = 2h^\vee$, radius $\sqrt2$ and constant $2\sqrt2/\pi$, so $4/\pi$ is
-convention-dependent.  (Until 2026-09-03 this subsection declared
-the unit sphere while the moment $\gamma_{\nmax}$ of
-Lemma~\ref{lem:L2} was computed against $\chi$;\ the two differ by the
-factor $2$ above, and the bound was correspondingly stated with a
-unit-metric seminorm against a dual-Coxeter moment.  Declaring the
-metric uniformly repairs the pairing in the main theorem:\ the distance
-$d$, the seminorms $L$ and $L_{\nmax}$, the moment $\gamma_{\nmax}$ and the
-Monge--Kantorovich distances all scale together (a seminorm inversely, a
-distance moment directly), so the inequality is unchanged in content ---
-and, since what was printed before paired a \emph{unit}-metric seminorm
-with a dual-Coxeter moment, the uniform statement is a factor-$2$
-\emph{strengthening} of the printed bound rather than a restatement of
-equal force.  Two scope limits:\ Lemmas~\ref{lem:L3}--\ref{lem:L5} remain
-stated in the unit metric (Eq.~\eqref{eq:seminorm_normalisation}
-converts), and the panel \emph{height} of \S\ref{sec:L5} is
-scale-\emph{invariant} rather than degree one --- a difference of
-seminorms measured on that seminorm's own unit ball --- so the panel
-comparison there is normalisation-dependent and is not part of the
-theorem.)  Identify $\sthree$
+convention-dependent.  The distance $d$, the seminorms $L$ and
+$L_{\nmax}$, the moment $\gamma_{\nmax}$ and the Monge--Kantorovich
+distances all scale together (a seminorm inversely, a distance moment
+directly);\ Lemmas~\ref{lem:L3}--\ref{lem:L5} are stated in the unit
+metric (Eq.~\eqref{eq:seminorm_normalisation} converts).  Identify $\sthree$
 with the Lie group $\SU(2)$ via the standard double cover\footnote{We
 use this identification implicitly throughout. It is convenient
 because (i)~the Peter--Weyl decomposition of $L^2(\SU(2))$ provides a
@@ -1069,8 +1017,9 @@ analysis. The truthful $\DCH$ is what enters
 We construct the central spectral Fej\'er kernel
 $\KS_{\nmax} \in C(\SU(2))$ that plays the role of the
 circle Fej\'er kernel in van~Suijlekom's reconstruction~\cite{vs2021_jgp}
-but with the natural-coefficient Plancherel
-weights forced by the Peter--Weyl bijection $n = 2j + 1$.
+with the natural-coefficient Plancherel weights $\sqrt{2j+1}$ of
+the Peter--Weyl bijection $n = 2j + 1$ (one admissible amplitude;\
+Theorem~\ref{thm:main_unconditional}).
 
 \begin{definition}[Central spectral Fej\'er kernel]\label{def:central_fejer}
 For $\nmax \ge 1$, define
@@ -1090,9 +1039,7 @@ on the conjugacy class of $g$), and unit-mass under the standard
 $\SU(2)$ Haar measure $dg$. Identifying conjugacy classes with the
 rotation angle $\chi \in [0, 2\pi]$ via $g = \exp(i (\chi/2)\, \hat{n}
 \cdot \sigma)$ on the maximal torus (eigenphases $\pm\chi/2$;
-unit-$\sthree$ geodesic distance $\chi/2$; corrected 2026-09-03 from
-$\chi \in [0, \pi]$ with $g = \exp(i\chi \hat n \cdot \sigma)$, which
-is the geodesic angle and does not match the characters below), the
+unit-$\sthree$ geodesic distance $\chi/2$), the
 conjugacy-class measure is $d\mu(\chi) = (1/\pi) \sin^2(\chi/2)\, d\chi$.
 
 \begin{lemma}[L2: kernel construction and quantitative rate]\label{lem:L2}
@@ -1141,10 +1088,7 @@ own metric, and every constant below is a dual-Coxeter constant;\ the
 corresponding unit-$\sthree$ moment is exactly $\gamma_{\nmax}/2$ at
 every $\nmax$ (\texttt{tests/test\_p38\_metric\_convention.py};\
 $\KS_1 \equiv 1$ makes $\gamma_1 = \pi$, exactly twice the unit-$\sthree$
-Haar-mean distance $\pi/2$).  \emph{Correction (2026-09-03):} this
-definition previously wrote ``$d_{\mathrm{round}}$'' while
-\S\ref{sec:ch_triple} declared the unit sphere, so the moment and the
-seminorm were stated in different metrics;\ both are now dual-Coxeter.
+Haar-mean distance $\pi/2$).
 Then:
 \begin{enumerate}\setlength{\itemsep}{1pt}
 \item[(d.i)] \textbf{[INTERNAL THEOREM]} $\gamma_{\nmax}$ admits the
@@ -1252,9 +1196,7 @@ estimators is $2.008$ at $n = 800$
 (\texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}:\
 \texttt{test\_circle\_fejer\_closed\_form\_matches\_quadrature},
 \texttt{test\_circle\_fejer\_constant\_is\_2\_over\_pi},
-\texttt{test\_su2\_constant\_is\_twice\_circle}). An earlier version of
-this remark stated the circle constant as $4/\pi$, ``the same on both
-sides''; that statement is withdrawn (2026-09-02 certification run).
+\texttt{test\_su2\_constant\_is\_twice\_circle}).
 \textbf{[OBSERVATION]} In the dual-Coxeter normalisation the $\SU(2)$
 constant is twice the circle constant; in the unit-$\sthree$
 normalisation (geodesic distance, the circle's own convention) the two
@@ -1264,34 +1206,26 @@ number, reached with a factor $2$ on the circle side and without it on
 the $\SU(2)$ side, so no common ``$2\Vol(\text{base})/\Vol(\text{group})$''
 form is claimed), the
 ratio of the unit-metric $\SU(2)$ estimator to the circle's being
-$1.004$ at $n = 800$ (2026-09-03 correction:\ the factor $2$ reported
-before is the metric scale, not a group-theoretic signature). No
+$1.004$ at $n = 800$ (the factor $2$ is the metric scale). No
 derivation of the $\SU(2)$ constant from the circle constant is given
 here; the $\sin^2(\chi/2)$ conjugacy-class weight and the
 $\sqrt{2j+1}$ Plancherel weight of Definition~\ref{def:central_fejer}
 together change both the kernel and the constant, while preserving
 the leading $\log n / n$ behaviour that the Fej\'er (on the circle,
 Ces\`aro-1) first moment already has there.  The $\log n$ factor is
-therefore a property of the kernel, not a non-abelian slowdown.  (An
-earlier version compared it with a torus rate $O(1/\nmax)$ attributed
-to Leimbach--van~Suijlekom~\cite{leimbach_vs2024};\ that paper proves
-convergence without an explicit rate, and the comparison is withdrawn,
-2026-09-28.)
+therefore a property of the kernel, not a non-abelian slowdown, and a
+tapered amplitude removes it \textbf{[MEASURED]} (Theorem~\ref{thm:main_unconditional}).
 \end{remark}
 
 \begin{remark}[The volume ratio behind the constant]
-\textbf{[OBSERVATION]} In the dual-Coxeter normalisation the asymptotic
+\textbf{[OBSERVATION]} In the dual-Coxeter normalisation the Fej\'er
 constant coincides numerically with
 \begin{equation*}
    \frac{4}{\pi}
    \;=\; \frac{\Vol(S^2)}{\pi^2}
    \;=\; \frac{4\pi}{\pi^2}.
 \end{equation*}
-\emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- on which an \textbf{[OBSERVATION]}-level reading places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ (the engine's case-exhaustion is \textbf{[CONDITIONAL]}, Paper~32) --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.
-Read as the unit-sphere quotient $\Vol(S^2)/\Vol(\sthree)$ rather than as a
-Hopf base-to-total ratio, the constant still carries pure volume content, and is one of
-the natural transcendentals on $\SU(2)$ that survives at the
-leading order of the central Fej\'er kernel's first moment.
+For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The coincidence is numerical;\ no derivation is given.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -1662,14 +1596,10 @@ metrization of \S~\ref{sec:named_gaps}:
    \quad\text{(dual-Coxeter metric of \S\ref{sec:ch_triple})},
 \end{equation}
 equivalently $(2/\pi)\log\nmax/\nmax + O(1/\nmax)$ on the unit
-$\sthree$;\ the asymptotic constant is \textbf{[INTERNAL THEOREM +
-MEASURED]} (Lemma~\ref{lem:L2}(d.ii)).
-\textbf{[OBSERVATION]} On the unit $\sthree$ the asymptotic constant is
-the sphere-volume quotient $\Vol(S^2)/\Vol(\sthree) = 2/\pi$ of
-unit-radius spheres;\ the dual-Coxeter constant $4/\pi$ is twice that
-quotient (numerically $\Vol(S^2)/\pi^2$).  Neither is the Hopf
-fibration's base-to-total ratio, whose base carries half the radius
-(\S\ref{sec:L2}, volume-ratio note). \textbf{[MEASURED]} A uniform bound
+$\sthree$;\ the asymptotic constant of the Fej\'er moment is
+\textbf{[INTERNAL THEOREM + MEASURED]} (Lemma~\ref{lem:L2}(d.ii)), and
+with a tapered amplitude the distance is \textbf{[MEASURED]}
+$O(1/\nmax)$ (Theorem~\ref{thm:main_unconditional}). \textbf{[MEASURED]} A uniform bound
 $\gamma_{\nmax} \le 6 \log \nmax / \nmax$
 holds on the finite range checked (Lemma~\ref{lem:L2}(d.iii));\ it is not
 proved for all $\nmax \ge 2$.
@@ -1688,10 +1618,7 @@ state-space GH bound.
 
 \emph{Which route establishes this.}  Not the L5 assembly:\ its two height
 constituents are refuted (\eqref{eq:height_identically_one}), so
-\eqref{eq:L5_bound} is \emph{not} established by that route --- as the
-withdrawal in Lemma~\ref{lem:L5} states, and as an earlier version of this
-proof failed to say, hedging instead only that the route ``inherits the
-panel scope of Lemma~\ref{lem:L3}''.  The bound comes from
+\eqref{eq:L5_bound} is \emph{not} established by that route.  The bound comes from
 Theorem~\ref{thm:main_unconditional}, which bounds the same state-space GH
 distance by $\gamma_{\nmax}$ using reach-type estimates alone and no height
 constituent, and which uses neither Lemma~\ref{lem:L3} nor
@@ -1741,15 +1668,15 @@ Fej\'er kernel that is the square of the spherical Dirichlet kernel
 (not a product of circle Fej\'er kernels), and a
 Bo\.zejko--Fendler-type transference, and proves convergence without an
 explicit rate.
-Three substantive complications arise on $\SU(2)$:
+Two substantive complications arise on $\SU(2)$:
 
 \textbf{(i) Non-abelian Peter--Weyl.} On $\SU(2)$ the Plancherel
 decomposition is not over $\Z^d$ but over half-integer weights
 $j \in \tfrac{1}{2}\N_{\ge 0}$ with isotypic blocks of dimension
-$2j+1$. The natural Plancherel weight $\sqrt{2j+1}$ is required to
-match the Fock-shell Peter--Weyl bijection $n = 2j+1$, and this is
-what produces the natural-coefficient kernel of
-Definition~\ref{def:central_fejer}. (For central multipliers the
+$2j+1$. The natural Plancherel weight $\sqrt{2j+1}$ matches the
+Fock-shell Peter--Weyl bijection $n = 2j+1$ and produces the
+natural-coefficient kernel of Definition~\ref{def:central_fejer};\ any
+real central amplitude in the window would serve the proof. (For central multipliers the
 cb-norm computation is elementary — block-scalar action — on any
 compact group;\ the genuine non-abelian difficulty is the
 Clebsch--Gordan structure of the multiplier symbol, not the cb-norm.)
@@ -1766,31 +1693,15 @@ of van~Suijlekom's~\cite{vs2021_jgp} Fej\'er
 reconstruction on $S^1$, lifted to the non-abelian setting via the
 Peter--Weyl decomposition.
 
-\textbf{(iii) The $\SO(4)$ selection rule (reading withdrawn
-2026-09-28).} Earlier versions read the Lipschitz comparison as tight
-``because of'' the multiplier sparsity of the $\SO(4)$ selection rule,
-with per-harmonic ratio $\sqrt{(N-1)/(N+1)}$, and contrasted it with the
-torus.  That per-harmonic inequality is false (Lemma~\ref{lem:L3},
-remark), and the reading and the torus contrast are withdrawn:\ $C_3 = 1$
-follows by compression on any closed spin manifold, with no sparsity
-input.
-
 The $\log n$ factor in $\gamma_n$ is the first-moment logarithm of the
 Fej\'er-type (squared-Dirichlet) kernel, which the circle already carries
 (Remark~\ref{rem:circle_fejer});\ it reflects the kernel choice, not
-non-abelianness.  (Earlier versions called it the standard one-log
-non-abelian slowdown relative to a torus rate $O(1/n)$;\
-Leimbach--van~Suijlekom state no such rate, and the comparison is
-withdrawn, 2026-09-28.) \textbf{[OBSERVATION]} In the dual-Coxeter normalisation the
-asymptotic constant $4/\pi$ is twice the circle Fej\'er first-moment
-constant $2/\pi$; on the unit $\sthree$ the two coincide, the factor
-$2$ being the metric scale (Remark~\ref{rem:circle_fejer},
-2026-09-03); we read the $\SU(2)$ value as the sphere-volume
-quotient $\Vol(S^2)/\Vol(\sthree)$ at unit radius, i.e.\
-$2\Vol(S^2)/\Vol(\sthree)$ in the dual-Coxeter normalisation --- both
-spheres of radius~$1$, so this is not the Hopf base-to-total ratio. (An earlier version of this
-sentence stated the constant as ``identical on both sides''; withdrawn
-2026-09-02.)
+non-abelianness, and a tapered amplitude removes it \textbf{[MEASURED]}
+(Theorem~\ref{thm:main_unconditional}). \textbf{[OBSERVATION]} In the
+dual-Coxeter normalisation the Fej\'er constant $4/\pi$ is twice the
+circle Fej\'er first-moment constant $2/\pi$; on the unit $\sthree$ the
+two coincide, the factor $2$ being the metric scale
+(Remark~\ref{rem:circle_fejer}).
 
 \subsection{Marcolli--van~Suijlekom gauge-network framework}
 \label{sec:marcolli_vs}
@@ -1860,25 +1771,23 @@ present paper.
 
 \subsection{Open questions}\label{sec:open}
 
-\textbf{(i) Quantitative tightness.} Theorem~\ref{thm:main} gives the
-asymptotic constant $4/\pi$ in $\gamma_{\nmax} \sim
-(4/\pi) \log \nmax / \nmax$ but not the next-order constant.
-\textbf{[MEASURED]} Numerical doubling-estimator data suggests
+\textbf{(i) The optimal rate.} \textbf{[OPEN]} A tapered amplitude gives
+$d_{\mathrm{GH}} = O(1/\nmax)$ on the evidence of
+Theorem~\ref{thm:main_unconditional};\ a proof, and the optimal constant
+over real central amplitudes in the window, are open.  For the Fej\'er
+kernel itself, $\gamma_{\nmax} \sim (4/\pi) \log \nmax / \nmax$, and
+\textbf{[MEASURED]} numerical doubling-estimator data suggests
 $\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(\log\nmax/\nmax)$
 (a fit gives the next coefficient $\approx -0.64$, consistent with the
 ${\sim}1.85\times$ rather than $2\times$ residual shrink per doubling) with
 $b \approx 4.10$, whose closed form is undetermined at the level of
 the present analysis.
 
-\emph{Update (2026-05-16):} \textbf{[MEASURED]} the value $b$ (rotation-angle
-normalisation) has been refined to $22$ decimal digits (no frozen test
+\textbf{[MEASURED]} The value $b$ (rotation-angle
+normalisation) is known to $22$ decimal digits (no frozen test
 in this repository computes $b$ beyond six digits; the figure is a
-Paper~40 cross-reference) as
-$b = 4.1093214674898756204229\ldots$
-(the original $80$-digit string circulated in working memos prior to
-this paper was contaminated from digit $12$ onward by float-precision
-panel points; corrected via re-extraction at $\ge 400$~dps in a
-follow-on sprint, see~\cite{paper40_unified} for details). PSLQ
+Paper~40 cross-reference~\cite{paper40_unified}),
+$b = 4.1093214674898756204229\ldots$. PSLQ
 identification has been attempted at coefficient ceiling $10^8$
 against an extended L-derivative basis ($\zeta'(s), \beta'(s),
 \eta'(s), L'(2, \chi_q)$, Stieltjes constants, Glaisher--Kinkelin
@@ -1921,12 +1830,10 @@ thought to require a higher-rank version of the
 Avery 3-Y integral and the corresponding selection rule (the
 compression proof of Lemma~\ref{lem:L3}, 2026-09-28, needs neither).
 
-\emph{Update (2026-05-16):} this open question is addressed by
-Paper~40~\cite{paper40_unified}, which generalises
+Paper~40~\cite{paper40_unified} generalises
 Theorem~\ref{thm:main} (unconditionally at rank~$1$;\ for general $G$
 conditionally on the per-group spin-window decomposition) to all compact connected semisimple Lie groups
-with bi-invariant metric (a circle factor carries the constant $2/\pi$
-of Remark~\ref{rem:circle_fejer}, so tori are excluded). The higher-rank analog of the Avery 3-Y selection
+with bi-invariant metric (tori excluded). The higher-rank analog of the Avery 3-Y selection
 rule is the \emph{Dirac-triangle inequality}
 $|D(\pi) - D(\pi')| \le \sqrt{C(\sigma)}$ for every
 $\sigma \subset \pi \otimes \pi'^*$, which generalises Paper~38's
@@ -1934,15 +1841,15 @@ $|n - n'| \le N - 1$ shell-difference rule (the literal "Casimir
 triangle inequality" $|C(\pi) - C(\pi')| \le C(\sigma)$ is false in
 general; the Dirac eigenvalue, not the Casimir, is the right
 ingredient;\ a representation-theoretic inequality, not a check of the
-Lipschitz constant $C_3$). \textbf{[PANEL-VERIFIED]} The rate is \emph{not}
-rank-dependent as anticipated
-above:\ the rate constant $4/\pi$ (dual-Coxeter normalisation) is reported \emph{universal} across
-the
-class, by a Plancherel-weight $\times$ Vandermonde-Jacobian
-cancellation argument (Paper~40~\cite{paper40_unified} \S 3.2) --- derived at rank~$1$
-($\SU(2)$, the present paper), with the rank-$\ge 2$ leg corroborated
-on reduced panels and a fully rank-uniform analytical proof recorded
-as a named gap in Paper~40. \textbf{[INTERNAL THEOREM]}
+Lipschitz constant $C_3$). \textbf{[PANEL-VERIFIED]} The Fej\'er-moment
+constant $4/\pi$ (dual-Coxeter normalisation) is reported universal
+across the \emph{simple} groups of the class, by a Plancherel-weight
+$\times$ Vandermonde-Jacobian cancellation argument
+(Paper~40~\cite{paper40_unified} \S 3.2) --- derived at rank~$1$
+($\SU(2)$, the present paper), corroborated on reduced panels at rank
+$\ge 2$, with a rank-uniform proof a named gap in Paper~40;\ for several
+simple factors it is open, and as here it is a kernel constant, not a
+convergence rate. \textbf{[INTERNAL THEOREM]}
 $C_3(G) = 1$ at every rank, sharp in the limit, follows by the same
 compression argument as Lemma~\ref{lem:L3} here (Paper~40 Lemma~L3,
 2026-10-02);\ Paper~40 \S 3.3 studies representation-theoretic
@@ -1950,8 +1857,7 @@ inequalities on tensor-product summands (existence of the PRV summands is
 Kumar's theorem, Invent.\ Math.\ \textbf{93}, 1988;\ the intermediate
 inequality is proved on special summands and verified on panels for the
 rest), whose bridge to the commutator norm is the per-harmonic step refuted here
-(Lemma~L3 there; the attribution to a 1990 Vinberg paper carried no
-locator and is withdrawn, 2026-09-03).
+(Lemma~L3 there).
 
 \textbf{(iv) Beyond the commutative factor, and beyond the translation
 seminorm.} \textbf{[OPEN]} Theorem~\ref{thm:main_unconditional} proves
@@ -2290,10 +2196,10 @@ truncations of compact semisimple Lie groups with bi-invariant metric},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 \newblock Generalizes the present paper from $\SU(2)$ to compact
 connected \emph{semisimple} Lie groups (for general $G$ conditionally on
-the per-group spin-window decomposition) (a circle factor carries the circle
-constant); rate constant $4/\pi$ reported universal across the simple
-groups of that class (for semisimple groups with several simple factors the constant is open;\ Paper~40 withdrew its semisimple corollary, 2026-10-02) (dual-Coxeter normalisation; derived at rank~1, rank-uniform proof a
-named gap) via a Plancherel-weight $\times$ Vandermonde-Jacobian
+the per-group spin-window decomposition); Fej\'er-moment constant
+$4/\pi$ reported universal across the simple groups of that class (open
+for several simple factors; dual-Coxeter normalisation; derived at
+rank~1, rank-uniform proof a named gap) via a Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation; Lipschitz comparison constant $C_3 = 1$ at every rank, by
 compression.
 

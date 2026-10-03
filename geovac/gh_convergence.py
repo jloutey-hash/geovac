@@ -65,10 +65,9 @@ The tunneling pair is
 
 with B_{n_max} the L4 Berezin reconstruction (positive contractive
 Lipschitz, approximate identity at rate gamma_{n_max}), and P_{n_max}
-the standard truncation projection.  The pair satisfies all four
-properties of a Latremoliere tunneling pair (UCP, Lipschitz-contractive
-on each direction, approximate identity in both round-trips), and the
-propinquity bound was claimed to follow [withdrawn: the height legs are refuted].
+the standard truncation projection.  The pair is NOT a Latremoliere
+tunneling pair: its dual-reach step is a named gap and both height
+constituents are refuted, so no propinquity bound follows.
 
 Mathematical structure
 ======================
@@ -103,8 +102,8 @@ metric structure").  The propinquity bound then reads
 
     WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: the two
     height constituents are refuted (height_B == 1, height_P != 0; see
-    height_B_witness).  The state-space GH bound below is assembled from
-    the reach constituents alone, and its VALUE is unchanged.
+    height_B_witness).  The state-space GH bound is Paper 38's lifted-state
+    theorem, which does not use this pair.
 
 L1'--L4 supply each piece:
 
@@ -115,9 +114,9 @@ L1'--L4 supply each piece:
   - reach_P  (the dual: the truncation forgets high-frequency content
       faster than gamma_{n_max} on Lipschitz f):
       || M_f - sigma B(f) ||_op <= gamma_{n_max} * ||f||_Lip
-      where sigma is the natural inclusion (B's left-inverse on
-      the central subalgebra, via invertibility of the kernel's
-      Fourier coefficients, L2(g)).
+      where sigma is the natural inclusion.  This partial-inverse step is
+      the named gap: a forward estimate controls no partial inverse
+      (Paper 38, rem:no_inverse).
 
   - height_B  (Lipschitz-distortion of the tunnel map; SEE ERRATUM BELOW):
       Per Paper 38 (papers/standalone/paper_38_su2_propinquity_convergence.tex
@@ -178,14 +177,14 @@ Honest scope of the bound
     form of B (which absorbs them; see L4 memo Section 2.3 for the
     centrality discussion).
 
-(ii) The QUALITATIVE rate gamma_{n_max} -> 0 is rigorous (L2 closed-form
-     gamma_2, gamma_3, gamma_4 are explicit algebraic numbers, monotone
-     decreasing).  The QUANTITATIVE rate O(log n / n) is consistent with
+(ii) gamma_{n_max} -> 0 is proved (Paper 38, Lemma L2(d)); gamma_2, gamma_3,
+     gamma_4 have explicit closed forms pi - (algebraic)/pi, e.g. gamma_2 =
+     pi - 64 sqrt(2)/(27 pi); monotone decrease is MEASURED on a finite sample.  The QUANTITATIVE rate O(log n / n) is consistent with
      but not rigorously proved by the small-n closed forms; L2's
      quantitative item was later CLOSED by Paper 38 (displayed rate
-     [INTERNAL THEOREM + MEASURED], 2026-06-10).  The lifted-state bound carries that rate (the L5
-     approximation-pair route is withdrawn); the constant depends on the
-     metric normalisation (see the module docstring).
+     [INTERNAL THEOREM + MEASURED]).  The lifted-state bound carries the
+     Fejer moment; 4/pi is that kernel's constant, not the convergence rate
+     (a tapered amplitude gives O(1/n), Paper 38).
 
 (iii) The distance actually established is van Suijlekom's state-space
       GH distance; Latremoliere's propinquity is a strictly stronger
@@ -225,15 +224,14 @@ API
 Verification protocol
 =====================
 
-Per CLAUDE.md Section 13.4a, every equation in the L5 proof memo has
-a corresponding unit test in ``tests/test_gh_convergence.py``.  The
-five-lemma chain is:
+``tests/test_gh_convergence.py`` checks the quantities computed here.
+The lemma chain (L5 withdrawn; Paper 38 does not use it) is:
 
   L1'  -> verified at n_max in {2, 3} via R3.5 (full_dirac_operator_system)
   L2   -> verified at n_max in {2, 3, 4, 5, 6, 7, 8} via central_fejer_su2
   L3   -> verified at n_max in {2, 3, 4} via r25_l3_lipschitz_bound
   L4   -> verified at n_max in {2, 3} via berezin_reconstruction
-  L5   -> verified at n_max in {2, 3, 4} via this module
+  L5   -> withdrawn; its computed quantities are checked at n_max in {2, 3, 4}
 
 References
 ==========
@@ -690,9 +688,10 @@ def compute_propinquity_bound(
         PropinquityBound object.
 
     Notes:
-        The rate is Paper 38's unconditional (c + o(1)) log n / n with the
-        convention-dependent constant c (4/pi rotation-angle, 2/pi unit
-        S^3); `track_c_constant` is retained for callers that pass a
+        The bound's Fejer moment is (c + o(1)) log n / n [INTERNAL THEOREM +
+        MEASURED], with the convention-dependent kernel constant c (4/pi
+        rotation-angle, 2/pi unit S^3); c is not the convergence rate (a
+        tapered amplitude gives O(1/n), Paper 38); `track_c_constant` is retained for callers that pass a
         constant explicitly.
     """
     pair = TunnelingPair.build(n_max, gamma_prec=gamma_prec)

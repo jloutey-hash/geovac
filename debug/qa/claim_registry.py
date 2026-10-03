@@ -96,14 +96,21 @@ CLAIMS = {
                   r"graph.{0,30}converges? to|\\le\s*C_\{?3\}?\s*(\\cdot\s*)?\\gamma",
         changed="2026-09-29"),
     "p38-rate-constant": dict(
-        statement="The displayed rate (4/pi) log n/n is [INTERNAL THEOREM + MEASURED] in the dual-"
-                  "Coxeter normalisation (2/pi unit S^3; 2 sqrt2/pi Kac).",
+        statement="4/pi is the asymptotic constant of the FEJER amplitude's moment, gamma_n = (4/pi) "
+                  "log n/n [INTERNAL THEOREM + MEASURED] (dual-Coxeter; 2/pi unit S^3; 2 sqrt2/pi Kac). It is "
+                  "NOT the convergence rate: the lifted-state bound holds for any real central amplitude, "
+                  "a Cesaro taper gives d_GH = O(1/n) [MEASURED], proof and optimal constant OPEN "
+                  "(re-priced 2026-10-03, FULL #12).",
         owner=P38, owner_anchor=r"4/\\pi",
         owner_tier=r"INTERNAL THEOREM \+ MEASURED", tier="INTERNAL THEOREM + MEASURED",
-        mention=r"4/π.{0,40}log|\(4/\\pi\)|4/π\)·log|rate .{0,15}4/π|c = 4/π",
-        qualifier=r"MEASURED",
-        overclaim=r"4/π (is )?canonical|rigorous\s+(?:at\s+)?rank|rigorous\s+rank-1|rigorous\s+\$?4/",
-        changed="2026-10-02"),
+        mention=r"4/π.{0,40}log|\(4/\\pi\)|4/π\)·log|rate .{0,15}4/π|c = 4/π|4/\\pi\$?\s*(rate|asymptotic constant)",
+        qualifier=r"Fej",
+        overclaim=r"4/(π|\\pi)\$? (is )?canonical|rigorous\s+(?:at\s+)?rank|rigorous\s+rank-1|rigorous\s+\$?4/|"
+                  r"(convergence|GH) rate\s+(is|of|=|reads)\s+[^.;]{0,15}4/(π|\\pi)|"
+                  r"converges? at (the )?rate[^.;]{0,10}4/(π|\\pi)|"
+                  r"rate at which[^.;]{0,60}converge[^.;]{0,40}carries|"
+                  r"4/(π|\\pi)\$?[^.;]{0,25}\b(sharp|optimal|forced)\b",
+        changed="2026-10-03"),
     "graph-s3-wall": dict(
         statement="The lattice edge Laplacian D-A does NOT converge to Delta_{S^3} (n_max disconnected "
                   "l-blocks; WALL); what is exact is the (n,l,m) label set + diagonal SO(4) Casimir.",
@@ -245,18 +252,21 @@ CLAIMS = {
                   r"three-homes'?\s+theorem\s+(establishes|proves)[^.;]{0,80}no\s+(single|spectral)",
         changed="2026-10-02"),
     "m1-gh-rate-reading": dict(
-        statement="The GH-rate constant 4/pi shares its value with the M1 (k = 0) volume slot of the master "
-                  "Mellin engine -- a READING, not a derivation (Paper 38); M1 does not produce, govern or "
-                  "own the GH rate, and the case-exhaustion does not cover GH rates.",
-        owner=P38, owner_anchor=r"appearance of this constant in", owner_tier=r"\[OBSERVATION\]",
-        tier="OBSERVATION", owner_window=2,
+        statement="The Fejer-moment constant (2/pi unit S^3; 4/pi dual-Coxeter) shares its value with the M1 "
+                  "(k = 0) volume slot of the master Mellin engine -- a READING, not a derivation (Paper 38). "
+                  "It is a kernel constant, not the GH convergence rate (a tapered amplitude gives O(1/n), "
+                  "2026-10-03); M1 does not produce, govern or own the GH rate.",
+        owner=P38, owner_anchor=r"volume slot of the master Mellin engine", owner_tier=r"\[OBSERVATION\]",
+        tier="OBSERVATION", owner_window=5,
         mention=r"(M_?1|M\$_\{1\}\$|k\s*=\s*0)[^.;]{0,80}(\bGH\b|Gromov|rate constant|propinquity rate)|"
                 r"(\bGH\b|Gromov|rate constant)[^.;]{0,80}(\bM_?1\b|M\$_\{1\}|k\s*=\s*0\s*(volume|sub))",
         qualifier=r"reading|OBSERVATION|shares (its|the) value|membership|not a derivation",
         overclaim=r"mechanism produces the|natural domain of (state-space )?G|M1 owns|pure M1 expression|"
                   r"in \$?M_?1\$? alone|identifies (the state-space GH rate )?with the|"
-                  r"exactly what the M1 mechanism predicts|closes it positively",
-        changed="2026-10-02"),
+                  r"exactly what the M1 mechanism predicts|closes it positively|"
+                  r"rate at which[^.;]{0,60}converge[^.;]{0,40}carries|"
+                  r"(GH|convergence) rate[^.;]{0,30}(sits|lies|is read) in",
+        changed="2026-10-03"),
     "p55-census-scope": dict(
         statement="Paper 55 is a CENSUS of S^3 spectral-zeta and heat-trace data: its ring memberships are "
                   "theorems, its slot indexing a reading; chemistry seeds, spectral determinants and Paper 61's "
