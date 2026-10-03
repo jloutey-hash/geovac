@@ -82,7 +82,7 @@ Trenev~\textit{et al.}~\cite{trenev2025}, span fitted by us); at equal
 qubit counts this yields $51\times$--$317\times$ fewer Pauli terms for
 H$_2$O across $n_{\max} = 1$--$3$.  These comparisons are at matched
 qubit counts, not matched accuracy; the composed basis carries
-classical equilibrium-geometry errors of 5--26\% (LiH/BeH$_2$/H$_2$O;
+classical equilibrium-geometry errors of 5.3--19.4\% (LiH/BeH$_2$/H$_2$O;
 Sec.~\ref{sec:accuracy}), making the framework optimal for fixed-geometry
 quantum simulation rather than geometry optimisation.
 Across the composed molecular library (35 molecules spanning
@@ -1427,7 +1427,7 @@ simulation cost from those that affect only energy accuracy:
   makes the comparison conservative for GeoVac.
 \item \textbf{$R_{\mathrm{eq}}$ error measures PES shape, not
   single-point quality:} The reported $R_{\mathrm{eq}}$ errors
-  (5.3\% for LiH, 11.7\% for BeH$_2$, 26\% for H$_2$O) reflect
+  (5.3\% for LiH, 11.7\% for BeH$_2$, 19.4\% for H$_2$O;\ Paper~17) reflect
   the equilibrium distance of the composed PES, not the energy
   accuracy at any particular geometry.  For quantum simulation at
   a fixed nuclear configuration---the standard use case in
@@ -2348,11 +2348,12 @@ primitive basis that dominates Chawla et al.'s 18q Pauli tensor.
 \textbf{Honest caveats on the Chawla et al.\ comparison.}
 \begin{enumerate}
   \item The RaH-vs-LiH / BeH / CaH comparison is not species-matched.
-    The four cells missing from Chawla et al.'s main paper (BeH-18q,
+    The five cells missing from Chawla et al.'s main paper (BeH-18q,
     MgH-18q, CaH-18q, SrH-18q, BaH-18q) would make this a genuine
     head-to-head.
-  \item GeoVac composed accuracy is 5--26 \% $R_{\mathrm{eq}}$ error
-    at the matched molecules (Paper 17); Chawla et al.'s DC-UCCSD is
+  \item GeoVac composed accuracy is 5.3--19.4 \% $R_{\mathrm{eq}}$ error
+    for LiH/BeH$_2$/H$_2$O (Paper 17;\ not measured for the Chawla
+    molecules); Chawla et al.'s DC-UCCSD is
     accuracy-targeted ($0.47\%$ vs CASCI for CaH). The comparison
     is \emph{resource estimation at fixed single-point geometry},
     not a spectroscopic benchmark.

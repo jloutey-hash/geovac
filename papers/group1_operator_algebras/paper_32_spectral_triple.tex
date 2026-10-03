@@ -1805,12 +1805,15 @@ The W2b cross-manifold structural blocker of
 Sec.~\ref{sec:frontier_framing} is exactly the convergence-theorem
 gap that surrounds this construction.
 
-\paragraph{Paper 39 closes the same-manifold tensor-product case.}
+\paragraph{Paper 39 treats the same-manifold tensor-product case at the
+state-space GH level.}
 The same-manifold sub-case of W2b --- the tensor product
 $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ of
 two truncated Camporesi--Higuchi spectral triples on $\sthree$ at
-distinct focal lengths $\lambda_a \neq \lambda_b$ --- is closed in a
-companion standalone paper (Paper~39~\cite{paper39}). The result
+distinct focal lengths $\lambda_a \neq \lambda_b$ --- is treated in a
+companion standalone paper (Paper~39~\cite{paper39}) at the level of
+van~Suijlekom's state-space Gromov--Hausdorff convergence;\ the
+Latr\'emoli\`ere-propinquity question that defines W2b stays open. The result
 extends Paper~38's convergence to the KO-dim-$6$ graded tensor product
 via the \emph{lifted-state} construction (leading constant $1$):\ Paper~38's
 unconditional-theorem facts, lifted factor-wise and metrized by the
@@ -1819,7 +1822,7 @@ product of the two odd Camporesi--Higuchi real spectral triples --- the
 naive $\gamma_a \otimes D_b$ being unrealisable ($\gamma_a = 0$ on
 $\sthree$).  (An earlier $(B,P)$-pair route via a Pythagorean refinement of
 the triangle inequality gave only a weaker conditional bound with constant
-$2$ (its internal Lipschitz comparison constant being $C_3^{(2)} \le \sqrt2$);\ its height leg was refuted and it is superseded by the
+$2$ (its internal Lipschitz comparison constant is $C_3^{(2)} = 1$, by compression);\ its height leg was refuted and it is superseded by the
 lifted-state route [retracted 2026-09-05: p39-pythagorean-height-route].) This is
 the mathematical foundation for the GeoVac multi-focal-composition
 program, where two electrons in distinct hydrogenic shells live on
@@ -2143,7 +2146,7 @@ These three are categorically different objects: a finite
 combinatorial trace, an infinite analytic Dirichlet series, and a
 single-level multiplicity.  They sit in different sectors of the
 spectral triple (scalar/spinor; finite/infinite; trace/zeta/dimension)
-and \textbf{[PANEL-VERIFIED]} Phases 4B--4I exhausted nine attempts to find a common spectral
+and \textbf{[PANEL-VERIFIED]} Phases 4B--4I made nine unsuccessful attempts to find a common spectral
 generator that produces all three simultaneously, without success
 (twelve counting Sprint~A and Sprint~K-CC; see the E6
 no-single-mechanism observation, Observation~\ref{obs:no_single_mechanism_K}).
@@ -2471,7 +2474,7 @@ Paper~38))
 produces period values in the localised pure-Tate sub-ring
 $\mathbb{Q}[\pi, \pi^{-1}]$ of mixed Tate periods over $\mathbb{Q}$,
 at depth $0$ and Tate weight $\in \mathbb{Z}$.  \textbf{[PANEL-VERIFIED]} Every M1 closed form
-witnessed across the corpus (Paper 25 Hopf base
+witnessed across the corpus (Paper 25 unit-sphere volume slot
 $\mathrm{Vol}(S^2)/4 = \pi$; Paper 38 §L2 asymptotic state-space GH
 rate $4/\pi = \mathrm{Vol}(S^2)/\pi^2$; Paper 40~\cite{loutey_paper40} Thm 1 universal
 $4/\pi$ across compact connected semisimple Lie groups (rigorous at
@@ -2531,7 +2534,7 @@ The M3 sub-mechanism (vertex-parity Hurwitz / Dirichlet $L$ /
 depth-$k$ loop tower) on the discrete Camporesi--Higuchi $\sthree$
 spectral triple lies in the cyclotomic mixed-Tate period ring at
 level $\le 4$ over $\mathcal{O}_4[1/4] = \mathbb{Z}[i, 1/2]$ at depth
-equal to the loop order, by direct application of
+at most the loop order, by direct application of
 Deligne~\cite{deligne2010} (proven for $N \in \{2,3,4,6,8\}$) and the
 explicit basis of Glanois~\cite{glanois2015}.  Three sub-rings are
 realised:
@@ -2541,7 +2544,7 @@ realised:
 \;\subset\;\mathcal{MT}(\mathbb{Z}[i, 1/2]),
 \end{equation*}
 selected by (i) un-restricted vs vertex-restricted summation, and
-(ii) loop order $=$ motivic depth.  Specifically:
+(ii) loop order bounding the motivic depth.  Specifically:
 \begin{itemize}
 \item Un-restricted Dirac Dirichlet $D(s)$ at integer $s \ge 2$
       (Paper~28~\cite{paper28} Thm~2) lies in
@@ -2553,11 +2556,12 @@ selected by (i) un-restricted vs vertex-restricted summation, and
       Hurwitz at quarter-integer shifts;\ Catalan $G = \beta(2)$ and
       $\beta(4)$ are level-$4$ Dirichlet $L$-value periods in this
       ring;
-\item Two-loop irreducible $S_{\min}$ (Paper~28 §$S_{\min}$) lies in
-      $\mathcal{MT}(\mathbb{Z}[1/2])$ at depth $2$; the depth-$k$
-      tower (Paper~28 Prop.~depth\_k) generates new irreducible
-      periods at depth $k = $ loop order in $\mathcal{MT}$ at level
-      $\le 4$.
+\item The two-loop $S_{\min}$ (Paper~28 §$S_{\min}$;\ resolved in
+      closed form in $\mathbb{Q}[\pi^2, \ln 2, \zeta(3), \zeta(5)]$, the
+      earlier ``irreducible'' label a basis-coverage artifact) lies in
+      $\mathcal{MT}(\mathbb{Z}[1/2])$;\ the depth-$k$ tower (Paper~28
+      Prop.~depth\_k) lies in $\mathcal{MT}$ at level $\le 4$ at depth at
+      most the loop order (realized depths can drop, Paper~55).
 \end{itemize}
 The vertex-parity-as-$\chi_{-4}$ Dirichlet character mechanism is read as
 an instance of the Deligne--Glanois Galois descent from level $4$ to level $2$
@@ -2570,9 +2574,9 @@ period-theoretic stratification over the cases it treats (the theorem is
 (Seeley--DeWitt coefficients and integer-$s$ values) in the pure-Tate
 sub-ring $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, and
 M3 in $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.  Specific
-motivic identification of irreducible constants at depth $\ge 2$
-($S_{\min}$, $S^{(3)}$, $\ldots$) within the Deligne--Glanois basis
-is an open question at each depth.  Sprint M3 Cyclotomic Mixed-Tate
+motivic identification of constants at depth $\ge 3$ within the
+Deligne--Glanois basis is an open question at each depth ($S_{\min}$ is
+resolved in closed form, above).  Sprint M3 Cyclotomic Mixed-Tate
 (June~2026, memo
 \texttt{debug/sprint\_m3\_cyclotomic\_mixed\_tate\_memo.md}).
 \end{corollary}
@@ -2606,7 +2610,7 @@ the scalar Fock-degeneracy).  The $\pi$-content is therefore consistent
 with case-exhaustion.  The remaining anomaly is at the
 \emph{depth-prediction} layer of Paper~34~\S\,VIII.3 (depth predicts
 $\sim 3\%$ residual at three projections; $K$ matches at
-$5\times10^{-7}$, the cubic's root at $10^{-7}$): a quantitative-error puzzle, distinct from the
+$4.8\times10^{-7}$, the cubic's root at $8.8\times10^{-8}$): a quantitative-error puzzle, distinct from the
 qualitative case-exhaustion of the present theorem, and
 unaffected by it.
 \end{remark}
@@ -2628,18 +2632,19 @@ expected $\pi$-free by the case-exhaustion reading; if a $\pi$ appears
 unexpectedly, a fourth mechanism M4 would need to be named.
 \end{remark}
 
-\begin{remark}[Mechanism-as-domain sharpening (Sprint MR-A/B/C, May~2026)]
+\begin{remark}[Mechanism-as-domain reading (Sprint MR-A/B/C, May~2026)]
 \label{rem:master_mellin_domain}
 A three-track follow-up sprint (MR-A: Dirac state-space GH rate;
 MR-B: spectral-action modular residual; MR-C: L2 next-order
 constant) tested whether the master Mellin engine of
-Paper~18~\S~III.7 is also \emph{predictive} for convergence rates,
-not only classifying for $\pi$-sources. The combined verdict
-sharpens the case-exhaustion theorem into a mechanism-as-domain
-partition.
+Paper~18~\S~III.7 is also read (a reading, not a derivation) as
+organizing convergence rates, not only tagging $\pi$-sources. The
+combined verdict is a mechanism-as-domain \emph{reading} alongside the
+case-exhaustion theorem.
 \begin{itemize}
-\item M1 ($k = 0$) is the natural domain of state-space
-GH rates. The L2 sprint (2026-05-06) measured the
+\item M1 ($k = 0$) is the slot of volume-slot normalizations;\ the
+state-space GH-rate constant shares its value (a reading, not a
+derivation, Paper~38). The L2 sprint (2026-05-06) measured the
 asymptotic constant of the SU(2) scalar central Fej{\'e}r kernel as
 $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$,
 Paper~38, 2026-09-03).  The constant is the sphere-volume
@@ -2669,11 +2674,11 @@ does not localize and the moment is identically $\gamma_n^{\rm Dirac}
 = \pi$ for every $n_{\max} \ge 1$. The L2 scalar rate's
 $(4/\pi)\log(n)/n$ decay (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$) is an integer$\times$half-integer
 interference effect; removing the integer sector kills it. This is
-exactly what the M1 mechanism predicts when the sub-bundle lacks
-the constant function.
+consistent with the M1 reading when the sub-bundle lacks the constant
+function.
 \end{itemize}
-The reading is therefore: the index $k \in \{0, 1, 2\}$ classifies
-\emph{both} the sub-mechanism and the natural domain of observable
+The reading is therefore: the index $k \in \{0, 1, 2\}$ is read as
+indexing \emph{both} the sub-mechanism and the natural domain of observable
 from which its transcendental signature can be extracted. The
 case-exhaustion theorem~\ref{thm:pi_source_case_exhaustion}
 (\textbf{[CONDITIONAL]}, first fifteen projections) tags \emph{which}
@@ -2685,11 +2690,12 @@ $\geq 80$-digit string was contaminated from digit~$12$ by
 float-precision panel points; see Paper~38~\S\,Open questions) but
 found no PSLQ identification in $M_1 \cup M_2 \cup M_3 \cup \{\gamma_E, \log 2,
 G, \zeta(3)\}$ at coefficient ceiling $10^4$. This is consistent
-with $c$ being a downstream Stein--Weiss IBP derivative of the M1
-mechanism rather than a direct Mellin output, and is a partial
+with $c$ being a downstream Stein--Weiss IBP derivative of the
+M1-read rate constant rather than a direct Mellin output, and is a partial
 negative against extending the predictive engine to all
 asymptotic-expansion coefficients along subsequent analytical
-pipelines. The engine is predictive \emph{within} each domain.
+pipelines. Within each domain the engine organizes the observed
+values (for $k = 0$ the GH-rate domain is itself a reading, Paper~38).
 Source: \texttt{debug/mr\_a\_dirac\_propinquity\_*},
 \texttt{debug/mr\_b\_spectral\_action\_rate\_*},
 \texttt{debug/mr\_c\_l2\_subleading\_*}.
@@ -2784,9 +2790,11 @@ action acts at continuum, not at finite cutoff.  Source:
 $M_1$ volume-slot coefficient (Sprint Q5'-Stage1-2b-continuum, 2026-06-05)]
 \label{rem:q5p_continuum_residue}
 The Mellin extraction-points reading of
-Remark~\ref{rem:q5p_mellin_extraction_points} is closed at theorem
-grade for the $M_1$ component on the truncated Camporesi--Higuchi
-spectral triple of dimension $d = 3$.  The continuum spectral zeta
+Remark~\ref{rem:q5p_mellin_extraction_points} is supported, for the
+$M_1$ component on the truncated Camporesi--Higuchi spectral triple of
+dimension $d = 3$, by the theorem-grade residue computation below;\ the
+identification of the extraction points with the M1 slot remains a
+reading.  The continuum spectral zeta
 $\zeta_{D^2}^{\mathrm{cont}}(s)
    = 2\,\zeta(2s - 2, 3/2) - \tfrac{1}{2}\,\zeta(2s, 3/2)$
 has a simple pole at the spectral-dimension value $s = d/2 = 3/2$
@@ -3510,11 +3518,15 @@ $F(s)$ admits the bit-exact decomposition by shift parity
 F(s) \;=\; F_{\mathrm{M2}}(s) + F_{\mathrm{M3}}(s),
 \]
 \[
-F_{\mathrm{M2}}(s) = \tfrac{1}{6}\zeta(s-4) + \tfrac{107}{6}\zeta(s-2) + 4\,\zeta(s) \quad (\text{even shifts},\ \text{M2 Seeley--DeWitt}),
+F_{\mathrm{M2}}(s) = \tfrac{1}{6}\zeta(s-4) + \tfrac{107}{6}\zeta(s-2) + 4\,\zeta(s) \quad (\text{even shifts}),
 \]
 \[
-F_{\mathrm{M3}}(s) = \tfrac{11}{3}\zeta(s-3) - \tfrac{53}{3}\zeta(s-1) \quad (\text{odd shifts},\ \text{M3 vertex-parity-Hurwitz}).
+F_{\mathrm{M3}}(s) = \tfrac{11}{3}\zeta(s-3) - \tfrac{53}{3}\zeta(s-1) \quad (\text{odd shifts}).
 \]
+(The subscripts are historical names for the even- and odd-shift
+parts, not value rings:\ at even $s$ the even-shift terms are pure-Tate
+and the odd-shift terms odd-$\zeta$, and at odd $s$ the assignment swaps,
+e.g.\ $F_{\mathrm{M2}}(7)$ carries $\zeta(3), \zeta(5), \zeta(7)$.)
 Bit-exact verification:\ $F - F_{M2} - F_{M3} = 0$ symbolically;\ 5
 simple poles at $s \in \{1, 2, 3, 4, 5\}$ with residues
 $\{4, -53/3, 107/6, 11/3, 1/6\}$;\ integer-$s$ panel exhibits \emph{mixed
@@ -3522,10 +3534,10 @@ M2 ($\pi^{2k}$) + M3 ($\zeta(\text{odd})$) content} at every test point
 (e.g.\ $F(6) = -53\zeta(5)/3 + \pi^2/36 + 4\pi^6/945 + 11\zeta(3)/3 + 107\pi^4/540$).
 $F$ is structurally distinct from the v3.62.0 M3 $\eta_D(s)$ Hurwitz
 Mellin (shares only the odd-shift structure with $\mathbb{Q}$
-vs $2^s\,\mathbb{Q}$ coefficients). This is an \emph{algebraic-side
-realisation of the M2/M3 part of the master Mellin engine partition
-on a single Hopf-algebra-level invariant} ($F$ has no M1 part;\ its
-M3 content is the odd-$\zeta$ sub-sector,
+vs $2^s\,\mathbb{Q}$ coefficients). This is a shift-parity
+decomposition of a single Hopf-algebra-level invariant that tracks the
+M2/M3 value split at even $s$ only ($F$ has no M1 part;\ at even
+$s$ its odd-shift content is the odd-$\zeta$ sub-sector,
 $\zeta(\text{odd}) \in M_3 \cap \mathrm{MT}(\mathbb{Z})$, Paper~55) — the Mellin engine extends
 from the trace-evaluation level (case-exhaustion theorem
 \ref{thm:pi_source_case_exhaustion}) to the substrate-side Mellin
@@ -3605,8 +3617,9 @@ and every $\eta_{(n, l)}$ value (60 + 60 entries up to $n_{\max} = 4$)
 is an integer in $\mathbb{Z}$ at depth 0 in the MT period ring;\
 (ii) every term of $F(s)$ (Remark~\ref{rem:q5p_mellin_lift_bridge}) at
 integer $s \in \{6, 7, 8, 9, 10\}$ (5 cells $\times$ 5 terms = 25 term
-classifications) is either pure-Tate $\pi^{2k}\,\mathbb{Q}$ (M2 component
-of v3.65.0 T1) or odd-Riemann $\zeta(\mathrm{odd})\,\mathbb{Q}$ (M3 component);
+classifications) is either pure-Tate $\pi^{2k}\,\mathbb{Q}$ or
+odd-Riemann $\zeta(\mathrm{odd})\,\mathbb{Q}$ (which shift parity carries
+which depends on the parity of $s$);
 both sit in $\mathrm{MT}(\mathbb{Q}, 1)$, which embeds in
 $\mathrm{MT}(\mathbb{Z}[i, 1/2], 4)$ trivially. The Paper 18 \S III.7
 M1/M2/M3 master Mellin engine partition aligns bit-exactly with the
@@ -4192,7 +4205,8 @@ The residual's ring $\mathbb{Q}[n_{\max}] \oplus
 \pi^{-2}\,\mathbb{Q}[n_{\max}]$ is therefore a statement about the
 chosen normalisation, and it does not add an instantiation of the
 mechanism-as-domain partition of Remark~\ref{rem:master_mellin_domain}
-(M1 owns state-space GH-rate observables, M2 heat-kernel residuals,
+(M1 volume-slot normalizations, the GH-rate constant sharing the value
+as a reading;\ M2 heat-kernel residuals,
 M3 vertex-restricted parity observables); an earlier version counted
 it as a fourth M1 instantiation and as a prediction of the engine
 (withdrawn 2026-09-28).
@@ -4330,11 +4344,11 @@ Marcolli--van~Suijlekom gauge-network framework, not a unified
 spectral triple in the Connes--Chamseddine
 sense~\cite{chamseddine_connes1997_2008}.
 
-\subsubsection*{Three Wilson constructions, one kinetic coefficient}
+\subsubsection*{Three Wilson constructions, a shared non-abelian kinetic coefficient}
 
 \textbf{[PANEL-VERIFIED]} Three independent sprints have produced gauge-invariant, finite,
-Haar-normalisable non-abelian Wilson lattice gauge theories on
-GeoVac sub-graphs:
+Haar-normalisable Wilson lattice gauge theories on GeoVac sub-graphs
+(one abelian, two non-abelian):
 
 \begin{itemize}\setlength{\itemsep}{2pt}
 \item \emph{Paper~25}~\cite{paper25} constructs the abelian
@@ -4482,7 +4496,9 @@ $\mathcal{A}_v = \mathbb{C}$ (or $C(V)$ globally) in all three rows;
 the vertex Hilbert space and the gauge group differ row-by-row, as
 listed in the table.  In each row the gauge-network spectral action
 reduces to the standard Wilson action plus a quadratic kinetic term
-in the weak-coupling expansion, with coefficient $1/(4 N_c)$.
+in the weak-coupling expansion, with coefficient $1/(4 N_c)$ in the
+two non-abelian rows (the $U(1)$ value $\tfrac14$ coincides with it at
+$N_c = 1$).
 
 The lineage placement is identical to that of
 Sec.~\ref{sec:lineage}, and each Wilson construction inherits the
@@ -4548,11 +4564,11 @@ their span $\mathcal{O}_{n_{\max}}$ is not closed under multiplication),
 so the $a \cdot b \notin \mathcal{O}$ feature does not block the
 fluctuation calculus.
 Sprint~H1 (Sec.~\ref{sec:higgs_h1}) closes this gap up to the
-Yukawa-undetermined verdict; Sprint~G3 (Sec.~\ref{sec:g3}) supplies
-the structural reason that $Y$ is undetermined --- $\gamma_{\mathrm{GV}}$
+Yukawa-undetermined verdict; Sprint~G3 (Sec.~\ref{sec:g3}) offers
+a structural reading of why $Y$ is undetermined --- $\gamma_{\mathrm{GV}}$
 and $\gamma_F$ are independent commuting $\mathbb{Z}_2$ gradings, the
 Yukawa lives on the $\gamma_F$ flip, and no GeoVac-side data couples
-to that flip.  G2 and G3 are therefore one structural fact, not two.
+to that flip.  On that reading G2 and G3 are one structural fact, not two.
 \item[\textbf{G3}] (Hypercharge / electroweak unification.)\ The SM
 relation $Q = T_3 + Y_W/2$ requires co-located $U(1)_Y$ and
 $\mathrm{SU}(2)_L$ on a common Hilbert space with a left--right
@@ -4914,7 +4930,7 @@ diagonal reproduces the empirical SM spectrum reproduces the
 SM-data-fit value $m_T^2(v, T_C) \approx (160~\mathrm{GeV})^2$;
 GeoVac admits any compatible spectrum but selects none.
 
-\textbf{Empirical falsification of the strict $Y = 0$ reading.}
+\textbf{The strict $Y = 0$ reading is disfavoured.}
 The strict Marcolli--vS-without-Higgs case ($Y = 0$) has
 $\mathrm{Tr}_{\mathrm{inner}}(Y_{\mathrm{diag}}^2) = 0$ and hence no
 \emph{Yukawa} contribution to the high-$T$ quadratic correction of
@@ -4922,8 +4938,10 @@ $V_{\mathrm{eff}}(\phi, T)$ (the gauge contribution is separate).  This
 shifts the electroweak crossover temperature quantitatively away from
 the $T_C \approx 160$~GeV of lattice studies of the Standard Model, which
 take the observed top Yukawa as input (symmetry restoration itself comes
-from the gauge and scalar thermal masses):\ the empirical record disfavours
-the strict $Y = 0$ slice.  This does not derive $Y_F$, and it narrows rather
+from the gauge and scalar thermal masses);\ $T_C$ is itself a
+lattice-SM output, and the empirical fact that excludes $Y = 0$ is the
+nonzero measured fermion masses, so the strict $Y = 0$ slice is
+disfavoured.  This does not derive $Y_F$, and it narrows rather
 than closes the H1 verdict's residual ambiguity.  The ``thin'' part of the positive-thin
 verdict is now thinner --- five thermal observables (Sprint TD
 Track~3 catalogue) are individual probes of distinct inner-factor
@@ -5167,10 +5185,14 @@ the H atom at $R = 3.5$ is structurally outside the [Ne] core's
 significant amplitude) and a total diagonal-element differential
 $\Delta_\text{total} = +8.6$~mHa --- $\sim 12\times$ below the
 prespecified GO threshold and $\sim 500\times$ below the wall depth.
-[Ne] core-correlation differential at NaH $R_\text{eq}$ converges
-across three independent literature anchors (Iron-Oren-Martin~2003~\cite{iron_oren_martin2003},
-Sylvetsky-Martin~2018~\cite{sylvetsky_martin2019} (a general inner-shell estimate, not NaH-specific), atomic Na correlation $\times$ active-fraction)
-to $\sim 0.001$--$0.003$~Ha, $10^3\times$ below the wall depth.
+[Ne] core-correlation differential at NaH $R_\text{eq}$ is estimated
+from one NaH-specific literature value, one general literature estimate
+and one in-house estimate
+(Iron-Oren-Martin~2003~\cite{iron_oren_martin2003}, whose NaH
+core-valence correction to $D_0$ is $\le 0.7$~kJ/mol $\approx 3\times10^{-4}$~Ha;
+Sylvetsky-Martin~2018~\cite{sylvetsky_martin2019}, a general inner-shell
+estimate, not NaH-specific;\ atomic Na correlation $\times$ active-fraction)
+at $\lesssim 0.001$--$0.003$~Ha, $\gtrsim 10^3\times$ below the wall depth.
 \emph{Five independent sprint-scale W1e closure mechanisms are now
 ruled out} (F4, F5, F6, Schmidt, core correlation). The chemistry-side
 architectural-extension ladder
@@ -5370,7 +5392,7 @@ not close on $S^3$ alone.
 \paragraph{The G2--G3 corollary.}  Sprint~H1 left G2 (Higgs as inner
 fluctuation) at the verdict ``construction admits a Higgs given an
 imposed Yukawa $Y$, but no GeoVac mechanism selects $Y$.''  G3's
-NEGATIVE supplies the structural reason.  The Yukawa sits in the
+NEGATIVE offers a structural reading of why.  The Yukawa sits in the
 off-diagonal $\mathbb{C} \leftrightarrow \mathbb{H}$ block of $D_F$
 that anticommutes with $\gamma_F$;\ the candidate GeoVac sources for
 that block (offdiag CH chirality bridging, Sturmian inter-shell
@@ -5559,7 +5581,7 @@ $*$-representation of the direct sum; corrected in
 \texttt{geovac/standard\_model\_triple.py}).  With the corrected
 representation the finite-algebra order-zero and order-one residuals are
 exactly zero, while the combined-triple residuals ($1.49$ and $1.26$ at
-$n_{\max} = 2$) are the GV factor's finite-resolution residual (the operator-system
+$n_{\max} = 2$) are the GV factor's operator-system (boundary-term) residual (the operator-system
 multipliers do not commute; cf.\ the order-zero/one rows of
 Table~\ref{tab:axiom_audit_lorentzian}), factorising through the
 operator-system commutator with residual $0$ (\texttt{tests/test\_standard\_model\_triple.py});
@@ -5656,11 +5678,12 @@ scoped 2026-09-03) factorizes the master Mellin engine into an
 \emph{outer} ring --- the M1/M2/M3 transcendentals of the GeoVac
 sector --- tensored with an \emph{inner} Yukawa Dirichlet ring
 $\mathbb{Q}[y_i^{-2s}]$ generated by the Yukawa eigenvalues. The two
-rings share no generator: the $\eta$-trivialization
-($\{\gamma_F, D_F\} = 0$ annihilates the odd-$k$ heat traces that
-would couple them), together with the G3 commuting-$\mathbb{Z}_2$
-result, leaves the inner Yukawa ring sharing no generator with any forced
-outer ring (none beyond $\mathbb{Q}$). This is the precise content of the structural-skeleton
+rings are read as sharing no generator beyond $\mathbb{Q}$:\ the
+$\eta$-trivialization ($\{\gamma_F, D_F\} = 0$ annihilates the odd-$k$
+heat traces) removes the M3 slot from the inner factor, and the G3
+commuting-$\mathbb{Z}_2$ result leaves no GeoVac-side datum coupling to
+the Yukawa flip;\ neither proves the two rings disjoint (an
+Observation-level reading). This is the precise content of the structural-skeleton
 scope (\S 1.5 of the project guidelines): the bone (the forced,
 integer/rational skeleton) and the calibration data (free) live in
 rings sharing no generator beyond $\mathbb{Q}$, and one reading (an
@@ -5762,8 +5785,9 @@ extracts only the gauge group from the Hopf-rung sphere; adopting DAS as a forci
 structural theorem that the AC tensor product
 $\mathcal{H} = \mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$ transfers
 the rung-$n$ sphere's division-algebra structure to a constraint on
-$\mathcal{H}_F$'s inner algebra. This theorem is sprint-reachable and
-paper-level; if it closes, the $n = 2$ real form would move from
+$\mathcal{H}_F$'s inner algebra (tested negative in Door~4e below:\ no
+standard AC compatibility condition forces $\mathbb{H}$). Had it
+closed, the $n = 2$ real form would move from
 ``admitted, with $\mathbb{H}$ imported from the literature (CCM
 second-order condition)'' to ``selected by a GeoVac-coherent geometric
 criterion'' --- still relative to the Hopf-tower organizing reading and
@@ -6059,7 +6083,8 @@ negative companions already recorded above:
   forced rings (an Observation-level reading).  \textbf{[PANEL-VERIFIED]}
   Sprint Yukawa-PSLQ (2026-06-03) added empirical confirmation:\ a
   $162$-cell sweep of the nine measured Yukawa values against the
-  forced inner-factor pure-Tate basis $\mathbb{Q}[\pi, \pi^{-1}]$
+  inner-factor pure-Tate basis $\mathbb{Q}[\pi, \pi^{-1}]$ suggested by
+  the M1/M2 slot restriction
   (basis sharpened by the $\eta$-trivialization audit ruling out
   $M_3$/Dirichlet $L$ on the inner factor) returned zero hits at
   $M \le 10^3$, at both MS-bar $M_Z$ and MS-bar
@@ -6340,8 +6365,9 @@ The argument is a structural inspection of each axiom in $\mathcal{A}$:
   functional.
 \item \textbf{Tensor products $\mathcal{T}_1 \otimes \mathcal{T}_2$
   (Paper 39).}  These produce a new spectral triple with combined
-  Dirac $D_1 \otimes 1 + 1 \otimes D_2$, on which the spectral
-  action $S(D_1 \otimes 1 + 1 \otimes D_2, \Lambda)$ remains
+  Dirac $D = D_1 \otimes \sigma_1 \otimes 1 + 1 \otimes \sigma_2 \otimes D_2$
+  (the Clifford-doubled product of two odd triples), on which the spectral
+  action $S(D, \Lambda)$ remains
   single-cutoff with the new combined $D$.  No second cutoff is
   introduced by the tensor-product construction.
 \end{enumerate}
@@ -6726,13 +6752,14 @@ of the C-arc.
 \begin{remark}[Chemistry-side $\eta$-trivialization analog: open structural-research target]
 \label{rem:chemistry_eta_analog}
 The SM-side $\eta$-trivialization theorem (Paper~18 \texttt{thm:eta\_trivialization})
-forces the inner-factor period ring to $M_1 \cup M_2$ on any
+restricts the inner factor to the $M_1$/$M_2$ Mellin \emph{slots} (the
+$M_3$ slot vanishes) on any
 Krajewski-class even finite spectral triple satisfying the chirality
 grading axiom $\{\gamma_F, D_F\} = 0$:\ for all odd $k$, $\mathrm{Tr}(D_F^k
 \cdot e^{-tD_F^2}) \equiv 0$, so $M_3$ (vertex-parity Hurwitz / Catalan $G$ /
-Dirichlet $L$) vanishes on the inner factor.  This is the structural
-reason F1 (Yukawa values) and F4--F7 (Higgs VEV, CKM, PMNS, neutrino
-masses) live outside the master Mellin engine's structural skeleton:\
+Dirichlet $L$) vanishes on the inner factor.  One reading (an
+Observation, not a derivation) is that this is why F1 (Yukawa values)
+and F4--F7 (Higgs VEV, CKM, PMNS, neutrino masses) live outside the master Mellin engine's structural skeleton:\
 the inner-factor Yukawa values occupy the M1/M2 slots, but their
 generators are tied to the couplings $y_i$ and are not among those of
 the rings the framework's outer-factor mechanism generates (an Observation-level
@@ -6742,8 +6769,8 @@ $\mathbb{Q}$).
 The chemistry-side analog would be a structural property of the
 FrozenCore $Z_{\rm eff}(r)$ pipeline that mirrors $\{\gamma_F, D_F\} =
 0$ on the chemistry inner-factor side:\ a chirality-style grading on
-the Clementi--Raimondi $Z_{\rm eff}(r)$ structure that forces a
-similar period-ring restriction on chemistry inner-factor data.  Such
+the Clementi--Raimondi $Z_{\rm eff}(r)$ structure that imposes a
+similar slot restriction on chemistry inner-factor data.  Such
 a property is not currently exhibited.  The most concrete candidate
 direction would identify a discrete grading on the FrozenCore radial
 profile pipeline (e.g., parity of multi-zeta exponents, partition of
@@ -6762,8 +6789,8 @@ H7 (multi-zeta coefficients in second-row valence basis) remain
 empirical-only pending this structural-research target's completion.
 The empirical-grade content (W1e period-class diagnostic,
 \texttt{debug/sprint\_w1e\_period\_class\_memo.md}, 2026-06-04)
-establishes that H6, H7 are not in $M_1 \cup M_2 \cup M_3$ at audit
-ceiling 100;  the open question is whether they sit in a structurally
+found no relation placing H6, H7 in $M_1 \cup M_2 \cup M_3$ at audit
+ceiling 100 (a PSLQ null result);  the open question is whether they sit in a structurally
 distinct chemistry-side ring forced by a hypothetical analog axiom.
 
 Paper~57~\S 6.3 records this remark as the named substantial
@@ -7667,7 +7694,7 @@ truncated Camporesi--Higuchi spectral triple $\mathcal{T}_{n_{\max}}$
 is \emph{chosen} as $K = 2J_z$ (\texttt{geovac/modular\_hamiltonian.py}),
 not derived from a wedge-restricted state;\ it has integer spectrum, so
 the period closure $\sigma_{2\pi}(O) = O$ holds bit-exactly for any
-$O$ of integer spectrum (regression-pinned in
+operator $O$, because $K$ has integer spectrum (regression-pinned in
 \texttt{tests/test\_modular\_period\_closure\_automatic.py}), and the
 four witness labels (Bisognano--Wichmann, Hartle--Hawking,
 Sewell, Unruh) are the same $K$ with $\kappa_g$ relabelled, so they
@@ -8479,7 +8506,7 @@ J.~Loutey,
 GeoVac Paper~50 (2026).
 \bibitem{loutey_paper55}
 J.~Loutey,
-``Periods of GeoVac:\ a cyclotomic mixed-Tate classification of the master Mellin engine,''
+``Periods of GeoVac:\ a cyclotomic mixed-Tate census of the master Mellin engine,''
 GeoVac Paper~55 (2026).
 \bibitem{loutey_paper56}
 J.~Loutey,

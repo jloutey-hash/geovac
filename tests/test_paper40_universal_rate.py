@@ -85,29 +85,33 @@ def _groups(r):
 
 
 # ---------------------------------------------------------------------------
-# general-G C_3 <= 1 (the L3 keystone) -- DEFAULT, fast reduced panel.
+# general-G Dirac-triangle inequality (DT) -- DEFAULT, fast reduced panel.
+# (DT) is a representation-theoretic inequality on Kostant eigenvalues and
+# Casimirs; it is NOT a check of the Lipschitz constant C_3, which is 1 by
+# compression (Paper 40 Lemma L3; tests/test_paper40_l3_compression.py).  The
+# bridge from (DT) to C_3 was withdrawn 2026-10-02.
 # Wires the previously-uncalled verify_dirac_triangle / run_panel.
 # ---------------------------------------------------------------------------
 
-def test_general_G_dirac_triangle_C3_leq_1(_rank2):
+def test_general_G_dirac_triangle_inequality_panel(_rank2):
     """For SU(3), Sp(2), G2 the Dirac triangle inequality holds on a reduced
     dominant-weight panel: every ordered pair (lambda, lambda') satisfies
     |D(lambda) - D(lambda')| <= sqrt(C(sigma)) for all sigma in the tensor
-    decomposition (fail_count = 0), with sup ratio strictly < 1.  This is the
-    general-rank C_3 <= 1 / L3 content -- the keystone the universality rides on.
+    decomposition (fail_count = 0), with sup ratio strictly < 1.  A statement
+    about eigenvalues, not about the commutator norm (the bridge is withdrawn).
     """
     for label, la, _rank in _groups(_rank2):
         weights = _rank2["panel_dominant_weights"](la.rank, 2)  # sum a_i <= 2
         res = _rank2["dirac_run_panel"](la, weights, label, verbose_violations=False)
         assert res["fail_count"] == 0, (
-            f"{label}: Dirac-triangle C_3<=1 violated in {res['fail_count']}/"
+            f"{label}: Dirac-triangle inequality (DT) violated in {res['fail_count']}/"
             f"{res['total_pairs']} pairs; max_ratio={res['max_ratio']:.4f}, "
             f"first violations={res['violations'][:3]}"
         )
         # non-vacuous: the panel actually exercises the bound (sup ratio in (0, 1])
         assert 0.0 < res["max_ratio"] <= 1.0 + 1e-9, (
             f"{label}: max_ratio={res['max_ratio']:.6f} not in (0, 1] "
-            f"(vacuous panel or genuine C_3>1)"
+            f"(vacuous panel or a (DT) violation)"
         )
         assert res["total_pairs"] >= 9  # reduced panel still has real content
 

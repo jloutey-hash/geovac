@@ -70,7 +70,7 @@ The `geovac-hamiltonians` package is a standalone wheel with no heavy dependenci
 - **Hardware demonstrations:** VQE or ADAPT-VQE runs on current hardware using GeoVac's compact Hamiltonians. H2 at 10 qubits and LiH at 30 qubits are natural targets.
 - **Measurement optimization:** Benchmarking classical shadows, derandomized shadows, or other measurement protocols on GeoVac's structurally sparse Hamiltonians.
 - **Extending the molecule set:** The composed architecture is systematic (core pairs + bond pairs + lone pairs) and now covers 30 molecules. New molecules require only a `MolecularSpec` definition and atomic classifier entry.
-- **Improving classical accuracy:** The 5-26% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the pseudopotential approximation. The balanced coupled architecture (Paper 19) achieves 0.20% energy error at n_max=3 for LiH.
+- **Improving classical accuracy:** The 5.3-19.4% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the pseudopotential approximation. The balanced coupled architecture (Paper 19) achieves 0.20% energy error at n_max=3 for LiH.
 
 ## Papers and Citation
 

@@ -32,9 +32,10 @@ combinatorial search over $1.92 \times 10^9$ formulas built from the
 same spectral ingredients, the formula ranks among the top $\sim\!10$
 ($p = 5.2 \times 10^{-9}$ per draw); this statistic does not account
 for the unregistered search that produced the formula and does not
-establish non-accidentality. The cubic is shown to be the characteristic
-polynomial of a traceless $\mathbb{Z}_3$-symmetric circulant matrix,
-suggesting democratic coupling among the three bundle components.
+establish non-accidentality. The cubic can be realized as the
+characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
+circulant matrix (any depressed cubic with unit constant term can, so
+this realizes the form without selecting it).
 However, the combination rule $K = \pi(B + F - \Delta)$ is a
 numerical observation, not a conjecture: an empirical coincidence with
 structural support, not a first-principles derivation. An internal Sprint-A structural check
@@ -93,9 +94,9 @@ The base $S^2$ parametrizes photon propagation directions, while the
 fiber $S^1$ encodes the $U(1)$ electromagnetic gauge phase. We
 identify a formula for $\alpha$ built entirely from the spectral
 invariants of these three manifolds, validate it statistically against
-a large space of alternative formulas, and identify structural
-underpinnings (a $\mathbb{Z}_3$-symmetric circulant matrix) that
-explain the cubic form. We also characterize precisely what remains
+a large space of alternative formulas, and give a structural
+realization (a $\mathbb{Z}_3$-symmetric circulant matrix) of the cubic
+form, which realizes rather than selects it. We also characterize precisely what remains
 unestablished.
 
 We state clearly at the outset: \textit{this is an empirical formula
@@ -106,8 +107,9 @@ coupling constant $K$ is observed, not derived.
 An earlier version of this work~\cite{paper2_old} attempted to extract
 $\alpha$ from a ``symplectic impedance'' ratio on the electron
 lattice, achieving $6.2 \times 10^{-5}$ relative error with a fitted
-helical pitch. The present result eliminates all fitted parameters and
-improves precision by a factor of~500.
+helical pitch. The present result eliminates all fitted parameters;\
+$K$ itself agrees with $\alpha^{-1}$ about $130\times$ more closely, and
+the cubic's root about $700\times$.
 
 
 %======================================================================
@@ -765,8 +767,9 @@ established results elsewhere in the GeoVac framework:
     analysis, not through the spectrum itself. The Dirac sector on
     $S^{3}$ is therefore a \emph{structural twin} of the
     Bargmann--Segal HO lattice in its rational-arithmetic certification,
-    and the Paper~2 $\pi$ content in $K = \pi(B + F - \Delta)$ is the
-    Coulomb-specific calibration of Paper~24's taxonomy.
+    and the Paper~2 $\pi$ content in $K = \pi(B + F - \Delta)$ is read
+    (a reading, not a derivation) as the Coulomb-specific calibration of
+    Paper~24's taxonomy.
 \end{itemize}
 
 %----------------------------------------------------------------------
@@ -847,7 +850,9 @@ natural stopping point. The program has achieved:
     in the asymptotic expansion.  All three ingredients of
     $K/\pi = B + F - \Delta$ are invisible to the perturbative spectral
     action: $B$ is a finite Casimir trace, $F$ is an arithmetic
-    Dirichlet series, and $\Delta$ is an Euler--Maclaurin boundary term.
+    Dirichlet series, and $\Delta$ is a Dirac mode-count boundary quantity
+    ($\Delta^{-1} = g_3^{\mathrm{Dirac}}$, twice the Euler--Maclaurin
+    boundary term).
     If it lives in any spectral-action sector at all, $K/\pi$ lives
     \emph{entirely} in the non-perturbative sector of the
     spectral-action supertrace.
@@ -884,7 +889,8 @@ not require the $\alpha$ observation to be explained.
 %======================================================================
 
 A formula involving $\pi$, $42$, and $\pi^2/6$ matching $\alpha^{-1}$
-to $8.8 \times 10^{-8}$ could in principle be a numerical
+to $4.8 \times 10^{-7}$ (its cubic's root to $8.8 \times 10^{-8}$)
+could in principle be a numerical
 coincidence. To test this, we performed a systematic combinatorial
 search~\cite{phase2_audit}.
 
@@ -952,9 +958,10 @@ non-accidentality; it is not a derivation.
 \section{The Circulant Structure}
 %======================================================================
 
-The cubic $\alpha^3 - K\alpha + 1 = 0$ is not an arbitrary polynomial
-ansatz. It arises naturally as the characteristic polynomial of a
-traceless $3 \times 3$ circulant matrix.
+The cubic $\alpha^3 - K\alpha + 1 = 0$ can be realized as the
+characteristic polynomial of a traceless $3 \times 3$ circulant matrix
+(any depressed cubic with unit constant term can be so realized, so the
+realization does not by itself select this cubic).
 
 \subsection{Circulant eigenvalue equation}
 
@@ -988,8 +995,9 @@ The $\mathbb{Z}_3$ symmetry of the circulant represents
 $2$, $3$) interacts equally with the other two. In the Hopf bundle
 context, the three objects are the fiber $S^1$, the base $S^2$, and
 the total space $S^3$. Each component contributes a spectral
-invariant; the circulant structure implies that their coupling respects
-the cyclic symmetry of the bundle decomposition.
+invariant; the circulant structure is consistent with a coupling that
+respects the cyclic symmetry of the bundle decomposition (a reading, since
+any depressed cubic with unit constant term admits such a realization).
 
 The $SU(2)$ structure constants $\varepsilon_{ijk}$ exhibit the same
 $\mathbb{Z}_3$ cyclic symmetry, producing a circulant with $b = c = 1$
@@ -999,9 +1007,9 @@ $K/3 \approx 45.7$ instead of~1.
 
 \subsection{Structural content and limitations}
 
-The circulant interpretation is a \textit{structural} result: it
-explains why the self-consistency equation takes the form of a
-depressed cubic with unit constant term. These features follow from
+The circulant interpretation is a \textit{structural} realization:\ it
+realizes the self-consistency equation's form, a depressed cubic with
+unit constant term (a realization, not a derivation). These features follow from
 three conditions:
 \begin{enumerate}
 \item Tracelessness: $\mathrm{tr}(M) = 0$ (eliminates the $s^2$ term).
@@ -1015,8 +1023,8 @@ Hopf map (linking number $+1$) and with the fermionic sign convention
 ($\psi \to -\psi$ under $2\pi$ rotation of the $S^1$ fiber), but
 neither identification constitutes a derivation.
 
-The circulant explains \textit{why a cubic}, but does not derive
-\textit{why this specific~$K$}. The single free parameter $bc = K/3$
+The circulant realizes the cubic form (it does not select it among
+depressed cubics), and does not derive \textit{why this specific~$K$}. The single free parameter $bc = K/3$
 encodes the coupling strength, and its value
 $\pi(42 + \pi^2/6 - 1/40)/3$ is not determined by the circulant
 structure alone.
@@ -1044,8 +1052,8 @@ three roots. The physical root $\alpha$ has $\theta \approx 3\pi/2$
 
 The circulant $M$ is therefore \textit{Hermitian}, not real symmetric,
 consistent with the $U(1)$ gauge structure of the Hopf fiber: the
-off-diagonal coupling carries a phase, as expected for a connection on
-a principal $U(1)$-bundle.
+off-diagonal coupling carries a phase, as a connection on a principal
+$U(1)$-bundle would (a consistency, not a derivation).
 
 \subsection{Self-referential property}
 
@@ -1138,7 +1146,7 @@ $\det'(\Delta_{S^1}) \cdot \det'(\Delta_{S^3})/\pi \approx 41.957$
 approaches $B = 42$ to $0.1\%$ (see Sec.~VIII) but the gap is not
 bridgeable by known spectral corrections. The combination rule mixes a
 discrete combinatorial quantity ($B = 42$) with a continuous spectral
-invariant ($F = \zeta(2)$) in a way that has no precedent in spectral
+invariant ($F = \zeta(2)$) in a way that has no known precedent in spectral
 geometry. If Link~3 can be closed, the mechanism likely involves the
 representation theory of $SO(4)$ rather than the analysis of smooth
 differential operators.
@@ -1164,8 +1172,8 @@ fix~$\Lambda$: any target~$T$ has a unique real root (IVT +
 monotonicity), so the match is tautological.  This confirms
 rather than closes the Link~3 gap.
 
-\textbf{Link~4} (partial): The cubic form arises naturally from
-$\mathbb{Z}_3$-symmetric coupling, and the $SU(2)$ structure constants
+\textbf{Link~4} (partial): The cubic form can be realized by
+$\mathbb{Z}_3$-symmetric coupling (a realization, not a selection), and the $SU(2)$ structure constants
 share this symmetry. But no derivation connects the Hopf bundle to the
 specific circulant with $bc = K/3$.
 
@@ -1349,7 +1357,7 @@ Three independent properties of $S^3$ underlie this coincidence:
   group, yielding the clean Clebsch--Gordan branching
   $l = 0, \ldots, n{-}1$ within each shell. No analogous product
   structure exists for $SO(d{+}1)$ with $d \neq 3$.
-\item $S^3 \cong SU(2)$ is the only sphere that is a Lie group,
+\item $S^3 \cong SU(2)$ is the only sphere of dimension $\ge 2$ that is a Lie group,
   enabling the Peter--Weyl decomposition that makes $B$ computable
   as a representation-theoretic trace.
 \item The embedding index of diagonal $SO(3) \subset SO(4)$ is~1.
@@ -1631,8 +1639,10 @@ spectral-geometric derivation; the rule mixes discrete
 representation-theoretic data ($B = 42$) with continuous spectral
 invariants ($F = \zeta(2)$) in a way that has no known precedent.
 The formula has the character of a remarkable empirical observation
-with structural support---the spectral ingredients are natural, the
-cubic form is natural, the selection principle is proven, but no
+with structural support---each spectral ingredient has an identified
+home (the choice of these three remains the open gap, Link~2), the
+cubic form is realizable by a circulant (not selected by it), the
+selection principle is proven, but no
 first-principles derivation of their assembly into $K$ exists;\ the
 combination is a numerical Observation.
 

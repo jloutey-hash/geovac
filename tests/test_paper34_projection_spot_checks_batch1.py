@@ -334,7 +334,7 @@ def test_paper34_III11_vector_photon_1_over_4pi():
     of the Hopf base (Paper 33).'
 
     Verifies the structural identity 1/Vol(S^2) = 1/(4 pi), tying this
-    projection to the same Hopf base measure source as §III.2.
+    projection to the same unit-sphere volume slot as §III.2.
     """
     from geovac.hopf_bundle import VOL_S2
 

@@ -53,6 +53,11 @@ from __future__ import annotations
 FRONT_DOOR = [
     "papers/INDEX.md",
     "docs/claims_register.md",
+    # added 2026-10-02 (/qa trunk DELTA #25): README:201 carried a section-13.5 K-tier
+    # violation and forced_free_seam.md (cited by Paper 57 as "the full table") carried
+    # retired rows, and neither was on the front door, so C25 never read them.
+    "README.md",
+    "docs/forced_free_seam.md",
 ]
 
 P32 = "papers/group1_operator_algebras/paper_32_spectral_triple.tex"
@@ -84,9 +89,10 @@ CLAIMS = {
         owner_tier=r"\[INTERNAL THEOREM", tier="INTERNAL THEOREM", owner_window=3,
         mention=r"Paper[~ ]?38\b.{0,60}convergence|discrete.?→.?continuum convergence|"
                 r"state-space G(romov|H).{0,40}convergence",
-        qualifier=r"(?<!almost-)(?<!almost )\bcommutative\b",
-        overclaim=r"almost-commutative[^.;]{0,40}\b(is|are|been)\s+(proved|proven)|"
-                  r"\b(proves|proved)\s+(the\s+)?(convergence\s+(of|for)\s+the\s+)?almost-commutative|"
+        qualifier=r"(?<!almost-)(?<!almost )(?<!non-)(?<!non )\bcommutative\b",
+        overclaim=r"almost[- ]commutative[^.;]{0,40}\b(is|are|been)\s+(also\s+)?(proved|proven)|"
+                  r"almost[- ]commutative[^.;]{0,60}\b(proved|proven)\s+(likewise|too|as well)|"
+                  r"\b(proves|proved)\s+(the\s+)?(convergence\s+(of|for)\s+the\s+)?(almost[- ]commutative|non-?commutative gauge)|"
                   r"graph.{0,30}converges? to|\\le\s*C_\{?3\}?\s*(\\cdot\s*)?\\gamma",
         changed="2026-09-29"),
     "p38-rate-constant": dict(
@@ -114,7 +120,8 @@ CLAIMS = {
         owner_tier=r"numerical observation", tier="OBSERVATION", owner_window=12,
         mention=r"π\(B ?\+ ?F|\\pi\(B ?\+ ?F|combination rule",
         qualifier=r"Observation|OBSERVATION|coincidence",
-        overclaim=r"\b(conjecture|prediction)\b|(?-i:\b(?:rule|K)\b)[^.;]{0,40}\b(is|as)\s+(a\s+)?theorem(?![-\w])|is derived|derives K",
+        overclaim=r"\b(conjecture|prediction)\b|(?-i:\b(?:rule|K)\b)[^.;]{0,40}\b(is|as)\s+(a\s+)?theorem(?![-\w])|is derived|derives K|"
+                  r"is now a theorem|(?-i:\b(?:rule|K)\b)[^.;]{0,60}\b(is\s+)?proved\s+from",
         changed="2026-06-14"),
     "sm-gauge-group-upgrade-b": dict(
         statement="U(1) x SU(2) x SU(3) (and the inner algebra C+H+M3(C)) is FORCED ONLY RELATIVE TO "
@@ -133,17 +140,17 @@ CLAIMS = {
         owner=P38, owner_anchor=r"UCP map has cb-norm",
         owner_tier=r"exactly \$1\$", tier="INTERNAL THEOREM", owner_window=2,
         mention=r"cb-norm",
-        qualifier=r"\b1\b|UCP|unital completely positive|mass max|legacy",
-        overclaim=r"cb-norm\s*(=|is)?\s*2\s*/|cb-norm .{0,25}(decay|O\(1/n)",
+        qualifier=r"cb-norm[^.;]{0,30}(=|is|of)\s*\$?1\b(?!\))|UCP|unital completely positive|mass max|legacy",
+        overclaim=r"cb-norm\s*(=|is)?\s*2\s*/|cb-norm .{0,25}(decay|O\(1/n)|cb-norm[^.;]{0,40}2\s*/\s*\(n",
         changed="2026-09-30"),
     "m2-ring-integer-s": dict(
         statement="M2's pure-Tate ring (+)_k pi^{2k} Q holds for Seeley-DeWitt coefficients and "
                   "spectral-zeta values at INTEGER s; half-integer s >= 5/2 carries odd zeta.",
         owner=P55, owner_anchor=r"label\{thm:m2_mixed_tate\}",
-        owner_tier=r"integer", tier="THEOREM (integer s)",
+        owner_tier=r"(?<!half-)(?<!half )\binteger\b", tier="THEOREM (integer s)",
         mention=r"pure-Tate even-weight|⊕.?π\^\{?2k|\\bigoplus_k \\pi\^\{2k\}",
         qualifier=r"(?<!half-)(?<!half )\binteger\b|Seeley|SD coeff",
-        overclaim=r"at (any|every) s\b|half-integer s.{0,20}pure-Tate",
+        overclaim=r"at (any|every) s\b|half-integer s.{0,20}pure-Tate|pure-Tate[^.;]{0,40}(at|for) (every|all|any) half-integer|non-integer s",
         changed="2026-09-30"),
     "paper7-symbolic-checks": dict(
         statement="Paper 7's sympy suite is 18 CHECKS of Fock's continuum chain (ten limiting-case, "
@@ -169,7 +176,7 @@ CLAIMS = {
                   "extrapolation marginally BELOW exact, non-variational) bracket the exact energy; the "
                   "properly variational 2D figure is 0.022% raw.",
         owner="papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
-        owner_anchor=r"marginally below", owner_tier=r"non-variational", tier="MEASURED",
+        owner_anchor=r"marginally below", owner_tier=r"non-variational", tier="MEASURED", owner_all=True, owner_window=1,
         mention=r"0\.004\s*\\?%",
         qualifier=r"extrapolat|non-variational|below the exact|below exact",
         overclaim=r"do not bracket|variational 0\.004|0\.004\s*\\?%[^.;]{0,30}variational bound",
@@ -178,7 +185,7 @@ CLAIMS = {
         statement="On the binary label lattice node degree depends on m and on which shell neighbours "
                   "exist, not monotonically on l (2p m=0 -> 3 > 2s = 2 = 2p m=+-1) [MEASURED].",
         owner="papers/group3_foundations/paper_1_spectrum.tex",
-        owner_anchor=r"monotone in \$l\$", owner_tier=r"\[MEASURED\]", tier="MEASURED",
+        owner_anchor=r"emph\{not\} monotone in \$l\$", owner_tier=r"\[MEASURED\]", tier="MEASURED",
         mention=r"(higher|high)[- ](angular momentum|\$?l\$?)[^.;]{0,40}(degree|connect)|more connections",
         qualifier=r"not monotone|m = 0|m=0|not\} monotone",
         overclaim=r"more connections|occupy higher-degree",
@@ -189,7 +196,7 @@ CLAIMS = {
         owner=P38, owner_anchor=r"6\s*(\\,)?\s*\\log", owner_tier=r"\[MEASURED\]", tier="MEASURED",
         mention=r"6\s*(\\,)?\s*\\log\s*\\?n|6 log n",
         qualifier=r"MEASURED|finite[- ]range|not proved",
-        overclaim=r"PANEL-VERIFIED|holds for all",
+        overclaim=r"PANEL-VERIFIED|holds for all|valid for every|proved for (every|all) n",
         changed="2026-09-30"),
     "k-match-precision": dict(
         statement="K = pi(B + F - Delta) itself matches 1/alpha to 4.77e-7 (raw, CODATA 2018); the "
@@ -197,8 +204,68 @@ CLAIMS = {
         owner=P2, owner_anchor=r"label\{obs:cross_sector\}", owner_tier=r"cubic's root", tier="OBSERVATION",
         mention=r"8\.8\s*(×|\\times)\s*10|8\.8e-8",
         qualifier=r"cubic|root|\\alpha\^2|α²|K\s*[−-]\s*\\?alpha",
-        overclaim=r"\bK\s*(=\s*(π|\\pi)\s*\(B[^)]*\)\s*)?match(es)?\s*(1/α|1/\\alpha|\$1/\\alpha\$)?\s*to\s*\$?8\.8",
+        overclaim=r"\bK\s*(=\s*(π|\\pi)\s*\(B[^)]*\)\s*)?(match(es)?|agrees? with)\s*(1/α|1/\\alpha|\$1/\\alpha\$)?\s*to\s*\$?8\.8|cubic is irrelevant",
         changed="2026-09-30"),
+    "p40-general-g-conditional": dict(
+        statement="Paper 40 generalises Paper 38 to compact connected semisimple Lie groups "
+                  "unconditionally at rank 1 and, for general G, conditionally on the per-group "
+                  "spin-window decomposition; scalar compact-group convergence is Gaudillot-Estrada--"
+                  "van Suijlekom's.",
+        owner="papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+        owner_anchor=r"(?<!un)conditionally on the per-group", owner_tier=r"for general \$G\$", tier="CONDITIONAL",
+        mention=r"Paper~?\s?40\b[^.;]{0,120}(generali[sz]|compact|semisimple|universal)|all\s+(simple\s+)?compact\s+(connected\s+)?(semisimple\s+)?Lie\s+groups",
+        qualifier=r"condition|rank[~ ]?1|rank 1|spin-window|named gap",
+        overclaim=r"resolved by\s+Paper[~\s]?40|closed it on the universal|settled by the present author|"
+                  r"machinery to all simple compact|closes it positively|was closed in\s+Paper[~\s]?40",
+        changed="2026-10-02"),
+    "p1-ladder-exact": dict(
+        statement="Paper 1's ladder operators reproduce n on INTERIOR shells and l(l+1) on every shell "
+                  "exactly [SYMBOLIC PROOF] (a two-line commutator identity, w_{n-1}^2 - w_n^2 = -n/2); not "
+                  "on the truncated top shell; not [PANEL-VERIFIED]. Upgraded from [MEASURED] 2026-10-02.",
+        owner="papers/group3_foundations/paper_1_spectrum.tex",
+        owner_anchor=r"They do, exactly, on interior shells", owner_tier=r"\[SYMBOLIC PROOF\]",
+        tier="SYMBOLIC PROOF", owner_window=1,
+        mention=r"(reproduce|return)[^.;]{0,40}quantum numbers|ladder operators[^.;]{0,60}(exact|reproduce)",
+        qualifier=r"interior|SYMBOLIC|commutator|n\s*<\s*n_",
+        overclaim=r"PANEL-VERIFIED|on every shell[^.;]{0,20}\bn\b|including the top shell[^.;]{0,30}\bn\b",
+        changed="2026-10-02"),
+    "three-homes-negative": dict(
+        statement="That no single spectral construction on S^3 generates B, F and Delta is an empirical "
+                  "record (twelve mechanisms eliminated, none exhibited) -- an OBSERVATION, not part of "
+                  "Paper 2's Three-homes theorem and not an exhaustion.",
+        owner=P2, owner_anchor=r"No single spectral construction on", owner_tier=r"\[OBSERVATION\]",
+        tier="OBSERVATION", owner_window=1,
+        mention=r"(generat\w*|share)[^.;]{0,40}all three|single[- ](spectral )?(construction|mechanism|generator)",
+        qualifier=r"OBSERVATION|empirical|eliminated|exhibited|record",
+        overclaim=r"no spectral construction on \$?S\^3\$? (simultaneously )?generates|complete enumeration|"
+                  r"three-homes'?\s+theorem\s+(establishes|proves)[^.;]{0,80}no\s+(single|spectral)",
+        changed="2026-10-02"),
+    "m1-gh-rate-reading": dict(
+        statement="The GH-rate constant 4/pi shares its value with the M1 (k = 0) volume slot of the master "
+                  "Mellin engine -- a READING, not a derivation (Paper 38); M1 does not produce, govern or "
+                  "own the GH rate, and the case-exhaustion does not cover GH rates.",
+        owner=P38, owner_anchor=r"appearance of this constant in", owner_tier=r"\[OBSERVATION\]",
+        tier="OBSERVATION", owner_window=2,
+        mention=r"(M_?1|M\$_\{1\}\$|k\s*=\s*0)[^.;]{0,80}(\bGH\b|Gromov|rate constant|propinquity rate)|"
+                r"(\bGH\b|Gromov|rate constant)[^.;]{0,80}(\bM_?1\b|M\$_\{1\}|k\s*=\s*0\s*(volume|sub))",
+        qualifier=r"reading|OBSERVATION|shares (its|the) value|membership|not a derivation",
+        overclaim=r"mechanism produces the|natural domain of (state-space )?G|M1 owns|pure M1 expression|"
+                  r"in \$?M_?1\$? alone|identifies (the state-space GH rate )?with the|"
+                  r"exactly what the M1 mechanism predicts|closes it positively",
+        changed="2026-10-02"),
+    "p55-census-scope": dict(
+        statement="Paper 55 is a CENSUS of S^3 spectral-zeta and heat-trace data: its ring memberships are "
+                  "theorems, its slot indexing a reading; chemistry seeds, spectral determinants and Paper 61's "
+                  "elliptic period lie outside it. Not a classification of all GeoVac transcendentals.",
+        owner=P55, owner_anchor=r"Over the census, the answer is affirmative", owner_tier=r"census",
+        tier="INTERNAL THEOREM (ring memberships) + OBSERVATION (scope)", owner_window=2,
+        mention=r"(all|every)[^.;]{0,30}transcendental[^.;]{0,80}(mixed-Tate|period)|"
+                r"Periods of GeoVac|period-theoretic class",
+        qualifier=r"census|over the cases treated|spectral(-zeta)? data|reading|identified",
+        overclaim=r"We show that the answer is affirmative|across the entire GeoVac corpus|full classification|"
+                  r"engine classification|classification of the transcendentals|"
+                  r"all of GeoVac'?s\s+transcendentals sit",
+        changed="2026-10-02"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",

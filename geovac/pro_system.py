@@ -348,7 +348,7 @@ def verify_cofiltered_axiom(m: int, n: int, k: int) -> Dict[str, Any]:
 # where $V_{n_{\max}}$ is the $\mathbb{Q}$-vector space of primitive
 # generators $\{x_{(n, l), k}\}$ for $(n, l) \in \text{sectors}(n_{\max})$
 # and $k \in \{0, 1, 2\}$ indexing the master Mellin engine slots
-# (Paper 18 \S III.7):\ $k = 0 \leftrightarrow M_1$ (Hopf-base measure),
+# (Paper 18 \S III.7):\ $k = 0 \leftrightarrow M_1$ (unit-sphere volume slot),
 # $k = 1 \leftrightarrow M_3$ (vertex-parity Hurwitz),
 # $k = 2 \leftrightarrow M_2$ (Seeley--DeWitt). The candidate motivic
 # Galois group is the Levi-decomposition product (v3.63.0 L1)
@@ -379,7 +379,7 @@ def verify_cofiltered_axiom(m: int, n: int, k: int) -> Dict[str, Any]:
 MELLIN_SLOTS: Tuple[int, int, int] = (0, 1, 2)
 r"""Mellin slot indices for the master Mellin engine (Paper 18 \S III.7).
 
-* $k = 0 \leftrightarrow M_1$ Hopf-base measure (Vol(S^2)/4 = \pi).
+* $k = 0 \leftrightarrow M_1$ unit-sphere volume slot (Vol(S^2)/4 = \pi).
 * $k = 1 \leftrightarrow M_3$ vertex-parity Hurwitz at quarter-integer shifts.
 * $k = 2 \leftrightarrow M_2$ Seeley--DeWitt coefficients ($\pi^{2k}$).
 """

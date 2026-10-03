@@ -60,6 +60,16 @@ finding is further located:
   qualifier / overclaim, the mirror direction) or a C16 entry (a retired
   phrasing). Once converted and the gates are green, a SURFACE-LARGE does not
   block RESEARCH-GRADE.
+- **Remediation completeness (added 2026-10-02, PI-approved).** A LARGE (either
+  kind) counts as fixed only when its **family** is closed: a discrimination-tested
+  C16/C25 entry exists, and every locus it, the C25 `--mentions` list and an
+  idea-level search over the summary surfaces return has been fixed. The
+  pre-checkpoint self-check is then repeated with fresh reviewers until one
+  returns zero LARGE, and every self-check's findings go into the run record.
+  Summary surfaces cite a claim (`\gvc` / pointer) and a value (registry key)
+  rather than paraphrasing it, for new and edited text from 2026-10-02;
+  existing surfaces are converted when touched, with outstanding
+  conversions in `docs/qa/<target>.debt.md`. See qa.md, hard rules.
 
 *Why, measured.* FULL #9, #10 and #11 each re-derived every keystone of the
 trunk and found **no mathematical defect in an owner** — yet each returned
@@ -650,6 +660,12 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-10-02 — **Remediation completeness rule** (PI-approved after DELTA #25;
+  MINOR bump v5.19.0): family closure before a LARGE counts as fixed; the
+  pre-checkpoint self-check loops to zero LARGE with fresh reviewers; summary
+  surfaces cite rather than paraphrase. Measured driver: two self-checks found 16
+  further LARGE after a gate-clean remediation, all in families without a
+  deterministic entry.
 - 2026-09-30 — **RESEARCH-GRADE stop rule revised; DELTA reshaped to claim search;
   C25 added** (PI-directed, after FULL #11; MINOR bump v5.18.0). LARGE is split
   into OWNER-LARGE (blocks) and SURFACE-LARGE (fixed + converted into a C25/C16

@@ -46,7 +46,7 @@ the exchange constant taxonomy, the angular sparsity theorem, the
 Bargmann--Segal lattice, and the universal/Coulomb partition, together
 with the \emph{reconvergence} node where these threads cohere (two-body
 selection rules from the tensor-product triple, the period
-classification, the Tannakian substrate and cosmic-Galois comparison homomorphism, and
+census, the Tannakian substrate and cosmic-Galois comparison homomorphism, and
 the forced/free seam)---into a single coherent narrative.  The arc has a
 dependency structure worth naming:\ a single taproot (the packing
 construction, made physical by the Fock $S^3$ projection) fans out into
@@ -196,8 +196,9 @@ graph theory and reproduces the Rydberg quantum numbers on interior
 shells (the energies are not a graph output:\ in Paper~7 the Coulomb
 kernel's eigenvalue forces $p_0 = Z/n$ and the energy shell then gives
 $E_n$);
-Paper~18~\cite{loutey_paper18} classifies transcendental content via an
-exchange-constant taxonomy and the master Mellin engine;
+Paper~18~\cite{loutey_paper18} tags transcendental content via an
+exchange-constant taxonomy and the master Mellin engine (a census and a
+reading);
 Paper~22~\cite{loutey_paper22} states the potential-independent angular
 sparsity theorem; Paper~24~\cite{loutey_paper24} constructs the
 Bargmann--Segal lattice and the Coulomb/HO asymmetry (seven layers catalogued, six standing);
@@ -314,7 +315,7 @@ T_\pm |n, l, m\rangle &\propto |n \pm 1, l, m\rangle.
 \end{align}
 The angular operators $L_\pm$ connect states within an $n$-shell along
 $m$; the radial operators $T_\pm$ connect states between adjacent
-$n$-shells at fixed $l$.  \textbf{[PANEL-VERIFIED]} Paper~1~\cite{loutey_paper1} demonstrates
+$n$-shells at fixed $l$.  \textbf{[SYMBOLIC PROOF]} Paper~1~\cite{loutey_paper1} shows
 that the operators built from the ladder generators reproduce the
 Rydberg quantum numbers exactly on interior shells:\ the $SU(1,1)$
 element $N = -2[T_+, T_-]$ returns $n$ for $n < n_{\max}$ (not on the
@@ -495,9 +496,10 @@ operator-algebra arc);\ the theorem statement displays the asymptotic
 rate $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and numerics-pinned;\
 the uniform $6\log n_{\max}/n_{\max}$ bound is \textbf{[MEASURED]}, a finite-range check), with the $4/\pi$ constant
-universal across compact connected semisimple Lie groups
-(Paper~40~\cite{loutey_paper40}: rigorous at rank~1, a rank-uniform
-analytical proof a named gap; a circle factor carries $2/\pi$); the
+reported universal across compact connected semisimple Lie groups
+(Paper~40~\cite{loutey_paper40}: rigorous at rank~1, fit-sensitive at rank~$\ge 2$, a rank-uniform
+analytical proof a named gap, the general-$G$ convergence itself
+conditional on the per-group spin-window decomposition; a circle factor carries $2/\pi$); the
 scalar analogue of that theorem, for the Peter--Weyl spectral
 truncations of $L^2(S^3)$, is the prior-art state-space GH result of
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}.  Paper~7's
@@ -522,10 +524,14 @@ fixes it, $E_n = -Z^2/(2(C+1))$ on the labels, i.e.\
 $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$.  The dimensionless label set carries no scale;
 the Rydberg energy is injected exclusively at the projection step.  This
 separation between dimensionless topology and dimensional projection
-is the \emph{dimensionless vacuum} viewpoint of Paper~7: all physical
+is the \emph{dimensionless vacuum} viewpoint of Paper~7 (the scale
+invariance itself is Fock's, explicit in Bander--Itzykson
+1966~\cite{bander_itzykson1966},
+\textbf{[PRIOR ART]}): all physical
 dimensions enter exclusively through the energy-shell constraint, i.e.\
 the focal-length parameter $p_0$ (the calibration $\pi$ content enters
-separately, through the $k = 0$ volume slot of \S\ref{sec:exchange}).
+separately, read as the $k = 0$ volume slot of \S\ref{sec:exchange}, a
+reading with a \textbf{[CONDITIONAL]} engine).
 
 \subsection*{Scale-freedom of the substrate and its reflection in conformal field theory}
 \label{sec:cft_reflection}
@@ -651,8 +657,9 @@ graph splits into $n_{\max}$ disconnected $l$-blocks;\ 2026-09-25), the
 exact content being the label set, on which minus that operator is the
 diagonal $SO(4)$ Casimir; (b)
 the systematic symbolic verification of the conformal transformation
-chain; (c) the framing of physical scales as confined to the
-energy-shell projection; (d) the computational consequence that
+chain; (c) the organizing use of Fock's scale invariance, physical
+scales confined to the energy-shell projection (the property itself
+\textbf{[PRIOR ART]}, Bander--Itzykson 1966~\cite{bander_itzykson1966}); (d) the computational consequence that
 sparse Hamiltonian-matrix eigenvalue problems (adjacency nonzeros
 growing as $V^{1.07}$, measured) can replace
 continuous integration.  (The label set itself is \textbf{[PRIOR ART]},
@@ -759,8 +766,9 @@ guarantee without modification.
 
 \subsection*{Operational consequence}
 
-The angular sparsity theorem is what makes GeoVac's qubit-encoded
-Hamiltonians competitive for VQE/NISQ resource estimation.
+The angular sparsity theorem, together with the composed block
+decomposition, is what makes GeoVac's qubit-encoded Hamiltonians
+competitive for VQE/NISQ resource estimation.
 \textbf{[MEASURED]} The
 quantum-computing applications papers (Group~4) report Pauli-term
 counts exactly linear in the qubit count for the composed-geometry
@@ -946,9 +954,11 @@ not the Hamiltonian: the spectrum comes from the diagonal Euler
 operator $\hbar \omega(\hat{N} + 3/2)$, and the graph adjacency
 encodes dipole transitions only.
 
-\item \textbf{Calibration $\pi$.}  \textbf{[PANEL-VERIFIED]} The Coulomb $S^3$ projection
-introduces calibration $\pi$ as the $k = 0$ volume-slot measure
-of the master Mellin engine (see Section~\ref{sec:exchange}); the HO Bargmann projection is
+\item \textbf{Calibration $\pi$.}  The Coulomb $S^3$ projection
+introduces calibration $\pi$, read (a reading, with a
+\textbf{[CONDITIONAL]} engine) as the $k = 0$ volume-slot measure
+of the master Mellin engine (see Section~\ref{sec:exchange});
+\textbf{[PANEL-VERIFIED]} the HO Bargmann projection is
 bit-exactly $\pi$-free at every finite $N_{\max}$.  This is one of
 the clearest concrete instances of an exchange constant being tied
 to a specific natural geometry.
@@ -1085,7 +1095,7 @@ $1/\Omega^4(0) = 1/16$, with which the matched kinetic scale
 $\kappa = -1/16$ coincides (an Observation, not a derivation;\ $\kappa$
 only matches the graph's band edge);\ $\pi$ entering through the
 $k = 0$ volume slot of the master Mellin engine,
-$\text{Vol}(S^2)/4 = \pi$.  This is the source of calibration
+$\text{Vol}(S^2)/4 = \pi$.  This is a source of calibration
 $\pi$ in the Coulomb sector.
 
 \item \textbf{Embedding.}  Single transcendental seeds introduced by
@@ -1370,26 +1380,28 @@ chordal-distance identity (Paper~7), not through the spectral action.
 \subsection{Periods (Paper~55)}
 The master Mellin engine of Paper~18 indexes the framework's
 $\pi$-content by operator order $k \in \{0, 1, 2\}$ in
-$\mathcal{M}[\mathrm{Tr}(D^k e^{-t D^2})]$.  Paper~55 completes this
-engine into a period-theoretic statement.  \textbf{[INTERNAL THEOREM]}
-The Mellin-slot ring inclusions below are theorems;\ the scope statement
-that they exhaust GeoVac's spectral data is a census
-(\textbf{[OBSERVATION]}) of the transcendentals that have appeared in
-GeoVac \emph{spectral} observables---it does not cover the non-spectral
-chemistry integrals, e.g.\ the embedding seed $e^a E_1(a)$ or the
-genus-one three-centre period of Paper~59 below.  That census comprises
+$\mathcal{M}[\mathrm{Tr}(D^k e^{-t D^2})]$.  Paper~55 extends this
+engine into a period-theoretic census.  \textbf{[INTERNAL THEOREM]}
+The ring memberships of the census values below are theorems;\ their
+indexing by Mellin slot is a reading, and the underlying case-exhaustion
+is \textbf{[CONDITIONAL]};\ the scope is a census
+(\textbf{[OBSERVATION]}) of $S^3$ spectral-zeta and heat-trace
+data---it does not cover the chemistry integrals (e.g.\ the embedding
+seed $e^a E_1(a)$), spectral determinants such as
+$\pi\,e^{\zeta(3)/(2\pi^2)}$, or the genus-one three-centre period of
+Paper~61.  That census comprises
 integer powers of $\pi$,
 odd zeta values $\zeta(2k{+}1)$, Catalan $G = \beta(2)$ and
 Dirichlet-$\beta$ values, and a depth-$k$ loop tower, all of which sit in
 cyclotomic mixed-Tate periods at level $\le 4$ over $\mathbb{Z}[i, 1/2]$,
-stratified by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
+read by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
 (pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$ at integer $s$
 (pure-Tate even-weight, depth~0, a strict refinement of the
 Fathizadeh--Marcolli classification~\cite{fathizadeh_marcolli2016}
 specialized to the static $S^3$ sub-case), and $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
 $\le 4$ (cyclotomic mixed-Tate, via Hurwitz zeta at quarter-integer
 shifts and the Deligne--Glanois descent~\cite{glanois2015}; the vertex-parity-as-$\chi_{-4}$
-correspondence of Paper~28~\cite{loutey_paper28}).  This is the period-theoretic completion of
+correspondence of Paper~28~\cite{loutey_paper28}).  This is the period-theoretic extension of
 the $\mathcal{A}/D$ partition:\ the Coulomb- ($D$-)sector spectral
 transcendentals are pinned to named cyclotomic mixed-Tate rings rather than chased
 indefinitely.  (Discipline check folded in here:\ the constant
@@ -1519,10 +1531,10 @@ distinct families:\ a multi-focal composition family (the framework can
 build it but cannot autonomously pick a number) and an inner-factor
 input-data family (sharing no generator with the outer-factor rings,
 an Observation-level reading).  This is the foundational reconvergence:\ the
-period classification's theorem-grade ring inclusions (Paper~55) and
+period census's theorem-grade ring memberships (Paper~55) and
 the finite-cutoff Tannakian comparison homomorphism (Paper~56) bound
-the empirical forced/free observation (the exhaustiveness of the
-classification is a census, \textbf{[OBSERVATION]})---with the $\mathcal{A}/D$ partition (Paper~31) supplying the
+the empirical forced/free observation (the census's scope is an
+\textbf{[OBSERVATION]})---with the $\mathcal{A}/D$ partition (Paper~31) supplying the
 spectral-triple language rather than a further theorem---
 though Paper~57 holds the forcing-iff-property principle itself open as
 a preliminary observation (it is an observations paper, not a theorem
@@ -1919,7 +1931,7 @@ J.~Loutey,
 GeoVac Paper~54 (2026).
 \bibitem{loutey_paper55}
 J.~Loutey,
-``Periods of GeoVac:\ a cyclotomic mixed-Tate classification of the master Mellin engine,''
+``Periods of GeoVac:\ a cyclotomic mixed-Tate census of the master Mellin engine,''
 GeoVac Paper~55 (2026).
 \bibitem{loutey_paper56}
 J.~Loutey,

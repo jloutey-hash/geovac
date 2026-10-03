@@ -1,5 +1,7 @@
 # Track CB: Coupled Composition Scoping — Investigation Report
 
+> **[Historical document, dated; superseded figures.]** Its resource counts and accuracy figures predate the 2026-08-29 exact ERI rule and later solver evolution (e.g. composed H2O R_eq is now 19.4%, Paper 17; the composed R_eq range is 5.3-19.4%). Current values: Papers 14/17/20, `docs/claims_register.md`, `debug/qa/numeric_registry.py`.
+
 **Date:** April 3, 2026
 **Version:** v2.0.37
 **Status:** NEGATIVE RESULT

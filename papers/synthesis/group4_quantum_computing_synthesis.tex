@@ -82,7 +82,7 @@ with the correction:\ the re-pricing is not a constant factor, it grows
 along the basis axis.
 \emph{Second}, every comparison is made at \emph{matched qubit count},
 not matched accuracy:\ the composed basis carries classical
-equilibrium-geometry errors of $5$--$26\%$, so the framework is
+equilibrium-geometry errors of $5.3$--$19.4\%$, so the framework is
 positioned for fixed-geometry NISQ/VQE simulation (Pauli count, QWC
 measurement groups), not for fault-tolerant geometry optimisation.  The
 nuclear extension is honest in the same way:\ its binding energies are
@@ -113,7 +113,7 @@ the four papers that develop and benchmark that observation.
 The reader should hold two framings in mind throughout.  First, the
 advantage is in \emph{resource scaling and term counts}, measured at
 \emph{matched qubit count}, not in energy accuracy:\ at $n_{\max}=2$ the
-composed basis carries $5$--$26\%$ classical equilibrium-geometry errors
+composed basis carries $5.3$--$19.4\%$ classical equilibrium-geometry errors
 (LiH/BeH$_2$/H$_2$O), so the natural use is single-point simulation at a
 fixed nuclear geometry, where the sparsity is free and the geometry
 error does not enter.  Second, the framework targets the NISQ/VQE
@@ -223,7 +223,7 @@ specific electronic-structure values $Q^{4.25}$ (LiH) and $Q^{3.92}$
 the published Gaussian Pauli counts of Trenev et al.~\cite{trenev2025}
 (Table~5, Appendix~B; Jordan--Wigner with 2-qubit reduction).
 For composed multi-center molecules the pseudopotential-partitioned
-architecture produces block-diagonal ERIs and a \emph{universal} within-molecule exponent of $3.17$ (identical to all
+architecture produces block-diagonal ERIs and a \emph{universal} within-molecule exponent of $3.17$ (a small-basis fit, the local slope rising with $n_{\max}$;\ identical to all
 reported digits --- corrected 2026-08-29 from the retired $O(Q^{2.5})$,
 whose apparent $0.02$ spread was an artifact of the sign error), across the
 benchmarked molecules---independent of molecular topology.  Across the
@@ -467,7 +467,7 @@ was found to be a sign error; the re-pricing is basis-dependent, not a
 constant factor, and it leaves composed LiH at near parity with raw
 STO-3G ($838$ vs.\ $\gvq{lih_sto3g_raw}{907}$) and $3.0\times$ larger than the qubit-reduced
 count.  All Pauli comparisons are at matched qubit count, not
-matched accuracy:\ the composed basis carries $5$--$26\%$ classical
+matched accuracy:\ the composed basis carries $5.3$--$19.4\%$ classical
 $R_{\mathrm{eq}}$ errors, the chemistry-accuracy scope is row-conditional
 (first-row binds; second-row overattracts), and the nuclear binding
 energies are encoding-validation benchmarks far from experiment.
@@ -499,8 +499,10 @@ encodings relevant to qubitization as well, but the framework is not
 positioned as a fault-tolerant-QPE or geometry-optimisation tool, and it
 is not a replacement for production quantum chemistry.  It is a
 structurally sparse, zero-parameter, ecosystem-exported library of qubit
-Hamiltonians with a proven state-space Gromov--Hausdorff truncation rate
-(a metric-space rate, not an energy-error bound)---a research
+Hamiltonians, built on a framework whose $S^{3}$ spectral triple carries a
+proven state-space Gromov--Hausdorff truncation rate (Paper~38;\ a
+property of that triple, not of the molecular Hamiltonians, and not an
+energy-error bound)---a research
 instrument for the resource-estimation and algorithm-development side of
 quantum simulation.
 

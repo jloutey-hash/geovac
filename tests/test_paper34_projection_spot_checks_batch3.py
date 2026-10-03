@@ -291,7 +291,7 @@ def test_paper34_III15_stefan_boltzmann_pi_squared_over_90():
     Matsubara sum.
 
     Test: verify the standard identity zeta_R(4) = pi^4 / 90 symbolically,
-    establishing the M1 x M2 (Hopf-base measure x even-zeta) coupling
+    establishing the M1 x M2 (unit-sphere volume slot x even-zeta) coupling
     that produces the Stefan-Boltzmann prefactor.
     """
     z4 = sp.zeta(4)

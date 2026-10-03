@@ -76,7 +76,7 @@ import pytest
 import sympy as sp
 
 # ----------------------------------------------------------------------------
-# §III.2  Hopf bundle: Vol(S^2)/4 = pi  (M1 Hopf-base measure)
+# §III.2  Hopf bundle: Vol(S^2)/4 = pi  (M1 unit-sphere volume slot)
 # ----------------------------------------------------------------------------
 
 def test_paper34_III2_hopf_measure_factor():
@@ -377,7 +377,7 @@ def test_paper34_III27_wick_sigma_2pi_identity_BW():
     # Cross-check Paper 34 §III.27 claim: BW canonical has beta = 2 pi
     # (Vol(S^1) = 2 pi master Mellin engine M1 signature).
     assert abs(bw.beta - 2.0 * np.pi) < 1e-14, (
-        f"BW canonical beta = {bw.beta} != 2 pi (M1 Hopf-base measure)"
+        f"BW canonical beta = {bw.beta} != 2 pi (M1 unit-sphere volume slot)"
     )
 
     results = bw.verify_witness()

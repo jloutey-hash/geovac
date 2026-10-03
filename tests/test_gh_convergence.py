@@ -563,6 +563,10 @@ class TestTheoremStatement:
         # convergence is in van Suijlekom STATE-SPACE GH, NOT the Latremoliere
         # propinquity (the open residual) -- guard against the zombie returning
         assert "Latremoliere" not in s and "propinquity" not in s
+        # the C_3 * gamma display is the WITHDRAWN L5 form: the string must open with the
+        # withdrawal marker, or the keys above would certify a refuted lemma as live
+        # (DELTA #25 code review: reverting the marker left every test green)
+        assert s.startswith("[WITHDRAWN"), s[:60]
 
     def test_statement_carries_the_unconditional_rate_not_the_retired_caveat(self):
         s = gh_theorem_statement()

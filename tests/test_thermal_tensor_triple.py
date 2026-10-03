@@ -318,11 +318,12 @@ class TestTranscendentalAudit:
                         or row["mechanism"].startswith("(none"))
             else:
                 # Pi-bearing results must reference a continuous integration
-                # source (Matsubara, Hopf measure, Seeley-DeWitt, theta
-                # inversion).
+                # source (Matsubara, unit-sphere volume slot -- the retired
+                # "Hopf-base measure" label, renamed 2026-10-02 -- Seeley-DeWitt,
+                # theta inversion).
                 src_keywords = ("matsubara", "hopf", "seeley-dewitt",
                                 "theta", "circle", "measure", "mellin",
-                                "jacobi", "boundary condition")
+                                "jacobi", "boundary condition", "volume")
                 tag_lower = row["tag"].lower() + row["factor"].lower()
                 assert any(kw in tag_lower for kw in src_keywords), \
                     f"pi-bearing row not tagged with continuous source: {row}"

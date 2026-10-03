@@ -57,8 +57,10 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
    against* (STO-3G / cc-pVDZ / cc-pVTZ / the published `trenev2025` exponents) and states
    whether the comparison is at **matched qubit count** or **matched accuracy** — never
    conflated. The standing caveat "*these are matched-qubit, not matched-accuracy*
-   comparisons; the composed basis carries 5–26% classical $R_{\rm eq}$ errors" must accompany
-   every composed Pauli-advantage headline. A favorable multiplier stated without the
+   comparisons; the composed basis carries 5.3–19.4% classical $R_{\rm eq}$ errors" must accompany
+   every composed Pauli-advantage headline (the quoted range updated 2026-10-02, PI-directed:
+   the earlier upper end, 26%, was H₂O's superseded value; the criterion itself is unchanged).
+   A favorable multiplier stated without the
    matched-axis caveat, or measured only against the weakest baseline, is MATERIAL.
 
 2. **Everything is rule-sensitive (the CF-1 partition, INVERTED 2026-08-30).**

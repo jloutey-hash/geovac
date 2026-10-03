@@ -73,16 +73,25 @@ NOT_AUTHORS = MONTHS | {
     "Diagnosed", "Corrected", "Sourced", "Resolved", "Flagged", "Scoped",
     "Promoted", "Demoted", "Reviewed", "Certified", "Applied", "Fixed",
     "Clarified", "Until",
+    # tier tags and sentence-initial words that precede a date (DELTA #25: these
+    # had been absorbed into the baseline as phantom attributions)
+    "MEASURED", "The", "Superseded",
 }
+
+# natbib form \bibitem[label]{key} as well as \bibitem{key}.  The bare form only
+# made Papers 42/44/45 and the group1 synthesis bibliography-blind: every inline
+# attribution there read as unresolved (DELTA #25 code review).
+BIBITEM = re.compile(r"\\bibitem(?:\[[^\]]*\])?\{([^}]*)\}")
 
 
 def bibitem_index(text: str):
     """Return (keys, bodies) for every \\bibitem in the file."""
     keys, bodies = [], []
-    for m in re.finditer(r"\\bibitem\{([^}]*)\}", text):
+    ms = list(BIBITEM.finditer(text))
+    for j, m in enumerate(ms):
         keys.append(m.group(1))
-        nxt = text.find("\\bibitem{", m.end())
-        bodies.append(text[m.end(): nxt if nxt > 0 else len(text)])
+        end = ms[j + 1].start() if j + 1 < len(ms) else len(text)
+        bodies.append(text[m.end():end])
     return keys, bodies
 
 
@@ -161,16 +170,17 @@ def _gate_substr(argv):
 def selftest() -> int:
     doc = (r"Per Smith~1999 and Jones--Brown~2004 the value is 3." "\n"
            r"\textbf{[CORRECTED 2026-09-25.]} Earlier versions." "\n"
-           r"Smith~1999 again, and Smith~1999 once more." "\n"
+           r"Smith~1999 again, and Smith~1999 once more; also Doe~2010." "\n"
            r"\begin{thebibliography}{9}" "\n"
            r"\bibitem{smith1999} A. Smith, Phys. Rev. A 1, 1 (1999)." "\n"
+           r"\bibitem[Doe(2010)]{doe2010} J. Doe, J. Funct. Anal. 2 (2010)." "\n"
            r"\end{thebibliography}")
     tmp = ROOT / "debug" / "qa" / "_c20_selftest.tex"
     tmp.write_text(doc, encoding="utf-8")
     try:
         u = scan(tmp)
         ok = (("Jones--Brown~2004" in u) and ("Smith~1999" not in u)
-              and ("CORRECTED~2026" not in u))
+              and ("CORRECTED~2026" not in u) and ("Doe~2010" not in u))
         print("selftest:", "PASS" if ok else "FAIL", "->", sorted(u))
         return 0 if ok else 1
     finally:
@@ -182,6 +192,11 @@ def main() -> int:
         return selftest()
     gate = _gate_substr(sys.argv)
     update = "--update-baseline" in sys.argv
+    # --update-baseline records a NEW paper's tags, but refuses to add tags to a
+    # paper that already has a baseline entry unless --accept-new is also given,
+    # and always prints what it adds: a silent re-baseline launders new debt.
+    accept_new = "--accept-new" in sys.argv
+    additions = []
     base = json.loads(BASELINE.read_text(encoding="utf-8")) if BASELINE.exists() else {}
 
     files = sorted(p for p in PAPERS.rglob("*.tex") if "archive" not in p.parts)
@@ -203,6 +218,10 @@ def main() -> int:
         prev = base.get(rel)
         prev_set = set(prev) if isinstance(prev, list) else None
         new_base[rel] = tags
+        if update and tags:
+            fresh = sorted(set(tags) - (prev_set or set()))
+            if fresh:
+                additions.append((rel, fresh, prev_set is not None))
         flag, added = "", []
         if prev_set is None and tags and not update:
             # An UNBASELINED paper was previously ungated: its attributions
@@ -227,6 +246,12 @@ def main() -> int:
                 print(f"      ... and {len(tags) - 6} more")
 
     if update:
+        for rel, fresh, was_based in additions:
+            print(f"  baseline {'ADD to existing' if was_based else 'NEW paper'}: {rel}: {fresh}")
+        blocked = [a for a in additions if a[2]] if not accept_new else []
+        if blocked:
+            print("\nREFUSED: new tags in already-baselined papers; cite them or pass --accept-new")
+            return 1
         BASELINE.write_text(json.dumps(new_base, indent=2), encoding="utf-8")
         print(f"\nbaseline written -> {BASELINE.relative_to(ROOT)}")
         return 0

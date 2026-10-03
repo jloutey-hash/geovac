@@ -10,7 +10,7 @@
 %
 % Math.OA / J. Geom. Phys. style; seventh math.OA standalone in the
 % GeoVac series. Siblings: Paper 38 (SU(2) Riemannian propinquity),
-% Paper 39 (tensor-product propinquity), Paper 40 (universal 4/pi
+% Paper 39 (tensor-product state-space GH), Paper 40 (universal 4/pi
 % rate constant on compact Lie groups), Paper 42 (Tomita-Takesaki
 % modular structure; finite 2pi period automatic for the posited
 % generator, no finite-cutoff four-witness identification, 2026-09-28),
@@ -207,8 +207,9 @@ Geometric Vacuum (GeoVac) framework~\cite{paper32} --- and proves
 that the leg's most natural device fails structurally --- following the math.OA quartet Papers
 38--40~\cite{paper38,paper39,paper40_unified} (Riemannian state-space
 Gromov--Hausdorff convergence on $\SU(2)$, on tensor products of $\SU(2)$ triples at
-distinct focal lengths, and on general compact Lie groups with
-bi-invariant metric) and the Lorentzian extensions
+distinct focal lengths, and on compact connected semisimple Lie groups
+with bi-invariant metric, for general $G$ conditionally on the per-group
+spin-window decomposition) and the Lorentzian extensions
 Papers~42 and~44~\cite{paper42,paper44} (Tomita--Takesaki modular
 structure on Riemannian truncations, with its extension to the
 Lorentzian Krein wedge in Paper~42~\S~11;\ operator-system
@@ -266,7 +267,7 @@ correctly, this identity is the \emph{diagnosis} that the temporal
 factor is metrically invisible to the seminorm, not a simplification.
 \item[(L4)] A joint Berezin map $\Bjoint_{\nmax,\Nt,T}$ (convolution
 form) with positivity, contractivity, approximate identity (rate
-$\gammajoint = O(\log\nmax/\nmax + T/\Nt)$), and spatial L3
+$\gammajoint = O(\log\nmax/\nmax + T\log\Nt/\Nt)$), and spatial L3
 compatibility;\ its temporal image is the Toeplitz compression
 algebra, not the momentum-diagonal subalgebra of $\Op^{L}$
 (Remark~\ref{rem:berezin_inequivalence}).
@@ -366,8 +367,9 @@ groups by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023}.
 The adjacent program~\cite{leimbach_vs2024,hekkelman2021,hekkelman_mcdonald2024b,toyota2023}
 covers $\mathbb{T}^{d}$, truncated circle geometry, noncommutative
 integrals on truncations, and groups with polynomial growth, with the
-$4/\pi$ rate asymptote on compact Lie groups computed in
-Paper~40~\cite{paper40_unified} (also adapted to $\SU(2)$ in
+$4/\pi$ rate asymptote on compact connected semisimple Lie groups
+reported in Paper~40~\cite{paper40_unified} (rigorous at rank~1,
+fit-sensitive at rank~$\ge 2$;\ also adapted to $\SU(2)$ in
 Paper~38~\cite{paper38};\ both with the mass-distribution/multiplier-symbol
 distinction of Lemma~\ref{lem:L2}). All of these are strictly Riemannian.
 
@@ -452,7 +454,7 @@ Bisognano--Wichmann~\cite{bisognano_wichmann1976} modular period at
 unit surface gravity, the period of the posited modular generator of
 Paper~42~\cite{paper42} (including its Krein-carrier \S~11). The proof of the main theorem
 holds for any $T > 0$;\ explicit dependence on $T$ enters the
-$\Uone$ factor of the joint mass-concentration moment as $O(T/\Nt)$.
+$\Uone$ factor of the joint mass-concentration moment as $O(T\log\Nt/\Nt)$.
 
 \subsection{Krein space and fundamental symmetry}\label{sec:krein_space}
 
@@ -682,8 +684,10 @@ the $L^{1}$-additive and $L^{2}$-Pythagorean joint gradient norms are
         |\nabla_{x} f(x, t)|^{2} + |\partial_{t} f(x, t)|^{2}}.
    \label{eq:joint_L2}
 \end{align}
-For general $f$, both extend by linearity over the Peter--Weyl
-$\times$ Fourier expansion and obey the standard triangle inequalities.
+For general $f$ the $L^{1}$ form is taken as
+$\norm{\nabla_{x} f}_{\infty} + \norm{\partial_{t} f}_{\infty}$ (a sum of
+suprema), which agrees with \eqref{eq:joint_L1} on pure tensors;\ it
+dominates the pointwise $\sup_{(x,t)}(|\nabla_x f| + |\partial_t f|)$.
 The $L^{2}$ form is dominated by the $L^{1}$ form via
 $\sqrt{a^{2} + b^{2}} \le a + b$ for $a, b \ge 0$;\ both forms
 upper-bound the same Lipschitz seminorm with the same constant in the
@@ -850,12 +854,15 @@ cancellation theorem from Paper~40~\S~3.2~\cite{paper40_unified}) gives
 the asymptotic rate constant
 \begin{equation*}
    \lim_{\nmax \to \infty} \frac{\nmax \cdot \gammaSU_{\nmax}}{\log \nmax}
-   \;=\; \frac{4}{\pi}.
+   \;=\; \frac{4}{\pi}
 \end{equation*}
-This is the universal compact-Lie-group rate constant on the bi-invariant
-metric and is independent of rank, Weyl-group order, and Lie type
-within the class. The $\Uone$ factor inherits a separate
-Fej\'er-on-the-circle rate.
+in the dual-Coxeter normalisation of the $\SU(2)$ metric ($2/\pi$ on the
+round unit $\sthree$ of \S\ref{sec:manifold};\ Paper~38, tier
+[INTERNAL THEOREM + MEASURED]). Paper~40 reports this constant as universal across compact connected
+\emph{semisimple} Lie groups with bi-invariant metric (rigorous at
+rank~1;\ numerically supported, with a fit-sensitive extraction, at
+rank~$\ge 2$). The $\Uone$ factor, which lies outside that class, has a
+separate Fej\'er-on-the-circle rate.
 \end{remark}
 
 % ----------------------------------------------------------
@@ -914,7 +921,7 @@ tightest, generator. The L3 comparison constant is $C_{3} = 1$
 (\S~\ref{sec:withdrawn_assembly}, which produces no distance) and the
 surviving spatial / product-carrier convergence carries no $C_{3}$ factor,
 no result changes. Numerical-panel values in \S\ref{sec:panel} are
-unaffected (they quote $\gammajoint$ directly).
+unaffected (they tabulate the spatial rate $\gammaSU$ directly).
 \end{remark}
 
 \begin{proof}
@@ -1058,9 +1065,12 @@ positive;\ $\cbnorm{\Bjoint} = 1$ and $\opnorm{\Bjoint(f)} \le
 \begin{equation}\label{eq:L4_approx_id}
    \opnorm{\Bjoint(f) - \Pjoint\,M_{f}\,\Pjoint}
    \;\le\; \gammajoint_{\nmax,\Nt,T} \cdot
-            \norm{\nabla^{\mathrm{joint}} f}_{\infty},
+            \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty},
 \end{equation}
-with $\gammajoint = O(\log\nmax/\nmax + T/\Nt) \to 0$ as
+with the sum-of-suprema $L^{1}$ norm of \S\ref{sec:gradient_norms} (against
+the $L^{2}$ or pointwise norms only the additive rate
+$\gammaSU + \gammaU$ holds),
+with $\gammajoint = O(\log\nmax/\nmax + T\log\Nt/\Nt) \to 0$ as
 $(\nmax, \Nt) \to (\infty, \infty)$.
 \item[(d)] \emph{Spatial L3 compatibility.} For every spatially-pure
 $f = f_{s} \otimes \mathbf{1}$,
@@ -1117,17 +1127,27 @@ O(\log\nmax / \nmax)$ (Paper~38~\S~L2 quantitative rate, $4/\pi$
 asymptote). By the standard Fej\'er-on-the-circle approximation rate
 (Katznelson~\cite{katznelson2004}\,Ch.~I), $\norm{\KU \ast f_{t} -
 f_{t}}_{\infty} \le \gammaU_{\Nt, T} \cdot \norm{\partial_{t}
-f_{t}}_{\infty}$ with $\gammaU = O(T/\Nt)$. Combining with the
-$L^{1}$-additive triangle decomposition and $\norm{\KU \ast f_{t}}_{\infty}
-\le \norm{f_{t}}_{\infty}$ (Young) gives
+f_{t}}_{\infty}$ with $\gammaU = O(T\log\Nt/\Nt)$ (the first moment
+of the circle Fej\'er kernel). For general $f$, moving
+first along the spatial and then along the temporal leg,
+$|f(u^{-1}x) - f(x)| \le d_{\SU}(u_s)\norm{\nabla_x f}_\infty +
+d_{\Uone}(u_t)\norm{\partial_t f}_\infty$;\ integrating against $\Kjoint$
+gives
 \begin{equation*}
    \norm{\Kjoint \ast f - f}_{\infty}
+   \;\le\; \gammaSU_{\nmax}\norm{\nabla_x f}_\infty
+          + \gammaU_{\Nt, T}\norm{\partial_t f}_\infty
    \;\le\; \max(\gammaSU_{\nmax}, \gammaU_{\Nt, T}) \cdot
-            \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty}.
+            \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty},
 \end{equation*}
-We define $\gammajoint := \max(\gammaSU, \gammaU)$. Compression-contraction
-on $L^{2}$ does not increase the operator norm, so (\ref{eq:L4_approx_id})
-follows. Linearity and the triangle inequality extend to general $f$.
+the last step against the sum-of-suprema norm of \S\ref{sec:gradient_norms}.
+We define $\gammajoint := \max(\gammaSU, \gammaU)$. (Against the pointwise
+norm $\sup(|\nabla_x f| + |\partial_t f|)$, or the $L^{2}$ form, only the
+additive form
+$(\gammaSU + \gammaU)$ holds;\ that is the rate Remark~\ref{rem:asymp_rate}
+and Proposition~\ref{prop:product_action_seminorm} use.)
+Compression-contraction on $L^{2}$ does not increase the operator norm, so
+(\ref{eq:L4_approx_id}) follows.
 
 \emph{(d) Spatial L3 compatibility.} For $f = f_{s} \otimes
 \mathbf{1}$, the temporal convolution of a constant is the constant
@@ -1342,11 +1362,11 @@ The assembly therefore produces no distance bound. The rate
 expression it would have produced,
 \begin{equation}\label{eq:main_bound}
    \Cthreejoint(\nmax, \Nt) \cdot \gammajoint_{\nmax, \Nt, T}
-   \;=\; O\!\Bigl(\tfrac{\log\nmax}{\nmax} + \tfrac{T}{\Nt}\Bigr)
+   \;=\; O\!\Bigl(\tfrac{\log\nmax}{\nmax} + \tfrac{T\log\Nt}{\Nt}\Bigr)
    \;\xrightarrow[(\nmax, \Nt)\to(\infty, \infty)]{}\; 0,
 \end{equation}
-is nonetheless a well-defined closed-form expression;\ its surviving
-meaning is the spatial convergence statement of
+is nonetheless a well-defined closed-form expression;\ its spatial leg
+$\gammaSU$ is the rate of the spatial convergence statement of
 Proposition~\ref{prop:spatial_conditional}, to which we now turn.
 
 \subsection{The spatial convergence statement}\label{sec:main_theorem}
@@ -1363,9 +1383,11 @@ $\Tcal^{L}_{\nmax,\Nt,T}$ converge to the spatial continuum reference
 at the Paper~38 rate
 \begin{equation}\label{eq:spatial_conditional}
    \mathrm{d}_{\mathrm{GH}}^{\,\mathrm{vS}}
-   \;\le\; \CthreeSU(\nmax) \cdot \gammaSU_{\nmax}
-   \;=\; O\!\Bigl(\tfrac{\log \nmax}{\nmax}\Bigr),
+   \;\le\; \gammaSU_{\nmax}
+   \;=\; O\!\Bigl(\tfrac{\log \nmax}{\nmax}\Bigr)
 \end{equation}
+(constant $1$, the lifted-state route;\ corrected 2026-10-02 from a display
+carrying a $C_{3}$ factor, which that route does not use),
 and the temporal factor is carried $\JL$-equivariantly
 (Lemma~\ref{lem:L4}(e)) but is metrically invisible:\ it contributes
 nothing to any Dirac-commutator seminorm on the momentum-diagonal
@@ -1392,12 +1414,12 @@ together with the structural identity (\ref{eq:L3_struct_id}).
 The joint rate factors at leading order:
 \begin{equation*}
    \gammajoint \;\le\; \gammaSU + \gammaU
-   \;=\; O\!\Bigl(\tfrac{\log\nmax}{\nmax}\Bigr) + O\!\Bigl(\tfrac{T}{\Nt}\Bigr),
+   \;=\; O\!\Bigl(\tfrac{\log\nmax}{\nmax}\Bigr) + O\!\Bigl(\tfrac{T\log\Nt}{\Nt}\Bigr),
 \end{equation*}
 with the SU(2) leading constant
-$\lim_{\nmax\to\infty} \nmax \gammaSU_{\nmax} / \log\nmax = 4/\pi$
-rigorous (Paper~38~\S~L2 Stein--Weiss closure + Paper~40~\S~3.2
-universal cancellation), and the $\Uone$ leading constant
+$\lim_{\nmax\to\infty} \nmax \gammaSU_{\nmax} / \log\nmax = 4/\pi$ in the
+dual-Coxeter normalisation ($2/\pi$ on the unit $\sthree$;\ Paper~38~\S~L2,
+tier [INTERNAL THEOREM + MEASURED]), and the $\Uone$ leading constant
 $\gammaU_{\Nt, T} \le C\, T \log\Nt / \Nt$ standard
 (Katznelson~\cite{katznelson2004}\,Ch.~I).
 \end{remark}
@@ -1552,10 +1574,10 @@ evaluates the panel
 \end{equation*}
 at $T = 2\pi$. The tabulated
 ``$\Lprop$ bound'' values are \emph{evaluations of the closed-form
-rate expressions} $\gammaSU(\nmax)$ and $\gammaU(\Nt, T)$ (the
-production module \texttt{geovac/lorentzian\_propinquity\_compact\_temporal.py}
-computes $\Cthreejoint \cdot \gammajoint$ from kernel-moment formulas;\
-no operator-level metric quantity is ever evaluated). The panel
+spatial rate} $\gammaSU(\nmax)$ (the production module
+\texttt{geovac/lorentzian\_propinquity\_compact\_temporal.py} computes
+$C_{3}\cdot\gammaSU$ with $C_{3} = 1$, and $\gammaU(\Nt, T)$ separately for
+its own column;\ no operator-level metric quantity is ever evaluated). The panel
 therefore verifies:\ (i) the algebraic reduction of the formulas at
 $\Nt = 1$ to Paper~38's formulas;\ (ii) monotone decrease of the rate
 expression in $\nmax$;\ (iii) ratio consistency
@@ -1596,11 +1618,13 @@ comparison constant; the earlier Avery-harmonic $(N-1)/\sqrt{N^{2}-1}$ form
 is withdrawn, Remark~\ref{rem:envelope_v2}). The column labeled ``mass max'' tabulates
 $2/(\nmax+1)$, which is the SU(2) Plancherel \emph{mass-distribution
 maximum}, not a cb-norm (the cb-norm of the smoothing map is $1$ at
-every cell;\ Lemma~\ref{lem:L2}). The ``$\Lprop$ bound'' column is the
-closed-form expression $\Cthreejoint\cdot\gammajoint$, whose surviving
-meaning is the spatial rate of
-Proposition~\ref{prop:spatial_conditional};\ it is not an evaluated
-metric. The $\Nt = 1$ residuals record the algebraic reduction of the
+every cell;\ Lemma~\ref{lem:L2}). The ``$\Lprop$ bound'' column
+tabulates the spatial rate $\gammaSU$ of
+Proposition~\ref{prop:spatial_conditional} --- not
+$\Cthreejoint\cdot\gammajoint$, which at $\Nt = 1$ would include
+$\gammaU = \pi/2$ (e.g.\ $\max(1.3223, \pi/2)$ at $(4,1)$) --- and it is
+not an evaluated metric (corrected 2026-10-02:\ the caption previously
+named the joint expression). The $\Nt = 1$ residuals record the algebraic reduction of the
 formulas to Paper~38's formulas.}\label{tab:panel}
 \end{table}
 
@@ -1609,13 +1633,17 @@ formulas to Paper~38's formulas.}\label{tab:panel}
 
 \begin{proposition}[Riemannian-limit reduction of the rate formulas]
 \label{prop:riemannian_limit}
-At $\Nt = 1$, the construction and its rate expression reduce
+At $\Nt = 1$, the construction and its spatial rate expression reduce
 bit-exactly to Paper~38's:
 \begin{equation}\label{eq:riemannian_limit}
-   \Cthreejoint(\nmax, 1)\,\gammajoint_{\nmax, 1, T}
-   \;=\; \CthreeSU(\nmax)\,\gammaSU_{\nmax}
-   \qquad \text{(Frobenius residual $0.0$ in float64).}
+   \gammaSU_{\nmax}\big|_{\text{this construction},\ \Nt = 1}
+   \;=\; \gammaSU_{\nmax}\big|_{\text{Paper~38}}
+   \qquad \text{(Frobenius residual $0.0$ in float64),}
 \end{equation}
+the spatial leg of the joint rate (on spatially pure symbols
+$\partial_t f = 0$, so the temporal leg $\gammaU_{1,T} = \pi/2$ does not
+enter;\ corrected 2026-10-02 from a statement with the full
+$\gammajoint$, which is false at $\nmax = 4$).
 \emph{(Neither side is an evaluated metric — see
 \S~\ref{sec:panel}.)}
 \end{proposition}
@@ -2198,10 +2226,10 @@ separate falsifier in
 
 \medskip\noindent\textit{Convergence diagnostic.} The ratio
 $\Lprop(4, 7) / \Lprop(2, 3) = 1.3223 / 2.0746 = 0.6374$ matches the
-single-factor Paper~38 / Paper~39 ratio bit-identically, confirming
-that the SU(2) factor dominates the joint rate at the tested cutoffs.
-At larger cutoffs the $\Uone$ factor would re-enter at order
-$O(T/\Nt)$ if $\Nt$ does not grow as fast as $\nmax/\log\nmax$.
+single-factor Paper~38 / Paper~39 ratio bit-identically --- a formula
+identity, since the tabulated column is the spatial rate $\gammaSU$
+(caption of Table~\ref{tab:panel}).  In the joint rate the $\Uone$ factor
+enters at order $O(T\log\Nt/\Nt)$.
 
 \medskip\noindent\textit{Memory note.} The panel cell $(\nmax, \Nt) =
 (5, 9)$ was originally planned but exceeds the operator-system
@@ -2431,9 +2459,8 @@ DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~39]{paper39}
 J.~Loutey,
-\newblock \emph{Tensor-product propinquity convergence for
-distinct-focal-length truncated Camporesi--Higuchi spectral triples on
-$\sthree$},
+\newblock \emph{State-space Gromov--Hausdorff convergence of truncated
+tensor-product Camporesi--Higuchi spectral triples on $\sthree \times \sthree$},
 \newblock GeoVac internal preprint, papers/standalone (2026),
 DOI via Zenodo.
 

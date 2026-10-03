@@ -99,6 +99,40 @@ def test_su2_casimir_spectrum_l_l_plus_1():
         assert abs(L2[i, i] - l * (l + 1)) < 1e-9, (n, l, m, L2[i, i])
 
 
+def test_number_operator_exact_arithmetic():
+    """[SYMBOLIC PROOF] backing (Paper 1 sec II, upgraded 2026-10-02): in EXACT
+    arithmetic (sympy, the T+ weights as surds) N = -2[T+,T-] equals n on every
+    interior state and -(n-1-l)(n+l)/2 on the truncated top shell.  The floating
+    tests above only bound |N - n| < 1e-9; this one rejects any weight convention
+    whose commutator is not exactly n (e.g. w^2 = (n-l)(n+l)/4 gives n - 1/2)."""
+    import sympy as sp
+
+    max_n = 6
+    states = [(n, l, m) for n in range(1, max_n + 1) for l in range(n)
+              for m in range(-l, l + 1)]
+    idx = {s: i for i, s in enumerate(states)}
+    dim = len(states)
+    Tp = sp.zeros(dim, dim)
+    for (n, l, m) in states:
+        if (n + 1, l, m) in idx:
+            Tp[idx[(n + 1, l, m)], idx[(n, l, m)]] = sp.sqrt(sp.Rational((n - l) * (n + l + 1), 4))
+    Tm = Tp.T
+    N = (-2 * (Tp * Tm - Tm * Tp)).applyfunc(sp.nsimplify)
+    for i in range(dim):
+        for j in range(dim):
+            if i != j:
+                assert N[i, j] == 0, (states[i], states[j], N[i, j])
+    interior = 0
+    for (n, l, m) in states:
+        v = sp.nsimplify(N[idx[(n, l, m)], idx[(n, l, m)]])
+        if (n + 1, l, m) in idx:
+            assert v == n, (n, l, m, v)
+            interior += 1
+        else:  # top shell: truncated commutator
+            assert v == sp.Rational(-(n - 1 - l) * (n + l), 2), (n, l, m, v)
+    assert interior > 0
+
+
 def test_rydberg_levels_from_algebra():
     """The imposed energy-shell map E = -1/(2 N^2), applied to the algebra's
     number operator N, gives E_n = -1/(2 n^2) exactly on interior states;

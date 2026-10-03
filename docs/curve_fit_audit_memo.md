@@ -1,5 +1,7 @@
 # Curve-Fit / Pattern-Match Audit Memo
 
+> **[Historical document, dated; superseded wording.]** Current standing labels: the combination rule K = π(B + F − Δ) is an **Observation** (since 2026-06-14; never 'conjectural', 'derived' or a 'prediction'); K matches 1/α to 4.8×10⁻⁷ (its cubic's root to 8.8×10⁻⁸); that no single construction generates B, F and Δ is an empirical record (twelve mechanisms eliminated), not a proof. Authoritative: Paper 2, Paper 32 §VIII, `docs/claims_register.md`.
+
 **Date:** 2026-05-02
 **Purpose:** Identify all PSLQ-shaped or "small-integer combination found
 numerically" claims across the GeoVac papers, classify by epistemic

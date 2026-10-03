@@ -580,7 +580,7 @@ REGISTRY = [
                           "d-block; within-molecule exponent 3.17 universal "
                           "(c(1)=3/2, c(2)=279/10, c(3)=7089/14; local slope "
                           "~3.8 at n_max=4); LiH composed 838 @ Q30, 1-norm "
-                          "34.5 Ha; equal-qubit H2O 51x/297x/317x (identity-included on both sides: 1126/22; the 54x mixed the identity-free 21 -- corrected 2026-09-28); cc-pVDZ "
+                          "34.0 Ha incl. identity (vs STO-3G 34.3); equal-qubit H2O 51x/297x/317x (identity-included on both sides: 1126/22; the 54x mixed the identity-free 21 -- corrected 2026-09-28); cc-pVDZ "
                           "76x.  RETIRED and now WRONG as live values: "
                           "11.10 x Q, 9.23 d-block, O(Q^2.5) / Q^2.50-2.52 "
                           "exponents, 334/333 LiH, 51x-1712x, 190x cc-pVDZ, "
@@ -630,6 +630,15 @@ REGISTRY = [
             # outside this family's scope.
             "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
             "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+            # Added 2026-10-02 (/qa trunk DELTA #25 self-check): README -- the front
+            # page -- carried O(Q^2.5) / 11.10xQ / 51x-1,712x / 334 live at five loci
+            # because it was never in this family's scope.
+            "README.md",
+            # Added 2026-10-02 (DELTA #25 self-check #14): the outreach one-pager
+            # headlined 51x-1,712x in its title, and the field guide summarises
+            # the library -- neither was in scope.
+            "docs/geovac_onepager.md",
+            "papers/synthesis/geovac_field_guide.tex",
         ],
     },
     {

@@ -506,7 +506,9 @@ class TestTheoremStatement:
     def test_statement_returns_string(self):
         s = gh_tensor_theorem_statement()
         assert isinstance(s, str)
-        assert "Theorem" in s
+        # the (B,P) display is a RECORD of the abandoned conditional route; the
+        # theorem is Paper 39's lifted-state bound (DELTA #25 self-check #10)
+        assert "Lemma L5-T record" in s and "lifted-state" in s
         assert "tensor-product" in s.lower()
 
     def test_statement_mentions_key_pieces(self):
@@ -540,8 +542,7 @@ class TestTheoremStatement:
         assert float(m.group(1)) == pytest.approx(2.0), m.group(1)
         # cross-check against what the module actually computes
         b = compute_tensor_propinquity_bound(3, 4, gamma_prec=15)
-        Na, Nb = 4, 5
-        c3 = (((Na - 1) + (Nb - 1)) ** 2 / (Na ** 2 + Nb ** 2 - 2)) ** 0.5
+        c3 = 1.0  # C_3^{(2)} = 1 by compression (Paper 39 Lemma L3-T)
         gmax = max(b.gamma_a, b.gamma_b)
         assert b.propinquity_bound_theorem == pytest.approx(
             float(m.group(1)) * c3 * gmax, rel=1e-9)
@@ -625,9 +626,11 @@ class TestSlowConvergence:
 
 
 class TestTriangleC3Bound:
-    """C_3^{(2),full} <= sqrt(((N_a-1)+(N_b-1))^2 / (N_a^2+N_b^2-2)) -> sqrt(2).
+    """Record of the WITHDRAWN per-irrep formula (2026-10-02): these values
+    are NOT values of C_3^{(2)}, which is 1 by compression (Paper 39 Lemma
+    L3-T).  The tests pin the record function's arithmetic only.
 
-    Corrected 2026-06-18 (/qa group1 Bite B-3). The conservative
+    History, corrected 2026-06-18 (/qa group1 Bite B-3). The conservative
     C_3^{(2),full} <= 2 (legacy Leibniz estimate) tightens to the TIGHT
     operator-norm triangle bound on the two Connes-Marcolli Leibniz
     terms.  An earlier draft claimed a PYTHAGOREAN refinement
@@ -635,8 +638,7 @@ class TestTriangleC3Bound:
     anticommutation does not give operator-norm orthogonality -- verified
     maximally violated on the actual harmonics in
     test_paper39_triangle_tight.py).  The correct bound is the triangle
-    one: equals 1 at (2,2), exceeds 1 for larger cutoffs, and increases
-    to sqrt(2).  Convergence is unaffected (sqrt(2) is finite).
+    one (record function: 1 at (2,2), rising toward sqrt(2)).
     """
 
     def test_bound_at_22_equals_one(self):
@@ -983,9 +985,9 @@ class TestR1R2KeystoneTheoremStatus:
             -> 0  as cutoffs -> infinity,
         [the previous statement here, C_3 (max(γ) + ε_cross) <= C_3 (1+2√2) max(γ),
          is the withdrawn reach-plus-height assembly [retracted 2026-09-04: p39-tensor-assembly-constant]]
-    where C_3^{(2)} = sqrt(((N_a-1) + (N_b-1))^2 / (N_a^2 + N_b^2 - 2)) is the
-    triangle bound, <= sqrt(2) (NOT < 1), exceeding 1 beyond (2,2) and -> sqrt(2);
-    convergence survives because sqrt(2) is a finite constant and γ -> 0.
+    where C_3^{(2)} = 1 by compression on the Clifford-doubled module (Paper 39
+    Lemma L3-T, 2026-10-02); the per-irrep triangle formula once quoted here is
+    withdrawn, and the triangle route alone gives only sqrt(2).
     """
 
     def test_five_lemma_status_l3_done(self):
@@ -993,16 +995,20 @@ class TestR1R2KeystoneTheoremStatus:
         status = FiveLemmaStatusTensor()
         d = status.to_dict()
         assert "DONE" in d["L3_T"]
-        # the live full-op-system bound is the triangle C_3 >= 1 -> sqrt(2);
-        # the withdrawn Pythagorean refinement must be flagged WITHDRAWN, not live
-        assert "triangle bound" in d["L3_T"]
+        # the live full-op-system constant is C_3 = 1 by compression; the
+        # withdrawn Pythagorean refinement must be flagged WITHDRAWN, not live,
+        # and the withdrawn per-irrep triangle reading must not be the live one
+        assert "C_3 = 1 by compression" in d["L3_T"]
         assert "WITHDRAWN" in d["L3_T"]
+        assert "-> sqrt(2)" not in d["L3_T"]
 
     def test_five_lemma_status_l5_done(self):
-        """L5-T should report DONE after R2 closure of the height bookkeeping."""
+        """L5-T is the abandoned conditional (B,P) assembly: its status must say
+        so, and must not present a propinquity bound as done (DELTA #25)."""
         status = FiveLemmaStatusTensor()
         d = status.to_dict()
-        assert "DONE" in d["L5_T"]
+        assert "conditional" in d["L5_T"] and "RECORD" in d["L5_T"]
+        assert "propinquity bound" not in d["L5_T"]
         # Should reference the explicit constant 2*sqrt(2)
         assert "2*sqrt(2)" in d["L5_T"] or "epsilon_cross" in d["L5_T"]
 

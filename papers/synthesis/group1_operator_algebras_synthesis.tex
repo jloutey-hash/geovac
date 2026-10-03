@@ -78,8 +78,8 @@
 \newcommand{\Sone}{S^{1}}
 
 \title{The operator-algebra arc of the GeoVac framework:\\
-a reading guide for spectral triples, Latr\'emoli\`ere propinquity,
-and Lorentzian convergence}
+a reading guide for spectral triples, state-space Gromov--Hausdorff
+convergence, and the Lorentzian question}
 \author{J.~Loutey\thanks{Independent researcher.
 \texttt{jloutey@gmail.com}.
 This synthesis was prepared in an AI-augmented agentic workflow with
@@ -113,8 +113,9 @@ normalisation of the $\SU(2)$ metric --- $2/\pi$ on the unit $S^3$,
 the constant scaling with the metric, 2026-09-03).
 Third, the rate constant $4/\pi$ is universal across the class of
 compact connected semisimple Lie groups with bi-invariant metric --- rigorous at
-rank~1, numerically pinned at ranks~1--2 for general $G$ with the
-rank-uniform analytical proof a named gap --- via a Plancherel-weight
+rank~1, numerically supported (fit-sensitive extraction) at rank~2 for
+general $G$, with the rank-uniform analytical proof a named gap --- via a
+Plancherel-weight
 $\times$ Vandermonde-Jacobian cancellation in the dual-Coxeter
 normalisation (Paper~40).  Fourth, the natural route to a Lorentzian convergence theorem on
 truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples ---
@@ -125,16 +126,21 @@ identically.  An earlier convergence claim through this device,
 together with the strong-form and bridge extensions built on it
 (Papers~46, 48, 49), is withdrawn;\ the Lorentzian analog of the
 convergence question Connes and van Suijlekom \cite{connes_vs2021}
-deferred to ``elsewhere'' (and which Paper~38 closed on the
-Riemannian side) remains open, now with a sharpened specification.  Paper~47's
+deferred to ``elsewhere'' (answered on the Riemannian side for scalar compact groups by
+Gaudillot-Estrada and van~Suijlekom, and for the spinor triple's
+commutative factor by Paper~38) remains open, now with a sharpened specification.  Paper~47's
 de-compactification limit $T \to \infty$ survives at the
 norm-resolvent / spectral level.  A
 master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
 Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
 compact connected semisimple Lie groups $G_{1}, \ldots, G_{k}$, the
-k-fold tensor product converges (state-space GH) at the universal
-$4/\pi$ rate with Lipschitz comparison constant $C_3^{(k)} \le
-\sqrt{k}$ (only the $k\le2$ cases are proved).  The constant
+k-fold tensor product converges (state-space GH) at the $4/\pi$ rate
+reported universal in Paper~40 (proved only for $\SU(2)$ and
+$\SU(2)\times\SU(2)$, on the lifted-state route with leading
+constant~$1$;\ the general-$G$ $k = 1$ case is conditional on the
+per-group spin-window decomposition;\ the joint Lipschitz constant
+$C_3^{(k)} = 1$, by compression, belongs to the abandoned
+approximation-pair route).  The constant
 $4/\pi$ of the Riemannian rate (Paper~38) is read --- convention-dependently
 (dual-Coxeter normalisation) and as a reading, not a derivation --- as the
 $M_{1}$ ($k = 0$ volume-slot) signature of the master Mellin engine, whose
@@ -272,28 +278,32 @@ d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \end{equation}
 The asymptotic constant is the sphere-volume quotient
 $2\Vol(S^{2})/\Vol(\sthree)$ at unit radius (numerically $\Vol(S^{2})/\pi^{2}$)
---- the $k = 0$ volume factor of the master Mellin engine, not the Hopf
+--- read (a reading, not a derivation;\ Paper~38) as the $k = 0$ volume
+factor of the master Mellin engine, not the Hopf
 fibration's base-to-total ratio (Paper~38, volume-ratio note;\ the fibration is
 $S^{1} \to \sthree \to S^{2}$, corrected 2026-09-03) --- and is
 discussed in detail in \S\ref{sec:gh}--\S\ref{sec:mellin} below
 (Paper~38~\cite{paper38}, Theorems~3.4 and 4.1).
 
-\paragraph{Headline 3: the rate constant $4/\pi$ is universal across
-compact simple Lie groups.}
+\paragraph{Headline 3: the rate constant $4/\pi$ is reported universal
+across compact simple Lie groups.}
 For any simple compact Lie group $G$ with bi-invariant metric (so
 $G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
 E_{7}, E_{8}\}$), the Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation theorem (Paper~40~\S 3.2~\cite{paper40_unified}) leaves
 exactly the rank-1 ($\SU(2)$) constant $4/\pi$ of Paper~38 Appendix~A
 from each positive root direction's Euler--Catalan asymptote, in the
-dual-Coxeter normalisation.  The constant $C_{3} = 1$ remains asymptotically tight
-at all ranks via the PRV-summand bound of Kumar (1988) and Vinberg
-(1990), applied to the dominant image of the tensor product
-$V_{\lambda} \otimes V_{\lambda'}^{*}$.  \emph{Tier:}\ this universality
+dual-Coxeter normalisation.  The Lipschitz comparison constant
+$C_{3} = 1$ (which enters only the withdrawn approximation-pair route)
+holds at every rank by compression (Paper~40's PRV-summand analysis
+after Kumar (1988), applied to the dominant image of the tensor product
+$V_{\lambda} \otimes V_{\lambda'}^{*}$, concerns representation-theoretic
+inequalities, proved on special summands and panel-verified on the rest,
+not this bound).  \emph{Tier:}\ this universality
 is rigorous at rank~1 ($\SU(2)$) and, for general $G$, is a
 proof-sketch mechanism (the Plancherel$\times$Vandermonde cancellation)
-numerically pinned at ranks~1--2 ($\SU(2),\SU(3),\mathrm{Sp}(2),G_{2}$) with one
-rank-3 datapoint; a fully rank-uniform analytical proof is a named gap
+numerically supported, with a fit-sensitive extraction, at rank~2
+($\SU(3),\mathrm{Sp}(2),G_{2}$) with one rank-3 datapoint; a fully rank-uniform analytical proof is a named gap
 (Paper~40~\S L2), and the per-group rate-constant extractions are
 fit-sensitive.
 
@@ -311,7 +321,7 @@ Lorentzian propinquity target bound would be
 \label{eq:headline_4}
 \end{equation}
 with $\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
-= O(\log \nmax / \nmax + T/\Nt)$, where
+= O(\log \nmax / \nmax + T\log\Nt/\Nt)$, where
 $\Lprop(\cdot,\cdot) := \Lambda(\cdot|_{\Kplus},\cdot|_{\Kplus})$ is
 the propinquity of the standard metric spectral triple obtained from
 the Krein-positive subspace $\Kplus = \{|\psi\rangle : \JL|\psi\rangle
@@ -322,7 +332,9 @@ and the restricted Lipschitz seminorm vanishes identically
 convergence claim through this device (formerly Theorem~5.1 of
 Paper~45) is withdrawn.  The Lorentzian analog of the convergence
 question Connes and van~Suijlekom \cite{connes_vs2021} deferred to
-``elsewhere'' (closed on the Riemannian side by Paper~38) remains
+``elsewhere'' (answered on the Riemannian side for scalar compact groups by
+Gaudillot-Estrada and van~Suijlekom, and for the spinor triple's
+commutative factor by Paper~38) remains
 open, now with a sharpened specification.
 
 \paragraph{Position against the literature.}
@@ -332,17 +344,22 @@ operator systems with finite-cutoff Connes distance; of Marcolli and
 van~Suijlekom 2014 \cite{marcolli_vs2014}, which introduced
 gauge networks as a discrete-graph realisation of finite spectral
 triples carrying connection on edges; and of the subsequent
-Latr\'emoli\`ere--Hekkelman--McDonald--Toyota--Farsi--Leimbach school
-of quantitative propinquity convergence for spectral truncations
+Latr\'emoli\`ere--Farsi propinquity programme and the
+Hekkelman--Leimbach--Toyota work on Gromov--Hausdorff convergence of
+spectral truncations
+(Hekkelman--McDonald's noncommutative integral on
+truncations~\cite{hekkelman_mcdonald2024b} is a related,
+non-convergence result)
 \cite{latremoliere_metric_st_2017,
 hekkelman2022,
-hekkelman_mcdonald2024b,toyota2023,
+toyota2023,
 farsi_latremoliere2024,farsi_latremoliere2025,
 leimbach_vs2024}.  All these earlier convergence results
 are strictly Riemannian (and almost all are on flat structures
 $S^{1}$, $\T^{d}$, $S^{2}$ Berezin--Toeplitz).  The Paper~38
-$\SU(2)$ result and the Paper~40 generalisation are non-abelian
-non-flat instances at quantitative rate (unconditional as of
+$\SU(2)$ result and the Paper~40 generalisation (for general $G$
+conditional on the per-group spin-window decomposition) are non-abelian
+non-flat instances at quantitative rate (Paper~38 unconditional as of
 June~2026, via the translation-seminorm metrization;\ scalar-sector
 convergence for compact groups is due to Gaudillot-Estrada and
 van~Suijlekom, arXiv:2310.14733);\ on the Lorentzian side the
@@ -536,12 +553,11 @@ GUE-like statistics seen on the spectral-zeta side of the framework,
 making clear that the Weil dictionary between Selberg and Riemann
 breaks at GeoVac by design.
 
-The Ramanujan property of the truncated graphs underwrites our
-freedom to take naive sums and traces over $G_{\nmax}$ without
-worrying about pathological spectral gaps: the cutoff
-graphs are well-conditioned for spectral analysis, and the Ihara
-polynomials are entirely in $\Z[s]$.  This is exactly the kind of
-substrate one wants under any convergence theorem to follow.
+At the small cutoffs where it holds, the Ramanujan property of the
+truncated graphs lets one take naive sums and traces over $G_{\nmax}$
+without pathological spectral gaps, and the Ihara polynomials are entirely
+in $\Z[s]$.  It does not persist as $\nmax \to \infty$ (above), and
+Paper~38's convergence theorem does not use it.
 
 % =====================================================================
 \section{Riemannian Gromov--Hausdorff convergence: the central
@@ -559,28 +575,31 @@ Theorem~3.4.
 The Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ of the round
 $\SU(2)$ Camporesi--Higuchi spectral triple converge to
 $\Tcal_{\sthree}$ in the van~Suijlekom state-space
-Gromov--Hausdorff sense:
+Gromov--Hausdorff sense, for the commutative factor on the true
+Camporesi--Higuchi window (translation-seminorm metrization;\ the
+almost-commutative extension is \textbf{[OPEN]}):
 \begin{equation}
-\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
+d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \;\le\;
-C_{3} \cdot \gamma_{\nmax} \;\to\; 0
+\gamma_{\nmax} \;\to\; 0
 \quad (\nmax \to \infty),
 \label{eq:gh_su2}
 \end{equation}
-with $C_{3} = 1$ (asymptotic tight via the PRV summand bound) and
-asymptotic constant $4/\pi$:
+with constant~$1$ from the lifted-state route and \textbf{[INTERNAL
+THEOREM + MEASURED]} asymptotic constant $4/\pi$:
 \begin{equation}
 n \,\gamma_{n} \;\sim\; (4/\pi)\,\log n
 \qquad (n \to \infty).
 \label{eq:gh_rate_constant}
 \end{equation}
 \textbf{[MEASURED]} A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$
-holds on the checked range of $n \ge 2$ (not proved for all $n$).
+holds on the checked sample of $n \ge 2$ (not proved for all $n$).
 \end{theorem}
 
-The proof rests on four supporting lemmas L1$'$, L2, L3, L4 of
-Paper~38~\S 4--\S 6 together with the \emph{lifted-state} construction,
-and we sketch each below.  A fifth lemma (L5, the Latr\'emoli\`ere
+The proof is the \emph{lifted-state} construction, which uses the L2
+central Fej\'er kernel and the L4(c) good-kernel estimate on the true
+window;\ the lemmas L1$'$ (the chirality-doubled model substrate) and L3
+are sketched below as supporting infrastructure.  A fifth lemma (L5, the Latr\'emoli\`ere
 propinquity assembly) was part of the original architecture and was
 \textbf{withdrawn on 2026-09-03} when its height bound was refuted;\ it
 is retained in Paper~38 as a record and is \emph{not} part of the proof
@@ -691,21 +710,23 @@ $\Mat_{f}$ on $\Op_{\nmax}$, the Lipschitz comparison
 C_{3} \cdot \norm{\nabla f}_{L^{\infty}(\sthree)}
 \label{eq:lipschitz_bound}
 \end{equation}
-holds with $C_{3} = 1$ (Paper~38, Theorem~5.2).  The proof uses
-SO(4) selection rules: the off-diagonal element of $[\DCH, \Mat_{f}]$
-between Peter--Weyl shells $V_{\lambda}$ and $V_{\lambda'}$ is
-bounded by $\sqrt{C(\lambda)} - \sqrt{C(\lambda')}$ where
-$C(\lambda)$ is the quadratic Casimir of the highest weight; the
-Dirac-triangle inequality $|D(\pi) - D(\pi')| \le \sqrt{C(\sigma)}$
-on intertwining summands $\sigma \subset \pi \otimes \pi'^{*}$
-secures $C_{3} \le 1$, and the Avery harmonic gradient scaling
-forces $C_{3} = 1$ in the limit $\nmax \to \infty$.  At any finite
-$\nmax$, $C_{3} = (N-1)/\sqrt{N^{2}-1}$ for $N = \nmax$, which
-converges to $1$ from below.
+holds with $C_{3} = 1$ (Paper~38, Lemma~L3).  The proof is by
+compression:\ $P_{\nmax}$ contracts operator norms, so
+$\opnorm{[\DCH, \Mat_{f}]} \le \opnorm{[\DCH, M_{f}]} =
+\norm{\nabla f}_{L^{\infty}}$ by Connes' formula on a closed spin
+manifold, and $C_{3} = 1$ cannot be lowered uniformly because
+$P_{\nmax} \to 1$ strongly.  (An earlier version of this synthesis
+sketched a proof through $\SO(4)$ selection rules with a per-harmonic
+ratio $(N-1)/\sqrt{N^{2}-1}$ at finite $\nmax$;\ that inequality is
+false and the reading was withdrawn in Paper~38, 2026-09-28.)
 
-The same bound is proved for all simple compact Lie groups in
-Paper~40~\S 3.3~\cite{paper40_unified}, with asymptotic tightness
-$C_{3}(G) = 1$ at all ranks; see
+The same compression argument proves the bound with $C_{3}(G) = 1$ on
+every compact connected Lie group in Paper~40's class, at every rank
+(Paper~40 Lemma~L3~\cite{paper40_unified};\ its per-summand
+Dirac-triangle / PRV analysis concerns representation-theoretic
+inequalities, proved on special summands and verified on panels for the
+rest, whose bridge to the commutator norm is withdrawn, so it is not a
+check); see
 \S\ref{sec:universality} below.
 
 \subsection{Lemma L4: Berezin reconstruction}
@@ -713,12 +734,13 @@ $C_{3}(G) = 1$ at all ranks; see
 A Berezin map $B_{\nmax}: C(\sthree) \to \Op_{\nmax}$ is constructed
 in Paper~38~\S 5.3 as
 \begin{equation}
-B_{\nmax}(f) \;=\; \sum_{N \le \nmax,\,L,\,M}
-\widehat{K}(N)\, c_{NLM}\, M_{NLM},
-\quad
-\widehat{K}(N) = N / Z_{\nmax}.
+B_{\nmax}(f) \;=\; \sum_{N \le 2\nmax - 1,\,L,\,M}
+\sigma_{\nmax}(N)\, c_{NLM}\, \Mat_{NLM}
+\;=\; P_{\nmax}\, \Mat_{K_{\nmax} \ast f}\, P_{\nmax},
 \label{eq:berezin}
 \end{equation}
+with $\sigma_{\nmax}$ the multiplier symbol of L2 (a sum weighted by the
+mass distribution $N/Z_{\nmax}$ instead would not be unital, Paper~38).
 This is the $\SU(2)$ non-K\"ahler analog of the Connes--van~Suijlekom
 \cite{connes_vs2021} Fej\'er kernel reconstruction on $S^{1}$ and the
 non-holomorphic analog of Hawkins \cite{hawkins2000}.  Four properties
@@ -732,8 +754,9 @@ compression);
 M_{f} P_{\nmax}} \le \gamma_{\nmax} \norm{\nabla f}_{\infty}$ with
 $\gamma_{\nmax}$ as in L2;
 \item[(d)] L3 compatibility: $\opnorm{[\DCH, B_{\nmax}(f)]} \le
-\norm{\nabla f}_{\infty}$ (i.e.~$C_{3} = 1$ is inherited via
-$\widehat{K} \le 1$).
+\norm{\nabla f}_{\infty}$ ($C_{3} = 1$ is inherited, since $B_{\nmax}(f)$
+is the compression of the multiplier by $K_{\nmax} \ast f$ and convolution
+by a probability kernel does not increase $\norm{\nabla f}_{\infty}$).
 \end{itemize}
 This is the operator-system analog of the Berezin--Toeplitz
 quantisation; see Connes--van~Suijlekom \cite{connes_vs2021}
@@ -769,10 +792,12 @@ That lemma is \textbf{[REFUTED AS STATED]} and withdrawn:\ its height
 leg asserted $\mathrm{height}_{B} \le \gamma_{\nmax}$ and
 $\mathrm{height}_{P} = 0$, and a finite-band witness exhibits an
 $f$ with $B(f) = 0$ for which the height quantity is exactly~$1$.  Hence
-$\mathrm{height}_{B} \equiv 1$ at every cutoff and the bound fails for
-every $\nmax \ge 6$.  Paper~38 retains the lemma as a record of the
-abandoned route;\ the $C_3 = 1$ factor quoted in the theorem is
-inherited from it, but the bound itself is not.
+$\mathrm{height}_{B} \equiv 1$ at every cutoff and the bound fails (the
+earlier panel-height check already crossed over between $\nmax = 6$ and
+$7$;\ monotonicity of $\gamma_{\nmax}$ beyond the measured range is not
+proved).  Paper~38 retains the lemma as a record of the
+abandoned route;\ the theorem's bound has constant~$1$ from the
+lifted-state route, with no $C_3$ factor.
 
 \emph{Net effect:}\ one proof path fell and the keystone stands.  WH1 is
 unaffected, because the unconditional theorem never depended on the
@@ -782,17 +807,18 @@ tensor extension likewise runs on the lifted-state construction.
 
 \subsection{Numerical verification}
 
-Paper~38 records the explicit $\Lambda$ values at small cutoffs:
+Paper~38 records the explicit values of the bound $\gamma_{\nmax}$ at
+small cutoffs (values of the bound, not computed distances):
 \begin{equation}
-\Lambda(\Tcal_{2}, \Tcal_{\sthree}) \approx 2.0746,
+\gamma_{2} \approx 2.0746,
 \quad
-\Lambda(\Tcal_{3}, \Tcal_{\sthree}) \approx 1.6101,
+\gamma_{3} \approx 1.6101,
 \quad
-\Lambda(\Tcal_{4}, \Tcal_{\sthree}) \approx 1.3223,
+\gamma_{4} \approx 1.3223,
 \label{eq:numerical_lambda}
 \end{equation}
-with $\Lambda(4)/\Lambda(2) = 0.637$.  These are monotone decreasing
-and consistent with the $O(\log \nmax / \nmax)$ rate.
+with $\gamma_{4}/\gamma_{2} = 0.637$.  These are monotone decreasing
+on this range and consistent with the $O(\log \nmax / \nmax)$ rate.
 
 \subsection{Tensor extension (Paper~39)}
 \label{sec:tensor_extension}
@@ -805,9 +831,11 @@ $\lambda_{a} \ne \lambda_{b}$ \cite{paper39}.  The result is an
 (Paper~38's footing):\ convergence in van~Suijlekom state-space
 Gromov--Hausdorff distance with bound
 $\Lambda \le \gamma^{(ab)} \le \lambda_a\gamma_{n_a} +
-\lambda_b\gamma_{n_b}$, \emph{leading constant $1$}, closing the
-published-open NCG question of convergence for the tensor of two infinite
-metric spectral triples.
+\lambda_b\gamma_{n_b}$, \emph{leading constant $1$}, for the spinor
+(Camporesi--Higuchi) tensor triple with an explicit rate and the
+KO-dimension-6 real structure of its limit (the scalar state-space case
+of $\SU(2)\times\SU(2)$ is covered by Gaudillot-Estrada and
+van~Suijlekom;\ the cross-manifold case stays open, Paper~32).
 
 The proof is the \emph{lifted-state} construction:\ Paper~38's
 \texttt{thm:main\_unconditional} facts (i)--(iv), lifted factor-wise to
@@ -822,13 +850,14 @@ $6$;\ the naive $\DCH^{(a)}\otimes I + \gamma_a\otimes\DCH^{(b)}$ is
 unrealisable ($\gamma_a = 0$ on $\sthree$) and the doubling is its
 replacement.
 
-The joint Lipschitz comparison constant $C_3^{(2)} \le \sqrt2$ and the
+The joint Lipschitz comparison constant $C_3^{(2)} = 1$ (by compression on
+the Clifford-doubled module, Paper~39 Lemma~L3-T) and the
 Berezin-tunneling cross-term (a triangle bound, rate $O(\max\gamma)$)
 belong to an \emph{abandoned} $(B,P)$-pair route, retained in Paper~39 as
 a record;\ they are \emph{not} rate constants of the theorem, whose
 constant is $1$. (That route's earlier Pythagorean refinement
-$C_3^{(2)}<1$ was withdrawn as false; the triangle bound is tight,
-$C_3^{(2)}\nearrow\sqrt2$.)
+$C_3^{(2)}<1$ was withdrawn as false;\ the triangle bound on the two
+Leibniz terms is tight term by term and gives only $\sqrt 2$.)
 
 % =====================================================================
 \section{The universality of the rate constant $4/\pi$}
@@ -836,28 +865,32 @@ $C_3^{(2)}\nearrow\sqrt2$.)
 % =====================================================================
 
 Paper~40 \cite{paper40_unified} extends Theorem~\ref{thm:gh_su2}
-from $\SU(2)$ to the class of all simple compact Lie groups with
-bi-invariant metric.
+from $\SU(2)$ to compact connected semisimple Lie groups with
+bi-invariant metric (for general $G$ conditionally on the per-group
+spin-window decomposition).
 
 \begin{theorem}[Paper~40, universal rate constant]
 \label{thm:universal_rate}
 Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
 with bi-invariant metric (each simple factor
 $\in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4},
-E_{6}, E_{7}, E_{8}\}$).  The truncated Camporesi--Higuchi triples
+E_{6}, E_{7}, E_{8}\}$).  The truncated (Kostant-Dirac) triples
 $\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the van~Suijlekom
 state-space Gromov--Hausdorff sense with the same asymptotic rate constant as
 \eqref{eq:gh_rate_constant}: namely $4/\pi$, in the dual-Coxeter
-normalisation.  The constant $C_{3}(G) = 1$ remains asymptotically
-tight at all ranks.  For general $G$ this is conditional on a
+normalisation (rigorous at rank~1;\ numerically supported, with a
+fit-sensitive extraction, at rank $\ge 2$, a rank-uniform proof being a
+named gap).  The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
+rank, by compression.  For general $G$ the convergence is conditional on a
 per-group spin-window decomposition (verified for $\SU(2)$).
 \end{theorem}
 
 \paragraph{Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation.}
-The proof of Theorem~\ref{thm:universal_rate} runs through a
-structural identity which we record because it is the deepest
-algebraic content of the universality.  In the central spectral
+The rate-constant universality of Theorem~\ref{thm:universal_rate}
+rests on a structural identity (a proof-sketch mechanism, rigorous at
+rank~1) which we record because it is the deepest algebraic content of
+the universality.  In the central spectral
 Fej\'er kernel on $G$,
 \begin{equation}
 K_{\nmax}(g) \;=\; \frac{1}{Z_{\nmax}(G)}
@@ -877,21 +910,24 @@ $\sum_{d \mathrm{ odd}} 1/d^{2} = \pi^{2}/8$.  The universal constant
 $4/\pi$ is then \emph{independent} of rank, Weyl group order, and
 Lie type.
 
-\paragraph{Asymptotic tightness $C_{3}(G) = 1$ via PRV.}
-The Lipschitz comparison bound \eqref{eq:lipschitz_bound} extends to
-$G$ via the PRV-summand theorem (Kumar 1988, Vinberg 1990):\ for
+\paragraph{The PRV-summand inequalities (representation theory, not a
+Lipschitz bound).}
+The Lipschitz comparison bound \eqref{eq:lipschitz_bound} holds on $G$
+by compression (Paper~40 Lemma~L3).  Separately, Paper~40 studies
+representation-theoretic inequalities on the PRV summands (existence by
+Kumar 1988;\ an earlier attribution to Vinberg 1990 carried no locator
+and is withdrawn, Paper~38):\ for
 every Weyl group element $w \in W$, the dominant image
 $\sigma_{w}$ of $\lambda + w\lambda'^{*}$ is a summand of
-$V_{\lambda} \otimes V_{\lambda'}^{*}$, and
-$|\sigma_{w} + \rho|^{2} \ge |\lambda - \lambda'|^{2} + |\rho|^{2}$.
-This covers the asymptotic family
-$(\nmax, 0, \dots, 0) \otimes (1, 0, \dots, 0)^{*}$ rigorously, giving
-$C_{3}(G) = 1$ asymptotic-tight in all simple Lie algebra types
-$A_{n}, B_{n}, C_{n}, D_{n}, G_{2}, F_{4}, E_{6}, E_{7}, E_{8}$.
-Interior (non-PRV) summands at finite cutoff are verified
-numerically across the panel $\SU(3), \SU(4), \mathrm{Sp}(2), G_{2}$
-at $5641/5641$ cells; analytic closure via Brauer--Klimyk signed-sum
-cancellation is bookkeeping.
+$V_{\lambda} \otimes V_{\lambda'}^{*}$, and Paper~40's Theorem~(b) gives
+$|\sigma_{w} + \rho|^{2} \ge |\lambda - \lambda'|^{2}$, which falls short
+of the intermediate inequality (INT) by $|\rho|^{2}$, so on the PRV class
+(INT) rests on the exact-arithmetic panels.  Interior (non-PRV)
+summands are verified across $\SU(3), \SU(4), \mathrm{Sp}(2), G_{2}$ at
+$5641/5641$ cells.  These are statements about eigenvalues and
+Casimirs;\ earlier versions bridged them to the commutator norm (and
+read the eigenvalue ratio as a per-isotypic Lipschitz constant), the
+step Paper~38 refuted at rank~1, so they are not a check of $C_{3}$.
 
 \paragraph{Companion: state-space GH.}
 The state-space Gromov--Hausdorff convergence (without rate and
@@ -901,9 +937,9 @@ Paper~40 provides the missing rate constant, the Lipschitz spinor
 bound, and the asymptotic tightness on the state-space GH substrate;
 the further step from state-space GH to spectral-triple-level
 Latr\'emoli\`ere propinquity (the dual-reach step) is a conceded named
-gap (the same scope boundary as Paper~38), so for general $G$ the
-result is conditional on a per-group spin-window decomposition,
-verified here only for $\SU(2)$.
+gap (the same scope boundary as Paper~38).  Separately, for general $G$
+the result is conditional on a per-group spin-window decomposition,
+verified only for $\SU(2)$.
 
 % =====================================================================
 \section{Modular structure and Wick rotation}
@@ -960,7 +996,7 @@ K_{\alpha}^{W} \;=\; J_{\mathrm{polar}}
 \quad \text{(rotation generator preserving } W),
 \label{eq:k_alpha}
 \end{equation}
-with integer spectrum $\{\text{two}\, m_{j}\}$ on the full-Dirac basis.
+with integer spectrum $\{2 m_{j}\}$ on the full-Dirac basis.
 The conjugation flow it generates (a modular flow only if Paper~42's
 open O0 identifies it) satisfies $\sigma_{2\pi}(O) = O$ bit-exact (residual
 $O(\sqrt{\dim \Hilb} \cdot \varepsilon_{\mathrm{machine}})$) for the
@@ -1176,8 +1212,8 @@ doubled scalar multipliers $M \oplus M$ commute with $\JL =$
 chirality-swap, and therefore preserve $\Kplus$ automatically:
 $\Op^{L,+} = \Op^{L}$ exactly.  Consequently the non-trivial
 Krein-positivity program shifts from operator level to \emph{state}
-level (Wasserstein--Kantorovich on $K^{+}$ states), which is the
-natural setting for the Paper~45 propinquity proof below.
+level (Wasserstein--Kantorovich on $K^{+}$ states), the setting in
+which Paper~45's degeneracy theorem (below) is read.
 
 \subsection{$K^{+}$-restricted weak-form Lorentzian propinquity:\ the degeneracy theorem (Paper~45)}
 
@@ -1196,8 +1232,11 @@ $\Tcal_{i}^{L}$ ($i = 1, 2$), define
 \Lambda(\Tcal_{1}^{L}|_{\Kplus}, \Tcal_{2}^{L}|_{\Kplus}),
 \label{eq:k_plus_prop_def}
 \end{equation}
-where $\Lambda$ is the standard Latr\'emoli\`ere propinquity
-\cite{latremoliere_metric_st_2017,latremoliere2018} and the
+where $\Lambda$ is the quantum Gromov--Hausdorff-type distance the
+device was meant to supply (Paper~45 frames it in van~Suijlekom's
+state-space setting, Latr\'emoli\`ere's tunnel
+hypotheses~\cite{latremoliere_metric_st_2017,latremoliere2018} being
+unavailable there) and the
 restriction to $\Kplus = \{|\psi\rangle : \JL|\psi\rangle =
 +|\psi\rangle\}$ is the standard metric spectral triple obtained from
 the Krein-positive subspace, on which the indefinite Krein product
@@ -1226,12 +1265,13 @@ Theorem~5.1 of Paper~45) is withdrawn.  The rate expression
 \begin{equation}
 C_{3}^{\mathrm{joint}} \cdot \gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
 \;=\;
-O\!\bigl(\log \nmax / \nmax \;+\; T / \Nt\bigr)
+O\!\bigl(\log \nmax / \nmax \;+\; T\log\Nt / \Nt\bigr)
 \label{eq:p45_rate}
 \end{equation}
-survives as a well-defined closed form whose meaning is an
-unconditional \emph{spatial} statement (Paper~38), the
-temporal factor being a metrically invisible spectator.
+survives as a well-defined closed form;\ its spatial leg
+$\gamma^{\SU(2)}$ is the rate of the unconditional \emph{spatial} statement
+(Paper~38, constant $1$), the temporal factor being a metrically invisible
+spectator.
 
 \subsection{Three structural simplifications}
 
@@ -1256,10 +1296,10 @@ Lichnerowicz commutator simplifies via the structural identity
 i\,[\DGV, a_{s}] \otimes a_{t}
 \label{eq:vanishing_cross_term}
 \end{equation}
-because $\{\gamma^{0}, \DGV\} = 0$ on the chirality-doubled basis.
-($\gamma^{0}$ anticommutes with the spatial Camporesi--Higuchi Dirac
-because $\DGV$ is chirality-diagonal in the Peskin--Schroeder chiral
-basis.)  The temporal direction contributes nothing to the joint
+because $[\gamma^{0}, a_{s}] = 0$ (the spatial multiplier is
+chirality-blind) and $[\partial_{t}, a_{t}] = 0$ (the temporal algebra is
+momentum-diagonal), so the $\gamma^{0} \otimes \partial_{t}$ term
+contributes nothing (Paper~45, Lemma~L3).  The temporal direction contributes nothing to the joint
 commutator, and $C_{3}^{\mathrm{joint}} = C_{3}^{\SU(2)}$ verbatim.
 Read correctly, \eqref{eq:vanishing_cross_term} is the
 \emph{diagnosis}:\ the momentum-diagonal temporal algebra is
@@ -1273,14 +1313,14 @@ Plancherel \emph{mass distribution}, a different invariant (the
 Bo\.zejko--Fendler appeal is withdrawn;\ the correct statement is
 elementary).  The $\Nt$-dependence of the rate
 \eqref{eq:p45_rate} lives entirely in the joint mass-concentration
-moment (the $T/\Nt$ Fej\'er-on-the-circle rate).
+moment (the $T\log\Nt/\Nt$ Fej\'er-on-the-circle rate).
 
 \paragraph{Riemannian-limit recovery at $\Nt = 1$ bit-exact.}
 At $\Nt = 1$, the joint Berezin reduces bit-identically to
 $B^{\SU(2)} \otimes B^{\Uone}_{1,T} = B^{\SU(2)}$, since the
 $\Nt = 1$ temporal Berezin map is the identity on the single Fourier
-mode.  Hence $\Lprop(\Tcal^{L}_{\nmax,1,T}, \Tcal^{L}_{\Manifold})$
-agrees with the Riemannian Paper~38 bound bit-exactly.  Under the
+mode.  Hence the spatial rate $\gamma^{\SU(2)}_{\nmax}$ computed by the
+construction at $\Nt = 1$ agrees with Paper~38's bit-exactly.  Under the
 degeneracy analysis this recovery is an automatic formula identity
 (the panel quantity only ever contained the spatial rate formula),
 not an operator-level falsifier;\ the falsifier with teeth is the
@@ -1348,8 +1388,8 @@ data).
 
 The most striking structural observation that emerges from reading
 the arc is that transcendental signatures of the same algebraic class
-recur across settings.  The constant $4/\pi$ of Paper~38 is the $k = 0$
-volume mechanism, the $M_{1}$
+recur across settings.  The constant $4/\pi$ of Paper~38 is read (a
+reading, not a derivation) as the $k = 0$ volume content, the $M_{1}$
 sub-case of the master Mellin engine catalogued in Paper~32~\S 8.  The
 constant $1/\pi^{2}$ of Paper~42~\S 11.7 lies in the same ring
 $\pi^{-2}\Q$ but is \emph{not} shown to arise from that mechanism:\ it is
@@ -1501,11 +1541,12 @@ with operator-norm constant $C_{3}^{\mathrm{op}}$ --- for which the
 earlier closed form $\sqrt{1 - 1/\nmax}$ is \emph{withdrawn} as
 operator-norm-false (the correct comparison is the Paper~38 Lemma~L3
 value $C_{3} = 1$; see Paper~46~App.~A.3) --- and rate
-$\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ from Paper~45.  The numerical panel matches
+$\gammajoint = O(\log\nmax/\nmax + T\log\Nt/\Nt)$ from Paper~45.  The numerical panel matches
 Paper~45's $K^{+}$-weak-form panel \emph{bit-exactly} at every
 tested cell --- the ``free-upgrade'' reading.
 
-Paper~46's Appendix~B (added 2026-05-22) extends the closure to the
+Paper~46's Appendix~B (added 2026-05-22;\ Paper~46 is descoped) claimed to
+extend the closure to the
 \emph{enlarged} operator system with chirality-flipping generators
 satisfying $\{\JL, M^{\mathrm{flip}}\} = 0$.  The substantive new
 content is the \emph{gradient-norm absorption mechanism}:\ the
@@ -1515,10 +1556,10 @@ substrates manifests at the Lipschitz seminorm level
 $L^{+}_{\mathrm{P45}}(a^{\mathrm{flip}}) = 0$ identically), but the
 separation is paid \emph{entirely in a $J$-graded gradient-norm
 extension} $G^{\mathrm{enlarged}} = G^{\mathrm{natural}} + 2\opnorm{D_{t}}
-\opnorm{f^{\mathrm{flip}}}$, leaving the Latr\'emoli\`ere propinquity
-bound bit-exactly preserved:\
+\opnorm{f^{\mathrm{flip}}}$;\ the two panel values coincide,
 $\Lambda^{\mathrm{enlarged}}(\nmax, \Nt) = \Lambda^{\mathrm{P46}}(\nmax, \Nt)$
-at every panel cell.
+at every cell, because both evaluate the same spatial rate formula ---
+not because a propinquity bound is preserved (none is established).
 
 \subsection{De-compactification limit, norm-resolvent / spectral closure (Paper 47)}
 \label{sec:closures_paper47}
@@ -1537,8 +1578,8 @@ open program.  Paper~47~\cite{paper47} closes it at the \emph{norm-resolvent / s
 
 \begin{equation}\label{eq:p47_composite}
 \Tcal^{L}_{\nmax, \Nt, T(\Nt)}
-\;\xrightarrow{\Lprop\text{-rate}\,
-O(\log\nmax/\nmax + T(\Nt)/\Nt)}\;
+\;\xrightarrow{\Lprop\text{-rate (descoped)}\,
+O(\log\nmax/\nmax + T(\Nt)\log\Nt/\Nt)}\;
 \Tcal^{L}_{\sthree \times \Sone_{T(\Nt)}}
 \;\xrightarrow{\mathrm{nr}\text{-rate}\,
 O(e^{-|\Im z|T(\Nt)/2})}\;
@@ -1546,7 +1587,10 @@ O(e^{-|\Im z|T(\Nt)/2})}\;
 \end{equation}
 
 along any \emph{admissible scaling} $T(\Nt) \to \infty$ with
-$T(\Nt)/\Nt \to 0$.  The inner arrow was proposed as propinquity convergence at
+$T(\Nt)\log\Nt/\Nt \to 0$ (the circle Fej\'er rate;\ an earlier version wrote
+$T(\Nt)/\Nt$ [retracted 2026-10-02: fejer-circle-rate-T-over-N], under which the sub-linear scaling $T_{1} = \Nt/\log\Nt$
+below looked admissible;\ under the corrected rate it is borderline, the
+rate tending to a constant).  The inner arrow was proposed as propinquity convergence at
 coupled cells (Paper~45/46 main theorem applied along the scaling), but
 that arrow is \emph{descoped} by Paper~45's degeneracy theorem;\
 the outer arrow is norm-resolvent convergence of the Lorentzian Dirac
@@ -1586,10 +1630,11 @@ sub-linear, $T_{2} = \sqrt{\Nt}$ square-root) confirms
 $\Lambda^{L}$ bit-exact $T$-and-$\Nt$-independence at fixed $\nmax$:\
 $\Lambda(\nmax=2) = 2.074551$ and $\Lambda(\nmax=3) = 1.610060$
 to 6+ significant figures across all three scalings, matching
-Paper~45 Table~1 verbatim.  Structural reason:\ $\gamma^{U(1)}(\Nt, T)$
-is subordinate to $\gamma^{\SU(2)}(\nmax)$ at every admissible-scaling
-cell, so the joint rate $\gammajoint = \max(\gamma^{\SU(2)},
-\gamma^{U(1)}) = \gamma^{\SU(2)}$ exactly.  The empirical confirmation
+Paper~45 Table~1 verbatim.  Structural reason:\ the panel quantity only
+ever contained the spatial rate formula (the degeneracy analysis below), so
+it equals $\gamma^{\SU(2)}(\nmax)$ exactly.  (An earlier version attributed
+this to the joint rate $\max(\gamma^{\SU(2)}, \gamma^{U(1)})$, which at
+$\Nt = 1$ is not $\gamma^{\SU(2)}$ in general.)  The empirical confirmation
 confirms the $T$- and $N_t$-independence of the surviving
 \emph{spatial} rate formula.  Under the degeneracy analysis above this is
 an automatic formula identity (the panel quantity only ever contained the
@@ -1649,46 +1694,46 @@ to $\Tcal_{\sthree}^{\otimes k}$, and (v) the higher-rank tensor product
 $\Tcal_{G_{1}} \otimes \Tcal_{G_{2}}$ at arbitrary compact connected
 Lie group factors.  Both were addressed on 2026-05-23 as \emph{sketches} (only the $k=2$ case is proved; see below).
 
-\textbf{(iii) k-fold extension --- $\sqrt{k}$ constant (sketch).}  The
-k-fold extension to SU(2) factors uses the graded Leibniz rule and the
-operator-norm \emph{triangle} bound, giving
-$C_{3}^{(k)} \le \sqrt{k}\,\sqrt{(N_{*} - 1)/(N_{*} + 1)} \nearrow
-\sqrt{k}$ where $N_{*} := \max_{j} n_{j}$. \emph{Correction
+\textbf{(iii) k-fold extension --- constant $1$ (sketch).}  On the
+$k$-fold module with $k$ mutually anticommuting Clifford generators, the
+compression argument of Paper~39 Lemma~L3-T gives $C_{3}^{(k)} = 1$ for
+every $k$ (Paper~39 \S6(iii));\ the operator-norm triangle bound with
+Cauchy--Schwarz gives only $\sqrt k$, and an earlier per-cutoff factor
+$\sqrt{(N_*-1)/(N_*+1)}$ is withdrawn with Paper~38's per-harmonic
+bound. \emph{Correction
 (2026-06-18):} an earlier draft claimed a $k$-\textbf{independent}
 constant $\sqrt{(N_*-1)/(N_*+1)}\to1^-$ via a ``Pythagorean Leibniz''
 sum-of-squares identity $\opnorm{\sum_j X_j}^2=\sum_j\opnorm{X_j}^2$.
 That identity is \textbf{false} (pairwise anticommutation of the
 $D^{(k)}$ summands does not make the commutator terms operator-norm
 orthogonal --- verified maximally violated at $k=2$ on the actual
-harmonics). The genuine $\sqrt{k}$ factor is real, not eliminated; for
-each fixed $k$ convergence still holds (finite constant), but the
-constant grows with the number of factors. Only the $k=2$ case is
-proved (Paper~39);\ $k>2$ is a sketch.
+harmonics);\ the $k$-independent constant now comes from compression,
+not from orthogonality. Only the $k=2$ case is proved (Paper~39);\ $k>2$
+is a sketch.
 
 \emph{(Upgrade, 2026-09-07 --- the proved case is \textbf{stronger} than this
-paragraph implies.)} The $\sqrt k$ discussion above is the
-triangle-bound route, and Paper~39 no longer proves $k=2$ that way:\ its
-theorem is the \emph{lifted-state} assembly, which uses neither a Berezin
-map nor a partial inverse, and the paper states explicitly that
-$C_3^{(2)} \le \sqrt2$ ``belongs to the \emph{abandoned} $(B,P)$-pair route
-and is not a rate constant of this theorem;\ its value is unchanged, only
-its role.'' So the $\sqrt k$ growth is a property of the sketched route for
-$k>2$, not a cost carried by the proved $k=2$ case. Recorded because this is
+paragraph implies.)} Paper~39 does not prove $k=2$ through the joint
+Lipschitz constant at all:\ its theorem is the \emph{lifted-state}
+assembly, which uses neither a Berezin map nor a partial inverse, and the
+paper states that $C_3^{(2)}$ (now $1$, by compression) ``belongs to the
+\emph{abandoned} $(B,P)$-pair route and is not a rate constant of this
+theorem.'' Recorded because this is
 the \emph{mirror} of the usual staleness:\ the owner strengthened its claim
 and this summary kept the weaker form --- nothing is misspelt and nothing is
 retracted, so neither C16 nor a \texttt{cited\_by} list can see it.
 
 \textbf{(v) Master theorem --- universal compact-Lie-group factors
 (sketch).}
-Combining the k-fold extension with the universal $4/\pi$ rate of
-Paper~40~\cite{paper40_unified} gives the expected multi-factor form
+Combining the k-fold extension with the $4/\pi$ rate reported universal
+in Paper~40~\cite{paper40_unified} (rigorous at rank~1;\ general-$G$
+convergence conditional) gives the expected multi-factor form (Paper~39 \S6(v))
 
 \begin{equation}\label{eq:master_theorem}
 \Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
-\;\le\; C_{3}^{(k)} \cdot \max_{j} \gamma^{G_{j}}_{n_{j}},
+\;\le\; \sum_{j=1}^{k} \gamma^{G_{j}}_{n_{j}},
 \qquad
-C_{3}^{(k)} \le \sqrt{k}\,\sup_{j} C_{3}^{G_{j}}(n_{j}) \nearrow \sqrt{k},
+C_{3}^{(k)} = 1,
 \end{equation}
 
 for arbitrary $k \ge 1$ and compact connected semisimple Lie groups
@@ -1696,23 +1741,30 @@ $G_{1}, \ldots, G_{k}$ with bi-invariant metrics (Paper~40's class; a
 central torus factor is excluded --- Paper~40 asserts no value for
 $c(G_{\mathrm{ss}} \times T^{k})$). \emph{Correction
 (2026-06-18):} this was boxed as a closed ``master theorem'' with a
-$k$-\textbf{independent} constant $\sup_j C_3^{G_j}(n_j)$;\ with the
-corrected triangle bound the constant carries a genuine $\sqrt{k}$ and
-is not $k$-independent. The joint rate then inherits the $4/\pi$
+$k$-\textbf{independent} constant $\sup_j C_3^{G_j}(n_j)$ resting on the
+false Pythagorean identity;\ the $k$-independent constant $1$ now comes
+from compression (each $G_j$ factor by Paper~40's left-equivariance
+argument). The joint rate then inherits the $4/\pi$
 asymptotic; but this multi-factor / general-$G$ form is a
-\textbf{sketch} (only the $k=2$, $\SU(2)$ and $k=1$ cases are proved).
+\textbf{sketch} (proved only for $k=1$, $\SU(2)$ and $k=2$,
+$\SU(2)\times\SU(2)$, on the lifted-state route with leading
+constant~$1$;\ $k=1$ for general $G$ is conditional;\ $C_3^{(k)}$ is the
+approximation-pair route's constant, not a rate constant). (An earlier
+version printed the rate as $\max_j\gamma^{G_j}_{n_j}$, below the proved
+$k=2$ bound;\ withdrawn 2026-10-02.)
 
-The master theorem subsumes Papers~\cite{paper38}
+The master-theorem sketch subsumes Papers~\cite{paper38}
 ($k = 1$, $G = \SU(2)$), \cite{paper40_unified}
-($k = 1$, general $G$), and the two-factor case
+($k = 1$, general $G$, conditional), and the two-factor case
 treated above (\S\ref{sec:tensor_extension}, $k = 2$,
-$G_{1} = G_{2} = \SU(2)$) as special cases.  Paper~45's product-carrier
+$G_{1} = G_{2} = \SU(2)$), each of which proves a bound at most the
+displayed sum.  Paper~45's product-carrier
 proposition at $\sthree \times \Sone_{T}$ (\texttt{prop:product\_action\_seminorm};
 signature-agnostic and not a Lorentzian claim --- its earlier
 compression-device convergence theorem is withdrawn) is a $k = 2$,
-$G_{1} = \SU(2)$, $G_{2} = \Uone$ product with per-factor cutoffs whose
-joint rate is the maximum of the factor rates, i.e.\ the $\SU(2)$ rate
-(\S\ref{sec:tensor_extension}); it lies outside Paper~40's semisimple
+$G_{1} = \SU(2)$, $G_{2} = \Uone$ product with per-factor cutoffs, which
+converges at the additive rate $\gamma^{\SU(2)} + \gamma^{\Uone}$
+(Paper~45, \texttt{eq:product\_rate}); it lies outside Paper~40's semisimple
 class and is not an instance of the master theorem's universal
 constant.
 
@@ -1756,8 +1808,8 @@ input is descoped by Paper~45's degeneracy theorem --- Bridge Theorem~6.4
 with all four properties (B1)+(B2)+(B3)+(B4) would yield seven newly
 accessible theorems on the GeoVac hemispheric wedge, including:
 (T3) bit-exact panel inheritance --- the
-$\Lambda(2,3) = 2.0746$, $\Lambda(3,5) = 1.6101$, $\Lambda(4,7) = 1.3223$
-panel of Paper~45 would transport verbatim; (T5) synthetic Pythagorean
+panel of bound values $\approx 2.0746$, $1.6101$, $1.3223$ at
+$(2,3)$, $(3,5)$, $(4,7)$ (values of the bound, not computed distances) of Paper~45 would transport verbatim; (T5) synthetic Pythagorean
 orthogonality with the $1/\pi^{2}$ prefactor (the posited-normalisation
 $1/\beta^{2}$ of Paper~42~\S 11.7, not a computed $M_{1}$ output;\ re-tiered
 2026-09-28) as the inverse-squared bridge cover slab-period; and
@@ -1792,7 +1844,7 @@ $M^{\mathrm{flip}} = \mathrm{diag}(W, -W)$ where $\{J, M\} = 0$).
 The closure rests on a genuinely new operator-algebraic construction:\
 the Connes--Rovelli thermal-time stack across \emph{distinct} KMS
 states, extending Connes--Rovelli~\cite{connes_rovelli1994} from the
-single-KMS-state setting to multi-state stack consistency.  Properties (B1$'$)+(B2$'$)+(B3$'$) hold theorem-grade;\ (B4$'$), the
+single-KMS-state setting to multi-state stack consistency.  Properties (B1$'$), (B2$'$) and the non-metric reading of (B3$'$) hold theorem-grade (Paper~49's Status note descopes the metric-ball reading of (B3$'$));\ (B4$'$), the
 metric-level $\Lambda$-inheritance, is \emph{descoped} (the Krein-side seminorm is degenerate, Paper~45/46).
 
 The headline structural finding is the
@@ -1947,7 +1999,8 @@ Paper~50 is the twelfth math.OA standalone in the arc.
 
 The arc closes the convergence side of the operator-algebra story on
 the Riemannian / spatial side (Paper~38, unconditional).  On the
-modular-Hamiltonian side, Papers~42 and 43 record automatic
+modular-Hamiltonian side, Paper~42 (including its \S~11, the archived
+Paper~43's surviving content) records automatic
 finite-cutoff period closures of a posited generator on Riemannian and
 Krein backgrounds;\ deriving that generator from a Camporesi--Higuchi
 wedge state is open (2026-09-28).  The Lorentzian
@@ -1980,7 +2033,7 @@ norm-resolvent level by Paper~47 (\S\ref{sec:closures_paper47});\
 G2-metric open as a named frontier.}
 The temporal factor $\Uone_{T}$ is finite; the standard physics
 applications (Hawking, Unruh) require non-compact $\R_{t}$.  The
-rate $T/\Nt \to 0$ in \eqref{eq:p45_rate} is the joint
+rate $T\log\Nt/\Nt \to 0$ in \eqref{eq:p45_rate} is the joint
 mass-concentration on $\Uone_{T}$ as $\Nt \to \infty$ at fixed $T$;
 the $T \to \infty$ limit is closed at the \emph{norm-resolvent /
 spectral} level by Paper~47~\cite{paper47}'s two-rate hybrid
@@ -2054,11 +2107,11 @@ K$^{+}$-weak-form extension is \emph{descoped}:\ Paper~45 proves a
 degeneracy theorem (the natural Lorentzian-propinquity seminorm
 vanishes identically), and what survives on the temporal factor is
 Paper~45's signature-agnostic product-carrier rate (not a Lorentzian
-convergence).  The metric geometry of
-the truncated triples carries the M$_{1}$ ($k = 0$ volume-slot)
-signature ($4/\pi$ in the Riemannian rate) that the abstract
-$\pi$-source case-exhaustion theorem (Theorem~\ref{thm:pi_source})
-identifies at the spectral-triple level.  (The $1/\pi^{2}$ of the
+convergence).  The Riemannian rate constant $4/\pi$ of the truncated
+triples is read (a reading, not a derivation;\ Paper~38) as M$_{1}$
+($k = 0$ volume-slot) content;\ the $\pi$-source case-exhaustion
+theorem (Theorem~\ref{thm:pi_source}, \textbf{[CONDITIONAL]}) does not
+itself cover GH rates.  (The $1/\pi^{2}$ of the
 Lorentzian Pythagorean closed form, formerly counted as a second
 appearance, is the imported normalisation of a posited generator and is
 not shown to share that signature;\ re-tiered 2026-09-28.)
@@ -2261,9 +2314,8 @@ Camporesi--Higuchi spectral triples on $\sthree$},
 
 \bibitem[Loutey, internal Paper~39]{paper39}
 J.~Loutey,
-\newblock \emph{Tensor-product propinquity convergence for
-distinct-focal-length truncated Camporesi--Higuchi spectral triples
-on $\sthree$},
+\newblock \emph{State-space Gromov--Hausdorff convergence of truncated
+tensor-product Camporesi--Higuchi spectral triples on $\sthree \times \sthree$},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~40]{paper40_unified}

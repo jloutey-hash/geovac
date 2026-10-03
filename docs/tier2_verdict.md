@@ -1,5 +1,7 @@
 # Dirac-on-S³ Tier 2 Sprint — Verdict (Track T6)
 
+> **[Historical document, dated; superseded figures.]** Its resource counts and accuracy figures predate the 2026-08-29 exact ERI rule and later solver evolution (e.g. composed H2O R_eq is now 19.4%, Paper 17; the composed R_eq range is 5.3-19.4%). Current values: Papers 14/17/20, `docs/claims_register.md`, `debug/qa/numeric_registry.py`.
+
 **Date:** 2026-04-15
 **Status:** Tier 2 complete.
 **Input tracks:** T0 (spinor ERI density), T1 (spinor matrix elements), T2 (Breit-Pauli SO), T3 (spin-ful composed pipeline), T4 (market test), T5 (π-free spinor certificate + Paper 18 subtier).

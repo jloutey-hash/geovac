@@ -968,7 +968,7 @@ def asymptotic_rate_constant() -> sp.Expr:
 
     Structural meaning (memo S2): 4/pi = Vol(S^2) / pi^2 = 2 Vol(S^2) / Vol(SU(2)) in the
     dual-Coxeter normalisation, Cas(ad) = h^v (2/pi at unit radius;
-    corrected 2026-09-03, an earlier line wrote Vol(S^1)) under the Haar normalization, the M1 Hopf-base measure
+    corrected 2026-09-03, an earlier line wrote Vol(S^1)) under the Haar normalization, the M1 unit-sphere volume slot (the 'Hopf-base measure' label is retired)
     factor of Sprint TS-E1 / Paper 32 SVIII / Paper 18 SIII.7.
     """
     return Rational(4) / sp.pi

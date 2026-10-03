@@ -1,4 +1,8 @@
-"""Tensor-product propinquity convergence on S^3 x S^3 (Phase C-W2b-easy).
+"""Tensor-product state-space GH convergence on S^3 x S^3 (Phase C-W2b-easy).
+
+(Module and identifier names say 'propinquity' for API stability; the object
+is van Suijlekom state-space Gromov-Hausdorff convergence, Paper 39, and
+Latremoliere propinquity is NOT claimed.)
 
 NAMING NOTE (DELTA #22, 2026-09-30): identifiers containing 'cb_norm' are kept for API stability, but the quantity 2/(n_max+1) (and its products, e.g. 4/((n_a+1)(n_b+1))) is the Plancherel MASS maximum, not a cb-norm. The central smoothing maps are unital completely positive, so their true cb-norm is 1 (Papers 38/39; central_fejer_su2.central_multiplier_cb_norm_true).
 
@@ -7,11 +11,11 @@ This module extends the single-factor GH-convergence theorem of Paper 38
 Camporesi-Higuchi spectral triples on S^3 at distinct focal lengths
 lambda_a, lambda_b > 0. It is the keystone deliverable of Phase C-W2b-easy
 of the multi-focal-composition program; per the diagnostic memo
-``debug/multifocal_b_w2b_diag_memo.md`` Section 3.1, this closes one
-of the two-infinite-non-abelian metric spectral triples openly stated as
-open in the published NCG literature (Track 3 surprise S2; Latremoliere
-2026 / Farsi-Latremoliere 2024-2025 / Aguilar 2019 all stay inside one-factor
-flat / one-factor finite / one-factor abelian regimes).
+``debug/multifocal_b_w2b_diag_memo.md`` Section 3.1, it treats a
+two-infinite-non-abelian case the published propinquity literature does not
+cover (Latremoliere 2026 / Farsi-Latremoliere 2024-2025 / Aguilar 2019 stay
+inside one-factor flat / finite / abelian regimes) -- at the level of
+state-space GH convergence; the propinquity question stays open.
 
 THE TENSOR-PRODUCT THEOREM
 ==========================
@@ -22,7 +26,8 @@ Let
     distinct).
   - T_a = T_{n_a}^a, T_b = T_{n_b}^b denote the Connes-vS truncated triples
     at cutoffs n_a, n_b respectively, each individually the object Paper 38
-    closed in Theorem L5.
+    treats (its theorem is the lifted-state route; Paper 38's L5 is
+    withdrawn).
   - T_a (X) T_b denote the tensor-product spectral triple, with
         H_{a,b} = H_a (X) H_b
         D_{a,b} = D_a (X) I_b  +  gamma_a (X) D_b           (Connes-Marcolli)
@@ -33,14 +38,17 @@ Let
     forcing gamma = 0 (verified symbolically; Paper 38 'KO-3 carries no
     chirality', Paper 32 likewise).  The formula above is the even-x-odd
     product;  the odd-x-odd case this module is in needs Clifford doubling.
-    That repair is NAMED, NOT ADOPTED -- whether the C_3^(2) and Berezin
-    estimates below survive it is OPEN, and they are what this module
-    computes.  Everything here is therefore reported for the operator as
-    printed, which is not a spectral triple.
+    Paper 39 adopts the doubled operator D_a (X) s1 (X) 1 + 1 (X) s2 (X) D_b
+    as the limit object, and proves the joint Lipschitz constant C_3^(2) = 1
+    and the Berezin compatibility L4-T(d) for it (2026-10-02).  The
+    triangle-bound and per-irrep quantities this module computes are for the
+    operator as printed above, which is not a spectral triple, and are
+    retained as records.
         algebra = O_a (X) O_b  (operator-system tensor product)
     living at KO-dim 3 + 3 = 6 (Connes-Marcolli convention).
 
-**Theorem L5-T (tensor-product GH convergence).** *In van Suijlekom's
+**Lemma L5-T record (abandoned conditional (B,P) route; Paper 39's theorem
+is the lifted-state bound gamma_a + gamma_b).** *In van Suijlekom's
 state-space Gromov-Hausdorff distance Lambda, the truncated tensor-product
 triples T_a (X) T_b converge to T_S3^a (X) T_S3^b as n_a, n_b -> infinity:*
 
@@ -50,12 +58,19 @@ triples T_a (X) T_b converge to T_S3^a (X) T_S3^b as n_a, n_b -> infinity:*
 
 conditionally on the reach_P named gap (Paper 39 thm:main status note,
 2026-09-04; the factor 2 is the reach-only assembly's, corrected the same
-day from a bare C_3^{(2)} * max(...) that under-counted the reach).
+day from a bare C_3^{(2)} * max(...) that under-counted the reach).  This is
+Paper 39's ABANDONED (B,P) route.  Paper 39's theorem is the lifted-state
+route: d_GH <= lambda_a gamma_a + lambda_b gamma_b <= 2 max(lambda gamma),
+constant 1, no C_3 factor and no reach_P.  With C_3^{(2)} = 1 (by
+compression, Paper 39 Lemma L3-T, 2026-10-02) the (B,P) value 2 max(lambda
+gamma) is an upper bound for the lifted-state sum, equal to it only when
+lambda_a gamma_a = lambda_b gamma_b.
 
 *The joint Lipschitz comparison constant on the factorized observable
-panel is C_3^{(2)} = 1 (inheriting the L3 single-factor C_3 = 1 via the
-Connes-Marcolli Leibniz identity); on the full operator system the live
-bound is the triangle bound C_3^{(2)} >= 1 -> sqrt(2). (The earlier
+panel is C_3^{(2)} = 1 (a special case of the compression bound below);
+on the full operator system the live
+constant is C_3^{(2)} = 1 by compression on the Clifford-doubled module (Paper 39 Lemma L3-T, 2026-10-02); the triangle bound gives only sqrt(2), and the
+per-irrep closed form once printed here is withdrawn. (The earlier
 SU(2)xSU(2) Pythagorean refinement C_3^{(2)} < 1 -> 1 was WITHDRAWN
 2026-06-18 as operator-norm-false; see Paper 39 "Withdrawn Pythagorean
 refinement".)*
@@ -72,8 +87,9 @@ underlying physical motivation: two electrons at distinct hydrogenic
 focal lengths p_0 = Z/n live each on its own S^3 Fock projection; the
 two-body coordinate operator V(r_e, R_n) is naturally a multiplier on
 the tensor-product algebra A_a (X) A_b acting on H_a (X) H_b. The
-present theorem provides the metric foundation — propinquity convergence
-of the tensor-product truncated triple to the continuum — under which
+present theorem provides the metric foundation — state-space GH
+convergence of the tensor-product truncated triple to the continuum (not
+Latremoliere propinquity) — under which
 that multiplier is well-defined and Lipschitz-bounded.
 
 The five-lemma extension
@@ -89,14 +105,14 @@ analog). The tensor extension defines O_a (X) O_b subset M_{N_a N_b}(C),
 the (algebraic) tensor product of operator systems. Standard fact: for
 any two operator systems O_1, O_2 of propagation numbers k_1, k_2, the
 tensor product propagation number satisfies
-    prop(O_1 (X) O_2) <= k_1 + k_2 - 1
-(see the symbolic verification in `tensor_propagation_bound`). For
-Paper 38's case k_a = k_b = 2, this gives prop(O_a (X) O_b) <= 3.
-Numerical verification at (n_a, n_b) = (2, 2) shows prop = 2 actually
-holds in our specific case, sharpening the bound.
+    prop(O_1 (X) O_2) <= max(k_1, k_2)
+since (O_1 (X) O_2)^p contains O_1^p (X) O_2^p, the full matrix algebra
+once p >= max(k_1, k_2) (Paper 39 Lemma L1'-T(b); see
+`tensor_propagation_bound`).  For k_a = k_b = 2 this gives
+prop(O_a (X) O_b) <= 2, matching the numerics at (n_a, n_b) = (2, 2).
 
 L2 (joint central spectral Fejer).  The single-factor central Fejer
-kernel on SU(2) has Plancherel symbol
+kernel on SU(2) has Plancherel MASS distribution (not its multiplier symbol)
     hat{K}_{n_max}(j) = (2j+1) / Z_{n_max},   j <= j_max,
 with Z_{n_max} = n_max(n_max+1)/2 and mass maximum 2/(n_max+1).
 The tensor extension is the product kernel
@@ -116,15 +132,12 @@ mass maximum is the product of the factor mass maxima:
 L3 (joint Lipschitz comparison).  Single-factor C_3 = 1. The
 Connes-Marcolli Leibniz rule gives
     [D_{a,b}, M_f (X) M_g] = [D_a, M_f] (X) M_g + gamma_a M_f (X) [D_b, M_g],
-so for f, g of unit Lipschitz norm in their respective factors:
-    || [D_{a,b}, M_f (X) M_g] ||_op <= 1 * ||g||_inf + ||f||_inf * 1
-                                    <= 2,
-giving joint C_3^{(2)} <= 2 in general. On the FACTORIZED observable
-panel where both ||g||_inf, ||f||_inf <= 1 (normalized panel), the
-factorized panel C_3 = max(1, 1) = 1 in the supremum sense, with
-sharper bookkeeping showing factorized panel C_3 = 1 exactly by
-applying the single-factor compression bound (Paper 38 L3) to each
-factor separately.
+and the triangle bound on the two terms gives only
+    || [D_{a,b}, M_f (X) M_g] ||_op <= ||grad f|| ||g||_inf + ||f||_inf ||grad g||.
+The joint constant is C_3^{(2)} = 1 relative to the classical product
+Lipschitz norm, at every cutoff, by compression on the Clifford-doubled
+module (Paper 39 Lemma L3-T, 2026-10-02): the truncation commutes with the
+doubled Dirac and the continuum symbol c_a s1 + s2 c_b has norm |grad F|.
 
 L4 (joint Berezin reconstruction).  Single-factor B_{n_max}: C(S^3) ->
 O_{n_max} positivity, contractivity, approximate identity. Joint
@@ -142,9 +155,11 @@ inherits all four L4 properties factor-by-factor:
                           + P_a M_f P_a (X) (B_b(g) - P_b M_g P_b),
       with norm bounded by gamma_{n_a} ||g||_inf + ||f||_inf gamma_{n_b}
       = O(max(gamma_{n_a}, gamma_{n_b})).
-  (d) L3 Lipschitz compatibility: inherits via the L3 Leibniz rule.
+  (d) L3 Lipschitz compatibility: by compression (B_n(f) = P M_{K*f} P),
+      C_3^{(2)} = 1 (Paper 39 Lemma L4-T(d)).
 
-L5 (joint propinquity assembly).  The joint tunneling pair is
+L5 (joint (B,P) assembly; the ABANDONED conditional route).  The joint
+tunneling pair is
     (B_{joint}, P_{joint}) := (B_a (X) B_b, P_a (X) P_b),
 a tunneling pair between T_a (X) T_b and T_S3^a (X) T_S3^b.
 Joint reach: from L4(c) joint approximate-identity rate,
@@ -159,7 +174,8 @@ so at ||h||_Lip = 1 the distortion is 1 and
     height_{B_{joint}} == 1   at every (n_a, n_b),
 with height_P != 0 by the same witness.  What epsilon_cross bounds is a
 unit-norm PANEL quantity, which is real and is retained under that name.
-Net (reach-only assembly, the footing Papers 38/40 stand on):
+Net (reach-only assembly of the ABANDONED (B,P) route; Papers 38/40 and
+Paper 39's theorem stand on the lifted-state route instead):
     Lambda(T_a (X) T_b, T_S3 (X) T_S3)
         <= max(reach_B, reach_P)
         <= C_3^{(2)} * (gamma_{n_a} + gamma_{n_b})
@@ -171,29 +187,32 @@ the refuted leg was the larger one.
 Honest scope of this run
 ========================
 
-The structural arguments above are clean. The numerical verification at
-(n_a, n_b) in {(2,2), (2,3), (3,3), (3,4), (4,4)} confirms the joint
-propinquity bound and the factor-by-factor inheritance of L1', L2, L4.
+The numerical panel at (n_a, n_b) in {(2,2), (2,3), (3,3), (3,4), (4,4)}
+checks the factor-by-factor inheritance of L1', L2, L4 and tabulates the
+abandoned route's values; Paper 39's theorem is proved, not verified
+numerically.
 
 What this run closes:
   - L1'-T (joint operator system): symbolic verification + numerical
     check at (n_a, n_b) = (2, 2) and (2, 3).
   - L2-T (joint Plancherel symbol, joint mass maximum, joint gamma): closed
     form, factorized via product Plancherel.
-  - L3-T (joint Lipschitz, factorized panel C_3 <= 1): closed form via
-    Leibniz; full operator system C_3 <= 2 via the triangle bound.
+  - L3-T (joint Lipschitz): C_3^{(2)} = 1 by compression on the
+    Clifford-doubled module (Paper 39, 2026-10-02); the triangle bound alone
+    gives sqrt(2).
   - L4-T (joint Berezin): factor-by-factor inheritance, all four
     properties verified on a 5-function product panel.
-  - L5-T (joint propinquity bound): assembly with rate
-    max(gamma_{n_a}, gamma_{n_b}) -> 0; explicit numerical bound at
-    (n_a, n_b) in {(2,2), (2,3), (3,3), (3,4), (4,4)}.
+  - L5-T (joint bound, conditional (B,P) assembly): rate
+    2 max(gamma_{n_a}, gamma_{n_b}) -> 0 (Paper 39's theorem: the
+    lifted-state bound gamma_a + gamma_b, constant 1); explicit numerical
+    values at (n_a, n_b) in {(2,2), (2,3), (3,3), (3,4), (4,4)}.
 
 What remains for follow-up:
-  - Joint L3 on the FULL (not factorized) operator system: a
-    verification beyond the factorized panel is sketched but not proved
-    exhaustively (the earlier Bozejko-Fendler framing is withdrawn). The factorized panel
-    case gives C_3 = 1; the full operator system case gives the triangle
-    bound C_3 >= 1 -> sqrt(2). (An earlier "tighten to C_3 = 1 + o(1)"
+  - Joint L3 on the FULL (not factorized) operator system: now PROVED
+    (C_3^{(2)} = 1 by compression, Paper 39 Lemma L3-T, 2026-10-02; the
+    earlier Bozejko-Fendler framing is withdrawn). The factorized panel
+    case gives C_3 = 1; on the full operator system C_3 = 1 by compression
+    (Paper 39 Lemma L3-T, 2026-10-02). (An earlier "tighten to C_3 = 1 + o(1)"
     Pythagorean plan was WITHDRAWN 2026-06-18 as operator-norm-false,
     Paper 39.)
   - Joint L5 height bookkeeping is WITHDRAWN (2026-09-04, above):
@@ -202,12 +221,11 @@ What remains for follow-up:
     epsilon_cross survives as the unit-norm panel quantity it computes.
     Whether a height-CONTROLLED assembly exists for this pair is open.
 
-The keystone tensor-product propinquity bound
-    Lambda(T_a (X) T_b, T_S3 (X) T_S3) -> 0
-is therefore (b) PROOF-SKETCHED WITH NUMERICAL CONFIRMATION ON A PANEL.
-A rigorous exhaustive proof of the optimal constant in front (the
-distinction between C_3^{(2)} = 1 and C_3^{(2)} <= 2 on the full
-operator system) is the natural follow-up sprint.
+The tensor-product state-space GH convergence
+    Lambda(T_a (X) T_b, T_S3 (X) T_S3) <= gamma_a + gamma_b -> 0
+is Paper 39's [INTERNAL THEOREM] (lifted-state route, constant 1);
+this module's (B,P) assembly is the abandoned conditional route, retained
+with C_3^{(2)} = 1 (by compression).
 
 API
 ===
@@ -217,7 +235,9 @@ API
     with focal-length parameters lambda_a, lambda_b.
 
   - ``compute_tensor_propinquity_bound(n_a, n_b, lambda_a, lambda_b)``:
-    the joint propinquity bound Lambda(T_a (X) T_b, T_S3 (X) T_S3).
+    the joint reference value and (B,P)-route values (name historical; the
+    proved bound is Paper 39's gamma_a + gamma_b, and propinquity is not
+    claimed).
 
   - ``tensor_L1prime``, ``tensor_L2_central_fejer``, ``tensor_L3_lipschitz``,
     ``tensor_L4_berezin``, ``tensor_L5_assembly``: per-lemma symbolic /
@@ -231,13 +251,15 @@ References
 ==========
 
 (Single-factor parents.)
-F. Loutey, "SU(2) propinquity convergence on the Camporesi-Higuchi
-spectral triple," Paper 38 (2026); papers/standalone/paper_38_*.tex.
+J. Loutey, Paper 38 (2026): state-space Gromov-Hausdorff convergence of
+the truncated SU(2) Camporesi-Higuchi spectral triple;
+papers/group1_operator_algebras/paper_38_*.tex.
 
 (Tensor-product NCG context.)
 F. Latremoliere, "Spectral continuity of almost commutative manifolds,"
-arXiv:2603.19128 (2026). [One Riemannian x one finite; this work is
-strictly outside the published frontier.]
+arXiv:2603.19128 (2026). [One Riemannian x one finite.  The S^3 x S^3
+spinor tensor case is outside it; the scalar state-space case of compact
+metric groups is Gaudillot-Estrada & van Suijlekom (IMRN 2025).]
 
 C. Farsi & F. Latremoliere, "Collapse in noncommutative geometry,"
 arXiv:2404.00240 (2024). [Products with one abelian factor.]
@@ -303,18 +325,28 @@ from geovac.r25_l3_lipschitz_bound import (
 # (simple tensors f (X) g with each factor of unit Lipschitz norm), the
 # joint C_3 equals the single-factor C_3 = 1.  On the FULL operator
 # system (general elements of O_a (X) O_b), the Leibniz rule produces
-# the conservative bound C_3^(2) <= 2 via the generic triangle inequality;
+# the legacy estimate C_3^(2) <= 2 via the generic triangle inequality;
 # the SU(2) x SU(2) Pythagorean refinement (R1, sprint W2b-easy-tighten,
 # 2026-05-07) that claimed to tighten this to C_3^(2) <= 1 + o(1) was
 # WITHDRAWN 2026-06-18 (operator-norm-false, Paper 39); the live full-op-
-# system bound is the triangle C_3^(2) >= 1 -> sqrt(2) — see
-# ``c3_full_triangle_bound``.
+# system constant is C_3^(2) = 1 by compression (Paper 39 Lemma L3-T,
+# 2026-10-02).  ``c3_full_triangle_bound`` is a withdrawn record.
 C_LIPSCHITZ_TENSOR_FACTORIZED: float = 1.0  # C_3^(2) on factorized panel
-C_LIPSCHITZ_TENSOR_FULL: float = 2.0        # C_3^(2) on full op-system (legacy / conservative)
+C_LIPSCHITZ_TENSOR_FULL: float = 2.0        # legacy Leibniz estimate (back-compat); C_3^(2) = 1 by compression
 
 
 def c3_full_triangle_bound(n_max_a: int, n_max_b: int) -> float:
-    """C_3^(2),full bound via the (tight) triangle bound on the graded Leibniz rule.
+    """[WITHDRAWN 2026-10-02 as a Lipschitz constant -- record only] Per-irrep
+    C_3^(2),full formula from the triangle bound on the graded Leibniz rule.
+
+    The per-irrep formula below combines the triangle bound with Paper 38's
+    single-factor per-harmonic estimate ||[D, M_{NLM}]|| <= (N-1), which is
+    FALSE (Paper 38, Lemma L3 remark, 2026-09-28); its values (1, 1.095,
+    1.155, ... on the diagonal) are therefore withdrawn as values of C_3^(2)
+    (Paper 39, Remark "Withdrawn finite-cutoff values").  What stands is the
+    uniform bound C_3^(2) <= sqrt(2) relative to the product Lipschitz norm
+    (per-factor constant 1 by compression, triangle bound, Cauchy-Schwarz).
+    The function is kept, unchanged, for back-compat and as the record.
 
     *Corrected 2026-06-18 (/qa group1 Bite B-3): the earlier "Pythagorean
     refinement" was WITHDRAWN — it is false. See the correction note below
@@ -344,17 +376,14 @@ def c3_full_triangle_bound(n_max_a: int, n_max_b: int) -> float:
     harmonics (tests/test_paper39_triangle_tight.py) finds the Pythagorean
     ratio MAXIMALLY violated (= 2) and the triangle bound TIGHT (= 1) at a
     pair of top-shell raising harmonics, where the two terms add
-    constructively. Hence C_3 -> sqrt(2), not 1^-. Convergence is
-    unaffected: sqrt(2) is a finite constant, so the propinquity bound
-    still -> 0 with gamma_n.
+    constructively, so the triangle route cannot do better than sqrt(2).
+    The constant itself is 1, by compression (Paper 39 Lemma L3-T).
 
     Args:
         n_max_a, n_max_b: cutoffs (each >= 1).
 
     Returns:
-        Closed-form upper bound on C_3^{(2),full} via the tight triangle
-        bound. Equals 1 at (2,2), exceeds 1 for larger cutoffs, and
-        increases to sqrt(2).
+        The withdrawn per-irrep record value (NOT a value of C_3^{(2)}).
     """
     N_a = n_max_a + 1
     N_b = n_max_b + 1
@@ -412,8 +441,8 @@ def c3_full_pythagorean_bound_symbolic(
     Sprint W2b-easy-tighten R1 closure (re-attempt 2026-05-07); full-grid
     interior-attainment fix 2026-06-21 (the prior corner-only scan
     under-reported the asymmetric supremum and contradicted Paper 39's
-    own Remark). This is the explicit closed form that replaces the
-    conservative C_3^{(2),full} = 2 placeholder.
+    own Remark). [WITHDRAWN 2026-10-02 as a value of C_3^{(2)} -- record
+    only; the constant is 1 by compression, Paper 39 Lemma L3-T.]
     """
     N_a_max = sp.Integer(n_max_a + 1)
     N_b_max = sp.Integer(n_max_b + 1)
@@ -623,10 +652,9 @@ def joint_gamma_subadditive_bound(
         integral K^{(a,b)} d <=  integral K^{(a)} d_{(1)} + integral K^{(b)} d_{(2)}
                               =  gamma_{n_a} + gamma_{n_b}.
 
-    For Pythagorean joint distance d_{joint}^2 = d_a^2 + d_b^2 (the
-    product Riemannian metric induced from S^3 x S^3), the same
-    triangle bound applies with the additional Cauchy-Schwarz factor
-    sqrt(2) which we absorb into the C_3^{(2)} = 2 constant.
+    For the product Riemannian distance d_{joint}^2 = d_a^2 + d_b^2 the
+    pointwise bound sqrt(x^2 + y^2) <= x + y gives the same sum bound
+    directly (Paper 39 Lemma lifted-state-T(b)); no constant is absorbed.
 
     The natural max-bound following from this for the state-space GH
     distance is (corrected 2026-09-04):
@@ -640,16 +668,18 @@ def joint_gamma_subadditive_bound(
 def joint_gamma_max_bound(
     gamma_a: float, gamma_b: float,
 ) -> float:
-    """Tight joint mass-concentration bound:
-        gamma_{joint} <= 2 * max(gamma_{n_a}, gamma_{n_b}).
+    """Loose (max-form) joint mass-concentration bound:
+        gamma_{joint} <= gamma_{n_a} + gamma_{n_b} <= 2 * max(gamma_{n_a}, gamma_{n_b}).
 
-    This is the form usually quoted in the Leimbach-vS Adv. Math. 2024
-    framework: the convergence rate of a tensor product is controlled
-    by the slower of the two factors, with a factor-of-2 absorbed into
-    the joint Lipschitz comparison constant C_3^{(2)} <= 2.
+    The loose max form: the rate is controlled by the slower of the two
+    factors up to the factor 2.  (Leimbach-van Suijlekom state no rate; the
+    proved bound is the sum, Paper 39.)  (The joint
+    Lipschitz comparison constant is C_3^{(2)} = 1 by compression, Paper 39
+    Lemma L3-T, 2026-10-02; the factor 2 here is the reach sum, not C_3.)
 
-    The keystone state-space GH statement of this module reads
-    (corrected 2026-09-04; conditional on the reach_P named gap)
+    The abandoned (B,P) route's display reads (corrected 2026-09-04;
+    conditional on the reach_P named gap; Paper 39's theorem is the
+    lifted-state bound gamma_a + gamma_b)
         Lambda(T_a (X) T_b, T_S3 (X) T_S3)
             <= C_3^{(2)} * 2 * max(gamma_{n_a}, gamma_{n_b})
             ->  0.
@@ -685,20 +715,18 @@ def joint_lipschitz_constant(
     ||g||_inf = 1) — the FACTORIZED PANEL — this reduces to
         || [D_{a,b}, M_{f (X) g}] ||_op <= C_3^a + C_3^b = 1 + 1 = 2.
 
-    However, on the FACTORIZED PANEL, the tensor product f (X) g has
-    induced Lipschitz seminorm ||f (X) g||_Lip = max(||f||_Lip, ||g||_Lip)
-    (NOT sum); the joint Lipschitz comparison reads
-        ||[D_{a,b}, M_{f (X) g}]||_op  <=  C_3^{(2),fact} ||f (X) g||_Lip,
-    with C_3^{(2),fact} <= 2 / max(1, 1) = 2.  Tighter: the panel
-    sharpens to C_3^{(2),fact} = 1 via the dominant-term reading of the
-    Leibniz rule (see Paper 38 §3.4 dual triangle inequality lifted to
-    products).
+    The factorized-panel value 1 returned here is the compression constant:
+    ||[D^dbl, S(F)]||_op <= ||grad F||_inf for every F (Paper 39 Lemma
+    L3-T), simple tensors included.  (An earlier docstring derived it from a
+    'dominant-term reading' of the Leibniz rule with
+    ||f (X) g||_Lip = max(||f||_Lip, ||g||_Lip); that derivation is
+    withdrawn, 2026-10-02.)
 
     On the FULL OPERATOR SYSTEM (general elements of O_a (X) O_b, not
-    simple tensors), the bound becomes C_3^{(2),full} <= 2 in general.
-    Tightening to C_3^{(2),full} = 1 requires the unverified
-    dual-triangle-inequality argument; in this run we report the
-    conservative C_3^{(2),full} <= 2.
+    simple tensors) C_3^{(2),full} = 1 by compression on the
+    Clifford-doubled module (Paper 39 Lemma L3-T, 2026-10-02).  This
+    function's non-factorized return value 2 is the legacy Leibniz estimate,
+    retained for back-compat, and is not the constant.
 
     Args:
         factorized_panel: if True, return the factorized-panel value 1.
@@ -884,8 +912,9 @@ def epsilon_cross_bound(
     NOTE (corrected 2026-06-18): an earlier draft asserted a Pythagorean
     operator-norm IDENTITY here (||.||_op^2 = ||.||_op^2 + ||.||_op^2) from a
     claimed anticommutation; that identity is FALSE in general (Paper 39,
-    "Withdrawn Pythagorean refinement"). The live bound is the triangle
-    (sub-additive) inequality:
+    "Withdrawn Pythagorean refinement"). This panel computation uses the
+    triangle (sub-additive) inequality (the joint constant itself is
+    C_3^{(2)} = 1 by compression, Paper 39 Lemma L3-T):
 
         ||[D_{a,b}, B_a(f) ⊗ B_b(g)]||_op
             <=  ||[D_a, B_a(f)]||_op ||B_b(g)||_op
@@ -893,7 +922,8 @@ def epsilon_cross_bound(
 
     which is what the returned value below computes (height telescoping).
 
-    Single-factor L4(d) + L5 height bounds (Paper 38 single-factor):
+    Single-factor L4(d) + the WITHDRAWN L5 height estimates (Paper 38;
+    retained only as the record of this panel computation):
 
         ||[D_a, B_a(f)]||_op    in [L_f - γ_a · L_f,  L_f]
         ||B_a(f)||_op            in [M_f - γ_a · M_f,  M_f]   (L4(b) contractivity slack)
@@ -938,7 +968,7 @@ def epsilon_cross_bound(
     The qualitative rate ε_cross → 0 as n_max_a, n_max_b → ∞ is robust;
     only the constant in front shifts (from "1 + o(1)" wishful to
     "<= 2*sqrt(2) leading").  NOTE 2026-09-04: this quantity no longer
-    propagates into the joint propinquity bound.  It was assembled there
+    propagates into the joint (B,P) bound.  It was assembled there
     as a Lipschitz-distortion height; that step is withdrawn (see the
     module docstring), the rate is assembled from reach alone, and the
     constant is 2 rather than 1 + 2*sqrt(2).  epsilon_cross remains a
@@ -1034,7 +1064,7 @@ def joint_panel_distortion_simple_tensor(
     triangle bound (see ``epsilon_cross_bound``; the earlier
     "Pythagorean" operator-norm identity was WITHDRAWN 2026-06-18 as
     false, Paper 39).  That panel bound is NOT a height bound and does
-    not enter the propinquity rate.
+    not enter the state-space GH rate.
     """
     from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_test_function
 
@@ -1163,14 +1193,14 @@ class TensorTunnelingPair:
         return float(self.lambda_b) * float(self.pair_b.gamma_rate_value)
 
     def joint_gamma_bound(self) -> float:
-        """Joint propinquity rate bound:
-            gamma_{joint} <= 2 * max(lambda_a*gamma_a, lambda_b*gamma_b).
+        """Loose joint rate form (record): 2 max(lambda gamma) >= the proved
+            gamma_a + gamma_b (Paper 39).
         """
         return joint_gamma_max_bound(self.gamma_a, self.gamma_b)
 
 
 # ---------------------------------------------------------------------------
-# The main propinquity bound  (Theorem L5-T)
+# The joint (B,P) bound (Lemma L5-T, abandoned conditional route; names historical)
 # ---------------------------------------------------------------------------
 
 
@@ -1197,14 +1227,15 @@ class TensorPropinquityBound:
     cb_norm_joint : float
         Joint central mass maximum 4 / ((n_a+1)(n_b+1)).
     c_lipschitz_factorized : float
-        Joint C_3 on the factorized panel (= 1 by Leibniz).
+        Joint C_3 on the factorized panel (= 1, by compression; Paper 39 L3-T).
     c_lipschitz_full : float
-        Joint C_3 on the full operator system, conservative legacy <= 2.
+        Legacy Leibniz estimate 2 (back-compat); the constant is
+        C_3^{(2)} = 1 by compression (Paper 39 Lemma L3-T).
     c_lipschitz_full_pythagorean : float
         WITHDRAWN (2026-06-18): the SU(2)xSU(2) Pythagorean operator-norm
         identity is false (Paper 39, "Withdrawn Pythagorean refinement");
-        the live full-op-system bound is the triangle C_3 >= 1 -> sqrt(2)
-        (see ``c3_full_triangle_bound``). Field retained for back-compat;
+        the live full-op-system constant is C_3^{(2)} = 1 by compression
+        (Paper 39 Lemma L3-T). Field retained for back-compat;
         do NOT use as the live constant.
     epsilon_cross_bound_value : float
         R2-explicit bound on the cross-Stein-Weiss term in the joint
@@ -1220,12 +1251,15 @@ class TensorPropinquityBound:
     height_joint_panel : float
         Empirical max joint Lipschitz-distortion height over the panel.
     propinquity_bound : float
-        The joint propinquity bound (factorized-panel constant).
+        max(gamma_a, gamma_b): a REFERENCE value (the slower factor's rate),
+        not a proved bound and not propinquity (name historical).
     propinquity_bound_full : float
-        The joint propinquity bound (legacy full-op-system constant <= 2).
+        2 max(gamma_a, gamma_b): an upper bound on the proved state-space GH
+        bound gamma_a + gamma_b (name historical; not propinquity).
     withdrawn_reach_plus_height_assembly : float
-        The joint propinquity bound under R1+R2 closure (sprint
-        W2b-easy-tighten): C_3_pyth * (max(gamma) + epsilon_cross).
+        WITHDRAWN reach-plus-height assembly value [retracted 2026-09-04:
+        p39-tensor-assembly-constant], record only (sprint W2b-easy-tighten):
+        C_3_pyth * (max(gamma) + epsilon_cross).
     qualitative_rate_only : bool
         Always True in this run (joint Track-C quantitative rate not yet
         established; depends on single-factor Track C).
@@ -1289,7 +1323,8 @@ def compute_tensor_propinquity_bound(
     panel_b: Optional[Sequence[TestFunction]] = None,
     gamma_prec: int = 20,
 ) -> TensorPropinquityBound:
-    """Compute the joint propinquity bound at (n_max_a, n_max_b).
+    """Compute the joint reference / (B,P)-route values at (n_max_a, n_max_b)
+    (names historical; not propinquity).
 
     Args:
         n_max_a, n_max_b: cutoffs (each >= 1).
@@ -1302,18 +1337,18 @@ def compute_tensor_propinquity_bound(
     Returns:
         TensorPropinquityBound object.
 
-    The factorized-panel bound is
-        Lambda <= C_3^{(2),fact} * max(gamma_a, gamma_b) = max(gamma_a, gamma_b)
-    since C_3^{(2),fact} = 1.
+    ``propinquity_bound`` (name historical) is max(gamma_a, gamma_b), a
+    REFERENCE value -- the slower factor's rate -- and NOT a proved bound:
+    the proved bound is Paper 39's gamma^(ab) <= gamma_a + gamma_b, which is
+    >= max(gamma) (2026-10-02).
 
-    The full-operator-system bound reported in this field is the
-    conservative
-        Lambda <= C_3^{(2),full} * max(gamma_a, gamma_b) = 2 max(gamma_a, gamma_b)
+    ``propinquity_bound_full`` reports
+        2 max(gamma_a, gamma_b)  (>= gamma_a + gamma_b, so a valid bound),
     Leibniz estimate ||g||_inf + ||f||_inf (once mislabelled
     'Bozejko-Fendler').  NOTE (2026-06-18 correction): the earlier
     "tighten to 1" follow-up was the *withdrawn* Pythagorean direction;
-    the correct comparison constant is the triangle bound
-    C_3^{(2)} <= sqrt(2) (see c3_full_triangle_bound).  The paper's
+    the comparison constant is C_3^{(2)} = 1 by compression (Paper 39
+    Lemma L3-T, 2026-10-02).  The paper's
     assembled Lambda^full column uses C_3^{(2)} * 2 * max(gamma)
     (corrected 2026-09-04 from 1 + 2 sqrt 2 ~ 3.828, which was the
     withdrawn reach-plus-height assembly [retracted 2026-09-04: p39-tensor-assembly-constant] -- and was LOOSER than this
@@ -1362,7 +1397,7 @@ def compute_tensor_propinquity_bound(
     bound_full = C_LIPSCHITZ_TENSOR_FULL * gamma_max
 
     # R1 (WITHDRAWN 2026-06-18 as false, Paper 39; retained for back-compat):
-    # legacy Pythagorean C_3^{(2),full} bound -- live value is the triangle bound
+    # legacy Pythagorean C_3^{(2),full} bound -- live constant is C_3^{(2)} = 1 (compression)
     c3_pyth = c3_full_pythagorean_bound(n_max_a, n_max_b)
 
     # R2: explicit ε_cross bound on the joint Lipschitz-distortion height
@@ -1380,13 +1415,16 @@ def compute_tensor_propinquity_bound(
     # that says so, for the record the retraction notes cite;  it is not a
     # propinquity bound and nothing downstream may read it as one.
     bound_r1_r2 = c3_pyth * (gamma_max + eps_cross)
-    # THE THEOREM'S constant (Paper 39 eq:main_thm, corrected 2026-09-04):
-    # Lambda <= C_3^{(2)} * 2 * max(gamma), with the TRIANGLE C_3^{(2)} =
-    # sqrt(((N_a-1)+(N_b-1))^2 / (N_a^2 + N_b^2 - 2)), N = n + 1.  Until this
+    # Paper 39's theorem (eq:main_thm) is the LIFTED-STATE route:
+    # d_GH <= gamma^(ab) <= gamma_a + gamma_b <= 2 max(gamma), constant 1, no
+    # C_3 factor.  The field below is that loosest form, 2 max(gamma).  (The
+    # conditional (B,P) assembly of Lemma L5-T gives the same number,
+    # C_3^{(2)} * 2 * max(gamma) with C_3^{(2)} = 1 by compression
+    # on the Clifford-doubled module (Paper 39 Lemma L3-T, 2026-10-02; the
+    # per-irrep triangle formula used here before is withdrawn).  Until this
     # field existed no code path computed the printed constant (CODE-A M3).
-    _Na, _Nb = n_max_a + 1, n_max_b + 1
-    c3_tri = ((( _Na - 1) + (_Nb - 1)) ** 2 / (_Na ** 2 + _Nb ** 2 - 2)) ** 0.5
-    bound_theorem = c3_tri * 2.0 * gamma_max
+    c3_compression = 1.0
+    bound_theorem = c3_compression * 2.0 * gamma_max
 
     return TensorPropinquityBound(
         n_max_a=n_max_a,
@@ -1419,17 +1457,20 @@ def joint_propinquity_lambda(
     full_operator_system: bool = False,
     gamma_prec: int = 20,
 ) -> float:
-    """Convenience: return the scalar joint propinquity bound at (n_a, n_b).
+    """Convenience: return the joint reference value (default) or the
+    2 max(gamma) upper bound at (n_a, n_b) (name historical; not propinquity).
 
     Args:
         n_max_a, n_max_b: cutoffs.
         lambda_a, lambda_b: focal lengths.
-        full_operator_system: if True, return the conservative
-            full-operator-system bound (C_3^{(2)} <= 2 instead of = 1).
+        full_operator_system: if True, return 2 max(gamma) (a valid bound,
+            >= the proved gamma_a + gamma_b); if False, max(gamma), a
+            reference value, not a proved bound.
         gamma_prec: mpmath precision.
 
     Returns:
-        Numerical bound on Lambda(T_a (X) T_b, T_S3 (X) T_S3).
+        max(gamma) (reference value, not a bound) by default; 2 max(gamma)
+        (an upper bound on Lambda) when full_operator_system is True.
     """
     out = compute_tensor_propinquity_bound(
         n_max_a, n_max_b,
@@ -1451,7 +1492,8 @@ def tensor_convergence_table(
     lambda_b: float = 1.0,
     gamma_prec: int = 20,
 ) -> Dict[Tuple[int, int], TensorPropinquityBound]:
-    """Compute joint propinquity bounds at a sequence of cutoff pairs.
+    """Compute the joint reference / (B,P)-route values at a sequence of
+    cutoff pairs (names historical; not propinquity).
 
     Args:
         pairs_n: list of (n_max_a, n_max_b) tuples.
@@ -1476,10 +1518,11 @@ def verify_joint_convergence_to_zero(
     *,
     threshold_ratio: float = 0.5,
 ) -> Tuple[bool, float]:
-    """Verify the joint bound at the largest (n_a, n_b) is at most
-    threshold_ratio times the bound at the smallest pair.
+    """Check that the reference value max(gamma) at the largest (n_a, n_b) is
+    at most threshold_ratio times its value at the smallest pair.
 
-    A weaker but more easily verified version of "Lambda -> 0".
+    A decay check on the reference rate, not a verification of the proved
+    bound (Paper 39's theorem is proved, not verified numerically).
     """
     if len(bounds) < 2:
         return True, 1.0
@@ -1626,40 +1669,38 @@ def tensor_L3_lipschitz(
 ) -> Dict[str, object]:
     """L3-T certification: joint Lipschitz comparison constant.
 
-    Verifies the Connes-Marcolli Leibniz rule produces:
-      - Factorized panel C_3^{(2),fact} = 1 (single-factor C_3 = 1
-        propagates via Leibniz dominant-term reading).
-      - Full operator system C_3^{(2)} via the SU(2) x SU(2) graded-Leibniz
-        TRIANGLE bound. (The earlier "Pythagorean refinement" C_3 < 1 was
+    Reports the joint Lipschitz comparison constants:
+      - Factorized panel C_3^{(2),fact} = 1 (a special case of the
+        compression bound, Paper 39 Lemma L3-T).
+      - Full operator system: C_3^{(2)} = 1 by compression (Paper 39 Lemma
+        L3-T, 2026-10-02); the graded-Leibniz TRIANGLE bound gives only
+        sqrt(2). (The earlier "Pythagorean refinement" C_3 < 1 was
         WITHDRAWN 2026-06-18 as false -- the operator-norm Pythagorean
         identity fails on the real CH harmonics; see
         c3_full_pythagorean_bound and Paper 39 Remark.)
-        The conservative <= 2 bound (legacy Leibniz estimate) is
-        retained for cross-check.
+        The legacy Leibniz estimate 2 is retained for cross-check.
 
-    Triangle bound (corrected 2026-06-18): the SU(2) x SU(2) graded Leibniz
-    gives the closed-form bound
-        C_3^{(2)}(N_a, N_b)  =  sqrt(((N_a-1) + (N_b-1))^2 /
-                                            (N_a^2 + N_b^2 - 2))
+    WITHDRAWN record (2026-10-02; rests on Paper 38's false per-harmonic
+    bound, not a value of C_3^{(2)}): the per-irrep formula
+        sqrt(((N_a-1) + (N_b-1))^2 / (N_a^2 + N_b^2 - 2))
     for the irrep V_{N_a} ⊗ V_{N_b}, attained at
     (N_a, N_b) = (n_max_a + 1, n_max_b + 1). For N_a = N_b this reduces to
-    sqrt(2n/(n+2)) (= 1 at n=2, -> sqrt(2)). The bound is >= 1 at every
-    finite cutoff and -> sqrt(2) in the limit (NOT "< 1 -> 1"; that
-    Pythagorean reading was withdrawn as false).
+    sqrt(2n/(n+2)). The empirical panel ratio reported below is a check
+    against it, not a determination of C_3^{(2)}.
 
     Args:
         n_max_a, n_max_b: cutoffs.
         lambda_a, lambda_b: focal lengths.
-        use_pythagorean_bound: if True (default), report the R1-tightened
-            Pythagorean bound C_3^{(2),full,Pyth}. If False, report the
-            conservative legacy <= 2 (for comparison / cross-check).
+        use_pythagorean_bound: if True (default), compare the panel against
+            the WITHDRAWN per-irrep record formula (name historical; not a
+            value of C_3^{(2)}, which is 1). If False, against the legacy 2.
 
     Returns:
         Dict reporting the comparison constants and a panel-based
         empirical verification on simple tensors. Includes:
           - C_3_factorized (= 1): factorized-panel constant.
-          - C_3_full_op_system: legacy conservative <= 2.
-          - C_3_full_pythagorean: R1-tightened SU(2)xSU(2) bound.
+          - C_3_full_op_system: legacy Leibniz estimate 2.
+          - C_3_full_pythagorean: WITHDRAWN per-irrep record (not C_3^{(2)}, which is 1).
           - empirical_C_3_max_panel: empirical on factorized panel.
           - empirical_within_pythagorean_bound: bool.
           - empirical_within_full_bound: bool (legacy).
@@ -1696,7 +1737,7 @@ def tensor_L3_lipschitz(
         "lambda_b": lambda_b,
         "C_3_factorized": C_LIPSCHITZ_TENSOR_FACTORIZED,    # = 1
         "C_3_full_op_system": C_LIPSCHITZ_TENSOR_FULL,      # <= 2 (legacy)
-        "C_3_full_pythagorean": c3_pyth,                    # WITHDRAWN 2026-06-18 (false); live = triangle >=1->sqrt2
+        "C_3_full_pythagorean": c3_pyth,                    # WITHDRAWN record (2026-06-18 / 2026-10-02); live C_3^(2) = 1 by compression
         "use_pythagorean_bound": bool(use_pythagorean_bound),
         "empirical_C_3_max_panel": empirical_C_3_max,
         # R1: empirical should be within Pythagorean bound on the factorized panel
@@ -1793,7 +1834,8 @@ def tensor_L5_assembly(
     lambda_b: float = 1.0,
     use_pythagorean_bound: bool = True,
 ) -> Dict[str, object]:
-    """L5-T assembly: joint propinquity bound from L1'-L4 ingredients.
+    """L5-T assembly (ABANDONED conditional (B,P) route; record): joint bound
+    from L1'-L4 ingredients.  Paper 39's theorem is the lifted-state route.
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
         <= max(reach_B, reach_P)              [heights WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]]
@@ -1803,10 +1845,9 @@ def tensor_L5_assembly(
     Two improvements over the C-W2b-easy first-pass version (sprint
     W2b-easy-tighten, 2026-05-07):
 
-    Triangle bound: tensor_L3_lipschitz exposes the SU(2) x SU(2)
-    graded-Leibniz TRIANGLE bound c3_full_pythagorean_bound (name
-    historical), giving C_3^{(2)} >= 1, -> sqrt(2) (closed form),
-    instead of the conservative <= 2 placeholder. (The earlier
+    Joint constant: C_3^{(2)} = 1 by compression (Paper 39 Lemma L3-T,
+    2026-10-02); c3_full_pythagorean_bound (name historical) is the
+    withdrawn per-irrep record, not a value of C_3^{(2)}. (The earlier
     "Pythagorean refinement" C_3 < 1 -> 1 was withdrawn 2026-06-18 as
     false.)
 
@@ -1816,21 +1857,21 @@ def tensor_L5_assembly(
     it is actually O(max γ) with explicit constant <= 2*sqrt(2) on the
     unit-norm panel. Qualitative rate -> 0 is robust; constant shifts.
 
-    The joint reach and joint height are now bounded by max(γ_a, γ_b)
-    via factor-by-factor inheritance from L4(c) (reach) and the
-    Connes-Marcolli graded triangle (sub-additive) Leibniz bound (height,
-    with R2 ε_cross; the earlier "Pythagorean" operator-norm identity was
-    WITHDRAWN 2026-06-18 as false, Paper 39).
+    The joint reach is bounded by γ_a + γ_b via factor-by-factor
+    inheritance from L4(c).  The joint HEIGHT is identically 1 (withdrawn as a
+    rate constituent 2026-09-04); ε_cross is a unit-norm panel quantity
+    only.  (The earlier "Pythagorean" operator-norm identity was WITHDRAWN
+    2026-06-18 as false, Paper 39.)
 
     Args:
         n_max_a, n_max_b: cutoffs.
         lambda_a, lambda_b: focal lengths.
-        use_pythagorean_bound: if True (default), use the R1-tightened
-            Pythagorean C_3 in the propinquity bound. If False, use the
-            conservative <= 2 (legacy).
+        use_pythagorean_bound: if True (default), use the WITHDRAWN
+            per-irrep record formula in the legacy R1 field (name historical;
+            not C_3^{(2)}, which is 1). If False, use the legacy 2.
 
     Returns:
-        Dict reporting the propinquity bound and constituent quantities.
+        Dict reporting the (B,P)-route record values and constituents.
         Includes the R1 Pythagorean bound and the R2 ε_cross bound.
     """
     bound = compute_tensor_propinquity_bound(
@@ -1839,7 +1880,7 @@ def tensor_L5_assembly(
     )
 
     # R1 (WITHDRAWN 2026-06-18 as false, Paper 39; retained for back-compat):
-    # legacy Pythagorean C_3 bound -- live value is the triangle bound
+    # legacy Pythagorean C_3 bound -- live constant is C_3^{(2)} = 1 (compression)
     c3_pyth = c3_full_pythagorean_bound(n_max_a, n_max_b)
 
     # R2: explicit ε_cross bound
@@ -1849,7 +1890,7 @@ def tensor_L5_assembly(
     )
     eps_cross = eps_data["epsilon_cross_bound"]
 
-    # Joint propinquity bound under R1 + R2:
+    # WITHDRAWN R1 + R2 assembly (record only):
     # Λ <= max(reach, height) <= max(γ_max, γ_max + ε_cross)
     #    = γ_max + ε_cross   (since both terms reach this max)
     g_a = bound.gamma_a
@@ -1881,7 +1922,7 @@ def tensor_L5_assembly(
         "gamma_max": g_max,
         "C_3_factorized": bound.c_lipschitz_factorized,
         "C_3_full": bound.c_lipschitz_full,                  # legacy <= 2
-        "C_3_full_pythagorean": float(c3_pyth),               # R1-tightened
+        "C_3_full_pythagorean": float(c3_pyth),               # WITHDRAWN record, not C_3^(2)
         "epsilon_cross_bound": float(eps_cross),              # R2-explicit
         "epsilon_cross_data": eps_data,
         "reach_panel": bound.reach_joint_panel,
@@ -1912,16 +1953,16 @@ class FiveLemmaStatusTensor:
     L2_T: str = "DONE (tensor_L2_central_fejer, closed-form factorization)"
     L3_T: str = (
         "DONE (tensor_L3_lipschitz, factorized panel C_3=1; "
-        "full O_sys triangle bound C_3 >= 1 -> sqrt(2); the earlier "
+        "full O_sys C_3 = 1 by compression (Paper 39 L3-T); the earlier "
         "SU(2)xSU(2) Pythagorean refinement (C_3<1, =1+o(1)) was "
         "WITHDRAWN 2026-06-18 as operator-norm-false; state-space GH)"
     )
     L4_T: str = "DONE (tensor_L4_berezin, factor-by-factor + 5-fn panel verification)"
     L5_T: str = (
-        "DONE (tensor_L5_assembly + numerical panel; "
-        "epsilon_cross = O(max(gamma_a, gamma_b)) with explicit constant "
-        "<= 2*sqrt(2) on unit-norm panel, R2 closure 2026-05-07; "
-        "joint propinquity bound qualitative-rate -> 0)"
+        "RECORD (conditional (B,P) assembly, the abandoned route: "
+        "tensor_L5_assembly + numerical panel; epsilon_cross is a unit-norm "
+        "panel quantity, <= 2*sqrt(2) max(gamma); Paper 39's theorem is the "
+        "lifted-state route, state-space GH, not propinquity)"
     )
 
     def to_dict(self) -> dict:
@@ -1935,24 +1976,30 @@ class FiveLemmaStatusTensor:
 
 
 def gh_tensor_theorem_statement() -> str:
-    """The formal Theorem L5-T (tensor-product GH convergence) statement.
+    """The Lemma L5-T record statement (abandoned conditional (B,P) route).
 
     Corrected 2026-06-22 (/qa group1 Batch 3 code dimension): the convergence
     is in van Suijlekom's STATE-SPACE Gromov-Hausdorff distance (NOT the
     Latremoliere propinquity), and the joint Lipschitz comparison constant is
-    the TRIANGLE bound C_3^{(2)} = sqrt(((N_a-1)+(N_b-1))^2/(N_a^2+N_b^2-2)),
-    which is >= 1 and -> sqrt(2). The earlier "Pythagorean refinement"
+    C_3^{(2)} = 1 by compression on the Clifford-doubled module (Paper 39
+    Lemma L3-T, 2026-10-02; the per-irrep triangle formula printed here
+    before is withdrawn). The earlier "Pythagorean refinement"
     (C_3 < 1 -> 1, "1 + o(1)") was WITHDRAWN 2026-06-18 as false (operator-norm
     Pythagorean identity fails on the real CH harmonics) -- see Paper 39 Remark
     "Withdrawn Pythagorean refinement" and ``c3_full_pythagorean_bound``.
     """
     return (
-        "Theorem L5-T (tensor-product GH convergence on S^3 x S^3). "
+        "Lemma L5-T record (abandoned conditional (B,P) route; the theorem is "
+        "Paper 39's lifted-state bound) -- tensor-product GH on S^3 x S^3. "
         "Let T_S3^a, T_S3^b denote two copies "
         "of the Camporesi-Higuchi metric spectral triple at focal lengths "
         "lambda_a, lambda_b > 0, and let T_a = T_{n_a}^a, T_b = T_{n_b}^b "
         "be the Connes-vS truncated triples at cutoffs n_a, n_b "
-        "respectively (each Paper 38 single-factor object). Then the "
+        "respectively (each Paper 38 single-factor object). Conditionally "
+        "on the reach_P named gap (this is Paper 39's abandoned (B,P) "
+        "assembly, Lemma L5-T; Paper 39's theorem is the lifted-state route, "
+        "Lambda <= lambda_a*gamma_{n_a} + lambda_b*gamma_{n_b}, constant 1, "
+        "no C_3 factor, no reach_P), the "
         "truncated tensor-product triple T_a (X) T_b converges to "
         "T_S3^a (X) T_S3^b in van Suijlekom's state-space Gromov-Hausdorff "
         "distance Lambda:\n\n"
@@ -1960,14 +2007,11 @@ def gh_tensor_theorem_statement() -> str:
         "      <=  C_3^{(2)} * 2 "
         "* max(lambda_a*gamma_{n_a}, lambda_b*gamma_{n_b})\n"
         "      ->  0  as  n_a, n_b -> infinity,\n\n"
-        "where the joint Lipschitz comparison constant is the closed-form "
-        "TRIANGLE bound\n\n"
-        "  C_3^{(2)}(n_a, n_b)\n"
-        "      =  sqrt( ((N_a - 1) + (N_b - 1))^2 / (N_a^2 + N_b^2 - 2) ),\n"
-        "      N_. = n_. + 1,\n\n"
-        ">= 1 at every finite cutoff and -> sqrt(2) as cutoffs -> infinity "
-        "(the earlier 'Pythagorean' C_3 < 1 -> 1 refinement was withdrawn "
-        "2026-06-18 as false). "
+        "where the joint Lipschitz comparison constant is C_3^{(2)} = 1 at "
+        "every cutoff, by compression on the Clifford-doubled module "
+        "(Paper 39 Lemma L3-T); the triangle bound gives only sqrt(2), and "
+        "the per-irrep closed form printed here before 2026-10-02 is "
+        "withdrawn (as is the earlier 'Pythagorean' C_3 < 1 refinement). "
         "The constant 2 in front of max(gamma) is the joint reach bound "
         "alone, reach <= gamma_a + gamma_b <= 2 max(gamma) by "
         "factor-by-factor L4(c). CORRECTED 2026-09-04 from 1 + 2*sqrt(2) "

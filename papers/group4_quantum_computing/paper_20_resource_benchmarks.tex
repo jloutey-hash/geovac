@@ -133,7 +133,7 @@ rules that translate directly into structural zeros in the qubit Hamiltonian.
 
 The result is a Pauli count exactly linear in~$Q$ across molecules at
 fixed basis (within-molecule basis exponent $3.17$), with
-$54$--$317\times$ fewer terms than Gaussian raw
+$51$--$317\times$ fewer terms than Gaussian raw
 Jordan-Wigner baselines at comparable qubit counts~\cite{GeoVac_Paper14}
 (exact-rule numbers, 2026-08-29).
 This structural sparsity is compatible with all downstream optimizations
@@ -291,7 +291,7 @@ bases for single-point calculations.
 
 \subsection{Multi-geometry FCI: solver vs.\ Hamiltonian accuracy}
 
-The 5.3--26\% equilibrium geometry errors reported in the classical
+The 5.3--19.4\% equilibrium geometry errors reported in the classical
 solver literature for GeoVac~\cite{GeoVac_Paper17} arise from the
 classical solver (adiabatic approximation, PK overcounting), not from
 the Hamiltonian operator itself. When the balanced coupled Hamiltonian
@@ -418,8 +418,10 @@ $\sim$75\% vs.\ experiment pattern documented in
 \S\ref{sec:applicability}).  Users running second-row or below should
 treat the qubit Hamiltonian as a \emph{resource-estimation target}
 only, not as a chemistry-accuracy Hamiltonian.  The Pauli counts,
-1-norm bounds, and GH convergence rates are correct in either case
-(they are properties of the operator, not its physics fidelity), so
+1-norm bounds, and the Paper~38 GH rate metadata are correct in either
+case (the first two are properties of the operator, not its physics
+fidelity;\ the GH rate is a property of the $S^3$ spectral triple, not
+of the molecular Hamiltonian), so
 algorithm research that benchmarks against scaling behaviour transfers
 cleanly across the scope boundary.  Algorithm research that wants
 ground-state energies should stay in the first-row library.
@@ -527,7 +529,7 @@ encoding uses 70 qubits (35 spatial orbitals $\times$ 2 spins) while
 STO-3G uses only 12 qubits (7 spatial orbitals
 with frozen core).  Against cc-pVDZ (46 qubits vs.\ GeoVac's 70---GeoVac
 uses $1.5\times$ more; not matched accuracy either, as the composed
-H$_2$O carries a 26\% $R_{\rm eq}$ error), GeoVac has $55\times$
+H$_2$O carries a 19.4\% $R_{\rm eq}$ error, Paper~17), GeoVac has $55\times$
 fewer Pauli terms (corrected 2026-08-30: the retired $138\times$ was
 $107{,}382/778$, i.e.\ computed against the retired pair-diagonal count).
 The measured GeoVac exponent over this range is $2.816$ against the
@@ -769,7 +771,7 @@ fewer) and preserves a sparsity win under any pessimistic $Q=20 \to Q=18$
 correction.
 
 \textbf{Accuracy caveats.} The Tier 2 spin-ful encoding inherits the
-composed architecture's $5$--$26\,\%$ $R_{\mathrm{eq}}$ error from
+composed architecture's $5.3$--$19.4\,\%$ $R_{\mathrm{eq}}$ error from
 Paper~17 and the Breit--Pauli leading-order $Z\alpha^2$ approximation
 from Paper~14. Chawla et al.'s DC-UCCSD is
 accuracy-targeted ($0.47\%$ vs CASCI for CaH). Table~\ref{tab:paper20_tier2}
@@ -1166,7 +1168,7 @@ The dissociation limit is not converged (see Sec.~\ref{sec:applicability}).
 
 \paragraph{Classical solver accuracy.}
 The classical (non-quantum) solver results reported in
-Refs.~\cite{GeoVac_Paper17,GeoVac_Paper19} (5.3--26\% $R_{\text{eq}}$
+Refs.~\cite{GeoVac_Paper17,GeoVac_Paper19} (5.3--19.4\% $R_{\text{eq}}$
 error) reflect classical solver limitations, not Hamiltonian quality.
 FCI on the balanced coupled Hamiltonian gives substantially better
 energies (0.20\% at $n_{\max}=3$), validating the Hamiltonian for
@@ -1230,9 +1232,10 @@ achieves 0.20\% single-point energy error at FCI; for second-row
 hydrides, the qubit Hamiltonian's potential-energy surface does not
 exhibit an interior minimum at $n_{\max}=2$ under any of the engineering
 configurations we tested (Section~\ref{subsec:scope_boundary}).  The
-framework's primary value proposition is structural sparsity with
-quantitative truncation-convergence rates (Paper~38 state-space GH rate, exposed as
-metadata on every Hamiltonian export), not energy-accuracy parity with
+framework's primary value proposition is structural sparsity (the
+Paper~38 state-space GH rate, exposed as metadata on every Hamiltonian
+export, is a property of the $S^3$ spectral triple, not of the molecular
+Hamiltonians), not energy-accuracy parity with
 CCSD(T) across the full periodic-table-row range.
 
 Second- and third-row molecules use analytical frozen cores

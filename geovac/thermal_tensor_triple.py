@@ -27,7 +27,7 @@ where:
 The scope of this module is to:
 
   1. Provide explicit construction of the tensor spectrum.
-  2. Reproduce Stefan-Boltzmann as an exact M1 (Hopf-base measure) x
+  2. Reproduce Stefan-Boltzmann as an exact M1 (unit-sphere volume slot) x
      M2 (Riemann zeta(4)) factorisation, sympy-symbolic, with each pi
      tagged to its tensor factor and Mellin mechanism.
   3. Compute closed-form thermal partition functions and Casimir-at-finite-T
@@ -74,15 +74,15 @@ import mpmath as mp
 # mechanism) tag, per the master Mellin engine partition (Paper 18 §III.7,
 # Paper 32 §VIII):
 #
-#   M1: Hopf-base measure / volume factor (Tr(D^0 e^{-tD^2}), k=0).
+#   M1: unit-sphere volume factor (Tr(D^0 e^{-tD^2}), k=0).
 #   M2: Seeley-DeWitt / spectral-action / Riemann-zeta-at-even (k=2).
 #   M3: vertex-parity / half-integer Hurwitz / Dirichlet-L (k=1).
 #
 # For thermal physics on S^3 x S^1_beta, the Matsubara sum produces zeta(2k)
 # values which sit in M2 (rational + Riemann zeta even), and the spatial
-# Hopf-base measure d^3k/(2pi)^3 contributes a 1/(2pi^2) which sits in M1.
+# The momentum measure d^3k/(2pi)^3 contributes a 1/(2pi^2) which sits in M1.
 
-PI_TAG_M1_HOPF = "M1: Hopf-base measure factor 1/(2 pi^2) from Vol(S^2)/(2pi)^3"
+PI_TAG_M1_HOPF = "M1: unit-sphere volume factor 1/(2 pi^2) from Vol(S^2)/(2pi)^3"
 PI_TAG_M1_S3VOL = "M1: Vol(S^3) / pi^2 = 2"
 PI_TAG_M1_MATSUBARA_CIRCLE = "M1: 2 pi from imaginary-time circle circumference (S^1_beta factor)"
 PI_TAG_M2_ZETA4 = "M2: pi^4 from Riemann zeta(4) = pi^4/90"
@@ -548,7 +548,7 @@ def transcendental_audit() -> dict:
     rows = [
         {
             "quantity": "Vol(S^2)/(2pi)^3 = 1/(2 pi^2)",
-            "factor": "spatial S^3 (continuum limit, Hopf-base measure)",
+            "factor": "spatial S^3 (continuum limit, unit-sphere volume slot)",
             "mechanism": "M1",
             "tag": PI_TAG_M1_HOPF,
             "pi_power": "1/pi^2",

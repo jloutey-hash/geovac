@@ -28,6 +28,16 @@ GVC_MD = re.compile(r"<!--\s*gvc:([a-z0-9-]+)\s*-->")
 # the 24 chars before) let "not only checked but INTERNAL THEOREM" and "no: K is
 # derived" through (DELTA #24 code review).
 _LIST = r"(?:[\w-]+(?:,|\s+or|\s+nor)\s+){0,4}"
+# A comma-separated negated list exempts an overclaim only if the list CLOSES with or/nor --
+# before the overclaim ("not a conjecture or theorem") or after it ("never a derivation,
+# conjecture, prediction or theorem").  "is not conditional, INTERNAL THEOREM" is not a
+# list at all and must fire (DELTA #25 code review: the v5.18.1 list rule let it through).
+_LIST_CLOSED_BEFORE = re.compile(r"\b(?:or|nor)\s+" + "[\"'`\u201c\u2018]*" + r"$", re.I)
+_LIST_CLOSED_AFTER = re.compile(r"^[\"'`\u201d\u2019]*\s*(?:,\s*[\w-]+(?:\s+[\w-]+)?\s*){0,4},?\s*(?:or|nor)\s+\w", re.I)
+_ADJ_NEG = re.compile(r"\b(?:not|never|nor|neither)\s+[\"'`\u201c\u2018]*(?:(?:a|an|the|be|been|is|are|was|were|presented\s+as)\s+){0,2}[\"'`\u201c\u2018]*$"
+                      r"|\b(?:withdrawn|downgraded|retired|demoted)\s+(?:as|from)\s+(?:(?:a|an|the)\s+)?[\"'`\u201c\u2018]*$"
+                      r"|\bno\s+longer\s+(?:(?:a|an|the)\s+)?[\"'`\u201c\u2018]*$"
+                      r"|\b(?:rather\s+than|instead\s+of)\s+(?:(?:a|an|the)\s+)?[\"'`\u201c\u2018]*$", re.I)
 _Q = "[\"'`\u201c\u2018]*"
 NEGATION = re.compile(r"(\b(?:not|never|nor)\s+(?:(?:a|an|the|be|been|is|are|was|were)\s+)?" + _LIST + _Q +
                       r"|\bno\s+longer\s+(?:(?:a|an|the)\s+)?" + _Q +
@@ -66,7 +76,7 @@ def _c(p: str) -> re.Pattern:
 def _norm(span: str) -> str:
     """Strip LaTeX formatting wrappers and ties so "\\emph{not}~a theorem" reads
     "not a theorem" and "mostly \\textbf{forced}" reads "mostly forced"."""
-    span = re.sub(r"\\(?:emph|textbf|textit|textrm|mathrm|text)\{", "", span)
+    span = re.sub(r"\\(?:emph|textbf|textit|textrm|textsc|textsf|texttt|textup|underline|mathrm|text)\{", "", span)
     span = re.sub(r"(?<!\\)[{}]", "", span)
     return span.replace("~", " ")
 
@@ -88,8 +98,12 @@ def check_text_span(cid: str, span: str) -> list[str]:
 def first_live_overclaim(cid: str, span: str):
     c = R.CLAIMS[cid]
     for m in _c(c["overclaim"]).finditer(span):
-        # an ADJACENT negation ("not a conjecture", "never derived") is the corrected form
-        if NEGATION.search(span[max(0, m.start() - 40):m.start()]):
+        # an ADJACENT negation ("not a conjecture", "never derived") is the corrected form;
+        # a negated LIST counts only if the list closes with or/nor (before or after)
+        pre = span[max(0, m.start() - 40):m.start()]
+        if _ADJ_NEG.search(pre):
+            continue
+        if NEGATION.search(pre) and (_LIST_CLOSED_BEFORE.search(pre) or _LIST_CLOSED_AFTER.match(span[m.end():m.end() + 80])):
             continue
         # a tier TRANSITION record is history only when the arrow points AT the current
         # tier ("conjecture→observation"); "INTERNAL THEOREM -> now proven" is not
@@ -115,8 +129,11 @@ def owner_checks() -> list[str]:
             continue
         w = c.get("owner_window", OWNER_WINDOW)
         wins = [_norm("\n".join(lines[max(0, i - w):i + w + 1])) for i in hits]
-        if not any(_c(c["owner_tier"]).search(x) for x in wins):
-            out.append(f"[{cid}] owner tier /{c['owner_tier']}/ not within {w} lines of the anchor in {c['owner']}")
+        # owner_all: EVERY anchor locus must carry the tier (one locus cannot vouch for another)
+        quant = all if c.get("owner_all") else any
+        if not quant(_c(c["owner_tier"]).search(x) for x in wins):
+            out.append(f"[{cid}] owner tier /{c['owner_tier']}/ not within {w} lines of "
+                       f"{'every' if c.get('owner_all') else 'the'} anchor in {c['owner']}")
         # the owner must not itself carry the overclaim next to its anchor (a registry that
         # only checks a tier word is present cannot see the owner drifting STRONGER)
         for x in wins:
@@ -201,7 +218,35 @@ def selftest() -> int:
                                "K = π(B + F − Δ): an Observation (not a conjecture or derivation)"),
         "p38-rate-constant": ("rate (c) log n/n with c = 4/π | INTERNAL THEOREM (unconditional)",
                               "rate (c) log n/n with c = 4/π | INTERNAL THEOREM + MEASURED"),
+        "graph-s3-wall": ("the graph Laplacian converges to Δ on S^3",
+                          "the graph Laplacian does not converge to Δ (WALL; disconnected l-blocks)"),
+        "p7-parseval-f0": ("the density-overlap formula is a key structural finding of S^3",
+                           "the density-overlap formula is the Fourier--Parseval form [PRIOR ART]"),
+        "he-bracket": ("He 0.004% is a variational 0.004% bound",
+                       "He 0.004% (a non-variational extrapolation, below exact)"),
+        "p1-degree-not-monotone-l": ("higher-l nodes have more connections",
+                                     "degree is not monotone in l; only the m = 0 nodes order D_2p > D_2s"),
+        "p38-uniform-bound": ("gamma_n <= 6 log n/n holds for all n",
+                              "gamma_n <= 6 log n/n [MEASURED] on a finite range, not proved for all n"),
+        "k-match-precision": ("K = π(B+F−Δ) matches 1/α to 8.8×10^-8",
+                              "K matches 1/α to 4.8×10^-7; the cubic's root to 8.8×10^-8"),
+        "p40-general-g-conditional": ("Paper 40 generalises it to all compact Lie groups, closes it positively",
+                                      "Paper 40 generalises it to compact semisimple groups (conditionally on the per-group spin-window decomposition)"),
+        "m2-ring-integer-s": ("the pure-Tate even-weight ring holds at every s",
+                              "the pure-Tate even-weight ring holds at integer s (Seeley-DeWitt coefficients)"),
+        "three-homes-negative": ("no spectral construction on S^3 simultaneously generates all three",
+                                 "no single construction generating all three has been exhibited (twelve eliminated; an empirical record)"),
+        "p1-ladder-exact": ("[PANEL-VERIFIED] the ladder operators reproduce the quantum numbers",
+                            "[SYMBOLIC PROOF] the ladder operators reproduce the quantum numbers on interior shells"),
+        "m1-gh-rate-reading": ("the M1 mechanism produces the 4/π GH rate constant",
+                               "the GH rate constant shares its value with M1 (a reading, not a derivation)"),
+        "p55-census-scope": ("all of GeoVac's transcendentals sit in mixed-Tate periods: the engine classification",
+                             "every transcendental in the census of S^3 spectral data sits in mixed-Tate periods"),
     }
+    missing = set(R.CLAIMS) - set(probes) - {"pi-source-case-exhaustion"} | (set(probes) - set(R.CLAIMS))
+    if missing - {"pi-source-case-exhaustion"}:
+        print(f"SELFTEST FAIL: claims without a fire+silent probe (or stale probes): {sorted(missing)}")
+        ok = False
     # The exact strings that ESCAPED the first version (DELTA #24 code review): each must fire.
     escapes = [
         ("pi-source-case-exhaustion", "case-exhaustion theorem (unconditional): every pi engages M1/M2/M3"),
@@ -210,6 +255,19 @@ def selftest() -> int:
         ("pi-source-case-exhaustion", "case-exhaustion (first fifteen) -- not only checked but INTERNAL THEOREM"),
         ("k-combination-rule", "the combination rule is an observation? no: K is derived from the spectral action"),
         ("pi-source-case-exhaustion", "case-exhaustion [CONDITIONAL] upgraded: INTERNAL THEOREM -> now proven"),
+        ("pi-source-case-exhaustion", "the case-exhaustion is not conditional, INTERNAL THEOREM"),
+        ("pi-source-case-exhaustion", "the case-exhaustion (first fifteen) is not conditional, INTERNAL THEOREM"),
+        ("p40-general-g-conditional", "has been resolved by Paper~40 (unconditionally at rank~1; conditionally on the per-group spin-window decomposition)"),
+        ("p40-general-g-conditional", "resolved by Paper 40, conditionally on the spin-window decomposition"),
+        ("k-combination-rule", "the combination rule, an Observation, \\textsc{conjecture}"),
+        ("k-combination-rule", "combination rule, once an Observation, is now a theorem"),
+        ("k-combination-rule", "combination rule (an Observation) is proved from the spectral action"),
+        ("wh1-p38-gh-convergence", "Paper 38 convergence (commutative factor), and the almost commutative extension is proved too"),
+        ("wh1-p38-gh-convergence", "Paper 38 proves convergence for the non-commutative gauge extension"),
+        ("m2-ring-integer-s", "pure-Tate even-weight ring at non-integer s"),
+        ("central-smoothing-cb-norm", "the cb-norm of the smoothing, 2/(n_max+1), vanishes"),
+        ("p38-uniform-bound", "6 log n/n [MEASURED], valid for every n_max (proved)"),
+        ("k-match-precision", "K agrees with 1/alpha to 8.8e-8 (the cubic is irrelevant)"),
     ]
     for cid, bad in escapes:
         if not check_text_span(cid, bad):

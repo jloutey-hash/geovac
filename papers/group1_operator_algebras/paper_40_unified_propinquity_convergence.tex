@@ -100,13 +100,14 @@ spin-window decomposition, see below)
 $\Tcal_\Lammax$ converges to $\Tcal_G$ in van~Suijlekom's state-space
 Gromov--Hausdorff distance for metric spectral triples, with
 \begin{equation*}
-   \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; C_3(G) \cdot \gamma_\Lammax(G),
+   d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
+   \;\le\; \gamma_\Lammax(G),
    \qquad
    \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax} + O(1/\Lammax),
 \end{equation*}
-where $C_3(G) \le 1$ is the Lipschitz comparison constant, asymptotic-tight
-as $\Lammax \to \infty$. The asymptotic rate constant $4/\pi$ is
+with constant~$1$ from the lifted-state route of Paper~38 (the
+Lipschitz comparison constant $C_3(G) = 1$ of Lemma~\ref{lem:L3} enters
+only the withdrawn approximation-pair route). The asymptotic rate constant $4/\pi$ is
 \emph{universal} across the class:\ it is independent of the rank of $G$,
 the order of the Weyl group $W(G)$, and the explicit Lie-type of $G$, in
 the dual-Coxeter normalisation of the bi-invariant inner product.  The
@@ -120,20 +121,22 @@ the identity is the rotation angle --- exactly the distance Paper~38
 integrates against --- so Paper~38 is the rank-1 case of this theorem in
 the same normalisation, and its constant $4/\pi$ is this one. Paper~38
 \cite{paper38} is recovered as the rank-$1$ case $G = \SU(2)$. The proof
-proceeds via the same lemma chain (L1$'$~chirality-doubled operator
-system, L2~central spectral Fej\'er kernel with closed-form quantitative
-rate, L3~Lipschitz comparison via the Dirac-triangle inequality on
-tensor products of irreducibles, L4~Berezin reconstruction via
-Peter--Weyl), closed by the lifted-state route.  The approximation pair
+is the lifted-state route (UCP compression plus the conjugation average
+against the L2 central spectral Fej\'er kernel with closed-form
+quantitative rate);\ the lemma chain (L1$'$~operator system, L3~Lipschitz
+comparison with constant $1$ at every rank, proved by compression,
+L4~Berezin reconstruction via Peter--Weyl) supplies the substrate and
+supporting estimates, L3 entering only the withdrawn approximation-pair
+route.  The approximation pair
 of \S\ref{sec:L5} is recorded but \emph{does not supply an independent
 proof}:\ its dual reach is a named gap and both height constituents are
-refuted (Lemma~\ref{lem:L5}, corrected 2026-09-04). The
-universality of $4/\pi$ identifies the state-space GH rate with the
-$k=0$ sub-mechanism of a master Mellin engine
-$\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple, sharpening the
-structural reading of Paper~38 from a single-group observation to a
-class-wide result (rigorous at rank~$1$; numerically established at
-rank~$\ge 2$, where the robust content is the discrimination of $4/\pi$
+refuted (Lemma~\ref{lem:L5}, corrected 2026-09-04).
+\textbf{[OBSERVATION]} Paper~38 reads its rate constant (a reading, not
+a derivation) as the $k=0$ volume-slot content of a master Mellin engine
+$\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple;\ the
+universality of $4/\pi$ extends the value so read from a single group to
+the class (rigorous at rank~$1$; numerically supported, with a
+fit-sensitive extraction, at rank~$\ge 2$, where the robust content is the discrimination of $4/\pi$
 from the Weyl-formula alternative and a fully rank-uniform analytical
 proof is a named gap, see Remark~\ref{rem:correction_L2} and the status
 note in \S\ref{sec:L2}). The result supplies an explicit
@@ -202,7 +205,7 @@ Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_estrada_vs2025};\ the present
 author's Paper~38~\cite{paper38} treats the spinor (Camporesi--Higuchi) instance on the round
 $S^3 = \SU(2)$ Camporesi--Higuchi spectral triple with explicit rate
 \(
-\Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_{S^3}) = O(\log \Lammax / \Lammax)
+d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_{S^3}) = O(\log \Lammax / \Lammax)
 \)
 and asymptotic constant $4/\pi = \Vol(S^2)/\pi^2$, twice the quotient
 $\Vol(S^2)/\Vol(S^3) = 2/\pi$ of unit-radius sphere volumes (not the Hopf fibration's base-to-total ratio;
@@ -212,8 +215,9 @@ through a lemma chain L1$'$--L4 plus an assembly step (the fifth,
 --- dual reach a named gap, both heights refuted), in which the
 principal new ingredients beyond the abelian case were (i)~a central spectral Fej\'er
 kernel on $\SU(2)$ built from Peter--Weyl rather than Schur--Fourier
-multipliers, (ii)~a Lipschitz comparison estimate exploiting the
-$\SO(4)$ selection rule on Avery 3-Y integrals, and (iii)~a non-K\"ahler
+multipliers, (ii)~a Lipschitz comparison estimate (originally argued
+through the $\SO(4)$ selection rule on Avery 3-Y integrals;\ since
+2026-09-28 proved by compression, Paper~38 Lemma~L3), and (iii)~a non-K\"ahler
 Berezin reconstruction via the central-Fej\'er-kernel spectral form.
 
 \paragraph{Concurrent state-space result.}
@@ -248,13 +252,14 @@ truncated metric spectral triples $\Tcal_\Lammax$ converge to $\Tcal_G$
 in van~Suijlekom's state-space Gromov--Hausdorff distance, with
 explicit rate
 \begin{equation}\label{eq:main_intro}
-   \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; C_3(G) \cdot \gamma_\Lammax(G), \qquad
+   d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
+   \;\le\; \gamma_\Lammax(G), \qquad
    \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax}
    + O\!\bigl(1/\Lammax\bigr),
 \end{equation}
-where $C_3(G) \le 1$ is the Lipschitz comparison constant of
-Lemma~\ref{lem:L3} (asymptotic-tight as $\Lammax \to \infty$) and
+with constant~$1$ from the lifted-state route of Paper~38 (the
+Lipschitz comparison constant $C_3(G) = 1$ of Lemma~\ref{lem:L3} enters
+only the withdrawn approximation-pair route), where
 $\gamma_\Lammax(G)$ is the mass-concentration moment of the central
 spectral Fej\'er kernel on $G$ given by Lemma~\ref{lem:L2}. The
 asymptotic rate constant $4/\pi$ is \emph{universal} across the class.
@@ -286,9 +291,10 @@ of $4/\pi \approx 1.273$ versus $32.9\%$ of $16/\pi^2 \approx 1.621$;
 $G_2$ extracted $1.177$, within $7.6\%$ of $4/\pi$ versus $51.6\%$ of
 $24/\pi^2 \approx 2.432$. Cross-group ratios are convention-independent
 and confirm the same verdict; see~\S\ref{sec:universal} for details.}.
-The universality is therefore not an artifact of $\SU(2)$ but a
-class-wide property of compact semisimple Lie groups with bi-invariant
-metric (a central $U(1)$ factor carries the circle constant $2/\pi$
+The universality is therefore not an artifact of $\SU(2)$ but, at the
+tier of Theorem~\ref{thm:main}(ii) (rigorous at rank~1, numerically
+supported at higher rank), a class-wide property of compact semisimple
+Lie groups with bi-invariant metric (a central $U(1)$ factor carries the circle constant $2/\pi$
 instead; see the scope note inside
 Corollary~\ref{cor:general_compact_connected}).
 
@@ -310,29 +316,33 @@ the Weyl-formula Reading~B ($c = 2|W|/\pi^r$), decisive at $G_2$
 (extracted $c$ near $4/\pi \approx 1.27$, far from
 $24/\pi^2 \approx 2.43$). A fully rank-uniform analytical proof is a
 named gap. In parallel, the
-Lipschitz comparison constant $C_3(G) = 1$ has been rigorously
-established as asymptotic-tight at all ranks via the
-Parthasarathy--Ranga Rao--Varadarajan summand bound for the asymptotic
-family (Theorem~\ref{thm:prv_summand_bound} and
-Corollary~\ref{cor:c3_asymptotic_tight}) together with a
-Brauer--Klimyk signed-sum closure for interior (non-PRV) summands
-(Lemma~\ref{lem:L3_interior}). The latter closes the L3 lemma at all
-ranks rigorously and reduces the previous numerical-verification
-status (5641/5641 cells across $\SU(3), \SU(4), \Sp(2), G_2$) to the
-per-orbit case-bookkeeping that the Brauer--Klimyk cancellation
-mechanism predicts. Both upgrades preserve the statement of the
-main theorem unchanged.
+Lipschitz comparison constant $C_3(G) = 1$ holds at every rank and every
+cutoff by compression (Lemma~\ref{lem:L3}, 2026-10-02).  The earlier
+per-summand analysis (the Dirac-triangle and intermediate inequalities,
+via the Parthasarathy--Ranga Rao--Varadarajan summand bound and a
+Brauer--Klimyk signed-sum closure, case-bookkeeping verified at
+$5641/5641$ cells across $\SU(3), \SU(4), \Sp(2), G_2$) is retained as
+representation-theoretic statements about Kostant eigenvalues and Casimirs
+(proved for the trivial-$\lambda$ and Cartan-product summands, verified on
+weight-bounded panels for the PRV and interior classes);\
+its bridge to the commutator norm (an entrywise bound read as an
+operator-norm bound, and eigenvalue ratios read as per-isotypic
+Lipschitz constants) is the step Paper~38 refuted at rank~1 on
+2026-09-28 and is withdrawn here, so it is neither needed for nor a check of
+Lemma~\ref{lem:L3}.
 
 \paragraph{Structural reading.}
-The constant $4/\pi$ identifies with the \emph{master Mellin M1
-sub-mechanism} on the spectral triple, in the sense that
+\textbf{[OBSERVATION]} The constant $4/\pi$ is read (a reading, not a
+derivation;\ Paper~38) as the \emph{master Mellin M1 volume-slot} content
+on the spectral triple, in the sense that
 $4/\pi = 2\Vol(S^2)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2$ is the
 volume quotient $2\Vol(S^2)/\Vol(S^3)$ at unit radius (Paper~38, volume-ratio note), and
 this factor is exactly what enters the
 $k = 0$ slice of the spectral-action heat-kernel Mellin transform
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the canonical Riemannian spectral
-triple. The class-wide universality of $4/\pi$ established here says
-that this M1 signature is rank-invariant across the semisimple class:\
+triple. The class-wide universality of $4/\pi$ reported here (at the
+tier of Theorem~\ref{thm:main}(ii)) says that the value so read is
+rank-invariant across the semisimple class:\
 whatever the group, the central spectral Fej\'er kernel sees the
 rank-$1$ ($\SU(2)$) asymptotic analysis of Paper~38 through
 Peter--Weyl rather than through the global geometry of the
@@ -351,8 +361,9 @@ and records the fifth:
 \S\ref{sec:L1prime}~the chirality-doubled operator system substrate;
 \S\ref{sec:L2}~the central spectral Fej\'er kernel and its quantitative
 rate (Stein--Weiss type $\log \Lammax / \Lammax$ with universal
-constant $4/\pi$); \S\ref{sec:L3}~the Lipschitz comparison via the
-Dirac-triangle inequality on tensor products of irreducibles;
+constant $4/\pi$); \S\ref{sec:L3}~the Lipschitz comparison, proved by compression (the
+earlier Dirac-triangle analysis retained as representation-theoretic
+statements, proved on special summands and panel-verified on the rest);
 \S\ref{sec:L4}~the Berezin reconstruction; and \S\ref{sec:L5}~the
 state-space GH assembly via the approximation pair. Section~\ref{sec:main_theorem}
 assembles the main theorem and states explicit corollaries for
@@ -434,12 +445,16 @@ class-function computations on $G$ reduce to Cartan integrals.
 
 For $G$ compact connected with bi-invariant metric, the canonical
 Dirac operator is the \emph{Kostant cubic Dirac operator}~\cite{kostant1999},
-constructed from the Killing form via the cubic Clifford element
+constructed from an invariant inner product on $\mathfrak g$ --- here
+the dual-Coxeter-normalised bi-invariant metric, the same one in which
+$\nabla f$ is measured (Kostant's construction works for any invariant
+inner product) --- via the cubic Clifford element
 \begin{equation}\label{eq:kostant_def}
    \Dop_G \;=\; \sum_a e_a \otimes e_a \;+\;
    \tfrac{1}{3}\sum_{a, b, c} f_{abc}\, e_a e_b e_c,
 \end{equation}
-where $\{e_a\}$ is an orthonormal basis of $\mathfrak g$ and $f_{abc}$
+where $\{e_a\}$ is an orthonormal basis of $\mathfrak g$ for that inner
+product and $f_{abc}$
 are the structure constants. The cubic term ensures that $\Dop_G$ is
 $G$-equivariant under the left regular action and self-adjoint on
 $L^2(G, \Sigma)$, where $\Sigma$ is the spinor bundle. The spectrum of
@@ -460,9 +475,10 @@ up to the conventional offset.}.
 
 For our purposes, the load-bearing input is~\eqref{eq:dirac_eigenvalue}
 and the Peter--Weyl decomposition~\eqref{eq:peter_weyl}; the cubic
-construction is not invoked again, and the proof of
-Theorem~\ref{thm:main_intro} is independent of the specific cubic
-form of $\Dop_G$.
+construction is invoked again only in the proof of Lemma~\ref{lem:L3},
+which uses that the cubic term is a constant (zeroth-order) Clifford
+element, and otherwise the proof of Theorem~\ref{thm:main_intro} is
+independent of the specific cubic form of $\Dop_G$.
 
 \subsection{The canonical compact-Lie-group spectral triple}
 
@@ -482,8 +498,8 @@ denotes the multiplication operator. By the standard
 Kantorovich--Rubinstein-type duality
 arguments~\cite{connes1995, latremoliere2018}, this coincides with the
 classical Lipschitz seminorm of $f$ with respect to the bi-invariant
-geodesic distance on $G$, up to a benign multiplicative constant which
-we control in Lemma~\ref{lem:L3} below.
+geodesic distance on $G$;\ the truncated comparison constant is
+exactly $1$ (Lemma~\ref{lem:L3} below).
 
 \subsection{Spectral truncation in Casimir-cutoff form}\label{sec:truncations}
 
@@ -536,11 +552,12 @@ $G$, with Paper~38 recovered as the rank-$1$ case
 
 \subsection{Distance convention}\label{sec:propinquity_convention}
 
-Throughout this paper, $\Lambda_{\mathrm{prop}}(\Tcal_1, \Tcal_2)$
+Throughout this paper, $d_{\mathrm{GH}}(\Tcal_1, \Tcal_2)$
 denotes van~Suijlekom's \emph{state-space Gromov--Hausdorff distance}
 between metric spectral triples~\cite{vs2021_jgp} --- the object every
-bound in this paper controls; the symbol is retained from the drafting
-lineage of Paper~38 (2026-09-02 correction:\ an earlier version of this
+bound in this paper controls (2026-10-02:\ earlier versions wrote it
+$\Lambda_{\mathrm{prop}}$, a symbol inherited from the drafting lineage
+of Paper~38;\ 2026-09-02 correction:\ an earlier version of this
 subsection defined the symbol as Latr\'emoli\`ere's propinquity). The
 strictly stronger Gromov--Hausdorff propinquity for metric spectral
 triples of Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017} --- the
@@ -639,7 +656,7 @@ $4/\pi \cdot \log \Lammax/\Lammax$.
 
 \paragraph{Status of the universality result.} The asymptotic
 universality of $4/\pi$ is \emph{rigorous at rank~$1$}
-($\SU(2)$, Paper~38) and \emph{numerically established} across
+($\SU(2)$, Paper~38) and \emph{numerically supported} (fit-sensitive extraction) across
 $\SU(3)$, $\Sp(2)$, $G_2$ (and a rank-$3$ datapoint $\SU(4)$);
 Theorem~\ref{thm:universal_constant} below. For general $G$ the
 \emph{Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
@@ -1086,36 +1103,84 @@ analysis''; withdrawn 2026-09-02.)
 \end{remark}
 
 % ---------------------------------------------------------------------
-\subsection{Lemma L3: Lipschitz comparison via the Dirac-triangle
-inequality}\label{sec:L3}
+\subsection{Lemma L3: Lipschitz comparison by compression}\label{sec:L3}
 % ---------------------------------------------------------------------
 
 The third lemma is the Lipschitz comparison estimate that controls the
 operator norm of the commutator $[\Dop_G, M_f]$ in terms of the
-classical Lipschitz norm of $f$ on $G$. This is the place where the
-SU(2)-specific Avery 3-Y selection rule of Paper~38 must be replaced
-by a higher-rank analog. The correct generalisation is the
+classical Lipschitz norm of $f$ on $G$. It is proved at every rank by
+compression, exactly as Paper~38 now proves the $\SU(2)$ case
+(2026-10-02;\ an earlier version of this section proved it through a
+higher-rank analog of Paper~38's Avery 3-Y selection rule).  The
 \emph{Dirac-triangle inequality} on tensor products of irreducibles,
-which we state, verify numerically, and reduce analytically below.
+which earlier versions used as the proof, is retained below
+(\S\ref{sec:L3_numerical}--\S\ref{sec:L3_analytical}) as a statement
+about Kostant eigenvalues and Casimirs of tensor-product summands;\
+its bridge to the commutator norm (an entrywise bound read as an
+operator-norm bound, and eigenvalue ratios read as per-isotypic
+Lipschitz constants) is the step Paper~38 refuted at rank~1 on
+2026-09-28 and is withdrawn here.
 
-\subsubsection{Statement and reduction to (INT)}\label{sec:L3_statement}
+\subsubsection{Statement and proof by compression}\label{sec:L3_statement}
 
-\begin{lemma}[L3: Lipschitz comparison on compact semisimple Lie groups]\label{lem:L3}
+\begin{lemma}[L3: Lipschitz comparison on compact Lie groups;\
+\textbf{[INTERNAL THEOREM]}]\label{lem:L3}
 Let $G$ be a compact connected Lie group of rank $r \ge 1$ with
 bi-invariant metric (dual-Coxeter normalised), and let $\Dop_G$ be the
-Kostant cubic Dirac operator on $G$. For every $f \in C^\infty(G)$ and
-every $\Lammax > 0$,
+Kostant cubic Dirac operator on $G$. For every real $f \in C^\infty(G)$
+and every $\Lammax > 0$,
 \begin{equation}\label{eq:L3_main_general}
-   \opnorm{[\Dop_G,\, M_f]}
-   \;\le\; C_3(G) \cdot \norm{\nabla f}_{L^\infty(G)},
+   \opnorm{[\Dop_\Lammax,\, P_\Lammax M_f P_\Lammax]}
+   \;\le\; C_3(G) \cdot \norm{\nabla f}_{L^\infty(G)}, \qquad C_3(G) = 1,
 \end{equation}
-where the bi-invariant Lipschitz norm $\norm{\nabla f}_{L^\infty}$ is
-taken with respect to the bi-invariant Riemannian metric on $G$, and
-$C_3(G) \le 1$ asymptotic-tight as $\Lammax \to \infty$.
+where the Lipschitz norm $\norm{\nabla f}_{L^\infty}$ is taken with
+respect to the bi-invariant Riemannian metric on $G$.  The constant
+cannot be lowered uniformly in $\Lammax$.
 \end{lemma}
 
-The key analytical ingredient in the proof is the Dirac-triangle
-inequality, which generalises the SU(2) selection rule
+\begin{proof}[Proof (by compression)]
+\emph{(a) The truncation commutes with $\Dop_G$.}  The projection
+$E_\pi$ of~\eqref{eq:casimir_cutoff} is the isotypic projection of the
+left regular action of $G$ on $L^2(G, \Sigma) = L^2(G) \otimes \Sigma$
+(the spinor bundle trivialised by a left-invariant frame), namely
+$E_\pi = \dim \pi \int_G \overline{\chi_\pi(g)}\, L_g\, dg$ (in
+$L^2(G) = \bigoplus_\pi V_\pi \otimes V_\pi^*$ the left- and right-isotypic
+components coincide, with equal Casimirs).  $\Dop_G$ is equivariant
+under the left regular action (\S\ref{sec:kostant_dirac}), so it
+commutes with every $L_g$, hence with every $E_\pi$ and with
+$P_\Lammax$.  Therefore $\Dop_\Lammax = P_\Lammax \Dop_G P_\Lammax =
+\Dop_G P_\Lammax$ and
+\[
+   [\Dop_\Lammax,\, P_\Lammax M_f P_\Lammax] \;=\;
+   P_\Lammax [\Dop_G, M_f] P_\Lammax .
+\]
+\emph{(b) The continuum commutator.}  In~\eqref{eq:kostant_def} the
+cubic term is a constant Clifford element acting on the spinor factor
+alone, so it commutes with $M_f$;\ the first-order term
+$\sum_a e_a \otimes X_a$ (the $X_a$ the left-invariant orthonormal
+frame fields) gives $[\Dop_G, M_f] = \sum_a e_a\, (X_a f) =
+c(df)$, Clifford multiplication by $df$.  For real $f$ its operator norm
+is $\sup_G |df| = \norm{\nabla f}_{L^\infty(G)}$, the Clifford relations
+being those of the bi-invariant metric.  (This is Connes' formula on a
+closed spin manifold;\ the cubic torsion term does not enter.)
+
+\emph{(c) Compression contracts norms}, so
+$\opnorm{P_\Lammax [\Dop_G, M_f] P_\Lammax} \le \norm{\nabla
+f}_{L^\infty(G)}$ for every $f$ and every $\Lammax$.  \emph{Sharpness:}
+$P_\Lammax \to 1$ strongly as $\Lammax \to \infty$, so
+$\opnorm{P_\Lammax [\Dop_G, M_f] P_\Lammax} \to \opnorm{[\Dop_G, M_f]}$
+and $C_3(G) = 1$ cannot be lowered uniformly.
+\end{proof}
+
+\noindent The argument uses only left-equivariance of $\Dop_G$ and
+that its symbol is Clifford multiplication, so it holds verbatim for
+every compact connected Lie group in the class, at every rank, with no
+case analysis;\ it replaces the per-summand route below as the proof of
+Lemma~\ref{lem:L3}.  Mechanism backed by
+\texttt{tests/test\_paper40\_l3\_compression.py}.
+
+The key analytical ingredient of the per-summand route is the
+Dirac-triangle inequality, which generalises the SU(2) selection rule
 $|n - n'| + 1 \le N \le n + n' - 1$ used in Paper~38 to arbitrary
 rank.
 
@@ -1193,44 +1258,48 @@ family $\lambda_n = (n, 0, \ldots, 0)$, $\lambda' = (1, 0, \ldots, 0)$
 gives the cleanest convergence-rate check:\ the ratio
 $|\Dop(\lambda_n) - \Dop(\lambda')|/\sqrt{\Cas(\sigma_{\min})}$
 approaches $1$ from below at the rate $1 - O(1/n)$ in every rank
-tested, structurally identical to Paper~38's $\sqrt{(N-1)/(N+1)} \to 1^-$
-behaviour for $\SU(2)$.
+tested.  (An earlier version called this structurally identical to a
+per-harmonic ratio $\sqrt{(N-1)/(N+1)}$ of Paper~38;\ that per-harmonic
+inequality is false and was withdrawn in Paper~38, 2026-09-28.)
 \end{proof}
 
-\subsubsection{Analytical proof of (INT) at low rank, on PRV summands,
-and structural reduction at all ranks}\label{sec:L3_analytical}
+\subsubsection{The per-summand inequalities:\ (INT) on special summands,
+PRV existence, and an interior-summand sketch}\label{sec:L3_analytical}
 
-\paragraph{Status of the rigorous coverage.} The bound $C_3(G) \le 1$
-itself follows directly by compression, as in Paper~38 Lemma~L3:\ the
-truncation projection commutes with the Dirac operator and contracts
-operator norms, so $\norm{[D, P M_f P]} \le \norm{[D, M_f]} =
-\norm{\nabla f}_{L^\infty}$ for every $f$, independently of the
-per-summand route below (Paper~38 withdrew its own per-harmonic route
-on 2026-09-28;\ the per-summand route here has not been re-audited
-against that withdrawal, so the coverage statements that follow are
-subject to it).  Four classes of summands
-$\sigma \subset \pi \otimes \pi'^*$ are now rigorously covered at all
-ranks:\ (i) the trivial-$\lambda$ case, (ii) the Cartan-product
-summand, (iii) \emph{all PRV (Parthasarathy--Ranga
-Rao--Varadarajan) summands}, by Theorem~\ref{thm:prv_summand_bound}
-below, and (iv) \emph{all interior (non-PRV) summands}, by
-Lemma~\ref{lem:L3_interior} below. The PRV-summand bound covers the
-asymptotic family $\lambda_n = (n, 0, \ldots, 0)$ tensored with
-$\lambda' = (1, 0, \ldots, 0)^*$ that dictates the asymptotic Lipschitz
-comparison rate, so the asymptotic tightness $C_3(G) = 1$ is rigorously
-established at all ranks. The closure of interior (non-PRV) summands
-via the Brauer--Klimyk signed-sum cancellation mechanism is established
-analytically in Lemma~\ref{lem:L3_interior}, with the per-orbit
-case-bookkeeping exhaustively verified in exact sympy arithmetic at
+\paragraph{Status of the per-summand analysis.} Lemma~\ref{lem:L3} is
+proved above by compression, so nothing below is needed for it.  What
+follows treats the Dirac-triangle (DT) and intermediate (INT)
+inequalities as statements about Kostant eigenvalues and Casimirs (proved
+for the special summand classes (i)--(ii) below, panel-verified for
+(iii)--(iv));\
+its bridge to the commutator norm (an entrywise bound read as an
+operator-norm bound, and eigenvalue ratios read as per-isotypic
+Lipschitz constants) is the step Paper~38 refuted at rank~1 on
+2026-09-28 and is withdrawn here, so the statements below about ``$C_3$'' are to be
+read as statements about (DT)/(INT), not as Lipschitz constants.  By
+summand class $\sigma \subset \pi \otimes \pi'^*$:\ (INT) is proved at all
+ranks for (i) the trivial-$\lambda$ case and (ii) the Cartan-product
+summand (Proposition~\ref{prop:int_special_cases});\ for (iii) the PRV
+(Parthasarathy--Ranga Rao--Varadarajan) summands,
+Theorem~\ref{thm:prv_summand_bound} gives existence at all ranks, but its
+inequality~(b) falls short of (INT) by $|\rho|^2$, so (INT) on that class
+rests on the exact-arithmetic panels at $A_2, A_3, C_2, G_2$;\ and (iv)
+the interior (non-PRV) summands are covered on those weight-bounded panels by
+Lemma~\ref{lem:L3_interior} (the higher exceptional ranks a named
+follow-on, below). The PRV class contains the asymptotic family
+$\lambda_n = (n, 0, \ldots, 0)$ tensored with
+$\lambda' = (1, 0, \ldots, 0)^*$, along which the (DT) ratio tends to $1$
+in every rank tested (a statement about eigenvalues). The closure of interior (non-PRV) summands
+via the Brauer--Klimyk signed-sum cancellation mechanism is sketched
+analytically in Lemma~\ref{lem:L3_interior} (a proof sketch at general rank),
+and (INT) on interior summands is verified in exact sympy arithmetic at
 $5641/5641$ cells across $\SU(3)$, $\SU(4)$, $\Sp(2)$, and $G_2$
 (extended panel; see Remark~\ref{rem:numerical_certification_interior}).
-The combined closure
-(Corollary~\ref{cor:L3_closure_at_all_ranks}) establishes the
-\emph{asymptotic-tight} $C_3(G) = 1$ leg rigorously at all ranks (via
-the PRV-summand bound of Kumar, which is genuinely rank-uniform) on
-every compact connected simple Lie group $G$. The \emph{interior} (INT)
-leg of Lemma~\ref{lem:L3} is proved analytically and verified by
-exhaustive numeric panels at the tested ranks ($A_2, A_3, C_2, G_2$);
+The combined status (Corollary~\ref{cor:L3_closure_at_all_ranks}) is
+therefore:\ (INT) at all ranks for classes (i)--(ii), and on the tested
+panels for classes (iii)--(iv). The \emph{interior} (INT)
+leg of the per-summand route is verified by exhaustive numeric
+weight-bounded panels at $A_2, A_3, C_2, G_2$, with an analytical sketch;
 its rank-uniform case-bookkeeping for the higher exceptional ranks
 ($F_4, E_6, E_7, E_8$) carries through the same analytical skeleton but
 is a named follow-on (Remark~\ref{rem:numerical_certification_interior}).
@@ -1259,7 +1328,7 @@ by dominance and non-negativity of inverse-Cartan entries.
 \end{enumerate}
 \end{proposition}
 
-\begin{theorem}[PRV-summand bound at all ranks]\label{thm:prv_summand_bound}
+\begin{theorem}[PRV summands:\ existence at all ranks, and an inequality weaker than (INT)]\label{thm:prv_summand_bound}
 Let $G$ be a compact connected simple Lie group with bi-invariant
 metric in the dual-Coxeter normalisation, and let $\pi, \pi'$ be
 irreducible representations of $G$. For each $w$ in the Weyl group
@@ -1275,9 +1344,13 @@ $\lambda_\pi + w\,\lambda_{\pi'}^*$. Then:
 representation $\sigma_w$ appears as a summand of
 $V_\pi \otimes V_{\pi'}^*$ in the Brauer--Klimyk decomposition.
 \item[(b)] (Inequality.) $|\sigma_w + \rho|^2 \ge
-|\lambda_\pi - \lambda_{\pi'}|^2$ at every PRV summand $\sigma_w$, so
-that the intermediate inequality~\eqref{eq:INT} holds on the entire
-PRV class.
+|\lambda_\pi - \lambda_{\pi'}|^2$ at every PRV summand $\sigma_w$.
+(Corrected 2026-10-02:\ since $\Cas(\sigma) = |\sigma + \rho|^2 -
+|\rho|^2$, this yields the intermediate inequality~\eqref{eq:INT} only in
+the stronger form $|\sigma_w + \rho|^2 \ge |\lambda_\pi -
+\lambda_{\pi'}|^2 + |\rho|^2$, which the sketch below does not
+establish;\ (INT) on the PRV class rests on the exact-arithmetic panels
+of Proposition~\ref{prop:dt_verification}.)
 \end{enumerate}
 \end{theorem}
 
@@ -1303,40 +1376,43 @@ type ($A_n, B_n, C_n, D_n, G_2, F_4, E_6, E_7, E_8$). Detailed
 bookkeeping is given in~\cite{dirac_triangle_memo}, \S\S 3--6.
 \end{proof}
 
-\begin{corollary}[Asymptotic-tightness of $C_3(G) = 1$]
+\begin{corollary}[(DT) ratio along the asymptotic family]
 \label{cor:c3_asymptotic_tight}
-The PRV-summand bound (Theorem~\ref{thm:prv_summand_bound})
-covers the asymptotic family $\pi_n = (n, 0, \ldots, 0)$ tensored
-with $\pi' = (1, 0, \ldots, 0)^*$, which dictates the asymptotic
-Lipschitz comparison rate. The asymptotic tightness $C_3(G) = 1$
-(Lemma~\ref{lem:L3}) is therefore rigorously established at all
-ranks for every compact connected simple Lie group $G$.
+The PRV class (Theorem~\ref{thm:prv_summand_bound}(a))
+contains the asymptotic family $\pi_n = (n, 0, \ldots, 0)$ tensored
+with $\pi' = (1, 0, \ldots, 0)^*$. Along this family the (DT) ratio tends to
+$1$ (a statement about eigenvalues and Casimirs, checked in every rank
+tested;\ it is not a bound on the Lipschitz constant, which
+Lemma~\ref{lem:L3} gives by compression).
 \end{corollary}
 
 \begin{proof}
 The asymptotic family $\pi_n \otimes \pi'^*$ decomposes (at large $n$)
 into a small number of summands all of which are PRV summands of the
 form $\sigma_w = \overline{(n, 0, \ldots, 0) + w \cdot
-(1, 0, \ldots, 0)^*}$ for $w$ running over a finite subset of $W$. The
-intermediate inequality~\eqref{eq:INT} holds on this entire family by
-Theorem~\ref{thm:prv_summand_bound}(b), and the per-isotypic ratio
+(1, 0, \ldots, 0)^*}$ for $w$ running over a finite subset of $W$. On
+this family the intermediate inequality~\eqref{eq:INT} is verified in exact
+arithmetic at the tested ranks (Proposition~\ref{prop:dt_verification};\
+Theorem~\ref{thm:prv_summand_bound}(b) alone does not give it), and the
+per-isotypic ratio
 $|\Dop(\pi_n) - \Dop(\pi')|^2 / \Cas(\sigma_w)$ approaches $1$ from
 below as $n \to \infty$ at the rate $1 - O(1/n)$ in every rank tested
-(Proposition~\ref{prop:dt_verification}). The supremum
-$C_3(G) = \sup_\sigma C_3(G, \sigma) = 1$ is therefore an asymptotic
-ceiling, achieved in the $n \to \infty$ limit.
+(Proposition~\ref{prop:dt_verification}).  (An earlier version read this
+ratio as a per-isotypic Lipschitz constant $C_3(G, \sigma)$ with
+supremum $1$;\ that reading is the withdrawn bridge.)
 \end{proof}
 
 The remaining summands $\sigma$ of $V_\pi \otimes V_{\pi'}^*$ that are
-not PRV summands are referred to as \emph{interior summands}. The
-analytic closure of \eqref{eq:INT} on this class is established by
+not PRV summands are referred to as \emph{interior summands}.
+\eqref{eq:INT} on this class is panel-verified and sketched analytically in
 the next lemma, which extracts the load-bearing structural fact
 underlying the Brauer--Klimyk signed-sum cancellation mechanism and
 states it as a single positivity inequality on the positive-root cone
 $Q^+ \subset \mathfrak{h}^*$.
 
 \begin{lemma}[L3-interior:\ (INT) on interior summands via Brauer--Klimyk
-signed-sum closure]\label{lem:L3_interior}
+signed-sum closure;\ \textbf{[PANEL-VERIFIED]} at $A_2, A_3, C_2, G_2$, a
+proof sketch at general rank]\label{lem:L3_interior}
 Let $G$ be a compact connected simple Lie group with bi-invariant
 metric in the dual-Coxeter normalisation, let $\pi, \pi'$ be irreducible
 representations of $G$ with highest weights $\lambda := \lambda_\pi$
@@ -1348,11 +1424,15 @@ inequality
 \begin{equation}\label{eq:INT_interior}
    |\lambda - \lambda'|^2 \;\le\; \Cas(\sigma).
 \end{equation}
+Verified in exact arithmetic on the panels of
+Remark~\ref{rem:numerical_certification_interior};\ at general rank the
+argument below is a sketch, since Step~4's cancellation is asserted and its
+case-bookkeeping is tabulated only on those panels.
 \end{lemma}
 
 \begin{proof}
 The proof reduces \eqref{eq:INT_interior} to a single positivity
-statement on the positive-root cone, and closes the latter by combining
+statement on the positive-root cone, and argues the latter by combining
 the weight-containment property of every contributing summand (Lemma~1
 below) with the standard Steinberg signed-sum formula for tensor-product
 multiplicities.
@@ -1500,8 +1580,9 @@ of Step~4, the surviving contribution from $\mu^* \in \mathcal A(\sigma)$
 satisfies \eqref{eq:per_witness}. Substituting back via
 \eqref{eq:norm_invariance} and~\eqref{eq:reduction_SI_prime} gives
 $2\langle \sigma + \rho, Q\rangle \ge |Q|^2$, which is
-\eqref{eq:SI_prime}. Hence \eqref{eq:INT_interior} holds on every
-interior summand.
+\eqref{eq:SI_prime}. Hence, granted Step~4's cancellation (tabulated on
+the panels, Remark~\ref{rem:case_bookkeeping}), \eqref{eq:INT_interior}
+holds on every interior summand.
 \end{proof}
 
 \begin{remark}[Per-orbit case-bookkeeping]\label{rem:case_bookkeeping}
@@ -1510,8 +1591,8 @@ inequality \eqref{eq:per_witness} together with the Brauer--Klimyk
 cancellation of small-norm orbit elements. The per-orbit
 case-by-case enumeration is finite at each rank (bounded by $|W|^2$)
 and follows the same Weyl-orbit decomposition used in the
-asymptotic-family analysis of Step~5 of the PRV-summand bound
-(Theorem~\ref{thm:prv_summand_bound}). The detailed enumeration was
+asymptotic-family analysis of Corollary~\ref{cor:c3_asymptotic_tight}. The
+detailed enumeration was
 carried out across $\SU(3), \SU(4), \Sp(2)$, and $G_2$ in the
 supporting memo~\cite[\S\S 4--5]{dirac_triangle_memo}, exhibiting
 $5641$ surviving interior summands across the four panels and
@@ -1521,16 +1602,16 @@ as the concrete content of Step~4's cancellation argument and refer
 the reader to the memo for the per-cell tables.
 \end{remark}
 
-\begin{remark}[Why the signed-sum mechanism succeeds at general rank]
+\begin{remark}[Why the signed-sum mechanism is expected to succeed at general rank]
 \label{rem:signed_sum_mechanism}
 The Brauer--Klimyk signed-sum cancellation mechanism is the
-load-bearing structural ingredient that makes Lemma~\ref{lem:L3}
-rigorous at general rank for both PRV and non-PRV summands. The PRV
-case (Theorem~\ref{thm:prv_summand_bound}) closes via the
-standard dominance-order fact~\cite[\S13]{humphreys1972}
-applied to the rho-shift, without invoking signed-sum cancellations
-directly; this is the most transparent special case. The interior case
-(Lemma~\ref{lem:L3_interior}) closes via the same algebraic
+structural ingredient of the per-summand sketch for interior summands
+(Lemma~\ref{lem:L3} itself is proved by compression). On the PRV
+class (Theorem~\ref{thm:prv_summand_bound}) existence needs no
+signed-sum cancellation, and the inequality~(b) from the standard
+dominance-order fact~\cite[\S13]{humphreys1972} applied to the rho-shift
+falls short of (INT) by $|\rho|^2$. The interior case
+(Lemma~\ref{lem:L3_interior}) is argued via the same algebraic
 ingredients applied through the Steinberg formula, with the additional
 mechanism that contributions from candidate weights $\mu_w$ violating
 the per-witness inequality \eqref{eq:per_witness} are precisely those
@@ -1538,10 +1619,10 @@ cancelled by the alternating-sign sum. Both arguments share the
 common skeleton:\ Lemma~1 (weight-containment), the Weyl-dominance
 lemma (the dominant orbit representative maximises
 $\langle\cdot,\rho\rangle$; Bourbaki~\cite{bourbaki_lie_8}), and the
-dual-Coxeter positivity of the inverse-Cartan matrix. The Brauer--Klimyk cancellation only adds
-the cancellation-pairing structure that promotes the per-PRV-orbit
-inequality to a class-wide statement on all summands of positive
-multiplicity.
+dual-Coxeter positivity of the inverse-Cartan matrix. The Brauer--Klimyk
+cancellation adds the pairing structure the sketch uses to extend the
+per-witness inequality to all interior summands;\ that extension is
+verified on the panels only.
 \end{remark}
 
 \begin{remark}[Numerical certification at the tested panels]
@@ -1551,41 +1632,38 @@ summands has been verified in exact sympy arithmetic at every cell of
 the extended panel of $5641$ interior summands across
 $\SU(3)\ (p + q \le 5)$, $\SU(4)\ (a + b + c \le 3)$,
 $\Sp(2)\ (a + b \le 3)$, and $G_2\ (a + b \le 2)$, with no exception.
-This numerical certification (preserved unchanged from the
-extended-panel verification of
-Proposition~\ref{prop:dt_verification}, where it forms the data
-backing the $5641/5641$ pass count) provides a complete check of the
+This numerical certification (the extended panel, beyond the
+$977$-pair panel of Proposition~\ref{prop:dt_verification}) provides a
+complete check of the
 per-orbit case-bookkeeping of Remark~\ref{rem:case_bookkeeping} on the
-four panels. The qualitative-rate analytical closure of
-Lemma~\ref{lem:L3_interior} together with this exhaustive numerical
-verification at the ranks tested in
-Proposition~\ref{prop:dt_verification} establishes
-\eqref{eq:INT_interior} at the rigor level of Paper~38
-Appendix~A.\footnote{Specifically, at the ranks tested in
-Proposition~\ref{prop:dt_verification}, the analytical reduction to
+four panels. This exhaustive verification establishes
+\eqref{eq:INT_interior} on these weight-bounded panels (not on whole
+ranks), at the rigor level of Paper~38 Appendix~A;\ the analytical sketch of
+Lemma~\ref{lem:L3_interior} is what would extend it.\footnote{Specifically,
+on the tested panels the analytical reduction to
 \eqref{eq:SI_prime} is exhaustively case-checked by the numerical
 panel; at higher ranks (e.g., $F_4, E_6, E_7, E_8$) the analytical
-proof structure of Steps 1--5 carries through verbatim, but the
+proof structure of Steps 1--5 is expected to carry through, but the
 per-orbit case-bookkeeping of Remark~\ref{rem:case_bookkeeping} would
 need to be re-tabulated on the relevant panels.}
 \end{remark}
 
-\begin{corollary}[Lemma~\ref{lem:L3} closure at all ranks]
+\begin{corollary}[(DT)/(INT) status by summand class]
 \label{cor:L3_closure_at_all_ranks}
-Combining Proposition~\ref{prop:int_special_cases} (trivial $\lambda$
-and Cartan-product cases), Theorem~\ref{thm:prv_summand_bound} (PRV
-class at all ranks), Lemma~\ref{lem:L3_interior} (interior class at
-all ranks via Brauer--Klimyk signed-sum closure), and
-Corollary~\ref{cor:c3_asymptotic_tight} (asymptotic-tightness of
-$C_3(G) = 1$): the intermediate inequality \eqref{eq:INT} holds for
-every summand $\sigma \subset V_\pi \otimes V_{\pi'^*}$ of positive
-multiplicity, on every compact connected simple Lie group $G$. By
-Lemma~\ref{lem:dt_reduction}, the Dirac-triangle inequality
-\eqref{eq:DT} holds. Lemma~\ref{lem:L3} is therefore rigorously
-established at all ranks with $C_3(G) = 1$ asymptotic-tight.
+(INT) holds at all ranks for the trivial-$\lambda$ and Cartan-product
+summands (Proposition~\ref{prop:int_special_cases}). On the PRV class
+(Theorem~\ref{thm:prv_summand_bound}(a)) and the interior class
+(Lemma~\ref{lem:L3_interior}) it is established on the exact-arithmetic
+panels at $A_2, A_3, C_2, G_2$;\ Theorem~\ref{thm:prv_summand_bound}(b)
+falls short of (INT) by $|\rho|^2$, and the interior case-bookkeeping at
+$F_4, E_6, E_7, E_8$ is a named follow-on. Where (INT) holds,
+Lemma~\ref{lem:dt_reduction} gives the Dirac-triangle inequality
+\eqref{eq:DT} (a representation-theoretic statement).  Neither bounds
+$C_3$:\ that bridge is withdrawn, and Lemma~\ref{lem:L3} is proved by
+compression.
 \end{corollary}
 
-\begin{proof}[Proof of Lemma~\ref{lem:L3}, given (DT)]
+\begin{proof}[Withdrawn per-summand bridge from (DT) to the commutator norm (retained as a record;\ the entrywise-to-operator-norm step is not valid, and the eigenvalue ratio is not a Lipschitz constant)]
 The Kostant Dirac $\Dop_G$ is block-diagonal in the Peter--Weyl
 decomposition, with eigenvalue $\pm \Dop(\pi)$ on the isotypic component
 of $\pi$. For each isotypic component of $f$ at weight $\sigma$, the
@@ -1619,7 +1697,7 @@ per-isotypic Lipschitz comparison ratio
    \frac{\opnorm{[\Dop_G, M_\sigma]}}{\norm{\nabla Y_\sigma}_{L^\infty}}
    \;\le\; C_3(G, \sigma),
 \end{equation}
-with $C_3(G, \sigma) \le 1$ asymptotic-tight as $\Cas(\sigma) \to
+with $C_3(G, \sigma) \le 1$ [retracted 2026-10-02: c3-per-summand-bridge] asymptotic-tight as $\Cas(\sigma) \to
 \infty$ (the asymptotic-tightness verified numerically as
 $\rho_n = 1 - O(1/n)$ in the family $\lambda_n = (n, 0, \ldots, 0)$;
 see Proposition~\ref{prop:dt_verification}). Taking the supremum
@@ -1630,24 +1708,15 @@ $C^\infty(G)$ follows by density.
 
 \begin{remark}[Transition cutoff $\Lammax_*$ for tight
 asymptotic behaviour]\label{rem:lambda_star}
-Corollary~\ref{cor:c3_asymptotic_tight} establishes $C_3(G) = 1$
-asymptotic-tight in the limit $\Lammax \to \infty$. At finite
-cutoff, the per-isotypic ratio satisfies $C_3(G, \sigma) < 1$ for
-each $\sigma$, with $C_3(G, \sigma) \to 1$ along the PRV-summand
-family $(n, 0, \ldots, 0) \otimes (1, 0, \ldots, 0)^*$ as
-$n \to \infty$. For $\SU(2)$, the per-isotypic ratio is closed-form,
-$C_3(\SU(2), V_j) = \sqrt{(2j-1)/(2j+1)}$, giving $C_3 = 0.91$ at
-$j = 5$ and $C_3 = 0.995$ at $j = 50$ (Paper~38 \S 3.3). The
-transition cutoff $\Lammax_*(G)$ at which the finite-cutoff bound
-becomes effectively asymptotic-tight (say within $5\%$ of $1$) is
-not characterised by the analytical proof at general $G$, and
-characterising $\Lammax_*(G)$ as a function of rank and Weyl-group
-data is open. For finite-cutoff applications
-(NISQ-scale simulations, finite-truncation quantum metric geometry),
-the per-isotypic structure of $C_3(G, \sigma)$ at
-$\Lammax \le \Lammax_*(G)$ is the load-bearing object rather than the
-asymptotic $C_3(G) = 1$ bound; this finer characterisation is open
-and not required for the state-space GH convergence theorem.
+Lemma~\ref{lem:L3} gives the comparison with constant $1$ at every
+cutoff, sharp as $\Lammax \to \infty$.  (An earlier version stated
+finite-cutoff per-isotypic ratios $C_3(G, \sigma) < 1$, with the
+$\SU(2)$ closed form $\sqrt{(2j-1)/(2j+1)}$, i.e.\ $0.91$ at $j = 5$ and
+$0.995$ at $j = 50$;\ under $N = 2j$ that is the per-harmonic ratio
+Paper~38 withdrew as false on 2026-09-28, and it is withdrawn here.)
+How fast the compressed commutator norm of a fixed $f$ approaches its
+limit as $\Lammax$ grows is open and not required for the state-space
+GH convergence theorem.
 \end{remark}
 
 \begin{remark}[Recovery of Paper~38]\label{rem:L3_paper38}
@@ -1658,8 +1727,10 @@ Dirac-triangle inequality~\eqref{eq:DT} becomes $|j - j'| \le
 \sqrt{k(k+1)}$, which holds trivially because $k \ge |j - j'|$ implies
 $k(k+1) \ge k^2 \ge |j - j'|^2$. The intermediate inequality
 \eqref{eq:INT} is $|j - j'|^2 \le k(k+1)$ in the SU(2) case, again
-trivial. Combined with the Avery 3-Y selection rule, this recovers
-Paper~38's per-harmonic ratio $\sqrt{(N-1)/(N+1)} \to 1^-$ verbatim.
+trivial.  (An earlier version added that, combined with the Avery 3-Y
+selection rule, this recovers a per-harmonic ratio
+$\sqrt{(N-1)/(N+1)}$ of Paper~38;\ that per-harmonic inequality is false
+and was withdrawn in Paper~38, 2026-09-28.)
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -1736,12 +1807,12 @@ Applying Lemma~\ref{lem:L3} to $g$ in the truncated multiplier
 representation gives
 \begin{equation*}
    \opnorm{[\Dop_G, B_\Lammax(f)]}
-   \;=\; \opnorm{[\Dop_G, M_g]}
+   \;\le\; \opnorm{[\Dop_G, M_g]}
    \;\le\; C_3(G) \cdot \norm{\nabla g}_{L^\infty}
    \;\le\; C_3(G) \cdot \norm{\nabla f}_{L^\infty}
    \;\le\; \norm{\nabla f}_{L^\infty},
 \end{equation*}
-where the final inequality uses $C_3(G) \le 1$ from
+where the final inequality uses $C_3(G) = 1$ from
 Lemma~\ref{lem:L3}.
 \end{proof}
 
@@ -1763,7 +1834,7 @@ groups.
 % ---------------------------------------------------------------------
 
 We bound van~Suijlekom's state-space Gromov--Hausdorff distance
-$\Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)$
+$d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)$
 (\S\ref{sec:propinquity_convention}) with an approximation pair
 $(B_\Lammax, P_\Lammax)$, $B_\Lammax: \Tcal_G \to \Tcal_\Lammax$ a
 unital completely positive (UCP) map and $P_\Lammax$ the spectral
@@ -1788,10 +1859,10 @@ Definition~\ref{def:berezin_general} and $P_\Lammax$ the spectral
 projection of~\eqref{eq:casimir_cutoff} is an approximation pair between
 $\Tcal_G$ and $\Tcal_\Lammax$. The state-space GH bound
 \begin{equation}\label{eq:L5_bound_general}
-   \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; C_3(G) \cdot \gamma_\Lammax(G),
+   d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
+   \;\le\; \gamma_\Lammax(G),
 \end{equation}
-with $C_3(G) \le 1$ from Lemma~\ref{lem:L3} and $\gamma_\Lammax(G)$
+with $\gamma_\Lammax(G)$
 from Lemma~\ref{lem:L2}(d), holds unconditionally for $G = \SU(2)$
 (Paper~38, \texttt{thm:main\_unconditional}) and, for general $G$,
 conditionally on the per-group lifted-state decomposition of
@@ -1811,8 +1882,8 @@ what survives of that lemma is the record below, not a proof.
 \emph{Reach.} By Lemma~\ref{lem:L4}(c), the forward reach satisfies
 $\mathrm{reach}_B \le \gamma_\Lammax(G) \cdot \norm{\nabla f}_{L^\infty}
 \le \gamma_\Lammax(G)$ on the unit Lipschitz ball $\{\Lipnorm{f} \le 1\}$,
-where we have used Lemma~\ref{lem:L3} to convert
-$\norm{\nabla f}_{L^\infty} \le \Lipnorm{f}$ with constant $C_3(G) \le 1$.
+where $\norm{\nabla f}_{L^\infty} = \Lipnorm{f}$ by Connes' formula
+(step~(b) of the proof of Lemma~\ref{lem:L3}).
 The dual-reach estimate $\mathrm{reach}_P \le \gamma_\Lammax(G)$ is a
 \emph{named gap} (Remark~\ref{rem:correction_L2}):\ the smoothing map
 has cb-norm $1$, and a forward cb-norm controls no partial
@@ -1851,7 +1922,7 @@ $\mathrm{height}_P \ne 0$.
 
 \emph{The conclusion \eqref{eq:L5_bound_general} is unaffected}, for the
 reason it is unaffected in Paper~38:\ the state-space GH assembly bounds
-$\Lambda_{\mathrm{prop}}$ using reach-type estimates alone, with no height
+$d_{\mathrm{GH}}$ using reach-type estimates alone, with no height
 constituent. What is withdrawn is the height leg of the four-term
 organisation above --- retained because it names what a Latr\'emoli\`ere
 tunnel would additionally require --- and not the bound. Whether a
@@ -1859,7 +1930,7 @@ tunnel would additionally require --- and not the bound. Whether a
 open, and Theorem~\ref{thm:main} must not be cited as height-controlled.
 
 \emph{Assembly.} Until 2026-09-04 this proof closed with
-$\Lambda_{\mathrm{prop}} \le \max(\gamma, \gamma, \gamma, 0) = \gamma$
+$d_{\mathrm{GH}} \le \max(\gamma, \gamma, \gamma, 0) = \gamma$
 [retracted 2026-09-04: l5-height-bound-achieved], whose third and fourth arguments are the two refuted
 height constituents, and declared ``all other constituents proved
 above''. Withdrawn:\ with the heights refuted and $\mathrm{reach}_P$ a
@@ -1888,21 +1959,26 @@ van~Suijlekom's state-space Gromov--Hausdorff distance (unconditionally
 for $\SU(2)$; for general $G$ conditional on the per-group spin-window
 lifted-state decomposition of Remark~\ref{rem:correction_L2}):
 \begin{equation}\label{eq:main_thm_general}
-   \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; C_3(G) \cdot \gamma_\Lammax(G), \qquad
+   d_{\mathrm{GH}}(\Tcal_\Lammax, \Tcal_G)
+   \;\le\; \gamma_\Lammax(G), \qquad
    \gamma_\Lammax(G) = \frac{4 \log \Lammax}{\pi\,\Lammax}
    + O\!\bigl(1/\Lammax\bigr),
 \end{equation}
 where:
 \begin{enumerate}\setlength{\itemsep}{2pt}
-\item[(i)] $C_3(G) \le 1$ is the Lipschitz comparison constant of
-Lemma~\ref{lem:L3}, asymptotic-tight as $\Lammax \to \infty$.
+\item[(i)] The bound has constant~$1$ (the lifted-state route);\ the
+Lipschitz comparison constant $C_3(G) = 1$ of Lemma~\ref{lem:L3}
+(by compression, sharp as $\Lammax \to \infty$) enters only the withdrawn
+approximation-pair route (corrected 2026-10-02:\ an earlier display
+read $C_3(G)\cdot\gamma_\Lammax(G)$, which the lifted-state route does
+not supply).
 \item[(ii)] The leading rate constant $4/\pi$ is \emph{universal}
 across the class:\ independent of the rank of $G$, the order of the
 Weyl group $W(G)$, and the explicit Lie-type of $G$, in the
 dual-Coxeter normalisation. (Tier:\ rigorous at rank~1; for general
-$G$ a proof-sketch mechanism numerically pinned at ranks~1--2 plus a
-rank-3 datapoint, the fully rank-uniform analytical proof being a
+$G$ a proof-sketch mechanism numerically supported (fit-sensitive
+extraction) at rank~2 plus a rank-3 datapoint, the fully rank-uniform
+analytical proof being a
 named gap --- see Theorem~\ref{thm:universal_constant_analytical} and
 \S\ref{sec:L2}.)
 \end{enumerate}
@@ -1912,12 +1988,11 @@ named gap --- see Theorem~\ref{thm:universal_constant_analytical} and
 Lemma~\ref{lem:L1prime} supplies the operator-system substrate;
 Lemma~\ref{lem:L2} the central spectral Fej\'er kernel with universal
 asymptotic $\gamma_\Lammax(G) \sim (4/\pi) \log\Lammax/\Lammax$
-(Theorem~\ref{thm:universal_constant}); Lemma~\ref{lem:L3} the
-Lipschitz comparison constant $C_3(G) \le 1$ via the Dirac-triangle
-inequality on tensor products (Proposition~\ref{prop:dt_verification},
-class-wide $977/977$ numerical verification + rigorous low-rank /
-special-summand analytical proof + structural Brauer--Klimyk reduction
-at general rank); Lemma~\ref{lem:L4} the Berezin reconstruction with
+(Theorem~\ref{thm:universal_constant}); Lemma~\ref{lem:L3} (used only
+by the withdrawn route) the Lipschitz comparison constant $C_3(G) = 1$, proved by compression at
+every rank (the Dirac-triangle analysis,
+Proposition~\ref{prop:dt_verification}, is a numerical panel of a
+representation-theoretic inequality, not a check of it); Lemma~\ref{lem:L4} the Berezin reconstruction with
 the four properties a Latr\'emoli\`ere tunneling pair would require; and---in
 the \emph{withdrawn} route only---Lemma~\ref{lem:L5} the assembly into the
 state-space GH bound.
@@ -1944,7 +2019,7 @@ geodesic distance on $G$.
 \end{proposition}
 
 \begin{proof}[Proof sketch]
-Theorem~\ref{thm:main} guarantees $\Lambda_{\mathrm{prop}}(\Tcal_\Lammax,
+Theorem~\ref{thm:main} guarantees $d_{\mathrm{GH}}(\Tcal_\Lammax,
 \Tcal_G) \to 0$, so the limit object exists in the state-space GH
 completion and equals $\Tcal_G$. The L4(c) approximate-identity
 property pins the limit to be the actual triple (rather than an
@@ -1961,7 +2036,9 @@ spectral triples $\Tcal_\Lammax$ converge to $\Tcal_{\SU(N)}$ in
 van~Suijlekom's state-space Gromov--Hausdorff distance at the universal rate
 $\gamma_\Lammax = (4/\pi)\log\Lammax/\Lammax + O(1/\Lammax)$
 \emph{at the tier of Theorem~\ref{thm:main}}:\ the rate constant is
-rigorous at rank~1 ($\SU(2)$) and numerically established at rank~$\ge 2$,
+rigorous at rank~1 ($\SU(2)$) and numerically supported at rank~$\ge 2$
+(fit-sensitive extraction;\ its discrimination from the Weyl-formula
+alternative is the robust part),
 and for $N\ge 3$ the convergence is conditional on the per-group
 spin-window decomposition verified there for $\SU(2)$.
 \end{corollary}
@@ -1969,19 +2046,24 @@ spin-window decomposition verified there for $\SU(2)$.
 \begin{corollary}[$\Spin(n)$]\label{cor:spin}
 For $G = \Spin(n)$ with $n \ge 3$ and the bi-invariant metric in the
 dual-Coxeter normalisation ($\Cas(\mathrm{ad}) = n - 2$), the
-truncated triples converge at the universal rate.
+truncated triples converge at the universal rate, at the tier of
+Theorem~\ref{thm:main} (conditional on the per-group spin-window
+decomposition;\ rate constant numerically supported at rank~$\ge 2$,
+fit-sensitive extraction).
 \end{corollary}
 
 \begin{corollary}[$\Sp(n)$]\label{cor:sp}
 For $G = \Sp(n)$ with the bi-invariant metric in the dual-Coxeter
 normalisation ($\Cas(\mathrm{ad}) = n + 1$), the truncated triples
-converge at the universal rate.
+converge at the universal rate, at the tier of Theorem~\ref{thm:main}
+(conditional on the per-group spin-window decomposition).
 \end{corollary}
 
 \begin{corollary}[Exceptional groups]\label{cor:exceptional}
 For $G \in \{G_2, F_4, E_6, E_7, E_8\}$ with the bi-invariant metric
 in the dual-Coxeter normalisation, the truncated triples converge at
-the universal rate.
+the universal rate, at the tier of Theorem~\ref{thm:main} (conditional
+on the per-group spin-window decomposition).
 \end{corollary}
 
 \begin{corollary}[Recovery of Paper~38]\label{cor:paper38_recovery}
@@ -1996,7 +2078,7 @@ dual-Coxeter normalisation in the bi-invariant Killing form, which is
 canonical.
 
 % =====================================================================
-\section{The rate constant is universal: structural interpretation}
+\section{The rate constant is universal (rigorous at rank 1): structural interpretation}
 \label{sec:universal}
 % =====================================================================
 
@@ -2056,10 +2138,10 @@ across rank-$2$ groups. The numerical extractions
 $c(G_2) = 1.177$, decisively favouring Reading A (within $7.6\%$ for
 $G_2$, $14.6\%$ for $\Sp(2)$, vs $51.6\%$ and $32.9\%$ for Reading B).
 
-\subsection{Why universality is structurally forced: the Plancherel
+\subsection{Why universality is expected: the Plancherel
 $\times$ Vandermonde cancellation}\label{sec:why_universal}
 
-Universality is not coincidental. The following cancellation theorem
+Universality is not expected to be coincidental. The following cancellation theorem
 (Theorem~\ref{thm:universal_constant_analytical} above) is the
 proposed mechanism --- rigorous at rank~$1$ (Paper~38 Appendix~A) and
 given as a proof sketch at rank~$\ge 2$, where it is corroborated
@@ -2134,9 +2216,10 @@ respectively (Theorem~\ref{thm:universal_constant}).
 
 \subsection{Identification with the master Mellin engine}\label{sec:master_mellin}
 
-The universal constant $4/\pi$ identifies with one specific sub-mechanism
-of a master Mellin engine on the spectral triple, in the following
-sense. The spectral-action heat kernel admits a Mellin transform
+\textbf{[OBSERVATION]} The universal constant $4/\pi$ is read (a
+reading, not a derivation;\ Paper~38) as the content of one specific
+sub-mechanism of a master Mellin engine on the spectral triple, in the
+following sense. The spectral-action heat kernel admits a Mellin transform
 \begin{equation}\label{eq:master_mellin}
    \mathcal M[\Tr(\Dop^k e^{-t\Dop^2})](s)
    \;=\; \int_0^\infty t^{s-1} \Tr(\Dop^k e^{-t\Dop^2}) dt,
@@ -2152,15 +2235,15 @@ quotient (convention-dependent:\ $4/\pi$ dual-Coxeter, $2/\pi$ on the
 unit $S^3$;\ Paper~38, volume-ratio note), not the Hopf fibration's
 base-to-total ratio.
 
-The universality of $4/\pi$ in Theorem~\ref{thm:main}(ii) is therefore
-the spectral-triple-rate-controlled manifestation of the $k = 0$
-sub-mechanism of the master Mellin engine, sharpened from a single-group
-observation (Paper~38) to a class-wide theorem. The
-GeoVac-internal scoping memo~\cite{unified_gh_scoping_memo} originally
-proposed this identification as an open question; the present
-theorem closes it positively across the rank-$2$ classical and
-exceptional cases, with the rank-invariance of the leading constant
-being the load-bearing experimental input.
+Under that reading, the universality of $4/\pi$ in
+Theorem~\ref{thm:main}(ii) is the rank-invariance of the $k = 0$
+volume-slot value, extended from a single group (Paper~38) to the class
+at the tier of Theorem~\ref{thm:main}(ii):\ rigorous at rank~$1$,
+numerically supported (and fit-sensitive) at rank~$2$, with one rank-$3$
+datapoint. The GeoVac-internal scoping
+memo~\cite{unified_gh_scoping_memo} originally proposed this
+identification as an open question;\ it remains a reading, with the
+rank-invariance of the leading constant as its experimental input.
 
 % =====================================================================
 \section{Discussion and open problems}\label{sec:discussion}
@@ -2244,9 +2327,10 @@ The technical overhead is the $K$-invariance bookkeeping in the
 Peter--Weyl decomposition $C^\infty(G/K) = \bigoplus_\pi V_\pi^K$ and
 the corresponding zonal-spherical-function machinery. The central
 spectral Fej\'er kernel construction extends to a $K$-bi-invariant
-class-function kernel on $G$, and the Lipschitz comparison via the
-Dirac-triangle inequality lifts to the $G/K$ setting via the
-spherical functions of Helgason~\cite{helgason1984}. We expect the
+class-function kernel on $G$ (spherical functions of
+Helgason~\cite{helgason1984}), and the Lipschitz comparison transfers
+by compression wherever the Dirac operator commutes with the
+truncation. We expect the
 universal rate constant $4/\pi$ to persist at the same level of
 generality, but the verification at rank $\ge 2$ symmetric spaces is
 deferred to a follow-on paper.
@@ -2304,16 +2388,19 @@ manifold-specific step to generalise. We have not written out the details.
 Cartan-product-type bound''. That refinement is \textbf{withdrawn} in
 Paper~39 --- graded anticommutation does not give operator-norm
 orthogonality --- so the extension was aimed at an abandoned route. The
-$C_3^{(2)} \le \sqrt2$ constant of that route survives with its value
-unchanged but is not a rate constant of Paper~39's theorem.)}
+joint constant of that route is now $C_3^{(2)} = 1$, by compression
+(Paper~39, Lemma~L3-T), and is not a rate constant of Paper~39's
+theorem.)}
 
 \subsection{Connection to Hekkelman--McDonald non-commutative integral}
 \label{sec:hekkelman_mcdonald}
 
 Hekkelman and McDonald~\cite{hekkelman_mcdonald2024b} construct a
 non-commutative integral on spectrally truncated triples and link it
-to a Szeg\"o limit formula. Their construction lives on $T^d$ (abelian),
-but the underlying truncation framework is the
+to a Szeg\"o limit formula, for spectrally truncated spectral triples
+in general (tori are among their examples);\ it is a
+noncommutative-integral result, not a Gromov--Hausdorff convergence
+result.  The underlying truncation framework is the
 Connes--van~Suijlekom paradigm common with the present paper. We expect
 that the non-commutative integral of \cite{hekkelman_mcdonald2024b}
 admits a class-wide compact-Lie-group extension under the same
@@ -2526,9 +2613,11 @@ J.~Loutey,
 \bibitem[Loutey, internal memo (Dirac-triangle)]{dirac_triangle_memo}
 J.~Loutey,
 \newblock \emph{Dirac-triangle inequality: full proof with PRV-summand
-bound at all ranks}
+bound at all ranks} [retracted 2026-10-02: int-from-prv-theorem-b]
 (\texttt{debug/dirac\_triangle\_full\_proof.md}),
-\newblock GeoVac internal working note (May 2026).
+\newblock GeoVac internal working note (May 2026);\ title as filed --- its
+all-ranks claim is superseded, Theorem~\ref{thm:prv_summand_bound}(b)
+falling short of (INT) by $|\rho|^2$.
 
 \bibitem[Loutey, internal memo (SU(4) rate constant)]{su4_rate_memo}
 J.~Loutey,

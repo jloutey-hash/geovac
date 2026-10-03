@@ -58,8 +58,8 @@ The remaining dimensionless coefficient is:
 
 The 1/(4 pi)^2 factor combines:
   - 1/(4 pi) for each of two photon propagators (Coulomb 4 pi
-    in the photon Green's function on R^3, inherited via Hopf-base
-    measure -- Paper 18 M1 mechanism)
+    in the photon Green's function on R^3, the unit-sphere area 4 pi
+    -- Paper 18 M1 volume slot)
 
 Honest framing: this normalization is the natural choice from
 dimensional analysis of the LS-7 prefactor structure.  An
@@ -317,7 +317,7 @@ def c_2s_native(
     matrix element, which is the spectral sum times a normalization N.
 
     Normalization conventions tested:
-      - 'hopf_4pi_squared': N = 1/(4 pi)^2 (two photon Hopf-base measure)
+      - 'hopf_4pi_squared': N = 1/(4 pi)^2 (two photon unit-sphere volume factors)
       - 'hopf_2pi_squared': N = 1/(2 pi)^2 (alternative photon norm)
       - 'unit': N = 1 (raw spectral sum)
       - 'pi_squared': N = 1/pi^2 (matches LS-7 prefactor structure)

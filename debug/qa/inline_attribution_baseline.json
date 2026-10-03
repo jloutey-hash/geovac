@@ -61,7 +61,6 @@
     "Schuessler--Fortson--Dehmelt~1969",
     "Schwartz~1961",
     "Theodosiou~1984",
-    "The~2014",
     "Vanderhaeghen~2014",
     "Walls~2003",
     "Wijngaarden--Holuj--Drake~2000",
@@ -84,43 +83,23 @@
   "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": [],
   "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": [],
   "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": [],
-  "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": [
-    "Bisognano--Wichmann~1976",
-    "Bizi--Brouder--Besnard~2018",
-    "Dungen~2016",
-    "Hartle--Hawking~1976",
-    "Sewell~1982",
-    "Unruh~1976"
-  ],
-  "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex": [
-    "Dungen~2016",
-    "Nieuviarts~2025",
-    "Suijlekom~2024"
-  ],
+  "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": [],
+  "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex": [],
   "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": [
-    "AMS~2016",
-    "Bizi--Brouder--Besnard~2018",
-    "Dungen~2016",
-    "Suijlekom~2021"
+    "AMS~2016"
   ],
   "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": [
     "BBT~2014"
   ],
-  "papers/group1_operator_algebras/paper_53_disk_propinquity.tex": [
-    "The~2026"
-  ],
-  "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex": [
-    "MEASURED~2026"
-  ],
+  "papers/group1_operator_algebras/paper_53_disk_propinquity.tex": [],
+  "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex": [],
   "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex": [
     "AUDITED~2026",
-    "MEASURED~2026",
     "PROGRESS~2026",
     "SCOPE~2026",
     "VALIDATED~2026"
   ],
   "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": [
-    "MEASURED~2026",
     "SCOPE~2026"
   ],
   "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex": [
@@ -129,7 +108,6 @@
   "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex": [],
   "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex": [
     "Clementi--Roetti~1974",
-    "MEASURED~2026",
     "Martin~2003",
     "Martin~2018",
     "Measured~2026",
@@ -145,7 +123,6 @@
   "papers/group3_foundations/paper_18_exchange_constants.tex": [
     "Clementi--Raimondi~1963",
     "Kontsevich--Zagier~2001",
-    "MEASURED~2026",
     "Morgan~1992",
     "SCOPE~2026"
   ],
@@ -210,22 +187,11 @@
   ],
   "papers/synthesis/group1_operator_algebras_synthesis.tex": [
     "ARCHIVED~2026",
-    "Bisognano--Wichmann~1976",
-    "Datta~2009",
-    "Dungen~2016",
-    "Hartle--Hawking~1976",
     "IMRN~2025",
     "Kumar~1988",
-    "Moghaddam~2020",
-    "Sewell~1982",
-    "Suijlekom~2014",
-    "Suijlekom~2021",
-    "Unruh~1976",
     "Vinberg~1990"
   ],
-  "papers/synthesis/group2_quantum_chemistry_synthesis.tex": [
-    "Superseded~2026"
-  ],
+  "papers/synthesis/group2_quantum_chemistry_synthesis.tex": [],
   "papers/synthesis/group3_foundations_synthesis.tex": [],
   "papers/synthesis/group4_quantum_computing_synthesis.tex": [
     "Greene~2006"

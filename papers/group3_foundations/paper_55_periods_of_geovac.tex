@@ -1,7 +1,7 @@
 % =====================================================================
 % Paper 55 (standalone): Periods of GeoVac
 %
-% Cyclotomic mixed-Tate classification of the master Mellin engine on
+% Cyclotomic mixed-Tate census of the master Mellin engine on
 % the discrete Camporesi-Higuchi S^3 spectral triple. Companion synthesis
 % paper to Papers 18, 28, 32, 38, 50.
 %
@@ -64,7 +64,7 @@
 \newcommand{\Zcal}{\mathcal{Z}}
 \newcommand{\DCH}{D_{\mathrm{CH}}}
 
-\title{Periods of GeoVac:\ a cyclotomic mixed-Tate classification of
+\title{Periods of GeoVac:\ a cyclotomic mixed-Tate census of
 the master Mellin engine}
 \author{J.~Loutey\thanks{Independent researcher.
 \texttt{jloutey@gmail.com}.  This work was developed in an
@@ -80,8 +80,11 @@ editorial decisions are the author's responsibility.}}
 \begin{abstract}
 The GeoVac framework is a discrete spectral-graph approach to
 quantum mechanics built around the Fock conformal projection
-$\R^3 \hookrightarrow \sthree$.  Its computational observables
-empirically produce a constrained class of transcendental numbers:\
+$\R^3 \hookrightarrow \sthree$.  Its $\sthree$ spectral-zeta and
+heat-trace data (the census treated here;\ chemistry-side quadrature
+seeds, spectral determinants, and the elliptic period of Paper~61 lie
+outside it) empirically produce a constrained class of transcendental
+numbers:\
 $\pi$ and integer powers thereof, classical odd zeta values
 $\zeta(2k+1)$, Catalan $G = \beta(2)$ and the Dirichlet beta values
 $\beta(s) = L(s, \chi_{-4})$, and a depth-$k$ tower of constants at
@@ -89,7 +92,7 @@ higher loop order, identified in closed form at $k = 2$ (Paper~28 of
 the GeoVac corpus).  We
 prove that every such identified transcendental (the census above;\ the
 depth-$k$ tower beyond $k = 2$ is not yet identified) sits in cyclotomic mixed-Tate
-periods at level $\le 4$ over $\mathcal{O}_4[1/4] = \Z[i, 1/2]$, with
+periods (localized at $\pi$) at level $\le 4$ over $\mathcal{O}_4[1/4] = \Z[i, 1/2]$, with
 a period-theoretic stratification, over the cases treated, read against the
 operator-order slot $k \in \{0, 1, 2\}$ of the master Mellin engine
 $\Mcal[\Tr(D^k e^{-tD^2})]$ on the discrete Camporesi--Higuchi
@@ -110,7 +113,7 @@ $\sthree$ spectral triple:
     Dirichlet $L$):\
     $M_3 \subset \MT(\Z[i, 1/2])$ at level $\le 4$ via
     Deligne~\cite{deligne2010} and the explicit basis of
-    Glanois~\cite{glanois2015}, at depth equal to loop order.  The
+    Glanois~\cite{glanois2015}, at depth at most the loop order.  The
     vertex-parity-as-$\chi_{-4}$ correspondence is the
     Deligne--Glanois Galois descent from level $4$ to level $2$
     realised on the framework's natural QED observables.
@@ -164,9 +167,9 @@ corpus~\cite{loutey_paper18} catalogues these as ``exchange
 constants'' organised by six tiers (intrinsic, calibration,
 embedding, algebraic-implicit, composition, inner-factor input data).
 
-The empirical content of the catalogue is short:\ across the entire
-GeoVac corpus, only the following transcendentals have ever appeared
-in spectral data:\
+The empirical content of the census treated here is short:\ in the
+$\sthree$ spectral-zeta and heat-trace data of the corpus, the
+following transcendentals appear:\
 \begin{equation}
 \label{eq:empirical_transcendentals}
 \pi^{n}\,(n \in \Z), \quad
@@ -178,6 +181,11 @@ S_{\min}, S^{(3)}, \ldots
 \end{equation}
 (Note: $S^{(4)}$ appeared in an earlier version of this equation but was
 never defined, computed, or tested anywhere in the corpus; it has been removed.)
+(Outside this census:\ the chemistry-side quadrature seeds
+$\{e^a E_1(a), \ln, \gamma_E\}$ of Paper~18, spectral determinants such
+as $\pi\,e^{\zeta(3)/(2\pi^2)}$ in Paper~2, and the elliptic CM-fibre
+period $\Gamma(1/4)^2/(4\sqrt\pi)$ of a three-centre integral in
+Paper~61, which the mixed-Tate substrate does not itself supply.)
 
 The first three classes have classical period-theoretic
 identifications (Kontsevich--Zagier 2001~\cite{kontsevich_zagier2001};
@@ -191,14 +199,14 @@ basis-coverage artifact (the tested bases contained $\le 2$ of the
 8 weight-5 level-2 monomials required).
 
 The natural question, opened by the empirical content of
-Eq.~\eqref{eq:empirical_transcendentals}:\ do all of GeoVac's
-transcendentals sit in a single, named period-theoretic class?  If so,
+Eq.~\eqref{eq:empirical_transcendentals}:\ do the transcendentals of
+that census sit in a single, named period-theoretic class?  If so,
 what is the structural mechanism that selects this class?
 
 \subsection{Result:\ a period-ring stratification of the master Mellin
 engine partition over the cases treated}
 
-We show that the answer is affirmative.  Every transcendental in
+Over the census, the answer is affirmative.  Every transcendental in
 Eq.~\eqref{eq:empirical_transcendentals} lies in cyclotomic mixed-Tate
 periods at level $\le 4$ over $\mathcal{O}_4[1/4] = \Z[i, 1/2]$, with
 a stratification over the cases treated, read against the operator-order slot
@@ -345,10 +353,10 @@ master Mellin engine $\Mcal[\Tr(D^k e^{-tD^2})]$ parameterised by
 operator order $k \in \{0, 1, 2\}$.
 \end{theorem}
 
-The (conditional) theorem partitions GeoVac's $\pi$-content by Mellin slot;\ it does
+The (conditional) theorem partitions the $\pi$-content of the first fifteen Paper~34 projections by Mellin slot;\ it does
 not by itself classify the \emph{period-theoretic ring} in which each
-sub-mechanism's output lives.  That classification --- which is the
-content of the present paper --- requires separate motivic input for
+sub-mechanism's output lives.  That placement, for the values in the
+census --- which is the content of the present paper --- requires separate motivic input for
 each slot, drawn from the published period theory of
 Kontsevich--Zagier~\cite{kontsevich_zagier2001},
 Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016},
@@ -401,8 +409,8 @@ the field generated by $\pi$.
 Witness & Source & M1 factor & Tate weight \\
 \midrule
 $\Vol(S^2)/4 = \pi$ & Paper~25~\S~II.1~\cite{loutey_paper25} (Hopf base) & $\pi$ & $+1$ \\
-$4/\pi$ (asymptotic state-space GH rate) & Paper~38~\S~L2~\cite{loutey_paper38} & $\pi^{-1}$ & $-1$ \\
-$4/\pi$ (universal across compact Lie groups) & Paper~40 Thm 1~\cite{loutey_paper40} & $\pi^{-1}$ & $-1$ \\
+$4/\pi$ (asymptotic state-space GH rate)$^{\ddagger}$ & Paper~38~\S~L2~\cite{loutey_paper38} & $\pi^{-1}$ & $-1$ \\
+$4/\pi$ (reported universal, compact semisimple)$^{\ddagger}$ & Paper~40 Thm 1~\cite{loutey_paper40} & $\pi^{-1}$ & $-1$ \\
 $1/\pi^2$ (Pythagorean prefactor; posited $1/\beta^2$, class only$^{\dagger}$) & Paper~42~\S~11.7~\cite{loutey_paper42} & $\pi^{-2}$ & $-2$ \\
 $1/\pi^2$ (F-theorem cross-product) & Paper~50 Thm 3.1~\cite{loutey_paper50} & $\pi^{-2}$ & $-2$ \\
 \bottomrule
@@ -415,6 +423,13 @@ normalisation $\beta = 2\pi/\kappa_g$ of a finite-cutoff generator that is
 not derived from a state;\ it witnesses membership in $\Q[\pi,\pi^{-1}]$
 only, not an M1 mechanism, and is not shown to share the signature of the
 $4/\pi$ rows (re-tiered 2026-09-28).
+
+\noindent$^{\ddagger}$The $4/\pi$ rows witness membership in
+$\Q[\pi,\pi^{-1}]$, which follows from the value whatever its origin;\
+their placement in the M1 slot is a reading, not a derivation
+(Paper~38).  The Paper~40 constant is reported universal over compact
+connected semisimple groups (rigorous at rank~$1$;\ a circle factor
+carries $2/\pi$).
 
 Every entry is $q \cdot \pi^n$ for $q \in \Q$ and $n \in \Z$ with
 $|n| \le 2$ on the empirical witnesses logged so far.  The K-formula
@@ -455,7 +470,7 @@ pure-Tate even-weight sub-ring
 M_2 \;\subset\; \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
 \;\subset\; \MT(\Q)
 \end{equation}
-of mixed-Tate periods over $\Q$, at depth $0$.  The classification
+of mixed-Tate periods over $\Q$, at depth $0$.  This ring result
 inherits the Fathizadeh--Marcolli~\cite{fathizadeh_marcolli2016}
 mixed-Tate result for Connes--Chamseddine spectral actions on
 Robertson--Walker spacetimes $\R \times \sthree$, restricted to the
@@ -723,7 +738,7 @@ $\mathcal{O}_4[1/4] = \Z[i, 1/2]$:
 \label{eq:m3_ring}
 M_3 \;\subset\; \MT(\Z[i, 1/2]),
 \end{equation}
-with depth equal to loop order and three structurally distinct
+with depth at most the loop order and three structurally distinct
 sub-sectors:
 \begin{enumerate}
   \item \textbf{Un-restricted Dirac Dirichlet.}  $D(s)$ at integer
@@ -1618,7 +1633,8 @@ The displayed asymptotic rate constant $4/\pi$ in the van~Suijlekom
 state-space Gromov--Hausdorff convergence of truncated
 Camporesi--Higuchi spectral triples (Paper~38 Lemma~L2,
 \cite{loutey_paper38};\ extended to compact semisimple Lie groups in
-Paper~40, \cite{loutey_paper40}) is a pure M1 expression:
+Paper~40, \cite{loutey_paper40}) is read (a reading, not a
+derivation;\ Paper~38) as an M1 expression:
 \begin{equation}
 \label{eq:propinquity_rate_M1}
 \frac{4}{\pi} \;=\; \frac{\Vol(S^2)}{\pi^2}.
@@ -1629,13 +1645,13 @@ dual-Coxeter normalization Paper~38 adopts ($\mathrm{Cas}(\mathrm{ad})
 is $2/\pi = \Vol(S^2)/\Vol(S^3)$, and under Kac's basic form it is
 $2\sqrt2/\pi$.  In every normalization it is an algebraic multiple of an
 M1 volume ratio (numerator $\Vol(S^2) = 4\pi$, Tate weight $+1$;\
-denominator a power of $\pi$), so no M2 or M3 content enters at any
-step of the state-space GH convergence argument.  (Earlier versions
+denominator a power of $\pi$), and no M2 or M3 content appears in the
+constant.  (Earlier versions
 attributed $\Vol(S^2)$ here to the Hopf base;\ that label is a
 misnomer --- the constant is the unit-sphere volume quotient
 $\Vol(S^2)/\Vol(S^3)$ up to the normalization factor, not a
 Hopf-base integration --- and is withdrawn.)  The period content of the rate
-constant thus lives in $M_1$ alone;\ its tier follows Paper~38
+constant is membership in $\Q[\pi,\pi^{-1}]$;\ its tier follows Paper~38
 ([INTERNAL THEOREM + MEASURED] for the displayed constant).
 
 \subsection{Joint-engagement modes}
@@ -3194,8 +3210,8 @@ indexing by the master Mellin engine slot $k \in \{0, 1, 2\}$ is a reading
 case-exhaustion is \textbf{[CONDITIONAL]}.  The
 census places the GeoVac framework inside the published
 periods/motives program (Kontsevich--Zagier, Brown, Deligne, Glanois,
-Fathizadeh--Marcolli) in a precise way:\ each of GeoVac's
-empirically-observed transcendentals has a named motivic home
+Fathizadeh--Marcolli) in a precise way:\ each transcendental in the
+census has a named motivic home
 inherited from the period-theoretic content of the corresponding
 sub-mechanism.  The vertex-parity-as-$\chi_{-4}$ correspondence at the
 core of GeoVac's two-loop QED sector (Paper~28 Theorem~3) is the
@@ -3258,21 +3274,22 @@ natural reference framework for the BC--RH program.
 \paragraph{Honest scope and relationship to GeoVac.}
 The arithmetic content of $\zeta$ accessible to the BC / scaling-site
 / zeta-spectral-triple substrate is \emph{not native to GeoVac}.
-GeoVac's RH-adjacent object is the Dirac spectral zeta $D(s)$ on the
-Fock-projected $\sthree$ graph (CLAUDE.md \S 1.7 WH6), whose zero
+GeoVac's RH-adjacent object is the Dirac spectral zeta $D(s)$ of the
+continuum $\sthree$ Dirac spectrum (a working hypothesis of the project's
+internal register), whose zero
 statistics are empirically GUE-like but which is structurally
 separated from classical Riemann $\zeta$ by three independent walls
 (Sprint 4 RH-N/O, Paper~29 \S 6):\ zeros not on a single critical
 line, no spectral-triple-natural functional equation, wrong Weyl law
 class.  Engaging the BC--RH program in earnest would require
 rebuilding GeoVac's substrate on adelic / scaling-site arithmetic
-input, not on the combinatorial $\sthree$ graph this paper has
-classified.  That is a parallel long-range research arc in its own
+input, not on the $\sthree$ spectral data this paper has
+catalogued.  That is a parallel long-range research arc in its own
 right;\ it is not a sub-sprint of the present cosmic-Galois $U^*$
 program.  We record it here so that the relationship is on the
 record:\ GeoVac and the BC--RH program target adjacent corners of
 the NCG landscape, but the substrates do not transport, and the
-present paper's classification of GeoVac periods is structurally
+present paper's census of GeoVac periods is structurally
 orthogonal to whatever the zeta-spectral-triple substrate classifies.
 
 % =====================================================================

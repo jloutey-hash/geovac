@@ -15,10 +15,11 @@ graded multipliers and confirms, over every single-harmonic tensor pair:
   (2) the triangle ratio ||A+B|| / (||A|| + ||B||) reaches its MAXIMUM 1
       (the triangle bound is TIGHT / achieved).
 
-Hence the correct constant is C_3^(2) <= sqrt(2) (-> sqrt(2)), not < 1. The
-convergence theorem is unaffected (sqrt(2) is a finite constant). See Paper 39
-Remark "Withdrawn Pythagorean refinement" and geovac.gh_convergence_tensor
-.c3_full_triangle_bound.
+Hence the triangle route cannot do better than sqrt(2), and the Pythagorean
+'< 1' is false.  The constant itself is C_3^(2) = 1 by compression on the
+Clifford-doubled module (Paper 39 Lemma L3-T, 2026-10-02;
+tests/test_paper39_compression_doubled.py).  See Paper 39 Remark "Withdrawn
+Pythagorean refinement".
 
 A = [D_a, M_f] (x) M_g ;  B = (gamma_a M_f) (x) [D_b, M_g] ;  A+B = [D_ab, M_f(x)M_g].
 """
@@ -90,14 +91,18 @@ def test_joint_leibniz_triangle_tight_pythagorean_false(n_max_a, n_max_b) -> Non
     )
 
 
-def test_c3_constant_is_triangle_not_pythagorean() -> None:
-    """The closed-form C_3 bound -> sqrt(2) (triangle), exceeds 1 beyond (3,3)."""
-    from geovac.gh_convergence_tensor import c3_full_triangle_bound as c3
-    # c3(n_max,n_max) sups over N in [2, n_max+1]; corner (n_max+1,n_max+1):
-    #   sqrt( (2 n_max)^2 / (2 (n_max+1)^2 - 2) ) = sqrt( 2 n_max / (n_max+2) ).
-    assert c3(1, 1) == pytest.approx(np.sqrt(2 / 3), abs=1e-9)   # corner (2,2): sqrt(4/6)
-    assert c3(2, 2) == pytest.approx(1.0, abs=1e-9)              # corner (3,3): sqrt(16/16)
-    assert c3(3, 3) == pytest.approx(np.sqrt(6 / 5), abs=1e-9)   # corner (4,4): sqrt(36/30)
-    assert c3(4, 4) > 1.0                                         # exceeds 1
-    assert c3(50, 50) < np.sqrt(2)                               # approaches but < sqrt(2)
-    assert c3(200, 200) > 1.39                                   # -> sqrt(2)
+def test_c3_record_formula_withdrawn() -> None:
+    """The per-irrep closed form (sqrt(2n/(n+2)) on the diagonal) rests on Paper 38's
+    FALSE per-harmonic bound ||[D, M_NLM]|| <= N-1 and is withdrawn as a value of
+    C_3^(2) (Paper 39, 2026-10-02); the constant is 1 by compression.  Rejects the
+    record function being presented as a live Lipschitz constant: its docstring
+    must open with the WITHDRAWN marker, and the module's theorem constant must not
+    be built from it."""
+    from geovac.gh_convergence_tensor import (
+        c3_full_triangle_bound as c3, compute_tensor_propinquity_bound)
+    doc = (c3.__doc__ or "").lstrip()
+    assert doc.startswith("[WITHDRAWN"), doc[:80]
+    b = compute_tensor_propinquity_bound(3, 4, gamma_prec=15)
+    gmax = max(b.gamma_a, b.gamma_b)
+    assert abs(b.propinquity_bound_theorem - 2.0 * gmax) < 1e-9 * gmax
+    assert abs(b.propinquity_bound_theorem - 2.0 * c3(3, 4) * gmax) > 1e-3

@@ -73,12 +73,12 @@ def _compute_witnesses(dps: int):
         "W1_Vol_S2_over_4": (
             mp.mpf(4) * pi / mp.mpf(4),   # Vol(S^2) = 4 pi, divided by 4 = pi
             +1,
-            "Paper 25 sec II.1 Hopf base measure (= pi)",
+            "Paper 25 sec II.1 unit-sphere volume slot (= pi)",
         ),
         "W2_propinquity_4_over_pi": (
             mp.mpf(4) / pi,                # Paper 38 L2 asymptotic rate
             -1,
-            "Paper 38 L2 rate; Paper 40 universal Lie group constant",
+            "Paper 38 L2 rate; Paper 40 rate constant (reported universal, compact semisimple; M1 placement a reading)",
         ),
         "W4_pythagorean_1_over_pi2": (
             mp.mpf(1) / pi**2,             # Paper 43 sec 10.2 prefactor

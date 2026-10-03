@@ -240,9 +240,10 @@ class GeoVacHamiltonian:
         is loose in absolute terms at the production cutoff
         ``max_n = 2`` (gamma_2 ~ 2.07 is the structural-truncation
         bound from the L2 sum rule, not the practically-observed
-        accuracy). Use it for cutoff-to-cutoff *improvement claims* and
-        for asymptotic statements; do NOT identify it with the
-        absolute relative energy error.
+        accuracy). It is a property of the S^3 spectral triple, not an
+        error bound for the molecular Hamiltonian: use it only for statements
+        about the truncated S^3 triple; do NOT identify it with any energy
+        error or read it as a cutoff-to-cutoff improvement of the Hamiltonian.
 
         Caches the computed value after first access. The first call
         runs the closed-form sum rule (Theorem 1(i) of the L2
@@ -251,8 +252,9 @@ class GeoVacHamiltonian:
         Returns
         -------
         float
-            Numerical value of ``gamma_{max_n}``.  ``C_3 = 1`` so this
-            *is* the propinquity bound.
+            Numerical value of ``gamma_{max_n}``, the state-space GH bound
+            (constant 1 from the lifted-state route; not a propinquity bound,
+            which the corpus does not claim).
 
         Raises
         ------

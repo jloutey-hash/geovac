@@ -1,5 +1,7 @@
 # Dirac-on-S³ Tier 1 Sprint — Verdict (Track D5)
 
+> **[Historical document, dated; superseded wording.]** Current standing labels: the combination rule K = π(B + F − Δ) is an **Observation** (since 2026-06-14; never 'conjectural', 'derived' or a 'prediction'); K matches 1/α to 4.8×10⁻⁷ (its cubic's root to 8.8×10⁻⁸); that no single construction generates B, F and Δ is an empirical record (twelve mechanisms eliminated), not a proof. Authoritative: Paper 2, Paper 32 §VIII, `docs/claims_register.md`.
+
 **Date:** 2026-04-15
 **Status:** Tier 1 complete.
 **Input tracks:** D1 (infrastructure), D2 (B analog), D3 (F analog), D4 (Hopf-equivariant Δ).
@@ -118,7 +120,7 @@ Nine mechanisms eliminated across Phases 4B–4I. Four positive structural ident
 ## 8. Deliverables produced by D5
 
 - `docs/dirac_s3_verdict.md` — this file.
-- `docs/paper2_section4_rewrite.tex` — drop-in Paper 2 §IV rewrite, not auto-applied, flagged for PI review.
+- `docs/archive/paper2_section4_rewrite.tex` — drop-in Paper 2 §IV rewrite, not auto-applied, flagged for PI review.
 - `docs/claude_md_proposed_updates.md` — mechanical CLAUDE.md edits list, not auto-applied.
 
 No computation was run in D5. All quoted equalities trace to one of: D2 memo, D3 memo, D4 memo, Phase 4H SM-D (already in CLAUDE.md §2).

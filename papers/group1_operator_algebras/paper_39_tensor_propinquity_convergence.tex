@@ -4,7 +4,7 @@
 % on S^3 at distinct focal lengths.
 %
 % Math.OA-style companion to Paper 38 (single-factor S^3 = SU(2)).
-% Closes the W2b-easy keystone of the GeoVac multi-focal-composition
+% Treats (state-space GH; propinquity open) the W2b-easy case of the GeoVac multi-focal-composition
 % program: tensor product of two infinite non-abelian metric spectral
 % triples on the same Riemannian manifold.
 %
@@ -121,17 +121,20 @@ state-space Gromov--Hausdorff convergence.
 
 \emph{An earlier $(B,P)$-pair assembly (the retained
 Lemma~\ref{lem:L5-T}) gave a weaker conditional bound with constant $2$ via
-the joint Lipschitz comparison constant $C_3^{(2)} \le \sqrt2$;\ that route's
+the joint Lipschitz comparison constant $C_3^{(2)} = 1$ (by compression);\ that route's
 height leg was refuted and its dual reach is a named gap, and it is
 superseded by the lifted-state route above.} The result extends
 \cite{connes_vs2021,leimbach_vs2024,loutey_paper38} to the simplest
-non-abelian tensor case, and closes a tensor-product state-space-GH
-case that the published literature on
-products of metric spectral triples~\cite{latremoliere2026,
+non-abelian tensor case.  The scalar state-space convergence of
+$\SU(2)\times\SU(2)$ is already covered by
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025} (compact metric
+groups, no Dirac operator, no rate);\ the new content is the spinor
+(Camporesi--Higuchi) tensor triple, with an explicit rate and the
+KO-dimension-6 real structure of its limit, a case the tensor-product
+propinquity literature~\cite{latremoliere2026,
 farsi_latremoliere2024,farsi_latremoliere2025,aguilar2019} does not
-cover; existing tensor-product propinquity results require the second
-factor to be finite-dimensional, AF, abelian, or to reduce to a
-single-character / Hopf-$S^1$ structure.
+cover (it requires the second factor to be finite-dimensional, AF,
+abelian, or to reduce to a single-character / Hopf-$S^1$ structure).
 \end{abstract}
 
 \bigskip\noindent
@@ -157,7 +160,11 @@ and Leimbach--van~Suijlekom~\cite{leimbach_vs2024} (with the related
 spectral-truncation integral of Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b}),
 and the present author~\cite{loutey_paper38} establish
 Gromov--Hausdorff convergence for spectral truncations of a
-\emph{single} compact Riemannian spectral triple:\ for $\SU(2)$ with an
+\emph{single} compact Riemannian spectral triple (the scalar Peter--Weyl
+truncations of any compact metric group, products such as
+$\SU(2)\times\SU(2)$ included, converge by
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}, with no Dirac
+operator and no rate):\ for $\SU(2)$ with an
 explicit rate $(c + o(1))\log\nmax/\nmax$~\cite{loutey_paper38}, and
 for the flat torus qualitatively (Leimbach--van~Suijlekom state no
 explicit rate). A natural and
@@ -185,8 +192,9 @@ Riemannian-by-AF, Riemannian-by-abelian, $C(X)$-by-AF,
 single-triple-along-paths, and single-truncation. None of these covers
 two infinite non-abelian Riemannian metric spectral triples.
 
-The present paper closes that gap in the simplest physically natural
-non-K\"ahler case: two copies of the round $\sthree = \SU(2)$
+The present paper treats that case at the level of van~Suijlekom's
+state-space Gromov--Hausdorff convergence (the propinquity question stays
+open), in the simplest physically natural non-K\"ahler case: two copies of the round $\sthree = \SU(2)$
 Camporesi--Higuchi triple~\cite{camporesi_higuchi1996}, each in its own
 focal-length scaling, tensored together via the Connes--Marcolli
 graded convention.
@@ -224,10 +232,11 @@ paper's KO arithmetic $3+3=6$ is the odd\,$\otimes$\,odd case, whose standard
 construction requires Clifford doubling
 ($\Hilb_a \otimes \C^2 \otimes \Hilb_b$,
 $D = \DCH^{(a)}\otimes\sigma_1\otimes 1 + 1\otimes\sigma_2\otimes\DCH^{(b)}$).
-\textbf{That repair is named, not adopted}, and \emph{whether
-Lemmas~\ref{lem:L3-T} and~\ref{lem:L4-T} hold for it is open} --- they were
-proved for the operator displayed here. See the status note to
-Theorem~\ref{thm:main}.
+The theorem's limit object is this doubled operator (see the status note
+to Theorem~\ref{thm:main});\ the sharp bound \eqref{eq:C3_2_compression} of
+Lemma~\ref{lem:L3-T} and Lemma~\ref{lem:L4-T}(d) are proved for it
+(2026-10-02), while the elementary triangle bound
+\eqref{eq:pythagorean_op_norm} is stated for the operator displayed here.
 The combined object has KO-dimension $3 + 3 = 6 \pmod 8$. Truncate
 each factor independently at cutoffs $\nmaxa, \nmaxb$ and form the
 tensor-product truncated triple $\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb}$.
@@ -251,7 +260,7 @@ O(1/n)$. The convergence is [INTERNAL THEOREM] in the translation-seminorm
 metrization (Paper~38's footing);\ it is proved by the lifted-state
 construction (Lemma~\ref{lem:lifted_state-T}), for which the dual reach
 $\mathrm{reach}_P$ is unnecessary. The joint Lipschitz comparison constant
-$C_3^{(2)} \le \sqrt2$ (\eqref{eq:C3_2_full}) belongs to the \emph{abandoned}
+$C_3^{(2)} = 1$ (\eqref{eq:C3_2_compression}) belongs to the \emph{abandoned}
 $(B,P)$-pair route (Lemma~\ref{lem:L5-T}) and is not a rate constant of this
 theorem.
 \end{theorem}
@@ -267,10 +276,11 @@ $(B,P)$-pair route (Lemmas~\ref{lem:L3-T}--\ref{lem:L5-T}) is retained as the
 record of an abandoned approach, supplemented there by two ingredients
 specific to the product:
 \begin{itemize}\setlength{\itemsep}{2pt}
-\item a closed-form Lipschitz comparison estimate from the (tight)
-operator-norm triangle bound $\norm{A + B}_{\mathrm{op}} \le \norm{A}
-+ \norm{B}$ on the two Connes--Marcolli Leibniz terms
-(Lemma~\ref{lem:L3-T}); and
+\item a Lipschitz comparison with constant $1$ at every cutoff, by
+compression on the Clifford-doubled module (Lemma~\ref{lem:L3-T});\ the
+elementary operator-norm triangle bound $\norm{A + B}_{\mathrm{op}} \le
+\norm{A} + \norm{B}$ on the two Leibniz terms, tight term by term, gives
+only $\sqrt 2$; and
 \item an explicit Stein--Weiss-type bound on the joint
 cross-Stein--Weiss \emph{panel} term, again via the triangle bound
 applied to the joint commutator (Lemma~\ref{lem:L5-T}). This term was
@@ -281,13 +291,14 @@ estimates alone.
 (An earlier draft used a \emph{Pythagorean} refinement of these two
 bounds, claiming $C_3^{(2)} < 1$; that refinement is withdrawn --- the
 graded anticommutation does not produce operator-norm orthogonality
---- and replaced throughout by the rigorous triangle bound, giving
-$C_3^{(2)} \le \sqrt 2$; see Remark~\ref{rem:no_pythagorean}.)
+--- and was replaced by the triangle bound $C_3^{(2)} \le \sqrt 2$, itself
+superseded (2026-10-02) by the compression bound $C_3^{(2)} = 1$; see
+Remark~\ref{rem:no_pythagorean} and Lemma~\ref{lem:L3-T}.)
 
 That abandoned route's mechanism was unified: the same KO-dim-6 graded
 structure that defines the Connes--Marcolli composed Dirac split both
 its joint Lipschitz constant (R1) and its joint cross-Stein--Weiss
-panel bound (R2) into Leibniz terms controlled by the triangle bound, each
+panel bound (R2) into Leibniz terms bounded by the triangle inequality, each
 of the five single-factor lemmas of \cite{loutey_paper38} extending
 factor-by-factor. The live proof, by contrast, is the lifted-state
 assembly, which needs none of this (Lemma~\ref{lem:lifted_state-T}).
@@ -300,9 +311,9 @@ $\Tcal_{\sthree} \otimes \Tcal_{S^5}^{\mathrm{Bargmann}}$, in which the
 second factor is a holomorphic Hardy-sector spectral triple of the
 type used in the Bargmann--Segal lattice
 construction~\cite{paper24}, is structurally obstructed at the
-framework level: the $\sthree$ factor is a second-order Riemannian
-spinor Dirac, while the $S^5$ Bargmann factor is a first-order
-complex-analytic Euler operator on a Hardy sector and does not fit
+framework level: the $\sthree$ factor is a Riemannian spinor Dirac
+operator, while the $S^5$ Bargmann factor is a complex-analytic Euler
+operator on a Hardy sector and does not fit
 standard NCG Dirac axioms. There is no published prescription for
 tensoring a Riemannian spinor Dirac with a Hardy-sector first-order
 complex operator in the propinquity framework, and the obstruction is
@@ -349,7 +360,7 @@ pursued here, and its dual-reach step would reintroduce the single-factor
 $\mathrm{reach}_P$ named gap (the invalid cb-norm dual-reach that descoped
 Papers~38/40). The abandoned $(B,P)$-pair assembly (Lemma~\ref{lem:L5-T})
 inherited that gap directly;\ its joint Lipschitz constant
-$C_3^{(2)} \le \sqrt 2$ (Lemma~\ref{lem:L3-T}) is that route's constant,
+$C_3^{(2)} = 1$ (Lemma~\ref{lem:L3-T}) is that route's constant,
 not a rate constant of Theorem~\ref{thm:main}.
 
 \subsection{Single-factor recall: the rescaled $\sthree$ Camporesi--Higuchi triple}
@@ -370,7 +381,7 @@ $\Tcal_{\nmax}^{\lambda} = (\Op_{\nmax}, \Hilb_{\nmax},
 $\Op_{\nmax} = P_{\nmax} C^\infty(\sthree) P_{\nmax}$ and the truncated
 Dirac $D_{\nmax} = P_{\nmax} \DCH P_{\nmax}$. We will write
 $\Tcal^\lambda$ when the dependence on $\lambda$ matters; the rescaling
-multiplies single-factor Connes distances and propinquity bounds by
+multiplies single-factor Connes distances and state-space GH bounds by
 $\lambda$, but is otherwise transparent for our purposes.
 
 \subsection{The tensor-product spectral triple}
@@ -407,9 +418,10 @@ as printed.
 This anticommutation of the two \emph{Dirac} summands is what gives the
 clean two-term graded Leibniz rule \eqref{eq:joint_leibniz} (it does
 \emph{not}, however, make the two resulting \emph{commutator} terms
-operator-norm orthogonal --- see Remark~\ref{rem:no_pythagorean}); the
-joint commutator is then controlled by the triangle bound, which
-suffices to make the tensor-product propinquity convergent.
+operator-norm orthogonal --- see Remark~\ref{rem:no_pythagorean}). The
+triangle bound on the two terms gives $\sqrt 2$;\ compression on the
+Clifford-doubled module gives the constant $1$ (Lemma~\ref{lem:L3-T}).
+Neither is a rate constant of Theorem~\ref{thm:main}.
 
 The truncated tensor-product triple at cutoffs $(\nmaxa, \nmaxb)$ is
 \begin{equation}\label{eq:tensor_truncated}
@@ -472,9 +484,9 @@ Lemma~\ref{lem:lifted_state-T}, which uses neither a Berezin map nor any
 partial inverse:\ $\mathrm{reach}_P$ is \emph{unnecessary}, both
 almost-inverse defects being the same Fej\'er smoothing at the same
 moment $\gamma^{(ab)}$. The joint Lipschitz comparison constant
-$C_3^{(2)} \le \sqrt2$ of Lemma~\ref{lem:L3-T} belongs to the
+$C_3^{(2)} = 1$ of Lemma~\ref{lem:L3-T} belongs to the
 \emph{abandoned} $(B,P)$-pair route (Lemma~\ref{lem:L5-T}) and is not a
-rate constant of this theorem;\ its value is unchanged, only its role.
+rate constant of this theorem.
 
 \emph{Limit object.} $\Tcal_{\sthree}^{\lambda_a} \otimes
 \Tcal_{\sthree}^{\lambda_b}$ is the graded tensor
@@ -522,8 +534,8 @@ the lifted-state route replaces it and needs neither.
 % =====================================================================
 
 We work at unit focal length $\lambda_a = \lambda_b = 1$ throughout
-this section; the $\lambda$-rescaling is reinstated at the end of
-\S\ref{sec:L5-T}.
+this section; the $\lambda$-rescaling is reinstated at the end of the
+proof of Lemma~\ref{lem:L5-T}.
 
 % ---------------------------------------------------------------------
 \subsection{Lemma L1$'$-T: tensor-product operator system}
@@ -587,11 +599,13 @@ in the SDP definition of the joint truncated Connes distance.
 As in~\cite[Remark~3.2]{loutey_paper38}, the offdiagonal extension is a
 metric-only device for finite-distance verification; the
 $D_{a,b} = \DCH^{(a)} \otimes I + \gamma_a \otimes \DCH^{(b)}$ printed here
-is what Lemmas~\ref{lem:L3-T}--\ref{lem:L4-T} are proved for. It does
+is what the elementary triangle bound \eqref{eq:pythagorean_op_norm} of
+Lemma~\ref{lem:L3-T} is stated for. It does
 \emph{not} satisfy the KO-dim-6 axioms, and indeed cannot be realised:\
 $\gamma_a = 0$ [retracted 2026-09-04: p39-chirality-grading-on-s3] (note after
-\eqref{eq:CM_dirac_recall}). What those two lemmas establish for the
-repaired operator is open.
+\eqref{eq:CM_dirac_recall}). The sharp bound \eqref{eq:C3_2_compression} and
+Lemma~\ref{lem:L4-T}(d) are proved for the doubled operator
+$D^{\mathrm{dbl}}_{a,b}$.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -669,15 +683,17 @@ well-behaved;\ withdrawn 2026-09-30.)
 \end{remark}
 
 % ---------------------------------------------------------------------
-\subsection{Lemma L3-T: joint Lipschitz comparison via the triangle
-bound on the graded Leibniz rule}\label{sec:L3-T}
+\subsection{Lemma L3-T: joint Lipschitz comparison by compression on the
+doubled module}\label{sec:L3-T}
 % ---------------------------------------------------------------------
 
-This is the central new technical content of the paper. The
+This lemma belongs to the abandoned $(B,P)$-pair route;\ the main
+theorem does not use it (Lemma~\ref{lem:lifted_state-T}). The
 Connes--Marcolli graded Dirac \eqref{eq:CM_dirac_recall} on the
 KO-dim-6 graded module splits the joint commutator into two Leibniz
 terms \eqref{eq:joint_leibniz}; the operator-norm triangle bound on
-that sum is what controls the joint Lipschitz comparison constant.
+that sum gives an elementary bound ($\sqrt 2$), and compression on the
+Clifford-doubled module gives the sharp constant $1$.
 
 \begin{remark}[Withdrawn Pythagorean refinement]\label{rem:no_pythagorean}
 An earlier version of this lemma claimed the \emph{Pythagorean}
@@ -696,9 +712,10 @@ harmonics (the supporting test below) finds the Pythagorean bound
 \emph{maximally violated} ($\norm{A+B}^2 / (\norm{A}^2+\norm{B}^2) = 2$
 exactly at a pair of top-shell raising harmonics, where the two terms
 add constructively) and the \emph{triangle} bound tight
-($\norm{A+B} = \norm{A}+\norm{B}$ there). The constant is therefore
-$C_3^{(2)} \nearrow \sqrt 2$, not $<1$. This does not affect
-convergence:\ $\sqrt 2$ is a finite constant, so the right-hand side of
+($\norm{A+B} = \norm{A}+\norm{B}$ there). The triangle route therefore
+bounds the constant by $\sqrt 2$, not by $<1$;\ the compression bound of
+Lemma~\ref{lem:L3-T} gives $1$. Neither affects
+convergence:\ both are finite constants, so the right-hand side of
 \eqref{eq:main_thm} still $\to 0$ as the cutoffs grow.
 \end{remark}
 
@@ -720,25 +737,47 @@ Remark~\ref{rem:no_pythagorean}),
         \;+\; \opnorm{\Mat_f} \cdot \opnorm{[\DCH^{(b)}, \Mat_g]}.
 \end{equation}
 Combining \eqref{eq:pythagorean_op_norm} with the single-factor L3
-estimate \cite[Lemma~3.5]{loutey_paper38} for each factor at level
-$(N_a, N_b)$ in the Avery 3-Y harmonic basis gives the per-irrep ratio
-\begin{equation}\label{eq:per_irrep_ratio_T}
-   \frac{\opnorm{[D_{a,b},\, \Mat_{N_a L_a M_a} \otimes
-                                \Mat_{N_b L_b M_b}]}^2}
-        {\norm{Y^{(3)}_{N_a L_a M_a} \otimes Y^{(3)}_{N_b L_b M_b}}_{\mathrm{Lip}}^2}
-   \;\le\; \frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}{N_a^2 + N_b^2 - 2}.
-\end{equation}
-Taking square roots and supping over the irrep grid gives the joint
-Lipschitz comparison constant
+of Paper~38 (constant $1$ at every cutoff, by compression:\
+$\opnorm{[\DCH, \Mat_h]} \le \norm{\nabla h}_{L^\infty}$) and
+$\opnorm{\Mat_h} \le \norm{h}_{L^\infty}$ gives, on simple tensors, the
+elementary bound
 \begin{equation}\label{eq:C3_2_full}
-   C_3^{(2)}(\nmaxa, \nmaxb)
-   \;:=\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \ 2 \le N_b \le \nmaxb+1}}
-            \sqrt{\frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}
-                       {N_a^2 + N_b^2 - 2}}
-   \;\le\; \sqrt{2},
+   \opnorm{[D_{a,b},\, \Mat_f \otimes \Mat_g]}
+   \;\le\; \norm{\nabla f}_\infty \norm{g}_\infty
+         + \norm{f}_\infty \norm{\nabla g}_\infty
+   \;\le\; \sqrt{2}\; L(f \otimes g),
+   \qquad
+   L(f \otimes g)^2 := \norm{\nabla f}_\infty^2 \norm{g}_\infty^2
+                      + \norm{f}_\infty^2 \norm{\nabla g}_\infty^2,
 \end{equation}
-bounded by $\sqrt 2$ at every finite $(\nmaxa, \nmaxb)$ and increasing to
-$\sqrt 2$ as the cutoffs grow. This constant prices the truncated-Dirac
+by Cauchy--Schwarz. The sharp statement is by compression on the
+Clifford-doubled module \textbf{[INTERNAL THEOREM]}:\ with
+$D^{\mathrm{dbl}}_{a,b} := \DCH^{(a)}\otimes\sigma_1\otimes 1 +
+1\otimes\sigma_2\otimes\DCH^{(b)}$ (Lemma~\ref{lem:real_structure-T}),
+$P_{a,b} := P_{\nmaxa}\otimes 1\otimes P_{\nmaxb}$ with $P_{\nmax}$ the
+true-window projection onto complete Camporesi--Higuchi eigenspaces, and
+$S_{a,b}(F) := P_{a,b}\Mat_F P_{a,b}$ (so $S_{a,b}(f\otimes g) = P_{\nmaxa}\Mat_f P_{\nmaxa}\otimes 1\otimes
+P_{\nmaxb}\Mat_g P_{\nmaxb}$), every $F \in C^\infty(\sthree\times\sthree)$
+satisfies
+\begin{equation}\label{eq:C3_2_compression}
+   \opnorm{[D^{\mathrm{dbl}}_{a,b},\, S_{a,b}(F)]}
+   \;\le\; \norm{\nabla_{\mathrm{prod}} F}_\infty
+   \;=\; \norm{F}_{\mathrm{Lip}},
+\end{equation}
+so the joint Lipschitz comparison constant is $C_3^{(2)} = 1$ relative to the
+classical product Lipschitz norm at every finite $(\nmaxa, \nmaxb)$, sharp as
+both cutoffs grow. On simple tensors $\norm{f\otimes g}_{\mathrm{Lip}} \le
+L(f\otimes g)$, so \eqref{eq:C3_2_compression} implies \eqref{eq:C3_2_full};
+the converse fails, and the triangle route's $\sqrt 2$ is not the constant.
+(Corrected 2026-10-02:\ an earlier
+version computed a per-irrep ratio, a diagonal closed form
+$\sqrt{2n/(n+2)}$ and its values from Paper~38's single-factor
+per-harmonic bound $\opnorm{[\DCH, \Mat_{NLM}]} \le N - 1$, which is false
+(Paper~38, Lemma~L3 remark, 2026-09-28);\ the ratio, the closed form, its
+values and the claim that the constant increases to $\sqrt 2$ are
+withdrawn;\ a uniform $\sqrt 2$ printed briefly in their place is the
+elementary bound \eqref{eq:C3_2_full}, superseded by
+\eqref{eq:C3_2_compression}.) This constant prices the truncated-Dirac
 $\to$ classical-gradient conversion of the abandoned $(B,P)$-pair route
 (Lemma~\ref{lem:L5-T});\ it is \emph{not} a rate constant of
 Theorem~\ref{thm:main}, whose lifted-state route (via the translation
@@ -788,12 +827,14 @@ attaining its maximum $2$, confirming both the tightness of
 \eqref{eq:pythagorean_op_norm} and the failure of the Pythagorean form
 (backing test \texttt{tests/test\_paper39\_triangle\_tight.py}).
 
-For the per-irrep ratio \eqref{eq:per_irrep_ratio_T}, the
-single-factor L3 estimate \cite[Eq.~(3.18)]{loutey_paper38} gives
-$\opnorm{[\DCH^{(\bullet)}, \Mat_{N_\bullet L_\bullet M_\bullet}]}
-\le (N_\bullet - 1)$ on the unit-normalised Avery harmonic
-$Y^{(3)}_{N_\bullet L_\bullet M_\bullet}$. The joint Lipschitz norm
-satisfies
+For \eqref{eq:C3_2_full}:\ each factor's commutator is bounded by
+compression, $\opnorm{[\DCH^{(\bullet)}, \Mat_h]} \le \norm{\nabla
+h}_{L^\infty}$ (Paper~38 Lemma~L3), and $\opnorm{\Mat_h} \le \norm{h}_\infty$
+(a compressed multiplication operator);\ the triangle bound
+\eqref{eq:pythagorean_op_norm} then gives the middle expression, and
+$a + b \le \sqrt 2\,\sqrt{a^2 + b^2}$ the last.  (The following
+per-harmonic computation is retained as the record of the withdrawn
+route.  The joint Lipschitz norm of unit harmonics satisfies
 \begin{equation}\label{eq:joint_lip}
    \norm{Y^{(3)}_{N_a L_a M_a} \otimes Y^{(3)}_{N_b L_b M_b}}_{\mathrm{Lip}}^2
    \;=\; (N_a^2 - 1) \cdot 1 + 1 \cdot (N_b^2 - 1)
@@ -803,47 +844,41 @@ where we have used $\norm{Y^{(3)}_{N_a L_a M_a}}_{\mathrm{Lip}}^2 =
 N_a^2 - 1$ (the round-$\sthree$ Laplace--Beltrami eigenvalue at level
 $N_a$) and $\norm{Y^{(3)}_{N_a L_a M_a}}_\infty \le 1$ on the
 unit-normalised panel. Combining \eqref{eq:pythagorean_op_norm} and
-\eqref{eq:joint_lip} gives
-\eqref{eq:per_irrep_ratio_T}.
+\eqref{eq:joint_lip}, combined with the false per-harmonic bound,
+gave the withdrawn per-irrep ratio;\ see
+Remark~\ref{rem:C3_2_diagonal}.)
 
-The supremum over the irrep rectangle $[2, \nmaxa+1] \times
-[2, \nmaxb+1]$ in \eqref{eq:C3_2_full} is finite and bounded by
-$\sqrt 2$:\ since
-$\bigl((N_a-1)+(N_b-1)\bigr)^2 \le 2\bigl((N_a-1)^2+(N_b-1)^2\bigr)
-\le 2(N_a^2 + N_b^2 - 2)$, the per-irrep ratio never exceeds $2$. The
-supremum is computed by scanning the (finite) irrep grid; it equals
-$1$ at $(2,2)$, exceeds $1$ for every larger cutoff, and increases to
-$\sqrt 2 \approx 1.414$ as $\nmaxa, \nmaxb \to \infty$ (diagonal values
-$1.000$ at $(2,2)$, $1.095$ at $(3,3)$, $1.155$ at $(4,4)$; see
-Remark~\ref{rem:C3_2_diagonal}).
+For \eqref{eq:C3_2_compression}:\ $P_{a,b}$ commutes with
+$D^{\mathrm{dbl}}_{a,b}$ ($P_{\nmax}$ is a spectral projection of $\DCH$, and
+the Clifford factor is untouched), so
+$[D^{\mathrm{dbl}}_{a,b}, P_{a,b}\Mat_F P_{a,b}] =
+P_{a,b}[D^{\mathrm{dbl}}_{a,b}, \Mat_F]P_{a,b}$, and compression contracts
+operator norms. On the continuum $[\DCH^{(\bullet)}, \Mat_F] =
+c_\bullet(d_\bullet F)$ is Clifford multiplication by the partial gradient, so
+$[D^{\mathrm{dbl}}_{a,b}, \Mat_F] = c_a(d_a F)\,\sigma_1 + \sigma_2\,c_b(d_b F)$
+pointwise. Since $c_\bullet(v)^2 = -|v|^2$, the two terms act on different
+tensor factors and $\sigma_1\sigma_2 = -\sigma_2\sigma_1$, its square is
+$-(|d_a F|^2 + |d_b F|^2)$, so its operator norm is
+$\norm{\nabla_{\mathrm{prod}} F}_\infty$
+(Lemma~\ref{lem:continuum_lip-T}). This is Paper~40's compression argument
+for Lemma~L3~\cite{paper40_unified} on the product;\ the anticommuting
+Clifford pair is what removes the triangle step's loss (backing test
+\texttt{tests/test\_paper39\_compression\_doubled.py}, a flat-torus model of
+the doubled-module compression;\ the $\sthree$ inputs, spectral truncation
+and the Clifford symbol, are Paper~38's).
 \end{proof}
 
-\begin{remark}[Diagonal closed form]\label{rem:C3_2_diagonal}
-On the diagonal $\nmaxa = \nmaxb = n$, the supremum in \eqref{eq:C3_2_full}
-is attained at the corner $(n+1, n+1)$ and reads
-\begin{equation*}
-   C_3^{(2)}(n, n)
-   \;=\; \sqrt{\frac{(2n)^2}{2(n+1)^2 - 2}}
-   \;=\; \sqrt{\frac{2 n}{n+2}}.
-\end{equation*}
-Numerical values: $C_3^{(2)}(2,2) = 1$, $C_3^{(2)}(3,3) =
-\sqrt{6/5} \approx 1.095$, $C_3^{(2)}(10,10) \approx 1.291$,
-$C_3^{(2)}(100,100) \approx 1.400$, with $C_3^{(2)}(n,n) \nearrow
-\sqrt 2$. The constant exceeds $1$ for every $n \ge 3$; the
-convergence in \eqref{eq:main_thm} is nonetheless driven entirely by
-the factor $\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) \to 0$, which the
-bounded constant $C_3^{(2)} \le \sqrt 2$ does not disturb.
-\end{remark}
-
-\begin{remark}[Asymmetric supremum]\label{rem:asymmetric_sup}
-For asymmetric cutoffs $\nmaxa \ne \nmaxb$, the supremum is again
-bounded by $\sqrt 2$ and is found by scanning the irrep grid. At
-$(\nmaxa, \nmaxb) = (10, 4)$ for example, the maximum over
-$[2,11] \times [2,5]$ is $\approx 1.179$ at the \emph{interior} point
-$(8,5)$ ($\sqrt{121/87}$) --- the supremum need not occur at the grid
-corner $((11,5)$ gives only $\sqrt{196/144} \approx 1.167)$. In all
-cases $C_3^{(2)} \le \sqrt 2$, which is what
-the convergence theorem requires.
+\begin{remark}[Withdrawn finite-cutoff values]\label{rem:C3_2_diagonal}\label{rem:asymmetric_sup}
+Earlier versions printed a diagonal closed form
+$C_3^{(2)}(n, n) = \sqrt{2n/(n+2)}$ (values $1$, $1.095$, $1.155$,
+$1.291$, $1.400$ at $n = 2, 3, 4, 10, 100$) and asymmetric suprema such
+as $\approx 1.179$ at $(10, 4)$.  All were computed from Paper~38's
+single-factor per-harmonic bound $\opnorm{[\DCH, \Mat_{NLM}]} \le N - 1$,
+which is false, and are withdrawn (2026-10-02).  What stands is
+$C_3^{(2)} = 1$ at every cutoff, by compression
+(\eqref{eq:C3_2_compression});\ the triangle route's $\sqrt 2$
+(\eqref{eq:C3_2_full}) is the weaker elementary bound.  The convergence
+theorem does not use this constant either way.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -880,9 +915,9 @@ $\opnorm{B_{\nmaxa, \nmaxb}(f \otimes g)} \le \norm{f}_\infty \cdot
         + \norm{f}_\infty \gamma_{\nmaxb}\norm{\nabla g}_\infty.
 \end{equation*}
 \item[(d)] (Compatibility with L3-T.)
-$\opnorm{[D_{a,b}, B_{\nmaxa, \nmaxb}(f \otimes g)]} \le C_3^{(2)}
-\norm{f \otimes g}_{\mathrm{Lip}}$, with $C_3^{(2)} \le \sqrt 2$ given
-by \eqref{eq:C3_2_full}.
+$\opnorm{[D^{\mathrm{dbl}}_{a,b}, B_{\nmaxa}(f) \otimes 1_2 \otimes
+B_{\nmaxb}(g)]} \le C_3^{(2)} \norm{f \otimes g}_{\mathrm{Lip}}$, with
+$C_3^{(2)} = 1$ given by \eqref{eq:C3_2_compression}.
 \end{enumerate}
 \end{lemma}
 
@@ -901,16 +936,14 @@ B_a(f) \otimes B_b(g) - P_a \Mat_f P_a \otimes P_b \Mat_g P_b
   + P_a \Mat_f P_a \otimes \bigl(B_b(g) - P_b \Mat_g P_b\bigr),
 \end{equation*}
 take operator norms, and apply single-factor L4(c) on each summand.
-\textbf{(d)} Apply Lemma~\ref{lem:L3-T} to the simple tensor $B_a(f)
-\otimes B_b(g) \in \Op_{\nmaxa} \otimes \Op_{\nmaxb}$, using
-single-factor L4(d) for the per-factor commutator bound and the
-triangle bound \eqref{eq:pythagorean_op_norm} for the
-operator-norm reduction.
+\textbf{(d)} Paper~38's Berezin map is the compression of a central
+Fej\'er convolution, $B_{\nmax}(f) = P_{\nmax}\Mat_{K_{\nmax}*f}P_{\nmax}$
+(\cite[Definition~\texttt{def:berezin}]{loutey_paper38}), so
+$B_{\nmaxa}(f)\otimes 1_2\otimes B_{\nmaxb}(g) =
+S_{a,b}\bigl((K_{\nmaxa}\otimes K_{\nmaxb}) * (f\otimes g)\bigr)$. Apply \eqref{eq:C3_2_compression};\
+convolution by a probability measure on the product group does not increase
+the bi-invariant Lipschitz norm.
 \end{proof}
-
-% ---------------------------------------------------------------------
-\subsection{Lemma L5-T: joint state-space-GH assembly}\label{sec:L5-T}
-% ---------------------------------------------------------------------
 
 % ---------------------------------------------------------------------
 \subsection{Lemma continuum-Lip-T: translation seminorm equals classical
@@ -936,8 +969,8 @@ of $\SU(2)$. With the doubled Dirac (Lemma~\ref{lem:real_structure-T}) the
 third equality $\norm{\nabla_{\mathrm{prod}}F}_\infty =
 \opnorm{[D_{a,b}, \Mat_F]}$ also holds exactly:\ this is where a
 Lipschitz-comparison constant $C_3^{(2)}$ would enter, and on the continuum
-symbol it is $1$. (The truncated-cutoff $C_3^{(2)} \le \sqrt2$ of
-Lemma~\ref{lem:L3-T} prices the \emph{truncated}-Dirac $\to$ classical
+symbol it is $1$. (The truncated-cutoff $C_3^{(2)} = 1$ of
+Lemma~\ref{lem:L3-T}, by compression, prices the \emph{truncated}-Dirac $\to$ classical
 gradient conversion of the abandoned $(B,P)$ route, which this route does not
 perform.)
 \end{proof}
@@ -1254,8 +1287,9 @@ only for the record of what the first pass got wrong about its order.
 \section{Numerical verification}\label{sec:numerical}
 % =====================================================================
 
-We verify the joint state-space-GH bound at the panel
-$(\nmaxa, \nmaxb) \in \{(2,2), (2,3), (3,3), (3,4), (4,4)\}$.
+We tabulate the single-factor inputs and the abandoned route's values at
+the panel $(\nmaxa, \nmaxb) \in \{(2,2), (2,3), (3,3), (3,4), (4,4)\}$;\
+Theorem~\ref{thm:main} itself is proved, not verified numerically.
 
 \paragraph{Single-factor input.} The single-factor moments
 $\gamma_{\nmax}$ inherit from~\cite[Lemma~3.4]{loutey_paper38}:
@@ -1272,13 +1306,9 @@ $4/9$ at $(2,2)$, $1/3$ at $(2,3)$, $1/4$ at $(3,3)$, $1/5$ at
 $(3,4)$, $4/25$ at $(4,4)$.
 
 \paragraph{Joint Lipschitz comparison constant.} By
-Lemma~\ref{lem:L3-T} (tight triangle bound), the diagonal sequence is
-\[
-C_3^{(2)}(n,n) = \sqrt{2n/(n+2)} \;\nearrow\; \sqrt 2,
-\]
-giving $C_3^{(2)}(2,2) = 1$,
-$C_3^{(2)}(3,3) = \sqrt{6/5} \approx 1.095$,
-$C_3^{(2)}(4,4) = \sqrt{8/6} \approx 1.155$.
+Lemma~\ref{lem:L3-T}, $C_3^{(2)} = 1$ at every cutoff (relative to the
+classical product Lipschitz norm, by compression);\ the earlier diagonal
+values are withdrawn (Remark~\ref{rem:C3_2_diagonal}).
 
 \paragraph{Panel values for the abandoned $(B,P)$-pair route (unit focal
 length).}
@@ -1286,17 +1316,16 @@ The columns below tabulate the \emph{abandoned} $(B,P)$-pair bound
 (Lemma~\ref{lem:L5-T}), retained for the record;\ they are \emph{not}
 Theorem~\ref{thm:main}'s bound, which is the tighter
 $\gamma^{(ab)} \le \gamma_{\nmaxa}+\gamma_{\nmaxb}$ of constant $1$,
-which is strictly below the $\Lambda^{\mathrm{full}}$ values here (those
-carry the extra $C_3^{(2)} \ge 1$ factor of the abandoned route).
-We report two presentations of the bound at the panel: the
-\emph{factorised-panel} bound $\Lambda^{\mathrm{fact}} =
-C_3^{(2),\mathrm{fact}} \cdot \max(\gamma_a, \gamma_b)$ with
-$C_3^{(2),\mathrm{fact}} = 1$ on the unit-Lipschitz simple-tensor panel
-(this is the variant computed by
-\texttt{compute\_tensor\_propinquity\_bound} as
-\texttt{propinquity\_bound}), and the \emph{full-operator-system} bound
-\eqref{eq:L5_bound_T} obtained by inserting the triangle-bound
-$C_3^{(2)} \le \sqrt 2$ of Lemma~\ref{lem:L3-T} together with the
+which is below the $\Lambda^{\mathrm{full}}$ bounds here (those
+carry the extra factor $2$ of the abandoned route).
+We report two columns at the panel: a \emph{reference value}
+$\Lambda^{\mathrm{fact}} := \max(\gamma_a, \gamma_b)$, the slower factor's
+rate (the variant computed by \texttt{compute\_tensor\_propinquity\_bound}
+as \texttt{propinquity\_bound};\ it is \emph{not} a proved bound, since the
+proved $\gamma^{(ab)} \ge \max(\gamma_a, \gamma_b)$), and the
+\emph{full-operator-system} bound
+\eqref{eq:L5_bound_T} obtained by inserting the compression constant
+$C_3^{(2)} = 1$ of Lemma~\ref{lem:L3-T} together with the
 factor $2$ reach contribution of Lemma~\ref{lem:L5-T}.
 
 \begin{center}
@@ -1306,19 +1335,21 @@ $(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
 mass max & $\Lambda^{\mathrm{fact}}$ &
 $C_3^{(2)}$ & $\Lambda^{\mathrm{full}}$ \\
 \midrule
-$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $1.000$ & $4.149$ \\
-$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $1.043$ & $4.326$ \\
-$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $1.095$ & $3.528$ \\
-$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $1.121$ & $3.610$ \\
-$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $1.155$ & $3.054$ \\
+$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $1$ & $4.149$ \\
+$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $1$ & $4.149$ \\
+$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $1$ & $3.220$ \\
+$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $1$ & $3.220$ \\
+$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $1$ & $2.645$ \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The factorised-panel column $\Lambda^{\mathrm{fact}}$ uses
-$\Lambda^{\mathrm{fact}} \le \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$,
-the value tracked in the supporting computational module as the
-factorised-panel propinquity bound. The full-operator-system column
+The reference column $\Lambda^{\mathrm{fact}} = \max(\gamma_{\nmaxa},
+\gamma_{\nmaxb})$ is the value the supporting computational module tracks
+under the historical name ``factorised-panel propinquity bound'';\ it is a
+reference rate, not a bound (an earlier caption read it as
+$\Lambda^{\mathrm{fact}} \le \max(\gamma)$, which no lemma here supplies,
+withdrawn 2026-10-02). The full-operator-system column
 $\Lambda^{\mathrm{full}}$ uses
 $\Lambda \le C_3^{(2)} \cdot 2 \cdot
 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$, the reach-only assembly of
@@ -1327,29 +1358,30 @@ $1 + 2\sqrt{2} \approx 3.828$ [retracted 2026-09-04: p39-tensor-assembly-constan
 column $1.914\times$ larger. The supporting module's
 \texttt{propinquity\_bound\_full} field tracks $2\max(\gamma)$
 \emph{without} the $C_3^{(2)}$ factor (its $2$ is documented there as a
-Lipschitz-comparison constant, a different quantity), so it agrees with
-this column only at $(2,2)$, where $C_3^{(2)} = 1$, and is not an
-independent corroboration of the factor $2$ (corrected 2026-09-04;\ an
+Lipschitz-comparison constant, a different quantity);\ with $C_3^{(2)} = 1$
+the two agree numerically, but the agreement is not an independent
+corroboration of this column (the column's per-cutoff $C_3^{(2)}$ values
+printed before 2026-10-02 are withdrawn) (corrected 2026-09-04;\ an
 earlier caption said the two ``coincide''). Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
 exhibit monotone decrease across the diagonal panel.
 
 \paragraph{Three structural observations.}
 \begin{enumerate}
 \item \emph{Monotone decrease and bit-identical match to single
-factor.} On the factorised panel,
+factor.} For the reference column,
 $\Lambda^{\mathrm{fact}}(2,2) = 2.0746$,
 $\Lambda^{\mathrm{fact}}(3,3) = 1.6101$,
 $\Lambda^{\mathrm{fact}}(4,4) = 1.3223$. The diagonal ratio
 $\Lambda^{\mathrm{fact}}(4,4) / \Lambda^{\mathrm{fact}}(2,2) =
 1.3223/2.0746 = 0.6374$ matches the single-factor Paper~38 ratio
 $\Lambda^{(1)}(4)/\Lambda^{(1)}(2) \approx 0.637$
-\emph{bit-identically} to four digits;\ the joint $\max$-rate is
-dominated by the slower factor and inherits the single-factor cutoff
-scaling. On the full-operator-system column the analogous ratio is
-$\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) \approx
-3.054/4.149 \approx 0.736$ (unchanged from the withdrawn column's
-$5.845/7.942$, the factor cancelling), with the (now increasing) $C_3^{(2)}$
-factor partially offsetting the $\max(\gamma)$ decrease.
+\emph{bit-identically} to four digits, trivially, since the reference
+value is the slower factor's own rate. On the full-operator-system column
+the analogous ratio is
+$\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) =
+2.645/4.149 \approx 0.637$, the same ratio, since $C_3^{(2)} = 1$ at every
+cutoff. (An earlier version printed $0.736$ from the withdrawn per-cutoff
+$C_3^{(2)}$ values.)
 
 \item \emph{Joint mass-distribution maximum decreases as
 $1/(\nmaxa \nmaxb)$.}  $4/9 \approx 0.444$ at $(2,2)$ vs.\
@@ -1358,15 +1390,19 @@ Lemma~\ref{lem:L2-T}(c) (a mass-distribution quantity;\ the cb-norms
 are $1$).
 
 \item \emph{Test count.} The supporting computational module
-\texttt{geovac/gh\_convergence\_tensor.py} ($\sim 1881$ lines) and
+\texttt{geovac/gh\_convergence\_tensor.py} and
 the test file \texttt{tests/test\_gh\_convergence\_tensor.py} contain
 the full verification panel, including
 \texttt{tests/test\_paper39\_triangle\_tight.py}, which builds the
 joint commutator from the real Camporesi--Higuchi matrices and the
 graded multipliers and confirms (i) the triangle bound
 \eqref{eq:pythagorean_op_norm} is tight (ratio $\to 1$) and (ii) the
-Pythagorean form is maximally violated (ratio $\to 2$), the
-computational basis for the $C_3^{(2)} \le \sqrt 2$ constant.
+Pythagorean form is maximally violated (ratio $\to 2$);\ the constant
+$C_3^{(2)} = 1$ itself comes from compression
+(\eqref{eq:C3_2_compression}, backing test
+\texttt{tests/test\_paper39\_compression\_doubled.py}, a flat-torus model of
+the doubled-module compression;\ the $\sthree$ inputs, spectral truncation
+and the Clifford symbol, are Paper~38's)).
 \end{enumerate}
 
 % =====================================================================
@@ -1377,7 +1413,10 @@ computational basis for the $C_3^{(2)} \le \sqrt 2$ constant.
 lineage}\label{sec:place_in_lineage}
 
 The published propinquity tensor-product literature, as discussed in
-\S\ref{sec:intro}, is summarized in the following table.
+\S\ref{sec:intro}, is summarized in the following table (the last row is
+state-space Gromov--Hausdorff convergence, not propinquity;\ the scalar
+state-space case of compact metric groups is
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}).
 
 \begin{center}
 \begin{tabular}{lll}
@@ -1389,10 +1428,10 @@ Riemannian $\times$ finite & Closed & Latr\'emoli\`ere~\cite{latremoliere2026} \
 $C(X) \times A$ ($A$ AF) & Closed & Aguilar~\cite{aguilar2019} \\
 Riemannian $\times$ abelian & Closed & Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024} \\
 Single Riemannian along path & Closed & Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2025} \\
-Single truncation, NC integral & Closed & Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b} \\
-Two infinite Riemannian non-flat & \textbf{Open prior to this work} & --- \\
+Single truncation, NC integral (not a convergence result) & Related & Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b} \\
+Two infinite Riemannian non-flat & \textbf{Open (propinquity)} & --- \\
 \midrule
-Two $\sthree$ at distinct $\lambda$ & \textbf{Closed (this paper)} & Theorem~\ref{thm:main} \\
+Two $\sthree$ at distinct $\lambda$ (state-space GH, spinor) & \textbf{This paper} & Theorem~\ref{thm:main} \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1401,16 +1440,16 @@ The structural difficulty of the two-infinite case is that
 Latr\'emoli\`ere tunneling pairs do not multiply trivially: for
 $(B_a \otimes B_b, P_a \otimes P_b)$, the joint reach inherits from
 both single-factor approximate-identity rates with their commutator
-structure, and the joint Lipschitz constant is not $\max(C_3^a,
-C_3^b)$ in general. Each factor's central convolution is unital completely positive
+structure, and the joint Lipschitz constant needs its own argument
+(here, compression on the Clifford-doubled module). Each factor's central convolution is unital completely positive
 (cb-norm $1$), but the propinquity-tunneling
-assembly for the product is not in print prior to this work. The
-present paper closes the case via the lifted-state construction
+assembly for the product is not in print, and is not supplied here. The
+present paper proves state-space GH convergence via the lifted-state construction
 (Lemma~\ref{lem:lifted_state-T}), which metrizes both state spaces by the
 translation seminorm and needs no dual reach. The $(B,P)$-pair route ---
 using the Connes--Marcolli graded anticommutation \eqref{eq:anticomm} on
-the KO-dim-6 module, with joint commutator controlled by the triangle
-bound at constant $C_3^{(2)} \le \sqrt 2$ (Lemmas~\ref{lem:L3-T},
+the KO-dim-6 module, with joint commutator controlled at constant
+$C_3^{(2)} = 1$ by compression (Lemmas~\ref{lem:L3-T},
 \ref{lem:L5-T}) --- is retained as the abandoned approach.
 
 \subsection{Obstructions to the cross-manifold extensions}
@@ -1428,9 +1467,9 @@ The first cross-manifold extension would tensor the Riemannian
 $\sthree$ Camporesi--Higuchi triple with a Bargmann--Segal-type
 spectral triple on $S^5$ in the holomorphic Hardy
 sector~\cite{paper24}. This is structurally obstructed at the
-framework level: the $\sthree$ factor is a second-order Riemannian
-spinor Dirac with KO-dimension $3$, while the $S^5$ Bargmann factor is
-a first-order complex-analytic Euler operator on a Hardy sector and
+framework level: the $\sthree$ factor is a Riemannian spinor Dirac
+operator with KO-dimension $3$, while the $S^5$ Bargmann factor is
+a complex-analytic Euler operator on a Hardy sector and
 does not fit standard NCG Dirac axioms (KO-dimension is not
 classically defined in this setting). The two factors live in
 different categories of NCG construction, and there is no published
@@ -1470,9 +1509,8 @@ Theorem~\ref{thm:main} in place, the cross-register two-body coordinate
 operator $V(\hat r_1, \hat r_2)$ across two electronic registers at
 distinct focal lengths is well-defined as a multiplier on the joint
 operator system $\Op_{\nmaxa} \otimes \Op_{\nmaxb}$, with
-Lipschitz seminorm bounded by the product of $C_3^{(2)}(\nmaxa,
-\nmaxb)$ and the classical Lipschitz norm of $V$ on $\sthree \times
-\sthree$. The convergence theorem provides the metric foundation; the
+Lipschitz seminorm bounded by the classical Lipschitz norm of $V$ on
+$\sthree \times \sthree$ ($C_3^{(2)} = 1$, Lemma~\ref{lem:L3-T}). The convergence theorem provides the metric foundation; the
 structural application is left for a separate paper.
 
 % =====================================================================
@@ -1485,55 +1523,56 @@ $\gamma_n \sim (4/\pi) \log n / n$ from~\cite{loutey_paper38}; the
 quantitative rate at small $\nmax$ remains the open follow-up to
 \cite[\S 5(i)]{loutey_paper38}, parallel to single-factor Track~C in
 the GeoVac internal record. The joint rate inherits the same
-open-quantitative-constant feature, since the $\max$-form
-$\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ is dominated by the worse
-single-factor rate.
+open-quantitative-constant feature, since
+$\gamma^{(ab)} \le \gamma_{\nmaxa} + \gamma_{\nmaxb}$ is asymptotically
+governed by the slower single-factor rate.
 
 \paragraph{(ii) Off-factorized-panel functions.} Theorem~\ref{thm:main}
-is stated and verified on simple tensors $f \otimes g$ and extended by
-linearity to finite linear combinations; the $C_3^{(2)}$ formula
-\eqref{eq:C3_2_full} arises from the (tight) triangle bound on the
-graded Leibniz rule for unit-Lipschitz Avery harmonics, and is sharp
-on factorized harmonics ($C_3^{(2)} = \sqrt 2$ is achieved). General
-$h \in C^\infty(\sthree \times \sthree)$ that are not of factorized
-form may admit sharper bounds via direct Sobolev embedding on $\sthree
-\times \sthree$. The detailed analysis of the off-factorized case is
-open.
+covers the full state space (the lifted-state route is not restricted to
+simple tensors), and the Lipschitz comparison
+\eqref{eq:C3_2_compression} holds for every
+$F \in C^\infty(\sthree \times \sthree)$, factorized or not;\ what is open
+off the factorized panel is the panel quantity \eqref{eq:height_explicit_T},
+computed here on simple tensors only.
 
 \paragraph{(iii) Higher tensor factors --- structural extension
 (sketch; the $k=2$ case is the theorem of this paper).} The proof
 extends mechanically to $k$-fold tensor products
 $\Tcal_{\sthree}^{\lambda_1} \otimes \cdots \otimes
-\Tcal_{\sthree}^{\lambda_k}$ via repeated application of the graded
-Leibniz rule and the operator-norm triangle bound:
+\Tcal_{\sthree}^{\lambda_k}$:\ the lifted-state route gives, factor by
+factor,
 \begin{equation}\label{eq:k_fold_main}
 \Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{(\sthree)^{\otimes k}}\bigr)
-\;\le\; C_{3}^{(k)}(n_{1}, \ldots, n_{k}) \cdot \gamma^{(k)}_{n_{1}, \ldots, n_{k}},
+\;\le\; \gamma^{(k)}_{n_{1}, \ldots, n_{k}}
+\;\le\; \sum_{j=1}^{k} \gamma^{\SU(2)}_{n_{j}},
 \end{equation}
-with the triangle bound
+with $\gamma^{(k)}$ the joint first moment of the product Fej\'er measure
+(constant $1$;\ for $k=2$ this is Theorem~\ref{thm:main}), and the
+approximation-pair route's joint Lipschitz constant is
 \begin{equation}\label{eq:k_fold_C3}
-C_{3}^{(k)}(n_{1}, \ldots, n_{k})
-\;\le\; \sqrt{k}\,\sqrt{\frac{N_{*} - 1}{N_{*} + 1}}
-\;\nearrow\; \sqrt{k},
-\qquad N_{*} := \max_{j} n_{j},
+C_{3}^{(k)}(n_{1}, \ldots, n_{k}) \;=\; 1
+\quad\text{(compression on the Clifford-doubled $k$-fold module)}.
 \end{equation}
-and joint rate $\gamma^{(k)} = \max_{j} \gamma^{\SU(2)}_{n_{j}}$
-(worst-factor SU(2) rate). \emph{Correction (2026-06-18):} an earlier
+(An earlier version printed the rate as $\max_j \gamma_{n_j}$, which is
+smaller than the joint moment already at $k = 2$;\ withdrawn
+2026-10-02.) \emph{Correction (2026-06-18):} an earlier
 draft claimed a $k$-\textbf{independent} constant
 $\sqrt{(N_*-1)/(N_*+1)} \to 1^-$ via a ``Pythagorean Leibniz''
 sum-of-squares bound $\opnorm{\sum_j X_j}^2 = \sum_j \opnorm{X_j}^2$.
 That identity is \textbf{false}:\ pairwise anticommutation of the
 $D^{(k)}$ summands does not make the resulting commutator terms
 operator-norm orthogonal (Remark~\ref{rem:no_pythagorean}; verified
-maximally violated at $k=2$). The correct bound is the triangle one,
-which gives a genuine $\sqrt{k}$ factor (not eliminated, as had been
-claimed) from
-$\bigl(\sum_j (N_j-1)\bigr)^2 \le k \sum_j (N_j-1)^2$, hence
-$C_3^{(k)} \nearrow \sqrt k$. For each \emph{fixed} $k$ this is a
-finite constant, so convergence \eqref{eq:k_fold_main} still holds
-(driven by $\gamma^{(k)} \to 0$); but the constant grows with the
-number of factors and is \emph{not} a $k$-independent drop-in tool.
+maximally violated at $k=2$). The triangle bound with
+Cauchy--Schwarz gives $C_3^{(k)} \le \sqrt k$;\ an intermediate version
+derived a growth $C_3^{(k)} \nearrow \sqrt k$ from Paper~38's false
+per-harmonic bound, which is withdrawn (2026-10-02). On the $k$-fold
+module with $k$ mutually anticommuting Clifford generators
+$e_1, \ldots, e_k$ (Dirac $\sum_j e_j\,\DCH^{(j)}$ on the $j$-th factor) the
+argument of \eqref{eq:C3_2_compression} applies verbatim:\ the true-window
+projection commutes with the Dirac operator, the continuum symbol
+$\sum_j e_j\,c_j(d_j F)$ squares to $-\lvert\nabla F\rvert^2$, and compression
+contracts norms, giving \eqref{eq:k_fold_C3}, a $k$-independent constant.
 This $k > 2$ extension is a sketch:\ only the $k = 2$ case is proved
 and verified in this paper.
 
@@ -1553,9 +1592,11 @@ The present paper treats the equal-manifold tensor product
 $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ at
 two distinct focal lengths on the same compact group $\SU(2)$.
 A companion higher-rank generalisation of the single-factor result
-of~\cite{loutey_paper38} has since been established
+of~\cite{loutey_paper38} has since been given
 in~\cite{paper40_unified}, which lifts Theorem~3.1
-of~\cite{loutey_paper38} to compact connected semisimple Lie groups $G$
+of~\cite{loutey_paper38} (unconditionally for $\SU(2)$;\ for general $G$
+conditionally on the per-group spin-window decomposition) to compact
+connected semisimple Lie groups $G$
 with bi-invariant metric (a circle factor carries the circle constant) and
 reports the rate constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38, 2026-09-03)
 as \emph{universal} across that class via a Plancherel-weight $\times$
@@ -1568,39 +1609,46 @@ multi-factor form
 \begin{equation}\label{eq:master_theorem_v}
 \Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
-\;\le\; C_{3}^{(k)} \cdot \max_{j} \gamma^{G_{j}}_{n_{j}},
+\;\le\; \sum_{j=1}^{k} \gamma^{G_{j}}_{n_{j}},
 \qquad
-C_{3}^{(k)} \;\le\; \sqrt{k}\,\sup_{j} C_{3}^{G_{j}}(n_{j})
-\;\nearrow\; \sqrt{k},
+C_{3}^{(k)} \;=\; 1,
 \end{equation}
 
-for any $k \ge 1$ and arbitrary compact connected Lie groups
+for any $k \ge 1$ and compact connected semisimple Lie groups
 $G_{1}, \ldots, G_{k}$ with bi-invariant metrics, where
-$C_{3}^{G_{j}}(n_{j}) \to 1^{-}$ is the
-Paper~40~\cite{paper40_unified} per-factor L3 constant and
+the per-factor L3 constant is $1$ at every cutoff (Paper~40~\cite{paper40_unified},
+by compression;\ an earlier per-cutoff ``$C_3 \to 1^-$'' is withdrawn) and
 $\gamma^{G_{j}}_{n_{j}}$ is the per-factor general-$G$ rate at the
 universal $(4/\pi) \log n_{j} / n_{j}$ asymptote. \emph{Correction
 (2026-06-18):} an earlier draft boxed this as a closed ``master
 theorem'' with a $k$-\textbf{independent} constant $\sup_j
 C_3^{G_j}(n_j)$; that rested on the withdrawn Pythagorean
-sum-of-squares bound (item~(iii)). With the correct triangle bound the
-constant carries a genuine $\sqrt{k}$ factor and is \emph{not}
-$k$-independent. For each fixed $k$ convergence holds (finite
-constant), and the joint rate still inherits the universal $4/\pi$
-asymptotic from~\cite{paper40_unified}; but this multi-factor /
-general-$G$ form is a \textbf{sketch} (only the $k=2$, $\SU(2)$ case is
-proved here, and the $k=1$ cases in \cite{loutey_paper38,
-paper40_unified}), not a separately verified master theorem.
+sum-of-squares bound (item~(iii)), which is false;\ the
+$k$-independent constant $1$ now comes from compression on the
+Clifford-doubled module instead (item~(iii);\ each $G_j$ factor by
+Paper~40's left-equivariance argument). For each fixed $k$ convergence
+would follow (for general $G$ conditionally, as at $k = 1$), and the joint
+rate would inherit the $4/\pi$ asymptotic
+reported universal in~\cite{paper40_unified} (rigorous at rank~1); but this multi-factor /
+general-$G$ form is a \textbf{sketch} (its $k=2$, $\SU(2)$ instance is
+Theorem~\ref{thm:main}, whose joint moment $\gamma^{(ab)}$ is at most the
+displayed sum, and its $k=1$ instances are \cite{loutey_paper38,
+paper40_unified}, all on the lifted-state route with leading
+constant~$1$;\ the $C_3^{(k)}$ constant belongs to the abandoned
+approximation-pair route), not a separately verified master theorem. (An
+earlier version printed the rate as $\max_j\gamma^{G_j}_{n_j}$;\ withdrawn
+2026-10-02, it is below the proved $k = 2$ bound.)
 
-Practical applications:\ Paper~45~\cite{paper45}'s compact-temporal
-carrier $\sthree \times S^{1}$ instantiates the $k = 2$,
-$G_{1} = \SU(2)$, $G_{2} = U(1)$ case of~\eqref{eq:master_theorem_v} at
-the level of its signature-agnostic product-carrier rate. Note,
+Related case:\ Paper~45~\cite{paper45}'s compact-temporal carrier
+$\sthree \times S^{1}$ is a $k = 2$, $G_{1} = \SU(2)$, $G_{2} = U(1)$
+product with its own signature-agnostic product-carrier rate;\ it lies
+outside Paper~40's semisimple class (a circle factor carries the constant
+$2/\pi$) and is not an instance of~\eqref{eq:master_theorem_v}. Note,
 however, that the Lorentzian (Krein) reading of that carrier does
 \emph{not} yield propinquity convergence:\ Paper~45 proves a degeneracy
 theorem (the natural Lorentzian-propinquity seminorm vanishes
-identically), so the master construction provides the surviving
-Riemannian product-carrier rate, not a Lorentzian convergence result.
+identically), so what survives there is the Riemannian product-carrier
+rate, not a Lorentzian convergence result.
 
 % =====================================================================
 \section{Conclusion}\label{sec:conclusion}
@@ -1617,7 +1665,7 @@ $\gamma^{(ab)}_\lambda \le \lambda_a\gamma_{\nmaxa} + \lambda_b\gamma_{\nmaxb}$
 of leading constant $1$, via the lifted-state construction
 (Lemma~\ref{lem:lifted_state-T}), for which the dual reach is unnecessary.
 The earlier $(B,P)$-pair route (constant $2$, joint Lipschitz comparison
-constant $C_3^{(2)} \le \sqrt2$, dual-reach named gap) is retained as the
+constant $C_3^{(2)} = 1$, dual-reach named gap) is retained as the
 record of an abandoned approach. In that abandoned route the mechanism
 controlling both the Lipschitz constant and the panel term was the
 Connes--Marcolli graded anticommutation
@@ -1625,17 +1673,18 @@ $\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ --- which is
 \emph{vacuous as printed}, $\gamma_a$ being necessarily $0$ on $\sthree$
 (the note after \eqref{eq:CM_dirac_recall});\ on the KO-dimension-6 graded
 module (the Clifford-doubled operator, Lemma~\ref{lem:real_structure-T})
-it produces a clean two-term graded Leibniz rule, whose joint commutator is controlled by the (tight) operator-norm
-triangle bound $\norm{A + B} \le \norm{A} + \norm{B}$ (an earlier
-Pythagorean refinement is withdrawn --- see
-Remark~\ref{rem:no_pythagorean} --- and convergence is unaffected since
-$C_3^{(2)} \le \sqrt 2$ is a finite constant). The result
+it produces a clean two-term graded Leibniz rule, whose joint commutator
+the elementary triangle bound controls only up to $\sqrt 2$;\ compression on
+the doubled module gives $C_3^{(2)} = 1$ (Lemma~\ref{lem:L3-T};\ an earlier
+Pythagorean refinement is withdrawn, Remark~\ref{rem:no_pythagorean}). The result
 extends Connes--van~Suijlekom~\cite{connes_vs2021} and the subsequent
 flat-structure and single-non-abelian-factor literature
-\cite{hekkelman2022, hekkelman_mcdonald2024b, leimbach_vs2024,
-loutey_paper38} to the simplest non-abelian tensor case, and closes a
-case in the propinquity tensor-product programme that the published
-literature does not previously cover. The cross-manifold extensions
+\cite{hekkelman2022, leimbach_vs2024,
+loutey_paper38} to the simplest non-abelian tensor case:\ the scalar
+case is covered by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}
+(compact metric groups, no Dirac operator, no rate), and the new content
+here is the spinor (Camporesi--Higuchi) tensor triple with an explicit
+rate and the KO-dimension-6 real structure of its limit. The cross-manifold extensions
 remain open structural questions, with the Coulomb/HO category
 mismatch documented in~\cite{paper24}~\S V identifying a precise
 framework-level obstruction to the Riemannian--Hardy variant.
@@ -1741,6 +1790,13 @@ F.~Latr\'emoli\`ere,
 the $C^1$ topology on Riemannian metrics},
 \newblock arXiv:2603.19128, 2026.
 
+\bibitem[Gaudillot-Estrada \& van~Suijlekom(2025)]{gaudillot_vs2025}
+Y.~Gaudillot-Estrada and W.~D.~van~Suijlekom,
+\newblock \emph{Convergence of spectral truncations for compact
+metric groups},
+\newblock Int.~Math.~Res.~Not.\ IMRN \textbf{2025}, no.~13 (2025),
+rnaf197;\ arXiv:2310.14733.
+
 \bibitem[Leimbach \& van~Suijlekom(2024)]{leimbach_vs2024}
 M.~Leimbach and W.~D.~van~Suijlekom,
 \newblock \emph{Gromov--Hausdorff convergence of spectral truncations
@@ -1789,11 +1845,12 @@ J.~Loutey,
 truncations of compact semisimple Lie groups with bi-invariant metric},
 \newblock preprint, May 2026; higher-rank single-factor companion to
 the present tensor-product paper, DOI via Zenodo.
-\newblock Generalizes \cite{loutey_paper38} from $\SU(2)$ to all
-compact connected Lie groups; rate constant $4/\pi$ rigorous at
-rank~1 and numerically established at rank~$\ge 2$ (a rank-uniform
-symbolic proof is a named gap); asymptotic-tight $C_3 = 1$ via the
-PRV-summand bound of Kumar (1988) and Vinberg (1990).
+\newblock Generalizes \cite{loutey_paper38} from $\SU(2)$ to compact
+connected semisimple Lie groups (for general $G$ conditionally on the
+per-group spin-window decomposition); rate constant $4/\pi$ rigorous at
+rank~1 and numerically supported at rank~$\ge 2$ (the extraction is
+fit-sensitive;\ a rank-uniform symbolic proof is a named gap); Lipschitz comparison constant
+$C_3 = 1$ at every rank, by compression.
 
 \bibitem[Loutey, Paper~45]{paper45}
 J.~Loutey,
@@ -1801,10 +1858,9 @@ J.~Loutey,
 $\SU(2) \times U(1)_{T}$ Krein spectral triples: a degeneracy theorem},
 \newblock preprint, May 2026; proves the natural Lorentzian-propinquity
 seminorm degenerates, closing that route; its signature-agnostic
-product-carrier rate is the $k = 2$,
-$G_{1} = \SU(2)$, $G_{2} = U(1)$ instance of the multi-factor form
-~\eqref{eq:master_theorem_v} (proved here only at $k = 2$; the
-general-$G$ statement is a sketch, \S\ref{sec:open}~(v)).
+product-carrier rate is a $k = 2$ product case ($\SU(2) \times U(1)$),
+outside the semisimple class of the multi-factor sketch
+\S\ref{sec:open}~(v).
 
 \end{thebibliography}
 

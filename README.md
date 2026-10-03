@@ -1,12 +1,12 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-4.76.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.19.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
 
-GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians with **O(Q^2.5) Pauli term scaling** — a **51x to 1,712x advantage** over published Gaussian baselines across LiH, BeH₂, and H₂O (Paper 14). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
+GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
 ```python
 from geovac.ecosystem_export import hamiltonian
-h = hamiltonian('LiH', R=3.015, l_max=2)  # 334 Pauli terms, 30 qubits
+h = hamiltonian('LiH', R=3.015)  # 838 Pauli terms, 30 qubits
 op_qiskit = h.to_qiskit()    # SparsePauliOp
 op_of = h.to_openfermion()   # QubitOperator
 op_pl = h.to_pennylane()     # qml.Hamiltonian
@@ -23,14 +23,14 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 
 | Metric | Value |
 |:-------|:------|
-| Molecules | **38** (H₂ through C₂H₆, 3 periodic table rows, 10 transition metals); **35** via `hamiltonian()` API |
-| Pauli scaling | **O(Q^2.5)** composed, universal coefficient 11.10 × Q |
-| Advantage vs Gaussian | **51×–1,712×** fewer Pauli terms (LiH/BeH₂/H₂O) |
-| 1-norm (LiH) | **32.6 Ha** (0.95× vs STO-3G 34.3 Ha, 13× fewer QWC groups) |
+| Library | **37 systems** via the `hamiltonian()` API (35 composed molecules + He + H₂), three periodic-table rows |
+| Pauli count | **N_Pauli = 27.90 × Q**, exactly linear across molecules at fixed basis (30.03 × Q d-block); within-molecule basis exponent 3.17 (small-basis fit; local slope ~3.8 by n_max = 4) |
+| Advantage vs Gaussian | **51×–317×** fewer Pauli terms at equal qubits (H₂O, n_max = 1–3); **76×** vs cc-pVDZ (LiH) |
+| LiH vs STO-3G | near parity on raw counts: 838 Pauli @ Q = 30 vs 907 raw (3.0× MORE than STO-3G's 276 reduced); 1-norm 34.0 vs 34.3 Ha |
 | He accuracy | **0.022%** raw (2D variational, properly variational); **0.004%** after a non-variational cusp extrapolation; zero free parameters |
-| H₂ accuracy | **96.0% D_e** (molecule-frame hyperspherical, l_max=6) |
+| H₂ accuracy | **99.97% D_e** (0.053 mHa; prolate explicit-r₁₂ CI, exact integrals, Paper 12); 96.0% via the Level-4 hyperspherical treatment (Paper 15) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |
-| Mathematical foundation | Fock 1935 S³ conformal equivalence, **18 symbolic proofs** |
+| Mathematical foundation | Fock 1935 S³ conformal equivalence, **18 symbolic checks of the continuum chain** (ten limiting-case or definitional) |
 
 ---
 
@@ -46,16 +46,16 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 
 ## The Math.OA / NCG / Periods Arc
 
-Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc consists of fourteen standalone papers in `papers/group1_operator_algebras/`:
+Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc lives in `papers/group1_operator_algebras/` and its synthesis; highlights:
 
 - **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2), explicit 4/π rate (dual-Coxeter normalisation; [INTERNAL THEOREM + MEASURED]) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window; the almost-commutative extension is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
 - **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
-- **Papers 46–49** Lorentzian metric-level claims built on the retracted quantity carry Status notes; the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive as stated
-- **Paper 50** Bit-exact F-theorem match on S³ + S⁵ (Klebanov–Pufu–Safdi)
+- **Papers 46–49** (Lorentzian metric-level claims built on the retracted quantity) are archived in `papers/archive/` (2026-09-14; see `docs/retired_papers.md`); the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive
+- **Paper 50** Re-derives the Klebanov–Pufu–Safdi continuum F-theorem values on S³ + S⁵ in closed Hurwitz form (continuum spectra; the truncation never enters)
 - **Paper 56** Tannakian reconstruction closed at finite cutoff (5,864 bit-exact zero residuals); infinite-cutoff motivic-Galois identification open
-- **Paper 55** Periods of the framework's Mellin sectors sit in pure-Tate / level-4 cyclotomic mixed-Tate rings
+- **Paper 55** A census of the S³ spectral-zeta and heat-trace transcendentals: they sit in pure-Tate / level-4 cyclotomic mixed-Tate rings (chemistry seeds, spectral determinants and Paper 61's elliptic period lie outside the census)
 
-The "C-arc closure" sprints of June 2026 placed eight theorem-grade non-selection results (Paper 32 §VIII) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
+The "C-arc closure" sprints of June 2026 placed seven proof-by-argument results (the Forced-Count dimension count and non-selection results) and one Observation (Paper 32 §VIII) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
 
 ### Claims and verification status
 
@@ -69,42 +69,44 @@ The "C-arc closure" sprints of June 2026 placed eight theorem-grade non-selectio
 
 | Metric | GeoVac (Composed) | Gaussian Baselines | Advantage |
 |--------|:-----------------:|:------------------:|:---------:|
-| Pauli scaling (molecules) | O(Q^2.5) | O(Q^3.9-4.3) | Structural |
-| LiH (Q=30) | 334 terms | 17,065 (Trenev) | 51× |
-| BeH₂ (Q=50) | 556 terms | 256,000 (Trenev) | 460× |
-| H₂O (Q=70) | 778 terms | 1.33M (Trenev) | 1,712× |
-| He 1-norm (Q=28) | 78.4 Ha | 530.5 Ha (cc-pVTZ) | 6.8× |
+| Pauli count across molecules (fixed basis) | 27.90 × Q, exactly linear | O(Q^3.9–4.3) | Structural |
+| H₂O, equal qubits (n_max = 1–3) | — | — | 51×–317× |
+| LiH vs cc-pVDZ | 838 terms | 63,519 | 76× |
+| Atomic path (He), equal qubits | — | — | 0.56× at Q = 10 (unfavorable) to 1.5× at Q = 28; 1-norm 4.0×/7.3× lower, at a 55–58 mHa worse He energy |
 
-### Market Test (Track CA): GeoVac vs Computed Gaussian Baselines
+### Market Test: GeoVac LiH vs Minimal-Basis STO-3G
 
-| Metric | GeoVac LiH (Q=30) | Gaussian STO-3G (Q=12) | Advantage |
+| Metric | GeoVac LiH (Q=30) | Gaussian STO-3G | Comparison |
 |--------|:-----------------:|:---------------------:|:---------:|
-| Pauli terms | 334 | 907 | 2.7× |
-| QWC groups | 21 | 273 | 13× |
-| 1-norm (λ) | 33.3 Ha | 34.3 Ha | 0.97× (match) |
+| Pauli terms | 838 | 907 raw / 276 reduced | near parity raw; 3.0× more than reduced |
+| 1-norm (λ) | 34.0 Ha | 34.3 Ha | 0.99× (match) |
+
+The decisive wins are the exact Q-linearity across molecules and the 76× reduction vs cc-pVDZ, not the comparison with minimal-basis STO-3G (all counts under the exact global-M_L rule, 2026-08-29).
 
 ---
 
-## Molecule Library (38 systems)
+## Molecule Library (37 systems)
 
-| Row | Molecules | Q range | Pauli range |
-|:---:|:----------|:-------:|:----------:|
-| 1st (Z=1-10) | H₂, He, LiH, BeH₂, H₂O, HF, NH₃, CH₄ | 10-90 | 112-1,000 |
-| 2nd (Z=11-18) | NaH, MgH₂, HCl, H₂S, PH₃, SiH₄ | 20-80 | 239-7,273 |
-| 3rd (Z=19-36) | KH, CaH₂, GeH₄, AsH₃, H₂Se, HBr | 20-80 | 239-7,273 |
-| Multi-center | LiF, CO, N₂, F₂, NaCl, CH₂O, C₂H₂, C₂H₆ | 50-160 | 556-1,777 |
-| Transition metals | ScH, TiH, VH, CrH, MnH, FeH, CoH, NiH, CuH, ZnH | 30 | 277 |
+| Row | Molecules |
+|:---:|:----------|
+| 1st (Z=1-10) | H₂, He, LiH, BeH₂, H₂O, HF, NH₃, CH₄ |
+| 2nd (Z=11-18) | NaH, MgH₂, HCl, H₂S, PH₃, SiH₄ |
+| 3rd (Z=19-36) | KH, CaH₂, GeH₄, AsH₃, H₂Se, HBr |
+| Heavier hydrides (frozen cores) | SrH, BaH |
+| Multi-center | LiF, CO, N₂, F₂, NaCl |
+| Transition metals | ScH, TiH, VH, CrH, MnH, FeH, CoH, NiH, CuH, ZnH |
 
-Isostructural invariance: molecules with the same block topology produce identical Pauli counts regardless of atomic species. The universal composed coefficient is N_Pauli = 11.11 × Q. Transition metal hydrides fall *below* this coefficient at Pauli/Q = 9.23, reflecting sparser d-orbital ERIs (4.0% density vs 8.9% for s/p).
+Isostructural invariance: molecules with the same block topology produce identical Pauli counts regardless of atomic species. The composed count is N_Pauli = 27.90 × Q (main-group) and 30.03 × Q (d-block), exactly linear across molecules at fixed basis. Current per-molecule counts: `hamiltonian(name).n_terms` and Papers 14/20.
 
 ### Nuclear Systems (Paper 23)
 
 | System | Qubits | Pauli terms | 1-norm | Notes |
 |:-------|:------:|:-----------:|:------:|:------|
-| Deuteron (1p+1n) | 16 | 592 | 227 MeV | Minnesota potential, two-species JW |
-| He-4 (2p+2n) | 16 | 712 | 557 MeV | Same Q, 1.20× Pauli for 12.25× Hilbert |
-| He-4 + Coulomb | 16 | 712 | 552 MeV | pp Coulomb +0.7 MeV |
-| Composed deuterium (1p+1n+1e) | 26 | 614 | 5e5 Ha | Nuclear + electronic block architecture |
+| Deuteron (1p+1n) | 16 | 688 | see Paper 23 | Minnesota potential, two-species JW |
+| He-4 (2p+2n) | 16 | 828 | see Paper 23 | Same Q, 12.25× Hilbert space |
+| Composed deuterium (1p+1n+1e) | 26 | 710 | see Paper 23 | Nuclear + electronic block architecture |
+
+(Counts corrected 2026-08-22, v5.0.0; the earlier 592 / 712 / 614 carried a Moshinsky N_tot guard.)
 
 ---
 
@@ -113,19 +115,21 @@ Isostructural invariance: molecules with the same block topology produce identic
 | System | Method | Result | Paper |
 |:-------|:-------|:-------|:-----:|
 | He (2e) | 2D variational (raw) / + cusp extrapolation | **0.022%** / **0.004%** (non-var.) error | 13 |
-| He (2e) | Graph-native CI (n_max=9) | **0.20%** (zero parameters, exact algebraic integrals) | 7, 13 |
+| He (2e) | Fixed-k = Z hydrogenic CI, physical Hamiltonian (n_max = 7) | **1.88%** (zero parameters, exact integrals; above the HF limit) | 13 |
+| H₂ (2e) | Prolate explicit-r₁₂ CI, exact integrals | **99.97% D_e** (0.053 mHa) | 12 |
 | H₂ (2e) | Mol-frame hyperspherical | **96.0% D_e** | 15 |
-| HeH⁺ (2e) | Charge-center hyperspherical | **93.1% D_e** | 15 |
+| HeH⁺ (2e) | Prolate explicit-r₁₂ CI | **R_eq −0.5%** at l = 3; energy ~1 mHa from the Kolos–Peek reference (the hyperspherical 93.1% is an adiabatic, non-variational over-binding; the consistent variational value is ~5% of D_e, Paper 15) | 12 |
+| LiH (4e) | Prolate all-electron, analytic core (Route C) | **R_eq +0.2%**; energy −8.0490 Ha (analytic explicit-r₁₂) | 19 |
 | LiH (4e) | Composed Level 3+4, ab initio PK | **R_eq 5.3%** | 17 |
 | BeH₂ (6e) | Composed + exchange coupling | **R_eq 11.7%** | 17 |
-| H₂O (10e) | Composed 5-block | **R_eq 26%** | 17 |
+| H₂O (10e) | Composed 5-block | **R_eq 19.4%** | 17 |
 | LiH (4e) | Balanced coupled, n_max=3 | **0.20% energy** | 19 |
 
 ---
 
 ## Development Methodology
 
-GeoVac is developed using an **AI-augmented agentic research workflow**. The principal investigator (J. Loutey) provides scientific direction, physical intuition, and quality control. Implementation, numerical exploration, and documentation drafting are performed collaboratively with large language models (Anthropic Claude). All physics results are validated against known analytical solutions, NIST reference data, and a symbolic proof suite (18 independent tests verifying the S³ conformal geometry). No result is accepted on the basis of LLM output alone.
+GeoVac is developed using an **AI-augmented agentic research workflow**. The principal investigator (J. Loutey) provides scientific direction, physical intuition, and quality control. Implementation, numerical exploration, and documentation drafting are performed collaboratively with large language models (Anthropic Claude). All physics results are validated against known analytical solutions, NIST reference data, and a symbolic suite (18 symbolic checks of Fock's S³ conformal chain, ten of them limiting-case or definitional). No result is accepted on the basis of LLM output alone.
 
 This workflow is itself a research contribution — an experiment in whether agentic AI tools can accelerate independent scientific research. The project has no institutional affiliation. Primary dissemination is via GitHub and Zenodo (DOI-stamped releases).
 
@@ -144,14 +148,14 @@ pip install -e .
 ```python
 from geovac.ecosystem_export import hamiltonian
 
-# Any of the 35 API-accessible molecules (38 total library)
-h = hamiltonian('LiH', R=3.015, l_max=2)
+# Any of the 37 library systems
+h = hamiltonian('LiH', R=3.015)
 print(f"Qubits: {h.n_qubits}, Pauli terms: {h.n_terms}")
 op = h.to_qiskit()  # or .to_openfermion(), .to_pennylane()
 
-# Transition metal hydrides (new in v2.8)
+# Transition metal hydrides
 h_fe = hamiltonian('FeH')
-print(f"FeH: Q={h_fe.n_qubits}, Pauli={h_fe.n_terms}")  # Q=30, 277 Pauli
+print(f"FeH: Q={h_fe.n_qubits}, Pauli={h_fe.n_terms}")
 ```
 
 ### Atomic Calculations
@@ -160,9 +164,9 @@ from geovac import LatticeIndex
 
 # Helium Full CI
 idx = LatticeIndex(n_electrons=2, max_n=5, nuclear_charge=2,
-                   vee_method='slater_full', h1_method='hybrid')
+                   vee_method='slater_full')  # physical one-body h1 (the default)
 E, psi = idx.compute_ground_state()
-print(f"He FCI: {E[0]:.6f} Ha")  # -2.894 Ha (0.35% error)
+print(f"He FCI: {E[0]:.6f} Ha")  # accuracy vs cutoff: see Paper 13
 ```
 
 ### Precision He (2D Variational)
@@ -179,60 +183,58 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 
 | # | Title | Key Result |
 |:-:|-------|------------|
-| 0 | Geometric Packing | Universal constant K = -1/16 |
+| 0 | Geometric Packing | Packing construction of the (n,l,m) label set; κ = −1/16 matched (an Observation) |
 | 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling |
-| **7** | **Dimensionless Vacuum** | **S³ proof (18/18 symbolic), SO(3N) generalization** |
-| **14** | **Qubit Hamiltonians** | **O(Q^2.5) composed; 51×–1,712× vs Gaussian** |
+| **7** | **Dimensionless Vacuum** | **Fock S³ chain (18 symbolic checks, ten limiting-case or definitional), SO(3N) generalization** |
+| **14** | **Qubit Hamiltonians** | **N_Pauli = 27.90 × Q exactly linear; 51×–317× vs Gaussian at equal qubits (H₂O)** |
 | **16** | **Chemical Periodicity** | **S_N representation theory, atomic classifier** |
-| 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
+| 6 | Quantum Dynamics (archived) | Rabi, spectroscopy, AIMD at O(V) |
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H₂⁺ to machine precision |
 | **12** | Algebraic V_ee | Neumann expansion; H₂ 99.97% D_e (explicit r₁₂, 0.053 mHa), 99.81% re-based CI, 92.4% σ-only |
 | **13** | Hyperspherical Lattice | He 0.022% (variational) / 0.004% (cusp extrapolation, non-variational), fiber bundle, algebraic structure |
-| **15** | Level 4 Geometry | H₂ 96.0% D_e, HeH⁺ 93.1% |
+| **15** | Level 4 Geometry | H₂ 96.0% D_e (structural N-electron treatment); HeH⁺ adiabatic 93.1% is non-variational (variational ~5%) |
 | **17** | Composed Geometries | LiH 5.3%, BeH₂ 11.7%, ab initio PK |
 | **18** | Exchange Constants | Weyl-Selberg taxonomy, π-free graph principle |
 | **22** | **Angular Sparsity Theorem** | **Potential-independent ERI density (6.06% at l_max=3, global-M_L rule)** |
 | **24** | **Bargmann-Segal Lattice** | **π-free HO discretization on S⁵ Hardy space** |
-| FCI-A | Full CI (Atoms) | He 0.35%, Li 1.10%, Be 0.90% |
+| FCI-A | Full CI (Atoms) | Atomic FCI benchmarks (current values in the paper) |
 | **19** | Balanced Coupled | 0.20% energy, PK-free, 3-molecule census |
-| **20** | Resource Benchmarks | 38 molecules, Gaussian comparison, `pip install` |
+| **20** | Resource Benchmarks | 37-system library, Gaussian comparison, `pip install` |
 | **23** | **Nuclear Shell Hamiltonians** | **Deuteron/He-4 qubit encoding, Fock rigidity theorem** |
-| 21 | Synthesis | S³ proof chain, exchange constants, research program |
-| **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸; three-sector spectral coincidence K = π(B + F − Δ); Marcolli-vS gauge-network lineage; combination rule remains conjectural** |
+| 21 | Synthesis (archived) | S³ proof chain, exchange constants, research program |
+| **2** | **Fine Structure Constant** | **K = π(B + F − Δ) matches 1/α to 4.8×10⁻⁷ (its cubic's root to 8.8×10⁻⁸); three-sector spectral coincidence; Marcolli-vS gauge-network lineage; the combination rule is an Observation, not derived** |
 | 8-9 | Bond Sphere + Sturmian | Structural theorem (guardrail), SO(4) selection rules |
 | 25, 28, 30 | Hopf gauge / QED on S³ / SU(2) Wilson | Discrete lattice-gauge structure on the Hopf graph |
 | 29 | Ramanujan Hopf | Graph-RH for GeoVac Hopf graphs; Ihara zeta closed forms |
-| **32** | **Spectral Triple** | **Explicit construction; eight theorem-grade non-selection results in §VIII** |
+| **32** | **Spectral Triple** | **Explicit construction; seven proof-by-argument non-selection results and one Observation in §VIII** |
 | 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
 | 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
 | **38** | **SU(2) state-space GH convergence** | **Unconditional for the commutative factor; 4/π rate (dual-Coxeter); compression/lifted-state proof, translation seminorm (see claims register)** |
-| 39, 40 | Tensor / Unified convergence | Rate-constant universality across compact Lie groups |
-| 42, 43 | Modular Hamiltonian / Lorentzian extension | Four-witness Wick-rotation; Krein-(3,1) extension |
+| 39, 40 | Tensor / Unified convergence | Same-manifold tensor case; 4/π reported universal over compact semisimple groups (rigorous at rank 1; fit-sensitive at rank ≥ 2; general-G convergence conditional) |
+| 42 | Modular Hamiltonian | Finite-cutoff modular structure; Krein-(3,1) carrier in §11 (Paper 43 archived into it) |
 | **45** | **Lorentzian degeneracy theorem** | **K⁺ compression annihilates the spatial Dirac; earlier convergence claim retracted 2026-06-09** |
-| 46–49 | Lorentzian metric arc (descoped) | Status notes; norm-resolvent arrow + cocycle-deficit algebra survive |
-| 50 | CFT₃ partition function | Bit-exact F-theorem match (Klebanov–Pufu–Safdi) |
-| 51, 53 | Gravity arc / disk-propinquity | S³ spectral action two-term-exact; disk-with-cone backbone |
-| **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4; master Mellin engine classification** |
-| **56** | **Tannakian Substrate** | **Cosmic-Galois U* = 𝔾_a^(3N) ⋊ SL_2 identification; 5,864 bit-exact residuals** |
-| 57 | Forced/free seam | 60-entry catalogue; P5 packing-reachability at 98.3% |
+| 46–49 | Lorentzian metric arc (archived) | Archived 2026-09-14; norm-resolvent arrow + cocycle-deficit algebra survive |
+| 50 | CFT₃ partition function | Closed-form re-derivation of the continuum KPS F-theorem values |
+| 51, 53 | Gravity arc / flat-plane truncations | S³ spectral action two-term-exact; flat-plane state-space GH theorem, disk-with-cone open |
+| **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
+| **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
+| 57 | Forced/free seam | 60-entry catalogue (34 forced / 1 Observation / 1 admitted / 24 calibration); P5 packing-reachability is an internal-consistency check, not a discriminator |
 
 ---
 
 ## Scope and Limitations
 
 ### What GeoVac Does Well
-- **Structurally sparse qubit Hamiltonians:** O(Q^2.5) Pauli scaling, 51×–1,712× fewer terms vs Gaussian
+- **Structurally sparse qubit Hamiltonians:** Pauli count exactly linear in Q across molecules (27.90 × Q), 51×–317× fewer terms than Gaussian at equal qubits (H₂O)
 - **Block-diagonal ERIs:** Gaunt selection rules enforce basis-intrinsic sparsity
-- **d-Orbital sparsity:** d-blocks have 4.0% ERI density (vs 8.9% s/p) — transition metals are cheaper per qubit
-- **Classical benchmarks:** H₂ 96.0% D_e, LiH R_eq 5.3%, He 0.022% raw / 0.004% (non-variational cusp extrapolation)
+- **Classical benchmarks:** H₂ 99.97% D_e (Paper 12), LiH R_eq +0.2% (Route C, Paper 19), He 0.022% raw / 0.004% (non-variational cusp extrapolation)
 - **Algebraic Slater integrals:** Exact hypergeometric R^k evaluator eliminates grid quadrature (machine precision, 8x speedup)
-- **DUCC downfolding:** Identifies PK l_max divergence root cause (109x p-orbital underestimate); H₂O 1-norm 9% lower
 - **Zero molecular fitting parameters** — all from nuclear charges and geometry
 
 ### Current Limitations
-- **Classical PES accuracy:** R_eq errors of 5-26% for composed molecules (PK structural overcounting). Optimal for fixed-geometry quantum simulation, not geometry optimization.
+- **Classical PES accuracy:** R_eq errors of 5.3-19.4% for composed molecules (PK structural overcounting). Optimal for fixed-geometry quantum simulation, not geometry optimization.
 - **Transition metals:** Full first series implemented as hydrides (v2.8.0); non-hydride TM molecules not yet built
-- **Polyatomic accuracy:** H₂O R_eq 26% (charge asymmetry bottleneck, not coupling framework)
+- **Polyatomic accuracy:** H₂O R_eq 19.4% (composed, zero parameters)
 
 ### What GeoVac Does NOT Replace
 - Production quantum chemistry for general molecules
@@ -248,7 +250,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
   author    = {J. Loutey},
   title     = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
   year      = {2026},
-  version   = {3.105.0},
+  version   = {5.19.0},
   doi       = {10.5281/zenodo.18738360},
   url       = {https://github.com/jloutey-hash/geovac}
 }
@@ -256,7 +258,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 
 If adapting the acknowledgment for academic papers:
 
-> Computational implementation and documentation drafting were performed with the assistance of large language models (Anthropic Claude) under the author's scientific direction. All results were validated against analytical benchmarks and symbolic proof suites.
+> Computational implementation and documentation drafting were performed with the assistance of large language models (Anthropic Claude) under the author's scientific direction. All results were validated against analytical benchmarks and symbolic check suites.
 
 ---
 

@@ -1,5 +1,7 @@
 # The Forcing Catalogue
 
+> **[Historical document, dated 2026-06-01 onward; superseded wording.]** Superseded for the forced-vs-free question by `docs/forced_free_seam.md` and Paper 57; current standing (Paper 32 §VIII): the gauge group and inner algebra are fixed only relative to the Bertrand × Hopf-tower organizing reading plus the adopted Upgrade B axiom (ℍ admitted, not forced); the seam is an Observation-level reading (it records the partition, it does not forbid selection); the π-source case-exhaustion is [CONDITIONAL] over the first fifteen Paper 34 projections (converse withdrawn as not established); the Paper 38 bound is d_GH ≤ γ (no C₃ factor), commutative factor only; 4/π is reported universal over compact semisimple groups (rigorous at rank 1); the cb-norm of the central smoothing is 1; no common generator of B, F, Δ is an empirical record. Phrases below such as 'forbids selection', 'mostly FORCED', 'closes the n=2 fork', 'proven' for these items are historical.
+
 *Bit-exact rigidities, and what they have not yet been asked to force.*
 
 Started 2026-06-01.
@@ -292,11 +294,11 @@ Two findings about the corpus as a whole, independent of any single door:
   observable in any one domain the engine already determines?
 - **Probe:** `OPEN` — per-domain: list what the engine predicts but we haven't computed.
 
-### F-5. WH1 propinquity bound Λ ≤ C₃·γ → 0, C₃=1, rate 4/π
+### F-5. WH1 state-space GH bound d ≤ γ_n → 0 (constant 1), rate 4/π
 - **Where:** Paper 38; `wh1_proven.md`, `l2_quantitative_rate_4_over_pi.md`
-- **Rigidity:** proven-theorem; 4/π = Vol(S²)/π² is the M1 signature
+- **Rigidity:** proven-theorem for the bound (Paper 38, state-space GH, not propinquity; the C₃·γ form is withdrawn); the 4/π rate is [INTERNAL THEOREM + MEASURED] and convention-dependent (dual-Coxeter), and 4/π = Vol(S²)/π² is *read as* the M1 signature (a reading, not a derivation)
 - **Filed as:** prediction (the "something new")
-- **Crack:** 4/π is universal across all compact Lie groups (Paper 40). Universality
+- **Crack:** 4/π is reported universal across compact connected semisimple Lie groups (Paper 40; rigorous at rank 1, a circle factor carries 2/π). Universality
   is a forcing. Does the rate constant carry a *physical* prediction (a convergence
   speed that maps to an observable), or is it purely internal math?
 - **Probe:** `OPEN`.
@@ -468,10 +470,10 @@ rows are the priority re-read (see meta-finding 2).
 - J²=−I, JD=+DJ, JOJ⁻¹=O bit-exact at n_max=1,2,3 (truthful CH) — bit-exact — prediction
 - Spec(K_α^W)⊂ℤ; σ_{2π}(O)=O bit-exact (BW-α + BW-γ period closure) — proven — prediction
 - Krein axioms J²=+I, D_L^×=D_L Frob=0; four BBB signs bit-exact at (m,n)=(4,6) — bit-exact — prediction
-- C₃^{(2)}(n,n)=√(n/(n+2)); C₃^op=√(1−1/n_max) — closed-form — proven
-- joint cb-norm = 2/(n_max+1) (saturation) — exact-rational — proven
+- [corrected 2026-10-02] C₃^{(2)}(n,n)=√(n/(n+2)); C₃^op=√(1−1/n_max) — WITHDRAWN (rested on Paper 38's false per-harmonic bound); the joint and single-factor constants are 1, by compression (Papers 38/39/40)
+- [corrected 2026-09-30] 2/(n_max+1) is the Plancherel mass maximum, not a cb-norm (the smoothing maps are UCP, cb-norm 1) — exact-rational
 - Riemannian-limit recovery at N_t=1 bit-exact; panel 2.0746/1.6101/1.3223 — bit-exact — prediction *(load-bearing falsifier)*
-- universal rate 4/π rank-invariant (M1 signature) — closed-form — proven
+- universal rate 4/π rank-invariant (read as the M1 signature, a reading) — rigorous at rank 1, numerically supported (fit-sensitive) at rank ≥ 2 (Paper 40)
 - [D_L, a_s⊗a_t]=i[D_GV,a_s]⊗a_t (time Lipschitz-invisible) — bit-exact — prediction
 - KO-dim 3 mod 8; order-zero fails 5–8% (finite-res artifact); offdiag breaks JD=+DJ (resid 2) — proven — negative-with-structure
 

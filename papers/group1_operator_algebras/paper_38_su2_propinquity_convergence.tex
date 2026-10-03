@@ -129,7 +129,7 @@ $C_3 = 1$, by compression from the continuum identity (proof replaced
 contractive, an approximate identity, and L3-compatible;\ (L5, since \emph{withdrawn} 2026-09-03: the bound is established by the
 unconditional lifted-state theorem, not this approximation-pair assembly).
 \textbf{[OBSERVATION]} The
-asymptotic constant is set by a quotient of sphere volumes ---
+asymptotic constant equals (numerically) a quotient of sphere volumes ---
 $2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and twice that,
 $4/\pi$, in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} --- and \emph{not} the Hopf
 fibration's base-to-total ratio (\S\ref{sec:L2}). The $\log\nmax$
@@ -313,12 +313,11 @@ is $4/\pi$, which coincides numerically with $\Vol(S^2)/\pi^2$ for
 $\Vol(S^2) = 4\pi$;\ on the unit $\sthree$ it is $2/\pi$, the factor $2$
 being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- on which an \textbf{[OBSERVATION]}-level reading places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ (the engine's case-exhaustion is \textbf{[CONDITIONAL]}, Paper~32) --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Separately, \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
 first-moment constant of the classical Fej\'er kernel on the circle
-(Remark~\ref{rem:circle_fejer}). This is the volume factor that the $k = 0$ (trivial)
+(Remark~\ref{rem:circle_fejer}). \textbf{[OBSERVATION]} We read it (a reading, not a derivation) as the volume factor that the $k = 0$ (trivial)
 heat kernel on the round $\sthree$ leaves behind --- the $k = 0$
 volume slot of the master Mellin engine, a quotient of unit-sphere volumes
 rather than the Hopf fibration's base-to-total ratio (\S\ref{sec:L2}) ---
-and which has been independently identified in the
-internal supporting analysis as one of the three sub-mechanisms of a
+that slot being one of the three sub-mechanisms of a
 master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
 $k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant in
 \eqref{eq:main_rate} ($2/\pi$ on the unit $\sthree$; $4/\pi$ in the
@@ -1165,7 +1164,7 @@ MEASURED]} $\displaystyle
 $
 \item[(d.iii)] (Uniform bound.) \textbf{[MEASURED]}
 $\gamma_{\nmax} \le 6\,\log \nmax / \nmax$
-on the checked range of $\nmax \ge 2$ (a monotonicity statement checked
+on the checked sample of $\nmax \ge 2$ (a monotonicity statement checked
 on a finite range, not proved for all $\nmax$).
 \end{enumerate}
 \end{enumerate}
@@ -1220,7 +1219,7 @@ test \texttt{tests/test\_central\_fejer\_su2.py};\ no proof of
 monotonicity for all $n$ is given),
 with maximum at $n = 2$ equal to
 $2 \gamma_2 / \log 2 = 2(\pi - 64\sqrt{2}/(27\pi)) / \log 2
-\approx 5.986$. The uniform bound follows on the checked range (it is \textbf{[MEASURED]}, not proved for all $n$).
+\approx 5.986$. The uniform bound follows on the checked sample (it is \textbf{[MEASURED]}, not proved for all $n$).
 \end{proof}
 
 \begin{remark}[Connection to the circle Fej\'er estimate]
@@ -1486,7 +1485,7 @@ panel.  The proof
 below does not use the panel;\ identifying the panel-side quantity is an
 open check.
 
-\subsection{Lemma L5:\ state-space Gromov--Hausdorff assembly}
+\subsection{Lemma L5 (withdrawn):\ state-space Gromov--Hausdorff assembly}
 \label{sec:L5}
 % ---------------------------------------------------------------------
 
@@ -1564,9 +1563,9 @@ average $\Phi$ at the same moment $\gamma_{\nmax}$
 and no transference estimate, enters anywhere. (For the record:\ a
 partial inverse of $B_{\nmax}$ on the full support window would be
 governed by the symbol \emph{minimum} and grow like $O(\nmax^2)$,
-which is why no forward bound could supply it.) The pair $(B_{\nmax},
-P_{\nmax})$ retains its role as the explicit forward-reconstruction
-refinement.
+which is why no forward bound could supply it.) $B_{\nmax}$ alone retains its role as an explicit forward
+reconstruction (Lemma~\ref{lem:L4});\ the pair refinement
+$(B_{\nmax}, P_{\nmax})$ is refuted as stated (below).
 
 \emph{Height.} The height constituent is a GeoVac-defined
 approximation quantity, loosely modelled on the height and reach of
@@ -1934,7 +1933,8 @@ $\sigma \subset \pi \otimes \pi'^*$, which generalises Paper~38's
 $|n - n'| \le N - 1$ shell-difference rule (the literal "Casimir
 triangle inequality" $|C(\pi) - C(\pi')| \le C(\sigma)$ is false in
 general; the Dirac eigenvalue, not the Casimir, is the right
-ingredient). \textbf{[PANEL-VERIFIED]} The rate is \emph{not}
+ingredient;\ a representation-theoretic inequality, not a check of the
+Lipschitz constant $C_3$). \textbf{[PANEL-VERIFIED]} The rate is \emph{not}
 rank-dependent as anticipated
 above:\ the rate constant $4/\pi$ (dual-Coxeter normalisation) is reported \emph{universal} across
 the
@@ -1943,10 +1943,13 @@ cancellation argument (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at r
 ($\SU(2)$, the present paper), with the rank-$\ge 2$ leg corroborated
 on reduced panels and a fully rank-uniform analytical proof recorded
 as a named gap in Paper~40. \textbf{[INTERNAL THEOREM]}
-Asymptotic-tight
-$C_3(G) = 1$ at all ranks follows from the PRV-summand bound (Kumar
-1988, Invent.\ Math.\ 93) together with a Brauer--Klimyk signed-sum
-closure for the interior summands, as proved in Paper~40 \S 3.3
+$C_3(G) = 1$ at every rank, sharp in the limit, follows by the same
+compression argument as Lemma~\ref{lem:L3} here (Paper~40 Lemma~L3,
+2026-10-02);\ Paper~40 \S 3.3 studies representation-theoretic
+inequalities on tensor-product summands (existence of the PRV summands is
+Kumar's theorem, Invent.\ Math.\ \textbf{93}, 1988;\ the intermediate
+inequality is proved on special summands and verified on panels for the
+rest), whose bridge to the commutator norm is the per-harmonic step refuted here
 (Lemma~L3 there; the attribution to a 1990 Vinberg paper carried no
 locator and is withdrawn, 2026-09-03).
 
@@ -2291,8 +2294,8 @@ the per-group spin-window decomposition) (a circle factor carries the circle
 constant); rate constant $4/\pi$ reported universal across that class
 (dual-Coxeter normalisation; rigorous at rank~1, rank-uniform proof a
 named gap) via a Plancherel-weight $\times$ Vandermonde-Jacobian
-cancellation; asymptotic-tight $C_3 = 1$ at all ranks via the PRV-summand
-bound (Kumar 1988) with a Brauer--Klimyk interior closure.
+cancellation; Lipschitz comparison constant $C_3 = 1$ at every rank, by
+compression.
 
 \bibitem[Loutey, internal Paper~2]{paper2}
 J.~Loutey,
