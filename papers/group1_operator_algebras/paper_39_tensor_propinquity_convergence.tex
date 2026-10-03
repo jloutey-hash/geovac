@@ -1052,7 +1052,11 @@ L_{a,b}(T)\gamma^{(ab)}$. The four-pair distortion computation
 hence $d_{\mathrm{GH}} \le \tfrac12\mathrm{dis}(R) = \gamma^{(ab)}$. This is
 Paper~38's \texttt{thm:main\_unconditional} proof, lifted factor-wise to
 $\mathbb{G}$;\ facts (i),(ii) hold for \emph{all} operators, so the bound
-covers the full (entangled-inclusive) joint state space.
+covers the full (entangled-inclusive) joint state space.  (Backing test
+\texttt{tests/test\_paper39\_lifted\_state.py}:\ the joint moment
+$\max(\gamma_a, \gamma_b) < \gamma^{(ab)} < \gamma_a + \gamma_b$ by two
+independent quadratures, and the product-state smoothing identity of (b) on
+exact Clebsch--Gordan multipliers.)
 \end{proof}
 
 % ---------------------------------------------------------------------

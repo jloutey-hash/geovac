@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.19.0 (October 2, 2026)
+**Version:** v5.19.1 (October 2, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Paper 39 main-theorem coverage gap closed (2026-10-02, v5.19.1, PI-directed):** `tests/test_paper39_lifted_state.py` backs the lifted-state route (joint moment sandwich + product-state identity), fire-tested. See CHANGELOG v5.19.1.
 - **/qa trunk DELTA #25 = DEFECTS, remediated (2026-10-02, v5.19.0, PI-approved):** P57 false Δ=c²(3,2); P1 ladder [SYMBOLIC PROOF]; P39/P40 C₃=1 by compression; new rule: families + self-check to zero LARGE (15 rounds); CLAUDE.md de-numbered. See CHANGELOG v5.19.0.
 - **/qa trunk DELTA #24 (first claim-search DELTA) = DEFECTS, remediated (2026-10-02, v5.18.1, PI-approved):** 5 OWNER + ~20 SURFACE LARGE, no math defect; C25 hardened; 17 C16 entries swept 85 loci. See CHANGELOG v5.18.1.
 - **/qa instrument: claim registry C25 + OWNER/SURFACE-LARGE stop rule + claim-search DELTA; trunk FULL #11 = FAIL, remediated (2026-09-30, v5.18.0, PI-directed):** 5 LARGE, no owner math defect; C25 found 4 front-door defects on run one. See CHANGELOG v5.18.0.

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.19.1] - 2026-10-02
+
+**Patch. Closes the coverage gap DELTA #25 declared on Paper 39's main theorem (PI-directed).**
+
+### Added
+- `tests/test_paper39_lifted_state.py` (6 tests): the two quantitative ingredients of Paper 39's lifted-state route (Lemma lifted-state-T(b)). (i) The joint first moment gamma^(ab) of the product Fejer measure, by 2-D Gauss-Legendre quadrature with single-factor moments cross-checked against `gamma_rate`, must satisfy the strict sandwich max(gamma_a, gamma_b) < gamma^(ab) < gamma_a + gamma_b at (2,2), (2,3), (3,4), (4,4); the (2,2) value (3.0849 vs max 2.0746, sum 4.1491, about 25% below the sum) is pinned by an independent adaptive 2-D mpmath quadrature. (ii) The product-state smoothing identity: the lifted state xi_a (x) xi_b, translated and read on product CG multipliers, gives sigma_J sigma_K D^J(g) D^K(h) exactly (so the induced measure is the product Fejer measure). Fire-tested: a sum product distance, an L-infinity product distance, a wrong joint state and an unnormalised state each FIRE (the L-infinity plant passed the sandwich alone; the independent pin was added for it).
+
+### Changed
+- `docs/claim_test_matrix.md` Paper 39 distance row: the declared COVERAGE GAP replaced by this test. Paper 39's lifted-state proof cites it.
+
 ## [v5.19.0] - 2026-10-02
 
 **MINOR (automatic: the `/qa` skill changed -- remediation-completeness rule). Also: CLAUDE.md carries no measured values in its standing sections (PI-directed); /qa trunk DELTA #25 (claim-search DELTA) = DEFECTS, remediated (PI-approved incl. decisions A-C). ~10 OWNER-LARGE + ~15 SURFACE-LARGE + 3 instrument defects; no keystone mathematical defect; one false equation (P57). The pre-checkpoint self-check loop (new rule: until a fresh reviewer returns zero LARGE) ran fifteen rounds, LARGE counts 10, 6, 9, 4, 7, 6, 5, 3, 3, 2, 2, 3, 1, 3, 0; its main result is Paper 39 Lemma L3-T upgraded to C_3^(2) = 1 by compression, plus two Paper 45 corrections (the circle Fejer rate O(T log N_t / N_t), and the panel column / Riemannian-limit identity stated on the spatial leg).**
