@@ -1,8 +1,8 @@
 """
 Geometric Paraboloid Lattice Generator
 
-Generates a discrete lattice of hydrogen quantum states (n, l, m) with 
-connectivity defined by angular momentum and radial transitions.
+Generates the discrete (n, l, m) label lattice with edges that change m
+(at fixed n, l) or n (at fixed l, m); no edge changes l.
 
 Author: Refactored for production
 Date: February 2026
@@ -23,7 +23,7 @@ class GeometricLattice:
     - l: angular momentum quantum number (0 ≤ l < n)
     - m: magnetic quantum number (-l ≤ m ≤ l)
 
-    Edges represent allowed transitions:
+    Edges (graph connectivity, not physical transitions; Paper 0):
     - Angular transitions: m ↔ m±1 (within same n, l)
     - Radial transitions: n ↔ n±1 (within same l, m)
 
@@ -66,7 +66,7 @@ class GeometricLattice:
     adjacency : scipy.sparse.csr_matrix
         Sparse adjacency matrix encoding connectivity
     node_weights : np.ndarray
-        Diagonal weights (potential energy) for each node
+        Diagonal label weights -Z/n^2 for each node (not a potential)
     """
 
     def __init__(self,
@@ -214,7 +214,7 @@ class GeometricLattice:
         
         Binary Mode (hybrid):
         ---------------------
-        Weight = 1.0 (all edges equal). Requires separate V = -Z/r term.
+        Weight = 1.0 (all edges equal).
         
         Parameters:
         -----------
@@ -446,16 +446,16 @@ class GeometricLattice:
                        n_bridges: int = 16, bridge_weight: float = 1.0) -> Tuple[csr_matrix, int, int]:
         """
         Stitch two lattices together with sparse topological bridges.
-        
-        This creates a molecular bonding configuration by connecting boundary
-        states (n_max) from two atomic lattices. The sparse bridge represents
-        orbital overlap along the bond axis.
-        
-        **Physical Interpretation:**
-        - Each bridge edge represents a quantum mechanical overlap integral
-        - n_bridges controls bond strength (optimal: 8-24 for H₂)
-        - Bridge prioritization mimics σ-bond character (l=0,m=0 dominance)
-        
+
+        SUPERSEDED (legacy LCAO graph concatenation): kept for the archived
+        v0.x demos. The FCI-M guardrail shows graph concatenation has an
+        R-independent kinetic term and no equilibrium; molecular work uses
+        natural geometry (Papers 11, 12, 17). Bridge counts below are model
+        parameters, not validated physics.
+
+        Connects boundary states (n_max) from two atomic lattices; bridge
+        prioritization favours (l=0, m=0) states.
+
         **Connection Strategy:**
         States are prioritized by overlap probability:
         1. Primary: (n_max, l=0, m=0) states (σ-bond core)
@@ -467,12 +467,7 @@ class GeometricLattice:
         other_lattice : GeometricLattice
             Second atomic lattice to bond with
         n_bridges : int, optional
-            Number of bridge edges connecting boundary states
-            Typical values:
-            - 1-4: Weak bonding (single σ character)
-            - 8-24: Normal covalent bond (H₂ optimal range)
-            - >50: Strong multi-orbital mixing
-            Default: 16 (experimentally validated for H₂)
+            Number of bridge edges connecting boundary states (default 16)
         bridge_weight : float, optional
             Weight for bridge edges (default: 1.0)
             Controls coupling strength across bond

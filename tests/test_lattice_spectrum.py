@@ -150,13 +150,27 @@ def test_lambda_max_is_linear_time_not_cubic() -> None:
 
 @pytest.mark.parametrize("n_max", [10, 70, 300])
 def test_saturation_is_one_sided_and_never_exceeds_the_bipartite_bound(n_max: int) -> None:
-    """REJECTS: any lambda_max at or above 2 d_max = 8.
-
-    The bound is one-sided -- this, not monotonicity, is what makes every
-    finite sample an understatement (Paper 0 SS VI;  the approach is NOT
-    monotone, C_20 = 40.7285 > C_21 = 40.6470).
-    """
+    """REJECTS: any lambda_max at or above 2 d_max = 8.  (This bounds
+    lambda_max only; it does not imply that n^2 (8 - lambda_max) understates
+    C_sat -- that is the separate measured pattern pinned below.)"""
     assert ls.lambda_max(n_max) < 8.0
+
+
+def test_csat_samples_understate_the_limit_at_all_591_cutoffs() -> None:
+    """Paper 0 SS VI [MEASURED]: C_sat,n = n^2 (8 - lambda_max) lies BELOW
+    C_sat = (pi^2/4)(2 + 2^(1/3))^2 (1 + 2^(-2/3)) at every integer cutoff
+    10 <= n <= 600 (591 cutoffs), with 195 decreasing steps (not monotone;
+    C_20 = 40.7285 > C_21 = 40.6470), 42.61 at 320 and 42.70 at 1000.
+    REJECTS: a sample at or above C_sat, a monotone approach, and the
+    n_max = 320 sample (42.6) taken for the limit."""
+    c_sat = np.pi ** 2 / 4 * (2 + 2 ** (1 / 3)) ** 2 * (1 + 2 ** (-2 / 3))
+    cs = {n: n * n * (8.0 - ls.lambda_max(n)) for n in range(10, 601)}
+    assert len(cs) == 591
+    assert max(cs.values()) < c_sat
+    assert sum(1 for n in range(11, 601) if cs[n] < cs[n - 1]) == 195
+    assert abs(cs[20] - 40.7285) < 1e-4 and abs(cs[21] - 40.6470) < 1e-4
+    assert abs(cs[320] - 42.61) < 5e-3 and c_sat - cs[320] > 0.1
+    assert abs(1000 ** 2 * (8.0 - ls.lambda_max(1000)) - 42.70) < 5e-3
 
 
 # ------------------------------------------------------------ eigenvectors
@@ -365,3 +379,46 @@ def test_path_spectrum_endpoints() -> None:
         assert s[0] == pytest.approx(0.0, abs=1e-14)
         assert s[-1] == pytest.approx(2 - 2 * math.cos((m - 1) * math.pi / m), abs=1e-14)
         assert s[-1] < 4.0
+
+
+# ------------------------------------------------------------ arithmetic
+
+
+def _charpoly_factors(n_max: int) -> dict:
+    """Irreducible factors over Q (with multiplicity) of the characteristic
+    polynomial of the production binary L = D - A, computed EXACTLY (sympy,
+    integer matrix) block by block over its connected components."""
+    import sympy as sp
+    from scipy.sparse.csgraph import connected_components
+    x = sp.Symbol("x")
+    lat = GeometricLattice(max_n=n_max)
+    A = lat.adjacency.toarray()
+    L = np.diag(A.sum(axis=1)) - A
+    _, lab = connected_components(A != 0, directed=False)
+    facs: dict = {}
+    for c in np.unique(lab):
+        idx = np.where(lab == c)[0]
+        M = sp.Matrix(np.rint(L[np.ix_(idx, idx)]).astype(int).tolist())
+        for f, e in sp.factor_list(M.charpoly(x).as_expr(), x)[1]:
+            facs[sp.expand(f)] = facs.get(sp.expand(f), 0) + e
+    return facs
+
+
+@pytest.mark.parametrize("n_max", [3, 4, 5, 6])
+def test_graph_spectrum_is_algebraic_and_not_all_rational(n_max: int) -> None:
+    """Paper 0 SS VI / the pi-free graph principle: L has integer entries, so
+    its eigenvalues are roots of an integer polynomial (algebraic), and they
+    are NOT all rational -- the exact characteristic polynomial has irreducible
+    factors of degree >= 2 (e.g. x^2 - 5x + 5, roots (5 +- sqrt 5)/2, at
+    n_max = 3).  REJECTS the retracted reading that the graph eigenvalues are
+    integers or rationals (an integer ladder such as -(n^2 - 1))."""
+    import sympy as sp
+    x = sp.Symbol("x")
+    facs = _charpoly_factors(n_max)
+    assert sum(sp.degree(f, x) * e for f, e in facs.items()) == sum(
+        n * n for n in range(1, n_max + 1))                     # full spectrum
+    assert all(sp.Poly(f, x).is_irreducible for f in facs)
+    assert all(c.is_integer for f in facs for c in sp.Poly(f, x).all_coeffs())
+    assert max(sp.degree(f, x) for f in facs) >= 2              # not all rational
+    if n_max == 3:
+        assert sp.expand(x**2 - 5 * x + 5) in facs

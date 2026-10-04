@@ -5,13 +5,16 @@ Verifies:
   - TomitaConjugation: J_TT^2 = +I (NOT -I; signature distinct from J_GV)
   - KMSState: trace cyclicity, KMS condition at beta
   - ModularHamiltonian:
-      * BW canonical sigma_{2*pi}(O) = O at machine precision (n_max=2,3,4)
+      * sigma_{2*pi}(O) = O at machine precision (n_max=2,3,4) for the posited
+        integer-spectrum generator K = 2 J_z -- automatic, so it identifies no
+        Bisognano-Wichmann modular flow (Paper 42)
       * Witness collapse: HH, Sew, Unruh all match BW residual
       * Propinquity rate cross-check: residual << gamma_{n_max} from L2
       * KMS condition at expectation level
 
-Sprint L1 (2026-05-16): principal falsifier named in Paper 32 SVIII rem,
-Paper 34 SIII.27, Paper 38.
+The verdict string STRONG_IDENTIFICATION is a legacy label for "all
+period-closure residuals below tolerance".  The genuine falsifier (K from a
+wedge-restricted state) is OPEN (Papers 32, 42).
 """
 
 from __future__ import annotations
@@ -219,17 +222,18 @@ def test_kms_state_expectation_self_adjoint():
 
 
 # ---------------------------------------------------------------------------
-# ModularHamiltonian — THE primary L1 falsifier
+# ModularHamiltonian — period closure (automatic for an integer spectrum)
 # ---------------------------------------------------------------------------
 
 
 def test_modular_periodicity_n_max_2_BW():
-    """L1 PRIMARY FALSIFIER: sigma_{2*pi}(O) = O at n_max=2.
-
-    Expected: STRONG_IDENTIFICATION (residual ~ machine eps).
-    """
+    """Period closure sigma_{2*pi}(O) = O at n_max=2 (residual ~ machine eps)."""
     bw = for_bisognano_wichmann(n_max=2)
     results = bw.verify_witness()
+    # The claim is the residual; the verdict string is a legacy label for it.
+    assert results["max_periodicity_residual"] < 1e-10, (
+        f"n_max=2: max_residual={results['max_periodicity_residual']:.2e}"
+    )
     assert results["verdict"] == "STRONG_IDENTIFICATION", (
         f"n_max=2 verdict: {results['verdict']}, "
         f"max_residual={results['max_periodicity_residual']:.2e}"
@@ -237,9 +241,13 @@ def test_modular_periodicity_n_max_2_BW():
 
 
 def test_modular_periodicity_n_max_3_BW():
-    """L1 falsifier at n_max=3."""
+    """Period closure at n_max=3."""
     bw = for_bisognano_wichmann(n_max=3)
     results = bw.verify_witness()
+    # The claim is the residual; the verdict string is a legacy label for it.
+    assert results["max_periodicity_residual"] < 1e-10, (
+        f"n_max=3: max_residual={results['max_periodicity_residual']:.2e}"
+    )
     assert results["verdict"] == "STRONG_IDENTIFICATION", (
         f"n_max=3 verdict: {results['verdict']}, "
         f"max_residual={results['max_periodicity_residual']:.2e}"
@@ -247,9 +255,13 @@ def test_modular_periodicity_n_max_3_BW():
 
 
 def test_modular_periodicity_n_max_4_BW():
-    """L1 falsifier at n_max=4."""
+    """Period closure at n_max=4."""
     bw = for_bisognano_wichmann(n_max=4)
     results = bw.verify_witness()
+    # The claim is the residual; the verdict string is a legacy label for it.
+    assert results["max_periodicity_residual"] < 1e-10, (
+        f"n_max=4: max_residual={results['max_periodicity_residual']:.2e}"
+    )
     assert results["verdict"] == "STRONG_IDENTIFICATION", (
         f"n_max=4 verdict: {results['verdict']}, "
         f"max_residual={results['max_periodicity_residual']:.2e}"
@@ -537,8 +549,8 @@ def test_kms_condition_at_beta_n_max_3():
 def test_propinquity_rate_residual_dominated_by_machine_eps():
     """L1 modular residual is at machine precision; gamma_n is O(1).
 
-    This confirms the STRONG_IDENTIFICATION verdict — the residual is
-    bit-exact, not merely scaling as gamma_n -> 0. The ratio
+    The residual is bit-exact (automatic for an integer spectrum), not
+    merely scaling as gamma_n -> 0. The ratio
     residual/gamma_n should be << 1 (much smaller than the qualitative-
     rate expectation), which is the "stronger than soft" closure.
     """
@@ -567,7 +579,7 @@ def test_operator_system_leakage_per_n_max():
     at n_max=2,3,4 by measuring how much of sigma_{2*pi}(O) sits outside
     the operator system.
 
-    Since we get STRONG_IDENTIFICATION (sigma_{2*pi}(O) = O bit-exact),
+    Since sigma_{2*pi}(O) = O bit-exact,
     the leakage should also be zero by construction (O is in O_system,
     sigma_{2*pi}(O) = O, so sigma_{2*pi}(O) is also in O_system).
     """
@@ -808,9 +820,8 @@ def test_tomita_modular_flow_unitary():
 def test_tomita_modular_periodicity_n_max_2():
     """sigma_{2*pi}^TT(a) = a at the full Tomita-Takesaki level at n_max=2.
 
-    THE LOAD-BEARING L1-TIGHTEN TEST: this is the closure of the
-    principal Sprint L1 falsifier via the Tomita-Takesaki construction
-    (not just BW-alpha geometric).
+    Tomita-Takesaki form of the period closure.  Circular as a BW test:
+    the modular operator is built from the K under test (Paper 32).
     """
     bw = for_bisognano_wichmann(n_max=2)
     tms = bw.tomita_structure()

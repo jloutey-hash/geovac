@@ -145,8 +145,9 @@ def test_spectrum_confined_and_bottom_dense_at_nmax_30():
 
 
 def test_lambda_max_deficit_at_nmax_70():
-    """Paper 0 conclusion: 0.11% saturation deficit at n_max = 70 (116,795
-    nodes).  Measured 2026-09-03: E0 = -0.499463.
+    """Paper 7 New Contributions item 1 ("measured through n_max = 30 and
+    70"): the relative saturation deficit (8 - lambda_max)/8 at n_max = 70
+    (116,795 nodes) is ~0.11% (measured: E0 = -0.499463).
 
     Computed BLOCKWISE on the constructed lattice (2026-09-04): L is block
     diagonal in l, so the top eigenvalue is the largest of the per-block

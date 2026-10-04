@@ -49,19 +49,15 @@ def test_paper7_he_optimised_single_exponent_is_minus_729_over_256():
 
 
 def test_paper7_prints_the_exact_he_values_and_the_right_error_story():
-    """Paper 7 must carry -729/256 and 27/16, and its -11/8 must sit only in
-    the retraction clause that names the right error (halving the total)."""
+    """Paper 7 must carry -729/256, 27/16 and -11/4, and must not print the
+    retired -11/8 (half the k = Z total) or the wrong 'halved the one-body sum'
+    story (the edit bar removed the retraction clause; history is in CHANGELOG)."""
     import os
-    import re
     p = os.path.join(os.path.dirname(__file__), "..", "papers", "group3_foundations",
                      "Paper_7_Dimensionless_Vacuum.tex")
     t = open(p, encoding="utf-8").read()
     assert "-729/256" in t and "27/16" in t and "-11/4" in t
-    hits = [m.start() for m in re.finditer(r"-11/8", t)]
-    assert hits, "the retraction clause naming -11/8 is gone"
-    for h in hits:
-        ctx = t[max(0, h - 120):h + 20]
-        assert "halved the total" in ctx, ctx
+    assert "-11/8" not in t
     assert "halved the one-body sum" not in t
 
 

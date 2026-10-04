@@ -177,6 +177,12 @@ def test_sp_splitting_identification_is_ill_conditioned():
     # runners-up inside the tie, which is relabelling-invariant.
     runners = [w for w, o in ov[1:] if abs(o - o1) <= 1e-9 * max(o1, 1.0)]
     assert any(abs(w0 - w) > 1.0 for w in runners), (w0, runners)
+    # The 2p node's selection is a near-tie too (Paper 1 conditioning caveat):
+    # top two amplitudes 0.21411 (lambda = 3.0117) vs 0.21317 (3.0468), 0.44%.
+    ovp = _ls.eigenspace_overlap(blocks, idx[(2, 1, 0)])
+    (wp0, op0), (wp1, op1) = ovp[0], ovp[1]
+    assert abs((op0 - op1) / op0 - 0.0044) < 0.0005, (op0, op1)
+    assert abs(wp0 - 3.0117) < 1e-4 and abs(wp1 - 3.0468) < 1e-4, (wp0, wp1)
 
 
 def test_l_zero_and_l_one_blocks_are_disconnected():
@@ -217,9 +223,21 @@ def test_cg_construction_splitting_does_not_decay():
         states, idx, A = build_cg(n_max)
         L = np.diag(A.sum(axis=1)) - A
         w, v = np.linalg.eigh(L)
-        j2s = int(np.argmax(np.abs(v[idx[(2, 0, 0)], :])))
-        j2p = int(np.argmax(np.abs(v[idx[(2, 1, 0)], :])))
-        vals[n_max] = abs(w[j2p] - w[j2s]) / abs(w[j2s])
+
+        def pick(row):
+            # basis-free: eigenvalue whose eigenSPACE has the largest
+            # projection ||P_lambda e_row||^2 (eigenvalues pooled within 1e-9)
+            groups, start = [], 0
+            for i in range(1, len(w) + 1):
+                if i == len(w) or w[i] - w[i - 1] > 1e-9:
+                    groups.append((start, i))
+                    start = i
+            amps = [float(np.sum(v[row, a:b] ** 2)) for a, b in groups]
+            a, b = groups[int(np.argmax(amps))]
+            return float(np.mean(w[a:b]))
+
+        l2s, l2p = pick(idx[(2, 0, 0)]), pick(idx[(2, 1, 0)])
+        vals[n_max] = abs(l2p - l2s) / abs(l2s)
     assert vals[8] > 1.0 and vals[20] > 1.0            # >100%, no decay
     assert vals[20] > vals[10]                          # not monotone downward
     for n_max, expected in ((8, 1.2931), (10, 0.6817), (15, 0.8371), (20, 1.3878)):
@@ -369,5 +387,83 @@ def test_sp_endpoint_is_selection_biased():
     at28 = _sp_proxy(28)[0] * 100
     at29 = _sp_proxy(29)[0] * 100
     assert abs(at30 - 0.391) < 0.01, at30
-    assert at28 > 3 * at30, (at28, at30)
-    assert at29 > 5 * at30, (at29, at30)
+    # the printed off-/on-branch factors, 4.2x and 6.6x
+    assert abs(at28 / at30 - 4.2) < 0.05, (at28, at30)
+    assert abs(at29 / at30 - 6.6) < 0.05, (at29, at30)
+
+
+@pytest.mark.parametrize("n_max", [40, 41, 58, 59])
+def test_generic_off_branch_rate(n_max):
+    """Paper 1's proved generic rate: off the n_max = 0 (mod 3) branch,
+    lambda_2s - 3 = +-pi/(sqrt(3) n_max) + O(n_max^-2), so n_max (lambda_2s - 3)
+    tends to +-pi/sqrt(3) (sign + on n_max = 1, - on n_max = 2 mod 3).  An
+    O(n_max^-2) deviation, or another constant, fails the 1/n_max window."""
+    _, lam = _sp_proxy(n_max)
+    sign = 1.0 if n_max % 3 == 1 else -1.0
+    target = sign * np.pi / np.sqrt(3.0)
+    assert abs(n_max * (lam - 3.0) - target) < 1.0 / n_max, (n_max, lam)
+
+
+def test_ordering_inversions_stop_at_13():
+    """Paper 1: up to n_max = 13 an on-branch value can exceed an off-branch
+    neighbour (6 > 7, 9 > 10, 12 > 13); from 15 to 30 every on-branch value is
+    below both following off-branch values."""
+    vals = {n: _sp_proxy(n)[0] for n in range(6, 31)}
+    inv = [(n, m) for n in range(6, 31, 3) for m in (n + 1, n + 2)
+           if m in vals and vals[m] < vals[n]]
+    assert inv == [(6, 7), (9, 10), (12, 13)], inv
+
+
+def _path_modes(N: int, x: int):
+    """Free-end path P_N: eigenvalues 2 - 2cos(pi j/N) and the squared,
+    normalised eigenvector amplitude at vertex x (cos(pi j (x+1/2)/N))."""
+    j = np.arange(N)
+    mu = 2 - 2 * np.cos(np.pi * j / N)
+    amp2 = np.cos(np.pi * j * (x + 0.5) / N) ** 2 / np.where(j == 0, N, N / 2)
+    return mu, amp2
+
+
+def _pick_closed_form(n_rad: int, x: int, n_az: int, y: int) -> float:
+    """Basis-free pick on the grid block P_{n_rad} x P_{n_az} at node (x, y):
+    the eigenvalue whose (pooled) eigenspace has the largest projection."""
+    mu, a = _path_modes(n_rad, x)
+    nu, b = _path_modes(n_az, y)
+    lam = (mu[:, None] + nu[None, :]).ravel()
+    amp = (a[:, None] * b[None, :]).ravel()
+    o = np.argsort(lam)
+    lam, amp = lam[o], amp[o]
+    groups, start = [], 0
+    for i in range(1, len(lam) + 1):
+        if i == len(lam) or lam[i] - lam[i - 1] > 1e-12:
+            groups.append((start, i))
+            start = i
+    a0, b0 = max(groups, key=lambda g: amp[g[0]:g[1]].sum())
+    return float(lam[a0:b0].mean())
+
+
+def _sp_proxy_closed_form(n_max: int) -> float:
+    """The s/p proxy from the closed-form block eigenvectors: 2s = vertex 1 of
+    the l = 0 path P_{n_max}; 2p (m = 0) = vertex (0, 1) of P_{n_max-1} x P_3."""
+    l2s = _pick_closed_form(n_max, 1, 1, 0)
+    l2p = _pick_closed_form(n_max - 1, 0, 3, 1)
+    return abs(l2p - l2s) / abs(l2s)
+
+
+@pytest.mark.parametrize("n_max", [12, 13, 28, 29, 30])
+def test_closed_form_proxy_matches_the_lattice(n_max):
+    """The closed-form route equals the per-block diagonalisation of the
+    production lattice (so it may be used where the lattice is too large)."""
+    assert abs(_sp_proxy_closed_form(n_max) - _sp_proxy(n_max)[0]) < 1e-12
+
+
+def test_off_branch_factors_at_120_and_3000():
+    """Paper 1 / Paper 7: the off-/on-branch factor is 20-23x at 118, 119
+    against 120 (formula n/(sqrt(3) pi) = 22.1) and 550-552x at 2998, 2999
+    against 3000 (551.3)."""
+    v = {n: _sp_proxy_closed_form(n) for n in (118, 119, 120, 2998, 2999, 3000)}
+    r = sorted([v[118] / v[120], v[119] / v[120]])
+    assert 20 < r[0] < 21 and 23 < r[1] < 23.5, r
+    assert abs(120 / (np.sqrt(3) * np.pi) - 22.1) < 0.05
+    r = sorted([v[2998] / v[3000], v[2999] / v[3000]])
+    assert 550 < r[0] < 551 and 552 < r[1] < 553, r
+    assert abs(3000 / (np.sqrt(3) * np.pi) - 551.3) < 0.05

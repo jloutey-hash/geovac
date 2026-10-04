@@ -194,8 +194,9 @@ class TimePropagator:
         couples states with selection rules:
             Delta_l = +/-1,  Delta_m = 0
 
-        Matrix elements use exact angular factors (Clebsch-Gordan) and
-        hydrogen radial integrals.
+        Matrix elements use exact angular factors (Clebsch-Gordan) times
+        heuristic radial factors (see _hydrogen_radial_dipole; these are
+        NOT the exact hydrogen radial integrals).
 
         Parameters
         ----------
@@ -240,7 +241,6 @@ class TimePropagator:
                 # and nearest (n_b = n_a +/- 1).
                 # Use the general formula: proportional to n^2 for diagonal,
                 # with off-diagonal suppressed.
-                # Exact for 1s->2p: -(128*sqrt(2))/243 = -0.7449
                 radial = _hydrogen_radial_dipole(n_a, l_a, n_b, l_b)
 
                 element = angular * radial
@@ -252,14 +252,16 @@ class TimePropagator:
 
 def _hydrogen_radial_dipole(n1: int, l1: int, n2: int, l2: int) -> float:
     """
-    Approximate hydrogen radial dipole matrix element <n2, l2 | r | n1, l1>.
+    Heuristic radial factor standing in for <n2, l2 | r | n1, l1>.
 
-    Uses the exact Gordon formula for key transitions and a general
-    scaling rule for others.
+    The hard-coded "key transition" constants below are NOT the exact
+    hydrogen (Gordon-formula) values -- e.g. the exact <2p|r|1s> is
+    2^7 sqrt(6) / 3^5 = 1.2903 Bohr, while 0.7449 is coded -- and the
+    remaining cases use an ad hoc scaling rule.  The numbers are kept
+    unchanged (they define the legacy graph-model dynamics tests).
 
-    The dominant transitions are:
-        <2,1|r|1,0> = (128*sqrt(2))/243 = 0.7449  (1s -> 2p)
-        <3,1|r|2,0> = (27*sqrt(6))/64  = 1.0328   (2s -> 3p)
+    Coded values:
+        (1s -> 2p) 0.7449,  (2s -> 3p) 1.0328,  (2p -> 3d) 0.4629
 
     For general n1, n2: scales roughly as (n1*n2)^(3/2) / (n2-n1 terms).
 
@@ -275,7 +277,7 @@ def _hydrogen_radial_dipole(n1: int, l1: int, n2: int, l2: int) -> float:
     radial : float
         Radial matrix element in Bohr
     """
-    # Exact values for key transitions
+    # Hard-coded (heuristic, not exact) values for key transitions
     if (n1, l1, n2, l2) == (1, 0, 2, 1):
         return 128.0 * np.sqrt(2.0) / 243.0  # 0.7449
 

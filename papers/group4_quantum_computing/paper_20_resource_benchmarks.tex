@@ -72,7 +72,7 @@ screened cross-center, explicit-core Hartree--Fock --- with no interior PES
 minimum at the qubit-Hamiltonian level. We document this scope boundary
 empirically in \S\ref{subsec:scope_boundary}; the framework's
 primary value proposition is structural sparsity with quantitative
-truncation-convergence rates (Paper~38 state-space GH convergence of the truncated $S^3$ triple, not of the molecular Hamiltonians), not energy-accuracy
+truncation-convergence bounds (Paper~38 state-space GH convergence of the truncated $S^3$ triple, not of the molecular Hamiltonians), not energy-accuracy
 parity with CCSD(T) on second-row systems.  The \texttt{hamiltonian()}
 registry covers 37 systems (35 composed molecules spanning
 $Z=1$--56, H through Ba, plus the He and H$_2$ reference atoms),
@@ -418,9 +418,9 @@ $\sim$75\% vs.\ experiment pattern documented in
 \S\ref{sec:applicability}).  Users running second-row or below should
 treat the qubit Hamiltonian as a \emph{resource-estimation target}
 only, not as a chemistry-accuracy Hamiltonian.  The Pauli counts,
-1-norm bounds, and the Paper~38 GH rate metadata are correct in either
+1-norm bounds, and the Paper~38 GH bound metadata are correct in either
 case (the first two are properties of the operator, not its physics
-fidelity;\ the GH rate is a property of the $S^3$ spectral triple, not
+fidelity;\ the GH bound is a property of the $S^3$ spectral triple, not
 of the molecular Hamiltonian), so
 algorithm research that benchmarks against scaling behaviour transfers
 cleanly across the scope boundary.  Algorithm research that wants
@@ -1051,20 +1051,21 @@ $d_{\mathrm{GH}} \le \gamma_{n_{\max}}$ from
 state-space Gromov--Hausdorff convergence theorem) at the cutoff $n_{\max}$
 used to build the Hamiltonian.  The L2 central-Fejér sum-rule
 gives $\gamma_{n_{\max}=2,3,4} = 2.0746 / 1.6101 / 1.3223$
-with asymptotic rate $4/\pi = \mathrm{Vol}(S^2)/\pi^2$, read (an
+with asymptotic constant $4/\pi = \mathrm{Vol}(S^2)/\pi^2$ (the Fej\'er kernel's
+constant, not the convergence rate), read (an
 Observation-level reading, not a derivation) as the $k = 0$ volume
 signature of the master Mellin engine M1 (see~\cite{GeoVac_Paper18}).  The constant is twice the quotient of
 \emph{unit-radius} sphere volumes $\mathrm{Vol}(S^2)/\mathrm{Vol}(S^3) = 2/\pi$ and is \emph{not} the Hopf
-base-to-total ratio (misnomer retired 2026-09-03);\ it is quoted here in
+base-to-total ratio;\ it is quoted here in
 the dual-Coxeter normalisation of the $\mathrm{SU}(2)$ metric, and reads
 $2/\pi$ on the unit round $S^3$.  It is the GH bound of the truncated
 $S^3$ Camporesi--Higuchi triple, carried as metadata at a
-chemistry-consumer API --- a state-space GH metric rate for that triple
+chemistry-consumer API --- a state-space GH bound for that triple
 (the bound proved, its displayed constant \textbf{[INTERNAL THEOREM + MEASURED]}),
-\emph{not} a rate for the molecular Hamiltonians and \emph{not} a direct energy-error bound (the operator-to-energy
+\emph{not} a bound for the molecular Hamiltonians and \emph{not} a direct energy-error bound (the operator-to-energy
 lift is a loose heuristic that overshoots by 3--4 orders of magnitude; see
 the Trotter-budget footnote).
-The rate is system-independent (it is a property of the
+The bound is system-independent (it is a property of the
 spectral-triple truncation, not of the chemistry content),
 so chemistry consumers reading the metadata see the same
 ``the truncated $S^3$ triple is within state-space GH distance
@@ -1233,7 +1234,7 @@ hydrides, the qubit Hamiltonian's potential-energy surface does not
 exhibit an interior minimum at $n_{\max}=2$ under any of the engineering
 configurations we tested (Section~\ref{subsec:scope_boundary}).  The
 framework's primary value proposition is structural sparsity (the
-Paper~38 state-space GH rate, exposed as metadata on every Hamiltonian
+Paper~38 state-space GH bound, exposed as metadata on every Hamiltonian
 export, is a property of the $S^3$ spectral triple, not of the molecular
 Hamiltonians), not energy-accuracy parity with
 CCSD(T) across the full periodic-table-row range.

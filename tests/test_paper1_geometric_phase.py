@@ -197,3 +197,24 @@ def test_log_holonomy_detector_actually_detects():
     assert abs(theta_warped - (-2.0 * math.log((n + 1) / n))) > 0.05
     # (it lands on -4 ln((n+1)/n): the exponent doubles the circulation)
     assert abs(theta_warped - (-4.0 * math.log((n + 1) / n))) < 1e-13
+
+
+def test_log_holonomy_from_production_lattice_weights():
+    """eq:log_holonomy_exact read off the PRODUCTION lattice's topological
+    edge weights (GeometricLattice(topological_weights=True).adjacency), not
+    the locally rebuilt w = 1/(n1 n2) above: the plaquette
+    (n,1,0) -> (n+1,1,0) -> (n+1,1,1) -> (n,1,1) -> (n,1,0) gives
+    Theta(n) = -2 ln((n+1)/n).  The binary production lattice (all weights 1)
+    would give Theta = 0 and fail."""
+    from geovac.lattice import GeometricLattice
+    lat = GeometricLattice(max_n=8, topological_weights=True)
+    A = lat.adjacency.tocsr()
+    idx = {s: i for i, s in enumerate(lat.states)}
+    for n in range(2, 8):
+        w12 = A[idx[(n, 1, 0)], idx[(n + 1, 1, 0)]]
+        w23 = A[idx[(n + 1, 1, 0)], idx[(n + 1, 1, 1)]]
+        w34 = A[idx[(n + 1, 1, 1)], idx[(n, 1, 1)]]
+        w41 = A[idx[(n, 1, 1)], idx[(n, 1, 0)]]
+        theta = (math.log(w12) + math.log(w23)
+                 - math.log(w34) - math.log(w41))
+        assert abs(theta - (-2.0 * math.log((n + 1) / n))) < 1e-12, (n, theta)

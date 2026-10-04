@@ -54,12 +54,11 @@ gamma^{joint} at low (n_max, N_t, T) panel.  It does NOT:
     times U(1) symbol maximum; Paper 45: neither a mass maximum nor a
     cb-norm).  The earlier Bozejko-Fendler appeal is withdrawn -- that
     result concerns discrete groups.
-  - Establish a quantitative rate constant (the Paper 38 4/pi
-    asymptote on SU(2) is preserved; the U(1) factor gives the classical
-    Fejer-on-the-circle rate (T/pi^2) log N_t / N_t -- the circle's first
-    moment carries a logarithm too, Paper 38 rem:circle_fejer; an earlier
-    note said 1/N_t, withdrawn 2026-10-02 -- so the joint additive rate is
-    O(log n_max / n_max + T log N_t / N_t)).
+  - Establish a convergence rate.  The SU(2) factor's Fejer moment carries
+    the Paper 38 Fejer-moment constant 4/pi (a kernel constant, not a rate);
+    the U(1) factor's Fejer moment is (T/pi^2) log N_t / N_t (the circle's
+    first moment carries a logarithm too, Paper 38 rem:circle_fejer), so the
+    joint additive moment is O(log n_max / n_max + T log N_t / N_t).
 
 What it provides is a NUMERICAL panel of gamma^{joint} values at
 (n_max, N_t, T) cells, with the factorization structure made explicit

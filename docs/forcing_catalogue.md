@@ -288,19 +288,19 @@ Two findings about the corpus as a whole, independent of any single door:
 - **Where:** Paper 18 §III.7, Paper 32 §VIII; `mellin_engine_domain_partition.md`
 - **Rigidity:** conditional case-exhaustion theorem (Paper 32 §VIII, [CONDITIONAL]) plus a census
 - **Filed as:** organizing principle
-- **Crack:** an earlier note called the engine "predictive within each domain" (withdrawn 2026-10-02: it classifies, it has not predicted). Has any
+- **Crack:** the engine classifies; it has not predicted. Has any
   domain's prediction actually been *extracted*, or only the classification stated?
-  M1↔GH rates (a reading), M2↔heat-kernel, M3↔vertex-parity — is there an un-computed
+  M1↔the Fejér-moment constant (a reading), M2↔heat-kernel, M3↔vertex-parity — is there an un-computed
   observable in any one domain the engine already determines?
 - **Probe:** `OPEN` — per-domain: list what the engine predicts but we haven't computed.
 
-### F-5. WH1 state-space GH bound d ≤ γ_n → 0 (constant 1), rate 4/π
+### F-5. WH1 state-space GH bound d ≤ γ_n → 0 (constant 1), Fejér-moment constant 4/π
 - **Where:** Paper 38; `wh1_proven.md`, `l2_quantitative_rate_4_over_pi.md`
-- **Rigidity:** proven-theorem for the bound (Paper 38, state-space GH, not propinquity; the C₃·γ form is withdrawn); the 4/π rate is [INTERNAL THEOREM + MEASURED] and convention-dependent (dual-Coxeter), and 4/π = Vol(S²)/π² is *read as* the M1 signature (a reading, not a derivation)
+- **Rigidity:** proven-theorem for the bound (Paper 38, state-space GH, not propinquity; the C₃·γ form is withdrawn); the 4/π Fejér constant is [INTERNAL THEOREM + MEASURED] and convention-dependent (dual-Coxeter); it is a kernel constant, not the convergence rate (a taper gives O(1/n) [MEASURED]), and 4/π = Vol(S²)/π² is *read as* the M1 signature (a reading, not a derivation)
 - **Filed as:** prediction (the "something new")
 - **Crack:** 4/π is reported universal across compact connected simple Lie groups (Paper 40; derived at rank 1, numerically supported and fit-sensitive at rank ≥ 2; for several simple factors the constant is open; a circle factor carries 2/π). Universality
-  is a numerically supported regularity, forced only at rank 1. Does the rate constant carry a *physical* prediction (a convergence
-  speed that maps to an observable), or is it purely internal math?
+  is a numerically supported regularity, forced only at rank 1. Does the Fejér constant carry a *physical* prediction (something that
+  maps to an observable), or is it purely internal math?
 - **Probe:** `OPEN`.
 
 ---
@@ -473,7 +473,7 @@ rows are the priority re-read (see meta-finding 2).
 - [corrected 2026-10-02] C₃^{(2)}(n,n)=√(n/(n+2)); C₃^op=√(1−1/n_max) — WITHDRAWN (rested on Paper 38's false per-harmonic bound); the joint and single-factor constants are 1, by compression (Papers 38/39/40)
 - [corrected 2026-09-30] 2/(n_max+1) is the Plancherel mass maximum, not a cb-norm (the smoothing maps are UCP, cb-norm 1) — exact-rational
 - Riemannian-limit recovery at N_t=1 bit-exact; panel 2.0746/1.6101/1.3223 — bit-exact — prediction *(load-bearing falsifier)*
-- universal rate 4/π rank-invariant (read as the M1 signature, a reading) — derived at rank 1, numerically supported (fit-sensitive) at rank ≥ 2 (Paper 40)
+- Fejér-moment constant 4/π reported universal, rank-invariant (read as the M1 signature, a reading) — derived at rank 1, numerically supported (fit-sensitive) at rank ≥ 2 (Paper 40)
 - [D_L, a_s⊗a_t]=i[D_GV,a_s]⊗a_t (time Lipschitz-invisible) — bit-exact — prediction
 - KO-dim 3 mod 8; order-zero fails 5–8% (finite-res artifact); offdiag breaks JD=+DJ (resid 2) — proven — negative-with-structure
 

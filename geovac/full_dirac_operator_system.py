@@ -10,7 +10,7 @@ Motivation
 
 WH1-R3.2 (debug/wh1_r32_spinor_lift_memo.md) lifted the truncated
 operator system from scalar to the Weyl sector of the Camporesi-Higuchi
-spinor bundle on S^3 and found two structural obstructions:
+spinor bundle on S^3 and found two obstructions of that model:
 
 (R3.2-i) The truthful Camporesi-Higuchi Dirac, restricted to the Weyl
         sector, is *diagonal* in (n_fock, l, m_j) with eigenvalue
@@ -186,7 +186,7 @@ Weyl-sector CH Dirac) gives a [D_full, M_full] = 0, just like in the
 Weyl case. **The truthful CH full Dirac has the same n-degeneracy
 obstruction as the Weyl-only CH Dirac.**
 
-This is a STRUCTURAL CONSEQUENCE of:
+In this chirality-doubled model this is a consequence of:
   (a) The scalar-multiplier acts identically on both chiralities.
   (b) D_full is diagonal in chirality with opposite signs.
 
@@ -205,8 +205,11 @@ chirality sectors of the Weyl-replicated Hilbert space DOES NOT break
 the n-degeneracy obstruction. The cross-pair +infinity count at
 n_max = 2 should be the SAME as in R3.2.
 
-This is itself a structurally informative finding: the obstruction is
-NOT about chirality bookkeeping. It is about the operator system
+The obstruction is a property of this Fock/Weyl model, not of the
+truncated Camporesi-Higuchi triple: on the true window (complete Dirac
+eigenspaces, Paper 38) the Dirac-commutator kernel is exactly the
+scalars at n_max <= 3 (tests/test_p38_true_ch_window.py). Within the
+model it is NOT about chirality bookkeeping. It is about the operator system
 being scalar-multiplier-only, which means any Dirac that is diagonal
 in n forces a large kernel of [D, .] cap O.
 

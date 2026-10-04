@@ -1,7 +1,9 @@
 """Tests for geovac.modular_hamiltonian_lorentzian: Sprint L2-E Krein-level
 Paper 42 redo.
 
-Verifies the four LOAD-BEARING falsifiers + standard structural checks:
+Verifies four period-closure checks (automatic for the posited
+integer-spectrum generator; they identify no Bisognano-Wichmann modular
+flow -- see the module docstring) + standard structural checks:
 
   L2E-FALS-1 (LOAD-BEARING): sigma_{2*pi}^{L,alpha}(O) = O bit-exact
   L2E-FALS-2: sigma_{2*pi}^{L,TT}(O) = O bit-exact
@@ -12,8 +14,8 @@ Verifies the four LOAD-BEARING falsifiers + standard structural checks:
 Plus the Paper 42 §7.2 / O3 H_local verdict at (3, 1) and six-witness
 collapse at the Krein level (Paper 42 §8 lifted).
 
-Sprint L2-E (2026-05-16): four-witness Wick-rotation theorem at the
-Krein level on a hemispheric wedge of S^3 x R at signature (3, 1).
+Sprint L2-E (2026-05-16): Krein-level period closure on a hemispheric
+wedge of S^3 x R at signature (3, 1) (signature-blind; Paper 45 descope).
 """
 
 from __future__ import annotations
@@ -517,16 +519,20 @@ def test_full_witness_battery_BW(n_max, N_t):
 
 
 def test_full_witness_battery_HH_at_M_1():
-    """Hartle-Hawking at M = 1 also gives strong identification."""
+    """Hartle-Hawking at M = 1 also passes period closure."""
     lmh = for_hartle_hawking_lorentzian(n_max=2, N_t=1, T_max=1.0, M=1.0)
     results = lmh.verify_witness_lorentzian()
+    assert results["max_alpha_residual"] < 1e-12
+    assert results["max_TT_residual"] < 1e-12
     assert results["verdict"] == "STRONG_IDENTIFICATION_LORENTZIAN"
 
 
 def test_full_witness_battery_Unruh_at_a_2():
-    """Unruh at a = 2 also gives strong identification (kappa_g-independent)."""
+    """Unruh at a = 2 also passes period closure (kappa_g-independent)."""
     lmh = for_unruh_lorentzian(n_max=2, N_t=1, T_max=1.0, a=2.0)
     results = lmh.verify_witness_lorentzian()
+    assert results["max_alpha_residual"] < 1e-12
+    assert results["max_TT_residual"] < 1e-12
     assert results["verdict"] == "STRONG_IDENTIFICATION_LORENTZIAN"
 
 
@@ -560,10 +566,12 @@ def test_restrict_operator_to_wedge_identity_preserved():
 # ---------------------------------------------------------------------------
 
 
-def test_full_panel_n_max_3_N_t_21_BW_strong():
-    """Full panel: n_max=3, N_t=21 BW canonical strong identification."""
+def test_full_panel_n_max_3_N_t_21_BW_period_closure():
+    """Full panel: n_max=3, N_t=21 period closure."""
     lmh = for_bisognano_wichmann_lorentzian(n_max=3, N_t=21, T_max=1.0)
     results = lmh.verify_witness_lorentzian()
+    assert results["max_alpha_residual"] < 1e-12
+    assert results["max_TT_residual"] < 1e-12
     assert results["verdict"] == "STRONG_IDENTIFICATION_LORENTZIAN", (
         f"verdict={results['verdict']}, "
         f"max_alpha={results['max_alpha_residual']:.2e}, "

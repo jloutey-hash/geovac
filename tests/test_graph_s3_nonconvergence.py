@@ -143,9 +143,8 @@ def test_so4_casimir_is_n2_minus_1_on_every_shell(n_max: int) -> None:
 
 
 def test_casimir_is_not_an_edge_laplacian() -> None:
-    """The exact S^3 operator on the labels is shell-diagonal with n-dependent values, so no
-    D - A built from shell-changing edges can share its eigenvectors; and the production L
-    does not even share its spectrum (L is bounded in [0, 8], the Casimir grows as n^2)."""
+    """The production L does not share the Casimir's spectrum: at n_max = 8 every eigenvalue
+    of L lies below 8 (L is bounded in [0, 8]), while the Casimir reaches n_max^2 - 1 = 63."""
     n_max = 8
     _, lap, states = _laplacian(n_max, topological=False)
     ev = np.linalg.eigvalsh(lap)

@@ -16,7 +16,7 @@ unit-S^3 distance theta -- is 2 theta, the SO(3) rotation angle chi.  So:
   * `central_fejer_su2.gamma_rate`, which integrates against chi, computes the
     dual-Coxeter moment -- it was right all along, and what was inconsistent
     was the setup section it was paired with;
-  * the rate constant is 4/pi in that metric and 2/pi on the unit sphere,
+  * the Fejer-moment constant is 4/pi in that metric and 2/pi on the unit sphere,
     the two differing by the metric scale (a distance moment is homogeneous
     of degree one in the metric).
 
@@ -79,7 +79,7 @@ def test_gamma_1_is_the_dual_coxeter_haar_mean_distance():
     assert abs(unit_s3_moment(1) - mpmath.pi / 2) < 1e-20
 
 
-def test_rate_constant_by_convention():
+def test_fejer_moment_constant_by_convention():
     """Doubling estimator a_n = (2n g_{2n} - n g_n)/log 2 at n = 25 in both
     conventions: the unit-S^3 value is exactly half the module's."""
     g25, g50 = gamma_rate(25, prec=30), gamma_rate(50, prec=30)
@@ -89,6 +89,8 @@ def test_rate_constant_by_convention():
     assert abs(a_rot / a_unit - 2) < 1e-10
     # the estimators sit above their limits 4/pi and 2/pi at this n (approach from above)
     assert a_rot > 4 / mpmath.pi and a_unit > 2 / mpmath.pi
+    # ... and at the measured value (two-sided)
+    assert abs(a_rot - mpmath.mpf("1.371478")) < 1e-5, a_rot
 
 
 # ---------------------------------------------------------------------------
@@ -232,7 +234,7 @@ def test_constant_is_the_unit_sphere_volume_quotient():
     assert abs(2 * vol_s2 / vol_s3 - 4 / np.pi) < 1e-12
 
 
-def test_hopf_base_ratio_is_not_the_rate_constant():
+def test_hopf_base_ratio_is_not_the_fejer_constant():
     """Guard on the retired reading: Vol(base)/Vol(group) is 1/(4 pi) in the
     dual-Coxeter metric and 1/(2 pi) on the unit sphere -- neither is 4/pi or
     2/pi.  The printed identity 4/pi = Vol(S^2)/pi^2 mixes normalisations."""

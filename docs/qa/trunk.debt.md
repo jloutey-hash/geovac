@@ -2,25 +2,22 @@
 
 SMALL findings that could not be fixed on sight (criteria.md RESEARCH-GRADE).
 
-## SMALL sweep (edit bar, 2026-10-03)
+## SMALL sweep (edit bar) -- SWEPT 2026-10-03 (v5.20.2)
 
-SMALLs found by trunk FULL #12 in units no LARGE fix opened.  Fixed in ONE scheduled
-sweep outside the cert cycle (docs/qa/criteria.md, "Incremental certification and the
-edit bar"); the swept units then show CHANGED and are reviewed by the next run.
+The FULL #12 and FULL #13 SMALL lists were fixed in one scheduled sweep (four
+file-disjoint agents: Paper 32; Paper 38 + Fejer modules; Papers 0/1/7 + tests;
+syntheses + non-trunk papers + misc), backstopped by C16 entry
+`trunk-small-sweep-2026-10-03`.  The swept units show CHANGED and are reviewed by
+the next run.  Item-by-item record: CHANGELOG v5.20.2.  Residue (not fixed):
 
-**Paper 0.** Prolate coordinates called a different manifold / "conformally distinct" (L618-645, L141-143, L611-612; shared (l,m) = SO(3) symmetry, own L376). L590 96.0% omits the Schwartz correction. L807-810 "E0 = -0.5 by construction" holds only at the matched cutoff. Abstract/L102/L831 [SYMBOLIC PROOF] on "(l,m) emerge from packing" (backing is a counting identity; own L345 "not a mechanism").
-**Paper 1.** L449-457 alpha's absence attributed to missing photon d.o.f. (it is the relativistic Dirac structure; only Lamb needs photons). L520-522 spin-orbit scaling (should be ~ alpha^2 |E_n|/(n l); P7 L825 has it right). "Below n_max~12 ordering can invert" (13 vs 12). Conditioning caveat omits the 2p near-tie 0.44%.
-**Paper 7.** "Inverse Fock Jacobian 1/Omega^4" label (Jacobian is Omega^3) across its family. Sec. 6 inline tiers. Helium wording L1007. c^2 tier wording (matrix "SYMBOLIC", P7 L820 "now derived"). 591-cutoff claim + tests/test_lattice_spectrum.py:155 non-sequitur. s/p L118-120 / L2998-3000 untested. Chordal table undefined points. Li nu=2 test uncited + "Phase 4H" codename.
-**Paper 32 (prose).** H1 order-zero "automatic by doubling" vs the G4a correction. Paper 23 table row "different D, same A" (should be different A). "Paper 28 is the spectral action of the present triple" (a reading). M2/M3 half-integer Hurwitz label inconsistency. obs:pi_coulomb causal overclaim. Prim(O(SL2)) identification (cotangent space). prop = 2 attributed to selection rules (generic). Seam L5697 reasserts disjointness. Stale W1e text vs Paper 58's localization. Dangling refs L673/L823. N_gen "satisfies every axiom" vs order-0/1 failure. Q4 O(e^{-pi^2/Lambda^2}) should be O(e^{-pi^2 Lambda^2}) (L8112 area). Conclusion "GeoVac is rank 1" stale reason. "Three GeoVac-original" (MvS) novelty vs lineage. Paper 28 conflated with the gauge-network limit (L8005). G2 "closed" + "G2, G3 one fact". L1 "single combinatorial object" (S5 differs). Six-witness "falsifiers" true by construction. Descope reason conflates the two K's. History notes ("an earlier version", "corrected 2026-...") throughout large units (chronicle relocation, item 5, is the better home).
-**Paper 32 (citations).** L370-374 Connes-vS P_n called a basis-index cutoff (it is the spectral projection chi_[1,n](D)). karamata1949 title (Serbian). Korevaar Remark 3 pointer unverifiable.
-**Paper 32 (code).** real_structure.apply_to_operator: U conj(op) U^T = -J op J^-1 (sign; latent). m_l(kappa, m_j) "via CG" is not a map. thm forced_count states D_GV x 1 + 1 x D_F, code uses s_GV x D_F. Module docstrings: full_dirac "STRUCTURAL", real_structure "J flips kappa", chirality "unique candidate".
-**Paper 38.** Mirror sentence: Paper 45's Toeplitz prerequisite now established. L2(b) cites a debug/ memo. berezin_reconstruction docstring "proven" for its non-unital map; L4 convolution form has no valid test; good-kernel estimate (iii) untested; L4(c) metric pairing loose by 2; open question (i) b-value untested beyond six digits. Matrix rows 61, 62 tiered SYMBOLIC beyond their tests. geovac/central_fejer_su2.py docstrings ("6 log n/n for all n", N0 tautological, "4/pi = 2Vol(S2)/Vol(SU(2)) dual-Coxeter", stale header, "sharp O(1/n)"). r25 header "proves". 4/pi convergence tests tolerant to 0.5%. claims_register row 8 test pointer cites the doubled-model test. History notes in Setup / L5 / Appendix units.
-**Tests/code (trunk).** tests/test_paper7_graph_convergence.py docstring cites a 0.11% claim no longer in P0. tests/test_trunk_qa_kappa.py header says papers claim kappa "derived". test_graph_s3_nonconvergence Casimir test body weaker than docstring. test_paper7_vee_s3 integrand types. Basis-invariance test weaker than claim. He hop shift unpinned. lattice.stitch_lattices "experimentally validated for H2" (failed approach). test_cg_construction_splitting uses raw argmax. Theta tested from formula only. Matrix rows 38, 143, 152 ("two axioms force"), 154 stale.
-**Syntheses / other papers.** group3 synthesis L185 "derives", L1680 "generates" drop P0's "motivated, not forced". History notes reported by the 4/pi agents in Papers 39, 40, 42, 45, 53 and the group1 synthesis (not opened by a LARGE). Label eq:gh_rate_constant is now a misnomer (not rendered).
-
-**Self-check round 4 (SMALL).** geovac/modular_hamiltonian.py method name `restrict_K_alpha_to_wedge` contradicts its corrected docstring (a relabelling, not a restriction; API rename owed). Paper 50 history notes at L158-161 and L186.
-**[CLOSED 2026-10-03, PI go-ahead]** CLAUDE.md S1.7 WH5 claim text and S13.5 K-rule note now say "of distinct type" (were "structurally independent" / "independent").
-**[CLOSED 2026-10-03, v5.20.1]** Two slow Paper 32 tests hit MemoryError; fixed by a lazy closed-form Tomita K_TT (0.5 s each, un-marked slow).
+- **Needs a new guard (separate guard pass).** Paper 38 L4 convolution form B = P(K*f)P on the true window; good-kernel estimate (iii).
+- **API renames deferred.** geovac/modular_hamiltonian.py `restrict_K_alpha_to_wedge` (a relabelling); central_fejer_su2 `asymptotic_rate_constant` / `gamma_rate` / `quantitative_rate_*`; geovac `UNIVERSAL_KINETIC_SCALE` constant name.
+- **Infrastructure.** Six memory-heavy tests not xdist-safe (test_true_window_real_structure routes B/C, test_p45_kplus_degeneracy x2, test_almost_commutative x2): mark xdist_group / serial.
+- **Chronicle (do-not-edit).** Korevaar Remark 3 pointer in docs/chronicles/paper_32_chronicle.tex unverified.
+- **History notes outside swept units.** Further dated / "earlier version" notes in Papers 39 and 40 (e.g. P39 L221, L507, L1229-1273; P40 L1057, L1931-1960), several holding C16 retraction tokens -- belongs to the chronicle-relocation pass (item 5). Paper 7 Sec. 6 Li nu=2 paragraph has no inline tier tag.
+- **New finding (to investigate).** Paper 32 audit item 4: the offdiag J-D residual equals 2 max(alpha, chirality_coupling) and does not depend on the (-1)^l phase (plants on the phase did not move it), so the paper's l-parity-flip mechanism wording may be inaccurate. Residuals now pinned in tests/test_real_structure.py.
+- **Pre-existing test failures (fail identically at ac6a79c; outside trunk).** tests/test_paper27_entropy.py::test_paper27_energy_graph_structural_invariants[3,4] (V-diagonal fraction 0.920240 vs pinned 0.920258) and ::test_paper27_ep2n_be_analytical_degenerate_pt (occupation 1.8986 vs pinned 1.924); tests/test_gh_convergence_tensor.py::TestR1R2KeystoneTheoremStatus::test_five_lemma_status_l3_done (status string no longer contains 'C_3 = 1 by compression'). Not in any recent regression slice -- investigate (likely the 2026-08-29 ERI-rule / He-hop re-measures and a P39 status-string edit).
+- **Not exercised in FULL #13 (owed before PASS).** C23 inverse citation (C_sat closed form; gearing 2 sqrt6/3; taper O(1/n) vs Jackson/Fejer-Riesz; c^2(n,l)). Dedicated arithmetic-audit pass. Stamp leak (P32 ::Conclusion) -> double the AUDIT fraction next run.
 
 ## Open
 

@@ -11,14 +11,19 @@ Theorem at line 344-356, states:
     of mixed-Tate periods over Q (Kontsevich-Zagier 2001), at depth 0
     and Tate weight in Z.
 
-The witness table at Paper 55 lines 378-389 lists five M1 observables
-across the corpus:
+The witness table in Paper 55 (subsection "Witnesses" of the M1 section)
+lists five M1 observables across the corpus:
 
-    W1: Vol(S^2)/4 = pi                  (Paper 25, Hopf-base)        pi^{+1}
-    W2: 4/pi (asymptotic propinquity)    (Paper 38 L2 rate)           pi^{-1}
-    W3: 4/pi (universal compact Lie)     (Paper 40 Thm 1)             pi^{-1}
-    W4: 1/pi^2 (Pythagorean orthog.)     (Paper 43 sec 10.2)          pi^{-2}
-    W5: 1/pi^2 (F-theorem cross-prod.)   (Paper 50 Thm 3.4)           pi^{-2}
+    W1: Vol(S^2)/4 = pi                  (Paper 25, quarter unit-sphere area)  pi^{+1}
+    W2: 4/pi (Fejer-moment constant of the state-space GH bound)
+                                         (Paper 38 sec L2)                     pi^{-1}
+    W3: 4/pi (reported universal, compact simple) (Paper 40 Thm 1)             pi^{-1}
+    W4: 1/pi^2 (Pythagorean prefactor; posited 1/beta^2, class only)
+                                         (Paper 42 sec 11.7)                   pi^{-2}
+    W5: 1/pi^2 (F-theorem cross-prod.)   (Paper 50 Thm 3.1)                    pi^{-2}
+
+The 4/pi rows witness membership in Q[pi, pi^{-1}] only; their placement
+in the M1 slot is a reading, not a derivation (Paper 55 table note).
 
 W3 numerically equals W2 (4/pi) — same value, different source. The
 sub-task requests verifying 3-5 distinct numerical values; the three
@@ -76,14 +81,14 @@ def _compute_witnesses(dps: int):
             "Paper 25 sec II.1 unit-sphere volume slot (= pi)",
         ),
         "W2_propinquity_4_over_pi": (
-            mp.mpf(4) / pi,                # Paper 38 L2 asymptotic rate
+            mp.mpf(4) / pi,                # Paper 38 L2 Fejer-moment constant
             -1,
-            "Paper 38 L2 rate; Paper 40 rate constant (reported universal, compact simple; M1 placement a reading)",
+            "Paper 38 L2 Fejer-moment constant; Paper 40 (reported universal, compact simple; M1 placement a reading)",
         ),
         "W4_pythagorean_1_over_pi2": (
-            mp.mpf(1) / pi**2,             # Paper 43 sec 10.2 prefactor
+            mp.mpf(1) / pi**2,             # Paper 42 sec 11.7 prefactor
             -2,
-            "Paper 43 sec 10.2 Pythagorean orthogonality prefactor; "
+            "Paper 42 sec 11.7 Pythagorean prefactor (class only); "
             "Paper 50 F-theorem cross-product factor",
         ),
     }

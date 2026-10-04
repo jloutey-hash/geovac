@@ -1,9 +1,9 @@
-"""Genuine backing for Paper 40's universal 4/pi rate constant.
+"""Genuine backing for Paper 40's universal 4/pi Fejer-moment constant (a kernel constant, not a convergence rate).
 
 WHAT IS ROBUST (and tested here, DEFAULT-collected):
   * rank-1 (SU(2)): the doubling estimator of the closed-form sum-rule
     converges to 4/pi (production code geovac.central_fejer_su2; Paper 38's
-    rate constant, [INTERNAL THEOREM + MEASURED]).
+    Fejer-moment constant, [INTERNAL THEOREM + MEASURED]).
   * the general-G Dirac-triangle inequality (DT): for SU(3), Sp(2) and G2,
     |D(lambda) - D(lambda')| <= sqrt(C(sigma)) for every sigma in
     lambda (x) lambda'^* across a reduced dominant-weight panel (fail_count = 0,
@@ -16,7 +16,7 @@ WHAT IS ROBUST (and tested here, DEFAULT-collected):
     v4.44.0 -- /qa group1 batch3 Flavor-B backfill).
   * rank-2 machinery correctness: the generic compact-Lie Weyl-integration
     used for SU(3)/Sp(2)/G2 integrates Haar to 1.0.
-  * the A-over-B discrimination (G2, |W|=12): the extracted rate constant sits
+  * the A-over-B discrimination (G2, |W|=12): the extracted Fejer-moment constant sits
     decisively closer to Reading A (c = 4/pi ~ 1.273) than Reading B
     (c = 2|W|/pi^r = 24/pi^2 ~ 2.432).  [@slow, full panel]
 
@@ -40,7 +40,7 @@ import pytest
 
 
 # ---------------------------------------------------------------------------
-# rank-1 anchor: SU(2) rate constant is 4/pi exactly (production code)
+# rank-1 anchor: SU(2) Fejer-moment constant is 4/pi exactly (production code)
 # ---------------------------------------------------------------------------
 
 def test_su2_rate_constant_is_4_over_pi():

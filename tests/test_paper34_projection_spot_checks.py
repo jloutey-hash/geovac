@@ -357,19 +357,20 @@ def test_paper34_III14_S3_Casimir_one_over_240():
 def test_paper34_III27_wick_sigma_2pi_identity_BW():
     """Paper 34 §III.27 (sec:proj_wick_rotation): transcendental signature
     '2 pi * Q via Vol(S^1) on the Euclidean time circle (M1).' The
-    operator-system-level closure (Paper 42 four-witness theorem +
-    Track L1 primary falsifier) is sigma_{2 pi}(O) = O bit-exact on the
-    Camporesi-Higuchi triple at BW canonical (beta = 2 pi, kappa_g = 1).
+    finite-cutoff period closure sigma_{2 pi}(O) = O holds bit-exactly for
+    the posited integer-spectrum generator K = 2 J_z at beta = 2 pi
+    (automatic for an integer spectrum; it identifies no Bisognano-Wichmann
+    modular flow -- Paper 42).
 
     Invokes the same machinery used by
-    tests/test_modular_hamiltonian.py::test_modular_periodicity_n_max_2_BW
-    -- a STRONG_IDENTIFICATION verdict from `verify_witness()` confirms
-    the bit-exact sigma_{2 pi}(O) = O closure (Paper 42 four-witness
-    theorem).
+    tests/test_modular_hamiltonian.py::test_modular_periodicity_n_max_2_BW;
+    the verdict string STRONG_IDENTIFICATION is a legacy label for "all
+    period-closure residuals below tolerance".
 
     Also verifies the structural reason -- K_boost has odd-integer
-    spectrum, so e^{i * 2 pi * n} = 1 closes the modular flow at the
-    canonical 2 pi period. This is exactly the M1 / Vol(S^1) = 2 pi
+    spectrum, so e^{i * 2 pi * n} = 1 makes the flow 2 pi-periodic
+    (automatic for any integer-spectrum generator; not a derivation of
+    the modular flow). This is exactly the M1 / Vol(S^1) = 2 pi
     signature claimed in Paper 34 §III.27.
     """
     from geovac.modular_hamiltonian import for_bisognano_wichmann

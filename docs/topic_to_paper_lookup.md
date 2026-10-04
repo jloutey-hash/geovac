@@ -2,7 +2,7 @@
 
 | Topic | Paper | Section | Tier |
 |:------|:-----:|:--------|:----:|
-| Universal constant -1/16 | 0 | Sec 2 | Core |
+| Matched scale kappa = -1/16 (Observation) | 0 | Sec 2 | Core |
 | Graph Laplacian method | 1 | Sec 3 | Core |
 | O(V) quantum dynamics | 6 | All | Core |
 | Rabi oscillations | 6 | -- | Core |

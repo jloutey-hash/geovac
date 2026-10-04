@@ -37,8 +37,9 @@ van Suijlekom 2015 Ch. 3):
   (ii) {γ, D} = 0.
   (iii) [γ, a] = 0 for every a in the algebra.
 
-In the [chi=+1, chi=-1] block ordering, the unique candidate (up to
-overall sign) that satisfies all three with the truthful CH Dirac is
+In the [chi=+1, chi=-1] block ordering, the candidate adopted here (not
+unique: (cos t sigma_x + sin t sigma_y) ⊗ I satisfies all three for every
+real t) that satisfies all three with the truthful CH Dirac is
 
     γ_GV = sigma_x ⊗ I_{dim_weyl},
 

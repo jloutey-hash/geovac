@@ -5,21 +5,23 @@ cos(chi) in the Gegenbauer eigenbasis of the unit-S^3 Laplacian.
 
 with radial functions  R_{nl}(chi) ~ sin^l(chi) C^{(l+1)}_{n-l-1}(cos chi)
 on the measure sin^2(chi) dchi.  Closed form: Gegenbauer three-term
-recurrence + norm ratio.  [SYMBOLIC + MEASURED]
+recurrence + norm ratio.  [PROOF-BY-ARGUMENT + MEASURED]
 
 WHY THIS FILE EXISTS (trunk FULL run #3, 2026-09-03, carryforward I.1.1).
 Paper 7 (and Papers 0, 2, 18, 32 and the group3 synthesis) printed the
 formula with prefactor 1/16 and read it as "(1/4)^2"; the Chebyshev-U
 recurrence  cos(chi) U_{n-1} = U_n/2 + U_{n-2}/2  has amplitude 1/2, so
 c^2(n, 0) = 1/4.  The 1/16 that the matching kappa = -1/16 coincides with
-is a DIFFERENT quantity, the inverse Fock Jacobian 1/Omega^4(0) = c^2(n,0)/4.
+is a DIFFERENT quantity, the fourth power of the inverse Fock conformal factor,
+1/Omega^4(0) = c^2(n,0)/4 (the volume Jacobian is Omega^3).
 The old backing test reached 1/16 through an unexplained `/2`; this file
 replaces it with an independent quadrature route.  The paper's special
 value 1/40 = Delta is the COMPOSITE  [1 - l(l+1)/(n(n+1))]_{(4,3)} / Omega^4(0)
 = (2/5)(1/16); the actual coupling is c^2(4,3) = 1/10.
 
-Tiers: closed form is a symbolic statement (INTERNAL THEOREM via the
-recurrence); the quadrature panel is its numerical certificate.
+Tiers: the closed form is argued from the recurrence (no symbolic step is
+executed here); the quadrature panel at seven (n, l) is its numerical
+certificate.
 """
 from __future__ import annotations
 
@@ -82,7 +84,7 @@ def test_s_wave_amplitude_is_one_half():
 
 def test_inverse_fock_jacobian_is_a_different_quantity():
     """1/Omega^4(0) = 1/16 with Omega(0) = 2 is c^2(n,0)/4, not c^2(n,0):
-    the kappa = -1/16 coincidence is with the Jacobian, not the coupling."""
+    the kappa = -1/16 coincidence is with 1/Omega^4(0), not the coupling."""
     omega0 = Fraction(2, 1)
     inv_jacobian = 1 / omega0 ** 4
     assert inv_jacobian == Fraction(1, 16)

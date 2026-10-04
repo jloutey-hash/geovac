@@ -1009,7 +1009,8 @@ class ModularHamiltonian:
         """Build K_alpha_W, the diagonal wedge RELABELLING (two_m_j on the wedge states).
 
         It is not a restriction of K_alpha: the wedge compression of K_alpha is
-        zero (shown below).
+        zero (shown below).  The method name is a legacy misnomer, kept for
+        API stability (callers import it); read "restrict" as "relabel".
 
         Why not the compression: in the wedge-adapted basis (symmetric /
         antisymmetric combinations of |+m_j, ...> and |-m_j, ...>) the
@@ -1521,23 +1522,19 @@ def verify_cross_witness_collapse(
 
 
 # ---------------------------------------------------------------------------
-# Propinquity rate cross-check (4/pi rate constant; 'Hopf-base' label retired)
+# State-space GH bound cross-check (4/pi = Fejer-kernel constant of gamma_n)
 # ---------------------------------------------------------------------------
 
 
 def propinquity_rate_check(n_max: int, tol: float = 1e-10) -> dict:
-    """Cross-check modular periodicity residual against L2 gamma_n rate.
+    """Cross-check modular periodicity residual against the L2 gamma_n bound.
 
     If the modular flow has "soft" identification at finite n_max, the
     residual ||sigma_{2*pi}(O) - O||_F should scale with the L2 central
     Fejer mass-concentration moment gamma_{n_max} from
-    geovac.central_fejer_su2 (which controls the state-space GH
-    convergence rate per Paper 38; propinquity is not claimed).
-
-    Historical: this was read as a cross-check linking L1 (modular
-    convergence) to L2 (metric-spectral-triple convergence) via the shared
-    value 4/pi.  Paper 42 withdrew that link (2026-09-28); the shared value is
-    a coincidence of readings, and the 'Hopf-base' label is retired.
+    geovac.central_fejer_su2 (which bounds the state-space GH distance per
+    Paper 38).  Paper 42 claims no link between the modular period closure
+    (integer generator spectrum) and the gamma_n Fejer constant 4/pi.
 
     Returns dict with per-n_max residuals and L2 gamma_n values.
     """

@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.19.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.20.2-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -250,7 +250,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
   author    = {J. Loutey},
   title     = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
   year      = {2026},
-  version   = {5.19.0},
+  version   = {5.20.2},
   doi       = {10.5281/zenodo.18738360},
   url       = {https://github.com/jloutey-hash/geovac}
 }

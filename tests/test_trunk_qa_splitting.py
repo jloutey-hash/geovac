@@ -128,11 +128,12 @@ def test_printed_values_reproduce(n_max):
         f"n_max={n_max}: {got:.3f}% vs printed {PRINTED[n_max]}%")
 
 
-@pytest.mark.parametrize("n_max", [6, 7, 9, 12, 15, 18])
+@pytest.mark.parametrize("n_max", FAST_GRID)
 def test_result_is_invariant_under_rotation_in_degenerate_eigenspaces(n_max):
     """The basis-free rule gives the same number for any orthonormal basis of
-    each degenerate eigenspace (these cutoffs are where the old argmax rule,
-    and a too-tight DEG_TOL, were shown to move).  The eigenspaces rotated are
+    each degenerate eigenspace, at every cutoff of the fast grid (Paper 1
+    App. B: n_max = 5..18; the old argmax rule and a too-tight DEG_TOL were
+    shown to move at 6, 7, 9, 12, 15, 18).  The eigenspaces rotated are
     defined by LOOSE_TOL, independent of the DEG_TOL under test."""
     L, i2s, i2p = _laplacian(n_max)
     w, v = np.linalg.eigh(L)

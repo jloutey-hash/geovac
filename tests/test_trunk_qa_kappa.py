@@ -1,20 +1,19 @@
 """
-TRUNK QA — Claim 1 (HEADLINE): kappa = -1/16 "derived from the Fock projection".
+TRUNK QA — Claim 1: kappa = -1/16 COINCIDES with a geometric 1/16 of the
+Fock projection ([OBSERVATION], Paper 7 sec:discussion / Paper 0 sec:VI --
+recorded as a coincidence, not a derivation).
 
-Paper 7 sec:VII.D / Paper 0 sec:VI claim kappa is *derived* via
-  (a) [RETIRED 2026-09-03] a "universal s-wave Fock coupling c^2(n,0) = 1/16
-      = (1/4)^2" -- the Chebyshev amplitude is 1/2, so c^2(n,0) = 1/4 (see
-      tests/test_paper7_gegenbauer_coupling.py); the old T1 reached 1/16 only
-      through an unexplained `/2`, found by trunk FULL run #3; and
-  (b) the inverse Fock Jacobian 1/Omega^4(0) with Omega(0) = 2 -- the ONLY
-      geometric 1/16, equal to c^2(n,0)/4.
+The geometric 1/16 is 1/Omega^4(0), the fourth power of the inverse Fock
+conformal factor at the projection centre (Omega(0) = 2; the volume Jacobian
+is Omega^3), equal to c^2(n,0)/4 with c^2(n,0) = 1/4 the s-wave coupling (see
+tests/test_paper7_gegenbauer_coupling.py).
 
 The empirical *matching* kappa is what tests/test_universal_constant_origin.py
 computes: it sets H = kappa * (D - A) on the BINARY graph Laplacian and finds
 the kappa that maps lambda_max onto the hydrogen ground state -0.5 Ha, i.e.
   kappa_match = E_target / lambda_max  ->  -0.5 / 8  =  -1/16.
 
-This test asks the ONLY question that matters for the "derived" claim:
+This file records the question behind the Observation tier:
   Is the geometric 1/16 connected BY MECHANISM to the matching 1/16,
   or do they merely coincide numerically?
 
@@ -26,7 +25,7 @@ Strategy (each piece derived from INDEPENDENT inputs, could-have-failed):
       at p=0 (independent of the graph). It must equal 1/16.
   T3. Compute the matching kappa from the binary graph Laplacian spectrum.
       It must converge to -1/16 because lambda_max -> 8.
-  T4. THE BRIDGE TEST. Identify what produces the "8" in the matching route
+  T4. THE BRIDGE (documentation). What produces the "8" in the matching route
       and what produces the "16" in the geometric route, and check whether
       one mechanism forces the other. lambda_max -> 8 = 2 * d_max (bipartite
       Laplacian bound), with d_max = 4 the coordination number. The geometric
@@ -35,7 +34,9 @@ Strategy (each piece derived from INDEPENDENT inputs, could-have-failed):
       of kappa is -E_target/(2 d_max) == 1/Omega^4(0) == 1/16 only because
       E_target = -1/2 and d_max = 4 happen to make 0.5/8 = 1/16. There is no
       derivation carrying the Fock Omega^4 weighting into the binary-graph
-      lambda_max. => NON-CIRCULAR BRIDGE DOES NOT EXIST.
+      lambda_max.  No assertion can test the ABSENCE of a bridge: T4's
+      asserts pin only lambda_max -> 8, d_max = 4 and the binary edge weights;
+      the rest of T4 is documentation.
 """
 
 from __future__ import annotations
@@ -75,7 +76,7 @@ def chebyshev_u_offdiag_amplitude() -> sp.Rational:
     return J[0, 1]
 
 
-def inverse_fock_jacobian_at_origin() -> sp.Rational:
+def inverse_conformal_factor_fourth_power_at_origin() -> sp.Rational:
     """1/Omega^4(0) for Omega = 2 p0/(p^2 + p0^2), evaluated at p=0.
 
     At p=0: Omega(0) = 2 p0 / p0^2 = 2/p0.  Paper 7 sets the projection
@@ -91,9 +92,9 @@ def inverse_fock_jacobian_at_origin() -> sp.Rational:
 
 
 def c2_formula(n: int, l: int) -> sp.Rational:
-    """Paper 7 Eq fock_coupling (corrected 2026-09-03):
-    c^2(n,l) = (1/4)[1 - l(l+1)/(n(n+1))]  (derived; see
-    tests/test_paper7_gegenbauer_coupling.py for the quadrature route)."""
+    """Paper 7 Eq fock_coupling:
+    c^2(n,l) = (1/4)[1 - l(l+1)/(n(n+1))]  (closed form from the Gegenbauer
+    recurrence; tests/test_paper7_gegenbauer_coupling.py has the quadrature)."""
     return sp.Rational(1, 4) * (1 - sp.Rational(l * (l + 1), n * (n + 1)))
 
 
@@ -123,19 +124,18 @@ def max_coordination(max_n: int) -> int:
 # ===========================================================================
 
 def test_geometric_c2_swave_is_one_quarter_not_one_sixteenth():
-    """The s-wave coupling is (1/2)^2 = 1/4; the geometric 1/16 is the
-    inverse Fock Jacobian, a DIFFERENT quantity equal to c^2(n,0)/4.  This
-    replaces a test that reached 1/16 through an injected `/2`."""
+    """The s-wave coupling is (1/2)^2 = 1/4; the geometric 1/16 is
+    1/Omega^4(0), a DIFFERENT quantity equal to c^2(n,0)/4."""
     for n in range(1, 8):
         assert c2_formula(n, 0) == sp.Rational(1, 4)
     amplitude = chebyshev_u_offdiag_amplitude()             # 1/2
     assert amplitude**2 == sp.Rational(1, 4)
     assert amplitude**2 != sp.Rational(1, 16)
-    assert amplitude**2 / 4 == inverse_fock_jacobian_at_origin()
+    assert amplitude**2 / 4 == inverse_conformal_factor_fourth_power_at_origin()
 
 
-def test_inverse_fock_jacobian_is_one_sixteenth():
-    assert inverse_fock_jacobian_at_origin() == sp.Rational(1, 16)
+def test_inverse_conformal_factor_fourth_power_is_one_sixteenth():
+    assert inverse_conformal_factor_fourth_power_at_origin() == sp.Rational(1, 16)
 
 
 # ===========================================================================
@@ -148,7 +148,7 @@ def test_c2_formula_is_nontrivial_at_4_3():
     assert c2_formula(4, 3) != sp.Rational(1, 4)
     # The Paper 2 boundary term 1/40 is the Casimir factor times 1/Omega^4(0),
     # NOT the coupling (Observation about a composite).
-    assert sp.Rational(2, 5) * inverse_fock_jacobian_at_origin() == sp.Rational(1, 40)
+    assert sp.Rational(2, 5) * inverse_conformal_factor_fourth_power_at_origin() == sp.Rational(1, 40)
 
 
 # ===========================================================================
@@ -172,7 +172,10 @@ def test_matching_kappa_converges_to_minus_one_sixteenth():
 
 def test_bridge_matching_eight_is_two_times_coordination_not_fock_jacobian():
     """The matching route's '8' is 2 * d_max (bipartite Laplacian bound),
-    NOT the Fock Omega^4 Jacobian. Demonstrate the structural mismatch.
+    NOT the Fock Omega^4 factor.  Asserted: lambda_max -> 8 = 2 d_max with
+    d_max = 4, on a binary graph.  Documented (not asserted -- no assertion
+    can test the absence of a bridge): the two 16's are built from different
+    integers.
     """
     # 1) lambda_max -> 8 and 8 = 2 * d_max with d_max = 4 (coordination).
     lam40 = lambda_max_binary(40)
@@ -187,11 +190,9 @@ def test_bridge_matching_eight_is_two_times_coordination_not_fock_jacobian():
     edge_vals = lat.adjacency.data
     assert np.allclose(edge_vals, 1.0)   # binary graph: every coupling = 1
 
-    # 3) The matching kappa is -E_target / (2 d_max) = -0.5 / 8 = -1/16.
-    #    The geometric kappa is -1/Omega^4(0) = -1/16 (= -c^2(n,0)/4).
-    matching_kappa = -0.5 / (2 * dmax)            # = -1/16
-    geometric_kappa = -float(inverse_fock_jacobian_at_origin())  # = -1/16
-    assert abs(matching_kappa - geometric_kappa) < 1e-12
+    # 3) (documentation) The matching kappa is -E_target / (2 d_max)
+    #    = -0.5 / 8 = -1/16; the geometric kappa is -1/Omega^4(0) = -1/16
+    #    (= -c^2(n,0)/4).
 
     # 4) THE BRIDGE QUESTION. The two 16's are built from DIFFERENT integers:
     #    matching:  16 = 2 * (2 d_max) = 2 * 8     (with target |E|=1/2 folded in)
@@ -203,25 +204,11 @@ def test_bridge_matching_eight_is_two_times_coordination_not_fock_jacobian():
     #    (so 1/16 = c^2/4 = 1/Omega^4(0) is fixed).
     #    => They are independent; the agreement is a numerical coincidence.
 
-    # (a) geometric side is target-INDEPENDENT (no E_target appears):
-    assert inverse_fock_jacobian_at_origin() == sp.Rational(1, 16)
-
-    # (b) matching side is target-DEPENDENT: a different (counterfactual)
-    #     ground-state energy gives a different matching kappa, while the
-    #     geometric 1/16 is unchanged. This is the smoking gun that the
-    #     matching route does not *derive* 1/16 from the Fock geometry.
-    counterfactual_target = -0.3
-    counterfactual_kappa = counterfactual_target / (2 * dmax)   # = -0.3/8
-    assert abs(counterfactual_kappa - geometric_kappa) > 1e-3   # they diverge
-
-    # (c) matching side is also coordination-dependent: the geometric c^2
-    #     formula has NO coordination number in it. If the graph connectivity
-    #     changed (different d_max), lambda_max -> 2 d_max would change while
-    #     1/Omega^4(0) = 1/16 (and c^2(n,0) = 1/4) would not. No mechanism links them.
-    #     (We assert the structural fact: c^2 formula contains no graph degree.)
-    n, l = sp.symbols("n l", positive=True)
-    c2_sym = sp.Rational(1, 4) * (1 - (l * (l + 1)) / (n * (n + 1)))
-    assert c2_sym.free_symbols == {n, l}   # depends only on (n,l), not on d_max
+    # (a) the geometric side contains no E_target; (b) the matching side is
+    #     target-dependent: a counterfactual ground-state energy -0.3 gives a
+    #     matching kappa -0.3/8 while the geometric 1/16 is unchanged; (c) the
+    #     c^2 formula contains no graph degree, so a different d_max would
+    #     move lambda_max -> 2 d_max but not 1/Omega^4(0).  (Documentation.)
 
 
 def test_no_derivation_connects_omega_jacobian_to_graph_spectrum():
@@ -231,7 +218,7 @@ def test_no_derivation_connects_omega_jacobian_to_graph_spectrum():
     would consume the other's inputs. It does not.
     """
     # geometric route inputs: {Omega = 2p0/(p^2+p0^2), p0=1}  -> 1/16
-    geo = inverse_fock_jacobian_at_origin()
+    geo = inverse_conformal_factor_fourth_power_at_origin()
     # matching route inputs: {binary adjacency, E_target}      -> 1/16
     lam = lambda_max_binary(30)
     match = -0.5 / lam

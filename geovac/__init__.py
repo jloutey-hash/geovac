@@ -1,31 +1,17 @@
 """
-GeoVac: Topological Quantum Chemistry Solver
-=============================================
+GeoVac: spectral-graph discretization for quantum chemistry
+============================================================
 
-The first quantum chemistry solver that models chemical bonds as sparse
-topological bridges (information channels) rather than force fields.
+Sparse Hamiltonians built on the (n, l, m) label set of the S^3
+hyperspherical harmonics (Fock's projection; Papers 0, 7), with natural
+geometries for molecules (prolate spheroidal, hyperspherical, composed;
+Papers 11, 12, 13, 15, 17) and qubit-Hamiltonian export (Paper 14).
 
-**Revolutionary Approach:**
-- Bonds = Graph connectivity (not Coulomb potentials)
-- Binding energy = Eigenvalue lowering from wavefunction delocalization
-- Bond strength ∝ Number of bridge edges (N ≈ 4×max_n for H₂)
-
-**Performance:**
-- O(N) complexity scaling with >97% matrix sparsity
-- Mean-field accuracy: 0% error for H₂⁺, ~17% correlation error for H₂
-- Ultra-fast: Single atoms in <10ms, molecules in <50ms
-
-**Physics Classification:**
-GeoVac functions as a discrete Topological Hartree-Fock solver:
-- Single-electron systems: Exact (validated with H₂⁺)
-- Multi-electron systems: Mean-field quality (missing correlation energy)
-
-**Key Innovation:**
-Models chemistry as discrete topology where:
-- Nodes = quantum states |n,l,m⟩
-- Edges = kinetic coupling
-- Bridges = molecular bonds
-- Eigenvalues = energies
+The atomic default is the physical diagonal -Z^2/(2 n^2).  The legacy graph
+model kappa*(D - A) matches the ground state only in the band-edge limit
+(kappa = -1/16, an Observation); its excited states are not hydrogen's, and the old
+bridged-graph (LCAO concatenation) molecular picture is superseded
+(FCI-M guardrail: R-independent kinetic term, no equilibrium).
 
 Quick Start (Atoms):
 -------------------
@@ -47,11 +33,7 @@ Available Classes:
 - AtomicSolver: single-electron atomic solver
 - DiracHamiltonian: Relativistic spinor-based solver (experimental)
 
-Status:
--------
-- Single atoms: Quantitative (~0.01% error with calibration)
-- Molecules: Semi-quantitative (~35% error for H₂ at N=16 bridges)
-- Scaling: O(N) complexity, 97-99% sparse matrices
+Status: measured results live in the papers and docs/claims_register.md.
 """
 
 __version__ = '0.4.0'
@@ -84,11 +66,7 @@ __all__ = [
 # Package metadata
 UNIVERSAL_KINETIC_SCALE = -1/16  # matched energy scale kappa (an Observation, Papers 0/7; -0.0625)
 EXPERIMENTAL_HELIUM_ENERGY = -2.90338583  # Hartree (NIST reference)
-
-# Physical constants validated by H/He+/H2+ convergence analysis
 HYDROGEN_GROUND_STATE = -0.5  # Hartree (exact)
-H2_PLUS_USES_UNIVERSAL_SCALE = True  # 0% error confirms topology is correct
-H2_CORRELATION_ERROR = 0.17  # 17% missing from mean-field (expected)
 
 # ---------------------------------------------------------------------------
 # Deprecated legacy names (archived 2026-09-26 to

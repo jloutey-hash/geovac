@@ -70,8 +70,12 @@ by hat{K}(j) on each j-isotype block, and compression to H_{n_max} kills
 the j > j_max blocks), so the spectral form B_{n_max}(f) above is
 equivalent to the convolution form by the Plancherel theorem.
 
-Properties (proven in this module + tests)
-==========================================
+Properties of the convolution form P (K*f) P (Paper 38 Lemma L4)
+=================================================================
+
+The proofs below are for the convolution form.  The mass-weighted map this
+module implements is not unital (B(1) = Z^-1 I), so they do not apply to it;
+its tests are numerical records of the historical map.
 
 (a) Positivity
 --------------
@@ -108,7 +112,7 @@ on multiplication operators by Sobolev / Cauchy-Schwarz.
 For f in C^infty(S^3),
 
     || B_{n_max}(f) - P_{n_max} M_f P_{n_max} ||_op
-        <=  C_3 * gamma_{n_max} * || nabla f ||_infty,   (C_3 = 1; Lemma L4(c); the L5 pair built on it is withdrawn)
+        <=  (1/2) gamma_{n_max} * || nabla f ||_infty,   (unit-metric gradient, dual-Coxeter gamma; Paper 38 Lemma L4(c))
 
 where gamma_{n_max} -> 0 by L2 part (e), C_3 = 1 by L3, and
 P_{n_max} M_f P_{n_max} is the unweighted compression of f to O_{n_max}.
@@ -179,19 +183,17 @@ Honest limitations
 
 (ii) The Berezin map of Hawkins 2000 was constructed for KAHLER manifolds
      using the holomorphic structure on a coadjoint orbit. SU(2) = S^3 is
-     not Kahler (no almost-complex structure compatible with the round
-     metric), so we do NOT use the holomorphic / Toeplitz form. We use
+     odd-dimensional and so admits no almost-complex structure at all,
+     so we do NOT use the holomorphic / Toeplitz form. We use
      instead the central-Fejer-kernel-spectral-projection form, which is
      the natural analog on a NON-Kahler compact group (the L2 kernel is
      the SU(2) analog of the Fejer kernel on S^1 used in
      Connes-van Suijlekom 2021).
 
-(iii) The approximate-identity rate (c) is proved here using L2 part (e)
-      gamma_{n_max} -> 0 (qualitative). The asymptotic rate of
-      gamma_{n_max} is consistent with O(log n / n) but the closed-form
-      rate constant is not nailed down; this is a sub-task of L2/L5
-      assembly, not of L4 itself. The L4 statement (c) is proved with
-      gamma_{n_max} treated as the (qualitative) rate-supplying ingredient.
+(iii) The approximate-identity bound (c) uses only gamma_{n_max} -> 0.
+      Its asymptotics, gamma ~ (4/pi) log n / n with 4/pi the Fejer-moment
+      constant (a kernel constant, not a convergence rate), are Paper 38
+      Lemma L2(d.ii).
 
 References
 ==========

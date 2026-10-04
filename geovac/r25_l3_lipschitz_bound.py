@@ -1,8 +1,9 @@
 """SU(2) Lipschitz bound for the Camporesi-Higuchi Dirac (R2.5 Lemma L3).
 
 This module realizes Lemma L3 of the GH-convergence proof shape laid out
-in `debug/track_ts_a_gh_convergence_memo.md` Section 5.3. It proves and
-verifies a uniform operator-norm bound
+in `debug/track_ts_a_gh_convergence_memo.md` Section 5.3. It checks on a
+panel, on the doubled computational model (the proof is the compression
+argument of Paper 38 Lemma L3), a uniform operator-norm bound
 
     ||[D_CH, M_f]||_op   <=   C * ||nabla f||_infty
 

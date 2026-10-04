@@ -1,55 +1,75 @@
 {
  "target": "trunk",
  "units": {
+  "cite:papers/group1_operator_algebras/paper_32_spectral_triple.tex": {
+   "date": "2026-10-03",
+   "hash": "3de9b583a526a0fe",
+   "run": "FULL #13"
+  },
+  "cite:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": {
+   "date": "2026-10-03",
+   "hash": "90868a05fb02c2e9",
+   "run": "FULL #13"
+  },
   "cite:papers/group3_foundations/Paper_0_Geometric_Packing.tex": {
    "date": "2026-10-03",
    "hash": "eff18ea0bb112af4",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "cite:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": {
+   "date": "2026-10-03",
+   "hash": "cd9847be78c817b7",
+   "run": "FULL #13"
   },
   "cite:papers/group3_foundations/paper_1_spectrum.tex": {
    "date": "2026-10-03",
    "hash": "d5c9aa3ba6006b32",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "cite:papers/synthesis/group3_foundations_synthesis.tex": {
+   "date": "2026-10-03",
+   "hash": "193ac148904f3a92",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit": {
    "date": "2026-10-03",
    "hash": "1e35bb3671c20658",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Bounded commutators (regularity)": {
    "date": "2026-10-03",
    "hash": "4c11e2f86ab328a6",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Compact resolvent / finite summability": {
    "date": "2026-10-03",
    "hash": "80ea04df1e87daaf",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Order one": {
    "date": "2026-10-03",
    "hash": "095715a9df912c0a",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Order zero (involutive faithful representation)": {
    "date": "2026-10-03",
    "hash": "afd3273c2a355895",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Real structure": {
    "date": "2026-10-03",
    "hash": "4281c2481b4f8ce6",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Summary": {
    "date": "2026-10-03",
-   "hash": "b2994cd9794f0115",
-   "run": "FULL #12 (unchanged by remediation)"
+   "hash": "36926fe180326541",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Z _2 -grading": {
    "date": "2026-10-03",
    "hash": "3851ebc2517693ac",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Conclusion": {
    "date": "2026-10-03",
@@ -59,872 +79,987 @@
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Introduction": {
    "date": "2026-10-03",
    "hash": "060e5b28e9093be7",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Introduction / What this paper is and is not": {
    "date": "2026-10-03",
    "hash": "1773b3005bf95464",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Introduction / Why a spectral triple, and why now": {
    "date": "2026-10-03",
    "hash": "48eafb41d629ee45",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Marcolli--van Suijlekom Placement: Instance + GeoVac-Original Extensio": {
    "date": "2026-10-03",
    "hash": "b2196f08cd7bc7f1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Open Questions": {
    "date": "2026-10-03",
    "hash": "2caa29dacb83ddca",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Sub-sector Identification: Papers 25, 28, 30, 31": {
    "date": "2026-10-03",
    "hash": "797ae97dfd7c48b0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Sub-sector Identification: Papers 25, 28, 30, 31 / Paper 25 (Hopf graph as lattice gauge): the Cartan torus": {
    "date": "2026-10-03",
    "hash": "0169e7a8dc53d304",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Sub-sector Identification: Papers 25, 28, 30, 31 / Paper 28 (QED on S^3 ): the spectral action": {
    "date": "2026-10-03",
    "hash": "49d1e1efadd6268c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Sub-sector Identification: Papers 25, 28, 30, 31 / Paper 30 (SU(2) Wilson gauge): the full non-abelian sector": {
    "date": "2026-10-03",
    "hash": "5440a946fe2052ee",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Sub-sector Identification: Papers 25, 28, 30, 31 / Paper 31 (universal/Coulomb partition): the": {
    "date": "2026-10-03",
    "hash": "274f371df6aef7d4",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
-  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem / Krein space construction at signature (3, 1)": {
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Sub-sector Identification: Papers 25, 28, 30, 31 / Summary of sub-sector identification": {
    "date": "2026-10-03",
-   "hash": "ac697c97e941f323",
-   "run": "FULL #12 (unchanged by remediation)"
+   "hash": "8ecdc1b15f8c0680",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem": {
+   "date": "2026-10-03",
+   "hash": "e0edbc4d85d49925",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem / Frontier-of-field framing: GeoVac-internal walls vs.": {
+   "date": "2026-10-03",
+   "hash": "caa0720a38382279",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem / Lorentzian extension (descoped)": {
+   "date": "2026-10-03",
+   "hash": "0a3a1b0d64724ee3",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem / Sprint G3: Electroweak chirality co-location on S^3": {
    "date": "2026-10-03",
    "hash": "58df27cbaedf13b2",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem / Sprint H1: Higgs as inner fluctuation on the GeoVac": {
    "date": "2026-10-03",
-   "hash": "8c36f4bfda414acc",
-   "run": "FULL #12 (unchanged by remediation)"
+   "hash": "fa376ef2f7022ca6",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The -Source Case-Exhaustion Theorem / The unified U(1) SU(2) SU(3) gauge": {
+   "date": "2026-10-03",
+   "hash": "8dbda2a92157272a",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The Connes Data Recalled": {
    "date": "2026-10-03",
    "hash": "07c7fa9853fca91e",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The Coulomb/HO Asymmetry in Spectral-Triple Language": {
    "date": "2026-10-03",
    "hash": "47e5e2883954ef68",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The GeoVac Triple: Explicit Construction": {
    "date": "2026-10-03",
    "hash": "6568c0067c49c352",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The GeoVac Triple: Explicit Construction / Bounded commutators": {
    "date": "2026-10-03",
    "hash": "9b5979f3d9b2a0d5",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The GeoVac Triple: Explicit Construction / The Dirac operator D_ GV": {
+   "date": "2026-10-03",
+   "hash": "7e06af99384206c9",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The GeoVac Triple: Explicit Construction / The Hilbert space H _ GV": {
    "date": "2026-10-03",
    "hash": "e88970590689ccc4",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The GeoVac Triple: Explicit Construction / The algebra A _ GV": {
    "date": "2026-10-03",
    "hash": "1fdb538447109d85",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The GeoVac Triple: Explicit Construction / The triple, summarized": {
    "date": "2026-10-03",
    "hash": "c04269d517b46a3e",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::The K = (B + F - ) Formula in Spectral-Action": {
+   "date": "2026-10-03",
+   "hash": "fa7fd9e13792a6e6",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::front": {
    "date": "2026-10-03",
    "hash": "e2408cc2ec01f04e",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Acknowledgments": {
    "date": "2026-10-03",
    "hash": "6d769f357b39fb17",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Detailed derivation of Lemma lem:L2 (d.ii)": {
    "date": "2026-10-03",
    "hash": "45e345d5a4ead7f0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Discussion": {
    "date": "2026-10-03",
    "hash": "4d7935254b61dd36",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Discussion / Marcolli--van Suijlekom gauge-network framework": {
    "date": "2026-10-03",
    "hash": "5410801eadde95fe",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Discussion / Obstruction to a Riemannian--Hardy tensor product": {
    "date": "2026-10-03",
    "hash": "dfbd79815604a483",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Discussion / Open questions": {
+   "date": "2026-10-03",
+   "hash": "defe54efe4225b47",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Discussion / Why (2) was harder than the torus": {
+   "date": "2026-10-03",
+   "hash": "8891a8a34eed2674",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Introduction": {
+   "date": "2026-10-03",
+   "hash": "5dc893976bcfd3dd",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Introduction / The unconditional theorem: compression and lifted": {
+   "date": "2026-10-03",
+   "hash": "c864cfbaf01c0641",
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Main theorem": {
+   "date": "2026-10-03",
+   "hash": "0ced79141d3f6eac",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Setup": {
    "date": "2026-10-03",
    "hash": "600fabd08a21a966",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Setup / Peter--Weyl basis and the Avery 3-Y integral": {
    "date": "2026-10-03",
    "hash": "18344e4274e36760",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Setup / The round Camporesi--Higuchi spectral triple": {
+   "date": "2026-10-03",
+   "hash": "f5a5e8afa6607ced",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::Setup / Truncations": {
    "date": "2026-10-03",
    "hash": "3a835cc9801f471c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::The five lemmas": {
    "date": "2026-10-03",
    "hash": "e101b578e8b83071",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::The five lemmas / Lemma L1 ' : chirality-doubled operator system": {
    "date": "2026-10-03",
    "hash": "e60bd7ce07fc3884",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::The five lemmas / Lemma L2: central spectral Fej 'er kernel on SU(2)": {
+   "date": "2026-10-03",
+   "hash": "25127ddc1e440a10",
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::The five lemmas / Lemma L3: Lipschitz comparison with C_3 = 1": {
    "date": "2026-10-03",
    "hash": "c11a85bca143b488",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::The five lemmas / Lemma L4: Berezin reconstruction": {
    "date": "2026-10-03",
    "hash": "5fa99f70b6327ec7",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::The five lemmas / Lemma L5 (withdrawn): state-space Gromov--Hausdorff assembly": {
    "date": "2026-10-03",
    "hash": "50975f411a403b51",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex::front": {
+   "date": "2026-10-03",
+   "hash": "c756da3893da7833",
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Acknowledgments": {
    "date": "2026-10-03",
    "hash": "2376ce9ce773679b",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Angular Quantum Numbers from Uniform Density": {
    "date": "2026-10-03",
    "hash": "11f9086e6a9e9653",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Angular Quantum Numbers from Uniform Density / Isomorphism with spherical harmonics": {
    "date": "2026-10-03",
    "hash": "e7141824b0ac5cdc",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Angular Quantum Numbers from Uniform Density / The angular capacity of shell k": {
    "date": "2026-10-03",
    "hash": "5bbed575169fb705",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Angular Quantum Numbers from Uniform Density / What the construction produces": {
    "date": "2026-10-03",
    "hash": "ebc73059572c060b",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Conclusions": {
    "date": "2026-10-03",
    "hash": "64a062e643c4e3d5",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Discussion": {
    "date": "2026-10-03",
    "hash": "ed27754aea04566c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Discussion / Historical context": {
    "date": "2026-10-03",
    "hash": "998ff3520ecdbd3a",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Discussion / Scope of the geometric analogy": {
    "date": "2026-10-03",
    "hash": "819c10a5ae83f021",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Discussion / The kinematic--dynamic distinction": {
    "date": "2026-10-03",
    "hash": "533f7755f98d972a",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Graph Topology and What Its Spectrum Carries": {
    "date": "2026-10-03",
    "hash": "828a9a7038515076",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Graph Topology and What Its Spectrum Carries / Edge set": {
    "date": "2026-10-03",
    "hash": "ad0de760e1aef3bd",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Graph Topology and What Its Spectrum Carries / Spectral bound": {
    "date": "2026-10-03",
    "hash": "e62ed6daed2b24ef",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Graph Topology and What Its Spectrum Carries / Vertex set": {
    "date": "2026-10-03",
    "hash": "baab01e174e2bc3e",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Introduction": {
    "date": "2026-10-03",
    "hash": "10cd5bc6a1f70de0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Scope and Limitations": {
    "date": "2026-10-03",
    "hash": "3b5668b4ea4cb341",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Scope and Limitations / Choices beyond the axioms": {
    "date": "2026-10-03",
    "hash": "a23820257a584473",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Scope and Limitations / What the construction does not provide": {
    "date": "2026-10-03",
    "hash": "5f142887b5ef5c28",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Scope and Limitations / What the construction provides": {
    "date": "2026-10-03",
    "hash": "14d7b31d5f9ac501",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Structural Correspondences: n , Spin, and 2n^2": {
    "date": "2026-10-03",
    "hash": "925575498a6b8221",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Structural Correspondences: n , Spin, and 2n^2 / A remark on the axioms": {
    "date": "2026-10-03",
    "hash": "b05dc2ec443c27d1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Structural Correspondences: n , Spin, and 2n^2 / The factor of 2 and orientability": {
    "date": "2026-10-03",
    "hash": "fbabe04aa1ef0cd2",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::Structural Correspondences: n , Spin, and 2n^2 / The principal quantum number as cumulative grouping": {
    "date": "2026-10-03",
    "hash": "f70cf1fefc92b24e",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::The Packing Construction": {
    "date": "2026-10-03",
    "hash": "b91f57060b831b06",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::The Packing Construction / Algorithm": {
    "date": "2026-10-03",
    "hash": "b59914f892f71236",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::The Packing Construction / Axioms": {
    "date": "2026-10-03",
    "hash": "2da0ddd51982a366",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::The Packing Construction / Resulting structure": {
    "date": "2026-10-03",
    "hash": "92dafb7078862d2f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::The Packing as Recurring Angular Cross-Section": {
    "date": "2026-10-03",
    "hash": "310870fc1086670d",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::The Packing as Recurring Angular Cross-Section / The node structure as combinatorial invariant": {
    "date": "2026-10-03",
    "hash": "919c638fe4f952a1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_0_Geometric_Packing.tex::front": {
    "date": "2026-10-03",
    "hash": "28c3a46ac7476f62",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Conformal Laplacian Derivation": {
    "date": "2026-10-03",
    "hash": "df4442e18df3c773",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions": {
    "date": "2026-10-03",
    "hash": "242cb61be7ecfef9",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / Concluding Remarks": {
    "date": "2026-10-03",
    "hash": "ae3b74e2421bd479",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / Extension to Molecules": {
    "date": "2026-10-03",
    "hash": "dbc142bcef153f2c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / Implications for the Discrete Model": {
    "date": "2026-10-03",
    "hash": "218162d059adc9b8",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / Limitations": {
+   "date": "2026-10-03",
+   "hash": "299baaa722df49fc",
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / Relation to the Coulomb Potential": {
    "date": "2026-10-03",
    "hash": "2d14e0c2c7839bf2",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / Summary of Results": {
    "date": "2026-10-03",
    "hash": "4a121528b654b18f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Discussion and Conclusions / The Scale-Invariance Property": {
    "date": "2026-10-03",
    "hash": "eb4dc7e763b80383",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Generalization to N Electrons": {
    "date": "2026-10-03",
    "hash": "d97a63c8f8e99bc5",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Generalization to N Electrons / Fermionic Statistics and Ground-State Selection": {
    "date": "2026-10-03",
    "hash": "599092294185d152",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Generalization to N Electrons / Implications for the Dimensionless Vacuum": {
    "date": "2026-10-03",
    "hash": "cde7fb88723413d4",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Generalization to N Electrons / The Angular Manifold and Its Isometry Group": {
    "date": "2026-10-03",
    "hash": "799e267bce371274",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Generalization to N Electrons / The Hierarchy of Spheres": {
    "date": "2026-10-03",
    "hash": "7af89591913fbab8",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Introduction": {
    "date": "2026-10-03",
    "hash": "fbb48a57ce9448f0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Operator Equivalence on the Continuum S^3": {
    "date": "2026-10-03",
    "hash": "1eca84b9989bd728",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Operator Equivalence on the Continuum S^3 / Conformal Decomposition of the Wavefunction": {
    "date": "2026-10-03",
    "hash": "6e401f1168f42fc3",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Operator Equivalence on the Continuum S^3 / The Conformal Laplacian Identity": {
    "date": "2026-10-03",
    "hash": "0dbc670af9c4c47c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Operator Equivalence on the Continuum S^3 / The Dimensionless Spectrum": {
    "date": "2026-10-03",
    "hash": "4223eaaa9e162901",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Operator Equivalence on the Continuum S^3 / The Energy Shell: Projecting to Physics": {
    "date": "2026-10-03",
    "hash": "a7d4b6acca443aa0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Operator Equivalence on the Continuum S^3 / Verification: Constants and Eigenfunctions": {
    "date": "2026-10-03",
    "hash": "00ca81dbed058fa7",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Symbolic Test Suite Summary": {
    "date": "2026-10-03",
    "hash": "b5100e24c8a8dd2c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Symbolic Test Suite Summary / Module I: Stereographic Projection Geometry ( tests/test _fock _projec": {
    "date": "2026-10-03",
    "hash": "19f45043c0661066",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Symbolic Test Suite Summary / Module II: Conformal Laplacian and Eigenvalues ( tests/test _fock _lap": {
    "date": "2026-10-03",
    "hash": "89bfded1a99ab216",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Symbolic Test Suite Summary / Supplement: the Coulomb kernel ( tests/test _paper7 _fock _kernel.py )": {
    "date": "2026-10-03",
    "hash": "56f5a34f9347f1fc",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Conformal Lens: Stereographic Projection": {
    "date": "2026-10-03",
    "hash": "7120b6a82d68d598",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Conformal Lens: Stereographic Projection / Fock's Mapping": {
    "date": "2026-10-03",
    "hash": "8511591b68717a5c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Conformal Lens: Stereographic Projection / Inverse Projection": {
    "date": "2026-10-03",
    "hash": "180d8a37e607a8af",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Conformal Lens: Stereographic Projection / Physical Interpretation of p_0": {
    "date": "2026-10-03",
    "hash": "f3244649b0a462f2",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Conformal Lens: Stereographic Projection / The Chordal Distance Identity": {
    "date": "2026-10-03",
    "hash": "6f23f341e6c854bd",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Conformal Lens: Stereographic Projection / The Unit Sphere Constraint": {
    "date": "2026-10-03",
    "hash": "9057c6ad31b7c8d8",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Dimensionless Graph": {
    "date": "2026-10-03",
    "hash": "1421b532bad567b4",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Dimensionless Graph / Intrinsic Dimensionlessness": {
    "date": "2026-10-03",
    "hash": "f88afb35f5b20130",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Dimensionless Graph / The Label Lattice and the Unit S^3 (No Continuum Limit of L )": {
    "date": "2026-10-03",
    "hash": "ebb81352f9048a92",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::The Dimensionless Graph / The Paraboloid Lattice": {
    "date": "2026-10-03",
    "hash": "bdd18ac617ecb854",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Two-Electron Repulsion on S^3": {
    "date": "2026-10-03",
    "hash": "bf38b4cd2465e0cf",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Two-Electron Repulsion on S^3 / Fock Projection onto S^3": {
    "date": "2026-10-03",
    "hash": "075fb15c3fbdc165",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Two-Electron Repulsion on S^3 / Implications": {
    "date": "2026-10-03",
    "hash": "dd898bd1483350ac",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Two-Electron Repulsion on S^3 / Momentum-Space Representation": {
    "date": "2026-10-03",
    "hash": "3238432e5dbd4547",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Two-Electron Repulsion on S^3 / Natural Projection Scales": {
    "date": "2026-10-03",
    "hash": "8fc1a0cde840ce76",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::Two-Electron Repulsion on S^3 / Structural Result: Node Property vs. Edge Property": {
    "date": "2026-10-03",
    "hash": "53cfa7f1832f822b",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::What is New vs. What is Known": {
    "date": "2026-10-03",
    "hash": "f3b0026d9133d79f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::What is New vs. What is Known / Known Results (Prior Work)": {
    "date": "2026-10-03",
    "hash": "06ca7dc2211362a8",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::What is New vs. What is Known / New Contributions of This Work": {
    "date": "2026-10-03",
    "hash": "70703bfb73f61a34",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex::front": {
    "date": "2026-10-03",
    "hash": "19f853ef93fae0ac",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Computational Details": {
    "date": "2026-10-03",
    "hash": "b2ac9636db4b2b65",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Computational Details / Graph Laplacian Diagonalization": {
    "date": "2026-10-03",
    "hash": "2c78b1741ca319a1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Computational Details / Lattice Construction": {
    "date": "2026-10-03",
    "hash": "1e53933925997498",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Computational Details / Log-Holonomy Calculation": {
    "date": "2026-10-03",
    "hash": "0fc1256fa14c145f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Conclusion": {
    "date": "2026-10-03",
    "hash": "c32d87be8986183f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Discussion: Algebraic versus Graph-Geometric Content": {
    "date": "2026-10-03",
    "hash": "ab9f2346a548606d",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Discussion: Algebraic versus Graph-Geometric Content / Artifact vs. Physics: Drawing the Line": {
    "date": "2026-10-03",
    "hash": "5d87520419a4eb22",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Discussion: Algebraic versus Graph-Geometric Content / The Absence of Fine Structure": {
    "date": "2026-10-03",
    "hash": "808a1167598e4caf",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Discussion: Algebraic versus Graph-Geometric Content / The Two Kinds of Content": {
    "date": "2026-10-03",
    "hash": "3a08f1e776a93f0c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Discussion: Algebraic versus Graph-Geometric Content / The Wavefunction as Distribution": {
    "date": "2026-10-03",
    "hash": "675c54e62db71ee5",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Discussion: Algebraic versus Graph-Geometric Content / Why Calibration Fails": {
    "date": "2026-10-03",
    "hash": "55c3ca93ac61315b",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Geometric Phase Structure of the Lattice": {
    "date": "2026-10-03",
    "hash": "82fc74f64cab47b6",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Geometric Phase Structure of the Lattice / Flat Connection for Real Operators": {
    "date": "2026-10-03",
    "hash": "514a4039134320dd",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Geometric Phase Structure of the Lattice / Log-Holonomy of Edge Weights": {
    "date": "2026-10-03",
    "hash": "c299bc04e2070fbb",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Geometric Phase Structure of the Lattice / Toward a Genuine Geometric Phase": {
    "date": "2026-10-03",
    "hash": "fb6efcfd816c4f15",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Introduction: The Texture of the Vacuum": {
    "date": "2026-10-03",
    "hash": "2e4b20713328c749",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Limitations and Next Steps: Missing Photon Degrees of Freedom": {
    "date": "2026-10-03",
    "hash": "6c92e710bef316e7",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Mathematical Definitions": {
    "date": "2026-10-03",
    "hash": "458afae48b2a028c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Mathematical Definitions / Berry Phase and Log-Holonomy": {
    "date": "2026-10-03",
    "hash": "c5f001e8f2889654",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Mathematical Definitions / Weighted Degree Matrix": {
    "date": "2026-10-03",
    "hash": "471681482773ce5c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::Supplementary Data": {
    "date": "2026-10-03",
    "hash": "b63aaec2f75b8ba1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Algebraic Skeleton: Exact Quantum Numbers": {
    "date": "2026-10-03",
    "hash": "09add86a2915a97f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Algebraic Skeleton: Exact Quantum Numbers / Quantum-Number Reproduction": {
    "date": "2026-10-03",
    "hash": "7345c0faa7cb5208",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Geometric Flesh: Topological Artifacts of Finite Truncation": {
    "date": "2026-10-03",
    "hash": "0dc0417cc489425b",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Geometric Flesh: Topological Artifacts of Finite Truncation / Convergence Analysis": {
    "date": "2026-10-03",
    "hash": "84a286520d90d7cf",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Geometric Flesh: Topological Artifacts of Finite Truncation / Differential Connectivity by Angular Momentum": {
    "date": "2026-10-03",
    "hash": "cf3d3835529799e9",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Geometric Flesh: Topological Artifacts of Finite Truncation / Physical Interpretation": {
    "date": "2026-10-03",
    "hash": "0229f11df2dabd8d",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Geometric Flesh: Topological Artifacts of Finite Truncation / The Graph Laplacian Hamiltonian": {
    "date": "2026-10-03",
    "hash": "1a7206b84ae585ea",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::The Geometric Flesh: Topological Artifacts of Finite Truncation / The Splitting as Discretization Artifact": {
    "date": "2026-10-03",
    "hash": "91faed8bc28c98c0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/group3_foundations/paper_1_spectrum.tex::front": {
    "date": "2026-10-03",
    "hash": "53c7de570f4f44f1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Acknowledgments": {
    "date": "2026-10-03",
    "hash": "62ff517407a51d30",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Angular Sparsity as a Structural Theorem": {
    "date": "2026-10-03",
    "hash": "d3ce0b81d5a473a7",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Angular Sparsity as a Structural Theorem / Operational consequence": {
    "date": "2026-10-03",
    "hash": "b931f9217b075291",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Angular Sparsity as a Structural Theorem / Spinor extension": {
    "date": "2026-10-03",
    "hash": "5cbd3cbc2f212958",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Angular Sparsity as a Structural Theorem / Universality across potentials": {
    "date": "2026-10-03",
    "hash": "1f6b6448861260b0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::Conclusion": {
+   "date": "2026-10-03",
+   "hash": "b92010d8eabfda43",
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::Introduction": {
+   "date": "2026-10-03",
+   "hash": "c51b7c9500ce2b0e",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Open Questions and Outlook": {
    "date": "2026-10-03",
    "hash": "02706118b0c35788",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Open Questions and Outlook / Cross-manifold extensions": {
    "date": "2026-10-03",
    "hash": "c678d9dc5c6ef5f3",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::Open Questions and Outlook / The combination rule": {
+   "date": "2026-10-03",
+   "hash": "375fb747c8c06f23",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Open Questions and Outlook / The elliptic layer of the cosmic Galois": {
    "date": "2026-10-03",
    "hash": "5ef221cd4911e463",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::Open Questions and Outlook / The multi-focal composition wall": {
+   "date": "2026-10-03",
+   "hash": "2b083614f33b7b57",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Open Questions and Outlook / The second packing axiom (W3)": {
    "date": "2026-10-03",
    "hash": "1e30e58b6325a6ac",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::Quantum Dynamics on the Graph": {
    "date": "2026-10-03",
    "hash": "b2afcb24ccedbba9",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Bargmann--Segal Lattice and the Coulomb/HO Asymmetry": {
    "date": "2026-10-03",
    "hash": "4fa7a51324e39a13",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::The Bargmann--Segal Lattice and the Coulomb/HO Asymmetry / The Coulomb/HO asymmetry: a seven-layer stratification": {
+   "date": "2026-10-03",
+   "hash": "7a749322c819a122",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Bargmann--Segal Lattice and the Coulomb/HO Asymmetry / The HO rigidity theorem": {
    "date": "2026-10-03",
    "hash": "47d3e1ce7893c5bf",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Bargmann--Segal Lattice and the Coulomb/HO Asymmetry / The discrete HO lattice on S^5": {
    "date": "2026-10-03",
    "hash": "5e999bc500e5349c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Bargmann--Segal Lattice and the Coulomb/HO Asymmetry / What the asymmetry says about transcendentals": {
    "date": "2026-10-03",
    "hash": "a86eb2b704b35f0f",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Exchange Constants Taxonomy": {
    "date": "2026-10-03",
    "hash": "d5d2f97317df51e2",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::The Exchange Constants Taxonomy / Seven categories (as in Paper 18)": {
+   "date": "2026-10-03",
+   "hash": "d81029d983daeaf4",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Exchange Constants Taxonomy / The Layer-1 / Layer-2 split": {
    "date": "2026-10-03",
    "hash": "db4386ff83f1a243",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::The Exchange Constants Taxonomy / The master Mellin engine": {
+   "date": "2026-10-03",
+   "hash": "3d0be96ed2b44e94",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Packing Construction and the Graph": {
    "date": "2026-10-03",
    "hash": "93cce68dccc38a30",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Packing Construction and the Graph / From the packing to the graph": {
    "date": "2026-10-03",
    "hash": "720acbaa4ac61ea0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Packing Construction and the Graph / Status of the packing-versus-physics question": {
    "date": "2026-10-03",
    "hash": "0570252191bef367",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Packing Construction and the Graph / The kinetic constant = -1/16": {
    "date": "2026-10-03",
    "hash": "679fd7a852db2d82",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Reconvergence: Two-Body Structure, Periods, and the": {
    "date": "2026-10-03",
    "hash": "d82f5e8997152ef5",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Reconvergence: Two-Body Structure, Periods, and the / Periods (Paper 55)": {
    "date": "2026-10-03",
    "hash": "45019ab3bbef4fd0",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Reconvergence: Two-Body Structure, Periods, and the / The Tannakian substrate and the cosmic-Galois comparison": {
    "date": "2026-10-03",
    "hash": "a1030e414d44d7c1",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Reconvergence: Two-Body Structure, Periods, and the / The forced/free seam (Paper 57)": {
    "date": "2026-10-03",
    "hash": "91135391f58ee22a",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Reconvergence: Two-Body Structure, Periods, and the / Two-body structure (Paper 54)": {
    "date": "2026-10-03",
    "hash": "119dcc93e5cf23fc",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence": {
    "date": "2026-10-03",
    "hash": "ca8a997166363dc6",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence / Multi-electron extension to S^ 3N-1": {
    "date": "2026-10-03",
    "hash": "6897392dd403cace",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence / Scale-freedom of the substrate and its reflection in conformal field t": {
    "date": "2026-10-03",
    "hash": "028ed1bf3acf7eba",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
+  },
+  "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence / Schr \"odinger recovery: labels, not a continuum limit of L": {
+   "date": "2026-10-03",
+   "hash": "58850cd09fca0941",
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence / The 18 symbolic checks": {
    "date": "2026-10-03",
    "hash": "fcab2d0321f94711",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence / The Fock projection and the chordal distance identity": {
    "date": "2026-10-03",
    "hash": "7cc855d1f459472d",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The S^3 Conformal Equivalence / What Paper 7 does and does not claim": {
    "date": "2026-10-03",
    "hash": "2ed314ea2630a01c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Universal/Coulomb Partition": {
    "date": "2026-10-03",
    "hash": "6a6e2eb6682b7420",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Universal/Coulomb Partition / Status as a spectral-triple-language reformulation": {
    "date": "2026-10-03",
    "hash": "7d58d99269761a71",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Universal/Coulomb Partition / The A/D split": {
    "date": "2026-10-03",
    "hash": "7e1265f44fc5587c",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::The Universal/Coulomb Partition / Why the partition matters operationally": {
    "date": "2026-10-03",
    "hash": "5156b0472c1bd766",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   },
   "prose:papers/synthesis/group3_foundations_synthesis.tex::front": {
    "date": "2026-10-03",
    "hash": "861a88f844199157",
-   "run": "FULL #12 (unchanged by remediation)"
+   "run": "FULL #13"
   }
  }
 }

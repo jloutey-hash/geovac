@@ -1,16 +1,15 @@
 """
-Test: Origin of the Universal Constant K = -1/16
-=================================================
+Test: Origin of the matched scale kappa = -1/16
+================================================
 
 Precision audit of the claim that -1/16 is a "topological invariant."
 
 This test answers the question: does -1/16 emerge from the topology alone,
-or is it the unique scale factor that maps the dimensionless graph spectrum
-onto the Rydberg formula?
+or is it the scale factor that sends the graph's band edge to -1/2?
 
 Method:
-  1. Construct the graph Laplacian for hydrogen at several max_n values
-  2. Find the lowest non-trivial eigenvalue at each resolution
+  1. Construct the graph Laplacian at several max_n values
+  2. Find the extremal eigenvalue lambda_max at each resolution
   3. Compute the scale factor needed to match E_1 = -0.5 Ha exactly
   4. Plot convergence and fit the limiting value
   5. Report the honest answer
@@ -184,8 +183,9 @@ class TestUniversalConstantOrigin:
         r2 = compute_required_scale_factor(max_n=20)
 
         # Key observation: kappa changes with max_n because the graph
-        # eigenvalues change. In the continuum limit, kappa -> -1/16.
-        # This proves kappa is a CONVERGENCE PROPERTY, not a topological constant.
+        # eigenvalues change. As max_n -> infinity (lambda_max -> 8, the band
+        # edge), kappa -> -1/16.
+        # kappa is a matched scale whose required value tends to -1/16 as lambda_max -> 8.
         kappa_10 = r1['kappa_required']
         kappa_20 = r2['kappa_required']
 
@@ -208,14 +208,10 @@ class TestUniversalConstantOrigin:
 
         The eigenvalues of kappa*(D-A) all cluster near -0.5 Ha,
         without clear separation between n=1, n=2, n=3 shells.
-        This is because the pure Laplacian encodes kinetic structure
-        but not the -Z/n^2 potential energy (node weights).
 
         This finding is consistent with the honest framing: the graph
-        topology provides the SPECTRAL FRAMEWORK, but one physical
-        input (the kinetic scale kappa) is required to set the energy
-        scale. The shell structure requires additional encoding
-        (node weights or topological edge weights).
+        spectrum is not the hydrogen spectrum, and kappa only matches the
+        band edge to -1/2.
         """
         from geovac import AtomicSolver
 
@@ -224,7 +220,7 @@ class TestUniversalConstantOrigin:
         energies, _ = solver.compute_ground_state(n_states=10)
         energies = np.sort(energies)
 
-        # All eigenvalues should be negative (bound states)
+        # All eigenvalues should be negative
         assert np.all(energies < 0), "All eigenvalues should be negative"
 
         # The ground state should be near -0.5 Ha
@@ -243,7 +239,7 @@ class TestUniversalConstantOrigin:
 
     def test_z_scaling_preserves_kappa(self):
         """
-        The same kappa = -1/16 works for all Z when scaled as kappa * Z².
+        kappa * Z^2 * lambda_max matches -Z^2/2 by construction for every Z.
 
         This checks only the legacy graph model's Z^2 scaling of its
         matched ground-state scale (kappa * Z^2 * lambda_max); kappa is a
@@ -278,7 +274,7 @@ def generate_full_report() -> str:
     """
     lines = []
     lines.append("=" * 74)
-    lines.append("PRECISION AUDIT: Origin of the Universal Constant K = -1/16")
+    lines.append("PRECISION AUDIT: Origin of the matched scale kappa = -1/16")
     lines.append("=" * 74)
     lines.append("")
 
@@ -328,7 +324,7 @@ def generate_full_report() -> str:
     # === Part 3: Z-scaling verification ===
     lines.append("PART 3: Z-Scaling Verification")
     lines.append("-" * 74)
-    lines.append("Same kappa = -1/16 works for all Z (scaled by Z^2).")
+    lines.append("kappa*Z^2*lambda_max matches -Z^2/2 by construction for every Z.")
     lines.append("")
 
     from geovac import AtomicSolver
@@ -357,33 +353,25 @@ def generate_full_report() -> str:
     lines.append("     whose eigenvalues are determined purely by graph connectivity.")
     lines.append("     This is genuinely topological.")
     lines.append("")
-    lines.append("  2. The RATIOS between eigenvalues are topological invariants.")
-    lines.append("     As max_n -> infinity, these ratios converge to 1:4:9:16:...")
-    lines.append("     (the Rydberg ratios). This convergence IS a topological")
-    lines.append("     property of the graph's continuum limit (unit S3).")
+    lines.append("  2. The graph spectrum is NOT the hydrogen spectrum: D - A has")
+    lines.append("     no l-changing edge, so it splits into max_n disconnected")
+    lines.append("     l-blocks with spectrum in [0, 8] (Paper 7, WALL). The")
+    lines.append("     n^2 - 1 ladder is the S3 Casimir on the labels, not a graph limit.")
     lines.append("")
-    lines.append("  3. The ABSOLUTE SCALE kappa = -1/16 is the unique constant")
-    lines.append("     that maps these dimensionless eigenvalues onto the")
-    lines.append("     dimensionful Rydberg energy levels E_n = -1/(2n^2) Ha.")
-    lines.append("     This mapping requires EXTERNAL INPUT: the physical energy")
+    lines.append("  3. kappa = -1/16 sends the band edge (8) to E_1 = -1/2 Ha;")
+    lines.append("     it does not map the graph spectrum onto the Rydberg ladder.")
+    lines.append("     This match requires EXTERNAL INPUT: the physical energy")
     lines.append("     scale (the Hartree).")
     lines.append("")
-    lines.append("  4. Paper 0's derivation of -1/16 from information packing")
-    lines.append("     (2n^2 states, shell structure) provides a CONSISTENCY")
-    lines.append("     argument: given the graph's degeneracy structure, -1/16")
-    lines.append("     is the unique value consistent with recovering hydrogen")
-    lines.append("     spectroscopy. But this is a matching condition, not an")
-    lines.append("     independent derivation from topology alone.")
+    lines.append("  4. -1/16 maps the extremal eigenvalue (band edge 8) to -1/2;")
+    lines.append("     its equality with the Fock-Jacobian 1/16 is an Observation")
+    lines.append("     (Papers 0/7), a matching condition, not a derivation.")
     lines.append("")
     lines.append("RECOMMENDED FRAMING:")
-    lines.append("  '-1/16 is the unique kinetic scale consistent with the")
-    lines.append("  Rydberg formula and the graph topology. It is not")
-    lines.append("  independently derived from topology alone -- it is the")
-    lines.append("  bridge between the dimensionless graph and dimensionful")
-    lines.append("  physics. Its universality across all Z (via Z^2 scaling)")
-    lines.append("  confirms that the graph topology correctly encodes the")
-    lines.append("  RELATIVE structure of quantum mechanics; the absolute")
-    lines.append("  scale requires one physical input.'")
+    lines.append("  '-1/16 is the matched scale that sends the graph's band")
+    lines.append("  edge to the hydrogen ground state (an Observation). The")
+    lines.append("  bridge to dimensionful energies is Fock's energy shell")
+    lines.append("  p0^2 = -2E, not the graph spectrum.'")
     lines.append("")
 
     # Convergence data for potential plotting

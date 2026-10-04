@@ -27,10 +27,8 @@ carry epsilon'' = (J gamma = sign * gamma J), shown in brackets:
     KO 2:  (-, +)[-]     KO 6:  (+, +)[-]         (Standard Model)
     KO 3:  (-, +)        KO 7:  (+, +)
 
-(Corrected 2026-09-05: rows 1,2,5,6 previously mis-stated epsilon'/the
-even-row signs; the code below uses only the KO-3 row, which was and is
-correct, so nothing computed was affected. Source: van Suijlekom,
-Noncommutative Geometry and Particle Physics, Table 3.1.)
+(Source: van Suijlekom, Noncommutative Geometry and Particle Physics,
+Table 3.1.)
 
 For S^3 (KO-dim 3) the conditions are J^2 = -1 AND J D = +D J. This is
 already the convention adopted in Paper 32 §IV.4 (Prop. reality),
@@ -39,68 +37,27 @@ matching the standard Camporesi-Higuchi charge conjugation on S^3 spinors.
 Continuum charge conjugation on S^3
 -----------------------------------
 
-On the Camporesi-Higuchi spinor bundle S^3 with the basis labeled by
-(n_fock, kappa, m_j) (or equivalently (n_fock, l, m_j, chirality) in the
-full Dirac sector), the standard charge conjugation acts as
+On the chirality-doubled basis (n_fock, l, m_j, chi) of
+`geovac/full_dirac_operator_system.py` (and on the Weyl basis
+(n_fock, l, m_j)), J acts as
 
-    J |n_fock, kappa, m_j, chirality> = sigma(n, kappa, m_j) *
-                                        |n_fock, -kappa, -m_j, chirality>
+    J |n_fock, l, m_j, chi> = sigma(l, m_j) * |n_fock, l, -m_j, chi>
 
-where sigma(.) is a phase determined by the spinor representation of
-Spin(3) = SU(2) [Friedrich, "Dirac operators in Riemannian geometry",
-Ch. 1; Camporesi-Higuchi 1996].
-
-Three structural facts force this form:
+with the chirality label held FIXED: J does not flip kappa or chi.
+(The truthful Dirac is D = chi (n_fock + 1/2), so a chirality flip would
+give J D = -D J, contradicting the KO-3 sign epsilon' = +1.)
 
 (a) J is ANTILINEAR. We realize this in code as a python operation
     J(psi) = U @ conj(psi)  where U is a fixed unitary matrix. The
     antilinearity ensures J^2 = U @ conj(U @ conj(psi)) = U @ conj(U) @ psi.
     For J^2 = -1 we need U @ conj(U) = -I, i.e. U is conjugate-skew.
 
-(b) J flips kappa -> -kappa. This is the sigma -> -sigma flip on the
-    spin index (large/small component swap) and l -> l unchanged
-    (spatial parity is separate). On the Weyl sector with j = l + 1/2
-    (kappa < 0) only, the kappa-flip would send us OUT of the Weyl
-    sector into the anti-Weyl j = l - 1/2 (kappa > 0) chain. So J on
-    the WEYL sector requires the FULL DIRAC sector to be defined at all.
-
-(c) J flips m_j -> -m_j. This is the "time-reversal" component of the
+(b) J flips m_j -> -m_j. This is the "time-reversal" component of the
     charge conjugation, equivalent to anti-symmetric Pauli matrix
     multiplication on the spin index.
 
-The phase sigma(.) is determined modulo overall phase by demanding
-J^2 = -1. For half-integer m_j states, the standard convention is
-
-    sigma(n, kappa, m_j) = (-1)^(j + m_j)   = (-1)^(2l + 1 + m_j) / 2)
-                          (or (-1)^(j - m_j) -- conventions vary)
-
-with the property that sigma(n, -kappa, -m_j) * conj(sigma(n, kappa, m_j))
-= -1 = J^2 sign.
-
-For the FULL DIRAC sector (Weyl + anti-Weyl), J acts within each
-chirality sector but flips the (kappa, m_j) labels:
-
-    J |n_fock, l, m_j, chi=+1> = sigma+ |n_fock, l, -m_j, chi=+1>  ON ONE
-                                                                   chirality
-    J |n_fock, l, m_j, chi=-1> = sigma- |n_fock, l, -m_j, chi=-1>
-
-Wait -- this is the WEYL j = l + 1/2 chain only. The full Dirac sector
-in the implementation `geovac/full_dirac_operator_system.py` doubles
-the SAME (l, m_j) chain (adding +/- chirality eigenvalue to the Dirac).
-The kappa-flip in that doubled basis is a swap of (l, m_j) <-> (l, -m_j)
-combined with a chirality-block permutation determined by whether one
-adopts the "kappa flips chirality" convention (full Dirac with both
-kappa signs at every level) or the "chirality is independent" convention
-(both kappa = -(l+1) signs, with chi an additional Z_2 grading).
-
-We adopt the SECOND convention to match `geovac/full_dirac_operator_system`.
-J then acts as
-
-    J |n_fock, l, m_j, chi> = sigma(l, m_j) * |n_fock, l, -m_j, chi>
-
-i.e. block-diagonal in chirality, with the m_j -> -m_j flip and a phase
-inside each block. This is the natural realization on the
-Weyl-doubled-by-chirality Hilbert space of the full_dirac module.
+The phase sigma(l, m_j) = i^(2 m_j) (-1)^l is fixed (modulo overall phase)
+by demanding J^2 = -1: sigma(l, -m_j) * conj(sigma(l, m_j)) = -1.
 
 Computational implementation
 ============================
@@ -366,17 +323,16 @@ class RealStructure:
     def apply_to_operator(self, op: np.ndarray) -> np.ndarray:
         """Apply the J-conjugation J op J^{-1} to a linear operator op.
 
-        For an antilinear J with J = U K and J^{-1} = K U^{-1} = K U^*
+        For an antilinear J with J = U K and J^{-1} = K U^{-1} = K U^dagger
         (since U is unitary):
 
-            J op J^{-1} (psi) = J op K U^* psi
-                              = U conj(op K U^* psi)
-                              = U conj(op) conj(K U^* psi)
-                              = U conj(op) U^T psi
+            J op J^{-1} (psi) = J op conj(U^dagger psi)
+                              = U conj(op conj(U^dagger psi))
+                              = U conj(op) U^dagger psi
 
-        So J op J^{-1} = U conj(op) U^T as a linear operator.
+        So J op J^{-1} = U conj(op) U^dagger as a linear operator.
         """
-        return self.U @ np.conj(op) @ self.U.T
+        return self.U @ np.conj(op) @ self.U.conj().T
 
     def J_squared_matrix(self) -> np.ndarray:
         """Compute J^2 as a linear operator: J^2 = U conj(U).
@@ -507,11 +463,11 @@ def verify_order_zero(J: RealStructure,
     For an antilinear J realized as J = U K, the J-conjugation of a
     linear operator b is
 
-        J b J^{-1} = U conj(b) U^T.
+        J b J^{-1} = U conj(b) U^dagger.
 
     The order-zero condition is
 
-        a (U conj(b) U^T) - (U conj(b) U^T) a = 0.
+        a (U conj(b) U^dagger) - (U conj(b) U^dagger) a = 0.
 
     Returns (all_pass, list of (i, j, residual) for any failing pair).
     """

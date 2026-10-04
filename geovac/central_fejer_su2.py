@@ -2,11 +2,9 @@
 
 This module implements the central spectral Fejer kernel on SU(2) ~= S^3
 that is the non-abelian analog of Leimbach-van Suijlekom 2024 (Adv. Math.
-439, 109496) Eq. (2.6) for the torus T^d. It is the second of five
-lemmas (L1' done in R3.5; L2 = this module; L3, L4, L5 to come) in the
-Track A roadmap toward proving Gromov-Hausdorff convergence of the
-Connes-van Suijlekom truncated state-space metric on the GeoVac S^3
-operator system to the round-S^3 Wasserstein-Kantorovich metric.
+439, 109496) Eq. (2.6) for the torus T^d: Paper 38 Lemma L2, whose moment
+gamma_{n_max} bounds the state-space Gromov-Hausdorff distance in Paper 38's
+main theorem.
 
 Mathematical setup
 ==================
@@ -76,7 +74,7 @@ The fourth (the only nontrivial property) is
 (SU2-iv)  Mass concentration: gamma_{n_max} := integral K(g) * d_round(e, g) dg
           tends to 0 as n_max -> infinity. The natural-coefficient kernel
           gives gamma = O(log(n_max) / n_max); a Cesaro-2 (square Fejer)
-          variant achieves gamma = O(1 / n_max).
+          variant gives gamma = O(1 / n_max) [MEASURED, Paper 38; no proof].
 
 Plancherel symbol
 -----------------
@@ -112,7 +110,8 @@ coefficient
 
 the kernel becomes the standard Fejer-kernel-on-SU(2) (square of a
 Fejer-summed character series). Standard Cesaro analysis on the SU(2)
-character series gives gamma = O(1 / n_max) with no log factor.
+character series gives gamma = O(1 / n_max) with no log factor
+[MEASURED, Paper 38 thm:main_unconditional; a proof is open].
 
 API
 ===
@@ -292,8 +291,8 @@ def _cesaro_2_coefficient(j: Rational, n_max: int) -> sp.Expr:
     For j = j_max this is sqrt(2 j_max + 1) * (1 - (n_max - 1)/(n_max + 1))
     = sqrt(n_max) * (2 / (n_max + 1)) -> 0 as n_max -> infinity. The
     Cesaro-2 weights are positive and decreasing in j, with the
-    boundary weight tending to zero; this is what gives the sharp
-    O(1 / n_max) rate.
+    boundary weight tending to zero; the moment is then O(1 / n_max)
+    [MEASURED, Paper 38; no proof, optimal constant open].
     """
     np1 = Integer(n_max + 1)
     weight = 1 - Integer(2) * j / np1
@@ -509,7 +508,7 @@ def gamma_rate(
     Here d_round(e, g) = chi (the rotation angle chi in [0, 2 pi] is the
     geodesic distance from the identity in the dual-Coxeter metric,
     Cas(ad) = h^vee, i.e. on the radius-2 S^3; on the unit S^3 the distance
-    is chi/2 and the rate constant halves, 4/pi -> 2/pi -- Paper 38). The conjugacy-class Haar measure is sin^2(chi/2)/pi d chi.
+    is chi/2 and the Fejer-moment constant halves, 4/pi -> 2/pi -- Paper 38). The conjugacy-class Haar measure is sin^2(chi/2)/pi d chi.
 
     Args:
         n_max: cutoff. n_max >= 1.
@@ -867,14 +866,17 @@ def peter_weyl_bijection_certificate(n_max: int) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Quantitative rate of mass concentration (R2.5 / L2 quantitative-rate sprint)
+# Asymptotics of the Fejer moment gamma_n (Paper 38 Lemma L2(d))
 # ---------------------------------------------------------------------------
 #
-# Theorem (memo `debug/r25_l2_quantitative_rate_memo.md`):
-#   (i)   lim_{n->infty} n*gamma_n / log(n) = 4/pi    (asymptotic constant).
-#   (ii)  gamma_n <= 6 * log(n) / n   for all n >= 2  (uniform bound).
-#   (iii) For any C > 4/pi, there exists N_0(C) such that
-#         gamma_n <= C * log(n) / n for all n >= N_0(C).
+# Paper 38 Lemma L2(d):
+#   (i)   lim_{n->infty} n*gamma_n / log(n) = 4/pi  (Fejer-moment constant;
+#         a kernel constant, not a convergence rate)  [INTERNAL THEOREM + MEASURED].
+#   (ii)  gamma_n <= 6 * log(n) / n on the checked range of n >= 2
+#         [MEASURED; not proved for all n].
+#   (iii) For any C > 4/pi, (i) gives some N_0(C) with
+#         gamma_n <= C * log(n) / n for all n >= N_0(C); its value is not
+#         computed (N0_for_constant returns a sampled threshold).
 #
 # The proof uses the closed-form sum-rule
 #   gamma_n = pi - 4 T_n / (pi Z_n),
@@ -888,8 +890,9 @@ def peter_weyl_bijection_certificate(n_max: int) -> dict:
 #   - quantitative_rate_bound(n_max, C=6): explicit upper bound C log(n)/n
 #   - asymptotic_rate_constant(): returns 4/pi as exact sympy expression
 #   - doubling_estimator(n)      : Richardson-style estimator for 4/pi
-#   - N0_for_constant(C)         : minimum n_max such that bound holds for
-#                                   all m >= n_max (from precomputed table)
+#   - N0_for_constant(C)         : smallest sampled n_max above which the
+#                                   bound held on the sample (lookup table;
+#                                   not a proved N_0)
 
 
 _PRECOMPUTED_N0_THRESHOLDS = {
@@ -966,10 +969,11 @@ def asymptotic_rate_constant() -> sp.Expr:
     Theorem 1(i) of the quantitative-rate memo:
         lim_{n->infty} n * gamma_n / log(n) = 4/pi.
 
-    Structural meaning (memo S2): 4/pi = Vol(S^2) / pi^2 = 2 Vol(S^2) / Vol(SU(2)) in the
-    dual-Coxeter normalisation, Cas(ad) = h^v (2/pi at unit radius;
-    corrected 2026-09-03, an earlier line wrote Vol(S^1)) under the Haar normalization, the M1 unit-sphere volume slot (the 'Hopf-base measure' label is retired)
-    factor of Sprint TS-E1 / Paper 32 SVIII / Paper 18 SIII.7.
+    4/pi is the Fejer-moment constant in the dual-Coxeter normalisation,
+    Cas(ad) = h^v (2/pi on the unit S^3), a kernel constant, not a
+    convergence rate.  [OBSERVATION, Paper 38] It coincides numerically with
+    Vol(S^2)/pi^2 for the unit S^2, i.e. twice the unit-sphere quotient
+    Vol(S^2)/Vol(S^3) = 2/pi; it is not the Hopf base-to-total ratio.
     """
     return Rational(4) / sp.pi
 
@@ -1023,8 +1027,10 @@ def doubling_estimator(n: int, prec: int = 50) -> mpmath.mpf:
 
 
 def N0_for_constant(C: float) -> int | None:
-    """Minimum n_max such that gamma_m <= C * log(m) / m for all m >= n_max.
+    """Smallest sampled n_max above which gamma_m <= C * log(m) / m held.
 
+    A lookup of thresholds measured on a finite sample of m (n <= 1000), not
+    a proved N_0(C): "for all m >= n_max" is checked only on that sample.
     Returns the precomputed threshold from the data table
     debug/data/r25_l2_quantitative_rate.json. If C is below 4/pi or
     too close to the asymptote (not resolved at n <= 1000 in the

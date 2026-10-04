@@ -21,15 +21,16 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-\textbf{[SYMBOLIC PROOF]} We show that the angular momentum quantum numbers $(\ell, m)$ emerge
-from a geometric construction: uniform-density packing of
+\textbf{[SYMBOLIC PROOF]} We show that the angular momentum label set $(\ell, m)$ is counted
+exactly by a geometric construction: uniform-density packing of
 distinguishable states on concentric isotropic shells in two
 dimensions.  Starting from two axioms---discrete binary
 distinguishability and geometric indifference (maximum entropy)---and
 the construction's structural choices (motivated, not forced), the
-construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
-isomorphic to the spherical harmonic basis $Y_{\ell m}$ with
-$\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  \textbf{[OBSERVATION]}
+construction yields per-shell angular capacities $2k-1$ for shell~$k$, equal in
+count to the spherical harmonic basis $Y_{\ell m}$ with
+$\ell = k - 1$ and $m = -\ell, \ldots, +\ell$ (assigning the $m$ values to
+positions is a labelling choice).  \textbf{[OBSERVATION]}
 The principal quantum number~$n$ corresponds to a cumulative grouping
 of the first~$n$ shells, producing the $n^2$ orbital count, but this
 grouping is not forced by the axioms alone.  Similarly, the per-shell
@@ -43,7 +44,7 @@ $-\Delta_{S^3} = L^2 + A^2$ is the diagonal $SO(4)$ Casimir
 $n^2-1$---and \textbf{[INTERNAL THEOREM]} its top
 eigenvalue saturates the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
 (attained in a mid-$\ell$ block, not in the $s$-wave block, whose own
-bound is 4; corrected 2026-09-03), so that under a single matched scale
+bound is 4), so that under a single matched scale
 $K_{\mathrm{vac}} = -1/16$ the extremal eigenvalue reaches the hydrogen
 ground-state energy---matched, not derived: the content that could have
 failed is the spectral bound, not the target the scale is matched to.
@@ -101,10 +102,10 @@ three distinct levels of strength.
 
 \textbf{[SYMBOLIC PROOF]} \noindent\textbf{Strong claim: angular quantum numbers.}  Shell~$k$
 has capacity $2k - 1$, which is isomorphic to the spherical harmonic
-basis $Y_{\ell m}$ with $\ell = k - 1$.  The angular momentum labels
-$(\ell, m)$ and the per-shell degeneracy $2\ell + 1$ emerge directly
-from the packing.  This is the central, mathematically rigorous result
-of the paper.
+basis $Y_{\ell m}$ with $\ell = k - 1$:\ the per-shell degeneracy
+$2\ell + 1$ is an exact count identity, and attaching the labels
+$(\ell, m)$ to the positions is a labelling choice.  This count identity
+is the central result of the paper.
 
 \medskip
 
@@ -137,8 +138,9 @@ for H$_2^+$ and H$_2$~\cite{paper11,paper12} only $m$ is a label:\ the
 $\eta$-separation replaces $\ell$ by a separation index whose node count
 correlates with $\ell$ only in the united-atom limit.  Where it
 appears, the full geometry separates into a system-specific radial or
-hyperradial part and an angular cross-section whose labeling is the
-packing derived here.  This recurrence is the reason the packing
+hyperradial part and an angular cross-section whose labeling, fixed by
+the rotational symmetry the geometry retains, is the one the packing
+counts.  This recurrence is the reason the packing
 construction is foundational to the series rather than merely a
 curiosity about hydrogen.
 
@@ -429,9 +431,7 @@ traces back to two sources:
   outward normals), a $\mathbb{Z}_2$ that can be read as a doubling of
   the state space.  This $\mathbb{Z}_2$ is the orientation class,
   relating O(3) to SO(3);\ it is \emph{not} the spin double cover
-  SU(2)$\to$SO(3), which comes from $\pi_1(\mathrm{SO}(3)) = \mathbb{Z}_2$
-  (corrected 2026-09-28:\ an earlier sentence said tracking the
-  orientation lifts SO(3) to SU(2)).  The arithmetic factor of~2 is the
+  SU(2)$\to$SO(3), which comes from $\pi_1(\mathrm{SO}(3)) = \mathbb{Z}_2$.  The arithmetic factor of~2 is the
   initialization above;\ orientability supplies no additional factor.
 \end{enumerate}
 
@@ -588,7 +588,7 @@ hyperspherical treatment of the two electrons.  The angular channels
 are labeled by per-electron $(\ell, m)$ channel labels, coupled by the
 two-centre potential, that determine the multichannel expansion.
 \textbf{[MEASURED]} Paper~15~\cite{paper15} recovers 96.0\% of the H$_2$ dissociation
-energy using this geometry;\ H$_2$'s natural geometry, and its best
+energy using this geometry with a Schwartz cusp correction;\ H$_2$'s natural geometry, and its best
 result, is the prolate Level~2 above.
 
 \textbf{Level~5: LiH via composed geometries.}
@@ -601,15 +601,14 @@ LiH and BeH$^+$.
 
 \medskip
 
-\textbf{[OBSERVATION]} The recurrence of the angular sector across the five levels is not
-imposed by hand, and it is not uniform:\ $m$ is an exact label wherever
+\textbf{[OBSERVATION]} The recurrence of the angular sector across the five levels follows
+from the rotational symmetry each geometry retains, and it is not uniform:\ $m$ is an exact label wherever
 axial symmetry survives;\ $\ell$ is an exact \emph{basis} label (with
 $2\ell+1$ states per $\ell$) wherever the separated coordinates carry an
 angular $S^2$ factor---Levels~1, 3, 4 and each Level-5 fiber---but a
 \emph{conserved} quantum number only where the full SO(3) survives
 (Level~1);\ at Level~2 the prolate separation replaces $\ell$ by a
-separation index.  The packing construction provides the combinatorial
-substrate for this angular factor.
+separation index.  The packing construction counts this angular factor.
 
 \subsection{The node structure as combinatorial invariant}
 \label{sec:combinatorial_invariant}
@@ -618,11 +617,13 @@ The preceding survey reveals a structural feature that merits explicit
 comment.  \textbf{[OBSERVATION]} The discrete quantum-number set
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$---with its
 degeneracy $2\ell + 1$ and selection rules---appears inside several
-conformally distinct continuum geometries.  The five geometries catalogued in
-Table~\ref{tab:cross-section} are different Riemannian manifolds with
-different metrics, curvatures, and coordinate singularity structures.
+continuum geometries, as the labels of the rotational (SO(3), or axial
+SO(2)) symmetry each retains.  The five geometries catalogued in
+Table~\ref{tab:cross-section} differ in their separated coordinates and
+coordinate singularity structures.
 $S^3$ is compact with constant positive curvature; prolate spheroidal
-coordinates are non-compact with coordinate singularities at the foci;
+coordinates are a coordinate system on flat $\mathbb{R}^3$ with
+coordinate singularities at the foci;
 the hyperspherical manifold $S^5$ is compact but five-dimensional (for two electrons); the
 composed fiber bundle is a product of manifolds with different
 dimensionalities at each level.  Levels~1, 3 and~4, and each fiber of
@@ -728,8 +729,7 @@ The full graph topology may also include edges connecting states with
 different~$\ell$ (e.g., $\ell$-changing transitions driven by
 non-spherical perturbations).  The production graph has no
 $\ell$-changing edges, so its Laplacian decomposes into independent
-$\ell$-blocks ($m$ is mixed within a block by the azimuthal edges ---
-corrected 2026-09-03 from ``$(\ell, m)$ blocks'').  This
+$\ell$-blocks ($m$ is mixed within a block by the azimuthal edges).  This
 block-diagonality mirrors the $\ell$-conservation of the spherically
 symmetric Coulomb Hamiltonian, but it is a property of the chosen edge
 set, not a consequence of the graph encoding the Coulomb problem;\ it
@@ -755,10 +755,9 @@ $p_0 = Z/n$, and the energy shell $p_0^2 = -2E$ then gives $E_n$
 but once Fock's kernel fixes it, $E_n = -Z^2/(2(C+1))$ on the labels).  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
 quantity of the Fock projection (Paper~7~\cite{paper7}): the squared
 coupling between adjacent $n$-shells in the Gegenbauer eigenbasis of the
-$S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$ (Paper~7,
-corrected 2026-09-03 from a printed $1/16$ prefactor), and the quantity
-that coincides with $1/16$ is the inverse Fock Jacobian $1/\Omega^4(0)$
-with $\Omega(0) = 2$, equivalently $c^2(n,0)/4$.  This numerical coincidence
+$S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$ (Paper~7), and the quantity
+that coincides with $1/16$ is the fourth power $\Omega(0)^{-4}$ of the inverse
+Fock conformal factor, with $\Omega(0) = 2$, equivalently $c^2(n,0)/4$.  This numerical coincidence
 between the energy-matching scale and the geometric $1/16$ is an
 observation, not a derivation (Paper~7): the matching scale and the
 conformal quantity are computed from disjoint inputs, with no known
@@ -772,8 +771,7 @@ eigenvalue converges to $\lambda_{\max} \to 8 = 2 d_{\max}$, twice the
 coordination number, attained in a mid-$\ell$ block ($\ell = 11$ at
 $n_{\max} = 30$)
 (\texttt{tests/test\_trunk\_qa\_kappa.py},
-\texttt{tests/test\_paper7\_graph\_convergence.py}; 2026-09-03
-correction of an earlier ``within each $(\ell,m)$ sector'' statement).
+\texttt{tests/test\_paper7\_graph\_convergence.py}).
 \textbf{[INTERNAL THEOREM]} The saturation has a closed-form rate.  Because no edge changes $\ell$, the Laplacian is block diagonal in $\ell$ and each block is the grid graph $P_{n_{\max} - \ell} \times P_{2\ell+1}$ (radial $\times$ azimuthal paths), so the whole spectrum is
 \textbf{[PRIOR ART]} the textbook Laplacian spectrum of a Cartesian
 product of path graphs~\cite{brouwer_haemers2012} (the block identification and the constant
@@ -799,14 +797,14 @@ $n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so every sample
 checked understates $C_{\mathrm{sat}}$ (a measured one-sided pattern, not proved for all
 $n_{\max}$).  The approach is \emph{not} monotone, however:\ there
 are $195$ decreasing steps in that range, e.g.\ $C_{\mathrm{sat},20} = 40.7285 >
-C_{\mathrm{sat},21} = 40.6470$ (corrected 2026-09-04;\ ``monotone from below'' was asserted
-from a doubling grid that happens to be monotone).  It is the one-sided pattern,
+C_{\mathrm{sat},21} = 40.6470$.  It is the one-sided pattern,
 not monotonicity, that makes every checked sample an understatement (the
-591-cutoff scan, the $C_{\mathrm{sat},20} > C_{\mathrm{sat},21}$ step and the $n_{\max} = 1000$ value
-are re-derived but not pinned by a test), and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
+591-cutoff scan, the $C_{\mathrm{sat},20} > C_{\mathrm{sat},21}$ step and the $n_{\max} = 320$ and $1000$ values
+are pinned by \texttt{tests/test\_lattice\_spectrum.py};\ the closed form by \texttt{tests/test\_paper1\_block\_spectrum.py}).  
 Finally, with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
-$K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
-ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
+$K_{\mathrm{vac}} = E_{\mathrm{target}}/8 = -0.5/8$, the
+ground-state eigenvalue $K_{\mathrm{vac}}\lambda_{\max}$ of~$H$ tends to
+$-0.5$~Ha as $\lambda_{\max} \to 8$, by construction.  The
 convergence of the spectral bound is the content; the reproduction of
 the target is not.  \textbf{[WALL]} Nor is that bound an $S^3$ quantity:\
 $8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid, and
@@ -828,7 +826,7 @@ Peter--Weyl truncation of $L^2(S^3)$, on which
 $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal
 $SO(4)$ Casimir $n^2 - 1$ at every cutoff (a node weight, not an edge
 Laplacian).  The
-\textbf{[SYMBOLIC PROOF]} $(\ell, m)$ angular structure is exact at every finite $n_{\max}$---it
+\textbf{[SYMBOLIC PROOF]} $(\ell, m)$ label set, with its $2\ell+1$ count, is exact at every finite $n_{\max}$---it
 is carried by the node labels, not approximated by mesh refinement.
 
 The conformal equivalence between the hydrogen problem and the
@@ -970,8 +968,7 @@ harmonics, on which $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal
 $SO(4)$ Casimir $n^2 - 1$.  The graph
 Laplacian equipped with $K_{\mathrm{vac}} = -1/16$ does \emph{not}
 converge to that operator:\ it splits into $n_{\max}$ disconnected
-$\ell$-blocks (\S VI;\ corrected 2026-09-25 from ``indicated
-numerically'', itself a 2026-09-04 correction of ``shows'').
+$\ell$-blocks (\S VI).
 
 \subsection{Scope of the geometric analogy}
 

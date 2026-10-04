@@ -262,8 +262,8 @@ def test_J_commutes_D_full_dirac_offdiag_status(n_max):
     where pi sends m_j -> -m_j; the m_j-lifter sign flips.
 
     Therefore, with default lifters (n_lift=1, l_lift=0.1, m_lift=0.005),
-    J D != +D J on the offdiag. We test and report rather than assert
-    pass/fail.
+    J D != +D J on the offdiag. Pinned (Paper 32 audit item 4): max
+    residual 1e-2 at n_max = 1 (m-linear lifter alone), 2 at n_max = 2, 3.
 
     EXCEPT: U conj(D) vs +D U:
       The condition is U conj(D) = +D U.
@@ -276,10 +276,10 @@ def test_J_commutes_D_full_dirac_offdiag_status(n_max):
     D = camporesi_higuchi_offdiag_dirac_matrix(basis)
     J = build_J_full_dirac(n_max)
     ok, err = verify_J_D_relation(J, D, expected_sign=+1, tol=1e-3)
-    # We don't ASSERT the result -- we record it and let the test
-    # display the actual residual via pytest output.
-    print(f"\n  [n_max={n_max}, full_dirac, offdiag]"
-          f" J D = +D J: passes={ok}, max err = {err:.3e}")
+    expected = {1: 1.0e-2, 2: 2.0, 3: 2.0}[n_max]
+    assert not ok, f"n_max={n_max}: J D = +D J unexpectedly holds on offdiag"
+    assert abs(err - expected) < 1e-9, (
+        f"n_max={n_max}: offdiag J D residual {err:.6e}, paper prints {expected}")
 
 
 @pytest.mark.parametrize("n_max", [2, 3])

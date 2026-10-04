@@ -4,8 +4,11 @@ Rabi Oscillation Test — High-Precision Weak-Field Benchmark
 
 v0.9.2: Bloch-Siegert corrected precision.
 
-Proves that the GeoVac lattice produces quantitatively correct coherent
-quantum dynamics by operating in the strict weak-field regime.
+Checks the Crank-Nicolson integrator on the legacy graph model
+(hamiltonian="graph", whose excited states are not hydrogen's) in the strict
+weak-field regime: the period is compared with the two-level formula evaluated
+at the model's own level gap, so this tests the integrator, not hydrogen
+spectroscopy.
 
 Lattice resolution strategy:
     The graph Laplacian spectrum becomes DENSER at higher max_n, causing
@@ -71,7 +74,7 @@ E0 = 0.0005  # Driving field amplitude (weak-field regime)
 # ======================================================================
 def build_rabi_system(max_n: int = 4):
     """
-    Build the hydrogen system with full diagonalization and identify the
+    Build the graph-model system with full diagonalization and identify the
     best dipole-coupled eigenstate for clean 2-level Rabi oscillations.
 
     Uses spectral isolation criterion: picks the eigenstate whose gap
@@ -187,7 +190,7 @@ def run_norm_conservation() -> dict:
     E, psi = solver.compute_ground_state(n_states=1)
     psi0 = psi[:, 0].astype(complex)
 
-    print(f"\n  System: Hydrogen (Z=1), max_n=10, N_states={solver.n_states}")
+    print(f"\n  System: graph model (Z=1), max_n=10, N_states={solver.n_states}")
     print(f"  E_gs = {E[0]:.6f} Ha")
     print(f"  Initial norm: {float(np.abs(np.vdot(psi0, psi0))):.15f}")
 
@@ -259,7 +262,7 @@ def run_rabi_oscillation(sys_info: dict) -> dict:
     mu_12 = sys_info['mu_12']
     idx_target = sys_info['idx_target']
 
-    print(f"\n  System: Hydrogen (Z=1), max_n={solver.max_n}, "
+    print(f"\n  System: graph model (Z=1), max_n={solver.max_n}, "
           f"N_states={solver.n_states}")
     print(f"  E_gs     = {E_gs:.6f} Ha  (eigenstate 0)")
     print(f"  E_target = {E_target:.6f} Ha  (eigenstate {idx_target})")
@@ -584,9 +587,7 @@ if __name__ == '__main__':
     print(f"\n  Result: {n_passed}/3 tests passed")
 
     if all_passed:
-        print(f"\n  The Lattice is not just an eigenvalue solver.")
-        print(f"  It is a Time Machine.")
-        print(f"  Weak-field Rabi dynamics: quantitatively confirmed.")
+        print(f"\n  Crank-Nicolson integrator check on the graph model: passed.")
 
     t_total = time.time() - t_start
     print(f"\n  Total time: {t_total:.1f}s")

@@ -239,7 +239,7 @@ The conjecture is the **HO dual of the Fock rigidity theorem** (Track NH, `form_
 
 ## 7. Structural insight — the HO is simpler than the Coulomb problem on the graph side
 
-**The Coulomb S³ graph uses (D − A) to COMPUTE the spectrum.**  The graph Laplacian eigenvalues are λₙ = n² − 1, and the universal kinetic scale κ = −1/16 maps these to Rydberg energies via the projection p₀² = −2E with Eₙ = −Z²/(2n²) — a NONLINEAR map.  Along the way, Paper 2 shows that π enters through the spectral zeta of S³ as a calibration exchange constant.
+**The Coulomb S³ spectrum is NOT computed by (D − A).**  The continuum S³ Laplace–Beltrami eigenvalues n² − 1 are the diagonal SO(4) Casimir on the (n, l, m) labels; the graph Laplacian D − A does not converge to Δ_{S³} (its spectrum is a grid band structure in [0, 8]; `tests/test_graph_s3_nonconvergence.py`), and the matched scale κ = −1/16 (an Observation) only maps its band edge to −1/2.  The Rydberg energies come from Fock's projection p₀² = −2E with p₀ = Z/n, Eₙ = −Z²/(2n²) — a NONLINEAR map.  Along the way, Paper 2 shows that π enters through the spectral zeta of S³ as a calibration exchange constant.
 
 **The Bargmann HO graph has the spectrum ALREADY in the diagonal.**  The Euler operator on Bargmann monomials (equivalently the CR Laplacian restricted to (N, 0) on Hardy space of S⁵) has eigenvalue N, and the projection ℏω(N + 3/2) is affine in N.  No graph Laplacian is needed to compute the spectrum, and no transcendental content enters at any step.
 

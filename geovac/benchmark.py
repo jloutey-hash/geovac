@@ -5,8 +5,9 @@ Benchmark Suite for 3-Electron Sparse Dynamics Engine
 Deliverable 2 — Two benchmark tests:
 
 Test A — Unitarity (run_unitarity_test)
-  Propagate a delta-kick initial state on the Lithium single-particle lattice
-  for 10,000 Crank-Nicolson steps. Log |<psi|psi> - 1| at every step.
+  Propagate a delta-kick initial state on the Z=3 single-particle lattice
+  (legacy graph model kappa*(D-A), hamiltonian='graph' -- not the physical
+  Li Hamiltonian; an integrator check only) for 10,000 Crank-Nicolson steps. Log |<psi|psi> - 1| at every step.
   Success criterion: norm deviation < 1e-12 throughout.
 
 Test B — Scaling (run_scaling_benchmark)
@@ -64,9 +65,11 @@ def run_unitarity_test(
     output_dir: str = "./figures",
 ) -> Dict:
     """
-    Test A: Unitarity of Crank-Nicolson propagation on Lithium lattice.
+    Test A: Unitarity of Crank-Nicolson propagation on the Z=3 lattice.
 
-    Uses the Lithium single-particle Hamiltonian H1 (Z=3, max_n=max_n).
+    Uses the legacy graph-model single-particle Hamiltonian
+    (AtomicSolver(hamiltonian='graph'), Z=3, max_n=max_n), whose excited
+    spectrum is a grid band structure, not the physical Li Hamiltonian.
     Initial state: delta function on the 1s state (index 0, lowest energy).
     This represents a "delta-kick" preparation — an instantaneous excitation
     into the bare lattice state before time evolution.

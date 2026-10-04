@@ -3,21 +3,19 @@
 H2 Potential Energy Surface (PES) -- Bond Dissociation Curve
 =============================================================
 
-Maps the Full CI ground state energy of H2 as a function of
-internuclear distance R, producing the classic Morse-like potential
-energy curve.
+Maps the legacy LCAO-graph Full CI energy against internuclear
+distance R (historical; see SUPERSEDED below).
 
 For each distance R:
   1. Build two hydrogen lattices with nucleus_position separated by R
   2. Stitch with distance-dependent bridge weights: W = exp(-R)
-  3. Solve for the exact 2-electron ground state via Full CI
+  3. Full CI of the legacy model
   4. Compute binding energy: D_e(R) = 2*E(H_atom) - E_CI(R)
 
-In the graph framework, the CI electronic energy E_CI(R) directly
-captures the binding landscape: the node weights (-Z/n^2) encode
-the nuclear-electron attraction, while the Full CI tensor product
-adds cross-nuclear attraction and electron-electron repulsion.
-The balance of these terms produces the equilibrium geometry.
+SUPERSEDED: legacy LCAO graph concatenation, kept as a historical script.
+The FCI-M guardrail shows this construction has an R-independent kinetic
+term and no physical equilibrium; the node weights (-Z/n^2) are label
+weights, not V_ne.  Molecular work uses natural geometry (Papers 11, 12).
 
 Usage:
     python benchmarks/scripts/h2_dissociation.py
@@ -58,7 +56,7 @@ def compute_h2_energy_ci(
     n_bridges : int
         Number of topological bridge edges.
     kinetic_scale : float
-        Universal kinetic scale constant.
+        Matched kinetic scale (kappa = -1/16, an Observation; Papers 0/7).
     bridge_decay_rate : float
         Exponential decay rate for bridge weights (1/Bohr).
 
@@ -114,7 +112,7 @@ def run_dissociation_curve() -> None:
     bridge_decay_rate = 1.0
     HA_TO_EV = 27.2114
 
-    # Dense grid near equilibrium, coarser outward
+    # Dense grid near the CI minimum, coarser outward
     R_values = np.array([
         0.5, 0.6, 0.7, 0.8, 0.9, 1.0,
         1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.8,
@@ -124,7 +122,7 @@ def run_dissociation_curve() -> None:
     print("=" * 72)
     print("  H2 Potential Energy Surface -- Full CI Dissociation Curve")
     print("=" * 72)
-    print(f"  Method:         Full CI (exact 2-electron)")
+    print(f"  Method:         Full CI (legacy model)")
     print(f"  Basis:          max_n = {max_n} per atom (30 states, 3600-dim CI)")
     print(f"  Bridges:        {n_bridges}")
     print(f"  Kinetic scale:  {kinetic_scale}")
@@ -179,14 +177,14 @@ def run_dissociation_curve() -> None:
     # Positive D_e means the CI energy is below the 2H limit (bound)
     D_e_arr = E_2H - E_ci_arr
 
-    # Find equilibrium from E_CI minimum (most negative = most bound)
+    # Locate the E_CI minimum (legacy model)
     idx_min_ci = np.argmin(E_ci_arr)
     R_eq_ci = R_arr[idx_min_ci]
     E_min_ci = E_ci_arr[idx_min_ci]
     D_e_ci = E_2H - E_min_ci
 
-    print("  CI Equilibrium (E_CI minimum):")
-    print(f"    R_eq    = {R_eq_ci:.2f} Bohr")
+    print("  CI minimum (legacy model):")
+    print(f"    R_min   = {R_eq_ci:.2f} Bohr")
     print(f"    E_CI    = {E_min_ci:.6f} Ha")
     print(f"    D_e     = {D_e_ci:.6f} Ha ({D_e_ci * HA_TO_EV:.3f} eV)")
     print()
@@ -200,11 +198,11 @@ def run_dissociation_curve() -> None:
     print(f"    Difference:     {asym_diff:.6f} Ha ({asym_diff / abs(E_2H) * 100:.2f}%)")
     print()
 
-    # Experimental comparison
+    # Experimental values, for reference only (legacy model; not a GeoVac result)
     R_exp_eq = 1.401   # Bohr
     D_exp = 0.1745     # Ha (4.75 eV)
-    print("  Experimental comparison:")
-    print(f"    {'':>16} {'GeoVac':>12} {'Experiment':>12}")
+    print("  Legacy-model output vs experiment (not a GeoVac result):")
+    print(f"    {'':>16} {'Legacy model':>12} {'Experiment':>12}")
     print(f"    {'R_eq (Bohr)':>16} {R_eq_ci:>12.2f} {R_exp_eq:>12.3f}")
     print(f"    {'D_e (eV)':>16} {D_e_ci * HA_TO_EV:>12.3f} {D_exp * HA_TO_EV:>12.3f}")
     print()
@@ -218,7 +216,7 @@ def run_dissociation_curve() -> None:
         2, 1, figsize=(10, 10), height_ratios=[1.2, 1],
     )
     fig.suptitle(
-        r"H$_2$ Potential Energy Surface — Full CI Dissociation Curve"
+        r"H$_2$ legacy LCAO-graph model (superseded) — Full CI curve"
         f"\n(max_n={max_n}, {n_bridges} bridges, "
         r"$W_{\mathrm{bridge}} = e^{-R}$"
         ")",
@@ -278,7 +276,7 @@ def run_dissociation_curve() -> None:
     ax2.plot(
         R_eq_ci, D_e_ci * HA_TO_EV, "*", color="gold", markersize=15, zorder=5,
         markeredgecolor="black", markeredgewidth=0.5,
-        label=f"Max binding: {D_e_ci * HA_TO_EV:.2f} eV at R={R_eq_ci:.2f}",
+        label=f"CI minimum (legacy model): {D_e_ci * HA_TO_EV:.2f} eV at R={R_eq_ci:.2f}",
     )
     ax2.axvline(
         R_exp_eq, color="gray", linestyle="--", linewidth=1, alpha=0.5,
@@ -286,7 +284,7 @@ def run_dissociation_curve() -> None:
 
     ax2.set_xlabel("Internuclear Distance R (Bohr)", fontsize=11)
     ax2.set_ylabel("Binding Energy (eV)", fontsize=11)
-    ax2.set_title("Binding Energy Curve", fontsize=11)
+    ax2.set_title("2E(H) - E_CI(R) (legacy model)", fontsize=11)
     ax2.legend(loc="upper right", fontsize=8)
     ax2.grid(True, alpha=0.3)
     ax2.set_xlim(0, R_arr[-1] + 0.3)
@@ -304,7 +302,7 @@ def run_dissociation_curve() -> None:
     print()
     print("=" * 72)
     print(f"  PES complete. {len(R_values)} points in {elapsed:.2f}s.")
-    print(f"  Equilibrium: R = {R_eq_ci:.2f} Bohr")
+    print(f"  CI minimum: R = {R_eq_ci:.2f} Bohr")
     print(f"  Binding:     D_e = {D_e_ci * HA_TO_EV:.3f} eV")
     print("=" * 72)
 

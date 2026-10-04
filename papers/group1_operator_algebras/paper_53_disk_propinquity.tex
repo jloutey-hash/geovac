@@ -119,11 +119,10 @@ $m\ge1$ do; for $m=1$, $\gamma_{1}=32/(5\pi)$. The two-dimensional
 Bochner--Riesz map is \emph{not} a usable lift: its kernel is negative
 somewhere at every order, and its Lebesgue constant exceeds~$1$
 \textbf{[PRIOR ART]} (both classical facts~\cite{stein_weiss}, with a one-line argument recorded here). On the finite Dirichlet disk-with-cone the paper
-reports measurements and withdraws earlier claims. The Markov--Ces\`aro
+reports measurements. The Markov--Ces\`aro
 reconstruction map is not positivity-preserving (a ring counterexample),
 and its reconstruction error on the open disk decays on every tested
-observable. The ``non-decaying'' rate reported in an earlier version was
-an artifact of evaluating a $0/0$ ratio at the boundary point.
+observable.
 Convergence on the disk, and on the cone with apex angle $\alpha\ne1$
 (which has no translation group), is left open.
 \end{abstract}
@@ -489,7 +488,7 @@ version (``classical, $s\ge\tfrac12$'') is false. Bochner--Riesz summability
 above the critical index~\cite{stein_weiss} concerns convergence, not
 positivity.
 
-\begin{remark}[the Lebesgue constant exceeds $1$ --- corrected 2026-09-07]
+\begin{remark}[the Lebesgue constant exceeds $1$]
 \label{rem:height_constant}
 $\Berez_{\Lambda}^{s}$ is a convolution, so
 $\nabla(\Berez f)=\Berez(\nabla f)$, and by Young's inequality the
@@ -510,10 +509,8 @@ s & 0.6 & 0.75 & 1 & 1.5 & 2 & 3 & 5 & 8\\\hline
 \]
 $\Lebesgue_{s}$ is $\Lambda$-independent by scaling and tends to $1$
 only as $s\to\infty$ (\texttt{tests/test\_paper53\_height\_constant.py}).
-An earlier version asserted that $\Berez_{\Lambda}^{s}$ is
-gradient-non-expansive, ``ratio $\le1$ at every $\Lambda$''. That is false
-over the unit-Lipschitz ball. The $\Lambda$-dependence it reported was a
-property of the Gaussian test functions. This is not Paper~38's
+So $\Berez_{\Lambda}^{s}$ is not gradient-non-expansive over the
+unit-Lipschitz ball. This is not Paper~38's
 withdrawn Lemma~L5 transported:\ L5's height was a reconstruction-defect
 quantity of a different construction.
 

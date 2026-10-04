@@ -33,6 +33,11 @@ def test_casimir_eigenvalues():
       n=5 -> mu_free = 48  (nu=8)
       n=7 -> mu_free = 96  (nu=12)
       n=9 -> mu_free = 160 (nu=16)
+
+    Scope: the solver BUILDS its R = 0 diagonal from this Casimir formula
+    (geovac/algebraic_angular.py), so this checks the channel/index
+    bookkeeping, not an independent reproduction of the SO(6) spectrum
+    (which is standard hyperspherical-harmonic theory; Paper 7 [PRIOR ART]).
     """
     from geovac.algebraic_angular import AlgebraicAngularSolver
 

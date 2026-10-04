@@ -77,15 +77,12 @@ def _hydrogenic_density_at_origin(n: int, l: int):
 # ----------------------------------------------------------------------------
 
 def test_paper34_III1_kappa_rational_prefactor():
-    """Paper 34 §III.1 (sec:proj_fock): transcendental signature 'rational
-    prefactor kappa = -1/16 (Rydberg-to-graph-eigenvalue conversion).'
+    """Paper 34 §III.1 (sec:proj_fock): kappa = -1/16 is a rational prefactor.
 
-    Verifies the universal topological constant kappa = -1/16 used to
-    map graph eigenvalues to Rydberg energies (CLAUDE.md §4).
-
-    Per CLAUDE.md §8 ('-1/16 is the universal topological constant
-    can be used directly'), this value is the framework's free-to-use
-    rational prefactor. Production-side symbolic version lives at
+    Verifies the matched scale kappa = -1/16 (an Observation, Papers 0/7:
+    it maps the graph's extremal eigenvalue to -1/2, not the graph spectrum
+    to the Rydberg ladder) is stored as an exact rational. CLAUDE.md §8
+    permits using -1/16 directly. Production-side symbolic version lives at
     geovac.graph_qed_propagator.KAPPA_SCALAR = sympy Rational(-1, 16).
     """
     from geovac.graph_qed_propagator import KAPPA_SCALAR

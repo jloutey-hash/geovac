@@ -56,7 +56,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
-| 0 `Paper_0_Geometric_Packing.tex` | **KEYSTONE** | The packing axiom; K = −1/16; nodes are quantum numbers |
+| 0 `Paper_0_Geometric_Packing.tex` | **KEYSTONE** | The packing axiom; matched scale κ = −1/16 (an Observation, not derived); nodes are quantum numbers |
 | 1 `paper_1_spectrum.tex` | **KEYSTONE** | Spectral graph theory; O(N) eigenvalue methods |
 | 7 `Paper_7_Dimensionless_Vacuum.tex` | **KEYSTONE** | S³ conformal equivalence, 18 symbolic checks (ten limiting-case/definitional/non-discriminating); graph→S³ convergence a WALL — most-cited paper in the corpus |
 | 18 `paper_18_exchange_constants.tex` | ACTIVE | Transcendental taxonomy; master Mellin engine M1/M2/M3 |

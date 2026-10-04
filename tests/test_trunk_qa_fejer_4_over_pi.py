@@ -1,4 +1,4 @@
-"""Trunk QA — Claim A: the 4/pi asymptotic constant of Paper 38 (L2 rate).
+"""Trunk QA — Claim A: the 4/pi Fejer-moment constant of Paper 38 (Lemma L2(d.ii); a kernel constant, not a convergence rate).
 
 CONTEXT
 =======

@@ -2227,7 +2227,7 @@ REGISTRY = [
         # witnesses are the same K with kappa_g relabelled. A trivial SYMBOLIC fact; it identifies no
         # Bisognano-Wichmann modular flow. The real falsifier (K from a wedge-restricted CH state) was
         # never run. Retired 2026-09-28, /qa trunk FULL (PI-approved).
-        "pattern": r"strongest\s+possible\s+level|literal\s+identification\s+(at|of)\s+(the\s+)?(operator[- ]system|finite\s+cutoff|four-witness)|Wick-rotation\s+literal\s+identification|to\s+``literal\s+identification|lift\S*\s+(\S+\s+){0,8}to\s+``?literal\s+identification|four-witness\s+modular-Hamiltonian\s+identification|close\s+the\s+four-witness",
+        "pattern": r"strongest\s+possible\s+level|literal\s+identification\s+(at|of)\s+(the\s+)?(operator[- ]system|finite\s+cutoff|four-witness)|Wick-rotation\s+literal\s+identification|to\s+``literal\s+identification|lift\S*\s+(\S+\s+){0,8}to\s+``?literal\s+identification|four-witness\s+modular-Hamiltonian\s+identification|close\s+the\s+four-witness|canonical\s+strong\s+identification|also\s+gives\s+strong\s+identification|PRIMARY\s+FALSIFIER",
         "exempt_if_nearby": withdrawal_marker("finite-four-witness-literal-identification"),
         "severity": "fail",
         "scope": "trunk group1 group3 group6 synthesis",
@@ -2235,6 +2235,7 @@ REGISTRY = [
         "files": [
             "papers/group*/*.tex",
             "papers/synthesis/*.tex",
+            "tests/*.py",
         ],
         "cited_by": {
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + summary surfaces reread 2026-09-28 (FULL #9 remediation; PM-verified gate 0 live) -- L1 / L1-tighten paras, sec:modular_hamiltonian_l1, L2-E, BH remark, honest scope, Q/conclusion; bibitem retitled",
@@ -6676,7 +6677,7 @@ REGISTRY = [
         "id": "kappa-universal-topological-constant",
         # FULL #12 (PI decision 3): kappa = -1/16 is the matched energy scale, an OBSERVATION
         # (Papers 0/7), not a 'universal topological constant'.
-        "pattern": r"universal\s+(?:topological|kinetic)\s+(?:constant|scale)",
+        "pattern": r"universal\s+(?:topological|kinetic)\s+(?:constant|scale)|universal\s+constant\s+(?:K\s*=\s*)?-1/16|Origin\s+of\s+the\s+Universal\s+Constant",
         "exempt_if_nearby": withdrawal_marker("kappa-universal-topological-constant"),
         "severity": "fail",
         "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
@@ -6688,6 +6689,131 @@ REGISTRY = [
             "geovac-hamiltonians/src/geovac_hamiltonians/*.py",
             "docs/claims_register.md",
             "docs/forced_free_seam.md",
+            "README.md",
+            "tests/*.py",
+            "demo/*.py",
+            "benchmarks/scripts/*.py",
+            "docs/topic_to_paper_lookup.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "fejer-constant-as-gh-rate",
+        # FULL #13 (2026-10-03): 4/pi is the Fejer kernel's moment constant; what is proved is
+        # the bound d_GH <= gamma_n.  The GH convergence rate is not 4/pi (a taper gives O(1/n),
+        # MEASURED).  Retires 'asymptotic/universal state-space GH rate' and 'explicit asymptotic
+        # rate' for the convergence (P32 conclusion, P55 table/subsection).
+        "pattern": r"(?:asymptotic|universal)\s+state-space\s+GH\s+rate|explicit\s+asymptotic\s+rate|"
+                   r"rate\s+constant\s+\$?4/\\pi\$?\s+in\s+the\s+van|with\s+asymptotic\s+rate\s+\$?4/\\pi|"
+                   r"GH\s+metric\s+rate|sense,\s+with\s+rate\s+constant\s+\$?4/\\pi|GH-rate\s+entry|Paper~38\s+rate\s+is\s+placed|"
+                   r"sets\s+the\s+L2\s+GH-convergence\s+rate|universal\s+rate\s+4/π|the\s+4/π\s+rate\s+is|"
+                   r"rate\s+now\s+established|independent\s+rate\s+coincidence",
+        "exempt_if_nearby": withdrawal_marker("fejer-constant-as-gh-rate"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #13, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/*.md",
+            "geovac/*.py",
+            "tests/*.py",
+        ],
+        "cited_by": {"papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated 2026-10-03 (FULL #13; table row + canonical example 3 reread in full)",
+                     "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-10-03 (FULL #13; Conclusion reread in full)",
+                     "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex": "remediated 2026-10-03 (FULL #13 self-check; metadata paragraph reread)",
+                     "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": "remediated 2026-10-03 (FULL #13 self-check; Relation-to-38/40 paragraph reread)",
+                     "papers/group5_qed_gauge/paper_51_gravity_arc.tex": "remediated 2026-10-03 (FULL #13 self-check round 2; cigar-entropy paragraph reread)"},
+    },
+    {
+        "id": "multi-loop-corollary-confirmed-closure",
+        # FULL #13: Paper 32's multi-loop renormalization corollary is CONDITIONAL on an
+        # unargued premise and the single-cutoff statement is an OBSERVATION; LS-8a is
+        # consistent with it, not a confirmation, and Paper 57 records a conditional
+        # classification, not a closure.
+        "pattern": r"empirically\s+confirmed\s+this\s+structural\s+verdict|"
+                   r"renormali[sz]ation\s+sub-sector\s+closure|"
+                   r"record\s+this\s+theorem\s+as\s+the\s+renormali[sz]ation|"
+                   r"wall\s+is\s+now\s+bound\s+by\s+argument|now\s+bound\s+by\s+argument\s+at\s+the\s+canonical-rep\s+level\s+under\s+two",
+        "exempt_if_nearby": withdrawal_marker("multi-loop-corollary-confirmed-closure"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #13, family gate).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/*.md",
+        ],
+        "cited_by": {"papers/group3_foundations/paper_57_forced_free_seam.tex": "reviewed 2026-10-03 (FULL #13; L613/L621/L631 already conditional / Observation)"},
+    },
+    {
+        "id": "lcao-bridge-graph-validated",
+        # FULL #13: the LCAO bridged-graph (graph concatenation) H2 model is superseded and
+        # guard-railed (FCI-M: R-independent kinetic, no equilibrium).  Its bridge counts and
+        # optimized-R '0.43%' are not validated physics.
+        "pattern": r"experimentally\s+validated\s+for\s+H|H.?\s+optimal\s+range|QUANTITATIVE\s+ACCURACY\s+ACHIEVED|"
+                   r"Bridges\s*=\s*molecular\s+bonds|Binding\s+energy\s*=\s*Eigenvalue\s+lowering|validated\s+with\s+H.?.?\+|confirms\s+topology\s+is\s+correct",
+        "exempt_if_nearby": withdrawal_marker("lcao-bridge-graph-validated"),
+        "severity": "fail",
+        "scope": "trunk group2",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #13, family gate).",
+        "files": [
+            "geovac/*.py",
+            "demo/*.py",
+            "benchmarks/scripts/*.py",
+            "tests/*.py",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "graph-model-credited-with-hydrogen-dynamics",
+        # FULL #13: the Rabi / dynamics tests run hamiltonian="graph" (non-physical excited
+        # states); they check the integrator, not hydrogen.
+        "pattern": r"lattice\s+produces\s+quantitatively\s+correct|Build\s+the\s+hydrogen\s+system|"
+                   r"converge\s+to\s+1:4:9:16|property\s+of\s+the\s+graph'?s\s+continuum\s+limit|"
+                   r"unique\s+constant\s+that\s+maps\s+these\s+dimensionless|encode\s+the\s+nuclear-electron\s+attraction",
+        "exempt_if_nearby": withdrawal_marker("graph-model-credited-with-hydrogen-dynamics"),
+        "severity": "fail",
+        "scope": "trunk group3 synthesis",
+        "note": "Registered 2026-10-03 (/qa trunk FULL #13, family gate).",
+        "files": [
+            "tests/*.py",
+            "geovac/*.py",
+            "demo/*.py",
+            "docs/*.md",
+            "benchmarks/scripts/*.py",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "trunk-small-sweep-2026-10-03",
+        # Retired wordings from the trunk SMALL sweep after FULL #13 (one backstop entry; each
+        # alternative fired on HEAD and has zero live hits after the sweep).  1/Omega^4 is the
+        # fourth power of the inverse conformal factor (the Jacobian is Omega^3); a negative real
+        # plaquette product gives a pi Berry phase; P0's choices are motivated, not forced; M1 is
+        # the volume factor (4/pi only shares the value); W1 walls are GeoVac-internal; CvS P_n
+        # is a spectral projection; G2/G3 are related, not one fact; Paper 28 is a reading; S^3
+        # (odd-dim) has no almost-complex structure; J flips m_j, not kappa; dynamics.py radial
+        # factors are heuristic.
+        "pattern": r"inverse\s+Fock\s+Jacobian|Fock\s+Jacobian\s+factor|nonzero\s+Berry\s+phase\s+requires\s+complex|"
+                   r"Two\s+axioms\s+force\s+shell\s+capacity|collapses\s+to\s+a\s+sphere-volume\s+quotient|"
+                   r"each\s+of\s+these\s+is\s+a\s+frontier-of-field|Bloch--?Siegert-corrected\s+two-level\s+period|"
+                   r"basis-index\s+cutoff|one\s+structural\s+fact,\s+not\s+two|"
+                   r"it\s+is\s+the\s+spectral\s+action\s+of\s+the\s+present\s+triple|GeoVac\s+is\s+rank~1|"
+                   r"rate-controlled\s+restatement|no\s+(?:integrable|compatible)\s+almost-complex|J\s+flips\s+kappa|"
+                   r"and\s+hydrogen\s+radial\s+integrals",
+        "exempt_if_nearby": withdrawal_marker("trunk-small-sweep-2026-10-03"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 synthesis",
+        "note": "Registered 2026-10-03 (trunk SMALL sweep after /qa FULL #13).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "geovac/*.py",
+            "tests/*.py",
+            "docs/claim_test_matrix.md",
             "README.md",
         ],
         "cited_by": {},

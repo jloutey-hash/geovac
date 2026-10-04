@@ -7,7 +7,7 @@ derived inter-shell coupling is (1/4)[1 - l(l+1)/(n(n+1))] (Chebyshev
 amplitude 1/2; tests/test_paper7_gegenbauer_coupling.py), so c^2(4,3) = 1/10.
 The number that equals Delta is the COMPOSITE
     [1 - l(l+1)/(n(n+1))]_{(4,3)} / Omega^4(0) = (2/5) (1/16) = 1/40,
-the Casimir factor times the inverse Fock Jacobian -- not a matrix element
+the Casimir factor times the fourth power of the inverse conformal factor -- not a matrix element
 of anything.  Delta itself is independently derived in production code from
 g_3^Dirac = 2(n+1)(n+2)|_{n=3} = 40.  The coincidence is an OBSERVATION about
 a composite; this file records exactly that status.
