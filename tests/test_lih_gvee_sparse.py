@@ -1,5 +1,5 @@
-"""Guard: the O(nnz) g_Vee reducer (debug/lih_gvee_sparse.py) equals the dense reducer
-(debug/lih_pi_m16.hg_Vee_m, the oracle) on a small pi-containing reference.
+"""Guard: the O(nnz) g_Vee reducer (geovac/lih_r12ci/gvee_sparse.py) equals the dense reducer
+(geovac/lih_r12ci/pi_m16.hg_Vee_m, the oracle) on a small pi-containing reference.
 
 What wrong answer this rejects: any sparse restriction that drops or mis-weights index tuples
 (a skipped topology class, a wrong circulation / L_z mask, a dropped triangle mode combo, a
@@ -33,12 +33,10 @@ TOL = 1e-10
 
 @pytest.fixture(scope="module")
 def setup():
-    sys.path.insert(0, DEBUG)
-    sys.path.insert(0, ROOT)
     import geovac.lih_r12ci.kernels as KG
     import geovac.lih_r12ci.triangle as TRI
-    import lih_pi_m16 as M
-    import lih_gvee_sparse as S
+    import geovac.lih_r12ci.pi_m16 as M
+    import geovac.lih_r12ci.gvee_sparse as S
     saved_flag = KG.USE_EXACT_NEUMANN
     KG.USE_EXACT_NEUMANN = True
     ref = M.build_primitives(M.CFG, M.PRIM_CACHE_PI, verbose=False)

@@ -15,20 +15,12 @@ Fire-tested claims (what wrong answer each rejects):
   (4) [slow] float64 ERI + sparse FCI reproduces the banked mpf LiH energy to <50 uHa
       -> rejects a float64-assembly regression in the productionized engine.
 """
-import os
-import sys
-
 import numpy as np
 import pytest
 
-_DEBUG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "debug")
-if _DEBUG not in sys.path:
-    sys.path.insert(0, _DEBUG)
-sys.argv = [sys.argv[0]]   # debug drivers parse argv at import
-
-import fci_fast                                              # noqa: E402
-from prolate_allelectron_fci import fci_energy               # noqa: E402
-from lih_r12_ceiling_probe import energy as helike_energy    # noqa: E402
+from geovac.prolate_allelectron import fci_fast
+from geovac.prolate_allelectron.fci_grid import fci_energy
+from geovac.prolate_allelectron.helike_cusp import energy as helike_energy
 
 RADIAL = ['t2', 's']
 RICH = ['u', 't2', 's', 'u2', 'ut2']
@@ -75,9 +67,9 @@ def test_float64_engine_reproduces_mpf_lih():
     """(4) The productionized fast engine (float64 ERI + sparse FCI) reproduces the banked
     mpf LiH energy (-7.99468, minimal-valence M=6, R=3.015) to <50 uHa.  Rejects a float64
     X-table assembly regression.  ~60s."""
-    import prolate_energy_ladder as L
-    import prolate_float_eri as F
-    import lih_core2exp_probe as P
+    from geovac.prolate_allelectron import energy_ladder as L
+    from geovac.prolate_allelectron import float_eri as F
+    from geovac.prolate_allelectron import routec as P
     L.build_eri_tensor_m = F.build_eri_tensor_m_f
     L.fci_energy = fci_fast.fci_energy_fast
     Et, M, Mk, nd, cond, dt = P.run(Jb=1, Lb=0, npi=0, Jpi=0, Lpi=0, alpha=1.0, core2=None)

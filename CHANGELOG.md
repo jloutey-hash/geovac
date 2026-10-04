@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.3] - 2026-10-04
+
+**Patch. The LiH / prolate stack behind Paper 19 is productionized: ~11k lines moved from debug/ into geovac/, every banked number reproduced bit-for-bit, and a permanent golden-value oracle added (PI-directed).**
+
+### Why
+Paper 19's best LiH results (Route C R_eq +0.2%; sigma marriage -8.0372; pi marriage -8.04905; VMC -8.047) ran on ~23 debug/ modules that five test files reached through sys.path hacks, and debug/ is prunable by policy. Plan + status: `debug/lih_productionization_plan.md`.
+
+### Added
+- **Golden oracle** `tests/data/lih_golden/` (`capture.py`, `golden.json`, `golden.npz`): 42 items captured from the pre-promotion code at v5.20.2 (single-threaded, fixed seeds; every repeated item bit-reproducible across fresh processes). `tests/test_lih_golden.py` re-runs each item in a fresh process through the promoted code and requires a bit-identical match (12 fast, 30 @slow up to ~3 h / 8.8 GB). Fire-tested: a 1e-15 relative change in `fourbody.reduced` fails it.
+- `geovac/prolate_allelectron/` (15 modules: grid and analytic all-electron FCI, the C4 atom-centred-core driver, mixed / float64 ERIs, sparse FCI, energy ladder, pure-product core, Route C and He-like-cusp helpers).
+- `geovac/lih_vmc.py`; `geovac/lih_r12ci/` gains `ref_tensor` (pair-index tensor), `enumerators` (generalized energy enumerators), `bridge_gate`, `sigma_marriage`, `pi_m16`, `gvee_sparse`, `source_override` (geminal-range source override, kept as-is: a real gamma parameter is an owed refactor).
+
+### Changed
+- Gate: all 54 golden-item checks across the two promotion steps bit-identical, including pi marriage trunc 1e-3 E_R12 = -8.049045088639625 (8.4 GB, unchanged) and linexp -8.043933411799529; Route C R_eq curve; sigma marriage -8.037235713815004.
+- `build_kernel_gen` / `build_kernel_m_gen`: three verbatim copies merged into `geovac/lih_r12ci/kernels.py` (bit-identical). `debug/lih_r12_4body_integral.py` (verbatim copy of `geovac/lih_r12ci/fourbody.py`) became a shim.
+- debug/ originals are module-alias shims (`sys.modules[__name__] = geovac module`; runpy for `__main__`); unpromoted drivers keep working through them.
+- Tests re-pointed to geovac (assertions unchanged): test_prolate_allelectron_fci, test_prolate_route_c_lih, test_paper19_pure_product_core (its ~190-line private copy removed; re-fire-tested on the promoted code), test_lih_vmc, test_lih_gvee_sparse, test_lih_gvee_triangle_symmetry, test_lih_r12ci_bridge (re-fire-tested). `docs/claim_test_matrix.md` rows re-pointed to geovac paths.
+- **Fixed:** `tests/test_lih_r12ci.py` imported `energy` from the package, which returns the submodule once `kernels`/`energy` is imported, so it errored when run after other r12ci tests; now imports the function from `assembly`.
+- **Paper 19:** the linexp marriage on the full pi reference read -8.04349 (a pre-triangle-weight-fix value); the current code gives -8.04393, and the fix's stated "at most 0.18 mHa" effect is now 0.44 mHa for that geminal. Corrected; the VMC cross-check is stated as run at the pre-fix coefficient. The -8.04905 headline is unaffected.
+
+### Owed
+Real geminal gamma parameter; the remaining debug drivers (gvee audits, multigeminal, pi_m16 energy/VMC drivers, r12ci MC drivers) still import through shims.
+
 ## [v5.20.2] - 2026-10-03
 
 **Patch. /qa trunk FULL #13 (first incremental FULL, unseeded) = FAIL; RESEARCH-GRADE not earned at review time; remediated.** 14 Opus reviewers (6 code, 4 claims, 1 synthesis, 3 citation) + completeness critic over the 63 units `cert_stamps.py --plan` named; 16/16 deterministic gates green; every keystone constant independently re-derived; all backing tests pass serially (the parallel-run MemoryErrors were concurrent load). Ledger: `debug/qa/trunk_full13_ledger.md`.

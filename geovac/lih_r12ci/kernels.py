@@ -126,6 +126,37 @@ def exact_neumann(lmax: int, mmax: int = 0):
     return op
 
 
+# --------------------------------------------------------------------------- #
+# general phi-averaged / mode-m geminal kernels on this grid.  SINGLE HOME (LiH productionization
+# step 2c, 2026-10-04): assembly.energy() and geovac.lih_r12ci.enumerators both use these; they were
+# two verbatim copies (an assembly.energy closure + debug/lih_marriage_phase2.py).  Read rho_cyl_f,
+# zc_f, NG of THIS module at call time (so a source_override.install_kernels grid override reaches
+# them too).
+# --------------------------------------------------------------------------- #
+def build_kernel_gen(func, nphi: int = 28) -> np.ndarray:
+    """K[i,j] = INT_0^2pi func(|r_i - r_j(phi')|) dphi' (phi' Gauss-Legendre on [0, pi], doubled)."""
+    xp, wp = leggauss(nphi); phi = 0.5 * np.pi * (xp + 1.0); wphi = 0.5 * np.pi * wp
+    rc = rho_cyl_f; z = zc_f; rc2 = rc[:, None] * rc[None, :]
+    base = rc[:, None] ** 2 + rc[None, :] ** 2 + (z[:, None] - z[None, :]) ** 2
+    K = np.zeros((NG, NG))
+    for cphi, w in zip(np.cos(phi), wphi):
+        d = np.sqrt(np.maximum(base - 2.0 * rc2 * cphi, 0.0))
+        K += 2.0 * w * func(d)
+    return K
+
+
+def build_kernel_m_gen(func, m: int, nphi: int = 48) -> np.ndarray:
+    """Mode-m Fourier kernel of func (normalised 1/2pi for m=0, 1/pi for m>0)."""
+    xp, wp = leggauss(nphi); phi = 0.5 * np.pi * (xp + 1.0); wphi = 0.5 * np.pi * wp
+    rc = rho_cyl_f; z = zc_f; rc2 = rc[:, None] * rc[None, :]
+    base = rc[:, None] ** 2 + rc[None, :] ** 2 + (z[:, None] - z[None, :]) ** 2
+    K = np.zeros((NG, NG))
+    for ph, w in zip(phi, wphi):
+        d = np.sqrt(np.maximum(base - 2.0 * rc2 * np.cos(ph), 0.0))
+        K += 2.0 * w * func(d) * np.cos(m * ph)
+    return K / (2 * np.pi) if m == 0 else K / np.pi
+
+
 if __name__ == "__main__":
     from .energy import V_aaaa, V_bbbb, V_aabb, V_aaab, V_bbab    # lazy Stage-1 build (~60 s)
     print("=" * 78)

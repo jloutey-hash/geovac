@@ -5,7 +5,8 @@ The gate: the only genuinely 4-body-connected term of the explicit-r12 energy,
     I = INT rho1 rho2 rho3 rho4 f(r12) f(r34) / r13 ,
 evaluated on a REAL non-isotropic pair density from the Phase-0 CI reference by the RI-free
 reduction (leaf dressed through the axially-averaged f-kernel, joined by the EXACT prolate-Neumann
-operator) and cross-checked against Monte Carlo.  debug/lih_marriage_phase1.py is the backing driver;
+operator) and cross-checked against Monte Carlo.  geovac/lih_r12ci/bridge_gate.py (formerly
+debug/lih_marriage_phase1.py) is the backing driver;
 its artifact debug/data/lih_marriage_phase1.npz freezes the reduction, the dressings, and the MC bars.
 
 What each guard EXCLUDES (the wrong answer it was fire-tested against, debug/firetest_lih_r12ci_bridge.py):
@@ -41,7 +42,7 @@ What each guard EXCLUDES (the wrong answer it was fire-tested against, debug/fir
 All checks read the frozen artifact; the reduction is recomputed live through the fast exact-Neumann
 path (no gVee phi-kernels, no 3-D dressing quadrature), so wall < 10 s.
 """
-import importlib.util
+import importlib
 import math
 import os
 
@@ -54,7 +55,7 @@ from geovac.lih_r12ci.hVee import neumann_potential
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "debug", "data", "lih_marriage_phase1.npz")
-DRIVER = os.path.join(ROOT, "debug", "lih_marriage_phase1.py")
+DRIVER = "geovac.lih_r12ci.bridge_gate"     # promoted from debug/lih_marriage_phase1.py (2026-10-04)
 
 GATE_REL = 1e-3
 
@@ -72,16 +73,13 @@ FROZEN_REL = 5e-4   # loose window: the frozen headline may be re-measured withi
 
 
 def _load_driver():
-    spec = importlib.util.spec_from_file_location("lih_marriage_phase1_mod", DRIVER)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
+    return importlib.import_module(DRIVER)
 
 
 @pytest.fixture(scope="module")
 def art():
     if not os.path.exists(OUT):
-        pytest.skip("run debug/lih_marriage_phase1.py first to produce the artifact")
+        pytest.skip("run python -m geovac.lih_r12ci.bridge_gate first to produce the artifact")
     return dict(np.load(OUT, allow_pickle=True))
 
 

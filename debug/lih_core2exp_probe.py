@@ -15,57 +15,23 @@ Reuses prolate_energy_ladder / C4 UNCHANGED; only the orbital list is rebuilt he
 Run:  python debug/lih_core2exp_probe.py scan     # fast zeta2 scan (minimal valence)
       python debug/lih_core2exp_probe.py confirm  # fuller valence, best zeta2
 """
-import os
+# R, E_EXACT, lih_orbs, run moved to geovac/prolate_allelectron/routec.py (LiH
+# productionization step 2a, 2026-10-04); re-exported here so P.R / P.lih_orbs / P.run
+# (lih_marriage_phase0, lih_pi_m16, lih_pi_m16_primcache, lih_vmc) keep working.
+import os as _os
+import sys as _sys
+
+_ROOT = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if _ROOT not in _sys.path:
+    _sys.path.insert(0, _ROOT)
 import sys
 import time
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import mpmath as mp                                                   # noqa: E402
-mp.mp.dps = 60
+import mpmath as mp
 
-import prolate_energy_ladder as L                                    # noqa: E402
-from prolate_allelectron_c4 import (                                 # noqa: E402
-    from_sigma, valence_prolate_orbital, valence_pi_orbital, ZC_LI)
-from prolate_mixed_eri import sto_orbital                            # noqa: E402
-from prolate_allelectron_analytic_fci import sto_orbital_B           # noqa: E402
-
-R = 3.015
-E_EXACT = -8.070
-
-
-def lih_orbs(Jbond, Lbond, npi, Jpi, Lpi, alpha, core2=None):
-    """Route C LiH ladder + optional 2nd-core STO exponents (list of zetas)."""
-    orbs, tags = [], []
-
-    def add(o, key):
-        orbs.append(o); tags.append((key, 0, 0))
-
-    add(from_sigma(sto_orbital(ZC_LI, R, is_core=True)), ('coreLi', 0, 0))
-    for k, z2 in enumerate(core2 or []):
-        add(from_sigma(sto_orbital(mp.mpf(z2), R, is_core=True)), (f'coreLi{k+2}', 0, 0))
-    add(from_sigma(sto_orbital(mp.mpf('0.65'), R)), ('Li2s', 0, 0))
-    add(from_sigma(sto_orbital_B(mp.mpf('1.0'), R)), ('H1s', 0, 0))
-    add(from_sigma(sto_orbital_B(mp.mpf('0.70'), R)), ('Hm', 0, 0))
-    for j in range(Jbond + 1):
-        for l in range(Lbond + 1):
-            orbs.append(from_sigma(valence_prolate_orbital(j, l, mp.mpf(alpha))))
-            tags.append((('bond', 0, Jbond, Lbond), j, l))
-    if npi > 0:
-        for ms in (+1, -1):
-            for j in range(Jpi + 1):
-                for l in range(Lpi + 1):
-                    orbs.append(valence_pi_orbital(j, l, mp.mpf(alpha), ms))
-                    tags.append((('bondpi', ms, Jpi, Lpi), j, l))
-    return orbs, tags
-
-
-def run(Jb, Lb, npi, Jpi, Lpi, alpha, core2=None, tol=1e-11):
-    orbs, tags = lih_orbs(Jb, Lb, npi, Jpi, Lpi, alpha, core2)
-    t = time.time()
-    Et, Ee, Mk, nd, cond = L.assemble_rebased(orbs, tags, R, 3.0, 1.0, 4, 3.0 / R,
-                                              alpha, tol=tol)
-    return Et, len(orbs), Mk, nd, cond, time.time() - t
+from geovac.prolate_allelectron.routec import (   # noqa: E402,F401  (sets mp.mp.dps = 60)
+    L, R, E_EXACT, lih_orbs, run, from_sigma, valence_prolate_orbital, valence_pi_orbital,
+    ZC_LI, sto_orbital, sto_orbital_B)
 
 
 def scan(z2list=(4.0, 1.6, 5.5)):

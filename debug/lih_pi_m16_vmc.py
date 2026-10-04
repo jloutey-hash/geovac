@@ -34,16 +34,8 @@ import lih_vmc
 ENERGY_NPZ = os.path.join(DATA, "lih_pi_m16_energy.npz")
 
 
-def _build_wf_from_no(ct: np.ndarray, T_no: np.ndarray, Mk: int, E_trunc: float):
-    """LiHWavefunction on the TRUNCATED M=16 pi natural-orbital reference (matches the marriage)."""
-    ref = M.build_primitives(M.CFG, M.PRIM_CACHE_PI, verbose=False)
-    prims = ref['prims']
-    na = nb = M.NELEC // 2
-    apairs = list(combinations(range(Mk), na)); bpairs = list(combinations(range(Mk), nb))
-    CS, _, _ = P0.fold_cs(ct, Mk)                       # grouped-order signed coefficient matrix
-    Vnn = ref['Vnn']
-    return lih_vmc.LiHWavefunction(prims, T_no, ct, apairs, bpairs, CS, ref['R'], 3.0, 1.0, Vnn,
-                                   E_trunc - Vnn, Mk, na, nb)
+# moved to geovac.lih_r12ci.pi_m16.build_wf_from_no (LiH productionization step 2c, 2026-10-04)
+_build_wf_from_no = M.build_wf_from_no
 
 
 def main() -> None:

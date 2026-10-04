@@ -1037,8 +1037,9 @@ dense kept-pair Coulomb field of $g_{V_{ee}}$ was replaced by a sparse
 contraction over the coefficient tensor's nonzero index triples.  That made the
 full $M=16$ $\pi$-containing CI reachable ($196$ active pairs, reference energy
 $E_{\rm trunc}=-8.02863$~Ha, $0.41$~mHa above the full CI).  With the original
-geminal $f=r\,e^{-r/2}$ it gives $E_{R_{12}}=-8.04349$~Ha, and VMC of the same
-trial function agrees to $0.14$~mHa.  \emph{(ii) The geminal shape.}  The
+geminal $f=r\,e^{-r/2}$ it gives $E_{R_{12}}=-8.04393$~Ha (its VMC cross-check,
+$-8.04363\pm0.00025$~Ha, was run at the coefficient $c$ obtained before the
+triangle-weight fix below).  \emph{(ii) The geminal shape.}  The
 remaining gap to the Pad\'e--Jastrow VMC is not a missing geminal: a VMC
 linear-method scan shows extra geminals saturate at $\sim1.4$~mHa and a
 quadratic $F^2$ term is worth $0.01$~mHa.  It is the Kato cusp.  For a
@@ -1121,9 +1122,10 @@ exact Monte-Carlo on a $\sigma$ reference cleared the $m=0$ machinery.  Grouping
 the 216 interaction triples into orbits of the density's relabeling symmetry
 left exactly one orbit non-degenerate.  An independent $\pi$-reference
 Monte-Carlo then put the triangle group $154\sigma$ off, and $1.9\sigma$ after
-the fix.  The effect on energies is at most $0.18$~mHa (the $r\,e^{-0.25r}$
-geminal on the nine-determinant reference), at most $0.064$~mHa for any Slater
-geminal, and $0.003$~mHa for the headline $-8.04905$.  Two other groups sit at
+the fix.  The effect on energies is $0.44$~mHa for $r\,e^{-0.5r}$ on the full
+$\pi$ reference, $0.18$~mHa for $r\,e^{-0.25r}$ on the nine-determinant reference,
+at most $0.064$~mHa for any Slater geminal, and $0.003$~mHa for the headline
+$-8.04905$.  Two other groups sit at
 about $2\sigma$ with opposite signs, below $4\times10^{-4}$ each, and are left
 open.  \textbf{[VALIDATED 2026-09-26, against independent Monte-Carlo.  Guard:\
 \texttt{tests/test\_lih\_gvee\_triangle\_symmetry.py} checks the weight symmetry

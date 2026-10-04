@@ -17,6 +17,9 @@
 | Direct CI (large systems) | `geovac/direct_ci.py` | `DirectCISolver(lattice_index)` |
 | Molecular FCI (LCAO) | `geovac/lattice_index.py` | `MolecularLatticeIndex(atoms, R)` |
 | Prolate spheroidal (H2+) | `geovac/prolate_spheroidal.py` | Prolate spheroidal lattice for diatomics |
+| LiH all-electron prolate FCI (Route C, Paper 19) | `geovac/prolate_allelectron/` | `c4` (atom-centred-core driver), `analytic_fci`, `mixed_eri`, `float_eri`, `fci_fast.fci_energy_fast`, `energy_ladder`, `routec.use_fast_engine()`; package `__init__` imports nothing (modules set mpmath dps at import) |
+| LiH explicit-r12 marriage (Papers 12, 19) | `geovac/lih_r12ci/` | `assembly.energy` (2-MO engine), `ref_tensor` (pair-index tensor), `enumerators`, `pi_m16` (M=16 pi reference), `gvee_sparse`, `bridge_gate`, `source_override.install_geminal` |
+| LiH VMC-over-FCI | `geovac/lih_vmc.py` | real-space Psi_CI x Pade Jastrow; regression oracle `tests/test_lih_golden.py` |
 | Hyperspherical (He) | `geovac/hyperspherical.py` | Two-electron hyperspherical solver |
 | Level 4 (H2) | `geovac/level4_multichannel.py` | Molecule-frame hyperspherical |
 | Core screening | `geovac/core_screening.py` | `CoreScreening(Z).solve()` |

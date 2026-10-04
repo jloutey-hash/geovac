@@ -18,8 +18,10 @@ share the build. Run with:  pytest tests/test_lih_r12ci.py --slow
 """
 import pytest
 
-from geovac.lih_r12ci import energy, VMC_TARGETS
-from geovac.lih_r12ci.assembly import ANALYTIC_REF
+from geovac.lih_r12ci import VMC_TARGETS
+# The function, not the `energy` submodule: once geovac.lih_r12ci.kernels/energy is
+# imported, `from geovac.lih_r12ci import energy` returns the submodule.
+from geovac.lih_r12ci.assembly import ANALYTIC_REF, energy
 
 pytestmark = pytest.mark.slow
 

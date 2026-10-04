@@ -24,63 +24,18 @@ ORBITAL (radial flexibility), which Route C's ladder can supply with existing co
 Validated against known He (Z=2) Hylleraas: {u,t2}=-2.892 (classic 3-term -2.9024),
 5-term -> 98% of the 57 mHa He correlation.  Float64, ~seconds.
 """
-import numpy as np
-from numpy.polynomial.legendre import leggauss
+# The grids, integ, basisfn and energy moved to geovac/prolate_allelectron/helike_cusp.py
+# (LiH productionization step 2a, 2026-10-04); re-exported here.
+import os as _os
+import sys as _sys
 
-N1 = N2 = 72; NU = 56; RMAX = 7.0
-_x1, _w1 = leggauss(N1)
-r1 = 0.5 * RMAX * (_x1 + 1.0); wr1 = 0.5 * RMAX * _w1
-r2 = r1.copy(); wr2 = wr1.copy()
-_xu, _wu = leggauss(NU)
-R1 = r1[:, None, None]; R2 = r2[None, :, None]
-ulo = np.abs(R1 - R2); uhi = R1 + R2
-R12 = ulo + (uhi - ulo) * 0.5 * (_xu[None, None, :] + 1.0)
-WVOL = (8 * np.pi**2 * (wr1[:, None, None] * R1) * (wr2[None, :, None] * R2)
-        * (0.5 * (uhi - ulo) * _wu[None, None, :]) * R12)
-C1 = (R1**2 - R2**2 + R12**2) / (2 * R1 * R12)     # rhat1 . (r1-r2)/r12
-C2 = (R2**2 - R1**2 + R12**2) / (2 * R2 * R12)     # rhat2 . (r2-r1)/r12
+_ROOT = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+if _ROOT not in _sys.path:
+    _sys.path.insert(0, _ROOT)
 
-
-def integ(g):
-    return np.sum(WVOL * g)
-
-
-def basisfn(kind):
-    """return (b, db/dr1, db/dr2, db/dr12) arrays for a Hylleraas primitive."""
-    O = np.ones_like(R12); Z = np.zeros_like(R12)
-    if kind == '1':   return O, Z, Z, Z
-    if kind == 'u':   return R12, Z, Z, O
-    if kind == 'u2':  return R12**2, Z, Z, 2 * R12
-    if kind == 't2':  return (R1 - R2)**2, 2 * (R1 - R2) * O, -2 * (R1 - R2) * O, Z
-    if kind == 's':   return (R1 + R2) * O, O, O, Z
-    if kind == 'ut2': return R12 * (R1 - R2)**2, 2 * (R1 - R2) * R12, -2 * (R1 - R2) * R12, (R1 - R2)**2
-    raise ValueError(kind)
-
-
-def energy(Z, zeta, kinds):
-    N = zeta**3 / np.pi
-    Phi2 = (N * np.exp(-zeta * (R1 + R2)))**2
-    V = -Z / R1 - Z / R2 + 1.0 / R12
-    B = [basisfn(k) for k in (['1'] + kinds)]
-    n = len(B)
-    S = np.zeros((n, n)); T = np.zeros((n, n)); Vm = np.zeros((n, n))
-    for i in range(n):
-        bi, di1, di2, diu = B[i]
-        for j in range(i, n):
-            bj, dj1, dj2, dju = B[j]
-            S[i, j] = S[j, i] = integ(Phi2 * bi * bj)
-            Vm[i, j] = Vm[j, i] = integ(Phi2 * bi * bj * V)
-            # electron 1: (di1 - z bi)(dj1 - z bj) + diu dju + [(di1-z bi)dju+(dj1-z bj)diu] C1
-            a_i1 = di1 - zeta * bi; a_j1 = dj1 - zeta * bj
-            a_i2 = di2 - zeta * bi; a_j2 = dj2 - zeta * bj
-            e1 = a_i1 * a_j1 + diu * dju + (a_i1 * dju + a_j1 * diu) * C1
-            e2 = a_i2 * a_j2 + diu * dju + (a_i2 * dju + a_j2 * diu) * C2
-            T[i, j] = T[j, i] = 0.5 * integ(Phi2 * (e1 + e2))
-    H = T + Vm
-    sval, svec = np.linalg.eigh(S)
-    Xs = svec @ np.diag(1 / np.sqrt(np.clip(sval, 1e-13, None))) @ svec.T
-    w = np.linalg.eigvalsh(Xs @ H @ Xs)
-    return H[0, 0] / S[0, 0], w[0], np.linalg.cond(S)
+from geovac.prolate_allelectron.helike_cusp import *        # noqa: E402,F401,F403
+from geovac.prolate_allelectron.helike_cusp import R1, R2, integ, energy   # noqa: E402,F401
+import numpy as np                                          # noqa: E402
 
 
 # ---- quadrature self-check (norm=1, <1/r1>=zeta, T00=zeta^2) --------------- #

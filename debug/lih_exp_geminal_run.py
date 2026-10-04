@@ -36,48 +36,9 @@ sys.path.insert(0, ROOT)
 DATA = os.path.join(HERE, "data")
 
 
-def install_kernels(gam: float, grid) -> object:
-    import geovac.lih_r12ci as pkg
-    name = "geovac.lih_r12ci.kernels"
-    assert name not in sys.modules, "kernels already imported -- override would not propagate"
-    path = os.path.join(ROOT, "geovac", "lih_r12ci", "kernels.py")
-    src = open(path, encoding="utf-8").read()
-    src, n1 = re.subn(r"^GAM = 0\.5\b", f"GAM = {float(gam)!r}", src, flags=re.M)
-    assert n1 == 1, "GAM line not found exactly once"
-    if grid is not None:
-        nxi, neta, nphi = grid
-        src, n2 = re.subn(r"^NXI, NETA, NPHI = 72, 44, 28\b",
-                          f"NXI, NETA, NPHI = {nxi}, {neta}, {nphi}", src, flags=re.M)
-        assert n2 == 1, "grid line not found exactly once"
-    spec = importlib.util.spec_from_loader(name, loader=None, origin=path)
-    mod = importlib.util.module_from_spec(spec)
-    mod.__file__ = path
-    mod.__package__ = "geovac.lih_r12ci"
-    sys.modules[name] = mod
-    exec(compile(src, path, "exec"), mod.__dict__)
-    pkg.kernels = mod
-    return mod
-
-
-def install_triangle(mmax, lmax) -> object:
-    """Source-override triangle.py's MMAX / LMAX (module constants that size import-time tables and
-    are bound BY VALUE into P2 / M at their import) -- must run before P2 / M import."""
-    import geovac.lih_r12ci as pkg
-    name = "geovac.lih_r12ci.triangle"
-    assert name not in sys.modules
-    path = os.path.join(ROOT, "geovac", "lih_r12ci", "triangle.py")
-    src = open(path, encoding="utf-8").read()
-    if mmax is not None:
-        src, n = re.subn(r"^MMAX = 4", f"MMAX = {int(mmax)}", src, flags=re.M); assert n == 1
-    if lmax is not None:
-        src, n = re.subn(r"^LMAX = 34", f"LMAX = {int(lmax)}", src, flags=re.M); assert n == 1
-    spec = importlib.util.spec_from_loader(name, loader=None, origin=path)
-    mod = importlib.util.module_from_spec(spec)
-    mod.__file__ = path; mod.__package__ = "geovac.lih_r12ci"
-    sys.modules[name] = mod
-    exec(compile(src, path, "exec"), mod.__dict__)
-    pkg.triangle = mod
-    return mod
+# install_kernels / install_triangle moved to geovac/lih_r12ci/source_override.py (LiH
+# productionization step 2c, 2026-10-04); re-exported here so XR.install_kernels keeps working.
+from geovac.lih_r12ci.source_override import install_kernels, install_triangle  # noqa: E402,F401
 
 
 def main() -> None:
@@ -101,9 +62,9 @@ def main() -> None:
     KG = install_kernels(args.gam, args.grid)
     if args.tri_mmax is not None or args.tri_lmax is not None:
         install_triangle(args.tri_mmax, args.tri_lmax)
-    import lih_marriage_phase2 as P2
-    import lih_pi_m16 as M
-    import lih_gvee_sparse as S
+    import geovac.lih_r12ci.enumerators as P2
+    import geovac.lih_r12ci.pi_m16 as M
+    import geovac.lih_r12ci.gvee_sparse as S
     from geovac.lih_r12ci import gVee as GV, hT as HT, gT as GT, triangle as TR, hVee as HV
 
     # --- propagation asserts (every namespace that bound GAM / the grid at import) ---

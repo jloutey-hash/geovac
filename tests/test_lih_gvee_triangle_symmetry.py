@@ -39,11 +39,9 @@ ORBIT = [((1, 2), (1, 3), (2, 3)), ((1, 2), (1, 4), (2, 4)), ((1, 2), (2, 3), (1
 
 @pytest.fixture(scope="module")
 def setup():
-    sys.path.insert(0, DEBUG)
-    sys.path.insert(0, ROOT)
     import geovac.lih_r12ci.kernels as KG
-    import lih_pi_m16 as M
-    import lih_gvee_sparse as S
+    import geovac.lih_r12ci.pi_m16 as M
+    import geovac.lih_r12ci.gvee_sparse as S
     old = KG.USE_EXACT_NEUMANN
     KG.USE_EXACT_NEUMANN = True
     ref = M.build_primitives(M.CFG, M.PRIM_CACHE_PI, verbose=False)

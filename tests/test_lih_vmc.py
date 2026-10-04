@@ -1,4 +1,4 @@
-r"""Fast regression backing for the LiH VMC-over-FCI build (debug/lih_vmc.py, Paper 19
+r"""Fast regression backing for the LiH VMC-over-FCI build (geovac/lih_vmc.py, Paper 19
 "Fixed-geometry energy versus well shape").
 
 The rigorous variational LiH energy -8.047 Ha is a STOCHASTIC VMC number (reproduce with
@@ -16,18 +16,14 @@ import sys
 import numpy as np
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                                "debug"))
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-import lih_vmc as V  # noqa: E402
+import geovac.lih_vmc as V  # noqa: E402  (promoted from debug/lih_vmc.py, 2026-10-04)
 
 
 def _orbs():
     import mpmath as mp
-    from prolate_mixed_eri import sto_orbital, valence_prolate_orbital, ZC_LI
-    from prolate_allelectron_analytic_fci import sto_orbital_B
-    from prolate_allelectron_c4 import from_sigma, valence_pi_orbital
+    from geovac.prolate_allelectron.mixed_eri import sto_orbital, valence_prolate_orbital, ZC_LI
+    from geovac.prolate_allelectron.analytic_fci import sto_orbital_B
+    from geovac.prolate_allelectron.c4 import from_sigma, valence_pi_orbital
     R = 3.015
     return R, {
         "Li1s_core": from_sigma(sto_orbital(ZC_LI, R, is_core=True)),
@@ -77,7 +73,7 @@ def test_orbital_laplacian_matches_fd():
 
 def test_orbital_value_equals_engine_grid():
     """The real-space orbital must equal the engine's own _orb_on_grid (phi_azi=0)."""
-    from prolate_allelectron_c4 import _orb_on_grid, _grid_template
+    from geovac.prolate_allelectron.c4 import _orb_on_grid, _grid_template
     R, orbs = _orbs()
     tmpl = _grid_template(R, N_grid=24, xi_max=10.0)
     xi, eta = tmpl['xi'], tmpl['eta']
@@ -113,9 +109,9 @@ def test_jastrow_cusp_finite_local_energy():
     R = 3.015
     # minimal wf: 2 orbitals, closed-shell-like, na=nb=2 needs 2 orbs; build by hand
     import mpmath as mp
-    from prolate_mixed_eri import sto_orbital, valence_prolate_orbital, ZC_LI
-    from prolate_allelectron_analytic_fci import sto_orbital_B
-    from prolate_allelectron_c4 import from_sigma
+    from geovac.prolate_allelectron.mixed_eri import sto_orbital, valence_prolate_orbital, ZC_LI
+    from geovac.prolate_allelectron.analytic_fci import sto_orbital_B
+    from geovac.prolate_allelectron.c4 import from_sigma
     orbs = [from_sigma(sto_orbital(ZC_LI, R, is_core=True)),
             from_sigma(sto_orbital_B(mp.mpf('1.0'), R))]
     prims = [V.extract_prim(o) for o in orbs]

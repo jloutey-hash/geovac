@@ -94,25 +94,8 @@ def energy(geminal: str = "exp") -> R12Result:
     T00, T11 = grid_int(Gpq(0, 0)), grid_int(Gpq(1, 1))
 
     # ---- general phi-averaged kernels on the sigma2 grid (for the linexp radial funcs) ---- #
-    def build_kernel_gen(func, nphi=28):
-        xp, wp = leggauss(nphi); phi = 0.5 * np.pi * (xp + 1.0); wphi = 0.5 * np.pi * wp
-        rc = rho_cyl_f; z = zc_f; rc2 = rc[:, None] * rc[None, :]
-        base = rc[:, None] ** 2 + rc[None, :] ** 2 + (z[:, None] - z[None, :]) ** 2
-        K = np.zeros((NG, NG))
-        for cphi, w in zip(np.cos(phi), wphi):
-            d = np.sqrt(np.maximum(base - 2.0 * rc2 * cphi, 0.0))
-            K += 2.0 * w * func(d)
-        return K
-
-    def build_kernel_m_gen(func, m, nphi=48):
-        xp, wp = leggauss(nphi); phi = 0.5 * np.pi * (xp + 1.0); wphi = 0.5 * np.pi * wp
-        rc = rho_cyl_f; z = zc_f; rc2 = rc[:, None] * rc[None, :]
-        base = rc[:, None] ** 2 + rc[None, :] ** 2 + (z[:, None] - z[None, :]) ** 2
-        K = np.zeros((NG, NG))
-        for ph, w in zip(phi, wphi):
-            d = np.sqrt(np.maximum(base - 2.0 * rc2 * np.cos(ph), 0.0))
-            K += 2.0 * w * func(d) * np.cos(m * ph)
-        return K / (2 * np.pi) if m == 0 else K / np.pi
+    # single home in kernels.py (2026-10-04; was a verbatim closure copy here + in the enumerators)
+    from .kernels import build_kernel_gen, build_kernel_m_gen
 
     # ---- geminal-specific kernels ---- #
     if geminal == "exp":

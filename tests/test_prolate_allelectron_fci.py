@@ -1,4 +1,4 @@
-"""Guards for the all-electron prolate FCI engine (debug/prolate_allelectron_fci.py,
+"""Guards for the all-electron prolate FCI engine (geovac/prolate_allelectron/fci_grid.py,
 CHANGELOG v5.15.x): the multi-exponent MO integrals, the FCI, and the generalized-m
 (pi/delta) azimuthal ERI kernels.
 
@@ -8,19 +8,11 @@ Fire-tested claims:
   (3) mu=0,1,2 kernels == direct numerical dphi integration (toroidal recurrence).
       Rejects a wrong F_1/F_2 coefficient, which nothing else would catch.
 """
-import os
-import sys
-
 import numpy as np
 import pytest
 
-_DEBUG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "debug")
-if _DEBUG not in sys.path:
-    sys.path.insert(0, _DEBUG)
-sys.argv = [sys.argv[0]]   # debug drivers parse argv at import
-
-from geovac.prolate_scf import get_orbital_on_grid, compute_vee_integral   # noqa: E402
-import prolate_allelectron_fci as A                                         # noqa: E402
+from geovac.prolate_scf import get_orbital_on_grid, compute_vee_integral
+from geovac.prolate_allelectron import fci_grid as A
 
 R = 1.4
 
