@@ -205,9 +205,8 @@ def test_L2E_FALS_1_BW_alpha_period_closure(n_max, N_t):
     )
 
 
-@pytest.mark.slow
 def test_L2E_FALS_1_BW_alpha_period_closure_n_max_3_N_t_11():
-    """L2E-FALS-1 at n_max=3, N_t=11 (dim_W_L=120, GNS=14400 — slow)."""
+    """L2E-FALS-1 at n_max=3, N_t=11 (dim_W_L=120, GNS=14400; ~0.5 s since Delta/K_TT are lazy)."""
     lmh = for_bisognano_wichmann_lorentzian(n_max=3, N_t=11, T_max=1.0)
     results = lmh.verify_witness_lorentzian()
     assert results["max_alpha_residual"] < 1e-12
@@ -561,7 +560,6 @@ def test_restrict_operator_to_wedge_identity_preserved():
 # ---------------------------------------------------------------------------
 
 
-@pytest.mark.slow
 def test_full_panel_n_max_3_N_t_21_BW_strong():
     """Full panel: n_max=3, N_t=21 BW canonical strong identification."""
     lmh = for_bisognano_wichmann_lorentzian(n_max=3, N_t=21, T_max=1.0)
@@ -573,7 +571,6 @@ def test_full_panel_n_max_3_N_t_21_BW_strong():
     )
 
 
-@pytest.mark.slow
 def test_six_witness_collapse_n_max_3_N_t_11():
     """Six-witness collapse at (n_max=3, N_t=11)."""
     results = verify_cross_witness_collapse_lorentzian(

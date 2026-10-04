@@ -1,0 +1,108 @@
+% =====================================================================
+% Paper 18 chronicle: sprint-record blocks relocated VERBATIM from
+% papers/group3_foundations/paper_18_exchange_constants.tex
+% (2026-10-03, v5.20.1, PI-approved item 5 of the QA process change:
+% "shrink the surface" -- chronicle prose leaves the paper, results stay).
+% Source: commit d36d270, Sec. "Taxonomy of Exchange Constants", the
+% chemistry-side paragraphs after "Chemistry-side analog" (Block A).
+% This file is a record, not a compiled document. Do not edit the blocks;
+% corrections belong in the papers that own the claims (Paper 19 for the
+% W1c/W1e chemistry wall, Paper 57 for the forced/free seam catalogue).
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% Block A -- the W1e period-class diagnostic (PSLQ of eleven NaH correction
+% terms) and the Sprint R3-A/B operational localization of the W1e wall.
+% ---------------------------------------------------------------------
+Sprint W1e period-class diagnostic (2026-06-04;
+\verb|debug/sprint_w1e_period_class_memo.md|) tested whether the
+W1c\,$\to$\,W1e chemistry-correlation wall sits in a higher-weight
+cyclotomic-mixed-Tate (M3) period class than the diagonal of the
+composed Hamiltonian.  Eleven NaH correction terms extracted from
+sprints F4 / F5 / F6 were PSLQ-classified at 100~dps against M1, M2,
+M3, and an INNER analog basis built from the Clementi--Raimondi
+exponents.  Result: zero outer-factor (M1/M2/M3) identifications across
+all eleven terms at audit ceiling 100 and permissive ceiling $10^6$,
+after filtering for rational-only fits, basis-internal $\mathbb{Q}$-linear
+dependencies, and the curve-fit-audit failure mode (basis size
+vs.\ input precision).  An independent random-rational null-hypothesis
+test against the same bases gave $0/50$ false positives on M2 and M3,
+confirming the bases are sparse enough that ``0~hits across 11~targets''
+is informative, not a measurement-noise artifact.
+
+The PSLQ result is a consistency check, not a derivation: the
+load-bearing argument is structural.  The M3 sub-mechanism lives at
+$k=1$ in the master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ (Sec.~\ref{sec:mellin}),
+which ties to vertex-parity / parity-character spectral sums on the
+GeoVac graph.  The W1e correction terms have no vertex-parity
+content---they are FCI eigenvalues and Hartree integrals over
+hydrogenic plus multi-zeta orbital products---so they categorically
+cannot pick up M3 content.  The PSLQ pass rules out the loophole
+``W1e might happen to land in M1/M2/M3 by coincidence''; the
+structural argument is what carries the negative.
+
+The chemistry-side corrections classify cleanly into the chemistry-side
+analog of the inner-factor input-data tier: FCI eigenvalues are
+algebraic-implicit roots of polynomials with externally-fitted matrix
+elements; Hartree $J$ and Slater--Condon $K$ integrals are rational
+in external $Z_{\rm eff}$ values; Phillips--Kleinman barriers depend
+on the same external orbital fits.  Six W1c / W1e closure attempts
+(CLAUDE.md~\S{}3 entries for cross-center PK, screened-Schrödinger
+valence, multi-zeta substitution, kernel-shape substitution,
+bonding-PK rank-1, basis enlargement, explicit-core Hartree) are
+explained at the structural level by this non-selection: they attempt
+outer-factor mechanisms (rational/algebraic modifications) on a wall
+whose content lies entirely in the external input-data tier.
+
+The chemistry analog of Sprint H1's Yukawa non-selection theorem is
+the W1e wall: the framework can compose any Clementi--Raimondi
+exponent set into the heavy-atom Hamiltonian but cannot autonomously
+select the exponents.  Outer-factor M-mechanism machinery is silent
+on inner-factor / calibration-data content in both the SM-side
+(Yukawa values) and the chemistry-side (atomic-physics calibration
+set) directions.  The five chemistry-side observables in the
+Sprint~TD Track~3 analog role (alkali-hydride binding energies,
+ionisation energies, fine-structure splittings, hyperfine splittings,
+polarisabilities) are not predicted by GeoVac alone; they are
+consistency checks that constrain candidate atomic-physics calibration
+sets, not framework-derived predictions.
+
+\paragraph{Operational localization (Sprint R3-B falsifier,
+2026-06-07).}  The W1e classification at the period-class level
+(0/11 hits in M1/M2/M3) is now sharpened by an operational
+test.  Sprint R3-B exported the NaH balanced Hamiltonian
+to FCIDUMP at $n_{\max} \in \{2, 3\}$ via the
+\texttt{GeoVacHamiltonian.to\_fcidump} interface and ran
+DMRG (sector-restricted FCI at $\mathrm{FCI\,dim} \le 784$,
+which IS DMRG-at-infinite-$\chi$) at every $R$ in
+$[2.5, 6.0]$ bohr.  The resulting PES is \emph{bit-identical to
+the P4 direct-FCI baseline} ($\max\text{diff} \sim 6 \times
+10^{-13}$~Ha at every grid point), with no interior minimum
+and $21$--$24\times$ over-binding at the experimental
+$R_e = 3.566$ bohr.  Increasing $n_{\max}$ from 2 to 3
+\emph{deepens} the unphysical well rather than closing it.
+The wall is therefore not at the determinant-expansion level
+(DMRG cannot move it) and not at basis-truncation level
+($n_{\max}$ sweep deepens it); it lives at the projection
+step from continuous Level 4 adiabatic+PK to second-quantized
+$(h_1, \mathrm{eri}, e_{\rm core})$ integrals.  A parallel
+diagnostic on LiH composed and balanced (Sprint R3-A,
+same date) found the same monotone-descending qubit-FCI PES
+behaviour: the LiH 2.82\% $R_{\rm eq}$ established at
+CHANGELOG v3.56.0 came from
+\texttt{ComposedDiatomicSolver.LiH\_ab\_initio} (continuous
+Level 4 multichannel adiabatic with PK), \emph{not} from FCI
+on the qubit/FCIDUMP-exported integrals.  The
+chemistry-side inner-factor input-data tier therefore has a
+specific structural home in the GeoVac construction: the
+projection step where continuous Level 4 multichannel
+information is reduced to the second-quantized integrals that
+seed qubit/composed solvers.  This is the chemistry-side
+\emph{operational} analog of the Sprint H1 Yukawa
+non-selection theorem at the projection level: the framework
+admits a chemistry Hamiltonian structurally but does not
+autonomously generate the calibration content of its
+$(h_1, \mathrm{eri}, e_{\rm core})$ tensors at this
+projection step.
+

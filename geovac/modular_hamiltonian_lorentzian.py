@@ -531,8 +531,43 @@ class LorentzianTomitaStructure:
     rho: Optional[np.ndarray] = None
     rho_sqrt: Optional[np.ndarray] = None
     rho_invsqrt: Optional[np.ndarray] = None
-    Delta_matrix: Optional[np.ndarray] = None
-    K_TT: Optional[np.ndarray] = None
+    _rho_eigvals: Optional[np.ndarray] = None
+    _rho_eigvecs: Optional[np.ndarray] = None
+    _Delta: Optional[np.ndarray] = None
+    _K_TT: Optional[np.ndarray] = None
+
+    @property
+    def Delta_matrix(self) -> np.ndarray:
+        """Delta_L = (rho^{-1})^T (x) rho on vec(X), built on first access.
+
+        Lazy because it is (dim_W_L^2)^2: 3.3 GB at (n_max, N_t) = (3, 11) and
+        53 GB at (3, 21), while the period-closure checks need only the
+        eigendecomposition of rho.
+        """
+        if self._Delta is None:
+            if self.rho is None:
+                self.construct()
+            V, lam = self._rho_eigvecs, self._rho_eigvals
+            rho_inv = (V * (1.0 / lam)) @ V.conj().T
+            self._Delta = np.kron(rho_inv.T, self.rho)
+        return self._Delta
+
+    @property
+    def K_TT(self) -> np.ndarray:
+        """K_L_TT = -log Delta_L in closed form, built on first access.
+
+        log Delta = -(log rho)^T (x) I + I (x) log rho (the two Kronecker factors
+        commute), so K_TT = (log rho)^T (x) I - I (x) log rho: no eigendecomposition
+        of the dim_W_L^2 operator is needed.
+        """
+        if self._K_TT is None:
+            if self.rho is None:
+                self.construct()
+            V, lam = self._rho_eigvecs, self._rho_eigvals
+            log_rho = (V * np.log(lam)) @ V.conj().T
+            eye = np.eye(self.dim_W_L, dtype=np.complex128)
+            self._K_TT = np.kron(log_rho.T, eye) - np.kron(eye, log_rho)
+        return self._K_TT
 
     @property
     def dim_GNS(self) -> int:
@@ -545,8 +580,7 @@ class LorentzianTomitaStructure:
         Computes:
           - rho_W^L = e^{-beta H_local} / Z on the wedge
           - rho^{1/2}, rho^{-1/2} via diagonalization
-          - Delta_L as a (dim_W_L^2 x dim_W_L^2) matrix on vec(X)
-          - K_L_TT = -log Delta_L
+        Delta_L and K_L_TT = -log Delta_L are lazy properties (closed form).
         """
         rho_unnorm = scipy.linalg.expm(-self.beta * self.H_local)
         Z = np.trace(rho_unnorm).real
@@ -561,17 +595,10 @@ class LorentzianTomitaStructure:
         invsqrt_diag = 1.0 / sqrt_diag
         self.rho_sqrt = (eigvecs * sqrt_diag) @ eigvecs.conj().T
         self.rho_invsqrt = (eigvecs * invsqrt_diag) @ eigvecs.conj().T
-
-        # Delta_L on K_GNS: vec(rho X rho^{-1}) = ((rho^{-1})^T (x) rho) vec(X)
-        rho_inv = np.linalg.inv(self.rho)
-        self.Delta_matrix = np.kron(rho_inv.T, self.rho)
-
-        # K_L_TT = -log Delta_L
-        delta_eigvals, delta_eigvecs = np.linalg.eigh(self.Delta_matrix)
-        delta_eigvals = np.maximum(delta_eigvals, 1e-30)
-        log_diag = np.log(delta_eigvals)
-        K_TT_diag = -log_diag
-        self.K_TT = (delta_eigvecs * K_TT_diag) @ delta_eigvecs.conj().T
+        self._rho_eigvals = eigvals
+        self._rho_eigvecs = eigvecs
+        self._Delta = None
+        self._K_TT = None
 
     def apply_J_L_TT(self, vec_X: np.ndarray) -> np.ndarray:
         """Apply the Lorentzian-side Tomita antilinear J_L_TT to vec(X).
@@ -630,8 +657,7 @@ class LorentzianTomitaStructure:
         """
         if self.rho is None:
             self.construct()
-        eigvals, eigvecs = np.linalg.eigh(self.rho)
-        eigvals = np.maximum(eigvals, 1e-30)
+        eigvals, eigvecs = self._rho_eigvals, self._rho_eigvecs
         log_eigs = np.log(eigvals)
         phases = np.exp(1j * t * log_eigs)
         rho_it = (eigvecs * phases) @ eigvecs.conj().T

@@ -20,7 +20,7 @@ edit bar"); the swept units then show CHANGED and are reviewed by the next run.
 
 **Self-check round 4 (SMALL).** geovac/modular_hamiltonian.py method name `restrict_K_alpha_to_wedge` contradicts its corrected docstring (a relabelling, not a restriction; API rename owed). Paper 50 history notes at L158-161 and L186.
 **[CLOSED 2026-10-03, PI go-ahead]** CLAUDE.md S1.7 WH5 claim text and S13.5 K-rule note now say "of distinct type" (were "structurally independent" / "independent").
-**Incomplete.** Two slow Paper 32 tests hit MemoryError (test_full_panel_n_max_3_N_t_21_BW_strong, test_L2E_FALS_1_BW_alpha_period_closure_n_max_3_N_t_11), as at FULL #10.
+**[CLOSED 2026-10-03, v5.20.1]** Two slow Paper 32 tests hit MemoryError; fixed by a lazy closed-form Tomita K_TT (0.5 s each, un-marked slow).
 
 ## Open
 
