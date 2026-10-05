@@ -180,6 +180,7 @@ def test_pre_2026_09_03_waypoints_do_not_reproduce():
 
 
 @pytest.mark.slow
+@pytest.mark.xdist_group("heavy_memory")
 def test_printed_values_n_max_20_25():
     """The off-branch excursion 4.1 % at 20 and 1.8 % at 25 (dense eigh, ~20 s)."""
     for n in (20, 25):
@@ -188,7 +189,7 @@ def test_printed_values_n_max_20_25():
 
 
 @pytest.mark.slow
-@pytest.mark.parametrize("n_max", [20, 25, 30])
+@pytest.mark.parametrize("n_max", [20, pytest.param(25, marks=pytest.mark.xdist_group("heavy_memory")), pytest.param(30, marks=pytest.mark.xdist_group("heavy_memory"))])
 def test_deg_tol_gap_window_slow_values(n_max):
     """The slow printed values (4.1 % at 20, 1.8 % at 25, 0.39 % at 30) rest on
     DEG_TOL too, so the noise << DEG_TOL < genuine-gap check is repeated here.
@@ -237,6 +238,7 @@ def test_deg_tol_gap_window_slow_values(n_max):
 
 
 @pytest.mark.slow
+@pytest.mark.xdist_group("heavy_memory")
 def test_endpoint_n_max_30_is_the_on_branch_closed_form():
     """n_max = 30 (9455 nodes, minutes): 0.39 %, within 1e-3 absolute of the
     printed value and equal to (2 - 2 cos(pi/29))/3."""

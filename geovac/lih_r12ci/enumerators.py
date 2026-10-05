@@ -2,7 +2,7 @@ r"""PROMOTED debug/lih_marriage_phase2.py -> geovac/lih_r12ci/enumerators.py (Li
 The promoted code is bit-identical to the debug/ original against
 tests/data/lih_golden/golden.json; debug/lih_marriage_phase2.py is now an alias shim of this module.
 Backs (Paper 19): the seven enumerator generalisations over T (gate G1: the 2-MO reference reproduces the assembly.py energies) -- the engine of the sigma (-8.0372) and pi (-8.0490) marriages.
-Side effects: import builds the gVee phi-kernels (via geovac.lih_r12ci.gVee, ~2 min) and binds GAM by value; build_kernel_gen / build_kernel_m_gen are now the single copies in geovac.lih_r12ci.kernels (formerly verbatim duplicates of assembly.energy's closures); build_ref_artifact READS debug/data/lih_marriage_phase0_ref_exact.npz; run_gate WRITES OUT.
+Side effects: import builds the gVee phi-kernels (via geovac.lih_r12ci.gVee, ~2 min) and reads the geminal range kernels.GAM when a Geminal is constructed (kernels.configure_geminal); build_kernel_gen / build_kernel_m_gen are now the single copies in geovac.lih_r12ci.kernels (formerly verbatim duplicates of assembly.energy's closures); build_ref_artifact READS debug/data/lih_marriage_phase0_ref_exact.npz; run_gate WRITES OUT.
 The original docstring follows (its 'Run: python debug/lih_marriage_phase2.py' lines still work through the shim).
 
 ----------------------------------------------------------------------------
@@ -60,6 +60,13 @@ from numpy.polynomial.legendre import leggauss
 
 # data files stay in debug/data (resolved from the repo root; never written into geovac/)
 from geovac.prolate_allelectron._paths import DEBUG_DATA as DATA  # noqa: E402
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 REF_EXACT = os.path.join(DATA, "lih_marriage_phase0_ref_exact.npz")
 OUT = os.path.join(DATA, "lih_marriage_phase2.npz")
 
@@ -75,7 +82,7 @@ def _t(t0: float) -> str:
 # geovac primitives  (import once; toggle USE_EXACT_NEUMANN per path)
 # =========================================================================== #
 import geovac.lih_r12ci.kernels as KG
-from geovac.lih_r12ci.kernels import (a as A_FOCUS, GAM, geo_f, grid_int, rho_cyl_f, zc_f,
+from geovac.lih_r12ci.kernels import (a as A_FOCUS, geo_f, grid_int, rho_cyl_f, zc_f,
                                        NXI, NETA, NG, build_kernel, Xg as _Xg, Eg as _Eg,
                                        ETA as _ETA1D, WETA as _WETA1D)
 from geovac.lih_r12ci.hVee import neumann_potential, P00, P01, P11
@@ -229,7 +236,7 @@ class Geminal:
 
     def __init__(self, name: str):
         self.name = name
-        g = GAM
+        g = KG.GAM
         if name == "exp":
             self.Kf = build_kernel(g); self.Kf2 = build_kernel(2 * g)
             self.Fm = [build_kernel_m(g, m) for m in range(MMAX + 1)]
@@ -761,7 +768,7 @@ def run_gate(paths: Sequence[str], gems: Sequence[str], preview: bool):
     np.set_printoptions(linewidth=140, precision=6, suppress=True)
     print("=" * 100)
     print("LiH MARRIAGE -- PHASE 2: seven enumerator generalisations over T + GATE G1 (2-MO regression)")
-    print(f"  R={R_ENG}  V_NN={V_NN:.6f}  grid {NXI}x{NETA} (NG={NG})  GAM={GAM}")
+    print(f"  R={R_ENG}  V_NN={V_NN:.6f}  grid {NXI}x{NETA} (NG={NG})  GAM={KG.GAM}")
     print("=" * 100, flush=True)
 
     EXACT_REF = {'linexp': -7.917199, 'exp': -7.943605}   # Phase 0b G-e exact-kernel references

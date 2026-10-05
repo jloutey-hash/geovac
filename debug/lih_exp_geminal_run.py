@@ -1,14 +1,12 @@
 r"""pi/M=16 marriage at a chosen geminal range gamma (and optionally a finer kernel grid).
 
-Runs the O(nnz) sparse analytic marriage (debug/lih_gvee_sparse.all_pieces_sparse) exactly as
-debug/lih_pi_m16_energy_sparse.py does, but with the geminal range GAM (a module constant of
-geovac/lih_r12ci/kernels.py, 0.5) and optionally the kernel grid (NXI, NETA, NPHI = 72, 44, 28)
-overridden.  geovac/ is NOT edited: kernels.py's SOURCE is read, the two constant lines are
-substituted, and the result is exec'd as the module `geovac.lih_r12ci.kernels` BEFORE any consumer
-imports it.  Every consumer binds GAM / the grid by `from .kernels import ...` at ITS import time
-(gVee even builds Kf/_KS at import), so a post-import monkeypatch would NOT reach them; the source
-override does.  After import the driver ASSERTS that every namespace that bound GAM sees the new
-value (P2.GAM, M.GAM, GV.GAM, hT/gT/triangle GAM, GV._KS keys).
+Runs the O(nnz) sparse analytic marriage (geovac.lih_r12ci.gvee_sparse.all_pieces_sparse) exactly as
+debug/lih_pi_m16_energy_sparse.py does, at geminal range gamma set through the real API
+geovac.lih_r12ci.configure_geminal (2026-10-04; it replaced the kernels.py GAM source override,
+bit-identically against tests/data/lih_golden).  Only the optional kernel GRID (NXI, NETA, NPHI =
+72, 44, 28) and the triangle cutoffs still go through geovac.lih_r12ci.source_override (a source exec
+before the consumers import).  After import the driver ASSERTS that every namespace sees the new value
+(P2.GAM, M.GAM, GV.GAM, hT/gT/triangle GAM, GV._KS keys).
 
     python debug/lih_exp_geminal_run.py --geminal exp --gam 2.0 --trunc 1e-2 [--grid 96 60 40]
 
@@ -37,7 +35,8 @@ DATA = os.path.join(HERE, "data")
 
 
 # install_kernels / install_triangle moved to geovac/lih_r12ci/source_override.py (LiH
-# productionization step 2c, 2026-10-04); re-exported here so XR.install_kernels keeps working.
+# productionization step 2c, 2026-10-04); re-exported here so XR.install_kernels keeps working
+# (install_kernels(gam, None) is now just geovac.lih_r12ci.configure_geminal(gam)).
 from geovac.lih_r12ci.source_override import install_kernels, install_triangle  # noqa: E402,F401
 
 
@@ -59,7 +58,12 @@ def main() -> None:
     ap.add_argument('--rank', type=int, default=None, help='triangle low-rank cutoff (30)')
     args = ap.parse_args()
 
-    KG = install_kernels(args.gam, args.grid)
+    if args.grid is None:
+        from geovac.lih_r12ci import configure_geminal
+        configure_geminal(args.gam)
+        import geovac.lih_r12ci.kernels as KG
+    else:
+        KG = install_kernels(args.gam, args.grid)      # grid source override, then configure_geminal
     if args.tri_mmax is not None or args.tri_lmax is not None:
         install_triangle(args.tri_mmax, args.tri_lmax)
     import geovac.lih_r12ci.enumerators as P2

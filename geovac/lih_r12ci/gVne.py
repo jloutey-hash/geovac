@@ -18,11 +18,19 @@ Run from debug/:  python lih_r12ci_gVne_analytic.py
 """
 import numpy as np
 
+from . import kernels as _KG    # NOTE: this standalone stage module builds its tables at import
 from .kernels import (
-    geo_f, dens, build_kernel, grid_int, a, ZA, ZB, GAM)
+    geo_f, dens, build_kernel, grid_int, a, ZA, ZB)
 from .energy import Z_A, Z_B
 from .hT import cvec, rA_f, rB_f, d_aa, d_ab, d_bb
 from .basis import sample_block
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return _KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 GVNE_REF = -2.8454
 FBAR_REF = 1.88028
@@ -36,7 +44,7 @@ P00 = c00[0] * d_aa + c00[1] * d_ab + c00[2] * d_bb
 P11 = c11[0] * d_aa + c11[1] * d_ab + c11[2] * d_bb
 P01 = c01[0] * d_aa + c01[1] * d_ab + c01[2] * d_bb
 rho = P00 + P11
-Kf = build_kernel(GAM); Kf2 = build_kernel(2 * GAM)
+Kf = build_kernel(_KG.GAM); Kf2 = build_kernel(2 * _KG.GAM)
 
 
 def dress(K, h):
@@ -122,12 +130,12 @@ def mc_breakdown(seed_u=41, seed_d=42):
     for s in range(len(up)):
         pos = np.concatenate([up[s], dn[s]], axis=1); POS.append(pos)
         d = lambda i, j: np.linalg.norm(pos[:, i] - pos[:, j], axis=-1)
-        Fall.append(sum(np.exp(-GAM * d(i, j)) for i, j in P + INTER))
+        Fall.append(sum(np.exp(-_KG.GAM * d(i, j)) for i, j in P + INTER))
     Fbar = np.concatenate(Fall).mean()
     for pos in POS:
         d = lambda i, j: np.maximum(np.linalg.norm(pos[:, i] - pos[:, j], axis=-1), 1e-12)
-        Su = sum(np.exp(-GAM * d(i, j)) for i, j in P)
-        Iu = sum(np.exp(-GAM * d(i, j)) for i, j in INTER)
+        Su = sum(np.exp(-_KG.GAM * d(i, j)) for i, j in P)
+        Iu = sum(np.exp(-_KG.GAM * d(i, j)) for i, j in INTER)
         F = Su + Iu
         rA = np.linalg.norm(pos - np.array([0, 0, -a]), axis=-1)
         rB = np.linalg.norm(pos - np.array([0, 0, +a]), axis=-1)

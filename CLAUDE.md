@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.20.3 (October 4, 2026)
+**Version:** v5.20.4 (October 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Owed items 1-4 (2026-10-04, v5.20.4):** P27 stale Be EP-2N numbers fixed (sign-fix fallout); P32 item 4 = J^2=-1 obstruction; heavy tests xdist-safe; LiH geminal gamma is a real parameter (golden bit-identical). See CHANGELOG v5.20.4.
 - **LiH/prolate stack productionized (2026-10-04, v5.20.3):** ~11k lines debug/ -> geovac/ (prolate_allelectron/, lih_r12ci/, lih_vmc); 42-item golden oracle, all bit-identical incl. -8.049045. See CHANGELOG v5.20.3.
 - **/qa trunk FULL #13 = FAIL, remediated (2026-10-03, v5.20.2):** 2 OWNER-LARGE (taper guard blind to a log rate; P32 corollary 'confirmed/closure') + 22 SURFACE (11 via self-check, 4/4/2/1/0); 4 C16 families; trunk SMALL sweep done (real_structure sign bug fixed). See CHANGELOG v5.20.2.
 - **Item 5 rounds A+B + slow-test closed form (2026-10-03, v5.20.1):** sprint record relocated verbatim to docs/chronicles/ (P32 8,642 -> 6,174 lines; P18 -84); OOM Tomita tests 0.5 s via closed-form K_TT. See CHANGELOG v5.20.1.

@@ -246,31 +246,22 @@ def test_J_commutes_D_full_dirac_truthful(n_max):
 def test_J_commutes_D_full_dirac_offdiag_status(n_max):
     """J D vs +D J on full Dirac sector with OFFDIAG CH perturbation.
 
-    The offdiag Dirac adds Hermitian E1-style hopping H[i, j] = alpha for
-    |Δn|=1, |Δl|=1, |Δm_j|<=1 (within and across chirality). This is
-    NOT manifestly J-symmetric unless the perturbation is symmetric under
-    m_j -> -m_j on bra/ket simultaneously.
+    The offdiag Dirac adds real E1-style hopping D[a, b] = alpha (same
+    chirality) or chirality_coupling (across) on |Δn|=1, |Δl|=1,
+    |Δm_j|<=1, plus diagonal lifters n_lift, l_lift, m_lift * 2 m_j.
 
-    The off-diag term H[i, j] = alpha is constant along (i, j) pairs that
-    satisfy the rule. The rule depends on |Δm_j|, which IS symmetric
-    under simultaneous m_j -> -m_j. So we *expect* the offdiag piece to
-    commute with J too.
-
-    But the diagonal-lifters l_lift * l + m_lift * 2 m_j include a
-    LINEAR term in m_j, which is ANTI-symmetric under m_j -> -m_j. Under
-    J, the diagonal entry at index i becomes the entry at index pi(i)
-    where pi sends m_j -> -m_j; the m_j-lifter sign flips.
-
-    Therefore, with default lifters (n_lift=1, l_lift=0.1, m_lift=0.005),
-    J D != +D J on the offdiag. Pinned (Paper 32 audit item 4): max
-    residual 1e-2 at n_max = 1 (m-linear lifter alone), 2 at n_max = 2, 3.
-
-    EXCEPT: U conj(D) vs +D U:
-      The condition is U conj(D) = +D U.
-      D real-valued (with default lifters) -> conj(D) = D.
-      So we need U D = D U, i.e. D is invariant under U-conjugation.
-      The m_j-linear term in diag(D) becomes its OPPOSITE sign at the
-      pi-image, so U D != D U in general.
+    Two sources of residual in U conj(D) = D U (D real):
+      * n_max = 1 (no hops): the m_j-linear lifter is odd under
+        m_j -> -m_j, residual m_lift * |2m_j - (-2m_j)| = 1e-2.
+      * n_max >= 2: the hop part is invariant under m_j -> -m_j, so the
+        condition on a hop (a, b) is sigma_{pi a} = sigma_{pi b}. But
+        J^2 = -1 forces sigma_{pi a} = -sigma_a, and the rule links both
+        partners (n, l, +-1/2) to the same neighbour, so NO permutation-
+        phase choice satisfies it; each failing hop gives 2|D[a, b]|,
+        residual 2 * max(alpha, chirality_coupling) = 2. The (-1)^l
+        factor in sigma only selects WHICH hops fail (Δm_j = 0 with it,
+        |Δm_j| = 1 without); see the mechanism tests below.
+    Pinned (Paper 32 audit item 4).
     """
     basis = full_dirac_basis(n_max)
     D = camporesi_higuchi_offdiag_dirac_matrix(basis)
@@ -299,10 +290,10 @@ def test_J_commutes_D_offdiag_no_m_lift_obstructed(n_max):
     For the offdiag CH (a hand-crafted finite-n_max Hermitian
     perturbation), the cross-shell hoppings D[(n,l,m), (n+1,l+/-1,m')]
     are J-symmetric in their support pattern (the offdiag selection rule
-    |Δl|=1, |Δm_j|<=1 is invariant under m_j -> -m_j). But the natural
-    permutation-phase J = U K with sigma(l, m_j) = i^(2m_j)*(-1)^l
-    does NOT have sigma_a = sigma_b for every offdiag-connected pair
-    (a, b), so [U, D] != 0 at order 1.
+    |Δl|=1, |Δm_j|<=1 is invariant under m_j -> -m_j), so U D = D U
+    needs sigma_{pi a} = sigma_{pi b} on every hop. J^2 = -1 forces
+    sigma_{pi a} = -sigma_a, and (n, l, +-1/2) share a neighbour, so this
+    fails for EVERY permutation-phase sigma, not just i^(2m_j)*(-1)^l.
 
     This test ASSERTS the failure, documenting the obstruction. The
     correct interpretation: the offdiag CH Dirac is NOT in the natural
@@ -339,6 +330,69 @@ def test_J_commutes_D_offdiag_no_m_lift_obstructed(n_max):
     # Document the actual residual size
     print(f"\n  [n_max={n_max}, full_dirac, offdiag, m_lift=0] "
           f"|JD - DJ|_max = {err:.3e} (expected ~ 2 from offdiag rule)")
+
+
+def _offdiag_U(basis, phase):
+    """Permutation-phase U for J|n,l,m_j,chi> = phase(l, 2m_j) |n,l,-m_j,chi>,
+    built here independently of geovac.real_structure."""
+    idx = {(b.n_fock, b.l, b.two_m_j, b.chirality): i for i, b in enumerate(basis)}
+    U = np.zeros((len(basis), len(basis)), dtype=np.complex128)
+    for j, b in enumerate(basis):
+        i = idx[(b.n_fock, b.l, -b.two_m_j, b.chirality)]
+        U[i, j] = phase(b, j)
+    return U
+
+
+@pytest.mark.parametrize("n_max", [2, 3])
+@pytest.mark.parametrize("alpha,coupling", [(1.0, 1.0), (0.3, 1.0), (1.0, 0.3), (0.7, 0.2)])
+def test_offdiag_JD_residual_is_twice_max_hop(n_max, alpha, coupling):
+    """Paper 32 item 4: each failing hop contributes 2|D_ab|, so the residual
+    is 2*max(alpha, chirality_coupling) (m_lift = 0)."""
+    basis = full_dirac_basis(n_max)
+    D = camporesi_higuchi_offdiag_dirac_matrix(
+        basis, diag_lifters=(1.0, 0.1, 0.0),
+        offdiag_alpha=alpha, chirality_coupling=coupling)
+    J = build_J_full_dirac(n_max)
+    _, err = verify_J_D_relation(J, D, expected_sign=+1)
+    assert abs(err - 2.0 * max(alpha, coupling)) < 1e-12
+
+
+@pytest.mark.parametrize("n_max", [2, 3])
+def test_offdiag_obstruction_is_phase_independent(n_max):
+    """Paper 32 item 4 mechanism: the obstruction is forced by J^2 = -1, not
+    by the (-1)^l factor. (i) The (-1)^l factor only selects which hops fail
+    (Delta m_j = 0 with it, |Delta m_j| = 1 without); (ii) the hop rule
+    links both J-partners m_j = +-1/2 to a common neighbour, which with
+    J^2 = -1 excludes every permutation-phase choice."""
+    basis = full_dirac_basis(n_max)
+    D = camporesi_higuchi_offdiag_dirac_matrix(
+        basis, diag_lifters=(1.0, 0.1, 0.0),
+        offdiag_alpha=1.0, chirality_coupling=1.0)
+    two_m = np.array([b.two_m_j for b in basis])
+
+    def failing_dm(U):
+        R = U @ D - D @ U  # D real
+        rows, cols = np.nonzero(np.abs(R) > 1e-12)
+        # R[pi(a), b] != 0  <=>  hop (a, b) fails;  pi flips 2m_j
+        return {abs(-two_m[r] - two_m[c]) // 2 for r, c in zip(rows, cols)}
+
+    U_paper = _offdiag_U(basis, lambda b, j: (1j) ** b.two_m_j * (-1) ** b.l)
+    U_nol = _offdiag_U(basis, lambda b, j: (1j) ** b.two_m_j)
+    for U in (U_paper, U_nol):
+        assert np.max(np.abs(U @ U.conj() + np.eye(len(basis)))) < 1e-12
+    assert failing_dm(U_paper) == {0}
+    assert failing_dm(U_nol) == {1}
+
+    # (ii) Premise of the phase-free obstruction: both J-partners
+    # (n, 0, m_j = +-1/2) hop to the SAME neighbour (n+1, 1, +1/2) with the
+    # same real amplitude. U D = D U then needs sigma_{pi a} = sigma_{pi b}
+    # = sigma_a, contradicting sigma_{pi a} = -sigma_a (J^2 = -1).
+    idx = {(b.n_fock, b.l, b.two_m_j, b.chirality): i for i, b in enumerate(basis)}
+    for chi in (+1, -1):
+        for n in range(1, n_max):
+            nb = idx[(n + 1, 1, +1, chi)]
+            up, dn = idx[(n, 0, +1, chi)], idx[(n, 0, -1, chi)]
+            assert D[up, nb] != 0 and D[dn, nb] == D[up, nb]
 
 
 # ---------------------------------------------------------------------------

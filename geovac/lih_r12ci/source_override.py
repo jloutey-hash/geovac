@@ -1,27 +1,22 @@
-"""Source-level overrides of the geminal range GAM / the kernel grid / the triangle cutoffs.
+"""DEPRECATED source-level overrides: the geminal range now has a real API; only the kernel GRID
+(NXI, NETA, NPHI) and the triangle cutoffs (MMAX, LMAX) still need a source override.
 
-PROMOTED from debug/lih_exp_geminal_run.py (``install_kernels``, ``install_triangle``) in the LiH
-productionization step 2c (2026-10-04); the mechanism is unchanged and bit-identical against
-``tests/data/lih_golden/golden.json`` (items ``pi_marriage_exp1.5_*``).
+Geminal range.  Use ``geovac.lih_r12ci.configure_geminal(gamma)`` (= ``kernels.configure_geminal``):
+every consumer reads ``kernels.GAM`` at call / construction time, and ``gVee``'s gamma tables are built
+at import for the current gamma or rebuilt on change.  ``install_kernels(gam, None)`` is kept as a thin
+wrapper that just calls ``configure_geminal(gam)``; it reproduces the old source-override results
+bit-identically (tests/data/lih_golden items ``pi_marriage_exp1.5_*``).
 
-Why a source override and not a parameter.  ``GAM`` (and ``NXI, NETA, NPHI``) are module constants
-of ``geovac/lih_r12ci/kernels.py`` that every consumer binds BY VALUE at its own import
-(``from .kernels import GAM, ...``), and ``gVee`` even builds its phi-kernels ``Kf``/``_KS`` at import.
-A post-import monkeypatch therefore would not reach them.  ``install_kernels`` reads kernels.py's
-SOURCE, substitutes the constant line(s), and execs the result as the module
-``geovac.lih_r12ci.kernels`` BEFORE any consumer imports it; every later ``from .kernels import ...``
-then binds the new value.  (Owed refactor: a real ``gamma`` parameter threaded through
-kernels/hT/gT/gVee/triangle/enumerators/pi_m16 -- not done here because every import-time
-binding would have to move, which is not a minimal, bit-identity-preserving change.)
+Grid / triangle cutoffs (still import-time bindings).  ``NXI, NETA, NPHI`` size the grid arrays of
+kernels.py that every consumer from-imports and builds tables from at import; ``MMAX, LMAX`` size
+triangle.py's import-time Legendre tables and are bound by value into enumerators / pi_m16.
+``install_kernels(gam, grid)`` with a grid and ``install_triangle`` therefore still read the module
+SOURCE, substitute the constant line, and exec it as the module BEFORE any consumer imports it:
+  * must be called before ANY import of the overridden module (asserted);
+  * it REPLACES ``sys.modules[...]`` (and the package attribute) for the rest of the process; there is
+    no uninstall -- use a fresh process per grid.
 
-Contract / side effects:
-  * must be called before ANY import of ``geovac.lih_r12ci.kernels`` (asserted) -- i.e. before
-    importing gVee, hT, gT, hVee, triangle, enumerators, pi_m16, gvee_sparse, ...;
-  * it REPLACES ``sys.modules['geovac.lih_r12ci.kernels']`` (and the package attribute) for the
-    rest of the process; there is no uninstall -- use a fresh process per gamma;
-  * the package ``__init__`` (``assembly``) imports kernels lazily, so importing
-    ``geovac.lih_r12ci`` itself does not defeat the assertion.
-
+PROMOTED from debug/lih_exp_geminal_run.py in the LiH productionization step 2c (2026-10-04).
 Paper 19 result it backs: the geminal-range table (tab:geminal_gamma) and the corpus-best
 pi-marriage energy with the Slater geminal e^{-1.5 r}.
 """
@@ -38,20 +33,25 @@ _PKG_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def install_kernels(gam: float, grid: Optional[Sequence[int]]) -> ModuleType:
-    """Exec kernels.py with ``GAM = gam`` (and optionally ``NXI, NETA, NPHI = grid``) as
-    ``geovac.lih_r12ci.kernels``.  Returns the installed module."""
+    """Set the geminal range to ``gam`` and (optionally) source-override the kernel grid.
+
+    ``grid is None``: equivalent to ``configure_geminal(gam)`` (callable at any time) and returns the
+    ordinary ``geovac.lih_r12ci.kernels`` module.  ``grid = (NXI, NETA, NPHI)``: exec kernels.py with
+    the grid line substituted as ``geovac.lih_r12ci.kernels`` (must precede every kernels import),
+    then ``configure_geminal(gam)`` on it.  Returns the kernels module in use."""
+    if grid is None:
+        import geovac.lih_r12ci.kernels as KG
+        KG.configure_geminal(gam)
+        return KG
     import geovac.lih_r12ci as pkg
     name = "geovac.lih_r12ci.kernels"
-    assert name not in sys.modules, "kernels already imported -- override would not propagate"
+    assert name not in sys.modules, "kernels already imported -- grid override would not propagate"
     path = os.path.join(_PKG_DIR, "kernels.py")
     src = open(path, encoding="utf-8").read()
-    src, n1 = re.subn(r"^GAM = 0\.5\b", f"GAM = {float(gam)!r}", src, flags=re.M)
-    assert n1 == 1, "GAM line not found exactly once"
-    if grid is not None:
-        nxi, neta, nphi = grid
-        src, n2 = re.subn(r"^NXI, NETA, NPHI = 72, 44, 28\b",
-                          f"NXI, NETA, NPHI = {nxi}, {neta}, {nphi}", src, flags=re.M)
-        assert n2 == 1, "grid line not found exactly once"
+    nxi, neta, nphi = grid
+    src, n2 = re.subn(r"^NXI, NETA, NPHI = 72, 44, 28\b",
+                      f"NXI, NETA, NPHI = {nxi}, {neta}, {nphi}", src, flags=re.M)
+    assert n2 == 1, "grid line not found exactly once"
     spec = importlib.util.spec_from_loader(name, loader=None, origin=path)
     mod = importlib.util.module_from_spec(spec)
     mod.__file__ = path
@@ -59,6 +59,7 @@ def install_kernels(gam: float, grid: Optional[Sequence[int]]) -> ModuleType:
     sys.modules[name] = mod
     exec(compile(src, path, "exec"), mod.__dict__)
     pkg.kernels = mod
+    mod.configure_geminal(gam)
     return mod
 
 

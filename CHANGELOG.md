@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.4] - 2026-10-04
+
+**Patch. Owed-list items 1-4: three pre-existing test failures resolved (one exposed stale Paper 27 numbers), Paper 32 item-4 mechanism corrected, heavy tests made xdist-safe, the LiH geminal range made a real parameter (all golden items still bit-identical).**
+
+### Fixed
+- **Paper 27 / pre-existing failures.** Bisected to the 2026-08-29 Condon-Shortley sign fix (b32581a). (a) It gauge-flips V within degenerate H1 eigenspaces, so the "diagonal fraction in the H1 eigenbasis" depends on eigh's basis choice (spread ~1e-3); the rel-1e-8 pin is replaced by the basis-free eigenspace-block fraction (0.9218678993 / 0.8937503049, n_max 3/4). (b) The Be EP-2N result was stale: the old occupations (0.020/0.037/0.020) broke the 1S equal-2p symmetry the fixed code restores (0.034 each). Paper 27 updated: ground state 0.97|2s^2> - 0.13|2p0^2> + 0.18|pair>, occupations (2.000, 1.899, 0.034, 0.034, 0.034), S_full 0.794 -> 0.821, entropy reduction 42% -> 40%, EP-2j n_max=3 FCI S_full 0.902 -> 0.916. (c) tests/test_gh_convergence_tensor.py asserted a phrase v5.19.2 reworded; now asserts the substance (C_3^(2) = 1 by compression, Pythagorean form withdrawn). All fire-tested.
+- **Paper 32 axiom-audit item 4.** The off-diagonal Dirac's JD = DJ failure is forced by J^2 = -1, not by the (-1)^l phase: both m_j = +-1/2 partners hop to the same neighbour with the same real value, so no phase of the permutation form satisfies both (numerical search over all phases confirms); residual = 2 max(alpha, coupling); the (-1)^l phase only selects which hops fail. Item rewritten; tests/test_real_structure.py gains two independent checks (fire-tested 4/4).
+
+### Changed
+- **xdist safety.** Measured peak memory; the genuinely heavy tests (true-window odd_no_grading[3] 11.6 GB, trunk_qa_splitting n_max 25/30 1.7-4 GB, full_dirac propagation 2.2 GB) are marked `xdist_group("heavy_memory")`; tests/conftest.py switches `-n` runs to `--dist loadgroup` (plain pytest unaffected); marker registered in pytest.ini. The offender set passes 3/3 under `-n auto --slow`.
+- **LiH geminal range is a real parameter.** `geovac.lih_r12ci.configure_geminal(gamma)` / `geminal_gamma()` replace the source-rewrite override (kept as a deprecated wrapper; grid / triangle cutoffs still need it). Consumers read the gamma at call time; tables rebuild on change. Golden gate: 12 fast items + r12ci_2mo_exact, marriage_2mo_generalized, both pi marriages at 1e-2, gvee sparse-vs-dense, triangle symmetry, and pi_marriage_exp1.5_1e-3 (-8.049045089, 0/32 values differ) all bit-identical.
+
+### Open
+- Paper 27 should define the "diagonal fraction" basis-free (degenerate H1). Owed-list items 5-9 remain (docs/qa/trunk.debt.md).
+
 ## [v5.20.3] - 2026-10-04
 
 **Patch. The LiH / prolate stack behind Paper 19 is productionized: ~11k lines moved from debug/ into geovac/, every banked number reproduced bit-for-bit, and a permanent golden-value oracle added (PI-directed).**

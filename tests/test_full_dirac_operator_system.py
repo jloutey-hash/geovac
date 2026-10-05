@@ -251,6 +251,7 @@ def test_dim_H_table():
 # ---------------------------------------------------------------------------
 
 
+@pytest.mark.xdist_group("heavy_memory")
 def test_propagation_number_full_does_not_saturate():
     """prop(O_full_{n_max}) does NOT reach the C*-envelope at any finite k.
 

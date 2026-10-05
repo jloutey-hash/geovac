@@ -69,3 +69,15 @@ def hydrogen_solver():
 # built the archived MoleculeHamiltonian, whose atomic default kinetic scale
 # -0.10298808 was FITTED to experiment. For helium use
 # geovac.hyperspherical_radial.solve_helium (see tests/test_hyperspherical_he.py).
+
+
+def pytest_configure(config):
+    """xdist safety: honour @pytest.mark.xdist_group("heavy_memory").
+
+    Memory-heavy tests (multi-GB dense matrices) are grouped onto a single
+    xdist worker so that `pytest -n auto` does not run several at once and
+    hit MemoryError / LAPACK init failures. xdist only honours groups under
+    `--dist loadgroup`, so upgrade the default `--dist load` automatically.
+    """
+    if getattr(config.option, "numprocesses", None) and getattr(config.option, "dist", None) == "load":
+        config.option.dist = "loadgroup"

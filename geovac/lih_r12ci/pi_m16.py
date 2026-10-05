@@ -58,8 +58,15 @@ from scipy.sparse.linalg import eigsh
 from geovac.prolate_allelectron._paths import DEBUG_DATA as DATA  # noqa: E402
 
 import geovac.lih_r12ci.kernels as KG
-from geovac.lih_r12ci.kernels import (a as A_FOCUS, GAM, geo_f, NXI, NETA, NG, Xg as _Xg, Eg as _Eg)
+from geovac.lih_r12ci.kernels import (a as A_FOCUS, geo_f, NXI, NETA, NG, Xg as _Xg, Eg as _Eg)
 from geovac.lih_r12ci.energy import R as R_ENG, Z_A as ZA_ENG, Z_B as ZB_ENG
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 # phase-2 machinery we extend / reuse
 import geovac.lih_r12ci.enumerators as P2

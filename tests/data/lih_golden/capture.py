@@ -958,8 +958,8 @@ def _pi_marriage(gname: str, trunc: float, gam: Optional[float], mem_cap: float 
     one geminal, fresh process, nothing written to debug/data."""
     _paths()
     if gam is not None:
-        from geovac.lih_r12ci.source_override import install_kernels   # promoted (step 2c)
-        install_kernels(gam, None)                 # source-override GAM BEFORE any consumer import
+        from geovac.lih_r12ci import configure_geminal   # real API (replaced the step-2c source override)
+        configure_geminal(gam)                     # before the consumer imports: the golden build order
     import geovac.lih_r12ci.kernels as KG
     import geovac.lih_r12ci.pi_m16 as M                           # promoted (step 2c)
     import geovac.lih_r12ci.gvee_sparse as S                      # promoted (step 2c)
@@ -985,7 +985,8 @@ _PI_CALL = ("KG.USE_EXACT_NEUMANN=True; ref=lih_pi_m16.build_primitives(CFG,PRIM
             "refm,info=build_ref_from_prims(ref,tag,cfg_tag='pi',trunc={t}); "
             "p=lih_gvee_sparse.all_pieces_sparse(lih_pi_m16.GeminalM('{g}'),refm,T0,mem_cap_gb=6.0); "
             "lih_pi_m16.assemble_c(p,p['E0_grid'])")
-_XR = "lih_exp_geminal_run.install_kernels({gam},None) [kernels.py GAM source-override, before imports]; "
+_XR = ("geovac.lih_r12ci.configure_geminal({gam}) [before the consumer imports; golden captured with "
+       "the equivalent kernels.py GAM source override lih_exp_geminal_run.install_kernels({gam},None)]; ")
 
 item("pi_marriage_linexp_1e-2", "slow", _PI_CALL.format(t="1e-2", g="linexp"),
      notes="linexp r e^{-0.5 r} on the 9-det pi ref. Banked pre-wcomb-fix -8.042181 (Sep 23, dense); "

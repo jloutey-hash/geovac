@@ -35,11 +35,18 @@ from scipy.special import lpmn, lqmn  # noqa: E402
 
 from . import kernels as _KG  # noqa: E402                    # USE_EXACT_NEUMANN read at call time
 from .kernels import (   # noqa: E402
-    Xg, Eg, geo_f, a, GAM, grid_int, rho_cyl_f, zc_f,
+    Xg, Eg, geo_f, a, grid_int, rho_cyl_f, zc_f,
     XI as XI1D, ETA as ETA1D, WXI, WETA)
 from .hVee import neumann_potential, P00, P11, P01, rho_g  # noqa: E402
 from .energy import R  # noqa: E402
 from .basis import sample_block  # noqa: E402
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return _KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 NXI, NETA = XI1D.size, ETA1D.size
 NG = NXI * NETA
@@ -179,7 +186,7 @@ def _mc_triangles(seed_u=71, seed_d=72, nw=14000, burn=3000, nsnap=18, thin=45):
     for s in range(len(up)):
         pos = np.concatenate([up[s], dn[s]], axis=1)     # (nw,4,3): 0,1 up ; 2,3 down
         d = lambda i, j: np.maximum(np.linalg.norm(pos[:, i] - pos[:, j], axis=-1), 1e-12)
-        f = lambda i, j: np.exp(-GAM * d(i, j))
+        f = lambda i, j: np.exp(-_KG.GAM * d(i, j))
         T1.append((f(0, 2) * f(1, 2) / d(0, 1)).mean())  # <f13 f23 coul12>
         T2.append((f(0, 1) * f(1, 2) / d(0, 2)).mean())  # <f12 f23 coul13>
     m = lambda x: np.mean(x); e = lambda x: np.std(x, ddof=1) / np.sqrt(len(x))
@@ -189,11 +196,11 @@ def _mc_triangles(seed_u=71, seed_d=72, nw=14000, burn=3000, nsnap=18, thin=45):
 if __name__ == "__main__":
     print("=" * 78)
     print("TRIANGLE GATE: two-center 3-body reduction (T1 intra-coul, T2 inter-coul)")
-    print(f"  sigma2 grid {NXI}x{NETA}, LMAX={LMAX}, MMAX={MMAX}, f=exp(-{GAM} r), R={R}")
+    print(f"  sigma2 grid {NXI}x{NETA}, LMAX={LMAX}, MMAX={MMAX}, f=exp(-{_KG.GAM} r), R={R}")
     print("=" * 78)
 
     # ---- Fourier kernels ----
-    Fm = [build_kernel_m(GAM, m) for m in range(MMAX + 1)]
+    Fm = [build_kernel_m(_KG.GAM, m) for m in range(MMAX + 1)]
 
     # ---- GATE 0: E_0 vs the m=0 neumann_potential machinery ----
     A = (P00).reshape(NXI, NETA); Bt = (rho_g).reshape(NXI, NETA)

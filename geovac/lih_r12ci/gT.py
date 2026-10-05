@@ -23,11 +23,20 @@ Run from debug/:  python lih_r12ci_gT_analytic.py
 """
 import numpy as np
 
-from .kernels import a, GAM, grid_int, dens, build_kernel, geo_f
+from . import kernels as _KG                                   # _KG.GAM read at call time
+from .kernels import a, grid_int, dens, build_kernel, geo_f
 from .hVee import (
     P00, P11, P01, rho_g, cov_FA_FB, make_kernel_f, make_kernel_Y, SIG2_REF)
 from .hT import Gpq, cvec, yukawa_pot_iso, rA_f, rB_f, d_aa, d_ab, d_bb, ZA, ZB
-from .gVee import psi_yuk, dress, Kf, Kf2, PAIRS, COMPS
+from . import gVee as _GV                                      # Kf/Kf2 read at call time
+from .gVee import psi_yuk, dress, PAIRS, COMPS
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return _KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 GT_REF = 1.38640            # VMC g_T (=_g_targets.py)
 GT1_REF = 1.16826           # drift^2 target
@@ -64,7 +73,7 @@ def contract_raw(fedges, base):
             scalar *= grid_int(D[u])
         else:
             w = next(iter(nb)); mult = len(inc)
-            D[w] = D[w] * dress(Kf if mult == 1 else Kf2, D[u])
+            D[w] = D[w] * dress(_GV.Kf if mult == 1 else _GV.Kf2, D[u])
         alive.discard(u); edges = [ed for ed in edges if u not in ed]
     return scalar
 
@@ -108,11 +117,11 @@ def make_kernel_Y_full(gam):
 if __name__ == "__main__":
     print("=" * 78)
     print("LiH R12-CI g_T (analytic, RI-free) = gT1 - gam^2 sigma^2 + 2 gam Cov[F,Y_sum]")
-    print(f"  f=exp(-{GAM} r), gam={GAM}")
+    print(f"  f=exp(-{_KG.GAM} r), gam={_KG.GAM}")
     print("=" * 78)
 
     # ---- Fbar (grid) ----
-    Af = make_kernel_f(GAM)
+    Af = make_kernel_f(_KG.GAM)
     from .hVee import _a1b1, crho, c00, c11, c01
     a1, b1 = _a1b1(Af['W']); Fbar = 2 * a1 + 4 * b1
     print(f"\n  Fbar = {Fbar:.6f}   T00={T00:.5f} T11={T11:.5f}  <T>=T00+T11={T00+T11:.5f}")
@@ -126,14 +135,14 @@ if __name__ == "__main__":
     print(f"  gT1 = 1/2[F2S - 2 Fbar FS + Fbar^2 S2] = {gT1:+.6f}   (VMC target {GT1_REF:+.5f})")
 
     # ---- Cov[F, Y_sum] via cov_FA_FB (Coulomb -> Yukawa(gam); product kernel Yukawa(2gam)) ----
-    By = make_kernel_Y_full(GAM)                 # second operator = Yukawa(gam), needs W + Psi
-    Cy2 = make_kernel_Y(2 * GAM)                 # product kernel f*Y = Yukawa(2gam), needs W only
+    By = make_kernel_Y_full(_KG.GAM)                 # second operator = Yukawa(gam), needs W + Psi
+    Cy2 = make_kernel_Y(2 * _KG.GAM)                 # product kernel f*Y = Yukawa(2gam), needs W only
     CovFY, cinfo = cov_FA_FB(Af, By, Cy2)
     Ybar = cinfo['FbarB']
     print(f"\n  Cov[F, Y_sum] = {CovFY:+.6f}   (Ybar = <Y_sum> = {Ybar:.5f})")
 
     # ---- assemble g_T ----
-    gT23 = -GAM ** 2 * SIG2 + 2 * GAM * CovFY     # = gT2 + gT3
+    gT23 = -_KG.GAM ** 2 * SIG2 + 2 * _KG.GAM * CovFY     # = gT2 + gT3
     g_T = gT1 + gT23
     print(f"\n  gT2+gT3 = -gam^2 sigma^2 + 2 gam Cov[F,Y_sum] = {gT23:+.6f}   (VMC {-0.04750+0.26563:+.5f})")
     print(f"  >>> g_T = gT1 + (gT2+gT3) = {g_T:+.6f}   (VMC target {GT_REF:+.5f})")

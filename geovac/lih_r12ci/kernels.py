@@ -25,6 +25,8 @@ basis {aa,ab,bb}: c^pq = [X0p X0q, X0p X1q + X1p X0q, X1p X1q].
 
 Run:  python debug/lih_r12ci_sigma2_analytic.py
 """
+import sys
+
 import numpy as np
 from numpy.polynomial.legendre import leggauss
 
@@ -36,7 +38,52 @@ from .basis import X          # Loewdin AO->MO (computed from S_AB)
 SIG2_REF = 0.13699          # VMC ground truth (lih_r12ci_sigma2_mc.py)
 FBAR_REF = 1.880743         # Stage 1 analytic Fbar
 VABAB_REF = 0.004350        # Stage 1 (ab|f|ab) importance-MC (validates the 2-center dressing)
-GAM = 0.5                   # geminal f = exp(-GAM r)
+GAM_DEFAULT = 0.5           # the Stage-1 geminal range (f = exp(-0.5 r) / r exp(-0.5 r))
+GAM = GAM_DEFAULT           # CURRENT geminal range; set it ONLY via configure_geminal(); every
+                            # consumer reads kernels.GAM at call time (never by from-import)
+
+
+def configure_geminal(gamma: float) -> float:
+    """Set the geminal range gamma (f = e^{-gamma r} for 'exp', r e^{-gamma r} for 'linexp').
+
+    The geminal KIND is not global state -- it is the per-call argument of
+    ``assembly.energy(geminal)`` / ``enumerators.Geminal(name)`` / ``pi_m16.GeminalM(name)``;
+    those read gamma from here when they are called / constructed.
+
+    May be called at any time.  If called before the consumers are imported (the cheapest and the
+    golden-oracle order), ``gVee`` builds its import-time tables (Kf, Kf2, _KS, Fm) directly at this
+    gamma.  If ``gVee`` is already imported, its gamma tables are rebuilt with the same builders, and
+    the gamma-blind derived caches (``triangle._MODE_CACHE``, ``enumerators._TRI_MAT_CACHE``,
+    ``pi_m16._TRIM_CACHE``) are cleared.  Geminal / GeminalM objects built BEFORE a change keep their
+    old gamma -- build them after configuring.  The module RNG streams (``triangle.rng``,
+    ``pi_m16._RSVD_RNG``) are NOT reset (no kernel build draws from them).
+
+    Returns the previous gamma.  Replaces the source override of LiH productionization step 2c
+    (``source_override.install_kernels``), bit-identically (tests/data/lih_golden).
+    """
+    global GAM
+    g = float(gamma)
+    if not (np.isfinite(g) and g > 0.0):
+        raise ValueError(f"geminal range gamma must be finite and > 0, got {gamma!r}")
+    old = GAM
+    if g == old:
+        return old
+    GAM = g
+    pkg = __name__.rpartition(".")[0]
+    gv = sys.modules.get(pkg + ".gVee")
+    if gv is not None:
+        gv._build_geminal_tables()
+    for sub, cache in (("triangle", "_MODE_CACHE"), ("enumerators", "_TRI_MAT_CACHE"),
+                       ("pi_m16", "_TRIM_CACHE")):
+        m = sys.modules.get(f"{pkg}.{sub}")
+        if m is not None:
+            getattr(m, cache).clear()
+    return old
+
+
+def geminal_gamma() -> float:
+    """The current geminal range (see configure_geminal)."""
+    return GAM
 
 # --------------------------------------------------------------------------- #
 # 2D prolate (xi,eta) grid  (all densities are phi-independent -> axial symmetry)

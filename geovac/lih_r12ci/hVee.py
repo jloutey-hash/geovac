@@ -27,11 +27,18 @@ from scipy.special import lqn, eval_legendre
 
 from . import kernels as _KG                                   # USE_EXACT_NEUMANN read at call time
 from .kernels import (
-    Xg, Eg, rA, rB, geo_f, dens, build_kernel, dressings, Wmat, grid_int, X, a, ZA, ZB, GAM,
+    Xg, Eg, rA, rB, geo_f, dens, build_kernel, dressings, Wmat, grid_int, X, a, ZA, ZB,
     XI as XI1D, ETA as ETA1D, WXI, WETA)
 from .energy import _hartree_1s, R
 from .hT import (yukawa_pot_iso, mc_yukawa_abab, rA_f, rB_f, d_aa, d_ab, d_bb, cvec)
 from .basis import sample_block
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return _KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 HVEE_REF = 0.3082      # VMC target (lih_r12ci_vmc.py), geminal exp(-0.5 r)
 E2_REF = 3.614436      # <Phi0|V_ee|Phi0> (Stage 2)
@@ -175,7 +182,7 @@ def vee_mc(seed_u=21, seed_d=22):
     for s in range(len(up)):
         pos = np.concatenate([up[s], dn[s]], axis=1)
         d = {ij: np.maximum(np.linalg.norm(pos[:, ij[0]] - pos[:, ij[1]], axis=-1), 1e-12) for ij in pairs}
-        F = sum(np.exp(-GAM * d[ij]) for ij in pairs)
+        F = sum(np.exp(-_KG.GAM * d[ij]) for ij in pairs)
         Vee = sum(1.0 / d[ij] for ij in pairs)
         fv.append((F * Vee).mean()); vv.append(Vee.mean())
     fv = np.array(fv); vv = np.array(vv)
@@ -187,10 +194,10 @@ if __name__ == "__main__":
     print("LiH R12-CI Stage 4b (part 1): ANALYTIC h_Vee (RI-free), target +0.3082")
     print("=" * 78)
 
-    Af = make_kernel_f(GAM)                 # f
-    Cf2 = make_kernel_f(2 * GAM)            # f^2 (product kernel for the sigma^2 self-check)
+    Af = make_kernel_f(_KG.GAM)                 # f
+    Cf2 = make_kernel_f(2 * _KG.GAM)            # f^2 (product kernel for the sigma^2 self-check)
     Kcoul = make_kernel_coul()             # Coulomb
-    Ky = make_kernel_Y(GAM)                # Yukawa = f.coul (product kernel for h_Vee)
+    Ky = make_kernel_Y(_KG.GAM)                # Yukawa = f.coul (product kernel for h_Vee)
 
     # ---- GATE 1: Coulomb dressing / W^coul controls ----
     # Neumann potential of the ISOTROPIC rho_aa must reproduce the closed-form Hartree.

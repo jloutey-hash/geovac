@@ -32,11 +32,19 @@ Run from debug/:  python lih_r12ci_hT_analytic.py
 import numpy as np
 from numpy.polynomial.legendre import leggauss
 
+from . import kernels as _KG                                   # _KG.GAM read at call time
 from .kernels import (
-    Xg, Eg, rA, rB, geo_f, dens, build_kernel, Wmat, grid_int, X, a, ZA, ZB, GAM)
+    Xg, Eg, rA, rB, geo_f, dens, build_kernel, Wmat, grid_int, X, a, ZA, ZB)
 from .energy import stage2_E0, _hartree_1s, N_A, N_B
 from .fourbody import sample_1s, CENTER_A, CENTER_B
 from .basis import sample_block
+
+
+def __getattr__(name):
+    # back-compat: ``<module>.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return _KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 HT_REF = 0.7485        # VMC target (lih_r12ci_vmc.py), geminal exp(-0.5 r)
 rng = np.random.default_rng(20260921)
@@ -112,7 +120,7 @@ def ybar_mc(gam, seed_u=11, seed_d=12):
 if __name__ == "__main__":
     print("=" * 78)
     print("LiH R12-CI Stage 4a (part 2): ANALYTIC h_T (RI-free), target +0.7485")
-    print(f"  f=exp(-{GAM} r);  grid from sigma2_analytic")
+    print(f"  f=exp(-{_KG.GAM} r);  grid from sigma2_analytic")
     print("=" * 78)
 
     # ---- gradient densities + kinetic overlaps ----
@@ -127,7 +135,7 @@ if __name__ == "__main__":
           f"   (rel {abs(T00+T11-T_exp)/abs(T_exp):.1e})")
 
     # ---- f-interaction matrix + dressing fields (same as sigma^2) ----
-    Kf = build_kernel(GAM); W, Psi = Wmat(Kf)
+    Kf = build_kernel(_KG.GAM); W, Psi = Wmat(Kf)
     c00, c11, c01 = cvec(0, 0), cvec(1, 1), cvec(0, 1); crho = c00 + c11
     Psi_field = lambda c: c[0] * Psi['aa'] + c[1] * Psi['ab'] + c[2] * Psi['bb']
     Psi00, Psi11, Psi01, Psirho = (Psi_field(c00), Psi_field(c11), Psi_field(c01), Psi_field(crho))
@@ -155,11 +163,11 @@ if __name__ == "__main__":
     print(f"\n  GATE B1 -- yukawa_pot_iso(gam->0) vs Hartree(1s_A): "
           f"max rel {np.max(np.abs(yk-hh)/np.abs(hh)):.1e}")
 
-    VYA = yukawa_pot_iso(rA_f, ZA, GAM); VYB = yukawa_pot_iso(rB_f, ZB, GAM)
+    VYA = yukawa_pot_iso(rA_f, ZA, _KG.GAM); VYB = yukawa_pot_iso(rB_f, ZB, _KG.GAM)
     IY_aaaa = grid_int(d_aa * VYA); IY_bbbb = grid_int(d_bb * VYB)
     IY_aabb = grid_int(d_bb * VYA); IY_aabb2 = grid_int(d_aa * VYB)   # symmetry check
     IY_aaab = grid_int(d_ab * VYA); IY_bbab = grid_int(d_ab * VYB)
-    IY_abab, e_abab = mc_yukawa_abab(GAM)
+    IY_abab, e_abab = mc_yukawa_abab(_KG.GAM)
     print(f"\n  --- PART B (Yukawa) ---")
     print(f"    I_Y: aaaa={IY_aaaa:.5f} bbbb={IY_bbbb:.5f} aabb={IY_aabb:.5f}"
           f"(={IY_aabb2:.5f}, rel {abs(IY_aabb-IY_aabb2)/abs(IY_aabb2):.1e})")
@@ -171,12 +179,12 @@ if __name__ == "__main__":
     alpha1Y = c00 @ WY @ c11 - c01 @ WY @ c01
     beta1Y = 0.25 * (crho @ WY @ crho)
     Ybar = 2 * alpha1Y + 4 * beta1Y
-    PartB = -0.5 * GAM ** 2 * Fbar + GAM * Ybar
+    PartB = -0.5 * _KG.GAM ** 2 * Fbar + _KG.GAM * Ybar
     print(f"    alpha1^Y={alpha1Y:.5f} beta1^Y={beta1Y:.5f}  Ybar=2a+4b={Ybar:.5f}")
-    print(f"    PartB = -1/2 gam^2 Fbar + gam Ybar = {-0.5*GAM**2*Fbar:.5f} + {GAM*Ybar:.5f}"
+    print(f"    PartB = -1/2 gam^2 Fbar + gam Ybar = {-0.5*_KG.GAM**2*Fbar:.5f} + {_KG.GAM*Ybar:.5f}"
           f" = {PartB:+.6f}")
 
-    ymc, eymc = ybar_mc(GAM)
+    ymc, eymc = ybar_mc(_KG.GAM)
     print(f"    GATE B2 -- Ybar (analytic) {Ybar:.5f} vs MC {ymc:.5f}+/-{eymc:.1e}"
           f"  (dev {abs(Ybar-ymc)/eymc:.1f} sigma)")
 

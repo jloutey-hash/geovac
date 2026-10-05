@@ -26,7 +26,7 @@ from numpy.polynomial.legendre import leggauss
 
 from . import kernels as _KG                                   # USE_EXACT_NEUMANN keys the cache
 from .kernels import (
-    a, GAM, grid_int, dens, build_kernel, rho_cyl_f, zc_f, geo_f)
+    a, grid_int, dens, build_kernel, rho_cyl_f, zc_f, geo_f)
 from .hVee import (
     neumann_potential, P00, P11, P01, rho_g, NXI, NETA, cov_FA_FB, make_kernel_f,
     make_kernel_coul, make_kernel_Y, E2_REF)
@@ -36,8 +36,13 @@ from .triangle import (
     build_kernel_m, triangle_raw, MMAX, NG, _MODE_CACHE)
 
 NG_ = NXI * NETA
-Kf = build_kernel(GAM)
-Kf2 = build_kernel(2 * GAM)
+
+
+def __getattr__(name):
+    # back-compat: ``gVee.GAM`` is the CURRENT geminal range (kernels.configure_geminal)
+    if name == "GAM":
+        return _KG.GAM
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 # --------------------------------------------------------------------------- #
 # Yukawa (screened-Coulomb) m=0 potential of an axially-symmetric density:
@@ -54,7 +59,6 @@ def build_kernel_smooth(gam, nphi=48):
     return K
 
 
-_KS = {GAM: build_kernel_smooth(GAM), 2 * GAM: build_kernel_smooth(2 * GAM)}
 _NEU_CACHE = {}
 
 
@@ -82,9 +86,34 @@ def I_yuk(L, Rt, gam):
 
 
 # --------------------------------------------------------------------------- #
-# the triangle Fourier kernels (built once) + per-mode middle-density modes
+# the gamma-dependent tables: f / f^2 phi-kernels, the smooth Yukawa kernels (keyed by gamma), the
+# triangle Fourier kernels.  Built ONCE at import for the current kernels.GAM (same builders, same
+# order Kf, Kf2, _KS[g], _KS[2g], Fm as the pre-2026-10 import-time module code) and rebuilt by
+# kernels.configure_geminal() when gamma changes.  _KS also builds any other gamma on demand.
 # --------------------------------------------------------------------------- #
-Fm = [build_kernel_m(GAM, m) for m in range(MMAX + 1)]
+class _SmoothKernels(dict):
+    """gamma -> build_kernel_smooth(gamma), built on first use."""
+
+    def __missing__(self, gam):
+        K = build_kernel_smooth(gam)
+        self[gam] = K
+        return K
+
+
+def _build_geminal_tables():
+    """(Re)build Kf, Kf2, _KS, Fm for kernels.GAM."""
+    global Kf, Kf2, _KS, Fm, _TABLE_GAM
+    g = _KG.GAM
+    Kf = build_kernel(g)
+    Kf2 = build_kernel(2 * g)
+    _KS = _SmoothKernels()
+    _KS[g] = build_kernel_smooth(g)
+    _KS[2 * g] = build_kernel_smooth(2 * g)
+    Fm = [build_kernel_m(g, m) for m in range(MMAX + 1)]
+    _TABLE_GAM = g
+
+
+_build_geminal_tables()
 
 
 def triangle_value(mu, mu_name, left, right):
@@ -157,7 +186,8 @@ def eval_triple(p, q, r):
     n_on_r = sum(1 for ed in fedges if ed == rset)
     rem_f = [tuple(ed) for ed in fedges if ed != rset]
     kernel_kind = 'coul' if n_on_r == 0 else 'yuk'
-    gam_k = None if n_on_r == 0 else (GAM if n_on_r == 1 else 2 * GAM)
+    g = _KG.GAM
+    gam_k = None if n_on_r == 0 else (g if n_on_r == 1 else 2 * g)
     tot = 0.0
     for gU, gUn, hU, hUn, kU in COMPS:
         for gD, gDn, hD, hDn, kD in COMPS:
@@ -194,7 +224,7 @@ def eval_pair_fc(p, r):
     e, gg = r
     rset = frozenset(r); pf = frozenset(p)
     if pf == rset:
-        kernel_kind, gam_k, rem_f = 'yuk', GAM, []
+        kernel_kind, gam_k, rem_f = 'yuk', _KG.GAM, []
     else:
         kernel_kind, gam_k, rem_f = 'coul', None, [tuple(p)]
     tot = 0.0
@@ -219,12 +249,12 @@ def eval_coul_only(r):
 if __name__ == "__main__":
     print("=" * 78)
     print("LiH R12-CI g_Vee (analytic, RI-free): <(F-Fbar)^2 V_ee>")
-    print(f"  sigma2 grid {NXI}x{NETA}, MMAX={MMAX}, f=exp(-{GAM} r)")
+    print(f"  sigma2 grid {NXI}x{NETA}, MMAX={MMAX}, f=exp(-{_KG.GAM} r)")
     print("=" * 78)
 
     # ---- GATE Y: Yukawa potential vs the h_T closed form (isotropic 1s_A) ----
     from .hT import yukawa_pot_iso, rA_f, d_aa, ZA
-    yk = psi_yuk(d_aa, GAM); ykc = yukawa_pot_iso(rA_f, ZA, GAM)
+    yk = psi_yuk(d_aa, _KG.GAM); ykc = yukawa_pot_iso(rA_f, ZA, _KG.GAM)
     msk = d_aa > 1e-6 * d_aa.max()
     print(f"\n  GATE Y -- psi_yuk(rho_aa) vs closed yukawa_pot_iso: rel "
           f"{np.abs(yk-ykc)[msk].mean()/np.abs(ykc[msk]).mean():.1e}")
@@ -248,7 +278,7 @@ if __name__ == "__main__":
     print(f"    {'<F^2 V_ee>':12s} = {F2V:+.5f}   (MC ~ +14.519)")
 
     # ---- assemble g_Vee ---- (two ways: mixed cov-vs-enum, and grid-consistent all-enum) ----
-    Af = make_kernel_f(GAM); Kc = make_kernel_coul(); Ky = make_kernel_Y(GAM)
+    Af = make_kernel_f(_KG.GAM); Kc = make_kernel_coul(); Ky = make_kernel_Y(_KG.GAM)
     h_Vee, info = cov_FA_FB(Af, Kc, Ky)
     Fbar = info['FbarA']; E2 = info['FbarB']
     g_Vee_mixed = F2V - 2 * Fbar * h_Vee - Fbar ** 2 * E2

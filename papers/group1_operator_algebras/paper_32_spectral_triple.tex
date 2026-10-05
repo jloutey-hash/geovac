@@ -1171,10 +1171,17 @@ $10^{-2}$ at $n_{\max} = 1$ from the m-linear lifter alone).  This is
 the natural counter-example: the round-3 \texttt{offdiag} Dirac is a
 hand-crafted Hermitian perturbation with E1-type hopping
 $D[a, b] = \alpha$ on the rule
-$|\Delta n| = |\Delta l| = 1, |\Delta m_j| \le 1$, and the
-permutation-phase $\sigma$ with $(-1)^l$ parity does not commute with
-this perturbation because the $l$-parity sign flips under bra/ket
-$l \to l \pm 1$.  The genuine 4-component Camporesi--Higuchi spinor
+$|\Delta n| = |\Delta l| = 1, |\Delta m_j| \le 1$ (value $\alpha$
+within a chirality, the chirality coupling across).  Since this real
+$D$ is invariant under $m_j \to -m_j$, $U\overline{D} = DU$ requires
+$\sigma$ to be equal on the $J$-images of every hopping pair, while
+$J^2 = -\mathbb{1}$ forces $\sigma_{J(a)} = -\sigma_a$;\ the rule
+links both partners $m_j = \pm 1/2$ of an $(n, l)$ shell to the same
+neighbour, so no phase choice of this permutation form commutes with
+$D$, and each failing hop contributes $2|D_{ab}|$ (residual
+$2\max(\alpha, \text{coupling})$).  The $(-1)^l$ factor in $\sigma$
+only selects which hops fail ($\Delta m_j = 0$ with it, $|\Delta m_j|
+= 1$ without).  The genuine 4-component Camporesi--Higuchi spinor
 Dirac (which couples large/small components via the proper
 $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ angular gradient with
 Clifford-algebra $\gamma$ matrices) would resolve this, but lies

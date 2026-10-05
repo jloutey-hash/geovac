@@ -999,12 +999,15 @@ class TestR1R2KeystoneTheoremStatus:
         status = FiveLemmaStatusTensor()
         d = status.to_dict()
         assert "DONE" in d["L3_T"]
-        # the live full-op-system constant is C_3 = 1 by compression; the
-        # withdrawn Pythagorean refinement must be flagged WITHDRAWN, not live,
-        # and the withdrawn per-irrep triangle reading must not be the live one
-        assert "C_3 = 1 by compression" in d["L3_T"]
-        assert "WITHDRAWN" in d["L3_T"]
-        assert "-> sqrt(2)" not in d["L3_T"]
+        # the live constant is C_3^(2) = 1 by compression on the
+        # Clifford-doubled module (Paper 39 Lemma L3-T); the withdrawn
+        # Pythagorean refinement (C_3 < 1) must be flagged WITHDRAWN, not live,
+        # and the superseded triangle bound must not be the live one
+        L3 = d["L3_T"]
+        assert "C_3^(2) = 1 by compression" in L3
+        assert "Clifford-doubled" in L3
+        assert "Pythagorean" in L3 and "WITHDRAWN" in L3
+        assert "-> sqrt(2)" not in L3 and "C_3^(2) = sqrt(2)" not in L3
 
     def test_five_lemma_status_l5_done(self):
         """L5-T is the abandoned conditional (B,P) assembly: its status must say

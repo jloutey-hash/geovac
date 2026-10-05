@@ -187,26 +187,52 @@ def test_paper27_one_body_counts_differ_from_area_law():
 # Paper 27 Section V — energy-graph structural values
 # ---------------------------------------------------------------------------
 
-# Reference values frozen from debug/data/energy_graph_nmax{3,4}.json.
-# These are the numerical values the paper cites; the V_diagonal_fraction
-# values below are the unsquared Frobenius ratio ||diag(V)|| / ||V||,
-# matching the quantity computed in debug/energy_graph_exploration.py.
+# Reference values frozen from debug/data/energy_graph_nmax{3,4}.json
+# (hop-augmented model, V at k=1: the paper's parenthetical "earlier" row).
+# The V_diagonal_fraction is the unsquared Frobenius ratio
+# ||diag(V)|| / ||V|| in the eigenbasis of H1, as computed in
+# debug/energy_graph_exploration.py.  H1 has degenerate eigenspaces
+# (6 at n_max=3, 21 at n_max=4), so that ratio depends on which
+# orthonormal basis eigh returns inside each one: it moved 0.920258 ->
+# 0.920240 when the 2026-08-29 Condon-Shortley sign fix (v5.2.0) flipped
+# V_IJ -> D V D with D = +-1 commuting with H1 -- a pure gauge change.
+# Its spread over that gauge is ~1e-3, so it is pinned only at the
+# paper's printed precision.  The gauge-INVARIANT version -- the mass of V
+# inside the H1 eigenspaces, ||P_blk V|| / ||V|| -- is pinned tightly; it
+# is the supremum of the diagonal fraction over the gauge.
 _ENERGY_GRAPH_REFERENCE = {
     3: {
         'n_nodes':                   31,
         'commutator_rel_norm':       0.0608693635999042,
         'V_frobenius':               0.9891187247955867,
-        'V_diag_fraction_unsquared': 0.9202580563910042,
+        'V_diag_fraction_printed':   0.920,
+        'V_blockdiag_fraction':      0.9218678992912449,
         'V_1s1s_diagonal':           0.625,   # = 5/8 exactly
     },
     4: {
         'n_nodes':                   101,
         'commutator_rel_norm':       0.05319420456063309,
         'V_frobenius':               1.1206101403143007,
-        'V_diag_fraction_unsquared': 0.8919969173234392,
+        'V_diag_fraction_printed':   0.892,
+        'V_blockdiag_fraction':      0.8937503049104757,
         'V_1s1s_diagonal':           0.625,
     },
 }
+
+
+def _h1_eigenspace_block_fraction(V, H1, tol=1e-8):
+    """||P_blk V||_F / ||V||_F: V's mass inside the eigenspaces of H1."""
+    e, U = np.linalg.eigh(H1)
+    Vb = U.T @ V @ U
+    blk = 0.0
+    i = 0
+    while i < len(e):
+        j = i
+        while j + 1 < len(e) and e[j + 1] - e[i] < tol:
+            j += 1
+        blk += float(np.sum(Vb[i:j + 1, i:j + 1] ** 2))
+        i = j + 1
+    return float(np.sqrt(blk) / np.linalg.norm(V))
 
 
 @pytest.mark.parametrize('n_max', [3, 4])
@@ -214,7 +240,7 @@ def test_paper27_energy_graph_structural_invariants(n_max):
     """Regression-lock the Section V commutator and hot-node numbers."""
     from debug.energy_graph_exploration import characterize
 
-    summary, _V, _H1, _pairs, _orbs = characterize(n_max)
+    summary, V, H1, _pairs, _orbs = characterize(n_max)
     ref = _ENERGY_GRAPH_REFERENCE[n_max]
 
     assert summary['n_nodes'] == ref['n_nodes']
@@ -224,8 +250,14 @@ def test_paper27_energy_graph_structural_invariants(n_max):
         ref['commutator_rel_norm'], rel=1e-8)
     assert h1_vs_v['V_frobenius'] == pytest.approx(
         ref['V_frobenius'], rel=1e-8)
-    assert h1_vs_v['V_diagonal_fraction_in_H1_eigenbasis'] == pytest.approx(
-        ref['V_diag_fraction_unsquared'], rel=1e-8)
+    # Gauge-invariant eigenspace mass: tight.
+    blk = _h1_eigenspace_block_fraction(V, H1)
+    assert blk == pytest.approx(ref['V_blockdiag_fraction'], rel=1e-8)
+    # Basis-dependent diagonal fraction: bounded by the eigenspace mass in
+    # every gauge, and equal to the paper's printed value at its precision.
+    diag_frac = h1_vs_v['V_diagonal_fraction_in_H1_eigenbasis']
+    assert diag_frac <= blk + 1e-12
+    assert diag_frac == pytest.approx(ref['V_diag_fraction_printed'], abs=1e-3)
 
     # Hot-node: (1s,1s) diagonal is exactly 5/8 (Slater F^0(1s,1s),
     # Paper 7 Eq. 29). This is at k_orb = 1, the graph-native value.
@@ -652,7 +684,7 @@ def test_paper27_ep2l_nmax5_below_two():
 
 def test_paper27_ep2n_be_analytical_degenerate_pt():
     """Be 3x3 analytical degenerate-PT matches: GS dominantly 2s^2,
-    occupations (2.0, 1.92, 0.02, 0.04, 0.02), S_full = 0.79 nats."""
+    occupations (2.000, 1.899, 0.034, 0.034, 0.034), S_full = 0.821 nats."""
     from debug.archive.misc.ep2N_be_analytical import (
         diag_E_for_pair, two_e_int_singlet_pair,
     )
@@ -674,16 +706,21 @@ def test_paper27_ep2n_be_analytical_degenerate_pt():
     # Spatial 1-RDM diagonal occupations
     occ = np.array([2.0, 2 * gs[0]**2, gs[2]**2,
                     2 * gs[1]**2, gs[2]**2])
-    # Pin the analytical occupations (paper: 2.000, 1.924, 0.020,
-    # 0.037, 0.020).  The former occ.sum() == 4 assert was an algebraic
+    # Pin the analytical occupations (paper: 2.000, 1.899, 0.034,
+    # 0.034, 0.034).  The former occ.sum() == 4 assert was an algebraic
     # tautology -- 2 + 2|gs|^2 = 4 for ANY normalized vector (cert-2).
-    assert occ[1] == pytest.approx(1.924, abs=2e-3)
-    assert occ[3] == pytest.approx(0.037, abs=5e-3)
+    assert occ[1] == pytest.approx(1.899, abs=1e-3)
+    # A 1S state has equal 2p_{-1}, 2p_0, 2p_{+1} occupations
+    # (|c_C|^2 = 2|c_B|^2).  The pre-2026-08-29 Gaunt sign error broke
+    # this (0.020 / 0.037 / 0.020).
+    assert occ[3] == pytest.approx(0.034, abs=1e-3)
+    assert occ[2] == pytest.approx(occ[3], abs=1e-10)
+    assert occ[4] == pytest.approx(occ[3], abs=1e-10)
     p = occ / occ.sum()
     p_pos = p[p > 1e-14]
     S_full = float(-np.sum(p_pos * np.log(p_pos)))
-    # Analytical S_full = 0.794 nats.
-    assert 0.75 < S_full < 0.85, f'S_full = {S_full:.4f} out of range'
+    # Analytical S_full = 0.821 nats.
+    assert S_full == pytest.approx(0.821, abs=1e-3), f'S_full = {S_full:.4f}'
 
 
 def test_paper26_27_consistency_z_scaling():

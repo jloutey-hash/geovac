@@ -410,7 +410,7 @@ def _generated_algebra_rank(Ts):
     return len(Q), None
 
 
-@pytest.mark.parametrize("n_max", [1, 2, 3])
+@pytest.mark.parametrize("n_max", [1, 2, pytest.param(3, marks=pytest.mark.xdist_group("heavy_memory"))])
 def test_true_window_is_odd_no_grading(n_max):
     """Paper 32 prop:odd(c), Paper 38 substrate note: the true window is ODD.
     The commutant of O^CH (null space of X -> [X, a] over a basis of O) is the
