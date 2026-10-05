@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.5] - 2026-10-05
+
+**Patch. LiH residual diagnosed in three cheap steps; the analytic CI-relaxed marriage banks a new corpus-best analytic LiH energy, -8.05164 Ha.**
+
+### Diagnostics (debug/ memos; no production code)
+- **Step 1 -- r12 t^2 (e-e-n) geminal: STOP** (`debug/sprint_r12t2_step1_memo.md`). It reduces exactly to rank-3 reweighted pair densities (validated vs i.i.d. Monte-Carlo, <= 1.8 sigma, incl. the kinetic Laplacian and triangles), but is worth 0.3-3 mHa: in the Li+ core Hylleraas calculation u t^2 adds 0.35 mHa on top of {u, u^2, s, t^2}; the ~10 mHa t^2 increment is orbital-representable radial correlation. Paper 19's "the residual is e-e-n correlation / needs r12 t^2" corrected at four loci (abstract included); ledger + CLAUDE.md S3 row added. Side finding: the legacy-Neumann triangle T2 is off 9.5 sigma (the exact-Neumann production path is not).
+- **Step 2 -- CI-coefficient relaxation: BORDERLINE** (`debug/sprint_ci_relax_step2_memo.md`). VMC linear method on the 90-det pi reference: CI-free (N+1) -2.7 +- 0.1 mHa, dressed determinants (2N) -3.8 +- 0.2 mHa vs the frozen 2x2.
+- **Step 3 -- pair-split / core geminals: GO, but the lever is electron-nucleus** (`debug/sprint_pair_geminal_step3_memo.md`). Core-region factors sum_i w(r_i) Psi and sum w_i w_j Psi gain 4-5 mHa only with the geminal present (alone <= 0.45 mHa); core-weighted geminals add 1.5-3 mHa; full set -8.0637 +- 0.0003 (VMC, variational). A second global geminal gains 0.0 mHa (reproduces the ledger negatives); an extra core orbital (M=17) 0.06 mHa. The switch radius r0 (0.6-1.0 bohr, robust): PI ruling 2026-10-05 -- the switch is defined from the Li 1s density of the reference itself (no free radius).
+
+### Added
+- `geovac/lih_r12ci/ci_relaxed.py`, `transition_tensor.py`: the (N_det+1)-dim RI-free eigenproblem {Phi_I} U {(F-Fbar)Psi_CI} with non-symmetric transition tensors and one new kinetic pair base phi_x Lap phi_y - (Lap phi_x) phi_y. Gates: G1 frozen limit = golden 2x2 to 5e-15; G2 transition columns vs MC within 3 sigma (1e-3 relative on the leading determinant); G3 nine-det -8.0504036 (LM -8.05047 +- 0.00024), ninety-det **-8.0516408** (LM -8.05164 +- 0.00017, 0.0 sigma; re-sampled VMC 0.8 sigma); G4 golden fast items + r12ci/gvee slow suites pass, no existing function changed. ~13 min / 2.8 GB on top of the banked 2x2 pieces.
+- `tests/test_lih_ci_relaxed.py` (fast tensor identity; @slow pins; all fire-tested).
+
+### Changed
+- Paper 19: abstract and the residual discussion now carry -8.05164 (analytic) and the step-3 picture (VMC-tiered). Claim-matrix rows added (the e-n finding is a coverage gap until its analytic build).
+
 ## [v5.20.4] - 2026-10-04
 
 **Patch. Owed-list items 1-4: three pre-existing test failures resolved (one exposed stale Paper 27 numbers), Paper 32 item-4 mechanism corrected, heavy tests made xdist-safe, the LiH geminal range made a real parameter (all golden items still bit-identical).**

@@ -88,8 +88,10 @@ orbital ceiling and safely above the exact $-8.0705$.  A deterministic,
 resolution-of-identity--free explicit-$r_{12}$ treatment on the same
 $\pi$-containing reference, with a cusp-correct Slater geminal, improves this to
 $-8.0490$~Ha (variational, cross-checked by VMC of the same trial function to
-$0.16$~mHa).  An additive-F12 estimate places the near-chemical target at
-$\approx-8.062$~Ha, which needs three-body correlation.  The atom-centered core
+$0.16$~mHa), and relaxing the CI coefficients alongside the geminal lowers it to
+$-8.0516$~Ha.  An additive-F12 estimate places the near-chemical target at
+$\approx-8.062$~Ha;\ the remaining gap is not electron--electron--nucleus
+correlation, which is worth $\lesssim3$~mHa here.  The atom-centered core
 turns out to be a convenience rather than a necessity:\ a pure prolate product
 basis also represents it, at the cost of hundreds of primitives.  The prolate
 route buys energy per qubit, not sparsity.  Its first qubit Hamiltonian ($Q=20$)
@@ -972,12 +974,8 @@ at $J=1$ reproduces the FCI energy to within statistics ($-8.0285\pm0.005$ vs
 $-8.0290$ for the $M=16$ basis).  The resulting rigorous variational energy is
 $\mathbf{-8.047\pm0.001}$~Ha ($\gamma\simeq1.5$, four independent seeds):\ $18$~mHa
 below the orbital ceiling and safely variational ($>-8.0705$).  A two-body Jastrow
-recovers $\approx19$~mHa of the $41$~mHa ceiling-to-exact gap; the remaining
-correlation---including the electron--electron--nucleus (three-body) content that
-the additive-F12 rich Hylleraas basis ($\{u,u^2,ut^2,t^2,s\}$) captured but a pure
-$u(r_{12})$ cannot---requires a nucleus-coupled three-body correlation term:\
-either a three-body Jastrow in the Monte-Carlo route, or, on the analytic side,
-an $r_{12}\,t^2$-type geminal evaluated by the same
+recovers $\approx19$~mHa of the $41$~mHa ceiling-to-exact gap.  The remaining
+correlation is evaluated on the analytic side by the
 resolution-of-identity--free reductions of Paper~12, whose reference generality
 (they act on arbitrary pair-density products, so a many-determinant reference
 enters only through a coefficient tensor) was established by audit on
@@ -1023,9 +1021,8 @@ two-body correlation the marriage recovers ($\approx14$~mHa) matches the
 two-body Pad\'e Jastrow ($\approx15$~mHa), so the shortfall is the reference, not
 the correlation treatment.  Reaching the $-8.047$ window is the same construction
 on a $\pi$-containing $M=16$ reference (a larger, azimuthally-resolved
-computation);\ reaching the $-8.062$ additive-F12 estimate additionally needs the
-nucleus-coupled $r_{12}t^2$ three-body geminal, which the same reductions are
-built to carry.  Backing:\ \texttt{tests/test\_lih\_r12ci\_bridge.py} (the
+computation);\ the $-8.062$ additive-F12 estimate lies beyond a single geminal on
+a fixed reference.  Backing:\ \texttt{tests/test\_lih\_r12ci\_bridge.py} (the
 four-body reduction on real densities) and \texttt{tests/test\_lih\_vmc.py} (the
 VMC stack);\ chronicle \texttt{CHANGELOG.md} v5.15.24.
 
@@ -1062,8 +1059,51 @@ long run traced it to under-burned-in sampling, which also biased the bare
 reference.  Along the way a real defect in the general-$m$ triangle weight of
 $g_{V_{ee}}$ was found and fixed (it only affects references with circulation,
 so the $\sigma$ results above are untouched).  Its effect here is $0.003$~mHa.
-The residual $21.5$~mHa is correlation a pairwise geminal cannot carry
-(electron--electron--nucleus), the $r_{12}t^2$ step named above.
+The residual $21.5$~mHa is not electron--electron--nucleus correlation.
+In the Li$^+$ core Hylleraas calculation behind the additive estimate, the
+genuinely three-body term $u\,t^2$ adds $0.35$~mHa on top of
+$\{u,u^2,s,t^2\}$ (He $0.21$, H$^-$ $0.15$);\ the larger $t^2$ increment is
+radial correlation that the orbital reference already carries.  An $r_{12}t^2$
+geminal does reduce exactly to reweighted pair densities (validated against
+Monte-Carlo to $\le1.8\sigma$ on the two-orbital reference), but its energy is
+$\approx0.3$--$3$~mHa.  \textbf{[MEASURED 2026-10-05 on He-like analogs; the
+molecular transfer is an estimate.]}
+
+\emph{Relaxing the reference.}  The $2\times2$ problem freezes the CI coefficients
+at their bare values.  Freeing them alongside the geminal is an
+$(N_{\rm det}+1)$-dimensional generalized eigenproblem in the basis
+$\{\Phi_I\}\cup\{(F-\bar F)\Psi_{\rm CI}\}$.  Its new elements are one-geminal-edge
+transition elements $\langle\Phi_I|(F-\bar F)|\Psi_{\rm CI}\rangle$ and
+$\langle\Phi_I|H(F-\bar F)|\Psi_{\rm CI}\rangle$, evaluated by the same
+resolution-of-identity--free reductions with non-symmetric transition tensors;\ the
+kinetic part needs one new pair base, $\phi_x\Delta\phi_y-(\Delta\phi_x)\phi_y$.  On
+the full $\pi$ reference it gives
+\[
+E = \mathbf{-8.05164}~\mathrm{Ha},
+\]
+$2.6$~mHa below the frozen $-8.04905$, variational, and in agreement with a VMC
+linear-method optimization of the same ansatz ($-8.05164\pm0.00017$).  The relaxed
+CI doubles shrink by $10$--$40\%$ while the geminal weight grows:\ the geminal and
+the doubles were partly counting the same correlation.  Relaxing the CI without the
+geminal gains only $0.03$~mHa.  \textbf{[MEASURED 2026-10-05; tests
+\texttt{tests/test\_lih\_ci\_relaxed.py} pin the nine-determinant value and the
+frozen-limit identity to the $2\times2$ energies.]}
+
+\emph{Where the remaining $18.9$~mHa lives.}  Variational Monte-Carlo
+linear-method scans on the same reference separate the candidates.  An extra core
+orbital ($M=17$) moves the geminal-dressed energy by $0.06$~mHa, so the orbital basis
+is not the residual.  A second geminal of any range over all pairs gains nothing,
+reproducing the earlier negatives.  What does gain is spatial structure at the Li
+core:\ factors $\sum_i w(r_i)\Psi$ and $\sum_{i<j}w(r_i)w(r_j)\Psi$, with $w$ a smooth
+switch on the Li $1s$ region, gain about $4$--$5$~mHa, but only in the presence of
+the geminal (alone they are worth $\lesssim0.5$~mHa), and core-weighted geminals add
+$1.5$--$3$~mHa more.  With the full set of such terms the variational energy reaches
+$-8.0637\pm0.0003$~Ha.  The missing piece is therefore electron--nucleus correlation
+that compensates the geminal's distortion of the core density, the pairing that
+quantum Monte-Carlo trial functions use as a matter of course.  These terms have the
+same structure as the geminal (one-electron weights times known kernels), so the same
+reductions carry them.  \textbf{[MEASURED 2026-10-05, VMC only;\ no analytic value
+yet.]}
 \textbf{[MEASURED 2026-09-27; the energy has no regression test, being a
 multi-hour run.  The engine's pieces are guarded by
 \texttt{tests/test\_lih\_gvee\_sparse.py} and

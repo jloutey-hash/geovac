@@ -323,3 +323,19 @@ FLAT plane by a positive squared-window reconstruction (Paper 53 thm:plane_gh, f
 step [ARGUED]). Record: Paper 53 (rebuilt), Paper 51 lem:L6_backbone → [OPEN], tests
 `tests/test_paper53_disk_obstruction.py` (pins the ρ = R artifact), `tests/test_paper53_flat_plane_squared_window.py`;
 CHANGELOG v5.17.9.
+
+### r12 t^2 (electron-electron-nucleus) geminal for the LiH residual (2026-10-05) | 1
+**Hypothesis (Paper 19, 2026-09-22..27):** the 21.5 mHa between the analytic marriage (-8.049045) and exact
+(-8.0705) is e-e-n correlation a pure u(r12) geminal cannot carry; an r12 t^2-type geminal through the RI-free
+reductions would reach the -8.062 additive-F12 target.
+**Result: STOP.** The machinery works -- u t^2 g(u) = k(u)[r1A^2 + r2A^2 - 2 r1A r2A] is an exact rank-3 sum of
+one-electron weights x a two-body kernel, every energy piece (incl. the kinetic Laplacian and triangles) reduces to
+reweighted pair densities, validated vs i.i.d. Monte-Carlo to <= 1.8 sigma on the 2-MO reference. But the payoff is
+not there: in the Li+ core Hylleraas calculation behind the -8.062 estimate, u t^2 adds 0.35 mHa on top of
+{u, u^2, s, t^2} (He 0.21, H- 0.15); the ~10 mHa t^2 increment is radial correlation the orbital reference already
+carries. Molecular-analog estimate 0.3-3 mHa vs the 21.5 mHa gap. Leading candidates for the residual: the CI
+coefficients frozen in the 2x2 problem (analog: 1.9-9 mHa per pair when relaxed) and the orbital basis behind the
+-8.032 ceiling. Same family as the per-pair-gamma (2026-08-26) and multi-geminal/F^2 (2026-09-26) rows: correlation-
+factor flexibility beyond the u-shape is not where the residual lives. Record: debug/sprint_r12t2_step1_memo.md;
+debug/r12t2_step1_*.py; Paper 19 (residual paragraph corrected 2026-10-05).
+

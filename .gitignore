@@ -134,3 +134,9 @@ debug/data/ints/
 # The .json measurements beside these stay tracked: they are the evidence
 # for the corrected exponents, not intermediates.
 debug/data/p60_Tp_*.npz
+
+# LiH residual diagnostics (2026-10-05): raw linear-method sample matrices,
+# 25-100 MB each, ~3.4 GB total; regenerable from debug/ci_relax_step2_lm.py
+# and debug/pair_geminal_step3_lm.py. Results/vectors stay committed.
+debug/data/cirelax_*_lm_s*.npz
+debug/data/pairgem_*_lm_s*.npz
