@@ -84,19 +84,35 @@ def analytic(t):
         Vm[2 + a, 2 + b] = pab[str((a, b))]['Vee']
     for (nm, b), v in blk.items():
         Vm[rowof[nm], 4 + int(b)] = v['Vee']
+    # kinetic and V_ne parts (reference side)
+    Tm = np.full((K, K), np.nan); Nm = np.full((K, K), np.nan)
+    pI2 = {b: pI[str(b)] for b in range(2)}
+    for a in range(2):
+        Tm[0, 2 + a] = d @ z1['T_I'][:, a]; Nm[0, 2 + a] = d @ z1['Vne_I'][:, a]
+        Tm[1, 2 + a] = pF[str(a)]['kin']; Nm[1, 2 + a] = pF[str(a)]['FWv']
+        if 'T' in pI2[a]:
+            Tm[0, 4 + a] = d @ np.array(pI2[a]['T'], float); Nm[0, 4 + a] = d @ np.array(pI2[a]['Vne'], float)
+    for (a, b) in ((0, 0), (0, 1), (1, 1)):
+        p_ = pab[str((a, b))]
+        Tm[2 + a, 2 + b] = 0.5 * p_['grad'] - 0.25 * p_['lap']; Nm[2 + a, 2 + b] = p_['Vne']
+    for (nm, b), v in blk.items():
+        Tm[rowof[nm], 4 + int(b)] = 0.5 * v['grad'] - 0.25 * (v['lapAB'] + v['lapBA'])
+        Nm[rowof[nm], 4 + int(b)] = v['Vne']
     for k in range(K):                                    # symmetric fill
         for l in range(k):
-            S[k, l] = S[l, k]; H[k, l] = H[l, k]; Vm[k, l] = Vm[l, k]
-    return tS, tH, S, H, d, tV, Vm
+            S[k, l] = S[l, k]; H[k, l] = H[l, k]; Vm[k, l] = Vm[l, k]; Tm[k, l] = Tm[l, k]; Nm[k, l] = Nm[l, k]
+    return tS, tH, S, H, d, tV, Vm, Tm, Nm
 
 
 def main() -> int:
     t = float(sys.argv[1]) if len(sys.argv) > 1 else 1e-2
     files = sorted(glob.glob(os.path.join(DATA, f"en_factors_g2_{t:.0e}_s*.npz")))
     zs = [np.load(f) for f in files]
-    B = {k: np.concatenate([z[k] for z in zs]) for k in ("tS", "tH", "S", "H", "tV", "V", "c0", "PP")}
+    keys = ["tS", "tH", "S", "H", "tV", "V", "c0", "PP"] + (["Tg", "Vn"] if all('Tg' in z.files for z in zs) else [])
+    B = {k: np.concatenate([z[k] for z in zs]) for k in keys}
     seed = np.concatenate([np.full(len(z['c0']), k) for k, z in enumerate(zs)])
-    tS, tH, S, H, d, tV, Vm = analytic(t)
+    tS, tH, S, H, d, tV, Vm, Tm, Nm = analytic(t)
+    have_T = all('Tg' in z.files for z in zs)
     N = len(d)
     C = np.column_stack([B['c0'] - d[None, :], B['PP'] - 1.0])
     if "--cv-overlaps" in sys.argv:
@@ -118,10 +134,13 @@ def main() -> int:
             rows.append(("P", f"<{COLS[k]} psi|{COLS[l]} psi>", S[k, l], B['S'][:, k, l]))
             rows.append(("P", f"<{COLS[k]} psi|H {COLS[l]} psi>", H[k, l], B['H'][:, k, l]))
             rows.append(("PV", f"<{COLS[k]} psi|Vee {COLS[l]} psi>", Vm[k, l], B['V'][:, k, l]))
+            if have_T:
+                rows.append(("PT", f"<{COLS[k]} psi|T {COLS[l]} psi>g", Tm[k, l], B['Tg'][:, k, l]))
+                rows.append(("PN", f"<{COLS[k]} psi|Vne {COLS[l]} psi>", Nm[k, l], B['Vn'][:, k, l]))
     print(f"files={len(files)} blocks={len(B['c0'])}  N={N}")
     print(f"{'element':28s} {'analytic':>14s} {'MC':>14s} {'err':>9s} {'z':>6s} {'rel':>9s} {'MCrel':>8s}")
     worst_z = 0.0; worst_rel = 0.0; ok_z = True; nlead = 0; nlead_ok = 0
-    for blk in ("T", "P", "TV", "PV"):
+    for blk in ("T", "P", "TV", "PV", "PT", "PN"):
         sub = [r for r in rows if r[0] == blk]
         for kind in (("S", "H") if blk in ("T", "P") else ("V",)):
             sel = [r for r in sub if (kind == "V" or ("|H " in r[1]) == (kind == "H")) and np.isfinite(r[2])]

@@ -120,25 +120,38 @@ def test_class_geminal_span(pts) -> None:
 
 
 # --------------------------------------------------------------------------- slow
-@pytest.fixture(scope="module")
-def nine_det(tmp_path_factory) -> dict:
+def _run(tmp_path_factory, phase2: bool) -> dict:
     out = tmp_path_factory.mktemp("en") / "r.npz"
     env = dict(os.environ)
     for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
         env[k] = "1"
-    run = subprocess.run([sys.executable, str(ROOT / "debug" / "en_factors_run.py"), "1e-2", "--phase2",
-                          "--save", str(out)], cwd=ROOT, env=env, capture_output=True, text=True)
+    cmd = [sys.executable, str(ROOT / "debug" / "en_factors_run.py"), "1e-2", "--save", str(out)]
+    if phase2:
+        cmd.append("--phase2")
+    run = subprocess.run(cmd, cwd=ROOT, env=env, capture_output=True, text=True)
     assert run.returncode == 0, run.stdout[-3000:] + run.stderr[-3000:]
     z = np.load(out, allow_pickle=True)
-    z2 = np.load(str(out)[:-4] + "_phase2.npz", allow_pickle=True)
-    return dict(E=json.loads(str(z['E'])), ident=json.loads(str(z['identity'])),
-                E2=json.loads(str(z2['E'])), sw=json.loads(str(z['switch'])))
+    r = dict(E=json.loads(str(z['E'])), ident=json.loads(str(z['identity'])), sw=json.loads(str(z['switch'])))
+    if phase2:
+        r['E2'] = json.loads(str(np.load(str(out)[:-4] + "_phase2.npz", allow_pickle=True)['E']))
+    return r
+
+
+@pytest.fixture(scope="module")
+def nine_det(tmp_path_factory) -> dict:
+    """phase 1 only (~10 min)."""
+    return _run(tmp_path_factory, False)
+
+
+@pytest.fixture(scope="module")
+def nine_det_p2(tmp_path_factory) -> dict:
+    """phase 1 + phase 2 (~70 min; the batched triangle class dominates)."""
+    return _run(tmp_path_factory, True)
 
 
 @pytest.mark.slow
 def test_G1_identity_and_internal_consistency(nine_det: dict) -> None:
     assert abs(nine_det['E']['A'] - E_RELAXED_9) < 1e-9
-    assert abs(nine_det['E2']['A'] - E_RELAXED_9) < 1e-9
     idt = nine_det['ident']
     for k in ('G1_A_vs_ci_relaxed', 'S_P_vs_dS_I', 'LA_ref_W1', 'LA_ref_W2', 'HPW_vs_kinsym_W1',
               'HPW_vs_kinsym_W2'):
@@ -147,12 +160,13 @@ def test_G1_identity_and_internal_consistency(nine_det: dict) -> None:
 
 
 @pytest.mark.slow
-def test_nine_det_energies_pinned(nine_det: dict) -> None:
+def test_phase1_nine_det_energy_pinned(nine_det: dict) -> None:
     assert abs(nine_det['E']['A_W12'] - E_PH1_9) < 2e-8
-    assert abs(nine_det['E2']['A_W12_G'] - E_PH2_9) < 2e-8
+    assert E_EXACT_LIH < nine_det['E']['A_W12'] < E_RELAXED_9 - 1e-3
 
 
 @pytest.mark.slow
-def test_variational_and_below_A(nine_det: dict) -> None:
-    E1 = nine_det['E']['A_W12']; E2 = nine_det['E2']['A_W12_G']
-    assert E_EXACT_LIH < E2 <= E1 < E_RELAXED_9 - 1e-3
+def test_phase2_nine_det_energy_pinned(nine_det_p2: dict) -> None:
+    assert abs(nine_det_p2['E2']['A'] - E_RELAXED_9) < 1e-9
+    assert abs(nine_det_p2['E2']['A_W12_G'] - E_PH2_9) < 2e-8
+    assert E_EXACT_LIH < nine_det_p2['E2']['A_W12_G'] <= nine_det_p2['E']['A_W12']

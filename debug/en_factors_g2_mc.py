@@ -9,7 +9,8 @@ Fc1 = sum (w_i + w_j) f_ij), w = the parameter-free core switch (core_switch.Cor
 density).  H(A psi) = A H psi - 1/2 (sum_i lap_i A) psi - sum_i grad_i A . grad_i psi, all analytic.
 Electronic H (V_NN removed).  Saved block means:
     tS[I,k] = <chi_I|X_k>,  tH[I,k] = <chi_I|H X_k>,  S[k,l] = <X_k|X_l>,  H[k,l] = <X_k|H X_l>,
-    and the V_ee-only parts tV[I,k] = <chi_I|V_ee X_k>, V[k,l] = <X_k|V_ee X_l> (low variance).
+    and the V_ee-only parts tV[I,k] = <chi_I|V_ee X_k>, V[k,l] = <X_k|V_ee X_l> (low variance), the V_ne part
+    Vn[k,l], and the kinetic part in GRADIENT form Tg[k,l] = 1/2 sum_i <grad_i X_k|grad_i X_l> (low variance).
 Usage: python debug/en_factors_g2_mc.py 1e-2 --seed 1 [--nwalk 1000 --nsweep 6000 --nburn 1500]
 """
 from __future__ import annotations
@@ -115,7 +116,7 @@ def main() -> int:
         mults += en_ops(w, gw, lw) + weighted_geminals(r, w, gw, lw)
         X = np.array([m[0] * psi for m in mults])
         if not need_H:
-            return chi, X, None, None
+            return chi, X, None, None, None, None
         gchi = gPhi / 2.0; lchi = lPhi / 2.0
         Vp = V.potential(wf, r) - wf.Vnn
         gpsi = np.einsum('N,NWed->Wed', cvec, gchi); lpsi = cvec @ lchi
@@ -125,12 +126,14 @@ def main() -> int:
         for i in range(r.shape[1]):
             for j in range(i + 1, r.shape[1]):
                 Vee += 1.0 / np.linalg.norm(r[:, i] - r[:, j], axis=-1)
-        return chi, X, HX, Vee[None] * X
+        GX = np.array([gA * psi[:, None, None] + A[:, None, None] * gpsi for (A, gA, _lA) in mults])
+        Vne = Vp - Vee
+        return chi, X, HX, Vee[None] * X, GX, Vne[None] * X
 
     if a.check:
         rng = np.random.default_rng(7)
         r = V._init_walkers(wf, 5, rng)
-        chi, X, HX, _VX = columns(r)
+        chi, X, HX, _VX, _GX, _VnX = columns(r)
         Vp = V.potential(wf, r) - wf.Vnn
         h = 1e-4; lap = np.zeros_like(X)
         for e in range(r.shape[1]):
@@ -157,7 +160,7 @@ def main() -> int:
             return (c[:N] @ chi + c[N] * (X[1] - Fbar * X[0]) + c[N + 1:N + 1 + nx] @ X[2:2 + nx])
 
         def logpv(rr):
-            chi, X, _h, _v = columns(rr, need_H=False)
+            chi, X, _h, _v, _g, _n = columns(rr, need_H=False)
             return np.log(np.abs(psi_val(chi, X)) ** 2 + 1e-300)
         est = []
 
@@ -166,7 +169,7 @@ def main() -> int:
             chi = Phi / 2.0; lchi = lPhi / 2.0
             Vp = V.potential(wf, r) - wf.Vnn
             Hchi = Vp[None] * chi - 0.5 * lchi
-            _chi, X, HX, _VX = columns(r)
+            _chi, X, HX, _VX, _GX, _VnX = columns(r)
             num = c[:N] @ Hchi + c[N] * (HX[1] - Fbar * HX[0]) + c[N + 1:N + 1 + nx] @ HX[2:2 + nx]
             est.append(float((num / psi_val(chi, X)).real.mean()) + wf.Vnn)
         t0 = time.time()
@@ -185,12 +188,13 @@ def main() -> int:
         return np.log(np.abs(psi) ** 2 + eps * np.sum(np.abs(Phi) ** 2, axis=0) + 1e-300)
 
     acc = dict(tS=np.zeros((N, K)), tH=np.zeros((N, K)), S=np.zeros((K, K)), H=np.zeros((K, K)),
-               tV=np.zeros((N, K)), V=np.zeros((K, K)), c0=np.zeros(N), PP=0.0)
+               tV=np.zeros((N, K)), V=np.zeros((K, K)), Tg=np.zeros((K, K)), Vn=np.zeros((K, K)),
+               c0=np.zeros(N), PP=0.0)
     blocks = {k: [] for k in acc}
     cnt = [0]
 
     def measure(r):
-        chi, X, HX, VX = columns(r)
+        chi, X, HX, VX, GX, VnX = columns(r)
         P = np.abs(cvec @ chi) ** 2 + eps * np.sum(np.abs(chi) ** 2, axis=0)
         q = Z / P
         nw = r.shape[0]
@@ -202,6 +206,8 @@ def main() -> int:
         acc["H"] += (Xc @ HX.T).real / nw
         acc["tV"] += (cc @ VX.T).real / nw
         acc["V"] += (Xc @ VX.T).real / nw
+        acc["Vn"] += (Xc @ VnX.T).real / nw
+        acc["Tg"] += 0.5 * np.einsum('kwed,lwed,w->kl', GX.conj(), GX, q).real / nw     # gradient form
         acc["c0"] += (cc @ X[0]).real / nw
         acc["PP"] += np.mean(q * np.abs(X[0]) ** 2)
         cnt[0] += 1
