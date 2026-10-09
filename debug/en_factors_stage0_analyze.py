@@ -10,6 +10,9 @@ for every switch key (0.6, 1.0 radial; -1 = DENS ruled; -2 = FRAC variant).  50-
 --project : also print the LM matrices projected onto the ANALYTIC basis of en_factors
             [chi_I, xi, W1 psi, W2 psi, F_cc psi, F_c1 psi] (DENS switch; electronic H) and save them
             to debug/data/en_factors_stage0_<tag>_proj.npz for gate G2/G3 comparison.
+Option b (PI 2026-10-09; tags enab = 90det, enab9det = 9det, keys 0.6, -1 DENS, -3 AMP):
+    A+W[-1]+W[-3]  = A + {W1, W2}(dens) + {A1, A2}(amp)   (the combined phase 1)
+    A+W+G[-1]+W[-3] etc.;  --project then projects onto [chi_I, xi, W1, W2, A1, A2].
 Usage: python debug/en_factors_stage0_analyze.py en0 [--project]
 """
 from __future__ import annotations
@@ -65,6 +68,13 @@ def main():
         sub[f"A+G[{r0:g}]"] = Q(A + G)
         sub[f"A+W+G[{r0:g}]"] = Q(A + W + G)
         sub[f"C+W[{r0:g}]"] = Q([bv(0), bv(1)] + W)
+    if -1.0 in keys and -3.0 in keys:                       # option b: density + amplitude switch
+        Wd = [P(-1.0, c, 0.0) for c in ("cc", "cv", "vv")]; Wa = [P(-3.0, c, 0.0) for c in ("cc", "cv", "vv")]
+        Gd = [P(-1.0, c, 1.5) for c in ("cc", "cv", "vv")]; Ga = [P(-3.0, c, 1.5) for c in ("cc", "cv", "vv")]
+        sub["A+W[-1]+W[-3]"] = Q(A + Wd + Wa)
+        sub["A+W+G[-1]+W[-3]"] = Q(A + Wd + Wa + Gd)
+        sub["A+W+G[-1]+W+G[-3]"] = Q(A + Wd + Wa + Gd + Ga)
+        sub["C+W[-1]+W[-3]"] = Q([bv(0), bv(1)] + Wd + Wa)
     res = {k: solve(S, H, q, 1e-10)[0] for k, q in sub.items()}
     jk = {k: [] for k in sub}
     for g in range(ng):
@@ -73,11 +83,11 @@ def main():
             jk[k].append(solve(Sj, Hj, q, 1e-10)[0])
     jk = {k: np.array(v) for k, v in jk.items()}
     je = lambda a: np.sqrt((ng - 1) / ng * np.sum((a - a.mean()) ** 2))
-    print(f"{'ansatz':16s} {'E':>11s} {'err':>9s}  {'vs A (mHa)':>18s} {'vs B (mHa)':>18s} np")
+    print(f"{'ansatz':22s} {'E':>11s} {'err':>9s}  {'vs A (mHa)':>18s} {'vs B (mHa)':>18s} np")
     for k in sub:
         dA = (res[k] - res["A"]) * 1e3; eA = je(jk[k] - jk["A"]) * 1e3
         dB = (res[k] - res["B"]) * 1e3; eB = je(jk[k] - jk["B"]) * 1e3
-        print(f"{k:16s} {res[k]:11.6f} {je(jk[k]):9.6f}  {dA:+8.3f} +/- {eA:5.3f}  {dB:+8.3f} +/- {eB:5.3f} {sub[k].shape[1]}")
+        print(f"{k:22s} {res[k]:11.6f} {je(jk[k]):9.6f}  {dA:+8.3f} +/- {eA:5.3f}  {dB:+8.3f} +/- {eB:5.3f} {sub[k].shape[1]}")
     np.savez(os.path.join(DATA, f"en_factors_stage0_{tag}_E.npz"),
              names=np.array(list(sub)), E=np.array([res[k] for k in sub]),
              jk=np.array([jk[k] for k in sub]))
@@ -94,8 +104,12 @@ def main():
         cols.append(0.5 * (bv(1) - Fbar * bv(0)))
         cols.append(0.5 * (P(k, "cv", 0.0) + 2 * P(k, "cc", 0.0)) / 3.0)
         cols.append(0.5 * P(k, "cc", 0.0))
-        cols.append(0.5 * P(k, "cc", 1.5))
-        cols.append(0.5 * (P(k, "cv", 1.5) + 2 * P(k, "cc", 1.5)))
+        if -3.0 in keys:                                    # option b basis: + A1 psi, A2 psi
+            cols.append(0.5 * (P(-3.0, "cv", 0.0) + 2 * P(-3.0, "cc", 0.0)) / 3.0)
+            cols.append(0.5 * P(-3.0, "cc", 0.0))
+        else:
+            cols.append(0.5 * P(k, "cc", 1.5))
+            cols.append(0.5 * (P(k, "cv", 1.5) + 2 * P(k, "cc", 1.5)))
         Qa = np.column_stack(cols)
         Sp = np.array([Qa.conj().T @ s @ Qa for s in Sg]).real
         Hp = np.array([Qa.conj().T @ h @ Qa for h in Hg]).real - V_NN * Sp

@@ -83,6 +83,54 @@ class CoreSwitch:
         return w, gw, lw
 
 
+class AmpSwitch(CoreSwitch):
+    r"""AMPLITUDE switch (PI ruling 2026-10-09, option b): w_amp(r) = phi_c(r) / phi_c(R_Li), the SAME
+    core natural orbital as the density switch (so w_amp^2 == w_den identically), = 1 at the Li nucleus.
+
+    Node / kink handling: the ruling's |phi_c|/|phi_c(Li)| has a gradient kink (and a surface delta in
+    its Laplacian) on the nodal surface of phi_c.  For the M=16 pi reference phi_c has NO node within
+    2.86 bohr of Li; its only nodal surface lies in the H / outer region, where |phi_c/phi_c(Li)| <= 7.6e-4
+    and which holds 1.1e-5 of the NO's norm.  The SIGNED ratio is used: identical to |phi_c|/|phi_c(Li)|
+    everywhere inside the node surface, smooth everywhere (no kink, no delta term), closed-form
+    derivatives  grad w = grad phi_c / phi0,  lap w = lap phi_c / phi0  (lap carries the integrable
+    1/r_Li cusp of phi_c, like V_ne).  `node_distance` reports the nearest node to Li for the record."""
+
+    def __init__(self, prims: Sequence[dict], tcore: np.ndarray, R: float):
+        super().__init__(prims, tcore, R)
+        self.inv1 = 1.0 / self.phi0
+
+    @classmethod
+    def from_reference(cls, prims, T_no, occ, m_no, R) -> "AmpSwitch":
+        p = select_core_no(occ, m_no, prims, T_no, R)
+        sw = cls(prims, T_no[:, p], R)
+        sw.no_index = p
+        return sw
+
+    def value(self, r: np.ndarray) -> np.ndarray:
+        Phi = V.eval_values_batch(self.prims, r, self.R)
+        return np.tensordot(self.tcore, Phi, axes=(0, 0)).real * self.inv1
+
+    def vgl(self, r: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        ph = np.zeros(r.shape[:-1]); gph = np.zeros(r.shape); lph = np.zeros(r.shape[:-1])
+        for c, p in zip(self.tcore, self.prims):
+            if c == 0.0:
+                continue
+            v, g, l = V.orbital_vgl(p, r, self.R)
+            ph += c * v.real; gph += c * g.real; lph += c * l.real
+        return ph * self.inv1, gph * self.inv1, lph * self.inv1
+
+    def node_distance(self, rmax: float = 8.0, n: int = 401) -> float:
+        """Smallest distance from Li of a point (rho, z) half-plane sample where phi_c/phi0 < 0."""
+        rho = np.linspace(0.0, rmax, n); zz = np.linspace(-self.R / 2 - rmax, self.R / 2 + rmax, 2 * n - 1)
+        Rg, Zg = np.meshgrid(rho, zz, indexing='ij')
+        pts = np.stack([Rg, 0 * Rg, Zg], -1).reshape(-1, 3)
+        a = self.value(pts).reshape(Rg.shape)
+        neg = a < 0
+        if not neg.any():
+            return float('inf')
+        return float(np.sqrt(Rg ** 2 + (Zg + self.R / 2) ** 2)[neg].min())
+
+
 class CoreFractionSwitch:
     """VARIANT (comparison only): w(r) = n_c |phi_c|^2 / sum_p n_p |phi_p|^2 -- the core NO's share of
     the full-CI reference density (n_p = NO occupations).  Parameter-free; w -> ~1 inside the core,
@@ -143,3 +191,9 @@ def grid_switch(nval_c: np.ndarray, ngrad_c: np.ndarray, nlap_c: np.ndarray, phi
     w = ph * ph / phi0 ** 2
     lw = 2.0 * (ph * np.asarray(nlap_c).real + g2) / phi0 ** 2
     return w, lw
+
+
+def grid_amp_switch(nval_c: np.ndarray, nlap_c: np.ndarray, phi0: float):
+    """AmpSwitch on the kernels grid: w_amp = phi_c / phi0, lap w_amp = lap phi_c / phi0 (signed; see
+    AmpSwitch for the node handling)."""
+    return np.asarray(nval_c).real / phi0, np.asarray(nlap_c).real / phi0

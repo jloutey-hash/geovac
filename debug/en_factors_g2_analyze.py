@@ -6,7 +6,10 @@ Fcc, Fc1).  Control variates (variance reduction only; exactly-known means): <ch
 <psi|psi> - 1.  Errors from the scatter of per-seed means (independent chains).
 Pass: every element within 3 sigma; |rel dev| <= 1e-3 on leading terms (|value| >= 5% of the block max)
 -- reported, together with the MC relative error that bounds what 1e-3 can mean.
-Usage: python debug/en_factors_g2_analyze.py 1e-2 [--cv-overlaps]
+--both (option b, PI 2026-10-09): analytic debug/data/en_factors_both_<t>.npz (en_factors_run.py
+--switch both) vs en_factors_g2b_<t>_s*.npz (en_factors_g2_mc.py --both); columns [1, F, W1, W2, A1, A2],
+A_k = the amplitude-switch columns.
+Usage: python debug/en_factors_g2_analyze.py 1e-2 [--cv-overlaps] [--both]
 """
 import glob
 import json
@@ -31,11 +34,15 @@ def cv_est(x, C, seed):
     return float(y.mean()), float(g.std(ddof=1) / np.sqrt(len(us)))
 
 
-def analytic(t):
-    z1 = np.load(os.path.join(DATA, f"en_factors_{t:.0e}.npz"), allow_pickle=True)
+def analytic(t, both=False):
+    z1 = np.load(os.path.join(DATA, f"en_factors_{'both_' if both else ''}{t:.0e}.npz"), allow_pickle=True)
     p2 = os.path.join(DATA, f"en_factors_{t:.0e}_phase2.npz")
     d = z1['d']
-    if os.path.exists(p2):
+    na = z1['S_I'].shape[1]                                # 2 (dens) or 4 (both: W1, W2, A1, A2)
+    if both:
+        nan0 = np.zeros((len(d), 0))
+        z2 = dict(blk=json.dumps({}), S_I=nan0, H_I=nan0, SPG=[], HPG=[], parts_I=json.dumps({}))
+    elif os.path.exists(p2):
         z2 = np.load(p2, allow_pickle=True)
     else:                                                  # phase 1 only: G columns -> NaN (skipped)
         nan2 = np.full((len(d), 2), np.nan)
@@ -59,14 +66,14 @@ def analytic(t):
     S[0, 1] = Fbar; H[0, 1] = dt + Fbar * E0
     S[1, 1] = sig2 + Fbar ** 2; H[1, 1] = gg + 2 * Fbar * dt + Fbar ** 2 * E0
     S_P = z1['S_I'].T @ d; HPW = z1['H_I'].T @ d
-    for a in range(2):
+    for a in range(na):
         S[0, 2 + a] = S_P[a]; H[0, 2 + a] = HPW[a]
         p = pF[str(a)]
         S[1, 2 + a] = p['FW']; H[1, 2 + a] = p['kin'] + p['FWv'] + p['FWee']
-    for (a, b) in ((0, 0), (0, 1), (1, 1)):
+    for (a, b) in [(a_, b_) for a_ in range(na) for b_ in range(a_, na)]:
         p = pab[str((a, b))]
         S[2 + a, 2 + b] = p['S']; H[2 + a, 2 + b] = 0.5 * p['grad'] - 0.25 * p['lap'] + p['Vne'] + p['Vee']
-    for b in range(2):
+    for b in range(len(z2['SPG'])):
         S[0, 4 + b] = z2['SPG'][b]; H[0, 4 + b] = z2['HPG'][b]
     rowof = {'F': 1, 'W1': 2, 'W2': 3, 'Fcc': 4, 'Fc1': 5}
     for (nm, b), v in blk.items():
@@ -74,25 +81,28 @@ def analytic(t):
         S[k, l] = v['S']; H[k, l] = v['H']
     # V_ee-only parts
     pI = json.loads(str(z2['parts_I']))
-    VG = np.column_stack([np.array(pI[str(b)]['Vee'], float) for b in range(2)])
+    VG = (np.column_stack([np.array(pI[str(b)]['Vee'], float) for b in range(2)]) if not both
+          else np.zeros((N, 0)))
     tV = np.column_stack([np.full(N, np.nan), np.full(N, np.nan), z1['Vee_I'], VG])
     Vm = np.full((K, K), np.nan)
-    for a in range(2):
+    for a in range(na):
         Vm[0, 2 + a] = d @ z1['Vee_I'][:, a]; Vm[1, 2 + a] = pF[str(a)]['FWee']
+    for a in range(VG.shape[1]):
         Vm[0, 4 + a] = d @ VG[:, a]
-    for (a, b) in ((0, 0), (0, 1), (1, 1)):
+    for (a, b) in [(a_, b_) for a_ in range(na) for b_ in range(a_, na)]:
         Vm[2 + a, 2 + b] = pab[str((a, b))]['Vee']
     for (nm, b), v in blk.items():
         Vm[rowof[nm], 4 + int(b)] = v['Vee']
     # kinetic and V_ne parts (reference side)
     Tm = np.full((K, K), np.nan); Nm = np.full((K, K), np.nan)
-    pI2 = {b: pI[str(b)] for b in range(2)}
-    for a in range(2):
+    pI2 = {b: pI[str(b)] for b in range(VG.shape[1])}
+    for a in range(na):
         Tm[0, 2 + a] = d @ z1['T_I'][:, a]; Nm[0, 2 + a] = d @ z1['Vne_I'][:, a]
         Tm[1, 2 + a] = pF[str(a)]['kin']; Nm[1, 2 + a] = pF[str(a)]['FWv']
+    for a in pI2:
         if 'T' in pI2[a]:
             Tm[0, 4 + a] = d @ np.array(pI2[a]['T'], float); Nm[0, 4 + a] = d @ np.array(pI2[a]['Vne'], float)
-    for (a, b) in ((0, 0), (0, 1), (1, 1)):
+    for (a, b) in [(a_, b_) for a_ in range(na) for b_ in range(a_, na)]:
         p_ = pab[str((a, b))]
         Tm[2 + a, 2 + b] = 0.5 * p_['grad'] - 0.25 * p_['lap']; Nm[2 + a, 2 + b] = p_['Vne']
     for (nm, b), v in blk.items():
@@ -106,12 +116,16 @@ def analytic(t):
 
 def main() -> int:
     t = float(sys.argv[1]) if len(sys.argv) > 1 else 1e-2
-    files = sorted(glob.glob(os.path.join(DATA, f"en_factors_g2_{t:.0e}_s*.npz")))
+    both = "--both" in sys.argv
+    global COLS
+    if both:
+        COLS = ["1", "F", "W1", "W2", "A1", "A2"]
+    files = sorted(glob.glob(os.path.join(DATA, f"en_factors_g2{'b' if both else ''}_{t:.0e}_s*.npz")))
     zs = [np.load(f) for f in files]
     keys = ["tS", "tH", "S", "H", "tV", "V", "c0", "PP"] + (["Tg", "Vn"] if all('Tg' in z.files for z in zs) else [])
     B = {k: np.concatenate([z[k] for z in zs]) for k in keys}
     seed = np.concatenate([np.full(len(z['c0']), k) for k, z in enumerate(zs)])
-    tS, tH, S, H, d, tV, Vm, Tm, Nm = analytic(t)
+    tS, tH, S, H, d, tV, Vm, Tm, Nm = analytic(t, both)
     have_T = all('Tg' in z.files for z in zs)
     N = len(d)
     C = np.column_stack([B['c0'] - d[None, :], B['PP'] - 1.0])

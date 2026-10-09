@@ -6,7 +6,9 @@ Independent of the analytic engine on both axes:
     kernels grid), azimuth -> 2 pi delta_{m_x m_y};  calibrated against the engine's T1_no / Vne_no;
   * the 4-electron contraction by the direct 2x2-minor expansion (not the transition-tensor code).
 Operator content (en_algebra Ops): kind on electron i in {rho, grad, lapA, rhov} x weight tokens.
-Usage: python debug/en_factors_onebody_check.py 1e-2
+--both (option b, PI 2026-10-09): the four columns [W1, W2, A1, A2] of en_factors_both_<t>.npz
+(A_k from the amplitude switch a = phi_c/phi_c(Li), core_switch.AmpSwitch).
+Usage: python debug/en_factors_onebody_check.py 1e-2 [--both]
 """
 import os
 import sys
@@ -22,7 +24,7 @@ sys.path.insert(0, os.path.dirname(HERE)); sys.path.insert(0, HERE)
 import geovac.lih_vmc as V  # noqa: E402
 import en_factors_stage0_lm as E0  # noqa: E402
 from geovac.lih_r12ci import pi_m16 as PM  # noqa: E402
-from geovac.lih_r12ci.core_switch import CoreSwitch  # noqa: E402
+from geovac.lih_r12ci.core_switch import CoreSwitch, AmpSwitch  # noqa: E402
 from geovac.lih_r12ci import en_algebra as A  # noqa: E402
 from geovac.lih_r12ci.transition_tensor import determinants  # noqa: E402
 
@@ -41,6 +43,7 @@ def quadrature(R, nr=500, nt=260, npi_extra=True):
 
 def main():
     t = float(sys.argv[1]) if len(sys.argv) > 1 else 1e-2
+    both = "--both" in sys.argv
     T_no, occ, m_no, R = E0.switch_reference()
     ref = PM.build_primitives(PM.CFG, PM.PRIM_CACHE_PI, verbose=False)
     prims = ref['prims']
@@ -57,6 +60,9 @@ def main():
     vne = -3.0 / rA - 1.0 / rB
     same = (m_no[:, None] == m_no[None, :])
     tokf = {'w': w, 'lapw': lw}
+    if both:
+        am, _ga, la = AmpSwitch.from_reference(prims, T_no, occ, m_no, R).vgl(pts)
+        tokf.update(a=am, lapa=la)
 
     def mat(kind, toks):
         f = Wq.copy()
@@ -99,16 +105,19 @@ def main():
                     out[I] += c * 0.25 * sum(d[J] * pt(ia[I], ia[J], v[0], v[1]) * pt(ib[I], ib[J], v[2], v[3])
                                              for J in range(N))
         return out
-    an = np.load(os.path.join(HERE, "data", f"en_factors_{t:.0e}.npz"), allow_pickle=True)
+    an = np.load(os.path.join(HERE, "data", f"en_factors_{'both_' if both else ''}{t:.0e}.npz"),
+                 allow_pickle=True)
     pab = json.loads(str(an['parts_ab']))
-    W = [A.W1_op(), A.W2_op()]; LW = [A.lap_op(x) for x in W]
+    W = [A.W1_op(), A.W2_op()] + ([A.W1_op('a'), A.W2_op('a')] if both else [])
+    LW = [A.lap_op(x) for x in W]
+    na = len(W)
     rows = []
-    for a in range(2):
+    for a in range(na):
         S = ev(W[a]); T = 0.5 * ev(W[a], 'grad') - 0.25 * ev(LW[a]) + 0.25 * ev(W[a], 'lapA')
         Vn = ev(W[a], 'rhov')
         rows += [(f"S_I[W{a+1}]", S, an['S_I'][:, a]), (f"T_I[W{a+1}]", T, an['T_I'][:, a]),
                  (f"Vne_I[W{a+1}]", Vn, an['Vne_I'][:, a])]
-    for (a, b) in ((0, 0), (0, 1), (1, 1)):
+    for (a, b) in [(a_, b_) for a_ in range(na) for b_ in range(a_, na)]:
         AB = A.op_mul(W[a], W[b])
         s = d @ ev(AB); g = d @ ev(AB, 'grad')
         l1 = d @ ev(A.op_add(A.op_mul(W[a], LW[b]), A.op_mul(W[b], LW[a]))); v = d @ ev(AB, 'rhov')

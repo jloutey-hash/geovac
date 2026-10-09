@@ -45,7 +45,8 @@ import geovac.lih_r12ci.enumerators as P2
 import geovac.lih_r12ci.pi_m16 as M
 import geovac.lih_r12ci.gvee_sparse as GS
 import geovac.lih_r12ci.ci_relaxed as CR
-from geovac.lih_r12ci.core_switch import CoreSwitch, grid_switch, grid_fraction_switch, select_core_no
+from geovac.lih_r12ci.core_switch import (CoreSwitch, AmpSwitch, grid_switch, grid_fraction_switch,
+                                          grid_amp_switch, select_core_no)
 from geovac.lih_r12ci.transition_tensor import (transition_stack, split_owners, determinants,
                                                 bra_det_ket_psi)
 
@@ -277,22 +278,48 @@ def switch_on_grid(info: dict, kind: str = 'dens') -> Tuple[np.ndarray, np.ndarr
     return w, lw, dict(core_no=core, occ_core=float(info['occ'][core]), phi0=sw.phi0, kind=kind)
 
 
+def amp_on_grid(info: dict) -> Tuple[np.ndarray, np.ndarray, dict]:
+    """Option-b AMPLITUDE switch a = phi_c / phi_c(R_Li) and lap a on the kernels grid (same core NO as
+    the density switch; signed -- see core_switch.AmpSwitch for the node handling)."""
+    from geovac.lih_r12ci.pi_m16 import build_primitives, CFG, PRIM_CACHE_PI
+    prims = build_primitives(CFG, PRIM_CACHE_PI, verbose=False)['prims']
+    core = select_core_no(info['occ'], info['m_no'], prims, info['T_no'], info['R'])
+    sw = AmpSwitch(prims, info['T_no'][:, core], info['R'])
+    a, la = grid_amp_switch(info['nval'][core], info['nlap'][core], sw.phi0)
+    return a, la, dict(core_no=core, phi0=sw.phi0, node_dist_Li=sw.node_distance())
+
+
+def en_ops(kind: str) -> List[Op]:
+    """Phase-1 column operators: 'dens' -> [W1, W2] (density switch w); 'amp' -> [A1, A2] (amplitude
+    switch a); 'both' -> [W1, W2, A1, A2] (option b, PI 2026-10-09)."""
+    d = [W1_op('w'), W2_op('w')]
+    a = [W1_op('a'), W2_op('a')]
+    return {'dens': d, 'frac': d, 'amp': a, 'both': d + a}[kind]
+
+
 # =========================================================================== #
 # phase 1: the W1 / W2 columns
 # =========================================================================== #
 def en_columns(gem, info: dict, Fbar: float, w: np.ndarray, lapw: np.ndarray, mem_cap_gb: float = 6.0,
-               verbose: bool = False) -> dict:
-    """New S / H blocks for the columns omega_a = W_a psi (a = 1, 2).  Electronic H (no V_NN)."""
+               verbose: bool = False, ops: Optional[Sequence[Op]] = None,
+               extra_mults: Optional[Dict[str, np.ndarray]] = None) -> dict:
+    """New S / H blocks for the columns omega_a = W_a psi.  Electronic H (no V_NN).
+    Default (ops None): W = [W1, W2] of the density switch -- the original phase-1 path, unchanged.
+    ops / extra_mults: single-weight-per-electron operators (e.g. en_ops('both') with
+    extra_mults = {'a': amp, 'lapa': lap amp})."""
     assert gem.name == 'exp', "en_factors supports the exp geminal only"
     t0 = time.time()
-    ref = ENRef(info, "M=16 pi full ordered pairs + e-n weights", dict(w=w, lapw=lapw))
+    mults = dict(w=w, lapw=lapw)
+    if extra_mults:
+        mults.update(extra_mults)
+    ref = ENRef(info, "M=16 pi full ordered pairs + e-n weights", mults)
     ia, ib, d, apairs = determinants(info['ct'], int(info['Mk']))
     N = len(d); Mk = ref.Mk
     stI = transition_stack(*bra_det_ket_psi(ia, ib, d), apairs, Mk)
     stP = transition_stack(*bra_psi_ket_psi(ia, ib, d), apairs, Mk)
     E = _Eval(gem, ref, stI, N, stP)
     g = gem.g
-    W = [W1_op(), W2_op()]
+    W = [W1_op(), W2_op()] if ops is None else list(ops)
     LW = [lap_op(x) for x in W]
     na = len(W)
     out: dict = dict(N=N, d=d)
@@ -309,7 +336,22 @@ def en_columns(gem, info: dict, Fbar: float, w: np.ndarray, lapw: np.ndarray, me
         Vne_I[:, a], _ = E.op(W[a], 'rhov')
     if verbose:
         print(f"    [en] transition one-body columns  [{time.time()-t0:6.1f}s]", flush=True)
-    vref = VariantRef(ref, [("1", np.ones_like(w)), ("w", w), ("w*w", w * w)], ref.tag + " variants")
+    if ops is None:
+        variants = [("1", np.ones_like(w)), ("w", w), ("w*w", w * w)]
+    else:                                   # every per-electron weight product of W_a and W_a W_b
+        vt = {()}
+        for a_ in range(na):
+            for b_ in range(a_, na):
+                for X in (W[a_], op_mul(W[a_], W[b_])):
+                    for t in X:
+                        vt.update(t)
+        variants = []
+        for tt in sorted(vt, key=lambda x: (len(x), x)):
+            arr = np.ones_like(w)
+            for x in tt:
+                arr = arr * mults[x]
+            variants.append((_toks_variant(tt), arr))
+    vref = VariantRef(ref, variants, ref.tag + " variants")
     ctx = GS.Ctx(gem, vref, mem_cap_gb)
     Vee_I = np.zeros((N, na))
     for a in range(na):
@@ -352,7 +394,7 @@ def en_columns(gem, info: dict, Fbar: float, w: np.ndarray, lapw: np.ndarray, me
         print(f"    [en] W-W blocks  [{time.time()-t0:6.1f}s]", flush=True)
     out.update(S_I=S_I, H_I=H_I, T_I=T_I, Vne_I=Vne_I, Vee_I=Vee_I, LA_I=LA_I, S_P=S_P,
                S_F=S_F, H_F=H_F, S_ab=S_ab, H_ab=H_ab, parts_F=parts_F, parts_ab=parts_ab,
-               wall_s=time.time() - t0, E=E, ref=ref)
+               wall_s=time.time() - t0, E=E, ref=ref, W=W)
     return out
 
 
@@ -368,8 +410,8 @@ def lowest_root(H: np.ndarray, S: np.ndarray, tol: float = 1e-10) -> Tuple[float
 
 
 def assemble(cr: dict, en: dict) -> Tuple[np.ndarray, np.ndarray]:
-    """(N+1+2) electronic S, H: ci_relaxed's (N+1) block + the W1, W2 columns (order chi, xi, W1, W2)."""
-    N = cr['N']; K = N + 3
+    """(N+1+na) electronic S, H: ci_relaxed's (N+1) block + the W columns (order chi, xi, W_1..W_na)."""
+    N = cr['N']; K = N + 1 + en['S_I'].shape[1]
     S = np.zeros((K, K)); H = np.zeros((K, K))
     S[:N + 1, :N + 1] = cr['S']; H[:N + 1, :N + 1] = cr['H']
     S[:N, N + 1:] = en['S_I']; S[N + 1:, :N] = en['S_I'].T
@@ -386,12 +428,28 @@ def en_energy(gem, refm, info: dict, pieces: dict, switch: str = 'dens', mem_cap
     and the identity diagnostics (G1 and the internal consistency checks)."""
     if cr is None:
         cr = CR.ci_relaxed_energy(gem, refm, info, pieces, mem_cap_gb=mem_cap_gb, verbose=verbose)
-    w, lw, meta = switch_on_grid(info, switch)
-    en = en_columns(gem, info, float(pieces['Fbar']), w, lw, mem_cap_gb=mem_cap_gb, verbose=verbose)
+    if switch in ('amp', 'both'):                 # option b (PI 2026-10-09): + amplitude switch columns
+        w, lw, meta = switch_on_grid(info, 'dens')
+        am, la, meta_a = amp_on_grid(info)
+        assert meta_a['core_no'] == meta['core_no']
+        meta = dict(meta, kind=switch, node_dist_Li=meta_a['node_dist_Li'])
+        en = en_columns(gem, info, float(pieces['Fbar']), w, lw, mem_cap_gb=mem_cap_gb, verbose=verbose,
+                        ops=en_ops(switch), extra_mults=dict(a=am, lapa=la))
+    else:
+        w, lw, meta = switch_on_grid(info, switch)
+        en = en_columns(gem, info, float(pieces['Fbar']), w, lw, mem_cap_gb=mem_cap_gb, verbose=verbose)
     S, H = assemble(cr, en)
     N = cr['N']
-    idx = dict(A=list(range(N + 1)), A_W1=list(range(N + 2)), A_W2=list(range(N + 1)) + [N + 2],
-               A_W12=list(range(N + 3)), CI_W12=list(range(N)) + [N + 1, N + 2])
+    if switch == 'both':                          # columns [W1, W2, A1, A2] after xi
+        c = N + 1
+        idx = dict(A=list(range(N + 1)), A_W12=list(range(N + 1)) + [c, c + 1],
+                   A_A12=list(range(N + 1)) + [c + 2, c + 3], A_W12_A12=list(range(N + 5)),
+                   CI_W12_A12=list(range(N)) + [c, c + 1, c + 2, c + 3])
+    elif switch == 'amp':
+        idx = dict(A=list(range(N + 1)), A_A12=list(range(N + 3)), CI_A12=list(range(N)) + [N + 1, N + 2])
+    else:
+        idx = dict(A=list(range(N + 1)), A_W1=list(range(N + 2)), A_W2=list(range(N + 1)) + [N + 2],
+                   A_W12=list(range(N + 3)), CI_W12=list(range(N)) + [N + 1, N + 2])
     E = {}
     vecs = {}
     for k, ii in idx.items():
@@ -405,6 +463,10 @@ def en_energy(gem, refm, info: dict, pieces: dict, switch: str = 'dens', mem_cap
         HPW_vs_kinsym_W1=float(d @ en['H_I'][:, 0]) - _sym_HPW(en, 0),
         HPW_vs_kinsym_W2=float(d @ en['H_I'][:, 1]) - _sym_HPW(en, 1),
     )
+    for a in range(2, en['S_I'].shape[1]):        # option-b amplitude columns
+        ident[f'S_P_vs_dS_I_{a}'] = float(d @ en['S_I'][:, a]) - en['S_P'][a]
+        ident[f'LA_ref_{a}'] = float(d @ en['LA_I'][:, a])
+        ident[f'HPW_vs_kinsym_{a}'] = float(d @ en['H_I'][:, a]) - _sym_HPW(en, a)
     return dict(E=E, vecs=vecs, S=S, H=H, cr=cr, en=en, switch=meta, identity=ident, w=w, lapw=lw)
 
 
@@ -412,7 +474,7 @@ def _sym_HPW(en: dict, a: int) -> float:
     """<psi|H|W_a psi> from the bra=ket symmetric kinetic formula (A = 1): cross-check of the
     transition column contracted with d (the current term must vanish on the reference)."""
     E: _Eval = en['E']
-    Wa = [W1_op(), W2_op()][a]
+    Wa = en.get('W', [W1_op(), W2_op()])[a]
     _, gg = E.op(Wa, 'grad')
     _, l1 = E.op(lap_op(Wa))
     _, v = E.op(Wa, 'rhov')

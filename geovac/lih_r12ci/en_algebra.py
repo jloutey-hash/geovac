@@ -5,7 +5,7 @@ electron-nucleus columns -- sums of products of one-electron weight tokens (per 
 most two pair-kernel edges -- and the closed-form Laplacian of a w-weighted geminal (g_lap), whose
 grad w . grad f cross term is decomposed into one-electron tokens (u, dzw, z, and the circulation
 +-1 tokens drwP/drwM, rhoP/rhoM).  Token -> real-space function (exact, phi = azimuth):
-    w, lapw = the switch and its Laplacian;  u = rho d_rho w + z d_z w;  dzw = d_z w;  z;
+    w, lapw = the switch and its Laplacian;  a, lapa = the amplitude switch (option b) and its Laplacian;  u = rho d_rho w + z d_z w;  dzw = d_z w;  z;
     drwP/drwM = d_rho w e^{+-i phi};  rhoP/rhoM = rho e^{+-i phi}.
 Edge keys: 'f' = e^{-g r}, 'Y' = e^{-g r}/r, 'coul' = 1/r.
 """
@@ -51,12 +51,16 @@ def op_mul(A: Op, B: Op) -> Op:
     return {t: v for t, v in out.items() if v != 0.0}
 
 
-def W1_op() -> Op:
-    return {_single(e, ('w',)): 1.0 for e in ELEC}
+def W1_op(tok: str = 'w') -> Op:
+    """sum_i tok(r_i); tok 'w' = density switch, 'a' = amplitude switch (option b)."""
+    return {_single(e, (tok,)): 1.0 for e in ELEC}
 
 
-def W2_op() -> Op:
-    return op_mul_pairs([('w',), ('w',)])
+def W2_op(tok: str = 'w') -> Op:
+    return op_mul_pairs([(tok,), (tok,)])
+
+
+LAPTOK = {'w': 'lapw', 'a': 'lapa'}       # single-factor weight token -> its Laplacian token
 
 
 def op_mul_pairs(toks2) -> Op:
@@ -72,16 +76,17 @@ def op_mul_pairs(toks2) -> Op:
 
 
 def lap_op(A: Op) -> Op:
-    """sum_i lap_i A for A a product of w-weights: lap_i of a single w_i factor -> 'lapw';
-    w_i^2 -> 2 w lapw + 2 |grad w|^2 is NOT needed by phase 1 (asserted)."""
+    """sum_i lap_i A for A a product of single-factor weights (w or a per electron): lap_i of a single
+    w_i (a_i) factor -> 'lapw' ('lapa'); a product of two weights on one electron is NOT needed by
+    phase 1 (asserted)."""
     out: Op = {}
     for t, v in A.items():
         for e in range(4):
             toks = t[e]
             if not toks:
                 continue
-            assert toks == ('w',), f"lap of {toks} not supported"
-            nt = list(t); nt[e] = ('lapw',)
+            assert len(toks) == 1 and toks[0] in LAPTOK, f"lap of {toks} not supported"
+            nt = list(t); nt[e] = (LAPTOK[toks[0]],)
             nt = tuple(nt)
             out[nt] = out.get(nt, 0.0) + v
     return out
@@ -92,7 +97,7 @@ def base_name(kind: str, toks: Tuple[str, ...]) -> str:
 
 
 
-TOKCIRC = {'w': 0, 'lapw': 0, 'u': 0, 'dzw': 0, 'z': 0, 'drwP': 1, 'drwM': -1, 'rhoP': 1, 'rhoM': -1}
+TOKCIRC = {'w': 0, 'lapw': 0, 'a': 0, 'lapa': 0, 'u': 0, 'dzw': 0, 'z': 0, 'drwP': 1, 'drwM': -1, 'rhoP': 1, 'rhoM': -1}
 GOp = Dict[tuple, float]
 
 

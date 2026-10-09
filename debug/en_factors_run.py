@@ -1,9 +1,11 @@
 r"""Driver: analytic e-n extension of the CI-relaxed LiH eigenproblem (geovac/lih_r12ci/en_factors.py).
 
 Phase 1: {chi_I} U {(F-Fbar) psi} U {W1 psi, W2 psi}, W_k from the parameter-free core switch.
+--switch both (option b, PI 2026-10-09): + {A1 psi, A2 psi} from the amplitude switch a = phi_c/phi_c(Li)
+(columns [W1, W2, A1, A2]; sub-ansatz A_W12 = the density-only phase 1, A_W12_A12 = all four).
 Frozen 2x2 pieces from the golden oracle (as debug/ci_relaxed_run.py).
 
-Usage:  python debug/en_factors_run.py 1e-2 [--switch dens|frac] [--wone] [--save debug/data/en_factors_1e-2.npz]
+Usage:  python debug/en_factors_run.py 1e-2 [--switch dens|frac|amp|both] [--wone] [--save debug/data/en_factors_1e-2.npz]
   --wone : identity mode, w == 1 (lap w == 0): W1 psi = 4 psi, W2 psi = 6 psi -> every new column must
            collapse onto the reference column (S_I = 4 d, H_I = 4 H_CI d, ...).
 """
@@ -27,7 +29,7 @@ sys.path.insert(0, ROOT); sys.path.insert(0, HERE)
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("trunc", type=float)
-    ap.add_argument("--switch", default="dens", choices=["dens", "frac"])
+    ap.add_argument("--switch", default="dens", choices=["dens", "frac", "amp", "both"])
     ap.add_argument("--wone", action="store_true")
     ap.add_argument("--phase2", action="store_true")
     ap.add_argument("--save", default=None)
@@ -93,7 +95,8 @@ def main() -> int:
                  H_ab=en['H_ab'], d=en['d'], w=r['w'], lapw=r['lapw'],
                  parts_F=json.dumps({str(k): v for k, v in en['parts_F'].items()}),
                  parts_ab=json.dumps({str(k): v for k, v in en['parts_ab'].items()}),
-                 E_A_cr=cr['E_A'], vec_A_W12=r['vecs']['A_W12'][1])
+                 E_A_cr=cr['E_A'], **{f"vec_{k}": v[1] for k, v in r['vecs'].items()},
+                 )
     if a.phase2:
         r2 = EN.en2_energy(gem, refm, info, pieces, verbose=True, ph1=r)
         print("\nPHASE 2 energies (total, Ha):")

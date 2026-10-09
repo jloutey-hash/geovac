@@ -11,7 +11,9 @@ Electronic H (V_NN removed).  Saved block means:
     tS[I,k] = <chi_I|X_k>,  tH[I,k] = <chi_I|H X_k>,  S[k,l] = <X_k|X_l>,  H[k,l] = <X_k|H X_l>,
     and the V_ee-only parts tV[I,k] = <chi_I|V_ee X_k>, V[k,l] = <X_k|V_ee X_l> (low variance), the V_ne part
     Vn[k,l], and the kinetic part in GRADIENT form Tg[k,l] = 1/2 sum_i <grad_i X_k|grad_i X_l> (low variance).
-Usage: python debug/en_factors_g2_mc.py 1e-2 --seed 1 [--nwalk 1000 --nsweep 6000 --nburn 1500]
+--both (option b, PI 2026-10-09): columns [1, F, W1, W2, A1, A2] instead, A_k = W_k of the AMPLITUDE
+switch a = phi_c/phi_c(Li) (core_switch.AmpSwitch); output en_factors_g2b_<t>_s<seed>.npz.
+Usage: python debug/en_factors_g2_mc.py 1e-2 --seed 1 [--nwalk 1000 --nsweep 6000 --nburn 1500] [--both]
 """
 from __future__ import annotations
 
@@ -35,7 +37,7 @@ import geovac.lih_vmc as V  # noqa: E402
 import ci_relax_step2_lm as S2  # noqa: E402
 import en_factors_stage0_lm as E0  # noqa: E402
 from geovac.lih_r12ci import pi_m16 as PM  # noqa: E402
-from geovac.lih_r12ci.core_switch import CoreSwitch  # noqa: E402
+from geovac.lih_r12ci.core_switch import CoreSwitch, AmpSwitch  # noqa: E402
 
 REFS = {1e-2: S2.REFS["9det"], 1e-3: S2.REFS["90det"]}
 COLS = ["1", "F", "W1", "W2", "Fcc", "Fc1"]
@@ -89,12 +91,17 @@ def main() -> int:
     ap.add_argument("--check", action="store_true", help="finite-difference check of the columns")
     ap.add_argument("--vmc-npz", default=None, help="analytic npz holding the eigenvector (VMC mode)")
     ap.add_argument("--vmc-key", default="vec_A_W12")
+    ap.add_argument("--both", action="store_true", help="option b: columns [1, F, W1, W2, A1, A2]")
     a = ap.parse_args()
+    global COLS
+    if a.both:
+        COLS = ["1", "F", "W1", "W2", "A1", "A2"]
     z = np.load(REFS[a.trunc], allow_pickle=True)
     wf = PM.build_wf_from_no(z['ct'], z['T_no'], int(z['Mk']), float(z['E_trunc']))
     bas = S2.Basis(wf)
     T_no, occ, m_no, R = E0.switch_reference()
     sw = CoreSwitch.from_reference(wf.prims, T_no, occ, m_no, R)
+    swa = AmpSwitch.from_reference(wf.prims, T_no, occ, m_no, R) if a.both else None
     N = bas.N; cvec = bas.cvec.real
     Z = 2.0
     eps = 1.0 / N
@@ -113,7 +120,14 @@ def main() -> int:
         else:
             w = sw.value(r); gw = np.zeros(r.shape); lw = np.zeros(w.shape)
         mults = [(np.ones(r.shape[0]), np.zeros(r.shape), np.zeros(r.shape[0])), (F, gF, lF)]
-        mults += en_ops(w, gw, lw) + weighted_geminals(r, w, gw, lw)
+        if swa is None:
+            mults += en_ops(w, gw, lw) + weighted_geminals(r, w, gw, lw)
+        else:
+            if need_H:
+                am, gam, lam = swa.vgl(r)
+            else:
+                am = swa.value(r); gam = np.zeros(r.shape); lam = np.zeros(am.shape)
+            mults += en_ops(w, gw, lw) + en_ops(am, gam, lam)
         X = np.array([m[0] * psi for m in mults])
         if not need_H:
             return chi, X, None, None, None, None
@@ -221,7 +235,7 @@ def main() -> int:
     print(f"[g2] trunc={a.trunc} N={N} seed={a.seed} core NO {sw.no_index} phi0={sw.phi0:+.6f}", flush=True)
     accr, sd = S2.metropolis(bas, logp, a.nwalk, a.nsweep, a.nburn, a.seed, a.thin, measure)
     out = {k: np.array(v) for k, v in blocks.items()}
-    np.savez(os.path.join(DATA, f"en_factors_g2_{a.trunc:.0e}_s{a.seed}.npz"), cvec=cvec,
+    np.savez(os.path.join(DATA, f"en_factors_g2{'b' if a.both else ''}_{a.trunc:.0e}_s{a.seed}.npz"), cvec=cvec,
              cols=np.array(COLS), **out)
     print(f"[g2] done {time.time()-t0:.0f}s blocks={len(blocks['c0'])} acc={accr:.2f}", flush=True)
     return 0
