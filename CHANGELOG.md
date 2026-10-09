@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.6] - 2026-10-09
+
+**Patch. Analytic Li-core electron-nucleus factors bring the RI-free LiH energy to -8.05851 Ha (new corpus-best analytic, variational, 12.0 mHa above exact); prior-art attribution for the RI-free reductions.**
+
+### Added
+- `geovac/lih_r12ci/core_switch.py`, `en_algebra.py`, `en_factors.py`: electron-nucleus columns sum_i s(r_i) Psi and sum_{i<j} s_i s_j Psi added to the (N_det+1) relaxed eigenproblem, reduced RI-free. Switches are parameter-free, built from the core natural orbital phi_c: density w = |phi_c|^2/|phi_c(Li)|^2 (phase 1 + 2 committed abebbec/5e0b561) and amplitude a = phi_c/phi_c(Li), signed (option b, 2c121cb; no node within 2.86 bohr of Li, |a| < 7.6e-4 where negative).
+- Energies (Ha), ninety-det pi reference: relaxed (A) -8.0516408; + density -8.0531714; + amplitude -8.0554174; **+ both -8.0585094** (-6.87 mHa). Nine-det: -8.0504036 / -8.0518612 / -8.0541100 / -8.0574330. Density-switch phase 2 (core-weighted geminals), nine-det: -8.0523941.
+- Gates: G1 drop-columns identities to <= 4e-11; G2 deterministic quadrature (S/T 6e-7, V_ne 1.3e-5 rel) + 12-seed MC (worst |z| 2.02 over 268 elements); G3 vs VMC linear method 0.6 sigma (ninety-det), 1.3 sigma (nine-det); G4 golden, ci_relaxed, r12ci, gvee suites pass. Ninety-det: 2040 s, 8.2 GB.
+- `tests/test_lih_en_factors.py`: fast amp-token + switch tests, @slow option-b pin; all fire-tested.
+
+### Not run
+- Option-b phase 2 (core-weighted geminals with the amplitude switch): estimated 10-30 h and >16 GB, needs new gradient tokens; VMC puts it at ~0.9 mHa. Low yield.
+
+### Changed
+- Prior art credited: the one-centre bridge/triangle reductions are classical Hylleraas-CI (King 2014; Sims-Hagstrom 2015; Ruiz-Sims-Padhy 2021; Barca-Loos 2017; Ten-no 2004; two-centre two-electron Lesiuk-Moszynski 2012, Pachucki 2012). Papers 12, 19 and the group2 synthesis now claim only the two-centre four-electron extension, as far as we can find. CLAUDE.md S2 "ahead of F12" wording scoped. Memo `debug/lit_scan/pairwise_factorization_priorart_memo.md`.
+- Paper 19: Sturmian overclaim fixed (hydrogenic orbitals have Sturmian radial shape, but the set is not a Sturmian basis); abstract and residual section carry -8.0585 and the analytic e-n build. Claim matrix: the VMC e-n coverage gap is closed by an analytic row.
+
 ## [v5.20.5] - 2026-10-05
 
 **Patch. LiH residual diagnosed in three cheap steps; the analytic CI-relaxed marriage banks a new corpus-best analytic LiH energy, -8.05164 Ha.**

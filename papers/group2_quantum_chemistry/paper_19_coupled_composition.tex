@@ -88,8 +88,9 @@ orbital ceiling and safely above the exact $-8.0705$.  A deterministic,
 resolution-of-identity--free explicit-$r_{12}$ treatment on the same
 $\pi$-containing reference, with a cusp-correct Slater geminal, improves this to
 $-8.0490$~Ha (variational, cross-checked by VMC of the same trial function to
-$0.16$~mHa), and relaxing the CI coefficients alongside the geminal lowers it to
-$-8.0516$~Ha.  An additive-F12 estimate places the near-chemical target at
+$0.16$~mHa); relaxing the CI coefficients alongside the geminal lowers it to
+$-8.0516$~Ha, and adding electron--nucleus factors on the Li core, built from the
+core orbital itself with no new parameter, to $-8.0585$~Ha.  An additive-F12 estimate places the near-chemical target at
 $\approx-8.062$~Ha;\ the remaining gap is not electron--electron--nucleus
 correlation, which is worth $\lesssim3$~mHa here.  The atom-centered core
 turns out to be a convenience rather than a necessity:\ a pure prolate product
@@ -246,14 +247,14 @@ which has until now been strictly single-center at each level.
 \label{sec:sturmian}
 %% ========================================================================
 
-GeoVac's hydrogenic orbitals are Coulomb Sturmians with the
-identification $k = Z/n$, where $k$ is the Sturmian exponent.
-This is not merely a notational correspondence: the entire GeoVac
-framework---the $S^3$ label lattice (Paper~7), the Fock
-projection, the angular momentum selection rules---is built on the
-same mathematical structure that the Avery group has developed for
-molecular Coulomb Sturmian calculations since the
-1990s~\cite{avery2000,avery2004,avery2012,avery2014}.
+Each GeoVac hydrogenic orbital has the radial shape of a Coulomb
+Sturmian with exponent $k = Z/n$, but the set is not a Sturmian basis:
+a Coulomb Sturmian basis shares one exponent $k$ across all shells, while
+the hydrogenic exponent changes with $n$.  The shared ground is the
+angular and momentum-space structure---the $S^3$ label set (Paper~7),
+Fock's projection, the angular momentum selection rules---which is the
+setting the Avery group has developed for molecular Coulomb Sturmian
+calculations~\cite{avery2000,avery2004,avery2012,avery2014}.
 
 \subsection{Shibuya--Wulfman integrals}
 
@@ -976,7 +977,9 @@ $\mathbf{-8.047\pm0.001}$~Ha ($\gamma\simeq1.5$, four independent seeds):\ $18$~
 below the orbital ceiling and safely variational ($>-8.0705$).  A two-body Jastrow
 recovers $\approx19$~mHa of the $41$~mHa ceiling-to-exact gap.  The remaining
 correlation is evaluated on the analytic side by the
-resolution-of-identity--free reductions of Paper~12, whose reference generality
+resolution-of-identity--free reductions of Paper~12 (on one centre the classical
+Hylleraas-CI reduction of many-electron correlated integrals;\ the two-center
+extension and its prior-art citations are in Paper~12), whose reference generality
 (they act on arbitrary pair-density products, so a many-determinant reference
 enters only through a coefficient tensor) was established by audit on
 2026-09-22 and demonstrated at the integral level on 2026-09-23:\ the
@@ -1011,8 +1014,8 @@ variational Monte-Carlo of the \emph{same} trial function
 $(1+c\,(F-\bar F))\Psi_{\rm CI}$ (standard local energy, analytic Jastrow
 Laplacian):\ $E_{\rm VMC}=-8.03755\pm0.00041$ (linexp) and
 $-8.03704\pm0.00003$ (exponential), agreeing with the analytic values to
-$0.31$ and $0.05$~mHa.  This is the first deterministic, resolution-of-identity--free
-LiH energy from the many-determinant explicit-$r_{12}$ engine, and it confirms
+$0.31$ and $0.05$~mHa.  This is the many-determinant engine's first
+deterministic, resolution-of-identity--free LiH energy, and it confirms
 the reference-generality of the reductions at the level of a real,
 independently-checked energy.  It is \emph{not} the corpus-best LiH number:\ the
 $-8.037$ sits above the VMC-over-FCI $-8.047$ because the $\sigma$-only reference
@@ -1102,8 +1105,30 @@ $-8.0637\pm0.0003$~Ha.  The missing piece is therefore electron--nucleus correla
 that compensates the geminal's distortion of the core density, the pairing that
 quantum Monte-Carlo trial functions use as a matter of course.  These terms have the
 same structure as the geminal (one-electron weights times known kernels), so the same
-reductions carry them.  \textbf{[MEASURED 2026-10-05, VMC only;\ no analytic value
-yet.]}
+reductions carry them.  \textbf{[MEASURED 2026-10-05, VMC.]}
+
+\emph{The analytic electron--nucleus build.}  The VMC scan used a radial switch
+with a chosen radius.  The analytic build uses switches taken from the reference
+itself:\ with $\phi_c$ the core natural orbital, the amplitude switch
+$a(\mathbf r)=\phi_c(\mathbf r)/\phi_c(\mathbf R_{\rm Li})$ and the density switch
+$w=a^2$, both equal to one at the Li nucleus, so no radius is chosen.  (The core
+orbital has no node within $2.9$~bohr of Li;\ its nodal surface lies near the H
+nucleus, where $|a|<10^{-3}$.)  The factors $\sum_i a_i\Psi$,
+$\sum_{i<j}a_ia_j\Psi$ and their $w$ counterparts enter as four more columns of the
+relaxed eigenproblem, reduced by the same resolution-of-identity--free machinery.
+On the full $\pi$ reference this gives
+\[
+E = \mathbf{-8.05851}~\mathrm{Ha},
+\]
+$6.9$~mHa below the relaxed $-8.05164$ and $12.0$~mHa above exact, variational, and
+in agreement with a VMC linear-method optimization of the same ansatz
+($-8.0587\pm0.0004$, $0.6\sigma$).  The amplitude switch carries most of the gain;
+the density switch alone is worth only $1.5$~mHa, because it is too tight to the
+nucleus.  The VMC scan puts the next step, core-weighted geminals, at under
+$1$~mHa more.  \textbf{[MEASURED 2026-10-09;
+\texttt{tests/test\_lih\_en\_factors.py} pins the nine-determinant value, checks
+that dropping the new columns reproduces the relaxed energy, and fire-tests the
+switch's value, sign and Laplacian.]}
 \textbf{[MEASURED 2026-09-27; the energy has no regression test, being a
 multi-hour run.  The engine's pieces are guarded by
 \texttt{tests/test\_lih\_gvee\_sparse.py} and
