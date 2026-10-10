@@ -115,11 +115,16 @@ rather than on cond(S). Reference material on the SW posing, if needed: Avery's 
 `tests/test_renner_teller_rung4.py`. A complete radial grid (FE-DVR) plus partial waves
 to l = 55, with exact second-order perturbation theory at linear geometry:
 **a2 = 0.44941, E_pi = -0.7385753 at R = 2.**
-- The near-degeneracy in §7 was a property of the fixed-S posing: there, levels are
-  compared at one shared S, not one shared R. At fixed R the dominant sigma partner, the
-  first excited z-even sigma, sits 0.093 Ha BELOW pi. It carries 0.742 of the 0.848
-  sigma relay, with coupling 0.263.
+- At fixed R the dominant sigma partner, the second z-even sigma, sits 0.093 Ha BELOW
+  pi. It carries 0.742 of the 0.848 sigma relay, with coupling 0.263. The exact fixed-S
+  k-gap is 0.065, so the §7 near-degeneracy (0.022-0.027) was that level's unconverged
+  position in rung 3's basis, as §7 itself diagnosed. A first reading that blamed the
+  posing is withdrawn.
+- Partner identity (`debug/renner_teller_rung4_partner.py`): at R = 2-6 it is the
+  symmetric combination of the protons' 1s; for R >= 8 the driver becomes the centre's
+  n = 2 s-like level (pi's l-sibling, near-degenerate). It crosses pi at R = 1.667,
+  where a2 diverges and changes sign.
 - The |m| = 2 relay cancels exactly from the splitting.
 - A two-state model gives 0.344: the right sign and 77% of the size.
-- Rung 3 (fixed-S Sturmian) is therefore not the route to bending coefficients. A posing
-  that compares levels at one shared R is, and the one-centre grid is already one.
+- Rung 3's route needs a larger proton basis to place that level; the one-centre grid
+  is already converged and is the referee.
