@@ -93,3 +93,18 @@ canonical orthogonalisation stalls. A positive answer is the first m != 0 multi-
 Sturmian observable. A negative answer locates the l > 0 wall on a physical quantity
 rather than on cond(S). Reference material on the SW posing, if needed: Avery's work in
 `C:\Users\jlout\Desktop\Avery` (outside the repo).
+
+## 7. Outcome (same day)
+
+- **Step 1 GO:** `geovac/sturmian_general_sw.py` + `tests/test_sturmian_general_sw.py`.
+  The radial factor is an exact closed form (one residue at p = i; no pi).
+- **Step 2:** the pi energy converges with the PROTON basis: -0.490, -0.657, -0.7182,
+  -0.7192. Growing the centre basis barely moves it.
+- **Step 3: STOP for a converged a2 in this posing.** a2 swings (+1.12, -0.40, -0.43,
+  -1.39, -1.55, +1.11) because one sigma state sits 0.022-0.027 from the pi state in k,
+  with bend coupling ~0.18, and it crosses the pi level between the two largest bases.
+- **The predicted conditioning failure did not occur.** The fixed-S kernel posing never
+  inverts S. The obstacle is one slowly converging sigma level.
+- **Next lever:** pin the sigma-pi gap at linear geometry with a more accurate method,
+  then treat sigma-pi as a 2x2 (pseudo-Jahn-Teller / Walsh) problem in s, which stays
+  valid at physical bends, where a2 does not.
