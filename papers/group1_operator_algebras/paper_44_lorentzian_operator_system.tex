@@ -226,7 +226,7 @@ $\dim_\C \HGV^{\nmax} = \tfrac{2}{3}\nmax(\nmax + 1)(\nmax + 2)
 $\C^{\Nt}$ is the temporal $L^2$ cutoff on the uniform grid
 $t_k = -T_{\max} + k \cdot 2T_{\max}/(\Nt - 1)$. Spatial scalar
 multipliers act on $\HGV^{\nmax}$ via the chirality-block-doubled
-spinor lift (Clebsch--Gordan decomposition $\oplus$ Avery--Wen--Avery
+spinor lift (Clebsch--Gordan decomposition $\oplus$ Wen--Avery
 $3$-$Y$ integrals); temporal multipliers act on $\C^{\Nt}$ by
 pointwise multiplication via the polynomial basis $g_p(t) = t^p$ for
 $p = 0, \ldots, \Nt - 1$.
@@ -510,7 +510,7 @@ $Y^{(3)}_{NLM}$:\
 with selection rules $|n - n'| + 1 \le N \le n + n' - 1$ (SO(4)
 triangle), $|l - l'| \le L \le l + l'$ with $l + l' + L$ even
 (parity), and $M = m_l - m_l'$. The integral is the
-Avery--Wen--Avery~\cite{avery_wen_avery2002} 3-Y integral, evaluated
+Wen--Avery~\cite{avery_wen_avery2002} 3-Y integral, evaluated
 symbolically in exact $\Q$-arithmetic via
 \texttt{geovac/so4\_three\_y\_integral.py}.
 
@@ -688,7 +688,7 @@ FullDiracTruncatedOperatorSystem multiplier list one-for-one
 (same SO(4) triangle, parity, and $M$-conservation filters), and the
 matrix construction calls the same
 \texttt{build\_spinor\_multiplier\_matrix} routine on the same
-Avery--Wen--Avery 3-Y integrals.
+Wen--Avery 3-Y integrals.
 
 The computational verification is documented in
 \texttt{tests/test\_operator\_system\_lorentzian.py::%

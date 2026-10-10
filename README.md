@@ -17,6 +17,8 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 
 > **New here? Five documents, in order:** (1) [`papers/synthesis/geovac_field_guide.tex`](papers/synthesis/geovac_field_guide.tex) — what this project is, as a story; (2) [`docs/claims_register.md`](docs/claims_register.md) — every headline claim with its verification tier and falsifier; (3) [`papers/INDEX.md`](papers/INDEX.md) — status map of all ~60 papers (keystone / active / observation / descoped / historical); (4) Paper 7 (the S³ equivalence) and (5) Paper 14 (the headline computational result). The repository deliberately preserves its negative results and closed diagnostic arcs as institutional memory — `debug/archive/` and `papers/archive/` are the record, not the product.
 
+> **Coming from Avery & Avery, *Hyperspherical Harmonics and Their Physical Applications* (World Scientific 2017)?** [`docs/outreach/avery_hyperspherical_map.pdf`](docs/outreach/avery_hyperspherical_map.pdf) maps what GeoVac builds on in that book, chapter by chapter: from the S³ label set through Fock's projection to generalized Sturmians, the Shibuya–Wulfman metric, and the quantum encoding of the isoenergetic secular equation.
+
 ---
 
 ## Headline Numbers

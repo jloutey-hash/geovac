@@ -1,0 +1,356 @@
+% Reading map prepared for James Avery (2026-10-09): how the GeoVac papers
+% build on J.E. Avery & J.S. Avery, "Hyperspherical Harmonics and Their
+% Physical Applications" (World Scientific 2017). Content mirrors the
+% reviewed web page (claims + citation review, 2026-10-09). Book equation
+% numbers are the PRINTED numbers of the compiled manuscript, not its
+% \label names. Cites the published book only; quotes no manuscript text.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{longtable, booktabs, array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=teal!70!black, urlcolor=teal!70!black}
+\setlist{itemsep=2pt, topsep=3pt}
+\emergencystretch=2em
+\newcommand{\tst}[1]{\nolinkurl{#1}}
+\makeatletter\g@addto@macro{\UrlBreaks}{\do\_\do\.}\makeatother
+
+\newcommand{\rel}[1]{\textsc{#1}}
+\newcommand{\bk}[1]{\textit{#1}}
+
+\title{Labels to Generalized Sturmians:\\ a map of the GeoVac papers onto
+\emph{Hyperspherical Harmonics and Their Physical Applications}}
+\author{J.~Loutey\thanks{Independent researcher,
+\texttt{jloutey@gmail.com}. Developed in an AI-assisted workflow
+(implementation and drafting with Anthropic's Claude);\ errors are the
+author's. Papers and tests:\
+\url{https://github.com/jloutey-hash/geovac}.}}
+\date{Prepared for James Avery, October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent This note maps what the GeoVac papers build on in
+J.~E.~Avery and J.~S.~Avery, \emph{Hyperspherical Harmonics and Their
+Physical Applications} (World Scientific, 2017), what they add, and where
+your methods meet a quantum computer. It runs from the discrete object
+GeoVac starts from, through Fock's projection, up to your
+generalized-Sturmian secular equation and its molecular form.
+
+Book references give the chapter and section title, which are the stable
+reference;\ equation numbers follow the manuscript you shared, compiled,
+and may differ slightly from the printed edition. GeoVac references give
+the paper and the regression test (under \texttt{tests/}) that checks the
+claim. Every number is quoted from the papers or their tests. Throughout,
+$K$ is the number of configurations (the dimension of the secular matrix),
+and the \emph{1-norm} is the sum of coefficient magnitudes when that matrix
+is written as a weighted sum of unitaries, which sets the cost of
+qubitization.
+
+\paragraph{How each connection is labelled.}
+\rel{builds on};\ \rel{extends};\ \rel{puts numbers on} (the book states
+it qualitatively and a GeoVac paper measures it);\ \rel{yours, credited}
+(results our papers had presented as their own until a direct reading of
+your book this month, and which now credit you);\ \rel{independent route};\
+\rel{scope of our claim} (reading your work narrowed a GeoVac statement).
+
+%-----------------------------------------------------------------------
+\section{The chain, one rung at a time}
+
+\subsection*{1. The discrete object: a label set with a Casimir on it}
+Paper~0 starts from an isotropic packing construction. Its shells have
+capacities $2k-1$, the same counts as the spherical harmonics $Y_{lm}$, and
+grouping them gives $n^2$ states per shell;\ the paper records that
+grouping as an observation, not a consequence of its axioms. The object is
+the exact label set $(n,l,m)$ of the $S^3$ harmonics, on which the
+Laplace--Beltrami operator acts as the diagonal SO(4) Casimir,
+\[
+-\Delta_{S^3} = L^2 + A^2,\qquad \text{eigenvalue } n^2-1 \text{ on every label},
+\]
+a classical structure (Pauli 1926, Bargmann 1936) that Paper~7 credits so.
+It is \emph{not} the lattice's own graph Laplacian:\ that operator never
+changes $l$, splits into $n_{\max}$ disconnected blocks, and does not
+converge to $\Delta_{S^3}$ --- Paper~7 proves this and records it as a
+negative result.\\
+\emph{GeoVac:} Paper~0 abstract;\ Paper~7 \S New contributions;\
+\tst{test_paper7_label_set.py}, \tst{test_graph_s3_nonconvergence.py}.\\
+\emph{Book} (\rel{independent route}):\ Ch.~2, \bk{Degeneracy of
+hyperspherical harmonics}, $(\lambda+1)^2$ for $d=4$, eq.~(2.43);\
+\bk{Eigenfunctions of generalized angular momentum}, eq.~(2.8). Paper~0
+reaches the count combinatorially.
+
+\subsection*{2. Fock's projection: from labels to the hydrogen spectrum}
+Paper~7 audits Fock's stereographic map and the chordal-distance identity
+in 18 symbolic checks of the known identities. The $S^3$ Coulomb kernel
+has eigenvalue $2\pi^2/n$, which forces $p_0=Z/n$ and gives
+$E_n=-Z^2/2n^2$ as a function of the Casimir. The labels carry the
+degeneracies and selection rules;\ the projection carries the physics.
+GeoVac reads the two as dual descriptions and takes no position on which is
+more basic.\\
+\emph{GeoVac:} Paper~7 \S Conformal map, \S Energy shell;\
+\tst{test_fock_projection.py}, \tst{test_fock_laplacian.py},
+\tst{test_paper7_fock_kernel.py}.\\
+\emph{Book} (\rel{independent route}):\ Ch.~5, \bk{Fock's original
+treatment}, eqs.~(5.10)--(5.29). Paper~7 credits Fock 1935 as the primary
+source for the one-electron chain.
+
+\subsection*{3. Coulomb Sturmians at a shared scale}
+Fix the scale and let the charge vary instead:\ all functions share one
+$k$, so all live on the same $S^3$. Papers~8, 34 and 60 use the
+potential-weighted orthonormality and the one-body matrix in its Sturmian
+form,
+\[
+\int \chi^*_{n'l'm'}\,\frac{n}{kr}\,\chi_{nlm}\,d^3r=\delta,\qquad
+h = k^2\bigl(1-\tfrac{m}{2}\bigr) - Zk\,\mathrm{diag}(1/n),
+\]
+with $m$ the overlap. GeoVac's production qubit Hamiltonians use hydrogenic
+orbitals with scale $Z/n$;\ those are not a Sturmian basis, and Paper~19
+says so.\\
+\emph{GeoVac:} Paper~8 \S Sturmian basis;\ Paper~34 \S Sturmian
+projection;\ Paper~60 eq.~(pw);\ \tst{test_paper60_sturmian.py}.\\
+\emph{Book} (\rel{builds on}):\ Ch.~6, \bk{Potential-weighted
+orthonormality}, eqs.~(6.32), (6.39);\ Ch.~9, \bk{Matrices representing
+kinetic energy and nuclear attraction}, eqs.~(9.40), (9.44).
+
+\subsection*{4. Many electrons}
+For $N$ electrons the same statement holds on $S^{3N-1}$:\ the
+Laplace--Beltrami operator is the diagonal SO($3N$) Casimir
+$\lambda(\lambda+3N-2)$. Paper~7 cites it as standard hyperspherical-harmonic
+theory (J.~Avery, 1989);\ Paper~13 uses the SO(6) case for helium, through
+other references.\\
+\emph{GeoVac:} Paper~7 \S N-electron;\ Paper~13 \S Casimir;\
+\tst{test_algebraic_angular.py}.\\
+\emph{Book} (\rel{builds on}):\ Ch.~2, eqs.~(2.1), (2.8);\ the $d=6$
+tables in Ch.~3, \bk{Normalization}.
+
+\subsection*{5. Generalized Sturmians:\ the isoenergetic secular equation}
+Paper~60 takes your secular equation as written. Fix the energy, solve for
+the scale:\ the roots are values of $p_\kappa$, each giving an energy
+directly. There is no overlap matrix and no outer energy search:
+\[
+\bigl[\,T^0 + T' - p_\kappa \mathbb{1}\,\bigr]B = 0,\qquad
+T^0 = Z\,\mathcal{R}_\nu\,\delta,\qquad E=-p_\kappa^2/2 .
+\]
+The form for an arbitrary weight potential $V_0$ is also yours, on
+Goscinski's construction. Earlier versions of Paper~60 presented it as
+their own;\ it is now credited:
+\[
+\sum_\nu \langle \Phi_\mu|\,V-\beta_\nu V_0\,|\Phi_\nu\rangle\, C_\nu = 0 .
+\]
+\emph{GeoVac:} Paper~60 eq.~(secular), eq.~(general $V_0$);\
+\tst{test_paper60_sturmian.py}, \tst{test_paper60_general_v0.py}.\\
+\emph{Book} (\rel{builds on};\ \rel{yours, credited} for eq.~(7.13)):\
+Ch.~7, \bk{Sturmians and the many-particle Schr\"odinger equation},
+eq.~(7.13);\ \bk{Derivation of the secular equations}, eqs.~(7.78)--(7.89);\
+Goscinski's weighted equation, eq.~(7.1).
+
+\subsection*{6. The tied scale, measured}
+In the isoenergetic formulation the basis scale is tied to the eigenvalue.
+Your text notes that the resulting Goscinskian exponents come out almost
+exactly at their variational optimum, and that the method suits excited
+states especially. For the single $1s^2$ configuration the remark is
+exact:\ the exponent is the textbook $27/16$ and the energy $-2.847$~Ha.
+Paper~60 measures how the departure grows as configurations are added. For
+the helium ground state the tied scale stalls at $7.46$~mHa while the same
+span with a free scale reaches $1.28$~mHa ($K=130$). At $K=452$ the ground
+state sits $6.82$~mHa from exact and the $2\,^1S$ state $1.716$~mHa:\ the
+cost is state-dependent and falls on the ground state, as your split-shell
+account explains. Paper~60 also proves a variational upper bound for this
+formulation, with an inertia corollary, and an interlacing bound;\ we did
+not find the upper bound stated in your books or theses.\\
+\emph{GeoVac:} Paper~60 eq.~(scale lock), \S ground state;\
+\tst{test_paper60_scale_lock.py}, \tst{test_paper60_no_selection.py}.\\
+\emph{Book} (\rel{puts numbers on}):\ Ch.~7, closing text of
+\bk{Derivation of the secular equations}, and the $^1S$ table for helium.
+
+\subsection*{7. Two centres:\ the Shibuya--Wulfman metric returns}
+For atom-centred Sturmians the metric is weighted by the ket's own nucleus,
+which makes each centre's block exactly the identity:
+\[
+S_{\tau'\tau} = \frac{n_\tau}{k}\,\Bigl\langle \chi_{\tau'}\Bigr|\frac{1}{r_{a(\tau)}}\Bigl|\chi_\tau\Bigr\rangle
+= \Bigl\langle \chi_{\tau'}\Bigr|\frac{p^2+k^2}{2k^2}\Bigl|\chi_\tau\Bigr\rangle .
+\]
+Paper~60's regression test reproduces ten of your closed-form
+Shibuya--Wulfman integrals to about $10^{-12}$. On a full $\sigma$ basis
+($n\le N$, $l<n$, $m=0$ on each centre) the conditioning grows exponentially
+with the number of shells:\ $18$ to $1.1\times10^{11}$ from $3$ to $15$
+functions per centre at $kR=3$. Paper~60 shows why. In this metric each
+centre's set is complete and the other centre's set is its translate, which
+is unitary here, so the two-centre metric is a finite section of
+\[
+\begin{pmatrix} I & U\\ U^* & I\end{pmatrix},\qquad U \text{ unitary},\quad
+\text{spectrum } \{0,2\}.
+\]
+No preconditioner that acts centre by centre can help;\ that is proved. The
+remedy you use for the two-centre density expansion, phasing out the
+smallest eigenvectors, also works on this metric:\ at threshold $10^{-6}$ it
+holds the conditioning at $10^{6}$ with an $\mathrm{H}_2^+$ accuracy loss
+below $10^{-7}$~Ha through $36$ functions per centre. The threshold has to
+fall as the basis grows.\\
+\emph{GeoVac:} Paper~60 \S Molecular frontier;\
+\tst{test_paper60_sigma_basis.py}, \tst{test_paper60_sigma_redundancy.py}.\\
+\emph{Book} (\rel{puts numbers on}):\ Ch.~8, \bk{Shibuya--Wulfman
+orbitals};\ Ch.~9, \bk{Shibuya--Wulfman integrals}, eq.~(9.26), and
+\bk{Matrices representing kinetic energy and nuclear attraction} (the
+own-nucleus form), eqs.~(9.42)--(9.44);\ \bk{2-center densities}, the remark
+after eq.~(9.75) that the density-fitting matrix $1+W$ becomes
+ill-conditioned through overcompleteness at small $S$, handled by phasing
+out the smallest eigenvectors. The translation reading itself is Shibuya
+and Wulfman's (1965).
+
+%-----------------------------------------------------------------------
+\section{On a quantum computer:\ generated, loaded, paid for}
+The idea we discussed:\ the angular structure can be produced on the device
+from quantum-number labels, so only the radial part has to be loaded, and
+the radial part depends on one variable. Paper~60 states the idea and tests
+what it costs. It does not measure the loading cost itself;\ that remains a
+motivating argument.
+
+\paragraph{Generated, from labels.}
+\begin{itemize}
+\item Angular couplings are exact algebraic numbers (square roots of
+rationals):\ Gaunt coefficients, $3j$ and $6j$ symbols, computed from
+$(n,l,m)$ with no quadrature.
+\item On one centre they are sparse, and the sparsity depends only on
+$l_{\max}$, not on the potential (Paper~22). Your Ch.~8 says the same of the
+one-centre coefficients:\ large but very sparse.
+\item At two centres $l$ stops being conserved and only the axial $m$
+survives (Papers~14, 58). Your Ch.~9 notes that the two-centre density
+coefficients are not sparse.
+\end{itemize}
+
+\paragraph{Loaded, one-dimensional.}
+\begin{itemize}
+\item The radial factors depend on one variable:\ $r$ for an atom, the
+hyperradius for several electrons, and for two centres closed-form
+functions of the internuclear distance $R$.
+\item If the angular part is generated on the device, the loading cost would
+be a small set of radial seeds rather than an $O(M^4)$ integral tensor.
+\item For two centres those seeds close over $\{e^aE_1(a),\ \ln,\ \gamma\}$,
+classically (Sugiura, Roothaan, Ruedenberg);\ Paper~58 organises them as a
+closed seed set. At three centres the $(XY|XZ)$ integral over $1s$ orbitals at
+a common exponent becomes an elliptic Bessel moment, genus one, in your
+momentum-space setting (Paper~59, which names your 2013 review as the
+closest prior art).
+\end{itemize}
+
+\paragraph{Paid for:\ the 1-norm.}
+\begin{itemize}
+\item What sets the quantum cost is chiefly the 1-norm of the encoded
+matrix, and for molecules also the metric's conditioning, not the load count
+alone.
+\item \emph{Atoms:} the secular matrix carries no metric and needs no energy
+search. Its 1-norm grows more slowly than its dimension over every basis
+computed (helium, $K^{0.82}$ over $K=74$--$164$, local slope falling to
+$0.77$ by $K=514$), when the basis grows at fixed $l_{\max}$. It is bought
+with the same tied scale that sets the accuracy floor:\ $6.82$~mHa for the
+ground state at $K=452$, against $1.716$~mHa for $2\,^1S$ at the same
+encoding cost.
+\item \emph{Molecules:} the metric returns and the 1-norm is ordinary
+polynomial. The metric is paid once, when the one-electron molecular
+orbitals are built;\ it does not compound with electron number.
+\end{itemize}
+
+\noindent In short:\ your isoenergetic formulation makes the atomic problem
+a clean quantum target at a state-dependent accuracy floor, a trade-off
+between cost, accuracy and which state is targeted rather than an
+unconditional efficiency gain. A targeted search did not find this
+combination in the existing quantum-algorithm literature. For molecules, the
+cost moves into the Shibuya--Wulfman metric, and rung~7 above is where that
+cost now stands.
+
+%-----------------------------------------------------------------------
+\section{Concordance:\ your book and the GeoVac papers}
+{\small
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.37\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}}
+\toprule
+Your book & GeoVac & Relation & Checked by\\
+\midrule
+\endhead
+Ch.~2, generalized angular momentum, eq.~(2.8) & Paper~7, SO($3N$) Casimir (\S N-electron;\ cites J.~Avery 1989) & builds on & \tst{test_algebraic_angular}\\
+Ch.~2, degeneracy, $(\lambda+1)^2$, eq.~(2.43) & Paper~0, $n^2$ shell grouping, reached combinatorially & independent & \tst{test_paper7_label_set}\\
+Ch.~5, Fock's original treatment, eqs.~(5.10)--(5.18) & Paper~7, stereographic map and chordal identity (credited to Fock 1935) & independent & \tst{test_fock_projection}\\
+Ch.~5, kernel eigenvalue and $Z/(kn)=1$, eqs.~(5.21)--(5.29) & Paper~7, kernel eigenvalue $2\pi^2/n$ forces $p_0=Z/n$ & independent & \tst{test_paper7_fock_kernel}\\
+Ch.~5, Coulomb Sturmians, eqs.~(5.32), (5.33) & Paper~34, Sturmian reading of the labels at $\lambda=Z/n$ & builds on & \tst{test_paper34_projection_spot_checks_batch1}\\
+Ch.~8 and Ch.~9, the four-dimensional three-harmonic coefficient & Papers~32, 38, 44, 45, the Wen--Avery 3-$Y$ integral on $S^3$ & builds on & \tst{test_so4_three_y_integral}\\
+Ch.~6, potential-weighted orthonormality, eqs.~(6.32), (6.39) & Paper~60 eq.~(pw);\ Paper~8 Sturmian orthogonality & builds on & \tst{test_paper60_sturmian}\\
+Ch.~9, kinetic-energy and nuclear-attraction matrices, eqs.~(9.40), (9.44) & Paper~34, $h=k^2(1-m/2)-Zk\,\mathrm{diag}(1/n)$;\ Paper~60, kinetic matrix $\mathbb{1}-(\text{overlap})/2$ & builds on & \tst{test_paper60_scale_lock} (Paper~60 form)\\
+Ch.~7, Goscinski's weighted equation and orthogonality, eqs.~(7.1), (7.5)--(7.8) & Paper~60 \S Isoenergetic reformulation & builds on & \tst{test_paper60_general_v0}\\
+Ch.~7, many-particle Schr\"odinger equation, eq.~(7.13) & Paper~60, secular equation for a general weight $V_0$ (now credited to you and Goscinski) & yours, credited & \tst{test_paper60_general_v0}\\
+Ch.~7, derivation of the secular equations, eqs.~(7.78)--(7.89) & Paper~60 eq.~(secular) & builds on & \tst{test_paper60_sturmian}\\
+Ch.~7, Goscinskian configurations, eqs.~(7.64)--(7.77) & Paper~60:\ He $1s^2=-2.847$~Ha reproduced;\ a domain rule for large $n$ & builds on & \tst{test_paper60_box_rule}\\
+Ch.~7, near-optimal exponents;\ suited to excited states & Paper~60:\ ground state $7.46$~mHa tied vs $1.28$~mHa free ($K=130$);\ at $K=452$, $6.82$ vs $1.716$~mHa for $2\,^1S$ & puts numbers on & \tst{test_paper60_scale_lock}\\
+Ch.~7, tied-scale formulation & Paper~60:\ variational upper bound (inertia corollary) and interlacing bound;\ upper bound not found in your books or theses & extends & \tst{test_paper60_scale_lock}, \tst{test_paper60_no_selection}\\
+Ch.~7, molecular spectra, eqs.~(7.48)--(7.63) & Paper~60, identity-form molecular secular equation;\ $T^0$ diagonal for molecular Sturmians (now credited to you) & yours, credited & ---\\
+Ch.~8, Shibuya--Wulfman orbitals:\ fixed-$S$ standard eigenproblem & Paper~60:\ fixed-$S$ vs fixed-$R$ on $\mathrm{H}_2^+$, $8.5\times10^{-2}$ vs $8.5\times10^{-4}$~Ha at 3 functions per centre, same basis & puts numbers on & \tst{test_paper60_sigma_basis}\\
+Ch.~9, Shibuya--Wulfman integrals, eqs.~(9.26), (9.27) & Paper~60 eq.~(sw), Hermitian form;\ ten closed forms reproduced to $\sim10^{-12}$ & builds on & \tst{test_paper60_sigma_basis}\\
+Ch.~9, nuclear-attraction form, own-nucleus weight, eqs.~(9.42), (9.43) & Paper~60:\ the metric is weighted by the ket's own nucleus (corrects our earlier ``the metric is $V_0$'') & yours, credited & \tst{test_paper60_sigma_redundancy}\\
+Ch.~8, Shibuya--Wulfman translation construction & Paper~60:\ two-centre metric a finite section of $\bigl(\begin{smallmatrix}I&U\\U^*&I\end{smallmatrix}\bigr)$, spectrum $\{0,2\}$;\ no centre-wise preconditioner helps (translation reading credited to Shibuya--Wulfman 1965) & extends & \tst{test_paper60_sigma_redundancy}\\
+Ch.~9, 2-center densities:\ $1+W$ ill-conditioned by overcompleteness;\ phase out the smallest eigenvectors (text after eq.~(9.75)) & Paper~60:\ the same remedy applied to the Shibuya--Wulfman metric on the $\sigma$ basis;\ at $10^{-6}$ it keeps $\mathrm{H}_2^+$ within $10^{-7}$~Ha through 36 functions per centre & puts numbers on & \tst{test_paper60_sigma_redundancy}\\
+Ch.~8 and Ch.~9, one-centre coefficients large but very sparse & Paper~14 Gaunt selection rules;\ Paper~22 sparsity depends only on $l_{\max}$ & independent & Paper~22 / 14 suites\\
+Ch.~9, two-centre density coefficients not sparse & Papers~14 and 58:\ $l$ selection lost at two centres, axial $m$ survives & independent & Paper~14 suite\\
+Ch.~9, interelectron repulsion between one-centre densities, momentum space, eqs.~(9.52)--(9.60) & Paper~59:\ the $(XY|XZ)$ three-centre integral over $1s$ at a common exponent is an elliptic Bessel moment, genus one (names your 2013 review as closest prior art) & extends & \tst{test_paper59_*}\\
+App.~B, Coulomb-Sturmian expansion of functions of $s=kr$, eq.~(B.5);\ STO integrals & Paper~58:\ these integrals are standard Coulomb--Sturmian practice, which GeoVac does not add to & builds on & ---\\
+Ch.~8 and Ch.~9, cross-centre overlap couples $n$ & Paper~8:\ our no-binding theorem holds only for a single-$n$ rotation approximation;\ the genuine Sturmian overlap escapes it and binds & scope of our claim & \tst{test_paper8_overlap_cross_n}\\
+Ch.~7, generalized Sturmians, eq.~(7.1) & Paper~8 structural theorem, scoped to the approximation, not to your basis & scope of our claim & \tst{test_paper8_sturmian_structural}\\
+Ch.~2, hyperradial separation, eq.~(2.1) & Paper~16, kinetic operator in hyperspherical form & builds on & ---\\
+Ch.~3, \bk{Normalization}, $d=6$ tables & Paper~13, SO(6) Casimir for helium & independent & \tst{test_algebraic_angular}\\
+Ch.~9, Shibuya--Wulfman integrals, own-nucleus form, eq.~(9.43) & Paper~19 \S Shibuya--Wulfman integrals & builds on & ---\\
+\bottomrule
+\end{longtable}
+}
+
+%-----------------------------------------------------------------------
+\section{Where it is open}
+\begin{description}[style=nextline, leftmargin=1.2em]
+\item[The molecular secular equation as a quantum target.] Your
+\bk{Molecular spectra} (Ch.~7) gives the identity-form secular equation for
+configurations built from molecular generalized Sturmians, with the weights
+$\beta_\nu$ found by interpolation. Paper~60 leaves the molecular 1-norm open
+with the obstruction identified:\ in the configuration-scaled form the
+nuclear-attraction matrix is neither diagonal nor independent of $p_\kappa$
+on two centres, and the one measured molecular 1-norm, from an ordinary
+two-centre CI, grows polynomially. Whether your molecular-Sturmian form avoids
+that obstruction is not tested.
+\item[A schedule for phasing out eigenvectors.] Phasing out works on the
+$\sigma$ basis. Each fixed threshold tested between $10^{-2}$ and $10^{-4}$
+stalls once the basis grows, while $10^{-6}$ holds through 36 functions per
+centre. Paper~60 concludes the threshold must fall with the basis;\ a
+shrinking schedule has not been tested.
+\item[Lowering the ground-state floor.] Paper~60 takes the mechanism from
+you:\ in $1s^2$ both electrons share one exponent, so the in-out correlation
+that a split-shell $1s\,1s'$ pair carries is missing. What it leaves open is
+whether a weighting potential of a different radial shape could lower the
+ground-state floor while keeping the Fock mapping.
+\item[Three centres.] The three-centre two-electron integral $(XY|XZ)$, over
+$1s$ orbitals at a common exponent, is genus one:\ an elliptic Bessel moment
+in the momentum-space Slater theory of your Ch.~9 (Paper~59, which names your
+2013 review as the closest prior art). Paper~59 identifies the class;\ a
+closed form is not known.
+\end{description}
+
+%-----------------------------------------------------------------------
+\section*{Papers referred to}
+All under \texttt{papers/} at \url{https://github.com/jloutey-hash/geovac}.
+\begin{itemize}[leftmargin=1.2em]
+\item Paper 0, \emph{Angular Momentum as Information Geometry}
+\item Paper 7, \emph{The Dimensionless Vacuum}
+\item Papers 8--9, \emph{Bond Sphere}
+\item Paper 13, \emph{The Hyperspherical Lattice}
+\item Paper 14, \emph{Structurally Sparse Qubit Hamiltonians}
+\item Paper 16, \emph{The Periodic Table Recast as $S_N$ Representation Theory}
+\item Paper 19, \emph{Toward PK-Free Molecular Hamiltonians}
+\item Paper 22, \emph{Potential-Independent Angular Sparsity}
+\item Papers 32, 38, 44, 45, the spectral-triple papers that use the Wen--Avery integral
+\item Paper 34, the projection catalogue
+\item Paper 58, \emph{Angular Sparsity Is an Atomic-Sector Property}
+\item Paper 59, \emph{The Three-Center ERI Is an Elliptic Bessel Moment}
+\item Paper 60, \emph{The Generalized-Sturmian Secular Equation Block-Encodes Without a Metric}
+\end{itemize}
+
+\end{document}

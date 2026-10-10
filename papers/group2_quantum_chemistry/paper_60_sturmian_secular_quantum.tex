@@ -57,7 +57,7 @@ efficiency claim.  The development follows.
 
 A recurring intuition in quantum simulation is that a Coulomb--Sturmian /
 hyperspherical basis is well suited to a quantum computer, because its angular
-matrix elements are exact rationals generated on the device from
+matrix elements are exact algebraic numbers (square roots of rationals) generated on the device from
 quantum-number labels rather than loaded as a classically-computed tensor;
 only the one-dimensional radial content need be shipped in.  We test the load-bearing
 obstruction to that idea---the cost of \emph{encoding} the basis---and find it
@@ -93,7 +93,7 @@ targeted prior-art search finds no existing quantum algorithm combining a
 Sturmian basis, a quantum eigenvalue routine, and the isoenergetic inversion;
 the two documented cost risks for such an algorithm---metric conditioning and an
 outer energy search---are both \emph{absent} in the atomic case (no metric; the
-eigenvalues are the energies).  \textbf{[MEASURED]} For molecules the
+eigenvalues $p_\kappa$ give the energies directly, $E=-p_\kappa^2/2$).  \textbf{[MEASURED]} For molecules the
 Shibuya--Wulfman metric returns and the problem is again generalized; we measure
 its conditioning and find it, on the $s$-sector, uniformly better than the $L^2$ overlap---its
 intra-center block is exactly the identity---and markedly better at larger
@@ -138,8 +138,8 @@ frontier on which the \emph{conditioning} axis is removable on $s$-sector
 shared-scale bases at $M=2$ and non-collinear $M=3$, the \emph{locality} cost is capped by the symbol's other
 pole, and the $\ell$-block sparsity loss is structural and not a conditioning
 effect at all.  \textbf{[MEASURED]} Its remaining
-question---whether the $N$-electron $1$-norm stays sublinear as it does for atoms---we answer in the
-negative: the atomic sublinearity rides on a diagonal nuclear matrix $T^0=Z R_\nu$ that is
+question---whether the $N$-electron $1$-norm stays sublinear as it does for atoms---is open, and we
+identify the obstruction: the atomic sublinearity rides on a diagonal nuclear matrix $T^0=Z R_\nu$ that is
 single-center-specific, and a validated two-center CI (dissociating $\mathrm{H}_2$ correctly) has a
 \emph{standard} block-encoding $1$-norm growing polynomially ($\sim n_{\rm orb}^{2.2}$), with no
 sublinear behavior.  The real molecular savings are the metric levers (the band-Toeplitz
@@ -760,7 +760,7 @@ The two documented cost risks for such a scheme are, moreover, \emph{absent in
 the atomic case}.  The metric-conditioning multiplier of block-encoded
 generalized eigenproblems~\cite{liang2022,baek2023} does not apply, because
 Eq.~\eqref{eq:secular} carries no metric.  The outer energy search that would
-otherwise multiply the cost does not arise, because the eigenvalues are the
+otherwise multiply the cost does not arise, because the eigenvalues fix the
 energies.  What remains is a single figure of merit, the $1$-norm of $M$, which
 Eq.~\eqref{eq:sublinear} measures to grow more slowly than the matrix dimension
 over every computed basis (with the caveats on window and mechanism recorded
@@ -840,7 +840,8 @@ $S_{\mu'\mu}=(2k^2)^{-1}\langle\nabla\varphi_{\mu'}|\nabla\varphi_\mu\rangle
 +\tfrac12\langle\varphi_{\mu'}|\varphi_\mu\rangle$.
 
 \textbf{[MEASURED]} On a two-center $s$-orbital Coulomb--Sturmian basis we find:
-(i) the intra-center block of $S$ is \emph{exactly} the identity---in the
+(i) the intra-center block of $S$ is \emph{exactly} the identity, as Avery and
+Avery's potential-weighted orthonormality requires~\cite{avery2017}---in the
 momentum-space evaluation, diagonal $\{1,1,1\}$ with off-diagonal
 $\sim\!10^{-16}$ (the $2$D-grid values $\{1,0.999,0.998\}$ are discretization
 error)---where the $L^2$ overlap's intra-center block is merely non-orthogonal
@@ -1221,8 +1222,9 @@ per-shell or band-Toeplitz preconditioners, including the $s$-sector
 $\mathrm{tri}(1,2,1)$, change the conditioning by constant factors at most
 (measured through $21$ functions per center),
 and fixed-rank deflation cannot bound it, since the rank needed for
-$\mathrm{cond}\le100$ grows with the basis.  What works is Avery and Avery's
-remedy, phasing out the smallest eigenvectors (canonical orthogonalization):\
+$\mathrm{cond}\le100$ grows with the basis.  What works is the remedy Avery and
+Avery use for the two-center density expansion, phasing out the smallest
+eigenvectors (canonical orthogonalization), applied here to the metric:\
 at threshold $10^{-6}$ it holds the conditioning at $10^{6}$ with a measured
 $\mathrm{H}_2^+$ accuracy loss below $10^{-7}$~Ha through $36$ functions per center, where the
 undropped metric exceeds $10^{15}$;\ but it removes directions rather than
@@ -1585,8 +1587,10 @@ leaves---the observed gains are DF's, not the momentum representation's.
 
 For a many-electron molecule the generalized-Sturmian secular equation is still
 $[\,T^0+T'-p_\kappa\mathbb{1}\,]B=0$---a \emph{standard} eigenproblem, the $-p_\kappa\mathbb{1}$ being
-the identity, not a metric (Avery's general form~\cite{averyphd}); only the atomic conveniences
-``$T^0$ diagonal'' and ``$T'$ pure numbers'' are lost.  The resource-relevant question is whether the
+the identity, not a metric (Avery's general form~\cite{averyphd}); in an atom-centered or $p_\kappa$-scaled configuration
+basis the atomic conveniences ``$T^0$ diagonal'' and ``$T'$ pure numbers'' are lost (see below), while
+Avery and Avery's molecular-Sturmian form keeps $T^0$ diagonal at the price of weights $\beta_\nu$
+found numerically (Sec.~\ref{sec:molecular}).  The resource-relevant question is whether the
 Shibuya--Wulfman metric penalty of Sec.~\ref{sec:molecular} \emph{compounds} with electron number.
 It need not.
 
