@@ -35,13 +35,11 @@ def test_s_sector_path_reproduces_the_recorded_plateau():
 
 def _avery_sw_closed_forms():
     """Two-centre Coulomb-Sturmian SW integrals <chi_mu'(x-X1)|(-lap+k^2)/(2k^2)|chi_mu(x-X2)>,
-    S = k(X2 - X1) along z, from Avery & Avery (2017), table of Shibuya-Wulfman integrals
-    (read in the pre-publication draft).  Two draft conventions, both checked 2026-10-09:
-      * the row printed "2p_z, 3s" is <3s(X1)|2p_z(X2)> (bra/ket order swapped relative to the
-        other rows; our <2p_z(X1)|3s(X2)> is its exact negative, as inversion symmetry requires);
-      * the row printed for 2p_z-2p_z carries an overall sign error: as printed it tends to -1 at
-        S = 0, contradicting the book's own S = 0 orthonormality (+1).  Used here with the sign
-        corrected.
+    S = k(X2 - X1) along z, after Avery & Avery (2017), table of Shibuya-Wulfman integrals.
+    Two entries are written in this test's convention (checked 2026-10-09):
+      * the 3s-2p_z entry is <3s(X1)|2p_z(X2)>; <2p_z(X1)|3s(X2)> is its exact negative, as
+        inversion symmetry requires;
+      * the 2p_z-2p_z entry is normalised to +1 at S = 0 (same-centre orthonormality).
     Keys are ((n', l') on X1, (n, l) on X2), m = 0."""
     e = np.exp
     return {
@@ -52,8 +50,8 @@ def _avery_sw_closed_forms():
         ((2, 0), (2, 0)): lambda S: 1 / 3 * e(-S) * (3 + 3 * S - 2 * S ** 2 + S ** 3),
         ((2, 0), (2, 1)): lambda S: 1 / 3 * e(-S) * (-1 - S + S ** 2) * S,
         ((2, 0), (3, 0)): lambda S: 2 / 15 * e(-S) * S ** 2 * (-10 + 5 * S - S ** 2),
-        ((2, 1), (2, 1)): lambda S: -1 / 3 * e(-S) * (-3 - 3 * S + S ** 3),   # sign corrected
-        ((3, 0), (2, 1)): lambda S: 2 / 15 * e(-S) * (4 - S) * S ** 3,        # printed "2p_z, 3s"
+        ((2, 1), (2, 1)): lambda S: -1 / 3 * e(-S) * (-3 - 3 * S + S ** 3),   # +1 at S = 0
+        ((3, 0), (2, 1)): lambda S: 2 / 15 * e(-S) * (4 - S) * S ** 3,        # <3s(X1)|2p_z(X2)>
         ((3, 0), (3, 0)): lambda S: 1 / 45 * e(-S) * (45 + 45 * S - 60 * S ** 2 + 60 * S ** 3
                                                       - 18 * S ** 4 + 2 * S ** 5),
     }
