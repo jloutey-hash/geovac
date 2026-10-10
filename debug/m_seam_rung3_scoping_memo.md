@@ -107,4 +107,19 @@ rather than on cond(S). Reference material on the SW posing, if needed: Avery's 
   inverts S. The obstacle is one slowly converging sigma level.
 - **Next lever:** pin the sigma-pi gap at linear geometry with a more accurate method,
   then treat sigma-pi as a 2x2 (pseudo-Jahn-Teller / Walsh) problem in s, which stays
-  valid at physical bends, where a2 does not.
+  valid at physical bends, where a2 does not. *(Premise corrected by §8: the physical
+  gap is not small.)*
+
+## 8. Rung 4 (same day): the converged referee
+
+`tests/test_renner_teller_rung4.py`. A complete radial grid (FE-DVR) plus partial waves
+to l = 55, with exact second-order perturbation theory at linear geometry:
+**a2 = 0.44941, E_pi = -0.7385753 at R = 2.**
+- The near-degeneracy in §7 was a property of the fixed-S posing: there, levels are
+  compared at one shared S, not one shared R. At fixed R the dominant sigma partner, the
+  first excited z-even sigma, sits 0.093 Ha BELOW pi. It carries 0.742 of the 0.848
+  sigma relay, with coupling 0.263.
+- The |m| = 2 relay cancels exactly from the splitting.
+- A two-state model gives 0.344: the right sign and 77% of the size.
+- Rung 3 (fixed-S Sturmian) is therefore not the route to bending coefficients. A posing
+  that compares levels at one shared R is, and the one-centre grid is already one.
