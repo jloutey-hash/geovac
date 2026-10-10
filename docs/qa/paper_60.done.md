@@ -564,13 +564,16 @@ registered rather than guessed.
     so Cauchy interlacing gives E(A) ≥ E(M). Measured corollary owned by C21
     `p60_best102_locked`. Backing `tests/test_paper60_no_selection.py`. The property that
     makes the encoding attractive is what supplies the bound.
-13. **The general-V₀ form, and what the molecular metric IS [INTERNAL THEOREM].**
+13. **The general-V₀ form [ESTABLISHED, from Avery] (re-tiered 2026-10-09) [retracted 2026-10-09: p60-sw-matrix-is-v0-ours].**
     `eq:general_v0` — V·C = V₀·B·C, every L² overlap cancelling for ANY local V₀, orthonormal
     configurations or not; atomic specialisation reproduces `eq:secular`. Backing
-    `tests/test_paper60_general_v0.py`. **Provenance split that must stay intact:** the
-    Shibuya–Wulfman integrals are Avery's; the identification of that matrix *as* the
-    V₀-weighted overlap is ours, and the variational bound for the fixed-scale metric-free
-    problem is not in his canon. Crediting either to Avery = MATERIAL.
+    `tests/test_paper60_general_v0.py`. **Provenance (corrected 2026-10-09 on reading Avery &
+    Avery 2017 directly):** the general-V₀ equation, the molecular identity-form secular
+    equation and the nuclear-attraction form of the SW integrals are AVERY'S; the atom-centred
+    SW metric is the OWN-CENTRE-weighted overlap, not the full-V₀-weighted one (the latter's
+    intra block departs from I by 1.16 at kR=2). Claiming the identification as ours, or
+    stating 'the molecular metric IS V₀' for an atom-centred basis = MATERIAL [retracted 2026-10-09: p60-sw-matrix-is-v0-ours]. The variational
+    bound for the fixed-scale metric-free problem remains ours.
 14. **The accuracy mechanism is AVERY'S, the price in qubits is OURS [ESTABLISHED, from
     Avery].** In-out radial correlation; split-shell 1s1s′ carries two independent exponents;
     a Goscinskian 1s² pins both electrons to one exponent for *any* weighting potential.
@@ -619,14 +622,18 @@ registered rather than guessed.
     spectrum-preserving. Presenting this as a compiled circuit = MATERIAL.
 20. **Overcompleteness is ONE DIRECTION, not a property of the basis [MEASURED].** The
     Bessel deficit of a displaced Sturmian against the one-centre span PLATEAUS and does not
-    tend to zero, so the one-centre set is measurably far from complete IN THE MOLECULAR
+    tend to zero, so the s-sector one-centre set is measurably far from complete IN THE MOLECULAR [retracted 2026-10-09: p60-incomplete-in-molecular-metric]
     METRIC. **The 2026-09-11 frames reading — "overcompleteness is the price of one-centre
     completeness" — is WITHDRAWN [retracted 2026-09-12: p60-frames-completeness];**
     re-asserting it = MATERIAL. Ron-Shen is the surviving
     mechanism. The paired claim form is load-bearing: the gap must collapse WHILE the deficit
     does not, which no single-sided bug satisfies. Backing
-    `tests/test_paper60_one_direction.py`. **Consequent caveat that must stay attached:** the
-    basis's motivating completeness is in the ATOMIC metric, not the molecular one.
+    `tests/test_paper60_one_direction.py`. **Scope (2026-10-09):** all of item 20 is the
+    s-SECTOR sine basis. On a full sigma basis the deficit falls without plateau, cond(S) is
+    exponential in the number of shells (gerade sector too) and the near-null directions
+    multiply (`debug/sturmian_sigma_basis_sw.py`); stating one-direction, the flat gerade
+    constant or the tri(1,2,1) preconditioner without the s-sector scope = MATERIAL. The
+    former caveat "motivating completeness is ATOMIC, not molecular" is withdrawn with it.
 21. **`eq:sigma_law` is Kac-Murdock-Szego [PRIOR ART].** Not derived here; the corpus claims
     only the IDENTIFICATION of the metric as such a finite section, Toeplitz minus Hankel
     with the stated symbol. Re-claiming the asymptotic = MATERIAL. Backing

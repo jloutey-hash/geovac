@@ -1189,7 +1189,9 @@ correlation than the failing runs used.  It does---with considerably less.
 
 Two scope conditions govern what follows, and the argument is weaker
 without them.  First, this construction \textbf{makes no sparsity claim}:
-the radial functions are six-Gaussian fits of Slater shapes evaluated with
+the radial functions are Gaussian expansions of Slater shapes (the
+fixed STO-6G $1s$ and STO-3G $2s$ contractions, six-Gaussian least-squares
+fits for $2p$ and $3s$) evaluated with
 a McMurchie--Davidson engine~\cite{mcmurchie1978} and a dense
 non-orthogonal Slater--Condon solver, so it forfeits precisely the
 label-generated sparsity this paper is about---it is item~4 of
@@ -1206,10 +1208,18 @@ $\mathrm{Na}\{1s, 2s, 2p \times 3, 3s\}$ and $\mathrm{H}\{1s\}$
 fragment-native orbitals~\cite{thom2009, sundstrom2014}, and general-$N$
 non-orthogonal Slater--Condon evaluation by L\"owdin
 cofactors~\cite{lowdin1955}.  Orbital exponents were optimized on
-the \emph{isolated} Na atom only ($E(\mathrm{Na}) = -161.0845$~Ha against
-a Clementi minimal-STO reference of $\approx -161.12$), with hydrogen at
-$\zeta = 1$, so the molecular curve is a fragment prediction rather than
-a fit.  Machinery validation at $R = 3.5\,a_0$: rotational invariance at
+the \emph{isolated} Na atom only ($E(\mathrm{Na}) = -161.0845$~Ha with
+these expansions;\ the $35$~mHa gap to a Clementi minimal-STO reference of
+$\approx -161.12$ is the expansions, not the exponents, since converged
+least-squares fits at the same exponents give $-161.119$~Ha), with
+hydrogen at $\zeta = 1$, so the molecular curve is a fragment prediction
+rather than a fit.  \textbf{[MEASURED]} The shape choice moves the
+non-orthogonal rows of Table~\ref{tab:nah} by about a percent, the
+L\"owdin row's $D_e$ by $20\%$ relative, and the FCI row not at all:\ with
+$8$- and $12$-Gaussian fits for every shape (mutually agreeing to
+$10^{-3}$~eV) the three-determinant entry is
+$3.744\,a_0$, $1.082$~eV, $92.0\%$, and the L\"owdin three-determinant
+entry $0.163$~eV, $13.9\%$;\ the conclusions below are unchanged.  Machinery validation at $R = 3.5\,a_0$: rotational invariance at
 $1.1 \times 10^{-13}$, and the 91-determinant non-orthogonal complete space
 reproduces the L\"owdin bitstring FCI to $1.8 \times 10^{-15}$~Ha.  (The
 value serialized by the exploratory driver was corrupted by variable

@@ -877,7 +877,7 @@ remove.)  (Superseded 2026-09-07:\ the earlier $K^{0.84}$,
 ``drifts upward'', $T^0$-at-$K^{0.70}$ and $T'$-superlinear-at-$K^{1.05}$ [retracted 2026-09-08: p60-tprime-superlinear]
 readings were measured on a truncated radial domain whose error grew with
 the fit variable.)  That split is what decides the molecular case.  For molecules the Shibuya--Wulfman metric returns, and the paper
-measures rather than assumes its cost:\ the conditioning grows
+measures rather than assumes its cost:\ on the $s$-sector the conditioning grows
 polynomially, at a band-limited concentration rate that is the
 Kac--Murdock--Szeg\H{o} asymptotic (what is the paper's own is the
 \emph{identification} of the metric as such a finite section, not the law).
@@ -888,7 +888,14 @@ conditioning cost without requiring equivalent centers, reaching water's $A_1$
 block when the band is aligned to the symbol's null direction (in the unrotated
 frame the same band is worse than no treatment at all), and a direct block-encoding of the preconditioned metric takes the
 penalty from $n^3$ to $n$.  Established on $s$-sector shared-scale bases at
-$M=2$ and non-collinear $M=3$;\ the collinear case is open.  What remains standing is the \emph{locality} cost,
+$M=2$ and non-collinear $M=3$;\ the collinear case is open.  None of these
+levers transfers as stated to a full $\sigma$ basis:\ with $\ell>0$ the
+one-center set approaches completeness in the molecular metric, the conditioning grows
+exponentially in the number of shells, the gerade sector included, no
+preconditioner of that kind exists there (each center's set is a unitary
+translate of the other's, so in the limit half the directions are redundant), and that
+basis is where the accuracy is ($\mathrm{H}_2^+$ to $5\times10^{-6}$~Ha at
+fifteen functions per center).  What remains standing is the \emph{locality} cost,
 capped by the symbol's other pole, and the $\ell$-block sparsity loss, which is
 structural rather than a conditioning effect.  The $N$-electron $1$-norm question is answered in the
 negative:\ the atomic sublinearity is a property of the isoenergetic

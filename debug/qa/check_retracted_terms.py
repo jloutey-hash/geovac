@@ -4422,7 +4422,13 @@ REGISTRY = [
                    "measurably far from complete IN THE MOLECULAR METRIC and the "
                    "bound holds only vacuously.  Ron-Shen is the surviving "
                    "mechanism, and it says something narrower and more useful: the "
-                   "near-dependence is ONE DIRECTION.",
+                   "near-dependence is ONE DIRECTION.  SCOPE CORRECTION 2026-10-09: "
+                   "every number above is the s-SECTOR sine basis; on a full sigma "
+                   "basis (l < n) the deficit falls without plateau and the "
+                   "near-null directions multiply (see p60-incomplete-in-molecular-"
+                   "metric), so the withdrawal holds for the s-sector only.  The "
+                   "phrase stays blocked: a general restatement would still need its "
+                   "own measured statement, not this one.",
         "pattern": r"overcompleteness is the price"
                    r"|price of one-cent(?:er|re) completeness"
                    r"|completeness of the one-cent(?:er|re) set[^.\n]{0,40}forces",
@@ -4448,6 +4454,87 @@ REGISTRY = [
         "cited_by": {
             "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- sec:molecular carries the plateau measurement",
             "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the one-direction row records the withdrawal",
+        },
+    },
+    {
+        "id": "p60-incomplete-in-molecular-metric",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-10-09.  'The one-centre shared-scale set is far from complete "
+                   "in the molecular metric' (Paper 60 sec:molecular, 2026-09-12) was "
+                   "measured on the s-SECTOR only: its 0.380/0.696/0.907 Bessel-deficit "
+                   "plateau is the l=0 projection of an off-centre function, which an "
+                   "s-only span cannot hold.  On a full sigma basis (n<=N, l<n, m=0; "
+                   "debug/sturmian_sigma_basis_sw.py, position-space prolate quadrature "
+                   "reproducing the s-sector plateau to 3 digits) the deficit falls "
+                   "without plateau (0.158 -> 0.037 over N=2..6 at kR=1), cond(S) is "
+                   "exponential in the number of shells, gerade sector included, and the "
+                   "near-null directions multiply.  Prompted by Avery & Avery 2017 ch. 9 "
+                   "(two-centre expansion ill-conditioned by overcompleteness).",
+        "pattern": r"far from complete[^.\n]{0,40}molecular metric"
+                   r"|not complete in the molecular metric"
+                   r"|one-cent(?:er|re) set is not complete",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d\d-\d\d: p60-incomplete-in-molecular-metric\]",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-10-09 -- Avery-book pass -- sec:molecular rewritten: plateau attributed to the l=0 projection, sigma-basis paragraph added, abstract/conclusion/resource scoped to the s-sector",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "reviewed 2026-10-09 -- Avery-book pass -- molecular paragraph scoped to the s-sector + sigma-basis sentence",
+            "docs/walls/register.md": "reviewed 2026-10-09 -- Avery-book pass -- dated scope-correction paragraph; row relabelled BREACHED (s-sector) / OPEN (sigma basis), PI-approved",
+            "docs/claim_test_matrix.md": "reviewed 2026-10-09 -- Avery-book pass -- one-direction row scoped; sigma-basis row added",
+        },
+    },
+    {
+        "id": "p60-sw-matrix-is-v0-ours",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-10-09.  Two Paper 60 provenance/accuracy claims, read against "
+                   "Avery & Avery 2017 directly: (i) 'the identification of the "
+                   "Shibuya-Wulfman matrix AS the V_0-weighted overlap is ours' -- the "
+                   "general-V_0 secular equation (eq:general_v0) is the book's eq. "
+                   "(7-14)/(12.48) (Goscinski), the molecular identity-form secular "
+                   "equation is its 'Molecular spectra' section, and the book writes each "
+                   "SW integral as (n/k)<chi'|1/r_a|chi>; (ii) 'the molecular metric IS "
+                   "V_0' for V_0 = all nuclei -- for an atom-centred Coulomb-Sturmian "
+                   "basis the eq:sw metric is weighted by the KET'S OWN nucleus; the "
+                   "full-V_0-weighted overlap's intra block departs from the identity by "
+                   "1.16 at kR=2 (geovac/sturmian_sigma_basis.py), against 2e-12 for S.",
+        "pattern": r"metric IS V_?0"
+                   r"|metric (?:\\emph\{)?is\}? \$(?:\\mathbf\{)?V\}?_0\$"
+                   r"|\\emph\{is\} \$(?:\\mathbf\{)?V\}?_0\$"
+                   r"|identification of (?:that|the (?:Shibuya.{1,3}Wulfman|SW)) matrix"
+                   r"[^.\n]{0,40}weighted overlap",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d\d-\d\d: p60-sw-matrix-is-v0-ours\]",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-10-09 -- Avery-book pass -- general-V0 paragraph re-tiered to [ESTABLISHED, from Avery]; atom-centred metric stated as own-centre-weighted; acknowledgments' 'ours' list corrected",
+            "docs/claim_test_matrix.md": "reviewed 2026-10-09 -- Avery-book pass -- eq:general_v0 row re-tiered",
+            "docs/qa/paper_60.done.md": "reviewed 2026-10-09 -- Avery-book pass -- DoD item 13 provenance reversed",
         },
     },
     {

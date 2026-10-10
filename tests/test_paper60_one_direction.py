@@ -13,7 +13,7 @@ gives the deficit directly:
     eps_N^2 = 1 - sum_{i<=N} <chi^A_i, chi^B_1>^2  >= 0.
 
 It does not go to zero -- it plateaus around 0.38 / 0.70 / 0.91 for kR = 1/2/4.
-So the one-centre set is far from complete in the molecular metric, the
+So the s-sector one-centre set is far from complete in the molecular metric [retracted 2026-10-09: p60-incomplete-in-molecular-metric], the
 hypothesis fails, and the degeneracy is NOT "one span already contains the
 other".  What sigma_max -> 1 says is narrower: some COMBINATION is captured.
 The degeneracy is one direction, not a diffuse property of the basis.
@@ -41,7 +41,7 @@ def bessel_deficit(s, N):
 
 
 @pytest.mark.parametrize("kR", KR_VALUES)
-def test_one_centre_set_is_not_complete_in_the_molecular_metric(kR):
+def test_s_sector_deficit_plateaus_in_the_molecular_metric(kR):
     """eps_N^2 plateaus strictly above zero -- the Prop-A hypothesis FAILS here.
 
     WRONG ANSWER REJECTED: eps_N -> 0, i.e. the reading that the one-centre span

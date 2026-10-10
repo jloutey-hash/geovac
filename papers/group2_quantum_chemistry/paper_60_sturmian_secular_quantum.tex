@@ -95,10 +95,19 @@ the two documented cost risks for such an algorithm---metric conditioning and an
 outer energy search---are both \emph{absent} in the atomic case (no metric; the
 eigenvalues are the energies).  \textbf{[MEASURED]} For molecules the
 Shibuya--Wulfman metric returns and the problem is again generalized; we measure
-its conditioning and find it uniformly better than the $L^2$ overlap---its
+its conditioning and find it, on the $s$-sector, uniformly better than the $L^2$ overlap---its
 intra-center block is exactly the identity---and markedly better at larger
 internuclear separation, but still growing with basis size through the
-inter-center coupling.  \textbf{[PRIOR ART]} The growth law is not new:\ the band-limited
+inter-center coupling.  \textbf{[MEASURED]} Every conditioning law below is
+measured on the $s$-sector shared-scale basis;\ on a full $\sigma$
+basis ($\ell>0$) the growth is exponential in the number of shells, in the
+gerade sector too, and the one-center set approaches completeness in the
+molecular metric, so the gerade, preconditioner and one-direction levers do not
+transfer as stated;\ no preconditioner of that kind exists there, because the
+two-center metric is a finite section of an operator with spectrum
+$\{0,2\}$, and dropping the redundant directions is the remedy that works, at
+the price of a classical eigendecomposition of the one-electron metric.  \textbf{[PRIOR ART]} On the
+$s$-sector the growth law is not new:\ the band-limited
 concentration rate $1-\sigma_{\max}\propto(kR)^2/n^2$, asymptotic exponent
 $2$, is the Kac--Murdock--Szeg\H{o} asymptotic, and what is ours is the
 \emph{identification} of the Shibuya--Wulfman metric as such a finite section
@@ -108,7 +117,7 @@ cross-center singular spectrum carries the composition-wall commutator, whose
 norm saturates at $\tfrac12$.  \textbf{[RESOURCE MODEL]} Turning this into a
 block-encoding count for $\mathrm{H}_2^+$ (validated to bind, $1.3\%$ $s$-only), the
 payoff is the gerade/ungerade lever: the $\sigma_g$ ground state lives in the gerade
-sector, whose conditioning is \emph{flat}---and flat at an exact constant of the
+sector, whose $s$-sector conditioning is \emph{flat}---and flat at an exact constant of the
 sinc symbol, $2/(1+\min_x j_0(x))=2.555041\ldots$, independent of $R$ and of basis
 size---so the ground-state metric
 penalty does \emph{not} grow with basis size---a ${\sim}60\times$ reduction versus the full
@@ -135,7 +144,8 @@ single-center-specific, and a validated two-center CI (dissociating $\mathrm{H}_
 \emph{standard} block-encoding $1$-norm growing polynomially ($\sim n_{\rm orb}^{2.2}$), with no
 sublinear behavior.  The real molecular savings are the metric levers (the band-Toeplitz
 preconditioner, the gerade sector, large separation, one-electron-only metric),
-not a sublinear matrix.  We do not
+not a sublinear matrix --- and the first two are $s$-sector results, while on a full
+$\sigma$ basis large separation only delays the growth.  We do not
 demonstrate the algorithm on hardware; this is a structural and resource
 analysis.
 \end{abstract}
@@ -272,14 +282,27 @@ the denominator.}  We invert because a block-encoding wants a standard Hermitian
 eigenproblem, and that requirement --- not the basis, and not the metric --- is
 what converts a benign spectral feature into a resource multiplier.
 
-The trade runs both ways and we do not claim the better side of it:\ a
-determinantal re-posing removes the conditioning multiplier but reinstates the
-outer nonlinear search over the scale that Eq.~\eqref{eq:secular} exists to
-eliminate, and which of the two is cheaper at scale is an open resource question
-this paper does not answer.  \emph{Provenance, because it bounds the paragraph:}\
-the bibliographic record and the abstract are verified at source;\ the two-page
-body is closed with no repository copy and is unread, so the mechanism above is
-reconstructed from the surrounding lineage rather than read.
+\emph{Provenance:}\ the 1979 note's bibliographic record and abstract are
+verified at source and its two-page body is unread, but the construction it
+rests on is read directly in Avery and Avery's account of the Shibuya--Wulfman
+orbitals~\cite{avery2017}:\ at fixed $S=kR$ the one-electron many-center
+problem is the \emph{standard} Hermitian eigenproblem of a Gram matrix of
+phase-shifted four-dimensional harmonics, its eigenvalues are the scales $k$,
+and the geometry follows as $R=S/k$.  \textbf{[MEASURED]} The trade this
+offers is not the one an outer search would suggest.  Molecularly,
+Eq.~\eqref{eq:sw} is \emph{itself} solved by an isoenergetic self-consistency
+over $k$ (Sec.~\ref{sec:resource}), so a search is not what distinguishes the
+two posings, and for a potential-energy curve the fixed-$S$ posing needs none
+(each $S$ gives one point).  What it costs is accuracy:\ it replaces each
+nucleus's potential by its projection onto the truncated harmonic set.  On
+$\mathrm{H}_2^+$ with the same $\sigma$ basis ($n\le N$, $\ell<n$, $m=0$ per
+center) at $R=2$~bohr, the fixed-$R$ posing Eq.~\eqref{eq:sw} is in error by
+$8.5\times10^{-4}$, $9.1\times10^{-5}$ and $5.4\times10^{-6}$~Ha at $3$, $6$
+and $15$ functions per center, the fixed-$S$ posing by $8.5\times10^{-2}$,
+$2.7\times10^{-2}$ and $8.2\times10^{-3}$~Ha, and the gap widens with $R$
+($7.5\times10^{-2}$ against $2.1\times10^{-7}$~Ha at $R=8$, $15$ functions).
+The metric-free posing exists and keeps the metric out of the denominator;\ on
+this evidence it pays for that in convergence by orders of magnitude.
 
 \section{The isoenergetic reformulation is metric-free for atoms}
 \label{sec:iso}
@@ -747,9 +770,11 @@ resource analysis, not a hardware demonstration.
 \section{The molecular frontier: Shibuya--Wulfman conditioning}
 \label{sec:molecular}
 
-\textbf{[INTERNAL THEOREM]} \emph{The general-$V_0$ form, and what the metric
-is.}  Before specializing, the general statement costs two lines and is worth
-having, because it says what the molecular metric actually is.  Projecting
+\textbf{[ESTABLISHED, from Avery]} \emph{The general-$V_0$ form, and what the
+metric is.}  The generalized-Sturmian secular equations hold for any weighting
+potential, atomic or molecular --- this is Goscinski's construction as
+derived by Avery and Avery~\cite{avery2017,goscinski2002} --- and we restate
+the two-line derivation because it says what the molecular metric is.  Projecting
 $\langle\Phi_\mu|H-E|\Phi_\nu\rangle=0$ and substituting the Sturmian equation on
 the ket, $(-\tfrac12\sum_j\nabla_j^{2}-E)|\Phi_\nu\rangle=-\beta_\nu
 V_0|\Phi_\nu\rangle$, gives
@@ -767,30 +792,39 @@ $\langle\Phi_\mu|V_0|\Phi_\nu\rangle=-Z R_\nu\delta_{\mu\nu}$ and
 $\beta_\nu Z=p_\kappa/R_\nu$, so $\mathbf{V}_0\mathbf{B}=-p_\kappa\mathbb{1}$ and
 Eq.~\eqref{eq:general_v0} collapses to Eq.~\eqref{eq:secular}:\ verified to
 $6\times10^{-10}$, with the reconstruction $Z\,\mathrm{diag}\,R_\nu-G$
-bit-identical to the assembled $M$.  \textbf{[OBSERVATION]} Molecularly
-$\mathbf{V}_0$ is \emph{not} diagonal, so the matrix on the right-hand side is
-the weighting potential itself --- not the identity, and not the $L^{2}$ overlap.
-That identifies the Shibuya--Wulfman matrix rather than merely naming it:\ for
-$V_0=-\sum_A Z_A/|\mathbf{r}-\mathbf{R}_A|$ its off-diagonal entries are exactly
-the cross-center nuclear-attraction integrals, which is what
-\texttt{geovac/shibuya\_wulfman.py} computes.  The molecular metric is not an
-extra structure the method acquires under generalization;\ it \emph{is} $V_0$.
-\emph{Provenance:} the Shibuya--Wulfman integrals and their momentum-space
-evaluation are Avery's;\ the identification of the resulting matrix \emph{as} the
-$V_0$-weighted overlap is our formalization --- a targeted consultation could not
-locate that sentence in the texts, only the integrals it would describe.
+bit-identical to the assembled $M$.  \textbf{[ESTABLISHED, from Avery +
+MEASURED]} Molecularly, which matrix stands on the right depends on the basis.
+For configurations built from \emph{molecular} Sturmian orbitals --- eigenfunctions
+of one multi-center problem at fixed $E$ --- $\mathbf{V}_0$ is again diagonal by
+potential-weighted orthogonality, and Avery and Avery give the resulting
+identity-form molecular secular equation explicitly, with the weights $\beta_\nu$
+found numerically~\cite{avery2017}.  In an \emph{atom-centered} Coulomb--Sturmian
+basis it is not:\ each function solves its own center's Sturmian equation, so the
+weight is the ket's own nucleus,
+$S_{\tau'\tau}=(n_\tau/k)\langle\chi_{\tau'}|\,|\mathbf r-\mathbf R_{a(\tau)}|^{-1}|\chi_\tau\rangle$
+--- the Shibuya--Wulfman matrix, which Avery and Avery write in exactly this
+nuclear-attraction form~\cite{avery2017} --- while the other nuclei's attraction
+sits in $W$ (Eq.~\eqref{eq:sw} below).  Weighting by the full
+$V_0=-\sum_A Z_A/|\mathbf r-\mathbf R_A|$ instead would destroy the exact
+intra-center identity measured below:\ at $kR=2$ its intra-center block departs
+from the identity by $1.16$, against $2\times10^{-12}$ for $S$
+(\texttt{geovac/sturmian\_sigma\_basis.py}).  The same-center cross-nucleus
+integrals $\langle\chi_A|Z_B/r_B|\chi_{A'}\rangle$, which
+\texttt{geovac/shibuya\_wulfman.py} computes for hydrogenic orbitals, belong to
+$W$, not to the metric.
 
 \textbf{[ESTABLISHED, from Avery]} Molecularly there is no closed-form
 counterpart to $\beta_\nu Z=p_\kappa/R_\nu$.  Because $V_0$ is multi-center, the
 weighting factors are obtained as the exact eigenvalues of the one-electron
 molecular Sturmian problem $[-\tfrac12\nabla^{2}-E+\beta v_0]\phi=0$ at fixed
 $E$, with a many-electron configuration's $\beta_\nu$ following from the
-isoenergetic condition on that spectrum.  This is what makes the molecular
-orbitals of Sec.~\ref{sec:molecular} $S_{\rm SW}$-orthonormal \emph{by
-construction} rather than by arrangement:\ potential-weighted orthonormality is
-automatic for eigenvectors of a common Sturmian problem with distinct $\beta$,
-and $S_{\rm SW}$ is the potential doing the weighting.  Two facts the paper had
-been carrying separately are one fact.
+isoenergetic condition on that spectrum.  Those exact molecular Sturmians are
+orthonormal in the \emph{full}-$V_0$ weight automatically, potential-weighted
+orthogonality holding for eigenvectors of a common Sturmian problem with distinct
+$\beta$.  The $S_{\rm SW}$-orthonormality of the molecular orbitals of
+Sec.~\ref{sec:manyelectron} has a different source:\ in the Galerkin form
+Eq.~\eqref{eq:sw} they are generalized eigenvectors of the pencil
+$(W,S_{\rm SW})$ at one $k$, hence orthogonal in both $W$ and $S_{\rm SW}$.
 
 The clean atomic result does not fully transfer to molecules.  The multi-center
 one-electron isoenergetic problem is again \emph{generalized},
@@ -904,27 +938,32 @@ $L_{\max}=2n/(\pi k)$ the longest wavelength the truncated basis carries, so
 the degeneracy switches on exactly when $L_{\max}$ exceeds the bond length ---
 which a complete basis must eventually do.
 
-\textbf{[MEASURED]} One reading of this degeneracy should be resisted, and
-the measurement excluding it is cheap.  Because the intra-center block is
-exactly the identity, the $A$-set is \emph{orthonormal} in the $S$ metric, so
-the deficit of a displaced Sturmian against the one-center span is directly
-computable:\ $\varepsilon_N^2=1-\sum_{i\le N}\langle\chi^A_i,\chi^B_1\rangle^2$
-by Bessel's inequality.  It does \emph{not} tend to zero.  It plateaus at
-$0.380$, $0.696$ and $0.907$ for $kR=1,2,4$, flat from $N=16$ to $N=256$
-(\texttt{tests/test\_paper60\_one\_direction.py}).  The one-center shared-scale
-set is therefore measurably far from complete \emph{in the molecular metric} ---
-between $38\%$ and $91\%$ of a displaced basis function lies outside its span
---- so the degeneracy is \emph{not} the statement that one center's span
-already contains the other's.  What $\sigma_{\max}\to1$ asserts is weaker and
-more useful:\ there exists a \emph{combination} in the $B$-span that the
-$A$-span captures, concentrated where the symbol attains its supremum.  The
-near-dependence is \emph{one direction}, not a diffuse property of the basis
---- which is why the fixed, geometry-independent rank-$(M-1)$ rotation of
-Sec.~\ref{sec:resource} removes it at $M=2$ and for non-collinear $M=3$, and why
-the coupling's participation ratio stays small.  It also qualifies the motivation offered below for this basis:\
-the Coulomb--Sturmians' completeness at a single scale is completeness in the
-\emph{atomic} metric, and the molecular problem is posed in $V_0$, where the
-one-center set is not complete.
+\textbf{[MEASURED]} On the $s$-sector the degeneracy is \emph{one
+direction}.  Because the intra-center block is exactly the identity, the
+$A$-set is \emph{orthonormal} in the $S$ metric, so the deficit of a displaced
+Sturmian against the one-center span is directly computable:\
+$\varepsilon_N^2=1-\sum_{i\le N}\langle\chi^A_i,\chi^B_1\rangle^2$ by Bessel's
+inequality.  On the $s$-sector it plateaus at $0.380$, $0.696$ and $0.907$
+for $kR=1,2,4$, flat from $N=16$ to $N=256$
+(\texttt{tests/test\_paper60\_one\_direction.py}), while $1-\sigma_{\max}$
+collapses as $N^{-2}$:\ what $\sigma_{\max}\to1$ asserts there is that one
+\emph{combination} in the $B$-span is captured, concentrated where the symbol
+attains its supremum, which is why the fixed, geometry-independent
+rank-$(M-1)$ rotation of Sec.~\ref{sec:resource} removes it at $M=2$ and for
+non-collinear $M=3$.  The plateau is \emph{not} an incompleteness of the
+Coulomb--Sturmian set in the molecular metric.  It is the $\ell=0$ projection:\
+a function centered at $B$ carries every $\ell$ about $A$, and an $s$-only
+span holds only the first.  On a full $\sigma$ basis ($n\le N$, $\ell<n$,
+$m=0$; position-space prolate quadrature,
+\texttt{debug/sturmian\_sigma\_basis\_sw.py}, which reproduces the $s$-sector
+plateau above to $10^{-3}$) the deficit falls without plateau, $0.158$,
+$0.090$, $0.064$, $0.048$, $0.037$ for $N=2$--$6$ at $kR=1$, and the
+near-dependence stops being one direction:\ at $kR=3$ the number of metric
+eigenvalues below $10^{-2}$ is $0,1,3,5,8$ for $N=2$--$6$, with the smallest
+falling faster than geometrically.  The conditioning law, the flat gerade sector and the
+preconditioner of this section and Sec.~\ref{sec:resource} are therefore
+$s$-sector results;\ the $\sigma$-basis measurements are collected at the end of
+this section.
 
 \textbf{[SYMBOLIC + MEASURED]} One residue is worth stating rather than
 hiding, and it has a closed form.  Our symbol does \emph{not} satisfy the
@@ -1100,7 +1139,7 @@ orthogonalization excluded below is excluded \emph{structurally}, not on
 conditioning grounds.  That specialization --- $m$ survives, within-$m$ $\ell$
 cannot, at every $\mathrm{cond}(S)>1$ --- is the part this paper claims.
 
-The molecular metric cost is therefore \emph{mitigated, not dissolved}:
+On the $s$-sector the molecular metric cost is therefore \emph{mitigated, not dissolved}:
 Eq.~\eqref{eq:sw} retains a polynomial conditioning multiplier that is worst where
 the chemistry lives, and it cannot simply be transformed away---conditioning is
 orthogonal-invariant, so the momentum-space form (which cancels the Fock Jacobian
@@ -1109,7 +1148,7 @@ an exact, grid-free \emph{evaluation} win, not a conditioning improvement.  Two
 genuine conditioning levers do exist: at larger separation $\mathrm{cond}(S)\to1$
 rapidly while the $L^2$ overlap cannot follow (its intra-center conditioning grows
 with basis regardless); and gerade/ungerade symmetry adaptation exactly
-block-diagonalizes $S$, isolating a gerade sector whose conditioning is flat
+block-diagonalizes $S$, isolating a gerade sector whose $s$-sector conditioning is flat
 ($\mathrm{cond}\approx2$, flat in basis and $R$) and confining all
 ill-conditioning to the ungerade sector---a free ${\sim}2\times$ effective-cost
 reduction in the homonuclear case.  The gerade flatness is itself derived:\ for
@@ -1125,6 +1164,75 @@ below are this constant read at small $n$.
 
 \textbf{[MEASURED]} This lever is a property of \emph{equivalent} centers, not of symmetry as such, and a probe on water ($\mathrm{H}_2\mathrm{O}$, $C_{2v}$: O${}+{}$2H) makes the distinction sharp. For an $s$-only shared-scale basis the only symmetry action is the H${}\leftrightarrow{}$H swap (O sits on the $C_2$ axis, fixed), so the totally-symmetric $A_1$ block---which holds the ground state---contains \emph{both} the O functions and the symmetric H combinations, and with them the O${}\leftrightarrow{}$H coupling between symmetry-\emph{inequivalent} centers that the group cannot remove. Building water's three-center SW metric exactly (every $s$--$s$ block depends only on inter-center distance) and adapting to $C_{2v}$, the $A_1$ ground-state block's conditioning \emph{grows}, $\mathrm{cond}(A_1)\sim N^{1.97}$ ($R^2=1.000$), essentially the raw metric ($19.9\to698$ over $N=6\to36$)---\emph{not} flat like the $\mathrm{H}_2^+$ gerade sector ($\mathrm{cond}\approx2$ throughout). Zeroing only the O${}\leftrightarrow{}$H block collapses it back to $\mathrm{cond}\approx2$, pinning that inequivalent-center coupling as the sole driver. The lever therefore does not transfer to a polyatomic with a symmetry-unique heavy center; it is confined to homonuclear-diatomic (equivalent-center) systems and their close analogs.
 The water block obeys the same exact law:\ the O${}\leftrightarrow{}$(H${}+{}$H) canonical correlations follow Eq.~\eqref{eq:sigma_law} with symbol curvature $c_{\rm sym}=R_{\rm OH}^2/24-R_{\rm HH}^2/96$ (exponent again exactly $2$;\ the fitted $1.97$ is the same pre-asymptotic reading), and $\mathrm{cond}(A_1)\approx1.12\times(1+\sigma_{\max})/(1-\sigma_{\max})$ with a constant prefactor---the canonical correlation is the whole story.  The structural reason the symmetry cannot help is now exact:\ O and H are not exchanged by any group element, so both $1\pm\sigma$ eigenvector families remain inside $A_1$ and no block absorbs the divergent factor.  A low-rank escape is also closed \emph{structurally}:\ the coupling's singular spectrum discretizes the range of the symbol (its effective rank grows linearly with basis size, participation ratio $\approx7$ at $N=36$), and since $1-\sigma_k\approx c_{\rm sym}(k\pi)^2/n^2$, an exact rank-$r$ (Woodbury) treatment of the top correlations divides the residual $\kappa$ by $(r+1)^2$ only---a useful constant factor ($\approx40$--$75\times$ in $d_{\rm inv}$ terms at $N=12$--$36$) but never a change of exponent;\ flattening would need $r\propto n$, i.e.\ classically diagonalizing the whole coupling, the sparsity-destroying orthogonalization already excluded.
+
+\textbf{[MEASURED]} \emph{The full $\sigma$ basis.}  Everything above in this
+section is measured on $s$-orbitals, where the Fock-sphere functions are the
+sine basis and the metric is a finite Toeplitz-minus-Hankel section.  Adding
+$\ell>0$ (the same $\mathrm{H}_2^+$ geometry, $n\le N$, $\ell<n$, $m=0$ per
+center, all integrals by position-space prolate quadrature,
+\texttt{debug/sturmian\_sigma\_basis\_sw.py}) changes the picture
+qualitatively.  At $kR=3$, $\mathrm{cond}(S)$ is $18$, $5.1\times10^{3}$,
+$1.2\times10^{7}$, $1.1\times10^{11}$ for $3$, $6$, $10$, $15$ functions per
+center, against $12$, $42$, $89$ for $4$, $8$, $12$ $s$-functions:\ the growth
+is exponential in the number of shells, not polynomial.  The gerade sector is
+no refuge:\ its conditioning reads $2.3$, $21$, $7.4\times10^{3}$,
+$2.1\times10^{7}$ on the same ladder, against $2.0$--$2.4$ on the $s$-sector.
+The mechanism is ordinary overcompleteness rather than a symbol zero:\ with
+$\ell>0$ each center's set approaches completeness in the molecular metric
+(the Bessel deficit above falls toward zero), so each center's span increasingly
+contains the other's, and the number of near-null directions grows with the
+basis.  This is the regime Avery and Avery describe for the two-center density
+expansion, which they describe as increasingly ill-conditioned through
+overcompleteness of the basis at small $kR$ and treat by phasing out the
+smallest eigenvectors~\cite{avery2013,avery2017} --- a qualitative
+statement with a remedy, not a growth law.  The accuracy bought is large:\ the
+same ladder takes the $\mathrm{H}_2^+$ error at $R=2$~bohr from
+$8.5\times10^{-4}$ to $5.4\times10^{-6}$~Ha (Sec.~\ref{sec:obstruction}), where
+the $s$-only basis of Sec.~\ref{sec:resource} is in error by $1.3\%$.  The
+$s$-sector levers --- the flat gerade constant, the tridiagonal preconditioner
+matched to a single symbol zero, the rank-$(M-1)$ rotation --- rest on the
+one-direction structure that $\ell>0$ removes, and are not established beyond
+the $s$-sector.
+
+\textbf{[DERIVED + MEASURED]} On the $\sigma$ basis no preconditioner of that
+kind exists, and the reason is exact.  The Sturmian equation turns the
+own-center-weighted metric into $\langle f|(p^2+k^2)/2k^2|g\rangle$, one inner
+product for every center;\ in it each center's axial Sturmian set is orthonormal
+and complete, and the other center's set is its image under the translation
+$T_R$, which commutes with $p^2$ and is therefore unitary in that metric (the
+reading of the Shibuya--Wulfman operator as a translation is prior art, as
+stated above~\cite{shibuya1965}).  The two-center metric is thus a finite
+section of $\bigl(\begin{smallmatrix}I&U\\U^\ast&I\end{smallmatrix}\bigr)$ with $U$
+unitary, an operator whose spectrum is $\{0,2\}$ with infinite multiplicity:\
+half its directions are genuine redundancy, not a symbol zero, and in the
+gerade and ungerade blocks $I\pm C\Pi$ the cross block tends strongly (and
+slowly) to the inversion about the bond midpoint, an involution.  Measured, the fraction of cross-block
+singular values above $0.9$ rises from $0$ to $0.57$ over $3$ to $28$
+functions per center at $kR=3$ ($0.33\to0.75$ at $kR=1$), the soft vectors mix
+several $\ell$ (none more than $75\%$ one $\ell$), and each fixed-$\ell$ diagonal block of the gerade metric grows
+only slowly (worst $\mathrm{cond}\le53$ through $28$ functions per center at
+$kR=1$) while the whole block grows exponentially:\ the softness is between
+different $\ell$.
+Two consequences follow.  A center-block-diagonal preconditioner provably
+gains nothing:\ for the top singular pair $Cv=\sigma u$ the vectors
+$(u,\pm v)$ have equal $P$-norm and $S$-norms $2(1\pm\sigma)$, so
+$\mathrm{cond}(P^{-1}S)\ge\mathrm{cond}(S)$ for any such $P$.  And per-$\ell$,
+per-shell or band-Toeplitz preconditioners, including the $s$-sector
+$\mathrm{tri}(1,2,1)$, change the conditioning by constant factors at most
+(measured through $21$ functions per center),
+and fixed-rank deflation cannot bound it, since the rank needed for
+$\mathrm{cond}\le100$ grows with the basis.  What works is Avery and Avery's
+remedy, phasing out the smallest eigenvectors (canonical orthogonalization):\
+at threshold $10^{-6}$ it holds the conditioning at $10^{6}$ with a measured
+$\mathrm{H}_2^+$ accuracy loss below $10^{-7}$~Ha through $36$ functions per center, where the
+undropped metric exceeds $10^{15}$;\ but it removes directions rather than
+preconditioning them, needs a classical eigendecomposition of the one-electron
+metric, and each fixed threshold tested ($10^{-2}$--$10^{-4}$) stalls convergence
+once the basis grows, so the threshold must fall with the basis.  The large-$R$ lever survives only as a
+delay:\ at $kR=8$ the conditioning is still exponential in the number of
+shells ($1.2\to3.3\times10^{9}$).  The $\sigma$-basis numbers quoted earlier in
+this section (through $15$ functions per center) are reproduced to their printed digits by an independent quadrature-free route
+(exact polynomial moments at $60$ digits).
 
 \subsection{Resource estimate: the gerade lever is the equivalent-center payoff}
 \label{sec:resource}
@@ -1153,7 +1261,7 @@ basis limitation, above the exact value)---and pins $\lambda_{\rm eff}=k_{\max}\
 \textbf{[RESOURCE MODEL, on the measured $\kappa$]} Table~\ref{tab:resource} gives the counts.
 Three readings: (i) the metric-free atomic case ($\kappa=1$, $d_{\rm inv}=0$) is recovered as
 the zero-penalty limit; (ii) the full SW metric costs $d_{\rm inv}\sim10^3$ by $N=16$; but
-(iii) the $\mathrm{H}_2^+$ ground state $\sigma_g$ is \emph{gerade}, and the gerade sector's
+(iii) the $\mathrm{H}_2^+$ ground state $\sigma_g$ is \emph{gerade}, and on this $s$-only basis the gerade sector's
 conditioning is flat ($\kappa_g\approx2$ across $N=4$--$20$), so the ground-state $S^{-1/2}$
 costs $d_{\rm inv}\approx16$--$18$ \emph{independent of basis size}---a ${\sim}60\times$
 reduction versus the full metric at $N=16$, on a register halved to
@@ -1190,11 +1298,12 @@ comparison and carries an honest caveat: the Gaussian conditioning is ratio-depe
 ratio-$1.6$ set (approaching completeness) blows up as $\mathrm{cond}\sim N^{6}$
 ($\kappa\!\sim\!10^5$ at $N=16$), a sparser ratio-$3$ set grows only as $N^{1.4}$ but leaves
 coverage gaps and still carries ${\sim}10\times$ the SW prefactor.  This is the classic Gaussian
-coverage-versus-linear-dependence trade-off; the Coulomb--Sturmians soften it rather than escaping it, because they are a
-set complete at one scale \emph{in the atomic metric} --- a property the
-molecular problem does not inherit:\ the molecular metric is itself polynomially conditioned ($\mathrm{cond}(S)\sim
-N^{1.85}$ on this window;\ derived asymptote $N^2$, Eq.~\eqref{eq:sigma_law}) with a small
-prefactor.  Production Gaussian simulation of course absorbs the overlap
+coverage-versus-linear-dependence trade-off; the Coulomb--Sturmians soften it on the
+$s$-sector rather than escaping it --- the $s$-sector metric is polynomially conditioned
+($\mathrm{cond}(S)\sim N^{1.85}$ on this window;\ derived asymptote $N^2$,
+Eq.~\eqref{eq:sigma_law}) with a small prefactor --- and with $\ell>0$ they
+meet the same trade in full, since the $\sigma$-basis metric's conditioning is
+exponential in the number of shells (Sec.~\ref{sec:molecular}).  Production Gaussian simulation of course absorbs the overlap
 classically in a prior mean-field step; the metric penalty priced here is precisely the cost of
 the on-device angular generation that motivated the Sturmian encoding in the first place.
 
@@ -1240,7 +1349,7 @@ lower-bounds the number of block-encoding queries for an eigenvalue
 transformation on the \emph{promised spectral interval}, and preconditioning
 changes that interval --- from $[\kappa^{-1},1]$ to $[1/2.23,1]$ --- rather
 than the polynomial approximated on it.  The statement that the metric cost is ``mitigated, not
-dissolved'' is therefore \emph{too pessimistic on the conditioning axis}, and
+dissolved'' is therefore, on the $s$-sector, \emph{too pessimistic on the conditioning axis}, and
 should be read as applying to the two axes below.
 
 \textbf{[MEASURED]} What preconditioning does \emph{not} buy is locality, and
@@ -1264,7 +1373,7 @@ then makes the
 holomorphic and Riesz calculi agree, so $z^{-1/2}$ is available exactly when
 $0\notin\mathrm{spec}$.  The escape is the spectrum touching zero, not the
 decay.  Together with the block-structure
-result above, the honest summary is that the metric's \emph{conditioning} cost
+result above, the honest summary on the $s$-sector is that the metric's \emph{conditioning} cost
 is removable, its \emph{locality} cost is capped by the chirp, and its
 \emph{$\ell$-block} cost is not a conditioning effect at all.
 
@@ -1554,7 +1663,7 @@ isoenergetic secular matrix, not of the basis, and it does not survive the loss 
 $T^0$.  For molecules the resource question therefore answers in the ordinary way: the block-encoding
 cost scales polynomially, and the metric levers of Secs.~\ref{sec:resource}--\ref{sec:manyelectron}
 (the gerade sector, large-$R$, one-electron-only metric) are the real savings, not a sublinear
-matrix.
+matrix --- the gerade and large-$R$ levers measured on the $s$-sector only (Sec.~\ref{sec:molecular}).
 
 \section{Conclusion and scope}
 \label{sec:conclusion}
@@ -1579,7 +1688,7 @@ one;\ read as a cheap fixed-accuracy tier, and especially as an
 literature has always been strongest --- it is a real operating point.  The open
 question we leave is whether a weighting potential of different radial shape can
 lower the ground-state floor without breaking Eq.~\eqref{eq:W_diagonal}.  \emph{For molecules}, the
-Shibuya--Wulfman metric returns; it is genuinely better-conditioned than the
+Shibuya--Wulfman metric returns; on the $s$-sector it is genuinely better-conditioned than the
 $L^2$ overlap---its intra-center block is the identity---and much better at large
 separation, but its inter-center coupling still costs conditioning that grows
 with basis size.  Two qualifications lift this from a caveat to a payoff.  The first is
@@ -1597,11 +1706,16 @@ size without requiring equivalent centers, and it reaches water's $A_1$ block
 (Sec.~\ref{sec:resource}), provided the band is aligned to the symbol's null
 direction --- the same band applied in the unrotated frame is worse than leaving
 the metric untreated.  Established on $s$-sector shared-scale bases at $M=2$ and non-collinear
-$M=3$;\ the collinear case is open and is not claimed.  And the penalty does not compound with electron number: the
+$M=3$;\ the collinear case is open and is not claimed.  Neither lever survives
+$\ell>0$ as stated:\ on a full $\sigma$ basis the metric's conditioning grows
+exponentially in the number of shells, gerade sector included, because the
+one-center set approaches completeness in the molecular metric
+(Sec.~\ref{sec:molecular}) --- which is also where the accuracy is.  And the penalty does not compound with electron number: the
 Shibuya--Wulfman metric is discharged once, at the one-electron molecular-orbital construction,
 after which the many-electron secular equation carries an identity metric
 (Sec.~\ref{sec:manyelectron})---the metric cost is one-electron, not $N$-electron.  The atomic case is a result;\ the molecular case is a frontier that is
-\emph{removable on the conditioning axis} within that scope, capped on locality
+\emph{removable on the conditioning axis} within the $s$-sector, and beyond it reducible, among the
+levers tested, by dropping redundant directions (no preconditioner of that kind exists there), capped on locality
 by the symbol's other pole, and structurally closed on $\ell$-sparsity.
 
 We have not run the algorithm on hardware, and we do not claim a resource
@@ -1621,9 +1735,11 @@ and the results we claim as our own, which are (the list is enumerated,
 not exhaustive of the paper's smaller observations):\ the scale-lock identity
 Eq.~\eqref{eq:scale_lock} together with the one-body Coulomb metric
 Eq.~\eqref{eq:W_diagonal} it rests on;\ the interlacing bound
-Eq.~\eqref{eq:no_selection};\ the identification of the Shibuya--Wulfman matrix
-\emph{as} the $V_0$-weighted overlap in Eq.~\eqref{eq:general_v0};\ and the
-variational bound for the fixed-scale metric-free problem.  Developed with an AI-augmented workflow under
+Eq.~\eqref{eq:no_selection};\ and the variational bound for the fixed-scale
+metric-free problem.  The general-$V_0$ secular equation
+Eq.~\eqref{eq:general_v0}, the molecular identity-form secular equation and the
+nuclear-attraction form of the Shibuya--Wulfman integrals are
+theirs~\cite{avery2017}.  Developed with an AI-augmented workflow under
 principal-investigator direction, with the headline numerical claims validated against
 analytical benchmarks and a regression test suite.
 \end{acknowledgments}
@@ -1675,6 +1791,15 @@ J.~Avery, \textit{Hyperspherical Harmonics: Applications in Quantum Theory}
 \bibitem{avery2006}
 J.~E.~Avery and J.~S.~Avery, \textit{Generalized Sturmians and Atomic Spectra}
 (World Scientific, Singapore, 2006).
+
+\bibitem{avery2017}
+J.~E.~Avery and J.~S.~Avery, \textit{Hyperspherical Harmonics and Their
+Physical Applications} (World Scientific, Singapore, 2017),
+doi:10.1142/10690.
+
+\bibitem{avery2013}
+J.~E.~Avery, ``Fast electron repulsion integrals for molecular Coulomb
+Sturmians,'' Adv.\ Quantum Chem.\ \textbf{67}, 129--151 (2013).
 
 \bibitem{averyphd}
 J.~E.~Avery, \textit{New Computational Methods in the Quantum Theory of

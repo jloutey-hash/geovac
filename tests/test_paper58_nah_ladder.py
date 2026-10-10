@@ -270,3 +270,74 @@ def test_paper58_nah_well_minimum_reproduces():
     assert d_e_eV == pytest.approx(1.071, abs=5e-3), (
         f"NaH D_e = {d_e_eV:.4f} eV vs Table II 1.071"
     )
+
+
+def _lsq_shapes(n_gauss):
+    sh = {}
+    for kind, (l, n_r) in (("1s", (0, 1)), ("2s", (0, 2)), ("2p", (1, 2)), ("3s", (0, 3))):
+        a, dco, _q = E.fit_sto_shape(l, n_r, n_gauss=n_gauss)
+        sh[kind] = (a, dco)
+    return sh
+
+
+def _parabola_min(grid, y):
+    i = int(np.argmin(y))
+    assert 0 < i < len(y) - 1, "no interior minimum"
+    x0, x1, x2 = grid[i - 1], grid[i], grid[i + 1]
+    y0, y1, y2 = y[i - 1], y[i], y[i + 1]
+    den = (x0 - x1) * (x0 - x2) * (x1 - x2)
+    a = (x2 * (y1 - y0) + x1 * (y0 - y2) + x0 * (y2 - y1)) / den
+    b = (x2 * x2 * (y0 - y1) + x1 * x1 * (y2 - y0) + x0 * x0 * (y1 - y2)) / den
+    c = y1 - a * x1 * x1 - b * x1
+    r = -b / (2 * a)
+    return r, a * r * r + b * r + c
+
+
+def _converged_row(n_gauss):
+    sh = _lsq_shapes(n_gauss)
+    o0 = np.zeros(3)
+    s, h, g = E.integral_set_md(_na_orbitals(o0, ZETA_NA, sh), [(o0, Z_NA)])
+    ht, gt = E.transform_integrals(E.lowdin_orbitals(s), h, g)
+    e_na = float(E.fci_ground(ht, gt, 11))
+    chi = _h_orbital(o0, ZETA_H, sh)
+    s1, h1, _ = E.integral_set_md([chi], [(o0, 1.0)])
+    e_diss = e_na + float(h1[0, 0] / s1[0, 0])
+    grid = np.arange(3.25, 4.51, 0.25)
+    d3 = _ladders()["cov+ionH (3 dets)"]
+    y3, yl, yf = [], [], []
+    for R in grid:
+        s, h, g, vnn = _nah_integrals(float(R), sh)
+        y3.append(E.noci_ground_gensc(d3, s, h, g)[0] + vnn)
+        ht, gt = E.transform_integrals(E.lowdin_orbitals(s), h, g)
+        yl.append(E.noci_ground_gensc(d3, np.eye(7), ht, gt)[0] + vnn)
+        yf.append(E.fci_ground(ht, gt, 12) + vnn)
+    ev = 27.211386245988
+    r3, m3 = _parabola_min(grid, np.array(y3))
+    _rl, ml = _parabola_min(grid, np.array(yl))
+    _rf, mf = _parabola_min(grid, np.array(yf))
+    dfci = (e_diss - mf) * ev
+    return {"E_Na": e_na, "R3": r3, "D3": (e_diss - m3) * ev, "Dl": (e_diss - ml) * ev,
+            "Dfci": dfci}
+
+
+@pytest.mark.slow
+def test_paper58_nah_shape_sensitivity_is_percent_level():
+    """Paper 58 sec:nah [MEASURED] shape-sensitivity sentence: with least-squares
+    Gaussian fits of EVERY Slater shape (8 and 12 Gaussians, mutually agreeing)
+    E(Na) = -161.119 Ha, the 3-det row is 3.744 a0 / 1.082 eV / 92.0%, the
+    Loewdin 3-det row 0.163 eV / 13.9%, and the FCI binding is unchanged (1.175).
+
+    Wrong answers rejected: "the 35 mHa gap to Clementi is the exponents" (E_Na
+    would stay near -161.0845); "the fit choice is immaterial" (the Loewdin row
+    would stay at 0.136); "the shift is fit-depth noise" (8 vs 12 would disagree).
+    """
+    r8, r12 = _converged_row(8), _converged_row(12)
+    for k in ("D3", "Dl", "Dfci"):
+        assert abs(r8[k] - r12[k]) < 1e-3, (k, r8[k], r12[k])
+    assert r12["E_Na"] == pytest.approx(-161.119, abs=1.5e-3)
+    assert r12["R3"] == pytest.approx(3.744, abs=2e-3)
+    assert r12["D3"] == pytest.approx(1.082, abs=2e-3)
+    assert 100 * r12["D3"] / r12["Dfci"] == pytest.approx(92.0, abs=0.15)
+    assert r12["Dl"] == pytest.approx(0.163, abs=2e-3)
+    assert 100 * r12["Dl"] / r12["Dfci"] == pytest.approx(13.9, abs=0.15)
+    assert r12["Dfci"] == pytest.approx(1.175, abs=1e-3)
