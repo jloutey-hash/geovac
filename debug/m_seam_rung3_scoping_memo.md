@@ -128,3 +128,15 @@ to l = 55, with exact second-order perturbation theory at linear geometry:
 - A two-state model gives 0.344: the right sign and 77% of the size.
 - Rung 3's route needs a larger proton basis to place that level; the one-centre grid
   is already converged and is the referee.
+
+## 9. Rung 5 (same day): Walsh's rule for AH2
+
+`tests/test_walsh_ah2.py`. One electron in parameter-free screened atomic potentials
+(Fermi-Amaldi), real bond lengths. Converged slopes reproduce Walsh's diagram:
+3a1 falls (-0.180), 1b2 rises (+0.145), 1b1 flat, 2a1 slightly falls (H2O).
+- Walsh orbital sum: H2O -0.165 (bends, robust).
+- BeH2 ~ -0.005: its two sigma slopes cancel, so the orbital sum alone does not
+  decide BeH2. Adding the H-H repulsion gives the right split (BeH2 linear, H2O bent),
+  but not water's angle.
+- Next lever, if pursued: a real total energy (self-consistent field in the same grid),
+  which replaces the orbital-sum heuristic.
