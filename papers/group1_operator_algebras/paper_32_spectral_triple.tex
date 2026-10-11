@@ -1808,6 +1808,43 @@ electronic conical intersection, not an identity with it.  (Computed and
 regression-pinned in \texttt{tests/test\_paper32\_composition.py} on
 validated two-center overlaps, with the commutant routine self-validated
 on cases of known answer; chronicle in CHANGELOG v5.1.0.)
+
+\textbf{[SYMBOLIC + MEASURED]} The Hamiltonian face of the same welding is
+the Renner effect~\cite{renner1934}, and its bookkeeping splits along the
+forced/free seam.  Take one electron, an apex charge $Z_c$ and two unit
+charges at distance $R$, bent by $s$ (the sine of half the deviation from
+linear).  A $|m| = \Lambda$ pair then opens at order $s^{2\Lambda}$:\ the
+bend changes $m$ by one unit per power of $s$, and $+\Lambda$ reaches
+$-\Lambda$ in $2\Lambda$ steps.  On a single shell the angular prices are
+the exact rationals $6/5$ ($\Lambda = 1$) and $5/6$ ($\Lambda = 2$)
+(\texttt{tests/test\_renner\_teller\_m\_splitting.py}).  These are forced.
+The coefficient itself is free.  In closed-form bases its radial weights
+carry exponentials in $R$ and no $\pi$
+(\texttt{tests/test\_renner\_teller\_rung2.py}).  At $Z_c = 1$, $R = 2$ the
+converged one-centre referee gives $0.44941$ per $s^2$ for
+$E_{\rm in} - E_{\rm out}$.  That referee uses a complete finite-element
+radial basis and partial waves to $l = 55$, with exact second-order
+perturbation theory checked against finite bends
+(\texttt{tests/test\_renner\_teller\_rung4.py}).
+
+Two structural facts survive the numbers.  First, the $|m| = 2$ relay
+shifts both $\pi$ components equally and cancels exactly from the
+splitting.  Second, one $\sigma$ partner carries most of the $\sigma$
+relay, and which side of the $\pi$ level it sits on fixes the sign.  The
+partner changes with $R$:\ it is the protons' symmetric $1s$ combination
+for $R = 2$--$6$, and the apex's $n = 2$, $l = 0$ level ($\pi$'s former
+$l$-sibling) for $R \ge 8$.  It crosses $\pi$ at $R = 1.667$, where the
+coefficient diverges and changes sign.
+
+The same machinery with parameter-free screened atomic potentials
+(Fermi--Amaldi self-interaction factor) reproduces Walsh's AH$_2$
+diagram~\cite{walsh1953} in sign and order
+(\texttt{tests/test\_walsh\_ah2.py}):\ $3a_1$ falls, $1b_2$ rises, $1b_1$ is
+flat.  The doubly occupied orbital sum bends H$_2$O robustly.  For BeH$_2$
+it nearly cancels, so in this model the orbital-sum rule alone does not
+decide BeH$_2$.  None of this is new chemistry.  What the framework adds is
+the sort:\ label survival, opening order and filling count are forced;
+slopes and partner positions are free.
 \end{remark}
 
 \begin{remark}[The configuration operator's Berry curvature: a flat $\mathbb{Z}_2$ bundle over nuclear geometry]
@@ -5647,6 +5684,16 @@ questions instead of free-floating conjectures.
 
 % ===================================================================
 \begin{thebibliography}{99}
+
+\bibitem{renner1934}
+R.~Renner, ``Zur Theorie der Wechselwirkung zwischen Elektronen- und
+Kernbewegung bei dreiatomigen, stabf\"ormigen Molek\"ulen,''
+\textit{Z.~Phys.}\ \textbf{92}, 172--193 (1934).
+
+\bibitem{walsh1953}
+A.~D.~Walsh, ``The electronic orbitals, shapes, and spectra of polyatomic
+molecules.\ Part~I.\ AH$_2$ molecules,''
+\textit{J.~Chem.\ Soc.}\ 2260--2266 (1953).
 
 \bibitem{connes1995}
 A.~Connes, ``Noncommutative geometry and reality,''
