@@ -1,0 +1,50 @@
+[
+ {
+  "basis": "sto_dzp",
+  "frozen_core": 0,
+  "qubits": 48,
+  "n_pauli": 128793,
+  "one_norm": 754.6256177640487,
+  "identity": 18.87290654120804
+ },
+ {
+  "basis": "sto_dzp",
+  "frozen_core": 1,
+  "qubits": 46,
+  "n_pauli": 107382,
+  "one_norm": 706.280943087507,
+  "identity": 7.4590593978643085
+ },
+ {
+  "basis": "ccpvdz",
+  "frozen_core": 0,
+  "qubits": 48,
+  "n_pauli": 128793,
+  "one_norm": 716.9514530978295,
+  "identity": 21.93442802159197
+ },
+ {
+  "basis": "ccpvdz",
+  "frozen_core": 1,
+  "qubits": 46,
+  "n_pauli": 107382,
+  "one_norm": 674.2948206241458,
+  "identity": 9.675820407603183
+ },
+ {
+  "basis": "ccpvtz",
+  "frozen_core": 0,
+  "qubits": 116,
+  "n_pauli": 4281643,
+  "one_norm": 7858.635453170004,
+  "identity": 666.5931519042269
+ },
+ {
+  "basis": "ccpvtz",
+  "frozen_core": 1,
+  "qubits": 114,
+  "n_pauli": 3983652,
+  "one_norm": 7653.486712510515,
+  "identity": 679.0982882898136
+ }
+]

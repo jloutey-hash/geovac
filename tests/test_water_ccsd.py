@@ -575,6 +575,73 @@ def radial_atom(s_prims, p_prims, Z=8.0, q_p=4, n_s_closed=2, tol=1e-12, maxit=5
     raise RuntimeError('radial atom did not converge')
 
 
+# ================================================================ qubit resources
+def freeze_core(h, g, nfc):
+    """Fold the lowest nfc MOs (doubly occupied) into a constant + effective one-body
+    operator.  h, g: MO basis, chemist (pq|rs).  Returns (h_act, g_act, E_core)."""
+    if nfc == 0:
+        return h, g, 0.0
+    c, a = slice(0, nfc), slice(nfc, None)
+    E = 2 * np.trace(h[c, c]) + 2 * np.einsum('iijj->', g[c, c, c, c]) - np.einsum('ijji->', g[c, c, c, c])
+    ha = h[a, a] + 2 * np.einsum('iipq->pq', g[c, c, a, a]) - np.einsum('ipqi->pq', g[c, a, a, c])
+    return ha, g[a, a, a, a], float(E)
+
+
+def jw_pauli_stats(h, g, const, tol=1e-10):
+    """Jordan-Wigner Pauli-term count and 1-norm of the spin-free real Hamiltonian
+    H = const + sum h_pq a+a + 1/2 sum (pr|qs) a+_p a+_q a_s a_r, spin-orbitals P = 2p+sigma.
+    Closed-form coefficients per string class, so no fermion-operator expansion:
+      I, Z_P, Z_P Z_Q            from U_PQ = (PP|QQ) - (PQ|QP)
+      hop(Q,S) (XX and YY)       1/2 h_QS + 1/4 sum_P W_QS,P
+      hop(Q,S) x Z_P             -1/4 W_QS,P,   W = (PP|QS) - (PQ|PS)
+      four distinct i<j<k<l      a=(ij|kl), b=(ik|jl), c=(il|jk):
+                                 XXXX,YYYY (a-c)/4; XXYY,YYXX (a-b)/4; XYYX,YXXY (b-c)/4
+    Validated against openfermion (test_jw_pauli_stats_matches_openfermion).
+    Returns n_pauli (identity counted), one_norm (identity excluded), identity."""
+    M = h.shape[0]
+    n = 2 * M
+    sp = np.arange(n) // 2
+    sg = np.arange(n) % 2
+    same = sg[:, None] == sg[None, :]
+    H1 = h[sp][:, sp] * same
+    J = np.einsum('ppqq->pq', g)[sp][:, sp]
+    K = np.einsum('pqqp->pq', g)[sp][:, sp] * same
+    U = J - K
+    np.fill_diagonal(U, 0.0)
+    iu = np.triu_indices(n, 1)
+    ident = const + 0.5 * np.trace(H1) + 0.25 * U[iu].sum()
+    cz = -0.5 * np.diag(H1) - 0.25 * U.sum(1)
+    czz = 0.25 * U[iu]
+    count, norm = [int(np.sum(np.abs(cz) > tol)), int(np.sum(np.abs(czz) > tol))], [np.abs(cz).sum(), np.abs(czz).sum()]
+    # hops: same-spin pairs Q<S, spectator P
+    Qi, Si = iu[0][same[iu]], iu[1][same[iu]]
+    q, s = sp[Qi], sp[Si]
+    Pi = np.arange(n)
+    W = g[sp[Pi][None, :], sp[Pi][None, :], q[:, None], s[:, None]] \
+        - (sg[Pi][None, :] == sg[Qi][:, None]) * g[sp[Pi][None, :], q[:, None], sp[Pi][None, :], s[:, None]]
+    W[(Pi[None, :] == Qi[:, None]) | (Pi[None, :] == Si[:, None])] = 0.0
+    chop = 0.5 * h[q, s] + 0.25 * W.sum(1)
+    count += [2 * int(np.sum(np.abs(chop) > tol)), 2 * int(np.sum(np.abs(W) > 4 * tol))]
+    norm += [2 * np.abs(chop).sum(), 0.5 * np.abs(W).sum()]
+    # four distinct spin-orbitals, chunked over the first index
+    for i in range(n - 3):
+        jkl = np.array([(j, k, l) for j in range(i + 1, n) for k in range(j + 1, n) for l in range(k + 1, n)])
+        if len(jkl) == 0:
+            continue
+        j, k, l = jkl.T
+
+        def chem(A, B, C, D):
+            ok = (sg[A] == sg[B]) & (sg[C] == sg[D])
+            return np.where(ok, g[sp[A], sp[B], sp[C], sp[D]], 0.0)
+        ii = np.full_like(j, i)
+        a, b, c = chem(ii, j, k, l), chem(ii, k, j, l), chem(ii, l, j, k)
+        for v in (a - c, a - b, b - c):
+            v = 0.25 * np.abs(v)
+            count.append(2 * int(np.sum(v > tol)))
+            norm.append(2 * v.sum())
+    return {'n_pauli': int(sum(count)) + 1, 'one_norm': float(sum(norm)), 'identity': float(ident)}
+
+
 # ================================================================ tests
 CRAWFORD_NUC = [(np.array([0.0, -0.143225816552, 0.0]), 8.0),
                 (np.array([1.638036840407, 1.136548822547, 0.0]), 1.0),
@@ -651,3 +718,42 @@ def test_frozen_core_ccsd_equals_active_space_fci():
     ga = np.einsum('pqrs,pa,qb,rc,sd->abcd', g, Ca, Ca, Ca, Ca, optimize=True)
     Efci = GE.fci_ground(heff, ga, 10 - 2 * fc) + Ecore + vnn(nuc)
     assert abs(r['CCSD'] - Efci) < 1e-9
+
+
+def _openfermion_stats(h, g, const, tol=1e-10):
+    from openfermion import InteractionOperator, jordan_wigner
+    M = h.shape[0]
+    n = 2 * M
+    sp, sg = np.arange(n) // 2, np.arange(n) % 2
+    same = (sg[:, None] == sg[None, :]).astype(float)
+    one = h[sp][:, sp] * same
+    # coefficient of a+_P a+_Q a_R a_S is 1/2 <PQ|SR> = 1/2 (PS|QR)
+    two = 0.5 * g[np.ix_(sp, sp, sp, sp)].transpose(0, 2, 3, 1) \
+        * same[:, None, None, :] * same[None, :, :, None]
+    q = jordan_wigner(InteractionOperator(const, one, two))
+    terms = {k: v for k, v in q.terms.items() if abs(v) > tol}
+    return len(terms), sum(abs(v) for k, v in terms.items() if k), terms.get((), 0.0).real
+
+
+def test_jw_pauli_stats_matches_openfermion():
+    """Independent route for the closed-form counter: openfermion's full Jordan-Wigner
+    expansion of the same MO Hamiltonian (STO-3G water, all-electron and frozen-core,
+    14 and 12 qubits).  Rejects a wrong 4-site pattern map (e.g. XYXY kept), a dropped
+    hop x Z_P class, a wrong exchange spin rule, or a wrong frozen-core fold."""
+    nuc = CRAWFORD_NUC
+    fns, T = gaussian_basis(_basis('sto-3g_H_O.json'), nuc)
+    S, h, g = ao_integrals(fns, nuc, T)
+    E, eps, C = rhf(S, h, g, 10, vnn(nuc))
+    hm = C.T @ h @ C
+    gm = np.einsum('pqrs,pi,qj,rk,sl->ijkl', g, C, C, C, C, optimize=True)
+    for fc in (0, 1):
+        ha, ga, c0 = freeze_core(hm, gm, fc)
+        st = jw_pauli_stats(ha, ga, c0 + vnn(nuc))
+        n_of, norm_of, id_of = _openfermion_stats(ha, ga, c0 + vnn(nuc))
+        assert st['n_pauli'] == n_of
+        assert abs(st['one_norm'] - norm_of) < 1e-9
+        assert abs(st['identity'] - id_of) < 1e-9
+        o = slice(0, 5 - fc)     # the folded Hamiltonian still gives the RHF energy
+        Ehf = (c0 + vnn(nuc) + 2 * np.trace(ha[o, o])
+               + 2 * np.einsum('iijj->', ga[o, o, o, o]) - np.einsum('ijji->', ga[o, o, o, o]))
+        assert abs(Ehf - E) < 1e-9

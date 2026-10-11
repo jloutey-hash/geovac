@@ -17,7 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Result.** Frozen-core CCSD(T) is -76.2818 (Slater DZP) vs -76.2410 for cc-pVDZ, or -76.2422 with its polarization re-optimized: 40.8 mHa lower at equal size. Of that, 28.8 mHa is SCF; RHF is within 1.5 mHa of cc-pVTZ.
   - **Ladder.** The cc-pVTZ anchor (58 functions) is -76.3322, so the Slater DZP covers ~94% of the DZ-to-TZ SCF gap and ~45% of the correlated gap. The Gaussian-fit evaluator is converged to 0.07 mHa (12 vs 16 Gaussians).
   - **New exact radial atom.** An exact one-centre radial average-of-configuration HF over Slater primitives (closed-form F^k/G^k). It gives He at -729/256 exactly, and for Ne it is the limit of the 3D route, approached from above.
-  - Memo `debug/water_barrier_memo.md`. Prior-art check of the correlated STO comparison is owed before any paper claim.
+  - **Qubit resources (step 3).** The Jordan-Wigner Pauli count and 1-norm come from a closed-form counter (`jw_pauli_stats`). It is validated against openfermion's full JW (five planted errors caught), and its frozen-core cc-pVDZ count of 107,382 matches Trenev et al. 2025 Table 5 exactly.
+    - Slater DZP and cc-pVDZ have *identical* Pauli counts (107,382 fc / 128,793 all-electron), because the count is set by orbital count and C2v symmetry, not by radial shape.
+    - The Slater 1-norm is 4.7% higher (706 vs 674 Ha, fc).
+    - cc-pVTZ needs 114 qubits, 3.98M terms and a 1-norm of 7,653 Ha.
+    - So the 41 mHa gain is nearly free in qubit cost. A true matched-accuracy Gaussian comparison is not yet done.
+  - **Prior art (moderate search).**
+    - The SCF advantage of STOs is textbook.
+    - The design recipe has precedent: Ema et al. JCC 2003, Förster-Visscher JCTC 2021.
+    - No matched-size correlated STO-vs-GTO head-to-head and no qubit-resource comparison were found.
+    - Persson-Taylor 1996 is unverified.
+  - Memo `debug/water_barrier_memo.md`.
 - **Negative results.**
   - An *uncontracted* 3s2p optimized on the atom spends its second s function on the core, leaving single-zeta valence. This is why general contraction is needed.
   - The fractional-SCF open-shell atom energy was 10.7 mHa above the variational average energy (non-variational orbitals).

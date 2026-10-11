@@ -96,16 +96,46 @@ all-electron ("ae").
   The exponential shape buys mainly the mean-field part (cusp + tail). Correlation
   is bought by the number of correlating functions, and there the gain is smaller
   (12 mHa).
-- Prior art (to check before any paper claim): Slater bases are known to be
-  more compact per function. The quantitative DZP-vs-cc-pVDZ correlated comparison
-  under one design rule has not yet been checked against the STO literature
-  (e.g. ADF / SMILES-type STO basis sets).
+- Prior art (checked 2026-10-11; moderate web search, primary sources where
+  reachable). The SCF half ("STO beats GTO per function") is textbook and not new.
+  The design recipe has precedent: Ema, ..., Fernandez Rico, Paldus, J. Comput.
+  Chem. 24, 859 (2003), doi:10.1002/jcc.10227 (STO valence sets for H-Ne with HF+CI-
+  optimized exponents, atoms only); Forster & Visscher, JCTC 2021,
+  doi:10.1021/acs.jctc.1c00308 (correlation-consistent-style STO sets for GW). The
+  closest molecular STO-vs-cc-pVXZ paper (Fernandez Rico et al., IJQC 100, 221 (2004),
+  doi:10.1002/qua.20088) compares forces, not correlated energies. No matched-size
+  correlated (CCSD(T)) STO-vs-GTO head-to-head was found, nor the SCF-vs-correlated
+  split of the DZ->TZ gap. The qualitative reading "orbital shape matters little for
+  correlation" is attributed to Persson & Taylor, JCP 1996 (Gaussian-geminal paper),
+  UNVERIFIED (full text blocked). Still to read before any claim: Persson-Taylor 1996,
+  the Madrid group's later molecular STO-CI papers, and the water CBS anchor in
+  Helgaker, Klopper, Koch, Noga, JCP 106, 9639 (1997), doi:10.1063/1.473863.
 
-## Step 3 (next): the qubit question
+## Step 3: the qubit question (done 2026-10-11)
 
-At 48 qubits the Slater DZP reaches about halfway from cc-pVDZ (48 qubits) to
-cc-pVTZ (116 qubits) in correlated energy. Matched-accuracy comparison: Pauli
-count and 1-norm of the Slater-DZP Hamiltonian vs cc-pVDZ (equal qubits, worse
-energy) and cc-pVTZ (more qubits, better energy). Both integral sets are dense
-(no Gaunt sparsity in a multicentre exponential basis), so expect Pauli counts
-~N^4 on both sides. The 1-norm is the open quantity.
+Jordan-Wigner, RHF canonical orbitals, interleaved spin, terms |c| > 1e-10,
+identity counted in N_Pauli and excluded from the 1-norm. Driver
+debug/water_qubit_resources.py; counter tests/test_water_ccsd.py::jw_pauli_stats
+(closed-form per string class, matches openfermion's full JW on STO-3G water,
+five planted errors all caught). External check: frozen-core cc-pVDZ = 107,382
+terms, exactly Trenev et al. 2025 Table 5. Data debug/data/water_qubit_resources.json.
+
+| basis | qubits (fc) | N_Pauli fc | 1-norm fc (Ha) | N_Pauli all-e (Q) | 1-norm all-e | CCSD(T) fc |
+|---|---|---|---|---|---|---|
+| Slater DZP | 46 | 107,382 | 706.3 | 128,793 (48) | 754.6 | -76.2817 |
+| cc-pVDZ | 46 | 107,382 | 674.3 | 128,793 (48) | 717.0 | -76.2410 |
+| cc-pVTZ | 114 | 3,983,652 | 7,653.5 | 4,281,643 (116) | 7,858.6 | -76.3322 |
+
+- The Pauli count is identical in both 24-function bases. It is fixed by the
+  orbital count and the C2v symmetry pattern (both bases share the irrep
+  composition), not by the radial shape.
+- The 1-norm is 4.7% higher for Slater DZP (fc). So the 41 mHa gain over
+  cc-pVDZ costs about 5% in 1-norm and nothing in qubits or terms.
+- This is not yet a matched-accuracy comparison. Slater DZP sits between cc-pVDZ
+  and cc-pVTZ, and cc-pVTZ costs 37x the terms and 11x the 1-norm for the other
+  ~55% of the gap. A fair matched-accuracy test needs a Gaussian basis of
+  intermediate size reaching -76.28 (e.g. cc-pVDZ plus added functions), which
+  has not been done.
+- Not GeoVac's basis. These are tuned STOs, not fixed-exponent hydrogenic or
+  Sturmian functions. The dense multicentre integrals give no Gaunt sparsity on
+  either side, so Paper 14's sparsity mechanism does not enter here.
