@@ -180,14 +180,19 @@ density Fourier transform $\tilde\rho$ and the $\bm k$ integral.
 We verify Eq.~\eqref{eq:momentum} two independent ways on the reference
 geometry $X=(0,0,0)$, $Y=(0,0,2)$, $Z=(1.5,0,0.5)$ (bohr), $\zeta=1$, for
 which a McMurchie--Davidson evaluation over $8$-Gaussian $1s$ fits gives the
-ground truth $(XY|XZ)=\gvq{three_center_eri_truth}{0.204941722}$.  \textbf{[MEASURED]} Using the closed-form
+reference value $(XY|XZ)=\gvq{three_center_eri_truth}{0.204941722}$.  That
+value carries the fit error:\ as the number of Gaussians grows ($6$ to $16$)
+the evaluation converges to the Slater value
+$\gvq{three_center_eri_slater}{0.2049416525}$, $7\times10^{-8}$ lower, which an
+exact expansion in angular channels about the shared center reproduces to
+$3\times10^{-10}$ (\texttt{tests/test\_pairwise\_three\_center.py}).  \textbf{[MEASURED]} Using the closed-form
 Fourier transform of the Gaussian-fitted density (a product of Gaussians is a
 Gaussian) in Eq.~\eqref{eq:momentum} reproduces the McMurchie--Davidson value
 on the \emph{same} fits to $1.9\times10^{-14}$: the momentum formula, the
 Fourier and Coulomb conventions, and the $\bm k$-quadrature are correct.
 Independently, computing the \emph{true} Slater density transform (no Gaussian
 fit) by a one-parameter reduction of the two-center Yukawa product reproduces
-the ground truth to $4.3\times10^{-7}$.  Both are pinned in the regression
+that reference to $4.3\times10^{-7}$.  Both are pinned in the regression
 suite~\cite{test_routeC}.
 
 \emph{The angular integral closes to a spherical Bessel kernel.}  Writing
@@ -224,7 +229,7 @@ $c_{1}=s(1-s)$, $c_{2}=t(1-t)$, and $D_{1}=|X-Y|$, $D_{2}=|X-Z|$.  The
 $\partial_{\zeta}$'s (a bookkeeping device restoring the Slater from the
 Yukawa) and the $(s,t)$ integrations are elementary operations; the
 transcendental content is entirely in the radial factor.
-Equation~\eqref{eq:reduced} reproduces the ground truth to
+Equation~\eqref{eq:reduced} reproduces the $8$-Gaussian reference to
 $1.8\times10^{-6}$ \textbf{[MEASURED]}, the residual being the finite-order
 angular and Feynman quadrature.
 

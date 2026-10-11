@@ -162,12 +162,21 @@ MEASURED = {
         aliases={}),
     "three_center_eri_truth": dict(
         value=0.204941722,
-        convention="constant: ground-truth value of the genuine three-center "
-                   "ERI (XY|XZ) over 1s Slater orbitals, Paper 59 validation "
-                   "point",
+        convention="constant: McMurchie-Davidson (XY|XZ) over 8-Gaussian FITS "
+                   "of the 1s Slater orbitals, Paper 59 validation point; it "
+                   "carries the fit error (+6.9e-8 vs three_center_eri_slater)",
         q=None,
-        provenance="MEASURED (Paper 59 Sec. 4), the reference the closed-form "
-                   "route is checked against",
+        provenance="MEASURED (Paper 59 Sec. 4), eri_md at n_gauss = 8",
+        aliases={}),
+    "three_center_eri_slater": dict(
+        value=0.2049416525,
+        convention="constant: the same (XY|XZ) over TRUE 1s Slater orbitals",
+        q=None,
+        provenance="MEASURED 2026-10-10, two routes: exact angular-channel "
+                   "(pairwise) expansion converged to 1e-12 "
+                   "(tests/test_pairwise_three_center.py), and the eri_md "
+                   "n_gauss = 6..16 fit sequence converging onto it (gap "
+                   "2.7e-10 at 16)",
         aliases={}),
     # ---------------------------------------------------------------- Paper 60
     # Isoenergetic secular matrix M = diag(Z R_nu) + T'.  The 1-norm exponent is
