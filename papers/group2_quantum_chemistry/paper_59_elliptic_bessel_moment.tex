@@ -41,8 +41,9 @@ to the Averys' generalized-Sturmian program---the three centers enter as
 three \emph{phases} rather than three foci, so the coordinate obstruction
 (prolate spheroidal coordinates admit exactly two foci) dissolves.
 \textbf{[MEASURED]} The resulting momentum integral reproduces the exact
-integral (agreement $1.9\times10^{-14}$ against a closed-form Gaussian
-reference; $4.3\times10^{-7}$ against an independent Slater evaluation), and
+integral (agreement $1.9\times10^{-14}$ with McMurchie--Davidson on the same
+Gaussian fits; with the true Slater density, $4.3\times10^{-7}$ against the
+fitted reference, which itself sits $7\times10^{-8}$ above the Slater value), and
 its angular part collapses to a single spherical Bessel kernel.
 \textbf{[MEASURED / classical]} What remains---the radial content---is a
 two-scale Bessel moment whose period is a \emph{complete elliptic integral}
@@ -809,6 +810,25 @@ reduction buys is an accurate, fast, geometry-native evaluator for the
 three-center integral and---the point of this paper---a precise diagnosis of
 why it is hard.
 
+\emph{The wall is closed-form, not computational.}  \textbf{[MEASURED]} The
+infinite series that the standard verdict falls back on is, concretely, the
+expansion of both densities in multipoles about the shared center (the
+Barnett--Coulson / L\"owdin $\alpha$-function route~\cite{barnett_coulson1951};
+a recent analytic treatment of the same integrals, for linear
+geometries, is Ref.~\cite{ozdogan_ruiz2012}).  Each channel is a product of two
+one-pair factors, and the third center enters only through the relative
+orientation of the two pairs.  On the water geometry
+($R_{\rm OH} = 1.809$, $104.5^\circ$) with O $1s/2s/2p$ and H $1s$ Slater
+orbitals, seven three-center integrals of both shared-O and shared-H type
+converge to $\sim\!10^{-9}$ by $L \approx 12$.  Gaussian-fit sequences
+converge onto every value; for the O $1s$ core the Gaussians approach it from
+below and are still $6\times10^{-8}$ short at $18$ Gaussians, while the
+channel sum is stable to thirteen digits
+(\texttt{tests/test\_pairwise\_general.py},
+\texttt{tests/test\_pairwise\_three\_center.py}).  The elliptic content of
+Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  So the genus
+jump bars a finite closed form; it does not bar an accurate evaluation.
+
 \emph{The open problem.}  As shown in Sec.~\ref{sec:obstruction}, the
 elliptic-dilogarithm route is obstructed: $N(D)$ is not an elliptic
 dilogarithm of elementary or period-level data but a period of the rank-four
@@ -861,6 +881,15 @@ it deserves to be.
 
 %% ========================================================================
 \begin{thebibliography}{99}
+
+\bibitem{barnett_coulson1951}
+M.~P.~Barnett and C.~A.~Coulson, ``The evaluation of integrals occurring in
+the theory of molecular structure.\ Parts I \& II,''
+\textit{Phil.\ Trans.\ R.\ Soc.\ Lond.\ A} \textbf{243}, 221--249 (1951).
+
+\bibitem{ozdogan_ruiz2012}
+T.~\"Ozdo\u{g}an and M.~B.~Ruiz, ``Evaluation of three-center two-electron
+repulsion integrals over Slater orbitals,'' arXiv:1209.3755 (2012).
 
 \bibitem{fock1935}
 V.~Fock, ``Zur Theorie des Wasserstoffatoms,''
