@@ -184,3 +184,44 @@ Reading:
   (symmetry-fixed), so radial shape does not move it.
 
 Data: debug/data/water_ccsd.jsonl, debug/data/water_qubit_resources.json.
+
+## Step 5: the two remedies (2026-10-11, PI-directed)
+
+- **Hydrogenic with composed's screening.** O 1s at the bare Z = 8; O shells n = 2-3
+  at Z_eff_valence = 6 (atomic_classifier, i.e. Z minus the 1s^2 core). Zero parameters.
+  This maps composed's core/valence blocks onto one 24-function set; composed itself
+  starts its valence blocks at n = 1, so the mapping is ours.
+- **Two-scale Coulomb Sturmian.** O: a core 1s at kc plus Sturmians sharing kv
+  (s n <= 2, p n <= 3, 3d) = 14 functions. (kc, kv) = (7.793, 2.281) minimize the radial
+  O-atom energy (-74.5027). H: k = 1. This is a simplified relative of Avery's
+  generalized Sturmians, not his isoenergetic construction.
+
+| kit (24 functions) | RHF | CCSD(T) fc | 1-norm fc |
+|---|---|---|---|
+| Sturmian, one k per atom | -74.2879 | -74.5603 | 848.8 |
+| hydrogenic, Z_eff = 6 for n >= 2 | -75.7466 | -75.9471 | 405.1 |
+| hydrogenic, bare Z | -75.8397 | -76.0452 | 510.8 |
+| Sturmian, two-scale | -75.8903 | -76.1113 | 620.0 |
+| cc-pVDZ | -76.0268 | -76.2410 | 674.3 |
+| Slater DZP (tuned) | -76.0556 | -76.2817 | 706.3 |
+
+(All 24-function kits: 107,382 Pauli terms frozen-core, 46 qubits.)
+
+- **Screening made the hydrogenic kit worse, by 98 mHa.** The diagnosis comes from the
+  O atom (average of configuration, 3D, ng 8) in the kits as built:
+  - bare -74.557, Z_eff -74.420;
+  - the same kits with the polynomial contractions released give -74.757
+    (radial, upper bound on the contracted energy).
+  So **200-340 mHa is lost to the fixed hydrogenic node structure**. Each hydrogenic
+  function carries a fixed radial polynomial (its nodes), set for orthogonality to the
+  1s of the *same* charge. Bare Z keeps every shell mutually consistent; Z_eff = 6 puts
+  the valence nodes in the wrong place relative to the Z = 8 core. The contraction, not
+  the decay rate, is the binding constraint.
+- **Sturmians do not pay this.** A shared-k Sturmian set spans the same space as its
+  primitives, so there is no contraction penalty; the two-scale kit is the best
+  GeoVac-native kit, 130 mHa above cc-pVDZ.
+- **No GeoVac-native kit reaches cc-pVDZ at 24 functions.** The best is 130 mHa behind
+  with 2 dials on O; the zero-parameter kits are 196 and 294 mHa behind.
+- **Observation, not a claim:** across the 24-function kits other than the
+  one-k Sturmian, the 1-norm rises with accuracy (405, 511, 620, 674, 706 Ha). A low
+  1-norm at equal size here tracks a worse description, not a cheaper one.

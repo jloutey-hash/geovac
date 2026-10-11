@@ -521,15 +521,37 @@ def _kit_columns(fns, cols_of):
     return np.array(cols).T
 
 
-def hydrogenic_kit(nuclei, n_gauss=12, ng_pol=8, nmax=None):
+def hydrogenic_kit(nuclei, n_gauss=12, ng_pol=8, nmax=None, z_valence=None):
     """GeoVac production radial rule (composed_qubit / two_center_eri): hydrogenic
-    orbitals with decay Z/n and the bare nuclear charge.  Zero parameters."""
+    orbitals with decay Z/n.  z_valence {Z: Z_eff}: shells n >= 2 use Z_eff instead of
+    the bare charge (composed's core/valence split: O core block Z = 8, valence blocks
+    Z_eff_valence = 6 from atomic_classifier).  Zero parameters either way."""
     fns, cols_of = [], []
     for center, Z in nuclei:
         nm = (nmax or {8.0: 3, 1.0: 2})[Z]
         for n in range(1, nm + 1):
+            Zs = (z_valence or {}).get(Z, Z) if n >= 2 else Z
             for l in range(n):
-                _shell_kit(center, [(l, _hydrogenic_coeffs(n, l, Z / n), Z / n)], n_gauss, ng_pol, fns, [], cols_of)
+                _shell_kit(center, [(l, _hydrogenic_coeffs(n, l, Zs / n), Zs / n)], n_gauss, ng_pol, fns, [], cols_of)
+    return fns, _kit_columns(fns, cols_of)
+
+
+O_TWO_SCALE = ([(1, 'c'), (1, 'v'), (2, 'v')], [(2, 'v'), (3, 'v')])   # (n, core|valence) s, p
+
+
+def sturmian_two_scale_kit(nuclei, kc, kv, kH=1.0, n_gauss=12, ng_pol=8):
+    """O: a core 1s at kc plus Coulomb Sturmians sharing kv (s n <= 2, p n <= 3, 3d):
+    14 functions.  H: Sturmians n <= 2 at kH.  Same span as the listed primitives."""
+    fns, cols_of = [], []
+    for center, Z in nuclei:
+        if Z == 8.0:
+            for l, prims in ((0, O_TWO_SCALE[0]), (1, O_TWO_SCALE[1]), (2, [(3, 'v')])):
+                for m, which in prims:
+                    _shell_kit(center, [(l, {m: 1.0}, kc if which == 'c' else kv)], n_gauss, ng_pol, fns, [], cols_of)
+        else:
+            for l in range(2):
+                for m in range(l + 1, 3):
+                    _shell_kit(center, [(l, {m: 1.0}, kH)], n_gauss, ng_pol, fns, [], cols_of)
     return fns, _kit_columns(fns, cols_of)
 
 

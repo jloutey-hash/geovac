@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Hydrogenic Z/n, bare Z** (composed_qubit's radial rule, zero parameters): CCSD(T) -76.0452, which is 196 mHa above cc-pVDZ (-76.2410) and 236 mHa above the tuned Slater DZP. Its 1-norm is the lowest (511 vs 674 Ha), but at a far worse energy.
   - **Coulomb Sturmians, one shared k per atom** (Avery's basis; k_O = 3.781 from the O atom, k_H = 1): CCSD(T) -74.5603, worse than STO-3G (-75.0123, 7 functions). One k cannot serve the O core and valence: the atom alone is 3.4 Ha above the tuned primitives.
   - **Conclusion:** the 41 mHa exponential win of v5.20.11 came from exponent tuning, not from the hydrogen-like shape. Mechanism: bare Z = 8 puts the O n=2 shell at zeta 4, about twice too compact for the valence. Z_eff screening (composed) and multi-scale Sturmians (Avery) are the untested remedies.
+  - **The two remedies, also negative.**
+    - Hydrogenic with composed's screening (O n>=2 at Z_eff = 6) is *worse*, at -75.9471 (98 mHa below bare Z). The O-atom diagnostic gives bare -74.557 and Z_eff -74.420 against -74.757 with the contractions released. The fixed hydrogenic node structure costs 200-340 mHa; screening moves the valence nodes away from the Z = 8 core.
+    - Two-scale Coulomb Sturmian (O core kc = 7.79 + shared valence kv = 2.28, both from the atom) is the best native kit, at -76.1113, still 130 mHa above cc-pVDZ. Sturmians pay no contraction penalty.
+    - Across the 24-function kits the 1-norm rises with accuracy (405 -> 706 Ha). Recorded as an observation.
   - **Builders.** `hydrogenic_kit` and `sturmian_kit` in `tests/test_water_ccsd.py`. A new slow test checks that the hydrogenic kit reproduces -Z^2/2n^2 and orthogonality; it catches 2/2 planted coefficient errors. Memo step 4: `debug/water_barrier_memo.md`.
 
 ## [v5.20.11] - 2026-10-11

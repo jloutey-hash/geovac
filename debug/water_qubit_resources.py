@@ -2,7 +2,7 @@
 water Hamiltonian in three bases -- Slater DZP (24 fns), cc-pVDZ (24), cc-pVTZ (58).
 
   integrals <key> [ccsd] : AO integrals -> RHF -> MO integrals saved to debug/data/water_mo_<key>.npz
-                     keys: sto_dzp | ccpvdz | ccpvtz | hydrogenic | sturmian
+                     keys: sto_dzp | ccpvdz | ccpvtz | hydrogenic | sturmian | hydrogenic_zeff | sturmian2
                      (ccsd: also RHF/CCSD/CCSD(T), all-electron + frozen core -> water_ccsd.jsonl)
   count            : JW Pauli count + 1-norm for every saved .npz, all-electron and frozen-core;
                      rows -> debug/data/water_qubit_resources.json
@@ -26,7 +26,8 @@ e = importlib.util.module_from_spec(_e)
 _e.loader.exec_module(e)
 DATA = os.path.join(ROOT, 'debug', 'data')
 K_O = 3.7809502390032312   # shared Sturmian exponent minimizing the radial O-atom energy (-71.40617)
-KEYS = ('sto_dzp', 'ccpvdz', 'ccpvtz', 'hydrogenic', 'sturmian')
+K_O_TWO_SCALE = (7.79324757, 2.28124155)   # (kc, kv) minimizing the radial O-atom energy (-74.50266)
+KEYS = ('sto_dzp', 'ccpvdz', 'ccpvtz', 'hydrogenic', 'sturmian', 'hydrogenic_zeff', 'sturmian2')
 
 
 def build(key, nuc):
@@ -35,6 +36,10 @@ def build(key, nuc):
         return w.slater_dzp_contracted(nuc, e.contracted_ex(dict(d, O3d=d['O3d_fc'], H2p=d['H2p_fc'])), 12, ng_pol=8)
     if key == 'hydrogenic':
         return w.hydrogenic_kit(nuc)
+    if key == 'hydrogenic_zeff':
+        return w.hydrogenic_kit(nuc, z_valence={8.0: 6.0})
+    if key == 'sturmian2':
+        return w.sturmian_two_scale_kit(nuc, *K_O_TWO_SCALE)
     if key == 'sturmian':
         return w.sturmian_kit(nuc, {8.0: K_O, 1.0: 1.0})
     return w.gaussian_basis(os.path.join(DATA, 'basis', key[:2] + '-' + key[2:] + '_H_O.json'), nuc)

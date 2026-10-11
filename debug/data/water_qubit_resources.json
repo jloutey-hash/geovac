@@ -78,5 +78,37 @@
   "n_pauli": 107382,
   "one_norm": 848.7660924907295,
   "identity": 49.16765954437838
+ },
+ {
+  "basis": "hydrogenic_zeff",
+  "frozen_core": 0,
+  "qubits": 48,
+  "n_pauli": 128793,
+  "one_norm": 443.3655100051041,
+  "identity": -15.944399717134601
+ },
+ {
+  "basis": "hydrogenic_zeff",
+  "frozen_core": 1,
+  "qubits": 46,
+  "n_pauli": 107382,
+  "one_norm": 405.1494539386819,
+  "identity": -31.12871997809286
+ },
+ {
+  "basis": "sturmian2",
+  "frozen_core": 0,
+  "qubits": 48,
+  "n_pauli": 128793,
+  "one_norm": 667.8793017611955,
+  "identity": 12.134748229740211
+ },
+ {
+  "basis": "sturmian2",
+  "frozen_core": 1,
+  "qubits": 46,
+  "n_pauli": 107382,
+  "one_norm": 620.0405114998158,
+  "identity": 0.744536829896532
  }
 ]
