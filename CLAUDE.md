@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.20.11 (October 11, 2026)
+**Version:** v5.20.12 (October 11, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Water with GeoVac-native bricks (2026-10-11, v5.20.12):** hydrogenic and Sturmian kits all short of cc-pVDZ at 24 functions (best: two-scale Sturmian, 130 mHa); §3 row added. See CHANGELOG v5.20.12.
 - **Water: Slater DZP vs cc-pVDZ at equal size (2026-10-11, v5.20.11):** own validated CCSD(T); Slater 41 mHa lower, identical Pauli count, 1-norm +4.7%; matched-accuracy Gaussian test owed. See CHANGELOG v5.20.11.
 - **m-seam probe + water three-centre ERIs (2026-10-10, v5.20.10):** bending opens m (Renner/Walsh, prior art); shared-centre (Barnett-Coulson) channels evaluate water's three-centre ERIs to 1e-9: closed-form wall only. See CHANGELOG v5.20.10.
 - **Avery-material wording made neutral before first push (2026-10-10, v5.20.9):** CHANGELOG/test/map no longer reference the shared draft or its table entries. See CHANGELOG v5.20.9.
@@ -458,6 +459,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | g_Vee speedup by algebra instead of sparsity: pair-space cancellation route + γ-series one-kernel route (2026-09-25) | 2 | Cancellation lever ≤9% of cost; γ-series converges exactly but ~100× dearer. The wall is sparsity (TREE4 dense field), cure = O(nnz) rewrite. See `docs/failed_approaches_ledger.md`. |
 | Multi-geminal expansion / quadratic F² term for the LiH r₁₂ marriage gap (2026-09-26) | 2 | Gap was geminal SHAPE (Kato cusp), not count: one e^{−2r} geminal closes it; k≥2 saturates at +1.4 mHa; F² worth 0.013 mHa. See `docs/failed_approaches_ledger.md`. |
 | r₁₂t² (e-e-n) geminal for the LiH residual (2026-10-05) | 1 | Separable and RI-free (validated vs MC) but worth ≤3 mHa: in the Li⁺ core u·t² adds 0.35 mHa; t² alone is orbital-representable radial correlation. Residual = frozen CI coefficients / orbital basis. See `docs/failed_approaches_ledger.md`. |
+| GeoVac-native bricks (hydrogenic Z/n, Coulomb Sturmian) vs cc-pVDZ at equal size, water (2026-10-11) | 4 | Best native kit (two-scale Sturmian) 130 mHa above cc-pVDZ; hydrogenic fixed nodes cost 200-340 mHa on the O atom, Z_eff screening worse. Same Pauli count; 1-norm rises with accuracy. See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the CUSP-2 row (2026-09-25): its 'Z_c≈1.84 graph-validity boundary' was the non-physical (1/16)A hop; physical He has no Z_c. The negative result (Schwartz tail does not help) stands | 0 | See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the Dirichlet-disk row (2026-09-29): the 'boundary obstruction' was a float artifact at the exact grid point ρ=R (0/0 Markov ratio); off it the error decays. Negative WITHDRAWN; disk + cone OPEN | 0 | See `docs/failed_approaches_ledger.md`. |
 

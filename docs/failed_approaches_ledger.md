@@ -339,3 +339,25 @@ coefficients frozen in the 2x2 problem (analog: 1.9-9 mHa per pair when relaxed)
 factor flexibility beyond the u-shape is not where the residual lives. Record: debug/sprint_r12t2_step1_memo.md;
 debug/r12t2_step1_*.py; Paper 19 (residual paragraph corrected 2026-10-05).
 
+
+### GeoVac-native bricks (hydrogenic Z/n, Coulomb Sturmian) as a better molecular basis than Gaussians at equal size (water, 2026-10-11) | 4
+**Hypothesis (PI-directed, after v5.20.11):** the 41 mHa that a tuned Slater DZP gains over cc-pVDZ on water
+(24 functions, frozen-core CCSD(T)) carries over to GeoVac's own zero-parameter bricks: hydrogenic orbitals
+(composed_qubit's a = Z/n radial rule) or Avery's Coulomb Sturmians, with a qubit-resource bonus.
+**Result: NEGATIVE, four kits.** Same 24-function count (O n<=3, H n<=2), same frozen-core CCSD(T) and
+Pauli/1-norm pipeline. CCSD(T) fc: Sturmian one k per atom -74.5603 (worse than STO-3G, -75.0123);
+hydrogenic Z_eff = 6 on O n>=2 (composed's screening rule) -75.9471; hydrogenic bare Z -76.0452; two-scale
+Sturmian (O core kc = 7.79, valence kv = 2.28, fixed on the atom) -76.1113 -- the best native kit, still
+130 mHa above cc-pVDZ (-76.2410) and 171 mHa above the tuned Slater DZP. Every 24-function kit has the same
+Pauli count (107,382 fc), and the 1-norm RISES with accuracy across them (405 -> 706 Ha), so the lower native
+1-norms buy nothing at matched size.
+**Mechanism (O-atom diagnostic):** one shared k cannot serve core and valence (atom 3.4 Ha above tuned
+primitives). Hydrogenic orbitals weld their radial nodes in place for orthogonality to a same-Z 1s; with the
+contractions released the O atom is -74.757 vs bare -74.557 and Z_eff -74.420, so the fixed node structure
+costs 200-340 mHa and screening moves the valence nodes away from the Z = 8 core. Sturmians at shared k span
+the same space as their STO primitives (no contraction penalty), so the two-scale kit is limited only by
+having two exponents. The v5.20.11 win came from exponent tuning, not from the hydrogen-like shape.
+Lesson: GeoVac's case does not rest on its radial bricks being better chemistry bricks; it rests on the
+one-centre structure (Gaunt selection rules, composed block sparsity). Record: debug/water_barrier_memo.md
+steps 4-5; builders + slow hydrogenic-spectrum test in tests/test_water_ccsd.py; debug/water_qubit_resources.py;
+CHANGELOG v5.20.12.

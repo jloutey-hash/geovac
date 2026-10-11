@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
-## [Unreleased]
+## [v5.20.12] - 2026-10-11
 
 ### Added
+- **CLAUDE.md §3 row + `docs/failed_approaches_ledger.md` entry** for the GeoVac-native-bricks negative below (4 kits), PI-directed.
 - **Water with GeoVac's own bricks at equal size (24 functions), PI-directed. Negative.**
   - Two GeoVac-native kits (shells n<=3 on O, n<=2 on H = 24 functions, cc-pVDZ's count) through the same frozen-core CCSD(T) and Pauli/1-norm pipeline. Neither has an exponent tuned to water.
   - **Hydrogenic Z/n, bare Z** (composed_qubit's radial rule, zero parameters): CCSD(T) -76.0452, which is 196 mHa above cc-pVDZ (-76.2410) and 236 mHa above the tuned Slater DZP. Its 1-norm is the lowest (511 vs 674 Ha), but at a far worse energy.
