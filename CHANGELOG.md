@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
-## [Unreleased]
+## [v5.20.11] - 2026-10-11
 
 ### Added
 - **Water past the many-electron barrier: Slater DZP vs cc-pVDZ at equal size (24 functions, 48 qubits), PI-directed.**
@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - An *uncontracted* 3s2p optimized on the atom spends its second s function on the core, leaving single-zeta valence. This is why general contraction is needed.
   - The fractional-SCF open-shell atom energy was 10.7 mHa above the variational average energy (non-variational orbitals).
   - The basis parser read STO-3G SP shells as two s functions. cc-pVDZ, which has no SP shells, was unaffected.
+
+### Changed
+- `.gitignore`: narrow rules for the regenerable water MO-integral `.npz` files (up to 90 MB) and the temp cc-pVDZ basis.
 
 ## [v5.20.10] - 2026-10-10
 

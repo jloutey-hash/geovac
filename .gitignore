@@ -140,3 +140,10 @@ debug/data/p60_Tp_*.npz
 # and debug/pair_geminal_step3_lm.py. Results/vectors stay committed.
 debug/data/cirelax_*_lm_s*.npz
 debug/data/pairgem_*_lm_s*.npz
+
+# Water qubit-resource MO integrals (2026-10-11): up to 90 MB each, regenerable by
+# debug/water_qubit_resources.py integrals <key>. The counts stay committed
+# (debug/data/water_qubit_resources.json). The cc-pVDZ temp basis is rewritten on
+# every call of debug/water_sto_exponents.py.
+debug/data/water_mo_*.npz
+debug/data/basis/_ccpvdz_polopt_tmp.json
