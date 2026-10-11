@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Water past the many-electron barrier: Slater DZP vs cc-pVDZ at equal size (24 functions, 48 qubits), PI-directed.**
+  - **Solver.** PySCF does not build on this Windows host, so the solver is our own: RHF + spin-orbital CCSD + (T), with an optional frozen core (`tests/test_water_ccsd.py`). It is validated externally: it reproduces the Crawford programming-project STO-3G water reference ((T) to 2e-12, CCSD correlation to 4e-10).
+  - **Solver checks.** CCSD equals FCI for two electrons. Frozen-core CCSD equals active-space FCI. Nine planted wrong answers were all caught.
+  - **Fair basis.** The Slater basis is built by cc-pVDZ's own design rule. Slater primitives are optimized on the O-atom average-of-configuration HF energy, then generally contracted to [atomic 1s, atomic 2s, diffuse s | atomic 2p, diffuse p]. H uses H2 RHF. Polarization exponents are optimized on frozen-core CCSD for both bases.
+  - **Result.** Frozen-core CCSD(T) is -76.2818 (Slater DZP) vs -76.2410 for cc-pVDZ, or -76.2422 with its polarization re-optimized: 40.8 mHa lower at equal size. Of that, 28.8 mHa is SCF; RHF is within 1.5 mHa of cc-pVTZ.
+  - **Ladder.** The cc-pVTZ anchor (58 functions) is -76.3322, so the Slater DZP covers ~94% of the DZ-to-TZ SCF gap and ~45% of the correlated gap. The Gaussian-fit evaluator is converged to 0.07 mHa (12 vs 16 Gaussians).
+  - **New exact radial atom.** An exact one-centre radial average-of-configuration HF over Slater primitives (closed-form F^k/G^k). It gives He at -729/256 exactly, and for Ne it is the limit of the 3D route, approached from above.
+  - Memo `debug/water_barrier_memo.md`. Prior-art check of the correlated STO comparison is owed before any paper claim.
+- **Negative results.**
+  - An *uncontracted* 3s2p optimized on the atom spends its second s function on the core, leaving single-zeta valence. This is why general contraction is needed.
+  - The fractional-SCF open-shell atom energy was 10.7 mHa above the variational average energy (non-variational orbitals).
+  - The basis parser read STO-3G SP shells as two s functions. cc-pVDZ, which has no SP shells, was unaffected.
+
 ## [v5.20.10] - 2026-10-10
 
 ### Added
