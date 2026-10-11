@@ -46,5 +46,37 @@
   "n_pauli": 3983652,
   "one_norm": 7653.486712510515,
   "identity": 679.0982882898136
+ },
+ {
+  "basis": "hydrogenic",
+  "frozen_core": 0,
+  "qubits": 48,
+  "n_pauli": 128793,
+  "one_norm": 555.7570157435748,
+  "identity": -1.9684751960428173
+ },
+ {
+  "basis": "hydrogenic",
+  "frozen_core": 1,
+  "qubits": 46,
+  "n_pauli": 107382,
+  "one_norm": 510.78526619070067,
+  "identity": -13.615846981587708
+ },
+ {
+  "basis": "sturmian",
+  "frozen_core": 0,
+  "qubits": 48,
+  "n_pauli": 128793,
+  "one_norm": 910.8537613630263,
+  "identity": 54.277663431879176
+ },
+ {
+  "basis": "sturmian",
+  "frozen_core": 1,
+  "qubits": 46,
+  "n_pauli": 107382,
+  "one_norm": 848.7660924907295,
+  "identity": 49.16765954437838
  }
 ]

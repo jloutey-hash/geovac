@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [Unreleased]
+
+### Added
+- **Water with GeoVac's own bricks at equal size (24 functions), PI-directed. Negative.**
+  - Two GeoVac-native kits (shells n<=3 on O, n<=2 on H = 24 functions, cc-pVDZ's count) through the same frozen-core CCSD(T) and Pauli/1-norm pipeline. Neither has an exponent tuned to water.
+  - **Hydrogenic Z/n, bare Z** (composed_qubit's radial rule, zero parameters): CCSD(T) -76.0452, which is 196 mHa above cc-pVDZ (-76.2410) and 236 mHa above the tuned Slater DZP. Its 1-norm is the lowest (511 vs 674 Ha), but at a far worse energy.
+  - **Coulomb Sturmians, one shared k per atom** (Avery's basis; k_O = 3.781 from the O atom, k_H = 1): CCSD(T) -74.5603, worse than STO-3G (-75.0123, 7 functions). One k cannot serve the O core and valence: the atom alone is 3.4 Ha above the tuned primitives.
+  - **Conclusion:** the 41 mHa exponential win of v5.20.11 came from exponent tuning, not from the hydrogen-like shape. Mechanism: bare Z = 8 puts the O n=2 shell at zeta 4, about twice too compact for the valence. Z_eff screening (composed) and multi-scale Sturmians (Avery) are the untested remedies.
+  - **Builders.** `hydrogenic_kit` and `sturmian_kit` in `tests/test_water_ccsd.py`. A new slow test checks that the hydrogenic kit reproduces -Z^2/2n^2 and orthogonality; it catches 2/2 planted coefficient errors. Memo step 4: `debug/water_barrier_memo.md`.
+
 ## [v5.20.11] - 2026-10-11
 
 ### Added

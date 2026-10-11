@@ -1,8 +1,9 @@
 """Step 3 of debug/water_barrier_memo.md: qubit resources (Pauli count, 1-norm) of the
 water Hamiltonian in three bases -- Slater DZP (24 fns), cc-pVDZ (24), cc-pVTZ (58).
 
-  integrals <key>  : AO integrals -> RHF -> MO integrals saved to debug/data/water_mo_<key>.npz
-                     keys: sto_dzp | ccpvdz | ccpvtz
+  integrals <key> [ccsd] : AO integrals -> RHF -> MO integrals saved to debug/data/water_mo_<key>.npz
+                     keys: sto_dzp | ccpvdz | ccpvtz | hydrogenic | sturmian
+                     (ccsd: also RHF/CCSD/CCSD(T), all-electron + frozen core -> water_ccsd.jsonl)
   count            : JW Pauli count + 1-norm for every saved .npz, all-electron and frozen-core;
                      rows -> debug/data/water_qubit_resources.json
 
@@ -24,12 +25,18 @@ _e = importlib.util.spec_from_file_location('e', os.path.join(ROOT, 'debug', 'wa
 e = importlib.util.module_from_spec(_e)
 _e.loader.exec_module(e)
 DATA = os.path.join(ROOT, 'debug', 'data')
+K_O = 3.7809502390032312   # shared Sturmian exponent minimizing the radial O-atom energy (-71.40617)
+KEYS = ('sto_dzp', 'ccpvdz', 'ccpvtz', 'hydrogenic', 'sturmian')
 
 
 def build(key, nuc):
     if key == 'sto_dzp':
         d = e.load()
         return w.slater_dzp_contracted(nuc, e.contracted_ex(dict(d, O3d=d['O3d_fc'], H2p=d['H2p_fc'])), 12, ng_pol=8)
+    if key == 'hydrogenic':
+        return w.hydrogenic_kit(nuc)
+    if key == 'sturmian':
+        return w.sturmian_kit(nuc, {8.0: K_O, 1.0: 1.0})
     return w.gaussian_basis(os.path.join(DATA, 'basis', key[:2] + '-' + key[2:] + '_H_O.json'), nuc)
 
 
@@ -45,10 +52,19 @@ if __name__ == '__main__':
         hmo = C.T @ h @ C
         gmo = np.einsum('pqrs,pi,qj,rk,sl->ijkl', g, C, C, C, C, optimize=True)
         np.savez(os.path.join(DATA, 'water_mo_%s.npz' % key), h=hmo, g=gmo, enuc=enuc, E_rhf=E, eps=eps)
-        print(key, 'nbf', C.shape[1], 'RHF %.8f' % E, 'done in %.0fs' % (time.time() - t0))
+        print(key, 'nbf', C.shape[1], 'RHF %.8f' % E, 'integrals+RHF %.0fs' % (time.time() - t0)); sys.stdout.flush()
+        if len(sys.argv) > 3 and sys.argv[3] == 'ccsd':
+            r = w.run(S, h, g, 10, enuc)
+            rf = w.run(S, h, g, 10, enuc, frozen_core=1)
+            row = {'basis': key, 'nbf': C.shape[1], **{k: float(v) for k, v in r.items()},
+                   **{k + '_fc': float(v) for k, v in rf.items() if k != 'RHF'}}
+            print(json.dumps(row)); sys.stdout.flush()
+            with open(os.path.join(DATA, 'water_ccsd.jsonl'), 'a') as f:
+                f.write(json.dumps(row) + '\n')
+        print('done in %.0fs' % (time.time() - t0))
     elif sys.argv[1] == 'count':
         rows = []
-        for key in ('sto_dzp', 'ccpvdz', 'ccpvtz'):
+        for key in KEYS:
             p = os.path.join(DATA, 'water_mo_%s.npz' % key)
             if not os.path.exists(p):
                 print('missing', key); continue

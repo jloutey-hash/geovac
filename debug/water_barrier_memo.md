@@ -139,3 +139,48 @@ terms, exactly Trenev et al. 2025 Table 5. Data debug/data/water_qubit_resources
 - Not GeoVac's basis. These are tuned STOs, not fixed-exponent hydrogenic or
   Sturmian functions. The dense multicentre integrals give no Gaunt sparsity on
   either side, so Paper 14's sparsity mechanism does not enter here.
+
+## Step 4: GeoVac's own bricks in the same test (2026-10-11, PI-directed)
+
+The shells n <= 3 on O (14 functions) and n <= 2 on H (5 functions) give 24 functions,
+the same count as cc-pVDZ. There are two GeoVac-native radial rules, and no
+polarization or exponent is tuned to water in either:
+
+- **Hydrogenic** (the production rule of composed_qubit / two_center_eri): decay Z/n
+  with the bare nuclear charge, so the kit has zero parameters. Builder
+  `hydrogenic_kit`; its test checks that every function is a one-electron eigenfunction
+  (-Z^2/2n^2) and that same-l functions are orthogonal.
+- **Coulomb Sturmian** (the theory's basis, i.e. Avery's): one shared exponent per atom.
+  k_H = 1, which makes the H 1s exact. k_O = 3.781 minimizes the radial O-atom energy;
+  the best that one shared k can do for the atom is -71.406 Ha, 3.4 Ha above the
+  Slater primitives' -74.768.
+
+Frozen-core CCSD(T), same geometry, same solver:
+
+| kit | functions | RHF | CCSD(T) fc | N_Pauli fc (46 q) | 1-norm fc |
+|---|---|---|---|---|---|
+| STO-3G | 7 | -74.9629 | -75.0123 | -- | -- |
+| Coulomb Sturmian (k per atom) | 24 | -74.2879 | -74.5603 | 107,382 | 848.8 |
+| hydrogenic Z/n, bare Z | 24 | -75.8397 | -76.0452 | 107,382 | 510.8 |
+| cc-pVDZ | 24 | -76.0268 | -76.2410 | 107,382 | 674.3 |
+| Slater DZP (tuned) | 24 | -76.0556 | -76.2817 | 107,382 | 706.3 |
+| cc-pVTZ | 58 | -76.0572 | -76.3322 | 3,983,652 (114 q) | 7,653.5 |
+
+Reading:
+- Neither GeoVac-native kit survives the test. The hydrogenic kit is 196 mHa above
+  cc-pVDZ at equal size, and 236 mHa above the tuned Slater kit. The shared-k Sturmian
+  kit, at 24 functions, is worse than STO-3G at 7. So the 41 mHa exponential-shape win
+  of step 2 came from exponent tuning, not from the hydrogen-like shape.
+- Mechanism, hydrogenic: bare Z puts the O n=2 shell at zeta = 4, about twice as compact
+  as the tuned valence (1.45-2.85). The valence then has to live in the n=3 functions
+  (zeta 2.67), which leaves almost nothing to correlate with. The core is fine
+  (zeta 8 vs 7.7-9.3 tuned). This is the job Z_eff screening does in composed_qubit;
+  it is not tested here.
+- Mechanism, Sturmian: one k cannot serve a core (~8) and a valence (~2) at once. The
+  remedy in the Sturmian literature is generalized or Goscinskian Sturmians with
+  several scales, which is Avery's route and is not built here.
+- The hydrogenic kit has the lowest 1-norm (511 vs 674, -24%), but it is at a much worse
+  energy, so this is not a resource win. All 24-function kits share one Pauli count
+  (symmetry-fixed), so radial shape does not move it.
+
+Data: debug/data/water_ccsd.jsonl, debug/data/water_qubit_resources.json.

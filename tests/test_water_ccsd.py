@@ -487,6 +487,65 @@ def slater_dzp_contracted(nuclei, ex, n_gauss=12, polarization=True, ng_pol=None
     return fns, np.hstack([np.array(cols).T, rest])
 
 
+# --- GeoVac-native kits: shells n <= 3 on O (14 fns) and n <= 2 on H (5 fns) = 24, as cc-pVDZ ---
+def _hydrogenic_coeffs(n, l, zeta):
+    """R_nl ~ r^l e^(-zeta r) L^(2l+1)_(n-l-1)(2 zeta r) as weights on the normalized
+    Slater primitives r^(m-1) e^(-zeta r), m = l+1 .. n."""
+    from scipy.special import genlaguerre
+    L = genlaguerre(n - l - 1, 2 * l + 1).coeffs[::-1]          # ascending powers of x
+    return {l + j + 1: L[j] * (2 * zeta) ** j / _sto_norm(l + j + 1, zeta) for j in range(len(L))}
+
+
+def _shell_kit(center, shells, n_gauss, ng_pol, fns, blocks, cols_of):
+    """shells: list of (l, {m: coeff}, zeta); each becomes one contracted function
+    per angular component (spherical for l = 2)."""
+    for l, coeffs, zeta in shells:
+        group = []
+        for m in coeffs:
+            start = len(fns)
+            sto_shell(center, m, l, zeta, ng_pol if (l == 2 or m > l + 1 and l > 0) else n_gauss, fns, [])
+            group.append((m, start))
+        cols_of.append((l, coeffs, group))
+
+
+def _kit_columns(fns, cols_of):
+    cols = []
+    for l, coeffs, group in cols_of:
+        rows = [[1.0 if k == c else 0.0 for k in range(len(CART[l]))] for c in range(len(CART[l]))] \
+            if l < 2 else SPH[2]
+        for row in rows:
+            v = np.zeros(len(fns))
+            for m, start in group:
+                v[start:start + len(row)] += coeffs[m] * np.asarray(row)
+            cols.append(v)
+    return np.array(cols).T
+
+
+def hydrogenic_kit(nuclei, n_gauss=12, ng_pol=8, nmax=None):
+    """GeoVac production radial rule (composed_qubit / two_center_eri): hydrogenic
+    orbitals with decay Z/n and the bare nuclear charge.  Zero parameters."""
+    fns, cols_of = [], []
+    for center, Z in nuclei:
+        nm = (nmax or {8.0: 3, 1.0: 2})[Z]
+        for n in range(1, nm + 1):
+            for l in range(n):
+                _shell_kit(center, [(l, _hydrogenic_coeffs(n, l, Z / n), Z / n)], n_gauss, ng_pol, fns, [], cols_of)
+    return fns, _kit_columns(fns, cols_of)
+
+
+def sturmian_kit(nuclei, k, n_gauss=12, ng_pol=8):
+    """Coulomb Sturmians with one shared exponent k per atom (k: {Z: k}).  Their span
+    for shells n <= nmax equals that of Slater primitives r^(m-1) e^(-k r), m <= nmax,
+    so plain primitives are used (variationally identical)."""
+    fns, cols_of = [], []
+    for center, Z in nuclei:
+        nm = {8.0: 3, 1.0: 2}[Z]
+        for l in range(nm):
+            for m in range(l + 1, nm + 1):
+                _shell_kit(center, [(l, {m: 1.0}, k[Z])], n_gauss, ng_pol, fns, [], cols_of)
+    return fns, _kit_columns(fns, cols_of)
+
+
 # --- exact one-centre radial average-of-configuration HF (s closed shells + one p shell) ---
 # Slater-type primitives N r^(n-1) e^(-z r); every integral closed form.  Energy (Slater
 # 1960 average of configuration): s-s pairs F0 - G0/2, s-p F0 - G1/6, p-p F0 - (2/25) F2.
@@ -757,3 +816,20 @@ def test_jw_pauli_stats_matches_openfermion():
         Ehf = (c0 + vnn(nuc) + 2 * np.trace(ha[o, o])
                + 2 * np.einsum('iijj->', ga[o, o, o, o]) - np.einsum('ijji->', ga[o, o, o, o]))
         assert abs(Ehf - E) < 1e-9
+
+
+@pytest.mark.slow
+def test_hydrogenic_kit_is_the_hydrogen_spectrum():
+    """The Z/n kit on a bare O8+ nucleus: each contracted function must be a one-electron
+    eigenfunction, so <h>/<S> = -Z^2/2n^2 and same-l functions are orthogonal (both to
+    the Gaussian-fit tolerance).  Rejects a wrong Laguerre power, a dropped (2 zeta)^j,
+    or a primitive weight not divided by its normalization."""
+    nuc = [(np.zeros(3), 8.0)]
+    fns, T = hydrogenic_kit(nuc, n_gauss=12, ng_pol=12)
+    S, h, _ = GE.integral_set_md(fns, nuc)
+    S, h = T.T @ S @ T, T.T @ h @ T
+    expect = [-32.0] + [-8.0] * 4 + [-32 / 9] * 9          # 1s | 2s 2p | 3s 3p 3d
+    eps = np.diag(h) / np.diag(S)
+    assert np.max(np.abs(eps - expect) / np.abs(expect)) < 2e-3
+    Sn = S / np.sqrt(np.outer(np.diag(S), np.diag(S)))
+    assert np.max(np.abs(Sn - np.eye(len(Sn)))) < 2e-3
