@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.13] - 2026-10-12
+
+### Added
+- **Avery load-vs-generate diagnostic, step 1 (atoms), PI-directed.** Is it cheaper in a qubitized block encoding to load every distinct ERI, or only an angular table (l_max only) plus the m-independent radial table? Realized exactly as two-stage coherent alias sampling over the multipole expansion (no on-device 3j arithmetic); price is a per-multipole 1-norm (lambda_F >= lambda_V). Hydrogenic, all n <= N: table ratio 1.2x -> 13.1x and net (lambda x QROAM Toffoli) 1.16x -> 2.52x over N = 2..6. Direction holds, magnitude modest (QROAM ~ sqrt(table)). Validated against four textbook Slater integrals (1e-16) and a brute-force M^4 sum at N = 2, 3. Caveats: plain sparse baseline (DF/THC may capture much of it), PREPARE only, atoms only. Corrects the August I/O-ladder cost model (step (b) is not common to both schemes under alias sampling). Driver `debug/avery_load_vs_generate_diag.py`; memo `debug/sprint_avery_load_vs_generate_memo.md`.
+
+### Changed
+- **CLAUDE.md §2:** Avery reading material has one canonical version, `docs/outreach/avery_hyperspherical_map.pdf`; the private web artifact is flagged retired (PI, 2026-10-11).
+
 ## [v5.20.12] - 2026-10-11
 
 ### Added
