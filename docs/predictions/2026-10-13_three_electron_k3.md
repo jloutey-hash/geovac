@@ -130,6 +130,16 @@ mass logs}. Prediction: PSLQ at 100 digits finds no relation with coefficients b
 Falsifier: a relation that survives a jump to 140 digits. Honest cap: a null PSLQ is evidence,
 not proof; a positive one would be decisive the other way.
 
+## P3e result (`debug/three_electron_p3e_check.py`; values cached in `debug/data/`)
+
+| Check | Outcome |
+|:--|:--|
+| 1-D formula vs F2's 2-D fibre | agree at all three (c_a,c_b,c_c) triples to 3e-15 to 4e-14 (the 2-D accuracy) |
+| P3e-1, equal scales | **holds.** 216 G(1,1,1) = 80 c30 - 6600 c32 + 81 pi^3, identical at 40 and 70 digits. Only K3 periods plus pi^3. |
+| K3 block at masses (1,2,4) | two exact relations among the six moments int x^k K K K (one at 40 digits; V = 13 D1 + 4 D2 - 26 S12 - 44 S13, identical at 110 and 150), leaving four independent periods {V, D1, D2, S12}: rank 4 = 22 - 18, consistent with Picard rank 18. |
+| P3e-2, generic, test as registered | **INCONCLUSIVE: the registered test cannot see a known relation.** At 150 digits, all three PSLQ calls (basis alone, control, G) return 21-term relations with coefficients 1e5-1e6. That is the chance-relation scale for 21 numbers at 150 digits (about 10^(150/21) = 10^7), so all three are noise. The positive control shows the registered cap of 1e6 was set too low. Every piece of Gctrl reduces exactly to {V, D1, D2, S12} at masses (1,2,4) (x^3 K1K0K0, x^4 K1K1K0, x^4 K1K0K1, x^5 K1K1K1; PSLQ at 60 digits). The assembled reduction is Gctrl = (11050792 V - 27272112 D1 - 52735824 D2 + 87003024 S12)/363825, with a residual of 1.6e-149 at 150 digits (`debug/data/three_electron_p3e_control_reduction.json`). Genuine relations at these masses need coefficients around 1e8, so a null at 1e6 is not evidence either way. Two basis facts were also checked: P_uv = pi K((v-u)/(v+u))/(u+v) exactly, and Q_uv = -dP/du is the quasi-period (not elementary), so the basis is the right kind. |
+| P3e-2, generic, powered rerun (amended after the control, before G was examined) | RUNNING: step Q at 320 digits, stability at 260, cap 1e11. The basis is step P's plus log5, log7, pi log5 and pi log7; extra elements only make a collapse easier to find. A null here, with the control found, would be evidence for P3e-2; a stable G relation would falsify it. |
+
 ## Prior art to check
 
 **Corpus first (searched 2026-10-13, PI prompt).** Paper 59 `sec:context` (around l.680) already
