@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.20.14 (October 13, 2026)
+**Version:** v5.20.15 (October 14, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,7 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
-- **Pre-registered period predictions (2026-10-13, v5.20.14):** four-centre ERI stays genus 1; three-electron chain is a K3 whose period is elliptic squared (Bailey 1936). See docs/predictions/ + CHANGELOG.
+- **Pre-registered period predictions (2026-10-13/14, v5.20.14-15):** four-centre ERI genus 1; three-electron chain = K3, period elliptic squared (Bailey); true fibre collapses at equal scales, not generically (PSLQ evidence). See docs/predictions/ + CHANGELOG.
 - **Water with GeoVac-native bricks (2026-10-11, v5.20.12):** hydrogenic and Sturmian kits all short of cc-pVDZ at 24 functions (best: two-scale Sturmian, 130 mHa); §3 row added. See CHANGELOG v5.20.12.
 - **Avery load-vs-generate, atoms (2026-10-11, v5.20.13):** loading angular+radial tables instead of every ERI nets 1.2x->2.5x (N=2..6) vs plain sparse; DF/THC baseline owed. See debug/sprint_avery_load_vs_generate_memo.md.
 - **Avery material: PDF canonical, web page RETIRED (2026-10-11, PI):** `docs/outreach/avery_hyperspherical_map.pdf` is the one version; the private claude.ai artifact "Labels to Generalized Sturmians" is retired (never shared; do not update).

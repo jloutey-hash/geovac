@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.15] - 2026-10-14
+
+### Added
+- **P3e: the true three-electron fibre (pre-registered 5017114f before computing).** The chain integral's D = 0 fibre reduces to one 1-D Bessel-Struve moment, G = int x K1(ax) J(bx) J(cx), with J = 3L - 3XK0 - X^2K1 and L = int_0^X K0. It agrees with the 2-D fibre to 4e-14.
+  - **P3e-1, equal scales collapse: HOLDS.** 216 G(1,1,1) = 80 c30 - 6600 c32 + 81 pi^3, i.e. K3 periods plus pi^3 (identical at 40 and 70 digits).
+  - **K3 rank at masses (1,2,4).** The six moments int x^k K K K obey two exact relations, leaving four independent periods; rank 4 = 22 - Picard rank 18.
+  - **P3e-2, generic scales do not collapse: the test as registered was INCONCLUSIVE; the powered rerun HOLDS (evidence, not proof).** The registered PSLQ cap (1e6) was below the coefficient scale of genuine relations. The positive control's exact reduction has denominator 363825 and numerators around 1e8: Gctrl = (11050792 V - 27272112 D1 - 52735824 D2 + 87003024 S12)/363825, residual 1.6e-149. The amended test was fixed after seeing the control and before examining G: 320 digits, with a stability check at 260. It recovers the control in every basis. G has no stable relation in K3 + pi^k (none below about 1e24) or in K3 + residue-curve periods and quasi-periods (with and without a factor pi) + Tate numbers including log2 and log3 (none below 1e9-1e13). Reading: the generic fibre carries iterated content beyond the K3 and elliptic periods, the three-electron analogue of Paper 59's extension. Caps: one mass triple; the basis omits dilogarithms and products of elliptic periods.
+  - **Method.** A shared double-exponential grid evaluates every integral from one set of Bessel/Struve values. It agrees with adaptive quadrature to 3e-149 and runs 320 digits in 48 minutes (the adaptive route took 9 hours just for the basis, which was abandoned). Drivers: `debug/three_electron_p3e_{check,fast,subspans,pieces,ctrl_exact}.py`; record `docs/predictions/2026-10-13_three_electron_k3.md`.
+
 ## [v5.20.14] - 2026-10-13
 
 ### Added
