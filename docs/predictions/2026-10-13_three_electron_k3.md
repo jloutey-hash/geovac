@@ -106,6 +106,30 @@ factors after the angle integral, i.e. iterated (antiderivative) structure, so t
 a relative period that may carry regulator-type content beyond K K', as the full banana
 integral does (elliptic trilogarithms, Bloch-Kerr-Vanhove) beyond its maximal cut.
 
+## P3e registration: the true fibre (registered 2026-10-13 after 2d540a32, before computing it)
+
+**Setup (derivation, to be checked numerically).** With rho = (c k^2+1)^{-5/2} and
+g = (c_a u^2+1)^{-3/2}/(3 c_a), the true D = 0 fibre (F2's integrand) folds to
+F = -(1/2) PV int_{R^2} rho_b(p) rho_c(q) g(p+q) / (p q), and a 1-D Fourier transform gives
+F = 4/(27 pi c_a^2) int_0^inf x K1(a x) J(b x) J(c x) dx,  a,b,c = c^{-1/2},
+J(X) = int_0^X z^2 K2(z) dz = 3 L(X) - 3 X K0(X) - X^2 K1(X),  L(X) = int_0^X K0.
+L is the iterated piece (the Coulomb kernels' 1/(pq)). Writing Ki(bx) = bx int_1^inf K0(bxu) du
+turns F into a two-fold mass integral of three-Bessel moments, i.e. of Bailey K K' products:
+the Coulomb kernels act as integrations over the K3 family, as Feynman parameters do for
+Paper 59's ERI. The residues of F's 2-form along p = 0 and q = 0 are the Paper 59 ERI curves
+y^2 = (c_c q^2+1)(c_a q^2+1) and (c_b p^2+1)(c_a p^2+1).
+
+**P3e-1 (equal scales collapse).** At c_a = c_b = c_c, integration by parts swaps every Ki
+against a Bessel of the same argument, so F lies in the Q-span of {c30, c32, Tate numbers}
+(c3k = int x^k K0^3): no iterated content. Falsifier: PSLQ at 60 digits finds no such relation.
+
+**P3e-2 (generic scales do not collapse).** At unequal rational masses F is NOT in the
+Q-span of {the K3 periods (int K0K0K0 and its three first mass-derivative moments), pi x the
+two residue-curve periods (int K0K0, int x K1 K0 for each), Tate numbers built from the
+mass logs}. Prediction: PSLQ at 100 digits finds no relation with coefficients below 10^6.
+Falsifier: a relation that survives a jump to 140 digits. Honest cap: a null PSLQ is evidence,
+not proof; a positive one would be decisive the other way.
+
 ## Prior art to check
 
 **Corpus first (searched 2026-10-13, PI prompt).** Paper 59 `sec:context` (around l.680) already
