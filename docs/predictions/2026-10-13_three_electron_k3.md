@@ -76,6 +76,36 @@ Picard-Fuchs order, or PSLQ of a high-precision fibre value against K K', K E', 
 moduli of the two coordinate-slice curves. If P3d holds, the three-electron rung is
 "elliptic squared", not a new class.
 
+## P3d result (2026-10-13, after the registration commit 5542244e; `debug/three_electron_p3d_check.py`)
+
+**P3d HOLDS for the holomorphic period, and the closed form is classical.** A 1-D Fourier
+transform (Paper 59 eq:K0 at D = 0) sends the K3 period
+P = int_{R^2} dp dq / sqrt((cb p^2+1)(cc q^2+1)(ca(p+q)^2+1)) to a three-scale Bessel moment,
+P = 8/(pi sqrt(ca cb cc)) V3(1/sqrt ca, 1/sqrt cb, 1/sqrt cc), V3(a,b,c) = int_0^inf K0(at)K0(bt)K0(ct) dt.
+Bailey (1936), restated as Bailey-Borwein-Broadhurst-Glasser, J. Phys. A 41, 205203 (2008),
+arXiv:0801.0891, eq. (33): (2c/pi) V3 = K(k-)K(k+') + K(k+)K(k-'), with
+k+- = (sqrt((c+a)^2-b^2) +- sqrt((c-a)^2-b^2))/(2c), a sum of products of two complete elliptic
+integrals with moduli algebraic in the scales.
+
+| Check | Outcome |
+|:--|:--|
+| Equal-mass anchor V3(1,1,1) | quad = Gamma form = (pi/2)K3K3' = eq. (33): all 30 digits agree (6.94882278107962978943643644547) |
+| V3 quad vs eq. (33), four (ca,cb,cc) | agree to 1e-34, including three cases where k+- are complex conjugates |
+| P direct 2-D quadrature vs Bessel reduction | agree to 2e-10 to 7e-10 (relative ~1e-12; scipy subdivision warning on the slow tails) |
+
+**Reading.** The geometry climbs (curve to K3) but the period does not open a new class: the
+three-electron chain's period is "elliptic squared", as Duhr (MPIM talk, 2024-08-19) reports for
+three-loop banana maximal cuts with three equal masses (products of complete elliptic integrals
+with algebraic arguments). Our case has three independent scales and still factorizes, by Bailey.
+GeoVac's contribution here is the reduction (three-electron Slater chain to Bailey's V3), not
+the closed form.
+
+**Not settled (the next frontier, the analogue of Paper 59's MMV question).** The actual D = 0
+fibre (F2's integrand) is not the holomorphic period: the two Coulomb kernels leave 1/(pq)
+factors after the angle integral, i.e. iterated (antiderivative) structure, so the integral is
+a relative period that may carry regulator-type content beyond K K', as the full banana
+integral does (elliptic trilogarithms, Bloch-Kerr-Vanhove) beyond its maximal cut.
+
 ## Prior art to check
 
 **Corpus first (searched 2026-10-13, PI prompt).** Paper 59 `sec:context` (around l.680) already

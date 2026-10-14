@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.14] - 2026-10-13
+
+### Added
+- **Pre-registered period predictions beyond Paper 59, PI-directed ("can the price list predict?").** Two registrations, each written and committed (5542244e) before its computation: `docs/predictions/2026-10-13_four_centre_genus.md` and `docs/predictions/2026-10-13_three_electron_k3.md`.
+  - **P1, four-centre ERI stays genus 1: CONFIRMED.** The general (XY|ZW) 1s Slater ERI reduces to one radial k-integral over two Feynman parameters whose only square roots are the two Paper 59 dispersion roots. Reduced formula 0.218814149639 vs McMurchie-Davidson 0.218814149425 (n = 16 Gaussians); Paper 59's three-centre value reproduced (0.204941652531). Honest weight: nearly a corollary of Paper 59 (calibration, not a hard test). Rule: genus is set by the number of distinct two-centre densities, not nuclei. `debug/four_centre_genus_check.py`.
+  - **P3a-c, three-electron chain integral <rho_a rho_b rho_c/(r12 r13)> lives on a K3: all five falsifiers passed.** Two momenta, three roots; the angle integral is elementary (no log); the reduced 2-D fibre matches the direct 3-D one to 1e-15..4e-14; the branch locus is six lines in P^2 with no four concurrent (K3); coordinate slices are non-isotrivial genus-1 curves, generic line slices genus 2; the one-centre limit is rational (23/54, 133/144, 289/225). `debug/three_electron_k3_check.py`.
+  - **P3d, the K3 period is "elliptic squared": HOLDS, and the closed form is classical.** The holomorphic period reduces by one Fourier transform to the three-scale Bessel moment V3 = int K0 K0 K0, which Bailey (1936; Bailey-Borwein-Broadhurst-Glasser 2008, eq. 33) writes as K(k-)K(k+') + K(k+)K(k-'). Checks: equal-mass anchor to 30 digits; quad vs eq. 33 to 1e-34 at four scale triples (three with complex-conjugate moduli); 2-D period vs Bessel reduction to ~1e-12 relative. GeoVac's contribution is the reduction from a three-electron Slater chain to Bailey's V3, not the closed form. `debug/three_electron_p3d_check.py`.
+  - **Corpus cross-check (PI prompt).** Paper 59 already pairs the ERI with the two-loop sunrise and cites the K3 banana literature; a Route-C memo had set the K3 banana aside as a different geometry, correct for two electrons. Dictionary: ERI <-> sunrise, three-electron chain <-> three-loop banana.
+  - **Open:** the actual chain integral is a relative period (the Coulomb kernels leave 1/(pq) iterated structure); whether it carries content beyond K K' (as the banana does, via elliptic trilogarithms) is the next question.
+
 ## [v5.20.13] - 2026-10-12
 
 ### Added
