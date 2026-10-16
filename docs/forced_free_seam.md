@@ -2,9 +2,9 @@
 
 *A catalogue of what the GeoVac framework fixes (relative to its stated axioms and organizing readings) and what it consumes as external input.*
 
-> **Re-synced 2026-10-02 to Paper 57 and Paper 32 §VIII** (/qa trunk DELTA #25). Paper 57 is authoritative; where a row and the paper differ, the paper wins. "F" for the gauge rows means *forced relative to the Bertrand × Hopf-tower organizing reading plus the adopted Upgrade B axiom*, not derived.
+> **Re-synced 2026-10-02 to Paper 57 and Paper 32 §VIII** (/qa trunk DELTA #25). **Widened 2026-10-15 (PI-directed):** status **W (Wall)**, sub-domain **J (released axes)**, rows A6/A7/I4, and the period column's `weight-1` / `elliptic` / `K3` classes; the door-indexed view is `docs/atlas.md`, gated by `tests/test_atlas_register.py` (which also checks the summary counts below against the rows). Paper 57 is authoritative; where a row and the paper differ, the paper wins. "F" for the gauge rows means *forced relative to the Bertrand × Hopf-tower organizing reading plus the adopted Upgrade B axiom*, not derived.
 
-Started 2026-06-08. Supersedes `docs/forcing_catalogue.md` for the forced-vs-free question; the prior catalogue's forward-run / probe structure remains the canonical record for *what does the same rigidity force that we haven't looked at*.
+Started 2026-06-08. Supersedes `docs/archive/forcing_catalogue.md` (archived 2026-10-15) for the forced-vs-free question; the prior catalogue's forward-run / probe structure remains the canonical record for *what does the same rigidity force that we haven't looked at*.
 
 ---
 
@@ -20,13 +20,14 @@ This catalogue consolidates it. Companion paper: `papers/group3_foundations/pape
 - **A (Admitted)** — the framework structurally allows this but does not autonomously select it among multiple structurally-equivalent options. Witness: existence proof + non-selection theorem or negative search.
 - **Obs (Observation)** — a matched or coincident value with no derivation bridge (e.g. κ = −1/16); neither forced nor consumed as calibration input.
 - **C (Calibration)** — the framework consumes this as external input. Witness: a non-selection theorem (preferred) or a documented negative search (acceptable).
+- **W (Wall)** — a proven obstruction with its mechanism pinned (the third verdict of the CLAUDE.md §1 mission statement): neither forced nor consumed. Witness: a theorem or a bit-exact/high-precision demonstration of the obstruction, plus the named mechanism. Added 2026-10-15 with sub-domain J; the wall's working record stays in `docs/walls/register.md`, this row only indexes it.
 
 ## Discriminator columns
 
 For each entry we record three properties to be tested in the paper §5 candidate-principle probe:
 
 - **MF** — multi-focal depth. `1` if the observable is the output of a single Paper-34 projection; `>1` if its definition requires composing multiple projections.
-- **P** — period class. `M1` / `M2` / `M3` / `outside` / `none` per Paper 18 §III.7 master Mellin engine; `meta` for the engine itself; `N/A` for non-period observables.
+- **P** — period class. `M1` / `M2` / `M3` / `outside` / `none` per Paper 18 §III.7 master Mellin engine; `meta` for the engine itself; `N/A` for non-period observables. Widened 2026-10-15 for the released-axis rows (J): `weight-1` (the two-centre seed set {e^a E₁(a), ln, γ_E}, π-free, Paper 18 `sec:level2_seed_set`), `elliptic` (the three-centre genus-one fibre, Paper 59 `sec:genus`), `K3` (the three-electron chain's two-momentum fibre, `docs/predictions/2026-10-13_three_electron_k3.md`). These sit outside the Mellin engine's M1/M2/M3 and outside the polylogarithm/MZV weight tower (Paper 18 `sec:level2_genus`); `outside` is kept for the calibration rows whose class is not identified.
 - **Dim** — dimensional character. `dimensionless` (ratio) / `dimensionful` (scale).
 
 ---
@@ -40,6 +41,8 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | A3 | $\kappa = -1/16$ matched kinetic scale | **Obs** | Matched to the graph's band edge; its coincidence with the Fock value $1/\Omega^4(0)$ is an Observation, not a derivation | Skeleton | 1 | none | dimensionless |
 | A4 | Shell degeneracy $g_n = n^2$ | **F** | Representation theory; exact integer | Skeleton | 1 | none | dimensionless |
 | A5 | Compactness ⇒ discreteness (Peter–Weyl; the converse fails, e.g. the HO of Paper 24 — discrete spectrum ⇔ compact resolvent) | **F** | Peter–Weyl; `memory/geovac_structural_skeleton_scope_pattern.md` | Skeleton | 1 | N/A | N/A |
+| A6 | Edge Laplacian $D-A$ of the label lattice as a route to $\Delta_{S^3}$ | **W** | Does not converge: $l$-preserving, $n_{\max}$ disconnected blocks, $\dim\ker L = n_{\max}$ at every cutoff, zero cross-block heat kernel; spectrum algebraic ($2-2\cos(j\pi/N)$ sums). Paper 0 `sec:graph`, Paper 7 `sec:attribution`; `tests/test_graph_s3_nonconvergence.py` (2026-09-25) | Skeleton | 1 | none | dimensionless |
+| A7 | Bargmann–Segal lattice of the 3D harmonic oscillator: π-free, bit-exact rational at every $N_{\max}$ (56 nodes, 165 edges, zero irrationals at $N_{\max}=5$) | **F** | Paper 24 `thm:pi-free`; the only π is π⁻³ in the continuous Bargmann measure, never invoked by the graph; the Maz'ya–Shubin counterexample to the converse of A5 (stated in Paper 18 `sec:pattern`); `tests/test_bargmann_graph.py` | Skeleton | 1 | none | dimensionless |
 
 ## B. Gauge structure
 
@@ -59,7 +62,7 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | # | Name | Status | Mechanism / Witness | Domain | MF | P | Dim |
 |---|------|:------:|---------------------|--------|:--:|:--:|:--:|
 | C1 | Master Mellin engine $\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$, $k \in \{0,1,2\}$ | **F** (CONDITIONAL) | Case-exhaustion theorem, [CONDITIONAL], first fifteen Paper 34 projections; converse withdrawn as not established; Paper 32 §VIII | Periods | 1 | meta | dimensionless |
-| C2 | M1 prefactor = $\mathrm{Vol}(S^2)/4 = \pi$ | **F** | Unit-sphere volume slot (the "Hopf-base measure" label is retired) | Periods | 1 | M1 | dimensionless |
+| C2 | M1 prefactor = $\mathrm{Vol}(S^2)/4 = \pi$ | **F** | Unit-sphere volume slot (the earlier "Hopf-base" label is retired) | Periods | 1 | M1 | dimensionless |
 | C3 | Seeley–DeWitt (Dirac, 4-spinor) $a_0 = \sqrt\pi$, $a_1 = -\sqrt\pi/2$, $a_{k\ge2} = 0$ on $S^3$ (corrected 2026-10-02 from $a_0 = a_1 = \sqrt\pi$, $a_2 = \sqrt\pi/8$, a production sign error) | **F** | Closed form; Paper 28 (two-term exactness) | Periods | 1 | M2 | dimensionless |
 | C4 | $\zeta_{D^2}(s) = 2^{2s-1}[\lambda(2s-2) - \lambda(2s)]$ | **F** | T9 theorem; Paper 28 | Periods | 1 | M2 | dimensionless |
 | C5 | $\chi_{-4}$ identity $D_{\rm even} - D_{\rm odd} = 2^{s-1}(\beta(s) - \beta(s-2))$ | **F** | Paper 28 §IV; vertex-parity Hurwitz | Periods | 1 | M3 | dimensionless |
@@ -135,17 +138,35 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | I1 | Fine-structure constant $\alpha$ (value) | **C** | E6 combination rule is an Observation; $\alpha$ value external | $\alpha$ | >1 | M1+M2 | dimensionless |
 | I2 | Born rule probability rule $p = \lvert\langle a\lvert\psi\rangle\rvert^2$ | **C** | Gleason via Hilbert inheritance; framework does not improve on Gleason; `external_input_three_class_partition.md` Class 1 | Foundations | 1 | N/A | N/A |
 | I3 | Higgs direction $\hat n \in S^2$ | **C** | Boyle–Farnsworth input | Inner | 1 | M1 | dimensionless |
+| I4 | Temporal observation window β (KMS / Matsubara circle); modes $2\pi k/\beta$ | **C** | The window is observer-supplied; once time is compactified to a circle the $2\pi$ per mode is a volume-slot (M1) reading, Paper 35 `sec:where_pi` (π enters at temporal compactification; WH7 registered, not proven). Open at register level: a compact *interval* is not a compact *circle* (CLAUDE.md §1.7 WH7, 2026-09-06); Paper 35 states the finite real-time window and the Euclidean circle as equivalent, which is the identification the register flags — a PI call, recorded here, not resolved. Falsifiers `tests/test_paper35_kg_panel.py`, `tests/test_wh7_toeplitz_temporal.py` | Foundations | 1 | M1 (reading) | dimensionful |
+
+## J. Released axes: the decompactification doors (added 2026-10-15)
+
+Each row is one axis released from the compact skeleton toward the continuum, with the number class that enters as its price. The ladder these rows trace — rationals and π at one centre; weight-one logarithms at two centres; an elliptic period at three; a K3 period for a three-electron chain — is stated piecewise in Paper 18 `sec:level2_seed_set` / `sec:level2_genus`, Paper 59 `sec:genus`, and the K3 prediction record; no single paper states the whole chain, and this section is the first place it is indexed together. The door-indexed view with falsifiers is `docs/atlas.md`.
+
+| # | Name | Status | Mechanism / Witness | Domain | MF | P | Dim |
+|---|------|:------:|---------------------|--------|:--:|:--:|:--:|
+| J1 | Second nucleus (prolate, diatomic): $l$ released across centres, $m$ survives as additive $U(1)$ conservation; two-centre ERI classes (AA\|BB) elementary and π-free, (AA\|AB)/(AB\|BB) {E₁, ln}, (AB\|AB) {E₁, ln, γ_E}: weight one, π-free, no dilogarithm | **F** (the $m$ rule is a theorem; the seed classes are counted, the elementary block decided) | Paper 58 `thm:abelian_residue`, `sec:mechanism`, `sec:census`; Paper 12 `sec:Bl_closed`; Paper 18 `sec:level2_seed_set`. Prior art: Curie 1894, Bethe 1929 (the $m$ rule); Neumann 1878, Roothaan 1951, Ruedenberg 1951 (the seeds). `tests/test_paper58_abelian_residue.py`, `tests/test_paper58_eri_census.py`, `tests/test_two_center_eri_aabb.py`, `tests/test_paper12_general_m_neumann.py` | Chemistry | 1 | weight-1 | dimensionless |
+| J2 | Decompactification front: the coupling that $l$ forbade turns on continuously in $R$, set by the decay length $n/Z$; the label stays Boolean | **Obs** | Paper 58 `sec:continuous` (front $R^*/\ell_n$ and exponent MEASURED; rate bound $0 < dA/dc^2 < 1$ via DLMF spheroidal, SYMBOLIC + MEASURED). Prior art: Herring 1962, Herring–Flicker 1964. `tests/test_paper58_decompactification_front.py`, `tests/test_paper58_dlmf_spheroidal.py`, `tests/test_paper58_coherence_front.py` | Chemistry | 1 | none (seed $e^aE_1(a)$, $a = R$) | dimensionful |
+| J3 | Third nucleus, shared centre (XY\|XZ): the fibre is the genus-one curve $y^2 = (c_1k^2+1)(c_2k^2+1)$, period $K(m)$; CM fibre at $\rho = 1/2$ ($\tau = i$): $K(1/2) = \Gamma(1/4)^2/(4\sqrt\pi)$; a finite closed form is barred, accurate evaluation is not | **W** (closed form only) | Paper 59 `sec:genus`, `sec:obstruction`, `sec:scope`; Paper 61 `sec:modular`; Paper 18 `sec:level2_genus`; walls register GEOMETRY-2FOCI. Prior art: Shibuya–Wulfman 1965, Barnett–Coulson 1951, Chowla–Selberg 1967; the sunrise literature. `tests/test_routeC_momentum.py`, `tests/test_paper59_euclidean_dictionary.py`, `tests/test_pairwise_three_center.py` | Chemistry | 1 | elliptic | dimensionless |
+| J4 | Fourth distinct centre (XY\|ZW): still one radial $k$-integral with the same two dispersion roots; no genus two at four centres (pre-registered P1, 2026-10-13; confirmed against McMurchie–Davidson; nearly a corollary of Paper 59) | **F** [PRE-REGISTERED, CONFIRMED; promoted from Obs 2026-10-15 when the paper home and guard landed] | Paper 59 `sec:four_centre`; record `docs/predictions/2026-10-13_four_centre_genus.md`; `tests/test_paper59_four_centre_genus.py` (values recomputed; radicand set equal to the two quadrics, symbolically). Prior art: Avery & Avery 2017 App. B (same momentum form, no genus reading) | Chemistry | 1 | elliptic | dimensionless |
+| J5 | Bending (water, AH₂): $m$ released; $\lvert m\rvert = \Lambda$ opens at order $s^{2\Lambda}$; the opening order and labels are exact rationals (6/5, 5/6), the slopes exponentials in $R$ (no π) | **F** (order and labels; the slopes are measured, not forced) | Paper 32 `rem:multicenter_composition`; Paper 59 `sec:scope`. Prior art: Renner 1934, Walsh 1953 (the CHANGELOG records "not novel as a method"). `tests/test_renner_teller_m_splitting.py`, `tests/test_renner_teller_rung2.py`, `tests/test_renner_teller_rung4.py`, `tests/test_walsh_ah2.py`, `tests/test_paper32_composition_pins.py` | Chemistry | 1 | none | dimensionless |
+| J6 | Water's three-centre ERIs: shared-centre (Barnett–Coulson) channels converge to $\sim 10^{-9}$ by $L \approx 12$; a closed form is barred by the J3 genus jump | **W** (closed form only; the evaluation is accurate) | Paper 59 `sec:scope`. Prior art: Barnett–Coulson 1951 / Löwdin α-function. `tests/test_pairwise_general.py` | Chemistry | 1 | elliptic | dimensionless |
+| J7 | Three-electron chain $\langle\rho_a\rho_b\rho_c/(r_{12}r_{13})\rangle$: a second momentum integration (three densities, three roots); the fibre is a K3 (P² on six lines); the holomorphic period is Bailey's $V_3 = \int K_0K_0K_0$, a sum of products $K\,K'$ ("elliptic squared"); at equal scales the fibre collapses to K3 periods plus π³; at generic scales it carries content beyond K3 and elliptic periods (evidence at one mass triple, not proof); the one-centre limit is rational | **F** for the K3 fibre and its elliptic-squared period [PRE-REGISTERED; P3a–d HOLD, guarded; promoted from Obs 2026-10-15]; the equal-scale collapse (P3e-1) and the generic content beyond K3 (P3e-2) stay evidence, unguarded | Paper 59 `sec:three_electron`; record `docs/predictions/2026-10-13_three_electron_k3.md`; `tests/test_paper59_three_electron_k3.py` (fibre agreement, elementary angle integral, rational one-centre limits, Bailey closed form vs quadrature, K3 period vs $V_3$, six-line branch locus, non-isotrivial slice); CHANGELOG v5.20.14–15. Prior art: Bailey 1936; Bailey–Borwein–Broadhurst–Glasser 2008 eq. 33; the three-loop banana literature. GeoVac's contribution is the reduction of the Slater chain to $V_3$, not the closed form | Chemistry | >1 (two momenta) | K3 | dimensionless |
+| J8 | Explicit-$r_{12}$ four-body bridge $f_{12}f_{34}/r_{13}$: four electrons linked by one bridging Coulomb kernel; reduces RI-free to a finite $(L,M)$ contraction of three-body vertex kernels (terminating at $L \le 2(l_{\rm bridge}+l_{\rm leaf})$) and, for $s$ leaves, to a two-electron Slater–Condon integral of dressed densities; $N \ge 5$ conjectural | **Obs** (validated reduction, no derivation; audit 2026-09-22) | Paper 12 `sec:r12`; `debug/sprint_n4_wall_diagnostic_memo.md`. One Coulomb kernel, so by J9 the class is the two-density one (genus ≤ 1), not the K3 of J7: the ladder is indexed by kernels sharing a vertex, not by electron count. Prior art: one-centre Hylleraas-CI (King 2014, Sims–Hagstrom 2015, Ruiz–Sims–Padhy 2021); only the two-centre extension is the corpus's. `tests/test_lih_r12ci_bridge.py`, `tests/test_paper12_r12.py` | Chemistry | 1 | weight-1 (one kernel) | dimensionless |
+| J9 | Rule: the transcendence class of a two-electron integral with a rational kernel is set by the number of distinct two-centre transition densities the kernel couples (zero or one: genus zero; two: genus one), not by the number of nuclei; three densities over two momenta give a surface (K3), not a higher-genus curve | **F** [SYMBOLIC at one centre; test-backed multicentre; four-centre instance pre-registered and confirmed] | Paper 59 `sec:f12`, `sec:momentum`, `sec:genus`; CHANGELOG v5.20.14. `tests/test_routeC_momentum.py` (`test_f12_multicenter_shares_eri_elliptic_genus`, `test_f12_geminal_pair_is_elementary`) | Chemistry | 1 | meta | N/A |
 
 ---
 
 ## Summary counts
 
-- **Forced (F):** 34 entries (several relative to a named organizing reading / adopted axiom, or CONDITIONAL, as marked in the rows)
-- **Observation (Obs):** 1 entry (A3, κ; re-classified from F on 2026-10-02)
+- **Forced (F):** 40 entries (several relative to a named organizing reading / adopted axiom, or CONDITIONAL, as marked in the rows; J4 and J7 promoted from Obs on 2026-10-15 when Paper 59 `sec:beyond` and their guards landed)
+- **Observation (Obs):** 3 entries (A3 κ, re-classified from F on 2026-10-02; J2, a measured front; J8, a validated reduction without a derivation)
 - **Admitted (A):** 1 entry
-- **Calibration (C):** 24 entries
+- **Calibration (C):** 25 entries
+- **Wall (W):** 3 entries (A6, J3, J6)
 
-Total: 60 entries across nine domains.
+Total: 72 entries across ten domains (60 on the 2026-06-08 catalogue that Paper 57 §5–6 audited; 12 rows added 2026-10-15: A6, A7, I4, J1–J9).
 
 ## Preliminary discriminator read
 
@@ -165,4 +186,4 @@ The §5 candidate-principle probe in Paper 57 will therefore test principles *pe
 
 ---
 
-*Source: this catalogue consolidates `docs/forcing_catalogue.md` (2026-06-01), CLAUDE.md §1.7 working hypotheses, CLAUDE.md §3 dead-end rows, `debug/sprint_h1_*_memo.md`, `debug/sprint_yukawa_pslq_memo.md`, `debug/sprint_read2_n_gen_scoping_memo.md`, `debug/sprint_w1e_period_class_memo.md`, `debug/sprint_forced_count_synthesis_memo.md`, `debug/seam_packing_scoping_memo.md`, and the memory files indexed in MEMORY.md under "Working hypotheses and core structural findings" and "Sprint outcomes (durable findings)". Companion paper: `papers/group3_foundations/paper_57_forced_free_seam.tex`.*
+*Source: this catalogue consolidates `docs/archive/forcing_catalogue.md` (2026-06-01; archived 2026-10-15), CLAUDE.md §1.7 working hypotheses, CLAUDE.md §3 dead-end rows, `debug/sprint_h1_*_memo.md`, `debug/sprint_yukawa_pslq_memo.md`, `debug/sprint_read2_n_gen_scoping_memo.md`, `debug/sprint_w1e_period_class_memo.md`, `debug/sprint_forced_count_synthesis_memo.md`, `debug/seam_packing_scoping_memo.md`, and the memory files indexed in MEMORY.md under "Working hypotheses and core structural findings" and "Sprint outcomes (durable findings)". Companion paper: `papers/group3_foundations/paper_57_forced_free_seam.tex`.*

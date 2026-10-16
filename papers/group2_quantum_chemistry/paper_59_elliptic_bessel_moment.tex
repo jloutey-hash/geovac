@@ -75,6 +75,13 @@ we leave open.  The message is not a solution
 but a relocation: the third center does not make the radial integral messier
 within the two-center class, it raises the transcendence one genus, past the
 reach of the sunrise's elliptic-dilogarithm mechanism.
+\textbf{[MEASURED]} Two pre-registered extensions (Sec.~\ref{sec:beyond})
+fix what the rung variable is:\ a fourth distinct center adds no genus,
+because the class counts the densities a kernel couples and not the
+nuclei, while a three-electron chain with two Coulomb kernels at one
+electron lives on a K3 surface whose holomorphic period is Bailey's
+three-scale Bessel moment, a sum of products of two complete elliptic
+integrals.
 \end{abstract}
 
 \maketitle
@@ -792,6 +799,85 @@ Gaussian F12; the statement is about the two-electron integrals, whose momentum-
 transcendence we have mapped.
 
 %% ========================================================================
+\section{Beyond the third center:\ a fourth center, and a three-electron chain}
+\label{sec:beyond}
+%% ========================================================================
+
+Two results pre-registered on 2026-10-13 (records
+\texttt{docs/predictions/2026-10-13\_four\_centre\_genus.md} and
+\texttt{docs/predictions/2026-10-13\_three\_electron\_k3.md}, each committed
+before its computation) extend the genus reading of
+Sec.~\ref{sec:genus} in the two directions the rule of Sec.~\ref{sec:f12}
+predicts:\ more centers, and more Coulomb kernels.
+
+\subsection{A fourth distinct center adds no genus}
+\label{sec:four_centre}
+
+\textbf{[MEASURED]} The general four-center integral $(XY|ZW)$, four
+distinct centers and $1s$ Slater orbitals, reduces by the same Feynman
+parametrization to one radial $k$-integral over two parameters $(s,t)$
+whose integrand carries exactly the two dispersion roots
+$\Delta_1(s)$, $\Delta_2(t)$ of Eq.~\eqref{eq:curve};\ the centers enter
+only through a single phase vector $\bm W(s,t)$ and the two pair
+distances $D_1$, $D_2$.  The reduced formula gives $0.218814149639$
+against $0.218814149425$ from McMurchie--Davidson on sixteen-Gaussian
+fits (the residual is the fit gap), and reproduces the three-center
+value $0.204941652531$ of Sec.~\ref{sec:reduction} as a special case.
+There is no genus two at four centers:\ the transcendence class is set
+by the number of distinct two-center densities the kernel couples, not
+by the number of nuclei, and this is that rule's first instance beyond
+the one this paper was written on.  Its honest weight is that of a
+corollary of Sec.~\ref{sec:momentum}, a calibration rather than a hard
+test.  The momentum form itself is the Averys'
+(Ref.~\cite{avery_avery_4center}, App.~B);\ the genus reading is not in
+it.  Guards:\ \texttt{tests/test\_paper59\_four\_centre\_genus.py} (both
+values recomputed;\ the kernel as the second $z$-derivative of a Yukawa
+product and the radicand set equal to the two quadrics, both
+symbolically;\ rigid-motion invariance with dependence on the pair
+placement).
+
+\subsection{A three-electron chain lives on a K3 surface}
+\label{sec:three_electron}
+
+\textbf{[SYMBOLIC + MEASURED]} The chain integral
+$\langle \rho_a(1)\rho_b(2)\rho_c(3)/(r_{12}r_{13})\rangle$, three
+one-center $1s$ Slater densities at scales $(a,b,c)$ joined by two
+Coulomb kernels at electron~1, has two momentum integrations and three
+dispersion roots.  The angular integral is elementary (no logarithm);\
+the reduced two-dimensional fibre matches the direct three-dimensional
+one ($10^{-15}$ to $4\times10^{-14}$ in the record, $10^{-9}$ in the
+reduced-precision guard);\ the one-center limit is rational
+($23/54$, $133/144$, $289/225$ at the three registered scale ratios);\
+the branch locus in $\mathbb{P}^2$ is six lines with no four concurrent,
+so the double cover is a K3 surface, and fixed-$p$ slices are
+non-isotrivial genus-one curves.  \textbf{[MEASURED / classical]} The
+holomorphic period reduces by one Fourier transform to Bailey's
+three-scale Bessel moment $V_3 = \int_0^\infty K_0(at)K_0(bt)K_0(ct)\,dt$,
+whose closed form is classical, $K(k_-)K(k_+') + K(k_+)K(k_-')$
+(Bailey~\cite{bailey1936};\ Ref.~\cite{bbbg2008}, Eq.~33), checked at four
+scale triples to $10^{-34}$ in the record and to $10^{-17}$ in the guard.
+The K3's period is therefore ``elliptic squared'':\ it opens no new
+transcendence class but a product of the class of Sec.~\ref{sec:genus}.
+The reduction from a Slater chain to $V_3$ is this paper's;\ the closed
+form is Bailey's.  In the dictionary of Sec.~\ref{sec:literature}, the
+repulsion integral pairs with the two-loop sunrise and the chain with the
+three-loop banana.  \textbf{[OBSERVATION, evidence]} At equal scales the
+true fibre at zero separation collapses to two K3 periods (Bessel moments
+of the record) and $\pi^3$;\ at the generic triple $(1,2,4)$ a 320-digit
+PSLQ finds no relation among K3 periods and powers of $\pi$, nor among K3
+periods, elliptic periods and quasi-periods, and Tate numbers.  That is
+evidence, at one scale triple and with a basis that omits dilogarithms
+and products of elliptic periods, that the generic fibre carries content
+beyond the K3 and elliptic periods, as the banana does.
+\textbf{[OPEN]} Whether longer trees give Calabi--Yau $n$-folds is not
+tested.  Guards:\ \texttt{tests/test\_paper59\_three\_electron\_k3.py}
+(the fibre agreement, the elementary angle integral, the rational
+one-center limits, Bailey's closed form against quadrature, the K3 period
+against $V_3$, the six-line branch locus, the non-isotrivial slice);\
+the equal-scale collapse and the generic null are not guarded, and the
+record carries them.
+
+%% ========================================================================
 \section{Scope, and the open frontier}
 \label{sec:scope}
 %% ========================================================================
@@ -878,7 +964,10 @@ connection, and its monodromy admits no invariant coordinate subspace---so it do
 close by any factorization.  Whether it closes at the irreducible level---as an Eisenstein/CM Bessel-moment
 period, a finite reduction to $\pi$ and the CM-fibre $\Gamma$-values
 (companion, Paper~61)---is the one frontier that remains, posed here as
-it deserves to be.
+it deserves to be.  Two pre-registered extensions (Sec.~\ref{sec:beyond})
+fix the rung variable:\ a fourth center adds nothing, because genus counts
+the densities a kernel couples and not the nuclei, while a second Coulomb
+kernel at one electron climbs to a K3 whose period is elliptic squared.
 
 %% ========================================================================
 \begin{thebibliography}{99}
@@ -921,6 +1010,10 @@ integrals,'' \textit{Phys.\ Rev.\ A}\ \textbf{36}, 1013--1044 (1987).
 D.~H.~Bailey, J.~M.~Borwein, D.~Broadhurst, and M.~L.~Glasser, ``Elliptic
 integral evaluations of Bessel moments and applications,''
 \textit{J.\ Phys.\ A}\ \textbf{41}, 205203 (2008); arXiv:0801.0891.
+
+\bibitem{bailey1936}
+W.~N.~Bailey, ``Some infinite integrals involving Bessel functions,''
+Proc.\ London Math.\ Soc.\ (2) \textbf{40}, 37--48 (1936).
 
 \bibitem{broadhurst2008}
 D.~Broadhurst, ``Elliptic integral evaluation of a Bessel moment by contour

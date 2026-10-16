@@ -220,7 +220,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | 51, 53 | Gravity arc / flat-plane truncations | S³ spectral action two-term-exact; flat-plane state-space GH theorem, disk-with-cone open |
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
 | **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
-| 57 | Forced/free seam | 60-entry catalogue (34 forced / 1 Observation / 1 admitted / 24 calibration); P5 packing-reachability is an internal-consistency check, not a discriminator |
+| 57 | Forced/free seam | 72-entry catalogue (40 forced / 3 Observation / 1 admitted / 25 calibration / 3 walls; released-axis sub-domain J added 2026-10-15, door-indexed in `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
 
 ---
 

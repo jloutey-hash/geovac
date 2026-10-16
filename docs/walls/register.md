@@ -4,7 +4,7 @@
 >
 > **Vocabulary.** Status: STANDING / SOFTENED / BREACHED / MIS-SCOPED / SUPERSEDED. Kind: HARD (proven structural impossibility) / SOFT (engineering·convention·precision·basis-limited, revisit-candidate) / OPEN-LEANING (tested-negative, a named better attempt exists). Cluster maturity: CRYSTALLIZED / FORMING / SINGLETON.
 
-**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked). · **2026-09-19 (v5.14.6):** architecture-swap audit **composed → prolate-native diatomic**, PI-adjudicated — a new *kind* of pass (audit against an architecture change, not a shared-mechanism cluster); see the dedicated section below.
+**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked). · **2026-09-19 (v5.14.6):** architecture-swap audit **composed → prolate-native diatomic**, PI-adjudicated — a new *kind* of pass (audit against an architecture change, not a shared-mechanism cluster); see the dedicated section below. · **2026-10-16 (v5.20.18):** `/walls PERIODS-TRANSCENDENCE`, PI-invoked — the cluster worked FORMING → CRYSTALLIZED (home: Paper 59 `sec:f12` + `sec:beyond`, seam J9); one member MIS-SCOPED (route-specific), one new OPEN-LEANING member filed; see its section below.
 
 ---
 
@@ -17,7 +17,7 @@
 | ALPHA-COMBINATION | *forming (unworked)* | ~13 | B, F, Δ have independent spectral homes; their *combination* into α⁻¹ has no single-mechanism derivation (12+ eliminated). |
 | GRAVITY-SUBSTRATE | *forming (unworked)* | ~12 | Finite-lattice substrate artifacts (Möbius α>1, A-coefficient, S_BH cutoff) vanish only in the a→0 continuum limit. |
 | RELATIVISTIC-TAPERING | *forming (unworked)* | ~3 | jj-coupled Coulomb conserves M_J/κ-branch as *sums*, not parities → no original-basis Z-string Z₂ survives. |
-| PERIODS-TRANSCENDENCE | *forming (unworked)* | ~5 | Two-electron/3-centre transcendence is set by *density topology* (elliptic, irregular), not the operator; no factorization closes it. |
+| **PERIODS-TRANSCENDENCE** | CRYSTALLIZED (2026-10-16) | 7 | For two-electron integrals over Slater densities the transcendence class is fixed by the **density topology the kernel couples** (distinct two-centre densities set the genus; a second kernel at a vertex lifts curve to surface), never by the operator, the basis, the number of nuclei, or a factorization; closed forms stop at genus zero. Home: Paper 59 `sec:f12` + `sec:beyond`; seam J9. |
 | NUCLEAR-CONTINUUM-RESPONSE | *singleton-ish (unworked)* | ~3 | Sum-over-states / IR-extrapolation fragile for continuum response; the error is the interaction (Minnesota), not the solver. |
 | MOLECULAR-BINDING-W1e | *forming (unworked)* | ~10 | Second-row over-binding lives at the integral-**specification** step, not correlation (DMRG=FCI); cheap engineering exhausted. |
 
@@ -318,6 +318,47 @@ machinery the prolate direction leaves behind, so it neither obstructs nor endor
 direction. The walls that actually bind are the recent PROLATE-NATIVE ones (Tier 1) and
 the two-foci ceiling. **Unobstructed by old evidence, entirely untested — gated on one
 unbuilt prolate ≥4e CI.**
+
+---
+
+## Cluster: PERIODS-TRANSCENDENCE — what sets the transcendence class of a two-electron integral (worked 2026-10-16, v5.20.18, PI-invoked)
+
+**Scope.** The walls on *what number class a GeoVac two-electron integral can land in*, and on the routes that tried to lower it. Current-state sources checked for every member: Paper 59 (`sec:genus`, `sec:obstruction`, `sec:f12`, `sec:scope`, `sec:beyond`), Paper 61 (`sec:modular`, the 64-digit guarded PSLQ), Paper 12 (`sec:r12`), CHANGELOG v5.1.10 → v5.20.17, `docs/predictions/2026-10-13_*.md`.
+
+### Member walls
+
+| Wall (ledger / owner) | Status | Kind | Evidence that decides it |
+|:--|:--|:--|:--|
+| Brute high-precision T2 by integrating the fibre over the family (ledger 2026-08-20) | **MIS-SCOPED** → route-specific | SOFT | The digits the row said were unreachable (≥30) were reached by a different route in the same release: the oscillation-free tail-analytic evaluator and then the (k,w) refactorization took T2 to 64 digits (CHANGELOG v5.1.10 "fibre precision wall removed"; Paper 61 `sec:modular`, "decided at 64 digits"). The wall is on *fibre-over-family quadrature*, not on the precision. Corrected scope: that route caps near 14 digits; use the Bessel-moment evaluators. |
+| ℚ(i) seam (P56 Dirac ↔ P59 T2) as a shared mechanism (ledger 2026-08-21, 4 instances) | **STANDING** | HARD | Its stated upgrade condition was "β(2) measured in T2 at ≥32 digits". Paper 61's guarded PSLQ is decisively negative through weight three, including the Catalan-completed ring, at 64 digits and height ≤10: T2 carries no measured conductor-4 content at reachable heights. The seam stays CONVERGENT; the structural leg (a compact-but-pure-Tate scalar sector falsifies the Wick pun) is unchanged. |
+| Seam involution: τ = i pinned by a physical ℤ₂ (ledger 2026-08-21) | **STANDING**, refined | HARD | Still no ℤ₂ pins τ = i. Refinement from Paper 61 `sec:modular`: τ = i *does occur*, as the in-domain CM fibre ρ = 1/2 of the Legendre family (period Γ(1/4)²/(4√π), Chowla–Selberg), i.e. as one fibre among a continuum, not as a fixed point of a physical involution. The row's "ρ ↦ 1/ρ, fixed locus the pure-Tate cusp" stands. |
+| Elliptic/CM-adapted basis for chemical accuracy (ledger 2026-08-23, 3 instances) | **STANDING** | HARD | Every accuracy gain since has come from the electron-electron cusp, never from radial exponent placement: explicit-r₁₂ H₂ to 0.053 mHa with exact integrals (Paper 12, v5.14.10); LiH to −8.0585 via geminal shape and core e-n factors (v5.16.0, v5.20.6); the two-block radial exponent worth ~0 (v5.14.2). The period of the *integral* is not a *basis* principle. |
+| Elliptic-dilogarithm route obstructed; the rank-4 Picard–Fuchs operator is irreducible (Paper 59 `sec:obstruction`, [SYMBOLIC + MEASURED]; not a §3 row — a paper-owned negative) | **STANDING** | HARD | Fourier–Laplace transform of an irreducible connection + exact-integer monodromy with no invariant coordinate subspace (Paper 59 abstract and `sec:obstruction`; `tests/test_routeC_momentum.py` `test_L4_monodromy_certificate_irreducible`). No factorization closes T2. |
+| Partial closed form of the three-centre block is worse than none (Poly-2, ledger 2026-08-14) | **STANDING** | HARD | Paper 59 `sec:scope`: "a value that is part closed-form and part numerical is neither more accurate nor decidable"; the cancelling T1/T2 contributions are physics (8-fold symmetry bit-exact). Supports the all-or-nothing consequence below. |
+| Generic three-electron chain fibre has no relation in K3 + elliptic + Tate bases (P3e-2, 2026-10-14; filed this run, ledger + §3) | **STANDING** | OPEN-LEANING | 320-digit PSLQ, one mass triple (1,2,4), basis omits dilogarithms of mass ratios and products of elliptic periods; the positive control recovers its exact relation in every basis (`docs/predictions/2026-10-13_three_electron_k3.md`; CHANGELOG v5.20.15; Paper 59 `sec:three_electron`, [OBSERVATION, evidence]). Named better attempt: widen the basis before widening the computation. |
+
+**Adjacent, not members.** The Yukawa-PSLQ null (ledger 2026-06-03) and the W1e period-class null (2026-06-04) are "calibration data are not outer-factor periods", Paper 57's two-family finding, a different mechanism (inner-factor input data), left for an ALPHA/INNER-FACTOR pass. The Hain–Brown period-level negative (`memory/hain_brown_identification.md`) belongs with the P56 Tannakian arc. The S^(4)-stage numerics rows (Levin on log-modulated summands, nested nsum, sumem, float64 contamination, sympy rank; ledger 2026-06-11/13) are a METHOD family (how not to sum), not a transcendence family; listed here only so the next pass does not re-sort them.
+
+**The l seam and m seam (owed by `docs/atlas.md`).** Neither needs a new row. The l-seam wall — cross-centre l-selection dies at the second nucleus — is the `two_kinds_of_sparsity` crystallization already inside CHEM-ACCURACY (Paper 58 `thm:abelian_residue`, seam J1). Bending's release of m is a *door* with prior art (Renner, Walsh; seam J5), not a wall. The water closed-form wall (seam J6) is this cluster's member 5/6 plus the GEOMETRY-2FOCI row in the architecture-swap audit.
+
+### Crystallization (FORMING → CRYSTALLIZED)
+
+**One sentence.** For a two-electron integral over Slater densities with a rational kernel, the transcendence class is fixed by the density topology the kernel couples — zero or one distinct two-centre density gives genus zero, two give genus one, and a second kernel meeting at a vertex lifts the curve to a surface (K3) — and not by the operator between the densities, the basis, the number of nuclei, or any factorization; so nothing short of changing what the kernel couples lowers the class, closed forms stop at genus zero, and a part-closed-form evaluation is worse than none.
+
+**Independent support (≥3).** (i) Paper 59 `sec:f12`: geminal kernels leave the curve unchanged (operator-independence), [SYMBOLIC] at one centre, test-backed at several. (ii) Four-centre P1 confirmed: no third root, same genus-1 family (nucleus-independence; `tests/test_paper59_four_centre_genus.py`). (iii) The CM-adapted basis null (basis-independence). (iv) The irreducible PF operator (no factorization). (v) The K3 chain: the class rises exactly when a second kernel shares a vertex (`tests/test_paper59_three_electron_k3.py`). (vi) Poly-2: partial closed forms cancel against what they omit.
+
+**Falsifier.** A finite closed form for (XY|XZ) (breaches J3, Paper 59 `sec:scope`); a genus-two fibre from a kernel coupling only two densities, or a third independent root at four centres (P1's own falsifiers); or a basis whose exponents placed by the CM fibre beats generic variational placement at matched size.
+
+**Operational consequence (dispatch rule).** (A) *Class question* — count the distinct two-centre densities the kernel couples and the kernels sharing a vertex; read the rung off that, not off the molecule. (B) *Accuracy question* — evaluate (shared-centre channel sums reach ~10⁻⁹ by L ≈ 12); do not chase a closed form past genus zero and never ship a partial one. (C) *Digits for an integer-relation search* — use the Bessel-moment / (k,w)-refactorization evaluators of Paper 61, not fibre-over-family quadrature. (D) *Next-rung question* — widen the PSLQ basis (dilogarithms of mass ratios, products of elliptic periods, more mass triples) before widening the computation.
+
+**Promotion.** None needed: the statement is already a paper claim (Paper 59 `sec:f12`, extended by `sec:beyond`) and a Forced seam row (J9); this pass records the cluster as its negative-side support and ties the walls to the guards.
+
+### This run's delta
+- PERIODS-TRANSCENDENCE: *forming (unworked)* → CRYSTALLIZED; members 5 → 7.
+- Brute-T2 row: STANDING → MIS-SCOPED (route-specific), with the 64-digit evidence.
+- Seam-involution row: refined (τ = i occurs as the in-domain CM fibre, not as a pinned point).
+- New member filed: P3e-2 generic chain fibre (ledger + CLAUDE.md §3 row), OPEN-LEANING.
+- The atlas's owed "l-seam / m-seam rows" discharged by pointer (no new wall exists there).
 
 ---
 

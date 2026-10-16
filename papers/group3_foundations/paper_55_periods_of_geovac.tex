@@ -801,7 +801,12 @@ into Hurwitz at quarter-integer shifts $1/4, 3/4, 5/4$ (Paper~28
 Theorem~3 proof), and the $\zeta(s, 1/4)$ contribution cancels in
 $D_{\mathrm{even}} - D_{\mathrm{odd}}$ via the Dirichlet $\beta$
 definition
-$\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$.  Hurwitz at
+$\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$.  (Papers~32 and 56
+name the shift set as $\{3/4, 5/4\}$, the shifts the parity sums
+produce directly from $m = n + 3/2$;\ since
+$\zeta(s, 5/4) = \zeta(s, 1/4) - 4^{s}$, that set and the
+$\{1/4, 3/4\}$ used here differ by an elementary term and name the same
+class --- a convention, not a discrepancy, recorded 2026-10-16.)  Hurwitz at
 quarter-integer shifts are periods of $\MT(\Z[i, 1/2])$ at level
 $N = 4$ by the explicit Glanois 2015 basis $\Bcal^4$
 (\cite{glanois2015} Corollaries 1.1--1.2), so $D_{\mathrm{even}}$,
@@ -1470,12 +1475,15 @@ Mellin engine, organised by the conditional case-exhaustion theorem
 (Theorem~\ref{thm:case_exhaustion}), not a consequence of it.
 
 The corresponding period rings $M_1, M_2, M_3$, however, are not
-set-theoretically disjoint.  The nesting structure is
+set-theoretically disjoint.  The nesting of their ring homes (the
+inclusions $M_2 \subset \bigoplus \pi^{2k}\Q$ and
+$M_3 \subset \MT(\Z[i,1/2])$ are the theorems of \S\S 4--5;\ an earlier
+display wrote them as equalities, corrected 2026-10-15) is
 \begin{equation}
 \label{eq:ring_nesting}
-M_2 = \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
+M_2 \;\subset\; \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
 \;\subset\; \MT(\Z)
-\;\subset\; M_3 = \MT(\Z[i, 1/2]),
+\;\subset\; \MT(\Z[i, 1/2]) \;\supset\; M_3,
 \qquad
 M_1 \cap \MT(\Z[i, 1/2]) = \Q[\pi].
 \end{equation}
