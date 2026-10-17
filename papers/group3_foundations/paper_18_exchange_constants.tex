@@ -380,7 +380,7 @@ stereographic weights is the quartic
   y^2 = (c_1 k^2 + 1)(c_2 k^2 + 1),
 \end{equation}
 an elliptic curve.  Its $D=0$ period is a complete elliptic integral $K$, and
-the full integral is an elliptic polylogarithm on this family, degenerating to
+the full integral is a period of this family (its radial core is not an elliptic dilogarithm, Paper~59), degenerating to
 the genus-zero two-centre curve only on the measure-zero locus $c_1 = c_2$ of a
 shared sphere.
 
@@ -395,8 +395,8 @@ system for three foci,'' and the reason Gaussian orbitals---whose product
 theorem collapses three centres to one---displaced Slater orbitals for
 polyatomic quantum chemistry.  The elliptic identification is numerical (the
 $D=0$ period verified to $31$ digits against a momentum-space evaluation that
-reproduces the exact three-centre integral to $\sim\!10^{-14}$); the closed
-form in elliptic polylogarithms is not derived here.
+reproduces the exact three-centre integral to $\sim\!10^{-14}$); no closed
+form is derived here.
 
 \subsection{Level 3: $\mu(R)$ ($S^3 \times S^3 \to$ hyperspherical)}
 \label{sec:mu}
@@ -1196,9 +1196,10 @@ slot and \emph{not} a base-to-total ratio of the Hopf fibration, a
 distinction that matters wherever the name is read as a ratio
 (2026-09-03; Paper~38, volume-ratio note)); $k = 2$ (standard spectral action $\mathrm{Tr}\,f(D^2/\Lambda^2)$
 generates Seeley--DeWitt coefficients, recovering M2); and $k = 1$
-(Mellin transform of $\mathrm{Tr}(D \cdot e^{-tD^2})$ produces the
-$\eta$-invariant series whose vertex-parity decomposition gives the
-quarter-integer Hurwitz shifts, recovering M3).  The Mellin engine of
+(the plain trace $\mathrm{Tr}(D \cdot e^{-tD^2})$ vanishes on the symmetric
+Camporesi--Higuchi spectrum;\ the slot is read through the absolute sum and its
+vertex-parity grading, Eq.~\eqref{eq:m3_gammaP_slot}, which gives the quarter-integer
+Hurwitz shifts, recovering M3).  The Mellin engine of
 this section is therefore not just \emph{a} mechanism producing
 exchange constants; under the (conditional) case-exhaustion theorem,
 it is the \emph{master} mechanism through which $\pi$ enters where it
@@ -1496,8 +1497,8 @@ above, or the period-ring stratification
 $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.
 It sharpens the description of the M3 row of the master Mellin
 engine:\ the sub-mechanism index $k = 1$ commits to the
-$\eta$-invariant Mellin family
-$\mathcal{M}[\mathrm{Tr}(D \cdot e^{-tD^2})]$, but the period-ring
+absolute and vertex-parity-graded Mellin family (the signed trace
+$\mathrm{Tr}(D \cdot e^{-tD^2})$ vanishes on this spectrum), but the period-ring
 location within $M_3$ at each evaluation is determined by the slot
 exponent.  Cross-reference Paper~55~\cite{loutey_paper55}
 \S\,M3-diagonal-collapse and \S\,M3-Galois-descent for the

@@ -248,6 +248,14 @@ def selftest() -> int:
                                             "Paper~39 proves the tensor-product case at the state-space GH level"),
         "p45-rates-spatial": ("Paper~45 propinquity proof gives the rate O(T/\\Nt)",
                               "Paper~45 proves a degeneracy theorem; its spatial rate is the surviving statement"),
+        "p59-four-centre-genus-one": ("The four-centre ERI is proved to be genus one in every case.",
+                                      "A fourth distinct centre adds no genus [MEASURED]: the four-centre ERI stays on a genus-one curve."),
+        "p59-three-electron-k3": ("Longer trees give Calabi-Yau n-folds, as Paper 59 proves.",
+                                  "Whether longer trees give Calabi-Yau n-folds is OPEN."),
+        "p35-window-circle-adopted": ("The real-time window is a periodic Euclidean circle.",
+                                      "Whether a real-time window forces the circle stays open; Paper 35 adopts the identification rather than derives it."),
+        "seam-j4-j7-forced": ("J4 stays Obs until a guard exists.",
+                              "J4 and J7 promoted from Obs 2026-10-15 (Paper 59 sec:beyond)."),
     }
     missing = set(R.CLAIMS) - set(probes) - {"pi-source-case-exhaustion"} | (set(probes) - set(R.CLAIMS))
     if missing - {"pi-source-case-exhaustion"}:

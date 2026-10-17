@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.20.18 (October 16, 2026)
+**Version:** v5.20.20 (October 16, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,8 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Four linked densities = first rung beyond elliptic (2026-10-16, v5.20.20, PI-directed):** tree identity; F_4 operator = AESZ #58, Sp4, not elliptic-built; Hamiltonian ERIs stay elliptic. Paper 59 sec:four_density; CHANGELOG v5.20.20.
+- **/qa claim-search DELTA on v5.20.16-18 = DEFECTS, remediated (2026-10-16, v5.20.19, PI-invoked):** math held; owner wording fixed; rung rule J9 F->Obs; 12 C16 + 4 C25 entries; self-check 4,4,1,0; 4 PI items. See CHANGELOG v5.20.19.
 - **/walls PERIODS-TRANSCENDENCE = CRYSTALLIZED; Mellin conventions resolved; Paper 35 window-as-circle restated (2026-10-16, v5.20.18, PI-invoked):** class set by density topology, not operator/basis/nuclei; brute-T2 row MIS-SCOPED; P3e-2 filed. See CHANGELOG v5.20.18.
 - **Paper 59 homes + guards for the four-centre and K3 results; Mellin engine single-sourced (2026-10-15, v5.20.17, PI-directed):** J4/J7 promoted to F; 25 restatement loci -> pointers, 6 discrepancies fixed; forcing catalogue archived; Paper 57 trimmed. See CHANGELOG v5.20.17.
 - **The atlas exists as one gated register (2026-10-15, v5.20.16, PI-directed):** `docs/atlas.md`, one row per released axis with price/verdict/falsifier; seam + Paper 57 widened to 72 entries (W status, sub-domain J); field guide re-centred on it. See CHANGELOG v5.20.16.

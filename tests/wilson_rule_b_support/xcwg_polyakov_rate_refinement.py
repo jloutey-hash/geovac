@@ -60,9 +60,9 @@ which gives the rate constant for log(sigma) vs beta:
 
     c_sigma = c_rho / 2     (since m_D = sqrt(rho_M / beta_V)).
 
-The (4/pi) prefactor in sigma = (4/pi) sqrt(rho_M / beta_V) is the M1
-Hopf-base measure signature Vol(S^2)/pi^2 of the Sprint TS-E1 master
-Mellin engine.
+The (4/pi) prefactor in sigma = (4/pi) sqrt(rho_M / beta_V) is read as the
+M1 volume-slot signature Vol(S^2)/pi^2 of the Sprint TS-E1 master
+Mellin engine (a reading, not a derivation).
 
 Generic-graph generalization
 ============================
@@ -596,7 +596,7 @@ def refined_string_tension(rho_M: np.ndarray, beta_grid: np.ndarray,
     m_D2_eff = np.maximum(m_D2_standard, lambda_2)
     sigma_refined = (1.0 / np.pi) * np.sqrt(2 * m_D2_eff / beta_V)
 
-    # Alternative: use the 4/pi (M1 Hopf-base) convention
+    # Alternative: use the 4/pi (M1 volume-slot) convention
     # sigma = (4/pi) sqrt(rho_M / beta_V) -- equivalent up to convention
     sigma_4_pi = (4.0 / np.pi) * np.sqrt(rho_M / beta_V)
 

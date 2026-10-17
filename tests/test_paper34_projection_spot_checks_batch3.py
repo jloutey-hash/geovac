@@ -85,7 +85,7 @@ def test_paper34_III3_S5_volume_pi_cubed():
     integration measures, never in lattice data.'
 
     Confirms the standard identity Vol(S^5) = pi^3 symbolically. This
-    is one of the M1 Hopf-base-style measure factors that appears in
+    is one of the M1 volume-slot factors that appears in
     continuum projections of the Bargmann-Segal lattice (Paper 55 §5.5
     S^5 extension of master Mellin engine M3).
     """

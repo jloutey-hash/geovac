@@ -81,7 +81,7 @@ import sympy as sp
 
 def test_paper34_III2_hopf_measure_factor():
     """Paper 34 §III.2 (sec:proj_hopf): transcendental signature
-    'pi = Vol(S^2)/4 (Hopf measure factor; Sprint A alpha-PI
+    'pi = Vol(S^2)/4 (unit-sphere volume-slot factor, M1; Sprint A alpha-PI
     identification).'
 
     Verifies the identity Vol(S^2)/4 = pi using both symbolic
@@ -96,7 +96,7 @@ def test_paper34_III2_hopf_measure_factor():
 
     # Production float check
     assert math.isclose(VOL_S2 / 4.0, math.pi, rel_tol=1e-15, abs_tol=1e-15), \
-        f"Hopf measure factor Vol(S^2)/4 = {VOL_S2/4} != pi = {math.pi}"
+        f"volume-slot factor Vol(S^2)/4 = {VOL_S2/4} != pi = {math.pi}"
 
     # Cross-check Vol(S^3) = 2 pi^2 (standard)
     assert math.isclose(VOL_S3, 2 * math.pi ** 2, rel_tol=1e-15), \

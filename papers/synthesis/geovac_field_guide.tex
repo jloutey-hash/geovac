@@ -442,7 +442,9 @@ mechanisms are the three sub-cases of a single Mellin transform
 \end{equation}
 on the discrete Camporesi--Higuchi $\sthree$ spectral triple, with
 operator-order index $k \in \{0, 1, 2\}$ read as indexing which
-mechanism produces which kind of transcendental.
+mechanism produces which kind of transcendental (at $k = 1$ the plain
+trace vanishes on the symmetric Dirac spectrum, and the slot is read
+through the absolute sum and its vertex-parity grading, Paper~18).
 
 \paragraph{The census rests on a conditional theorem.}
 Paper~32~\S~VIII~\cite{loutey_paper32} contains a
@@ -471,13 +473,20 @@ dilogarithm (Paper~18~\S III, Paper~12, Paper~58);\ a third nucleus
 with a shared centre makes the integral an elliptic period, and the
 class leaves the polylogarithm tower for the elliptic one (Paper~59,
 Paper~61~\cite{loutey_paper59, loutey_paper61});\ a fourth centre adds
-nothing new;\ a three-electron chain with two momentum integrations
-lives on a K3 surface whose holomorphic period is a product of two
-elliptic ones (Bailey's three-scale Bessel moment~\cite{bailey1936};\
+nothing new;\ a three-electron chain over two-centre densities with two momentum
+integrations lives on a K3 surface whose holomorphic period is a sum of
+two products of elliptic periods (a three-scale Bessel moment whose
+closed form, given in Paper~59~\cite{loutey_paper59}, follows from an
+identity of Bailey~\cite{bailey1936};\
 pre-registered 2026-10-13, record in \texttt{docs/predictions/}, home
-Paper~59's closing section~\cite{loutey_paper59}).  The
-rung variable is the number of Coulomb kernels sharing a vertex, not the
-number of nuclei or electrons.  \S\ref{sec:atlas} indexes these rows
+Paper~59~\cite{loutey_paper59}).  The class is set by the number of
+distinct two-centre densities a kernel couples, and a second kernel
+sharing a vertex lifts the curve to a surface;\ neither is the number of
+nuclei or electrons, and the rule is an observed pattern across the
+tested cases.  Four linked densities give the first period not built
+from elliptic ones (Paper~59~\cite{loutey_paper59}), so the integrals of
+a molecular Hamiltonian, which link two, stay elliptic for any molecule.
+\S\ref{sec:atlas} indexes these rows
 with the observer rows.
 
 \paragraph{What was a zoo became a catalogued program.}
@@ -615,8 +624,8 @@ project's most operationally useful structural reading.
 \paragraph{Theorem-bounding the seam (June 2026).}  The forced/free seam
 discipline above was sharpened into a set of named structural results
 (proof-by-argument) in June 2026.  Paper~57
-catalogues seventy-two named entries across ten domains (40 forced, 3
-Observations including $\kappa$, 1 admitted-not-forced, 25 calibration,
+catalogues seventy-three named entries across ten domains (40 forced, 4
+Observations including $\kappa$ and the rung rule, 1 admitted-not-forced, 25 calibration,
 3 walls;\ the released-axis sub-domain, the wall status and the
 temporal-window row were added October 2026) and tests a
 ``packing-reachability'' discriminator (P5);\ its $98.3\%$ agreement
@@ -700,7 +709,7 @@ oscillator lattice & nothing & rational graph & zero & forced \\
 sphere measure (M1) & a measure & $\Q$-linear in $\pi^{\pm n}$ & $\pi$ & forced \\
 heat kernel (M2) & Seeley--DeWitt slot & pure Tate & $\pi^{2k}\cdot\Q$ (integer $s$) & forced \\
 vertex parity (M3) & a parity sum & Catalan $G$, $\beta(4)$ & $\MT(\Z[i,1/2])$, level $\le 4$ & forced \\
-time window & real time $\to$ circle & Matsubara modes & $2\pi$ per mode;\ window consumed & obs.\ / free \\
+time window & real time read as a circle & Matsubara modes & $2\pi$ per mode;\ window consumed & obs.\ / free \\
 Born measure & the observation & counting $=$ Born on the flat locus only & an imported measure & free \\
 $\alpha$ & a combination & three spectral homes & an Observation;\ value consumed & obs.\ / free \\
 second nucleus & $l$ & $m$ & weight one, $\pi$-free & forced \\
@@ -708,9 +717,9 @@ front in $R$ & continuous coupling & a Boolean label & nothing new & obs. \\
 third nucleus & the third focus & one $k$, two densities & elliptic $K(m)$ & wall (closed form) \\
 fourth centre & a fourth centre & the same two roots & nothing new & forced (pre-reg.) \\
 bending & $m$ & order $s^{2\Lambda}$, labels & rationals & forced \\
-three-electron chain & a second momentum & period factorizes & K3, ``elliptic squared'' & forced (pre-reg.);\ generic fibre obs. \\
-$r_{12}$ bridge & four electrons, one kernel & three-body, then two & the two-centre class & obs. \\
-rung rule & --- & genus $=$ densities coupled & (meta) & forced \\
+three-electron chain & a second momentum & a sum of period products & K3, ``elliptic squared'' & forced (pre-reg.);\ generic fibre obs. \\
+$r_{12}$ bridge & four electrons & three-body, then two & none assigned & obs. \\
+rung rule & --- & class set by distinct two-centre densities & (meta) & obs. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -719,29 +728,36 @@ rung rule & --- & genus $=$ densities coupled & (meta) & forced \\
 One centre:\ rationals and $\pi$.  Two centres:\ weight-one
 logarithms and $E_1$, with no $\pi$.  Three centres:\ an elliptic
 period, and the class leaves the polylogarithm tower.  Four centres:\
-nothing new.  A three-electron chain:\ a K3 whose holomorphic period is
-a product of two elliptic ones.  The rung is set by the number of
-Coulomb kernels sharing a vertex, equivalently the number of distinct
-two-centre densities a kernel couples, and not by nuclei or electrons.
-That is why two statements that sound opposed are both true:\ the
-four-body explicit-$r_{12}$ bridge has one kernel and reduces to
-three-body kernels and then to a two-electron integral (``four reduces
-to three''), while a three-electron chain with two kernels meeting at
-one electron climbs a rung.
+nothing new.  A three-electron chain over two-centre densities:\ a K3
+whose holomorphic period is a sum of two products of elliptic periods.
+Four linked densities:\ the first period not built from elliptic ones.
+The class is set by the number of distinct two-centre densities a kernel
+couples, and a second kernel sharing a vertex lifts the curve to a
+surface;\ neither count is the number of nuclei or electrons, and both
+are an observed pattern across the tested cases rather than a
+derivation.  So two statements that sound opposed do not conflict:\ the
+four-body explicit-$r_{12}$ bridge reduces, for $s$ leaves and as a
+validated reduction rather than a derivation, to three-body kernels and
+then to a two-electron integral of geminal-dressed densities (``four
+reduces to three''), while a three-electron chain with two kernels
+meeting at one electron climbs a rung.
 
 \paragraph{What the atlas does not do.}
 It carries no numbers of its own, it does not rank doors, and it does
 not say which rung comes next.  Two rows were pre-registered results
 (the fourth centre and the chain), now housed in Paper~59's closing
-section with reduced-precision guards;\ two walls are
-closed-form walls only, with accurate evaluation on the far side;\ and
-one observer row carries an open identification (a finite real-time
-window and a Euclidean circle, which Paper~35 states as equivalent and
-the project's register flags as a technical hole).  The open question
-the ladder leaves is whether the chain's generic fibre carries content
-beyond the K3 and elliptic periods, and whether longer trees give
-Calabi--Yau $n$-folds;\ both are stated as conjecture in the
-registration record.
+section with reduced-precision guards;\ one wall (the third
+nucleus) bars only closed forms of its radial core by factorization,
+with accurate evaluation on the far side;\ and one observer row carries an open
+identification (a finite real-time window read as a Euclidean circle,
+which Paper~35 adopts rather than derives;\ a bare interval keeps a
+continuous spectrum).  The open questions the ladder leaves are whether
+the chain's generic fibre carries content beyond the K3 and elliptic
+periods, where a search at one mass triple found no relation in a basis
+that omits dilogarithms and products of elliptic periods, and whether
+five linked densities go beyond four (Paper~59 finds four the first
+rung not built from elliptic periods;\ five is not elliptic-built
+either, and its relation to four is open).
 
 % =====================================================================
 \section{What's in the Corpus}
@@ -815,13 +831,16 @@ would require:
 
 \begin{itemize}
   \item \textbf{The next rung of the period ladder}.  The
-    three-electron chain's holomorphic period is a product of two
-    elliptic periods (\S\ref{sec:atlas});\ whether its generic fibre
+    three-electron chain's holomorphic period is a sum of two products
+    of elliptic periods (\S\ref{sec:atlas});\ whether its generic fibre
     carries content beyond the K3 and elliptic periods (iterated
-    structure from the Coulomb kernels), and whether longer trees give
-    Calabi--Yau $n$-folds as the banana integrals do, are the two open
-    questions the registration record states as conjecture.  Both are
-    posed in Paper~59's closing section;\ neither is guarded.
+    structure from the Coulomb kernels), and whether five linked
+    densities go beyond four, are the two open questions:\ the first has
+    a negative search at one mass triple in a basis that omits
+    dilogarithms;\ for the second, Paper~59 finds four linked densities
+    the first rung not built from elliptic periods and five not
+    elliptic-built either.  Both are posed in Paper~59's closing
+    section;\ the first is not guarded.
   \item \textbf{The $\alpha$ observation}.  Paper~2's combination rule
     $K = \pi(B + F - \Delta)$ matches the empirical $\alpha^{-1}$ to
     $4.8\times 10^{-7}$ relative (and the root of the cubic
@@ -1185,12 +1204,12 @@ Three-Center Coulomb Integral:\ Modular Structure and Cosmic-Galois
 Placement,'' GeoVac corpus (2026).
 
 \bibitem{loutey_paper24}
-J.~Loutey, ``Paper 24: The Bargmann--Segal Lattice for the 3D Harmonic
-Oscillator,'' GeoVac corpus (2026).
+J.~Loutey, ``Paper 24: The Bargmann--Segal Lattice:\ $\pi$-Free
+Discretization of the Harmonic Oscillator on $S^5$,'' GeoVac corpus (2026).
 
 \bibitem{bailey1936}
-W.~N.~Bailey, ``Some infinite integrals involving Bessel functions,''
-\textit{Proc.\ London Math.\ Soc.}\ (2)~\textbf{40}, 37--48 (1936).
+W.~N.~Bailey, ``Some infinite integrals involving Bessel functions (II),''
+\textit{J.\ London Math.\ Soc.}\ \textbf{11}, 16--20 (1936).
 
 \bibitem{mazya_shubin2005}
 V.~Maz'ya and M.~Shubin, ``Discreteness of spectrum and positivity

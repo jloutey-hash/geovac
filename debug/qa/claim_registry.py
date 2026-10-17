@@ -322,6 +322,62 @@ CLAIMS = {
         overclaim=r"Paper~?\s?45 propinquity proof|O\(T/\\Nt\)|SU\(2\) factor dominates the joint rate|"
                   r"standard Latr\S*\s+propinquity",
         changed="2026-10-02"),
+    "p59-four-centre-genus-one": dict(
+        statement="The general four-centre Slater ERI (XY|ZW) lives on a genus-one curve: a fourth "
+                  "distinct centre adds no genus (no genus two) [MEASURED; agrees with an independent "
+                  "McMurchie-Davidson evaluation]. Pre-registered 2026-10-13.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"A fourth distinct center adds no genus", owner_tier=r"\[MEASURED\]",
+        tier="MEASURED", owner_window=4,
+        mention=r"four[- ]cent(er|re)[^.;]{0,80}(genus|elliptic|period|ERI)|fourth (distinct )?cent(er|re)",
+        qualifier=r"MEASURED|measured|genus[- ]one|no genus two|adds no genus|elliptic",
+        overclaim=r"four[- ]cent(er|re)[^.;]{0,60}\b(theorem|proved|proven)\b|"
+                  r"genus[- ]two (curve|surface|period)s? (at|for) four",
+        changed="2026-10-15"),
+    "p59-three-electron-k3": dict(
+        statement="The three-electron chain integral lives on a K3 surface whose holomorphic period is "
+                  "a sum of two products of complete elliptic integrals ('elliptic squared'; BBBG 2008 eq. 33, from an identity of Bailey) [MEASURED / classical]; the TRUE fibre collapses to K3 "
+                  "periods at equal scales (evidence); at generic scales a PSLQ search at one mass triple finds no "
+                  "relation in a K3 + elliptic + Tate basis (evidence, not proof); Calabi-Yau n-folds for longer "
+                  "trees are OPEN.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"A three-electron chain lives on a K3", owner_tier=r"\[MEASURED / classical\]",
+        tier="MEASURED / classical", owner_window=20,
+        mention=r"Calabi.?Yau|generic (chain )?(fibre|fiber)|longer (trees|chains)",
+        qualifier=r"OPEN|\bopen\b|conjectur|hunch|untested|not tested|no relation|evidence",
+        overclaim=r"generic (fibre|fiber)[^.;]{0,40}\b(is|are|reduces to|lies in)\b[^.;]{0,20}\bK3\b|"
+                  r"(proves?|proved|shows?|established?)[^.;]{0,30}Calabi.?Yau|"
+                  r"Calabi.?Yau[^.;]{0,40}\b(proved|proven|established)\b",
+        changed="2026-10-15"),
+    "p35-window-circle-adopted": dict(
+        statement="Paper 35 reads the observer's finite real-time window as a periodic Euclidean circle; "
+                  "this identification is ADOPTED, not derived: a compact interval without periodic "
+                  "identification keeps a continuous spectrum, and the KMS circle is Euclidean while the "
+                  "window is real-time (Kempf 2010 is the published cap).",
+        owner="papers/group6_precision_observations/paper_35_time_as_projection.tex",
+        owner_anchor=r"identification the paper adopts", owner_tier=r"not one it derives",
+        tier="ADOPTED IDENTIFICATION", owner_window=1,
+        mention=r"periodic Euclidean (circle|time)|(observer|real-time|temporal|lifetime|finite)[^.;]{0,40}window[^.;]{0,60}\bcircle\b|"
+                r"compactified time[^.;]{0,30}discrete",
+        qualifier=r"adopt|not (one it )?deriv|rather than deriv|identif|interval|caveat|Kempf",
+        overclaim=r"compactified time is (automatically )?discrete|"
+                  r"window[^.;]{0,40}\b(forces|derives|implies)\b[^.;]{0,20}(periodic|circle|discrete)"
+                  r"(?![^.;]{0,40}\b(open|unsettled|untested)\b)",
+        changed="2026-10-16"),
+    "seam-j4-j7-forced": dict(
+        statement="Seam rows J4 (fourth centre: genus one) and J7 (three-electron chain: K3, elliptic "
+                  "squared) are F (forced) as of 2026-10-15, on Paper 59 sec:beyond; J2 (front) and J8 "
+                  "(r12 bridge, a validated reduction) and J9 (the rung rule, re-tiered F -> Obs 2026-10-16) are "
+                  "Obs; J3/J6 (closed forms of the three-centre radial core) are W. J10 (four linked densities) is F as of 2026-10-16. Totals 40 F / 4 Obs / 1 A / "
+                  "25 C / 3 W = 73.",
+        owner="docs/forced_free_seam.md",
+        owner_anchor=r"^\| J4 \|", owner_tier=r"\*\*F\*\*",
+        tier="F (seam verdict)", owner_window=0,
+        mention=r"\bJ[47]\b",
+        qualifier=r"\bF\b|forced|FORCED|promot|Paper~?\s?59|genus|K3",
+        overclaim=r"\bJ[47]\b[^.;]{0,15}\b(is|are|stays?|remains?)\s+(an?\s+)?\**Obs\b|"
+                  r"\bJ[47]\b[^.;]{0,15}\**Obs\**\s*\|",
+        changed="2026-10-15"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",

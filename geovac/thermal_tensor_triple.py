@@ -76,7 +76,7 @@ import mpmath as mp
 #
 #   M1: unit-sphere volume factor (Tr(D^0 e^{-tD^2}), k=0).
 #   M2: Seeley-DeWitt / spectral-action / Riemann-zeta-at-even (k=2).
-#   M3: vertex-parity / half-integer Hurwitz / Dirichlet-L (k=1).
+#   M3: vertex-parity / quarter-integer Hurwitz / Dirichlet-L (k=1).
 #
 # For thermal physics on S^3 x S^1_beta, the Matsubara sum produces zeta(2k)
 # values which sit in M2 (rational + Riemann zeta even), and the spatial
@@ -246,7 +246,7 @@ def thermal_partition_function_log(modes: list[TensorMode], beta_sym: sp.Symbol
 
 def stefan_boltzmann_factorization() -> dict:
     """Reproduce the Stefan-Boltzmann constant for a single bosonic massless
-    scalar field as an explicit M1 (Hopf measure) x M2 (Riemann zeta) product.
+    scalar field as an explicit M1 (volume slot) x M2 (Riemann zeta) product.
 
     The textbook result for the free-energy density on flat R^3 x S^1_beta is
 
@@ -660,7 +660,7 @@ def transcendental_audit() -> dict:
             "a temporal/spectral parameter promoted from the discrete spectrum: "
             "(a) Matsubara modes 2 pi k / beta come from compactification of "
             "    imaginary time (Paper 35 KG-2 mechanism). "
-            "(b) The 1/(2 pi^2) Hopf measure factor enters from the Weyl "
+            "(b) The 1/(2 pi^2) unit-sphere volume factor (M1) enters from the Weyl "
             "    asymptotic d^3k/(2pi)^3, i.e. from the *continuum* limit of "
             "    the spatial integration. "
             "(c) The sqrt(pi) Seeley-DeWitt coefficients come from the "

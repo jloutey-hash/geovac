@@ -76,12 +76,17 @@ but a relocation: the third center does not make the radial integral messier
 within the two-center class, it raises the transcendence one genus, past the
 reach of the sunrise's elliptic-dilogarithm mechanism.
 \textbf{[MEASURED]} Two pre-registered extensions (Sec.~\ref{sec:beyond})
-fix what the rung variable is:\ a fourth distinct center adds no genus,
-because the class counts the densities a kernel couples and not the
-nuclei, while a three-electron chain with two Coulomb kernels at one
-electron lives on a K3 surface whose holomorphic period is Bailey's
-three-scale Bessel moment, a sum of products of two complete elliptic
-integrals.
+probe the rung variable:\ a fourth distinct center adds no genus,
+consistent with the class counting the distinct two-center densities a
+kernel couples and not the nuclei, while a three-electron chain over two-center
+densities with two Coulomb kernels at one electron lives on a K3 surface
+whose holomorphic period is a three-scale Bessel moment, a sum of
+products of two complete elliptic integrals.  \textbf{[SYMBOLIC + MEASURED]}
+A third extension finds that the holomorphic period of any tree of linked
+densities depends only on how many densities it links, and that four linked
+densities give the first period not built from elliptic ones:\ its equation
+is an irreducible fourth-order operator of Calabi--Yau type, with no
+quadratic relation among its solutions.
 \end{abstract}
 
 \maketitle
@@ -778,9 +783,12 @@ $y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$, whose period is a complete elliptic integr
 $4\pi/k^{2}$ or geminal $8\pi\gamma/(k^{2}+\gamma^{2})^{2}$ alike---is a rational function on
 this curve, so $\widetilde f\,dk/y$ is again an elliptic integral: the genus is
 \emph{unchanged}, the geminal merely trading an elliptic integral of the first kind (the
-Coulomb period) for one of the third kind (its poles at $k^{2}=-\gamma^{2}$).  The
-transcendence class is thus set by the number of two-center transition densities---zero or
-one gives genus zero, two gives genus one---exactly as for the repulsion integral.
+Coulomb period) for one of the third kind (its poles at $k^{2}=-\gamma^{2}$).  \textbf{[OBSERVATION]} On every
+instance tested, the transcendence class is set by the number of two-center transition densities on distinct
+center pairs---zero or one gives genus zero, two gives genus one, while two densities on the
+same pair (the two-center exchange class) build the same fibre family yet close in the
+two-center seed set (Paper~18~\cite{loutey_paper18}), so the fibre genus alone does not
+decide the class---exactly as for the repulsion integral.
 
 \textbf{[OBSERVATION]} The consequence is a \emph{unification}, not an escape.  Explicitly-correlated integrals are
 native to the Fock momentum representation and cost the same as the corresponding repulsion
@@ -799,7 +807,7 @@ Gaussian F12; the statement is about the two-electron integrals, whose momentum-
 transcendence we have mapped.
 
 %% ========================================================================
-\section{Beyond the third center:\ a fourth center, and a three-electron chain}
+\section{Beyond the third center:\ a fourth center, a three-electron chain, and four linked densities}
 \label{sec:beyond}
 %% ========================================================================
 
@@ -807,8 +815,11 @@ Two results pre-registered on 2026-10-13 (records
 \texttt{docs/predictions/2026-10-13\_four\_centre\_genus.md} and
 \texttt{docs/predictions/2026-10-13\_three\_electron\_k3.md}, each committed
 before its computation) extend the genus reading of
-Sec.~\ref{sec:genus} in the two directions the rule of Sec.~\ref{sec:f12}
-predicts:\ more centers, and more Coulomb kernels.
+Sec.~\ref{sec:genus} in two directions:\ more centers, and more Coulomb
+kernels.  A third, registered on 2026-10-16
+(\texttt{docs/predictions/2026-10-16\_linking\_ceiling.md}, written before
+its computation but not committed beforehand), asks how the rung grows with
+the number of linked densities.
 
 \subsection{A fourth distinct center adds no genus}
 \label{sec:four_centre}
@@ -822,44 +833,48 @@ only through a single phase vector $\bm W(s,t)$ and the two pair
 distances $D_1$, $D_2$.  The reduced formula gives $0.218814149639$
 against $0.218814149425$ from McMurchie--Davidson on sixteen-Gaussian
 fits (the residual is the fit gap), and reproduces the three-center
-value $0.204941652531$ of Sec.~\ref{sec:reduction} as a special case.
-There is no genus two at four centers:\ the transcendence class is set
-by the number of distinct two-center densities the kernel couples, not
-by the number of nuclei, and this is that rule's first instance beyond
+value $0.204941652531$ of Sec.~\ref{sec:momentum} as a special case.
+There is no genus two at four centers, consistent with the class being
+set by the number of distinct two-center densities the kernel couples,
+not by the number of nuclei;\ this is that rule's first instance beyond
 the one this paper was written on.  Its honest weight is that of a
 corollary of Sec.~\ref{sec:momentum}, a calibration rather than a hard
 test.  The momentum form itself is the Averys'
 (Ref.~\cite{avery_avery_4center}, App.~B);\ the genus reading is not in
 it.  Guards:\ \texttt{tests/test\_paper59\_four\_centre\_genus.py} (both
-values recomputed;\ the kernel as the second $z$-derivative of a Yukawa
-product and the radicand set equal to the two quadrics, both
-symbolically;\ rigid-motion invariance with dependence on the pair
-placement).
+values recomputed against McMurchie--Davidson;\ the kernel derived
+symbolically as the second $z$-derivative of a Yukawa product;\ the
+integrand's square roots and the dependence on the pair placement
+checked).
 
 \subsection{A three-electron chain lives on a K3 surface}
 \label{sec:three_electron}
 
 \textbf{[SYMBOLIC + MEASURED]} The chain integral
 $\langle \rho_a(1)\rho_b(2)\rho_c(3)/(r_{12}r_{13})\rangle$, three
-one-center $1s$ Slater densities at scales $(a,b,c)$ joined by two
-Coulomb kernels at electron~1, has two momentum integrations and three
+two-center $1s$ Slater transition densities (dispersion roots
+$\Delta_b = \sqrt{c_b p^2 + 1}$, $\Delta_c = \sqrt{c_c q^2 + 1}$,
+$\Delta_a = \sqrt{c_a |p+q|^2 + 1}$, scales $a = c_a^{-1/2}$, $b = c_b^{-1/2}$,
+$c = c_c^{-1/2}$) joined by two Coulomb kernels at electron~1, has two momentum integrations and three
 dispersion roots.  The angular integral is elementary (no logarithm);\
 the reduced two-dimensional fibre matches the direct three-dimensional
 one ($10^{-15}$ to $4\times10^{-14}$ in the record, $10^{-9}$ in the
 reduced-precision guard);\ the one-center limit is rational
-($23/54$, $133/144$, $289/225$ at the three registered scale ratios);\
+($23/54$, $133/144$, $289/225$ at the three registered exponent triples);\
 the branch locus in $\mathbb{P}^2$ is six lines with no four concurrent,
 so the double cover is a K3 surface, and fixed-$p$ slices are
 non-isotrivial genus-one curves.  \textbf{[MEASURED / classical]} The
-holomorphic period reduces by one Fourier transform to Bailey's
-three-scale Bessel moment $V_3 = \int_0^\infty K_0(at)K_0(bt)K_0(ct)\,dt$,
-whose closed form is classical, $K(k_-)K(k_+') + K(k_+)K(k_-')$
-(Bailey~\cite{bailey1936};\ Ref.~\cite{bbbg2008}, Eq.~33), checked at four
-scale triples to $10^{-34}$ in the record and to $10^{-17}$ in the guard.
+holomorphic period reduces by one Fourier transform to the three-scale
+Bessel moment $\bar V_3 = \int_0^\infty K_0(at)K_0(bt)K_0(ct)\,dt$ (the
+notation of Ref.~\cite{bbbg2008}), whose closed form for $c \ge b \ge a > 0$
+is $(2c/\pi)\,\bar V_3 = K(k_-)K(k_+') + K(k_+)K(k_-')$, with the moduli
+$k_\pm$ of Ref.~\cite{bbbg2008} (Eq.~33, obtained there from an identity of
+Bailey~\cite{bailey1936}), checked at four scale triples to $10^{-34}$ in
+the record and at three in the guard to $10^{-17}$.
 The K3's period is therefore ``elliptic squared'':\ it opens no new
-transcendence class but a product of the class of Sec.~\ref{sec:genus}.
-The reduction from a Slater chain to $V_3$ is this paper's;\ the closed
-form is Bailey's.  In the dictionary of Sec.~\ref{sec:literature}, the
+transcendence class, being a sum of products of periods of the class of Sec.~\ref{sec:genus}.
+The reduction from a Slater chain to $\bar V_3$ is this paper's;\ the closed
+form is that of Ref.~\cite{bbbg2008}.  In the language of Sec.~\ref{sec:literature}, the
 repulsion integral pairs with the two-loop sunrise and the chain with the
 three-loop banana.  \textbf{[OBSERVATION, evidence]} At equal scales the
 true fibre at zero separation collapses to two K3 periods (Bessel moments
@@ -869,13 +884,129 @@ periods, elliptic periods and quasi-periods, and Tate numbers.  That is
 evidence, at one scale triple and with a basis that omits dilogarithms
 and products of elliptic periods, that the generic fibre carries content
 beyond the K3 and elliptic periods, as the banana does.
-\textbf{[OPEN]} Whether longer trees give Calabi--Yau $n$-folds is not
-tested.  Guards:\ \texttt{tests/test\_paper59\_three\_electron\_k3.py}
+Longer trees are taken up in Sec.~\ref{sec:four_density}.
+Guards:\ \texttt{tests/test\_paper59\_three\_electron\_k3.py}
 (the fibre agreement, the elementary angle integral, the rational
-one-center limits, Bailey's closed form against quadrature, the K3 period
-against $V_3$, the six-line branch locus, the non-isotrivial slice);\
+one-center limits, the closed form against quadrature, the K3 period
+against $\bar V_3$, the six-line branch locus, the non-isotrivial slice);\
 the equal-scale collapse and the generic null are not guarded, and the
 record carries them.
+
+\subsection{Four linked densities:\ the first rung beyond elliptic}
+\label{sec:four_density}
+
+\textbf{[SYMBOLIC + MEASURED]} The holomorphic period of a chain depends
+only on how many densities the kernels link, not on the pattern of the
+links.  Take $n$ two-center $1s$ densities joined into a tree by $n-1$
+rational kernels, and write the dispersion root of density $v$ at the
+fingerprint fibre as $\Delta_v=\sqrt{c_vL_v^2+1}$, with $L_v$ the signed
+sum of the momenta on the kernels at $v$.  Fourier-transforming each
+$1/\Delta_v$ to $K_0(|y|/\sqrt{c_v})/(\pi\sqrt{c_v})$ turns every momentum
+integration into a delta function that identifies the two ends of its
+kernel, and a tree is connected, so
+\begin{equation}
+  \int_{\mathbb{R}^{n-1}} d^{n-1}k\,\prod_{v=1}^{n}\frac{1}{\Delta_v(L_v(k))}
+  = \frac{2^{n}}{\pi\sqrt{c_1\cdots c_n}}
+    \int_0^\infty \prod_{v=1}^{n} K_0(a_v x)\,dx,
+  \qquad a_v = c_v^{-1/2},
+  \label{eq:tree}
+\end{equation}
+for a star and a chain alike.  At $n=3$ this is the $\bar V_3$ reduction
+of Sec.~\ref{sec:three_electron};\ at $n=2$ it is the elliptic period of
+Eq.~\eqref{eq:period}.  A three-dimensional evaluation of four-density
+stars and chains, with the faster-decaying roots $\Delta_v^{-3}$ to which
+the same argument applies, matches the Bessel-moment side to between
+$4\times10^{-9}$ and $2\times10^{-7}$, the grid's own convergence.
+
+\textbf{[SYMBOLIC]} To read the rung, vary one scale:\
+$F_n(t)=\int_0^\infty K_0(x)^{n-1}K_0(tx)\,dx$.  The Mellin transform of
+$K_0^{\,n-1}$ obeys the recurrence of the $(n-1)$-th symmetric power of the
+Bessel operator, and that of $K_0(tx)$ is $2^{s-2}\Gamma(s/2)^2$, so $F_n$
+satisfies an explicit linear equation in $t$ of order $n$;\
+\textbf{[MEASURED]} each one is checked against direct quadrature of $F_n$
+to $10^{-28}$.  For $n=2$ it is the Legendre equation of $K$.  For $n=3$
+it is the equation of ${}_3F_2(\tfrac12,\tfrac12,\tfrac12;1,1;t^2)$,
+Clausen's square of an elliptic period, as Bailey's formula requires.
+For $n=4$, in the variable $x=1/(4t^2)$, it is
+\begin{equation}
+  \theta^4 - x(2\theta+1)^2(10\theta^2+10\theta+3)
+  + 9x^2(2\theta+1)^2(2\theta+3)^2,
+  \qquad \theta = x\,\frac{d}{dx},
+  \label{eq:four_density_op}
+\end{equation}
+which has maximally unipotent monodromy at $x=0$ and conifold points at
+$x=1/36$ and $x=1/4$, with local exponents $(0,1,1,2)$.  Its holomorphic
+solution is $\sum_m B_m (x/4)^m$ with integer
+$B_m=\binom{2m}{m}^2\sum_k\binom{m}{k}^2\binom{2k}{k}$, the term-by-term
+(Hadamard) product of $\binom{2m}{m}^2$ with the Ap\'ery-like sequence of
+the equal-mass sunrise, and its mirror map has integer coefficients.
+
+\textbf{[SYMBOLIC]} Whether a family is built from elliptic periods shows
+in the quadratic relations among the solutions of its equation:\ for
+monodromy of these types, an elliptic family has none, the square of
+one elliptic family or the tensor product of two has one, and the cube of
+one has three.  Counted
+exactly on Taylor bases at two rational points, the numbers are
+$0,1,0,1$ for $n=2,3,4,5$.  For $n=4$ the operator is irreducible, since
+its holomorphic solution satisfies no equation of order three or less with
+coefficients of degree up to $40$;\ and its Yukawa coupling,
+$1+16q+1152q^2+99520q^3+\cdots$, is not constant, as it would be for a
+symmetric cube.  An irreducible fourth-order local system with no invariant
+quadric has differential Galois group $\mathrm{Sp}_4$ or $\mathrm{SL}_4$,
+and neither is a quotient of a product of copies of $\mathrm{SL}_2$.  So
+$F_4$ is not a polynomial in elliptic periods with algebraic moduli, and
+neither is the generic four-scale moment, which restricts to it.  Two
+linked densities give an elliptic period, three give a K3 whose period is
+elliptic squared, and four give the first period of a new kind.  At $n=5$
+the single relation marks an orthogonal structure of rank five, not the
+fourth power of an elliptic period, which would carry six;\ whether it is
+new relative to $n=4$ is open.
+
+\textbf{[OBSERVATION]} Every electron-repulsion integral couples exactly
+two densities, so the integrals of a molecular Hamiltonian stay on the
+elliptic rung however large the molecule.  The class climbs only in
+correlated integrals that link more densities, such as the four-electron
+bridge integrals of explicitly correlated methods taken over two-center
+densities.  Three caps apply.  These are statements about the fibre and
+its holomorphic period, so the integrated value may sit lower, as the
+two-center exchange class does (Sec.~\ref{sec:f12}).  The real
+three-dimensional four-density integral is assumed, not shown, to reduce
+into the one-dimensional Bessel-moment family of Eq.~\eqref{eq:tree};\ the
+analogous step is checked only at $n=3$.  And irreducibility is shown up to
+the stated degree.  Guards:\
+\texttt{tests/test\_paper59\_four\_density\_rung.py}.
+
+\textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
+Bessel moments;\ what is new here is the route into it from a molecular
+integral.  The operator~\eqref{eq:four_density_op} is entry \#58 of the
+Calabi--Yau tables of Almkvist, van Enckevort, van Straten and
+Zudilin~\cite{aesz2005} (entry 2.9 of the Calabi--Yau operator
+database~\cite{cydb}), listed there as a Hadamard product, with the same
+holomorphic coefficients and Yukawa coupling;\ Gegelia and van
+Straten~\cite{gegelia_vanstraten2024} list it among their conjectural
+sources of paramodular forms, at conductors $2145$ and $2465$.  For every
+$n$ from $2$ to $5$ the holomorphic solution of the equation of $F_n$ at
+$t=\infty$ is $t^{-1}\sum_m\binom{2m}{m}^2W_{n-1}(2m)\,(16t^2)^{-m}$, the
+Hadamard product of $\binom{2m}{m}^2$ with the even moments $W_{n-1}(2m)$
+of the $(n-1)$-step planar random walk, whose links to Bessel moments and
+Calabi--Yau equations are Broadhurst's~\cite{broadhurst2009walks}.  The
+alternation of the monodromy, symplectic for $n$ even and orthogonal for
+$n$ odd, matches the self-duality of the symmetric-power Kloosterman
+motives of Fres\'an, Sabbah and Yu~\cite{fresansabbahyu2023}, whose
+pairing is symplectic when the number of Bessel factors is even and
+orthogonal when it is odd.  The climb parallels the banana ladder, where an
+$l$-loop equal-mass banana integral carries a Calabi--Yau
+$(l-1)$-fold~\cite{bonisch2021}, though the operators differ.  The nearest
+physics analogue of a ceiling set by the calculation rather than the
+system is the bound of Bourjaily, McLeod, von Hippel and Wilhelm on the
+rigidity of massless four-dimensional Feynman integrals, $2(L-1)$ at $L$
+loops~\cite{bourjaily2019}:\ there the loop order caps the geometry, here
+the number of densities one integral links.  On the chemistry side,
+one-center three- and four-electron correlated integrals have closed
+forms~\cite{fromm_hill1987,padhy2017}, consistent with the rung needing
+two-center densities.  A targeted search found no source placing a
+molecular integral on these operators;\ that is an absence from a search,
+not a proof of absence.
 
 %% ========================================================================
 \section{Scope, and the open frontier}
@@ -913,8 +1044,11 @@ below and are still $6\times10^{-8}$ short at $18$ Gaussians, while the
 channel sum is stable to thirteen digits
 (\texttt{tests/test\_pairwise\_general.py},
 \texttt{tests/test\_pairwise\_three\_center.py}).  The elliptic content of
-Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  So the genus
-jump bars a finite closed form; it does not bar an accurate evaluation.
+Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  The radial core is a period of an irreducible connection
+(Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
+closed form through any factorization;\ that does not bar an accurate
+evaluation, and whether the integrated three-center integral has a finite
+closed form is the open problem below.
 
 \emph{The open problem.}  As shown in Sec.~\ref{sec:obstruction}, the
 elliptic-dilogarithm route is obstructed: $N(D)$ is not an elliptic
@@ -965,9 +1099,13 @@ close by any factorization.  Whether it closes at the irreducible level---as an 
 period, a finite reduction to $\pi$ and the CM-fibre $\Gamma$-values
 (companion, Paper~61)---is the one frontier that remains, posed here as
 it deserves to be.  Two pre-registered extensions (Sec.~\ref{sec:beyond})
-fix the rung variable:\ a fourth center adds nothing, because genus counts
-the densities a kernel couples and not the nuclei, while a second Coulomb
-kernel at one electron climbs to a K3 whose period is elliptic squared.
+probe the rung variable:\ a fourth center adds nothing, consistent with the class
+counting the distinct two-center densities a kernel couples and not the nuclei, while
+a second Coulomb kernel at one electron, over two-center densities, climbs
+to a K3 whose period is elliptic squared.  A third extension shows the rung is
+set by how many densities one integral links:\ four linked densities give the
+first period not built from elliptic ones, so the integrals of a molecular
+Hamiltonian, which link two, stay elliptic for any molecule.
 
 %% ========================================================================
 \begin{thebibliography}{99}
@@ -1012,8 +1150,8 @@ integral evaluations of Bessel moments and applications,''
 \textit{J.\ Phys.\ A}\ \textbf{41}, 205203 (2008); arXiv:0801.0891.
 
 \bibitem{bailey1936}
-W.~N.~Bailey, ``Some infinite integrals involving Bessel functions,''
-Proc.\ London Math.\ Soc.\ (2) \textbf{40}, 37--48 (1936).
+W.~N.~Bailey, ``Some infinite integrals involving Bessel functions (II),''
+J.\ London Math.\ Soc.\ \textbf{11}, 16--20 (1936).
 
 \bibitem{broadhurst2008}
 D.~Broadhurst, ``Elliptic integral evaluation of a Bessel moment by contour
@@ -1121,6 +1259,32 @@ J.~Broedel, C.~Duhr, F.~Dulat, and L.~Tancredi, ``Elliptic polylogarithms and
 iterated integrals on elliptic curves II:\ an application to the sunrise
 integral,'' \textit{Phys.\ Rev.\ D}\ \textbf{97}, 116009 (2018);
 arXiv:1712.07095.
+
+\bibitem{aesz2005}
+G.~Almkvist, C.~van Enckevort, D.~van Straten, and W.~Zudilin, ``Tables of
+Calabi--Yau equations,'' arXiv:math/0507430 (2005).
+
+\bibitem{cydb}
+Calabi--Yau differential operator database, version 3.0,
+\texttt{cydb.mathematik.uni-mainz.de}, entry 2.9 (AESZ \#58).
+
+\bibitem{gegelia_vanstraten2024}
+N.~Gegelia and D.~van Straten, ``Paramodular forms from Calabi--Yau
+operators,'' arXiv:2408.10183 (2024), Table~3.
+
+\bibitem{broadhurst2009walks}
+D.~Broadhurst, ``Bessel moments, random walks and Calabi--Yau equations,''
+preprint (2009).
+
+\bibitem{bourjaily2019}
+J.~L.~Bourjaily, A.~J.~McLeod, M.~von Hippel, and M.~Wilhelm, ``Bounded
+collection of Feynman integral Calabi--Yau geometries,'' \textit{Phys.\
+Rev.\ Lett.}\ \textbf{122}, 031601 (2019); arXiv:1810.07689.
+
+\bibitem{padhy2017}
+B.~Padhy, ``Analytic evaluation of some three- and four-electron atomic
+integrals involving $s$ STO's and exponential correlation with unlinked
+$r_{ij}$'s,'' arXiv:1701.05701 (2017).
 
 \bibitem{bonisch2021}
 K.~B\"onisch, F.~Fischbach, A.~Klemm, C.~Nega, and R.~Safari, ``Analytic

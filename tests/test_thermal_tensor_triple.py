@@ -2,7 +2,7 @@
 
 Verification panel:
 
-* Stefan-Boltzmann factorisation as M1 (Hopf measure) x M2 (zeta(4)).
+* Stefan-Boltzmann factorisation as M1 (volume slot) x M2 (zeta(4)).
 * Stefan-Boltzmann Dirac with fermionic eta factor 7/8.
 * Tensor-product mode construction (D = D_S^3 (x) 1 + gamma (x) D_tau).
 * Closed-form Casimir on unit S^3 (scalar 1/240, Dirac +17/480).
@@ -319,7 +319,7 @@ class TestTranscendentalAudit:
             else:
                 # Pi-bearing results must reference a continuous integration
                 # source (Matsubara, unit-sphere volume slot -- the retired
-                # "Hopf-base measure" label, renamed 2026-10-02 -- Seeley-DeWitt,
+                # "Hopf-base measure" label [retracted 2026-09-29: hopf-base-measure-label] -- Seeley-DeWitt,
                 # theta inversion).
                 src_keywords = ("matsubara", "hopf", "seeley-dewitt",
                                 "theta", "circle", "measure", "mellin",

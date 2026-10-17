@@ -95,7 +95,7 @@ depth-$k$ tower beyond $k = 3$ is not yet identified) sits in cyclotomic mixed-T
 periods (localized at $\pi$) at level $\le 4$ over $\mathcal{O}_4[1/4] = \Z[i, 1/2]$, with
 a period-theoretic stratification, over the cases treated, read against the
 operator-order slot $k \in \{0, 1, 2\}$ of the master Mellin engine
-$\Mcal[\Tr(D^k e^{-tD^2})]$ on the discrete Camporesi--Higuchi
+$\Mcal[\Tr(|D|^k e^{-tD^2})]$ on the discrete Camporesi--Higuchi
 $\sthree$ spectral triple:
 \begin{itemize}
   \item $k = 0$ (volume slot, $\Vol(S^2)/4 = \pi$):\
@@ -114,9 +114,10 @@ $\sthree$ spectral triple:
     $M_3 \subset \MT(\Z[i, 1/2])$ at level $\le 4$ via
     Deligne~\cite{deligne2010} and the explicit basis of
     Glanois~\cite{glanois2015}, at depth at most the loop order.  The
-    vertex-parity-as-$\chi_{-4}$ correspondence is the
+    vertex-parity-as-$\chi_{-4}$ correspondence is read as the
     Deligne--Glanois Galois descent from level $4$ to level $2$
-    realised on the framework's natural QED observables.
+    on the framework's natural QED observables, at the level of
+    motivic periods.
 \end{itemize}
 The three sub-mechanisms are not set-theoretically disjoint
 (joint engagement is the typical case in physical observables);
@@ -213,7 +214,7 @@ a stratification over the cases treated, read against the operator-order slot
 $k \in \{0, 1, 2\}$ of the \emph{master Mellin engine}
 \begin{equation}
 \label{eq:master_mellin_engine}
-\Mcal\!\left[\,\Tr\bigl(D^k\, e^{-tD^2}\bigr)\,\right](s)
+\Mcal\!\left[\,\Tr\bigl(|D|^k\, e^{-tD^2}\bigr)\,\right](s)
 \end{equation}
 on the discrete Camporesi--Higuchi $\sthree$ spectral
 triple~\cite{camporesi_higuchi1996}.  The structure is:
@@ -232,8 +233,8 @@ $1$ & M3 (vertex parity / Hurwitz / Dirichlet $L$) & $\MT(\Z[i, 1/2])$ at level 
 The M3 row contains the substantive new identification:\ the
 vertex-parity selection rule that produces Catalan $G$ and
 $\beta(s)$ values in the framework's two-loop QED sector (Paper~28
-Theorem~3, \cite{loutey_paper28}) is precisely the Deligne--Glanois
-Galois descent from level $4$ to level $2$ on the framework's
+Theorem~3, \cite{loutey_paper28}) is read, at the level of motivic
+periods, as the Deligne--Glanois Galois descent from level $4$ to level $2$ on the framework's
 natural Dirichlet series $D(s) = D_{\mathrm{even}}(s) +
 D_{\mathrm{odd}}(s)$, with Hurwitz at quarter-integer shifts
 $\zeta(s, 1/4), \zeta(s, 3/4)$ surviving in
@@ -292,14 +293,14 @@ spectral zeta is
 \subsection{The master Mellin engine}
 
 The Mellin transform of the trace
-$\Tr\bigl(D^k\, e^{-tD^2}\bigr)$ extracts the spectral zeta value
-$D(2s - k)$ (modulo $\Gamma$-factor normalisations):
+$\Tr\bigl(|D|^k\, e^{-tD^2}\bigr)$ extracts the spectral zeta value
+$D(2s - k)$:
 \begin{equation}
 \label{eq:mellin_extract}
-\Mcal\!\left[\Tr\bigl(D^k\, e^{-tD^2}\bigr)\right](s)
+\Mcal\!\left[\Tr\bigl(|D|^k\, e^{-tD^2}\bigr)\right](s)
 = \frac{1}{\Gamma(s)} \int_0^\infty t^{s-1} \,
-   \sum_{n \ge 0} g_n (\lambda_n)^k\, e^{-t \lambda_n^2}\,dt
-= \frac{\Gamma(s + k/2)}{\Gamma(s)} \cdot D(2s + k).
+   \sum_{n \ge 0} g_n |\lambda_n|^k\, e^{-t \lambda_n^2}\,dt
+= D(2s - k).
 \end{equation}
 At integer $s$, the three cases $k \in \{0, 1, 2\}$ produce
 structurally distinct outputs:
@@ -315,12 +316,14 @@ structurally distinct outputs:
     $\Tr\,f(D^2/\Lambda^2)$ produces Seeley--DeWitt coefficients
     $\{a_k(D^2)\}_{k \ge 0}$ via the asymptotic expansion of the heat
     trace as $t \to 0^+$.  We designate this contribution as M2.
-  \item $k = 1$:\ the $\eta$-invariant series
+  \item $k = 1$:\ the signed trace $\Tr(D e^{-tD^2})$ and the
+    $\eta$-invariant series
     $\eta(s) := \sum_n \mathrm{sgn}(\lambda_n) g_n |\lambda_n|^{-s}$
-    arises by Mellin transform of $\Tr(D e^{-tD^2})$, with the
+    vanish on the symmetric Camporesi--Higuchi spectrum;\ the $k = 1$
+    content is the absolute sum of Eq.~\eqref{eq:mellin_extract}, whose
     vertex-parity decomposition
     $D = D_{\mathrm{even}} + D_{\mathrm{odd}}$ on the parity of
-    $n_{\mathrm{Fock}}$ exposing Hurwitz at quarter-integer shifts.
+    $n_{\mathrm{Fock}}$ exposes Hurwitz at quarter-integer shifts.
     We designate this contribution as M3.
 \end{itemize}
 
@@ -349,8 +352,9 @@ a mechanism carries $\pi$ --- is not established):
 A falsification sweep against three candidate fourth mechanisms
 (continuum gravity, anomaly classes, principal bundles) returned the
 sharper finding that $M_1, M_2, M_3$ are three sub-cases of the single
-master Mellin engine $\Mcal[\Tr(D^k e^{-tD^2})]$ parameterised by
-operator order $k \in \{0, 1, 2\}$.
+master Mellin engine $\Mcal[\Tr(|D|^k e^{-tD^2})]$ parameterised by
+operator order $k \in \{0, 1, 2\}$ (the absolute trace:\ the signed $k = 1$
+trace vanishes on the symmetric spectrum).
 \end{theorem}
 
 The (conditional) theorem partitions the $\pi$-content of the first fifteen Paper~34 projections by Mellin slot;\ it does
@@ -780,9 +784,9 @@ Paper~28.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-The Mellin transform at $k = 1$,
-$\Mcal[\Tr(D \cdot e^{-tD^2})](s)$, extracts the spectral zeta
-$D(2s + 1)$ via Eq.~\eqref{eq:mellin_extract}.  On the
+The Mellin transform at $k = 1$ of the absolute sum,
+$\Mcal[\Tr(|D| \cdot e^{-tD^2})](s)$, extracts the spectral zeta
+$D(2s - 1)$ via Eq.~\eqref{eq:mellin_extract}.  On the
 Camporesi--Higuchi spectrum~\eqref{eq:ch_spectrum}, the half-integer
 shift $3/2$ writes
 \[
@@ -1005,11 +1009,12 @@ sub-sector accessing Catalan $G$, $\beta(4)$, and the difference
 $D_{\mathrm{even}} - D_{\mathrm{odd}}$) as the Deligne--Glanois Galois
 descent at $N = 4$ on the framework's natural M3 observables.
 
-Glanois 2015~\cite{glanois2015} establishes (Corollaries 1.1--1.2)
-that for $N \in \{2, 3, 4, 6, 8\}$ the period map
-$\mathrm{per}: \Hcal^N \to \Zcal^N$ is an isomorphism, and provides
-an explicit basis $\Bcal^N$ of motivic multiple zeta values relative
-to $N$-th roots of unity.  At $N = 4$ the basis indexing data
+Glanois 2015~\cite{glanois2015} provides, for
+$N \in \{2, 3, 4, 6, 8\}$, an explicit basis $\Bcal^N$ of motivic
+multiple zeta values relative to $N$-th roots of unity;\ its image
+under the period map $\mathrm{per}: \Hcal^N \to \Zcal^N$ is a
+generating family for the real values (that the period map is
+injective is the period conjecture, open).  At $N = 4$ the basis indexing data
 $(x_1, \ldots, x_p; \epsilon_1, \ldots, \epsilon_p)$ allows
 $\epsilon_p = \sqrt{-1}$ and $\epsilon_i \in \{\pm 1\}$ at other
 entries, with level filtration controlled by the number of even
@@ -1033,10 +1038,10 @@ from $N = 4$ to $N = 1$ in the un-restricted Dirac Dirichlet.
 
 We summarise:
 
-\begin{proposition}[Vertex parity is Deligne--Glanois descent]
+\begin{proposition}[Vertex parity read as Deligne--Glanois descent]
 \label{prop:vertex_parity_descent}
-The Galois descent from level $N = 4$ to level $N = 2$ in the
-Glanois 2015 cyclotomic mixed-Tate framework is realised on the
+At the level of motivic periods, the Galois descent from level $N = 4$ to
+level $N = 2$ in the Glanois 2015 cyclotomic mixed-Tate framework is realised on the
 discrete Camporesi--Higuchi $\sthree$ spectral triple by the
 vertex-parity decomposition $D = D_{\mathrm{even}} + D_{\mathrm{odd}}$.
 The further descent from $N = 2$ to $N = 1$ (classical MZV) is
@@ -1048,11 +1053,13 @@ $\zeta(s, 1/4) + \zeta(s, 3/4) = (4^s - 2^s)\zeta(s)$ at integer $s$.
 This identification places the parity-discriminant and $\chi_{-4}$
 theorems of Paper~28 inside the standard cyclotomic-mixed-Tate Galois
 hierarchy at the operator-level resolution provided by the discrete
-spectral triple, with no new motivic conjecture required:\ Deligne
-2010~\cite{deligne2010} proves the period map is an isomorphism at
-$N = 4$, Glanois 2015~\cite{glanois2015} provides the explicit
-descent operation, and Paper~28 supplies the closed forms that match
-the descent on the spectral-triple side.
+spectral triple, at the level of motivic periods:\ Deligne
+2010~\cite{deligne2010} and Glanois 2015~\cite{glanois2015} give
+explicit motivic bases at $N = 4$ whose periods span the real values,
+Glanois provides the explicit descent operation, and Paper~28 supplies
+the closed forms that match the descent on the spectral-triple side;\
+reading the identification on the real numbers themselves assumes the
+period conjecture.
 
 \subsection{Cross-manifold extension to $\sfive$:\ same classification,
 three-term polynomial structure}
@@ -1422,8 +1429,9 @@ positioning]
 \label{rem:reading_A_strategic}
 Theorem~\ref{thm:jlo_depth2_reading_A} closes the depth-$2$ Reading
 A/B question on the natural Camporesi--Higuchi substrate at the
-JLO cocycle level.  GeoVac IS the abelianisation-by-Cartier--Milnor--Moore
-of the cosmic-Galois universe at depth $2$:\ the depth-$2$ cocycle
+JLO cocycle level.  On this computation GeoVac is consistent with
+the abelianisation-by-Cartier--Milnor--Moore of the cosmic-Galois
+universe at depth $2$:\ the depth-$2$ cocycle
 carries genuinely new content not derivable from depth-$1$
 (depth-$1$ JLO vanishes identically on commutative $\mathcal{A}$,
 v3.59.0 Sprint Q5'-Stage1-Arc), but that new content sits entirely
@@ -1469,7 +1477,7 @@ advancing the equality direction itself.
 The three sub-mechanisms M1, M2, M3 are role-disjoint at the Mellin
 slot index $k \in \{0, 1, 2\}$:\ each \emph{elementary spectral
 object} of GeoVac is read as produced by one Mellin slot of
-$\Tr(D^k e^{-tD^2})$ at one operator order $k$ (composite observables
+$\Tr(|D|^k e^{-tD^2})$ at one operator order $k$ (composite observables
 typically engage several;\ Paper~32).  This is a reading of the master
 Mellin engine, organised by the conditional case-exhaustion theorem
 (Theorem~\ref{thm:case_exhaustion}), not a consequence of it.
@@ -1477,15 +1485,15 @@ Mellin engine, organised by the conditional case-exhaustion theorem
 The corresponding period rings $M_1, M_2, M_3$, however, are not
 set-theoretically disjoint.  The nesting of their ring homes (the
 inclusions $M_2 \subset \bigoplus \pi^{2k}\Q$ and
-$M_3 \subset \MT(\Z[i,1/2])$ are the theorems of \S\S 4--5;\ an earlier
-display wrote them as equalities, corrected 2026-10-15) is
+$M_3 \subset \MT(\Z[i,1/2])$ are the theorems of \S\S 4--5, and
+$M_1 \subset \Q[\pi, \pi^{-1}]$ that of \S 3) is
 \begin{equation}
 \label{eq:ring_nesting}
 M_2 \;\subset\; \bigoplus_{k \ge 0} \pi^{2k}\cdot\Q
 \;\subset\; \MT(\Z)
 \;\subset\; \MT(\Z[i, 1/2]) \;\supset\; M_3,
 \qquad
-M_1 \cap \MT(\Z[i, 1/2]) = \Q[\pi].
+M_1 \subset \Q[\pi, \pi^{-1}].
 \end{equation}
 A given period value $\pi^{2k}$ can be reached by M1 (as an integer
 power of the $k = 0$ volume factor), by M2 (as a Seeley--DeWitt
@@ -1670,8 +1678,8 @@ The three examples above exhibit the three natural composition modes:
 \toprule
 Mode & Combination & Example & Ring \\
 \midrule
-Additive & $\sum_i \alpha_i$ inside a single linear combination & Paper~2 K-formula & $M_1 \cdot (M_0 \oplus M_2 \oplus M_3) \subset \Q[\pi]$ \\
-Multiplicative & $\prod_i \alpha_i$ across mechanism boundaries & Paper~50 F-theorem & $M_1 \cdot M_3 \subset \MT(\Z[i, 1/2])$ \\
+Additive & $\sum_i \alpha_i$ inside a single linear combination & Paper~2 K-formula & $M_1 \cdot (M_0 \oplus M_2) \subset \Q[\pi, \pi^{-1}]$ \\
+Multiplicative & $\prod_i \alpha_i$ across mechanism boundaries & Paper~50 F-theorem & $M_1 \cdot M_3 \subset \MT(\Z[i, 1/2])[\pi^{-1}]$ \\
 Pure single-mechanism & all factors from one slot & Paper~25 volume slot ($\pi$;\ the Paper~38 Fej\'er constant is placed here only as a reading) & $M_1$ alone \\
 \bottomrule
 \end{tabular}
@@ -1904,14 +1912,13 @@ sub-case $a(t) \equiv 1$.  Closed forms derived by Jacobi $\vartheta_2,
 documents the full derivation, numerical verification, and
 dimension-parity sharpening.
 
-The M1 sub-mechanism transfers to $\sfive$ via the $\mathbb{CP}^2$
-base measure on the Hopf-like projection $\sfive \to \mathbb{CP}^2$,
-$\Vol(\mathbb{CP}^2)/4 = \pi^2/2 \in \Q[\pi]$.  Whether the M3
-sub-mechanism (vertex parity and Hurwitz at the half-integer shift
-$5/2$) admits a parallel cyclotomic-mixed-Tate-at-level-$\le 4$
-classification on $\sfive$ is a sub-sprint of identical structural shape
-to the $\sthree$ argument in \S\ref{sec:m3};\ we record it as an open
-sub-question below (Q3').
+The M1 volume slot transfers to $\sfive$, whose volumes lie in
+$\Q[\pi]$ (for the unit sphere, $\Vol(\sfive) = \pi^3$).  Whether the M3
+sub-mechanism (vertex parity and Hurwitz at the quarter-integer shifts
+$5/4$, $7/4$) admits a parallel cyclotomic-mixed-Tate-at-level-$\le 4$
+classification on $\sfive$ is a question of identical structural shape
+to the $\sthree$ argument in \S\ref{sec:m3};\ it is recorded as
+sub-question Q3' and closed below.
 
 \subsection{M3 on $\sfive$:\ structural closure, empirical PSLQ deferred}
 \label{subsec:open_s5_m3}
@@ -3221,9 +3228,9 @@ Fathizadeh--Marcolli) in a precise way:\ each transcendental in the
 census has a named motivic home
 inherited from the period-theoretic content of the corresponding
 sub-mechanism.  The vertex-parity-as-$\chi_{-4}$ correspondence at the
-core of GeoVac's two-loop QED sector (Paper~28 Theorem~3) is the
-literal Deligne--Glanois Galois descent from level $4$ to level $2$
-on the framework's natural Dirichlet series.
+core of GeoVac's two-loop QED sector (Paper~28 Theorem~3) is read,
+at the level of motivic periods, as the Deligne--Glanois Galois descent
+from level $4$ to level $2$ on the framework's natural Dirichlet series.
 
 % =====================================================================
 \appendix
@@ -3236,7 +3243,7 @@ The cosmic-Galois $U^*$ thread of \S\ref{subsec:open_m2_m3} sits on the
 machinery:\ its substrate is the Fock-projected $\sthree$ graph, its
 periods are cyclotomic mixed-Tate at level $\le 4$, and the
 transcendentals in its census are tagged by the master Mellin engine
-$\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$ at $k \in \{0, 1, 2\}$.  A
+$\mathcal{M}[\mathrm{Tr}(|D|^k e^{-tD^2})]$ at $k \in \{0, 1, 2\}$.  A
 distinct but adjacent strand of the broader NCG program treats the
 \emph{arithmetic} side of $\zeta$ directly:\ the Bost--Connes
 system~\cite{bost_connes1995}, the Connes--Consani scaling
