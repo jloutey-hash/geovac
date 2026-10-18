@@ -343,7 +343,7 @@ CLAIMS = {
         owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
         owner_anchor=r"A three-electron chain lives on a K3", owner_tier=r"\[MEASURED / classical\]",
         tier="MEASURED / classical", owner_window=20,
-        mention=r"Calabi.?Yau|generic (chain )?(fibre|fiber)|longer (trees|chains)",
+        mention=r"Calabi.{0,3}Yau[^.;|]{0,15}folds?|generic (chain )?(fibre|fiber)|longer (trees|chains)",
         qualifier=r"OPEN|\bopen\b|conjectur|hunch|untested|not tested|no relation|evidence",
         overclaim=r"generic (fibre|fiber)[^.;]{0,40}\b(is|are|reduces to|lies in)\b[^.;]{0,20}\bK3\b|"
                   r"(proves?|proved|shows?|established?)[^.;]{0,30}Calabi.?Yau|"
@@ -378,6 +378,82 @@ CLAIMS = {
         overclaim=r"\bJ[47]\b[^.;]{0,15}\b(is|are|stays?|remains?)\s+(an?\s+)?\**Obs\b|"
                   r"\bJ[47]\b[^.;]{0,15}\**Obs\**\s*\|",
         changed="2026-10-15"),
+    "p59-coulomb-ring-elliptic": dict(
+        statement="A Coulomb ring of three linked densities does not climb: at the 3-D fingerprint fibre "
+                  "the triangle's operator factors exactly as M o (theta - r) with an algebraic piece and M "
+                  "equivalent to Legendre's equation, so it sits on the elliptic rung, below the chain's K3; "
+                  "at one centre it carries dilogarithms where the chain is rational [SYMBOLIC + MEASURED]. "
+                  "Scope: Coulomb kernels; the drop is the exact (unique) integration of the loop, and the "
+                  "correlated (geminal) triangle does not drop.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"A fourth finds that a Coulomb ring of three densities does not climb", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
+        tier="SYMBOLIC + MEASURED", owner_window=1,
+        mention=r"ring of three|rings? (does|do) not climb|Coulomb (ring|triangle)|"
+                r"triangle of three\s+densit|loop (lowers|integrates out)|ring behaves|"
+                r"closing [^.;]{0,30}into a ring|loop trades geometry|"
+                r"(rung|class) is set by how many densities|kernel sharing a vertex lifts",
+        qualifier=r"Coulomb|uniqueness|unique|integrates out|fibre|fiber|correlated|geminal",
+        overclaim=r"\b(rings|loops) (never|cannot|can ?not) climb|"
+                  r"\b(any|every) (ring|loop)[^.;]{0,40}(lowers|elliptic rung|drops)|"
+                  r"(?<!Coulomb )\bring of three densities\b[^.;]{0,30}\bsits\b|"
+                  r"(?<!Coulomb )\btriangle of three densities sits|"
+                  r"\ba ring does not climb\b|"
+                  r"loop lowers the rung when it integrates out exactly|"
+                  r"whose (massive )?loop does not( integrate out( exactly)?)?\b|"
+                  r"(rung|class) is set by how many densities one integral links",
+        changed="2026-10-17"),
+    "p59-correlated-triangle-k3": dict(
+        statement="The correlated triangle (exponential geminals e^(-gamma r) on the two edges at one "
+                  "density) sits with the three-density chain on the K3 rung exactly at gamma = 1 "
+                  "(annihilator R3 o R1, R3 equivalent to F_3's operator) [SYMBOLIC + MEASURED]; at "
+                  "gamma = 3/2 it reaches the K3 rung by local data mod p plus Levelt rigidity, and whether it climbs further is open. "
+                  "One geminal shape; the cusp-correct and linear-exponential geminals are untested. "
+                  "The registered elliptic prediction (QG2) was falsified.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"the correlated triangle does not drop", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
+        tier="SYMBOLIC + MEASURED", owner_window=1,
+        mention=r"correlated (\(geminal\) )?triangle|geminal triangle|geminals on (the )?two edges|"
+                r"exponential[- ]geminal triangle|geminal kite|stays K3",
+        qualifier=r"gamma|\\gamma|exponential|one geminal|K3|chain|rigidity",
+        overclaim=r"correlated (\(geminal\) )?triangle[^.;]{0,40}\b(sits|lies|stays) on the elliptic|"
+                  r"\b(all|every) geminals?\b[^.;]{0,40}\bK3\b|"
+                  r"\bK3\b[^.;]{0,40}\b(for|at) (all|every) (\$?\\?gamma|geminal)|"
+                  r"local data (mod \$?p\$? )?at \$?\\?gamma ?= ?3/2\$?(?![^.]{0,120}(not excluded|open))",
+        changed="2026-10-17"),
+    "p59-ising-thresholds": dict(
+        statement="At t = 1 the tree ladder is the Ising class c_{n,0} = int K0^n: for n <= 8 the finite "
+                  "singular points are t^2 = (n-1-2j)^2 and no others, so t = 1 is singular exactly for "
+                  "even n [SYMBOLIC + MEASURED]. The values (c_{3,0} CM elliptic, c_{4,0} = 4 pi^2 L(f,2), "
+                  "c_{6,0} = 108 pi^2 L(g,4)) are PRIOR ART (BBBG; Lim-Tu-Yu); c_{8,0} fits no single "
+                  "L-value tried, so parity is not the rule for values; c_{5,0}, c_{7,0} fit no tested "
+                  "lower basis at a stated bound. What the ladder adds is the threshold reading.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"At \$t=1\$ the ladder is the Ising class", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
+        tier="SYMBOLIC + MEASURED (thresholds); PRIOR ART (values)", owner_window=1,
+        mention=r"Ising[- ]class|c_\{?[3-8],0\}?|even moments|parity (rule|heuristic)",
+        qualifier=r"\\le ?8|<= ?8|up to \$?8|\$?n ?\\le|prior art|PRIOR ART|heuristic|not the rule",
+        overclaim=r"(?<!heuristic that )\beven moments (always )?drop(?![^.;]{0,40}\b(is not|not the rule|heuristic)\b)|"
+                  r"parity (is|gives) the rule for values|"
+                  r"(we|this paper) (prove|establish|identify|find)s?[^.;]{0,40}\bL\(|"
+                  r"for (every|all) \$?n\$?(?![^.;]{0,15}(up to|\\le|<=))[^.;]{0,40}(singular|threshold)|"
+                  r"c_\{?8,0\}?[^.;]{0,40}\b(equals|is)\b[^.;]{0,20}\bL\(",
+        changed="2026-10-17"),
+    "p59-tree-banana-hadamard": dict(
+        statement="The tree ladder's operators are the Hadamard products of the Legendre operator with "
+                  "the equal-mass banana operators with n-1 propagators, in y = 1/(16 t^2), checked in "
+                  "exact arithmetic for n = 2 to 5 [SYMBOLIC]; n = 4 is AESZ #58 and n = 5 the operator "
+                  "printed with #39 (prior art: Almkvist-Zudilin; the tables). F_n is irreducible for "
+                  "n = 2..5 by local exponents and Fuchs' relation.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"So the tree ladder is tied to the banana ladder", owner_tier=r"\[SYMBOLIC\]",
+        tier="SYMBOLIC (n = 2..5) + PRIOR ART", owner_window=0,
+        mention=r"banana ladder|Hadamard product",
+        qualifier=r"\$?n ?= ?2\$? to \$?5|n ?= ?2\.\.5|2 to 5|checked|Almkvist|prior art|PRIOR ART|AESZ",
+        overclaim=r"(proved|proven|theorem)[^.;]{0,40}(banana|Hadamard)|"
+                  r"(banana|Hadamard)[^.;]{0,40}\bfor (all|every) \$?n\b|"
+                  r"\bwhole (tree )?ladder\b|"
+                  r"five densities[^.;|]{0,60}\b(open|evidence|not settled)\b|relation to four is open",
+        changed="2026-10-17"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",

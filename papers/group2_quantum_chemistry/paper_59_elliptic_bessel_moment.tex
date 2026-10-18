@@ -87,15 +87,16 @@ densities depends only on how many densities it links, and that four linked
 densities give the first period not built from elliptic ones:\ its equation
 is an irreducible fourth-order operator of Calabi--Yau type, with no
 quadratic relation among its solutions, an entry of the published
-Calabi--Yau tables;\ the whole tree ladder is the banana ladder of
+Calabi--Yau tables;\ for two to five densities the tree ladder is the banana ladder of
 Feynman integrals under a Hadamard product with the Legendre family.
-\textbf{[SYMBOLIC + MEASURED]} A fourth finds that a ring does not climb:\ the Coulomb triangle of three
-densities splits at the fibre into elementary, algebraic and elliptic
+\textbf{[SYMBOLIC + MEASURED]} A fourth finds that a Coulomb ring of three densities does not climb:\ its
+operator factors at the fibre into elementary, algebraic and elliptic
 pieces, one rung below the three-density chain, and at one center it
-carries a dilogarithm where the chain is rational.  The drop comes from the
-exact integration of the Coulomb loop:\ with exponential geminals on two
-edges, the correlated triangle of explicitly correlated methods sits with
-the chain, on the K3 rung.
+carries a dilogarithm where the chain is rational.  With exponential
+geminals $e^{-\gamma r}$ on two edges, the correlated triangle of explicitly
+correlated methods sits with the chain on the K3 rung at $\gamma=1$;\
+\textbf{[OBSERVATION]} the drop is read as the uniqueness of the Coulomb loop, which
+factors it into pairwise inverse distances.
 \end{abstract}
 
 \maketitle
@@ -728,15 +729,19 @@ three-center Slater integral, via the Fock projection, is a two-scale Bessel
 moment on the sunrise elliptic curve---appears to be unmade.  This is an
 absence from a targeted search, not a proof of absence; the residual risk is
 an obscure single source.  \textbf{[OBSERVATION]} A second placement datum is
-arithmetic:\ the conductor-$4$ content this family carries (the $\mathbb{Z}[i]$
-theta series $\theta_{3}^{2}$ of the companion (Paper~61);\ $G=\beta(2)=
-L(2,\chi_{-4})$ in the corrected ring) is absent from the established
-Bessel-moment corpus, which sits at levels/conductors $3, 6, 8,
-15$~\cite{broadhurst2016,fresansabbahyu2023,zhou_wick2018}---a targeted search
-finds no Catalan-constant appearance in any of these---the nearest $\chi_{-4}$
-appearance being the topological-string sector of the Broadhurst--Dorigoni
+arithmetic:\ the $\mathbb{Z}[i]$ content this family carries (the theta
+series $\theta_{3}^{2}$ of the companion (Paper~61);\ $G=\beta(2)=
+L(2,\chi_{-4})$) does not appear in the established
+Bessel-moment corpus, whose forms sit at levels $3, 6, 8,
+15$~\cite{broadhurst2016,fresansabbahyu2023,zhou_wick2018} and, in the twisted
+moments of Lim, Tu and Yu~\cite{lim_tu_yu2026}, $24$ and $48$:\ a targeted search
+finds no Catalan-constant appearance in any of these, and $\chi_{-4}$ enters
+$c_{3,0}$ as a twist:\ the form attached to it is the newform of level $12$
+twisted by $\chi_{-4}$, whose complex multiplication stays by
+$\mathbb{Q}(\sqrt{-3})$, not $\mathbb{Q}(i)$~\cite{lmfdb};\ the nearest other $\chi_{-4}$
+appearance is the topological-string sector of the Broadhurst--Dorigoni
 programme~\cite{broadhurst_dorigoni2026}.  The family thus occupies an
-apparently unclaimed arithmetic slot (conductor $4$) in that literature, of a
+apparently unclaimed arithmetic slot ($\mathbb{Z}[i]$, complex multiplication by $\mathbb{Q}(i)$) in that literature, of a
 piece with the unmade bridge above.  (Reconciliation with the value-level searches of
 the companion (Paper~61):\ the conductor-$4$ arithmetic is a property of the \emph{family} and of the
 $D\to0$ shadow;\ the physical integrated value itself shows no measured conductor-$4$
@@ -914,7 +919,7 @@ record carries them.
 
 \textbf{[SYMBOLIC + MEASURED]} The holomorphic period of a tree of linked
 densities depends only on how many densities the kernels link, not on the
-pattern of the links;\ a ring behaves differently
+pattern of the links;\ a Coulomb ring of three behaves differently
 (Sec.~\ref{sec:density_ring}).  Take $n$ two-center $1s$ densities joined into a tree by $n-1$
 rational kernels, and write the dispersion root of density $v$ at the
 fingerprint fibre as $\Delta_v=\sqrt{c_vL_v^2+1}$, with $L_v$ the signed
@@ -1040,7 +1045,7 @@ banana with $n-1$ propagators.
 \textbf{[SYMBOLIC + MEASURED]} At $t=1$ the ladder is the Ising class of
 Bessel moments, $F_n(1)=c_{n,0}=\int_0^\infty K_0(x)^n\,dx$~\cite{bbbg2008}.
 The singular values of $t^2$ are the thresholds $(n-1-2j)^2$ for every $n$
-up to $8$, with no other finite singular point, so $t=1$ is a singular point
+up to $8$, with no other finite nonzero singular point, so $t=1$ is a singular point
 of $F_n$'s operator exactly when $n$ is even.  There one local exponent is
 doubled, while at the thresholds of odd $n$ one is a half-integer.  Since
 $F_n$ is analytic for $t>0$, at a threshold it is the solution without the
@@ -1096,7 +1101,7 @@ uniqueness (star-triangle) relation gives
   \label{eq:star_triangle}
 \end{equation}
 which a Feynman-parameter evaluation confirms at five random triples to
-$10^{-12}$.  The triangle becomes an integral over the same two momenta and
+$1.2\times10^{-12}$.  The triangle becomes an integral over the same two momenta and
 three densities as the three-electron chain.  For spherical densities the
 magnitude measure cancels the weight, and
 \begin{equation}
@@ -1151,7 +1156,8 @@ equation to a solution of $M$, an identity checked in exact rational
 arithmetic.  And $G$ needs the elliptic piece:\ $(\theta-r)(G+1)$ is a
 nonzero solution of $M$, equal to $-0.161$ at $t=0.5$ and $-2.33$ at
 $t=1.3$.  Neither side has a relation to the K3 family of $F_3$.
-The pieces of $G$ are therefore elementary, algebraic and elliptic.  The
+So $G$ is built from an elementary constant, an algebraic function and an elliptic
+period integrated once against an algebraic kernel.  The
 triangle sits on the elliptic rung of a single repulsion integral.  That is
 one rung below the three-density chain.
 
@@ -1192,45 +1198,48 @@ against an elementary kernel.  So the
 Coulomb ring lowers the rung at the fibre and raises the weight at one
 center.  In neither limit does it climb.
 
-\textbf{[SYMBOLIC + MEASURED]} The correlated triangle does not drop.  Put
+\textbf{[SYMBOLIC + MEASURED]} At $\gamma=1$ the correlated triangle does not drop.  Put
 the exponential geminal $f=e^{-\gamma r}$ on the two edges at one density,
 $Y=\langle\rho_i\rho_j\rho_k\,f_{ik}f_{jk}/r_{ij}\rangle$, at the fibre with
 scales $(1,1,t)$ and $t$ on the density that carries both geminals.  The
 registered prediction was that $Y$ stays on the elliptic rung.  The loop is
-still elementary:\ with masses $(\gamma,\gamma,0)$ it is a solid angle,
+still elementary:\ it is a mass derivative of the loop with masses
+$(\gamma,\gamma,0)$, a solid angle,
 $\pi^2\arctan(\sqrt{\det M}/D)/\sqrt{\det M}$ in the Gram data of the masses
 and momenta, matched by direct integration at five triples to
 $3\times10^{-14}$.  But it has no uniqueness step.  The two densities and
 the two geminals around it form a kite, whose Taylor series satisfies an
 order-two operator, measured on 600 coefficients and mapped exactly to the
 Legendre equation:\ the kite is elliptic.  At $\gamma=1$ the minimal
-annihilator of $Y$ has order four and divides exactly as $R_3R_1$.  The
-piece $R_1$ has an algebraic solution.  The piece $R_3$ is the adjoint of an
+annihilator of $Y$ has order four and divides exactly as $\tilde R_3\tilde R_1$,
+with factors of orders three and one that are not those of the chain.  The
+piece $\tilde R_1$ has an algebraic solution.  The piece $\tilde R_3$ is the adjoint of an
 operator whose solutions are the image of the solutions of $F_3$'s operator
 under an exact order-two map, and since $F_3$'s operator is anti-self-adjoint,
-$R_3$ is equivalent to it.  Applied to $Y$, the order-four operator leaves at
-most $2\times10^{-26}$ of its largest term at four values of $t$, with no
+$\tilde R_3$ is equivalent to it.  Applied to $Y$, the order-four operator leaves at
+most $2.3\times10^{-26}$ of its largest term at four values of $t$, with no
 source term, and no operator of order three annihilates $Y$.  Attaching the
 last density turns the elliptic kite into the K3 family, a Clausen-type
-step.  So the correlated triangle sits with the three-density chain, on the
+step.  So at $\gamma=1$ the correlated triangle sits with the three-density chain, on the
 K3 rung, and not with the Coulomb triangle.  At $\gamma=3/2$ a quotient of
-order three, found modulo a prime, has the local data of $F_3$'s operator,
+order three, found modulo a prime, has the local data of $F_3$'s operator
+twisted by $t$, with genuine singular points only at $t=0,\pm2,\infty$,
 which fixes it up to equivalence by Levelt's
 rigidity~\cite{beukers_heckman1989};\ the explicit map was not found, and a
 factor above K3 is not excluded there.  The singular points move with
-$\gamma$, to $t=|1-\gamma|,2,1+\gamma,2\gamma$, which meet at $t=2$ for
-$\gamma=1$.  The drop of the Coulomb ring is therefore a property of
-uniqueness, not of rings:\ a loop lowers the rung when it integrates out
-exactly.
+$\gamma$, to $t=|1-\gamma|,2,1+\gamma,2\gamma$, three of which meet at $t=2$ for
+$\gamma=1$.  \textbf{[OBSERVATION]} The drop of the Coulomb ring is therefore read as a property of
+uniqueness, not of rings:\ both loops integrate out exactly, but only the
+Coulomb one factors into pairwise inverse distances, and only it lowers the rung.
 
 \textbf{[OBSERVATION]} The registered decision rule did not anticipate this
-outcome.  It allowed the triangle to land on the chain's rung, with or
+outcome.  It allowed the Coulomb triangle to land on the chain's rung, with or
 without an elementary term, or to climb;\ it lands below.  By the rule's
 letter $L_G$ is an order-three factor that is not equivalent to the chain's
-operator, which the rule called a climb, but $L_G$ splits into lower pieces,
+operator, which the rule called a climb, but $L_G$ factors into lower pieces,
 so it is not a climb in the sense the record intended.  Two side readings
 failed.  The singular points at $t=\pm1$ were not predicted;\ they belong to
-the elliptic piece.  And a ring of three does not sit with the chain of
+the elliptic piece.  And a Coulomb ring of three does not sit with the chain of
 three, as the record expected, but lower.  The count of linked densities
 orders the trees, not the rings.  The caps of Sec.~\ref{sec:four_density}
 apply:\ these are fibre statements, and the integrated value may sit lower.
@@ -1254,8 +1263,8 @@ $D=3$, and the early references are collected by Preti~\cite{preti2018}.
 Under the relation of Sec.~\ref{sec:four_density} to the banana ladder, the
 triangle's elliptic piece is the $n=2$ rung itself.  What is added here is the fibre reading:\ the Struve
 moment~\eqref{eq:ring_struve}, its operator, its place below the chain,
-and the correlated triangle's place with it.  The solid-angle form of the
-massive loop is standard;\ no literature search was made for it.
+and the correlated triangle's place with it.  No literature search was made
+for the solid-angle form of the massive loop;\ it rests on its numerical check.
 No literature search was made for the operator~\eqref{eq:ring_op}.
 
 %% ========================================================================
@@ -1352,16 +1361,17 @@ it deserves to be.  Two pre-registered extensions (Sec.~\ref{sec:beyond})
 probe the rung variable:\ a fourth center adds nothing, consistent with the class
 counting the distinct two-center densities a kernel couples and not the nuclei, while
 a second Coulomb kernel at one electron, over two-center densities, climbs
-to a K3 whose period is elliptic squared.  A third extension shows the rung is
-set by how many densities one integral links:\ four linked densities give the
+to a K3 whose period is elliptic squared.  A third extension shows the rung of a tree is
+set by how many densities it links:\ four linked densities give the
 first period not built from elliptic ones, five give no new type, and the
 integrals of a molecular Hamiltonian, which link two, stay elliptic for any
-molecule;\ the operators are known, tied to the banana ladder by a Hadamard
+molecule;\ the operators for two to five densities are known, tied to the banana ladder by a Hadamard
 product, and what is new is the route from a molecular integral.  A fourth shows
 that the count orders trees, not rings:\ a Coulomb triangle of three
-densities sits on the elliptic rung, below the chain of three, because its
-loop integrates out exactly;\ the correlated triangle, whose loop does not,
-sits with the chain.
+densities sits on the elliptic rung at the fibre, below the chain of three,
+while the correlated triangle with exponential geminals sits with the chain at
+$\gamma=1$;\ we read the difference as uniqueness, which factors the Coulomb loop
+and not the geminal one.
 
 %% ========================================================================
 \begin{thebibliography}{99}
@@ -1547,6 +1557,10 @@ integrals,'' arXiv:1401.6438 (2014).
 \bibitem{beukers_heckman1989}
 F.~Beukers and G.~Heckman, ``Monodromy for the hypergeometric function
 ${}_nF_{n-1}$,'' \textit{Invent.\ Math.}\ \textbf{95}, 325--354 (1989).
+
+\bibitem{lmfdb}
+The LMFDB Collaboration, ``The $L$-functions and modular forms database,''
+\texttt{https://www.lmfdb.org}, newforms 12.3.c.a and 48.3.e.a (accessed 2026-10-18).
 
 \bibitem{lim_tu_yu2026}
 Z.~L.~Lim, F.-T.~Tu and J.-D.~Yu, ``Galois representations and modularity

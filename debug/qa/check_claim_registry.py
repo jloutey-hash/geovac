@@ -256,6 +256,14 @@ def selftest() -> int:
                                       "Whether a real-time window forces the circle stays open; Paper 35 adopts the identification rather than derives it."),
         "seam-j4-j7-forced": ("J4 stays Obs until a guard exists.",
                               "J4 and J7 promoted from Obs 2026-10-15 (Paper 59 sec:beyond)."),
+        "p59-coulomb-ring-elliptic": ("Rings never climb the period ladder.",
+                                      "A Coulomb ring of three densities does not climb: its loop integrates out exactly."),
+        "p59-correlated-triangle-k3": ("The correlated triangle also sits on the elliptic rung.",
+                                       "The correlated triangle with exponential geminals sits with the chain on the K3 rung at gamma = 1."),
+        "p59-ising-thresholds": ("In the Ising class the even moments drop a rung.",
+                                 "In the Ising class t = 1 is a threshold exactly for even n up to 8, and parity is not the rule for values."),
+        "p59-tree-banana-hadamard": ("The banana ladder relation holds for all $n$.",
+                                     "The tree ladder is tied to the banana ladder by a Hadamard product, checked for n = 2 to 5."),
     }
     missing = set(R.CLAIMS) - set(probes) - {"pi-source-case-exhaustion"} | (set(probes) - set(R.CLAIMS))
     if missing - {"pi-source-case-exhaustion"}:

@@ -182,7 +182,7 @@ sanity check. None changes a reported number.
 
 **Caps.** Fibre statements at zero separation with the fast-decay root, like every rung in
 Paper 59; the integrated-value question (PI item 1) is untouched. Coulomb kernels only; the LiH
-geminal triangle (PT4) is untested. Only the triangle. The comparison is between the 3-D triangle
+geminal triangle (PT4) is untested here (tested the same day: K3 at gamma = 1, record `2026-10-17_ring_extensions.md`). Only the triangle. The comparison is between the 3-D triangle
 and the 3-D chain at the same fingerprint; the 1-D convention of PL1 was not used for the ring,
 where it does not apply (the loop momentum is a flat direction of the kernel-free form). The
 chain control's no-split result (D12) is bounded in the degrees and denominators of the map.
@@ -232,7 +232,7 @@ order-4 factor P of W (measured, P C / h at most 1e-33 at 30 digits, 9e-45 at 40
 and the artanh solution is absent: C = c t^2 + t^2 int s^-3 (B' f) ds. Registered (A) and (B)
 are refuted exactly, (B) for any elementary term. (2) The minimality audit finds no defect in any
 Paper 59 rung claim. The triangle's source term is L_G applied to a constant, so L_G (G + 1) = 0,
-and G needs its elliptic piece ((theta - r)(G + 1) is nonzero). (3) The tree ladder is the banana
+and G needs its elliptic piece ((theta - r)(G + 1) is nonzero). (3) For n = 2 to 5 the tree ladder is the banana
 ladder under a Hadamard product with the Legendre family (prior art: Almkvist-Zudilin), so the
 triangle's elliptic piece is the n = 2 rung itself. Paper 59 `sec:density_ring` and
 `sec:four_density` carry all three.
