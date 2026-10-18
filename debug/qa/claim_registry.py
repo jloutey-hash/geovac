@@ -425,7 +425,7 @@ CLAIMS = {
                   "singular points are t^2 = (n-1-2j)^2 and no others, so t = 1 is singular exactly for "
                   "even n [SYMBOLIC + MEASURED]. The values (c_{3,0} CM elliptic, c_{4,0} = 4 pi^2 L(f,2), "
                   "c_{6,0} = 108 pi^2 L(g,4)) are PRIOR ART (BBBG; Lim-Tu-Yu); c_{8,0} fits no single "
-                  "L-value tried, so parity is not the rule for values; c_{5,0}, c_{7,0} fit no tested "
+                  "L-value tried, so the searches give parity no support as a rule for values; c_{5,0}, c_{7,0} fit no tested "
                   "lower basis at a stated bound. What the ladder adds is the threshold reading.",
         owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
         owner_anchor=r"At \$t=1\$ the ladder is the Ising class", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",

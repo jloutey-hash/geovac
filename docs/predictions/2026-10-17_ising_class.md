@@ -108,10 +108,10 @@ integrand stays integrable. So at each threshold F_n is the solution without the
 branch. At even n, t = 1 is such a point, and c_{n,0} is the value there of the solution analytic
 at the singular point.
 
-### IS1 quadrature, IS2, IS3: all three confirmed as registered; the value rule is not parity
+### IS1 quadrature, IS2, IS3: confirmed for the registered value cases (the conifold attachment untested); parity finds no support at n = 8
 
 Memo `debug/sprint_ising_class_memo.md`; scripts `debug/ising_class_*.py`; data
-`debug/data/ising_class_*`. Moments c_{n,0}, n = 1..8, by two independent routes (mpmath
+`debug/data/ising_class_*`. Moments c_{n,0}, n = 2..8 (at n = 1 route B reaches 93-101 digits), by two independent routes (mpmath
 tanh-sinh with an own K0; exact log-series on [0,1] plus arb on [1,R]) agree to >= 286 digits.
 PSLQ controls: every run recovers c_{2,0} = pi^2/4 and c_{4,1} = 7 zeta(3)/8 and a planted
 relation of height bound/100; every relation found re-checked at full precision.
@@ -121,14 +121,15 @@ relation of height bound/100; every relation found re-checked at full precision.
 - **IS2: CONFIRMED within bounds.** c_{3,0} = 3 Gamma(1/3)^6/(32 pi 2^(2/3)), not Tate (bound
   1e32); it also equals (pi^2/2) L(48.3.e.a, 1). c_{5,0} and c_{7,0}: no relation with Tate,
   Tate times c_{3,0}, or homogeneous bases with five modular L-values (bounds 1e14 to 1e21 for
-  n = 5, 1e7 to 1e15 for n = 7).
-- **IS3: CONFIRMED for the registered cases.** c_{4,0} is not Tate (bound 1e24). PSLQ finds
+  n = 5, 1e7 to 1e15 for n = 7, over all bases; 1e14 to 1e17 and 1e7 to 1e9 over the lower
+  bases that Paper 59 quotes).
+- **IS3: CONFIRMED for the registered value cases.** c_{4,0} is not Tate (bound 1e24). PSLQ finds
   c_{4,0} = 4 pi^2 L(8.4.a.a, 2), f = eta(2 tau)^4 eta(4 tau)^4 of weight 4 and level 8, and
-  c_{6,0} = 108 pi^2 L(24.6.a.a, 4), weight 6 and level 24; both to 5e-261. The conifold
+  c_{6,0} = 108 pi^2 L(24.6.a.a, 4), weight 6 and level 24; both to 5e-261. (The disclosed memory above placed n = 6 at level 6; the form is of level 24.) The conifold
   attachment was not tested.
 - **Not registered, and the rule did not anticipate it: n = 8.** c_{8,0} has no Tate relation and
-  no single L-value relation found (bounds 1e7 to 1e12). So "even moments drop" is false as a
-  general rule. The organizing quantity is the size of the period matrix of the Kloosterman
+  no single L-value relation found (bounds 1e7 to 1e12). So "even moments drop" finds no support as a
+  general rule (a bounded search, evidence and not a disproof). The organizing quantity is the size of the period matrix of the Kloosterman
   motive (Lim, Tu, Yu, arXiv:2609.13576): c_{n,0} is a single L-value where that matrix is 1x1,
   n = 1, 2, 3, 4, 6, and sits inside a 2x2 determinant for n = 5, 7, 8. Parity matched only the
   cases it named.
@@ -140,10 +141,10 @@ at the wrong level misses by 33%. Lim-Tu-Yu exists (title and authors confirmed 
 theorem statements were read by the agent, not by me).
 
 Prior art. The values are not ours: c_{3,0} and c_{4,0} (as a 4F3) are Bailey-Borwein-
-Broadhurst-Glasser's (verified in their Table 1); the L-value forms of c_{3,0}, c_{4,0} and,
-conjecturally, c_{6,0} are Lim-Tu-Yu's. What the ladder adds is the reading: t = 1 is a threshold
+Broadhurst-Glasser's (verified in their Table 1); the L-value forms of c_{3,0} and c_{4,0} are
+collected by Lim-Tu-Yu, who credit them to earlier work, and the numerical c_{6,0} form is theirs. What the ladder adds is the reading: t = 1 is a threshold
 of F_n's operator exactly at even n, with one logarithm there, and a square-root branch at the
-thresholds of odd n; and the value-level parity heuristic built on it fails at n = 8.
+thresholds of odd n; and the value-level parity heuristic built on it finds no support at n = 8.
 
 Guarded (2026-10-18, its own step): the threshold table and exponents for n <= 8, the n = 6, 7, 8 operators on F_n, and the c_{3,0}, c_{4,0}, c_{6,0} identities, in `tests/test_paper59_four_density_rung.py`, fire-tested 14/14. The 24.6.a.a coefficients the guard uses are LMFDB's; the Kloosterman-route a_p of this run match them for every prime 5 <= p <= 97.
 

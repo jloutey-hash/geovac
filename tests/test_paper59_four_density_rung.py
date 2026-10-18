@@ -480,8 +480,8 @@ def test_tree_ladder_is_legendre_hadamard_banana():
     the printed operator and must annihilate sum binom(2m,m)^2 W_{n-1}(2m) y^m through m = 30,
     its unique holomorphic solution at the MUM point y = 0.  The operator is irreducible (the Fuchs
     guard above, in t; a factor in y would pull back to one in t), so it is that series' minimal
-    operator, i.e. the Hadamard product.  Not guarded here: that sum_k W_N(2k) s^-k is the banana
-    period (cited, Vanhove 2014)."""
+    operator, i.e. the Hadamard product.  That Vanhove's banana operators annihilate sum_k W_N(2k)
+    s^(-k-1) is guarded by test_vanhove_banana_operators_annihilate_the_walk_series."""
     Mx = 30
     legendre = BANANA_PRINTED[2]          # theta^2 - 4y(2 theta+1)^2 is the operator of binom(2m,m)^2
     for m in range(1, Mx):
@@ -617,3 +617,42 @@ def test_ising_moments_are_the_registered_values():
         assert abs(moment[4] / (4 * mp.pi**2 * _L_value(f, 8, 4, 2, +1)) - 1) < 1e-25
         assert abs(moment[4] / (4 * mp.pi**2 * _L_value(f, 16, 4, 2, +1)) - 1) > 0.1
         assert abs(moment[6] / (108 * mp.pi**2 * _L_value(g, 24, 6, 4, -1)) - 1) < 1e-25
+
+
+# ---------------------------------------------------------------- SMALL sweep 2026-10-18
+def test_ising_operators_irreducible_by_fuchs_n_6_to_8():
+    """Rejects a reducible operator at n = 6, 7, 8 (so that the threshold table would describe a
+    non-minimal operator): the Mellin-route operator must be Fuchsian, its exponents must satisfy
+    Fuchs' relation, and the exponent bound must exclude a right factor of every order k < n, with no
+    bound on degrees.  Positive control: test_fuchs_argument_sees_the_reducible_triangle."""
+    for n in (6, 7, 8):
+        exps, fuchsian = _local_exponents(_t_ode(n))
+        assert fuchsian
+        assert sum(sum(ex) for ex in exps.values()) == R_((len(exps) - 2) * n * (n - 1), 2)
+        assert _fuchs_factor_orders(exps, n) == []
+
+
+# Vanhove, arXiv:1401.6438, Table 1: the equal-mass two-dimensional banana operator with N propagators,
+# sum_k q_k(s) d^k/ds^k (homogeneous part).
+VANHOVE_TABLE1 = {2: ["s-2", "s*(s-4)"],
+                  3: ["s-3", "3*s**2-20*s+9", "s*(s-1)*(s-9)"],
+                  4: ["s-4", "7*s**2-68*s+64", "6*s**3-90*s**2+192*s", "s**2*(s-4)*(s-16)"],
+                  5: ["s-5", "(3*s-5)*(5*s-57)", "25*s**3-518*s**2+1839*s-450",
+                      "10*s**4-280*s**3+1554*s**2-900*s", "s**2*(s-25)*(s-1)*(s-9)"]}
+
+
+def test_vanhove_banana_operators_annihilate_the_walk_series():
+    """Rejects a wrong identification of the Hadamard factor: Vanhove's banana operator with N
+    propagators must annihilate g(s) = sum_k W_N(2k) s^(-k-1) for N = 2..5, in exact integers, to the
+    truncation (every power s^(-p) the truncated series determines).  Control: the N-propagator
+    operator applied to the series of W_(N+1) must not vanish."""
+    S = sp.Symbol("s")
+    K = 30
+    for N, ops in VANHOVE_TABLE1.items():
+        qs = [sp.sympify(q, locals={"s": S}) for q in ops]
+        for walk, should_vanish in ((N, True), (N + 1, False)):
+            g = sum(_walk_moment(walk, k) * S**(-k - 1) for k in range(K))
+            Lg = sp.expand(sum(q * sp.diff(g, S, j) for j, q in enumerate(qs)) * S**(K + 10))
+            P = sp.Poly(Lg, S)
+            coeffs = [P.coeff_monomial(S**(K + 10 - p)) for p in range(-3, K - 6)]
+            assert all(c == 0 for c in coeffs) == should_vanish

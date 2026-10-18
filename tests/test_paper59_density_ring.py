@@ -31,6 +31,7 @@ from __future__ import annotations
 import random
 
 import mpmath as mp
+import numpy as np
 import pytest
 import sympy as sp
 
@@ -968,3 +969,121 @@ def test_correlated_triangle_sits_on_the_k3_rung():
         assert _apply_Q_num(QG4, thY[tv], tv) < 1e-10
         assert _apply_Q_num(bad, thY[tv], tv) > 1e-6
         assert abs(thY[tv][1] - r(tv) * thY[tv][0]) > 0.5 * abs(thY[tv][0])
+
+
+# ---------------------------------------------------------------- no split (SMALL sweep 2026-10-18)
+def _even_rdiv_delta(Q, r):
+    """L = Top o (theta - r) exactly, both in delta form."""
+    Qq, rem = _rdiv(_coeff_list(Q), [-r, sp.Integer(1)])
+    assert all(sp.simplify(c) == 0 for c in rem)
+    return _theta_to_delta(Qq), _theta_to_delta([-r, sp.Integer(1)])
+
+
+def _annihilator_any(L, G):
+    """Monic annihilator of G(Sol L) for any order of G (pads the remainders)."""
+    n = len(L) - 1
+    pad = lambda v: list(v) + [sp.Integer(0)] * (n - len(v))
+    vecs = [pad(_ddiv(G, L)[1])]
+    for _ in range(n):
+        vecs.append(pad(_ddiv(_dcompose([0, 1], vecs[-1]), L)[1]))
+    ns = sp.Matrix([[vecs[k][i] for k in range(n + 1)] for i in range(n)]).nullspace()
+    assert len(ns) == 1
+    return [sp.cancel(c / ns[0][n]) for c in ns[0]]
+
+
+@pytest.mark.slow
+def test_ring_and_correlated_triangle_operators_do_not_split():
+    """Rejects 'the factorisation is a direct sum', which would let G be algebraic plus a rational image
+    of an elliptic period, and would let an order-three operator annihilate the correlated triangle Y.
+    L_G = M o (theta - lambda_G) and the order-four annihilator of Y, R3~ o R1~: the exact system
+    Bot o S = 1 mod Top, within the pole and degree bound set by the local exponents, must be
+    inconsistent (7 unknowns, rank 7 < 8; 48 unknowns, rank 48 < 49).  Since R3~ is irreducible
+    (equivalent to F_3's operator), no split means no order-three right factor of R3~ o R1~ holds Y.
+    Positive control, the same code: on the planted split Top' = ann(Bot(Sol Top)) the search must
+    find S (16 and 87 unknowns) and S must verify exactly."""
+    for Q, r, want, ctrl in ((QG, R_RING, (7, 7, 8), 16), (QG4, R_QG, (48, 48, 49), 87)):
+        Top, Bot = _even_rdiv_delta(Q, r)
+        nunk, rA, rAb, S = _split_search(Top, Bot, _split_bounds(Top, Bot))
+        assert (nunk, rA, rAb) == want and S is None
+        Topc = _annihilator_any(Top, Bot)
+        nc, rc, rcb, Sc = _split_search(Topc, Bot, _split_bounds(Topc, Bot))
+        assert nc == rc == rcb == ctrl and Sc is not None
+        assert _is_one_mod(Bot, Sc, Topc)
+
+
+# ---------------------------------------------------------------- the massive loop (SMALL sweep 2026-10-18)
+def _loop_closed(x1, x2, m, nu):
+    """Solid-angle closed form: I_111 = pi^2 arctan(sqrt(det G)/D)/sqrt(det G) in the Gram data
+    G_ij = (m_i^2 + m_j^2 + s_ij)/2, D = m1 m2 m3 + G12 m3 + G13 m2 + G23 m1; the geminal loop
+    (propagators 1 and 2 squared) is d/d(m1^2) d/d(m2^2) of it."""
+    x1 = [mp.mpf(v) for v in x1]
+    x2 = [mp.mpf(v) for v in x2]
+    s12 = sum((a - b)**2 for a, b in zip(x1, x2))
+    s13 = sum(a * a for a in x1)
+    s23 = sum(b * b for b in x2)
+
+    def i111(a, b, c):
+        m1, m2, m3 = mp.sqrt(a), mp.sqrt(b), mp.sqrt(c)
+        g12, g13, g23 = (a + b + s12) / 2, (a + c + s13) / 2, (b + c + s23) / 2
+        det = a * (b * c - g23**2) - g12 * (g12 * c - g23 * g13) + g13 * (g12 * g23 - b * g13)
+        D = m1 * m2 * m3 + g12 * m3 + g13 * m2 + g23 * m1
+        return mp.pi**2 * mp.atan(mp.sqrt(det) / D) / mp.sqrt(det)
+
+    a, b, c = [mp.mpf(v)**2 for v in m]
+    if nu == (1, 1, 1):
+        return i111(a, b, c)
+    return mp.diff(lambda aa, bb: i111(aa, bb, c), (a, b), (1, 1))
+
+
+def _loop_direct(x1, x2, m, nu, Nang=120, Nr=160):
+    """int d^3 l prod_i (|l - x_i|^2 + m_i^2)^(-nu_i) with x3 = 0: spherical coordinates, Gauss-Legendre
+    in cos(theta) and r (three panels plus the tail r = R/s), trapezoid in phi; float64."""
+    x1, x2 = np.array(x1), np.array(x2)
+    uu, wu = np.polynomial.legendre.leggauss(Nang)
+    ph = np.linspace(0, 2 * np.pi, Nang, endpoint=False)
+    wph = 2 * np.pi / Nang
+    st = np.sqrt(1 - uu**2)
+    n = np.stack([np.outer(st, np.cos(ph)), np.outer(st, np.sin(ph)), np.outer(uu, np.ones_like(ph))], -1)
+    d1, d2 = n @ x1, n @ x2
+    R = max(np.linalg.norm(x1), np.linalg.norm(x2)) + 2
+    sr, wr = np.polynomial.legendre.leggauss(Nr)
+
+    def f(ri):
+        return ((ri**2 - 2 * ri * d1 + x1 @ x1 + m[0]**2) ** -nu[0]
+                * (ri**2 - 2 * ri * d2 + x2 @ x2 + m[1]**2) ** -nu[1] * (ri**2 + m[2]**2) ** -nu[2] * ri**2)
+
+    tot = 0.0
+    for lo, hi in [(0, R / 3), (R / 3, 2 * R / 3), (2 * R / 3, R)]:
+        for ri, wi in zip((hi - lo) / 2 * sr + (hi + lo) / 2, (hi - lo) / 2 * wr):
+            tot += wi * np.sum(wu[:, None] * f(ri)) * wph
+    for si, wi in zip((sr + 1) / 2, wr / 2):
+        tot += wi * R / si**2 * np.sum(wu[:, None] * f(R / si)) * wph
+    return tot
+
+
+def test_massive_loop_is_a_solid_angle():
+    """Rejects a wrong closed form for the correlated triangle's loop: with masses (gamma, gamma, 0),
+    gamma = 1, the solid-angle formula and its (2,2,1) mass derivative (the geminal loop) must match
+    direct three-dimensional quadrature to 1e-8 at two external triples.  Controls: the massless
+    uniqueness value pi^3/(|x12||x13||x23|) applied to the massive loop, and the formula with
+    sqrt(det G) replaced by det G, must each miss the quadrature by more than 1e-3."""
+    mp.mp.dps = 30
+    triples = [([0.3, -1.1, 0.7], [1.2, 0.4, -0.5]), ([-0.9, 0.2, 1.4], [0.5, -1.3, -0.8])]
+    m = (1.0, 1.0, 0.0)
+    for x1, x2 in triples:
+        for nu in ((1, 1, 1), (2, 2, 1)):
+            closed = float(_loop_closed(x1, x2, m, nu))
+            direct = _loop_direct(x1, x2, m, nu)
+            assert abs(direct / closed - 1) < 1e-8
+    x1, x2 = triples[0]
+    good = _loop_direct(x1, x2, m, (1, 1, 1))
+    s12 = sum((a - b)**2 for a, b in zip(x1, x2))
+    s13 = sum(a * a for a in x1)
+    s23 = sum(b * b for b in x2)
+    g12, g13, g23 = (2 + s12) / 2, (1 + s13) / 2, (1 + s23) / 2
+    det = g12 * g23 * g13 * 2 - g23**2 - g13**2
+    D = g13 + g23
+    unique = float(mp.pi**3 / mp.sqrt(s12 * s13 * s23))
+    det_for_sqrt = float(mp.pi**2 * mp.atan(det / D) / det)
+    for wrong in (unique, det_for_sqrt):
+        assert abs(good / wrong - 1) > 1e-3
