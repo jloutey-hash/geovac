@@ -1,0 +1,46 @@
+{
+ "W@0@1/2": {
+  "dim": 4,
+  "maxlog": 2
+ },
+ "W@0@1": {
+  "dim": 1,
+  "maxlog": 0
+ },
+ "R3@0@1/2": {
+  "dim": 3,
+  "maxlog": 2
+ },
+ "E@0@1": {
+  "dim": 1,
+  "maxlog": 0
+ },
+ "L3@0@0": {
+  "dim": 3,
+  "maxlog": 2
+ },
+ "W@oo@-1": {
+  "dim": 4,
+  "maxlog": 2
+ },
+ "W@oo@1/2": {
+  "dim": 1,
+  "maxlog": 0
+ },
+ "R3@oo@-1": {
+  "dim": 3,
+  "maxlog": 2
+ },
+ "E@oo@-1": {
+  "dim": 1,
+  "maxlog": 0
+ },
+ "W4=R3oR1@0@1/2": {
+  "dim": 4,
+  "maxlog": 2
+ },
+ "W4=R3oR1@oo@-1": {
+  "dim": 2,
+  "maxlog": 1
+ }
+}

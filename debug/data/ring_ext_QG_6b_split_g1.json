@@ -1,0 +1,10 @@
+{
+ "G4 (minimal op of Y)": {
+  "f3|R": 0,
+  "f3|L": 1
+ },
+ "control: R1 o R3 (split by construction)": {
+  "f3|R": 0,
+  "f3|L": 0
+ }
+}

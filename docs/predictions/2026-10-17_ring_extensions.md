@@ -110,3 +110,97 @@ not rational, by analogy with the triangle's dilogarithms. Report the smallest f
 - One larger ring. Rings with trees attached are not covered.
 - The ring-of-four computation may be too heavy for the precision a rung decision needs; a STOP
   for feasibility is an allowed outcome and must be reported as such, not as a result.
+
+## Result (2026-10-17, same session, after commit 8ba60ae5)
+
+### QR: STOP for feasibility. No rung decision.
+
+Memo `debug/sprint_ring_ext_QR_memo.md`; scripts `debug/ring_ext_QR_{box,kernel,pw,mom,data,search,omega}.py`,
+data `debug/data/ring_ext_QR_*`. QR1 is neither confirmed nor falsified; none of R-n-1, R-ell,
+R-tree, R-other can be read, and the open-chain-of-four control was not carried to a rung.
+
+What passed. Test 1: the kernel K_v has a one-dimensional form (a Feynman-parameter integral of
+-z + (pi z/2)(H_1 - Y_1), Struve and Bessel), matching direct 3-D quadrature at five (x, y) and
+two scales to 2e-16 .. 9e-14. The 3-D massless box reduces exactly to its four triangles
+(at N = D + 1 the dimension-shift term vanishes): Box = pi^3 [sum over vertices of 1/(product of
+the three edges there)] / (Ptolemy sum of opposite-edge products), matching Feynman parameters
+at four configurations to 7e-16 (prior art not searched; likely known). The ring itself by two
+independent routes, position-space partial waves and momentum space, agreeing to 2e-8:
+S(0.7) = 0.022023792114497, S(1.6) = 0.04913982868458; S / t^2 tends to the chain of three at
+(1,1,1) as t -> 0; route (a) reproduces the triangle and the chain of three, whose recorded
+operators annihilate its data to 1e-14.
+
+Why it blocked. After the loop the square keeps a weight that couples all its variables (the
+triangle's was a constant), so no operator came out exactly, and creative-telescoping tools are
+not installed. A float64 operator search failed its own positive controls (it did not recover the
+chain's known K3 operator), so by test rule 3 its "none" for S is void. Unblock: 60+ digit data
+(the evaluator is cancellation-free and ports to arb or double-double), or creative telescoping
+on route (b)'s explicit four-dimensional algebraic integrand, or a closed form for the weight.
+
+Correction to the conventions paragraph above: the fibre density with transform
+(c k^2 + 1)^(-3/2), a = c^(-1/2), is proportional to K0(a r), not K0(r / a). The computation
+used the transform, so nothing depends on the slip.
+
+### QG: G-chain at gamma = 1. QG2, the main prediction, is falsified.
+
+Computation began after commit 8ba60ae5. Memo `debug/sprint_ring_ext_QG_memo.md`; scripts
+`debug/ring_ext_QG_*.py`, data `debug/data/ring_ext_QG_*`. All registered controls pass.
+
+QG1 holds [SYMBOLIC + MEASURED]. The 3-D loop with masses (gamma, gamma, 0) is a solid angle,
+pi^2 arctan(sqrt(det M)/D)/sqrt(det M), and its (2,2,1) mass-derivative is the geminal loop. Both
+match direct 3-D integration at five triples for each gamma, worst relative difference 2.5e-14.
+The Nickel 1978 reference was not found and is NOT VERIFIED; the closed form rests on the check.
+
+Controls. The gamma -> 0 member (Yukawa on all three edges) reproduces G(t) to 5e-15 at t = 0.7
+and 3e-14 at t = 1.6, and the gap closes steadily at gamma = 0.1, 0.03, 0.01. Two routes to the
+kite (momentum triangle; a double-bubble algebraic double integral) agree to 4e-16. The rung scan
+finds F_3 in F_3, Legendre in Legendre, neither in F_4, and the K3 piece in the chain's W.
+
+gamma = 1 [SYMBOLIC, except where marked].
+- The kite phi(z) has an order-2 operator [MEASURED on 600 coefficients, residual 3e-155], mapped
+  exactly to Legendre at t^2 = -z/4. The kite is elliptic.
+- The minimal annihilator of Y is an operator G4 of order 4: the exact common right divisor of the
+  Mellin-route operator and of the operator of Y's log t part. G4 Y is 1e-27 to 2e-26 of the
+  largest term at t = 0.5, 0.8, 1.3, 3.0 [MEASURED, 30-digit grid]; the small remaining absolute
+  residual is a constant offset in Y of about 4e-30, matched by Q_0(0) at three t. No source term.
+  No order-3 annihilator up to t^2-degree 99.
+- G4 = R3 R1. R1 has the algebraic solution t^3(33t^6-612t^4+5232t^2-49088)/(t^2-4)^(9/2).
+  R3 is the adjoint of an operator R with Sol(R) = A Sol(L3), A an exact order-2 map with
+  denominator (9t^4+312t^2-12560)^2; L3 is anti-self-adjoint, so R3 is equivalent to F_3's
+  operator. The K3 piece does not split off (bounded search; the same search finds the planted
+  split in R1 R3). Composition factors: algebraic and K3, nothing higher; Y needs both.
+- Singular points t = 0, +-2, infinity; at gamma = 1 the thresholds 2, 2 gamma and 1 + gamma
+  coincide at t = 2.
+
+Checked by me with the helpers of `tests/test_paper59_density_ring.py`, on the agent's printed
+operators: the memo's G4 equals the stored one; G4*(A f) = 0 mod L3 exactly; A is injective;
+G4* = Q1 R exactly with Q1 of order one; L3* = -L3; R1's solution is exact; G4 is right-divisible
+by R1; changing one coefficient of A by 0.1% breaks the identity. Independently, phi(0) = 3 pi/16
+at gamma = 1 by a position-space route the agent did not use (closed-form convolutions).
+
+gamma = 3/2 [MEASURED mod p + rigidity]. Y_log has an exact integer operator L9 of order 9; L9 Y
+is below 7e-28 at t = 0.8, 1.3, 1.7 while a 1e-6 perturbation gives 1e-10 to 5e-14. Singular
+points t = 1/2, 2, 5/2, 3, that is |1-gamma|, 2, 1+gamma, 2 gamma: the side prediction that they
+move with gamma holds. An order-3 quotient N3, found mod p, has F_3's local data twisted by t
+(maximally unipotent at 0, a pseudo-reflection at t = 2, no other true singular points), so by
+the rigidity of hypergeometric systems (Beukers-Heckman, used from memory, NOT VERIFIED) it is
+equivalent to F_3. The explicit map was not found within the searched bounds; the same blind
+pipeline finds it at gamma = 1. The middle factors are not all identified, so a factor above K3
+is not excluded at gamma = 3/2.
+
+Verdict against the registration. QG1 holds. QG2 is falsified: outcome G-chain at gamma = 1; at
+gamma = 3/2, K3 by local data, G-climb not excluded. By the decision rule's letter, gamma = 3/2 is
+"K3-equivalent, map not exhibited". Non-split attachment holds at gamma = 1.
+
+Why the registered reasoning failed. It said an inverse tangent adds weight, not geometry. The
+loop is elementary, but the kite around it is elliptic, and attaching the apex density, a
+Stieltjes transform, turns the elliptic family into F_3's K3 family (a Clausen-type step). The
+Coulomb triangle stays low only because its star-triangle step removes the kite. So the drop of
+the ring is a fact about uniqueness, not about rings.
+
+Not a result: the secondary placement (t on i) is STOP for feasibility.
+
+Caps. Fibre only; one geminal shape (exponential, not the cusp-correct or linear-exponential
+geminals of the LiH engine); two values of gamma; apex placement. The kite operators are guessed
+from series and checked on 600 coefficients, not derived. gamma = 1 is the special value where
+the thresholds coincide.

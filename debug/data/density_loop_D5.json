@@ -1,0 +1,14 @@
+{
+ "control F_4 op|f3|R": 0,
+ "control F_4 op|f3|L": 0,
+ "control F_4 op|f2|R": 0,
+ "control F_4 op|f2|L": 0,
+ "triangle L_G|f3|R": 0,
+ "triangle L_G|f3|L": 0,
+ "triangle L_G|f2|R": 0,
+ "triangle L_G|f2|L": 1,
+ "chain L_C|f3|R": 0,
+ "chain L_C|f3|L": 0,
+ "chain L_C|f2|R": 0,
+ "chain L_C|f2|L": 0
+}

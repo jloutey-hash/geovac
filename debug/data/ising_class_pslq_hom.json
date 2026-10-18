@@ -1,0 +1,1173 @@
+[
+ {
+  "family": "HOM wt 5: Tate_5 + c30*Tate_2 + pi^(n-s) L[8.4.a.a](s)",
+  "basis": [
+   "pi^5",
+   "pi^2z3",
+   "z5",
+   "c30*pi^2",
+   "pi^3*L[8.4.a.a](2)",
+   "pi^2*L[8.4.a.a](3)"
+  ],
+  "search": {
+   "target": "c50",
+   "dim": 7,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e21",
+   "relation": null,
+   "norm_bound": "1029207519471471076505",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e19)",
+    "dim": 7,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e21",
+    "relation": {
+     "planted(height~1e19)": 4216872086254141288,
+     "pi^5": 3362983054953524331,
+     "pi^2z3": 4993714644045531299,
+     "z5": -2177736751670329140,
+     "c30*pi^2": -1771576178503877724,
+     "pi^3*L[8.4.a.a](2)": 3480633895475988430,
+     "pi^2*L[8.4.a.a](3)": 3947179248954738136
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "2.8e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 5: Tate_5 + c30*Tate_2 + pi^(n-s) L[6.4](s)",
+  "basis": [
+   "pi^5",
+   "pi^2z3",
+   "z5",
+   "c30*pi^2",
+   "pi^3*L[6.4](2)",
+   "pi^2*L[6.4](3)"
+  ],
+  "search": {
+   "target": "c50",
+   "dim": 7,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e21",
+   "relation": null,
+   "norm_bound": "1016079074196519243125",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e19)",
+    "dim": 7,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e21",
+    "relation": {
+     "planted(height~1e19)": 4216872086254141288,
+     "pi^5": 3362983054953524331,
+     "pi^2z3": 4993714644045531299,
+     "z5": -2177736751670329140,
+     "c30*pi^2": -1771576178503877724,
+     "pi^3*L[6.4](2)": 3480633895475988430,
+     "pi^2*L[6.4](3)": 3947179248954738136
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "2.31e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 5: Tate_5 + c30*Tate_2 + pi^(n-s) L[6.6](s)",
+  "basis": [
+   "pi^5",
+   "pi^2z3",
+   "z5",
+   "c30*pi^2",
+   "pi^2*L[6.6](3)",
+   "pi^1*L[6.6](4)"
+  ],
+  "search": {
+   "target": "c50",
+   "dim": 7,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e21",
+   "relation": null,
+   "norm_bound": "1119630924775523740316",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e19)",
+    "dim": 7,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e21",
+    "relation": {
+     "planted(height~1e19)": -4216872086254141288,
+     "pi^5": -3362983054953524331,
+     "pi^2z3": -4993714644045531299,
+     "z5": 2177736751670329140,
+     "c30*pi^2": 1771576178503877724,
+     "pi^2*L[6.6](3)": -3480633895475988430,
+     "pi^1*L[6.6](4)": -3947179248954738136
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "4.34e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 5: Tate_5 + c30*Tate_2 + pi^(n-s) L[24.6.a.a](s)",
+  "basis": [
+   "pi^5",
+   "pi^2z3",
+   "z5",
+   "c30*pi^2",
+   "pi^1*L[24.6.a.a](4)",
+   "pi^0*L[24.6.a.a](5)"
+  ],
+  "search": {
+   "target": "c50",
+   "dim": 7,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e21",
+   "relation": null,
+   "norm_bound": "1035328055010135942559",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e19)",
+    "dim": 7,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e21",
+    "relation": {
+     "planted(height~1e19)": -4216872086254141288,
+     "pi^5": -3362983054953524331,
+     "pi^2z3": -4993714644045531299,
+     "z5": 2177736751670329140,
+     "c30*pi^2": 1771576178503877724,
+     "pi^1*L[24.6.a.a](4)": -3480633895475988430,
+     "pi^0*L[24.6.a.a](5)": -3947179248954738136
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "1.28e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 5: Tate_5 + c30*Tate_2 + pi^(n-s) L[15.3](s)",
+  "basis": [
+   "pi^5",
+   "pi^2z3",
+   "z5",
+   "c30*pi^2",
+   "pi^3*L[15.3](2)",
+   "sqrt15*pi^3*L[15.3](2)"
+  ],
+  "search": {
+   "target": "c50",
+   "dim": 7,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e21",
+   "relation": null,
+   "norm_bound": "1310586196753271718588",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e19)",
+    "dim": 7,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e21",
+    "relation": {
+     "planted(height~1e19)": 4216872086254141288,
+     "pi^5": 3362983054953524331,
+     "pi^2z3": 4993714644045531299,
+     "z5": -2177736751670329140,
+     "c30*pi^2": -1771576178503877724,
+     "pi^3*L[15.3](2)": 3480633895475988430,
+     "sqrt15*pi^3*L[15.3](2)": 3947179248954738136
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "4.41e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 5: Tate_5 + c30*Tate_2 + pi^(n-s) L[48.3.e.a](s)",
+  "basis": [
+   "pi^5",
+   "pi^2z3",
+   "z5",
+   "c30*pi^2",
+   "pi^4*L[48.3.e.a](1)",
+   "sqrt3*pi^4*L[48.3.e.a](1)"
+  ],
+  "search": {
+   "target": "c50",
+   "dim": 7,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e21",
+   "relation": {
+    "c30*pi^2": -2,
+    "pi^4*L[48.3.e.a](1)": 1
+   },
+   "norm_bound": null,
+   "ended_on_bound": false,
+   "residual_full_precision": "3.29e-260",
+   "verified": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e19)",
+    "dim": 7,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e21",
+    "relation": {
+     "c30*pi^2": -2,
+     "pi^4*L[48.3.e.a](1)": 1
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "3.29e-260",
+    "verified": true,
+    "planted_ok": false
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 6: Tate_6 + c30*Tate_3 + pi^(n-s) L[8.4.a.a](s)",
+  "basis": [
+   "pi^6",
+   "pi^3z3",
+   "z3z3",
+   "pi^1z5",
+   "c30*pi^3",
+   "c30*z3",
+   "pi^4*L[8.4.a.a](2)",
+   "pi^3*L[8.4.a.a](3)"
+  ],
+  "search": {
+   "target": "c60",
+   "dim": 9,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e16",
+   "relation": null,
+   "norm_bound": "10092850646251274",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e14)",
+    "dim": 9,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e16",
+    "relation": {
+     "planted(height~1e14)": 20242365453029,
+     "pi^6": 20417534046000,
+     "pi^3z3": 13609601196978,
+     "z3z3": 16552341002946,
+     "pi^1z5": 12625311788193,
+     "c30*pi^3": -14436740815506,
+     "c30*z3": 20197620184063,
+     "pi^4*L[8.4.a.a](2)": -31293447760328,
+     "pi^3*L[8.4.a.a](3)": 24211885422338
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "1.11e-263",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 6: Tate_6 + c30*Tate_3 + pi^(n-s) L[6.4](s)",
+  "basis": [
+   "pi^6",
+   "pi^3z3",
+   "z3z3",
+   "pi^1z5",
+   "c30*pi^3",
+   "c30*z3",
+   "pi^4*L[6.4](2)",
+   "pi^3*L[6.4](3)"
+  ],
+  "search": {
+   "target": "c60",
+   "dim": 9,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e16",
+   "relation": null,
+   "norm_bound": "11975232982866953",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e14)",
+    "dim": 9,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e16",
+    "relation": {
+     "planted(height~1e14)": -20242365453029,
+     "pi^6": -20417534046000,
+     "pi^3z3": -13609601196978,
+     "z3z3": -16552341002946,
+     "pi^1z5": -12625311788193,
+     "c30*pi^3": 14436740815506,
+     "c30*z3": -20197620184063,
+     "pi^4*L[6.4](2)": 31293447760328,
+     "pi^3*L[6.4](3)": -24211885422338
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "5.86e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 6: Tate_6 + c30*Tate_3 + pi^(n-s) L[6.6](s)",
+  "basis": [
+   "pi^6",
+   "pi^3z3",
+   "z3z3",
+   "pi^1z5",
+   "c30*pi^3",
+   "c30*z3",
+   "pi^3*L[6.6](3)",
+   "pi^2*L[6.6](4)"
+  ],
+  "search": {
+   "target": "c60",
+   "dim": 9,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e16",
+   "relation": null,
+   "norm_bound": "10186214925512897",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e14)",
+    "dim": 9,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e16",
+    "relation": {
+     "planted(height~1e14)": -20242365453029,
+     "pi^6": -20417534046000,
+     "pi^3z3": -13609601196978,
+     "z3z3": -16552341002946,
+     "pi^1z5": -12625311788193,
+     "c30*pi^3": 14436740815506,
+     "c30*z3": -20197620184063,
+     "pi^3*L[6.6](3)": 31293447760328,
+     "pi^2*L[6.6](4)": -24211885422338
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "7.91e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 6: Tate_6 + c30*Tate_3 + pi^(n-s) L[24.6.a.a](s)",
+  "basis": [
+   "pi^6",
+   "pi^3z3",
+   "z3z3",
+   "pi^1z5",
+   "c30*pi^3",
+   "c30*z3",
+   "pi^2*L[24.6.a.a](4)",
+   "pi^1*L[24.6.a.a](5)"
+  ],
+  "search": {
+   "target": "c60",
+   "dim": 9,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e16",
+   "relation": {
+    "c60": -1,
+    "pi^2*L[24.6.a.a](4)": 108
+   },
+   "norm_bound": null,
+   "ended_on_bound": false,
+   "residual_full_precision": "4.86e-261",
+   "verified": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e14)",
+    "dim": 9,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e16",
+    "relation": {
+     "planted(height~1e14)": -20242365453029,
+     "pi^6": -20417534046000,
+     "pi^3z3": -13609601196978,
+     "z3z3": -16552341002946,
+     "pi^1z5": -12625311788193,
+     "c30*pi^3": 14436740815506,
+     "c30*z3": -20197620184063,
+     "pi^2*L[24.6.a.a](4)": 31293447760328,
+     "pi^1*L[24.6.a.a](5)": -24211885422338
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "1.58e-263",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 6: Tate_6 + c30*Tate_3 + pi^(n-s) L[15.3](s)",
+  "basis": [
+   "pi^6",
+   "pi^3z3",
+   "z3z3",
+   "pi^1z5",
+   "c30*pi^3",
+   "c30*z3",
+   "pi^4*L[15.3](2)",
+   "sqrt15*pi^4*L[15.3](2)"
+  ],
+  "search": {
+   "target": "c60",
+   "dim": 9,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e16",
+   "relation": null,
+   "norm_bound": "10352153330075121",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e14)",
+    "dim": 9,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e16",
+    "relation": {
+     "planted(height~1e14)": -20242365453029,
+     "pi^6": -20417534046000,
+     "pi^3z3": -13609601196978,
+     "z3z3": -16552341002946,
+     "pi^1z5": -12625311788193,
+     "c30*pi^3": 14436740815506,
+     "c30*z3": -20197620184063,
+     "pi^4*L[15.3](2)": 31293447760328,
+     "sqrt15*pi^4*L[15.3](2)": -24211885422338
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "4.2e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 6: Tate_6 + c30*Tate_3 + pi^(n-s) L[48.3.e.a](s)",
+  "basis": [
+   "pi^6",
+   "pi^3z3",
+   "z3z3",
+   "pi^1z5",
+   "c30*pi^3",
+   "c30*z3",
+   "pi^5*L[48.3.e.a](1)",
+   "sqrt3*pi^5*L[48.3.e.a](1)"
+  ],
+  "search": {
+   "target": "c60",
+   "dim": 9,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e16",
+   "relation": {
+    "c30*pi^3": -2,
+    "pi^5*L[48.3.e.a](1)": 1
+   },
+   "norm_bound": null,
+   "ended_on_bound": false,
+   "residual_full_precision": "3.29e-260",
+   "verified": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e14)",
+    "dim": 9,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e16",
+    "relation": {
+     "c30*pi^3": -2,
+     "pi^5*L[48.3.e.a](1)": 1
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "3.29e-260",
+    "verified": true,
+    "planted_ok": false
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 7: Tate_7 + c30*Tate_4 + pi^(n-s) L[8.4.a.a](s)",
+  "basis": [
+   "pi^7",
+   "pi^4z3",
+   "pi^1z3z3",
+   "pi^2z5",
+   "z7",
+   "c30*pi^4",
+   "c30*pi^1z3",
+   "pi^5*L[8.4.a.a](2)",
+   "pi^4*L[8.4.a.a](3)"
+  ],
+  "search": {
+   "target": "c70",
+   "dim": 10,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e15",
+   "relation": null,
+   "norm_bound": "1032260588295321",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e13)",
+    "dim": 10,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e15",
+    "relation": {
+     "planted(height~1e13)": 2084687560730,
+     "pi^7": 3104177403472,
+     "pi^4z3": -2956882656445,
+     "pi^1z3z3": 2449694823420,
+     "pi^2z5": 2763120751720,
+     "z7": -1137588534212,
+     "c30*pi^4": 2637610434737,
+     "c30*pi^1z3": 1113256449501,
+     "pi^5*L[8.4.a.a](2)": 3267508449172,
+     "pi^4*L[8.4.a.a](3)": -1700442448410
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "1.18e-263",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 7: Tate_7 + c30*Tate_4 + pi^(n-s) L[6.4](s)",
+  "basis": [
+   "pi^7",
+   "pi^4z3",
+   "pi^1z3z3",
+   "pi^2z5",
+   "z7",
+   "c30*pi^4",
+   "c30*pi^1z3",
+   "pi^5*L[6.4](2)",
+   "pi^4*L[6.4](3)"
+  ],
+  "search": {
+   "target": "c70",
+   "dim": 10,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e15",
+   "relation": null,
+   "norm_bound": "1065407846010434",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e13)",
+    "dim": 10,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e15",
+    "relation": {
+     "planted(height~1e13)": -2084687560730,
+     "pi^7": -3104177403472,
+     "pi^4z3": 2956882656445,
+     "pi^1z3z3": -2449694823420,
+     "pi^2z5": -2763120751720,
+     "z7": 1137588534212,
+     "c30*pi^4": -2637610434737,
+     "c30*pi^1z3": -1113256449501,
+     "pi^5*L[6.4](2)": -3267508449172,
+     "pi^4*L[6.4](3)": 1700442448410
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "9.55e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 7: Tate_7 + c30*Tate_4 + pi^(n-s) L[6.6](s)",
+  "basis": [
+   "pi^7",
+   "pi^4z3",
+   "pi^1z3z3",
+   "pi^2z5",
+   "z7",
+   "c30*pi^4",
+   "c30*pi^1z3",
+   "pi^4*L[6.6](3)",
+   "pi^3*L[6.6](4)"
+  ],
+  "search": {
+   "target": "c70",
+   "dim": 10,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e15",
+   "relation": null,
+   "norm_bound": "1131357080518200",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e13)",
+    "dim": 10,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e15",
+    "relation": {
+     "planted(height~1e13)": 2084687560730,
+     "pi^7": 3104177403472,
+     "pi^4z3": -2956882656445,
+     "pi^1z3z3": 2449694823420,
+     "pi^2z5": 2763120751720,
+     "z7": -1137588534212,
+     "c30*pi^4": 2637610434737,
+     "c30*pi^1z3": 1113256449501,
+     "pi^4*L[6.6](3)": 3267508449172,
+     "pi^3*L[6.6](4)": -1700442448410
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "5.47e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 7: Tate_7 + c30*Tate_4 + pi^(n-s) L[24.6.a.a](s)",
+  "basis": [
+   "pi^7",
+   "pi^4z3",
+   "pi^1z3z3",
+   "pi^2z5",
+   "z7",
+   "c30*pi^4",
+   "c30*pi^1z3",
+   "pi^3*L[24.6.a.a](4)",
+   "pi^2*L[24.6.a.a](5)"
+  ],
+  "search": {
+   "target": "c70",
+   "dim": 10,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e15",
+   "relation": null,
+   "norm_bound": "1117310688667014",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e13)",
+    "dim": 10,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e15",
+    "relation": {
+     "planted(height~1e13)": 2084687560730,
+     "pi^7": 3104177403472,
+     "pi^4z3": -2956882656445,
+     "pi^1z3z3": 2449694823420,
+     "pi^2z5": 2763120751720,
+     "z7": -1137588534212,
+     "c30*pi^4": 2637610434737,
+     "c30*pi^1z3": 1113256449501,
+     "pi^3*L[24.6.a.a](4)": 3267508449172,
+     "pi^2*L[24.6.a.a](5)": -1700442448410
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "2.26e-263",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 7: Tate_7 + c30*Tate_4 + pi^(n-s) L[15.3](s)",
+  "basis": [
+   "pi^7",
+   "pi^4z3",
+   "pi^1z3z3",
+   "pi^2z5",
+   "z7",
+   "c30*pi^4",
+   "c30*pi^1z3",
+   "pi^5*L[15.3](2)",
+   "sqrt15*pi^5*L[15.3](2)"
+  ],
+  "search": {
+   "target": "c70",
+   "dim": 10,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e15",
+   "relation": null,
+   "norm_bound": "1113152204903404",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e13)",
+    "dim": 10,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e15",
+    "relation": {
+     "planted(height~1e13)": 2084687560730,
+     "pi^7": 3104177403472,
+     "pi^4z3": -2956882656445,
+     "pi^1z3z3": 2449694823420,
+     "pi^2z5": 2763120751720,
+     "z7": -1137588534212,
+     "c30*pi^4": 2637610434737,
+     "c30*pi^1z3": 1113256449501,
+     "pi^5*L[15.3](2)": 3267508449172,
+     "sqrt15*pi^5*L[15.3](2)": -1700442448410
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "1.64e-263",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 7: Tate_7 + c30*Tate_4 + pi^(n-s) L[48.3.e.a](s)",
+  "basis": [
+   "pi^7",
+   "pi^4z3",
+   "pi^1z3z3",
+   "pi^2z5",
+   "z7",
+   "c30*pi^4",
+   "c30*pi^1z3",
+   "pi^6*L[48.3.e.a](1)",
+   "sqrt3*pi^6*L[48.3.e.a](1)"
+  ],
+  "search": {
+   "target": "c70",
+   "dim": 10,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e15",
+   "relation": {
+    "c30*pi^4": -2,
+    "pi^6*L[48.3.e.a](1)": 1
+   },
+   "norm_bound": null,
+   "ended_on_bound": false,
+   "residual_full_precision": "3.29e-260",
+   "verified": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e13)",
+    "dim": 10,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e15",
+    "relation": {
+     "c30*pi^4": -2,
+     "pi^6*L[48.3.e.a](1)": 1
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "3.29e-260",
+    "verified": true,
+    "planted_ok": false
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 8: Tate_8 + c30*Tate_5 + pi^(n-s) L[8.4.a.a](s)",
+  "basis": [
+   "pi^8",
+   "pi^5z3",
+   "pi^2z3z3",
+   "z3z5",
+   "pi^3z5",
+   "pi^1z7",
+   "c30*pi^5",
+   "c30*pi^2z3",
+   "c30*z5",
+   "pi^6*L[8.4.a.a](2)",
+   "pi^5*L[8.4.a.a](3)"
+  ],
+  "search": {
+   "target": "c80",
+   "dim": 12,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e12",
+   "relation": null,
+   "norm_bound": "1145514656503",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e10)",
+    "dim": 12,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e12",
+    "relation": {
+     "planted(height~1e10)": 2608576159,
+     "pi^8": 2179849613,
+     "pi^5z3": -2797805171,
+     "pi^2z3z3": -1112011454,
+     "z3z5": -2149453817,
+     "pi^3z5": -1405281523,
+     "pi^1z7": -1977700766,
+     "c30*pi^5": -2752636501,
+     "c30*pi^2z3": -3136976376,
+     "c30*z5": -2703437906,
+     "pi^6*L[8.4.a.a](2)": -3249216332,
+     "pi^5*L[8.4.a.a](3)": -2715977317
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "1.16e-263",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 8: Tate_8 + c30*Tate_5 + pi^(n-s) L[6.4](s)",
+  "basis": [
+   "pi^8",
+   "pi^5z3",
+   "pi^2z3z3",
+   "z3z5",
+   "pi^3z5",
+   "pi^1z7",
+   "c30*pi^5",
+   "c30*pi^2z3",
+   "c30*z5",
+   "pi^6*L[6.4](2)",
+   "pi^5*L[6.4](3)"
+  ],
+  "search": {
+   "target": "c80",
+   "dim": 12,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e12",
+   "relation": null,
+   "norm_bound": "1138364026658",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e10)",
+    "dim": 12,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e12",
+    "relation": {
+     "planted(height~1e10)": -2608576159,
+     "pi^8": -2179849613,
+     "pi^5z3": 2797805171,
+     "pi^2z3z3": 1112011454,
+     "z3z5": 2149453817,
+     "pi^3z5": 1405281523,
+     "pi^1z7": 1977700766,
+     "c30*pi^5": 2752636501,
+     "c30*pi^2z3": 3136976376,
+     "c30*z5": 2703437906,
+     "pi^6*L[6.4](2)": 3249216332,
+     "pi^5*L[6.4](3)": 2715977317
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "3.16e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 8: Tate_8 + c30*Tate_5 + pi^(n-s) L[6.6](s)",
+  "basis": [
+   "pi^8",
+   "pi^5z3",
+   "pi^2z3z3",
+   "z3z5",
+   "pi^3z5",
+   "pi^1z7",
+   "c30*pi^5",
+   "c30*pi^2z3",
+   "c30*z5",
+   "pi^5*L[6.6](3)",
+   "pi^4*L[6.6](4)"
+  ],
+  "search": {
+   "target": "c80",
+   "dim": 12,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e12",
+   "relation": null,
+   "norm_bound": "1063819874406",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e10)",
+    "dim": 12,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e12",
+    "relation": {
+     "planted(height~1e10)": -2608576159,
+     "pi^8": -2179849613,
+     "pi^5z3": 2797805171,
+     "pi^2z3z3": 1112011454,
+     "z3z5": 2149453817,
+     "pi^3z5": 1405281523,
+     "pi^1z7": 1977700766,
+     "c30*pi^5": 2752636501,
+     "c30*pi^2z3": 3136976376,
+     "c30*z5": 2703437906,
+     "pi^5*L[6.6](3)": 3249216332,
+     "pi^4*L[6.6](4)": 2715977317
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "6.53e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 8: Tate_8 + c30*Tate_5 + pi^(n-s) L[24.6.a.a](s)",
+  "basis": [
+   "pi^8",
+   "pi^5z3",
+   "pi^2z3z3",
+   "z3z5",
+   "pi^3z5",
+   "pi^1z7",
+   "c30*pi^5",
+   "c30*pi^2z3",
+   "c30*z5",
+   "pi^4*L[24.6.a.a](4)",
+   "pi^3*L[24.6.a.a](5)"
+  ],
+  "search": {
+   "target": "c80",
+   "dim": 12,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e12",
+   "relation": null,
+   "norm_bound": "1140014101759",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e10)",
+    "dim": 12,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e12",
+    "relation": {
+     "planted(height~1e10)": 2608576159,
+     "pi^8": 2179849613,
+     "pi^5z3": -2797805171,
+     "pi^2z3z3": -1112011454,
+     "z3z5": -2149453817,
+     "pi^3z5": -1405281523,
+     "pi^1z7": -1977700766,
+     "c30*pi^5": -2752636501,
+     "c30*pi^2z3": -3136976376,
+     "c30*z5": -2703437906,
+     "pi^4*L[24.6.a.a](4)": -3249216332,
+     "pi^3*L[24.6.a.a](5)": -2715977317
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "6.48e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 8: Tate_8 + c30*Tate_5 + pi^(n-s) L[15.3](s)",
+  "basis": [
+   "pi^8",
+   "pi^5z3",
+   "pi^2z3z3",
+   "z3z5",
+   "pi^3z5",
+   "pi^1z7",
+   "c30*pi^5",
+   "c30*pi^2z3",
+   "c30*z5",
+   "pi^6*L[15.3](2)",
+   "sqrt15*pi^6*L[15.3](2)"
+  ],
+  "search": {
+   "target": "c80",
+   "dim": 12,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e12",
+   "relation": null,
+   "norm_bound": "1028316963210",
+   "ended_on_bound": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e10)",
+    "dim": 12,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e12",
+    "relation": {
+     "planted(height~1e10)": -2608576159,
+     "pi^8": -2179849613,
+     "pi^5z3": 2797805171,
+     "pi^2z3z3": 1112011454,
+     "z3z5": 2149453817,
+     "pi^3z5": 1405281523,
+     "pi^1z7": 1977700766,
+     "c30*pi^5": 2752636501,
+     "c30*pi^2z3": 3136976376,
+     "c30*z5": 2703437906,
+     "pi^6*L[15.3](2)": 3249216332,
+     "sqrt15*pi^6*L[15.3](2)": 2715977317
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "6.11e-264",
+    "verified": true,
+    "planted_ok": true
+   }
+  ]
+ },
+ {
+  "family": "HOM wt 8: Tate_8 + c30*Tate_5 + pi^(n-s) L[48.3.e.a](s)",
+  "basis": [
+   "pi^8",
+   "pi^5z3",
+   "pi^2z3z3",
+   "z3z5",
+   "pi^3z5",
+   "pi^1z7",
+   "c30*pi^5",
+   "c30*pi^2z3",
+   "c30*z5",
+   "pi^7*L[48.3.e.a](1)",
+   "sqrt3*pi^7*L[48.3.e.a](1)"
+  ],
+  "search": {
+   "target": "c80",
+   "dim": 12,
+   "dps": 255,
+   "tol": "1e-215",
+   "maxcoeff": "1e12",
+   "relation": {
+    "c30*pi^5": -2,
+    "pi^7*L[48.3.e.a](1)": 1
+   },
+   "norm_bound": null,
+   "ended_on_bound": false,
+   "residual_full_precision": "3.29e-260",
+   "verified": true
+  },
+  "controls": [
+   {
+    "target": "planted(height~1e10)",
+    "dim": 12,
+    "dps": 255,
+    "tol": "1e-215",
+    "maxcoeff": "1e12",
+    "relation": {
+     "c30*pi^5": -2,
+     "pi^7*L[48.3.e.a](1)": 1
+    },
+    "norm_bound": null,
+    "ended_on_bound": false,
+    "residual_full_precision": "3.29e-260",
+    "verified": true,
+    "planted_ok": false
+   }
+  ]
+ }
+]

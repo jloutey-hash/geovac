@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.20.2-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.20.21-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -220,7 +220,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | 51, 53 | Gravity arc / flat-plane truncations | S³ spectral action two-term-exact; flat-plane state-space GH theorem, disk-with-cone open |
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
 | **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
-| 57 | Forced/free seam | 73-entry catalogue (40 forced / 4 Observation / 1 admitted / 25 calibration / 3 walls; released-axis sub-domain J added 2026-10-15, J10 2026-10-16, door-indexed in `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
+| 57 | Forced/free seam | 74-entry catalogue (41 forced / 4 Observation / 1 admitted / 25 calibration / 3 walls; released-axis sub-domain J added 2026-10-15, J10 2026-10-16, J11 2026-10-17, door-indexed in `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
 
 ---
 

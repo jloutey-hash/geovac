@@ -1,0 +1,26 @@
+{
+ "control F_3 op": {
+  "f3|R": 1,
+  "f3|L": 1,
+  "f2|R": 0,
+  "f2|L": 0
+ },
+ "control Legendre": {
+  "f3|R": 0,
+  "f3|L": 0,
+  "f2|R": 1,
+  "f2|L": 1
+ },
+ "control F_4 op": {
+  "f3|R": 0,
+  "f3|L": 0,
+  "f2|R": 0,
+  "f2|L": 0
+ },
+ "control chain W": {
+  "f3|R": 0,
+  "f3|L": 0,
+  "f2|R": 0,
+  "f2|L": 0
+ }
+}

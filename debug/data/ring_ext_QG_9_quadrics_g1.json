@@ -1,0 +1,42 @@
+{
+ "control F_3 op@1/2": {
+  "order": 3,
+  "pairs": 6,
+  "relations": 1
+ },
+ "control F_3 op@7/5": {
+  "order": 3,
+  "pairs": 6,
+  "relations": 1
+ },
+ "control Legendre@1/2": {
+  "order": 2,
+  "pairs": 3,
+  "relations": 0
+ },
+ "control Legendre@7/5": {
+  "order": 2,
+  "pairs": 3,
+  "relations": 0
+ },
+ "R3 (K3 factor of G4)@1/2": {
+  "order": 3,
+  "pairs": 6,
+  "relations": 0
+ },
+ "R3 (K3 factor of G4)@7/5": {
+  "order": 3,
+  "pairs": 6,
+  "relations": 0
+ },
+ "G4 (minimal op of Y)@1/2": {
+  "order": 4,
+  "pairs": 10,
+  "relations": 0
+ },
+ "G4 (minimal op of Y)@7/5": {
+  "order": 4,
+  "pairs": 10,
+  "relations": 0
+ }
+}

@@ -368,8 +368,8 @@ CLAIMS = {
         statement="Seam rows J4 (fourth centre: genus one) and J7 (three-electron chain: K3, elliptic "
                   "squared) are F (forced) as of 2026-10-15, on Paper 59 sec:beyond; J2 (front) and J8 "
                   "(r12 bridge, a validated reduction) and J9 (the rung rule, re-tiered F -> Obs 2026-10-16) are "
-                  "Obs; J3/J6 (closed forms of the three-centre radial core) are W. J10 (four linked densities) is F as of 2026-10-16. Totals 40 F / 4 Obs / 1 A / "
-                  "25 C / 3 W = 73.",
+                  "Obs; J3/J6 (closed forms of the three-centre radial core) are W. J10 (four linked densities) is F as of 2026-10-16; J11 (a ring of three densities) is F as of "
+                  "2026-10-17. Totals 41 F / 4 Obs / 1 A / 25 C / 3 W = 74.",
         owner="docs/forced_free_seam.md",
         owner_anchor=r"^\| J4 \|", owner_tier=r"\*\*F\*\*",
         tier="F (seam verdict)", owner_window=0,

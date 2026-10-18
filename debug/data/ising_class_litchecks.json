@@ -1,0 +1,6 @@
+{
+ "LTY c30 = (pi^2/2) L(48.3.e.a,1)  [proven]": "3.29e-260",
+ "LTY c40 = 4 pi^2 L(8.4.a.a,2)  [proven]": "3.23e-261",
+ "LTY c60 = 108 pi^2 L(24.6.a.a,4)  [numerical, '?']": "4.86e-261",
+ "RWZ L(8.4.a.a,3) relation check: L(f2,3) = pi^2/4 L(f2,1)": "1.49e-260"
+}

@@ -1,0 +1,8 @@
+{
+ "M5 > f3 (R), NT 900": 1,
+ "triangle > f2 (L), NT 900": 1,
+ "M5 top vs f2(t^2/4) (L)": 0,
+ "M5 bottom vs f2(t^2/4) (R)": 0,
+ "triangle vs f2(t^2/4) (L)": 0,
+ "triangle vs f2(t^2/4) (R)": 0
+}

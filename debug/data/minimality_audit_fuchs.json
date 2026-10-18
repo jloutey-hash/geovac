@@ -1,0 +1,354 @@
+{
+ "F2_legendre": {
+  "order": 2,
+  "leading_coeff": "t**2*(t - 1)*(t + 1)",
+  "points": {
+   "-1": {
+    "indicial": "-2*lambda**2",
+    "exponents": [
+     "0",
+     "0"
+    ]
+   },
+   "0": {
+    "indicial": "-lambda**2",
+    "exponents": [
+     "0",
+     "0"
+    ]
+   },
+   "1": {
+    "indicial": "2*lambda**2",
+    "exponents": [
+     "0",
+     "0"
+    ]
+   },
+   "oo": {
+    "indicial": "(lambda - 1)**2",
+    "exponents": [
+     "1",
+     "1"
+    ]
+   }
+  },
+  "fuchs_check": {
+   "sum_exponents": "2",
+   "expected": "2"
+  },
+  "fuchsian_everywhere": true,
+  "right_factor_orders": {
+   "1": {
+    "min_sum": 1.0,
+    "bound": 0.0,
+    "factor_possible": false
+   }
+  },
+  "irreducible_by_fuchs": true
+ },
+ "F3": {
+  "order": 3,
+  "leading_coeff": "-t**3*(t - 2)*(t + 2)",
+  "points": {
+   "-2": {
+    "indicial": "-16*lambda*(lambda - 1)*(2*lambda - 1)",
+    "exponents": [
+     "0",
+     "1/2",
+     "1"
+    ]
+   },
+   "0": {
+    "indicial": "4*lambda**3",
+    "exponents": [
+     "0",
+     "0",
+     "0"
+    ]
+   },
+   "2": {
+    "indicial": "-16*lambda*(lambda - 1)*(2*lambda - 1)",
+    "exponents": [
+     "0",
+     "1/2",
+     "1"
+    ]
+   },
+   "oo": {
+    "indicial": "(lambda - 1)**3",
+    "exponents": [
+     "1",
+     "1",
+     "1"
+    ]
+   }
+  },
+  "fuchs_check": {
+   "sum_exponents": "6",
+   "expected": "6"
+  },
+  "fuchsian_everywhere": true,
+  "right_factor_orders": {
+   "1": {
+    "min_sum": 1.0,
+    "bound": 0.0,
+    "factor_possible": false
+   },
+   "2": {
+    "min_sum": 3.0,
+    "bound": 2.0,
+    "factor_possible": false
+   }
+  },
+  "irreducible_by_fuchs": true
+ },
+ "F4_aesz58_t": {
+  "order": 4,
+  "leading_coeff": "t**4*(t - 3)*(t - 1)*(t + 1)*(t + 3)",
+  "points": {
+   "-3": {
+    "indicial": "-3888*lambda*(lambda - 2)*(lambda - 1)**2",
+    "exponents": [
+     "0",
+     "1",
+     "1",
+     "2"
+    ]
+   },
+   "-1": {
+    "indicial": "16*lambda*(lambda - 2)*(lambda - 1)**2",
+    "exponents": [
+     "0",
+     "1",
+     "1",
+     "2"
+    ]
+   },
+   "0": {
+    "indicial": "9*lambda**2*(lambda - 2)**2",
+    "exponents": [
+     "0",
+     "0",
+     "2",
+     "2"
+    ]
+   },
+   "1": {
+    "indicial": "-16*lambda*(lambda - 2)*(lambda - 1)**2",
+    "exponents": [
+     "0",
+     "1",
+     "1",
+     "2"
+    ]
+   },
+   "3": {
+    "indicial": "3888*lambda*(lambda - 2)*(lambda - 1)**2",
+    "exponents": [
+     "0",
+     "1",
+     "1",
+     "2"
+    ]
+   },
+   "oo": {
+    "indicial": "(lambda - 1)**4",
+    "exponents": [
+     "1",
+     "1",
+     "1",
+     "1"
+    ]
+   }
+  },
+  "fuchs_check": {
+   "sum_exponents": "24",
+   "expected": "24"
+  },
+  "fuchsian_everywhere": true,
+  "right_factor_orders": {
+   "1": {
+    "min_sum": 1.0,
+    "bound": 0.0,
+    "factor_possible": false
+   },
+   "2": {
+    "min_sum": 6.0,
+    "bound": 4.0,
+    "factor_possible": false
+   },
+   "3": {
+    "min_sum": 13.0,
+    "bound": 12.0,
+    "factor_possible": false
+   }
+  },
+  "irreducible_by_fuchs": true
+ },
+ "F5": {
+  "order": 5,
+  "leading_coeff": "-t**5*(t - 4)*(t - 2)*(t + 2)*(t + 4)",
+  "points": {
+   "-4": {
+    "indicial": "-49152*lambda*(lambda - 3)*(lambda - 2)*(lambda - 1)*(2*lambda - 3)",
+    "exponents": [
+     "0",
+     "1",
+     "3/2",
+     "2",
+     "3"
+    ]
+   },
+   "-2": {
+    "indicial": "768*lambda*(lambda - 3)*(lambda - 2)*(lambda - 1)*(2*lambda - 3)",
+    "exponents": [
+     "0",
+     "1",
+     "3/2",
+     "2",
+     "3"
+    ]
+   },
+   "0": {
+    "indicial": "-64*lambda**2*(lambda - 2)**2*(lambda - 1)",
+    "exponents": [
+     "0",
+     "0",
+     "1",
+     "2",
+     "2"
+    ]
+   },
+   "2": {
+    "indicial": "768*lambda*(lambda - 3)*(lambda - 2)*(lambda - 1)*(2*lambda - 3)",
+    "exponents": [
+     "0",
+     "1",
+     "3/2",
+     "2",
+     "3"
+    ]
+   },
+   "4": {
+    "indicial": "-49152*lambda*(lambda - 3)*(lambda - 2)*(lambda - 1)*(2*lambda - 3)",
+    "exponents": [
+     "0",
+     "1",
+     "3/2",
+     "2",
+     "3"
+    ]
+   },
+   "oo": {
+    "indicial": "(lambda - 1)**5",
+    "exponents": [
+     "1",
+     "1",
+     "1",
+     "1",
+     "1"
+    ]
+   }
+  },
+  "fuchs_check": {
+   "sum_exponents": "40",
+   "expected": "40"
+  },
+  "fuchsian_everywhere": true,
+  "right_factor_orders": {
+   "1": {
+    "min_sum": 1.0,
+    "bound": 0.0,
+    "factor_possible": false
+   },
+   "2": {
+    "min_sum": 6.0,
+    "bound": 4.0,
+    "factor_possible": false
+   },
+   "3": {
+    "min_sum": 14.0,
+    "bound": 12.0,
+    "factor_possible": false
+   },
+   "4": {
+    "min_sum": 25.0,
+    "bound": 24.0,
+    "factor_possible": false
+   }
+  },
+  "irreducible_by_fuchs": true
+ },
+ "ring_LG": {
+  "order": 3,
+  "leading_coeff": "-t**3*(t - 2)*(t - 1)*(t + 1)*(t + 2)",
+  "points": {
+   "-2": {
+    "indicial": "-48*lambda*(lambda - 1)*(2*lambda + 3)",
+    "exponents": [
+     "-3/2",
+     "0",
+     "1"
+    ]
+   },
+   "-1": {
+    "indicial": "6*lambda**2*(lambda - 1)",
+    "exponents": [
+     "0",
+     "0",
+     "1"
+    ]
+   },
+   "0": {
+    "indicial": "-4*lambda*(lambda - 3)**2",
+    "exponents": [
+     "0",
+     "3",
+     "3"
+    ]
+   },
+   "1": {
+    "indicial": "6*lambda**2*(lambda - 1)",
+    "exponents": [
+     "0",
+     "0",
+     "1"
+    ]
+   },
+   "2": {
+    "indicial": "-48*lambda*(lambda - 1)*(2*lambda + 3)",
+    "exponents": [
+     "-3/2",
+     "0",
+     "1"
+    ]
+   },
+   "oo": {
+    "indicial": "lambda*(lambda - 3)*(lambda - 2)",
+    "exponents": [
+     "0",
+     "2",
+     "3"
+    ]
+   }
+  },
+  "fuchs_check": {
+   "sum_exponents": "12",
+   "expected": "12"
+  },
+  "fuchsian_everywhere": true,
+  "right_factor_orders": {
+   "1": {
+    "min_sum": -3.0,
+    "bound": 0.0,
+    "factor_possible": true
+   },
+   "2": {
+    "min_sum": 2.0,
+    "bound": 4.0,
+    "factor_possible": true
+   }
+  },
+  "irreducible_by_fuchs": false
+ }
+}

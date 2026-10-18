@@ -1,0 +1,68 @@
+{
+ "6": {
+  "d": null,
+  "info": "none up to d=56"
+ },
+ "7": {
+  "d": null,
+  "info": "none up to d=49"
+ },
+ "8": {
+  "d": null,
+  "info": "none up to d=43"
+ },
+ "9": {
+  "d": 25,
+  "info": {
+   "resid": "1.72e-337",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "10": {
+  "d": 15,
+  "info": {
+   "resid": "2.93e-344",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "11": {
+  "d": 12,
+  "info": {
+   "resid": "5.80e-344",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "12": {
+  "d": 10,
+  "info": {
+   "resid": "2.62e-343",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "14": {
+  "d": 9,
+  "info": {
+   "resid": "8.06e-344",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "16": {
+  "d": 8,
+  "info": {
+   "resid": "5.25e-343",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "9": {
+  "d": 10,
+  "info": {
+   "resid": "7.94e-344",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "10": {
+  "d": 9,
+  "info": {
+   "resid": "1.83e-343",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "11": {
+  "d": 8,
+  "info": {
+   "resid": "1.39e-343",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "12": {
+  "d": 8,
+  "info": {
+   "resid": "3.32e-343",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "14": {
+  "d": 7,
+  "info": {
+   "resid": "7.10e-343",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ }
+}

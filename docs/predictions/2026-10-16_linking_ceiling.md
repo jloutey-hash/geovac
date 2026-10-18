@@ -77,7 +77,7 @@ ceiling is set by the method (how many densities one integral links), not by the
 | PL1, four-density tree, star and chain (fast-decay variant, 3-D sinh-trapezoid) | both equal the Bessel-moment formula to 4e-9 to 2e-7 relative, at the grid's own convergence level, at three scale sets including equal scales. Shape does not matter. The identity itself is a one-line Fourier argument (delta functions on a connected tree), so this checks the bookkeeping, not a conjecture. |
 | Step B: exact ODE in t for F_n, n = 2..5 (Mellin route) | orders 2, 3, 4, 5. Each checked on F_n by direct quadrature: relative residual 1e-28 to 1e-32 at t = 0.3, 0.7, 1.6 (30 digits). |
 | Control F_2 | theta^2 F = t^2 (theta+1)^2 F: the Legendre (elliptic K) equation. 0 quadratic relations. |
-| Control F_3 | 4 theta^3 F = t^2 (theta+1)^3 F, i.e. 3F2(1/2,1/2,1/2;1,1;t^2), which is Clausen's square of 2F1(1/4,1/4;1;.): symmetric square of an elliptic equation. 1 quadratic relation. Matches Bailey. |
+| Control F_3 | 4 theta^3 F = t^2 (theta+1)^3 F, i.e. 3F2(1/2,1/2,1/2;1,1;t^2/4) (argument corrected 2026-10-17 from t^2: the recurrence of the operator gives t^2/4, singular at t = 2), which is Clausen's square of 2F1(1/4,1/4;1;.): symmetric square of an elliptic equation. 1 quadratic relation. Matches Bailey. |
 | **F_4** | order 4, **0 quadratic relations** (exact, at t0 = 1/2 and 7/5, 60 Taylor terms). In x = 1/(4t^2) it is the MUM operator th^4 - x(2th+1)^2(10th^2+10th+3) + 9x^2(2th+1)^2(2th+3)^2 (symbolic identity); in z = x/4 its holomorphic solution has integer coefficients B_n = C(2n,n)^2 sum_k C(n,k)^2 C(2k,k) (checked n < 40; integral to n = 300): the Hadamard product of C(2n,n)^2 with the equal-mass sunrise sequence. Integral mirror map. Yukawa coupling K(q) = 1 + 16q + 1152q^2 + 99520q^3 + ... (integer coefficients), **not constant**, so not a symmetric cube. Conifold points x = 1/36, 1/4 with exponents (0,1,1,2). Irreducible: the holomorphic solution satisfies no ODE of order 1, 2 or 3 with polynomial coefficients of degree <= 40 (rank mod a 61-bit prime; the same search finds the operator itself at order 4, degree 2). |
 | F_5 (PL4) | order 5, MUM at t = inf, irreducible (same search, degree <= 40), **1 quadratic relation**: an orthogonal (rank-5, K3-type) structure. A symmetric fourth power of an elliptic equation would give 6; so F_5 is not built from elliptic pieces either. Whether it is new relative to F_4 is not settled: SO(5) is the exterior-square image of Sp(4), so F_5 could be tied to the F_4 rung. |
 
@@ -102,3 +102,12 @@ any molecule. The class climbs only with the number of densities one integral li
 moment family; that the real three-dimensional four-electron integral reduces into the same
 family is assumed (P3e checked the analogue at n = 3 only). (3) The instanton numbers from K(q) are 16, 142, 11056/3, 121470, ...; with Broadhurst's normalisation N_k = N0 n_k, N0 = 3, they are integral. Prior-art scan (same day, after the result): the operator is AESZ #58 (CYDB 2.9, a Hadamard product), with the same holomorphic coefficients and Yukawa coupling; see Paper 59 `sec:four_density` and CHANGELOG v5.20.20 for the full prior art. (4) Irreducibility is shown up to the stated
 degree bound, not for unbounded degree.
+
+**Follow-up (2026-10-17; memos `debug/sprint_{banana_dictionary,minimality_audit}_memo.md`).**
+The operators of F_n for n = 2 to 5 are the Hadamard products of the Legendre operator with the
+equal-mass banana operators with n - 1 propagators, in y = 1/(16 t^2), checked exactly; n = 4 is
+AESZ #58 and n = 5 is the fifth-order operator the tables print with entry #39 (prior art:
+Almkvist-Zudilin, math/0402386; AESZ, math/0507430). So five densities give no new type, and the
+open question of this record about n = 5 is answered by the literature. Irreducibility for n = 2
+to 5 now follows from local exponents and Fuchs' relation, with no degree bound. Paper 59
+`sec:four_density` carries this.

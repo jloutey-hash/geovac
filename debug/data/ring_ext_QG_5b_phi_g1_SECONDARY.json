@@ -1,0 +1,65 @@
+{
+ "7": {
+  "d": 21,
+  "info": {
+   "resid": "2.89e-154",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "8": {
+  "d": 17,
+  "info": {
+   "resid": "6.76e-153",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "9": {
+  "d": 14,
+  "info": {
+   "resid": "5.73e-153",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "10": {
+  "d": 12,
+  "info": {
+   "resid": "5.91e-153",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "12": {
+  "d": 10,
+  "info": {
+   "resid": "9.09e-153",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "14": {
+  "d": 9,
+  "info": {
+   "resid": "2.00e-152",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ },
+ "16": {
+  "d": 9,
+  "info": {
+   "resid": "2.14e-153",
+   "rational": false,
+   "exact": null,
+   "P": null
+  }
+ }
+}

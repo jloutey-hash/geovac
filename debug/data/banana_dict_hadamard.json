@@ -1,0 +1,22 @@
+{
+ "2": {
+  "recurrences_proportional": true,
+  "left_factor": "4/m**2",
+  "series_residual_max_m<40": "0"
+ },
+ "3": {
+  "recurrences_proportional": true,
+  "left_factor": "4/m**2",
+  "series_residual_max_m<40": "0"
+ },
+ "4": {
+  "recurrences_proportional": true,
+  "left_factor": "64/m**2",
+  "series_residual_max_m<40": "0"
+ },
+ "5": {
+  "recurrences_proportional": true,
+  "left_factor": "64/m**2",
+  "series_residual_max_m<40": "0"
+ }
+}

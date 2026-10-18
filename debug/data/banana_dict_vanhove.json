@@ -1,0 +1,36 @@
+{
+ "Bp_3_rightfactor_vanhove_2": true,
+ "Bp_4_rightfactor_vanhove_3": true,
+ "Bp_5_rightfactor_vanhove_4": true,
+ "Bp_6_rightfactor_vanhove_5": true,
+ "sing_F2_t2": [
+  "1"
+ ],
+ "sing_banana2_t2": [
+  "4"
+ ],
+ "sing_banana3_t2": [
+  "9",
+  "1"
+ ],
+ "sing_banana4_t2": [
+  "16",
+  "4"
+ ],
+ "sing_banana5_t2": [
+  "25",
+  "9",
+  "1"
+ ],
+ "sing_F3_t2": [
+  "4"
+ ],
+ "sing_F4_t2": [
+  "9",
+  "1"
+ ],
+ "sing_F5_t2": [
+  "16",
+  "4"
+ ]
+}

@@ -1,0 +1,155 @@
+{
+ "1,0": {
+  "rel_diff_AB": "7.0e-102",
+  "digits_AB": 101,
+  "rel_diff_A_closed": "1.92e-290",
+  "rel_diff_B_closed": "7.0e-102"
+ },
+ "1,1": {
+  "rel_diff_AB": "6.58e-99",
+  "digits_AB": 98,
+  "rel_diff_A_closed": "0.0",
+  "rel_diff_B_closed": "6.58e-99"
+ },
+ "1,2": {
+  "rel_diff_AB": "2.51e-96",
+  "digits_AB": 95,
+  "rel_diff_A_closed": "1.92e-290",
+  "rel_diff_B_closed": "2.51e-96"
+ },
+ "1,3": {
+  "rel_diff_AB": "5.9e-94",
+  "digits_AB": 93,
+  "rel_diff_A_closed": "0.0",
+  "rel_diff_B_closed": "5.9e-94"
+ },
+ "2,0": {
+  "rel_diff_AB": "1.31e-290",
+  "digits_AB": 289,
+  "rel_diff_A_closed": "1.31e-290",
+  "rel_diff_B_closed": "0.0"
+ },
+ "2,1": {
+  "rel_diff_AB": "0.0",
+  "digits_AB": 290,
+  "rel_diff_A_closed": "0.0",
+  "rel_diff_B_closed": "0.0"
+ },
+ "2,2": {
+  "rel_diff_AB": "1.13e-290",
+  "digits_AB": 289
+ },
+ "2,3": {
+  "rel_diff_AB": "1.0e-290",
+  "digits_AB": 289
+ },
+ "3,0": {
+  "rel_diff_AB": "5.64e-291",
+  "digits_AB": 290,
+  "rel_diff_A_closed": "5.64e-291",
+  "rel_diff_B_closed": "2.91e-321"
+ },
+ "3,1": {
+  "rel_diff_AB": "3.46e-291",
+  "digits_AB": 290,
+  "rel_diff_A_closed": "3.46e-291",
+  "rel_diff_B_closed": "2.16e-321"
+ },
+ "3,2": {
+  "rel_diff_AB": "2.63e-291",
+  "digits_AB": 290,
+  "rel_diff_A_closed": "2.63e-291",
+  "rel_diff_B_closed": "4.04e-320"
+ },
+ "3,3": {
+  "rel_diff_AB": "2.36e-290",
+  "digits_AB": 289,
+  "rel_diff_A_closed": "2.36e-290",
+  "rel_diff_B_closed": "1.52e-320"
+ },
+ "4,0": {
+  "rel_diff_AB": "6.57e-291",
+  "digits_AB": 290
+ },
+ "4,1": {
+  "rel_diff_AB": "4.27e-290",
+  "digits_AB": 289,
+  "rel_diff_A_closed": "4.27e-290",
+  "rel_diff_B_closed": "0.0"
+ },
+ "4,2": {
+  "rel_diff_AB": "2.14e-290",
+  "digits_AB": 289
+ },
+ "4,3": {
+  "rel_diff_AB": "2.86e-291",
+  "digits_AB": 290,
+  "rel_diff_A_closed": "2.86e-291",
+  "rel_diff_B_closed": "2.1e-321"
+ },
+ "5,0": {
+  "rel_diff_AB": "1.24e-290",
+  "digits_AB": 289
+ },
+ "5,1": {
+  "rel_diff_AB": "1.89e-290",
+  "digits_AB": 289
+ },
+ "5,2": {
+  "rel_diff_AB": "9.36e-291",
+  "digits_AB": 290
+ },
+ "5,3": {
+  "rel_diff_AB": "3.58e-292",
+  "digits_AB": 291
+ },
+ "6,0": {
+  "rel_diff_AB": "1.14e-291",
+  "digits_AB": 290
+ },
+ "6,1": {
+  "rel_diff_AB": "5.39e-291",
+  "digits_AB": 290
+ },
+ "6,2": {
+  "rel_diff_AB": "1.32e-291",
+  "digits_AB": 290
+ },
+ "6,3": {
+  "rel_diff_AB": "1.61e-291",
+  "digits_AB": 290
+ },
+ "7,0": {
+  "rel_diff_AB": "2.46e-289",
+  "digits_AB": 288
+ },
+ "7,1": {
+  "rel_diff_AB": "1.25e-290",
+  "digits_AB": 289
+ },
+ "7,2": {
+  "rel_diff_AB": "2.13e-291",
+  "digits_AB": 290
+ },
+ "7,3": {
+  "rel_diff_AB": "2.62e-290",
+  "digits_AB": 289
+ },
+ "8,0": {
+  "rel_diff_AB": "2.13e-287",
+  "digits_AB": 286
+ },
+ "8,1": {
+  "rel_diff_AB": "2.07e-290",
+  "digits_AB": 289
+ },
+ "8,2": {
+  "rel_diff_AB": "3.31e-291",
+  "digits_AB": 290
+ },
+ "8,3": {
+  "rel_diff_AB": "6.73e-291",
+  "digits_AB": 290
+ },
+ "c40_vs_4F3_rel_60dps": "1.56e-61"
+}
