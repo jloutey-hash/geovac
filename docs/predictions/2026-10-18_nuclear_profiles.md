@@ -58,3 +58,34 @@ per order, and the weight-one constants at fourth order are universal.
   finite-size corrections is known in the precision literature. The contribution, if any, is the
   accounting: which orders consume which moments, and which constants are universal.
 - Non-relativistic, s-waves only, infinite nuclear mass.
+
+## Result (2026-10-18, same session, after commit 8292bf51)
+
+Script `debug/nuclear_profiles_door.py`; data `debug/data/nuclear_profiles_door.json`. All three
+registered predictions hold, for both profiles.
+
+- **Shell, exact series (sympy, through x^5):**
+  mu = -(2/3) x^2 + (16/15) x^3 - x^4 [ (4/9) ln(2x) + (8/9) gamma_E + 127/315 ]
+       + x^5 [ (64/45) ln(2x) + (128/45) gamma_E - 4448/2835 ] + ...
+  NP1 (-2/3) and NP2 (16/15, the Friar term with <d^3> = 16 R^3/5) hold symbolically; NP3 holds
+  symbolically: the fourth-order term minus -delta_0^2 [ln(2x) + 2 gamma_E] is the rational -127/315 x^4.
+  Exact matching at 50 digits differs from the series by 6.9e-12, 9.0e-15, 5.4e-18 at x = 1e-2, 3.3e-3,
+  1e-3, about 5 to 7 times x^6, slowly drifting as an x^6 ln x term would.
+- **Gaussian, numerical (odefun at 30 digits to r = 12 b; y = 1e-3 .. 3.2e-2, 11 points):** with log
+  columns the fit residual is 3e-11 (without them 9e-7). NP1: the leading ratio is 1 to 1.2e-9. NP2:
+  the y coefficient is -3.009016002 against -16/(3 sqrt(pi)) = -3.009011112, relative error 1.6e-6
+  (gate 1e-3). NP3: the y^2 ln y coefficient is 1.99545 against 2, relative error 2.3e-3 (gate 2e-2).
+  So for a Gaussian nucleus pi^(-1/2) enters the defect at third order, from the profile.
+
+Not registered, derived for both the uniform sphere and the shell: at fourth and fifth order the
+weight-one constants appear only in the combination ln(2ZR) + 2 gamma_E, the expansion of the
+exterior irregular function Y_1. A measured observation across two exactly solved profiles, not a
+theorem.
+
+What this says, in one line: the structure is not the sphere's: it holds for all three round profiles tested. The
+leading order consumes <r^2>, the next the Friar moment <r^3>_(2), and these carry whatever number
+class the profile carries (rational for the sphere and the shell, pi^(-1/2) for the Gaussian); from
+fourth order on, a universal piece -delta_0^2 [ln(2ZR) + 2 gamma_E] enters for every profile tested (the Gaussian's gamma_E coefficient was not separated), the
+weight-one class of row J1, with the rest profile-dependent.
+
+Home (2026-10-18, PI-approved): Paper 23 `sec:finite_nucleus` (eq:defect_s now the derived series; an "Other profiles" paragraph; the price paragraph rewritten as one consumed moment per order); seam J14 and atlas door 24 updated; J14 recorded as the seventh instance of the multi-focal composition wall (Paper 57 `sec:unity`, PI decision); guard `tests/test_paper23_nuclear_profiles.py`, written as its own step and fire-tested 9/9.

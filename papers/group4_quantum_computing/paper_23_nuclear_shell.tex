@@ -51,7 +51,7 @@ hyperfine scales. We state and apply the Fock projection rigidity
 theorem: the $S^3$ conformal projection that makes electronic Hamiltonians
 equivalent to the $S^3$ Laplace--Beltrami operator (whose harmonics the
 GeoVac lattice's nodes label) is unique to the Coulomb potential and
-does \emph{not} extend to HO or Woods--Saxon systems. A finite nucleus breaks it in a controlled way:\ the labels survive, $n$ is released from being a whole number, and the $s$-wave quantum defect $-(2/5)(ZR)^2$ is the same for every $n$ and continues across threshold, the radius being consumed (Sec.~\ref{sec:finite_nucleus}). For nuclear
+does \emph{not} extend to HO or Woods--Saxon systems. A finite nucleus breaks it in a controlled way:\ the labels survive, $n$ is released from being a whole number, and the $s$-wave quantum defect $-(2/5)(ZR)^2$ is the same for every $n$ and continues across threshold, moments of the nuclear charge being consumed, one per order (Sec.~\ref{sec:finite_nucleus}). For nuclear
 Hamiltonians, the GeoVac contribution is therefore the angular machinery
 and qubit encoding, not the conformal projection. All nuclear physics
 inputs (Minnesota parameters, spin--orbit strength, $\hbar\omega$)
@@ -337,13 +337,15 @@ c_l = \frac{2^{2l+2}\,k_l}{\bigl((2l+1)!\bigr)^2},
 k_l = \frac{1}{2l+2} - \frac{3}{2(2l+3)} + \frac{1}{2(2l+5)},
 \label{eq:defect}
 \end{equation}
-so $c_0 = 2/5$, $c_1 = 1/105$ and $c_2 = 1/28350$. \textbf{[SYMBOLIC PROOF + MEASURED]} The leading term is first-order perturbation theory with the hydrogenic normalization near the origin, whose product over $s$ is the one behind the continuum factor of Paper~7~\cite{Paper7};\ exact matching at 50--60 digits, for $ZR$ from $10^{-3}$ to $3.2\times 10^{-2}$ and $n \le 40$, confirms it to $10^{-10}$ for $l = 0$ and $10^{-11}$ for $l = 1, 2$. The defect depends on $Z$ and $R$ only through $ZR$. The $s$-wave defect is the same for every $n$, $-(2/5)(ZR)^2 = -(2/3)Z^2\langle r^2\rangle$:\ the Foldy--Friar contact term~\cite{Friar1979} read as a quantum defect. Beyond leading order, \textbf{[MEASURED]}
+so $c_0 = 2/5$, $c_1 = 1/105$ and $c_2 = 1/28350$. \textbf{[SYMBOLIC PROOF + MEASURED]} The leading term is first-order perturbation theory with the hydrogenic normalization near the origin, whose product over $s$ is the one behind the continuum factor of Paper~7~\cite{Paper7};\ exact matching at 50--60 digits, for $ZR$ from $10^{-3}$ to $3.2\times 10^{-2}$ and $n \le 40$, confirms it to $10^{-10}$ for $l = 0$ and $10^{-11}$ for $l = 1, 2$. The defect depends on $Z$ and $R$ only through $ZR$. The $s$-wave defect is the same for every $n$, $-(2/5)(ZR)^2 = -(2/3)Z^2\langle r^2\rangle$:\ the Foldy--Friar contact term~\cite{Friar1979} read as a quantum defect. Beyond leading order the $s$-wave defect follows exactly from the zero-energy matching, since the defect at threshold is the zero-energy phase shift over $\pi$ (Seaton's limit, below). Inside, with $s = r/R$, the radial equation is $u'' = -x(3 - s^2)\,u$, a power series in $x = ZR$;\ outside, the zero-energy pair is $\sqrt{2r}\,J_1(\sqrt{8r})$ and $-\sqrt{2r}\,Y_1(\sqrt{8r})$. Matching gives \textbf{[SYMBOLIC PROOF + MEASURED]}
 \begin{equation}
-\delta_{n0} = -\tfrac{2}{5}\,x^2\Bigl[\,1 - \tfrac{80}{63}\,x + \tfrac{2}{5}\,x^2\ln x + \cdots\Bigr],
+\delta_{n0} = -\tfrac{2}{5}x^2 + \tfrac{32}{63}x^3 - x^4\Bigl[\tfrac{4}{25}\ln(2x) + \tfrac{8}{25}\gamma_E + \tfrac{28477}{225225}\Bigr] + O(x^5\ln x),
 \qquad x = ZR,
 \label{eq:defect_s}
 \end{equation}
-with the same coefficients at every $n$ ($-80/63$ to $4\times 10^{-10}$, an identification by agreement;\ a fit without the logarithm stalls at a residual near $10^{-8}$).
+the same at every $n$, and agreeing with the exact matching to $1.3\times 10^{-18}$ at $x = 10^{-3}$ (the series is kept through $x^5$). The $x^3$ term is the Friar term $\tfrac13 Z^3\langle r^3\rangle_{(2)}$, the third moment of the nuclear charge convolved with itself~\cite{Friar1979}, which for the uniform sphere is exactly $32R^3/21$. The weight-one constants $\gamma_E$ and $\ln 2$ enter at fourth order, as $-\delta_0^2[\ln(2ZR) + 2\gamma_E]$ with $\delta_0$ the leading term.
+
+\emph{Other profiles.} The structure is not the sphere's. For a thin charged shell the same derivation gives exactly $-\tfrac23 x^2 + \tfrac{16}{15}x^3 - x^4[\tfrac49\ln(2x) + \tfrac89\gamma_E + \tfrac{127}{315}] + \cdots$:\ the leading term set by $\langle r^2\rangle = R^2$, the Friar term with $\langle r^3\rangle_{(2)} = 16R^3/5$, and the same universal fourth-order piece. For a Gaussian nucleus of width $b$, solved numerically, the leading term is $-2(Zb)^2$ to $10^{-9}$ and the third-order coefficient is the Friar value $32/(3\sqrt\pi)\,(Zb)^3$ to $1.6\times 10^{-6}$, so a $\pi^{-1/2}$ enters the defect from the profile;\ the fourth-order logarithm has the universal coefficient to $0.2\%$ \textbf{[MEASURED]}.
 
 Across threshold the defect continues as one function of energy. Since $1 - s^2/n^2 = 1 + 2s^2E/Z^2$, the leading defect is a polynomial $\mu(E)$, and to first order the short-range phase shift relative to Coulomb is
 \begin{equation}
@@ -352,7 +354,7 @@ Across threshold the defect continues as one function of energy. Since $1 - s^2/
 \end{equation}
 the factor being Paper~7's continuum factor. \textbf{[MEASURED]} At $ZR = 10^{-3}$ the phase shift divided by Eq.~\eqref{eq:defect_phase} equals the bound side's ratio to $10^{-6}$ at $k = 1/2$, $1$ and $2$;\ without the factor it misses by $4.4\%$ at $k = 2$. At threshold the factor tends to one and Seaton's limit~\cite{Seaton1983} holds:\ the bound defects extrapolated to $n \to \infty$ and the phase shift over $\pi$ extrapolated to $k \to 0$ agree to $10^{-15}$.
 
-\emph{The price.} The release consumes one number, the radius (one per charge moment for a general profile), and no label fixes it. The coefficients multiplying its powers are rational, with logarithms of $R$ from second order, and no $\pi$ enters the leading defect. So the labels survive and the radius is consumed:\ a released axis whose price is calibration data, as the two-focal-length picture of Sec.~\ref{sec:cross-register} expects. \textbf{[PRIOR ART]} The physics is textbook (Foldy;\ Friar~\cite{Friar1979};\ Seaton~\cite{Seaton1983});\ the contribution is the accounting on the electron's labels. Guard:\ \texttt{tests/test\_paper23\_finite\_nucleus\_door.py}.
+\emph{The price.} The release consumes numbers of the nucleus, one per order, and no label fixes them:\ the mean square radius at leading order, the Friar moment at the next. They carry whatever number class the profile carries (rational for the sphere and the shell, $\pi^{-1/2}$ for a Gaussian);\ no $\pi$ enters from the electron's side at leading order. From fourth order on a universal piece enters, $\ln(2ZR) + 2\gamma_E$, the weight-one class of the two-centre seed set of Paper~18~\cite{Paper18}. So the labels survive and the moments are consumed:\ a released axis whose price is calibration data, as the two-focal-length picture of Sec.~\ref{sec:cross-register} expects. \textbf{[PRIOR ART]} The physics is textbook (Foldy;\ Friar~\cite{Friar1979};\ Seaton~\cite{Seaton1983});\ the contribution is the accounting on the electron's labels. Guard:\ \texttt{tests/test\_paper23\_finite\_nucleus\_door.py}.
 
 %% =====================================================================
 \section{The Deuteron: First Two-Species Nuclear Qubit Hamiltonian}
@@ -1266,7 +1268,7 @@ nucleon--electron systems but faces a $\sim 10^{13}$ coefficient ratio that
 requires block-partitioned simulation. The Fock projection rigidity
 theorem precisely delineates which parts of the GeoVac framework
 transfer to non-Coulomb systems (the angular machinery) and which do
-not (the $S^3$ conformal projection);\ a finite nucleus keeps the electron's labels, releases $n$ from integrality and consumes its radius (Sec.~\ref{sec:finite_nucleus}). The binding energies reported
+not (the $S^3$ conformal projection);\ a finite nucleus keeps the electron's labels, releases $n$ from integrality and consumes moments of its charge, one per order (Sec.~\ref{sec:finite_nucleus}). The binding energies reported
 here at $N_{\mathrm{shells}}=2$ are not converged and should not be
 read as nuclear-structure predictions; they are encoding-validation
 benchmarks that verify the qubit Hamiltonian reproduces the matrix

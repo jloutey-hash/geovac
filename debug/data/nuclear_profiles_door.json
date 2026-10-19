@@ -1,0 +1,37 @@
+{
+ "shell_series": "x**5*(64*Lg/45 - 4448/2835 + 128*EulerGamma/45) + x**4*(-4*Lg/9 - 8*EulerGamma/9 - 127/315) + 16*x**3/15 - 2*x**2/3",
+ "shell_NP1_coef_x2": "-2/3",
+ "shell_NP2_coef_x3": "16/15",
+ "shell_NP3_x4_minus_universal": "-127/315",
+ "shell_exact_check": {
+  "0.01": {
+   "exact_minus_series": "6.897e-12",
+   "over_x6": "6.8971"
+  },
+  "0.00333": {
+   "exact_minus_series": "9.027e-15",
+   "over_x6": "6.5803"
+  },
+  "0.001": {
+   "exact_minus_series": "5.39e-18",
+   "over_x6": "5.3905"
+  }
+ },
+ "gauss": {
+  "no_log": {
+   "a0": "1.00000410863",
+   "a1": "-3.01661116641",
+   "resid": "8.84e-7"
+  },
+  "with_logs": {
+   "a0": "1.00000000123",
+   "a1": "-3.00901600244",
+   "y2log": "1.9954502",
+   "resid": "3.27e-11"
+  },
+  "a1_pred_-16/(3 sqrt pi)": "-3.00901111225",
+  "a1_rel_err": "1.63e-6",
+  "y2log_pred": 2,
+  "y2log_rel_err": "0.00227"
+ }
+}

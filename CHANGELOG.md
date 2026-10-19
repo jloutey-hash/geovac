@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.27] - 2026-10-18
+
+### Added
+- **Finite-nucleus owed items: the measured coefficients derived, and two more profiles (pre-registered NP1-NP3, 8292bf51).** An exact zero-energy series (Seaton's limit) gives the uniform-sphere s-wave defect -(2/5)x^2 + (32/63)x^3 - x^4[(4/25)ln(2x) + (8/25)gamma_E + 28477/225225] + ..., x = ZR, deriving the measured -80/63 and 2/5; checked against exact matching to 1.3e-18 at x = 1e-3. The x^3 term is the Friar moment (32 R^3/21, symbolic). Thin shell (exact) and Gaussian (numerical) confirm NP1-NP3: leading term set by <r^2>; next the Friar term (16/15; 32/(3 sqrt pi), to 1.6e-6, so pi^(-1/2) enters from the profile); from fourth order a universal -delta_0^2 [ln(2ZR) + 2 gamma_E], the weight-one class of J1. Home: Paper 23 `sec:finite_nucleus` (eq:defect_s derived, an other-profiles paragraph, the price as one consumed moment per order).
+- **Guard** `tests/test_paper23_nuclear_profiles.py` (3 fast + 1 slow), written as its own step, fire-tested 9/9.
+
+### Changed
+- **PI decisions on the v5.20.26 items:** J14 stays C; FN3 stays scored as falsified; J14 is recorded as the seventh instance of the multi-focal composition wall (Paper 57 `sec:unity` list, abstract and counts; group3 synthesis; seam row; memory). Paper 34's own list of six is a different list and is unchanged.
+- Seam J14, atlas door 24 (owed list now the relativistic case only), claim matrix; summary surfaces of Papers 23 and 57 say moments of the charge, not the radius alone.
+
 ## [v5.20.26] - 2026-10-18
 
 ### Added
