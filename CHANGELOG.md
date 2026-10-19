@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.29] - 2026-10-19
+
+### Added
+- **The Kustaanheimo-Stiefel lift (pre-registered KS1-KS5, be16fccd): all five hold.** The fibre-neutral sector of the four-dimensional oscillator is the hydrogen label set (n^2 at N = 2(n-1), none at odd N, l = 0..n-1 once each, n <= 15); the SO(4) Casimir 2(J+^2 + J-^2) = n^2 - 1 in integer arithmetic (n <= 10); each state pushed down is a Coulomb Sturmian with Z = n p0, p0 = 2 omega (14 states, symbolic); the R^4 inner product is (pi/4) times the 1/r-weighted R^3 one, the same constant for every pair; the spectral zeta values of the oscillator ladders carry pi^2 at even argument as the S^3 Casimir ladder's do. Home: Paper 24 `sec:ks_frame`.
+- **The hyperfine door, a finite nuclear magnetization (pre-registered ZM1-ZM4, be16fccd).** ZM1-ZM3 hold: the leading change is -2 Z r_Z with the Zemach radius, the same for every n; a point charge gives an entire function of ZR with coefficients polynomial in 1/n^2; a uniform charge gives (4/5) x^2 ln x, -2 times the leading quantum defect of J14, for every profile and n. ZM4 fails in part: an unregistered x^3 ln x term, n-independent, its constant not identified. The n-dependence at second order fits (4/5)[psi(n) - ln n - 1/n] plus a profile constant (post hoc, confirmed at n = 3 before being seen). A code defect (r^2/R^2 for r^2/R^3 in the interior series) was caught by a smoke test before scoring. Home: Paper 23 `sec:finite_nucleus`, "A finite magnetization".
+- Seam rows J15 (F) and J16 (C), atlas doors 25 and 26; Paper 57 sub-domain J (sixteen rows, 79 entries); claim-matrix rows.
+- **Guards**, each written as its own step on an independent route and fire-tested: `tests/test_paper24_ks_lift.py` (24 fast; Sturmians pulled up to R^4 rather than pushed down; 9/9) and `tests/test_paper23_hyperfine_door.py` (16 fast; Zemach radii by Zemach's Fourier formula, float64 bound states; 8/8, one plant being the R^2-for-R^3 slip).
+- C16 entry `coulomb-ho-calibration-pi-layer` with 14 stamped dependents.
+
+### Changed
+- **Paper 24 layer (ii), calibration pi, withdrawn (PI-delegated decision).** At fixed energy the Coulomb projection is linear, and both sides carry pi through a measure and through spectral sums at even argument, so the placement of pi does not separate the Coulomb problem from the oscillator. `thm:asymmetry` becomes a proposition saying so; steps 5-6 of the causal chain removed; rows 6-7 of `tab:asymmetry` marked as the energy frame; abstract, introduction, taxonomy subsection, alpha subsection, partition, spinor section and conclusion follow. Seven layers catalogued, five standing.
+- Dependents swept: Paper 31 (abstract, intro, the "where pi enters" section rewritten, layer table; one standing discriminator), Paper 32 (`obs:pi_coulomb` rescoped, table row, heat-trace sentence, counts), Papers 2, 18, 25, 30, 34, 35, 38, 39, 45, the group1 and group3 syntheses, README, papers/INDEX.md, docs/topic_to_paper_lookup.md.
+- **HF-4 (PI-delegated decision):** kept as an instance of the multi-focal composition wall, priced like J14 (walls register note; Paper 57 `sec:unity`).
+- Prior art checked against primary or catalogue sources: Zemach 1956, Bohr-Weisskopf 1950, Friar-Payne 2005, Kustaanheimo-Stiefel 1965, Hietarinta et al. 1984; Rotenberg through citing works only.
+
+### Open (PI)
+- CLAUDE.md S1.6 still says calibration pi is structurally Coulomb-specific; that section is PI-only.
+- `docs/qa/group3.done.md` and `docs/qa/trunk.done.md` still count six standing layers; definitions of done are PI-owned.
+
 ## [v5.20.28] - 2026-10-19
 
 ### Added

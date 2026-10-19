@@ -362,6 +362,21 @@ unbuilt prolate ≥4e CI.**
 
 ---
 
+## Note 2026-10-19 (v5.20.29, PI-delegated, not a `/walls` pass): HF-4 priced, kept as a multi-focal instance
+
+The PI delegated one decision in session ("You choose"): whether the hyperfine door moves HF-4 out of the
+multi-focal composition wall ([[multi_focal_wall_pattern]]; Paper 57 `sec:unity`).
+
+- **Wall: STANDING**, evidence: Paper 23 `sec:finite_nucleus` ("A finite magnetization", 2026-10-19); record
+  `docs/predictions/2026-10-19_zemach_door.md` (ZM1-ZM3 hold, ZM4 fails in part); seam J16.
+- **HF-4 instance: MIS-SCOPED, re-stated.** Its text ("no magnetization-density distribution carried") names a
+  limit of one code function. With the distribution carried, the electron's labels survive and the hyperfine
+  factor is set by the Zemach moment of charge and magnetization together, one joint moment per order, which no
+  label fixes. That is the J14 shape (PI decision 2026-10-18: J14 is a door and the seventh instance), so HF-4
+  stays an instance, priced. The wall's mechanism is supported, not breached: two spatial distributions compose
+  at leading order only through a joint moment, the Zemach radius, that neither radius fixes alone.
+- **Classification unchanged** (HARD at the level of the mechanism; the door is priced, not closed).
+
 ## Promotion candidates (PI-gated)
 
 **CHEM-ACCURACY two-walls compounding.** One-sentence mechanism: *chemical accuracy (Wall A, breachable) and native sparsity (Wall B, hard) co-locate favorably only at one center, so breaching the cusp for molecules re-triggers the non-orthogonality wall.* Support: ≥3 independent negatives (R12-CI conditioning v5.0.7; flexible-Jastrow cap v5.0.8; elliptic-basis null v5.0.1) + 1 breach (atomic xTC v5.0.9) + 2 crystallized meta-findings it subsumes. Falsifier: above. **Proposed home:** a sharpening of [[two_kinds_of_sparsity]] and/or a Paper 14 remark tying the atomic xTC win to the molecular tension. **PI decision required** to write it into a paper.

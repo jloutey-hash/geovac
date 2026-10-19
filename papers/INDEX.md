@@ -61,7 +61,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 7 `Paper_7_Dimensionless_Vacuum.tex` | **KEYSTONE** | S³ conformal equivalence, 18 symbolic checks (ten limiting-case/definitional/non-discriminating); graph→S³ convergence a WALL — most-cited paper in the corpus |
 | 18 `paper_18_exchange_constants.tex` | ACTIVE | Transcendental taxonomy; master Mellin engine M1/M2/M3 |
 | 22 `paper_22_angular_sparsity.tex` | **KEYSTONE** | Potential-independent angular sparsity theorem (underwrites the Pauli scaling) |
-| 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (7 catalogued, 6 standing) |
+| 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (7 catalogued, 5 standing); Kustaanheimo–Stiefel lift |
 | 31 `paper_31_universal_coulomb_partition.tex` | **KEYSTONE** | Universal vs Coulomb-specific (A/D) split of the spectral triple |
 | 54 `paper_54_tensor_product_two_body.tex` | ACTIVE | Two-body selection rules from the tensor-product triple; radial coupling NOT forced |
 | 55 `paper_55_periods_of_geovac.tex` | ACTIVE | Periods of the Mellin sectors: pure-Tate / level-4 cyclotomic mixed-Tate |

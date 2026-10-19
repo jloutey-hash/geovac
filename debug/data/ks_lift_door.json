@@ -1,0 +1,155 @@
+{
+ "KS1_KS2": {
+  "KS1_count": {
+   "1": 1,
+   "2": 4,
+   "3": 9,
+   "4": 16,
+   "5": 25,
+   "6": 36,
+   "7": 49,
+   "8": 64,
+   "9": 81,
+   "10": 100,
+   "11": 121,
+   "12": 144,
+   "13": 169,
+   "14": 196,
+   "15": 225
+  },
+  "KS1_odd_levels_empty": true,
+  "KS1_l_content": {
+   "1": true,
+   "2": true,
+   "3": true,
+   "4": true,
+   "5": true,
+   "6": true,
+   "7": true,
+   "8": true,
+   "9": true,
+   "10": true,
+   "11": true,
+   "12": true,
+   "13": true,
+   "14": true,
+   "15": true
+  },
+  "KS1_minpoly": {
+   "1": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "2": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "3": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "4": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "5": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "6": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "7": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   },
+   "8": {
+    "product_zero": true,
+    "shorter_product_nonzero": true
+   }
+  },
+  "KS2": {
+   "1": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "2": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "3": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "4": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "5": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "6": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "7": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "8": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "9": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   },
+   "10": {
+    "J2_equals_K2": true,
+    "casimir_is_n2m1": true
+   }
+  }
+ },
+ "KS3": {
+  "n1_(0, 0, 0, 0)": true,
+  "n2_(0, 0, 1, 1)": true,
+  "n2_(0, 1, 1, 0)": true,
+  "n2_(1, 0, 0, 1)": true,
+  "n2_(1, 1, 0, 0)": true,
+  "n3_(0, 0, 2, 2)": true,
+  "n3_(0, 1, 2, 1)": true,
+  "n3_(0, 2, 2, 0)": true,
+  "n3_(1, 0, 1, 2)": true,
+  "n3_(1, 1, 1, 1)": true,
+  "n3_(1, 2, 1, 0)": true,
+  "n3_(2, 0, 0, 2)": true,
+  "n3_(2, 1, 0, 1)": true,
+  "n3_(2, 2, 0, 0)": true
+ },
+ "KS4": {
+  "distinct_ratios": [
+   "pi/4"
+  ],
+  "n_nonzero": 8,
+  "zeros_consistent": true
+ },
+ "KS5": {
+  "casimir_s2_minus_closed": "1.5558e-61",
+  "s4": {
+   "ks_minus_zeta(s-2)": "0.0",
+   "euler_minus_closed": "0.0",
+   "energy_minus_hurwitz": "0.0",
+   "hurwitz_3/2_identity": "5.4451e-61",
+   "casimir_value": "0.0520132750358781216599745141523"
+  },
+  "s6": {
+   "ks_minus_zeta(s-2)": "0.0",
+   "euler_minus_closed": "0.0",
+   "energy_minus_hurwitz": "0.0",
+   "hurwitz_3/2_identity": "-3.306e-61",
+   "casimir_value": "0.00552286131000111111500486197222"
+  }
+ }
+}

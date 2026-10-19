@@ -162,7 +162,7 @@
 | π-free graph certificate (HO) | 24 | Sec III | Core |
 | HO rigidity theorem (dual of Fock rigidity) | 24 | Sec V | Core |
 | Coulomb/HO structural asymmetry | 24 | Sec IV | Core |
-| Calibration π is Coulomb-specific | 24 | Sec IV | Core |
+| Where π enters, Coulomb vs HO (calibration-π layer withdrawn 2026-10-19); Kustaanheimo–Stiefel lift | 24 | sec:ks_frame | Core |
 | First-order vs second-order operator distinction | 24 | Sec IV | Core |
 | S^5 Hardy space / Bargmann space / SU(3) (N,0) | 24 | Sec II | Core |
 | Linear-affine HO projection | 24 | Sec II.B | Core |

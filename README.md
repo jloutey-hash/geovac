@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.20.28-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-5.20.29-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -42,7 +42,7 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 
 **Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 828 Pauli); the conformal machinery does not.
 
-**The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. Calibration π is Coulomb-specific, not a generic feature of quantum discretization.
+**The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. In the Kustaanheimo–Stiefel frame the Coulomb problem is itself a constrained 4D oscillator, and π enters both sides the same ways (a measure and spectral sums), so the two differ in representation theory and arithmetic, not in where π enters.
 
 ---
 

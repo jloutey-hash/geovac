@@ -50,18 +50,19 @@ results into two disjoint sectors:
   partition's sharpness, the second subject to that caveat.
 \end{itemize}
 The two rigidity theorems sit on opposite sides of an operator-order
-divide: Coulomb requires a second-order Riemannian Laplacian and a
-nonlinear stereographic projection that introduces calibration $\pi$;
-the HO uses a first-order complex Euler operator and a linear-affine
-Bargmann projection that is bit-exactly $\pi$-free.  This asymmetry is
-not an accident of two examples; it is a structural feature of
-sphere-quotient discretizations.  The Sprint 5 result on $S^5$ gauge
-structure~\cite{paper25} adds Wilson gauge with natural matter
-coupling to calibration $\pi$ as a second Coulomb/HO discriminator;
-unlike calibration $\pi$, it is decided by representation theory (on
+divide:\ Coulomb uses a second-order Riemannian Laplacian, the HO a
+first-order complex Euler operator.  The divide does not decide where
+$\pi$ enters:\ both label sets are $\pi$-free, and on both sides $\pi$
+enters through a measure and through spectral sums at even argument;\
+in the Kustaanheimo--Stiefel frame the Coulomb problem is itself a
+constrained oscillator with a linear projection (Paper~24).  The
+Sprint 5 result on $S^5$ gauge structure~\cite{paper25} supplies the
+standing Coulomb/HO discriminator, Wilson gauge with natural matter
+coupling, decided by representation theory (on
 $S^3 = \mathrm{SU}(2)$ matter and links share a representation, on
-$S^5$ matter coupling needs a Clebsch--Gordan intertwiner), not by
-operator order.  (A third, the spectrum-computing role of $L_0$, [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
+$S^5$ matter coupling needs a Clebsch--Gordan intertwiner).
+Calibration $\pi$, listed here as a second discriminator until
+2026-10-19, is withdrawn.  (A third, the spectrum-computing role of $L_0$, [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
 was listed here until 2026-09-25;\ it is withdrawn, because the graph
 Laplacian on $S^3$ does not converge to the $S^3$ Laplacian and is
 spectrally inert there as on $S^5$.)  We frame the partition in spectral-triple
@@ -102,10 +103,9 @@ sparsity is not particular to any of these systems: it is a property
 of the angular momentum algebra and persists across all spherical
 fermion bases, regardless of the radial potential.
 
-The same machinery, however, does \emph{not} produce identical
-transcendental content.  The Coulomb framework on $S^3$ is honestly
-$\pi$-laden at every level above the bare graph: the kinetic
-calibration $\kappa = -1/16$ is itself rational (a matched scale on the
+The same machinery does not produce identical spectra or
+projections.  Above the label level, $\pi$ enters both sides.  On
+$S^3$ the kinetic calibration $\kappa = -1/16$ is itself rational (a matched scale on the
 graph's extremal eigenvalue; the bridge to the $\pi$-laden continuum is
 Fock's energy shell $p_0^2 = -2E$, not $\kappa$), its value \emph{coinciding} with the
 $1/16$ of the Fock projection Jacobian as an Observation, not a
@@ -115,19 +115,16 @@ the volume-slot measure $\mathrm{Vol}(S^2)/4 = \pi$,
 and the spectral
 zeta values appear at even integer arguments via the Jacobi-theta
 inversion formula~\cite{paper18,paper28}.  The 3D harmonic oscillator
-discretized via Bargmann--Segal on $S^5$ is by contrast bit-exactly
-$\pi$-free in exact rational arithmetic at every finite
-$N_{\max}$~\cite{paper24}: every adjacency, every dipole transition
-amplitude, every spectral eigenvalue is a rational number or finite
-algebraic extension.  This is not a numerical accident; Paper~24
-establishes that no $\pi$ enters the discrete graph because no
-calibration step has been performed.  The harmonic oscillator's
-Bargmann transform is unitary by construction, requires no
-stereographic distortion, and produces a linear spectrum
-$\hbar\omega(N + 3/2)$ with no transcendental coefficient anywhere.
+discretized via Bargmann--Segal on $S^5$ is bit-exactly $\pi$-free in
+exact rational arithmetic at every finite $N_{\max}$~\cite{paper24}:\
+every adjacency, every dipole transition amplitude, every spectral
+eigenvalue is a rational number or finite algebraic extension.  So is
+the $S^3$ label set.  Above that level the oscillator meets $\pi$ the
+same two ways:\ the $\pi^{-3}$ of the Gaussian Bargmann measure, and
+$\pi^2$ in its spectral zeta values at even argument (Paper~24).
 
 These two observations --- universal angular sparsity and
-potential-specific transcendental content --- point at a structural
+potential-specific spectra and projections --- point at a structural
 decomposition of the GeoVac framework that, once stated explicitly,
 clarifies what the framework does and does not transfer across
 physical systems.  The decomposition is the standard separation of a
@@ -137,7 +134,7 @@ Connes~\cite{connes_book1994} and the graph-spectral-triple framework
 of Marcolli and van Suijlekom~\cite{marcolli_vs2014}.  In this
 language, angular sparsity belongs to $\mathcal{A}$ (it is a
 selection rule on which products of basis functions are nonzero,
-independent of any operator); rigidity, calibration $\pi$, and the
+independent of any operator); rigidity, the projection, and the
 particular spectrum belong to $D$ (they encode the choice of
 potential and projection).
 
@@ -162,15 +159,14 @@ theorem as the canonical content of the universal sector.
 Section~\ref{sec:specific} reviews the two known potential-specific
 rigidity theorems (Fock and Bargmann--Segal) and shows that they sit
 on opposite sides of an operator-order divide.
-Section~\ref{sec:transcendental} traces the calibration-$\pi$
-asymmetry to the operator-order distinction and the projection type
-(nonlinear vs.\ linear-affine).
+Section~\ref{sec:transcendental} records where $\pi$ enters on each
+side and why the operator-order divide does not separate them.
 Section~\ref{sec:five-layers} reports the Sprint~5 result that the
-Coulomb/HO asymmetry has two standing independent discriminators
-(within the catalogue of Paper~24~\cite{paper24}, seven layers
-catalogued, six standing;\ a third discriminator reported here
-originally, the spectrum-computing role of $L_0$, is withdrawn as of
-2026-09-25), and gives
+Coulomb/HO asymmetry has one standing discriminator of the three
+reported here (within the catalogue of Paper~24~\cite{paper24}, seven
+layers catalogued, five standing;\ the spectrum-computing role of
+$L_0$ and calibration $\pi$ are withdrawn, 2026-09-25 and
+2026-10-19), and gives
 the predictive checklist that follows.
 Section~\ref{sec:implications} states what features of GeoVac
 transfer to non-Coulomb systems for free and what does not.
@@ -525,8 +521,8 @@ Geometry & Riemannian & Complex (Hardy) \\
 Symmetry & $\mathrm{SO}(4)$ & $\mathrm{SU}(3)$ \\
 Operator & 2nd-order Laplacian & 1st-order Euler \\
 Spectrum & $-1/n^2$ (quadratic) & $N + 3/2$ (linear) \\
-Projection & $p_0 = \sqrt{-2E}$ (nonlinear) & linear-affine \\
-Calibration & $p_0$ energy shell ($\pi$-laden);\ $\kappa$ matched, rational & $\pi$-free \\
+Projection & $p_0 = \sqrt{-2E}$ (nonlinear;\ linear at fixed $p_0$) & linear-affine \\
+Where $\pi$ enters & measure, spectral sums;\ $\kappa$ matched, rational & measure, spectral sums \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -557,15 +553,15 @@ $K = \pi(B + F - \Delta)$~\cite{paper2_alpha} --- is bound to one
 specific central potential and does not transfer.
 
 %=================================================================
-\section{The Transcendental Asymmetry}
+\section{Where $\pi$ Enters}
 \label{sec:transcendental}
 %=================================================================
 
-The two rigidity theorems differ in more than the choice of sphere.
-Coulomb is honestly $\pi$-laden at every level above the bare graph;
-the harmonic oscillator is bit-exactly $\pi$-free at every level.
-This asymmetry is not an accident of two examples; it traces directly
-to the operator-order divide in Table~\ref{tab:rigidity_dual}.
+The two rigidity theorems differ in more than the choice of sphere,
+but not in where $\pi$ enters.  Both label sets are $\pi$-free, and
+above them $\pi$ enters both sides in the same two ways, through a
+measure and through spectral sums.  The operator-order divide of
+Table~\ref{tab:rigidity_dual} does not separate them.
 
 \subsection{Operator order and projection type}
 
@@ -584,12 +580,8 @@ on $S^3$.  This projection is \emph{nonlinear} in the eigenvalue:
   = p_0(n) \cdot n,
 \]
 and the inverse relation $n \mapsto E_n$ involves an inverse square
-root.  The calibration step from continuum eigenvalue to physical energy
-introduces a factor that traces to the Riemannian volume of $S^3$
-(via the Lichnerowicz constant on $S^3$ and the volume-slot measure
-$\mathrm{Vol}(S^2)/4 = \pi$); this calibration $\pi$ enters the
-energy mapping, not the kinetic constant: $\kappa = -1/16$ is itself
-$\pi$-free, coinciding with the geometric $1/16$ as an
+root, and no $\pi$.  The matched kinetic constant $\kappa = -1/16$ is
+also $\pi$-free, coinciding with the geometric $1/16$ as an
 Observation~\cite{paper7,paper24}.
 
 The harmonic oscillator construction uses the first-order Euler
@@ -601,39 +593,30 @@ in the eigenvalue:
   E_N = \hbar\omega(N + 3/2),
 \]
 and the inverse relation $N \mapsto E_N$ involves no square roots,
-no rescalings, and no Riemannian volume factors.  The calibration
-step requires no $\pi$ because no Riemannian volume is integrated
-to extract the physical scale.  The single $\pi$ in the
-Bargmann--Segal ecosystem is the Gaussian normalization $\pi^{-3}$
-of the continuous Bargmann measure, which the discrete graph never
-invokes.
+no rescalings, and no Riemannian volume factors.  The only $\pi$ in
+the Bargmann--Segal construction is the Gaussian normalization
+$\pi^{-3}$ of the continuous Bargmann measure, which the discrete
+graph never invokes.
 
-\subsection{The general structural rule}
+The projection type depends on which number is held fixed.  At fixed
+$p_0$ the Coulomb Sturmians have charges $Z_n = n\,p_0$, linear in the
+label with one universal constant;\ in the Kustaanheimo--Stiefel frame
+they are the constrained states of a four-dimensional oscillator, and
+the lift costs one fibre volume, $\pi/4$, which cancels in every ratio
+(Paper~24~\cite{paper24}).
 
-The asymmetry generalizes.  The presence or absence of calibration
-$\pi$ in a sphere-quotient discretization correlates with the
-operator order and projection type as follows:
+\subsection{Spectral sums carry $\pi$ on both sides}
 
-\begin{description}
-\item[Second-order Riemannian, nonlinear projection.]  Calibration
-  $\pi$ \emph{is} structurally forced.  The projection step
-  integrates against a Riemannian volume form
-  $d\mathrm{Vol}_M = \sqrt{|g|}\, d^n x$, which contributes
-  $\mathrm{Vol}(M)$ to overlap normalizations and $\pi$ to spectral
-  determinants via the Jacobi-theta inversion formula~\cite{paper28}.
-  Even-power $\pi^{2k}$ enters via spectral zeta values
-  $\zeta_R(2k)$, which are rational multiples of $\pi^{2k}$.
-\item[First-order complex, linear-affine projection.]  Calibration
-  $\pi$ is \emph{not} forced.  The projection is unitary and the
-  spectrum is exact-linear in the holomorphic degree; no Riemannian
-  volume is integrated and no square roots are taken.  Discrete
-  graph quantities are expressible as exact rationals or finite
-  algebraic extensions of $\mathbb{Q}$~\cite{paper24}.
-\end{description}
-
-This is the operator-order axis of the Paper~18 transcendental
-taxonomy~\cite{paper18}.  The QED-on-$S^3$ work
-(Paper~28~\cite{paper28}) confirmed it via the T9 theorem: the
+Even powers $\pi^{2k}$ enter through spectral zeta values, through
+$\zeta_R(2k)$, a rational multiple of $\pi^{2k}$, and this holds on
+both sides.
+Paper~24~\cite{paper24} gives the oscillator ladders in closed form:\
+with $g_N = (N+1)(N+2)/2$ the energy ladder
+$\sum_N g_N (N + \tfrac32)^{-4}$ is $\pi^2/4 - \pi^4/48$, beside the
+$S^3$ Casimir ladder's $\pi^2/12 + 1/16$ at $s = 2$.  What the operator
+order governs on $S^3$ is which zeta values appear, the operator-order
+axis of the Paper~18 taxonomy~\cite{paper18}:\ the QED-on-$S^3$ work
+(Paper~28~\cite{paper28}) shows, via the T9 theorem, that the
 spectral zeta function of the squared Dirac operator $D^2$ is a
 two-term polynomial in $\pi^2$ with rational coefficients at every
 integer $s$ (operator order 2 $\to$ $\pi^{\mathrm{even}}$).  The
@@ -641,18 +624,16 @@ parity discriminant theorem of Paper~28 confirms the dual: odd-order
 operators produce odd-zeta content $\zeta_R(3), \zeta_R(5), \ldots$
 via half-integer Hurwitz reduction.
 
-\subsection{Where calibration $\pi$ does and does not appear}
+\subsection{Where $\pi$ does and does not appear}
 
-The structural rule predicts which framework results carry $\pi$ and
-which do not.  We tabulate examples in
+We tabulate which framework results carry $\pi$ in
 Table~\ref{tab:pi_distribution}.
 
 \begin{table}[h]
-\caption{Where calibration $\pi$ appears in GeoVac results.  Items
-above the divide depend on second-order Riemannian operators with
-nonlinear projections; items below depend on first-order complex
-operators with linear projections.  Universal-sector results (angular
-sparsity, $jj$-coupled selection rules) are $\pi$-free regardless,
+\caption{Where $\pi$ appears in GeoVac results.  On both
+potential-specific sides the label-level data are $\pi$-free and $\pi$
+enters through measures and spectral sums.  Universal-sector results
+(angular sparsity, $jj$-coupled selection rules) are $\pi$-free,
 because they involve no projection.}
 \label{tab:pi_distribution}
 \begin{ruledtabular}
@@ -664,16 +645,19 @@ Angular sparsity~\cite{paper22} & no \\
 Composed Pauli scaling~\cite{paper14} & no \\
 Wigner $3j$ algebra & no \\
 \hline
-\multicolumn{2}{l}{\emph{Coulomb-specific (2nd-order, nonlinear proj.):}} \\
+\multicolumn{2}{l}{\emph{Coulomb ($S^3$):}} \\
+Label set $(n,l,m)$, Casimir $n^2 - 1$~\cite{paper7} & no \\
 $\kappa = -1/16$~\cite{paper7} & no ($-1/16$ rational; $\pi$ enters at the energy map) \\
 Spectral zeta $\zeta_{D^2}(s)$~\cite{paper28} & yes ($\pi^{2k}$) \\
 Volume-slot measure $\mathrm{Vol}(S^2)/4$~\cite{paper2_alpha} & yes \\
 $\alpha$-combination Observation $K$~\cite{paper2_alpha} & yes \\
 \hline
-\multicolumn{2}{l}{\emph{HO-specific (1st-order, linear proj.):}} \\
+\multicolumn{2}{l}{\emph{HO ($S^5$ Hardy):}} \\
 Bargmann--Segal graph adjacency~\cite{paper24} & no \\
 HO spectrum $\hbar\omega(N + 3/2)$ & no \\
 Bargmann transition amplitudes & no \\
+Bargmann measure $\pi^{-3}$~\cite{paper24} & yes (never used by the graph) \\
+Oscillator spectral zeta at even $s$~\cite{paper24} & yes ($\pi^{2k}$) \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -681,14 +665,8 @@ Bargmann transition amplitudes & no \\
 \medskip\noindent\textbf{Implication for nuclear extensions.}
 Paper~23's nuclear shell model qubit Hamiltonians use the harmonic
 oscillator basis with the Minnesota nucleon--nucleon
-potential~\cite{paper23}.  By the structural rule, these Hamiltonians
-should be $\pi$-free in the angular and basis structure (HO is the
-1st-order side); calibration $\pi$ enters only if the projection step
-to physical energies invokes a Riemannian volume.  Paper~23's
-construction works directly in the HO basis without a stereographic
-projection, so the prediction is that the nuclear qubit Hamiltonians
-are $\pi$-free.  Inspection of Paper~23 confirms this: every
-coefficient is a rational combination of Minnesota Gaussians,
+potential~\cite{paper23}.  Paper~23's construction works directly in the HO basis without a
+stereographic projection:\ every coefficient is a rational combination of Minnesota Gaussians,
 Moshinsky--Talmi brackets, and HO matrix elements; no transcendental
 coefficient appears.
 
@@ -701,12 +679,13 @@ The Sprint~5 investigation~\cite{paper25} of $S^5$ gauge structure
 sharpened the Coulomb/HO asymmetry from two layers
 (spectrum-computing and calibration $\pi$) to three discriminators as
 originally reported, the third being Wilson gauge with natural matter
-coupling.  The spectrum-computing layer is withdrawn (2026-09-25, Layer~1
-below), so two standing discriminators remain.  We summarize the
+coupling.  The spectrum-computing layer (2026-09-25, Layer~1 below) and
+the calibration-$\pi$ layer (2026-10-19, Layer~2) are withdrawn, so one
+standing discriminator remains.  We summarize the
 potential-specific layers here as the predictive checklist for
 extending the framework to any new central potential (the full
 asymmetry is catalogued in Paper~24~\cite{paper24}:\ seven layers
-catalogued, six standing).
+catalogued, five standing).
 
 \subsection{The structural layers}
 
@@ -725,9 +704,14 @@ catalogued, six standing).
   and $L_0$ encodes \emph{dipole transition amplitudes} --- the
   spectrum is diagonal on the labels and $L_0$ is spectrally inert.
   This is therefore not an asymmetry (Paper~24).
-\item[Layer 2: Calibration $\pi$.]  Coulomb requires it (yes,
-  Section~\ref{sec:transcendental}); HO does not (no, by Paper~24
-  $\pi$-free certificate).  This is the transcendental layer.
+\item[Layer 2: Calibration $\pi$ (withdrawn 2026-10-19).]  This layer
+  was catalogued on the premise that the Coulomb side requires
+  calibration $\pi$ and the HO side does not.  Both label sets are
+  $\pi$-free, and $\pi$ enters both sides through a measure and through
+  spectral sums at even argument;\ the projection type behind the
+  premise depends on which number is held fixed
+  (Section~\ref{sec:transcendental};\ Paper~24).  This is therefore not
+  an asymmetry.
 \item[Layer 3: Wilson gauge with natural matter coupling.]  The
   Sprint~5 result~\cite{paper25} on $S^5$ gauge structure showed
   that the abelian U(1) Wilson--Hodge structure transfers verbatim
@@ -752,10 +736,10 @@ catalogued, six standing).
 \begin{table}[h]
 \caption{Coulomb/HO partition by structural layer.  Rows~1--3 are the
 discriminators reported here (Sprint~5 sharpening~\cite{paper25});
-row~1 is withdrawn (2026-09-25), so rows~2--3 are the two standing
-discriminators.  Rows~4--5 are further potential-specific layers from
+rows~1 and~2 are withdrawn (2026-09-25, 2026-10-19), so row~3 is the
+one standing discriminator.  Rows~4--5 are further potential-specific layers from
 Papers~24 and~51~\cite{paper24,paper51}, part of the asymmetry
-catalogued in Paper~24~\cite{paper24} (seven catalogued, six standing).
+catalogued in Paper~24~\cite{paper24} (seven catalogued, five standing).
 $\checkmark$~means the feature is present; ``--'' means it is absent or
 not natural.}
 \label{tab:five_layers}
@@ -764,7 +748,7 @@ not natural.}
 Feature & Coulomb $S^3$ & HO $S^5$ \\
 \hline
 $L_0$ computes spectrum (withdrawn 2026-09-25) & -- & -- \\
-Calibration $\pi$ & $\checkmark$ & -- \\
+$\pi$ in measures and spectral sums (withdrawn as a discriminator) & $\checkmark$ & $\checkmark$ \\
 Wilson gauge with natural matter coupling & $\checkmark$ (SU(2), argued) & -- \\
 Posited-wedge-generator Pythagorean (Paper~24~\S V) & $\checkmark$ & -- (argued) \\
 Gravity termination (Paper~51~\cite{paper51} G4-5a) & $\checkmark$ (pure Einstein) & -- \\
@@ -777,8 +761,8 @@ Block-diagonal ERI & $\checkmark$ & $\checkmark$ \\
 \end{table}
 
 The features above the divide in Table~\ref{tab:five_layers} are the
-potential-specific layers --- the two standing discriminators
-established here (rows~2--3; row~1 is withdrawn) together with two further layers
+potential-specific layers --- the one standing discriminator
+established here (row~3; rows~1 and~2 are withdrawn) together with two further layers
 catalogued in Papers~24 and~51; the features below are the
 universal-sector features that hold on either sphere.
 
@@ -787,8 +771,8 @@ universal-sector features that hold on either sphere.
 The third layer is structurally distinct from the first two.  Layer~1
 (spectrum-computing) is a question about \emph{what $L_0$ does}; it
 is determined by the projection rule (Fock vs.\ Bargmann--Segal).
-Layer~2 (calibration $\pi$) is a question about \emph{which scalars
-appear}; it is determined by the operator order and projection type
+Layer~2 (calibration $\pi$) was a question about \emph{which scalars
+appear};\ its answer is the same on both sides
 (Section~\ref{sec:transcendental}).  Layer~3 (Wilson gauge with
 natural matter coupling) is a question about \emph{whether the matter
 shares the representation of the link group}; it is determined by the
@@ -799,17 +783,18 @@ order.  Three structural questions were catalogued;\ none reduces to
 either of the others.  (Layer~1 is withdrawn as of 2026-09-25:\ its
 answer is the same on both spheres, since $L_0$ on $S^3$ does not
 converge to the $S^3$ Laplacian and is spectrally inert there too;\
-two standing discriminators remain, Layers~2 and~3.)
+Layer~2 is withdrawn as of 2026-10-19 for the same reason;\ one
+standing discriminator remains, Layer~3.)
 
 \medskip\noindent\textbf{Predictive consequence.}  For any candidate
 new central potential, the layer table provides a checklist
 for what features of the GeoVac framework can be expected to
 transfer.  A new potential matching the Coulomb pattern (e.g., a
 hidden $\mathrm{SO}(4)$-like symmetry, a stereographic-style
-projection, integer spectrum) inherits both standing Coulomb-specific
-discriminators.  A potential matching the HO pattern (e.g., a hidden
+projection, integer spectrum) inherits the standing Coulomb-specific
+discriminator.  A potential matching the HO pattern (e.g., a hidden
 SU($n$)-like symmetry, a complex-analytic projection, linear
-spectrum) inherits both HO-side counterparts.  Any other potential
+spectrum) inherits its HO-side counterpart.  Any other potential
 inherits the universal sector but neither set of specific layers,
 and must be analyzed system by system.
 
@@ -867,7 +852,7 @@ re-derived for the new system:
   invariants~\cite{paper18,paper28}.  The Coulomb spectral zeta
   function lives in the $\pi$-polynomial ring (Paper~28 T9
   theorem); other systems may live in different rings (e.g., the HO
-  Bargmann--Segal lattice lives in $\mathbb{Q}$).
+  Euler ladder at $s = 4$ also carries $\zeta(3)$, Paper~24).
 \item The fine-structure-constant Observation
   $K = \pi(B + F - \Delta)$~\cite{paper2_alpha}.  This is a
   Coulomb-specific observation tied to the volume-slot measure
@@ -941,7 +926,7 @@ therefore three-tier rather than two-tier:
   shifts, flow-tier subtractions.  Universal across central
   potentials, but parametric in a scalar.
 \item \textbf{Potential-specific sector} (substantive $D$):
-  rigidity theorems, calibration $\pi$, transcendental content,
+  rigidity theorems, the projection, transcendental content,
   the $\alpha$-combination Observation.  Per-system rederivation required.
 \end{enumerate}
 
@@ -1508,20 +1493,20 @@ new system.
 
 The two known potential-specific rigidity theorems (Fock for
 Coulomb, Bargmann--Segal for HO) sit on opposite sides of an
-operator-order divide.  Coulomb is a second-order Riemannian
-construction with a nonlinear projection that introduces calibration
-$\pi$; HO is a first-order complex construction with a linear-affine
-projection that is bit-exactly $\pi$-free.  The Sprint~5 sharpening
-leaves two standing discriminators:\ calibration $\pi$, which
-stratifies along the operator-order divide, and Wilson gauge with
-natural matter coupling, which is decided by representation theory
+operator-order divide:\ Coulomb is a second-order Riemannian
+construction, HO a first-order complex one.  The divide does not decide
+where $\pi$ enters;\ both sides carry it in a measure and in spectral
+sums (Paper~24).  The Sprint~5 sharpening leaves one standing
+discriminator, Wilson gauge with natural matter coupling, which is
+decided by representation theory
 (on $S^3$ matter and links share a representation, argued but not yet
 constructed;\ on $S^5$ matter coupling needs a Clebsch--Gordan
-intertwiner).  A third, the spectrum-computing role of $L_0$, is [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
+intertwiner).  Calibration $\pi$ is withdrawn (2026-10-19), and the
+spectrum-computing role of $L_0$ is [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
 withdrawn (2026-09-25:\ the $S^3$ graph Laplacian does not converge to
 the $S^3$ Laplacian and is spectrally inert, as on $S^5$).
 Paper~24~\cite{paper24} catalogues the full asymmetry as seven
-structural layers, six standing.
+structural layers, five standing.
 
 The framing offered by this paper has no new theoretical content; it
 is a structural reorganization of existing results in

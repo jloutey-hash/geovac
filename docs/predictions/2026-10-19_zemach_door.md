@@ -84,3 +84,48 @@ door with a price list, like J14, rather than a wall. Changing its status is a /
 - Textbook in substance (Zemach; Bohr and Weisskopf; Friar and Payne). The contribution, if any, is the
   accounting on the door, and the tie between the hyperfine logarithm and J14's quantum defect.
 - Non-relativistic; no recoil, no QED, no orbital (Bohr-Weisskopf) currents; model profiles.
+
+## Result (2026-10-19, same session, after commit be16fccd)
+
+Script `debug/zemach_door.py`; data `debug/data/zemach_door.json`. ZM1, ZM2 and ZM3 hold. ZM4 fails in
+part: an unregistered x^3 ln x term is present.
+
+Code defect fixed before scoring: the first interior series used r^2/R^2 for the r^2 term of 2V
+instead of r^2/R^3. A smoke test caught it: the quantum defect came out near -(2/3) x^3 instead of
+J14's -(2/5) x^2. After the fix the defect at x = 1e-3 is -3.99491399e-7, matching J14's derived series
+-(2/5) x^2 + (32/63) x^3 to the printed digits; 40 and 50 digits agree to all printed figures.
+
+- **Zemach moments (sympy, exact):** 3/4, 36/35, 6/5 for point, ball and shell magnetization with a
+  uniform charge, as registered.
+- **ZM2 (exact, n = 1..6, through x^6):** no logarithm at any order; the x coefficient is -3/2 and the x^2
+  coefficient 1 + 1/(5 n^2) for every n; each coefficient c_k(n) is a polynomial in 1/n^2 of degree
+  floor(k/2), fitted on the first floor(k/2) + 1 values of n and reproducing all six.
+- **ZM1 (40 digits, x = 1e-5 .. 3e-3, 12 points, n = 1, 2, 3):** the x coefficient is -1.5, -2.0571428571,
+  -2.4 for point, ball and shell, relative error 1e-10 or better with the registered columns, the same
+  for every n (gate 1e-4).
+- **ZM3:** the x^2 ln x coefficient is 0.800000 for all nine cases (three profiles, three n), relative
+  error 4e-6 or better with the registered columns and 5e-7 with x^4 ln x added (gate 2e-2). A fit with
+  no logarithm leaves a residual 1.8e-8 against 2e-15. So the hyperfine logarithm is -2 delta_0, set by
+  the charge distribution alone, the same for every magnetization profile and every n.
+- **ZM4, failed in part:** the fit also requires x^3 ln x: dropping that column raises the residual from
+  2e-15 to 6e-12. Its coefficient is the same for every n and depends on the profile; it equals
+  (4/5) times the Zemach coefficient plus -1.0147, the last the same for all three profiles to 2e-5
+  between fits of one column set and to 1e-2 across column sets, so not identified. The registration
+  said that only the x^2 ln x term and its companion constant were non-rational, so it is falsified.
+  The companion's class is consistent with weight one: after removing ZM2's magnetization part, the
+  x^2 coefficient is (4/5) [psi(n) - ln n - 1/n] plus a constant that depends on the profile and not on
+  n (residual spread 1e-6 over n = 1, 2, 3). That form is post-hoc: read off n = 1, 2, written down
+  before the n = 3 run, then confirmed by it (prediction 0.8544435, measured 0.85444352). The profile
+  constants (1.61973, 1.60095, 1.626 for point, ball, shell) are not identified.
+
+What this says, in one line: the magnetization door is a price list, like J14. Two distributions
+compose at leading order through one convolution moment, the Zemach radius, the same for every level.
+The logarithm comes only from the charge distribution, with coefficient -2 delta_0 from J14's quantum
+defect. A point charge brings no logarithm at any order. The n-dependence enters at second order in
+weight-one form. Predicted verdict FREE (the distribution consumed) with a forced shape; whether the
+hyperfine instance HF-4 leaves the multi-focal wall is a /walls question for the PI.
+
+**Disposition (2026-10-19, PI-delegated: "You choose").** HF-4 stays an instance of the multi-focal
+composition wall, priced like J14 (walls register note of this date; Paper 57 `sec:unity`). Home: Paper 23
+`sec:finite_nucleus`, "A finite magnetization". Guard `tests/test_paper23_hyperfine_door.py`, fire-tested 8/8.
+Seam J16 (C), atlas door 26.

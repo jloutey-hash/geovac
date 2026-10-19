@@ -2093,7 +2093,7 @@ spectral-action expansion.
 % ===================================================================
 
 Paper~31~\cite{paper31} formalized a layered asymmetry (Paper~24
-\S 5 catalogues seven layers, six standing;\ the table below
+\S 5 catalogues seven layers, five standing;\ the table below
 tabulates structural rows, including the spectrum-computing role of
 $L_0$, withdrawn and marked; the
 CM Hodge structure is Paper~24 \S 5) between the
@@ -2117,9 +2117,9 @@ Projection order &
 Spectrum &
   Quadratic $n^2 - 1$ (scalar LB)$^{*}$ &
   Linear $E_N = N + 3/2$ \\
-Calibration constant &
-  $\pi$ (volume slot $\mathrm{Vol}(S^2)/4$) &
-  None ($\pi$-free in exact arithmetic) \\
+Where $\pi$ enters (withdrawn as a layer) &
+  measure (volume slot $\mathrm{Vol}(S^2)/4$), spectral sums &
+  measure ($\pi^{-3}$), spectral sums \\
 Wilson + natural matter &
   $\mathrm{SU}(2)$, matter rep $=$ link rep (argued) &
   Pure gauge only; matter needs CG \\
@@ -2144,20 +2144,24 @@ the HO case is a spectral triple of complex Euler type on the
 holomorphic Hardy space of $S^5$.  These are different objects even
 though both are ``almost-commutative'' in the broad sense.  Calibration
 $\pi$ enters in the Coulomb case through the $k = 0$ volume slot
-$\mathrm{Vol}(S^2) / 4$ in the spectral-action coefficients; it does
-not enter the HO case because the HO spectral action is built from a
-linear (first-order) operator whose heat kernel does not produce $\pi$
-at the rational level of the truncation~\cite{paper24}.
+$\mathrm{Vol}(S^2) / 4$ in the spectral-action coefficients.  It is
+not absent on the HO side:\ there $\pi$ enters through the Bargmann
+measure and through spectral sums at even argument~\cite{paper24}.
+The heat trace of the linear Euler operator,
+$\sum_N g_N e^{-tN} = (1 - e^{-t})^{-3}$ with $g_N = (N+1)(N+2)/2$,
+has rational Laurent coefficients because the functional is taken of
+the operator;\ taken of its square, as on $S^3$, it meets the same
+Gaussian integrals and $\pi$.
 
-\begin{observation}[Coulomb-specificity of $\pi$]
+\begin{observation}[Where QED's $\pi$ enters on $S^3$]
 \label{obs:pi_coulomb}
-The presence of $\pi$ in the spectral-action coefficients of QED is
-specific to the Coulomb-projected $S^3$ triple of this paper, not a
-universal feature of GeoVac-style discretizations.  The HO triple is
-$\pi$-free at the discrete level.  On this reading QED's $\pi$
-enters through the Coulomb-projection $S^3$ triple:\ through the
+The $\pi$ in the spectral-action coefficients of QED on the
+Coulomb-projected $S^3$ triple of this paper enters through the
 $k = 0$ volume slot $\mathrm{Vol}(S^2)/4$ (M1) and the spectral
-action's $\pi^{2k}$ (M2).
+action's $\pi^{2k}$ (M2).  Its presence is not specific to the
+Coulomb problem:\ both GeoVac triples are $\pi$-free at the discrete
+level, and on the HO side $\pi$ enters through a measure and through
+spectral sums (Paper~24).
 \end{observation}
 
 \begin{theorem}[G3 closure: Bertrand-rigidity category obstruction]%
@@ -2223,11 +2227,13 @@ Bertrand exhausts the potentials;\ the two rigidity theorems fix
 the projection type for each.  The category mismatch is a
 structural feature of central-force quantum mechanics, not an
 artifact of the GeoVac construction.  The asymmetry layers of
-Paper~24~\S~V (seven catalogued, six standing;\ five are listed here,
+Paper~24~\S~V (seven catalogued, five standing;\ five are listed here,
 the remaining two, including the
 CM Hodge structure, are in Paper~24~\S~V) --- spectrum-computing role of $L_0$ (\emph{withdrawn}:\
 $L_0$ does not converge to $\Delta_{S^3}$ and is
-spectrally inert on both spheres); calibration $\pi$; Wilson gauge
+spectrally inert on both spheres); calibration $\pi$ (\emph{withdrawn}:\
+$\pi$ enters both sides through a measure and through spectral sums);
+Wilson gauge
 with natural matter coupling (a representation-theoretic layer, not an
 $L_0$ one); modular-Hamiltonian Pythagorean orthogonality;
 spectral-action gravity termination --- are, the withdrawn one
@@ -3018,11 +3024,11 @@ Cor.~11.15 (closed form and witness-universality);\ Paper~42~\S 8,
 the Hilbert--Schmidt orthogonality remark (which states that the
 orthogonality does \emph{not} underlie the six-witness agreement, which
 holds by construction);\
-Paper~24~\S 5.3 Coulomb/HO asymmetry (seven catalogued, six standing; the structural
+Paper~24~\S 5.3 Coulomb/HO asymmetry (seven catalogued, five standing; the structural
 finding that the Pythagorean orthogonality is $S^3$-specific to
 the construction --- the $S^5$ Hardy sector has no clean analog,
 adding the Pythagorean orthogonality for the posited wedge generator
-as a further Coulomb/HO asymmetry layer alongside calibration $\pi$ and Wilson matter
+as a further Coulomb/HO asymmetry layer alongside Wilson matter
 coupling).
 \end{remark}
 
@@ -3253,7 +3259,7 @@ Dirac fermions on the Coulomb graph.
 \end{itemize}
 
 The two-step picture is consistent with Paper~24's Coulomb/HO
-asymmetry (seven layers catalogued, six standing, Papers~24 and~31)
+asymmetry (seven layers catalogued, five standing, Papers~24 and~31)
 and sharpens its Wilson gauge-with-natural-matter layer:\ on the
 $S^3$ Coulomb side the gauge group acts in the same
 representation as the matter, so matter--gauge coupling is
@@ -3381,10 +3387,10 @@ factors of a tensor-product Hilbert space, but the resulting
 object is a direct sum of two Wilson-YM instances rather than a
 unification.  This is the most consequential gap.  It is also the
 most directly tied to the Coulomb/HO asymmetry of
-Sec.~\ref{sec:coulomb_ho} (seven layers catalogued, six standing):\
+Sec.~\ref{sec:coulomb_ho} (seven layers catalogued, five standing):\
 the absence of cross-manifold unification is a structural symptom of
-the same asymmetry that forbids a calibration-$\pi$ analog and a
-natural Wilson matter coupling on $S^5$.
+the same asymmetry that forbids a natural Wilson matter coupling on
+$S^5$.
 Sprint~G4 scoping (Sec.~\ref{sec:g4}) sharpens this gap into G4a
 (Connes SM on $\mathcal{T}_{S^3}$ alone with
 $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$;\
@@ -3976,10 +3982,11 @@ Riemannian on a single manifold, never crossing.
 The structural reading is that G4b is the Coulomb/HO
 asymmetry of Paper~24~\S V resurfacing at the spectral-triple level.
 Paper~24~\S 5.3 records these layers of this asymmetry (seven
-catalogued, six standing, Paper~31), the standing ones all
+catalogued, five standing, Paper~31), the standing ones all
 Coulomb-specific; the first four:\ (i)~spectrum-computing role of
 $L_0$ (\emph{withdrawn}:\ $L_0$ is spectrally inert on both
-spheres);\ (ii)~calibration~$\pi$;\ (iii)~Wilson gauge with natural matter
+spheres);\ (ii)~calibration~$\pi$ (\emph{withdrawn}:\ $\pi$ enters
+both sides through a measure and through spectral sums);\ (iii)~Wilson gauge with natural matter
 coupling (argued), Sec.~\ref{sec:unified_gauge};\ and (iv)~posited wedge-generator
 Pythagorean orthogonality on the $m_j$-reflection wedge, a
 chirality-parity identity (Paper~42~\S 11.7~\cite{paper42};
@@ -3991,8 +3998,8 @@ closure (for the chosen integer-spectrum generator; signature-blind,
 so the $(3,1)$ Krein carrier adds no Lorentzian content), while the Bargmann
 $S^5$ side has none of the four ingredients (no spinor bundle on
 the $(N, 0)$ Hardy tower;\ no second-order-vs-first-order distinction
-with a separate Dirac;\ no half-integer wedge;\ no calibration $\pi$
-or natural Wilson matter coupling). The Connes tensor-product
+with a separate Dirac;\ no half-integer wedge;\ no natural Wilson
+matter coupling). The Connes tensor-product
 framework cannot bridge them as currently published.  Closing G4b is
 therefore not a sprint-scale GeoVac task;\ it requires either an
 extension of NCG to handle Riemannian--Hardy mixed tensor products,
@@ -5664,7 +5671,7 @@ sectors of distinct type in the same triple
 an observation.  \textbf{[OBSERVATION]} The Coulomb/HO asymmetry of Paper~31 is the
 statement that the GeoVac triple's continuum limit is one specific real
 odd $\mathrm{KO}$-dimension-3 triple, not a generic class
-(Observation~\ref{obs:pi_coulomb}); its true-window truncation is odd
+(Sec.~\ref{sec:coulomb_ho}); its true-window truncation is odd
 like the limit (measured, $n_{\max} \le 3$), and only the chirality-doubled model truncation is even
 (Proposition~\ref{prop:odd}).
 

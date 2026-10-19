@@ -503,6 +503,53 @@ REGISTRY = [
         },
     },
     {
+        "id": "coulomb-ho-calibration-pi-layer",
+        # The CLAIM (Paper 24 thm:asymmetry, layer (ii)): calibration pi is Coulomb-specific, tied to
+        # second-order Riemannian operators with nonlinear projections, with no analog for the HO's
+        # linear projection; Paper 31: two standing discriminators.  Withdrawn 2026-10-19 (KS lift,
+        # pre-registered be16fccd): at fixed energy the Coulomb projection is linear (Z = n p0), and the
+        # oscillator's spectral zeta values carry pi^2 at even argument as those of S^3 do.
+        "pattern": r"calibration\s*~?\s*\$?\\pi\$?\s+is\s+(?:structurally\s+)?Coulomb-specific|calibration\s+π\s+is\s+(?:structurally\s+)?Coulomb-specific|no calibration constants of any kind|Structural origin of calibration|two standing (?:independent )?discriminators|seven layers catalogued,\s+six\s+standing|seven catalogued,\s+six standing|six standing layers|seven,\s+six\s+stand|7 catalogued, 6 standing|7 layers catalogued, 6 standing|Coulomb-specificity of \$?\\pi|linear-affine projection has no such",
+        "exempt_if_nearby": withdrawal_marker("coulomb-ho-calibration-pi-layer"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 group6 synthesis",
+        "note": "Registered 2026-10-19 (PI-delegated decision).  Seven layers catalogued, five standing; Paper 31: one standing discriminator.  Evidence: tests/test_paper24_ks_lift.py; record docs/predictions/2026-10-19_ks_lift.md.  CLAUDE.md S1.6 still states the withdrawn reading and is PI-only (flagged, not listed here).",
+        "files": [
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group5_qed_gauge/paper_2_alpha.tex",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+            "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "README.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + reviewed 2026-10-19 (PM) -- abstract, intro, roadmap, tab:rigidity_dual, sec:transcendental rewritten, tab:pi_distribution, Layer 2, layer table, independence, checklist, conclusion",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + reviewed 2026-10-19 (PM) -- tab:coulomb_ho row, heat-trace paragraph, obs:pi_coulomb rescoped, layer lists and counts",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + reviewed 2026-10-19 (PM) -- Paper 24 bullet in the Dirac-sector list",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": "remediated + reviewed 2026-10-19 (PM) -- S5 pi-free sentence, operator-order discriminant sentence, layer list",
+            "papers/group5_qed_gauge/paper_30_su2_wilson.tex": "remediated + reviewed 2026-10-19 (PM) -- layer history sentence",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + reviewed 2026-10-19 (PM) -- three-tier collapse consistency sentence",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + reviewed 2026-10-19 (PM) -- unit-introduction asymmetry item",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated + reviewed 2026-10-19 (PM) -- Casimir-class sentence",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex": "remediated + reviewed 2026-10-19 (PM) -- count only",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "remediated + reviewed 2026-10-19 (PM) -- counts only",
+            "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex": "remediated + reviewed 2026-10-19 (PM) -- count and layer list",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + reviewed 2026-10-19 (PM) -- counts and the (ii) layer item",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + reviewed 2026-10-19 (PM) -- abstract (d), counts, layer-2 item, operator-order paragraph, transcendentals paragraph",
+            "README.md": "remediated + reviewed 2026-10-19 (PM) -- Paper 24 paragraph",
+        },
+    },
+    {
         "id": "p11-pi-orbital-selection-rule",
         # The CLAIM (Paper 11 Limitations, H2 paragraph): <sigma_g sigma_g|pi_+ pi_-> = 0 by azimuthal
         # symmetry, so pi orbitals cannot improve the 1Sigma_g+ ground state.  FALSE: the state
