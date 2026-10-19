@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.24] - 2026-10-18
+
+### Changed
+- **Seam F definition widened for the released axes (PI decision on the v5.20.21 debt item).** An F on a J row is relative to the release: it covers what the release leaves standing (the $m$ rule once $l$ is released across centres) and the number class the release lets in, fixed by the released integral with no calibration input. The witness is a symbolic derivation; quadrature and exact searches are checks; a measurement-only part is named in its row and sits outside the F. The J rows are not packing-reachable in P5's sense, which is why P5's agreement is quoted on the 60-entry catalogue. `docs/forced_free_seam.md` status conventions; Paper 57 `sec:forced_released`. No row changes status; counts unchanged. Noted for later: the chain, four-density and ring rows release no geometric label, so only the second half applies to them; a split label is a one-line change if wanted.
+- **J11 (seam row and Paper 57):** the correlated triangle's K3 placement at gamma = 1 no longer says "exactly" (owner Paper 59: exact factorization and map, operator checked on the function numerically); both correlated-triangle placements are stated as outside the F.
+- **Ising record IS3 (PI decision on the residual):** "drops" for n = 6 is read by the registration's own caveat as a relation in the PSLQ bases tried; c_{6,0} lands on one L-value of a single weight-6 form; no ladder rung assigned.
+- Debt file `docs/qa/v5.20.21_claim_delta.debt.md`: both items marked resolved.
+
 ## [v5.20.23] - 2026-10-18
 
 ### QA

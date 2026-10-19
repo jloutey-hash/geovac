@@ -126,7 +126,7 @@ relation of height bound/100; every relation found re-checked at full precision.
 - **IS3: CONFIRMED for the registered value cases.** c_{4,0} is not Tate (bound 1e24). PSLQ finds
   c_{4,0} = 4 pi^2 L(8.4.a.a, 2), f = eta(2 tau)^4 eta(4 tau)^4 of weight 4 and level 8, and
   c_{6,0} = 108 pi^2 L(24.6.a.a, 4), weight 6 and level 24; both to 5e-261. (The disclosed memory above placed n = 6 at level 6; the form is of level 24.) The conifold
-  attachment was not tested.
+  attachment was not tested. As the registration's caveat allows, "drops" for n = 6 means a relation in the PSLQ bases tried: c_{6,0} lands on one L-value of a single weight-6 form, a two-dimensional piece where F_6's operator has order six. No rung of the corpus ladder is assigned.
 - **Not registered, and the rule did not anticipate it: n = 8.** c_{8,0} has no Tate relation and
   no single L-value relation found (bounds 1e7 to 1e12). So "even moments drop" finds no support as a
   general rule (a bounded search, evidence and not a disproof). The organizing quantity is the size of the period matrix of the Kloosterman
