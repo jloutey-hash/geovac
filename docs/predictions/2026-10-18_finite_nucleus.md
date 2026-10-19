@@ -114,3 +114,13 @@ defect at leading order (the 1/(4 pi) of |psi(0)|^2 cancels against the 4 pi of 
 Proposed, PI decides: an atlas door and a seam J row (n released from integrality by a second
 scale), with its home in Paper 23 beside the rigidity theorem, or in Paper 34 beside the Foldy/Friar
 projection; a guard in `tests/`.
+
+## Amendment (2026-10-18, after commit bd2435d1, before any computation)
+
+Noticed while writing the computation, not registered: first-order perturbation with the J13 result
+gives tan Delta_l ~ pi mu(E) / (1 - e^(-2 pi eta)), where mu(E) is the continued leading defect, because
+the energy-normalized continuum density is the continued bound density times that factor. So FN3's
+registered leading form, Delta_l/pi = mu(E) with no factor, is expected to fail at energies where
+e^(-2 pi eta) is not small (about 4 percent at eta = 1/2), while Seaton's limit at threshold is
+unaffected (the factor tends to 1). FN3 stays as registered and is scored as registered; this note
+records the expectation before the test.
