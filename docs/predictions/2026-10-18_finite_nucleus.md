@@ -175,3 +175,24 @@ the continuum adds only J13's factor. The interior is the electron's oscillator 
 Coulomb exterior at the nuclear radius; that formal match with Paper 24 is recorded, not read.
 
 Home (2026-10-18, PI-approved): Paper 23 `sec:finite_nucleus`, beside the rigidity theorem, with a pointer from Paper 34 `sec:proj_charge_density`; seam row J14 (C); atlas door 24 (FREE for the radius); guard `tests/test_paper23_finite_nucleus_door.py`, written as its own step and fire-tested 12/12. While fire-testing, the guard's node check was found not to sample the interior (its first grid point lay outside the nucleus); a point inside was added, after which the sign-matching plant fires.
+
+## Owed item: the measured coefficients derived (2026-10-18, after v5.20.26)
+
+Script `debug/finite_nucleus_threshold_series.py`. Seaton's limit lets the s-wave defect be computed at
+E = 0: inside, with s = r/R, the radial equation is u'' = -x(3 - s^2)u, a power series in x = ZR;
+outside, the energy-normalized zero-energy pair is sqrt(2r) J_1(sqrt(8r)) and -sqrt(2r) Y_1(sqrt(8r))
+(Wronskian checked). Matching at r = R gives, exactly to the order kept,
+
+  mu = -(2/5) x^2 + (32/63) x^3 - x^4 [ (4/25) ln(2x) + (8/25) gamma_E + 28477/225225 ]
+       + x^5 [ (128/315) ln(2x) + (256/315) gamma_E - 30486592/57432375 ] + O(x^6 ln x).
+
+- The measured -80/63 is derived: (32/63)/(-2/5). The measured 2/5 on x^2 ln x is derived: (4/25)/(2/5).
+- The x^3 term is the Friar term (1/3) Z^3 <r^3>_(2): for the uniform sphere the self-convolution
+  moment is exactly 32 R^3/21, computed symbolically from the overlap volume of two spheres. So the
+  next order consumes a second, distinct number of the nucleus, not a power of R.
+- New: at fourth order the weight-one constants gamma_E and ln 2 enter, the same class as the
+  two-centre seed set of row J1, and still no pi. The x^4 term has the form
+  -delta_0^2 [ln(2x) + 2 gamma_E] + rational, delta_0 = -(2/5) x^2.
+- Check against the exact matching: at x = 1e-2, 3.3e-3, 1e-3 the threshold defect minus the series is
+  1.6e-12, 2.1e-15, 1.3e-18, that is about 1.3 to 1.6 times x^6, slowly drifting as an x^6 ln x term
+  would.
