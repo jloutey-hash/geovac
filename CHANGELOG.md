@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.20.28] - 2026-10-19
+
+### Added
+- **A finite nucleus in the Dirac equation, near and past Z alpha = 1 (pre-registered RD1-RD5, aef8ba6d).** Uniform sphere, exact interior series matched to the exterior. RD2 confirmed: the 1s shift scales as R^(2 gamma) (local exponent within 6e-5 of 2 gamma at Z alpha = 0.9). RD3 missed on its registered threshold: at Z alpha = 1 the local exponent falls 0.22 -> 0.067 over R = 1e-3..1e-9, so no power law holds, but it does not reach the registered 0.05. RD4 confirmed: Z_cr = 169.71 for R = 1.2 (2.5 Z)^(1/3) fm. RD5 confirmed: at Z alpha = 1.2 successive diving radii are in ratio 114.377, 113.995, 113.992, 113.992 -> e^(pi/sigma) = 113.992. Past Z alpha = 1 the radius is compulsory, entering only through ln R modulo pi/sigma. Home: Paper 23 `sec:finite_nucleus` (new paragraph; abstract and conclusion clauses; Pieper-Greiner 1969 and Zel'dovich-Popov 1972 credited, both checked against their primary listings). Seam J14 and atlas door 24 extended; door 24 owes nothing.
+- **Guard** `tests/test_paper23_relativistic_nucleus.py` (3 fast), written as its own step on an independent float64 scipy route that agrees with the mpmath script to every printed digit; fire-tested 10/10.
+
+### Changed
+- `debug/relativistic_nucleus_door.py` runs in stages. Code defects fixed before scoring: the ratio matching function had a pole, replaced by the Wronskian form; a bracketing search at Z alpha = 1; mpmath's root finders stalled on RD4, replaced by a capped Illinois step; RD5 integrates one grid cell at a time after the first full run was stopped by the operating system for low memory.
+
 ## [v5.20.27] - 2026-10-18
 
 ### Added

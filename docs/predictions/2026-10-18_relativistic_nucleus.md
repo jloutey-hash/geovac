@@ -70,3 +70,72 @@ rather than corrective.
   fixed as above. Real supercritical physics (pair production, the charged vacuum) is not touched.
 - The physics is textbook (references above). The contribution, if any, is the accounting on the door:
   what the release keeps, and how the consumed number's role changes at Z alpha = 1.
+
+## Result (2026-10-19)
+
+Script `debug/relativistic_nucleus_door.py`, log `debug/data/relativistic_nucleus_door.log`. The run
+was stopped by the operating system for low memory after RD3 finished, before RD4. RD2 and RD3 are
+read from that log. RD4 and RD5 were then run as separate stages (logs `_rd4.log`, `_rd5.log`); RD5
+now integrates the exterior one grid cell at a time, so its memory stays bounded.
+
+**Code defects found and fixed before the scored run (not physics):**
+1. The first matching function was the ratio of interior and exterior F/G. It has a narrow pole in W,
+   and the secant step jumped past c^2, where the square root turns complex. Replaced by the
+   Wronskian form, which is smooth in W, R and Z, and a secant start at the point-nucleus level.
+2. At Z alpha = 1 the shift is not small, so a start at the point level (W = 0) fails the same way.
+   Added a bracketing search that walks down from W = 0.6 c^2 to the first sign change.
+3. RD4: mpmath's anderson and illinois root finders both stalled in the bracket. Replaced by a
+   hand-written Illinois step with a step cap and a progress print.
+
+**RD2: CONFIRMED.** Local slopes d ln(Delta W)/d ln R, smallest R first:
+
+| Z alpha | 2 gamma | slopes (R = 1e-8..1e-5) | miss at smallest R |
+|:--|:--|:--|:--|
+| 0.3 | 1.907878 | 1.907876, 1.907857, 1.907665 | 2e-6 |
+| 0.6 | 1.600000 | 1.599995, 1.599947, 1.599471 | 5e-6 |
+| 0.9 | 0.871780 | 0.871717, 0.871360, 0.869146 | 6e-5 |
+
+All inside 1e-3. The clause "at Z = 1 it reduces to the non-relativistic law" was not computed in
+this run; it is unscored.
+
+**RD1:** holds by construction (the potential is round, so kappa, m_j and parity label the levels).
+The p 1/2 shift at Z alpha = 0.6 was computed but only written to the JSON, which the stop prevented.
+
+**RD3: MISSED on the registered threshold.** W/c^2 at Z alpha = 1:
+
+| R | 1e-3 | 1e-4 | 1e-5 | 1e-6 | 1e-7 | 1e-8 | 1e-9 |
+|:--|:--|:--|:--|:--|:--|:--|:--|
+| W/c^2 | 0.34484 | 0.20752 | 0.14377 | 0.10900 | 0.08751 | 0.07300 | 0.06259 |
+
+Local slopes per decade: 0.221, 0.159, 0.120, 0.095, 0.079, 0.067. The slope keeps falling, so no
+power law holds over the range and falsifier 2 does not fire. But the registered number was "below
+0.05" by R = 1e-9, and the last slope is 0.067. Scored as missed. The unregistered guess
+W ~ 1/ln(1/R) also fails: W ln(1/R)/c^2 runs 2.38, 1.91, 1.66, 1.51, 1.41, 1.34, 1.30, still falling.
+W goes to zero slower than any power but faster than 1/ln(1/R) over this range.
+
+**RD4: CONFIRMED.** With R = 1.2 (2.5 Z)^(1/3) fm, the matching function at W = -c^2 changes sign
+once between Z = 160 and 184, between 168 and 170. The root is Z_cr = 169.7065, residual 8e-26, at
+R = 1.704e-4 bohr (9.02 fm). Inside [165, 180]. Consistent with the literature values near 170 for
+similar radius laws.
+
+**RD5: CONFIRMED.** At Z alpha = 1.2, sigma = 0.663325, e^(pi/sigma) = 113.9921. The radii at which
+successive s 1/2 levels reach W = -c^2:
+
+| level | 1 | 2 | 3 | 4 | 5 |
+|:--|:--|:--|:--|:--|:--|
+| R_k (bohr) | 1.04464e-4 | 9.13329e-7 | 8.01197e-9 | 7.02853e-11 | 6.16581e-13 |
+
+Ratios R_k/R_(k+1): 114.377, 113.995, 113.992, 113.992. Within 0.34 percent at the first ratio and
+3e-5 by the second, against the registered 2 percent by the third.
+
+Cross-check between the stages: at Z = 164.4 the deepest level dives at R = 1.04e-4 bohr, below the
+radius law's 1.69e-4 bohr at that charge, where RD4's scan has not yet dived (D = +0.16). Consistent.
+
+**Score: RD1 by construction, RD2 confirmed, RD3 missed on its threshold, RD4 and RD5 confirmed.**
+
+**Price, read off the result.** Below Z alpha = 1 the radius enters as R^(2 gamma). At Z alpha = 1
+it enters more slowly than any power. Past it, the radius fixes the levels only through ln R modulo
+pi/sigma: the continuous scale invariance of the point problem is broken to a discrete one, with
+period e^(pi/sigma), by one consumed number. The radius is compulsory, not corrective. Verdict as
+predicted: FREE. The transcendental e^(pi/sigma) is a function of the consumed alpha through sigma,
+with pi from the log-periodic phase; it is not on the skeleton side.
