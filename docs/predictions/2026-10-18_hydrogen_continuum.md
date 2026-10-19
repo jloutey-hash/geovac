@@ -120,3 +120,50 @@ kind gets the curve-fit audit before it is written anywhere.
 
 Proposed, PI decides: an atlas door and a seam J row (n released at positive energy), with its home
 in Paper 7 beside Fock's projection, and a guard in `tests/`.
+
+## Result (2026-10-18, same session, after commit fb4fdd85)
+
+Script `debug/hydrogen_continuum_door.py`; data `debug/data/hydrogen_continuum_door.json`. All four
+registered predictions hold.
+
+- **HC1: CONFIRMED [SYMBOLIC].** E_n continues to k^2/2; n^2 - 1 continues to -(1 + rho^2); the S^3
+  zonal function satisfies its eigen-equation with n^2 - 1, the H^3 zonal function sin(rho chi)/sinh
+  chi satisfies its own with 1 + rho^2, and the continued S^3 function is exactly i times the H^3
+  one. l and m survive: the continuum densities below are computed at l = 0, 1, 2 at every k, from
+  the same initial states.
+- **HC2: CONFIRMED.** The bound side is Z/pi symbolically. The continuum contact density, from
+  mpmath's own regular Coulomb function at the origin, equals (Z/pi)/(1 - e^(-2 pi eta)) to 4e-29 at
+  k in {0.1, 0.5, 1, 2, 5}, Z = 1, 2.
+- **HC3: CONFIRMED, l-independent.** Route A, Q_i(n) as one closed form in n, matches the exact
+  rational oscillator strengths at integer n = 2..60 to 2e-39 for all four transitions, and the
+  registered 1s closed form is exact there. Route B, direct quadrature against mpmath's Coulomb
+  functions, energy-normalized. Over 40 rows (1s -> p, 2s -> p, 2p -> s, 2p -> d; five k; Z = 1, 2)
+  the ratio route B / Q_i(i eta) equals 1/(1 - e^(-2 pi eta)) to 4e-30; Q_i(i eta) is real to
+  6e-30. Thresholds: at n = 1000 and eta = 1000 the two sides agree to 6e-6 for every transition,
+  bracketing the 1s value 2^8 e^(-4)/3 = 1.5629345 from above (bound, 1.5629387) and below
+  (continuum, 1.5629304).
+- **HC4: CONFIRMED.** At eta = 1 and 2, each continuum density with the factor 1/(1 - e^(-2 pi eta))
+  and the exponential e^(-4 eta arccot(eta/n_i)) stripped off is a rational (for 1s at eta = 1,
+  16/3, so df/dE = (8/3)/sinh(pi)); PSLQ gives zero weight to the Coulomb phase
+  arg Gamma(l + 1 + i eta), log k and gamma_E (bound 1e15, tolerance 1e-35), and a planted
+  7/13 + 2 gamma_E is recovered. Tag: neither Paper 18 nor Paper 34 has any entry for an exponential
+  of pi (searched: e^pi, e^(-2 pi), sinh pi, coth, Gelfond), so the door adds a class, not a rung.
+
+Not registered, structural: in every tested transition the 2F1 of the radial integral has c - b a
+non-positive integer, so Euler's transformation makes it (1 - z)^(c-a-b) times a finite polynomial,
+with 1 - z = (n - n_i)/(n + n_i). That is where the factors ((n - n_i)/(n + n_i))^(2n), and after
+continuation the exponentials e^(-4 eta arccot(eta/n_i)), come from: one closed form in n covers
+the bound and free sides, and the only thing the continuum adds beyond it is the factor.
+
+Defects in my own test code, caught before any verdict: mpmath's 2F1 failed to converge at integer
+n (catastrophic cancellation in a terminating sum) and at the 2s initial state with eta = 2; both
+were replaced by the Euler-transformed closed form above, validated at integer n against the
+independent exact-rational route.
+
+What the door says, in one line: releasing n leaves l, m and the Gaunt rules standing, removes only
+the cap l <= n - 1, and the whole continuum is the continued bound skeleton times one factor
+1/(1 - e^(-2 pi eta)), an exponential of pi that the bound side never shows and that is flat at
+threshold. The shared Bose-Einstein form is recorded, not read. The mathematics is textbook; this is
+the accounting.
+
+Home (2026-10-18, PI-approved): Paper 7 `sec:continuum`; seam row J13 (F); atlas door 23; guard `tests/test_paper7_hydrogen_continuum_door.py`, written as its own step and fire-tested 12/12. The guard adds a check the computation did not make: the factor holds at the level of the radial functions, for every r and l <= 3, as the ratio of the two normalizations.

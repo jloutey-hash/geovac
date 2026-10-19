@@ -116,3 +116,49 @@ candidate M1. Confidence in the tag: moderate; the tag is a classification, not 
 
 Proposed, PI decides: an atlas door and a seam J row (spin released by contraction), with its home
 in Paper 24 as the spin-side entrance to the Bargmann space, and a guard in `tests/`.
+
+## Result (2026-10-18, same session, after commit fb4fdd85)
+
+Script `debug/large_spin_door.py`; data `debug/data/large_spin_door.json`. All five registered
+predictions hold.
+
+- **LS1: CONFIRMED [SYMBOLIC].** The scaled element is sqrt(n+1) sqrt(1 - n/(2S)) symbolically, with
+  relative error n/(4S) + n^2/(32 S^2); [A_S, A_S^dagger] = 1 - n/S on |n> exactly for S = 1..20.
+- **LS2: CONFIRMED.** The closed-form d-matrix columns at pi/2 are S_x eigenvectors to 2e-50 at
+  S = 3, 7, 12; their squares are rational by construction.
+- **LS3: CONFIRMED.** p_S(x) is exactly rational at S = N^2 (sqrt(S) = N). Fit over N = 40..400:
+  the limit is pi^(-1/2) e^(-x^2) to 1e-35 or better, and c_1 matches -1/8 + x^2/2 - x^4/6 to 1e-29
+  at all seven x in {0, 1/2, 1, 3/2, 2, 5/2, 3}. A fit allowing half-integer powers gives their
+  coefficients at most 2e-14, against order-one integer ones (consistent with zero at that fit's
+  precision). Not registered, measured: c_2(x) = 1/128 - 11x^2/48 + 19x^4/48 - 3x^6/20 + x^8/72,
+  one polynomial fitting seven points with five coefficients to 9e-27, degree 2k in x^2 as
+  registered; PSLQ returns c_2(1) = 221/5760 and c_2(2) = -3571/5760 with zero weight on log 2,
+  gamma_E and zeta(3), and a planted 221/5760 + 3 log 2 is recovered. At x = 1/2 the search is
+  inconclusive at this precision (bound 1e5, tolerance 1e-20; the denominator is larger). The
+  Wallis limit: p_S(0) at N = 400 differs from pi^(-1/2) by -4.4e-7, which is
+  -pi^(-1/2)/(8S), the registered c_1(0).
+- **LS4: CONFIRMED.** For n = 0..4 at x = 1/2, 1, 3/2, S^(1/4) <S, S-n | X_S = x> tends to psi_n(x)
+  to 1e-23 or better, rate O(1/S), half-integer coefficients consistent with zero (at most 2e-12),
+  once the d-matrix's convention phase (-1)^(S-m) is divided out; the residual sign is +1 for every
+  n. Second route: an mpmath eigendecomposition of S_x at S = 30 agrees with the closed form to
+  3e-50.
+- **LS5: CONFIRMED [SYMBOLIC], tag as a reading.** (2S+1)/(2S) (1 + |w|^2/(2S))^(-2S-2) tends to
+  e^(-|w|^2) and C(2S, n)/(2S)^n to 1/n! for n = 0..5: the sphere's coherent-state measure contracts
+  to Paper 24's Bargmann measure. On the label side no pi appears at any finite S; pi^(-1/2) and
+  e^(-x^2) enter only as limits of rational label data. Paper 18 reads pi = Vol(S^2)/4 as a
+  normalization of the M1 volume slot and tiers that reading an Observation
+  (`sec:mellin`, the M1 list); the spin door's pi is the same Vol(S^2) normalization, so it takes
+  the same tag at the same tier: M1, read, not derived.
+
+Defects in my own test code, caught before any verdict: the first LS4 run fixed the d-matrix's
+sign from the last point only, so the ratio alternated with the parity of S - m at x = 1/2 and 3/2
+(fixed by dividing out (-1)^(S-m)); the first PSLQ call on c_2 used a coefficient bound of 1e8 at
+25 digits and returned a spurious relation, then a tolerance tighter than c_2's precision and
+returned nothing (fixed: bound 1e5, tolerance 1e-20, with a planted control).
+
+What the door says, in one line: releasing spin by contraction leaves the label n standing, removes
+only the cap n <= 2S, and lets in exactly pi^(1/2) and e^(-x^2), both as limits of algebraic label
+data; the pi is the sphere's volume normalization. The mathematics is textbook; this is the
+accounting.
+
+Home (2026-10-18, PI-approved): Paper 24 `sec:large_spin`; seam row J12 (F, with the measured corrections and the M1 reading outside it); atlas door 22; guard `tests/test_paper24_large_spin_door.py`, written as its own step and fire-tested 11/11.

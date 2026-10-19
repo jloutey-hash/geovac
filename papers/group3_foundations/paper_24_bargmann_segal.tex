@@ -36,7 +36,11 @@ these states with dipole transition weights computed by exact
 $N_{\max} = 5$ (56 nodes, 165 edges, zero irrationals encountered).
 The single $\pi$ in the entire ecosystem is the Gaussian normalization
 $\pi^{-3}$ of the continuous Bargmann measure, which the discrete
-graph never invokes.  The Coulomb problem on $S^3$ and the harmonic
+graph never invokes.  The one-mode version of that measure is the
+large-spin limit of a spin's coherent-state measure on $S^2$, so the
+oscillator is also reached from the compact label set of a spin, with
+the $\pi$ entering only in the limit (Section~\ref{sec:large_spin}).
+The Coulomb problem on $S^3$ and the harmonic
 oscillator on $S^5$ are both natural sphere quotients, but they live
 on different spheres with different geometric character (Riemannian vs
 complex), have natural operators of different order (second vs first),
@@ -113,7 +117,9 @@ The plan of the paper is as follows.  Section~\ref{sec:bs}
 summarizes the Bargmann--Segal construction and its identification
 with the SU(3) symmetric representation theory.
 Section~\ref{sec:graph} constructs the graph and states the
-$\pi$-free certificate (Theorem~\ref{thm:pi-free}).
+$\pi$-free certificate (Theorem~\ref{thm:pi-free});
+Section~\ref{sec:large_spin} reaches the one-mode Bargmann space from
+the label set of a spin by the large-spin contraction.
 Section~\ref{sec:asymmetry} presents the Coulomb / HO structural
 asymmetry as the conceptual centerpiece (Theorem~\ref{thm:asymmetry}).
 Section~\ref{sec:rigidity} states the harmonic oscillator rigidity
@@ -410,6 +416,73 @@ fixed by the requirement that the Gaussian have unit total integral.
 The discrete graph never invokes this normalization.  No analogous
 $\pi$ enters the spectrum, the degeneracies, the selection rules,
 the Wigner $3j$ coefficients, or the radial matrix elements.
+
+\subsection{A spin-side entrance: the large-spin contraction}
+\label{sec:large_spin}
+
+A spin $S$ has the finite label set $m = -S, \dots, S$.  As $S$
+grows, the neighbourhood of the pole $m = S$ flattens and the spin
+algebra contracts to the one-mode oscillator
+algebra~\cite{holstein1940,inonu1953}, so the one-mode Bargmann space
+is reached from a compact label set.  \textbf{[PRIOR ART]} The
+mathematics is classical;\ what is recorded here is the accounting of
+what the release leaves standing and what it lets in.
+
+With $n = S - m$ and $A_S^\dagger = S_-/\sqrt{2S}$,
+\begin{equation}
+  \langle n+1 | A_S^\dagger | n \rangle
+  = \sqrt{n+1}\,\sqrt{1 - \frac{n}{2S}},
+  \qquad
+  [A_S, A_S^\dagger]\,|n\rangle = \Bigl(1 - \frac{n}{S}\Bigr)|n\rangle .
+  \label{eq:hp_contraction}
+\end{equation}
+\textbf{[SYMBOLIC PROOF]} The label $n$ survives as the oscillator
+quantum number, and the only thing released is the cap $n \le 2S$.
+The limit is not uniform:\ it fails for $n$ of order $S$.
+
+The operator $X_S = S_x/\sqrt{S}$ has eigenvalues $x = m/\sqrt{S}$,
+spaced $1/\sqrt{S}$, so its spectrum becomes dense on the whole real
+line.  In the pole state the probability of eigenvalue $x$, per unit
+$x$, is
+\begin{equation}
+  p_S(x) = \sqrt{S}\binom{2S}{S+m}4^{-S}
+  = \frac{e^{-x^2}}{\sqrt{\pi}}
+    \Bigl[1 + \frac{c_1(x)}{S} + \frac{c_2(x)}{S^2} + \cdots\Bigr],
+  \label{eq:spin_density}
+\end{equation}
+with $c_1 = -\tfrac18 + \tfrac{x^2}{2} - \tfrac{x^4}{6}$,
+$c_2 = \tfrac{1}{128} - \tfrac{11x^2}{48} + \tfrac{19x^4}{48}
+- \tfrac{3x^6}{20} + \tfrac{x^8}{72}$, and no half-integer powers of
+$1/S$;\ the series is asymptotic, not convergent.
+\textbf{[MEASURED]} At $S = N^2$ the density is an exact rational;\ a
+fit over $N = 40, \dots, 400$ gives the limit to $10^{-35}$ and $c_1$
+to $10^{-29}$ at seven values of $x$, and $c_2$ is one polynomial
+fitting the same seven points to $10^{-26}$.  The eigenvectors follow
+the same pattern:\ $S^{1/4}\langle S, S-n | X_S = x\rangle$ tends to
+the Hermite function $\psi_n(x)$ at rate $1/S$, for $n \le 4$
+(\textbf{[MEASURED]};\ the Krawtchouk-to-Hermite limit of the Askey
+scheme~\cite{koekoek2010}).
+
+\paragraph{Where the $\pi$ enters.}
+At every finite $S$ the label side carries no $\pi$:\ the matrix
+elements are square roots of rationals, the eigenvector components of
+$S_x$ have rational squares, and $p_S(x)/p_S(0)$ is rational.  The
+constants $\pi^{1/2}$ and $e^{-x^2}$ appear only as limits of rational
+label data, $\pi^{-1/2}$ through Wallis's limit of $\sqrt{S}\binom{2S}{S}4^{-S}$.
+On the continuous side, the spin coherent states resolve the identity
+with the measure $(2S+1)/(4\pi)\,d\Omega$ on the
+sphere~\cite{radcliffe1971,arecchi1972}.  Under $z = w/\sqrt{2S}$ in the
+stereographic coordinate this measure, times the coherent-state weight,
+contracts to $\pi^{-1}e^{-|w|^2}\,d^2w$, the one-mode form of
+Eq.~\eqref{eq:bargmann-measure}.  \textbf{[SYMBOLIC PROOF]} The
+Bargmann $\pi$ is therefore the large-$S$ limit of the sphere's
+$1/(4\pi)$, the normalization by $\mathrm{Vol}(S^2)$.  Paper~18 reads a
+$\pi$ of this kind as its volume slot M1, as a reading and not a
+derivation~\cite{paper18}, and this one takes the same tag.  Only one
+contraction is covered here (near a pole);\ the non-compact real form
+$\mathrm{SU}(1,1)$ and Wigner's continuous-spin representations are
+other routes and are not tested.  Guard:\
+\texttt{tests/test\_paper24\_large\_spin\_door.py}.
 
 \subsection{Hamiltonian and graph Laplacian roles}
 \label{sec:roles}
@@ -1434,7 +1507,11 @@ symmetry (forward direction due to Jauch--Hill;\ the converse,
 attributed to Wybourne and Iachello, is imported rather than proved
 here), the Borel--Weil identification of $(N, 0)$
 irreducibles with the holomorphic Hardy-space sectors, and the
-Bargmann--Segal--Hall unitary intertwiner.
+Bargmann--Segal--Hall unitary intertwiner.  The same oscillator is
+reached from the finite label set of a spin by the large-spin
+contraction, which keeps the label $n$, releases only the cap
+$n \le 2S$, and lets in $\pi^{1/2}$ and $e^{-x^2}$ only as limits of
+rational label data (Section~\ref{sec:large_spin}).
 
 Calibration $\pi$ is Coulomb-specific.  It is the cost of mapping
 a quadratic Riemannian eigenvalue to an inverse-square physical
@@ -1465,6 +1542,31 @@ constants enter the discrete-to-physical map.
 V.~Fock,
 ``Zur Theorie des Wasserstoffatoms,''
 \textit{Z.\ Phys.}\ \textbf{98}, 145 (1935).
+
+\bibitem{holstein1940}
+T.~Holstein and H.~Primakoff,
+``Field dependence of the intrinsic domain magnetization of a
+ferromagnet,''
+\textit{Phys.\ Rev.}\ \textbf{58}, 1098 (1940).
+
+\bibitem{inonu1953}
+E.~In\"on\"u and E.~P.~Wigner,
+``On the contraction of groups and their representations,''
+\textit{Proc.\ Natl.\ Acad.\ Sci.\ USA}\ \textbf{39}, 510 (1953).
+
+\bibitem{radcliffe1971}
+J.~M.~Radcliffe,
+\textit{J.\ Phys.\ A}\ \textbf{4}, 313 (1971).
+
+\bibitem{arecchi1972}
+F.~T.~Arecchi, E.~Courtens, R.~Gilmore, and H.~Thomas,
+``Atomic coherent states in quantum optics,''
+\textit{Phys.\ Rev.\ A}\ \textbf{6}, 2211 (1972).
+
+\bibitem{koekoek2010}
+R.~Koekoek, P.~A.~Lesky, and R.~F.~Swarttouw,
+\textit{Hypergeometric Orthogonal Polynomials and Their
+$q$-Analogues} (Springer, Berlin, 2010).
 
 \bibitem{bargmann1961}
 V.~Bargmann,
