@@ -7198,11 +7198,11 @@ REGISTRY = [
     },
     {
         "id": 'seam-catalogue-stale-total',
-        "pattern": '\\b4[01]\\s+forced\\s+entries|60-entry\\s+forced/free\\s+catalogue|seventy-(three|four)\\s+named\\s+entries|\\b74-entry\\b|\\b74\\s+entries',
+        "pattern": '\\b4[01]\\s+forced\\s+entries|60-entry\\s+forced/free\\s+catalogue|seventy-(three|four|six)\\s+named\\s+entries|\\b7[46]-entry\\b|\\b7[46]\\s+entries',
         "exempt_if_nearby": withdrawal_marker('seam-catalogue-stale-total'),
         "severity": 'fail',
         "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
-        "note": 'Registered 2026-10-18 (/qa claim-search DELTA on the v5.20.21 claim-impact set). The seam catalogue has 74 entries (41 F / 4 Obs / 1 A / 25 C / 3 W) since J11 (2026-10-17). Widened 2026-10-18: 76 entries (43 F / 4 Obs / 1 A / 25 C / 3 W) since J12-J13.',
+        "note": 'Registered 2026-10-18 (/qa claim-search DELTA on the v5.20.21 claim-impact set). The seam catalogue has 74 entries (41 F / 4 Obs / 1 A / 25 C / 3 W) since J11 (2026-10-17). Widened 2026-10-18: 76 entries (43 F / 4 Obs / 1 A / 25 C / 3 W) since J12-J13; then 77 (26 C) since J14.',
         "files": [
             'papers/group*/*.tex',
             'papers/synthesis/*.tex',

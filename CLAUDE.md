@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.20.25 (October 18, 2026)
+**Version:** v5.20.26 (October 18, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Zero energy and a finite nucleus as doors (2026-10-18, v5.20.26, pre-registered):** E=0 contracts SO(4) to E(3); finite nucleus releases n from integrality, prices a consumed radius (J14, C). CHANGELOG v5.20.26.
 - **Spin and the hydrogen continuum as released axes (2026-10-18, v5.20.25, pre-registered):** spin contraction keeps n, pi only as limits; continuum = continued bound skeleton x 1/(1-e^{-2pi eta}). J12/J13. CHANGELOG v5.20.25.
 - **Seam F relative to the release; c_{6,0} drop read by its caveat (2026-10-18, v5.20.24, PI-decided):** J-row F covers surviving labels + the released class; measured parts outside. CHANGELOG v5.20.24.
 - **SMALL sweep of the v5.20.21 DELTA debt (2026-10-18, v5.20.23, PI-directed):** 44 of 49 fixed, 5 left with reasons; 4 guards fire-tested 10/10; self-check 2,3,1,0. CHANGELOG v5.20.23.

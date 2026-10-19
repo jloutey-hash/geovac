@@ -51,7 +51,7 @@ hyperfine scales. We state and apply the Fock projection rigidity
 theorem: the $S^3$ conformal projection that makes electronic Hamiltonians
 equivalent to the $S^3$ Laplace--Beltrami operator (whose harmonics the
 GeoVac lattice's nodes label) is unique to the Coulomb potential and
-does \emph{not} extend to HO or Woods--Saxon systems. For nuclear
+does \emph{not} extend to HO or Woods--Saxon systems. A finite nucleus breaks it in a controlled way:\ the labels survive, $n$ is released from being a whole number, and the $s$-wave quantum defect $-(2/5)(ZR)^2$ is the same for every $n$ and continues across threshold, the radius being consumed (Sec.~\ref{sec:finite_nucleus}). For nuclear
 Hamiltonians, the GeoVac contribution is therefore the angular machinery
 and qubit encoding, not the conformal projection. All nuclear physics
 inputs (Minnesota parameters, spin--orbit strength, $\hbar\omega$)
@@ -322,6 +322,37 @@ explicit radial matrix elements (Slater-like integrals computed from
 HO wavefunctions) for the radial part of the two-body interaction. The
 radial part is no longer related to the graph; it is a precomputed
 numerical table.
+
+\subsection{A finite nucleus:\ $n$ released from integrality}
+\label{sec:finite_nucleus}
+
+The rigidity theorem says the $S^3$ projection needs exactly $-Z/r$. A nucleus of finite size changes the potential inside it, so $SO(4)$ must break. This subsection records what breaks and what survives, for a uniformly charged sphere of radius $R$ (atomic units, infinite nuclear mass). The nucleus enters as a second length scale, the situation of the composed register of Sec.~\ref{sec:ne} at two focal lengths;\ here it is read on the electron's labels alone. Inside the sphere the potential is $-Z(3R^2 - r^2)/(2R^3)$, an isotropic oscillator, so the electron's radial solution there is a Kummer function of $r^2$;\ outside it is a Coulomb function. Every level and phase shift below is one matching of the two at $r = R$. That interior oscillator is the electron's, not the nucleons' of Sec.~\ref{sec:shell};\ the shared form is noted, not read.
+
+\textbf{[MEASURED]} The labels $l$ and $m$ and the Gaunt rules survive, since the nucleus is round, and the radial node count stays $n - l - 1$ (checked at $ZR = 0.01$ for eight states). What is released is $n$ being a whole number:\ $E_{nl} = -Z^2/(2(n - \delta_{nl})^2)$, with
+\begin{equation}
+\delta_{nl} = -c_l\,(ZR)^{2l+2}\prod_{s=1}^{l}\Bigl(1 - \frac{s^2}{n^2}\Bigr) + \cdots,
+\qquad
+c_l = \frac{2^{2l+2}\,k_l}{\bigl((2l+1)!\bigr)^2},
+\quad
+k_l = \frac{1}{2l+2} - \frac{3}{2(2l+3)} + \frac{1}{2(2l+5)},
+\label{eq:defect}
+\end{equation}
+so $c_0 = 2/5$, $c_1 = 1/105$ and $c_2 = 1/28350$. \textbf{[SYMBOLIC PROOF + MEASURED]} The leading term is first-order perturbation theory with the hydrogenic normalization near the origin, whose product over $s$ is the one behind the continuum factor of Paper~7~\cite{Paper7};\ exact matching at 50--60 digits, for $ZR$ from $10^{-3}$ to $3.2\times 10^{-2}$ and $n \le 40$, confirms it to $10^{-10}$ for $l = 0$ and $10^{-11}$ for $l = 1, 2$. The defect depends on $Z$ and $R$ only through $ZR$. The $s$-wave defect is the same for every $n$, $-(2/5)(ZR)^2 = -(2/3)Z^2\langle r^2\rangle$:\ the Foldy--Friar contact term~\cite{Friar1979} read as a quantum defect. Beyond leading order, \textbf{[MEASURED]}
+\begin{equation}
+\delta_{n0} = -\tfrac{2}{5}\,x^2\Bigl[\,1 - \tfrac{80}{63}\,x + \tfrac{2}{5}\,x^2\ln x + \cdots\Bigr],
+\qquad x = ZR,
+\label{eq:defect_s}
+\end{equation}
+with the same coefficients at every $n$ ($-80/63$ to $4\times 10^{-10}$, an identification by agreement;\ a fit without the logarithm stalls at a residual near $10^{-8}$).
+
+Across threshold the defect continues as one function of energy. Since $1 - s^2/n^2 = 1 + 2s^2E/Z^2$, the leading defect is a polynomial $\mu(E)$, and to first order the short-range phase shift relative to Coulomb is
+\begin{equation}
+\tan\Delta_l(E) = \frac{\pi\,\mu(E)}{1 - e^{-2\pi Z/k}} ,
+\label{eq:defect_phase}
+\end{equation}
+the factor being Paper~7's continuum factor. \textbf{[MEASURED]} At $ZR = 10^{-3}$ the phase shift divided by Eq.~\eqref{eq:defect_phase} equals the bound side's ratio to $10^{-6}$ at $k = 1/2$, $1$ and $2$;\ without the factor it misses by $4.4\%$ at $k = 2$. At threshold the factor tends to one and Seaton's limit~\cite{Seaton1983} holds:\ the bound defects extrapolated to $n \to \infty$ and the phase shift over $\pi$ extrapolated to $k \to 0$ agree to $10^{-15}$.
+
+\emph{The price.} The release consumes one number, the radius (one per charge moment for a general profile), and no label fixes it. The coefficients multiplying its powers are rational, with logarithms of $R$ from second order, and no $\pi$ enters the leading defect. So the labels survive and the radius is consumed:\ a released axis whose price is calibration data, as the two-focal-length picture of Sec.~\ref{sec:cross-register} expects. \textbf{[PRIOR ART]} The physics is textbook (Foldy;\ Friar~\cite{Friar1979};\ Seaton~\cite{Seaton1983});\ the contribution is the accounting on the electron's labels. Guard:\ \texttt{tests/test\_paper23\_finite\_nucleus\_door.py}.
 
 %% =====================================================================
 \section{The Deuteron: First Two-Species Nuclear Qubit Hamiltonian}
@@ -1235,7 +1266,7 @@ nucleon--electron systems but faces a $\sim 10^{13}$ coefficient ratio that
 requires block-partitioned simulation. The Fock projection rigidity
 theorem precisely delineates which parts of the GeoVac framework
 transfer to non-Coulomb systems (the angular machinery) and which do
-not (the $S^3$ conformal projection). The binding energies reported
+not (the $S^3$ conformal projection);\ a finite nucleus keeps the electron's labels, releases $n$ from integrality and consumes its radius (Sec.~\ref{sec:finite_nucleus}). The binding energies reported
 here at $N_{\mathrm{shells}}=2$ are not converged and should not be
 read as nuclear-structure predictions; they are encoding-validation
 benchmarks that verify the qubit Hamiltonian reproduces the matrix
@@ -1339,6 +1370,11 @@ Commun.~Pure Appl.~Math.~\textbf{14}, 187 (1961).
 L.~L. Foldy,
 ``Neutron-Electron Interaction,''
 Rev.~Mod.~Phys.~\textbf{30}, 471 (1958).
+
+\bibitem{Seaton1983}
+M.~J. Seaton,
+``Quantum defect theory,''
+Rep.~Prog.~Phys.~\textbf{46}, 167 (1983).
 
 \bibitem{Friar1979}
 J.~L. Friar,

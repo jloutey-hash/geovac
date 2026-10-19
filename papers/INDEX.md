@@ -66,7 +66,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 54 `paper_54_tensor_product_two_body.tex` | ACTIVE | Two-body selection rules from the tensor-product triple; radial coupling NOT forced |
 | 55 `paper_55_periods_of_geovac.tex` | ACTIVE | Periods of the Mellin sectors: pure-Tate / level-4 cyclotomic mixed-Tate |
 | 56 `paper_56_tannakian_substrate.tex` | ACTIVE | Tannakian/cosmic-Galois reconstruction at finite cutoff (5,864 bit-exact residuals) |
-| 57 `paper_57_forced_free_seam.tex` | ACTIVE | 76-entry forced/free catalogue; P5 packing-reachability = the consolidated F/C label (98.3% is an internal-consistency check, not an independent discriminator) |
+| 57 `paper_57_forced_free_seam.tex` | ACTIVE | 77-entry forced/free catalogue; P5 packing-reachability = the consolidated F/C label (98.3% is an internal-consistency check, not an independent discriminator) |
 | 61 `paper_61_bessel_moment_periods.tex` | ACTIVE | Number-theory tower of the three-center ERI (companion to Paper 59): Legendre/Γ(2) modular family + in-domain CM Γ-value fibres (Chowla–Selberg), X₀(2) home + conductor-4 (ℤ[i], G=β(2)) arithmetic, resurgent-Lambert reading; Bessel-moment period algebra — Wronskian W₀D⁻², quadratic relations B=πΩ forcing the *monodromy* into Sp₄(ℤ) (Galois in Sp₄(ℂ)); cosmic-Galois bridge ↔ Paper 56; closed form open. Cert OWED (post-dates last /qa) |
 
 ## Group 1 — Operator algebras / NCG (`group1_operator_algebras/`)
