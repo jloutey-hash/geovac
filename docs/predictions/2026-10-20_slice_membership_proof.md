@@ -75,3 +75,26 @@ point; there is no reason yet that this point is x = 0.
 ## Result
 
 (To be appended after scoring; the predictions above are never edited.)
+
+## Disposition (scored 2026-10-20)
+
+Script `debug/slice_membership_D_x0.py`, data `debug/data/slice_membership_D.json`, log
+`debug/slice_membership_D.log`.
+
+**Controls.** The exponents of R3 R1 at x = 0 reproduce the bound tables (slice -5/2, -1/2, 1/2, 3/2;
+chain 1/2, 3/2, 3/2, 5/2). P keeps x^-1 (slice) and x (chain). The bounds hold at t = 0.05, 0.3, 1, 3:
+G t^2 / (9 pi^3/8) = 0.923, 0.616, 0.242, 0.050, and C / t^2 = 0.805, 0.435, 0.156, 0.033.
+
+**MP1: FAILED.** W at x = 0 is {-5/2, -1, -1/2, 1/2, 3/2} as predicted, but P is {-5/2, -1, -1/2, 1/2}.
+P drops the smallest solution, not the largest, so no growth condition at x = 0 gives ker P.
+Class: **MISS**.
+
+**MP2: FAILED.** W at x = 0 is {1/2, 1, 3/2, 3/2, 5/2} as predicted, but P is {1/2, 1, 3/2, 3/2}. Same
+pattern. Class: **MISS**.
+
+**Fallback: FAILED, by inspection, no computation needed.** P kills t^-2 (slice) and t^2 (chain). These
+are the fastest-growing solutions at x = infinity. G = O(t^-4) excludes t^-2, so ker P is not contained
+in the set of solutions that obey the bound, and no growth condition at infinity gives ker P either.
+
+**Next.** A parity argument at infinity, found while scoring, is registered separately in
+`docs/predictions/2026-10-20_slice_parity_proof.md` before it is computed.
