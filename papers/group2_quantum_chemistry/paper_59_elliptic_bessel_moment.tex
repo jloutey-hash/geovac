@@ -1225,7 +1225,8 @@ operator is a left multiple of an operator $P$ of order four, and the chain
 satisfies $P$:\ $PC$, divided by the solution $t^3/(1-t^2)^2$ of $R_1$, is
 at most $10^{-23}$ at 20 digits and $10^{-33}$ at 30 digits at four values
 of $t$, and $9\times10^{-45}$ at 40 digits at one, while a $1\%$ change in
-one coefficient gives $0.02$ to $0.07$.  The second solution of
+one coefficient gives $0.02$ to $0.07$;\ the next paragraph proves that
+the chain satisfies $P$.  The second solution of
 $R_1(\theta-2)$, which carries $\operatorname{artanh} t$, is absent.  So
 $C=c\,t^2+t^2\int^t s^{-3}(B'f)(s)\,ds$ with $f$ a solution of $F_3$'s
 operator and $B'$ a rational map.  That integral cannot be done inside the
@@ -1265,14 +1266,37 @@ A search modulo a prime finds no rational map that splits the K3 piece
 off, in a box larger than the bound set by the leading terms of the local
 exponents, and the same call finds a planted split.  So $G$ is an
 elementary function plus a K3 function integrated once against an
-elementary kernel, here one that carries $\operatorname{artanh}t$;\ whether
-that term drops, as it does for the chain at the fingerprint fibre, was not
-tested.  The operator is singular at $t=1$, the equal-scale point where
+elementary kernel.  The second solution of $R_1(\theta+2)$, which carries
+$\operatorname{artanh}t$, is absent, as it is for the chain.  In
+$x=t^2$, $\delta=x\,d/dx$, the exact system $R_1S=1$ modulo $R_3$ has a
+unique rational solution $S=s_0+s_1\delta+s_2\delta^2$ inside the bound
+set by the local exponents, with denominator $x(x-1)^4(2x+7)$.  So
+$R_3R_1(\theta+2)=Q_1P$ with $P=(\theta+2)-S\,R_1(\theta+2)$ of order four,
+and $P$ kills $t^{-2}$.  On $G$, $P$ leaves at most $2\times10^{-26}$ of its
+largest term at 25 digits at $t=1/2$ and $13/10$, while a $1\%$ change in
+$s_0$ gives $10^{-3}$.  The membership is also proved, here and for the
+chain.  Since $R_1S=1+NR_3$ with $N$ rational, $R_1P=-N\,R_3R_1(\theta+2)$, so
+$P$ sends every solution of $R_3R_1(\theta+2)$ to a multiple of
+$t/(1-t^2)^4$, which is odd in $t$.  Near $x=0$, $J$ is a sum of odd powers
+of $x$ times powers of $\log x$.  So to the right of its strip the Mellin
+transform of $G$ has poles only at $s=4,6,8,\dots$, and the expansion of $G$
+at large $t$ has only even powers of $t$, times logarithms.  The
+coefficients of $P$ are rational in $t^2$, so $PG$ has the same property.
+The multiple is therefore zero, and $PG=0$.  For the chain the same steps
+run with the solution $t^3/(1-t^2)^2$ of its $R_1$ and the odd function
+$\chi=\int_0^x sK_1$.  Equivalently, $\ker P$ is the set of solutions that
+are even in $t$ at infinity, and at infinity $P$ keeps exactly the integer
+exponents of $R_3R_1(\theta+2)$, in $x$.  Analyticity on $\operatorname{Re}t>0$
+alone would not do:\ $P$ has a solution with a logarithm at $t=1$ and one
+with a half-integer exponent at $t=2$.  The operator is singular at $t=1$, the equal-scale point where
 the fibre collapses (Sec.~\ref{sec:three_electron});\ its exponent $-3$
 there comes from $R_1$, so the singularity is not apparent.  Caps:\ the
 no-split search is modulo a prime, and its bound rests on the leading-term
-argument rather than the written proof the chain has.  Record:\
-\texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}.  Guard:\
+argument rather than the written proof the chain has;\ the parity step
+uses the standard Mellin contour shift.  Records:\
+\texttt{docs/predictions/2026-10-19\_p3e2\_widened.md},
+\texttt{docs/predictions/2026-10-20\_slice\_artanh.md} and
+\texttt{docs/predictions/2026-10-20\_slice\_parity\_proof.md}.  Guard:\
 \texttt{tests/test\_paper59\_chain\_slater\_slice.py}.
 
 \textbf{[SYMBOLIC + MEASURED]} At $\gamma=1$ the correlated triangle does not drop.  Put

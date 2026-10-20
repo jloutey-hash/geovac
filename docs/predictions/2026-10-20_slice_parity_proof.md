@@ -59,3 +59,30 @@ Confidence: high, since (b) follows from (a) and steps 2 to 5.
 ## Result
 
 (To be appended after scoring; the predictions above are never edited.)
+
+## Disposition (scored 2026-10-20)
+
+Scripts `debug/slice_parity_E.py` (stopped after parts (a) and (b), whose output was saved; its sympy
+Bessel series was too slow) and `debug/slice_parity_F_series.py`. Data
+`debug/data/slice_parity_{E,F}.json`, logs `debug/slice_parity_{E,F}.log`.
+
+**Controls.** The infinity exponents of R3 R1 reproduce the bound tables: slice {2, 7/2, 4, 6}, chain
+{0, 1/2, 1, 2}. P from the perturbed section leaves a nonzero remainder in (a), for both objects. The
+truncated series reproduce J and chi at z = 0.3 to 2.5e-15 and 2.6e-16. G t^4 = 18.4207, 18.7355,
+18.8204 at t = 10, 20, 40, against 6 pi = 18.8496. The gaps 0.429, 0.114, 0.029 fall by a factor near 4
+per doubling, as t^-2 times a log does. An odd power would give 2 or 8.
+
+**MP3 (a): HELD.** R1 P = -N W exactly, with
+N = (x-4)(42x^4 - 45x^3 + 77x^2 - 75x + 33) / (315 x (x-1)^3 (2x+7)) for the slice and
+N = (x-4)(20x^2 - 7x + 5) / (15 x (x-1)(4x+11)) for the chain.
+
+**MP3 (b): HELD.** At infinity W is {1, 2, 7/2, 4, 6} and P is {1, 2, 4, 6} for the slice; W is
+{-1, 0, 1/2, 1, 2} and P is {-1, 0, 1, 2} for the chain. P drops exactly the half-integer exponent.
+
+**MP3 (c): HELD.** J and chi carry only the powers x^1, x^3, x^5, x^7, x^9 below x^11, times logs.
+
+**Class: CHECK** for all three, as decided before computing: a tier upgrade. P G = 0 on the Slater slice
+and P C = 0 for the chain at the fingerprint fibre go from measured to proved, with the cap on the Mellin
+contour shift stated above. One detail was added while scoring and is not a change of argument: on t > 1,
+Sol(R1) is spanned by h, so P G = alpha h there; the large-t comparison gives alpha = 0 on t > 1, and
+P G = 0 then holds on all of t > 0 by analytic continuation.

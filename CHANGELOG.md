@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.2] - 2026-10-20
+
+PI-directed ("Let's do that"; "Love proofs. Let's do it."): does the artanh term drop from the Slater slice of the three-electron chain, and can its membership be proved.
+
+### Added
+- **Pre-registered SA1-SA2** (`docs/predictions/2026-10-20_slice_artanh.md`, committed cffafc1d before computing). SA1 HELD (CHECK): in x = t^2, R1 S = 1 modulo R3 has a unique rational solution S = s0 + s1 delta + s2 delta^2 within the local-exponent bound (57 unknowns, rank 57), denominator x(x-1)^4(2x+7). So R3 R1 (theta+2) = Q1 P with P of order four, and P kills t^-2: the artanh solution is absent. SA2 PARTLY: P G = 0 numerically to 2e-27 and 1.5e-26 of the largest term at t = 1/2 and 13/10 against 6.6e-4 and 1.1e-3 for a 1% change in s0 (CHECK); the exact clause failed, P has a log at t = 1 (MISS). Disclosure error recorded: the chain's P also has a log there. An unregistered t = 2 extension also failed.
+- **Pre-registered MP1-MP2** (`docs/predictions/2026-10-20_slice_membership_proof.md`, committed 27c05502): a proof by local exponents at x = 0 or at infinity. Both FAILED (MISS): at x = 0, P drops the smallest solution of W, not the largest, so growth bounds do not force membership. Bounds checked: 0 <= J <= 3 pi/2, G <= 9 pi^3/(8 t^2) and G <= 6 pi/t^4; for the chain C <= t^2.
+- **Pre-registered MP3, the parity proof** (`docs/predictions/2026-10-20_slice_parity_proof.md`, committed 5ec2b08d). HELD (CHECK, a tier upgrade from measured to proved), for the slice and the chain. R1 S = 1 + N R3 with N rational gives R1 P = -N W, so P sends every solution of W to a multiple of t/(1-t^2)^4 (chain: t^3/(1-t^2)^2), which is odd in t. J and chi = int s K1 are odd in x times logs near 0, so the Mellin poles lie at s = 4, 6, 8 and G is even in t at infinity; P has coefficients rational in t^2, so the multiple is zero. ker P is the set of solutions of W even at infinity: W at infinity {1, 2, 7/2, 4, 6}, P {1, 2, 4, 6} (chain {-1, 0, 1/2, 1, 2} and {-1, 0, 1, 2}). Series control 2.5e-15 and 2.6e-16; G t^4 tends to 6 pi.
+- **Guards** added to `tests/test_paper59_chain_slater_slice.py`, each written as its own step: the section and P, uniqueness within the bound (slow), not forced by analyticity (slice; chain slow), P G = 0 at two points with a perturbed control (slow), R1 P a left multiple of W with h odd (slice; chain slow), P keeps the integer exponents at infinity (slice; chain slow), J and chi odd at zero. 18 pass with --slow; fire-tested 10/10 and 9/9.
+- Debug drivers `debug/slice_artanh_{A_section,B_factor,C_t2}.py`, `debug/slice_membership_D_x0.py`, `debug/slice_parity_{E,F_series}.py` and their `debug/data/` JSON.
+
+### Changed
+- **Paper 59 `sec:density_ring`:** the Slater-slice paragraph replaces "whether that term drops was not tested" with the section, the order-four factor and the numbers, then the parity proof for the slice and the chain; the chain paragraph points to it; caps name the Mellin contour shift; records line lists three records. Compiles three-pass clean, 0 undefined references.
+- `docs/claim_test_matrix.md`: new row "the Slater slice: the artanh solution is absent", PROVED, backed by the guards above. Summary surfaces (Paper 57 J7, atlas door 17, field guide, walls register) re-read: still faithful.
+- README badge 5.21.2.
+
 ## [v5.21.1] - 2026-10-19
 
 PI-directed ("I want to do all this"): check the multi-focal wall against effective field theory, audit the prediction records for novelty, and narrow onto the period ladder.

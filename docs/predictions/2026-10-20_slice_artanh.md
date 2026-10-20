@@ -88,3 +88,44 @@ SA1 holds; nothing known forces SA1.
 ## Result
 
 (To be appended after scoring; the predictions above are never edited.)
+
+## Disposition (scored 2026-10-20)
+
+Run by the PM against the committed file (`cffafc1d`). Scripts `debug/slice_artanh_{A_section,B_factor,C_t2}.py`,
+data `debug/data/slice_artanh_{A,B,C}.json`, logs `debug/slice_artanh_{A,B,C}.log`.
+
+**Controls.** The search code on the chain returned the chain's recorded S1 exactly (30 unknowns, rank
+30). On the chain's planted split it found and verified a solution (34 unknowns, rank 34). S with its
+first coefficient times 1.01 leaves a nonzero remainder. The printed bound table matches the hand values:
+at x = 0, R3 has exponents -5/2, -1/2, 3/2; at x = 1, R3 R1 has -4, 0, 1, 2.
+
+**SA1: HELD.** The exact system R1 S = 1 mod R3 is consistent within the bound and has a unique solution
+(57 unknowns, rank 57, rank with target 57):
+- S0 = -(378x^5 - 327x^4 + 635x^3 - 605x^2 + 475x - 220) / (105 x (x-1)^4 (2x+7)),
+- S1 = -2(546x^5 - 339x^4 + 1309x^3 - 2041x^2 + 1893x - 792) / (315 x (x-1)^4 (2x+7)),
+- S2 = -4(x-4)(42x^4 - 45x^3 + 77x^2 - 75x + 33) / (315 x (x-1)^4 (2x+7)),
+in x = t^2 on (1, delta, delta^2). P = (theta+2) - S R1 (theta+2) has order four and kills t^-2, and
+W = Q1 P with zero remainder. P is singular at x = 1, x = 4 and the roots of 42x^4 - 45x^3 + 77x^2 - 75x + 33.
+Class: **CHECK**.
+
+**SA2: PARTLY.**
+- *Numerical clause, HELD.* |P G| / (largest term) = 2.2e-27 at t = 1/2 and 1.5e-26 at t = 13/10, at
+  25 digits. P built from the perturbed S gives 6.6e-4 and 1.1e-3. G matches the guard's recorded
+  values. So the artanh solution H is absent from G to that precision. Class: **CHECK**.
+- *Exact clause, FAILED.* At x = 1, P has exponents -3, 0, 1, 2 and a local solution with a logarithm,
+  so ker P is not the set of solutions single-valued around t = 1 and the analyticity argument does not
+  apply. Class: **MISS**.
+- *Disclosure error, found while scoring.* The record called this "the chain's argument". The chain's P
+  has the same logarithm at x = 1 (`debug/data/nosplit_membership.json`: P maxlog 1). That script
+  attempted the argument and it failed there too. Paper 59 states the chain's membership from numbers
+  only, so nothing in the paper rested on it.
+
+**Unregistered extension, not scored.** The same argument at t = 2 (x = 4), where G is also analytic, fails
+for both objects: P keeps the solution with half-integer exponent there (-9/2 for the Slater slice, -3/2
+for the chain). So in both cases G lies on P for a reason that analyticity on Re t > 0 does not supply.
+Analyticity at t = 1 and t = 2 gives two conditions on G in the five-dimensional Sol(W); lying on P is a
+third. Its source, perhaps the decay at large t, is open.
+
+**Consequence.** On the Slater slice, G is the elementary t^-2 plus a K3 function integrated once, and the
+integration does not bring in the artanh solution. This matches the chain at the fingerprint fibre. Both
+rest on high-precision numerics, not on a proof.
