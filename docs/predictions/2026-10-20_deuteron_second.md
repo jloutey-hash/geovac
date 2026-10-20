@@ -133,3 +133,41 @@ potential, 0 < (r_ERE - r_m)/r_m < 2.005%, the MT-III value.
 ## Result
 
 (To be appended after scoring; the predictions above are never edited.)
+
+## Disposition (scored 2026-10-20)
+
+Run by a computation agent against the frozen file (commit 1e9aaa71); scripts `debug/deuteron_second_*.py`,
+data `debug/data/deuteron_second_*.json`, full record `debug/deuteron_second_results_memo.md`. Reviewed by the
+PM against the score file. The basis and ODE routes agree to about 1e-8 or better on every scored number.
+
+**Controls.** All passed. MT-III regression: same energy-optimal lambda; B, r_m and a_t match the first run
+to 1e-20. Hydrogen exact. Gaussian Laguerre elements: closed form vs dps-50 quadrature 2e-50. P2 binding
+2.2022692 MeV, +1.2e-4 from the published 2.202.
+
+| ID | Verdict | Class | Number | Gate |
+|:--|:--|:--|:--|:--|
+| DS1 | HELD | CHECK | B +6.6e-4, a_t -2.9e-4, r_m -3.5e-4 relative to the thesis | 2e-3, 2e-3, 1e-3 |
+| DS2 | FAILED | MISS | 4.25e-6 at N_r = 30 | <= 1e-6 |
+| DS3 | HELD | CHECK | B -4.1e-5 at the energy-optimal 20 MeV | 1e-4 |
+| DS4 | HELD | CHECK | spread 6.3e-6; mean vs ODE +1.8e-7 | 1e-4 each |
+| DS5 | HELD | CHECK | 1.533% | (0, 2.005%) |
+
+**DS1.** P1 gives r_m = 1.9755514 fm, so the parameter set accounts for 95% of the first run's 0.68% gap
+to the thesis value. The loose end is closed. The registration's hbar c estimate was too large: 197.327 vs
+197.33 moves B by 5.8e-5, not 3e-4, and neither convention closes the remaining few parts in 1e4.
+
+**DS2 (MISS).** The registration's reasoning failed: at N_r = 30 the soft Gaussian core converges r_m more
+slowly than MT-III's 1/r core (4.3e-6 vs 1.6e-6). By N_r = 35 it is at 1.8e-8. The Gaussian interior costs
+more than the core saved.
+
+**DS3.** Confirms the first disposition's diagnosis: with a soft core the HO basis converges B; MT-III's
+failure was its 1/r core. The HO radius stays poor (best -2.6e-4 at 15 MeV), as the Gaussian tail predicts.
+
+**Unscored.** P2 (Minnesota): B 2.2022692 MeV, r_m 1.9518279 fm, a_t 5.4265163 fm, A_S 0.8737492 fm^-1/2,
+r_ch 2.10573 fm (-1.05% vs CODATA 2018). P1: r_m 1.9755514 fm; its r_ch, 2.12774 fm, lands within 1.2e-4 of
+CODATA 2018. That is not a match: the formula omits spin-orbit and two-body terms worth about 0.2%, so the
+agreement is below the formula's own error and carries no information.
+
+**Deviations** (D1-D10 in the memo; how, not what; none changes a grade): Gaussian elements by erfc plus
+upward recurrence at 200 digits; control lambdas 1/2 and 1 chosen by the agent; the Kohn a_t functional
+extended to Gaussian terms; DS3's optimum is the lowest-energy scan point.

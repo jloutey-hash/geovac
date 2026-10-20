@@ -167,3 +167,9 @@ threshold. The shared Bose-Einstein form is recorded, not read. The mathematics 
 the accounting.
 
 Home (2026-10-18, PI-approved): Paper 7 `sec:continuum`; seam row J13 (F); atlas door 23; guard `tests/test_paper7_hydrogen_continuum_door.py`, written as its own step and fire-tested 12/12. The guard adds a check the computation did not make: the factor holds at the level of the radial functions, for every r and l <= 3, as the ratio of the two normalizations.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- HC1-HC4: CHECK (Bander-Itzykson; Sommerfeld; Seaton 1983, now credited in Paper 7)

@@ -48,3 +48,11 @@ same momentum-space form, evaluated by Coulomb-Sturmian expansion. No genus
 or elliptic reading of it appears in the book (searched: "elliptic", "genus";
 the only "elliptic" hit is ch. 8's elliptic-coordinate Sturmians, a
 two-focus/prolate false friend).
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- P1: FINDING, low weight (the momentum form is the Averys')
+- P2: FINDING, routine
+- P3: UNSCORED (superseded by P3a-P3e)

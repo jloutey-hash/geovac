@@ -335,7 +335,7 @@ unbuilt prolate ≥4e CI.**
 | Elliptic/CM-adapted basis for chemical accuracy (ledger 2026-08-23, 3 instances) | **STANDING** | HARD | Every accuracy gain since has come from the electron-electron cusp, never from radial exponent placement: explicit-r₁₂ H₂ to 0.053 mHa with exact integrals (Paper 12, v5.14.10); LiH to −8.0585 via geminal shape and core e-n factors (v5.16.0, v5.20.6); the two-block radial exponent worth ~0 (v5.14.2). The period of the *integral* is not a *basis* principle. |
 | Elliptic-dilogarithm route obstructed; the rank-4 Picard–Fuchs operator is irreducible (Paper 59 `sec:obstruction`, [SYMBOLIC + MEASURED]; not a §3 row — a paper-owned negative) | **STANDING** | HARD | Fourier–Laplace transform of an irreducible connection + exact-integer monodromy with no invariant coordinate subspace (Paper 59 abstract and `sec:obstruction`; `tests/test_routeC_momentum.py` `test_L4_monodromy_certificate_irreducible`). No factorization closes T2. |
 | Partial closed form of the three-centre block is worse than none (Poly-2, ledger 2026-08-14) | **STANDING** | HARD | Paper 59 `sec:scope`: "a value that is part closed-form and part numerical is neither more accurate nor decidable"; the cancelling T1/T2 contributions are physics (8-fold symmetry bit-exact). Supports the all-or-nothing consequence below. |
-| Generic three-electron chain fibre has no relation in K3 + elliptic + Tate bases (P3e-2, 2026-10-14; filed this run, ledger + §3) | **STANDING** | OPEN-LEANING | 320-digit PSLQ, one mass triple (1,2,4), basis omits dilogarithms of mass ratios and products of elliptic periods; the positive control recovers its exact relation in every basis (`docs/predictions/2026-10-13_three_electron_k3.md`; CHANGELOG v5.20.15; Paper 59 `sec:three_electron`, [OBSERVATION, evidence]). Named better attempt: widen the basis before widening the computation. |
+| Generic three-electron chain fibre has no relation in K3 + elliptic + Tate bases (P3e-2, 2026-10-14; filed this run, ledger + §3) | **STANDING** | OPEN-LEANING | 320-digit PSLQ, one mass triple (1,2,4), basis omits dilogarithms of mass ratios and products of elliptic periods; the positive control recovers its exact relation in every basis (`docs/predictions/2026-10-13_three_electron_k3.md`; CHANGELOG v5.20.15; Paper 59 `sec:three_electron`, [OBSERVATION, evidence]). Named better attempt: widen the basis before widening the computation. **Update 2026-10-20 (pre-registered P3e-2W, `docs/predictions/2026-10-19_p3e2_widened.md`):** the named attempt was made. Five bases (adding dilogarithms, trilogarithms, Bailey-adapted products of elliptic periods, the vacuum sunrise, logarithms times periods) at four generic triples, a swap test, and two threshold triples: no relation, 17 of 20 generic cells valid; on the slice G(t;1,1) the fibre is a K3 function integrated once (Paper 59 `sec:density_ring`). Still STANDING; the kind (OPEN-LEANING vs SOFT) is left to the next `/walls` pass. |
 
 **Adjacent, not members.** The Yukawa-PSLQ null (ledger 2026-06-03) and the W1e period-class null (2026-06-04) are "calibration data are not outer-factor periods", Paper 57's two-family finding, a different mechanism (inner-factor input data), left for an ALPHA/INNER-FACTOR pass. The Hain–Brown period-level negative (`memory/hain_brown_identification.md`) belongs with the P56 Tannakian arc. The S^(4)-stage numerics rows (Levin on log-modulated summands, nested nsum, sumem, float64 contamination, sympy rank; ledger 2026-06-11/13) are a METHOD family (how not to sum), not a transcendence family; listed here only so the next pass does not re-sort them.
 
@@ -371,11 +371,20 @@ multi-focal composition wall ([[multi_focal_wall_pattern]]; Paper 57 `sec:unity`
   `docs/predictions/2026-10-19_zemach_door.md` (ZM1-ZM3 hold, ZM4 fails in part); seam J16.
 - **HF-4 instance: MIS-SCOPED, re-stated.** Its text ("no magnetization-density distribution carried") names a
   limit of one code function. With the distribution carried, the electron's labels survive and the hyperfine
-  factor is set by the Zemach moment of charge and magnetization together, one joint moment per order, which no
+  factor is set by the Zemach moment of charge and magnetization together, one joint moment per order [superseded 2026-10-19: further joint constants as NRQED matching
+  coefficients; see the addendum below], which no
   label fixes. That is the J14 shape (PI decision 2026-10-18: J14 is a door and the seventh instance), so HF-4
   stays an instance, priced. The wall's mechanism is supported, not breached: two spatial distributions compose
   at leading order only through a joint moment, the Zemach radius, that neither radius fixes alone.
 - **Classification unchanged** (HARD at the level of the mechanism; the door is priced, not closed).
+- **Addendum 2026-10-19 (EFT check, `debug/eft_multifocal_check_memo.md`, sources verified by the PM):** for
+  the nuclear instances (J14, HF-4/J16) the price is the NRQED matching statement (Hill-Paz, PRL 107, 160402
+  (2011); Karshenboim, Phys. Lett. A 225, 97 (1997)): one coefficient per independent contact operator at each
+  order, logs fixed by lower orders. "One moment per order" was too strong (two at fourth order) and "universal
+  ln + 2 gamma_E" holds only for the log's coefficient. These instances support the wall's existence, not that
+  it is GeoVac-specific; the GeoVac-specific content is that the label skeleton has no native matching step
+  (Paper 57 `sec:unity`, on the Paper 32 LS-8a template). X4-1 (pre-registered) confirmed the fourth-order
+  n-dependence in our own code to 5e-9.
 
 ## Promotion candidates (PI-gated)
 

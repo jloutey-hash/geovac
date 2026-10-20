@@ -1,0 +1,18 @@
+{
+ "L_G": {
+  "t=0": "-4*(rho - 5)*(rho - 3)*(rho - 1)**2*(rho + 1)*(rho + 2)*(rho + 5)",
+  "t=1": "6*rho*(rho - 5)*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(rho + 3)",
+  "t=-1": "6*rho*(rho - 5)*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(rho + 3)",
+  "t=2": "-768*rho*(rho - 5)*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(2*rho + 9)",
+  "t=-2": "-768*rho*(rho - 5)*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(2*rho + 9)",
+  "t=inf (from top Q, exponents mu of t^mu)": "-6*(rho + 2)*(rho + 4)*(rho + 7)*(rho + 8)*(rho + 12)"
+ },
+ "M6": {
+  "t=0": "-4*(rho - 5)*(rho - 3)*(rho - 1)**2*(rho + 1)*(rho + 5)",
+  "t=1": "6*rho*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(rho + 4)",
+  "t=-1": "-6*rho*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(rho + 4)",
+  "t=2": "-384*rho*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(2*rho + 11)",
+  "t=-2": "384*rho*(rho - 4)*(rho - 3)*(rho - 2)*(rho - 1)*(2*rho + 11)",
+  "t=inf (from top Q, exponents mu of t^mu)": "-6*(rho + 4)*(rho + 7)*(rho + 8)*(rho + 12)"
+ }
+}

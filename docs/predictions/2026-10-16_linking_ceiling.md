@@ -111,3 +111,12 @@ Almkvist-Zudilin, math/0402386; AESZ, math/0507430). So five densities give no n
 open question of this record about n = 5 is answered by the literature. Irreducibility for n = 2
 to 5 now follows from local exponents and Fuchs' relation, with no degree bound. Paper 59
 `sec:four_density` carries this.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- PL1: FINDING, routine (the standard position-space form of banana integrals)
+- PL2: CHECK (AESZ #58)
+- PL3: UNSCORED
+- PL4: CHECK

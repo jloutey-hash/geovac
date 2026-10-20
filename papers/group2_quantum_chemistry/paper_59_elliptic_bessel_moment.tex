@@ -904,19 +904,33 @@ repulsion integral sits on the rung of the two-loop sunrise and the chain
 on the rung of the three-loop banana;\ the families differ, and
 Sec.~\ref{sec:four_density} gives the exact relation.  \textbf{[OBSERVATION, evidence]} At equal scales the
 true fibre at zero separation collapses to two K3 periods (Bessel moments
-of the record) and $\pi^3$;\ at the generic triple $(1,2,4)$ a 320-digit
-PSLQ finds no relation among K3 periods and powers of $\pi$, nor among K3
-periods, elliptic periods and quasi-periods, and Tate numbers.  That is
-evidence, at one scale triple and with a basis that omits dilogarithms
-and products of elliptic periods, that the generic fibre carries content
-beyond the K3 and elliptic periods, as the banana does.
+of the record) and $\pi^3$.  At four generic scale triples, $(1;2,4)$,
+$(1;3,7)$, $(3;1,7)$ and $(3;4,6)$ with the central density's scale first,
+integer-relation searches at 340 and 400 digits find no relation in five
+bases built from the K3 periods and their scale derivatives, products of
+elliptic periods at the Bailey moduli, residue periods and their
+products, dilogarithms and trilogarithms of scale ratios, the vacuum
+sunrise and its mass derivatives, logarithms times periods, and
+weight-three Tate numbers.  Every basis recovers a planted relation, and
+in every basis the fibre with $\int_0^x K_0$ dropped from each leaf
+reduces onto the K3 periods;\ three of the twenty searches are void, their
+precision cap below the planted relation's height.  Moving the central
+density within the scale set $\{1,3,7\}$ gives no relation either, and the
+fibre does not collapse at the two threshold triples $(2;1,1)$ and
+$(3;1,2)$, where the central scale is the sum of the others.  That is
+evidence, at a sample of triples and with guessed bases, that the generic
+fibre carries content beyond the K3 and elliptic periods, as the banana
+does;\ on a one-parameter slice it is a K3 function integrated once
+(Sec.~\ref{sec:density_ring}), a class no finite basis of periods is
+expected to capture.
 Longer trees are taken up in Sec.~\ref{sec:four_density}.
 Guards:\ \texttt{tests/test\_paper59\_three\_electron\_k3.py}
 (the fibre agreement, the elementary angle integral, the rational
 one-center limits, the closed form against quadrature, the K3 period
 against $\bar V_3$, the six-line branch locus, the non-isotrivial slice);\
 the equal-scale collapse and the generic null are not guarded, and the
-record carries them.
+records carry them (\texttt{docs/predictions/2026-10-13\_three\_electron\_k3.md},
+\texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}).
 
 \subsection{Four linked densities:\ the first rung beyond elliptic}
 \label{sec:four_density}
@@ -1079,8 +1093,10 @@ collected by Lim, Tu and Yu~\cite{lim_tu_yu2026}, who credit them to earlier
 work, through the hypergeometric forms of Ref.~\cite{bbbg2008};\ the
 numerical form of $c_{6,0}$ is theirs, and in their account of the
 underlying Kloosterman motives the moments at $n=5$, $7$ and $8$ enter
-only through $2\times2$ determinants of periods.  The threshold reading is
-what the ladder adds.  In the bookkeeping of Papers~18
+only through $2\times2$ determinants of periods.  The singular points themselves are the
+thresholds and pseudo-thresholds of the equal-mass banana operator
+(Ref.~\cite{bonisch2021}, Eq.~(3.7));\ the threshold reading of the
+values is what the ladder adds.  In the bookkeeping of Papers~18
 and~34~\cite{loutey_paper18,loutey_paper34} these values lie beyond the
 genus-graded embedding tier:\ $c_{3,0}$ is a rational multiple of $2^{-2/3}\Gamma(1/3)^6/\pi$, a
 complex-multiplication period, and $c_{4,0}$ and, numerically, $c_{6,0}$
@@ -1223,6 +1239,42 @@ against an elementary kernel.  So the
 Coulomb ring lowers the rung at the fibre and raises the weight at one
 center.  In neither limit does it climb the period ladder.
 
+\textbf{[SYMBOLIC + MEASURED]} The same holds for the physical weights.
+With the Slater densities of Sec.~\ref{sec:three_electron}, the chain's
+fibre at zero separation, on the slice with scales $(t;1,1)$ and $t$ on
+the central density, is
+\begin{equation}
+  G(t)=\int_0^\infty x\,K_1(tx)\,J(x)^2\,dx,\qquad
+  J=3\int_0^x K_0-3xK_0-x^2K_1 .
+  \label{eq:chain_slater_slice}
+\end{equation}
+The Mellin route gives an operator of order seven, which divides exactly
+as $N_2\,R_3\,R_1\,(\theta+2)$.  The two lowest pieces are elementary:\
+$\theta+2$ has the solution $t^{-2}$, and $R_1=(1-t^2)\theta-(1+7t^2)$ has
+the solution $t/(1-t^2)^4$.  The piece $R_3$, of order three, is
+equivalent to $F_3$'s operator $4\theta^3-t^2(\theta+1)^3$:\ an explicit
+order-two map, rational in $t$ with poles at $t=0,\pm2$, sends every
+solution of $F_3$'s operator to a solution of $N_2R_3$, and $R_3$ is the
+annihilator of the image, both checked in exact rational arithmetic.
+Again $N_2$ is not needed:\ $R_3R_1(\theta+2)$ annihilates $G$ with a
+residual of at most $2\times10^{-31}$ at 32 digits at five values of $t$
+between $0.5$ and $3.5$, while changing one coefficient of $R_3$ by one part
+in 198 gives residuals from $10^3$ to $4\times10^4$.  And $G$ needs the K3
+piece:\ $R_1(\theta+2)G$ is nonzero, $191$ at $t=0.5$ and $8.9$ at $t=3.5$.
+A search modulo a prime finds no rational map that splits the K3 piece
+off, in a box larger than the bound set by the leading terms of the local
+exponents, and the same call finds a planted split.  So $G$ is an
+elementary function plus a K3 function integrated once against an
+elementary kernel, here one that carries $\operatorname{artanh}t$;\ whether
+that term drops, as it does for the chain at the fingerprint fibre, was not
+tested.  The operator is singular at $t=1$, the equal-scale point where
+the fibre collapses (Sec.~\ref{sec:three_electron});\ its exponent $-3$
+there comes from $R_1$, so the singularity is not apparent.  Caps:\ the
+no-split search is modulo a prime, and its bound rests on the leading-term
+argument rather than the written proof the chain has.  Record:\
+\texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}.  Guard:\
+\texttt{tests/test\_paper59\_chain\_slater\_slice.py}.
+
 \textbf{[SYMBOLIC + MEASURED]} At $\gamma=1$ the correlated triangle does not drop.  Put
 the exponential geminal $f=e^{-\gamma r}$ on the two edges at one density,
 $Y=\langle\rho_i\rho_j\rho_k\,f_{ik}f_{jk}/r_{ij}\rangle$, at the fibre with
@@ -1291,8 +1343,9 @@ $D=3$, and the early references are collected by Preti~\cite{preti2018}.
 Under the relation of Sec.~\ref{sec:four_density} to the banana ladder, the
 triangle's elliptic piece is the $n=2$ rung itself.  What is added here is the fibre reading:\ the Struve
 moment~\eqref{eq:ring_struve}, its operator, its place below the chain,
-and the correlated triangle's place with it.  No literature search was made
-for the solid-angle form of the massive loop;\ it rests on its numerical check.
+and the correlated triangle's place with it.  The solid-angle form of the massive loop is Davydychev and Delbourgo's
+(Sec.~5.1 of~\cite{davydychev_delbourgo1998}, which recovers Nickel's
+result~\cite{nickel1978});\ here it also rests on its numerical check.
 No literature search was made for the operator~\eqref{eq:ring_op}.
 
 %% ========================================================================
@@ -1594,6 +1647,13 @@ The LMFDB Collaboration, ``The $L$-functions and modular forms database,''
 \bibitem{lim_tu_yu2026}
 Z.~L.~Lim, F.-T.~Tu and J.-D.~Yu, ``Galois representations and modularity
 for twisted moments of Kloosterman sums,'' arXiv:2609.13576 (2026).
+
+\bibitem{davydychev_delbourgo1998}
+A.~I. Davydychev and R.~Delbourgo, ``A geometrical angle on Feynman
+integrals,'' J.~Math.~Phys.~\textbf{39}, 4299 (1998), arXiv:hep-th/9709216.
+
+\bibitem{nickel1978}
+B.~G. Nickel, J.~Math.~Phys.~\textbf{19}, 542 (1978).
 
 \bibitem{preti2018}
 M.~Preti, ``STR:\ a Mathematica package for the method of uniqueness,''

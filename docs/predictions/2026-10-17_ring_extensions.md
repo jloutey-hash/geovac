@@ -204,3 +204,13 @@ Caps. Fibre only; one geminal shape (exponential, not the cusp-correct or linear
 geminals of the LiH engine); two values of gamma; apex placement. The kite operators are guessed
 from series and checked on 600 coefficients, not derived. gamma = 1 is the special value where
 the thresholds coincide.
+
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- QG1: CHECK (Davydychev-Delbourgo 1998 Sec. 5.1, after Nickel 1978; now credited in Paper 59)
+- QG2: MISS
+- QR1: UNSCORED
+- QR2: UNSCORED

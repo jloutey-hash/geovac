@@ -150,3 +150,12 @@ Guarded (2026-10-18, its own step): the threshold table and exponents for n <= 8
 
 Unidentified: c_{5,0}, c_{7,0}, c_{8,0}. Stopped for feasibility: the weight-3 level-525 form and
 the symmetric-square L-function the literature attaches to the n = 5, 7 determinants.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- IS1: CHECK
+- IS2: CHECK
+- IS3: CHECK
+- IS3': UNSCORED

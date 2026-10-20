@@ -1,0 +1,80 @@
+{
+ "control F_3 op|f3|R": [
+  1,
+  [
+   0,
+   0
+  ]
+ ],
+ "control F_3 op|f3|L": [
+  1,
+  [
+   0,
+   0
+  ]
+ ],
+ "control F_3 op|f2|R": [
+  0,
+  null
+ ],
+ "control F_3 op|f2|L": [
+  0,
+  null
+ ],
+ "control F_3 op|f2(t^2/4)|R": [
+  0,
+  null
+ ],
+ "control F_3 op|f2(t^2/4)|L": [
+  0,
+  null
+ ],
+ "control F_4 op|f3|R": [
+  0,
+  null
+ ],
+ "control F_4 op|f3|L": [
+  0,
+  null
+ ],
+ "control F_4 op|f2|R": [
+  0,
+  null
+ ],
+ "control F_4 op|f2|L": [
+  0,
+  null
+ ],
+ "control F_4 op|f2(t^2/4)|R": [
+  0,
+  null
+ ],
+ "control F_4 op|f2(t^2/4)|L": [
+  0,
+  null
+ ],
+ "M6|f3|R": [
+  0,
+  null
+ ],
+ "M6|f3|L": [
+  0,
+  null
+ ],
+ "M6|f2|R": [
+  0,
+  null
+ ],
+ "M6|f2|L": [
+  0,
+  null
+ ],
+ "M6|f2(t^2/4)|R": [
+  0,
+  null
+ ],
+ "M6|f2(t^2/4)|L": [
+  0,
+  null
+ ]
+}

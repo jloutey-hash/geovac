@@ -503,6 +503,41 @@ REGISTRY = [
         },
     },
     {
+        "id": "finite-nucleus-one-per-order-universal-log",
+        # The CLAIMS (Paper 23 sec:finite_nucleus, Paper 57 J14/J16/HF-4, seam J14/J16, atlas doors 24/26):
+        # a finite nucleus consumes moments "one per order"; from fourth order a "universal"
+        # ln(2ZR) + 2 gamma_E enters; the s-wave defect series eq:defect_s is "the same at every n";
+        # the psi(n) hyperfine form is "post hoc"; Paper 34: the Foldy/Friar correction is "rational at
+        # every order".  Corrected 2026-10-19 (EFT check, sources verified by the PM): the price is NRQED
+        # matching, one coefficient per independent contact operator per order (two at fourth order:
+        # <r^4> and a log-moment constant); only the log's coefficient is fixed, the constant beside it is
+        # profile-dependent (PPY25 Eq. 30, a single gamma_E for an exponential charge); the defect depends
+        # on n from x^4 (X4-1, pre-registered, 5e-9); the psi(n) form is Karshenboim's (1997/2001); logs
+        # enter from fourth order, so "rational at every order" is false.
+        "pattern": r"consumed,\s+one\s+per\s+order|charge,\s+one\s+per\s+order|one\s+joint\s+moment\s+per\s+order|universal\s+piece\s+enters|same\s+universal\s+fourth-order|universal\s+coefficient\s+to|universal\s+\$?\\ln\(2ZR\)|rational\s+in\s+the\s+charge\s+form-factor\s+moments\s+at\s+every\s+order|a\s+post-hoc\s+form|so\s+it\s+is\s+post\s+hoc|the\s+same\s+at\s+every\s+\$n\$,\s+and\s+agreeing",
+        "exempt_if_nearby": withdrawal_marker("finite-nucleus-one-per-order-universal-log"),
+        "severity": "fail",
+        "scope": "group3 group4 group6",
+        "note": "Registered 2026-10-19 (PI-directed EFT check).  Evidence: debug/eft_multifocal_check_memo.md; record docs/predictions/2026-10-19_eft_checks.md (X4-1 held).  Sources: Hill-Paz PRL 107, 160402; Karshenboim PLA 225, 97 and physics/0102085 Eq. 26; Pachucki-Patkos-Yerokhin arXiv:2502.09455 Eq. 30, 77.",
+        "files": [
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "docs/forced_free_seam.md",
+            "docs/atlas.md",
+            "docs/claim_test_matrix.md",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated + reviewed 2026-10-19 (PM) -- abstract, J14 and J16 items, HF-4 item, EFT prior-art paragraph after obs:multi_focal_wall",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + reviewed 2026-10-19 (PM) -- sec:proj_charge_density transcendental signature scoped to third order",
+            "docs/forced_free_seam.md": "remediated + reviewed 2026-10-19 (PM) -- rows J14 and J16",
+            "docs/atlas.md": "remediated + reviewed 2026-10-19 (PM) -- doors 24 and 26",
+            "docs/claim_test_matrix.md": "remediated + reviewed 2026-10-19 (PM) -- Paper 23 finite-nucleus rows; new eq:defect_n4 row",
+            "docs/walls/register.md": "reviewed 2026-10-19 (PM) -- the 2026-10-19 HF-4 note is a dated record; an EFT addendum follows it",
+            "CLAUDE.md": "reviewed 2026-10-19 (PM) -- the v5.20.27 S2 line is a dated chronicle record, left as written",
+        },
+    },
+    {
         "id": "coulomb-ho-calibration-pi-layer",
         # The CLAIM (Paper 24 thm:asymmetry, layer (ii)): calibration pi is Coulomb-specific, tied to
         # second-order Riemannian operators with nonlinear projections, with no analog for the HO's

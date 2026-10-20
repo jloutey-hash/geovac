@@ -120,3 +120,9 @@ survive with every l present, and the threshold function is a pi-free entire fun
 approach in whole powers of E; it is nearly a corollary of J13, and adds the symmetry and the price.
 
 Home (2026-10-18, PI-approved): Paper 7 `sec:continuum`, as the third shape (eq:zero_energy); seam row J13 and atlas door 23 extended; guard `tests/test_paper7_zero_energy_door.py`, written as its own step and fire-tested 9/9.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- ZE1-ZE3: CHECK (Pauli 1926; Seaton 1983, now credited in Paper 7)

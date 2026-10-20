@@ -76,3 +76,26 @@ the x^3 ln x coefficient minus (4/5) x (the x coefficient) equals -64/63.
 ## Result
 
 (To be appended after scoring; the predictions above are never edited.)
+
+## Disposition (scored 2026-10-19)
+
+Script `debug/eft_checks.py`; data `debug/data/eft_checks_x4.json`, `debug/data/eft_checks_x3.json` and
+their logs. One slip in the disclosure above: the hand value of f(3) is -0.00916, not -0.0104; the script
+evaluated it exactly, as the file said it would, and nothing scored depends on the hand value.
+
+**Controls.** All pass. mu(1) at x = 1e-3 minus the threshold series through x^3 is 6.6e-13, the x^4 level.
+The x coefficients of H reproduce -3/2, -72/35, -12/5. The x^2 ln x coefficients are 0.80000005 (6.5e-8
+relative).
+
+**X4-1: HELD.** D_12: predicted x^4 coefficient -0.0123321203; fitted -0.0123321204, relative error 5.4e-9
+(5 columns) and 1.1e-7 (4 columns); an added ln x column is 1.2e-8 of the constant. D_13: predicted
+-0.0145081249; relative error 5.3e-9 and 1.1e-7; ln x column 1.2e-8. The s-wave defect depends on n at
+x^4, as PPY25 Eq. (30) implies. Class: **CHECK**. Consequence: Paper 23's "the same at every n" is scoped
+to x^3; the fourth-order term is now Eq. `eq:defect_n4` there.
+
+**X3-1: FAILED at its registered gate.** For all six (profile, n) cases the constant is -1.01486 (8
+columns), the same across profiles and n to 2e-5, against -64/63 = -1.015873: relative difference 1.0e-3,
+outside the 1e-4 falsifier bound. The 7-column fit gives -1.0129 to -1.0130, so the fit's own truncation
+spread (2e-3) exceeds the discrepancy: the data neither confirm nor exclude -64/63. The registered
+test failed; this fit does not decide -64/63, and the constant stays unidentified. Class: **MISS**. A decisive test needs an exact derivation
+or a fit whose truncation spread is well below 1e-3; either would be a new pre-registration.

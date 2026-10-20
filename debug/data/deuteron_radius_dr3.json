@@ -1,0 +1,196 @@
+{
+ "laguerre_literal_N40_lam_13949/10000": {
+  "H": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 1556,
+   "first_irrational": [
+    0,
+    1,
+    "1614594641177372192435171422850489/4856767137261271360678081500000",
+    "300000000/194574601"
+   ]
+  },
+  "R2": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 154,
+   "first_irrational": [
+    0,
+    1,
+    "-6000000000000/2714121109349",
+    "300000000/194574601"
+   ]
+  },
+  "T": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 1556,
+   "first_irrational": [
+    0,
+    1,
+    "57846503/500000",
+    "300000000/194574601"
+   ]
+  },
+  "V": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 1556,
+   "first_irrational": [
+    0,
+    1,
+    "421080260650240440534645590321/1942706854904508544271232600",
+    "300000000/194574601"
+   ]
+  },
+  "unnormalized_all_Fraction": true,
+  "unnormalized_S_diagonal_exact": true
+ },
+ "laguerre_literal_N40_lam_1/2": {
+  "H": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 1556,
+   "first_irrational": [
+    0,
+    1,
+    "476739906547147/11369751560100",
+    "12"
+   ]
+  },
+  "R2": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 154,
+   "first_irrational": [
+    0,
+    1,
+    "-48",
+    "12"
+   ]
+  },
+  "T": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 1556,
+   "first_irrational": [
+    0,
+    1,
+    "4147/100",
+    "12"
+   ]
+  },
+  "V": {
+   "entries": 1600,
+   "irrational_in_orthonormal_basis": 1556,
+   "first_irrational": [
+    0,
+    1,
+    "52363093498/113697515601",
+    "12"
+   ]
+  },
+  "unnormalized_all_Fraction": true,
+  "unnormalized_S_diagonal_exact": true
+ },
+ "ho_yukawa_0s": {
+  "sympy_integral": "mu*exp(b**2*mu**2/4)*erf(b*mu/2) - mu*exp(b**2*mu**2/4) + 2/(sqrt(pi)*b)",
+  "closed_form": "2*(-sqrt(pi)*b*mu*exp(b**2*mu**2/4)*erfc(b*mu/2)/2 + 1)/(sqrt(pi)*b)",
+  "sympy_difference": "0",
+  "erfc_coefficient": "-2*y/b (nonzero for mu, b > 0)",
+  "numeric": [
+   {
+    "hw": "10",
+    "mu": "1.55",
+    "b": "2.879930554718290425",
+    "closed": "0.03113009957305817752716095623383437",
+    "quad": "0.03113009957305817752716095623383437",
+    "abs_diff": "5.4738e-47",
+    "erfc_term_value": "-0.36067766997431848625"
+   },
+   {
+    "hw": "10",
+    "mu": "3.11",
+    "b": "2.879930554718290425",
+    "closed": "0.0091156765424326063230168116881360758",
+    "quad": "0.0091156765424326063230168116881360758",
+    "abs_diff": "1.1084e-46",
+    "erfc_term_value": "-0.38269209300494405746"
+   },
+   {
+    "hw": "20",
+    "mu": "1.55",
+    "b": "2.0364184245876386197",
+    "closed": "0.074782780641946509366364945554225371",
+    "quad": "0.074782780641946509366364945554225371",
+    "abs_diff": "7.6634e-47",
+    "erfc_term_value": "-0.47931708089510570898"
+   },
+   {
+    "hw": "20",
+    "mu": "3.11",
+    "b": "2.0364184245876386197",
+    "closed": "0.024273151155395066008267223249401715",
+    "quad": "0.024273151155395066008267223249401715",
+    "abs_diff": "1.8337e-46",
+    "erfc_term_value": "-0.52982671038165715233"
+   },
+   {
+    "hw": "40",
+    "mu": "1.55",
+    "b": "1.4399652773591452125",
+    "closed": "0.16693644665811532921927919500431239",
+    "quad": "0.16693644665811532921927919500431239",
+    "abs_diff": "2.1895e-47",
+    "erfc_term_value": "-0.61667909243663799834"
+   },
+   {
+    "hw": "40",
+    "mu": "3.11",
+    "b": "1.4399652773591452125",
+    "closed": "0.061935455517945311780539763550889676",
+    "quad": "0.061935455517945311780539763550889676",
+    "abs_diff": "7.6634e-47",
+    "erfc_term_value": "-0.72168008357680801578"
+   }
+  ],
+  "PASS": true
+ },
+ "minnesota": {
+  "HO_minnesota": {
+   "00": {
+    "element": "(b**2*kappa + 1)**(-3/2)",
+    "in_t": "t**3",
+    "polynomial_in_t": true
+   },
+   "01": {
+    "element": "sqrt(6)*b**2*kappa/(2*(b**2*kappa + 1)**(5/2))",
+    "in_t": "-sqrt(6)*t**5/2 + sqrt(6)*t**3/2",
+    "polynomial_in_t": true
+   },
+   "02": {
+    "element": "sqrt(30)*(-2*b**2*kappa + (b**2*kappa + 1)**2 - 1)/(4*(b**2*kappa + 1)**(7/2))",
+    "in_t": "sqrt(30)*t**7/4 - sqrt(30)*t**5/2 + sqrt(30)*t**3/4",
+    "polynomial_in_t": true
+   },
+   "11": {
+    "element": "(-6*b**2*kappa + 3*(b**2*kappa + 1)**2 - 1)/(2*(b**2*kappa + 1)**(7/2))",
+    "in_t": "5*t**7/2 - 3*t**5 + 3*t**3/2",
+    "polynomial_in_t": true
+   },
+   "12": {
+    "element": "sqrt(5)*(13*b**2*kappa + 3*(b**2*kappa + 1)**3 - 9*(b**2*kappa + 1)**2 + 6)/(4*(b**2*kappa + 1)**(9/2))",
+    "in_t": "-7*sqrt(5)*t**9/4 + 13*sqrt(5)*t**7/4 - 9*sqrt(5)*t**5/4 + 3*sqrt(5)*t**3/4",
+    "polynomial_in_t": true
+   },
+   "22": {
+    "element": "(-140*b**2*kappa + 15*(b**2*kappa + 1)**4 - 60*(b**2*kappa + 1)**3 + 130*(b**2*kappa + 1)**2 - 77)/(8*(b**2*kappa + 1)**(11/2))",
+    "in_t": "63*t**11/8 - 35*t**9/2 + 65*t**7/4 - 15*t**5/2 + 15*t**3/8",
+    "polynomial_in_t": true
+   }
+  },
+  "HO_algebraic": true,
+  "Laguerre_00_minnesota": "lambda**2*(kappa**(3/2) - (sqrt(kappa) - sqrt(pi)*lambda*exp(lambda**2/kappa)*erfc(lambda/sqrt(kappa)))*(kappa + 2*lambda**2))/kappa**(5/2)",
+  "Laguerre_contains_erfc": true,
+  "Laguerre_numeric": {
+   "closed": "0.52833846696929223426151301328292181",
+   "quad": "0.52833846696929223426151301328292181",
+   "abs_diff": "7.3568e-45",
+   "z": "1.74498880544902"
+  }
+ }
+}

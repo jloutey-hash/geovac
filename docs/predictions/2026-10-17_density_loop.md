@@ -244,3 +244,13 @@ Fromm, Pachucki: no matches. Its interelectron repulsion integrals join two dens
 (ch. 9, Fourier and Sturmian; app. B, Slater orbitals); its "triangles" are mass-spring examples
 (ch. 11-12); its "method of trees" (app. C, Aquilanti) builds hyperspherical harmonics and is
 unrelated to trees of linked densities. The triangle is not in this book.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- PT1: CHECK (star-triangle uniqueness)
+- PT2 main: FINDING (the strongest of the set)
+- PT2 side: MISS
+- PT3: CHECK (Remiddi 1991)
+- PT4: MISS

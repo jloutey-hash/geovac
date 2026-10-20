@@ -362,3 +362,17 @@ one-centre structure (Gaunt selection rules, composed block sparsity). Record: d
 steps 4-5; builders + slow hydrogenic-spectrum test in tests/test_water_ccsd.py; debug/water_qubit_resources.py;
 CHANGELOG v5.20.12.
 | Generic three-electron chain fibre as a combination of K3, elliptic and Tate periods (P3e-2, 2026-10-14; filed by `/walls` 2026-10-16) | 1 | At the generic mass triple (1,2,4) a 320-digit PSLQ (stability check at 260) finds no relation among the chain fibre, K3 periods and powers of pi, nor among K3 periods, elliptic periods and quasi-periods, and Tate numbers (log 2, log 3), while the positive control recovers its exact relation (denominator 363825) in every basis. Lesson: the generic fibre carries content beyond the K3 and elliptic periods, the three-electron analogue of Paper 59 extension; OPEN-LEANING — widen the basis (dilogarithms of mass ratios, products of elliptic periods) and the mass triples before widening the computation. Record `docs/predictions/2026-10-13_three_electron_k3.md`; Paper 59 `sec:three_electron`; walls register PERIODS-TRANSCENDENCE. |
+
+### RE-INTERPRETATION of "Sturmian basis for deuteron polarizability with Minnesota NN (2026-06-01)" (2026-10-20) | 0 (correction of the mechanism; the polarizability negative stands)
+
+The row's v2 lesson, "Minnesota is an effective interaction for HO" (the cause given for 20x overbinding in a
+Sturmian basis), is not supported by its own script. Read 2026-10-20 (PM, after a scoping agent flagged it):
+`debug/deuteron_sturmian_v2.py` line 34 labels as triplet the parameters -91.4 MeV, 0.465 fm^-2, which are
+close to Minnesota's SINGLET term (published triplet: -178 MeV, 0.639 fm^-2); and it builds the basis
+x^{l+1} L_n^{2l+1}(x) e^{-x/2}, which is orthogonal only with weight 1/r, while setting the overlap matrix to
+the identity (line ~115) and normalizing with the matching wrong Gamma factor. Either defect alone
+invalidates the energies. What stands: the polarizability negative (sum-over-states is fragile for a
+continuum response; LIT is the right method), and the v1 grid failure. What is withdrawn: the claim that
+Minnesota cannot be used in a Sturmian basis; untested. Consequence: the 2026-10-20 deuteron-radius door
+(`docs/predictions/2026-10-20_deuteron_radius.md`) uses MT-III and a correctly orthonormal Laguerre basis
+(L_n^{(2l+2)}), for independent reasons (published parameters, rational matrix elements).

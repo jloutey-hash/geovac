@@ -137,3 +137,51 @@ r_ERE^2 = 1/(8 kappa^2 (1 - kappa rho)) and rho = 2(kappa - 1/a_t)/kappa^2.
 ## Result
 
 (To be appended after scoring; the predictions above are never edited.)
+
+## Disposition (scored 2026-10-20)
+
+Run by a computation agent against the frozen file; scripts `debug/deuteron_radius_*.py`, data
+`debug/data/deuteron_radius_*.json`, full record `debug/deuteron_radius_results_memo.md`. Reviewed by the PM.
+The ODE and Laguerre routes agree on r_m to about 2e-9 (B 3e-11, a_t 2e-9, A_S 5e-8), so no miss below is
+numerical.
+
+**Controls.** Hydrogen exact: E = -1/2 at N_r = 1; -1/8 an exact eigenvalue at N_r = 2, lambda = 1/2. MT-I
+singlet unbound at N_r = 1..40 (ODE a_s = -23.58 fm). B = 2.2306877 MeV by both routes (-1.0e-6 relative to
+the published 2.23069); a_t = 5.5132023 fm by both routes (+4.2e-7). The HO consistency control FAILED: the
+811.8/r repulsive core keeps the HO basis UV-limited at every point scanned, so the infrared collapse onto
+one L_2 curve that More et al. describe never appears.
+
+**DR1: FAILED.** The Laguerre radius error at N_r = 30 is 1.62e-6, above the 1e-6 gate; the gate is met
+between N_r = 30 and 35. The HO half (off by at least 1.2% at every hbar-omega) held, but it is voided by
+the failed consistency control. Class: **MISS**.
+
+**DR2: FAILED.** At the registered scales lambda = 2 kappa and 3 kappa, N_r = 40, A_S(r) varies by 5.6e-3 and
+8.2e-4 over 8-16 fm, above the 1e-4 gate; the match to the ODE A_S at 2 kappa is -2.8e-4. At the
+energy-optimal scale, about 6 kappa, the spread is 4e-6, but that scale was not registered and is not scored.
+Class: **MISS**.
+
+**DR3: FAILED.** 1556 of 1600 entries of H in the registered orthonormal basis are irrational: the
+normalization brings in 1/sqrt((m+1)(m+2)(n+1)(n+2)). The registration's claim was mis-stated; in the
+unnormalized basis H and the overlap are rational (that is how the computation was assembled), but that
+version was not registered. The HO erfc clause and the Minnesota clause held. Class: **MISS**.
+
+**DR4: FAILED.** r_m(MT-III) = 1.9897135 fm, just below the window [1.99, 2.05]. r_ch = 2.14089 fm, +0.606%
+above CODATA 2018 2.12799 fm, below the +0.8% lower edge. Inputs re-read at scoring: r_p = 0.84075(64) fm
+(CODATA 2022), r_n^2 = -0.1155(17) fm^2 (PDG 2026). The basis-error clause held (2e-9, far below the
+residual to experiment). Class: **MISS**.
+
+**DR5: FAILED.** (r_ERE - r_m)/r_m = 2.00497%, just above the 2% bound. Class: **MISS**.
+
+**Reading.** All five are misses of the registered gates, and four of them miss by a small margin. The
+cause is the registration, not the physics: the DR4 and DR5 windows carried over experiment's +0.6%
+effective-range overshoot, while MT-III's own overshoot is 2.005%; the DR2 scales were chosen to avoid a
+construction artifact and sat far from the optimum; DR3 stated rationality for the wrong basis; DR1's gate sat
+just inside the convergence curve. What the run does establish, outside any scored claim: the deuteron
+radius comes out of the potential, r_m = 1.98971 fm, with no input from the electron side; r_ch is +0.61%
+above experiment, the potential's error. Novelty re-searches: no Laguerre-versus-HO deuteron comparison was
+found (DR1); Biernat, arXiv:1110.3180, p. 94, quotes a Malfliet-Tjon radius of 1.97625 fm for an unverified
+parameter set, so DR4 stays PROBABLY KNOWN and the 0.7% difference from our value is unexplained.
+
+**Deviations.** Exact assembly was done in the unnormalized basis (the orthonormal one is irrational, see
+DR3) and diagonalized at 50 digits; the basis-route a_t used a Kohn functional fixed before it was computed;
+the lambda grid, the singlet control's lambda and the ODE details were unregistered implementation choices.

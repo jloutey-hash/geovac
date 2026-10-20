@@ -160,3 +160,14 @@ and periods that are symmetric squares of elliptic periods, which supports P3d.
 Nega-Safari); double covers of P^2 on six lines (Matsumoto-Sasaki-Yoshida, E(3,6) hypergeometric);
 three-electron Slater integrals (Fromm-Hill 1987 for one-centre r12 r23 r31, dilogarithms;
 Harris; Remiddi). Not checked before registering.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- P3a: FINDING, routine
+- P3b: FINDING (the K3 type is classical; placing this integral on it was not found)
+- P3c: CHECK
+- P3d: CHECK (Bailey-Borwein-Broadhurst-Glasser)
+- P3e-1: FINDING (likely new; a standard IBP mechanism)
+- P3e-2: UNCLEAR (re-tested by `2026-10-19_p3e2_widened.md`)

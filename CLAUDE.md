@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.0 (October 19, 2026)
+**Version:** v5.21.1 (October 19, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **EFT check, novelty audit, period and deuteron tests (2026-10-19/20, v5.21.1, PI-directed):** nuclear doors = NRQED matching; 7 of 34 held predictions not in literature; X4-1, P3e-3, DS1/3-5 held; X3-1, P3e-4, DR1-5, DS2 missed. CHANGELOG v5.21.1.
 - **§1.6 restated; §2 compaction round 8 (2026-10-19, v5.21.0, PI-authorized):** calibration-π reading removed, Track NJ back to "shelved"; 131 bullets moved verbatim to the frontier archive. CHANGELOG v5.21.0.
 - **KS lift and hyperfine door; calibration-pi layer withdrawn (2026-10-19, v5.20.29, pre-registered, PI-delegated):** hydrogen = constrained 4D oscillator, Z = n p0, one pi/4; Zemach priced, ZM4 partly failed. CHANGELOG v5.20.29.
 - **Dirac finite nucleus near Z alpha = 1 (2026-10-19, v5.20.28, pre-registered):** R^(2gamma) below; radius compulsory past it, diving radii in ratio e^(pi/sigma); Z_cr 169.7; RD3 threshold missed. CHANGELOG v5.20.28.
@@ -350,6 +351,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | RE-INTERPRETATION of the CUSP-2 row (2026-09-25): its 'Z_c≈1.84 graph-validity boundary' was the non-physical (1/16)A hop; physical He has no Z_c. The negative result (Schwartz tail does not help) stands | 0 | See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the Dirichlet-disk row (2026-09-29): the 'boundary obstruction' was a float artifact at the exact grid point ρ=R (0/0 Markov ratio); off it the error decays. Negative WITHDRAWN; disk + cone OPEN | 0 | See `docs/failed_approaches_ledger.md`. |
 | Generic three-electron chain fibre as K3 + elliptic + Tate periods (P3e-2, 2026-10-14; filed by `/walls` 2026-10-16) | 1 | 320-digit PSLQ at one mass triple finds no relation while the positive control recovers its exact one; the generic fibre carries more than K3 and elliptic periods. OPEN-LEANING: widen the basis (dilogs, elliptic products) before the computation. See `docs/failed_approaches_ledger.md`; walls register PERIODS-TRANSCENDENCE. |
+| RE-INTERPRETATION of the Minnesota-Sturmian deuteron row (2026-10-20): the v2 '20x overbinding' came from singlet parameters labelled triplet and a non-orthonormal basis treated as orthonormal, not from Minnesota being HO-tuned. The polarizability negative stands | 0 | See `docs/failed_approaches_ledger.md`. |
 
 ---
 

@@ -162,3 +162,9 @@ data; the pi is the sphere's volume normalization. The mathematics is textbook; 
 accounting.
 
 Home (2026-10-18, PI-approved): Paper 24 `sec:large_spin`; seam row J12 (F, with the measured corrections and the M1 reading outside it); atlas door 22; guard `tests/test_paper24_large_spin_door.py`, written as its own step and fire-tested 11/11.
+
+## Novelty classification (appended 2026-10-19)
+
+Classes per `docs/predictions/README.md`, set after the fact by a literature audit (`debug/prediction_novelty_audit_memo.md`; this record predates the novelty field). FINDING = held, not found in the literature; CHECK = held, already known; MISS = failed.
+
+- LS1-LS5: CHECK (Holstein-Primakoff; Krawtchouk-Hermite; Radcliffe)
