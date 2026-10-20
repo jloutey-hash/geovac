@@ -104,12 +104,16 @@ claim restates them (C7).
   - *(Bite-1: Paper 22 angular sparsity theorem; Paper 24 π-free Bargmann–Segal
     lattice + Coulomb/HO six-layer asymmetry; Paper 31 A/D partition — certified.)*
 - **C8 — post-v5.16.0 pre-registration (added 2026-09-27).**
-  - **Coulomb/HO asymmetry: 7 layers catalogued, 6 standing.** Layer 1 (the
-    spectrum-computing role of L₀) is withdrawn with the graph→S³ re-pricing (trunk
-    C6/C8). The Wilson layer survives, re-scoped to representation theory; on S³ it
-    is argued, not constructed. **Paper 31 has two standing discriminators, not
-    three.** A live "seven layers", "three independent discriminators" or "L₀ matter
-    propagator" is LARGE (C16 `coulomb-ho-layer1-and-three-discriminators`).
+  - **Coulomb/HO asymmetry: 7 layers catalogued, 5 standing** (amended 2026-10-19,
+    PI-directed). Layer 1 (the spectrum-computing role of L₀) is withdrawn with the
+    graph→S³ re-pricing (trunk C6/C8). Layer 2, calibration π, is withdrawn by the
+    Kustaanheimo–Stiefel lift: π enters both sides through a measure and spectral
+    sums (Paper 24 `sec:ks_frame`). The Wilson layer survives, re-scoped to
+    representation theory; on S³ it is argued, not constructed. **Paper 31 has one
+    standing discriminator.** A live "seven layers", "six standing", "two" or
+    "three independent discriminators", "calibration π is Coulomb-specific" or
+    "L₀ matter propagator" is LARGE (C16 `coulomb-ho-layer1-and-three-discriminators`,
+    `coulomb-ho-calibration-pi-layer`).
   - **Paper 22 §sign_holonomy (new):** the sign problem as a frustrated ±1 holonomy.
     The measured claims are stated at their measured tier. Nothing is claimed about
     signs beyond "no better than random"; the Gaunt-zero cycle cut is about 15×, and

@@ -99,8 +99,9 @@ re-prices everything above it.
     The C16 entries `graph-laplacian-converges-to-s3` and
     `graph-eigenvalues-integer-or-rational` are the deterministic backstop; the
     claim-impact reviewer covers paraphrases.
-  - **Also in claim-impact scope:** WH3's graph-limit leg, and Coulomb/HO Layer 1
-    (withdrawn: 7 catalogued, 6 standing), wherever trunk papers restate them.
+  - **Also in claim-impact scope:** WH3's graph-limit leg, and Coulomb/HO Layers 1
+    and 2 (both withdrawn: 7 catalogued, 5 standing; Layer 2 amended 2026-10-19,
+    PI-directed), wherever trunk papers restate them.
 - **C7 extension — which object converges (pre-registered 2026-09-28 after FULL #9,
   PI-approved; applies from the next run).** Paper 38's convergence theorem is about
   the **true Camporesi–Higuchi truncation** (Dirac eigenspaces up to the cutoff), not

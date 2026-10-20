@@ -513,7 +513,7 @@ REGISTRY = [
         "exempt_if_nearby": withdrawal_marker("coulomb-ho-calibration-pi-layer"),
         "severity": "fail",
         "scope": "trunk group1 group3 group5 group6 synthesis",
-        "note": "Registered 2026-10-19 (PI-delegated decision).  Seven layers catalogued, five standing; Paper 31: one standing discriminator.  Evidence: tests/test_paper24_ks_lift.py; record docs/predictions/2026-10-19_ks_lift.md.  CLAUDE.md S1.6 still states the withdrawn reading and is PI-only (flagged, not listed here).",
+        "note": "Registered 2026-10-19 (PI-delegated decision).  Seven layers catalogued, five standing; Paper 31: one standing discriminator.  Evidence: tests/test_paper24_ks_lift.py; record docs/predictions/2026-10-19_ks_lift.md.  CLAUDE.md S1.6 restated 2026-10-19 (v5.21.0, PI-authorized).",
         "files": [
             "papers/group3_foundations/paper_24_bargmann_segal.tex",
             "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
@@ -547,6 +547,7 @@ REGISTRY = [
             "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + reviewed 2026-10-19 (PM) -- counts and the (ii) layer item",
             "papers/synthesis/group3_foundations_synthesis.tex": "remediated + reviewed 2026-10-19 (PM) -- abstract (d), counts, layer-2 item, operator-order paragraph, transcendentals paragraph",
             "README.md": "remediated + reviewed 2026-10-19 (PM) -- Paper 24 paragraph",
+            "docs/track_nj_alpha_memo.md": "remediated + reviewed 2026-10-19 (PM) -- dated correction: the definitively-shelved upgrade withdrawn, recommendation back to shelve",
         },
     },
     {

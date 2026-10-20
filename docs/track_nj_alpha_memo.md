@@ -178,6 +178,8 @@ A derivation route that does not mention −Z/r somewhere should be treated with
 
 **Recommendation: DEFINITIVELY SHELVED.**
 
+> **Correction (2026-10-19, v5.21.0).** The upgrade to "definitively shelved" is withdrawn. It rested on Paper 24's claim that calibration π is structurally Coulomb-specific, and Paper 24 withdrew that layer: in the Kustaanheimo–Stiefel frame the oscillator's spectral zeta values carry π² as the S³ ones do (Paper 24 sec:ks_frame; `tests/test_paper24_ks_lift.py`). The recommendation reverts to A, shelve, on the numerical result of §4 and the Fock rigidity narrowing of §2. The text below is kept as written.
+
 (Originally Recommendation A — "Shelve the nuclear → α connection." Upgraded after Track NK Sprint 2 / Paper 24, see §6.1 below.)
 
 Rationale:
@@ -214,7 +216,7 @@ The four candidate routes from §3 (Runge–Lenz, SO(4) coadjoint orbits, SO(4,2
 | **Word count (§1–6)** | ~2,250 |
 | **Sections** | 6 (Question; Rigidity narrows; What it rules in; Numerical exploration; Negative result; Recommendation) |
 | **Numerical result** | B_nuc(n_max = 3, j-coupled) = 103.5; no Paper 2 coincidence at p < 10⁻³ |
-| **Recommendation** | **DEFINITIVELY SHELVED** (upgraded from "Shelve" after Track NK Sprint 2 / Paper 24) |
+| **Recommendation** | **SHELVED** (the 2026-10-19 correction withdraws the "definitively" upgrade) |
 | **Paper 2 status** | Unchanged numerically; "Dynamical specificity" framing added in Phase 4B |
 | **Code changes** | None (theory memo) |
 

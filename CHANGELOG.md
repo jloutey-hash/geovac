@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.0] - 2026-10-19
+
+Minor bump: a change to CLAUDE.md S1.6 (PI-authorized).
+
+### Changed
+- **CLAUDE.md S1.6 restated (PI-authorized).** Phase 4 item (6) no longer says calibration pi is structurally Coulomb-specific; it now says the Coulomb/HO asymmetry is representation-theoretic and arithmetic, with pi entering both sides through a measure and spectral sums (Paper 24 `sec:ks_frame`). Closes the v5.20.29 open item.
+- **Track NJ back to "shelved".** Its 2026-04 upgrade to "definitively shelved, structurally impossible" rested on the withdrawn calibration-pi layer. CLAUDE.md S1.6 and `docs/track_nj_alpha_memo.md` (dated correction note; original text kept) now say shelved, on the memo's numerical result and the Fock rigidity narrowing. Paper 2 cites the memo only for the numerical check and is unchanged. The memo is added to the C16 `coulomb-ho-calibration-pi-layer` dependents, stamped.
+- **CLAUDE.md S2 compaction round 8.** The 131 one-liners from v5.15.24 back to the v4.76.0 close-out freeze moved verbatim to `docs/development_frontier_archive.md`. CLAUDE.md 185 KB -> 135 KB, under the 150 KB repo-health budget. Conservation check: 131/131 moved lines present in the archive, none left in CLAUDE.md, zero bullets lost.
+- **Definitions of done amended (PI-directed).** `docs/qa/group3.done.md` C8 and `docs/qa/trunk.done.md` C6 now pre-register 7 catalogued, 5 standing, and one standing Paper 31 discriminator; the group3 entry names both C16 entries.
+- README badge 5.21.0.
+
 ## [v5.20.29] - 2026-10-19
 
 ### Added
