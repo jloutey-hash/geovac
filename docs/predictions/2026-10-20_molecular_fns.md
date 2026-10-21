@@ -102,3 +102,33 @@ H2+ ground state at fixed internuclear distance R, and whether the LCAO value (z
   Breit-Pauli order.
 - The cancellation of all nucleus-dependent terms in the difference is an EFT argument; C1 and C2
   test it on hydrogen only.
+
+## Disposition (appended 2026-10-20, after computing; the predictions above are unchanged)
+
+Drivers: `debug/molfns_solver.py`, `debug/molfns_A_controls.py`, `debug/molfns_B_h2plus.py`,
+`debug/molfns_C_symb.py`. Data: `debug/data/molfns_A.json`, `debug/data/molfns_B_c3.json`,
+`debug/data/molfns_B_prod.json`, `debug/data/molfns_B_c3h.json`.
+
+**Controls.**
+- C1 PASSED. Hydrogen, rn -> 0 by linear extrapolation from rn = 1e-3, 1e-4 (h = 0.01):
+  S(2) - S(1) = -0.88059 (exact -0.880647), S(3) - S(1) = -0.93189 (exact -0.931946). Both within 1e-4.
+  The nucleus-dependent parts cancel in the difference, as argued. A first run failed because psi(0)
+  was extrapolated from points next to the inner grid edge, where the Dirichlet condition mixes in
+  an irregular solution; the window was moved inside the nucleus (rn/100 to rn/5).
+- C2 PASSED. Z = 2: S(2) - S(1) = -0.88062, S(3) - S(1) = -0.93191.
+- **C3 FAILED.** Single-centre H2+ at R = 2, Richardson in h (0.005, 0.0025) at l_max = 32, 48, the
+  l_max = 64 point corrected by the measured grid offset (+2.0e-5), then extrapolated in l_max
+  (power about 2.85): E = -1.1026349, against -1.1026342145, about 7e-7 off; the registered tolerance
+  is 1e-7. **By the rule above, MF1-MF4 are VOID.**
+
+**Unscored observations.**
+- S_mol(2): 0.4999 (l_max 32), 0.5074 (48), 0.5103 (64) at h = 0.005; h-corrected 0.4988 (32),
+  0.5058 (48); extrapolated about 0.52. S_mol(1): 0.4897 (24), 0.4908 (32), 0.4916 (48), about 0.49.
+- R = 4 and R = 8 did not converge: S(4) went -0.414, -0.190, -0.077, +0.019 for l_max 16 to 48, and
+  S(8) went -0.025, -0.111, -0.432 for l_max 16 to 32. Diagnosis, after the runs: G' contains the
+  2p sigma_u state with denominator E_g - E_u, which closes as R grows; its total contribution is
+  exactly zero by parity (H_BP is even, psi is gerade), but the single-centre expansion about one
+  nucleus breaks that parity at finite l_max, and the small gap amplifies the leak. The far-nucleus
+  point values also converge only like 1/l at the cusp. Both are method defects of this route, not
+  results.
+- Follow-up registration: `docs/predictions/2026-10-20_molecular_fns_b.md` (R = 4 and 8, blind).

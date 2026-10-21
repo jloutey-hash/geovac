@@ -22,9 +22,11 @@ Written as a separate step from the result.  Each test names the wrong answer it
   parity proof      (record docs/predictions/2026-10-20_slice_parity_proof.md) R1 o P = -N o W exactly, so
                     P y is a multiple of the odd h = t/(1 - t^2)^4 for y in Sol(W); at infinity P keeps
                     exactly W's integer exponents; J and chi are odd at x = 0 (series), so G and C are
-                    even at infinity and P G = 0, P C = 0.  Slice and chain.
+                    even at infinity and, given W G = 0 and W C = 0 (measured, not proved), P G = 0 and
+                    P C = 0.  Slice and chain.
 
-Not guarded: the no-split search (a mod-p search in the record).  The paper states it with that cap.
+Not guarded: the no-split search (a mod-p search in the record) and the Mellin contour shift that
+turns J's odd series into G's even expansion at infinity.  The paper states both caps.
 """
 from __future__ import annotations
 
@@ -217,7 +219,7 @@ def test_w_annihilates_g(tv):
 
 # ------------------------------------------------------------------ the order-four factor (artanh absent)
 # Record docs/predictions/2026-10-20_slice_artanh.md (SA1, SA2; committed cffafc1d before computing).
-# Written as a separate step from the result.  Work in x = t^2, delta = x d/dx (theta = 2 delta), with
+# Written as a separate step from the result.  Work in x = t^2 (the paper's w), delta = x d/dx (theta = 2 delta), with
 # the chain guard's exact delta-form machinery; operators are lists [c_0, c_1, ...], functions on the left.
 import test_paper59_density_ring as DR  # noqa: E402
 
@@ -337,7 +339,8 @@ def _check_not_forced(P, Ed, R3d, half4):
 def test_membership_is_not_forced_by_analyticity():
     """Rejects 'P is log-free at t = 1' and 'P has only integer exponents at t = 2': either would make
     ker P the solutions single-valued there, and analyticity of G on Re t > 0 alone would prove P G = 0.
-    The paper says it does not, and proves P G = 0 by parity at infinity instead (tests below).
+    The paper says it does not, and derives P G = 0 by parity at infinity from the measured W G = 0
+    instead (tests below).
     Detector controls: E = R1 (theta + 2) must show its artanh log at x = 1, and R3, ordinary there, none."""
     R3d, _, T2d, Ed = _slater_delta()
     _check_not_forced(_P(S_DELTA, T2d, Ed), Ed, R3d, Rat(-9, 2))
@@ -345,7 +348,7 @@ def test_membership_is_not_forced_by_analyticity():
 
 @pytest.mark.slow
 def test_chain_membership_is_not_forced_by_analyticity():
-    """The same for the chain's P (the paper says 'for the chain alike'): a log at t = 1 and the
+    """The same for the chain's P: a log at t = 1 and the
     exponent -3/2 at t = 2."""
     R3d, _, T2d, Ed, _ = DR._chain_delta(DR._chain_pieces()[2])
     P = [sp.cancel(a - b) for a, b in zip(T2d + [0, 0, 0], DR._dcompose(DR.S1_DELTA, Ed))]

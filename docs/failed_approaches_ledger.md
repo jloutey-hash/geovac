@@ -376,3 +376,20 @@ continuum response; LIT is the right method), and the v1 grid failure. What is w
 Minnesota cannot be used in a Sturmian basis; untested. Consequence: the 2026-10-20 deuteron-radius door
 (`docs/predictions/2026-10-20_deuteron_radius.md`) uses MT-III and a correctly orthonormal Laguerre basis
 (L_n^{(2l+2)}), for independent reasons (published parameters, rational matrix elements).
+
+### Frozen Li+ core as a Gaussian contact series matched to atomic levels only (CE, 2026-10-20) | 1
+
+A frozen Li+ HF core was written as V_eff = -1/r + sum_{l<L} P_l sum_{k<=K} c_lk (r/a)^(2k) exp(-(r/a)^2),
+a = 0.6, with the K+1 coefficients per channel fixed so the K+1 lowest atomic levels of that channel are exact
+(no molecular data), and tested on LiH+ against the exact frozen-core operator F = T - 3/r + 2J - K on the
+space orthogonal to the core. The registration (`docs/predictions/2026-10-20_core_eft.md`) is VOID because a
+shared solver control failed, so the numbers are would-have verdicts; they do not depend on that control.
+X-state error ratio per added order K (L = 3): 1.75, 2.18, 2.63 at R = 4, 6, 10 for the first step (registered
+bar 3). Adding the p channel helps (15.9x at R = 6); adding d makes every error worse (contacts of size 10-40
+fitting a 4e-8 defect). K = 3 is not constructible in double precision. Paper 17's PK form A exp(-7 r^2)/r^2 on
+l = 0, refit to the 2s level, errs less than the contact series at R >= 3 (0.86 to 0.12 of it).
+Lesson: energy-only matching on bound atomic levels fixes exterior phases only; the proton's field probes the
+core interior, where a smooth contact series has the wrong wave function. A transferable core operator needs
+matching data that couples to an external field (the role norm conservation plays for pseudopotentials,
+Hamann-Schlueter-Chiang 1979). This is not a seventh PK reshape: the composed builder was not touched.
+Drivers `debug/core_eft_A.py`, `debug/core_eft_B.py`; CHANGELOG v5.21.3.

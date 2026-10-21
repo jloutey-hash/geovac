@@ -66,3 +66,55 @@ fall toward the hydrogen value 0 as R grows?
 - As in the first record: one electron, clamped nuclei, fixed R, Breit-Pauli order, the EFT
   cancellation argument tested on hydrogen only.
 - The g-u projection is exact only in the continuum limit; C5 and C6 test that it behaves.
+
+## Disposition (appended 2026-10-20, partial; the predictions above are unchanged)
+
+Driver `debug/molfns_C_symb.py mfb`, data `debug/data/molfns_C_mfb.json`, log `debug/molfns_C_mfb.log`.
+The run was stopped by the host for low memory before its last point (R = 8, l_max = 64). S below is
+at rn = 1e-3 (rn = 3e-4 agrees to 1e-4 at every point).
+
+| R | l_max 32 | 48 | 64 | parity ratio u, g at l_max 64 (ideal -1, +1) |
+|:--|:--|:--|:--|:--|
+| 2 | 0.50261 | 0.50585 | 0.50743 | -0.969, +0.969 |
+| 4 | 0.12967 | 0.11307 | 0.10539 | -0.938, +0.936 |
+| 8 | 0.04979 | 0.03129 | not run | -1.693, +0.390 (at 48) |
+
+**Controls.**
+- C3b PASSED, with a disclosed ambiguity: the registered sentence names the first disposition's
+  procedure (Richardson in h, then extrapolation in l_max), which gives -1.1026349, 7e-7 from the
+  prolate value, inside 2e-6. Read without the l_max extrapolation, the l_max = 64 point with the grid
+  offset is 1.8e-5 off. The tolerance was written knowing the procedure gives 7e-7, so the procedure
+  reading is the intended one.
+- C5 PASSED: S_mol(2) = 0.5074 at l_max 64, steps 0.0032 and 0.0016 (a 1/l tail), extrapolated about
+  0.512; within 0.02 of the first route's 0.52. Without the u projection the same point gives 0.4047
+  (l_max 32): the u term is large and its cancellation needs u(R_b) = -u(0), which the expansion gives
+  only to 0.94 there.
+- C6 PASSED at R = 4: |S(64) - S(48)| = 0.0077. **Not evaluable at R = 8** (no l_max 64 point).
+
+**Predictions.**
+- **MFB1: HELD.** S_mol(4) = 0.105 at l_max 64; steps 0.0166 and 0.0077 (1/l), extrapolated about 0.08.
+  Positive. Novelty: the searches recorded in the first record were run on 2026-10-20 before
+  registering, and not repeated after computing; the README asks for a repeat before a FINDING counts,
+  so the class was **FINDING, pending the repeated search**; the repeat is below. Caps of the first record (one
+  electron, clamped nuclei, Breit-Pauli order, the EFT cancellation tested on hydrogen only).
+- **MFB2: NOT SCORED** (needs R = 8, where C6 is not evaluable). The half that does not use R = 8 holds:
+  S(4) about 0.08 to 0.105 is below S(2) about 0.51.
+- **MFB3: NOT SCORED** (R = 8). At l_max 48 the value is 0.031, but the expansion reaches the far
+  nucleus poorly there (g parity ratio 0.39), so it is not read as a result.
+
+**What this says, within the caps.** The R = 2 value is a control here (C5), not a registered
+prediction. Read with that status: the LCAO value S_mol = 0, which Korobov and Karr use for HD+, is
+off by about 0.5 at R = 2, near the equilibrium distance, comparable to the nuclear-shape constant
+C_theta = 0.38 that sits beside it. Their uncertainty estimate (the size of the non-logarithmic term)
+covers this. By R = 4 the constant has fallen to about 0.1.
+
+**Novelty search repeated after computing (2026-10-21).** Checked in the primary text (arXiv HTML):
+Korobov, Karr and Zhong, arXiv:2506.22164 (2025, the second-order m alpha^6 terms for H2+ and HD+:
+point nuclei, no finite-size term; nuclear radii named only as a target of later fits); Zhong et al.,
+arXiv:2603.07858v2 (2026, the whole text: point nuclei, "finite" refers only to regularized
+operators); the two-centre Dirac finite-basis paper arXiv:2310.04057 (H2+ with an extended nucleus as
+a regulator; radius dependence quoted as about 1e-9 of the energy, no separate finite-size constant).
+Searches on the two-centre m alpha^6 finite-size constant, and on going beyond LCAO for it, found no
+calculation. **MFB1 class: FINDING**, with the caps of the first record. Its weight is a number for a
+term the field estimates, not a change to HD+ spectroscopy (the whole term is a few kHz times the
+density at the nucleus, and the LCAO uncertainty already covers it).

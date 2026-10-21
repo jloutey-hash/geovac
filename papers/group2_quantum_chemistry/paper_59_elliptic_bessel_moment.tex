@@ -1225,8 +1225,8 @@ operator is a left multiple of an operator $P$ of order four, and the chain
 satisfies $P$:\ $PC$, divided by the solution $t^3/(1-t^2)^2$ of $R_1$, is
 at most $10^{-23}$ at 20 digits and $10^{-33}$ at 30 digits at four values
 of $t$, and $9\times10^{-45}$ at 40 digits at one, while a $1\%$ change in
-one coefficient gives $0.02$ to $0.07$;\ the next paragraph proves that
-the chain satisfies $P$.  The second solution of
+one coefficient gives $0.02$ to $0.07$;\ the next paragraph derives this
+from the measured annihilation by $R_3R_1(\theta-2)$.  The second solution of
 $R_1(\theta-2)$, which carries $\operatorname{artanh} t$, is absent.  So
 $C=c\,t^2+t^2\int^t s^{-3}(B'f)(s)\,ds$ with $f$ a solution of $F_3$'s
 operator and $B'$ a rational map.  That integral cannot be done inside the
@@ -1268,32 +1268,43 @@ exponents, and the same call finds a planted split.  So $G$ is an
 elementary function plus a K3 function integrated once against an
 elementary kernel.  The second solution of $R_1(\theta+2)$, which carries
 $\operatorname{artanh}t$, is absent, as it is for the chain.  In
-$x=t^2$, $\delta=x\,d/dx$, the exact system $R_1S=1$ modulo $R_3$ has a
+$w=t^2$, $\delta=w\,d/dw$, the exact system $R_1S=1$ modulo $R_3$ has a
 unique rational solution $S=s_0+s_1\delta+s_2\delta^2$ inside the bound
-set by the local exponents, with denominator $x(x-1)^4(2x+7)$.  So
+set by the local exponents, with denominator $w(w-1)^4(2w+7)$.  So
 $R_3R_1(\theta+2)=Q_1P$ with $P=(\theta+2)-S\,R_1(\theta+2)$ of order four,
 and $P$ kills $t^{-2}$.  On $G$, $P$ leaves at most $2\times10^{-26}$ of its
 largest term at 25 digits at $t=1/2$ and $13/10$, while a $1\%$ change in
-$s_0$ gives $10^{-3}$.  The membership is also proved, here and for the
-chain.  Since $R_1S=1+NR_3$ with $N$ rational, $R_1P=-N\,R_3R_1(\theta+2)$, so
+$s_0$ gives $10^{-3}$.  That $PG=0$ follows from the measured
+annihilation of $G$ by $R_3R_1(\theta+2)$, and the chain's $PC=0$, for its
+own order-four $P$, from the
+measured annihilation of $C$ by its $R_3R_1(\theta-2)$.  Since $R_1S=1+NR_3$ with $N$ rational, $R_1P=-N\,R_3R_1(\theta+2)$, so
 $P$ sends every solution of $R_3R_1(\theta+2)$ to a multiple of
 $t/(1-t^2)^4$, which is odd in $t$.  Near $x=0$, $J$ is a sum of odd powers
 of $x$ times powers of $\log x$.  So to the right of its strip the Mellin
 transform of $G$ has poles only at $s=4,6,8,\dots$, and the expansion of $G$
 at large $t$ has only even powers of $t$, times logarithms.  The
 coefficients of $P$ are rational in $t^2$, so $PG$ has the same property.
-The multiple is therefore zero, and $PG=0$.  For the chain the same steps
-run with the solution $t^3/(1-t^2)^2$ of its $R_1$ and the odd function
-$\chi=\int_0^x sK_1$.  Equivalently, $\ker P$ is the set of solutions that
-are even in $t$ at infinity, and at infinity $P$ keeps exactly the integer
-exponents of $R_3R_1(\theta+2)$, in $x$.  Analyticity on $\operatorname{Re}t>0$
-alone would not do:\ $P$ has a solution with a logarithm at $t=1$ and one
-with a half-integer exponent at $t=2$.  The operator is singular at $t=1$, the equal-scale point where
+On $t>1$, where $R_1$ is regular, $PG$ is a single multiple of
+$t/(1-t^2)^4$, so that multiple is zero.  Since $G$ is analytic on
+$\operatorname{Re}t>0$ and $P$ has rational coefficients, $PG$ is
+meromorphic there;\ it vanishes on $t>1$, so $PG=0$ for all $t>0$.
+Equivalently, among the solutions of $R_3R_1(\theta+2)$, $\ker P$ is the
+set that are even in $t$ at infinity, and at infinity $P$ keeps exactly the
+integer exponents of $R_3R_1(\theta+2)$, in $w$.  The analyticity of $G$
+at $t=1$ alone, or at $t=2$ alone, does not give $PG=0$:\ $P$ has a solution
+with a logarithm at $t=1$ and one with a half-integer exponent at $t=2$.
+For the chain, $C=(8t^3/\pi^3)\int_0^\infty\chi(x)^2K_0(tx)\,dx$, where
+$\chi=\int_0^x sK_1$ is, near $x=0$, a sum of odd powers of $x$ times powers
+of $\log x$.  So $\int_0^\infty\chi^2K_0(tx)\,dx$ has only odd powers of $t$
+at infinity, times logarithms, and with the factor $t^3$ the function $C$
+has only even ones;\ the same steps then run with the solution
+$t^3/(1-t^2)^2$ of its $R_1$.  The operator $R_3R_1(\theta+2)$ is singular at $t=1$, the equal-scale point where
 the fibre collapses (Sec.~\ref{sec:three_electron});\ its exponent $-3$
 there comes from $R_1$, so the singularity is not apparent.  Caps:\ the
 no-split search is modulo a prime, and its bound rests on the leading-term
 argument rather than the written proof the chain has;\ the parity step
-uses the standard Mellin contour shift.  Records:\
+uses the standard Mellin contour shift and takes the annihilation by
+$R_3R_1(\theta+2)$ from the measurement above.  Records:\
 \texttt{docs/predictions/2026-10-19\_p3e2\_widened.md},
 \texttt{docs/predictions/2026-10-20\_slice\_artanh.md} and
 \texttt{docs/predictions/2026-10-20\_slice\_parity\_proof.md}.  Guard:\
@@ -1350,8 +1361,8 @@ exponential, at two values of $\gamma$, the first the value at which three
 thresholds meet, with $t$ on the density carrying both
 geminals, so the cusp-correct and linear-exponential geminals of the LiH
 engine are untested, and its kite operators are guessed from series and
-checked on their coefficients;\ only the triangle among rings;\ and that the chain satisfies the order-four $P$ is measured, not
-proved.  The search that excludes a K3 piece
+checked on their coefficients;\ only the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
+measured annihilation by $R_3R_1(\theta-2)$ and the Mellin contour shift.  The search that excludes a K3 piece
 from the triangle is bounded in degree, unlike the chain's no-split proof,
 but the orders settle it:\ the
 factors found have orders one and two, which leaves no room for the

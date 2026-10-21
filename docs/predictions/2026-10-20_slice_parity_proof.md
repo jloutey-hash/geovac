@@ -86,3 +86,12 @@ and P C = 0 for the chain at the fingerprint fibre go from measured to proved, w
 contour shift stated above. One detail was added while scoring and is not a change of argument: on t > 1,
 Sol(R1) is spanned by h, so P G = alpha h there; the large-t comparison gives alpha = 0 on t > 1, and
 P G = 0 then holds on all of t > 0 by analytic continuation.
+
+**Correction 2026-10-20 (/qa paper_59 claim-search DELTA, three reviewers independently).** The
+argument starts from y in Sol(W), and that G solves W (and C its W) is measured, not proved: the Mellin
+route gives the order-seven N2 W, and N2 is shown spurious only numerically (2e-31 at five t). So the
+proof reduces two measured facts to one: P G = 0 and P C = 0 follow from the measured W G = 0 and
+W C = 0. The tier upgrade above is partial. Paper 59 now says so. A closure was suggested by the code
+reviewer and is not attempted here: N2 is irregular at infinity (formal solutions like e^(+-i sqrt6 t)),
+so a nonzero W G could not carry G's power-log expansion; that would also need L_G G = 0 to be exact,
+which is itself derived by the Mellin route and checked numerically. Any such attempt is a new registration.

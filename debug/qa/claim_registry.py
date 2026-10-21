@@ -454,6 +454,30 @@ CLAIMS = {
                   r"\bwhole (tree )?ladder\b|"
                   r"five densities[^.;|]{0,60}\b(open|evidence|not settled)\b|relation to four is open",
         changed="2026-10-17"),
+    "p59-slater-slice-membership": dict(
+        statement="On the Slater slice G(t) of the three-electron chain (eq:chain_slater_slice; scales "
+                  "(t;1,1), zero separation) the artanh solution of R1(theta+2) is absent: a unique rational "
+                  "partial section S gives R3 R1 (theta+2) = Q1 P with P of order four, and P G = 0. "
+                  "By parity (R1 P = -N W sends every solution of W to a multiple of an odd function; G is "
+                  "even in t at infinity) P G = 0 FOLLOWS FROM the measured W G = 0 (N2 spurious, 2e-31), "
+                  "and likewise for the chain at the fingerprint fibre; it is not proved outright. The parity "
+                  "step uses the standard Mellin contour shift (cited, not tested). Analyticity alone does not "
+                  "force it. Scope: one slice; the generic fibre stays evidence.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"That \$PG=0\$ follows from the measured", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
+        tier="SYMBOLIC + MEASURED (given the measured W G = 0; Mellin contour shift cited)", owner_window=36,
+        mention=r"artanh|order[- ](four|4)\s+(\$?P\b|factor|membership)|Slater slice|chain_slater_slice|"
+                r"satisf\w*\s+(the\s+)?(order[- ](four|4)\s+)?\$?P\$?\b(?!\s*\()|"
+                r"lies?\s+on\s+(the\s+)?(order[- ](four|4)\s+factor|\$?P\b)|"
+                r"slice[^.;|]{0,60}(integrated once|order four|membership)",
+        qualifier=r"measured|given|annihilat|slice|\(t;\s?1,\s?1\)|one-parameter|Mellin|contour|parity",
+        overclaim=r"whether\s+(that|the|this)\s+(artanh\s+)?term\s+drops[^.;]{0,80}not\s+tested|"
+                  r"membership\s+is\s+(also\s+)?(measured,\s+not\s+proved|proved)|"
+                  r"satisf\w*\s+(the\s+)?order[- ](four|4)\s+\$?P\$?\s+is\s+measured,?\s+not\s+proved|"
+                  r"proves?\s+that\s+the\s+chain\s+satisfies|"
+                  r"(membership|P ?G ?= ?0|lies? on \$?P)[^.;|]{0,80}\bproved\b(?![^.;]{0,120}(given|measured|W.annihilat))|"
+                  r"(generic|every|all)[^.;]{0,20}(fibres?|fibers?|slices?)[^.;]{0,60}(order[- ]four|artanh[^.;]{0,20}absent)",
+        changed="2026-10-20"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",
