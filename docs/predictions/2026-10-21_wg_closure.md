@@ -91,3 +91,19 @@ term, which the Mellin route does not guarantee (it produced the source -3 t^2 f
 - The Mellin contour shift and the vertical decay of Phi are used, not proved here (the paper's existing cap).
 - Exactness of S = 0 is over the symbols named in Step 1; if an independent transcendental appears whose
   vanishing coefficient needs a relation among constants, that coefficient is reported, not assumed zero.
+
+## Disposition, part 0: the replacement control, stated before computing it (2026-10-21)
+
+The triangle cannot be set up in the same code. Its kernel psi solves an inhomogeneous equation,
+(theta^2 - 1 - x^2) psi = -2/pi, and its Mellin factor M[psi] needs psi's series at infinity as well as at
+zero; the engine built for this record handles K-Bessel kernels, with exact Gamma recurrences and series
+data at x = 0 only. So C1 is replaced, by the rule above, by:
+
+- **C1' (constructed positive control).** G1(t) = int_0^inf x K1(t x) J(x) dx, the slice with J in place of
+  J^2. Its operator L1 comes from `mellin_t_ode` on J's own relation; its strip is 2 < Re s < 3 and its
+  crossed poles are at s = 3, 5, 7, .... The engine's predicted source S1(t) must equal a direct quadrature of
+  L1 G1 at t = 0.7 and 1.9 to 1e-20 of the largest term, at 30 digits. C1' counts as a positive control only
+  if S1 is not identically zero. If it is, the next variant is G0(t) = int_0^inf x K0(t x) J(x)^2 dx, then
+  G2(t) = int_0^inf x K1(t x) J(x)^3 dx, in that order, until one has a nonzero source.
+- **C1'' (negative control).** The same engine, run on the C1' function with one crossed pole left out,
+  must disagree with the quadrature by more than 1e-6 of the largest term at one of the two t.
