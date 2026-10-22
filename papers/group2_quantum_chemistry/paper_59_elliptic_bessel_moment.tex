@@ -976,7 +976,7 @@ the same argument applies, matches the Bessel-moment side to between
 $4\times10^{-9}$ and $2\times10^{-7}$, the grid's own convergence.  That
 check tests the identity's bookkeeping;\ the real three-dimensional
 integral reduces to moments of the same family with other weights in $x$,
-the step shown below for the star and assumed for the path.
+as shown below for both trees of four densities, the star and the path.
 
 \textbf{[SYMBOLIC]} To read the rung, vary one scale:\
 $F_n(t)=\int_0^\infty K_0(x)^{n-1}K_0(tx)\,dx$.  The Mellin transform of
@@ -1036,10 +1036,10 @@ correlated integrals that link more densities, such as the four-electron
 bridge integrals of explicitly correlated methods taken over two-center
 densities.  Two caps apply.  These are statements about the fibre and
 its holomorphic period, so the integrated value may sit lower, as the
-two-center exchange class does (Sec.~\ref{sec:f12}).  And the real
-three-dimensional integral is shown to reduce into the family of
-Eq.~\eqref{eq:tree} only for the star, one density linked to three;\ for
-the path of four densities the step is assumed.  \textbf{[SYMBOLIC +
+two-center exchange class does (Sec.~\ref{sec:f12}).  And the reduction of
+the real three-dimensional integral into the family of
+Eq.~\eqref{eq:tree} is shown only for the chain of three and the two trees
+of four below;\ for five or more densities it is not shown.  \textbf{[SYMBOLIC +
 MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
 $(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
 $\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
@@ -1055,6 +1055,22 @@ a prime, not proved (record
 \texttt{docs/predictions/2026-10-21\_four\_density\_star.md}).  Guards:\
 \texttt{tests/test\_paper59\_four\_density\_rung.py},
 \texttt{tests/test\_paper59\_four\_density\_star.py}.
+\textbf{[SYMBOLIC + MEASURED]} The path, four densities in a chain,
+reduces the same way.  On the slice $(1,t,1,1)$, with $t$ on an inner
+density, it is
+$(16/\pi^4)\,t^3\int_0^\infty\!\int_0^\infty\min(x,y)\,K_0(tx)\chi(x)\,K_0(y)\chi(y)\,dx\,dy$,
+checked against a momentum-space evaluation to 20 digits.  Its holonomic
+relations give an operator of order 74 with an exact right factor of
+order 12, which annihilates the path to below $10^{-28}$ of its largest
+term at 32 digits and $4\times10^{-56}$ at 60.  That factor splits exactly
+into a piece equivalent to the operator~\eqref{eq:four_density_op}, three
+pieces equivalent to the Legendre operator of $F_2$, and two of order
+one, each equivalence by an exact rational map;\ there is no K3 piece,
+and the path needs the top piece.  So both trees of four densities sit on
+the same rung and skip the K3 rung;\ for the path, minimality is bounded
+by a search modulo a prime up to $t$-degree 260 (record
+\texttt{docs/predictions/2026-10-22\_four\_density\_path.md}).  Guard:\
+\texttt{tests/test\_paper59\_four\_density\_path.py}.
 
 \textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
 Bessel moments;\ what is new here is the route into it from a molecular
@@ -1380,12 +1396,18 @@ source term, and no operator of order three annihilates $Y$:\ an exact
 search within a bound set by the local exponents finds no split.  Attaching the
 last density turns the elliptic kite into the K3 family, a Clausen-type
 step.  So at $\gamma=1$ the correlated triangle sits with the three-density chain, on the
-K3 rung, and not with the Coulomb triangle.  At $\gamma=3/2$ a quotient of
-order three, found modulo a prime, has the local data of $F_3$'s operator
-twisted by $t$, with genuine singular points only at $t=0,\pm2,\infty$,
-which fixes it up to equivalence by Levelt's rigidity, in the form of
-Beukers and Heckman~\cite{beukers_heckman1989};\ the explicit map was not found, and a
-factor above K3 is not excluded there.  The singular points of $Y$'s annihilator move with
+K3 rung, and not with the Coulomb triangle.  At $\gamma=3/2$ an annihilator of $Y$ of order nine
+has an exact composition series whose pieces have orders one (four of
+them, each with an algebraic solution), two and three.  The order-three
+piece has the local data of $F_3$'s operator twisted by $t$, with genuine
+singular points only at $t=0,\pm2,\infty$, which fixes it up to
+equivalence by Levelt's rigidity, in the form of Beukers and
+Heckman~\cite{beukers_heckman1989};\ an exact order-two map from $F_3$'s
+operator confirms the equivalence.  The order-two piece is irreducible and
+not identified.  The order-six right factor below the order-three piece
+leaves between 1.3 and 2.4 times the largest term of $Y$ at three values
+of $t$, so $Y$ needs the K3 piece, and no piece above K3 occurs (record
+\texttt{docs/predictions/2026-10-22\_correlated\_triangle\_g32.md}).  The singular points of $Y$'s annihilator move with
 $\gamma$, to $t=|1-\gamma|,2,1+\gamma,2\gamma$, three of which meet at $t=2$ for
 $\gamma=1$.  \textbf{[OBSERVATION]} The drop of the Coulomb ring is therefore read as a property of
 uniqueness, not of rings:\ both loops integrate out exactly, but only the

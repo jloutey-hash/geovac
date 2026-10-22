@@ -1,0 +1,47 @@
+{
+ "0": {
+  "free": [],
+  "order": 3,
+  "tdeg": 14
+ },
+ "1": "log",
+ "3": {
+  "free": [
+   5,
+   7,
+   9,
+   11
+  ],
+  "order": null,
+  "tdeg": "too few termstoo few terms"
+ },
+ "5": {
+  "free": [
+   7,
+   9,
+   11
+  ],
+  "order": null,
+  "tdeg": "too few termstoo few terms"
+ },
+ "7": {
+  "free": [
+   9,
+   11
+  ],
+  "order": null,
+  "tdeg": "too few termstoo few terms"
+ },
+ "9": {
+  "free": [
+   11
+  ],
+  "order": null,
+  "tdeg": "too few termstoo few terms"
+ },
+ "11": {
+  "free": [],
+  "order": null,
+  "tdeg": "too few termstoo few terms"
+ }
+}

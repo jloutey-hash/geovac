@@ -1,0 +1,33 @@
+{
+ "1": "log",
+ "3": "log",
+ "5": {
+  "free": [
+   7,
+   9,
+   11
+  ],
+  "order": null,
+  "tdeg": null
+ },
+ "7": {
+  "free": [
+   9,
+   11
+  ],
+  "order": null,
+  "tdeg": null
+ },
+ "9": {
+  "free": [
+   11
+  ],
+  "order": null,
+  "tdeg": null
+ },
+ "11": {
+  "free": [],
+  "order": null,
+  "tdeg": null
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "0.8": {
+  "L9Y_rel": "6.92e-28",
+  "L9_perturbed_rel": "0.00655"
+ },
+ "1.3": {
+  "L9Y_rel": "7.95e-29",
+  "L9_perturbed_rel": "0.00508"
+ },
+ "1.7": {
+  "L9Y_rel": "2.28e-28",
+  "L9_perturbed_rel": "0.000268"
+ },
+ "gamma1_F_split": {
+  "sol": [
+   2,
+   []
+  ],
+  "wronskian": [
+   2,
+   []
+  ]
+ }
+}

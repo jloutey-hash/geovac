@@ -1,0 +1,38 @@
+{
+ "Z2p_Q@1": {
+  "indicial": "29889*e*(e + 3)/431663598665728",
+  "roots": [
+   "-3",
+   "0"
+  ],
+  "obstruction_at_resonance": "18225/13813235157303296",
+  "log": true
+ },
+ "Z2p_Q@3": {
+  "indicial": "-11047157569755*e*(e - 1)/8301223051264",
+  "roots": [
+   "0",
+   "1"
+  ],
+  "obstruction_at_resonance": "0",
+  "log": false
+ },
+ "Z2_Q@1": {
+  "indicial": "22762971621280972800000*(e + 5)*(e + 7)",
+  "roots": [
+   "-7",
+   "-5"
+  ],
+  "obstruction_at_resonance": "-379382860354682880000",
+  "log": true
+ },
+ "Z2_Q@3": {
+  "indicial": "24451265942229656640565324112749358348500992000000*e*(e - 1)",
+  "roots": [
+   "0",
+   "1"
+  ],
+  "obstruction_at_resonance": "0",
+  "log": false
+ }
+}

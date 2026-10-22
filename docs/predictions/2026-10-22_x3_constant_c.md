@@ -64,3 +64,23 @@ c = (x^3 ln x coefficient) - (4/5) x (x coefficient), the X3-1 definition.
 ## Caps stated in advance
 
 A fit, not a derivation. Three values of n, three magnetization profiles, one charge model.
+
+## Disposition (appended 2026-10-22, after computing)
+
+Computed by `debug/x3_constant_c.py` (stages `raw 1`, `raw 2`, `raw 3`, then `fit`), with the model,
+window and column sets as registered. Data `debug/data/x3_constant_c_raw_n{1,2,3}.json`, fit
+`debug/data/x3_constant_c.json`, log `debug/data/x3_constant_c_fit.log`.
+
+**Controls.** Zemach x-coefficients: largest relative error 9.9e-17 over the nine cases. Synthetic shift
+of 1e-6: recovered to 2.8e-81. Case agreement within each set: D 6.1e-14, E 2.1e-16, F 3.7e-13. All pass.
+
+**X3-1c: HELD.** The spread over D, E and F is 8.1e-13 relative to 64/63. The largest |c + 64/63|,
+relative, is 8.2e-13 (set F); set D gives 2.3e-13 to 2.9e-13 and set E 1.1e-14 in every case. Both are
+below the registered 1e-9 in all nine cases and all three sets, so n = 1, 2 and 3 agree and there is no
+n-dependence of c at this order. The (3,2) column of set F does not move c beyond 8e-13, so the data
+carry no x^3 ln^2 x term at that level.
+
+**Novelty, re-checked at scoring.** A search found the known Zemach-type logarithmic term of order
+(Z alpha)^3 (Eides, Grotch and Shelyuto, hep-ph/0002158) but no source stating this profile-independent
+constant. NOT FOUND, as registered. Class: **FINDING**, of low weight, since the value follows from the
+known EFT rule. Caps as stated: a fit, not a derivation; three n, three profiles, one charge model.

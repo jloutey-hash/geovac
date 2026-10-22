@@ -90,3 +90,59 @@ If the annihilator of g, its Mellin operator or the factorization cannot be comp
 session's memory, the computation stops and the record says STOP for feasibility, unscored, with the
 stage reached. A switch to the leaf slice (t, 1, 1, 1), where the kernel is chi(t r) and g = K0 H, is
 allowed only as a new registration.
+
+## Disposition (appended 2026-10-22, after scoring)
+
+Computed by a sub-agent from this record; scripts `debug/four_density_path_*.py`, data and logs
+`debug/data/four_density_path_*`, exact pieces as strings in `debug/data/four_density_path_pieces.json`.
+
+**Model note.** The annihilator of g = chi H was built in the differential module spanned by c_i h_j and
+c_i c_j k_l, dimension 18, not 24: the chi in g and the chi in H's source are the same function. Its relation has
+order 18 in theta_x and z-degree 37, so L has order 74 (t-degree 74). The minimal annihilator was found by exact
+linear algebra in the x-module, using theta_t P_h = P_{(2 - theta) h} and t^2 P_h = P_{z^-1 (theta-1)^2 h}
+(search mod p, rebuilt by CRT, x-identity checked exactly over Q).
+
+**Controls.** The module code with chi^3/x gives the star's order-19 operator exactly. One leaf removed
+(H -> chi, exact since chi'' = -x K0) gives the chain's registered order-seven operator exactly, and the grid code
+with H -> chi gives C(t) to 2.6e-26. Normalization N = 16/pi^4; P agrees with an independent momentum-space
+evaluation to all 20 digits at t = 0.7 and t = 1.6. Grid convergence 1e-40. A step-B line first integrated chi in
+place of chi^2 (a bug, 4.9 percent off); corrected by `four_density_path_B2_leaf.py`. An extra probe, not
+registered: with H_0 kept formal the module operator has Mellin order 15 and the chain's order-seven operator is
+not an exact right factor of it.
+
+**FP1: HELD.** L = M62 o W12 exactly (python-flint over Q; a perturbed W12 fails the same division). W12, order 12,
+t-degree 78, divides exactly as Y4 o Z2 o Z2' o L1 o R2 o (theta - 2). Y4 has order four and is equivalent to F_4's
+operator by an exact odd map of order three: built from B P + q P_h4 = 0, with h4 = x^6 K0^3 = (c1 - c2)^2 k0 in
+the module, then R8 P = C P_h4 with R8 = Z2 o Z2' o L1 o R2 o (theta - 2), and G = t^-3 (theta-4)^2 (theta-2)^2
+theta^2 from F_4's function to P_h4. Y4 o A = 0 mod Q4 and the image annihilator equals Y4, both exact. B P = -q P_h4
+holds to 1e-57 at 60 digits at four t, so no boundary term. Repeated novelty search at scoring: no source places this
+integral on AESZ #58; the related Matuzas instance noted in the star record stands. Class: **FINDING**, narrowed
+as for the star.
+
+**FP2: HELD.** R8, the right factor below the F_4 piece, leaves 0.10, 0.31, 0.084 and 0.053 of the largest term on P
+at t = 0.5, 1.3, 2.5, 3.5. Class: **CHECK**.
+
+**FP3: HELD (minimality bounded).** W12 annihilates P: residual 3.0e-31, 9.8e-31, 9.4e-29, 5.7e-29 at 32 digits at
+the four t (4.7e-60 to 3.6e-56 at 60 digits). A 1/200 change in the theta^2 coefficient of Y4 (the F_4 piece, chosen
+as in the star record before evaluation) gives 5.5e-3 to 0.50. Composition factors: Y4 (F_4), Z2, Z2' and R2 (each
+equivalent to Legendre's operator, F_2, by exact odd maps; each irreducible, since its only log-free solution at
+t = 0 has an order-two annihilator), L1 and theta - 2 (order one). No F_3 (K3) factor. The right factors theta - 2,
+R2 o (theta - 2), R3 o (theta - 2), Z2' o R3 o (theta - 2) and R8 all fail on P (0.05 to 1.8). Cap: minimality bounded
+by the x-module search, no relation of order 11 or less up to t-degree 260, mod one prime. Class: **FINDING**. The path
+has the star's F_4 piece and adds two Legendre pieces; like the star it skips the K3 rung.
+
+**Disclosed widening.** The map from Legendre's operator into Z2 gave nullity 0 in the boxes (t^2-1)^6 (t^2-9)^6 and
+(t^2-1)^4 (t^2-4)^3 (t^2-9)^3 A10^2 A14^2; it was found after widening to (t^2-1)^6 (t^2-4)^4 (t^2-9)^2 A10^5 A14^3,
+numerators t^-23..t^171, with A10, A14 the apparent factors of R3 and Z2'. The minimal box is (t^2-1)^6 A14^2,
+numerators t^1..t^49. The map was then checked exactly.
+
+**PM check (2026-10-22).** Rerun with the sympy helpers of `tests/test_paper59_generic_slice.py`, a code
+path independent of the agent's operator module, plus an own quadrature (log
+`debug/data/four_density_path_pm_check.log`). W12 / R8, R8 / (R3 o (theta - 2)) and R3 / R2 have zero
+remainder, with quotients Y4, X4 and order one. X4 / Z2' has zero remainder. Its quotient is Z2 o A14^-2,
+not Z2: the stored Q-forms clear denominators on the left, so the stored Z2' carries the factor A14^2.
+This is the same composition factor as Z2 under a rational gauge. The three Legendre maps and the F_4 map
+are exact, and a 1/1000 change in one map coefficient breaks each. An own grid (H by direct quadrature
+at each node, 245 nodes, 32 digits) gives W12 P relative residual 2.3e-31 and 8.8e-29 at t = 1.3 and
+2.5. The perturbed W12 gives 0.50 and 0.12, and R8 gives 0.31 and 0.084. Scored in the record's words:
+FP1 HELD (FINDING, narrowed as for the star), FP2 HELD (CHECK), FP3 HELD (FINDING, minimality bounded).

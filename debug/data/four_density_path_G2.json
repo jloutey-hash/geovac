@@ -1,0 +1,5 @@
+{
+ "L_div_W12_zero_flint": true,
+ "control_W12_div_R8_zero": true,
+ "control_L_div_perturbed_W12_zero": false
+}
