@@ -107,3 +107,43 @@ data at x = 0 only. So C1 is replaced, by the rule above, by:
   G2(t) = int_0^inf x K1(t x) J(x)^3 dx, in that order, until one has a nonzero source.
 - **C1'' (negative control).** The same engine, run on the C1' function with one crossed pole left out,
   must disagree with the quadrature by more than 1e-6 of the largest term at one of the two t.
+
+## Disposition (appended 2026-10-21, after computing; the predictions above are unchanged)
+
+Driver `debug/wg_closure_A.py`, data `debug/data/wg_closure_A.json`, log `debug/wg_closure_A.log`. Exact
+arithmetic in sympy throughout; quadrature at 30 digits for the controls.
+
+**Disclosed code error, fixed before scoring.** The first run reported C3 FAILED for the chain and crashed
+in WG2. Both had one cause: the test files build their symbols t and u with different assumptions, so
+sympy treated them as different symbols. With the symbols rebound by name the recomputed chain operator
+equals `QC` term by term; nothing else changed between the runs.
+
+**Controls.**
+- C3 PASSED: the recomputed slice operator equals `QG`, and the chain's equals `QC`, exactly.
+- C1' PASSED as a positive control: for G1 = int x K1(t x) J dx the engine predicts L1 G1 = -16/t, and
+  quadrature gives -22.857142857142857142857143 at t = 0.7 and -8.4210526315789473684210526 at t = 1.9, equal
+  to the engine to all 25 printed digits. The source is nonzero, so C1' counts.
+- C1'' PASSED: with its one crossed pole (s = 3) left out the engine gives 0, against -22.86.
+- C2 PASSED: Bessel's equation, q = 1 - 3/(4t^2), oscillation reported (T = 1.2247); the modified equation,
+  q -> -1, reported not oscillatory.
+- Extra check, not registered: C1' has only simple poles, and the slice has a double pole at s = 8. For
+  G0 = int x K0(t x) J^2 dx, which has the same poles, the engine gives L0 G0 = -9216 t^2, and quadrature
+  gives -4515.84 and -33269.76 at t = 0.7 and 1.9, equal to all printed digits. Without the double pole the
+  engine gives 9216(-t^4 - 3)/t^2, so that branch is exercised.
+
+**Predictions.**
+- **WG1: HELD.** v_0 = 0 for J^2 (and for J and chi^2). The six crossed residues (s = 4 for i = 1, 2, 3;
+  s = 6 for i = 2, 3; s = 8, a double pole, for i = 3) sum to zero exactly. The cancellation is not
+  term by term: leaving out the residues at s = 4, 6 or 8 gives 8640 pi + 55440 pi/t^2, -8640 pi - 10080 pi/t^2
+  and -45360 pi/t^2. So L_G G = 0 with no source. Class **CHECK**.
+- **WG2: HELD.** q -> 6, q = 6 - 59/(4 t^2) + ..., q' = O(t^-3); q >= 5 on [T, infinity) with T = 3.4179
+  (the largest real root of q - 5's numerator, denominator and N2's leading coefficient). Class **CHECK**.
+- **WG3: HELD.** Chain: v_0 = 0 for chi^2; the six crossed residues (s = 0, 2, 4, with a triple pole at 4)
+  sum to zero exactly; q -> 20/9, q = 20/9 - 85/(12 t^2) + ..., q' = O(t^-3), q >= 2 on [5.3156, infinity).
+  Class **CHECK**.
+- **Consequence.** W G = 0 and W C = 0 now follow, by the argument in "What I know": y = W G solves N2 y = 0
+  (WG1), is real, and has a power-log expansion at infinity; every nonzero real solution of N2 has
+  infinitely many zeros past T and amplitude bounded below by a multiple of t^(-1/2) (WG2), so y = 0 on
+  t > T, hence on t > 0. With the parity record, P G = 0 and P C = 0 follow. The one cap left is the Mellin
+  contour shift (vertical decay of Phi, the power-log expansion at infinity), as before. The tier of the
+  slice and chain membership moves from "derived from the measured W G = 0" to derived, with that cap.

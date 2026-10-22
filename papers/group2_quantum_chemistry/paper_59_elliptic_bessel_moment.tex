@@ -922,12 +922,28 @@ evidence, at a sample of triples and with guessed bases, that the generic
 fibre carries content beyond the K3 and elliptic periods, as the banana
 does;\ on a one-parameter slice it is a K3 function integrated once
 (Sec.~\ref{sec:density_ring}), a class no finite basis of periods is
-expected to capture.
+expected to capture.  \textbf{[SYMBOLIC + MEASURED]} A second slice, with
+scales $(t;1,2)$, passes through two of these triples, $(1;2,4)$ at $t=1/2$
+and the threshold triple $(3;1,2)$ at $t=3$, where the fibre values
+agree with the slice to 20 digits.  Its Mellin operator has order 17 and
+divides exactly over the factor $\theta+2$ and two first-order pieces,
+one for each leaf, which enter together as their least common left
+multiple.  Above them sits a piece of order four, equivalent by an exact
+map with poles only at $t=0,\pm1,\pm3$ to the operator of the three-scale
+moment $\int_0^\infty K_0(tx)K_0(x)K_0(2x)\,dx$.  The composite of order
+seven annihilates the fibre to $5\times10^{-33}$ of its largest term at
+32 digits, the fibre needs the order-four piece, and a search modulo a
+prime finds no rational map splitting it off within the bound set by the
+local exponents, while the same call finds a planted split.  So on this
+slice too the fibre is an elementary function plus a K3 function
+integrated once, which accounts for the null at those two triples
+(record \texttt{docs/predictions/2026-10-21\_generic\_slice.md}).
 Longer trees are taken up in Sec.~\ref{sec:four_density}.
 Guards:\ \texttt{tests/test\_paper59\_three\_electron\_k3.py}
 (the fibre agreement, the elementary angle integral, the rational
 one-center limits, the closed form against quadrature, the K3 period
 against $\bar V_3$, the six-line branch locus, the non-isotrivial slice);\
+\texttt{tests/test\_paper59\_generic\_slice.py} (the second slice);\
 the equal-scale collapse and the generic null are not guarded, and the
 records carry them (\texttt{docs/predictions/2026-10-13\_three\_electron\_k3.md},
 \texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}).
@@ -960,7 +976,7 @@ the same argument applies, matches the Bessel-moment side to between
 $4\times10^{-9}$ and $2\times10^{-7}$, the grid's own convergence.  That
 check tests the identity's bookkeeping;\ the real three-dimensional
 integral reduces to moments of the same family with other weights in $x$,
-the step assumed below.
+the step shown below for the star and assumed for the path.
 
 \textbf{[SYMBOLIC]} To read the rung, vary one scale:\
 $F_n(t)=\int_0^\infty K_0(x)^{n-1}K_0(tx)\,dx$.  The Mellin transform of
@@ -1020,11 +1036,25 @@ correlated integrals that link more densities, such as the four-electron
 bridge integrals of explicitly correlated methods taken over two-center
 densities.  Two caps apply.  These are statements about the fibre and
 its holomorphic period, so the integrated value may sit lower, as the
-two-center exchange class does (Sec.~\ref{sec:f12}).  The real
-three-dimensional four-density integral is assumed, not shown, to reduce
-into the one-dimensional Bessel-moment family of Eq.~\eqref{eq:tree};\ the
-analogous step is checked only at $n=3$.  Guards:\
-\texttt{tests/test\_paper59\_four\_density\_rung.py}.
+two-center exchange class does (Sec.~\ref{sec:f12}).  And the real
+three-dimensional integral is shown to reduce into the family of
+Eq.~\eqref{eq:tree} only for the star, one density linked to three;\ for
+the path of four densities the step is assumed.  \textbf{[SYMBOLIC +
+MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
+$(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
+$\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
+a momentum-space evaluation to $2\times10^{-21}$.  Its Mellin operator, of
+order 19, divides exactly with a piece of order four equivalent to the
+operator~\eqref{eq:four_density_op} by an exact rational map.  An
+order-eight right factor annihilates the star to $3\times10^{-45}$ of its
+largest term at 45 digits;\ its composition factors are that piece, the
+Legendre operator of $F_2$ and two of order one, with no K3 piece, and the
+star needs the top piece.  So the star sits on the rung of four linked
+densities and skips the K3 rung;\ minimality is bounded by a search modulo
+a prime, not proved (record
+\texttt{docs/predictions/2026-10-21\_four\_density\_star.md}).  Guards:\
+\texttt{tests/test\_paper59\_four\_density\_rung.py},
+\texttt{tests/test\_paper59\_four\_density\_star.py}.
 
 \textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
 Bessel moments;\ what is new here is the route into it from a molecular
@@ -1111,7 +1141,10 @@ one-center three- and four-electron correlated integrals have closed
 forms~\cite{fromm_hill1987,padhy2017}, consistent with the rung needing
 two-center densities.  A targeted search found no source placing a
 molecular integral on these operators;\ that is an absence from a search,
-not a proof of absence.
+not a proof of absence.  Matuzas~\cite{matuzas2026} relates one channel of
+a different four-electron correlation integral, a ring of Coulomb links
+with one diagonal over Slater functions, to another Calabi--Yau operator,
+AESZ-330, by an inhomogeneous equation.
 
 \subsection{A ring of three densities:\ the loop does not climb}
 \label{sec:density_ring}
@@ -1225,8 +1258,7 @@ operator is a left multiple of an operator $P$ of order four, and the chain
 satisfies $P$:\ $PC$, divided by the solution $t^3/(1-t^2)^2$ of $R_1$, is
 at most $10^{-23}$ at 20 digits and $10^{-33}$ at 30 digits at four values
 of $t$, and $9\times10^{-45}$ at 40 digits at one, while a $1\%$ change in
-one coefficient gives $0.02$ to $0.07$;\ the next paragraph derives this
-from the measured annihilation by $R_3R_1(\theta-2)$.  The second solution of
+one coefficient gives $0.02$ to $0.07$;\ the next paragraph derives this.  The second solution of
 $R_1(\theta-2)$, which carries $\operatorname{artanh} t$, is absent.  So
 $C=c\,t^2+t^2\int^t s^{-3}(B'f)(s)\,ds$ with $f$ a solution of $F_3$'s
 operator and $B'$ a rational map.  That integral cannot be done inside the
@@ -1274,10 +1306,24 @@ set by the local exponents, with denominator $w(w-1)^4(2w+7)$.  So
 $R_3R_1(\theta+2)=Q_1P$ with $P=(\theta+2)-S\,R_1(\theta+2)$ of order four,
 and $P$ kills $t^{-2}$.  On $G$, $P$ leaves at most $2\times10^{-26}$ of its
 largest term at 25 digits at $t=1/2$ and $13/10$, while a $1\%$ change in
-$s_0$ gives $10^{-3}$.  That $PG=0$ follows from the measured
-annihilation of $G$ by $R_3R_1(\theta+2)$, and the chain's $PC=0$, for its
-own order-four $P$, from the
-measured annihilation of $C$ by its $R_3R_1(\theta-2)$.  Since $R_1S=1+NR_3$ with $N$ rational, $R_1P=-N\,R_3R_1(\theta+2)$, so
+$s_0$ gives $10^{-3}$.  Both annihilations are derived, not only measured.
+With $W=R_3R_1(\theta+2)$, the Mellin operator is $N_2W$, and $N_2WG=0$ holds
+with no source term.  Each term $t^{2i}Q_i(\theta)G$ of that operator is an
+integral on the line $\operatorname{Re}s=c-2i$, $2<c<4$;\ moving it to $c$
+crosses the poles of the Mellin transform of $G$ at $s=4,6,8$, which come from
+the series of $J^2$ at $x=0$.  The six residues cancel exactly, though
+none of them vanishes alone.  The recurrence itself has no boundary term, since the
+relation for $J^2$ kills constants.  The same bookkeeping gives the nonzero
+sources $-16/t$ for $\int_0^\infty xK_1(tx)J(x)\,dx$ and $-9216\,t^2$ for
+$\int_0^\infty xK_0(tx)J(x)^2\,dx$, both equal to quadrature at 25 digits.
+So $y=WG$ solves $N_2y=0$.  In the normal form $v''+qv=0$ of $N_2$,
+$q=6-59/(4t^2)+O(t^{-4})$, with $q\ge5$ for $t\ge3.42$ and $q'=O(t^{-3})$.
+So by Sturm comparison every nonzero real solution has infinitely many zeros
+there, and its amplitude does not fall faster than $t^{-1/2}$.  A function
+with an expansion in powers and logarithms of $t$ at infinity has neither
+property, and $y$ has one;\ so $WG=0$.  For the chain the residues at
+$s=0,2,4$ cancel the same way, and $q\to20/9$ with $q\ge2$ for $t\ge5.32$,
+so $WC=0$ for its $W=R_3R_1(\theta-2)$.  Since $R_1S=1+NR_3$ with $N$ rational, $R_1P=-N\,R_3R_1(\theta+2)$, so
 $P$ sends every solution of $R_3R_1(\theta+2)$ to a multiple of
 $t/(1-t^2)^4$, which is odd in $t$.  Near $x=0$, $J$ is a sum of odd powers
 of $x$ times powers of $\log x$.  So to the right of its strip the Mellin
@@ -1302,12 +1348,12 @@ $t^3/(1-t^2)^2$ of its $R_1$.  The operator $R_3R_1(\theta+2)$ is singular at $t
 the fibre collapses (Sec.~\ref{sec:three_electron});\ its exponent $-3$
 there comes from $R_1$, so the singularity is not apparent.  Caps:\ the
 no-split search is modulo a prime, and its bound rests on the leading-term
-argument rather than the written proof the chain has;\ the parity step
-uses the standard Mellin contour shift and takes the annihilation by
-$R_3R_1(\theta+2)$ from the measurement above.  Records:\
+argument rather than the written proof the chain has;\ the annihilation
+and the parity step use the standard Mellin contour shift.  Records:\
 \texttt{docs/predictions/2026-10-19\_p3e2\_widened.md},
-\texttt{docs/predictions/2026-10-20\_slice\_artanh.md} and
-\texttt{docs/predictions/2026-10-20\_slice\_parity\_proof.md}.  Guard:\
+\texttt{docs/predictions/2026-10-20\_slice\_artanh.md},
+\texttt{docs/predictions/2026-10-20\_slice\_parity\_proof.md} and
+\texttt{docs/predictions/2026-10-21\_wg\_closure.md}.  Guard:\
 \texttt{tests/test\_paper59\_chain\_slater\_slice.py}.
 
 \textbf{[SYMBOLIC + MEASURED]} At $\gamma=1$ the correlated triangle does not drop.  Put
@@ -1362,7 +1408,7 @@ thresholds meet, with $t$ on the density carrying both
 geminals, so the cusp-correct and linear-exponential geminals of the LiH
 engine are untested, and its kite operators are guessed from series and
 checked on their coefficients;\ only the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
-measured annihilation by $R_3R_1(\theta-2)$ and the Mellin contour shift.  The search that excludes a K3 piece
+Mellin contour shift.  The search that excludes a K3 piece
 from the triangle is bounded in degree, unlike the chain's no-split proof,
 but the orders settle it:\ the
 factors found have orders one and two, which leaves no room for the
@@ -1661,6 +1707,11 @@ Calabi--Yau differential operator database, version 3.0,
 \bibitem{gegelia_vanstraten2024}
 N.~Gegelia and D.~van Straten, ``Paramodular forms from Calabi--Yau
 operators,'' arXiv:2408.10183 (2024), Table~3.
+
+\bibitem{matuzas2026}
+J.~Matuzas, ``A Calabi--Yau period in a four-electron correlation integral:
+modular physical fibre and a hypergeometric endpoint,'' Zenodo,
+doi:10.5281/zenodo.23218203 (2026).
 
 \bibitem{almkvist_zudilin2007}
 G.~Almkvist and W.~Zudilin, ``Differential equations, mirror maps and zeta

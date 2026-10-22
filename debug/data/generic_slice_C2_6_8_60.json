@@ -1,0 +1,14 @@
+{
+ "box": [
+  6,
+  8,
+  60,
+  1100
+ ],
+ "control R_V|R": 1,
+ "control R_V|L": 1,
+ "control F_4|R": 0,
+ "control F_4|L": 0,
+ "M14|R": 1,
+ "M14|L": 0
+}

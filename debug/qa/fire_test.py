@@ -41,6 +41,16 @@ went to "a scratch copy"; they never did.
 
 A plant that does not match its anchor is an error, and so is a no-op plant --
 either would otherwise read as "guard did not fire", accusing a working guard.
+
+A plant that breaks COLLECTION is VOID, not FIRED (fixed 2026-10-21; found by
+the v5.21.2 claim-search DELTA, whose code reviewer made two accidental
+syntax-error plants and was told "the guard fires").  A file that cannot be
+compiled or imported makes every test in it fail, so the failure says nothing
+about the guard.  Two checks: a .py target is compiled after planting, before
+pytest runs; and pytest's own exit code is read, where 1 means tests ran and
+failed and 2 to 4 mean collection or the run itself broke.  Out of scope: a
+plant that compiles but makes a module raise when it is imported INSIDE a test
+body still reads as FIRED; read the failure when a plant is that coarse.
 """
 from __future__ import annotations
 
@@ -53,6 +63,8 @@ import sys
 import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+FIRED, ASLEEP, NOT_RUN, VOID = "FIRED", "DID NOT FIRE", "NOT RUN", "VOID"
 
 
 def _invalidate_bytecode(target: str) -> None:
@@ -156,8 +168,8 @@ def _apply(text: str, plants: list[tuple[str, str]], where: str) -> str:
 
 def run(test_path: str, plants: list[tuple[str, str]],
         plant_in: str | None = None, selector: str | None = None,
-        quiet: bool = False) -> bool:
-    """Return True when the planted defect makes the selected tests fail."""
+        quiet: bool = False) -> str:
+    """Return FIRED, DID NOT FIRE, NOT RUN or VOID for the selected tests."""
     target = os.path.join(ROOT, plant_in or test_path)
     backup = target + ".firetest.bak"
     # --slow is NOT optional here (added 2026-09-07).  The corpus skips
@@ -187,8 +199,18 @@ def run(test_path: str, plants: list[tuple[str, str]],
         raise
     try:
         src = io.open(target, encoding="utf-8").read()
-        io.open(target, "w", encoding="utf-8", newline="\n").write(
-            _apply(src, plants, plant_in or test_path))
+        planted = _apply(src, plants, plant_in or test_path)
+        broken = None
+        if target.endswith(".py"):
+            try:
+                compile(planted, target, "exec")
+            except SyntaxError as e:
+                broken = f"the plant breaks the file's syntax: {e.msg}, line {e.lineno}"
+        if broken is not None:
+            if not quiet:
+                print(f"  plant -> VOID   ({broken})")
+            return VOID
+        io.open(target, "w", encoding="utf-8", newline="\n").write(planted)
         # Invalidate BEFORE the run as well.  A length-preserving plant written
         # in the same wall-clock second as the last compile leaves the .pyc
         # header valid, so the interpreter would run the ORIGINAL bytecode and
@@ -201,9 +223,17 @@ def run(test_path: str, plants: list[tuple[str, str]],
         _invalidate_bytecode(target)
         _release_lock(lock)
 
-    fired = proc.returncode != 0
     tail = [l for l in proc.stdout.splitlines() if l.strip()][-1:]
     summary = tail[0].strip() if tail else ""
+    # pytest exit codes: 0 all passed, 1 tests ran and some failed, 2 interrupted
+    # (a collection error lands here), 3 internal error, 4 usage error, 5 nothing
+    # collected.  Only 1 is a guard rejecting the plant.
+    if proc.returncode in (2, 3, 4) or "during collection" in proc.stdout:
+        if not quiet:
+            print(f"  plant -> VOID   (pytest exit {proc.returncode}: collection or "
+                  f"the run broke, so the failure says nothing about the guard; {summary})")
+        return VOID
+    fired = proc.returncode == 1
     # A test that never RAN is not a guard that failed to fire.  pytest exits 0
     # both when a guard correctly rejects nothing AND when every selected test
     # was skipped or deselected; conflating the two is exactly how a slow-marked
@@ -213,11 +243,11 @@ def run(test_path: str, plants: list[tuple[str, str]],
     if not executed:
         if not quiet:
             print(f"  plant -> NOT RUN   ({summary})")
-        return None
+        return NOT_RUN
     if not quiet:
-        print(f"  plant -> {'FIRED' if fired else 'DID NOT FIRE'}"
+        print(f"  plant -> {FIRED if fired else ASLEEP}"
               + (f"   ({summary})" if summary else ""))
-    return fired
+    return FIRED if fired else ASLEEP
 
 
 def _selftest() -> int:
@@ -230,18 +260,42 @@ def _selftest() -> int:
     fd, path = tempfile.mkstemp(suffix="_firetest_selftest.py", dir=os.path.join(ROOT, "tests"))
     os.close(fd)
     rel = os.path.join("tests", os.path.basename(path))
+    # A helper module the test imports inside its body, not at collection: a
+    # syntax break planted there is invisible to pytest's exit code, so only
+    # the compile pre-check can call it VOID.
+    hfd, hpath = tempfile.mkstemp(suffix="_firetest_helper.py", dir=os.path.join(ROOT, "tests"))
+    os.close(hfd)
+    hrel = os.path.join("tests", os.path.basename(hpath))
+    io.open(hpath, "w", encoding="utf-8", newline="\n").write("VALUE = 2.0\n")
     io.open(path, "w", encoding="utf-8", newline="\n").write(
         "VALUE = 2.0\n\n\n"
         "def test_real_guard():\n"
         "    assert VALUE == 2.0\n\n\n"
         "def test_tautological_guard():\n"
-        "    assert VALUE / 2 == VALUE * 0.5\n")
+        "    assert VALUE / 2 == VALUE * 0.5\n\n\n"
+        "def test_lazy_guard():\n"
+        "    import importlib.util\n"
+        f"    spec = importlib.util.spec_from_file_location('h', r'{hpath}')\n"
+        "    m = importlib.util.module_from_spec(spec)\n"
+        "    spec.loader.exec_module(m)\n"
+        "    assert m.VALUE == 2.0\n")
     try:
         print("fire_test self-test")
         real = run(rel, [("VALUE = 2.0", "VALUE = 3.0")],
-                   selector="test_real_guard")
+                   selector="test_real_guard") == FIRED
         taut = run(rel, [("VALUE = 2.0", "VALUE = 3.0")],
-                   selector="test_tautological_guard")
+                   selector="test_tautological_guard") == FIRED
+        # The 2026-10-21 fix, in both of its halves.  (a) A plant that makes the
+        # test file raise at import is a collection error (pytest exit 2); the
+        # old rule, returncode != 0, called it FIRED.  (b) A syntax break in a
+        # module imported inside a test body makes that test fail at run time
+        # (exit 1); only the compile pre-check calls it VOID.
+        coll = run(rel, [("VALUE = 2.0", "VALUE = UNDEFINED_NAME_FT")],
+                   selector="test_real_guard")
+        lazy = run(rel, [("VALUE = 2.0", "VALUE = 2.0 +")], plant_in=hrel,
+                   selector="test_lazy_guard")
+        lazy_ok = run(rel, [("VALUE = 2.0", "VALUE = 3.0")], plant_in=hrel,
+                      selector="test_lazy_guard")
         # Restoration fidelity: content AND what the interpreter actually
         # imports.  The tool poisoned __pycache__ until 2026-09-04 and the
         # selftest could not see it, because it only ever checked the source
@@ -256,9 +310,13 @@ def _selftest() -> int:
              "spec.loader.exec_module(m);print(m.VALUE)"],
             cwd=ROOT, capture_output=True, text=True)
         import_ok = probe.stdout.strip() == "2.0"
-        ok = real and not taut and content_ok and import_ok
+        ok = (real and not taut and content_ok and import_ok
+              and coll == VOID and lazy == VOID and lazy_ok == FIRED)
         print(f"  real guard fired: {real}   (expected True)")
         print(f"  tautological guard fired: {taut}   (expected False)")
+        print(f"  import-breaking plant: {coll}   (expected VOID)")
+        print(f"  syntax break in a lazily imported helper: {lazy}   (expected VOID)")
+        print(f"  real mutation of that helper: {lazy_ok}   (expected FIRED)")
         print(f"  source restored byte-exactly: {content_ok}   (expected True)")
         print(f"  interpreter imports the RESTORED value: {import_ok}   "
               f"(expected True -- catches __pycache__ poisoning)")
@@ -268,6 +326,7 @@ def _selftest() -> int:
         return 0 if ok else 1
     finally:
         os.remove(path)
+        os.remove(hpath)
 
 
 def main() -> int:
@@ -298,8 +357,14 @@ def main() -> int:
     print(f"fire-testing {args.test_path}"
           + (f" (mutating {args.plant_in})" if args.plant_in else "")
           + (f" [-k {args.selector}]" if args.selector else ""))
-    fired = run(args.test_path, plants, args.plant_in, args.selector)
-    if fired is None:
+    outcome = run(args.test_path, plants, args.plant_in, args.selector)
+    if outcome == VOID:
+        print("\nRESULT: VOID -- the plant broke collection (syntax or import), so "
+              "every test fails whatever the guard checks. Use a plant that keeps "
+              "the file importable. Do NOT record this as a guard that fires.")
+        return 3
+    fired = outcome == FIRED
+    if outcome == NOT_RUN:
         print("\nRESULT: INCONCLUSIVE -- no test executed, so this run says "
               "NOTHING about the guard. Check the -k selector, skip markers or "
               "collection, then re-run. Do NOT record this as a dead guard.")

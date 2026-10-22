@@ -89,3 +89,39 @@ weights, not Slater ones. The annihilation is measured, not derived.
 
 If the symmetric-cube Mellin operator or its factorization cannot be completed within the session's
 memory, the computation stops and the record says STOP for feasibility, unscored, with the stage reached.
+
+## Disposition (appended 2026-10-21, after scoring)
+
+Computed by a sub-agent from this record; scripts `debug/four_density_star_*.py`, data and logs
+`debug/data/four_density_star_*`. PM checks: theta - 3 divides every coefficient of L; E2 kills
+t^3 (1 + theta) applied to the Legendre period (series to t^80); the final scoring script
+`four_density_star_S_w8score.py`, rerun, reproduces the exact divisions (L = N o W8, W9 = Z o W8) and
+all residuals.
+
+**Controls.** m = 2 reproduces the chain's registered order-seven operator; K0^3 reproduces F_4's
+operator and eq:four_density_op; the normalization is (2/pi)^(leaves+1), 8/pi^3 for the chain and
+N = 16/pi^4 for the star; S agrees with an independent momentum-space evaluation to 1.7e-21 (t = 1.6)
+and fully at 20 digits (t = 0.7), and the same code with two leaves reproduces the chain to 18 digits.
+
+**FD1: PARTLY.** L has order 19 (t-degree 18), above the registered 11; no source term (L S at most
+6e-45 of its largest term at 45 digits, at t = 0.5, 1.3, 2.5, 3.5). L divides exactly as
+N11 o R4pp o X1 o E2 o (theta - 3): theta - 3 (solution t^3); E2 = (theta-3)^2 - t^2 theta (theta-2),
+equivalent to the Legendre operator of F_2 by f -> t^3 (1 + theta) f; X1 of order one; R4pp of order four,
+equivalent to F_4's operator by an exact map of order three (numerators of degree at most 17,
+denominator (t^2-1)^2 (t^2-9)^3), found mod p, rebuilt by CRT, verified exactly. The falsifier does not
+fire. Novelty search repeated at scoring (2026-10-21): no source places this integral on AESZ #58. A
+related prior instance exists: J. Matuzas, "A Calabi-Yau period in a four-electron correlation integral:
+modular physical fibre and a hypergeometric endpoint", Zenodo 10.5281/zenodo.23218203 (2026-10-07): a ring
+of Coulomb links plus one diagonal with Slater exponents, on AESZ-330 (landing page read; full text not
+read). Class: **MISS** for the order count; **FINDING** for the F_4 piece, narrowed by that related work.
+
+**FD2: HELD.** Below the F_4 piece, R4 = X1 o E2 o (theta - 3) leaves 4.0e-3 to 2.19 of the largest term
+on S; in the second exact series, B5 leaves 6.3e-3 to 0.24. Class: **CHECK**.
+
+**FD3: HELD (minimality bounded).** W8 = R4pp o X1 o E2 o (theta - 3), order 8, annihilates S: residual
+at most 2.4e-45 at 45 digits at four t; a perturbation of 1/200 in the theta^2 coefficient of R4pp gives
+1.5e-4 to 0.69. Composition factors: F_4, F_2 (Legendre) and two of order one; no F_3 (K3) factor. Lower
+right factors fail on S. Cap: minimality bounded mod p in the box (t^2-1)^4 (t^2-4)^3 (t^2-9)^4
+(5t^2+4)^3 (5t^4+2t^2+2)^3, numerators t^-10 to t^74; other order-two subs not enumerated. Class:
+**FINDING**. The star skips the K3 rung, and its one-leaf moment is elliptic where the chain's is
+algebraic.

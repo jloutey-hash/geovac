@@ -1,0 +1,42 @@
+{
+ "map_box": {
+  "powers": {
+   "b": 2,
+   "c": 0,
+   "e": 3,
+   "k1": 0,
+   "k2": 0
+  },
+  "lo": 3,
+  "hi": 17,
+  "nullity_unknowns_rows": [
+   1,
+   32,
+   513
+  ]
+ },
+ "M_A_mod_Q4_zero": true,
+ "div_zero": true,
+ "L_div_W8_zero": true,
+ "W9_div_W8_zero": true,
+ "0.5": {
+  "W8_rel": "1.082e-45",
+  "W8_perturbed_rel": "0.0001472",
+  "largest": "3.96688e+6"
+ },
+ "1.3": {
+  "W8_rel": "1.601e-46",
+  "W8_perturbed_rel": "0.005859",
+  "largest": "1.51114e+12"
+ },
+ "2.5": {
+  "W8_rel": "1.437e-45",
+  "W8_perturbed_rel": "0.3586",
+  "largest": "2.41379e+18"
+ },
+ "3.5": {
+  "W8_rel": "2.42e-45",
+  "W8_perturbed_rel": "0.6923",
+  "largest": "3.46835e+22"
+ }
+}

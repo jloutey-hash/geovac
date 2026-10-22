@@ -22,8 +22,11 @@ Written as a separate step from the result.  Each test names the wrong answer it
   parity proof      (record docs/predictions/2026-10-20_slice_parity_proof.md) R1 o P = -N o W exactly, so
                     P y is a multiple of the odd h = t/(1 - t^2)^4 for y in Sol(W); at infinity P keeps
                     exactly W's integer exponents; J and chi are odd at x = 0 (series), so G and C are
-                    even at infinity and, given W G = 0 and W C = 0 (measured, not proved), P G = 0 and
-                    P C = 0.  Slice and chain.
+                    even at infinity and, given W G = 0 and W C = 0, P G = 0 and P C = 0.  Slice and chain.
+  W G = 0 derived     (record docs/predictions/2026-10-21_wg_closure.md) the Mellin operator N2 W has no
+                    source: the residues crossed at s = 4, 6, 8 cancel, each one needed (chain s = 0, 2, 4);
+                    the bookkeeping matches quadrature on int x K1(t x) J dx (source -16/t); N2 oscillates
+                    at infinity (q -> 6; chain 20/9), with Bessel controls.  So W G = 0 and W C = 0.
 
 Not guarded: the no-split search (a mod-p search in the record) and the Mellin contour shift that
 turns J's odd series into G's even expansion at infinity.  The paper states both caps.
@@ -339,8 +342,8 @@ def _check_not_forced(P, Ed, R3d, half4):
 def test_membership_is_not_forced_by_analyticity():
     """Rejects 'P is log-free at t = 1' and 'P has only integer exponents at t = 2': either would make
     ker P the solutions single-valued there, and analyticity of G on Re t > 0 alone would prove P G = 0.
-    The paper says it does not, and derives P G = 0 by parity at infinity from the measured W G = 0
-    instead (tests below).
+    The paper says it does not, and derives P G = 0 by parity at infinity from W G = 0, itself derived
+    (tests below).
     Detector controls: E = R1 (theta + 2) must show its artanh log at x = 1, and R3, ordinary there, none."""
     R3d, _, T2d, Ed = _slater_delta()
     _check_not_forced(_P(S_DELTA, T2d, Ed), Ed, R3d, Rat(-9, 2))
@@ -477,3 +480,142 @@ def test_j_and_chi_are_odd_at_zero():
     assert abs(mp.mpf(str(sp.N(J.subs(sub), 25))) - _J(zz)) < mp.mpf(10) ** -12
     chiref = mp.quad(lambda s: s * mp.besselk(1, s), [0, zz])
     assert abs(mp.mpf(str(sp.N(chi.subs(sub), 25))) - chiref) < mp.mpf(10) ** -12
+
+
+# ------------------------------------------------------------------ W G = 0 derived
+# Record docs/predictions/2026-10-21_wg_closure.md (WG1-WG3; committed 61d5b6c9 + fd4221cb before
+# computing).  Written as a separate step from the result, self-contained (no debug/ import).
+# (a) No source: t^(2i) Q_i(theta) G is an integral on the line c - 2i; moving it to c crosses the
+#     poles of Phi(w) = A(alpha - w) E(w + beta) at w = p, c < p < c + 2i, where A = M[f^2] has the
+#     singular part -sum_m f_{n,m} m!/eps^(m+1) at p = alpha + n (f^2 = sum f_{n,m} x^n log^m x).
+#     L G = S(t) = -sum Res; S must vanish.
+# (b) N2 oscillates: in v'' + q v = 0, q -> 6 (chain 20/9) with q bounded below past T and q' = O(t^-3).
+_xs = sp.Symbol("xs", positive=True)
+_Lx, _Lt, _eps = sp.symbols("Lx Lt eps")
+Q1_J = [-(u - 1) * (u + 2), (u + 2) * (u + 7)]     # mellin route of G1 = int x K1(t x) J(x) dx (record)
+
+
+def _ser0(f, N):
+    e = sp.series(f, _xs, 0, N).removeO()
+    return sp.expand(sp.expand_log(e, force=True).subs(sp.log(_xs), _Lx))
+
+
+def _int0(expr):
+    X = sp.Symbol("X", positive=True)
+    out = sp.Integer(0)
+    for (n, m), c in sp.Poly(sp.expand(expr), _xs, _Lx).terms():
+        out += c * sp.integrate(X**n * sp.log(X) ** m, (X, 0, _xs))
+    return sp.expand(sp.expand_log(out, force=True).subs(sp.log(_xs), _Lx))
+
+
+def _terms(e, N):
+    return {(n, m): c for (n, m), c in sp.Poly(sp.expand(e), _xs, _Lx).terms() if n < N}
+
+
+def _J_ser(N=10):
+    k0, k1 = _ser0(sp.besselk(0, _xs), N + 2), _ser0(sp.besselk(1, _xs), N + 2)
+    J = 3 * _int0(k0) - 3 * _xs * k0 - _xs**2 * k1
+    return sp.expand(sum(c * _xs**n * _Lx**m for (n, m), c in _terms(J, N).items()))
+
+
+def _chi_ser(N=10):
+    chi = _int0(sp.expand(_xs * _ser0(sp.besselk(1, _xs), N + 2)))
+    return sp.expand(sum(c * _xs**n * _Lx**m for (n, m), c in _terms(chi, N).items()))
+
+
+def _mellin_source(Q, fc, alpha, beta, nu, c, drop=None):
+    E = lambda w: 2 ** (w - 2) * sp.gamma((w - nu) / 2) * sp.gamma((w + nu) / 2)
+    uq = [q.xreplace({sym: u for sym in q.free_symbols if sym.name == "u"}) for q in Q]
+    S = sp.Integer(0)
+    for i, Qi in enumerate(uq):
+        for n in sorted({n for n, _ in fc}):
+            p = alpha + n
+            if i == 0 or not (c < p < c + 2 * i) or p == drop:
+                continue
+            s0, mm = p - 2 * i, max(m for nn, m in fc if nn == n)
+            A = -sum(fc[(n, m)] * sp.factorial(m) / _eps ** (m + 1) for m in range(mm + 1) if (n, m) in fc)
+            ex = (A * sp.expand(Qi.subs(u, -(s0 + _eps) - 2 * i))
+                  * sp.series(E(p + beta + _eps), _eps, 0, mm + 1).removeO()
+                  * sp.series(sp.exp(-_eps * _Lt), _eps, 0, mm + 1).removeO())
+            S += -sp.expand(ex).coeff(_eps, -1) * t ** (-s0)
+    return sp.simplify(sp.expand_func(sp.expand(S)))
+
+
+def _liouville_q(a):
+    a0, a1, a2 = [sp.sympify(e).xreplace({sym: t for sym in sp.sympify(e).free_symbols if sym.name == "t"})
+                  for e in a]
+    f = sp.cancel((a2 + a1) / (a2 * t))
+    g = sp.cancel(a0 / (a2 * t**2))
+    return sp.cancel(g - sp.diff(f, t) / 2 - f**2 / 4), a2
+
+
+def _oscillates_past(a, q0, T):
+    """q -> a limit above q0, q > q0 on [T, oo) (no real root of q - q0's numerator or denominator,
+    or of the leading coefficient, beyond T) and q' = O(t^-3)."""
+    q, a2 = _liouville_q(a)
+    if not sp.limit(q, t, sp.oo) > q0:
+        return False
+    num, den = sp.fraction(sp.cancel(q - q0))
+    lead = sp.fraction(sp.cancel(a2))[0]
+    for pol in (num, den, lead):
+        if pol.has(t) and any(r > T for r in sp.Poly(pol, t).real_roots()):
+            return False
+    if not (q - q0).subs(t, T + 1) > 0:
+        return False
+    qn, qd = sp.fraction(sp.cancel(sp.diff(q, t)))
+    return sp.Poly(qn, t).degree() - sp.Poly(qd, t).degree() <= -3
+
+
+def test_mellin_operator_has_no_source():
+    """Rejects 'L_G G has a source term' (so W G = 0 would not follow from N2 W G = 0), and a residue sum
+    that vanishes trivially: leaving out any one of the crossed poles s = 4, 6, 8 must give a nonzero
+    source.  J^2 starts at x^2, so the first crossed pole is s = 4."""
+    fc = _terms(sp.expand(_J_ser() ** 2), 10)
+    assert min(n for n, _ in fc) == 2
+    assert _mellin_source(QG, fc, 2, 0, 1, 3) == 0
+    for p in (4, 6, 8):
+        assert _mellin_source(QG, fc, 2, 0, 1, 3, drop=p) != 0
+
+
+def test_mellin_source_bookkeeping_matches_quadrature():
+    """Rejects a residue bookkeeping that reports zero whatever it is given: on G1 = int x K1(t x) J dx
+    it must give the nonzero source -16/t, and quadrature of L1 G1 must agree."""
+    fc = _terms(_J_ser(), 10)
+    S1 = _mellin_source(Q1_J, fc, 2, 0, 1, sp.Rational(5, 2))
+    assert sp.simplify(S1 + 16 / t) == 0
+    mp.mp.dps = 20
+    pw = _theta_k1_powers(2)
+    tv = mp.mpf("0.7")
+    I = []
+    for a, b in pw:
+        h = lambda x, a=a, b=b: x * _J(x) * (a(tv * x) * mp.besselk(0, tv * x) + b(tv * x) * mp.besselk(1, tv * x))
+        I.append(mp.quad(h, [0, mp.mpf(1) / 8, 1, 4, 16, 64, mp.inf]))
+    val = 0
+    for i, q in enumerate(Q1_J):
+        cs = sp.Poly(q, u).all_coeffs()[::-1]
+        val += tv ** (2 * i) * sum(mp.mpf(sp.N(cf, 25)) * I[j] for j, cf in enumerate(cs))
+    assert abs(val + 16 / tv) < mp.mpf(10) ** -12
+
+
+def test_n2_oscillates_at_infinity():
+    """Rejects 'N2 has a solution with a power-log expansion at infinity' (then W G = 0 would not
+    follow): q -> 6, q > 5 on [7/2, oo), q' = O(t^-3).  Detector controls: Bessel's equation passes,
+    the modified one (solution K1, smaller than any power) fails."""
+    assert sp.limit(_liouville_q(N2)[0], t, sp.oo) == 6
+    assert _oscillates_past(N2, 5, sp.Rational(7, 2))
+    assert _oscillates_past([t**2 - 1, 0, 1], sp.Rational(1, 2), 2)
+    assert not _oscillates_past([-(t**2 + 1), 0, 1], sp.Rational(1, 2), 2)
+
+
+@pytest.mark.slow
+def test_chain_w_annihilation_is_derived():
+    """Rejects 'the chain's Mellin operator has a source' and 'its N2 has a power-log solution': for
+    C = (8 t^3/pi^3) int chi^2 K0(t x) dx the crossed residues at s = 0, 2, 4 cancel (each alone does
+    not), and the chain's N2 has q -> 20/9, q > 2 on [11/2, oo)."""
+    fc = _terms(sp.expand(_chi_ser() ** 2), 10)
+    assert _mellin_source(DR.QC, fc, -2, 3, 0, -1) == 0
+    for p in (0, 2, 4):
+        assert _mellin_source(DR.QC, fc, -2, 3, 0, -1, drop=p) != 0
+    N2c = DR._chain_pieces()[3]
+    assert sp.limit(_liouville_q(N2c)[0], t, sp.oo) == sp.Rational(20, 9)
+    assert _oscillates_past(N2c, 2, sp.Rational(11, 2))

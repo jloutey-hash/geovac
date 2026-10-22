@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.3 (October 21, 2026)
+**Version:** v5.21.4 (October 21, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,8 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Ladder punchlist: second chain slice and real 3-D star (2026-10-21, v5.21.4, pre-registered):** (t;1,2) again K3 integrated once; star on F_4 rung, no K3; X3-1b UNCLEAR. CHANGELOG v5.21.4.
+- **W G = 0 derived; fire_test collection errors VOID (2026-10-21, v5.21.4, pre-registered):** no Mellin source, N2 oscillates; slice and chain membership derived, contour-shift cap only; WG1-3 held. CHANGELOG v5.21.4.
 - **Molecular EFT: two-centre finite-size constant; frozen core as contact series (2026-10-20/21, v5.21.3, pre-registered):** MF, CE void (controls); MFB1 held, S_mol(4) > 0, FINDING; contact series transfers worse than PK. CHANGELOG v5.21.3.
 - **Slater slice: artanh term drops; P G = 0 reduced to the measured W G = 0 (2026-10-20, v5.21.2, pre-registered):** order-four factor P; parity carries W G = 0 to P G = 0, slice and chain; SA1, MP3 held; MP1-2 missed. CHANGELOG v5.21.2.
 - **EFT check, novelty audit, period and deuteron tests (2026-10-19/20, v5.21.1, PI-directed):** nuclear doors = NRQED matching; 7 of 34 held predictions not in literature; X4-1, P3e-3, DS1/3-5 held; X3-1, P3e-4, DR1-5, DS2 missed. CHANGELOG v5.21.1.

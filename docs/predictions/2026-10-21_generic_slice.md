@@ -97,3 +97,53 @@ from apparent singularities, and t = 3 is a genuine singular point of the minima
 
 One slice, beta = 2. Slater weights only. The annihilation in GS3 is measured; a derived version would
 follow the wg_closure route and is not part of this registration.
+
+## Disposition (appended 2026-10-21, after scoring)
+
+Scripts: `debug/generic_slice_{A,A2,B,C,C2,D,D2,E,F2,G}.py`, `debug/generic_slice_num.py`; data and logs
+`debug/data/generic_slice_*`. `generic_slice_F.py` (symbolic-rho exponents) was stopped for time on W7 and
+replaced by the d/dt indicial route `generic_slice_F2.py`, which reproduces its R_V and R exponents.
+
+**Controls.** b = 1 reproduces the registered QG exactly (ratio 1), and the K0 x K0 x K0 tensor at b = 1
+gives F_3's operator. The split search finds the planted split (E3 o R_V, nullity 1) at the scoring box.
+Informational: the P3e-2W grid values satisfy G(3;1,2) = G_b(3) and G(1;2,4) = G_b(1/2)/4 to 20 digits,
+so this slice passes through two of the null triples.
+
+**GS1: FAILED.** L has order 17 and t-degree 18, above the registered 10. The structural part held:
+theta + 2 is an exact right factor, and the two first-order pieces with solutions t/(1-t^2)^4 and
+t/(4-t^2)^4 are each exact right factors of L/(theta+2). They do not peel one after the other in either
+order; they enter as their least common left multiple E2 (order 2), and L = M14 o E2 o (theta+2)
+exactly. Class: **MISS** (the order count was wrong).
+
+**GS2: HELD.** V's Mellin operator R_V has order 4 (exponents 0, 0, 2, 2 at t = 0; singular at t = 1, 3).
+A gauge of order three, rational in t with poles only at t = 0, +-1, +-3 and numerators of degree at
+most 22, maps Sol(R_V) into Sol(M14); its annihilator R has order 4 and M14 = N10 o R with zero
+remainder, in exact rational arithmetic. Found mod p in the box t^-8 (t^2-1)^-6 (t^2-4)^-6 (t^2-9)^-6,
+degree 60, rebuilt from three primes by CRT and rational reconstruction. A first box (poles of order 3,
+degree 30) found nothing; disclosed, and expected from the b = 1 slice's map, which has poles of order 5.
+Cap: the irreducibility of R_V is shown only against factors of order one and three (Fuchs exponent
+count); an order-two factor is not excluded by exponents. Class: **CHECK**.
+
+**GS3: PARTLY.** W7 = R o E2 o (theta+2) annihilates G_b at 32 digits: relative residual 2.8e-29 at
+t = 0.5 (the quadrature floor there, 2.0e-29) and at most 5.2e-33 at t = 1.3, 2.5, 3.5. G_b needs the K3
+piece: E3 G_b is 0.13 to 0.49 of its largest term. The perturbation clause, with the theta^1
+coefficient of R times 1 + 1/200, gave 2.9e-4 and 3.2e-4 at t = 0.5, 1.3 but 4.9e-6 and 2.5e-6 at
+t = 2.5, 3.5, below the registered 1e-5 at two points, though 27 orders above the residual. No other
+coefficient was tried after seeing this. Also: the order-17 L annihilates G_b with no source term, at
+about 1e-37 of its largest term at t = 1.3, 2.5, 3.5 (t = 0.5 unresolved on the grid). Class: **CHECK**
+for the annihilation; the perturbation clause is a control shortfall.
+
+**GS4: HELD.** Leading-term bound from the local exponents: pole order at most 4 at t = 0 and 6 at
+t = +-1, +-2, +-3, numerator excess 1 at infinity. In a box beyond it (t^-8, poles of order 10, degree
+65) no gauge maps Sol(R_V) into Sol(W7) (nullity 0), while the planted split is found. So on the slice
+(t;1,2) the fibre is an elementary function plus a K3 function integrated once, as on (t;1,1). Caps:
+mod p; the bound is the leading-term argument, not a written proof. Novelty search repeated at scoring
+(2026-10-21, two extended web searches): no source places a molecular chain integral on these operators;
+the nearest are Feynman-integral papers on two-parameter K3 families (arXiv:2502.15326) and the
+four-mass banana (arXiv:2507.23061), neither molecular. Class: **FINDING**. It explains the P3e-2W null at
+(1;2,4) and (3;1,2): no finite basis of periods is expected to capture a K3 function integrated once.
+
+**GS5: HELD.** The singular points of R in t > 0 are t = 1 and 3, each with a half-integer exponent
+(-13/2, -15/2), plus the roots of a degree-10 polynomial, apparent since R is equivalent to R_V; t = 2
+is regular. W7 has exponent -9/2 at t = 1 and at t = 3. That t = 3 is genuine for the minimal
+annihilator of G_b holds if R is irreducible (the GS2 cap). Class: **CHECK**.

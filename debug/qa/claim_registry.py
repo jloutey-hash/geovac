@@ -458,26 +458,31 @@ CLAIMS = {
         statement="On the Slater slice G(t) of the three-electron chain (eq:chain_slater_slice; scales "
                   "(t;1,1), zero separation) the artanh solution of R1(theta+2) is absent: a unique rational "
                   "partial section S gives R3 R1 (theta+2) = Q1 P with P of order four, and P G = 0. "
-                  "By parity (R1 P = -N W sends every solution of W to a multiple of an odd function; G is "
-                  "even in t at infinity) P G = 0 FOLLOWS FROM the measured W G = 0 (N2 spurious, 2e-31), "
-                  "and likewise for the chain at the fingerprint fibre; it is not proved outright. The parity "
-                  "step uses the standard Mellin contour shift (cited, not tested). Analyticity alone does not "
-                  "force it. Scope: one slice; the generic fibre stays evidence.",
+                  "W G = 0 (W = R3 R1 (theta+2)) is DERIVED (2026-10-21, WG1-WG2): the Mellin operator "
+                  "N2 W kills G with no source (the crossed residues at s = 4, 6, 8 cancel exactly), and N2 "
+                  "oscillates at infinity (Liouville q -> 6), so a nonzero W G could not carry G's power-log "
+                  "expansion. Parity (R1 P = -N W; G even in t at infinity) then gives P G = 0. Likewise for "
+                  "the chain at the fingerprint fibre (WG3). One cap: the standard Mellin contour shift "
+                  "(cited, not tested). Analyticity alone does not force it. Scope: one slice; the generic "
+                  "fibre stays evidence.",
         owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
-        owner_anchor=r"That \$PG=0\$ follows from the measured", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
-        tier="SYMBOLIC + MEASURED (given the measured W G = 0; Mellin contour shift cited)", owner_window=36,
+        owner_anchor=r"Both annihilations are derived", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
+        tier="SYMBOLIC + MEASURED (derived, with the Mellin contour shift cited)", owner_window=36,
         mention=r"artanh|order[- ](four|4)\s+(\$?P\b|factor|membership)|Slater slice|chain_slater_slice|"
                 r"satisf\w*\s+(the\s+)?(order[- ](four|4)\s+)?\$?P\$?\b(?!\s*\()|"
                 r"lies?\s+on\s+(the\s+)?(order[- ](four|4)\s+factor|\$?P\b)|"
                 r"slice[^.;|]{0,60}(integrated once|order four|membership)",
-        qualifier=r"measured|given|annihilat|slice|\(t;\s?1,\s?1\)|one-parameter|Mellin|contour|parity",
+        qualifier=r"derived|annihilat|slice|\(t;\s?1,\s?1\)|one-parameter|Mellin|contour|parity",
+        # Overclaims, and the superseded weaker tier (the mirror direction): a restatement that still
+        # rests P G = 0 on a MEASURED W G = 0 is stale after 2026-10-21.
         overclaim=r"whether\s+(that|the|this)\s+(artanh\s+)?term\s+drops[^.;]{0,80}not\s+tested|"
-                  r"membership\s+is\s+(also\s+)?(measured,\s+not\s+proved|proved)|"
+                  r"membership\s+is\s+(also\s+)?measured,\s+not\s+proved|"
                   r"satisf\w*\s+(the\s+)?order[- ](four|4)\s+\$?P\$?\s+is\s+measured,?\s+not\s+proved|"
-                  r"proves?\s+that\s+the\s+chain\s+satisfies|"
-                  r"(membership|P ?G ?= ?0|lies? on \$?P)[^.;|]{0,80}\bproved\b(?![^.;]{0,120}(given|measured|W.annihilat))|"
+                  r"(follows?|derived?s?)\s+(this\s+)?from\s+the\s+measured\s+(annihilation|\$?W\s*G)|"
+                  r"rests?\s+on\s+the\s+measured\s+annihilation|"
+                  r"(membership|P ?G ?= ?0|lies? on \$?P)[^.;|]{0,80}\bproved\b(?![^.;]{0,120}(contour|Mellin))|"
                   r"(generic|every|all)[^.;]{0,20}(fibres?|fibers?|slices?)[^.;]{0,60}(order[- ]four|artanh[^.;]{0,20}absent)",
-        changed="2026-10-20"),
+        changed="2026-10-21"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",

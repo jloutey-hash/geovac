@@ -95,3 +95,7 @@ W C = 0. The tier upgrade above is partial. Paper 59 now says so. A closure was 
 reviewer and is not attempted here: N2 is irregular at infinity (formal solutions like e^(+-i sqrt6 t)),
 so a nonzero W G could not carry G's power-log expansion; that would also need L_G G = 0 to be exact,
 which is itself derived by the Mellin route and checked numerically. Any such attempt is a new registration.
+
+**Forward pointer (2026-10-21).** The premise W G = 0 (and W C = 0) named in the correction above is now
+derived: `docs/predictions/2026-10-21_wg_closure.md` (WG1-WG3 held). The one cap left is the Mellin
+contour shift.
