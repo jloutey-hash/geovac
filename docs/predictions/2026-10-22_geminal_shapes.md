@@ -95,3 +95,77 @@ passing is a STOP, reported and not scored. GA2 is a one-function statement brid
 dictionary only. Neither shape is run inside the LiH energy; these are fibre statements.
 
 ## Disposition
+
+Appended 2026-10-22, after scoring GA2 (GA1 runs by a sub-agent; its disposition follows when it reports).
+Scripts `debug/ga2_gaussian_avatar.py`, `debug/one_formula_diagnostics.py`; data and logs `debug/data/ga2_*`,
+`debug/data/one_formula_diagnostics.*`.
+
+**GA2: HELD.** The x-equation on K0 e^{-x^2} holds symbolically. The Mellin route gives
+L_G = t^4 (theta+1)^2 - t^2 theta^2 (4 theta + 1) + 4 theta^2 (theta - 2)^2, order four, which annihilates
+H_G to 1e-41 to 3e-41 at t = 0.4, 0.9, 1.7, 3.1 at 40 digits; the 1/200 change gives 1.6e-5 to 3.3e-3.
+The irregular point rests on growth, not on L_G's degrees, since L_G is not shown minimal and a left
+multiple of a Fuchsian operator need not be Fuchsian. The companion J(t) = int I0(tx) K0(x) e^{-x^2} dx
+lies in the solution space of every annihilator with rational coefficients (continuing t around 0 turns
+H_G into H_G - i pi J), and log J - (t-1)^2/4 is -0.9, -1.9, -2.4, -2.8, -3.3, -3.9, -4.4 at
+t = 4, 6, 8, 10, 14, 20, 28: a function of Gaussian growth, which no Fuchsian operator admits. So every
+annihilator of H_G has an irregular singular point at infinity. Control: the same conversion for
+K0(x) cosh(3x/2) gives an order-six operator that L_Leg right-divides exactly. Class: **CHECK**, as
+registered. The chemistry reading stays at the avatar level.
+
+**Unregistered diagnostics, run alongside (not scored).**
+- The slot is not a convention. At gamma = 3/2, putting the geminal in a mass slot and a density scale in
+  the momentum slot gives j = 4(16x^2+472x+25)^3/(9x(4x-1)^2(4x-25)^2) (masses t, gamma; momentum 1) and
+  j = 4(16x^2-104x+601)^3/(9(4x-1)^2(4x-25)^2) (masses 1, gamma; momentum t). Traces of Frobenius squared,
+  at x = 2, 3, 7, 11 and primes 5 to 79, agree with C2b's family at 19 of 57 and 15 of 54 good pairs;
+  isogeny needs all. Controls: the EC record's J1 and J2 agree at 59 of 59 (so its unscored "isogenous"
+  remark holds), and Legendre's family against its 2-isogenous form at 48 of 48. The first run used J2
+  with the wrong normalization and read 3 of 58; corrected (the D_of convention), disclosed.
+- The gamma = 1 Legendre family, j = 16(x+12)^3/(x-4)^2, is not isogenous to the elliptic curve under
+  F_3's Clausen square, j = 16(16-x)^3/x^2 (31 of 80). So the absence of the elliptic piece at gamma = 1
+  is not that it coincides with the K3's curve.
+- The dispersion-root form L(a,b;c) = (pi/4) int dk / (Delta_a(k) Delta_b(k-c)), each root the product of
+  principal square roots of its linear factors, matches the cosine form at real c to 2e-34 and the cosh
+  form at c = i gamma with gamma < b to 2e-26. For gamma > b (a = 1.7, b = 1, gamma = 3/2) the same contour
+  returns a purely imaginary value, 0.988 i against C = 2.037: the branch point i(gamma - b) has crossed the
+  real axis, and the contour integral is then another period of the same curve, not identified. At
+  gamma = b that branch point sits on the contour; this is the gamma = 1 configuration of the triangle.
+- Literature (citation reviewer, primary sources): the function is BBBG 2008's S-bar_3 (Eq. 30), with both
+  the k-convolution and an elliptic closed form, and the c = 0 case is their Eq. 19; credited in Paper 59.
+  Davydychev-Delbourgo Eq. (2.4) defines the angle as used; D = 1 with half-integer powers is covered only
+  by their general sum-of-powers result. The Gradshteyn-Ryzhik entry could not be opened; the closed form
+  is instead matched to Aoki-Qin-Yamaguchi-Zhu arXiv:2605.28054 Eq. (A.10) at nu = -1/2, whose condition
+  a + b > |Im c| is the pseudo-threshold bound t > gamma - 1.
+
+Appended 2026-10-23, after scoring GA1. Computed by a sub-agent from this record; scripts `debug/ga1_*.py`,
+data and logs `debug/data/ga1_*`, everything exact as strings in `debug/data/ga1_pieces.json`. The PM
+rechecked the Legendre map on an independent code path (`debug/ga1_pm_check.py`).
+
+**Object.** Y_lin built as the second gamma-derivatives of the unequal-mass loop, analytically; the same
+derivation at the exponential shape reproduces record QG's kernel symbolically; the loop against direct
+3-D quadrature agrees to 4e-15; two kite routes agree to 2e-16.
+
+**Annihilator.** L9lin of order nine and t^2-degree 32, integer coefficients. Genuine singular points in
+t > 0: exactly {1/2, 2, 5/2, 3}; the degree-26 remaining factor is apparent. On Y_lin at 32 digits it
+leaves 5.6e-28, 1.3e-29, 9.4e-29, 1.9e-24 of the largest term at t = 0.8, 1.3, 1.7, 2.5, no source
+term; the 1/200 change leaves 7.1e-3 to 2.0e-7. Minimality bounded as in record g32 (no order 6, 7, 8
+up to degrees 75, 65, 58; order 9 first appears at degree 32).
+
+**GA1: HELD.** Composition series by exact pseudo-divisions, orders 1, 1, 1, 1, 2, 3, the same
+multiplicities as Y_exp. Four algebraic pieces: a rational one; exponent -5/2 at t = 2; exponents -11/2
+and -13/2 at t = 3 (Y_exp had -7/2, -9/2 there). The order-two piece, x-degree 36 and not C2b (x-degree
+30), is equivalent to the Legendre operator with z = (t^2 + 1 - gamma^2)/(2t), twisted by x^(1/2), by an
+exact order-one map with E = ((4x-1)(4x-25))^5 (4x+5), numerator degree 24; a 1/1000 change breaks it;
+PM recheck exact. The order-three piece is equivalent to F_3's operator twisted by t by an exact map
+(found modulo primes, rebuilt over 12, verified exactly), MUM at t = 0 and a pseudo-reflection at t = 2.
+Irreducibility by exponent-bounded split searches; planted splits found. Both falsifier clauses unmet.
+Class: **FINDING**, as registered. It closes the Paper 59 cap for the linexp shape at gamma = 3/2.
+
+**Controls.** The stored exponential series gives L9 at gamma = 3/2 exactly; the generic peeler
+reproduces L9's series, K6 and F; the F_3 map control reproduces the gamma = 3/2 map; the Legendre
+control recovers the CF2 map; mod-p series agree with the floats on 60 coefficients for both shapes.
+
+**Deviations.** The radius stayed at 2 (analytic for |z| < 4; a radius-1 run agrees to 5e-64). The
+float null vector could not be rationalised (48 stable digits), so the operator came from the kite's
+Taylor coefficients computed exactly modulo eight primes, CRT and rational reconstruction, then checked
+against all 800 float coefficients (4.5e-366). A generic chain-first peeler replaced the gamma = 2 chain
+script, validated on L9. First box found the operator.

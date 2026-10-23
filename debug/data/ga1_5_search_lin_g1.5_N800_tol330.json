@@ -1,0 +1,24 @@
+{
+ "series": "debug/data/ga1_series_lin_g1.5_M1600_d600_rho2.json",
+ "N": 800,
+ "dps": 600,
+ "tol": 330,
+ "6": {
+  "d": null,
+  "info": "none up to d=75"
+ },
+ "7": {
+  "d": null,
+  "info": "none up to d=65"
+ },
+ "8": {
+  "d": null,
+  "info": "none up to d=58"
+ },
+ "9": {
+  "d": 32,
+  "info": {
+   "resid": "1.13e-364"
+  }
+ }
+}

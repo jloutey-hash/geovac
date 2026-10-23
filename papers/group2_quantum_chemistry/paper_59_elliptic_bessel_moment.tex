@@ -301,7 +301,8 @@ elliptic integral \textbf{[MEASURED, 31 digits; classical]},
 %
 with modulus $m=1-c_{\min}/c_{\max}$
 (nondegenerate, $0<m<1$;\ prefactor verified for both orderings of
-$c_{1},c_{2}$ in \texttt{test\_paper59\_euclidean\_dictionary.py}), while on the diagonal $c_{1}=c_{2}=c$ it collapses
+$c_{1},c_{2}$ in \texttt{test\_paper59\_euclidean\_dictionary.py};\ in
+Bessel form it is Eq.~(19) of Ref.~\cite{bbbg2008}), while on the diagonal $c_{1}=c_{2}=c$ it collapses
 to the elementary $\pi/(2\sqrt{c})$.  Since $c_{1}=s(1-s)$ and $c_{2}=t(1-t)$
 range independently over $[0,\tfrac14]$, the full integral~\eqref{eq:reduced}
 is an integral over a \emph{family} of elliptic curves, of modulus
@@ -341,9 +342,9 @@ Bessel moment \textbf{[MEASURED, 30 digits]},
 %
 with $a_{i}=1/\sqrt{c_{i}}$ and $p_{i}=D_{i}\sqrt{c_{i}}$.  This is a
 shifted-argument, two-scale member of the Bessel-moment family; it is not one
-of the single-scale moments $\int_{0}^{\infty}t^{k}K_{0}^{n}(t)\,dt$
-catalogued in closed form by Bailey, Borwein, Broadhurst and
-Glasser~\cite{bbbg2008}.
+of the moments catalogued in closed form by Bailey, Borwein, Broadhurst and
+Glasser~\cite{bbbg2008}, whose two-scale entries (their Eqs.~19 and~30) are
+the unshifted case $p_1=p_2=0$.
 
 A change of variable $x=\sqrt{c_{1}k^{2}+1}$ on the one-mass slice
 $N(D)\equiv M(D,0)$ puts it in the cleanest canonical form: the Laplace
@@ -1418,9 +1419,15 @@ $\lambda=(\gamma^2-(t-1)^2)/(4t)$, so that $\lambda(1-\lambda)$ is
 $-1/(16t^2)$ times the K\"all\'en function of $t^2$, $1$ and $\gamma^2$.
 Twisted by $t$, the Legendre operator of degree $-1/2$ in
 $z=(t^2+1-\gamma^2)/(2t)$ is the period operator above, coefficient for
-coefficient.  It annihilates
-$C(t)=\int_0^\infty K_0(tx)K_0(x)\cosh(\gamma x)\,dx$ to $5\times10^{-41}$
-at 40 digits, and $C=\pi^2P_{-1/2}(z)/(4\sqrt t)$ to $2\times10^{-16}$ at
+coefficient.  \textbf{[PRIOR ART]} The function itself is
+$\pi\bar S_3(a,b,w)$ of Ref.~\cite{bbbg2008} (their Eq.~30), given there
+as a convolution of two square-root propagators,
+$(\pi/4)\int_{-\infty}^{\infty}dk/\sqrt{(k^2+a^2)((k-c)^2+b^2)}$, and as a
+complete elliptic integral of modulus
+$\sqrt{(c^2+(a-b)^2)/(c^2+(a+b)^2)}$;\ the Legendre form, the imaginary
+momentum and the triangle are the readings added here.  It annihilates
+$C(t)=\int_0^\infty K_0(tx)K_0(x)\cosh(\gamma x)\,dx$, which converges for
+$t>\gamma-1$, the pseudo-threshold, to $5\times10^{-41}$ at 40 digits, and $C=\pi^2P_{-1/2}(z)/(4\sqrt t)$ to $2\times10^{-16}$ at
 15 digits:\ the continuation to imaginary momentum of a classical cosine
 transform of $K_0K_0$.  Since $\int dp_2\,e^{ip_2x_2}=2\pi\delta(x_2)$,
 $C$ is $\pi$ times the two-dimensional bubble with masses $t$ and $1$,
@@ -1442,6 +1449,16 @@ to the Legendre operator with $z=(t^2-3)/(2t)$, its order-three piece is
 the twisted K3 piece at $t=\pm2$ again, and its order-one pieces are
 algebraic, branched at $t=2$ and $t=2\gamma=4$ (record
 \texttt{docs/predictions/2026-10-22\_c2b\_feynman\_g2.md}).
+\textbf{[SYMBOLIC + MEASURED]} The cusp-correct geminal $f=re^{-\gamma r}$
+of the LiH engine, on both edges at $\gamma=3/2$, brings no new type, as
+registered before computing from the fact that $re^{-\gamma r}$ is a
+$\gamma$-derivative of the same Yukawa triangle.  Its annihilator of order
+nine, checked on the integral to $10^{-28}$, has the same composition
+series:\ four algebraic pieces, branched at $t=2$ and $3$;\ an order-two
+piece, a different operator from the exponential case's, equivalent by an
+exact map to the same Legendre family;\ and the twisted K3 piece (record
+\texttt{docs/predictions/2026-10-22\_geminal\_shapes.md};\ guard
+\texttt{tests/test\_paper59\_ga1\_geminal.py}).
 \textbf{[SYMBOLIC + MEASURED]} One function carries both elliptic pieces
 met so far.  Write
 $\mathcal{L}(a,b;c)=\int_0^\infty K_0(ax)K_0(bx)\cos(cx)\,dx
@@ -1450,10 +1467,18 @@ is the radial core of the three-center integral at zero separation:\
 with $a_i=c_i^{-1/2}$ it reproduces Eq.~\eqref{eq:period} to
 $4\times10^{-31}$ at three pairs of scales.  At $c=i\gamma$ it is $C(t)$
 above.  Zero or real momentum gives $z\ge1$.  Imaginary momentum gives
-$z=\cos\theta$, with $\theta$ the angle opposite the side $\gamma$ in the
-triangle with sides $t$, $1$ and $\gamma$, and the modulus is
+$z=\cos\theta$ between the pseudo-threshold and the threshold,
+$|t-1|<\gamma<t+1$, with $\theta$ the angle opposite the side $\gamma$ in
+the triangle with sides $t$, $1$ and $\gamma$, and the modulus is
 $\lambda=\sin^2(\theta/2)$.  The thresholds are the flat triangles, since
-the K\"all\'en function is $-16$ times the squared area.  The right angle,
+the K\"all\'en function is $-16$ times the squared area.  The slot is not
+a convention:\ with the geminal as a mass and a density scale as the
+momentum, the two other assignments give the families
+$j=4(16x^2+472x+25)^3/\bigl(9x(4x-1)^2(4x-25)^2\bigr)$ and
+$j=4(16x^2-104x+601)^3/\bigl(9(4x-1)^2(4x-25)^2\bigr)$, and neither is
+isogenous to the piece's, since their traces of Frobenius differ at most
+good primes at every rational $x$ tried, while the two solutions of the
+degree-six search agree at every one.  The right angle,
 $\gamma^2=t^2+1$, gives $\lambda=1/2$ and $j=1728$, the same
 complex-multiplication value $K(1/\sqrt2)$ as the three-center fibre at
 $\rho=1/2$.  \textbf{[OBSERVATION]} On this family, then, composing
@@ -1464,7 +1489,17 @@ angle of their triangle, and a flat triangle is singular.  Reading
 one-loop integrals through triangles of masses and momenta is the
 approach of Davydychev and Delbourgo~\cite{davydychev_delbourgo1998};\
 what is added is its appearance in a correlated molecular integral.
-Guard:\ \texttt{tests/test\_paper59\_one\_formula.py}.  The order-six right factor below the order-three piece
+\textbf{[SYMBOLIC + MEASURED]} The shape of the geminal matters at this
+level.  A Gaussian geminal's avatar, $\int_0^\infty K_0(tx)K_0(x)e^{-x^2}dx$,
+is annihilated by $t^4(\theta+1)^2-t^2\theta^2(4\theta+1)+4\theta^2(\theta-2)^2$
+to $10^{-41}$, and its monodromy companion, with $I_0$ for $K_0(tx)$, grows
+like $e^{(t-1)^2/4}$, so every annihilator has an irregular singular point
+at infinity:\ at the level of the one function, Slater geminals stay on the
+ladder of Picard--Fuchs operators and Gaussian ones leave it for exponential
+periods (registered before computing, record
+\texttt{docs/predictions/2026-10-22\_geminal\_shapes.md}).
+Guards:\ \texttt{tests/test\_paper59\_one\_formula.py},
+\texttt{tests/test\_paper59\_geminal\_shapes.py}.  The order-six right factor below the order-three piece
 leaves between 1.3 and 2.4 times the largest term of $Y$ at three values
 of $t$, so $Y$ needs the K3 piece, and no piece above K3 occurs (record
 \texttt{docs/predictions/2026-10-22\_correlated\_triangle\_g32.md}).  The singular points of $Y$'s annihilator move with
@@ -1487,9 +1522,9 @@ apply:\ these are fibre statements, and the integrated value may sit lower.
 Further caps:\ for the correlated triangle, one geminal shape, the
 exponential, at three values of $\gamma$, the first the value at which three
 thresholds meet, with $t$ on the density carrying both
-geminals, so the cusp-correct and linear-exponential geminals of the LiH
-engine are untested, and its kite operators are guessed from series and
-checked on their coefficients;\ only the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
+geminals, so of the LiH engine's two shapes the cusp-correct one is
+tested at $\gamma=3/2$ only, and its kite operators are guessed from series
+and checked on their coefficients;\ only the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
 Mellin contour shift.  The search that excludes a K3 piece
 from the triangle is bounded in degree, unlike the chain's no-split proof,
 but the orders settle it:\ the

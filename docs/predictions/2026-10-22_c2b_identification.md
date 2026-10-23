@@ -188,3 +188,7 @@ elliptic Picard-Fuchs piece, one for the j-invariant or discriminant. A FINDING 
 **Caps.** As registered: one gamma, the fingerprint fibre, apex placement. Integer traces are shown on
 finitely many words; the exact map is the proof. L9's minimality is bounded, as in GT, and does not affect
 this result.
+
+**Appended 2026-10-22.** The unscored remark that J2 is isogenous to J1 up to a twist is now checked:
+their traces of Frobenius squared agree at 59 of 59 good pairs over x = 2, 3, 7, 11 and primes 5 to 79,
+with a Legendre 2-isogeny control at 48 of 48 (`debug/one_formula_diagnostics.py`).

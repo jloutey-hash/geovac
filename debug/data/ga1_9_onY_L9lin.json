@@ -1,0 +1,42 @@
+{
+ "op": "debug/data/ga1_5_op_lin_g1.5_L9lin.json",
+ "key": "Q",
+ "order": 9,
+ "perturbed": {
+  "theta_power": 0,
+  "x_power": 4,
+  "factor": "1 + 1/200"
+ },
+ "0.8": {
+  "Y": "0.001550865580034863075740367",
+  "quad_h_vs_2h_Y": "3.68e-14",
+  "LY_rel_group": "5.57e-28",
+  "LY_rel_monomial": "9.98e-29",
+  "LY_rel_group_2h": "2.26e-14",
+  "perturbed_rel_group": "0.00712"
+ },
+ "1.3": {
+  "Y": "0.002822468623109806858507875",
+  "quad_h_vs_2h_Y": "1.18e-13",
+  "LY_rel_group": "1.3e-29",
+  "LY_rel_monomial": "1.44e-29",
+  "LY_rel_group_2h": "5.14e-15",
+  "perturbed_rel_group": "0.00343"
+ },
+ "1.7": {
+  "Y": "0.003608722563420867293113628",
+  "quad_h_vs_2h_Y": "3.11e-13",
+  "LY_rel_group": "9.38e-29",
+  "LY_rel_monomial": "7.95e-29",
+  "LY_rel_group_2h": "1.74e-11",
+  "perturbed_rel_group": "0.000211"
+ },
+ "2.5": {
+  "Y": "0.00464650264032935223500893",
+  "quad_h_vs_2h_Y": "2.41e-12",
+  "LY_rel_group": "1.9e-24",
+  "LY_rel_monomial": "3.87e-25",
+  "LY_rel_group_2h": "2.6e-9",
+  "perturbed_rel_group": "2.0e-7"
+ }
+}

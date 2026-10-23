@@ -1,0 +1,39 @@
+{
+ "series": "debug/data/ga1_series_lin_g1.5_M1600_d600_rho2.json",
+ "N": 800,
+ "dps": 600,
+ "r": 10,
+ "d": 19,
+ "solves": [
+  [
+   1,
+   0,
+   "3.55e-364",
+   "(2, 1)"
+  ],
+  [
+   7,
+   0,
+   "3.55e-364",
+   "(2, 1)"
+  ],
+  [
+   1,
+   60,
+   "2.94e-364",
+   "(2, 1)"
+  ]
+ ],
+ "vs_seed7_from0": {
+  "worst_abs": "4.83e-49",
+  "worst_rel": "5.66e-47"
+ },
+ "vs_seed1_from60": {
+  "worst_abs": "0.121",
+  "worst_rel": "14.2"
+ },
+ "entry_magnitude_min_max": [
+  "4.59e-396",
+  "1.0"
+ ]
+}
