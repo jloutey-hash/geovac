@@ -1403,8 +1403,68 @@ piece has the local data of $F_3$'s operator twisted by $t$, with genuine
 singular points only at $t=0,\pm2,\infty$, which fixes it up to
 equivalence by Levelt's rigidity, in the form of Beukers and
 Heckman~\cite{beukers_heckman1989};\ an exact order-two map from $F_3$'s
-operator confirms the equivalence.  The order-two piece is irreducible and
-not identified.  The order-six right factor below the order-three piece
+operator confirms the equivalence.  The order-two piece is elliptic.  In
+$x=t^2$ it is equivalent, by an exact map of order one, to the operator of a
+period of the rational elliptic surface
+$Y^2=X^3-3x^2(16x^2+152x+25)\,X-2x^3(4x-5)(16x^2-616x+25)$, whose
+$j$-invariant is $(16x^2+152x+25)^3/\bigl(x(4x-1)^2(4x-25)^2\bigr)$ and whose
+singular fibres are $I_1^*$, $I_2$, $I_2$, $I_1$ at $x=0,1/4,25/4,\infty$;\ over
+$t$ they are six fibres $I_2$, at $t=0,\pm1/2,\pm5/2,\infty$, that is at
+$t=|1-\gamma|$ and $1+\gamma$.  The monodromy of the piece has integer traces,
+measured at 80 digits, and the map is exact (record
+\texttt{docs/predictions/2026-10-22\_c2b\_identification.md}).
+\textbf{[SYMBOLIC + MEASURED]} The curve is Legendre's, with modulus
+$\lambda=(\gamma^2-(t-1)^2)/(4t)$, so that $\lambda(1-\lambda)$ is
+$-1/(16t^2)$ times the K\"all\'en function of $t^2$, $1$ and $\gamma^2$.
+Twisted by $t$, the Legendre operator of degree $-1/2$ in
+$z=(t^2+1-\gamma^2)/(2t)$ is the period operator above, coefficient for
+coefficient.  It annihilates
+$C(t)=\int_0^\infty K_0(tx)K_0(x)\cosh(\gamma x)\,dx$ to $5\times10^{-41}$
+at 40 digits, and $C=\pi^2P_{-1/2}(z)/(4\sqrt t)$ to $2\times10^{-16}$ at
+15 digits:\ the continuation to imaginary momentum of a classical cosine
+transform of $K_0K_0$.  Since $\int dp_2\,e^{ip_2x_2}=2\pi\delta(x_2)$,
+$C$ is $\pi$ times the two-dimensional bubble with masses $t$ and $1$,
+integrated over a line of external momentum moved off the origin by
+$i\gamma$;\ at $\gamma=0$ it is $F_2$.  In the dictionary of
+Sec.~\ref{sec:four_density} the geminal therefore acts as an imaginary
+external momentum, and the singular points are where $\gamma=t+1$ or
+$\gamma=|t-1|$, the bubble's threshold and pseudo-threshold.  The
+registered candidate with $e^{-\gamma x}$ in place of $\cosh(\gamma x)$
+is not a solution, because its sinh part is not (record
+\texttt{docs/predictions/2026-10-22\_c2b\_feynman.md}).  This fixes the
+operator class of the piece, not the component of $Y$ along it.
+\textbf{[SYMBOLIC + MEASURED]} At $\gamma=2$ the reading was registered
+before $Y$ was computed there, and it held piece by piece.  An
+annihilator of order nine, fitted from 800 series coefficients and
+checked on $Y$ to $5\times10^{-26}$, has the same composition series
+as at $\gamma=3/2$.  Its order-two piece is equivalent by an exact map
+to the Legendre operator with $z=(t^2-3)/(2t)$, its order-three piece is
+the twisted K3 piece at $t=\pm2$ again, and its order-one pieces are
+algebraic, branched at $t=2$ and $t=2\gamma=4$ (record
+\texttt{docs/predictions/2026-10-22\_c2b\_feynman\_g2.md}).
+\textbf{[SYMBOLIC + MEASURED]} One function carries both elliptic pieces
+met so far.  Write
+$\mathcal{L}(a,b;c)=\int_0^\infty K_0(ax)K_0(bx)\cos(cx)\,dx
+=\pi^2P_{-1/2}(z)/(4\sqrt{ab})$, with $z=(a^2+b^2+c^2)/(2ab)$.  At $c=0$ it
+is the radial core of the three-center integral at zero separation:\
+with $a_i=c_i^{-1/2}$ it reproduces Eq.~\eqref{eq:period} to
+$4\times10^{-31}$ at three pairs of scales.  At $c=i\gamma$ it is $C(t)$
+above.  Zero or real momentum gives $z\ge1$.  Imaginary momentum gives
+$z=\cos\theta$, with $\theta$ the angle opposite the side $\gamma$ in the
+triangle with sides $t$, $1$ and $\gamma$, and the modulus is
+$\lambda=\sin^2(\theta/2)$.  The thresholds are the flat triangles, since
+the K\"all\'en function is $-16$ times the squared area.  The right angle,
+$\gamma^2=t^2+1$, gives $\lambda=1/2$ and $j=1728$, the same
+complex-multiplication value $K(1/\sqrt2)$ as the three-center fibre at
+$\rho=1/2$.  \textbf{[OBSERVATION]} On this family, then, composing
+unequal decay rates costs one elliptic period:\ at zero momentum its
+modulus is set by their ratio, and equal rates make it elementary, as
+Eq.~\eqref{eq:period} records;\ at imaginary momentum it is set by the
+angle of their triangle, and a flat triangle is singular.  Reading
+one-loop integrals through triangles of masses and momenta is the
+approach of Davydychev and Delbourgo~\cite{davydychev_delbourgo1998};\
+what is added is its appearance in a correlated molecular integral.
+Guard:\ \texttt{tests/test\_paper59\_one\_formula.py}.  The order-six right factor below the order-three piece
 leaves between 1.3 and 2.4 times the largest term of $Y$ at three values
 of $t$, so $Y$ needs the K3 piece, and no piece above K3 occurs (record
 \texttt{docs/predictions/2026-10-22\_correlated\_triangle\_g32.md}).  The singular points of $Y$'s annihilator move with
@@ -1425,7 +1485,7 @@ three, as the record expected, but lower.  The count of linked densities
 orders the trees, not the rings.  The caps of Sec.~\ref{sec:four_density}
 apply:\ these are fibre statements, and the integrated value may sit lower.
 Further caps:\ for the correlated triangle, one geminal shape, the
-exponential, at two values of $\gamma$, the first the value at which three
+exponential, at three values of $\gamma$, the first the value at which three
 thresholds meet, with $t$ on the density carrying both
 geminals, so the cusp-correct and linear-exponential geminals of the LiH
 engine are untested, and its kite operators are guessed from series and

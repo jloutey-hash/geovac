@@ -1,0 +1,140 @@
+{
+ "k3map": {
+  "identity_exact": true,
+  "perturbed_1e-3_identity": false
+ },
+ "apparent": {
+  "C2b: degree 14 (mult 1)": [
+   {
+    "p": 4611686018427385861,
+    "int_exps": [
+     0,
+     2
+    ],
+    "logfree": [
+     true,
+     true
+    ]
+   },
+   {
+    "p": 4611686018427385831,
+    "int_exps": [
+     0,
+     2
+    ],
+    "logfree": [
+     true,
+     true
+    ]
+   }
+  ],
+  "C2b: degree 6 (mult 1)": [
+   {
+    "p": 4611686018427385981,
+    "int_exps": [
+     0,
+     2
+    ],
+    "logfree": [
+     true,
+     true
+    ]
+   },
+   {
+    "p": 4611686018427385861,
+    "int_exps": [
+     0,
+     2
+    ],
+    "logfree": [
+     true,
+     true
+    ]
+   }
+  ],
+  "C2b: degree 4 (mult 2)": [
+   {
+    "p": 4611686018427385981,
+    "int_exps": [
+     1,
+     2
+    ],
+    "logfree": [
+     true,
+     true
+    ]
+   },
+   {
+    "p": 4611686018427385861,
+    "int_exps": [
+     1,
+     2
+    ],
+    "logfree": [
+     true,
+     true
+    ]
+   }
+  ],
+  "F: degree 19 (mult 1)": [
+   {
+    "p": 4611686018427385861,
+    "int_exps": [
+     0,
+     1,
+     3
+    ],
+    "logfree": [
+     true,
+     true,
+     true
+    ]
+   },
+   {
+    "p": 4611686018427385801,
+    "int_exps": [
+     0,
+     1,
+     3
+    ],
+    "logfree": [
+     true,
+     true,
+     true
+    ]
+   }
+  ],
+  "F: degree 14 (mult 2)": [
+   {
+    "p": 4611686018427385861,
+    "int_exps": [
+     0,
+     2,
+     3
+    ],
+    "logfree": [
+     true,
+     true,
+     true
+    ]
+   },
+   {
+    "p": 4611686018427385831,
+    "int_exps": [
+     0,
+     2,
+     3
+    ],
+    "logfree": [
+     true,
+     true,
+     true
+    ]
+   }
+  ]
+ },
+ "j_gamma2": {
+  "j": "16*(x + 3)**6/(x*(x - 9)**2*(x - 1)**2)",
+  "equals_record": true
+ }
+}

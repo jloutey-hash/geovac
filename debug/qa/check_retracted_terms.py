@@ -7872,6 +7872,25 @@ REGISTRY = [
         ],
         "cited_by": {},
     },
+    {
+        "id": 'p59-c2b-unidentified',
+        "pattern": 'order-two\\s+piece\\s+is\\s+irreducible\\s+and\\s+not\\s+identified|what\\s+the\\s+(irreducible\\s+)?order-two\\s+piece\\s+of\\s+the\\s+correlated|identifying\\s+the\\s+irreducible\\s+order-two\\s+piece|order-two\\s+piece\\s+(irreducible\\s+and\\s+)?unidentified',
+        "exempt_if_nearby": withdrawal_marker('p59-c2b-unidentified'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": 'Registered 2026-10-22 (EC1-EC3, record docs/predictions/2026-10-22_c2b_identification.md). The order-two piece of the correlated triangle at gamma = 3/2 is the period of a rational elliptic surface (j = (16x^2+152x+25)^3/(x(4x-1)^2(4x-25)^2), fibres I1*, I2, I2, I1), by an exact order-one map; it is no longer unidentified.',
+        "files": [
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/atlas.md',
+            'docs/forced_free_seam.md',
+            'docs/walls/register.md',
+            'README.md',
+            'papers/INDEX.md',
+            'docs/claim_test_matrix.md',
+        ],
+        "cited_by": {},
+    },
 ]
 
 

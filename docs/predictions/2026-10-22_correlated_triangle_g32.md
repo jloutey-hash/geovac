@@ -123,3 +123,8 @@ together), GT3 HELD (CHECK). The negative control was ill-posed at registration,
 it perturbs an operator whose residual on Y is meant to be nonzero, so it cannot discriminate. The
 unscored C2b is unipotent at exactly four points in x = t^2 (0, 1/4, 25/4, infinity), the pattern of a
 Beauville-type elliptic family; that is a lead, not a result.
+
+**Note (2026-10-22, appended).** The "Beauville-type" lead in the PM check above is wrong as stated. The cross
+ratio of the four points is 25, outside Beauville's rational cross ratios, and x = 0 carries minus a unipotent.
+C2b is identified in `docs/predictions/2026-10-22_c2b_identification.md` (EC1-EC3): the period of a rational
+elliptic surface with fibres I1*, I2, I2, I1, by an exact map.
