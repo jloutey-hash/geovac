@@ -110,3 +110,65 @@ confluence reading is a reading. A STOP for feasibility (no annihilator with con
 reported and not scored. The Newton-polygon clause of GY1 is conclusive only on a minimal annihilator,
 since a left multiple of a Fuchsian operator need not be Fuchsian (record GA2); on a non-minimal one the
 irregularity rests on the growth of a companion solution, as in GA2, and this is said so.
+
+## Disposition (appended 2026-10-24, after computing; the predictions above are unchanged)
+
+Computed by a sub-agent from this record; scripts `debug/gy_*.py`, data and logs `debug/data/gy_*`, everything
+exact as strings in `debug/data/gy_pieces.json`, memo `debug/sprint_gy_memo.md`. PM recheck on an independent code
+path, `debug/gy_pm_check.py` (log `debug/data/gy_pm_check.log`).
+
+**Object.** The Gaussian loop is e^{-s12/(8 gamma)} 4 gamma pi^(3/2) Daw(R/sqrt(2 gamma))/R,
+R^2 = (s13 + s23)/2 - s12/4, against direct 3-D quadrature at five triples to 6.7e-12. Routes A and B agree to
+2.6e-23. The Taylor coefficients of the kite carry two constants, phi = pi^(3/2)/(2 sqrt 2) [E A(z) + B(z)] with A, B
+rational series and E = sqrt(pi/2) e^{1/2} erfc(1/sqrt 2); the split was derived and checked to 1e-38 before use.
+Controls: the same series driver with the exponential pair reproduces the stored record-QG series at gamma = 3/2 to
+1.6e-76 on 100 coefficients; Cauchy radii 1 and 2 agree to 5e-244; the F_3 map search recovers the stored Slater map
+at gamma = 2, and a 1/1000 change breaks it; the Newton-polygon code gives Fuchsian for the Slater L9 and slope -1 for
+GA2's L_G. **PM recheck of the object:** Y_G by a position-space reduction written independently (the pair closes on
+the apex as exp(-2 gamma |x3 - m|^2 - gamma |x12|^2/2), m = (x1 + x2)/2) agrees with the agent's values at t = 0.8,
+1.3, 2.5 to 3.6e-14, the float64 floor (grid self-consistency 1.5e-14).
+
+**Operator.** L9G, order nine, x-degree 13, integer coefficients, from exact series modulo five primes; on 800 float
+coefficients 1.9e-362; on Y_G at six t at 32 digits 1.2e-27 to 2.4e-27 of the largest monomial; the 1/200 change
+leaves 2.3e-3 to 1.4 (GA1 normalisation) and 5.4e-2 to 1.1 (dominant monomial). Minimal over Q(x): no operator of
+order one to eight to x-degree 100, exact mod p on both split parts. The Mellin route from the kite (order five) gives
+order 17, which L9G right-divides exactly. Requiring both split parts to be annihilated assumes E irrational (not
+proved); independently, the float search on phi alone returns the same order nine at degree 13.
+
+**GY1: HELD.** On the minimal annihilator the Newton polygon at x = infinity has height 4 and an edge of slope -1
+with characteristic polynomial 27661 C^5 (2C - 1)^2 (4C - 1)^2 (PM recheck exact), so two formal solutions grow like
+exp(t^2/8), as predicted, and two like exp(t^2/4), not predicted. Since the operator is minimal, the cap on
+non-minimal operators does not apply. The value clause is PARTLY: c = 1/8 occurs, but the dominant rate is 1/4.
+Class: **CHECK**.
+
+**GY2: HELD, and not discriminating as registered.** The only genuine finite singular point in x > 0 is x = 4;
+x = 1 is an ordinary point (exponents 0 to 8); x = 4 carries the exponent -3/2; the degree-seven factor of the leading
+coefficient is apparent (PM recheck exact at x = 1, 4). There is no factor of order two. **Registration error,
+disclosed:** gamma = 1 is the equal-mass value, where the Slater triangle also has its thresholds only at t = 2 and
+0 and also has no elliptic piece (records QG and MG). So neither clause of GY2 separates the Gaussian shape from the
+Slater shape at this gamma. "No point moves with gamma" rests on the derived kernel, where only M can vanish, not on a
+second gamma. Class: **CHECK**, of low weight.
+
+**GY3: FAILED, within bounds.** L9G = F2 o F1 exactly, with F1 of order four (x-degree 5) and F2 of order five
+(x-degree 18), both irregular at infinity (PM recheck: F1 right-divides L9G with zero remainder; the quotient is F2
+times (5x^2 + 48x + 48)^-5). Irreducibility rests on bounded searches: Frobenius probes of F and F* at x = 0, 1, 4 to
+x-degree 220, and order-one factors exp(c x) t^f (1 - x/4)^e P with c from the Newton polygon and deg P <= 120, which
+also closes a 1 + 3 + 1 split of F2 around an F_3 piece. By Jordan-Holder the composition factors are fixed up to
+equivalence, and neither has order three, so no factor is equivalent to F_3's operator. A direct map search from F_3
+into F1, F2, L9G and their adjoints (t-powers -11 to 5, (x - 4)^-6, the apparent factor squared, numerator degree 128)
+also finds nothing. Each factor keeps a Jordan block of size three at t = 0, the local trace of the K3 piece, inside an
+irreducible irregular factor. F1 is exactly the annihilator of the E-part of Y_G. Class: **MISS**.
+
+**Reading (not scored).** The registered confluence reading held for the elliptic rung and failed for the K3 rung:
+with Gaussian geminals the K3 piece does not survive as a Fuchsian factor; its local data at t = 0 survive, fused with
+exponential solutions. So the K3 rung of the Slater triangle is not set by the densities and the Coulomb line alone;
+the geminal's mass shell enters it.
+
+**Novelty.** With GY3 failed the record's FINDING condition (hits on both GY2 and GY3) is not met; the search was not
+repeated.
+
+**Deviations.** Exact mod-p series used although phi_n carries two constants (split derived first); route B is
+one-dimensional; the Y grid step refined from 1/16 (unconverged) to 1/128; the exponential-pair control at 120 digits
+on 100 coefficients; an N = 1200 bound run and a stacked float search died in a rate-limit interruption and were not
+rerun (the N = 600 exact bounds cover them); a NaN defect in complex square roots at the branch cut was found and
+fixed, and no reported number depends on it.

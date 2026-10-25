@@ -1,0 +1,11 @@
+{
+ "gamma": "2",
+ "pieces": "debug/data/ga3_pieces.json",
+ "factor": "factor_5",
+ "map_file": "debug/data/ga3_pieces.json",
+ "twist": "x^(1/2)",
+ "E": "x**11 - 47*x**10 + 895*x**9 - 8665*x**8 + 42410*x**7 - 70870*x**6 - 212610*x**5 + 1145070*x**4 - 2105595*x**3 + 1957365*x**2 - 925101*x + 177147",
+ "exact": true,
+ "perturbed_breaks": true,
+ "j": "16*(x + 3)**6/(x*(x - 9)**2*(x - 1)**2)"
+}

@@ -1,0 +1,90 @@
+{
+ "two_radii": {
+  "rows": [
+   {
+    "n": 0,
+    "rel": "1.67e-44",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-3.29008099576"
+   },
+   {
+    "n": 1,
+    "rel": "6.11e-45",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-5.16207774292"
+   },
+   {
+    "n": 2,
+    "rel": "3.51e-45",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-6.32653911169"
+   },
+   {
+    "n": 5,
+    "rel": "1.64e-45",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-7.96269777301"
+   },
+   {
+    "n": 10,
+    "rel": "1.12e-45",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.6977975495"
+   },
+   {
+    "n": 20,
+    "rel": "9.44e-46",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.93515146158"
+   },
+   {
+    "n": 40,
+    "rel": "8.8e-46",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.98555687672"
+   },
+   {
+    "n": 60,
+    "rel": "8.61e-46",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.99376142605"
+   },
+   {
+    "n": 80,
+    "rel": "8.53e-46",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.99653529299"
+   },
+   {
+    "n": 100,
+    "rel": "8.48e-46",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.99779868833"
+   },
+   {
+    "n": 120,
+    "rel": "8.45e-46",
+    "expected_bound": "8.33e-44",
+    "ratio_rho45": "-8.99847851168"
+   }
+  ],
+  "worst_rel_over_expected_bound": "0.201",
+  "agree": true
+ },
+ "slice22": {
+  "reference": "cf_g2_series_g2_M1600_d600_rho2.json",
+  "coefficients_compared": 120,
+  "worst_rel_over_expected_bound": "0.0569",
+  "agree": true,
+  "rel_n0": "4.92e-77",
+  "rel_n100": "8.7e-78"
+ },
+ "slice33": {
+  "reference": "mg_series_g3_M1600_d600_rho2.json",
+  "coefficients_compared": 120,
+  "worst_rel_over_expected_bound": "0.026",
+  "agree": true,
+  "rel_n0": "2.25e-77",
+  "rel_n100": "8.67e-78"
+ }
+}

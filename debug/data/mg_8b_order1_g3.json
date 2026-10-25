@@ -1,0 +1,40 @@
+{
+ "factor_ra": {
+  "dlog_residues": {
+   "x": "-1",
+   "19*x + 408": "1"
+  },
+  "polynomial_part_of_dlog": "0",
+  "solution": "(19*x + 408)/x",
+  "operator_kills_solution": true
+ },
+ "factor_rb": {
+  "dlog_residues": {
+   "x - 4": "-5/2",
+   "361*x**2 + 684*x - 768": "1"
+  },
+  "polynomial_part_of_dlog": "0",
+  "solution": "(361*x**2 + 684*x - 768)/(x - 4)**(5/2)",
+  "operator_kills_solution": true
+ },
+ "factor_B2q": {
+  "dlog_residues": {
+   "x - 36": "-7/2",
+   "x": "3/2",
+   "32851*x**4 - 5165492*x**3 + 172222992*x**2 + 326597184*x + 1846333440": "1"
+  },
+  "polynomial_part_of_dlog": "0",
+  "solution": "x**(3/2)*(32851*x**4 - 5165492*x**3 + 172222992*x**2 + 326597184*x + 1846333440)/(x - 36)**(7/2)",
+  "operator_kills_solution": true
+ },
+ "factor_rho1": {
+  "dlog_residues": {
+   "x - 36": "-9/2",
+   "x": "5/2",
+   "39311*x**6 - 39780444*x**5 - 698444064*x**4 + 550862591616*x**3 - 19357346905344*x**2 + 17709098480640*x - 841846113239040": "1"
+  },
+  "polynomial_part_of_dlog": "0",
+  "solution": "x**(5/2)*(39311*x**6 - 39780444*x**5 - 698444064*x**4 + 550862591616*x**3 - 19357346905344*x**2 + 17709098480640*x - 841846113239040)/(x - 36)**(9/2)",
+  "operator_kills_solution": true
+ }
+}

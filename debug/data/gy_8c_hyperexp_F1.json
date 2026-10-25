@@ -1,0 +1,63 @@
+{
+ "key": "factor_1",
+ "F": [
+  {
+   "c": "0",
+   "candidates": 1,
+   "Nmax": 120,
+   "hits": []
+  },
+  {
+   "c": "1/4",
+   "candidates": 1,
+   "Nmax": 120,
+   "hits": []
+  }
+ ],
+ "F_adjoint": [
+  {
+   "c": "0",
+   "candidates": 1,
+   "Nmax": 120,
+   "hits": []
+  },
+  {
+   "c": "-1/4",
+   "candidates": 1,
+   "Nmax": 120,
+   "hits": []
+  }
+ ],
+ "F_adjoint_with_app_poles": {
+  "1": [
+   {
+    "c": "0",
+    "candidates": 1,
+    "Nmax": 120,
+    "hits": []
+   },
+   {
+    "c": "-1/4",
+    "candidates": 1,
+    "Nmax": 120,
+    "hits": []
+   }
+  ],
+  "2": [
+   {
+    "c": "0",
+    "candidates": 1,
+    "Nmax": 120,
+    "hits": []
+   },
+   {
+    "c": "-1/4",
+    "candidates": 1,
+    "Nmax": 120,
+    "hits": []
+   }
+  ]
+ },
+ "apparent_factor_used": "5*x^2 + 48*x + 48",
+ "seconds": 2.089962959289551
+}

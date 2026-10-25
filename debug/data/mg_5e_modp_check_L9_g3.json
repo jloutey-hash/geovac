@@ -1,0 +1,16 @@
+{
+ "op": "debug/data/mg_5_op_L9_g3.json",
+ "kind": "ylog",
+ "modp_series": "debug/data/mg_5d_phi_modp_g3_N800_p2305843009213693951.json",
+ "p": 2305843009213693951,
+ "N": 800,
+ "r": 9,
+ "d": 23,
+ "nonzero_residues": 0,
+ "nullity_r_d": 1,
+ "lower_order_test": {
+  "r": 8,
+  "d": 81,
+  "nullity": 0
+ }
+}

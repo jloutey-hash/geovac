@@ -1,0 +1,28 @@
+{
+ "series": "data/ga3_series_lin_g2_M1600_d600_rho2.json",
+ "N": 800,
+ "dps": 600,
+ "tol": 330,
+ "6": {
+  "d": null,
+  "info": "none up to d=75"
+ },
+ "7": {
+  "d": 65,
+  "info": {
+   "resid": "1.17e-331"
+  }
+ },
+ "8": {
+  "d": 55,
+  "info": {
+   "resid": "6.46e-332"
+  }
+ },
+ "9": {
+  "d": 32,
+  "info": {
+   "resid": "2.94e-364"
+  }
+ }
+}

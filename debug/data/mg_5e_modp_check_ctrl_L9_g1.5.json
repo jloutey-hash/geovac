@@ -1,0 +1,16 @@
+{
+ "op": "debug/data/ring_ext_QG_5c_ylog_g1.5_r9_d25.json",
+ "kind": "ylog",
+ "modp_series": "debug/data/ga1_5d_phi_modp_exp_N400_p2305843009213693951.json",
+ "p": 2305843009213693951,
+ "N": 400,
+ "r": 9,
+ "d": 25,
+ "nonzero_residues": 1,
+ "nullity_r_d": 0,
+ "lower_order_test": {
+  "r": 8,
+  "d": 36,
+  "nullity": 0
+ }
+}

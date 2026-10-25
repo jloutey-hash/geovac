@@ -1,0 +1,38 @@
+{
+ "gamma": "0.5",
+ "op": "debug/data/mg_5_op_kite_g0.5.json",
+ "dps": 50,
+ "M": 64,
+ "r0": "0.15",
+ "nodes": 300,
+ "perturbed": {
+  "z_power": 12,
+  "theta_power": 0,
+  "factor": "1 + 1/200"
+ },
+ "node_selfcheck": 3.0994998995665446e-47,
+ "0.3": {
+  "phi": "3.465496763183751144337184",
+  "LY_rel_group": "3.82e-47",
+  "perturbed_rel_group": "5.31e-5",
+  "circle_alias_est": "1.04e-49"
+ },
+ "0.7": {
+  "phi": "1.589699454413496740977446",
+  "LY_rel_group": "3.21e-44",
+  "perturbed_rel_group": "0.00986",
+  "circle_alias_est": "1.45e-48"
+ },
+ "1.5": {
+  "phi": "0.4881991956554914295240346",
+  "LY_rel_group": "1.3e-41",
+  "perturbed_rel_group": "0.0204",
+  "circle_alias_est": "1.76e-48"
+ },
+ "2.5": {
+  "phi": "0.1647909373036794586354987",
+  "LY_rel_group": "4.69e-41",
+  "perturbed_rel_group": "0.0173",
+  "circle_alias_est": "8.59e-49"
+ }
+}

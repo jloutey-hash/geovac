@@ -1,0 +1,16 @@
+{
+ "identity": {
+  "nullity": 1,
+  "exact": true
+ },
+ "M14": {
+  "nullity_by_box": {
+   "t^0 x^-3 den^-3 M15": 0,
+   "t^1 x^-3 den^-3 M15": 0,
+   "t^0 x^-4 den^-6 M30": 0,
+   "t^1 x^-4 den^-6 M30": 1
+  },
+  "exact": true,
+  "box": "t^1 x^-4 den^-6 M30"
+ }
+}

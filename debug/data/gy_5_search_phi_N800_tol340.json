@@ -1,0 +1,31 @@
+{
+ "series": "debug/data/gy_series_gauss_g1_M1600_d600_rho2.json",
+ "N": 800,
+ "dps": 600,
+ "tol": 340,
+ "mode": "phi",
+ "5": {
+  "d": 62,
+  "info": {
+   "resid": "2.28e-344"
+  }
+ },
+ "6": {
+  "d": 52,
+  "info": {
+   "resid": "3.02e-345"
+  }
+ },
+ "7": {
+  "d": 45,
+  "info": {
+   "resid": "2.31e-348"
+  }
+ },
+ "8": {
+  "d": 36,
+  "info": {
+   "resid": "8.47e-343"
+  }
+ }
+}

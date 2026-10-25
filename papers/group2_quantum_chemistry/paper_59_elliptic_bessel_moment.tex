@@ -1449,8 +1449,38 @@ to the Legendre operator with $z=(t^2-3)/(2t)$, its order-three piece is
 the twisted K3 piece at $t=\pm2$ again, and its order-one pieces are
 algebraic, branched at $t=2$ and $t=2\gamma=4$ (record
 \texttt{docs/predictions/2026-10-22\_c2b\_feynman\_g2.md}).
+\textbf{[SYMBOLIC + MEASURED]} Why the order drops at $\gamma=1$.  In
+Feynman parameters the kite's density pair enters through
+$M(u)=\sqrt{1+u(1-u)z}$ and its geminal pair through
+$N(v)=\sqrt{\gamma^2+v(1-v)z}$.  At $\gamma=1$ the two are the same
+function:\ the two bubbles have equal masses, and the four pair thresholds
+$t=2$, $2\gamma$, $1+\gamma$, $|1-\gamma|$ fall onto $2$ and $0$.  Two
+readings were registered and separated before computing:\ equal masses,
+or merely colliding thresholds.  At $\gamma=3$ the pseudo-threshold
+$|1-\gamma|$ falls on the density-pair threshold $t=2$ with unequal
+masses.  There the annihilator of $Y$ keeps order nine and the series
+$1,1,1,1,2,3$, the elliptic piece is present, mapped exactly from the
+Legendre operator with $z=(t^2-8)/(2t)$, and the genuine singular points
+are exactly $t=2,4,6$;\ at $t=2$ the K3 piece's half-integer exponents and
+the elliptic piece's $I_2$ fibre sit together, and no factor is lost.  At
+$\gamma=1/2$, before the branch point crosses the contour, the order is
+nine as well, with the Legendre map at $z=(t^2+3/4)/(2t)$ and singular
+points at $t=1/2,1,3/2,2$.  So colliding thresholds remove nothing, and
+the drop at $\gamma=1$ is the equal-mass degeneration, the step that
+makes the equal-mass sunrise special in the Feynman-integral
+literature~\cite{blochvanhove2015}.  The kite's operator in $z$ has order
+six at $\gamma=1/2$, $3/2$, $2$ and $3$, with genuine singular points
+exactly at minus the squared pair masses and at $0$ and $\infty$, and
+order two at $\gamma=1$.  The annihilators are checked on $Y$ to
+$6\times10^{-27}$ at $\gamma=1/2$ and $3\times10^{-24}$ at $\gamma=3$,
+and the maps are exact (record
+\texttt{docs/predictions/2026-10-23\_gamma1\_mechanism.md};\ guard
+\texttt{tests/test\_paper59\_mg\_mechanism.py}).  Cap:\ the
+mechanism is read from the integrand and tested by its consequences at
+two values of $\gamma$;\ no symbolic derivation of the drop from $N=M$ is
+given.
 \textbf{[SYMBOLIC + MEASURED]} The cusp-correct geminal $f=re^{-\gamma r}$
-of the LiH engine, on both edges at $\gamma=3/2$, brings no new type, as
+of the LiH engine, on both edges at $\gamma=3/2$ and $2$, brings no new type, as
 registered before computing from the fact that $re^{-\gamma r}$ is a
 $\gamma$-derivative of the same Yukawa triangle.  Its annihilator of order
 nine, checked on the integral to $10^{-28}$, has the same composition
@@ -1458,7 +1488,17 @@ series:\ four algebraic pieces, branched at $t=2$ and $3$;\ an order-two
 piece, a different operator from the exponential case's, equivalent by an
 exact map to the same Legendre family;\ and the twisted K3 piece (record
 \texttt{docs/predictions/2026-10-22\_geminal\_shapes.md};\ guard
-\texttt{tests/test\_paper59\_ga1\_geminal.py}).
+\texttt{tests/test\_paper59\_ga1\_geminal.py}).  At $\gamma=2$,
+registered as a check of the rule, the order is nine again with the same
+series and the same degrees, the genuine singular points are exactly
+$t=1,2,3,4$, the order-two piece is again a different operator from the
+exponential case's and maps exactly from the Legendre operator with
+$z=(t^2-3)/(2t)$, and the algebraic pieces carry the exponents $-11/2$ and
+$-13/2$ at $t=2\gamma$ as at $\gamma=3/2$;\ the operator is exact, from
+coefficients modulo twelve primes and rational reconstruction, and leaves
+$2\times10^{-24}$ on the integral at 32 digits (record
+\texttt{docs/predictions/2026-10-23\_geminal\_shapes\_g2.md};\ guard
+\texttt{tests/test\_paper59\_ga3\_geminal.py}).
 \textbf{[SYMBOLIC + MEASURED]} One function carries both elliptic pieces
 met so far.  Write
 $\mathcal{L}(a,b;c)=\int_0^\infty K_0(ax)K_0(bx)\cos(cx)\,dx
@@ -1498,6 +1538,26 @@ at infinity:\ at the level of the one function, Slater geminals stay on the
 ladder of Picard--Fuchs operators and Gaussian ones leave it for exponential
 periods (registered before computing, record
 \texttt{docs/predictions/2026-10-22\_geminal\_shapes.md}).
+\textbf{[SYMBOLIC + MEASURED]} On the full triangle, with $e^{-r^2}$ on
+both edges and scales $(1,1,t)$, the Gaussian shape removes more than the
+elliptic piece.  The minimal annihilator of $Y$ has order nine and
+$x$-degree 13 and splits exactly into two pieces, of orders four and five,
+both irregular at infinity, with formal solutions growing like
+$e^{t^2/4}$ and $e^{t^2/8}$;\ its only genuine finite singular point is
+$t=2$.  No piece is equivalent to $F_3$'s operator, although each keeps
+the K3 piece's Jordan block of size three at $t=0$:\ the K3 rung of the
+Slater triangle is not set by the densities and the Coulomb line alone.
+The prediction that the K3 piece survives failed.  The operator leaves
+$2\times10^{-27}$ on $Y$ at 32 digits, and an independent evaluation of
+$Y$ agrees to $4\times10^{-14}$ (record
+\texttt{docs/predictions/2026-10-23\_gaussian\_geminal\_triangle.md};\ guard
+\texttt{tests/test\_paper59\_gy\_gaussian.py}).
+Caps:\ one value, $\gamma=1$, the equal-mass value, at which the Slater
+triangle has no elliptic piece either, so the comparison of shapes is
+cleanest for the K3 piece;\ the irreducibility of the two pieces and the
+absence of an $F_3$ piece rest on bounded searches;\ and minimality assumes
+that $\sqrt{\pi/2}\,e^{1/2}\operatorname{erfc}(1/\sqrt2)$, the constant
+that enters the Taylor coefficients, is irrational.
 Guards:\ \texttt{tests/test\_paper59\_one\_formula.py},
 \texttt{tests/test\_paper59\_geminal\_shapes.py}.  The order-six right factor below the order-three piece
 leaves between 1.3 and 2.4 times the largest term of $Y$ at three values
@@ -1519,12 +1579,14 @@ the elliptic piece.  And a Coulomb ring of three does not sit with the chain of
 three, as the record expected, but lower.  The count of linked densities
 orders the trees, not the rings.  The caps of Sec.~\ref{sec:four_density}
 apply:\ these are fibre statements, and the integrated value may sit lower.
-Further caps:\ for the correlated triangle, one geminal shape, the
-exponential, at three values of $\gamma$, the first the value at which three
-thresholds meet, with $t$ on the density carrying both
-geminals, so of the LiH engine's two shapes the cusp-correct one is
-tested at $\gamma=3/2$ only, and its kite operators are guessed from series
-and checked on their coefficients;\ only the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
+Further caps:\ for the correlated triangle, the exponential shape at
+five values of $\gamma$, the first the equal-mass value, with $t$ on the
+density carrying both geminals, and the LiH engine's cusp-correct shape at
+$\gamma=3/2$ and $2$ only, and a Gaussian shape at $\gamma=1$ only;\ the kite operators were guessed from series and
+checked on their coefficients, and are now also derived by integration by
+parts (below), and the mechanism of the drop at $\gamma=1$
+is tested by its consequences at two values of $\gamma$, not derived;\ only
+the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
 Mellin contour shift.  The search that excludes a K3 piece
 from the triangle is bounded in degree, unlike the chain's no-split proof,
 but the orders settle it:\ the
@@ -1545,6 +1607,62 @@ and the correlated triangle's place with it.  The solid-angle form of the massiv
 (Sec.~5.1 of~\cite{davydychev_delbourgo1998}, which recovers Nickel's
 result~\cite{nickel1978});\ here it also rests on its numerical check.
 No literature search was made for the operator~\eqref{eq:ring_op}.
+
+\textbf{[SYMBOLIC + MEASURED]} The kite operators above were guessed from
+Taylor series.  They also follow from integration by parts, the standard
+reduction of Feynman integrals~\cite{chetyrkin_tkachov1981,laporta2000}.  In
+momentum space the kite is a two-loop integral in $D=3$ with five lines:\ the
+two densities with index $3/2$, the two geminals $(q^2+\gamma^2)^{-2}$ and
+the Coulomb line $q^{-2}$.  A reduction modulo a large prime, sampled at many
+values of $z$, gives the differential system of the master integrals, and
+the kite's cyclic vector in that system gives its operator.  At
+$\gamma=1/2$, $3/2$, $2$ and $3$ the operator has order six and equals the
+guessed one exactly.  At $\gamma=1$ the master integrals drop from nine to
+three and the operator is the Legendre one, so the equal-mass degeneration
+shows in the reduction itself.  On the tetrahedron, the three-loop vacuum
+integral with the apex density of mass $t$, the reduction gives an operator
+for $Y$ of order ten at $\gamma=3/2$, divisible on the right by the
+order-nine operator above.  Off the symmetric slice, at density scales
+$(1,2)$ and geminal exponents $(3/2,3)$, the series route found no operator
+with 260 unknowns or fewer.  The reduction gives one of order eleven and
+degree $113$ in $z$, about 1300 unknowns.  Its integer coefficients reach 565
+bits, but the eighteen-dimensional system behind it needs only 37, so the
+system is rebuilt exactly from two primes and checked on a third, and the
+operator is built from it over $\mathbb{Q}(z)$.  It agrees with the operator
+computed at thirteen primes, and on 300 Taylor coefficients at 280 digits it
+leaves $1.3\times10^{-280}$ of the largest term;\ with one coefficient
+changed by $1/200$ it leaves $4\times10^{-41}$.  Its genuine singular points
+are exactly $z=-1/4,-1,-9/4,-4,-9,-49/4,-16,-81/4$, with $0$ and $\infty$:\
+minus the squares of the two-line cuts through the two densities and through
+the two geminals, and of the three-line cuts that pair each density with the
+geminal on the opposite edge.  The points $z=-25/4$ and $-25$, where a
+pairing of each density with its adjacent geminal would put its cuts, are
+ordinary, and the remaining 92 roots of the leading coefficient are
+apparent.  Controls:\ the one-loop bubble in $D=3$ against its arctan closed
+form, and the kite with the Coulomb line removed, whose exact Taylor series
+is the product of two bubbles (records
+\texttt{docs/predictions/2026-10-24\_ibp\_kite.md} and
+\texttt{docs/predictions/2026-10-23\_price\_formula\_slots.md}).
+\textbf{[SYMBOLIC + MEASURED]} On the tetrahedron at the same point the
+reduction needs 34 masters and gives an operator for $Y/t^3$ in $x=t^2$ of
+order nineteen, exact over $\mathbb{Q}$ (the system rebuilt from two primes
+and checked on a third).  On $Y$ from a 60-digit grid it leaves
+$5\times10^{-55}$ to $3\times10^{-43}$ of the largest term, following the
+quadrature error.  The genuine singular points of $Y$'s minimal operator in
+$x>0$ are the same eight cuts, $x=1/4,1,9/4,4,9,49/4,16,81/4$.  The other
+roots of the leading coefficient are apparent, and at each of the eight some
+analytic continuation of $Y$ changes on a small loop.  The change is the
+same to four digits in 64- and 90-digit arithmetic, and at least $10^{10}$
+times the change on a loop around an ordinary point along a path at least as
+long.  Caps:\ the reduction is new code, checked against the guessed
+operators and the series;\ the pieces of $Y$ off the slice, and whether
+order nineteen is minimal, are not yet in hand.  \textbf{[PRIOR ART]} Integration by parts on
+this tetrahedron in momentum space is Puchalski, K\c{e}dziera and
+Pachucki's, for the three-electron Slater integral with integer
+indices~\cite{pkp2009}, which they reduce to a differential equation.  What
+is added here is the family with half-integer density lines and the
+geminal's squared lines, and the check against operators found
+independently.  Guard:\ \texttt{tests/test\_paper59\_ib\_kite.py}.
 
 %% ========================================================================
 \section{Scope, and the open frontier}
@@ -1691,6 +1809,21 @@ integrals,'' \textit{Phys.\ Rev.\ A}\ \textbf{36}, 1013--1044 (1987).
 
 \bibitem{remiddi1991}
 E.~Remiddi, \textit{Phys.\ Rev.\ A}\ \textbf{44}, 5492 (1991).
+
+\bibitem{chetyrkin_tkachov1981}
+K.~G.~Chetyrkin and F.~V.~Tkachov, ``Integration by parts:\ the algorithm
+to calculate $\beta$-functions in 4 loops,'' \textit{Nucl.\ Phys.\ B}
+\textbf{192}, 159 (1981).
+
+\bibitem{laporta2000}
+S.~Laporta, ``High-precision calculation of multi-loop Feynman integrals by
+difference equations,'' \textit{Int.\ J.\ Mod.\ Phys.\ A} \textbf{15}, 5087
+(2000);\ arXiv:hep-ph/0102033.
+
+\bibitem{pkp2009}
+M.~Puchalski, D.~K\c{e}dziera and K.~Pachucki, ``Ground state of Li and
+Be$^+$ using explicitly correlated functions,'' \textit{Phys.\ Rev.\ A}
+\textbf{80}, 032521 (2009);\ arXiv:0909.5542.
 
 \bibitem{ppr2004}
 K.~Pachucki, M.~Puchalski and E.~Remiddi, ``Recursion relations for

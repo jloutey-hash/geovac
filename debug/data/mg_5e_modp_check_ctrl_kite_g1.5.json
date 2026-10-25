@@ -1,0 +1,16 @@
+{
+ "op": "debug/data/mg_5_op_kite_g1.5_stored.json",
+ "kind": "phi",
+ "modp_series": "debug/data/ga1_5d_phi_modp_exp_N400_p2305843009213693951.json",
+ "p": 2305843009213693951,
+ "N": 400,
+ "r": 6,
+ "d": 23,
+ "nonzero_residues": 1,
+ "nullity_r_d": 0,
+ "lower_order_test": {
+  "r": 5,
+  "d": 55,
+  "nullity": 0
+ }
+}

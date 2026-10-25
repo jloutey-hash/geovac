@@ -1,0 +1,12 @@
+{
+ "B": "1",
+ "gamma": "3",
+ "z": "(t^2 + -8)/(2 t)",
+ "pieces": "data/pf_ctrl_mg_g3_piece.json",
+ "factor": "C2b_theta",
+ "map_file": "data/pf_ctrl_mg_g3_piece.json",
+ "twist": "x^(1/2)",
+ "E": "x**9 - 72*x**8 + 2016*x**7 - 26112*x**6 + 112896*x**5 + 903168*x**4 - 13369344*x**3 + 66060288*x**2 - 150994944*x + 134217728",
+ "exact": true,
+ "perturbed_breaks": true
+}

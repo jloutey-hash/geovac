@@ -109,3 +109,55 @@ carrying both the density pair and the pseudo-threshold.
 One geminal shape, the exponential. Two new values of gamma. The mechanism is read from the integrand
 and tested by its consequences at gamma = 1/2 and 3; no symbolic derivation of the drop from N = M is
 attempted here. A feasibility STOP at either gamma is reported as a STOP and is not scored.
+
+## Disposition (appended 2026-10-23, after computing; the predictions above are unchanged)
+
+Pipeline `debug/mg_*.py`, data `debug/data/mg_*`, everything exact as strings in `debug/data/mg_pieces.json`.
+Series of 800 coefficients at 600 digits at each gamma (Cauchy route at radius 1/2 for gamma = 1/2 and 2 for
+gamma = 3), cross-checked coefficient by coefficient against an exact mod-p series at one prime (0 mismatches).
+
+**MG1 HELD.** At gamma = 1/2 Y has an annihilator of order nine and x-degree 25; no operator of order six,
+seven or eight to x-degree 63, 49, 39 (float), and none of order eight to degree 81 mod p. The composition
+series is 1, 1, 1, 1, 2, 3 by exact pseudo-division. Genuine singular points in t > 0: exactly {1/2, 1, 3/2, 2}
+(a degree-19 factor of the leading coefficient is apparent: exponents 0..7, 9, log-free). The order-two piece
+is mapped exactly from the Legendre operator in z = (t^2 + 3/4)/(2t) twisted by x^(1/2), with
+E = ((x - 1/4)(x - 9/4))^4 (x - 3/4) and numerator degrees 19, 21; the PM re-check on an independent code
+path (`debug/pm_map_check.py`) confirms the identity and that a 1/1000 perturbation breaks it. The
+order-three piece is mapped exactly from F_3's operator twisted by t.
+
+**MG2 HELD (reading A).** At gamma = 3 the order stays nine (x-degree 23), the series stays 1, 1, 1, 1, 2, 3,
+and the elliptic piece is present: an exact map from the Legendre operator in z = (t^2 - 8)/(2t) twisted by
+x^(1/2), E = ((x - 4)(x - 16))^4 (x + 8), numerator degrees 19, 21, PM re-checked. Genuine singular points in
+t > 0: exactly {2, 4, 6}. At x = 4 the local exponents are the union predicted: {-3/2, -1/2} from the K3 piece
+and {-1 with a logarithm, 0, ..., 5} from the elliptic piece's I2 fibre. The K3 piece is equivalent to F_3's
+operator twisted by t (exact map t (x - 4)^(-3) with numerator degree 18, against (x - 4)^(-4) and degree 20
+at gamma = 1/2 and 2); its pseudo-reflection exponent at x = 4 is -9/2 rather than -11/2. So the collision of
+the pseudo-threshold with the density-pair threshold merges local data but removes no factor. Colliding
+thresholds do not cause the drop at gamma = 1; equal masses do.
+
+**MG3 HELD.** The kite's operator in z has order six at both gamma (z-degree 23 and 21; no order five to
+degree 122 mod p). Genuine singular points: {-4, -1, -9/4, -1/4, 0, infinity} at gamma = 1/2 and
+{-4, -36, -16, 0, infinity} at gamma = 3, exactly minus the squared pair masses; at gamma = 3 the point -4
+carries both the density pair (exponents -1 with a logarithm, 0, 0, 1, 2) and the pseudo-threshold (-1/2).
+The operator applied to the kite by quadrature at 50 digits leaves at most 5e-41 at four values of z.
+
+**Controls.** The same pipeline at gamma = 2 reproduces L9g (order nine, x-degree 25, residual 7e-364 on the
+coefficients), its chain and factors, and the CF5 map with the same E and numerators. The kite at gamma = 1
+reproduces the stored order-two operator. The 1/200 change in one coefficient leaves residuals between
+1.8e-6 and 5.7e-4 on Y (the smallest at t = 5/2, gamma = 3; above the 1e-6 bar at every point) and between
+5e-5 and 2e-2 on the kite, against at most 3e-24 and 5e-41 for the unperturbed operators.
+
+**Residuals on the function.** L applied to Y by quadrature at 32 digits at t = 0.8, 1.3, 1.7, 2.5: at most
+6e-27 (gamma = 1/2) and 3e-24 (gamma = 3), relative to the largest term.
+
+**Deviations from the model.** Coefficients came from the float Cauchy route and were cross-checked mod p at
+one prime, not reconstructed by CRT; the ratio-recognition tolerance was 150 digits, with the exact recheck
+as the validation. A mod-p series bug (the last coefficient of a length-M run inexact) was found and fixed in
+the new `mg_5d_modp_series.py`; the older ga1 route never saw it because it drops the last rows. No STOP.
+
+**Credit.** The equal-mass degeneration of a two-loop self-energy is classical (the equal-mass sunrise);
+what is new here is only that this is the mechanism for this integral's drop at gamma = 1, tested by its
+consequences at gamma = 1/2 and 3. No symbolic derivation of the drop from N = M was attempted.
+
+**Novelty at scoring.** MG1 and MG3: CHECK. MG2: FINDING (the mechanism pinned by a case that separates the
+two readings).

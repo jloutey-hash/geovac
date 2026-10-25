@@ -1,0 +1,29 @@
+{
+ "op": "data/ga3_5_op_lin_g2_L9lin.json",
+ "order": 9,
+ "rule": "perturb by 1/200 the coefficient (theta^k, x^i) whose monomial is largest at this t",
+ "0.8": {
+  "perturbed_theta_power": 1,
+  "perturbed_x_power": 1,
+  "LY_rel_group": "1.42e-27",
+  "perturbed_rel_group": "0.0739"
+ },
+ "1.3": {
+  "perturbed_theta_power": 1,
+  "perturbed_x_power": 4,
+  "LY_rel_group": "2.03e-27",
+  "perturbed_rel_group": "0.00866"
+ },
+ "1.7": {
+  "perturbed_theta_power": 1,
+  "perturbed_x_power": 11,
+  "LY_rel_group": "5.88e-26",
+  "perturbed_rel_group": "0.0145"
+ },
+ "2.5": {
+  "perturbed_theta_power": 1,
+  "perturbed_x_power": 15,
+  "LY_rel_group": "2.11e-24",
+  "perturbed_rel_group": "0.0154"
+ }
+}

@@ -146,3 +146,188 @@ annihilator of Y is recovered with its controls passing, that is a STOP for feas
 not scored; in that case the kite's operator alone may still score PF2's kite clause, and this is said
 so. The direct pairing, if it appears, is a MISS for PF1 and a finding about the formula, recorded as
 such.
+
+## Disposition (appended 2026-10-24; predictions above unchanged)
+
+**PF1-PF4: STOP for feasibility. All four UNSCORED.** No annihilator of the kite phi(z) was found within the
+cap, so none of Y(t) was found either. By the caps above this is reported and not scored. The kite clause of
+PF2 is not scored either, since it needs the kite's operator.
+
+- The search: 300 Taylor coefficients of phi at 280 digits, tail accurate to 1.7e-216 or better. At orders 6, 9
+  and 12 the residual falls smoothly as the number of unknowns grows (r = 6: 2.7e-29 at 63 unknowns to 2.1e-191
+  at 259; r = 9: to 5.1e-194 at 250; r = 12: to 1.3e-196 at 247). There is no sharp drop to the data's precision.
+  The earlier hits at 1e-151 to 1e-174 sat just under a 1e-150 tolerance and are threshold solutions, not
+  operators. So the kite has no operator with 260 unknowns or fewer. A successor run would need about 720
+  coefficients at about 600 digits.
+- Partial evidence, not scored. On the principal sheet the true kite has Taylor radius 9 with leading exponent
+  -1. The direct-pairing object (the same kite with its two geminals swapped) has radius 25/4 with a square-root
+  branch point there. So the true kite is analytic at z = -25/4 on the principal sheet, and so are the four
+  pseudo-threshold points -1/4, -1, -9/4 and -4. This leans toward the crossed pairing of PF1. It does not settle
+  PF1 or PF2, because a genuine singular point of an operator can sit on another sheet. The points -25, -49/4,
+  -16 and -81/4 lie beyond the radius and were not tested.
+- PM recheck: an independent three-term ratio fit on the stored series gives radius 9.00025 and exponent -1.016
+  at n = 297 for the true kite, and radius 6.25008 and exponent -0.503 at n = 125 for the swapped object. The
+  agent's route A, built from the definition, matches the derived kite to 1.7e-21 or better at three w and rejects
+  the swapped form by 1.2e-2 or more.
+- Controls that passed: the loop against direct 3-D quadrature at five triples (2.4e-15); the slice members
+  (1, 1; 2, 2) and (1, 1; 3, 3) against the stored series (1.9e-47 and 5e-77); the stored gamma = 3 Legendre map
+  recovered and broken by a 1/1000 change; R_V's identity map exact; the kite-first route reproduces the stored
+  gamma = 3 operator L9 (2.2e-362 on 800 coefficients).
+- Deviations: the registered Cauchy series was stopped (it would have run more than 50 hours) and replaced by
+  direct power-series arithmetic in z, checked against the Cauchy coefficients to 1.7e-76. Off the slice the
+  Taylor coefficients are not in pi Q (no relation to height 1e20), so the exact mod-p route does not exist. The
+  1/200, minimality and planted-split controls were not run, because nothing was accepted.
+- Reading: none. The formula's slot content off the symmetric slice stays open. Novelty search not repeated, since
+  nothing scored.
+- Memo `debug/sprint_pf_memo.md`; data `debug/data/pf_pieces.json` (operator and map keys empty, with the
+  reason); series `debug/data/pf_series_direct_explore_N300_d280_460x460_sub.json` and
+  `debug/data/pf_series_swapped_g_M256_d60_rho3.json`.
+
+## Disposition addendum (2026-10-24, after record IB; predictions above unchanged)
+
+Record IB (`2026-10-24_ibp_kite.md`) derived the kite's operator at (1, 2; 3/2, 3) by integration by parts:
+order 11, z-degree 102 to 113, exact over Q, on the stored 300-coefficient series to 1.3e-280. By the caps
+above, the kite's operator alone may score PF2's kite clause, and it is scored here.
+
+- **PF2, kite clause: HELD.** The genuine singular points of the kite's operator are exactly
+  z = -1/4, -1, -9/4, -4, -9, -49/4, -16, -81/4, with 0 and infinity. Exact local exponents over Q: -1/2 at
+  -1/4, -4, -49/4 and -16 (the three-line cuts); a double exponent 0, so a logarithm, at -1, -9, -9/4 and
+  -81/4 (the two-line cuts); at 0 the exponents include -4 and half-integers; at infinity half-integers, two
+  of them double. At the direct-pairing points -25/4 and -25 the leading coefficient does not vanish and the
+  exponents are 0 to 10: ordinary points. The rest of the leading coefficient is one irreducible factor of
+  degree 92 over Z, and at its roots all 11 solutions are analytic (counted modulo a prime where it has a
+  root): apparent. The same count gives 8 or 10 of 11 at the eight cuts and 11 of 11 at -25/4, -25 and a
+  control point.
+- **PF1, PF3, PF4 and PF2's Y clause: still UNSCORED.** They are stated for Y's annihilator. The reduction on
+  the tetrahedron off the slice (34 masters) needs more than 80 sample points; a run with 170 is in progress.
+- Reading, not scored: at the kite level the crossed pairing holds and the direct pairing has no
+  singularity at all.
+
+## Status note (2026-10-24, later; predictions and dispositions above unchanged; nothing scored here)
+
+The 170-sample reduction on the tetrahedron off the slice finished sampling. The fit then failed on a bug in the
+PM's fitter, not in the data: the "random" normalisation vector had all 400 entries equal, so it fixed D(1), and
+every denominator here vanishes at x = 1. Fits accepted earlier were each checked on every sample and on held-out
+points, so they stand. Fixed, and refitted from the saved samples: 34 masters, entries of total degree at most 35,
+held-out points pass. The operator for Y/t^3 in x = t^2 has order 19 and x-degree 102 to 121, modulo one 61-bit prime.
+
+Preview at that one prime, not a score:
+- The rational roots of the leading coefficient are exactly x = 0, 1/4, 1, 9/4, 4, 9, 49/4, 16, 81/4.
+- At 1/4, 4, 49/4 and 16 the exponents are -1 and 0 to 17, and 18 of 19 solutions are analytic; the 19th is not
+  a Laurent series, so it carries a logarithm. At 1, 9, 9/4 and 81/4 there are three half-integer exponents and
+  16 of 19 analytic solutions.
+- x = 25/4 and 25, the direct-pairing points, are ordinary (19 of 19).
+- The remaining degree-98 part of the leading coefficient splits over F_P into irreducible factors of degrees
+  8, 13, 19, 20 and 38. Counted in each extension field, all 19 solutions are analytic at their roots: apparent.
+  Control: the same code at the eight cuts reproduces the counts above.
+
+Why this is not a score: the operator comes from one prime and has not yet been checked against Y itself (the
+control above requires annihilation on Y with the 1/200 perturbation), and order 19 may not be minimal (about 16
+was expected; at gamma = 3/2 the reduction gave order 10 against the minimal 9). The genuine points of the minimal
+annihilator lie among these, but that each of the eight is genuine for it is not yet shown. Lifting the system
+needs samples at a second and a third prime: one prime leaves about 450 of 4275 coefficients at the 30-bit
+reconstruction limit and 243 unreconstructed.
+
+## Status note 2 (2026-10-25; predictions and dispositions above unchanged; nothing scored here)
+
+The tetrahedron off the slice was sampled at two more primes (same 34 masters, order 19 at each).
+
+- Lift. The system matrix A was rebuilt over Q from two primes and agrees with the third. The target's own
+  expression in the masters, c, needed all three primes (heights up to 78 bits, against about 91 for
+  reconstruction from three), so c is not held out; its independent check is the check on Y below. The operator
+  for Y/t^3 in x = t^2 is exact over Q: order 19, x-degree 102 to 121, integer coefficients up to 934 bits.
+- On Y (the 32-digit grid). Residual of the largest t^(2i) group: 6.1e-24, 5.1e-28, 1.2e-24, 1.8e-16 at
+  t = 0.8, 1.7, 2.6, 3.8; on the grid with twice the step, 2.0e-8, 1.1e-10, 4.5e-10, 5.5e-5, so the residual
+  follows the quadrature error. A 1/200 change in the dominant-monomial coefficient leaves 1.0, 1.2, 1.6, 1.1. In
+  GA1's normalisation it leaves 1.0, 1.3e-5, 1.4e-19, 1.8e-16: that coefficient's monomial is negligible at large
+  t, so in that normalisation the control tests only at t = 0.8 and 1.7.
+- Points, exact. The leading coefficient factors over Z as x^7 (4x - 1)(x - 4)(4x - 49)(x - 16)
+  [(x - 1)(x - 9)(4x - 9)(4x - 81)]^3 f, with f irreducible of degree 98. The exponents over Q are those of the
+  preview. At a fresh prime, not one the operator was built from, f splits into degrees 5, 27 and 66, and all 19
+  solutions are analytic at its roots: apparent. The series counts at the eight points are unchanged.
+- PF2, first arm of the falsifier (a genuine point outside the set): excluded for x > 0. Y's minimal annihilator M
+  divides L on the right, so every solution of M is a solution of L, and a point where all solutions of L are
+  analytic is not genuine for M.
+- PF2, second arm (each of the eight genuine for M): not yet decided. Method, chosen at scoring time and not named
+  in the record: every analytic continuation of Y solves M, so x0 is genuine for M if some continuation of Y
+  changes on a small loop around x0. L was continued numerically at 40 digits, from Y's values at t = 0.8 on the
+  grid, through the upper half-plane. Two sheets were tried: Y itself, which as a convergent integral is analytic
+  for Re t > 0 and so is the control, and Y continued once around x = 0. Change of the scaled vector on the loop:
+
+  | x0 | Y itself (control) | around 0 |
+  |:--|:--|:--|
+  | 1/4 | 1.6e-30 | 5.9e-22 |
+  | 1 | 6.0e-16 | 1.2e-16 |
+  | 9/4 | 8.9e-11 | 2.5e-12 |
+  | 4 | 5.7e-13 | 3.9e-15 |
+  | 9 | 1.5e-8 | 2.0 |
+  | 49/4 | 1.8e-11 | 0.080 |
+  | 16 | 9.6e-9 | 0.14 |
+  | 81/4 | 0.19 | 2.0 |
+  | 3, 25/4, 25 (ordinary) | 3.6e-41, 2.2e-41, 1.2e-41 | 3.5e-41, 2.1e-41, 2.8e-41 |
+
+  So 9, 49/4 and 16 are genuine for M. At 1/4, 1, 9/4 and 4 both sheets are analytic to the noise, so nothing is
+  decided there: other sheets have not been tried. At 81/4 the control itself is 0.19, so the test does not
+  decide there. The noise is the grid's error, about 1e-24, carried by solutions of L that grow along the path.
+  Monodromy matrices from exact identity data were also computed at 60 digits, but the transport to the far points
+  has condition number above 1e60, so they could not be used at that precision.
+- In progress: a 60-digit grid at half the step, to rerun the test with about 50-digit data.
+
+## Disposition addendum 2 (2026-10-25; predictions above unchanged)
+
+The operator for Y off the slice is exact over Q and checked on Y (status note 2). That is enough to score
+PF2's Y clause. PF1, PF3 and PF4 need the factorisation of that operator and stay UNSCORED.
+
+- **PF2, Y clause: HELD.** The genuine singular points of Y's minimal annihilator M in x = t^2 > 0 are exactly
+  1/4, 1, 9/4, 4, 9, 49/4, 16 and 81/4.
+  - First arm, no genuine point outside the set. M divides the exact order-19 operator L on the right, so every
+    genuine point of M is a genuine point of L. For x > 0 those are the eight cuts. The other roots of L's leading
+    coefficient are apparent (status note 2).
+  - Second arm, each of the eight genuine for M. Every analytic continuation of Y solves M, so x0 is genuine for
+    M if some continuation of Y changes on a small loop around x0. This method was chosen at scoring time and is
+    not named in the record.
+- Check on Y, on a new 60-digit grid at half the step (247 nodes). Residual of the largest t^(2i) group: 3.2e-45,
+  1.6e-51, 4.9e-55, 3.3e-43 at t = 0.8, 1.7, 2.6, 3.8. With the old step: 4.2e-29, 5.1e-28, 1.2e-24, 1.8e-16. So
+  the residual still follows the quadrature error. A 1/200 change in the dominant monomial leaves 1.0, 1.18, 1.55,
+  1.14. In GA1's normalisation it leaves 1.0, 1.3e-5, 1.4e-19, 7.3e-40; as in status note 2, that monomial is
+  negligible at large t.
+- The loops. L was continued by Taylor stepping from Y's values at t = 0.8 on the 60-digit grid, through the upper
+  half-plane, to the base point x = 0.12. A sheet is a word of loops at the base point: "0, 9" means once around
+  0, then once around 9. The number is the change of the scaled vector on a small loop around x0, relative to its
+  size. A loop around an ordinary point leaves every continuation unchanged, so on such a loop the number is the
+  numerical error of that path. The controls are chosen so that their path is at least as long as the deciding
+  one.
+
+  | x0 | deciding sheet | change, 64 / 90 digits | control | control, 64 / 90 digits |
+  |:--|:--|:--|:--|:--|
+  | 9 | 0 | 2.0 / 2.0 | Y itself | 5.9e-32 / 7.1e-37 |
+  | 49/4 | 0 | 0.07967 / 0.07967 | Y itself | 3.0e-35 / 1.5e-39 |
+  | 16 | 0 | 0.1332 / 0.1332 | Y itself | 3.3e-33 / 5.6e-38 |
+  | 81/4 | 0 | 2.0 / 2.0 | Y itself | 5.2e-28 / 9.4e-33 |
+  | 1/4 | 0, 9 | 0.4999 / 0.4999 | 0, 10 | 9.7e-15 / 8.2e-18 |
+  | 1 | 0, 9 | 2.0 / 2.0 | 0, 10 | 3.3e-13 / 2.9e-16 |
+  | 9/4 | 0, 16 | 2.0 / 2.0 | 0, 17 | 4.6e-4 / 9.8e-11 |
+  | 4 | 0, 16 | 0.1564 / 0.1564 | 0, 17 | 6.7e-11 / 1.5e-17 |
+  | 3, 25/4, 25 (ordinary) | every sheet on the 60-digit grid | 1.4e-62 or less | | |
+
+  Each deciding value is the same to four digits at both precisions and lies at least 1e10 above its control at
+  90 digits. The single-loop values also agree on the old 32-digit grid at 40 digits: 2.0, 0.07963, 0.1379, 2.0.
+- Noise, disclosed. Three readings made during the run were wrong and are not used.
+  - A pilot on the 32-digit grid gave 0.0042 at 1/4 on the sheet "0, 49/4". On the 60-digit grid the same sheet
+    gives 2.7e-14 there. The pilot was noise.
+  - On the 32-digit grid every two-loop sheet gives about 0.0026, 2.0, 2.0 and 0.27 at 1/4, 1, 9/4 and 4, whichever
+    far point the second loop goes round, and so does the control around the ordinary point 25. All of it is noise.
+  - On the 60-digit grid at 64 digits the sheet "0, 81/4" and the control "0, 25" are also noise (at 1/4, 0.0358
+    and 0.0357). At 90 digits the control "0, 25" still leaves 1.03 at 9/4. So no two-loop sheet that goes beyond
+    17 is used.
+  - A first check by the PM used controls of Y itself for the two-loop sheets. These underestimate the noise there,
+    since Y does not carry the components that the loop around 0 brings in. The cross-check on the second grid
+    found this, and the ordinary-point controls above replace them.
+  - Starting from t = 1.3 instead of 0.8 gives the same values to every printed digit, so on the 60-digit grid the
+    data error does not limit. The noise falls with the working precision, by a factor 1e3 to 1e7 from 64 to 90
+    digits, which is less than the 26 digits added. The cause is not pinned.
+- Reading, not scored: which loop exposes which point is a statement about the pieces of Y, and that is PF1 and
+  PF4's question.
+- **PF1, PF3, PF4: still UNSCORED.** They need the factorisation of L and whether order 19 is minimal.
+- Script `debug/ib_tetra_pf_sheets.py`. Data `debug/data/ib_tetra_pf_sheets_*.json` and logs,
+  `debug/data/pf_9_onY_tetra_pf_exact_d60.json`, grid `debug/data/pf_grid_d60_h0.03125.json`.

@@ -1,0 +1,54 @@
+{
+ "1": {
+  "d": null,
+  "dmax": 100
+ },
+ "2": {
+  "d": null,
+  "dmax": 100
+ },
+ "3": {
+  "d": null,
+  "dmax": 100
+ },
+ "4": {
+  "d": null,
+  "dmax": 100
+ },
+ "5": {
+  "d": 12,
+  "nullity": 1,
+  "nullity_at_dmax": 89,
+  "dmax": 100
+ },
+ "6": {
+  "d": 9,
+  "nullity": 2,
+  "nullity_at_dmax": 184,
+  "dmax": 100
+ },
+ "7": {
+  "d": 8,
+  "nullity": 3,
+  "nullity_at_dmax": 279,
+  "dmax": 100
+ },
+ "8": {
+  "d": 7,
+  "nullity": 2,
+  "nullity_at_dmax": 374,
+  "dmax": 100
+ },
+ "9": {
+  "d": 7,
+  "nullity": 4,
+  "nullity_at_dmax": 469,
+  "dmax": 100
+ },
+ "10": {
+  "d": 7,
+  "nullity": 6,
+  "nullity_at_dmax": 564,
+  "dmax": 100
+ }
+}

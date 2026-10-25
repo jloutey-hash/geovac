@@ -1,0 +1,8 @@
+{
+ "p": 2305843009213693951,
+ "validation_mismatches_vs_CF5_float_series": 0,
+ "nullity_r8_d39": 0,
+ "nullity_r9_d24": 0,
+ "nullity_r9_d25": 1,
+ "null_vector_equals_L9g_mod_p": true
+}

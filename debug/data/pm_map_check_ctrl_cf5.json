@@ -1,0 +1,11 @@
+{
+ "gamma": "2",
+ "pieces": "debug/data/cf_g2_pieces.json",
+ "factor": "factor_C2b",
+ "map_file": "debug/data/cf_g2_pieces.json",
+ "twist": "x^(1/2)",
+ "E": "x**9 - 37*x**8 + 516*x**7 - 3172*x**6 + 6046*x**5 + 18138*x**4 - 85644*x**3 + 125388*x**2 - 80919*x + 19683",
+ "exact": true,
+ "perturbed_breaks": true,
+ "j": "16*(x + 3)**6/(x*(x - 9)**2*(x - 1)**2)"
+}

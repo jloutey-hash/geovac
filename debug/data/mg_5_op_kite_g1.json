@@ -1,0 +1,18 @@
+{
+ "series": "debug/data/mg_series_g1_M1024_d200_rho2.json",
+ "kind": "phi",
+ "N": 300,
+ "dps": 200,
+ "r": 2,
+ "d": 4,
+ "Q": [
+  "15360*u**2 + 15360*u",
+  "8192*u**2 + 42240*u + 32320",
+  "1152*u**2 + 10816*u + 23792",
+  "176*u + 604",
+  "-4*u**2 - 32*u - 63"
+ ],
+ "exact_recheck": "9.17e-112",
+ "lead": "-4*(z - 20)*(z + 4)**2*(z + 12)",
+ "note": "operator sum_i z^i Q_i(theta_z), u = theta_z = z d/dz, annihilating phi(z)"
+}

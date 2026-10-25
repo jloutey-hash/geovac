@@ -1,0 +1,23 @@
+{
+ "runs": [
+  {
+   "c": "0",
+   "candidates": 2,
+   "Nmax": 60,
+   "hits": [
+    {
+     "f0": "1",
+     "e4": "-9/2",
+     "nullity": 1
+    }
+   ]
+  },
+  {
+   "c": "1/8",
+   "candidates": 2,
+   "Nmax": 60,
+   "hits": []
+  }
+ ],
+ "found_at_c0": true
+}

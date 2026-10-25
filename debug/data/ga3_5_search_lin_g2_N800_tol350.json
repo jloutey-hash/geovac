@@ -1,0 +1,18 @@
+{
+ "series": "data/ga3_series_lin_g2_M1600_d600_rho2.json",
+ "N": 800,
+ "dps": 600,
+ "tol": 350,
+ "7": {
+  "d": null,
+  "info": "none up to d=65"
+ },
+ "8": {
+  "d": null,
+  "info": "none up to d=58"
+ },
+ "9": {
+  "d": null,
+  "info": "none up to d=52"
+ }
+}

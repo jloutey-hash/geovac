@@ -1,0 +1,46 @@
+{
+ "1": {
+  "d": null,
+  "dmax": 100
+ },
+ "2": {
+  "d": null,
+  "dmax": 100
+ },
+ "3": {
+  "d": null,
+  "dmax": 100
+ },
+ "4": {
+  "d": null,
+  "dmax": 100
+ },
+ "5": {
+  "d": null,
+  "dmax": 100
+ },
+ "6": {
+  "d": null,
+  "dmax": 100
+ },
+ "7": {
+  "d": null,
+  "dmax": 100
+ },
+ "8": {
+  "d": null,
+  "dmax": 100
+ },
+ "9": {
+  "d": 13,
+  "nullity": 1,
+  "nullity_at_dmax": 88,
+  "dmax": 100
+ },
+ "10": {
+  "d": 9,
+  "nullity": 1,
+  "nullity_at_dmax": 183,
+  "dmax": 100
+ }
+}

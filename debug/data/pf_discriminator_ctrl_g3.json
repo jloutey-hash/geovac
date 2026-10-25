@@ -1,0 +1,193 @@
+{
+ "op": "data/pf_5_op_ctrl_g3.json",
+ "key": "Q",
+ "order": 9,
+ "x_degree": 23,
+ "rational_roots_of_lead": {
+  "16": 1,
+  "36": 2,
+  "4": 3
+ },
+ "discriminator": {
+  "25/4": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  },
+  "25": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  }
+ },
+ "predicted": {
+  "1/4": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  },
+  "1": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  },
+  "9/4": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  },
+  "4": {
+   "lead_multiplicity": 3,
+   "exps": [
+    "-3/2",
+    "-1",
+    "-1/2",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "classes": [
+    [
+     [
+      "-3/2",
+      1,
+      true
+     ],
+     [
+      "-1/2",
+      1,
+      true
+     ]
+    ],
+    [
+     [
+      "-1",
+      1,
+      false
+     ],
+     [
+      "0",
+      1,
+      true
+     ],
+     [
+      "1",
+      1,
+      true
+     ],
+     [
+      "2",
+      1,
+      true
+     ],
+     [
+      "3",
+      1,
+      true
+     ],
+     [
+      "4",
+      1,
+      true
+     ],
+     [
+      "5",
+      1,
+      true
+     ]
+    ]
+   ],
+   "verdict": "GENUINE"
+  },
+  "9": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  },
+  "49/4": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  },
+  "16": {
+   "lead_multiplicity": 1,
+   "exps": [
+    "-1",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+   ],
+   "classes": [
+    [
+     [
+      "-1",
+      1,
+      false
+     ],
+     [
+      "0",
+      1,
+      true
+     ],
+     [
+      "1",
+      1,
+      true
+     ],
+     [
+      "2",
+      1,
+      true
+     ],
+     [
+      "3",
+      1,
+      true
+     ],
+     [
+      "4",
+      1,
+      true
+     ],
+     [
+      "5",
+      1,
+      true
+     ],
+     [
+      "6",
+      1,
+      true
+     ],
+     [
+      "7",
+      1,
+      true
+     ]
+    ]
+   ],
+   "verdict": "GENUINE"
+  },
+  "81/4": {
+   "lead_multiplicity": 0,
+   "verdict": "regular (not a root of the leading coefficient)"
+  }
+ },
+ "other_rational_roots": {
+  "36": {
+   "exps": [
+    "-5/2",
+    "-3/2",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "verdict": "GENUINE"
+  }
+ }
+}

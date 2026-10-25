@@ -1,0 +1,670 @@
+{
+ "factor_1": {
+  "order": 1,
+  "x_degree": 1,
+  "t0": [
+   "1"
+  ],
+  "inf_mu": [
+   "-2"
+  ],
+  "points": {
+   "-4": {
+    "exps": [
+     "-3/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-3/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "1/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "1",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "x + 4",
+    1
+   ]
+  ],
+  "newton_infinity": {
+   "order": 1,
+   "points": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "upper_hull": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "height": 0,
+   "fuchsian_at_infinity": true,
+   "edges": [
+    {
+     "from": [
+      0,
+      1
+     ],
+     "to": [
+      1,
+      1
+     ],
+     "slope": "0",
+     "sigma": "0"
+    }
+   ],
+   "growth_exponents_if_fuchsian": [
+    "-2"
+   ]
+  },
+  "solution_exponents": {
+   "t=0 (t-power)": [
+    "1"
+   ],
+   "x=-4 ((x-x0)-power)": [
+    "-3/2"
+   ],
+   "inf (t-growth, if Fuchsian)": [
+    "-2"
+   ]
+  },
+  "rational_roots_of_lead": [
+   [
+    "-4",
+    1
+   ]
+  ]
+ },
+ "factor_2": {
+  "order": 2,
+  "x_degree": 3,
+  "t0": [
+   "-2",
+   "0"
+  ],
+  "inf_mu": [],
+  "points": {
+   "-4": {
+    "exps": [
+     "0",
+     "1"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 2,
+      "log_free_solutions": 2,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ],
+       [
+        "1",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "0",
+    "dim": 2,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-1",
+      1,
+      false
+     ],
+     [
+      "0",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [],
+  "lead": [
+   [
+    "x + (-3)",
+    1
+   ]
+  ],
+  "newton_infinity": {
+   "order": 2,
+   "points": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "upper_hull": [
+    [
+     0,
+     3
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "height": 2,
+   "fuchsian_at_infinity": false,
+   "edges": [
+    {
+     "from": [
+      0,
+      3
+     ],
+     "to": [
+      2,
+      1
+     ],
+     "slope": "-1",
+     "sigma": "1",
+     "points_on_edge": [
+      0,
+      1,
+      2
+     ],
+     "char_poly_in_C": "(2*C + 1)**2",
+     "exponents_c_of_exp_c_x_sigma": {
+      "-1/4": 2
+     },
+     "note": "a root C = 0 belongs to the lower-slope part, not to an exponential; the roots are exact if the polynomial factors over Q, else numerical",
+     "reading": "formal solutions exp(c x) = exp(c t^2) with c = C/2"
+    }
+   ],
+   "growth_exponents_if_fuchsian": null
+  },
+  "rational_roots_of_lead": [
+   [
+    "3",
+    1
+   ]
+  ]
+ },
+ "factor_3": {
+  "order": 2,
+  "x_degree": 10,
+  "t0": [
+   "2",
+   "2"
+  ],
+  "inf_mu": [],
+  "points": {
+   "-4": {
+    "exps": [
+     "-3",
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 2,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-3",
+        1,
+        false
+       ],
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "0",
+    "dim": 2,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "1",
+      2,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [],
+  "lead": [
+   [
+    "x + (-3)",
+    1
+   ],
+   [
+    "x + 4",
+    1
+   ],
+   [
+    "x^6 + 101*x^5 + (-1160)*x^4 + (-9408)*x^3 + (-8768)*x^2 + (-176384)*x + (-49152)",
+    1
+   ]
+  ],
+  "newton_infinity": {
+   "order": 2,
+   "points": [
+    [
+     0,
+     10
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     8
+    ]
+   ],
+   "upper_hull": [
+    [
+     0,
+     10
+    ],
+    [
+     2,
+     8
+    ]
+   ],
+   "height": 2,
+   "fuchsian_at_infinity": false,
+   "edges": [
+    {
+     "from": [
+      0,
+      10
+     ],
+     "to": [
+      2,
+      8
+     ],
+     "slope": "-1",
+     "sigma": "1",
+     "points_on_edge": [
+      0,
+      1,
+      2
+     ],
+     "char_poly_in_C": "(4*C + 1)**2",
+     "exponents_c_of_exp_c_x_sigma": {
+      "-1/8": 2
+     },
+     "note": "a root C = 0 belongs to the lower-slope part, not to an exponential; the roots are exact if the polynomial factors over Q, else numerical",
+     "reading": "formal solutions exp(c x) = exp(c t^2) with c = C/2"
+    }
+   ],
+   "growth_exponents_if_fuchsian": null
+  },
+  "rational_roots_of_lead": [
+   [
+    "3",
+    1
+   ],
+   [
+    "-4",
+    1
+   ]
+  ],
+  "apparent": {
+   "degree 6 (mult 1)": [
+    {
+     "p": 4611686018427385981,
+     "int_exps": [
+      0,
+      2
+     ],
+     "logfree": [
+      true,
+      true
+     ]
+    },
+    {
+     "p": 4611686018427385831,
+     "int_exps": [
+      0,
+      2
+     ],
+     "logfree": [
+      true,
+      true
+     ]
+    }
+   ]
+  }
+ },
+ "L": {
+  "order": 5,
+  "x_degree": 12,
+  "t0": [
+   "-2",
+   "0",
+   "1",
+   "2",
+   "2"
+  ],
+  "inf_mu": [
+   "-2"
+  ],
+  "points": {
+   "-4": {
+    "exps": [
+     "-3/2",
+     "-1",
+     "0",
+     "1",
+     "2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-3/2",
+        1,
+        true
+       ]
+      ]
+     },
+     {
+      "class": "0",
+      "dim": 4,
+      "log_free_solutions": 3,
+      "exponents": [
+       [
+        "-1",
+        1,
+        false
+       ],
+       [
+        "0",
+        1,
+        true
+       ],
+       [
+        "1",
+        1,
+        true
+       ],
+       [
+        "2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "0",
+    "dim": 4,
+    "log_free_solutions": 2,
+    "exponents": [
+     [
+      "-1",
+      1,
+      false
+     ],
+     [
+      "0",
+      1,
+      true
+     ],
+     [
+      "1",
+      2,
+      true
+     ]
+    ]
+   },
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "1/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "1",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "x^6 + 101*x^5 + (-1160)*x^4 + (-9408)*x^3 + (-8768)*x^2 + (-176384)*x + (-49152)",
+    1
+   ],
+   [
+    "x + 4",
+    2
+   ]
+  ],
+  "newton_infinity": {
+   "order": 5,
+   "points": [
+    [
+     0,
+     12
+    ],
+    [
+     1,
+     12
+    ],
+    [
+     2,
+     11
+    ],
+    [
+     3,
+     10
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "upper_hull": [
+    [
+     0,
+     12
+    ],
+    [
+     1,
+     12
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "height": 4,
+   "fuchsian_at_infinity": false,
+   "edges": [
+    {
+     "from": [
+      0,
+      12
+     ],
+     "to": [
+      1,
+      12
+     ],
+     "slope": "0",
+     "sigma": "0"
+    },
+    {
+     "from": [
+      1,
+      12
+     ],
+     "to": [
+      5,
+      8
+     ],
+     "slope": "-1",
+     "sigma": "1",
+     "points_on_edge": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "char_poly_in_C": "C*(2*C + 1)**2*(4*C + 1)**2",
+     "exponents_c_of_exp_c_x_sigma": {
+      "-1/4": 2,
+      "-1/8": 2,
+      "0": 1
+     },
+     "note": "a root C = 0 belongs to the lower-slope part, not to an exponential; the roots are exact if the polynomial factors over Q, else numerical",
+     "reading": "formal solutions exp(c x) = exp(c t^2) with c = C/2"
+    }
+   ],
+   "growth_exponents_if_fuchsian": null
+  },
+  "rational_roots_of_lead": [
+   [
+    "-4",
+    2
+   ]
+  ],
+  "apparent": {
+   "degree 6 (mult 1)": [
+    {
+     "p": 4611686018427385981,
+     "int_exps": [
+      0,
+      1,
+      2,
+      3,
+      5
+     ],
+     "logfree": [
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    },
+    {
+     "p": 4611686018427385831,
+     "int_exps": [
+      0,
+      1,
+      2,
+      3,
+      5
+     ],
+     "logfree": [
+      true,
+      true,
+      true,
+      true,
+      true
+     ]
+    }
+   ]
+  }
+ },
+ "split": {
+  "factor_2": {
+   "skipped": "not Fuchsian at infinity; the exponent-bounded split searches do not apply"
+  },
+  "factor_3": {
+   "skipped": "not Fuchsian at infinity; the exponent-bounded split searches do not apply"
+  }
+ }
+}

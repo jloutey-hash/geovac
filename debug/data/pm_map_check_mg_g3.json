@@ -1,0 +1,11 @@
+{
+ "gamma": "3",
+ "pieces": "debug/data/mg_7_pieces_g3.json",
+ "factor": "factor_C2b",
+ "map_file": "debug/data/mg_map_factor_C2b_g3.json",
+ "twist": "x^(1/2)",
+ "E": "x**9 - 72*x**8 + 2016*x**7 - 26112*x**6 + 112896*x**5 + 903168*x**4 - 13369344*x**3 + 66060288*x**2 - 150994944*x + 134217728",
+ "exact": true,
+ "perturbed_breaks": true,
+ "j": "16*(x**2 - 4*x + 64)**3/(x*(x - 16)**2*(x - 4)**2)"
+}

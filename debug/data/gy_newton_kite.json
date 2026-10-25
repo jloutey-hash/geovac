@@ -1,0 +1,118 @@
+{
+ "infinity": {
+  "order": 5,
+  "points": [
+   [
+    0,
+    12
+   ],
+   [
+    1,
+    12
+   ],
+   [
+    2,
+    11
+   ],
+   [
+    3,
+    10
+   ],
+   [
+    4,
+    9
+   ],
+   [
+    5,
+    8
+   ]
+  ],
+  "upper_hull": [
+   [
+    0,
+    12
+   ],
+   [
+    1,
+    12
+   ],
+   [
+    5,
+    8
+   ]
+  ],
+  "height": 4,
+  "fuchsian_at_infinity": false,
+  "edges": [
+   {
+    "from": [
+     0,
+     12
+    ],
+    "to": [
+     1,
+     12
+    ],
+    "slope": "0",
+    "sigma": "0"
+   },
+   {
+    "from": [
+     1,
+     12
+    ],
+    "to": [
+     5,
+     8
+    ],
+    "slope": "-1",
+    "sigma": "1",
+    "points_on_edge": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "char_poly_in_C": "C*(2*C + 1)**2*(4*C + 1)**2",
+    "exponents_c_of_exp_c_x_sigma": {
+     "-1/4": 2,
+     "-1/8": 2,
+     "0": 1
+    },
+    "note": "a root C = 0 belongs to the lower-slope part, not to an exponential; the roots are exact if the polynomial factors over Q, else numerical",
+    "reading": "formal solutions exp(c x) = exp(c t^2) with c = C/2"
+   }
+  ],
+  "growth_exponents_if_fuchsian": null
+ },
+ "zero": {
+  "points": [
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    4,
+    0
+   ],
+   [
+    5,
+    0
+   ]
+  ],
+  "regular_at_0": true
+ }
+}
