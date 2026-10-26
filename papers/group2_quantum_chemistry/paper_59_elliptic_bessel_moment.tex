@@ -1654,23 +1654,37 @@ roots of the leading coefficient are apparent, and at each of the eight some
 analytic continuation of $Y$ changes on a small loop.  The change is the
 same to four digits in 64- and 90-digit arithmetic, and at least $10^{10}$
 times the change on a loop around an ordinary point along a path at least as
-long.  \textbf{[SYMBOLIC + MEASURED]} The operator factors exactly over
-$\mathbb{Q}$ into seven pieces of order one and one piece of order twelve.  The
-order-one pieces have algebraic solutions, branched at $x=1,9$, at $9/4$ and at
-$81/4$, and the order-seven part they make does not annihilate $Y$:\ it leaves
-$6$ to $10\%$ of the largest term.  The order-twelve piece is singular at
-$x=1/4,1,4,9,49/4,16$ and not at $9/4$ or $81/4$.  It has no right or left
-factor of order one.  The K3 operator of the chain of three with scales
-$(t;1,2)$ is not equivalent to a right or left factor of it, and neither is the
-Legendre family pulled back to any of the four pairings of a density with a
-geminal, or the system induced from Bailey's curves over the conic
-$w^2=(x-1)(x-9)$, within a bounded search that finds each of them when planted.  So $Y$
-needs a piece of order at least two that is neither of these.  Caps:\ the reduction
-is new code, checked against the guessed operators and the series;\ that the
-order-twelve piece is irreducible is not proved, and whether order nineteen
-is minimal is not decided (records
-\texttt{docs/predictions/2026-10-23\_price\_formula\_slots.md} and
-\texttt{docs/predictions/2026-10-25\_geometric\_route\_y.md}).
+long.  \textbf{[SYMBOLIC + MEASURED]} The order nineteen is not minimal.  The
+reduction treats the two sectors with one geminal and no Coulomb line as
+different, but each is the same sunrise of the three densities times a
+one-line tadpole, so their masters differ by the constant ratio of the
+geminal scales, $\gamma_1/\gamma_2=1/2$.  With that relation imposed the
+operator has order fifteen, exact over $\mathbb{Q}$, and on $Y$ it leaves
+$2\times10^{-56}$ to $4\times10^{-46}$ of the largest term;\ the same
+construction with the ratio $1/3$ leaves $10^{-4}$ to $2\times10^{-2}$.  The
+reduction's system is block triangular in its sectors, so the pieces can be
+read sector by sector, and they are the predicted ones.  The K3 operator of
+the chain of three with scales $(t;1,2)$ is the sunrise sector's own block, and
+it is a left factor.  The Legendre family pulled back to the two crossed
+pairings, $z_1=(4t^2+7)/(16t)$ and $z_2=(t^2-8)/(2t)$, gives the two pieces of
+order two, from the sectors with one geminal and the Coulomb line;\ the direct
+pairings do not occur.  The other seven pieces have order one and algebraic
+solutions, branched at $x=1,9$, at $9/4$ and at $81/4$, and come from the
+sectors with both geminals.  Each of the three identifications is an exact map
+over $\mathbb{Q}(x)$, rebuilt from many primes and checked by exact division.
+$Y$ needs the K3 piece:\ the right factor without it leaves $2\times10^{-4}$ to
+$4\times10^{-3}$ of the largest term.  It needs both elliptic pieces, since its
+minimal operator is genuinely singular at $x=1/4$ and $x=4$ and no other piece
+is singular there.  Caps:\ the reduction is new code, checked against the
+guessed operators and the series;\ the irreducibility of the K3 piece rests on
+a bounded search;\ and how many of the seven order-one pieces $Y$ needs, and so
+the order of its minimal operator, between eight and fifteen, is not decided.
+An earlier reading of the order-nineteen operator, as one piece of order twelve
+with none of these pieces at either end, came from a map search whose box was
+too small at the left end, and is withdrawn (records
+\texttt{docs/predictions/2026-10-23\_price\_formula\_slots.md}, addendum 6,
+\texttt{docs/predictions/2026-10-25\_geometric\_route\_y.md} and
+\texttt{docs/predictions/2026-10-25\_tetrahedron\_route\_y.md}).
 \textbf{[PRIOR ART]} Integration by parts on
 this tetrahedron in momentum space is Puchalski, K\c{e}dziera and
 Pachucki's, for the three-electron Slater integral with integer
@@ -1800,8 +1814,9 @@ densities sits on the elliptic rung at the fibre, below the chain of three,
 while the correlated triangle with exponential geminals sits with the chain at
 $\gamma=1$;\ we read the difference as uniqueness, which factors the Coulomb loop
 and not the geminal one.  Off the symmetric slice the correlated triangle carries
-a piece of order twelve with neither the K3 piece nor an elliptic piece at either
-end;\ whether it is irreducible is open.
+the K3 piece of the chain of three, an elliptic piece for each crossed pairing
+of a density with a geminal, and algebraic pieces;\ the order of its minimal
+operator is between eight and fifteen.
 
 %% ========================================================================
 \begin{thebibliography}{99}

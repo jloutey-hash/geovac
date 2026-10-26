@@ -100,3 +100,20 @@ That is a hypothesis for the next test, not a result.
 
 Addendum (2026-10-25): the induced-system hypothesis above was tested (PF record, addendum 5). The induced system
 and its three twists are at neither end of F_8, at numerator degree up to 800. The scores stand.
+
+## Disposition addendum 2 (2026-10-26; prediction, scoring rules and the disposition above unchanged)
+
+**Rescored. TG1: HIT. TG2: HIT. TG3: PARTIAL. TG4: UNDECIDED. TG5: HIT.** Data: PF record, addendum 6. The disposition
+above rested on a left-end map search that was void. Y's operator of order 15 has composition factors R_V, the two
+crossed Legendre pullbacks and seven algebraic order-one pieces, each identification an exact map, and Y needs the
+three transcendental ones.
+- TG1: the transcendental composition factors of Y's minimal operator are exactly R_V and the two crossed pullbacks,
+  each once; every other factor has order one with an algebraic solution. The top sector contributes two order-one
+  pieces branched at 9/4 and 81/4, as predicted.
+- TG2: the largest irreducible factor has order 4. Cap: R_V's irreducibility rests on a bounded probe.
+- TG3: every read feature of the table matches (reflections at 1 and 9; trivial at the six points; two blocks at 0
+  and at infinity, with the eigenvalues predicted). The block sizes 2 + 2 and 3 + 1 are not read.
+- TG4: the order is between 8 and 15, not decided.
+- TG5: the order-4 factor is equivalent to R_V by an exact map (56 primes, checked by exact division).
+The induced-system hypothesis of the disposition is moot: the two eigenvalues -1 at 1 and 9 in F_8 are its two R_V
+copies.

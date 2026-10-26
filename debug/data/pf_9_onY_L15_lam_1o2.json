@@ -1,0 +1,64 @@
+{
+ "op": "data/pf_19_quotient_Q.json",
+ "key": "L15_lam_1/2",
+ "order": 15,
+ "x_degree": 96,
+ "perturbed_GA1_normalisation": {
+  "theta_power": 0,
+  "x_power": 16,
+  "factor": "1 + 1/200"
+ },
+ "perturbed_dominant_monomial": "per t: the coefficient (theta^k, x^i) whose monomial is largest at that t, times 1 + 1/200",
+ "0.8": {
+  "Y": "0.0006794407182018872331097023",
+  "quad_h_vs_2h_Y": "6.72e-28",
+  "LY_rel_group": "3.8e-46",
+  "LY_rel_monomial": "5.13e-51",
+  "LY_rel_group_2h": "6.37e-31",
+  "perturbed_GA1_rel_group": "0.891",
+  "dominant_monomial": {
+   "theta_power": 2,
+   "x_power": 7
+  },
+  "perturbed_dominant_rel_group": "1.0"
+ },
+ "1.7": {
+  "Y": "0.002399302497706388457508616",
+  "quad_h_vs_2h_Y": "2.2e-27",
+  "LY_rel_group": "3.36e-52",
+  "LY_rel_monomial": "7.19e-55",
+  "LY_rel_group_2h": "4.09e-32",
+  "perturbed_GA1_rel_group": "0.0787",
+  "dominant_monomial": {
+   "theta_power": 1,
+   "x_power": 28
+  },
+  "perturbed_dominant_rel_group": "1.32"
+ },
+ "2.6": {
+  "Y": "0.004076341717990851402899955",
+  "quad_h_vs_2h_Y": "6.86e-27",
+  "LY_rel_group": "2.16e-56",
+  "LY_rel_monomial": "1.8e-58",
+  "LY_rel_group_2h": "3.17e-28",
+  "perturbed_GA1_rel_group": "2.87e-10",
+  "dominant_monomial": {
+   "theta_power": 3,
+   "x_power": 47
+  },
+  "perturbed_dominant_rel_group": "0.382"
+ },
+ "3.8": {
+  "Y": "0.00582071177679304658674994",
+  "quad_h_vs_2h_Y": "6.1e-26",
+  "LY_rel_group": "8.92e-49",
+  "LY_rel_monomial": "1.67e-51",
+  "LY_rel_group_2h": "2.18e-21",
+  "perturbed_GA1_rel_group": "2.32e-24",
+  "dominant_monomial": {
+   "theta_power": 5,
+   "x_power": 71
+  },
+  "perturbed_dominant_rel_group": "1.5"
+ }
+}

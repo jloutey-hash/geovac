@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.13] - 2026-10-26
+
+PI-directed ("Ok, sure. Do that": build the sector blocks of the IBP system and map their pieces into the order-12 factor). No new prediction; the method was chosen at scoring time and the records' scores are appended.
+
+### Added
+- **The pieces of Y off the slice are the predicted ones; the order-12 reading is withdrawn (PF addendum 6).** The IBP system for Y is block triangular in its six sectors (blocks 4, 4, 6, 6, 9, 5; `debug/pf_14_sector_blocks.py`), so every irreducible piece has order at most 9 and the order-12 factor had to split.
+  - The two sunrise sectors are one function times tadpoles (ratio 1/2), a relation IBP cannot see. With it, Y's operator has order 15, exact over Q, residual 2e-56 to 4e-46 on Y; ratio 1/3 control 1e-4 to 2e-2 (`debug/pf_18_quotient.py`, `debug/pf_19_quotient_Q.py`).
+  - L15 = [R_V] o [z_1 + z_2] o R_7 by exact division: the K3 operator of the chain (the sunrise block itself) on the left, the crossed Legendre pullbacks in the middle, the seven algebraic order-one pieces on the right. Exact maps from 40 to 56 primes (`debug/pf_21_pieces.py`, `debug/pf_22_pieces_hom.py`, `debug/pf_24_exact_maps.py`). Direct pairings absent.
+  - Y needs R_V (residual 2e-4 to 4e-3 without it) and both elliptic pieces (local-monodromy argument at 1/4 and 4) (`debug/pf_23_needs.py`).
+  - R_V: no proper factor at degree 40, control found (`debug/pf_25_rv_split.py`). Socle of L15: R_V and two copies of the 9/4 class (`debug/pf_26_socle.py`), so the minimal order (8 to 15) is not decided.
+- **Errors disclosed.** The left-end map search of v5.21.11-12 lacked poles at the target's apparent points and was too small at x = 0 for adjoint targets (`debug/pf_20_left_fix.py`: nullity 0 with the old box or either fix alone, 2 with both). Every left-end negative of PF addenda 3-5 is void; right-end negatives stand. Block sources with one Frobenius series are degenerate when the block is reducible (nullities in the thousands; not used).
+- **Rescored.** PF1, PF3, PF4 HELD. TG1, TG2, TG5 HIT; TG3 PARTIAL; TG4 UNDECIDED. GR3 HIT; GR2 PARTIAL; GR1, GR4, GR5 UNDECIDED. Both blind geometric routes predicted every transcendental piece.
+- C16 entry `p59-y-order12-block` for the withdrawn reading, with its dependents.
+
+### Changed
+- Paper 59 `sec:density_ring`: the order-12 passage replaced; conclusion sentence restated. Synthesis sentence restated. `docs/atlas.md` door 27 and the claim-matrix row rewritten.
+- CLAUDE.md version and S2 line; README badge 5.21.13.
+
 ## [v5.21.12] - 2026-10-25
 
 PI-directed ("Yes update 59 +checkpoint first. Then launch the tetrahedron geometry agent. Also, lets send out an explorer looking for general tetrahedron stuff with out feynnman integral stuff", then "Yes please" to the induced-system test). Pre-registered TG1-TG5 (`docs/predictions/2026-10-25_tetrahedron_route_y.md`, committed c5fb49e8 before the comparison).

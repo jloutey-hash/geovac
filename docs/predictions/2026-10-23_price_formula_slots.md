@@ -424,3 +424,47 @@ The scores of addendum 3 stand.
   and S o F_8 are found at this degree for R_V and z_1.
 
 The scores of addendum 3 stand. The predicted pieces, and the induced one, are at neither end of F_8.
+
+## Addendum 6 (2026-10-26; everything above unchanged): the pieces found; the order-12 reading withdrawn
+
+**PF1: HELD. PF3: HELD. PF4: HELD.** These replace the scores of addendum 3. Method chosen at scoring time: the
+reduction's sector filtration (PI direction 2026-10-26, "Do that", on the sector blocks).
+
+Two errors in addenda 3-5, found here:
+- **Left-end gap.** A left factor is tested through adjoints, and the adjoint's solutions have poles at the target's
+  apparent points (L with exponents 0, 2 at a point: L* has -1, 1) and t-exponents down to -25 at x = 0 (L has 3..25),
+  beyond the box's x^-8. The box allowed neither, so every left-end negative of addenda 3-5 is void. Right-end
+  negatives stand: the target's solutions are analytic at its apparent points. Discriminating control: the sector
+  argument below requires R_V at the left end of L; `debug/pf_20_left_fix.py` finds nullity 0 with the old box and
+  with either fix alone, and nullity 2 with both (x^-16, the target's degree-98 factor squared).
+- **Order 19 is not minimal.** The two sectors with one geminal and no Coulomb line are the same density sunrise times
+  a one-line tadpole, so their masters differ by gamma_1/gamma_2 = 1/2. The reduction cannot see this.
+
+Data (`debug/pf_14_sector_blocks.py` to `debug/pf_26_socle.py`):
+- The 34 masters fall into six sectors with blocks 4, 4, 6, 6, 9, 5 ({g1}, {g2}, {g1,C}, {g2,C}, {g1,g2}, top). In
+  all 510 stored samples (three primes) no derivative leaves the sub-sector order, so the system is block triangular.
+  Y's 19 orders spread 4, 4, 2-3, 2, 4-5, 2 over them; the two sunrise blocks are the same operator.
+- With the sunrise relation the operator L15 has order 15, exact over Q (d/dx degrees 81-96, 674 bits). On Y's
+  60-digit grid it leaves 3.8e-46, 3.4e-52, 2.2e-56, 8.9e-49 at t = 0.8, 1.7, 2.6, 3.8 (6e-31 to 2e-21 at twice the
+  step); with the ratio 1/3 instead, 1.6e-2, 1.4e-3, 1.2e-4, 1.7e-3, the same at both steps; the dominant-coefficient
+  1/200 control leaves 0.38 to 1.5. L19 = Q o L15 exactly.
+- L15 = [order 4] o X o R_7, every division exact; R_7 = chain_R7 is the quotient by the sunrise and the
+  geminal-Coulomb sectors. The left piece is equivalent to R_V (the sunrise block, `debug/pf_17_block_hom.py`, maps
+  both ways); X receives maps from z_1 and from z_2, so X = z_1 + z_2; d_1 and d_2 map nowhere. Exact maps
+  (`debug/pf_24_exact_maps.py`): z_1 and z_2 into X from 40 primes (542, 547 bits), R_V into the left piece from 56
+  primes (762 bits), each checked by exact division. Box a 16, b 12, degree 400; planted right and left controls found.
+- Y needs R_V: the order-11 right factor without it leaves 2e-4 to 4e-3 of the largest term, the same at both steps.
+  Y needs z_1 and z_2: its minimal operator M is genuinely singular at 1/4 and 4 (PF2, second arm); L19 has one log at
+  each, rank(T - I) is superadditive along a filtration, and z_1 (z_2) is the only piece of L15 nontrivial there, so a
+  right factor without it would be trivial there.
+- Composition of L19's order-12 factor F_8: R_V, R_V, z_1, z_2. It is reducible.
+- R_V has no proper factor found by the Frobenius probe at coefficient degree up to 40, where the planted z_1 o z_2
+  splits (`debug/pf_25_rv_split.py`).
+- Socle of L15 (left factors): R_V once and the class of F_2, F_3, F_4 (branched at 9/4) twice; z_1, z_2, F_1,
+  F_5-F_7 are not left factors (`debug/pf_26_socle.py`, box a 20). So the order of M, between 8 and 15, is not decided.
+
+Scores. PF1: exactly two order-two composition factors, inequivalent, each equivalent by an exact order-one map
+(twist t) to the Legendre operator in z_1 and z_2; the direct pairing is absent. PF3: R_V is a composition factor,
+Y needs it, and it is a left factor of L15 (nothing above it). PF4: every composition factor is R_V, z_1, z_2 or one
+of the seven algebraic order-one pieces of addendum 3. Caps: R_V's irreducibility rests on the bounded probe; the
+order of M is not decided.

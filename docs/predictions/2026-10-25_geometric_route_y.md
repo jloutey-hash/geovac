@@ -110,3 +110,22 @@ three separate pieces of orders 4, 2 and 2. The agent named the risk itself. The
 on the Fock curves, so the density-topology rule does not govern it, and a top-sector piece could not be excluded.
 Both routes, the Landau reading and the geometry, located the same thresholds and the same candidate pieces, and both
 missed that block. Whether it is truly one irreducible piece is not proved.
+
+## Disposition addendum (2026-10-26; prediction, scoring rules and the disposition above unchanged)
+
+**Rescored. GR1: UNDECIDED. GR2: PARTIAL. GR3: HIT. GR4: UNDECIDED. GR5: UNDECIDED.** The disposition above rested
+on a map search that was void at the left end (PF record, addendum 6). With that fixed and the reduction cut by its
+sectors, Y's operator of order 15 has composition factors R_V (order 4), the crossed Legendre pullbacks at z_1 and
+z_2 (order 2 each) and seven algebraic order-one pieces, each identification an exact map; Y needs the three
+transcendental ones.
+- GR1: the order-4 and order-2 pieces are exactly as predicted. HIT needs three or four order-one pieces in Y's
+  minimal operator M; L15 has seven, and how many M keeps is not decided. No MISS condition holds.
+- GR2: at x = 1 and 9 a reflection; trivial at the six points; at 0 eigenvalue 1 with two Jordan blocks (rank 2); at
+  infinity eigenvalue -1 on Y/t^3 with two blocks. All read features match; the block sizes (2 + 2 at 0, 3 + 1 at
+  infinity) are not read.
+- GR3: the order-4 piece is trivial at exactly 1/4, 9/4, 4, 49/4, 16, 81/4.
+- GR4: the order of M is between 8 and 15.
+- GR5: the order-4 piece is equivalent to R_V by an exact map; the symmetric invariant form is not tested.
+
+Reading, not scored: the blind route predicted every transcendental piece of Y. What looked like a block beyond it
+was a gap in our search.

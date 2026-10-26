@@ -1,0 +1,53 @@
+{
+ "target": "L19",
+ "k": 2,
+ "M": 600,
+ "amax": 16,
+ "target_extra_degree": 98,
+ "old denominator: Hom(R_V*, L*)": {
+  "nu=0": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 2404,
+   "N": 2718,
+   "equations": 2603,
+   "x_exponent_of_series": "-1"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 2404,
+   "N": 2718,
+   "equations": 2603,
+   "x_exponent_of_series": "-1"
+  },
+  "extra_den": "1"
+ },
+ "new denominator: Hom(R_V*, L*)": {
+  "nu=0": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 2404,
+   "N": 2718,
+   "equations": 2603,
+   "x_exponent_of_series": "-1"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    2,
+    2
+   ],
+   "U": 2404,
+   "N": 2718,
+   "equations": 2603,
+   "x_exponent_of_series": "-1"
+  },
+  "extra_den": "1"
+ }
+}

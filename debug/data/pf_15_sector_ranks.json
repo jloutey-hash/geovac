@@ -1,0 +1,203 @@
+{
+ "ib_tetra_pf_op.json": {
+  "P": 2305843009213693951,
+  "order_A": {
+   "ranks": [
+    19,
+    15,
+    11,
+    9,
+    7,
+    2,
+    0
+   ],
+   "contribution": {
+    "(3,)": 4,
+    "(4,)": 4,
+    "(3, 5)": 2,
+    "(4, 5)": 2,
+    "(3, 4)": 5,
+    "(3, 4, 5)": 2
+   }
+  },
+  "order_B": {
+   "ranks": [
+    19,
+    15,
+    11,
+    7,
+    5,
+    2,
+    0
+   ],
+   "contribution": {
+    "(4,)": 4,
+    "(3,)": 4,
+    "(3, 4)": 4,
+    "(4, 5)": 2,
+    "(3, 5)": 3,
+    "(3, 4, 5)": 2
+   }
+  },
+  "blocks": {
+   "(3,)": {
+    "size": 4,
+    "cyclic_rank_random_vector": 4
+   },
+   "(4,)": {
+    "size": 4,
+    "cyclic_rank_random_vector": 4
+   },
+   "(3, 5)": {
+    "size": 6,
+    "cyclic_rank_random_vector": 5
+   },
+   "(4, 5)": {
+    "size": 6,
+    "cyclic_rank_random_vector": 6
+   },
+   "(3, 4)": {
+    "size": 9,
+    "cyclic_rank_random_vector": 9
+   },
+   "(3, 4, 5)": {
+    "size": 5,
+    "cyclic_rank_random_vector": 5
+   }
+  }
+ },
+ "ib_tetra_pf_p1_op.json": {
+  "P": 2305843009213693921,
+  "order_A": {
+   "ranks": [
+    19,
+    15,
+    11,
+    9,
+    7,
+    2,
+    0
+   ],
+   "contribution": {
+    "(3,)": 4,
+    "(4,)": 4,
+    "(3, 5)": 2,
+    "(4, 5)": 2,
+    "(3, 4)": 5,
+    "(3, 4, 5)": 2
+   }
+  },
+  "order_B": {
+   "ranks": [
+    19,
+    15,
+    11,
+    7,
+    5,
+    2,
+    0
+   ],
+   "contribution": {
+    "(4,)": 4,
+    "(3,)": 4,
+    "(3, 4)": 4,
+    "(4, 5)": 2,
+    "(3, 5)": 3,
+    "(3, 4, 5)": 2
+   }
+  },
+  "blocks": {
+   "(3,)": {
+    "size": 4,
+    "cyclic_rank_random_vector": 4
+   },
+   "(4,)": {
+    "size": 4,
+    "cyclic_rank_random_vector": 4
+   },
+   "(3, 5)": {
+    "size": 6,
+    "cyclic_rank_random_vector": 5
+   },
+   "(4, 5)": {
+    "size": 6,
+    "cyclic_rank_random_vector": 6
+   },
+   "(3, 4)": {
+    "size": 9,
+    "cyclic_rank_random_vector": 9
+   },
+   "(3, 4, 5)": {
+    "size": 5,
+    "cyclic_rank_random_vector": 5
+   }
+  }
+ },
+ "ib_tetra_pf_p2_op.json": {
+  "P": 2305843009213693907,
+  "order_A": {
+   "ranks": [
+    19,
+    15,
+    11,
+    9,
+    7,
+    2,
+    0
+   ],
+   "contribution": {
+    "(3,)": 4,
+    "(4,)": 4,
+    "(3, 5)": 2,
+    "(4, 5)": 2,
+    "(3, 4)": 5,
+    "(3, 4, 5)": 2
+   }
+  },
+  "order_B": {
+   "ranks": [
+    19,
+    15,
+    11,
+    7,
+    5,
+    2,
+    0
+   ],
+   "contribution": {
+    "(4,)": 4,
+    "(3,)": 4,
+    "(3, 4)": 4,
+    "(4, 5)": 2,
+    "(3, 5)": 3,
+    "(3, 4, 5)": 2
+   }
+  },
+  "blocks": {
+   "(3,)": {
+    "size": 4,
+    "cyclic_rank_random_vector": 4
+   },
+   "(4,)": {
+    "size": 4,
+    "cyclic_rank_random_vector": 4
+   },
+   "(3, 5)": {
+    "size": 6,
+    "cyclic_rank_random_vector": 5
+   },
+   "(4, 5)": {
+    "size": 6,
+    "cyclic_rank_random_vector": 6
+   },
+   "(3, 4)": {
+    "size": 9,
+    "cyclic_rank_random_vector": 9
+   },
+   "(3, 4, 5)": {
+    "size": 5,
+    "cyclic_rank_random_vector": 5
+   }
+  }
+ }
+}

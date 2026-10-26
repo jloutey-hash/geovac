@@ -7891,6 +7891,28 @@ REGISTRY = [
         ],
         "cited_by": {},
     },
+    {
+        "id": 'p59-y-order12-block',
+        "pattern": 'neither\\s+the\\s+K3\\s+(piece\\s+)?nor\\s+an\\s+elliptic\\s+piece\\s+at\\s+either|needs\\s+a\\s+piece\\s+of\\s+order\\s+at\\s+least\\s+two\\s+that\\s+is\\s+neither|order-twelve\\s+piece\\s+is\\s+irreducible\\s+is\\s+not\\s+proved|whether\\s+the\\s+order-12\\s+piece\\s+is\\s+irreducible',
+        "exempt_if_nearby": withdrawal_marker('p59-y-order12-block'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": 'Withdrawn 2026-10-26 (PF addendum 6, docs/predictions/2026-10-23_price_formula_slots.md). The off-slice triangle Y was read as carrying an order-12 piece with neither the K3 nor an elliptic piece at either end. The left-end map search was too small (adjoint solutions have poles at the target apparent points and t-exponents to -25 at 0). Cut by the IBP sectors, Y has the K3 piece R_V (left factor), the crossed Legendre pieces z_1, z_2 and seven algebraic order-one pieces, by exact maps.',
+        "files": [
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/atlas.md',
+            'docs/forced_free_seam.md',
+            'docs/walls/register.md',
+            'README.md',
+            'papers/INDEX.md',
+            'docs/claim_test_matrix.md',
+        ],
+        "cited_by": {
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + reviewed 2026-10-26 -- the off-slice sentence restated from Paper 59",
+            "docs/atlas.md": "remediated + reviewed 2026-10-26 -- door 27 Owed line rewritten",
+        },
+    },
 ]
 
 
