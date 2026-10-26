@@ -107,3 +107,62 @@ than by a + b n: the residual sum of squares of the sqrt(n) fit is at most a qua
 - The fit replaces the geminal in this one integral. Production uses the fit only for some integral classes and
   keeps others exact. An error measured here says nothing directly about an MP2-F12 or CCSD-F12 energy.
 - If the engine controls fail, that is a STOP for feasibility, reported and not scored.
+
+## Disposition (appended 2026-10-25; predictions above unchanged)
+
+**GF1: MISSED. GF2: HELD. GF3: HELD.** All controls passed.
+
+Relative error E_n(t) = Y_n/Y - 1 of the n-term fit, at t = 1/2, 1, 2, 4. Every E_n is negative: the fitted
+geminals give too small a Y.
+
+| n | W1 (plain norm) | W2 (extra weight exp(-r^2)) |
+|:--|:--|:--|
+| 1 | -1.3e-1, -1.2e-1, -9.9e-2, -9.7e-2 | -5.2e-1, -4.9e-1, -4.3e-1, -3.6e-1 |
+| 2 | -1.6e-2, -1.1e-2, -7.4e-3, -6.7e-3 | -2.9e-1, -2.5e-1, -2.0e-1, -1.5e-1 |
+| 3 | -2.7e-3, -1.6e-3, -8.1e-4, -6.3e-4 | -1.7e-1, -1.5e-1, -1.1e-1, -7.9e-2 |
+| 4 | -5.7e-4, -2.8e-4, -1.2e-4, -8.3e-5 | -1.1e-1, -9.1e-2, -6.6e-2, -4.5e-2 |
+| 5 | -1.4e-4, -5.8e-5, -2.0e-5, -1.3e-5 | -7.6e-2, -6.0e-2, -4.2e-2, -2.7e-2 |
+| 6 | -3.6e-5, -1.4e-5, -4.1e-6, -2.4e-6 | -5.4e-2, -4.1e-2, -2.8e-2, -1.7e-2 |
+| 7 | -1.0e-5, -3.5e-6, -9.2e-7, -5.1e-7 | -3.9e-2, -2.9e-2, -1.9e-2, -1.2e-2 |
+| 8 | -3.2e-6, -9.8e-7, -2.3e-7, -1.2e-7 | -2.9e-2, -2.1e-2, -1.4e-2, -8.1e-3 |
+| 9 | -1.1e-6, -2.9e-7, -6.1e-8, -3.0e-8 | -2.2e-2, -1.6e-2, -9.8e-3, -5.7e-3 |
+| 10 | -3.7e-7, -9.1e-8, -1.7e-8, -8.1e-9 | -1.7e-2, -1.2e-2, -7.2e-3, -4.1e-3 |
+
+- **GF1: MISSED.** Under W1 the six-term fit sits inside the band, 3.6e-5 down to 2.4e-6. Under W2 it is 5.4e-2
+  down to 1.7e-2, above the 1e-3 ceiling at all four t. The first clause of the falsifier fires.
+- **GF2: HELD.** Under W1 at t = 1, fitting ln|E_n| for n = 2 to 10, the residual sum of squares is 0.068 for
+  a + b sqrt(n) and 0.93 for a + b n, a ratio of 0.073 against the registered 0.25. |E_n| falls at every step.
+  Not registered: the ratio is 0.02 to 0.09 at the other t under W1 and 0.001 to 0.008 under W2. The slope b is
+  -6.1 to -7.8 under W1 and -1.6 to -2.1 under W2.
+- **GF3: HELD.** Under W1 at n = 6, |E_6(1/2)| = 3.6e-5 against |E_6(4)| = 2.4e-6, a factor of 15. The error falls
+  as the apex density becomes compact at every n and under both weights.
+- Why W2 misses. The W2 fit is good at short range and loses the tail. At n = 6 its pointwise relative error is
+  -2.4e-2 at r = 0, 1e-4 or less for r up to 1, -1.1e-2 at r = 3, -0.19 at r = 4 and -0.80 at r = 6, with r in
+  units of 1/gamma. The W1 fit is worst at the cusp, -6.0e-2 at r = 0, and stays within about 2e-3 out to r = 6.
+  So W1's larger error at the cusp costs Y little, while W2's lost tail costs it percent-level error. Y reaches
+  r_ik and r_jk of a few units of 1/gamma, and further for a diffuse apex.
+- Reading, not scored: on this integral the error of a Gaussian fit is set by how far out the fit is trusted, not by
+  the cusp, and a weight narrower than the integral's reach leaves a percent-level error that falls slowly with n.
+  The production weight is not known here, so this says nothing about which side of that line a production fit
+  falls. What the exact operator adds is a reference against which a given fit can be measured to about 1e-9.
+- The rate. The root-exponential law for Gaussian expansions of an s-type exponential is in McKemmish and Gill,
+  "Gaussian expansions of orbitals" (J. Chem. Theory Comput., 2012), who find the energy error of optimal
+  even-tempered expansions falls like exp(-pi sqrt(3n)) and trace it to the cusp, generalising Kutzelnigg (1994).
+  That source was found by a search and its abstract read; the paper itself was not opened. The recalled
+  Kutzelnigg reference was not opened either.
+- Controls, all passed.
+  - Fit code: W1 reproduces the STO-1G, STO-2G, STO-3G and STO-6G exponents at zeta = 1 to every printed digit
+    (STO-3G 0.109818, 0.405771, 2.22766, as in the standard table quoted by Wikipedia's STO-nG page; STO-6G
+    0.0651095 to 23.103).
+  - Loop: the unequal-exponent Gaussian loop against direct 3-D quadrature at five random triples, 4e-15 to 3.6e-14.
+  - Engine: at A = B = 1, a = b = 1 against record GY's 32-digit grid at t = 0.8, 1.7, 2.6, 4.4e-16 or better.
+  - Quadrature: two node sets agree to 8.9e-16 or better at seven pairs with exponents up to 2.0e4, the largest
+    in any fit, and to 1.0e-15
+    over all 100 pairs of the n = 10 W1 fit. Before the final quadrature, a first version reached only 1e-9 to 6e-4
+    on tight Gaussians; it was replaced before any E_n was computed.
+  - Reference: the 60-digit grid against the 32-digit grid, 6e-28 to 1.1e-25 at the four t.
+  - Sanity: E_n falls at every n under both weights.
+- Deviations: the fitter first failed at n = 7, when a line search merged two exponents and the Gram matrix became
+  singular. Singular steps are now treated as bad points. No fit was changed by hand.
+- Scripts `debug/gf_engine.py`, `debug/gf_fit.py`, `debug/gf_checks.py`, `debug/gf_run.py`. Data
+  `debug/data/gf_fits.json`, `debug/data/gf_checks.json`, `debug/data/gf_results.json` and their logs.

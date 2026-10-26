@@ -1,0 +1,1420 @@
+{
+ "factor_1": {
+  "order": 1,
+  "x_degree": 6,
+  "t0": [
+   "-5"
+  ],
+  "inf_mu": [
+   "-3"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "-3/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-3/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "-3/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-3/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-5/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "3/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "x + (-1)",
+    1
+   ],
+   [
+    "x + (-9)",
+    1
+   ],
+   [
+    "374*x^4 + (-5745)*x^3 + 27243*x^2 + (-41715)*x + 19683",
+    1
+   ]
+  ]
+ },
+ "factor_2": {
+  "order": 1,
+  "x_degree": 7,
+  "t0": [
+   "3"
+  ],
+  "inf_mu": [
+   "12"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "-3/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-3/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "3/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-6",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "4*x + (-9)",
+    1
+   ],
+   [
+    "866932*x^6 + (-15892576)*x^5 + 104124241*x^4 + (-296006724)*x^3 + 386413578*x^2 + (-220639140)*x + 56746089",
+    1
+   ]
+  ]
+ },
+ "factor_3": {
+  "order": 1,
+  "x_degree": 9,
+  "t0": [
+   "5"
+  ],
+  "inf_mu": [
+   "16"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "-5/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-5/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "5/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-8",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "4*x + (-9)",
+    1
+   ],
+   [
+    "236387822*x^8 + (-8972441527)*x^7 + 102594973203*x^6 + (-558004978998)*x^5 + 1681019661150*x^4 + (-2977432773867)*x^3 + 3071685460887*x^2 + (-1610013027888)*x + 230166034218",
+    1
+   ]
+  ]
+ },
+ "factor_4": {
+  "order": 1,
+  "x_degree": 11,
+  "t0": [
+   "7"
+  ],
+  "inf_mu": [
+   "20"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "-7/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-7/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "7/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-10",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "4*x + (-9)",
+    1
+   ],
+   [
+    "4520164*x^10 + (-156200364)*x^9 + 1429028085*x^8 + 14369793570*x^7 + (-256727019699)*x^6 + 1351625836320*x^5 + (-3082718508471)*x^4 + 1810244525850*x^3 + 5186829616335*x^2 + (-10268256413376)*x + 5685008255586",
+    1
+   ]
+  ]
+ },
+ "factor_5": {
+  "order": 1,
+  "x_degree": 13,
+  "t0": [
+   "9"
+  ],
+  "inf_mu": [
+   "24"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "-9/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-9/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "9/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-12",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "4*x + (-81)",
+    1
+   ],
+   [
+    "12490652330292224*x^12 + 878238623187162624*x^11 + (-34316388053324235072)*x^10 + (-44367089221290340512)*x^9 + 11813863089569598634662*x^8 + (-90360330584039513008317)*x^7 + (-113012247792908288686113)*x^6 + 3549149539335839889182943*x^5 + (-12722124607632438823324233)*x^4 + 273586697034581312337393*x^3 + 95173537973547355134247773*x^2 + (-213233575707165657693730131)*x + 149437620051111812325246759",
+    1
+   ]
+  ]
+ },
+ "factor_6": {
+  "order": 1,
+  "x_degree": 15,
+  "t0": [
+   "11"
+  ],
+  "inf_mu": [
+   "28"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "-11/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-11/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "11/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-14",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "4*x + (-81)",
+    1
+   ],
+   [
+    "1092010214203355955200*x^14 + (-271122884577077036306432)*x^13 + 7733656241334201251874816*x^12 + 203043628114408059339391488*x^11 + (-28111898311983777166634969280)*x^10 + 1256995718174238647529719761200*x^9 + (-30149024536775078753295219835680)*x^8 + 412096390998521673460477410538560*x^7 + (-3182790733581715261574285778508800)*x^6 + 11901419092912025836199060663994720*x^5 + (-1126512346042129349240035299887760)*x^4 + (-166528353574432642381323512912676468)*x^3 + 627910609902980357958486250039034544*x^2 + (-977402685548421897660789575245307568)*x + 569217836379223167118495991170448085",
+    1
+   ]
+  ]
+ },
+ "factor_7": {
+  "order": 1,
+  "x_degree": 17,
+  "t0": [
+   "13"
+  ],
+  "inf_mu": [
+   "32"
+  ],
+  "points": {
+   "1/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "1": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "9": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "49/4": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "16": {
+    "exps": [
+     "0"
+    ],
+    "mono": [
+     {
+      "class": "0",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "0",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   },
+   "81/4": {
+    "exps": [
+     "-13/2"
+    ],
+    "mono": [
+     {
+      "class": "1/2",
+      "dim": 1,
+      "log_free_solutions": 1,
+      "exponents": [
+       [
+        "-13/2",
+        1,
+        true
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "mono_t0": [
+   {
+    "class": "1/2",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "13/2",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "mono_inf": [
+   {
+    "class": "0",
+    "dim": 1,
+    "log_free_solutions": 1,
+    "exponents": [
+     [
+      "-16",
+      1,
+      true
+     ]
+    ]
+   }
+  ],
+  "lead": [
+   [
+    "4*x + (-81)",
+    1
+   ],
+   [
+    "170035928517675720507392*x^16 + (-17779537627188986996981760)*x^15 + 263296227346972817752498176*x^14 + (-1958135523028852527085694976)*x^13 + 1589140362206605684673527091712*x^12 + (-125815561829335925328656757450240)*x^11 + 4136216938800460722533734014415968*x^10 + (-60141675717225237267451664733495600)*x^9 + 84519686707591996997347867987585680*x^8 + 8653426457244676868454425741720963520*x^7 + (-104008545113538931305865411720239378432)*x^6 + 358225521104879289984270137361869017440*x^5 + 1156113646970217430568209755211965261384*x^4 + (-12085071699791354841020356217304328026864)*x^3 + 32491697827807011185416482644971673457678*x^2 + (-33038603555553487182262247613036519809895)*x + 10309409550944625381996391718439481018317",
+    1
+   ]
+  ]
+ }
+}

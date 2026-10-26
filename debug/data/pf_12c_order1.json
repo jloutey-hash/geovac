@@ -1,0 +1,28 @@
+{
+ "control chain_R2": {
+  "admissible_choices": 32,
+  "hits": [
+   [
+    "-5",
+    {
+     "1": "-3/2",
+     "-1": "-3/2",
+     "3": "-3/2",
+     "-3": "-3/2"
+    },
+    11
+   ]
+  ],
+  "seconds": 0.20743417739868164
+ },
+ "F_8": {
+  "admissible_choices": 8,
+  "hits": [],
+  "seconds": 17.85857605934143
+ },
+ "F_8*": {
+  "admissible_choices": 0,
+  "hits": [],
+  "seconds": 5.679533958435059
+ }
+}

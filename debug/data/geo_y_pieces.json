@@ -1,0 +1,165 @@
+{
+ "cuts": [
+  {
+   "side_with_O": [
+    "O"
+   ],
+   "lines": [
+    "O1",
+    "O2",
+    "O3"
+   ],
+   "t_values": [
+    "1",
+    "3"
+   ],
+   "x_values": [
+    "1",
+    "9"
+   ],
+   "beta": "-1/2",
+   "beta_type": "eigenvalue -1 (sqrt)",
+   "fock_factors": "3",
+   "rung": "K3 surface"
+  },
+  {
+   "side_with_O": [
+    "1",
+    "O"
+   ],
+   "lines": [
+    "O2",
+    "O3",
+    "13",
+    "12"
+   ],
+   "t_values": [
+    "1/2",
+    "7/2"
+   ],
+   "x_values": [
+    "1/4",
+    "49/4"
+   ],
+   "beta": "0",
+   "beta_type": "log (unipotent)",
+   "fock_factors": "2",
+   "rung": "elliptic curve"
+  },
+  {
+   "side_with_O": [
+    "2",
+    "O"
+   ],
+   "lines": [
+    "O1",
+    "O3",
+    "23",
+    "12"
+   ],
+   "t_values": [
+    "2",
+    "4"
+   ],
+   "x_values": [
+    "4",
+    "16"
+   ],
+   "beta": "0",
+   "beta_type": "log (unipotent)",
+   "fock_factors": "2",
+   "rung": "elliptic curve"
+  },
+  {
+   "side_with_O": [
+    "1",
+    "2",
+    "O"
+   ],
+   "lines": [
+    "O3",
+    "13",
+    "23"
+   ],
+   "t_values": [
+    "3/2",
+    "9/2"
+   ],
+   "x_values": [
+    "9/4",
+    "81/4"
+   ],
+   "beta": "-3/2",
+   "beta_type": "eigenvalue -1 (sqrt)",
+   "fock_factors": "1",
+   "rung": "genus 0 (algebraic)"
+  }
+ ],
+ "singular_x_predicted": [
+  "1/4",
+  "1",
+  "9/4",
+  "4",
+  "9",
+  "49/4",
+  "16",
+  "81/4"
+ ],
+ "matches_given_eight": true,
+ "adjacent_not_cuts_x": {
+  "(t,a,g1)": [
+   "25/4",
+   "1/4"
+  ],
+  "(t,b,g2)": [
+   "25",
+   "1"
+  ]
+ },
+ "elliptic_pieces": {
+  "E_A (cut O2|13: density a=1, geminal g2=3)": {
+   "j_quartic_equals_j_legendre": true,
+   "j(x)": "16*(x**2 - 4*x + 64)**3/(x*(x - 16)**2*(x - 4)**2)",
+   "poles_of_j_in_x_with_order": {
+    "16": 2,
+    "4": 2,
+    "0": 1
+   },
+   "order_of_pole_at_infinity": 1,
+   "lambda(t)": "-(tt - 4)*(tt + 2)/(4*tt)"
+  },
+  "E_B (cut O1|23: density b=2, geminal g1=3/2)": {
+   "j_quartic_equals_j_legendre": true,
+   "j(x)": "(16*x**2 + 824*x + 49)**3/(4*x*(4*x - 49)**2*(4*x - 1)**2)",
+   "poles_of_j_in_x_with_order": {
+    "49/4": 2,
+    "1/4": 2,
+    "0": 1
+   },
+   "order_of_pole_at_infinity": 1,
+   "lambda(t)": "-(2*tt - 7)*(2*tt - 1)/(32*tt)"
+  }
+ },
+ "three_fock_discriminant_general": "(-A**2 - 2*A*B - B**2 + x)*(-A**2 + 2*A*B - B**2 + x)/x**2",
+ "three_fock_lambda_sum_general": "(A**2 - B**2 + x)/x",
+ "slice_singular_t": {
+  "density pair (a+b, |a-b|)": [
+   "2",
+   "0"
+  ],
+  "geminal pair (g1+g2, |g1-g2|)": [
+   "2*g",
+   "0"
+  ],
+  "a with g2": [
+   "g + 1",
+   "Abs(g - 1)"
+  ],
+  "b with g1": [
+   "g + 1",
+   "Abs(g - 1)"
+  ]
+ },
+ "slice_three_fock_lambda_sum": "1",
+ "slice_note": "On the slice lambda_+ + lambda_- = 1, so E_- is E_+ up to a twist and E_+ (x) E_- = Sym^2 + wedge^2 (ranks 3 + 1); E_A and E_B coincide."
+}

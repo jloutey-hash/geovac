@@ -331,3 +331,61 @@ PF2's Y clause. PF1, PF3 and PF4 need the factorisation of that operator and sta
 - **PF1, PF3, PF4: still UNSCORED.** They need the factorisation of L and whether order 19 is minimal.
 - Script `debug/ib_tetra_pf_sheets.py`. Data `debug/data/ib_tetra_pf_sheets_*.json` and logs,
   `debug/data/pf_9_onY_tetra_pf_exact_d60.json`, grid `debug/data/pf_grid_d60_h0.03125.json`.
+
+## Disposition addendum 3 (2026-10-25; predictions and earlier dispositions above unchanged)
+
+**PF4: MISSED. PF1: UNDECIDED, leaning MISS. PF3: UNDECIDED, leaning MISS.** Methods chosen at scoring time where
+the record does not name them, disclosed below. Caps: the map searches are bounded boxes, and whether the order-12
+factor is irreducible is not proved.
+
+What was computed.
+- Composition chain of L, exact over Q (`debug/pf_7_chain.py`, every inclusion checked by exact division): seven
+  order-one factors F_1 to F_7 (x-degrees 6, 7, 9, 11, 13, 15, 17), then one factor F_8 of order 12 and x-degree 282
+  on which the probes of `debug/pf_lib.py` find no proper right or left factor (Frobenius exponents at every point,
+  degree at most 140). The chain's top equals L by mutual exact division.
+- The order-one factors have algebraic solutions: t^k (x - x0)^(half-integer) times a polynomial, exponent 1 at every
+  other root of the leading coefficient. F_1 is branched at x = 1 and 9 (exponents -3/2), F_2 to F_4 at 9/4
+  (-3/2, -5/2, -7/2), F_5 to F_7 at 81/4 (-9/2, -11/2, -13/2), each also as an odd power of t at 0.
+- The order-7 right divisor R_7 = F_7 o ... o F_1 does not annihilate Y: on the 60-digit grid it leaves 0.0996,
+  0.0596, 0.0688, 0.0747 of the largest term at t = 0.8, 1.7, 2.6, 3.8, the same with twice the step (L leaves
+  3e-45 to 3e-43). So Y's minimal annihilator M has a composition factor equivalent to an irreducible right factor of
+  F_8. (LCLM(M, R_7) is a right divisor of L of order above 7, so Sol(M) maps onto a nonzero submodule of Sol(F_8).)
+- Local data of F_8 (Y normalisation): at x = 1/4, 4, 49/4, 16 exponents -8 and 0 to 10, one logarithm; at x = 1 and
+  9 exponents -13/2, -11/2 and 0 to 9, no logarithm; at 9/4 and 81/4 exponents 0 to 11, no logarithm, so F_8 does not
+  see those two points; at t = 0 the t-exponents 3, 5, ..., 25, six of them with logarithms.
+- Order-one ends: the exponent-bounded hyperexponential search of record g32 on F_8 (8 admissible exponent choices)
+  and on its adjoint (0 admissible) finds no order-one right or left factor. Control: on F_2 o F_1 it finds F_1.
+- Predicted pieces at the ends (`debug/pf_12_hom.py`): an exact-identity search mod p for a map
+  A = t^nu x^(-a) den^(-b) sum p_jm x^m theta^j (den the product over the eight cuts) from each source S into F_8
+  (S equivalent to a right factor) and from S* into F_8* (S equivalent to a left factor), and the same into L. Box:
+  a = 8, b = 6, numerator degree 300, nu = 0 and 1, so every map with numerator degree up to 244 and smaller poles
+  is inside. Sources: R_V; the crossed Legendre pullbacks z_1, z_2; the direct d_1, d_2. Nullity 0 at two primes for
+  every source, target and side. Controls: each source maps into itself; a source planted as a right factor of
+  F_1 o S(theta + 1) or F_8 o S(theta + 1), or as a left factor of S o F_1 or S o F_8, is found, the latter two at
+  the full box; z_1 into F_1 o R_V and R_V into F_1 o z_1 give 0; the Legendre sources in theta form annihilate
+  t^(-1/2) P_(-1/2)(z) to 1e-41.
+- Numerical monodromy (`debug/pf_11_monodromy.py`, 19 columns at 80 digits, loops at the eight cuts and at 0): the
+  ordinary-point controls give |M - I| = 2e-30 at 25/4 and 1e-18 at 10. Three irreducibility tests on the quotient
+  (algebra closure, a balanced closure spectrum, Norton's test) did not separate the planted reducible control
+  (ker L / ker R_6), so they decide nothing and are not used. The same holds for the orbit test of minimality.
+
+Scores.
+- **PF4: MISSED.** M has a composition factor equivalent to an irreducible right factor B of F_8. B is not of order
+  one (complete search) and not equivalent to R_V or to any of the four Legendre pullbacks (box above). So M has a
+  factor of another type, which is PF4's falsifier. Cap: the box.
+- **PF1: UNDECIDED, leaning MISS.** No Legendre pullback, crossed or direct, is at the bottom or the top of F_8 or of
+  L. They could only be middle factors of F_8, which needs F_8 to be reducible with an unpredicted factor below them.
+  If F_8 is irreducible, PF1 misses. Not decided because irreducibility is not proved.
+- **PF3: UNDECIDED, leaning MISS.** R_V is at neither end of F_8 or L, and PF3 puts it at the top ("no factor above
+  it"). The same residual case as PF1 remains, and if F_8 is irreducible its order-12 factor is the falsifier's
+  "irreducible factor of order five or more".
+- Minimality of order 19: not decided.
+
+Reading, not scored. The structure is three groups: elementary pieces branched at the three-density threshold
+{1, 9} and at the two geminal points {9/4, 81/4}, which carry every half-integer exponent at 9/4 and 81/4, and one
+hard block of order 12 that sees exactly the six two-line and three-line cuts 1/4, 1, 4, 9, 49/4, 16 and is blind to
+9/4 and 81/4. The Landau reading put the right thresholds in the right places. It did not predict that the
+transcendental part sits in one block with none of the predicted pieces at either end.
+
+Owed. A proof or refutation that F_8 is irreducible: a better-conditioned monodromy computation, or an
+exterior-power or eigenring argument. And the order of M.

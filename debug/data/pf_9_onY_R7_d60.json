@@ -1,0 +1,64 @@
+{
+ "op": "data/pf_pieces_tetra_exact.json",
+ "key": "chain_R7",
+ "order": 7,
+ "x_degree": 24,
+ "perturbed_GA1_normalisation": {
+  "theta_power": 0,
+  "x_power": 1,
+  "factor": "1 + 1/200"
+ },
+ "perturbed_dominant_monomial": "per t: the coefficient (theta^k, x^i) whose monomial is largest at that t, times 1 + 1/200",
+ "0.8": {
+  "Y": "0.0006794407182018872331097023",
+  "quad_h_vs_2h_Y": "6.72e-28",
+  "LY_rel_group": "0.0996",
+  "LY_rel_monomial": "0.00385",
+  "LY_rel_group_2h": "0.0996",
+  "perturbed_GA1_rel_group": "0.17",
+  "dominant_monomial": {
+   "theta_power": 1,
+   "x_power": 1
+  },
+  "perturbed_dominant_rel_group": "0.0344"
+ },
+ "1.7": {
+  "Y": "0.002399302497706388457508616",
+  "quad_h_vs_2h_Y": "2.2e-27",
+  "LY_rel_group": "0.0596",
+  "LY_rel_monomial": "0.0059",
+  "LY_rel_group_2h": "0.0596",
+  "perturbed_GA1_rel_group": "0.0492",
+  "dominant_monomial": {
+   "theta_power": 1,
+   "x_power": 5
+  },
+  "perturbed_dominant_rel_group": "0.00907"
+ },
+ "2.6": {
+  "Y": "0.004076341717990851402899955",
+  "quad_h_vs_2h_Y": "6.86e-27",
+  "LY_rel_group": "0.0688",
+  "LY_rel_monomial": "0.00448",
+  "LY_rel_group_2h": "0.0688",
+  "perturbed_GA1_rel_group": "0.0685",
+  "dominant_monomial": {
+   "theta_power": 1,
+   "x_power": 6
+  },
+  "perturbed_dominant_rel_group": "0.146"
+ },
+ "3.8": {
+  "Y": "0.00582071177679304658674994",
+  "quad_h_vs_2h_Y": "6.1e-26",
+  "LY_rel_group": "0.0747",
+  "LY_rel_monomial": "0.00851",
+  "LY_rel_group_2h": "0.0747",
+  "perturbed_GA1_rel_group": "0.0747",
+  "dominant_monomial": {
+   "theta_power": 3,
+   "x_power": 14
+  },
+  "perturbed_dominant_rel_group": "0.0308"
+ }
+}

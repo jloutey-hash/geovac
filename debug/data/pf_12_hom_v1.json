@@ -1,0 +1,837 @@
+{
+ "box": {
+  "amax": 8,
+  "bmax": 6,
+  "M": 300,
+  "den": "prod over the eight cuts",
+  "primes": [
+   1073741789,
+   1073740783
+  ]
+ },
+ "legendre_numeric_check": {
+  "z1": "7.93e-42",
+  "z2": "2.98e-41",
+  "d1": "1.37e-41",
+  "d2": "0.0"
+ },
+ "controls": {
+  "Hom(R_V, R_V)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 84,
+    "N": 286,
+    "equations": 283,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 84,
+    "N": 286,
+    "equations": 283,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted right: Hom(R_V, F_1 o R_V(theta+1))": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 84,
+    "N": 292,
+    "equations": 283,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 84,
+    "N": 292,
+    "equations": 283,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted left: Hom(R_V*, (R_V o F_1)*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 84,
+    "N": 292,
+    "equations": 283,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 84,
+    "N": 292,
+    "equations": 283,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(z1, z1)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted right: Hom(z1, F_1 o z1(theta+1))": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted left: Hom(z1*, (z1 o F_1)*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(z2, z2)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted right: Hom(z2, F_1 o z2(theta+1))": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted left: Hom(z2*, (z2 o F_1)*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(d1, d1)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted right: Hom(d1, F_1 o d1(theta+1))": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted left: Hom(d1*, (d1 o F_1)*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(d2, d2)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 246,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted right: Hom(d2, F_1 o d2(theta+1))": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "planted left: Hom(d2*, (d2 o F_1)*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     1,
+     1
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 252,
+    "equations": 241,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "negative: Hom(z1, F_1 o R_V)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 250,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 42,
+    "N": 250,
+    "equations": 241,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "negative: Hom(R_V, F_1 o z1)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 84,
+    "N": 294,
+    "equations": 283,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 84,
+    "N": 294,
+    "equations": 283,
+    "x_exponent_of_series": "0"
+   }
+  }
+ },
+ "tests": {
+  "Hom(R_V, F_8)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1686,
+    "equations": 1403,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1686,
+    "equations": 1403,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(R_V*, F_8*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1686,
+    "equations": 1403,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1686,
+    "equations": 1403,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(R_V, L)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1518,
+    "equations": 1403,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1518,
+    "equations": 1403,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(R_V*, L*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1518,
+    "equations": 1403,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 1204,
+    "N": 1518,
+    "equations": 1403,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(z1, F_8)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(z1*, F_8*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(z1, L)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(z1*, L*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(z2, F_8)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(z2*, F_8*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(z2, L)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(z2*, L*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(d1, F_8)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(d1*, F_8*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(d1, L)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(d1*, L*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(d2, F_8)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(d2*, F_8*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 1084,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  },
+  "Hom(d2, L)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "0"
+   }
+  },
+  "Hom(d2*, L*)": {
+   "nu=0": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   },
+   "nu=1": {
+    "nullity_two_primes": [
+     0,
+     0
+    ],
+    "U": 602,
+    "N": 916,
+    "equations": 801,
+    "x_exponent_of_series": "-1"
+   }
+  }
+ },
+ "seconds": 73.98362469673157
+}

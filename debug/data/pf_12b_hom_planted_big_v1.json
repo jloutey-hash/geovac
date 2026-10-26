@@ -1,0 +1,139 @@
+{
+ "box": {
+  "amax": 8,
+  "bmax": 6,
+  "M": 300
+ },
+ "planted right: Hom(R_V, F_8 o R_V(theta+1))": {
+  "nu=0": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 1204,
+   "N": 1688,
+   "equations": 1403,
+   "x_exponent_of_series": "0"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    1,
+    1
+   ],
+   "U": 1204,
+   "N": 1688,
+   "equations": 1403,
+   "x_exponent_of_series": "0"
+  }
+ },
+ "planted left: Hom(R_V*, (R_V o F_8)*)": {
+  "nu=0": {
+   "nullity_two_primes": [
+    1,
+    1
+   ],
+   "U": 1204,
+   "N": 1688,
+   "equations": 1403,
+   "x_exponent_of_series": "-1"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 1204,
+   "N": 1688,
+   "equations": 1403,
+   "x_exponent_of_series": "-1"
+  }
+ },
+ "planted right: Hom(z1, F_8 o z1(theta+1))": {
+  "nu=0": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "0"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    1,
+    1
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "0"
+  }
+ },
+ "planted left: Hom(z1*, (z1 o F_8)*)": {
+  "nu=0": {
+   "nullity_two_primes": [
+    1,
+    1
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "-1"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "-1"
+  }
+ },
+ "planted right: Hom(z2, F_8 o z2(theta+1))": {
+  "nu=0": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "0"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    1,
+    1
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "0"
+  }
+ },
+ "planted left: Hom(z2*, (z2 o F_8)*)": {
+  "nu=0": {
+   "nullity_two_primes": [
+    1,
+    1
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "-1"
+  },
+  "nu=1": {
+   "nullity_two_primes": [
+    0,
+    0
+   ],
+   "U": 602,
+   "N": 1088,
+   "equations": 801,
+   "x_exponent_of_series": "-1"
+  }
+ }
+}

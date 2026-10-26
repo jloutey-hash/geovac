@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.10 (October 24, 2026)
+**Version:** v5.21.11 (October 25, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Pieces of the off-slice triangle; Gaussian fit priced; blind geometric route (2026-10-25, v5.21.11, pre-registered):** order-12 block, no predicted piece at its ends; PF4, GR1, GF1 missed; GF2-3 held. CHANGELOG v5.21.11.
 - **Feynman-integral reduction reproduces the kite operators and reaches off the slice (2026-10-24, v5.21.10, pre-registered):** IB1-4 held; PF2 held, kite and Y clauses (crossed cuts); PF1, PF3-4 open. CHANGELOG v5.21.10.
 - **Gaussian geminal on the full triangle; price formula off the slice stopped (2026-10-24, v5.21.9, pre-registered):** K3 piece lost (GY3 missed); GY1-2 held; PF1-4 unscored, no operator within cap. CHANGELOG v5.21.9.
 - **Gamma = 1 drop is the equal-mass degeneration; cusp-correct geminal holds at gamma 2 (2026-10-23, v5.21.8, pre-registered):** gamma = 3 keeps order nine with the elliptic piece (MG1-MG3 held); GA3 held. CHANGELOG v5.21.8.

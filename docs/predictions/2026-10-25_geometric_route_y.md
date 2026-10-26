@@ -82,3 +82,31 @@ Each of GR1-GR5 is the agent's answer to Q1-Q5 below, scored HIT, MISS, PARTIAL 
 - **Prediction:** The transcendental H^2 of the K3 double plane y^2 = (p^2+1)(q^2+4)((p+q)^2+x), branched along six lines; generic Picard number 18. Its rank is 4 and its Hodge type is (1, 2, 1), weight 2. It is isomorphic to H^1(E_{λ(u)}) ⊗ H^1(E_{λ(−u)}) (a Shioda–Inose partner of E+ × E−). The monodromy preserves a symmetric form: orthogonal, in O(2,2) with reflections, not symplectic.
 - **Confidence:** high for this K3 piece; moderate that it is the largest piece of Y.
 - **Reason:** Bailey's moduli become Möbius in the conic parameter, and the F_p character sums match ±a_p(E+)a_p(E−) in 117 of 117 rows. The tensor of two symplectic H^1's is orthogonal.
+
+## Disposition (appended 2026-10-25; prediction and scoring rules above unchanged)
+
+**GR1: MISSED. GR2, GR3, GR4, GR5: UNDECIDED.** The data are those of disposition addendum 3 of
+`docs/predictions/2026-10-23_price_formula_slots.md`. In short: L = F_8 o F_7 o ... o F_1 with seven order-one
+factors and one factor F_8 of order 12; R_7 does not annihilate Y; F_8 has no order-one right or left factor; none of
+R_V, the Legendre pullbacks at z_1, z_2 and the direct d_1, d_2 is equivalent to a right or left factor of F_8 or
+of L within the stated box, with planted controls found at the full box.
+
+- **GR1: MISSED.** The prediction says every composition factor of Y's minimal annihilator M is the order-4 K3
+  piece, one of the two elliptic pieces, or an algebraic order-one piece. M has a composition factor equivalent to an
+  irreducible right factor of F_8, and that factor is none of these. Cap: the box.
+- **GR2, GR3, GR5: UNDECIDED.** The order-4 piece is not found at either end of F_8. Its local monodromy and form
+  cannot be read.
+- **GR4: UNDECIDED.** The order of M is not decided.
+
+Reading, not scored: what the geometry got right. These parts can be checked against the data without the pieces:
+- the algebraic pieces branched at 81/4, at 9/4 and at {1, 9}: all three groups occur (three, three and one
+  order-one factors of L);
+- the hard part blind to 9/4 and 81/4: F_8 has trivial local monodromy at both;
+- eigenvalue -1 and no logarithm at 1 and 9: F_8 has exactly that, with two such exponents, not one;
+- one logarithm at each of 1/4, 4, 49/4, 16: F_8 has exactly that.
+
+What it got wrong: the transcendental part sits in a block of order 12 with no predicted piece at either end and no split found, not
+three separate pieces of orders 4, 2 and 2. The agent named the risk itself. The top sector's kernel is not rational
+on the Fock curves, so the density-topology rule does not govern it, and a top-sector piece could not be excluded.
+Both routes, the Landau reading and the geometry, located the same thresholds and the same candidate pieces, and both
+missed that block. Whether it is truly one irreducible piece is not proved.
