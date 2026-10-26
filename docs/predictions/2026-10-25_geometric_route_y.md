@@ -129,3 +129,16 @@ transcendental ones.
 
 Reading, not scored: the blind route predicted every transcendental piece of Y. What looked like a block beyond it
 was a gap in our search.
+
+## Disposition addendum 2 (2026-10-26; prediction, scoring rules and earlier dispositions unchanged)
+
+**GR1: PARTIAL. GR2: HIT. GR3: HIT. GR4: PARTIAL. GR5: HIT.** Data: PF record, addendum 7. Convention fixed before
+computing: minimal over Q(x).
+- GR1: M has R_V (order 4), the two crossed Legendre pullbacks (order 2), and five order-one pieces with algebraic
+  solutions, branched at 81/4 (three), at 9/4 (one) and at {1, 9} (one). The order-4 and order-2 pieces are as
+  predicted. HIT needs three or four order-one pieces, and M has five. No MISS condition holds.
+- GR2: the features not read before are now read. At x = 0 the Jordan blocks are 2 + 2; at infinity 3 + 1, one block
+  with log squared. Every point matches.
+- GR4: the order of M is 13, inside 10 to 13 but not 11.
+- GR5: the order-4 factor is equivalent to R_V by an exact map, and its monodromy has a symmetric invariant form (and
+  no alternating one), with reflections at 1 and 9.

@@ -468,3 +468,43 @@ Scores. PF1: exactly two order-two composition factors, inequivalent, each equiv
 Y needs it, and it is a left factor of L15 (nothing above it). PF4: every composition factor is R_V, z_1, z_2 or one
 of the seven algebraic order-one pieces of addendum 3. Caps: R_V's irreducibility rests on the bounded probe; the
 order of M is not decided.
+
+## Addendum 7 (2026-10-26; predictions, scoring rules and earlier addenda unchanged)
+
+**PF1, PF3, PF4: HELD, now on Y's minimal operator itself.** Addendum 6 scored them on the order-15 operator L15,
+whose composition contains that of Y's minimal operator M. M is now found. PI-directed ("Let's work that list down").
+Convention, fixed before computing: minimal over Q(x). Hom dimensions do not change on extending the field, so the
+order is the same over C(x).
+- Two of the three order-one pieces of the 9/4 class are left factors of L15: two independent hyperexponential
+  solutions g_1, g_2 of L15*, exact from 112 primes, each checked by the exact identity (`debug/pf_29_cosocle.py`).
+- The bilinear concomitant B(y, g) is constant for solutions y of L15. On Y it is below 1e-56 of its largest term at
+  t in (1/2, 1), (1, 3/2) and (2, 3), for both g_i, and it grows by about 1e18 with the 2h quadrature: noise, not a
+  value. Controls: the adjoint solution g' for the R_V copy (exact map, 60 primes, 859 bits) gives
+  B(Y, g') = 978526454748.98808377716938048 at t = 0.6, 0.7 and 0.8, the same at 2h, 1e-8 of its largest term; and
+  B(s_1, g) = 0 to the working precision for the exact solution s_1 of the right factor F_1
+  (`debug/pf_30_concomitant.py`, `debug/pf_31_concomitant_checks.py`, `debug/pf_32_rv_control.py`).
+- So M13, the order-13 right factor of L15 orthogonal to g_1 and g_2, annihilates Y. It is exact over Q (40 primes,
+  532 bits, L15 / M13 exact; `debug/pf_33_m13.py`, `debug/pf_34_m13_exact.py`). On Y it leaves 8e-57 to 2e-46 of the
+  largest term (2h: 1e-31 to 8e-27; the dominant coefficient times 1 + 1/200 gives 0.26 to 1.0).
+- Left factors of M13: Hom(S*, M13*) for S = R_V, z_1, z_2, F_1, F_2, F_5 (every class of composition factor), box
+  a 20, b 12, M13's apparent factor squared, numerator degree 500, two primes. R_V gives 1; the others 0; the planted
+  F_5 o M13 gives 1. So R_V, once, is M13's only irreducible left factor. Every proper invariant subspace of Sol(M13)
+  lies in the kernel of its one map to R_V, which is Sol(M13) intersected with Sol(R_S), and Y is not in Sol(R_S)
+  (addendum 6). So M = M13.
+- M's composition factors: R_V, z_1, z_2, and five of order one with algebraic solutions: the class branched at
+  1 and 9 once, the 9/4 class once, the 81/4 class three times. PF1, PF3 and PF4 hold as stated.
+- R_V is irreducible. Its exponents leave no admissible shape for an order-one right factor of R_V or of R_V*; its
+  exterior square has one admissible shape, and no element of it (`debug/pf_28_forms.py`; negatives rigorous, since
+  rank mod p is at most the rank over Q and truncation only drops equations; controls AESZ #1, a tensor product of
+  two Legendre operators, and their direct sum, all as expected). Its monodromy preserves a symmetric form and no
+  alternating one: one quadratic relation among its solutions, none among its Wronskians, and a rational element in
+  the symmetric square of R_V*. Jordan blocks 2 + 2 at x = 0 and 3 + 1 at infinity, from the log filtration, for R_V
+  and for L15's left piece alike (`debug/pf_27_jordan.py`; controls 2+2, 3+1 and the quintic's single block).
+- Caps: the two vanishing pairings are measured, not proved; the left-factor searches are bounded boxes; Hom
+  dimensions, the form and the blocks are computed modulo two primes.
+- Errors found during the work, none of which reached a record: an elementwise product in place of a series product,
+  and a dropped top series coefficient, in the first exterior-square test (both caught by its controls); a float
+  exponent and too short a series in the first g' (caught by B(s_1, g') being nonzero); content removed on the
+  adjoint side in the first M13 (caught by the division check). Also found: the order-one search of
+  `debug/correlated_triangle_g32_lib4.py` is hard-coded to the singular points of an earlier object, so it is not
+  complete for these operators. No current claim rests on its negatives.

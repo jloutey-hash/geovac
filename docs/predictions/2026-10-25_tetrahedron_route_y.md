@@ -117,3 +117,14 @@ three transcendental ones.
 - TG5: the order-4 factor is equivalent to R_V by an exact map (56 primes, checked by exact division).
 The induced-system hypothesis of the disposition is moot: the two eigenvalues -1 at 1 and 9 in F_8 are its two R_V
 copies.
+
+## Disposition addendum 3 (2026-10-26; prediction, scoring rules and earlier dispositions unchanged)
+
+**TG1: HIT. TG2: HIT. TG3: HIT. TG4: HIT. TG5: HIT.** Data: PF record, addendum 7. Convention fixed before computing:
+minimal over Q(x).
+- TG1 now holds on Y's minimal operator itself: R_V, z_1 and z_2 once each, and five other factors, each of order one
+  with an algebraic solution.
+- TG3: the Jordan blocks are 2 + 2 at x = 0 and 3 + 1 at infinity, as in the table. Every feature matches.
+- TG4: the order of Y's minimal operator is 13.
+- Reading, not scored: T5's symmetric form holds (orthogonal, with reflections at 1 and 9; no alternating form).
+  The Hodge type and the signature are not tested.

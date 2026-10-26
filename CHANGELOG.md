@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.14] - 2026-10-26
+
+PI-directed ("Let's work that list down": the open and owed items of v5.21.13). No new prediction; the scoring
+convention (minimal over Q(x)) was fixed before computing, and the records' scores are appended.
+
+### Added
+- **Y's minimal operator has order 13 (PF addendum 7).** Two of the three 9/4-class order-one pieces are left factors
+  of L15; Y pairs to zero with both (concomitant below 1e-56 of its largest term, growing with quadrature error; R_V
+  control 1e-8, stable). The order-13 right factor M13 without them is exact over Q (40 primes; L15 / M13 exact) and
+  leaves 8e-57 to 2e-46 on Y. Its only irreducible left factor is R_V, so M13 is minimal. Pieces: R_V, z_1, z_2 and
+  five order-one (1-9 class once, 9/4 once, 81/4 three times) (`debug/pf_29_cosocle.py` to `debug/pf_34_m13_exact.py`).
+- **R_V is irreducible and orthogonal; Jordan blocks 2+2 at 0, 3+1 at infinity.** Exponent-complete searches on R_V,
+  R_V* and the exterior square, mod two primes, with three controls; one quadratic relation among solutions, none among
+  Wronskians (`debug/pf_27_jordan.py`, `debug/pf_28_forms.py`).
+- **Rescored.** GR2, GR5 HIT; GR1, GR4 PARTIAL (five order-one pieces; order 13). TG3, TG4 HIT, so TG1-TG5 all HIT.
+  PF1, PF3, PF4 held on M itself.
+- **Guard, written as a separate step:** `tests/test_paper59_y_minimal_order.py` (7 tests, one slow; data `tests/data/paper59_y_2026_10_26.json`, built by `debug/pf_35_guard_data.py`, no debug/ import). Fire-tested against six wrong answers, all fire; a +1 plant on a 532-bit coefficient did not, being below the data's precision. Not re-run: L15, the sunrise relation, the exact maps, the concomitant tests.
+- Disclosed: the order-one search of `debug/correlated_triangle_g32_lib4.py` is hard-coded to an earlier object's
+  singular points (no current claim rests on its negatives); three coding errors caught by controls (PF addendum 7).
+
+### Changed
+- Paper 59 `sec:density_ring`: the minimal order, the irreducibility, the form and the blocks; caps restated;
+  conclusion sentence. Synthesis sentence. `docs/atlas.md` door 27 and the claim-matrix row.
+- CLAUDE.md version and S2 line; README badge 5.21.14.
+
 ## [v5.21.13] - 2026-10-26
 
 PI-directed ("Ok, sure. Do that": build the sector blocks of the IBP system and map their pieces into the order-12 factor). No new prediction; the method was chosen at scoring time and the records' scores are appended.

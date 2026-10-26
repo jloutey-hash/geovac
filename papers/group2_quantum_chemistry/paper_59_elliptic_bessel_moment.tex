@@ -1675,10 +1675,28 @@ over $\mathbb{Q}(x)$, rebuilt from many primes and checked by exact division.
 $Y$ needs the K3 piece:\ the right factor without it leaves $2\times10^{-4}$ to
 $4\times10^{-3}$ of the largest term.  It needs both elliptic pieces, since its
 minimal operator is genuinely singular at $x=1/4$ and $x=4$ and no other piece
-is singular there.  Caps:\ the reduction is new code, checked against the
-guessed operators and the series;\ the irreducibility of the K3 piece rests on
-a bounded search;\ and how many of the seven order-one pieces $Y$ needs, and so
-the order of its minimal operator, between eight and fifteen, is not decided.
+is singular there.  \textbf{[SYMBOLIC + MEASURED]} The minimal operator of
+$Y$ has order thirteen, exact over $\mathbb{Q}$.  Two of the three order-one
+pieces branched at $x=9/4$ are left factors of the order-fifteen operator.
+The pairing of $Y$ with each of them, the bilinear concomitant, is a constant,
+and on $Y$ it is below $10^{-56}$ of its largest term and grows with the
+quadrature error;\ the same pairing with the K3 piece, the control, is
+$10^{-8}$ of its largest term and does not move at twice the step.  So the
+right factor of order thirteen without those two pieces annihilates $Y$,
+leaving $8\times10^{-57}$ to $2\times10^{-46}$ of the largest term.  Its only
+irreducible left factor is the K3 piece, once, and $Y$ needs that piece, so no
+smaller operator annihilates $Y$.  Its five order-one pieces are branched at
+$x=1,9$ (one), at $9/4$ (one) and at $81/4$ (three).  The K3 piece is
+irreducible:\ its exponents leave no room for a factor of order one or three,
+and its exterior square has no element of the one admissible form, so it has
+no factor of order two.  Its monodromy preserves a symmetric form and no
+alternating one, with reflections at $x=1$ and $x=9$, and its Jordan blocks
+are $2+2$ at $x=0$ and $3+1$ at infinity.  Caps:\ the reduction is new code,
+checked against the guessed operators and the series;\ the two vanishing
+pairings are measured, not proved;\ the left-factor searches behind the order
+thirteen are bounded, with planted controls found;\ and the form, the blocks
+and the irreducibility are computed modulo two primes, the last by searches
+that are complete for its exponents.
 An earlier reading of the order-nineteen operator, as one piece of order twelve
 with none of these pieces at either end, came from a map search whose box was
 too small at the left end, and is withdrawn (records
@@ -1691,7 +1709,8 @@ Pachucki's, for the three-electron Slater integral with integer
 indices~\cite{pkp2009}, which they reduce to a differential equation.  What
 is added here is the family with half-integer density lines and the
 geminal's squared lines, and the check against operators found
-independently.  Guard:\ \texttt{tests/test\_paper59\_ib\_kite.py}.
+independently.  Guards:\ \texttt{tests/test\_paper59\_ib\_kite.py} and
+\texttt{tests/test\_paper59\_y\_minimal\_order.py}.
 
 \textbf{[MEASURED]} Production explicitly correlated codes do not use a
 single Gaussian geminal.  For many integrals they replace $e^{-\gamma r}$ by
@@ -1815,8 +1834,8 @@ while the correlated triangle with exponential geminals sits with the chain at
 $\gamma=1$;\ we read the difference as uniqueness, which factors the Coulomb loop
 and not the geminal one.  Off the symmetric slice the correlated triangle carries
 the K3 piece of the chain of three, an elliptic piece for each crossed pairing
-of a density with a geminal, and algebraic pieces;\ the order of its minimal
-operator is between eight and fifteen.
+of a density with a geminal, and five algebraic pieces;\ its minimal
+operator has order thirteen.
 
 %% ========================================================================
 \begin{thebibliography}{99}

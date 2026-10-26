@@ -1,0 +1,307 @@
+{
+ "control AESZ #1": {
+  "by_run": {
+   "x0=2,p=1000000007": {
+    "wedge dep": 1,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 0,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=2,p=998244353": {
+    "wedge dep": 1,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 0,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=1000000007": {
+    "wedge dep": 1,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 0,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=998244353": {
+    "wedge dep": 1,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 0,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   }
+  },
+  "agree": true
+ },
+ "control A (x) B": {
+  "by_run": {
+   "x0=2,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=2,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   }
+  },
+  "agree": true
+ },
+ "control A (+) B": {
+  "by_run": {
+   "x0=2,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [
+     [
+      "0",
+      {
+       "1": "-1",
+       "9": "-1"
+      },
+      1,
+      2
+     ]
+    ],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=2,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [
+     [
+      "0",
+      {
+       "1": "-1",
+       "9": "-1"
+      },
+      1,
+      2
+     ]
+    ],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [
+     [
+      "0",
+      {
+       "1": "-1",
+       "9": "-1"
+      },
+      1,
+      2
+     ]
+    ],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [
+     [
+      "0",
+      {
+       "1": "-1",
+       "9": "-1"
+      },
+      1,
+      2
+     ]
+    ],
+    "sym shapes": 0,
+    "sym hyp": []
+   }
+  },
+  "agree": true
+ },
+ "R_V": {
+  "by_run": {
+   "x0=2,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=2,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   },
+   "x0=5,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 1,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 0,
+    "sym hyp": []
+   }
+  },
+  "agree": true
+ },
+ "R_V adjoint": {
+  "by_run": {
+   "x0=2,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 1,
+    "sym hyp": [
+     [
+      "-2",
+      {
+       "9": "0",
+       "1": "0"
+      },
+      1,
+      1
+     ]
+    ]
+   },
+   "x0=2,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 1,
+    "sym hyp": [
+     [
+      "-2",
+      {
+       "9": "0",
+       "1": "0"
+      },
+      1,
+      1
+     ]
+    ]
+   },
+   "x0=5,p=1000000007": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 1,
+    "sym hyp": [
+     [
+      "-2",
+      {
+       "9": "0",
+       "1": "0"
+      },
+      1,
+      1
+     ]
+    ]
+   },
+   "x0=5,p=998244353": {
+    "wedge dep": 0,
+    "sym dep": 0,
+    "one shapes": 0,
+    "one hyp": [],
+    "wedge shapes": 1,
+    "wedge hyp": [],
+    "sym shapes": 1,
+    "sym hyp": [
+     [
+      "-2",
+      {
+       "9": "0",
+       "1": "0"
+      },
+      1,
+      1
+     ]
+    ]
+   }
+  },
+  "agree": true
+ }
+}
