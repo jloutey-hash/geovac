@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.12] - 2026-10-25
+
+PI-directed ("Yes update 59 +checkpoint first. Then launch the tetrahedron geometry agent. Also, lets send out an explorer looking for general tetrahedron stuff with out feynnman integral stuff", then "Yes please" to the induced-system test). Pre-registered TG1-TG5 (`docs/predictions/2026-10-25_tetrahedron_route_y.md`, committed c5fb49e8 before the comparison).
+
+### Added
+- **TG1-TG5: TG1 MISSED; TG2-TG5 UNDECIDED.** A second blind agent priced the whole tetrahedron, top sector included. It predicts the same pieces as the first route (K3 order 4, two elliptic, algebraic), with the top sector algebraic: the top cut's point counts match an Artin-Tate form in 187 of 187 rows, and a Katz middle convolution of the Legendre bubble rebuilds the K3 piece with its monodromy and a symmetric form. The data do not contain those pieces at either end of F_8. Memo `debug/geo_tet_route_memo.md`, scripts `debug/geo_tet_*.py` (`geo_tet_euler.py` is the agent's first attempt, which mixed prime classes; its output was deleted).
+- **A gap in the map search found and closed (PF addendum 4).** The v5.21.11 box allowed poles only at the eight cuts; a Legendre map can need one at the source's apparent point B^2 - gamma^2. Fixed in `debug/pf_12_hom.py` (`source_extra`), with a control that only the fixed denominator passes (old 0, new 1 for all four sources). Re-run, also at twelve primes (which excludes factors defined only over a quadratic field): nullity 0 throughout. The v5.21.11 scores stand.
+- **The induced-system hypothesis tested (PF addendum 5).** F_8 has two eigenvalues -1 at x = 1 and 9; the tensor-induced K3 has one, the system induced from Bailey's curve E+ over w^2 = (x - 1)(x - 9) has two. Its order-4 operator built exactly (`debug/pf_13_induced.py`, four twists, numerically checked to 1e-42, two half-integer exponents at 1 and 9): not at either end of F_8. At numerator degree 800 (`debug/pf_12f_hom_deg800.py`), with planted controls found at that degree, no source of the ten maps into F_8 or F_8*.
+- **Explorer memo** `debug/explorer_tetrahedron_geometry_memo.md`: pure-geometry routes for tetrahedral integrals, ranked. Top two: double covers branched along plane arrangements (Paper 59's density factors are parallel plane pairs), and Aomoto-Machida integrals over sphere arrangements, singular where Cayley-Menger minors vanish. The amplituhedron resemblance is concrete only for the solid-angle kernel. Several citations marked UNVERIFIED in the memo; none used in a paper.
+
+### Changed
+- Paper 59 `sec:density_ring`: the search sentence names the induced system too. Compiles three-pass clean.
+- `docs/atlas.md` door 27 and the claim-matrix row for the pieces of Y.
+- CLAUDE.md version and S2 line; README badge 5.21.12.
+
 ## [v5.21.11] - 2026-10-25
 
 PI-directed ("Let's make the call to do all 3": cut the checkpoint, factor the order-19 operator for PF1, PF3 and PF4, and run the Gaussian-fit test; then "Would it maybe be beneficial to send out a sub agent to start a more geometric route", answered "Yes please"). Pre-registered GF1-GF3 (`docs/predictions/2026-10-25_gaussian_fit_geminal.md`, committed 9cac600d before computing) and GR1-GR5 (`docs/predictions/2026-10-25_geometric_route_y.md`, committed ddd88961 before the comparison).

@@ -100,21 +100,40 @@ def logfree_series(S, p, N):
     raise RuntimeError("no log-free exponent at x = 0")
 
 
-def den_coeffs(b):
+def den_coeffs(b, extra=None):
+    """(prod over the eight cuts)^b times extra^b; extra = the source's other singular and apparent points
+    (fix of 2026-10-25: the first run allowed poles at the cuts only, and a map may need poles at the source's own
+    apparent point, x = B^2 - gamma^2 for a Legendre pullback)"""
     d = flint.fmpz_poly([1])
     for xp in XC:
         d = d * flint.fmpz_poly([-xp.numerator, xp.denominator]) ** b
+    if extra is not None:
+        d = d * extra ** b
     return [int(c) for c in d.coeffs()]
 
 
-def nullity(S, F, nu, a, b, M, p, margin=200):
+def source_extra(S):
+    """product of the irreducible factors of the source's leading coefficient other than x and the eight cuts"""
+    lead = S[-1]
+    cuts = [flint.fmpz_poly([-xp.numerator, xp.denominator]) for xp in XC]
+    e = flint.fmpz_poly([1])
+    for f, _ in lead.factor()[1]:
+        if f.degree() < 1 or f == flint.fmpz_poly([0, 1]) or f == -flint.fmpz_poly([0, 1]):
+            continue
+        if any(f == c or f == -c for c in cuts):
+            continue
+        e = e * f
+    return e
+
+
+def nullity(S, F, nu, a, b, M, p, margin=200, extra=None):
     rS = len(S) - 1
     U = rS * (M + 1)
     D = G.op_degree(F)
     N = U + D + margin
     ex, f = logfree_series(S, p, N)
     ET = frac_mod(2 * ex, p)
-    w = H.inv_series(den_coeffs(b), N, p)
+    w = H.inv_series(den_coeffs(b, extra), N, p)
     cols = np.zeros((N, U), dtype=np.int64)
     k = 0
     nn = np.arange(N, dtype=np.int64)
@@ -153,14 +172,17 @@ def nullity(S, F, nu, a, b, M, p, margin=200):
     return nul, {"U": U, "N": N, "equations": Nout, "x_exponent_of_series": str(ex)}
 
 
-def hom(S, F, amax, bmax, M):
+def hom(S, F, amax, bmax, M, extra="auto"):
+    if isinstance(extra, str):
+        extra = source_extra(S)
     res = {}
     for nu in (0, 1):
         nl = []
         for p in PRIMES:
-            nul, info = nullity(S, F, nu, amax, bmax, M, p)
+            nul, info = nullity(S, F, nu, amax, bmax, M, p, extra=extra)
             nl.append(nul)
         res[f"nu={nu}"] = {"nullity_two_primes": nl, **info}
+    res["extra_den"] = str(extra) if extra is not None else "none"
     return res
 
 

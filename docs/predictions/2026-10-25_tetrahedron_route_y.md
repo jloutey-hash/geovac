@@ -78,3 +78,25 @@ If the order-4 factor is not found, TG3 and TG5 are UNDECIDED.
 - **Prediction:** The transcendental H² of the K3 double plane y² = (p² + 1)(q² + 4)((p+q)² + x), branched along six lines. It has rank 4 and Hodge type (1, 2, 1), weight 2, and is ≅ H¹(E₊) ⊗ H¹(E₋) for Bailey's conjugate curves. The monodromy preserves a **symmetric** form: orthogonal, O(2,2) with reflections, not symplectic.
 - **Confidence:** high.
 - **Reason:** The algorithm's invariant form is unique and symmetric, which is the middle convolution of a symplectic system by a quadratic character. It agrees with the previous memo's F_p identity S_p − 2 ≡ ±a_p(E₊)a_p(E₋) (mod p) in 117 of 117 rows.
+
+## Disposition (appended 2026-10-25; prediction and scoring rules above unchanged)
+
+**TG1: MISSED. TG2, TG3, TG4, TG5: UNDECIDED.** Data: addenda 3 and 4 of
+`docs/predictions/2026-10-23_price_formula_slots.md`. With the denominator gap closed and at twelve primes, none of
+R_V and the four Legendre pullbacks is equivalent to a right or left factor of F_8, and F_8 has no order-one end.
+Y's minimal operator has a factor equivalent to an irreducible right factor of F_8, which is none of the types TG1
+allows. Cap: the box.
+
+- TG2 (largest piece of order 4): not decided, since the irreducibility of F_8 is not proved.
+- TG3, TG5: the order-4 factor is not found, so UNDECIDED by the rule.
+- TG4 (order 13): the order of the minimal operator is not decided.
+
+Reading, not scored. The prediction agrees with the first geometric route on every piece, by two new computations
+(an Artin-Tate count of the top cut in 187 of 187 rows, and a Katz middle convolution of the Legendre bubble). The
+data agree with both routes on the local types at most points and disagree on the pieces. One place the data and the
+prediction can be compared directly: at x = 1 and x = 9 F_8 has two eigenvalues -1, and the predicted K3 piece has
+one. A rank-4 piece induced from E+ over the conic w^2 = (x - 1)(x - 9), rather than tensor-induced, would have two.
+That is a hypothesis for the next test, not a result.
+
+Addendum (2026-10-25): the induced-system hypothesis above was tested (PF record, addendum 5). The induced system
+and its three twists are at neither end of F_8, at numerator degree up to 800. The scores stand.

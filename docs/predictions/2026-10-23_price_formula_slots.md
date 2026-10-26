@@ -389,3 +389,38 @@ transcendental part sits in one block with none of the predicted pieces at eithe
 
 Owed. A proof or refutation that F_8 is irreducible: a better-conditioned monodromy computation, or an
 exterior-power or eigenring argument. And the order of M.
+
+## Addendum 4 (2026-10-25; everything above unchanged): a gap in the map search, closed
+
+Reading the second geometric prediction (`docs/predictions/2026-10-25_tetrahedron_route_y.md`) showed that the map
+box of addendum 3 allowed poles only at the eight cuts. A map from a Legendre pullback can need a pole at the
+source's own apparent point x = B^2 - gamma^2 (7/4, -8, -5/4, -5), and the direct pullbacks are also singular at
+25/4 and 25. The planted controls of addendum 3 needed no such pole, so they could not catch the gap.
+
+- Fix (`debug/pf_12_hom.py`, `source_extra`): the denominator is now the product over the eight cuts times every
+  other factor of the source's leading coefficient. R_V has none, so its search was already complete in its poles.
+- New discriminating control (`debug/pf_12d_hom_rerun.py`): each Legendre source planted as F_1 o (S o (x - x_a)),
+  whose map y -> y/(x - x_a) needs that pole. Old denominator: nullity 0 at both primes for all four sources. New
+  denominator: nullity 1 at both primes for all four.
+- Re-run with the fixed box (a 8, b 6, numerator degree 300; R_V at degree 500): nullity 0 for every source into
+  F_8, F_8*, L and L*.
+- Twelve primes (`debug/pf_12e_hom_primes.py`): nullity 0 at all twelve, for every source into F_8 and F_8*, both
+  t-parities. A factor equivalent to a source only over a quadratic field would give maps at the primes where the
+  field's discriminant is a square, so this also excludes that case.
+
+The scores of addendum 3 stand.
+
+## Addendum 5 (2026-10-25; everything above unchanged): the induced system, and numerator degree 800
+
+- Hypothesis from the TG disposition: F_8 contains the rank-4 system induced from Bailey's curve E+ over the conic
+  w^2 = (x - 1)(x - 9), which has two eigenvalues -1 at x = 1 and 9 as F_8 has, rather than the tensor-induced K3.
+  `debug/pf_13_induced.py` builds its order-4 operator exactly over Q(x), for f = g F(lambda+(x)), F a Legendre
+  solution, lambda+ = (x - 3 + w)/(2x), and four twists g = 1, sqrt(lambda+), sqrt(1 - lambda+),
+  sqrt(lambda+ (1 - lambda+)). Each annihilates f and its conjugate to 1e-42 at x = 12, and each has exactly two
+  half-integer exponents at x = 1 and at x = 9. None is equivalent to a right or left factor of F_8 (fixed box,
+  numerator degree 300 and 800, two primes).
+- Numerator degree 800 (`debug/pf_12f_hom_deg800.py`), for R_V, the four Legendre pullbacks and the four induced
+  sources: nullity 0 into F_8 and F_8*, both t-parities, two primes. Planted right and left factors F_8 o S(theta+1)
+  and S o F_8 are found at this degree for R_V and z_1.
+
+The scores of addendum 3 stand. The predicted pieces, and the induced one, are at neither end of F_8.
