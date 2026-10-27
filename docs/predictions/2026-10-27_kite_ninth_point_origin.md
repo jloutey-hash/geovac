@@ -302,3 +302,116 @@ The other items (ND0, ND3, ND4, NM2-NM4) are scored separately and do not change
 - ND3's rate points have their own coincidences. For example, R_c makes the pairing {1,3} equal-mass, which
   may change masters. That is exactly what (a) tests.
 - ND4 numerics may not find all 22 points. In that case it is not scored, by rule.
+
+## Disposition (appended 2026-10-27; predictions above unchanged)
+
+**Short run, PI-directed: ND0, ND1, ND2, NM0, NM1 only.**
+
+| Item | Verdict |
+|:--|:--|
+| ND0 | HELD; method gate passed |
+| ND1 | HELD |
+| ND2 | HELD |
+| NM0 | PASSED; Question M scored |
+| NM1 | HELD |
+| ND3a, ND3b, ND4, NM2, NM3, NM4 | not run (PI chose a short run) |
+| Gate | GO (derived) |
+
+Scripts:
+- `debug/nq_engine.py` (critical-point ideal, count and traces)
+- `debug/nq_scan.py` (sampling driver)
+- `debug/nq_counts_serial.py` (direct counts)
+- `debug/nq_fit.py` (trace rebuild and the drop polynomial D_eps)
+- `debug/nq_lift.py` (attempted lift to Q)
+- `debug/nq_nd12.py` (ND1, ND2)
+- `debug/nq_broadhurst_check.py` (credit check below)
+
+Data and logs: `debug/data/nq_*`. Primes: p0 = 2^61 - 1, p1 = 2305843009213693921.
+
+- **ND0, HELD.**
+  - 84 random z at eps = 0, p0, all with count 22. The six traces were rebuilt at degrees at most 10 over 10, and
+    all passed 6 of 6 held-out points.
+  - D_0 has degree 16. Its roots are 0 (power 3), -111/1120, -25, -1/4, -25/4, -1/9 (power 1), and -25/9,
+    -121/9, -25/36, -529/36 (power 2). Nothing else.
+  - The gate printed PASS before anything else was read.
+  - None of -100/9, -16/9, -625/36, -49/36, -73/9, -277/36 is a root.
+  - So at P2 the massless drop locus is exactly the ten points: the cut rule's eight, z = 0, and z9.
+  - Log: `nq_fit_e0_p0.log`.
+- **ND1, HELD.**
+  - The lex elimination in components, saturated by k2, finished in under a second at each point. At P2, R1 and
+    R2 (seeded: R1 = (100, 81/16, 1521/16, 729/4), R2 = (225, 1/16, 729/49, 1296)) the z-eliminant is exactly
+    the model factor, to power 1.
+  - There is no {1,2} cut factor and no other factor.
+  - Log: `nq_nd1.log`.
+- **ND2, HELD.**
+  - At P2 the configuration has all five on-shell residuals exactly 0.
+  - The loop-equation matrix has rank 4, so the null space has dimension 1:
+    alpha* = (-49000/9711, 44800/9711, 49000/5511, -44800/5511, 1). All five components are nonzero and finite;
+    they are real, of mixed sign.
+  - U(alpha*) = 0 exactly. Reported, not scored: F(alpha*) = 0 as well.
+  - Log: `nq_nd2.log`.
+- **NM0, PASSED** (direct counts first, `nq_counts_nm0.log`). At eps = 1/400:
+  - The count is 29 at -(11/3 + 1/20)^2 and at -(5/3 - 1/20)^2.
+  - It is 30 at both points + 1/1000 and at -37/101.
+  - In the trace scans, the four roots -(11/3 +- m)^2 and -(5/3 +- m)^2 are present in D_eps at eps = m^2 for
+    m = 1/20, 1/40 and 1/80, at p0 and at p1. Each fit script printed CONTROL VERDICT: PASS before any other root.
+- **NM1, HELD.**
+  - At eps = 1/400, 1/1600 and 1/6400 (p0: 84, 60 and 60 samples; p1: 30 each), every sample has count 30, and
+    the traces have degrees at most 10 over 10 with all held-out points passing.
+  - D_eps has degree 17 at each eps and each prime.
+  - The model quadratic divides D_eps at p0 and at p1, for all three eps.
+  - Negative control: the quadratic with eps x 1001/1000 divides at none of the six (eps, prime) pairs.
+  - Log: `nq_nm1_negctl.log`.
+  - *Unscored observation* (NM2 was not run). At p0, eps = 1/400, D_eps factors as:
+    - 0 (power 3);
+    - the four eps-free points -25, -1/4, -25/4, -1/9;
+    - the eight massive three-line thresholds -(a +- g2 +- m)^2 and -(b +- g1 +- m)^2;
+    - the model quadratic.
+
+    Nothing else. So no other drop point appears anywhere in z at that eps. The NM2 window clause, the
+    lift-dependent part, was not scored.
+- **Reading.**
+  - z9 is the leading Landau singularity of the kite with all five lines on shell and k, w-k, q coplanar. Its
+    multipliers have U = 0, which is why the parametric test (U != 0) missed it.
+  - With a Coulomb mass it continues as a drop curve through (z9, 0), on the model's curve C(z, eps) = 0.
+  - The point does not exist only because line 5 is massless. At eps = 0 the second branch has left to infinity,
+    so only one point is left. (That infinite branch is NM3, which was not run.)
+  - The -7/2 exponent agrees with the Baikov maximal-cut rule; that is a postdiction only.
+  - Paper 59's sentence that the point "belongs to the massless line" needs restating. That is a PM/PI call; this
+    record does not edit papers.
+- **Novelty.**
+  - **[PRIOR ART] for the location:** Broadhurst, "Multivariate elliptic kites and tetrahedral tadpoles",
+    arXiv:2212.01962 (v2). Sec. 3, Eq. 25 gives the pole s3 of the two-particle cut as the rung mass goes to 0.
+    With his lines 1-5 = our a, b, Coulomb, g1, g2 and s = -z, s3 = -z9. The abstract page and the HTML equations
+    were fetched in this run.
+  - **Same mechanism as ND1.** His Eqs. 8-9 give the anomalous thresholds s+- of the triangles that form the
+    kite: the two lines of one two-particle cut plus the rung, with the other two lines on shell. Mapped as
+    above, s+- are exactly the two roots of this record's curve C(z = -s, eps) = 0. This was checked at P2 with
+    eps = 1/400 and at one random rate point, residual 0 at 120 digits (`nq_broadhurst_check.py`,
+    `nq_broadhurst_check.log`).
+  - So the coplanar on-shell (U = 0) pinch is his triangle anomalous threshold, and the record's massive branch
+    is his s+ (his s- is the branch that runs to infinity).
+  - What this run adds is a measurement on the D = 3 kite: the Euler/trace-pole drop locus at P2 is exactly the
+    ten points, and the multiplier structure is U = 0. It is not a new location or mechanism.
+  - Baikov and Gram-determinant references stay as registered: listing-level, to be verified before citation.
+- **Deviations, disclosed.**
+  1. *ND2 relaunch.* The first ND2 run had a sign error in k1: it took k1 = (z + A - B)/(2 om) instead of
+     (z - A + B)/(2 om). Its on-shell residuals were nonzero, so it was discarded
+     (`nq_nd2_try1_wrong_k1.log`) and rerun after the fix.
+  2. *Fewer samples than registered.* The scans used 84, 60 and 60 samples at p0, not 140. The degrees came out
+     at most 20, so fits had at least 30 spare points. This direction is conservative.
+  3. *A partial fit was looked at early.* While the eps = 1/400 scan ran, I fitted it at 54 samples. I read only
+     the degree lines and deleted the output, then refitted on all 84 with controls first.
+  4. *The p0 lift to Q failed.* The trace coefficients do not reconstruct from one 61-bit prime. The registered
+     check "lift confirmed on 6 p1 samples" was therefore replaced by an independent rebuild at p1, with 24 more
+     p1 samples per eps (30 each). NM1's "p0 and p1" clause was then tested directly, mod p1.
+  5. *A first fit printed no gate verdict.* The first ND0 fit used `--controls=...` syntax, which the parser
+     ignored, so it printed only the factorization. It was rerun with the gate.
+  6. *A cosmetic label.* The fit script's "mod p0" print label also appears on p1 fits. The prime is read from
+     the data.
+- **Compute.**
+  - Wall: 08:17-10:23, about 2.1 h, within the 3 h hard cap.
+  - Samples: 84 massless trace samples, 294 massive trace samples (204 at p0, 90 at p1), and 5 direct counts.
+  - About 65 s processor time per massless sample and 130 s per massive sample, under the 180 s STOP.
+  - Never more than 8 processes of mine at once. No processes I did not start were touched. No python process was
+    left running.

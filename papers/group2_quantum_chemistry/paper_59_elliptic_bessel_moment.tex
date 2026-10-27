@@ -157,7 +157,16 @@ four-dimensional (Fock)
 hyperspherical harmonics goes back to Niukkanen~\cite{niukkanen1984}, and the
 general one- and two-electron multicenter integrals close, via the
 Fourier-transform method together with Feynman's identity, to low-dimensional
-numerical quadrature~\cite{grotendorst_steinborn1988}.  Momentum-space
+numerical quadrature~\cite{grotendorst_steinborn1988}.  Recently the
+four-center two-electron integral over Slater orbitals has been reduced, by
+cached Fourier--Bessel coefficients, to one radial quadrature, at about
+$4\times10^{5}$ integrals per second on one GPU in a preliminary
+benchmark~\cite{chen2026fourier};\ that is the production baseline for any
+cost claim below.  Formulas in elementary functions for three- and four-center
+Slater integrals have also been given~\cite{novosadov2025}, but they drop the
+cross term in the gradients of two orbitals, on the ground that the cosine
+between them averages to zero, so they are estimates, not exact closed forms.
+Momentum-space
 Coulomb--Sturmians are hyperspherical harmonics under Fock's conformal
 projection~\cite{fock1935}, the framework the Averys built into the
 generalized-Sturmian method~\cite{avery1989,avery2006,avery_avery2015} and
@@ -1736,7 +1745,9 @@ $12$\,s per value, against $0.02$\,s for one more grid sum, because once the
 kite is known the outer integral is a cheap sum.  The structure pays where
 the cost is, in the inner kite.  Caps:\ one parameter set, so a new
 configuration needs a new derivation, which dominates the cost;\ times on one
-machine, with the quadrature's processor time an upper bound;\ and no
+machine, with the quadrature's processor time an upper bound;\ the
+comparison is to this paper's own grid, not to a production Slater-integral
+code such as Ref.~\cite{chen2026fourier};\ and no
 certified error bounds, only agreement with the grid (record
 \texttt{docs/predictions/2026-10-26\_operator\_evaluator.md}, registered before
 computing).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
@@ -1756,9 +1767,7 @@ at $z=-111/1120$, with exponents $-7/2,0,1,\dots,9$, and the leading Landau
 equations of the kite and of its contractions have no solution there.  A
 count of critical points of the Lee--Pomeransky likelihood, which equals the
 number of masters at a generic point, confirms it:\ $22$ at generic $z$, $21$
-there, at two primes.  The drop is in the full kite only, and it disappears
-when the Coulomb line is given a small mass, so the point belongs to the
-massless line.  Its position has a closed form in the squared rates
+there, at two primes.  The drop is in the full kite only.  Its position has a closed form in the squared rates
 $A=a^2$, $B=b^2$, $G_1=\gamma_1^2$, $G_2=\gamma_2^2$:
 \begin{equation}
 z_9=\frac{(AG_2-BG_1)(A-B-G_1+G_2)}{(A-G_1)(B-G_2)} .
@@ -1774,9 +1783,30 @@ unknowns, and passed $18$ held-out sets at two primes;\ it reproduces
 $-111/1120$ at the blind point, and on the family $(1,2,3/2,\gamma_2)$ the
 critical-point count drops from $22$ to $21$ exactly at $z_9$ (record
 \texttt{docs/predictions/2026-10-26\_kite\_ninth\_point.md}, registered before
-computing).  It is measured, not derived, and whether the point comes from
-the massless Coulomb line is open:\ the massive test was void, its positive
-controls failing.  The operator's degree,
+computing).  \textbf{[PRIOR ART]} The location is known.  Broadhurst gives
+it, with $s=-z$, as the pole $s_3$ that the two-particle cuts of the kite
+acquire when its rung becomes massless with unequal adjacent masses
+(Ref.~\cite{broadhurst2022kites}, Eqs.~(24)--(25));\ it is the massless-rung
+limit of the anomalous threshold of the triangle formed by the two lines of
+one cut and the rung, the other two lines on shell, which the kite's own
+leading Landau equations do not contain.  \textbf{[MEASURED]} A registered
+test confirms that this is the mechanism here.  With all five lines on shell
+and the loop momenta in one plane, eliminating the equations in components
+gives exactly the factor of Eq.~\eqref{eq:kite_ninth_point} at three sets of
+rates and no other.  The multipliers are all nonzero, and the first Symanzik
+polynomial $U$ vanishes on them, which is why a Landau test that requires
+$U\neq0$ misses the point.  Given a small Coulomb mass, the point does not
+vanish but moves:\ the count drops on a curve through $(z_9,0)$, one of
+Broadhurst's two triangle thresholds, while the other runs to infinity as the
+mass goes to zero.  A scan in $z$ that assumes no location finds, at the blind
+rates, exactly ten drop points:\ $z=0$, $z_9$ and the eight cut values.  Caps:\
+the massive curve is checked modulo two primes at three masses, not over the
+rationals, and the local shape, the drop size on the curve and the escape
+direction were not run (record
+\texttt{docs/predictions/2026-10-27\_kite\_ninth\_point\_origin.md}, registered
+before computing).  What is added here is the measurement in this family:\ the
+critical-point drop, the exponent, and the complete drop locus at one set of
+rates.  The operator's degree,
 $120$, exceeds the prediction, and its coefficients needed a fourth prime.
 With $\gamma_2^2$ left free the differential system has degree $16$ in it,
 but the kite written in the masters has degree $26$, so the one-parameter
@@ -1796,6 +1826,21 @@ class would speed the run by at most $1.27$ times, and a free kernel build by
 $1.03$ times.  Caps:\ one run per truncation on one machine;\ a reduced
 truncation is no proxy, giving $48\%$ (record
 \texttt{docs/predictions/2026-10-26\_lih\_triangle\_share.md}, registered
+before computing).
+
+\textbf{[MEASURED]} Whether the one-mass slice could be tabulated, as Gaussian
+codes tabulate the Boys function, depends on how many master integrals it
+needs and in how many variables.  Counting critical points, as for the kite,
+the slice needs four masters, and the index range the production code uses
+needs a fifth, an antiderivative in $D$ from a pole at $x=0$;\ a scaling
+identity leaves two variables.  By the registered gate this is borderline:\ a
+table is not ruled out, but its speed against a production
+code~\cite{chen2026fourier} is untested.  The physical fibre, with two
+offsets, needs six masters in three variables.  Caps:\ the scaling identity
+missed its registered precision, $2.7\times10^{-25}$ against $10^{-25}$, and
+an unregistered rerun agrees to $1.6\times10^{-37}$;\ these are counts of
+masters, not the cost of a table (record
+\texttt{docs/predictions/2026-10-27\_master\_count\_tabulation.md}, registered
 before computing).
 
 \textbf{[MEASURED]} Production explicitly correlated codes do not use a
@@ -1938,8 +1983,9 @@ six Taylor coefficients, rebuilds the grid behind $Y$ to the grid's own
 precision in about a thirteenth of the upper bound on the quadrature's
 processor time, derivation included, while $Y$'s own operator is slower than one more grid sum.  At a
 second set of rates the cuts predict eight of the kite's nine singular points;\ the ninth has a measured closed
-form in the squared rates, set by the adjacent pairings the cuts ignore, and it sits on $z=0$ at the original
-rates.  In
+form in the squared rates, a known triangle threshold of the massless-rung kite (Broadhurst), confirmed here
+as an on-shell pinch that moves, not vanishes, at a small Coulomb mass, and it sits on
+$z=0$ at the original rates.  In
 the LiH calculation the triangle class is a fifth of the run and its kernel build three percent.  A
 six-Gaussian geminal fit that a production code ships misses $Y$ by five to
 thirteen percent, through its tail and not its cusp.
@@ -1993,6 +2039,22 @@ to calculate $\beta$-functions in 4 loops,'' \textit{Nucl.\ Phys.\ B}
 S.~Laporta, ``High-precision calculation of multi-loop Feynman integrals by
 difference equations,'' \textit{Int.\ J.\ Mod.\ Phys.\ A} \textbf{15}, 5087
 (2000);\ arXiv:hep-ph/0102033.
+
+\bibitem{chen2026fourier}
+W.~Chen, L.~Silberman, U.~Segal and C.~Greif, ``Fourier transform-based
+computation of two-electron four-center Coulomb repulsion integrals,''
+arXiv:2610.12608 (2026).
+
+\bibitem{novosadov2025}
+B.~K.~Novosadov, ``An operator method for calculating matrix elements of
+quantum chemistry in the basis of Slater orbitals.\ Formulae for 3- and
+4-center integrals,'' \textit{Mat.\ Model.} \textbf{37}(2), 88--98 (2025),
+in Russian;\ doi:10.20948/mm-2025-02-07.
+
+\bibitem{broadhurst2022kites}
+D.~Broadhurst, ``Multivariate elliptic kites and tetrahedral tadpoles,''
+arXiv:2212.01962 (v2, 2024), to appear in the proceedings of LT-15 (Varna,
+2023).
 
 \bibitem{pkp2009}
 M.~Puchalski, D.~K\c{e}dziera and K.~Pachucki, ``Ground state of Li and

@@ -261,3 +261,82 @@ Predicted: **BORDERLINE**, probability 0.75.
   terms on the slice, a second local system enters: two tables, 4 or 5 each. That would move MC5 to STOP under
   the rule above. This is stated now so it cannot be read either way after the fact.
 - C3 may be expensive under saturation. The cap handles it.
+
+## Disposition (appended 2026-10-27 after phase 2; the predictions above are unchanged)
+
+**Runs.** Scripts: `debug/mct_counts.py`, `debug/mct_mc3.py`, `debug/mct_mc3_rerun.py`. Logs:
+`debug/data/mct_c1_kite.log`, `mct_controls.log`, `mct_slice.log`, `mct_fibre.log`, `mct_mc3.log`,
+`mct_mc3_rerun.log`. At most 2 of my processes ran at once. Total wall about 6 min, against a cap of 2 h. No process
+I did not start was touched.
+
+**Deviations, disclosed.**
+1. **Order of runs.** C1 (kite) was started first, in the background. C2-C5 ran and passed next. The slice counts
+   (MC1, MC2, MC2b, MC4) and MC6 then ran *before* C1 finished. C1 finished at 74 s wall and passed, so the voiding
+   rule was not triggered. Strictly, though, "MC0 first" held for C2-C5 only, not for C1.
+2. **MC3 rerun.** The registered run at mp.dps = 45 gave a worst relative difference of 2.7e-25, which is a literal
+   miss of the 1e-25 threshold.
+   - Both forms agree to that level at all three points, so the limit is the quadrature, not a mismatch.
+   - A rerun at dps = 70, on the same points, forms and breakpoints, gave 1.6e-37.
+   - The rerun was not pre-registered.
+3. **MC4 random points.** The fixed (Dhat, sigma) for the two scans was the first MC1 point. The 40 scan points came
+   from the same seeded generator, drawn after the MC1 and MC2 points.
+4. **MC6 at D2 = 0** (reported, not scored). In the conic-quotient chart the count is 6, not 4.
+   - Route F does not project onto the w -> -w character, so it counts both w-parities of the k-odd sector.
+   - The record's claim that "at D2 = 0 the extra symmetry cuts this to the 4 of the slice" therefore concerns the
+     w-odd eigenspace, and was not tested. The registered hand reading implies a split 6 = 4 + 2.
+   - This bears only on that consistency sentence, not on the MC6 prediction, which was made at D2 != 0.
+
+**Scores.**
+
+| ID | Result | Verdict | Class |
+|:--|:--|:--|:--|
+| MC0 | C1 kite = 22 (`lit_scan_euler_kite.py` unchanged, p = 32003); C2 bubble = 3; C3 sunrise = 7; C4: Gamma 1, Bessel 2 (generic and -1/2), Kummer 2; C5 Gauss 2F1 = 2. Exact and mod-p0 counts agree. | HELD (all pass) | control |
+| MC1 | 4 at all 5 points; Route X generic and actual, Route M generic and actual; exact = mod p0 | HELD | CHECK |
+| MC2(a) | n1 = 1, n2 in {1,2,3}: 4 at all 3 points | HELD | CHECK |
+| MC2(b) | n1 in {2,3}, all n2: 5 at all 3 points, generic and actual exponents | HELD | CHECK |
+| MC2(c) | Route M: 4 for all 9 (n1, n2) at all 3 points | HELD | CHECK |
+| MC2b | n1 = 1: 4; n1 in 2..5: 5, for n2 in {1,3,5}, at 3 points | HELD | CHECK |
+| MC3 | Scaling identity: 2.7e-25 at dps 45 (literal miss, quadrature-limited); 1.6e-37 on the disclosed rerun | MISSED as registered (literal threshold; quadrature-limited). The disclosed rerun agrees to 1.6e-37 but was not registered (PM rescored the agent's HELD before commit). Two scaled variables stands on the rerun as unregistered evidence | CHECK |
+| MC4 | 4 at all 40 random points; 3 at sigma = 1; 2 at sigma = 0; 3 at Dhat = 0 | HELD | CHECK |
+| MC5 | See below | **BORDERLINE**, as predicted | -- |
+| MC6 | Two-offset fibre, conic quotient: 6 at 3 points (generic and -1/2), exact = mod p0 | HELD | CHECK |
+
+**Production index set, checked before scoring MC5.**
+- No module in `geovac/` evaluates the three-centre slice or fibre. The evaluators are:
+  1. `tests/test_routeC_momentum.py`, `_slater_density_ft` and `test_momentum_angular_reduced_j0_form`.
+     - These keep the *unit-index* Yukawa-product kernel e^{-D Delta}/Delta, with
+       Delta^2 = s(1-s)k^2 + s zA^2 + (1-s) zB^2.
+     - They take the two zeta-derivatives per density by central finite differences, at displaced masses.
+  2. `debug/routeC_hp_evaluator.py`, `P(x, k)` (lines 83-86).
+     - This is the analytic form, c e^{-Delta}(Delta^{-3} + 3 Delta^{-4} + 3 Delta^{-5}), written at D = 1.
+     - In general D it is D^2 Delta^{-3} + 3D Delta^{-4} + 3 Delta^{-5}, so the indices are **{3, 4, 5} per
+       density**.
+  3. The slice pins in `tests/test_routeC_momentum.py` (from line 247). These evaluate L(D, rho) and its
+     x^k moments (D-derivatives) at unit index only. That is the family F_D.
+- On the slice, D2 = 0 kills the D2^2 and D2 terms of the second density, which leaves **n2 = 5 only**. So the
+  actual analytic slice index set is **n1 in {3, 4, 5}, n2 = 5**.
+  - This is a subset of the registered MC2b set {1..5} x {1,3,5}.
+  - It contains no n1 = 1 member: every member has the x = 0 pole.
+  - Its n2 is odd, so there is one local system.
+  - Its members' counts were all measured in MC2b: 5 each.
+- The finite-difference route avoids index shifts by varying the masses instead. A table used that way needs the
+  mass dependence. By MC3 that dependence is carried by (Dhat, sigma) plus prefactors, so this adds no variable.
+
+**MC5 gate.**
+- F_D = 4 masters (MC1). F_prod = 5 masters, with the extra one the x = 0 pole, the D-antiderivative (MC2b). The
+  actual set {3,4,5} x {5} also gives 5.
+- Scaled variables: 2 (MC3).
+- Outcome: **BORDERLINE**.
+- The registered risk did not occur: no even n2 enters on the slice, so there is no second local system and no
+  STOP.
+
+**What this does and does not establish.**
+- **It establishes** that tabulation is not ruled out for the slice. The shape is 4 masters (5 with the
+  antiderivative) in 2 scaled variables. The Mellin picture (MC2(c)) also shows the fifth master is an
+  antiderivative, so it could be carried by one extra tabulated function or by a D-quadrature of L.
+- **It does not establish:**
+  - any speed claim (the test against arXiv:2610.12608 is still owed, in its own record);
+  - anything about the physical integral. The two-offset fibre has 6 masters (MC6) in 3 scaled variables, plus b
+    from j0, plus the outer (s, t) integrals.
+  - the stability of the recurrences.
+- Every scored item is a CHECK of standard machinery. There is no FINDING, as the novelty section anticipated.

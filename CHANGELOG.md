@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.17] - 2026-10-27
+
+PI-directed ("Hey, let's also send out an explorer agent to search for prior art"; "Short run"; "Let's do these
+recommendations. Can we get the Novosadov paper tho?").
+
+### Added
+- **PRIOR ART for the ninth point.** Broadhurst, arXiv:2212.01962 (v2 2024, LT-15 proceedings), Sec. 3 Eqs. 24-25:
+  s3 = -z9 under the mapping (1,2,3,4,5) = (a, b, Coulomb, g1, g2). It is the massless-rung limit of the anomalous
+  threshold of the triangle {two lines of one cut + rung}, other two lines on shell. PM checked it against the
+  rendered page and by hand at P2 (s = 111/1120). Memo `debug/lit_scan/ninth_point_formula_prior_art_memo.md`.
+- **ND0, ND1, ND2, NM0, NM1 HELD; gate GO (derived). Origin of the ninth point and its massive branch**
+  (`docs/predictions/2026-10-27_kite_ninth_point_origin.md`, committed alone before computing, 78c5ea3a). Short run
+  (PI): ND3a/b, ND4, NM2-NM4 not run.
+  - ND0: hypothesis-free trace-pole scan at eps = 0, P2, 84 samples mod p0: exactly ten drop points (z = 0, z9, the
+    eight cut values); none of the six decoys.
+  - ND1: component elimination of the on-shell, non-collinear system (no Gram identity) gives exactly the z9 factor
+    at P2, R1, R2.
+  - ND2: one-dimensional multiplier solution, all five nonzero, U(alpha*) = 0 exactly (F(alpha*) = 0, unscored).
+    This is why the parametric Landau test (U != 0) missed it.
+  - NM0: controls passed (direct counts 29 on the two threshold branches, 30 off them; all four threshold roots in
+    every D_eps at both primes).
+  - NM1: the model quadratic divides D_eps at p0 and p1 for eps = 1/400, 1/1600, 1/6400; eps x 1.001 control divides
+    in none of six cases. With a Coulomb mass the point moves on a drop curve through (z9, 0); the second branch
+    runs to infinity as eps -> 0.
+  - Agent check: Broadhurst's Eqs. 8-9 thresholds s+- are exactly the two roots of the record's curve (residual 0 at
+    120 digits, `debug/nq_broadhurst_check.py`): same mechanism, not just same location.
+  - Deviations disclosed in the record: ND2 first run had a sign error (discarded, log kept); 84/60/60 samples
+    instead of 140 (degrees <= 20); one early peek at degree lines; the Q-lift replaced by an independent rebuild mod
+    p1 (30 samples per eps); ND0 fit rerun to print its controls. PM review: no rescoring; NM1 was registered as
+    divisibility at both primes.
+  - Scripts `debug/nq_*.py`; data `debug/data/nq_*`.
+- **MC0-MC2b, MC4, MC6 HELD; MC3 MISSED as registered; MC5 BORDERLINE (as predicted). Master count for
+  tabulating the one-mass slice** (`docs/predictions/2026-10-27_master_count_tabulation.md`, committed alone before
+  computing, d6731471).
+  - Slice F_D: 4 masters; production index set (n1 in {3,4,5}, n2 = 5): 5, the extra one an antiderivative in D from
+    the x = 0 pole; 2 scaled variables. Two-offset fibre: 6 masters in 3 variables (MC6).
+  - MC3 rescored by the PM from the agent's HELD: the registered run gave 2.7e-25 against a 1e-25 threshold; an
+    unregistered rerun agrees to 1.6e-37.
+  - Scripts `debug/mct_*.py`; logs `debug/data/mct_*.log`.
+- **Brown-circle methods survey** (`debug/lit_scan/brown_circle_methods_memo.md`): nothing makes a single ERI
+  cheaper; candidates ranked (system stepping, Euler-characteristic master counts, feyntrop cross-check, Boys-like
+  tabulation, intersection theory). Chen-Silberman-Segal-Greif arXiv:2610.12608 is the production baseline.
+- **Novosadov, Mat. Model. 37(2) 88-98 (2025)**, read in full (Russian): the three- and four-centre formulas drop the
+  gradient cross term ("averages to zero"), so they are estimates, not exact closed forms.
+
+### Changed
+- Paper 59 `sec:density_ring`: Broadhurst [PRIOR ART] paragraph; "belongs to the massless line" withdrawn and replaced
+  by the confirmed mechanism (on-shell coplanar pinch, U = 0, moves rather than vanishes at a small Coulomb mass) with
+  caps; new [MEASURED] master-count paragraph after the LiH triangle share; lineage paragraph cites Chen et al. and
+  Novosadov; operator-cost caps name Chen et al. as the production comparison not made; conclusion sentence updated.
+  Three bibitems added. Abstract and conclusion reread; abstract unchanged.
+- Group 2 synthesis, `docs/atlas.md` door 27, `docs/claim_test_matrix.md` (ninth-point row).
+
 ## [v5.21.16] - 2026-10-27
 
 PI-directed ("Let's do those things"; "let's document in paper 59, then checkpoint").
