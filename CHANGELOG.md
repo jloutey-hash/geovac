@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.18] - 2026-10-27
+
+PI-directed ("Yes please. Let's do that H2 one then the water one after"; "Yes please. Good work"; "Yes").
+
+### Added
+- **HG0-HG2, HG4 HELD; HG3 NOT RUN; gate GO. The H2 Slater-geminal master integral and Paper 59's elliptic curve**
+  (`docs/predictions/2026-10-27_h2_geminal_elliptic.md`, committed alone before computing, dc0f7cce).
+  - PRIOR ART read first: Pachucki arXiv:0905.1635 (no geminal: second order, Bessel); Lesiuk and Moszynski,
+    PRA 86, 052513 (2012), arXiv:1209.0839 (geminal: fourth order, "hyper-Bessel functions", s2 = 0 special cases).
+    PDF in `debug/lit_scan/dl_lesiuk2012/` (untrusted, excluded from git).
+  - HG1: LM Eq. 54 = Paper 59 eq:pf under r = D/t1, rho = T1/(T1 - T2), exactly.
+  - HG2: Delta = 4 x the D = 3 Baikov (Gram) determinant of the tetrahedron's loop momenta on its maximal cut, exactly
+    (independent of LM's Eqs. 32-33; confirms the transcription).
+  - Derivation (PM): both operators are r Delta(d/dr) + Delta'(d/dr)/2, the Laplace image of a maximal cut with
+    exponent -1/2. Dictionary: geminal exponent -> 0 is rho -> 0 (Bessel); s2 = 0 is rho = 1 (equal-scale collapse).
+  - HG4: s2 = 0 (genus zero) on James-Coolidge, Kolos-Wolniewicz / symmetric exchange, (AA|AA), (AB|AB); genus one
+    on (AA|BB), (AA|AB) and unequal exponents. Classifies the master's operator, not the physical integrals.
+  - HG3 not run: an independent 1e-15 value of the six-dimensional master was not attempted; gate does not need it.
+  - Scripts `debug/hg_symbolic.py`, `debug/hg2_baikov.py`; logs `debug/data/hg_*.log`.
+- **WA0 PASS (as amended), WA1 MISSED, WA2 MISSED (E2), WA3 HELD; gate STOP as registered. Singular points of the
+  three-centre integral in the bond angle** (`docs/predictions/2026-10-27_water_angle_singularities.md`, committed
+  alone before computing, 0d7c3363; Addendum 1 correcting the WA0(a) reference committed before computing, 6b9aad1e).
+  - The PM's first pitch (water near a kite singular point) was withdrawn before registration: the kite is a piece
+    of the correlated triangle, and every three-centre integral sweeps rho over the Feynman parameters.
+  - Channel coefficients F_l are the Legendre coefficients in cos(gamma). WA3: one sign in all six cases, so the
+    linear geometry is not the nearest singular point. WA1: asymmetric rates 2.1-2.8% above D</D> (tolerance 1%).
+    WA2: symmetric water algebraic, p = 7.6 / 7.5; E2 log r = -0.0107 over the 0.01 limit.
+  - Deviation disclosed: the first alternation estimator (4 parameters on 4 points) fired falsely on controls and was
+    replaced, before any case, by the registered triples estimator.
+  - Unregistered follow-up: a 1/l term brings the asymmetric rates within 0.9% and 0.6%; symmetric r = 1.0006,
+    p = 8.05 (a (1 - x)^(7/2) singularity at gamma = 0 would give 8; not established).
+  - Scripts `debug/wa_channels.py`, `debug/wa_analyze.py`, `debug/wa_unregistered.py`; data and logs `debug/data/wa_*`.
+
+### Changed
+- Paper 59 `sec:f12`: "lives entirely in the densities, never in the operator" scoped to the physical integrals
+  tested; new [PRIOR ART + SYMBOLIC] paragraph on the two-centre geminal master (Lesiuk-Moszynski operator = eq:pf
+  rescaled); conclusion sentence; bibitem `lesiuk2012`. Water passage: [MEASURED] bond-angle sentences with caps.
+  Abstract reread, unchanged.
+- Group 2 synthesis: the F12 sentence scoped, with the geminal-master exception.
+- `docs/claim_test_matrix.md`: two new rows (guards owed); sec:f12 row scope note.
+- Not changed, flagged to the PI: the walls register's PERIODS-TRANSCENDENCE statement ("not by the operator between
+  the densities") carries the same clause; `/walls` is PI-invoked.
+
 ## [v5.21.17] - 2026-10-27
 
 PI-directed ("Hey, let's also send out an explorer agent to search for prior art"; "Short run"; "Let's do these

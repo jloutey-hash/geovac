@@ -110,3 +110,48 @@ gives coefficients about l^(-2 alpha - 1)).
 ## Disposition
 
 (Appended after computing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-27 by the PM; computed in the main session)
+
+Driver `debug/wa_channels.py` (modes `assign`, `control`, `cases`), scorer `debug/wa_analyze.py`; data
+`debug/data/wa_channels.json`; logs `debug/data/wa_{assign,control,cases,analyze}.log`. Wall time about 1 min.
+
+**Before scoring.**
+- Exponent assignment: the test's G has zA on X. The on-axis density transform at zX = 2.25, zH = 1.24 agrees with a
+  direct 2D quadrature (0.25230424 vs 0.25230424 at k = 0.7; 0.06075227 at k = 2), and the swapped assignment does
+  not. E2 uses the test's assignment.
+- *Deviation, disclosed.* My first WA3 estimator fitted 4 parameters to 4 consecutive l. That is interpolation, and it
+  read the curvature of a plain geometric sequence as alternation (4e-3 and 2e-2 on 1/|Y - Z|). It was replaced,
+  before any case was computed, by the estimator the record names: detrend by the WA1 fit, then the second
+  difference on adjacent triples. On the controls it gives about 1e-15 for 1/|Y - Z| and 3.0 for 1/|Y + Z|.
+
+| Item | Result | Verdict |
+|:--|:--|:--|
+| WA0(a) | channel sum 0.204941652531; REFEREE_NG16 diff 2.7e-10 (below 1e-9). Literal registered reference: diff -6.9e-8 | PASS as amended (Addendum 1); FAIL literally |
+| WA0(b) | 1/|Y-Z|: r = 0.72360000 and 0.55279160 (exact); D1 = D2: r = 1, p = 0 | PASS |
+| WA0(c) | 1/|Y+Z|: alternation fires (3.0) in all three | PASS |
+| WA1 | E1: r = 0.74243 (+2.6%), 0.56848 (+2.8%); E2: 0.74139 (+2.5%), 0.56440 (+2.1%). Usable l 15..36 and 15..23 | **MISSED** (all four over 1%) |
+| WA2 | E1: log r = -0.0083, p = 7.60, halves 7.50 / 7.72. E2: log r = -0.0107, p = 7.50, halves 7.38 / 7.67 | **MISSED** (E2 log r over 0.01; E1 holds) |
+| WA3 | alternation at most 3.5e-4 in all six; every F_l at l >= 15 positive | HELD |
+
+**Gate: STOP as registered** (WA1 failed). The registered reading of a WA1 failure was "a singularity other than
+coalescence". The evidence below points instead to the registered fit model being too crude, but that evidence was
+not registered.
+
+**Unregistered follow-up (does not change any score).** `debug/wa_unregistered.py`, log
+`debug/data/wa_unregistered.log`. E1 only, grid level 2, l to 60.
+- Adding a 1/l term to the fit: r = 0.72983 (+0.86%) and 0.55589 (+0.56%) for the asymmetric pairs. Symmetric water:
+  r = 1.00057, p = 8.05.
+- In every registered case the upper half of the l range gave r closer to D</D> than the lower half.
+- E1 and E2 rates agree to a few tenths of a percent, so the rate does not depend on the exponents.
+- Reading (not established): the nearest singularity is the coalescence of the outer centres, approached slowly by
+  the l-range available. For symmetric water p near 8 would be a (1 - x)^(7/2) singularity at gamma = 0, i.e. the
+  lowest odd power of |Y - Z| being the seventh.
+
+**WA4 (reported).** Bent water, x = -0.25, sits in the interior of the analyticity region in every case; the
+symmetric-water singular point is at gamma = 0 (H atoms merging), not at the linear geometry.
+
+**What stands.** WA3: no alternating component, so the linear geometry gamma = 180 deg is not the nearest
+singularity in any case tested, and the nearest one is on the gamma = 0 side. WA1's location is not confirmed at the
+registered tolerance. A clean test needs a fit model with subleading terms and more digits at higher l, registered
+in advance.

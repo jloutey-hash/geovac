@@ -817,8 +817,9 @@ decide the class---exactly as for the repulsion integral.
 
 \textbf{[OBSERVATION]} The consequence is a \emph{unification}, not an escape.  Explicitly-correlated integrals are
 native to the Fock momentum representation and cost the same as the corresponding repulsion
-integrals, because here the difficulty of a two-electron integral lives entirely in the
-densities, never in the operator between them.  In particular the elliptic obstruction of
+integrals, because here, for the physical integrals tested, the difficulty of a
+two-electron integral lives in the densities, not in the operator between them;\ the two-center
+master integral below is an exception at the level of its operator.  In particular the elliptic obstruction of
 this paper---the genuine three-center, two-two-center-density integral---gates
 explicitly-correlated \emph{evaluation} as well: the corresponding closed form (the
 kernel changes the kind of period, not the curve) that would evaluate the
@@ -830,6 +831,28 @@ from the same transcendence classes.  We do not here treat the many-electron
 (resolution-of-identity) machinery of a full F12 method, nor a resource comparison with tuned
 Gaussian F12; the statement is about the two-electron integrals, whose momentum-space
 transcendence we have mapped.
+
+\textbf{[PRIOR ART + SYMBOLIC]} The two-center integral with a Slater geminal shows where
+this reading needs care.  Take the two-electron master integral of a diatomic molecule, with
+an inverse power and an exponential on each of the five distances.  Without a geminal its
+equation in the bond length has second order and Bessel solutions~\cite{pachucki2009};\ with
+one it has fourth order, and Lesiuk and Moszynski defined its solutions by series and named
+them hyper-Bessel functions~\cite{lesiuk2012}.  Their operator is Eq.~\eqref{eq:pf} after a
+rescaling of the bond length.  Both have the form $r\,\Delta(d/dr)+\tfrac12\Delta'(d/dr)$
+for an even quartic $\Delta$, the Laplace image of a maximal cut with exponent $-1/2$.  Here
+$\Delta$ is four times the Gram determinant of the loop momenta of the tetrahedron, with
+every line on shell;\ that tetrahedron is the Laplace transform of the master
+integral~\cite{lesiuk2012}.  The geminal's exponent is the parameter:\ as it goes to zero,
+$\rho\to0$ and the operator falls to the Bessel one, as $N\to K_{0}$ above.  Both densities of
+the master lie on one pair of centers, so for this operator the kernel does change the class:\
+the same-pair collapse is a property of the Coulomb kernel.  Symmetric exponent patterns, the
+James--Coolidge and Ko\l{}os--Wolniewicz ones and the single-exponent $(AA|AA)$ and $(AB|AB)$
+classes, give $\rho=1$, the equal-scale collapse of Eq.~\eqref{eq:curve};\ the $(AA|BB)$ and
+$(AA|AB)$ patterns and unequal exponents give a genus-one operator.  Caps:\ this classifies
+the master's operator, not the physical integrals, which are its derivatives in the
+exponents;\ the master's source term and the published numbers were not re-checked;\ no
+earlier statement of the identification was found in a short search (record
+\texttt{docs/predictions/2026-10-27\_h2\_geminal\_elliptic.md}, registered before computing).
 
 %% ========================================================================
 \section{Beyond the third center:\ a fourth center, a three-electron chain, four linked densities, and a ring}
@@ -1906,7 +1929,19 @@ converge onto every value; for the O $1s$ core the Gaussians approach it from
 below and are still $6\times10^{-8}$ short at $18$ Gaussians, while the
 channel sum is stable to thirteen digits
 (\texttt{tests/test\_pairwise\_general.py},
-\texttt{tests/test\_pairwise\_three\_center.py}).  The elliptic content of
+\texttt{tests/test\_pairwise\_three\_center.py}).  \textbf{[MEASURED]} The channel sum
+is the Legendre series of the integral in $\cos\gamma$, $\gamma$ the bond angle, so the decay
+of its terms locates the nearest singular point of the integral as a function of the angle.
+In every case tested the terms keep one sign, so that point is not the linear geometry.  At
+water's equal bond lengths they fall like a power, about $\ell^{-8}$, which puts it at
+$\gamma=0$, where the two hydrogens would merge;\ at unequal lengths $D_1\neq D_2$ they fall
+geometrically, at a rate within $3\%$ of $D_</D_>$, the rate of $1/|Y-Z|$, whose only
+singular point is the two outer centers merging.  Bent water is an ordinary point.
+Caps:\ the registered tolerance for that rate was $1\%$ and it was missed in all four cases;\
+a fit with a $1/\ell$ term, not registered, comes within $1\%$;\ $1s$ orbitals with two
+exponent sets only (record
+\texttt{docs/predictions/2026-10-27\_water\_angle\_singularities.md}, registered before
+computing).  The elliptic content of
 Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  The radial core is a period of an irreducible connection
 (Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
 closed form through any factorization;\ that does not bar an accurate
@@ -1953,7 +1988,9 @@ complete elliptic integral.  The seventy-year difficulty of polyatomic Slater
 integrals is, at the level of transcendence, a genus jump; and a classical
 molecular integral turns out to be an instance of the modern theory of
 elliptic Feynman integrals---a bridge that, to our knowledge, had not been
-drawn.  The finite closed form remains open---and, we have shown, past the
+drawn.  With a Slater geminal the two-center master integral already reaches the same
+curve:\ its published fourth-order operator is the three-center one rescaled, and only
+symmetric exponent patterns collapse.  The finite closed form remains open---and, we have shown, past the
 reach of the sunrise's elliptic-dilogarithm mechanism, whose inhomogeneity is
 absent here: the object is a period of a rank-four irregular connection which we
 prove irreducible---it is the Fourier--Laplace transform of an irreducible
@@ -2184,6 +2221,10 @@ H.~Safouhi, ``The properties of sine, spherical Bessel and reduced Bessel
 functions for improving convergence of semi-infinite very oscillatory integrals:\
 the evaluation of three-centre nuclear attraction integrals over $B$ functions,''
 \textit{J.\ Phys.\ A:\ Math.\ Gen.}\ \textbf{34}, 2801--2818 (2001).
+
+\bibitem{lesiuk2012}
+M.~Lesiuk and R.~Moszynski, ``Analytical two-center integrals over Slater geminal
+functions,'' \textit{Phys.\ Rev.\ A}\ \textbf{86}, 052513 (2012).
 
 \bibitem{pachucki2009}
 K.~Pachucki, ``Two-center two-electron integrals with exponential functions,''

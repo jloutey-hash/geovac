@@ -122,3 +122,49 @@ collapse rho = 1.
 ## Disposition
 
 (Appended after computing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-27 by the PM; computed in the main session)
+
+Scripts `debug/hg_symbolic.py`, `debug/hg2_baikov.py`; logs `debug/data/hg_symbolic.log`, `debug/data/hg2_baikov.log`.
+
+| Item | Result | Verdict |
+|:--|:--|:--|
+| HG0(a) | at w1 = 0 the transcribed operator is s1 (r f'' + f' - p^2 r f), p^2 = -s2/s1, exactly | PASS |
+| HG0(b) | eq:pf on eq:laplace at rho = 1/3: residual 6.9e-23 (D = 1), 1.9e-23 (D = 2), below 1e-20 | PASS |
+| HG0(c) | s2 = 0 at the JC point and at the symmetric-exchange point | PASS |
+| HG1 | exact identity: with r = D/t1 and rho = T1/(T1 - T2), LM Eq. 54 = sqrt(T1) a (T1 - T2) times eq:pf | HELD |
+| HG2 | the D = 3 Baikov (Gram) determinant of the tetrahedron's loop momenta on its maximal cut equals Delta_LM / 4, exactly | HELD |
+| HG3 | not run (see below) | NOT RUN |
+| HG4(a) | JC: s2 = 0 identically | HELD |
+| HG4(b) | KW / symmetric exchange: s2 = 0 identically | HELD |
+| HG4(c) | s2 = (x^2 - y^2)^2 (2x^2 + 2y^2 - w1^2), disc = product of four squared linear factors: genus one generically | HELD |
+| HG4(d) | (AA|AA), (AB|AB): s2 = 0. (AA|BB): s2 = 16 z^4 (8 z^2 - w1^2). (AA|AB): s2 = z^4 (16 z^2 - 3 w1^2), disc = -w1^2 (2z - w1)^3 (2z + w1)^3 | HELD (all four) |
+| HG4(e) | generic unequal point: s2 and disc nonzero | HELD |
+
+**Gate: GO.** LM's hyper-Bessel functions are, up to r -> D/t1, the solutions of Paper 59's eq:pf: Laplace periods of
+the elliptic curve y^2 = Delta(u), with Delta four times the tetrahedron's maximal-cut Gram determinant.
+
+**Derivation, beyond the registered items (PM, symbolic).** For any polynomial Delta, integrating by parts against
+e^{ur} turns (Delta d/du + Delta'/2) Delta^{-1/2} = 0 into (r Delta(d/dr) + Delta'(d/dr)/2) F = 0 for
+F(r) = Int e^{ur} Delta^{-1/2} du over a closed or end-point-vanishing path. With Delta = w1^2 u^4 + s1 u^2 + s2 this
+is LM Eq. 54 term by term, and with Delta = (x^2 - 1)(rho x^2 + 1 - rho) and u = -x it is eq:pf. So both operators
+are the r-space image of a maximal cut with Baikov exponent -1/2. That HG1 holds is therefore expected once HG2
+holds; HG1 alone is short algebra.
+
+**Dictionary (with t1 the root that stays finite).** w1 -> 0 is rho -> 0, the K0 / Pachucki limit (Paper 59: N -> K0
+as rho -> 0). s2 = 0 is rho = 1, Paper 59's equal-scale collapse (c1 = c2). s1^2 = 4 w1^2 s2 is a double root: LM
+Table I's own test point (u2 = w2 = 1, u3 = w3 = 2, w1 = 1) has s1 = -18, s2 = 81, disc = 0, i.e. LM's special case D.
+
+**HG3 not run.** A 1e-15 value of the six-dimensional master by an independent route (one-centre Yukawa expansion
+about A) converges slowly because both densities are singular at B. The gate does not need it: HG2 and the
+derivation fix the homogeneous operator without LM's algebra. What stays unchecked here is LM's inhomogeneous
+source U(r) and their numbers. LM validated those against their w1-series.
+
+**HG5 (reported).** zeta = 1. (AA|BB): t^2 roots real, (31/4, 64), (7, 16), (23/4, 64/9) at w1 = 1/2, 1, 3/2;
+rho = 256/225, 16/9, 256/49 (or 1 - rho). (AA|AB): t^2 roots complex conjugate, so Re rho = 1/2 automatically; this
+is not the CM point. No physical point checked lands at rho = 1/2 with real branch points, or at rho = 1.
+Caveat as registered: physical integrals are derivatives of the master; a genus-one master does not make the
+physical (AA|BB) integral genus one (Paper 59: one-centre densities with a geminal kernel are elementary).
+
+**Novelty after the run.** The identification is not found in the short search; the Baikov reading of LM's
+polynomial is standard technique. Status: OPEN pending a fuller search.
