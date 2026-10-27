@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.15 (October 26, 2026)
+**Version:** v5.21.16 (October 27, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Kite's ninth singular point has a closed form (2026-10-27, v5.21.16, pre-registered):** rational in squared rates, poles at adjacent equal rates, zero at the base point; NP1/3/4 held, NP2 void. CHANGELOG v5.21.16.
 - **Operators evaluate; production geminal fit priced (2026-10-26, v5.21.15, pre-registered):** kite operator rebuilds Y at ~1/13 CPU bound; Psi4 fit -5 to -13%; blind point: ninth singular point unexplained; LiH triangle 21%, kernels 3%. CHANGELOG v5.21.15.
 - **Y's minimal order is 13; K3 piece irreducible and orthogonal (2026-10-26, v5.21.14, PI-directed):** two 9/4 pieces drop; blocks 2+2/3+1; TG1-5, GR2/3/5 hit; GR1/4 partial. CHANGELOG v5.21.14.
 - **Pieces of Y found by sector; order-12 reading withdrawn (2026-10-26, v5.21.13, PI-directed):** order 15; R_V + crossed elliptic + seven algebraic, exact maps; PF1/3/4 held, TG1 hit. CHANGELOG v5.21.13.

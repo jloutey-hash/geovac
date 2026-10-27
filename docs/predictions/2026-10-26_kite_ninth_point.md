@@ -226,3 +226,94 @@ NP2 and NP3b are scored separately and do not change the gate.
   together cancel in the rebuilt form. The positive controls test whether a known branch survives this.
 - Rational reconstruction from one 61-bit prime may not reach the coefficient heights. The second prime then
   disagrees, and a CRT lift from two primes doubles the fit samples, within the caps.
+
+## Disposition (appended 2026-10-27; predictions above unchanged)
+
+**NP1 HELD (a, b, c). NP2 NOT SCORED (Stage B void: both positive controls failed). NP3 HELD (a, b). NP4 HELD.
+Gate: GO.**
+
+Scripts: `debug/np_engine.py`, `debug/np_pilot.py`, `debug/np_stageA.py`, `debug/np_base_check.py`, `debug/np_stageB.py`,
+`debug/np_stageC.py`, `debug/np_formula.py`. Data and logs: `debug/data/np_*`. Primes p0 = 2^61 - 1 and
+p1 = 2305843009213693921.
+
+**The result.** Write A = a^2, B = b^2, G1 = g1^2, G2 = g2^2. Then
+
+  z9 = (A G2 - B G1)(A - B - G1 + G2) / ((A - G1)(B - G2)).
+
+It is homogeneous of weight 1. It is symmetric under (a, g1) <-> (b, g2), the kite's reflection, and under
+(a, b) <-> (g1, g2). On F1 it reduces to z9(s) = (s - 9)(4s - 21) / (5(s - 4)). It vanishes where a g2 = b g1 or
+a^2 + g2^2 = b^2 + g1^2. It has poles where an adjacent pair has equal masses, a = g1 or b = g2. These are the pairings
+{1,3} and {2,4} that PK1 found are not singular points. The base point has a g2 = b g1 = 3, so z9 = 0 there.
+
+- **Pilot** (48 samples, 250 s wall, median 35.6 s processor time per sample; `np_pilot.log`).
+  - Readout identity at P2: -111/1120. Scaling control at twice P2: -111/280, both as required.
+  - At one random s on F1, the full system was rebuilt in z: 18 masters, the same labels as P2, entry degree at most 19,
+    all 5 held-out points passed.
+  - Common denominator of A: z, the two system-only factors and the four cut quadratics, each to power 1, plus one
+    residual linear factor. In c the residual has power 3 in 27 entries and power 2 in 3, with no adjacent-pair
+    quadratic.
+  - The five carriers are C/(z - r) with total degree 1, and the 4-sample readout equals the residual root.
+- **NP1(a), HELD.** One extra root, simple in the carriers, power 3 in c (at the pilot s). Critical-point counts
+  (`np_euler_*.log`, mod 32003):
+
+  | g2 | at z9 | at z9 + 1/1000 | at -37/101 |
+  |:--|:--:|:--:|:--:|
+  | 5/2 | 21 | 22 | 22 |
+  | 7/2 | 21 | 22 | 22 |
+
+  The drop is one at z9 in both cases, and none at the controls.
+- **NP1(b), HELD.** 36 random s at p0 (180 samples including the 6 held-out and the 3 rationals, 934 s wall). The fit
+  has numerator degree 2 and denominator degree 1, total 3, against the cap of 32. That leaves 31 of the 36 fit points
+  to spare.
+  - Lifted from p0: z9 = (4s^2 - 57s + 189) / (5s - 20).
+  - Held out: 6 of 6 at p0, and 4 of 4 random s at p1 (`np_stageA_p1.log`, 28 samples, 141 s).
+  - Exact rationals, measured at p0 and p1 (they agree) and equal to the formula: g2 = 5/2 gives -44/45, g2 = 7/2 gives
+    364/165, g2 = 4 gives 301/60.
+  - Permuted-label control: no reconstruction within degree 32, so it fails as required.
+- **NP1(c), HELD.** The formula gives 0 at s = 9. At the base point, all five carriers in all three saved base systems
+  (p5, p10, p13) have denominator exactly z (`np_base_check.log`, saved data only). So the base point's unexplained
+  z = 0 exponent and its z^3 in c are z9 sitting on z = 0.
+- **NP3(a), HELD.** The factor is linear at the pilot. The readout succeeded at every Stage C point (42 + 53 + 6),
+  with no fallback.
+- **NP3(b), HELD.**
+  - C1: one random line, 42 points (168 samples, 853 s). Degrees 3 and 2, 6 of 6 held out, so U = 29, within the
+    cap of 250.
+  - C2: 41 fit points against 29 unknowns plus normalization (rank 29 of 30 columns, so 12 equations to spare, all
+    consistent). Held out: 12 of 12 at p0 and 6 of 6 at p1 (`np_stageC_check.log`).
+  - Exact checks (`np_formula.log`): P2 gives -111/1120 (measured in the PK record, not fitted); restricted to F1 it
+    equals the Stage A formula identically; twice P2 gives -111/280.
+- **NP4, HELD.** At the pilot the carriers have the form C/(z - z9). The 8-sample fallback was needed at 0 of the
+  42 + 7 + 42 + 53 + 6 rate points read.
+- **NP2, NOT SCORED (Stage B void).**
+  - Code control passed: the engine reproduced the saved P2 top row at 2 z.
+  - Masters: 30 at every one of the 320 massive samples, including the 64 at z9. So z9 does not cut the massive basis
+    for generic eps.
+  - Every entry was rebuilt in eps: maximum eps-degree 33, 0 failed fits, all held-out points passed. The two random z
+    agree on every order of vanishing v.
+  - The positive controls failed. At -121/9 and at -25/9 no entry has v above generic. The rule "not scored if a
+    positive control fails" therefore applies.
+  - My expectation that the threshold quadratic gives a factor eps there was wrong, or that factor cancels in the
+    rebuilt functions. At -121/9 the eps-root 484/9 does appear, in 13 entries, but without a factor eps. The four
+    eps-roots 100/9, 16/9, 49/36, 625/36, present at every z, are (a+g1)^2, (g1-a)^2, (g2-b)^2, (b+g2)^2.
+  - *Unscored observation:* at z9, and only there, all 30 entries of c have eps^-3 (27) or eps^-2 (3) against eps^0
+    at random z. 60 entries of A rise from v = 0 to 1. An eps-root -1982123/372960 appears in 120 entries. This looks
+    like a massive branch through (z9, eps = 0), with the power 3 of (z - z9) in the massless c. But the method did
+    not see a known branch, so its sensitivity is not established. Question 2 stays open.
+- **Novelty.** The method is standard (record's novelty section). A singular point outside the normal thresholds, with
+  a closed form whose denominator is set by the non-cut adjacent pairings, was not found in the lit-scan. No further
+  search was made, so this is not a novelty claim. Exponents at z9 away from P2 were not measured, and the formula is
+  not derived.
+- **Deviations, disclosed.**
+  1. *Pilot relaunch.* The first launch had no `__main__` guard. Windows spawn re-ran the script in every worker,
+     which kept failing and being respawned for about 11 minutes. No sample was computed. I stopped it with
+     TaskStop, deleted its 52 MB error log, and added the guard to `np_pilot.py`, `np_stageA.py` and `np_stageB.py`.
+     After the stop, tasklist showed no python process, including the one I had seen before my run started and had
+     not started myself. I did not target it. Whether it ended on its own or was caught by the stop, I cannot tell.
+  2. *Stage C2 relaunch.* The first C2 run (212 samples, `np_stageC_dense_try1.log`) solved with the D constant term
+     set to 1. That was inconsistent because D vanishes at B = G1 = G2 = 0, which the formula above confirms. Its
+     samples had not been saved. The rerun used the identical seeds, so the same points, and normalized instead by
+     the first nonzero D coefficient. Rank was 29 of 30 both times. 212 extra samples.
+  3. Processor time was 35.6 s per massless sample and 43.0 s per massive sample, above the 27.8 s quoted in the
+     disclosures but inside the caps (90 s and 120 s).
+- **Compute.** 874 massless samples (48 + 180 + 28 + 168 + 2 x 212 + 24 + 2) and 320 massive samples, plus 6 critical-point counts. About 2.2 h wall from
+  the first launch, within the 8 h cap. Never more than 8 processes of mine at once.

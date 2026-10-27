@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.16] - 2026-10-27
+
+PI-directed ("Let's do those things"; "let's document in paper 59, then checkpoint").
+
+### Added
+- **NP1, NP3, NP4 HELD; NP2 NOT SCORED (void). Where the kite's ninth singular point comes from**
+  (`docs/predictions/2026-10-26_kite_ninth_point.md`, committed alone before computing, 8f3c1d1b).
+  - Closed form in the squared rates A, B, G1, G2: z9 = (A G2 - B G1)(A - B - G1 + G2)/((A - G1)(B - G2)).
+    Symmetric under the kite's reflection and under (a,b) <-> (g1,g2); poles where an adjacent pair has equal rates
+    (the pairings PK1 found are not singular points); zero at the base point (a g2 = b g1 = 3), which explains the
+    base operator's unexplained z = 0 exponent and the z^3 in its system.
+  - NP1: on (1,2,3/2,g2), one extra root, simple in the five carriers, power 3 in c; z9(s) = (s-9)(4s-21)/(5(s-4)),
+    s = g2^2, fitted from 36 points (cap 32 total degree, used 3), 10 held out at two primes; exact rationals at
+    g2 = 5/2, 7/2, 4; permuted-label control fails as required. LP critical-point count 21 at z9, 22 nearby, at
+    g2 = 5/2 and 7/2. Base carriers have denominator exactly z.
+  - NP3: all-rates fit, 29 unknowns (cap 250), 41 rate sets, 18 held out at two primes; reproduces -111/1120 at P2.
+  - NP2 void: the massive test's positive controls (-121/9, -25/9) showed no eps pole. Unscored: at z9 only, every
+    massive c entry gains eps^-3 or eps^-2.
+  - Deviations disclosed in the record: a pilot without a `__main__` guard respawned workers for about 11 minutes
+    before being stopped (no samples); one fit rerun with a corrected normalization (same rank).
+  - PM check: the formula gives -111/1120 at (1,3/2,7/3,8/3) and the NP1(b) family formula, by hand.
+  - Scripts `debug/np_*.py`; data `debug/data/np_*`. Cost probe `debug/np_probe_massive_time.py`.
+
+### Changed
+- Paper 59 `sec:density_ring`: "its formula in the rates is open" replaced by eq. `eq:kite_ninth_point` and its
+  checks; conclusion sentence updated. Abstract reread, unchanged.
+- Group 2 synthesis, `docs/atlas.md` door 27, `docs/claim_test_matrix.md` (one row, guard owed).
+
 ## [v5.21.15] - 2026-10-26
 
 PI-directed ("Doesn't this research into the structure of these integrals help us run them optimally", "I rather

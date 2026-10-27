@@ -1758,8 +1758,25 @@ count of critical points of the Lee--Pomeransky likelihood, which equals the
 number of masters at a generic point, confirms it:\ $22$ at generic $z$, $21$
 there, at two primes.  The drop is in the full kite only, and it disappears
 when the Coulomb line is given a small mass, so the point belongs to the
-massless line.  Its formula in the rates is open.  At the original rates it may sit on $z=0$, where that
-operator has an exponent the cuts do not explain.  The operator's degree,
+massless line.  Its position has a closed form in the squared rates
+$A=a^2$, $B=b^2$, $G_1=\gamma_1^2$, $G_2=\gamma_2^2$:
+\begin{equation}
+z_9=\frac{(AG_2-BG_1)(A-B-G_1+G_2)}{(A-G_1)(B-G_2)} .
+\label{eq:kite_ninth_point}
+\end{equation}
+It is symmetric under the kite's reflection $(a,\gamma_1)\leftrightarrow
+(b,\gamma_2)$ and under $(a,b)\leftrightarrow(\gamma_1,\gamma_2)$.  Its poles
+lie where an adjacent pair has equal rates, the pairings the cuts ignore.  At
+the original rates $a\gamma_2=b\gamma_1$, so $z_9=0$:\ the ninth point sits on
+$z=0$ there, which accounts for that operator's exponent at $z=0$ that the
+cuts did not explain.  The formula was fitted from $41$ sets of rates, $29$
+unknowns, and passed $18$ held-out sets at two primes;\ it reproduces
+$-111/1120$ at the blind point, and on the family $(1,2,3/2,\gamma_2)$ the
+critical-point count drops from $22$ to $21$ exactly at $z_9$ (record
+\texttt{docs/predictions/2026-10-26\_kite\_ninth\_point.md}, registered before
+computing).  It is measured, not derived, and whether the point comes from
+the massless Coulomb line is open:\ the massive test was void, its positive
+controls failing.  The operator's degree,
 $120$, exceeds the prediction, and its coefficients needed a fourth prime.
 With $\gamma_2^2$ left free the differential system has degree $16$ in it,
 but the kite written in the masters has degree $26$, so the one-parameter
@@ -1920,7 +1937,9 @@ operator has order thirteen.  The operators also evaluate:\ the kite's, from
 six Taylor coefficients, rebuilds the grid behind $Y$ to the grid's own
 precision in about a thirteenth of the upper bound on the quadrature's
 processor time, derivation included, while $Y$'s own operator is slower than one more grid sum.  At a
-second set of rates the cuts predict eight of the kite's nine singular points;\ the ninth is unexplained.  In
+second set of rates the cuts predict eight of the kite's nine singular points;\ the ninth has a measured closed
+form in the squared rates, set by the adjacent pairings the cuts ignore, and it sits on $z=0$ at the original
+rates.  In
 the LiH calculation the triangle class is a fifth of the run and its kernel build three percent.  A
 six-Gaussian geminal fit that a production code ships misses $Y$ by five to
 thirteen percent, through its tail and not its cusp.
