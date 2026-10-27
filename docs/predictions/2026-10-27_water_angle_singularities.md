@@ -98,6 +98,15 @@ gives coefficients about l^(-2 alpha - 1)).
 - Linear-geometry analytic treatment: KNOWN (Ozdogan and Ruiz).
 - The singularity structure of the three-centre Slater integral in the bond angle: NOT SEARCHED. Treat as OPEN.
 
+## Addendum 1 (2026-10-27, before any computation; predictions above unchanged)
+
+- WA0(a) names the wrong reference. 0.2049417218 is the 8-Gaussian McMurchie-Davidson value, which carries the fit
+  error. The channel sum computes the Slater integral, whose referee in the test file is REFEREE_NG16 =
+  0.204941652260 (Paper 59: the Slater value is 7e-8 lower). WA0(a) as registered would fail on that 7e-8 for a
+  reason unrelated to the method. Found by the PM reading the test file, before running anything.
+- WA0(a) is scored against REFEREE_NG16 to 1e-9 (the test's own tolerance). The disposition also reports the
+  literal registered comparison.
+
 ## Disposition
 
 (Appended after computing. The predictions above are not edited.)
