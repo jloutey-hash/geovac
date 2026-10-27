@@ -1,0 +1,10 @@
+{
+ "prime_index": 5,
+ "prime": "2305843009213693669",
+ "nsamp": 80,
+ "pool_wall_s": 532.3532567024231,
+ "worker_cpu_total_s": 3063.234375,
+ "worker_cpu_min_s": 31.5,
+ "worker_cpu_max_s": 40.65625,
+ "main_cpu_s_after_pool": 0.5625
+}

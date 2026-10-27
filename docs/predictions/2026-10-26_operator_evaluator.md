@@ -115,3 +115,67 @@ and 3.8 to 1e-35, but its cost per t is higher than one grid sum per t.
 - A production code needs the integrals for many orbital pairs at once. This measures one integral.
 - If the input coefficients cannot be had cheaply, or the path cannot reach the nodes, that is a STOP for
   feasibility, reported and not scored.
+
+## Disposition (appended 2026-10-26; predictions above unchanged)
+
+**OE1 HELD, OE2 HELD, OE3 HELD, OE4 HELD.** All controls passed. Scripts `debug/oe_engine.py`, `debug/oe_kite.py`,
+`debug/oe_y.py`; data `debug/data/oe_kite_{ref,fresh,pert}_d100.json`, `debug/data/oe_y_d80{,_pert}.json`.
+
+- **Method change, disclosed.** Two departures from the model, both found before any value was scored.
+  - Arb's rigorous ball radii grew far faster through the recurrences than the true error, so every value became an
+    unbounded ball. Radii are dropped after each step. This is plain floating point at the working precision, which
+    the caps already allowed ("no error bounds are certified").
+  - The model let apparent singular points be ignored in the step radius. In practice a step centred at z = 1/8,
+    with the apparent root 0.1686 inside the disk, blew up: rounding excites solutions of the recurrence that are
+    singular there, though the solutions of the operator are not. So every step reaches half the distance to the
+    nearest root of the leading coefficient, apparent roots included, and the path detours above the three real
+    apparent roots (0.1686, 1.886, 12.24). The series at 0 is used for z <= 1/16, not 1/8.
+- **OE1.** Y from route O against the grid at t = 0.8, 1.3, 1.7, 2.5: 2.3e-69, below 1e-69, 2.3e-69, below 1e-69,
+  the precision at which the grid stores phi. Node errors: 5.8e-69 to 2.7e-68 for w up to 10, then growing:
+  7.6e-58 (w ~ 1e2), 6.0e-43 (1e5), 3.4e-8 (1e12), 1.5e8 (1e15). The largest product of a node's error and its weight
+  in Y is 2.6e-69 (t = 0.8) and 1.4e-68 (t = 2.5), so the large-w nodes do not move Y. **HELD (CHECK).**
+- **OE2.** Fresh input (pf_4b at 100 digits, 80 x 80 nodes, one process): 0.96 s, agreeing with the 280-digit
+  series to 5e-100. Continuation: 62.7 s, 248 Taylor steps (225 on the main path, 9 branch walks to nodes near the
+  apparent roots). Total 63.7 s wall on one process, against the 789 s threshold and the grid's 7893.7 s on
+  fifteen. **HELD (CHECK).**
+- **OE3.** The operator over Q was lifted from the prime runs p5, p10 and p13, which saved the differential system.
+  They took 945, 957 and 921 s, not the 685-687 s of p0 and p1 that this record quoted. The lift, rerun in a scratch
+  folder, took 12.8 s and reproduced the operator in use exactly. Total with route O: 2836 + 64 = about 2900 s on one
+  process, against a tenth of the CPU bound, 11,841 s. Ratio about 1/41 of the bound. **HELD (CHECK).**
+- **OE4.** From theta^j Y at t0 = 1.7, M13 reaches t = 0.8, 1.3, 2.5, 2.6, 3.8 with relative errors 2.2e-50, 9.3e-55,
+  2.9e-52, 1.3e-51, 3.5e-48, in 3.9, 3.6, 4.9, 4.8 and 11.9 s (14 to 32 steps), against 0.019 to 0.030 s for one grid
+  sum. Within 1e-35, and 120 to 540 times slower per t. **HELD (UNCLEAR: novelty not sought).**
+- **Controls.** Input against the 280-digit series: 5e-100. Recurrence, coefficients 6 to 20 against the series:
+  4.4e-75. Free-index consistency at z = 0: exactly zero residual at n = 0..5, so those six solutions are log-free.
+  Negative control, one coefficient of P_5 times 201/200: Y wrong by 1.4e-2, 2.5e-2, 3.7e-2, 6.8e-2. M13 with one
+  coefficient of P_7 times 201/200: errors 6e-2 to 1e96.
+- **Novelty, repeated at scoring.** The particle-physics references were checked: Moriello, JHEP 01 (2020) 150,
+  arXiv:1907.13234; Hidding, Comput. Phys. Commun. 269, 108125 (2021), arXiv:2006.05510; Liu and Ma, Comput. Phys.
+  Commun. 283, 108565 (2023), arXiv:2201.11669. Paper 59 already credits Puchalski, Kedziera and Pachucki (2009) with
+  reducing the integer-index three-electron integral to a differential equation. So the evaluator is a known method
+  applied to this family, and OE1 to OE3 are CHECKs. The measured cost ratio on this family was not found elsewhere,
+  in a brief search.
+- **Reading.** The structure pays where the cost is. The inner kite is a two-dimensional integral at every node; its
+  operator turns 247 such integrals into six Taylor coefficients and a walk. The outer t-integral is already a
+  one-dimensional sum once the kite is known, and Y's operator cannot beat it. A new parameter set needs a new
+  derivation, which is now the larger part of the cost.
+
+## Addendum: OE3 cost corrected to processor time (appended 2026-10-26; predictions and disposition above unchanged)
+
+The OE3 scoring above is wrong in its units. `debug/ib_kite_de.py` samples with `Pool(6)`, and the three prime runs
+overlapped (their logs end at 14:40, 14:52 and 14:54). So 921 to 957 s per prime are wall times of six-worker
+pools, not times on one process, and "2836 + 64 = about 2900 s on one process" compared wall time with a processor
+time bound. The error was found by the agent scoping record PK (`2026-10-26_parametric_kite_operator.md`).
+
+- **Re-measured.** Prime p5 rerun with each worker's processor time read at the end of its one task, imports
+  included (`debug/oe3_cpu.py`, data `debug/data/oe3_cpu_p5.json`). 80 samples: 3,063 s of worker processor time,
+  32 to 41 s per sample; the main process's rational rebuild about 2 s. A one-process LiH job ran at the same time.
+- **Total.** Three primes at about 3,065 s each, assuming p10 and p13 cost the same as p5 (their logged wall times
+  agree with p5's within 3%), is about 9,200 s. Plus the 12.8 s lift and route O's 64 s: about 9,300 s.
+- **OE3 rescored.** Against a tenth of the CPU bound, 11,841 s: **HELD, with a margin of about a fifth.** The ratio
+  is about 1/13 of the bound, not 1/41. Only p5 was measured; if p10 and p13 cost 42% more each than p5, OE3 would
+  fail.
+- **Unchanged.** OE1, OE2 (route O itself ran on one process), OE4, the controls, and the classes. The Reading's
+  last sentence stands with more force: the derivation is about 140 times route O's own cost.
+- Paper 59, the group 2 synthesis, the atlas, the claim matrix, CLAUDE.md and the CHANGELOG were corrected to "about
+  a thirteenth" in the same edit.

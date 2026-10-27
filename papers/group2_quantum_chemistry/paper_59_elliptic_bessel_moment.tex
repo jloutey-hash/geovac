@@ -1712,6 +1712,75 @@ geminal's squared lines, and the check against operators found
 independently.  Guards:\ \texttt{tests/test\_paper59\_ib\_kite.py} and
 \texttt{tests/test\_paper59\_y\_minimal\_order.py}.
 
+\textbf{[MEASURED]} The operators are also evaluators.  The kite's operator,
+with the kite's first six Taylor coefficients at $z=0$ as its only input,
+gives the kite at all $247$ nodes of the grid behind $Y$.  It does so by Taylor
+steps along a path that passes above the three apparent singular points on
+the positive axis.  Each step reaches half the distance to the nearest root
+of the leading coefficient, apparent roots included, because rounding
+excites solutions of the recurrence that blow up there.  On one process this
+takes $64$\,s, of which the input takes $1$\,s;\ the quadrature it replaces
+took $7894$\,s on fifteen.  $Y$ from the two routes agrees to
+$2\times10^{-69}$ at four values of $t$, the precision at which the grid is
+stored.  The node error grows towards large $w$, to $3\times10^{-8}$ near
+$w=10^{12}$, but those nodes carry so little weight that no node moves $Y$ by
+more than $1.4\times10^{-68}$.  With the derivation included, the route
+costs about $9300$\,s of processor time, about a thirteenth of the upper
+bound on the quadrature's.  The derivation is three reduction runs on six
+worker processes, one of which was measured at $3065$\,s of processor time,
+and a $13$\,s lift.  Changing
+one operator coefficient by $1/200$ moves $Y$ by $1$ to $7\%$.  $Y$'s own
+operator does not pay in the same way.  From the grid's data at $t=1.7$ it
+reaches five other values of $t$ to $4\times10^{-48}$ or better, but at $4$ to
+$12$\,s per value, against $0.02$\,s for one more grid sum, because once the
+kite is known the outer integral is a cheap sum.  The structure pays where
+the cost is, in the inner kite.  Caps:\ one parameter set, so a new
+configuration needs a new derivation, which dominates the cost;\ times on one
+machine, with the quadrature's processor time an upper bound;\ and no
+certified error bounds, only agreement with the grid (record
+\texttt{docs/predictions/2026-10-26\_operator\_evaluator.md}, registered before
+computing).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
+their differential equations in series is standard in particle
+physics~\cite{moriello2020,hidding2021,liu_ma2023}, and
+Ref.~\cite{pkp2009} reduces the integer-index three-electron integral to such
+an equation.  What is added is the measured cost on this family.
+
+\textbf{[MEASURED]} Most of such an operator's singular points can be read
+off before it is derived, but not all of them.  At a second set of rates,
+chosen blind, $(a,b,\gamma_1,\gamma_2)=(1,3/2,7/3,8/3)$, the kite's operator
+again has eighteen masters and order eleven.  The eight singular points
+predicted from its cuts, at minus the squared sums and differences of the
+rates on each cut, are all genuine and carry the predicted local exponents;
+the pairings of adjacent lines give none.  But a ninth genuine point appears
+at $z=-111/1120$, with exponents $-7/2,0,1,\dots,9$, and the leading Landau
+equations of the kite and of its contractions have no solution there.  A
+count of critical points of the Lee--Pomeransky likelihood, which equals the
+number of masters at a generic point, confirms it:\ $22$ at generic $z$, $21$
+there, at two primes.  The drop is in the full kite only, and it disappears
+when the Coulomb line is given a small mass, so the point belongs to the
+massless line.  Its formula in the rates is open.  At the original rates it may sit on $z=0$, where that
+operator has an exponent the cuts do not explain.  The operator's degree,
+$120$, exceeds the prediction, and its coefficients needed a fourth prime.
+With $\gamma_2^2$ left free the differential system has degree $16$ in it,
+but the kite written in the masters has degree $26$, so the one-parameter
+family exceeded its registered sample cap and was not built (record
+\texttt{docs/predictions/2026-10-26\_parametric\_kite\_operator.md},
+registered before computing).  \textbf{[PRIOR ART]} Reading singular points
+from cuts is standard Landau and threshold analysis.
+
+\textbf{[MEASURED]} In the molecular calculation the triangle class is a
+modest share of the cost.  In the explicitly correlated LiH calculation of
+Paper~19 at its best truncation, the class that $Y$ models takes $21\%$ of a
+one-process run, third of its four large pieces, behind the electron--nucleus
+and kinetic blocks.  The part an operator evaluator would replace, the
+factorization of the three-body kernels, is $3\%$ of the run;\ the rest of
+the class is about $2.4$ million Coulomb mode solves.  So a free triangle
+class would speed the run by at most $1.27$ times, and a free kernel build by
+$1.03$ times.  Caps:\ one run per truncation on one machine;\ a reduced
+truncation is no proxy, giving $48\%$ (record
+\texttt{docs/predictions/2026-10-26\_lih\_triangle\_share.md}, registered
+before computing).
+
 \textbf{[MEASURED]} Production explicitly correlated codes do not use a
 single Gaussian geminal.  For many integrals they replace $e^{-\gamma r}$ by
 a least-squares fit, six Gaussians by default.  The off-slice triangle above,
@@ -1723,10 +1792,22 @@ falls like $e^{-b\sqrt{n}}$ in the number of terms $n$, as the cusp at $r=0$
 predicts.  With an extra weight $e^{-\gamma^2r^2}$ the fit loses its tail, and
 the six-term error is $5.4\times10^{-2}$ to $1.7\times10^{-2}$.  So on this
 integral the error is set by how far out the fit is trusted, not by the cusp.
-Caps:\ the production weight function is not reproduced, so this does not
-price a production fit;\ one configuration, with model densities (record
+Caps:\ the production weight function is not reproduced, so these two weights
+do not price a production fit;\ one configuration, with model densities (record
 \texttt{docs/predictions/2026-10-25\_gaussian\_fit\_geminal.md}, registered
 before computing).
+\textbf{[MEASURED]} A fit that a production code ships, the six-term fit
+written into Psi4's source~\cite{psi4_2020}, is the best of the three at the
+cusp and the worst in the tail.  It is $1.8\%$ low at $r=0$, against $6\%$ for
+the plain fit, and half the true value at $\gamma r=4$.  On the same $Y$ it
+gives an error of $-13\%$ at $t=1/2$ down to $-5.5\%$ at $t=4$, more than three
+thousand times the plain fit's.  The three fits are ordered by their tails,
+not by their cusps.  Caps:\ $Y$ weights the geminal over its whole range,
+while a correlation energy is dominated by short range, so this prices the
+fit on this integral and not on an F12 energy;\ the fit's weight and its
+literature source are not verified, nor which integrals the code uses it for
+(record \texttt{docs/predictions/2026-10-26\_production\_geminal\_fit.md},
+registered before computing).
 
 %% ========================================================================
 \section{Scope, and the open frontier}
@@ -1835,7 +1916,14 @@ $\gamma=1$;\ we read the difference as uniqueness, which factors the Coulomb loo
 and not the geminal one.  Off the symmetric slice the correlated triangle carries
 the K3 piece of the chain of three, an elliptic piece for each crossed pairing
 of a density with a geminal, and five algebraic pieces;\ its minimal
-operator has order thirteen.
+operator has order thirteen.  The operators also evaluate:\ the kite's, from
+six Taylor coefficients, rebuilds the grid behind $Y$ to the grid's own
+precision in about a thirteenth of the upper bound on the quadrature's
+processor time, derivation included, while $Y$'s own operator is slower than one more grid sum.  At a
+second set of rates the cuts predict eight of the kite's nine singular points;\ the ninth is unexplained.  In
+the LiH calculation the triangle class is a fifth of the run and its kernel build three percent.  A
+six-Gaussian geminal fit that a production code ships misses $Y$ by five to
+thirteen percent, through its tail and not its cusp.
 
 %% ========================================================================
 \begin{thebibliography}{99}
@@ -1891,6 +1979,28 @@ difference equations,'' \textit{Int.\ J.\ Mod.\ Phys.\ A} \textbf{15}, 5087
 M.~Puchalski, D.~K\c{e}dziera and K.~Pachucki, ``Ground state of Li and
 Be$^+$ using explicitly correlated functions,'' \textit{Phys.\ Rev.\ A}
 \textbf{80}, 032521 (2009);\ arXiv:0909.5542.
+
+\bibitem{moriello2020}
+F.~Moriello, ``Generalised power series expansions for the elliptic planar
+families of Higgs + jet production at two loops,'' \textit{JHEP}
+\textbf{01} (2020) 150;\ arXiv:1907.13234.
+
+\bibitem{hidding2021}
+M.~Hidding, ``DiffExp, a Mathematica package for computing Feynman integrals
+in terms of one-dimensional series expansions,'' \textit{Comput.\ Phys.\
+Commun.}\ \textbf{269}, 108125 (2021);\ arXiv:2006.05510.
+
+\bibitem{liu_ma2023}
+X.~Liu and Y.-Q.~Ma, ``AMFlow:\ a Mathematica package for Feynman integrals
+computation via auxiliary mass flow,'' \textit{Comput.\ Phys.\ Commun.}\
+\textbf{283}, 108565 (2023);\ arXiv:2201.11669.
+
+\bibitem{psi4_2020}
+D.~G.~A.~Smith \textit{et al.}, ``PSI4 1.4:\ open-source software for
+high-throughput quantum chemistry,'' \textit{J.\ Chem.\ Phys.}\
+\textbf{152}, 184108 (2020);\ the fit is in
+\texttt{psi4/src/psi4/libmints/integralparameters.cc}, class
+\texttt{FittedSlaterCorrelationFactor}.
 
 \bibitem{ppr2004}
 K.~Pachucki, M.~Puchalski and E.~Remiddi, ``Recursion relations for

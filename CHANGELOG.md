@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.15] - 2026-10-26
+
+PI-directed ("Doesn't this research into the structure of these integrals help us run them optimally", "I rather
+thought we were better equipped to report on the cusp and tail as compared to gaussians", then "Let's do both").
+Pre-registered OE1-OE4 and PG1-PG3, committed alone before computing (0a98d7e3).
+
+### Added
+- **OE1-OE4: ALL HELD. The integral's own operators as evaluators** (`docs/predictions/2026-10-26_operator_evaluator.md`).
+  - The kite's exact order-11 IBP operator, from its first six Taylor coefficients at z = 0 (0.96 s at 100 digits on
+    one process), gives the kite at all 247 nodes of the 60-digit Y grid by Taylor steps: 248 steps, 62.7 s, one
+    process. The grid took 7893.7 s on fifteen. Y from the two routes agrees to 2.3e-69 or better at t = 0.8, 1.3,
+    1.7, 2.5, the grid's stored precision (OE1, OE2).
+  - Node error grows at large w (3.4e-8 near w = 1e12), but no node's error times its weight exceeds 1.4e-68 of Y.
+  - Derivation included: about 9,300 s of processor time, about 1/13 of the grid's CPU upper bound (OE3). One prime
+    run re-measured at 3,065 s of processor time (`debug/oe3_cpu.py`, data `debug/data/oe3_cpu_p5.json`). The logged
+    921-957 s per prime, not the 685-687 s the record quoted, are wall times of six-worker pools that overlapped. The
+    lift took 12.8 s, rerun in scratch and identical. A first scoring counted those wall times as one process
+    (2900 s, 1/41); the parametric-kite agent caught it, and record OE carries a correction addendum.
+  - Y's own M13 reaches t = 0.8, 1.3, 2.5, 2.6, 3.8 from the grid's data at t = 1.7 to 2e-50 to 4e-48, but at 3.6 to
+    11.9 s per t against 0.02 s for one grid sum (OE4). The structure pays in the inner kite, not the outer sum.
+  - Method changes, disclosed in the disposition: ball radii dropped (plain floating point; arb's rigorous radii
+    blew up through the recurrences); steps limited by apparent roots too (rounding excites recurrence solutions that
+    blow up there), with detours above the three real apparent roots 0.1686, 1.886, 12.24.
+  - Controls: input 5e-100 and recurrence 4.4e-75 against the 280-digit series; one operator coefficient times
+    201/200 moves Y by 1.4-6.8% (kite) and 6e-2 to 1e96 (M13). Classes: CHECK (the method is DiffExp/AMFlow-style
+    series solving, and Puchalski-Kedziera-Pachucki 2009 reduce the integer-index integral to a differential
+    equation); OE4 UNCLEAR.
+  - Scripts `debug/oe_engine.py`, `debug/oe_kite.py`, `debug/oe_y.py`; data `debug/data/oe_*`.
+- **PG1-PG3: ALL HELD. A production geminal fit on the exact Y** (`docs/predictions/2026-10-26_production_geminal_fit.md`).
+  - Psi4's hard-coded six-term fit of exp(-r) (`libmints/integralparameters.cc`, `FittedSlaterCorrelationFactor`):
+    1.8% low at r = 0 (best cusp of the three fits), half the true value at r = 4 (worst tail).
+  - On Y at t = 1/2, 1, 2, 4: -12.9%, -10.6%, -7.9%, -5.5%; record GF's weighted fit -5.4% to -1.7%, its plain fit
+    -3.6e-5 to -2.4e-6. Ordered by tail, not cusp, at every t (PG2); falls with t (PG3).
+  - Controls: record GF's plain six-term row recomputed to its digits; quadrature 5.6e-16 at two node sets.
+  - Caps: Y weights the whole geminal, so this is not an F12 energy error; the fit's weight, source and use in Psi4
+    are unverified. Classes: PG1 FINDING (modest), PG2 UNCLEAR, PG3 CHECK. Script `debug/pg_run.py`.
+- **PK1-PK5: ALL MISSED; PK6-PK8 not run (STOP). The kite at a blind second point, and with a rate left free**
+  (`docs/predictions/2026-10-26_parametric_kite_operator.md`, committed alone before computing, daa0c049; PI
+  direction "Let's do both with sub agents").
+  - At (a, b, g1, g2) = (1, 3/2, 7/3, 8/3): four prime runs (320 samples, 2552 s wall on six workers; heights 72
+    bits against 37 at the base, so a fourth prime), exact operator over Q(z) in 46 s. Order 11, 18 masters,
+    degree 120 (predicted 102-113). Identification gate: Taylor 6-40 from 0-5 to 2.3e-69; negatives 2.9e49 and up.
+  - The cut rule held on every point it names: the eight predicted points are genuine with exactly the predicted
+    exponents, at infinity too, and the adjacent values are not roots. But a ninth genuine point at z = -111/1120,
+    exponents -7/2, 0, 1..9, with no solution of the leading Landau equations for the kite or its contractions
+    (sympy Groebner). Its origin is open; at the base point it may sit on z = 0, where the base exponent -4 was
+    unexplained (a guess, not registered). The z = 0 exponent -4 became 7/2.
+  - PK5: with s = g2^2 free, the system A has degree 16 in s, but the kite in the masters, c, has 26 (predicted at
+    most 19). The family would need 2247 samples, above the 1743 cap, so stage 2b stopped. Untested: a family of A
+    alone (about 1527 samples) with c per value.
+  - PM check: the operator file has order 11, lead degree 120, z = -111/1120 a simple root, the eight cut points
+    roots, -100/9 and -49/36 not.
+  - Literature scan and a second route (`debug/lit_scan/topology_rung_ninth_point_memo.md`, PI-directed explorer).
+    Critical-point count of the Lee-Pomeransky likelihood (`debug/lit_scan_euler_*.py`): 22 at generic z, 21 at
+    -111/1120 and at the three-line cut -121/9, 17 at the two-line cuts, at two primes; the drop is in the top sector
+    only and vanishes with a Coulomb mass^2 of 1/100. A principal-Landau-determinant face scan misses it, the class
+    Helmer-Papathanasiou-Tellander (arXiv:2402.14787) show PLD can miss. Q1: closest prior theorem is Brown,
+    arXiv:0910.0114 (period ring grows under minors; massless phi^4, D = 4); the Coulomb ring's drop below the chain,
+    on the same graph K4, shows the rung is not purely topological. Not yet in Paper 59's bibliography.
+- **LT1-LT4, LT6 HELD; LT5 MISSED; LT7 digits held, overhead clause not confirmed. The triangle class's share of
+  LiH** (`docs/predictions/2026-10-26_lih_triangle_share.md`, committed alone before computing, a7b730fe).
+  - At truncation 1e-3, one process, E_R12 reproduced to the golden digits: 10,187 s total; h_Vne/g_Vne 30.1%,
+    h_T/g_T 22.3%, triangle 21.2%, non-triangle g_Vee 16.7%, Fbar/sigma2 8.4%.
+  - Inside the triangle: 196 middle densities, 1,236 mode kernels (548 eigendecompositions, 688 SVDs); their
+    factorization 333 s, 3.3% of the run; the rest about 2.4M Coulomb mode solves.
+  - Amdahl caps: a free triangle phase 1.27x, a free kernel build 1.03x. The operator evaluator of record OE
+    addresses only the latter.
+  - LT5: the 1e-2 proxy gives 47.9%, not a proxy. LT7: the top-level timers leave 1.1% untimed, so the
+    under-1% overhead clause fires as written (PM rescored the agent's HELD); the cProfile control was not run.
+  - Script `debug/lih_triangle_share.py`; data `debug/data/lih_triangle_share_{0.01,0.001}.json`.
+
+### Changed
+- Paper 59 `sec:density_ring`: a [MEASURED] paragraph on the operators as evaluators with caps and prior art (three
+  bibitems, checked); a [MEASURED] paragraph on the Psi4 fit (one bibitem); the GF caps sentence narrowed to its two
+  weights; one conclusion sentence. Then two [MEASURED] paragraphs, on the blind second point and on the LiH
+  share, and one more conclusion sentence. Abstract reread, unchanged.
+- Group 2 synthesis: one sentence on OE/PG, one on PK/LT.
+- `docs/atlas.md` door 27; `docs/claim_test_matrix.md` four rows (guards owed for OE, PG, PK).
+- CLAUDE.md version and S2 line; README badge 5.21.15.
+
 ## [v5.21.14] - 2026-10-26
 
 PI-directed ("Let's work that list down": the open and owed items of v5.21.13). No new prediction; the scoring

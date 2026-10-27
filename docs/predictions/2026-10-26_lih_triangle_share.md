@@ -147,3 +147,58 @@ operator-evaluator method it is set against is the known one credited in `2026-1
   value, not a measurement here.
 - If the instrumented run does not reproduce the golden digits, the timings are void and reported as such.
 - Up to 4 worker processes are allowed; the run uses 1.
+
+## Disposition (appended 2026-10-26; predictions above unchanged)
+
+**LT1 HELD, LT2 HELD, LT3 HELD (edge), LT4 HELD, LT5 MISSED, LT6 HELD. LT7: digits HELD; the overhead clause is NOT CONFIRMED, since the sum check leaves 1.1% and the falsifier as written (1 percent or more) fires; the cProfile control was not run.** (Header and the LT7 bullet corrected by the PM before commit.)
+Script `debug/lih_triangle_share.py`; data `debug/data/lih_triangle_share_{0.01,0.001}.json` and the two `.log` files.
+One process, one BLAS thread, both runs fresh. Wall times here (735 s at 1e-2, 10,187 s at 1e-3) differ from the
+golden runtimes (2,008 s, 10,538 s), so shares are from one run each on this machine.
+
+| Quantity | 1e-2 (nact 64) | 1e-3 (nact 196, target) |
+|:--|:--|:--|
+| Total wall | 735.4 s | 10,187.0 s |
+| Triangle phase (`eval_triangles`) | 352.0 s, 47.9% | 2,159.2 s, 21.2% |
+| h_Vne + g_Vne | 61.4 s, 8.3% | 3,070.4 s, 30.1% |
+| h_T + g_T | 158.1 s, 21.5% | 2,275.5 s, 22.3% |
+| g_Vee non-triangle (`vee_reduce_sparse`) | 16.1 s, 2.2% | 1,705.3 s, 16.7% |
+| Fbar + sigma2 | 55.7 s, 7.6% | 860.3 s, 8.4% |
+| Primitive load + reference build | 10.5 s | 3.7 s |
+| Middle densities cm | 64 | 196 |
+| Eigendecomposition builds / SVD calls | 192 / 204 (396) | 548 / 688 (1,236) |
+| Factorization time (eigh + SVD) | 159.4 s (21.7% of wall) | 333.1 s (3.3% of wall) |
+| Coulomb mode solves (all calls) | 189.2 s | 2,000.2 s |
+| `tri_solve_rows` | 194,232 | 2,412,864 |
+| E_R12 | -8.048140609752963 | -8.049045088639625 |
+
+- **LT1 HELD.** 21.2% at 1e-3, inside 15 to 27 percent. The earlier log gave 20.0%.
+- **LT2 HELD.** `tri_cm` is 196 and 64. Mode kernels 1,236 (band 1,000 to 1,400) and 396 (band 300 to 450). The m
+  histogram at 1e-3 is {0: 108, +-1: 40 each, +-2: 4 each}, so 8 pairs with |mA| = 2, exactly the bound I used.
+  The eigh count 548 and SVD count 688 match my 540 and 690.
+- **LT3 HELD at the edge.** The factorizations are 333.1 s of 2,159.2 s, which is 15.4% (band 5 to 20). The
+  `coul_mode_stack_any` timer reads 2,000.2 s, which is 92.6% of the triangle time, above the stated 75 to 90 band.
+  That timer is not restricted to the triangle: the three sub-timers sum to 2,333 s, which exceeds the 2,159 s
+  phase by 174 s, so some solve calls run in the non-triangle code. The triangle's solves plus its small
+  matrix products are the remainder 2,159 - 333 = 1,826 s, 84.6% at most. The stated falsifier (solves below 75
+  percent or factorization above 20 percent) did not fire. I score it HELD, with the 92.6% reading recorded as
+  an over-count. At 1e-2 the sub-timers (348 s) match the phase (352 s).
+- **LT4 HELD.** At 1e-3 the order is h_Vne/g_Vne 3,070 s, h_T/g_T 2,276 s, triangle 2,159 s, non-triangle g_Vee 1,705 s.
+  The h_T/g_T block is larger than the triangle by only 5 percent.
+- **LT5 MISSED.** At 1e-2 the share is 47.9%, outside 10 to 40 percent. The proxy overstates the target share by
+  a factor 2.3. The triangle cost at 1e-2 is mostly fixed per-cm work (factorizations 21.7% of wall), while the Vne
+  and T blocks shrank much more. The 1e-2 run is not a reliable proxy for the share.
+- **LT6 HELD.** Factorization time is 3.3% of total wall at 1e-3 (cap 5%). Amdahl cap for a free triangle phase:
+  1/(1 - 0.212) = 1.27x, inside 1.18x to 1.37x. For a free K_mu build: 1/(1 - 0.033) = 1.03x.
+- **LT7 digits HELD; overhead clause not confirmed (see header); the cProfile cross-check was not run.** E_R12, c, h and E_trunc
+  match the golden repr at both truncations (1e-2: -0.23890174597345007, 0.09609089427285555; 1e-3:
+  -0.22689482141009634, 0.0899638869289805), the digits listed in the golden record. The 18-piece-level comparison
+  against golden.json was not run; the four printed values were. The top-level timers sum to 653.9 s of 735.4 s
+  (1e-2) and 10,074.6 s of 10,187.0 s (1e-3). The unaccounted 81 s and 112 s are untimed work (most likely the
+  `GeminalM` construction and the loop glue); I did not isolate it. That is 1.1 percent at 1e-3, so the
+  under-1-percent overhead claim is not confirmed as stated, though that gap is not necessarily timer cost.
+
+**Reading.** In the corpus-best LiH run the triangle phase is about a fifth of the wall time, third of the four big
+pieces. A free triangle phase would speed the run by about 1.27x. The K_mu kernel build, the part the operator
+evaluator of record 2026-10-26_operator_evaluator.md would replace, is about 3% of the run (1.03x at best). The rest
+of the triangle time is the prolate-Neumann Coulomb mode solves (about 2.4 million rows) and their products, which that
+evaluator does not address. The larger targets are the h_Vne/g_Vne block (30%) and the h_T/g_T block (22%).

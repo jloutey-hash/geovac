@@ -78,3 +78,28 @@ are ordered by their tail deficit, the reverse of their cusp deficit.
 - Y weights the geminal over its whole range. A correlation energy is dominated by short range, so a large error on
   Y does not imply a large error in an F12 energy. This record prices the fit on this integral, not on an energy.
 - One code's fit. Its weight and its literature source are unverified, and how the code uses it is not checked.
+
+## Disposition (appended 2026-10-26; predictions above unchanged)
+
+**PG1 HELD, PG2 HELD, PG3 HELD.** All controls passed. Script `debug/pg_run.py`; data `debug/data/pg_results.json`,
+log `debug/data/pg_run.log`.
+
+| t | Psi4 | W2 (record GF) | W1 (record GF, recomputed) |
+|:--|:--|:--|:--|
+| 1/2 | -1.285e-1 | -5.35e-2 | -3.590e-5 |
+| 1 | -1.063e-1 | -4.13e-2 | -1.359e-5 |
+| 2 | -7.90e-2 | -2.77e-2 | -4.100e-6 |
+| 4 | -5.49e-2 | -1.75e-2 | -2.423e-6 |
+
+- **PG1.** 5.5e-2 to 1.3e-1, inside 1e-2 to 3e-1 at all four t. **HELD (FINDING, modest:** the size of a shipped
+  fit's error on an exact correlated three-electron integral was not found in the literature, in a brief search
+  repeated at scoring; the integral and the densities are model shapes).
+- **PG2.** Negative at every t, and |Psi4| > |W2| > |W1| at every t: the fits are ordered by their tail deficit, the
+  reverse of their cusp deficit. **HELD (UNCLEAR:** the short-range design of production weights is PROBABLY KNOWN).
+- **PG3.** |E| falls monotonically from t = 1/2 to t = 4. **HELD (CHECK:** it repeats record GF's ordering for a third
+  fit).
+- **Controls.** Record GF's W1 n = 6 row recomputed to its printed digits. The smallest-exponent Psi4 pair at the
+  larger node set: 5.6e-16.
+- **Reading.** The Psi4 fit is 3,600 times worse than the plain fit at t = 1/2 and 22,700 times worse at t = 4, though
+  its cusp is better. On an integral that weights the whole geminal, the tail sets the error. The caps stand: this is
+  not an F12 energy, and the fit's weight and use in the code are unverified.

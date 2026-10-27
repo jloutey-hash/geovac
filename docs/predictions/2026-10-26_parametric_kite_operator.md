@@ -263,3 +263,79 @@ samples for a derivation by the existing pipeline.
   the budget allows a fourth.
 - The direct series at P2 may need more nodes than at the base point; the wrapper control sets the node count.
 - The family's degree in s could exceed 19, which would push the cost past the cap. PK5 measures it first.
+
+## Disposition, stage 1 (appended 2026-10-26; predictions above unchanged)
+
+**PK1 MISSED. PK2 MISSED. PK3 MISSED. PK4 MISSED.** The cut rule held on every point it names, and so did the exponent
+rule. What failed is a ninth genuine point that no cut predicts, at z = -111/1120, together with what it changes.
+Identification gate passed. Scripts `debug/pko_run_p2.sh`, `debug/pko_lift.py`, `debug/pko_series.py`,
+`debug/pko_recurrence.py`, `debug/pko_landau_leading.py`; data `debug/data/ib_pko_p2_p{0,1,2,3}_op.json`, the
+operator `debug/data/ib_pko_p2_op_Q.json`, logs `debug/data/pko_p2_*.log`, `debug/data/pko_landau_p2*.log`.
+
+- **Derivation.** Four prime runs, one after another, Pool(6) each, 80 samples each: 576, 531, 643 and 802 s wall
+  (320 samples, 2552 s). Two primes did not reconstruct the system. Its heights reach 72 bits, against 37 at the
+  base point. So the system was lifted from three primes and checked on the fourth, which agreed. This is the
+  extra prime the budget allowed. The exact operator over Q(z) was built in 46 s: order 11, coefficients up to
+  779 bits, agreeing with the operator at 4 of 4 primes.
+- **Identification gate.** The operator's recurrence gives Taylor coefficients 6 to 40 from 0 to 5, agreeing with
+  the direct P2 series to 2.3e-69 relative, the precision of that series. Deviation, disclosed: the first try fed
+  0 to 5 at 70 digits, and the recurrence amplifies rounding about 100 times per coefficient here, so it reached
+  1.6 at n = 40, although n = 6 agreed to 9e-63. Inputs at 170 digits (two node counts, agreeing to 9e-170) and a
+  250-digit recurrence fixed it. Wrapper control: at the base masses the wrapper reproduces the stored 280-digit
+  series, coefficients 0 to 40, to 2.6e-69. Node control at P2: 120x120 against 160x160 nodes, 7.9e-70.
+- **Negative controls.** The base operator on the P2 series: 2.9e49. The P2 operator with its lowest coefficient of
+  P_5 times 201/200: 7.6e97; P_11 the same way: 1.8e82. Deviation, disclosed: my first choice of coefficient
+  (z^41 in P_5) cannot enter the first 40 coefficients, so that control could not fail. It was replaced by the
+  lowest nonzero coefficient, before the replacement was run.
+- **PK1, MISSED.** Factoring the leading coefficient over Z and testing each factor (`debug/ib_apparent.py`): all
+  eight predicted points are genuine. The four adjacent values are not roots of the leading coefficient, so the
+  strong form holds too. But z = -111/1120 is a ninth genuine point, a simple root with exponents -7/2, 0, 1, ...,
+  9. The other roots, one factor of degree 98, are apparent.
+- **PK2, MISSED.** 18 masters and order 11, as predicted. The degrees are 109 to 120, not 102 to 113. The leading
+  coefficient is z^5, the four three-line factors to the power 1, the four two-line factors to the power 3, as
+  predicted, then (1120z + 111) and an apparent factor of degree 98, not 92.
+- **PK3, MISSED.** At each of the eight points the exponents are exactly those in the table. At infinity they are
+  exactly the base point's. At z = 0 they are -1/2, 0, 1/2, 1, 3/2, 2, 5/2, 3, 7/2, 4, 5. The base point's -4 is
+  replaced by 7/2.
+- **PK4, MISSED.** The system's denominators have z-roots -25 and -1/9 to the power 2, the other six predicted
+  points to the power 1, and -73/9 = -(a^2+g2^2) and -277/36 = -(b^2+g1^2) to the power 1, as predicted, with no
+  adjacent value. So the base point's -25/4 was b^2+g1^2, as read. But z = 0 has power 1, not 3, and
+  (1120z + 111) appears to the power 3.
+- **The ninth point.** It is not a leading Landau singularity of the first type. With sympy Groebner bases, the
+  Landau equations dF/dalpha_i = 0 with every alpha and U nonzero have no solution at P2, for the kite and for
+  every graph with one line contracted. With two lines contracted, only the two-line cuts come back. The test is
+  degenerate for the massless Coulomb line. A regulator mass^2 of 1e-6 on that line still gives none. Its origin
+  is open. A guess, recorded here and not registered as a prediction: at the base point it could sit on z = 0,
+  where the base point has the unexplained exponent -4 and the system has z to the power 3. Stage 2's family runs
+  through the base point and should show how this point moves with g2.
+- **Novelty.** The rule that held is standard Landau and threshold analysis, so those clauses are CHECKs. A
+  genuine point outside the normal thresholds was not sought in the literature.
+- **Reading.** At a generic point the cut rule gives every genuine point of a normal-threshold type, with the right
+  exponents, and no adjacent pairing. It is not the whole singular locus. The base point's coincidences hid one
+  more genuine point. Its location is a rational function of the masses that is not yet known. Without that, a
+  blind prediction of the leading coefficient, and so of the operator's degree, is not available.
+
+## Disposition, stage 2 (appended 2026-10-26; predictions above unchanged)
+
+**PK5 MISSED. STOP for stage 2b by the record's rule. PK6, PK7 and PK8 NOT RUN.** Script `debug/pko_family.py`;
+data `debug/data/pko_fam_deg_p5.json`, log `debug/data/pko_fam_deg_p5.log`. The fitting and specialization script
+for stage 2b, `debug/pko_family_fit.py`, was written but not run.
+
+- **PK5, MISSED.** At one fixed random z modulo p5, 35 random values of s = g2^2, with (a, b, g1) = (1, 2, 3/2): 30
+  to fit, 5 held out. All 108 nonzero entries were rebuilt as rational functions of s and passed their held-out
+  points, with no failed fits. 18 masters at every sample. The largest numerator degree plus denominator degree is
+  26, against the predicted at most 19. It comes from the vector c, the kite written in the masters, at 26
+  (numerator 12, denominator 14). The matrix A, the differential system itself, stays at 16 (numerator at most 7,
+  denominator at most 9), inside the prediction.
+- **STOP.** With d_s = 26 the planned family needs 2 x 36 x 31 + 15 = 2247 samples, above the cap of 1743. At the
+  measured rate, 35 samples in 297 s wall on six workers, that is about 5.3 h, above the cap of 5 h. Either one
+  stops stage 2b under the rule. Stage 1 also showed that the heights can need a third prime, which would make it
+  about 3350 samples.
+- **What the measurement says about the route.** The system A depends on g2 with low degree. The extra degree is in
+  c. So a family of A alone would cost 2 x 36 x 21 + 15 = 1527 samples on two primes, but the operator also needs c.
+  c could be had from the same reducer in other ways, for example by choosing a different master basis or by
+  reducing the kite only at the new value of s. That would cost a few samples per new value, not a derivation.
+  This was not tested and is not claimed.
+- **Compute used, whole phase.** Stage 1: 320 reduction samples, 2552 s wall on Pool(6), plus a 46 s lift and about
+  2 min of series runs. Stage 2a: 35 samples, 297 s wall. All within the 9 h cap, never more than 7 worker processes
+  of mine at once.

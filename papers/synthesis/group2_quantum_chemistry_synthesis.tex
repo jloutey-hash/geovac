@@ -843,7 +843,18 @@ on the opposite edge, and the correlated triangle there has the same eight
 singular points in $t^2$.  Its operator there splits into the K3 piece of the
 chain of three, an elliptic piece for each crossed pairing, and algebraic
 pieces of order one;\ its minimal operator has order thirteen.  The method on this graph is Puchalski, K\c{e}dziera
-and Pachucki's, for integer indices.
+and Pachucki's, for integer indices.  [MEASURED] The operators also evaluate:\
+the kite's, from six Taylor coefficients, rebuilds the quadrature grid behind
+the triangle to the grid's own precision in about a thirteenth of the upper
+bound on its processor time, derivation included, while the triangle's own
+operator is slower than one more grid sum.  A six-Gaussian geminal fit that a
+production code ships misses the triangle by five to thirteen percent,
+through its tail and not its cusp;\ the triangle weights the whole geminal,
+so this is not an F12 energy error (Paper~59).  At a second, blind set of rates
+the cuts predict eight of the kite's nine singular points, and the ninth is
+unexplained;\ in the LiH calculation the triangle class is a fifth of the run
+and its kernel build three percent, so a free kernel build would save about
+three percent (Paper~59).
 
 That density-not-operator reading has a constructive counterpart at two
 centers:\ Paper~12 carries out the
