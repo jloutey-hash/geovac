@@ -166,3 +166,53 @@ model l* + 10 was 24 to 46. The windows below are set from those, tighter than W
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-28 by the PM; computed in the main session)
+
+Code `debug/wx_L_compute.py`, `debug/wx_L_score.py`, `debug/wx_G_run.py`, `debug/wx_G_score.py`; derivation code
+`debug/wl_local.py`, `debug/wl_extrap.py`, `debug/wx_gauss.py` unchanged since registration. Logs
+`debug/data/wx_L_score.log`, `debug/data/wx_G_score.log`; data `debug/data/wx_{L,G}_*.json`. Record committed 06:26;
+part L scored 06:37, part G 06:42, inside the 60 min cap, at most 4 processes. Every control ran at the precision the
+record states, and no control was rerun.
+
+**Part L.**
+
+| Item | P | Q | R | S | Verdict |
+|:--|:--|:--|:--|:--|:--|
+| L0(a) moments, symmetric Phi/C | exact, 1 to 1e-40 | | | | PASS |
+| L0(b) referee | 2.7e-10 | | | | PASS |
+| L0(c) level 3 vs 4, l = 16..40 (bound 1e-5) | 5.0e-8 | 8.3e-8 | 4.9e-8 | 4.4e-8 | PASS, all live |
+| L0(d) synthetic, nb = 4 (bound 2e-2) | -6.2e-3 | -5.2e-3 | -6.8e-3 | -4.8e-3 | PASS |
+| A, nb = 5 (bound 1e-3) | 1.0000259 | 0.9999685 | 0.9999783 | 1.0000242 | La held |
+| A, nb = 4 | 1.0001624 | 0.9997963 | 0.9998546 | 1.0001258 | within 2e-3 of nb = 5 |
+| A_naive | 1.25239 | 1.06515 | 1.09817 | 1.16764 | Lb held |
+
+**Gate L: GO.** At unequal bond lengths the size of the bond-angle singularity is the Landau collinear-pinch average of
+the two cusp functions along the segment between the H atoms, with nothing fitted in it: it matches to at most 3.2e-5
+in four fresh cases where both bond lengths and the H exponent vary. The endpoint size is off by 6.5 to 25 percent.
+Novelty: the pinch mechanism is KNOWN (Landau, standard); its use for the size of this term is NOT SEARCHED.
+
+**Part G.**
+
+| Control | Result | Verdict |
+|:--|:--|:--|
+| G0(a) Slater level 2 vs 3, l = 0..63 (bound 2e-5) | E3 6.3e-7, E4 1.8e-6 | PASS |
+| G0(b) k-space vs series, 50 digits (bound 1e-12) | g3 2.4e-32, g4 3.8e-24, E3-3 1.8e-44, E4-3 2.1e-44 | PASS, all live |
+| G0(c) resummation at 104.5 deg (bound 1e-14) | g3 9.6e-49, E3-3 8.2e-50 | PASS |
+| G0(d) toy q_l | 1.19e-8 | PASS |
+| G0(e) Slater local power, l = 21, 23, 42, 50 | E3 7.76-7.91, E4 7.77-7.91 | PASS |
+
+| Item | Result | Verdict |
+|:--|:--|:--|
+| Ga g3, g4 | F_l > 0; worst residual / bound 0.145, 0.397; p_30 81.6, 109.2 | held |
+| Gb1 | F_l > 0 for l = 0..63 in all four contracted cases | held |
+| Gb2 l* (window) | E3-3 12 (11..14); E3-6 39 (37..40); E4-3 13 (12..15); E4-6 42 (41..44) | held |
+| Gb2 scaling (2.9..3.5) | E3 3.250, E4 3.231 | held |
+| Gb3 p at l0, l0+5 | E3-3 43.1, 56.6; E3-6 23.9, 28.5; E4-3 43.2, 56.4; E4-6 23.6, 27.8 | held |
+
+**Gate G: GO.** With no cusp there is no power-law tail, and the STO-3G and STO-6G contractions follow the Slater
+coefficients only up to a crossover placed by the model to within one unit (observed = model or model - 1 again in all
+four cases), moving with the square root of the tightest exponent. Novelty: Ga, Gb1, Gb3 are CHECKs (KNOWN); Gb2 is
+PROBABLY KNOWN as basis-set lore, not searched, so a CHECK, not a finding.
+
+**Reported only.** WL and WG stay STOP as registered; this record is their scored replacement on fresh cases.

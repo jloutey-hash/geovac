@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.19 (October 27, 2026)
+**Version:** v5.21.20 (October 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Bond-angle size at unequal lengths = Landau pinch average; Gaussian crossover; kite not a chemistry shortcut (2026-10-28, v5.21.20, pre-registered):** WX GO both parts; WL, WG STOP (unmeasured controls); KS STOP. CHANGELOG v5.21.20.
 - **/walls periods re-crystallized; water bond-angle term derived, contact form (2026-10-27, v5.21.19, pre-registered):** graph reading promoted; WA5 STOP; WA6 GO; WA7 STOP (sign clause); WA8 GO, zero contact drops l^-8. CHANGELOG v5.21.19.
 - **H2 geminal master on Paper 59's elliptic curve; water bond-angle singularity (2026-10-27, v5.21.18, pre-registered):** LM operator = eq:pf rescaled, GO; linear geometry not singular, rate test STOP. CHANGELOG v5.21.18.
 - **Ninth point = Broadhurst's triangle threshold, mechanism confirmed; slice master count (2026-10-27, v5.21.17, pre-registered):** prior art credited; GO (derived), moves at small Coulomb mass; tabulation BORDERLINE, MC3 missed. CHANGELOG v5.21.17.
@@ -228,7 +229,7 @@ it is a PI call.
 ---
 ## 3. Approaches That Failed
 
-Critical institutional memory. **Do not re-derive these dead ends.** Category table below, then a name+count index of the 93 per-sprint instances; the **full account of every row is `docs/failed_approaches_ledger.md`** (moved verbatim). Refinement layer: `docs/walls/register.md`. Sub-agents must check the ledger first.
+Critical institutional memory. **Do not re-derive these dead ends.** Category table below, then a name+count index of the per-sprint instances; the **full account of every row is `docs/failed_approaches_ledger.md`** (moved verbatim). Refinement layer: `docs/walls/register.md`. Sub-agents must check the ledger first.
 
 |:---------|:-----:|:-----------|
 | Category | Count | Key Lesson |
@@ -370,6 +371,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | RE-INTERPRETATION of the CUSP-2 row (2026-09-25): its 'Z_c≈1.84 graph-validity boundary' was the non-physical (1/16)A hop; physical He has no Z_c. The negative result (Schwartz tail does not help) stands | 0 | See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the Dirichlet-disk row (2026-09-29): the 'boundary obstruction' was a float artifact at the exact grid point ρ=R (0/0 Markov ratio); off it the error decays. Negative WITHDRAWN; disk + cone OPEN | 0 | See `docs/failed_approaches_ledger.md`. |
 | Generic three-electron chain fibre as K3 + elliptic + Tate periods (P3e-2, 2026-10-14; filed by `/walls` 2026-10-16) | 1 | 320-digit PSLQ at one mass triple finds no relation while the positive control recovers its exact one; the generic fibre carries more than K3 and elliptic periods. OPEN-LEANING: widen the basis (dilogs, elliptic products) before the computation. See `docs/failed_approaches_ledger.md`; walls register PERIODS-TRANSCENDENCE. |
+| The kite operator as a chemistry-precision evaluator (KS, 2026-10-28) | 1 | At 1e-12 float64 graded quadrature is ~500x faster with the operator given; the operator walk needs 60 digits. Structure, not a shortcut. See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the Minnesota-Sturmian deuteron row (2026-10-20): the v2 '20x overbinding' came from singlet parameters labelled triplet and a non-orthonormal basis treated as orthonormal, not from Minnesota being HO-tuned. The polarizability negative stands | 0 | See `docs/failed_approaches_ledger.md`. |
 | Frozen Li+ core as a Gaussian contact series matched to atomic levels only (CE, 2026-10-20; registration void on a shared control) | 1 | On LiH+ the error falls far less than 3x per order, the d channel makes it worse, and Paper 17's PK form transfers better: bound atomic levels fix only exterior phases while the molecular field probes the core interior. See `docs/failed_approaches_ledger.md`. |
 

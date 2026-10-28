@@ -393,3 +393,15 @@ core interior, where a smooth contact series has the wrong wave function. A tran
 matching data that couples to an external field (the role norm conservation plays for pseudopotentials,
 Hamann-Schlueter-Chiang 1979). This is not a seventh PK reshape: the composed builder was not touched.
 Drivers `debug/core_eft_A.py`, `debug/core_eft_B.py`; CHANGELOG v5.21.3.
+
+### The kite operator as a chemistry-precision evaluator (KS, 2026-10-28) | 1
+
+Record OE (v5.21.15) found that the kite's Picard-Fuchs operator rebuilds Y faster than a 60-digit quadrature grid.
+Record KS (`docs/predictions/2026-10-28_kite_speed_test.md`, registered before timing) asked whether that holds at
+chemistry precision, 1e-12, against float64 tanh-sinh quadrature graded at the ends and split along the ridge.
+It does not: with the operator already given, the quadrature is about 500 times faster (0.033 s against 16 s of
+processor time on one core), and about 3e5 times faster with the operator's derivation counted. The operator's Taylor
+walk diverges at 20 to 40 working digits, so it cannot run below 60 digits at all (KS2 failed). The two routes agree on
+Y to 7e-14. Lesson: the operator is a statement about structure and a high-precision evaluator, not a chemistry
+shortcut; at double precision a plain graded quadrature wins. One parameter set, one machine. Scripts
+`debug/ks_*.py`; Paper 59 `sec:f12`, the [MEASURED] paragraph after the operator-evaluator guard; CHANGELOG v5.21.20.

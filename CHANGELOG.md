@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.20] - 2026-10-28
+
+PI-directed: two tests by sub-agents ("kick those off with sub agents"), the Landau map of the bond-angle integral
+("Yeah, let's do this"), and one fresh registration with every control measured first ("Yes").
+
+### Added
+- **WX (fresh registration, both parts GO)** (`docs/predictions/2026-10-28_water_landau_gaussian_fresh.md`, committed
+  alone as 3bd09697 before computing). Every numeric control bound was measured first, on the old voided cases and on
+  unscored neighbour cases (D + 0.05); measurement scripts `debug/wx_measure_L.py`, `debug/wx_measure_G*.py`,
+  `debug/wx_model.py`.
+  - Part L: at unequal bond lengths the size of the bond-angle singular term is the Landau collinear-pinch average
+    Phi = (pi^2/630) 24 int int s u G_Y(-s w) G_Z(u w), the two cusp functions averaged along the H-H segment. Four
+    fresh cases (both lengths and the H exponent varied), grid level 3 against level 4 (noise 4e-8 to 8e-8, bound
+    1e-5): the extracted size matches Phi to at most 3.2e-5 at nb = 5; the endpoint size is off by 6.5 to 25%. GO.
+  - Part G: single s Gaussians give no power-law tail; STO-3G and STO-6G follow the Slater l^-8 coefficients up to a
+    crossover l*, observed at model l* or model l* - 1 in all four fresh cases, ratio l*(6)/l*(3) = 3.250 and 3.231.
+    GO. Novelty: checks of the contact reading (basis-set lore), not findings.
+  - Code `debug/wx_gauss.py` (WG's series form and model with D as a parameter; reproduces WG's l* = 11, 32 at
+    D = 1.809), `debug/wx_L_compute.py`, `debug/wx_L_score.py`, `debug/wx_G_run.py`, `debug/wx_G_score.py`.
+- **Paper 59 water passage:** the unequal-length cap ("size not derived") replaced by the [SYMBOLIC + MEASURED]
+  Landau-pinch result; a [MEASURED] Gaussian paragraph (no cusp, no power tail; crossover at about
+  3.6-3.7 D sqrt(alpha_max)), labelled a check, not a new result. Abstract and conclusion reread: neither states the
+  water results.
+- **Paper 59 kite speed paragraph** ([MEASURED], record KS): at 1e-12 a float64 graded tanh-sinh quadrature beats the
+  kite operator about 500x with the operator given, 3e5x with its derivation; the operator's Taylor walk diverges
+  below 60 digits. Conclusion sentence added: the operator's gain is a property of 60-digit arithmetic.
+- **CLAUDE.md §3 + ledger:** row "The kite operator as a chemistry-precision evaluator (KS)". The §3 intro's stale
+  instance count (93; the index has 107 rows) dropped.
+- **Memory rule** `feedback_measure_controls_before_registering.md`: any numeric control bound is measured on an
+  unscored case before registering (three hits: WA6, WL, KS's timer tick).
+
+### Changed
+- **Paper 59 Chen et al. rate:** about 4e5 integrals/s at the contraction stage with the cache built, about 4e4/s end to
+  end (was the first figure alone), checked against the preprint text.
+
+### Closed (STOP, as registered)
+- **KS** (`2026-10-28_kite_speed_test.md`): STOP. KS2 failed, KS3, KS3b, KS4 held, KS5 unclear.
+- **WL** (`2026-10-28_water_landau_unequal.md`): STOP; control (c) bound 1e-7 set without measuring, all four cases
+  void. The physics (size to 4e-4) reported only; replaced by WX part L.
+- **WG** (`2026-10-28_water_gaussian_contact.md`): STOP by PM ruling; control (b) was first run at 30 digits, a
+  precision the record did not set, and failed for g1. The 50-digit rerun reported only; replaced by WX part G.
+
 ## [v5.21.19] - 2026-10-27
 
 PI-invoked ("Ok, let's fix /walls and build guards."): `/walls PERIODS-TRANSCENDENCE`, then the owed guards, each written

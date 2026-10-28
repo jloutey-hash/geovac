@@ -107,3 +107,34 @@ is the extracted amplitude divided by the naive size times (2 D1 D2)^(7/2) (so A
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-28 by the PM; computed in the main session)
+
+Scorer `debug/wl_score.py`, log `debug/data/wl_score.log`, data `debug/data/wl_score.json`. Derivation `debug/wl_local.py`
+and `debug/wl_extrap.py` unchanged since registration.
+
+| Item | A | B | C | D | Verdict |
+|:--|:--|:--|:--|:--|:--|
+| WL-0(a) moments, symmetric Phi/C | exact, 1 to 1e-40 | | | | PASS |
+| WL-0(b) referee | 2.7e-10 | | | | PASS |
+| WL-0(c) level 1 vs 2, l = 16..40 (bound 1e-7) | 1.3e-4 | 2.9e-5 | 1.1e-3 | 1.1e-3 | **FAIL, all four void** |
+| WL-0(d) synthetic, nb = 4 (bound 2e-2) | -4.3e-3 | -3.1e-3 | -7.9e-3 | -7.9e-3 | PASS |
+| A, nb = 4 | 1.000041 | 1.000110 | 1.000176 | 0.999619 | (void) |
+| A, nb = 5 | 0.999989 | 1.000014 | 1.000016 | 0.999965 | (void) |
+| A_naive | 1.0980 | 1.1060 | 1.5189 | 1.0841 | (void) |
+
+**Gate: STOP as registered.** Control (c) failed in every case, so no case is live and WLa-b are not scored.
+
+**Cause: the control's bound, set without measuring.** I set 1e-7 for the level 1 vs level 2 difference without
+computing it. The difference measures level 1's error, and level 1 is known to sit at about 1e-5 to 1e-3 here (WA6
+found 4e-5 at zX = 1). The bound was never achievable with this pair of levels. This is the second registration in two
+days whose noise statement was not measured first (WA6's understated floor was the first).
+
+**Reported only, not scored.**
+- At every case the extracted size agrees with the pinch average Phi to 4e-4 (nb = 4) and 3.5e-5 (nb = 5). The naive
+  endpoint size is off by 8 to 52 percent, against the extraction's own synthetic error of at most 8e-3.
+- Diagnostic after scoring (`debug/wl_diag_level3.py`, data `debug/data/wl_diag_level3.json`): level 2 vs level 3
+  differs by 3.1e-6, 5.1e-6, 8.1e-6 (A, C, D). A from level 3 is 1.000050, 1.000183, 0.999615, unchanged from level 2.
+  So the level-2 coefficients the extraction used were good to about 1e-5.
+- A scored result needs a fresh registration on unseen cases with the noise control on levels 2 and 3, sized from
+  these measured floors.

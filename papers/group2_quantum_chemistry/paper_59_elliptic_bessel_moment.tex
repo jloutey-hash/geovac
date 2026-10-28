@@ -160,7 +160,8 @@ Fourier-transform method together with Feynman's identity, to low-dimensional
 numerical quadrature~\cite{grotendorst_steinborn1988}.  Recently the
 four-center two-electron integral over Slater orbitals has been reduced, by
 cached Fourier--Bessel coefficients, to one radial quadrature, at about
-$4\times10^{5}$ integrals per second on one GPU in a preliminary
+$4\times10^{5}$ integrals per second on one GPU at the contraction stage, with the
+cache already built, and about $4\times10^{4}$ per second end to end, in a preliminary
 benchmark~\cite{chen2026fourier};\ that is the production baseline for any
 cost claim below.  Formulas in elementary functions for three- and four-center
 Slater integrals have also been given~\cite{novosadov2025}, but they drop the
@@ -1789,7 +1790,7 @@ one operator coefficient by $1/200$ moves $Y$ by $1$ to $7\%$.  $Y$'s own
 operator does not pay in the same way.  From the grid's data at $t=1.7$ it
 reaches five other values of $t$ to $4\times10^{-48}$ or better, but at $4$ to
 $12$\,s per value, against $0.02$\,s for one more grid sum, because once the
-kite is known the outer integral is a cheap sum.  The structure pays where
+kite is known the outer integral is a cheap sum.  At $60$ digits the structure pays where
 the cost is, in the inner kite.  Caps:\ one parameter set, so a new
 configuration needs a new derivation, which dominates the cost;\ times on one
 machine, with the quadrature's processor time an upper bound;\ the
@@ -1797,7 +1798,17 @@ comparison is to this paper's own grid, not to a production Slater-integral
 code such as Ref.~\cite{chen2026fourier};\ and no
 certified error bounds, only agreement with the grid (record
 \texttt{docs/predictions/2026-10-26\_operator\_evaluator.md}, registered before
-computing;\ guard \texttt{tests/test\_paper59\_operator\_evaluator.py}).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
+computing;\ guard \texttt{tests/test\_paper59\_operator\_evaluator.py}).
+\textbf{[MEASURED]} At chemistry precision the comparison reverses.  For $Y$ to $10^{-12}$, a
+double-precision tanh-sinh quadrature of the same two-dimensional integral, graded at the
+ends and split along its ridge, takes $0.033$\,s of processor time on one core.  The
+operator route takes $16$\,s with the operator already given, about $500$ times slower,
+and $3\times10^{5}$ times slower with its derivation counted.  It also cannot run below
+$60$ digits:\ at $20$ to $40$ digits its Taylor walk diverges.  The two routes agree on $Y$
+to $7\times10^{-14}$.  So the operator is an evaluator only where high precision is wanted;\
+for chemistry it is a statement about structure, not a shortcut (record
+\texttt{docs/predictions/2026-10-28\_kite\_speed\_test.md}, registered before timing;\ one
+parameter set, one machine).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
 their differential equations in series is standard in particle
 physics~\cite{moriello2020,hidding2021,liu_ma2023}, and
 Ref.~\cite{pkp2009} reduces the integer-index three-electron integral to such
@@ -1992,11 +2003,28 @@ the coefficients to $10^{-4}$ at $\ell=60$ with no fitted number, and what is le
 $\ell^{-4}$, the order of the first term left out.  The rate test above missed because its
 fit left the power free:\ on a function with exactly this singularity that fit is $5\%$ off,
 and with the derived power the four unequal-length rates come within $0.03\%$ (reported only;
-that run was voided by one of its own controls).  Caps:\ at unequal lengths the size of the
-leading term is not derived, because a gradient term moves it there (records
+that run was voided by one of its own controls;\ records
 \texttt{docs/predictions/2026-10-27\_water\_cusp\_singularity.md} and
 \texttt{docs/predictions/2026-10-27\_water\_cusp\_next\_term.md}, each registered before
-computing).  \textbf{[SYMBOLIC + MEASURED]} With zero contact the $\ell^{-8}$ term is absent.
+computing).  \textbf{[SYMBOLIC + MEASURED]} At unequal lengths the singular point moves to
+$x^{*}=(D_1^{2}+D_2^{2})/(2D_1D_2)>1$, where $|Y-Z|^{2}=0$ at a complex angle, and every
+gradient of the two cusp functions enters at the same order there, so the endpoint value of
+$C$ does not carry over.  Summed, those orders are the moments of $24su$ on the simplex
+$s,u\ge0$, $s+u\le1$:\ the term is $\Phi\,(2D_1D_2)^{7/2}(x^{*}-x)^{7/2}$ with
+$\Phi=(\pi^{2}/630)\,24\iint su\,G_Y(-sw)\,G_Z(uw)\,ds\,du$, $w=Y-Z$, the two cusp functions
+averaged along the segment between the hydrogens.  This is the collinear pinch of the Landau
+equations for $|\mathbf{a}|$, $|\mathbf{b}|$ and $1/|w+\mathbf{a}-\mathbf{b}|$.  For $1s$
+functions $\Phi$ is a two-dimensional integral of
+$e^{-\zeta_{\rm X}(R_1(s)+R_2(u))}$ with $R_1(s)^{2}=(1-s)D_1^{2}+sD_2^{2}$, and it equals $C$
+at $D_1=D_2$.  Extracted from the coefficients with the subleading powers as fitted
+nuisances, the leading size matches $\Phi$ to $3.2\times10^{-5}$ in four cases registered before
+computing, with both lengths and the hydrogen exponent varied and nothing fitted in the
+size;\ the endpoint value is off by $6.5$ to $25\%$ (record
+\texttt{docs/predictions/2026-10-28\_water\_landau\_gaussian\_fresh.md};\ a first registration
+stopped on a control bound set without measuring, record
+\texttt{docs/predictions/2026-10-28\_water\_landau\_unequal.md}).  The pinch mechanism is
+standard;\ its use for this term was not searched.  Caps:\ $1s$ functions, oxygen exponents
+$3$ and $4$.  \textbf{[SYMBOLIC + MEASURED]} With zero contact the $\ell^{-8}$ term is absent.
 For a hydrogen function whose first-order cusp cancels, the derived next term, $(1-x)^{9/2}$
 with one such function and $(1-x)^{11/2}$ with two, reproduces the coefficients with nothing
 fitted, with the sign the derivation gives:\ to $0.5$--$1.9\%$ at $\ell=35$ on four cases
@@ -2005,6 +2033,20 @@ record \texttt{docs/predictions/2026-10-27\_water\_zero\_contact\_fresh.md}).  A
 registration stopped on a sign clause it stated wrongly;\ its size and remainder clauses held
 (record \texttt{docs/predictions/2026-10-27\_water\_zero\_contact.md}).  Caps:\ symmetric
 geometry, $1s$ on the oxygen, cusp-free pairs of $1s$ functions only.
+\textbf{[MEASURED]} Gaussian functions have no cusp, so the contact reading says their
+bond-angle series has no power-law tail.  For one $s$ Gaussian per center the integral is a
+Boys function, linear in $\cos\gamma$, and its coefficients fall like $T^{\ell}/(2\ell+1)!!$.
+STO-3G and STO-6G contractions follow the Slater $\ell^{-8}$ coefficients up to a crossover
+$\ell^{*}\approx3.6$--$3.7\,D\sqrt{\alpha_{\max}}$, $\alpha_{\max}$ the tightest hydrogen
+exponent, and fall away past it.  A model that keeps only the cusp-cusp term placed
+$\ell^{*}$ to within one in four cases registered before computing, and $\ell^{*}$ moves with
+$\sqrt{\alpha_{\max}}$ (record
+\texttt{docs/predictions/2026-10-28\_water\_landau\_gaussian\_fresh.md};\ a first registration
+stopped on a control whose precision it did not set, record
+\texttt{docs/predictions/2026-10-28\_water\_gaussian\_contact.md}).  That a Gaussian fit
+copies a cusp only down to about $1/\sqrt{\alpha_{\max}}$ is basis-set lore;\ this is a check
+of the contact reading, not a new result.  Caps:\ symmetric geometry, $s$ functions, two
+published contractions.
 The elliptic content of
 Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  The radial core is a period of an irreducible connection
 (Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
@@ -2082,7 +2124,9 @@ of a density with a geminal, and five algebraic pieces;\ its minimal
 operator has order thirteen.  The operators also evaluate:\ the kite's, from
 six Taylor coefficients, rebuilds the grid behind $Y$ to the grid's own
 precision in about a thirteenth of the upper bound on the quadrature's
-processor time, derivation included, while $Y$'s own operator is slower than one more grid sum.  At a
+processor time, derivation included, while $Y$'s own operator is slower than one more grid sum.  That gain
+is a property of $60$-digit arithmetic:\ at $10^{-12}$ a double-precision quadrature is about $500$ times
+faster than the kite's operator, so for chemistry the operator is structure, not a shortcut.  At a
 second set of rates the cuts predict eight of the kite's nine singular points;\ the ninth has a measured closed
 form in the squared rates, a known triangle threshold of the massless-rung kite (Broadhurst), confirmed here
 as an on-shell pinch that moves, not vanishes, at a small Coulomb mass, and it sits on
