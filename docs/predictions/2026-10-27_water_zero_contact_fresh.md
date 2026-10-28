@@ -65,6 +65,15 @@ remainder gives 9.4), and |F_35 / L1_35 - 1| >= 5 dev_35.
 - At most 30 min wall. No change to `geovac/` or `tests/`.
 - Symmetric geometry; two cusp-free pairs; 1s on X. Not a claim about Gaussian or p functions.
 
+## Addendum 1 (appended 2026-10-27, before computing; the predictions above are not edited)
+
+- **A disclosure was wrong.** The bound-rule bullet says that applied to WA7's cases the rule gives "0.05 or more".
+  I had not computed it. Computed now from WA7's stored betas: 0.030, 0.048 ('both', zeta_X = 1, 2.25) and 0.013, 0.019
+  ('one'), against WA7's deviations at l = 35 of 0.0060, 0.0103, 0.0026, 0.0041. So on WA7's cases the rule sits 4-5
+  times above what was found, not above 0.05.
+- **The printed bounds are rounded loosely.** The rule gives c1 0.0915, c2 0.0347, c3 0.0618, c4 0.0267. The scored
+  bounds are the ones printed in the record (0.090, 0.035, 0.064, 0.026), unchanged.
+
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
