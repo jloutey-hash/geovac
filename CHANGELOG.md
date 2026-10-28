@@ -7,6 +7,112 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.19] - 2026-10-27
+
+PI-invoked ("Ok, let's fix /walls and build guards."): `/walls PERIODS-TRANSCENDENCE`, then the owed guards, each written
+as a separate step after its claim and fire-tested.
+
+### Changed
+- **`/walls PERIODS-TRANSCENDENCE`: the crystallization's operator clause MIS-SCOPED, re-crystallized** (`docs/walls/register.md`,
+  cluster delta 2026-10-27). "Never by the operator" was contradicted by four paper-owned results: GA2 (a Gaussian geminal
+  leaves the Picard-Fuchs ladder, v5.21.7), GY3 missed (the Gaussian triangle loses its K3 piece, v5.21.9), MG1-MG3 (the
+  gamma = 1 drop is an equal-mass degeneration, v5.21.8), HG1-HG4 (a Slater geminal lifts the same-pair two-centre master's
+  operator to genus one, v5.21.18). New statement: the class is set by the integral read as a graph, the density topology
+  plus the masses on the kernel lines; a massless Coulomb kernel adds no threshold, so for Coulomb integrals the density
+  topology alone sets the rung. Basis, nuclei-count and factorization clauses unchanged. Falsifier widened; dispatch rule (A)
+  amended. P3e-2's kind settled to SOFT: the second slice through two null triples carries R_V (GS2, v5.21.4), irreducible
+  and orthogonal (v5.21.14), whose periods no P3e-2W basis contained. No promotion; whether Paper 59 states the graph
+  reading is a PI call.
+- **Paper 59 `sec:f12`:** the opening "governed not by the operator but by the density topology" contradicted the same
+  section's master paragraph and `sec:density_ring`; now "at the level of the curve", with pointers to both. Guard pointers
+  added to the six record parentheticals of this round. Compiles three-pass clean, 0 undefined references. Abstract and
+  conclusion reread: neither states the operator clause.
+- **Graph reading promoted to its own observation (PI-delegated, "Can you make those decisions and enact them").** Paper 59
+  `sec:f12` closes with an [OBSERVATION + PRIOR ART] paragraph: read as a Feynman graph, the class is set by the graph's
+  shape and the masses on its lines; Coulomb lines are massless, so the density topology alone sets the rung for Coulomb
+  integrals; Slater geminals are massive lines; Gaussian geminals leave the ladder. Prior art credited (internal masses set
+  a Feynman integral's geometry: Bloch-Vanhove, Vanhove 2014). Falsifier and four guards stated; matrix row added; walls
+  register records the decision. The section's other sentence ("lives in the densities, not in the operator") restated
+  at the curve level, pointing to it. Abstract and conclusion reread: both speak of Coulomb kernels only, unchanged.
+- **Seam J9** (`docs/forced_free_seam.md`), **Paper 57** J9 item, **atlas row 19**: the same-pair clause scoped to the Coulomb
+  kernel, with the geminal exceptions. Paper 57 compiles three-pass clean.
+- **C25:** new entry `p59-operator-clause-scope` (fires on "lives entirely in the densities, never in the operator", silent on
+  the scoped wording; self-test PASS); its mention pattern narrowed after a false match on Paper 18's "(operator-independent)"
+  basis tiers. Gate PASS, 32 claims.
+
+### Added
+- **Guards, each a separate step, fire script `debug/fire_guards_2026_10_27.sh`:**
+  - `tests/test_paper59_h2_geminal_master.py` (5 fast): Delta = 4 x the on-shell Gram determinant; the LM operator = eq:pf under
+    r = D/sqrt(T1), rho = T1/(T1 - T2); the Bessel limit; the s2 patterns. Fire-tested 10/10. A first draft passed a wrong
+    rescaling, because no coefficient matched and every one read as zero; it now rejects leftover terms and a zero constant.
+  - `tests/test_paper59_water_bond_angle.py` (2 fast + 1 slow, ~30 s): the referee control; one sign in all six cases; the rate
+    within 3% above D</D>; the symmetric power 7-8.5 with |log r| < 0.02. Fire-tested 6/6. A control line that could not fail
+    was removed before recording.
+  - `tests/test_paper59_kite_ninth_point.py` (7 fast; data `tests/data/paper59_kite_p2_2026_10_27.json`, built by
+    `debug/build_kite_guard_data_2026_10_27.py`): the blind operator's order, masters and degree; exact local exponents at
+    the eight cuts (-1/2 at the crossed three-line cuts, doubled at the two-line cuts), at z9 (-7/2) and ordinary at the
+    adjacent pairings; eq:kite_ninth_point against the 53 Stage C and Stage A values at two primes, its zero, symmetries and
+    poles; the ND1 elimination at three rate sets; the ND2 multipliers with U = 0. Fire-tested 8/8.
+  - `tests/test_paper59_operator_evaluator.py` (1 fast, ~4 s): six Taylor coefficients and the operator fix the series; Taylor
+    steps past the apparent root reach two grid nodes to 1e-60. Fire-tested 3/3 (a 1/200 coefficient, a 1e-40 input, a walk
+    that ignores apparent roots). Times are not guarded.
+  - `tests/test_paper59_master_count.py` (4 fast): four masters on the slice, a fifth for n1 >= 2, six on the two-offset fibre,
+    three method controls. Fire-tested 3/3 on wrong counts. Four other plants (no-op steps on generic data, the quadratic's form,
+    one offset) stayed green and are not wrong answers; the last is the record's disclosed deviation 4.
+  - `tests/test_paper59_production_geminal_fit.py` (1 slow, ~5 min): Psi4's errors to 1e-3 and their order, with the W1 six-term
+    fit against the 60-digit grid as the engine control. Fire-tested 3/3 (a wrong Psi4 coefficient, a Coulomb-loop factor 8 -> 8.1, a missing gamma^2).
+- **WA5, the bond-angle singularity as a derived cusp-cusp term (pre-registered, record
+  `docs/predictions/2026-10-27_water_cusp_singularity.md`, committed alone first): STOP as registered.** Derivation: the
+  only angle-dependent non-analytic part of (XY|XZ) is the H-H cusp-cusp term C s^7, s = |Y - Z|,
+  C = zeta_H^5 zeta_X^3 e^{-zeta_X(D1+D2)}/630 (checked exactly on the two-centre 1s Coulomb integral, whose first odd
+  term is (2/315) R^7). It fixes the Legendre power at 4 (unequal bonds) and 8 (equal). Control WA5-0(b) failed: on a
+  synthetic s^7 + 3 s^9 the registered fits miss (the s^9 correction is about 40/l^2 relative, too large for a 1/l
+  series), so WA5a-c are void. Reported only: with the power fixed, the rate is within 0.03% of D</D> in all four
+  asymmetric cases (WA1 had missed by 2-3%, a fit-model bias of about 5% on a perfect model function), the symmetric
+  power is 8.02 and 8.04, and F_l / L_l rises toward 1 (0.99 at l = 60, symmetric). Driver `debug/wa5_cusp.py`.
+  WA5's derivation had one error, found while deriving WA6: the gradient term |a| a_j gives w_j |w|^7, which is not
+  analytic. It enters at next order for equal lengths, but moves the leading size for unequal ones.
+- **WA6, the symmetric-water series from the derived terms, nothing fitted (pre-registered, record
+  `docs/predictions/2026-10-27_water_cusp_next_term.md`, committed alone first): GO.** `debug/wa6_local.py` derives the
+  singular part through (1 - x)^(9/2) by an exact local Fourier computation (it reproduces the two-centre
+  (2/315) R^7 + (16/14175) R^9 exactly). At D1 = D2 = 1.809: |F_l / L2_l - 1| = 1.0e-4 (E1) and 1.7e-4 (E2) at l = 60,
+  against 1.0e-2 and 1.3e-2 with the leading term alone; the remainder falls like l^-4 (dev_30 / dev_60 = 16.2,
+  predicted about 16). One disclosed deviation: the registration understated the noise floor (4.4e-5, not 1.4e-5;
+  the 1e-4 control bound is met). Paper 59's water passage states the derived term [SYMBOLIC + MEASURED], with the
+  unequal-length size as the cap. Guard `tests/test_paper59_water_cusp_term.py` (1 fast, 1 slow ~13 s), fire-tested
+  7/7 as a separate step (an FT constant 8 -> 8.1, the degree-2 terms dropped, the k sign of the first density, a wrong
+  rotation at Z, the alpha9 term dropped, a wrong next power, a wrong R^9 coefficient).
+- **Prior-art check for WA5/WA6 (PI-directed explorer; the closest source verified by the PM against its abstract).**
+  No prior art for the cusp-cusp origin, the constant C, the bond-angle rates or the two-term match. Credited in
+  Paper 59: Silverstone, J. Chem. Phys. 46, 4377 (1967), the small-R series of two-centre Coulomb integrals with its
+  non-analytic family (full text unread). Partial and owed in full text: Bouferguene-Jones 1998, Joy-Handler 1965.
+  Recorded under "Novelty check" in the WA6 record. Bouferguene-Jones 1998 then read in full from a free copy: their Eq. (4.24) gives the
+  one-electron analogue's multipole-series terms as geometric in the distance ratio times a power of l (logarithmic at
+  equal distances). Credited in Paper 59 as prior art for the form of the rate. The two-electron cusp-cusp term, its
+  size and the bond-angle reading remain unfound. No free copies of Silverstone or Joy-Handler.
+- **Contact form of the bond-angle term; WA7 zero-contact test (pre-registered, record
+  `docs/predictions/2026-10-27_water_zero_contact.md`, committed alone first): STOP.** The cusp-cusp term factors as
+  (pi^2/630) g_Y g_Z |Y - Z|^7, one contact g per hydrogen (Kato: -zeta_H chi_X chi_Y at the nucleus), pi^2/630
+  universal: the Coulomb form of Tan's contact relations (credit Hofmann, Barth and Zwerger, arXiv:1304.2891). WA7 gave
+  one H function, then both, a zero first-order cusp. All controls passed; the derived next term matched (dev at l = 30:
+  1.1e-2, 2.0e-2 with both; 4.9e-3, 7.7e-3 with one; remainder ratios 23-45; gain over the leading term 7-15x). The gate
+  is STOP on WA7a's sign clause: the registration said F_l takes the sign of beta_p, but the Legendre coefficients of
+  (1 - x)^(9/2) are negative, so the derivation predicts F_l > 0, which is what was found. The registration's error,
+  disclosed; Paper 59 states the zero-contact result as reported only. Drivers `debug/wa7_local.py`,
+  `debug/wa7_score.py`, `debug/wa7_twocentre.py` (the machinery checked to R^11, 8/93555, exactly). Guard
+  `tests/test_paper59_water_cusp_term.py` extended (contact factorization fast; zero contact slow), fire-tested 6/6 as a
+  separate step. Also corrected in conversation, not in any file: Tan's k^-4 tail is a momentum density from a 1/r
+  wavefunction; the cusp's k^-4 is an amplitude, and the Coulomb density tail is k^-8.
+- **WA8, the zero-contact terms on four fresh cases (pre-registered, record
+  `docs/predictions/2026-10-27_water_zero_contact_fresh.md`, committed alone first; addendum 1, also committed before
+  computing, corrected a disclosure the registration had not computed): GO.** Two cusp-free pairs, two oxygen exponents,
+  two bond lengths: dev at l = 35 of 1.9e-2, 7.0e-3, 1.2e-2, 5.1e-3, each 4-5x inside its rule-set bound; sign as
+  derived; remainder ratios 11-15 (l^-4 gives 9.4); gain over the leading term 7-15x. Paper 59 now states the
+  zero-contact result [SYMBOLIC + MEASURED]. Scorer `debug/wa8_score.py`, derivation `debug/wa8_local.py`. The existing
+  guard covers the mechanism (its zero-contact test is on the WA7 case).
+- `docs/claim_test_matrix.md`: six rows moved from COVERAGE GAP to GUARDED; a new master-count row; the blind-point row's
+  "origin open" points to the ninth-point row.
+
 ## [v5.21.18] - 2026-10-27
 
 PI-directed ("Yes please. Let's do that H2 one then the water one after"; "Yes please. Good work"; "Yes").

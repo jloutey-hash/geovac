@@ -97,3 +97,41 @@ F_l / L_l = A0 + A1/l + A2/l^2 over the usable l gives |A0 - 1| < 0.03.
 ## Disposition
 
 (Appended after computing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-27 by the PM; computed in the main session)
+
+Driver `debug/wa5_cusp.py` (modes `control`, `cases`); logs `debug/data/wa5_{control,cases}.log`; data
+`debug/data/wa5_cusp.json`.
+
+| Item | Result | Verdict |
+|:--|:--|:--|
+| WA5-0(a) | channel sum 0.204941652531, diff 2.7e-10 | PASS |
+| WA5-0(b) | synthetic s^7 + 3 s^9: A0 = 0.988, 0.975, 0.973 (need 1e-2); r/rho = 1.0115, 1.0551 (need 1e-3) | **FAIL** |
+| WA5a-c | void as registered | VOID |
+
+**Gate: STOP as registered** (a control failed).
+
+**Why the control failed (diagnosed after, not registered).** The quadrature is not the cause: the synthetic
+coefficients match the closed form for (1 - x)^a to all printed digits. The cause is the control's own size. The
+s^9 / s^7 coefficient ratio behaves like 2(a+1)^2/l^2, about 40/l^2 for a = 7/2, so with C''/C' = 3 the correction is
+about 50 percent at l = 15, and a three-term series in 1/l cannot absorb it to 1 percent. The registered fit models are
+too weak for a subleading term that large. Whether water's own subleading term is that large was not known in advance.
+
+**Water cases, reported only (they score nothing).**
+
+| Case | usable l | r / (D</D>) (p fixed 4) | p (D1 = D2) | A0 | F_l / L_l at the two ends |
+|:--|:--|:--|:--|:--|:--|
+| E1 (1.809, 1.809) | 15-60 | | 8.017 | 1.0036 | 0.850, 0.990 |
+| E1 (1.809, 2.5) | 15-45 | 0.99981 | | 0.9899 | 0.771, 0.940 |
+| E1 (1.809, 1.0) | 15-29 | 1.00004 | | 0.9518 | 0.774, 0.875 |
+| E2 (1.809, 1.809) | 15-60 | | 8.038 | 1.0068 | 0.814, 0.987 |
+| E2 (1.809, 2.5) | 15-45 | 0.99976 | | 1.0670 | 0.804, 1.004 |
+| E2 (1.809, 1.0) | 15-29 | 0.99996 | | 1.0145 | 0.744, 0.888 |
+
+- With the power fixed by the derivation, the rate lands within 0.03 percent of D</D> in all four asymmetric cases
+  (WA1 had missed by 2-3 percent). The symmetric power is 8.02 and 8.04.
+- F_l / L_l rises toward 1 in every case and is within 1.5 percent of it at l = 60 for symmetric water. The fitted A0
+  is within 7 percent of 1, but the control shows that fit is not reliable to better than a few percent here.
+- Reading (not established, since unscored): the bond-angle singularity is the H-H cusp-cusp term C s^7, at the
+  outer-centre coalescence, with the size C = zeta_H^5 zeta_X^3 e^{-zeta_X(D1+D2)}/630. A scored test needs either the
+  s^9 coefficient derived too, so that nothing is fitted, or a control sized to the subleading term actually present.

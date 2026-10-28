@@ -483,6 +483,22 @@ CLAIMS = {
                   r"(membership|P ?G ?= ?0|lies? on \$?P)[^.;|]{0,80}\bproved\b(?![^.;]{0,120}(contour|Mellin))|"
                   r"(generic|every|all)[^.;]{0,20}(fibres?|fibers?|slices?)[^.;]{0,60}(order[- ]four|artanh[^.;]{0,20}absent)",
         changed="2026-10-21"),
+    "p59-operator-clause-scope": dict(
+        statement="The density topology, not the operator between the densities, sets the class AT THE LEVEL OF "
+                  "THE CURVE: a rational kernel keeps the curve the densities build [SYMBOLIC]. The integrated class "
+                  "can move with the kernel's mass and shape: a Slater geminal makes the two-centre master "
+                  "integral's operator genus one (the Lesiuk-Moszynski operator is eq:pf rescaled), the correlated "
+                  "triangle drops at the equal-mass value gamma = 1, and a Gaussian geminal leaves the "
+                  "Picard-Fuchs ladder. Scope set 2026-10-27 by /walls PERIODS-TRANSCENDENCE.",
+        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner_anchor=r"At the level of the curve, whether the integral closes", owner_tier=r"\[SYMBOLIC\]",
+        tier="SYMBOLIC (curve level); the class of the integrated object can move with the kernel", owner_window=4,
+        mention=r"(not|never)\s+(by|in)\s+the\s+operator|operator[- ]independence at work|"
+                r"lives?\s+(entirely\s+)?in\s+the\s+densities",
+        qualifier=r"curve|Coulomb|physical integrals tested|exception|\bmass|shape|machinery|reduc",
+        overclaim=r"(entirely|only)\s+in\s+the\s+densities,?\s+never\s+in\s+the\s+operator|"
+                  r"never\s+by\s+the\s+operator",
+        changed="2026-10-27"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",

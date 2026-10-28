@@ -266,6 +266,8 @@ def selftest() -> int:
                                      "The tree ladder is tied to the banana ladder by a Hadamard product, checked for n = 2 to 5."),
         "p59-slater-slice-membership": ("On the Slater slice, P G = 0 follows from the measured annihilation by W.",
                                         "On the Slater slice both annihilations are derived, with the Mellin contour shift as the one cap."),
+        "p59-operator-clause-scope": ("The difficulty of a two-electron integral lives entirely in the densities, never in the operator between them.",
+                                      "At the level of the curve, the class is governed not by the operator but by the density topology."),
     }
     missing = set(R.CLAIMS) - set(probes) - {"pi-source-case-exhaustion"} | (set(probes) - set(R.CLAIMS))
     if missing - {"pi-source-case-exhaustion"}:

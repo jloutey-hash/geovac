@@ -796,8 +796,10 @@ form~\eqref{eq:kernelswap} reproduces a direct position-space quadrature to $10^
 the Coulomb self-repulsion of a $1s$ density to its exact value $5a/8$
 (\texttt{test\_f12\_kernel\_swap\_and\_native\_geminal}).
 
-Whether the integral closes in elementary functions is governed \emph{not} by the operator
-but by the \emph{density topology}.  \textbf{[SYMBOLIC]} When both transition densities are
+At the level of the curve, whether the integral closes in elementary functions is governed
+\emph{not} by the operator but by the \emph{density topology};\ the class of the integrated
+object can still move with the kernel's mass and shape (the two-center master integral below,
+and the correlated triangle of Sec.~\ref{sec:density_ring}).  \textbf{[SYMBOLIC]} When both transition densities are
 single-center the radial integrand is rational and the pair integral is genus zero: e.g.\
 $\int_{0}^{\infty}[k^{2}/(k^{2}+\gamma^{2})^{2}]\,j_{0}(kR)\,dk=(\pi/4\gamma)\,e^{-\gamma R}$
 (\texttt{test\_f12\_geminal\_pair\_is\_elementary}).  A \emph{two}-center transition density,
@@ -817,9 +819,9 @@ decide the class---exactly as for the repulsion integral.
 
 \textbf{[OBSERVATION]} The consequence is a \emph{unification}, not an escape.  Explicitly-correlated integrals are
 native to the Fock momentum representation and cost the same as the corresponding repulsion
-integrals, because here, for the physical integrals tested, the difficulty of a
-two-electron integral lives in the densities, not in the operator between them;\ the two-center
-master integral below is an exception at the level of its operator.  In particular the elliptic obstruction of
+integrals, because here, for the physical integrals tested, the curve of a two-electron
+integral is built by the densities, not by the operator between them;\ the kernel's mass can
+still move the class of the integrated object (the observation closing this section).  In particular the elliptic obstruction of
 this paper---the genuine three-center, two-two-center-density integral---gates
 explicitly-correlated \emph{evaluation} as well: the corresponding closed form (the
 kernel changes the kind of period, not the curve) that would evaluate the
@@ -852,7 +854,29 @@ $(AA|AB)$ patterns and unequal exponents give a genus-one operator.  Caps:\ this
 the master's operator, not the physical integrals, which are its derivatives in the
 exponents;\ the master's source term and the published numbers were not re-checked;\ no
 earlier statement of the identification was found in a short search (record
-\texttt{docs/predictions/2026-10-27\_h2\_geminal\_elliptic.md}, registered before computing).
+\texttt{docs/predictions/2026-10-27\_h2\_geminal\_elliptic.md}, registered before computing;\
+guard \texttt{tests/test\_paper59\_h2\_geminal\_master.py}).
+
+\textbf{[OBSERVATION + PRIOR ART]} Read as a Feynman graph, the cases of this section and of
+Sec.~\ref{sec:density_ring} fit one pattern.  The densities and the kernels are the lines;\ a
+Slater geminal is a line whose mass is its exponent $\gamma$, and the Coulomb kernel is a line
+with no mass.  On every instance tested the class is set by the shape of the graph together
+with the masses on its lines.  A massless Coulomb line adds no threshold, so for Coulomb
+integrals the density topology alone sets the rung, as stated above.  A Slater geminal keeps
+the curve the densities build, but it lifts the same-pair master above to genus one, and the
+correlated triangle's operator drops order where the geminal's mass equals that of a density
+pair, $\gamma=1$.  A Gaussian geminal is not a propagator of this kind, and its integrals leave
+the Picard--Fuchs ladder (Sec.~\ref{sec:density_ring}).  That the internal masses set the
+geometry of a Feynman integral is standard:\ the sunset graph with massless lines evaluates in
+Gamma functions, and with massive lines it is elliptic~\cite{blochvanhove2015,vanhove2014}.
+What is recorded here is only that these molecular integrals follow the same dictionary.  It is
+a pattern across the tested instances, not a derivation.  It would fail on a Coulomb-only
+integral whose class depends on anything but the density topology, or on a Slater-geminal
+integral whose class does not change at an equal-mass value of its exponent (guards
+\texttt{tests/test\_paper59\_h2\_geminal\_master.py},
+\texttt{tests/test\_paper59\_geminal\_shapes.py},
+\texttt{tests/test\_paper59\_gy\_gaussian.py},
+\texttt{tests/test\_paper59\_mg\_mechanism.py}).
 
 %% ========================================================================
 \section{Beyond the third center:\ a fourth center, a three-electron chain, four linked densities, and a ring}
@@ -1773,7 +1797,7 @@ comparison is to this paper's own grid, not to a production Slater-integral
 code such as Ref.~\cite{chen2026fourier};\ and no
 certified error bounds, only agreement with the grid (record
 \texttt{docs/predictions/2026-10-26\_operator\_evaluator.md}, registered before
-computing).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
+computing;\ guard \texttt{tests/test\_paper59\_operator\_evaluator.py}).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
 their differential equations in series is standard in particle
 physics~\cite{moriello2020,hidding2021,liu_ma2023}, and
 Ref.~\cite{pkp2009} reduces the integer-index three-electron integral to such
@@ -1827,7 +1851,8 @@ the massive curve is checked modulo two primes at three masses, not over the
 rationals, and the local shape, the drop size on the curve and the escape
 direction were not run (record
 \texttt{docs/predictions/2026-10-27\_kite\_ninth\_point\_origin.md}, registered
-before computing).  What is added here is the measurement in this family:\ the
+before computing;\ guard \texttt{tests/test\_paper59\_kite\_ninth\_point.py}, which also
+covers the blind point and Eq.~\eqref{eq:kite_ninth_point}).  What is added here is the measurement in this family:\ the
 critical-point drop, the exponent, and the complete drop locus at one set of
 rates.  The operator's degree,
 $120$, exceeds the prediction, and its coefficients needed a fourth prime.
@@ -1864,7 +1889,7 @@ missed its registered precision, $2.7\times10^{-25}$ against $10^{-25}$, and
 an unregistered rerun agrees to $1.6\times10^{-37}$;\ these are counts of
 masters, not the cost of a table (record
 \texttt{docs/predictions/2026-10-27\_master\_count\_tabulation.md}, registered
-before computing).
+before computing;\ guard \texttt{tests/test\_paper59\_master\_count.py}).
 
 \textbf{[MEASURED]} Production explicitly correlated codes do not use a
 single Gaussian geminal.  For many integrals they replace $e^{-\gamma r}$ by
@@ -1892,7 +1917,7 @@ while a correlation energy is dominated by short range, so this prices the
 fit on this integral and not on an F12 energy;\ the fit's weight and its
 literature source are not verified, nor which integrals the code uses it for
 (record \texttt{docs/predictions/2026-10-26\_production\_geminal\_fit.md},
-registered before computing).
+registered before computing;\ guard \texttt{tests/test\_paper59\_production\_geminal\_fit.py}).
 
 %% ========================================================================
 \section{Scope, and the open frontier}
@@ -1938,10 +1963,49 @@ $\gamma=0$, where the two hydrogens would merge;\ at unequal lengths $D_1\neq D_
 geometrically, at a rate within $3\%$ of $D_</D_>$, the rate of $1/|Y-Z|$, whose only
 singular point is the two outer centers merging.  Bent water is an ordinary point.
 Caps:\ the registered tolerance for that rate was $1\%$ and it was missed in all four cases;\
-a fit with a $1/\ell$ term, not registered, comes within $1\%$;\ $1s$ orbitals with two
-exponent sets only (record
+$1s$ orbitals with two exponent sets only (record
 \texttt{docs/predictions/2026-10-27\_water\_angle\_singularities.md}, registered before
-computing).  The elliptic content of
+computing;\ guard \texttt{tests/test\_paper59\_water\_bond\_angle.py}).
+\textbf{[SYMBOLIC + MEASURED]} The singular term itself is derived.  Only the two hydrogen
+cusps, meeting through $1/r_{12}$, make the integral non-analytic in the angle, and the lowest
+such term is $C\,|Y-Z|^{7}$ with $C=\zeta_{\rm H}^{5}\zeta_{\rm X}^{3}e^{-\zeta_{\rm X}(D_1+D_2)}/630$.
+The same local computation, run on the two-center Coulomb integral of two $1s$ densities,
+reproduces the first two odd terms of its closed form, $(2/315)R^{7}+(16/14175)R^{9}$, exactly.
+The term factors into one number per hydrogen.  Call $g_Y$ the coefficient of $|\mathbf{r}-Y|$
+in the density $\chi_X\chi_Y$ at $Y$, its contact;\ Kato's cusp rule sets it to
+$-\zeta_{\rm H}\,\chi_X(Y)\chi_Y(Y)$.  Then the term is $(\pi^{2}/630)\,g_Y g_Z\,|Y-Z|^{7}$, and
+$\pi^{2}/630$ is the same for any two densities with a point cusp.  For Slater orbitals the
+$\pi^{2}$, a Fourier-measure factor, cancels against the normalizations, so $C$ is $\pi$-free.
+This is the Coulomb form of Tan's contact relations, in which one short-distance number per
+cusp, times a universal function, fixes a slow tail~\cite{hofmann2013}.
+The small-$R$ series of two-center Coulomb integrals, with a non-analytic family of terms
+beside the even one, is Silverstone's~\cite{silverstone1967}.  For the one-electron
+analogue, the three-center nuclear-attraction integral, Bouferguene and Jones derived the
+large-$\ell$ terms of the same multipole series:\ geometric in the ratio of the two distances,
+times a power of $\ell$ set by the orbital, and only logarithmically convergent when the
+distances are equal~\cite{bouferguene1998}.  The two-electron cusp-cusp term, its size, and
+its reading as the bond-angle singularity were not found in a short search.
+The term fixes the power:\ $\ell^{-8}$ at equal lengths, and $\ell^{-4}$ times the geometric
+rate at unequal ones.  At water's equal lengths the first two orders, $\alpha_7(1-x)^{7/2}+
+\alpha_9(1-x)^{9/2}$, both in closed form from the two exponents and the bond length, reproduce
+the coefficients to $10^{-4}$ at $\ell=60$ with no fitted number, and what is left falls like
+$\ell^{-4}$, the order of the first term left out.  The rate test above missed because its
+fit left the power free:\ on a function with exactly this singularity that fit is $5\%$ off,
+and with the derived power the four unequal-length rates come within $0.03\%$ (reported only;
+that run was voided by one of its own controls).  Caps:\ at unequal lengths the size of the
+leading term is not derived, because a gradient term moves it there (records
+\texttt{docs/predictions/2026-10-27\_water\_cusp\_singularity.md} and
+\texttt{docs/predictions/2026-10-27\_water\_cusp\_next\_term.md}, each registered before
+computing).  \textbf{[SYMBOLIC + MEASURED]} With zero contact the $\ell^{-8}$ term is absent.
+For a hydrogen function whose first-order cusp cancels, the derived next term, $(1-x)^{9/2}$
+with one such function and $(1-x)^{11/2}$ with two, reproduces the coefficients with nothing
+fitted, with the sign the derivation gives:\ to $0.5$--$1.9\%$ at $\ell=35$ on four cases
+registered before computing (two cusp-free pairs, two oxygen exponents, two bond lengths;
+record \texttt{docs/predictions/2026-10-27\_water\_zero\_contact\_fresh.md}).  A first
+registration stopped on a sign clause it stated wrongly;\ its size and remainder clauses held
+(record \texttt{docs/predictions/2026-10-27\_water\_zero\_contact.md}).  Caps:\ symmetric
+geometry, $1s$ on the oxygen, cusp-free pairs of $1s$ functions only.
+The elliptic content of
 Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  The radial core is a period of an irreducible connection
 (Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
 closed form through any factorization;\ that does not bar an accurate
@@ -2137,6 +2201,19 @@ J.\ London Math.\ Soc.\ \textbf{11}, 16--20 (1936).
 \bibitem{broadhurst2008}
 D.~Broadhurst, ``Elliptic integral evaluation of a Bessel moment by contour
 integration of a lattice Green function,'' arXiv:0801.4813 (2008).
+
+\bibitem{hofmann2013}
+J.~Hofmann, M.~Barth and W.~Zwerger, ``Short-distance properties of Coulomb systems,''
+arXiv:1304.2891 (2013).
+
+\bibitem{bouferguene1998}
+A.~Bouferguene and H.~W.~Jones, ``Convergence analysis of the addition theorem of Slater
+orbitals and its application to three-center nuclear attraction integrals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{109}, 5718--5729 (1998).
+
+\bibitem{silverstone1967}
+H.~J.~Silverstone, ``Series expansion for two-center noninteger-$n$ Coulomb integrals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{46}, 4377--4380 (1967).
 
 \bibitem{blochvanhove2015}
 S.~Bloch and P.~Vanhove, ``The elliptic dilogarithm for the sunset graph,''

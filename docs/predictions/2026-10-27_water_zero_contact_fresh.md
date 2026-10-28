@@ -77,3 +77,23 @@ remainder gives 9.4), and |F_35 / L1_35 - 1| >= 5 dev_35.
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-27 by the PM; computed in the main session)
+
+Scorer `debug/wa8_score.py`, log `debug/data/wa8_score.log`, data `debug/data/wa8_score.json`. Derivation
+`debug/wa8_local.py` and `debug/wa7_local.py` unchanged since registration.
+
+| Item | c1 | c2 | c3 | c4 | Verdict |
+|:--|:--|:--|:--|:--|:--|
+| WA8-0(a) | WA7 F_30 reproduced to 12 digits | | | | PASS |
+| WA8-0(b) noise, l = 20..35 | 1.1e-9 | 1.9e-8 | 7.1e-10 | 1.4e-8 | PASS, 4 live |
+| WA8a dev_35 (bound) | 1.88e-2 (0.090) | 7.0e-3 (0.035) | 1.22e-2 (0.064) | 5.1e-3 (0.026) | |
+| WA8a sign of L2, l = 20..35 | yes | yes | yes | yes | **HELD** |
+| WA8b dev_20 / dev_35 (> 3) | 14.9 | 11.5 | 13.6 | 11.3 | |
+| WA8b gain over L1 at 35 (>= 5) | 7.3 | 12.2 | 9.4 | 14.7 | **HELD** |
+
+**Gate: GO.** On four cases not computed before (two cusp-free pairs, two oxygen exponents, two bond lengths, one or
+both H functions cusp-free), zero contact removes the l^-8 term, and the derived next term, (1 - x)^(11/2) with both
+H functions cusp-free and (1 - x)^(9/2) with one, reproduces the coefficients to 0.5-1.9% at l = 35 with nothing
+fitted, with the sign the derivation gives. The remainder falls slightly faster than l^-4 between l = 20 and 35
+(ratios 11-15 against 9.4), as in WA7. Each deviation is 4-5 times inside its bound.

@@ -4,7 +4,7 @@
 >
 > **Vocabulary.** Status: STANDING / SOFTENED / BREACHED / MIS-SCOPED / SUPERSEDED. Kind: HARD (proven structural impossibility) / SOFT (engineering·convention·precision·basis-limited, revisit-candidate) / OPEN-LEANING (tested-negative, a named better attempt exists). Cluster maturity: CRYSTALLIZED / FORMING / SINGLETON.
 
-**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked). · **2026-09-19 (v5.14.6):** architecture-swap audit **composed → prolate-native diatomic**, PI-adjudicated — a new *kind* of pass (audit against an architecture change, not a shared-mechanism cluster); see the dedicated section below. · **2026-10-16 (v5.20.18):** `/walls PERIODS-TRANSCENDENCE`, PI-invoked — the cluster worked FORMING → CRYSTALLIZED (home: Paper 59 `sec:f12` + `sec:beyond`, seam J9); one member MIS-SCOPED (route-specific), one new OPEN-LEANING member filed; see its section below.
+**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked). · **2026-09-19 (v5.14.6):** architecture-swap audit **composed → prolate-native diatomic**, PI-adjudicated — a new *kind* of pass (audit against an architecture change, not a shared-mechanism cluster); see the dedicated section below. · **2026-10-16 (v5.20.18):** `/walls PERIODS-TRANSCENDENCE`, PI-invoked — the cluster worked FORMING → CRYSTALLIZED (home: Paper 59 `sec:f12` + `sec:beyond`, seam J9); one member MIS-SCOPED (route-specific), one new OPEN-LEANING member filed; see its section below. · **2026-10-27 (v5.21.19):** `/walls PERIODS-TRANSCENDENCE`, PI-invoked — the crystallization's "never by the operator" clause MIS-SCOPED by four paper-owned results (Gaussian and Slater geminal kernels move the class); re-crystallized as "the integral's graph: density topology plus kernel-line masses"; P3e-2 kind settled to SOFT (missing R_V periods); see the cluster's 2026-10-27 delta.
 
 ---
 
@@ -17,7 +17,7 @@
 | ALPHA-COMBINATION | *forming (unworked)* | ~13 | B, F, Δ have independent spectral homes; their *combination* into α⁻¹ has no single-mechanism derivation (12+ eliminated). |
 | GRAVITY-SUBSTRATE | *forming (unworked)* | ~12 | Finite-lattice substrate artifacts (Möbius α>1, A-coefficient, S_BH cutoff) vanish only in the a→0 continuum limit. |
 | RELATIVISTIC-TAPERING | *forming (unworked)* | ~3 | jj-coupled Coulomb conserves M_J/κ-branch as *sums*, not parities → no original-basis Z-string Z₂ survives. |
-| **PERIODS-TRANSCENDENCE** | CRYSTALLIZED (2026-10-16) | 7 | For two-electron integrals over Slater densities the transcendence class is fixed by the **density topology the kernel couples** (distinct two-centre densities set the class; a second kernel at a vertex lifts curve to surface; a pattern across the tested instances), never by the operator, the basis, the number of nuclei, or a factorization; the three-centre radial core has no closed form through any factorization. Home: Paper 59 `sec:f12` + `sec:beyond`; seam J9. |
+| **PERIODS-TRANSCENDENCE** | CRYSTALLIZED (2026-10-16; re-scoped 2026-10-27) | 7 | For two-electron integrals over Slater densities the transcendence class is set by the **integral's graph: the density topology the kernels couple, plus the masses on the kernel lines**. A massless Coulomb kernel adds no threshold, so for Coulomb integrals the density topology alone sets the rung; a massive (geminal) kernel can move it. Never set by the basis, the number of nuclei, or a factorization; the three-centre radial core has no closed form through any factorization. A pattern across the tested instances. Home: Paper 59 `sec:f12` + `sec:beyond` + `sec:density_ring`; seam J9. |
 | NUCLEAR-CONTINUUM-RESPONSE | *singleton-ish (unworked)* | ~3 | Sum-over-states / IR-extrapolation fragile for continuum response; the error is the interaction (Minnesota), not the solver. |
 | MOLECULAR-BINDING-W1e | *forming (unworked)* | ~10 | Second-row over-binding lives at the integral-**specification** step, not correlation (DMRG=FCI); cheap engineering exhausted. |
 
@@ -353,7 +353,42 @@ unbuilt prolate ≥4e CI.**
 
 **Promotion.** None needed: the statement is already a paper claim (Paper 59 `sec:f12`, extended by `sec:beyond`) and an Observation seam row (J9; re-tiered from F by the 2026-10-16 /qa claim-search DELTA); this pass records the cluster as its negative-side support and ties the walls to the guards.
 
-### This run's delta
+### Delta 2026-10-27 (v5.21.19, `/walls PERIODS-TRANSCENDENCE`, PI-invoked) — the operator clause re-scoped
+
+**Current state checked.** Paper 59 `sec:f12` (the geminal-master paragraph, v5.21.18), `sec:density_ring` (the γ = 1 mechanism; the Gaussian geminal; the off-slice kite and Y), `sec:three_electron` (the second slice); CHANGELOG v5.20.19 → v5.21.18; records `2026-10-22_geminal_shapes`, `2026-10-23_gamma1_mechanism`, `2026-10-23_gaussian_geminal_triangle`, `2026-10-27_h2_geminal_elliptic`, `2026-10-21_generic_slice`.
+
+**The crystallized statement: MIS-SCOPED in one clause.** "Never by the operator" was too broad. Four results, each in the owning paper, show the kernel moving the class:
+
+| Result | What the kernel does | Owner | Guard |
+|:--|:--|:--|:--|
+| GA2 (v5.21.7) | A Gaussian geminal's avatar has an irregular point at infinity: it leaves the Picard–Fuchs ladder for exponential periods; Slater avatars stay on it | Paper 59 `sec:density_ring` | `tests/test_paper59_geminal_shapes.py` |
+| GY3 missed (v5.21.9) | With e^{−r²} on both edges the correlated triangle loses its K3 piece: "the K3 rung of the Slater triangle is not set by the densities and the Coulomb line alone" | Paper 59 `sec:density_ring` | `tests/test_paper59_gy_gaussian.py` |
+| MG1–MG3 (v5.21.8) | The correlated triangle's order drops at γ = 1 because the geminal pair and the density pair then have equal masses; at γ = 1/2, 3/2, 2, 3 it does not | Paper 59 `sec:density_ring` | `tests/test_paper59_mg_mechanism.py` |
+| HG1–HG4 (v5.21.18) | A Slater geminal (a rational kernel, 4π/(k²+w₁²) with the 1/r₁₂) lifts the two-centre master integral's operator from Bessel to genus one, though both densities sit on one centre pair. Operator level only; the physical integrals are its exponent derivatives | Paper 59 `sec:f12` | `tests/test_paper59_h2_geminal_master.py` |
+
+What still holds, checked: at the level of the curve a rational kernel does not change the curve the densities build (Paper 59 `sec:f12`, [SYMBOLIC], `test_f12_multicenter_shares_eri_elliptic_genus`); the basis, nuclei-count and factorization clauses are untouched by anything since 2026-10-16.
+
+**Re-crystallized sentence (replaces the 2026-10-16 one, which is kept below as history).** For integrals over Slater densities, the transcendence class is set by the integral read as a graph: the density topology the kernels couple, together with the masses on the kernel lines. A massless Coulomb kernel adds no threshold, so for Coulomb integrals the density topology alone sets the rung: zero or one distinct two-centre density gives genus zero, two give genus one, same-pair densities close in the two-centre seed set, and a second kernel at a vertex lifts curve to surface (K3). A massive kernel is a line with its own mass. A Slater geminal keeps the curve the densities build but can lift a same-pair master to genus one, and it degenerates when its mass equals a density pair's (γ = 1). A Gaussian geminal is not a propagator of this kind and leaves the Picard–Fuchs ladder. The class is never set by the basis, the number of nuclei, or a factorization. It is a pattern across the tested instances, not a derivation.
+
+*Why this reading is not new physics.* Paper 59 `sec:density_ring` already reduces the kite as a two-loop D = 3 Feynman integral, with density lines, squared geminal lines and a massless Coulomb line (IB1–IB4, v5.21.10). The re-scope just reads the cluster through that dictionary: thresholds come from massive lines, and the Coulomb line has none.
+
+**Falsifier (widened).** As before: a genus-two fibre from a kernel coupling two densities, a third root at four centres, or a CM-placed basis beating generic placement. Added: a Coulomb-only integral whose class depends on anything but the density topology, or a Slater-geminal integral whose class does not change at an equal-mass value of its exponent.
+
+**Dispatch rule (A) amended.** *Class question:* count the distinct two-centre densities, the kernels sharing a vertex, **and the massive kernel lines with their masses**. Read the rung off the graph. Read it off the density topology alone only when every kernel is Coulomb.
+
+**Member status updates.**
+- Generic three-electron chain fibre (P3e-2 / P3e-2W): **STANDING, kind settled to SOFT (basis-limited, cause located).** The kind was left open on 2026-10-20. The second slice (t;1,2) runs through two of the null triples. Its operator has an order-four piece R, equivalent by an exact map to the operator R_V of ∫K₀(tx)K₀(x)K₀(2x)dx (GS2 held, CHANGELOG v5.21.4). R_V is irreducible and orthogonal (v5.21.14). None of the five P3e-2W bases contains R_V's periods, so the null is what a basis missing that piece predicts. The next attempt is named: put R_V's periods (the three-mass Bessel moment) in the basis.
+- Every other member: unchanged, evidence as recorded on 2026-10-16. Nothing since has touched the irreducible PF operator, Poly-2, the seam involution, the ℚ(i) seam, or the CM-basis null.
+
+**Loci re-scoped in the same pass (summary surfaces move with the claim).** Paper 59 `sec:f12`'s opening sentence ("governed not by the operator but by the density topology") contradicted the same section's master paragraph and `sec:density_ring`. It now reads "at the level of the curve", with pointers to both. The same cap was added to seam J9 (`docs/forced_free_seam.md`), Paper 57's J9 item and atlas row 19. The group 2 synthesis was already scoped in v5.21.18.
+
+**Promotion.** None needed. The sharper statement is assembled from paper-owned results, and J9 stays an Observation. The PI decides whether Paper 59 should state the graph reading (massive vs massless lines) as its own [OBSERVATION] sentence. This pass did not add it.
+
+**Promotion decided (2026-10-27, PI-delegated: "Can you make those decisions and enact them").** The graph reading is now its own [OBSERVATION + PRIOR ART] paragraph closing Paper 59 `sec:f12`, with the falsifier above and four guards. Prior art credited: internal masses set a Feynman integral's geometry (Bloch–Vanhove; Vanhove 2014). Tier stays Observation. The section's remaining "lives in the densities" sentence was restated at the curve level and points to it.
+
+*Superseded 2026-10-16 one-sentence statement* (kept verbatim above under "Crystallization"; its "and not by the operator between the densities" clause is the one re-scoped here).
+
+### This run's delta (2026-10-16)
 - PERIODS-TRANSCENDENCE: *forming (unworked)* → CRYSTALLIZED; members 5 → 7.
 - Brute-T2 row: STANDING → MIS-SCOPED (route-specific), with the 64-digit evidence.
 - Seam-involution row: refined (τ = i occurs as the in-domain CM fibre, not as a pinned point).

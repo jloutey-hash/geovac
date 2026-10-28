@@ -79,3 +79,33 @@ order predicts about 16), and dev_30 is at least 5 times smaller than |F_30 / L1
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
+
+### Disposition (appended 2026-10-27 by the PM; computed in the main session)
+
+Scorer `debug/wa7_score.py` (with `debug/wa7_twocentre.py`), log `debug/data/wa7_score.log`, data
+`debug/data/wa7_score.json`. Derivation `debug/wa7_local.py` unchanged since registration.
+
+| Item | Result | Verdict |
+|:--|:--|:--|
+| WA7-0(a) | closed form vs 40-digit quadrature: worst relative 5e-30 | PASS |
+| WA7-0(b) | 2R^7/315 + 16R^9/14175 + 8R^11/93555, exact | PASS |
+| WA7-0(c) | noise floor l = 15..35: 8.6e-10, 1.0e-9 ('both'); 1.6e-8, 1.9e-8 ('one') | PASS, 4 cases live |
+| WA7-0(d) | WA6 E1 1s dev_30 = 1.647e-3 | PASS |
+| WA7a size | dev_30 = 1.15e-2, 1.99e-2 ('both', zeta_X = 1, 2.25; bound 5e-2); 4.9e-3, 7.7e-3 ('one'; bound 2e-2) | held |
+| WA7a sign | 'both': F_l > 0, the sign of beta11, held. 'one': F_l > 0 at every l in 15..35, beta9 < 0 | **MISSED** |
+| WA7b | dev_15 / dev_30 = 33.0, 44.9, 22.7, 23.8 (> 6); gain over the leading term at l = 30: 9.5, 6.8, 14.6, 11.2 (>= 5) | **HELD** |
+
+**Gate: STOP** (WA7a missed, on its sign clause, in the two 'one' cases).
+
+**Cause of the miss: an error in the registration, not in the derivation.** The registration said F_l would have the
+sign of beta_p. But the large-l Legendre coefficients of (1 - x)^a do not keep one sign across a: they are positive for
+a = 7/2 and 11/2 and negative for a = 9/2 (the sign of Gamma(a + 1 - l)). So the derived prediction for 'one' is
+beta9 times a negative coefficient: F_l > 0. That is what was found, and F_l / L2_l - 1 = +4.9e-3 and +7.7e-3 at
+l = 30. The registered sign clause is therefore wrong as written, and the scored gate stands as STOP. The sentence
+"in 'one' the series changes sign" in the derivation section was the same error.
+
+**Reported only (not scored as a GO).** With zero contact on one or both H functions, the l^-8 term is absent, and the
+derived next term matches the coefficients with nothing fitted: to 1-2% at l = 30 with both H functions cusp-free
+(F_30 about 1e-14, falling like l^-12) and to 0.5-0.8% with one (l^-10). In every case the remainder falls faster than
+the next order predicts between l = 15 and 30 (ratio 23-45, against about 16), so l = 15 is not yet asymptotic.
+A fresh registration on unseen cases would be needed to score this.
