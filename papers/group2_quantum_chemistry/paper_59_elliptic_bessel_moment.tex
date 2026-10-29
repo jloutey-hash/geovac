@@ -2052,6 +2052,34 @@ stopped on a control whose precision it did not set, record
 copies a cusp only down to about $1/\sqrt{\alpha_{\max}}$ is basis-set lore;\ this is a check
 of the contact reading, not a new result.  Caps:\ symmetric geometry, $s$ functions, two
 published contractions.
+\textbf{[SYMBOLIC + MEASURED]} The bond-angle function obeys a linear differential equation in
+$x$, since the integrand is holonomic in the positions;\ we looked for it.  Each Legendre
+coefficient is a finite sum of rational numbers times fixed constants, built from the
+three-term rules of $i_\ell$ and $k_\ell$ in $\ell$ and exact integration by parts:\ six constants
+for the one-electron three-center integral $\int\phi_{\rm X}\phi_{\rm Y}/|\mathbf{r}-Z|$ (four
+exponentials and $e^{\mp\zeta_{\rm H}D_1}E_1((\zeta_{\rm X}+\zeta_{\rm H})D_2)$), and 31 for
+$(XY|XZ)$, all exponentials times $1$, $E_1$ or a logarithm, so each channel stays in the
+two-center class.  With the coefficients exact, the equation is found by linear algebra modulo
+primes, where an approximate fit cannot imitate it;\ from floating-point coefficients at 110 to 200
+digits, approximate low-order fits matched even a known control to the data's precision and
+hid it.  The one-electron integral obeys an operator of order $8$ with polynomial coefficients
+of degree $31$, the same in two geometries and modulo two primes;\ an independent derivation
+from the $\ell$-recurrences alone, with no fit to the coefficients, gives an order-$9$ operator
+that the order-$8$ one divides exactly.  Its only finite singular point with a non-integer
+exponent is $x^{*}$, with exponents $3/2$ and $5/2$ besides integers:\ Poisson's equation turns
+the density's $|\mathbf{r}-Y|$ cusp term into a $|Z-Y|^{3}$ term of the potential.  The points
+$x=\pm1$ carry repeated integer exponents and one further rational point an exponent $-2$;\ the
+integral is analytic at both, so these belong to other solutions.  Infinity is irregular.  For
+$(XY|XZ)$ no operator exists with fewer than about $1970$ unknowns at any order up to $40$
+($2001$ coefficients, two geometries, two primes);\ the constant components alone carry seven
+distinct operators of orders $6$ to $13$ (records
+\texttt{docs/predictions/2026-10-28\_nuclear\_attraction\_angle\_operator.md},
+\texttt{docs/predictions/2026-10-28\_bottom\_up\_angle\_operator.md},
+\texttt{docs/predictions/2026-10-28\_two\_electron\_angle\_operator\_exact.md} and
+\texttt{docs/predictions/2026-10-28\_angle\_operator.md}, each registered before computing).
+Guessing an operator from many exact terms is standard~\cite{bluemlein2009moments,bostan2009chi5};\ an
+equation in the bond angle for a three-center integral was not found in a literature search.
+Caps:\ $1s$ functions;\ the constants are assumed linearly independent over $\mathbb{Q}$.
 The elliptic content of
 Eq.~\eqref{eq:curve} is spread over the infinite channel sum.  The radial core is a period of an irreducible connection
 (Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
@@ -2069,7 +2097,10 @@ Fourier--Laplace transform of an irreducible connection, confirmed concretely by
 its exact-integer monodromy (Sec.~\ref{sec:obstruction}), so $N(D)$ admits no
 closed form through any factorization of the operator.  The
 one remaining question is whether the irreducible connection nonetheless carries
-a \emph{transcendental} closed form, which we do not settle.
+a \emph{transcendental} closed form, which we do not settle.  As a function of the
+bond angle the integrated object is large:\ its operator in $x$ has more than about $1970$
+unknowns at every order up to $40$, where the one-electron analogue needs order $8$
+(Sec.~\ref{sec:scope}).
 The companion (Paper~61) localizes it: the object is an Eisenstein /
 complex-multiplication Bessel-moment period---not a cusp-form $L$-value and not an
 elliptic dilogarithm---whose master family obeys the quadratic period relations
@@ -2347,6 +2378,16 @@ H.~Safouhi, ``The properties of sine, spherical Bessel and reduced Bessel
 functions for improving convergence of semi-infinite very oscillatory integrals:\
 the evaluation of three-centre nuclear attraction integrals over $B$ functions,''
 \textit{J.\ Phys.\ A:\ Math.\ Gen.}\ \textbf{34}, 2801--2818 (2001).
+
+\bibitem{bluemlein2009moments}
+J.~Bl\"umlein, M.~Kauers, S.~Klein and C.~Schneider, ``Determining the closed forms of the
+$O(a_s^3)$ anomalous dimensions and Wilson coefficients from Mellin moments by means of computer
+algebra,'' \textit{Comput.\ Phys.\ Commun.}\ \textbf{180}, 2143 (2009); arXiv:0902.4091.
+
+\bibitem{bostan2009chi5}
+A.~Bostan, S.~Boukraa, A.~J.~Guttmann, S.~Hassani, I.~Jensen, J.-M.~Maillard and N.~Zenine,
+``High order Fuchsian equations for the square lattice Ising model:\ $\tilde\chi^{(5)}$,''
+\textit{J.\ Phys.\ A}\ \textbf{42}, 275209 (2009); arXiv:0904.1601.
 
 \bibitem{lesiuk2012}
 M.~Lesiuk and R.~Moszynski, ``Analytical two-center integrals over Slater geminal

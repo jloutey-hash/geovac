@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.22] - 2026-10-28
+
+PI-directed: the climb to the two-electron integral ("Agreed. Checkpoint then step 1"), the bottom-up derivation by a
+sub-agent ("Maybe we should put a sub agent on this?"), and "Let's update paper 59 and then checkpoint".
+
+### Added
+- **BU (pre-registered, committed alone as 818cb6d3; GO)** (`docs/predictions/2026-10-28_bottom_up_angle_operator.md`).
+  The one-electron bond-angle operator derived from the label rules with no fit to coefficient data (sub-agent; memo
+  `debug/bu_bottom_up_memo.md`, scripts `debug/bu_*.py`): integration-by-parts identities per radial piece (L symbolic)
+  give a 14-dimensional first-order system in L over Q(L); the x-operator annihilating every solution has order 9,
+  degree 30, and NA's guessed (8, 31) operator divides it exactly (D = M G, M first order) mod both primes; negative
+  controls fail. PM-verified: the derivation reads only the derived system; D annihilates the generic sequence on all
+  962 rows (NA's code), a one-coefficient change fails on all 962.
+- **AO3 (pre-registered, committed alone as 05dd9ef4; STOP)** (`docs/predictions/2026-10-28_two_electron_angle_operator_exact.md`).
+  Each Legendre coefficient of (XY|XZ) is split exactly into rationals times 31 constants, all exponentials times 1,
+  E1 or a log (`debug/ao_exact.py`: inner antiderivatives, outer J and K recursions, finite parts; checked against the
+  arb engine to <= 1.1e-83 and the 110-digit data to 2.7e-105). No operator with fewer than about 1970 unknowns at any
+  order up to 40 (L = 0..2000, two fresh geometries, two primes). Reported: the constant components carry seven distinct
+  operators of orders 6 to 13 and five have none up to order 24 (`debug/ao3_components.py`).
+- **Paper 59 sec:scope:** a [SYMBOLIC + MEASURED] paragraph on the bond-angle equation (exact coefficients; the
+  one-electron order-8 operator, confirmed bottom-up; x* the only finite branch point, exponents 3/2 and 5/2; the
+  two-electron operator beyond 1970 unknowns); one sentence in the open problem; bibitems Bluemlein-Kauers-Klein-
+  Schneider (CPC 180, 2143) and Bostan et al. (J. Phys. A 42, 275209), checked against the papers and arXiv. Abstract and
+  conclusion reread: neither states the water or bond-angle results; unchanged. Compiles three-pass clean; C19, C20 pass.
+
+### Changed
+- **`debug/na_exact.py`:** field powers and inverse factorials (`Field.pw`, `Field.ifact`) replace exact big-fraction
+  powers (L^2.2 per coefficient -> about L); disclosed in the AO3 disposition; mod-p results equal the exact rationals
+  reduced mod p, NA N1 unchanged (1.3e-93).
+
 ## [v5.21.21] - 2026-10-28
 
 PI-directed: the literature search on the water results ("Yes please"), the Paper 59 wording ("We can update that not

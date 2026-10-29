@@ -1,0 +1,86 @@
+{
+ "2305843009213693951": {
+  "guessed_nullity": 1,
+  "guessed_orders": 8,
+  "guessed_degrees": [
+   31,
+   32,
+   33,
+   34,
+   35,
+   35,
+   36,
+   36,
+   37
+  ],
+  "derived_orders": 9,
+  "derived_degrees": [
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   35,
+   36,
+   36,
+   37
+  ],
+  "right_division_exact": true,
+  "quotient_steps": [
+   [
+    1,
+    37
+   ],
+   [
+    0,
+    73
+   ]
+  ],
+  "remainder_degrees": [
+   -1
+  ]
+ },
+ "4611686018427387847": {
+  "guessed_nullity": 1,
+  "guessed_orders": 8,
+  "guessed_degrees": [
+   31,
+   32,
+   33,
+   34,
+   35,
+   35,
+   36,
+   36,
+   37
+  ],
+  "derived_orders": 9,
+  "derived_degrees": [
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   35,
+   36,
+   36,
+   37
+  ],
+  "right_division_exact": true,
+  "quotient_steps": [
+   [
+    1,
+    37
+   ],
+   [
+    0,
+    73
+   ]
+  ],
+  "remainder_degrees": [
+   -1
+  ]
+ }
+}

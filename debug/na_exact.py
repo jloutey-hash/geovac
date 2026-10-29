@@ -30,6 +30,28 @@ class Field:
     def zero(self):
         return self(0)
 
+    def pw(self, q, k):
+        """q^k in the field (cached powers; no big-fraction arithmetic)."""
+        q = Fraction(q)
+        if k == 0:
+            return self(1)
+        c = self.__dict__.setdefault('_pw', {})
+        if q not in c:
+            base = self(q)
+            c[q] = ([self(1)], [self(1)], base, (self(1) / base) if q != 0 else None)
+        pos, neg, base, inv = c[q]
+        lst, mult = (pos, base) if k > 0 else (neg, inv)
+        while len(lst) <= abs(k):
+            lst.append(lst[-1] * mult)
+        return lst[abs(k)]
+
+    def ifact(self, n):
+        """1/n! in the field (cached)."""
+        c = self.__dict__.setdefault('_if', [self(1)])
+        while len(c) <= n:
+            c.append(c[-1] / self(len(c)))
+        return c[n]
+
 
 def bessel_tables(K, Lmax):
     """i[L] = {sigma: {j: coef}} for e^{sigma x} x^{-j};  k[L] = {j: coef} for e^{-x} x^{-j}; L = 0..Lmax."""
@@ -73,11 +95,8 @@ class Integrals:
             if m > 0:
                 return {}
             # coefficient of eps^0 in eps^m e^{b eps}
-            f = Fraction(1)
-            for t in range(1, -m + 1):
-                f /= t
-            return {(Fraction(0), '1', None): K(Fraction(b) ** (-m) * f)}
-        return {(Fraction(b) * R, '1', None): K(Fraction(R) ** m)}
+            return {(Fraction(0), '1', None): K.pw(b, -m) * K.ifact(-m)}
+        return {(Fraction(b) * R, '1', None): K.pw(R, m)}
 
     def table(self, b, A, B, nmin, nmax):
         key = (b, A, B)
@@ -155,26 +174,26 @@ def coefficients(D1, D2, zX, zH, Lmax, K):
 
             if inner:
                 y = zH * D1
-                kL = sum((K(y ** (-j)) * v for j, v in kt[L].items()), K(0))
-                kL1 = sum((K(y ** (-j)) * v for j, v in kt[L + 1].items()), K(0))
+                kL = sum((K.pw(y, -j) * v for j, v in kt[L].items()), K(0))
+                kL1 = sum((K.pw(y, -j) * v for j, v in kt[L + 1].items()), K(0))
                 # (2L+1) i_L(x) kL + x i_{L+1}(x) kL - y i_L(x) kL1, times e^{-y}
                 for s in (1, -1):
                     for j, v in it[L][s].items():
-                        put(-y, s * zH, -j, K(zH ** (-j)) * v * (K(2 * L + 1) * kL - K(y) * kL1))
+                        put(-y, s * zH, -j, K.pw(zH, -j) * v * (K(2 * L + 1) * kL - K(y) * kL1))
                     for j, v in it[L + 1][s].items():
-                        put(-y, s * zH, 1 - j, K(zH ** (1 - j)) * v * kL)
+                        put(-y, s * zH, 1 - j, K.pw(zH, 1 - j) * v * kL)
             else:
                 x = zH * D1
                 for s in (1, -1):
-                    iL = sum((K(x ** (-j)) * v for j, v in it[L][s].items()), K(0))
-                    iL1 = sum((K(x ** (-j)) * v for j, v in it[L + 1][s].items()), K(0))
+                    iL = sum((K.pw(x, -j) * v for j, v in it[L][s].items()), K(0))
+                    iL1 = sum((K.pw(x, -j) * v for j, v in it[L + 1][s].items()), K(0))
                     for j, v in kt[L].items():
-                        put(s * x, -zH, -j, K(zH ** (-j)) * v * (K(2 * L + 1) * iL + K(x) * iL1))
+                        put(s * x, -zH, -j, K.pw(zH, -j) * v * (K(2 * L + 1) * iL + K(x) * iL1))
                     for j, v in kt[L + 1].items():
-                        put(s * x, -zH, 1 - j, -K(zH ** (1 - j)) * v * iL)
+                        put(s * x, -zH, 1 - j, -K.pw(zH, 1 - j) * v * iL)
             # times -2 r^2 e^{-zX r} w_L(r)
             wpow = L if near else -L - 1
-            wc = K(D2 ** (-L - 1)) if near else K(D2 ** L)
+            wc = K.pw(D2, -L - 1) if near else K.pw(D2, L)
             for (e0, b, n), v in mono.items():
                 bb, nn = b - zX, n + 2 + wpow
                 tab = I.table(bb, A, B, nn, nn) if nn >= -1 else I.table(bb, A, B, nn, -1)

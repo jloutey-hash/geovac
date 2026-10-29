@@ -70,3 +70,30 @@ As in AO and NA: no bond-angle ODE for three-centre Slater integrals found in th
 
 1s functions, two geometries, L <= 2000, R <= 40. NOT FOUND says nothing beyond the budget. The linear independence of
 the constants over Q is assumed.
+
+## Disposition (appended 2026-10-28, after scoring; nothing above edited)
+
+**Deviation disclosed.** The first launch of the four scans was stopped during the coefficient stage, before any search
+output existed: the per-coefficient cost grew like L^2.2 (17 hours projected), from exact big-fraction powers reduced
+mod p. The fix computes those powers in the field (`Field.pw`, `Field.ifact` in `debug/na_exact.py`; uses in
+`debug/ao_exact.py`). Checked before relaunching: the mod-p coefficients equal the exact rationals reduced mod p (0
+mismatches, W1, L <= 30); exact vs the arb engine unchanged (W1 1.1e-83); NA N1 exact vs numeric 1.3e-93. What is
+computed is unchanged; only the speed (51 minutes per case and prime to L = 2000).
+
+**Controls, all held.** AO3-0(a): W1 1.1e-83, W2 3.9e-84 (bound 1e-60), 31 constants in each; (b) the NA control and
+decoy reproduce on both primes.
+
+**AO3-1 MISSED in both cases, both primes. Gate: STOP.** For every order R = 1..40, no operator up to the largest
+degree the rows allow (Q = 985 at R = 1 down to 45 at R = 40): the nullity is 0 at the top degree, so at every lower
+one. Reading: within the ansatz sum a_ij x^j T^i, the bond-angle operator of the two-electron integral has more than
+about 1970 unknowns at every order up to 40; the one-electron operator had 288 (order 8, degree 31). AO3-2 to AO3-5
+unscored. The integral is D-finite in x, so the operator exists; it lies beyond this budget.
+Data: `debug/data/ao3_scan_{W1,W2}_{p}.{json,log}`.
+
+**Reported only: the components** (`debug/ao3_components.py`, W1, L = 0..1000, prime 2^61 - 1, smallest Q at the
+smallest R <= 24; `debug/data/ao3_comp_W1.{json,log}`). 26 of the 31 component sequences have an operator; their
+(R, Q0) take seven distinct values: (6, 16) [2 log components], (8, 30) [4 exp*E1], (10, 72) [5 exp*E1 and 3 log],
+(12, 46) [1 exp], (12, 60) [6 exp*E1], (13, 59) [4 exp*E1], (13, 61) [2 exp]. Five pure-exponential components have no
+operator up to R = 24 at this length. Reading: the generic operator is a common left multiple of at least seven
+distinct component operators of orders 6-13 (sum 74) plus the five unfound ones; in NA the six components collapsed to
+order 8, here they do not, which accounts for AO3-1's miss.
