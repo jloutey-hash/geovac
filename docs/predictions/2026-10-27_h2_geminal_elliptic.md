@@ -168,3 +168,58 @@ physical (AA|BB) integral genus one (Paper 59: one-centre densities with a gemin
 
 **Novelty after the run.** The identification is not found in the short search; the Baikov reading of LM's
 polynomial is standard technique. Status: OPEN pending a fuller search.
+
+### Addendum 2026-10-29: HG3 run after the disposition (not scored)
+
+HG3 was run after the disposition above, by the momentum route. Each Yukawa-pair density is written with one
+Feynman parameter. The geminal kernel is 4 pi/(k^2 + w1^2). This uses neither LM's r-equation nor their w1-series.
+Tanh-sinh rules in t, s and k. Scripts `debug/hg3_master.py`, `debug/hg3_krefine.py`; logs
+`debug/data/hg3_master.log`, `debug/data/hg3_krefine.log`.
+
+| k level | Table I point (w1 = 1): relative to LM | Table III point (w1 = 2) |
+|:--|:--|:--|
+| 6 | -1.86e-7 | 1.1754074566e-4 |
+| 7 | -2.98e-8 | 1.1754078304e-4 |
+| 8 | +1.89e-9 | 1.1754079062e-4 |
+| 9 | -1.14e-10 | 1.1754079014e-4 |
+
+The t and s rules are converged: changing their level moves the value by less than 1e-15. The k rule is not. The
+integrand has an oscillating tail of about sin(2k)/k^5, from points at opposite ends of the bond, so the k rule
+gains only a factor of about 15 per level.
+
+Reading. The two routes agree to 1.1e-10 relative at the Table I point, and the gap is still shrinking. The w1 = 2
+value agrees with every digit Table III gives. No disagreement is seen, so the falsifier does not fire. But the
+registered test is agreement to 1e-15, and this run does not reach it. HG3 stays unscored. It is not counted as held.
+
+Named better attempt. The corpus has removed this kind of tail before: the tail-analytic fibre of the T2 work
+(`tests/test_routeC_momentum.py::test_tail_analytic_fibre_matches_direct`). It splits the k integral at a cut K and
+integrates the oscillating tail in closed form with incomplete gamma functions. It would need the large-k amplitudes
+of the t, s integral, and higher-precision arithmetic to reach 1e-15.
+
+### Addendum 2 2026-10-29: HG3 with an analytic tail (scored after the disposition)
+
+The tail fix named above was applied (PI-directed). Script `debug/hg3_tail.py`, log `debug/data/hg3_tail.log`.
+For large k only the bond ends contribute, so F(k) = a sum of k^-n (even n >= 4), plus sin(2k) times k^-n (odd n >= 5),
+plus cos(2k) times k^-n (even n >= 6). The powers follow from the end-point scaling t = tau/k^2. Int_0^K F dk uses
+Gauss-Legendre panels. The tail amplitudes are solved for by linear least squares from F on [K, 4K]. These are
+numerical expansion coefficients, not physical parameters. The tail Int_K^inf is done exactly with exponential
+integrals E_n. Float64 throughout; about 15 s per value.
+
+| t level | K | tail orders | Table I point: relative to LM | Table III point |
+|:--|:--|:--|:--|:--|
+| 5 | 20 | 4 | -1.35e-13 | 1.1754079016680788e-4 |
+| 5 | 30 | 4 | -4.5e-16 | 1.1754079016684492e-4 |
+| 5 | 30 | 5 | -1.1e-16 | 1.1754079016684507e-4 |
+| 5 | 40 | 5 | -1.1e-16 | 1.1754079016684507e-4 |
+| 6 | 30 | 5 | -1.1e-16 | 1.1754079016684507e-4 |
+| 6 | 40 | 6 | -1.1e-16 | 1.1754079016684507e-4 |
+
+The value stops moving once K >= 30 with 5 orders. Changing K, the order count or the t level then leaves it fixed
+to the last float digit. The remaining 1.1e-16 is the size of float64 rounding at this magnitude. The w1 = 2 value
+agrees with every digit Table III gives. The previous addendum's plain k rule (level 9, -1.1e-10, alternating in
+sign) brackets this value. The route does not use LM's r-equation, their w1-series or their numbers.
+
+**HG3: HELD, scored after the disposition.** The disagreement is 1.1e-16, well inside the registered 1e-15. Caveats:
+the run came after the disposition. The tail method was chosen after the first run converged slowly. The prediction
+and its tolerance were fixed beforehand and are not changed. The precision floor is float64, so this shows agreement
+to 1e-15, not to LM's 21 digits.

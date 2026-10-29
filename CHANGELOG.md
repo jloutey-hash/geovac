@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.24] - 2026-10-29
+
+PI-directed: the owed items ("Leta work down those owed items"; the debug-folder WARN held, "We can hold off on the
+debug folder one") and the HG3 tail fix ("Let's try that tail fix first").
+
+### Added
+- **Guards for the bond-angle results** (`tests/test_paper59_bond_angle_operator.py`, data
+  `tests/data/paper59_angle_2026_10_29.json` built by `debug/build_angle_guard_data_2026_10_29.py`; 7 tests, about 3 s,
+  no debug/ import). NA: the order-8 operator annihilates the one-electron sequence, and x* is its branch point with
+  exponents 3/2 and 5/2. B2: the order-41 recurrence annihilates the two-electron sequence, and integer beta occurs
+  only at 17/25 and 25/17. B2X: the exact rationals reproduce the annihilated sequence, beta_eff(100) lies within 0.5
+  of -4, and an independent momentum quadrature matches the exact split. Written as a separate step; fire-tested 9/9.
+  Measured floor: a beta = 3 piece is caught at 16% of F_100 and missed at 1.6%.
+- **HG3 run after the disposition (record `docs/predictions/2026-10-27_h2_geminal_elliptic.md`, addenda 1 and 2):
+  HELD.** The H2 Slater-geminal master by a momentum route with one Feynman parameter per density, using none of LM's
+  equation, series or numbers. A plain k rule converged only algebraically (-1.1e-10 at level 9; an oscillating
+  sin(2k)/k^5 tail from the bond ends). The T2 tail-analytic idea removes it: Gauss-Legendre panels to K, then the
+  bond-end expansion (k^-n even, sin(2k) k^-n odd, cos(2k) k^-n even), amplitudes by least squares on [K, 4K],
+  integrated exactly with E_n. LM Table I: -1.1e-16 relative, fixed in K, tail order and t level; Table III: every
+  printed digit. Caveats in the record: the method was chosen after the slow run; the floor is float64. Scripts
+  `debug/hg3_{master,krefine,tail}.py`.
+- **HG3 guard** in `tests/test_paper59_h2_geminal_master.py` (two tests, about 2 s each, self-contained). Fire-tested
+  6/6: tail dropped, wrong tail frequency, wrong geminal kernel (Table III only), exponents swapped, too few tail
+  orders, t + s in j0.
+
+### Changed
+- **Paper 59 sec:f12:** the cap "the published numbers were not re-checked" now says the master's values at its two
+  test points were reproduced to 1e-15, and that LM's source term was not re-derived.
+- **Paper 59, the dictionary paragraph:** one sentence credits Brown's minor-monotonicity theorem for massless
+  phi^4 periods as the nearest theorem in shape, with the difference that masses enter here (bibitem
+  `brown2009periods`, arXiv:0910.0114; arXiv lists no journal reference. The June literature memo's "Comm. Math.
+  Phys." for this paper is wrong; the memo is left unedited).
+- **`docs/claim_test_matrix.md`:** four rows for NA, BU, B2 and B2X; the geminal-master row records HG3. C22 passes.
+- Paper 59 compiles three-pass clean, 0 undefined references; C19, C20 and C22 pass.
+
+### Still owed
+- Silverstone 1967 (J. Chem. Phys., DOI 10.1063/1.1840555): only the abstract was readable; it does not show the
+  R^7 coefficient, so Paper 59's "not read" sentence stays. Full text needs institutional access.
+- The repo-health debug/ folder WARN, held by the PI.
+
 ## [v5.21.23] - 2026-10-29
 
 PI-directed: the two-electron bottom-up derivation ("Let's take that natural next step"), its open question ("Let's

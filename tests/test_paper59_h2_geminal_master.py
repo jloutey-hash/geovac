@@ -12,6 +12,10 @@ with s1, s2 transcribed from their Eqs. 32-33.  Claims guarded:
   * The Bessel limit: at w1 = 0 the operator is second order, r f'' + f' - p^2 r f, p^2 = -s2/s1.
   * HG4: s2 = 0 (so rho = 1, the equal-scale collapse) on the James-Coolidge, Kolos-Wolniewicz, (AA|AA) and (AB|AB)
     patterns; s2 != 0 (genus one) on (AA|BB), (AA|AB) and a generic unequal point.
+  * HG3 (record addendum 2): the master's value at LM Table I to 1e-15 relative, and at Table III to its printed
+    digits, by an independent momentum-space route (end of file).  Fire-tested 2026-10-29, 6/6 fired: tail dropped,
+    wrong tail frequency, wrong geminal kernel (Table III only; at w1 = 1 it is invisible), exponents swapped on one
+    density, too few tail orders (3), and t + s in place of t - s in j0.
 """
 import sympy as sp
 
@@ -108,3 +112,85 @@ def test_lopsided_patterns_are_genus_one():
                w1: sp.Rational(3, 4)}
     assert S2.subs(generic) != 0
     assert (S1**2 - 4*w1**2*S2).subs(generic) != 0
+
+
+# ---------------------------------------------------------------------------
+# HG3 (record addendum 2): the master's value at LM's two test points by an independent momentum-space route.
+# Each Yukawa-pair density is one Feynman-parameter integral, the geminal kernel is 4 pi/(k^2 + w1^2), so
+#   f = (r / 2 pi) Int_0^inf F(k) dk,  F(k) = k^2/(k^2 + w1^2) Int Int dt ds j0(k r (t - s)) E1(t, k) E2(s, k),
+#   E = e^{-r sqrt(Delta)}/sqrt(Delta),  Delta = t(1 - t) k^2 + t a^2 + (1 - t) b^2.
+# Tanh-sinh in t and s.  Int_0^K by Gauss-Legendre panels; the tail by its bond-end expansion, k^-n (even n >= 4),
+# sin(r k) k^-n (odd n >= 5), cos(r k) k^-n (even n >= 6), amplitudes by least squares on [K, 4K], integrated exactly.
+# Uses neither LM's r-equation, their w1-series nor their numbers (LM Table I is only the target).
+# Measured: Table I relative error -1.1e-16 at (t level 5, K 30, 5 orders), stable in K, orders and t level.
+# ---------------------------------------------------------------------------
+
+def _hg3_master(w1v, lt=5, K=30.0, nord=5, R=2.0, ab1=(2.0, 1.0), ab2=(1.0, 2.0), tail=True, freq=None):
+    import math
+    import mpmath as mp
+    import numpy as np
+    mp.mp.dps = 30
+    freq = R if freq is None else freq
+    h = 2.0 ** -lt
+    j = np.arange(-int(4.5 / h), int(4.5 / h) + 1) * h
+    y = np.pi * np.sinh(j)
+    t, tc = 1 / (1 + np.exp(-y)), 1 / (1 + np.exp(y))
+    wt = np.pi * np.cosh(j) * t * tc * h
+    keep = (t > 0) & (tc > 0) & (wt > 1e-300)
+    t, tc, wt = t[keep], tc[keep], wt[keep]
+    TS = R * (t[:, None] - t[None, :])
+
+    def j0(x):
+        out = np.ones_like(x)
+        m = np.abs(x) > 1e-4
+        out[m] = np.sin(x[m]) / x[m]
+        out[~m] = 1 - x[~m] ** 2 / 6 + x[~m] ** 4 / 120
+        return out
+
+    def F(k):
+        D1 = t * tc * k ** 2 + t * ab1[0] ** 2 + tc * ab1[1] ** 2
+        D2 = t * tc * k ** 2 + t * ab2[0] ** 2 + tc * ab2[1] ** 2
+        E1 = wt * np.exp(-R * np.sqrt(D1)) / np.sqrt(D1)
+        E2 = wt * np.exp(-R * np.sqrt(D2)) / np.sqrt(D2)
+        return k ** 2 / (k ** 2 + w1v ** 2) * (E1 @ j0(k * TS) @ E2)
+
+    x, w = np.polynomial.legendre.leggauss(24)
+    npan = int(2 * K)
+    parts = []
+    for p in range(npan):
+        a, b = K * p / npan, K * (p + 1) / npan
+        parts += [0.5 * (b - a) * wi * F(0.5 * (b - a) * xi + 0.5 * (a + b)) for xi, wi in zip(x, w)]
+    total = math.fsum(parts)
+    if tail:
+        ks = np.linspace(K, 4 * K, 240)
+        cols, kinds = [], []
+        for i in range(nord):
+            cols += [ks ** -(4 + 2 * i), np.sin(freq * ks) * ks ** -(5 + 2 * i), np.cos(freq * ks) * ks ** -(6 + 2 * i)]
+            kinds += [('a', 4 + 2 * i), ('s', 5 + 2 * i), ('c', 6 + 2 * i)]
+        A = np.array(cols).T
+        sc = np.abs(A).max(axis=0)
+        coef = np.linalg.lstsq(A / sc, np.array([F(k) for k in ks]), rcond=None)[0] / sc
+        tl = mp.mpf(0)
+        for c, (kind, n) in zip(coef, kinds):
+            if kind == 'a':
+                tl += c * mp.mpf(K) ** (1 - n) / (n - 1)
+            else:
+                zz = mp.mpf(K) ** (1 - n) * mp.expint(n, -1j * freq * K)
+                tl += c * (zz.imag if kind == 's' else zz.real)
+        total += float(tl)
+    return R / (2 * math.pi) * total
+
+
+LM_TABLE_I = 2.39121170158262983284e-4      # LM Table I: u2 = w2 = 1, u3 = w3 = 2, w1 = 1, r = 2
+LM_TABLE_III = '1.1754079'                   # LM Table III, same with w1 = 2, at the digits the extraction gives
+
+
+def test_hg3_master_matches_lm_table_one_to_1e_15():
+    v = _hg3_master(1.0)
+    assert abs(v - LM_TABLE_I) / LM_TABLE_I < 1e-15
+
+
+def test_hg3_master_matches_lm_table_three_digits():
+    v = _hg3_master(2.0)
+    assert ('%.7e' % v).startswith(LM_TABLE_III)
+    assert abs(v - 1.17540790e-4) < 5e-12
