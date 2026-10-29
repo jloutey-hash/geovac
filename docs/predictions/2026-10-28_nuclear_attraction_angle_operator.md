@@ -87,3 +87,47 @@ closed form (prior art for the route; the six-constant count is ours, not search
 
 1s functions, two geometries, R <= 12, L <= 1000. The linear independence of the six constants over Q is assumed.
 NOT FOUND says nothing beyond the budget.
+
+## Disposition (appended 2026-10-28, after scoring; nothing above edited)
+
+**Controls, all held.** NA0(a) exact x 2 pi N vs `ao_na.py`, L = 0..40: N1 6.4e-88, N2 7.7e-74 (bound 1e-60); six
+constants in each case, the same pattern (four exponentials; e^{-+zH D1} E1((zX + zH) D2)). (b) positive control:
+order 4 at Q = 15, orders 1-3 none, on both primes; (c) decoy: nullity 0 at (4, 15), no order-4 operator, both primes.
+Implementation note: the smallest Q at each R was found by bisection (nullity is non-decreasing in Q), which returns
+the same quantity as the registered linear scan; checked equal on the control.
+
+**Search, identical on both primes and in both cases.** Orders 1-7: no operator up to the row limit. Smallest degree
+at each order (nullity):
+
+| R | 8 | 9 | 10 | 11 | 12 |
+|:--|:--|:--|:--|:--|:--|
+| Q0 | 31 (1) | 22 (2) | 18 (1) | 17 (4) | 16 (5) |
+
+**Singular points of the order-8, degree-31 operator** (`debug/na_points.py`, `debug/data/na_points_{N1,N2}.json`;
+rational points agree on both primes):
+
+| Point | N1 | N2 | exponents |
+|:--|:--|:--|:--|
+| x* | 125/117 (multiplicity 2) | 89/80 | 0, 1, 2, 3, 4, 5, 3/2, 5/2 |
+| x = 1 and x = -1 | multiplicity 8 | same | 0, 0, 1, 1, 2, 3, 4, 5 |
+| one further rational point | -179401/179400 | 2509/1980 | -2, 0, 1, 2, 3, 4, 5, 6 |
+| an irreducible block (degree 18; 17) | | | 0, 1, 2, 3, 4, 5, 6, 8 (apparent) |
+| infinity | irregular | irregular | |
+
+- **NA1 HELD** (both cases, both primes, R_min = 8, Q0 = 31, nullity 1).
+- **NA2 MISSED.** x* is a root of the leading coefficient, but x = +-1 have repeated integer exponents (0 and 1 twice;
+  not R distinct) and one further rational point in each case has exponent -2, so neither is of apparent type. What
+  holds, reported only: x* is the only finite point with a non-integer exponent, i.e. the only finite branch point,
+  in both cases. f itself is analytic at +-1 and at the further point (they lie inside its ellipse of convergence),
+  so those singularities belong to other solutions of the operator.
+- **NA3 HELD.** 3/2 is an exponent at x*, as Poisson's |Z - Y|^3 predicts; 5/2 is also one (the next term of the same
+  branch, not the 5/2-only reading).
+- **NA4 HELD.** Infinity irregular.
+- **NA5 HELD.** Same (R_min, Q0) = (8, 31) and the same trade table in both geometries.
+
+**Gate: BORDERLINE** (NA1, NA3, NA4 held; NA2 missed).
+
+**Reported only.** Components, smallest Q at R <= 6 (same in both cases): the two E1 components order 4 at Q = 14; the
+exponential components order 5 at Q = 15 and 18, and two of order 6 at Q = 26 each; the full operator (order 8) is far
+below their sum, so the components share solutions. The linear independence of the six constants over Q was assumed.
+Data: `debug/data/na_scan_{N1,N2}.{json,log}`.

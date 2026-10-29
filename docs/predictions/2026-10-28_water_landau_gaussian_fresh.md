@@ -216,3 +216,24 @@ four cases), moving with the square root of the tightest exponent. Novelty: Ga, 
 PROBABLY KNOWN as basis-set lore, not searched, so a CHECK, not a finding.
 
 **Reported only.** WL and WG stay STOP as registered; this record is their scored replacement on fresh cases.
+
+### Novelty check (appended 2026-10-28, after the disposition; PI-directed search by two explorers, PM-verified in part)
+
+- Part L, pinch size. The Landau pinch mechanism is standard. Taking the singular coefficient at the critical point is
+  the simple-pinch rule: Hannesdottir, McLeod, Schwartz and Vergu, "The Landau Bootstrap", arXiv:2410.02424, App. B
+  ("we have replaced the alpha_i variables in the numerator by the value they take at the critical point, which is
+  valid at leading order"), and Sec. 2 ("non-simple pinches ... require more care to analyze", citing Pham 1967 and
+  Berghoff-Panzer arXiv:2212.06661). Both sentences checked by the PM in the downloaded text. Berghoff-Panzer abstract
+  checked: it treats degenerate cases but states no size formula there. Pham 1967 not read. Here the pinch points fill
+  the H-H segment, which is why the endpoint value fails. The complex singular angle x* is classical (Sack, J. Math.
+  Phys. 5, 245 (1964), abstract only) and its rate is in Bouferguene-Jones 1998 (credited). A general stationary-phase
+  formula for a critical manifold (Morse-Bott) may contain the segment average; seen only in a search summary
+  (Brumley-Templier arXiv:1411.4317), not checked. NOT FOUND: the Landau reading of a molecular integral's geometry
+  singularity, and the segment-average size. Verdict: method KNOWN, this use NOT FOUND in a search.
+- Contact form (WA records). NOT FOUND: the constant pi^2/630 for the bond angle, the cusp-cusp origin of the tail,
+  and zero contact removing the l^-8 term. PARTIAL: a cusp setting a k^-4 tail (Benesch-Smith, second-hand, reference
+  unconfirmed; Kimball and Hofmann-Barth-Zwerger credited); g as Kato's cusp coefficient is standard (Kato; Bingel;
+  Fournais et al., Ann. Henri Poincare 8, 731 (2007), abstract only). Open risk: Silverstone, JCP 46, 4377 (1967), no
+  free copy; if its charge distributions are r^(n-1) e^(-zeta r), its non-analytic family would start at R^7 for 1s
+  and may hold the two-centre coefficient (2/315). Unread lead: Silverstone and Kay, JCP 50, 5045 (1969).
+- Memos: debug/lit_scan/water_pinch_prior_art_memo.md, debug/lit_scan/water_contact_prior_art_memo.md.

@@ -7,6 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.21] - 2026-10-28
+
+PI-directed: the literature search on the water results ("Yes please"), the Paper 59 wording ("We can update that not
+searched wording"), the three-centre closed form by its bond-angle equation ("Maybe we can work on that?", "Yep"), the
+bigger box ("let's go for the bigger box"), the stepping stone ("2 seems fine") and the exact, bottom-up route ("Sure go
+ahead with that", "Love it").
+
+### Added
+- **NA (pre-registered, committed alone as 557043ba; BORDERLINE)** (`docs/predictions/2026-10-28_nuclear_attraction_angle_operator.md`).
+  The one-electron three-centre nuclear-attraction integral, as a function of x = cos(bond angle), obeys a linear ODE of
+  order 8 with coefficients of degree 31, the same in two geometries and on two primes; higher order lowers the degree
+  (order 9: 22, 10: 18, 11: 17, 12: 16). NA1, NA3 (exponent 3/2 at the Landau point x*, from Poisson's |Z - Y|^3), NA4
+  (infinity irregular), NA5 held; NA2 missed: x* is the only finite branch point, but x = +-1 carry repeated integer
+  exponents and one further rational point per case has exponent -2, so they are not apparent.
+  - Method: each Legendre coefficient split exactly, F_L / (2 pi N) = sum of rationals times six constants (four
+    exponentials, e^{-+zH D1} E1((zX + zH) D2); the gamma and log terms cancel), built bottom-up from the three-term
+    rules of i_L, k_L, exact integration by parts and a finite part at r = 0 (`debug/na_exact.py`); searched mod two
+    61-62-bit primes (`debug/na_modguess.py`); analysed exactly mod p (`debug/na_modanalyze.py`, `debug/na_points.py`).
+  - Controls: exact vs the 200-digit numeric engine (`debug/ao_na.py`) to <= 7.7e-74; an exact order-4 control
+    (sum x^k e^{c_k x}) found at its known order and nothing below; a one-entry decoy kills it.
+  - Assumed, not tested: the six constants are linearly independent over Q.
+- **Engines** for the two-electron bond-angle coefficients: momentum route `debug/ao_engine.py`, position routes
+  `debug/ao_radial.py` (mpmath) and `debug/ao_radial2.py` (arb; good to 5e-85 or better to L = 400; elementary Bessels
+  `debug/ao_bessel.py`). Controls and guessers `debug/ao_{control,control2,decoy,guess,guess2,scan,analyze}.py`.
+- **Literature searches** (three explorer agents, key quotes PM-verified in the downloaded text): the water contact form
+  and the pinch size, NOT FOUND (Silverstone 1967 unread, the one open risk); the bond-angle ODE for three-centre
+  integrals, NOT FOUND; the guessing budget documented (Bluemlein-Kauers-Klein-Schneider 2009, 5114 moments; Bostan et
+  al. 2009, 7400 vs 49100 terms). Memos `debug/lit_scan/{water_contact,water_pinch,angle_ode}_prior_art_memo.md`;
+  logged in the WX and AO records.
+- **Ledger + CLAUDE.md §3:** "Guessing a bond-angle ODE from floating-point Legendre coefficients (AO)".
+
+### Changed
+- **Paper 59** water passage: "not found in a short search" and "was not searched" replaced by the search results
+  (cusp-cusp term and segment-average size not found; the simple-pinch rule takes the coefficient at one point, here
+  the pinch points fill a segment; Silverstone's full text unread). Compiles three-pass clean; C19 passes.
+
+### Closed (STOP, as registered)
+- **AO** (`docs/predictions/2026-10-28_angle_operator.md`, committed alone as 6359f1b8): float-coefficient search for
+  the two-electron bond-angle ODE, 141 coefficients at 110 digits; no operator within about 100 unknowns in either
+  case. The controls then showed fake fits mask any operator at this precision; superseded by the exact route of NA.
+
 ## [v5.21.20] - 2026-10-28
 
 PI-directed: two tests by sub-agents ("kick those off with sub agents"), the Landau map of the bond-angle integral

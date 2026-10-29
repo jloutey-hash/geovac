@@ -405,3 +405,16 @@ walk diverges at 20 to 40 working digits, so it cannot run below 60 digits at al
 Y to 7e-14. Lesson: the operator is a statement about structure and a high-precision evaluator, not a chemistry
 shortcut; at double precision a plain graded quadrature wins. One parameter set, one machine. Scripts
 `debug/ks_*.py`; Paper 59 `sec:f12`, the [MEASURED] paragraph after the operator-evaluator guard; CHANGELOG v5.21.20.
+
+### Guessing a bond-angle ODE from floating-point Legendre coefficients (AO, 2026-10-28) | 1
+
+Record AO (`docs/predictions/2026-10-28_angle_operator.md`, registered before the search) looked for the linear ODE in
+x = cos(gamma) of the three-centre integral (XY|XZ) from 141 Legendre coefficients at 110 digits, by an SVD null-vector
+search over sum a_ij x^j T^i, T = (1 - x^2) d/dx. Nothing was found within about 100 unknowns (STOP, both cases). The
+controls then showed why this route cannot work at any affordable size: the functions are so smooth away from the
+singular point that fake low-order operators fit them to the data's own precision (a known order-4 control at 200
+digits and 501 coefficients: spectrum falling smoothly to 1e-120, no gap above 4.9 decades). Lesson: guess from exact
+data. Splitting each coefficient exactly into rational numbers times a few fixed constants and searching mod primes
+(record NA) found the one-electron operator at once (order 8, degree 31). The guessing literature works from exact
+data for this reason (Bluemlein-Kauers-Klein-Schneider 2009; Bostan et al. 2009). Scripts `debug/ao_*.py`; CHANGELOG
+v5.21.21.

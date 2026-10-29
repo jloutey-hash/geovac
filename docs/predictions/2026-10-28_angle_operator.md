@@ -99,3 +99,41 @@ three-centre two-electron Slater integral: NOT SEARCHED, treat as OPEN.
 
 1s functions, two scored geometries, budget R <= 5, Q <= 30; NOT FOUND within budget says nothing about the order
 beyond it.
+
+## Disposition (appended 2026-10-28, after scoring; nothing above edited)
+
+**Controls, all held.** (a) S1 position vs momentum route, L = 0..5: 9.9e-10 (bound 1e-8). (b) probe sum vs the
+pairwise limit: 2.2e-13 (bound 1e-11). (c) eps, n = 100 vs n = 140, L = 0..140: S1 5.0e-73, S2 3.0e-61 (bound 1e-60;
+S2 passes with less margin than the unscored cases showed). (d) positive control FOUND at (2, 8), smin 1.2e-68, gap
+2.9e51; decoy no FOUND in 107 candidates, worst gap 7.9e3. Both scored cases live; every F_L positive.
+
+| Case | candidates | FOUND | worst gap (R, Q) | next |
+|:--|:--|:--|:--|:--|
+| S1 | 107 (whole budget) | none | 3.6e4 (5, 8) | 2.5e3 (2, 20) |
+| S2 | 107 (whole budget) | none | 2.4e3 (3, 15) | 1.7e3 (2, 19) |
+
+**AO1 MISSED in both cases. Gate: STOP.** AO2-AO5 unscored. Both scans look like the decoy, smin falling smoothly
+with the basis size and no gap above 4e4, against 3e51 for the true equation of the control. The integral is
+D-finite in x, so the equation exists; within R <= 5, Q <= 30 and about 100 unknowns, it was not found. Reading:
+its size exceeds this budget, which 141 coefficients cannot widen much (rows must exceed unknowns).
+Data: `debug/data/ao_{S1,S2}_m{100,140}.json`, scans `debug/data/ao_scan_{S1,S2}.json`, controls
+`debug/data/ao_run_{pos,decoy}.json`.
+
+### Novelty check (appended 2026-10-28, after the disposition; PI-asked explorer, key quotes PM-verified in the downloaded text)
+
+- An ODE in the bond angle (or in a third-centre distance) for three- or four-centre Slater or Yukawa integrals, two- or
+  one-electron: NOT FOUND. Pachucki's two-centre route (arXiv:0905.1635, credited in Paper 59) does IBP in momentum
+  space and reaches the bond length through a Laplace transform; no three-centre extension found in his 2009-2013 papers.
+- Position-space IBP with fixed centres and exponential lines: NOT FOUND. Analogues only: coordinate-space massless
+  technique (Chetyrkin-Kataev-Tkachov 1980, abstract); Yangian DEs in cross-ratios for one-loop massive position-space
+  graphs (Loebbert et al., abstracts).
+- Guessing from many coefficients is standard and its budget is documented (both PM-verified): Bluemlein, Kauers,
+  Klein, Schneider, CPC 180, 2143 (2009): "For the most complicated subproblem 5114 moments were needed in order to
+  produce a recurrence of order 35 whose coefficients have degrees up to 938", the system smallest when order and
+  degree are "approximately balanced", from exact rational moments. Bostan et al., J. Phys. A 42, 275209 (2009),
+  chi^(5): the minimal ODE needs about (q+1)(D0+1) terms; "this optimal linear ODE can be discovered from some 7400
+  terms while the minimal order linear ODE requires almost 49100 terms" (non-minimal order, lower degree). Kauers and
+  Koutschan, arXiv:2202.07966: "The more the number of equations exceeds the number of variables, the stronger is the
+  evidence that the solution is not just noise". No source found on guessing from floating-point data, where fake
+  approximants are the extra hazard measured here.
+- Memo: debug/lit_scan/angle_ode_prior_art_memo.md.
