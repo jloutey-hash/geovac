@@ -43,3 +43,42 @@ if obtained.
 ## Caps
 
 One geometry, 1s functions; the linear independence of the 31 constants over Q is assumed for the generic sequence.
+
+## Disposition (appended 2026-10-28, after the derivation; nothing above edited)
+
+**Outcome: BORDERLINE.** B2-0, B2-1 and B2-2 held. B2-3 missed as worded.
+
+Derivation by a sub-agent (memo `debug/b2_memo.md`; scripts `debug/b2_{engine,derive,data,check,charpoly}.py`).
+- Route: the integral split so that each inner integral starts at 0 or ends at infinity, so no constants enter. Bessel
+  modules with integration-by-parts identities reduced mod p, closed under the L-shift: a first-order system of
+  dimension 180.
+- Recurrence in L by the cyclic-vector method, 4200 points, rational reconstruction: order 41, degree 926, the same on
+  both primes.
+
+**PM verification** (`debug/b2_pmcheck.py`). Independence: `b2_derive.py` reads only `b2_engine.py` and two helper
+functions from `bu_derive.py`, with no coefficient data. Annihilation: the generic sequence was rebuilt here straight from
+`debug/ao_exact.py` with AO3's weights, to L = 400, past the 300 the record names. Result: 0 of 360 rows nonzero on both
+primes. With one coefficient changed, 360 of 360 rows are nonzero. `debug/b2_asym.py` was re-run on both primes and gives
+identical output.
+
+**Large-L structure** (both primes):
+
+| root lam | x | betas |
+|:--|:--|:--|
+| 17/25 (x5) | 457/425 = x* | -4, -5, -6, 3, 1 |
+| 25/17 (x4) | x* | -4, -5, 3, 1 |
+| -51/121, -121/51 | -8621/6171 | -1/2 |
+| -1875/2057, -2057/1875 | -3873437/3856875 | -1/2 |
+| 0 (x10) | none | none |
+
+There are also two irreducible quadratics, each twice, with real negative roots mapping to x < -1.
+
+- **B2-2 held.** Integer beta occurs only at 17/25 and 25/17. The two other rational points lie past x = -1 and carry
+  only beta = -1/2, which corresponds to an integer alpha.
+- **B2-3 missed.** At 17/25 the contact exponent beta = -4, i.e. (x* - x)^(7/2), is present and is the slowest negative
+  one. But beta = 3 and beta = 1 also occur, so not every beta is <= -4.
+
+**Open, not scored.** It is not known whether beta = 3 and 1 belong to the integral's coefficients, or only to the
+recurrence's larger solution space. The recurrence's space has dimension 41. In BU the derived recurrence carried one
+solution more than the sequence needed, and the 25/17 solutions grow, so they too must be absent from the decaying
+coefficients. Settling this needs data: either a large-L numeric test of F_L or the sequence's minimal recurrence.

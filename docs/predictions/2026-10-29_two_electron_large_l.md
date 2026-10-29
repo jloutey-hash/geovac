@@ -52,3 +52,23 @@ B2-3's physical content holds for the integral. STOP if beta_eff(300) lies withi
 ## Caps
 
 This covers one geometry and 1s functions. It tests the true integral, not the generic sequence.
+
+## Disposition (appended 2026-10-29, after the scored run; nothing above edited)
+
+**Outcome: GO.** X0, X1 and X2 all held (`debug/data/b2x_W1.json`, `debug/data/b2x_W1.log`; the exact coefficients
+took 884 s).
+
+| L | 25 | 50 | 100 | 150 | 200 | 250 | 300 |
+|:--|:--|:--|:--|:--|:--|:--|:--|
+| beta_eff | -4.706 | -4.407 | -4.217 | -4.148 | -4.112 | -4.090 | -4.075 |
+| r_L | 0.5654 | 0.6232 | 0.6521 | 0.6615 | 0.6662 | 0.6690 | 0.6708 |
+
+- **X0 held.** At least 552 digits agree at every L.
+- **X1 held.** r_L > 0 at every L from 100 to 300, so the alternating roots are absent.
+- **X2 held.** |beta_eff(300) + 4| = 0.075. The approach is monotone from below, with a drift of about 20/L.
+
+**Reading.** The true coefficients decay as (17/25)^L L^-4. So the integral's slowest bond-angle term is the
+cusp-cusp contact (x* - x)^(7/2). The exponents 3 and 1 of B2's recurrence, the growing roots at 25/17, and the
+alternating roots all belong to other solutions of the derived recurrence and carry zero weight in the integral.
+This is the same situation as the extra solutions in NA and BU. The finiteness argument (no negative alpha where
+the hydrogen centres meet) agrees.

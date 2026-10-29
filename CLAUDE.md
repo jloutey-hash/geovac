@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.22 (October 28, 2026)
+**Version:** v5.21.23 (October 29, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Two-electron bond-angle recurrence derived bottom-up; contact term leads (2026-10-29, v5.21.23, pre-registered):** order 41; B2 BORDERLINE (extra exponents 3, 1); B2X GO, true coefficients rho^L L^-4. CHANGELOG v5.21.23.
 - **Order-8 bond-angle ODE confirmed bottom-up; two-electron ODE beyond 1970 unknowns (2026-10-28, v5.21.22, pre-registered):** BU GO (derived order 9 = M G); AO3 STOP, 31 constants, seven component operators; Paper 59 sec:scope. CHANGELOG v5.21.22.
 - **One-electron three-centre integral obeys an order-8 ODE in the bond angle, from exact data (2026-10-28, v5.21.21, pre-registered):** NA BORDERLINE: x* sole branch point, exponent 3/2; apparent-elsewhere missed. AO STOP. CHANGELOG v5.21.21.
 - **Bond-angle size at unequal lengths = Landau pinch average; Gaussian crossover; kite not a chemistry shortcut (2026-10-28, v5.21.20, pre-registered):** WX GO both parts; WL, WG STOP (unmeasured controls); KS STOP. CHANGELOG v5.21.20.

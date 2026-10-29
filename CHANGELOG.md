@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.23] - 2026-10-29
+
+PI-directed: the two-electron bottom-up derivation ("Let's take that natural next step"), its open question ("Let's
+work that open question"), and the Paper 59 addition and checkpoint ("I want them").
+
+### Added
+- **B2 (pre-registered, committed alone as ab16914a; BORDERLINE)** (`docs/predictions/2026-10-28_two_electron_bottom_up.md`).
+  The two-electron (XY|XZ) coefficients for case W1, built from the label rules with no fit (sub-agent; memo
+  `debug/b2_memo.md`, scripts `debug/b2_{engine,derive,data,check,charpoly}.py`). The inner integrals start at 0 or end
+  at infinity, so no constants enter. Bessel modules with integration-by-parts reduction mod p give a 180-dimensional
+  first-order system in L. The recurrence in L has order 41 and degree 926 on both primes. B2-0, B2-1 and B2-2 held:
+  integer beta occurs only at 17/25 and 25/17, which map to x*. B2-3 missed: at 17/25 the betas are -4, -5, -6, 3 and 1.
+  PM-verified (`debug/b2_pmcheck.py`): the generic sequence, rebuilt from `debug/ao_exact.py` to L = 400, leaves 0 of
+  360 rows nonzero on both primes; with one coefficient changed, 360 of 360 are nonzero.
+- **B2X (pre-registered, committed alone as 7b674a09; GO)** (`docs/predictions/2026-10-29_two_electron_large_l.md`).
+  The true W1 coefficients evaluated exactly to L = 301 (`debug/b2_large_l.py`, at least 552 agreeing digits).
+  beta_eff = -4.217, -4.112 and -4.075 at L = 100, 200 and 300, with r_L > 0 throughout. So the coefficients decay as
+  (17/25)^L L^-4, and the slowest bond-angle term is the contact (x* - x)^(7/2). The exponents 3 and 1 carry zero
+  weight. Control on the one-electron case N1, measured before registering: -2.022 at L = 300 (NA's 3/2).
+- **Paper 59 sec:scope:** sentences on the order-41 recurrence and the rho^L L^-4 decay, and one clause in the open
+  problem. Abstract and conclusion reread: neither states the bond-angle results; unchanged. Compiles three-pass clean;
+  C19 passes.
+
 ## [v5.21.22] - 2026-10-28
 
 PI-directed: the climb to the two-electron integral ("Agreed. Checkpoint then step 1"), the bottom-up derivation by a
