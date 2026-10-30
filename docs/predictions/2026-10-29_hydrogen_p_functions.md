@@ -109,3 +109,14 @@ from PP-0(b), i.e. beta < -9.5.
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
+
+## Addendum 1 (appended 2026-10-29, after the registration commit and before any scored quantity is formed; the predictions above are not edited)
+
+- **A defect in the PC plan.** PC's coefficients come from the Legendre derivative rule,
+  F_L = (2L+1)/(D1 D2) sum_{k = L+1, L+3, ...} c_k. With c_k computed only to 150, F_L near L = 150 loses most of its
+  sum (at L = 150 the sum is empty), so the fit window 100..150 cannot be used as registered. Found while writing the
+  scorer; no PC quantity had been formed.
+- **Fix.** PC's nine inputs O_1 O_2 q are computed to L = 230 (points named with suffix `_L230`, same step, digits
+  6*230 + 400). The omitted part of each sum is about rho^(230 - L) of it, 1e-10 or less on L <= 150 at rho = 3/4.
+  The PC fit window, bound and prediction are unchanged. The nine PC points already launched at L = 150 are not used
+  for PC; the one with no offsets stays the PP-0(b) 1s control at U, as registered.

@@ -117,3 +117,30 @@ If any of these fails, every item is void.
 ## Disposition
 
 (Appended after comparing. The predictions above are not edited.)
+
+**Disposition (appended 2026-10-29, after scoring; predictions above unchanged). GATE: GO.**
+
+Scorer `debug/graded_ac/yc_score.py` (written by the sub-agent after commit 0295f53a; the record's name `ga_score.py` predates the rename). Log `debug/graded_ac/yc_score.log`, data `yc_score.json`. The PM re-ran the scorer independently; the log reproduced identically.
+
+- **YC-0 PASS.** (a) the fixed t = 0.1 window values at n_max = 10, 12, 14 reproduce to 4.7e-13 absolute; (b) worst relative tail bound at the scored t is 6.5e-30; (c) largest pure-gauge continuum value 1.8e-15.
+
+| τ | n_max | kA/kA^∞ | kΦ/kΦ^∞ | c | miss = abs(c/4 − 1) | ρ_pg | YC2 bound |
+|---|---|---|---|---|---|---|---|
+| 1 | 2 | −1.2434 | 0.2531 | −19.648 | 5.912 | 4.344 | 0.1 |
+| 1 | 3 | −3.4573 | 0.3275 | −42.230 | 11.558 | 2.815 | 0.1 |
+| 1 | 4 | −6.3503 | 0.3602 | −70.528 | 18.632 | 2.412 | 0.1 |
+| 1 | 5 | −9.9282 | 0.3778 | −105.106 | 27.277 | 2.232 | 0.1 |
+| 4 | 2 | 0.3644 | 0.7279 | 2.0023 | 0.4994 | 1.912 | 0.0499 |
+| 4 | 3 | 0.0737 | 0.8673 | 0.3398 | 0.9151 | 14.94 | 0.0915 |
+| 4 | 4 | −0.2734 | 0.9059 | −1.2069 | 1.3017 | 6.019 | 0.1 |
+| 4 | 5 | −0.6879 | 0.9223 | −2.9832 | 1.7458 | 3.373 | 0.1 |
+
+- **YC1 HELD.** Smallest miss 0.499 (τ = 4, n_max = 2).
+- **YC2 HELD.** No failures. The smallest margin ρ_pg / bound is 22 (τ = 1, n_max = 5: 2.232 / 0.1), recomputed by the PM from the table. The sub-agent's hand-back quoted 11; that figure does not follow from the table and is not used.
+- **YC3 HELD** (reported, not gated). The miss rises strictly with n_max at both τ.
+- **The interesting outcome did not occur.** The S³ window behaves like the flat-torus toy: at finite cutoff the compressed gauge functional is not gauge invariant, and that, not the curvature or the odd window, sets c. The Higgs functional is less affected (kΦ/kΦ^∞ = 0.25 to 0.92) than the gauge one (kA/kA^∞ negative at six of eight points).
+
+Interpretations the scorer made, disclosed: (1) YC-0(a) compared the 12-decimal logged values, not the record's rounded table, at 1e-12 absolute; (2) denominators were recomputed at full precision and match the logged 14-decimal values to 4.9e-15; (3) the window pure-gauge companion is [D_w, P b P] + h.c., the compression of a = 1.
+
+Reading. On the truncated S³, the CCM coefficient 4 cannot be read at finite cutoff by the naive compressed spectral action: gauge breaking from the compression dominates, exactly as on a flat truncation. This is a wall on the instrument (spectral truncation breaks gauge invariance), not a statement that the outer factor moves the 4. Whether a gauge-invariant definition of the fluctuated spectral action on the window exists is the open question this leaves; none was defined before scoring, so none is scored here.
+

@@ -117,3 +117,43 @@ Also reported, not predicted: W(R5) against cc-pVDZ (-76.2410); RHF and all-elec
 ---
 
 (Appended after comparing. The predictions above are not edited.)
+
+## Disposition (2026-10-30)
+
+Runs: `python debug/scale_ladder.py water R3`, `R4`, `R5`, `R5H`, after the record was committed (3875399b).
+Rows in `debug/data/scale_ladder.jsonl`, logs `debug/data/scale_ladder_<rung>.log`. Each run 1129-1204 s integrals,
+about 5 s solve, under load.
+
+| Rung | RHF | fc-CCSD(T) | all-electron CCSD(T) | Step on water (mHa) | Step on atom (mHa) |
+|:--|:--|:--|:--|:--:|:--:|
+| R2 (R2rep) | -75.890293 | -76.111337 | -76.120634 | | |
+| R3 | -75.890159 | -76.108484 | -76.117764 | -2.85 | 3.4 |
+| R4 | -75.905860 | -76.124580 | -76.137966 | 16.10 | 21.9 |
+| R5 | -76.036106 | -76.244112 | -76.258281 | 119.53 | 232.0 |
+| R5H | -76.045000 | -76.248015 | -76.262063 | 3.90 (vs R5) | |
+
+G = W(R2) - W(R5) = 132.78 mHa.
+
+- **SL-0: PASS** (measured before registration).
+- **SL1: HELD.** (W(R4) - W(R5)) / G = 119.53 / 132.78 = 0.900 (bound 0.6). The atom had 0.902.
+- **SL2: HELD.** G / 257.3 mHa = 0.516 (band 0.3 to 0.8). W(R5) = -76.2441, inside [-76.1885, -76.3172]. The clean
+  transfer control T1 was 0.50.
+- **SL3 (reported): HELD in direction.** W(R5) is 37.7 mHa above Slater DZP (-76.2818). The record's estimate was
+  about 6 mHa above, from the confounded T2 ratio. That estimate was well off.
+- **SL4 (reported): HELD.** W(R5H) is 3.90 mHa below W(R5). The H2 gain was 4.06 mHa, so the H side transfers at
+  about 0.96.
+- **Gate: GO** (SL-0 passed, SL1 and SL2 held).
+
+Reported, not predicted:
+- **Against cc-pVDZ (-76.2410) at the same 24 functions:** R5 is 3.1 mHa below, R5H 7.0 mHa below. The v5.20.12
+  two-scale kit was 129.7 mHa above. So the 130 mHa gap is closed by releasing exponents set on the free atom and on
+  H2, with nothing tuned on water.
+- **R3 is non-monotone.** Splitting the p exponent from the s valence exponent lowers the atom by 3.4 mHa and raises
+  water by 2.85 mHa. The step ratios fall from R3 to R5: -0.84, 0.735, 0.515. Transfer is not a single number per
+  ladder.
+- RHF carries most of the R5 gain: 145.8 mHa from R2 to R5 at RHF, against 132.8 mHa at fc-CCSD(T).
+
+Scope, stated so it is not over-read: R5 is a Slater-type basis with five atom-set O exponents, a 3d tied to the 3p
+exponent, and one H exponent. It is a better-chosen member of the same primitive family as v5.20.12, not a new
+GeoVac structure. One geometry and one method. Slater DZP, with water-tuned polarization and two H s exponents,
+stays 34 mHa lower than R5H.

@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.25] - 2026-10-30
+
+PI-directed: the basis discussion ("Let's chase chemistry a bit. Let's talk basis."; "Cool. Let's find out."), the
+record ("Commit"), and the symmetry columns ("I think we should do these tests and add these columns").
+
+### Added
+- **SL (pre-registered, committed alone as 3875399b; GO)** (`docs/predictions/2026-10-30_scale_ladder.md`, driver
+  `debug/scale_ladder.py`, data `debug/data/scale_ladder*.{jsonl,json,log}`). Water at 24 functions with the
+  v5.20.12 two-scale Sturmian kit's primitive types, releasing the number of distinct O exponents one rung at a time
+  (R2 to R5), every exponent set on the free O atom (radial average-of-configuration HF, 41 Nelder-Mead starts) or on
+  H2 RHF (rung R5H), nothing tuned on water. fc-CCSD(T): R2 -76.111337 (the v5.20.12 kit, reproduced to 1e-4), R3
+  -76.108484, R4 -76.124580, R5 -76.244112, R5H -76.248015. SL1 held: the p split carries 0.900 of the water gain
+  (atom 0.902; bound 0.6). SL2 held: the water gain is 0.516 of the atom's 257.3 mHa (band 0.3 to 0.8; the clean
+  transfer control T1 gave 0.50). SL3 held in direction only: R5 is 37.7 mHa above Slater DZP where the confounded
+  control had suggested about 6. SL4 held: H exponents from H2 lower water by 3.90 mHa against a 4.06 mHa H2 gain.
+  Reported, not predicted: R5 is 3.1 mHa and R5H 7.0 mHa below cc-pVDZ (-76.2410) at the same size; R3 is
+  non-monotone (atom down 3.4 mHa, water up 2.85 mHa), so the atom-to-water transfer ratio is not one number per
+  ladder (-0.84, 0.735, 0.515 by rung). RHF carries 145.8 of the 132.8 mHa. Scope: a better-chosen member of the
+  same Slater-type family, one geometry, one method; Slater DZP with water-tuned polarization stays 34 mHa below R5H.
+- **numpy 2.4.0 / Python 3.14.0 memory leak found and patched locally.** `np.diag` on a 1-D input assigns through
+  `.flat`, which leaks about 2.8 KB per call and is never freed; the atom optimizer reached 18 GB and was killed
+  three times before this was traced (`scratchpad` probe: 83 to 250 MB over 400 solves unpatched, flat at 85 MB
+  patched). `debug/scale_ladder.py` carries a process-local replacement through fancy indexing. `np.diag` appears
+  about 140 times across 58 `geovac/` files; a production fix is owed and needs its own regression run (PI call).
+
+- **Atlas symmetry columns + guard (`docs/atlas.md`, `tests/test_atlas_symmetry_survivors.py`).** Two columns
+  on every door: the host symmetry group with its survivor, and the Wilson gauge reading on the survivor (U(1)
+  Paper 25, SU(2) Paper 30, SU(3) on S⁵ pure gauge; "OPEN" where no result decides it). Filled from existing
+  records; the two computable cells are guarded. Door 11 (second nucleus, Z_orb = Z_nuc = 1, R = 2, L_max 6, n ≤ 3,
+  `compute_cross_center_vne`): l couples at equal m (max 0.076 Ha), the n = 2 Fock multiplet splits 4 → 1+2+1 and
+  the n = 3 multiplet 9 → three singles and three pairs, so SO(4) → SO(2). Door 24 (uniform sphere R = 0.05,
+  hydrogenic radial integrals): the 2s shift 1.2e-4 Ha against 2p 5.4e-9, 1s–2s coupling 3.4e-4, so SO(4) → SO(3)
+  with n released. Not a guard of the m rule itself (the builder imposes it; Paper 58's test owns it). Fire-tested
+  4/4 as a separate step: wrong n = 2 pattern, "2s and 2p shift alike", "no l coupling", "no 1s–2s coupling" each
+  fail exactly one test. Atlas gate `tests/test_atlas_register.py` passes with the new columns.
+- **One open cell worth naming (door 11).** The survivor's generator is L_z = J_{L,z} + J_{R,z}, a torus of SO(4);
+  Paper 25's U(1) sits on the Hopf fibre, a torus of one SU(2) factor. They are different subgroups. Whether the two
+  Wilson structures meet at a second nucleus is recorded as OPEN, not asserted. Doors 22 and 23 release to
+  non-compact groups, where no Wilson action exists (Haar is not normalizable); the Standard Model groups are
+  attached to manifolds (S³, S⁵), not to axes, and the columns record which subgroup each door leaves standing.
+
+### Changed
+- **CLAUDE.md §3 and `docs/failed_approaches_ledger.md`:** the 2026-10-11 native-bricks row is softened by an
+  appended entry: the 130 mHa was the two-exponent cap, not the Sturmian family. The row's lesson stands.
+
 ## [v5.21.24] - 2026-10-29
 
 PI-directed: the owed items ("Leta work down those owed items"; the debug-folder WARN held, "We can hold off on the

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.24 (October 29, 2026)
+**Version:** v5.21.25 (October 30, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,8 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Atlas gains symmetry-survivor and Wilson-gauge columns (2026-10-30, v5.21.25, PI-directed):** door 11 SO(4)→SO(2), door 24 SO(4)→SO(3), guarded and fire-tested 4/4; door 11's two U(1)s differ, OPEN. CHANGELOG v5.21.25.
+- **Scale ladder: five atom-set O exponents put water below cc-pVDZ at 24 functions (2026-10-30, v5.21.25, pre-registered):** SL GO; p split 0.90; transfer 0.52; R3 non-monotone; np.diag leak patched locally. CHANGELOG v5.21.25.
 - **HG3 held after an analytic k tail; bond-angle guards (2026-10-29, v5.21.24, PI-directed):** LM Table I matched to 1.1e-16; NA/B2/B2X guarded, 9/9 and 6/6 fired; Brown credited. CHANGELOG v5.21.24.
 - **Two-electron bond-angle recurrence derived bottom-up; contact term leads (2026-10-29, v5.21.23, pre-registered):** order 41; B2 BORDERLINE (extra exponents 3, 1); B2X GO, true coefficients rho^L L^-4. CHANGELOG v5.21.23.
 - **Order-8 bond-angle ODE confirmed bottom-up; two-electron ODE beyond 1970 unknowns (2026-10-28, v5.21.22, pre-registered):** BU GO (derived order 9 = M G); AO3 STOP, 31 constants, seven component operators; Paper 59 sec:scope. CHANGELOG v5.21.22.
@@ -379,6 +381,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | Guessing a bond-angle ODE from floating-point Legendre coefficients (AO, 2026-10-28) | 1 | Fake low-order fits match the smooth parts to the data's precision, so no cliff shows; guess from exact data mod primes (record NA). See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the Minnesota-Sturmian deuteron row (2026-10-20): the v2 '20x overbinding' came from singlet parameters labelled triplet and a non-orthonormal basis treated as orthonormal, not from Minnesota being HO-tuned. The polarizability negative stands | 0 | See `docs/failed_approaches_ledger.md`. |
 | Frozen Li+ core as a Gaussian contact series matched to atomic levels only (CE, 2026-10-20; registration void on a shared control) | 1 | On LiH+ the error falls far less than 3x per order, the d channel makes it worse, and Paper 17's PK form transfers better: bound atomic levels fix only exterior phases while the molecular field probes the core interior. See `docs/failed_approaches_ledger.md`. |
+| RE-INTERPRETATION of the native-bricks row (SL, 2026-10-30): the 130 mHa shortfall of the two-scale Sturmian kit was the two-exponent cap, not the primitive family. Five O exponents set on the free atom, nothing tuned on water, land 3 mHa below cc-pVDZ at 24 functions. The lesson stands: the case rests on one-centre structure, not on better bricks | 0 | See `docs/failed_approaches_ledger.md`; record `docs/predictions/2026-10-30_scale_ladder.md`. |
 
 ---
 

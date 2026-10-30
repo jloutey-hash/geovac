@@ -418,3 +418,17 @@ data. Splitting each coefficient exactly into rational numbers times a few fixed
 (record NA) found the one-electron operator at once (order 8, degree 31). The guessing literature works from exact
 data for this reason (Bluemlein-Kauers-Klein-Schneider 2009; Bostan et al. 2009). Scripts `debug/ao_*.py`; CHANGELOG
 v5.21.21.
+
+### RE-INTERPRETATION of "GeoVac-native bricks ... vs cc-pVDZ at equal size, water (2026-10-11)" (SL, 2026-10-30) | 0 (the row's lesson stands; its 130 mHa figure is re-read)
+
+The row's mechanism paragraph already said the two-scale Sturmian kit "is limited only by having two exponents."
+The pre-registered scale ladder (record `docs/predictions/2026-10-30_scale_ladder.md`, GO; CHANGELOG v5.21.25)
+measured that limit. Same 24 functions, same Slater-type primitives, same frozen-core CCSD(T). Releasing the O
+exponents one group at a time, each set on the free O atom and none on water: R2 (the kit) -76.1113, R3 -76.1085,
+R4 -76.1246, R5 -76.2441; with H exponents from H2 RHF, R5H -76.2480. cc-pVDZ is -76.2410. So the 130 mHa was the
+exponent count, not the primitive family, and five atom-set scales beat cc-pVDZ at equal size by 3 to 7 mHa.
+What does not move: Slater DZP, with water-tuned polarization and two H s exponents, is still 34 mHa below R5H;
+the Pauli count is the same for every 24-function kit; and the row's lesson that GeoVac's case rests on one-centre
+structure, not on its bricks being better chemistry bricks, is unchanged. Two further facts from the ladder: the
+split between the two p exponents carries 0.90 of the gain on the atom and on water alike, and rung R3 is
+non-monotone (atom down 3.4 mHa, water up 2.85 mHa), so the atom-to-water transfer is not one ratio per ladder.
