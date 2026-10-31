@@ -1,0 +1,92 @@
+# Pre-registered prediction: the matched-accuracy Gaussian comparison for water (MA)
+
+**Registered 2026-10-31**, before any water energy of the two new bases is computed. PI delegated the
+registration ("We can download that data. Seems fine to me." / "Register is your call tho."). Owed by Paper 62
+(Sec. qubit, Sec. limits): the equal-size statement there is not a matched-accuracy one.
+**Commit status:** committed on its own, before any computation it scores.
+**Rests on:** Paper 62 Tables I and V (cc-pVDZ fc-CCSD(T) -76.241025, Slater DZP -76.281739, cc-pVTZ -76.332191,
+all 12-Gaussian evaluator, own solver, R_OH 1.809 bohr, 104.5 deg; registry `p62_*`); CHANGELOG v5.20.11.
+
+## Why
+
+Paper 62 shows the Slater DZP 40.7 mHa below cc-pVDZ at the same 24 functions and the same Pauli count. That is an
+equal-size comparison. The matched-accuracy question is the other way round: which Gaussian basis first reaches the
+Slater DZP's energy, and what does it cost in qubits, Pauli terms and 1-norm? cc-pVTZ (58 functions) overshoots by
+50 mHa. Two intermediate Gaussian rungs are added so the crossing is bracketed from both sides.
+
+## The ladder (fixed before any scored run)
+
+Same geometry, solver, frozen-core convention and Pauli counter as Paper 62 (`tests/test_water_ccsd.py`). Driver
+`debug/matched_accuracy_gaussian.py`; basis files `debug/data/basis/{cc-pvdz,ccpvdz_tzpol,aug-cc-pvdz,cc-pvtz}_H_O_Ne.json`
+(re-serialized from the Basis Set Exchange, ccRepo/Grant Hill revision 2018-10-03, downloaded 2026-10-31 into
+`debug/lit_scan/dl_bse_augccpvdz/`, excluded from git).
+
+| Basis | Water functions | Status |
+|:--|:--:|:--|
+| cc-pVDZ | 24 | known: fc-CCSD(T) -76.241025 (Paper 62) |
+| cc-pVDZ+TZpol | 35 | scored here; cc-pVDZ's s and p shells with cc-pVTZ's polarization shells (O 2d, H 2p); our construction |
+| aug-cc-pVDZ | 41 | scored here; the standard augmented set |
+| cc-pVTZ | 58 | known: fc-CCSD(T) -76.332191 (Paper 62) |
+
+Target: the Slater DZP's fc-CCSD(T), -76.281739 Ha (24 functions). Scored energy: frozen-core CCSD(T). RHF,
+all-electron, Pauli count and 1-norm (fc and all-electron) reported for both new rungs.
+
+## What I know before comparing (disclosed)
+
+- No water energy of cc-pVDZ+TZpol or aug-cc-pVDZ has been computed with this solver.
+- **Neon controls (non-scored, measured 2026-10-31; `debug/data/matched_accuracy_controls.jsonl`):**
+
+| Ne basis | Functions | RHF | fc-CCSD(T) | RHF gain over cc-pVDZ (mHa) | fc gain (mHa) |
+|:--|:--:|:--|:--|:--:|:--:|
+| cc-pVDZ | 14 | -128.488776 | -128.678836 | | |
+| cc-pVDZ+TZpol | 19 | -128.488776 | -128.705023 | 0.00 | 26.19 |
+| aug-cc-pVDZ | 23 | -128.496350 | -128.709295 | 7.57 | 30.46 |
+| cc-pVTZ | 30 | -128.531862 | -128.802454 | 43.09 | 123.62 |
+
+  On the closed-shell atom the second polarization set is pure correlation (RHF unchanged to 1e-11) and worth 26
+  mHa; augmentation is worth 30 mHa, a quarter of it RHF. Water needs 40.7 mHa over cc-pVDZ to reach the Slater DZP.
+- The water augmentation gain will differ from neon's: water has diffuse functions on three centres and a bond
+  region, and its RHF is further from its limit (41 mHa vs neon's cc-pVDZ, which is closer). No transfer ratio
+  atom-to-water has been measured for augmentation, so the predictions below are directional.
+- Timing: neon cc-pVTZ (30 functions) took 341 s of integrals; water at 41 functions is expected near 20-30 min.
+
+## Predictions
+
+Notation: W(B) = water fc-CCSD(T) in basis B. Target T = -76.281739.
+
+**MA1 (gated).** W(aug-cc-pVDZ) > T: augmentation at double-zeta does not reach the Slater DZP.
+- Falsifier: W(aug-cc-pVDZ) <= T.
+- Reason: neon's augmentation gain is 30.5 mHa against the 40.7 needed; water would have to gain a third more than
+  neon from the same step.
+- Probability 0.65.
+
+**MA2 (gated).** W(cc-pVDZ+TZpol) > T: a second polarization set does not reach the Slater DZP either.
+- Falsifier: W(cc-pVDZ+TZpol) <= T.
+- Reason: neon gains 26.2 mHa, all correlation; the Slater DZP's lead over cc-pVDZ is 29 mHa of SCF plus 12 of
+  correlation, and polarization functions buy little SCF energy.
+- Probability 0.8.
+
+**MA3 (reported, not gated).** The RHF share of each new rung's fc gain: TZpol <= 0.3 (neon 0.00), augmentation
+<= 0.5 (neon 0.25). Direction: both rungs are correlation-dominated steps, unlike the Slater DZP step, which is
+SCF-dominated (0.71).
+- Probability 0.7 each.
+
+**MA4 (reported, not gated).** The two rungs are ordered as on neon: W(aug-cc-pVDZ) < W(cc-pVDZ+TZpol).
+- Probability 0.6 (on neon the margin is 4 mHa; water's three centres could reverse it).
+
+Also reported, not predicted: the Pauli counts and 1-norms at 35 and 41 functions (the count is fixed by orbital
+count and symmetry and can be computed before the energy; it is not a prediction), and the interpolated
+matched-accuracy cost, i.e. the Pauli count and 1-norm at the energy T, read linearly in energy between the two
+rungs that bracket T. Under MA1 and MA2 the bracket is aug-cc-pVDZ to cc-pVTZ.
+
+**Gate.** GO if MA1 and MA2 both hold. BORDERLINE if one misses. STOP if both miss (then a Gaussian basis of 35-41
+functions matches the Slater DZP, and the matched-accuracy cost is at most that basis's).
+
+## Caps
+
+- One geometry, one method, one molecule, as in Paper 62. The intermediate rung cc-pVDZ+TZpol is our construction,
+  not a standard basis; it is there to bracket, not to recommend.
+- cc-pVDZ's polarization is the published one here (Paper 62 also reports it re-optimized, 1.2 mHa lower); the
+  Slater target keeps its water-optimized polarization. The comparison is standard Gaussian bases against the
+  Slater DZP as built.
+- A linear interpolation of Pauli count in energy between two rungs is a reading, not a measurement of any basis.
