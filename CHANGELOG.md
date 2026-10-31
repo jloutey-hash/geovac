@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.26] - 2026-10-30
+
+PI-directed: the open atlas cell ("And then maybe we hit that open issue"; "Commit").
+
+### Added
+- **SY (pre-registered, committed alone as eed51c2c; GO)** (`docs/predictions/2026-10-30_so4_commutant_door11.md`,
+  driver `debug/so4_commutant.py`, log `debug/data/so4_commutant_score.log`). Which one-parameter subgroup of
+  SO(4) survives a second nucleus. The six generators (L from the ladder algebra, A from Pauli's shell identity
+  P_n r P_n = -(3n/2) P_n A P_n) are built in the cross-centre builder's own hydrogenic basis; [L,L], [L,A], [A,A]
+  and L² + A² = n² - 1 close to 2e-14, and the builder's z angular factor matches to 1e-16. Controls (measured
+  before registration): an SO(4)-invariant operator keeps all six directions; the door-24 central operator keeps
+  exactly L_x, L_y, L_z and breaks the three A's at relative 0.17 to 0.62. Scored at R = 2 (and 4, 1): the commutant
+  of V_B in so(4) is one-dimensional, the null vector L_z to 1e-16, the five broken directions at relative 0.035
+  to 0.10 in the pattern 1 + 2 + 2, and the Hopf fibre's generator L_z + A_z broken at 0.38, the same as A_z. SY1,
+  SY2, SY3 held. Reading: the second nucleus keeps the rotation about the bond axis, a U(1) with fixed points,
+  and breaks the free Hopf U(1) that Paper 25's Wilson-Hodge structure is built on. Paper 25's identification of
+  the gauge phase with the fibre does not transfer to door 11. Not a Wilson-theory statement: a U(1) action can be
+  written on any graph.
+- **Guard** `tests/test_atlas_so4_commutant.py` (self-contained, no debug/ import; four tests, about 5 s). Written
+  as a separate step; fire-tested 4/4, each wrong answer failing exactly one test: "a second direction survives"
+  (dim 2), "the Hopf generator commutes", "the central control keeps all six", and a mis-scaled A (1/n² for 1/n),
+  which the algebra check catches.
+- **Atlas door 11:** the OPEN Wilson cell is replaced by the decided reading; falsifier column cites the record and
+  the two survivor guards.
+
+### Changed
+- **Paper 25, the Paper 2 interpretation paragraph:** the fibre reading is scoped to one centre, with the door-11
+  result and its guard. **Paper 32 §VIII.B, gap G4:** one sentence that the gauge groups attach to manifolds, not
+  to released axes, pointing at the atlas survivor columns and the door-11 result. `docs/claim_test_matrix.md`: one
+  row.
+
 ## [v5.21.25] - 2026-10-30
 
 PI-directed: the basis discussion ("Let's chase chemistry a bit. Let's talk basis."; "Cool. Let's find out."), the

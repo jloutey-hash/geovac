@@ -91,3 +91,33 @@ for the central one.
 ---
 
 (Appended after comparing. The predictions above are not edited.)
+
+## Disposition (2026-10-30)
+
+Run: `python debug/so4_commutant.py score`, after the record was committed (eed51c2c). Log
+`debug/data/so4_commutant_score.log`.
+
+| R (bohr) | Commutant dim | Null vector | Broken relative singular values | ‖[V_B, L_z + A_z]‖/‖V_B‖ | ‖[V_B, A_z]‖/‖V_B‖ | ‖[V_B, L_x]‖/‖V_B‖ |
+|:--|:--:|:--|:--|:--:|:--:|:--:|
+| 2 | 1 | L_z to 1e-16 in every other component | 0.102, 0.073, 0.073, 0.060, 0.060 | 0.382 | 0.382 | 0.225 |
+| 4 | 1 | L_z | 0.102, 0.091, 0.091, 0.088, 0.088 | 0.381 | 0.381 | 0.341 |
+| 1 | 1 | L_z | 0.090, 0.077, 0.077, 0.035, 0.035 | 0.337 | 0.337 | 0.129 |
+
+- **SY0: PASS** (measured before registration).
+- **SY1: HELD.** One relative singular value at 1e-17, the other five between 0.035 and 0.10 (bound 1e-3); the null
+  vector is L_z with every other weight below 3e-16 (bound 0.03).
+- **SY2: HELD.** The Hopf generator's relative commutator is 0.38 (bound 1e-3). Its commutator equals A_z's, as it
+  must when L_z commutes.
+- **SY3: HELD.** Same dimension and same null vector at R = 4 and R = 1.
+- **Gate: GO.**
+
+Reading, for the atlas's door-11 cells: the second nucleus leaves exactly one direction of SO(4), the rotation about
+the bond axis. That rotation has fixed points (the axis itself). The Hopf fibre's generator L_z + A_z, which is free
+on S³ and is the U(1) Paper 25's Wilson-Hodge structure is built on, is broken at the same relative size as A_z
+alone. So the surviving U(1) is not the fibre, and Paper 25's identification of the gauge phase with the fibre does
+not transfer to a second nucleus. The five broken directions come in the pattern 1 + 2 + 2 (one A_z-type value and
+two degenerate pairs), the footprint of the surviving SO(2) acting on the broken five.
+
+Scope, so it is not over-read: a statement about which geometric subgroup remains, at Z = 1 in the hydrogenic
+family. Not a statement about whether a U(1) Wilson action can be written on a two-centre graph (it can, on any
+graph), and not a Wilson-loop computation.
