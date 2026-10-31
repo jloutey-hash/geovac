@@ -157,3 +157,26 @@ Scope, stated so it is not over-read: R5 is a Slater-type basis with five atom-s
 exponent, and one H exponent. It is a better-chosen member of the same primitive family as v5.20.12, not a new
 GeoVac structure. One geometry and one method. Slater DZP, with water-tuned polarization and two H s exponents,
 stays 34 mHa lower than R5H.
+
+## Addendum (2026-10-30, later): the R3 non-monotone step diagnosed
+
+PI: "Let's do the R3 non-monotone diagnostic." Memo `debug/scale_ladder_r3_diag_memo.md` (hypotheses written
+before computing); scripts `debug/scale_ladder_r3_diag.py`, `debug/scale_ladder_r3_diag_atom.py`; data
+`debug/data/scale_ladder_r3_diag{.jsonl,_atom.json,_oion.json}`. Nothing tuned on water: every substituted exponent
+is R2's 2.28124 or R3's own value.
+
+- The water loss from R2 to R3 is correlation: RHF +0.13, fc-CCSD +2.57, (T) +0.15 mHa.
+- On the neutral O atom (UHF reference, same Gaussian-fitted kits, fc-CCSD(T)) the step gains 2.84 mHa at UHF and
+  loses 2.72 mHa of correlation: a wash (-0.12 mHa). Water loses the same 2.72 mHa of correlation. The correlation
+  half transfers one to one; the HF half does not transfer.
+- The correlation loss is mostly the 3d exponent, a passenger of the 3p in the ladder's design and invisible to the
+  radial HF objective: putting the 3d back at 2.28124 recovers 2.13 of the 2.85 mHa on water (predicted 2.1 from the
+  atom).
+- The HF half cancels on water: diffusing the p family costs water 5.2 mHa at RHF and tightening the s valence gains
+  5.1 mHa, while the atom gains from both. Water's RHF is two to six times more sensitive than the atom's to the 3p
+  and s-valence exponents, and of the opposite sign for the p family. The prediction's RHF clause (within 0.2 mHa)
+  failed for the 3p and s substitutions by 6.7 and 5.1 mHa; the correlation clause held in all three.
+- Reading of the rung-by-rung ratios (-0.84, 0.735, 0.515): the R3 ratio is a ratio of two cancelling HF pieces and
+  a transferring correlation loss, not a transfer number. R4 and R5 are HF-driven radial splits and are not touched.
+- Not done (PI call, changes the ladder's rule): set the 3d exponent by an atomic correlated criterion instead of
+  tying it to the 3p.

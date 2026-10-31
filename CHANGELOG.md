@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.28] - 2026-10-30
+
+PI-directed ("Let's do the R3 non-monotone diagnostic"). Diagnostic only; nothing tuned on water; no new rung.
+
+### Added
+- **R3 step of the scale ladder diagnosed** (memo `debug/scale_ladder_r3_diag_memo.md`, hypotheses written before
+  computing; scripts `debug/scale_ladder_r3_diag.py` and `debug/scale_ladder_r3_diag_atom.py`; data
+  `debug/data/scale_ladder_r3_diag{.jsonl,_atom.json,_oion.json}`; addendum appended to
+  `docs/predictions/2026-10-30_scale_ladder.md`). The record had R3 lowering the O atom by 3.4 mHa and raising water
+  by 2.85 mHa. The loss on water is correlation (RHF +0.13, fc-CCSD +2.57, (T) +0.15 mHa). On the neutral O atom
+  (UHF reference, same Gaussian-fitted kits, fc-CCSD(T) through the existing spin-orbital CCSD) the step gains 2.84
+  mHa at UHF and loses 2.72 mHa of correlation, a wash at -0.12 mHa; water loses the same 2.72 mHa of correlation.
+  So the correlation half transfers one to one and the HF half does not transfer. The correlation loss is mostly the
+  3d exponent, a passenger of the 3p in the ladder's design that the radial HF objective never sees: putting the 3d
+  back at R2's 2.28124 recovers 2.13 of the 2.85 mHa on water (predicted 2.1 from the atom). The HF half cancels on
+  water: diffusing the p family costs 5.2 mHa at RHF and tightening the s valence gains 5.1, while the atom gains
+  from both; water's RHF is two to six times more sensitive than the atom's to the 3p and s-valence exponents and of
+  the opposite sign for the p family. The pre-stated prediction's correlation clause held in all three substitution
+  runs; its RHF clause (within 0.2 mHa) failed for the 3p and s substitutions by 6.7 and 5.1 mHa, which is the
+  cancellation itself. Gaussian-fit error ruled out by construction (one shape per (l, n), scaled by zeta squared).
+  A closed-shell O^2- probe was run first and set aside: its RHF moves 34 mHa between the sets. Reading: the R3
+  ratio (-0.84) is two cancelling HF pieces plus a transferring correlation loss, not a transfer number; R4 and R5
+  (HF-driven radial splits) are untouched. Not done, PI call since it changes the ladder's rule: set the 3d by an
+  atomic correlated criterion instead of tying it to the 3p.
+
+### Changed
+- CLAUDE.md: version; §2 one-liner.
+
 ## [v5.21.27] - 2026-10-30
 
 PI-directed: the Yukawa side quest ("We can go with your recommendation"; "Go ahead with the pre-reg"), filed
