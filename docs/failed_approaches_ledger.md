@@ -432,3 +432,26 @@ the Pauli count is the same for every 24-function kit; and the row's lesson that
 structure, not on its bricks being better chemistry bricks, is unchanged. Two further facts from the ladder: the
 split between the two p exponents carries 0.90 of the gain on the atom and on water alike, and rung R3 is
 non-monotone (atom down 3.4 mHa, water up 2.85 mHa), so the atom-to-water transfer is not one ratio per ladder.
+
+### Reading the CCM Yukawa coefficient at finite cutoff from the compressed spectral action on the true CH window (YC, 2026-10-29) | 1
+
+Record YC (`docs/predictions/2026-10-29_ccm_yukawa_coefficient_window.md`, registered and committed alone as 0295f53a
+before scoring; GO) asked whether GeoVac's truncated outer factor moves the coefficient 4 in Chamseddine-Connes-Marcolli's
+Y_2 = 4 g^2. The instrument is the Dabrowski-Dossena product D_GV (x) gamma_F + 1 (x) D_F on the true Camporesi-Higuchi
+window, with one compressed multiplier pair feeding the gauge and the Higgs fluctuation, and the continuum reference by
+two agreeing routes. Scored at tau = t (n_max + 1/2)^2 in {1, 4} and n_max = 2..5: c is never within 1e-3 of 4
+(smallest miss 0.499; c runs from 2.00 to -105), the pure-gauge companion is 1.9 to 15 times the scored gauge
+functional, and the miss grows with n_max. Mechanism (lit memo `debug/lit_scan/gauge_invariant_truncation_memo.md`,
+derived there and checked on the truncated circle): compressing a function onto a fixed spectral window leaves no unitary
+but the constants acting (Choi's multiplicative domain; Dong, SIGMA 18, 060, computes the truncated circle's gauge
+group as U(1) x (U(1) x| Z_2) at every n), and the epsilon^2 pure-gauge term is an exact edge-crossing sum weighted by
+f' at the window edge, suppressed at fixed t and not at fixed tau. It is the same defect as the order-zero and
+order-one failure on the true window (Paper 32). Lesson: the naive compressed spectral action is not a gauge-invariant
+instrument at finite cutoff, so it cannot read a ratio of gauge to Higgs normalizations; this says nothing about
+whether the outer factor moves the 4. Every known repair changes the object: fluctuate before truncating (the window
+moves with the gauge field), pass to the C*-envelope M_N with gauge group U(N), the fuzzy sphere (needs truncated
+functions to form a matrix algebra; no associative odd-sphere analogue), or gauge networks (need sites). OPEN: a gauge
+theory on a fixed spectral window with a nontrivial local gauge group. Cluster candidate for the walls register: the
+order-zero and order-one defect of the true window (Paper 32, `tests/test_true_window_real_structure.py`). Scope:
+commutative-factor compression only; WH1's almost-commutative convergence and Paper 32's H1 theorem are untouched.
+Drivers `debug/graded_ac/`; CHANGELOG v5.21.27.

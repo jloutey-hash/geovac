@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.26 (October 30, 2026)
+**Version:** v5.21.27 (October 30, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **CCM's Yukawa coefficient cannot be read at finite cutoff; compression breaks gauge invariance (2026-10-29, v5.21.27, pre-registered):** YC GO, all held; known obstruction (Choi, Dong); every fix changes the object. CHANGELOG v5.21.27.
 - **A second nucleus keeps L_z only; the Hopf U(1) breaks (2026-10-30, v5.21.26, pre-registered):** SY GO; commutant of V_B in so(4) one-dimensional at R = 1, 2, 4; Hopf generator broken at 0.38; Paper 25's fibre reading does not transfer. CHANGELOG v5.21.26.
 - **Atlas gains symmetry-survivor and Wilson-gauge columns (2026-10-30, v5.21.25, PI-directed):** door 11 SO(4)→SO(2), door 24 SO(4)→SO(3), guarded and fire-tested 4/4; door 11's two U(1)s differ, OPEN. CHANGELOG v5.21.25.
 - **Scale ladder: five atom-set O exponents put water below cc-pVDZ at 24 functions (2026-10-30, v5.21.25, pre-registered):** SL GO; p split 0.90; transfer 0.52; R3 non-monotone; np.diag leak patched locally. CHANGELOG v5.21.25.
@@ -383,6 +384,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | RE-INTERPRETATION of the Minnesota-Sturmian deuteron row (2026-10-20): the v2 '20x overbinding' came from singlet parameters labelled triplet and a non-orthonormal basis treated as orthonormal, not from Minnesota being HO-tuned. The polarizability negative stands | 0 | See `docs/failed_approaches_ledger.md`. |
 | Frozen Li+ core as a Gaussian contact series matched to atomic levels only (CE, 2026-10-20; registration void on a shared control) | 1 | On LiH+ the error falls far less than 3x per order, the d channel makes it worse, and Paper 17's PK form transfers better: bound atomic levels fix only exterior phases while the molecular field probes the core interior. See `docs/failed_approaches_ledger.md`. |
 | RE-INTERPRETATION of the native-bricks row (SL, 2026-10-30): the 130 mHa shortfall of the two-scale Sturmian kit was the two-exponent cap, not the primitive family. Five O exponents set on the free atom, nothing tuned on water, land 3 mHa below cc-pVDZ at 24 functions. The lesson stands: the case rests on one-centre structure, not on better bricks | 0 | See `docs/failed_approaches_ledger.md`; record `docs/predictions/2026-10-30_scale_ladder.md`. |
+| Reading the CCM Yukawa coefficient 4 at finite cutoff from the compressed spectral action on the true CH window (YC, 2026-10-29) | 1 | The compression breaks gauge invariance: the pure-gauge companion is an edge-crossing boundary sum that dominates at fixed tau. Known obstruction (Choi; Dong); every known fix changes the object. See `docs/failed_approaches_ledger.md`; record `docs/predictions/2026-10-29_ccm_yukawa_coefficient_window.md`. |
 
 ---
 

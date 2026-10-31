@@ -20,6 +20,7 @@
 | **PERIODS-TRANSCENDENCE** | CRYSTALLIZED (2026-10-16; re-scoped 2026-10-27) | 7 | For two-electron integrals over Slater densities the transcendence class is set by the **integral's graph: the density topology the kernels couple, plus the masses on the kernel lines**. A massless Coulomb kernel adds no threshold, so for Coulomb integrals the density topology alone sets the rung; a massive (geminal) kernel can move it. Never set by the basis, the number of nuclei, or a factorization; the three-centre radial core has no closed form through any factorization. A pattern across the tested instances. Home: Paper 59 `sec:f12` + `sec:beyond` + `sec:density_ring`; seam J9. |
 | NUCLEAR-CONTINUUM-RESPONSE | *singleton-ish (unworked)* | ~3 | Sum-over-states / IR-extrapolation fragile for continuum response; the error is the interaction (Minnesota), not the solver. |
 | MOLECULAR-BINDING-W1e | *forming (unworked)* | ~10 | Second-row over-binding lives at the integral-**specification** step, not correlation (DMRG=FCI); cheap engineering exhausted. |
+| SPECTRAL-WINDOW-COMPRESSION | *forming (named 2026-10-30, unworked)* | 2 walls + 1 open | Compressing functions onto a fixed spectral window P(·)P is not multiplicative, so every structure that needs the algebra to act multiplicatively fails by an **edge-crossing boundary sum**: order zero and order one on the true CH window, and gauge invariance of the compressed fluctuation (YC). Choi's multiplicative domain; Dong's gauge group of the truncated circle. See the 2026-10-30 note below. |
 
 ### Banked kills awaiting clustering (`/aha` v5.1.2, 2026-08-25)
 
@@ -421,6 +422,45 @@ multi-focal composition wall ([[multi_focal_wall_pattern]]; Paper 57 `sec:unity`
   (Paper 57 `sec:unity`, on the Paper 32 LS-8a template). X4-1 (pre-registered) confirmed the fourth-order
   n-dependence in our own code to 5e-9.
 
+## Note 2026-10-30 (v5.21.27, PI-authorized filing, not a `/walls` pass): YC wall filed; cluster SPECTRAL-WINDOW-COMPRESSION named FORMING
+
+The PI authorized touching the register when the Yukawa side quest was chronicled ("You can touch the walls
+register"). This files the new wall and names its cluster. No member was re-verified beyond the current-state
+reads cited; the cluster is not worked.
+
+- **New wall (STANDING, filed):** reading the CCM Yukawa coefficient 4 at finite cutoff from the compressed
+  spectral action on the true CH window (YC, 2026-10-29). Evidence: record
+  `docs/predictions/2026-10-29_ccm_yukawa_coefficient_window.md` (GO; YC1 to YC3 held, smallest miss 0.499, the
+  pure-gauge companion 1.9 to 15 against a bound of 0.1, the miss rising with cutoff); §3 row and ledger row;
+  Paper 32 scope paragraph after `thm:h1_yukawa_non_selection`; CHANGELOG v5.21.27.
+- **Kind: HARD at the level of the mechanism, OPEN-LEANING as a question.** The compressed fluctuation a[D,b]
+  with a, b compressed is not gauge invariant because P u P is unitary only when [u, P] = 0 (Choi's multiplicative
+  domain), and the pure-gauge term is an exact edge-crossing sum weighted by the test function's slope at the
+  window edge (`debug/lit_scan/gauge_invariant_truncation_memo.md`, checked on the truncated circle). That is a
+  theorem about the instrument, not about the coefficient. Named better attempts exist, each changing the
+  object: fluctuate then truncate, the C*-envelope with U(N), gauge networks. The open question is a gauge
+  theory on a fixed window with a nontrivial local gauge group.
+- **Cluster members, from current state:**
+  1. Order zero and order one fail and grow on the true CH window, a Toeplitz boundary term (WH1 status;
+     `tests/test_true_window_real_structure.py`; Paper 32). Wall.
+  2. YC, above. Wall.
+  3. Convergence in the Dirac seminorm on the true window: its kernel is the scalars at the tested cutoffs
+     (WH1 status). OPEN item, listed because the same compression sits under it; not a filed negative.
+- **Shared mechanism, first statement (not yet sharp):** P(·)P onto complete Dirac eigenspaces preserves the
+  state space (Paper 38) but not the product, and every property of a spectral triple that uses the product,
+  the order conditions, the unitarity of gauge transformations, the derivation property of [D, ·], leaks
+  through the window edge by a sum over pairs with one index inside and one outside. The YC lit memo derives the
+  gauge case in closed form; the order-one case is measured, not yet written in the same form.
+- **Operational consequence (provisional):** a finite-cutoff test that needs the algebra to act multiplicatively
+  must either stay inside the multiplicative domain (constants on the true window) or change the object. A
+  prediction scored through a compressed product should carry a pure-gauge or order-one companion as a control,
+  as YC did.
+- **What would move it toward CRYSTALLIZED:** the order-one defect written as the same edge-crossing sum, with
+  the slope weight replaced by the Dirac gap, and checked against `tests/test_true_window_real_structure.py`;
+  then Dong's gauge group computed for the window's own operator system (cheap, exact). Two independent
+  negatives are below the promotion floor of three; a third would be the Dirac-seminorm kernel if it is shown
+  to be the same boundary term.
+
 ## Promotion candidates (PI-gated)
 
 **CHEM-ACCURACY two-walls compounding.** One-sentence mechanism: *chemical accuracy (Wall A, breachable) and native sparsity (Wall B, hard) co-locate favorably only at one center, so breaching the cusp for molecules re-triggers the non-orthogonality wall.* Support: ≥3 independent negatives (R12-CI conditioning v5.0.7; flexible-Jastrow cap v5.0.8; elliptic-basis null v5.0.1) + 1 breach (atomic xTC v5.0.9) + 2 crystallized meta-findings it subsumes. Falsifier: above. **Proposed home:** a sharpening of [[two_kinds_of_sparsity]] and/or a Paper 14 remark tying the atomic xTC win to the molecular tension. **PI decision required** to write it into a paper.
@@ -428,4 +468,4 @@ multi-focal composition wall ([[multi_focal_wall_pattern]]; Paper 57 `sec:unity`
 ---
 
 ## Backlog — clusters to work next
-Run `/walls <cluster>` on any of: QED-SELECTION-RULES · ALPHA-COMBINATION · GRAVITY-SUBSTRATE · RELATIVISTIC-TAPERING · NUCLEAR-CONTINUUM-RESPONSE · MOLECULAR-BINDING-W1e. Each needs its members pulled from §3, re-verified against current state, tagged hard/soft, and a crystallization attempted.
+Run `/walls <cluster>` on any of: QED-SELECTION-RULES · ALPHA-COMBINATION · GRAVITY-SUBSTRATE · RELATIVISTIC-TAPERING · NUCLEAR-CONTINUUM-RESPONSE · MOLECULAR-BINDING-W1e · SPECTRAL-WINDOW-COMPRESSION (named 2026-10-30). Each needs its members pulled from §3, re-verified against current state, tagged hard/soft, and a crystallization attempted.

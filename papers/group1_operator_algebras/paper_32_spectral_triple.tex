@@ -4135,6 +4135,33 @@ positivity checks are automatic for nonzero Hermitian $D_F$). See
 \texttt{debug/h1\_higgs\_inner\_fluctuation\_memo.md}.
 \end{proof}
 
+\paragraph{Scope: the dynamical constraint is not tested here (2026-10-29).}
+\textbf{[MEASURED, pre-registered]} The theorem is kinematic.
+Chamseddine--Connes--Marcolli's spectral action adds one dynamical
+relation, the trace constraint $\sum_\sigma (y_\nu^2 + y_e^2 + 3y_u^2 +
+3y_d^2) = 4g^2$ at the cutoff, whose coefficient is a ratio of two
+same-order heat-kernel densities from which the outer manifold cancels.
+H1 did not impose or test it, and imposing it would add one equation on
+a weighted trace without selecting values, so the theorem is unaffected
+either way. A pre-registered test asked whether the truncated outer
+factor moves that coefficient (CHANGELOG v5.21.27). On the true window
+the graded product of the next paragraph has to be taken in
+Dabrowski--Dossena's form $D_{\mathrm{GV}} \otimes \gamma_F + 1 \otimes
+D_F$, because no grading commutes with $\mathcal{O}^{\mathrm{CH}}$
+(Proposition~\ref{prop:odd}); its square factorizes exactly. With that
+product the compressed gauge fluctuation $a[D,b]$ is not gauge
+invariant: the pure-gauge companion ($a = 1$) is an edge-crossing
+boundary sum, the same defect as the failure of the order-zero and
+order-one conditions on the window, and it dominates the gauge
+functional whenever the heat cutoff sits at the window edge. The
+coefficient therefore cannot be read at finite cutoff by this
+instrument. The result is a wall on the instrument, not evidence that
+the outer factor moves the $4$. The obstruction is known (Choi's
+multiplicative domain; Dong's gauge group of the truncated circle), and
+every known repair changes the object: fluctuating before truncating,
+the $C^*$-envelope with gauge group $\mathrm{U}(N)$, or lattice gauge
+networks with sites.
+
 \paragraph{The forced/free seam (forcing-catalogue Door~4, 2026-06-01).}
 \textbf{[OBSERVATION]} The Yukawa non-selection theorem admits a sharper structural reading.
 The almost-commutative factorization $D^2 = D_{\mathrm{GV}}^2 \otimes 1

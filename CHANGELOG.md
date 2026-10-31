@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.27] - 2026-10-30
+
+PI-directed: the Yukawa side quest ("We can go with your recommendation"; "Go ahead with the pre-reg"), filed
+afterwards ("Ok, let's look at yukawa filling"). The files were committed in v5.21.25 without a chronicle entry; this is
+that entry. No new computation.
+
+### Added
+- **YC (pre-registered, committed alone as 0295f53a; GO)** (`docs/predictions/2026-10-29_ccm_yukawa_coefficient_window.md`,
+  scorer `debug/graded_ac/yc_score.py`, data `yc_score.json`). Question: does GeoVac's truncated outer factor, the true
+  Camporesi-Higuchi window, move the coefficient 4 in Chamseddine-Connes-Marcolli's Yukawa normalization Y_2 = 4 g^2?
+  In the continuum that 4 is a ratio of two same-order heat-kernel densities, gauge F^2 and Higgs |d phi|^2, and the
+  outer manifold cancels from the ratio (lit memo `debug/lit_scan/ccm_spectral_action_yukawa_memo.md`; primary sources
+  CCM07, CC12, CCvS13 read in full; the 2007 Higgs prediction was falsified and repaired in 2012 with a fitted n, so no
+  mass prediction was attempted). Instrument (`debug/graded_ac/graded_product_memo.md`): the Dabrowski-Dossena product
+  D_GV (x) gamma_F + 1 (x) D_F, whose square factorizes exactly and whose one-forms split exactly. The module's
+  sign(D_GV) product does not factorize (cross term 2|D_GV| (x) D_F) and the gamma_GV (x) D_F form does not exist on the
+  window, since no grading commutes with O^CH (the window is odd, Paper 32 prop:odd). Real structure J_GV (x) J_F gamma_F
+  gives KO-1; with J_F alone the sign eps' is inconsistent (Dabrowski-Dossena Table 5). One multiplier pair feeds both
+  fluctuations, so c depends on the outer factor alone. Continuum reference by two routes: a level sum to n = 51 with a
+  Gaussian tail bound (R1) and the Gilkey a_4 density on the unit S^3 (R2), R(0+) = 2, agreeing with a visible O(t)
+  correction. Controls measured before registration: pure gauge k^inf = 0 to 4e-15; the flat-torus toy returns c = 4 to
+  1e-12 at fixed t and misses by order 1 to 60 at fixed tau = t R^2; the S^3 pipeline at fixed t = 0.1 approaches 4 as
+  n_max grows (miss 1.4e-2, 3.3e-4, 3.1e-6 at n_max = 10, 12, 14). Scored at tau in {1, 4} x n_max in {2, 3, 4, 5}:
+  YC-0 PASS; YC1 held (smallest miss 0.499 at tau = 4, n_max = 2; c runs from 2.00 down to -105); YC2 held (the
+  pure-gauge companion rho_pg is 1.9 to 15 against a bound of at most 0.1, smallest margin 22); YC3 held (the miss rises
+  strictly with n_max at both tau). The named interesting outcome, something on S^3 protecting gauge invariance of the
+  compressed functional, did not occur. Reading: on the truncated S^3 the CCM coefficient cannot be read at finite
+  cutoff by the naive compressed spectral action, because the compression breaks gauge invariance, exactly as on a flat
+  truncation. A wall on the instrument, not a statement that the outer factor moves the 4.
+- **Literature scan: gauge invariance on a spectral truncation = KNOWN OBSTRUCTION**
+  (`debug/lit_scan/gauge_invariant_truncation_memo.md`). A unitary u acts on the window only if [u, P] = 0 (Choi's
+  multiplicative domain), and the commutant of O^CH is the scalars; Dong (SIGMA 18, 060) computes the gauge group of the
+  truncated circle as U(1) x (U(1) x| Z_2) at every n, so the local gauge group is gone. Derived in the memo and checked
+  on the truncated circle (four radii, 7 digits): the epsilon^2 pure-gauge coefficient is an exact edge-crossing sum,
+  -sum over i in W, j outside W of |chi_ij|^2 f'(lambda_i)(lambda_i - lambda_j), suppressed at fixed t and not at fixed
+  tau. This ties the YC miss to the order-zero and order-one failure on the true window. Known fixes all change the
+  object: fluctuate then truncate (Chamseddine-Connes; the window then moves with A); the C*-envelope M_N with gauge
+  group U(N) (Verhoeven 2026; the CCvS 2013 perturbation semigroup); the fuzzy sphere, where the truncated functions
+  already form a matrix algebra and which has no associative odd-sphere analogue (Ramgoolam); gauge networks
+  (Marcolli-van Suijlekom), which need sites. OPEN: a gauge theory on a fixed spectral window with a nontrivial local
+  gauge group. Subtracting the pure-gauge term is not a fix. Cheapest diagnostic: score the exponentiated companion
+  against the linear one; the difference isolates the defect. Dong's gauge group of O^CH itself is not computed (cheap
+  and exact, if wanted).
+- **Literature scan: Yukawa patterns under RG running** (`debug/lit_scan/yukawa_rg_patterns_memo.md`), input to the
+  design and to any later forced/free test: every fixed-point success needs one extra free boundary condition; only
+  scale-invariant patterns (Gatto-Sartori-Tonin, same-sector light mass ratios, the exact one-loop flavour invariants)
+  are testable at every scale at once; Koide's Q = 2/3 holds for pole masses and not for running ones. No GeoVac
+  quantity computed.
+
+### Changed
+- **Paper 32, after thm:h1_yukawa_non_selection:** a scope paragraph. H1 tested kinematics, not CCM's dynamical trace
+  constraint; that constraint is one equation and selects no values; the YC result and its mechanism, pointing here.
+  The seam paragraph's graded product is realized on the true window by the Dabrowski-Dossena form, since no gamma_GV
+  exists there. `docs/claim_test_matrix.md`: one row, declared coverage gap (record-backed; the scorer lives in debug/).
+- **CLAUDE.md §3 and the ledger:** one row. The ledger row names its cluster candidate, the true window's order-zero
+  and order-one defect.
+- **Walls register (PI-authorized filing, not a `/walls` pass):** the YC wall filed STANDING, HARD at the mechanism
+  and OPEN-LEANING as a question; a new cluster SPECTRAL-WINDOW-COMPRESSION named FORMING with two walls (true-window
+  order zero/one; YC) and one open item (Dirac-seminorm kernel), a first mechanism statement (compression leaks through
+  the window edge wherever the product is used), and what would crystallize it. `docs/walls/register.md`.
+
 ## [v5.21.26] - 2026-10-30
 
 PI-directed: the open atlas cell ("And then maybe we hit that open issue"; "Commit").
