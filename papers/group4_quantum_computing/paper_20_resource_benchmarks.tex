@@ -359,7 +359,12 @@ calculations at experimentally known or DFT-optimized geometries.
 The framework's PES-topology accuracy is row-conditional.  For first-row
 hydrides (Z = 3--9 + H), the balanced coupled Hamiltonian binds at the
 correct equilibrium geometry with documented overbinding magnitude.  For
-second-row and below (Z $\ge$ 11), it does not.
+second-row and below (Z $\ge$ 11), it does not.  (For what the
+library's fixed-exponent radial rules cost against a tuned exponential
+basis at equal size, measured on water outside the library, see
+Paper~62: the hydrogenic $Z/n$ kit is about $0.2$~Ha above cc-pVDZ at
+twenty-four functions, and the loss is the fixed node structure, which
+screening makes worse.)
 
 \paragraph{Empirical evidence.}  The sprint sequence of
 2026-06-07 (project memos

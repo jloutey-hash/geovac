@@ -82,6 +82,9 @@ SCOPES = {
     # convention live in both of these.
     "group3": ["papers/group3_foundations/paper_22_angular_sparsity.tex",
                "papers/synthesis/group3_foundations_synthesis.tex"],
+    # Added 2026-10-31: Paper 62's water energies and 1-norms are declared
+    # objects (p62_* keys) and its gaps are DERIVED from them.
+    "group2": ["papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex"],
 }
 
 EXEMPT = re.compile(

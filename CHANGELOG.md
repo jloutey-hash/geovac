@@ -7,6 +7,92 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.29] - 2026-10-31
+
+PI-directed ("Let's make that paper home for the water basis comparisons"; new paper chosen over folding: "I like
+the new paper argument for this new water stuff tho. Let's do it.").
+
+### Added
+- **Paper 62, `papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex` (new, ACTIVE, cert OWED).**
+  "Water at Twenty-Four Functions: Slater-Type Bases Set on the Free Atom Against cc-pVDZ, With the Qubit Cost."
+  Homes the water basis arc that had no paper: v5.20.11 (Slater DZP vs cc-pVDZ at equal size), v5.20.12 (the
+  framework's own exponential kits, negative), v5.21.25 (the pre-registered scale ladder, SL) and v5.21.28 (the R3
+  diagnosis). Sections: solver and validation; equal size and equal design rule; the native kits with the
+  node-structure mechanism; the ladder as registered, its disposition and the R3 rung; qubit cost (shape-blind Pauli
+  count, 1-norm rising with accuracy); prior art; limitations. Every load-bearing number is a `\gvq` object; all
+  measured tiers; caps in the abstract (one geometry/method/molecule; water-tuned DZP 34 mHa lower; matched-accuracy
+  Gaussian test owed; not a lattice result). Compiles three-pass with zero undefined references or citations.
+  Numbering: 61 was the last paper in the series.
+- **Numeric registry:** 14 `p62_*` MEASURED keys (fc-CCSD(T) energies of cc-pVDZ, Slater DZP, cc-pVTZ, the three
+  native kits, rungs R3/R5/R5H; two RHF anchors; two 1-norms) and 10 DERIVED keys (the 41/29 mHa gap, the 196/130
+  mHa losses, the 3.1/7.0 mHa margins, the 34 mHa cap, SL1 0.900, SL2 0.516, the 4.7 percent 1-norm ratio). A new
+  convention kind `energy` ("total energy") so the self-test parses them; the self-test passes (18) and C21 passes
+  on a new `group2` scope that gates the paper.
+- **Claim-test matrix:** Paper 62 section, seven rows, all LIVE after the guard below.
+- **Ladder guard, written as a separate step after the paper (PI: "let's work on what's owed"):**
+  `tests/test_paper62_scale_ladder.py`, data `tests/data/paper62_scale_ladder_2026_10_30.json` built by
+  `debug/build_p62_guard_data.py`. Three tests. (1) Every rung's O exponents are a stationary local minimum of the
+  free-O-atom radial average-of-configuration HF, recomputed through `test_water_ccsd.radial_atom` (central-difference
+  gradients measured 6e-8 to 1.7e-6, bound 5e-5; the energy rises under each perturbation), and R2 is the v5.20.12
+  two-scale kit; 0.3 s. (2) SL1 = 0.900 and SL2 = 0.516 derived from the stored water energies and the recomputed atom
+  energies, never copied; the R3 non-monotone step and R5H < R5 as reported. (3) The R3 one-centre probe recomputed:
+  neutral O atom UHF + fc-CCSD(T) in the R2, R3 and 3d-back kits, asserting the UHF gain, the correlation loss, their
+  cancellation, equality with water's correlation loss, and the 3d carrying more than 70% of it; slow, 213 s; no
+  debug/ import. Only the water energies are read. Fire-tested 8/8: R4 p exponent moved, objective q_p = 3, base-rung
+  constant moved, stored R4 water energy drifted, R5 water gain flattened, antisymmetrizer sign, 3d not put back,
+  UHF and correlation swapped; each FIRED. C13 and C22 pass; Paper 62's Backing section names the guard.
+- **Pointers:** Paper 14 sec:composed_gaussian and Paper 20 subsec:scope_boundary each carry one parenthetical
+  pointer to Paper 62 (shape-blind Pauli count; the cost of the fixed-exponent rules); group2 synthesis gains a
+  Paper 62 subsection and bibitem; `papers/INDEX.md` row; CLAUDE.md §6 group2 count 12 -> 13. Papers 14, 20 and the
+  synthesis recompile clean.
+
+- **MA (pre-registered, committed alone as 6b6d85c2; GO)** (`docs/predictions/2026-10-31_matched_accuracy_gaussian.md`,
+  driver `debug/matched_accuracy_gaussian.py`, data `debug/data/matched_accuracy{.jsonl,.log}`,
+  controls `debug/data/matched_accuracy_controls.jsonl`). The matched-accuracy comparison Paper 62 owed: which
+  Gaussian basis first reaches the Slater DZP's fc-CCSD(T) (-76.281739 at 24 functions). Two intermediate rungs
+  bracket the crossing: cc-pVDZ+TZpol (35 functions, cc-pVDZ's s/p shells with cc-pVTZ's polarization, our
+  construction) and aug-cc-pVDZ (41). Registration delegated by the PI ("Register is your call tho."); control bounds
+  measured on neon first (second polarization set 26 mHa, all correlation; augmentation 30 mHa, a quarter RHF).
+  Results: cc-pVDZ+TZpol -76.266498 (+15.24 mHa above the target; MA2 held), aug-cc-pVDZ -76.273743 (+8.00; MA1
+  held); RHF shares 0.19 and 0.45 (MA3 held, bounds 0.3 and 0.5); aug below TZpol by 7.2 mHa (MA4 held). Qubit
+  resources (JW, fc): 505,467 terms / 1,814.9 Ha on 68 qubits and 982,785 / 1,901.1 on 80, against the Slater DZP's
+  107,382 / 706.3 on 46. The crossing lies between aug-cc-pVDZ and cc-pVTZ, 0.137 of the way in energy; aug-cc-pVDZ
+  alone, still 8 mHa short, costs 9.2x the terms and 2.7x the 1-norm; the linear reading at the crossing is about
+  1.4 M terms, 2,690 Ha and 85 qubits (13x, 3.8x), a reading, not a measurement. The aug-cc-pVDZ energy agrees with
+  the commonly quoted ~-76.274 (orientation only). Paper 62 gains Sec. matched and Table VI, the abstract, conclusion
+  and limitations updated; six MEASURED + four DERIVED registry keys; INDEX, synthesis and matrix updated.
+  Basis data: aug-cc-pVDZ, cc-pVDZ and cc-pVTZ for H/O/Ne from the Basis Set Exchange (ccRepo/Grant Hill
+  2018-10-03), downloaded into `debug/lit_scan/dl_bse_augccpvdz/` (git-excluded, read with `-I`) and re-serialized
+  into `debug/data/basis/*_H_O_Ne.json`.
+
+- **Matched-accuracy guard, written as a separate step after the result (PI: "Let's tackle that open item"):**
+  `tests/test_paper62_matched_accuracy.py` (4 tests, all slow, about 6 min). Recomputes the aug-cc-pVDZ and cc-pVDZ
+  water runs end to end from basis files stored in `tests/data/` (fc-CCSD(T), RHF share of the augmentation step,
+  JW Pauli count, non-identity 1-norm, qubits) and derives the 8.00 mHa gap, the 0.137 crossing fraction and the
+  9.15 and 2.69 ratios; the Slater DZP target, the TZpol rung and the cc-pVTZ anchor are read as registered values.
+  Baseline 4/4 passed. Fire-tested 8/8 (basis exponent moved, all-electron energy as frozen-core, literal off by
+  1 mHa, (T) weight 1.01, target above aug-cc-pVDZ, cc-pVDZ literal off, identity in the 1-norm, frozen core
+  dropped from the qubit step); each FIRED. Matrix row NO-TEST -> LIVE; Paper 62's Backing names the guard.
+
+### Composed solver: caveat only (PI decision, 2026-10-31)
+- After the pros and cons below, the PI chose the caveat-only option over re-tiering or archiving: the
+  composed solver "might be considered a very efficient estimation product", and the slow exact-integral
+  runs show why that matters. CLAUDE.md §1.5 (PI-directed edit) gains one caveat: every composed-versus-
+  Gaussian comparison there is at matched qubits, not matched accuracy, and the matched-accuracy comparison is
+  Paper 62's; the builder's standing role is a fast, cheap estimator at the accuracy Paper 17 documents.
+  Measured for the wording: the library builds H2O (Q=70) in 1.8 s, LiH (Q=30) in 0.3 s, NaH (Q=20) in
+  0.4 s. Paper 14 already states its comparisons are matched-qubit, not matched-accuracy, and already points
+  to Paper 62, so no paper changed. Nothing re-tiered; the composed headline claims stand as written.
+
+### Assessment, not a change (PI asked whether to archive the composed solver)
+- Dependents counted: 22 papers mention the composed architecture, 29 `geovac/` modules and 41 test files import
+  `composed_qubit` or the export layer, and the README front page carries it ten times. Its negatives (PK ceiling,
+  six modifications, W1e) are walls and stay regardless. The honest read given to the PI: as a chemistry solver it is
+  an approximation with a known ceiling, beaten by Gaussians on accuracy at equal cost; its one structural fact, the
+  exact Q-linearity of the Pauli count across molecules, is bought by the same block factorization that costs the
+  accuracy, so the sparsity and the inaccuracy are one fact. Retire claims, not papers (§9): the recommended move is a
+  re-tiering of what the composed architecture is for, not an archive. Decision is the PI's; nothing was changed.
+
 ## [v5.21.28] - 2026-10-30
 
 PI-directed ("Let's do the R3 non-monotone diagnostic"). Diagnostic only; nothing tuned on water; no new rung.

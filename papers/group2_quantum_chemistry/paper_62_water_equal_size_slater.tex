@@ -1,0 +1,847 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{observation}{Observation}
+\newcommand{\gvq}[2]{#2}
+\newcommand{\gvc}[2]{#2}
+\newcommand{\mHa}{\,\mathrm{mHa}}
+
+\begin{document}
+
+\title{Water at Twenty-Four Functions:\\
+Slater-Type Bases Set on the Free Atom Against cc-pVDZ,\\
+With the Qubit Cost}
+\thanks{Paper 62 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{October 31, 2026}
+
+\begin{abstract}
+\emph{Central result.}  At a fixed basis size of twenty-four functions,
+the size of cc-pVDZ on water, we ask how much of the Gaussian basis's
+correlated energy a one-centre Slater-type design recovers when its
+exponents are set on the free atoms, and what that costs in qubit
+resources.  \textbf{[MEASURED]} A Slater double-zeta-plus-polarization
+basis built by cc-pVDZ's own design rule sits
+$\gvq{p62_dzp_vs_ccpvdz_mha}{40.7}\mHa$ below cc-pVDZ at frozen-core
+CCSD(T), of which $\gvq{p62_dzp_vs_ccpvdz_scf_mha}{28.8}\mHa$ is
+self-consistent field.  \textbf{[MEASURED, negative]} Every exponential
+kit with fixed or shared exponents loses: the hydrogenic $Z/n$ rule by
+$\gvq{p62_hyd_above_ccpvdz_mha}{196}\mHa$, a single Coulomb--Sturmian
+scale per atom by more than one hartree, and a two-scale Sturmian kit
+by $\gvq{p62_two_scale_above_ccpvdz_mha}{130}\mHa$; the hydrogenic
+loss is the fixed radial node structure, not the decay rate.
+\textbf{[MEASURED, pre-registered]} Releasing the oxygen exponents one
+at a time, every value set by the free oxygen atom's radial Hartree--Fock
+energy with nothing tuned on water, closes that gap: with five oxygen
+exponents the water energy lands $\gvq{p62_r5_below_ccpvdz_mha}{3.1}\mHa$
+below cc-pVDZ, and $\gvq{p62_r5h_below_ccpvdz_mha}{7.0}\mHa$ below with
+hydrogen exponents set on H$_2$.  The split of the $2p$ from the $3p$
+exponent carries $\gvq{p62_sl1_ratio}{0.900}$ of the water gain, as it
+carries $0.902$ of the atom's; the water gain is
+$\gvq{p62_sl2_ratio}{0.516}$ of the atom's.  Both were predicted before
+the water energies were computed.  The one non-monotone rung is
+diagnosed: its correlation loss transfers from the atom one to one and is
+mostly a $3d$ exponent the atomic objective never sees, while its
+Hartree--Fock gain is two opposite pieces that cancel on water.
+\textbf{[MEASURED]} The Jordan--Wigner Pauli count is the same for every
+twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107\,382}$ terms on
+46 frozen-core qubits, because it is fixed by the orbital count and the
+$C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
+across the kits.  \emph{Caps.}  One geometry, one method, one molecule.
+The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
+below the best atom-set rung.  \textbf{[MEASURED, pre-registered]} The
+matched-accuracy comparison brackets the Gaussian cost from both sides:
+aug-cc-pVDZ at 41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$
+short of the Slater DZP while already costing
+$\gvq{p62_aug_pauli_ratio}{9.2}\times$ the Pauli terms and
+$\gvq{p62_aug_lambda_ratio}{2.7}\times$ the 1-norm on 80 qubits against
+46, and the crossing lies between it and cc-pVTZ.  Nothing here is a
+GeoVac lattice structure: the
+bases are tuned exponential functions evaluated through Gaussian fits,
+and the angular sparsity of the one-centre framework does not enter.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+
+The atomic sector of the Geometric Vacuum programme is built on
+exponential radial functions: hydrogenic orbitals with decay $Z/n$, and
+Coulomb--Sturmians with one shared scale per centre
+\cite{avery2006,avery2017}.  Its molecular work has either kept those
+functions and paid for it in accuracy (the composed architecture,
+Paper~17), or left them for prolate-spheroidal and explicitly correlated
+constructions on two centres (Papers~11, 12, 19).  Water is the first
+molecule in the series where the integrals over exponential functions
+on three centres are evaluated to working precision (Paper~59 and the
+shared-centre channels of CHANGELOG v5.20.10), and so the first where
+the question of this paper can be asked cleanly.
+
+The question is narrow on purpose.  Fix the basis size at twenty-four
+functions, which is what cc-pVDZ \cite{dunning1989} spends on water.
+Fix the geometry and the correlation method.  Then ask three things.
+First, does a Slater-type basis built by cc-pVDZ's own design rule beat
+cc-pVDZ at that size, and by how much at the mean-field and the
+correlated level separately?  Second, do the exponential functions the
+one-centre framework actually uses, with their fixed or shared
+exponents, survive the same test?  Third, if they do not, how many
+distinct radial scales does oxygen need, and can those scales be set on
+the free atom rather than on the molecule?
+
+The third question is the one with content.  A basis whose exponents
+are tuned on the molecule being computed is a fit.  A basis whose
+exponents are set on the free atom and then carried to the molecule
+tests a transfer.  The scale ladder of Sec.~\ref{sec:ladder} was
+pre-registered as a transfer test: the predictions were written and
+committed before any water energy of the new rungs was computed, and
+the record is reproduced in Sec.~\ref{sec:ladder} with its disposition.
+
+Two things this paper is not.  It is not a GeoVac lattice result.  The
+bases here are tuned Slater-type functions evaluated through Gaussian
+fits, and the angular (Gaunt) sparsity of the one-centre framework
+\cite{paper22} plays no part in any number below; Sec.~\ref{sec:qubit}
+says what the qubit count does and does not depend on.  And it is not a
+claim about the basis-set limit.  Everything is measured at one size,
+one geometry and one method, and the caps are listed in
+Sec.~\ref{sec:limits}.
+
+\section{Solver and validation}
+\label{sec:solver}
+
+\paragraph{Integrals.}  All one- and two-electron integrals are
+evaluated by the McMurchie--Davidson scheme \cite{mcmurchie1978} over
+contracted Cartesian Gaussians, through the project's
+\texttt{noci\_engine} module.  Gaussian bases are used as published.
+Slater-type primitives $r^{n-1}e^{-\zeta r}Y_{lm}$ enter as Gaussian
+fits: one shape is fitted per $(l,n)$ and number of Gaussians, by
+least squares on the radial function, and then scaled by $\zeta^{2}$ to
+the required exponent \cite{stewart1970}.  Because the shape is fitted
+once and scaled, the fit error of a given $(l,n)$ is the same at every
+exponent; this matters for the ladder of Sec.~\ref{sec:ladder}, where
+rungs differ only in exponents.  Twelve Gaussians per valence primitive
+and eight per polarization function are used throughout.  The fitted
+basis is a legitimate Gaussian basis with exact integrals, so every
+Hartree--Fock energy below is a strict upper bound for that fitted
+basis; the fit's convergence toward the true Slater function is checked
+in Sec.~\ref{sec:dzp}.
+
+\paragraph{Correlation.}  The correlated solver is the project's own:
+restricted Hartree--Fock, spin-orbital coupled-cluster singles and
+doubles, and the perturbative triples correction
+\cite{purvis1982,raghavachari1989}, with an optional frozen oxygen $1s$.
+It is in \texttt{tests/test\_water\_ccsd.py}.  (An external package was
+not used because none builds on the host; the solver's independence is
+also what makes the checks below meaningful.)  It is validated where
+its answer is known:
+\begin{itemize}
+\item it reproduces the published STO-3G water reference of the
+Crawford programming projects \cite{crawford_projects} to
+$2\times10^{-12}$~Ha in the triples correction and
+$4\times10^{-10}$~Ha in the CCSD correlation energy;
+\item CCSD equals full configuration interaction for two electrons, to
+$10^{-9}$~Ha;
+\item frozen-core CCSD equals active-space full CI on a case where both
+are computable;
+\item nine planted wrong answers (sign flips, dropped diagrams, a wrong
+denominator) were each caught by the tests.
+\end{itemize}
+
+\paragraph{Atomic reference.}  Oxygen exponents are set on the free
+atom by an exact one-centre radial average-of-configuration
+Hartree--Fock over Slater primitives, with the Slater $F^{k}$ and
+$G^{k}$ integrals in closed form
+\cite{slater1960}.  The code gives helium's single-zeta energy
+$-729/256$~Ha exactly, and for neon its energy is the limit that the
+three-dimensional Gaussian-fit route approaches from above as the
+number of Gaussians grows ($-4.9$, $-0.20$, $-0.09$~mHa at 8, 12, 16
+Gaussians).  An earlier open-shell route through fractional-occupation
+SCF orbitals sat $10.7$~mHa above the variational average energy, because
+its orbitals are not variational for that energy; it was replaced by the
+radial code and is not used.
+
+\paragraph{Geometry and conventions.}  $R_{\rm OH}=1.809$~bohr,
+$\angle\mathrm{HOH}=104.5^{\circ}$.  Energies are in hartree.  ``fc''
+means the oxygen $1s$ is frozen in the correlation treatment; cc-pVDZ is
+a valence-correlation basis, so the frozen-core energy is the fair
+yardstick, and it is the scored quantity throughout.  All-electron
+values are reported alongside where they were computed.
+
+\section{Equal size, equal design rule: Slater DZP against cc-pVDZ}
+\label{sec:dzp}
+
+The fairness rule is cc-pVDZ's own design, with Slater primitives in
+place of Gaussian ones.  cc-pVDZ on oxygen is a general contraction of
+atom-optimized primitives to $[3s2p1d]$, with the contracted functions
+being the atomic $1s$ and $2s$ orbitals plus the most diffuse $s$
+primitive, the atomic $2p$ plus the most diffuse $p$ primitive, and one
+$d$ polarization function.  The Slater basis here does the same:
+\begin{itemize}
+\item O: four $s$ primitives ($1s,1s',2s,2s'$) and three $p$ primitives
+optimized on the atom's average-of-configuration Hartree--Fock energy,
+contracted to $\{$atomic $1s$, atomic $2s$, most diffuse $s\}$ and
+$\{$atomic $2p$, most diffuse $p\}$.  The optimized exponents are
+$9.317, 6.765 \mid 2.710, 1.694$ for $s$ and $5.719, 2.846, 1.450$ for
+$p$, with atom energy $-74.768205$~Ha.
+\item H: $1s,1s'$ optimized on H$_2$ RHF at $R=1.4$~bohr: $1.212$,
+$0.627$.
+\item Polarization (O $3d$, H $2p$): one exponent each, optimized on
+frozen-core CCSD of water, for both bases alike.  The cc-pVDZ $d$ and
+$p$ exponents re-optimized the same way move from $1.185$ to $1.312$ and
+from $0.727$ to $0.605$; the Slater optima are O $3d$ $2.756$ and H
+$2p$ $1.579$.  (A Slater $3d$ is diffuse at a given $\zeta$, with
+$\langle r\rangle=7/2\zeta$, so these look large next to Gaussian
+values.)
+\end{itemize}
+Polarization is the one place where water enters the design, and it
+enters both bases identically.  A negative result fixed the contraction
+rule: an uncontracted $3s2p$ set optimized on the atom spends its
+second $s$ function on the core ($10.03$, $8.33$, $2.32$), leaving the
+valence $s$ single-zeta.  That is why cc-pVDZ uses general contraction,
+and why the Slater basis does too.
+
+\begin{table}[t]
+\caption{Water at 24 functions, $R_{\rm OH}=1.809$~bohr,
+$104.5^{\circ}$.  fc = oxygen $1s$ frozen in the correlation treatment.
+The cc-pVTZ row (58 functions) is the anchor for the Gaussian ladder.
+Energies in hartree.}
+\label{tab:dzp}
+\begin{ruledtabular}
+\begin{tabular}{lrrr}
+Basis & \multicolumn{1}{c}{RHF} & \multicolumn{1}{c}{CCSD(T) fc} &
+\multicolumn{1}{c}{CCSD(T) ae} \\
+\hline
+cc-pVDZ (standard) & -76.026795 & \gvq{p62_ccpvdz_fc}{-76.241025} & -76.243143 \\
+cc-pVDZ, pol.\ re-opt.\ & -76.027257 & -76.242201 & -76.244383 \\
+Slater DZP (12 G) & \gvq{p62_dzp_rhf}{-76.055573} & \gvq{p62_dzp_fc}{-76.281739} & -76.285720 \\
+Slater DZP (16 G) & -76.055644 & -76.281811 & -76.285792 \\
+cc-pVTZ (58 fns) & \gvq{p62_ccpvtz_rhf}{-76.057162} & \gvq{p62_ccpvtz_fc}{-76.332191} & \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED]} Table~\ref{tab:dzp} gives the result.  At
+frozen-core CCSD(T) the Slater DZP basis is
+$\gvq{p62_dzp_vs_ccpvdz_mha}{40.7}\mHa$ below cc-pVDZ at equal size,
+and $39.5$~mHa below cc-pVDZ with its polarization re-optimized on the
+same footing.  Of the gain, $\gvq{p62_dzp_vs_ccpvdz_scf_mha}{28.8}\mHa$
+is at the Hartree--Fock level and $12$~mHa is additional correlation
+energy.  The evaluator is converged: going from twelve to sixteen
+Gaussians per function moves every energy by $0.07$~mHa.
+
+\paragraph{Place on the Gaussian ladder.}  The cc-pVTZ anchor makes the
+split readable.  The Slater DZP RHF energy is $1.6$~mHa above
+cc-pVTZ's, so it covers about $94\%$ of the DZ-to-TZ mean-field gap.
+Its frozen-core CCSD(T) energy is $50.5$~mHa above cc-pVTZ's, so it
+covers about $45\%$ of the DZ-to-TZ correlated gap.  The reading is the
+expected one: the exponential shape buys the mean-field part, the cusp
+at the nucleus and the exponential tail, while correlation energy is
+bought by the number of correlating functions, which is the same in
+both bases.  That the mean-field advantage of Slater functions exists
+is textbook; what is measured here is its size at equal count under an
+identical design rule, and the fact that the correlated advantage is
+less than a third of it.
+
+\section{The framework's own exponential kits, negative}
+\label{sec:native}
+
+The $41$~mHa of Sec.~\ref{sec:dzp} could come from the exponential
+shape or from the exponent tuning.  The one-centre framework's radial
+rules fix the exponents, so they separate the two.  Two rules and two
+remedies were tested, at the same twenty-four functions (shells
+$n\le3$ on O, $n\le2$ on H), the same geometry and the same solver, with
+no exponent or polarization tuned on water in any of them.
+
+\begin{description}
+\item[Hydrogenic $Z/n$, bare $Z$.]  Every function is a hydrogen-like
+orbital of the nuclear charge, decay $Z/n$, with its fixed radial
+polynomial.  This is the production rule of the composed builder
+(Paper~17) and the two-centre engine (Paper~58).  Zero parameters.  A
+slow test checks that each function is a one-electron eigenfunction at
+$-Z^{2}/2n^{2}$ and that same-$l$ functions are orthogonal; it caught
+two planted coefficient errors.
+\item[Hydrogenic with the composed screening.]  O $1s$ at $Z=8$; O
+shells $n\ge2$ at $Z_{\rm eff}=6$, which is $Z$ minus the $1s^{2}$ core
+as the composed classifier assigns it.  Zero parameters.  This maps
+the composed core and valence blocks onto one function set; the
+composed builder itself starts its valence block at $n=1$, so the
+mapping is ours.
+\item[Coulomb--Sturmian, one scale per atom.]  Avery's basis
+\cite{avery2006}: one shared exponent $k$ on each centre.  $k_{\rm H}=1$
+makes the H $1s$ exact.  $k_{\rm O}=3.781$ minimizes the radial oxygen
+energy, and the best that one shared scale can do for the atom is
+$-71.406$~Ha, $3.4$~Ha above the Slater primitives' $-74.768$.
+\item[Coulomb--Sturmian, two scales.]  A core $1s$ at $k_{c}$ plus
+Sturmians sharing $k_{v}$ ($s$ with $n\le2$, $p$ with $n\le3$, one
+$3d$) on oxygen, fourteen functions; $(k_{c},k_{v})=(7.793, 2.281)$
+minimize the radial oxygen energy ($-74.5027$~Ha); H at $k=1$.  This is
+a simplified relative of Avery's generalized Sturmians, not his
+isoenergetic construction (Paper~60).
+\end{description}
+
+\begin{table}[t]
+\caption{The exponential kits at 24 functions, frozen-core CCSD(T),
+same geometry and solver as Table~\ref{tab:dzp}.  STO-3G (7 functions)
+for reference.  Every 24-function kit has
+$\gvq{h2o_ccpvdz_pauli}{107\,382}$ Jordan--Wigner Pauli terms on 46
+qubits (Sec.~\ref{sec:qubit}); the frozen-core 1-norm is in hartree.}
+\label{tab:native}
+\begin{ruledtabular}
+\begin{tabular}{lrrrr}
+Kit & Fns & \multicolumn{1}{c}{RHF} & \multicolumn{1}{c}{CCSD(T) fc} &
+\multicolumn{1}{c}{$\lambda$ fc} \\
+\hline
+STO-3G & 7 & -74.9629 & -75.0123 & \\
+Sturmian, one $k$ per atom & 24 & -74.2879 & -74.5603 & 848.8 \\
+hydrogenic, $Z_{\rm eff}=6$ ($n\ge2$) & 24 & -75.7466 & \gvq{p62_hyd_zeff_fc}{-75.9471} & 405.1 \\
+hydrogenic, bare $Z$ & 24 & -75.8397 & \gvq{p62_hyd_fc}{-76.0452} & 510.8 \\
+Sturmian, two scales & 24 & -75.8903 & \gvq{p62_two_scale_fc}{-76.1113} & 620.0 \\
+cc-pVDZ & 24 & -76.0268 & \gvq{p62_ccpvdz_fc}{-76.2410} & 674.3 \\
+Slater DZP & 24 & -76.0556 & \gvq{p62_dzp_fc}{-76.2817} & 706.3 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, negative]} Table~\ref{tab:native} gives the result.
+No kit with fixed or shared exponents reaches cc-pVDZ at twenty-four
+functions.  The bare-$Z$ hydrogenic kit is
+$\gvq{p62_hyd_above_ccpvdz_mha}{196}\mHa$ above it and $236$~mHa above
+the Slater DZP.  The one-scale Sturmian kit, at twenty-four functions,
+is worse than STO-3G at seven.  So the $41$~mHa of Sec.~\ref{sec:dzp}
+came from exponent choice, not from the hydrogen-like shape.
+
+\paragraph{Mechanism, hydrogenic.}  Bare $Z=8$ puts the oxygen $n=2$
+shell at $\zeta=4$, about twice as compact as the tuned valence
+($1.45$ to $2.85$).  The valence then has to live in the $n=3$
+functions ($\zeta=2.67$), which leaves almost nothing to correlate with.
+The core is fine ($\zeta=8$ against $7.7$ to $9.3$ tuned).  Screening
+is the obvious remedy and it makes things worse, by $98$~mHa.  The
+diagnosis comes from the oxygen atom in the kits as built: bare
+$-74.557$, screened $-74.420$, and the same two kits with their
+polynomial contractions released give $-74.757$, an upper bound on what
+the contracted set could reach.  So between $200$ and $340$~mHa is lost
+to the fixed hydrogenic node structure.  Each hydrogenic function
+carries a radial polynomial whose nodes are set for orthogonality to the
+$1s$ of the \emph{same} charge.  Bare $Z$ keeps every shell mutually
+consistent; $Z_{\rm eff}=6$ puts the valence nodes in the wrong place
+relative to the $Z=8$ core.  The contraction, not the decay rate, is
+the binding constraint.
+
+\paragraph{Mechanism, Sturmian.}  One scale cannot serve a core near
+$\zeta=8$ and a valence near $\zeta=2$ at once.  Sturmians pay no
+contraction penalty, since a shared-$k$ set spans the same space as its
+primitives, and the two-scale kit is accordingly the best of the four,
+at $\gvq{p62_two_scale_above_ccpvdz_mha}{130}\mHa$ above cc-pVDZ.
+The remedy the Sturmian literature names is several scales
+\cite{avery2006}; whether two is the cap or merely the first rung is
+what Sec.~\ref{sec:ladder} tests.
+
+\paragraph{An observation, not a claim.}  Across the twenty-four
+function kits other than the one-scale Sturmian, the frozen-core
+1-norm rises with accuracy: $405$, $511$, $620$, $674$, $706$~Ha.  A
+low 1-norm at equal size here tracks a worse description, not a cheaper
+one.  Sec.~\ref{sec:qubit} returns to this.
+
+\section{The scale ladder: how many oxygen exponents, set on the atom}
+\label{sec:ladder}
+
+\subsection{Design, fixed before any water rung was run}
+
+Twenty-four functions throughout.  O: $s$ primitives ($1s,1s,2s$), $p$
+primitives ($2p,3p$), and one $3d$ tied to the $3p$ exponent.  H:
+$1s,2s,2p$.  Rungs differ only in which oxygen primitives share an
+exponent (Table~\ref{tab:ladder_design}).  Every oxygen exponent set
+minimizes the radial average-of-configuration Hartree--Fock energy of
+the free oxygen atom (Sec.~\ref{sec:solver}), Nelder--Mead from 41
+starts.  Hydrogen exponents are $k=1$, except on the last rung, where
+$1s,2s,2p$ are each set by H$_2$ RHF at $R=1.4$~bohr.  Nothing is tuned
+on water.  So any water gain is transfer, not fitting.  The $R2$ rung
+is the two-scale Sturmian kit of Sec.~\ref{sec:native}; rebuilt through
+the ladder's driver it reproduces that kit's energies to $10^{-4}$~Ha
+(the pre-registered control SL-0).
+
+\begin{table}[t]
+\caption{The ladder.  Letters mark which oxygen primitives share an
+exponent.  Atom energies are the radial average-of-configuration
+Hartree--Fock minima that set the exponents; the seven-primitive Slater
+atom of Sec.~\ref{sec:dzp} is $-74.76820$~Ha, $8.2$~mHa below $R5$.}
+\label{tab:ladder_design}
+\begin{ruledtabular}
+\begin{tabular}{llcrr}
+Rung & O groups $(1s,1s,2s,2p,3p)$ & $N_\zeta$ & \multicolumn{1}{c}{Atom}
+& \multicolumn{1}{c}{Step (mHa)} \\
+\hline
+$R2$ & $a,b,b,b,b$ & 2 & -74.50266 & \\
+$R3$ & $a,b,b,c,c$ & 3 & -74.50605 & 3.4 \\
+$R4$ & $a,b,c,d,d$ & 4 & -74.52793 & 21.9 \\
+$R5$ & $a,b,c,d,e$ & 5 & -74.75997 & 232.0 \\
+$R5H$ & as $R5$; H from H$_2$ & 5 & & \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The atom ladder is the control that frames the predictions.  Its total
+gain $R2\to R5$ is $257.3$~mHa, and the $p$ split ($R4\to R5$), which
+releases the $2p$ exponent from the $3p$, carries $0.902$ of it.  Two
+transfer ratios were measured on cases the ladder does not score: the
+clean step from one shared oxygen scale to two (the two Sturmian kits of
+Sec.~\ref{sec:native}) transfers at $0.50$, and the confounded step from
+the two-scale kit to the Slater DZP at $0.64$, confounded upward because
+the DZP also has two hydrogen $s$ exponents and water-tuned
+polarization.
+
+\subsection{Predictions, as registered}
+
+The record \cite{sl_record} was committed on its own before any water
+energy of $R3$, $R4$, $R5$ or $R5H$ was computed.  With $W(R)$ the
+frozen-core CCSD(T) water energy of rung $R$ and $G=W(R2)-W(R5)$:
+\begin{description}
+\item[SL1 (gated).]  $(W(R4)-W(R5))/G\ge0.6$: the $p$ split dominates
+on water too.  Stated probability $0.75$.
+\item[SL2 (gated).]  $0.3\le G/257.3\mHa\le0.8$, i.e.\ $W(R5)$ between
+$-76.1885$ and $-76.3172$~Ha.  The band is wide on purpose, because the
+clean control measured a core step and the ladder's main step is
+valence.  Probability $0.7$.
+\item[SL3 (reported).]  $W(R5)$ stays above the Slater DZP.  Direction
+only.  Probability $0.6$.
+\item[SL4 (reported).]  $W(R5H)<W(R5)$.  Direction only.  Probability
+$0.7$.
+\end{description}
+Gate: GO if SL1 and SL2 both hold.  Also reported, not predicted:
+$W(R5)$ against cc-pVDZ, which at the clean transfer ratio lands on top
+of it ($-76.240$ against $-76.241$) and so was declared a coin flip in
+advance.
+
+\subsection{Result}
+
+\begin{table}[t]
+\caption{Water on the ladder, 24 functions, same geometry and solver.
+Steps are rung-to-rung changes, positive downward.  The atom step is the
+radial HF gain of Table~\ref{tab:ladder_design}.}
+\label{tab:ladder}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Rung & \multicolumn{1}{c}{RHF} & \multicolumn{1}{c}{CCSD(T) fc} &
+\multicolumn{1}{c}{CCSD(T) ae} & \multicolumn{1}{c}{Water step} &
+\multicolumn{1}{c}{Atom step} \\
+\hline
+$R2$ & -75.890293 & \gvq{p62_two_scale_fc}{-76.111337} & -76.120634 & & \\
+$R3$ & -75.890159 & \gvq{p62_r3_fc}{-76.108484} & -76.117764 & -2.85 & 3.4 \\
+$R4$ & -75.905860 & -76.124580 & -76.137966 & 16.10 & 21.9 \\
+$R5$ & -76.036106 & \gvq{p62_r5_fc}{-76.244112} & -76.258281 & 119.53 & 232.0 \\
+$R5H$ & -76.045000 & \gvq{p62_r5h_fc}{-76.248015} & -76.262063 & 3.90 & \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, pre-registered; GO]}  Table~\ref{tab:ladder}.
+$G=132.78$~mHa.
+\begin{itemize}
+\item SL1 held: $(W(R4)-W(R5))/G=\gvq{p62_sl1_ratio}{0.900}$, against
+the bound $0.6$ and the atom's $0.902$.
+\item SL2 held: $G/257.3\mHa=\gvq{p62_sl2_ratio}{0.516}$, inside the
+band; the clean control was $0.50$.
+\item SL3 held in direction: $W(R5)$ is $37.7$~mHa above the Slater
+DZP.  The record's estimate from the confounded ratio had been about
+$6$~mHa; that estimate was well off, and the record says so.
+\item SL4 held: $W(R5H)$ is $3.90$~mHa below $W(R5)$, against an H$_2$
+gain of $4.06$~mHa, a transfer near $0.96$ on the hydrogen side.
+\end{itemize}
+Reported, not predicted: against cc-pVDZ at the same twenty-four
+functions, $R5$ is $\gvq{p62_r5_below_ccpvdz_mha}{3.1}\mHa$ below and
+$R5H$ is $\gvq{p62_r5h_below_ccpvdz_mha}{7.0}\mHa$ below.  The two-scale
+kit had been $130$~mHa above.  So the gap of Sec.~\ref{sec:native} is
+closed by releasing exponents set on the free atom and on H$_2$, with
+nothing tuned on water.  RHF carries most of it: $145.8$~mHa from $R2$
+to $R5$ at the mean-field level against $132.8$ at CCSD(T).
+
+What this does and does not say.  $R5$ is a Slater-type basis with five
+atom-set oxygen exponents, a $3d$ tied to the $3p$, and one hydrogen
+exponent.  It is a better-chosen member of the same primitive family as
+the two-scale kit, not a new structure.  The Slater DZP, with
+water-tuned polarization and two hydrogen $s$ exponents, stays
+$\gvq{p62_dzp_below_r5h_mha}{34}\mHa$ below $R5H$.  That $34$~mHa is
+the price of setting everything on the atom.  The lesson of
+Sec.~\ref{sec:native} stands: the case rests on one-centre structure,
+not on better bricks; what moved is that the two-exponent cap, not the
+Sturmian family, had been the $130$~mHa.
+
+\subsection{The non-monotone rung, diagnosed}
+\label{sec:r3}
+
+$R3$ splits the oxygen $p$ exponent from the $s$-valence exponent.  The
+atom gains $3.4$~mHa; water loses $2.85$~mHa.  The rung-by-rung ratios
+of water step to atom step, $-0.84$, $0.735$, $0.515$, are therefore not
+one transfer number per ladder.  A diagnostic, with its hypotheses
+written before any new number was computed, located the cause
+\cite{sl_record}.  Nothing was tuned on water: every substituted exponent
+below is $R2$'s $2.28124$ or $R3$'s own value.
+
+The water loss is correlation.  From $R2$ to $R3$, RHF moves $+0.13$~mHa,
+the CCSD correlation $+2.57$ and the triples $+0.15$.  The one-centre
+probe is the neutral oxygen atom in the same Gaussian-fitted kits, with
+an unrestricted Hartree--Fock reference for the $M_S=1$ triplet
+determinant and the same frozen-core CCSD(T).  On the atom the step
+gains $2.84$~mHa at UHF and loses $2.72$~mHa of correlation, a wash of
+$-0.12$~mHa.  Water loses the same $2.72$~mHa of correlation.  So the
+correlation half of the step transfers one to one, and the Hartree--Fock
+half does not transfer at all.
+
+Where the correlation goes.  The ladder's objective is Hartree--Fock on
+the atom, with no $d$ function.  It never sees the $3d$, and it sees the
+$3p$ only through the occupied $2p$.  At $R3$ the $p$ family drifts
+diffuse to suit the occupied $2p$, and the $3p$ and $3d$, which carry
+most of the correlation at this size and want to be compact, ride along.
+Putting the $3d$ alone back at $R2$'s exponent, with everything else at
+$R3$, recovers $2.13$ of the $2.85$~mHa on water; the atom had predicted
+about $2.1$ before that run.  About $80\%$ of the loss is the $3d$, a
+passenger of the $3p$ by the ladder's design, with the rest split
+between the $3p$ and the $s$ shift.
+
+Why the Hartree--Fock gain cancels.  The atom gains at HF from both
+moves of the step, the $p$ family going diffuse and the $s$ valence
+tightening.  On water, the first costs $5.2$~mHa at RHF and the second
+gains $5.1$~mHa, so the atom's gain cancels to $0.13$~mHa.  Water's RHF
+is two to six times more sensitive than the atom's to the $3p$ and
+$s$-valence exponents, and of the opposite sign for the $p$ family: the
+free atom's $2p^{4}$ wants a more diffuse $p$ than the oxygen in water's
+bonds.  The prediction's clause that RHF would stay within $0.2$~mHa of
+$R3$ under each substitution failed for the $3p$ and $s$ substitutions,
+by $6.7$ and $5.1$~mHa; the correlation clause held in all three.  That
+failure is the mechanism.
+
+The upshot for the ladder: $R3$'s ratio of $-0.84$ is a ratio of two
+cancelling HF pieces and a transferring correlation loss, not a transfer
+number, and the $R4$ and $R5$ rungs, which are HF-driven radial splits,
+are untouched.  The ladder's one design flaw is identified: a $3d$ tied
+to an exponent the atomic objective cannot see.  Setting it by an atomic
+correlated criterion instead would change the ladder's rule and was not
+done.
+
+\section{The qubit cost}
+\label{sec:qubit}
+
+The second-quantized Hamiltonian of each basis was mapped to qubits by
+the Jordan--Wigner transformation \cite{jordan1928} over RHF canonical
+orbitals, with interleaved spin, terms kept at $|c|>10^{-10}$, the
+identity counted in the Pauli number and excluded from the 1-norm.  The
+counter is closed-form per string class and is validated against a full
+Jordan--Wigner construction in OpenFermion on STO-3G water, where five
+planted errors were each caught; its frozen-core cc-pVDZ count matches
+the published count of Trenev \emph{et al.}\ \cite{trenev2025} exactly.
+
+\begin{table}[t]
+\caption{Qubit resources, Jordan--Wigner.  $\lambda$ is the Pauli
+1-norm in hartree, identity excluded.  Frozen core (fc) drops the oxygen
+$1s$.}
+\label{tab:qubit}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrrrr}
+Basis & $Q$ fc & $N_{\rm Pauli}$ fc & \multicolumn{1}{c}{$\lambda$ fc} &
+$Q$ ae & $N_{\rm Pauli}$ ae & \multicolumn{1}{c}{$\lambda$ ae} &
+\multicolumn{1}{c}{CCSD(T) fc} \\
+\hline
+Slater DZP & 46 & \gvq{h2o_ccpvdz_pauli}{107\,382} & \gvq{p62_dzp_lambda_fc}{706.3} & 48 & 128\,793 & 754.6 & -76.2817 \\
+cc-pVDZ & 46 & \gvq{h2o_ccpvdz_pauli}{107\,382} & \gvq{p62_ccpvdz_lambda_fc}{674.3} & 48 & 128\,793 & 717.0 & -76.2410 \\
+cc-pVTZ & 114 & 3\,983\,652 & 7\,653.5 & 116 & 4\,281\,643 & 7\,858.6 & -76.3322 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED]}  Table~\ref{tab:qubit}.  Three facts.
+\begin{enumerate}
+\item The Pauli count is identical in every twenty-four-function basis,
+tuned or not, Gaussian or exponential.  It is fixed by the orbital count
+and the $C_{2v}$ pattern of the canonical orbitals, which every basis
+here shares, and not by the radial shape.  Radial shape can move an
+energy by a hartree (Table~\ref{tab:native}) without moving a single
+term.
+\item The 1-norm is $\gvq{p62_lambda_ratio_pct}{4.7}\%$ higher for the
+Slater DZP than for cc-pVDZ.  So the $41$~mHa of Sec.~\ref{sec:dzp}
+costs about five percent in 1-norm and nothing in qubits or terms.
+\item cc-pVTZ, the next Gaussian rung, costs $37\times$ the terms and
+$11\times$ the 1-norm for the remaining $55\%$ of the correlated gap.
+\end{enumerate}
+The second fact is an equal-size statement, not a matched-accuracy
+one.  The Slater DZP sits between cc-pVDZ and cc-pVTZ in energy, so the
+matched-accuracy question is which Gaussian basis first reaches its
+energy and what that basis costs.
+
+\subsection{Matched accuracy}
+\label{sec:matched}
+
+Two intermediate Gaussian rungs were added to bracket the crossing from
+both sides, and the outcome was pre-registered before either was run
+\cite{ma_record}: cc-pVDZ's $s$ and $p$ shells with cc-pVTZ's
+polarization shells (O $2d$, H $2p$; 35 functions; our construction, there
+to bracket, not to recommend), and the standard aug-cc-pVDZ (41
+functions).  The gated predictions were that neither reaches the Slater
+DZP; the control bounds were measured on the neon atom first, where the
+second polarization set is worth $26$~mHa, all correlation, and
+augmentation $30$~mHa, a quarter of it mean-field.
+
+\begin{table}[t]
+\caption{Matched accuracy.  Same geometry, solver and counter as
+Table~\ref{tab:qubit}.  ``vs DZP'' is the frozen-core CCSD(T) energy
+relative to the Slater DZP's, positive above.}
+\label{tab:matched}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Basis & Fns & CCSD(T) fc & vs DZP (mHa) & $N_{\rm Pauli}$ fc ($Q$) & $\lambda$ fc \\
+\hline
+cc-pVDZ & 24 & $-76.2410$ & $+40.7$ & 107\,382 (46) & 674.3 \\
+Slater DZP & 24 & $-76.2817$ & $0$ & \gvq{h2o_ccpvdz_pauli}{107\,382} (46) & \gvq{p62_dzp_lambda_fc}{706.3} \\
+cc-pVDZ+TZpol & 35 & \gvq{p62_tzpol_fc}{$-76.2665$} & $+\gvq{p62_tzpol_above_dzp_mha}{15.2}$ & \gvq{p62_tzpol_pauli_fc}{505\,467} (68) & \gvq{p62_tzpol_lambda_fc}{1\,814.9} \\
+aug-cc-pVDZ & 41 & \gvq{p62_aug_fc}{$-76.2737$} & $+\gvq{p62_aug_above_dzp_mha}{8.0}$ & \gvq{p62_aug_pauli_fc}{982\,785} (80) & \gvq{p62_aug_lambda_fc}{1\,901.1} \\
+cc-pVTZ & 58 & $-76.3322$ & $-50.5$ & 3\,983\,652 (114) & 7\,653.5 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, pre-registered; GO]}  Table~\ref{tab:matched}.  Both
+predictions held: the 35-function basis stays
+$\gvq{p62_tzpol_above_dzp_mha}{15.2}\mHa$ above the Slater DZP and
+aug-cc-pVDZ $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$ above it.  Both steps
+are correlation-dominated, with mean-field shares of $0.19$ and $0.45$
+against the Slater DZP step's $0.71$, and the two rungs keep neon's
+order; those were the reported clauses, and they held too.  The
+aug-cc-pVDZ energy agrees with the commonly quoted value near
+$-76.274$~Ha, which is an orientation check and not a cited reference.
+
+The crossing therefore lies between aug-cc-pVDZ and cc-pVTZ, $0.14$ of
+the way in energy.  The lower bound needs no interpolation: aug-cc-pVDZ,
+still $8$~mHa short of the Slater DZP, already costs
+$\gvq{p62_aug_pauli_ratio}{9.2}\times$ the Pauli terms,
+$\gvq{p62_aug_lambda_ratio}{2.7}\times$ the 1-norm, and 80 qubits
+against 46.  Read linearly in energy between the bracketing rungs, the
+matched-accuracy Gaussian cost is near $1.4$ million terms, a 1-norm
+near $2\,700$~Ha and about 85 qubits, which is 13 times the terms and
+3.8 times the 1-norm; that interpolation is a reading of two measured
+rungs, not a measurement of any basis.  The qubit statement of this
+paper is thus a matched-accuracy one: at matched or better accuracy on
+water, the Gaussian basis costs at least nine times the Pauli terms and
+2.7 times the 1-norm of the Slater DZP, and the equal-size result of
+Table~\ref{tab:qubit} is its lower rung.
+
+Two things the angular sparsity of the one-centre framework
+\cite{paper22} would have added, and does not here.  Multi-centre
+integrals over these bases are dense; no Gaunt zero appears in any
+Hamiltonian of Table~\ref{tab:qubit}, on either side.  And the 1-norm
+observation of Sec.~\ref{sec:native}, that a low 1-norm at equal size
+tracks a worse energy, is the reason the composed library's 1-norm
+figures (Papers~14, 20) are reported at matched qubits with the
+accuracy stated alongside, never as a cost advantage on their own.
+
+\section{Prior art}
+\label{sec:prior}
+
+A moderate search was made, against primary sources where reachable.
+The mean-field half of Sec.~\ref{sec:dzp}, that Slater functions beat
+Gaussians per function at the SCF level, is textbook and no part of it
+is claimed here.  The design recipe, atom-optimized Slater primitives
+generally contracted on the cc-pV$X$Z pattern, has precedent in the
+Madrid group's STO valence sets for H to Ne with HF- and CI-optimized
+exponents \cite{ema2003}, and in the correlation-consistent-style STO
+sets of F\"orster and Visscher \cite{forster2021}.  The closest
+molecular STO-against-cc-pV$X$Z comparison found compares forces, not
+correlated energies \cite{rico2004}.  No matched-size correlated
+STO-against-GTO head-to-head on a molecule was found, nor the split of
+the DZ-to-TZ gap into its mean-field and correlated parts, nor any
+qubit-resource comparison between the two families.  A qualitative
+reading that orbital shape matters little for correlation energy is
+sometimes attributed to Persson and Taylor; the full text could not be
+read and it is not cited as support.  The water complete-basis anchor of
+Helgaker, Klopper, Koch and Noga \cite{helgaker1997} was consulted for
+orientation only; no basis-set-limit statement is made.
+
+The transfer question of Sec.~\ref{sec:ladder}, whether exponents set on
+the free atom carry to the molecule and at what ratio, is the standard
+premise of every atom-optimized basis family, cc-pV$X$Z included
+\cite{dunning1989}.  What is specific here is the pre-registered
+rung-by-rung measurement of the ratio, the identification of the
+$p$-split as the carrier on both sides, and the diagnosis of the one
+rung where the ratio has the wrong sign.
+
+\section{Limitations}
+\label{sec:limits}
+
+\begin{itemize}
+\item One geometry, one method, one molecule.  No potential energy
+surface, no basis-set limit, no second molecule.  The ladder frees
+exponents in one order and does not test every partition of five
+primitives.  ``Needed'' in Sec.~\ref{sec:ladder} means ``worth more
+than the bound at twenty-four functions''; it does not mean a count is
+forced.
+\item The Slater functions are Gaussian fits.  The fit is converged at
+the $0.07$~mHa level for the DZP basis and is exponent-independent by
+construction on the ladder, but every number here is for the fitted
+basis.  Exact Slater integrals on three centres exist in the series
+(Paper~59) and were not used for these energies.
+\item The matched-accuracy comparison (Sec.~\ref{sec:matched}) uses
+standard Gaussian bases as published against the Slater DZP as built,
+with its water-optimized polarization; cc-pVDZ's own re-optimized
+polarization is worth $1.2$~mHa and does not change the bracket.  The
+35-function intermediate basis is our construction.  The interpolated
+matched-accuracy cost is a reading between two measured rungs.
+\item The $3d$ exponent on the ladder is tied to the $3p$, and
+Sec.~\ref{sec:r3} shows that tie to be the ladder's one design flaw.
+A ladder with the $3d$ set by an atomic correlated criterion would be a
+different ladder and has not been run.
+\item The solver is the project's own.  It is validated against an
+external reference on STO-3G water and against exact limits, but no
+larger-basis external cross-check of the CCSD(T) energies exists on the
+host.
+\item None of this is a GeoVac lattice result, and none of it uses the
+angular sparsity that is the framework's structural asset.  The paper
+measures what tuned exponential functions buy at equal size, and finds
+that the framework's fixed-exponent rules do not buy it.
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+At twenty-four functions on water, a Slater-type basis built by
+cc-pVDZ's own rule is $41$~mHa lower at frozen-core CCSD(T), mostly at
+the mean-field level, for the same Pauli count and five percent more
+1-norm.  The gain is exponent choice: the one-centre framework's
+fixed-exponent rules, hydrogenic $Z/n$ and single-scale Sturmian, lose
+by $0.2$ to more than $1$~Ha at the same size, and the hydrogenic loss is
+the node structure the fixed exponents impose, which screening makes
+worse.  Releasing the oxygen exponents one at a time, each set on the
+free atom, closes that gap: five exponents put water $3$~mHa below
+cc-pVDZ with nothing tuned on the molecule, the $p$ split carries nine
+tenths of the gain on both the atom and the molecule, and the gain
+transfers at about half, all as predicted before the energies were
+computed.  The one rung that went the wrong way is a $3d$ passenger the
+atomic objective cannot see, plus two mean-field pieces that cancel on
+water and not on the atom.  At matched accuracy the comparison turns
+around: aug-cc-pVDZ at 41 functions is still $8$~mHa short of the
+Slater DZP and already costs nine times the Pauli terms and 2.7 times
+the 1-norm, and the crossing lies between it and cc-pVTZ.  The
+water-tuned basis stays $34$~mHa ahead of the best atom-set rung, and
+nothing here is a property of the lattice.
+
+\section*{Backing}
+
+Solver, validation tests, the radial atom, the kit builders and the
+Pauli counter: \texttt{tests/test\_water\_ccsd.py}.  The ladder's guard,
+\texttt{tests/test\_paper62\_scale\_ladder.py}, recomputes the
+free-atom objective at the stored exponents and checks that each rung's
+exponents are a stationary minimum of it, derives the SL1 and SL2
+ratios from the stored water energies and the recomputed atom energies,
+and recomputes the one-centre $R3$ probe of Sec.~\ref{sec:r3}; only
+the water energies are read from its data file.  The matched-accuracy
+guard, \texttt{tests/test\_paper62\_matched\_accuracy.py}, recomputes
+the aug-cc-pVDZ and cc-pVDZ water runs end to end, energies and
+Jordan--Wigner cost, from basis files stored beside it; the Slater DZP
+target and the other two rungs are read as registered values.  The ladder's record,
+with its predictions, disposition and the $R3$ addendum:
+\texttt{docs/predictions/2026-10-30\_scale\_ladder.md}; the
+matched-accuracy record:
+\texttt{docs/predictions/2026-10-31\_matched\_accuracy\_gaussian.md}.
+Chronicle: CHANGELOG v5.20.11, v5.20.12, v5.21.25, v5.21.28, v5.21.29.
+
+\begin{thebibliography}{99}
+
+\bibitem{avery2006}
+J.~E.~Avery and J.~S.~Avery, \textit{Generalized Sturmians and Atomic Spectra}
+(World Scientific, Singapore, 2006).
+
+\bibitem{avery2017}
+J.~E.~Avery and J.~S.~Avery, \textit{Hyperspherical Harmonics and Their
+Physical Applications} (World Scientific, Singapore, 2017),
+doi:10.1142/10690.
+
+\bibitem{dunning1989}
+T.~H.~Dunning, Jr., ``Gaussian basis sets for use in correlated molecular
+calculations. I. The atoms boron through neon and hydrogen,''
+J.\ Chem.\ Phys.\ \textbf{90}, 1007 (1989).
+
+\bibitem{mcmurchie1978}
+L.~E.~McMurchie and E.~R.~Davidson, ``One- and two-electron integrals over
+Cartesian Gaussian functions,'' J.\ Comput.\ Phys.\ \textbf{26}, 218 (1978).
+
+\bibitem{stewart1970}
+R.~F.~Stewart, ``Small Gaussian expansions of Slater-type orbitals,''
+J.\ Chem.\ Phys.\ \textbf{52}, 431 (1970).
+
+\bibitem{purvis1982}
+G.~D.~Purvis III and R.~J.~Bartlett, ``A full coupled-cluster singles and
+doubles model: The inclusion of disconnected triples,''
+J.\ Chem.\ Phys.\ \textbf{76}, 1910 (1982).
+
+\bibitem{raghavachari1989}
+K.~Raghavachari, G.~W.~Trucks, J.~A.~Pople, and M.~Head-Gordon, ``A fifth-order
+perturbation comparison of electron correlation theories,''
+Chem.\ Phys.\ Lett.\ \textbf{157}, 479 (1989).
+
+\bibitem{crawford_projects}
+T.~D.~Crawford and co-workers, \textit{Programming Projects}, the
+STO-3G water CCSD(T) reference values, \url{https://github.com/CrawfordGroup/ProgrammingProjects}.
+[Cited for the reference energies the solver is validated against.]
+
+\bibitem{slater1960}
+J.~C.~Slater, \textit{Quantum Theory of Atomic Structure}, Vol.~I
+(McGraw-Hill, New York, 1960).
+[Cited for the $F^{k}$ and $G^{k}$ Slater integrals and the
+average-of-configuration energy.]
+
+\bibitem{jordan1928}
+P.~Jordan and E.~Wigner, ``\"Uber das Paulische \"Aquivalenzverbot,''
+Z.\ Phys.\ \textbf{47}, 631 (1928).
+
+\bibitem{trenev2025}
+D.~Trenev, P.~J.~Ollitrault, S.~M.~Harwood, T.~P.~Gujarati,
+S.~Raman, A.~Mezzacapo, and S.~Mostame,
+``Refining resource estimation for the quantum computation of
+vibrational molecular spectra through Trotter error analysis,''
+Quantum \textbf{9}, 1630 (2025); arXiv:2311.03719.
+[Cited for the frozen-core cc-pVDZ water Pauli count of Table~5,
+which the counter here reproduces exactly.]
+
+\bibitem{ema2003}
+I.~Ema, J.~M.~Garc\'ia de la Vega, G.~Ram\'irez, R.~L\'opez,
+J.~Fern\'andez Rico, H.~Meissner, and J.~Paldus, ``Polarized basis sets of
+Slater-type orbitals: H to Ne atoms,'' J.\ Comput.\ Chem.\ \textbf{24},
+859 (2003), doi:10.1002/jcc.10227.
+
+\bibitem{forster2021}
+A.~F\"orster and L.~Visscher, ``GW100: A Slater-type orbital perspective,''
+J.\ Chem.\ Theory Comput.\ \textbf{17}, 5080 (2021),
+doi:10.1021/acs.jctc.1c00308.
+
+\bibitem{rico2004}
+J.~Fern\'andez Rico, R.~L\'opez, I.~Ema, and G.~Ram\'irez, ``Reference
+calculations with Slater-type orbitals: forces,'' Int.\ J.\ Quantum
+Chem.\ \textbf{100}, 221 (2004), doi:10.1002/qua.20088.
+
+\bibitem{helgaker1997}
+T.~Helgaker, W.~Klopper, H.~Koch, and J.~Noga, ``Basis-set convergence of
+correlated calculations on water,'' J.\ Chem.\ Phys.\ \textbf{106}, 9639
+(1997), doi:10.1063/1.473863.
+
+\bibitem{paper22}
+J.~Loutey, ``Potential-Independent Angular Sparsity for Qubit Hamiltonians in Spherical Fermion Systems'' (Paper 22 in this series).
+
+\bibitem{sl_record}
+J.~Loutey, pre-registered record ``How many radial scales water needs on
+oxygen (SL),'' \texttt{docs/predictions/2026-10-30\_scale\_ladder.md}, this
+repository, registered and committed 2026-10-30 before the scored
+energies were computed; disposition and the $R3$ addendum appended the
+same day.
+
+\bibitem{ma_record}
+J.~Loutey, pre-registered record ``The matched-accuracy Gaussian
+comparison for water (MA),''
+\texttt{docs/predictions/2026-10-31\_matched\_accuracy\_gaussian.md},
+this repository, registered and committed 2026-10-31 before the two
+scored energies were computed; disposition appended the same day.
+
+\end{thebibliography}
+
+\end{document}

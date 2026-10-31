@@ -971,6 +971,41 @@ $R$-dependence the single-$n$ approximation lacked.  What it does not do
 is recover GeoVac's angular sparsity, which is the trade Paper~58 states
 as a conservation law.
 
+\subsection{Water at equal basis size:\ what the exponential bricks buy (Paper~62)}
+
+Paper~62~\cite{loutey_paper62} asks the narrowest version of the
+basis question the chemistry arc has produced:\ at twenty-four
+functions, the size of cc-pVDZ on water, one geometry and one method
+(frozen-core CCSD(T) in the project's own validated solver), how much
+does a one-centre Slater-type design recover, and what does it cost in
+qubit terms.  Four measured findings.  A Slater double-zeta basis built
+by cc-pVDZ's own design rule is $41$~mHa lower, $29$ of it at the
+mean-field level, at the same Jordan--Wigner Pauli count and five
+percent more $1$-norm.  The framework's own fixed-exponent rules do not
+buy that:\ the hydrogenic $Z/n$ kit is about $0.2$~Ha above cc-pVDZ, a
+single Coulomb--Sturmian scale per atom more than a hartree, and the
+hydrogenic loss is the fixed radial node structure, which composed-style
+screening makes worse.  A pre-registered ladder that releases the oxygen
+exponents one at a time, each set on the free atom with nothing tuned on
+water, closes the gap:\ five exponents land $3$~mHa below cc-pVDZ, the
+$2p$/$3p$ split carries nine tenths of the gain on both the atom and
+the molecule, and the gain transfers at about half, both predicted before
+the energies were computed.  The one rung that went the wrong way is
+diagnosed as a $3d$ passenger of an exponent the atomic objective never
+sees, plus two mean-field pieces that cancel on water and not on the
+atom.  At matched accuracy the qubit comparison turns around
+(pre-registered, both gated predictions held):\ aug-cc-pVDZ at
+forty-one functions is still $8$~mHa short of the Slater DZP and already
+costs nine times the Pauli terms and $2.7$ times the $1$-norm on
+$80$ qubits against $46$, with the crossing between it and cc-pVTZ.  The
+caps are stated in the paper:\ the water-tuned Slater basis
+stays $34$~mHa lower than the best atom-set rung, and none of it is a
+lattice result; the
+angular sparsity that is the framework's structural asset plays no part
+in any number there.  For the hierarchy, the datum is the one
+Sec.~\ref{sec:positioning} needs:\ the case for exponential functions
+rests on the one-centre structure, not on better bricks.
+
 \subsection{Fixed-$k$ CI for atoms on the $S^3$ label set}
 
 The atomic FCI paper~\cite{loutey_fci_atoms} solves multi-electron
@@ -1452,6 +1487,11 @@ GeoVac Paper~61 (2026).
 J.~Loutey,
 ``The Generalized-Sturmian Secular Equation Block-Encodes Without a Metric:\ A Quantum-Algorithm Analysis, Metric-Free for Atoms and a Conditioning Frontier for Molecules,''
 GeoVac Paper~60 (2026).
+
+\bibitem{loutey_paper62}
+J.~Loutey,
+``Water at Twenty-Four Functions:\ Slater-Type Bases Set on the Free Atom Against cc-pVDZ, With the Qubit Cost,''
+GeoVac Paper~62 (2026).
 
 \bibitem{loutey_fci_atoms}
 J.~Loutey,

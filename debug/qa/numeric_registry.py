@@ -1299,6 +1299,70 @@ MEASURED = {
     "lih_balanced_pauli": dict(
         value=2726, convention="Pauli terms, LiH balanced Q=30",
         provenance="MEASURED 2026-08-29; retired value 878"),
+
+    # ---- Paper 62: water at 24 functions (2026-10-11 / 2026-10-30) --------
+    # Geometry R_OH 1.809 bohr, 104.5 deg; own RHF + CCSD(T) solver
+    # (tests/test_water_ccsd.py); fc = oxygen 1s frozen.  Rows in
+    # debug/data/water_ccsd.jsonl, debug/data/scale_ladder.jsonl,
+    # debug/data/water_qubit_resources.json.
+    "p62_ccpvdz_fc": dict(
+        value=-76.241025, convention="total energy, Ha, water fc-CCSD(T), cc-pVDZ (24 fns)",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11), own solver, Basis Set Exchange cc-pVDZ"),
+    "p62_dzp_fc": dict(
+        value=-76.281739, convention="total energy, Ha, water fc-CCSD(T), Slater DZP by cc-pVDZ's design rule, 12 Gaussians/fn",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11); 16-Gaussian check -76.281811"),
+    "p62_dzp_rhf": dict(
+        value=-76.055573, convention="total energy, Ha, water RHF, Slater DZP",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11)"),
+    "p62_ccpvtz_fc": dict(
+        value=-76.332191, convention="total energy, Ha, water fc-CCSD(T), cc-pVTZ (58 fns), anchor",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11)"),
+    "p62_ccpvtz_rhf": dict(
+        value=-76.057162, convention="total energy, Ha, water RHF, cc-pVTZ",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11)"),
+    "p62_hyd_fc": dict(
+        value=-76.045244, convention="total energy, Ha, water fc-CCSD(T), hydrogenic Z/n bare-Z kit (24 fns)",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.12)"),
+    "p62_hyd_zeff_fc": dict(
+        value=-75.947087, convention="total energy, Ha, water fc-CCSD(T), hydrogenic kit with Z_eff = 6 on O n>=2",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.12)"),
+    "p62_two_scale_fc": dict(
+        value=-76.111337, convention="total energy, Ha, water fc-CCSD(T), two-scale Coulomb-Sturmian kit = ladder rung R2",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.12, -76.1113); R2rep 2026-10-30 -76.111337 (CHANGELOG v5.21.25)"),
+    "p62_r3_fc": dict(
+        value=-76.108484, convention="total energy, Ha, water fc-CCSD(T), ladder rung R3",
+        provenance="MEASURED 2026-10-30 (CHANGELOG v5.21.25), docs/predictions/2026-10-30_scale_ladder.md"),
+    "p62_r5_fc": dict(
+        value=-76.244112, convention="total energy, Ha, water fc-CCSD(T), ladder rung R5 (five atom-set O exponents, H k=1)",
+        provenance="MEASURED 2026-10-30 (CHANGELOG v5.21.25), pre-registered record"),
+    "p62_r5h_fc": dict(
+        value=-76.248015, convention="total energy, Ha, water fc-CCSD(T), ladder rung R5H (R5 + H exponents from H2 RHF)",
+        provenance="MEASURED 2026-10-30 (CHANGELOG v5.21.25), pre-registered record"),
+    "p62_dzp_lambda_fc": dict(
+        value=706.3, convention="non-identity 1-norm (Ha), water Slater DZP fc Q=46",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11), jw_pauli_stats; openfermion-validated"),
+    "p62_ccpvdz_lambda_fc": dict(
+        value=674.3, convention="non-identity 1-norm (Ha), water cc-pVDZ fc Q=46",
+        provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11), jw_pauli_stats"),
+    # matched-accuracy rungs (record MA, 2026-10-31, pre-registered 6b6d85c2)
+    "p62_tzpol_fc": dict(
+        value=-76.266498, convention="total energy, Ha, water fc-CCSD(T), cc-pVDZ+TZpol (35 fns, our construction)",
+        provenance="MEASURED 2026-10-31 (record docs/predictions/2026-10-31_matched_accuracy_gaussian.md)"),
+    "p62_aug_fc": dict(
+        value=-76.273743, convention="total energy, Ha, water fc-CCSD(T), aug-cc-pVDZ (41 fns)",
+        provenance="MEASURED 2026-10-31 (record MA); agrees with the commonly quoted ~-76.274"),
+    "p62_tzpol_pauli_fc": dict(
+        value=505467, convention="Pauli, water cc-pVDZ+TZpol fc Q=68 (identity included)",
+        provenance="MEASURED 2026-10-31 (record MA), jw_pauli_stats"),
+    "p62_aug_pauli_fc": dict(
+        value=982785, convention="Pauli, water aug-cc-pVDZ fc Q=80 (identity included)",
+        provenance="MEASURED 2026-10-31 (record MA), jw_pauli_stats"),
+    "p62_tzpol_lambda_fc": dict(
+        value=1814.9, convention="non-identity 1-norm (Ha), water cc-pVDZ+TZpol fc Q=68",
+        provenance="MEASURED 2026-10-31 (record MA), jw_pauli_stats"),
+    "p62_aug_lambda_fc": dict(
+        value=1901.1, convention="non-identity 1-norm (Ha), water aug-cc-pVDZ fc Q=80",
+        provenance="MEASURED 2026-10-31 (record MA), jw_pauli_stats"),
 }
 
 # ---------------------------------------------------------------------------
@@ -1388,6 +1452,36 @@ DERIVED = {
                              "scaling gap vs the Gaussian band, low end"),
     "exponent_gap_hi":      ("4.3 - exp_pauli_4pt", 0.02,
                              "scaling gap vs the Gaussian band, high end"),
+
+    # ---- Paper 62: water at 24 functions ------------------------------
+    "p62_dzp_vs_ccpvdz_mha":     ("1000 * (p62_ccpvdz_fc - p62_dzp_fc)", 0.05,
+                                  "Slater DZP below cc-pVDZ, fc-CCSD(T), mHa"),
+    "p62_dzp_vs_ccpvdz_scf_mha": ("1000 * (-76.026795 - p62_dzp_rhf)", 0.05,
+                                  "the SCF part of that gap, mHa (cc-pVDZ RHF -76.026795)"),
+    "p62_hyd_above_ccpvdz_mha":  ("1000 * (p62_hyd_fc - p62_ccpvdz_fc)", 0.5,
+                                  "bare-Z hydrogenic kit above cc-pVDZ, mHa"),
+    "p62_two_scale_above_ccpvdz_mha": ("1000 * (p62_two_scale_fc - p62_ccpvdz_fc)", 0.5,
+                                  "two-scale Sturmian kit (= R2) above cc-pVDZ, mHa"),
+    "p62_r5_below_ccpvdz_mha":   ("1000 * (p62_ccpvdz_fc - p62_r5_fc)", 0.05,
+                                  "ladder R5 below cc-pVDZ, mHa"),
+    "p62_r5h_below_ccpvdz_mha":  ("1000 * (p62_ccpvdz_fc - p62_r5h_fc)", 0.05,
+                                  "ladder R5H below cc-pVDZ, mHa"),
+    "p62_dzp_below_r5h_mha":     ("1000 * (p62_r5h_fc - p62_dzp_fc)", 0.5,
+                                  "water-tuned Slater DZP below the best atom-set rung, mHa"),
+    "p62_sl1_ratio":             ("(-76.124580 - p62_r5_fc) / (p62_two_scale_fc - p62_r5_fc)", 0.0005,
+                                  "SL1: the p split's share of the water gain (R4 fc -76.124580)"),
+    "p62_sl2_ratio":             ("1000 * (p62_two_scale_fc - p62_r5_fc) / 257.3", 0.0005,
+                                  "SL2: water gain over the atom's 257.3 mHa"),
+    "p62_lambda_ratio_pct":      ("100 * (p62_dzp_lambda_fc / p62_ccpvdz_lambda_fc - 1)", 0.05,
+                                  "Slater DZP 1-norm over cc-pVDZ's, percent"),
+    "p62_tzpol_above_dzp_mha":   ("1000 * (p62_tzpol_fc - p62_dzp_fc)", 0.05,
+                                  "cc-pVDZ+TZpol above the Slater DZP, mHa (MA2)"),
+    "p62_aug_above_dzp_mha":     ("1000 * (p62_aug_fc - p62_dzp_fc)", 0.05,
+                                  "aug-cc-pVDZ above the Slater DZP, mHa (MA1)"),
+    "p62_aug_pauli_ratio":       ("p62_aug_pauli_fc / h2o_ccpvdz_pauli", 0.05,
+                                  "aug-cc-pVDZ Pauli terms over the 24-function count"),
+    "p62_aug_lambda_ratio":      ("p62_aug_lambda_fc / p62_dzp_lambda_fc", 0.05,
+                                  "aug-cc-pVDZ 1-norm over the Slater DZP's"),
 }
 
 # ---------------------------------------------------------------------------
@@ -1577,6 +1671,11 @@ _KINDS = (
     ("lambda", ("1-norm",)),
     ("qwc", ("qwc",)),
     ("eri", ("eri quartet", "nonzero eri")),
+    # Total energies in hartree (Paper 62 water bases, 2026-10-31): a
+    # basis + method + molecule datum, no identity convention; listed
+    # before "exponent" because a basis convention may name the exponents
+    # that define it.
+    ("energy", ("total energy",)),
     ("exponent", ("exponent", "decay")),
     # Angular ERI density: a percentage carrying a SELECTION-RULE convention
     # (global-M_L Coulomb vs the stricter pair-diagonal) rather than an

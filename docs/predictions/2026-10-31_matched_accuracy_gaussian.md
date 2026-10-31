@@ -90,3 +90,50 @@ functions matches the Slater DZP, and the matched-accuracy cost is at most that 
   Slater target keeps its water-optimized polarization. The comparison is standard Gaussian bases against the
   Slater DZP as built.
 - A linear interpolation of Pauli count in energy between two rungs is a reading, not a measurement of any basis.
+
+---
+
+(Appended after comparing. The predictions above are not edited.)
+
+## Disposition (2026-10-31)
+
+Runs: `python debug/matched_accuracy_gaussian.py water ccpvdz_tzpol`, `water augccpvdz`, after the record was
+committed (6b6d85c2). Rows in `debug/data/matched_accuracy.jsonl`, log `debug/data/matched_accuracy.log`. Integrals
+213 s and 293 s, solves 27 s and 51 s, under the p-function load.
+
+| Basis | Functions | RHF | fc-CCSD(T) | ae-CCSD(T) | vs target T (mHa) | fc gain over cc-pVDZ (mHa) | RHF share |
+|:--|:--:|:--|:--|:--|:--:|:--:|:--:|
+| cc-pVDZ | 24 | -76.026795 | -76.241025 | -76.243143 | +40.71 | | |
+| cc-pVDZ+TZpol | 35 | -76.031742 | -76.266498 | -76.269454 | +15.24 | 25.47 | 0.19 |
+| aug-cc-pVDZ | 41 | -76.041422 | -76.273743 | -76.276008 | +8.00 | 32.72 | 0.45 |
+| Slater DZP (target) | 24 | -76.055573 | -76.281739 | -76.285720 | 0 | 40.71 | 0.71 |
+| cc-pVTZ | 58 | -76.057162 | -76.332191 | | -50.45 | 91.17 | 0.33 |
+
+- **MA1: HELD.** W(aug-cc-pVDZ) = -76.273743, 8.00 mHa above T.
+- **MA2: HELD.** W(cc-pVDZ+TZpol) = -76.266498, 15.24 mHa above T.
+- **MA3 (reported): HELD** both. RHF share 0.19 (TZpol, bound 0.3) and 0.45 (augmentation, bound 0.5). Water's
+  augmentation step is more SCF-heavy than neon's (0.45 vs 0.25), as the disclosed caveat allowed.
+- **MA4 (reported): HELD.** aug-cc-pVDZ below cc-pVDZ+TZpol by 7.2 mHa (neon 4.3).
+- **Gate: GO.**
+
+Reported, not predicted (Jordan-Wigner, RHF canonical orbitals, identity in N_Pauli and out of the 1-norm):
+
+| Basis | Q fc | N_Pauli fc | 1-norm fc (Ha) | Q ae | N_Pauli ae | 1-norm ae (Ha) |
+|:--|:--:|:--:|:--:|:--:|:--:|:--:|
+| Slater DZP | 46 | 107,382 | 706.3 | 48 | 128,793 | 754.6 |
+| cc-pVDZ+TZpol | 68 | 505,467 | 1,814.9 | 70 | 570,822 | 1,871.5 |
+| aug-cc-pVDZ | 80 | 982,785 | 1,901.1 | 82 | 1,091,076 | 1,958.3 |
+| cc-pVTZ | 114 | 3,983,652 | 7,653.5 | 116 | 4,281,643 | 7,858.6 |
+
+- The crossing lies between aug-cc-pVDZ and cc-pVTZ, 0.137 of the way in energy. Linear interpolation in energy
+  puts the matched-accuracy Gaussian cost near 1.39 million terms, a 1-norm near 2,690 Ha and about 85 qubits:
+  13 times the Slater DZP's terms and 3.8 times its 1-norm. The lower bound needs no interpolation: aug-cc-pVDZ,
+  still 8 mHa short of the target, already costs 9.2 times the terms (982,785 vs 107,382), 2.7 times the 1-norm
+  (1,901 vs 706) and 80 qubits against 46.
+- External sanity (orientation only, not a cited reference): the aug-cc-pVDZ fc-CCSD(T) energy agrees with the
+  commonly quoted value near -76.274 at the equilibrium geometry.
+
+Scope, stated so it is not over-read: one geometry, one method, standard Gaussian bases as published against the
+Slater DZP as built (water-optimized polarization). The interpolation is a reading. The result upgrades Paper 62's
+qubit statement from equal-size to matched-accuracy: at matched or better accuracy the Gaussian basis costs at least
+nine times the Pauli terms and 2.7 times the 1-norm.
