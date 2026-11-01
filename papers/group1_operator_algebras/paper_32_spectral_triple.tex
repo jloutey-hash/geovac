@@ -4153,12 +4153,35 @@ product the compressed gauge fluctuation $a[D,b]$ is not gauge
 invariant: the pure-gauge companion ($a = 1$) is an edge-crossing
 boundary sum, the same defect as the failure of the order-zero and
 order-one conditions on the window, and it dominates the gauge
-functional whenever the heat cutoff sits at the window edge. The
+functional whenever the heat cutoff sits at the window edge. Exactly:
+with $\chi = i(b - b^\dagger)$, the companion's $\epsilon^2$ heat
+coefficient equals $-\sum_{i\in W,\,j\notin W} |\chi_{ij}|^2
+f'(\lambda_i)(\lambda_i - \lambda_j)$ for $f(x) = e^{-tx^2}$, while
+$[\chi,[\chi,D]] = 0$ in the continuum
+(\texttt{tests/test\_paper32\_window\_gauge\_breaking.py}). The
+order-one defect has the same exact form. For functions $a, b$ the
+continuum identity $[[D,a],b] = 0$ leaves, on the window,
+$[[D_W,a_W],b_W]_{il} = \sum_{k\notin W} \bigl[-(\lambda_i-\lambda_k)
+a_{ik}b_{kl} + b_{ik}(\lambda_k-\lambda_l)a_{kl}\bigr]$: every term
+passes once through a state outside $W$ and carries the Dirac gap
+across the edge. At $a = b = \chi$ it is the gauge defect above, with
+$f'(\lambda_i)$ as the extra weight
+(\texttt{tests/test\_paper32\_window\_order\_one.py}). The
 coefficient therefore cannot be read at finite cutoff by this
 instrument. The result is a wall on the instrument, not evidence that
 the outer factor moves the $4$. The obstruction is known (Choi's
-multiplicative domain; Dong's gauge group of the truncated circle), and
-every known repair changes the object: fluctuating before truncating,
+multiplicative domain; Dong's gauge group of the truncated
+circle~\cite{dong2022}). \textbf{[MEASURED, pre-registered]} On the true window
+the surviving pattern is the one Dong found on the circle.
+The Lie algebra of the identity component of Dong's gauge group
+$\{U : U\,\mathcal{O}^{\mathrm{CH}}\,U^* = \mathcal{O}^{\mathrm{CH}}\}$
+has dimension $7$ at $n_{\max} = 1, \dots, 4$, namely
+$\mathfrak{u}(1) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R$:
+a phase and the isometries of round $S^3$. The group also contains a
+unitary implementing the inversion $g \mapsto g^{-1}$, unique up to
+phase, which anticommutes with $D$. The local gauge group
+$C(S^3, \mathrm{U}(1))$ leaves nothing beyond its constants (the full
+component group is not determined here). Every known repair changes the object: fluctuating before truncating,
 the $C^*$-envelope with gauge group $\mathrm{U}(N)$, or lattice gauge
 networks with sites.
 
@@ -6058,6 +6081,10 @@ arXiv:hep-th/0610241.
 C.~Farsi, F.~Latr\'emoli\`ere and J.~Packer, ``Convergence of inductive
 sequences of spectral triples for the spectral propinquity,''
 \textit{Adv.~Math.}\ \textbf{437}, 109442 (2024), arXiv:2301.00274.
+
+\bibitem{dong2022}
+R.~Dong, ``The gauge group and perturbation semigroup of an operator
+system,'' \textit{SIGMA}\ \textbf{18}, 060 (2022), arXiv:2111.13076.
 
 \end{thebibliography}
 

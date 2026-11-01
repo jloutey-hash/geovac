@@ -91,7 +91,10 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
         # group2_quantum_chemistry/ but post-dated the original group2 scope,
         # so a group2 run had silently excluded them. Each has its own
         # docs/qa/paper_{58,59,60}.done.md the group DoD references.
-        "papers": [8, 11, 12, 13, 15, 17, 19, 58, 59, 60],
+        # 62 added 2026-10-31: written that day in group2_quantum_chemistry/ and in
+        # no scope, so --gate group2 skipped it (the selftest orphan check caught it;
+        # nothing runs the selftest automatically).
+        "papers": [8, 11, 12, 13, 15, 17, 19, 58, 59, 60, 62],
         "extra": [
             "group2_quantum_chemistry/paper_fci_atoms.tex",
             "group2_quantum_chemistry/paper_fci_molecules.tex",
@@ -151,6 +154,8 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
     # them.  A scope exclusion inherited from a premise dies with the premise.
     "paper_59": {"papers": [59],
                  "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
+    "paper_62": {"papers": [62],
+                 "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
     "paper_60": {"papers": [60],
                  "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
     # Paper 61 was split out of Paper 59 on 2026-09-06 and belonged to NO
@@ -172,6 +177,7 @@ ALIASES = {
     "paper 58": "paper_58", "paper58": "paper_58", "p58": "paper_58",
     "paper 59": "paper_59", "paper59": "paper_59", "p59": "paper_59",
     "paper 60": "paper_60", "paper60": "paper_60", "p60": "paper_60",
+    "paper 62": "paper_62", "paper62": "paper_62", "p62": "paper_62",
 }
 
 _NUM_RE = re.compile(r"(?:^|/)[Pp]aper_(\d+)_")

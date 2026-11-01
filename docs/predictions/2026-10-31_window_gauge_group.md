@@ -75,3 +75,45 @@ On the true window the gauge group's identity component is U(1) · Spin(4): an o
 the S³ analogue of Dong's circle. The local gauge group C(S³, U(1)) has no remnant beyond its constants. This
 sharpens the YC wall from "local gauge invariance fails" to "exactly the global isometries survive". It does not
 repair the instrument and changes no paper claim on its own.
+
+## Disposition (2026-10-31)
+
+Runs after the record was committed (2e3ba9c2): `python debug/gauge_group_window.py score 1 2 3 4` and
+`reflection 1 2 3`. Rows in `debug/data/gauge_group_window.jsonl`, log `debug/data/gauge_group_window_score.log`.
+
+| n_max | dim H | dim O | dim g | largest null eigenvalue | smallest nonzero eigenvalue | λ_max(G) | known 7 in g |
+|:--:|:--:|:--:|:--:|:--|:--|:--|:--:|
+| 1 (reported) | 4 | 5 | 7 | 4.2e-16 | 1.000 | 4.000 | rank 7 |
+| 2 | 16 | 30 | 7 | 2.4e-15 | 0.899 | 6.137 | rank 7 |
+| 3 | 40 | 91 | 7 | 1.4e-14 | 0.832 | 7.929 | rank 7 |
+| 4 | 80 | 204 | 7 | 2.7e-14 | 0.769 | not printed | rank 7 |
+
+- **WG0: PASS** (as registered).
+- **WG1: HELD** at n_max = 2, 3, 4. dim g = 7, so g = u(1) ⊕ su(2)_L ⊕ su(2)_R exactly. Validity: no eigenvalue in
+  the void band at n_max ≤ 3 (smallest nonzero / λ_max = 0.25, 0.15, 0.11). At n_max = 4 λ_max was not printed; the
+  band would need λ_max > 7,700 for 0.769 to fall in it, against 4.0, 6.1, 7.9 at n_max = 1, 2, 3.
+- **WG2 (reported):** dim g = 7 at n_max = 1 as well; no accidental symmetry on the smallest window.
+- **WG3 (reported):** the inversion g ↦ g⁻¹ is implemented. For each of three sign conventions of the inversion on
+  matrix coefficients (Condon-Shortley sign, no sign, plain index swap), the intertwining equation U e = ι(e) U has a
+  one-dimensional solution space, unitary to 2e-14, and that U ANTICOMMUTES with D (to 7e-14; ‖[U, D]‖ = 6.0, 18.3,
+  38.9), as an orientation reversal must. Control: the identity map gives the scalars only (null dimension 1, U
+  commuting with D). Not shown: that these are the only components.
+- **Gate: GO.**
+
+Reading (as stated in advance, now held): on the true window the identity component of Dong's gauge group is
+U(1) · Spin(4), the phase and the isometries of round S³, and the group also contains an orientation-reversing
+element that anticommutes with D, the analogue of Dong's reflection of the circle. The local gauge group C(S³, U(1))
+leaves nothing beyond its constants. This sharpens the YC wall from "local gauge invariance fails" to "exactly the
+global isometries (and a reflection) survive". It does not repair the instrument.
+
+## Erratum (2026-10-31, after the disposition)
+
+The registration's control disclosure says a conjugation bug in the basis routine "passed the real control and was
+caught by the inclusion check". That cause is wrong. Writing the guard showed that conjugating the basis vectors
+changes nothing here: Toep_n and the true window's O are both closed under entrywise conjugation (and transposition),
+measured to 5e-15 at n_max = 1, 2, 3, so the routine's conjugation was harmless for every system this record touches.
+The inclusion check had failed for a different reason, a 0/0 relative residual for the identity, which commutes with
+all of O; that was fixed (zero commutator returns zero) before any scored run. The conjugated-Toeplitz control is
+therefore not a test of the conjugation; it stays as a second control of the Gram form on complex matrices. No
+scored number, verdict or disposition changes.
+

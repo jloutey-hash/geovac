@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.21.29 (October 31, 2026)
+**Version:** v5.21.30 (October 31, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Owed items closed; Dong's gauge group on the true window (2026-10-31, v5.21.30, PI-directed, WG pre-registered GO):** numpy 2.4.0 excluded; edge-crossing identity guarded; window keeps a phase plus isometries plus a reflection; HF repeats Paper 62 (HS, GO). CHANGELOG v5.21.30.
 - **Paper 62 homes the water basis arc (2026-10-31, v5.21.29, PI-directed):** Slater DZP vs cc-pVDZ, native kits negative, scale ladder + R3 diagnosis, qubit cost; matched accuracy (MA, GO): aug-cc-pVDZ 8 mHa short at 9.2x terms; ladder and MA guards 8/8 each; §1.5 composed caveat. CHANGELOG v5.21.29.
 - **Scale ladder's R3 step diagnosed: correlation loss transfers one to one, HF gain cancels on water (2026-10-30, v5.21.28, PI-directed):** 3d is a passenger of the 3p the HF objective never sees; atom wash at fc-CCSD(T). CHANGELOG v5.21.28.
 - **CCM's Yukawa coefficient cannot be read at finite cutoff; compression breaks gauge invariance (2026-10-29, v5.21.27, pre-registered):** YC GO, all held; known obstruction (Choi, Dong); every fix changes the object. CHANGELOG v5.21.27.

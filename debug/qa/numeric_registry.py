@@ -1363,6 +1363,46 @@ MEASURED = {
     "p62_aug_lambda_fc": dict(
         value=1901.1, convention="non-identity 1-norm (Ha), water aug-cc-pVDZ fc Q=80",
         provenance="MEASURED 2026-10-31 (record MA), jw_pauli_stats"),
+    # second molecule (record HS, 2026-10-31, pre-registered b5ccf2ff); H-F 1.7325 bohr, F 1s frozen
+    "p62_hf_dzp_fc": dict(
+        value=-100.287713, convention="total energy, Ha, HF fc-CCSD(T), Slater DZP by Paper 62's rule (19 fns)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_dzp_rhf": dict(
+        value=-100.060707, convention="total energy, Ha, HF RHF, Slater DZP",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_ccpvdz_fc": dict(
+        value=-100.228146, convention="total energy, Ha, HF fc-CCSD(T), cc-pVDZ as published (19 fns)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_ccpvdz_polopt_fc": dict(
+        value=-100.228217, convention="total energy, Ha, HF fc-CCSD(T), cc-pVDZ polarization re-optimized on HF",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_ccpvdz_polopt_rhf": dict(
+        value=-100.019359, convention="total energy, Ha, HF RHF, cc-pVDZ polarization re-optimized",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_tzpol_fc": dict(
+        value=-100.255091, convention="total energy, Ha, HF fc-CCSD(T), cc-pVDZ+TZpol (27 fns, our construction)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_aug_fc": dict(
+        value=-100.263583, convention="total energy, Ha, HF fc-CCSD(T), aug-cc-pVDZ (32 fns)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_ccpvtz_fc": dict(
+        value=-100.338356, convention="total energy, Ha, HF fc-CCSD(T), cc-pVTZ (44 fns)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_pauli_fc": dict(
+        value=63535, convention="Pauli, HF Slater DZP and cc-pVDZ fc Q=36 (identity included)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_aug_pauli_fc": dict(
+        value=591674, convention="Pauli, HF aug-cc-pVDZ fc Q=62 (identity included)",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_dzp_lambda_fc": dict(
+        value=432.6, convention="non-identity 1-norm (Ha), HF Slater DZP fc Q=36",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_ccpvdz_lambda_fc": dict(
+        value=433.6, convention="non-identity 1-norm (Ha), HF cc-pVDZ fc Q=36",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+    "p62_hf_aug_lambda_fc": dict(
+        value=1169.9, convention="non-identity 1-norm (Ha), HF aug-cc-pVDZ fc Q=62",
+        provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
 }
 
 # ---------------------------------------------------------------------------
@@ -1482,6 +1522,16 @@ DERIVED = {
                                   "aug-cc-pVDZ Pauli terms over the 24-function count"),
     "p62_aug_lambda_ratio":      ("p62_aug_lambda_fc / p62_dzp_lambda_fc", 0.05,
                                   "aug-cc-pVDZ 1-norm over the Slater DZP's"),
+    "p62_hf_dzp_vs_ccpvdz_mha":  ("1000 * (p62_hf_ccpvdz_polopt_fc - p62_hf_dzp_fc)", 0.05,
+                                  "HS1: HF Slater DZP below re-optimized cc-pVDZ, mHa"),
+    "p62_hf_scf_share":          ("(p62_hf_ccpvdz_polopt_rhf - p62_hf_dzp_rhf) / (p62_hf_ccpvdz_polopt_fc - p62_hf_dzp_fc)", 0.0005,
+                                  "HS3: RHF share of the HF equal-size gap"),
+    "p62_hf_aug_above_dzp_mha":  ("1000 * (p62_hf_aug_fc - p62_hf_dzp_fc)", 0.05,
+                                  "HS4: HF aug-cc-pVDZ above the Slater DZP, mHa"),
+    "p62_hf_aug_pauli_ratio":    ("p62_hf_aug_pauli_fc / p62_hf_pauli_fc", 0.005,
+                                  "HF aug-cc-pVDZ Pauli terms over the 19-function count"),
+    "p62_hf_aug_lambda_ratio":   ("p62_hf_aug_lambda_fc / p62_hf_dzp_lambda_fc", 0.005,
+                                  "HF aug-cc-pVDZ 1-norm over the Slater DZP's"),
 }
 
 # ---------------------------------------------------------------------------
@@ -1592,7 +1642,10 @@ RETIRED = {
                                     r"meV|polarizability|spheroidal|DLMF"),
     3.36:    ("exp_qwc_3pt",        r"Q\^|exponent|scaling|QWC",   None),
     3.147:   ("exp_pauli_4pt",      r"exponent|alpha|scaling",  None),
-    1.694:   ("exp_lambda_4pt",     r"exponent|alpha|scaling",  None),
+    # forbid primitive|Hartree|bohr added 2026-10-31: Paper 62 lists the oxygen
+    # basis-function exponents 9.317, 6.765 | 2.710, 1.694, and "exponents"
+    # there are orbital exponents in bohr^-1, not a 1-norm scaling exponent.
+    1.694:   ("exp_lambda_4pt",     r"exponent|alpha|scaling",  r"primitive|Hartree|bohr"),
     3.355:   ("exp_qwc_3pt",        r"exponent|alpha|scaling",  None),
 
     111:     ("block_sp_n2_pauli",  r"Pauli per|per \$s\$\+\$p\$|block.*Pauli", r"Rev\.|\\textbf|page"),

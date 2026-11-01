@@ -77,6 +77,28 @@ HYDROGEN_GROUND_STATE = -0.5  # Hartree (exact)
 # ---------------------------------------------------------------------------
 import warnings as _warnings
 
+# numpy 2.4.0 leaks ~2.8 KB per call, never freed, whenever an array is
+# written through ``ndarray.flat`` with a slice or an index array; np.diag,
+# np.eye, np.identity, np.diagflat and np.fill_diagonal all write that way.
+# Fixed in 2.4.1 (measured 2026-10-31; 2.4.6 and 2.5.4 also clean).  setup.py
+# excludes the release; this catches an environment that already has it.
+_LEAKY_NUMPY = frozenset({'2.4.0'})
+
+
+def _warn_if_leaky_numpy():
+    import numpy as _np
+    if _np.__version__ in _LEAKY_NUMPY:
+        _warnings.warn(
+            "numpy %s leaks memory in ndarray.flat assignment (used by np.diag, "
+            "np.eye, np.identity, np.diagflat, np.fill_diagonal); long GeoVac "
+            "runs can grow to many GB.  Upgrade: pip install 'numpy>=2.4.1'."
+            % _np.__version__, RuntimeWarning, stacklevel=3)
+        return True
+    return False
+
+
+_warn_if_leaky_numpy()
+
 _LEGACY_FITTED_MSG = (
     "geovac.{name} is archived (superseded): the legacy helium/molecule "
     "classes use a kinetic scale -0.10298808 FITTED to the experimental "

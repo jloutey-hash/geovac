@@ -86,3 +86,37 @@ Paper 62's equal-size and matched-accuracy findings are not water-specific: for 
 built by the same fixed rule, the Slater DZP beats cc-pVDZ at equal size by a mostly mean-field margin, at the same
 Pauli count, and the Gaussian basis needs more than aug-cc-pVDZ to match it. Still two molecules, one method, one
 geometry each.
+
+## Disposition (2026-10-31)
+
+Runs after the record was committed (b5ccf2ff): `pol_sto F`, `pol_gto F`, then `final F` for the six bases. Log
+`debug/data/hf_slater_hs_score.log`, rows `debug/data/hf_slater_matched.jsonl`, exponents
+`debug/data/hf_slater_exponents.json`. Both polarization fits stopped on their tolerances (28 and 30 objective
+calls, cap 60 steps): no VOID. Fitted exponents: Slater F 3d 3.193, H 2p 1.563; cc-pVDZ F d 1.670 (published 1.640),
+H p 0.697 (published 0.727).
+
+| Basis | Functions | RHF | fc-CCSD(T) | ae-CCSD(T) | vs Slater DZP fc (mHa) | N_Pauli fc (Q) | 1-norm fc (Ha) |
+|:--|:--:|:--|:--|:--|:--:|:--:|:--:|
+| cc-pVDZ | 19 | -100.019419 | -100.228146 | -100.230090 | +59.57 | 63,535 (36) | 433.6 |
+| cc-pVDZ, pol. re-optimized | 19 | -100.019359 | -100.228217 | -100.230180 | +59.50 | 63,535 (36) | 434.8 |
+| cc-pVDZ+TZpol | 27 | -100.022111 | -100.255091 | -100.257919 | +32.62 | 290,731 (52) | 1,089.9 |
+| aug-cc-pVDZ | 32 | -100.033474 | -100.263583 | -100.265664 | +24.13 | 591,674 (62) | 1,169.9 |
+| Slater DZP | 19 | -100.060707 | -100.287713 | -100.291400 | 0 | 63,535 (36) | 432.6 |
+| cc-pVTZ | 44 | -100.058021 | -100.338356 | -100.351352 | -50.64 | 2,096,366 (86) | 4,483.5 |
+
+- **HS1: HELD.** 59.50 mHa against the re-optimized cc-pVDZ (59.57 against the published one), bound 20.
+- **HS2: HELD** (scored, not gating). 59.50 lies in [39.6, 81.4].
+- **HS3: HELD.** RHF part 41.35 mHa, share 0.695 (water 0.71, neon 0.70).
+- **HS4: HELD.** cc-pVDZ+TZpol +32.62 and aug-cc-pVDZ +24.13 above the Slater DZP; cc-pVTZ 50.64 below.
+- **HS5: HELD.** 63,535 = 63,535 fc Pauli terms on 36 qubits.
+- **HS6 (reported).** The Slater DZP's 1-norm is 0.2% BELOW cc-pVDZ's (432.6 vs 433.6; water: 4.7% above). The
+  crossing lies 0.323 of the way from aug-cc-pVDZ to cc-pVTZ (water 0.137, neon 0.55). aug-cc-pVDZ, still 24 mHa
+  short, costs 9.31x the terms (591,674 / 63,535) and 2.70x the 1-norm (1,169.9 / 432.6) on 62 qubits against 36;
+  water's ratios were 9.15x and 2.69x.
+- **Gate: GO.**
+
+Reading (as stated in advance, now held): Paper 62's equal-size and matched-accuracy findings are not
+water-specific. For a second ten-electron molecule built by the same fixed rule, the Slater DZP beats cc-pVDZ at
+equal size by a mostly mean-field margin at the same Pauli count, and the Gaussian basis needs more than
+aug-cc-pVDZ to match it. Still two molecules, one method, one geometry each. The near-identical aug-cc-pVDZ cost
+ratios for water and HF (9.2-9.3x terms, 2.7x 1-norm) are reported, not predicted, and not read as a law.

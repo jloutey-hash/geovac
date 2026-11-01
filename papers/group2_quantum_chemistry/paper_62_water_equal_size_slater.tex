@@ -52,7 +52,8 @@ Hartree--Fock gain is two opposite pieces that cancel on water.
 twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107\,382}$ terms on
 46 frozen-core qubits, because it is fixed by the orbital count and the
 $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
-across the kits.  \emph{Caps.}  One geometry, one method, one molecule.
+across the kits.  \emph{Caps.}  One geometry and one method per molecule;
+the ladder and the native kits are water only.
 The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
 below the best atom-set rung.  \textbf{[MEASURED, pre-registered]} The
 matched-accuracy comparison brackets the Gaussian cost from both sides:
@@ -60,7 +61,12 @@ aug-cc-pVDZ at 41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$
 short of the Slater DZP while already costing
 $\gvq{p62_aug_pauli_ratio}{9.2}\times$ the Pauli terms and
 $\gvq{p62_aug_lambda_ratio}{2.7}\times$ the 1-norm on 80 qubits against
-46, and the crossing lies between it and cc-pVTZ.  Nothing here is a
+46, and the crossing lies between it and cc-pVTZ.
+\textbf{[MEASURED, pre-registered]} The same rule on hydrogen fluoride,
+a second molecule, repeats both findings: the Slater DZP is
+$\gvq{p62_hf_dzp_vs_ccpvdz_mha}{59.5}\mHa$ below cc-pVDZ at nineteen
+functions with the same Pauli count, and aug-cc-pVDZ is still short at
+$\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the terms.  Nothing here is a
 GeoVac lattice structure: the
 bases are tuned exponential functions evaluated through Gaussian fits,
 and the angular sparsity of the one-centre framework does not enter.
@@ -637,6 +643,59 @@ tracks a worse energy, is the reason the composed library's 1-norm
 figures (Papers~14, 20) are reported at matched qubits with the
 accuracy stated alongside, never as a cost advantage on their own.
 
+\subsection{A second molecule: hydrogen fluoride}
+\label{sec:hf}
+
+To test whether any of this is specific to water, the same rule was
+applied to hydrogen fluoride, the cheapest second molecule: a diatomic
+with ten electrons and 19 functions in cc-pVDZ, needing only two-centre
+integrals.  Nothing in the rule changed.  The fluorine primitives were
+set on the free atom's radial average-of-configuration Hartree--Fock
+energy and contracted as cc-pVDZ is; the hydrogen exponents are water's;
+the polarization exponents of both the Slater basis and cc-pVDZ were
+re-optimized on the molecule's frozen-core CCSD.  The predictions and
+their bounds were registered first \cite{hs_record}, with neon, the
+isoelectronic closed shell, as the measured control: there the Slater
+DZP is $81.4$~mHa below cc-pVDZ at fourteen functions, an upper anchor
+because a free atom's own contracted orbitals sit near its Hartree--Fock
+limit.
+
+\begin{table}[t]
+\caption{Hydrogen fluoride at $r_e = 1.7325$~bohr, F $1s$ frozen, same
+solver and counter as Table~\ref{tab:matched}.  ``vs DZP'' is relative
+to the Slater DZP, positive above.  cc-pVDZ$^*$: its F $d$ and H $p$
+exponents re-optimized on the molecule, as for the Slater basis.}
+\label{tab:hf}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Basis & Fns & CCSD(T) fc & vs DZP (mHa) & $N_{\rm Pauli}$ fc ($Q$) & $\lambda$ fc \\
+\hline
+cc-pVDZ & 19 & \gvq{p62_hf_ccpvdz_fc}{$-100.2281$} & $+59.6$ & \gvq{p62_hf_pauli_fc}{63\,535} (36) & \gvq{p62_hf_ccpvdz_lambda_fc}{433.6} \\
+cc-pVDZ$^*$ & 19 & \gvq{p62_hf_ccpvdz_polopt_fc}{$-100.2282$} & $+\gvq{p62_hf_dzp_vs_ccpvdz_mha}{59.5}$ & 63\,535 (36) & 434.8 \\
+cc-pVDZ+TZpol & 27 & \gvq{p62_hf_tzpol_fc}{$-100.2551$} & $+32.6$ & 290\,731 (52) & 1\,089.9 \\
+aug-cc-pVDZ & 32 & \gvq{p62_hf_aug_fc}{$-100.2636$} & $+\gvq{p62_hf_aug_above_dzp_mha}{24.1}$ & \gvq{p62_hf_aug_pauli_fc}{591\,674} (62) & \gvq{p62_hf_aug_lambda_fc}{1\,169.9} \\
+Slater DZP & 19 & \gvq{p62_hf_dzp_fc}{$-100.2877$} & $0$ & 63\,535 (36) & \gvq{p62_hf_dzp_lambda_fc}{432.6} \\
+cc-pVTZ & 44 & \gvq{p62_hf_ccpvtz_fc}{$-100.3384$} & $-50.6$ & 2\,096\,366 (86) & 4\,483.5 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, pre-registered; GO]}  Table~\ref{tab:hf}.  All five
+gated or scored predictions held.  At equal size the Slater DZP is
+$\gvq{p62_hf_dzp_vs_ccpvdz_mha}{59.5}\mHa$ below the re-optimized
+cc-pVDZ, between water's gap and neon's as predicted, and
+$\gvq{p62_hf_scf_share}{0.69}$ of that is mean-field, as for water
+($0.71$) and neon ($0.70$).  The Pauli count is identical,
+$\gvq{p62_hf_pauli_fc}{63\,535}$ terms on 36 qubits for both, and here
+the Slater 1-norm is not higher but $0.2\%$ lower.  At matched accuracy
+the pattern repeats: aug-cc-pVDZ at 32 functions is still
+$\gvq{p62_hf_aug_above_dzp_mha}{24.1}\mHa$ short, the crossing lies
+between it and cc-pVTZ ($0.32$ of the way, against water's $0.14$), and
+aug-cc-pVDZ already costs $\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the
+Pauli terms and $\gvq{p62_hf_aug_lambda_ratio}{2.7}\times$ the 1-norm on
+62 qubits against 36.  The two molecules give nearly the same two
+ratios; that was reported, not predicted, and is not read as a law.
+
 \section{Prior art}
 \label{sec:prior}
 
@@ -671,8 +730,11 @@ rung where the ratio has the wrong sign.
 \label{sec:limits}
 
 \begin{itemize}
-\item One geometry, one method, one molecule.  No potential energy
-surface, no basis-set limit, no second molecule.  The ladder frees
+\item One geometry and one method per molecule, and two molecules.  The
+equal-size and matched-accuracy findings are checked on hydrogen
+fluoride (Sec.~\ref{sec:hf}); the native kits, the ladder and the $R3$
+diagnosis are water only.  No potential energy surface, no basis-set
+limit.  The ladder frees
 exponents in one order and does not test every partition of five
 primitives.  ``Needed'' in Sec.~\ref{sec:ladder} means ``worth more
 than the bound at twenty-four functions''; it does not mean a count is
@@ -722,9 +784,12 @@ atomic objective cannot see, plus two mean-field pieces that cancel on
 water and not on the atom.  At matched accuracy the comparison turns
 around: aug-cc-pVDZ at 41 functions is still $8$~mHa short of the
 Slater DZP and already costs nine times the Pauli terms and 2.7 times
-the 1-norm, and the crossing lies between it and cc-pVTZ.  The
-water-tuned basis stays $34$~mHa ahead of the best atom-set rung, and
-nothing here is a property of the lattice.
+the 1-norm, and the crossing lies between it and cc-pVTZ.  Hydrogen
+fluoride, built by the same rule and registered in advance, repeats
+both the equal-size gap ($59.5$~mHa, mostly mean-field, same Pauli
+count) and the matched-accuracy bracket.  The water-tuned basis stays
+$34$~mHa ahead of the best atom-set rung, and nothing here is a
+property of the lattice.
 
 \section*{Backing}
 
@@ -743,7 +808,14 @@ target and the other two rungs are read as registered values.  The ladder's reco
 with its predictions, disposition and the $R3$ addendum:
 \texttt{docs/predictions/2026-10-30\_scale\_ladder.md}; the
 matched-accuracy record:
-\texttt{docs/predictions/2026-10-31\_matched\_accuracy\_gaussian.md}.
+\texttt{docs/predictions/2026-10-31\_matched\_accuracy\_gaussian.md};
+the hydrogen fluoride record:
+\texttt{docs/predictions/2026-10-31\_hf\_slater\_second\_molecule.md}.
+The hydrogen fluoride guard,
+\texttt{tests/test\_paper62\_hf\_second\_molecule.py}, recomputes the
+free fluorine atom's design step and the cc-pVDZ and aug-cc-pVDZ runs end
+to end; the Slater DZP and the other two rungs are read as registered
+values.
 Chronicle: CHANGELOG v5.20.11, v5.20.12, v5.21.25, v5.21.28, v5.21.29.
 
 \begin{thebibliography}{99}
@@ -841,6 +913,14 @@ comparison for water (MA),''
 \texttt{docs/predictions/2026-10-31\_matched\_accuracy\_gaussian.md},
 this repository, registered and committed 2026-10-31 before the two
 scored energies were computed; disposition appended the same day.
+
+\bibitem{hs_record}
+J.~Loutey, pre-registered record ``The Slater-DZP result on hydrogen
+fluoride (HS),''
+\texttt{docs/predictions/2026-10-31\_hf\_slater\_second\_molecule.md},
+this repository, registered and committed 2026-10-31 before any
+hydrogen fluoride energy was computed; disposition appended the same
+day.
 
 \end{thebibliography}
 

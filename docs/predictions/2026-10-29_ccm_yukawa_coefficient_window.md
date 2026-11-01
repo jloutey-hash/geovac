@@ -144,3 +144,6 @@ Interpretations the scorer made, disclosed: (1) YC-0(a) compared the 12-decimal 
 
 Reading. On the truncated S³, the CCM coefficient 4 cannot be read at finite cutoff by the naive compressed spectral action: gauge breaking from the compression dominates, exactly as on a flat truncation. This is a wall on the instrument (spectral truncation breaks gauge invariance), not a statement that the outer factor moves the 4. Whether a gauge-invariant definition of the fluctuated spectral action on the window exists is the open question this leaves; none was defined before scoring, so none is scored here.
 
+## Erratum (2026-10-31)
+
+The disposition table's rho_pg at tau = 4, n_max = 3 is printed 14.94. The scorer stored 14.934717 (`debug/graded_ac/yc_score.json`), so the rounded value is 14.93. A display-rounding slip in the table only: no verdict, bound or margin changes (YC2's margin at that point is 163). Found while writing the guard `tests/test_paper32_window_gauge_breaking.py`, which recomputes 14.934717 independently.

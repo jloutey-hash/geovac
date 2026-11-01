@@ -1,0 +1,20 @@
+{
+ "cg_max_err_vs_sympy": 1.1102230246251565e-16,
+ "rows": [
+  {
+   "n_max": 4,
+   "dimW": 80,
+   "dimQ": 1220,
+   "pairs": 41616,
+   "max_rel": 2.3071822230491515e-14,
+   "max_abs": 2.6645352591003757e-15,
+   "max_defect": 3.8971143170299745,
+   "absD_control_max_mismatch": null,
+   "absD_control_max_defect": null,
+   "continuum_identity_D": 2.6645352591003757e-15,
+   "continuum_identity_absD": null,
+   "gap_scale": 4.500000000000001
+  }
+ ],
+ "gauge": []
+}

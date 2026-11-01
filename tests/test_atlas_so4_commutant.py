@@ -107,6 +107,63 @@ def test_sy_generators_close_the_so4_algebra(gens):
     assert np.abs(cas - np.diag([n * n - 1.0 for (n, l, m) in STATES])).max() < 1e-12
 
 
+def _central_correction(R: float = 0.05) -> np.ndarray:
+    """Door 24's operator: the uniform-sphere finite-nucleus correction (radius R), Z = 1."""
+    r = np.linspace(1e-6, R, 4001)
+    dV = -(3 / (2 * R) - r * r / (2 * R ** 3)) + 1 / r
+    Vc = np.zeros((DIM, DIM), complex)
+    for (n1, l1, m1) in STATES:
+        for (n2, l2, m2) in STATES:
+            if (l1, m1) != (l2, m2):
+                continue
+            c1, a1 = _hydrogenic_poly_coeffs(1.0, n1, l1)
+            c2, a2 = _hydrogenic_poly_coeffs(1.0, n2, l2)
+            R1 = np.exp(-a1 * r) * np.polyval(c1[::-1], r)
+            R2 = np.exp(-a2 * r) * np.polyval(c2[::-1], r)
+            Vc[IDX[(n1, l1, m1)], IDX[(n2, l2, m2)]] = np.trapezoid(R1 * R2 * dV * r * r, r)
+    return Vc
+
+
+def test_door24_both_chiral_factors_are_broken(gens):
+    """Atlas door 24 (decided 2026-10-31): a finite nucleus breaks both chiral SU(2) factors
+    J^+- = (L +- A)/2, the left and right multiplications that make S^3 a group; only their sum L survives.
+
+    Wrong answers rejected: "the chiral SU(2) of Paper 30's S^3 = SU(2) survives a finite nucleus" (a
+    commutant inside span J^+ or span J^-); a commutant routine blind inside a 3-dim span (the SO(4)-invariant
+    control must keep all three of each factor).
+    """
+    L, A = gens
+    Jp = [(L[a] + A[a]) / 2 for a in range(3)]
+    Jm = [(L[a] - A[a]) / 2 for a in range(3)]
+    H = np.diag([-0.5 / n ** 2 for (n, l, m) in STATES]).astype(complex)
+    for J in (Jp, Jm):
+        assert commutant(H, J)[0] == 3
+    Vc = _central_correction()
+    for J in (Jp, Jm):
+        d, rel, _ = commutant(Vc, J)
+        assert d == 0, d
+        assert min(rel) > 1e-3, rel
+    assert commutant(Vc, L)[0] == 3
+
+
+def test_door24_rotations_fix_a_vector_in_every_shell_and_the_chiral_factor_none(gens):
+    """The label-level trace of fixed points against free action: on each shell n >= 2 the rotation group L
+    leaves exactly one vector invariant (the s state) and the chiral factor J^+ leaves none.
+
+    Wrong answers rejected: a survivor that acts freely (no invariant vector per shell), and swapping the roles
+    of L and J^+.
+    """
+    L, A = gens
+    Jp = [(L[a] + A[a]) / 2 for a in range(3)]
+    for n in range(2, NMAX + 1):
+        ids = [IDX[s] for s in STATES if s[0] == n]
+        for G, expect in ((L, 1), (Jp, 0)):
+            M = np.vstack([g[np.ix_(ids, ids)] for g in G])
+            s = np.linalg.svd(M, compute_uv=False)
+            inv = len(ids) - int(np.sum(s > 1e-10))
+            assert inv == expect, (n, expect, inv)
+
+
 def test_sy_central_control_keeps_exactly_the_rotations(gens):
     L, A = gens
     R = 0.05

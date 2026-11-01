@@ -36,8 +36,10 @@ $l$-blocks).  This paper documents a framework observation: the
 same graph, viewed through its incidence structure, instantiates the
 combinatorial ingredients of a lattice gauge theory.  Nodes carry
 scalar matter (0-forms), edges carry a $U(1)$ connection (1-forms),
-and the Hopf quotient $S^3 \to S^2$ (collapsing the magnetic quantum
-number $m_l$ along its $2l+1$ fiber) produces the discrete base graph
+and a discrete stand-in for the Hopf quotient $S^3 \to S^2$
+(collapsing the magnetic quantum number $m_l$ along its $2l+1$
+rotation multiplet, not the fibre circle itself; grouping by the fibre's
+own chiral factor instead joins its components, Sec.~III) produces the discrete base graph
 on which gauge-neutral propagation lives.  The node Laplacian
 $L_0 = B B^{\top}$ is the matter propagator of the graph; the edge
 Laplacian $L_1 = B^{\top} B$ is the discrete Hodge--1 Laplacian, whose
@@ -368,6 +370,27 @@ point.  On the GeoVac graph, the natural discrete implementation of
 this quotient collapses each magnetic fiber $\{(n, l, m_l) :
 m_l = -l, \ldots, +l\}$ at fixed $(n, l)$ to a single sector label
 $(n, l)$.  The Hopf base is then a graph on $(n, l)$ sectors.
+This collapse groups the states of a shell by the rotation group $L$:
+each collapsed multiplet is an orbit of $L$, which keeps $l$ and moves
+$m_l$.  It is a stand-in for the Hopf quotient on the graph's own
+labels, not the quotient by the fibre circle itself, which is generated
+by $L_z + A_z$ (Sec.~\ref{sec:conclusion}) and whose natural labels mix
+different $l$ within a shell.  Every base-graph quantity in this paper,
+the sector weights $2l+1$ included, uses the rotation grouping.
+\textbf{[MEASURED, pre-registered]} The grouping matters.  Grouping
+each shell instead by the chiral factor whose torus is the fibre (the
+eigenspaces of $(L_z - A_z)/2$, weight $n$ each), with each node counted
+in each group by its exact occupation, gives a base graph that is
+connected, with one zero mode where the rotation grouping has one per
+$l$-block (three at $n_{\max} = 3$, four at $n_{\max} = 4$).  About
+three quarters of the edge weight then runs between groups, against
+under two fifths, and at $n_{\max} = 3$ its spectrum is irrational where
+the rotation spectrum below is integer.  The total edge weight, the
+group count per shell and the shell degeneracy $n^2$ (hence $F$) do not
+depend on the grouping, and the Casimir sum of the chiral factor is
+exactly half of $B$
+(\texttt{tests/test\_paper25\_hopf\_grouping.py}; record
+\texttt{docs/predictions/2026-10-31\_hopf\_grouping.md}).
 
 At $n_{\max} = 3$, the base graph has 6 sectors,
 \begin{equation}
@@ -494,7 +517,8 @@ transitions, and signed incidence matrix $B$.  Then:
 \item The edge Laplacian $L_1$ has kernel dimension
   $\beta_1(G) = N_1 - N_0 + c$; these harmonic 1-forms are the
   discrete analog of topologically nontrivial $U(1)$ connections.
-\item The Hopf quotient (collapsing $m_l$-fibers) yields a
+\item The rotation-multiplet stand-in for the Hopf quotient
+  (collapsing each $m_l$ multiplet, Sec.~III) yields a
   sub-graph $G^{S^2}$ on $(n, l)$ sectors, with Laplacian spectrum
   $\{0, 0, 0, 1, 3, 6\}$ at $n_{\max} = 3$ (Track
   $\alpha$-D~\cite{Paper2}; pinned exactly in
@@ -1105,9 +1129,12 @@ stated as its own claim---that the same graph, together with its
 signed incidence matrix $B$, carries all the combinatorial
 ingredients of a lattice gauge theory.  The node Laplacian
 $L_0 = B B^{\top}$ is the matter propagator; the edge Laplacian
-$L_1 = B^{\top} B$ is the discrete Hodge--1 Laplacian; the Hopf
-quotient collapsing $m_l$-fibers produces the $S^2$ base graph on
-which gauge-neutral propagation lives.
+$L_1 = B^{\top} B$ is the discrete Hodge--1 Laplacian; collapsing
+each $m_l$ rotation multiplet, a stand-in for the Hopf quotient,
+produces the $S^2$ base graph on which gauge-neutral propagation
+lives; its disconnected $l$-blocks and integer spectrum belong to that
+grouping, and a grouping by the fibre's chiral factor gives one
+connected base (Sec.~III).
 
 Under the Paper~2 proposed interpretation, the three components
 of the Hopf bundle acquire physical labels: $S^3$ as electron bound

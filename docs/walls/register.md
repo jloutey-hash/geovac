@@ -20,7 +20,7 @@
 | **PERIODS-TRANSCENDENCE** | CRYSTALLIZED (2026-10-16; re-scoped 2026-10-27) | 7 | For two-electron integrals over Slater densities the transcendence class is set by the **integral's graph: the density topology the kernels couple, plus the masses on the kernel lines**. A massless Coulomb kernel adds no threshold, so for Coulomb integrals the density topology alone sets the rung; a massive (geminal) kernel can move it. Never set by the basis, the number of nuclei, or a factorization; the three-centre radial core has no closed form through any factorization. A pattern across the tested instances. Home: Paper 59 `sec:f12` + `sec:beyond` + `sec:density_ring`; seam J9. |
 | NUCLEAR-CONTINUUM-RESPONSE | *singleton-ish (unworked)* | ~3 | Sum-over-states / IR-extrapolation fragile for continuum response; the error is the interaction (Minnesota), not the solver. |
 | MOLECULAR-BINDING-W1e | *forming (unworked)* | ~10 | Second-row over-binding lives at the integral-**specification** step, not correlation (DMRG=FCI); cheap engineering exhausted. |
-| SPECTRAL-WINDOW-COMPRESSION | *forming (named 2026-10-30, unworked)* | 2 walls + 1 open | Compressing functions onto a fixed spectral window P(·)P is not multiplicative, so every structure that needs the algebra to act multiplicatively fails by an **edge-crossing boundary sum**: order zero and order one on the true CH window, and gauge invariance of the compressed fluctuation (YC). Choi's multiplicative domain; Dong's gauge group of the truncated circle. See the 2026-10-30 note below. |
+| SPECTRAL-WINDOW-COMPRESSION | *forming (named 2026-10-30; mechanism exact for both walls 2026-10-31; one negative short of the floor, Dirac-seminorm candidate ruled out)* | 2 walls + 1 open | Compressing functions onto a fixed spectral window P(·)P is not multiplicative, so every structure that needs the algebra to act multiplicatively fails by an **edge-crossing boundary sum**: order zero and order one on the true CH window, and gauge invariance of the compressed fluctuation (YC). Choi's multiplicative domain; Dong's gauge group of the truncated circle. See the 2026-10-30 note below. |
 
 ### Banked kills awaiting clustering (`/aha` v5.1.2, 2026-08-25)
 
@@ -460,6 +460,44 @@ reads cited; the cluster is not worked.
   then Dong's gauge group computed for the window's own operator system (cheap, exact). Two independent
   negatives are below the promotion floor of three; a third would be the Dirac-seminorm kernel if it is shown
   to be the same boundary term.
+
+## Note 2026-10-31 (v5.21.30, PM edit under the PI's standing permission, not a `/walls` pass): two steps on SPECTRAL-WINDOW-COMPRESSION
+
+Two of the steps the 2026-10-30 note named as moving the cluster toward CRYSTALLIZED are done. Status unchanged:
+FORMING, two walls, below the promotion floor of three.
+
+- **The gauge case is now exact and guarded on S³.** On the true window the pure-gauge companion's ε² heat
+  coefficient equals the edge-crossing sum −Σ_{i∈W, j∉W} |χ_ij|² f′(λ_i)(λ_i − λ_j), f = e^{−tx²}, χ = i(b − b†),
+  to 2e-15 at all eight YC points, while [χ,[χ,D]] = 0 on interior rows (the continuum zero). The lit memo had derived
+  it and checked it on the truncated circle only. Guard `tests/test_paper32_window_gauge_breaking.py`, fire-tested 7/7.
+- **Dong's gauge group computed for the window's own operator system** (record WG,
+  `docs/predictions/2026-10-31_window_gauge_group.md`, GO). The identity component's Lie algebra is
+  u(1) ⊕ su(2)_L ⊕ su(2)_R at n_max = 1..4: a phase and the isometries; the inversion is implemented by a unitary that
+  anticommutes with D. This is a positive computation, not a third negative. It fits the mechanism statement: what
+  survives the compression is what commutes with the window (the isometries commute with D), and nothing local does.
+  Guard `tests/test_paper32_window_gauge_group.py`, fire-tested 5/5.
+- **The order-one defect is the same edge-crossing sum (added later the same day).** For functions a, b,
+  [[D_W,a_W],b_W]_il = Σ_{k∉W} [−(λ_i−λ_k) a_ik b_kl + b_ik (λ_k−λ_l) a_kl]: the continuum identity [[D,a],b] = 0
+  removes every interior term, and the weight is the bare Dirac gap across the edge. Checked entry by entry at
+  n_max = 1..4 against the direct defect and against `tests/test_true_window_real_structure.py`'s own numbers; |D| in
+  place of D breaks it. At a = b = χ it is the gauge defect with f′(λ_i) as an extra weight: one object, not two
+  analogous ones. Derived by a sub-agent (`debug/order_one_edge_crossing_memo.md`), re-derived by the PM; guard
+  `tests/test_paper32_window_order_one.py`, fire-tested 5/5.
+- **Mechanism statement, sharpened:** compression onto complete Dirac eigenspaces keeps exactly the structure that
+  commutes with D (the isometries, by WG) and breaks every product identity by one boundary sum through the window
+  edge, Σ_{k∉W} with a Dirac-gap weight. Both walls are that sum.
+- **The Dirac-seminorm candidate is NOT a negative (checked the same day; sub-agent, PM-verified).** Nothing fails
+  there: the kernel of a ↦ [D,a] on O^CH is the scalars (Paper 38 rem:dirac_degeneracy, guarded), and Papers 32
+  and 38 say the translation seminorm was chosen because its estimates close, "not because the Dirac seminorm
+  fails"; convergence in it is an open proof, not a measured failure. And it cannot carry the edge sum: it is
+  linear in a, and since P commutes with D, [D_W, a_W] = P[D,a]P exactly, with no intermediate state to drop
+  (`debug/dirac_seminorm_edge_crossing_memo.md`; exact zero at n_max = 1..3, nonzero once the window is rotated
+  off D's eigenspaces). The crossing block Q[D,a]P is a norm loss only.
+- **Mechanism statement, refined by that check:** the walls are PRODUCT identities (order one, gauge invariance),
+  each with an intermediate state that the compression drops outside W. A quantity linear in the algebra cannot
+  break this way on a spectral window.
+- **Still owed for CRYSTALLIZED:** a third independent negative, which must be another product identity that the
+  compression breaks. No candidate is named.
 
 ## Promotion candidates (PI-gated)
 

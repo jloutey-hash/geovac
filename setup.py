@@ -24,7 +24,13 @@ setup(
     packages=find_packages(exclude=['tests', 'old_research_archive', 'geometric-solver']),
     
     install_requires=[
-        'numpy>=1.20.0',
+        # 2.4.0 excluded: writing through ndarray.flat with a slice or index
+        # array leaks ~2.8 KB per call, never freed, and np.diag, np.eye,
+        # np.identity, np.diagflat and np.fill_diagonal all do that.  Measured
+        # 2026-10-31 (Python 3.14.0): 2.4.0 leaks; 2.4.1, 2.4.6 and 2.5.4 do not.
+        # A long optimizer run reached 18 GB before it was traced (CHANGELOG
+        # v5.21.25 and v5.21.29).
+        'numpy>=1.20.0,!=2.4.0',
         'scipy>=1.7.0',
         'networkx>=2.6.0',
         'numba>=0.57.0',

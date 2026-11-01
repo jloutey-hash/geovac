@@ -7,6 +7,143 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.21.30] - 2026-10-31
+
+Patch. The two items owed by the PM (PI: "Let's hit the two owed by you").
+
+### Fixed
+- **numpy 2.4.0 memory leak: production fix.** Re-measured before acting (one process per form, 20,000 calls):
+  the leak is wider than v5.21.25 recorded. Writing through `ndarray.flat` with a slice or an index array leaks
+  about 2.8 KB per call, never freed; reading `.flat`, a single-integer write, `np.diagonal` and fancy indexing do
+  not. So `np.diag` (vector to matrix, any k), `np.eye`, `np.identity`, `np.diagflat` and `np.fill_diagonal` all
+  leak (54 to 57 MB per 20,000 calls each). Bisected in isolated virtual environments: 2.4.0 leaks; 2.4.1, 2.4.6
+  and 2.5.4 do not. The fix is therefore to exclude the release, not to patch the about 130 geovac call sites:
+  `setup.py` requires `numpy>=1.20.0,!=2.4.0`, and `import geovac` raises a RuntimeWarning naming the upgrade when
+  2.4.0 is installed. Regression slice (topological baseline plus package-level consumers and the warning-sensitive
+  files): 185 passed, 18 skipped. **The local environment still has 2.4.0**: upgrading it waits for the p-function
+  run to finish, since its workers hold numpy loaded.
+- **Guard `tests/test_numpy_flat_leak.py`** (written as a separate step): the exclusion is in `setup.py`; the
+  import warning fires on 2.4.0 and is silent on 2.4.1, 2.4.6, 2.5.4; and an in-process probe, with a deliberate
+  2.8 KB-per-call leak as positive control, finds no leak in the five functions. The probe FAILS on this install
+  now, by design, and passes under 2.4.6 and 2.5.4 (and fails under 2.4.0) in the isolated environments.
+  Fire-tested 5/5 on the static parts (exclusion dropped, wrong release excluded, empty version set, inverted
+  check, wrong warning category); a sixth plant (coarse threshold) is uninformative while the probe already fails.
+
+### Added
+- **Guard for Paper 32's scope paragraph after thm:h1_yukawa_non_selection**, `tests/test_paper32_window_gauge_breaking.py`
+  (3 tests, 5 s, no debug/ import: the record's S^3 Clebsch-Gordan construction ported). Checks that
+  [chi,[chi,D]] = 0 on every interior row (why the continuum companion vanishes); that on the window the pure-gauge
+  eps^2 heat coefficient equals the edge-crossing sum -sum_{i in W, j not in W} |chi_ij|^2 f'(lambda_i)(lambda_i - lambda_j)
+  to 2e-15 at all eight scored points; and that rho_pg reproduces the scorer's stored values to 1e-6, exceeds 1 at
+  every fixed-tau point, and falls 1.2e-2, 1.9e-4, 1.4e-6 at fixed t = 0.1, n_max = 10, 12, 14. Fire-tested 7/7.
+  The matrix row moved from declared gap to LIVE; Paper 32's paragraph states the identity and names the test.
+  Not covered, declared: the Dabrowski-Dossena square factorization and the c values.
+- **WG (pre-registered, committed alone as 2e3ba9c2; GO): Dong's gauge group of the true CH window** (record
+  `docs/predictions/2026-10-31_window_gauge_group.md`, driver `debug/gauge_group_window.py`, rows
+  `debug/data/gauge_group_window.jsonl`). Research thread 1 of the PI-approved ranking. Dong (SIGMA 18 (2022) 060)
+  defines G(E) = {U unitary : U E U* = E} and finds U(1) x (U(1) x| Z_2) for the truncated circle. Here its identity
+  component's Lie algebra {X : [X, O] in O} is computed as the null space of a Gram form. Controls measured first:
+  Dong's Toeplitz system gives dim 2 at n = 2..7, also after a random unitary conjugation; seven known generators
+  (phase, left translations, right translations with spin) lie in g, so dim g >= 7. Scored: dim g = 7 at n_max = 2,
+  3, 4 (and 1, reported), null eigenvalues <= 2.7e-14 against gaps >= 0.77; so g = u(1) + su(2)_L + su(2)_R, a phase
+  and the isometries of round S^3. Reported: the inversion g -> g^{-1} is implemented by a unitary unique up to phase
+  that anticommutes with D, the analogue of Dong's reflection; the identity control gives the scalars only; the full
+  component group is not determined. Reading: on the true window the local gauge group leaves nothing beyond its
+  constants, the S^3 analogue of Dong's circle; it sharpens the YC wall and repairs nothing. Erratum appended to the
+  record: its disclosure blamed a basis-conjugation bug for an early inclusion failure; the cause was a 0/0 residual
+  for the identity, and the conjugation is harmless here (O is closed under conjugation, measured to 5e-15).
+  Paper 32's scope paragraph gains the result and a `dong2022` bibitem (it named Dong with no entry). The walls
+  register listed this computation as a crystallization step for SPECTRAL-WINDOW-COMPRESSION. **Walls register
+  changed** (PM edit under the PI's standing permission of 2026-10-31, not a `/walls` pass): a dated note records the
+  two steps done (the exact edge-crossing identity guarded on S^3; Dong's group computed), the cluster stays FORMING,
+  and the index cell now reads "two crystallization steps done 2026-10-31".
+- **Guard `tests/test_paper32_window_gauge_group.py`** (3 tests, 14 s; separate step; no debug/ import): Dong's
+  circle reproduced, real and conjugated; dim g = 7 with the seven generators inside at n_max = 1, 2, 3; the inversion
+  implemented by a unitary that anticommutes with D, with the identity control. Fire-tested 5/5 (commutant-only
+  Gram, right translation without spin, dim 8 claimed, reflection commuting with D, inversion without the index swap).
+  A sixth plant, conjugating the basis vectors, did not fire, correctly: it is not a wrong answer for these systems.
+- **HS (pre-registered, committed alone as b5ccf2ff; GO): Paper 62's result on a second molecule** (record
+  `docs/predictions/2026-10-31_hf_slater_second_molecule.md`, driver `debug/hf_slater_matched.py`, rows
+  `debug/data/hf_slater_matched.jsonl`, log `debug/data/hf_slater_hs_score.log`). Research thread 3. Hydrogen fluoride
+  at r_e = 1.7325 bohr, F 1s frozen, by Paper 62's rule unchanged (F primitives on the free atom's radial
+  average-of-configuration HF, -99.408295; H exponents water's; polarization re-optimized on HF fc-CCSD for both the
+  Slater basis and cc-pVDZ). Control measured first on neon: Slater DZP 81.4 mHa below cc-pVDZ at 14 functions, RHF share
+  0.70, crossing 0.55 of the way from aug-cc-pVDZ to cc-pVTZ. Results: Slater DZP -100.287713 against re-optimized
+  cc-pVDZ -100.228217, 59.50 mHa (HS1 held, bound 20; HS2 held, inside water 39.6 and neon 81.4); RHF share 0.695 (HS3);
+  cc-pVDZ+TZpol +32.6, aug-cc-pVDZ +24.1 above, cc-pVTZ 50.6 below (HS4); Pauli 63,535 = 63,535 on 36 qubits (HS5).
+  Reported: the Slater 1-norm 0.2% below cc-pVDZ's (water +4.7%); crossing 0.32; aug-cc-pVDZ 9.31x the terms and 2.70x
+  the 1-norm on 62 qubits against 36, nearly water's 9.15x and 2.69x (reported, not read as a law). Paper 62 gains
+  Sec. hf and Table tab:hf; abstract, limitations and conclusion updated; 13 MEASURED + 5 DERIVED `p62_hf_*` registry
+  keys; INDEX, group2 synthesis and matrix updated. Guard `tests/test_paper62_hf_second_molecule.py` (separate step; 3 tests,
+  about 3 min): the F primitives recompute to -99.408295 as a stationary minimum; cc-pVDZ (both forms) and
+  aug-cc-pVDZ recompute end to end; HS1-HS4 and the 9.31x / 2.70x ratios derived from them; the Slater DZP, TZpol and
+  cc-pVTZ read as registered. Fire-tested 6/6 (oxygen's occupation, atom energy off by 1 mHa, all-electron as
+  frozen-core, identity in the 1-norm, gap against the published cc-pVDZ, DZP literal moved above aug-cc-pVDZ).
+  Fluorine basis data from the Basis Set Exchange into `debug/lit_scan/dl_bse_fluorine/` (git-excluded, read with -I).
+- **Atlas door 24's OPEN Wilson cell decided** (research thread 4; worked by a sub-agent, PM-verified; driver and memo
+  `debug/door24_wilson_cell{.py,_memo.md}`). The finite-nucleus survivor is the rotation group L = J+ + J-, acting on
+  S^3 = SU(2) by conjugation, with fixed points; both chiral factors J+- = (L +- A)/2 (the left and right
+  multiplications) are broken: their commutants with the correction are zero, which linear algebra forces once the
+  commutant in so(4) is span L (already guarded as SY's central control). Paper 30 never names a subgroup of SO(4): it
+  states S^3 = SU(2) as manifolds and takes Paper 25's chiral torus as its maximal torus, so "its link group is a
+  chiral factor" is a reading, and that reading does not transfer to a finite nucleus. Not pre-registered: no number
+  is cited; the commutator sizes measured by the agent (0.358, 0.716) are left out of the cell. Guard: two tests added
+  to `tests/test_atlas_so4_commutant.py` (separate step), fire-tested 4/4 (SO(4)-invariant operator for the nucleus;
+  J+ taken as the survivor; L and J+ swapped in the fixed-vector count; A dropped from the chiral factor). Atlas gate
+  8/8. **Raised to the PI, not changed:** Paper 25 Sec. III builds its discrete Hopf quotient by collapsing m_l
+  multiplets at fixed (n, l), which are orbits of the rotation group L, while its conclusion (since v5.21.26) names
+  the fibre generator L_z + A_z, a chiral torus. Different subgroups inside one paper; the (n, l) base graph feeds
+  Paper 2's B, so the fix is a PI call. **PI chose the wording fix** (no recomputation): Paper 25 Sec. III now says
+  the collapse groups a shell by rotation multiplets, a stand-in for the Hopf quotient rather than the quotient by
+  the fibre circle (whose labels mix l), and that every base-graph quantity, the 2l+1 weights included, uses the
+  rotation grouping; the abstract, the conclusion and the group5 synthesis say the same. No number changes; B = 42 is
+  defined by l and is untouched. Paper 24's S^5 analogue already says "SO(3)-adapted" and was left as is. The PI
+  flagged similarity studies here (the surviving labels pick the geometry, as in chemistry); recorded for later,
+  not started.
+- **HG (pre-registered, committed alone as 3199c307; GO): Paper 25's base graph under two groupings** (record
+  `docs/predictions/2026-10-31_hopf_grouping.md`, driver `debug/hopf_grouping_controls.py`, log
+  `debug/data/hopf_grouping_score.log`). The PI's similarity question ("two valid grouping schemes, shouldn't we
+  try both?"); draft by a sub-agent, the three choices taken on the PM's recommendation (occupation edge rule,
+  Tr J+^2 as the Hopf B, n_max = 3 and 4). Forced checks verified at both cutoffs: Hopf B = B/2 (21 vs 42; 81 vs
+  162); F, total edge weight and group count are grouping-blind. Controls: the rotation grouping reproduces Paper
+  25's {0,0,0,1,3,6}; at n_max = 4 the ROTATION spectrum is already irrational (2 +- sqrt 2), so the integrality
+  prediction was gated at n_max = 3 only. Scored: the Hopf base is connected (one zero mode against three and
+  four), inter-group weight 29/3 of 13 and 2009/75 of 34 (rotation 5 and 14), spectrum irrational at n_max = 3
+  (irreducible quadratics, discriminants 40 and 265), lambda_max smaller (35/6 vs 6; 8.907 vs 10). HG1-HG3 held.
+  Paper 25 Sec. III states it (plus a clause in the abstract and conclusion); group5 synthesis matches; one more
+  stale locus fixed (the results list still called the collapse "the Hopf quotient"). Guard
+  `tests/test_paper25_hopf_grouping.py` (3 tests, 3 s; separate step), fire-tested 5/5. No Paper 2 number changes.
+- **Order-one defect on the true window = an exact edge-crossing sum** (research thread 7; derived and checked by a
+  sub-agent, `debug/order_one_edge_crossing{.py,_memo.md}`, re-derived by the PM). For functions a, b,
+  [[D_W,a_W],b_W]_il = sum over k outside W of [-(lambda_i - lambda_k) a_ik b_kl + b_ik (lambda_k - lambda_l) a_kl],
+  because the continuum identity [[D,a],b] = 0 removes every interior term. Checked entry by entry at n_max = 1..4
+  (worst 2.3e-14 relative) and against `tests/test_true_window_real_structure.py`'s own defect numbers; |D| for D
+  breaks it. At a = b = chi it is the gauge defect with f'(lambda_i) as an extra weight: one object. Paper 32's scope
+  paragraph states it. Guard `tests/test_paper32_window_order_one.py` (3 tests, 2 s; separate step), fire-tested 5/5.
+  **Walls register changed again:** the SPECTRAL-WINDOW-COMPRESSION note gains this step and a sharpened mechanism
+  statement; the index cell now reads "mechanism exact for both walls; one negative short of the floor".
+- **The Dirac-seminorm candidate for the cluster's third wall is not a negative** (sub-agent, PM-verified;
+  `debug/dirac_seminorm_edge_crossing{.py,_memo.md}`). No quantity fails: the kernel is the scalars, and the papers
+  say the translation seminorm was chosen because its estimates close, not because the Dirac one fails. It also
+  cannot carry the edge sum, since it is linear in the algebra and P commutes with D, so [D_W,a_W] = P[D,a]P exactly
+  (zero defect at n_max = 1..3; a control window rotated off D's eigenspaces gives 0.18-0.22). **Walls register
+  changed:** the note records the check, refines the mechanism (the walls are product identities with a dropped
+  intermediate state), and says a third negative must be another product identity; the index cell notes the
+  candidate ruled out.
+- **Paper 62 was in no gate scope (found while running the full C21).** It sat in `group2_quantum_chemistry/` but
+  was not listed in `debug/qa/qa_scopes.py`, so every `--gate group2` run skipped it, including the "C21 group2
+  PASS" reported for v5.21.29: that PASS examined Paper 62 only through the registry's own-scope list, not the
+  retired-value scan. The scope self-test's orphan check did detect it, but nothing runs that self-test
+  automatically. Fixed as for Papers 58-61: Paper 62 added to `group2`, plus a `paper_62` scope with the group2
+  synthesis and aliases. Rerun on the true scopes: C5, C11, C13, C14, C15, C16, C17, C19, C20, C21 and compiles
+  all PASS on `paper_62` and `group2`. The one finding it surfaced was a false positive: Paper 62's oxygen orbital
+  exponent 1.694 matched the retired 1-norm exponent of the same digits; `RETIRED[1.694]` gains the forbidden
+  context `primitive|Hartree|bohr` (discrimination proved: fires on the retired wording, silent on Paper 62).
+  Still open: the scope self-test also FAILs on six archived papers (43, 46-49, 52) still declared in `group1`,
+  and no hook or test runs it, so an orphan paper can recur unnoticed.
+- **Erratum appended to record YC:** the disposition table's rho_pg at tau = 4, n_max = 3 reads 14.94; the scorer
+  stored 14.934717 (14.93). Display rounding only; no verdict or margin moves.
+
 ## [v5.21.29] - 2026-10-31
 
 PI-directed ("Let's make that paper home for the water basis comparisons"; new paper chosen over folding: "I like

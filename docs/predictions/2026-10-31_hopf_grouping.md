@@ -114,3 +114,41 @@ them. No Paper 2 number changes, and the K combination rule stays an Observation
 
 **Caps:** two cutoffs; one graph; one radial family for A; the occupation rule is one reasonable way to squash
 blended states, not a theorem that it is the Hopf quotient.
+
+## Disposition (2026-10-31)
+
+Run after the record was committed (3199c307): `HG_NMAX=3|4 python debug/hopf_grouping_controls.py score`, log
+`debug/data/hopf_grouping_score.log`. Irreducibility over Q checked separately with sympy.
+
+| | n_max = 3 | n_max = 4 |
+|:--|:--|:--|
+| Groups (weights) | 6 (1, 2, 2, 3, 3, 3) | 10 (+ 4, 4, 4, 4) |
+| Zero modes, Hopf / rotation | 1 / 3 | 1 / 4 |
+| Inter-group weight, Hopf / total | 29/3 of 13 (0.744) | 2009/75 of 34 (0.788) |
+| Inter-group weight, rotation | 5 of 13 | 14 of 34 |
+| Characteristic polynomial (Hopf) | x (6x − 35)(6x² − 52x + 111)(6x² − 29x + 24) / 216 | x (600x² − 10154x + 42841)(24x³ − 242x² + 609x − 360)(6000x⁴ − ...) / 86400000 |
+| Irreducible factors of degree ≥ 2 | two quadratics, discriminants 40 and 265 | quadratic, cubic, quartic (all irreducible) |
+| λ_max, Hopf / rotation | 35/6 = 5.833 / 6 | 8.907 / 10 |
+
+- **HG0: PASS** (as registered).
+- **HG1: HELD** at both. (a) one zero mode; (b) the factor degrees match x · p₃ · p₂ and x · p₅ · p₄ (the assignment of
+  factors to the mirror sectors was not separately checked; the degrees allow only that split with the x in the even
+  part); (c) inter-group weight 9.67 > 5 and 26.79 > 14.
+- **HG2: HELD** at both: 29/3 > 13/2 and 2009/75 > 17. About three quarters of the graph's edge weight runs between Hopf
+  groups, against under two fifths between rotation sectors.
+- **HG3: HELD** at n_max = 3: both quadratic factors are irreducible over Q (discriminants 40, 265), so the Hopf base
+  spectrum is irrational where the rotation spectrum {0,0,0,1,3,6} is integer. Reported at n_max = 4: every factor
+  of degree ≥ 2 is irreducible; the rotation spectrum there is already irrational (2 ± √2).
+- **HG4 (reported):** λ_max smaller under Hopf at both cutoffs (35/6 against 6; 8.907 against 10).
+- **HG5 (reported):** the alternative (Frobenius) rule also gives one zero mode at both cutoffs; its spectrum shares
+  some eigenvalues with the primary's (1.060, 3.773, 5.833 at n_max = 3; 0.860, 2.656, 6.567 at n_max = 4) and
+  differs in the rest, under its stated sign convention.
+- **Gate: GO.**
+
+Reading (as stated in advance, now held): on the same labels, Paper 25's base-graph quantities split three ways.
+Grouping-blind: F, the total edge weight, the group count per shell. Grouping-dependent and forced: the weight
+profile, the Casimir sum (Hopf B = 21 = B/2 at n ≤ 3), and the zero modes (one, against one per l-block).
+Grouping-dependent and measured: the fibre carries a quarter of the edge weight under Hopf against three fifths
+under rotation, and at n_max = 3 the Hopf spectrum is irrational where rotation's is integer. Paper 25's three zero
+modes are its rotation grouping's l-blocks; the Hopf grouping joins them. No Paper 2 number changes; the K
+combination rule stays an Observation.
