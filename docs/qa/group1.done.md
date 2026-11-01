@@ -31,6 +31,12 @@
 **32, 38** taken as already-certified (`/qa trunk` PASS); in scope only where a
 group1 paper restates them (C7).
 
+> **Scope note (appended 2026-11-01, mechanical; the criteria are not changed).** Papers 43, 46, 47, 48, 49 and
+> 52 are archived (`docs/retired_papers.md`; `papers/archive/`) and are out of the file scope
+> (`debug/qa/qa_scopes.py`). Their surviving content is reviewed where it now lives: Paper 43's in Paper 42 Sec. 11,
+> Paper 52's as a remark in Paper 50. C14's bullets for 46-49 apply to any live paper that still cites their
+> claims; for those papers C14 reduces to "no archived claim cited as live".
+
 **Deterministic `--gate`:** `group1`.
 
 ## Branch deltas (the only non-inherited content)

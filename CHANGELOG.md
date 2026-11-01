@@ -7,6 +7,175 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.22.0] - 2026-11-01
+
+**Minor bump (PI-approved, "yes to the version number increase"):** a deterministic QA criterion was rescoped (C10 now fails on duplicate `\bibitem` keys and `\label`s), which CLAUDE.md Sec. 9 makes a minor bump. The work below began under the provisional heading v5.21.31 (2026-10-31), which was never tagged.
+
+### Added
+- **Pre-/qa owed-items round (PI-directed, 2026-11-01: "I'm going to be doing some qa sessions soon, so I want to
+  make sure we're in a good state"; then "We can do all your recommendations. Small and large.").** An inventory
+  sub-agent swept the claim matrix, debt files, atlas Owed lines and CHANGELOG since v5.20.0; the PM verified its top
+  items before acting. Done:
+  - **Guards (each a separate step, fire-tested):**
+    - `tests/test_paper59_offslice_y_operator.py` (off-slice Y order-19 operator; stored exact operator and grid,
+      leading coefficient factored in-test, apparentness and the eight genuine cuts by an independent algebraic
+      route, M13 right-divides L; 17 tests, 2 s; 11/11 plants; builder `debug/build_offslice_y_guard_data_2026_11_01.py`).
+    - `tests/test_paper59_gaussian_fit_geminal.py` (GF; STO-3G/6G reproduced, least-squares optimality at 40 digits,
+      the paper's error figures and root-exponential rate, E_1 and E_6 recomputed; 6 fast + 1 slow; 11/11 plants).
+      Writing it found two loose descriptive numbers in the GF record (not in the paper); erratum appended to
+      `docs/predictions/2026-10-25_gaussian_fit_geminal.md`.
+    - `tests/test_paper62_dzp_headline.py` (Slater DZP and cc-pVDZ water recomputed end to end: the 40.7 / 28.8 mHa
+      headline and the 0.07 mHa 12 -> 16 Gaussian convergence; exponents copied to
+      `tests/data/paper62_water_dzp_2026_11_01.json`). Before it every Paper 62 guard READ the DZP energy.
+    - `tests/test_paper62_native_kits.py` (bare-Z hydrogenic kit's water fc-CCSD(T) recomputed, the abstract's 196
+      mHa; slow, 47 min at 4 threads; passed). Fire-tested: the headline guard 3/3 (exponent slip, the 39.5 mHa
+      re-optimized gap, 8 Gaussians on primitives), the kit guard 1/1 (Z_eff = 6 kit).
+    - `tests/test_he_physical_hamiltonian.py::test_paper27_diagonality_is_basis_free_as_eigenspace_mass` (4/4 plants).
+  - **Paper 27:** the "diagonal fraction in the H1 eigenbasis" depended on the basis chosen inside H1's degenerate
+    eigenspaces (closes the v5.20.4 owed item). Now stated basis-free as V_ee's mass inside the eigenspaces: 0.953
+    (n_max 3), 0.937 (n_max 4); the configuration-basis 0.945 / 0.926 kept as one choice, which a rotation moves in the
+    third digit.
+  - **Paper 59 rescoped to the radial core (PI decision):** subtitle now "A Genus-One Radial Core at the Third Center
+    in Momentum-Space Slater Theory"; abstract, introduction, sec:obstruction, sec:scope and conclusion say the
+    radial core is genus one and that the class of the integrated value is OPEN (the two-centre exchange class
+    integrates the same fibre family to genus zero; each Legendre channel of (XY|XZ) is in the two-centre class).
+    Title citers (Papers 32, 56, 57, 61, three syntheses), Papers 18, 34, 58, 61, the atlas, seam, claims register,
+    INDEX and topic lookup follow. The deleted sentence called an earlier dilogarithm identification "structurally
+    doomed", which was never shown. The decisive test (does the bond-angle operator carry an elliptic factor?) is
+    recorded as open, not commissioned.
+  - **Half-integer Hurwitz values placed in M3 (PI decision):** Paper 18 Sec. III.7 states the tie-break for a value
+    D(m) reached from two Mellin slots: M2 if it lies in the pure-Tate ring, otherwise M3. So zeta(s,3/2)'s odd-zeta
+    values are M3's and its pi-power values M2's. Papers 32, 34, 50, 55, three syntheses and one matrix row follow;
+    C16 entry `half-integer-hurwitz-odd-zeta-as-m2` added (fires on the 10 old phrasings, silent on the new; 8
+    dependents stamped). Side effects, reported to the PI: the even-argument values of the unrestricted Dirac series
+    move M3 -> M2 (consistent: the k = 1 slot at integer s reaches odd arguments only), and the rule is not neutral
+    on rationals.
+    PI then delegated both ("You can decide on all the remaining"): the even-argument move stands, and Paper 18
+    now says the rule applies only to a value reached from two slots and is not neutral on rationals.
+  - **Paper 61 narrowed to match (PI-delegated):** T2, the integrated value, was never identified as an
+    Eisenstein/CM period (every relation search is negative; its closed form is OPEN), so six sentences calling the
+    integrated value one were inferring the class. Abstract, intro, the genus placement, the period-algebra opening,
+    the cusp-form paragraph and the closing paragraph now place the RADIAL CORE there; the integrated value keeps
+    only what was shown for it (not a critical L-value of a Gamma(2) cusp form, by the weight count; the negative
+    searches). The elliptic-dilogarithm negative is now said of the radial core only (Paper 59's mechanism
+    argument). The X_0(2) fundamental-domain and Lambert-series statements stay (they describe the representation).
+    group3 synthesis sentence follows.
+  - **Summary surfaces:** canonical-orbital qualifier added to the group2 synthesis and INDEX row 62; atlas doors 21
+    and 27 Owed lines corrected; claim-matrix rows for Paper 32 (Dong's full group; order-one norms), Paper 25 (HG
+    second route), Paper 62 (Stark-Zimmerman) and Paper 27.
+  - **Paper 62 definition of done** `docs/qa/paper_62.done.md` (PI-delegated): branch criterion "equal size is not
+    equal accuracy, canonical orbitals are not all orbitals"; 11 headline claims with RECOMPUTED / READ backing;
+    STATUS NOT CERTIFIED, so the staleness tool lists it as owed.
+  - **QA instrument (a C-criterion rescoped, so the next checkpoint is a MINOR bump under Sec. 9):** C10
+    (`debug/qa/check_compiles.py`) now FAILs on a duplicate `\bibitem` key or `\label` in the source and on
+    "multiply defined" in the log, with `--selftest` (fires on the Paper 59 shape, silent on its fix);
+    `docs/qa/criteria.md` C10 widened. Corpus scan found one more: Paper 36's unreferenced duplicate
+    `eq:uehling_kernel`, the first renamed `eq:ls1_constant_difference`. The group1 scope drops archived Papers 43,
+    46-49, 52 (`debug/qa/qa_scopes.py`, scope note in `docs/qa/group1.done.md`); the scope selftest passes.
+- **Second prior-art scan of the day (PI-directed: "send out some more lit searches to look for prior art, or
+  expansions on what we're doing").** Four parallel sub-agent searches, memos
+  `debug/lit_scan/prior_art_{atom_correlating_exponents,gaussian_fit_convergence,bond_angle_series,dirac_zeta_periods}_memo.md`;
+  downloads in git-excluded `debug/lit_scan/dl_prior_{atom_correlating,gauss_conv,angular_series,dirac_zeta}/`. The PM
+  checked every credited citation (OSTI, arXiv, PubMed Central or the downloaded text) before editing. Credits applied:
+  - **Paper 62:** sec:limits now says setting the 3d by an atomic correlated criterion is Dunning's cc rule (verbatim
+    from the 1989 abstract) and points to the SL-3d record; the ema2003 clause now states their rule exactly (single d
+    for B-Ne, all exponents on the atom's HF + fc-CISD, H on H2). SL-3d record Addendum 1 carries the same credit.
+  - **Paper 59:** the GF root-exponential law credited to Kutzelnigg 1994 and Braess 1995 (an upper bound in a weighted
+    norm; our constant b is our measurement); STO-3G/6G to Hehre-Stewart-Pople 1969; the bond-angle Legendre series with
+    closed-form terms to Silverstone, PNAS 58, 34 (1967), for the related (1s_a1s_a|1s_b1s_c); the derivative trick for
+    p functions to Weniger, arXiv:math-ph/0505018. Joy-Handler 1965 was read via OSTI and has no bearing.
+  - **Paper 55:** the closed form of the Camporesi-Higuchi D(s) credited to Ball-Marcolli (CQG 33, 115018, 2016) and
+    Eckstein-Iochum (SpringerBriefs 27, 2018, Example 3.15).
+  - **Paper 28:** two-term exactness of the S^3 heat trace credited to Chamseddine-Connes, "The uncanny precision of
+    the spectral action" (CMP 293, 867, 2010), stated there for S^3 x S^1.
+  - **Paper 18:** the tie-break's first reason cites Brown's ICM 2014 survey (zeta^u(2n) = 0).
+  - No source states the Paper 18 tie-break, the l^-10 / l^-5 laws, a bond-angle ODE, the SL-3d transfer measurement,
+    or settles the integrated three-centre class. Build-on leads in the memos: Silverstone-Kay III as an independent
+    check of the 31-constant coefficients; Kawai's holonomic Landau variety; sinc quadrature for geminal fits; Clementi-
+    Roetti / Bunge STO tables; lens-space Dirac zeta values as a test of M3's level bound.
+- **SL-3d pre-registered (8790010b, committed alone) and run:** the ladder with every rung's O 3d set by the free O
+  atom's fc-CCSD(T) (UHF M_S = 1) instead of tied to the 3p; atom-set 3d 2.80 / 2.80 / 2.79 / 2.74 (R2..R5). Controls
+  R3dB (ratio 0.963) and R2d (1.052, a new water run, excluded from scoring). Sub-agent Phase 1; drivers
+  `debug/scale_ladder_3d_{atom,water,score}.py`. **Scored GO:** water/atom ratio 1.039, 1.052, 0.905, 0.848 on R3d, R4d, R5d, R5Hd (band 0.844-1.156; R5Hd at the edge); R3 stays 0.78 mHa above R2 (predicted about +1.2); reported SL3d-H missed on R5d/R5Hd (water RHF part positive there), SL3d-C and SL3d-R held. Best atom-set rung R5Hd -76.260011, 19.0 mHa below cc-pVDZ (was 7.0) and 21.7 above the water-tuned Slater DZP (was 34). Paper 62 sec:r3 gains the paragraph; abstract cap, sec:ladder 'price', sec:limits item and conclusion updated; group2 synthesis and INDEX row follow. Record Addendum 1 (Dunning prior art) appended after the registration commit and before scoring; disposition appended. Guard OWED (separate step; one rung recompute is about 20 min).
+- **Hydrogen p functions in the bond-angle series: PP scored GO** (record
+  `docs/predictions/2026-10-29_hydrogen_p_functions.md`, pre-registered 2026-10-29; scorer `debug/pp_score.py`, 109
+  exact points). Controls passed (step check 9.2e-58; 1s at -3.99965 and -8.00004). All five decay powers held within
+  0.002 of prediction (bound 0.02): a hydrogen p function keeps -4 at unequal lengths (PC -5) and moves -8 to -10 at
+  equal lengths. PP2 held. Paper 59 sec:scope states it (PI-directed), after the zero-contact passage; claim-matrix
+  row GUARDED by `tests/test_paper59_hydrogen_p_functions.py` (written as a separate step: stored exact data
+  `tests/data/paper59_pp_2026_11_01.json` from `debug/build_pp_guard_data_2026_11_01.py`; independent float quadrature
+  reproduces 1s, PA, PB and PC's parent at l <= 6 to 1e-7; PC derivative rule; the registered decay fit; fire-tested 7/7).
+- **Paper 59 duplicate bibitem fixed:** two different Matuzas preprints shared the key `matuzas2026`, so the
+  water passage's three citations of the single-centre preprint (doi:10.5281/zenodo.23448184) resolved to the
+  Calabi-Yau one. The single-centre item is now `matuzas2026sc`; the Calabi-Yau citation at the ring passage is
+  unchanged. Found by the pre-/qa owed-items inventory; `check_compiles.py` does not flag duplicate keys.
+- **numpy upgraded locally 2.4.0 -> 2.4.6** after the long run finished; `tests/test_numpy_flat_leak.py` now passes
+  with the topology proofs and the new guards (33 passed).
+- **Prior-art scan of everything since v5.21.29** (PI-directed; four parallel sub-agent searches, memos
+  `debug/lit_scan/prior_art_{truncation_symmetries,sto_gto_qubit,hydrogen_groupings_hopf,symmetry_picks_geometry}_memo.md`;
+  downloads in git-excluded `debug/lit_scan/dl_prior_*`; every credited citation checked by the PM against its arXiv
+  page or the downloaded text). Credits and scope fixes applied:
+  - **Paper 62:** Lesiuk et al., PRA 91, 012510 (2015) credited for the qualitative equal-size result ("We have not
+    found a situation when STOs perform worse than GTOs basis sets of the same size", verbatim) and for an earlier
+    correlation-consistent Slater design; Nemec-Towler-Needs, JCP 132, 034111 (2010) as the counterpoint (stock DFT
+    Slater sets need about 45% more functions than 6-311G at HF); the no-prior-art sentence narrowed to quantitative
+    matched-size/matched-accuracy tables on a polyatomic with the SCF/correlation split; the shape-blind Pauli count
+    scoped to canonical orbitals (Koridon et al., PRR 3, 033127 (2021): localized bases change it). Abstract scoped.
+  - **Paper 32:** Glaser-Stern, JMP 61, 033507 (2020) credited: order one fails at the spectral cut of a spinor
+    Dirac window on S^2 as "a boundary defect of asymptotically constant norm" with unbounded trace norm (checked in
+    the arXiv HTML). Our exact edge-crossing closed form was not found in the literature. Paper 32's "grow toward the
+    sup-norm scale" wording already matches their bounded operator norm; no change there.
+  - **Paper 25:** the HG Hopf groups are the parabolic (Stark) states regrouped, and the occupations are squared
+    Park-Tarter coefficients (Park, Z. Phys. 159, 155 (1960); Tarter, JMP 11, 3192 (1970); checked via Mardoyan et
+    al., arXiv:2310.17336); the half-Casimir result labelled elementary; Manton, CMP 113, 341 (1987) credited as the
+    discrete Hopf bundle precedent; "a second nucleus commutes with L_z alone" scoped to the six so(4) generators,
+    with the two-centre separation constant (Coulson-Joseph, IJQC 1, 337 (1967)) named as the extra quadratic
+    conserved quantity.
+  - **Record SY:** addendum on the scope of "only L_z" (Erikson-Hill, Phys. Rev. 75, 29 (1949); Coulson-Joseph).
+    CLAUDE.md §2 one-liner scoped to "only L_z of so(4)".
+  - **PI's principle** ("the quantum numbers pick the geometry"): an established programme in sharper form (Miller
+    school: separable coordinates = commuting second-order symmetry operators; Boyer-Kalnins-Miller, Nagoya Math. J.
+    60 (1976) 35). Recorded in the project memory note, not in a paper.
+- **Build-on round (five parallel sub-agents, each PM-verified by rerunning its driver or reading its source):**
+  - **HG second route (AGREE):** Mardoyan et al. eq. (2.2.29) (Tarter 3F2 form), computed in exact fractions with no
+    Clebsch-Gordan routine, gives every HG occupation exactly, n_max = 1..4 (1, 7, 26, 70 entries, difference 0);
+    label map mu = (m - n1 + n2)/2. Swapping n1 and n2 is invisible by the CG^2 symmetry at equal spins (the record's
+    F3). Paper 25 cites it; guard test added to `tests/test_paper25_hopf_grouping.py`.
+  - **Manton flux test: NOT-APPLICABLE**, not registered (`debug/manton_flux_prereg_draft.md`). The label graph is
+    not a principal bundle (nodes are labels of harmonics, the fibre U(1) acts on states; no fixed-point-free
+    shell-preserving automorphism), and with its squares filled the label complex has H1 = H2 = 0, so every U(1)
+    bundle over it is trivial. Controls: Manton's 24-cell reproduced (no flat connection, Chern sum 1 for all 4096
+    connections); a trivial bundle shows his flux rule gives connection-dependent integers there. Paper 25's
+    unbacked "the beta_1 = 2 cycles carry nontrivial holonomy" narrowed to "can carry", with the triviality stated.
+  - **Edge leak in Toeplitz form (PARTIAL: Widom's originals paywalled; identity verified in Boettcher,
+    arXiv:math/0012200, p. 2):** [[D_W,a_W],b_W] = H~(b)H([D,a]) - H~([D,a])H(b), agreement <= 1e-15 at n_max = 1..4.
+    Measured (not pre-registered) at n_max = 1..12: largest operator norm over the 16 spin-1/2 pairs exactly
+    1 - n/(n+1)^2 (bounded, tending to 1), largest trace norm exactly n(n+2): Glaser-Stern's S^2 pattern on S^3.
+    Paper 32 states it; guard test added to `tests/test_paper32_window_order_one.py`.
+  - **Dong's group is the full group (FULL-GROUP at n_max = 1, 2, 3; measured + reduction, not pre-registered):** the
+    commutant of O is the scalars, so O generates M_N, simple, hence its own C*-envelope (Connes-van Suijlekom 2021
+    Def. 2.24; Hamana), and every unital complete order automorphism is Ad U (Skolem-Noether). Components counted:
+    G = (U(1).Spin(4)) x| Z2, Aut = O(4), the S^3 analogue of Dong's O(2). Beyond n_max = 3 not shown; a general-n
+    claim would need a registration. Paper 32 states it; guard test added to `tests/test_paper32_window_gauge_group.py`.
+  - **Stark-Zimmerman comparison: RUN (PI-directed), a reported comparison, not a gated prediction**
+    (`debug/stark_zimmerman_scoping_memo.md`, driver `debug/stark_zimmerman_hf_tz.py`, data
+    `debug/data/stark_zimmerman_hf_tz.jsonl`). Our RHF + frozen-core CCSD(T) in their 34-function HF TZ Slater set
+    (SI Table S1, nodeless, uncontracted) at their geometry (R = 0.9170 A). Evaluator control first: HF Slater DZP at
+    8 Gaussians per function gives E_corr -0.226999 against -0.227010 at 12 (the total moves 3.6 mHa, all in the mean
+    field). Their TZ set: E_corr -0.256068 (8 Gaussians) and -0.256103 (12); theirs, heat-bath CI, -0.2558. Ours is
+    0.3 mHa deeper. Neither side is full CI: their HCI is not extrapolated (eps1 = 1e-4), which usually leaves it
+    short, and CCSD(T) differs from FCI by an unmeasured amount here, so the 0.3 mHa is agreement, not a bound. It
+    checks the correlation part only (they report no SCF energies). Wall: 4.5 min, 27 min, 2.5 h at 4 threads.
+    Paper 62 (PI-directed) states it as a fifth validation item in Sec. solver (bibitem stark2025) and narrows the
+    scope bullet ("no larger-basis external cross-check") to "correlation only, one molecule". No guard test: the
+    run is 2.5 h; the data file is the record.
+  - The four new guard tests fire-tested 6/6.
+- Build-on items found: Mardoyan et al.'s explicit spherical/parabolic/spheroidal interbasis coefficients (an
+  independent second route for HG); Manton's flux quantization on a discrete Hopf base (a test for Paper 25's base
+  graph); Hankel/Widom form of the edge-crossing defect (Toeplitz estimates); Hamana/Verhoeven envelope uniqueness
+  (WG's group is then the window's full automorphism group up to phases; not yet checked); Stark-Zimmerman
+  arXiv:2510.15204 heat-bath-CI correlation energies for H2O and HF in Slater bases (an independent data point).
+
 ## [v5.21.30] - 2026-10-31
 
 Patch. The two items owed by the PM (PI: "Let's hit the two owed by you").

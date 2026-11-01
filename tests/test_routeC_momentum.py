@@ -130,9 +130,9 @@ def test_three_center_kernel_is_elliptic():
 
     Decisive witness: the D=0 period is a COMPLETE ELLIPTIC INTEGRAL K when the two
     Fock scales differ, and pi/(2 sqrt c) when they coincide.  This is the exact
-    transcendence obstruction of the two-body three-centre ERI -- the third centre
-    raises the transcendence from the two-centre engine's genus-0 {E1, ln, gamma}
-    to genus-1 (elliptic).  m(s,t)=1-c_min/c_max degenerates only on the measure-zero
+    transcendence obstruction of the two-body three-centre ERI's radial core -- the
+    third centre raises the radial core's transcendence from the two-centre engine's
+    genus-0 {E1, ln, gamma} to genus-1 (elliptic); the integrated value's class is open.  m(s,t)=1-c_min/c_max degenerates only on the measure-zero
     locus c1=c2 (equal Fock scales = a shared hypersphere).
 
     High-precision (mpmath): the D=0 period is the complete elliptic integral K

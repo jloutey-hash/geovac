@@ -23,12 +23,13 @@ Modular Structure and Cosmic-Galois Placement}
 \date{August 16, 2026}
 
 \begin{abstract}
-The companion Paper~59~\cite{loutey_paper59} establishes that the genuine
+The companion Paper~59~\cite{loutey_paper59} establishes that the radial core of the genuine
 three-center electron-repulsion integral over $1s$ Slater orbitals, read in
 momentum space under Fock's conformal projection, is a two-scale elliptic
-Bessel moment: its radial content is a period of the rank-four irregular
+Bessel moment:\ a period of the rank-four irregular
 Picard--Fuchs connection of the genus-one curve
-$y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$, and its finite closed form is open.  This
+$y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$;\ its finite closed form, and whether the
+integrated value leaves the two-center class, are open.  This
 paper takes that object as its starting point and develops its number-theoretic
 structure.  \textbf{[MEASURED; classical]} The elliptic family is the Legendre
 family over the modular curve $X(2)=\Gamma(2)\backslash\mathfrak{H}^{\ast}$,
@@ -40,10 +41,10 @@ $\Gamma$-values, so a molecular integral carries classical $\Gamma$-value
 periods across distinct fundamental discriminants.  \textbf{[OBSERVATION]} The
 integrated observable lives on $X_{0}(2)$, is a $\Gamma(2)$ resurgent Lambert
 series (the pure multiple modular value being its regular $D\to0$ shadow), and
-carries conductor-$4$ ($\mathbb{Z}[i]$, $G=\beta(2)$) arithmetic through the
-fibre theta series $K=\tfrac{\pi}{2}\theta_{3}^{2}$. That modular and
-complex-multiplication structure---not the integer-relation search---places it
-inside the cosmic-Galois / mixed-elliptic-motive layer the program's Tannakian
+its fibre carries conductor-$4$ ($\mathbb{Z}[i]$, $G=\beta(2)$) arithmetic through the
+theta series $K=\tfrac{\pi}{2}\theta_{3}^{2}$. That modular and
+complex-multiplication structure---not the integer-relation search---places the
+radial core inside the cosmic-Galois / mixed-elliptic-motive layer the program's Tannakian
 substrate reaches for;\ the guarded, decoy-calibrated searches are separately
 and decisively negative for a clean low-height closed form through weight
 three.
@@ -56,9 +57,10 @@ $B=\pi\,\Omega$, with $\Omega$ the canonical integer symplectic intersection
 form, so the \emph{monodromy} group lies in $\mathrm{Sp}_{4}(\mathbb{Z})$
 (the differential Galois group, being a positive-dimensional algebraic
 group here, lies in $\mathrm{Sp}_{4}(\mathbb{C})$).
-The object is an Eisenstein / complex-multiplication Bessel-moment period,
-neither a cusp-form $L$-value nor an elliptic dilogarithm; the explicit finite
-reduction remains the open frontier.
+The radial core is an Eisenstein / complex-multiplication Bessel-moment period,
+past the reach of the elliptic-dilogarithm mechanism; the integrated value is not
+a critical $L$-value of a $\Gamma(2)$ cusp form, and its class and explicit finite
+reduction remain the open frontier.
 \end{abstract}
 
 \maketitle
@@ -67,13 +69,13 @@ reduction remains the open frontier.
 \section{Introduction: the object, and the tower above it}
 %% ========================================================================
 
-The genuine three-center electron-repulsion integral $(XY|XZ)$ over $1s$ Slater
+The radial core of the genuine three-center electron-repulsion integral $(XY|XZ)$ over $1s$ Slater
 orbitals is, read in momentum space under Fock's conformal projection, a
 two-scale elliptic Bessel moment: a period of the rank-four irregular
 Picard--Fuchs connection of the genus-one curve
 $y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$, whose two scales are the
 Feynman/K\"all\'en--Lehmann parameters $c_{1}=s(1-s)$ and $c_{2}=t(1-t)$.  The
-construction of that object---the momentum reduction, the transcendence jump
+construction of that object---the momentum reduction, the radial core's transcendence jump
 from the genus-zero two-center class, the elliptic-dilogarithm obstruction, and
 the differential-Galois irreducibility of the connection---together with its
 chemistry context and full numerical validation is the companion
@@ -84,8 +86,8 @@ Here we develop the number-theoretic tower that sits above it.
 Section~\ref{sec:modular} places the elliptic family as the Legendre family over
 $X(2)$, exhibits its rational modulus map and its in-domain
 complex-multiplication fibres, and reads the integrated observable as a
-$\Gamma(2)$ resurgent Lambert series carrying conductor-$4$ arithmetic---its
-cosmic-Galois placement.  Section~\ref{sec:bessel_algebra} makes that placement
+$\Gamma(2)$ resurgent Lambert series over a family carrying conductor-$4$
+arithmetic---the cosmic-Galois placement of the radial core.  Section~\ref{sec:bessel_algebra} makes that placement
 quantitative through the period algebra of the master family: the Wronskian
 $W_{0}D^{-2}$, the quadratic period relations, and the intersection form
 $B=\pi\,\Omega$ that forces the \emph{monodromy} group into
@@ -107,7 +109,7 @@ places its own.  Paper~18's \emph{embedding} tier carries a \emph{genus} grading
 object sits one rung above the \emph{two-centre} class:\ the two-center
 constants are the genus-zero set $\{E_{1},\ln,\gamma_{E}\}$, while the
 three-center fibre --- which this paper shares with its companion, whose own
-title places it at genus one --- leaves that tower for the elliptic one.  Concretely:\ $\pi$ enters at the measure
+title places its radial core at genus one --- leaves that tower for the elliptic one.  Concretely:\ $\pi$ enters at the measure
 tier of Paper~34 and appears here as the overall factor of the intersection form
 $B=\pi\Omega$ and in $K=\tfrac{\pi}{2}\theta_{3}^{2}$;\ the Jacobi theta
 constants $\theta_{2},\theta_{3},\theta_{4}$ and the constant
@@ -188,7 +190,7 @@ integral visits, periods that are classical $\Gamma$-values---across distinct
 fundamental discriminants, so the arithmetic tracks the fibre rather than a single
 coincidence.
 
-\emph{The integrated integral is an elliptic Bessel moment.}  The full
+\emph{The integrated integral is an integral of elliptic Bessel moments.}  The full
 parameter integral pulls back, via Eq.~\eqref{eq:lambda_rho}, to an iterated
 integral over $X(2)$ of period-weighted forms.  The fibre, however, carries an
 irregular exponential (Bessel) twist---it degenerates to the Bessel value
@@ -340,7 +342,7 @@ symbolically at the operator level in Paper~59
 (Newton polygon, Poincar\'e rank one) and witnessed numerically below---not by the
 integer-relation search.
 
-\textbf{[OBSERVATION]} This places the three-center integral inside the
+\textbf{[OBSERVATION]} This places the three-center radial core inside the
 elliptic (genus-one) layer of the cosmic-Galois / mixed-elliptic-motive structure
 that the Geometric Vacuum program's Tannakian substrate reaches
 for~\cite{brown_cosmic2017,loutey_paper56}---the concrete elliptic period the
@@ -572,7 +574,7 @@ relations}
 \label{sec:bessel_algebra}
 %% ========================================================================
 
-Section~\ref{sec:modular} places the integrated observable in the Bessel-moment
+Section~\ref{sec:modular} places the radial core in the Bessel-moment
 class; we now make that placement quantitative by exhibiting the period algebra
 it inhabits.  The rank-four irregular connection of Paper~59 has four master
 periods, the Laplace transforms
@@ -744,10 +746,7 @@ $X(2)$, from the two Feynman integrations), whereas a weight-six cusp form's
 critical $L$-values sit at motivic weight five; and the period pairing just
 exhibited is Eisenstein-flavoured (pure $\pi$-rationals), not cuspidal.  The
 integrated three-center integral is therefore \emph{not} a critical $L$-value of
-a $\Gamma(2)$ cusp form: it is an Eisenstein / complex-multiplication period,
-built from $\pi$ and the CM-fibre $\Gamma$-values of Sec.~\ref{sec:modular}
-($K(\tfrac12)=\Gamma(\tfrac14)^{2}/4\sqrt\pi$, the discriminant-$8$ period, and
-their kin).  \textbf{[MEASURED]} A guarded integer-relation
+a $\Gamma(2)$ cusp form.  \textbf{[MEASURED]} A guarded integer-relation
 search (with a same-magnitude decoy control) confirms the value is not a
 low-height combination of the small weight-$\le2$ disc-$4$ Eisenstein/CM ring,
 nor of the small weight-$\le1$ disc-$8$ ring $\{1,\pi,\varpi,P_{8}\}$ ($P_{8}$
@@ -767,15 +766,15 @@ including the Catalan-completed corrected ring, at height $\le10$---so the
 finite closed form, if it exists at all, either has height $>10$ in that ring
 or lives outside it.
 
-This narrows the open problem sharply: the finite closed form, should it exist,
-is a reduction of the observable to $\pi$, the CM-fibre $\Gamma$-values, their
-Legendre \emph{quasiperiods}, and the weight-two Eisenstein $L$-value
-$G=\beta(2)$ (Sec.~\ref{sec:modular}), within the Bessel-moment period
-algebra---a two-scale, shifted member of the Broadhurst--BBBG
-class~\cite{bbbg2008,broadhurst2008} evaluated over $X(2)$---and is neither an
-elliptic dilogarithm nor a cusp-form $L$-value.  \textbf{[OBSERVATION]} Because the corrected-ring searches are now decisively negative
-through weight three at clean heights ($64$ digits, height $\le10$), any such finite
-combination either belongs to the $D\to0$ \emph{shadow}---where the shadow reading of Sec.~\ref{sec:modular} places the
+This narrows the open problem: the finite closed form, should it exist, is
+not a cusp-form $L$-value.  The searched ring is
+$\pi$, the CM-fibre $\Gamma$-values, their Legendre \emph{quasiperiods}, and the
+weight-two Eisenstein $L$-value $G=\beta(2)$ (Sec.~\ref{sec:modular}), the
+period content of the Bessel-moment algebra of the family---a two-scale, shifted
+member of the Broadhurst--BBBG class~\cite{bbbg2008,broadhurst2008} evaluated
+over $X(2)$.  \textbf{[OBSERVATION]} Because the corrected-ring searches are now decisively negative
+through weight three at clean heights ($64$ digits, height $\le10$), any finite
+combination in that ring either belongs to the $D\to0$ \emph{shadow}---where the shadow reading of Sec.~\ref{sec:modular} places the
 weight-three $G$-requiring element---or sits at height $>10$ in that ring;\ the physical
 value itself carries no measured conductor-$4$ content at reachable heights.
 
@@ -888,7 +887,7 @@ Paper~56 in this series.
 
 \bibitem{loutey_paper59}
 J.~Loutey, ``The Three-Center Electron-Repulsion Integral Is an Elliptic
-Bessel Moment: Genus One at the Third Center in Momentum-Space Slater
+Bessel Moment: A Genus-One Radial Core at the Third Center in Momentum-Space Slater
 Theory,'' Paper~59 in this series.
 
 \end{thebibliography}

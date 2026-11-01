@@ -1,0 +1,24 @@
+{
+ "betas": {
+  "1s-U": -3.9996529066701925,
+  "1s-E": -8.000044186384475,
+  "PA-U": -3.99963700018444,
+  "PB-U": -3.997968127376231,
+  "PC-U": -4.998917376642073,
+  "PA-E": -10.00006167420284,
+  "PB-E": -9.999412937606301
+ },
+ "lines": [
+  "PP-0(a) PA-U step 1e-31 vs 1e-30, max rel dev L<=150: 9.2e-58  PASS",
+  "PP-0(b) 1s at U: beta -3.99965 (raw at 149 -4.2054, sign flips False), true -4  PASS",
+  "PP-0(b) 1s at E: beta -8.00004 (raw at 149 -7.9716, sign flips False), true -8  PASS",
+  "PP1 PA-U: beta -3.99964 (raw at 149 -4.2240, sign flips False), predicted -4  HELD",
+  "PP1 PB-U: beta -3.99797 (raw at 149 -4.1762, sign flips False), predicted -4  HELD",
+  "PP1 PC-U: beta -4.99892 (raw at 149 -5.3116, sign flips False), predicted -5  HELD",
+  "PP1 PA-E: beta -10.00006 (raw at 149 -9.9638, sign flips False), predicted -10  HELD",
+  "PP1 PB-E: beta -9.99941 (raw at 149 -9.9731, sign flips False), predicted -10  HELD",
+  "PP2 PA-E -10.0001, PB-E -9.9994 (< -9.5)  HELD",
+  "GATE GO"
+ ],
+ "gate": "GO"
+}

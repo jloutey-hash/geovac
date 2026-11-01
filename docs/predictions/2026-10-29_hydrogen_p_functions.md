@@ -120,3 +120,25 @@ from PP-0(b), i.e. beta < -9.5.
   6*230 + 400). The omitted part of each sum is about rho^(230 - L) of it, 1e-10 or less on L <= 150 at rho = 3/4.
   The PC fit window, bound and prediction are unchanged. The nine PC points already launched at L = 150 are not used
   for PC; the one with no offsets stays the PP-0(b) 1s control at U, as registered.
+
+## Disposition, scored 2026-11-01 (appended after comparing; the predictions and Addendum 1 are not edited)
+
+All 109 points on disk; `python debug/pp_score.py` (PC from the L = 230 points, per Addendum 1). Output
+`debug/data/pp_score.log`.
+
+| Item | beta (fit L = 100..150) | Predicted | Off by | Verdict |
+|:--|--:|--:|--:|:--|
+| PP-0(a) step 1e-31 vs 1e-30 | max rel dev 9.2e-58 | < 1e-20 | | PASS |
+| PP-0(b) 1s at U | -3.99965 | -4 | 0.00035 | PASS |
+| PP-0(b) 1s at E | -8.00004 | -8 | 0.00004 | PASS |
+| PA-U | -3.99964 | -4 | 0.00036 | HELD |
+| PB-U | -3.99797 | -4 | 0.00203 | HELD |
+| PC-U | -4.99892 | -5 | 0.00108 | HELD |
+| PA-E | -10.00006 | -10 | 0.00006 | HELD |
+| PB-E | -9.99941 | -10 | 0.00059 | HELD |
+| PP2 (PA-E, PB-E < -9.5) | -10.0001, -9.9994 | < -9.5 | | HELD |
+
+No item changed sign in its raw beta_eff. Largest miss 0.002 (PB-U), a tenth of the bound.
+
+**Gate: GO.** PP-0 passes at both geometries and PP1 holds on all five items. A p function on the hydrogens leaves the
+decay power at unequal lengths unchanged (-4, PC -5) and lowers it by two at equal lengths (-8 to -10), as derived.

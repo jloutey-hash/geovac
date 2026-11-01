@@ -477,23 +477,30 @@ commutator are not.)  The numbers below are re-measured on helium's
 physical Hamiltonian, $H_1$ of Eq.~\eqref{eq:h1_geovac} plus
 $V_{ee}$ at $k=Z=2$, with the earlier values in parentheses.
 
-\paragraph*{Frobenius-mass diagonality.}  In the eigenbasis of
-the one-body operator $H_1$, $V_{ee}$ is overwhelmingly
-diagonal:
+\paragraph*{Frobenius-mass diagonality.}  $H_1$ has degenerate
+eigenspaces (six at $n_{\max}=3$, ten at $n_{\max}=4$), so ``the
+diagonal of $V_{ee}$ in the eigenbasis of $H_1$'' depends on which
+basis is chosen inside each one.  The basis-free measure is the mass
+of $V_{ee}$ inside the eigenspaces, with $P_\lambda$ the projector
+onto the eigenspace of $H_1$ at eigenvalue $\lambda$:
 \begin{equation}
-  \frac{\lVert \mathrm{diag}_{H_1}\!V_{ee}\rVert_F}
+  \frac{\bigl\lVert \sum_\lambda P_\lambda V_{ee} P_\lambda\bigr\rVert_F}
        {\lVert V_{ee}\rVert_F}
-  \;=\; 0.945 \text{ (}n_{\max}=3\text{)},
-  \;\; 0.926 \text{ (}n_{\max}=4\text{)},
+  \;=\; 0.953 \text{ (}n_{\max}=3\text{)},
+  \;\; 0.937 \text{ (}n_{\max}=4\text{)},
 \end{equation}
-using the unsquared Frobenius ratio (earlier, on the hop-augmented
-model:\ $0.920$, $0.892$).  The relative commutator
+using the unsquared Frobenius ratio.  It bounds the diagonal fraction
+in every eigenbasis; in the configuration basis that diagonal fraction
+is $0.945$ and $0.926$ (earlier, on the hop-augmented model:\ $0.920$,
+$0.892$), and a rotation inside the degenerate eigenspaces moves it in
+the third digit.  So $V_{ee}$ is overwhelmingly block-diagonal in the
+eigenspaces of the one-body operator.  The relative commutator
 $\lVert [H_1, V_{ee}]\rVert_F / \lVert H_1 \rVert_F = 10.6\%$ at
 $n_{\max}=3$, dropping only to $9.3\%$ at $n_{\max}=4$ (earlier $6.1\%$,
 $5.3\%$, with $V_{ee}$ at half strength).  The
 commutator does not vanish with basis size; $H_1$ and $V_{ee}$
-are genuinely non-commuting.  The one-body eigenbasis
-``almost'' diagonalizes the entropy-generating operator, and the
+are genuinely non-commuting.  The one-body eigenspaces
+``almost'' block-diagonalize the entropy-generating operator, and the
 residual off-diagonal mass is the correlation.  (An earlier sentence
 credited it with driving the ``graph-native'' CI from $\sim\!3\%$ to
 $0.2\%$; that convergence belonged to the hop-augmented model, and with

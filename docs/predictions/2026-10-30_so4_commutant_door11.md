@@ -121,3 +121,13 @@ two degenerate pairs), the footprint of the surviving SO(2) acting on the broken
 Scope, so it is not over-read: a statement about which geometric subgroup remains, at Z = 1 in the hydrogenic
 family. Not a statement about whether a U(1) Wilson action can be written on a two-centre graph (it can, on any
 graph), and not a Wilson-loop computation.
+
+## Addendum (2026-10-31, prior-art scan): scope of "only L_z"
+
+The scored statement is about the six generators of so(4): the commutant of V_B inside so(4) is one-dimensional,
+spanned by L_z. It is not a statement that L_z is the only conserved quantity of the two-centre problem. That problem
+has one more, the separation constant of prolate spheroidal coordinates, quadratic in L and A and not a group
+generator (C. A. Coulson and A. Joseph, Int. J. Quantum Chem. 1, 337 (1967); first given explicitly by H. A. Erikson and E. L. Hill, Phys. Rev. 75, 29 (1949), record and abstract checked); it reduces
+to L^2 when the two centres merge. Found by the 2026-10-31 prior-art scan
+(`debug/lit_scan/prior_art_hydrogen_groupings_hopf_memo.md`, `debug/lit_scan/prior_art_symmetry_picks_geometry_memo.md`).
+No scored number, verdict or disposition changes; Paper 25's wording was scoped the same day.

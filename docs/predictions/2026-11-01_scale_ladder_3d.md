@@ -163,3 +163,38 @@ load), so 1.1 to 1.5 h serial; the scorer takes seconds.
 (Appended after comparing. The predictions above are not edited.)
 
 ## Disposition
+
+## Addendum 1 (appended 2026-11-01 after the registration commit 8790010b and before the scorer was run; the predictions above are not edited)
+
+Prior art found by a literature scan the same day (`debug/lit_scan/prior_art_atom_correlating_exponents_memo.md`):
+the criterion is Dunning's correlation-consistent rule, J. Chem. Phys. 90, 1007 (1989), whose abstract (checked on
+OSTI 6593601) says correlating functions are effective "if the exponents of the functions are optimized in atomic
+correlated calculations, although the primitive (sp) functions ... can be taken from atomic Hartree--Fock
+calculations", studied on the oxygen atom; Ema et al., J. Comput. Chem. 24, 859 (2003), applied the same idea to
+Slater sets (all exponents on HF plus fc-CISD of the atom, H on H2). What this record adds is the per-rung transfer
+ratio measured against a registered band; no source measuring it was found. Nothing in the design, cases or bounds
+changes.
+
+## Disposition, scored 2026-11-01 (appended after comparing; the predictions and Addendum 1 are not edited)
+
+`python debug/scale_ladder_3d_score.py` after the four Phase-2 water runs (log `debug/data/scale_ladder_3d_score.log`).
+Controls reproduced (C1 0.963, C2 1.052).
+
+| Rung | atom A (mHa) | water change (mHa) | ratio | RHF part | corr part | SL3d-T |
+|:--|--:|--:|--:|--:|--:|:--|
+| R3d | -10.240 | -10.637 | 1.039 | -3.060 | -7.577 | HELD |
+| R4d | -10.049 | -10.568 | 1.052 | -2.970 | -7.598 | HELD |
+| R5d | -14.146 | -12.800 | 0.905 | +0.270 | -13.070 | HELD |
+| R5Hd | -14.146 | -11.996 | 0.848 | +1.880 | -13.876 | HELD (0.004 inside the band) |
+
+- **SL3d-M HELD:** W(R3d) - W(R2d) = +0.781 mHa; the step stays non-monotone (predicted about +1.2).
+- **SL3d-H (reported) MISSED on R5d and R5Hd:** the water RHF part is positive there (+0.27, +1.88 mHa). The
+  compensation the controls showed (RHF gain covering a correlation shortfall) does not extend to the largest move;
+  on these rungs the total is carried by correlation alone. R3d, R4d as predicted.
+- **SL3d-C (reported) HELD** on all four (water/atom correlation ratio below 1).
+- **SL3d-R (reported) HELD:** R5d -76.256912 (15.89 mHa below cc-pVDZ, 24.83 above the Slater DZP), R5Hd -76.260011
+  (18.99 below, 21.73 above).
+- New ladder fc-CCSD(T): R2d -76.119903, R3d -76.119121, R4d -76.135148, R5d -76.256912, R5Hd -76.260011.
+
+**Gate: GO** (SL3d-T on 4 of 4, SL3d-M held). The R5Hd ratio sits at the band's edge, and the band's factor of three
+was a choice; read the GO as "the transfer holds to about 15%", not tighter.

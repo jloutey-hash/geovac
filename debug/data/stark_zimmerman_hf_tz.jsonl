@@ -1,0 +1,3 @@
+{"case": "control_hf_slater_dzp_ng8", "nbf": 19, "RHF": -100.05708830097065, "CCSD(T)_fc": -100.28408719629279, "Ecorr_fc": -0.22699889532214002, "t": 275.3, "ng": 8, "ng12_reference_fc": -100.287713}
+{"case": "stark_zimmerman_tz", "nbf": 34, "RHF": -100.0620886616105, "CCSD(T)_fc": -100.31815619756779, "Ecorr_fc": -0.2560675359572855, "t": 1635.6, "ng": 8, "R_bohr": 1.7328788562818314, "their_Ecorr_HBCI": -0.2558}
+{"case": "stark_zimmerman_tz", "nbf": 34, "RHF": -100.0661068140277, "CCSD(T)_fc": -100.32220948605043, "Ecorr_fc": -0.2561026720227204, "t": 9034.3, "ng": 12, "R_bohr": 1.7328788562818314, "their_Ecorr_HBCI": -0.2558}

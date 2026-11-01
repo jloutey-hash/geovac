@@ -108,3 +108,22 @@ def test_gauge_defect_is_the_order_one_defect_at_a_equals_b():
         fprime = -2 * t * lw * np.exp(-t * lw ** 2)
         val = 0.5 * float(np.real(np.sum(fprime * np.diag(C))))
         assert abs(val - kpg) < 1e-10 * max(1.0, abs(kpg)), (tau, n_max, val, kpg)
+
+
+def test_defect_operator_norm_is_bounded_and_trace_norm_grows_with_the_top_shell():
+    """Measured pattern (not pre-registered; debug/edge_leak_toeplitz_form_memo.md), the S^3 form of Glaser-Stern's
+    S^2 finding: over the sixteen pairs of spin-1/2 coefficient functions the largest operator norm of the defect is
+    exactly 1 - n/(n+1)^2 (bounded, tending to 1) and the largest trace norm exactly n(n+2), n = n_max = 1..4.
+
+    Wrong answers rejected: an operator norm that grows without bound, and a trace norm that stays bounded.
+    """
+    for n_max in (1, 2, 3, 4):
+        S, funcs, inW = setup(n_max)
+        op = tr = 0.0
+        for a in funcs:
+            for b in funcs:
+                s = np.linalg.svd(defect_direct(S.lam, a, b, inW), compute_uv=False)
+                op, tr = max(op, s[0]), max(tr, s.sum())
+        n = n_max
+        assert abs(op - (1 - n / (n + 1) ** 2)) < 1e-10, (n, op)
+        assert abs(tr - n * (n + 2)) < 1e-8, (n, tr)

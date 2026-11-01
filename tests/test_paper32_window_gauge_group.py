@@ -153,3 +153,36 @@ def test_inversion_is_implemented_by_a_unitary_that_anticommutes_with_D():
     assert np.linalg.norm(Ui.conj().T @ Ui - I) < 1e-10
     assert np.linalg.norm(Ui @ Dc + Dc @ Ui) < 1e-10
     assert np.linalg.norm(Ui @ Dc - Dc @ Ui) > 1.0
+
+
+def _preserves(U, E):
+    B = np.array([e.reshape(-1) for e in E])
+    worst = 0.0
+    for e in E:
+        c = (U @ e @ U.conj().T).reshape(-1)
+        worst = max(worst, np.linalg.norm(c - B.T @ (B.conj() @ c)) / np.linalg.norm(c))
+    return worst
+
+
+def test_full_group_inputs_commutant_scalars_and_centre_but_not_sign_D():
+    """The inputs of the full-group reduction (record WG follow-up, debug/wg_full_group_memo.md, not
+    pre-registered): the commutant of O is the scalars (so O generates M_N, its own C*-envelope), and among unitary
+    functions of D the level-alternating one (a centre element of Spin(4)) preserves O while sign(D) does not.
+
+    Wrong answers rejected: a commutant larger than the scalars (the envelope argument would fail), sign(D) taken
+    as a gauge symmetry, and a test that cannot see a symmetry (the centre element must pass).
+    """
+    for n_max in (2, 3):
+        E, Dc = window(n_max)
+        N = Dc.shape[0]
+        I = np.eye(N)
+        G = sum((np.kron(I, e.T) - np.kron(e, I)).conj().T @ (np.kron(I, e.T) - np.kron(e, I)) for e in E)
+        w = np.linalg.eigvalsh(0.5 * (G + G.conj().T))
+        assert int(np.sum(w < 1e-9 * w[-1])) == 1
+        ev, V = np.linalg.eigh(0.5 * (Dc + Dc.conj().T))
+        vals = sorted(set(np.round(ev, 9)))
+        P = {v: V[:, np.abs(ev - v) < 1e-6] @ V[:, np.abs(ev - v) < 1e-6].conj().T for v in vals}
+        lev = sum(((-1) ** i) * P[v] for i, v in enumerate(vals))
+        sgn = sum((1.0 if v > 0 else -1.0) * P[v] for v in vals)
+        assert _preserves(lev, E) < 1e-10, _preserves(lev, E)
+        assert _preserves(sgn, E) > 0.5, _preserves(sgn, E)

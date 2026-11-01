@@ -136,3 +136,65 @@ def test_hopf_spectrum_is_irrational_where_rotation_is_integer_and_the_casimir_h
     trJ = float(np.real(np.trace(sum(G @ G for G in Jp))))
     trL = float(np.real(np.trace(sum(G @ G for G in L))))
     assert abs(trL - 42) < 1e-9 and abs(trJ - 21) < 1e-9
+
+
+# ---- second route: the published parabolic-spherical coefficients (no Clebsch-Gordan routine) ----
+def _poch(a, k):
+    p = 1
+    for i in range(k):
+        p *= a + i
+    return p
+
+
+def _hyp3f2(a, b, kmax):
+    s = sp.Integer(0)
+    for k in range(kmax + 1):
+        den = _poch(b[0], k) * _poch(b[1], k) * sp.factorial(k)
+        if den == 0:
+            break
+        s += sp.Rational(_poch(a[0], k) * _poch(a[1], k) * _poch(a[2], k), den)
+    return s
+
+
+def _w2_book(n1, n2, m, l):
+    """Square of Mardoyan et al. (arXiv:2310.17336) eq. (2.2.29), the Tarter 3F2 form of the
+    parabolic (n1, n2, m) -> spherical (n, l, m) coefficient, n = n1 + n2 + |m| + 1."""
+    am = abs(m)
+    n = n1 + n2 + am + 1
+    if not (am <= l <= n - 1):
+        return sp.Integer(0)
+    F = sp.factorial
+    pref = sp.Rational((2 * l + 1) * F(n1 + am) * F(n2 + am) * F(l + am),
+                       F(n1) * F(n2) * F(l - am) * F(n - l - 1) * F(n + l))
+    H = _hyp3f2((-n2, -l + am, l + am + 1), (am + 1, -n + am + 1), n2)
+    return pref * sp.Rational(F(n - am - 1), F(am)) ** 2 * H ** 2
+
+
+def test_occupations_equal_the_published_parabolic_spherical_coefficients():
+    """The Hopf-group occupations equal, exactly, the squared parabolic-spherical coefficients of the
+    published closed form, regrouped by mu = (m - n1 + n2)/2: a second route with no CG routine.
+
+    Wrong answers rejected: a label map that drops m (mu = (n2 - n1)/2), and mu -> -mu at fixed m (an L_z sign
+    error).  (Swapping n1 and n2 is not a wrong answer: CG^2(j,a;j,m-a) = CG^2(j,m-a;j,a) when both spins equal j.)
+    """
+    for n_max in (2, 3):
+        m = so4(n_max)
+        groups, Mh = hopf_M(m.STATES)
+        for mu_map, expect_equal in ((lambda n1, n2, mm: sp.Rational(mm - n1 + n2, 2), True),
+                                     (lambda n1, n2, mm: sp.Rational(n2 - n1, 2), False),
+                                     (lambda n1, n2, mm: -sp.Rational(mm - n1 + n2, 2), False)):
+            book = {}
+            for n in range(1, n_max + 1):
+                for mm in range(-(n - 1), n):
+                    for n1 in range(0, n - abs(mm)):
+                        n2 = n - 1 - abs(mm) - n1
+                        mu = mu_map(n1, n2, mm)
+                        for l in range(abs(mm), n):
+                            key = (n, l, mm, mu)
+                            book[key] = book.get(key, 0) + _w2_book(n1, n2, mm, l)
+            worst = 0
+            for i, (n, l, mm) in enumerate(m.STATES):
+                for g, (ng, mu) in enumerate(groups):
+                    if ng == n:
+                        worst = max(worst, abs(sp.nsimplify(Mh[i, g]) - book.get((n, l, mm, mu), 0)))
+            assert (worst == 0) is expect_equal, (n_max, worst)

@@ -7913,6 +7913,33 @@ REGISTRY = [
             "docs/atlas.md": "remediated + reviewed 2026-10-26 -- door 27 Owed line rewritten",
         },
     },
+    {
+        "id": 'half-integer-hurwitz-odd-zeta-as-m2',
+        "pattern": "M2'?s\\s+spinor\\s+sub-?mechanism|sub-mechanism\\s+for\\s+the\\s+spinor\\s+sector|two\\s+readings\\s+of\\s+the\\s+slot\\s+index|half-integer\\s+M2\\s+values|enter\\s+M2\\s+only\\s+at\\s+half-integer|M2\\s+at\\s+half-integer\\s+\\$?s|zeta\\s+of\\s+M2'?s\\s+sub-mechanism|files\\s+under\\s+M2\\s+as\\s+the|spinor\\s+series\\s+is\\s+filed\\s+under\\s+M2",
+        "exempt_if_nearby": withdrawal_marker('half-integer-hurwitz-odd-zeta-as-m2'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": 'Re-classified 2026-11-01 (PI-approved; open item docs/qa/v5.20.18_claim_delta.debt.md). The odd-zeta values of the half-integer Hurwitz zeta(s, 3/2) (e.g. zeta_{D^2} at half-integer s >= 5/2) are M3, not M2: a value D(m) reached from two Mellin slots is placed by the period ring it lands in (Paper 18 Sec. III.7 tie-break). zeta(s, 3/2) is the spinor spectrum zeta and appears in every slot; its pi-power values are M2. Retired wording: "M2\'s spinor sub-mechanism", "half-integer M2 values", "two readings of the slot index", "M2 at half-integer s".',
+        "files": [
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/atlas.md',
+            'docs/forced_free_seam.md',
+            'README.md',
+            'papers/INDEX.md',
+            'docs/claim_test_matrix.md',
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + reviewed 2026-11-01 -- owner; tie-break stated after the period-ring stratification, census hedge rewritten",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + reviewed 2026-11-01 -- M2 bullet, converse witness, Bernoulli-ladder control",
+            "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": "remediated + reviewed 2026-11-01 -- 'two readings' parenthetical replaced",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated + reviewed 2026-11-01 -- M2 theorem, volume-norm caveat, M3 sub-sector 1, joint-engagement paragraph, conclusion",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + reviewed 2026-11-01 -- (3,1) trivialization parenthetical",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + reviewed 2026-11-01 -- converse-witness parenthetical",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + reviewed 2026-11-01 -- M2 bullet",
+            "papers/synthesis/group6_precision_observations_synthesis.tex": "remediated + reviewed 2026-11-01 -- pure-Tate tier parenthetical",
+        },
+    },
 ]
 
 

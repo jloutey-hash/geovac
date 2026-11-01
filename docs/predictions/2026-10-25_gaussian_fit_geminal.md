@@ -166,3 +166,12 @@ geminals give too small a Y.
   singular. Singular steps are now treated as bad points. No fit was changed by hand.
 - Scripts `debug/gf_engine.py`, `debug/gf_fit.py`, `debug/gf_checks.py`, `debug/gf_run.py`. Data
   `debug/data/gf_fits.json`, `debug/data/gf_checks.json`, `debug/data/gf_results.json` and their logs.
+
+## Erratum (appended 2026-11-01, found while writing the guard `tests/test_paper59_gaussian_fit_geminal.py`; the predictions and the disposition above are not edited)
+
+Two descriptive sentences in the results were looser than the stored fits. Recomputed from the stored six-term
+coefficients:
+- W2: the error is 1.35e-4 at r = 0.5 (not "1e-4 or less for r up to 1"), and it climbs to -2.4e-2 at the cusp, r = 0.
+- W1: the relative error reaches -5.3e-3 near r = 5.33 (not "within about 2e-3 out to r = 6"); the largest absolute
+  error on [0.5, 6] is 7.5e-4.
+Neither number is stated in Paper 59, no prediction rested on either, and no verdict changes.

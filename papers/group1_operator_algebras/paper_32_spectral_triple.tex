@@ -2307,9 +2307,11 @@ introduces $\sqrt{\pi}$ via heat-kernel coefficients on the
 Camporesi--Higuchi Dirac spectrum on unit~$S^3$ (Paper~28
 Theorem~T9~\cite{paper28}: $\zeta_{D^2}(s)$ is a two-term polynomial
 in $\pi^2$ with rational coefficients at every integer $s \ge 1$;\ at
-half-integer $s \ge 5/2$ it carries odd zeta values instead).
-The sub-mechanism for the spinor sector is the half-integer Hurwitz
-$\zeta(s, 3/2)$.
+half-integer $s \ge 5/2$ it carries odd zeta values instead, which are
+M3's).  The spinor spectrum's zeta is the half-integer Hurwitz
+$\zeta(s, 3/2)$;\ it appears in every slot, its $\pi$-power values are
+M2's and its odd zeta values M3's (the period-ring tie-break of
+Paper~18~\S III.7~\cite{paper18}).
 \item[\textbf{M3}] (vertex-topology Dirichlet $L$-content):\
 introduces Catalan~$G = \beta(2)$ and Dirichlet $\beta(s)$ via
 quarter-integer Hurwitz shifts $\zeta(s, 3/4)$, $\zeta(s, 5/4)$ (the
@@ -2361,10 +2363,10 @@ value.
 Paper~55~\cite{loutey_paper55} tags the rational Casimir trace $B = 42$ as M1's
 ``rational core'' (a tagging convention, not a proof that $B$ is the
 converged value of a chain engaging M1);\ the spinor spectral
-zeta of M2's sub-mechanism at half-integer $s$ carries no known $\pi$,
+zeta at half-integer $s$ carries no known $\pi$,
 e.g.\ $\zeta_{D^2}(5/2) = 14\,\zeta(3) - \tfrac{31}{2}\,\zeta(5)$
-(Paper~28 T9;\ this lies outside the pure-Tate M2 ring, which is
-scoped to Seeley--DeWitt coefficients and integer $s$);\ M3's
+(Paper~28 T9;\ an odd-zeta value, outside the pure-Tate M2 ring and
+so M3's by the period-ring tie-break);\ M3's
 convergent closed form at $s = 4$ gives
 $2^{3}(\beta(4) - \beta(2)) = 8(\beta(4) - G)$, with no known $\pi$
 (none of $\zeta(3)$, $\zeta(5)$, $G$, $\beta(4)$ is known to lie in
@@ -2660,7 +2662,8 @@ Paper~0~\cite{paper0}) has no clean $\zeta$ form; the Dirac Casimir
 $17/480$ misses the scalar $B_4$ rung by exactly $1/32$ and requires
 the half-integer Hurwitz shift $\zeta(-3,\tfrac{1}{2})$, i.e.\ the
 scalar/spinor distinction is the integer/half-integer Hurwitz split
-(the half-integer shift is M2's spinor sub-mechanism).
+(the half-integer shift is the spinor spectrum's zeta, which appears in
+every Mellin slot;\ Paper~18~\S III.7).
 \end{itemize}
 The reading is the rational-residue extension of
 Theorem~\ref{thm:pi_source_case_exhaustion}: the rational coefficients
@@ -4166,7 +4169,21 @@ a_{ik}b_{kl} + b_{ik}(\lambda_k-\lambda_l)a_{kl}\bigr]$: every term
 passes once through a state outside $W$ and carries the Dirac gap
 across the edge. At $a = b = \chi$ it is the gauge defect above, with
 $f'(\lambda_i)$ as the extra weight
-(\texttt{tests/test\_paper32\_window\_order\_one.py}). The
+(\texttt{tests/test\_paper32\_window\_order\_one.py}).  That order one
+fails at the spectral cut of a spinor Dirac window is not new: Glaser
+and Stern found it numerically on the round $S^2$, as ``a boundary
+defect of asymptotically constant norm'' whose trace norm is unbounded
+\cite{glaser_stern2020}.  The closed form above was not found in the
+literature.  In Toeplitz language, with $T(x) = PxP$, $H(x) = QxP$ and
+$\tilde H(x) = PxQ$, it reads $[[D_W,a_W],b_W] = \tilde H(b)\,H([D,a]) -
+\tilde H([D,a])\,H(b)$, the window form of the Toeplitz--Hankel product
+identity $T(bc) - T(b)T(c) = H(b)H(\tilde c)$ \cite{boettcher2000}.
+\textbf{[MEASURED, not pre-registered]} It lives on the outermost shell
+only, and it matches Glaser and Stern's pattern on $S^3$: over the
+sixteen pairs of spin-$\tfrac12$ coefficient functions the largest
+operator norm is $1 - n/(n+1)^2$, bounded and tending to $1$, while the
+largest trace norm is $n(n+2)$, growing with the outermost shell
+($n = n_{\max} = 1, \dots, 12$). The
 coefficient therefore cannot be read at finite cutoff by this
 instrument. The result is a wall on the instrument, not evidence that
 the outer factor moves the $4$. The obstruction is known (Choi's
@@ -4180,8 +4197,18 @@ $\mathfrak{u}(1) \oplus \mathfrak{su}(2)_L \oplus \mathfrak{su}(2)_R$:
 a phase and the isometries of round $S^3$. The group also contains a
 unitary implementing the inversion $g \mapsto g^{-1}$, unique up to
 phase, which anticommutes with $D$. The local gauge group
-$C(S^3, \mathrm{U}(1))$ leaves nothing beyond its constants (the full
-component group is not determined here). Every known repair changes the object: fluctuating before truncating,
+$C(S^3, \mathrm{U}(1))$ leaves nothing beyond its constants.
+\textbf{[MEASURED + reduction, not pre-registered]} At
+$n_{\max} = 1, 2, 3$ this is the whole symmetry group.  The commutant of
+$\mathcal{O}^{\mathrm{CH}}$ is the scalars, so it generates $M_N$, which
+is simple and is therefore its $C^*$-envelope; by the envelope's
+universal property \cite{connes_vs2021} and Skolem--Noether, every unital
+complete order automorphism of $\mathcal{O}^{\mathrm{CH}}$ is
+$\mathrm{Ad}\,U$ for some $U$ in the group.  Its components are then
+counted exactly: the group is $(\mathrm{U}(1)\cdot\mathrm{Spin}(4))
+\rtimes \mathbb{Z}_2$, and the automorphism group is $O(4)$, the
+analogue of Dong's $O(2)$ for the circle.  Beyond $n_{\max} = 3$ this is
+not shown.  Every known repair changes the object: fluctuating before truncating,
 the $C^*$-envelope with gauge group $\mathrm{U}(N)$, or lattice gauge
 networks with sites.
 
@@ -6053,7 +6080,7 @@ GeoVac Paper~56 (2026).
 
 \bibitem{loutey_paper59}
 J.~Loutey,
-``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment: Genus One at the Third Center in Momentum-Space Slater Theory,''
+``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment: A Genus-One Radial Core at the Third Center in Momentum-Space Slater Theory,''
 GeoVac Paper~59 (2026).
 
 \bibitem{halmos1969}
@@ -6081,6 +6108,15 @@ arXiv:hep-th/0610241.
 C.~Farsi, F.~Latr\'emoli\`ere and J.~Packer, ``Convergence of inductive
 sequences of spectral triples for the spectral propinquity,''
 \textit{Adv.~Math.}\ \textbf{437}, 109442 (2024), arXiv:2301.00274.
+
+\bibitem{boettcher2000}
+A.~B\"ottcher, ``One more proof of the Borodin--Okounkov formula for
+Toeplitz determinants,'' arXiv:math/0012200 (2000).
+
+\bibitem{glaser_stern2020}
+L.~Glaser and A.~Stern, ``Understanding truncated non-commutative
+geometries through computer simulations,'' J.\ Math.\ Phys.\
+\textbf{61}, 033507 (2020), arXiv:1909.08054.
 
 \bibitem{dong2022}
 R.~Dong, ``The gauge group and perturbation semigroup of an operator

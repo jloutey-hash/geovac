@@ -78,9 +78,12 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
         "papers": [0, 1, 7, 32, 38],
         "extra": ["synthesis/group3_foundations_synthesis.tex"],
     },
-    # docs/qa/group1.done.md: Papers 29, 39, 40, 42-50, 52, 53 + synthesis.
+    # docs/qa/group1.done.md: Papers 29, 39, 40, 42, 44, 45, 50, 53 + synthesis.
+    # 43, 46-49 and 52 removed 2026-11-01: archived (docs/retired_papers.md), so the
+    # selftest FAILed on six unresolved members; 43's content is Paper 42 Sec. 11 and
+    # 52's a remark in Paper 50, both still in scope.
     "group1": {
-        "papers": [29, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53],
+        "papers": [29, 39, 40, 42, 44, 45, 50, 53],
         "extra": ["synthesis/group1_operator_algebras_synthesis.tex"],
     },
     # docs/qa/group2.done.md: the 9 chemistry papers + synthesis.  Papers 58,

@@ -282,8 +282,9 @@ spectral zeta function is
 D(s) := \sum_{n \ge 0} \frac{g_n}{|\lambda_n^{\mathrm{CH}}|^s}
       = 2\,\zeta(s - 2, 3/2) - \tfrac{1}{2}\,\zeta(s, 3/2),
 \end{equation}
-where $\zeta(s, a)$ is the Hurwitz zeta function, and the squared
-spectral zeta is
+where $\zeta(s, a)$ is the Hurwitz zeta function (this closed form is in
+Ball and Marcolli~\cite{ball_marcolli2016} and Eckstein and Iochum, Example
+3.15~\cite{eckstein_iochum2018}), and the squared spectral zeta is
 \begin{equation}
 \label{eq:dirac_squared_dirichlet}
 \zeta_{D^2}(s) := \sum_{n \ge 0} \frac{g_n}{(\lambda_n^{\mathrm{CH}})^{2s}}
@@ -465,8 +466,9 @@ asymptotic, while depth-$0$ mechanisms do not.
 The M2 sub-mechanism on the discrete Camporesi--Higuchi $\sthree$
 spectral triple produces period values --- its volume-normalised
 heat-kernel coefficients, and its spectral-zeta values at
-\emph{integer} $s$ (half-integer $s \ge 5/2$ carries odd zeta values,
-\S\ref{sec:m2_volume_norm}) --- in the strictly smaller
+\emph{integer} $s$ (at half-integer $s \ge 5/2$ the values are odd zeta
+values, which the period-ring tie-break of \S\ref{sec:m2_volume_norm}
+files under M3) --- in the strictly smaller
 pure-Tate even-weight sub-ring
 \begin{equation}
 \label{eq:m2_ring}
@@ -721,7 +723,13 @@ $1$), and at half-integer $s \ge 5/2$ the values carry odd zeta
 values (e.g.\ $\zeta_{D^2}(5/2) = 14\,\zeta(3) - \tfrac{31}{2}\,\zeta(5)$).
 This reconciles Paper~28 Theorem~1 (T9:\ $\bigoplus_k \pi^{2k}\cdot\Q$
 at integer $s$, odd zeta values at half-integer $s$) with the
-pure-Tate classification at integer $s$.
+pure-Tate classification at integer $s$.  The half-integer values are
+M3's, not M2's:\ $\zeta_{D^2}(s) = D(2s)$ is also reached from the
+$k = 1$ slot, and a value reached from two slots is placed by the
+period ring it lands in (the tie-break of Paper~18~\S III.7).  Odd zeta
+values lie outside M2's ring~\eqref{eq:m2_ring} and inside M3's, and
+$\zeta_{D^2}$ at half-integer $s \ge 5/2$ is not a Seeley--DeWitt
+coefficient.
 
 % =====================================================================
 \section{M3:\ vertex parity, Hurwitz at quarter-integer shifts, and
@@ -749,7 +757,10 @@ sub-sectors:
     shift $\zeta(s, 3/2) = \zeta(s, 1/2) - 2^s$, this further reduces
     to $\MT(\Z)$ (classical Brown MZV at level $1$,
     \cite{brown2012}):\ $\pi^{\mathrm{even}}\cdot\Q$ at even $s$ and
-    $\zeta(\mathrm{odd})\cdot\Q$ at odd $s$.
+    $\zeta(\mathrm{odd})\cdot\Q$ at odd $s$.  The odd-$s$ values are
+    M3's;\ the even-$s$ values are also reached from the $k = 2$ slot,
+    and the period-ring tie-break (\S\ref{sec:joint}) files them
+    under M2.
   \item \textbf{Vertex-restricted $\chi_{-4}$ content.}  The parity
     discriminant
     \[
@@ -1498,9 +1509,12 @@ M_1 \subset \Q[\pi, \pi^{-1}].
 A given period value $\pi^{2k}$ can be reached by M1 (as an integer
 power of the $k = 0$ volume factor), by M2 (as a Seeley--DeWitt
 coefficient at order $k$), or by M3 (as an even-weight Brown MZV
-inside the un-restricted Dirac Dirichlet).  The Mellin slot index
-$k$ is the structural label that distinguishes the three readings;\
-the period value alone does not.
+inside the un-restricted Dirac Dirichlet).  For distinct elementary
+objects the Mellin slot index $k$ is the structural label;\ the period
+value alone does not distinguish them.  For one value $D(m)$ reached
+from two slots the slot index is ambiguous, and the tie-break is the
+period ring (Paper~18~\S III.7):\ $D(m)$ is M2 when it lies in
+$\bigoplus_k \pi^{2k}\cdot\Q$ and M3 otherwise.
 
 The rational subring $\Q$ sits inside every $M_i$ at Tate weight
 $0$ and depth $0$;\ rational coefficients (the Casimir trace
@@ -3220,7 +3234,8 @@ mathematical research project on the viable lineage.
 The transcendentals in the census of GeoVac spectral data lie in
 cyclotomic mixed-Tate periods at level $\le 4$ over $\Z[i, 1/2]$;\ their
 indexing by the master Mellin engine slot $k \in \{0, 1, 2\}$ is a reading
-(the half-integer M2 values carry odd zeta), and the underlying
+(a value reached from two slots is placed by its period ring, so the
+odd zeta values of the spinor spectrum are M3's), and the underlying
 case-exhaustion is \textbf{[CONDITIONAL]}.  The
 census places the GeoVac framework inside the published
 periods/motives program (Kontsevich--Zagier, Brown, Deligne, Glanois,
@@ -3437,6 +3452,14 @@ J.~Karamata, ``\"Uber die Hardy--Littlewoodschen Umkehrungen des
 Abelschen Stetigkeitssatzes,'' \textit{Math.\ Z.}~\textbf{32},
 319--320 (1930);\ reprint in \textit{Selected Papers},
 Mathematical Institute, Belgrade, 1962, \S~V.3.
+
+\bibitem{ball_marcolli2016}
+A.~Ball and M.~Marcolli, ``Spectral action models of gravity on packed Swiss cheese
+cosmology,'' \textit{Class.\ Quantum Grav.}\ \textbf{33}, 115018 (2016);\ arXiv:1506.01401.
+
+\bibitem{eckstein_iochum2018}
+M.~Eckstein and B.~Iochum, \textit{Spectral Action in Noncommutative Geometry},
+SpringerBriefs in Mathematical Physics \textbf{27} (Springer, 2018);\ arXiv:1902.05306.
 
 \bibitem{korevaar2004}
 J.~Korevaar, \textit{Tauberian Theory:\ A Century of Developments},

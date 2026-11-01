@@ -236,3 +236,40 @@ def test_paper7_he_nmax5_hop_shift_and_physical_error():
     assert E_phys > E_HE and E_phys > E_HF_LIMIT_HE     # variational, above HF
     # the hop shift exceeds He's whole correlation energy (42.0 mHa)
     assert -shift_mha > 1e3 * (E_HF_LIMIT_HE - E_HE)
+
+
+def _eigenspace_mass(V, e, tol=1e-10):
+    same = np.abs(e[:, None] - e[None, :]) < tol
+    return float(np.linalg.norm(V[same]) / np.linalg.norm(V))
+
+
+@pytest.mark.parametrize('n_max, blk_ref, diag_ref, n_spaces', [(3, 0.953, 0.945, 6), (4, 0.937, 0.926, 10)])
+def test_paper27_diagonality_is_basis_free_as_eigenspace_mass(n_max, blk_ref, diag_ref, n_spaces):
+    """Paper 27 Sec. cusp, 'Frobenius-mass diagonality' (2026-11-01, written as a separate step): H1 is degenerate,
+    so the basis-free measure is ||sum_l P_l V P_l||_F / ||V||_F = 0.953 (n_max 3), 0.937 (n_max 4); it is unchanged
+    by a random rotation inside each eigenspace, while the configuration-basis diagonal fraction (0.945, 0.926)
+    moves and never exceeds it.
+
+    Wrong answers rejected: the configuration-basis number reported as the basis-free one; eigenspaces merged across
+    energies (mass 1); a measure that moves under the rotation; the eigenspace count of the hop model.
+    Fire-tested 2026-11-01, 4/4: diag in place of blk; tol 1e9 (merged eigenspaces); count 31; a rotation that
+    mixes eigenspaces.  (U.T V U.T was tried and is not a wrong answer: still orthogonal block by block.)
+    """
+    D1, V1, cfg, ns = _blocks(n_max)
+    h1, V = 4 * D1, 2 * V1
+    e = np.diag(h1).copy()
+    vals = np.unique(np.round(e, 10))
+    assert len(vals) == n_spaces
+    blk = _eigenspace_mass(V, e)
+    diag = float(np.linalg.norm(np.diag(np.diag(V))) / np.linalg.norm(V))
+    assert blk == pytest.approx(blk_ref, abs=5e-4) and diag == pytest.approx(diag_ref, abs=5e-4)
+    rng = np.random.default_rng(1)
+    U = np.eye(len(e))
+    for v in vals:
+        idx = np.where(np.abs(e - v) < 1e-10)[0]
+        U[np.ix_(idx, idx)] = np.linalg.qr(rng.normal(size=(len(idx), len(idx))))[0]
+    Vr = U.T @ V @ U
+    diag_r = float(np.linalg.norm(np.diag(np.diag(Vr))) / np.linalg.norm(V))
+    assert abs(_eigenspace_mass(Vr, e) - blk) < 1e-12
+    assert abs(diag_r - diag) > 1e-4
+    assert diag <= blk + 1e-12 and diag_r <= blk + 1e-12

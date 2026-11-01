@@ -66,6 +66,40 @@ AUX_SUFFIXES = (".aux", ".log", ".out", "Notes.bib", ".toc", ".bbl",
 
 UNDEF_REF = re.compile(r"Reference `([^']*)' on page [^ ]* undefined")
 UNDEF_CITE = re.compile(r"Citation `([^']*)' on page [^ ]* undefined")
+# Duplicate keys (2026-11-01 lesson).  Paper 59 carried two different preprints under one \bibitem key; every
+# \cite of the first silently resolved to the second, and the build reported nothing this gate read.  A repeated
+# \bibitem key or \label is a defect whatever LaTeX prints, so it is checked in the SOURCE (comments stripped) and
+# in the log ("multiply defined").
+BIBITEM_KEY = re.compile(r"\\bibitem(?:\[[^\]]*\])?\{([^}]*)\}")
+LABEL_KEY = re.compile(r"\\label\{([^}]*)\}")
+MULTIPLY = re.compile(r"(?:Label|Citation) `([^']*)' multiply defined")
+COMMENT = re.compile(r"(?<!\\)%.*")
+
+
+def duplicate_keys(src: str):
+    """Repeated \\bibitem keys and \\label keys in a .tex source, comments stripped."""
+    body = "\n".join(COMMENT.sub("", line) for line in src.splitlines())
+    out = {}
+    for kind, pat in (("bibitem", BIBITEM_KEY), ("label", LABEL_KEY)):
+        seen, dup = set(), []
+        for k in pat.findall(body):
+            if k in seen and k not in dup:
+                dup.append(k)
+            seen.add(k)
+        out[kind] = dup
+    return out
+
+
+def selftest() -> int:
+    """The duplicate-key check must FIRE on the 2026-11-01 Paper 59 shape and stay SILENT on its fix."""
+    bad = ("\\cite{m26}\n\\bibitem{m26}\nJ. M., ``Single-centre''\n\\bibitem{x}\nX\n"
+           "\\bibitem{m26}\nJ. M., ``Calabi--Yau''\n\\label{s}\\label{t}\n% \\label{s} in a comment\n")
+    good = bad.replace("\\bibitem{m26}\nJ. M., ``Single", "\\bibitem{m26sc}\nJ. M., ``Single")
+    got_bad, got_good = duplicate_keys(bad), duplicate_keys(good)
+    ok = got_bad == {"bibitem": ["m26"], "label": []} and got_good == {"bibitem": [], "label": []}
+    ok = ok and duplicate_keys("\\label{a}\n\\label{a}\n") == {"bibitem": [], "label": ["a"]}
+    print(f"[selftest] fire: {got_bad}  silent: {got_good}  -> {'PASS' if ok else 'FAIL'}")
+    return 0 if ok else 1
 
 
 def _clean(d: str, base: str) -> None:
@@ -126,18 +160,23 @@ def compile_one(path: str, passes: int):
     cites = sorted(set(UNDEF_CITE.findall(log)))
     fatal = "! LaTeX Error" in log or "! Emergency stop" in log
     fonts = log.count("Font Warning")
+    multiply = sorted(set(MULTIPLY.findall(log)))
+    dups = duplicate_keys(io.open(path, encoding="utf-8", errors="ignore").read())
 
     _clean(d, base)
 
     return dict(base=base, rc=rc, refs=refs, cites=cites, fatal=fatal,
-                fonts=fonts)
+                fonts=fonts, multiply=multiply, dups=dups)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--gate", default="", help="substring filter on the path")
     ap.add_argument("--passes", type=int, default=3)
+    ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
+    if args.selftest:
+        return selftest()
 
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     files = sorted(glob.glob(os.path.join(root, "papers", "**", "*.tex"),
@@ -159,6 +198,12 @@ def main() -> int:
             problems.append("undefined ref(s): " + ", ".join(r["refs"]))
         if r["cites"]:
             problems.append("undefined citation(s): " + ", ".join(r["cites"]))
+        if r["dups"]["bibitem"]:
+            problems.append("duplicate \\bibitem key(s): " + ", ".join(r["dups"]["bibitem"]))
+        if r["dups"]["label"]:
+            problems.append("duplicate \\label(s): " + ", ".join(r["dups"]["label"]))
+        if r["multiply"]:
+            problems.append("multiply defined (log): " + ", ".join(r["multiply"]))
         note = f"  [{r['fonts']} font warn]" if r["fonts"] else ""
         if problems:
             bad += 1

@@ -319,7 +319,13 @@ verdict is the **AND across all review dimensions** (below).
   a missing figure asset exits 0 and silently renders a draft box (the 2026-07-05
   lesson: P13/P15/FCI-A "passed" compile checks for weeks with three orphaned
   figure dirs the 2026-05-22 reorg left behind under `papers/core/`; a `pdftex.def
-  Error` in the log is a FAIL).
+  Error` in the log is a FAIL). **Duplicate keys FAIL too (widened 2026-11-01,
+  PI-approved):** a repeated `\bibitem` key or `\label` in the source (comments
+  stripped), or "multiply defined" in the log. Paper 59 carried two Matuzas
+  preprints under one key, so three priority citations resolved to the wrong
+  work, and the build exited 0 with every reference defined.
+  `debug/qa/check_compiles.py --selftest` proves the check fires on that shape
+  and is silent on its fix.
 - **C11 — Internal-citation titles AND years (deterministic).** Every internal
   GeoVac citation in scope names the cited paper by its current `\title`,
   **and its bibitem year matches that paper's own `\date`** — certified by

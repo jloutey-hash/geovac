@@ -50,12 +50,14 @@ mostly a $3d$ exponent the atomic objective never sees, while its
 Hartree--Fock gain is two opposite pieces that cancel on water.
 \textbf{[MEASURED]} The Jordan--Wigner Pauli count is the same for every
 twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107\,382}$ terms on
-46 frozen-core qubits, because it is fixed by the orbital count and the
-$C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
+46 frozen-core qubits, because in canonical orbitals it is fixed by the
+orbital count and the $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
 across the kits.  \emph{Caps.}  One geometry and one method per molecule;
 the ladder and the native kits are water only.
 The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
-below the best atom-set rung.  \textbf{[MEASURED, pre-registered]} The
+below the best atom-set rung, and $21.7$~mHa below once the $3d$ is also set
+on the atom's correlated energy (pre-registered;\ water then lands $19.0$~mHa
+below cc-pVDZ).  \textbf{[MEASURED, pre-registered]} The
 matched-accuracy comparison brackets the Gaussian cost from both sides:
 aug-cc-pVDZ at 41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$
 short of the Slater DZP while already costing
@@ -155,7 +157,16 @@ $10^{-9}$~Ha;
 \item frozen-core CCSD equals active-space full CI on a case where both
 are computable;
 \item nine planted wrong answers (sign flips, dropped diagrams, a wrong
-denominator) were each caught by the tests.
+denominator) were each caught by the tests;
+\item in the 34-function Slater triple-zeta set of Stark \emph{et al.}\
+for hydrogen fluoride, at their geometry \cite{stark2025}, its
+frozen-core CCSD(T) correlation energy is $-0.25610$~Ha (12 Gaussians
+per function; $-0.25607$ at 8), against their heat-bath configuration
+interaction value of $-0.2558$~Ha from a different code, which
+integrates the Slater functions directly on a numerical grid.  Neither number is full configuration interaction,
+so the $0.3$~mHa difference is agreement, not an error bound.  The
+check covers the correlation energy only, since they report no
+mean-field energies.
 \end{itemize}
 
 \paragraph{Atomic reference.}  Oxygen exponents are set on the free
@@ -471,8 +482,10 @@ atom-set oxygen exponents, a $3d$ tied to the $3p$, and one hydrogen
 exponent.  It is a better-chosen member of the same primitive family as
 the two-scale kit, not a new structure.  The Slater DZP, with
 water-tuned polarization and two hydrogen $s$ exponents, stays
-$\gvq{p62_dzp_below_r5h_mha}{34}\mHa$ below $R5H$.  That $34$~mHa is
-the price of setting everything on the atom.  The lesson of
+$\gvq{p62_dzp_below_r5h_mha}{34}\mHa$ below $R5H$.  With the $3d$ also
+set on the atom, by its correlated energy, the gap is $21.7$~mHa
+(Sec.~\ref{sec:r3});\ that is the price of setting everything on the atom
+by these rules.  The lesson of
 Sec.~\ref{sec:native} stands: the case rests on one-centre structure,
 not on better bricks; what moved is that the two-exponent cap, not the
 Sturmian family, had been the $130$~mHa.
@@ -525,9 +538,26 @@ The upshot for the ladder: $R3$'s ratio of $-0.84$ is a ratio of two
 cancelling HF pieces and a transferring correlation loss, not a transfer
 number, and the $R4$ and $R5$ rungs, which are HF-driven radial splits,
 are untouched.  The ladder's one design flaw is identified: a $3d$ tied
-to an exponent the atomic objective cannot see.  Setting it by an atomic
-correlated criterion instead would change the ladder's rule and was not
-done.
+to an exponent the atomic objective cannot see.
+
+\textbf{[MEASURED, pre-registered]} The fix was then run as its own
+registered ladder (record
+\texttt{docs/predictions/2026-11-01\_scale\_ladder\_3d.md}, committed before any
+scored water energy).  On every rung the $3d$ exponent is set by the free
+oxygen atom's frozen-core CCSD(T) energy, UHF triplet reference, with the
+$s,p$ exponents unchanged;\ this is Dunning's correlation-consistent rule
+\cite{dunning1989}, and nothing is tuned on water.  The atom puts the $3d$
+at $2.74$ to $2.80$ on every rung, against $1.98$ to $2.28$ when tied to the
+$3p$.  The prediction, from two control moves, was that water would change
+by the atom's correlated change within $15.6\%$ on each rung.  It held on
+all four:\ water over atom is $1.04$, $1.05$, $0.91$ and $0.85$ for $R3$,
+$R4$, $R5$ and $R5H$, the last at the band's edge.  $R3$ stays $0.8$~mHa above
+$R2$, as predicted:\ the $3d$ share of its loss is gone on both rungs, and
+what remains is the part that does not transfer.  On the two largest
+moves the water RHF part rises instead of falling, so there the total is
+carried by correlation alone.  The best atom-set rung is now $R5H$ at
+$-76.260011$~Ha, $19.0$~mHa below cc-pVDZ and $21.7$~mHa above the
+water-tuned Slater DZP.
 
 \section{The qubit cost}
 \label{sec:qubit}
@@ -704,14 +734,29 @@ The mean-field half of Sec.~\ref{sec:dzp}, that Slater functions beat
 Gaussians per function at the SCF level, is textbook and no part of it
 is claimed here.  The design recipe, atom-optimized Slater primitives
 generally contracted on the cc-pV$X$Z pattern, has precedent in the
-Madrid group's STO valence sets for H to Ne with HF- and CI-optimized
-exponents \cite{ema2003}, and in the correlation-consistent-style STO
-sets of F\"orster and Visscher \cite{forster2021}.  The closest
+Madrid group's STO valence sets for H to Ne, a single $d$ for B to Ne,
+with all exponents set by minimizing the sum of the atom's
+Hartree--Fock and frozen-core CISD energies and hydrogen's on H$_2$
+\cite{ema2003}, and in the correlation-consistent-style STO
+sets of F\"orster and Visscher \cite{forster2021}, and earlier in the
+correlation-consistent Slater sets of Lesiuk and co-workers for the
+beryllium dimer, who report at FCI and CCSD(T) that they ``have not
+found a situation when STOs perform worse than GTOs basis sets of the
+same size'' \cite{lesiuk2015}; that is the qualitative form of the
+equal-size result here, and it is theirs.  The counterpoint is also on
+record: stock Slater sets tuned for density-functional work need about
+$45\%$ more functions than 6-311G for the same Hartree--Fock precision
+\cite{nemec2010}, which fits this paper's reading that the gain is in
+how the exponents are designed, not in the function family.  The closest
 molecular STO-against-cc-pV$X$Z comparison found compares forces, not
-correlated energies \cite{rico2004}.  No matched-size correlated
-STO-against-GTO head-to-head on a molecule was found, nor the split of
-the DZ-to-TZ gap into its mean-field and correlated parts, nor any
-qubit-resource comparison between the two families.  A qualitative
+correlated energies \cite{rico2004}.  No quantitative matched-size or
+matched-accuracy table of correlated energies on a polyatomic molecule
+was found, nor the split of the DZ-to-TZ gap into its mean-field and
+correlated parts, nor any qubit-resource comparison between the two
+families.  The statement that the Pauli count is fixed by orbital count
+and symmetry holds for the delocalized canonical orbitals used here; it
+is not a general law, since localized or diagonal bases change the count
+\cite{koridon2021}.  A qualitative
 reading that orbital shape matters little for correlation energy is
 sometimes attributed to Persson and Taylor; the full text could not be
 read and it is not cited as support.  The water complete-basis anchor of
@@ -752,12 +797,18 @@ polarization is worth $1.2$~mHa and does not change the bracket.  The
 matched-accuracy cost is a reading between two measured rungs.
 \item The $3d$ exponent on the ladder is tied to the $3p$, and
 Sec.~\ref{sec:r3} shows that tie to be the ladder's one design flaw.
-A ladder with the $3d$ set by an atomic correlated criterion would be a
-different ladder and has not been run.
+Setting the $3d$ by an atomic correlated criterion is Dunning's
+correlation-consistent rule, correlating exponents ``optimized in atomic
+correlated calculations'' while the $s,p$ functions ``can be taken from
+atomic Hartree--Fock calculations'' \cite{dunning1989}; a ladder built that
+way is a different ladder;\ it was registered separately and run
+(Sec.~\ref{sec:r3}).
 \item The solver is the project's own.  It is validated against an
-external reference on STO-3G water and against exact limits, but no
-larger-basis external cross-check of the CCSD(T) energies exists on the
-host.
+external reference on STO-3G water and against exact limits.  The one
+larger-basis external check is of the correlation energy alone, on
+hydrogen fluoride in another group's Slater basis
+(Sec.~\ref{sec:solver}); no external total energy in these bases exists
+on the host.
 \item None of this is a GeoVac lattice result, and none of it uses the
 angular sparsity that is the framework's structural asset.  The paper
 measures what tuned exponential functions buy at equal size, and finds
@@ -787,9 +838,12 @@ Slater DZP and already costs nine times the Pauli terms and 2.7 times
 the 1-norm, and the crossing lies between it and cc-pVTZ.  Hydrogen
 fluoride, built by the same rule and registered in advance, repeats
 both the equal-size gap ($59.5$~mHa, mostly mean-field, same Pauli
-count) and the matched-accuracy bracket.  The water-tuned basis stays
-$34$~mHa ahead of the best atom-set rung, and nothing here is a
-property of the lattice.
+count) and the matched-accuracy bracket.  Setting the $3d$ on the atom's
+correlated energy too, Dunning's rule, run as its own registered ladder,
+puts water $19.0$~mHa below cc-pVDZ, with every rung's change predicted
+from the atom to within $15\%$.  The water-tuned basis stays $21.7$~mHa
+ahead of that best atom-set rung, and nothing here is a property of the
+lattice.
 
 \section*{Backing}
 
@@ -906,6 +960,28 @@ oxygen (SL),'' \texttt{docs/predictions/2026-10-30\_scale\_ladder.md}, this
 repository, registered and committed 2026-10-30 before the scored
 energies were computed; disposition and the $R3$ addendum appended the
 same day.
+
+\bibitem{stark2025}
+A.~Stark, N.~Meier, J.~Hatch, J.~Kammeraad, D.-K.~Dang and
+P.~Zimmerman, ``Numerical Integration of Slater Basis Functions Over
+Prolate Spheroidal Grids,'' arXiv:2510.15204 (2025).
+
+\bibitem{lesiuk2015}
+M.~Lesiuk, M.~Przybytek, M.~Musia\l, B.~Jeziorski and R.~Moszynski,
+``Calculation of two-centre two-electron integrals over Slater-type
+orbitals revisited. III. Case study of the beryllium dimer,''
+Phys.\ Rev.\ A \textbf{91}, 012510 (2015), arXiv:1410.6176.
+
+\bibitem{nemec2010}
+N.~Nemec, M.~D.~Towler and R.~J.~Needs, ``Benchmark all-electron
+ab initio quantum Monte Carlo calculations for small molecules,''
+J.\ Chem.\ Phys.\ \textbf{132}, 034111 (2010), arXiv:0908.2041.
+
+\bibitem{koridon2021}
+E.~Koridon, S.~Yalouz, B.~Senjean, F.~Buda, T.~E.~O'Brien and
+L.~Visscher, ``Orbital transformations to reduce the 1-norm of the
+electronic structure Hamiltonian for quantum computing applications,''
+Phys.\ Rev.\ Research \textbf{3}, 033127 (2021), arXiv:2103.14753.
 
 \bibitem{ma_record}
 J.~Loutey, pre-registered record ``The matched-accuracy Gaussian

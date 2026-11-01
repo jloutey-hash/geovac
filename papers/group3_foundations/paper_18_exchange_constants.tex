@@ -380,14 +380,17 @@ stereographic weights is the quartic
   y^2 = (c_1 k^2 + 1)(c_2 k^2 + 1),
 \end{equation}
 an elliptic curve.  Its $D=0$ period is a complete elliptic integral $K$, and
-the full integral is a period of this family (its radial core is not an elliptic dilogarithm, Paper~59), degenerating to
+the full integral is an integral of periods over this family (its radial core is not an elliptic dilogarithm, Paper~59), degenerating to
 the genus-zero two-centre curve only on the measure-zero locus $c_1 = c_2$ of a
 shared sphere.
 
-The embedding tier therefore carries a \emph{genus grading}: genus zero
+The embedding tier therefore carries a \emph{genus grading} at the level of the
+radial core: genus zero
 ($\{e^a E_1(a), \ln, \gamma_E\}$) at two centres, genus one (elliptic) at
-three.  The two two-centre negatives above---no $\pi$, no dilogarithm---are
-genus-zero properties and do \emph{not} survive the third centre, which does
+three.  Whether the integrated three-centre value leaves the two-centre class
+is open:\ the two-centre exchange class builds the same fibre family and still
+closes at genus zero (Paper~59).  The two two-centre negatives above---no $\pi$, no dilogarithm---are
+genus-zero properties and do \emph{not} survive in the radial core at the third centre, which does
 not climb to a higher rung of the polylogarithm/MZV weight tower but leaves
 that tower entirely, orthogonally to the calibration $M_1/M_2/M_3$ Mellin
 sub-mechanisms.  This is the transcendence-level statement of ``no coordinate
@@ -1162,7 +1165,8 @@ Paper~32 §VIII Corollaries \texttt{cor:m1\_pure\_tate},
 state the case-exhaustion-theorem-level consequences.  Every
 transcendental in the census of GeoVac spectral data has a named motivic
 home (a census, not a classification;\ indexing by the Mellin slot~$k$ is
-a reading, which the half-integer M2 values with odd zeta strain);\ the remainder of this
+a reading, with the period-ring tie-break stated below for a value
+reached from two slots);\ the remainder of this
 subsection walks the master-mechanism reading
 (\S\,master-mechanism), the mechanism-as-domain reading
 (\S\,domain-partition), the witness panels for the three period-ring
@@ -1407,6 +1411,25 @@ the cases it treats (\textbf{[CONDITIONAL]}, first fifteen projections):\
 M1 in $\mathbb{Q}[\pi, 1/\pi]$, M2 (Seeley--DeWitt coefficients and
 integer $s$) in $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$, M3 in
 $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.
+
+\emph{Tie-break for a value reached from two slots.}  Slot~$k$
+extracts $D(2s - k)$, so one value $D(m)$ is reached from two slots
+($k = 1$ at $s$ and $k = 2$ at $s + \tfrac{1}{2}$), and the slot index
+alone does not place it.  The tie-break is the period ring the value
+lands in:\ $D(m)$ is M2 when it lies in M2's pure-Tate ring
+$\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ and M3 otherwise.  The
+half-integer Hurwitz function $\zeta(s, 3/2)$ is the spinor spectrum's
+zeta and appears in every slot;\ its $\pi$-power values (even argument,
+including $\zeta_{D^2}$ at integer $s$) are M2, and its odd-zeta values
+(odd argument, including $\zeta_{D^2}$ at half-integer $s \ge 5/2$)
+are M3.  Two reasons fix the rule:\ odd zeta values violate M2's own
+signature (motivically, the unipotent zeta values vanish at even argument and not at odd,
+Brown~\cite{brown_icm2014}) and lie in M3's ring, where the unrestricted series $D(s)$ is
+already filed above;\ and $\zeta_{D^2}$ at half-integer $s \ge 5/2$ is
+not a Seeley--DeWitt coefficient.  The rule applies only to a value
+reached from two slots, and it is not neutral on rationals:\ $\mathbb{Q}$
+lies inside M2's ring, so a rational value reached from two slots would
+be filed under M2.
 
 \paragraph{M3 sectional convention refinement (Sprint L2-D, May 2026).}
 The vertex-parity Hurwitz mechanism of M3 is sectional in the chosen
@@ -4071,6 +4094,10 @@ arXiv:2401.03705 (2024).
 C.~I.~Perez-Sanchez,
 ``Comment on `Gauge networks in noncommutative geometry','',
 arXiv:2508.17338 (2025).
+
+\bibitem{brown_icm2014}
+F.~Brown, ``Motivic periods and $\mathbb{P}^1\setminus\{0,1,\infty\}$,'' in
+\textit{Proceedings of the ICM, Seoul 2014}, Vol.~II;\ arXiv:1407.5165.
 
 \bibitem{brown2012}
 F.~Brown,

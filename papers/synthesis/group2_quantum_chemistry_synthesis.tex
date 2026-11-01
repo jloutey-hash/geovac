@@ -785,10 +785,11 @@ Weight one is not the same as decidable.
 
 Paper~58 closes the two-center tensor in closed form;\ Paper~59 asks what
 happens at the third.  Read in momentum space, the three-center
-electron-repulsion integral is a two-scale Bessel moment whose two Fock
+electron-repulsion integral has a radial core that is a two-scale Bessel moment whose two Fock
 scales define a quartic curve:\ the two-center case is genus zero
 (elementary, weight-one $\{E_1,\ln,\gamma\}$), and the third center
-raises the genus to one.  Its period is a complete elliptic integral, it
+raises the radial core's genus to one;\ whether the integrated value leaves the
+two-center class is open.  Its period is a complete elliptic integral, it
 satisfies an explicit fourth-order Picard--Fuchs equation, and the
 connection is \emph{irreducible} (a Fourier--Laplace transform of an
 irreducible rank-one connection), so no closed form arises through
@@ -801,7 +802,7 @@ closed form remains open, and the paper says so.
 Two consequences for this arc.  The polyatomic question below is thereby
 sharpened from ``can the genuine-integral route be extended?'' to a
 statement about transcendence class:\ the extension is not blocked by
-missing algebra but by a genus jump, and any closed-form polyatomic
+missing algebra but by a genus jump in the radial core, and any closed-form polyatomic
 tensor is all-or-nothing (a part-closed-form, part-fitted tensor is not
 decidable at all).  And the same obstruction gates explicitly-correlated
 (F12) evaluation, because the difficulty of a two-electron integral lives
@@ -885,7 +886,7 @@ LiH):\ the deliverable is the RI-free reduction, not the correlation energy
 recovered.  On one centre that reduction is the classical Hylleraas-CI
 treatment of three- and four-electron integrals;\ only its two-center
 extension appears to be new, as far as the literature search reported in
-Paper~12 (which gives the prior art) could establish.  The gate is therefore specifically the three-center genus jump,
+Paper~12 (which gives the prior art) could establish.  The gate is therefore specifically the three-center genus jump of the radial core,
 not explicit correlation as such.
 
 \subsection{The isoenergetic secular equation as a quantum algorithm (Paper~60)}
@@ -980,8 +981,8 @@ functions, the size of cc-pVDZ on water, one geometry and one method
 does a one-centre Slater-type design recover, and what does it cost in
 qubit terms.  Four measured findings.  A Slater double-zeta basis built
 by cc-pVDZ's own design rule is $41$~mHa lower, $29$ of it at the
-mean-field level, at the same Jordan--Wigner Pauli count and five
-percent more $1$-norm.  The framework's own fixed-exponent rules do not
+mean-field level, at the same Jordan--Wigner Pauli count in canonical
+orbitals and five percent more $1$-norm.  The framework's own fixed-exponent rules do not
 buy that:\ the hydrogenic $Z/n$ kit is about $0.2$~Ha above cc-pVDZ, a
 single Coulomb--Sturmian scale per atom more than a hartree, and the
 hydrogenic loss is the fixed radial node structure, which composed-style
@@ -1003,7 +1004,9 @@ both findings:\ the Slater DZP is $59.5$~mHa below cc-pVDZ at nineteen
 functions with the same Pauli count, and aug-cc-pVDZ is still
 $24$~mHa short at $9.3$ times the terms.  The
 caps are stated in the paper:\ the water-tuned Slater basis
-stays $34$~mHa lower than the best atom-set rung, and none of it is a
+stays $34$~mHa lower than the best atom-set rung, $21.7$~mHa once the
+$3d$ is also set on the atom's correlated energy (Dunning's rule, a second
+pre-registered ladder that put water $19.0$~mHa below cc-pVDZ), and none of it is a
 lattice result; the
 angular sparsity that is the framework's structural asset plays no part
 in any number there.  For the hierarchy, the datum is the one
@@ -1251,7 +1254,7 @@ lone--lone couplings unphysical at the composed
 level~\cite{loutey_paper17}; extending the genuine-integral route past
 two centers is the open polyatomic question---now sharpened by Paper~59
 from an algebra question to a transcendence one:\ the third center raises
-the genus from zero to one, the resulting connection is irreducible, and
+the radial core's genus from zero to one, the resulting connection is irreducible, and
 the finite closed form is open~\cite{loutey_paper59}.  Both remain named
 boundaries of the current encoding rather than refutations of the
 hierarchy.
@@ -1479,7 +1482,7 @@ GeoVac Paper~58 (2026).
 
 \bibitem{loutey_paper59}
 J.~Loutey,
-``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment:\ Genus One at the Third Center in Momentum-Space Slater Theory,''
+``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment:\ A Genus-One Radial Core at the Third Center in Momentum-Space Slater Theory,''
 GeoVac Paper~59 (2026).
 
 \bibitem{loutey_paper61}

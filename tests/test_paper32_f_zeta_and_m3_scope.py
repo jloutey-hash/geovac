@@ -13,7 +13,8 @@
 (2) The pi-source case-exhaustion theorem's converse (iii) => (i) is
     WITHDRAWN (DELTA #21, 2026-09-30; an intermediate FULL #10 re-scope to
     'M1 or M2 only' is also retired) as NOT ESTABLISHED (not proved false).
-    Candidate witnesses: M2's spinor zeta at half-integer s and M3 at s = 2
+    Candidate witnesses: the spinor zeta at half-integer s (an odd-zeta value,
+    M3's by Paper 18's period-ring tie-break, 2026-11-01) and M3 at s = 2
     (analytic continuation) and s = 4 (convergent) -- no KNOWN pi.  (B = 42's
     M1 'rational core' tag is a Paper 55 convention, not a witness.)  The PSLQ helper
     below is EVIDENCE only and its scope is narrow: it tests q1*pi^k + q2
@@ -98,11 +99,13 @@ def test_converse_withdrawn_m3_convergent_witness_s4():
 
 
 def test_converse_withdrawn_m2_half_integer_witness():
-    """DELTA #21: M2's spectral zeta (Paper 28 T9) at half-integer s = 5/2 is
-    14 zeta(3) - (31/2) zeta(5) -- no KNOWN pi -- so engaging M2 is not known to force pi.
+    """DELTA #21: the squared-Dirac spectral zeta (Paper 28 T9) at half-integer
+    s = 5/2 is 14 zeta(3) - (31/2) zeta(5) -- no KNOWN pi.  (Name kept for
+    history: since 2026-11-01 this odd-zeta value is filed under M3, not M2,
+    by Paper 18's period-ring tie-break.)
     Computed from the Dirac spectrum |lambda| = n + 3/2, deg 2(n+1)(n+2).
-    WRONG ANSWER REJECTED: an M2 spectral-zeta value at half-integer s with a
-    small pi relation (i.e. 'M2 always injects pi')."""
+    WRONG ANSWER REJECTED: a squared-Dirac spectral-zeta value at half-integer
+    s with a small pi relation."""
     s = mp.mpf(5) / 2
     z = mp.nsum(lambda n: 2 * (n + 1) * (n + 2) * (n + mp.mpf(3) / 2) ** (-2 * s), [0, mp.inf])
     assert abs(z - (14 * mp.zeta(3) - mp.mpf(31) / 2 * mp.zeta(5))) < mp.mpf(10) ** -30

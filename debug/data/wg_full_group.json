@@ -1,0 +1,218 @@
+[
+ {
+  "n_max": 2,
+  "mode": "full",
+  "dimH": 16,
+  "dimO": 30,
+  "commutant_dim": 1,
+  "eigenvalues": [
+   -2.5,
+   -1.5,
+   1.5,
+   2.5
+  ],
+  "eig_mults": [
+   6,
+   2,
+   2,
+   6
+  ],
+  "spin4_labels": [
+   [
+    1.0,
+    0.5
+   ],
+   [
+    0.5,
+    0.0
+   ],
+   [
+    0.0,
+    0.5
+   ],
+   [
+    0.5,
+    1.0
+   ]
+  ],
+  "multiplicity_free": true,
+  "T_constraint_rank": 7,
+  "T_identity_dim": 1,
+  "T_torsion_invariants": [
+   2
+  ],
+  "T_elements_found_mod_phase": [
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.5,
+    0.0,
+    0.5
+   ]
+  ],
+  "center_mod_phase": [
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.5,
+    0.0,
+    0.5
+   ]
+  ],
+  "T_extra_mod_center": [],
+  "T_found_residuals": [
+   1.0863908647481932e-15,
+   1.093931688226596e-15
+  ],
+  "signD_residual": 1.0,
+  "alternating_level_residual": 1.093931688226596e-15,
+  "inversion_null": 1,
+  "inversion_anticommutes_D": 9.04214086782283e-15,
+  "inversion_unitarity": 4.970073923189811e-15,
+  "inversion_preserves_O": 1.4551919315993395e-15,
+  "inv_L_to_R_resid": 1.2742204701721809e-15,
+  "inv_R_to_L_resid": 1.2795515485260625e-15,
+  "inversion_square_is_scalar": 3.7371085128787806e-15,
+  "O_closed_under_transpose": 9.930079045428116e-16,
+  "O_closed_under_conjugation": 1.1468732426910146e-15,
+  "transpose_intertwiner_null": 1,
+  "transpose_gram_ratios": [
+   9.403090304932168e-17,
+   0.12082512918268536
+  ],
+  "transpose_U_unitarity": 4.504330307197697e-15,
+  "transpose_U_comm_D": 1.1996164382894483e-14,
+  "transpose_U_anticomm_D": 18.330302779823363,
+  "transpose_U_L_to_R": 1.0,
+  "transpose_U_L_to_L": 1.125636807865897e-15,
+  "transpose_2pos_violation_rel": 3.010742880042986e-15
+ },
+ {
+  "n_max": 3,
+  "mode": "full",
+  "dimH": 40,
+  "dimO": 91,
+  "commutant_dim": 1,
+  "eigenvalues": [
+   -3.5,
+   -2.5,
+   -1.5,
+   1.5,
+   2.5,
+   3.5
+  ],
+  "eig_mults": [
+   12,
+   6,
+   2,
+   2,
+   6,
+   12
+  ],
+  "spin4_labels": [
+   [
+    1.5,
+    1.0
+   ],
+   [
+    1.0,
+    0.5
+   ],
+   [
+    0.5,
+    0.0
+   ],
+   [
+    0.0,
+    0.5
+   ],
+   [
+    0.5,
+    1.0
+   ],
+   [
+    1.0,
+    1.5
+   ]
+  ],
+  "multiplicity_free": true,
+  "T_constraint_rank": 11,
+  "T_identity_dim": 1,
+  "T_torsion_invariants": [
+   2
+  ],
+  "T_elements_found_mod_phase": [
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.5,
+    0.0,
+    0.5,
+    0.0,
+    0.5
+   ]
+  ],
+  "center_mod_phase": [
+   [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.5,
+    0.0,
+    0.5,
+    0.0,
+    0.5
+   ]
+  ],
+  "T_extra_mod_center": [],
+  "T_found_residuals": [
+   1.8863519823107823e-15,
+   1.8865847665637293e-15
+  ],
+  "signD_residual": 0.9860132971832698,
+  "alternating_level_residual": 1.8865847665637293e-15,
+  "inversion_null": 1,
+  "inversion_anticommutes_D": 4.52768519508465e-14,
+  "inversion_unitarity": 1.429841107017908e-14,
+  "inversion_preserves_O": 2.635643128354865e-15,
+  "inv_L_to_R_resid": 2.2668528979787968e-15,
+  "inv_R_to_L_resid": 2.2113950614999386e-15,
+  "inversion_square_is_scalar": 1.4065961636220815e-14,
+  "O_closed_under_transpose": 1.5922098020567453e-15,
+  "O_closed_under_conjugation": 1.884095150552412e-15,
+  "transpose_intertwiner_null": 1,
+  "transpose_gram_ratios": [
+   -6.751668043085123e-16,
+   0.08571727401007374
+  ],
+  "transpose_U_unitarity": 1.5978027282133374e-14,
+  "transpose_U_comm_D": 3.590613455273831e-14,
+  "transpose_U_anticomm_D": 38.88444419044716,
+  "transpose_U_L_to_R": 1.0,
+  "transpose_U_L_to_L": 2.8176183560846002e-15,
+  "transpose_2pos_violation_rel": 7.205453357977502e-15
+ }
+]
