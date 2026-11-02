@@ -47,7 +47,9 @@ import pytest
 
 HERE = Path(__file__).parent
 SUP = HERE / 'paper59_intclass_support'
-FROZEN = {'intclass_lib.py': 'b1655d6450fec0c1ed5f51d29e89e4d0cdb222da7eadf3d570286e1bff7467a6',
+# sha256 after CRLF -> LF (git may rewrite line endings on checkout).  intclass_lib.py was frozen with CRLF
+# endings, raw sha256 b1655d64...67a6 as in commit 40093e7c; the other three were frozen with LF.
+FROZEN = {'intclass_lib.py': '2a142e5b5667b432c7de4be885f5b6767daf3d209c86261076dc6ae5e4f641d4',
           'intclass_score.py': 'aaf700e482f53c0a204939c08e6e12c9786d544e48c77e176503f21e5add91ca',
           'na_modguess.py': '84691c87a4a280b6823438af574c0fff6af9bf3f7ba7b76d93f2bbe866847d7d',
           'na_modanalyze.py': 'de92dc3acdcc7082001e32b50ef44db8c3bd75d990f615603b5f97f6ea178005'}
@@ -74,7 +76,7 @@ SC, I = _load()
 def test_support_copies_are_the_frozen_instrument():
     """Wrong answer rejected: an instrument edited after the record was scored."""
     for name, h in FROZEN.items():
-        assert hashlib.sha256((SUP / name).read_bytes()).hexdigest() == h, name
+        assert hashlib.sha256((SUP / name).read_bytes().replace(b'\r\n', b'\n')).hexdigest() == h, name
 
 
 def pulled_back_peel(c_x, D1, D2):
