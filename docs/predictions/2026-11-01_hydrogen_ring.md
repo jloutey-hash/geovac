@@ -167,3 +167,67 @@ aug-cc-pVDZ to match it. Part B: on a ring one set of orbitals carries two label
 momentum is the label that gives exact selection rules and taperable qubits; the site label is the one that gives
 locality and truncation. This is the planar-ring form of the PI's prediction. It says nothing yet about a torus,
 where the tube winding is only approximately conserved (Encinosa-Mott); that is a separate test.
+
+## Disposition
+
+Scored 2026-11-01 after the scored modes ran (rows in `debug/data/hring_study.jsonl`, modes `final` and `labels`;
+exponents `debug/data/hring_exponents.json`). Driver unchanged since this record's commit (313996c0; sha256 in its
+message). **Decision: STOP.** HR-A1 and HR-A4 failed. Part B held in full. Not VOID: both polarization fits ended
+with success, well under the iteration cap (Slater p = 1.5518 in 7 evaluations, cc-pVDZ p = 0.6085 in 8), and the
+cc-pVTZ pipeline check passed (3.7e-7 Eh).
+
+| Basis (H6, 1.0 A) | Functions | RHF | CCSD | CCSD(T) | JW Pauli | 1-norm |
+|:--|:--:|:--:|:--:|:--:|:--:|:--:|
+| Slater DZP | 30 | -3.253852 | -3.389089 | -3.391958 | 288,959 | 910.8 |
+| cc-pVDZ, p re-optimized | 30 | -3.248909 | -3.385643 | -3.388492 | 284,895 | 944.2 |
+| cc-pVDZ, published | 30 | -3.249608 | -3.384403 | -3.387147 | 286,927 | 987.1 |
+| cc-pVDZ+TZpol | 48 | -3.250136 | -3.392375 | -3.395593 | 1,812,729 | 3290.7 |
+| aug-cc-pVDZ | 54 | -3.249807 | -3.389846 | -3.393029 | 3,038,807 | 2846.7 |
+| cc-pVTZ | 84 | -3.255794 | -3.405645 | -3.409413 | 16,902,041 | 14679.4 |
+
+**Part A**
+- **HR-A1 MISSED.** The Slater DZP lies 3.47 mEh below the re-optimized cc-pVDZ, short of the 6.2 mEh bar. The
+  sign is right.
+- **HR-A2 MISSED (not gating).** 3.47 mEh is below the band [6.2, 24.7].
+- **HR-A3 HELD.** The RHF gap is 4.94 mEh, 1.43 times the CCSD(T) gap. Correlation gives back 1.48 mEh, more than
+  on H2 (share 1.13).
+- **HR-A4 MISSED.** cc-pVDZ+TZpol (48 functions) lies 3.64 mEh below the Slater DZP, and aug-cc-pVDZ (54) lies
+  1.07 mEh below it. cc-pVTZ lies below it, as predicted. Paper 62's water result, aug-cc-pVDZ still 8 mHa short,
+  does not carry over to this ring.
+- **HR-A5 MISSED as registered.** Over canonical orbitals the counts differ: Slater 288,959 against cc-pVDZ
+  286,927 (published) and 284,895 (re-optimized). *Diagnosis, after scoring:* the difference is not the radial
+  shape. In both fixed labellings of Part B, the Slater DZP and cc-pVDZ give identical counts at 1e-10 (site
+  653,971, ring 149,591 in both). The two cc-pVDZ forms, with the same shape family, also differ from each other
+  over canonical orbitals. The D6h ring has degenerate orbital pairs, and the RHF solver returns an arbitrary
+  rotation within each pair, which moves integrals across the 1e-10 threshold. Water has no degenerate orbitals,
+  which is why Paper 62's canonical counts matched. The registered prediction did not anticipate this. It stands
+  as missed.
+- **HR-A6 (reported).**
+  - The Slater DZP has the lowest 1-norm of the four 30-function rows, 3.5% below the re-optimized cc-pVDZ.
+  - The cc-pVDZ+TZpol, the cheapest basis that beats the Slater DZP, costs 6.3 times the Pauli terms and 3.6
+    times the 1-norm.
+  - Re-optimizing the cc-pVDZ p exponent gains 1.34 mEh.
+  - The crossing lies between 30 and 48 functions, at or below the cc-pVDZ+TZpol rung, lower than on H2, where it
+    sat between cc-pVDZ+TZpol and cc-pVTZ.
+
+**Part B (both spaces)**
+- **HR-B1 HELD.** Z2 counts: 3 site and 5 ring, in the Slater DZP space and in the cc-pVDZ space.
+- **HR-B2 HELD.** Ring labels cut the 1e-10 count by a factor of 4.37 in both spaces (653,971 to 149,591).
+- **HR-B3 HELD.** At 1e-2 the site count is lower: 4,267 against 7,987 (Slater), and 4,171 against 7,979 (cc-pVDZ).
+- **HR-B4 (reported).**
+  - 1-norms, site against ring: 764.1 against 769.4 (Slater) and 746.4 against 779.2 (cc-pVDZ).
+  - Exactly zero two-electron integrals: 44.8% (site) and 87.3% (ring).
+  - The crossover lies between 1e-4 and 1e-3 in both spaces. At 1e-3 site is already lower: 51,115 against
+    70,851 (Slater), 50,395 against 63,031 (cc-pVDZ). This is lower than in the H4 cc-pVDZ control, where it lay
+    between 1e-3 and 1e-2.
+
+**Novelty at scoring time.** One rescan, a web search for a correlated Slater-against-Gaussian comparison on hydrogen
+rings at equal size. It found Reinhardt et al. again (Hartree-Fock and QMC, minimal basis) and nothing correlated.
+Status unchanged.
+
+**Reading (STOP).** Part A: on a pure-hydrogen ring the exponential basis still wins at equal size, but by about
+3.5 mEh, not the 12 mEh that three H2 units would give. One extra shell of Gaussian polarization closes the gap.
+Paper 62's matched-accuracy margin is a water result. It does not carry over to the ring, so it cannot be read as
+general to hydrogen-rich molecules. Part B holds as stated in advance: one orbital space, two label sets, two jobs.
+Ring momentum gives the exact zeros and two extra taperable qubits. Site labels give the lower count once small
+terms are dropped.

@@ -50,8 +50,8 @@ mostly a $3d$ exponent the atomic objective never sees, while its
 Hartree--Fock gain is two opposite pieces that cancel on water.
 \textbf{[MEASURED]} The Jordan--Wigner Pauli count is the same for every
 twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107\,382}$ terms on
-46 frozen-core qubits, because in canonical orbitals it is fixed by the
-orbital count and the $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
+46 frozen-core qubits, because in canonical orbitals without degenerate
+pairs it is fixed by the orbital count and the $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
 across the kits.  \emph{Caps.}  One geometry and one method per molecule;
 the ladder and the native kits are water only.
 The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
@@ -68,7 +68,12 @@ $\gvq{p62_aug_lambda_ratio}{2.7}\times$ the 1-norm on 80 qubits against
 a second molecule, repeats both findings: the Slater DZP is
 $\gvq{p62_hf_dzp_vs_ccpvdz_mha}{59.5}\mHa$ below cc-pVDZ at nineteen
 functions with the same Pauli count, and aug-cc-pVDZ is still short at
-$\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the terms.  Nothing here is a
+$\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the terms.
+\textbf{[MEASURED, pre-registered; STOP]} A ring of six hydrogens, with no
+core, does not:\ the Slater DZP is only $3.5$~mHa below cc-pVDZ at thirty
+functions, and one more Gaussian polarization shell at 48 functions already
+beats it, so the matched-accuracy margin is a property of these two
+molecules, not of exponential functions.  Nothing here is a
 GeoVac lattice structure: the
 bases are tuned exponential functions evaluated through Gaussian fits,
 and the angular sparsity of the one-centre framework does not enter.
@@ -726,6 +731,104 @@ Pauli terms and $\gvq{p62_hf_aug_lambda_ratio}{2.7}\times$ the 1-norm on
 62 qubits against 36.  The two molecules give nearly the same two
 ratios; that was reported, not predicted, and is not read as a law.
 
+\subsection{A third system: a ring of six hydrogens}
+\label{sec:hring}
+
+Both molecules above have a heavy atom.  To see whether the result needs
+one, the same rule was applied to H$_6$, a regular hexagon at $1.0$~\AA,
+with no core at all \cite{hr_record}.  The Slater DZP is $[2s1p]$ per
+hydrogen with water's $1s$ pair;\ its $2p$ exponent and cc-pVDZ's were
+re-optimized on the ring's CCSD.  All electrons are correlated.  The
+solver is the same, through a memory-lean copy that never forms the
+spin-orbital virtual block;\ it gives the original's energies to every
+printed digit on three smaller rings.  On the scored ring it reproduces
+the published cc-pVTZ CCSD, $-3.405645$~Ha \cite{magoulas2022}, to
+$4\times10^{-7}$~Ha.  The predictions were scaled from H$_2$:\ three H$_2$
+gaps make $12.3$~mHa.
+
+\begin{table}[t]
+\caption{H$_6$ ring, $D_{6h}$, $1.0$~\AA, all electrons, CCSD(T).
+cc-pVDZ$^*$:\ its $p$ exponent re-optimized on the ring.  ``vs DZP'' is
+relative to the Slater DZP, positive above.  Pauli counts over RHF
+canonical orbitals, tolerance $10^{-10}$.}
+\label{tab:hring}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Basis & Fns & CCSD(T) & vs DZP (mHa) & $N_{\rm Pauli}$ ($Q$) & $\lambda$ \\
+\hline
+cc-pVDZ & 30 & $-3.387147$ & $+4.8$ & 286\,927 (60) & 987.1 \\
+cc-pVDZ$^*$ & 30 & $-3.388492$ & $+3.5$ & 284\,895 (60) & 944.2 \\
+Slater DZP & 30 & $-3.391958$ & $0$ & 288\,959 (60) & 910.8 \\
+aug-cc-pVDZ & 54 & $-3.393029$ & $-1.1$ & 3\,038\,807 (108) & 2\,846.7 \\
+cc-pVDZ+TZpol & 48 & $-3.395593$ & $-3.6$ & 1\,812\,729 (96) & 3\,290.7 \\
+cc-pVTZ & 84 & $-3.409413$ & $-17.5$ & 16\,902\,041 (168) & 14\,679.4 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, pre-registered; STOP]}  Table~\ref{tab:hring}.  At equal
+size the Slater DZP still wins, but by $3.5$~mHa, short of the registered
+bar of $6.2$~mHa.  The mean-field part is $4.9$~mHa, larger than the whole
+gap:\ correlation gives $1.5$~mHa back.  At matched accuracy the result
+turns over.  One more Gaussian polarization shell, cc-pVDZ+TZpol at 48
+functions, is already $3.6$~mHa below the Slater DZP, and aug-cc-pVDZ is
+$1.1$~mHa below.  So the crossing lies between 30 and 48 functions, and the
+cheapest Gaussian basis that beats the Slater DZP costs $6.3\times$ the
+Pauli terms and $3.6\times$ the 1-norm.  The water and hydrogen fluoride
+margins at matched accuracy are not a property of exponential functions in
+general;\ on this ring they shrink to one shell.
+
+The ring also qualifies the Pauli-count statement.  Over canonical orbitals
+the three 30-function counts differ by up to $1.4\%$, even between the two
+cc-pVDZ forms.  The cause is the ring's degenerate orbital pairs:\ the
+solver returns an arbitrary rotation inside each pair, and that moves
+integrals across the tolerance.  In a fixed symmetry-adapted labelling the
+counts are identical for the Slater and Gaussian bases:\ $149\,591$ in ring
+labels and $653\,971$ in site labels, the two labellings described next.  Water and hydrogen
+fluoride have no degenerate orbitals, which is why their canonical counts
+matched.  The registered prediction of equal canonical counts missed.
+
+Two labellings of the same orbital space were also compared, registered in
+the same record.  \emph{Site} labels are orthogonalized local functions;\
+\emph{ring} labels are their discrete Fourier transform around the ring.
+Ring labels carry the ring momentum, which gives two more qubit symmetries
+(five against three) and $4.37$ times fewer Pauli terms at $10^{-10}$,
+since $87\%$ of their integrals vanish exactly.  Site labels give fewer
+terms once small ones are dropped:\ at $10^{-2}$, $4\,267$ against $7\,987$.
+The crossover falls between $10^{-4}$ and $10^{-3}$.  All three
+predictions held in both the Slater and the cc-pVDZ space.  Using
+symmetries to remove qubits is standard \cite{bravyi2017tapering};\ that
+local orbitals suit some methods and delocalized ones others is reported
+for hydrogen chains, rings and lattices \cite{stair2020};\ the counts here are new
+only as measurements.  A comparison of the two families on hydrogen rings
+at the Hartree--Fock level, with one function per atom, is
+Ref.~\cite{reinhardt2011}.
+
+\textbf{[MEASURED, pre-registered; GO]}  A torus of rings has two
+winding labels instead of one \cite{tr_record}.  The molecule is $N$
+small rings of $M$ hydrogens, $M=3$ or $4$, set upright around a circle,
+with one minimal Slater $1s$ per atom.  The winding $k$ around the hole is
+exact, since every ring is equivalent under the $N$-fold rotation.  The
+winding $m$ around the tube is not:\ the inner side of the tube faces the
+hole and the outer side does not.  Eleven scored cases were run after
+sixteen controls at a different ring spacing set every band.  The share
+of the integrals that breaks $k$ is at most $8.4\times10^{-15}$.  The qubit
+symmetries count $2$, $4$ and $5$ in site labels, $k$ labels and $(k,m)$
+labels at even $N$, and $2$, $3$ and $4$ at odd $N$, as counted in
+advance.  The share that breaks $m$ falls as the torus thins.  Its local
+slope against the ratio $r/R$ of tube radius to ring radius rises toward
+$1$ for a change of $m$ by one ($0.943$ at $M=3$ and $0.998$ at $M=4$, in
+the electron-pair integrals at the thinnest step) and toward $2$ for a
+change by two ($1.980$ at $M=4$).  That is the curvature coupling of
+toroidal and poloidal modes known for electrons on a torus
+\cite{encinosa2022};\ here it is checked in a molecule.  Using $m$ as well
+as $k$ always keeps the same fraction of the Pauli terms at $10^{-10}$:\
+$0.5065$ at $M=3$ and $0.5308$ at $M=4$, unmoved by the change of spacing.
+That fraction has no derivation and is reported as an observation.  At
+$10^{-2}$ site labels again give the fewest terms.  Momentum labels for
+periodic systems and their use in removing qubits are established
+\cite{manrique2020,picozzi2026}.
+
 \section{Prior art}
 \label{sec:prior}
 
@@ -756,7 +859,8 @@ correlated parts, nor any qubit-resource comparison between the two
 families.  The statement that the Pauli count is fixed by orbital count
 and symmetry holds for the delocalized canonical orbitals used here; it
 is not a general law, since localized or diagonal bases change the count
-\cite{koridon2021}.  A qualitative
+\cite{koridon2021}, and degenerate orbitals make the canonical count depend
+on an arbitrary rotation (Sec.~\ref{sec:hring}).  A qualitative
 reading that orbital shape matters little for correlation energy is
 sometimes attributed to Persson and Taylor; the full text could not be
 read and it is not cited as support.  The water complete-basis anchor of
@@ -775,10 +879,12 @@ rung where the ratio has the wrong sign.
 \label{sec:limits}
 
 \begin{itemize}
-\item One geometry and one method per molecule, and two molecules.  The
+\item One geometry and one method per system, and three systems.  The
 equal-size and matched-accuracy findings are checked on hydrogen
-fluoride (Sec.~\ref{sec:hf}); the native kits, the ladder and the $R3$
-diagnosis are water only.  No potential energy surface, no basis-set
+fluoride (Sec.~\ref{sec:hf}), and they fail on the H$_6$ ring
+(Sec.~\ref{sec:hring}):\ the equal-size gap shrinks to $3.5$~mHa and the
+matched-accuracy margin to one shell.  The native kits, the ladder and the
+$R3$ diagnosis are water only.  No potential energy surface, no basis-set
 limit.  The ladder frees
 exponents in one order and does not test every partition of five
 primitives.  ``Needed'' in Sec.~\ref{sec:ladder} means ``worth more
@@ -838,7 +944,10 @@ Slater DZP and already costs nine times the Pauli terms and 2.7 times
 the 1-norm, and the crossing lies between it and cc-pVTZ.  Hydrogen
 fluoride, built by the same rule and registered in advance, repeats
 both the equal-size gap ($59.5$~mHa, mostly mean-field, same Pauli
-count) and the matched-accuracy bracket.  Setting the $3d$ on the atom's
+count) and the matched-accuracy bracket.  A ring of six hydrogens, with no
+core, does not:\ there the Slater DZP is $3.5$~mHa ahead at equal size and
+one extra Gaussian shell overtakes it, so the matched-accuracy margin is
+not general to exponential functions.  Setting the $3d$ on the atom's
 correlated energy too, Dunning's rule, run as its own registered ladder,
 puts water $19.0$~mHa below cc-pVDZ, with every rung's change predicted
 from the atom to within $15\%$.  The water-tuned basis stays $21.7$~mHa
@@ -870,7 +979,11 @@ The hydrogen fluoride guard,
 free fluorine atom's design step and the cc-pVDZ and aug-cc-pVDZ runs end
 to end; the Slater DZP and the other two rungs are read as registered
 values.
-Chronicle: CHANGELOG v5.20.11, v5.20.12, v5.21.25, v5.21.28, v5.21.29.
+The hydrogen ring and hydrogen torus records, each with its controls and
+disposition:\ \texttt{docs/predictions/2026-11-01\_hydrogen\_ring.md} and
+\texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md}.
+Chronicle: CHANGELOG v5.20.11, v5.20.12, v5.21.25, v5.21.28, v5.21.29,
+v5.22.1.
 
 \begin{thebibliography}{99}
 
@@ -997,6 +1110,56 @@ fluoride (HS),''
 this repository, registered and committed 2026-10-31 before any
 hydrogen fluoride energy was computed; disposition appended the same
 day.
+
+\bibitem{hr_record}
+J.~Loutey, pre-registered record ``Slater against Gaussian on a ring of
+six hydrogens, and two labellings of one orbital space (HR),''
+\texttt{docs/predictions/2026-11-01\_hydrogen\_ring.md}, this repository,
+registered and committed 2026-11-01 before any scored ring energy was
+computed; disposition appended the same day.
+
+\bibitem{magoulas2022}
+I.~Magoulas, J.~Shen, and P.~Piecuch, ``Addressing strong correlation by
+approximate coupled-pair methods with active-space and full treatments of
+three-body clusters,'' Mol.\ Phys.\ \textbf{120}, e2057365 (2022);
+arXiv:2111.13787.
+
+\bibitem{bravyi2017tapering}
+S.~Bravyi, J.~M.~Gambetta, A.~Mezzacapo, and K.~Temme, ``Tapering off
+qubits to simulate fermionic Hamiltonians,'' arXiv:1701.08213 (2017).
+
+\bibitem{stair2020}
+N.~H.~Stair and F.~A.~Evangelista, ``Exploring Hilbert space on a budget:
+Novel benchmark set and performance metric for testing electronic
+structure methods in the regime of strong correlation,''
+arXiv:2005.11349 (2020).
+
+\bibitem{reinhardt2011}
+P.~Reinhardt, J.~Toulouse, R.~Assaraf, C.~J.~Umrigar, and P.~E.~Hoggan,
+``Quantum Monte Carlo facing the Hartree-Fock symmetry dilemma: The case
+of hydrogen rings,'' arXiv:1107.3537 (2011).
+
+\bibitem{tr_record}
+J.~Loutey, pre-registered record ``The hydrogen torus, one exact winding
+and one leaking winding (TR),''
+\texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md}, this repository,
+registered and committed 2026-11-02 before any scored case was computed;
+disposition appended the same day.
+
+\bibitem{encinosa2022}
+M.~Encinosa and J.~Williamson, ``Electron gases in toroidal shells: mode
+coupling and state functions,'' Physica E (2022),
+doi:10.1016/j.physe.2022.115558; arXiv:2207.01745.
+
+\bibitem{manrique2020}
+D.~Z.~Manrique, I.~T.~Khan, K.~Yamamoto, V.~Wichitwechkarn, and
+D.~Mu\~noz Ramo, ``Momentum-space unitary coupled cluster and
+translational quantum subspace expansion for periodic systems on quantum
+computers,'' arXiv:2008.08694 (2020).
+
+\bibitem{picozzi2026}
+D.~Picozzi, ``Periodic symmetry-adapted encoding:\ qubit reduction in
+crystalline electronic structure,'' arXiv:2606.05777 (2026).
 
 \end{thebibliography}
 

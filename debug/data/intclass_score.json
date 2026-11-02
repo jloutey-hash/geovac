@@ -1,0 +1,20 @@
+{
+ "IC-0": "HELD",
+ "W1": "NOT-TRIANGULAR",
+ "W2": "NOT-TRIANGULAR",
+ "IC-1": "HELD",
+ "IC-2": "HELD",
+ "W1_stuck_types": [
+  "confluent-genus1-type",
+  "other"
+ ],
+ "IC-3": "HELD",
+ "NA": [
+  "NOT-TRIANGULAR",
+  "INCOMPLETE"
+ ],
+ "IC-4": "MISSED",
+ "IC-5": "HELD",
+ "IC-6": "HELD",
+ "gate": "GO"
+}

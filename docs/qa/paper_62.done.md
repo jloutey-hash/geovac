@@ -79,7 +79,7 @@ claim holds in canonical orbitals. A run PASSes this criterion only if all four 
 | 9 | HF: Slater DZP 59.5 mHa below cc-pVDZ at 19 functions; aug-cc-pVDZ short at 9.3x terms | MEASURED, pre-registered | `test_paper62_hf_second_molecule.py` (Gaussian rungs recomputed; **Slater DZP READ**, 23 min) |
 | 10 | External check: E_corr in Stark et al.'s TZ set agrees to 0.3 mHa | MEASURED, reported comparison | **record-only** (2.5 h): `debug/data/stark_zimmerman_hf_tz.jsonl` |
 | 11 | Water-tuned DZP stays 34 mHa below the best atom-set rung; 21.7 with the atom-set 3d | MEASURED (cap) | derived from #1 and #5 (C21); the 21.7 from #12 |
-| 12 | SL-3d: the 3d set on the atom's fc-CCSD(T) (Dunning's rule); transfer within 15% on four rungs; R5Hd 19.0 mHa below cc-pVDZ | MEASURED, pre-registered | **record-only, guard owed** (`docs/predictions/2026-11-01_scale_ladder_3d.md`) |
+| 12 | SL-3d: the 3d set on the atom's fc-CCSD(T) (Dunning's rule); transfer within 15% on four rungs; R5Hd 19.0 mHa below cc-pVDZ | MEASURED, pre-registered | `test_paper62_scale_ladder_3d.py` (ratios, band, SL3d-M, R5Hd position derived; R3 atom optimum and R3d water recomputed, slow; other rungs READ) |
 
 ## Watch-notes (things the PM already suspects, ranked)
 

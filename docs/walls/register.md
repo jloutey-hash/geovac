@@ -389,6 +389,29 @@ What still holds, checked: at the level of the curve a rational kernel does not 
 
 *Superseded 2026-10-16 one-sentence statement* (kept verbatim above under "Crystallization"; its "and not by the operator between the densities" clause is the one re-scoped here).
 
+### Note 2026-11-01 (v5.22.1, PM edit under the PI's standing permission, PI-approved; not a `/walls` pass) — what "genus zero" covers
+
+**Trigger.** Record IC (`docs/predictions/2026-11-01_integrated_class.md`, scored GO, IC-4 missed). As a function of
+the bond angle, the one-electron three-centre integral, int X Y / |r - Z|, is NOT TRIANGULAR: case N1, all six
+components stuck on both primes. So it leaves the two-centre class in the angle. It couples only one two-centre
+density, which the sentence above places at genus zero.
+
+**Reading (no status change).** The crystallized sentence stays CRYSTALLIZED and an Observation, and its falsifier is
+not triggered. Three clarifications, none a change of the rule:
+1. *Different object.* The rule is about the class of the value at one geometry: the curve the densities build,
+   in momentum space. IC tests the class of the function of the angle. A function can lie outside a class that
+   contains each of its values, so the two can disagree without either being wrong.
+2. *Genus zero is not the two-centre seed class.* Genus zero already holds non-elementary objects. Paper 59's
+   one-mass slice reduces to the Bessel K0(D) when one scale decouples, and K0 is genus zero but non-Liouvillian.
+   IC control B1 is that case. Read "zero or one distinct two-centre density gives genus zero" as a statement about
+   the curve, not as "lands in {E1, ln, gamma}".
+3. *First measured instance.* IC's N1 is the first measured case of a one-density integral leaving the triangular
+   class in the angle. Whether its stuck piece is Bessel-type is not decided. Its rates at infinity,
+   lambda^2 = -(zX^2 - zH^2), suggest it, but the stuck pieces have order 4 to 6 and the classifier reads "other".
+
+**Open (named, not run).** A pre-registered test of whether N1's stuck piece is equivalent to a Bessel-type
+operator. If it is, clarification 2 gets a concrete example. If it is not, something new sits at genus zero.
+
 ### This run's delta (2026-10-16)
 - PERIODS-TRANSCENDENCE: *forming (unworked)* → CRYSTALLIZED; members 5 → 7.
 - Brute-T2 row: STANDING → MIS-SCOPED (route-specific), with the 64-digit evidence.

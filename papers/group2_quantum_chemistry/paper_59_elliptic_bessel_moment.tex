@@ -74,9 +74,12 @@ no invariant coordinate subspace---so no closed form arises through factorizatio
 we leave open.  The message is not a solution
 but a relocation: the third center does not make the radial core messier
 within the two-center class, it raises the radial core's transcendence one genus, past the
-reach of the sunrise's elliptic-dilogarithm mechanism.  \textbf{[OPEN]} Whether the
-integrated three-center value leaves the two-center class is open:\ integrating the
-Feynman parameters can lower the class, as it does for two-center exchange.
+reach of the sunrise's elliptic-dilogarithm mechanism.  \textbf{[MEASURED]} The integrated
+three-center value leaves the two-center class too, as a function of the bond angle:\ its
+bond-angle operator, built from exact coefficients modulo primes, keeps a piece of order six
+with no first-order factor at two geometries, where a two-center-class form would factor
+completely (assuming its constants independent;\ the class of the value at one geometry is
+not decided).
 \textbf{[MEASURED]} Two pre-registered extensions (Sec.~\ref{sec:beyond})
 probe the rung variable:\ a fourth distinct center adds no genus,
 consistent with the class counting the distinct two-center densities a
@@ -148,8 +151,8 @@ a genus-zero fact and it stops at two centers.  The third center raises the
 radial core's transcendence one genus, to the elliptic (genus-one) world of Bessel moments
 and two-mass sunrise Feynman integrals.  We establish this constructively,
 validate every step numerically, place the object in the literature, and mark
-the finite closed form as open, together with whether the integrated value leaves the
-two-center class (Sec.~\ref{sec:scope}).
+the finite closed form as open.  As a function of the bond angle, the integrated value also
+leaves the two-center class (Sec.~\ref{sec:scope}).
 
 \emph{Lineage and scope.}  The momentum-space route is not new machinery.
 Molecular integrals over exponential-type orbitals have long been evaluated by
@@ -335,8 +338,8 @@ polylogarithm weight tower but leaves that tower for the elliptic one.  This
 is the transcendence-level form of ``no coordinate system for three foci.''
 It does not by itself fix the class of the integrated value:\ the two-center
 exchange class builds the same fibre family and still closes at genus zero
-(Sec.~\ref{sec:f12}), and whether the integrated three-center value leaves the
-two-center class is open (Sec.~\ref{sec:scope}).
+(Sec.~\ref{sec:f12}).  The integrated three-center value is tested separately, as a
+function of the bond angle, and it leaves the two-center class (Sec.~\ref{sec:scope}).
 
 %% ========================================================================
 \section{The reduction: an elliptic Bessel moment}
@@ -1954,7 +1957,8 @@ solid-harmonic polynomials in $\bm k$ and shift the exponents; these change
 the weights and arguments but not the genus of the curve~\eqref{eq:curve},
 which is set by the two distinct scales.  The result is a statement about the
 transcendence \emph{class} of the radial core of the three-center integral, established on its
-simplest genuine instance;\ the class of the integrated value is open (below).  It does not by itself deliver a polyatomic energy:
+simplest genuine instance;\ the integrated value, as a function of the angle, leaves the
+two-center class (below).  It does not by itself deliver a polyatomic energy:
 a molecular Hamiltonian requires the full three-center tensor, and a value
 that is part closed-form and part numerical is neither more accurate (the
 Gaussian fits are already exact to fit quality) nor decidable.  What the
@@ -2129,10 +2133,29 @@ computing).
 Guessing an operator from many exact terms is standard~\cite{bluemlein2009moments,bostan2009chi5};\ an
 equation in the bond angle for a three-center integral was not found in a literature search.
 Caps:\ $1s$ functions;\ the constants are assumed linearly independent over $\mathbb{Q}$.
-Since every channel stays in the two-center class, any elliptic content of the integrated
-value must come from the infinite channel sum, and whether it does is open:\ the integrated
-three-center value is not shown to leave the two-center class, and the decisive test is
-whether the bond-angle operator carries an elliptic factor.  The radial core is a period of an irreducible connection
+Since every channel stays in the two-center class, any higher-class content of the integrated
+value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the
+angle.  A two-center-class form in $w=|Y-Z|$ is a finite sum of rational functions, exponentials
+$e^{\lambda w}$ and their iterated integrals, so its operator in $w$ factors completely into
+first-order pieces.  For each of the 31 constant components we built the operator from the exact
+coefficients modulo a prime and removed first-order right factors one at a time.  At both
+geometries and modulo both primes, six components stop, after none or two such steps, at a piece
+of order $6$ with no first-order right factor.  Under the assumption that the 31 constants are
+linearly independent over $\overline{\mathbb{Q}}$, the integrated $(XY|XZ)$, as a function of the
+angle, therefore leaves the two-center class, and with it the class of iterated integrals of
+exponentials and rational functions.  The one-electron integral leaves it too:\ at one geometry all
+six of its components stop with no step taken, modulo both primes, and at the other geometry the
+test is undecided.  We had predicted the opposite for the one-electron integral.  This is a
+statement about the function of the angle:\ the class of the value at a single geometry is not
+decided, and whether the blocking piece is elliptic is a reading of local data, not a proof.  The
+search for first-order factors is incomplete where a singular factor does not split modulo the
+prime, since a first-order factor may need an algebraic extension of the
+constants~\cite{cluzeau_vanhoeij2004}.  Unsplit exponential rates
+are flagged and such components not counted;\ a planted control shows that unsplit singular points
+can also hide a factor without a flag, and none of the counted components has such a point with a
+fractional exponent.  Caps:\ $1s$ functions, two geometries, two primes, minimal operators not
+certified (record \texttt{docs/predictions/2026-11-01\_integrated\_class.md}, registered before
+computing).  The radial core is a period of an irreducible connection
 (Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
 closed form through any factorization;\ that does not bar an accurate
 evaluation, and whether the integrated three-center integral has a finite
@@ -2179,8 +2202,8 @@ where the coordinate obstruction dissolves, reduce to a two-scale Bessel
 moment on an elliptic curve, an elliptic deformation of the Bessel $K_{0}$
 with an explicit fourth-order Picard--Fuchs equation and a period that is a
 complete elliptic integral.  At the level of the radial core, the seventy-year difficulty of
-polyatomic Slater integrals is a genus jump;\ whether the integrated value leaves the
-two-center class is open (Sec.~\ref{sec:scope});\ and a classical
+polyatomic Slater integrals is a genus jump;\ as a function of the bond angle the
+integrated value leaves the two-center class too (Sec.~\ref{sec:scope});\ and a classical
 molecular integral turns out to be an instance of the modern theory of
 elliptic Feynman integrals---a bridge that, to our knowledge, had not been
 drawn.  With a Slater geminal the two-center master integral already reaches the same
@@ -2469,6 +2492,11 @@ algebra,'' \textit{Comput.\ Phys.\ Commun.}\ \textbf{180}, 2143 (2009); arXiv:09
 A.~Bostan, S.~Boukraa, A.~J.~Guttmann, S.~Hassani, I.~Jensen, J.-M.~Maillard and N.~Zenine,
 ``High order Fuchsian equations for the square lattice Ising model:\ $\tilde\chi^{(5)}$,''
 \textit{J.\ Phys.\ A}\ \textbf{42}, 275209 (2009); arXiv:0904.1601.
+
+\bibitem{cluzeau_vanhoeij2004}
+T.~Cluzeau and M.~van Hoeij,
+``A modular algorithm for computing the exponential solutions of a linear differential operator,''
+\textit{J.\ Symbolic Comput.}\ \textbf{38}, 1043--1076 (2004).
 
 \bibitem{lesiuk2012}
 M.~Lesiuk and R.~Moszynski, ``Analytical two-center integrals over Slater geminal

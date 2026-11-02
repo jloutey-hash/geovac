@@ -1,0 +1,10 @@
+{
+ "gto_p": 0.6084949937651835,
+ "gto_p_E_ccsd": -3.3856433920357034,
+ "gto_p_nfev": 8,
+ "gto_p_success": true,
+ "sto_p": 1.5517951828161198,
+ "sto_p_E_ccsd": -3.388982365203574,
+ "sto_p_nfev": 7,
+ "sto_p_success": true
+}

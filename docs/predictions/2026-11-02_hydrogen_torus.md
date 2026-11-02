@@ -112,3 +112,30 @@ A torus molecule carries two winding labels that do different jobs. The winding 
 gives the qubit symmetries. The winding around the tube is approximate; its leak shrinks like (r/R)^|Delta m|,
 so it becomes useful as the torus thins, and its cost as a label is bounded without any SCF. This confirms a known
 geometric mechanism in a molecule. It does not by itself say anything about gauge groups.
+
+## Disposition (2026-11-02, appended after scoring; predictions above unedited)
+
+**Decision: GO.** All six predictions held. Scored rows `debug/data/torus_study.jsonl` (11 cases, s = 1.4,
+d = 1.0; sha256 `c2de2d26ac0006e65055b11169ca16057132ed8d4f377e381bdc8092bb88f3d1`), driver hash as registered.
+
+| Prediction | Result | Verdict |
+|:--|:--|:--|
+| TR1 k-breaking <= 1e-13 | max 8.4e-15 (h and g, all 11) | HELD |
+| TR2 Z2 site/tor/full | M = 3: N = 10, 14 2/4/5, N = 11 2/3/4; M = 4: N = 10 2/4/5, N = 11 2/3/4 | HELD |
+| TR3a Delta m = 1 slopes rising, in [0.60, 1.05] | M = 3: h 0.765, 0.799, 0.838, 0.866, 0.887; g 0.834, 0.867, 0.902, 0.926, 0.943. M = 4: h 0.862, 0.883, 0.906, 0.920; g 0.978, 0.989, 0.996, 0.998 | HELD |
+| TR3b Delta m = 2 slopes rising, in [1.55, 2.10] | M = 4: h 1.766, 1.803, 1.844, 1.871; g 1.912, 1.942, 1.967, 1.980 | HELD |
+| TR3c thinnest g slope | 0.943 (to 1, bar 0.15); 0.998 (to 1, bar 0.10); 1.980 (to 2, bar 0.15) | HELD |
+| TR4 full/tor at 1e-10 | M = 3: 0.50657, 0.50649, 0.50643; M = 4: 0.53081, 0.53081 | HELD |
+| TR5 site lowest at 1e-2 | M = 3: 2131 / 8235 / 7689, 2542 / 8400 / 8862, 3991 / 14063 / 11957; M = 4: 3681 / 12901 / 11553, 4357 / 12629 / 10701 | HELD (not in decision) |
+| TR6 m-breaking 1-norm share falls | M = 3: 0.0964, 0.0878, 0.0714; M = 4: 0.1318, 0.1168 | HELD (not in decision) |
+
+Imaginary residue after dropping the m-breaking part: at most 2.1e-14 (the back-transform is consistent).
+
+**Reading.** As stated in advance: the winding around the hole is exact and carries the extra Z2; the winding
+around the tube leaks as (r/R)^|Delta m| in the thin limit, approached from below, and its cost as a label (the
+m-breaking 1-norm share) falls as the torus thins. This confirms a known geometric mechanism in a molecule.
+
+**Caps.** One minimal Slater 1s per H, no correlation energy computed; two tube sizes (M = 3, 4); slopes are
+local finite differences, so "approaches 1 and 2" is read from the trend, not from a fitted limit. TR4's ratio held
+at a second spacing to 3e-4, which supports a counting origin, but no derivation exists; it stays an observation
+until one does.

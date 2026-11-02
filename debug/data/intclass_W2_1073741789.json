@@ -1,0 +1,3147 @@
+{
+ "case": "W2",
+ "prime": 1073741789,
+ "L": 2000,
+ "Rmax": 40,
+ "nconst": 31,
+ "components": {
+  "(Fraction(-103, 25), (('E1', Fraction(121, 25)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     60,
+     1
+    ],
+    "13": [
+     39,
+     2
+    ],
+    "14": [
+     32,
+     3
+    ],
+    "15": [
+     28,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.3,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.3,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 67.5
+  },
+  "(Fraction(-103, 25), ())": {
+   "R0": 13,
+   "found": {
+    "13": [
+     61,
+     1
+    ],
+    "14": [
+     40,
+     2
+    ],
+    "15": [
+     32,
+     1
+    ],
+    "16": [
+     29,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 13,
+    "x_degree": 53,
+    "w_degree": 114,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 11,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       7
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 13,
+    "x_degree": 53,
+    "w_degree": 114,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.3,
+    "residual": {
+     "order": 11,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       7
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 72.5
+  },
+  "(Fraction(-106, 25), (('E1', Fraction(-11, 25)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     60,
+     1
+    ],
+    "13": [
+     39,
+     2
+    ],
+    "14": [
+     32,
+     3
+    ],
+    "15": [
+     28,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 64.9
+  },
+  "(Fraction(-106, 25), (('E1', Fraction(-8, 25)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     60,
+     1
+    ],
+    "13": [
+     39,
+     2
+    ],
+    "14": [
+     32,
+     3
+    ],
+    "15": [
+     28,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 66.3
+  },
+  "(Fraction(-106, 25), (('E1', Fraction(88, 25)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     60,
+     1
+    ],
+    "13": [
+     39,
+     2
+    ],
+    "14": [
+     32,
+     3
+    ],
+    "15": [
+     28,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.1,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.1,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 67.4
+  },
+  "(Fraction(-106, 25), ())": {
+   "R0": 13,
+   "found": {
+    "13": [
+     61,
+     1
+    ],
+    "14": [
+     40,
+     2
+    ],
+    "15": [
+     32,
+     1
+    ],
+    "16": [
+     29,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 13,
+    "x_degree": 53,
+    "w_degree": 114,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 11,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       7
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 13,
+    "x_degree": 53,
+    "w_degree": 114,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 11,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       7
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 68.3
+  },
+  "(Fraction(-114, 25), (('E1', Fraction(-11, 25)),))": {
+   "R0": 8,
+   "found": {
+    "8": [
+     30,
+     1
+    ],
+    "9": [
+     21,
+     2
+    ],
+    "10": [
+     18,
+     3
+    ],
+    "11": [
+     16,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 42.9
+  },
+  "(Fraction(-114, 25), (('E1', Fraction(-16, 25)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.1,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 60.5
+  },
+  "(Fraction(-114, 25), (('E1', Fraction(-8, 25)),))": {
+   "R0": 8,
+   "found": {
+    "8": [
+     30,
+     1
+    ],
+    "9": [
+     21,
+     2
+    ],
+    "10": [
+     18,
+     3
+    ],
+    "11": [
+     16,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 42.4
+  },
+  "(Fraction(-114, 25), (('E1', Fraction(16, 5)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     98,
+     1
+    ],
+    "13": [
+     59,
+     2
+    ],
+    "14": [
+     46,
+     3
+    ],
+    "15": [
+     39,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.6,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.8,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 83.8
+  },
+  "(Fraction(-114, 25), (('E1', Fraction(22, 5)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     98,
+     1
+    ],
+    "13": [
+     59,
+     2
+    ],
+    "14": [
+     46,
+     3
+    ],
+    "15": [
+     39,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.7,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.7,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 81.1
+  },
+  "(Fraction(-114, 25), (('ln', Fraction(1, 5)),))": {
+   "R0": 6,
+   "found": {
+    "6": [
+     16,
+     1
+    ],
+    "7": [
+     12,
+     2
+    ],
+    "8": [
+     10,
+     1
+    ],
+    "9": [
+     10,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 34.5
+  },
+  "(Fraction(-114, 25), (('ln', Fraction(11, 5)),))": {
+   "R0": 6,
+   "found": {
+    "6": [
+     16,
+     1
+    ],
+    "7": [
+     12,
+     2
+    ],
+    "8": [
+     10,
+     1
+    ],
+    "9": [
+     10,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 35.9
+  },
+  "(Fraction(-114, 25), (('ln', Fraction(2, 1)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.3,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 60.6
+  },
+  "(Fraction(-114, 25), (('ln', Fraction(2, 5)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 60.5
+  },
+  "(Fraction(-114, 25), (('ln', Fraction(22, 5)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.1,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 58.6
+  },
+  "(Fraction(-114, 25), ())": {
+   "R0": 11,
+   "found": {
+    "11": [
+     75,
+     1
+    ],
+    "12": [
+     46,
+     2
+    ],
+    "13": [
+     36,
+     3
+    ],
+    "14": [
+     31,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 11,
+    "x_degree": 69,
+    "w_degree": 146,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 11,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       5
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 11,
+    "x_degree": 69,
+    "w_degree": 146,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 11,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       5
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 70.7
+  },
+  "(Fraction(-128, 25), ())": {
+   "R0": 20,
+   "found": {
+    "20": [
+     78,
+     1
+    ],
+    "21": [
+     66,
+     2
+    ],
+    "22": [
+     59,
+     4
+    ],
+    "23": [
+     54,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.4,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.7,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 127.4
+  },
+  "(Fraction(-18, 25), (('E1', Fraction(16, 5)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     98,
+     1
+    ],
+    "13": [
+     59,
+     2
+    ],
+    "14": [
+     46,
+     3
+    ],
+    "15": [
+     39,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.6,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.6,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 79.7
+  },
+  "(Fraction(-18, 25), (('E1', Fraction(176, 25)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 60.4
+  },
+  "(Fraction(-18, 25), (('E1', Fraction(22, 5)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     98,
+     1
+    ],
+    "13": [
+     59,
+     2
+    ],
+    "14": [
+     46,
+     3
+    ],
+    "15": [
+     39,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.8,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 90,
+    "w_degree": 187,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 0.7,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 83.7
+  },
+  "(Fraction(-18, 25), (('E1', Fraction(88, 25)),))": {
+   "R0": 8,
+   "found": {
+    "8": [
+     30,
+     1
+    ],
+    "9": [
+     21,
+     2
+    ],
+    "10": [
+     18,
+     3
+    ],
+    "11": [
+     16,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 46.3
+  },
+  "(Fraction(-19, 5), ())": {
+   "R0": 18,
+   "found": {
+    "18": [
+     66,
+     2
+    ],
+    "19": [
+     52,
+     1
+    ],
+    "20": [
+     46,
+     4
+    ],
+    "21": [
+     42,
+     5
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 17,
+    "x_degree": 97,
+    "w_degree": 204,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 1.0,
+    "residual": {
+     "order": 15,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       9
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 17,
+    "x_degree": 97,
+    "w_degree": 204,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 4 roots outside F_p"
+    ],
+    "time": 1.0,
+    "residual": {
+     "order": 15,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       9
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 109.6
+  },
+  "(Fraction(-194, 25), ())": {
+   "R0": 20,
+   "found": {
+    "20": [
+     78,
+     1
+    ],
+    "21": [
+     66,
+     2
+    ],
+    "22": [
+     59,
+     4
+    ],
+    "23": [
+     54,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.3,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.5,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 132.3
+  },
+  "(Fraction(-224, 25), ())": {
+   "R0": 20,
+   "found": {
+    "20": [
+     78,
+     1
+    ],
+    "21": [
+     66,
+     2
+    ],
+    "22": [
+     59,
+     4
+    ],
+    "23": [
+     54,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.5,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.6,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 130.5
+  },
+  "(Fraction(-7, 25), (('E1', Fraction(121, 25)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     60,
+     1
+    ],
+    "13": [
+     39,
+     2
+    ],
+    "14": [
+     32,
+     3
+    ],
+    "15": [
+     28,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -531126801,
+      531126801,
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 71.5
+  },
+  "(Fraction(-98, 25), ())": {
+   "R0": 20,
+   "found": {
+    "20": [
+     78,
+     1
+    ],
+    "21": [
+     66,
+     2
+    ],
+    "22": [
+     59,
+     4
+    ],
+    "23": [
+     54,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.4,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 18,
+    "x_degree": 164,
+    "w_degree": 339,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 6 roots outside F_p"
+    ],
+    "time": 1.4,
+    "residual": {
+     "order": 16,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 6 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       2
+      ],
+      [
+       "6/5",
+       2
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 130.2
+  },
+  "(Fraction(114, 25), (('E1', Fraction(242, 25)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 65.8
+  },
+  "(Fraction(18, 25), (('E1', Fraction(121, 25)),))": {
+   "R0": 8,
+   "found": {
+    "8": [
+     30,
+     1
+    ],
+    "9": [
+     21,
+     2
+    ],
+    "10": [
+     18,
+     3
+    ],
+    "11": [
+     16,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 8,
+    "x_degree": 24,
+    "w_degree": 51,
+    "steps": 2,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 46.3
+  },
+  "(Fraction(18, 25), (('E1', Fraction(242, 25)),))": {
+   "R0": 10,
+   "found": {
+    "10": [
+     72,
+     1
+    ],
+    "11": [
+     44,
+     2
+    ],
+    "12": [
+     34,
+     1
+    ],
+    "13": [
+     30,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 10,
+    "x_degree": 67,
+    "w_degree": 141,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 4 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       4
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 63.6
+  },
+  "(Fraction(26, 25), (('E1', Fraction(121, 25)),))": {
+   "R0": 12,
+   "found": {
+    "12": [
+     60,
+     1
+    ],
+    "13": [
+     39,
+     2
+    ],
+    "14": [
+     32,
+     3
+    ],
+    "15": [
+     28,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 12,
+    "x_degree": 53,
+    "w_degree": 113,
+    "steps": 2,
+    "step_flags": [
+     "lambda edge has 2 roots outside F_p"
+    ],
+    "time": 0.2,
+    "residual": {
+     "order": 10,
+     "type": "other",
+     "clean": false,
+     "flags": [
+      "lambda edge has 2 roots outside F_p"
+     ],
+     "lam": [
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "0",
+       6
+      ]
+     ],
+     "logs": [
+      -214748354,
+      -429496715,
+      429496715,
+      214748354
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK-UNCONFIRMED",
+   "time": 71.2
+  }
+ },
+ "time": 5238.4
+}

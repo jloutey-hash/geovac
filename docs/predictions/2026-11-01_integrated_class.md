@@ -195,3 +195,48 @@ controls of the same order (12-13, w-degree up to 120) it is under 1 s; a peel s
 
 ## Disposition
 
+Scored 2026-11-01 by `python debug/intclass_score.py score` (output `debug/data/intclass_score.{json,out}`), after
+the Phase 2 runs below. Instrument files unchanged since this record's commit (sha256 as in its message).
+**Decision: GO.** IC-0, IC-1, IC-2, IC-3, IC-5, IC-6 held; IC-4 missed.
+
+| Case, prime | components | STUCK (clean, A = B) | STUCK-UNCONFIRMED | stuck residuals (order, reading) | time |
+|:--|:--:|:--:|:--:|:--|:--:|
+| W1, 1073741789 | 31 | 6 | 25 | 6 x (6, other) | 5451 s |
+| W1, 1073741833 | 31 | 31 | 0 | 6 x (6, other); 25 of order 10-16, confluent-genus1-type | 5484 s |
+| W2, 1073741789 | 31 | 6 | 25 | 6 x (6, other) | 5238 s |
+| W2, 1073741833 | 31 | 6 | 25 | 6 x (6, other) | 5326 s |
+| N1, both primes | 6 | 6 | 0 | orders 4-6, other / confluent-genus1-type | ~400 s each |
+| N2, both primes | 6 | 0 | 6 | flagged: lambda edge does not split over F_p | ~400 s each |
+
+- **IC-0 HELD.** All controls pass on both scoring primes.
+- **IC-1 HELD.** Six W1 components are clean STUCK on both primes, each with a residual of order 6. So W1 is NOT
+  TRIANGULAR. Every other component was unconfirmed on the first prime only because some exponential rates at
+  infinity do not lie in that prime field (flag "lambda edge has k roots outside F_p"). On the second prime all 31
+  are clean STUCK.
+- **IC-2 HELD.** W2 is NOT TRIANGULAR on the same evidence: six clean STUCK components on both primes, order-6
+  residuals. The other 25 are flagged on both primes.
+- **IC-3 HELD, with a scope note.** The genus-one readings all come from the second prime. The six components
+  that are STUCK on both primes read "other" on both. The reading is the record's own classifier, not a proof
+  (Caps).
+- **IC-4 MISSED.** N1 is NOT TRIANGULAR: all six components are clean STUCK on both primes, with no factor peeled.
+  N2 is INCOMPLETE: all six are flagged. The one-electron integral, as a function of the angle, also leaves the
+  triangular class. Its rates at infinity are lambda = 0 and lambda^2 = -69/100 = -(1.3^2 - 1.0^2), set by the two
+  orbital exponents of the N1 case.
+- **IC-5 HELD.** No component is decided differently on the two primes.
+- **IC-6 HELD.** All 31 W1 components have an operator within the caps (minimal orders 6 to 20).
+
+**Erratum to Caps (found after scoring, before this disposition).** The Caps say the hyperexponential search
+flags everything outside its coverage. That is false. The search assigns one exponent to each F_p-irreducible
+factor of the leading coefficient. A solution whose exponents differ at the conjugate roots of a factor of degree
+two or more is missed without a flag. Planted control: 4(c - w^2) y'' - 4 w y' + y = 0, with solutions
+(w - s)^(1/2) and (w + s)^(1/2), s^2 = c. It is TRIANGULAR, and the instrument returns it clean STUCK when c is not
+a square mod p (c = 5 at 1073741833). With c = 2, a square there, it peels in one step. Rescaled, this is
+Chebyshev's equation of order 1/2. The gap and its cure, working over the extension field, are standard
+(Cluzeau and van Hoeij, J. Symb. Comput. 38 (2004) 1043; their recurrence paper, Sec. 8). The miss needs a factor
+of degree two or more with a non-integer exponent class, or exponents outside F_p. **Check on the scored
+residuals** (rebuilt at L = 600; probe scripts in the session scratchpad, not committed): no such factor and no
+exponent outside F_p in any of W1's six both-prime STUCK residuals (both primes), W2's six (second prime) or
+N1's six (second prime). In every probed residual all exponents are integers. In W1 and W2, the two ln
+components have only degree-one singular factors, where the search is complete. So no scored
+STUCK is this miss, and every verdict above stands. Every verdict above depends on that check, not on the Caps
+statement as registered.

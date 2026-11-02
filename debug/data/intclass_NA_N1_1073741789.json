@@ -1,0 +1,636 @@
+{
+ "case": "N1",
+ "prime": 1073741789,
+ "L": 1200,
+ "Rmax": 24,
+ "nconst": 6,
+ "components": {
+  "(Fraction(-117, 50), '1', None)": {
+   "R0": 5,
+   "found": {
+    "5": [
+     18,
+     1
+    ],
+    "6": [
+     13,
+     2
+    ],
+    "7": [
+     11,
+     2
+    ],
+    "8": [
+     10,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 16,
+    "w_degree": 34,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 16,
+    "w_degree": 34,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK",
+   "time": 10.6
+  },
+  "(Fraction(-209, 50), '1', None)": {
+   "R0": 6,
+   "found": {
+    "6": [
+     26,
+     1
+    ],
+    "7": [
+     18,
+     2
+    ],
+    "8": [
+     15,
+     2
+    ],
+    "9": [
+     14,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-1",
+       1
+      ],
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "1",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-1",
+       1
+      ],
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "1",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK",
+   "time": 12.3
+  },
+  "(Fraction(-389, 50), '1', None)": {
+   "R0": 6,
+   "found": {
+    "6": [
+     26,
+     1
+    ],
+    "7": [
+     18,
+     2
+    ],
+    "8": [
+     15,
+     2
+    ],
+    "9": [
+     14,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-1",
+       1
+      ],
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "1",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-1",
+       1
+      ],
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "1",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK",
+   "time": 11.6
+  },
+  "(Fraction(-9, 5), '1', None)": {
+   "R0": 5,
+   "found": {
+    "5": [
+     15,
+     1
+    ],
+    "6": [
+     11,
+     2
+    ],
+    "7": [
+     9,
+     2
+    ],
+    "8": [
+     8,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 13,
+    "w_degree": 30,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 13,
+    "w_degree": 30,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": true
+    }
+   },
+   "verdict": "STUCK",
+   "time": 9.4
+  },
+  "(Fraction(-9, 5), 'E1', Fraction(299, 50))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     14,
+     1
+    ],
+    "5": [
+     10,
+     2
+    ],
+    "6": [
+     8,
+     1
+    ],
+    "7": [
+     8,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 9.3
+  },
+  "(Fraction(9, 5), 'E1', Fraction(299, 50))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     14,
+     1
+    ],
+    "5": [
+     10,
+     2
+    ],
+    "6": [
+     8,
+     1
+    ],
+    "7": [
+     8,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "593113254",
+       1
+      ],
+      [
+       "480628535",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ],
+     "logs": [
+      -234688402,
+      234688402,
+      -214748357,
+      -429496720,
+      429496720,
+      214748357
+     ],
+     "adjoint_has_order1": false
+    }
+   },
+   "verdict": "STUCK",
+   "time": 8.7
+  }
+ },
+ "time": 419.8
+}

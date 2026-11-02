@@ -1,0 +1,3216 @@
+{
+ "prime": 1073741789,
+ "case": "S1 geometry (D1, D2) = (9/5, 13/5)",
+ "results": [
+  {
+   "name": "P1",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 2,
+   "maxdeg": 7,
+   "steps": [],
+   "time": 0.0,
+   "residual_order": 2,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 2,
+    "lam": [
+     [
+      "0",
+      2
+     ]
+    ],
+    "logs": [
+     0,
+     -214748357,
+     -429496720,
+     429496720,
+     214748357
+    ],
+    "type": "fuchsian-elliptic-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "x_order": 2,
+   "x_degree": 4,
+   "pass": true
+  },
+  {
+   "name": "N1",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 3,
+   "maxdeg": 6,
+   "steps": [
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 6,
+     "t": 0.0
+    },
+    {
+     "order": 2,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 1,
+     "N0": 2,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 7,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 3,
+   "x_degree": 4,
+   "pass": true
+  },
+  {
+   "name": "P3",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 5,
+   "maxdeg": 20,
+   "steps": [
+    {
+     "order": 5,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 20,
+     "t": 0.0
+    },
+    {
+     "order": 4,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 2,
+     "N0": 3,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 21,
+     "t": 0.0
+    },
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-2"
+      ]
+     ],
+     "Ndeg": 3,
+     "N0": 3,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 24,
+     "t": 0.0
+    }
+   ],
+   "time": 0.01,
+   "residual_order": 2,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 2,
+    "lam": [
+     [
+      "0",
+      2
+     ]
+    ],
+    "logs": [
+     0,
+     -214748357,
+     -429496720,
+     429496720,
+     214748357
+    ],
+    "type": "fuchsian-elliptic-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-3",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "-2",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "-2",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "-2",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "-2",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "x_order": 5,
+   "x_degree": 11,
+   "pass": true
+  },
+  {
+   "name": "N2a",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 1,
+   "maxdeg": 1,
+   "steps": [],
+   "time": 0.0,
+   "x_order": 1,
+   "x_degree": 1,
+   "pass": true
+  },
+  {
+   "name": "N2b",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 2,
+   "maxdeg": 7,
+   "steps": [
+    {
+     "order": 2,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 3,
+     "N0": 3,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 10,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 2,
+   "x_degree": 4,
+   "pass": true
+  },
+  {
+   "name": "N2c",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 2,
+   "maxdeg": 7,
+   "steps": [
+    {
+     "order": 2,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 3,
+     "N0": 3,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 10,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 2,
+   "x_degree": 4,
+   "pass": true
+  },
+  {
+   "name": "N3a",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 2,
+   "maxdeg": 1,
+   "steps": [
+    {
+     "order": 2,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 1,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 2,
+   "x_degree": 1,
+   "pass": true
+  },
+  {
+   "name": "N3b",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 2,
+   "maxdeg": 1,
+   "steps": [
+    {
+     "order": 2,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 1,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 2,
+   "x_degree": 1,
+   "pass": true
+  },
+  {
+   "name": "N5E1_m",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 1,
+   "maxdeg": 0,
+   "steps": [],
+   "time": 0.0,
+   "x_order": 1,
+   "x_degree": 0,
+   "pass": true
+  },
+  {
+   "name": "N5E1_p",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 1,
+   "maxdeg": 0,
+   "steps": [],
+   "time": 0.0,
+   "x_order": 1,
+   "x_degree": 0,
+   "pass": true
+  },
+  {
+   "name": "N5exp_m",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 3,
+   "maxdeg": 1,
+   "steps": [
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 1,
+     "t": 0.0
+    },
+    {
+     "order": 2,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 1,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 3,
+   "x_degree": 2,
+   "pass": true
+  },
+  {
+   "name": "N5exp_p",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 3,
+   "maxdeg": 1,
+   "steps": [
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 1,
+     "t": 0.0
+    },
+    {
+     "order": 2,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 1,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 3,
+   "x_degree": 2,
+   "pass": true
+  },
+  {
+   "name": "N4",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 5,
+   "maxdeg": 16,
+   "steps": [
+    {
+     "order": 5,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 16,
+     "t": 0.0
+    },
+    {
+     "order": 4,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 1,
+     "N0": 3,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 15,
+     "t": 0.0
+    },
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 2,
+     "N0": 2,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 13,
+     "t": 0.0
+    },
+    {
+     "order": 2,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ]
+     ],
+     "Ndeg": 3,
+     "N0": 4,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 9,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 5,
+   "x_degree": 7,
+   "pass": true
+  },
+  {
+   "name": "N6",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 5,
+   "maxdeg": 24,
+   "steps": [
+    {
+     "order": 5,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 2,
+     "N0": 8,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 32,
+     "t": 0.0
+    },
+    {
+     "order": 4,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 1,
+     "N0": 13,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 25,
+     "t": 0.0
+    },
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 11,
+     "N0": 11,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 40,
+     "t": 0.0
+    },
+    {
+     "order": 2,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 13,
+     "N0": 14,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 27,
+     "t": 0.0
+    }
+   ],
+   "time": 0.0,
+   "x_order": 5,
+   "x_degree": 12,
+   "pass": true
+  },
+  {
+   "name": "P7",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 7,
+   "maxdeg": 42,
+   "steps": [
+    {
+     "order": 7,
+     "lam": 0,
+     "gauges": [],
+     "Ndeg": 2,
+     "N0": 8,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 54,
+     "t": 0.0
+    },
+    {
+     "order": 6,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 2,
+     "N0": 14,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 43,
+     "t": 0.0
+    },
+    {
+     "order": 5,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-2"
+      ]
+     ],
+     "Ndeg": 12,
+     "N0": 12,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 74,
+     "t": 0.0
+    },
+    {
+     "order": 4,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 14,
+     "N0": 15,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 65,
+     "t": 0.0
+    },
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       6,
+       "-1"
+      ]
+     ],
+     "Ndeg": 15,
+     "N0": 15,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 64,
+     "t": 0.0
+    }
+   ],
+   "time": 0.01,
+   "residual_order": 2,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 2,
+    "lam": [
+     [
+      "0",
+      2
+     ]
+    ],
+    "logs": [
+     0,
+     -214748357,
+     -429496720,
+     429496720,
+     214748357
+    ],
+    "type": "fuchsian-elliptic-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-5",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-3",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-3",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-3",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-3",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 2,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 4,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 8,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "x_order": 7,
+   "x_degree": 21,
+   "pass": true
+  },
+  {
+   "name": "N8",
+   "expect": "TRIANGULAR",
+   "verdict": "TRIANGULAR",
+   "order": 10,
+   "maxdeg": 79,
+   "steps": [
+    {
+     "order": 10,
+     "lam": -3,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 79,
+     "t": 0.0
+    },
+    {
+     "order": 9,
+     "lam": 3,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 4,
+     "N0": 4,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 79,
+     "t": 0.0
+    },
+    {
+     "order": 8,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ]
+     ],
+     "Ndeg": 10,
+     "N0": 18,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 79,
+     "t": 0.0
+    },
+    {
+     "order": 7,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ]
+     ],
+     "Ndeg": 17,
+     "N0": 17,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 109,
+     "t": 0.0
+    },
+    {
+     "order": 6,
+     "lam": 2,
+     "gauges": [
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 26,
+     "N0": 26,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 129,
+     "t": 0.0
+    },
+    {
+     "order": 5,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       3,
+       "-1"
+      ],
+      [
+       3,
+       "-1"
+      ],
+      [
+       4,
+       "-1"
+      ]
+     ],
+     "Ndeg": 33,
+     "N0": 39,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 125,
+     "t": 0.0
+    },
+    {
+     "order": 4,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 33,
+     "N0": 45,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 167,
+     "t": 0.0
+    },
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       14,
+       "-1"
+      ],
+      [
+       14,
+       "-1"
+      ]
+     ],
+     "Ndeg": 63,
+     "N0": 63,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 152,
+     "t": 0.0
+    },
+    {
+     "order": 2,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       10,
+       "-1"
+      ],
+      [
+       10,
+       "-1"
+      ],
+      [
+       14,
+       "-1"
+      ]
+     ],
+     "Ndeg": 65,
+     "N0": 66,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 129,
+     "t": 0.0
+    }
+   ],
+   "time": 0.05,
+   "x_order": 10,
+   "x_degree": 41,
+   "pass": true
+  },
+  {
+   "name": "P8",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 12,
+   "maxdeg": 119,
+   "steps": [
+    {
+     "order": 12,
+     "lam": -3,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 0,
+     "N0": 0,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 119,
+     "t": 0.0
+    },
+    {
+     "order": 11,
+     "lam": 3,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ]
+     ],
+     "Ndeg": 4,
+     "N0": 4,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 119,
+     "t": 0.0
+    },
+    {
+     "order": 10,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ]
+     ],
+     "Ndeg": 10,
+     "N0": 18,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 119,
+     "t": 0.1
+    },
+    {
+     "order": 9,
+     "lam": -2,
+     "gauges": [
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ]
+     ],
+     "Ndeg": 17,
+     "N0": 17,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 159,
+     "t": 0.1
+    },
+    {
+     "order": 8,
+     "lam": 2,
+     "gauges": [
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 26,
+     "N0": 26,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 189,
+     "t": 0.1
+    },
+    {
+     "order": 7,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       3,
+       "-1"
+      ],
+      [
+       3,
+       "-1"
+      ],
+      [
+       4,
+       "-1"
+      ]
+     ],
+     "Ndeg": 34,
+     "N0": 40,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 189,
+     "t": 0.1
+    },
+    {
+     "order": 6,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ]
+     ],
+     "Ndeg": 34,
+     "N0": 46,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 267,
+     "t": 0.2
+    },
+    {
+     "order": 5,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       14,
+       "-1"
+      ],
+      [
+       14,
+       "-1"
+      ]
+     ],
+     "Ndeg": 64,
+     "N0": 64,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 268,
+     "t": 0.2
+    },
+    {
+     "order": 4,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-6"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       10,
+       "-1"
+      ],
+      [
+       10,
+       "-1"
+      ],
+      [
+       14,
+       "-1"
+      ]
+     ],
+     "Ndeg": 66,
+     "N0": 67,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 289,
+     "t": 0.2
+    },
+    {
+     "order": 3,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-7"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       52,
+       "-1"
+      ]
+     ],
+     "Ndeg": 87,
+     "N0": 87,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 242,
+     "t": 0.3
+    }
+   ],
+   "time": 0.3,
+   "residual_order": 2,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 2,
+    "lam": [
+     [
+      "0",
+      2
+     ]
+    ],
+    "logs": [
+     0,
+     -214748357,
+     -429496720,
+     429496720,
+     214748357
+    ],
+    "type": "fuchsian-elliptic-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-8",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-8",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-8",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-8",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-8",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 4,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 4,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 56,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "x_order": 12,
+   "x_degree": 61,
+   "pass": true
+  },
+  {
+   "name": "P4",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 2,
+   "maxdeg": 7,
+   "steps": [],
+   "time": 0.0,
+   "residual_order": 2,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 2,
+    "lam": [
+     [
+      "3",
+      2
+     ]
+    ],
+    "logs": [
+     0,
+     -214748357,
+     -429496720,
+     429496720,
+     214748357
+    ],
+    "type": "fuchsian-elliptic-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "pass": true
+  },
+  {
+   "name": "P5",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 13,
+   "maxdeg": 88,
+   "steps": [
+    {
+     "order": 13,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-5/2"
+      ],
+      [
+       1,
+       "-5/2"
+      ]
+     ],
+     "Ndeg": 9,
+     "N0": 9,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 147,
+     "t": 0.0
+    },
+    {
+     "order": 12,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-2"
+      ],
+      [
+       1,
+       "-5/2"
+      ],
+      [
+       1,
+       "-5/2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "1/2"
+      ],
+      [
+       2,
+       "-1"
+      ],
+      [
+       3,
+       "-1"
+      ]
+     ],
+     "Ndeg": 16,
+     "N0": 16,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 174,
+     "t": 0.1
+    },
+    {
+     "order": 11,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-7/2"
+      ],
+      [
+       1,
+       "-1/2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       3,
+       "-1"
+      ],
+      [
+       3,
+       "-1"
+      ]
+     ],
+     "Ndeg": 22,
+     "N0": 23,
+     "nsol": 2,
+     "flags": [],
+     "newdeg": 175,
+     "t": 0.1
+    },
+    {
+     "order": 10,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-4"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-7/2"
+      ],
+      [
+       1,
+       "-3/2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       8,
+       "-1"
+      ]
+     ],
+     "Ndeg": 28,
+     "N0": 28,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 174,
+     "t": 0.1
+    },
+    {
+     "order": 9,
+     "lam": 0,
+     "gauges": [
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-13/2"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-5"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       1,
+       "-3"
+      ],
+      [
+       1,
+       "-5/2"
+      ],
+      [
+       1,
+       "-1"
+      ],
+      [
+       9,
+       "-1"
+      ]
+     ],
+     "Ndeg": 37,
+     "N0": 38,
+     "nsol": 1,
+     "flags": [],
+     "newdeg": 195,
+     "t": 0.2
+    }
+   ],
+   "time": 0.3,
+   "residual_order": 8,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 8,
+    "lam": [
+     [
+      "0",
+      8
+     ]
+    ],
+    "logs": [
+     -268435435,
+     -268435447,
+     16,
+     4
+    ],
+    "type": "fuchsian-higher",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-6",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-6",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-6",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-6",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "rat",
+        "-11/2",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "rat",
+        "-11/2",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "-2",
+        1
+       ],
+       [
+        "int",
+        "-3",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "rat",
+        "7/2",
+        1
+       ],
+       [
+        "rat",
+        "5/2",
+        1
+       ],
+       [
+        "rat",
+        "3/2",
+        1
+       ],
+       [
+        "rat",
+        "1/2",
+        1
+       ],
+       [
+        "rat",
+        "-1/2",
+        1
+       ],
+       [
+        "rat",
+        "-3/2",
+        1
+       ],
+       [
+        "rat",
+        "-5/2",
+        1
+       ],
+       [
+        "rat",
+        "-7/2",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "7",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 3,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "7",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     },
+     {
+      "fdeg": 10,
+      "croots": [
+       [
+        "int",
+        "-1",
+        1
+       ],
+       [
+        "int",
+        "7",
+        1
+       ],
+       [
+        "int",
+        "6",
+        1
+       ],
+       [
+        "int",
+        "5",
+        1
+       ],
+       [
+        "int",
+        "4",
+        1
+       ],
+       [
+        "int",
+        "3",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        1
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "pass": true
+  },
+  {
+   "name": "P6",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 4,
+   "maxdeg": 1,
+   "steps": [],
+   "time": 0.0,
+   "residual_order": 4,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 4,
+    "lam": [
+     [
+      "-1",
+      1
+     ],
+     [
+      "792366101",
+      1
+     ],
+     [
+      "281375688",
+      1
+     ],
+     [
+      "1",
+      1
+     ]
+    ],
+    "logs": [
+     0
+    ],
+    "type": "confluent-genus1-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        1
+       ],
+       [
+        "int",
+        "2",
+        1
+       ],
+       [
+        "int",
+        "1",
+        2
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "pass": true
+  },
+  {
+   "name": "B1",
+   "expect": "STUCK",
+   "verdict": "STUCK",
+   "order": 2,
+   "maxdeg": 1,
+   "steps": [],
+   "time": 0.0,
+   "residual_order": 2,
+   "residual_diag": null,
+   "adjoint_has_order1": false,
+   "class": {
+    "clean": true,
+    "flags": [],
+    "order": 2,
+    "lam": [
+     [
+      "-1",
+      1
+     ],
+     [
+      "1",
+      1
+     ]
+    ],
+    "logs": [
+     0
+    ],
+    "type": "confluent-genus0-type",
+    "adjoint_has_order1": false,
+    "genuine_points": [
+     {
+      "fdeg": 1,
+      "croots": [
+       [
+        "int",
+        "0",
+        2
+       ]
+      ],
+      "regular": true
+     }
+    ]
+   },
+   "pass": true
+  }
+ ],
+ "all_pass": true,
+ "time": 43.4
+}
