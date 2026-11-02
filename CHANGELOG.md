@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.22.2] - 2026-11-02
+
+### Added
+- **SQ pre-registered and scored: GO (squashed hydrogen ring; PI: "Yep, let's do that.", after a review of the
+  corpus's geometries).** Record `docs/predictions/2026-11-02_squashed_ring.md`, committed alone before scoring.
+  Order rule derived first: the squash z_j = R(e^{i phi_j} + eps e^{-i phi_j}) carries ring-momentum charge 2, so
+  the part changing k by c is of order eps^{p(c)}, p(c) = min |q| with 2q = +-c mod N (odd c exactly zero at even
+  N; (N - c)/2 at odd N, wrap-around). Five controls at 1.2 A (N = 6, 7, 8, 9, 11) set the bars; scored N = 9-13
+  at 1.0 A: zeros at most 2.1e-15, first-step slopes within 0.0056 of p(c), all slopes to eps = 0.08 within 0.045,
+  wrap-around orders 4, 5, 6 at N = 9, 11, 13. Known mechanism (spurion counting, Umklapp; Renner;
+  Encinosa-Williamson), checked in a molecule. Driver `debug/ellipse_ring_study.py`.
+- **Atlas:** a dated observation under the door kinds, "how fast a label dies": three shape deformations (bending,
+  torus, squash) break a label as a power fixed by charge counting; a second nucleus breaks l through an
+  exponential tail (door 12). Not a paper claim.
+- **Paper 62 sec:hring:** a squashed-ring paragraph after the torus one (measured result only; the three-door
+  reading stays in the atlas); bibitems sq_record, renner1934 (copied from Paper 32); Backing lists the SQ record;
+  `papers/INDEX.md` row 62; claim-matrix COVERAGE GAP row, guard owed as a separate step. Abstract and conclusion
+  unchanged (they carry the H6 energy result, not the label studies).
+
+### Pre-QA button-up (PI-directed, 2026-11-02: "We should do all of these except for the debug folder size")
+- **Four owed guards, each a separate step, each fire-tested; the four COVERAGE GAP rows are now GUARDED.**
+  - `tests/test_paper62_squashed_ring.py` (SQ; 3 fast, 2 s): N = 7, 8 rebuilt; zeros below 1e-13; ten slopes within
+    0.02 of hand-written orders. 4/4 plants fired; a one-axis stretch stayed green correctly (still charge 2).
+  - `tests/test_paper62_hydrogen_torus.py` (TR; 2 fast, 9 s; 1 slow, 17 s): k exact, Z2 2/4/5 and 2/3/4, Delta m = 1
+    slopes rising. The slopes on these fatter tori start at 0.575 (h), below the record's 0.60, which was set on
+    thinner ones; the guard's lower bound 0.50 is measured here and says so. 5/5 fired.
+  - `tests/test_paper62_hydrogen_ring.py` (HR; 5 fast; 2 slow, 1 min): Table tab:hring's column and the label results
+    derived from a stored copy (`tests/data/paper62_hring_2026_11_02.json`); cc-pVDZ* recomputed to 1e-6 by the
+    original spin-orbital solver (an independent route from the lean copy that made the row); both labellings
+    rebuilt, Z2 and Pauli counts exact. 7/7 fired. The Slater DZP row (45 min) stays READ.
+  - `tests/test_paper59_integrated_class.py` (IC; 4 fast, 3 s): verbatim, hash-checked copies of the frozen
+    instrument in `tests/paper59_intclass_support/`; W1 component (-231/50, ln 5/2) at L = 600, second prime:
+    clean STUCK at order 6 from both operator sets; controls; the conjugate-root gap pinned (peels at c = 2,
+    missed at c = 5). 4/4 fired; flipping the pullback's a2 sign stayed green correctly (w -> i w).
+- **IC record addendum (appended).** Writing the guard showed the erratum's "only degree-one singular factors" is
+  loose: the stuck residuals also have apparent factors of degree 2 and 12. Every exponent is an integer and the
+  five genuine factors have degree one, which is the condition the erratum needs; verdicts unchanged.
+- **Paper 62's single-scale Sturmian row guarded** (`tests/test_paper62_single_scale_sturmian.py`; was READ, done
+  file C8 row 4): the one-scale O atom -71.40617 at k_O = 3.78095 and its minimum (fast); water RHF and
+  fc-CCSD(T) recomputed to 1e-6 (slow, 878 s). Plants 3/3 fired (two fast; the slow one, the two-scale valence
+  scale as the shared scale).
+- **Done files (PM drafts, PI to approve before any run):** `docs/qa/paper_62.done.md` rows 13-15 (HR, TR, SQ) and
+  row 4's backing; `docs/qa/paper_59.done.md` item 9 (IC), with a note that items 1-8 predate every claim added
+  since 2026-08-17.
+- **Closed on inspection, no change:** the `np.diag` production fix listed as owed in v5.21.25 was already done in
+  v5.21.30 / v5.22.0 (numpy 2.4.0 excluded in `setup.py`, import warning, `tests/test_numpy_flat_leak.py`, local
+  numpy 2.4.6).
+
 ## [v5.22.1] - 2026-11-02
 
 ### Added

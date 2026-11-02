@@ -240,3 +240,14 @@ N1's six (second prime). In every probed residual all exponents are integers. In
 components have only degree-one singular factors, where the search is complete. So no scored
 STUCK is this miss, and every verdict above stands. Every verdict above depends on that check, not on the Caps
 statement as registered.
+
+## Addendum (2026-11-02, appended while writing the guard; nothing above edited)
+
+The erratum's sentence "the two ln components have only degree-one singular factors" is looser than the check
+it reports. Rebuilt at L = 600 on the second prime, both ln components' stuck residuals (sets A and B) have five
+genuine singular factors, all of degree one, and also apparent factors of degree 2 and 12 (exponents 0 to 4 and
+6, the solutions analytic there). Every exponent at every point is an integer. The condition the erratum
+actually needs is the one this satisfies: a miss requires a factor of degree two or more with a non-integer
+exponent class (or exponents outside F_p), and integer exponents, at apparent points included, are absorbed by
+the polynomial part of the search. So the verdicts stand as stated; only the wording of that one sentence was
+loose. Guard: `tests/test_paper59_integrated_class.py`.

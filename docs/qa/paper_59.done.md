@@ -269,6 +269,15 @@ a new number. The reviewers must verify ALL of:
    [MEASURED 25 digits]; Broadhurst–Roberts/FSY type + intersection-form = OBSERVATION /
    "one step short of a theorem"; NOT a cusp-form $L$-value (Eisenstein/CM period)
    [OBSERVATION].
+9. **Integrated class (IC) [MEASURED, pre-registered GO; PM DRAFT 2026-11-02, PI to approve before any run].**
+   As a function of the bond angle the integrated $(XY|XZ)$ is not triangular, so it leaves the two-centre
+   class: six of 31 constant components stop at an order-6 piece with no order-one factor, at two geometries
+   mod two primes; the one-electron integral too (one geometry decided). Caps: Qbar-independence of the 31
+   constants assumed; minimal operators not certified; the search is complete only where genuine singular
+   factors have degree one or exponents are integers (record erratum + 2026-11-02 addendum). Backing:
+   `tests/test_paper59_integrated_class.py` (one component, one prime, L = 600; the rest READ).
+   *Note for the PI:* items 1-8 were frozen 2026-08-17; the claims added since (sec:scope bond-angle
+   operator NA/B2/B2X, the Y operator, the ladder sections) have no row here yet.
 
 ## Seeding plan (worktree only; never touches the real corpus)
 

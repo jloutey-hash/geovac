@@ -829,6 +829,26 @@ $10^{-2}$ site labels again give the fewest terms.  Momentum labels for
 periodic systems and their use in removing qubits are established
 \cite{manrique2020,picozzi2026}.
 
+\textbf{[MEASURED, pre-registered; GO]}  Squashing a ring into an ellipse
+breaks its momentum $k$ at an order that can be counted in advance
+\cite{sq_record}.  Atom $j$ sits at $z_j = R(e^{i\phi_j} + \epsilon
+e^{-i\phi_j})$.  A rotation by $2\pi/N$ turns $\epsilon$ into
+$\epsilon e^{4\pi i/N}$, so each power of $\epsilon$ shifts $k$ by $2$.
+The part of the integrals that changes $k$ by $c$ is then of order
+$\epsilon^{p(c)}$, where $p(c)$ is the smallest $|q|$ with
+$2q \equiv \pm c \pmod N$.  At even $N$ odd changes vanish;\ at odd $N$ an
+odd change wraps around the ring and needs $(N-c)/2$ powers.  Five control
+rings at a different spacing set the bars, and five scored rings,
+$N = 9$ to $13$ with one minimal Slater $1s$ per atom, were run after.  The
+forbidden parts are at most $2.1\times10^{-15}$.  Every local slope at the
+smallest squash is within $0.006$ of $p(c)$, and every slope up to
+$\epsilon = 0.08$ within $0.05$.  The wrap-around orders $4$, $5$ and $6$
+appear at $N = 9$, $11$ and $13$.  This is ordinary selection-rule counting
+with the squash as a charge-two perturbation, the same counting that gives
+the order of the Renner splitting in a bent linear molecule
+\cite{renner1934};\ here it is checked in a molecule, together with the
+torus result above.
+
 \section{Prior art}
 \label{sec:prior}
 
@@ -979,11 +999,12 @@ The hydrogen fluoride guard,
 free fluorine atom's design step and the cc-pVDZ and aug-cc-pVDZ runs end
 to end; the Slater DZP and the other two rungs are read as registered
 values.
-The hydrogen ring and hydrogen torus records, each with its controls and
-disposition:\ \texttt{docs/predictions/2026-11-01\_hydrogen\_ring.md} and
-\texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md}.
+The hydrogen ring, hydrogen torus and squashed ring records, each with its
+controls and disposition:\ \texttt{docs/predictions/2026-11-01\_hydrogen\_ring.md},
+\texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md} and
+\texttt{docs/predictions/2026-11-02\_squashed\_ring.md}.
 Chronicle: CHANGELOG v5.20.11, v5.20.12, v5.21.25, v5.21.28, v5.21.29,
-v5.22.1.
+v5.22.1, v5.22.2.
 
 \begin{thebibliography}{99}
 
@@ -1145,6 +1166,18 @@ and one leaking winding (TR),''
 \texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md}, this repository,
 registered and committed 2026-11-02 before any scored case was computed;
 disposition appended the same day.
+
+\bibitem{sq_record}
+J.~Loutey, pre-registered record ``How fast the ring momentum dies on a
+squashed hydrogen ring (SQ),''
+\texttt{docs/predictions/2026-11-02\_squashed\_ring.md}, this repository,
+registered and committed 2026-11-02 before any scored case was computed;
+disposition appended the same day.
+
+\bibitem{renner1934}
+R.~Renner, ``Zur Theorie der Wechselwirkung zwischen Elektronen- und
+Kernbewegung bei dreiatomigen, stabf\"ormigen Molek\"ulen,''
+\textit{Z.~Phys.}\ \textbf{92}, 172--193 (1934).
 
 \bibitem{encinosa2022}
 M.~Encinosa and J.~Williamson, ``Electron gases in toroidal shells: mode

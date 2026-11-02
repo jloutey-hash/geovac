@@ -106,3 +106,29 @@ including the wrap-around order at odd N. With the bending and torus cases, that
 that break a label as a power fixed by charge counting, against one distance door (a second nucleus) that breaks it
 through an exponential tail. That supports writing the reading into the atlas as a dated observation. It says
 nothing about energies, and nothing about how large the leading coefficients are.
+
+## Disposition (2026-11-02, appended after scoring; predictions above unedited)
+
+**Decision: GO.** SQ1, SQ2 and SQ3 held; SQ4 held. Scored rows `debug/data/ellipse_ring_study.jsonl` (35 rows,
+s = 1.0 A, N = 9-13; sha256 `55063b4932000fba75c242346c6e64d39cc1029c63d906f5875e8dcb1b224a7e`), driver hash as
+registered.
+
+| Prediction | Result | Verdict |
+|:--|:--|:--|
+| SQ1 exact zeros <= 1e-13 | max 2.1e-15 (every class at eps = 0; odd c at N = 10, 12, every eps) | HELD |
+| SQ2 first-step slope within 0.02 of p(c) | max deviation 0.0056 | HELD |
+| SQ3 slopes to eps = 0.08 within 0.10 of p(c) | max deviation 0.045 (N = 13, h, c = 1, step 0.04 -> 0.08) | HELD |
+| SQ4 wrap-around, c = 1 at odd N | N = 9: 4.001-4.033; N = 11: 5.001-5.041; N = 13: 5.999-6.045 | HELD |
+
+Below the floor, not scored: N = 13, c = 1, step 0.005 -> 0.01 (shares 6.0e-15 and 7.8e-15 at eps = 0.005, at
+the rounding level; slopes 5.86 and 5.98 shown for completeness). Steps 0.08 -> 0.16, reported only: every one
+within 0.08 of p(c). N = 13's c = 1 (order 6) and c = 3 (order 5) are orders no control reached at that class.
+
+**Reading.** As stated in advance: the ring momentum dies as eps^{p(c)}, counted from the squash's charge of 2,
+with the wrap-around order at odd N. Three shape deformations (bending, torus curvature, squashing) now break a
+label as a power fixed by charge counting; one distance door (a second nucleus) breaks it through an exponential
+tail. This is the known spurion and Umklapp counting, checked in a molecule.
+
+**Caps.** One minimal Slater 1s per H, no energies; planar rings only; the coefficients of the leading powers are
+measured, not predicted; the bending instance (door 15) measures an energy splitting, while TR and SQ measure
+matrix-element shares, so the three agree on the counting, not on one quantity.

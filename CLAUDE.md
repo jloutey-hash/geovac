@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.22.1 (November 2, 2026)
+**Version:** v5.22.2 (November 2, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Squashed ring GO; pre-QA guards (2026-11-02, v5.22.2, pre-registered + PI-directed):** ring momentum dies as eps^p(c); IC, HR, TR, SQ, single-scale Sturmian guarded, fire-tested; done-file rows drafted. CHANGELOG v5.22.2.
 - **Integrated class, H-ring, torus (2026-11-01/02, v5.22.1, pre-registered):** IC GO (leaves triangular class); HR STOP (Slater margin gone on H6); TR GO (toroidal winding exact). Papers 59, 62. CHANGELOG v5.22.1.
 - **Pre-/qa owed round; SL-3d GO; C10 widened (2026-11-01, v5.22.0, PI-directed):** six guards; P59 radial-core rescope; Hurwitz odd zeta to M3; atom-set 3d transfers within 15%; duplicate keys fail C10. CHANGELOG v5.22.0.
 - **Owed items closed; Dong's gauge group on the true window (2026-10-31, v5.21.30, PI-directed, WG pre-registered GO):** numpy 2.4.0 excluded; edge-crossing identity guarded; window keeps a phase plus isometries plus a reflection; HF repeats Paper 62 (HS, GO). CHANGELOG v5.21.30.
