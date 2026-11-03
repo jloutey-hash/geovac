@@ -762,7 +762,11 @@ authoritative under CLAUDE.md section 1; the seam document is its companion
 data file), and the pass does not start on Paper 57 until that is decided.
 *Done when:* every verdict has exactly one restating home, the others point;
 C25 is green on the front door; `tests/test_atlas_register.py` passes; the
-change log here records the home map.
+change log here records the home map. **Done 2026-11-02 (v6.1.0), home map as
+above; the Paper 57 decision (PM, PI-delegated): the seam document owns the
+per-entry status and the counts, Paper 57 restates them and is gated
+(`tests/test_atlas_register.py` checks 6 to 8). Atlas cells for the J doors are
+one clause each; door 27 is the single home of its own verdict.**
 
 **Pass B: apply the cite-don't-paraphrase rule, trunk first.** The rule was
 adopted 2026-10-02 and hardened 2026-10-03 (item 5 above); on 2026-11-02 the
@@ -780,8 +784,11 @@ loci with `--mentions`, wrap each restating sentence on a derived surface,
 run C25, and fix what it names under the edit bar (delete, don't hedge; minimal
 diff). Then one bounded self-check on the changed units. *Done when:* every
 derived-surface mention of a registered claim is annotated or a pointer, C25 is
-green, and the trunk coverage line is unchanged (the pass touches no owner
-unit's claims; a changed owner unit is a defect of the pass).
+green, and no owner claim changed (the abstract and conclusion units the pass
+annotates show CHANGED and wait for the next run; a changed claim is a defect
+of the pass). **Trunk slice done 2026-11-02 (v6.1.0): 63 spans, C25 green;
+slice 2 (the other six syntheses, 68 spans) and the front-door slice (three
+pages added to C25's front door) done the same day (v6.1.0).**
 
 ## Run shapes: full runs vs delta-verification runs (2026-07-02, PI direction)
 
@@ -891,6 +898,9 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-11-02 — **C25 front door widened; Passes A and B complete** (v6.1.0, MINOR):
+  `docs/atlas.md`, `docs/geovac_positioning.md`, `docs/geovac_onepager.md` join the front
+  door; line-wrap handling in `--mentions` and in annotated spans. CHANGELOG v6.1.0.
 - 2026-11-02 — **Convergence fixes** (PI-directed after the 2026-11-02 study of
   runs v5.17.1 to v5.20.23; MAJOR bump v6.0.0, PI call). (1) Surface grading: STRONGER
   and STALE restatements are LARGE; UNSCOPED is LARGE only on the front door for
@@ -1280,7 +1290,10 @@ roots holding the retired wording).
 What it FAILs on:
 1. **Owner drift** -- the owner no longer carries its anchor + tier (the
    registry may never silently disagree with the paper it points at).
-2. **Front door** -- any line of `papers/INDEX.md` or `docs/claims_register.md`
+2. **Front door** -- any line of a file in the registry's `FRONT_DOOR` list
+   (`papers/INDEX.md`, `docs/claims_register.md`, `README.md`,
+   `docs/forced_free_seam.md`; since 2026-11-02 also `docs/atlas.md`,
+   `docs/geovac_positioning.md`, `docs/geovac_onepager.md`)
    that mentions a claim without its qualifier, or with its overclaim
    (negated mentions and `old→new` transition records are exempt).
 3. **Annotated loci** -- `\gvc{<id>}{<text>}` (LaTeX; renders `<text>`, like
@@ -1289,6 +1302,10 @@ What it FAILs on:
 
 What it reports: `--mentions <id>` (the claim-search DELTA reading list, with
 `!!` on loci lacking the qualifier within two lines) and `--changed-since`.
+*Line wraps (closed 2026-11-02):* the reading list finds a mention broken across
+a line wrap, and an annotated span is read with its whitespace collapsed, so a
+qualifier or overclaim split across a wrap counts. Both are fire-tested in the
+selftest.
 
 *Why.* C16 is a blocklist: it catches a known-bad phrasing re-surfacing. It is
 blind to the **mirror direction** -- a restatement that is merely missing its

@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 
 \newcommand{\gvq}[2]{#2}
+\newcommand{\gvc}[2]{#2}
 
 \begin{document}
 
@@ -36,8 +37,8 @@ of the first~$n$ shells, producing the $n^2$ orbital count, but this
 grouping is not forced by the axioms alone.  Similarly, the per-shell
 count carries a factor of~2 from the binary initialization
 ($N_{\mathrm{init}} = 2$), which we read as corresponding to spin
-multiplicity (a counting correspondence, not a derivation of spin).  When the packing is interpreted
-as a graph, its Laplacian splits into $\ell$-blocks (the edges change
+multiplicity (a counting correspondence, not a derivation of spin).  On the label set taken as a graph, the
+Laplacian splits into $\ell$-blocks (the edges change
 $n$ or $m$, never $\ell$) and so does not converge to the $S^3$
 Laplacian---the spinless node set is the exact $S^3$ label set, on which
 $-\Delta_{S^3} = L^2 + A^2$ is the diagonal $SO(4)$ Casimir
@@ -48,8 +49,8 @@ bound is 4), so that under a single matched scale
 $K_{\mathrm{vac}} = -1/16$ the extremal eigenvalue reaches the hydrogen
 ground-state energy---matched, not derived: the content that could have
 failed is the spectral bound, not the target the scale is matched to.
-The per-shell spectrum $E_n = -Z^2/(2n^2)$ is not a function of the
-graph Laplacian.  On the labels it is the function
+\gvc{graph-s3-wall}{The per-shell spectrum $E_n = -Z^2/(2n^2)$ is not a function of the
+graph Laplacian}.  On the labels it is the function
 $E_n = -Z^2/(2(C+1))$ of the diagonal Casimir $C = n^2-1$, i.e.\ the
 bound-state Hamiltonian is $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$,
 and that function is fixed by Fock's continuum projection:\ the eigenvalue $2\pi^2/n$ of
@@ -101,7 +102,7 @@ three distinct levels of strength.
 \medskip
 
 \textbf{[SYMBOLIC PROOF]} \noindent\textbf{Strong claim: angular quantum numbers.}  Shell~$k$
-has capacity $2k - 1$, which is isomorphic to the spherical harmonic
+has capacity $2k - 1$, which equals in count the spherical harmonic
 basis $Y_{\ell m}$ with $\ell = k - 1$:\ the per-shell degeneracy
 $2\ell + 1$ is an exact count identity, and attaching the labels
 $(\ell, m)$ to the positions is a labelling choice.  This count identity
@@ -124,7 +125,7 @@ axioms.
 \medskip
 
 \textbf{[OBSERVATION]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
-sector constructed here recurs inside the natural geometries of the
+sector counted here recurs inside the natural geometries of the
 Geometric Vacuum (GeoVac) series as a basis label.  The full $(\ell, m)$
 labeling, with $2\ell+1$ states per~$\ell$, appears on $S^3$ for
 hydrogen~\cite{paper7} (where $\ell$ is also conserved), in the
@@ -151,8 +152,8 @@ The counting $\sum_{\ell=0}^{n-1}(2\ell+1) = n^2$ is standard SO(3)
 representation theory.  The relationship between hydrogen's
 ``accidental'' degeneracy and the geometry of~$S^3$ was established by
 Fock~\cite{fock1935} and Bargmann~\cite{bargmann1936}.  What is new
-here is the specific packing algorithm that produces the $(\ell, m)$
-labeling from geometric--combinatorial reasoning independent of the
+here is the specific packing algorithm that reproduces the per-shell
+count of the $(\ell, m)$ labels from geometric--combinatorial reasoning independent of the
 operator formalism, and the observation that this angular sector
 recurs as the angular fiber of the GeoVac natural geometries wherever
 their symmetry retains it (fully at the one-centre, molecule-frame
@@ -161,7 +162,7 @@ prolate level).
 
 The paper is organized as follows.
 Section~\ref{sec:construction} presents the packing algorithm.
-Section~\ref{sec:angular} establishes the isomorphism between shell
+Section~\ref{sec:angular} establishes the count identity between shell
 capacity and the spherical harmonic basis.
 Section~\ref{sec:correspondences} discusses the structural
 correspondences for~$n$ and spin.
@@ -222,7 +223,8 @@ circular shells, area-proportional counting, and binary initialization,
 constitute the full set of assumptions.  The axioms motivate these
 choices but do not uniquely determine them.  What is remarkable is that
 this particular realization---arguably the simplest one consistent with
-the axioms---produces exactly the angular momentum quantum numbers.
+the axioms---reproduces exactly the per-shell count of the angular
+momentum quantum numbers.
 
 \subsection{Algorithm}
 
@@ -297,13 +299,13 @@ strength.
 
 
 %% ================================================================
-%%  III.  ANGULAR QUANTUM NUMBERS FROM UNIFORM DENSITY
+%%  III.  THE ANGULAR COUNT UNDER UNIFORM DENSITY
 %% ================================================================
-\section{Angular Quantum Numbers from Uniform Density}
+\section{The Angular Count under Uniform Density}
 \label{sec:angular}
 
 This section contains the central result of the paper: the per-shell
-state count from the packing construction is isomorphic to the angular
+state count from the packing construction equals in count the angular
 momentum labeling $(\ell, m)$.
 
 \subsection{The angular capacity of shell $k$}
@@ -320,7 +322,7 @@ distinct angular slots.  \textbf{[SYMBOLIC PROOF]} The annular-area derivation o
 angular capacity (equivalently $2\ell+1$ with $\ell = k-1$) is verified
 by \texttt{tests/test\_trunk\_qa\_annular.py}.
 
-\subsection{Isomorphism with spherical harmonics}
+\subsection{Count identity with spherical harmonics}
 
 The spherical harmonics $Y_{\ell m}(\theta, \phi)$ for a given~$\ell$
 have $2\ell + 1$ independent components labeled by
@@ -346,19 +348,18 @@ be proportional to $2k-1$, which is the dimension of the
 $(k{-}1)$-th irreducible representation of SO(3).  (The identity
 establishes equal counts for every $k$;\ it is not a mechanism linking
 planar area to SO(3), and the bijection of positions with $m$ values is
-a labelling choice.)  The packing construction therefore generates the
-complete angular momentum label set
-$\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$ as a direct
-consequence of uniform density on isotropic shells.
+a labelling choice.)  The packing construction therefore reproduces,
+shell by shell, the count of the complete angular momentum label set
+$\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$.
 
 \subsection{What the construction produces}
 
 To be precise about the scope of this result:
 
 \begin{itemize}
-\item The construction produces the \emph{labeling} $(\ell, m)$ and
-  the \emph{degeneracy} $2\ell + 1$ per shell.  These are the angular
-  quantum numbers.
+\item The construction reproduces the \emph{degeneracy} $2\ell + 1$
+  per shell as an exact count;\ attaching the angular labels
+  $(\ell, m)$ to its positions is a labelling choice.
 
 \item It does \emph{not} produce the functional form of the spherical
   harmonics, the eigenvalue $\ell(\ell+1)$ of $\hat{L}^2$, or the
@@ -373,7 +374,7 @@ To be precise about the scope of this result:
   (Sec.~\ref{sec:graph}).
 
 \item The result is \emph{independent} of any specific physical
-  system.  The angular labeling emerges from 2D isotropic geometry,
+  system.  The angular count comes from 2D isotropic geometry,
   not from the hydrogen atom.  Hydrogen merely happens to use this
   same angular sector---as do all rotationally symmetric quantum
   systems.
@@ -386,8 +387,8 @@ To be precise about the scope of this result:
 \section{Structural Correspondences: $n$, Spin, and $2n^2$}
 \label{sec:correspondences}
 
-The angular quantum numbers $(\ell, m)$ emerge directly from the
-packing (Sec.~\ref{sec:angular}).  The principal quantum number~$n$
+The per-shell count of the angular quantum numbers $(\ell, m)$ follows
+directly from the packing (Sec.~\ref{sec:angular}).  The principal quantum number~$n$
 and the spin factor of~2 involve additional identifications that are
 natural and mathematically grounded but not uniquely forced by the two
 axioms.  We present them here as structural correspondences.
@@ -459,7 +460,7 @@ alone.  The axioms constrain the construction; they do not uniquely
 fix every detail of it.
 
 This distinction matters for the epistemic status of the results.  The
-angular quantum numbers $(\ell, m)$ follow from any isotropic,
+per-shell count of the angular quantum numbers $(\ell, m)$ follows from any isotropic,
 uniform-density, concentric construction with linearly spaced radii---a
 robust class (the linear spacing is needed for the $2k-1$ per-shell
 capacity; other spacings change it).  The
@@ -473,8 +474,8 @@ particular choices above.
 \section{The Packing as Recurring Angular Cross-Section}
 \label{sec:cross-section}
 
-The packing construction of Sec.~\ref{sec:construction} produces a
-recurring $(\ell, m)$ angular labeling.  In the subsequent papers of
+The packing construction of Sec.~\ref{sec:construction} counts a
+recurring $(\ell, m)$ angular sector.  In the subsequent papers of
 the GeoVac series, this angular sector appears as a structural factor
 inside the natural geometries used for quantum chemistry calculations,
 as a basis label:\ the full $(\ell, m)$ labeling, with $2\ell+1$ states
@@ -483,7 +484,7 @@ conserved only at Level~1, a Gaunt-coupled channel label elsewhere), but
 only $m$ at the two-centre Level~2, where the prolate separation replaces
 $\ell$.  Where it appears, the full geometry of each system separates into a
 system-specific radial (or hyperradial) coordinate and the angular
-cross-section derived here.
+cross-section counted here.
 
 Table~\ref{tab:cross-section} summarizes the hierarchy.
 
@@ -519,7 +520,7 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
   inside each natural geometry of the GeoVac series.  At Levels~1, 3, 4
   and in each Level-5 fiber the coordinate system separates into a
   system-specific radial part and the full $(\ell, m)$ labeling
-  constructed in this paper (a basis label;\ conserved only at
+  counted in this paper (a basis label;\ conserved only at
   Level~1);\ at the two-centre Level~2 only $m$ is a label.
   $^{\ast}$H$_2$'s natural geometry is Level~2 (prolate spheroidal,
   Paper~12);\ Level~4 is its structural $N$-electron hyperspherical
@@ -533,9 +534,9 @@ momentum-space problem onto the three-sphere~$S^3$.  The eigenstates
 of the Laplace--Beltrami operator on $S^3$ are hyperspherical
 harmonics, which decompose as $Y_{n\ell m} = R_{n\ell}(\chi) \,
 Y_{\ell m}(\theta, \phi)$ (the radial factor depends on $\ell$,
-$R_{n\ell} \propto \sin^\ell\chi\, C^{\ell+1}_{n-\ell-1}(\cos\chi)$).  The angular factor $Y_{\ell m}$ is
-precisely the per-shell structure of the packing, with $\ell = k - 1$.
-The packing's node set is exactly the label set of these harmonics
+$R_{n\ell} \propto \sin^\ell\chi\, C^{\ell+1}_{n-\ell-1}(\cos\chi)$).  The angular factor $Y_{\ell m}$ carries
+the per-shell count $2\ell + 1$ that the packing reproduces, with $\ell = k - 1$.
+The graph's node set is exactly the label set of these harmonics
 (the Peter--Weyl truncation of $L^2(S^3)$), on which
 $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal $SO(4)$ Casimir
 $n^2 - 1$;\ Paper~7~\cite{paper7}
@@ -558,12 +559,11 @@ dissociation energy ($0.053$~mHa) with explicit $r_{12}$ correlation,
 and $99.81\%$ ($0.32$~mHa) with a re-based orbital CI
 (Paper~12~\cite{paper12}).  The azimuthal quantum number~$m$
 survives exactly as the quantum number of the $\phi$-equation
-($e^{im\phi}$), directly inheriting the packing's angular slot
-labeling.  The quantum number~$\ell$ is no longer exactly conserved in
+($e^{im\phi}$).  The quantum number~$\ell$ is no longer exactly conserved in
 the two-center problem: it is replaced by a separation parameter from
 the $\eta$-equation that reduces to~$\ell$ in the united-atom limit.
-The angular structure is recognizably descended from the $(\ell, m)$
-packing---$m$ is exact---but $\ell$ is no longer a label:\ the prolate
+Of the $(\ell, m)$ labels, $m$ is exact,
+but $\ell$ is no longer a label:\ the prolate
 $\eta$-separation replaces it by a separation index whose node count
 correlates with $\ell$ only in the united-atom limit (the lifting of the
 $(2\ell+1)$-fold degeneracy by the axial potential is common to every
@@ -690,7 +690,9 @@ and different in kind from isospectrality.
 
 \subsection{Vertex set}
 
-The packing defines a graph $G = (V, E)$ with vertex set
+We define a graph $G = (V, E)$ on the label set (reached from the
+packing's shells only through the cumulative-grouping Observation,
+which reuses shell~$k$ in every principal shell $n \geq k$), with vertex set
 \begin{equation}
   V = \bigl\{(n, \ell, m, s) : 1 \leq n \leq n_{\max},\;
       0 \leq \ell < n,\;
@@ -853,13 +855,13 @@ the graph Laplacian in the archived Paper~6~\cite{paper6} (superseded).
 \subsection{What the construction provides}
 
 \begin{itemize}
-\item[$\checkmark$] The angular quantum number labeling $(\ell, m)$
-  and the per-shell degeneracy $2\ell + 1$, as a direct consequence of
-  uniform-density isotropic packing.
+\item[$\checkmark$] The per-shell degeneracy $2\ell + 1$ of the angular
+  labels $(\ell, m)$, reproduced as an exact count by uniform-density
+  isotropic packing.
 
-\item[$\checkmark$] A graph topology $(V, E)$ whose vertices carry
-  quantum number labels and whose edges connect labels related by
-  ladder operators (not physical transitions).
+\item[$\checkmark$] A graph topology $(V, E)$ defined on the labels,
+  whose edges connect labels related by ladder operators (not physical
+  transitions).
 
 \item[$\checkmark$] The structural correspondences $n \leftrightarrow$
   cumulative grouping and spin multiplicity $\leftrightarrow$
@@ -882,7 +884,7 @@ the graph Laplacian in the archived Paper~6~\cite{paper6} (superseded).
 
 \item[$\times$] Wavefunctions $R_{n\ell}(r)$ or
   $Y_{\ell m}(\theta, \phi)$ in their functional form.  The packing
-  produces the labels, not the functions.
+  counts the labels;\ it does not produce the functions.
 
 \item[$\times$] Time evolution and dynamics.  These require the
   Hamiltonian as an operator;\ they were attempted via the graph
@@ -937,33 +939,33 @@ provided a comprehensive treatment of the angular momentum algebra
 underlying the $(\ell, m)$ structure.
 
 The present work operates at a different level: rather than analyzing
-the symmetries of the Schr\"odinger equation, it constructs the
-angular labeling from geometric--combinatorial reasoning that is
-logically independent of the operator formalism.  The result is the
-same $(\ell, m)$ basis---as it must be, since both approaches reflect
-the same underlying rotational symmetry---but obtained by a different
+the symmetries of the Schr\"odinger equation, it reproduces the
+angular count from geometric--combinatorial reasoning that is
+logically independent of the operator formalism.  The result has the
+same per-shell count as the $(\ell, m)$ basis, obtained by a different
 route.
 
 \subsection{The kinematic--dynamic distinction}
 
-The packing construction produces the angular labelling and
-degeneracy counting of the \emph{kinematic} structure of quantum
+The packing construction reproduces the angular degeneracy
+counting of the \emph{kinematic} structure of quantum
 mechanics.  It does not produce the \emph{dynamics}:
 the Hamiltonian, the energy spectrum, or time evolution.  This
 separation is a feature of the construction, not a limitation.  It
 shows that, given the construction's choices (Sec.~\ref{sec:correspondences}),
-the angular quantum-number labels follow from geometry and counting,
+the per-shell count of the angular quantum-number labels follows from
+geometry and counting,
 independently of the specific force law or potential.
 
-In the GeoVac series, dynamics enter through the Coulomb problem's
-continuum structure, not through a limit of the graph Laplacian.
+In the GeoVac series, \gvc{graph-s3-wall}{dynamics enter through the Coulomb problem's
+continuum structure, not through a limit of the graph Laplacian}.
 Paper~7~\cite{paper7} verifies Fock's conformal equivalence between the
 hydrogen problem and the Laplace--Beltrami operator on~$S^3$ (the
 bound-state Hamiltonian being $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$), under
 which the $1/r$ Coulomb potential can equivalently be described as the
 coordinate distortion of the stereographic projection (a dual
 description, not a claim that either reading is prior);\ the
-packing's (spinless) node set is the label set of that operator's
+graph's (spinless) node set is the label set of that operator's
 harmonics, on which $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal
 $SO(4)$ Casimir $n^2 - 1$.  The graph
 Laplacian equipped with $K_{\mathrm{vac}} = -1/16$ does \emph{not}
@@ -973,16 +975,16 @@ $\ell$-blocks (\S VI).
 \subsection{Scope of the geometric analogy}
 
 The construction shows that information-theoretic reasoning under
-geometric constraints \emph{can} reproduce the angular quantum number
-structure.  It does not show that this is the \emph{only} way to
+geometric constraints \emph{can} reproduce the per-shell count of the
+angular labels.  It does not show that this is the \emph{only} way to
 obtain these labels, nor does it establish that quantum mechanics
 \emph{must} have a geometric origin.  The angular momentum algebra
 $[\hat{L}_i, \hat{L}_j] = i\epsilon_{ijk}\hat{L}_k$ is a consequence
 of rotational symmetry regardless of whether one arrives at it through
 operator theory or geometric packing.  What the construction
-demonstrates is that the \emph{state-counting} aspect of angular
-momentum---the degeneracy $2\ell + 1$---has a geometric--combinatorial
-derivation, given the construction's structural choices.
+demonstrates is that the number $2k - 1$ has a geometric--combinatorial
+derivation;\ its equality with the degeneracy $2\ell + 1$ is a count
+identity, not a derivation of the degeneracy.
 
 
 %% ================================================================
@@ -991,9 +993,9 @@ derivation, given the construction's structural choices.
 \section{Conclusions}
 \label{sec:conclusions}
 
-The angular momentum quantum numbers $(\ell, m)$ emerge from
-uniform-density packing on isotropic shells: shell~$k$ carries
-$2k - 1$ angular slots, isomorphic to the spherical harmonic basis
+The per-shell count of the angular momentum quantum numbers $(\ell, m)$
+follows from uniform-density packing on isotropic shells: shell~$k$
+carries $2k - 1$ angular slots, equal in count to the spherical harmonic basis
 $Y_{\ell m}$ with $\ell = k - 1$.  This result follows from two
 axioms (binary distinguishability and geometric indifference) together
 with natural structural choices (concentric shells with linearly
@@ -1010,7 +1012,7 @@ These are structural correspondences---genuine mathematical
 observations that match hydrogen's quantum numbers---but they depend
 on identifications beyond what the two axioms alone determine.
 
-The $(\ell, m)$ angular sector constructed here recurs as the
+The $(\ell, m)$ angular sector counted here recurs as the
 angular cross-section inside the natural geometries of the GeoVac
 series as a basis label---in full on $S^3$ for
 single-electron atoms~\cite{paper7} (where $\ell$ is also conserved),

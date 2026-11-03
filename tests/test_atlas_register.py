@@ -16,7 +16,16 @@ that goes stale must fail here instead of surviving quietly.  Checks:
      falsifier column exists, and each row has at least one; a row that says
      "owed" must still carry a registered-prediction file;
   5. the seam catalogue's summary counts (F / Obs / A / C / W and the total)
-     equal the counts of its rows.
+     equal the counts of its rows;
+  6. (2026-11-02, one record per verdict) every seam row an atlas row cites as
+     its record agrees with the atlas verdict: F needs FORCED, C needs FREE,
+     W needs WALL, Obs needs OBS (a cell saying "no seam row of its own" cites
+     no record);
+  7. Paper 57 restates the seam counts in its abstract and its completeness
+     paragraph; both must equal the seam summary (the seam document owns the
+     per-entry status and the counts, PI-delegated decision 2026-11-02);
+  8. the field guide's atlas table carries atlas door numbers, and each row's
+     verdict words are among that door's atlas verdict tokens.
 
 Each wrong answer the gate rejects is planted in ``test_gate_rejects_*`` below,
 so the gate is fire-tested in the same file (CLAUDE.md section 9: a guard whose
@@ -34,6 +43,9 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ATLAS_PATH = REPO_ROOT / "docs" / "atlas.md"
 SEAM_PATH = REPO_ROOT / "docs" / "forced_free_seam.md"
+PAPER57_PATH = REPO_ROOT / "papers" / "group3_foundations" / "paper_57_forced_free_seam.tex"
+FIELD_GUIDE_PATH = REPO_ROOT / "papers" / "synthesis" / "geovac_field_guide.tex"
+STATUS_TO_VERDICT = {"F": "FORCED", "C": "FREE", "W": "WALL", "Obs": "OBS"}
 
 VERDICTS = {"FORCED", "FREE", "WALL", "OBS"}
 SEAM_STATUSES = {"F", "A", "Obs", "C", "W"}
@@ -147,6 +159,12 @@ def check_atlas(atlas_text: str, seam_text: str, repo_root: Path) -> List[str]:
         if "owed" in r["falsifier"] and not any(p.startswith("docs/predictions/") for p in paths):
             problems.append(f"{tag}: guard marked owed without a registered prediction file")
 
+        if "no seam row of its own" not in r["seam"]:
+            for sid in _SEAM_ID_RE.findall(r["seam"]):
+                want = STATUS_TO_VERDICT.get(seam.get(sid, ""))
+                if want and want not in tokens:
+                    problems.append(f"{tag}: seam row {sid} is {seam[sid]} but the verdict carries no {want}")
+
     for sid, status in seam.items():
         if sid.startswith("J") and sid not in cited_seam:
             problems.append(f"seam row {sid} (released axis) is cited by no atlas row")
@@ -169,6 +187,89 @@ def check_atlas(atlas_text: str, seam_text: str, repo_root: Path) -> List[str]:
     return problems
 
 
+def seam_summary_counts(seam_text: str) -> Dict[str, int]:
+    out = {k: int(rx.search(seam_text).group(1)) for k, rx in _SUMMARY_RE.items() if rx.search(seam_text)}
+    m = _TOTAL_RE.search(seam_text)
+    if m:
+        out["total"] = int(m.group(1))
+    return out
+
+
+_P57_ABSTRACT_RE = re.compile(
+    r"(\d+) forced entries \(the gauge-group.*?(\d+) Observations.*?(\d+) admitted-not-forced entry, (\d+) calibration entries and (\d+) walls",
+    re.S)
+_P57_COMPLETE_RE = re.compile(
+    r"The (\d+) entries \((\d+) forced \+ (\d+) Observation \+ (\d+) admitted \+ (\d+) calibration \+ (\d+) walls\)")
+_P57_TABLE_RE = re.compile(r"A consolidated table of the (\d+) forced entries")
+
+
+def check_paper57_counts(paper_text: str, seam_text: str) -> List[str]:
+    """Paper 57's abstract, its consolidated-table sentence and its completeness paragraph restate the
+    seam counts; the seam document is the record, so each restatement must equal it."""
+    want = seam_summary_counts(seam_text)
+    problems: List[str] = []
+    m = _P57_ABSTRACT_RE.search(paper_text)
+    if not m:
+        problems.append("Paper 57 abstract count sentence not found")
+    else:
+        got = dict(zip(("F", "Obs", "A", "C", "W"), map(int, m.groups())))
+        for k, v in got.items():
+            if want.get(k) != v:
+                problems.append(f"Paper 57 abstract says {k} = {v}, seam summary says {want.get(k)}")
+    m = _P57_COMPLETE_RE.search(paper_text)
+    if not m:
+        problems.append("Paper 57 completeness paragraph count sentence not found")
+    else:
+        got = dict(zip(("total", "F", "Obs", "A", "C", "W"), map(int, m.groups())))
+        for k, v in got.items():
+            if want.get(k) != v:
+                problems.append(f"Paper 57 completeness paragraph says {k} = {v}, seam summary says {want.get(k)}")
+    m = _P57_TABLE_RE.search(paper_text)
+    if not m:
+        problems.append("Paper 57 consolidated-table sentence not found")
+    elif int(m.group(1)) != want.get("F"):
+        problems.append(f"Paper 57 consolidated-table sentence says F = {m.group(1)}, seam summary says {want.get('F')}")
+    return problems
+
+
+_FG_VERDICT_WORD_RE = re.compile(r"\b(forced|free|wall|obs)\b", re.I)
+
+
+def field_guide_rows(fg_text: str) -> List[tuple]:
+    """(door number, door name, verdict cell) for each row of the field guide's atlas table."""
+    start = fg_text.index("\\label{sec:atlas}")
+    a = fg_text.index("\\begin{tabular}", start)
+    b = fg_text.index("\\end{tabular}", a)
+    rows = []
+    for line in fg_text[a:b].splitlines():
+        s = line.strip()
+        if not s.endswith("\\\\") or "&" not in s:
+            continue
+        cells = [c.strip() for c in s[:-2].split("&")]
+        if cells[0].isdigit():
+            rows.append((int(cells[0]), cells[1], cells[-1]))
+    return rows
+
+
+def check_field_guide(fg_text: str, atlas_text: str) -> List[str]:
+    atlas = {int(r["n"]): r for r in parse_atlas_rows(atlas_text)}
+    rows = field_guide_rows(fg_text)
+    problems: List[str] = []
+    if not rows:
+        return ["field guide atlas table has no numbered rows"]
+    for n, door, verdict in rows:
+        if n not in atlas:
+            problems.append(f"field guide row '{door}' cites atlas door {n}, which does not exist")
+            continue
+        tokens = set(_VERDICT_TOKEN_RE.findall(atlas[n]["verdict"]))
+        words = {w.upper() for w in _FG_VERDICT_WORD_RE.findall(verdict)}
+        if not words:
+            problems.append(f"field guide row '{door}' (door {n}) has no verdict word")
+        for w in words - tokens:
+            problems.append(f"field guide row '{door}' says {w}; atlas door {n} verdict is {atlas[n]['verdict']!r}")
+    return problems
+
+
 @pytest.fixture(scope="module")
 def texts():
     return (ATLAS_PATH.read_text(encoding="utf-8"),
@@ -178,6 +279,18 @@ def texts():
 def test_atlas_and_seam_are_consistent(texts):
     atlas, seam = texts
     problems = check_atlas(atlas, seam, REPO_ROOT)
+    assert not problems, "\n".join(problems)
+
+
+def test_paper57_restates_the_seam_counts(texts):
+    _, seam = texts
+    problems = check_paper57_counts(PAPER57_PATH.read_text(encoding="utf-8"), seam)
+    assert not problems, "\n".join(problems)
+
+
+def test_field_guide_table_matches_the_atlas(texts):
+    atlas, _ = texts
+    problems = check_field_guide(FIELD_GUIDE_PATH.read_text(encoding="utf-8"), atlas)
     assert not problems, "\n".join(problems)
 
 
@@ -227,6 +340,40 @@ def test_gate_rejects_stale_seam_counts(texts):
     assert m is not None
     bad = seam.replace(m.group(0), m.group(0).replace(m.group(1), str(int(m.group(1)) + 1)), 1)
     assert any("seam summary says W" in p for p in check_atlas(atlas, bad, REPO_ROOT))
+
+
+def test_gate_rejects_verdict_disagreeing_with_seam_status(texts):
+    atlas, seam = texts
+    row = next(l for l in atlas.splitlines() if l.startswith("| 12 |"))
+    assert "| OBS |" in row
+    bad = atlas.replace(row, row.replace("| OBS |", "| FORCED |", 1), 1)
+    assert any("seam row J2 is Obs but the verdict carries no OBS" in p for p in check_atlas(bad, seam, REPO_ROOT))
+
+
+def test_gate_rejects_stale_paper57_counts(texts):
+    _, seam = texts
+    paper = PAPER57_PATH.read_text(encoding="utf-8")
+    m = _P57_TABLE_RE.search(paper)
+    assert m is not None
+    bad = paper.replace(m.group(0), m.group(0).replace(m.group(1), str(int(m.group(1)) - 1)), 1)
+    assert any("consolidated-table sentence says F" in p for p in check_paper57_counts(bad, seam))
+    m2 = _P57_COMPLETE_RE.search(paper)
+    bad2 = paper.replace(m2.group(0), m2.group(0).replace(m2.group(1), str(int(m2.group(1)) + 2), 1), 1)
+    assert any("completeness paragraph says total" in p for p in check_paper57_counts(bad2, seam))
+
+
+def test_gate_rejects_field_guide_verdict_drift(texts):
+    atlas, _ = texts
+    fg = FIELD_GUIDE_PATH.read_text(encoding="utf-8")
+    rows = field_guide_rows(fg)
+    n, door, verdict = rows[0]
+    assert "forced" in verdict
+    line = next(l for l in fg.splitlines() if l.strip().startswith(f"{n} & {door}"))
+    bad = fg.replace(line, line.replace("forced", "wall", 1), 1)
+    assert bad != fg
+    assert any("says WALL" in p for p in check_field_guide(bad, atlas))
+    bad_door = fg.replace(line, line.replace(f"{n} & ", "99 & ", 1), 1)
+    assert any("door 99, which does not exist" in p for p in check_field_guide(bad_door, atlas))
 
 
 def test_gate_rejects_uncited_released_axis(texts):

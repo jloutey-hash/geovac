@@ -78,7 +78,9 @@ def _norm(span: str) -> str:
     "not a theorem" and "mostly \\textbf{forced}" reads "mostly forced"."""
     span = re.sub(r"\\(?:emph|textbf|textit|textrm|textsc|textsf|texttt|textup|underline|mathrm|text)\{", "", span)
     span = re.sub(r"(?<!\\)[{}]", "", span)
-    return span.replace("~", " ")
+    # collapse line breaks and runs of spaces (2026-11-02): an annotated span usually crosses a
+    # LaTeX line wrap, and a qualifier or overclaim split across the wrap was invisible
+    return re.sub(r"\s+", " ", span.replace("~", " "))
 
 
 def check_text_span(cid: str, span: str) -> list[str]:
@@ -186,6 +188,27 @@ def annotation_checks() -> list[str]:
     return out
 
 
+def mention_lines(pattern: str, lines: list[str]) -> list[int]:
+    """0-based indices of lines that mention the claim, INCLUDING a mention broken across a line
+    wrap (added 2026-11-02: LaTeX source wraps prose at ~70 columns, so "edge" / "Laplacian" on
+    consecutive lines was invisible to a per-line match).  A wrapped mention is reported at the
+    line where it starts; a line already matched on its own is not reported twice."""
+    rx = _c(pattern)
+    hits: list[int] = []
+    for i, l in enumerate(lines):
+        if rx.search(l):
+            hits.append(i)
+            continue
+        if i + 1 < len(lines):
+            a, b = l.rstrip(), lines[i + 1].lstrip()
+            joined = a + " " + b
+            for m in rx.finditer(joined):
+                if m.start() < len(a) < m.end():
+                    hits.append(i)
+                    break
+    return hits
+
+
 def mentions(cid: str) -> list[tuple[str, int, bool, str]]:
     c = R.CLAIMS[cid]
     res = []
@@ -193,10 +216,9 @@ def mentions(cid: str) -> list[tuple[str, int, bool, str]]:
         for f in sorted(glob.glob(os.path.join(ROOT, g))):
             rel = os.path.relpath(f, ROOT).replace("\\", "/")
             lines = _read(rel).split("\n")
-            for i, l in enumerate(lines):
-                if _c(c["mention"]).search(l):
-                    win = "\n".join(lines[max(0, i - 2):i + 3])
-                    res.append((rel, i + 1, bool(_c(c["qualifier"]).search(win)), l.strip()[:120]))
+            for i in mention_lines(c["mention"], lines):
+                win = "\n".join(lines[max(0, i - 2):i + 3])
+                res.append((rel, i + 1, bool(_c(c["qualifier"]).search(win)), lines[i].strip()[:120]))
     return res
 
 
@@ -326,6 +348,16 @@ def selftest() -> int:
         print("SELFTEST FAIL: \\gvc nested-brace parser"); ok = False
     if list(gvc_spans(r"\gvc{k-combination-rule}{unterminated"))[0][1] is not None:
         print("SELFTEST FAIL: unterminated \\gvc not reported"); ok = False
+    # a span crossing a line wrap is read as one line: the overclaim fires, the qualifier counts
+    if not check_text_span("graph-s3-wall", "on each block the graph Laplacian converges\n  to the S^3 operator"):
+        print("SELFTEST FAIL: overclaim split across a line wrap escaped"); ok = False
+    if check_text_span("p59-operator-clause-scope", "lives in the densities, for the physical integrals\ntested"):
+        print("SELFTEST FAIL: qualifier split across a line wrap not counted"); ok = False
+    # reading list sees a mention broken across a line wrap, once, at the line it starts on
+    wrapped = ["x the discrete Fock graph's edge", "Laplacian does not converge", "a graph Laplacian here"]
+    got = mention_lines(R.CLAIMS["graph-s3-wall"]["mention"], wrapped)
+    if got != [0, 2]:
+        print(f"SELFTEST FAIL: wrapped-mention reading list returned {got}, expected [0, 2]"); ok = False
     lb = {cid for cid, c in R.CLAIMS.items() if c.get("load_bearing")}
     if not {"k-combination-rule", "wh1-p38-gh-convergence"} <= lb or lb == set(R.CLAIMS):
         print(f"SELFTEST FAIL: load_bearing flags not discriminating ({len(lb)} of {len(R.CLAIMS)})"); ok = False

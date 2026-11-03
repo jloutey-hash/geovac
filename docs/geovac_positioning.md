@@ -70,7 +70,7 @@ The GeoVac paper series is available at [github.com/jloutey-hash/geovac](https:/
 
 Key papers:
 - **Paper 14** (qubit encoding): Pauli scaling analysis, composed sparsity, Gaussian baselines
-- **Paper 7** (foundation): S3 conformal equivalence, 18 symbolic proofs
+- **Paper 7** (foundation): S3 conformal equivalence, 18 symbolic checks of the continuum chain (ten limiting-case or definitional)
 - **Paper 17** (composed geometries): LiH, BeH2, H2O molecular solvers
 - **Paper 15** (Level 4): H2 molecule-frame hyperspherical solver
 - **Paper 18** (exchange constants): Spectral-geometric classification of transcendental content

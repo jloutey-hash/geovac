@@ -185,7 +185,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 
 | # | Title | Key Result |
 |:-:|-------|------------|
-| 0 | Geometric Packing | Packing construction of the (n,l,m) label set; κ = −1/16 matched (an Observation) |
+| 0 | Geometric Packing | Packing count equal to the 2l+1 angular degeneracy; κ = −1/16 matched (an Observation) |
 | 1 | Spectral Graph Theory | Eigenvalue methods, O(N) scaling |
 | **7** | **Dimensionless Vacuum** | **Fock S³ chain (18 symbolic checks, ten limiting-case or definitional), SO(3N) generalization** |
 | **14** | **Qubit Hamiltonians** | **N_Pauli = 27.90 × Q exactly linear; 51×–317× vs Gaussian at equal qubits (H₂O)** |
@@ -220,7 +220,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | 51, 53 | Gravity arc / flat-plane truncations | S³ spectral action two-term-exact; flat-plane state-space GH theorem, disk-with-cone open |
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
 | **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
-| 57 | Forced/free seam | 77-entry catalogue (43 forced / 4 Observation / 1 admitted / 26 calibration / 3 walls; released-axis sub-domain J added 2026-10-15, J10 2026-10-16, J11 2026-10-17, J12–J14 2026-10-18, door-indexed in `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
+| 57 | Forced/free seam | forced/free catalogue (per-entry status and counts: `docs/forced_free_seam.md`; door-indexed view: `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
 
 ---
 

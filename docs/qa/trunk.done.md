@@ -31,6 +31,7 @@
 > | re-checks #1–#3 | 2026-09-28 | DEFECTS each (residue paraphrases, then ~13 LARGE pre-existing debt) -> v5.17.2, list-closing pass v5.17.3 |
 > | FULL #9 | 2026-09-28 | FAIL (unseeded; ~15 LARGE + ~35 SMALL; RESEARCH-GRADE NOT earned). Keystone mathematics SOUND. LARGE cluster: P32's diagonal finite triple ([D,π(f)]≡0) and its consequences; finite four-witness "literal identification" trivial (K=2J_z); order-zero/one residuals grow; E6 proof; P38 substrate A1/A2; P7 Stage-3 tier; P1 title/α. PI approved all recommendations; remediation in progress |
 > | FULL #12 | 2026-10-03 | FAIL (unseeded; 9 OWNER-LARGE families + ~15 SURFACE-LARGE + ~60 SMALL; RESEARCH-GRADE NOT earned at review time). 4/pi re-priced to a Fejer-kernel constant (taper: O(1/n) MEASURED). Remediated under the new edit bar (SMALLs to the sweep list); self-check 4 rounds -> v5.20.0 |
+> | FULL (incremental) | 2026-11-03 | FAIL (unseeded; 15 Opus reviewers + critic; OWNER-LARGE: Paper 0 count-vs-label family, Paper 7 Stage-3 tier, Paper 18 calibration-pi layer; SURFACE-LARGE: calibration-pi and M3 plain-trace restatements in P32 and the group3 synthesis; code 0 LARGE, citations 0 WRONG; RESEARCH-GRADE NOT earned). Remediated gate-first; self-check 2 rounds, closed with an open owner fix (Paper 0 round-2 edits unreviewed). Coverage 82/174 -> 156/174 -> v6.1.1 |
 >
 > **No run has produced PASS.** Only a FULL run can, and the last four FULL
 > runs each found material defects — several *introduced by the previous

@@ -544,7 +544,11 @@ REGISTRY = [
         # linear projection; Paper 31: two standing discriminators.  Withdrawn 2026-10-19 (KS lift,
         # pre-registered be16fccd): at fixed energy the Coulomb projection is linear (Z = n p0), and the
         # oscillator's spectral zeta values carry pi^2 at even argument as those of S^3 do.
-        "pattern": r"calibration\s*~?\s*\$?\\pi\$?\s+is\s+(?:structurally\s+)?Coulomb-specific|calibration\s+π\s+is\s+(?:structurally\s+)?Coulomb-specific|no calibration constants of any kind|Structural origin of calibration|two standing (?:independent )?discriminators|seven layers catalogued,\s+six\s+standing|seven catalogued,\s+six standing|six standing layers|seven,\s+six\s+stand|7 catalogued, 6 standing|7 layers catalogued, 6 standing|Coulomb-specificity of \$?\\pi|linear-affine projection has no such",
+        "pattern": r"calibration\s*~?\s*\$?\\pi\$?\s+is\s+(?:structurally\s+)?Coulomb-specific|calibration\s+π\s+is\s+(?:structurally\s+)?Coulomb-specific|no calibration constants of any kind|Structural origin of calibration|two standing (?:independent )?discriminators|seven layers catalogued,\s+six\s+standing|seven catalogued,\s+six standing|six standing layers|seven,\s+six\s+stand|7 catalogued, 6 standing|7 layers catalogued, 6 standing|Coulomb-specificity of \$?\\pi|linear-affine projection has no such"
+                   r"|calibration\s*~?\s*\$?\\pi\$?\s*\(yes|\$\\pi\$\s+for\s+Coulomb\s+via[^.]{0,80}?\$\\pi\$-free\s+for\s+HO"
+                   r"|\$\\pi\$-free\s+certificate\s+live\s+in\s+the\s+potential-specific|the\s+withdrawn\s+one\s+excepted"
+                   r"|calibration\s+\$?\\pi\$?\s+reappears|\$\\pi\$\s+re-enters\s+via\s+the\s+Seeley"
+                   r"|\(\$\\pi\$-free\s+certificate,\s+Hardy",
         "exempt_if_nearby": withdrawal_marker("coulomb-ho-calibration-pi-layer"),
         "severity": "fail",
         "scope": "trunk group1 group3 group5 group6 synthesis",
@@ -7166,8 +7170,115 @@ REGISTRY = [
         "cited_by": {},
     },
     {
+        "id": "k-lambda-selection-promotion-route",
+        # Paper 32 Q4 (removed 2026-11-03, PI-approved): spectral-action selection of Lambda was
+        # called "the most direct route" to promoting Paper 2's K = pi(B+F-Delta) to a derivation,
+        # although that search is among the twelve eliminated mechanisms (T9: no single CC
+        # heat-kernel expansion contains B, F, Delta).  K stays an Observation (Sec. 13.5).
+        "pattern": r"most\s+direct\s+route\s+by\s+which\s+Paper~?2"
+                   r"|\$K/\\pi\$\s+would\s+become\s+a\s+derived",
+        "exempt_if_nearby": withdrawal_marker("k-lambda-selection-promotion-route"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa trunk FULL incremental, PI-approved). Lambda selection is an eliminated K mechanism, not an open promotion route.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p32-g3-chirality-closed-negative",
+        # The CLAIM (Paper 32 sec:g3, as rescoped 2026-11-03): the difference
+        # gamma_GV x 1 - 1 x gamma_F is nonzero by construction (two gradings on different
+        # tensor factors), so the TESTED identification fails; the product grading gamma_5 grades
+        # H1's combined Dirac at zero Yukawa; a grading compatible with both at nonzero Yukawa is
+        # untested.  Retired: G3 "closed in the negative", identification "structurally
+        # impossible", and the reading of the independent gradings as the reason the Yukawa is
+        # unselected (the same independence holds in Connes' SM).
+        "pattern": r"G3[^.]{0,60}?closed\s+(?:it\s+|this\s+)?in\s+the\s+negative"
+                   r"|G3\s+is\s+closed\s+in\s+the\s+negative"
+                   r"|unification\s+on\s+\$S\^3\$\s+alone\s+closed\s+in\s+the\s+negative"
+                   r"|Identification\s+is\s+structurally\s+impossible"
+                   r"|With\s+G3\s+negative|what\s+Sprint~G3\s+closed"
+                   r"|chirality-grading\s+question\s+Sprint~G3\s+closed"
+                   r"|G3's\s+NEGATIVE\s+offers|which\s+G3\s+\(NEGATIVE\)"
+                   r"|non-selection\s+of\s+the\s+Yukawa\s+is\s+the\s+G3"
+                   r"|G3\s+commuting-\$\\mathbb\{Z\}_2\$\s+theorem"
+                   r"|Verdict:\\\s+NEGATIVE\s+on\s+\$S\^3\$\s+alone"
+                   r"|G2--G3\s+corollary\s+applies"
+                   r"|offers\s+a\s+structural\s+reading\s+of\s+why\s+\$Y\$"
+                   r"|chirality-grading\s+route\s+is\s+closed\s+in\s+the\s+negative"
+                   r"|G3\s+commuting-\$\\mathbb\{Z\}_2\$\s+result"
+                   r"|production\s+grading\s+\$\\gamma_\{\\mathrm\{GV\}\}\s*=\s*\\sigma_x\s*\\otimes\s*\\mathbb\{1\}\$\s+the\s+anticommutator\s+vanishes\.",
+        "exempt_if_nearby": withdrawal_marker("p32-g3-chirality-closed-negative"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa trunk FULL incremental, PI-approved rescope). The G3 difference test fails by construction; it does not close the compatible-grading question.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + reviewed 2026-11-03 (PM) -- inner-factor open question: commuting-Z2 fingerprint deleted; H1/G4a verdict list drops G3; paragraph reread",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + reviewed 2026-11-03 (PM) -- standing-position scope list: H1/G3 verdicts -> H1 verdict; paragraph reread",
+        },
+    },
+    {
+        "id": "p0-packing-generates-labels",
+        # The CLAIM (Paper 0, [SYMBOLIC PROOF]): shell k's capacity 2k-1 EQUALS IN COUNT the 2l+1
+        # degeneracy; attaching (l, m) to positions is a labelling choice; the identity is not a
+        # mechanism linking planar area to SO(3).  Retired: "generates the complete angular momentum
+        # label set", "as it must be, since both approaches reflect the same rotational symmetry",
+        # "isomorphic to the spherical harmonic basis", "(l, m) emerge from the packing".
+        "pattern": r"generates\s+the\s+complete\s+angular\s+momentum\s+label\s+set"
+                   r"|as\s+it\s+must\s+be,\s+since\s+both\s+approaches\s+reflect"
+                   r"|isomorphic\s+to\s+the\s+(?:spherical\s+harmonic\s+basis|angular\s+momentum\s+label)"
+                   r"|emerges?\s+(?:directly\s+)?from\s+(?:the\s+)?(?:packing|uniform-density|2D\s+isotropic)"
+                   r"|as\s+a\s+direct\s+consequence\s+of\s+uniform-density"
+                   r"|produces\s+exactly\s+the\s+angular\s+momentum\s+quantum\s+numbers"
+                   r"|establishes\s+the\s+isomorphism\s+between\s+shell|Isomorphism\s+with\s+spherical\s+harmonics"
+                   r"|(?:produces|constructs)\s+(?:the\s+|a\s+recurring\s+)?(?:\\emph\{)?(?:\$?\(\\ell,\s*m\)\$?\s+)?(?:angular\s+)?labell?ing"
+                   r"|packing\s+produces\s+the\s+labels|angular\s+quantum-number\s+labels\s+follow\s+from\s+geometry"
+                   r"|angular\s+quantum\s+numbers\s+\$\(\\ell,\s*m\)\$\s+follow\s+from\s+any"
+                   r"|packing[^.;]{0,60}?yields\s+the\s+angular\s+sector"
+                   r"|precisely\s+the\s+per-shell\s+structure\s+of\s+the\s+packing|inheriting\s+the\s+packing's\s+angular"
+                   r"|recognizably\s+descended\s+from|Angular\s+Quantum\s+Numbers\s+from\s+Uniform\s+Density"
+                   r"|angular\s+cross-section\s+derived\s+here|sector\s+constructed\s+here|labell?ing\s+constructed\s+in\s+this\s+paper"
+                   r"|packing's\s+(?:\(spinless\)\s+)?node\s+set|packing\s+defines\s+a\s+graph"
+                   r"|packing\s+is\s+interpreted\s+as\s+a\s+graph|packing\s+axiom[^.]{0,40}?whose\s+node\s+set"
+                   r"|Packing\s+construction\s+of\s+the\s+\(n,\s*l,\s*m\)\s+label\s+set"
+                   r"|geometric--combinatorial\s+derivation,\s+given\s+the\s+construction",
+        "exempt_if_nearby": withdrawal_marker("p0-packing-generates-labels"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa trunk FULL incremental, claims chunk A, OWNER-LARGE). The packing proves an equal count, not the labels or a symmetry necessity.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + reviewed 2026-11-03 (PM) -- packing paragraph (equal count, labelling choice); executive summary and conclusion reread",
+        },
+    },
+    {
         "id": 'engine-k1-plain-trace',
-        "pattern": '\\\\mathrm\\{Tr\\}\\(D\\s*\\\\cdot\\s*e\\^\\{-tD\\^2\\}\\)\\$\\s+produces|arises\\s+by\\s+Mellin\\s+transform\\s+of\\s+\\$\\\\Tr\\(D\\s+e\\^\\{-tD\\^2\\}\\)\\$,\\s+with|\\\\Mcal\\[\\\\Tr\\(D\\s*\\\\cdot\\s*e\\^\\{-tD\\^2\\}\\)\\]\\(s\\)\\$,\\s+extracts|commits\\s+to\\s+the\\s+\\$\\\\eta\\$-invariant\\s+Mellin\\s+family|\\\\Tr\\\\bigl\\(D\\^k\\\\,\\s*e\\^\\{-tD\\^2\\}\\\\bigr\\)\\\\right\\]\\(s\\)|\\\\Mcal\\[\\\\Tr\\(D\\^k\\s*e\\^\\{-tD\\^2\\}\\)\\]|\\\\Mcal\\\\!\\\\left\\[\\\\,\\\\Tr\\\\bigl\\(D\\^k\\\\,\\s*e\\^\\{-tD\\^2\\}\\\\bigr\\)|Mellin\\s+slot\\s+of\\s+\\$\\\\Tr\\(D\\^k\\s+e\\^\\{-tD\\^2\\}\\)\\$|\\\\mathcal\\{M\\}\\[\\\\mathrm\\{Tr\\}\\(D\\^k\\s+e\\^\\{-tD\\^2\\}\\)\\]\\$\\s+at\\s+\\$k|\\\\mathcal\\{M\\}\\[\\\\Tr\\(D\\^\\{k\\}\\s+\\\\cdot\\s+e\\^\\{-t\\s+D\\^\\{2\\}\\}\\)\\]',
+        "pattern": '\\\\mathrm\\{Tr\\}\\(D\\s*\\\\cdot\\s*e\\^\\{-tD\\^2\\}\\)\\$\\s+produces|arises\\s+by\\s+Mellin\\s+transform\\s+of\\s+\\$\\\\Tr\\(D\\s+e\\^\\{-tD\\^2\\}\\)\\$,\\s+with|\\\\Mcal\\[\\\\Tr\\(D\\s*\\\\cdot\\s*e\\^\\{-tD\\^2\\}\\)\\]\\(s\\)\\$,\\s+extracts|commits\\s+to\\s+the\\s+\\$\\\\eta\\$-invariant\\s+Mellin\\s+family|\\\\Tr\\\\bigl\\(D\\^k\\\\,\\s*e\\^\\{-tD\\^2\\}\\\\bigr\\)\\\\right\\]\\(s\\)|\\\\Mcal\\[\\\\Tr\\(D\\^k\\s*e\\^\\{-tD\\^2\\}\\)\\]|\\\\Mcal\\\\!\\\\left\\[\\\\,\\\\Tr\\\\bigl\\(D\\^k\\\\,\\s*e\\^\\{-tD\\^2\\}\\\\bigr\\)|Mellin\\s+slot\\s+of\\s+\\$\\\\Tr\\(D\\^k\\s+e\\^\\{-tD\\^2\\}\\)\\$|\\\\mathcal\\{M\\}\\[\\\\mathrm\\{Tr\\}\\(D\\^k\\s+e\\^\\{-tD\\^2\\}\\)\\]\\$\\s+at\\s+\\$k|\\\\mathcal\\{M\\}\\[\\\\Tr\\(D\\^\\{k\\}\\s+\\\\cdot\\s+e\\^\\{-t\\s+D\\^\\{2\\}\\}\\)\\]' + r'|\\mathrm\{Tr\}\(D\s*\\cdot\s*e\^\{-t\s*D\^2\}\)\$\.?\s+Produces',
         "exempt_if_nearby": withdrawal_marker('engine-k1-plain-trace'),
         "severity": 'fail',
         "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',

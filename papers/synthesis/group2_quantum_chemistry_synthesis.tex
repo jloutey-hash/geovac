@@ -14,6 +14,7 @@
 \newtheorem{observation}{Observation}
 \newtheorem{conjecture}{Conjecture}
 
+\newcommand{\gvc}[2]{#2}
 \begin{document}
 
 \title{The Natural Geometry Hierarchy:\\
@@ -89,9 +90,9 @@ fails and only the axial $m$-rule survives, so the angular sparsity is an
 \emph{atomic-sector} property---the abelian residue of the molecular
 point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
-machine precision for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
+machine precision for $\mathrm{H}_2^+$, \gvc{he-bracket}{$0.022\%$ (properly variational, raw
 $l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
-for He, $99.97\%$ of $D_e$ ($0.053$~mHa) for $\mathrm{H}_2$ via an
+for He}, $99.97\%$ of $D_e$ ($0.053$~mHa) for $\mathrm{H}_2$ via an
 explicit-$r_{12}$ extension of the prolate spheroidal engine with exact
 algebraic integrals ($99.81\%$ / $0.32$~mHa via re-conditioned CI at the
 variational optimum $\alpha = 1.40$)---and $96.0\%$ (cusp-corrected) in
@@ -112,9 +113,9 @@ operator are dual descriptions of the same quantum-number structure,
 linked by an exact Peter--Weyl label identification (the lattice's
 labels are those of the $S^3$ harmonics, on which the operator acts as
 the diagonal $SO(4)$ Casimir), with Fock's proven conformal projection
-linking the operator to the Schr\"odinger equation (the lattice's
+linking the operator to the Schr\"odinger equation (\gvc{graph-s3-wall}{the lattice's
 graph Laplacian is not one of the two:\ it does not converge to
-$\Delta_{S^3}$, Paper~7); the interpretive question of which
+$\Delta_{S^3}$, Paper~7}); the interpretive question of which
 is more fundamental is left open.
 \end{abstract}
 
@@ -132,8 +133,7 @@ the unit three-sphere $S^3$, and that the quantum-number labels
 $(n,l,m)$ of a discrete graph are exactly the labels of the $S^3$
 harmonics, on which the $S^3$ Laplace--Beltrami operator acts as the
 diagonal $SO(4)$ Casimir at every cutoff~\cite{loutey_paper0, loutey_paper1,
-loutey_paper7} (the graph's edge Laplacian does not converge to that
-operator;\ corrected 2026-09-25).  That arc answers a question about a single
+loutey_paper7} (\gvc{graph-s3-wall}{the graph's edge Laplacian does not converge to that operator}).  That arc answers a question about a single
 one-electron atom.  The present synthesis takes up the question the
 foundations arc opens but does not close:\ what is the right
 discretization for a \emph{molecule}, or for an atom with \emph{more
@@ -143,9 +143,9 @@ The organizing answer is the \emph{natural geometry principle}, stated
 first in Paper~11~\cite{loutey_paper11}:\ every separable quantum
 system has a natural lattice, namely the label set and channel
 structure of the coordinates in which the problem separates (for $S^3$
-this is the label lattice, not a discretization of the
+this is the label lattice, \gvc{graph-s3-wall}{not a discretization of the
 Laplace--Beltrami operator, whose graph Laplacian does not converge to
-it, Paper~7).  For a one-center one-electron system that coordinate system
+it, Paper~7}).  For a one-center one-electron system that coordinate system
 is $S^3$; for a two-center one-electron system it is the prolate
 spheroid; for a one-center two-electron system it is the hyperspherical
 coordinate system; for a two-center two-electron system it is again
@@ -204,8 +204,8 @@ Laplace--Beltrami operator are dual descriptions of the same
 quantum-number structure, linked by an exact Peter--Weyl label identification (the lattice's
 labels are those of the $S^3$ harmonics, on which the operator acts as
 the diagonal $SO(4)$ Casimir), with Fock's proven conformal projection
-linking the operator to the Schr\"odinger equation (the lattice's graph Laplacian is not
-one of the two:\ it does not converge to $\Delta_{S^3}$, Paper~7), and
+linking the operator to the Schr\"odinger equation (\gvc{graph-s3-wall}{the lattice's graph Laplacian is not
+one of the two:\ it does not converge to $\Delta_{S^3}$, Paper~7}), and
 the interpretive question of ontological priority is left to the
 reader.  The framework's concrete
 advantages---a zero-parameter construction from nuclear charges and
@@ -224,10 +224,10 @@ properties this synthesis foregrounds.
 The one-electron atomic baseline is the $S^3$ label lattice of the
 foundations arc:\ on the discrete $(n,l,m)$ label lattice $-\Delta_{S^3}$ is the
 diagonal $SO(4)$ Casimir $n^2-1$, so through Fock's energy shell the
-Rydberg spectrum holds at every cutoff; the graph Laplacian itself does not
+Rydberg spectrum holds at every cutoff; \gvc{graph-s3-wall}{the graph Laplacian itself does not
 converge to the $S^3$ operator, and its extremal eigenvalue matches
 the ground state only by construction through
-$\kappa$~\cite{loutey_paper1, loutey_paper7}.  The natural first
+$\kappa$}~\cite{loutey_paper1, loutey_paper7}.  The natural first
 question for chemistry is whether the same $S^3$ object handles a
 \emph{molecule}.  Paper~8~\cite{loutey_paper8} pursues this directly:\
 it shows that a diatomic molecule is geometrically a single $S^3$ with
@@ -458,10 +458,10 @@ finite-difference error, and the paper labels it as
 such~\cite{loutey_paper13}.  The properly variational results come from
 a two-dimensional variational solver that treats the hyperradius and
 hyperangle simultaneously, avoiding the adiabatic approximation:\
-$0.022\%$ raw at $l_{\max}=7$ (a genuine variational upper bound) and
+\gvc{he-bracket}{$0.022\%$ raw at $l_{\max}=7$ (a genuine variational upper bound) and
 $0.004\%$ with a Schwartz cusp correction at $l_{\max}=4$ (a
 non-variational extrapolation that lies marginally below the exact
-energy)~\cite{loutey_paper13}.  A separate, fully zero-parameter route
+energy)}~\cite{loutey_paper13}.  A separate, fully zero-parameter route
 is configuration interaction in the fixed $k=Z$ hydrogenic basis on
 the $S^3$ labels, with the exact diagonal one-body operator and exact
 rational Slater integrals:\ it reaches $1.88\%$ above exact at
@@ -805,21 +805,21 @@ statement about transcendence class:\ the extension is not blocked by
 missing algebra but by a genus jump in the radial core, and any closed-form polyatomic
 tensor is all-or-nothing (a part-closed-form, part-fitted tensor is not
 decidable at all).  And the same obstruction gates explicitly-correlated
-(F12) evaluation, because the difficulty of a two-electron integral lives
+(F12) evaluation, \gvc{p59-operator-clause-scope}{because the difficulty of a two-electron integral lives
 in the densities, not in the operator between them, for the physical integrals
-tested.  The exception is the two-center master integral with a Slater geminal:\
+tested}.  The exception is the two-center master integral with a Slater geminal:\
 its published fourth-order operator (Lesiuk and Moszynski) is Paper~59's
 three-center one rescaled, so the geminal's mass moves it from the Bessel
 equation onto the same elliptic curve, and only symmetric exponent patterns
 collapse.  Two pre-registered
-extensions (Paper~59, added October 2026) probe the rung variable:\ a
-fourth distinct center adds no genus [MEASURED], consistent with the
+extensions (Paper~59, added October 2026) probe the rung variable:\ \gvc{p59-four-centre-genus-one}{a
+fourth distinct center adds no genus [MEASURED]}, consistent with the
 class counting the distinct two-center densities a kernel couples and
-not the nuclei;\ a three-electron chain over two-center densities with two
+not the nuclei;\ \gvc{p59-three-electron-k3}{a three-electron chain over two-center densities with two
 Coulomb kernels at one electron lives on a K3 surface [SYMBOLIC +
 MEASURED] whose holomorphic period is a three-scale Bessel moment, a sum
 of products of two complete elliptic integrals (``elliptic squared'');\ whether the chain's generic fibre carries more
-is evidence only, and left open, though a second slice through two of the
+is evidence only, and left open}, though a second slice through two of the
 null triples is again a K3 function integrated once [SYMBOLIC + MEASURED].  A third extension [SYMBOLIC +
 MEASURED] finds that the holomorphic period of a tree of linked densities
 depends only on how many densities it links, and that four linked
@@ -829,10 +829,10 @@ real three-dimensional star and path of four densities both reduce, with
 no K3 piece;\ [OBSERVATION] so the
 integrals of a molecular Hamiltonian, which link two densities, stay
 elliptic at the fibre for any molecule.  A fourth [SYMBOLIC + MEASURED]
-finds that a Coulomb ring of three densities sits on the elliptic rung at
-the fibre, below the chain, while the correlated triangle with exponential
+finds that \gvc{p59-coulomb-ring-elliptic}{a Coulomb ring of three densities sits on the elliptic rung at
+the fibre, below the chain}, while \gvc{p59-correlated-triangle-k3}{the correlated triangle with exponential
 geminals sits with the chain on the K3 rung at $\gamma=1$, $3/2$ and
-$2$.  [SYMBOLIC + MEASURED] Its elliptic piece at $\gamma=3/2$ and $2$ is
+$2$}.  [SYMBOLIC + MEASURED] Its elliptic piece at $\gamma=3/2$ and $2$ is
 a two-dimensional bubble at imaginary external momentum $i\gamma$, the
 same function that gives the three-center fibre at zero momentum, and
 the reading predicted the $\gamma=2$ pieces before they were computed, and
@@ -1281,8 +1281,8 @@ construction of the natural-geometry hierarchy for electronic
 structure.  Each level is the coordinate system in which a given system
 separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
 for $\mathrm{H}_2^+$ (machine precision)~\cite{loutey_paper11}, hyperspherical
-coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
-cusp; $1.88\%$ fixed-$k$ hydrogenic CI)~\cite{loutey_paper13}, molecule-frame hyperspherical
+coordinates for He (\gvc{he-bracket}{$0.022\%$ variational raw / $0.004\%$ non-variational
+cusp; $1.88\%$ fixed-$k$ hydrogenic CI})~\cite{loutey_paper13}, molecule-frame hyperspherical
 coordinates for $\mathrm{H}_2$ ($96.0\%$ of $D_e$,
 cusp-corrected)~\cite{loutey_paper15}---though $\mathrm{H}_2$'s natural
 geometry is the prolate spheroid, where an explicit-$r_{12}$ CI reaches
@@ -1310,9 +1310,9 @@ operator are dual descriptions of the same quantum-number structure,
 linked by an exact Peter--Weyl label identification (the lattice's
 labels are those of the $S^3$ harmonics, on which the operator acts as
 the diagonal $SO(4)$ Casimir), with Fock's proven conformal projection
-linking the operator to the Schr\"odinger equation (the lattice's
+linking the operator to the Schr\"odinger equation (\gvc{graph-s3-wall}{the lattice's
 graph Laplacian is not one of the two:\ it does not converge to
-$\Delta_{S^3}$, Paper~7); the framework's concrete
+$\Delta_{S^3}$, Paper~7}); the framework's concrete
 advantages do not depend on which description one regards as
 fundamental, and that interpretive question is left open.
 

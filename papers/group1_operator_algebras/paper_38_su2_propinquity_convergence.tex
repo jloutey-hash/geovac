@@ -71,6 +71,7 @@ and editorial decisions are the author's responsibility.}}
 \date{June 2026 (preprint)}
 
 \newcommand{\gvq}[2]{#2}
+\newcommand{\gvc}[2]{#2}
 
 \begin{document}
 \maketitle
@@ -117,10 +118,10 @@ closed-form Fej\'er moment.
 Supporting structure is organized in four lemmas:\ (L1$'$) \textbf{[PANEL-VERIFIED]} a
 finite-distance statement on a doubled computational model of the
 truncated operator system (not used by the theorem;\ \S\ref{sec:truncations});\ (L2)
-\textbf{[INTERNAL THEOREM + MEASURED]} a positive
+\textbf{[INTERNAL THEOREM + MEASURED]} \gvc{p38-rate-constant}{a positive
 central spectral Fej\'er kernel on $\SU(2)$ with closed-form
 mass-concentration moment and Stein--Weiss-type asymptotics
-$\gamma_n \sim (4/\pi)\log n / n$ (dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$);\ (L3) \textbf{[INTERNAL THEOREM]} a
+$\gamma_n \sim (4/\pi)\log n / n$ (dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)};\ (L3) \textbf{[INTERNAL THEOREM]} a
 Lipschitz comparison bound
 $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
 $C_3 = 1$, by compression from the continuum identity (\emph{not} used
@@ -1809,10 +1810,10 @@ algebraic level (Peter--Weyl, central characters, Plancherel weights);\
 the compression proof of Lemma~\ref{lem:L3} needs no higher-rank version
 of the Avery 3-Y integral or its selection rule.
 
-Paper~40~\cite{paper40_unified} generalises
+\gvc{p40-general-g-conditional}{Paper~40~\cite{paper40_unified} generalises
 Theorem~\ref{thm:main} (unconditionally at rank~$1$;\ for general $G$
 conditionally on the per-group spin-window decomposition) to all compact connected semisimple Lie groups
-with bi-invariant metric (tori excluded). The higher-rank analog of the Avery 3-Y selection
+with bi-invariant metric (tori excluded)}. The higher-rank analog of the Avery 3-Y selection
 rule is the \emph{Dirac-triangle inequality}
 $|D(\pi) - D(\pi')| \le \sqrt{C(\sigma)}$ for every
 $\sigma \subset \pi \otimes \pi'^*$, which generalises Paper~38's
@@ -1829,8 +1830,8 @@ $\times$ Vandermonde-Jacobian cancellation argument
 $\ge 2$, with a rank-uniform proof a named gap in Paper~40;\ for several
 simple factors it is open, and as here it is a kernel constant, not a
 convergence rate. \textbf{[INTERNAL THEOREM]}
-$C_3(G) = 1$ at every rank, sharp in the limit, follows by the same
-compression argument as Lemma~\ref{lem:L3} here (Paper~40 Lemma~L3);\
+\gvc{lipschitz-c3-compression}{$C_3(G) = 1$ at every rank, sharp in the limit, follows by the same
+compression argument as Lemma~\ref{lem:L3} here (Paper~40 Lemma~L3)};\
 Paper~40 \S 3.3 studies representation-theoretic
 inequalities on tensor-product summands (existence of the PRV summands is
 Kumar's theorem, Invent.\ Math.\ \textbf{93}, 1988;\ the intermediate

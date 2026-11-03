@@ -40,6 +40,7 @@ Marcolli--van~Suijlekom Gauge-Network Lineage}
 \date{May 2026}
 
 \newcommand{\gvq}[2]{#2}
+\newcommand{\gvc}[2]{#2}
 
 \begin{document}
 \maketitle
@@ -73,10 +74,10 @@ continuum limit is Yang--Mills without Higgs), and inside the
 Connes--van~Suijlekom spectral-truncation
 program~\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024,vansuijlekom2024_ksystems}.  Every
 structural ingredient of the GeoVac construction has published
-precedent; what is not duplicated is the $\alpha$ observation
+precedent; what is not duplicated is \gvc{k-combination-rule}{the $\alpha$ observation
 ($K = \pi(B + F - \Delta)$ matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$;\
 the root of the cubic $1/\alpha = K - \alpha^2$ matches to
-$8.8 \times 10^{-8}$;\ Paper~2~\cite{paper2}) from a discrete spectral
+$8.8 \times 10^{-8}$;\ Paper~2~\cite{paper2})} from a discrete spectral
 construction.
 \textbf{[OBSERVATION]}
 (2)~\emph{Sub-sector identification.}  Paper~28's QED on~$S^3$ is the
@@ -2164,7 +2165,7 @@ level, and on the HO side $\pi$ enters through a measure and through
 spectral sums (Paper~24).
 \end{observation}
 
-\begin{theorem}[G3 closure: Bertrand-rigidity category obstruction]%
+\begin{theorem}[Cross-manifold closure: Bertrand-rigidity category obstruction]%
 \label{thm:g3_closure}
 \textbf{[PROOF-BY-ARGUMENT; scoped to published constructions]}
 Within standard Connes spectral triples and Berezin--Toeplitz
@@ -2177,7 +2178,7 @@ that simultaneously preserves:
   $D^2$, spinor bundle, first-order Camporesi--Higuchi Dirac with
   spectrum $|\lambda_n| = n + 3/2$); and
 \item[(b)] the Bargmann character of $\Tcal^{\mathrm{BL}}_{S^5}$
-  ($\pi$-free certificate, Hardy-sector tower structure,
+  (Hardy-sector tower structure,
   first-order Euler spectrum $E_N = N + 3/2$, Paper~24).
 \end{enumerate}
 The obstruction is categorical and rests on three premises:
@@ -2209,7 +2210,8 @@ holomorphic $\to$ Berezin--Toeplitz quantization.
 Three constructions are available:
 (i)~the standard graded tensor product with the round-$S^5$
 Riemannian Dirac---this preserves~(a) but violates~(b)
-($\pi$ re-enters via the Seeley--DeWitt coefficients on $S^5$);
+(its spectrum is the round-$S^5$ Dirac spectrum, not the first-order
+Euler ladder, and it carries no Hardy-sector tower);
 (ii)~the tensor product with the Bargmann--Euler operator---this
 preserves~(b) but violates~(a)
 ($E_{\mathrm{BL}}$ is not a Dirac-type operator on $S^5$,
@@ -2236,13 +2238,13 @@ $\pi$ enters both sides through a measure and through spectral sums);
 Wilson gauge
 with natural matter coupling (a representation-theoretic layer, not an
 $L_0$ one); modular-Hamiltonian Pythagorean orthogonality;
-spectral-action gravity termination --- are, the withdrawn one
+spectral-action gravity termination --- are, the two withdrawn ones
 excepted, read here as downstream of this single categorical
 obstruction;\ the proof sketch argues the obstruction itself, not each
 layer's derivation from it.
 \end{proof}
 
-\begin{remark}[G3 scope]%
+\begin{remark}[Cross-manifold scope]%
 \label{rem:g3_scope}
 Theorem~\ref{thm:g3_closure} does not assert that $S^3$ and $S^5$
 are unrelated --- they are the two Bertrand geometries, deeply connected
@@ -3350,16 +3352,12 @@ their span $\mathcal{O}_{n_{\max}}$ is not closed under multiplication),
 so the $a \cdot b \notin \mathcal{O}$ feature does not block the
 fluctuation calculus.
 Sprint~H1 (Sec.~\ref{sec:higgs_h1}) sharpens this gap to the
-Yukawa-undetermined verdict; Sprint~G3 (Sec.~\ref{sec:g3}) offers
-a structural reading of why $Y$ is undetermined --- $\gamma_{\mathrm{GV}}$
-and $\gamma_F$ are independent commuting $\mathbb{Z}_2$ gradings, the
-Yukawa lives on the $\gamma_F$ flip, and no GeoVac-side data couples
-to that flip.
+Yukawa-undetermined verdict.
 \item[\textbf{G3}] (Hypercharge / electroweak unification.)\ The SM
 relation $Q = T_3 + Y_W/2$ requires co-located $U(1)_Y$ and
 $\mathrm{SU}(2)_L$ on a common Hilbert space with a left--right
 chiral asymmetry.  Paper~25's $U(1)$ and Paper~30's
-$\mathrm{SU}(2)$ are co-located on the same $S^3$ graph (the co-location Sprint~G3 tested and closed in the negative, \S\ref{sec:g3}), but
+$\mathrm{SU}(2)$ are co-located on the same $S^3$ graph (Sprint~G3 tested one identification of $\gamma_{\mathrm{GV}}$ with the weak-isospin grading, \S\ref{sec:g3}), but
 the Camporesi--Higuchi Dirac (Sec.~\ref{sec:construction}
 Definition~\ref{def:D_GV_spectral}) is non-chiral by default.  The
 chirality grading introduced in Sprint~TS Track~E2 (R3.5, full
@@ -3367,13 +3365,13 @@ Dirac with both chiralities) is a $\mathbb{Z}_2$-grading of the
 spinor bundle, not the SM weak-isospin chirality, and it does not
 distinguish left- and right-handed sectors of a charged matter
 field.
-Sprint~G3 (Sec.~\ref{sec:g3}) closed this in the negative on $S^3$
-alone:\ $\gamma_{\mathrm{GV}}$ and $\gamma_F$ are independent commuting
-$\mathbb{Z}_2$ gradings on $\mathcal{H}_{\mathrm{GV}} \otimes
-\mathcal{H}_F$, with operator-norm residual exactly~$2$ at every
-$n_{\max} \in \{1, 2, 3\}$.  Identification is structurally
-impossible by tensor-product factorisation, and the electroweak
-co-location route is therefore pushed to G4.
+Sprint~G3 (Sec.~\ref{sec:g3}) tested whether $\gamma_{\mathrm{GV}}$
+and $\gamma_F$ are the same operator on $\mathcal{H}_{\mathrm{GV}}
+\otimes \mathcal{H}_F$;\ they are not, by construction (operator-norm
+residual exactly~$2$ at every $n_{\max} \in \{1, 2, 3\}$).  The product
+grading $\gamma_{\mathrm{GV}} \otimes \gamma_F$ grades the combined Dirac
+at zero Yukawa and fails at nonzero Yukawa;\ whether some other grading
+compatible with both exists there is untested, so G3 stays open.
 \item[\textbf{G4}] (Cross-manifold obstruction, the dominant gap.)\
 Connes' SM uses a \emph{single} spectral triple
 $(\mathcal{A}_{\mathrm{SM}}, \mathcal{H}_{\mathrm{SM}},
@@ -3409,8 +3407,7 @@ since built, closed positive-thin:\ it defines the construction but
 selects no Yukawa, hypercharge or generation data) and G4b (genuine
 cross-manifold $\mathcal{T}_{S^3} \otimes \mathcal{T}_{S^5}$, blocked
 at the NCG-framework level by the Riemannian-vs-Hardy-sector
-asymmetry).  With G3 negative and G4a built, no sprint-scale
-electroweak-unification path remains open.
+asymmetry).
 \end{enumerate}
 
 A footnote on the GUT-embedding direction:\ Sprint~4H Track~SM-C
@@ -3430,8 +3427,8 @@ coincidences.
 \subsubsection*{Unification targets after G3: what remains}
 
 Of the four gaps, G4 (cross-manifold) is the most consequential.  G3
-is closed in the negative (\S\ref{sec:g3}:\ identification is
-structurally impossible by tensor-product factorisation);\ G4a is
+is open (\S\ref{sec:g3}:\ the one identification tested fails by
+construction);\ G4a is
 built and closed positive-thin (\S\ref{sec:g4});\ G4b is blocked at
 the NCG-framework level;\ G1 has no current selecting mechanism
 (\S\ref{sec:unified_gauge}).  Paper~25's
@@ -3449,18 +3446,13 @@ $U_e \in \mathrm{SU}(2) \times U(1)$ and a chosen embedding of
 hypercharge as the $U(1)$ phase.  Whether such a construction
 admits a Higgs-style inner fluctuation through an
 almost-commutative extension (closing G2 within the electroweak
-sector) is an open structural question.  Whether the
-Camporesi--Higuchi Dirac admits a chirality grading compatible with
-weak-isospin is \emph{not} open:\ Sprint~G3 closed it in the negative on $S^3$
-alone (\S\ref{sec:g3}).
-\emph{The open question} --- the almost-commutative lift of Paper~30's
-$\mathrm{SU}(2)$ Wilson instance, \emph{not} the chirality-grading question
-Sprint~G3 closed --- is a clean $S^3$-only target that does not require any
+sector) is an open structural question, and so is whether a grading
+compatible with weak isospin exists at nonzero Yukawa (\S\ref{sec:g3}).
+The almost-commutative lift of Paper~30's
+$\mathrm{SU}(2)$ Wilson instance is a clean $S^3$-only target that does not require any
 progress on the $S^5$ side. It is not by itself an electroweak
 construction:\ what it would deliver is a non-chiral
-$\mathrm{SU}(2) \times \mathrm{U}(1)$ Wilson product on $S^3$;\ chiral
-electroweak co-location on $S^3$ is what Sprint~G3 closed
-(\S\ref{sec:g3}), and G4a (Connes SM on the $S^3$ triple alone, below)
+$\mathrm{SU}(2) \times \mathrm{U}(1)$ Wilson product on $S^3$, and G4a (Connes SM on the $S^3$ triple alone, below)
 is built and closed positive-thin.
 
 We do not claim such a unification has been achieved, or even that
@@ -3471,8 +3463,7 @@ and the lineage placement are real); a recorded
 honest gap analysis (G1--G4 are real); and a recorded open
 direction (the almost-commutative lift of Paper~30's $\mathrm{SU}(2)$
 Wilson instance is the most concrete $S^3$-only target;\ G4a is built
-and closed positive-thin, and the chirality-grading route is closed in
-the negative, \S\ref{sec:g3}).  Per the project's rhetoric rule, no claim is made that GeoVac
+and closed positive-thin, and G3 is open, \S\ref{sec:g3}).  Per the project's rhetoric rule, no claim is made that GeoVac
 contains the Standard Model; the claim is only that it contains
 the three SM gauge groups as separate Wilson lattice gauge
 theories on its own sub-manifolds, with a weak-coupling kinetic
@@ -3683,8 +3674,7 @@ spectral-action computation; deferred to Track~1 R2.5~L4
 closure for the rigorous interpretation), does \emph{not} include
 the SM color factor $M_3(\mathbb{C})$ (deferred per
 Sec.~\ref{sec:unified_gauge} G4), and does \emph{not} identify the
-GV and weak-isospin chiralities (that identification is what
-Sprint~G3 closed in the negative, \S\ref{sec:g3}).  Per the project's
+GV and weak-isospin chiralities (\S\ref{sec:g3}).  Per the project's
 rhetoric rule, no claim is made that GeoVac contains the Higgs:\ the
 claim is that it admits a Higgs given an imposed Yukawa, and that
 the Yukawa is not derived from GeoVac structure.
@@ -3726,10 +3716,8 @@ the residual
 \end{equation}
 
 vanishes (or vanishes on the physical sector under standard
-left/right convention swap).  $\Delta = 0$ would close G3 in the
-positive; $\Delta \neq 0$ robustly would close G3 in the negative
-on $S^3$ alone and push electroweak unification onto G4
-cross-manifold territory.
+left/right convention swap).  $\Delta = 0$ would identify the two
+gradings.
 
 \paragraph{Constructions.}  The sprint executed three parallel
 tracks (memos
@@ -3863,31 +3851,20 @@ $\|\{\gamma_5, D\}\|_F = 17, 52, 110$ at $n_{\max} = 1, 2, 3$, and with
 the production grading $4.7, 9.3, 14.8$ at $Y \ne 0$.  $\gamma_{\mathrm{GV}}$ and $\gamma_F$ do not
 identify across the tensor product.
 
-\paragraph{Verdict:\ NEGATIVE on $S^3$ alone.}  The two chirality
+\paragraph{Verdict:\ the tested identification fails by construction;\
+G3 stays open.}  The two chirality
 gradings $\gamma_{\mathrm{GV}}$ (the chirality-doubling grading
 $\sigma_x \otimes \mathbb{1}$ of Proposition~\ref{prop:odd}(b)) and $\gamma_F$ (weak-isospin grading on the AC factor) are
-\emph{independent commuting} $\mathbb{Z}_2$ gradings on
-$\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$.  They cannot be
-identified by any standard NCG sign convention because, by
-construction, $\gamma_{\mathrm{GV}}$ acts as identity on
+independent commuting $\mathbb{Z}_2$ gradings on
+$\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$:\ $\gamma_{\mathrm{GV}}$ acts as identity on
 $\mathcal{H}_F$ and $\gamma_F$ acts as identity on
-$\mathcal{H}_{\mathrm{GV}}$:\ they are different operators, acting
-on different tensor factors.  Electroweak chirality co-location does
-not close on $S^3$ alone.
-
-\paragraph{The G2--G3 corollary.}  Sprint~H1 left G2 (Higgs as inner
-fluctuation) at the verdict ``construction admits a Higgs given an
-imposed Yukawa $Y$, but no GeoVac mechanism selects $Y$.''  G3's
-NEGATIVE offers a structural reading of why.  The Yukawa sits in the
-off-diagonal $\mathbb{C} \leftrightarrow \mathbb{H}$ block of $D_F$
-that anticommutes with $\gamma_F$;\ the candidate GeoVac sources for
-that block (offdiag CH chirality bridging, Sturmian inter-shell
-coupling) have no kinematic relation to $\gamma_F$, because
-$\gamma_{\mathrm{GV}}$ is structurally independent of $\gamma_F$.
-Equivalently:\ no GeoVac-side data fixes $Y$ because the GeoVac
-chirality lives on a different $\mathbb{Z}_2$ grading from the one
-the Yukawa flips.  This is a \emph{sharpening} of H1's G2 verdict (the
-Yukawa-undetermined gap is named structurally), not a new gap.
+$\mathcal{H}_{\mathrm{GV}}$, so $\Delta \neq 0$ for any such pair and
+the test could not have come out positive.  It rules out equating the
+two operators, not a grading compatible with both:\ the product
+$\gamma_5$ grades the combined Dirac at zero Yukawa, and whether a
+compatible grading exists at nonzero Yukawa (for instance under the
+graded product of~\cite{dabrowski_dossena2011}, which the paper does
+not use) is untested.
 
 \paragraph{Files.}  Modules
 \texttt{geovac/chirality\_grading.py} (G3-A, 50/50 tests) and the
@@ -3909,8 +3886,7 @@ NCG-framework-blocked)}
 \label{sec:g4}
 % -------------------------------------------------------------------
 
-With G2 sharpened to the Yukawa-undetermined verdict and electroweak
-unification on $S^3$ alone closed in the negative, G4
+With G2 sharpened to the Yukawa-undetermined verdict, G4
 (cross-manifold) was the last route scoped for a GeoVac-internal SM
 construction (G4a since built and closed positive-thin;\ G4b
 framework-blocked).  A scoping pass (May~2026, memo
@@ -3931,8 +3907,7 @@ recourse to the $S^5$ Bargmann construction.  Outcome:\
 operator level \emph{for the admitted} $\mathcal{A}_F$ --- an organizing
 reading plus the adopted Upgrade~B axiom, not a derivation --- with the abelian and $\mathrm{SU}(2)$ gauge content already
 exhibited by H1) plus a Higgs sector that is non-trivial whenever the
-Yukawa-Dirac off-diagonal blocks are imposed.  The G2--G3 corollary
-applies verbatim:\ G4a defines the construction, but no GeoVac
+Yukawa-Dirac off-diagonal blocks are imposed.  As in H1, G4a defines the construction, but no GeoVac
 mechanism selects the Yukawa, hypercharge assignments, or
 generations.  G4a therefore does not close the SM-derivation
 question;\ it relocates the open data-selection items
@@ -3969,10 +3944,7 @@ standard NCG axioms and the GeoVac-specific content of Sprints
 be the standard Riemannian spinor Dirac on round $S^5$ (KO-dim~5).
 The tensor product is a textbook Connes object with combined
 KO-dim $3 + 5 = 8 \equiv 0 \pmod 8$, but it discards the
-$(N, 0)$-tower structure that made Paper~24's $S^5$ ``natural,''
-and the bit-exact $\pi$-free certificate of Paper~24~\S III is
-irrelevant to round-$S^5$ (calibration $\pi$ reappears via standard
-Weyl asymptotics).
+$(N, 0)$-tower structure that made Paper~24's $S^5$ ``natural.''
 \item \emph{Option~B (Bargmann--Euler-based).}  Promote the Euler
 operator $\hat{N}$ on the Bargmann graph to a Dirac-like object via
 chiral doubling.  This preserves Sprint~ST-SU3 SU(3) Wilson content
@@ -4023,9 +3995,8 @@ structural questions, not as sprint targets.
 four-gap analysis of Sec.~\ref{sec:unified_gauge} compresses to:
 
 \begin{itemize}\setlength{\itemsep}{2pt}
-\item G2 is the Yukawa-undetermined verdict, which G3 (NEGATIVE)
-reads structurally:\ $\gamma_{\mathrm{GV}}$ and $\gamma_F$ are
-independent commuting $\mathbb{Z}_2$ gradings on the tensor product.
+\item G2 is the Yukawa-undetermined verdict;\ G3 is open (the one
+identification tested fails by construction).
 \item G4 splits cleanly:\ G4a (Connes SM on $\mathcal{T}_{S^3}$
 alone with $M_3(\mathbb{C})$) is \textbf{closed at POSITIVE-THIN}
 (2026-05-31):\ $\mathrm{U}(1) \times \mathrm{SU}(2) \times
@@ -4069,7 +4040,7 @@ $s_{\mathrm{GV}} \otimes \gamma_F$ built from $s_{\mathrm{GV}} =
 \mathrm{sign}(D_{\mathrm{GV}})$ does \emph{not} anticommute with $D$
 ($\|\{\gamma, D\}\|_F = 34, 104, 220$ at $n_{\max} = 1, 2, 3$);\ with the
 production grading $\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}$
-the anticommutator vanishes.
+the anticommutator vanishes at zero Yukawa only, as in G3.
 Inner fluctuations decompose into
 $\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$
 gauge 1-forms plus a Higgs scalar that is non-trivial whenever the
@@ -4122,12 +4093,9 @@ morphism in $\mathcal{A}_{\mathrm{GV}}$.
 \begin{proof}[Proof sketch]
 The parameter count follows from direct enumeration on the
 chirality-graded $J$-real subspace of Hermitian operators on
-$\mathcal{H}_F$. The non-selection of the Yukawa is the G3
-structural finding (Sprint G3, \S\ref{sec:g3}):
-$\gamma_{\text{GV}}$ and $\gamma_F$ are independent commuting
-$\mathbb{Z}_2$'s on $\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$,
-so no GeoVac-side data couples to the $\gamma_F$ flip that carries
-the Yukawa. The full fluctuated Dirac $D_A = D + A + JAJ^{-1}$ was
+$\mathcal{H}_F$. The non-selection of the Yukawa: $Y$ enters only
+$D_F$, whose axioms hold at every imposed $Y$ (Sprint~H1,
+\S\ref{sec:higgs_h1};\ G4a, \S\ref{sec:g4}). The full fluctuated Dirac $D_A = D + A + JAJ^{-1}$ was
 constructed at $n_{\max} \in \{2, 3\}$
 ($\dim \mathcal{H}_{\text{total}} = 512, 1280$) and the inner
 fluctuations decompose cleanly into the gauge piece fixed by
@@ -4227,9 +4195,7 @@ sector --- tensored with an \emph{inner} Yukawa Dirichlet ring
 $\mathbb{Q}[y_i^{-2s}]$ generated by the Yukawa eigenvalues. The two
 rings are read as sharing no generator beyond $\mathbb{Q}$:\ the
 $\eta$-trivialization ($\{\gamma_F, D_F\} = 0$ annihilates the odd-$k$
-heat traces) removes the M3 slot from the inner factor, and the G3
-commuting-$\mathbb{Z}_2$ result leaves no GeoVac-side datum coupling to
-the Yukawa flip;\ neither proves the two rings disjoint (an
+heat traces) removes the M3 slot from the inner factor;\ this does not prove the two rings disjoint (an
 Observation-level reading). This is the precise content of the structural-skeleton
 scope (\S 1.5 of the project guidelines): the bone (the forced,
 integer/rational skeleton) and the calibration data (free) are read as
@@ -4602,8 +4568,7 @@ The positive content of Theorem~\ref{thm:forced_count} sits beside two
 negative companions already recorded above:
 \begin{itemize}\setlength{\itemsep}{2pt}
 \item \textbf{Door 4 seam reading (Yukawa-value wall):}\ the
-  $\eta$-trivialization plus tensor factorization plus the G3
-  commuting-$\mathbb{Z}_2$ result place the $D_F$-entries inside
+  $\eta$-trivialization plus tensor factorization place the $D_F$-entries inside
   $\mathcal{M}(D_F)$ in a Dirichlet ring sharing no generator with any
   forced outer ring, so the framework does not derive them from the
   forced rings (an Observation-level reading).  \textbf{[PANEL-VERIFIED]}
@@ -5697,10 +5662,7 @@ autonomously select $\Lambda$.  Setting the trace equal to $K/\pi$
 gave a closed-form Cardano solution $\Lambda_\infty = 3.7102\ldots$
 (50 dps), which was tautological in the sense that it was determined
 by demanding the equality.  Whether there is a structural principle
-that selects $\Lambda$ is open; if so, $K/\pi$ would become a derived
-quantity rather than a coincidence.  This is the most direct route by
-which Paper~2 could be promoted from observation to derivation, and it
-is also the one most resistant to incremental progress.
+that selects $\Lambda$ is open.
 
 \paragraph{Q5.  Higher-form structure (Breit / rank-2 connections).}
 \textbf{[OPEN]}
@@ -5749,11 +5711,11 @@ term of the compression (\textbf{[MEASURED]}).
 the resulting structure (Table~\ref{tab:subsectors}), Papers~25 and~30
 through the gauge-network Dirac rather than $D_{\mathrm{GV}}$.  The construction sits inside the
 published Marcolli--van~Suijlekom gauge-network framework with the
-Perez-Sanchez correction.  The combination rule
+Perez-Sanchez correction.  \gvc{k-combination-rule}{The combination rule
 $K = \pi(B + F - \Delta)$ is phrased as a sum across three
 sectors of distinct type in the same triple
 (Observation~\ref{obs:three_sector}), without changing its status as
-an observation.  \textbf{[OBSERVATION]} The Coulomb/HO asymmetry of Paper~31 is the
+an observation}.  \textbf{[OBSERVATION]} The Coulomb/HO asymmetry of Paper~31 is the
 statement that the GeoVac triple's continuum limit is one specific real
 odd $\mathrm{KO}$-dimension-3 triple, not a generic class
 (Sec.~\ref{sec:coulomb_ho}); its true-window truncation is odd

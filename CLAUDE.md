@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.0.0 (November 2, 2026)
+**Version:** v6.1.1 (November 3, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,8 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk FULL incremental = FAIL, remediated (2026-11-03, v6.1.1, PI-invoked):** P0 count-vs-label, calibration-pi residue, M3 plain trace; P32 electroweak G3 rescoped OPEN, Q4 cut; code 0 LARGE; coverage 156/174. CHANGELOG v6.1.1.
+- **Passes A and B done; C25 front door widened (2026-11-02, v6.1.0, PI-directed, MINOR):** seam owns counts (Paper 57's stale 77 fixed, gated); 131 `\gvc` spans across all seven syntheses and trunk abstracts; C25 line-wrap blind spots closed; atlas, positioning page, one-pager gated. CHANGELOG v6.1.0.
 - **/qa convergence fixes (2026-11-02, v6.0.0, PI-directed, MAJOR):** surface grading (UNSCOPED no longer LARGE off the front door); self-check bounded to two rounds, owner-only stop; owner papers stamped, syntheses contradiction-checked; coverage line in every run (trunk 88/174); Passes A/B defined. CHANGELOG v6.0.0.
 - **Torus scored-step guard; P59/P62 done-file rows approved (2026-11-02, v5.22.3, PI-approved):** TR guard recomputes the record's N = 10 -> 11 step, fire-tested 4/4; P59 items 9-15 frozen. CHANGELOG v5.22.3.
 - **Squashed ring GO; pre-QA guards (2026-11-02, v5.22.2, pre-registered + PI-directed):** ring momentum dies as eps^p(c); IC, HR, TR, SQ, single-scale Sturmian guarded, fire-tested; done-file rows drafted. CHANGELOG v5.22.2.

@@ -24,6 +24,7 @@
 % quantity when it moves.  See CLAUDE.md SS15.
 \newcommand{\gvq}[2]{#2}
 
+\newcommand{\gvc}[2]{#2}
 \begin{document}
 
 \title{Structural Sparsity for Quantum Simulation:\\
@@ -317,11 +318,10 @@ configuration---frozen-core balanced, multi-zeta valence, screened
 cross-center, explicit-core Hartree--Fock---with no interior PES minimum
 at the qubit-Hamiltonian level.  This scope boundary is documented
 empirically, not papered over:\ the framework's value proposition is
-structural sparsity together with a state-space Gromov--Hausdorff
-convergence bound for the truncated $S^3$ Camporesi--Higuchi triple
-(Paper~38;\ the bound is proved, its displayed constant
+structural sparsity together with \gvc{wh1-p38-gh-convergence}{a state-space Gromov--Hausdorff
+convergence bound for the truncated $S^3$ Camporesi--Higuchi triple (Paper~38, commutative factor;\ the bound is proved, its displayed constant
 \textbf{[INTERNAL THEOREM + MEASURED]};\ it is not a bound for the molecular
-Hamiltonians) --- a \emph{metric-space} bound, explicitly
+Hamiltonians)} --- a \emph{metric-space} bound, explicitly
 \emph{not} a direct energy-error bound (the operator-to-energy lift
 overshoots by 3--4 orders of magnitude) --- not energy-accuracy parity with
 CCSD(T) on second-row systems.

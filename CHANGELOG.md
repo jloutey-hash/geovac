@@ -7,6 +7,193 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.1.1] - 2026-11-03
+
+`/qa trunk` FULL (incremental), PI-invoked ("We're going to run through a bunch of QA for papers"). Unseeded;
+standing calibration record cited (FULL #2 19/21 seeds 0/8 FP; DELTA #1 9/9; DELTA #2 8/9). Snapshot
+817c5218 (the uncommitted v6.1.0 tree, pinned as `refs/qa/trunk-full-2026-11-03`); one worktree per code
+reviewer so fire-test plants could not cross. **Verdict: FAIL. RESEARCH-GRADE not earned** (owner defects
+found). **Coverage 82/174 -> 156/174 (90%)**; the 18 remediated prose units wait for the next run.
+
+### Panel (all Opus)
+- Deterministic, whole trunk: C5/C12, C10, C11, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C24, C25 all
+  PASS before and after remediation (group3 re-gated after the Paper 18 edit). C23 not exercised (owed).
+- Claims (6 chunks), synthesis C9 (1), citations (2), code (6), completeness critic (1).
+- Code: every inline-cited trunk test run (P0 174, P1 ~150, P7 473, P32 ~500, P38 ~325 passed; 0 failed); ~95
+  fire-test plants, all FIRED except four known or benign (P0 591-scan guard accepts a too-high C_sat; P1
+  Frobenius guard disclosed asleep; P7 ze2 accepts a 1/n^3 term; P32 three SU(3) 1/12 literal tests).
+  Independent re-derivations all matched: C_sat 42.7396543, 4/pi to n = 12800 (b = 4.109318), taper O(1/n)
+  two doublings past the guard, s/p proxy values, Casimir, c^2(n,l), forced count 32, 6/5 and 5/6, 1/12.
+  The P32 forced-count vacuous assertion (FULL #2) is genuinely fixed; the P38 taper guard (FULL #13) now
+  separates log n/n from 1/n.
+- Citations: 0 WRONG across 151 bibitems; 83 confirmed against sources; NITs only.
+
+### LARGE findings and remediation (gate-first; edit bar)
+- **OWNER-LARGE, Paper 0:** the count identity (2k-1 = 2l+1, [SYMBOLIC PROOF]; label attachment a labelling
+  choice) was restated as "generates the label set", "isomorphic to", "emerge from", "as it must be, since
+  both approaches reflect the same rotational symmetry", "inheriting / descended from", "derived here", and
+  a section heading "Angular Quantum Numbers from Uniform Density". New C16 entry
+  `p0-packing-generates-labels` (33 loci over four widenings, silent after); every locus rewritten
+  to the count form; group3 synthesis packing paragraph and two "yields the angular sector" restatements
+  converted.
+- **OWNER-LARGE (borderline), Paper 7 L754:** "Stages 2 and 3 are verified by symbolic computation" covered
+  the continuum leg checked at 20 digits; now scoped.
+- **Calibration-pi family (withdrawn 2026-10-19), C16 `coulomb-ho-calibration-pi-layer` widened:** Paper 18
+  L3613 still listed "calibration pi (yes S^3, no S^5)" (OWNER-LARGE in Paper 18, group3); Paper 32 G3 kept
+  "the withdrawn one excepted" with two layers withdrawn, premise (b) "pi-free certificate", Step 2(i) "pi
+  re-enters via Seeley-DeWitt", and G4b Option A "calibration pi reappears"; group3 synthesis L1278 and L1300
+  restated pi as a Coulomb/HO discriminator. All rewritten; G3's conclusion stands on the Euler-ladder and
+  Hardy-tower clauses. Paper 18's SU(3) sentence also updated to the ST-SU3 split (gauge alone universal,
+  gauge with natural matter coupling Coulomb-specific) and its "projections do not interpolate" clause cut.
+- **SURFACE-LARGE, group3 synthesis L1182:** M3 defined as the Mellin transform of the plain trace, which
+  vanishes; now carries Paper 18's absolute-sum / vertex-parity gloss. C16 `engine-k1-plain-trace` widened
+  (it had missed a spacing variant).
+- Downgraded on verification: the signed engine Tr(D^k e^{-tD^2}) in Paper 32 L2509/L2633 is Paper 18's own
+  notation (debt item from v5.20.18), not STALE; the PM's reviewer brief had paraphrased the owner as |D|^k.
+- Each widened or new entry was proven to fire on the retired wording and stay silent on the corrected text.
+
+### Self-check (bounded)
+- Round 1: 2 OWNER-LARGE (rest of the Paper 0 family; Paper 32 G3 proof and G4b), 1 SURFACE-LARGE family,
+  1 SURFACE-LARGE candidate (Paper 18 SU(3)), 1 SMALL. Fixed gate-first.
+- Round 2: 2 OWNER-LARGE (Paper 0 Sec. V "inheriting/descended", section heading and "derived here"), 3 SMALL.
+  Fixed gate-first. **Self-check closed with an open owner fix:** the round-2 Paper 0 edits are unreviewed
+  and their units stay unstamped; a third round is a PI call.
+
+### Raised to the PI
+- Paper 32 G3 (L3376, L3413, L3454): "a chirality grading compatible with weak isospin ... closed in the
+  negative" rests on an identification test that fails by construction; the paper's own product grading
+  gamma_5 = gamma_GV x gamma_F grades D at Y = 0 on the doubled model (L3852-3864). Not edited.
+- Paper 32 Q4 (K-adjacent): Lambda-selection called "the most direct route" to promoting Paper 2, while
+  Obs. no_single_mechanism_K lists the Lambda search among the twelve eliminated mechanisms. Logged SMALL.
+- Upgrade candidates (tier changes): KO-3 signs forced at every n_max (Frobenius-Schur); P1 gearing = 2 and
+  nnz <= 4V; P0 C_sat bound for all n_max; P32 B = 42 two routes; forced-count steps 2048 -> 272.
+
+### PI decisions applied (same day; the PI accepted all five PM recommendations)
+- **Paper 32 G3 rescoped OPEN (OWNER-LARGE).** The identification test equates two operators acting on
+  different tensor factors, so it could not come out positive; it rules out equating them, not a compatible
+  grading. Rewritten: the G1-G4 gap list, "what remains", H1's G3 and scope paragraphs, sec:g3's design
+  sentence and verdict, the G4 opener, the Net list, and the Yukawa non-selection proof sketch (now rests on
+  H1/G4a: Y enters only D_F, whose axioms hold at every imposed Y). The "G2--G3 corollary" (independent
+  gradings as the reason Y is unselected; the same independence holds in Connes' SM) is deleted, with its
+  citers: Paper 32's two Door-4 seam sentences, Paper 18's inner-factor open question ("commuting-Z2
+  fingerprint") and verdict list, and Paper 34's scope list. Theorem/remark "G3 closure"/"G3 scope" (the
+  S^3 x S^5 category obstruction, a different gap) retitled "Cross-manifold". New C16
+  `p32-g3-chirality-closed-negative` (21 loci at HEAD, silent after; dependents Papers 18 and 34 stamped).
+- **Measured during the self-check:** G4a's sentence "with the production grading the anticommutator vanishes"
+  holds at zero Yukawa only. The product sigma_x x gamma_F against G4a's graded-product Dirac gives 0 at
+  Y = 0 and Frobenius 2.97, 5.93, 9.38 at the test Yukawa (n_max = 1, 2, 3). The sentence now says so; a guard
+  is owed (debt file).
+- **Paper 32 Q4 clause deleted** (K-adjacent): Lambda selection is an eliminated K mechanism, not an open
+  promotion route. New C16 `k-lambda-selection-promotion-route`.
+- **Paper 0 third self-check round** (one fresh Opus reviewer, whole paper): 3 LARGE, 9 SMALL.
+  Fixed: the packing credited with producing the (n,l,m) node set (it produces n_max^2 slots against
+  sum n^2 labels; the S^3 label set needs the grouping Observation, which reuses shell k in every n >= k),
+  at the abstract, Sec. VI vertex set, the S^3 identification, the "provides" checklist and the Fock
+  paragraph; and the Discussion's "derivation" of the degeneracy (now: 2k-1 is derived, its equality with
+  2l+1 is a count identity). Same family on the surface: Paper 57 L77 and the README paper table.
+  C16 `p0-packing-generates-labels` widened (six alternations; fire/silent proven). The title is raised to
+  the PI, not changed. SMALLs to the debt file. The round-3 edits are themselves unreviewed; no fourth round
+  without the PI.
+- Tier upgrades deferred to one upgrade sprint after the branch runs (guards written separately).
+
+### Changed
+- Papers 0, 7, 18, 32, 34, 57, the group3 synthesis and README (above). `debug/qa/check_retracted_terms.py`
+  (three new entries, three widened). `docs/qa/trunk.debt.md` (SMALL sweep list, completeness-critic gaps). `docs/qa/trunk.done.md` (run
+  row). `docs/qa/stamps/trunk*` (stamps). CLAUDE.md version and section 2 line.
+
+## [v6.1.0] - 2026-11-02
+
+MINOR bump: C25's scope widened (three pages added to its front door), the standing exception for a
+rescoped deterministic check. PI-directed ("Let's run through those owed items ... You're gonna have to
+make that call" on Paper 57; then "Let's work down the owes list"). The two scheduled passes of v6.0.0
+(criteria.md "Two scheduled passes"), all slices.
+
+### The Paper 57 call (PM, PI-delegated)
+`docs/forced_free_seam.md` owns the per-entry forced/free/wall status and the summary counts. Paper 57 keeps
+its narrative and its J-row paragraphs, and restates the counts in its abstract, its consolidated-table
+sentence and its completeness item; each restatement is now held equal to the seam summary by
+`tests/test_atlas_register.py` (check 7). Reason: the paper itself delegates "the full table" to the seam
+document, the seam document is on the C25 front door, and a count is bookkeeping, not physics; the
+authoritative-source rule still governs any mechanism statement.
+
+### Pass A: one record per verdict (done)
+- Live finding on arrival: the seam counts were restated at five loci with three stale values. Paper 57's
+  abstract and consolidated-table sentence said 43 forced / 26 calibration / 77 entries (the seam says
+  44 / 27 / 79; Paper 57's own completeness item already said 79); README and INDEX said 77; the group3
+  synthesis said 72 and listed sub-domain J through J8 only. Fixed: Paper 57's two loci corrected and its
+  abstract's released-axis list now names the Kustaanheimo-Stiefel lift and the nuclear magnetization;
+  README, INDEX and the synthesis point at the seam document instead of restating counts.
+- Atlas rows 11-27: "What is released / What survives / Price" cut to one clause each, the mechanism
+  detail living in the cited seam row (checked row by row; seam J3 gained the one clause the atlas alone
+  carried, the integrated-class result of 2026-11-01). Door 27 has no seam row; its cell now says so, and
+  it is the single home of that verdict.
+- Atlas door 9: verdict gained "FORCED (the three spectral homes)"; seam row E5 is F and the new check
+  caught the omission.
+- Field guide: the atlas table carries atlas door numbers, keeps Door / Price / Verdict, drops the
+  Released / Survives columns; its paragraph points at the atlas and the seam document.
+- `tests/test_atlas_register.py` gained three checks, each fire-tested in the same file: (6) every seam
+  row an atlas row cites as its record agrees with the atlas verdict (F needs FORCED, C FREE, W WALL,
+  Obs OBS; a cell saying "nearest" cites no record); (7) Paper 57's three count loci equal the seam
+  summary; (8) each field-guide row's door number resolves and its verdict words are among that door's
+  atlas tokens. 13 tests pass.
+
+### Pass B: cite-don't-paraphrase, trunk slice (done)
+- 63 restating spans wrapped in `\gvc{id}{...}` across the group3 synthesis (34) and the abstracts and
+  conclusions of Papers 0, 1, 7, 32 and 38 (29), covering 13 registered claims; `\newcommand{\gvc}[2]{#2}`
+  added to the six preambles. C25 holds every span to its claim's qualifier and overclaim patterns:
+  RESULT PASS after one reorder (the WH1 sentence in the synthesis conclusion, where the parenthetical
+  "the almost-commutative extension is [OPEN]" sat between "almost-commutative" and "is proved").
+- Four dated history notes deleted from paragraphs the pass edited (synthesis lines 40 and 384, Paper 1
+  conclusion twice); C16 withdrawal tokens untouched. The synthesis line 1242 parenthetical gained
+  "for the commutative factor" so it carries WH1's qualifier.
+- Not annotated, by design: the front door (INDEX, claims register) is already gated line by line by
+  C25; bibliography titles, section headings and the owner papers' body derivations (Paper 38's
+  appendix lines on gamma_n) are not restatements.
+- Blind spot found: `check_claim_registry.py --mentions` matches a mention pattern against single
+  lines, so a phrase broken across a line wrap ("edge" / "Laplacian") is not listed. The synthesis
+  executive summary (line 63) was found by hand and wrapped; recorded in criteria.md C25.
+- Slice 2, the other six syntheses: 68 spans (field guide 13, group1 25, group2 14, group4 1, group5 12,
+  group6 3), 20 registered claims. Three Paper 38 restatements lacked its scope and gained "commutative
+  factor" (field guide twice, group4); group1's "unconditional as of June 2026" became "unconditional for
+  the commutative factor"; three dated history notes deleted (field guide, group2, group5). Skipped by
+  design: theorem headers, table cells, bibitems, titles, sentences that restate several claims at once
+  (one span carries one id), and the cb-norm paragraph whose explanation of the retired value a reader
+  still needs.
+- Front-door slice: the four front-door files were already checked line by line. `docs/atlas.md`,
+  `docs/geovac_positioning.md` and `docs/geovac_onepager.md` join C25's front door
+  (`debug/qa/claim_registry.py` FRONT_DOOR). The first dry run found one live defect: the positioning
+  page still said Paper 7 has "18 symbolic proofs" (a STRONGER restatement, LARGE under the surface rule;
+  now "18 symbolic checks of the continuum chain (ten limiting-case or definitional)"). It also showed
+  one false positive, atlas door 7's "whether a real-time window forces the circle", reworded to
+  "whether the circle is forced by a real-time window". Discrimination: retired wording planted in each
+  of the three pages fires; the corrected pages are silent.
+- Two C25 blind spots closed, each fire-tested by planting the old code (both selftest probes FAIL on it):
+  the `--mentions` reading list now finds a mention broken across a line wrap, reported once at the line
+  it starts; and the span normalizer collapses whitespace, so a qualifier or an overclaim split across a
+  line wrap inside a `\gvc` span is read as one phrase. The second was found when a correct span
+  ("for the physical integrals / tested") failed; the mirror case, an overclaim split the same way,
+  had been passing silently.
+- Slice-2 self-check (bounded, round 1; fresh Opus, 67/67 hunks): 0 LARGE. 2 SMALL fixed: two group1 spans
+  stating the 4/pi-as-M1 reading were tagged to the case-exhaustion and rate-constant claims, now
+  `m1-gh-rate-reading`. NITs fixed: a group2 span had swallowed a closing parenthesis; field-guide row 21
+  (pre-existing) put the geminal triangle under door 21's Coulomb-only FORCED, now pointed to door 27.
+  NIT left: group5's honest-scope denial list sits outside its span, because C25's conjecture/prediction
+  pattern does not exempt a negated list there. Outside the diff, the reviewer flagged two registry owner
+  statements: `p59-operator-clause-scope` said the correlated triangle "drops" at gamma = 1, which reads
+  against Paper 59's "does not drop" (the operator order drops; the rung stays K3), and
+  `p59-correlated-triangle-k3` called the cusp-correct geminal untested, which Paper 59 tests at gamma = 3/2
+  and 2. Both statements corrected against the paper. No round 2 owed.
+- Trunk coverage moved from 88/174 to 82/174: the six abstract/conclusion units the pass annotated are
+  CHANGED and wait for the next run (the criteria DoD wording is corrected to say so).
+- Self-check (bounded): round 1 (fresh Opus, 65 text hunks read): 0 LARGE, 0 OWNER-LARGE; 1 SMALL outside the diff (Paper 57's limitations item counted six wall instances against seven in its abstract; fixed); 6 NITs, 4 fixed (door 20's one-scale scope and J10's two caveats restored, door 26's charge-profile condition restored, J3's new clause carries Paper 59's independence assumption, check 6 keys on an exact phrase); 2 left (field guide row 9 is a subset of door 9's verdict; the added words "for the commutative factor" are intentional). No round 2 owed.
+
+### Changed
+- CLAUDE.md: version v6.1.0; section 2 one-liner. `.claude/commands/qa.md` and criteria.md C25: the front-door
+  list is named as the registry's FRONT_DOOR, with the seven files. `docs/qa/trunk.debt.md`: passes marked done / owed.
+  `docs/qa/criteria.md`: Pass A home map recorded, Pass B DoD wording corrected, C25 line-wrap note.
+- All nine edited papers compile three-pass with zero undefined references (C10); C19, C16 and C17 on
+  the trunk PASS.
+
 ## [v6.0.0] - 2026-11-02
 
 MAJOR bump, PI call ("Let's call this a major update"): the `/qa` instrument changed in what it grades, when it

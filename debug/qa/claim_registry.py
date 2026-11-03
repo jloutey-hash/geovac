@@ -64,6 +64,13 @@ FRONT_DOOR = [
     # retired rows, and neither was on the front door, so C25 never read them.
     "README.md",
     "docs/forced_free_seam.md",
+    # added 2026-11-02 (Pass B, front-door slice; MINOR bump v6.1.0): the atlas restates every
+    # door's verdict and is a derived document under the target split; the positioning page and
+    # the one-pager are the other reader-facing summaries.  On the first dry run the positioning
+    # page still carried the retired "18 symbolic proofs".
+    "docs/atlas.md",
+    "docs/geovac_positioning.md",
+    "docs/geovac_onepager.md",
 ]
 
 P32 = "papers/group1_operator_algebras/paper_32_spectral_triple.tex"
@@ -413,7 +420,7 @@ CLAIMS = {
                   "density) sits with the three-density chain on the K3 rung exactly at gamma = 1 "
                   "(annihilator R3 o R1, R3 equivalent to F_3's operator) [SYMBOLIC + MEASURED]; at "
                   "gamma = 3/2 it reaches the K3 rung by local data mod p plus Levelt rigidity, and whether it climbs further is open. "
-                  "One geminal shape; the cusp-correct and linear-exponential geminals are untested. "
+                  "The cusp-correct shape r e^(-gamma r) brings no new type at gamma = 3/2 and 2 (Paper 59). "
                   "The registered elliptic prediction (QG2) was falsified.",
         owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
         owner_anchor=r"the correlated triangle does not drop", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
@@ -494,7 +501,7 @@ CLAIMS = {
                   "THE CURVE: a rational kernel keeps the curve the densities build [SYMBOLIC]. The integrated class "
                   "can move with the kernel's mass and shape: a Slater geminal makes the two-centre master "
                   "integral's operator genus one (the Lesiuk-Moszynski operator is eq:pf rescaled), the correlated "
-                  "triangle drops at the equal-mass value gamma = 1, and a Gaussian geminal leaves the "
+                  "triangle's operator order drops at the equal-mass value gamma = 1 (it stays on the K3 rung), and a Gaussian geminal leaves the "
                   "Picard-Fuchs ladder. Scope set 2026-10-27 by /walls PERIODS-TRANSCENDENCE.",
         owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
         owner_anchor=r"At the level of the curve, whether the integral closes", owner_tier=r"\[SYMBOLIC\]",

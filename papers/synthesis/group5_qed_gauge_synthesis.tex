@@ -16,6 +16,7 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{observation}{Observation}
 
+\newcommand{\gvc}[2]{#2}
 \begin{document}
 
 \title{Gauge Structure, QED, and Gravity from the Spectral Geometry of
@@ -56,14 +57,14 @@ content enters through the continuum $S^3$ Dirac spectral sums, which
 produce the odd zeta values of flat-space QED ($\zeta(3)$, $\zeta(5)$),
 plus $S^3$ vertex-parity content (Catalan~$G$, $\beta(4)$) and the
 depth-2 period $\zeta(5,3)$, through a depth-filtered period
-tower~\cite{loutey_paper28}.  The fine-structure constant approximately satisfies (to
+tower~\cite{loutey_paper28}.  \gvc{k-combination-rule}{The fine-structure constant approximately satisfies (to
 $8.8\times10^{-8}$ relative; an Observation) the
 cubic $\alpha^3-K\alpha+1=0$ with $K=\pi(B+F-\Delta)$ assembled from
 three spectral invariants of the Hopf bundle, each with an independently
 established spectral home; this
 is recorded strictly as an \textbf{Observation} (agreement
 $8.8\times10^{-8}$, twelve single-mechanism derivations eliminated),
-never as a derivation~\cite{loutey_paper2}.  Bound-state QED reaches
+never as a derivation~\cite{loutey_paper2}}.  Bound-state QED reaches
 sub-percent one-loop Lamb-shift closure with no GeoVac-specific
 fit~\cite{loutey_paper36}, and a spectral-action gravity sketch yields an
 \emph{exactly} two-term Einstein--Hilbert action together with a set of
@@ -84,9 +85,8 @@ The GeoVac program builds its discrete hydrogen lattice on the labels
 $(n,l,m)$ of the Laplace--Beltrami operator on the unit
 three-sphere~$S^3$, on which that operator acts as the diagonal $SO(4)$
 Casimir;\ the operator is related to the Schr\"odinger equation by
-Fock's 1935 conformal projection~\cite{loutey_paper7}.  (The lattice's
-graph Laplacian is not equivalent to it and does not converge to it,
-Paper~7, corrected 2026-09-25.)  The Group~5 arc
+Fock's 1935 conformal projection~\cite{loutey_paper7}.  (\gvc{graph-s3-wall}{The lattice's
+graph Laplacian is not equivalent to it and does not converge to it, Paper~7}.)  The Group~5 arc
 asks what the \emph{same} spectral geometry says about the rest of
 electromagnetism, the gauge sector, and---most speculatively---gravity.
 A single distinction organizes the answer, and it is the through-line of
@@ -99,8 +99,8 @@ $\mathrm{SU}(2)$.  These two facts are not GeoVac inputs; they are
 geometry.  Reading the GeoVac graph through its incidence matrix turns
 them into an abelian and then a non-abelian Wilson lattice gauge theory
 on the same nodes and edges, whose labels carry the Coulomb spectrum
-(\S\ref{sec:gauge}; the spectrum sits on the labels as the diagonal
-$SO(4)$ Casimir, not in the edge Laplacian).  The natural gauge reach saturates at
+(\S\ref{sec:gauge}; \gvc{graph-s3-wall}{the spectrum sits on the labels as the diagonal
+$SO(4)$ Casimir, not in the edge Laplacian}).  The natural gauge reach saturates at
 $U(1)\times\mathrm{SU}(2)\times\mathrm{SU}(3)$, and where it stops is
 itself structural:\ $\mathrm{SU}(3)$ admits only a pure-gauge Wilson
 theory, its natural matter coupling obstructed at the Clebsch--Gordan
@@ -111,9 +111,9 @@ asymmetry of Paper~24~\cite{loutey_paper24}).
 multi-loop constants, and the cutoff function of the gravity sector are
 all on the other side of the ledger:\ calibration or observation, in the
 two-layer language of Paper~34~\cite{loutey_paper34}.  The framework's
-most precise number---the cubic's root matches $\alpha$ to
+most precise number---\gvc{k-match-precision}{the cubic's root matches $\alpha$ to
 $8.8\times10^{-8}$ ($K$ itself to $4.8\times10^{-7}$)---is held
-explicitly at \textbf{Observation} tier, with no claim of derivation
+explicitly at \textbf{Observation} tier}, with no claim of derivation
 (\S\ref{sec:alpha}).  This is the same discipline that runs through the
 quantum-chemistry and quantum-computing arcs:\ lead with the structural
 result, name the calibration boundary, and let the tier of each claim be
@@ -140,9 +140,9 @@ gravity sector and---characteristically---records what did not work.
 \paragraph{The Hodge/Wilson dictionary on the graph (Paper~25).}
 With $B$ the node--edge incidence matrix of the GeoVac graph, the node
 Laplacian $L_0=BB^{\top}$ is the matter propagator of the lattice
-gauge theory (it does \emph{not} converge to $-\Delta_{S^3}$:\ it splits
+gauge theory (\gvc{graph-s3-wall}{it does \emph{not} converge to $-\Delta_{S^3}$:\ it splits
 into $n_{\max}$ disconnected $\ell$-blocks, and the Coulomb spectrum
-lives on the labels instead~\cite{loutey_paper7}) and the edge Laplacian
+lives on the labels instead~\cite{loutey_paper7}}) and the edge Laplacian
 $L_1=B^{\top}B$ is the discrete Hodge-1 Laplacian whose kernel counts
 cycles---the photon propagator in temporal gauge.  Assigning a $U(1)$
 connection $U_e=e^{i\theta_e}$ to each edge and collapsing the magnetic
@@ -342,8 +342,8 @@ spectral zeta of the $S^1$ fiber at $s = 1$, its $k > 0$ modes (equivalently the
 Dirichlet series at the packing exponent $d_{\max}=4$~\cite{loutey_paper0}),
 and $\Delta=1/40$ is an $S^3$ boundary term equal to the reciprocal of
 the single-level Dirac degeneracy $g_3^{\text{Dirac}}=2(n{+}1)(n{+}2)|_{n=3}=40$.
-The physical root gives $\alpha^{-1}=137.036011$, matching CODATA to a
-relative error of $8.8\times10^{-8}$ with zero free parameters; in a
+\gvc{k-match-precision}{The physical root gives $\alpha^{-1}=137.036011$, matching CODATA to a
+relative error of $8.8\times10^{-8}$ with zero free parameters}; in a
 combinatorial search over $1.92\times10^9$ comparable formulas the
 formula ranks among the top $\sim\!10$ ($p = 5.2\times10^{-9}$ per
 draw), a statistic that does not account for the unregistered search
@@ -351,24 +351,24 @@ that produced the formula and does not establish non-accidentality.
 
 The status of Eq.~\eqref{eq:K} must be stated exactly, and it is a
 \textbf{hard prohibition} of the framework that it be stated no more
-strongly.  The combination rule $K=\pi(B+F-\Delta)$ is an
+strongly.  \gvc{k-combination-rule}{The combination rule $K=\pi(B+F-\Delta)$ is an
 \textbf{Observation}:\ an empirical numerical coincidence with structural
-support, \emph{never} a derivation, conjecture, prediction, or theorem.
+support}, \emph{never} a derivation, conjecture, prediction, or theorem.
 Each ingredient has an \emph{independently derived} spectral home---a
 ``three-homes'' theorem establishes that $B$, $F$, $\Delta$ live in two
 distinct sectors of $S^3$ (scalar and spinor) and are three different object
 types (finite trace, infinite Dirichlet series, single-level degeneracy);\
-no single construction generating all three has been exhibited (an
-empirical record, not part of the theorem)---but their \emph{combination} is not derived.  A multi-phase
+\gvc{three-homes-negative}{no single construction generating all three has been exhibited (an
+empirical record, not part of the theorem)}---but their \emph{combination} is not derived.  A multi-phase
 structural-decomposition program eliminated twelve single-mechanism
 derivations of the rule, leaving the cross-sector sum a genuine open
 question:\ in the paper's own assessment, the geometric arena (Link~1)
 and the per-component invariants (Link~2) are largely established, while the
 additive combination (Link~3) is ``not established.''  The synthesis
 inherits this verdict verbatim:\ what is structural here is each spectral
-home; what is observational is that they sum approximately to
+home; \gvc{k-match-precision}{what is observational is that they sum approximately to
 $\alpha^{-1}/\pi$ (to $4.8\times10^{-7}$ relative;\ $8.8\times10^{-8}$
-through the cubic's root).
+through the cubic's root)}.
 
 %% ========================================================================
 \section{Bound-state precision QED}\label{sec:bsqed}
@@ -476,8 +476,8 @@ $\alpha$-ingredients $B$, $F$, $\Delta$ has an independently derived
 spectral home.
 
 \paragraph{What is conditional or observational.}
-The fine-structure combination rule $K=\pi(B+F-\Delta)$ is an
-\textbf{Observation}, not a derivation---the single most important tier
+\gvc{k-combination-rule}{The fine-structure combination rule $K=\pi(B+F-\Delta)$ is an
+\textbf{Observation}, not a derivation}---the single most important tier
 statement in the arc.  The bound-state QED matches are observation-side:\
 the spectral-sum structure is derived but the QED constants are imported,
 and every $\pi$ enters through a Layer-2 projection.  The Rule-B gauge
@@ -493,9 +493,9 @@ matter-coupled lattice gauge theory---the Clebsch--Gordan intertwiner
 obstruction caps the natural gauge reach (a face of the Coulomb/HO
 asymmetry).  The scalar graph photon misses seven of the eight selection
 rules because it carries no angular quantum numbers; recovering them is a
-calibration cost ($1/(4\pi)$ per loop), not graph-native content.  Twelve
+calibration cost ($1/(4\pi)$ per loop), not graph-native content.  \gvc{three-homes-negative}{Twelve
 single-mechanism derivations of the $\alpha$ combination rule were
-eliminated.  The gravity sector contributes five recorded negatives---the
+eliminated}.  The gravity sector contributes five recorded negatives---the
 M\"obius finite-spacing artifact, the failed IR-over-count cure, the
 analytically-supplied (not extracted) tip coefficient, the Wald
 bookkeeping factor of~2, and the non-area-law wedge entropy---each kept
@@ -531,8 +531,8 @@ J.~Loutey,
 ``The Fine Structure Constant as a Spectral Coincidence on the Hopf
 Fibration,''
 GeoVac Paper~2 (2026).
-[The combination rule $K=\pi(B+F-\Delta)$ is recorded strictly as an
-Observation; see \S\ref{sec:alpha}.]
+[\gvc{k-combination-rule}{The combination rule $K=\pi(B+F-\Delta)$ is recorded strictly as an
+Observation}; see \S\ref{sec:alpha}.]
 
 \bibitem{loutey_paper7}
 J.~Loutey,

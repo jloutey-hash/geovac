@@ -15,6 +15,7 @@
 \newtheorem{conjecture}{Conjecture}
 
 \newcommand{\gvq}[2]{#2}
+\newcommand{\gvc}[2]{#2}
 
 \begin{document}
 
@@ -37,9 +38,9 @@ non-relativistic quantum mechanics on natural geometries, built on a
 packed lattice of quantum-number labels.  For hydrogen the lattice's
 nodes are exactly the labels of the unit-$S^3$ harmonics, on which
 (minus) the continuous Laplace--Beltrami operator acts as the diagonal
-$SO(4)$ Casimir at every cutoff;\ the lattice's edge Laplacian does \emph{not}
+$SO(4)$ Casimir at every cutoff;\ \gvc{graph-s3-wall}{the lattice's edge Laplacian does \emph{not}
 replace or converge to that operator (it splits into $n_{\max}$
-disconnected $l$-blocks;\ corrected 2026-09-25).  This synthesis paper assembles the framework's foundational
+disconnected $l$-blocks)}.  This synthesis paper assembles the framework's foundational
 arc---the packing construction, the discrete
 graph and its dynamics, the conformal equivalence with the unit $S^3$,
 the exchange constant taxonomy, the angular sparsity theorem, the
@@ -60,10 +61,10 @@ bound-state Hamiltonian is $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ --- audite
 symbolic checks, with the non-definitional energy step (the $S^3$
 Coulomb kernel's eigenvalue $2\pi^2/n$ forcing $p_0 = Z/n$) carried by
 the exact kernel-eigenvalue test of Paper~7 ($n \le 4$;\ general $n$ is
-Fock's);\ \textbf{[WALL]} the discrete Fock graph's edge
+Fock's);\ \textbf{[WALL]} the discrete Fock \gvc{graph-s3-wall}{graph's edge
 Laplacian does \emph{not} converge to that operator (it splits into
 $n_{\max}$ disconnected $l$-blocks with an $n_{\max}$-dimensional
-kernel);\ what is exact is its label set, on which the operator is the
+kernel)};\ what is exact is its label set, on which the operator is the
 diagonal $SO(4)$ Casimir (the 18 checks
 do not touch the graph-side step) (ten of the eighteen limiting-case,
 definitional or non-discriminating rather than logically independent,
@@ -142,14 +143,14 @@ hydrogen.  The label set is dimensionless and scale-invariant;
 physical energies enter only through Fock's energy-shell constraint
 $p_0^2 = -2E$, which acts as a stereographic focal length, with
 $p_0 = Z/n$ forced by the eigenvalue of Fock's $S^3$ Coulomb kernel on
-the shell labelled $n$ (not through the graph Laplacian, whose spectrum is a
-grid band structure).  \textbf{[WALL]} This discrete construction does
+the shell labelled $n$ (\gvc{graph-s3-wall}{not through the graph Laplacian, whose spectrum is a
+grid band structure}).  \textbf{[WALL]} \gvc{graph-s3-wall}{This discrete construction does
 not converge to the unit-$S^3$ Laplace--Beltrami operator:\ the graph Laplacian has no $l$-changing edges, so it splits into
 $n_{\max}$ disconnected blocks, its saturation $\lambda_{\max} \to 8$ is
 the band edge of two-dimensional grids, and the $s/p$ proxy decay
 [retracted 2026-09-04: sp-splitting-as-convergence-evidence] tracks cutoff
 divisibility ($\lambda_{2s} = 3$ exactly iff $n_{\max} \equiv 0 \bmod 3$;\
-Paper~1 \S III).  What is exact is the label set:\ ``degeneracy recovery''
+Paper~1 \S III)}.  What is exact is the label set:\ ``degeneracy recovery''
 legitimately means that the nodes, $n^2$ per shell, are the
 Gel'fand--Tsetlin labels of the Peter--Weyl truncation of $L^2(S^3)$,
 on which $-\Delta_{S^3}$ is the diagonal $SO(4)$ Casimir $n^2 - 1$.  The
@@ -181,15 +182,15 @@ single dependency structure.  \emph{The taproot:} Paper~0
 choices motivated rather than forced, reads the angular quantum numbers
 as packing indices; Paper~7~\cite{loutey_paper7} makes
 it physical, verifying the conformal equivalence with the unit $S^3$ via
-a suite of 18 symbolic checks (ten of the eighteen limiting-case, definitional or non-discriminating)
+\gvc{paper7-symbolic-checks}{a suite of 18 symbolic checks (ten of the eighteen limiting-case, definitional or non-discriminating)}
 plus an exact test (for $n \le 4$;\ general $n$ is Fock 1935, a
 Funk--Hecke instance) that the $S^3$ Coulomb kernel's eigenvalue
 $2\pi^2/n$ forces the focal length $p_0 = Z/n$,
 and extending to the
 multi-electron $S^{3N-1}$ setting.  \emph{The fan-out} (the framework's
 working machinery):\ Paper~1~\cite{loutey_paper1} sets up the spectral
-graph theory and reproduces the Rydberg quantum numbers on interior
-shells (the energies are not a graph output:\ in Paper~7 the Coulomb
+graph theory and \gvc{p1-ladder-exact}{reproduces the Rydberg quantum numbers on interior
+shells} (the energies are not a graph output:\ in Paper~7 the Coulomb
 kernel's eigenvalue forces $p_0 = Z/n$ and the energy shell then gives
 $E_n$);
 Paper~18~\cite{loutey_paper18} tags transcendental content via an
@@ -222,8 +223,8 @@ audited symbolically (Paper~7~\cite{loutey_paper7}):\ Fock's projection
 makes the bound-state Hamiltonian the function $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$ of
 that operator, its scale $p_0 = Z/n$ fixed by the kernel eigenvalue
 $2\pi^2/n$ (tested exactly for $n \le 4$;\ general $n$ is Fock's);
-\textbf{[WALL]} the discrete Fock graph's edge Laplacian does not
-converge to that operator:\ the proved spectral-bound statement ---
+\textbf{[WALL]} \gvc{graph-s3-wall}{the discrete Fock graph's edge Laplacian does not
+converge to that operator}:\ the proved spectral-bound statement ---
 the saturation of the bipartite bound, \textbf{[INTERNAL THEOREM]}
 closed form with rate $C_{\mathrm{sat}}/n_{\max}^2$ (Paper~0~\S VI) --- is a grid band
 edge, and the size of the $s/p$ proxy tracks the residue of
@@ -232,13 +233,13 @@ $n_{\max}$ modulo $3$, not convergence (the label set is exact), while
 convergence of the spinor spectral truncations (the commutative $S^3$
 factor, true window;\ the almost-commutative extension \textbf{[OPEN]})
 is proved unconditionally:\ the distance is bounded by a closed-form Fej\'er
-moment $\gamma_{n_{\max}}$ that vanishes in the limit.  For the Fej\'er
+moment $\gamma_{n_{\max}}$ that vanishes in the limit.  \gvc{p38-rate-constant}{For the Fej\'er
 kernel,
 $\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$, with the constant
 $\gvq{l2_rate_4_over_pi}{4/\pi}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
 tiered \textbf{[INTERNAL THEOREM + MEASURED]};\ the constant is the
 kernel's, not the convergence rate, since a tapered amplitude gives a
-\textbf{[MEASURED]} $O(1/n_{\max})$ (Paper~38~\cite{loutey_paper38}, main theorem).  \textbf{(H2)} \textbf{[PRIOR ART mechanism;\ explicit densities new]} The angular sparsity
+\textbf{[MEASURED]} $O(1/n_{\max})$ (Paper~38~\cite{loutey_paper38}, main theorem)}.  \textbf{(H2)} \textbf{[PRIOR ART mechanism;\ explicit densities new]} The angular sparsity
 density of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}): a structural theorem of
 spherical-fermion bases, not a Coulomb-specific accident.
@@ -247,12 +248,12 @@ encoding on the Hardy sector of $S^5$ that is bit-exactly $\pi$-free
 (Paper~24~\cite{loutey_paper24}).  \textbf{(H4)} \textbf{[OBSERVATION]} The framework's
 results decompose cleanly into a universal algebra-only sector and a
 potential-specific Dirac-dependent sector
-(Paper~31~\cite{loutey_paper31}).  We discuss the fine-structure
+(Paper~31~\cite{loutey_paper31}).  \gvc{k-combination-rule}{We discuss the fine-structure
 constant combination $K = \pi(B + F - \Delta)$ of
 Paper~2~\cite{loutey_paper2_alpha} only as an Observation, in keeping
 with the project rule that the combination rule remains an
 \emph{Observation} at the rule level despite three spectral homes of
-distinct type for $B$, $F$, and $\Delta$.
+distinct type for $B$, $F$, and $\Delta$}.
 
 %% ========================================================================
 \section{The Packing Construction and the Graph}
@@ -279,11 +280,12 @@ surface maximizes entropy and is therefore isotropic.
 spaced radii and area-proportional state counting (choices the axioms
 motivate but do not force, Paper~0), the angular state count on
 shell~$k$ is $2k - 1$.
-The shell capacities $\{1, 3, 5, 7, \ldots\}$ are isomorphic to the
+The shell capacities $\{1, 3, 5, 7, \ldots\}$ equal in count the
 spherical harmonic basis $Y_{lm}$ under the identification $l = k - 1$
-and $m = -l, \ldots, +l$.  The angular quantum numbers $(l, m)$ and
-the per-shell degeneracy $2l + 1$ thus emerge from the packing
-geometry and these counting choices, without invoking the Schr\"odinger equation or the
+and $m = -l, \ldots, +l$ (attaching the labels to positions is a
+labelling choice).  The per-shell degeneracy $2l + 1$ is thus
+reproduced as an exact count from the packing geometry and these
+counting choices, without invoking the Schr\"odinger equation or the
 angular momentum operators $\hat{L}^2$, $\hat{L}_z$.
 
 \textbf{[OBSERVATION]} The principal quantum number~$n$ enters as a cumulative grouping of
@@ -381,10 +383,9 @@ unit-$S^3$ Laplace--Beltrami operator and the hydrogen Schr\"odinger
 problem, carried by the Fock projection (the bound-state Hamiltonian is
 $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$).  The
 discrete Fock graph's role is its label set, on which minus that
-operator is the diagonal $SO(4)$ Casimir exactly;\ that the graph's edge Laplacian
+operator is the diagonal $SO(4)$ Casimir exactly;\ \gvc{graph-s3-wall}{that the graph's edge Laplacian
 has that operator as its continuum limit is \emph{false} (it splits
-into $n_{\max}$ disconnected $l$-blocks;\ corrected 2026-09-04 from
-``established'' and 2026-09-25 from ``unestablished'').  This section
+into $n_{\max}$ disconnected $l$-blocks)}.  This section
 states the result and explains its operational role.
 
 \subsection*{The Fock projection and the chordal distance identity}
@@ -432,10 +433,10 @@ Green's function of the $\mathbb{R}^4$ Laplacian (Paper~7).
 
 \subsection*{The 18 symbolic checks}
 
-\textbf{[SYMBOLIC PROOF]} Paper~7~\cite{loutey_paper7} verifies the conformal-equivalence chain
+\textbf{[SYMBOLIC PROOF]} \gvc{paper7-symbolic-checks}{Paper~7~\cite{loutey_paper7} verifies the conformal-equivalence chain
 through a suite of 18 symbolic checks implemented in \texttt{sympy}
 (Paper~7 flags ten of them as limiting-case, definitional or
-non-discriminating rather than logically independent theorems).
+non-discriminating rather than logically independent theorems)}.
 The checks cover the stereographic projection formulas, the unit
 sphere constraint, the chordal distance identity, the conformal factor
 identity, the conformal Laplacian transformation law, the integer
@@ -459,7 +460,7 @@ lies outside their scope (Paper~7 states this explicitly).
 
 \subsection*{Schr\"odinger recovery: labels, not a continuum limit of $L$}
 
-\textbf{[WALL]} The graph Laplacian on the GeoVac lattice does \emph{not}
+\textbf{[WALL]} \gvc{graph-s3-wall}{The graph Laplacian on the GeoVac lattice does \emph{not}
 converge, as $n_{\max} \to \infty$ under any rescaling, to the round
 $S^3$ Laplace--Beltrami operator:\ its edges never change $l$, so it is
 the direct sum of $n_{\max}$ disconnected grid graphs, with
@@ -469,7 +470,7 @@ production weights and the $1/(n_i n_j)$ option alike (the graph heat
 kernel also vanishes between blocks, but reading that as a continuum
 statement would need a node-to-point identification the papers do not
 make)
-(\texttt{tests/test\_graph\_s3\_nonconvergence.py}).  The closed-form
+(\texttt{tests/test\_graph\_s3\_nonconvergence.py})}.  The closed-form
 saturation of the spectral bound, \textbf{[INTERNAL THEOREM]}
 (Paper~0~\S VI), is a grid band edge, and the size of the $s/p$ proxy
 tracks the residue of $n_{\max}$ modulo $3$, not convergence.  What is exact, at every
@@ -478,27 +479,27 @@ the Peter--Weyl truncation of $L^2(S^3)$, and on them $-\Delta_{S^3}$ is
 the diagonal $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$
 (the Casimir value is checked from the generators in the same test;\
 its identity with $-\Delta_{S^3}$ is prior art, not tested there).  What is a theorem on the
-operator-algebra side is a statement about a different object:\ \textbf{[INTERNAL THEOREM]} for the spinor (Dirac)
+operator-algebra side is a statement about a different object:\ \textbf{[INTERNAL THEOREM]} \gvc{wh1-p38-gh-convergence}{for the spinor (Dirac)
 spectral truncations (the commutative $S^3$ factor, true window;\ the
 almost-commutative extension \textbf{[OPEN]}) it is an unconditional
 van~Suijlekom state-space Gromov--Hausdorff convergence, bounded by a
 closed-form Fej\'er moment $\gamma_{n_{\max}} \to 0$ (proved), under the
 translation-seminorm metrization (Paper~38~\cite{loutey_paper38},
-operator-algebra arc);\ the Fej\'er moment behaves as
+operator-algebra arc)};\ \gvc{p38-rate-constant}{the Fej\'er moment behaves as
 $(4/\pi)\log n_{\max}/n_{\max}$, its constant $4/\pi$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard normalised form $(\theta|\theta) = 2$ of Kac~\cite{kac_infinite1990}, where $\mathrm{Cas}(\mathrm{ad}) = 2h^\vee$ (computed for $\mathfrak{su}(2), \mathfrak{su}(3)$ in \texttt{tests/test\_kac\_normalisation\_casimir.py}))
 tiered \textbf{[INTERNAL THEOREM + MEASURED]} (derived and numerics-pinned;\
 a kernel constant, not the convergence rate:\ a tapered amplitude gives a
-\textbf{[MEASURED]} $O(1/n_{\max})$), with the $4/\pi$ Fej\'er-moment constant
+\textbf{[MEASURED]} $O(1/n_{\max})$)}, \gvc{p40-general-g-conditional}{with the $4/\pi$ Fej\'er-moment constant
 reported universal across compact connected simple Lie groups
 (Paper~40~\cite{loutey_paper40}: derived at rank~1, fit-sensitive at rank~$\ge 2$, a rank-uniform
 analytical proof a named gap, the general-$G$ convergence itself
-conditional on the per-group spin-window decomposition; a circle factor carries $2/\pi$); the
+conditional on the per-group spin-window decomposition; a circle factor carries $2/\pi$)}; the
 scalar analogue of that theorem, for the Peter--Weyl spectral
 truncations of $L^2(S^3)$, is the prior-art state-space GH result of
-Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}.  Paper~7's
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}.  \gvc{paper7-symbolic-checks}{Paper~7's
 18 symbolic checks (ten of the eighteen limiting-case or definitional) target the
 conformal-transformation chain, not a convergence statement, and the
-graph-side \emph{operator} convergence is refuted. The
+graph-side \emph{operator} convergence is refuted}. The
 saturation of the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
 \emph{is} a theorem --- \textbf{[INTERNAL THEOREM]} closed form with rate
 $C_{\mathrm{sat}}/n_{\max}^2$, $C_{\mathrm{sat}} = \gvq{saturation_c}{42.7397}\ldots$ (Paper~0~\S VI;\
@@ -617,13 +618,13 @@ $SO(3N)$ acting on the hyperspherical angular basis, mapping onto,
 rather than predicting, the known table (see Paper~16, group~4,
 outside the foundations scope of this synthesis).
 
-\textbf{[PRIOR ART;\ SYMBOLIC PROOF]} The classical closed-form
+\textbf{[PRIOR ART;\ SYMBOLIC PROOF]} \gvc{p7-parseval-f0}{The classical closed-form
 single-center two-electron repulsion integral
 $F^0(\text{1s}, \text{1s}) = \gvq{slater_f0_1s}{5Z/8}$ is re-derived from the density-overlap
 formula of Paper~7 for $s$-orbital pairs --- the standard Fourier--Parseval
 form of the Coulomb integral, written in the stereographic variable
 $t = q/(2Z)$ (the single-integral structure is Parseval's, not the $S^3$
-geometry's).  More
+geometry's)}.  More
 generally, all single-center Slater $F^k$ integrals reduce to exact
 rationals in arithmetic over $\mathbb{Q}$ (the hypergeometric Slater
 engine, \texttt{geovac/hypergeometric\_slater.py}, which is not part
@@ -793,9 +794,9 @@ below) were re-run and reproduce, with regression backing live in
 Items (a), (c) and (d) below are Paper~6's archived measurements with
 no live regression test (a named coverage gap in the claim matrix).
 \emph{Scope:}\ both live checks run on the labelled legacy graph model
-\texttt{AtomicSolver(hamiltonian='graph')}, $H = \kappa(D - A)$, whose
+\texttt{AtomicSolver(hamiltonian='graph')}, $H = \kappa(D - A)$, \gvc{graph-s3-wall}{whose
 excited spectrum is a grid band structure and not physical hydrogen
-(Paper~7);\ they are checks of the Crank--Nicolson integrator on that
+(Paper~7)};\ they are checks of the Crank--Nicolson integrator on that
 model, not hydrogen physics.  The graph Hamiltonian $H$ is
 sparse with $O(V)$
 nonzero entries, so the Crank--Nicolson propagator
@@ -836,9 +837,9 @@ carry live regression backing (see the provenance note above).
 Paper~6 is not a foundational claim in the same sense as Papers 7, 18,
 22, 24, or 31---it is an operational demonstration that the
 foundations support time evolution.  Its role in the synthesis is to
-close the gap between the spectral statement of Papers~1 and~7 (the
+close the gap between the spectral statement of Papers~1 and~7 (\gvc{p1-ladder-exact}{the
 ladder operators $T_\pm, L_\pm$ reproduce the Rydberg quantum numbers on
-interior shells, Paper~1) and the dynamical statement
+interior shells, Paper~1}) and the dynamical statement
 required for any quantum-chemistry application (a sparse Hamiltonian on
 the labels supports time evolution at the same $O(V)$ cost;\ the live
 demonstration uses the graph model, not physical hydrogen).  Paper~6's
@@ -927,8 +928,8 @@ the Coulomb $S^3$ graph, the graph Laplacian $L_0$ carries the bipartite
 bound whose saturation $\lambda_{\max} \to 2 d_{\max} = 8$ ---
 \textbf{[INTERNAL THEOREM]} closed form, at rate
 $(C_{\mathrm{sat}} + o(1))/n_{\max}^2$ (Paper~0~\S VI) --- was read as the one
-convergence indication that survived scrutiny;\ it is a grid band edge,
-and $L_0$ does not converge to $\Delta_{S^3}$.  On $S^3$ as on $S^5$ the
+convergence indication that survived scrutiny;\ \gvc{graph-s3-wall}{it is a grid band edge,
+and $L_0$ does not converge to $\Delta_{S^3}$}.  On $S^3$ as on $S^5$ the
 spectrum is a diagonal on the labels (the $SO(4)$ Casimir $n^2-1$ there,
 the Euler operator here), and $L_0$ is spectrally inert on both, so this
 layer is not an asymmetry. Its spectrum is
@@ -1028,8 +1029,8 @@ fifth (spectral-action gravity) comes from Paper~51; the sixth
 (master Mellin chirality-parity) from a June~2026 sprint; and the seventh
 (CM/Hodge-circle arithmetic) from the August~2026 seam arc.  Five of the
 seven stand:\ the first (spectrum-computing role of $L_0$) is withdrawn
-(2026-09-25), because the $S^3$ graph Laplacian does not converge to the
-$S^3$ Laplacian and is spectrally inert, as on $S^5$, and the second
+(2026-09-25), because \gvc{graph-s3-wall}{the $S^3$ graph Laplacian does not converge to the
+$S^3$ Laplacian and is spectrally inert, as on $S^5$}, and the second
 (calibration $\pi$) is withdrawn (2026-10-19), because $\pi$ enters
 both sides the same ways (Paper~24).  The operator-order divide
 (Paper~31) separates the spectra:\ the
@@ -1170,17 +1171,19 @@ a reading, not a derivation;\ a kernel constant, not the convergence rate.
 \item \textbf{M2 ($k = 2$).}  Standard Seeley--DeWitt expansion of
 $\mathrm{Tr}\,e^{-t D^2}$.  Its heat-kernel coefficients, via Jacobi
 $\theta$-inversion on the half-integer-shifted Dirac spectrum, carry
-$\Gamma$-factor powers of $\sqrt{\pi}$;\ at integer $s$ the
+$\Gamma$-factor powers of $\sqrt{\pi}$;\ \gvc{m2-ring-integer-s}{at integer $s$ the
 spectral-zeta values it produces lie in the pure-Tate even-weight ring
-$\bigoplus_k \pi^{2k}\mathbb{Q}$ (Paper~55), while at half-integer
+$\bigoplus_k \pi^{2k}\mathbb{Q}$ (Paper~55)}, while at half-integer
 $s \ge 5/2$ the values are odd zeta values (e.g.\
 $\zeta_{D^2}(5/2) = 14\zeta(3) - \tfrac{31}{2}\zeta(5)$, Paper~28),
 which are M3's:\ a value reached from two slots is placed by the period
 ring it lands in (Paper~18~\S III.7).  The heat-kernel and spectral-zeta statements concern
 different objects and are not in conflict.
 
-\item \textbf{M3 ($k = 1$).}  Mellin transform of
-$\mathrm{Tr}(D \cdot e^{-t D^2})$.  Produces the quarter-integer
+\item \textbf{M3 ($k = 1$).}  The plain trace
+$\mathrm{Tr}(D \cdot e^{-t D^2})$ vanishes on the symmetric
+Camporesi--Higuchi spectrum;\ the slot is read through the absolute
+sum and its vertex-parity grading.  This produces the quarter-integer
 Hurwitz / vertex-parity content (Catalan's $G$, Dirichlet $\beta(s)$ at
 integer $s$) that appears in two-loop QED vertex corrections on $S^3$.
 (Slot assignments and ring homes:\ Paper~18~\S III.7, Paper~55
@@ -1239,9 +1242,9 @@ diagonal in the same basis, so $[D_{\mathrm{GV}}, \pi(f)] = 0$ and that
 triple carries no metric.  The metric, and with it the ``Dirac-dependent
 sector'' below, rests on the truthful, non-diagonal Camporesi--Higuchi
 Dirac operator of Paper~38~\cite{loutey_paper38}, not on the diagonal
-form.  (Paper~38's convergence theorem itself
+form.  (\gvc{wh1-p38-gh-convergence}{Paper~38's convergence theorem itself, for the commutative factor,
 is metrized by the translation seminorm;\ convergence in the Dirac
-seminorm is open there.)
+seminorm is open there}.)
 
 \subsection*{The A/D split}
 
@@ -1275,15 +1278,16 @@ require per-system rederivation.  Examples:
 \item The matched scale $\kappa = -1/16$ (Coulomb-specific; no analog
 on the Bargmann lattice;\ it matches only the graph's band edge, the
 energies entering through the energy shell).
-\item Transcendental content: $\pi$ for Coulomb via the $k = 0$
-volume-slot measure, $\pi$-free for
-HO.
+\item Transcendental content of spectral invariants: the Coulomb
+spectral zeta function lives in the $\pi$-polynomial ring; other
+systems may live in different rings (the HO Euler ladder at $s = 4$
+also carries $\zeta(3)$, Paper~24).
 \item Rigidity theorems: Fock rigidity (Paper~23) pins the Coulomb
 geometry to $S^3$; HO rigidity (Paper~24;\ conditional on the imported
 $SU(3)$-closure converse) pins the HO geometry to
 $H^2(S^5)$ with $(N, 0)$ symmetric irreps.
-\item The candidate fine-structure-constant combination
-$K = \pi(B + F - \Delta)$ of Paper~2 (an Observation):\ lives in the
+\item \gvc{k-combination-rule}{The candidate fine-structure-constant combination
+$K = \pi(B + F - \Delta)$ of Paper~2 (an Observation)}:\ lives in the
 Coulomb-specific sector through the volume-slot $\pi$ on $S^3$
 (Paper~31);\ of its three ingredients only $\Delta$ uses the Dirac
 degeneracy.
@@ -1296,9 +1300,8 @@ conceptual structure.  Paper~22's angular sparsity theorem lives in
 the universal sector and transfers free between hydrogen and the
 deuteron; Paper~23's nuclear shell model qubit Hamiltonians inherit
 the angular sparsity automatically but require a fresh per-potential
-analysis of the Dirac sector.  Paper~24's HO rigidity and the
-$\pi$-free certificate live in the potential-specific sector and
-explicitly do \emph{not} transfer to the Coulomb side---the
+analysis of the Dirac sector.  Paper~24's HO rigidity lives in the potential-specific sector and
+explicitly does \emph{not} transfer to the Coulomb side---the
 Bargmann-style first-order operator has no analog on $S^3$.  Paper~25
 (group~5, QED/gauge) on the SU(2) Wilson lattice gauge structure of the
 Hopf graph also lives in the potential-specific sector as far as Wilson
@@ -1383,8 +1386,8 @@ $\pi$-content by operator order $k \in \{0, 1, 2\}$ in
 $\mathcal{M}[\mathrm{Tr}(D^k e^{-t D^2})]$.  Paper~55 extends this
 engine into a period-theoretic census.  \textbf{[INTERNAL THEOREM]}
 The ring memberships of the census values below are theorems;\ their
-indexing by Mellin slot is a reading, and the underlying case-exhaustion
-is \textbf{[CONDITIONAL]};\ the scope is a census
+indexing by Mellin slot is a reading, and \gvc{pi-source-case-exhaustion}{the underlying case-exhaustion
+is \textbf{[CONDITIONAL]}};\ the scope is a census
 (\textbf{[OBSERVATION]}) of $S^3$ spectral-zeta and heat-trace
 data---it does not cover the chemistry integrals (e.g.\ the embedding
 seed $e^a E_1(a)$), spectral determinants such as
@@ -1396,7 +1399,7 @@ Dirichlet-$\beta$ values, and the depth-$k$ loop tower as identified so
 far ($k \le 3$), all of which sit in
 cyclotomic mixed-Tate periods at level $\le 4$ over $\mathbb{Z}[i, 1/2]$,
 read by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
-(pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$ at integer $s$
+(pure-Tate, depth~0), \gvc{m2-ring-integer-s}{$M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$ at integer $s$}
 (pure-Tate even-weight, depth~0, a strict refinement of the
 Fathizadeh--Marcolli classification~\cite{fathizadeh_marcolli2016}
 specialized to the static $S^3$ sub-case), and $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
@@ -1513,8 +1516,8 @@ what it consumes.  Paper~57 catalogues the forced entries (forced
 relative to its axiom set, which includes the adopted Upgrade~B axiom;\ the
 label-set spectrum $n^2 - 1$, carried on the labels as the $SO(4)$
 Casimir---not the graph Laplacian's grid band edge, which Paper~57 records
-as matched rather than forced---the $S^3$ outer manifold, the gauge group $U(1) \times SU(2)
-\times SU(3)$ from Bertrand $\times$ Hopf-tower truncation (an organizing reading plus an adopted axiom, not a derivation), the master
+as matched rather than forced---the $S^3$ outer manifold, \gvc{sm-gauge-group-upgrade-b}{the gauge group $U(1) \times SU(2)
+\times SU(3)$ from Bertrand $\times$ Hopf-tower truncation (an organizing reading plus an adopted axiom, not a derivation)}, the master
 Mellin engine, two-term-exact gravity), the single admitted-not-forced
 entry (the quaternionic factor $\mathbb{H}$), and the calibration
 entries (Yukawa values, generation count, cutoff moments, atomic
@@ -1529,15 +1532,9 @@ representation).  The packing-reachable tag is the F/C label
 by construction, so its $98.3\%$ agreement across the $60$-entry
 catalogue of June 2026 is an internal-consistency check, not an independent
 discriminator (Paper~57~\S6.1);\ the genuine discriminator signal is
-the two-family decomposition below.  (The catalogue now holds $72$
-entries:\ a released-axis sub-domain J was added in October 2026 ---
-the second nucleus, the decompactification front, the third and fourth
-centre, bending, the three-electron chain and the four-body $r_{12}$
-bridge, each with the number class that enters when the axis is
-released, from weight-one logarithms through an elliptic period to a K3
---- together with a wall status, the edge-Laplacian wall and
-oscillator-lattice rows at the skeleton level, and the temporal
-observation window as a calibration row;\ the door-indexed view is
+the two-family decomposition below.  (The catalogue's released-axis
+sub-domain J, added in October 2026, and its entry counts are kept in
+\texttt{docs/forced\_free\_seam.md};\ the door-indexed view is
 \texttt{docs/atlas.md}.)  The free side splits into two structurally
 distinct families:\ a multi-focal composition family (the framework can
 build it but cannot autonomously pick a number) and an inner-factor
@@ -1576,20 +1573,20 @@ the packing exponent $d_{\max} = 4$, and $\Delta = 1/40$ is the
 inverse Dirac mode count $g_3^{\text{Dirac}}(S^3) = 2(n+1)(n+2)|_{n=3}$.
 Each ingredient now has a structurally identified spectral home;
 twelve mechanisms have been eliminated as candidate single-principle
-derivations of the sum~\cite{loutey_paper2_alpha}.  The combination rule
+derivations of the sum~\cite{loutey_paper2_alpha}.  \gvc{k-combination-rule}{The combination rule
 itself remains an \emph{Observation} at the rule level (never a
 conjecture or derivation, per the project's hard rule):\ there is no
 first-principles derivation explaining why the additive combination of
 three objects with spectral homes of distinct type approximately equals
 $\alpha^{-1}$ (the plain sum $K$ matches $\alpha^{-1}$ to
 $4.8\times10^{-7}$ relative; the $8.8 \times 10^{-8}$ agreement is that
-of Paper~2's self-consistency root $\alpha^{-1}+\alpha^{2}=K$).  The synthesis treats this as an open structural
+of Paper~2's self-consistency root $\alpha^{-1}+\alpha^{2}=K$)}.  The synthesis treats this as an open structural
 question and does not assert priority for the observed identification.
 
 \subsection*{The second packing axiom (W3)}
 
-\textbf{[OPEN]} The packing construction of Paper~0 yields the angular sector
-$(l, m)$ and provides natural correspondences for $n$ and spin
+\textbf{[OPEN]} The packing construction of Paper~0 reproduces the per-shell count
+of the angular sector $(l, m)$ and provides natural correspondences for $n$ and spin
 multiplicity, but it does not produce calibration data such as Yukawa
 couplings or the number of fermion generations.  These appear in the
 exchange-constant taxonomy as Layer-2 inner-factor input data: the
@@ -1665,17 +1662,17 @@ Laplace--Beltrami operator onward is audited symbolically
 Hamiltonian $H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, its non-definitional
 kernel-eigenvalue step tested exactly for $n \le 4$, general $n$
 Fock's); \textbf{[WALL]} the discrete Fock
-graph's edge Laplacian does \emph{not} converge to that operator (it
+\gvc{graph-s3-wall}{graph's edge Laplacian does \emph{not} converge to that operator (it
 splits into $n_{\max}$ disconnected $l$-blocks with an
-$n_{\max}$-dimensional kernel), while the label set is exact, carrying
+$n_{\max}$-dimensional kernel)}, while the label set is exact, carrying
 $-\Delta_{S^3}$ as the diagonal $SO(4)$ Casimir $n^2 - 1$;\ and
-\textbf{[INTERNAL THEOREM]} the state-space GH convergence of the spinor
-spectral truncations---the commutative $S^3$ factor, on the true
-Camporesi--Higuchi window (the almost-commutative extension is
-\textbf{[OPEN]})---is proved in Paper~38~\cite{loutey_paper38}:\ the
+\textbf{[INTERNAL THEOREM]} \gvc{wh1-p38-gh-convergence}{the state-space GH convergence of the spinor
+spectral truncations is proved in Paper~38~\cite{loutey_paper38} for the
+commutative $S^3$ factor, on the true Camporesi--Higuchi window (the
+almost-commutative extension is \textbf{[OPEN]})}:\ the
 bound and $\gamma_{n_{\max}} \to 0$ are proved (Paper~38, main theorem:\ the
-Fej\'er moment is $(4/\pi)\log n_{\max}/n_{\max}$, \textbf{[INTERNAL THEOREM +
-MEASURED]};\ a tapered amplitude gives a \textbf{[MEASURED]} $O(1/n_{\max})$); \textbf{[PRIOR ART mechanism;\ explicit
+\gvc{p38-rate-constant}{Fej\'er moment is $(4/\pi)\log n_{\max}/n_{\max}$, \textbf{[INTERNAL THEOREM +
+MEASURED]};\ a tapered amplitude gives a \textbf{[MEASURED]} $O(1/n_{\max})$}); \textbf{[PRIOR ART mechanism;\ explicit
 densities new]} the angular sparsity of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}); the 3D harmonic oscillator admits a
 bit-exactly $\pi$-free discrete encoding on $H^2(S^5)$
@@ -1684,13 +1681,13 @@ cleanly into an algebra-only universal sector and a Dirac-dependent
 potential-specific sector (Paper~31~\cite{loutey_paper31}); the
 exchange-constant taxonomy of Paper~18~\cite{loutey_paper18} catalogues
 where transcendentals enter physical observables and identifies a
-\textbf{[CONDITIONAL]} master Mellin engine at three operator orders as the generator of the
+\gvc{pi-source-case-exhaustion}{\textbf{[CONDITIONAL]} master Mellin engine at three operator orders as the generator of the
 $\pi$-content of the projection chains case-checked so far (Paper~32~\cite{loutey_paper32}'s
 case-exhaustion theorem, over Paper~34 \S III.1--15, with its
-(i)$\Leftrightarrow$(ii) leg resting on empirical verification); the
+(i)$\Leftrightarrow$(ii) leg resting on empirical verification)}; the
 packing axiom of
-Paper~0~\cite{loutey_paper0} yields the angular sector geometrically
-(its structural choices motivated, not forced);
+Paper~0~\cite{loutey_paper0} reproduces the per-shell count of the
+angular sector geometrically (its structural choices motivated, not forced);
 the spectral graph theory of Paper~1~\cite{loutey_paper1} and the
 sparse $O(V)$ time propagation of Paper~6~\cite{loutey_paper6}
 (archived; demonstrated on the graph model, not physical hydrogen)
@@ -1704,9 +1701,9 @@ Bargmann--Segal lattice, and the universal sparsity bound at fixed
 $l_{\max}$ are statements about the discrete label set and the basis it
 indexes, not about the graph Laplacian (the integer spectrum $n^2 - 1$
 belongs to the continuum operator, carried exactly on the labels as the
-diagonal $SO(4)$ Casimir, while the graph Laplacian's own spectrum is
+diagonal $SO(4)$ Casimir, while \gvc{graph-s3-wall}{the graph Laplacian's own spectrum is
 closed form, bounded in $[0, 8]$, and does not converge to it ---
-Paper~0~\S VI, Paper~7); their continuum counterparts are theorems about
+Paper~0~\S VI, Paper~7}); their continuum counterparts are theorems about
 the Laplace--Beltrami operator or the Euler operator on the corresponding
 natural manifold, and consistency between the two is guaranteed by the
 label-set/Casimir correspondence together with Fock's conformal
@@ -1718,7 +1715,7 @@ Schr\"odinger equation ($H = -\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$), and the int
 
 The open questions catalogued in Section~\ref{sec:open} are
 substantive but do not destabilize the structural results of the
-foundations arc.  The $\alpha$ combination rule remains an Observation;
+foundations arc.  \gvc{k-combination-rule}{The $\alpha$ combination rule remains an Observation};
 the second-packing-axiom question is open; no construction for the
 cross-manifold extensions is known at the NCG-framework level; the multi-focal composition
 wall is an active research frontier; and the elliptic (genus-one) layer of the

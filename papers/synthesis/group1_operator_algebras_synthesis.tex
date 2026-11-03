@@ -87,6 +87,7 @@ Anthropic's Claude.  All design decisions and editorial choices are
 the author's responsibility.}}
 \date{May 2026}
 
+\newcommand{\gvc}[2]{#2}
 \begin{document}
 \maketitle
 
@@ -101,16 +102,16 @@ Marcolli--van~Suijlekom gauge-network lineage, and establishes four
 load-bearing results.  First, the underlying truncated graphs are
 Ramanujan \emph{at small sizes} --- a finite-size graph-RH Observation
 (three of four families cross the Kotani--Sunada bound at modest sizes,
-Paper~29~\S7), with integer-algebraic Ihara zeros (Paper~29).  Second, the
+Paper~29~\S7), with integer-algebraic Ihara zeros (Paper~29).  Second, \gvc{wh1-p38-gh-convergence}{the
 Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
 continuum spectral triple $\Tcal_{\sthree}$ in the van~Suijlekom
 state-space Gromov--Hausdorff sense --- for the commutative ($S^3$)
 factor on the true Camporesi--Higuchi window;\ convergence of the
-almost-commutative extension is \textbf{[OPEN]} --- with the Fej\'er-kernel bound
+almost-commutative extension is \textbf{[OPEN]}} --- \gvc{p38-rate-constant}{with the Fej\'er-kernel bound
 $d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$,
 $\gamma_{\nmax} \sim (4/\pi)\log\nmax/\nmax$, and a measured $O(1/\nmax)$ under a
 tapered amplitude (Paper~38, main theorem;\ $4/\pi$ in the dual-Coxeter
-normalisation of the $\SU(2)$ metric, $2/\pi$ on the unit $S^3$).
+normalisation of the $\SU(2)$ metric, $2/\pi$ on the unit $S^3$)}.
 Third, the Fej\'er-moment constant $4/\pi$ is reported universal across the
 compact connected simple Lie groups with bi-invariant metric (for several
 simple factors it is open) --- derived at
@@ -133,7 +134,7 @@ commutative factor by Paper~38) remains open, now with a sharpened specification
 de-compactification limit $T \to \infty$ survives at the
 norm-resolvent / spectral level.  A
 master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
-Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
+Papers~38,~39, and~40 as special cases:\ \gvc{p40-general-g-conditional}{for arbitrary $k \ge 1$ and
 compact connected simple Lie groups $G_{1}, \ldots, G_{k}$, the
 k-fold tensor product converges (state-space GH) with per-factor Fej\'er-moment
 bounds, constant $4/\pi$ reported universal in Paper~40 (proved only for $\SU(2)$ and
@@ -141,11 +142,10 @@ $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ the general-$G$ $k = 1$ case is conditional on the
 per-group spin-window decomposition;\ the joint Lipschitz constant
 $C_3^{(k)} = 1$, by compression, belongs to the abandoned
-approximation-pair route).  The Fej\'er-moment constant
-$4/\pi$ (Paper~38) is read --- convention-dependently
+approximation-pair route)}.  \gvc{m1-gh-rate-reading}{The Fej\'er-moment constant $4/\pi$ (Paper~38) is read --- convention-dependently
 (dual-Coxeter normalisation) and as a reading, not a derivation --- as the
 $M_{1}$ ($k = 0$ volume-slot) signature of the master Mellin engine, whose
-case-exhaustion (Paper~32~\S\,VIII) is \textbf{[CONDITIONAL]};\ the reading
+case-exhaustion (Paper~32~\S\,VIII) is \textbf{[CONDITIONAL]}};\ the reading
 concerns the kernel's constant, not the GH rate;\ the $1/\pi^{2}$ of the
 Lorentzian HS-orthogonality (Paper~42~\S 11.7) is \emph{not} shown to be
 the same signature --- it is the square of the posited normalisation
@@ -261,12 +261,12 @@ Ihara factorizations of \S5).
 
 \paragraph{Headline 2: Riemannian state-space Gromov--Hausdorff
 convergence, with a Fej\'er-kernel bound of constant $4/\pi$.}
-The Connes--van~Suijlekom truncations
+\gvc{wh1-p38-gh-convergence}{The Connes--van~Suijlekom truncations
 $\Tcal_{\nmax} = (\Op_{\nmax}, \HGV, \DGV)$ of the
 $\SU(2)$ Camporesi--Higuchi spectral triple converge to the continuum
 triple $\Tcal_{\sthree}$ in the van~Suijlekom state-space
 Gromov--Hausdorff sense (for the commutative factor on the true window;\
-the almost-commutative extension is \textbf{[OPEN]}), with
+the almost-commutative extension is \textbf{[OPEN]})}, with
 \begin{equation}
 d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \;\le\; \gamma_{\nmax},
@@ -295,9 +295,9 @@ E_{7}, E_{8}\}$), the proposed Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation mechanism (Paper~40~\S 3.2~\cite{paper40_unified};\ a proof
 sketch at rank~$\ge 2$) leaves exactly the rank-1 ($\SU(2)$) constant $4/\pi$ of Paper~38 Appendix~A
 from each positive root direction's Euler--Catalan asymptote, in the
-dual-Coxeter normalisation.  The Lipschitz comparison constant
+dual-Coxeter normalisation.  \gvc{lipschitz-c3-compression}{The Lipschitz comparison constant
 $C_{3} = 1$ (which enters only the withdrawn approximation-pair route)
-holds at every rank by compression (Paper~40's PRV-summand analysis
+holds at every rank by compression} (Paper~40's PRV-summand analysis
 after Kumar (1988), applied to the dominant image of the tensor product
 $V_{\lambda} \otimes V_{\lambda'}^{*}$, concerns representation-theoretic
 inequalities, proved on special summands and panel-verified on the rest,
@@ -327,10 +327,10 @@ with $\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
 $\Lprop(\cdot,\cdot) := \Lambda(\cdot|_{\Kplus},\cdot|_{\Kplus})$ is
 the propinquity of the standard metric spectral triple obtained from
 the Krein-positive subspace $\Kplus = \{|\psi\rangle : \JL|\psi\rangle
-= +|\psi\rangle\}$.  The target fails structurally:\ the quantity $\Lprop$ is
+= +|\psi\rangle\}$.  The target fails structurally:\ \gvc{p45-rates-spatial}{the quantity $\Lprop$ is
 degenerate --- the K$^{+}$ compression annihilates the spatial Dirac
 and the restricted Lipschitz seminorm vanishes identically
-(Paper~45's annihilation theorem~\cite{paper45}) --- and the earlier
+(Paper~45's annihilation theorem~\cite{paper45})} --- and the earlier
 convergence claim through this device (formerly Theorem~5.1 of
 Paper~45) is withdrawn.  The Lorentzian analog of the convergence
 question Connes and van~Suijlekom \cite{connes_vs2021} deferred to
@@ -360,10 +360,9 @@ leimbach_vs2024}.  All these earlier convergence results
 are Riemannian or discrete-group (Toyota's are for discrete groups of
 polynomial growth), and almost all of the Riemannian ones are on flat
 structures ($S^{1}$, $\T^{d}$, $S^{2}$ Berezin--Toeplitz).  The Paper~38
-$\SU(2)$ result and the Paper~40 generalisation (for general $G$
-conditional on the per-group spin-window decomposition) are non-abelian
-non-flat instances at quantitative rate (Paper~38 unconditional as of
-June~2026, via the translation-seminorm metrization;\ scalar-sector
+$\SU(2)$ result and \gvc{p40-general-g-conditional}{the Paper~40 generalisation (for general $G$
+conditional on the per-group spin-window decomposition)} are non-abelian
+non-flat instances at quantitative rate (\gvc{wh1-p38-gh-convergence}{Paper~38 unconditional for the commutative factor, via the translation-seminorm metrization};\ scalar-sector
 convergence for compact groups is due to Gaudillot-Estrada and
 van~Suijlekom, arXiv:2310.14733);\ on the Lorentzian side the
 Paper~45 contribution is a degeneracy theorem, not a convergence
@@ -545,9 +544,9 @@ graphs that are used implicitly elsewhere in the arc.  First, no $\pi$
 or transcendental quantity appears anywhere in the Ihara
 polynomials, in any of the tested factorizations
 (Paper~29~\S 5.4~\cite{paper29}, Corollary on integer-algebraicity).
-This is the graph-spectral analog of the
+This is the graph-spectral analog of \gvc{pi-source-case-exhaustion}{the
 $\pi$-source case-exhaustion theorem (Paper~32~\S 8, \textbf{[CONDITIONAL]},
-first fifteen Paper~34 projections): both say that, where $\pi$ appears,
+first fifteen Paper~34 projections)}: both say that, where $\pi$ appears,
 it enters through specific named mechanisms ($k = 0$ volume slot;
 spectral action; vertex-parity Hurwitz character), never in the bare
 combinatorial data.  Second, the Hashimoto-spectrum Poisson
@@ -575,12 +574,12 @@ Theorem~3.4.
 
 \begin{theorem}[Paper~38, GH convergence on $\sthree = \SU(2)$]
 \label{thm:gh_su2}
-The Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ of the round
+\gvc{wh1-p38-gh-convergence}{The Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ of the round
 $\SU(2)$ Camporesi--Higuchi spectral triple converge to
 $\Tcal_{\sthree}$ in the van~Suijlekom state-space
 Gromov--Hausdorff sense, for the commutative factor on the true
 Camporesi--Higuchi window (translation-seminorm metrization;\ the
-almost-commutative extension is \textbf{[OPEN]}):
+almost-commutative extension is \textbf{[OPEN]})}:
 \begin{equation}
 d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \;\le\;
@@ -832,10 +831,10 @@ $\Tcal_{\sthree}^{\lambda_{a}} \otimes \Tcal_{\sthree}^{\lambda_{b}}$
 of two copies of the same manifold at distinct focal lengths
 $\lambda_{a} \ne \lambda_{b}$ \cite{paper39}.  The result is an
 \textbf{[INTERNAL THEOREM]} in the translation-seminorm metrization
-(Paper~38's footing):\ convergence in van~Suijlekom state-space
+(Paper~38's footing):\ \gvc{p39-state-space-not-propinquity}{convergence in van~Suijlekom state-space
 Gromov--Hausdorff distance with bound
 $\Lambda \le \gamma^{(ab)} \le \lambda_a\gamma_{n_a} +
-\lambda_b\gamma_{n_b}$, \emph{leading constant $1$}, for the spinor
+\lambda_b\gamma_{n_b}$, \emph{leading constant $1$}}, for the spinor
 (Camporesi--Higuchi) tensor triple with an explicit bound and the
 KO-dimension-6 real structure of its limit (the scalar state-space case
 of $\SU(2)\times\SU(2)$ is covered by Gaudillot-Estrada and
@@ -854,12 +853,12 @@ $6$;\ the naive $\DCH^{(a)}\otimes I + \gamma_a\otimes\DCH^{(b)}$ is
 unrealisable ($\gamma_a = 0$ on $\sthree$) and the doubling is its
 replacement.
 
-The joint Lipschitz comparison constant $C_3^{(2)} = 1$ (by compression on
+\gvc{lipschitz-c3-compression}{The joint Lipschitz comparison constant $C_3^{(2)} = 1$ (by compression on
 the Clifford-doubled module, Paper~39 Lemma~L3-T) and the
 Berezin-tunneling cross-term (a triangle bound, rate $O(\max\gamma)$)
 belong to an \emph{abandoned} $(B,P)$-pair route, retained in Paper~39 as
 a record;\ they are \emph{not} rate constants of the theorem, whose
-constant is $1$. (That route's earlier Pythagorean refinement
+constant is $1$}. (That route's earlier Pythagorean refinement
 $C_3^{(2)}<1$ was withdrawn as false;\ the triangle bound on the two
 Leibniz terms is tight term by term and gives only $\sqrt 2$.)
 
@@ -868,10 +867,10 @@ Leibniz terms is tight term by term and gives only $\sqrt 2$.)
 \label{sec:universality}
 % =====================================================================
 
-Paper~40 \cite{paper40_unified} extends Theorem~\ref{thm:gh_su2}
+\gvc{p40-general-g-conditional}{Paper~40 \cite{paper40_unified} extends Theorem~\ref{thm:gh_su2}
 from $\SU(2)$ to compact connected semisimple Lie groups with
 bi-invariant metric (for general $G$ conditionally on the per-group
-spin-window decomposition).
+spin-window decomposition)}.
 
 \begin{theorem}[Paper~40, universal Fej\'er-moment constant]
 \label{thm:universal_rate}
@@ -880,15 +879,15 @@ with bi-invariant metric (each simple factor
 $\in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4},
 E_{6}, E_{7}, E_{8}\}$).  The truncated (Kostant-Dirac) triples
 $\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the van~Suijlekom
-state-space Gromov--Hausdorff sense;\ for \emph{simple} $G$ the Fej\'er-type
+state-space Gromov--Hausdorff sense;\ \gvc{p40-general-g-conditional}{for \emph{simple} $G$ the Fej\'er-type
 moment has the same asymptotic constant as \eqref{eq:gh_rate_constant} (for products of several
 simple factors the constant is open, Paper~40):\ namely
 $4/\pi$, in the dual-Coxeter
 normalisation (derived at rank~1;\ numerically supported, with a
 fit-sensitive extraction, at rank $\ge 2$, a rank-uniform proof being a
-named gap);\ whether a tapered amplitude gives $O(1/\nmax)$ for general
-$G$ is \textbf{[OPEN]}.  The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
-rank, by compression.  For general $G$ the convergence is conditional on a
+named gap)};\ whether a tapered amplitude gives $O(1/\nmax)$ for general
+$G$ is \textbf{[OPEN]}.  \gvc{lipschitz-c3-compression}{The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
+rank, by compression}.  For general $G$ the convergence is conditional on a
 per-group spin-window decomposition (verified for $\SU(2)$).
 \end{theorem}
 
@@ -1224,9 +1223,9 @@ which Paper~45's degeneracy theorem (below) is read.
 
 \subsection{$K^{+}$-restricted weak-form Lorentzian propinquity:\ the degeneracy theorem (Paper~45)}
 
-Paper~45 \cite{paper45} closes off the Lorentzian-propinquity route via a
+\gvc{p45-rates-spatial}{Paper~45 \cite{paper45} closes off the Lorentzian-propinquity route via a
 degeneracy theorem (the natural K$^{+}$-weak-form seminorm vanishes
-identically) on the substrate of Paper~44.
+identically)} on the substrate of Paper~44.
 
 \begin{definition}[Paper~45~\S 1.3, K$^{+}$-weak-form Lorentzian
 propinquity]
@@ -1490,9 +1489,9 @@ to be the same $M_{1}$ signature as the $4/\pi$ of Paper~38, and no
 $\Vol(S^{2}) = 4\pi$ identity links them.
 
 \paragraph{Why this matters.}
-The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
+\gvc{pi-source-case-exhaustion}{The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
 \emph{spectral-triple-level} statement about where $\pi$ can enter
-chains of the first fifteen Paper~34 projections (\textbf{[CONDITIONAL]}).  The constant
+chains of the first fifteen Paper~34 projections (\textbf{[CONDITIONAL]})}.  The constant
 $4/\pi$ of Paper~38 is a \emph{kernel-level} statement about the
 Fej\'er moment that bounds the state-space GH distance.  The fact that these two abstractly-different
 levels agree on the same signature is a consistency check within one
@@ -1704,9 +1703,9 @@ $\Tcal_{G_{1}} \otimes \Tcal_{G_{2}}$ at arbitrary compact connected
 Lie group factors.  Both were addressed on 2026-05-23 as \emph{sketches} (only the $k=2$ case is proved; see below).
 
 \textbf{(iii) k-fold extension --- constant $1$ (sketch).}  On the
-$k$-fold module with $k$ mutually anticommuting Clifford generators, the
+$k$-fold module with $k$ mutually anticommuting Clifford generators, \gvc{lipschitz-c3-compression}{the
 compression argument of Paper~39 Lemma~L3-T gives $C_{3}^{(k)} = 1$ for
-every $k$ (Paper~39 \S6(iii));\ the operator-norm triangle bound with
+every $k$} (Paper~39 \S6(iii));\ the operator-norm triangle bound with
 Cauchy--Schwarz gives only $\sqrt k$, and an earlier per-cutoff factor
 $\sqrt{(N_*-1)/(N_*+1)}$ is withdrawn with Paper~38's per-harmonic
 bound. \emph{Correction
@@ -1752,20 +1751,20 @@ $c(G_{\mathrm{ss}} \times T^{k})$). The $k$-independent constant $1$ comes
 from compression (each $G_j$ factor by Paper~40's left-equivariance
 argument). Each summand $\gamma^{G_j}$ carries the Fej\'er-moment $4/\pi$
 asymptotic (the joint leading constant is open for several factors,
-Paper~40); but this multi-factor / general-$G$ form is a
+Paper~40); \gvc{p40-general-g-conditional}{but this multi-factor / general-$G$ form is a
 \textbf{sketch} (proved only for $k=1$, $\SU(2)$ and $k=2$,
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ $k=1$ for general $G$ is conditional;\ $C_3^{(k)}$ is the
-approximation-pair route's constant, not a rate constant).
+approximation-pair route's constant, not a rate constant)}.
 
 The master-theorem sketch subsumes Papers~\cite{paper38}
 ($k = 1$, $G = \SU(2)$), \cite{paper40_unified}
 ($k = 1$, general $G$, conditional), and the two-factor case
 treated above (\S\ref{sec:tensor_extension}, $k = 2$,
 $G_{1} = G_{2} = \SU(2)$), each of which proves a bound at most the
-displayed sum.  Paper~45's product-carrier
+displayed sum.  \gvc{p45-rates-spatial}{Paper~45's product-carrier
 proposition at $\sthree \times \Sone_{T}$ (\texttt{prop:product\_action\_seminorm};
-signature-agnostic and not a Lorentzian claim --- its earlier
+signature-agnostic and not a Lorentzian claim} --- its earlier
 compression-device convergence theorem is withdrawn) is a $k = 2$,
 $G_{1} = \SU(2)$, $G_{2} = \Uone$ product with per-factor cutoffs, which
 converges at the additive rate $\gamma^{\SU(2)} + \gamma^{\Uone}$
@@ -2102,22 +2101,21 @@ to complete the state-side dictionary.
 \paragraph{Concluding remark.}
 The structural identification of GeoVac as an almost-commutative
 spectral triple in the Marcolli--van~Suijlekom lineage rests, at the
-state-space Gromov--Hausdorff level, on Paper~38, which proves the
+state-space Gromov--Hausdorff level, \gvc{wh1-p38-gh-convergence}{on Paper~38, which proves the
 commutative ($S^3$) factor only (convergence of the almost-commutative
-extension is \textbf{[OPEN]});\ it is extended by Paper~39 (tensor product,
-state-space GH) and Paper~40 (compact connected semisimple Lie groups;\
+extension is \textbf{[OPEN]})};\ it is extended by Paper~39 (tensor product,
+state-space GH) and \gvc{p40-general-g-conditional}{Paper~40 (compact connected semisimple Lie groups;\
 for general $G$ conditionally on the per-group spin-window
-decomposition).  The Lorentzian
-K$^{+}$-weak-form extension is \emph{descoped}:\ Paper~45 proves a
+decomposition)}.  The Lorentzian
+K$^{+}$-weak-form extension is \emph{descoped}:\ \gvc{p45-rates-spatial}{Paper~45 proves a
 degeneracy theorem (the natural Lorentzian-propinquity seminorm
 vanishes identically), and what survives on the temporal factor is
 Paper~45's signature-agnostic product-carrier rate (not a Lorentzian
-convergence).  The Fej\'er-moment constant $4/\pi$ of the truncated
-triples' bound is read (a reading, not a derivation;\ Paper~38) as M$_{1}$
+convergence)}.  \gvc{m1-gh-rate-reading}{The Fej\'er-moment constant $4/\pi$ of the truncated triples' bound is read (a reading, not a derivation;\ Paper~38) as M$_{1}$
 ($k = 0$ volume-slot) content;\ it is the kernel's constant, not the
 convergence rate, and the $\pi$-source case-exhaustion
 theorem (Theorem~\ref{thm:pi_source}, \textbf{[CONDITIONAL]}) does not
-itself cover GH rates.  (The $1/\pi^{2}$ of the
+itself cover GH rates}.  (The $1/\pi^{2}$ of the
 Lorentzian Pythagorean closed form is the imported normalisation of a
 posited generator and is not shown to share that signature.)
 
