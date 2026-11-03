@@ -83,7 +83,7 @@ def _compute_witnesses(dps: int):
         "W2_propinquity_4_over_pi": (
             mp.mpf(4) / pi,                # Paper 38 L2 Fejer-moment constant
             -1,
-            "Paper 38 L2 Fejer-moment constant; Paper 40 (reported universal, compact simple; M1 placement a reading)",
+            "Paper 38 L2 Fejer-moment constant (M1 placement a reading); Paper 40 rank >= 2 constant open",
         ),
         "W4_pythagorean_1_over_pi2": (
             mp.mpf(1) / pi**2,             # Paper 42 sec 11.7 prefactor

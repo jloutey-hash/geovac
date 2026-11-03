@@ -104,7 +104,7 @@ smoothing at the same moment. The theorem is [INTERNAL THEOREM] \emph{in the
 translation-seminorm metrization} --- the footing of Paper~38's
 \texttt{thm:main\_unconditional}, with which both state spaces are metrized;
 that seminorm agrees with the truncated-Dirac commutator seminorm on the
-continuum and, unlike it, is non-degenerate at finite cutoff. The limit is
+continuum, and convergence in the Dirac seminorm itself is open. The limit is
 the graded tensor product of the two odd (KO-$3$) Camporesi--Higuchi real
 spectral triples --- Hilbert space $\Hilb_a \otimes \C^2 \otimes \Hilb_b$,
 Dirac $\DCH^{(a)}\otimes\sigma_1\otimes 1 + 1\otimes\sigma_2\otimes\DCH^{(b)}$,
@@ -470,15 +470,15 @@ subadditive form and $2\max$ the looser corollary ($\gamma^{(ab)}$ is
 strictly below $\gamma_{\nmaxa}+\gamma_{\nmaxb}$ by
 $\sqrt{x^2+y^2} \le x+y$, and strictly below $2\max$ at every finite
 cutoff). The right-hand
-side is $O(\log\nmax/\nmax) \to 0$ with universal asymptotic constant
-$4/\pi$ per factor.
+side is $O(\log\nmax/\nmax) \to 0$ with asymptotic constant
+$4/\pi$ per factor (dual-Coxeter normalisation).
 
 \emph{Metrization (the tier's scope).} As in Paper~38's
 \texttt{thm:main\_unconditional}, both state spaces are metrized by the
 left-\emph{translation} Lipschitz seminorm, which agrees with the
 truncated-Dirac commutator seminorm on the continuum
-(Lemma~\ref{lem:continuum_lip-T}) and, unlike it, is non-degenerate at
-finite cutoff. The statement is unconditional \emph{in that metrization}
+(Lemma~\ref{lem:continuum_lip-T});\ convergence in the Dirac seminorm
+itself is open (Paper~38). The statement is unconditional \emph{in that metrization}
 --- Paper~38's own footing and the tier this theorem shares --- not
 simpliciter.
 
@@ -1122,14 +1122,12 @@ automatic ($J b J^{-1}$ is right multiplication, which commutes with left
 multiplication and with $[D,a]$;\ Paper~32~\S VIII, the standard commutative
 fact) --- so the continuum tensor triple satisfies them. \textbf{At finite
 cutoff they do not hold, and the residual \emph{grows} with the cutoff}
-(measured max residual $5.5\times10^{-2} \to 7.9\times10^{-2}$ for
-order-zero and $1.0\times10^{-1} \to 2.0\times10^{-1}$ for order-one from
-$\nmax = 2$ to $3$, and continuing to grow at higher cutoff):\ the truncated operator system is not an
+(on the true Camporesi--Higuchi window the single-factor max residual is
+$1/2, 5/9, 11/16$ for order zero and $3/4, 5/3, 21/8$ for order one at
+$\nmax = 1, 2, 3$, \texttt{tests/test\_true\_window\_real\_structure.py}):\
+the truncated operator system is not an
 algebra, the same phenomenon Paper~32~\S VIII (order zero and order one)
-records for the single factor.  (An earlier version pointed to Paper~38
-\texttt{rem:dirac\_degeneracy}, which concerns the doubled model's
-commutator-seminorm kernel, not the order conditions; repointed
-2026-09-28.) The product introduces \emph{no cross-factor
+records for the single factor. The product introduces \emph{no cross-factor
 obstruction} --- every cross-factor pair satisfies both conditions to machine
 precision, so the finite-cutoff defect is exactly the inherited single-factor
 one. The order conditions are \emph{not} required for the distance bound of
@@ -1609,10 +1607,8 @@ in~\cite{paper40_unified}, which lifts Theorem~3.1
 of~\cite{loutey_paper38} (unconditionally for $\SU(2)$;\ for general $G$
 conditionally on the per-group spin-window decomposition) to compact
 connected semisimple Lie groups $G$
-with bi-invariant metric (a circle factor carries the circle constant) and
-reports the Fej\'er-moment constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38)
-as \emph{universal} across the simple groups of that class (for semisimple groups with several simple factors the constant is open) via a Plancherel-weight $\times$
-Vandermonde-Jacobian cancellation (derived at rank~1).
+with bi-invariant metric;\ whether its Fej\'er-moment constant is the
+same for every simple group is open.
 
 Combining the $k$-fold extension (item~(iii) above) with the
 general-$G$ ingredients of~\cite{paper40_unified} gives the expected
@@ -1630,15 +1626,14 @@ for any $k \ge 1$ and compact connected simple Lie groups
 $G_{1}, \ldots, G_{k}$ with bi-invariant metrics, where
 the per-factor L3 constant is $1$ at every cutoff (Paper~40~\cite{paper40_unified},
 by compression) and
-$\gamma^{G_{j}}_{n_{j}}$ is the per-factor general-$G$ Fej\'er moment, with the
-universal $(4/\pi) \log n_{j} / n_{j}$ asymptote. The
+$\gamma^{G_{j}}_{n_{j}}$ is the per-factor general-$G$ Fej\'er moment
+(its leading constant is Paper~38's $4/\pi$ per shell index at
+$\SU(2)$ and open beyond, Paper~40). The
 $k$-independent constant $1$ comes from compression on the
 Clifford-doubled module (item~(iii);\ each $G_j$ factor by
 Paper~40's left-equivariance argument). For each fixed $k$ convergence
 would follow (for general $G$ conditionally, as at $k = 1$), and the joint
-bound would inherit, factor by factor, the $4/\pi$ asymptotic
-reported universal on simple groups in~\cite{paper40_unified} (derived at
-rank~1);\ the joint moment itself has a larger constant than any single
+bound would inherit each factor's leading constant;\ the joint moment itself has a larger constant than any single
 factor's (Theorem~\ref{thm:main}:\ it lies strictly between the largest
 factor moment and the sum);\ but this multi-factor /
 general-$G$ form is a \textbf{sketch} (its $k=2$, $\SU(2)$ instance is
@@ -1858,9 +1853,8 @@ truncations of compact semisimple Lie groups with bi-invariant metric},
 the present tensor-product paper, DOI via Zenodo.
 \newblock Generalizes \cite{loutey_paper38} from $\SU(2)$ to compact
 connected semisimple Lie groups (for general $G$ conditionally on the
-per-group spin-window decomposition); Fej\'er-moment constant $4/\pi$ derived at
-rank~1 and numerically supported at rank~$\ge 2$ (the extraction is
-fit-sensitive;\ a rank-uniform symbolic proof is a named gap); Lipschitz comparison constant
+per-group spin-window decomposition); Fej\'er-moment constant
+group-independence open; Lipschitz comparison constant
 $C_3 = 1$ at every rank, by compression.
 
 \bibitem[Loutey, Paper~45]{paper45}

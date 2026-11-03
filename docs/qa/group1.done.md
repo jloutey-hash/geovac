@@ -65,12 +65,15 @@ group1 paper restates them (C7).
   *number* is verified.
 - **C7 (trunk-dependent status).** Paper 38/WH1 as PROVEN scoped to the van
   Suijlekom state-space GH distance; Paper 32 axioms / κ at current tiers.
-- **C8 (headline honesty), per-paper.** Paper 29 = Ramanujan + integer-algebraic
-  Ihara zeros; Paper 40 = 4/π rate **universal** (derived-numerics-pinned + PRV
-  tightness, not full symbolic proof beyond the verified panel); Paper 50 =
-  **bit-exact** CFT-on-sphere F-theorem match (arithmetic fact, not a CFT
-  derivation); Paper 45 headline = the **annihilation theorem** (a NEGATIVE
-  result), never a convergence theorem.
+- **C8 (headline honesty), per-paper.** Paper 29 = Ramanujan at small sizes as a
+  **finite-size** statement (two of four families cross; S³ judged per
+  ℓ-component) + integer-algebraic Ihara zeros; Paper 40 = the SU(2) constant
+  (2/π) log Λ/Λ in its own variable Λ, with group-independence **[OPEN]** (never
+  "universal"); Paper 50 = a continuum re-derivation of the known
+  Klebanov–Pufu–Safdi F values (the cutoff never enters; not a GeoVac
+  derivation), TT-bar sphere match credited to Caputa–Datta–Shyam; Paper 45
+  headline = the **annihilation theorem** (a NEGATIVE result), never a
+  convergence theorem.
 
 ## Proposed first bite (PI to confirm at FREEZE)
 
@@ -84,6 +87,13 @@ group1 paper restates them (C7).
   head-on while the descope is fresh.*
 
 ## Change log
+- 2026-11-03 — **FULL (incremental) = FAIL -> REMEDIATED** (v6.1.2, PI-invoked). Unseeded; standing
+  calibration record cited. Owner LARGE in Papers 29 (S^3 crossing a disconnected-graph artifact; functional
+  equation; RH bridge), 39, 40 (4/pi per Lambda; universality re-tiered OPEN, PI decision), 44, 45, 50 (TT-bar
+  attribution; S^7-S^11 untested) and 53 (Lebesgue table); synthesis surface LARGE; 13 C16 entries added, 3
+  widened; C25 p40 entry re-tiered. Self-check R1 4 OWNER-LARGE, R2 4 (Paper 40) -> closed with an open owner
+  fix (Paper 40 units unstamped). Coverage 0/314 -> 191/314. RESEARCH-GRADE not earned. Debt:
+  `docs/qa/group1.debt.md`. C8 restated to the current owner headlines (PI-approved 2026-11-03, between runs).
 - 2026-09-15 — **WHOLE-GROUP FULL certifying run = FAIL -> REMEDIATED**
   (v5.12.2), the first whole-group FULL since the 2026-06-24 bite-wise cert.
   Live scope = 10 papers after the 46-49 archival + synthesis. 10-agent panel +

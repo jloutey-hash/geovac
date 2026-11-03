@@ -36,11 +36,13 @@ Kotani--Sunada~\cite{kotani2000} graph-RH (Ramanujan) bound
 \emph{strictly}, with deviations of the largest non-trivial Hashimoto
 eigenvalue from $\sqrt{q_{\max}}$ ranging from $-0.198$ ($S^3$,
 $n_{\max}=3$) to $-0.357$ ($S^5$, $N_{\max}=3$).  A follow-on
-post-draft extension to $n_{\max},N_{\max}\in\{4,5\}$ establishes
-that three of four graph families \emph{cross} the Kotani--Sunada
-bound at modest sizes ($V\approx 30$--$60$), with the signed
-deviation growing linearly in $V$; the graph-RH for GeoVac is
-therefore a \emph{finite-size} statement, not an asymptotic one.
+post-draft extension to $n_{\max},N_{\max}\in\{4,5\}$ finds that two
+of four graph families \emph{cross} the Kotani--Sunada bound at modest
+sizes (scalar $S^5$ at $N_{\max}=5$, Dirac-$S^3$ Rule~B at
+$n_{\max}=4$), while the scalar $S^3$ graph, whose $\ell$-blocks are
+disconnected components, stays below the bound on every component
+through $n_{\max}=5$;\ the graph-RH for GeoVac is therefore a
+\emph{finite-size} statement for the families that cross.
 (2)~\emph{Algebraicity of zeros}:
 every $\zeta_G(s)^{-1}$ factors as a product of integer-coefficient
 polynomials; no transcendental ($\pi$, $\zeta(2)$, $\zeta(3)$) enters
@@ -66,8 +68,9 @@ quotient $H^3/\Gamma$ from framework invariants; the Selberg-zeta
 direction on hyperbolic quotients of hydrogen is therefore structurally
 closed.  The Ihara-to-classical-$\zeta$ bridge is additionally blocked
 by bipartiteness (odd-argument Dirichlet characters such as $\chi_{-4}$
-have support disjoint from the Ihara walk-length spectrum); the
-spectral-side Dirichlet series of Paper 28 remains the open direction.
+have support disjoint from the Ihara walk-length spectrum), and the
+direct bridge from the spectral-side Dirichlet series of Paper 28 to
+classical RH is closed as well.
 \end{abstract}
 
 % ===================================================================
@@ -107,12 +110,13 @@ question from inside GeoVac rather than from outside.  We do not
 attempt to prove or disprove RH.  We ask: does the framework contain,
 on its own, a graph-zeta or spectral-zeta object with an RH-type
 structure --- an Euler product, a functional equation, and a critical
-locus that our zeros respect?  The answer, for the two Hopf graphs
-the framework natively builds, is yes.  Every tested GeoVac graph
-satisfies the Kotani--Sunada~\cite{kotani2000} Ramanujan bound
-(Section~\ref{sec:main_result}).  The associated functional equation
-takes the irregular-graph reflection form $s\mapsto -s$ rather than
-the regular-graph form $s\mapsto 1/(q s)$
+locus that our zeros respect?  For the two Hopf graphs the framework
+natively builds, the answer is partial.  Every graph tested at
+$n_{\max},N_{\max}\le 3$ satisfies the Kotani--Sunada~\cite{kotani2000}
+Ramanujan bound, and two of the four families cross it at larger
+sizes (Section~\ref{sec:main_result}).  There is no functional equation of
+the regular-graph form $s\mapsto 1/(q s)$;\ what holds is evenness of
+$\zeta_G^{-1}$ under $s\mapsto -s$, which follows from bipartiteness
 (Section~\ref{sec:functional_equation}).  And the Ihara zeros are
 algebraic, consistent with Paper~24's $\pi$-free structure
 (Section~\ref{sec:closed_forms}).
@@ -302,15 +306,17 @@ for every non-trivial tested graph.}
 
 \begin{observation}
 \label{obs:ramanujan}
-At the small (closed-form) cutoffs of this section ($n_{\max} \le 4$ on
+At the small (closed-form) cutoffs of this section ($n_{\max} \le 3$ on
 $S^3$, $N_{\max} \le 3$ on $S^5$), the largest non-trivial
 Hashimoto eigenvalue is strictly smaller than the Kotani--Sunada bound:\
 these graphs are strictly sub-Ramanujan, their spectral gap exceeding
 the optimal Ramanujan gap of an equivalent-$q_{\max}$ regular graph.
 This is a \emph{finite-size} statement:\ the larger-cutoff sweep of
-\S\ref{sec:open_questions} (RH-D) shows three of four families
-(including $S^3$ Coulomb at $n_{\max} = 5$) \emph{cross} the bound, so
-the property does not persist asymptotically.
+\S\ref{sec:open_questions} (RH-D) shows two of four families
+(scalar $S^5$ at $N_{\max} = 5$, Dirac-$S^3$ Rule~B at $n_{\max} = 4$)
+\emph{cross} the bound, so for them the property does not persist;\
+the scalar $S^3$ graph stays below it on every connected component
+through $n_{\max} = 5$.
 \end{observation}
 
 The strictness of the deviation is itself structurally interesting.
@@ -321,9 +327,9 @@ bound asymptotically are in this sense \emph{optimal}.  The closed-form
 data of this section do not by themselves establish the asymptotic
 behavior of the deviation; the larger-cutoff sweep in
 Section~\ref{sec:open_questions} (RH-D) resolves it --- the signed
-deviation crosses the bound for three of four families, so the graphs
+deviation crosses the bound for two of four families, so those graphs
 are \emph{not} asymptotically Ramanujan (the graph-RH here is a
-finite-size statement).
+finite-size statement for them).
 
 % ===================================================================
 \section{Closed-Form Ihara Zetas and Structural Factorizations}
@@ -556,7 +562,7 @@ $P_{12}$ zeros are the first explicit GeoVac objects in this tier.
 Full per-factor Galois table in \texttt{debug/galois\_ihara\_memo.md}.
 
 % ===================================================================
-\section{Functional Equation: the Irregular-Graph Reflection}
+\section{No Functional Equation: Reflection Symmetry from Bipartiteness}
 \label{sec:functional_equation}
 % ===================================================================
 
@@ -591,12 +597,12 @@ polynomial factor in the closed forms
 (\ref{eq:s5_nmax3_closed}) is even in~$s$.
 \end{proposition}
 
-The proposition is a structural statement about undirected graphs:
-the Hashimoto matrix $T$ satisfies $T\sim -T$ under the involution
-$e\mapsto e^{-1}$ on directed edges, so its characteristic polynomial
-is even in its argument.  Proposition~\ref{prop:reflection} is
-therefore a universal property of the Ihara zeta on any undirected
-graph, regular or not.
+The proposition follows from bipartiteness:\ on a bipartite graph
+every closed non-backtracking walk has even length, so
+$\mathrm{tr}\,T^{k} = 0$ for odd $k$ and the characteristic polynomial
+of the Hashimoto matrix $T$ is even.  It is not a property of every
+graph:\ the $K_4$ witness, which has triangles, carries odd terms in
+$\zeta^{-1}$.
 
 \begin{proposition}[Algebraic closure under Galois conjugation]
 \label{prop:galois}
@@ -695,10 +701,10 @@ closed.
 This observation refines the Paper~24~\cite{paper24} universal /
 Coulomb-specific partition one level further:
 \begin{itemize}
-\item $S^3$ (Coulomb, bound): compact, Hopf, calibration $\pi$, discrete
+\item $S^3$ (Coulomb, bound): compact, Hopf, discrete
 spectrum, graph-zeta available.
 \item $S^5$ (HO, Bargmann--Segal): compact complex, Hopf $U(1)$,
-bit-exactly $\pi$-free, discrete spectrum, graph-zeta available.
+discrete spectrum, graph-zeta available.
 \item $H^3$ (Coulomb, continuum): non-compact, no natural Hopf
 bundle, no natural discrete subgroup, continuous spectrum,
 Selberg-zeta \emph{requires external arithmetic input}.
@@ -723,23 +729,26 @@ for $N_{\max}=3$) and a headline match to Paper~25's Hodge data.
 
 \paragraph{Alon--Boppana asymptotics --- resolved (Sprint~2, RH-D).}
 Extending the Ramanujan verdict to $n_{\max},N_{\max}\in\{4,5\}$ in a
-post-draft sweep establishes that the signed deviation grows
-\emph{linearly in $V$} for three of four families (scalar $S^3$
-Coulomb: $R^2=0.994$; scalar $S^5$ Bargmann--Segal: $R^2=0.766$;
-Dirac-$S^3$ Rule~B: $R^2=0.828$).  The Kotani--Sunada bound is crossed
-between $V\approx 30$ and $V\approx 60$ for each of these families:
-scalar $S^3$ at $n_{\max}=5$ ($V=55$, deviation $+0.20$), scalar $S^5$
+post-draft sweep finds the signed deviation rising with $V$ for two
+of four families, consistent with linear growth (scalar $S^5$
+Bargmann--Segal: $R^2=0.766$;\ Dirac-$S^3$ Rule~B: $R^2=0.828$).  The
+Kotani--Sunada bound is crossed by both:\ scalar $S^5$
 at $N_{\max}=5$ ($V=56$, deviation $+0.65$), Dirac-$S^3$ Rule~B at
-$n_{\max}=4$ ($V=60$, deviation $+1.53$).  Only the Dirac-$S^3$ Rule~A
-family appears to remain sub-Ramanujan, with a $1/V$-class envelope
+$n_{\max}=4$ ($V=60$, deviation $+1.53$).  The scalar $S^3$ graph
+splits into its $\ell$-blocks as disconnected components, so its
+non-trivial spectrum is taken per component;\ every component is
+sub-Ramanujan through $n_{\max}=5$ (largest deviation $-0.03$), and
+the apparent $+0.20$ at $n_{\max}=5$ was the Perron value of another
+component.  The Dirac-$S^3$ Rule~A family also remains sub-Ramanujan,
+with a $1/V$-class envelope
 ($|\text{deviation}|\sim V^{-3.05}$, $R^2=0.994$).  The conjectured
 structural mechanism is \emph{mixed-density topology}: $q_{\max}$ is
 set by the single densest vertex while the Perron eigenvalue of $T$ is
 driven by graph volume; as the graph grows, near-regular dense
 sub-blocks appear whose Perron exceeds $\sqrt{q_{\max}}$.  The
 graph-RH for GeoVac is a finite-size statement, secured for
-$n_{\max},N_{\max}\le 3$ and failing asymptotically for the three
-dense families.  The finite-size sign flip (Ramanujan at small size,
+$n_{\max},N_{\max}\le 3$ and failing asymptotically for the two
+families that cross.  The finite-size sign flip (Ramanujan at small size,
 crossing at $V\approx 30$--$60$) is recomputed from the live graph
 spectra in \texttt{tests/test\_paper29\_bound\_crossing.py}; full data
 at \texttt{debug/data/alon\_boppana\_sweep.json}.
@@ -965,12 +974,12 @@ full analysis in \texttt{debug/su2\_wilson\_gauge\_memo.md}.
 The GeoVac Hopf graphs satisfy the graph Riemann Hypothesis --- the
 Kotani--Sunada Ramanujan bound --- strictly, at every small size
 tested ($n_{\max},N_{\max}\le 3$).  Extending to $n_{\max},N_{\max}
-\in\{4,5\}$ in a Sprint-2 follow-up sweep shows that three of four
-graph families cross the bound at modest sizes
-($V\approx 30$--$60$) with a signed deviation growing linearly in $V$,
-so the graph-RH is a finite-size statement for GeoVac, not an
-asymptotic one (Section~\ref{sec:open_questions}, Alon--Boppana
-subsection).  Their Ihara zetas factor with integer coefficients; their
+\in\{4,5\}$ in a Sprint-2 follow-up sweep shows that two of four
+graph families (scalar $S^5$, Dirac-$S^3$ Rule~B) cross the bound at
+modest sizes, so for them the graph-RH is a finite-size statement;\
+the scalar $S^3$ graph stays below the bound on every connected
+component through $n_{\max}=5$ (Section~\ref{sec:open_questions},
+Alon--Boppana subsection).  Their Ihara zetas factor with integer coefficients; their
 zeros are algebraic; no transcendentals enter the zero set, consistent
 with Paper~24's $\pi$-free certificate.  The per-$\ell$-shell
 decomposition of the $S^3$ Coulomb zeta and the $12+22$ / $22+24$
@@ -995,18 +1004,16 @@ We frame this as an observation rather than a claim about the
 classical Riemann Hypothesis.  The graph-RH for a specific family
 of finite graphs is a different object than RH for $\zeta(s)$.  What
 these results establish is a concrete bridge at small graph sizes:
-\emph{our} framework has an Euler product, a functional equation (in
-the irregular-graph form), a critical region, and zeros that respect
+\emph{our} framework has an Euler product, a reflection symmetry
+$s\mapsto -s$ from bipartiteness, a critical region, and zeros that respect
 the Ramanujan bound at $n_{\max},N_{\max}\le 3$, plus a validated
 $\mathbb{Z}_2$ block-decomposition matching the Paper~25 Hopf
 structure.  The Sprint~2 search for a limiting bridge to classical
-$\zeta(s)$ (Track~RH-G) produced a structural redirection: the
-bipartiteness of the GeoVac Hopf graphs blocks any Ihara-side bridge,
-but Paper~28's spectral Dirichlet series (equipped with
-$\chi_{-4}$) remains the open direction on the spectral side.  The
-Ihara zeta therefore terminates as a self-contained structural object
-with validated $\mathbb{Z}_2$ block decomposition, and the Prize-bound
-research program moves to the spectral-zeta side.
+$\zeta(s)$ (Track~RH-G) found that the bipartiteness of the GeoVac
+Hopf graphs blocks any Ihara-side bridge, and Sprint~4 (RH-O,
+\S\ref{sec:open_questions}) closed the direct spectral-side bridge as
+well.  The Ihara zeta therefore terminates as a self-contained
+structural object with validated $\mathbb{Z}_2$ block decomposition.
 
 The computations reported here are recorded in
 \texttt{geovac/ihara\_zeta.py} and \texttt{tests/test\_ihara\_zeta.py},

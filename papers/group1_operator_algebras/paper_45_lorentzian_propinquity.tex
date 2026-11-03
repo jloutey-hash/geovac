@@ -3,14 +3,14 @@
 % Lorentzian propinquity convergence claim is WITHDRAWN (2026-06-09):
 % the main theorem is a degeneracy theorem (the K+-compressed seminorm
 % vanishes).  Surviving: the spatial state-space GH statement and the
-% product-carrier S^3 x S^1_T convergence (signature-agnostic), at
+% product-carrier S^3 x S^1_T convergence (signature-agnostic; proof sketch), at
 % BBB (m, n) = (4, 6) chiral basis with van den Dungen 2016 Krein
 % Dirac.
 %
 % Math.OA / J. Geom. Phys. style; seventh math.OA standalone in the
 % GeoVac series. Siblings: Paper 38 (SU(2) Riemannian state-space GH),
-% Paper 39 (tensor-product state-space GH), Paper 40 (universal 4/pi
-% Fejer-moment constant on compact Lie groups), Paper 42 (Tomita-Takesaki
+% Paper 39 (tensor-product state-space GH), Paper 40 (compact Lie
+% groups), Paper 42 (Tomita-Takesaki
 % modular structure; finite 2pi period automatic for the posited
 % generator, no finite-cutoff four-witness identification, 2026-09-28),
 % Paper 42 Sec. 11 (its Krein-carrier extension; former Paper 43,
@@ -161,7 +161,8 @@ defined on it. The annihilation is thus \emph{multiplier-algebra
 specific}, not absolute:\ the Toeplitz temporal multipliers named below
 as the open target \emph{survive} the same compression
 ($s_{\Kplus}(I_s \otimes S_q) = \omega_q$ exactly; Status note
-2026-06-18), but the surviving seminorm carries no indefinite-signature
+2026-06-18) --- nonzero but still degenerate, since the spatial
+multipliers stay in its kernel --- and the surviving seminorm carries no indefinite-signature
 content even under a genuine temporal Krein involution --- a sharpened
 ``weakens-to-convention'' verdict. What does hold:\ the operator-level
 $\JL$-equivariance of the Berezin/truncation pair;\ the structural
@@ -366,10 +367,10 @@ van~Suijlekom~\cite{vs2021_jgp} and extended to all compact metric
 groups by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023}.
 The adjacent program~\cite{leimbach_vs2024,hekkelman2021,hekkelman_mcdonald2024b,toyota2023}
 covers $\mathbb{T}^{d}$, truncated circle geometry, noncommutative
-integrals on truncations, and groups with polynomial growth, with the
-$4/\pi$ Fej\'er-moment asymptote on compact connected simple Lie groups
-reported in Paper~40~\cite{paper40_unified} (derived at rank~1,
-fit-sensitive at rank~$\ge 2$;\ also adapted to $\SU(2)$ in
+integrals on truncations, and groups with polynomial growth, with
+compact connected simple Lie groups treated in
+Paper~40~\cite{paper40_unified} (whether the Fej\'er-moment constant is
+group-independent is open;\ the $4/\pi$ asymptote adapted to $\SU(2)$ in
 Paper~38~\cite{paper38};\ both with the mass-distribution/multiplier-symbol
 distinction of Lemma~\ref{lem:L2}). All of these are strictly Riemannian.
 
@@ -858,10 +859,8 @@ the asymptotic Fej\'er-moment constant
 \end{equation*}
 in the dual-Coxeter normalisation of the $\SU(2)$ metric ($2/\pi$ on the
 round unit $\sthree$ of \S\ref{sec:manifold};\ Paper~38, tier
-[INTERNAL THEOREM + MEASURED]). Paper~40 reports this constant as universal across compact connected
-\emph{simple} Lie groups with bi-invariant metric (derived at
-rank~1;\ numerically supported, with a fit-sensitive extraction, at
-rank~$\ge 2$). The $\Uone$ factor, which lies outside that class, has a
+[INTERNAL THEOREM + MEASURED]). Whether the constant is the same for
+every compact connected simple Lie group is open (Paper~40). The $\Uone$ factor, which lies outside that class, has a
 separate Fej\'er-on-the-circle rate.
 \end{remark}
 
@@ -919,7 +918,7 @@ $Y^{(3)}_{2\nmax-1,0,0}$ \emph{commutes} with $\DGV$ — the loosest, not the
 tightest, generator. The L3 comparison constant is $C_{3} = 1$
 (eq.~\ref{eq:C3_joint_bound}); since it feeds only the failed-assembly bound
 (\S~\ref{sec:withdrawn_assembly}, which produces no distance) and the
-surviving spatial / product-carrier convergence carries no $C_{3}$ factor,
+surviving spatial convergence and the product-carrier sketch carry no $C_{3}$ factor,
 no result changes. Numerical-panel values in \S\ref{sec:panel} are
 unaffected (they tabulate the spatial rate $\gammaSU$ directly).
 \end{remark}
@@ -1466,16 +1465,16 @@ non-compact carriers is open (Paper~47 carries its own Status note).
 The degeneracy theorem leaves a definite repair specification
 (\S~\ref{sec:open}, Q1(i)):\ a temporal multiplier algebra built from
 Toeplitz compressions of $e^{iqt}$ rather than momentum-diagonal
-polynomials. That prerequisite has now been established, and with it
-the convergence content of the withdrawn assembly is restored at the
-\emph{product-carrier} level — in the translation (action) seminorm
+polynomials. That prerequisite has now been built, and a convergence
+statement is sketched for a different object, the
+\emph{product carrier} in the translation (action) seminorm
 framework of the companion $\sthree$ paper's unconditional theorem,
 not in the Krein--Dirac-commutator framework that produced the
-degeneracy.
+degeneracy. The withdrawn claim is not restored.
 
 \begin{proposition}[Product carrier, action seminorm]
 \label{prop:product_action_seminorm}
-Metrize the truncated joint system $P\,(C(\sthree \times \Sone_{T}))\,P$,
+\textbf{[PROOF SKETCH]} Metrize the truncated joint system $P\,(C(\sthree \times \Sone_{T}))\,P$,
 $P = P_{\nmax} \otimes P_{K}$, by the translation Lipschitz seminorm
 over the product isometry group $SU(2) \times \Uone$,
 \begin{equation*}
@@ -1496,8 +1495,8 @@ and is therefore tautologically Lipschitz-contractive;\
 (iii) the dual arrow is the product lifted state $\xi_{s} \otimes
 \xi_{t}$ (spatial spinor lifted state of the companion paper tensored
 with the temporal Fej\'er amplitude), whose almost-inverse defects are
-the two factor Fej\'er smoothings. Consequently the truncations
-converge to $C(\sthree \times \Sone_{T})$ in van~Suijlekom state-space
+the two factor Fej\'er smoothings. Consequently, by this sketch, the
+truncations converge to $C(\sthree \times \Sone_{T})$ in van~Suijlekom state-space
 Gromov--Hausdorff distance at the additive rate
 \begin{equation}\label{eq:product_rate}
   \mathrm{d}_{\mathrm{GH}}^{\,\mathrm{vS}} \;\le\;
@@ -1519,25 +1518,25 @@ Lipschitz constant \emph{exactly} on single modes,
 $L(S_{q}) = 2\pi q / T$, at every finite window (the
 Connes--van~Suijlekom $\Sone$ pattern~\cite{connes_vs2021};\ driver
 \texttt{debug/wh7\_toeplitz\_temporal\_probe.py}, max error
-$1.4\times10^{-14}$). The joint claims are verified numerically on the
-$j \le 1$ Peter--Weyl window tensored with a $K = 2$ Fourier window
-(\texttt{tests/wh7\_support/wh7\_b1\_joint\_product\_gh.py};\ frozen falsifier
-\texttt{tests/test\_wh7\_b1\_joint.py}):\ Peter--Weyl orthonormality of
-the quadrature at $10^{-15}$;\ pure-factor exactness of
-$L_{\mathrm{joint}}$ at $0$ and $10^{-16}$;\ the Leibniz envelope
+$1.4\times10^{-14}$). The frozen falsifier
+\texttt{tests/test\_wh7\_b1\_joint.py} checks, at the single cutoff of a
+$j \le 1$ Peter--Weyl window tensored with a $K = 2$ Fourier window:\
+Peter--Weyl orthonormality of the quadrature at $10^{-15}$;\
+pure-factor exactness of $L_{\mathrm{joint}}$ at $0$ and $10^{-16}$;\
+the Leibniz envelope
 $\max(L_{s}\|B\|, \|A\| L_{t}) \le L_{\mathrm{joint}}(A \otimes B) \le
 L_{s}\|B\| + \|A\| L_{t}$ on a six-cell panel;\ the joint kernel
-condition;\ the additive smoothing bound $\|\Phi_{s} \otimes
-\Phi_{t}(F) - F\| \le (\gamma_{s} + \gamma_{t})\,\mathrm{Lip}(F)$;\
-and bit-exact reduction to the spatial statement at $\Nt = 1$ (the
-load-bearing Riemannian-limit falsifier of \S~\ref{sec:riemannian_limit},
-preserved in the rebuilt architecture).
+condition on one constant and one non-constant element;\ and
+reduction to the spatial statement at $\Nt = 1$ (the
+Riemannian-limit check of \S~\ref{sec:riemannian_limit}). No test
+checks the dual arrow, the additive smoothing bound at the
+proposition's kernels, or the rate.
 \end{proof}
 
-\begin{remark}[What this restores, and what it does not]
+\begin{remark}[What this sketch indicates, and what it does not]
 \label{rem:not_yet_lorentzian}
-Proposition~\ref{prop:product_action_seminorm} restores the
-convergence content the withdrawn assembly claimed — the temporal
+Proposition~\ref{prop:product_action_seminorm} is a convergence
+statement for a different object than the withdrawn assembly — the temporal
 direction now carries genuine metric weight, because the seminorm is
 generated by the group action, which the Toeplitz multipliers do not
 commute with ($[D_{t}, S_{q}] = \omega_{q} S_{q}$, against
@@ -1807,10 +1806,10 @@ while chirality-flipping generators (Paper~46 Appendix~B) are the
 natural starting point since their Dirac commutators are nonzero.
 Establishing the temporal Toeplitz commutator estimate of
 Lemma~\ref{lem:L4}(d)'s caveat is the first concrete step.
-\textbf{Update (2026-06):} clauses (i) and (iii) are now closed in the
-action-seminorm framework, where the product-carrier convergence holds
-at additive rate
-(Proposition~\ref{prop:product_action_seminorm});\ clause (ii) is
+\textbf{Update (2026-06):} clauses (i) and (iii) are addressed by a
+proof sketch in the action-seminorm framework, where product-carrier
+convergence is sketched at additive rate (dual arrow and rate untested;
+Proposition~\ref{prop:product_action_seminorm});\ clause (ii) is
 bypassed there, since the action seminorm never routes the metric
 through the Dirac. The remaining content of Q1 is therefore exactly
 the \emph{signature}:\ a seminorm in which Lorentzian structure (not
@@ -1835,18 +1834,19 @@ $s_{\Kplus}(I_{s} \otimes S_{q}) = \|[\Pplus\DL\Pplus,
 $(\nmax,\Nt) \in \{(2,3),(3,5)\}$. So Theorem~\ref{thm:kplus_annihilation}
 is \emph{multiplier-algebra specific}:\ the kernel is $100\%$ of the
 spatial$+$momentum-diagonal basis but the Toeplitz temporal algebra
-survives compression --- a nondegenerate seminorm \emph{does} exist on
-the enlarged compressed operator system (structurally, because
+survives compression --- the seminorm is nonzero on the Toeplitz
+generators (structurally, because
 $\JL = \gamma^{0}_{s} \otimes I_{\Nt}$ leaves the temporal block
-untouched). However, that surviving seminorm carries \emph{no}
+untouched), though its kernel still contains the spatial multipliers,
+so it stays degenerate on the enlarged compressed operator system. However, that surviving seminorm carries \emph{no}
 indefinite-signature content:\ replacing $\JL$ by a genuine temporal
 Krein involution $\JL = \gamma^{0}_{s} \otimes \mathrm{sign}(D_{t})$
 (the Wick energy-sign structure, a true involution that anticommutes
 with the spatial Dirac and acts nontrivially on time) leaves
 $s_{\Kplus}(I_{s} \otimes S_{q}) = \omega_{q}$ \emph{bit-exact and
 unchanged}. The $\Kplus$/Toeplitz route is therefore a robust
-``weakens-to-convention'':\ it rescues a metric, but a \emph{Euclidean}
-one --- no choice of temporal Krein involution injects Lorentzian
+``weakens-to-convention'':\ what survives is temporal and
+signature-blind --- no choice of temporal Krein involution injects Lorentzian
 signature into the compressed Lipschitz seminorm. This is independent
 evidence that the signature, if it is metric at all, must enter at the
 state/modular level (the boost candidate above), not through any

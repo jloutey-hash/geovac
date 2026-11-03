@@ -548,6 +548,7 @@ REGISTRY = [
                    r"|calibration\s*~?\s*\$?\\pi\$?\s*\(yes|\$\\pi\$\s+for\s+Coulomb\s+via[^.]{0,80}?\$\\pi\$-free\s+for\s+HO"
                    r"|\$\\pi\$-free\s+certificate\s+live\s+in\s+the\s+potential-specific|the\s+withdrawn\s+one\s+excepted"
                    r"|calibration\s+\$?\\pi\$?\s+reappears|\$\\pi\$\s+re-enters\s+via\s+the\s+Seeley"
+                   r"|Hopf,\s+calibration\s+\$\\pi\$"
                    r"|\(\$\\pi\$-free\s+certificate,\s+Hardy",
         "exempt_if_nearby": withdrawal_marker("coulomb-ho-calibration-pi-layer"),
         "severity": "fail",
@@ -565,6 +566,7 @@ REGISTRY = [
             "papers/group6_precision_observations/paper_35_time_as_projection.tex",
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
             "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
@@ -7166,6 +7168,292 @@ REGISTRY = [
             'README.md',
             'papers/INDEX.md',
             'docs/claim_test_matrix.md',
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p40-universal-4pi-per-lambda",
+        # Paper 40 (PI-approved re-tier 2026-11-03): in its own Casimir variable Lambda
+        # (dual-Coxeter, Cas(j) = j(j+1), n_max = 2 j_max + 1 so Lambda ~ n/2) the SU(2) Fejer
+        # moment is (2/pi) log Lambda / Lambda -- Paper 38's (4/pi) log n / n. The rank-2 values
+        # (SU(3) 1.243, Sp(2) 1.087, G2 1.177) were rescaled by sqrt(C_gen(ad)/h^v) with unscaled
+        # distances; the same pipeline gives 0.45 on SU(2). Whether the leading constant is the
+        # same for every simple G is OPEN.
+        "pattern": r"universal\s+Fej\\'er-moment\s+(?:constant|bound)"
+                   r"|universal\s+\$4/\\pi\$"
+                   r"|\$4/\\pi\$\s+(?:is\s+)?(?:\\emph\{)?universal"
+                   r"|universality\s+of\s+(?:the\s+constant\s+)?\$4/\\pi\$"
+                   r"|leading\s+coefficient\s+\$4/\\pi\$\s+universal"
+                   r"|\\frac\{4\s*\\log\s*\\Lammax\}\{\\pi\\,\\Lammax\}"
+                   r"|\\frac\{4\}\{\\pi\}\s*\\cdot\s*\\frac\{\\log\s*\\Lammax\}\{\\Lammax\}"
+                   r"|Fej\\'er-moment\s+constant\s+is\s+universal"
+                   r"|universal\s+\$\(4/\\pi\)"
+                   r"|reported\s+(?:as\s+)?universal"
+                   r"|\\emph\{universal\}\s+across\s+the\s+simple"
+                   r"|universal\s+asymptotic\s+constant",
+        "exempt_if_nearby": withdrawal_marker("p40-universal-4pi-per-lambda"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL, code reviewer + PM; PI-approved re-tier). 4/pi is per n, not per Lambda; rank>=2 universality OPEN (convention mismatch).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p39-order-residual-doubled-model",
+        # Paper 39: the finite-cutoff order-zero/one residuals 5.5e-2 -> 7.9e-2 and 1.0e-1 -> 2.0e-1
+        # were measured on the doubled Fock/Weyl model; on the true CH window the single-factor
+        # residuals are 1/2, 5/9, 11/16 (order zero) and 3/4, 5/3, 21/8 (order one), n_max = 1..3
+        # (tests/test_true_window_real_structure.py).
+        "pattern": r"5\.5\s*\\times\s*10\^\{-2\}\s*\\to\s*7\.9\s*\\times\s*10\^\{-2\}"
+                   r"|1\.0\s*\\times\s*10\^\{-1\}\s*\\to\s*2\.0\s*\\times\s*10\^\{-1\}",
+        "exempt_if_nearby": withdrawal_marker("p39-order-residual-doubled-model"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL, code reviewer; PM checked against the true-window test). Doubled-model residuals stated as the paper's finite-cutoff defect.",
+        "files": [
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p29-s3-crossing-disconnected-artifact",
+        # Paper 29 RH-D: the S^3 Coulomb "crossing" at n_max = 5 (+0.20) is the Perron value of
+        # another connected component (the S^3 graph splits into l-blocks); per component every
+        # S^3 graph through n_max = 5 is sub-Ramanujan. Two of four families cross (S^5 at
+        # N_max = 5, Dirac Rule B at n_max = 4). PM-verified 2026-11-03 with an independent
+        # non-backtracking builder.
+        "pattern": r"three\s+of\s+four\s+(?:graph\s+)?families"
+                   r"|including\s+\$(?:S\^3|\\sthree)\$\s+Coulomb\s+at\s+\$(?:n_\{\\max\}|\\nmax)\s*=\s*5\$"
+                   r"|Coulomb:\s+\$R\^2=0\.994\$"
+                   r"|scalar\s+\$S\^3\$\s+at\s+\$n_\{\\max\}=5\$"
+                   r"|larger\s+sizes\s+cross\s+it"
+                   r"|three\s+of\s+four\s+families\s+cross",
+        "exempt_if_nearby": withdrawal_marker("p29-s3-crossing-disconnected-artifact"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL, code reviewer + PM independent check). The S^3 bound-crossing was a disconnected-graph artifact; two of four families cross.",
+        "files": [
+            "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+        ],
+        "cited_by": {
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "remediated + reviewed 2026-11-03 (PM) -- executive summary, Headline 1 and the Ramanujan remark reread",
+            "docs/claims_register.md": "remediated + reviewed 2026-11-03 (PM) -- row 15 reread",
+        },
+    },
+    {
+        "id": "p29-graph-rh-overclaim",
+        "pattern": r"Every\s+tested\s+GeoVac\s+graph\s+satisfies"
+                   r"|associated\s+functional\s+equation\s+takes\s+the\s+irregular-graph"
+                   r"|universal\s+property\s+of\s+the\s+Ihara\s+zeta\s+on\s+any\s+undirected\s+graph"
+                   r"|a\s+functional\s+equation\s+\(in\s+the\s+irregular-graph\s+form\)"
+                   r"|Prize-bound"
+                   r"|Dirichlet\s+series\s+of\s+Paper\s*~?\s*28\s+remains\s+the\s+open\s+direction"
+                   r"|remains\s+the\s+open\s+direction\s+on\s+the\s+spectral\s+side"
+                   r"|Functional\s+Equation:\s+the\s+Irregular-Graph\s+Reflection",
+        "exempt_if_nearby": withdrawal_marker("p29-graph-rh-overclaim"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). Paper 29: Ramanujan holds only at n,N <= 3; the s -> -s symmetry is evenness from bipartiteness, not a functional equation; the spectral-side RH bridge is closed.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p45-kplus-metric-rescue",
+        "pattern": r"nondegenerate\s+seminorm\s+(?:\\emph\{does\}\s+)?exists?"
+                   r"|rescues\s+a\s+metric"
+                   r"|convergence\s+content\s+of\s+the\s+withdrawn\s+assembly\s+is\s+restored"
+                   r"|restores\s+the\s+convergence\s+content"
+                   r"|prerequisite\s+has\s+now\s+been\s+established"
+                   r"|clauses\s+\(i\)\s+and\s+\(iii\)\s+are\s+now\s+closed",
+        "exempt_if_nearby": withdrawal_marker("p45-kplus-metric-rescue"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). The Toeplitz K+ seminorm is nonzero but degenerate (spatial multipliers stay in its kernel); the product-carrier proposition is a different object and does not restore the withdrawn claim.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+            "tests/test_lorentzian_toeplitz_kplus.py",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "dirac-seminorm-degenerate-on-true-window",
+        "pattern": r"unlike\s+it,\s+is\s+non-degenerate\s+at"
+                   r"|truthful\s+Camporesi--Higuchi\s+data\s+at\s+finite\s+\$\\nmax\$\s+has\s+the\s+property",
+        "exempt_if_nearby": withdrawal_marker("dirac-seminorm-degenerate-on-true-window"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). On the true CH window the Dirac-commutator seminorm is a norm (n_max <= 3, Paper 38 rem:dirac_degeneracy); the degeneracy belongs to the doubled model.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "ch-s3-triple-called-even",
+        "pattern": r"unital,\s+even,\s+real\s+spectral\s+triple\s+of\s+metric\s+dimension",
+        "exempt_if_nearby": withdrawal_marker("ch-s3-triple-called-even"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). The round-S^3 CH triple is odd (KO-3); a grading exists only on the chirality-doubled model; a group-G triple is even only when dim G is even.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "doubled-carrier-prop-envelope-lorentzian",
+        "pattern": r"structural\s+match\s+that\s+establishes"
+                   r"|propagation,\s+Weyl\s+sector"
+                   r"|distinction\s+is\s+genuinely\s+introduced\s+by\s+the\s+Lorentzian"
+                   r"|imposed\s+by\s+the\s+Lorentzian\s+geometry\s+itself"
+                   r"|natural\s+setting\s+for\s+(?:any\s+|a\s+)?future\s+Lorentzian-propinquity"
+                   r"|candidate\s+Lorentzian-propinquity\s+metric"
+                   r"|and\s+a\s+Lorentzian-propinquity\s+convergence\s+argument"
+                   r"|=\s*2\$\s+for\s+every\s+\$\\nmax\s*\\ge\s*2\$"
+                   r"|\\text\{for\s+every\s+\}\s*\\nmax\s*\\ge\s*2,"
+                   r"|Lorentzian-geometric\s+ceiling|present\s+Lorentzian\s+construction\s+sharpens",
+        "exempt_if_nearby": withdrawal_marker("doubled-carrier-prop-envelope-lorentzian"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). Paper 32's prop = 2 is the scalar system; the Weyl/achievable prop = 2 is measured at n_max <= 3; the envelope dependence comes from chirality doubling (present at N_t = 1), not Lorentzian geometry; no Lorentzian-propinquity route is live (Paper 45).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p40-rank2-decisive-and-metrization",
+        "pattern": r"rank-invariant\s+reading\s+is\s+favoured\s+decisively\s+over"
+                   r"|decisively\s+favouring\s+Reading\s+A"
+                   r"|disfavours\s+independently"
+                   r"|many\s+multiples\s+of\s+the\s+bias"
+                   r"|moves\s+toward\s+unity\s+as\s+the\s+panel"
+                   r"|Gromov--Hausdorff\s+distance\s+for\s+metric\s+spectral\s+triples,\s+with",
+        "exempt_if_nearby": withdrawal_marker("p40-rank2-decisive-and-metrization"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). Paper 40: the A-vs-B discrimination is decisive at G2 only (SU(3) non-discriminating, Sp(2) fit-unstable); the convergence is in the translation-seminorm metrization, Dirac-seminorm convergence open.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "group1-synthesis-tier-drift",
+        "pattern": r"rotation\s+generator\s+preserving"
+                   r"|J_\{\\mathrm\{polar\}\}(?:\|_\{W_\{L\}\}|\^\{W\})"
+                   r"|further\s+shows\s+that\s+\$M_\{1\}"
+                   r"|arc\s+closes\s+the\s+convergence\s+side",
+        "exempt_if_nearby": withdrawal_marker("group1-synthesis-tier-drift"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL). Paper 42's wedge generator is the relabelling diag(2m_j) (the polar rotation does not preserve the wedge); Paper 32 reads M1-M3 as sub-cases (not shows); Paper 38 proves the commutative factor only.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p50-hkst-sphere-partition-attribution",
+        "pattern": r"Tajdini~\\cite\{hartman_kruthoff_shaghoulian_tajdini2019\}\s+showed\s+that\s+sphere",
+        "exempt_if_nearby": withdrawal_marker("p50-hkst-sphere-partition-attribution"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL; PM checked arXiv). The d = 2..6 sphere-partition-function match to cut-off AdS is Caputa-Datta-Shyam, arXiv:1902.10893, not HKST.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
+        ],
+        "cited_by": {},
+    },
+    {
+        "id": "p44-vandungen-no-parity-restriction",
+        "pattern": r"no\s+parity-dimension\s+restriction",
+        "exempt_if_nearby": withdrawal_marker("p44-vandungen-no-parity-restriction"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-03 (/qa group1 FULL; PM read arXiv:1505.01939 p.7). van den Dungen Prop. 4.1's proof uses even dimension.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/atlas.md",
+            "docs/geovac_positioning.md",
+            "docs/geovac_onepager.md",
         ],
         "cited_by": {},
     },

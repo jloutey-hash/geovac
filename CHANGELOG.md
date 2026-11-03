@@ -7,6 +7,90 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.1.2] - 2026-11-03
+
+`/qa group1` FULL (incremental), PI-invoked as the next target of the 2026-11-03 sequence, plus the
+PI-approved Paper 0 retitle. Unseeded; standing calibration record cited (FULL #2 19/21 seeds, 0/8 FP;
+DELTA #1 9/9; DELTA #2 8/9). Snapshot 9b3c2e01 (`refs/qa/group1-full-2026-11-03`); one worktree per code
+reviewer. **Verdict: FAIL. RESEARCH-GRADE not earned** (owner defects in Papers 29, 39, 40, 44, 45, 50, 53).
+**Coverage 0/314 -> 191/314 (61%)** (cite 1/10: most bibliographies changed in remediation; Papers 32/38 left to the trunk record; Paper 45 code and Paper 40 changed units wait for the next run). Papers 32 and 38 were reviewed whole in the trunk run the same day and
+entered this run only where a group1 paper restates them.
+
+### Paper 0 retitle (PI-approved)
+- "Angular Momentum as Information Geometry: Isotropic Packing and the Recurring Angular Cross-Section" ->
+  "Counting Angular Momentum Labels by Isotropic Packing" (the old title read as an identity claim). Bibitems in
+  26 citing files updated; C11 corpus-wide PASS; C10 58/58. The outreach PDF still shows the old title until rebuilt.
+
+### Panel (Opus unless noted)
+- Deterministic, whole group1: C5/C12, C10, C11, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C24, C25 all PASS
+  before remediation; re-run after (below). C23 not exercised.
+- Claims 4 chunks, synthesis C9 1, citations 2 (Opus: > 50 bibitems), code 8 (Opus on 39/40/45/53, Sonnet on
+  29/42/44/50), completeness critic 1.
+- Code: every inline-cited test run (all passing); constants re-derived by independent routes (F_s, F_D to 50
+  digits; gamma_SU panel; S(n), D(n) to n = 6; joint moments; disk boundary limit); guards fire-tested.
+- Citations: 0 fabricated sources or wrong arXiv IDs; 5 material mischaracterizations (below).
+
+### LARGE findings and remediation (gate-first; every entry proven to fire on HEAD and stay silent after)
+- **Paper 29 (OWNER).** The S^3 "bound crossing" at n_max = 5 was the Perron value of another connected
+  component (the S^3 graph splits into l-blocks); PM re-derived per component with an independent
+  non-backtracking builder (-0.238, -0.200, -0.029). Two of four families cross (S^5 at N_max = 5, Dirac Rule B
+  at n_max = 4), not three. Also: "every tested graph" Ramanujan; a "functional equation" that is evenness from
+  bipartiteness (the "any undirected graph" proof was false; K4 refutes it); the spectral-side RH bridge called
+  open and "Prize-bound" though the body closes it; a calibration-pi bullet. C16 `p29-s3-crossing-disconnected-artifact`,
+  `p29-graph-rh-overclaim`, calibration entry widened. Synthesis and claims register row 15 follow.
+- **Paper 40 (OWNER; PI decision "fix + re-tier").** In its own Casimir variable (Lambda ~ n/2) the SU(2)
+  Fejer moment is (2/pi) log Lambda/Lambda, i.e. Paper 38's (4/pi) log n/n; the paper wrote 4/pi per Lambda.
+  The rank-2 constants were rescaled by sqrt(C_gen(ad)/h^vee) with unscaled distances (the same pipeline gives
+  0.450 on SU(2)), so the universality comparison was unsupported: group-independence and the rank >= 2 rate
+  form re-tiered to [OPEN]; the cancellation mechanism demoted to a proposal (Remark). Also the metrization was
+  unnamed (translation seminorm; Dirac-seminorm convergence open) and the rank-2 "decisive" verdict covered
+  SU(3) and Sp(2). C16 `p40-universal-4pi-per-lambda`, `p40-rank2-decisive-and-metrization`; C25
+  `p40-general-g-conditional` re-tiered. Restatements swept in Papers 18, 32, 38, 39, 41, 42, 44, 45, 50, 55, the
+  field guide, both syntheses, README, INDEX, claims register row 9 and a test label.
+- **Paper 39 (OWNER).** Order-zero/one residuals quoted from the doubled model (true window: 1/2, 5/9, 11/16 and
+  3/4, 5/3, 21/8); the translation seminorm called non-degenerate "unlike" the Dirac one (a norm on the true
+  window). C16 `p39-order-residual-doubled-model`, `dirac-seminorm-degenerate-on-true-window`.
+- **Paper 44 (OWNER).** prop_ach = 2 stated "for every n_max" (measured at n_max <= 3; the cited Paper 32 value is
+  the scalar system); the envelope dependence credited to Lorentzian geometry (chirality doubling, present at
+  N_t = 1); a live Lorentzian-propinquity route (the Krein-positive seminorm vanishes, Paper 45); van den Dungen's
+  Prop. 4.1 said to have no parity restriction (its proof uses even dimension; PM read the PDF). C16
+  `doubled-carrier-prop-envelope-lorentzian`, `p44-vandungen-no-parity-restriction`.
+- **Paper 45 (OWNER).** The Toeplitz probe "rescues a metric" (the seminorm stays degenerate); the
+  product-carrier proposition "restores the convergence content" and is "verified" (a different object; its
+  frozen test checks one cutoff; now [PROOF SKETCH]). C16 `p45-kplus-metric-rescue`.
+- **Paper 42 (SURFACE).** The round-S^3 CH triple called even with a grading; Paper 32's scalar prop = 2 called
+  the "right host" for the doubled carrier. C16 `ch-s3-triple-called-even`.
+- **Paper 50.** The d = 2..6 cut-off-AdS sphere match credited to HKST; it is Caputa-Datta-Shyam (PM checked
+  arXiv; JHEP 05 (2019) 112). S^7-S^11 closed forms marked "DONE" with no test -> [MEASURED; no regression test].
+  C16 `p50-hkst-sphere-partition-attribution`.
+- **Paper 53 (OWNER).** Lebesgue-constant table wrong at small s (tail truncation): 7.10, 3.29, 2.03, 1.42, 1.23,
+  1.09, 1.02, 1.0045 (PM re-ran, stable over 200-3200 zeros); its guard shares the error.
+- **Synthesis (SURFACE).** The wedge generator called J_polar "preserving W" (Paper 42: a relabelling); Lemma
+  L1' degeneracy blamed on the true window; "shows" for Paper 32's "reads"; "the arc closes the convergence side".
+  C16 `group1-synthesis-tier-drift`.
+- Citations also fixed: Paper 40 Fejer reconstruction re-pointed (van Suijlekom 2021; Leimbach-van Suijlekom);
+  Paper 42 Tomita venue; Paper 44 literature grouping.
+
+### Self-check (bounded)
+- Round 1: Paper 40 2 OWNER-LARGE (stale rank >= 2 single-log sentence; cancellation stated as holding); Papers
+  42/44/45/50 2 OWNER-LARGE ("Lorentzian-geometric ceiling"; product-carrier "established/holds/closed");
+  Papers 29/39/53 0 (two more universality residues in Paper 39 fixed as family). Fixed; C16 widened.
+- Round 2: Paper 40 4 OWNER-LARGE (proposal in a theorem environment -> Remark; Step 3 and structural reading
+  conditional; abstract rate and "close the gap" scoped); Papers 44/45/50 0. **Self-check closed with an open
+  owner fix:** Paper 40's round-2 edits are unreviewed and its units stay unstamped.
+
+### Raised to the PI
+- Paper 40 re-tier (decided: fix + re-tier). A consistent-convention recomputation of the rank-2 constants is
+  the route back to any group-independence claim.
+- `docs/qa/group1.done.md` C8 still reads "Paper 40 = 4/pi rate universal" and frames Paper 50 as "bit-exact";
+  criteria are frozen during a run, so the update needs PI approval.
+
+### Changed
+- Papers 0 (title), 18, 29, 32, 38, 39, 40, 41, 42, 44, 45, 50, 53, 55, 57 and 22 others (Paper 0 bibitems); the
+  field guide, group1 and group3 syntheses; README, INDEX, claims register; `debug/qa/check_retracted_terms.py`
+  (13 new entries, 3 widened), `debug/qa/claim_registry.py` (p40 entry re-tiered); two test docstrings/labels;
+  `docs/qa/group1.debt.md` (new: SMALL list, owed guards, critic gaps).
+
 ## [v6.1.1] - 2026-11-03
 
 `/qa trunk` FULL (incremental), PI-invoked ("We're going to run through a bunch of QA for papers"). Unseeded;

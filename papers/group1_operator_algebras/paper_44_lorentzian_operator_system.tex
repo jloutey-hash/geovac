@@ -6,7 +6,7 @@
 % Math.OA / J. Geom. Phys. style; sixth math.OA standalone in the
 % GeoVac series. Siblings: Paper 38 (SU(2) state-space GH convergence),
 % Paper 39 (tensor-product state-space GH convergence), Paper 40
-% (universal 4/pi Fejer-moment constant on compact Lie groups), Paper 42
+% (compact Lie groups; Fejer-moment constant group-independence open), Paper 42
 % (Tomita-Takesaki modular structure; finite 2pi period, automatic for
 % the posited integer-spectrum generator -- no finite-cutoff four-witness
 % identification, 2026-09-28); its Sec. 11 absorbs the former Paper 43
@@ -121,8 +121,9 @@ multiplicatively closed) and exhibit a witness pair lifting the
 Paper~32~\S~III witness verbatim. The principal structural finding is
 that the propagation number is \emph{envelope-dependent}:\ targeting
 the natural Weyl-doubled achievable envelope $\dim_\Weyl^2 \cdot \Nt$,
-we obtain $\prop(\Op_{\nmax, \Nt}^L) = 2$ for every $\nmax \ge 2$,
-matching Paper~32~\S~III verbatim; targeting the full $\Bcal(\Krein)$
+we measure $\prop(\Op_{\nmax, \Nt}^L) = 2$ at $\nmax \in \{2, 3\}$
+\textbf{[MEASURED]}, the value Paper~32~\S~III finds on the scalar Fock
+system; targeting the full $\Bcal(\Krein)$
 envelope $\dim_\Krein^2$, we obtain $\prop = \infty$ at every cell.
 The Weyl-doubling and the commutative temporal subalgebra
 \emph{block} scalar multipliers from generating chirality-flipping or
@@ -131,14 +132,12 @@ correct natural target for scalar-multiplier closure on the spinor
 bundle. A separate substantive finding is that the Krein-positive
 restriction is trivial:\ every chirality-doubled scalar multiplier
 $M \oplus M$ commutes with the chirality-swap fundamental symmetry
-$\JL$, so $\Op^{L,+} = \Op^L$ exactly. The Krein-positive program is
-shifted from the operator-system substrate (where it is automatic) to
-the state level, which is the natural setting for any future
-Lorentzian-propinquity convergence argument. The construction is the
-foundation on which any subsequent continuum Lorentzian-propinquity
-program would build (the former Sprint L3b\footnote{Sprint/track designations are anchors into the project's internal chronicle (\texttt{CHANGELOG.md} in the repository).} propinquity route is descoped with Paper~45, 2026-06-09;\ see~\S~\ref{sec:open}). Honest scope:
+$\JL$, so $\Op^{L,+} = \Op^L$ exactly. The natural Krein-positive
+seminorm device is annihilated (Paper~45), so any remaining route has
+to carry the signature somewhere other than the seminorm (the former
+Sprint L3b\footnote{Sprint/track designations are anchors into the project's internal chronicle (\texttt{CHANGELOG.md} in the repository).} propinquity route is descoped with Paper~45, 2026-06-09;\ see~\S~\ref{sec:open}). Honest scope:
 this paper closes the operator-system substrate at finite cutoff;
-continuum / GH-limit / Lorentzian-propinquity convergence is open. No
+Lorentzian-propinquity convergence is descoped (Paper~45). No
 published Lorentzian propinquity construction exists as of May 2026:\
 Latr\'emoli\`ere~2017/2023~\cite{latremoliere_metric_st_2017} and
 Leimbach--van~Suijlekom~2024~\cite{leimbach_vs2024} are strictly
@@ -253,9 +252,9 @@ Targeting the Weyl-doubled \emph{achievable} envelope
 $\dim_\achievable = \dim_\Weyl^2 \cdot \Nt$,
 \begin{equation}\label{eq:prop_lor_ach_intro}
    \prop_{\achievable}(\Op_{\nmax, \Nt}^L) \;=\; 2
-   \qquad \text{for every } \nmax \ge 2, \; \Nt \ge 1,
+   \qquad \text{at } \nmax \in \{2, 3\} \ \textbf{[MEASURED]},
 \end{equation}
-verbatim with Paper~32~\S~III. Targeting the full $\Bcal(\Krein)$
+the value Paper~32~\S~III finds on the scalar Fock system. Targeting the full $\Bcal(\Krein)$
 envelope $\dim_\Krein^2$,
 \begin{equation}\label{eq:prop_lor_full_intro}
    \prop_{\mathrm{full}}(\Op_{\nmax, \Nt}^L) \;=\; \infty
@@ -294,21 +293,20 @@ develops the propinquity for metric spectral triples;\ the
 explicit Gromov--Hausdorff convergence on a non-trivial example was
 deferred to ``elsewhere'' three times in \cite{connes_vs2021}
 (lines~220--221, 1101, 2616--2617 of arXiv:2004.14115v2). Subsequent
-work by
-Hekkelman~\cite{hekkelman2022},
-Leimbach--van~Suijlekom~\cite{leimbach_vs2024},
-Toyota~\cite{toyota2023},
-Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
-farsi_latremoliere2025} addresses the flat structures $S^1$, $T^d$,
-and Berezin--Toeplitz $S^2$ (Hekkelman--McDonald's noncommutative
+work treats the flat structures $S^1$ and $T^d$
+(Hekkelman~\cite{hekkelman2022},
+Leimbach--van~Suijlekom~\cite{leimbach_vs2024}), discrete groups of
+polynomial growth (Toyota~\cite{toyota2023}) and collapse and analytic
+paths of metrics (Farsi--Latr\'emoli\`ere~\cite{farsi_latremoliere2024,
+farsi_latremoliere2025}) (Hekkelman--McDonald's noncommutative
 integral on truncations~\cite{hekkelman_mcdonald2024b} is related but is
 not a convergence result). For the non-abelian case
 $\sthree = \SU(2)$, the scalar state-space convergence is due to
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025} and the spinor (Camporesi--Higuchi)
 instance is the present author's Paper~38 \cite{paper38}; the tensor-product extension was closed in
-Paper~39~\cite{paper39}; the compact-simple Fej\'er-moment constant $4/\pi$
-is reported universal in Paper~40~\cite{paper40_unified} (derived at
-rank~1;\ a rank-uniform proof is a named gap). All of these
+Paper~39~\cite{paper39}; Paper~40~\cite{paper40_unified} treats compact
+Lie groups (whether the Fej\'er-moment constant is group-independent is
+open). All of these
 are strictly Riemannian.
 \item[(b)] \textbf{Lorentzian noncommutative geometry.}
 Strohmaier~\cite{strohmaier2006},
@@ -798,11 +796,13 @@ reaches $\dim_\C \mathcal{V}$.
 
 \begin{theorem}[Achievable-envelope propagation]
 \label{thm:prop_envelope_dependent}
-For every $(\nmax, \Nt)$ with $\nmax \ge 2$ and $\Nt \ge 1$:
+\textbf{[MEASURED]} At the cells $(\nmax, \Nt) \in \{(2,1), (2,3),
+(2,5), (3,1)\}$ of the table below:
 \begin{equation}\label{eq:prop_ach}
-   \prop_{\achievable}(\Op_{\nmax, \Nt}^L) \;=\; 2.
+   \prop_{\achievable}(\Op_{\nmax, \Nt}^L) \;=\; 2;
 \end{equation}
-For every $(\nmax, \Nt)$ with $\nmax \ge 2$ and $\Nt \ge 1$ at finite
+larger cutoffs are untested.
+\textbf{[SYMBOLIC]} For every $(\nmax, \Nt)$ with $\nmax \ge 2$ and $\Nt \ge 1$ at finite
 cutoff:
 \begin{equation}\label{eq:prop_full_inf}
    \prop_{\mathrm{full}}(\Op_{\nmax, \Nt}^L) \;=\; \infty.
@@ -831,10 +831,10 @@ for any $\Nt \ge 1$ and $\nmax \ge 2$. So
 $\prop_{\mathrm{full}}(\Op^L) = \infty$.
 \end{proof}
 
-\begin{proof}[Proof of \eqref{eq:prop_ach}, computational verification]
-The Riemannian Paper~32~\S~III result is $\prop(\Op_{\nmax}^\Weyl) =
-2$ for the Weyl-sector operator system on $\HGV^{\Weyl, \nmax}$
-(Proposition~\ref{prop:paper32_prop}, see~\S~\ref{sec:context}). Under
+\begin{proof}[Reduction and computational verification of \eqref{eq:prop_ach}]
+The reduction uses $\prop(\Op_{\nmax}^\Weyl) = 2$ for the Weyl-sector
+operator system on $\HGV^{\Weyl, \nmax}$
+(Proposition~\ref{prop:paper32_prop}, measured). Under
 the chirality-doubling map $\Op_{\nmax}^\Weyl \to
 \Op_{\nmax}^{\mathrm{Full\,Dirac}}$, $M_W \mapsto M_W \oplus M_W$,
 the propagation number is preserved with target envelope
@@ -883,20 +883,20 @@ which is closed under multiplication and so has no nontrivial
 propagation depth to drive).
 \end{proof}
 
-\begin{proposition}[Paper~32~\S~III propagation, Weyl sector]
+\begin{proposition}[Weyl-sector propagation]
 \label{prop:paper32_prop}
-For every $\nmax \in \{2, 3, 4\}$,
+\textbf{[MEASURED]} At $\nmax \in \{2, 3\}$,
 $\prop(\Op_{\nmax}^\Weyl) = 2$ on the envelope
 $\mathrm{env}(\Op^\Weyl) = \Mat_{\dim_\Weyl}(\C)$, with
 $\dim(\Op^\Weyl) < \dim_\Weyl^2 = \dim(\mathrm{env})$ strictly.
 \end{proposition}
 
 \begin{proof}
-Paper~32~\S~III, \texttt{prop:propagation\_number}, computational
-verification in \texttt{tests/test\_operator\_system.py} (24 tests
-passing, $\sim 20$ s CPU time). The result is invariant under three
-SO(4) radial-overlap placeholder conventions (Paper~32~\S~III,
-discussion after the proposition statement).
+The $\Nt = 1$ rows of the table above
+(\texttt{tests/test\_operator\_system\_lorentzian.py}). Paper~32~\S~III's
+\texttt{prop:propagation\_number} is the same statement for the scalar
+Fock operator system ($N = 5, 14, 30$ at $\nmax = 2, 3, 4$;\
+\texttt{tests/test\_operator\_system.py}), not the Weyl sector.
 \end{proof}
 
 \subsection{Why both numbers are real}\label{sec:both_real}
@@ -926,8 +926,9 @@ The Riemannian Paper~32~\S~III situation has no analogous distinction:\
 on the scalar Fock-projected $\sthree$ Hilbert space (Paper~32
 Definition~3.2), there is no chirality doubling and no temporal
 factor, so the achievable and full envelopes coincide. The
-distinction is genuinely introduced by the Lorentzian extension:\ the
-chirality doubling enters at the spinor level (Sprint WH1-R3.5
+distinction comes from chirality doubling, which is already present at
+$\Nt = 1$ on the Riemannian chirality-doubled model (the table above),
+so it is signature-blind:\ the chirality doubling enters at the spinor level (Sprint WH1-R3.5
 \texttt{full\_dirac\_operator\_system.py}, which the Riemannian
 Paper~32~\S~III analysis chose not to invoke for clarity); the
 temporal factor enters at the L2-B Krein-space level. Both
@@ -965,8 +966,8 @@ $\prop = 2$. The Paper~32 witness pair (raise-then-lower at the top
 shell) and the propagation-2 result are then two facets of the same
 single envelope.
 
-The present Lorentzian construction sharpens this Riemannian
-template into a dichotomy that has no analog in
+The chirality-doubled carrier (already at $\Nt = 1$) sharpens this
+Riemannian scalar template into a dichotomy that has no analog in
 Paper~32~\S~III. Under the Weyl-doubled achievable envelope
 $\mathcal{V}_\achievable$ — the structural target for
 scalar-multiplier closure on the chirality-doubled spinor bundle —
@@ -987,10 +988,9 @@ subalgebra together cannot generate the chirality-flipping or
 non-diagonal-temporal directions of $\Bcal(\Krein)$ at any finite
 $k$ (Theorem~\ref{thm:prop_envelope_dependent}
 eq.~\eqref{eq:prop_full_inf}). This is a real structural ceiling
-imposed by the Lorentzian geometry itself — the chirality doubling
-forced by the BBB $(m, n) = (4, 6)$ Krein structure plus the
-commutative temporal slot — not a residual closure failure of the
-truncation.
+of the chirality-doubled construction --- present already at
+$\Nt = 1$, so not a Lorentzian effect --- not a residual closure
+failure of the truncation.
 
 The operator system's informative content is therefore
 \emph{envelope-relative}. On the achievable envelope, Paper~44
@@ -998,7 +998,7 @@ preserves Paper~32's Connes--vS structural reading exactly:\
 sub-envelope linear dimension, full second-power dimension, $\prop =
 2$. On the full envelope, the operator system is ``even more
 sub-informative'' than its Riemannian template, because it hits the
-Lorentzian-geometric ceiling before reaching $\Bcal(\Krein)$. We
+chirality-doubling ceiling before reaching $\Bcal(\Krein)$. We
 therefore name the achievable envelope as the natural target for the
 Connes--vS propagation question on the Lorentzian extension, with
 the full-envelope $\prop = \infty$ recorded as a structural ceiling
@@ -1081,13 +1081,10 @@ positivity is automatic at the level of the operators themselves.
 The non-trivial Krein-positivity question is therefore not at the
 operator-substrate level but at the \emph{state} level:\ which states
 on $\Op^L$ assign positive expectation values to the Krein-positive
-matrix elements?  The Wasserstein--Kantorovich state space on
-$\Krein^+$ is the natural setting (cf.\
-\cite{latremoliere_metric_st_2017}~\S~3, the Riemannian state-space
-propinquity), and a Lorentzian-propinquity convergence argument
-(the former Sprint L3b route, descoped with Paper~45;\
-see~\S~\ref{sec:open}) would presumably work at the
-state level rather than the operator-system substrate.
+matrix elements?  A Wasserstein--Kantorovich distance on those states
+would need a Lipschitz seminorm, and the natural Krein-positive one is
+identically zero (Paper~45);\ the former Sprint L3b route is descoped
+with Paper~45 (see~\S~\ref{sec:open}).
 
 A non-trivial Krein-positive restriction at the substrate level would
 require enlarging $\Op^L$ to include chirality-mixing operators
@@ -1306,8 +1303,8 @@ This is the principal open question. The Riemannian
 template — Paper~38~\cite{paper38}'s state-space Gromov--Hausdorff
 convergence on $\sthree = \SU(2)$, Paper~39~\cite{paper39}'s
 tensor-product extension, Paper~40~\cite{paper40_unified}'s
-$4/\pi$ Fej\'er-moment constant on compact simple Lie groups (reported
-universal, derived at rank~1) — relies on
+compact-Lie-group extension (its Fej\'er-moment constant group-independence
+open) — relies on
 four lemmas (L1$'$ chirality-doubled operator system, L2 central
 spectral Fejér kernel, L3 Lipschitz spinor bound, L4 Berezin
 reconstruction) together with the lifted-state construction.  A fifth
@@ -1378,11 +1375,10 @@ Krein-positivity question from the operator-substrate to the state
 level. The natural object is the set of positive linear functionals
 $\omega:\ \Op^L \to \C$ with $\omega(A^\dagger A) \ge 0$ for $A \in
 \Op^L$ \emph{and} $\omega$ respects the Krein indefinite form (i.e.\
-$\omega(\JL A \JL) = \omega(A)$, the natural Krein invariance). The
-Wasserstein--Kantorovich distance on this state space is then the
-candidate Lorentzian-propinquity metric. To our knowledge, no
-construction of such an object appears in the published NCG literature
-as of May 2026.
+$\omega(\JL A \JL) = \omega(A)$, the natural Krein invariance). A
+Wasserstein--Kantorovich distance on this state space needs a
+Lipschitz seminorm, and the natural Krein-positive one vanishes
+identically (Paper~45), so this route has no metric to build on.
 
 \subsection{Nieuviarts twist-morphism applicability}\label{sec:open_nieuviarts}
 
@@ -1396,7 +1392,8 @@ companion proceedings note~\cite{nieuviarts2025b_proceedings}
 acknowledges that the odd-dimensional case is open. The present
 construction explicitly bypasses this by working directly with the
 van~den~Dungen~2016~\cite{vandungen2016} Proposition~4.1 lift to a
-Krein space, which has no parity-dimension restriction. If the
+Krein space, which applies because the signature-$(3,1)$ spacetime is
+even-dimensional (its proof uses a grading). If the
 Nieuviarts construction were extended to odd dimensions, it would
 provide an alternative substrate for a Lorentzian convergence program
 (the Sprint L3b program itself is descoped,
@@ -1476,28 +1473,26 @@ The principal structural finding is the
 \emph{envelope dependence of the propagation number}
 (Theorem~\ref{thm:prop_envelope_dependent}). Targeting the
 Weyl-doubled achievable envelope $\dim_\Weyl^2 \cdot \Nt$, the
-Lorentzian extension preserves the Connes--vS propagation-2 result
-verbatim (eq.~\eqref{eq:prop_ach}, matching Paper~32~\S~III, matching
-the Toeplitz operator system $C(S^1)^{(n)}$ of
-\cite{connes_vs2021}~\S 4). Targeting the full
+propagation number is $2$ at the measured cutoffs
+(eq.~\eqref{eq:prop_ach}), the value of Paper~32~\S~III's scalar
+system and of the Toeplitz operator system $C(S^1)^{(n)}$ of
+\cite{connes_vs2021}~\S 4. Targeting the full
 $\Bcal(\Krein)$ envelope, the propagation number is $\infty$
 (eq.~\eqref{eq:prop_full_inf}):\ chirality-doubling and a
 commutative temporal subalgebra block the scalar-multiplier
 construction from generating chirality-flipping operators or
-non-diagonal temporal operators. This envelope-dependence is a real
-structural feature of the chirality-doubled Lorentzian extension,
-not visible in the scalar Riemannian template.
+non-diagonal temporal operators. This envelope-dependence comes from
+chirality doubling and is present already at $\Nt = 1$;\ it is not
+visible in the scalar Riemannian template.
 
 A separate substantive finding is that the Krein-positive restriction
 to the natural sub-operator-system $\Op^{L, +}$ equals $\Op^L$
 itself (Proposition~\ref{prop:krein_positivity_trivial}). Every
 chirality-doubled scalar multiplier $M \oplus M$ commutes with the
 chirality-swap fundamental symmetry $\JL$, so Krein positivity is
-automatic at the operator-substrate level. The non-trivial
-Krein-positivity question is at the \emph{state} level, where the
-Wasserstein--Kantorovich state-space construction on Krein-positive
-states is the natural setting for a future Lorentzian-propinquity
-argument.
+automatic at the operator-substrate level. The natural Krein-positive
+seminorm vanishes identically (Paper~45), so no state-level metric
+is built on it.
 
 \medskip\noindent
 \textbf{Honest scope.} This paper closes the operator-system
@@ -1543,8 +1538,8 @@ scalar compact groups, and Paper~38~\cite{paper38} for the spinor
 state-space Gromov--Hausdorff level (commutative factor, unconditional, Fej\'er-moment
 constant $4/\pi$); Paper~40~\cite{paper40_unified} addresses the compact-Lie-group
 family (unconditionally at rank~$1$, for general $G$ conditionally on the
-per-group spin-window decomposition) with Fej\'er-moment constant $4/\pi$ (reported
-universal on the simple groups). A Lorentzian analog of Paper~38's
+per-group spin-window decomposition;\ whether its Fej\'er-moment constant
+is the same for every simple group is open). A Lorentzian analog of Paper~38's
 convergence (a continuum Lorentzian metric on $\sthree \times \R$, whether
 propinquity or state-space GH;\ Paper~38 itself proves only the
 Riemannian state-space GH statement) remains open. The present paper, together with

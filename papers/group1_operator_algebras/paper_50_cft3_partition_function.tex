@@ -190,7 +190,8 @@ route) and the strong-form construction~\cite{paper46} is
 correspondingly descoped on the natural substrate, so a Lorentzian
 quantum-metric convergence remains an open target. What survives is
 the norm-resolvent non-compact-carrier closure~\cite{paper47} at the
-spectral level and Paper~45's signature-agnostic product-carrier rate.
+spectral level and Paper~45's signature-agnostic product-carrier
+convergence sketch (dual arrow and rate untested).
 The Krein--Mondino--S\"amann bridge~\cite{paper48} and the
 OSLPLS strong-form bridge~\cite{paper49} proposed a synthetic-Lorentzian
 geometric interpretation;\ both are descoped and archived (see the
@@ -1057,10 +1058,11 @@ on round $S^{d}$ ($d$ odd) lies in the ring
 \]
 of dimension $(d-1)/2 + 1$ (top atom $\zeta(d)/\pi^{d-1}$). This is
 verified (symbolically or by PSLQ identification) at $S^{3}$, $S^{5}$
-(Theorems~\ref{thm:scalar_S5},~\ref{thm:dirac_S5}), and --- by direct
+(Theorems~\ref{thm:scalar_S5},~\ref{thm:dirac_S5}), and
+\textbf{[MEASURED; no regression test]} by direct
 high-precision computation (Door~1 graduation, 2026-06-03; $260$ dps,
 frozen basis, reconstruction error $\lesssim 10^{-261}$, decoy-controlled)
---- at $S^{7}$, $S^{9}$, and $S^{11}$. The conformally coupled scalar on
+at $S^{7}$, $S^{9}$, and $S^{11}$. The conformally coupled scalar on
 $S^{11}$, for instance, is
 \begin{align}
 \zeta'_{\mathrm{sc}, S^{11}}(0) =\;
@@ -1077,10 +1079,7 @@ $\zeta(3)$ coefficient exactly zero, confirming a clean signature:\
 $\log 2$ (M3's ring, level~2) and the M1$\times$M3 cross-products
 $\zeta(2k+1)/\pi^{2k}$.
 
-\emph{Erratum.} An earlier version of this remark reported $S^{7}$ as a
-structural non-match (``no PSLQ relation in the tested bases''). That was a
-\emph{false negative} from an under-resolved search. The genuine $S^{7}$
-scalar relation
+The $S^{7}$ scalar relation
 \[
 \zeta'_{\mathrm{sc}, S^{7}}(0) =
 -\tfrac{1}{512}\log 2
@@ -1091,12 +1090,12 @@ scalar relation
 has integer coefficients of order $10^{4}$, but locking it requires the
 value to $\gtrsim 200$ digits; a $30$-digit value run against
 $\mathrm{maxcoeff} = 10^{16}$ sits below the resolution threshold and
-returns spurious non-detection. Verified independently at $200$ dps
+returns spurious non-detection. It was found at $200$ dps
 (reconstruction error $\approx 2.4 \times 10^{-202}$) and reproduced by the
-Door~1 driver at $260$ dps. The ladder therefore \emph{closes} (these are
-closed-form evaluations of continuum spectral zeta functions): every
-odd rung $S^{3}, \dots, S^{11}$ has a rational-coefficient closed form in
-$\mathcal{R}_{d}$, with no transcendental outside $\mathcal{R}_{d}$.
+Door~1 driver at $260$ dps. Every odd rung $S^{3}, \dots, S^{11}$
+therefore has a rational-coefficient closed form in $\mathcal{R}_{d}$
+(closed-form evaluations of continuum spectral zeta functions;\
+symbolic at $S^{3}$, $S^{5}$, measured by PSLQ at $S^{7}$--$S^{11}$).
 
 \textbf{Dual-basis projection (special to $S^{3}$, unaffected).} Isolating
 a single ring generator using only the $(\text{scalar}, \text{Dirac})$ pair
@@ -1150,9 +1149,7 @@ The first row is evaluated on the continuum spectra directly and does
 not involve the truncation. The truncated triples on which the second
 and third rows are computed converge as
 $\nmax \to \infty$ in the van~Suijlekom state-space Gromov--Hausdorff
-distance to the continuum triple per~\cite{paper38} (with the
-signature-agnostic product-carrier rate of~\cite{paper45} on the
-temporal factor);\ that convergence does not produce the F values of the
+distance to the continuum triple per~\cite{paper38};\ that convergence does not produce the F values of the
 first row. The second row is a finite-cutoff
 degeneracy count with no continuum identification claimed;\ the third row is an analogy with the
 Euclidean rotation generator only, and no operator convergence
@@ -1217,7 +1214,7 @@ Free scalar (conformal) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE
 Free Dirac (CH) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M3-ring + M1$\times$M3 \\
 Free scalar (conformal) on $S^{5}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} & DONE Sec.~\ref{sec:s5_extension} & M3-ring + M1$\times$M3 extended \\
 Free Dirac (CH) on $S^{5}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} (their $F_f$ is per Dirac component, $\times 4$ for the full four-component $S^{5}$ Dirac;\ which normalisation Sec.~\ref{sec:s5_extension} uses is the open ``Weyl'' labelling question) & DONE Sec.~\ref{sec:s5_extension} & M3-ring + M1$\times$M3 extended \\
-Free scalar (conformal) on $S^{7}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} & DONE (in-ring $\mathcal{R}_{7}$, $\geq 200$ dps; Erratum to Rem~\ref{rem:general_d_conjecture}) & M3-ring + M1$\times$M3 extended \\
+Free scalar (conformal) on $S^{7}$ & general-$d$ formula of Giombi--Klebanov~\cite{giombi_klebanov2015} & MEASURED (in-ring $\mathcal{R}_{7}$, $\geq 200$ dps, no regression test; Rem~\ref{rem:general_d_conjecture}) & M3-ring + M1$\times$M3 extended \\
 \midrule
 Free Maxwell on $\sthree$ & --- & open: $\sthree$ Maxwell-scalar duality gives same as scalar & expected M3-ring + M1$\times$M3 \\
 Free Maxwell on $S^{5}$ & --- & TODO; needs transverse 1-form Hodge spectrum & open \\
@@ -1285,7 +1282,9 @@ on $\sthree$ --- a structural classification, not a reproduction of the
 holographic computation.
 
 \paragraph{Relation to the TT-bar cut-off AdS picture.}
-Hartman, Kruthoff, Shaghoulian, and Tajdini~\cite{hartman_kruthoff_shaghoulian_tajdini2019}
+Building on the higher-dimensional TT-bar deformation of Hartman,
+Kruthoff, Shaghoulian, and Tajdini~\cite{hartman_kruthoff_shaghoulian_tajdini2019},
+Caputa, Datta, and Shyam~\cite{caputa_datta_shyam2019}
 showed that sphere partition functions of TT-bar-deformed large-$N$
 holographic CFT$_d$ in $d \in \{2, 3, 4, 5, 6\}$ non-perturbatively
 match bulk computations of AdS$_{d+1}$ at finite radial cut-off. A
@@ -1368,9 +1367,7 @@ state-space GH convergence machinery to simple compact Lie groups
 (for general $G$ conditionally on the per-group spin-window decomposition). A natural
 catalogue extension is CFT-on-$G$ partition functions for various
 $G$ (heat-kernel zeta on $\mathrm{SU}(3)$, $\mathrm{Sp}(2)$, etc.)
-where the framework's Fej\'er-moment constant $4/\pi$ is reported universal
-(Paper~40;\ derived at rank~1) but the
-specific transcendental ring may differ.
+where the specific transcendental ring may differ.
 
 \item \textbf{Spectral-action coefficients.} The
 Connes-Chamseddine~\cite{chamseddine_connes1997} spectral action
@@ -1409,8 +1406,7 @@ content is Paper~42~\S~11), 44, 45, 46, 47, 48, 49.
 The previous eleven established operator-algebraic legitimacy of the
 framework's discrete-spectral-triple truncation and the spectral-truncation
 convergence theory at the Riemannian and tensor-product levels and, for
-compact connected semisimple Lie groups (conditionally, for general $G$;\
-the universal Fej\'er-moment constant for the simple ones), together with the norm-resolvent
+compact connected semisimple Lie groups (conditionally, for general $G$), together with the norm-resolvent
 non-compact-carrier closure at the spectral level.  The Lorentzian
 \emph{propinquity} levels---strong-form Lorentzian (Paper~46) and both
 synthetic-Lorentzian bridges (Papers~48, 49)---are \emph{descoped} by
@@ -1567,6 +1563,10 @@ JHEP \textbf{07} (1998) 023, arXiv:hep-th/9806087.
 \bibitem{hartman_kruthoff_shaghoulian_tajdini2019} T.~Hartman, J.~Kruthoff,
 E.~Shaghoulian, and A.~Tajdini, \emph{Holography at finite cutoff with a
 $T^{2}$ deformation}, JHEP \textbf{03} (2019) 004, arXiv:1807.11401.
+
+\bibitem{caputa_datta_shyam2019} P.~Caputa, S.~Datta, and V.~Shyam,
+\emph{Sphere partition functions \& cut-off AdS}, JHEP \textbf{05}
+(2019) 112, arXiv:1902.10893.
 
 \bibitem{chamseddine_connes1997} A.~H.~Chamseddine and A.~Connes,
 \emph{The spectral action principle},

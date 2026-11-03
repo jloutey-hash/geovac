@@ -230,9 +230,11 @@ CLAIMS = {
         statement="Paper 40 generalises Paper 38 to compact connected semisimple Lie groups "
                   "unconditionally at rank 1 and, for general G, conditionally on the per-group "
                   "spin-window decomposition; scalar compact-group convergence is Gaudillot-Estrada--"
-                  "van Suijlekom's. The 4/pi universality is reported for SIMPLE G only (derived at "
-                  "rank 1, numerically supported at rank >= 2); for several simple factors the constant "
-                  "is open (semisimple corollary withdrawn 2026-10-02).",
+                  "van Suijlekom's. The leading Fejer-moment constant is Paper 38's at rank 1 "
+                  "((2/pi) log Lambda/Lambda in Paper 40's Casimir variable = (4/pi) log n/n in Paper 38's); "
+                  "whether it is the same for every simple G is OPEN: the rank-2 extractions used a "
+                  "normalisation that does not reproduce the SU(2) anchor (re-tiered 2026-11-03, PI-approved). "
+                  "For several simple factors the constant is open (semisimple corollary withdrawn 2026-10-02).",
         owner="papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
         owner_anchor=r"(?<!un)conditionally on the per-group", owner_tier=r"for general \$G\$", tier="CONDITIONAL",
         mention=r"Paper~?\s?40\b[^.;]{0,120}(generali[sz]|compact|semisimple|universal)|all\s+(simple\s+)?compact\s+(connected\s+)?(semisimple\s+)?Lie\s+groups",
@@ -240,8 +242,10 @@ CLAIMS = {
         overclaim=r"resolved by\s+Paper[~\s]?40|closed it on the universal|settled by the present author|"
                   r"machinery to all simple compact|closes it positively|was closed in\s+Paper[~\s]?40|"
                   r"universal\s+(?:across|over)\s+(?:the\s+)?compact\s+(?:connected\s+)?(?:\*\*)?semisimple|"
-                  r"rigorous\s+(?:at\s+)?rank",
-        load_bearing=True, changed="2026-10-02"),
+                  r"rigorous\s+(?:at\s+)?rank|"
+                  r"4/\\pi\$?[^.;]{0,40}universal|universal[^.;]{0,30}\$?4/\\pi|"
+                  r"numerically\s+supported[^.;]{0,30}rank\s*\$?\\ge\s*2",
+        load_bearing=True, changed="2026-11-03"),
     "p1-ladder-exact": dict(
         statement="Paper 1's ladder operators reproduce n on INTERIOR shells and l(l+1) on every shell "
                   "exactly [SYMBOLIC PROOF] (a two-line commutator identity, w_{n-1}^2 - w_n^2 = -n/2); not "

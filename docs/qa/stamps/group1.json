@@ -1,0 +1,960 @@
+{
+ "target": "group1",
+ "units": {
+  "cite:papers/group1_operator_algebras/paper_53_disk_propinquity.tex": {
+   "date": "2026-11-03",
+   "hash": "53dfb63be1f3b59b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex": {
+   "date": "2026-11-03",
+   "hash": "9e07c435e8bab116",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": {
+   "date": "2026-11-03",
+   "hash": "4b08db79ec5681fa",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": {
+   "date": "2026-11-03",
+   "hash": "a872617ec134fe13",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": {
+   "date": "2026-11-03",
+   "hash": "e367246a0927eda9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex": {
+   "date": "2026-11-03",
+   "hash": "85f0b7f768f779c8",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex": {
+   "date": "2026-11-03",
+   "hash": "688eba61fc9c4864",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "code:papers/group1_operator_algebras/paper_53_disk_propinquity.tex": {
+   "date": "2026-11-03",
+   "hash": "f4a58100862a545b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Closed-Form Ihara Zetas and Structural Factorizations": {
+   "date": "2026-11-03",
+   "hash": "aaf8e845479006f7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Closed-Form Ihara Zetas and Structural Factorizations / Algebraicity of zeros": {
+   "date": "2026-11-03",
+   "hash": "e7980219f3c75a60",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Closed-Form Ihara Zetas and Structural Factorizations / S^3 Coulomb at n_ =3 : per- -shell": {
+   "date": "2026-11-03",
+   "hash": "d4401b905607ba1a",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Closed-Form Ihara Zetas and Structural Factorizations / S^5 Bargmann--Segal at N_ =2": {
+   "date": "2026-11-03",
+   "hash": "db11e1a9465542eb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Closed-Form Ihara Zetas and Structural Factorizations / S^5 Bargmann--Segal at N_ =3 : the 12+22": {
+   "date": "2026-11-03",
+   "hash": "745b6a30a0c50d3e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Ihara Zeta and Graph-RH": {
+   "date": "2026-11-03",
+   "hash": "9bc69a76f59a8a68",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Ihara Zeta and Graph-RH / Hashimoto non-backtracking operator": {
+   "date": "2026-11-03",
+   "hash": "16c303d9efce1cf7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Ihara Zeta and Graph-RH / Ihara--Bass determinantal formula": {
+   "date": "2026-11-03",
+   "hash": "8258c945a21727c3",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Ihara Zeta and Graph-RH / Ramanujan graphs and graph-RH": {
+   "date": "2026-11-03",
+   "hash": "6704ae30f321e5f4",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Scope Boundary: No Natural Hyperbolic Quotient": {
+   "date": "2026-11-03",
+   "hash": "669dbed16e665d11",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::Scope Boundary: No Natural Hyperbolic Quotient / The Wick rotation is clean but continuous": {
+   "date": "2026-11-03",
+   "hash": "cf8600edc887e5a3",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::The GeoVac Hopf Graphs": {
+   "date": "2026-11-03",
+   "hash": "2342ca28e777a30c",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::The GeoVac Hopf Graphs / Combinatorial summary": {
+   "date": "2026-11-03",
+   "hash": "73bcc0b94d817910",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::The GeoVac Hopf Graphs / S^3 Coulomb graph": {
+   "date": "2026-11-03",
+   "hash": "187d71ba1100ca1e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex::The GeoVac Hopf Graphs / S^5 Bargmann--Segal graph": {
+   "date": "2026-11-03",
+   "hash": "1f21c281e966dcf5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "50b4fc0ddd27c12e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Conclusion": {
+   "date": "2026-11-03",
+   "hash": "6bae385f13c3ac34",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "2646c88a4be385d0",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Numerical verification": {
+   "date": "2026-11-03",
+   "hash": "2ad69aeb3899343a",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Related work and significance": {
+   "date": "2026-11-03",
+   "hash": "8212b799e43a99bb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Related work and significance / Obstructions to the cross-manifold extensions": {
+   "date": "2026-11-03",
+   "hash": "3da4a3d047ab18ff",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Related work and significance / Place in the Connes--van Suijlekom / Latr 'emoli `ere": {
+   "date": "2026-11-03",
+   "hash": "4cf92778e0fb06f7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::Related work and significance / Significance for the multi-focal-composition program": {
+   "date": "2026-11-03",
+   "hash": "50ca6077399345f4",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The setting": {
+   "date": "2026-11-03",
+   "hash": "e19c65e2ee89baf6",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The setting / Single-factor recall: the rescaled Camporesi--Higuchi triple": {
+   "date": "2026-11-03",
+   "hash": "3759b78ae09ad08a",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The setting / The tensor-product spectral triple": {
+   "date": "2026-11-03",
+   "hash": "2efcc68a251f54f9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas": {
+   "date": "2026-11-03",
+   "hash": "add46274d09fa0f9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas / Lemma L1 ' -T: tensor-product operator system": {
+   "date": "2026-11-03",
+   "hash": "b089d1f01da3677d",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas / Lemma L2-T: joint central spectral Fej 'er kernel": {
+   "date": "2026-11-03",
+   "hash": "28f206a1bf15a0e6",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas / Lemma L3-T: joint Lipschitz comparison by compression on the": {
+   "date": "2026-11-03",
+   "hash": "85e3d428181a84ff",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas / Lemma L4-T: joint Berezin reconstruction": {
+   "date": "2026-11-03",
+   "hash": "a915f871dbec817d",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas / Lemma continuum-Lip-T: translation seminorm equals classical": {
+   "date": "2026-11-03",
+   "hash": "5eda09280ebc3acb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex::The tensor lemmas / Lemma lifted-state-T: the lifted-state route": {
+   "date": "2026-11-03",
+   "hash": "a2b30030af545f57",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "2cc26da6794a4b30",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Discussion and open problems": {
+   "date": "2026-11-03",
+   "hash": "2a27493bd29ed7da",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Discussion and open problems / Cross-manifold tensor products and the Coulomb/HO": {
+   "date": "2026-11-03",
+   "hash": "9ea66862cb73dcd0",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Discussion and open problems / Lorentzian / Wick-rotated analog": {
+   "date": "2026-11-03",
+   "hash": "7328d06dff4cc646",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Discussion and open problems / Relation to Rieffel's coadjoint-orbit programme": {
+   "date": "2026-11-03",
+   "hash": "e0ec273a33c3b159",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Setup": {
+   "date": "2026-11-03",
+   "hash": "175f3032d42663a1",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Setup / Distance convention": {
+   "date": "2026-11-03",
+   "hash": "4ede0aae1b931ec9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Setup / Kostant cubic Dirac operator": {
+   "date": "2026-11-03",
+   "hash": "8162dd17de1f1336",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::Setup / Spectral truncation in Casimir-cutoff form": {
+   "date": "2026-11-03",
+   "hash": "cc9b6a10c32b5fe4",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::The five lemmas": {
+   "date": "2026-11-03",
+   "hash": "e101b578e8b83071",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::The five lemmas / Lemma L1 ' : chirality-doubled operator system": {
+   "date": "2026-11-03",
+   "hash": "a17f3e630e8d91b5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::The five lemmas / Lemma L3: Lipschitz comparison by compression": {
+   "date": "2026-11-03",
+   "hash": "63dab1bfaedb658c",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex::The five lemmas / Lemma L5: state-space GH assembly via the approximation pair": {
+   "date": "2026-11-03",
+   "hash": "892c6c6b99c8c66e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "3d40104720ec0486",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Computational verification protocol": {
+   "date": "2026-11-03",
+   "hash": "c420381dbd06e89b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Computational verification protocol / Module API": {
+   "date": "2026-11-03",
+   "hash": "7ab1564af114c7f2",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Computational verification protocol / Test coverage": {
+   "date": "2026-11-03",
+   "hash": "b69b56606b4ccb70",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Computational verification protocol / Wall time and reproducibility": {
+   "date": "2026-11-03",
+   "hash": "426143dfc8e7f6b1",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Conclusion and open questions": {
+   "date": "2026-11-03",
+   "hash": "55800da5f8d53f86",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Four witnesses, one construction (by construction)": {
+   "date": "2026-11-03",
+   "hash": "4560e330431b4f82",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff": {
+   "date": "2026-11-03",
+   "hash": "901c2e96eea69486",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Axiom audit at Bizi--Brouder--Besnard signature (4, 6)": {
+   "date": "2026-11-03",
+   "hash": "9cd693ff9a3242c0",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Hilbert--Schmidt orthogonality: a chirality-parity identity": {
+   "date": "2026-11-03",
+   "hash": "b3138f710af2fc65",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Honest scope at finite cutoff": {
+   "date": "2026-11-03",
+   "hash": "7010d87107ed89aa",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Krein-carrier period closure at finite cutoff": {
+   "date": "2026-11-03",
+   "hash": "88343f32a257a7b9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Lorentzian wedge, Gibbs state and generator": {
+   "date": "2026-11-03",
+   "hash": "05e8da4ab9ec5cfd",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Riemannian-limit recovery at = 1": {
+   "date": "2026-11-03",
+   "hash": "a71b8fbcbdbbd0ac",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / Signature-independence of the H_ local residual": {
+   "date": "2026-11-03",
+   "hash": "7b5f4c13332776bb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / The Krein carrier and the Lorentzian Dirac": {
+   "date": "2026-11-03",
+   "hash": "683f1f141d7d854b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff / The M3 sub-mechanism is sectional in n_ fock -parity": {
+   "date": "2026-11-03",
+   "hash": "2c4267dec9994bea",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Lorentzian-readiness audit and Riemannian scope": {
+   "date": "2026-11-03",
+   "hash": "1c828f2a7e6fed59",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Lorentzian-readiness audit and Riemannian scope / Footnote on the Nieuviarts twist morphism": {
+   "date": "2026-11-03",
+   "hash": "51d83a1c04c8df63",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Lorentzian-readiness audit and Riemannian scope / The 28-projection Lorentzian transfer audit": {
+   "date": "2026-11-03",
+   "hash": "e7c82edfe8bd16e9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Related work and scope": {
+   "date": "2026-11-03",
+   "hash": "cd0c91f868e2c1c3",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Bisognano--Wichmann modular structure at finite cutoff": {
+   "date": "2026-11-03",
+   "hash": "59911956e48db9d5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Bisognano--Wichmann modular structure at finite cutoff / Four-witness unification and unit normalisation": {
+   "date": "2026-11-03",
+   "hash": "e4dfc3b9f3eee367",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Bisognano--Wichmann modular structure at finite cutoff / The hemispheric wedge projector": {
+   "date": "2026-11-03",
+   "hash": "abf4f899c77a8f10",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Bisognano--Wichmann modular structure at finite cutoff / The wedge-restricted Gibbs state": {
+   "date": "2026-11-03",
+   "hash": "5abbd08e2bb73965",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- )": {
+   "date": "2026-11-03",
+   "hash": "d869da370921674f",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / Bit-exact period closure at the Tomita level": {
+   "date": "2026-11-03",
+   "hash": "836f1068a8565f53",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / Spectrum of K_": {
+   "date": "2026-11-03",
+   "hash": "4029e34fd667b7d7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / State-space GH bound cross-check": {
+   "date": "2026-11-03",
+   "hash": "6e49e90f7d246865",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / The GNS Hilbert--Schmidt space": {
+   "date": "2026-11-03",
+   "hash": "84b17ad5263a00eb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / The Tomita antilinear conjugation": {
+   "date": "2026-11-03",
+   "hash": "cda74bcd0a5b3532",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / The modular S operator and polar decomposition": {
+   "date": "2026-11-03",
+   "hash": "2ae8f1fe406b7fc9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- )": {
+   "date": "2026-11-03",
+   "hash": "6ecb2ff504b67a2a",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- ) / Operator-system non-leakage": {
+   "date": "2026-11-03",
+   "hash": "cabb75fe32c7aa58",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- ) / The geometric generator": {
+   "date": "2026-11-03",
+   "hash": "a62fc20785fa8f95",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- ) / The geometric modular flow": {
+   "date": "2026-11-03",
+   "hash": "01ed0c4ab2c49e76",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The truncated Camporesi--Higuchi spectral triple": {
+   "date": "2026-11-03",
+   "hash": "f2eead9bde59022b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The truncated Camporesi--Higuchi spectral triple / State-space GH convergence to the continuum": {
+   "date": "2026-11-03",
+   "hash": "50b2ef5f79bbb6dc",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Unified closure": {
+   "date": "2026-11-03",
+   "hash": "6dadb2041ede18b5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Unified closure / Cross-witness collapse at the algebra-action level": {
+   "date": "2026-11-03",
+   "hash": "9dc10939bb359635",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Unified closure / Flow conjugacy": {
+   "date": "2026-11-03",
+   "hash": "faabc3e9afe1fce2",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Unified closure / The posited local Hamiltonian": {
+   "date": "2026-11-03",
+   "hash": "c35f09aacd5ca6b4",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "1d95b6b09bd1e59b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Appendix: Section reference for the sec:propagation Sec. 5 context cro": {
+   "date": "2026-11-03",
+   "hash": "1cbb462ab77adf60",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Connection to the Krein hemispheric wedge of Paper 42": {
+   "date": "2026-11-03",
+   "hash": "a65ec0701ef54edd",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Envelope dependence of the propagation number": {
+   "date": "2026-11-03",
+   "hash": "f4a8d0786a59d8e0",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Envelope dependence of the propagation number / The two envelopes": {
+   "date": "2026-11-03",
+   "hash": "7a2392d90c62c472",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "b7eb1bb1fa75f83f",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Introduction / Outline": {
+   "date": "2026-11-03",
+   "hash": "efb22dfa712d2fea",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Introduction / Relation to the Krein-carrier section of Paper 42": {
+   "date": "2026-11-03",
+   "hash": "083477418e3f4253",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Open questions (and the descoped Sprint L3b outlook)": {
+   "date": "2026-11-03",
+   "hash": "ae69efa884a67956",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Open questions (and the descoped Sprint L3b outlook) / Cross-manifold W2b": {
+   "date": "2026-11-03",
+   "hash": "db4cc4e7a87835bc",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Open questions (and the descoped Sprint L3b outlook) / Higher-rank compact Lie group extension": {
+   "date": "2026-11-03",
+   "hash": "e9e8f617d36b17d7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Open questions (and the descoped Sprint L3b outlook) / Multi-focal-composition wall": {
+   "date": "2026-11-03",
+   "hash": "b81656f32f72634b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Riemannian limit at = 1": {
+   "date": "2026-11-03",
+   "hash": "0584f4007c87ddaf",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Setup: Krein space, Lorentzian Dirac, BBB axiom audit": {
+   "date": "2026-11-03",
+   "hash": "c9f99b1296b39275",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Setup: Krein space, Lorentzian Dirac, BBB axiom audit / Spatial scalar multipliers on the chirality-doubled bundle": {
+   "date": "2026-11-03",
+   "hash": "787e7ac449121003",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Setup: Krein space, Lorentzian Dirac, BBB axiom audit / Temporal multipliers on ^": {
+   "date": "2026-11-03",
+   "hash": "7c1a03be8bfbafff",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Setup: Krein space, Lorentzian Dirac, BBB axiom audit / The BBB axiom audit at (m, n) = (4, 6)": {
+   "date": "2026-11-03",
+   "hash": "8d593a5716d1758e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Setup: Krein space, Lorentzian Dirac, BBB axiom audit / The Krein space _ ,": {
+   "date": "2026-11-03",
+   "hash": "b39f6e99adc8eca0",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Setup: Krein space, Lorentzian Dirac, BBB axiom audit / The Lorentzian Dirac": {
+   "date": "2026-11-03",
+   "hash": "446f5ff6ba956d22",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::The Lorentzian truncated operator system": {
+   "date": "2026-11-03",
+   "hash": "1763a79ba538d98b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::The witness pair": {
+   "date": "2026-11-03",
+   "hash": "9c09ce0bf2b5724d",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "709d88f309b7ad4f",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Discussion": {
+   "date": "2026-11-03",
+   "hash": "4d7935254b61dd36",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Discussion / Four-witness Wick-rotation connection": {
+   "date": "2026-11-03",
+   "hash": "e546ec7b4af4af07",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Discussion / Relation to Mondino--S \"amann": {
+   "date": "2026-11-03",
+   "hash": "557e45c95ab6a710",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Discussion / Structural-skeleton scope": {
+   "date": "2026-11-03",
+   "hash": "3d22da15159266e5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "51154c06f458fea5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Introduction / Honest scope and named gaps": {
+   "date": "2026-11-03",
+   "hash": "18c7688da03f4592",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Introduction / Outline": {
+   "date": "2026-11-03",
+   "hash": "fda3ec1aca457e7d",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Introduction / What this paper does": {
+   "date": "2026-11-03",
+   "hash": "a1dfe2a83c57376b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Lemma L1 ' : the operator-system substrate": {
+   "date": "2026-11-03",
+   "hash": "7e7b2276a30cc1fa",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification and Riemannian-limit recovery": {
+   "date": "2026-11-03",
+   "hash": "9624f86e82a5f6d1",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification and Riemannian-limit recovery / Asymptotic rate consistency": {
+   "date": "2026-11-03",
+   "hash": "35add391f77fa8c2",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification and Riemannian-limit recovery / Riemannian-limit recovery (load-bearing falsifier)": {
+   "date": "2026-11-03",
+   "hash": "4ce8cdeedb7d4f5e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification and Riemannian-limit recovery / Verification panel": {
+   "date": "2026-11-03",
+   "hash": "7fd886d8a34c48ee",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification panel data": {
+   "date": "2026-11-03",
+   "hash": "b771cd1d9f96ec45",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries": {
+   "date": "2026-11-03",
+   "hash": "00cfa761d20fb40e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Compact-temporal manifold and Wick-rotated metric": {
+   "date": "2026-11-03",
+   "hash": "611b3a42b049b8a8",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Joint central spectral Fej 'er kernel": {
+   "date": "2026-11-03",
+   "hash": "fdb3dacb20dac8b5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Joint gradient norms": {
+   "date": "2026-11-03",
+   "hash": "a06c0cf8f656ccaf",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Krein space and fundamental symmetry": {
+   "date": "2026-11-03",
+   "hash": "65c4e9e552637e79",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Krein-positive subspace and weak-form propinquity": {
+   "date": "2026-11-03",
+   "hash": "1210afb03016fb21",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Lorentzian Dirac operator": {
+   "date": "2026-11-03",
+   "hash": "12c80cb673d892d2",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries / Truncated Lorentzian operator system": {
+   "date": "2026-11-03",
+   "hash": "443fe729d2bc9707",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Symbolic Plancherel calculation for the joint Fej 'er symbol": {
+   "date": "2026-11-03",
+   "hash": "f0ccc432b1a33301",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly": {
+   "date": "2026-11-03",
+   "hash": "f1fdd44945830cfb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly / Anatomy of the failed assembly": {
+   "date": "2026-11-03",
+   "hash": "3492b65f3901583b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly / The annihilation theorem": {
+   "date": "2026-11-03",
+   "hash": "3eb383b012b0d117",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly / The spatial convergence statement": {
+   "date": "2026-11-03",
+   "hash": "0b98776d392e2a96",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly / The tunneling pair": {
+   "date": "2026-11-03",
+   "hash": "9517fd1a193f3c07",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The three analytical lemmas": {
+   "date": "2026-11-03",
+   "hash": "9e18887290075661",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The three analytical lemmas / Lemma L4: joint Berezin reconstruction": {
+   "date": "2026-11-03",
+   "hash": "0834bf4a667f9b3e",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "97c600c82da5177b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Bulk-side scope": {
+   "date": "2026-11-03",
+   "hash": "d6cfd5d54a87f99a",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Casini--Huerta--Myers analogy": {
+   "date": "2026-11-03",
+   "hash": "ec1e6a0893588de3",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Casini--Huerta--Myers analogy / Continuum CHM hemisphere modular Hamiltonian": {
+   "date": "2026-11-03",
+   "hash": "622b0a1cb817ecce",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Casini--Huerta--Myers analogy / Framework wedge generator": {
+   "date": "2026-11-03",
+   "hash": "436469361cd4db2d",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit": {
+   "date": "2026-11-03",
+   "hash": "d9c997d3c3b27312",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit / Closed forms on S^ 5 (PSLQ-identified)": {
+   "date": "2026-11-03",
+   "hash": "96bd6cf1c684cb77",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit / Implementation effort and continuation pattern": {
+   "date": "2026-11-03",
+   "hash": "19333eccb4373a77",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit / Log 3 cancellation theorem": {
+   "date": "2026-11-03",
+   "hash": "6c34cc8345b37761",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values": {
+   "date": "2026-11-03",
+   "hash": "039e236a00fcb79b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Closed Hurwitz forms of the continuum spectral zeta": {
+   "date": "2026-11-03",
+   "hash": "c0bb1ca6f6f97101",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Closed-form match: Dirac": {
+   "date": "2026-11-03",
+   "hash": "a239ab1da40a1a98",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Closed-form match: scalar": {
+   "date": "2026-11-03",
+   "hash": "7d0da33d1e9a0909",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Continuum reference": {
+   "date": "2026-11-03",
+   "hash": "e6a9f6716183d9d7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Master Mellin engine decomposition": {
+   "date": "2026-11-03",
+   "hash": "a8f2dfde159fcfc9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Setup": {
+   "date": "2026-11-03",
+   "hash": "f7fe89bf69e896f5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Setup / The GeoVac spectral triple on": {
+   "date": "2026-11-03",
+   "hash": "f5b0fbc262ae632c",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Setup / Wedge KMS state": {
+   "date": "2026-11-03",
+   "hash": "812bb1b9ec4ce43b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Synthesis and open questions": {
+   "date": "2026-11-03",
+   "hash": "a777bbb50de063af",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Synthesis and open questions / Open questions": {
+   "date": "2026-11-03",
+   "hash": "9058e32c4d52e213",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable": {
+   "date": "2026-11-03",
+   "hash": "178feb7f68c595fb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable / Mechanism: degeneracy log on the lowest shell": {
+   "date": "2026-11-03",
+   "hash": "ec0cefbbfa0a30b5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable / Structural decomposition: F is in the spectral-zeta side, not the stat": {
+   "date": "2026-11-03",
+   "hash": "97a9202ca055d9e7",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable / The framework's wedge KMS entropy": {
+   "date": "2026-11-03",
+   "hash": "292cda1e0c4a132b",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable / Three blockers for literal Ryu--Takayanagi on the framework's graph": {
+   "date": "2026-11-03",
+   "hash": "2417befbb00a9c67",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::front": {
+   "date": "2026-11-03",
+   "hash": "e515c7d4f31fad7a",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Acknowledgments": {
+   "date": "2026-11-03",
+   "hash": "7e24c756f92cc652",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Conclusion": {
+   "date": "2026-11-03",
+   "hash": "874c8dc97c38d637",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "f00ffdfe48e96ad2",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Introduction / Context": {
+   "date": "2026-11-03",
+   "hash": "1b43cddeb9a8045d",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Introduction / Honest scope": {
+   "date": "2026-11-03",
+   "hash": "4b0ce2a9735b1f77",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Introduction / Results": {
+   "date": "2026-11-03",
+   "hash": "7ff67919aeb382d9",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Open questions": {
+   "date": "2026-11-03",
+   "hash": "8d460f08cd3f6fc5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The cone 1": {
+   "date": "2026-11-03",
+   "hash": "1a0636b672a4ef33",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The finite disk-with-cone: measurements": {
+   "date": "2026-11-03",
+   "hash": "1890eeaf0d123589",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The finite disk-with-cone: measurements / Setup": {
+   "date": "2026-11-03",
+   "hash": "0dae0bcad06a6538",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The finite disk-with-cone: measurements / The Markov--Ces `aro map": {
+   "date": "2026-11-03",
+   "hash": "2aeb0266bc4185cb",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The flat plane": {
+   "date": "2026-11-03",
+   "hash": "0493291c6543def5",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The flat plane / Setup": {
+   "date": "2026-11-03",
+   "hash": "66c4aa64cee8e334",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The flat plane / State classes and the convergence statement": {
+   "date": "2026-11-03",
+   "hash": "e02534f098f65ebd",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The flat plane / The window lift": {
+   "date": "2026-11-03",
+   "hash": "a6c853213c0c0be2",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::The flat plane / Windows: smooth edge versus sharp edge": {
+   "date": "2026-11-03",
+   "hash": "b7acd11d59c45966",
+   "run": "group1 FULL incremental 2026-11-03"
+  },
+  "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::front": {
+   "date": "2026-11-03",
+   "hash": "59fcf70179fc8678",
+   "run": "group1 FULL incremental 2026-11-03"
+  }
+ }
+}

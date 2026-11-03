@@ -9,7 +9,7 @@
 %
 % Math.OA / J. Geom. Phys. style; companion to Paper 38 (SU(2)
 % state-space GH convergence on Camporesi-Higuchi truncated triples) and
-% Paper 40 (4/pi Fejer-moment constant reported universal on compact simple Lie groups).
+% Paper 40 (compact Lie groups; Fejer-moment constant group-independence open).
 %
 % Status: first draft, May 2026, post-Sprint-L0 / L1 / L1-tighten
 % closure (2026-05-16). Built from internal sprint memos:
@@ -231,9 +231,8 @@ operator system $\Op_{\nmax} = P_{\nmax} \, C^\infty(\sthree) \,
 P_{\nmax}$ obtained by orthogonal projection onto the
 finite-dimensional subspace $\Hilb_{\nmax}$ spanned by the lowest
 Camporesi--Higuchi spinor harmonics, and with the Connes--vS
-``Toeplitz S$^1$'' propagation invariant
-$\mathrm{prop}(\Op_{\nmax}) = 2$ verified verbatim in supporting work
-of the present author (Paper~32~\S~III). The convergence of
+``Toeplitz S$^1$'' propagation invariant equal to $2$ on the scalar
+Fock operator system (Paper~32~\S~III). The convergence of
 $\Tcal_{\nmax}$ to the round-$\sthree$ Camporesi--Higuchi spectral
 triple $\Tcal_{\sthree}$ in van~Suijlekom's state-space
 Gromov--Hausdorff distance --- with explicit rate
@@ -416,8 +415,8 @@ computational verification protocol and the supporting module
 Appendix~\ref{app:framework_crossref} cross-references the result to
 the present author's broader framework
 (Paper~38~\cite{paper38} for state-space Gromov--Hausdorff convergence;\
-Paper~40~\cite{paper40_unified} for the $4/\pi$ Fej\'er-moment constant
-reported universal over compact simple groups (derived at rank~1);\ Paper~32~\S~VIII for the master Mellin engine
+Paper~40~\cite{paper40_unified} for compact Lie groups (the Fej\'er-moment
+constant is Paper~38's at rank~1;\ whether it is group-independent is open);\ Paper~32~\S~VIII for the master Mellin engine
 case-exhaustion theorem and the four-witness theorem's M1
 sub-mechanism reading).
 
@@ -463,10 +462,11 @@ We form the spectral triple
                  L^2(\sthree, \Sigma),\;
                  \DCH \,\bigr).
 \end{equation}
-This is a unital, even, real spectral triple of metric dimension $3$
+This is a unital, odd, real spectral triple of metric dimension $3$
 in the sense of Connes~\cite{connes1995}, with KO-dimension $3 \pmod
-8$. The chirality grading $\gamma_5 = \mathrm{diag}(+1, -1)$ on
-$\Sigma_+ \oplus \Sigma_-$, the Connes real structure
+8$;\ it carries no chirality grading (the grading
+$\gamma_5 = \mathrm{diag}(+1, -1)$ on $\Sigma_+ \oplus \Sigma_-$ used
+below lives on the chirality-doubled model). The Connes real structure
 $J_{\mathrm{GV}}$ (charge conjugation, $J_{\mathrm{GV}}^2 = -I$), and
 the standard Lipschitz seminorm
 $\opnorm{[\DCH, \Mat_f]}$ on the algebra $C^\infty(\sthree)$ all enter
@@ -517,13 +517,13 @@ algebra-side analog of the Lipschitz seminorm and the propagation
 invariant. The truncated metric spectral triple is then
 $\Tcal_{\nmax} = (\Op_{\nmax}, \Hilb_{\nmax}, D_{\nmax})$.
 
-Paper~32~\S~III of the present author's framework documentation
-verifies that the propagation invariant
-$\mathrm{prop}(\Op_{\nmax}) = 2$ at $\nmax \in \{2, 3, 4\}$, matching
+Paper~32~\S~III verifies that the propagation invariant of the scalar
+Fock operator system is $2$ at $\nmax \in \{2, 3, 4\}$, matching
 Connes--van~Suijlekom~\cite[\S 4]{connes_vs2021} for the
-Toeplitz operator system on $S^1$ verbatim. This is the structural
-match that establishes $\Op_{\nmax}$ as the right operator-system
-host for spectral-triple-internal modular constructions.
+Toeplitz operator system on $S^1$. On the chirality-doubled carrier
+used here the value depends on the envelope:\ $2$ against the
+achievable (Weyl-doubled) envelope at the cutoffs measured, $\infty$
+against the full matrix algebra (Paper~44).
 
 \subsection{State-space GH convergence to the continuum}
 \label{sec:propinquity_recap}
@@ -2548,14 +2548,13 @@ Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma} is driven instead by
 the integer spectrum of the posited generator, and no link between the
 two is claimed.
 
-\paragraph{Paper~40 (\cite{paper40_unified}, universal $4/\pi$ on
-compact simple Lie groups).}
+\paragraph{Paper~40 (\cite{paper40_unified}, compact Lie groups).}
 The Paper~38 state-space Gromov--Hausdorff convergence extends to compact
 connected semisimple Lie groups with bi-invariant metric (for general $G$
-conditionally on the per-group spin-window decomposition;\ a circle factor
-carries the circle constant), with the Fej\'er-moment constant $4/\pi$ (dual-Coxeter normalisation of the $\SU(2)$ metric; $2/\pi$ on the unit round $S^3$, the constant scaling with the metric --- Paper~38)
-reported universal across the simple groups of that class (for semisimple groups with several simple factors the constant is open) via the Plancherel-weight $\times$
-Vandermonde-Jacobian cancellation (Paper~40~\S~3.2; derived at rank~1). The
+conditionally on the per-group spin-window decomposition), with the
+Fej\'er moment tending to zero;\ its leading constant is Paper~38's at
+rank~1, and whether it is the same for every simple group is open
+(Paper~40). The
 modular structure of the present paper plausibly extends to the
 higher-rank cases (Section~\ref{sec:conclusion} O4); the integer
 spectrum of the posited wedge generator $K_\alpha^W$ on the spinor
@@ -2800,9 +2799,9 @@ applications},
 
 \bibitem[Tomita(1967)]{tomita1967}
 M.~Tomita,
-\newblock \emph{Standard form of von Neumann algebras},
-\newblock Lecture notes, RIMS Kokyuroku \textbf{14}, Kyoto University,
-1967.
+\newblock \emph{Standard forms of von Neumann algebras},
+\newblock The Vth Functional Analysis Symposium of the Mathematical
+Society of Japan, Sendai, 1967 (unpublished notes).
 
 \bibitem[Toyota(2023)]{toyota2023}
 R.~Toyota,

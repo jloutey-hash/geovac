@@ -101,7 +101,7 @@ Camporesi--Higuchi spinor Dirac operator, places it in the
 Marcolli--van~Suijlekom gauge-network lineage, and establishes four
 load-bearing results.  First, the underlying truncated graphs are
 Ramanujan \emph{at small sizes} --- a finite-size graph-RH Observation
-(three of four families cross the Kotani--Sunada bound at modest sizes,
+(two of four families cross the Kotani--Sunada bound at modest sizes,
 Paper~29~\S7), with integer-algebraic Ihara zeros (Paper~29).  Second, \gvc{wh1-p38-gh-convergence}{the
 Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
 continuum spectral triple $\Tcal_{\sthree}$ in the van~Suijlekom
@@ -112,14 +112,11 @@ $d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$,
 $\gamma_{\nmax} \sim (4/\pi)\log\nmax/\nmax$, and a measured $O(1/\nmax)$ under a
 tapered amplitude (Paper~38, main theorem;\ $4/\pi$ in the dual-Coxeter
 normalisation of the $\SU(2)$ metric, $2/\pi$ on the unit $S^3$)}.
-Third, the Fej\'er-moment constant $4/\pi$ is reported universal across the
-compact connected simple Lie groups with bi-invariant metric (for several
-simple factors it is open) --- derived at
-rank~1, numerically supported (fit-sensitive extraction) at rank~2 for
-general $G$, with the rank-uniform analytical proof a named gap --- via a
-Plancherel-weight
-$\times$ Vandermonde-Jacobian cancellation in the dual-Coxeter
-normalisation (Paper~40).  Fourth, the natural route to a Lorentzian convergence theorem on
+Third, Paper~40 extends the convergence to compact connected
+semisimple Lie groups (conditionally for general $G$);\ whether the
+Fej\'er-moment constant is the same for every simple group is
+\textbf{[OPEN]}, since its rank-2 extractions used a normalisation
+that does not reproduce the $\SU(2)$ anchor.  Fourth, the natural route to a Lorentzian convergence theorem on
 truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples ---
 compressing to the Krein-positive subspace --- is closed by a
 degeneracy theorem (Paper~45):\ the compression annihilates the
@@ -137,7 +134,7 @@ master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
 Papers~38,~39, and~40 as special cases:\ \gvc{p40-general-g-conditional}{for arbitrary $k \ge 1$ and
 compact connected simple Lie groups $G_{1}, \ldots, G_{k}$, the
 k-fold tensor product converges (state-space GH) with per-factor Fej\'er-moment
-bounds, constant $4/\pi$ reported universal in Paper~40 (proved only for $\SU(2)$ and
+bounds, leading constant open beyond $\SU(2)$ in Paper~40 (proved only for $\SU(2)$ and
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ the general-$G$ $k = 1$ case is conditional on the
 per-group spin-window decomposition;\ the joint Lipschitz constant
@@ -249,9 +246,10 @@ operator algebras with four headline results.
 The finite Fock-projected $\sthree$ Coulomb graphs and the
 Bargmann--Segal $\sfive$ holomorphic graphs satisfy the
 Kotani--Sunada Ramanujan bound at small cutoffs --- a \emph{finite-size}
-graph-RH:\ three of four families (including $\sthree$ Coulomb at
-$\nmax = 5$) cross the bound at modest sizes, so the property does not
-persist asymptotically (Paper~29~\S7).  Their \emph{reciprocal} Ihara
+graph-RH:\ two of four families (scalar $\sfive$, Dirac-$\sthree$
+Rule~B) cross the bound at modest sizes, while the scalar $\sthree$
+graph stays below it on every connected component through
+$\nmax = 5$ (Paper~29~\S7).  Their \emph{reciprocal} Ihara
 zeros (Hashimoto $T$-eigenvalues) are algebraic integers; the Ihara
 zeros themselves are algebraic over~$\mathbb{Q}$ with integer-coefficient
 (but non-monic) minimal polynomials, and no $\pi$ or transcendental
@@ -287,15 +285,14 @@ $S^{1} \to \sthree \to S^{2}$) --- and is
 discussed in detail in \S\ref{sec:gh}--\S\ref{sec:mellin} below
 (Paper~38~\cite{paper38}, Theorems~3.4 and 4.1).
 
-\paragraph{Headline 3: the Fej\'er-moment constant $4/\pi$ is reported universal
-across compact simple Lie groups.}
-For any simple compact Lie group $G$ with bi-invariant metric (so
-$G \in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
-E_{7}, E_{8}\}$), the proposed Plancherel-weight $\times$ Vandermonde-Jacobian
-cancellation mechanism (Paper~40~\S 3.2~\cite{paper40_unified};\ a proof
-sketch at rank~$\ge 2$) leaves exactly the rank-1 ($\SU(2)$) constant $4/\pi$ of Paper~38 Appendix~A
-from each positive root direction's Euler--Catalan asymptote, in the
-dual-Coxeter normalisation.  \gvc{lipschitz-c3-compression}{The Lipschitz comparison constant
+\paragraph{Headline 3: the Fej\'er-moment constant beyond $\SU(2)$ is open.}
+For a simple compact Lie group $G$ with bi-invariant metric, Paper~40
+proposes a Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
+mechanism (\S 3.2~\cite{paper40_unified};\ a proof sketch) under which
+the leading constant would be the rank-1 one;\ whether the constant is
+group-independent is \textbf{[OPEN]}, because the rank-2 extractions used
+a normalisation that does not reproduce the $\SU(2)$ anchor.
+\gvc{lipschitz-c3-compression}{The Lipschitz comparison constant
 $C_{3} = 1$ (which enters only the withdrawn approximation-pair route)
 holds at every rank by compression} (Paper~40's PRV-summand analysis
 after Kumar (1988), applied to the dominant image of the tensor product
@@ -526,9 +523,10 @@ satisfies the Kotani--Sunada Ramanujan bound strictly:\ the largest
 non-trivial Hashimoto eigenvalue sits strictly inside the spectral
 radius $\sqrt{q_{\max}}$ associated with the maximum (Perron) vertex
 degree.  This is a \emph{finite-size} statement, not an asymptotic
-theorem:\ Paper~29~\S7 shows three of four families (including
-$\sthree$ Coulomb at $\nmax = 5$) \emph{cross} the bound at modest
-sizes, so the graph-RH does not persist as $\nmax \to \infty$.  The
+theorem:\ Paper~29~\S7 shows two of four families (scalar $\sfive$,
+Dirac-$\sthree$ Rule~B) \emph{cross} the bound at modest sizes;\ the
+$\sthree$ graph stays below it on every connected component through
+$\nmax = 5$, and no asymptotic statement is proved for it.  The
 reciprocal Ihara zeros (Hashimoto $T$-eigenvalues) are algebraic
 integers, while the Ihara zeros themselves are algebraic over~$\mathbb{Q}$;
 the corresponding Ihara polynomials factor over $\Z[s]$ into
@@ -620,12 +618,12 @@ both chiralities) is the subject of an internal sprint
 (R3.5).\footnote{Parenthetical sprint/track designations are anchors
 into the project's internal chronicle (\texttt{CHANGELOG.md} in the
 repository); ``WH$n$'' designations are entries of the internal
-working-hypothesis register (\texttt{CLAUDE.md}~\S1.7).}  The
-truthful Camporesi--Higuchi data at finite $\nmax$ has the property
-that on most cross-shell pairs the Connes distance is $+\infty$
-(an artefact of the $n$-shell degeneracy in the Avery basis); this
-is repaired by lifting to the full Dirac sector with both
-chiralities and off-diagonal shell-coupling multipliers.  The
+working-hypothesis register (\texttt{CLAUDE.md}~\S1.7).}  L1$'$
+concerns the doubled computational model, not the true window:\ on
+the doubled Fock spin-orbital model the Dirac-commutator seminorm has
+a kernel larger than the scalars, while on the true
+Camporesi--Higuchi window it is a norm at $\nmax \le 3$ (Paper~38,
+Rem.~dirac\_degeneracy).  The
 chirality-doubled operator system has dimension
 $\dim \Op_{\nmax} = 1, 14, 55, 140, \dots$ at
 $\nmax = 1, 2, 3, 4, \dots$ and every cross-shell pair has finite
@@ -863,7 +861,7 @@ $C_3^{(2)}<1$ was withdrawn as false;\ the triangle bound on the two
 Leibniz terms is tight term by term and gives only $\sqrt 2$.)
 
 % =====================================================================
-\section{The universality of the Fej\'er-moment constant $4/\pi$}
+\section{The Fej\'er-moment constant beyond $\SU(2)$}
 \label{sec:universality}
 % =====================================================================
 
@@ -872,20 +870,18 @@ from $\SU(2)$ to compact connected semisimple Lie groups with
 bi-invariant metric (for general $G$ conditionally on the per-group
 spin-window decomposition)}.
 
-\begin{theorem}[Paper~40, universal Fej\'er-moment constant]
+\begin{theorem}[Paper~40, compact Lie groups]
 \label{thm:universal_rate}
 Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
 with bi-invariant metric (each simple factor
 $\in \{\SU(N), \mathrm{Spin}(n)\ (n \ge 5), \mathrm{Sp}(n), G_{2}, F_{4},
 E_{6}, E_{7}, E_{8}\}$).  The truncated (Kostant-Dirac) triples
 $\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the van~Suijlekom
-state-space Gromov--Hausdorff sense;\ \gvc{p40-general-g-conditional}{for \emph{simple} $G$ the Fej\'er-type
-moment has the same asymptotic constant as \eqref{eq:gh_rate_constant} (for products of several
-simple factors the constant is open, Paper~40):\ namely
-$4/\pi$, in the dual-Coxeter
-normalisation (derived at rank~1;\ numerically supported, with a
-fit-sensitive extraction, at rank $\ge 2$, a rank-uniform proof being a
-named gap)};\ whether a tapered amplitude gives $O(1/\nmax)$ for general
+state-space Gromov--Hausdorff sense;\ \gvc{p40-general-g-conditional}{the Fej\'er-type
+moment's leading constant is that of \eqref{eq:gh_rate_constant} at rank~1, and whether it is
+the same for every simple $G$ is \textbf{[OPEN]}:\ the rank-2 extractions used a
+normalisation that does not reproduce the $\SU(2)$ anchor (Paper~40;\ for products of
+several simple factors the constant is also open)};\ whether a tapered amplitude gives $O(1/\nmax)$ for general
 $G$ is \textbf{[OPEN]}.  \gvc{lipschitz-c3-compression}{The Lipschitz comparison constant is $C_{3}(G) = 1$ at every
 rank, by compression}.  For general $G$ the convergence is conditional on a
 per-group spin-window decomposition (verified for $\SU(2)$).
@@ -893,10 +889,9 @@ per-group spin-window decomposition (verified for $\SU(2)$).
 
 \paragraph{Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation.}
-The constant's universality in Theorem~\ref{thm:universal_rate}
-rests on a structural identity (a proof-sketch mechanism, derived at
-rank~1) which we record because it is the deepest algebraic content of
-the universality.  In the central spectral
+Paper~40 proposes a mechanism for a group-independent constant (a
+proof sketch;\ whether the constant is in fact group-independent is
+open, Theorem~\ref{thm:universal_rate}).  In the central spectral
 Fej\'er kernel on $G$,
 \begin{equation}
 K_{\nmax}(g) \;=\; \frac{1}{Z_{\nmax}(G)}
@@ -908,13 +903,9 @@ the Plancherel weight $\sqrt{\dim V_{\lambda}}$ on the squared
 amplitude (so the weight is $\dim V_{\lambda}$) and the Vandermonde
 Jacobian $|\Delta(t)|^{2}$ in the Weyl integration formula on $G$
 share the same $\prod_{\alpha > 0}$ product structure over positive
-roots.  In the dual-Coxeter normalisation these products cancel
-exactly, leaving only the rank-1 ($\SU(2)$) constant $4/\pi$ of
-Paper~38 Appendix~A from each positive-root direction's Euler--Catalan
-asymptote
-$\sum_{d \mathrm{ odd}} 1/d^{2} = \pi^{2}/8$.  The universal constant
-$4/\pi$ is then \emph{independent} of rank, Weyl group order, and
-Lie type.
+roots.  The sketch has these products cancel, leaving the rank-1
+($\SU(2)$) constant of Paper~38 Appendix~A from each positive-root
+direction's Euler sum $\sum_{d \mathrm{ odd}} 1/d^{2} = \pi^{2}/8$.
 
 \paragraph{The PRV-summand inequalities (representation theory, not a
 Lipschitz bound).}
@@ -998,8 +989,8 @@ $P_{W} = \tfrac{1}{2}(I + R_{\mathrm{polar}})$ on $P_{\nmax}\HGV$
 (bit-exact idempotent and Hermitian), and for the posited geometric
 generator
 \begin{equation}
-K_{\alpha}^{W} \;=\; J_{\mathrm{polar}}
-\quad \text{(rotation generator preserving } W),
+K_{\alpha}^{W} \;=\; \mathrm{diag}(2 m_{j}) \ \text{on } P_{W}\HGV
+\quad \text{(a relabelling;\ Paper~42, Def.~K\_alpha\_W)},
 \label{eq:k_alpha}
 \end{equation}
 with integer spectrum $\{2 m_{j}\}$ on the full-Dirac basis.
@@ -1071,7 +1062,7 @@ the Krein-level analogues of \eqref{eq:k_alpha} and
 \eqref{eq:bw_alpha_gamma_conjugacy} hold bit-exact:
 \begin{itemize}\setlength\itemsep{0pt}
 \item[(i)] The posited Lorentzian wedge generator
-$K_{L}^{\alpha,W} = J_{\mathrm{polar}}|_{W_{L}}$ (its
+$K_{L}^{\alpha,W}$, the relabelling $\mathrm{diag}(2m_{j})$ on $W_{L}$ (its
 Bisognano--Wichmann identification is open, Paper~42 O0) has integer
 spectrum on the Krein hemispheric wedge.
 \item[(ii)] The Krein-Tomita modular operator $\Delta_{L}$ admits a
@@ -1439,8 +1430,8 @@ two-loop sunset vertices.
 \end{itemize}
 \end{theorem}
 
-The TS-E3 sharpening of Paper~32 further shows that $M_{1}, M_{2},
-M_{3}$ are sub-cases of a single master Mellin-engine mechanism
+The TS-E3 sharpening of Paper~32 further reads $M_{1}, M_{2},
+M_{3}$ as sub-cases of a single master Mellin-engine mechanism
 \begin{equation}
 \pi\text{-source}
 \;=\;
@@ -1668,7 +1659,7 @@ Papers~42/44~\cite{paper42,paper44}:\
 $\gamma^{5}$ restricted to the wedge) is a unitary self-adjoint
 involution;\
 (I2) $[\Pi_{W}, H_{\mathrm{local}}] = 0$ (even parity of the
-posited BW-$\alpha$ generator $K_{\alpha}^{W} = J_{\mathrm{polar}}^{W}$
+posited BW-$\alpha$ generator $K_{\alpha}^{W} = \mathrm{diag}(2m_{j})$
 under wedge chirality);\
 (I3) the wedge-restricted Lorentzian Dirac $\DL^{W}$ has \emph{mixed}
 parity --- its temporal factor is $\Pi_{W}$-\emph{odd}
@@ -1730,11 +1721,11 @@ the \emph{mirror} of the usual staleness:\ the owner strengthened its claim
 and this summary kept the weaker form --- nothing is misspelt and nothing is
 retracted, so neither C16 nor a \texttt{cited\_by} list can see it.
 
-\textbf{(v) Master theorem --- universal compact-Lie-group factors
+\textbf{(v) Master theorem --- compact-Lie-group factors
 (sketch).}
-Combining the k-fold extension with the Fej\'er-moment constant $4/\pi$ reported universal
-in Paper~40~\cite{paper40_unified} (derived at rank~1;\ general-$G$
-convergence conditional) gives the expected multi-factor form (Paper~39 \S6(v))
+Combining the k-fold extension with Paper~40~\cite{paper40_unified}
+(general-$G$ convergence conditional;\ the leading constant beyond
+$\SU(2)$ open) gives the expected multi-factor form (Paper~39 \S6(v))
 
 \begin{equation}\label{eq:master_theorem}
 d_{\mathrm{GH}}^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
@@ -1749,9 +1740,8 @@ $G_{1}, \ldots, G_{k}$ with bi-invariant metrics (Paper~40's class; a
 central torus factor is excluded --- Paper~40 asserts no value for
 $c(G_{\mathrm{ss}} \times T^{k})$). The $k$-independent constant $1$ comes
 from compression (each $G_j$ factor by Paper~40's left-equivariance
-argument). Each summand $\gamma^{G_j}$ carries the Fej\'er-moment $4/\pi$
-asymptotic (the joint leading constant is open for several factors,
-Paper~40); \gvc{p40-general-g-conditional}{but this multi-factor / general-$G$ form is a
+argument). The leading constant of each summand $\gamma^{G_j}$ is open
+beyond $\SU(2)$ (Paper~40); \gvc{p40-general-g-conditional}{and this multi-factor / general-$G$ form is a
 \textbf{sketch} (proved only for $k=1$, $\SU(2)$ and $k=2$,
 $\SU(2)\times\SU(2)$, on the lifted-state route with leading
 constant~$1$;\ $k=1$ for general $G$ is conditional;\ $C_3^{(k)}$ is the
@@ -1950,15 +1940,10 @@ $M_{3}$'s level-$\le 4$ ring), restricting the substrate-natural ring to $\log 2
 \pi^{2} \cdot \Q + \zeta(5)/\pi^{4} \cdot \Q$ on $\sfive$.
 
 \paragraph{$S^{7}$--$S^{11}$ ladder closure.}
-The ladder \emph{generates}:\ every odd rung
-$S^{3}, \dots, S^{11}$ has a rational-coefficient closed form in
-$\mathcal{R}_{d}$, with no transcendental outside $\mathcal{R}_{d}$
-(Paper~50~\S 8).  An earlier reported $S^{7}$ non-match was a
-search-resolution artifact (a $30$-digit PSLQ search;\ the genuine
-$S^{7}$ scalar relation, with integer coefficients of order $10^{4}$,
-lies in $\mathcal{R}_{7}$ and appears at $\geq 200$ digits with
-reconstruction error $\approx 2.4\times10^{-202}$ ---
-Paper~50~\S 8, Erratum).
+Every odd rung $S^{3}, \dots, S^{11}$ has a rational-coefficient
+closed form in $\mathcal{R}_{d}$ (Paper~50,
+Rem.~general\_d\_conjecture:\ symbolic at $S^{3}$, $S^{5}$;\ measured
+by PSLQ at $S^{7}$--$S^{11}$, with no regression test).
 
 \paragraph{Cataloguing the master Mellin engine in physics.}
 The S$^{3}$ and S$^{5}$ closures are recorded in Paper~50~\S 9 as the
@@ -2001,8 +1986,9 @@ Paper~50 is the twelfth math.OA standalone in the arc.
 \label{sec:open}
 % =====================================================================
 
-The arc closes the convergence side of the operator-algebra story on
-the Riemannian / spatial side (Paper~38, unconditional).  On the
+On the Riemannian / spatial side Paper~38 proves convergence for the
+commutative ($\sthree$) factor, unconditionally;\ the almost-commutative
+extension and Dirac-seminorm convergence are open.  On the
 modular-Hamiltonian side, Paper~42 (including its \S~11, the archived
 Paper~43's surviving content) records automatic
 finite-cutoff period closures of a posited generator on Riemannian and

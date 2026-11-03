@@ -11,11 +11,13 @@ Two facts, both bit-exact on the real P45 Krein machinery:
       reproduced -- it is spatial-multiplier-only).
     - TOEPLITZ TEMPORAL multipliers a = I_spatial (x) S_q (the WH7 algebra):
       K+-compressed seminorm = omega_q = 2*pi*q/T EXACTLY (survives, nonzero).
-      => the annihilation is NOT system-wide; a nondegenerate seminorm exists.
+      => the annihilation is NOT system-wide: the seminorm is nonzero on the
+         Toeplitz generators, but the spatial multipliers stay in its kernel,
+         so it is still degenerate on the enlarged system.
 
   v2 (J = gamma0_spatial (x) sign(D_t), a genuine temporal Wick involution):
     - same Toeplitz temporal seminorm = omega_q EXACTLY.
-      => the surviving metric carries NO indefinite-signature content even when
+      => the surviving seminorm carries NO indefinite-signature content even when
       the Krein involution genuinely acts on time. The Lorentzian signature is
       convention relative to the propinquity Lipschitz seminorm.
 
