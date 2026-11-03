@@ -269,15 +269,68 @@ a new number. The reviewers must verify ALL of:
    [MEASURED 25 digits]; Broadhurst–Roberts/FSY type + intersection-form = OBSERVATION /
    "one step short of a theorem"; NOT a cusp-form $L$-value (Eisenstein/CM period)
    [OBSERVATION].
-9. **Integrated class (IC) [MEASURED, pre-registered GO; PM DRAFT 2026-11-02, PI to approve before any run].**
+9. **Integrated class (IC) [MEASURED, pre-registered GO; drafted 2026-11-02, PI-approved 2026-11-02].**
    As a function of the bond angle the integrated $(XY|XZ)$ is not triangular, so it leaves the two-centre
    class: six of 31 constant components stop at an order-6 piece with no order-one factor, at two geometries
    mod two primes; the one-electron integral too (one geometry decided). Caps: Qbar-independence of the 31
    constants assumed; minimal operators not certified; the search is complete only where genuine singular
    factors have degree one or exponents are integers (record erratum + 2026-11-02 addendum). Backing:
    `tests/test_paper59_integrated_class.py` (one component, one prime, L = 600; the rest READ).
-   *Note for the PI:* items 1-8 were frozen 2026-08-17; the claims added since (sec:scope bond-angle
-   operator NA/B2/B2X, the Y operator, the ladder sections) have no row here yet.
+   *Note:* items 1-8 were frozen 2026-08-17. Items 10-15 below cover the claims added since.
+
+**Items 10-15: claims added after the 2026-08-17 freeze. Drafted 2026-11-02 (PI-directed: "Ok, go for it");
+PI-approved 2026-11-02 ("Approve paper 59 points").** Grouped by section; enumerated from `docs/claim_test_matrix.md` (rows for
+`sec:f12`, `sec:beyond` and its subsections, the water passage and `sec:scope`). Each item names what is guarded
+and what is record-only, so a pass on the item cannot read as more than its backing.
+
+10. **F12 integrals and the geminal master (`sec:f12`) [MEASURED + SYMBOLIC; OBSERVATION + PRIOR ART].**
+    F12 integrals are native to the momentum representation (kernel swap, 1e-14); the two-centre pair integral
+    is elementary (genus 0); the geminal does not lower the genus of multi-centre physical integrals (the
+    class is set by density topology; scope qualified 2026-10-27: the two-centre geminal master's own operator
+    is elliptic). Lesiuk-Moszynski's order-4 geminal operator equals eq:pf under the stated map [SYMBOLIC;
+    PRIOR ART for the operator, LM 2012; the master's operator only, not physical integrals]. The graph
+    reading (massless Coulomb lines, massive Slater lines, Gaussian lines off the ladder) is an
+    [OBSERVATION]: a pattern over the tested instances, not a derivation. Backing:
+    `test_routeC_momentum.py`, `test_paper59_h2_geminal_master.py` and the pattern's four instance guards.
+11. **A fourth centre and the three-electron chain (`sec:four_centre`, `sec:three_electron`) [MEASURED +
+    SYMBOLIC].** (XY|ZW) reduces to one radial integral with the same two dispersion roots, so a fourth centre
+    adds no genus (1s instance). The chain's fibre is a K3 surface; its holomorphic period is the Bessel moment
+    with the Bailey / BBBG eq. 33 closed form [PRIOR ART]. On the slice (t;1,2) the fibre needs the order-four
+    piece R, mapped exactly to a three-K0 moment. Caps: P3e (the generic fibre) is record-only and stays
+    OPEN-LEANING on the walls register; the no-split searches are mod p, record-only.
+12. **Four linked densities (`sec:four_density`) [SYMBOLIC + MEASURED].** Tree identity eq:tree (any tree of n
+    linked densities has the same holomorphic period, shape-independent). For n = 4 the operator
+    eq:four_density_op is irreducible with no quadratic relation, so it is not built from elliptic periods:
+    the first rung beyond elliptic. The real 3-D star and path reduce into it (each needs the F_4-equivalent
+    piece; no K3 piece). Caps: one-dimensional moment family plus two 3-D shapes; the path's module
+    factorization, the minimality searches and the momentum-space cross-checks are record-only.
+13. **The ring of three densities and the correlated triangle (`sec:density_ring`) [SYMBOLIC + MEASURED].**
+    The Coulomb triangle drops to the elliptic rung (below the chain's K3). The correlated triangle Y at
+    gamma = 3/2 has an order-nine annihilator with an exact composition series (four algebraic pieces, an
+    elliptic order-two piece = a bubble at imaginary momentum, and the K3 piece, which Y needs); the same
+    types at gamma = 2, 3, 1/2; the order drops only at gamma = 1 (equal masses). The cusp-correct geminal
+    brings no new type; the Gaussian geminal leaves the Fuchsian class (irregular at infinity). Off the slice:
+    the kite's operator (order 11) and Y's (order 19 from IBP, order 15 with the sunrise relation; minimal order
+    13, v5.21.14) with exact pieces R_V, crossed Legendre pullbacks and seven algebraic pieces; the kite's ninth
+    singular point has a closed form, located by Broadhurst's triangle threshold [PRIOR ART for the location].
+    Caps: many annihilators, series and K3 maps are record-only (NO-TEST in the matrix rows); minimality and
+    irreducibility are exponent-bound arguments, not certified.
+14. **Pricing and evaluation on the triangle (`sec:density_ring`) [MEASURED].** Gaussian fits of the geminal
+    priced on Y (six terms: -3.6e-5 to -2.4e-6 plain, percent level weighted); Psi4's six-term fit -5 to -13%;
+    the operators rebuild Y at about a thirteenth of the grid's CPU bound but are not a chemistry shortcut;
+    the triangle phase is 21% of a LiH r12 run. Caps: model densities, one configuration, not an F12 energy;
+    the evaluator timing row has no guard; the LiH share is a COVERAGE GAP (cost measurement, no guard
+    planned).
+15. **The bond angle (water passage, `sec:scope`) [SYMBOLIC + MEASURED].** Channel coefficients are Legendre
+    coefficients in cos(gamma); the linear geometry is not singular. The only angle-dependent non-analytic part
+    of (XY|XZ) is the H-H cusp-cusp term (pi^2/630) g_Y g_Z |Y-Z|^7 (contact form, universal constant); a zero
+    contact drops it. Hydrogen p functions keep rho^l l^-4 at unequal lengths. The one-electron three-centre
+    integral obeys an order-8 operator in x = cos(gamma) (x* the only non-integer exponent), confirmed by an
+    independent order-9 derivation it divides; the (XY|XZ) coefficients obey an order-41 recurrence in l built
+    with no fit, decaying as rho^l l^-4. Water's three-centre ERIs converge to about 1e-9 by L ~ 12 in the
+    shared-centre expansion. Caps: NA verdict BORDERLINE, B2 BORDERLINE, WA1 STOP as registered; the order-9
+    division and the no-operator-below-1970-unknowns bound are record-backed (hours of modular algebra); one
+    prime in the guards.
 
 ## Seeding plan (worktree only; never touches the real corpus)
 
@@ -300,6 +353,8 @@ $\{-\pi,0,2\pi\}$, the exponents $\{0,1,1,2\}$. Answer key →
 the real corpus.
 
 ## Change log
+- 2026-11-02 — **Items 9-15 APPROVED by the PI** ("Approve paper 59 points"). Item 9 (IC) and items 10-15 (every
+  claim added after the 2026-08-17 freeze) join the frozen goalposts; items 1-8 unchanged.
 - 2026-08-17 — **DRAFTED + FROZEN** by PM, PI framing approved (three-question freeze):
   C9 = N/A (no synthesis footprint; fold-into-group3-foundations logged as standing
   follow-up), branch criterion swapped to transcendence-tier + open-frontier honesty,

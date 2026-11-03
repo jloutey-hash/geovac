@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.22.3] - 2026-11-02
+
+### Added
+- **The torus guard now reproduces the record's own scored numbers** (PI-approved recommendation).
+  `tests/test_paper62_hydrogen_torus.py::test_scored_step_reproduces_the_record` (slow, 1 min) rebuilds the
+  first scored step of record TR, M = 3, N = 10 -> 11 at s = 1.4 A. The four leak shares match the stored rows
+  to 1e-9, and both slopes (h 0.765, g 0.834) lie in TR3a's own band [0.60, 1.05]. Before this, the guard tested
+  the mechanism on fatter tori with a measured lower bound of 0.50. Fire-tested 4/4 FIRED.
+
+### Changed
+- `docs/qa/paper_62.done.md`: rows 4 and 13-15 approved by the PI; row 14's backing names the new test.
+- `docs/qa/paper_59.done.md`: items 10-15 drafted, then approved by the PI with item 9 (IC). They cover every
+  claim added after the 2026-08-17 freeze, grouped by section: F12 and the geminal master; the fourth centre and
+  the three-electron chain; four linked densities; the ring of three and the correlated triangle; pricing and
+  evaluation on the triangle; the bond angle. Each item names what is guarded and what is record-only. Before
+  this, a QA run would have checked only the eight August headlines plus IC.
+
 ## [v5.22.2] - 2026-11-02
 
 ### Added

@@ -14,7 +14,11 @@ tests/test_water_ccsd.py, and the Z2 counter and real DFT are written out here.
   * slow (about 17 s): the poloidal winding m leaks with a |delta m| = 1 local slope against r/R
     that rises toward thinner tori and stays below 1.05, for h and for g.  The lower bound 0.50 is
     measured on these fatter tori (slopes h 0.575, 0.628; g 0.596, 0.672, measured 2026-11-02), not
-    the record's TR3a bound 0.60, which was set on thinner ones (its controls start at N = 8).
+    the record's TR3a bound 0.60, which was set on thinner ones (its controls start at N = 8);
+  * slow (about 1 min): the record's first scored step itself, M = 3, N = 10 -> 11 at s = 1.4 A.
+    The four leak shares match the stored scored rows to 1e-9, and both slopes lie in TR3a's
+    [0.60, 1.05] (h 0.765, g 0.834).  Added 2026-11-02 (PI-approved) so that the record's own numbers
+    reproduce, not only the mechanism.
 
 Fire-tested 2026-11-02 with debug/qa/fire_test.py; every plant FIRED:
   1. an inner-outer asymmetry in the k direction (ring j = 0 pushed out by 1%);
@@ -22,6 +26,9 @@ Fire-tested 2026-11-02 with debug/qa/fire_test.py; every plant FIRED:
   3. the hand-written even-N tor count given as 3 (the odd-N value);
   4. the hand-written slope band centred on 2 (the |delta m| = 2 order) instead of 1;
   5. the (pq|rs) momentum change mislabelled (-1, 1, 1, -1 in place of -1, 1, -1, 1), slope test.
+The scored-step test was fire-tested the same day, 4/4 FIRED: the control spacing 1.2 in place of 1.4;
+the in-ring spacing 1.05 in place of 1.0; the |delta m| = 1 class counted one-sided (dm == 1); the
+Slater exponent 1.30 in place of 1.24.
 """
 import importlib.util
 import os
@@ -43,10 +50,16 @@ ZERO = 1e-13
 Z2_EXPECTED = {'even': {'site': 2, 'tor': 4, 'full': 5}, 'odd': {'site': 2, 'tor': 3, 'full': 4}}
 SLOPE_BAND = (0.50, 1.05)   # lower bound measured here, see docstring
 NS_SLOPE = (6, 7, 8)
+S_SCORED = 1.4
+TR3A_BAND = (0.60, 1.05)
+# Scored rows of record TR (debug/data/torus_study.jsonl, sha256 c2de2d26...f3d1), M = 3, s = 1.4, d = 1.0:
+# r/R and the Delta m = 1 shares of h and of (pq|rs).
+SCORED = {10: (0.2548729212664928, 0.0679133026281965, 0.08782289376115512),
+          11: (0.23236909647411566, 0.06327654672594189, 0.08130481997577564)}
 
 
-def torus(N, M):
-    R = S_RING * ANG / (2 * np.sin(np.pi / N))
+def torus(N, M, s=S_RING):
+    R = s * ANG / (2 * np.sin(np.pi / N))
     r = D_TUBE * ANG / (2 * np.sin(np.pi / M))
     nuc = []
     for j in range(N):
@@ -173,3 +186,22 @@ def test_poloidal_leak_slope_rises_toward_one():
                           / np.log(b['rR'] / a['rR']))
         assert all(SLOPE_BAND[0] <= s <= SLOPE_BAND[1] for s in slopes), (name, slopes)
         assert all(s2 > s1 for s1, s2 in zip(slopes, slopes[1:])), (name, slopes)
+
+
+@pytest.mark.slow
+def test_scored_step_reproduces_the_record():
+    """Wrong answers rejected: a guard that passes on its own geometry while the record's scored
+    numbers no longer reproduce (a changed basis, spacing or share definition); a scored slope
+    outside the record's own TR3a band."""
+    got = {}
+    for N, (rR, hm1, gm1) in SCORED.items():
+        nuc, rR_now = torus(N, M_TUBE, S_SCORED)
+        sh = km_shares(N, M_TUBE, *site_integrals(nuc))
+        assert abs(rR_now - rR) < 1e-12, (N, rR_now)
+        assert abs(sh['h_m1'] - hm1) < 1e-9 and abs(sh['g_m1'] - gm1) < 1e-9, (N, sh)
+        assert sh['h_k'] < ZERO and sh['g_k'] < ZERO, (N, sh)
+        got[N] = (rR_now, sh)
+    for name in ('h', 'g'):
+        s = (np.log(got[11][1][name + '_m1'] / got[10][1][name + '_m1'])
+             / np.log(got[11][0] / got[10][0]))
+        assert TR3A_BAND[0] <= s <= TR3A_BAND[1], (name, s)
