@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.0.0] - 2026-11-02
+
+MAJOR bump, PI call ("Let's call this a major update"): the `/qa` instrument changed in what it grades, when it
+stops, what it certifies and what it reports. PI-directed
+("I want to implement all recommendations") after a study of the /qa runs v5.17.1 to v5.20.23.
+
+### The study, in brief
+Twenty-five runs. OWNER-LARGE ran at 0 to 10 per run and tracked new sections, not old debt: the
+owner instrument works. SURFACE-LARGE ran at 10 to 40 per run and never fell below 10 on a full
+sweep; the self-check loops ran 15, 10, 4, 4, 6 and 4 rounds, each later round mostly reading text
+the previous round had written. Causes: one claim lives at about a hundred loci (116 for the
+Paper 38 convergence theorem); the cite-don't-paraphrase rule adopted 2026-10-02 had zero `\gvc`
+annotations in any paper body; the stop rule "zero LARGE from a fresh reviewer" measures the
+reviewer's sampling, not the corpus; and a third of the trunk's units stamped 2026-10-03 were CHANGED
+or NEW by 2026-11-02 because the group3 synthesis absorbs every sprint. C16 grew from 115 entries
+(2026-09-29) to 302 (2026-11-02).
+
+### Changed
+- **Surface grading** (`docs/qa/criteria.md`, "Surface grading"; qa.md step 7). A restatement is
+  LARGE when STRONGER or STALE. UNSCOPED is LARGE only on a front-door surface for a C25 claim
+  marked `load_bearing`; elsewhere it is a NIT when the sentence names its owner and a SMALL when
+  it does not. "When in doubt, grade LARGE" now applies to owner findings only. STRONGER must be
+  shown by quoting the owner's tier line beside the restatement.
+- **Bounded self-check** (criteria.md "Incremental certification" item 3; qa.md families rule 2).
+  Stop at zero OWNER-LARGE in the changed owner units, at most two rounds. Surface findings go
+  gate-first into C25/C16 and never restart the loop. A round-2 owner fix is recorded and left
+  unstamped; a third round is a PI call.
+- **Target split** (criteria.md item 6; qa.md step 1 and step 4). Owner papers are stamped. Every
+  file under `papers/synthesis/` and the front-door docs are derived documents: contradiction-
+  checked every run (C9, graded by the surface rule), never stamped, outside coverage.
+- **Coverage is the convergence number** (criteria.md item 7). `debug/qa/cert_stamps.py --status`
+  and `--plan` print `COVERAGE <target>: stamped/total owner units`; the line goes in every run
+  line. `--plan` freezes the unit set in `docs/qa/stamps/<target>.plan.json`; later units are
+  NEXT-CYCLE until `--stamp` closes the cycle. `--stamp` refuses derived dimensions and drops any
+  derived stamps. Selftest: four new exact-value checks (owner-only counting, a synthesis's cite
+  unit is derived, frozen-set exclusion, derived-only target). Measured now: trunk 88/174 (51%),
+  group2 0/379, synthesis n/a (derived-only).
+- **C25 `load_bearing` flag** (`debug/qa/claim_registry.py`). Set on 24 of 32 claims whose
+  qualifier carries a tier, a status, a withdrawal or a hard prohibition (the K combination rule,
+  the WH1 commutative-factor scope, the Fejer constant, the graph wall, the Upgrade B axiom, the
+  non-variational He bracket, the conditional Paper 40 and Paper 32 results, the adopted window
+  identification, PRIOR ART attributions, ...). Not set on the eight scope-only qualifiers
+  (interior shells, C3 = 1 by compression, the P59 ring/triangle/slice/operator scopes, the
+  cb-norm value, degree monotonicity). `--mentions` prints the flag in its header; the selftest
+  checks the flag discriminates (the two keystones carry it, not every claim does).
+- **Two scheduled passes defined and priced** (criteria.md, "Two scheduled passes";
+  `docs/qa/trunk.debt.md`, "Scheduled passes"). Pass A: one record per verdict across the six
+  restating registers, with the home map proposed and one PI decision named (whether Paper 57's
+  tables stay a second home). Pass B: cite-don't-paraphrase, trunk first; about 1,080 mention
+  loci corpus-wide for the 32 claims, about 195 on derived surfaces. Neither pass was run.
+- `.claude/commands/qa.md`: the FULL-run shape, the C9 bullet, step 7, the families hard rule and
+  the output contract carry the above. `docs/qa/trunk.done.md`: the group3 synthesis is named a
+  derived document. Memory: `feedback_edit_bar`, `feedback_precheckpoint_selfcheck` and
+  `qa_gate_methodology` updated; MEMORY.md index lines.
+- `debug/qa/check_claim_registry.py`: stdout reconfigured to UTF-8 so `--mentions` no longer
+  crashes on a Greek letter under the Windows console code page.
+
+### Not changed
+The owner read-in-full, gate-first sweeps, fire-tested guards, delete-don't-hedge, the
+deterministic gates, "a clean delta before a FULL", and frozen done files.
+
 ## [v5.22.3] - 2026-11-02
 
 ### Added

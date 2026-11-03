@@ -22,7 +22,7 @@ You operate under the **§9 QA principles:** you are a **FRESH adversary** (pros
 
 Do **not** edit any file. Return:
 - **Claim table:** {claim, location, backing, tier-supported, tier-asserted, classification, MATERIAL/NIT, counterfactual, one-line note}.
-- **Material findings:** each OVERCLAIM / UNSUPPORTED / RHETORIC-VIOLATION tagged **SMALL** (PM fixes wording) or **LARGE** (raise to PI — a load-bearing claim materially exceeding its backing, a zombie cite in a synthesis, a hard-prohibition touch, a keystone status overstatement), with the failing reason.
+- **Material findings:** each OVERCLAIM / UNSUPPORTED / RHETORIC-VIOLATION tagged **SMALL** (PM fixes wording) or **LARGE** (raise to PI — a load-bearing claim materially exceeding its backing, a zombie cite in a synthesis, a hard-prohibition touch, a keystone status overstatement), with the failing reason. **Locate every finding first (2026-11-02; `docs/qa/criteria.md`, "Surface grading"):** OWNER (the defect is in the document that owns the claim; when in doubt grade LARGE) or RESTATEMENT (any other locus, a paper's own abstract and conclusion included). A restatement is LARGE only when STRONGER or STALE against its owner, and you must quote the owner's tier line beside it; a restatement that merely drops one of the owner's qualifiers is UNSCOPED, which is a NIT when the sentence names its owner and SMALL when it does not (LARGE only on a front-door surface for a C25 claim marked `load_bearing`). Do not hunt UNSCOPED on a synthesis; note it.
 - **Upgrade candidates:** load-bearing claims whose backing proves *more* than the prose states.
 - **One-line verdict** on the paper's/synthesis's claim integrity.
 

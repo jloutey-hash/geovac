@@ -46,10 +46,37 @@ A UNIT NEEDS REVIEW WHEN
                dimension).  The audit measures stamp decay: a LARGE found in an
                audited unit means stamps are leaking and the next run widens.
 
+TARGET SPLIT, COVERAGE AND THE FROZEN PLAN (2026-11-02, PI-directed)
+--------------------------------------------------------------------
+The trunk was stamped on 2026-10-03 with 212 units; by 2026-11-02, 89 were
+CHANGED and 16 NEW, about a third, and most of the churn was in the group3
+synthesis, which absorbs every research sprint.  A target that restates the
+whole corpus cannot stay certified while the corpus moves.  So:
+
+  OWNER units   prose: / cite: / code: units of the owner papers.  These are
+                what a certification stamps, and what COVERAGE counts.
+  DERIVED units the `synthesis` dimension (papers/synthesis/*.tex).  A derived
+                document is checked, every run, for CONTRADICTION of its owners
+                (STRONGER / STALE restatements; criteria.md, surface grading)
+                but is never stamped and never enters the coverage fraction.
+                `--stamp` refuses the synthesis dimension.
+
+  COVERAGE      stamped-current owner units / owner units in the frozen plan,
+                printed by --status and --plan.  This fraction is the
+                convergence number: it goes in every run line.  Once it reaches
+                1.0 the cost of a run is proportional to what changed since the
+                last one.
+
+  FROZEN PLAN   `--plan` writes docs/qa/stamps/<target>.plan.json (the unit ids
+                at plan time).  Until `--stamp` closes the cycle, units that
+                appear later are reported NEXT-CYCLE and do not enter the
+                coverage denominator; new sections written during a cert cycle
+                roll to the next one.  `--plan --refreeze` rewrites the plan.
+
 USAGE
 -----
   python debug/qa/cert_stamps.py --target trunk --status
-  python debug/qa/cert_stamps.py --target trunk --plan [--seed 2026-10-03]
+  python debug/qa/cert_stamps.py --target trunk --plan [--seed 2026-10-03] [--refreeze]
   python debug/qa/cert_stamps.py --target trunk --stamp --run "FULL #13" \
          [--dims prose,cite,code] [--exclude SUBSTR ...]
   python debug/qa/cert_stamps.py --selftest
@@ -57,7 +84,8 @@ USAGE
 `--stamp` records the CURRENT hashes as reviewed-clean.  Run it only after the
 run's findings in those units are remediated AND re-reviewed (the self-check
 loop) -- remediated text is not clean text.  `--exclude` keeps units with open
-findings unstamped (substring match on the unit id).
+findings unstamped (substring match on the unit id).  `--stamp` also deletes
+the frozen plan: the cycle is closed.
 """
 from __future__ import annotations
 
@@ -76,6 +104,16 @@ STAMPS = ROOT / "docs" / "qa" / "stamps"
 TESTS = ROOT / "tests"
 MATRIX = ROOT / "docs" / "claim_test_matrix.md"
 DATE = re.compile(r"20\d{2}-\d{2}-\d{2}")
+
+# Derived documents: contradiction-checked every run, never stamped, never counted
+# in coverage (docstring, "TARGET SPLIT").
+DERIVED_DIMS = {"synthesis"}
+OWNER_DIMS = {"prose", "cite", "code"}
+
+
+def is_derived(u: dict) -> bool:
+    """A derived DOCUMENT's units are all derived, its cite: unit included."""
+    return u["dim"] in DERIVED_DIMS or "/synthesis/" in u.get("paper", "")
 
 
 def _load(name: str, rel: str):
@@ -310,16 +348,71 @@ def audit_sample(states: dict, units: dict, seed: str, frac: float = 0.10, floor
     return sorted(picks)
 
 
+# --------------------------------------------------------------------------- coverage + frozen plan
+def plan_path(target: str) -> Path:
+    return STAMPS / f"{target}.plan.json"
+
+
+def load_plan(target: str) -> dict | None:
+    f = plan_path(target)
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else None
+
+
+def coverage(units: dict, states: dict, frozen: set[str] | None = None) -> dict:
+    """Stamped-current OWNER units over owner units in the frozen plan (or all owner units).
+
+    Derived dims never enter either number; units outside the frozen set are
+    counted separately as `next_cycle`."""
+    owner = {u for u in units if not is_derived(units[u])}
+    in_scope = owner & frozen if frozen is not None else owner
+    per: dict[str, list[int]] = {}
+    for u in sorted(in_scope):
+        d = per.setdefault(units[u]["dim"], [0, 0])
+        d[1] += 1
+        if states[u][0] == "CURRENT":
+            d[0] += 1
+    num = sum(v[0] for v in per.values())
+    den = sum(v[1] for v in per.values())
+    return dict(stamped=num, total=den, frac=(num / den if den else None), per_dim=per,
+                derived=sum(1 for u in units if is_derived(units[u])),
+                next_cycle=sorted(owner - in_scope))
+
+
+def coverage_line(target: str, cov: dict, plan: dict | None) -> str:
+    if cov["total"] == 0:
+        head = f"COVERAGE {target}: n/a (no owner units; derived-only target)"
+    else:
+        dims = ", ".join(f"{d} {v[0]}/{v[1]}" for d, v in sorted(cov["per_dim"].items()))
+        head = (f"COVERAGE {target}: {cov['stamped']}/{cov['total']} owner units stamped current "
+                f"({100 * cov['frac']:.0f}%) [{dims}]")
+    tail = f"; derived units {cov['derived']} (contradiction-checked, not stamped)"
+    if plan:
+        tail += f"; plan frozen {plan['date']}; added since: {len(cov['next_cycle'])} (NEXT-CYCLE)"
+    else:
+        tail += "; no frozen plan (run --plan to freeze the unit set)"
+    return head + tail
+
+
 # --------------------------------------------------------------------------- CLI
 def _lines(units: dict, uid: str) -> int:
     return units[uid]["text"].count("\n") + 1 if units[uid]["text"] else 0
 
 
-def cmd_status(target: str, plan: bool, seed: str) -> int:
+def cmd_status(target: str, plan: bool, seed: str, refreeze: bool = False) -> int:
     units = units_for(target)
     stamps = load_stamps(target)
     states = classify(units, stamps)
-    review = {u for u, (s, _) in states.items() if s != "CURRENT"}
+    frozen_rec = load_plan(target)
+    if plan and (frozen_rec is None or refreeze):
+        frozen_rec = dict(target=target, date=_dt.date.today().isoformat(), seed=seed,
+                          units=sorted(u for u in units if not is_derived(units[u])))
+        STAMPS.mkdir(parents=True, exist_ok=True)
+        plan_path(target).write_text(json.dumps(frozen_rec, indent=1) + "\n", encoding="utf-8")
+        print(f"froze the unit set: {len(frozen_rec['units'])} owner units -> {plan_path(target).relative_to(ROOT).as_posix()}")
+    frozen = set(frozen_rec["units"]) if frozen_rec else None
+    cov = coverage(units, states, frozen)
+    next_cycle = set(cov["next_cycle"])
+    review = {u for u, (s, _) in states.items() if s != "CURRENT" and u not in next_cycle}
     audit = audit_sample(states, units, seed) if plan else []
     counts: dict[str, dict[str, int]] = {}
     for uid, (s, _) in states.items():
@@ -327,7 +420,9 @@ def cmd_status(target: str, plan: bool, seed: str) -> int:
         counts[units[uid]["dim"]][s] += 1
     print(f"target {target}: {len(units)} units, {len(stamps['units'])} stamped")
     for dim in sorted(counts):
-        print(f"  {dim:<10} " + "  ".join(f"{k}={v}" for k, v in sorted(counts[dim].items())))
+        tag = "  (derived: contradiction check only, never stamped)" if dim in DERIVED_DIMS else ""
+        print(f"  {dim:<10} " + "  ".join(f"{k}={v}" for k, v in sorted(counts[dim].items())) + tag)
+    print(coverage_line(target, cov, frozen_rec))
     if plan:
         tot = sum(_lines(units, u) for u in units if units[u]["dim"] in ("prose", "synthesis"))
         rev = sum(_lines(units, u) for u in review | set(audit) if units[u]["dim"] in ("prose", "synthesis"))
@@ -342,6 +437,8 @@ def cmd_status(target: str, plan: bool, seed: str) -> int:
         for uid in sorted(review):
             s, why = states[uid]
             print(f"  {s:<12} {uid}" + (f"  [{why}]" if why else ""))
+    for uid in sorted(next_cycle):
+        print(f"  {'NEXT-CYCLE':<12} {uid}")
     return 0
 
 
@@ -365,25 +462,34 @@ def cmd_stamp(target: str, run: str, dims: set[str], exclude: list[str],
     """Stamp current hashes.  With `unchanged_since`, stamp only units whose text is identical
     at that revision (the review happened there; remediated units wait for the next run).
     Code units are never stamped this way -- their inputs are not reconstructed at `rev`."""
+    if dims & DERIVED_DIMS:
+        print(f"refusing to stamp derived dimension(s) {sorted(dims & DERIVED_DIMS)}: "
+              "derived documents are contradiction-checked every run, never certified")
+        return 2
     units = units_for(target)
     data = load_stamps(target)
     today = _dt.date.today().isoformat()
     then = _units_at(target, unchanged_since) if unchanged_since else None
     n = 0
     for uid, u in units.items():
-        if u["dim"] not in dims or any(x in uid for x in exclude):
+        if u["dim"] not in dims or is_derived(u) or any(x in uid for x in exclude):
             continue
         if then is not None and then.get(uid) != u["hash"]:
             continue
         data["units"][uid] = dict(hash=u["hash"], run=run, date=today)
         n += 1
     live = set(units)
-    stale = [k for k in data["units"] if k not in live]
+    stale = [k for k in data["units"] if k not in live or is_derived(units[k])]
     for k in stale:
         del data["units"][k]
     save_stamps(target, data)
     print(f"stamped {n} units ({', '.join(sorted(dims))}) for {target} as '{run}' on {today}; "
-          f"dropped {len(stale)} stamps for units that no longer exist")
+          f"dropped {len(stale)} stamps for units that no longer exist or are derived")
+    if plan_path(target).exists():
+        plan_path(target).unlink()
+        print("closed the cycle: frozen plan removed")
+    states = classify(units, data)
+    print(coverage_line(target, coverage(units, states), None))
     return 0
 
 
@@ -431,6 +537,24 @@ def _selftest() -> int:
           and len(audit_sample({k: sts[k] for k in list(sts)[:5]}, big, "s")) == 2)
     ct = cite_text(tex)
     check("cite unit holds the bibliography and the citing lines", "bibitem{a}" in ct and "x \\cite{a}" in ct)
+    # coverage: owner units only, derived never counted, frozen plan excludes later units
+    cu = {"prose:p::a": dict(dim="prose", paper="p"), "prose:p::b": dict(dim="prose", paper="p"),
+          "cite:p": dict(dim="cite", paper="p"), "code:p": dict(dim="code", paper="p"),
+          "prose:papers/synthesis/s.tex::a": dict(dim="synthesis", paper="papers/synthesis/s.tex"),
+          "cite:papers/synthesis/s.tex": dict(dim="cite", paper="papers/synthesis/s.tex")}
+    cs = {"prose:p::a": ("CURRENT", ""), "prose:p::b": ("CHANGED", ""), "cite:p": ("CURRENT", ""),
+          "code:p": ("NEW", ""), "prose:papers/synthesis/s.tex::a": ("CURRENT", ""),
+          "cite:papers/synthesis/s.tex": ("CURRENT", "")}
+    cv = coverage(cu, cs)
+    check("coverage counts owner units only (2 of 4); a synthesis's cite unit is derived too",
+          (cv["stamped"], cv["total"], cv["derived"]) == (2, 4, 2))
+    cv = coverage(cu, cs, frozen={"prose:p::a", "cite:p", "code:p"})
+    check("a unit outside the frozen plan is NEXT-CYCLE, not in the denominator",
+          (cv["stamped"], cv["total"], cv["next_cycle"]) == (2, 3, ["prose:p::b"]))
+    cv = coverage({"prose:papers/synthesis/s.tex::a": dict(dim="synthesis", paper="papers/synthesis/s.tex")},
+                  {"prose:papers/synthesis/s.tex::a": ("CURRENT", "")})
+    check("a derived-only target has no coverage fraction", cv["total"] == 0 and cv["frac"] is None)
+    check("the coverage line names the fraction", "2/3 owner units" in coverage_line("t", coverage(cu, cs, frozen={"prose:p::a", "cite:p", "code:p"}), None))
     print("\nSELFTEST:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
@@ -443,9 +567,11 @@ def main() -> int:
     ap.add_argument("--seed", default=_dt.date.today().isoformat())
     ap.add_argument("--stamp", action="store_true")
     ap.add_argument("--run")
-    ap.add_argument("--dims", default="prose,synthesis,cite,code")
+    ap.add_argument("--dims", default="prose,cite,code",
+                    help="owner dimensions to stamp; the derived 'synthesis' dimension is refused")
     ap.add_argument("--exclude", action="append", default=[])
     ap.add_argument("--unchanged-since", help="stamp only units whose text is identical at this git revision")
+    ap.add_argument("--refreeze", action="store_true", help="with --plan: rewrite the frozen unit set")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
@@ -456,7 +582,7 @@ def main() -> int:
         if not a.run:
             ap.error("--stamp needs --run")
         return cmd_stamp(a.target, a.run, set(a.dims.split(",")), a.exclude, a.unchanged_since)
-    return cmd_status(a.target, a.plan, a.seed)
+    return cmd_status(a.target, a.plan, a.seed, a.refreeze)
 
 
 if __name__ == "__main__":

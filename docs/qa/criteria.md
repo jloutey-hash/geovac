@@ -45,7 +45,42 @@ holds it when its **most recent FULL run, or claim-search DELTA run,** had:
 SMALL covers material defects confined to secondary content: a
 non-headline number, citation metadata, a stale cross-reference, a caveat
 misplaced but present, or a secondary paraphrase that does not flip a tier.
-**When in doubt, grade LARGE.**
+**When in doubt, grade an OWNER finding LARGE.** The rule does not apply to
+restatements; those follow the surface grading below (2026-11-02).
+
+**Surface grading (added 2026-11-02, PI-directed).** A finding at any locus
+other than the claim's owner is a *restatement* and is graded by what it does
+to the owner's claim, not by the LARGE/SMALL list above:
+- **STRONGER** (the restatement asserts a higher tier, a wider scope, or more
+  than the owner proves) is **LARGE**.
+- **STALE** (the restatement asserts a withdrawn or corrected claim as current)
+  is **LARGE**.
+- **UNSCOPED** (same claim, same tier, one of the owner's qualifiers missing):
+  - on a front-door surface (the C25 `FRONT_DOOR` list) for a claim whose C25
+    entry carries `load_bearing=True`, it is **LARGE** (C25 fails on it; the fix
+    is gate-demanded);
+  - elsewhere, when the sentence names its owner (a paper number, theorem,
+    section, pointer or `\gvc`), it is a **NIT**: fix on sight if the unit is
+    open, otherwise log it; the reader who follows the pointer gets the scope;
+  - elsewhere, when the sentence names no owner, it is **SMALL**, and the fix is
+    the pointer or the `\gvc` annotation, not a re-paraphrase.
+- A reviewer may grade a restatement STRONGER only by quoting the owner's tier
+  line and the restatement side by side. A restatement that cannot be placed is
+  UNSCOPED, not STRONGER: the "when in doubt" rule is for owners.
+- **A paper's own abstract and conclusion restate its body.** Against the body,
+  STRONGER or STALE there is **OWNER-LARGE** (the owner contradicts itself);
+  UNSCOPED there is **SMALL**. The body carries the scope; the abstract
+  summarizes. (This narrows the LARGE list's "abstract" clause to the
+  STRONGER/STALE case, 2026-11-02.)
+
+*Why (measured, 2026-11-02 study of runs v5.17.1 to v5.20.23).* OWNER-LARGE ran
+at 0 to 10 per run and tracked new research, not old debt; SURFACE-LARGE ran at
+10 to 40 per run and never fell below 10 on a full sweep. One trunk claim has
+about a hundred mention loci; a scope word dropped on one of them was a LARGE
+that re-opened a unit, wrote new prose, and fed the next fresh reviewer. Holding
+every restatement to the owner's full qualifier list at a hundred loci per claim
+is the standard of a legal brief, not of a scientific abstract, and it is the
+part of the instrument that did not converge.
 
 **OWNER-LARGE vs SURFACE-LARGE (added 2026-09-30, PI-directed).** Every LARGE
 finding is further located:
@@ -54,8 +89,10 @@ finding is further located:
   headline number wrong at its source. These block RESEARCH-GRADE.
 - **SURFACE-LARGE** — the owner is right and a *restatement* of it is not: a
   summary surface (abstract, conclusion, synthesis, INDEX, claims register),
-  a citing paper, a docstring, or a test comment states the claim stronger,
-  staler or unscoped relative to its owner. These are fixed on sight **and
+  a citing paper, a docstring, or a test comment states the claim stronger
+  or staler than its owner (or unscoped on the front door for a `load_bearing`
+  claim; every other unscoped restatement is a NIT or a SMALL under the
+  surface grading above, 2026-11-02). These are fixed on sight **and
   converted into a gate entry** — a C25 claim-registry entry (missing
   qualifier / overclaim, the mirror direction) or a C16 entry (a retired
   phrasing). Once converted and the gates are green, a SURFACE-LARGE does not
@@ -64,8 +101,11 @@ finding is further located:
   kind) counts as fixed only when its **family** is closed: a discrimination-tested
   C16/C25 entry exists, and every locus it, the C25 `--mentions` list and an
   idea-level search over the summary surfaces return has been fixed. The
-  pre-checkpoint self-check is then repeated with fresh reviewers until one
-  returns zero LARGE, and every self-check's findings go into the run record.
+  pre-checkpoint self-check then runs **to zero OWNER-LARGE in the changed
+  units, at most two rounds** (bounded 2026-11-02; see "Incremental
+  certification", item 3); surface findings it raises are converted to a C25 or
+  C16 entry and fixed where the gate names them, and do not re-open the loop.
+  Every self-check's findings go into the run record.
   Summary surfaces cite a claim (`\gvc` / pointer) and a value (registry key)
   rather than paraphrasing it, for new and edited text from 2026-10-02;
   existing surfaces are converted when touched, with outstanding
@@ -298,7 +338,11 @@ verdict is the **AND across all review dimensions** (below).
   carries **no descoped/withdrawn (zombie) result**, does not overstate
   convergence between papers or misstate a paper's status, and faithfully
   reflects the in-scope papers. (`claims-reviewer`, **separate dispatch** from
-  the per-paper claims review.)
+  the per-paper claims review.) **Since 2026-11-02 this is the contradiction
+  check on a derived document** ("Incremental certification", item 6): the
+  reviewer holds the owners' current statements and grades each restating
+  sentence STRONGER / STALE / UNSCOPED / FAITHFUL under the surface rule; the
+  synthesis is never stamped and its units are not in the coverage fraction.
 
   **C9-currency (added 2026-08-22, PI-ratified).** Certification additionally
   requires the synthesis to be *current with its own group*: every paper in the
@@ -547,7 +591,7 @@ Reviewer count per dimension follows the **granularity & scaling rule** in `qa.m
 | Code / test-backing | C1, C2 | `code-reviewer` · **1 paper/agent** (does not consolidate) | RUN the tests; does each *prove* its claim? |
 | Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` · **chunk ~3–4 papers/agent** | prose ≤ tier; hard prohibitions intact |
 | External citations | C4 | `citation-reviewer` · **chunk ~5–6 papers/agent** | cites resolve and say what we attribute |
-| Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
+| Synthesis faithfulness (contradiction check on a derived document) | C9 | `claims-reviewer` (one per derived document in scope) | **separate dispatch** from per-paper claims; graded by the surface rule; never stamped |
 | Deterministic | C10, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py`, `check_headline_numbers.py`, `check_duration_language.py`, `check_latex_escapes.py`, `check_inline_attributions.py`, `check_numeric_consistency.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
 | Arithmetic audit | (cross-cuts C8) | dedicated reviewer or in-panel instruction: re-derive every stated total/ratio/percentage from its own components | registered 2026-08-29 (cert-3: two of the run's LARGEs were sums that did not equal their own parts); fires on FULL runs |
 
@@ -599,8 +643,26 @@ hand; or run with every unit treated as NEW). PASS and RESEARCH-GRADE require ev
 unit to carry a current stamp at the end of the run.
 
 **3. Stamping.** After the run's LARGE findings are remediated AND the self-check
-loop has returned zero LARGE, stamp the units the run reviewed whose text the
+has returned zero OWNER-LARGE (below), stamp the units the run reviewed whose text the
 remediation left unchanged: `--stamp --run "<run id>" --unchanged-since <reviewed sha>`.
+
+  **The self-check is bounded (2026-11-02, PI-directed).** Round 1: one fresh
+  Opus claims reviewer reads in full every owner unit `--status` reports CHANGED
+  or CLAIM-MOVED, plus the abstract, conclusion and scope paragraphs of each
+  owner paper touched. Any OWNER-LARGE is fixed under the families rule and
+  round 2 runs with a new reviewer on the same scope. **There is no round 3.** A
+  round-2 OWNER-LARGE is fixed, its unit stays unstamped (it is CHANGED), and
+  the run line records "self-check closed with an open owner fix"; a third
+  round is a PI call. Surface findings from either round are graded by the
+  surface rule, converted gate-first into a C25 or C16 entry, fixed at the loci
+  the gate names, and never restart the loop. The round count and each round's
+  OWNER/SURFACE tally go in the run line, as before.
+  *Why, measured:* the loops ran 15, 10, 4, 4, 6 and 4 rounds, and from round 2
+  on nearly every finding was a restatement or hedge text the previous round
+  had written, or old debt beside it. A fresh reviewer sent 60 documents and
+  told to find problems returns zero only by sampling; "zero LARGE from a fresh
+  adversary" was a sampling event, not a state of the corpus. The stop rule now
+  measures the thing a self-check can measure: that the owner edits hold.
 Remediated units stay unstamped and are reviewed (and stamped) by the next run --
 remediated text is not clean text, and the self-check is a claims-only check, not a
 certification review. Units with open LARGE are excluded (`--exclude`). A stamp means
@@ -639,10 +701,87 @@ the preamble when first used). No build-time insertion of a canonical sentence, 
 the reason numeric-registry rule 5 rejects build-time numbers: the sentence around
 it would not update.
 
+**6. The target is split: owner papers are certified, derived documents are
+checked (2026-11-02, PI-directed).** A target's units are of two kinds.
+*Owner units* (`prose:`, `cite:`, `code:` of the owner papers) are what a
+certification stamps and what coverage counts. *Derived documents* (every file
+under `papers/synthesis/`, including the field guide; and, for the front door,
+README, INDEX, the claims register, `docs/atlas.md`, `docs/forced_free_seam.md`)
+restate owners and absorb every research sprint; they are **never stamped** and
+never enter the coverage fraction. Each run gives every derived document in
+scope a **contradiction check**: one claims reviewer per document, with the
+owners' current statements pasted in, asking of each restating sentence only
+"does it contradict its owner" (STRONGER or STALE). UNSCOPED is noted, not
+hunted. This is the C9 dimension, kept, with its grading set by the surface
+rule. `cert_stamps.py` reports derived units separately and refuses to stamp
+them. *Why, measured:* the trunk was stamped 2026-10-03 with 212 units; on
+2026-11-02, 89 were CHANGED and 16 NEW, about a third, and the group3 synthesis
+alone had ten commits between those dates. A target that restates the corpus
+cannot stay certified while the corpus moves; the owners can.
+
+**7. Coverage is the convergence number; the unit set is frozen at plan time
+(2026-11-02, PI-directed).** `cert_stamps.py --status` and `--plan` print
+`COVERAGE <target>: stamped/total owner units (percent) [per dimension]`. That
+fraction goes in **every run line** (CHANGELOG entry and the CLAUDE.md section 2
+one-liner), as `coverage 88/174` and the like. `--plan` writes the frozen unit
+set to `docs/qa/stamps/<target>.plan.json`; until `--stamp` closes the cycle,
+units created later are reported NEXT-CYCLE and stay out of the denominator, so
+a section written during a cert cycle rolls to the next cycle instead of
+moving the goalposts mid-run. `--plan --refreeze` rewrites the set. Measured on
+2026-11-02 before any change: trunk 88/174 (51%). Once a target reaches 100%
+once, the cost of a run is proportional to what was written since the last one,
+and that is what convergence looks like on this instrument.
+
 **Honest ceiling.** A stamp certifies the unit's text against the claims as they
 stood; CLAIM-MOVED catches a moved claim only where the C25 `mention` pattern or a
 C16 `cited_by` reaches. A paraphrase neither reaches stays CURRENT -- which is what
-the AUDIT sample and rule 5 exist to bound.
+the AUDIT sample and rule 5 exist to bound. Derived documents carry no stamp, so
+their state is only as current as the last contradiction check.
+
+## Two scheduled passes: one record per verdict, and cite-don't-paraphrase (2026-11-02, PI-directed)
+
+These are the two changes that shrink the surface class rather than finding it
+faster. Each is a one-time pass outside any cert cycle, with a definition of done,
+and each is owed before the next trunk FULL run. Their state is tracked in
+`docs/qa/trunk.debt.md`, "Scheduled passes".
+
+**Pass A: collapse the registers to one home per verdict.** Measured on
+2026-11-02, six surfaces restate verdicts: Paper 57's tables, its companion
+`docs/forced_free_seam.md` (79 entries), `docs/atlas.md` (one row per released
+axis), `docs/claims_register.md`, the field guide's atlas table, and
+`papers/INDEX.md`. The v5.20.22 fix of one missing scope clause landed at six
+loci. The pass assigns **one owning record per kind of verdict** and turns every
+other surface's restatement into a one-line pointer: released-axis price and
+verdict live in `docs/atlas.md` (the gated register, PI-directed 2026-10-15);
+per-entry forced/free/wall status lives in `docs/forced_free_seam.md` (Paper 57's
+"full table"); headline-claim tiers live in `docs/claims_register.md`; INDEX
+carries paper status only; the field guide's atlas table carries door numbers and
+a pointer. Whether Paper 57's own tables remain a second home for the per-entry
+status, or point to the seam document, is a PI decision (the paper is
+authoritative under CLAUDE.md section 1; the seam document is its companion
+data file), and the pass does not start on Paper 57 until that is decided.
+*Done when:* every verdict has exactly one restating home, the others point;
+C25 is green on the front door; `tests/test_atlas_register.py` passes; the
+change log here records the home map.
+
+**Pass B: apply the cite-don't-paraphrase rule, trunk first.** The rule was
+adopted 2026-10-02 and hardened 2026-10-03 (item 5 above); on 2026-11-02 the
+corpus held 243 `\gvq` number annotations and **zero** `\gvc` claim annotations
+in any paper body (Paper 62 defines the macro and does not use it; the claims
+register has three Markdown ones). Thirty-two claims are registered. The pass
+converts every load-bearing restatement on a derived surface to a pointer or a
+`\gvc{id}{...}` / `<!-- gvc:id -->` annotation held to its C25 entry, in this
+order: the group3 synthesis and the five trunk papers' abstracts and
+conclusions; then the front door; then the other six syntheses. Measured price
+(`check_claim_registry.py --mentions`, 2026-11-02): about 1,080 mention loci
+corpus-wide for the 32 claims, about 195 of them on derived surfaces; the
+trunk-first slice is roughly a third of those. Procedure per claim: list the
+loci with `--mentions`, wrap each restating sentence on a derived surface,
+run C25, and fix what it names under the edit bar (delete, don't hedge; minimal
+diff). Then one bounded self-check on the changed units. *Done when:* every
+derived-surface mention of a registered claim is annotated or a pointer, C25 is
+green, and the trunk coverage line is unchanged (the pass touches no owner
+unit's claims; a changed owner unit is a defect of the pass).
 
 ## Run shapes: full runs vs delta-verification runs (2026-07-02, PI direction)
 
@@ -752,6 +891,19 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-11-02 — **Convergence fixes** (PI-directed after the 2026-11-02 study of
+  runs v5.17.1 to v5.20.23; MAJOR bump v6.0.0, PI call). (1) Surface grading: STRONGER
+  and STALE restatements are LARGE; UNSCOPED is LARGE only on the front door for
+  a `load_bearing` C25 claim, otherwise NIT (owner named) or SMALL; "when in
+  doubt, grade LARGE" is owner-only. (2) The self-check stops at zero
+  OWNER-LARGE, at most two rounds; surface findings go gate-first and never
+  re-open it. (3) Target split: owner papers are stamped, derived documents get
+  a contradiction check and are never stamped (`cert_stamps.py` refuses them).
+  (4) Coverage (stamped/total owner units) is printed by `cert_stamps.py` and
+  goes in every run line; `--plan` freezes the unit set. (5) Two scheduled
+  passes defined and priced: one record per verdict (Pass A) and
+  cite-don't-paraphrase, trunk first (Pass B). Sections: "Surface grading",
+  "Incremental certification" items 3, 6, 7, "Two scheduled passes".
 - 2026-10-03 — **Incremental certification + edit bar** (PI-directed after FULL #12;
   MINOR bump v5.20.0): per-unit content-hash stamps (`cert_stamps.py`); a FULL reviews
   only NEW/CHANGED/CLAIM-MOVED units plus a 10% audit sample; only a LARGE opens a

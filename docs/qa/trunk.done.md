@@ -61,7 +61,9 @@
 > by every run since; see the banner.
 
 **Scope:** Papers **0, 1, 7** (group3 foundations) + **32, 38** (group1
-operator-algebras) + the **group3 foundations synthesis**. The trunk is the
+operator-algebras) + the **group3 foundations synthesis** (a *derived document*
+since 2026-11-02: contradiction-checked every run under C9, never stamped,
+outside the coverage fraction; criteria.md "Incremental certification" item 6). The trunk is the
 foundation every branch depends on; it is QA'd first so a finding at a root
 re-prices everything above it.
 

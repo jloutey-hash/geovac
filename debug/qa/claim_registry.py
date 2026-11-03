@@ -45,6 +45,12 @@ DELTA.  Never register a claim whose owner text you have not read; the
 ``owner_anchor`` + ``owner_tier`` pair is checked every run so the registry
 cannot silently disagree with the paper it points at.
 
+``load_bearing=True`` (2026-11-02, surface grading) marks a claim whose
+QUALIFIER carries its tier, status or a hard prohibition: dropping it on a
+front-door surface is still a SURFACE-LARGE.  Everywhere else, and for every
+other claim, a missing qualifier (UNSCOPED) grades SMALL or NIT; only STRONGER
+and STALE restatements are LARGE (docs/qa/criteria.md, "Surface grading").
+
 Patterns are Python regexes, matched case-insensitively against a LINE
 (Markdown front-door rows are single lines) or against the annotated span.
 """
@@ -80,7 +86,7 @@ CLAIMS = {
                   r"stated and proven|does not force|every appearance of .{0,10}pi.{0,10} in any|"
                   r"complete (period-theoretic |period-ring )?stratification|classif(ies|y) the transcendentals|"
                   r"which transcendentals can appear|identifies as the \$?M_?\{?1",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "wh1-p38-gh-convergence": dict(
         statement="Truncations of the TRUE Camporesi-Higuchi window converge to the round-S^3 triple "
                   "in state-space GH (translation seminorm): COMMUTATIVE FACTOR ONLY; the almost-"
@@ -94,7 +100,7 @@ CLAIMS = {
                   r"almost[- ]commutative[^.;]{0,60}\b(proved|proven)\s+(likewise|too|as well)|"
                   r"\b(proves|proved)\s+(the\s+)?(convergence\s+(of|for)\s+the\s+)?(almost[- ]commutative|non-?commutative gauge)|"
                   r"graph.{0,30}converges? to|\\le\s*C_\{?3\}?\s*(\\cdot\s*)?\\gamma",
-        changed="2026-09-29"),
+        load_bearing=True, changed="2026-09-29"),
     "p38-rate-constant": dict(
         statement="4/pi is the asymptotic constant of the FEJER amplitude's moment, gamma_n = (4/pi) "
                   "log n/n [INTERNAL THEOREM + MEASURED] (dual-Coxeter; 2/pi unit S^3; 2 sqrt2/pi Kac). It is "
@@ -110,7 +116,7 @@ CLAIMS = {
                   r"converges? at (the )?rate[^.;]{0,10}4/(π|\\pi)|"
                   r"rate at which[^.;]{0,60}converge[^.;]{0,40}carries|"
                   r"4/(π|\\pi)\$?[^.;]{0,25}\b(sharp|optimal|forced)\b",
-        changed="2026-10-03"),
+        load_bearing=True, changed="2026-10-03"),
     "graph-s3-wall": dict(
         statement="The lattice edge Laplacian D-A does NOT converge to Delta_{S^3} (n_max disconnected "
                   "l-blocks; WALL); what is exact is the (n,l,m) label set + diagonal SO(4) Casimir.",
@@ -119,7 +125,7 @@ CLAIMS = {
         mention=r"graph Laplacian|edge Laplacian|D\s*[−-]\s*A\b",
         qualifier=r"not|WALL|disconnected|refuted|wall|band edge|block",
         overclaim=r"converges to (the )?(S|Δ|\\Delta)|reproduces the (hydrogen|Rydberg)",
-        changed="2026-09-25"),
+        load_bearing=True, changed="2026-09-25"),
     "k-combination-rule": dict(
         statement="K = pi(B + F - Delta) ~ alpha^-1 is an OBSERVATION (numerical coincidence); never "
                   "conjecture, derivation, prediction or theorem (CLAUDE.md 13.5).",
@@ -129,7 +135,7 @@ CLAIMS = {
         qualifier=r"Observation|OBSERVATION|coincidence",
         overclaim=r"\b(conjecture|prediction)\b|(?-i:\b(?:rule|K)\b)[^.;]{0,40}\b(is|as)\s+(a\s+)?theorem(?![-\w])|is derived|derives K|"
                   r"is now a theorem|(?-i:\b(?:rule|K)\b)[^.;]{0,60}\b(is\s+)?proved\s+from",
-        changed="2026-06-14"),
+        load_bearing=True, changed="2026-06-14"),
     "sm-gauge-group-upgrade-b": dict(
         statement="U(1) x SU(2) x SU(3) (and the inner algebra C+H+M3(C)) is FORCED ONLY RELATIVE TO "
                   "the adopted Upgrade B axiom, via an organizing reading -- not a derivation.",
@@ -140,7 +146,7 @@ CLAIMS = {
         qualifier=r"Upgrade|organizing reading|adopted|not a derivation|admitted",
         overclaim=r"mostly forced|derived from the packing|construction does reach|autonomously generat|"
                   r"relative theorem of necessity|disjointness forbids",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "central-smoothing-cb-norm": dict(
         statement="The central smoothing maps are UCP, so their cb-norm is 1; 2/(n_max+1) (and "
                   "4/((n_a+1)(n_b+1))) are Plancherel MASS maxima, not cb-norms.",
@@ -158,7 +164,7 @@ CLAIMS = {
         mention=r"pure-Tate even-weight|⊕.?π\^\{?2k|\\bigoplus_k \\pi\^\{2k\}",
         qualifier=r"(?<!half-)(?<!half )\binteger\b|Seeley|SD coeff",
         overclaim=r"at (any|every) s\b|half-integer s.{0,20}pure-Tate|pure-Tate[^.;]{0,40}(at|for) (every|all|any) half-integer|non-integer s",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "paper7-symbolic-checks": dict(
         statement="Paper 7's sympy suite is 18 CHECKS of Fock's continuum chain (ten limiting-case, "
                   "definitional or non-discriminating), not 18 independent proofs.",
@@ -167,7 +173,7 @@ CLAIMS = {
         mention=r"\b18\b.{0,20}symbolic|symbolic.{0,20}\b18\b",
         qualifier=r"check|limiting|definitional",
         overclaim=r"18 (independent )?(symbolic )?proofs|18/18 symbolic proofs|independent proofs",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "p7-parseval-f0": dict(
         statement="The single-integral F^0 density-overlap formula is the standard Fourier-Parseval form "
                   "of the Coulomb integral written in the stereographic variable t = q/(2Z) [PRIOR ART]; "
@@ -177,7 +183,7 @@ CLAIMS = {
         mention=r"density[- ]overlap|single integral over one|F\^0.{0,40}S\^3|Slater integrals on \$S\^3",
         qualifier=r"Parseval|PRIOR ART|prior art|stereographic variable",
         overclaim=r"key structural finding|Fock projection converts|consequence of the \$?S\^3",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "he-bracket": dict(
         statement="The He fixed-k CI (1.88% above exact) and the cusp-corrected 0.004% (a Schwartz "
                   "extrapolation marginally BELOW exact, non-variational) bracket the exact energy; the "
@@ -187,7 +193,7 @@ CLAIMS = {
         mention=r"0\.004\s*\\?%",
         qualifier=r"extrapolat|non-variational|below the exact|below exact",
         overclaim=r"do not bracket|variational 0\.004|0\.004\s*\\?%[^.;]{0,30}variational bound",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "p1-degree-not-monotone-l": dict(
         statement="On the binary label lattice node degree depends on m and on which shell neighbours "
                   "exist, not monotonically on l (2p m=0 -> 3 > 2s = 2 = 2p m=+-1) [MEASURED].",
@@ -204,7 +210,7 @@ CLAIMS = {
         mention=r"6\s*(\\,)?\s*\\log\s*\\?n|6 log n",
         qualifier=r"MEASURED|finite[- ]range|not proved",
         overclaim=r"PANEL-VERIFIED|holds for all|valid for every|proved for (every|all) n",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "k-match-precision": dict(
         statement="K = pi(B + F - Delta) itself matches 1/alpha to 4.77e-7 (raw, CODATA 2018); the "
                   "8.8e-8 figure is the root of Paper 2's cubic 1/alpha = K - alpha^2, not K.",
@@ -212,7 +218,7 @@ CLAIMS = {
         mention=r"8\.8\s*(×|\\times)\s*10|8\.8e-8",
         qualifier=r"cubic|root|\\alpha\^2|α²|K\s*[−-]\s*\\?alpha",
         overclaim=r"\bK\s*(=\s*(π|\\pi)\s*\(B[^)]*\)\s*)?(match(es)?|agrees? with)\s*(1/α|1/\\alpha|\$1/\\alpha\$)?\s*to\s*\$?8\.8|cubic is irrelevant",
-        changed="2026-09-30"),
+        load_bearing=True, changed="2026-09-30"),
     "p40-general-g-conditional": dict(
         statement="Paper 40 generalises Paper 38 to compact connected semisimple Lie groups "
                   "unconditionally at rank 1 and, for general G, conditionally on the per-group "
@@ -228,7 +234,7 @@ CLAIMS = {
                   r"machinery to all simple compact|closes it positively|was closed in\s+Paper[~\s]?40|"
                   r"universal\s+(?:across|over)\s+(?:the\s+)?compact\s+(?:connected\s+)?(?:\*\*)?semisimple|"
                   r"rigorous\s+(?:at\s+)?rank",
-        changed="2026-10-02"),
+        load_bearing=True, changed="2026-10-02"),
     "p1-ladder-exact": dict(
         statement="Paper 1's ladder operators reproduce n on INTERIOR shells and l(l+1) on every shell "
                   "exactly [SYMBOLIC PROOF] (a two-line commutator identity, w_{n-1}^2 - w_n^2 = -n/2); not "
@@ -250,7 +256,7 @@ CLAIMS = {
         qualifier=r"OBSERVATION|empirical|eliminated|exhibited|record",
         overclaim=r"no spectral construction on \$?S\^3\$? (simultaneously )?generates|complete enumeration|"
                   r"three-homes'?\s+theorem\s+(establishes|proves)[^.;]{0,80}no\s+(single|spectral)",
-        changed="2026-10-02"),
+        load_bearing=True, changed="2026-10-02"),
     "m1-gh-rate-reading": dict(
         statement="The Fejer-moment constant (2/pi unit S^3; 4/pi dual-Coxeter) shares its value with the M1 "
                   "(k = 0) volume slot of the master Mellin engine -- a READING, not a derivation (Paper 38). "
@@ -266,7 +272,7 @@ CLAIMS = {
                   r"exactly what the M1 mechanism predicts|closes it positively|"
                   r"rate at which[^.;]{0,60}converge[^.;]{0,40}carries|"
                   r"(GH|convergence) rate[^.;]{0,30}(sits|lies|is read) in",
-        changed="2026-10-03"),
+        load_bearing=True, changed="2026-10-03"),
     "p55-census-scope": dict(
         statement="Paper 55 is a CENSUS of S^3 spectral-zeta and heat-trace data: its ring memberships are "
                   "theorems, its slot indexing a reading; chemistry seeds, spectral determinants and Paper 61's "
@@ -279,7 +285,7 @@ CLAIMS = {
         overclaim=r"We show that the answer is affirmative|across the entire GeoVac corpus|full classification|"
                   r"engine classification|classification of the transcendentals|"
                   r"all of GeoVac'?s\s+transcendentals sit",
-        changed="2026-10-02"),
+        load_bearing=True, changed="2026-10-02"),
     "lipschitz-c3-compression": dict(
         statement="The Lipschitz comparison constant is C_3 = 1 at every cutoff, by compression: single factor "
                   "(Paper 38), every rank (Paper 40), and jointly on the Clifford-doubled S^3 x S^3 module "
@@ -308,7 +314,7 @@ CLAIMS = {
         qualifier=r"state-space|Gromov|\bGH\b|not claimed|abandoned|stays open|lifted-state",
         overclaim=r"closes that gap|propinquity of Paper~?39|Open prior to this work|"
                   r"Tensor-product propinquity convergence for|Paper 39 closes the same-manifold",
-        changed="2026-10-02"),
+        load_bearing=True, changed="2026-10-02"),
     "p45-rates-spatial": dict(
         statement="Paper 45 proves a degeneracy theorem (the K^+-compressed Lorentzian seminorm vanishes), "
                   "not a propinquity convergence; its surviving spatial statement is d_GH <= gamma_SU "
@@ -321,7 +327,7 @@ CLAIMS = {
         qualifier=r"degenera|spatial|additive|state-space|descoped|withdrawn|retracted|not a",
         overclaim=r"Paper~?\s?45 propinquity proof|O\(T/\\Nt\)|SU\(2\) factor dominates the joint rate|"
                   r"standard Latr\S*\s+propinquity",
-        changed="2026-10-02"),
+        load_bearing=True, changed="2026-10-02"),
     "p59-four-centre-genus-one": dict(
         statement="The general four-centre Slater ERI (XY|ZW) lives on a genus-one curve: a fourth "
                   "distinct centre adds no genus (no genus two) [MEASURED; agrees with an independent "
@@ -333,7 +339,7 @@ CLAIMS = {
         qualifier=r"MEASURED|measured|genus[- ]one|no genus two|adds no genus|elliptic",
         overclaim=r"four[- ]cent(er|re)[^.;]{0,60}\b(theorem|proved|proven)\b|"
                   r"genus[- ]two (curve|surface|period)s? (at|for) four",
-        changed="2026-10-15"),
+        load_bearing=True, changed="2026-10-15"),
     "p59-three-electron-k3": dict(
         statement="The three-electron chain integral lives on a K3 surface whose holomorphic period is "
                   "a sum of two products of complete elliptic integrals ('elliptic squared'; BBBG 2008 eq. 33, from an identity of Bailey) [MEASURED / classical]; the TRUE fibre collapses to K3 "
@@ -348,7 +354,7 @@ CLAIMS = {
         overclaim=r"generic (fibre|fiber)[^.;]{0,40}\b(is|are|reduces to|lies in)\b[^.;]{0,20}\bK3\b|"
                   r"(proves?|proved|shows?|established?)[^.;]{0,30}Calabi.?Yau|"
                   r"Calabi.?Yau[^.;]{0,40}\b(proved|proven|established)\b",
-        changed="2026-10-15"),
+        load_bearing=True, changed="2026-10-15"),
     "p35-window-circle-adopted": dict(
         statement="Paper 35 reads the observer's finite real-time window as a periodic Euclidean circle; "
                   "this identification is ADOPTED, not derived: a compact interval without periodic "
@@ -363,7 +369,7 @@ CLAIMS = {
         overclaim=r"compactified time is (automatically )?discrete|"
                   r"window[^.;]{0,40}\b(forces|derives|implies)\b[^.;]{0,20}(periodic|circle|discrete)"
                   r"(?![^.;]{0,40}\b(open|unsettled|untested)\b)",
-        changed="2026-10-16"),
+        load_bearing=True, changed="2026-10-16"),
     "seam-j4-j7-forced": dict(
         statement="Seam rows J4 (fourth centre: genus one) and J7 (three-electron chain: K3, elliptic "
                   "squared) are F (forced) as of 2026-10-15, on Paper 59 sec:beyond; J2 (front) and J8 "
@@ -377,7 +383,7 @@ CLAIMS = {
         qualifier=r"\bF\b|forced|FORCED|promot|Paper~?\s?59|genus|K3",
         overclaim=r"\bJ[47]\b[^.;]{0,15}\b(is|are|stays?|remains?)\s+(an?\s+)?\**Obs\b|"
                   r"\bJ[47]\b[^.;]{0,15}\**Obs\**\s*\|",
-        changed="2026-10-15"),
+        load_bearing=True, changed="2026-10-15"),
     "p59-coulomb-ring-elliptic": dict(
         statement="A Coulomb ring of three linked densities does not climb: at the 3-D fingerprint fibre "
                   "the triangle's operator factors exactly as M o (theta - r) with an algebraic piece and M "
@@ -437,7 +443,7 @@ CLAIMS = {
                   r"(we|this paper) (prove|establish|identify|find)s?[^.;]{0,40}\bL\(|"
                   r"for (every|all) \$?n\$?(?![^.;]{0,15}(up to|\\le|<=))[^.;]{0,40}(singular|threshold)|"
                   r"c_\{?8,0\}?[^.;]{0,40}\b(equals|is)\b[^.;]{0,20}\bL\(",
-        changed="2026-10-17"),
+        load_bearing=True, changed="2026-10-17"),
     "p59-tree-banana-hadamard": dict(
         statement="The tree ladder's operators are the Hadamard products of the Legendre operator with "
                   "the equal-mass banana operators with n-1 propagators, in y = 1/(16 t^2), checked in "
@@ -453,7 +459,7 @@ CLAIMS = {
                   r"(banana|Hadamard)[^.;]{0,40}\bfor (all|every) \$?n\b|"
                   r"\bwhole (tree )?ladder\b|"
                   r"five densities[^.;|]{0,60}\b(open|evidence|not settled)\b|relation to four is open",
-        changed="2026-10-17"),
+        load_bearing=True, changed="2026-10-17"),
     "p59-slater-slice-membership": dict(
         statement="On the Slater slice G(t) of the three-electron chain (eq:chain_slater_slice; scales "
                   "(t;1,1), zero separation) the artanh solution of R1(theta+2) is absent: a unique rational "

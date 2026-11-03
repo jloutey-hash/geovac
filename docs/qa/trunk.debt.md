@@ -19,6 +19,20 @@ the next run.  Item-by-item record: CHANGELOG v5.20.2.  Residue (not fixed):
 - **[CLOSED 2026-10-04, v5.20.4] Pre-existing test failures.** Two Paper 27 tests: the 2026-08-29 sign fix (b32581a) gauge-flips V within degenerate H1 eigenspaces, so the 'diagonal fraction in the H1 eigenbasis' is basis-dependent -> pinned the basis-free eigenspace-block fraction instead; the Be EP-2N occupations were stale and broke 1S symmetry -> Paper 27 updated (S_full 0.794 -> 0.821, reduction 42% -> 40%, EP-2j FCI S 0.902 -> 0.916). Paper 39 status test asserted a reworded phrase -> asserts substance. All fire-tested. Open wording item: Paper 27 should define the diagonal fraction basis-free (degenerate H1).
 - **Not exercised in FULL #13 (owed before PASS).** C23 inverse citation (C_sat closed form; gearing 2 sqrt6/3; taper O(1/n) vs Jackson/Fejer-Riesz; c^2(n,l)). Dedicated arithmetic-audit pass. Stamp leak (P32 ::Conclusion) -> double the AUDIT fraction next run.
 
+## Scheduled passes (2026-11-02, PI-directed; definitions in criteria.md "Two scheduled passes")
+
+- **Pass A: one record per verdict.** Six surfaces restate verdicts (Paper 57 tables,
+  docs/forced_free_seam.md, docs/atlas.md, docs/claims_register.md, the field guide's atlas table,
+  papers/INDEX.md). Proposed home map: released-axis price/verdict -> atlas; per-entry F/C/W status ->
+  seam document; headline-claim tiers -> claims register; INDEX = paper status only; field guide =
+  door numbers + pointer. **PI decision owed before the pass touches Paper 57:** do its tables
+  remain a second home for per-entry status, or point to the seam document? NOT RUN.
+- **Pass B: cite-don't-paraphrase, trunk first.** Price measured 2026-11-02: ~1,080 mention loci
+  corpus-wide for the 32 C25 claims, ~195 on derived surfaces (syntheses, field guide, INDEX, claims
+  register); zero `\gvc` in any paper body today. Order: group3 synthesis + trunk abstracts and
+  conclusions; front door; the other syntheses. Done when every derived-surface mention is a pointer
+  or an annotated span, C25 green, trunk coverage unchanged. NOT RUN.
+
 ## Open
 
 - 2026-10-03 (DELTA #26) — Paper 40 PRV upgrade owed: (INT) holds on every PRV summand at all ranks (Cas(sigma) = |sigma|^2 + 2<sigma,rho> >= |lambda + w lambda'^*|^2 >= |lambda - lambda'|^2); sound by inspection, needs an exact-arithmetic test before it replaces the v5.19.0 'rests on panels' caveat.

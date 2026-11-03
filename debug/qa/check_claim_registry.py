@@ -326,11 +326,16 @@ def selftest() -> int:
         print("SELFTEST FAIL: \\gvc nested-brace parser"); ok = False
     if list(gvc_spans(r"\gvc{k-combination-rule}{unterminated"))[0][1] is not None:
         print("SELFTEST FAIL: unterminated \\gvc not reported"); ok = False
+    lb = {cid for cid, c in R.CLAIMS.items() if c.get("load_bearing")}
+    if not {"k-combination-rule", "wh1-p38-gh-convergence"} <= lb or lb == set(R.CLAIMS):
+        print(f"SELFTEST FAIL: load_bearing flags not discriminating ({len(lb)} of {len(R.CLAIMS)})"); ok = False
     print("SELFTEST", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
 
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser()
     ap.add_argument("--mentions")
     ap.add_argument("--changed-since")
@@ -342,7 +347,9 @@ def main() -> int:
         if a.mentions not in R.CLAIMS:
             print("unknown claim id"); return 1
         rows = mentions(a.mentions)
-        print(f"# {a.mentions}: {R.CLAIMS[a.mentions]['statement']}")
+        lb = "LOAD-BEARING qualifier (front-door UNSCOPED = LARGE)" if R.CLAIMS[a.mentions].get("load_bearing") \
+            else "scope qualifier (UNSCOPED = SMALL/NIT off the front door)"
+        print(f"# {a.mentions} [{lb}]: {R.CLAIMS[a.mentions]['statement']}")
         for rel, ln, q, txt in rows:
             print(f"{'  ' if q else '!!'} {rel}:{ln}: {txt}")
         print(f"# {len(rows)} mention(s); '!!' = no qualifier within +-2 lines (read these first)")
