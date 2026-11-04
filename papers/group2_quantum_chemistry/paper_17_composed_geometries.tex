@@ -9,7 +9,7 @@
 \begin{document}
 
 \title{Composed Natural Geometries for Core-Valence Diatomics:\\
-LiH and BeH$^+$ from Discrete Graph Topology}
+LiH and BeH$^+$ from Natural-Geometry Solvers}
 \thanks{Paper 17 in the Geometric Vacuum series}
 
 \author{J.~Loutey}
@@ -24,30 +24,33 @@ LiH and BeH$^+$ from Discrete Graph Topology}
 The natural geometry hierarchy assigns each separable quantum system
 a coordinate system where Coulomb singularities become boundary
 conditions:\ $S^3$ for atoms (Paper~7), prolate spheroids for
-H$_2^+$ (Paper~11), hyperspherical for He (Paper~13), molecule-frame
-hyperspherical for H$_2$ (Paper~15).
+H$_2^+$ and H$_2$ (Papers~11, 12), hyperspherical for He (Paper~13),
+with molecule-frame hyperspherical coordinates as the structural
+two-electron treatment of H$_2$ that composition builds on (Paper~15).
 Systems with core electrons resist a single natural geometry because
 core and valence electrons occupy different length scales.
 We introduce \emph{composed natural geometries}---fiber bundles where
 each electron group inhabits its own natural coordinate system,
-connected by screening functions and ab initio Phillips--Kleinman
-pseudopotentials derived entirely from the core wavefunction.
+connected by screening functions and Phillips--Kleinman
+pseudopotentials built from the core wavefunction plus one empirical
+atomic input (the neutral atom's first ionization energy), with the
+barrier-width formula chosen among four candidates by comparison with
+the LiH equilibrium bond length.
 For LiH ($Z_A=3$, $Z_B=1$, 4~electrons): the Li$^+$~$1s^2$ core is
 solved via Level~3 hyperspherical (Paper~13), yielding $Z_{\rm eff}(r)$
 and pseudopotential parameters; the two valence electrons are solved via
 Level~4 molecule-frame hyperspherical (Paper~15) with $Z_{\rm eff}$
 injection; the potential energy surface is scanned via a $\rho$-collapse
 adiabatic method that reduces per-$R$-point cost to seconds.
-Results: $R_{\rm eq} = 3.21$~bohr (6.4\% error vs.\ experiment 3.015,
+Results: $R_{\rm eq} = 3.22$~bohr (6.9\% error vs.\ experiment 3.015,
 improved from 17\% in LCAO),
-$\omega_e = 1471$~cm$^{-1}$ (4.6\% error vs.\ 1406),
-with zero experimental molecular data in the pseudopotential.
+$\omega_e = 1465$~cm$^{-1}$ (4.2\% error vs.\ 1406).
 The $l$-dependent PK variant reduces the $R_{\rm eq}$ error further, to
 5.3\%---the figure quoted as this paper's headline elsewhere in the
-corpus;\ 6.4\% is the plain ab initio PK.
+corpus;\ 6.9\% is the plain channel-blind PK.
 Total wall time is ${\sim}4$~minutes per molecule on commodity hardware.
 The same formula transfers to BeH$^+$ ($Z_A=4$) with no per-molecule
-tuning.
+tuning, giving a bound ion whose $R_{\rm eq}$ is 30\% long.
 \end{abstract}
 
 \maketitle
@@ -75,7 +78,7 @@ Four levels of this hierarchy have been established:
   Laplacian's extremal eigenvalue matches the ground state only by
   construction through $\kappa$; Paper~7~\cite{paper7});\ the $S^3$
   content enters through the exact label set and Fock's continuum
-  chain, not through a continuum limit of the graph Laplacian, which [retracted 2026-09-25: graph-laplacian-converges-to-s3]
+  chain, not through a continuum limit of the graph Laplacian, which % [retracted 2026-09-25: graph-laplacian-converges-to-s3]
   does not converge to $\Delta_{S^3}$ (Paper~7).
 
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).
@@ -87,8 +90,9 @@ Four levels of this hierarchy have been established:
 \item[Level~3] \emph{One-center, two-electron} (He).
   Hyperspherical coordinates $(R_e, \alpha, \hat{r}_1, \hat{r}_2)$
   resolve the $e$--$e$ cusp as a boundary condition at $\alpha=\pi/4$,
-  $\theta_{12}=0$.  Paper~13~\cite{paper13} achieves 0.05\% error for
-  He with a single adiabatic channel.
+  $\theta_{12}=0$.  Paper~13~\cite{paper13} reaches 0.022\% error for
+  He with a 2D variational solver (a single adiabatic channel gives a
+  non-variational 0.05\%).
 
 \item[Level~4] \emph{Two-center, two-electron} (H$_2$).
   Molecule-frame hyperspherical coordinates
@@ -123,11 +127,13 @@ This is a fiber-bundle composition of natural
 geometries with typed inter-layer maps ($R\to\infty$ dissociation,
 $Z\to Z'$ isoelectronic substitution).
 
-The key results: LiH $R_{\rm eq} = 3.21$~bohr (6.4\% error),
-$\omega_e = 1471$~cm$^{-1}$ (4.6\% error), with zero experimental
-molecular data.  The same code, with only $(Z_A, Z_B, M_A, M_B)$
-changed, produces a bound BeH$^+$ with physical spectroscopic
-constants.  We do not claim production accuracy; this is a proof of
+The key results: LiH $R_{\rm eq} = 3.22$~bohr (6.9\% error),
+$\omega_e = 1465$~cm$^{-1}$ (4.2\% error);\ the pseudopotential uses one
+empirical atomic input and a barrier-width formula chosen against the
+LiH bond length (Sec.~\ref{sec:B_compare}).  The same code, with only
+$(Z_A, Z_B, M_A, M_B)$ changed, produces a bound BeH$^+$, but its
+spectroscopic constants are far from experiment ($R_{\rm eq}$ $+30\%$,
+$\omega_e$ $+20\%$; Table~\ref{tab:beh}).  We do not claim production accuracy; this is a proof of
 concept for the composed geometry architecture.
 
 
@@ -267,7 +273,9 @@ We parameterize the PK barrier as
   V_{\rm PK}(r) = \frac{A\,e^{-Br^2}}{r^2}\,,
   \label{eq:Vpk}
 \end{equation}
-where $A$ and $B$ are derived entirely from the core wavefunction.
+where $A$ and $B$ are computed from the core wavefunction, with one
+empirical atomic input to $A$ and a formula choice for $B$ made against
+the LiH bond length (both stated below).
 
 \paragraph{Barrier width $B$.}
 The PK barrier must be localized where the core density is concentrated.
@@ -278,13 +286,17 @@ We define the inverse-square-weighted core radius
   \label{eq:reff}
 \end{equation}
 which weights the inner core---where $1/r^2$ is large---more heavily
-than the diffuse tail.  Then
+than the diffuse tail (both integrals are taken over $r > 0.01$~bohr).  Then
 \begin{equation}
   B = \frac{1}{2\,r_{\rm eff}^2}\,.
   \label{eq:B}
 \end{equation}
-For Li: $r_{\rm eff} = 0.267$~bohr, $B = 7.00$~bohr$^{-2}$.
-For Be: $r_{\rm eff} = 0.200$~bohr, $B = 12.53$~bohr$^{-2}$.
+For Li: $r_{\rm eff} = 0.271$~bohr, $B = 6.80$~bohr$^{-2}$.
+For Be: $r_{\rm eff} = 0.203$~bohr, $B = 12.10$~bohr$^{-2}$.
+This radius was selected from four candidate definitions by comparing
+the LiH $R_{\rm eq}$ each produces with experiment (Table~\ref{tab:B});\
+the choice is a formula selection made against one molecular datum, not
+a derivation.
 
 \paragraph{Barrier height $A$.}
 The kinetic energy cost of core--valence orthogonalization is
@@ -295,15 +307,16 @@ The kinetic energy cost of core--valence orthogonalization is
 \end{equation}
 where $E_{\rm core}$ is the total core energy from the hyperspherical
 solve, $N_{\rm core} = 2$, and $E_{\rm val}$ is estimated from the
-first ionization energy of the neutral atom (an atomic property, not
-a molecular one: $\text{IE}(\text{Li}) = 0.198$~Ha~\cite{nist},
+first ionization energy of the neutral atom, taken from experiment
+($\text{IE}(\text{Li}) = 0.198$~Ha~\cite{nist},
 $\text{IE}(\text{Be}) = 0.343$~Ha~\cite{nist}).
 For Li: $A = 6.93$~Ha$\cdot$bohr$^2$.
 For Be: $A = 13.01$~Ha$\cdot$bohr$^2$.
 
-No experimental molecular data enters these formulas.  Only atomic
-properties: $Z$, the core wavefunction (via the Level~3 solve), and
-the first ionization energy of the neutral atom.
+The formulas therefore take $Z$, the core wavefunction (via the
+Level~3 solve), and one empirical atomic input, the measured first
+ionization energy of the neutral atom;\ the choice of $B$ formula was
+made against the LiH bond length (Sec.~\ref{sec:B_compare}).
 
 \paragraph{$l$-dependent pseudopotential.}
 The channel-blind PK barrier [Eq.~(\ref{eq:Vpk})] applies the
@@ -318,8 +331,8 @@ orthogonality of the core.
 At $l_{\max} = 2$ this reduces $R_{\rm eq}$ error from 6.9\% to
 5.3\% for LiH.  The $l_{\max}$ divergence (Sec.~\ref{sec:outlook})
 is reduced but not eliminated: at $l_{\max} = 3$, $R_{\rm eq}$
-error is 14.7\% (vs 16.9\% channel-blind).  The remaining divergence
-is attributed to differential angular correlation, not PK artifacts.
+error is 15.7\% (vs 18.8\% channel-blind).  The remaining divergence
+is intrinsic to the PK/composed architecture (Sec.~\ref{sec:outlook}).
 
 
 \subsection{\texorpdfstring{$Z_{\rm eff}$}{Z\_eff} injection into the
@@ -347,11 +360,12 @@ constant.
 scanning}
 \label{sec:rho_collapse}
 
-Paper~15 proved that the Level~4 angular eigenvalue problem depends
+In the Level~4 angular problem the molecular charge function depends
 on $(R, R_e)$ only through the dimensionless ratio
-$\rho = R/(2R_e)$.  This means the angular eigenvalue curves
-$\varepsilon_\nu(\rho)$ can be computed once on a one-dimensional grid
-of $\rho$ values and then interpolated via cubic splines.
+$\rho = R/(2R_e)$ (Paper~15), so its matrix elements can be computed
+once on a one-dimensional grid of $\rho$ values and interpolated via
+cubic splines;\ the angular eigenvalues themselves depend on both $\rho$
+and $R_e$.
 
 The effective radial potential is
 \begin{equation}
@@ -440,12 +454,14 @@ command
 \label{sec:pk_params}
 
 Table~\ref{tab:pk} collects the PK parameters for Li and Be cores,
-derived entirely from the core wavefunction and atomic ionization
-energies.
+computed from the core wavefunction and the measured atomic ionization
+energies, with the $B$ formula of Sec.~\ref{sec:B_compare}.
 
 \begin{table}[b]
 \caption{Ab initio Phillips--Kleinman pseudopotential parameters.
-  All quantities from the core wavefunction; no molecular data.}
+  Computed from the core wavefunction and the neutral-atom ionization
+  energy;\ the $B$ formula was chosen against LiH $R_{\rm eq}$
+  (Table~\ref{tab:B}).}
 \label{tab:pk}
 \begin{ruledtabular}
 \begin{tabular}{lddd}
@@ -453,15 +469,15 @@ energies.
   & \multicolumn{1}{c}{Be ($Z{=}4$)}
   & \multicolumn{1}{c}{Formula} \\
 \colrule
-$r_{\rm eff}$ (bohr)   & 0.267  & 0.200  & \multicolumn{1}{c}{Eq.~(\ref{eq:reff})} \\
+$r_{\rm eff}$ (bohr)   & 0.271  & 0.203  & \multicolumn{1}{c}{Eq.~(\ref{eq:reff})} \\
 $A$ (Ha$\cdot$bohr$^2$) & 6.93  & 13.01  & \multicolumn{1}{c}{Eq.~(\ref{eq:A})} \\
-$B$ (bohr$^{-2}$)       & 7.00  & 12.53  & \multicolumn{1}{c}{Eq.~(\ref{eq:B})} \\
-$E_{\rm core}$ (Ha)     & -7.280 & -13.700 & \multicolumn{1}{c}{Level~3} \\
+$B$ (bohr$^{-2}$)       & 6.80  & 12.10  & \multicolumn{1}{c}{Eq.~(\ref{eq:B})} \\
+$E_{\rm core}$ (Ha)     & -7.324 & -13.700 & \multicolumn{1}{c}{Level~3} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-$B$ scales approximately as $Z^2$ ($7.00/12.53 \approx 9/16 = (3/4)^2$),
+$B$ scales approximately as $Z^2$ ($6.80/12.10 \approx 9/16 = (3/4)^2$),
 consistent with the core radius scaling as $1/Z$.
 
 
@@ -488,9 +504,9 @@ different pseudopotential treatments.
   & \multicolumn{1}{c}{Fitted}
   & \multicolumn{1}{c}{Expt.} \\
 \colrule
-$R_{\rm eq}$ (bohr)      & 2.5   & 0.88  & 3.21  & 2.97  & 3.015 \\
-$\omega_e$ (cm$^{-1}$)   & \multicolumn{1}{c}{---}  & 2637  & 1471  & 1617  & 1406 \\
-$B_e$ (cm$^{-1}$)        & \multicolumn{1}{c}{---}  & \multicolumn{1}{c}{---}  & 6.63  & 7.84  & 7.51 \\
+$R_{\rm eq}$ (bohr)      & 2.5   & 0.88  & 3.22  & 2.97  & 3.015 \\
+$\omega_e$ (cm$^{-1}$)   & \multicolumn{1}{c}{---}  & 2637  & 1465  & 1617  & 1406 \\
+$B_e$ (cm$^{-1}$)        & \multicolumn{1}{c}{---}  & \multicolumn{1}{c}{---}  & 6.58  & 7.84  & 7.51 \\
 Bound?                    & \multicolumn{1}{c}{Yes}
   & \multicolumn{1}{c}{collapse}
   & \multicolumn{1}{c}{Yes}
@@ -503,24 +519,24 @@ Bound?                    & \multicolumn{1}{c}{Yes}
 Without the PK pseudopotential, the valence electrons collapse into
 the core ($R_{\rm eq} = 0.88$~bohr).  The PK barrier is necessary, not
 merely helpful.  The ab initio PK gives $\omega_e$ closer to experiment
-(4.6\% error) than the fitted PK (15\% error), suggesting that the
+(4.2\% error) than the fitted PK (15\% error), suggesting that the
 $\langle 1/r^2 \rangle$-weighted barrier width captures the correct
 PES curvature.
-The ab initio $R_{\rm eq}$ overshoots experiment (3.21 vs.\ 3.015~bohr)
+The ab initio $R_{\rm eq}$ overshoots experiment (3.22 vs.\ 3.015~bohr)
 because the ab initio barrier height $A = 6.93$ exceeds the fitted
 value $A = 5.0$ by 39\%, producing stronger Pauli repulsion that
 pushes the equilibrium outward.  The barrier widths are nearly
-identical ($B = 7.00$ ab initio vs.\ $7.0$ fitted), so the overshoot
-is controlled entirely by $A$.  Reducing $A$ toward 5 would recover
+identical ($B = 6.80$ ab initio vs.\ $7.0$ fitted), so the overshoot
+is controlled mainly by $A$.  Reducing $A$ toward 5 would recover
 the fitted $R_{\rm eq}$ at the cost of reintroducing a fitted
-parameter; we retain the ab initio value as the parameter-free
-prediction.
+parameter; we retain the ab initio value of $A$.
 
 The $l_{\max}$ dependence provides a convergence indicator:
-$l_{\max} = 2$ gives $R_{\rm eq} = 2.97$~bohr (fitted) or 3.21~bohr
-(ab initio); $l_{\max} = 3$ gives $R_{\rm eq} = 3.23$~bohr (fitted).
+$l_{\max} = 2$ gives $R_{\rm eq} = 2.97$~bohr (fitted) or 3.22~bohr
+(ab initio); $l_{\max} = 3$ gives $R_{\rm eq} = 3.23$~bohr (fitted)
+or 3.58~bohr (ab initio).
 The experimental value (3.015) is bracketed by $l_{\max} = 2$ and
-$l_{\max} = 3$ with fitted PK, and within 6.4\% at $l_{\max} = 2$
+$l_{\max} = 3$ with fitted PK, and within 6.9\% at $l_{\max} = 2$
 with the ab initio PK.
 
 $D_e$ is overestimated because the dissociation limit at $R = 7$~bohr
@@ -551,8 +567,8 @@ Table~\ref{tab:beh} reports the results.
   & \multicolumn{1}{c}{Fitted PK}
   & \multicolumn{1}{c}{Reference} \\
 \colrule
-$R_{\rm eq}$ (bohr)     & 3.25  & 2.82  & \multicolumn{1}{c}{${\sim}\,2.48$} \\
-$\omega_e$ (cm$^{-1}$)  & 2857  & 3088  & \multicolumn{1}{c}{${\sim}\,2222$} \\
+$R_{\rm eq}$ (bohr)     & 3.22  & 2.82  & \multicolumn{1}{c}{${\sim}\,2.48$} \\
+$\omega_e$ (cm$^{-1}$)  & 2669  & 3088  & \multicolumn{1}{c}{${\sim}\,2222$} \\
 Bound?  & \multicolumn{1}{c}{Yes}
   & \multicolumn{1}{c}{Yes}
   & \multicolumn{1}{c}{Yes} \\
@@ -562,7 +578,9 @@ Bound?  & \multicolumn{1}{c}{Yes}
 
 No molecule-specific code or parameter tuning is required.  The PK
 parameters are derived from the Be$^{2+}$ core solution using the
-identical formulas [Eqs.~(\ref{eq:reff})--(\ref{eq:A})].
+identical formulas [Eqs.~(\ref{eq:reff})--(\ref{eq:A})].  Transfer is
+qualitative only:\ the ab initio $R_{\rm eq}$ is $30\%$ and $\omega_e$
+$20\%$ above the reference values.
 
 
 \subsection{Sensitivity analysis}
@@ -579,8 +597,6 @@ dependence:
     $R_{\rm eq}$ range of ${\sim}1.0$~bohr.
 \end{itemize}
 The equilibrium is not sharply tuned to specific PK values.
-The physics (core screening~+~Pauli repulsion) determines the
-equilibrium, not parameter adjustment.
 
 
 \subsection{$B$ formula comparison}
@@ -602,20 +618,23 @@ equilibrium.  Table~\ref{tab:B} reports the results.
   & \multicolumn{1}{c}{Error (\%)} \\
 \colrule
 RMS                 & 0.677  & 1.09  & 4.00  & 32.7 \\
-Peak                & 0.717  & 0.97  & 4.06  & 34.5 \\
-Median              & 0.500  & 2.00  & 3.75  & 24.4 \\
-Inv-sq (selected)   & 0.267  & 7.00  & 3.21  & 6.4  \\
+Peak                & 0.817  & 0.75  & 4.18  & 38.6 \\
+Median              & 0.501  & 1.99  & 3.75  & 24.4 \\
+Inv-sq (selected)   & 0.271  & 6.80  & 3.22  & 6.9  \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The inverse-square formula [Eq.~(\ref{eq:reff})] wins because it
-weights the inner core---where the PK barrier must act---via the
-$\langle 1/r^2 \rangle$ expectation.  The RMS and peak formulas are
+The inverse-square formula [Eq.~(\ref{eq:reff})] was selected because
+it gives the LiH $R_{\rm eq}$ closest to experiment;\ the RMS radius
+was the original choice.  A physical rationale is that it weights the
+inner core---where the PK barrier must act---via the
+$\langle 1/r^2 \rangle$ expectation, while the RMS and peak formulas are
 dominated by the diffuse tail and produce barriers that are too broad.
-The median is intermediate.  This is not parameter selection---it is
-choosing the physically correct moment of the core density for the
-purpose at hand (repulsive barrier localization).
+The selection is nevertheless a choice among four formulas made with
+the LiH $R_{\rm eq}$ in view, so the LiH bond length is not an
+independent prediction;\ BeH$^+$ (Table~\ref{tab:beh}) used no further
+choice.
 
 
 %% ========================================================================
@@ -717,8 +736,9 @@ $\langle \psi_{nlm}^A | V_B | \psi_{n'l'm'}^A \rangle$ can be
 computed analytically via incomplete gamma functions (the multipole
 expansion terminates exactly at $L_{\max} = 2 l_{\max}$ by Gaunt
 selection rules).  The resulting ``balanced coupled''
-Hamiltonian---with all four interaction types and no PK---produces
-the only bound LiH in 4-electron FCI (1.8\% energy error vs
+Hamiltonian---with all four interaction types and no PK---is the only
+4-electron FCI scheme with a LiH PES minimum, being the only one whose
+integrals depend on $R$ (1.8\% energy error vs
 PK's 15.0\%) and achieves 0.20\% energy error at $n_{\max} = 3$.
 For BeH$_2$, PK overcorrects: 27.4\% error in 4-electron FCI vs
 10.7\% balanced.  The balanced 1-norm is lower than composed for
@@ -739,7 +759,7 @@ under the umbrella name ``composed Hamiltonian'':
     hyperspherical PES solver of Sec.~\ref{sec:results} that produces
     the headline LiH 5.3\% $R_{\rm eq}$ error at $l_{\max} = 2$.
     Its $R_{\rm eq}$ drift slope is
-    $+0.15$--$0.22$~bohr per unit $l_{\max}$, structural to PK
+    $+0.30$--$0.37$~bohr per unit $l_{\max}$ (Table~\ref{tab:solver_pk}), structural to PK
     overcounting at higher angular channels.
   \item \textbf{Balanced-coupled solver} (in
     \texttt{geovac/balanced\_coupled.py}, with $n_e$-projected FCI
@@ -748,8 +768,9 @@ under the umbrella name ``composed Hamiltonian'':
     benchmarking (Paper~14, Paper~20). The balanced architecture
     replaces PK entirely with cross-block ERIs plus cross-center V$_{ne}$
     via Shibuya--Wulfman multipole expansion (Paper~19). Its
-    $R_{\rm eq}$ drift slope is $+0.054$~bohr per unit $n_{\max}$,
-    a 3$\times$ improvement over the PK-composed solver.
+    $R_{\rm eq}$ drift is $+0.053$ then $+0.023$~bohr per unit
+    $n_{\max}$ (a different truncation parameter from $l_{\max}$, so the
+    two slopes are not directly comparable).
 \end{enumerate}
 
 These are different solvers in different code paths with different
@@ -980,7 +1001,7 @@ The composed geometry generalizes:
     natural-geometry subproblem and each hyperedge is a typed coupling.
 \end{itemize}
 
-We tested LiH at $l_{\max} = 2$--$7$ with $l$-dependent PK
+We tested LiH at $l_{\max} = 2$--$4$ with $l$-dependent PK
 (applying the pseudopotential barrier only to $l = 0$ channels,
 where the $1s$ core resides), expecting the $l_{\max}$
 convergence pattern from Paper~15 (H$_2$) to reduce $R_{\rm eq}$
@@ -993,30 +1014,12 @@ monotonically from experiment.
 $l_{\max}$ & $N_{\rm ch}$ & $R_{\rm eq}$ (bohr) & Error &
   $\Delta R_{\rm eq}$ \\
 \hline
-2 &  5 & 2.80 &  7.0\% & --- \\
-3 &  8 & 3.02 &  0.0\% & $+0.21$ \\
-4 & 13 & 3.42 & 13.5\% & $+0.41$ \\
-5 & 18 & 3.47 & 15.2\% & $+0.05$ \\
-6 & 25 & 3.56 & 18.1\% & $+0.09$ \\
-7 & 32 & 3.64 & 20.7\% & $+0.08$ \\
+2 &  9 & 3.18 &  5.3\% & --- \\
+3 & 16 & 3.49 & 15.7\% & $+0.31$ \\
+4 & 25 & 3.78 & 25.5\% & $+0.30$ \\
 \hline
 \end{tabular}
 \end{center}
-
-\paragraph{Mechanism: differential angular correlation.}
-The $l_{\max}$ divergence arises from \emph{differential angular
-correlation}: higher-$l$ channels provide angular correlation energy
-that preferentially stabilizes large-$R$ (diffuse) geometries over
-small-$R$ (compact) geometries, shifting the PES minimum outward.
-A diagnostic decomposition confirms this is entirely nuclear in
-origin.  Removing all electron--electron off-diagonal coupling
-while retaining the full nuclear coupling gives a ground-state
-channel weight $w(0{,}0) = 0.243$ and 8~channels for 90\% of
-the norm---massive spreading driven by the asymmetric nuclear
-potential.  Conversely, retaining only the $e$--$e$ coupling
-(diagonal nuclear) gives $w(0{,}0) = 0.9998$---the electron--electron
-interaction produces no channel mixing.  The spreading is 100\%
-nuclear.
 
 \paragraph{Eigenvalue convergence at fixed geometry.}
 At fixed internuclear geometry $(R, R_e)$, the angular eigenvalue
@@ -1026,7 +1029,7 @@ $R^2 = 0.997$).  The divergence of $R_{\rm eq}$ is therefore not a
 failure of eigenvalue convergence but a differential effect: the
 converged eigenvalue improves faster at large~$R$ than at
 small~$R$, tilting the PES.  The overall drift rate is
-$+0.168$~bohr per unit $l_{\max}$ (linear fit, $R^2 = 0.89$).
+$+0.30$~bohr per unit $l_{\max}$ over $l_{\max} = 2$--$4$.
 
 \paragraph{R-dependent pseudopotential scaling.}
 \label{par:rdep_pk}
@@ -1051,21 +1054,18 @@ For LiH with $R_{\rm ref} = 3.015$~bohr and cap $= 1.5$:
 \hline
 Mode & $l_{\max}$ & $R_{\rm eq}$ (bohr) & Error \\
 \hline
-$l$-dependent     & 4 & 3.42 & 13.5\% \\
 $R$-dependent     & 4 & 3.08 &  2.0\% \\
 Self-consistent   & 4 & 3.19 &  5.9\% \\
-$l$-dependent     & 7 & 3.64 & 20.7\% \\
 $R$-dependent     & 7 & 3.61 & 19.7\% \\
 \hline
 \end{tabular}
 \end{center}
 
 \noindent
-The $R$-dependent scaling reduces $R_{\rm eq}$ error from 13.5\% to
-2.0\% at $l_{\max} = 4$, but the advantage erodes at higher
-$l_{\max}$: the asymptotic drift rates are $+0.168$ ($l$-dependent)
-and $+0.160$ ($R$-dependent) bohr per unit $l_{\max}$ over the
-range $l_{\max} = 2$--$7$.  Self-consistent PK (iteratively
+The $R$-dependent scaling gives 2.0\% $R_{\rm eq}$ error at
+$l_{\max} = 4$, but the advantage erodes at higher
+$l_{\max}$: its drift rate is $+0.160$ bohr per unit $l_{\max}$
+over the range $l_{\max} = 2$--$7$.  Self-consistent PK (iteratively
 adjusting the barrier strength based on the eigenstate's $l = 0$
 content) achieves intermediate drift reduction (50\%).  The scaling
 delays the onset of divergence but does not eliminate the asymptotic
@@ -1088,8 +1088,7 @@ exist at all: without PK there is no minimum to diverge.  It does
 \emph{not} localize the $l_{\max}$ divergence to the adiabatic
 approximation; the variational analysis below shows the 2D solver
 produces the \emph{same} drift, so the divergence is intrinsic to the
-composed-geometry architecture, not the adiabatic approximation or
-the PK form.  The operating point remains $l_{\max} = 2$.
+PK/composed architecture, not the adiabatic approximation.  The operating point remains $l_{\max} = 2$.
 
 \paragraph{Ab initio $R_{\rm ref}$ derivation (negative result).}
 \label{par:rref_negative}
@@ -1115,21 +1114,6 @@ Deriving $R_{\rm ref}$ from core properties creates circular
 reasoning: the only atomic length scales ($0.27$--$0.82$~bohr) are
 too small by a factor of ${\sim}4$--$11$.
 
-\paragraph{Root cause: adiabatic approximation with asymmetric charges.}
-Subsequent diagnostics (v2.0.6) have traced the $l_{\max}$ divergence
-to the adiabatic multichannel approximation interacting with
-PK-induced angular symmetry breaking.  A bare HeH$^+$ Level~4
-calculation---with no $Z_{\rm eff}$, no Phillips--Kleinman
-pseudopotential, and no composition---exhibits the same qualitative
-drift: $+0.262$~bohr per $l_{\max}$.  In composed LiH, where
-$Z_A = Z_B = 1$ (symmetric), the PK barrier on atom~A breaks the
-$A \leftrightarrow B$ symmetry, producing an effective heteronuclear
-system with drift $+0.303$~bohr per $l_{\max}$.  The mechanism is
-that asymmetric nuclear coupling populates odd-$l$ channels forbidden
-in homonuclear systems; H$_2$ places 94\% of its channel weight in
-the $(0{,}0)$ channel, while HeH$^+$ places only 68\%, with 20\% in
-odd-$l$ channels that preferentially stabilize large-$R$ configurations.
-
 Three alternative mitigation strategies were tested and found
 insufficient.  (i)~An algebraic PK projector (rank-1
 $|\psi_{\rm core}\rangle\langle\psi_{\rm core}|$) produces
@@ -1139,8 +1123,7 @@ core state in function space while still penetrating the core
 region in coordinate space.  (ii)~Enhanced $Z_{\rm eff}$ with a
 repulsive dip (PK-free) requires extreme parameters
 ($Z_{\rm eff}(0) = -38$) due to $1/r^2$ vs $1/r$ shape mismatch,
-and the odd-$l$ channel population rises to 30.7\%---worse than
-bare HeH$^+$.  (iii)~Single-channel DBOC correction of $+0.035$~Ha
+and the odd-$l$ channel population rises to 30.7\%.  (iii)~Single-channel DBOC correction of $+0.035$~Ha
 is 97\% cancelled by off-diagonal $P$-matrix coupling in the
 complete-basis limit, overcorrecting by $23\times$.
 
@@ -1170,8 +1153,8 @@ drift rate for each configuration, including updated fine-grid results
   & \multicolumn{1}{c}{$l{=}4$}
   & Drift \\
   \hline
-  Adiab.\ + ch-blind          &  6.4 & 16.9 & 32.8 & $+0.40$ \\
-  Adiab.\ + $l$-dep           &  5.3 & ---  & ---  & --- \\
+  Adiab.\ + ch-blind          &  6.9 & 18.8 & 31.2 & $+0.37$ \\
+  Adiab.\ + $l$-dep           &  5.3 & 15.7 & 25.5 & $+0.30$ \\
   2D + ch-blind (coarse)       &  6.1 &  9.5 & ---  & $+0.10$ \\
   2D + ch-blind (fine)         &  5.5 & 10.4 & 20.4 & $+0.15$--$0.30$ \\
   2D + $l$-dep                 &  6.1 &  9.5 & 16.1 & $+0.15$ \\
@@ -1179,12 +1162,10 @@ drift rate for each configuration, including updated fine-grid results
 \end{ruledtabular}
 \end{table}
 
-\paragraph{Updated root cause (v2.0.32).}
-Fine-grid analysis (16 R-points, Track~BQ) revealed that the earlier
-coarse-grid survey overestimated the adiabatic contribution to the
-drift.  On the fine grid, the 2D variational solver produces drift of
+\paragraph{Root cause.}
+On a fine grid (16 R-points, Track~BQ), the 2D variational solver produces drift of
 $+0.15$--$0.30$~bohr/$l_{\max}$ (Table~\ref{tab:solver_pk}),
-comparable to the adiabatic solver's $+0.40$~bohr/$l_{\max}$.
+comparable to the adiabatic solver's $+0.30$--$0.37$~bohr/$l_{\max}$.
 Single-point energies at fixed geometry ($R = 3.015$~bohr) also
 diverge with $l_{\max}$: $E = -8.184$, $-8.204$, $-8.236$~Ha at
 $l_{\max} = 2$, $3$, $4$ respectively (exact: $-8.071$~Ha), violating
@@ -1200,7 +1181,7 @@ Three conclusions emerge from the full survey:
     relative to the adiabatic solver.  The earlier coarse-grid result
     ($+0.10$~bohr/$l_{\max}$) was an artifact of insufficient R-grid
     resolution; the fine-grid drift ($+0.15$--$0.30$~bohr/$l_{\max}$)
-    is comparable to the adiabatic drift ($+0.40$~bohr/$l_{\max}$).
+    is comparable to the adiabatic drift ($+0.30$--$0.37$~bohr/$l_{\max}$).
   \item The $l$-dependent PK has \emph{zero effect} on the 2D solver:
     $R_{\rm eq}$ is identical to channel-blind PK at $l_{\max} = 2$
     (6.1\%) and $l_{\max} = 3$ (9.5\%).  The PK projection and the
@@ -1220,7 +1201,7 @@ the PK form.  All solver and PK combinations are now exhausted.
 
 \paragraph{Composed-geometry accuracy ceiling.}
 The operating point for production LiH calculations is $l_{\max} = 2$,
-where all four configurations give 5--6\% $R_{\rm eq}$ error.
+where all four configurations give 5--7\% $R_{\rm eq}$ error.
 The accuracy cost of the composition is quantified by the
 full $N$-electron scoping study: a 4-electron mol-frame hyperspherical
 solver on $S^{11}$ (SO(12) angular basis) would have ${\sim}13{,}000$
@@ -1504,19 +1485,25 @@ single high-dimensional coordinate system.  The key results:
 
 \begin{enumerate}
 \item LiH $R_{\rm eq}$ improves from 17\% error (LCAO) to 5.3\%
-  (composed, ab initio PK, $l$-dependent) with zero molecular fitting.
+  (composed, ab initio PK, $l$-dependent);\ the pseudopotential's
+  $B$ formula was chosen against the LiH bond length, so this
+  $R_{\rm eq}$ is not an independent prediction.
 
-\item The ab initio PK pseudopotential is derived entirely from the
-  core wavefunction: $A$ from the core--valence energy gap
-  [Eq.~(\ref{eq:A})], $B$ from the $\langle 1/r^2 \rangle$-weighted
-  core radius [Eq.~(\ref{eq:reff})].
+\item The ab initio PK pseudopotential is computed from the
+  core wavefunction and one empirical atomic input: $A$ from the
+  core--valence energy gap with the measured neutral-atom ionization
+  energy [Eq.~(\ref{eq:A})], $B$ from the $\langle 1/r^2 \rangle$-weighted
+  core radius [Eq.~(\ref{eq:reff})], selected among four candidate
+  radii by LiH $R_{\rm eq}$.
 
 \item The architecture transfers to BeH$^+$ with no per-molecule
-  tuning.
+  tuning, qualitatively only ($R_{\rm eq}$ $+30\%$, $\omega_e$ $+20\%$).
 
-\item The composition pattern---core graphs + valence graphs + typed
-  coupling edges---provides a concrete framework for extending discrete
-  graph quantum chemistry to general molecules.
+\item The composition pattern---a Level~3 hyperspherical core solver +
+  a Level~4 molecule-frame hyperspherical valence solver + typed coupling
+  edges (screening, PK pseudopotential, nuclear repulsion)---provides a
+  concrete framework for extending natural-geometry solvers to general
+  molecules.
 
 \item For polyatomics (BeH$_2$), the full 1-RDM inter-fiber exchange
   [Eq.~(\ref{eq:full_exchange})] reduces $R_{\rm eq}$ error from
@@ -1525,22 +1512,22 @@ single high-dimensional coordinate system.  The key results:
 
 \item All four solver $\times$ PK combinations have been exhausted
   (Table~\ref{tab:solver_pk}).  The 2D variational solver does
-  \emph{not} substantially reduce the drift (the earlier
-  ``$4\times$'' reduction was a coarse-grid artifact, retracted in
-  v2.0.32; the fine-grid 2D drift is comparable to the adiabatic
-  drift); $l$-dependent PK has zero additional effect on the 2D
+  \emph{not} substantially reduce the drift (the fine-grid 2D drift
+  is comparable to the adiabatic drift); $l$-dependent PK has zero
+  additional effect on the 2D
   solver.  A residual $+0.15$--$0.30$~bohr/$l_{\max}$ drift is
   intrinsic to the composed-geometry approximation.  Without PK,
   no equilibrium exists in the classical composed solver.
   (Paper~19~\cite{loutey_paper19} shows that the balanced coupled
   Hamiltonian---which replaces PK with explicit cross-block ERIs
-  and cross-center $V_{ne}$---produces equilibrium in 4-electron
-  FCI, and is the \emph{only} coupling scheme that does so.)
+  and cross-center $V_{ne}$---has a PES minimum in 4-electron
+  FCI, the only one of four coupling schemes whose integrals depend
+  on $R$.)
   Ab initio $R_{\rm ref}$ derivation fails
   (scale mismatch).  The PK pseudopotential is classified as a
   \emph{composition exchange constant} (Paper~18): the irreducible
   cost of factorizing the $N$-electron wavefunction into composed
-  coordinates.  The operating point is $l_{\max} = 2$ (5--6\%
+  coordinates.  The operating point is $l_{\max} = 2$ (5--7\%
   $R_{\rm eq}$ error), where the 144$\times$ angular compression
   vs.\ a full 4-electron solver justifies the approximation.
 \end{enumerate}
@@ -1553,13 +1540,13 @@ Level & System & Geometry & Best result \\
 \midrule
 1 & H       & $S^3$ (Fock)           & exact on the labels (diagonal Casimir $n^2-1$); graph $\lambda_{\max}$ matched by construction \\
 2 & H$_2^+$ & Prolate spheroid       & machine precision (spectral) \\
-3 & He      & Hyperspherical         & 0.05\% error (adiabatic FD; non-variational, error cancellation) \\
-4 & H$_2$   & Mol-frame hypersp.     & 96.0\% $D_e$ \\
+2 & H$_2$   & Prolate spheroid       & 99.97\% $D_e$ (explicit-$r_{12}$ CI, Paper~12) \\
+3 & He      & Hyperspherical         & 0.022\% error (2D variational, raw) \\
+4 & H$_2$   & Mol-frame hypersp.     & 96.0\% $D_e$ (structural $N$-electron treatment) \\
 4N & LiH    & Full mol-frame hypersp. (SO(12)) & $R_{\rm eq}$: 63.5\% ($l_{\max}=2$, 2D variational; unbound $D_e$) \\
 5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\
-5 & BeH$^+$ & Composed (Level 3+4)   & Bound, physical \\
+5 & BeH$^+$ & Composed (Level 3+4)   & Bound; $R_{\rm eq}$ $+30\%$ \\
 5 & BeH$_2$ & Composed (Level 3+4+4) & $R_{\rm eq}$: 11.7\% error \\
-5b & LiH/BeH$_2$/H$_2$O & Balanced coupled (Paper~19) & $E$: 0.20\%; $R_{\rm eq}$: 8.8\% (drift) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1657,7 +1644,7 @@ on $S^3$) and a 2-electron valence (Level~4 on $S^5$), coupled via
 $Z_{\rm eff}$ screening and the PK pseudopotential.
 
 This compression comes at the cost of the PK approximation: the
-composed solver achieves $R_{\rm eq}$ within 5--6\% at $l_{\max} = 2$,
+composed solver achieves $R_{\rm eq}$ within 5--7\% at $l_{\max} = 2$,
 while the full solver gives 64\% error at the same $l_{\max}$.
 However, the composed solver's advantage grows with $l_{\max}$
 (wall time scales as $l_{\max}^2$ for composed vs.\ $l_{\max}^{11}$

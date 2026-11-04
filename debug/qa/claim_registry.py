@@ -192,15 +192,16 @@ CLAIMS = {
         overclaim=r"key structural finding|Fock projection converts|consequence of the \$?S\^3",
         load_bearing=True, changed="2026-09-30"),
     "he-bracket": dict(
-        statement="The He fixed-k CI (1.88% above exact) and the cusp-corrected 0.004% (a Schwartz "
-                  "extrapolation marginally BELOW exact, non-variational) bracket the exact energy; the "
-                  "properly variational 2D figure is 0.022% raw.",
+        statement="He: the properly variational 2D figure is 0.022% raw (l_max=7); adding the Schwartz "
+                  "partial-wave tail at l_max=4 gives 0.020%, still ABOVE exact (the former 0.004% "
+                  "'marginally below exact' came from a cusp coefficient ~4.6x too large); the fixed-k CI "
+                  "is 1.88% above exact.",
         owner="papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
-        owner_anchor=r"marginally below", owner_tier=r"non-variational", tier="MEASURED", owner_all=True, owner_window=1,
-        mention=r"0\.004\s*\\?%",
-        qualifier=r"extrapolat|non-variational|below the exact|below exact",
-        overclaim=r"do not bracket|variational 0\.004|0\.004\s*\\?%[^.;]{0,30}variational bound",
-        load_bearing=True, changed="2026-09-30"),
+        owner_anchor=r"0\.020\\%", owner_tier=r"above", tier="MEASURED", owner_all=True, owner_window=1,
+        mention=r"0\.004\s*\\?%|0\.020\s*\\?%",
+        qualifier=r"above (the )?exact|still above",
+        overclaim=r"0\.004|marginally below|below (the )?exact|bracket",
+        load_bearing=True, changed="2026-11-04"),
     "p1-degree-not-monotone-l": dict(
         statement="On the binary label lattice node degree depends on m and on which shell neighbours "
                   "exist, not monotonically on l (2p m=0 -> 3 > 2s = 2 = 2p m=+-1) [MEASURED].",

@@ -285,9 +285,11 @@ def compute_Bl_table(
 ) -> np.ndarray:
     """Compute B_l(p, alpha) = integral_1^inf xi^p e^{-alpha*xi} Q_l(xi) dxi.
 
-    Uses scipy.integrate.quad with vectorized Q_l evaluation via lqmn.
-    All l values are computed simultaneously for each quadrature point
-    by using a shared integration grid.
+    Closed form, no quadrature: the m = 0, s = 0 case of
+    :func:`geovac.neumann_vee_general_m._B_table` (closed-form seeds at
+    l = 0, 1 in E_1, Euler gamma and ln, then the forward l-recurrence),
+    evaluated in mpmath and returned as float64.  The working precision grows
+    with l_max because the forward Q_l recurrence is unstable.
 
     Parameters
     ----------
@@ -303,8 +305,8 @@ def compute_Bl_table(
     Bl : ndarray, shape (l_max+1, p_max+1)
         Bl[l, p] = B_l(p, alpha).
     """
-    from scipy.integrate import quad
-    from scipy.special import lqmn
+    import mpmath as mp
+    from geovac import neumann_vee_general_m as ngm
 
     # Check cache
     cache_key = (l_max, p_max, round(alpha, 10))
@@ -318,15 +320,12 @@ def compute_Bl_table(
 
     Bl = np.zeros((l_max + 1, p_max + 1))
 
+    dps = 40 + 6 * l_max
+    with mp.workdps(dps):
+        Btab = ngm._B_table(0, 0, l_max, p_max, mp.mpf(alpha))
     for l in range(l_max + 1):
         for p in range(p_max + 1):
-            def integrand(xi: float, l_: int = l, p_: int = p) -> float:
-                Qvals, _ = lqmn(0, l_, xi)
-                Ql = Qvals[0, l_]
-                return xi**p_ * np.exp(-alpha * xi) * Ql
-
-            val, err = quad(integrand, 1.0, np.inf, limit=200, epsabs=1e-14)
-            Bl[l, p] = val
+            Bl[l, p] = float(Btab[(l, p)])
 
     _Bl_cache[cache_key] = Bl.copy()
     return Bl

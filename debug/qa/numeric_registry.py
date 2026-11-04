@@ -1131,7 +1131,7 @@ MEASURED = {
     "p11_h2plus_err_ha": dict(
         value=3.6e-14, convention="|E_total(spectral, n_basis=20, R=2.0) - E_ref| "
                                   "in Ha, against E_ref = -0.6026342144949 Ha "
-                                  "(1s-sigma-g, Bates/Ledsham/Stewart lineage). "
+                                  "(1s-sigma-g at R=2.0 -- the energy at R=2, NOT the PES minimum; source Peek 1965, J. Chem. Phys. 43, 3004). "
                                   "REFERENCE-LIMITED: the residual is at or below "
                                   "the precision at which E_ref is conventionally "
                                   "quoted, so the mantissa is NOT a stable "
@@ -1151,7 +1151,7 @@ MEASURED = {
     "p11_h2plus_req_bohr": dict(
         value=1.9973, convention="fitted R_eq (bohr) from a FINE PES grid "
                                  "(0.005 spacing) + fit_spectroscopic_constants, "
-                                 "vs R_ref = 1.997. The retired 2.005 / 0.38% is "
+                                 "vs R_ref = 1.99719 (exact H2+ R_e; +0.004%). The retired 2.005 / 0.38% is "
                                  "a COARSE-grid (0.05) FIT artifact, not a solver "
                                  "property: the H2+ well is flat to 1e-6 Ha over "
                                  "+-0.005 bohr, so a quadratic apex on a 0.05 grid "
@@ -1161,7 +1161,32 @@ MEASURED = {
                    "D_e=0.10263464, k=0.10355766. The paper prints 2.005 / "
                    "0.38%, ~29x worse, and thereby prints its BETTER solver as "
                    "worse than its own FD-8000 control (2.001 / 0.21%).",
-        aliases={1.997: "reference value", 0.0131: "percent error vs 1.997"}),
+        aliases={1.99719: "reference value", 0.004: "percent error vs 1.99719"}),
+    "p17_lih_req_pct": dict(
+        value=6.85, convention="% R_eq error vs 3.015, LiH composed Level 3+4, "
+                               "ab initio PK (B_method inv2), channel-blind, l_max=2, "
+                               "n_Re=300, default scan_pes grid, fit_window 1.5",
+        provenance="MEASURED 2026-11-04 ComposedDiatomicSolver.LiH_ab_initio(l_max=2) "
+                   "solve_core+scan_pes+fit: R_eq=3.22159 bohr, omega_e=1464.77, "
+                   "B_e=6.582; identical on the tests/test_ab_initio_pk_v2.py grid. "
+                   "Paper 17 previously printed 3.21 / 6.4% / 1471 (not reproduced)",
+        aliases={6.9: "1 dp", 3.22: "R_eq bohr"}),
+    "p17_lih_omega_cm": dict(
+        value=1465, convention="omega_e cm^-1, same configuration as p17_lih_req_pct",
+        provenance="MEASURED 2026-11-04, same run (1464.77); 4.2% vs 1406",
+        aliases={4.2: "percent error vs 1406"}),
+    "p17_lih_req_ldep_pct": dict(
+        value=5.34, convention="% R_eq error vs 3.015, same as p17_lih_req_pct but "
+                               "pk_channel_mode='l_dependent'",
+        provenance="MEASURED 2026-11-04: R_eq=3.17610, omega_e=1556.18; l_max=3 "
+                   "l-dep 3.48782 (15.7%), channel-blind l_max=3 3.58325 (18.8%)",
+        aliases={5.3: "1 dp"}),
+    "p17_beh_req_bohr": dict(
+        value=3.22, convention="BeH+ R_eq bohr, BeH_plus_ab_initio(l_max=2), "
+                               "channel-blind, default grid; ref ~2.48 (+30%)",
+        provenance="MEASURED 2026-11-04: R_eq=3.21578, omega_e=2668.59 (+20% vs 2222); "
+                   "Paper 17 previously printed 3.25 / 2857",
+        aliases={2669: "omega_e cm^-1"}),
     "p12_rebased_de_pct_aopt": dict(
         value=99.81, convention="% of D_e, H2 R=1.4011, re-based (5,5)+delta "
                                 "(|m|<=2), laguerre_legendre, at the VARIATIONAL "
@@ -1344,6 +1369,9 @@ MEASURED = {
     "p62_ccpvdz_lambda_fc": dict(
         value=674.3, convention="non-identity 1-norm (Ha), water cc-pVDZ fc Q=46",
         provenance="MEASURED 2026-10-11 (CHANGELOG v5.20.11), jw_pauli_stats"),
+    "p62_dzp_pauli": dict(
+        value=107382, convention="Pauli terms incl. identity, water Slater DZP fc Jordan-Wigner, Q=46, RHF canonical orbitals, |c|>1e-10",
+        provenance="MEASURED: recomputed by the /qa group2 code reviewer (2026-11-03), Slater DZP JW count, 46 qubits"),
     # matched-accuracy rungs (record MA, 2026-10-31, pre-registered 6b6d85c2)
     "p62_tzpol_fc": dict(
         value=-76.266498, convention="total energy, Ha, water fc-CCSD(T), cc-pVDZ+TZpol (35 fns, our construction)",
@@ -1758,6 +1786,12 @@ _KINDS = (
     # genuinely residuals, and relabelling them "% of d_e" to satisfy the
     # parser would register a false convention to quiet a gate.
     ("residual", ("in ha, against", "mha above exact", "residual")),
+    # Spectroscopic constants of a PES fit (Paper 17 composed LiH / BeH+,
+    # registered 2026-11-04): R_eq and its % error, omega_e.  No identity
+    # convention applies; the convention string must carry the solver
+    # configuration (PK mode, l_max, grid), since 5.34% and 6.85% are the
+    # same molecule under two PK channel modes.
+    ("spectroscopic", ("r_eq error", "r_eq bohr", "omega_e cm")),
 )
 
 

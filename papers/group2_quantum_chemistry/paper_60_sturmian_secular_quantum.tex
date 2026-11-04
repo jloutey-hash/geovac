@@ -67,8 +67,8 @@ Coulomb--Sturmian basis is $L^2$-non-orthogonal; a second-quantized (Jordan--Wig
 encoding must L\"owdin-orthogonalize it, and the LCU $1$-norm $\lambda$ then
 \emph{inflates} as $\lambda\sim Q^{3.3}$ (versus $Q^{1.2}$ for an orthonormal
 hydrogenic basis), driven by the dense $S^{-1/2}$ that L\"owdin
-orthogonalization introduces as the basis members grow progressively linearly
-dependent.
+orthogonalization introduces as the basis members grow increasingly
+non-orthogonal.
 \textbf{[ESTABLISHED, from Avery's formulation]} The generalized-Sturmian
 \emph{isoenergetic} reformulation removes this obstruction for atoms: posed in
 the potential-weighted metric in which the Coulomb--Sturmians are orthonormal,
@@ -203,7 +203,7 @@ Section~\ref{sec:conclusion} states the honest boundary.
 A second-quantized (Jordan--Wigner) encoding requires an $L^2$-orthonormal set of
 single-particle spin-orbitals.  The genuine shared-scale Coulomb--Sturmians are
 \emph{not} $L^2$-orthonormal: at a common scale $k$ their higher members grow
-linearly dependent, so a qubit encoding must first orthogonalize them (L\"owdin,
+increasingly non-orthogonal, so a qubit encoding must first orthogonalize them (L\"owdin,
 $S^{-1/2}$), and the coefficient distribution---hence
 $\lambda=\sum_i|c_i|$---spreads.
 
@@ -1298,8 +1298,8 @@ $s$-Gaussian LCAO metric (ratio $2$), the SW inverse-degree is $10^2$--$3\times1
 smaller (full metric) and $10^3$--$10^4$ smaller (gerade).  This is a metric-versus-metric
 comparison and carries an honest caveat: the Gaussian conditioning is ratio-dependent---a denser
 ratio-$1.6$ set (approaching completeness) blows up as $\mathrm{cond}\sim N^{6}$
-($\kappa\!\sim\!10^5$ at $N=16$), a sparser ratio-$3$ set grows only as $N^{1.4}$ but leaves
-coverage gaps and still carries ${\sim}10\times$ the SW prefactor.  This is the classic Gaussian
+($\kappa\approx1.5\times10^6$ at $N=16$), a sparser ratio-$3$ set grows only as $N^{1.6}$ but leaves
+coverage gaps and still carries ${\sim}4\times$ the SW prefactor.  This is the classic Gaussian
 coverage-versus-linear-dependence trade-off; the Coulomb--Sturmians soften it on the
 $s$-sector rather than escaping it --- the $s$-sector metric is polynomially conditioned
 ($\mathrm{cond}(S)\sim N^{1.85}$ on this window;\ derived asymptote $N^2$,
@@ -1628,7 +1628,7 @@ integrals, and these are in hand.  We evaluate the shared-scale Coulomb--Sturmia
 $(pq|rs)$ numerically (a single multipole route about one nucleus, so every center class is uniform)
 and validate them against the framework's \emph{exact} closed form: the one-center
 $(1s\,1s|1s\,1s)=\tfrac58$ to $4\times10^{-6}$, and the two-center $(AA|BB)$ to $\sim\!10^{-4}$
-against $\texttt{aabb\_value}$ at $R\in\{1.4,2.0,3.0\}$ (the closed forms themselves are weight-one,
+against $\texttt{aabb\_value}$ at $R\in\{1.4,2.0,3.0\}$ (the $(AA|BB)$ closed forms themselves are weight-one,
 $\pi$-free $\{E_1,\ln,\gamma\}$~\cite{loutey_paper58,loutey_paper59}).  With these, the interacting
 method binds a molecule: minimal-basis ($1s$ on each center, common scale) $\mathrm{H}_2$ in the
 metric-free molecular-Sturmian basis has an interior minimum at $R\approx1.6$~bohr with
@@ -1651,7 +1651,7 @@ non-interacting limit (returning $p_\kappa=2k_{\sigma_g}$ where the correct valu
 $\sqrt2\,k_{\sigma_g}$).  A faithful molecular $1$-norm therefore requires the $p_\kappa$-scaled
 molecular Goscinskian (config charge $Q_\nu=p_\kappa/R_\nu$, two-center nuclear $T^0$ and two-center
 ERIs at the config scale, solved self-consistently; validated at $R\!\to\!\infty=2$ H atoms and
-$R\!\to\!0=$ He).  The obstruction is thus not that the integrals are hard---they close
+$R\!\to\!0=$ He).  The obstruction is thus not that the integrals are hard---the two-center integrals close
 (Papers~\cite{loutey_paper58,loutey_paper59})---but that the single-center diagonal-$T^0$ structure
 that \emph{produced} the sublinearity does not transfer.
 
@@ -1679,7 +1679,7 @@ equation in which the two feared cost risks of the genre are structurally
 absent.  Its block-encoding $1$-norm grows more slowly than the matrix
 dimension over every basis we can compute, and increasingly so.  But the
 sharper statement is a trade-off rather than an efficiency:\ that growth
-belongs to the fixed-$l_{\max}$ basis-growth rule, reverses under full-shell
+belongs to the fixed-$l_{\max}$ basis-growth rule, weakens under full-shell
 growth, and is paid for by an accuracy floor whose mechanism is
 Eq.~\eqref{eq:scale_lock}:\ the metric-free form exists only at the scale
 $\lambda=p_\kappa$, and that scale is not the variational optimum.  The floor is
@@ -1726,7 +1726,7 @@ We have not run the algorithm on hardware, and we do not claim a resource
 advantage over production quantum chemistry: the systems where the encoding is
 demonstrably cheap are small.  What we claim is structural and measured---that the
 generalized-Sturmian method's classical elegance (no self-consistency, energies
-direct, pure-number matrices) is also, for atoms, a near-ideal quantum
+direct, pure-number matrices) is also, for atoms, a quantum
 encoding---and that this reframes the on-device-generation intuition from a hope
 into a characterized boundary, clean on one side and open on the other.
 
@@ -1848,7 +1848,8 @@ Quantum Inf.\ Process.\ \textbf{21}, 23 (2022); arXiv:2112.02554.
 \bibitem{rajchel2025}
 G.~Rajchel-Mieldzio\'c, S.~Pli\'s, and E.~Zak,
 ``Quantum algorithm for solving generalized eigenvalue problems with
-application to the Schr\"odinger equation,'' arXiv:2506.13534 (2025).
+application to the Schr\"odinger equation,'' Phys.\ Rev.\ Research \textbf{8}, 023192 (2026);
+arXiv:2506.13534.
 
 \bibitem{baek2023}
 U.~Baek \textit{et al.},
@@ -1967,7 +1968,7 @@ projections,'' \textit{Ann.\ Funct.\ Anal.}\ \textbf{5}(2), 176 (2014);
 arXiv:1306.1923.
 
 \bibitem{monkhorst_jeziorski1979}
-H.~J.~Monkhorst and B.~Jeziorski, ``No linear dependence and multi-center integral
+H.~J.~Monkhorst and B.~Jeziorski, ``No linear dependence or many-center integral
 problems in momentum space quantum chemistry,'' \textit{J.\ Chem.\ Phys.}\
 \textbf{71}(12), 5268--5269 (1979);\ doi:10.1063/1.438337.
 

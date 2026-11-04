@@ -67,23 +67,28 @@ cross-center potential terminates exactly at $L_{\max} = 2l_{\max}$
 by Gaunt selection rules (33 one-body terms at $n_{\max}=2$).  The
 balanced Hamiltonian has 2{,}726 Pauli terms (Conjecture~1 holds in
 its ratio form only; see Sec.~\ref{sec:conjecture_verdict}).
-Four-electron FCI gives $R_{\rm eq}$ error of 7.0\% and
-$D_e = 0.037$~Ha---the only bound configuration among all four
-coupling schemes tested (Conjecture~2 not confirmed in strict sense,
+Four-electron FCI gives a PES minimum with $R_{\rm eq}$ error of 7.0\%,
+the only minimum among the four coupling schemes tested:\ the other three
+have $R$-independent one-body and electron-repulsion integrals, so their
+energies are a constant plus $3/R$ and cannot bind.  No dissociation
+energy is defined:\ the balanced electron repulsion is also built
+$R$-independent, and past the minimum the curve keeps rising instead of
+approaching the separated atoms (Conjecture~2 not confirmed in strict sense,
 but the comparison crosses FCI regimes).  At $n_{\max} = 3$ ($Q = 84$),
 single-point FCI gives 0.20\% energy error (down from 1.8\%) with
 analytical integrals (incomplete gamma functions, machine precision),
-confirming convergence through $n_{\max}=3$;\ at $n_{\max}=4$ the
+the error decreasing through $n_{\max}=3$;\ at $n_{\max}=4$ the
 model crosses \emph{past} exact (over-binding), so the fixed-geometry
 error is not monotonically improvable either.  The $R_{\rm eq}$ drift is structural to the
 block decomposition ($+0.053$ then $+0.023$~bohr at the two available steps---
-decelerating, not a constant rate; $3\times$
-smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.  It is,
+decelerating, not a constant rate;\ the PK solver's drift, $+0.30$--$0.37$~bohr
+per unit $l_{\max}$ in Paper~17, is in a different truncation parameter and is not
+directly comparable), not numerical.  It is,
 however, not a physics wall:\ a companion all-electron prolate-spheroidal
 treatment with an $R$-accurate analytic atom-centered core resolves it to
 $R_{\rm eq} = +0.2\%$ (the corpus's best LiH geometry) and, with a rigorous
 VMC-over-FCI treatment (a two-body Jastrow on the analytic-orbital FCI state),
-reaches a \emph{variational} energy of $-8.047$~Ha---$18$~mHa below the $-8.032$
+reaches a \emph{variational} energy of $-8.047$~Ha---$15$~mHa below the $-8.032$
 orbital ceiling and safely above the exact $-8.0705$.  A deterministic,
 resolution-of-identity--free explicit-$r_{12}$ treatment on the same
 $\pi$-containing reference, with a cusp-correct Slater geminal, improves this to
@@ -119,7 +124,7 @@ PK is the framework's accuracy bottleneck.  At $l_{\max} = 2$ (the
 optimal operating point), LiH achieves 5.3\% $R_{\rm eq}$ error;
 BeH$_2$ gives 11.7\%; H$_2$O gives 19.4\%.  These errors are
 structural, not numerical: the $l_{\max}$ divergence
-(+0.15--0.22~bohr per additional angular channel) is confirmed to
+($+0.30$--$0.37$~bohr per unit $l_{\max}$, Paper~17) is confirmed to
 originate in PK overcounting, not in the adiabatic approximation
 (Track~BQ, v2.0.32;\ sprint and track designations are anchors into the project's internal chronicle, \texttt{CHANGELOG.md} in the repository).  Six attempts to modify PK have failed
 (projector, spectral, self-consistent, $R$-dependent, $l$-dependent,
@@ -447,7 +452,7 @@ With a balanced Hamiltonian (all one-body and two-body terms present,
 no PK), the FCI accuracy on the coupled Hamiltonian should be
 significantly better than the composed framework's 5.3\% $R_{\rm eq}$
 error, bounded below by the hydrogenic FCI accuracy floor
-(${\sim}0.35\%$ for He at $n_{\max} = 5$, Paper~FCI-A).
+($1.93\%$ for He at $n_{\max} = 5$, Paper~FCI-A).
 \end{conjecture}
 
 
@@ -488,8 +493,8 @@ Coupled composition uses the same block structure---it changes how
 blocks are coupled, not how they are defined.
 
 \emph{Paper~18 (Exchange Constants):} PK is classified as a
-``calibration exchange constant''---a transcendental quantity that
-enters when projecting between the graph and continuous coordinates.
+``composition exchange constant''---the irreducible cost of factorizing
+the antisymmetric wavefunction into composed coordinates.
 If coupled composition eliminates PK, it removes one exchange constant
 from the framework, consistent with the algebraicization program
 (Sec.~XII of Paper~18).
@@ -616,7 +621,7 @@ $R = 3.015$~bohr.  Exact: $-8.071$~Ha.}
 \label{tab:fci_balanced}
 \begin{ruledtabular}
 \begin{tabular}{lddl}
-Configuration & \multicolumn{1}{c}{$E_{\mathrm{FCI}}$ (Ha)} & \multicolumn{1}{c}{Error} & Bound? \\
+Configuration & \multicolumn{1}{c}{$E_{\mathrm{FCI}}$ (Ha)} & \multicolumn{1}{c}{Error} & PES min.? \\
 \hline
 Balanced (CD)        & -7.924 & 1.8\%  & YES \\
 Decoupled            & -7.195 & 10.9\% & NO  \\
@@ -627,10 +632,17 @@ Exact                & -8.071 & 0\%    & YES \\
 \end{ruledtabular}
 \end{table}
 
-The balanced configuration is the only coupling scheme that produces a
-bound molecule.  The PES scan gives $R_{\rm eq} = 3.226$~bohr (7.0\%
-error vs.\ exact 3.015~bohr) and $D_e = 0.037$~Ha (exact: 0.092~Ha).
-The variational bound is respected at all $R$-points.
+The balanced configuration is the only coupling scheme whose PES has a
+minimum.  This is by construction rather than a measured ranking:\ in
+the other three schemes the one-body and electron-repulsion integrals do
+not change with $R$ (identical at $R = 2$ and $8$~bohr), so their
+energies are a constant plus $3/R$ and cannot bind.  The PES scan gives
+$R_{\rm eq} = 3.226$~bohr (7.0\% error vs.\ exact 3.015~bohr).  No
+dissociation energy can be read off:\ the balanced electron-repulsion
+integrals are also $R$-independent, and past the minimum the curve keeps
+rising (by more than 1~Ha at $R = 20$~bohr) instead of approaching the
+separated-atom energy.  The variational bound is respected at all
+$R$-points.
 
 Conjecture~\ref{conj:accuracy} predicted that the balanced Hamiltonian
 would achieve significantly better accuracy than PK's 5.3\%
@@ -640,7 +652,8 @@ uses $l$-dependent PK at $l_{\max} = 2$ with continuous PES optimization,
 while the current result uses $n_{\max} = 2$ FCI on a qubit Hamiltonian
 with grid-computed integrals (0.18\% radial accuracy for $Z = 1$).
 The qualitative result---the balanced coupled configuration is the
-\emph{only} bound configuration among all four coupling schemes---is the
+only one of the four coupling schemes with an $R$-dependent electronic
+Hamiltonian, and so the only one with a PES minimum---is the
 primary finding of this phase.
 
 \subsection{Basis convergence: $n_{\max} = 3$}
@@ -775,8 +788,11 @@ repulsion are \emph{bit-exactly} $R$-independent (each $F_T$ numerically zero,
 $\lesssim 10^{-13}$~Ha/bohr).  The LiH well is therefore a strict two-term
 balance---$V_{NN}$ pushing the nuclei apart ($F = -0.331$~Ha/bohr) against the
 cross-center $V_{\rm ne}$ drawing them together ($F = +0.302$~Ha/bohr), summing
-to the residual outward tilt $-0.029$~Ha/bohr.  The $8.8\%$ deficit is thus
-specifically the $R$-slope of the cross-center $V_{\rm ne}$: its \emph{magnitude}
+to the residual outward tilt $-0.029$~Ha/bohr.  Because the construction builds
+all of its electron repulsion $R$-independent, the $8.8\%$ deficit is, within
+this construction, the $R$-slope of the cross-center $V_{\rm ne}$ (a two-centre
+treatment whose electron repulsion moved with $R$ would share it out
+differently): its \emph{magnitude}
 at any fixed geometry is basis-accurate (hence the convergent energy), while its
 \emph{slope}---which encodes the bonding density contracting toward the bond as
 the nuclei approach---is under-delivered, because the fixed, unpolarized
@@ -805,8 +821,9 @@ $Z_{\rm orb}=2.3$).  A genuine contracting bond orbital requires $h_1$ from
 physical kinetic-plus-nuclear integrals---i.e.\ a variational
 (non-parameter-free) two-centre treatment, the prolate-spheroidal route of
 Paper~12 (LiH $n_{\max}=2$; a measured closed-form model).  This
-mirrors the composed/PK result (Paper~17), where the \emph{parameter-free}
-pseudopotential barrier reproduces $\omega_e$ to $4.6\%$ but caps the attainable
+mirrors the composed/PK result (Paper~17), where the ab initio
+pseudopotential barrier (one empirical atomic input, and a width formula
+chosen against the LiH bond length) reproduces $\omega_e$ to $4.2\%$ but caps the attainable
 energy accuracy.  For LiH the two architectures thus trade energy accuracy
 against curvature accuracy, and neither reproduces the full well; universality
 of this trade across hydrides is untested (a measured result; the curvature
@@ -956,7 +973,7 @@ Chronicle:\ \texttt{CHANGELOG.md} v5.16.0.
 \emph{The energy is near-chemical, by estimate.}  The pure-orbital prolate
 all-electron energy plateaus at $-8.032$~Ha ($38$~mHa above the exact $-8.0705$)
 once the angular and radial ladders saturate---a determinant-limited orbital
-ceiling, already the corpus's best LiH energy---because a finite orbital basis
+ceiling---because a finite orbital basis
 cannot represent the electron--electron cusp.  Adding that cusp through an
 additive-F12 correction (the $r_{12}$ energy an isolated He-like pair gains beyond
 a radial-converged orbital pair:\ $30.1$~mHa for the Li core, validated against
@@ -974,9 +991,9 @@ energy), sampled by Metropolis with the standard $E_L=V-\tfrac12\nabla^2\Psi/\Ps
 estimator.  The build is validated by the mandatory gate---VMC of $\Psi_{\rm CI}$
 at $J=1$ reproduces the FCI energy to within statistics ($-8.0285\pm0.005$ vs
 $-8.0290$ for the $M=16$ basis).  The resulting rigorous variational energy is
-$\mathbf{-8.047\pm0.001}$~Ha ($\gamma\simeq1.5$, four independent seeds):\ $18$~mHa
-below the orbital ceiling and safely variational ($>-8.0705$).  A two-body Jastrow
-recovers $\approx19$~mHa of the $41$~mHa ceiling-to-exact gap.  The remaining
+$\mathbf{-8.047\pm0.001}$~Ha ($\gamma\simeq1.5$, four independent seeds):\ $15$~mHa
+below the $-8.032$ orbital ceiling and safely variational ($>-8.0705$).  A two-body Jastrow
+recovers $\approx15$~mHa of the $38$~mHa ceiling-to-exact gap.  The remaining
 correlation is evaluated on the analytic side by the
 resolution-of-identity--free reductions of Paper~12 (on one centre the classical
 Hylleraas-CI reduction of many-electron correlated integrals;\ the two-center
@@ -1210,8 +1227,7 @@ curvature and tilt at the true minimum all shrink geometrically at a common
 ratio ($\approx 0.36$--$0.38$)---the basis is converging---but every
 observable, the energy included, converges to a \emph{wrong} limit.
 $E_{\rm tot}(R_{\rm true})$ runs $-7.9297\to-8.0548\to-8.1020$~Ha at
-$n_{\max}=2/3/4$ (shipped convention, frozen-core offset $-7.2799$~Ha;\ the
-corrected sign shifts each value by $\approx+4$~mHa), \emph{crossing} the exact
+$n_{\max}=2/3/4$ (frozen-core offset $-7.2799$~Ha), \emph{crossing} the exact
 $-8.0705$ between $n_{\max}=3$ and $4$ and extrapolating to $\approx-8.13$:\ the
 balanced model over-binds
 past exact, so its excellent energy convergence is an approach-from-above
@@ -1222,35 +1238,20 @@ surviving, robust across geometric, power-law and deliberately-slow $1/n$
 extrapolation models);\ the tilt worsens toward $-0.0399$;\ $R_{\rm eq}$
 extrapolates to $+10.1\%$ and worsening;\ $\omega_e$ at the well's own minimum
 falls $2040\to1946\to1901$~cm$^{-1}$ ($+45.1\to+38.4\to+35.3\%$, extrapolating
-to $\approx+32\%$---the earlier ``stays $\sim+45\%$'' reading was an
-$n_{\max}=2$-only fit), still far from $1406$.  Model-free statement:\ closing
+to $\approx+32\%$), still far from $1406$.  Model-free statement:\ closing
 the curvature gap at the observed per-shell step would need over a hundred
 further shells with no decay in step size.  The well-shape residual is
 therefore an \emph{irreducible} property of the balanced architecture's
 orbital-basis limit, not slow basis healing
 (\texttt{tests/test\_balanced\_direct\_ci.py}).
 
-\emph{Reproducibility note.}  In the course of building the engine, a global
-sign error was found (and fixed) in the shipped assembled-matrix path's
-same-spin double-excitation phase:\ it contributed a nearly
-$n_{\max}$-independent spurious over-binding of ${\sim}+4$~mHa on balanced
-LiH while leaving the geometry observables essentially unchanged
-($<0.2$~pp).  \emph{Scope of the correction, stated precisely because the two conventions
-are easy to conflate.}\ The energies tabulated in this paper are on the
-\emph{faithful} (pre-fix) convention:\ at the fixed geometry $R=3.015$ the
-banked values are $-7.9297$, $-8.0548$, $-8.1020$~Ha at $n_{\max}=2,3,4$,
-while the corrected phase gives $-7.9256$, $-8.0509$, $-8.0982$~Ha---a shift
-of $+4.13$, $+3.85$, $+3.79$~mHa.  So the $n_{\max}=3$ energy error reads
-$0.20\%$ on the faithful convention---the figure quoted throughout this paper---
-and $0.24\%$ on the corrected one (both against the exact $-8.0705$~Ha).  The
-earlier statement that ``no number in this paper changes'' was \emph{wrong}:\ it
-compared the corrected energy at the well's own minimum ($R_{\rm eq}=3.2776$,
-a different offset) against the faithful energy at $R=3.015$, and the two
-agreed only by cancellation.  What genuinely does not move is the geometry:\
-$R_{\rm eq}$ shifts by $\le0.13$~pp and the qualitative conclusions---binding,
-the stiffness excess, and the $n_{\max}=4$ crossing---are unchanged under
-either convention.  The corrected phase is pinned element-by-element against
-a brute-force Fock-space FCI in the same test file.
+\emph{Reproducibility note.}  The energies tabulated in this paper use the
+same-spin double-excitation phase pinned element-by-element against a
+brute-force Fock-space FCI in the same test file:\ at the fixed geometry
+$R=3.015$ the default build gives $-7.9282$ and $-8.0545$~Ha at
+$n_{\max}=2,3$ (frozen-core offset $-7.2799$~Ha), within $1.5$~mHa of the
+tabulated values, so the $n_{\max}=3$ energy error is $0.20\%$ against the
+exact $-8.0705$~Ha.
 
 \subsection{Summary of conjecture status}
 \label{sec:conjecture_verdict}
@@ -1269,9 +1270,10 @@ integrals (machine precision via incomplete gamma functions) confirm that
 the $R_{\rm eq}$ drift is structural to the block decomposition, not
 numerical: grid error contributed only 0.007~bohr to $R_{\rm eq}$ at
 $n_{\max} = 3$.  The drift is $+0.053$~bohr from $n_{\max}=2$ to 3 and $+0.023$~bohr
-from 3 to 4---decelerating, consistent with the extrapolated limit below
-($3\times$ smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$) but in
-the same outward direction.  Energy converges excellently through
+from 3 to 4---decelerating, consistent with the extrapolated limit below,
+and in the same outward direction as PK's $+0.30$--$0.37$~bohr per unit
+$l_{\max}$ (Paper~17;\ a different truncation parameter, so the two slopes
+are not directly comparable).  Energy converges excellently through
 $n_{\max}=3$: $1.8\% \to 0.20\%$ ($9\times$ improvement) from $n_{\max} = 2$
 to 3---and then crosses \emph{past} exact at $n_{\max}=4$ (over-binding;\ the
 well-shape subsection), so the fixed-geometry error is not monotonically
@@ -1311,12 +1313,14 @@ Sec.~\ref{sec:architecture}:
   The balanced Hamiltonian (Eq.~\ref{eq:coupled} with all four
   interaction types) gives 2{,}726 Pauli terms, 75.2~Ha non-identity
   1-norm, and 629 QWC groups (Table~\ref{tab:resources}).
-  Conjecture~\ref{conj:sparsity} confirmed.
+  Conjecture~\ref{conj:sparsity} partially confirmed
+  (Sec.~\ref{sec:conjecture_verdict}).
 
 \item \textbf{FCI benchmark.}  \emph{COMPLETE.}
   Four-electron FCI gives $E = -7.924$~Ha (1.8\% error),
-  $R_{\rm eq} = 3.226$~bohr (7.0\%), $D_e = 0.037$~Ha.
-  The balanced configuration is the only bound coupling scheme
+  $R_{\rm eq} = 3.226$~bohr (7.0\%);\ no dissociation energy is
+  defined.  The balanced configuration is the only coupling scheme with a
+  PES minimum, the other three having $R$-independent integrals
   (Table~\ref{tab:fci_balanced}).  Conjecture~\ref{conj:accuracy}
   not confirmed in strict sense (7.0\% vs.\ 5.3\% PK), but the
   comparison is cross-regime.
@@ -1327,8 +1331,9 @@ Sec.~\ref{sec:architecture}:
   at $n_{\max} = 2$; see Table~\ref{tab:convergence}).
   Pauli scaling exponent 3.74, 1-norm exponent 1.71.
   $R_{\rm eq} = 3.280$~bohr (8.8\% error), confirming structural drift
-  of $+0.053$ then $+0.023$~bohr per step (decelerating, not a constant rate; $3\times$ smaller than PK's
-  $+0.15$--$0.22$~bohr/$l_{\max}$).  Grid error contributes only
+  of $+0.053$ then $+0.023$~bohr per step (decelerating, not a constant rate;\ PK's
+  $+0.30$--$0.37$~bohr per unit $l_{\max}$ is in a different truncation
+  parameter).  Grid error contributes only
   0.007~bohr to $R_{\rm eq}$ (negligible).  Classification: MIXED---energy
   converges excellently through $n_{\max}=3$ (then crosses past exact;\ the
   well-shape subsection), $R_{\rm eq}$ drifts structurally.
@@ -1407,10 +1412,10 @@ architecture with PK remains cheaper.  For fault-tolerant QPE where
 the 1-norm determines the number of Trotter steps, the balanced
 framework eliminates PK entirely.  This is decisive for molecules
 with large nuclear charges: H$_2$O's PK contributed 98.7\% of the
-total composed 1-norm (28,053~Ha), and the balanced 1-norm
-(1,509.3~Ha) is $18.6\times$ cheaper.  Even compared to the
-electronic-only composed 1-norm (361~Ha, with PK classically
-partitioned), the balanced 1-norm is $4.18\times$ higher---but the
+total composed 1-norm (28,061.9~Ha), and the balanced 1-norm
+(1,612.0~Ha) is $17.4\times$ cheaper.  Even compared to the
+electronic-only composed 1-norm (372.5~Ha, with PK classically
+partitioned), the balanced 1-norm is $4.33\times$ higher---but the
 balanced Hamiltonian does not require the classical 1-RDM post-processing
 step that PK partitioning demands.
 
@@ -1648,8 +1653,8 @@ $|R^M_\text{hyd} - R^M_\text{phys}|^2 w_R(z)$ that NaH's smoother
 scaling is therefore monotone-with-saturation, not strictly linear
 in $|\Delta r|$.  The prediction for RbH (4 nodes) and CsH
 (5 nodes) is that they continue the plateau, matching the framework's
-empirical chemistry catalogue: LiH binds in production at
-$n_{\max}=2$; NaH, KH, RbH, CsH do not.
+empirical chemistry catalogue: LiH has a PES minimum in the composed
+production pipeline (Paper~17) at $n_{\max}=2$; NaH, KH, RbH, CsH do not.
 
 \paragraph{Mixed Slater-$n$ essential for screened valence orbitals
 (Sprint $\alpha$-Multi-zeta, 2026-05-23).}
@@ -2439,25 +2444,26 @@ remaining 10.9\% error shows that inter-block coupling \emph{is}
 needed for quantitative accuracy.
 
 The four-electron FCI results (Sec.~\ref{sec:results}) confirm the
-diagnosis from Track~CB.  PK overcorrects (15.0\% error, unbound).
-Removing all inter-block coupling undercorrects (10.9\%, unbound).
+diagnosis from Track~CB.  PK overcorrects (15.0\% error;\ no minimum, by
+construction).  Removing all inter-block coupling undercorrects (10.9\%;\ no
+minimum, by construction).
 Adding only cross-block $V_{ee}$ without $V_{ne}$ is energetically
 unbalanced (29.0\%, worst of all).  Only the balanced combination of
 all four interaction types---within-block $h_1$ and $V_{ee}$,
-cross-block $V_{ee}$, and cross-center $V_{ne}$---produces a bound
-molecule with the correct qualitative PES shape.  This suggests that
+cross-block $V_{ee}$, and cross-center $V_{ne}$---produces a PES
+minimum, because only it has an $R$-dependent electronic Hamiltonian
+(the other three energies are a constant plus $3/R$).  This suggests that
 the physical content of PK is not pseudopotential enforcement of
 orthogonality, but rather an incomplete approximation to the sum of
 cross-block $V_{ee}$ and cross-center $V_{ne}$.
 
 A practical concern: Track~CB found that adding cross-block ERIs
-increases the 1-norm from 37.3 to 85.7~Ha.  Even if PK is
+increases the 1-norm from 38.3 to 80.5~Ha.  Even if PK is
 eliminated, the net quantum resource cost could increase if the
 balanced coupled Hamiltonian has higher 1-norm than the composed
-Hamiltonian with PK classically partitioned (Track~BF: electronic-only
-1-norm 32.6~Ha).  The sparsity advantage in Pauli count may be
-partially offset by a 1-norm disadvantage.  This tradeoff must be
-quantified for the balanced Hamiltonian.
+Hamiltonian with PK classically partitioned.  The sparsity advantage in
+Pauli count may be partially offset by a 1-norm disadvantage;\
+Table~\ref{tab:balanced_census} quantifies the tradeoff.
 
 The mathematical infrastructure for computing the missing integrals
 exists in the Coulomb Sturmian literature and connects directly to
@@ -2486,7 +2492,7 @@ resolve the key open questions from Phase~3.  The energy convergence
 is excellent through $n_{\max}=3$: 1.8\% $\to$ 0.20\% ($9\times$ improvement) as the
 basis grows from $Q = 30$ to $Q = 84$, with the variational bound
 respected at these basis sizes (at $n_{\max}=4$ the model crosses past
-exact;\ the well-shape subsection).  This rules out the PK-like divergence scenario (where
+exact;\ the well-shape subsection).  Through $n_{\max}=3$ this shows no sign of the PK-like divergence scenario (where
 higher angular momentum channels systematically overcounted
 correlation).
 
@@ -2495,8 +2501,8 @@ block decomposition, not numerical.  Analytical integrals (machine
 precision via incomplete gamma functions) changed $R_{\rm eq}$ by
 only 0.007~bohr at $n_{\max} = 3$ (3.287~$\to$~3.280~bohr), while
 the drift from $n_{\max} = 2$ to 3 is $+0.053$~bohr.  This drift
-is $3\times$ smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$ but
-in the same outward direction.  The root cause is the block
+is in the same outward direction as PK's $+0.30$--$0.37$~bohr per unit
+$l_{\max}$ (Paper~17), a slope in a different truncation parameter.  The root cause is the block
 decomposition itself: each block uses a different effective nuclear
 charge ($Z_{\mathrm{eff}}$), and orbitals on different blocks do not
 span the same Hilbert space.  The cross-center $V_{ne}$ partially
@@ -2568,7 +2574,7 @@ J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral
 
 \bibitem{loutey_paper17}
 J.~Loutey, ``Composed Natural Geometries for Core-Valence Diatomics:
-  LiH and BeH$^+$ from Discrete Graph Topology,'' GeoVac Paper~17 (2026).
+  LiH and BeH$^+$ from Natural-Geometry Solvers,'' GeoVac Paper~17 (2026).
 
 \bibitem{fock1935}
 V.~Fock, ``Zur Theorie des Wasserstoffatoms,''

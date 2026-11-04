@@ -1889,7 +1889,7 @@ the single-channel approximation, not of the natural geometry: the 2D
 variational solver gives $E_\text{min} = -7.79$~Ha (variational bound
 respected, $D_e$ unbound) versus the adiabatic solver's $D_e = +0.49$~Ha
 ($5.3\times$ exact).  Track~BQ (CLAUDE.md~\S~2, v2.0.32) further
-established that the $R_\text{eq}$ drift $+0.15$--$0.22$~bohr/$l_\text{max}$
+established that the $R_\text{eq}$ drift ($+0.30$--$0.37$~bohr per unit $l_\text{max}$, Paper~17)
 in LiH composed geometry is \emph{not} from the adiabatic
 approximation: both the adiabatic and 2D variational solvers produce
 identical drift, isolating the residual to the composed-geometry PK
@@ -2057,10 +2057,10 @@ because $V^\text{coupling}(\rho)$ carries piecewise $\rho$-dependence
 inherited from the two-center nuclear charge function.\\
 \textbf{Used in:} Paper~13 (He hyperspherical, $l_\text{max}=2$--$7$
 coupled-channel convergence to $0.022\%$ raw at $l_\text{max}=7$,
-$0.004\%$ with a Schwartz cusp extrapolation at $l_\text{max}=4$ on the 2D
-solver --- non-variational, marginally below exact --- Track~DI v2.6.0); Paper~15 (H$_2$ Level~4,
+$0.020\%$ with a Schwartz cusp extrapolation at $l_\text{max}=4$ on the 2D
+solver --- non-variational, still above exact --- Track~DI v2.6.0); Paper~15 (H$_2$ Level~4,
 $96.0\%$ $D_e$ at $l_\text{max}=6$ $\sigma+\pi$ with 61 coupled
-channels); Paper~17 (composed-geometry diatomics and polyatomics,
+channels, on the $R_{e,\min} = 0.3$ grid); Paper~17 (composed-geometry diatomics and polyatomics,
 where the Level~3 and Level~4 coupled-channel solvers run on each
 electron group's natural geometry block); Paper~18 \S~IV.4 (this
 projection is where the algebraic-implicit and piecewise tiers live
@@ -2068,7 +2068,7 @@ at operator level); production solver modules
 \texttt{geovac/hyperspherical\_adiabatic.py} (Level~3) and
 \texttt{geovac/level4\_multichannel.py} (Level~4).\\
 \textbf{Empirical anchor:} He hyperspherical at Level~3 reaches
-$0.022\%$ raw error (properly variational; $0.004\%$ after a
+$0.022\%$ raw error (properly variational; $0.020\%$ after a
 non-variational cusp extrapolation at $l_\text{max}=4$) (Track~DI
 v2.6.0, Sprint~1; 2D variational solver on
 $S^5$ with $l_\text{max}=7$, $n_R=35$, self-consistent cusp
@@ -4010,7 +4010,7 @@ graph-validity-boundary'' reading used a non-physical $+\tfrac{1}{16}$ [retracte
 one-body graph hop and are withdrawn (2026-09-25; Paper~13). \\
 He ground state (2D variational + cusp) & Fock + spectral cusp &
 $0.022\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1 (variational); a cusp
-extrapolation gives $0.004\%$ at $\ell_\text{max}=4$ (non-variational, marginally below exact). \\
+extrapolation gives $0.020\%$ at $\ell_\text{max}=4$ (non-variational, above exact). \\
 He ground state (Hylleraas r$_{12}$, $\omega_{\max}=4$) & Fock $\circ$
 explicit r$_{12}$ correlation
 & $-0.016$~mHa = $0.0006\%$ vs Drake NR at 22 basis functions & T &
@@ -10616,7 +10616,7 @@ GeoVac Project, ``The Level~4 Natural Geometry: Two-Center Two-Electron
 Molecules in Molecule-Frame Hyperspherical Coordinates,'' Paper~15 (2025).
 
 \bibitem{paper17}
-GeoVac Project, ``Composed Natural Geometries for Core-Valence Diatomics: LiH and BeH$^+$ from Discrete Graph Topology,'' Paper~17 (2025).
+GeoVac Project, ``Composed Natural Geometries for Core-Valence Diatomics: LiH and BeH$^+$ from Natural-Geometry Solvers,'' Paper~17 (2025).
 
 \bibitem{paper18}
 GeoVac Project, ``Spectral-Geometric Exchange Constants: Projecting Discrete Spectra onto Continuous Manifolds,'' Paper~18

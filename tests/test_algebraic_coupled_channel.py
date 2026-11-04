@@ -376,10 +376,9 @@ def test_exact_improves_over_full():
 def test_lmax5_error_below_025():
     """l_max=5 with q_mode='exact' should achieve < 0.25% error.
 
-    This characterizes the coupled-channel convergence floor. The error
-    converges as ~l_max^{-2} toward a structural floor of ~0.19-0.20%
-    set by the adiabatic channel truncation. Sub-0.1% requires a
-    variational 2D solver (Paper 15) rather than more l_max.
+    This pins the value on the default R_min = 0.1 bohr Dirichlet wall
+    (0.21%).  It is the wall, not a coupled-channel floor: at R_min = 0.02
+    the l_max=5 energy lies 0.0022% below exact (Paper 13).
     """
     from geovac.algebraic_coupled_channel import solve_hyperspherical_algebraic_coupled
 

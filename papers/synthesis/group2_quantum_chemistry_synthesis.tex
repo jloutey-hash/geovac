@@ -1,6 +1,6 @@
 % group2_quantum_chemistry_synthesis.tex
 % GeoVac Group 2 Synthesis: Quantum Chemistry / Natural Geometry Hierarchy Arc
-% Status: Project archive synthesis, revised August 2026 (Paper 58 promotion)
+% Status: Project archive synthesis, revised November 2026 (group2 QA)
 % Audience: quantum chemists, electronic-structure theorists
 
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
@@ -24,7 +24,7 @@ A Synthesis of the GeoVac Quantum-Chemistry Arc}
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
 
-\date{August 14, 2026}
+\date{November 4, 2026}
 
 %% ========================================================================
 %% ABSTRACT
@@ -38,12 +38,12 @@ singularities become boundary conditions and the Laplace--Beltrami
 operator's quantum-number structure (labels, degeneracies, selection
 rules) is carried exactly by a sparse lattice whose nodes are those
 labels.  This synthesis assembles the framework's quantum-chemistry
-arc---the twelve Group~2 papers spanning one-electron atoms, the
+arc---the thirteen Group~2 papers spanning one-electron atoms, the
 two-center one-electron ion, the two-electron atom, the two-center
 two-electron molecule, the core--valence and polyatomic
 extensions, the genuine two-center tensor census, the transcendence
-frontier at the third center, and the isoenergetic Sturmian secular
-equation---into a single
+frontier at the third center, the isoenergetic Sturmian secular
+equation, and an equal-size basis comparison on water---into a single
 coherent narrative organized by the
 \emph{natural geometry hierarchy}.  The hierarchy is a grid indexed by
 the number of nuclear centers and the number of electrons:\ $S^3$
@@ -67,7 +67,7 @@ inequality~\cite{loutey_paper15}; what currently survives as quadrature
 ($Z_{\mathrm{eff}}$ screening, the adiabatic potential curves, the
 hyperradial coupling) is named explicitly, and finding algebraic
 replacements is an ongoing goal rather than a deficiency.
-\emph{Second}, two structural negative theorems delimit the
+\emph{Second}, two structural negative results delimit the
 design space:\ in the single-$n$ $D$-matrix \emph{approximation} to a
 single-center molecular Sturmian basis with a shared momentum scale, the
 one-electron Hamiltonian and overlap obey the
@@ -91,11 +91,12 @@ fails and only the axial $m$-rule survives, so the angular sparsity is an
 point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
 machine precision for $\mathrm{H}_2^+$, \gvc{he-bracket}{$0.022\%$ (properly variational, raw
-$l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
-for He}, $99.97\%$ of $D_e$ ($0.053$~mHa) for $\mathrm{H}_2$ via an
+$l_{\max}=7$) and $0.020\%$ with the Schwartz cusp tail at $l_{\max}=4$,
+still above exact, for He}, $99.97\%$ of $D_e$ ($0.053$~mHa) for $\mathrm{H}_2$ via an
 explicit-$r_{12}$ extension of the prolate spheroidal engine with exact
-algebraic integrals ($99.81\%$ / $0.32$~mHa via re-conditioned CI at the
-variational optimum $\alpha = 1.40$)---and $96.0\%$ (cusp-corrected) in
+algebraic integrals ($99.81\%$ / $0.32$~mHa via re-conditioned CI at a
+larger truncation and the variational optimum $\alpha = 1.40$)---and $96.0\%$ (on an
+unconverged inner hyperradial wall) in
 the molecule-frame hyperspherical treatment---two routes to the same
 system, not a matched pair, and $\mathrm{H}_2$'s natural geometry is the
 prolate spheroid---and---in the
@@ -168,7 +169,7 @@ separation of variables, its own algebraic content, and its own
 accuracy ceiling.  Table~\ref{tab:hierarchy} summarizes the hierarchy
 and the headline result at each level; the body of this synthesis
 unpacks each row, the algebraic structure that makes it work, and the
-two proven theorems that mark the boundaries of what natural geometry
+two negative results that mark the boundaries of what natural geometry
 can and cannot do.
 
 \begin{table*}[t]
@@ -186,9 +187,9 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 \midrule
 1 & atom (1, 1) & $S^3$ (Fock projection) & exact on the labels (diagonal Casimir $n^2-1$); graph $\lambda_{\max}$ matched by construction & \cite{loutey_paper7} \\
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & machine precision (spectral Laguerre) & \cite{loutey_paper11} \\
-3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $1.88\%$ (fixed-$k$ hydrogenic CI, $n_{\max}=7$) & \cite{loutey_paper13} \\
-4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
-4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal & $99.97\%$ of $D_e$ ($0.053$~mHa) via explicit-$r_{12}$ CI (exact integrals);\ $99.81\%$ ($0.32$~mHa) via re-based CI at $\alpha_{\rm opt}=1.40$ & \cite{loutey_paper12} \\
+2 & $\mathrm{H}_2$ (2, 2) & prolate spheroidal & $99.97\%$ of $D_e$ ($0.053$~mHa) via explicit-$r_{12}$ CI (exact integrals);\ $99.81\%$ ($0.32$~mHa) via re-based CI at a larger truncation and $\alpha_{\rm opt}=1.40$ & \cite{loutey_paper12} \\
+3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw); $0.020\%$ with the Schwartz cusp tail, above exact; $1.88\%$ (fixed-$k$ hydrogenic CI, $n_{\max}=7$) & \cite{loutey_paper13} \\
+4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, inner wall $R_{e,\min}=0.3$~bohr, not converged) & \cite{loutey_paper15} \\
 4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
 5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
 5 & $\mathrm{BeH}_2$ (polyatomic) & composed $+$ 1-RDM exchange & $R_{\mathrm{eq}}$ $11.7\%$ & \cite{loutey_paper17} \\
@@ -233,8 +234,8 @@ question for chemistry is whether the same $S^3$ object handles a
 it shows that a diatomic molecule is geometrically a single $S^3$ with
 two weighted poles---the \emph{bond sphere}---in which the internuclear
 distance $R$ encodes as a polar angle $\gamma$ through
-$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$, and all cross-atom
-matrix elements are $SO(4)$ Wigner $D$-matrix elements evaluated at the
+$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$, and, in a single-$n$ model, the cross-atom
+matrix elements are taken to be $SO(4)$ Wigner $D$-matrix elements evaluated at the
 bond rotation $e^{i\gamma A_y}$.  The geometry is consistent, and it
 yields exact selection rules for $\sigma$-bonds:\ the bond rotation
 preserves $m=0$ within $l=1$ and does not mix $s$ and $p$ states,
@@ -246,7 +247,7 @@ $\gamma$~\cite{loutey_paper8}.
 The bond sphere construction also produces the arc's first proven
 \emph{negative} theorem, and it is load-bearing for everything that
 follows.  In a single-center molecular Sturmian basis with a shared momentum scale
-$p_0$, treated with Paper~8's single-$n$ rotation approximation, the one-electron Hamiltonian matrix is
+$p_0$, with both the overlap and the cross-nuclear potential taken in Paper~8's single-$n$ $D$-matrix model, the one-electron Hamiltonian matrix is
 \begin{equation}
 H_{ij} = -\frac{p_0^2}{2}\,S_{ij} + (1-\beta_j)\,V_{ij},
 \label{eq:sturmian_structural}
@@ -302,9 +303,9 @@ root-finding in the separation parameter $c^2 = -R^2 E_{\mathrm{elec}}/2$
 to enforce self-consistency.  The method has zero free parameters:\ all
 inputs are nuclear charges, the internuclear distance, and the basis
 resolution.  With the spectral Laguerre radial solver at
-$n_{\mathrm{basis}} = 20$, the $\mathrm{H}_2^+$ ground-state energy is
-$E_{\min} = -0.602634214494936$~Ha against the reference
-$-0.6026342144949$~Ha~\cite{bates1953}---agreement to
+$n_{\mathrm{basis}} = 20$, the $\mathrm{H}_2^+$ ground-state energy at
+$R = 2.0$~bohr is $E = -0.602634214494936$~Ha against Peek's value
+$-0.6026342144949$~Ha at that distance~\cite{peek1965}---agreement to
 $3.6\times10^{-14}$~Ha, i.e.\ to the precision at which that reference
 is quoted, making it the most accurate single result in the chemistry
 arc---with the correct dissociation to $\mathrm{H}+p$ as
@@ -365,7 +366,7 @@ repulsion $\langle \phi_i | 1/r_{12} | \phi_j \rangle$ over the
 six-dimensional two-particle configuration space.  Standard numerical
 quadrature on a grid converges slowly because of the Coulomb
 singularity at $r_{12} = 0$ and saturates near $80\%$ of the exact
-$\mathrm{H}_2$ dissociation energy regardless of basis size.  The
+$\mathrm{H}_2$ dissociation energy as the basis grows.  The
 algebraic replacement is the Neumann expansion~\cite{neumann1878} of $1/r_{12}$ in prolate
 spheroidal coordinates, which decomposes each six-dimensional integral
 into a finite sum of products of one-dimensional auxiliary integrals
@@ -375,7 +376,7 @@ Legendre moments satisfy exact three-term recurrences, so the
 $V_{ee}$ matrix is exact within the Neumann truncation order with no
 six-dimensional quadrature and no fitted parameters~\cite{loutey_paper12}.
 That property holds for all $m$:\ the log-singular second-kind moment
-$B_l$, once evaluated by a one-dimensional adaptive quadrature, now has a
+$B_l$ has a
 closed form in $\{E_1, \gamma, \ln\}$, and the azimuthal extension
 described below uses the same closed-form seeds, so the prolate
 $V_{ee}$ is fully quadrature-free for every $m$~\cite{loutey_paper12}.  A
@@ -399,15 +400,16 @@ $|m| \le 1$ in the same basis, with the same Neumann kernel, reaches
 $99.1\%$ of $D_e$ in the original monomial basis---a gain of
 $11.6$~mHa against the $0.34$~mHa
 available from near-tripling the $\sigma$ basis.  Re-conditioning that
-same span (Laguerre $\times$ Legendre, high-precision assembly) then
-climbs to $99.81\%$ ($0.32$~mHa, inside chemical accuracy) at the
-variational optimum $\alpha = 1.40$, and an explicit-$r_{12}$ extension of
+same span (Laguerre $\times$ Legendre, high-precision assembly) gives
+$99.22\%$, and at a larger truncation with the $\delta$ channels
+($(5,5)$, $|m| \le 2$) and the variationally optimal exponent $\alpha = 1.40$
+it climbs to $99.81\%$ ($0.32$~mHa, inside chemical accuracy); an explicit-$r_{12}$ extension of
 the same engine---every $r_{12}$ matrix element reduced to the same
 algebraic Neumann kernels, no quadrature---reaches $99.97\%$
 ($0.053$~mHa)~\cite{loutey_paper12}.  The
 $|m| = 2$ sector was numerically unstable in the differentiation-based
 radial engine, so the $\delta$ contribution (${\approx}0.5$~mHa) was
-first fixed by an independent Gaussian-basis route;\ the quoted figure
+first fixed by an independent Gaussian-basis route;\ the monomial $99.1\%$
 carries a stability envelope, the basis being strongly linearly
 dependent at that size.  Paper~12 has since generalised the same
 $A_l$, $B_l$, $X_l$ recurrences to the associated Legendre functions,
@@ -421,8 +423,7 @@ $\{E_1, \gamma, \ln\}$---fully quadrature-free).
 
 \emph{Withdrawn.}  Earlier versions of this synthesis reported
 Paper~12's original diagnosis---that the gap was the electron--electron
-cusp demanding non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$
-terms, and that this identified hyperspherical coordinates as the next
+cusp demanding non-analytic terms, and that this identified hyperspherical coordinates as the next
 natural geometry.  Paper~12 has withdrawn both, and the correction reached
 further than this section:\ Paper~18's Level-4
 subsection~\cite{loutey_paper18} had built an \emph{irreducibility}
@@ -453,15 +454,14 @@ The accuracy results here are reported at carefully separated tiers, and
 the synthesis preserves the distinction.  The original single-channel
 adiabatic solver gives $E = -2.9052$~Ha, nominally $0.05\%$ from the
 exact $-2.9037$~Ha, but it is \emph{non-variational}:\ it lies below the
-exact energy through a fortuitous cancellation of adiabatic and
-finite-difference error, and the paper labels it as
+exact energy because the single-channel adiabatic approximation omits the
+positive diagonal Born--Oppenheimer correction, and the paper labels it as
 such~\cite{loutey_paper13}.  The properly variational results come from
 a two-dimensional variational solver that treats the hyperradius and
 hyperangle simultaneously, avoiding the adiabatic approximation:\
 \gvc{he-bracket}{$0.022\%$ raw at $l_{\max}=7$ (a genuine variational upper bound) and
-$0.004\%$ with a Schwartz cusp correction at $l_{\max}=4$ (a
-non-variational extrapolation that lies marginally below the exact
-energy)}~\cite{loutey_paper13}.  A separate, fully zero-parameter route
+$0.020\%$ with the Schwartz partial-wave tail added at $l_{\max}=4$, still
+above the exact energy}~\cite{loutey_paper13}.  A separate, fully zero-parameter route
 is configuration interaction in the fixed $k=Z$ hydrogenic basis on
 the $S^3$ labels, with the exact diagonal one-body operator and exact
 rational Slater integrals:\ it reaches $1.88\%$ above exact at
@@ -480,17 +480,18 @@ diagonalizations---numerical content named explicitly as a current,
 not fundamental, feature~\cite{loutey_paper13, loutey_paper18}.
 
 Paper~13 also documents an instructive negative result:\ in the
-\emph{adiabatic} approximation, increasing $l_{\max}$ beyond $0$
-worsens the energy, because the finite-difference treatment of the
-boundary singularities $l(l+1)/\cos^2\alpha$ and $l(l+1)/\sin^2\alpha$
-degrades faster than the partial-wave content improves; the adiabatic
-channel truncation has an intrinsic floor near $0.19\%$--$0.20\%$.  The
-2D variational solver is what breaks that floor~\cite{loutey_paper13}.
+single-channel \emph{adiabatic} approximation, increasing $l_{\max}$ beyond $0$
+worsens the energy, because the added angular channels bring correlation
+without the compensating non-adiabatic kinetic cost and the energy falls
+below exact; the apparent ${\approx}0.2\%$ limit of the coupled-channel
+treatment is the default inner hyperradial wall, not the formalism, and
+moving that wall takes the $l_{\max}=3$ error to
+$0.0075\%$~\cite{loutey_paper13}.
 The same fiber-bundle structure, coupled to a nuclear lattice, delivers
 an end-to-end demonstration:\ ab initio rovibrational constants for
 $\mathrm{H}_2$ with zero spectroscopic input, the fundamental
-$\nu_{01} = 4157~\mathrm{cm}^{-1}$ ($0.1\%$) and the rotational
-constant $B_e = 59.5~\mathrm{cm}^{-1}$ ($2.2\%$)~\cite{loutey_paper13}.
+$\nu_{01} = 4123~\mathrm{cm}^{-1}$ ($0.9\%$) and the rotational
+constant $B_e = 59.3~\mathrm{cm}^{-1}$ ($2.6\%$)~\cite{loutey_paper13}.
 
 %% ========================================================================
 \section{Level 4: The Two-Center Two-Electron Molecule}
@@ -507,17 +508,20 @@ electron--electron cusp appears at $\alpha = \pi/4$, $\theta_{12} = 0$
 \emph{independent of molecular geometry}---a structural difference from
 prolate spheroidal coordinates, where the same locus is not a coordinate
 surface---a difference in where the cusp sits, which does not translate
-into an accuracy advantage---and the angular eigenvalue problem depends on $(R, R_e)$
-only through $\rho$, collapsing a two-dimensional parameter sweep to one
-dimension~\cite{loutey_paper15}.
+into an accuracy advantage---and the molecular charge function depends on $(R, R_e)$
+only through $\rho$, so it can be cached on a one-dimensional $\rho$ grid
+(the angular eigenvalues themselves depend on both $\rho$ and
+$R_e$)~\cite{loutey_paper15}.
 
 A coupled-channel expansion in body-frame partial waves $(l_1, m_1,
 l_2, m_2)$ with the gerade constraint $l_1 + l_2$ even and $m_1 + m_2 =
 0$, solved with the same two-dimensional $(R_e, \alpha)$ variational
-solver that avoids the adiabatic approximation, recovers $96.0\%$ (cusp-corrected;\ ${\sim}95\%$ pure-variational) of
+solver that avoids the adiabatic approximation, recovers $96.0\%$ of
 the exact $D_e$~\cite{kolos1968} at $l_{\max}=6$ with $\sigma$ and $\pi$ channels ($61$
-channels; a complete-basis extrapolation reaches
-$\sim\!97\%$)~\cite{loutey_paper15}.
+channels) on a hyperradial grid with inner wall $R_{e,\min} = 0.3$~bohr;\
+that wall is not converged, and at $l_{\max}=4$ moving it to $0.05$~bohr
+raises the recovered $D_e$ from $94.1\%$ to
+$96.9$--$97.3\%$~\cite{loutey_paper15}.
 
 \emph{Withdrawn.}  Earlier versions read this as exceeding the
 $92.4\%$ of prolate spheroidal CI (Paper~12) and confirming a
@@ -525,12 +529,12 @@ cusp-resolution advantage for the hyperspherical geometry.  The
 comparison was not like-for-like:\ the $96.0\%$ includes $\pi$
 channels and the $92.4\%$ does not.  At matched $m_{\max}$ no comparison is
 available:\ Paper~12's own basis with $|m| \le 1$ reaches $99.1\%$ in its
-original monomial basis and $99.81\%$ re-conditioned,
+original monomial basis and $99.22\%$ re-conditioned,
 but those figures and the $96.0\%$ differ in truncation, cusp treatment and
 solver class alike.  Neither paper claims a coordinate-system advantage
 over the other, and the two published figures are not a matched pair in
-any case:\ the $96.0\%$ is $l_{\max} = 6$ with a Schwartz cusp
-correction and a different solver class.  What both papers do agree on
+any case:\ the $96.0\%$ is $l_{\max} = 6$ on an unconverged inner
+wall and a different solver class.  What both papers do agree on
 is the physics that matters here:\ the $m \ne 0$ channels carry the
 angular correlation, and neither geometry gets it without them.  The framework extends to heteronuclear
 diatomics:\ for $\mathrm{HeH}^+$ a charge-center origin shift and
@@ -558,7 +562,8 @@ Paper~15 is careful about variational hygiene.  The adiabatic
 approximation systematically \emph{over}-estimates $D_e$ by roughly
 $11\%$ relative to the 2D variational solver, and at $l_{\max}=4$ with
 $m_{\max}=1$ the adiabatic $D_e$ exceeds the exact value, violating the
-variational principle; the 2D result is the correct bound, and the
+variational principle; the 2D result avoids that overestimate (its
+finite-difference energies are not strict upper bounds), and the
 $\sim\!10$ percentage-point gap between them is the kinetic-energy cost
 of non-adiabatic coupling~\cite{loutey_paper15}.  The convergence also
 shows an even--odd staircase:\ even-$l_{\max}$ increments add large
@@ -580,26 +585,27 @@ downward (Level-4 coordinates are undefined for one
 electron)~\cite{loutey_paper17}.  Paper~17~\cite{loutey_paper17}
 introduces \emph{composed} natural geometries:\ fiber bundles in which
 each electron group inhabits its own natural coordinate system, coupled
-by screening functions and ab initio Phillips--Kleinman (PK)
-pseudopotentials~\cite{phillips_kleinman1959} derived entirely from the core wavefunction.  For LiH,
+by screening functions and Phillips--Kleinman (PK)
+pseudopotentials~\cite{phillips_kleinman1959} built from the core wavefunction.  For LiH,
 the $\mathrm{Li}^+\,1s^2$ core is solved by the Level-3 hyperspherical
 method, yielding a screening function $Z_{\mathrm{eff}}(r)$ and the PK
 parameters; the two valence electrons are solved by the Level-4
 molecule-frame method with $Z_{\mathrm{eff}}$ injected; and the
 potential-energy surface is scanned by a $\rho$-collapse adiabatic
-method.  The construction uses \emph{zero} experimental molecular
-data---all PK inputs are atomic (the core wavefunction, the ionization
-energy, the nuclear charges)~\cite{loutey_paper17}.
+method.  The PK takes one empirical atomic input (the neutral atom's
+first ionization energy), and its barrier-width formula was chosen among
+four candidates by comparison with the LiH equilibrium bond
+length~\cite{loutey_paper17}.
 
 \subsection{Results and the PK accuracy ceiling}
 
 The composed LiH potential-energy surface gives $R_{\mathrm{eq}} =
-3.21$~bohr at $l_{\max}=2$ ($6.4\%$ error versus the experimental
+3.22$~bohr at $l_{\max}=2$ ($6.9\%$ error versus the experimental
 $3.015$~bohr~\cite{huber1979}, improved from $17\%$ in the LCAO baseline) and
-$\omega_e = 1471~\mathrm{cm}^{-1}$ ($4.6\%$); an $l$-dependent PK
+$\omega_e = 1465~\mathrm{cm}^{-1}$ ($4.2\%$); an $l$-dependent PK
 variant, which restricts the projector to the $l=0$ core channels,
 reduces the bond-length error to $5.3\%$~\cite{loutey_paper17}.  The
-same parameter-free formula transfers to $\mathrm{BeH}_2$ and
+same formula, with no per-molecule tuning, transfers to $\mathrm{BeH}_2$ and
 $\mathrm{H}_2\mathrm{O}$:\ with full one-reduced-density-matrix
 inter-fiber exchange, $\mathrm{BeH}_2$ reaches $11.7\%$
 bond-length error (matching a single-parameter fitted exchange model at
@@ -615,20 +621,23 @@ removing it collapses $R_{\mathrm{eq}}$ to $0.88$~bohr, so PK is what
 creates the bonding-versus-Pauli-repulsion balance that produces an
 equilibrium at all~\cite{loutey_paper17}.  Second, the residual error
 is structural.  Across all four solver$\times$PK combinations the
-bond-length error saturates near $5$--$6\%$ at the $l_{\max}=2$
+bond-length error sits at $5$--$7\%$ at the $l_{\max}=2$
 operating point, and the $l_{\max}$ drift (the systematic outward
 creep of $R_{\mathrm{eq}}$ with partial-wave order) is not removed by
 the 2D variational solver, by the $l$-dependent PK, or by an
 $R$-dependent PK whose reference length cannot be derived from atomic
 quantities without circular reasoning~\cite{loutey_paper17}.  The paper
-attributes this to a deep correlation wall---labeled W1e, the composed
+reads the residual drift as intrinsic to the composed-geometry
+approximation, with PK classified as a composition exchange constant.
+A separate wall, labeled W1e---the inner-region overattraction of
+second-row NaH, the composed
 architecture's instance of the framework's multi-focal composition wall
-pattern---and documents that single-mechanism repairs each saturate
-well below closure:\ a bonding-orbital PK extension at a $43\%$ ceiling,
+pattern---is documented there with single-mechanism repairs that each saturate
+well below closure on that system:\ a bonding-orbital PK extension at a $43\%$ ceiling,
 explicit-core Hartree pressure at $\sim\!26\%$, basis enlargement at
 $\sim\!10\%$, with Schmidt orthogonalization and core correlation each
-contributing negligibly~\cite{loutey_paper17}.  This wall is later
-relocated from the correlation treatment to the Hamiltonian specification
+contributing negligibly~\cite{loutey_paper17}.  That wall is later
+relocated, on NaH, from the correlation treatment to the Hamiltonian specification
 itself, and given a group-theoretic mechanism, in
 Sec.~\ref{sec:pkfree_fci}.
 
@@ -648,7 +657,7 @@ encoding being wrong.  The composed geometry trades this exact
 inter-group antisymmetry for a $144\times$ angular compression (cost
 scaling $l_{\max}^2$ versus $l_{\max}^{11}$), which is what makes the
 composed architecture the production operating point despite the
-$5$--$6\%$ ceiling~\cite{loutey_paper17}.  The reason the trade is
+$5$--$7\%$ ceiling~\cite{loutey_paper17}.  The reason the trade is
 forced and not a matter of convenience is a structural obstruction:\
 exact antisymmetry requires a shared coordinate system, while
 composition factorizes the wavefunction into incompatible coordinate
@@ -676,9 +685,10 @@ $0.20\%$ energy error at $n_{\max}=3$ (down from $1.8\%$ at $n_{\max}=2$),
 using analytical incomplete-gamma cross-center integrals at machine
 precision~\cite{loutey_paper19}.  The structural cost is geometric
 rather than energetic:\ the equilibrium bond length still drifts to
-$R_{\mathrm{eq}} = 3.28$~bohr ($\approx 8.8\%$ error), though the drift
-per $n_{\max}$ step is about three times smaller than the PK
-$l_{\max}$ drift~\cite{loutey_paper19}.  The honest reading is that
+$R_{\mathrm{eq}} = 3.28$~bohr ($\approx 8.8\%$ error), decelerating over
+the two available $n_{\max}$ steps (a different truncation parameter from
+the PK $l_{\max}$ drift, so the two are not directly
+comparable)~\cite{loutey_paper19}.  The honest reading is that
 the energy axis converges through $n_{\max}=3$ while the geometry drifts---but
 not that the energy axis is simply the good one:\ at $n_{\max}=4$ the model
 crosses \emph{past} exact (over-binding), so the fixed-geometry error is not
@@ -688,8 +698,11 @@ geometries rather than to full potential-energy surfaces, with that
 non-monotonicity disclosed.  The drift is not a physics wall.  An all-electron
 prolate-spheroidal (Level~2) treatment gives $R_{\mathrm{eq}}=+0.2\%$, and its
 analytic, resolution-of-identity--free explicit-$r_{12}$ energy,
-$-8.04905$~Ha, is the corpus's best LiH energy.  It is variational and
-cross-checked by Monte-Carlo.  That route buys energy per qubit, not sparsity.
+$-8.04905$~Ha, is variational and cross-checked by Monte-Carlo;\ relaxing
+the CI coefficients and adding electron--nucleus factors on the Li core,
+built from the core orbital with no new parameter, lowers it to
+$-8.05851$~Ha, the corpus's best LiH energy (variational, in agreement
+with a VMC optimization of the same ansatz).  That route buys energy per qubit, not sparsity.
 Its qubit Hamiltonian is dense within $M_L$, with $8{,}370$ Pauli terms at
 $Q=20$, ten times the composed LiH count at $Q=30$~\cite{loutey_paper19}.  Paper~19 also
 records a clean
@@ -758,7 +771,7 @@ experiment), recovering $91.1\%$ of the in-basis FCI binding from three
 fragment-native determinants, and with \emph{fewer} correlation degrees
 of freedom than the runs that failed---which is what carries the
 inference.  This localizes W1e to the Hamiltonian specification rather
-than the correlation treatment:\ the wall was the atomic-sector
+than the correlation treatment on this system:\ the wall was the atomic-sector
 construction, not the determinant expansion.  The demonstration
 deliberately forfeits the sparsity, because the sparsity and the
 atomic-sector evaluation are the same choice.
@@ -853,7 +866,10 @@ and Pachucki's, for integer indices.  [MEASURED] The operators also evaluate:\
 the kite's, from six Taylor coefficients, rebuilds the quadrature grid behind
 the triangle to the grid's own precision in about a thirteenth of the upper
 bound on its processor time, derivation included, while the triangle's own
-operator is slower than one more grid sum.  A six-Gaussian geminal fit that a
+operator is slower than one more grid sum;\ at chemistry precision
+($10^{-12}$) a double-precision quadrature is about $500$ times faster
+than the kite's operator, so for chemistry the operator is structure, not
+a shortcut.  A six-Gaussian geminal fit that a
 production code ships misses the triangle by five to thirteen percent,
 through its tail and not its cusp;\ the triangle weights the whole geminal,
 so this is not an F12 energy error (Paper~59).  At a second, blind set of rates
@@ -886,8 +902,11 @@ LiH):\ the deliverable is the RI-free reduction, not the correlation energy
 recovered.  On one centre that reduction is the classical Hylleraas-CI
 treatment of three- and four-electron integrals;\ only its two-center
 extension appears to be new, as far as the literature search reported in
-Paper~12 (which gives the prior art) could establish.  The gate is therefore specifically the three-center genus jump of the radial core,
-not explicit correlation as such.
+Paper~12 (which gives the prior art) could establish.  The gate is therefore set by the
+densities an integral links:\ for the Hamiltonian's integrals it is the
+three-center genus jump of the radial core, while correlated integrals that
+link more densities climb further, and a two-center Slater-geminal master
+integral already reaches the three-center curve~\cite{loutey_paper59}.
 
 \subsection{The isoenergetic secular equation as a quantum algorithm (Paper~60)}
 
@@ -1001,7 +1020,7 @@ costs nine times the Pauli terms and $2.7$ times the $1$-norm on
 $80$ qubits against $46$, with the crossing between it and cc-pVTZ.
 Hydrogen fluoride, built by the same rule and pre-registered, repeats
 both findings:\ the Slater DZP is $59.5$~mHa below cc-pVDZ at nineteen
-functions with the same Pauli count, and aug-cc-pVDZ is still
+functions with the same Pauli count in canonical orbitals, and aug-cc-pVDZ is still
 $24$~mHa short at $9.3$ times the terms.  A ring of six hydrogens, with
 no core, does not (pre-registered, STOP):\ the Slater DZP is only $3.5$~mHa
 ahead at thirty functions and one more Gaussian polarization shell
@@ -1034,59 +1053,61 @@ hybrid one-body operator with a non-physical graph hop and are
 withdrawn as helium results); lithium $1.03\%$ (at $n_{\max}=5$)
 and beryllium $0.71\%$ (at $n_{\max}=4$, with $487{,}635$
 determinants)~\cite{loutey_fci_atoms}.  The Hamiltonian is sparse
-(fill fraction $0.68\%$ for He at $n_{\max}=5$, $0.12\%$ for Li at
-$n_{\max}=4$) with a sub-quadratic nonzero-count growth exponent
-$\alpha \approx 1.4$--$1.5$.  The paper documents an instructive
+(fill fraction $0.17\%$ for Li at $n_{\max}=5$ and $0.05\%$ for Be at
+$n_{\max}=4$;\ $2.1\%$ for He at $n_{\max}=5$) with a sub-quadratic
+nonzero-count growth exponent $\alpha \approx 1.6$--$1.8$.  The paper documents an instructive
 variational subtlety:\ a hybrid one-body operator that mixes graph
 Laplacian off-diagonals (carrying $\kappa = -1/16$) lowers the He
 energy only because those off-diagonals are a hop absent from the
 atom's Hamiltonian, and violates the variational principle for
 three-electron lithium, so the
 exact hydrogenic one-body operator is required for monotonic
-convergence~\cite{loutey_fci_atoms}.  The dominant remaining error for
-heteronuclear LiH at $n_{\max}=3$ is basis truncation, not integral
-incompleteness---the basis-set superposition error there exceeds the
-experimental binding energy, so the raw binding number is reported with
-its counterpoise correction~\cite{boys_bernardi} and its honest caveat~\cite{loutey_fci_atoms}.
+convergence~\cite{loutey_fci_atoms}.  For heteronuclear LiH the
+surface is monotonically attractive and does not return to the
+separated-atom energy at large $R$, so no binding energy is extracted;\
+the counterpoise correction~\cite{boys_bernardi} is $R$-independent and
+comparable to the experimental binding energy~\cite{loutey_fci_atoms}.
 
-\subsection{The graph-concatenation theorem (a second guardrail)}
+\subsection{The graph-concatenation negative (a second guardrail)}
 
 The molecular FCI paper~\cite{loutey_fci_mol} supplies the arc's second
-proven negative theorem.  A topological LCAO architecture that builds a
+guardrail, a measured negative result.  A topological LCAO architecture that builds a
 molecular graph by concatenating atom-centered hydrogenic lattices
 (via Mulliken cross-nuclear attraction, Slater--Condon repulsion, and
-overlap bridges) is shown to have an intra-atomic graph-Laplacian
-kinetic energy that is \emph{completely $R$-independent} by
-construction:\ the atomic lattice structure does not change as the
+overlap bridges) is shown to have an intra-atomic one-electron block
+(the hydrogenic diagonal, which carries each atom's kinetic energy) that is \emph{completely $R$-independent} by
+construction:\ it does not respond as the
 nuclei approach.  The balanced Hamiltonian therefore produces a
 monotonically attractive potential-energy surface with no equilibrium
-geometry---the binding energy decreases smoothly from $0.464$~Ha at
-$R=1.5$~bohr to $0.042$~Ha at $R=5.0$~bohr, with a virial ratio far
-from unity~\cite{loutey_fci_mol}.  The paper documents a $29$-version
+geometry---at $n_{\max}=2$ the curve still lies $0.22$~Ha below the
+separated-atom energy at $R=8$~bohr, so no binding energy is
+extracted~\cite{loutey_fci_mol}.  The paper documents a $29$-version
 diagnostic arc that falsifies basis-set superposition error as the
 geometric driver, rules out orbital-exponent relaxation, and---citing
 the Sturmian structural theorem of Paper~8---rules out every
 single-center Sturmian and bond-sphere alternative \emph{of the
 single-$n$ $D$-matrix form} as a repair; a
-single-parameter Fock-weighted kinetic correction partially restores an
-equilibrium ($R_{\mathrm{eq}} \approx 3.8$~bohr) but cannot fit
-$R_{\mathrm{eq}}$ and $D_e$ simultaneously~\cite{loutey_fci_mol,
+Fock-weighted kinetic correction with one fitted scale $\lambda$ partially restores an
+equilibrium ($R_{\mathrm{eq}} \approx 3.7$~bohr at $\lambda = 0.1$,
+$n_{\max}=2$) without repairing the large-$R$ limit~\cite{loutey_fci_mol,
 loutey_paper8}.
 
-Together the two negative theorems---Sturmian structural (shared
+Together the two negative results---Sturmian structural (shared
 $SO(4)$ Wigner-$D$ congruence $\Rightarrow$ $R$-independent eigenvalues,
 Paper~8) and graph
 concatenation ($R$-independent kinetic energy $\Rightarrow$ no
 equilibrium, the molecular FCI paper)---are guardrails:\ they explain
-\emph{why} the natural-geometry hierarchy is necessary.  A molecule
-must be discretized in coordinates where the separation introduces
+\emph{why} this arc took the natural-geometry route.  Coordinates where
+the separation introduces
 $R$-dependence (prolate spheroidal, molecule-frame hyperspherical, or
-composed), because the two obvious shortcuts (one shared-exponent
+composed) supply what the two obvious shortcuts (one shared-exponent
 single-center basis in the single-$n$ $D$-matrix approximation; one
-concatenated graph) cannot bind in the forms analysed.  The
-shared-exponent leg is the scoped one:\ the genuine cross-$n$ basis
-escapes it algebraically (Paper~8 \texttt{cor:binding}; Paper~60), at the
-cost of the qubit-encoding sparsity that motivated the restriction.
+concatenated graph) lack, since those cannot bind in the forms analysed.
+The route is not the only one:\ the genuine cross-$n$ basis
+escapes the shared-exponent leg algebraically (Paper~8 \texttt{cor:binding}; Paper~60), at the
+cost of the qubit-encoding sparsity that motivated the restriction, and
+Paper~58's NaH binds with genuine two-center integrals over atom-centred
+orbitals.
 
 %% ========================================================================
 \section{The Algebraic-First Thread}
@@ -1166,9 +1187,10 @@ those ceilings honestly.
 The construction is \emph{zero-parameter}:\ every result in
 Table~\ref{tab:hierarchy} takes as input only nuclear charges,
 geometry, and a basis resolution---no fitted potentials, no empirical
-screening constants, no experimental molecular data (the PK
-pseudopotential of Paper~17 is derived entirely from the atomic core
-wavefunction)~\cite{loutey_paper11, loutey_paper17}.  Angular-momentum
+screening constants, no experimental molecular data---with one disclosed
+exception:\ the PK pseudopotential of Paper~17 takes the atomic ionization
+energy as input, and its barrier-width formula was chosen against the LiH
+bond length~\cite{loutey_paper11, loutey_paper17}.  Angular-momentum
 selection rules are baked into the basis, so the matrix elements that
 vanish by symmetry are never computed, and the surviving ones are exact
 algebraic quantities.  The Hamiltonians are structurally sparse, with
@@ -1190,9 +1212,11 @@ payoff:\ the $l$-selection component of the sparsity is an atomic-sector
 property, exact for the composed encoding precisely because it evaluates
 per center, so the favorable scaling characterizes small systems
 evaluated in the atomic sector rather than genuine multi-center
-integration.  This synthesis establishes the chemistry-side foundation of
+integration.  Those Pauli comparisons are at matched qubits, not matched
+accuracy;\ the matched-accuracy cost comparison is Paper~62's, on tuned
+exponential bases~\cite{loutey_paper62}.  This synthesis establishes the chemistry-side foundation of
 that payoff:\ the natural-geometry hierarchy, the algebraic-first
-integral structure, and the two negative theorems that justify the
+integral structure, and the two negative results that justify the
 composed encoding.
 
 \subsection{The benchmarking discipline}
@@ -1204,8 +1228,8 @@ bond-length error, well above production quantum-chemistry accuracy; the
 honest reading is that the framework is a computationally principled
 \emph{alternative} offering sparsity, scaling, and structural insight,
 not a replacement for correlated electronic-structure methods.  The
-papers report the proven negatives---the Sturmian and concatenation
-theorems, the PK ceiling, the W1e wall, the failed PK alternatives and
+papers report the negatives---the Sturmian theorem and the concatenation
+result, the PK ceiling, the W1e wall, the failed PK alternatives and
 cusp treatments---as a first-class part of the corpus, because the
 characterization of what natural geometry \emph{cannot} do is as
 load-bearing as what it can~\cite{loutey_paper8, loutey_fci_mol,
@@ -1219,17 +1243,18 @@ loutey_paper17}.
 Three structural questions remain open at the close of the
 classical-solver arc.
 
-\paragraph{The composed accuracy ceiling (W1e).}  The composed
-architecture saturates near $5$--$6\%$ bond-length error at its
-$l_{\max}=2$ operating point.  Whether a composition rule could close
-W1e without sacrificing the $144\times$ angular compression---i.e.\
-without reverting to the exact-but-expensive Level-4N encoding---was the
+\paragraph{The composed accuracy ceiling and W1e.}  The composed
+architecture sits at $5$--$7\%$ LiH bond-length error at its
+$l_{\max}=2$ operating point, a drift intrinsic to the composed
+approximation~\cite{loutey_paper17}.  Whether the label-generated
+sparsity and binding can coexist on the second-row wall W1e (NaH's
+inner-region overattraction) was a
 central open chemistry question of the classical-solver arc; Paper~58
-answers it in the negative and gives the reason~\cite{loutey_paper58}.
+answers it in the negative on that system and gives the reason~\cite{loutey_paper58}.
 The $l$-selection sparsity is exact only in the atomic sector---it is the
 abelian residue that survives genuine two-center evaluation---so closing
 the bond requires forming the two-center orbital products that destroy
-it.  W1e is thereby relocated from the correlation treatment (a DMRG
+it.  W1e is thereby relocated, on NaH, from the correlation treatment (a DMRG
 cross-check reproduces FCI bit-identically without binding) to the
 Hamiltonian specification itself, and the sparsity-versus-binding trade
 is a conservation law rather than a missing integral.  What remains open
@@ -1265,8 +1290,8 @@ hierarchy.
 
 None of these open questions destabilizes the structural results of the
 arc.  The natural-geometry hierarchy is established level by level; the
-algebraic-first content is catalogued; the two negative theorems are
-proven; and the accuracy ceilings are characterized.  The open
+algebraic-first content is catalogued; the Sturmian theorem is proven
+within its scope and the concatenation negative is measured; and the accuracy ceilings are characterized.  The open
 questions are frontier questions about how far the framework's
 sparsity can be pushed before its accuracy ceiling binds, not
 foundational concerns.
@@ -1281,10 +1306,10 @@ construction of the natural-geometry hierarchy for electronic
 structure.  Each level is the coordinate system in which a given system
 separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
 for $\mathrm{H}_2^+$ (machine precision)~\cite{loutey_paper11}, hyperspherical
-coordinates for He (\gvc{he-bracket}{$0.022\%$ variational raw / $0.004\%$ non-variational
-cusp; $1.88\%$ fixed-$k$ hydrogenic CI})~\cite{loutey_paper13}, molecule-frame hyperspherical
-coordinates for $\mathrm{H}_2$ ($96.0\%$ of $D_e$,
-cusp-corrected)~\cite{loutey_paper15}---though $\mathrm{H}_2$'s natural
+coordinates for He (\gvc{he-bracket}{$0.022\%$ variational raw / $0.020\%$ with the
+cusp tail, still above exact; $1.88\%$ fixed-$k$ hydrogenic CI})~\cite{loutey_paper13}, molecule-frame hyperspherical
+coordinates for $\mathrm{H}_2$ ($96.0\%$ of $D_e$ on an unconverged inner
+wall)~\cite{loutey_paper15}---though $\mathrm{H}_2$'s natural
 geometry is the prolate spheroid, where an explicit-$r_{12}$ CI reaches
 $99.97\%$ ($0.053$~mHa)~\cite{loutey_paper12}---and composed fiber bundles for
 core--valence and polyatomic systems ($5.3\%$, $11.7\%$, $19.4\%$
@@ -1293,13 +1318,13 @@ $\mathrm{H}_2\mathrm{O}$)~\cite{loutey_paper17}.  The arc is held
 together by an algebraic-first discipline---exact angular coupling,
 algebraic Neumann $V_{ee}$~\cite{loutey_paper12}, Laguerre recurrences,
 and $3j$-terminating Legendre expansions~\cite{loutey_paper15}---and is
-bounded by two structural negative theorems:\ a single-center
+bounded by two structural negative results:\ a single-center
 shared-$p_0$ Sturmian basis cannot bind a molecule \emph{in the single-$n$
 $D$-matrix approximation}~\cite{loutey_paper8} (the genuine cross-$n$
 basis does bind, algebraically, at the cost of the
 sparsity---\cite{loutey_paper60}), and a
 concatenated atom-centered graph has no equilibrium~\cite{loutey_fci_mol}.
-Those theorems are why the hierarchy is the route this arc took;\ the
+Those results are why the hierarchy is the route this arc took;\ the
 first is a scoped guardrail rather than an unconditional no-go.
 
 The framework is a zero-parameter, structurally sparse research
@@ -1337,10 +1362,11 @@ V.~Fock,
 ``Zur Theorie des Wasserstoffatoms,''
 Z.\ Phys.\ \textbf{98}, 145 (1935).
 
-\bibitem{bates1953}
-D.~R.~Bates, K.~Ledsham, and A.~L.~Stewart,
-``Wave functions of the hydrogen molecular ion,''
-Philos.\ Trans.\ R.\ Soc.\ Lond.\ A \textbf{246}, 215 (1953).
+\bibitem{peek1965}
+J.~M.~Peek,
+``Eigenparameters for the $1s\sigma_g$ and $2p\sigma_u$ orbitals of
+H$_2^+$,''
+J.\ Chem.\ Phys.\ \textbf{43}, 3004 (1965).
 
 \bibitem{flammer1957}
 C.~Flammer,
@@ -1466,7 +1492,7 @@ GeoVac Paper~15 (2026).
 
 \bibitem{loutey_paper17}
 J.~Loutey,
-``Composed Natural Geometries for Core--Valence Diatomics: LiH and BeH$^+$ from Discrete Graph Topology,''
+``Composed Natural Geometries for Core--Valence Diatomics: LiH and BeH$^+$ from Natural-Geometry Solvers,''
 GeoVac Paper~17 (2026).
 
 \bibitem{loutey_paper18}
@@ -1506,12 +1532,12 @@ GeoVac Paper~62 (2026).
 
 \bibitem{loutey_fci_atoms}
 J.~Loutey,
-``Full Configuration Interaction on a Sparse Graph Hamiltonian: Multi-electron Atoms via Relational Lattice Indexing,''
+``Full Configuration Interaction in a Hydrogenic Basis on the $S^3$ Label Set: Multi-electron Atoms via Relational Lattice Indexing,''
 GeoVac FCI (atoms) Paper (2026).
 
 \bibitem{loutey_fci_mol}
 J.~Loutey,
-``Topological Full Configuration Interaction for Heteronuclear Diatomics: LiH as a Benchmark,''
+``Full Configuration Interaction for Heteronuclear Diatomics in Concatenated Atom-Centred Bases: LiH as a Benchmark,''
 GeoVac FCI (molecules) Paper (2026).
 
 \end{thebibliography}

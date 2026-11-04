@@ -19,6 +19,10 @@
 > - **Paper 58** (Abelian residue): `docs/qa/paper_58.done.md`
 > - **Paper 59** (Elliptic Bessel moment): `docs/qa/paper_59.done.md` — note the
 >   59/61 seam (Paper 61 is group3; they describe one object).
+> - **Paper 62** (water at equal size, Slater vs Gaussian; added to `qa_scopes.py`
+>   2026-10-31): `docs/qa/paper_62.done.md`. With 62 the scope is **14 documents**
+>   (13 papers + the synthesis). [watch-notes updated 2026-11-04, PI-approved,
+>   during the /qa group2 FULL run: values below are the current owner values]
 > - **Paper 60** (Sturmian secular / QC reading): `docs/qa/paper_60.done.md` —
 >   NOT certified; carries a declared literal-registration debt (partly discharged
 >   2026-09-13) and has never had a clean delta.
@@ -79,8 +83,11 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
 2. **Guardrail negatives stay negative.** The two load-bearing NEGATIVE theorems are
    presented *as negatives* and not re-asserted anywhere as a working method:
    - **Sturmian Structural Theorem (Paper 8 / Papers 8–9 guardrail, §3.5):**
-     single-center / shared-exponent / unified-basis molecular encodings give
-     $H_{ij}\propto S_{ij}$ ⇒ **R-independent eigenvalues ⇒ no equilibrium**.
+     in the single-n, shared-p₀ D-matrix MODEL (overlap AND cross-nuclear
+     potential imposed as D-matrix elements) $H_{ij}\propto S_{ij}$ ⇒
+     **R-independent eigenvalues ⇒ no equilibrium**. The genuine cross-n
+     Coulomb–Sturmian basis escapes it; its binding is Paper 60's result. Grading
+     the scope statement as a weakening is wrong — it is the theorem.
    - **FCI-M graph-concatenation (paper_fci_molecules, guardrail, §3.5):** LCAO graph
      concatenation gives R-independent kinetic energy ⇒ **monotonically attractive PES,
      no minimum.**
@@ -116,6 +123,13 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     **Grading note:** the CODE dimension of the 2026-09-19 run was graded against
     the OLD criterion and reported its falsification; any later dimension is
     graded against this one.
+  - **Paper 11 (2026-11-04):** the 13-digit reference $-0.6026342144949$ Ha is
+    Peek 1965 at $R = 2.0$ (the energy at $R=2$, not $E_{\min}$); $R_{\rm eq}$
+    1.99726 is $+0.004\%$ against the exact 1.99719.
+  - **Paper 12 (2026-11-04):** the $\sigma$-sector $B_l$ table is closed-form in
+    the shipped engine (`neumann_vee.compute_Bl_table` routes through the
+    general-m seeds); the grid study's 6-function basis is 3 $\sigma$ + 3
+    $r_{12}$ functions. The text below this line predates that.
   - **Paper 12 — watch-note refreshed 2026-09-20 (/qa DELTA):** the live
     headline is **99.97% of $D_e$ / 0.053 mHa via the explicit-$r_{12}$ CI**
     (James--Coolidge, exact algebraic integrals, no quadrature; v5.14.10;
@@ -142,21 +156,36 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     retired; grading a corrected paper against it would mark the correction as a
     defect. Algebraic recurrence = *exact* **for σ**; μ>0 uses spectral quadrature.
     The surviving transcendental seed is named.
-  - **Paper 13:** He **0.022% raw** ($l_{\max}=7$) / **0.004% cusp-corrected**
-    ($l_{\max}=4$), 2D variational, *properly variational upper bounds*; the 0.05%
+  - **Paper 13 (updated 2026-11-04):** He **0.022% raw** ($l_{\max}=7$, properly
+    variational) / **0.020% cusp-corrected** ($l_{\max}=4$, non-variational, ABOVE
+    exact — the former "0.004%, marginally below exact" was a 4.6× Schwartz
+    coefficient; C16 `g2-cusp-coefficient-overcorrection`). The coupled-channel
+    "structural floor" was the $R_{\min}=0.1$ wall (C16
+    `g2-coupled-channel-structural-floor`). Former note: the 0.05%
     single-channel adiabatic is **non-variational** (lucky cancellation — must be
     flagged); the fixed-$k=Z$ hydrogenic CI on the **physical** Hamiltonian is **1.88%** at
     $n_{\max}=7$ (above the HF limit; zero parameters). The "graph-native 0.216%" (and
     0.19%/0.20% before it) is **RETIRED (2026-09-25)**: it added a non-physical (1/16)A
     one-body hop. Any live 0.216%/0.19%/"86% of correlation" is LARGE (C16
     `he-graph-native-hop-headline`).
-  - **Paper 15:** H$_2$ **96.0%** of $D_e$ ($l_{\max}=6$, 61 channels, ~97% CBS);
+  - **Paper 15 (updated 2026-11-04):** **96.0%** is the $R_{e,\min}=0.3$ grid
+    value (wall-dependent: 94.1% → 96.9–97.3% at $l_{\max}=4$); the CBS ~97% is
+    withdrawn; the angular eigenvalue depends on $\rho$ and $R_e$. Former note:
+    H$_2$ **96.0%** of $D_e$ ($l_{\max}=6$, 61 channels, ~97% CBS);
     the adiabatic over-estimate (~11%) is a flagged artifact.
-  - **Paper 17:** LiH composed $R_{\rm eq}$ **5.3%** ($l$-dependent PK); BeH$_2$ **11.7%**;
+  - **Paper 17 (updated 2026-11-04):** retitled "...from Natural-Geometry
+    Solvers" (PI); channel-blind LiH re-measured **3.22 bohr / 6.9%**, $\omega_e$
+    1465 (4.2%); $l$-dependent **5.3%**; the PK uses the NIST ionization energy
+    and a B formula chosen against LiH $R_{\rm eq}$ (disclosed, PI-approved); no
+    "5b" level. Former note: LiH composed $R_{\rm eq}$ **5.3%** ($l$-dependent PK); BeH$_2$ **11.7%**;
     H$_2$O **19.4%** (*uncoupled* five-block, $R_{\rm eq}=1.459$ bohr); LiH 4N $R_{\rm eq}
     \approx 64\%$ (**unbound** $D_e$, no PK — the equilibrium-without-PK control); 144×
     angular compression ($l_{\max}^2$ vs $l_{\max}^{11}$, cost of PK).
-  - **Paper 19:** balanced coupled LiH **0.20%** *energy* ($n_{\max}=3$) with **structural
+  - **Paper 19 (updated 2026-11-04):** best LiH energy **$-8.05851$ Ha**
+    (variational, e–n factors); the 0.20% balanced energy is on the CORRECTED
+    phase convention (PM direct run $-8.054515$); "only bound scheme" and
+    "$D_e = 0.037$" were by construction (C16 `p19-unbound-by-construction`).
+    Former note: balanced coupled LiH **0.20%** *energy* ($n_{\max}=3$) with **structural
     $R_{\rm eq}$ drift (~8.8%)** — energy converges, geometry drifts; the 29% unbalanced
     figure is the negative control. **Prolate all-electron LiH (Route C and the
     explicit-$r_{12}$ marriage, added 2026-09-27):**
@@ -170,14 +199,19 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     - The $g_{V_{ee}}$ triangle-weight defect is fixed (π references only; ≤0.18 mHa).
     - Tiers: the pure-product-core, prolate-Pauli-count and product-basis findings are
       MEASURED (debug-backed). Grade any tier inflation there as LARGE.
-  - **FCI-atoms:** He **1.88%** (physical fixed-$k$ CI, $n_{\max}=7$); H$^-$ bound, **+2.15%**
+  - **FCI-atoms (updated 2026-11-04):** retitled (hydrogenic basis on the $S^3$
+    label set, PI); headline He **1.93% at $n_{\max}=5$** (1.88% at 7); the
+    pre-registered Be/Li hop question is CLOSED (exact $h_1$, pinned by
+    `tests/test_direct_ci.py`); H$^-$ +2.2% is printed in Paper 13, not here.
+    Former note: He **1.88%** (physical fixed-$k$ CI, $n_{\max}=7$); H$^-$ bound, **+2.15%**
     above exact (variational). The "over-binds 21%" and "$Z_c\approx1.84$ boundary" were hop
     artifacts (retired 2026-09-25). **Pre-registered check:** Be **0.71%** / Li **1.03%**.
     Were they computed on a Hamiltonian carrying the same (1/16)A graph hop (the
     `lattice_index` / `casimir_ci` h1 path)? If yes, they are LARGE and must be
     re-measured on the physical h1. If no, state the h1 used.
-  - **FCI-molecules:** the graph-concatenation **negative** (no minimum) — the headline
-    *is* the negative result.
+  - **FCI-molecules (updated 2026-11-04):** retitled (PI); the negative (no
+    minimum) is restated on the physical $h_1$ at $n_{\max}=2$ (hop-era tables
+    retired, C16 `fcim-hop-era-results`) — the headline *is* the negative result.
 - **C4 (citations) — chemistry-method + reference-value surface.** Verify the reference
   energies / baselines actually say what is attributed: Pekeris/Hylleraas He ($-2.9037$ Ha),
   Kołos–Wolniewicz H$_2$ $D_e$, NIST atomic data, the cc-pVTZ/cc-pVDZ/STO-3G
@@ -226,6 +260,14 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   worktree only.
 
 ## Change log
+- 2026-11-04 — **/qa group2 FULL incremental = FAIL, remediated (v6.2.0).** ~45 owner LARGE fixed (He cusp
+  coefficient 4.6x; coupled-channel wall; Paper 15 wall + rho; FCI-M hop-era tables; Paper 8 model; Paper 17 PK
+  selection + retitle; Paper 19 by-construction results; Paper 12 quadrature; Paper 11 Peek); 14 C16 entries;
+  self-check R1 19 / R2 6 OWNER-LARGE, R2 fixed after the last round (units unstamped). Coverage 227/379.
+  Debt: docs/qa/group2.debt.md.
+- 2026-11-04 — **Watch-notes updated mid-run (PI-approved, decision 5 of the
+  /qa group2 FULL report).** Graded against current owner values; the staleness
+  banner's re-freeze recommendation is met by this update. Scope 14 documents.
 - 2026-09-19 — **CRITERIA REWRITTEN MID-RUN (PI direction).** The `/qa group2 full`
   run of 2026-09-19 (PI-scoped to Papers 11/12/13) verified this file frozen at
   commit `4bd5a36`, ran the **CODE** dimension, and found the Paper-11 C8 headline

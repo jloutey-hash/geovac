@@ -43,7 +43,8 @@ scale $\kappa = -1/16$ (Paper~7).  For molecules, however, $S^3$ is not the natu
 geometry: the single-$p_0$ momentum scale cannot encode the
 $R$-dependent bonding physics in that single-$n$ shared-$p_0$ approximation
 (Paper~8--9, negative theorem;\ the genuine cross-$n$ Coulomb--Sturmian basis
-escapes it and binds).
+escapes it, and a validated two-centre Coulomb--Sturmian H$_2$ CI binds,
+Paper~60).
 
 We resolve this by identifying the \emph{natural geometry principle}:
 every separable quantum system has a natural lattice---the label set
@@ -72,20 +73,22 @@ The separation constant is also an exact label. In any product
 Erikson--Hill operator $\Lambda$ are Atkinson operator determinants, so
 $[H,\Lambda]=0$ holds at every truncation (measured to $10^{-14}$).
 $\Lambda$ runs from $L^2$ in the united atom to the Runge--Lenz $A_z$
-(parabolic) label in the separated atoms. For the Paper~12 H$_2$ CI at
+(parabolic) label in the separated atoms.
+\textbf{[MEASURED, not regression-tested]} For the Paper~12 H$_2$ CI at
 one basis and geometry it ranks configurations 8--10$\times$ better than
 orbital energy, though natural orbitals beat it by about $10\times$. It
 does not transfer to a LiH orbital set that is not tensor-closed.
 
 Results for H$_2^+$ with the spectral Laguerre radial solver
-($n_{\mathrm{basis}} = 20$): minimum energy
-$E_{\min} = -0.602634214494936$~Ha, reproducing the two-center
-reference $-0.6026342144949$~Ha~\cite{Bates1953} to
-$3.6\times10^{-14}$~Ha---at or below the precision to which that
-reference is conventionally quoted, so the residual is
+($n_{\mathrm{basis}} = 20$): total energy at $R = 2.0$~bohr
+$E = -0.602634214494936$~Ha, reproducing Peek's value
+$-0.6026342144949$~Ha at that distance~\cite{Peek1965} to
+$3.6\times10^{-14}$~Ha---below the last digit to which that
+reference is quoted, so the residual is
 reference-limited rather than a property of the method
-(\textbf{[MEASURED 2026-09-19]}).  Equilibrium bond length
-$R_{\mathrm{eq}} = 1.9973$~bohr ($0.013\%$ error), and correct
+(\textbf{[MEASURED]}).  Equilibrium bond length
+$R_{\mathrm{eq}} = 1.9973$~bohr ($0.004\%$ above the exact
+$1.99719$~bohr), and correct
 dissociation to H~+~p at $R \to \infty$.
 The spectral solver achieves a $250\times$ dimension reduction and a
 $270\times$ speedup over
@@ -139,11 +142,9 @@ not to Sturmian molecular binding.
 
 For heteronuclear systems, the situation is worse: no shared $p_0$
 exists that simultaneously represents both atomic length scales.
-The LCAO approach (atom-centered lattices with bridges) partially
-circumvents this, achieving a vertical binding energy
-$D_e^{\text{CP}} = 0.110$~Ha for LiH at nmax$= 3$ ($\sim 20\%$ error
-vs experiment)~\cite{loutey_lcao_fci}, but carries intrinsic BSSE and
-an $R$-independent kinetic energy, producing a monotonically attractive
+The LCAO approach (atom-centered lattices with bridges) keeps both
+length scales~\cite{loutey_lcao_fci}, but carries intrinsic BSSE and
+an $R$-independent one-electron block, producing a monotonically attractive
 potential-energy surface with no equilibrium geometry.
 
 This paper takes a fundamentally different approach.  Rather than
@@ -519,7 +520,7 @@ and spectral radial solvers for H$_2^+$ at $R = 2.0$~bohr.
 \hline
   $E_{\mathrm{total}}$ error & 1.01\% & \multicolumn{1}{c}{machine precision} \\
   $R_{\mathrm{eq}}$ (bohr)   & \sim 2.01 & 1.9973 \\
-  $R_{\mathrm{eq}}$ error    & 0.65\% & 0.013\% \\
+  $R_{\mathrm{eq}}$ error    & 0.64\% & 0.004\% \\
   Wall time (s)               & 4.3 & 0.016 \\
   Matrix dimension            & 5000 & 20 \\
 \end{tabular}
@@ -539,8 +540,8 @@ reveals that the prolate spheroidal separation itself is far more
 accurate than previously reported.
 
 Spectral convergence is rapid: $N_b = 5$ already achieves
-sub-$0.01\%$ accuracy, and $N_b = 20$ reaches the
-$10^{-4}\%$ level.  The existing FD solver is preserved as the
+sub-$0.01\%$ accuracy, and $N_b = 20$ reaches
+$3.6\times10^{-14}$~Ha.  The existing FD solver is preserved as the
 default for backward compatibility.
 
 \subsection{Algebraic matrix elements}
@@ -1159,16 +1160,17 @@ by the energy eigenvalue.
 
 The LCAO approach~\cite{loutey_lcao_fci} constructs a molecular
 basis by combining atom-centered lattices with bridge elements.
-While it gives a vertical binding energy ($D_e^{\text{CP}} = 0.110$~Ha
-for LiH, $\sim 20\%$ error, no equilibrium geometry), it has inherent
-limitations:
+Its LiH potential-energy surface has no equilibrium geometry, and it
+has inherent limitations:
 \begin{enumerate}
   \item \textbf{BSSE:} Combining two lattices creates basis set
-    superposition error ($-0.115$~Ha for LiH at nmax$= 3$),
+    superposition error ($0.088$~Ha for LiH at $n_{\max} = 2$, the same at
+    every $R$),
     requiring counterpoise correction.
-  \item \textbf{$R$-independent kinetic energy:} The graph Laplacian
-    eigenvalues on each atomic lattice do not depend on $R$,
-    shifting $R_{\mathrm{eq}}$ to $\sim 2.5$~bohr (expt.\ 3.015).
+  \item \textbf{$R$-independent one-electron block:} The hydrogenic
+    one-electron diagonal of each atom does not depend on $R$,
+    giving a monotonically attractive PES with no equilibrium
+    geometry (expt.\ $R_{\mathrm{eq}} = 3.015$~bohr).
   \item \textbf{Bridge parameters:} The inter-atomic coupling
     requires STO overlap integrals and Mulliken-type approximations.
 \end{enumerate}
@@ -1232,8 +1234,8 @@ is the prolate spheroid, just as the natural geometry for atoms is
 the three-sphere $S^3$.  By discretizing the separated prolate
 spheroidal equations with a spectral angular solver and a spectral
 Laguerre radial solver, we obtain the H$_2^+$ ground-state
-energy to machine precision and the equilibrium bond length to
-$0.013\%$ accuracy with zero free parameters.  The spectral solver
+energy at $R = 2.0$~bohr to machine precision and the equilibrium bond
+length to $0.004\%$ accuracy with zero free parameters.  The spectral solver
 achieves a $250\times$ dimension reduction and $270\times$ speedup
 over the finite-difference radial solver, whose $1.01\%$ error was
 a discretization artifact.  For $\sigma$ states, the spectral matrix
@@ -1418,6 +1420,12 @@ D.~R. Bates, K.~Ledsham, and A.~L. Stewart,
 ``Wave functions of the hydrogen molecular ion,''
 Philos. Trans. R. Soc. London A \textbf{246}, 215--240 (1953).
 
+\bibitem{Peek1965}
+J.~M. Peek,
+``Eigenparameters for the $1s\sigma_g$ and $2p\sigma_u$ orbitals of
+H$_2^+$,''
+J. Chem. Phys. \textbf{43}, 3004--3006 (1965).
+
 \bibitem{Morse1953}
 P.~M. Morse and H.~Feshbach,
 \textit{Methods of Theoretical Physics}
@@ -1479,7 +1487,7 @@ J. Comput. Phys. \textbf{298}, 585--601 (2015).
 L.~G. Mardoyan, G.~S. Pogosyan, A.~N. Sissakian, and V.~M. Ter-Antonyan,
 ``Spheroidal corrections to the spherical and parabolic bases of the
 hydrogen atom,''
-Theor. Math. Phys. \textbf{64}, 171--175 (1985).
+Theor. Math. Phys. \textbf{64}, 762--764 (1985).
 
 \bibitem{GK1961}
 S.~S. Gershtein and V.~D. Krivchenkov,

@@ -1,0 +1,1140 @@
+{
+ "target": "group2",
+ "units": {
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::Heteronuclear Geometry: The Egg": {
+   "date": "2026-11-04",
+   "hash": "79838c72df96bcc2",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::Heteronuclear Geometry: The Egg / Bond Polarity as Egg Asymmetry": {
+   "date": "2026-11-04",
+   "hash": "9b7c270641c8b72e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::Heteronuclear Geometry: The Egg / Metric Distortion": {
+   "date": "2026-11-04",
+   "hash": "87afced7e91dc884",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::Heteronuclear Geometry: The Egg / Prolate Spheroidal Coordinates": {
+   "date": "2026-11-04",
+   "hash": "64d2d3ab5863c292",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::Heteronuclear Geometry: The Egg / Symmetry Breaking: SO(4) SO(2)": {
+   "date": "2026-11-04",
+   "hash": "519394005c702582",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::Heteronuclear Geometry: The Egg / Topology vs. Metric": {
+   "date": "2026-11-04",
+   "hash": "821178482fe10e20",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::SO(4) Selection Rules for -Bond Formation": {
+   "date": "2026-11-04",
+   "hash": "00f541628f7031a1",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Bond Sphere Construction": {
+   "date": "2026-11-04",
+   "hash": "575c2fcae0c850cf",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Bond Sphere Construction / The Angle--Distance Relationship": {
+   "date": "2026-11-04",
+   "hash": "73bde39004873f3f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Bond Sphere Construction / The Antipodal Limit": {
+   "date": "2026-11-04",
+   "hash": "98e555faa2f25d91",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Bond Sphere Construction / The Bond-Sphere Lattice": {
+   "date": "2026-11-04",
+   "hash": "79eaab1460186127",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Bond Sphere Construction / The Opposite-Sign Rotation": {
+   "date": "2026-11-04",
+   "hash": "2bf1e33679ce216e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Kinetic Membrane": {
+   "date": "2026-11-04",
+   "hash": "201728075c88a07c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Kinetic Membrane / Connection to Bader's Bond Critical Point": {
+   "date": "2026-11-04",
+   "hash": "332a90d4f2e8f5a9",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Kinetic Membrane / Identification via the Fiedler Vector": {
+   "date": "2026-11-04",
+   "hash": "eaf8918f763ce4b1",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Runge--Lenz Alignment Argument": {
+   "date": "2026-11-04",
+   "hash": "379ec2b32f3e089a",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Single-Atom Case as a Special Limit": {
+   "date": "2026-11-04",
+   "hash": "e793c0aaef71ba72",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Single-Atom Case as a Special Limit / Covariance and the Single-Atom Limit": {
+   "date": "2026-11-04",
+   "hash": "dd24b22714b2a9a3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Single-Atom Case as a Special Limit / The T_ , L_ Operators as SO(4) Generators": {
+   "date": "2026-11-04",
+   "hash": "b7a17b1df462586f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis": {
+   "date": "2026-11-04",
+   "hash": "285aa113a9db1b47",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis / Backward Compatibility with Papers 0--7": {
+   "date": "2026-11-04",
+   "hash": "1d895bd1ad717c68",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis / Definition": {
+   "date": "2026-11-04",
+   "hash": "09e627a0f7227af5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis / Encodes Both Geometry and Energy": {
+   "date": "2026-11-04",
+   "hash": "0f1ed45617f3b599",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis / Geometric Inconsistency of the Hydrogenic Basis": {
+   "date": "2026-11-04",
+   "hash": "9859a0c693c33341",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis / The Self-Consistency Condition": {
+   "date": "2026-11-04",
+   "hash": "09caa5aa68a07182",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Basis / Verification": {
+   "date": "2026-11-04",
+   "hash": "725d53c4dd56f4d6",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The Sturmian Diagonal Theorem": {
+   "date": "2026-11-04",
+   "hash": "a085bbd06a1ee3bb",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The _k Eigenvalue Problem": {
+   "date": "2026-11-04",
+   "hash": "79f2045f5cea861d",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The _k Eigenvalue Problem / Key Result": {
+   "date": "2026-11-04",
+   "hash": "e7430f7c726dcccd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The _k Eigenvalue Problem / Prolate Spheroidal Separation": {
+   "date": "2026-11-04",
+   "hash": "9397566e2e18b1f8",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The _k Eigenvalue Problem / The Matching Condition": {
+   "date": "2026-11-04",
+   "hash": "e938b998cdfeb9c0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::The _k Eigenvalue Problem / Why Prolate Spheroidal Coordinates Are Natural": {
+   "date": "2026-11-04",
+   "hash": "02a65d53d27d8548",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex::What Is Known vs. What Is New": {
+   "date": "2026-11-04",
+   "hash": "556e08a825613a3e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Comparison with Failed Approaches": {
+   "date": "2026-11-04",
+   "hash": "016595160cf636de",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Comparison with Failed Approaches / 1D axial lattice": {
+   "date": "2026-11-04",
+   "hash": "c9debe913e5f38c9",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Comparison with Failed Approaches / 2D tensor-product grid": {
+   "date": "2026-11-04",
+   "hash": "489ed970890e7828",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "ed27754aea04566c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Discussion / Limitations and extensions": {
+   "date": "2026-11-04",
+   "hash": "49d96507cd04762e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Discussion / Resolution of the bond sphere impasse": {
+   "date": "2026-11-04",
+   "hash": "011c3aa6ca42a198",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Discussion / The natural geometry principle": {
+   "date": "2026-11-04",
+   "hash": "4e513da9c59aea9b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Grid Convergence Analysis": {
+   "date": "2026-11-04",
+   "hash": "ab12c5b5ee6bcb6e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Prolate Spheroidal Coordinates": {
+   "date": "2026-11-04",
+   "hash": "7acb9e3862e797a7",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State": {
+   "date": "2026-11-04",
+   "hash": "d9b6051256bb6dd5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State / Dissociation limit": {
+   "date": "2026-11-04",
+   "hash": "073b8749076709bc",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State / Grid convergence": {
+   "date": "2026-11-04",
+   "hash": "b8f65da50e735f3e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State / Heteronuclear extension: HeH ^ 2+ HeH2+": {
+   "date": "2026-11-04",
+   "hash": "55da93febf05157e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State / Potential energy surface": {
+   "date": "2026-11-04",
+   "hash": "2019ada62685cde5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State / Spectroscopic constants": {
+   "date": "2026-11-04",
+   "hash": "54dc03c8792c0b9c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Results: H _2^+ H2+ Ground State / The separation constant as an exact label": {
+   "date": "2026-11-04",
+   "hash": "e48f399ae4fad480",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Root-Finding and Self-Consistency": {
+   "date": "2026-11-04",
+   "hash": "ad56018b0ea6aba9",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Separation of the Two-Center Coulomb Problem": {
+   "date": "2026-11-04",
+   "hash": "83e556e53540f930",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Spectral Laguerre Radial Solver": {
+   "date": "2026-11-04",
+   "hash": "74ee578171098086",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Spectral Laguerre Radial Solver / Algebraic matrix elements": {
+   "date": "2026-11-04",
+   "hash": "e7803bf8f063fdc3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Spectral Laguerre Radial Solver / Generalized eigenvalue problem": {
+   "date": "2026-11-04",
+   "hash": "d25edd6ab15c9a1d",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Spectral Laguerre Radial Solver / Laguerre basis": {
+   "date": "2026-11-04",
+   "hash": "0439e6b0dd61d257",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::Spectral Laguerre Radial Solver / Matrix elements": {
+   "date": "2026-11-04",
+   "hash": "bb9260551d19d61f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Angular Equation: Spectral Solver": {
+   "date": "2026-11-04",
+   "hash": "b43da409c61449cb",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Angular Equation: Spectral Solver / Boundary conditions": {
+   "date": "2026-11-04",
+   "hash": "c3b687dad5bd90fa",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Angular Equation: Spectral Solver / Legendre expansion": {
+   "date": "2026-11-04",
+   "hash": "f3215a2d820b1e56",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Radial Equation: Self-Adjoint Finite Differences": {
+   "date": "2026-11-04",
+   "hash": "3a68cd76a55e478a",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Radial Equation: Self-Adjoint Finite Differences / Boundary conditions": {
+   "date": "2026-11-04",
+   "hash": "6e5f69657ec89643",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Radial Equation: Self-Adjoint Finite Differences / Eigenvalue interpretation": {
+   "date": "2026-11-04",
+   "hash": "1f3af4b6b9cf48d8",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex::The Radial Equation: Self-Adjoint Finite Differences / Self-adjoint stencil": {
+   "date": "2026-11-04",
+   "hash": "7c596b7edf960f6e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Auxiliary Integrals and Recurrence Relations": {
+   "date": "2026-11-04",
+   "hash": "afd2997158b3c0b0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Auxiliary Integrals and Recurrence Relations / Angular moments C_l(q) Cl(q)": {
+   "date": "2026-11-04",
+   "hash": "cb863c3b0e25e582",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Auxiliary Integrals and Recurrence Relations / Exponential moments A_n( ) An(alpha)": {
+   "date": "2026-11-04",
+   "hash": "9941e152592678ee",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Auxiliary Integrals and Recurrence Relations / First-kind Legendre moments": {
+   "date": "2026-11-04",
+   "hash": "94b6b58c95222929",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Auxiliary Integrals and Recurrence Relations / Second-kind Legendre moments": {
+   "date": "2026-11-04",
+   "hash": "11546aafe5643fe0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Auxiliary Integrals and Recurrence Relations / Two-dimensional radial integral": {
+   "date": "2026-11-04",
+   "hash": "354a0dae8e5c145c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Convergence Study": {
+   "date": "2026-11-04",
+   "hash": "33474833b1124314",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Convergence Study / Computational setup": {
+   "date": "2026-11-04",
+   "hash": "b300850d43dd2518",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Convergence Study / Results": {
+   "date": "2026-11-04",
+   "hash": "7f596f9c7fe5490f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Convergence Study / The sweet spot: 27 basis functions": {
+   "date": "2026-11-04",
+   "hash": "1d0d157f87aa374a",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Diagnosis of the Remaining 7.6 % Gap": {
+   "date": "2026-11-04",
+   "hash": "c83f2813cb4ed09f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Diagnosis of the Remaining 7.6 % Gap / The missing channels": {
+   "date": "2026-11-04",
+   "hash": "30413cdb4729b101",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Diagnosis of the Remaining 7.6 % Gap / What the plateau tells us": {
+   "date": "2026-11-04",
+   "hash": "bb9fbed79b67c453",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Implementation": {
+   "date": "2026-11-04",
+   "hash": "33d6bb3310079753",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Implementation / Hybrid Hamiltonian: Numba T + V_ ne T+Vne": {
+   "date": "2026-11-04",
+   "hash": "e6c811de8d8cac3f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Implications for the GeoVac Program": {
+   "date": "2026-11-04",
+   "hash": "d1635f39ebd4b0fa",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Implications for the GeoVac Program / Comparison with the S^3 S3": {
+   "date": "2026-11-04",
+   "hash": "75499f1e013a2e6c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Implications for the GeoVac Program / The natural geometry hierarchy": {
+   "date": "2026-11-04",
+   "hash": "c20469a4a41c88a0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Introduction": {
+   "date": "2026-11-04",
+   "hash": "4aaed79c954ac8d0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Numerical Verification of Auxiliary Integrals": {
+   "date": "2026-11-04",
+   "hash": "2b0e61d5d062f785",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Restoring the Azimuthal Channels": {
+   "date": "2026-11-04",
+   "hash": "22090dd306e567ad",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::Restoring the Azimuthal Channels / The monomial cap is conditioning, not a ceiling": {
+   "date": "2026-11-04",
+   "hash": "c0b58941847e948b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::The Neumann Expansion": {
+   "date": "2026-11-04",
+   "hash": "60ae07e98e06b438",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::The Neumann Expansion / Expansion of 1/r_ 12 1/r12 in": {
+   "date": "2026-11-04",
+   "hash": "4665ca2c62615627",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::The Neumann Expansion / Matrix element factorization": {
+   "date": "2026-11-04",
+   "hash": "b1c7cb707080de0a",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex::The Neumann Expansion / Selection rules": {
+   "date": "2026-11-04",
+   "hash": "9e9869197e3d9722",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Ab Initio Molecular Spectroscopy": {
+   "date": "2026-11-04",
+   "hash": "64de87c532990c65",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Adiabatic Potential Curves": {
+   "date": "2026-11-04",
+   "hash": "6ca27b5386054bb3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Angular Solver and Coupled-Channel Convergence": {
+   "date": "2026-11-04",
+   "hash": "4175216711647b80",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Angular Solver and Coupled-Channel Convergence / Algebraic Laguerre matrix elements": {
+   "date": "2026-11-04",
+   "hash": "491ec9482c3d8626",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Angular Solver and Coupled-Channel Convergence / Algebraic spectral basis": {
+   "date": "2026-11-04",
+   "hash": "a02b74a1cf510683",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Angular Solver and Coupled-Channel Convergence / Rayleigh--Schr \"odinger perturbation series for (R)": {
+   "date": "2026-11-04",
+   "hash": "4b4863b5833befd2",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Structure of the Angular Problem / Partial harmonic sum identities": {
+   "date": "2026-11-04",
+   "hash": "033c68b49b66432b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Structure of the Angular Problem / SO(6) Casimir eigenvalues": {
+   "date": "2026-11-04",
+   "hash": "a60aae369e03420e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Structure of the Angular Problem / The algebraic curve and its branch points": {
+   "date": "2026-11-04",
+   "hash": "4f02cc793b30dff4",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Structure of the Angular Problem / Topology flow: S^5 S^3 R": {
+   "date": "2026-11-04",
+   "hash": "063c857ca54b487f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Coupled-Channel Structure": {
+   "date": "2026-11-04",
+   "hash": "7d15762a6ad39b54",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Coupled-Channel Structure / Connection to Born--Oppenheimer molecular dynamics": {
+   "date": "2026-11-04",
+   "hash": "41581ecb2bde1381",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Coupled-Channel Structure / The hyperspherical lattice as a coupled-channel graph": {
+   "date": "2026-11-04",
+   "hash": "9dca4f5ac799ca94",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "ed27754aea04566c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Discussion / The universal structure of natural lattices": {
+   "date": "2026-11-04",
+   "hash": "76e479bfdc6ad5d5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Hyperspherical Coordinates and the Hamiltonian": {
+   "date": "2026-11-04",
+   "hash": "3d97d24d980542b8",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Hyperspherical Coordinates and the Hamiltonian / Coordinate definitions": {
+   "date": "2026-11-04",
+   "hash": "bb7a62296787e281",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Hyperspherical Coordinates and the Hamiltonian / The full Hamiltonian": {
+   "date": "2026-11-04",
+   "hash": "c6fd9545f03cbcc9",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Results": {
+   "date": "2026-11-04",
+   "hash": "bde1993fedd97263",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Results / Runtime and scaling": {
+   "date": "2026-11-04",
+   "hash": "5aed19d0b173e9d9",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Results / The diagonal Born--Oppenheimer correction": {
+   "date": "2026-11-04",
+   "hash": "938f0eddf1a61ab0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Angular Eigenvalue Problem": {
+   "date": "2026-11-04",
+   "hash": "fad48ec010416dfa",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Angular Eigenvalue Problem / Convergence in the angular basis": {
+   "date": "2026-11-04",
+   "hash": "12eaa6d7750a497c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Angular Eigenvalue Problem / Electron-electron coupling via Gaunt integrals": {
+   "date": "2026-11-04",
+   "hash": "2edc0a97f538f157",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Angular Eigenvalue Problem / Finite-difference discretization": {
+   "date": "2026-11-04",
+   "hash": "8ca1e218cc5a9363",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Angular Eigenvalue Problem / L=0 partial-wave reduction": {
+   "date": "2026-11-04",
+   "hash": "35dfaa9686e6a3c6",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Angular Eigenvalue Problem / Liouville substitution": {
+   "date": "2026-11-04",
+   "hash": "7e72cf5bdd51ac28",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Hyperradial Solver": {
+   "date": "2026-11-04",
+   "hash": "b74faffc7f1b7f5f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Hyperradial Solver / Convergence studies": {
+   "date": "2026-11-04",
+   "hash": "767c495dfc808d33",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Hyperradial Solver / Self-adjoint finite differences": {
+   "date": "2026-11-04",
+   "hash": "15a6a5880c9478eb",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::The Natural Geometry Hierarchy": {
+   "date": "2026-11-04",
+   "hash": "57f771c7687cd6bf",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "ed27754aea04566c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Discussion / Adiabatic vs. variational": {
+   "date": "2026-11-04",
+   "hash": "999adde4ff02cb32",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Discussion / Comparison with the He hierarchy": {
+   "date": "2026-11-04",
+   "hash": "9e3ae7dea73d5886",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Discussion / Spectral Laguerre radial solver": {
+   "date": "2026-11-04",
+   "hash": "71ff358c9360712c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Discussion / The even-odd staircase": {
+   "date": "2026-11-04",
+   "hash": "26a95f4220751166",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Discussion / The role of pi channels": {
+   "date": "2026-11-04",
+   "hash": "6735f4e60a415276",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Double Adiabatic Approximation": {
+   "date": "2026-11-04",
+   "hash": "660ff145612fb97f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Double Adiabatic Approximation / Hyperradial equation": {
+   "date": "2026-11-04",
+   "hash": "06da81dbc148438f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Double Adiabatic Approximation / Limiting cases": {
+   "date": "2026-11-04",
+   "hash": "f158eb9477180ee5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Double Adiabatic Approximation / Liouville substitution": {
+   "date": "2026-11-04",
+   "hash": "47800355539974bd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Double Adiabatic Approximation / Two-stage Born--Oppenheimer": {
+   "date": "2026-11-04",
+   "hash": "5e4275174780f7e2",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Molecule-Frame Hyperspherical Coordinates": {
+   "date": "2026-11-04",
+   "hash": "22be665b4f407749",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Molecule-Frame Hyperspherical Coordinates / Cusp location": {
+   "date": "2026-11-04",
+   "hash": "3a5709d010a33961",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Molecule-Frame Hyperspherical Coordinates / Definition": {
+   "date": "2026-11-04",
+   "hash": "8195ec00b8722d0f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Molecule-Frame Hyperspherical Coordinates / The controlling parameter rho": {
+   "date": "2026-11-04",
+   "hash": "4ec7c78bf6622dcd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Molecule-Frame Hyperspherical Coordinates / Volume element": {
+   "date": "2026-11-04",
+   "hash": "db2d3a267dd92ba1",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Multichannel Partial-Wave Expansion": {
+   "date": "2026-11-04",
+   "hash": "aa9c3f4ff24006c0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Multichannel Partial-Wave Expansion / Channel labels": {
+   "date": "2026-11-04",
+   "hash": "7eb5625f8ebb9d3f",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Multichannel Partial-Wave Expansion / Electron--electron coupling": {
+   "date": "2026-11-04",
+   "hash": "bebecfad8485f141",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Multichannel Partial-Wave Expansion / Heteronuclear extension": {
+   "date": "2026-11-04",
+   "hash": "907b6ab703c9d73e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Multichannel Partial-Wave Expansion / Nuclear coupling": {
+   "date": "2026-11-04",
+   "hash": "98fcc76943c7e260",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Multichannel Partial-Wave Expansion / The gerade--quadrupole constraint": {
+   "date": "2026-11-04",
+   "hash": "d6d1fadde328e329",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Results": {
+   "date": "2026-11-04",
+   "hash": "bde1993fedd97263",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Results / Comparison with Paper 12": {
+   "date": "2026-11-04",
+   "hash": "c287ad41c54335f3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Results / Grid convergence": {
+   "date": "2026-11-04",
+   "hash": "ef6aa80d90e7b2f3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::Results / HeH ^+ + convergence": {
+   "date": "2026-11-04",
+   "hash": "2f60a3b2b69e06f7",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::The Molecular Charge Function": {
+   "date": "2026-11-04",
+   "hash": "3dc42f698228dabb",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::The Molecular Charge Function / Electron--electron term": {
+   "date": "2026-11-04",
+   "hash": "a3efbedf573c998e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::The Molecular Charge Function / Hamiltonian decomposition": {
+   "date": "2026-11-04",
+   "hash": "612914ae4ee05547",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::The Molecular Charge Function / Nuclear attraction": {
+   "date": "2026-11-04",
+   "hash": "14a473802f3c64dd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_15_level4_geometry.tex::The Molecular Charge Function / The molecular charge function": {
+   "date": "2026-11-04",
+   "hash": "7904c9bf3167fc92",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Computational Details": {
+   "date": "2026-11-04",
+   "hash": "da15c2b237b5285d",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "ed27754aea04566c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Discussion / Comparison with standard quantum chemistry": {
+   "date": "2026-11-04",
+   "hash": "a29165be21cdb64c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Discussion / The composed geometry as a category": {
+   "date": "2026-11-04",
+   "hash": "c9b9cbf17ea1b581",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Discussion / What the R_ eq improvement means": {
+   "date": "2026-11-04",
+   "hash": "f82059923b931723",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Full N -Electron Validation": {
+   "date": "2026-11-04",
+   "hash": "cce5b22789618d36",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Full N -Electron Validation / Level 4N: the exact N -electron generalization": {
+   "date": "2026-11-04",
+   "hash": "bf2360709d317655",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Full N -Electron Validation / Non-adiabatic coupling diagnosis": {
+   "date": "2026-11-04",
+   "hash": "49e9ed7fc7747f90",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Full N -Electron Validation / Results by l_": {
+   "date": "2026-11-04",
+   "hash": "d565ddb266ce11f2",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Results": {
+   "date": "2026-11-04",
+   "hash": "bde1993fedd97263",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Theory: Composed Natural Geometries": {
+   "date": "2026-11-04",
+   "hash": "b38e59e381e48997",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Theory: Composed Natural Geometries / Core screening function": {
+   "date": "2026-11-04",
+   "hash": "a87a07dc7003ab64",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Theory: Composed Natural Geometries / The composition principle": {
+   "date": "2026-11-04",
+   "hash": "fb0797ef8001fd50",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_17_composed_geometries.tex::Theory: Composed Natural Geometries / Z_ eff Z _eff injection into the": {
+   "date": "2026-11-04",
+   "hash": "2ca506e6ed77e8ad",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Computational Results": {
+   "date": "2026-11-04",
+   "hash": "01529f31a0bda6d5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Computational Results / Basis convergence: n_ = 3": {
+   "date": "2026-11-04",
+   "hash": "5382c3d010895517",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Computational Results / Cross-center V_ ne census": {
+   "date": "2026-11-04",
+   "hash": "d44e26c08fb39696",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Computational Results / Quantum resource comparison": {
+   "date": "2026-11-04",
+   "hash": "18e0b03b4d4c0983",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Connection to Coulomb Sturmian Theory": {
+   "date": "2026-11-04",
+   "hash": "010d6f70c51521c7",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Connection to Coulomb Sturmian Theory / Resolution: multipole expansion termination": {
+   "date": "2026-11-04",
+   "hash": "22850c0c5707e93c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Connection to Coulomb Sturmian Theory / Shibuya--Wulfman integrals": {
+   "date": "2026-11-04",
+   "hash": "98d800f76e17e98d",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Connection to Coulomb Sturmian Theory / The Coulomb resolution alternative": {
+   "date": "2026-11-04",
+   "hash": "7517e87564a494bf",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::Connection to Coulomb Sturmian Theory / The convergence challenge": {
+   "date": "2026-11-04",
+   "hash": "afd93c065d9de039",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::The Missing Piece: Two-Center Nuclear Attraction": {
+   "date": "2026-11-04",
+   "hash": "0dd9c73735527ed0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_19_coupled_composition.tex::The Negative Result: Coupled Composition Without V_ ne": {
+   "date": "2026-11-04",
+   "hash": "2ba8c33cf86ff3e1",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Demonstration: NaH binds with genuine integrals": {
+   "date": "2026-11-04",
+   "hash": "2c97223bc0501ebd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Introduction: what the sparsity bought, and what it cost": {
+   "date": "2026-11-04",
+   "hash": "44b02016ca9407b3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Introduction: what the sparsity bought, and what it cost / A change of method, not a refinement": {
+   "date": "2026-11-04",
+   "hash": "26895d975cae259d",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The continuous side: the decompactification front": {
+   "date": "2026-11-04",
+   "hash": "62c1051cf02d47b9",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The exact-arithmetic census": {
+   "date": "2026-11-04",
+   "hash": "1209c75d38012560",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The exact-arithmetic census / Machinery and certificate": {
+   "date": "2026-11-04",
+   "hash": "1e90ba78e1c72d82",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The quadrature-free diatomic": {
+   "date": "2026-11-04",
+   "hash": "e035d091526f5f2b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Two re-readings": {
+   "date": "2026-11-04",
+   "hash": "e075a267427aa69d",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Two re-readings / Cost conservation": {
+   "date": "2026-11-04",
+   "hash": "04ae8b8d0b8641df",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Two re-readings / L \"owdin was paying an honest bill": {
+   "date": "2026-11-04",
+   "hash": "aa820173a00d880b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Beyond the third center: a fourth center, a three-electron chain, four": {
+   "date": "2026-11-04",
+   "hash": "a9cca5cda0773e4b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Beyond the third center: a fourth center, a three-electron chain, four / A fourth distinct center adds no genus": {
+   "date": "2026-11-04",
+   "hash": "535b70ffc998a075",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Beyond the third center: a fourth center, a three-electron chain, four / A ring of three densities: the loop does not climb": {
+   "date": "2026-11-04",
+   "hash": "6522aada96762c85",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Beyond the third center: a fourth center, a three-electron chain, four / A three-electron chain lives on a K3 surface": {
+   "date": "2026-11-04",
+   "hash": "3cb56b848482c2fe",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Conclusion": {
+   "date": "2026-11-04",
+   "hash": "56ab177bd5955b91",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Explicitly-correlated integrals are native to this representation": {
+   "date": "2026-11-04",
+   "hash": "bec173e1ebdc18dd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Placement in the literature": {
+   "date": "2026-11-04",
+   "hash": "a9919a0412263cef",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::Scope, and the open frontier": {
+   "date": "2026-11-04",
+   "hash": "af90a400b632802a",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::The momentum-space reduction": {
+   "date": "2026-11-04",
+   "hash": "fc8617d2861aff69",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex::The transcendence jump: genus zero to genus one": {
+   "date": "2026-11-04",
+   "hash": "ef5bf61342741ffb",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::Atomic implementation, validation, and the sublinear 1 -norm": {
+   "date": "2026-11-04",
+   "hash": "42369f54ea6acd09",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::Introduction": {
+   "date": "2026-11-04",
+   "hash": "5680101187b116e0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::Radial-domain convergence rule": {
+   "date": "2026-11-04",
+   "hash": "0e34ddda3d5ef2ea",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::The isoenergetic reformulation is metric-free for atoms": {
+   "date": "2026-11-04",
+   "hash": "b0cfee0d706f9369",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::The molecular frontier: Shibuya--Wulfman conditioning": {
+   "date": "2026-11-04",
+   "hash": "451562b5c4e254cd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::The quantum algorithm and its novelty": {
+   "date": "2026-11-04",
+   "hash": "e41b4671226fbf51",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::Backing": {
+   "date": "2026-11-04",
+   "hash": "5126ac752e402c7e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::Introduction": {
+   "date": "2026-11-04",
+   "hash": "bddc3beae08051e0",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::Limitations": {
+   "date": "2026-11-04",
+   "hash": "e28e1f56366693d2",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::Prior art": {
+   "date": "2026-11-04",
+   "hash": "29c25171a1aafe80",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::Solver and validation": {
+   "date": "2026-11-04",
+   "hash": "11c5c0901664683c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The framework's own exponential kits, negative": {
+   "date": "2026-11-04",
+   "hash": "f69a3c405d156171",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The qubit cost / A second molecule: hydrogen fluoride": {
+   "date": "2026-11-04",
+   "hash": "0b0da312128a93fc",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The scale ladder: how many oxygen exponents, set on the atom": {
+   "date": "2026-11-04",
+   "hash": "46b3a02df51d3d80",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The scale ladder: how many oxygen exponents, set on the atom / Design, fixed before any water rung was run": {
+   "date": "2026-11-04",
+   "hash": "a38c698ecc2faa05",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The scale ladder: how many oxygen exponents, set on the atom / Predictions, as registered": {
+   "date": "2026-11-04",
+   "hash": "b42abae689e1b3bd",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The scale ladder: how many oxygen exponents, set on the atom / Result": {
+   "date": "2026-11-04",
+   "hash": "66f9cf12aa39c501",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex::The scale ladder: how many oxygen exponents, set on the atom / The non-monotone rung, diagnosed": {
+   "date": "2026-11-04",
+   "hash": "edd27f43c480b94c",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_atoms.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "05b35f68acd4b239",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_atoms.tex::Heteronuclear Diagnostic Arc (v0.9.11--v0.9.30) / Molecular Sturmian basis: prolate spheroidal implementation": {
+   "date": "2026-11-04",
+   "hash": "ccacd099b355e5a5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_atoms.tex::Method": {
+   "date": "2026-11-04",
+   "hash": "4b81fe969b542b1b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_atoms.tex::Method / Excitation-driven direct CI": {
+   "date": "2026-11-04",
+   "hash": "17cbcbe4398e5f70",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_atoms.tex::Method / Lattice index and Slater determinant basis": {
+   "date": "2026-11-04",
+   "hash": "e583b3399b12f6a3",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_atoms.tex::Method / One-electron Hamiltonian": {
+   "date": "2026-11-04",
+   "hash": "99ef8efede9f32d5",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::LiH Benchmark Results": {
+   "date": "2026-11-04",
+   "hash": "3ad4813dee79ff2e",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::Missing Kinetic Repulsion and the Fock-Weighted Correction": {
+   "date": "2026-11-04",
+   "hash": "083da8e577700271",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::Systematic Diagnostic Arc": {
+   "date": "2026-11-04",
+   "hash": "e6328a3a1dd57779",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::Topological LCAO Architecture": {
+   "date": "2026-11-04",
+   "hash": "88a7d4816dbe941a",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::Topological LCAO Architecture / Counterpoise Correction Framework": {
+   "date": "2026-11-04",
+   "hash": "f837daf92c8700cf",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::Topological LCAO Architecture / O(V) O(V) Direct Configuration Interaction": {
+   "date": "2026-11-04",
+   "hash": "83c06f0187b88c5b",
+   "run": "qa-group2-full-2026-11-04"
+  },
+  "prose:papers/group2_quantum_chemistry/paper_fci_molecules.tex::Topological LCAO Architecture / Subgraph Concatenation": {
+   "date": "2026-11-04",
+   "hash": "052a9778a1e9c49a",
+   "run": "qa-group2-full-2026-11-04"
+  }
+ }
+}

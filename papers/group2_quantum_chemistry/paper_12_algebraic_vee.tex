@@ -38,7 +38,7 @@ over the six-dimensional two-particle configuration space.  The
 standard approach---numerical quadrature on a grid in prolate
 spheroidal coordinates---converges slowly due to the Coulomb
 singularity at $r_{12} = 0$ and saturates at $\sim$80\% of the
-exact H$_2$ dissociation energy $D_e$ regardless of basis size.
+exact H$_2$ dissociation energy $D_e$ as the basis grows.
 
 We replace numerical integration with algebraic evaluation using
 the Neumann expansion of $1/r_{12}$ in prolate spheroidal
@@ -85,13 +85,7 @@ the linear dependence, and the energy then climbs monotonically and
 variationally to $\gvq{p12_rebased_de_pct_aopt}{99.81}\%$ of $D_e$
 ($\gvq{p12_rebased_err_mha_aopt}{0.32}$~mHa, inside chemical accuracy) at a
 larger truncation and the variationally optimal exponent
-(Sec.~\ref{sec:recondition}).  \textbf{[WITHDRAWN]} This paper
-previously attributed the gap to the electron-electron cusp requiring
-non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read
-that as motivation for hyperspherical coordinates.  Neither holds:
-no such term appears in the calculation above, nor in the grid-based
-prolate spheroidal FE-DVR treatment of Tao, McCurdy and Rescigno, an
-accurate two-electron H$_2$ calculation in these same coordinates.  \textbf{[MEASURED]}
+(Sec.~\ref{sec:recondition}).  \textbf{[MEASURED]}
 An explicit-$r_{12}$ (James--Coolidge) extension of the algebraic engine,
 in which every $r_{12}$ matrix element reduces to the same
 $A\,K_0 - B\,K_1$ Neumann kernels as $V_{ee}$ (no quadrature), reaches
@@ -106,8 +100,9 @@ the genuinely four-body Coulomb bridge and the two-center three-body triangle
 are both reduced RI-free---the latter through a low-rank expansion of its
 non-separable two-point kernel contracted mode-by-mode with the general-$m$
 prolate Neumann Coulomb---so the entire $2\times2$ CI energy assembles
-analytically, matching a same-geminal variational Monte-Carlo reference to
-sub-mHa and lying above the exact value (variational) (Sec.~\ref{sec:r12}).
+deterministically; for the cusp-correct geminal $f = r\,e^{-\gamma r}$ its
+correlation energy matches a same-geminal variational Monte-Carlo reference to
+sub-mHa, and the energy lies above the exact value (variational) (Sec.~\ref{sec:r12}).
 \end{abstract}
 
 \maketitle
@@ -580,10 +575,7 @@ The computation of the $V_{ee}$ matrix proceeds in four stages:
       \item The second-kind Legendre moments $B_l(p, 2\alpha)$ and
         $B_l(p, 4\alpha)$ in closed form
         (Eqs.~\eqref{eq:Bl_closed}--\eqref{eq:Bl_recurrence}).
-        Cost: $O(l_{\max} \cdot p_{\max})$ arithmetic, no quadrature;
-        this replaced the former adaptive-quadrature seeding, which had
-        dominated the $V_{ee}$ build ($\sim$40$\times$ faster, identical
-        values).
+        Cost: $O(l_{\max} \cdot p_{\max})$ arithmetic, no quadrature.
     \end{itemize}
   \item \textbf{$X_l$ table.}  Compute
     $X_l(p_1, p_2, 2\alpha)$ for all
@@ -644,14 +636,11 @@ For the $V_{ee}$ matrix alone:
     per element.
   \item \textbf{Algebraic} (Neumann expansion):
     $O(N_{\mathrm{bf}}^2 \cdot l_{\max} + l_{\max}^2
-    \cdot p_{\max}^2)$, pure arithmetic throughout---the
-    closed-form $B_l$ tables (Sec.~\ref{sec:Bl_closed}) removed the
-    former quadrature entirely.
+    \cdot p_{\max}^2)$, pure arithmetic throughout, with
+    closed-form $B_l$ tables (Sec.~\ref{sec:Bl_closed}).
 \end{itemize}
 
-The algebraic approach is both faster (the closed-form $B_l$ made the
-$V_{ee}$ build $\sim$40$\times$ faster than the earlier
-quadrature-seeded path) and \emph{exact within the Neumann
+The algebraic approach is \emph{exact within the Neumann
 truncation}, whereas the numerical approach always carries grid
 truncation error.
 
@@ -763,13 +752,16 @@ not in the $\sigma$ sector at all
 
 \subsection{Grid dependence of numerical \texorpdfstring{$V_{ee}$}{Vee}}
 
-To confirm that the numerical plateau is grid-limited, we
-performed a grid convergence study for the 6-function basis
-($j = 1$, $l = 0$) at fixed $\alpha = 1.0$:
+To show how strongly the numerical $V_{ee}$ depends on the grid, we
+performed a grid convergence study for a 6-function basis at fixed
+$\alpha = 1.0$:\ the three $\sigma$ functions with $j \le 1$, $l = 0$,
+and the same three multiplied by $r_{12}$ ($p = 1$), all matrix
+elements evaluated on the grid:
 
 \begin{table}[h]
 \caption{Grid convergence of numerical $V_{ee}$ for the
-  6-function basis at $R = 1.4011$~bohr, $\alpha = 1.0$.
+  6-function basis (three $\sigma$ functions and their $r_{12}$
+  multiples) at $R = 1.4011$~bohr, $\alpha = 1.0$.
   \label{tab:grid_convergence}}
 \begin{ruledtabular}
 \begin{tabular}{cdd}
@@ -787,13 +779,10 @@ performed a grid convergence study for the 6-function basis
 \end{table}
 
 With the same 6 basis functions, $D_e\%$ increases from 66\% to
-85.7\% as the grid is refined from $12\times 8$ to $60\times 40$.
-The convergence is slow ($\sim$1.3~percentage points per grid
-doubling) and the cost grows quadratically.  In contrast, the
-Neumann result for this basis is grid-independent at
-61.8\% $D_e$ (the basis itself limits accuracy at 6 functions; the
-$V_{ee}$ angular series terminates exactly, and the $B_l$ moment is
-closed-form, so no quadrature enters).
+85.7\% as the grid is refined from $12\times 8$ to $60\times 40$,
+still moving at the finest grid, and the cost grows quadratically.
+The Neumann $V_{ee}$ of Table~\ref{tab:convergence} covers only
+$p = 0$ functions, so this basis has no Neumann entry.
 
 %% ========================================================================
 %% VI. DIAGNOSIS OF THE 7.6% GAP
@@ -838,42 +827,29 @@ at the electron-electron coalescence point $r_{12} = 0$:
   \label{eq:kato}
 \end{equation}
 where $\bar{\Psi}$ is the spherically averaged wavefunction.
-This cusp produces a discontinuity in the first derivative of
-$\Psi$ with respect to $r_{12}$ and, more fundamentally,
-introduces non-analytic dependence on $r_{12}$.
+This cusp is linear in $r_{12}$:\ it is analytic in $r_{12}$ itself
+but non-analytic in the one-electron coordinates, since
+$r_{12} = |\mathbf{r}_1 - \mathbf{r}_2|$ is not smooth at $r_{12} = 0$.
 
 The Fock expansion~\cite{Fock1954, Morgan1986} of the exact
-wavefunction near the two-electron coalescence point has the form
+wavefunction near the triple-coalescence point $R = 0$ has the form
 \begin{equation}
-  \Psi = \sum_{n=0}^\infty\sum_{k=0}^{\lfloor n/2\rfloor}
-    R^{n/2}\,(\ln R)^k\,f_{nk}(\hat{\Omega}),
+  \Psi = \sum_{k=0}^\infty R^{k}\sum_{p=0}^{\lfloor k/2\rfloor}
+    (\ln R)^p\,\psi_{kp}(\hat{\Omega}),
   \label{eq:fock_expansion}
 \end{equation}
 where $R = (r_1^2 + r_2^2)^{1/2}$ is the hyperradius and
 $\hat{\Omega}$ represents the hyperangular coordinates.  The
-$R^{1/2}$ and $R\ln R$ terms are fundamentally non-analytic:
+logarithmic terms, starting at $R^2\ln R$, are non-analytic:
 no finite sum of polynomial$\times$exponential functions in
 prolate spheroidal coordinates can represent them \emph{exactly}.
 
-\textbf{[WITHDRAWN]} Earlier versions of this paper concluded from
-this that the cusp is what caps the calculation at 92.4\%.  It is
-not, and the argument was never sound:\ non-analyticity implies slow
-convergence of a partial-wave expansion, not a floor at 7.6\%.  Two
-calculations settle it.  Tao, McCurdy and
-Rescigno~\cite{tao_mccurdy_rescigno2010}, working in these same
-prolate spheroidal coordinates with a polynomial angular basis and no
-$r_{12}$ dependence anywhere in it, carry out an accurate
-two-electron H$_2$ calculation in these same coordinates.  (Their odd-$m$ radial functions do carry an explicit
-$(\xi^2-1)^{1/2}$, which they introduce for the non-analytic behaviour
-at $\xi = 1$;\ that is a one-electron boundary condition on the focal
-axis, the analogue of the $\sin\theta$ behaviour of ordinary spherical
-harmonics at odd $m$, and is unrelated to $r_{12}$.  The point stands
-as stated:\ nothing in their basis represents the \emph{interelectronic}
-non-analyticity.)  And the calculation reported in
+This non-analyticity does not cap the calculation at 92.4\%:\ it
+implies slow convergence of a partial-wave expansion, not a floor at
+7.6\%.  The calculation reported in
 Sec.~\ref{sec:azimuthal} below, run in the basis of
 Eq.~\eqref{eq:basis_function} with the same Neumann kernel and
-likewise no $r_{12}$ dependence, reaches $99.1\%$.  Neither could
-exist if representing the cusp were the binding constraint at this
+no $r_{12}$ dependence, reaches $99.1\%$, which could not happen if representing the cusp were the binding constraint at this
 accuracy.  What the cusp does cost is the slow tail of the
 partial-wave series;\ at $|m| \le 1$ and $l \le 3$ that residue is
 under one percent of $D_e$.
@@ -888,8 +864,8 @@ wavefunctions.  We tested this by extending the basis with
 $r_{12}^p$ ($p = 1, 2$) factors.  The results are instructive:
 with 18 functions including $r_{12}^2$ and angular terms
 ($l \leq 1$), the numerical $V_{ee}$ reaches 86.8\% $D_e$
-at the $20\times 14\times 16$ grid---but this \emph{also}
-saturates with grid refinement.  The $r_{12}$ factors improve
+at the $20\times 14\times 16$ grid, and, like the 6-function study,
+carries unconverged grid error.  The $r_{12}$ factors improve
 the wavefunction's ability to represent the cusp, but the
 $V_{ee}$ integrals involving $r_{12}$ are even harder to
 evaluate numerically (they become seven-dimensional integrals
@@ -900,13 +876,8 @@ functions outperforms the $r_{12}$ + numerical approach at
 86.8\% with $p \leq 2$ basis functions.  What that comparison
 establishes is narrower than it looks:\ \emph{an exact $V_{ee}$ beats
 $r_{12}$ basis functions carrying grid error}.  It says nothing about
-the cusp in either direction.  (Earlier versions drew the stronger
-conclusion that ``the cusp does not need $r_{12}^p$ basis
-functions---it needs exact $V_{ee}$'';\ that goes with the rest of the
-withdrawn cusp reading, and
-Sec.~\ref{sec:azimuthal_diagnosis} gives the cusp's actual cost here.)  The $r_{12}$ basis functions are
-a workaround for poor $V_{ee}$ integration, not a solution
-to the underlying representation problem.
+the cusp in either direction;\
+Sec.~\ref{sec:azimuthal_diagnosis} gives the cusp's actual cost here.
 
 \subsection{The missing channels}
 
@@ -1393,8 +1364,7 @@ mpf-orthogonalized solve retains them.
 \textbf{[MEASURED 2026-09-20]} This constructively settles what the
 Sec.~\ref{sec:recondition} residual \emph{is}.  It is
 electron--electron correlation, captured by ordinary integer powers of
-$r_{12}$---not the non-analytic $r_{12}^{1/2}$, $r_{12}\ln r_{12}$ terms
-this paper once invoked (Abstract, \textbf{[WITHDRAWN]}).  The
+$r_{12}$, not by non-analytic terms.  The
 explicit-$r_{12}$ energy then \emph{plateaus} near $0.05$~mHa:\ at $p\le 1$
 and a single $\alpha$ the overlap becomes linearly dependent
 ($\mathrm{cond}\sim\!10^{19}$ with essentially all directions retained),
@@ -1566,8 +1536,8 @@ the isotropic screened-Coulomb dressings from the exact closed-radial Yukawa
 potential rather than the Neumann-minus-smooth field, exactly the distinction
 the Coulomb sector already draws between its closed Hartree potential and the
 two-center Neumann potential;\ this carries the covariance from $-0.079$ to
-$-0.103$ (Monte-Carlo $-0.102$), so the cusp-correct energy is reached fully
-analytically and RI-free with no residual quadrature caveat.  The genuinely
+$-0.103$ (Monte-Carlo $-0.102$), so the cusp-correct energy is reached
+deterministically and RI-free.  The genuinely
 four-body and three-body content thus lives, RI-free, \emph{inside} a
 two-center four-electron correlation energy---terms that production $F_{12}$
 methods treat with a resolution of identity.  This remains a
@@ -1791,12 +1761,13 @@ evidence.
 The Neumann algebraic $V_{ee}$ realizes a form of quantum
 chemistry in which the two-electron integrals are reduced entirely to
 recurrence relations and closed forms on quantum number labels---with
-the log-singular second-kind moment $B_l$ now closed-form
+the log-singular second-kind moment $B_l$ in closed form
 (Sec.~\ref{sec:Bl_closed}), \emph{no} numerical integration remains in
-either the $\sigma$ or the $|m| \ge 1$ sector.  Combined with the
-analytical kinetic energy (integration by parts) and nuclear
-attraction (simple polynomial moments), the \emph{entire}
-Hamiltonian matrix is constructed without any quadrature at all.
+either the $\sigma$ or the $|m| \ge 1$ sector.  In the exact-integral
+engine of Sec.~\ref{sec:r12}, where the kinetic energy and nuclear
+attraction reduce to the same algebraic objects, the \emph{entire}
+Hamiltonian matrix is constructed without any quadrature; the hybrid
+build of Eq.~\eqref{eq:hybrid_H} still evaluates $T + V_{ne}$ on a grid.
 
 This has conceptual significance beyond computational
 efficiency: it demonstrates that the physics of
@@ -1853,8 +1824,9 @@ for H$_2$.  The key results are:
   \item \textbf{12--20 percentage point improvement} over numerical
     $V_{ee}$ at every basis size from 1 to 72 functions.
   \item \textbf{Numerical $V_{ee}$ saturates at $\sim$80\%}
-    regardless of basis size, confirming grid truncation error
-    as the dominant error source.
+    from 27 functions onward, 12--13 points below the Neumann
+    result in the same basis, so the grid $V_{ee}$ error is the
+    dominant error source.
   \item \textbf{27 basis functions is the sweet spot}: 92.2\%
     in 705~s versus 92.4\% in 5271~s at 72 functions.
   \item \textbf{The 7.6\% gap} is a basis-space limit, not an
@@ -1883,20 +1855,17 @@ for H$_2$.  The key results are:
     a ceiling), and re-basing the same span onto orthogonal polynomials
     is an exact change of basis that lets the energy climb monotonically
     and variationally to chemical accuracy at $(5,5)+\delta$
-    (Sec.~\ref{sec:recondition}).  What the residual is \emph{not} is more
-    azimuthal channels;\ radial completeness and the $e$--$e$ cusp remain
-    candidates that the knob elimination does not separate.
+    (Sec.~\ref{sec:recondition}).  The residual is not more azimuthal
+    channels;\ the explicit-$r_{12}$ extension (Sec.~\ref{sec:r12})
+    identifies it as electron correlation captured by integer powers of
+    $r_{12}$, reaching $\gvq{p12_r12_err_mha}{0.053}$~mHa.
 \end{enumerate}
 
-\textbf{[WITHDRAWN]} Earlier versions of this paper concluded that
-the residual was the electron-electron cusp demanding non-analytic
-$r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read that as
-identifying hyperspherical coordinates as the next natural geometry.
-Both are withdrawn:\ the calculations above contain no such term and
-reach chemical accuracy---$0.053$~mHa with the explicit-$r_{12}$
-extension---and an accurate grid-based prolate spheroidal treatment in
-the literature~\cite{tao_mccurdy_rescigno2010} independently shows these
-coordinates are not cusp-limited.
+Prolate spheroidal coordinates are not cusp-limited at this accuracy:\
+the calculations above contain no non-analytic term in $r_{12}$, and the
+grid-based prolate spheroidal double-photoionization study of Tao,
+McCurdy and Rescigno~\cite{tao_mccurdy_rescigno2010}, whose basis has no
+$r_{12}$ dependence, works in the same coordinates.
 
 The result demonstrates a form of quantum chemistry where
 recurrence relations and closed forms on quantum number labels replace
@@ -1906,8 +1875,8 @@ entirely---including the log-singular $B_l$ moment, whose closed form
 associated Legendre functions of the $|m| \ge 1$ channels
 (Sec.~\ref{sec:azimuthal}), so no numerical integration remains.
 Just as
-Paper~7 showed that atomic energies are encoded in the
-topology of $S^3$, this paper shows that molecular
+Paper~7 showed that the hydrogen spectrum is carried by Fock's
+conformal equivalence with $S^3$, this paper shows that molecular
 electron-electron repulsion is encoded in the algebraic
 structure of the Legendre functions $P_l$, $Q_l$ and their
 associated forms $P_l^m$, $Q_l^m$ on the
@@ -1985,10 +1954,10 @@ results with the $p = 0$ Neumann results.
   & \multicolumn{1}{c}{$D_e\%$}
   & \multicolumn{1}{c}{$t$ (s)} \\
 \hline
-  $r_{12}^1$, num., $60\times40$ grid & 6  & 85.7 & 447 \\
+  $r_{12}^{0-1}$, num., $60\times40$ grid & 6  & 85.7 & 447 \\
   $r_{12}^{0-2}$, num., $20\times14$ grid & 18 & 86.8 & 970 \\
-  $p\!=\!0$, Neumann, $30\times20$ grid & 27 & 92.2 & 705 \\
-  $p\!=\!0$, Neumann, $30\times20$ grid & 72 & 92.4 & 5271 \\
+  $p\!=\!0$, Neumann $V_{ee}$, $T{+}V_{ne}$ on $30\times20$ & 27 & 92.2 & 705 \\
+  $p\!=\!0$, Neumann $V_{ee}$, $T{+}V_{ne}$ on $30\times20$ & 72 & 92.4 & 5271 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1999,7 +1968,7 @@ points, confirming that exact $V_{ee}$ evaluation is more
 important than $r_{12}$-dependent basis functions when the
 $V_{ee}$ integrals are computed numerically.  The combination
 of $r_{12}$-dependent basis functions with Neumann-type
-algebraic $V_{ee}$ is a natural extension left for future work.
+algebraic integrals is carried out in Sec.~\ref{sec:r12}.
 
 %% ========================================================================
 %% BIBLIOGRAPHY
@@ -2054,10 +2023,11 @@ V.~Fock,
 Z. Phys. \textbf{98}, 145--154 (1935).
 
 \bibitem{Neumann1878}
-C.~Neumann,
-\textit{\"Uber die Entwicklung einer Function mit imagin\"aren
-Argument nach den Kugelfunctionen erster und zweiter Art}
-(Teubner, Leipzig, 1878).
+F.~E.~Neumann,
+``Entwicklung der in elliptischen Coordinaten ausgedr\"uckten
+reciproken Entfernung zweier Puncte in Reihen, welche nach den
+Laplace'schen $Y^{(n)}$ fortschreiten,''
+J. Reine Angew. Math. \textbf{37}, 21--50 (1848).
 
 \bibitem{Roothaan1951}
 C.~C.~J. Roothaan,

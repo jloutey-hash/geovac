@@ -33,7 +33,8 @@ atom-centered hydrogenic blocks (screened $Z_{\mathrm{eff}}$ per block,
 theorem:\ Papers~8--9 establish $R$-independence only under the imposed
 single-$n$ $D$-matrix premise (Paper~8, Remark ``Scope:\ the overlap premise is
 imposed, not generic''), and the
-genuine cross-$n$ Coulomb--Sturmian overlap escapes it and binds) whose angular
+genuine cross-$n$ Coulomb--Sturmian overlap escapes it;\ a validated
+two-centre Coulomb--Sturmian H$_2$ CI binds, Paper~60) whose angular
 matrix elements are
 generated from quantum-number labels by Gaunt selection, with no spatial
 quadrature.  This yields structurally sparse qubit Hamiltonians---838
@@ -118,7 +119,8 @@ forfeits the sparsity: it makes no sparsity claim.
 $60$ digits with symbolic $\tau$-series termination, its entire potential
 curve $E(R)$ is a single closed-form expression in $\{\exp, E_{1}, \log, \gamma\}$
 with certified $R_{\rm eq}$, $D_{e}$ and $k$, and the heteronuclear LiH case
-reaches $30$ digits net of an explicit tail bound.
+reaches $30$ digits net of an explicit tail bound (a campaign value;\ its
+regression test is \textsc{owed}).
 
 A by-product bears on the continuous theory the census borrows from:\ the
 radial integral at the core of the two-center direct-Coulomb $(AA|BB)$
@@ -430,7 +432,7 @@ coefficient vanishes---gives
 outcome & count \\
 \hline
 decided nonzero & 195 \\
-zero, vanishing Gaunt coefficient & 0 \\
+zero, vanishing Gaunt coefficient (forced:\ none of the $625$ is Gaunt-forbidden) & 0 \\
 zero, accidental (Gaunt nonzero, radial sum cancels) & 0 \\
 \hline\hline
 \end{tabular}
@@ -505,8 +507,9 @@ Fock-project onto spheres of \emph{different} radii $\sqrt{c_1}\neq\sqrt{c_2}$,
 and the product of their stereographic weights is the quartic
 $y^2=(c_1 k^2+1)(c_2 k^2+1)$---an elliptic curve.  Its $D=0$ period is exactly a
 complete elliptic integral, and the radial core is a genus-one object on the
-same family---by Paper~59's final characterization an irreducible $\Gamma(2)$
-period (the elementary elliptic-polylogarithm target is excluded there)---%
+same family---by Paper~59's final characterization an irreducible Bessel-moment
+period of the Legendre ($\Gamma(2)$) family (the elementary elliptic-polylogarithm
+target is excluded there)---%
 degenerating to the genus-zero two-centre case only
 on the measure-zero locus $c_1=c_2$ of a shared sphere.  The two negatives that
 make the two-centre engine weight-one and $(AA|BB)$ decidable---no $\pi$, no
@@ -544,7 +547,7 @@ energy $-1.106556606091$~Ha.  Evaluating the identical basis through
 Gaussian-fitted integrals converges monotonically onto that value as the
 fit deepens ($2.7\times10^{-3}$, $3.0\times10^{-4}$, $4.5\times10^{-5}$,
 $8.0\times10^{-6}$, $1.9\times10^{-6}$~Ha at $4, 6, 8, 10, 12$
-primitives), confirming the native value is the exact one.  The residual
+primitives), confirming the native value is the exact in-basis one.  The residual
 sits in $h$, not in $g$: the electron-repulsion tensors agree to
 $1.9\times10^{-8}$ and the overlaps to $1.5\times10^{-8}$ at ten
 primitives, while the one-electron terms lag because kinetic energy probes
@@ -811,10 +814,10 @@ geometry is angle-free and therefore unambiguous---and it returns a result
 we did not anticipate, reported as
 Observation~\ref{obs:permutation_cost} below.
 
-The measured factor of $3$--$5$ for the $m$-rule at the bases of
-Sec.~\ref{sec:census} is the $\mathbb{Z}$-grading case of
-Corollary~\ref{cor:point_group}.  It is exact and structural, and it is a
-constant factor---not the exactly-linear-in-$Q$ Pauli-count story
+The measured factors of $3.4$ and $5.4$ for the $m$-rule at the bases of
+Sec.~\ref{sec:census} are the $\mathbb{Z}$-grading case of
+Corollary~\ref{cor:point_group}.  They are exact and structural, and they are
+constant factors---not the exactly-linear-in-$Q$ Pauli-count story
 ($N_{\mathrm{Pauli}} = 27.90 \times Q$ across molecules at fixed
 basis, Paper~14) the framework's qubit results rest on.
 
@@ -1446,7 +1449,7 @@ cross-center classes grow with the number of center pairs.
 
 \begin{table}[b]
 \caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in the
-\texttt{tests/test\_paper58\_*} suite (six files, plus
+\texttt{tests/test\_paper58\_*} suite (eleven files, plus
 \texttt{tests/test\_two\_center\_eri\_aabb.py} for the $(AA|BB)$ rows; per-claim mapping in
 \texttt{docs/claim\_test\_matrix.md}).  \textsc{owed} $=$
 result stands on an exploratory driver and must be migrated
@@ -1474,7 +1477,7 @@ Sec.~\ref{sec:continuous} front, exponent & MEASURED & \textsc{live} \\
 Eq.~\eqref{eq:tail_geometric}, $t_c$ & MEASURED / SYMB. & \textsc{live} \\
 Obs.~\ref{obs:permutation_cost} & MEASURED & \textsc{live} \\
 Tab.~\ref{tab:nah}, fixed $R$ & MEAS. & \textsc{live} \\
-Tab.~\ref{tab:nah}, minima & MEAS. & \textsc{live} \\
+Tab.~\ref{tab:nah}, minima & MEAS. & \textsc{live} (3-det row);\ other rows driver \\
 NaH atom-only $\zeta$ & MEAS. & \textsc{live} \\
 Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
@@ -1502,7 +1505,7 @@ Theory,'' GeoVac Paper~14 (2026).
 
 \bibitem{loutey_paper17}
 J.~Loutey, ``Composed Natural Geometries for Core-Valence Diatomics:\
-LiH and BeH$^{+}$ from Discrete Graph Topology,'' GeoVac Paper~17 (2026).
+LiH and BeH$^{+}$ from Natural-Geometry Solvers,'' GeoVac Paper~17 (2026).
 
 \bibitem{loutey_paper19}
 J.~Loutey, ``Toward PK-Free Molecular Hamiltonians:\ Two-Center

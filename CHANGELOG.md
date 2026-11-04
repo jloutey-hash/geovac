@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.2.0] - 2026-11-04
+
+`/qa group2` FULL (incremental; first whole-group cert under stamps; 14 documents incl. Papers 58-62), PI-invoked as
+the next target of the 2026-11-03 sequence. MINOR bump (PI-approved): headline numbers move in Papers 13, 15, 17 and
+FCI-molecules, and three papers are retitled. Unseeded; standing calibration record cited (FULL #2 19/21 seeds, 0/8
+FP; DELTA #1 9/9; DELTA #2 8/9). Snapshot 706c5317 (`refs/qa/group2-full-2026-11-03`); seven reviewer worktrees.
+**Verdict: FAIL. RESEARCH-GRADE not earned.** **Coverage 0/379 -> 227/379 (60%)** (prose 227/355, cite 0/13, code 0/11: every cite and code unit was touched by the remediation or has an owed guard).
+
+### Panel
+- Deterministic (group2, synthesis, corpus): C5/C12, C10, C11, C13-C22, C24, C25 all PASS before review and after
+  remediation (C11 corpus-wide after the retitles).
+- Code 7 (Opus), claims 4 (Opus), citations 2 (Opus + web), synthesis C9 1, completeness critic 1, plus two
+  independent verifiers (citation/physics; code-physics). Every MATERIAL finding PM-verified against the text,
+  recomputed by an independent agent, or run directly by the PM (Paper 19's phase convention).
+
+### Owner fixes (LARGE; ~45 accepted)
+- **Paper 13:** the Schwartz/Hill coefficient in `geovac/cusp_correction.py` was (10/pi)<delta(r12)> = 0.339 for He,
+  4.6x the correct A_E = 0.074226 (Bromley-Mitroy physics/0601049; the solver's own partial-wave increments agree to
+  0.1%). The cusp-corrected "0.004%, marginally below exact" headline was that overcorrection; corrected **0.020%,
+  above exact**. The coupled-channel "structural floor 0.19-0.20%" was the default R_min = 0.1 bohr wall (0.0075%
+  at R_min = 0.02, l_max = 3). The 0.05% single-channel figure is below exact because the DBOC is omitted. Fock
+  expansion restated (integer powers of the hyperradius). Rovibrational constants recomputed from the stored PES
+  (nu01 ~4123 cm^-1); the "NIST 4498" reference was S1(0). Li nu0 = 2.
+- **Paper 15:** the angular eigenvalue depends on rho AND R_e (only C_mol is rho-only). The 96.0% D_e is the
+  R_e,min = 0.3 grid value (94.1% -> 96.9-97.3% at l_max = 4 when the wall is lowered); CBS ~97% removed; hand-set
+  beta/gamma in the H2 cusp model disclosed (PI-approved).
+- **Paper 8 (guardrail):** eq. sw_exact is the single-n D-matrix model, not an identity (<1s|1/r_B|1s> =
+  0.896/0.610/0.328/0.125 at R = 0.5/1.4/3.015/8); the structural theorem's model is the between-centre blocks
+  proportional to D with constant same-centre blocks; binding of the genuine cross-n basis cited to Paper 60.
+- **FCI-molecules (guardrail):** its tables came from the archived MolecularLatticeIndex carrying the retired (1/16)A
+  one-body hop. Restated on the physical h1 at n_max = 2: still monotonic with no minimum (the guardrail survives),
+  0.22 Ha below separated atoms at R = 8; BSSE 0.088 Ha, R-independent; lambda scan minima at 3.7/4.1/4.7 bohr.
+  Hop-era 0.110 / 0.115 / -8.118 / -7.497 / virial column retired. Retitled (PI).
+- **FCI-atoms:** physical Hamiltonian is a diagonal hydrogenic h1 + Gaunt ERIs (no graph edges); molecular-Sturmian
+  "correct path" scoped (12-25%, Paper 8); STO-3G comparison stated as not at matched size. Retitled (PI).
+- **Paper 17:** the PK uses the NIST ionization energy and a B formula chosen among four candidates against LiH R_eq
+  (commit 75c2a574): disclosed (PI-approved). Headline re-measured 3.22 bohr / 6.9%, omega_e 1465 (4.2%);
+  l-dependent 5.3%; l_max 2-4 = 5.3/15.7/25.5% (+0.30-0.37 per l_max); one mechanism for the divergence (PK/composed);
+  the added "5b" hierarchy level removed; BeH+ +30% stated. Retitled "...from Natural-Geometry Solvers" (PI).
+- **Paper 19:** the three non-balanced schemes have R-independent integrals, so "unbound" holds by construction; the
+  "D_e = 0.037" was the depth to the scan edge (no D_e); the 0.20% energy is on the corrected phase (PM direct run
+  -8.054515); retired pair-diagonal 1-norms replaced; PK drift not comparable across l_max and n_max.
+- **Paper 12:** `neumann_vee.compute_Bl_table` now uses the closed-form seeds (it called scipy quad; energies
+  unchanged to 1.5e-12 Ha; 119 consumer tests pass); grid-study basis and comparator corrected; Fock expansion.
+- **Paper 11:** the 13-digit H2+ reference is Peek 1965 at R = 2 (not E_min); R_eq +0.004% vs 1.99719; residue of
+  the retired 10^-4 % removed.
+- **Papers 58-60, 62:** Paper 59's object is a Bessel-moment period of the Legendre family (MMV only the D->0 shadow);
+  "representation", not closed form; Paper 60 "weakens", not "reverses"; Paper 62 canonical-orbital qualifier.
+- **Restatements outside group2:** Paper 7, Paper 34, field guide (He cusp); Paper 34 (PK drift); 11 bibitems
+  (Paper 17 title); group2 synthesis, README, INDEX, claims register, positioning, one-pager.
+
+### Gates
+- C16: 14 entries (cusp overcorrection, coupled-channel floor, Paper 15 rho/wall, Paper 8 SW exact, Paper 11 residue,
+  FCI-M hop era, Paper 17 PK selection, Paper 19 by construction, Paper 12 quadrature/grid, Fock half-powers,
+  Paper 13 rovib, Paper 59 MMV route, Paper 60 reverses, Paper 17 drift). Each fires on the v6.1.5 text and is
+  silent now (case-insensitive check, as the gate runs).
+- C25 `he-bracket` re-anchored to 0.020% (fixer edit; review owed as a guard). C21: `p62_dzp_pauli`, four Paper 17
+  keys, Paper 11 conventions.
+- group2.done.md watch-notes updated to the current owner values (PI-approved); scope 14 documents.
+
+### Self-check
+- R1: 19 OWNER-LARGE (residue beside fixes; history prose in edited paragraphs) -> fixed. R2 (last): 6 OWNER-LARGE
+  (Paper 13 caption, Paper 15 abstract H2 motivation, FCI-A arc table, Paper 19 "binds", Paper 11 BSSE, Paper 8
+  theorem model) -> fixed after the last round; those units stay unstamped (self-check closed with open owner fixes).
+
+### Also
+- CLAUDE.md §5 Level-3 note and the §2/§5 He rows: the coupled-channel "structural floor" and the sub-exact cusp
+  figure corrected (PI-approved).
+
+### Not fixed here (`docs/qa/group2.debt.md`)
+- Owed guards for every paper (several existing guards could not fail: Paper 11 headline, Paper 17 headline,
+  Paper 58 density); pre-existing slow-tier rot in `tests/test_composed_cusp.py`; ~100 SMALLs; Paper 16 vs Paper 13
+  nu0 consistency; prospective re-derivation of the PK B formula and H2 cusp coefficient (PI).
+
 ## [v6.1.5] - 2026-11-03
 
 group3 guard pass + Paper 56 comparison theorem restated (PI-approved recommendations of the v6.1.4 verdict).

@@ -12,8 +12,8 @@
 
 \begin{document}
 
-\title{Topological Full Configuration Interaction for Heteronuclear\\
-Diatomics: LiH as a Benchmark}
+\title{Full Configuration Interaction for Heteronuclear\\
+Diatomics in Concatenated Atom-Centred Bases: LiH as a Benchmark}
 \thanks{GeoVac FCI Paper in the Geometric Vacuum series}
 
 \author{J.~Loutey}
@@ -34,26 +34,29 @@ attraction on the diagonal, Slater--Condon two-electron repulsion
 integrals with exact $R^k$ radial integrals and Gaunt coefficients, and
 STO-overlap bridges on the off-diagonal; the resulting one- and
 two-electron Hamiltonian is diagonalized in the full Slater determinant
-space.  For LiH at $n_{\max}=3$ (28 spatial orbitals, 56 spin-orbitals,
-367\,290 determinants), the Boys--Bernardi counterpoise-corrected vertical
-binding energy at the experimental geometry ($R=3.015$~bohr) is
-$D_{e}^{\mathrm{CP}}=0.110$~Ha, within 20\% of the experimental value
-$D_{e}=0.092$~Ha.  The balanced Hamiltonian produces a monotonically
-attractive potential energy surface with no equilibrium geometry, a
-limitation traced to the $R$-independence of the graph Laplacian's
-intra-atom kinetic energy: unlike continuous quantum mechanics, the
-discrete adjacency within each atomic subgraph does not respond to
-inter-nuclear compression.  A Fock-weighted kinetic correction, whose
-\emph{form} is derived from the energy-shell constraint $p_0^2 = Z^2/n^2$
+space (4\,845 determinants for LiH at $n_{\max}=2$, where the results
+below are obtained;\ the solver also handles the 367\,290 determinants of
+$n_{\max}=3$).  For LiH the
+balanced Hamiltonian produces a monotonically attractive potential
+energy surface with no equilibrium geometry; at $n_{\max}=2$ the curve
+still lies 0.22~Ha below the separated-atom energy at $R=8$~bohr, so it
+does not dissociate to the atoms and no binding energy is extracted.
+The absence of a minimum is traced to the $R$-independence of the intra-atom
+one-electron block:\ unlike continuous quantum mechanics, each atom's
+hydrogenic diagonal $-Z^2/(2n^2)$ is fixed at construction and does not
+respond to inter-nuclear compression;\ the large-$R$ offset is not
+diagnosed here.  A Fock-weighted kinetic correction, whose
+\emph{form} is motivated by the energy-shell constraint $p_0^2 = Z^2/n^2$
 of Paper~7 but whose overall scale $\lambda$ is a single fitted parameter
 (retained as a labeled qualitative diagnostic, not a zero-parameter
 result), partially restores the equilibrium by concentrating
-orthogonalization repulsion on compact core orbitals, achieving
-$R_{\mathrm{eq}}\approx 3.8$~bohr and $D_e^{\mathrm{CP}}\approx 0.046$~Ha.  A 29-version diagnostic arc
+orthogonalization repulsion on compact core orbitals, giving
+$R_{\mathrm{eq}}\approx 3.7$~bohr at $\lambda=0.1$ ($n_{\max}=2$)
+without repairing the large-$R$ limit.  A 29-version diagnostic arc
 (v0.9.8--v0.9.37) systematically tested and eliminated every competing
 hypothesis: basis set superposition error as a geometric driver, integral
-incompleteness, orbital exponent relaxation, SO(4) Sturmian bond sphere
-geometries, and Hamiltonian imbalance between cross-nuclear and
+incompleteness, orbital exponent relaxation, the single-$n$, shared-$p_0$
+SO(4) Sturmian bond sphere approximation, and Hamiltonian imbalance between cross-nuclear and
 electron repulsion orbital subspaces.  In particular, Wigner $D$-matrix
 selection rules $D^{2}_{10,10}(\gamma)=1$ and
 $D^{2}_{00,10}(\gamma)=0$ are proven as structural results.  The
@@ -89,14 +92,13 @@ which solves the multi-center problem by concatenating atomic subgraphs
 into a bipartite molecular graph connected by discrete off-diagonal
 bridges.  The resulting block Hamiltonian is fed into an $O(V)$
 excitation-driven Full Configuration Interaction solver that operates
-entirely in Slater determinant space.  As a headline result, the
-Boys--Bernardi counterpoise-corrected vertical binding energy of LiH at
-$n_{\max}=3$ and $R=3.015$~bohr is
-$D_{e}^{\mathrm{CP}}=0.110$~Ha, within 20\% of the experimental value
-of $0.092$~Ha~\cite{huber}.  The balanced Hamiltonian reveals a
-fundamental limitation of the discrete LCAO framework: the absence of
-$R$-dependent kinetic repulsion, which is partially resolved by a
-Fock-weighted kinetic correction derived from Paper~7~\cite{paper7}.
+entirely in Slater determinant space.  The headline result is negative:
+for LiH the balanced Hamiltonian gives a monotonically attractive
+potential energy surface with no equilibrium geometry, revealing a
+fundamental limitation of the discrete LCAO framework:\ the absence of
+$R$-dependent kinetic repulsion.  A Fock-weighted kinetic correction,
+whose form follows Paper~7~\cite{paper7} but whose scale $\lambda$ is
+fitted, partially restores an equilibrium.
 
 LiH is the minimal four-electron heteronuclear diatomic and therefore
 the ideal first benchmark for the Topological LCAO framework.  Its four
@@ -119,7 +121,7 @@ behavior---integral incompleteness, orbital
 relaxation, and Sturmian geometries.
 Section~\ref{sec:kinetic} identifies the root cause as missing
 $R$-dependent kinetic repulsion and presents a Fock-weighted correction
-derived from Paper~7.
+whose form follows Paper~7 and whose scale is fitted.
 Section~\ref{sec:conclusion} summarizes and outlines next steps.
 
 %% ========================================================================
@@ -192,7 +194,7 @@ rules with two classes of integrals.  Same-atom Coulomb and exchange
 integrals use exact Slater $R^k$ radial integrals with Gaunt angular
 coefficients, validated against the known analytical values
 $F^0(1s,1s)=5Z/8$, $F^0(1s,2s)=17Z/81$, and
-$F^0(2s,2s)=77Z/512$~\cite{shull_lowdin}.  Cross-atom Coulomb repulsion
+$F^0(2s,2s)=77Z/512$.  Cross-atom Coulomb repulsion
 is evaluated via multipole expansion, with exchange restricted to
 $s$-orbital pairs where the overlap is non-negligible.
 
@@ -272,83 +274,63 @@ four-electron Slater determinant space contains $\binom{56}{4} =
 from the excitation-driven Direct CI solver described in
 Sec.~\ref{sec:direct_ci}, with wall time of approximately 8~seconds on
 a single CPU core (Numba-accelerated assembly; approximately 75~seconds
-without JIT compilation).
+without JIT compilation).  The energetics below are reported at
+$n_{\max}=2$ (5 spatial orbitals per atom, 20 spin-orbitals, 4\,845
+determinants), the size at which the physical one-electron Hamiltonian
+has been run; the $n_{\max}=3$ figures above describe the method and
+its cost.
 
 %% ------------------------------------------------------------------------
 \subsection{Energetic Accuracy and Basis Set Superposition}
 \label{sec:energy}
 %% ------------------------------------------------------------------------
 
-Table~\ref{tab:lih_energies} summarizes the key energetic results.  The
-raw (uncorrected) binding energy significantly overestimates experiment,
-a clear signature of BSSE in the finite atom-centered basis.  The
-Boys--Bernardi counterpoise correction quantifies the superposition
-error at $\Delta E_{\mathrm{BSSE}} = 0.115$~Ha, with the lithium
-fragment contributing $0.105$~Ha and the hydrogen fragment
-$0.010$~Ha---reflecting the far greater variational flexibility
-available to the smaller atom when it can access the partner's
-higher-$Z$ orbitals.
-
-After CP correction, the vertical binding energy at $R=3.015$~bohr is
-$D_e^{\mathrm{CP}} = 0.110$~Ha, a 20\% overestimate of the experimental
-value $0.092$~Ha~\cite{huber}.  We emphasize that this is a
-\emph{vertical} binding energy computed at fixed internuclear distance,
-not an adiabatic value at the theoretical equilibrium: the balanced
-Hamiltonian produces no equilibrium geometry (Sec.~\ref{sec:contraction}).
+Table~\ref{tab:lih_energies} gives the LiH potential energy surface at
+$n_{\max}=2$ with the physical one-electron Hamiltonian: the hydrogenic
+diagonal plus cross-nuclear attraction, with the STO-overlap bridges as
+the only off-diagonal one-electron terms.  The separated-atom reference
+(each atom in its own basis) is $E_{\mathrm{Li}}+E_{\mathrm{H}} =
+-7.601$~Ha, and the Boys--Bernardi counterpoise correction gives
+$\Delta E_{\mathrm{BSSE}} = 0.088$~Ha, the same at every $R$ from 1.5 to
+8~bohr (the ghost fragments carry no $R$-dependent term).  The surface does not return to
+the separated-atom energy at large $R$ (Sec.~\ref{sec:contraction}), so
+the energy difference to the atomic fragments at $R=3.015$~bohr is not a
+dissociation energy and is not compared with experiment.
 
 \begin{table}[h]
 \centering
-\begin{tabular}{lc}
+\begin{tabular}{cc}
 \toprule
-Quantity & Value \\
+$R$ (bohr) & $E$ (Ha) \\
 \midrule
-$n_{\max}$ & 3 \\
-Spatial orbitals & 28 \\
-Spin-orbitals & 56 \\
-Slater determinants & 367\,290 \\
-$E_{\mathrm{LiH}}(R{=}3.015)$ (Ha) & $-8.118$ \\
-$E_{\mathrm{Li}}^{\mathrm{mol}}$ (Ha) & $-7.392$ \\
-$E_{\mathrm{H}}^{\mathrm{mol}}$ (Ha) & $-0.500$ \\
-$\Delta E_{\mathrm{BSSE}}$ (Ha) & $-0.115$ \\
-$D_e^{\mathrm{raw}}$ (Ha) & 0.226 \\
-$D_e^{\mathrm{CP}}$ (Ha) & 0.110 \\
-$D_e^{\mathrm{expt}}$ (Ha) & 0.092 \\
-Error (\%) & 20 \\
+1.5 & $-8.3793$ \\
+2.5 & $-8.0592$ \\
+3.015 & $-7.9899$ \\
+4.0 & $-7.9312$ \\
+5.0 & $-7.8877$ \\
+8.0 & $-7.8258$ \\
+\midrule
+separated atoms & $-7.601$ \\
 \bottomrule
 \end{tabular}
-\caption{LiH energetics at $n_{\max}=3$, $R=3.015$~bohr (balanced
-\texttt{exact+True} configuration).  The Boys--Bernardi counterpoise
-correction removes 0.115~Ha of basis set superposition error.  The
-20\% overestimate of $D_e$ is a vertical binding energy at fixed $R$;
-the balanced Hamiltonian produces no equilibrium geometry.}
+\caption{LiH potential energy surface at $n_{\max}=2$ (balanced
+\texttt{exact+True} configuration, physical one-electron Hamiltonian).
+The energy falls monotonically as $R$ decreases, with no minimum, and at
+$R=8$~bohr it lies 0.22~Ha below the separated-atom energy.}
 \label{tab:lih_energies}
 \end{table}
-
-\noindent\emph{Composition note.}  The tabulated fragment energies
-$E_{\mathrm{Li}}^{\mathrm{mol}} = -7.392$ and
-$E_{\mathrm{H}}^{\mathrm{mol}} = -0.500$~Ha are the free-atom
-(own-basis) energies; substituted directly into Eq.~(\ref{eq:cp})
-they yield the \emph{raw} binding $D_e^{\mathrm{raw}} = 0.226$~Ha.
-The counterpoise correction evaluates the same fragments in the full
-dimer (ghost) basis---$E_{\mathrm{Li}}^{\mathrm{ghost}} = -7.497$,
-$E_{\mathrm{H}}^{\mathrm{ghost}} = -0.510$~Ha---so that
-Eq.~(\ref{eq:cp}) gives the counterpoise-corrected
-$D_e^{\mathrm{CP}} = D_e^{\mathrm{raw}} - \Delta E_{\mathrm{BSSE}}
-= 0.226 - 0.115 = 0.110$~Ha.
 
 \paragraph{Hamiltonian balance requirement.}
 The cross-nuclear attraction and electron repulsion must operate on
 matched orbital subspaces.  Two balanced configurations---\texttt{exact}
 cross-nuclear with full cross-atom $V_{ee}$ (\texttt{exact+True}), and
 \texttt{fourier} cross-nuclear with $s$-only $V_{ee}$
-(\texttt{fourier+s\_only})---produce molecular energies agreeing within
-2~mHa across the entire PES, confirming variational consistency.  An
-\emph{imbalanced} configuration (\texttt{exact+s\_only}) artificially
-overbinds by 0.55~Ha, as the $p$ and $d$ orbitals receive cross-nuclear
-attraction without the compensating electron repulsion screening.  An
-earlier version of this work inadvertently used the imbalanced
-configuration; the results presented here are from the balanced
-\texttt{exact+True} Hamiltonian.
+(\texttt{fourier+s\_only})---produce nearly identical molecular energies
+across the PES.  An \emph{imbalanced} configuration
+(\texttt{exact+s\_only}) artificially overbinds, as the $p$ and $d$
+orbitals receive cross-nuclear attraction without the compensating
+electron repulsion screening.  The results presented here are from the
+balanced \texttt{exact+True} Hamiltonian.
 
 %% ------------------------------------------------------------------------
 \subsection{Absence of Equilibrium Geometry}
@@ -356,36 +338,33 @@ configuration; the results presented here are from the balanced
 %% ------------------------------------------------------------------------
 
 The balanced configurations (\texttt{exact+True} and
-\texttt{fourier+s\_only}) produce identical results within 2~mHa,
-confirming variational consistency.  However, both yield monotonically
-attractive PES curves with no equilibrium geometry.  The equilibrium
-reported in earlier versions arose from an imbalanced Hamiltonian
-configuration that has since been corrected.
+\texttt{fourier+s\_only}) both yield monotonically attractive PES curves
+with no equilibrium geometry.
 
-The CP-corrected binding energy $D_e^{\mathrm{CP}}$ decreases smoothly
-from 0.464~Ha at $R=1.5$~bohr to 0.042~Ha at $R=5.0$~bohr, with the
-PES slope diminishing but never reversing sign.  At no point does the
-repulsive kinetic wall balance the attractive cross-nuclear and exchange
-interactions: the system is variationally attracted to short bond
-lengths at all $R$.
+With the physical one-electron Hamiltonian (Table~\ref{tab:lih_energies})
+the energy falls from $-7.826$~Ha at $R=8.0$~bohr to $-8.379$~Ha at
+$R=1.5$~bohr, the slope diminishing at large $R$ but never reversing
+sign, and at $R=8$~bohr the curve still lies 0.22~Ha below the
+separated-atom energy.  At no point does a repulsive wall balance the
+attractive cross-nuclear and exchange interactions: the system is
+variationally attracted to short bond lengths at all $R$.
 
 This monotonic behavior is traced to a structural property of the
-Topological LCAO: the graph Laplacian kinetic energy within each atomic
-subgraph is \emph{completely $R$-independent}.  In continuous quantum
+Topological LCAO: the one-electron block of each atom is
+\emph{completely $R$-independent}.  In continuous quantum
 mechanics, bringing two atoms together forces their electrons into
 higher-momentum orthogonal states, creating the kinetic repulsion that
 establishes the equilibrium bond length.  In the discrete framework,
-each atom's adjacency matrix---and hence its contribution to the kinetic
-energy via the degree matrix $D$---is fixed at construction time and
-does not respond to the approach of a second center.
+each atom's one-electron block---the hydrogenic diagonal $-Z^2/(2n^2)$,
+which carries that atom's kinetic energy---is fixed at construction time
+and does not respond to the approach of a second center:\ the
+atom-centered orbitals are treated as orthonormal across the two
+centers, so no orthogonalization kinetic energy arises.
 
-The only $R$-dependent kinetic contribution comes from the bridge edges
-connecting the two subgraphs.  However, these bridge elements are
-approximately two orders of magnitude too weak: the maximum bridge
-matrix element at $R=3.015$~bohr is 0.017~Ha, compared to the $\sim$0.5~Ha
-kinetic correction required by virial theorem analysis (the observed
-virial ratio $\eta = -V/(2T) \approx 30$ instead of the equilibrium
-value $\eta = 1$).
+The only $R$-dependent off-diagonal one-electron terms are the bridge
+edges connecting the two subgraphs, and they are small:\ the maximum
+bridge matrix element at $R=3.015$~bohr is 0.017~Ha, and the bridges
+produce no repulsive wall.
 
 This absence of equilibrium geometry motivates both the systematic
 diagnostic arc in the following section and the kinetic repulsion
@@ -417,11 +396,10 @@ partner center would artificially lower the molecular energy, inflating
 $D_e$ and potentially distorting the PES minimum.
 
 The Boys--Bernardi counterpoise correction (Sec.~\ref{sec:cp})
-quantified the superposition error at
-$\Delta E_{\mathrm{BSSE}} = 0.115$~Ha and corrected the vertical
-binding energy to $D_e^{\mathrm{CP}}=0.110$~Ha (20\% error).  BSSE
-is the dominant source of energetic error in the raw binding energy
-but does not address the absence of an equilibrium geometry, which
+quantified the superposition error
+($\Delta E_{\mathrm{BSSE}} = 0.088$~Ha at $n_{\max}=2$ with the
+physical one-electron Hamiltonian, Table~\ref{tab:lih_energies}).
+BSSE does not address the absence of an equilibrium geometry, which
 has a distinct root cause (Sec.~\ref{sec:kinetic}).
 
 %% ------------------------------------------------------------------------
@@ -438,14 +416,14 @@ significant contributions from higher angular momentum channels.
 
 Exact cross-nuclear attraction matrix elements, computed analytically
 from the hydrogenic Fourier representation and validated against the
-shell theorem, deviate by less than $0.6$~mHa from the Mulliken
-diagonal approximation, confirming that the Mulliken scheme is
-essentially exact for this system.
+shell theorem, deviate by less than $2$~mHa from the Mulliken
+diagonal approximation at $n_{\max}=2$ ($R=2.5$--$5.0$~bohr),
+confirming that the Mulliken scheme is close to exact for this system.
 
-Extending the cross-atom $V_{ee}$ to all $(n,l)$ pairs---392 Coulomb
-integrals at $n_{\max}=3$ compared to 18 for the $s$-only
-restriction---contributes a correction of only $+0.449$~mHa to the
-total energy.  This negligible shift reflects the fact that the LiH
+With the Fourier cross-nuclear diagonal, extending the cross-atom
+$V_{ee}$ to all $(n,l)$ pairs---392 Coulomb integrals at $n_{\max}=3$
+compared to 18 for the $s$-only restriction---shifts the total energy
+by only $+0.3$ to $+0.4$~mHa at $n_{\max}=2$.  This negligible shift reflects the fact that the LiH
 ground state is overwhelmingly $s$-orbital dominated: the $1s^2 2s^2$
 configuration of lithium and the $1s$ of hydrogen leave higher angular
 momentum channels essentially unoccupied.
@@ -466,18 +444,19 @@ system compensates by contracting $R_{\mathrm{eq}}$.
 A variational orbital exponent parameter $\zeta_B$ was introduced for
 the hydrogen center, allowing the effective nuclear charge
 $Z_{\mathrm{eff}} = \zeta_B Z_B$ to optimize the radial extent of all
-hydrogen-centered orbitals.  The variational minimum occurs at
-$\zeta_B \approx 1.30$ at $R=3.015$~bohr, relaxing toward unity at
-large $R$ as expected.
+hydrogen-centered orbitals.  At $n_{\max}=2$ with the physical
+one-electron Hamiltonian (scan step $0.1$), the variational minimum
+occurs at $\zeta_B \approx 1.3$ at $R=3.015$~bohr, relaxing toward
+unity at large $R$ ($\zeta_B \approx 1.1$ at $R=5$ and $8$~bohr).
 
-The relaxation energy is approximately $-0.27$~Ha, but it is
-\emph{uniform across the entire bonding region}: the energy lowering at
-$R=2.5$~bohr and $R=3.015$~bohr differs by only $+0.007$~Ha.
-Consequently, $\Delta R_{\mathrm{eq}} = 0.0$~bohr---the PES minimum
-does not shift.  Moreover, the CP-corrected binding energy inflates by a
-factor of $4.7\times$ to $D_e^{\mathrm{CP}}=0.433$~Ha, demonstrating
-that the variational freedom is exploited for unphysical basis
-compression rather than physical polarization.
+The relaxation energy is approximately $-0.31$~Ha, but it is
+\emph{uniform across the bonding region}: the energy lowering at
+$R=2.5$~bohr and $R=3.015$~bohr differs by only $0.004$~Ha.
+Consequently the relaxed PES remains monotonically attractive, with no
+minimum.  Moreover, the energy below the counterpoise ghost fragments at
+$R=3.015$~bohr grows by a factor of $2.2$ (from $0.300$ to
+$0.652$~Ha), demonstrating that the variational freedom is exploited
+for unphysical basis compression rather than physical polarization.
 
 Orbital exponent relaxation is eliminated as a mechanism for geometric
 contraction.
@@ -507,7 +486,7 @@ overbinding), prolate spheroidal MO projections
 25\% error with $p_0$ values collapsing to a single geometric mean).
 
 The definitive negative result is the structural theorem proven in
-companion Paper~8~\cite{paper8} (Theorem~3): in a Sturmian basis
+companion Paper~8~\cite{paper8} (Theorem~4): in a Sturmian basis
 sharing a single momentum parameter $p_0$, treated with Paper~8's
 single-$n$ rotation approximation, the one-electron Hamiltonian
 and overlap obey the two-term identity
@@ -522,21 +501,22 @@ reintroducing exactly the continuous spatial geometry that the discrete
 graph framework is designed to eliminate.  The Bond Sphere Sturmian
 alternative is therefore falsified \emph{in this single-$n$, shared-$p_0$
 form}.  The scope matters:\ the genuine cross-$n$ Coulomb--Sturmian overlap
-couples $n$ and escapes the theorem, and it binds (Paper~8, Remark).  What is
+couples $n$ and escapes the theorem, so binding is not excluded for it
+(Paper~8, Remark).  What is
 ruled out is this approximation, not the discrete framework.
 
 \paragraph{Cross-$n$ hybridization (v0.9.37).}
 A further hypothesis attributed the geometric error to the $D$-matrix's
-block-diagonality in $n$: the Shibuya--Wulfman formula connects only
-same-$n$ orbitals (Li~$1s \leftrightarrow$ H~$1s$, Li~$2s \leftrightarrow$
-H~$2s$), giving zero off-diagonal coupling for the chemically relevant
-Li~$2s \leftrightarrow$ H~$1s$ pair.  Overlap-based bridges using the
+block-diagonality in $n$: the single-$n$ $D$-matrix approximation of
+Paper~8 connects only same-$n$ orbitals (Li~$1s \leftrightarrow$ H~$1s$,
+Li~$2s \leftrightarrow$ H~$2s$), giving zero off-diagonal coupling for
+the chemically relevant Li~$2s \leftrightarrow$ H~$1s$ pair, which the
+full cross-$n$ Shibuya--Wulfman matrix does couple~\cite{paper8}.  Overlap-based bridges using the
 Shibuya--Wulfman energy scale $-(Z_{\mathrm{eff}}/p_0)\sin\gamma$ were
 implemented, producing Li~$2s$--H~$1s$ coupling of 0.052~Ha (40\% of
-the same-$n$ $D$-matrix coupling).  However, the PES worsened: $D_e$
-increased from 7.1 to 10.7~eV because the cross-$n$ coupling adds
-binding at short~$R$ where the overlap is largest, reinforcing the
-existing overbinding.  Cross-shell hybridization is eliminated as a
+the same-$n$ $D$-matrix coupling).  However, the PES worsened:\ the
+cross-$n$ coupling adds binding at short~$R$, where the overlap is
+largest.  Cross-shell hybridization is eliminated as a
 mechanism for the geometry error.
 
 \paragraph{Level~4 locked-core (v0.9.37).}
@@ -545,8 +525,8 @@ to LiH by locking the Li~$1s^2$ core and treating the two active
 electrons in hyperspherical coordinates with effective charges
 $Z_{\mathrm{eff}}$.  Four core models were tested (bare $Z$, integer
 screening, Clementi--Raimondi, and Core Hartree with penetration); all
-produce monotonically attractive PES with $R_{\mathrm{eq}} \lesssim
-2.5$~bohr and $D_e > 12$~eV.  The failure has the same root cause:
+produce PES that collapse to short bond lengths
+($R_{\mathrm{eq}} \lesssim 2.5$~bohr) with $D_e > 12$~eV.  The failure has the same root cause:
 the core-to-H-nucleus attraction $V_{\mathrm{cross}} = -2Z_B\langle
 1s^2_Z | 1/r_B | 1s^2_Z \rangle$ behaves as $-2/R$ at large $R$ but
 saturates exponentially at short $R$ (exp$(-6R)$ decay for Li $1s$),
@@ -556,13 +536,13 @@ $R \approx 3$~bohr.
 \medskip
 
 Having falsified BSSE as a geometric driver, eliminated integral
-incompleteness, ruled out orbital exponent relaxation, mathematically
-disproven the Sturmian alternative, excluded cross-$n$ hybridization
-and locked-core hyperspherical approaches, the $O(V)$
-Topological LCAO remains, among the alternatives surveyed here, the
-only sound discrete framework for heteronuclear FCI.  The absence of an equilibrium geometry in the
-balanced Hamiltonian is traced to the $R$-independence of the graph
-Laplacian kinetic energy, analyzed in the following section.
+incompleteness, ruled out orbital exponent relaxation, shown that the
+single-$n$, shared-$p_0$ Sturmian approximation cannot bind (Paper~8's
+theorem, which does not exclude the genuine cross-$n$ basis), and
+excluded cross-$n$ hybridization and locked-core hyperspherical
+approaches, we trace the absence of an equilibrium geometry in the
+balanced Hamiltonian to the $R$-independence of the intra-atom
+one-electron block, analyzed in the following section.
 
 %% ========================================================================
 \section{Missing Kinetic Repulsion and the Fock-Weighted Correction}
@@ -574,45 +554,17 @@ Laplacian kinetic energy, analyzed in the following section.
 \label{sec:kinetic_diagnostic}
 %% ------------------------------------------------------------------------
 
-The virial theorem for a Coulombic system requires
-$\eta \equiv -V/(2T) = 1$ at the equilibrium geometry.
-Table~\ref{tab:virial} documents the virial ratio across the LiH PES:
-$\eta$ ranges from $46$ at $R=1.5$~bohr to $22$ at $R=5.0$~bohr,
-indicating that the kinetic energy is $\sim$30$\times$ too weak relative
-to the potential energy at all internuclear distances.
-
-\begin{table}[h]
-\centering
-\begin{tabular}{ccccc}
-\toprule
-$R$ (bohr) & $T$ (Ha) & $V$ (Ha) & $\eta=-V/(2T)$ & $E$ (Ha) \\
-\midrule
-1.5 & $-0.092$ & $-8.380$ & 45.8 & $-8.471$ \\
-2.5 & $-0.122$ & $-8.055$ & 32.9 & $-8.178$ \\
-3.015 & $-0.133$ & $-7.985$ & 30.0 & $-8.118$ \\
-4.0 & $-0.172$ & $-7.908$ & 23.0 & $-8.079$ \\
-5.0 & $-0.181$ & $-7.867$ & 21.7 & $-8.049$ \\
-\bottomrule
-\end{tabular}
-\caption{Virial analysis of the balanced LiH PES.  The virial ratio
-$\eta$ should equal 1 at equilibrium but ranges from 22 to 46,
-indicating the kinetic energy is $\sim$30$\times$ too weak.}
-\label{tab:virial}
-\end{table}
-
-Direct examination confirms that the intra-atom kinetic energy (the
-off-diagonal $\mathbf{H}_1$ within each atomic subgraph) is identically
-$R$-independent: the lithium and hydrogen graph Laplacians are
-constructed once from the isolated-atom topology and never modified as
-$R$ changes.  Bridge edges contribute a small $R$-dependent kinetic
-term through the degree matrix, but the maximum bridge element at
-$R=3.015$~bohr is only 0.017~Ha, two orders of magnitude below the
-required repulsion.
+Direct examination confirms that the intra-atom one-electron block (the
+hydrogenic diagonal $-Z^2/(2n^2)$ within each atomic subgraph) is
+identically $R$-independent: it is fixed by the isolated-atom labels and
+never modified as $R$ changes.  Bridge edges contribute a small
+$R$-dependent off-diagonal term, but the maximum bridge element at
+$R=3.015$~bohr is only 0.017~Ha, and it produces no repulsive wall.
 
 This is a structural limitation of the Topological LCAO architecture:
-the discrete graph Laplacian has no mechanism to represent the
-orthogonalization kinetic energy that arises when atomic orbitals
-overlap in continuous quantum mechanics.
+the concatenated basis, treated as orthonormal across the two centers,
+has no mechanism to represent the orthogonalization kinetic energy that
+arises when atomic orbitals overlap in continuous quantum mechanics.
 
 %% ------------------------------------------------------------------------
 \subsection{The Fock-Weighted Kinetic Correction}
@@ -620,9 +572,9 @@ overlap in continuous quantum mechanics.
 %% ------------------------------------------------------------------------
 
 The energy-shell constraint of Paper~7---$p_0^2 = -2E = Z^2/n^2$ for
-the $n$-th shell---provides a natural scale for the
-``information density'' of each orbital on the conformal $S^3$ manifold.
-We exploit this to construct a physically motivated kinetic correction.
+the $n$-th shell---provides a natural momentum scale $p_0 = Z/n$ for
+each orbital.  We exploit this to construct a physically motivated
+kinetic correction.
 
 For each orbital $\phi_a$ on atom $A$, the Fock-weighted overlap
 kinetic correction adds to the diagonal of $\mathbf{H}_1$:
@@ -639,8 +591,8 @@ orbitals (high $n$) and concentrate the kinetic penalty on compact core
 orbitals whose overlap decays rapidly with $R$.
 
 The physical content of Eq.~(\ref{eq:fock_correction}) is that the cost
-of overlapping two topological information structures scales with the
-product of their information densities $p_0^2 = Z^2/n^2$.  Core--core
+of overlapping two orbitals scales with the product of their squared
+shell momenta $p_0^2 = Z^2/n^2$.  Core--core
 pairs (Li~1$s$--H~1$s$) carry weight $9 \times 1 = 9$, while
 diffuse--diffuse pairs (Li~3$s$--H~3$s$) carry weight
 $1 \times 0.11 = 0.11$---an 81$\times$ discrimination.
@@ -655,58 +607,61 @@ Fock weighting.  For the Li~1$s$ orbital alone, the ratio improves from
 \label{sec:fock_results}
 %% ------------------------------------------------------------------------
 
-Table~\ref{tab:fock_scan} summarizes the $\lambda$-scan.
+Table~\ref{tab:fock_scan} summarizes the $\lambda$-scan at
+$n_{\max}=2$ with the physical one-electron Hamiltonian
+($R = 1.5$--$8.0$~bohr, step $0.5$~bohr near the minimum).
 
 \begin{table}[h]
 \centering
 \begin{tabular}{lccc}
 \toprule
 $\lambda$ & Equilibrium? & $R_{\mathrm{eq}}$ (bohr) &
-$D_e^{\mathrm{CP}}$ (Ha) \\
+$E(8.0)-E(R_{\mathrm{eq}})$ (Ha) \\
 \midrule
 0.00 & No & --- & --- \\
-0.02 & No & --- & 0.091 at $R{=}3.0$ \\
-0.05 & No & --- & uptick at $R{=}3.5$ \\
-\textbf{0.10} & \textbf{Yes} & $\bm{\sim 3.8}$ &
-\textbf{0.046} \\
-0.20 & Yes & $\sim 4.4$ & 0.020 \\
-0.50 & No (unbound) & --- & --- \\
+0.02 & No & --- & --- \\
+0.05 & No & --- & --- \\
+\textbf{0.10} & \textbf{Yes} & $\bm{\sim 3.7}$ & \textbf{0.092} \\
+0.20 & Yes & $\sim 4.1$ & 0.075 \\
+0.50 & Yes & $\sim 4.7$ & 0.045 \\
 \bottomrule
 \end{tabular}
-\caption{Fock-weighted kinetic correction scan.  At $\lambda = 0.1$,
-a genuine potential energy minimum emerges at $R\approx 3.8$~bohr with
-a repulsive wall below $R \approx 2.3$~bohr.}
+\caption{Fock-weighted kinetic correction scan at $n_{\max}=2$
+($\lambda$ fitted; $R_{\mathrm{eq}}$ from a three-point parabola about
+the lowest grid point).  For $\lambda \geq 0.1$ a potential energy
+minimum appears and moves outward as $\lambda$ grows; the last column
+is the depth below the $R=8$~bohr point, not a dissociation energy.}
 \label{tab:fock_scan}
 \end{table}
 
-At $\lambda = 0.1$, the Fock-weighted correction creates a genuine
-potential energy minimum with a proper repulsive wall: the molecule is
-unbound below $R \approx 2.3$~bohr, maximally bound near
-$R \approx 3.8$~bohr ($D_e^{\mathrm{CP}} \approx 0.046$~Ha), and
-dissociates smoothly at large $R$.  This is a qualitative success---the
-first equilibrium geometry produced by any balanced Hamiltonian
-configuration---but the single-parameter model cannot simultaneously
-reproduce both $R_{\mathrm{eq}}$ and $D_e$: at $\lambda = 0.02$,
-the CP-corrected binding energy matches experiment
-($D_e^{\mathrm{CP}} = 0.091$~Ha at $R=3.015$~bohr), but no equilibrium
-forms.
+For $\lambda \geq 0.1$ the Fock-weighted correction creates a potential
+energy minimum with a repulsive inner wall, at
+$R_{\mathrm{eq}} \approx 3.7$~bohr for $\lambda = 0.1$, moving to
+$4.1$ and $4.7$~bohr at $\lambda = 0.2$ and $0.5$.  This is a
+qualitative success---the first equilibrium geometry produced by any
+balanced Hamiltonian configuration---but it does not repair the large-$R$
+limit:\ for every $\lambda$ the curve at $R=8$~bohr still lies
+$0.22$~Ha below the separated-atom energy, so no dissociation energy is
+obtained, and no scanned value of $\lambda$ places the minimum at the
+experimental $3.015$~bohr.
 
 %% ------------------------------------------------------------------------
 \subsection{Remaining Limitations}
 \label{sec:limitations}
 %% ------------------------------------------------------------------------
 
-The remaining discrepancy ($R_{\mathrm{eq}} = 3.8$ vs.\ experiment
-$3.015$~bohr, $D_e = 0.046$ vs.\ $0.092$~Ha) likely reflects the
+The remaining discrepancy ($R_{\mathrm{eq}} \approx 3.7$ vs.\
+experiment $3.015$~bohr at $\lambda=0.1$, and no return to the
+separated atoms) likely reflects the
 limitation of a purely diagonal correction.  In standard quantum
 chemistry, kinetic repulsion includes both diagonal (orbital compression)
 and off-diagonal (orthogonalization) contributions from the full kinetic
 energy matrix $T_{AB} = \langle\phi_A|-\tfrac{1}{2}\nabla^2|\phi_B\rangle$.
 The Fock-weighted correction captures only the diagonal component.
 
-The BSSE of $0.115$~Ha \emph{strictly exceeds} the experimental
-dissociation energy of $0.092$~Ha, confirming significant basis
-deficiency at $n_{\max}=3$.  However, since the balanced PES has no
+The BSSE of $0.088$~Ha at $n_{\max}=2$ is comparable to the
+experimental dissociation energy of $0.092$~Ha, confirming significant
+basis deficiency.  However, since the balanced PES has no
 minimum, BSSE is not the mechanism for geometric contraction---it is a
 separate issue of basis completeness that CP correction addresses for
 vertical binding energies.
@@ -716,30 +671,34 @@ vertical binding energies.
 \label{sec:conclusion}
 %% ========================================================================
 
-We have presented the first heteronuclear full configuration interaction
-calculation on a discrete graph Hamiltonian.  The Topological LCAO
+We have presented a heteronuclear full configuration interaction
+calculation in concatenated atom-centered hydrogenic bases on the $S^3$
+label set.  The Topological LCAO
 architecture concatenates atom-centered hydrogenic lattices via Mulliken
 cross-nuclear attraction, Slater--Condon two-electron integrals, and
 STO-overlap bridges, and diagonalizes the resulting Hamiltonian in the
-full 367\,290-determinant Slater space using excitation-driven Direct CI.
+full Slater-determinant space using excitation-driven Direct CI
+(4\,845 determinants at $n_{\max}=2$, where the LiH results are
+obtained;\ the solver also handles the 367\,290 determinants of
+$n_{\max}=3$).
 
-For LiH at $n_{\max}=3$, the Boys--Bernardi counterpoise-corrected
-vertical binding energy at $R=3.015$~bohr is
-$D_e^{\mathrm{CP}}=0.110$~Ha, within 20\% of the experimental value
-of $0.092$~Ha.  The balanced Hamiltonian produces a monotonically
-attractive PES with no equilibrium geometry---a limitation traced to
-the $R$-independence of the graph Laplacian's intra-atom kinetic
-energy, not to basis truncation.
+For LiH the balanced Hamiltonian produces a monotonically attractive
+PES with no equilibrium geometry; at $n_{\max}=2$ it still lies 0.22~Ha
+below the separated-atom energy at $R=8$~bohr.  The absence of a
+minimum is traced to the $R$-independence of each atom's one-electron
+block, a structural property rather than basis truncation;\ the
+large-$R$ offset is not diagnosed here.
 
 A 29-version diagnostic arc (v0.9.8--v0.9.37) systematically falsified
 every competing hypothesis: basis set superposition error as a geometric
 driver, integral incompleteness, orbital exponent relaxation, and the
-SO(4) Sturmian Bond Sphere alternative.  The missing kinetic repulsion
-was identified as a structural limitation of the LCAO concatenation,
-and a Fock-weighted kinetic correction derived from Paper~7's
-energy-shell constraint $p_0^2 = Z^2/n^2$ partially restores the
-equilibrium ($R_{\mathrm{eq}} \approx 3.8$~bohr,
-$D_e^{\mathrm{CP}} \approx 0.046$~Ha at $\lambda = 0.1$).
+single-$n$, shared-$p_0$ SO(4) Sturmian Bond Sphere approximation.  The
+missing kinetic repulsion was identified as a structural limitation of
+the LCAO concatenation, and a Fock-weighted kinetic correction, whose
+form follows Paper~7's energy-shell constraint $p_0^2 = Z^2/n^2$ and
+whose scale $\lambda$ is fitted, partially restores the
+equilibrium ($R_{\mathrm{eq}} \approx 3.7$~bohr at $\lambda = 0.1$,
+$n_{\max}=2$) without repairing the large-$R$ limit.
 
 The $O(V)$ scaling of the underlying graph Hamiltonian is preserved
 throughout, with the Direct CI solver achieving
@@ -749,16 +708,13 @@ The natural next steps are:
 \item Extending the Fock-weighted correction to include off-diagonal
 kinetic matrix elements between atomic centers, which would provide
 the missing intermediate-$R$ binding;
-\item Investigating whether the Bond Sphere geometry of Paper~8
-naturally incorporates the required $R$-dependent kinetic coupling
-through the SO(4) Wigner $D$-matrix;
 \item Increasing $n_{\max}$ to assess basis convergence of the
-vertical binding energy.
+potential energy surface and its large-$R$ limit.
 \item \textbf{Prolate spheroidal lattice:} The fundamental limitation
-identified above---that the LCAO graph Laplacian provides no
+identified above---that the LCAO one-electron blocks provide no
 $R$-dependent kinetic repulsion---arises because the molecular graph
 is constructed as a concatenation of atomic $S^3$ subgraphs whose
-adjacency matrices are fixed at construction time.  This limitation
+one-electron blocks are fixed at construction time.  This limitation
 is resolved by recognizing that the natural geometry for two-center
 systems is the prolate spheroid, not the concatenated $S^3$.  In
 prolate spheroidal coordinates $(\xi, \eta, \varphi)$, the two-center
@@ -774,12 +730,9 @@ binding in a discrete framework, and the diagnostic arc
 (Table~\ref{tab:versions}) provides a systematic record of approaches
 that fail and why.
 \end{enumerate}
-The discovery that the Fock projection's energy-shell scale provides
-a qualitatively correct weighting for kinetic repulsion reinforces the physical
-content of the conformal $S^3$ framework: the momentum parameter
-$p_0^2 = Z^2/n^2$ is not merely a mathematical artifact of the
-stereographic projection but encodes the ``information density'' of
-each quantum state on the three-sphere.
+The Fock projection's energy-shell scale $p_0^2 = Z^2/n^2$ supplies a
+qualitatively useful weighting for the kinetic repulsion, with its
+overall scale $\lambda$ fitted.
 
 %% ========================================================================
 \appendix
@@ -788,7 +741,7 @@ each quantum state on the three-sphere.
 %% ========================================================================
 
 Table~\ref{tab:versions} documents the complete diagnostic arc from
-v0.9.11 (the counterpoise-corrected baseline) through v0.9.38, including
+v0.9.11 (the balanced LCAO baseline) through v0.9.38, including
 architecture, results, and root cause classification for each version.
 
 \begin{table*}[t]
@@ -800,11 +753,11 @@ Version & Architecture & $D_e^{\mathrm{CP}}$ (Ha) & $R_{\mathrm{eq}}$ (bohr)
 & Status & Root Cause \\
 \midrule
 v0.9.11 & LCAO baseline (balanced \texttt{exact+True})
-  & 0.110 & No eq. & Baseline (20\%) & CP-corrected vertical $D_e$ \\
+  & --- & No eq. & Baseline & No large-$R$ return to atoms \\
 v0.9.12 & L\"owdin orthogonalization
   & --- & --- & Fail & Breaks variational principle \\
 v0.9.13 & Mulliken exchange $K$
-  & 0.110 & $\sim$2.5 & 19\% err & $K$ overcorrects $D_e$ \\
+  & --- & $\sim$2.5 & --- & $K$ overcorrects $D_e$ \\
 v0.9.15 & SO(4) Wigner $D$-matrix
   & --- & --- & Infrastructure & 44/44 tests, no production \\
 v0.9.16 & $D$-matrix cross-nuclear (geom.\ mean)
@@ -844,20 +797,20 @@ v0.9.33 & MO Sturmian FCI (variant)
 v0.9.34 & Dual-$p_0$ extension
   & --- & --- & Unbound/overbinding & Shared $SO(4)$ congruence, eigenvalues $\gamma$-independent \\
 v0.9.35 & All-$l$ cross-atom $V_{ee}$
-  & 0.110 & No eq. & $\Delta E = 0.4$~mHa & Negligible correction \\
+  & --- & No eq. & $\Delta E = 0.4$~mHa & Negligible correction \\
 v0.9.36 & Orbital exponent relaxation
-  & 0.433 & No eq. & $4.7\times$ overbind & Uniform PES shift \\
+  & --- & No eq. & Fail & Uniform PES shift \\
 v0.9.37 & Hamiltonian balance diagnostic
-  & 0.110 & No eq. & Corrected & Imbalance identified \\
+  & --- & No eq. & Corrected & Imbalance identified \\
 v0.9.38 & Numba-accelerated assembly
-  & 0.110 & No eq. & $738\times$ speedup & Python loop overhead eliminated \\
+  & --- & No eq. & $738\times$ speedup & Python loop overhead eliminated \\
 \bottomrule
 \end{tabular}
 \caption{Diagnostic arc version history (v0.9.11--v0.9.38).
-The LCAO baseline (v0.9.11, balanced \texttt{exact+True}) achieves
-correct-order-of-magnitude binding ($D_e^{\mathrm{CP}} = 0.110$~Ha,
-20\% error) but lacks equilibrium geometry due to missing kinetic
-repulsion.}
+The LCAO baseline (v0.9.11, balanced \texttt{exact+True}) lacks an
+equilibrium geometry due to missing kinetic repulsion and does not
+return to the separated-atom energy at large $R$
+(Table~\ref{tab:lih_energies}).}
 \label{tab:versions}
 \end{table*}
 
@@ -891,11 +844,6 @@ S.~F.~Boys and F.~Bernardi, ``The calculation of small molecular
 interactions by the differences of separate total energies.  Some
 procedures with reduced errors,''
 Mol.~Phys. \textbf{19}, 553 (1970).
-
-\bibitem{shull_lowdin}
-H.~Shull and P.-O.~L\"owdin, ``Superposition of Configurations and
-Natural Spin Orbitals.\ Applications to the He Problem,''
-J.~Chem.~Phys. \textbf{30}, 617 (1959).
 
 \bibitem{huber}
 K.~P.~Huber and G.~Herzberg, \emph{Molecular Spectra and Molecular

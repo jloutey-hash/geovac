@@ -8,29 +8,33 @@ where Psi_bar is the spherically averaged wavefunction around the coalescence
 point.  A finite partial-wave expansion (l_max < infinity) cannot exactly
 satisfy this derivative condition because the Coulomb cusp requires all l.
 
-The energy error from the missing cusp is estimated from the coalescence
-amplitude and the known partial-wave convergence behavior (Schwartz 1962,
-Hill 1985, Kutzelnigg & Morgan 1992):
+The energy error from the missing cusp is estimated from the known
+partial-wave convergence law (Schwartz 1962, Hill 1985, Kutzelnigg & Morgan
+1992):
 
-    E_exact - E_{l_max} ~ -A / (l_max + 1)^4
+    Delta E_l = E_l - E_{l-1} ~ -A / (l + 1/2)^4
 
-where A is related to the coalescence density.  For He-like atoms:
-    A = (8*Z^2/pi) * <delta^3(r12)>_exact * (5/4) / Z^2
-      = (10/pi) * <delta^3(r12)>_exact
+with leading coefficient (Hill 1985)
 
-For He: <delta^3(r12)>_exact = 0.1066 (Thakkar & Smith 1977), giving
-A ~ 0.339.  The partial-wave increment is:
-    Delta_l = A * [1/(l+1)^4 - 1/(l+2)^4]  (contribution from channel l)
+    A = 6 pi^2 * int_0^inf |Psi(r, r, r12 = 0)|^2 r^5 dr .
 
-The cusp correction at finite l_max is the sum of missing increments:
-    Delta E_cusp = -sum_{l=l_max+1}^{infinity} Delta_l
-                 = -A / (l_max + 2)^4 * zeta_tail
+For the exact He ground state A = 0.074226 Ha (Bromley & Mitroy,
+arXiv:physics/0601049, Eqs. 8-9, written there as A_E = -0.074226 with the
+opposite sign convention).  The repo's own 2D variational increments
+(level3_variational) give effective coefficients 0.0831 ... 0.0782 at
+l = 3..7, approaching this value from above as the higher-order
+(l + 1/2)^-5 term dies away.  A is NOT (10/pi) <delta^3(r12)>; that
+relation, used here previously, overstates the He coefficient by ~4.6x.
 
-where zeta_tail sums the remaining 1/n^4 contributions.
+The cusp correction at finite l_max is the leading-order tail
+    Delta E_cusp = -A * sum_{l=l_max+1}^{infinity} 1/(l + 1/2)^4 .
 
-For Level 4 (H2), the same physics applies but R-dependently: the coalescence
-density <delta^3(r12)>(R) varies with internuclear distance.  At R->infinity,
-it approaches 2 * <delta^3(r12)>_He (two isolated atoms).
+Only the He (Z = 2) coefficient is tabulated; no verified value is used for
+other Z.  For Level 4 (H2) the module uses a MODEL: A(R) = A_He * delta(R) /
+delta_He, i.e. the coefficient is taken proportional to the coalescence
+density, with delta(R) from the hand-set interpolation in
+coalescence_density_h2 (see its docstring).  Neither the proportionality nor
+that interpolation is derived.
 
 References:
   - Kato, Commun. Pure Appl. Math. 10, 151 (1957)
@@ -38,6 +42,7 @@ References:
   - Hill, J. Chem. Phys. 83, 1173 (1985)
   - Kutzelnigg & Morgan, J. Chem. Phys. 96, 4484 (1992)
   - Thakkar & Smith, Phys. Rev. A 15, 1 (1977)
+  - Bromley & Mitroy, arXiv:physics/0601049 (He partial-wave coefficients)
   - Paper 12, Section VII (cusp diagnosis)
   - Paper 13, Section III (angular eigenproblem)
 """
@@ -62,6 +67,21 @@ _COALESCENCE_DENSITY_HE = 0.1066
 # The 1/(l+1/2)^4 form is more accurate than 1/(l+1)^4 (Hill 1985)
 _SCHWARTZ_EXPONENT = 4
 
+# Leading partial-wave coefficient for the exact He ground state,
+# A = 6 pi^2 int |Psi(r,r,0)|^2 r^5 dr (Hill 1985), value from
+# Bromley & Mitroy, arXiv:physics/0601049, Eqs. 8-9 (A_E = -0.074226 there).
+_SCHWARTZ_COEFF_HE = 0.074226
+
+
+def _coefficient_from_delta(delta_r12: float) -> float:
+    """Model coefficient A proportional to the coalescence density.
+
+    A = A_He * delta / delta_He.  Exact at the He anchor by construction;
+    elsewhere a model assumption (not derived), used for the H2 path and for
+    the delta_r12 override.
+    """
+    return _SCHWARTZ_COEFF_HE * delta_r12 / _COALESCENCE_DENSITY_HE
+
 
 def coalescence_density_he_like(Z: float) -> float:
     """Coalescence density <delta^3(r12)> for He-like atoms.
@@ -83,28 +103,31 @@ def coalescence_density_he_like(Z: float) -> float:
 
 
 def schwartz_coefficient(Z: float) -> float:
-    """Schwartz partial-wave convergence coefficient A.
+    """Schwartz partial-wave convergence coefficient A for the He atom.
 
     The energy increment from partial wave l is approximately:
-        Delta E_l ~ A / (l + 1/2)^4
+        Delta E_l ~ -A / (l + 1/2)^4
 
-    For He-like atoms:
-        A = (5/4) * (8 / pi) * <delta^3(r12)>
-
-    This follows from Kutzelnigg & Morgan (1992) Eq. 29.
+    with A = 6 pi^2 int |Psi(r,r,0)|^2 r^5 dr (Hill 1985); for the exact He
+    ground state A = 0.074226 Ha (Bromley & Mitroy, arXiv:physics/0601049).
+    Only Z = 2 is tabulated.
 
     Parameters
     ----------
     Z : float
-        Nuclear charge.
+        Nuclear charge (must be 2).
 
     Returns
     -------
     float
         Coefficient A in Hartree.
     """
-    delta = coalescence_density_he_like(Z)
-    return (5.0 / 4.0) * (8.0 / pi) * delta
+    if abs(Z - 2.0) > 1e-12:
+        raise ValueError(
+            "schwartz_coefficient: only the He (Z=2) coefficient is "
+            "tabulated; pass delta_r12 to use the proportional model"
+        )
+    return _SCHWARTZ_COEFF_HE
 
 
 def cusp_correction_he(
@@ -127,7 +150,8 @@ def cusp_correction_he(
     l_max : int
         Maximum partial wave included in the calculation.
     delta_r12 : float or None
-        Override coalescence density.  If None, uses the He-like estimate.
+        Override coalescence density; A then follows the proportional
+        model A = A_He * delta / delta_He.  If None, uses the He value.
 
     Returns
     -------
@@ -135,7 +159,7 @@ def cusp_correction_he(
         Energy correction Delta E_cusp (Hartree, negative).
     """
     if delta_r12 is not None:
-        A = (5.0 / 4.0) * (8.0 / pi) * delta_r12
+        A = _coefficient_from_delta(delta_r12)
     else:
         A = schwartz_coefficient(Z)
 
@@ -241,7 +265,7 @@ def cusp_correction_from_solver(
     err_corr = abs(E_corr - E_exact) / abs(E_exact) * 100
 
     if delta_r12 is not None:
-        A = (5.0 / 4.0) * (8.0 / pi) * delta_r12
+        A = _coefficient_from_delta(delta_r12)
     else:
         A = schwartz_coefficient(Z)
 
@@ -270,9 +294,12 @@ def coalescence_density_h2(R: float) -> float:
     R -> inf: <delta^3(r12)> -> 0 (two separated H atoms, no e-e coalescence
               in ground state singlet -- each atom has only 1 electron)
 
-    The interpolation uses the electron density overlap, which decays
-    exponentially with R.  For H2 near equilibrium (R ~ 1.4 bohr),
-    the coalescence density is approximately 60-80% of the He value.
+    The interpolation f(R) = exp(-beta R^2 / (1 + gamma R)) has two
+    HAND-SET parameters, beta = 0.60 and gamma = 0.3, set by hand with the
+    Gaussian-geminal H2 coalescence density (Komasa & Cencek, ~0.025-0.030
+    a.u. near R = 1.4, i.e. f ~ 0.25) as the stated target.  They are not
+    derived, and they do not reproduce that target: f(1.4) = 0.437,
+    delta(1.4) = 0.0466 a.u.  They enter the H2 cusp correction directly.
 
     Parameters
     ----------
@@ -291,18 +318,9 @@ def coalescence_density_h2(R: float) -> float:
     # At R->inf, electrons on separate atoms -> delta=0 for singlet H+H
     # The decay scale is set by the electron overlap, which for H2
     # goes roughly as exp(-R) for large R.
-    # Near equilibrium, fitted to reproduce the known H2 coalescence
-    # density from Gaussian geminal calculations (Komasa & Cencek):
-    # <delta^3(r12)>(R_eq=1.4) ~ 0.025-0.030 a.u.
-    #
-    # Model: delta(R) = delta_He * f(R) where:
-    #   f(0) = 1 (united atom)
-    #   f(inf) = 0 (separated atoms)
-    #   f(R_eq=1.4) ~ 0.25 (calibrated to known values)
-
-    # Simple exponential decay with correct limits
-    # f(R) = exp(-beta * R^2 / (1 + gamma*R))
-    # Tuned so f(1.4) ~ 0.25
+    # Model: delta(R) = delta_He * f(R) with f(0) = 1, f(inf) = 0,
+    # f(R) = exp(-beta * R^2 / (1 + gamma*R)).  beta, gamma are HAND-SET
+    # (target f(1.4) ~ 0.25 from Komasa & Cencek; actual f(1.4) = 0.437).
     beta = 0.60
     gamma = 0.3
     f_R = np.exp(-beta * R ** 2 / (1.0 + gamma * R))
@@ -334,8 +352,8 @@ def cusp_correction_h2_point(
     if delta_r12 is None:
         delta_r12 = coalescence_density_h2(R)
 
-    # Use the Schwartz formula with the R-dependent coalescence density
-    A_R = (5.0 / 4.0) * (8.0 / pi) * delta_r12
+    # Schwartz formula with the model coefficient A(R) = A_He * delta(R)/delta_He
+    A_R = _coefficient_from_delta(delta_r12)
 
     # Sum the tail
     tail = 0.0

@@ -58,13 +58,14 @@ class TestCuspCorrectionHe:
         )
 
     def test_schwartz_coefficient_magnitude(self):
-        """Schwartz coefficient A should be ~0.34 for He."""
+        """Schwartz coefficient A = 0.074226 Ha for He (Bromley & Mitroy)."""
         from geovac.cusp_correction import schwartz_coefficient
 
         A = schwartz_coefficient(Z=2.0)
-        # Kutzelnigg & Morgan (1992): A ~ 0.34 for He
-        assert 0.2 < A < 0.5, (
-            f"Schwartz coefficient A = {A:.4f} outside expected range [0.2, 0.5]"
+        # Hill (1985) A = 6 pi^2 int |Psi(r,r,0)|^2 r^5 dr; He value from
+        # Bromley & Mitroy, arXiv:physics/0601049 (A_E = -0.074226).
+        assert abs(A - 0.074226) < 1e-6, (
+            f"Schwartz coefficient A = {A:.6f}, expected 0.074226"
         )
 
     def test_correction_magnitude_lmax0(self):
@@ -80,19 +81,11 @@ class TestCuspCorrectionHe:
         )
 
     def test_correction_z_scaling(self):
-        """Correction should scale as Z^3 (from coalescence density)."""
+        """Only the He (Z=2) coefficient is tabulated; other Z must raise."""
         from geovac.cusp_correction import cusp_correction_he
 
-        dE_Z2 = cusp_correction_he(Z=2.0, l_max=1)
-        dE_Z3 = cusp_correction_he(Z=3.0, l_max=1)
-
-        ratio = abs(dE_Z3) / abs(dE_Z2)
-        expected_ratio = (3.0 / 2.0) ** 3
-        # Allow 10% tolerance for the Z-scaling
-        assert abs(ratio - expected_ratio) / expected_ratio < 0.1, (
-            f"Z-scaling ratio {ratio:.4f} deviates from (3/2)^3 = "
-            f"{expected_ratio:.4f}"
-        )
+        with pytest.raises(ValueError):
+            cusp_correction_he(Z=3.0, l_max=1)
 
     def test_schwartz_convergence_rate(self):
         """Verify 1/(l+1/2)^4 convergence behavior."""
@@ -384,8 +377,8 @@ class TestCuspCorrectionIntegration:
             f"{cusp['error_corrected_pct']:.4f}% vs "
             f"{cusp['error_uncorrected_pct']:.4f}%"
         )
-        # Corrected error should be < 0.2%
-        assert cusp['error_corrected_pct'] < 0.2
+        # Corrected error should be < 0.25% (default R_min = 0.1 wall)
+        assert cusp['error_corrected_pct'] < 0.25
 
     def test_he_lmax_convergence_with_cusp(self):
         """Cusp-corrected energies should converge faster."""

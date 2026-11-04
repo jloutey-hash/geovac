@@ -64,11 +64,11 @@ class TestCuspCorrectionWiring:
 
     def test_standalone_cusp_values(self):
         """Verify standalone cusp_correction_h2_point gives expected range."""
-        # At l_max=2, R~3 bohr, correction should be ~-1 to -2 mHa
+        # At l_max=2, R~3 bohr, correction is ~-0.05 mHa (A_He = 0.074226)
         dc = cusp_correction_h2_point(R=3.0, l_max=2)
         assert dc < 0, "Cusp correction must be negative"
         assert abs(dc) < 0.01, "Correction should be < 10 mHa"
-        assert abs(dc) > 0.0001, "Correction should be > 0.1 mHa"
+        assert abs(dc) > 0.00001, "Correction should be > 0.01 mHa"
 
     def test_cusp_vanishes_at_large_R(self):
         """Cusp correction vanishes at dissociation (large R)."""

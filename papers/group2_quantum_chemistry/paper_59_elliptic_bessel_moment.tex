@@ -54,8 +54,7 @@ MEASURED]} The one-mass slice is the Laplace transform of the elliptic
 differential---an elliptic deformation of the Bessel $K_{0}$, reducing to
 $K_{0}(D)$ when one scale decouples ($\rho\to0$) and to the complete elliptic
 integral $K$ at zero separation---and satisfies an explicit fourth-order
-Picard--Fuchs equation with polynomial coefficients (residual
-$\sim\!10^{-24}$), whose characteristic exponents are the four branch points
+Picard--Fuchs equation with polynomial coefficients, whose characteristic exponents are the four branch points
 of the curve.  \textbf{[OBSERVATION]} This places a molecular integral inside
 the modern theory of Bessel moments and two-mass elliptic Feynman integrals;
 a targeted literature search finds that connection unmade in either field.
@@ -137,7 +136,7 @@ multiply into a single Gaussian on a third point~\cite{boys1950}---Slater
 orbitals have no product theorem---and this, not any Geometric-Vacuum-specific
 limitation, is the seventy-year-old reason Gaussian bases displaced Slater
 orbitals for polyatomic quantum chemistry.  The modern state of the art for three-center
-Slater repulsion integrals (Ref.~\cite{ozdogan2012}) reduces them to a single
+Slater repulsion integrals in linear conformations (Ref.~\cite{ozdogan2012}) reduces them to a single
 infinite expansion or a one-dimensional numerical quadrature; the one
 celebrated closed form in correlated three-electron theory, Fromm and Hill's
 analytic evaluation~\cite{fromm_hill1987}, is a \emph{dilogarithm}---a
@@ -394,8 +393,7 @@ first-order relation $Q f' + \tfrac12 Q' f = 0$, and the boundary at the
 branch point $x=1$ vanishes ($Q(1)^{1/2}=0$), integration by parts against
 $e^{-Dx}$ (using $\int_{1}^{\infty}x^{n}e^{-Dx}f\,dx=(-1)^{n}L^{(n)}(D)$,
 $L\equiv\sqrt{c_{1}}\,N$) yields an exact fourth-order Picard--Fuchs equation
-with polynomial coefficients \textbf{[SYMBOLIC PROOF; MEASURED residual
-$\sim\!10^{-24}$]},
+with polynomial coefficients \textbf{[SYMBOLIC PROOF]},
 %
 \begin{equation}
   D\rho\,L'''' + 2\rho\,L''' + D(1{-}2\rho)L'' + (1{-}2\rho)L'
@@ -440,7 +438,8 @@ space $b$, and the fibre~\eqref{eq:besselmoment} is exactly the two-propagator c
 $M=4\pi a_{1}a_{2}\int_{\mathbb{R}}db\,G_{a_{1}}(p_{1},b)\,G_{a_{2}}(p_{2},b)$: two Euclidean
 packets of unequal mass, evolved from a point source for Euclidean times $p_{1},p_{2}$ and
 overlapped on one spatial slice \textbf{[MEASURED, $10^{-30}$ and $10^{-31}$ at five parameter
-points each;\ \texttt{test\_paper59\_euclidean\_dictionary.py}]}. Three things become visible.
+points each;\ regression-tested at one point each, to $10^{-18}$ and $10^{-14}$, in
+\texttt{test\_paper59\_euclidean\_dictionary.py}]}. Three things become visible.
 First, the Feynman parameters are
 K\"all\'en--Lehmann spectral variables: $c=s(1-s)$ forces $a=\zeta/\sqrt{c}\ge2\zeta$, so each
 two-centre density is dispersed over its own two-particle cut and the elliptic modulus
@@ -454,7 +453,7 @@ $e^{-D\Delta}\Delta^{-n}=\frac{1}{(n-1)!}\int_{D}^{\infty}(u-D)^{n-1}e^{-u\Delta
 converts the Yukawa into the Slater. Third, $j_{0}(k|\bm W|)$ is a uniform smearing of the
 shared spatial coordinate over the composite separation, so the third centre enters
 \emph{only} through space while the bond lengths set the two Euclidean-time offsets
-\textbf{[MEASURED, $1.8\times10^{-10}$ for the full position-space fibre]}.
+\textbf{[MEASURED, $1.8\times10^{-10}$ for the full position-space fibre;\ not regression-tested]}.
 
 %% ========================================================================
 \section{The elliptic-dilogarithm route is obstructed}
@@ -594,7 +593,7 @@ four exponential sectors, so the entire trans-series of $N(D)$ over
 $\{e^{\pm D},\,e^{\pm i\sqrt{(1-\rho)/\rho}\,D}\}$ has \emph{algebraic} connection
 data.  The one genuinely elliptic ingredient enters only at the boundary:\ at $D=0$
 the open Laplace thimbles close into the cycles of the curve and
-$\sqrt{c_{1}}\,N(0)=K(1-\rho)$ exactly ($14$ digits).  So the closed form at the
+$\sqrt{c_{1}}\,N(0)=K(1-\rho)$ exactly ($14$ digits).  So the representation at the
 irregular level is explicit:\ $N(D)$ is the Borel--Laplace transform of the algebraic
 differential $\psi$, with algebraic Stokes data and an elliptic-period
 $K(1-\rho)$ normalization---as far as a genuinely irregular, genus-one object
@@ -708,8 +707,9 @@ mixed plane survives, and the reducibility criterion above returns
 \textbf{[SYMBOLIC + MEASURED]} Consequently $N(D)$ is a period of an \emph{irreducible}
 rank-four connection: it admits no closed form through any factorization of $L$,
 and the sole remaining route to a closed form is a genuinely transcendental one at
-the full rank-four level---the elliptic-polylogarithm / $\Gamma(2)$
-multiple-modular-value structure developed in the companion (Paper~61~\cite{loutey_paper61}).  The differential-%
+the full rank-four level---an Eisenstein / complex-multiplication Bessel-moment
+period of the Legendre ($\Gamma(2)$) family, of which a $\Gamma(2)$ multiple modular
+value is only the regular $D\to0$ shadow (Paper~61~\cite{loutey_paper61}).  The differential-%
 Galois \emph{reducibility} question is thereby settled (negatively: $L$ is
 irreducible); the transcendental closed form is the one problem that remains
 open~\cite{test_routeC}.
@@ -1152,7 +1152,8 @@ Zudilin~\cite{aesz2005} (entry 2.9 of the Calabi--Yau operator
 database~\cite{cydb}), listed there as a Hadamard product, with the same
 holomorphic coefficients;\ Gegelia and van
 Straten~\cite{gegelia_vanstraten2024} list it among their conjectural
-sources of paramodular forms, at conductors $2145$ and $2465$.  For every
+sources of paramodular forms, at conductors $2145$ and $2465$ (their
+Table~6;\ their Table~3 lists entry~2.9 at conductors $945$ and $960$).  For every
 $n$ from $2$ to $5$ the holomorphic solution of the equation of $F_n$ at
 $t=\infty$ is $t^{-1}\sum_m\binom{2m}{m}^2W_{n-1}(2m)\,(16t^2)^{-m}$, the
 Hadamard product of $\binom{2m}{m}^2$ with the even moments $W_{n-1}(2m)$
@@ -1204,7 +1205,7 @@ of $10^{14}$ to $10^{17}$ and $10^{7}$ to $10^{9}$;\
 $c_{4,0}=4\pi^2L(f,2)$ with $f=\eta(2\tau)^4\eta(4\tau)^4$ of weight four
 and level eight, checked to $5\times10^{-261}$;\ and
 $c_{6,0}=108\pi^2L(g,4)$ with $g$ of weight six and level 24, to the same
-precision.  But $c_{8,0}$ fits no single $L$-value tried, with no Tate
+precision (both on the prediction record's computation, not a regression test).  But $c_{8,0}$ fits no single $L$-value tried, with no Tate
 relation to coefficient bound $10^7$ and none with an $L$-value to
 $10^{12}$, so the $n=8$ search gives parity no support as a rule for values.  \textbf{[PRIOR ART]} The $L$-value forms of $c_{3,0}$ and $c_{4,0}$ are
 collected by Lim, Tu and Yu~\cite{lim_tu_yu2026}, who credit them to earlier
@@ -2265,7 +2266,7 @@ Spectra} (World Scientific, Singapore, 2006).
 \bibitem{avery_avery_4center}
 J.~E.~Avery and J.~S.~Avery, ``4-Center STO interelectron repulsion
 integrals with Coulomb Sturmians,'' \textit{Adv.\ Quantum Chem.}\ \textbf{76},
-133--146 (2017).
+133--146 (2018).
 
 \bibitem{shibuya1965}
 T.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum space,''
@@ -2531,7 +2532,7 @@ Calabi--Yau differential operator database, version 3.0,
 
 \bibitem{gegelia_vanstraten2024}
 N.~Gegelia and D.~van Straten, ``Paramodular forms from Calabi--Yau
-operators,'' arXiv:2408.10183 (2024), Table~3.
+operators,'' arXiv:2408.10183 (2024), Tables~3 and~6.
 
 \bibitem{matuzas2026}
 J.~Matuzas, ``A Calabi--Yau period in a four-electron correlation integral:

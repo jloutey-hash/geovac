@@ -36,7 +36,7 @@ GeoVac's 1-norm scaling and commutator-based Trotter bounds (exponents in Paper 
 
 ## Honest Limitations
 
-GeoVac's classical accuracy is substantially below production quantum chemistry. The best classical results are H2 at 99.97% dissociation energy (explicit-r12 CI in prolate coordinates, Paper 12), LiH equilibrium bond length at 5.3% error, BeH2 at 11.7%, and H2O at 19.4% -- compared to sub-0.1% for Gaussian methods with correlating basis sets. For atoms, the 2D variational solver reaches 0.022% for He (variational), and a Schwartz cusp extrapolation 0.004% (non-variational, marginally below exact; zero free parameters). The framework's library covers 35 composed molecules across 3 periodic table rows. The value proposition is structural sparsity for quantum simulation, not classical accuracy.
+GeoVac's classical accuracy is substantially below production quantum chemistry. The best classical results are H2 at 99.97% dissociation energy (explicit-r12 CI in prolate coordinates, Paper 12), LiH equilibrium bond length at 5.3% error, BeH2 at 11.7%, and H2O at 19.4% -- compared to sub-0.1% for Gaussian methods with correlating basis sets. For atoms, the 2D variational solver reaches 0.022% for He (variational), and 0.020% with the Schwartz cusp tail, still above exact (zero free parameters). The framework's library covers 35 composed molecules across 3 periodic table rows. The value proposition is structural sparsity for quantum simulation, not classical accuracy.
 
 Note on H2O 1-norm: The Phillips-Kleinman pseudopotential (PK) is a one-body operator whose energy contribution can be computed classically from the 1-RDM measured during VQE, with zero additional quantum circuits. This quantum-classical partitioning (v2.0.29) removes the PK contribution from the quantum 1-norm with no approximation. Current partitioned 1-norms: Paper 14/20 and the numeric registry (the per-system figures once quoted here predate the 2026-08-29 exact rule).
 
@@ -62,7 +62,7 @@ The `geovac-hamiltonians` package is a standalone wheel with no heavy dependenci
 - **Hardware demonstrations:** VQE or ADAPT-VQE runs on current hardware using GeoVac's compact Hamiltonians. H2 at 10 qubits and LiH at 30 qubits are natural targets.
 - **Measurement optimization:** Benchmarking classical shadows, derandomized shadows, or other measurement protocols on GeoVac's structurally sparse Hamiltonians.
 - **Extending the molecule set:** The composed architecture is systematic (core pairs + bond pairs + lone pairs) and now covers 30 molecules. New molecules require only a `MolecularSpec` definition and atomic classifier entry.
-- **Improving classical accuracy:** The 5.3-19.4% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the pseudopotential approximation. The balanced coupled architecture (Paper 19) achieves 0.20% energy error at n_max=3 for LiH.
+- **Improving classical accuracy:** The 5.3-19.4% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the pseudopotential approximation. The balanced coupled architecture (Paper 19) achieves 0.20% energy error at n_max=3 for LiH (at n_max=4 it crosses past exact, so the error is not monotonically improvable).
 
 ## Papers and Citation
 

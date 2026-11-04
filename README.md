@@ -29,8 +29,8 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 | Pauli count | **N_Pauli = 27.90 × Q**, exactly linear across molecules at fixed basis (30.03 × Q d-block); within-molecule basis exponent 3.17 (small-basis fit; local slope ~3.8 by n_max = 4) |
 | Advantage vs Gaussian | **51×–317×** fewer Pauli terms at equal qubits (H₂O, n_max = 1–3); **76×** vs cc-pVDZ (LiH) |
 | LiH vs STO-3G | near parity on raw counts: 838 Pauli @ Q = 30 vs 907 raw (3.0× MORE than STO-3G's 276 reduced); 1-norm 34.0 vs 34.3 Ha |
-| He accuracy | **0.022%** raw (2D variational, properly variational); **0.004%** after a non-variational cusp extrapolation; zero free parameters |
-| H₂ accuracy | **99.97% D_e** (0.053 mHa; prolate explicit-r₁₂ CI, exact integrals, Paper 12); 96.0% via the Level-4 hyperspherical treatment (Paper 15) |
+| He accuracy | **0.022%** raw (2D variational, properly variational); **0.020%** with the Schwartz cusp tail, still above exact; zero free parameters |
+| H₂ accuracy | **99.97% D_e** (0.053 mHa; prolate explicit-r₁₂ CI, exact integrals, Paper 12); 96.0% via the Level-4 hyperspherical treatment on an unconverged inner hyperradial wall (Paper 15) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |
 | Mathematical foundation | Fock 1935 S³ conformal equivalence, **18 symbolic checks of the continuum chain** (ten limiting-case or definitional) |
 
@@ -116,16 +116,16 @@ Isostructural invariance: molecules with the same block topology produce identic
 
 | System | Method | Result | Paper |
 |:-------|:-------|:-------|:-----:|
-| He (2e) | 2D variational (raw) / + cusp extrapolation | **0.022%** / **0.004%** (non-var.) error | 13 |
+| He (2e) | 2D variational (raw) / + Schwartz cusp tail | **0.022%** / **0.020%** error (both above exact) | 13 |
 | He (2e) | Fixed-k = Z hydrogenic CI, physical Hamiltonian (n_max = 7) | **1.88%** (zero parameters, exact integrals; above the HF limit) | 13 |
 | H₂ (2e) | Prolate explicit-r₁₂ CI, exact integrals | **99.97% D_e** (0.053 mHa) | 12 |
-| H₂ (2e) | Mol-frame hyperspherical | **96.0% D_e** | 15 |
+| H₂ (2e) | Mol-frame hyperspherical | **96.0% D_e** (inner wall R_e,min = 0.3 bohr, not converged) | 15 |
 | HeH⁺ (2e) | Prolate explicit-r₁₂ CI | **R_eq −0.5%** at l = 3; energy ~1 mHa from the Kolos–Peek reference (the hyperspherical 93.1% is an adiabatic, non-variational over-binding; the consistent variational value is ~5% of D_e, Paper 15) | 12 |
-| LiH (4e) | Prolate all-electron, analytic core (Route C) | **R_eq +0.2%**; energy −8.0490 Ha (analytic explicit-r₁₂) | 19 |
-| LiH (4e) | Composed Level 3+4, ab initio PK | **R_eq 5.3%** | 17 |
+| LiH (4e) | Prolate all-electron, analytic core (Route C) | **R_eq +0.2%**; energy −8.0585 Ha (analytic explicit-r₁₂ + electron–nucleus factors, variational) | 19 |
+| LiH (4e) | Composed Level 3+4, PK (one atomic empirical input) | **R_eq 5.3%** | 17 |
 | BeH₂ (6e) | Composed + exchange coupling | **R_eq 11.7%** | 17 |
 | H₂O (10e) | Composed 5-block | **R_eq 19.4%** | 17 |
-| LiH (4e) | Balanced coupled, n_max=3 | **0.20% energy** | 19 |
+| LiH (4e) | Balanced coupled, n_max=3 | **0.20% energy** (crosses past exact at n_max=4) | 19 |
 
 ---
 
@@ -192,15 +192,15 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **16** | **Chemical Periodicity** | **S_N representation theory, atomic classifier** |
 | 6 | Quantum Dynamics (archived) | Rabi, spectroscopy, AIMD at O(V) |
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H₂⁺ to machine precision |
-| **12** | Algebraic V_ee | Neumann expansion; H₂ 99.97% D_e (explicit r₁₂, 0.053 mHa), 99.81% re-based CI, 92.4% σ-only |
-| **13** | Hyperspherical Lattice | He 0.022% (variational) / 0.004% (cusp extrapolation, non-variational), fiber bundle, algebraic structure |
-| **15** | Level 4 Geometry | H₂ 96.0% D_e (structural N-electron treatment); HeH⁺ adiabatic 93.1% is non-variational (variational ~5%) |
-| **17** | Composed Geometries | LiH 5.3%, BeH₂ 11.7%, ab initio PK |
+| **12** | Algebraic V_ee | Neumann expansion; H₂ 99.97% D_e (explicit r₁₂, 0.053 mHa), 99.81% re-based CI (larger truncation, optimal exponent), 92.4% σ-only |
+| **13** | Hyperspherical Lattice | He 0.022% (variational) / 0.020% (with cusp tail, still above exact), fiber bundle, algebraic structure |
+| **15** | Level 4 Geometry | H₂ 96.0% D_e (structural N-electron treatment; unconverged inner wall); HeH⁺ adiabatic 93.1% is non-variational (variational ~5%) |
+| **17** | Composed Geometries | LiH 5.3%, BeH₂ 11.7%; PK with one atomic empirical input |
 | **18** | Exchange Constants | Weyl-Selberg taxonomy, π-free graph principle |
 | **22** | **Angular Sparsity Theorem** | **Potential-independent ERI density (6.06% at l_max=3, global-M_L rule)** |
 | **24** | **Bargmann-Segal Lattice** | **π-free HO discretization on S⁵ Hardy space** |
 | FCI-A | Full CI (Atoms) | Atomic FCI benchmarks (current values in the paper) |
-| **19** | Balanced Coupled | 0.20% energy, PK-free, 3-molecule census |
+| **19** | Balanced Coupled | 0.20% energy at n_max=3 (crosses past exact at n_max=4), PK-free, 3-molecule census |
 | **20** | Resource Benchmarks | 37-system library, Gaussian comparison, `pip install` |
 | **23** | **Nuclear Shell Hamiltonians** | **Deuteron/He-4 qubit encoding, Fock rigidity theorem** |
 | 21 | Synthesis (archived) | S³ proof chain, exchange constants, research program |
@@ -229,9 +229,9 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 ### What GeoVac Does Well
 - **Structurally sparse qubit Hamiltonians:** Pauli count exactly linear in Q across molecules (27.90 × Q), 51×–317× fewer terms than Gaussian at equal qubits (H₂O)
 - **Block-diagonal ERIs:** Gaunt selection rules enforce basis-intrinsic sparsity
-- **Classical benchmarks:** H₂ 99.97% D_e (Paper 12), LiH R_eq +0.2% (Route C, Paper 19), He 0.022% raw / 0.004% (non-variational cusp extrapolation)
+- **Classical benchmarks:** H₂ 99.97% D_e (Paper 12), LiH R_eq +0.2% (Route C, Paper 19), He 0.022% raw / 0.020% with the cusp tail (still above exact)
 - **Algebraic Slater integrals:** Exact hypergeometric R^k evaluator eliminates grid quadrature (machine precision, 8x speedup)
-- **Zero molecular fitting parameters** — all from nuclear charges and geometry
+- **Zero molecular fitting parameters** — all from nuclear charges and geometry (disclosed exception: Paper 17's PK barrier-width formula was chosen against the LiH bond length)
 
 ### Current Limitations
 - **Classical PES accuracy:** R_eq errors of 5.3-19.4% for composed molecules (PK structural overcounting). Optimal for fixed-geometry quantum simulation, not geometry optimization.

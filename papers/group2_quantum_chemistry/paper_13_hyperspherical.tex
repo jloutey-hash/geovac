@@ -40,20 +40,19 @@ below depends on it.)
 This paper introduces the hyperspherical lattice for helium.
 The original adiabatic solver obtains $E = -2.9052$~Ha with a single
 channel---nominally 0.05\% from the exact $-2.9037$~Ha, but
-non-variational (below the exact energy due to fortuitous error
-cancellation).  A 2D variational solver treating hyperradius and
+non-variational:\ it lies below the exact energy because the
+single-channel adiabatic approximation omits the positive diagonal
+Born--Oppenheimer correction.  A 2D variational solver treating hyperradius and
 hyperangle simultaneously (Note added v2.6.0) achieves a properly
-variational $0.022\%$ raw at $l_{\max} = 7$; a further Schwartz
-cusp \emph{extrapolation} at $l_{\max} = 4$ reaches $0.004\%$ but
-lies marginally below the exact energy (non-variational).
+variational $0.022\%$ raw at $l_{\max} = 7$; adding the Schwartz
+partial-wave tail at $l_{\max} = 4$ gives $0.020\%$, still above
+the exact energy.
 A separate fixed-exponent configuration interaction in the hydrogenic
 $(n,l,m)$ basis at $k = Z$, with exact rational Slater integrals and
 zero free parameters, reaches $1.88\%$ above the exact energy at
 $n_{\max} = 7$ with helium's physical Hamiltonian---a floor set by the
 missing continuum of the fixed-$k$ bound-state basis, not by the cusp.
-(An earlier ``graph-native'' figure of 0.216\% added a non-physical [retracted 2026-09-25: he-graph-native-hop-headline]
-one-body graph hop to that Hamiltonian and is withdrawn as a helium
-result; see Sec.~\ref{sec:conclusion}.)  The hyperspherical lattice is structurally
+The hyperspherical lattice is structurally
 the same kind of object as the atomic $S^3$ lattice and the molecular
 prolate spheroidal lattice, but with one key generalization: it is a
 \emph{coupled-channel expansion} in which the angular eigenvalue
@@ -66,8 +65,8 @@ As a demonstration of the framework's end-to-end capability, we
 combine the prolate spheroidal electron lattice with a nuclear
 lattice to produce ab initio rovibrational frequencies for H$_2$
 with zero experimental spectroscopic input: the fundamental
-vibrational frequency $\nu_{01} = 4157$~cm$^{-1}$ (0.1\% error)
-and the rotational constant $B_e = 59.5$~cm$^{-1}$ (2.2\% error),
+vibrational frequency $\nu_{01} = 4123$~cm$^{-1}$ (0.9\% error)
+and the rotational constant $B_e = 59.3$~cm$^{-1}$ (2.6\% error),
 computed from first principles using only nuclear charges and masses.
 \end{abstract}
 
@@ -116,8 +115,8 @@ The hierarchy of natural geometries discovered so far is:
 
 The motivation for this step is the structure of the two-electron
 wavefunction itself.  Near the three-body coalescence the exact
-wavefunction contains non-analytic terms $r_{12}^{1/2}$ and
-$r_{12}\ln r_{12}$~\cite{Fock1954}, which no polynomial basis in
+wavefunction contains logarithmic terms in the hyperradius
+$R = (r_1^2 + r_2^2)^{1/2}$, the first being $R^2\ln R$~\cite{Fock1954}, which no polynomial basis in
 single-electron coordinates represents exactly, and for an atom the
 coalescence is genuinely three-body---nuclear and interelectronic
 singularities meet at a single point.
@@ -251,8 +250,9 @@ coordinate.  This is a difference from single-electron coordinate
 systems, not a demonstrated advantage over them.
 
 Fock~\cite{Fock1954} showed that the exact two-electron wavefunction
-near the triple coalescence ($R \to 0$) contains non-analytic terms
-$R^{1/2}$ and $R\ln R$.  These terms are automatically represented
+near the triple coalescence ($R \to 0$) is an expansion in integer
+powers of $R$ times powers of $\ln R$, the first logarithmic term
+being $R^2\ln R$.  These terms are automatically represented
 by a sufficiently fine hyperradial grid, whereas they cannot be
 captured by any polynomial basis in $(r_1, r_2)$ separately.
 
@@ -578,9 +578,9 @@ energy.  The single-channel adiabatic hyperspherical solver achieves
 0.05\% error with a $600\times 600$ sparse matrix in 3~seconds; this is
 a \emph{non-variational} figure---the converged energy lies below the
 exact value (see text).  The properly variational two-dimensional
-treatment (Track~DI) reaches 0.022\% (raw, $l_{\max}=7$); the Schwartz
-cusp-corrected 0.004\% ($l_{\max}=4$) is itself a non-variational
-extrapolation that lies below the exact value.}
+treatment (Track~DI) reaches 0.022\% (raw, $l_{\max}=7$);\ with the
+Schwartz tail added at $l_{\max}=4$ it is 0.020\%, above the exact
+value.}
 \label{tab:comparison}
 \begin{ruledtabular}
 \begin{tabular}{lddc}
@@ -842,8 +842,8 @@ frequencies for H$_2$ with zero experimental spectroscopic input.
 
 \subsection{Potential energy surface}
 
-The electronic energy $E_{\mathrm{elec}}(R)$ is computed at 8 bond
-lengths from $R = 1.0$ to $2.0$~bohr using the Hylleraas basis
+The electronic energy $E_{\mathrm{elec}}(R)$ is computed at 6 bond
+lengths from $R = 1.0$ to $2.0$~bohr (step $0.2$) using the Hylleraas basis
 with Neumann $V_{ee}$ (Paper~12, $j_{\max}=2$, $l_{\max}=2$,
 27 basis functions)~\cite{loutey_paper12}.
 The total energy including nuclear repulsion is
@@ -867,8 +867,8 @@ relations~\cite{Herzberg1950}:
 
 Table~\ref{tab:morse} compares the ab initio Morse parameters with
 experimental values.  The equilibrium bond length $R_e$ is
-reproduced to 1.2\% and the vibrational frequency $\omega_e$ to
-0.8\%.  The well depth $D_e$ recovers 92.5\% of the exact value,
+reproduced to 1.3\% and the vibrational frequency $\omega_e$ to
+0.1\%.  The well depth $D_e$ recovers 92.4\% of the exact value,
 consistent with the Neumann $V_{ee}$ single-point benchmark of
 Paper~12.
 
@@ -883,10 +883,10 @@ stage.}
   \multicolumn{1}{c}{Expt.} &
   \multicolumn{1}{c}{Error (\%)} \\
   \hline
-  $D_e$ (Ha) & 0.1615 & 0.1745 & -7.5 \\
-  $R_e$ (bohr) & 1.418 & 1.401 & +1.2 \\
-  $\omega_e$ (cm$^{-1}$) & 4435 & 4401 & +0.8 \\
-  $B_e$ (cm$^{-1}$) & 59.49 & 60.85 & -2.2 \\
+  $D_e$ (Ha) & 0.1613 & 0.1745 & -7.6 \\
+  $R_e$ (bohr) & 1.420 & 1.401 & +1.3 \\
+  $\omega_e$ (cm$^{-1}$) & 4396 & 4401 & -0.1 \\
+  $B_e$ (cm$^{-1}$) & 59.26 & 60.85 & -2.6 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -894,7 +894,7 @@ stage.}
 \subsection{Rovibrational spectrum}
 
 The ab initio Morse parameters are used to construct the nuclear
-lattice of Paper~10~\cite{loutey_paper10}: a Morse vibrational chain
+lattice of Paper~10~\cite{loutey_paper10}:a Morse vibrational chain
 (SU(2) algebraic representation) coupled to an SO(3) rotational
 paraboloid.  Table~\ref{tab:rovib} compares the ab initio
 rovibrational transitions with NIST
@@ -914,17 +914,18 @@ $\to$ spectrum.}
   & \multicolumn{1}{c}{(cm$^{-1}$)} &
   \multicolumn{1}{c}{(cm$^{-1}$)} & \\
   \hline
-  $v = 0 \to 1$ & 4157 & 4161 & -0.1 \\
-  $v = 0 \to 2$ & 8037 & 8087 & -0.6 \\
-  $J = 0 \to 1$ & 119.0 & 118.0 & +0.8 \\
-  $R(0)$: $(0,0)\!\to\!(1,1)$ & 4276 & 4498 & -4.9 \\
+  $v = 0 \to 1$ & 4123 & 4161 & -0.9 \\
+  $v = 0 \to 2$ & 7973 & 8087 & -1.4 \\
+  $J = 0 \to 1$ & 116.0 & 118.5 & -2.1 \\
+  $(v,J) = (0,0)\!\to\!(1,1)$ & 4234 & 4274 & -0.9 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The rovibrational frequencies agree with experiment to 0.1--5\%,
-with the largest error in the combination band $R(0)$ where
-rotational-vibrational coupling introduces additional approximation.
+The rovibrational frequencies agree with the reference values to
+0.9--2.1\%.  The $J = 0\to1$ and $(0,0)\to(1,1)$ references are the
+level energies $118.49$ and $4273.74$~cm$^{-1}$ of
+Ref.~\cite{PachuckiKomasa2009}.
 The key achievement is that these frequencies are computed from first
 principles using only nuclear charges and masses---no experimental
 spectroscopic input at any stage of the pipeline.
@@ -935,7 +936,7 @@ spectroscopic input at any stage of the pipeline.
   from the Hylleraas basis with Neumann $V_{ee}$ (points) with Morse
   fit (solid curve).  The dissociation limit $E(\text{H} + \text{H}) =
   -1.0$~Ha is shown as a dashed line.  $D_e = 0.161$~Ha
-  ($-7.5\%$ vs.\ experiment), $R_e = 1.42$~bohr ($+1.2\%$).}
+  ($-7.6\%$ vs.\ experiment), $R_e = 1.42$~bohr ($+1.3\%$).}
   \label{fig:pes}
 \end{figure}
 
@@ -954,27 +955,17 @@ The selection rules $G(l, k, l') \neq 0$ only when $|l - l'| \leq k
 $\mathcal{G}$ whose nodes are partial waves $l$ and whose edges carry
 the allowed multipole order $k$.
 
-Within this graph, the shortest weighted path from a doubly-excited
-channel to the ionization continuum determines the leading-order
-autoionization rate.  For the $s$-wave channels ($l = 0$) of the
-$^1S$ symmetry, the dominant coupling to the continuum is direct
-($k = 0$, monopole), with Gaunt weight $G(0,0,0) = 2$.  For the
-$p$-wave channels ($l = 1$), the coupling requires at minimum a
-$k = 1$ (dipole) step: $G(1,1,0) = 2/3$, giving a graph distance
-roughly $3\times$ longer.  The $d$-wave channels ($l = 2$) require
-two steps through the coupling graph, suppressing their rates by
-an additional order of magnitude.
+Within this graph, $s$-wave channels ($l = 0$) of the $^1S$
+symmetry couple to one another through the monopole ($k = 0$,
+$G(0,0,0) = 2$) and to $p$-wave channels through the dipole
+($G(1,1,0) = 2/3$);\ $d$-wave channels couple to $s$-wave channels
+in a single quadrupole step ($G(2,2,0) \ne 0$).
 
-This hierarchy---$\Gamma_s \gg \Gamma_p \gg \Gamma_d$---is the
-angular topology's prediction for the \emph{inter-sector} width
-ordering.  Numerically, the computed non-adiabatic couplings confirm
-the pattern: $|P_{01}| \sim 0.02$ (s--s), $|P_{02}| \sim 0.3$
+The selection rules fix which couplings are allowed, not how large
+they are.  The magnitudes come from the computed non-adiabatic
+couplings:\ $|P_{01}| \sim 0.02$ (s--s), $|P_{02}| \sim 0.3$
 (s--p), and $|P_{23}| \sim 1.0$ (p--p), spanning two orders of
-magnitude.  The suppression of $s$-wave autoionization relative to
-$p$-wave mixing is a direct consequence of the Gaunt selection rules
-acting as a topological filter on decay pathways---analogous to how
-the energy-shell constraint $p_0^2 = -2E$ filters the $S^3$ spectrum
-in Paper~7~\cite{loutey_paper7}.
+magnitude.  The $s$--$s$ coupling is the weakest.
 
 %% ========================================================================
 %% XI. LIMITS OF THE ADIABATIC APPROXIMATION
@@ -983,7 +974,7 @@ in Paper~7~\cite{loutey_paper7}.
 \section{Limits of the Adiabatic Approximation for Quantitative Widths}
 \label{sec:adiabatic_limits}
 
-The inter-sector hierarchy ($s$ vs.\ $p$ vs.\ $d$) is robust, but
+The inter-sector coupling magnitudes ($s$ vs.\ $p$) are robust, but
 quantitative \emph{within-sector} width ratios---such as
 $\Gamma(2s^2\,{}^1\!S)/\Gamma(2s3s\,{}^1\!S) = 3.29$
 (the autoionization phenomenon was observed by Madden--Codling~\cite{Madden1963}, there in the dipole-allowed ${}^1\!P^{\rm o}$ series;\ the doubly-excited ${}^1\!S$ ratio quoted here is illustrative)---probe physics beyond the adiabatic
@@ -991,9 +982,7 @@ channel decomposition.  Coupled-channel exterior complex scaling (ECS)
 on the adiabatic potentials resolves $\theta$-stable complex
 eigenvalues that are quasi-bound states of the upper channels, but
 these are dominated by $p$-wave and $d$-wave character.  The narrow
-$s$-wave autoionization resonances remain unresolved: the $P_{01}$
-coupling of $0.02$ produces widths $\sim P^2 \sim 10^{-4}$~Ha,
-far below the discretized continuum spacing.
+$s$-wave autoionization resonances remain unresolved.
 
 This is not a numerical failure but a structural limitation.  The
 adiabatic channel functions $\Phi_\mu(R; \hat\Omega)$ change
@@ -1023,7 +1012,7 @@ and the integrated phase is the holonomy.)
 The numerical results of Sections~\ref{sec:angular}--\ref{sec:results}
 demonstrate that the adiabatic hyperspherical method reaches a
 nominal, non-variational $0.05\%$ for helium.  In this section we investigate the algebraic
-structure underlying this accuracy: what is analytically computable,
+structure of the angular problem: what is analytically computable,
 what is not, and what this reveals about the topology of multi-electron
 atoms.
 
@@ -1136,19 +1125,6 @@ The electron-electron potential $V_{ee}$ is nearly diagonal in the
 $\mathrm{SO}(6)$ basis.  The leading off-diagonal coupling decays
 as $|V_{n',n}| \sim |n' - n|^{-1}$ for the nuclear term, while
 $V_{ee}$ off-diagonal elements are an order of magnitude smaller.
-This sparsity is why the single-channel ($l = 0$) adiabatic
-approximation works as well as it does:\ the ground channel is only
-weakly coupled to excited channels.
-
-\textbf{[WITHDRAWN 2026-09-14]}
-[retracted 2026-09-14: p13-sparsity-causes-005]  Earlier versions made the
-sparsity responsible for the $0.05\%$ figure specifically.  This paper's own
-closing section attributes that number instead to fortuitous
-cancellation between the adiabatic approximation error and the
-finite-difference discretization error.  The two readings are not
-compatible---one makes the number a structural property of the
-framework, the other an artifact---and the sparsity attribution is
-withdrawn.
 
 \subsection{The algebraic curve and its branch points}
 \label{sec:algebraic_boundary}
@@ -1293,7 +1269,9 @@ giving $\mu_{\mathrm{free}} = 0, 4, 9, 15, 22, \ldots$
 
 The centrifugal barrier from extracting $R^{-8/2} = R^{-4}$
 is $48/(8R^2) = 6/R^2$, corresponding to $l_{\mathrm{eff}} = 3$
-and $n_{\mathrm{eff}} = 4$.
+and $n_{\mathrm{eff}} = 4$ at $\nu = 0$;\ at grand angular momentum
+$\nu$ the barrier is $(6 + \mu_{\mathrm{free}})/R^2$, giving
+$l_{\mathrm{eff}} = \nu + 3$ and $n_{\mathrm{eff}} = \nu + 4$.
 
 \subsubsection{Selection rules from $S_3$ permutation symmetry}
 
@@ -1307,8 +1285,13 @@ mixed-symmetry irrep.
 This has a profound consequence for the angular spectrum: the
 $[2,1]$ irrep does not appear at $\nu = 0$ (which carries only
 the fully symmetric $[3]$ representation).  The lowest
-$\mathrm{SO}(9)$ level containing $[2,1]$ is $\nu = 1$, with
-$\mu_{\mathrm{free}} = 4$.  The lithium ground state therefore
+$\mathrm{SO}(9)$ level containing $[2,1]$ is $\nu = 1$, but its
+harmonics are linear in the electron coordinates, so they carry
+$L = 1$ and odd parity and cannot form the ${}^2S^{e}$ state.  At
+$\nu = 2$ the $L = 0$ harmonics (the traceless combinations of
+$\bm{r}_i\cdot\bm{r}_j$) decompose as $[3] \oplus 2[2,1]$, so the
+ground state's lowest level is $\nu_0 = 2$, with
+$\mu_{\mathrm{free}} = 9$.  The lithium ground state therefore
 starts at a \emph{higher} free eigenvalue than helium---a direct
 manifestation of the Pauli exclusion principle encoded in the
 group theory of $S^8$.
@@ -1336,17 +1319,17 @@ not relevant for the ground state.
 \subsubsection{Quasi-Coulomb accuracy}
 
 Using the exact lithium energy $E = -7.4781$~Ha with
-$n_{\mathrm{eff}} = 4$:
+$n_{\mathrm{eff}} = \nu_0 + 4 = 6$:
 \begin{equation}
   Z_{\mathrm{eff}} = \sqrt{2 n_{\mathrm{eff}}^2 |E|}
-  = \sqrt{32 \times 7.4781} = 15.469,
+  = \sqrt{72 \times 7.4781} = 23.204,
 \end{equation}
 and $E_{\mathrm{qc}} = -Z_{\mathrm{eff}}^2/(2 n_{\mathrm{eff}}^2)
 = -7.478$~Ha.  Because $Z_{\mathrm{eff}}$ here is obtained by
 inverting the \emph{exact} energy, this agreement is tautological by
 construction---it is not a predictive test of the quasi-Coulomb
 model, but merely records the effective charge
-$Z_{\mathrm{eff}} = 15.469$ consistent with the lithium ground
+$Z_{\mathrm{eff}} = 23.204$ consistent with the lithium ground
 state.  (Helium's $5.5\%$ figure uses an independently computed
 $a_1$, so the two are not directly comparable.)
 
@@ -1354,7 +1337,7 @@ $a_1$, so the two are not directly comparable.)
 \label{sec:pattern}
 
 Table~\ref{tab:pattern} summarizes the algebraic structure across
-the first three elements, revealing a systematic pattern.
+the first three elements.
 
 \begin{table}[h]
 \caption{Algebraic structure comparison for H, He, and Li.  The
@@ -1370,19 +1353,16 @@ angular momentum for the ground-state symmetry.}
   \hline
   H  & $S^2$ & SO(3) & 0 & 1   & 0\%   & 0\% \\
   He & $S^5$ & SO(6) & 0 & 5/2 & 5.5\% & 5.5\% \\
-  Li & $S^8$ & SO(9) & 1 & 4   & $<0.01$\% & $<0.01$\% \\
+  Li & $S^8$ & SO(9) & 2 & 6   & n/a & n/a \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The pattern suggests that atoms with higher fermionic irreps
-(more electrons, higher $\nu_0$) are \emph{better} approximated
-by the quasi-Coulomb model.  This is physically reasonable:
-the Pauli exclusion principle forces the ground state to higher
-angular momentum, where the centrifugal barrier is stronger and
-the perturbative expansion converges more rapidly.  The topology
-flow from round $S^{3N-1}$ to a product manifold becomes less
-dramatic (relative to the total energy) as $N$ increases.
+Only the He row is a test of the quasi-Coulomb model:\ the Li row
+has no independently computed $a_1$, and its $Z_{\mathrm{eff}}$ is
+inverted from the exact energy, so the table supports no trend with
+$N$.  What the Li row records is the symmetry data:\ the Pauli
+principle forces the ground state to $\nu_0 = 2$.
 
 
 %% ========================================================================
@@ -1427,17 +1407,19 @@ Gaussian-basis Hamiltonians.  The GeoVac encoding scales as
 $O(Q^{3.79})$ in the number of qubits $Q$, against a measured
 Gaussian band of $Q^{3.9}$--$Q^{4.3}$~\cite{loutey_paper14}.  The
 structural sparsity of the two-electron integral tensor (ERI density
-$\sim 1/M^2$ for the lattice versus $\sim O(1)$ for Gaussians) is
-therefore worth $0.1$--$0.5$ in exponent, not the far larger margin
-the retired pair-diagonal counts suggested.
+decaying empirically as $\sim 1/M$ for the lattice versus $\sim O(1)$
+for Gaussians) is therefore worth $0.1$--$0.5$ in exponent.  That
+exponent is a small-basis fit;\ the load-bearing advantage in
+Paper~14 is the exact linearity of the Pauli count in $Q$ across
+molecules at fixed basis.
 
 \subsection{Open questions}
 
 Several extensions are natural:
 \begin{enumerate}
   \item \textbf{Coupled channels and autoionization:} The
-    inter-sector width hierarchy (Sec.~\ref{sec:autoionization})
-    is topologically determined, but quantitative within-sector
+    inter-sector coupling magnitudes (Sec.~\ref{sec:autoionization})
+    are computed, but quantitative within-sector
     ratios require going beyond the adiabatic approximation
     (Sec.~\ref{sec:adiabatic_limits}).  Slow variable discretization
     or full 2D complex scaling on the $(R, \alpha)$ space are the
@@ -1445,7 +1427,7 @@ Several extensions are natural:
   \item \textbf{Three-electron systems:} Li requires a 9D
     configuration space ($S^8$) with $\mathrm{SO}(9)$ Casimir
     structure (Sec.~\ref{sec:lithium}).  The ground state
-    lives in the $[2,1]$ irrep of $S_3$ at $\nu = 1$, with a
+    lives in the $[2,1]$ irrep of $S_3$ at $\nu = 2$, with a
     hierarchical topology flow.  Implementation requires deriving
     the 3-particle angular Hamiltonian in Jacobi hyperspherical
     coordinates with $S_3$ symmetry projection.
@@ -1568,9 +1550,13 @@ with no finite-difference noise or step-size dependence.
 The algebraic angular solver reveals that the adiabatic approximation,
 not the angular basis, is the accuracy bottleneck at $l_{\max} \ge 1$.
 
-At $l_{\max} = 0$, the single-channel adiabatic energy is above
-exact ($0.16\%$ error), because the lone angular channel cannot
-capture the full electron correlation.  At $l_{\max} \ge 1$,
+At $l_{\max} = 0$, the single-channel adiabatic energy lies below
+exact once the inner hyperradial wall is at $R_{\min} \le 0.05$~bohr
+($-0.024\%$ at $R_{\min} = 0.05$~bohr, the wall of
+Table~\ref{tab:spectral_radial_convergence}, and $-0.042\%$ at
+$R_{\min} = 0.02$~bohr, Gegenbauer $n_{\mathrm{basis}} = 15$);\ the
+$+0.16\%$ obtained with the algebraic solver's default
+$R_{\min} = 0.1$~bohr Dirichlet wall is that wall's artifact.  At $l_{\max} \ge 1$,
 additional angular channels add electron correlation without the
 compensating non-adiabatic kinetic cost, and the adiabatic energy
 dives \emph{below} exact ($0.56$--$0.65\%$ error).  The error
@@ -1639,7 +1625,8 @@ coupled-channel error decreases (convergent).
 \begin{table}[h]
 \caption{He ground-state energy convergence with $l_{\max}$
 using the exact $Q$-matrix ($q_{\mathrm{mode}} = \mathrm{exact}$,
-$n_{\mathrm{basis}} = 15$, $n_{\mathrm{channels}} = 3$).
+$n_{\mathrm{basis}} = 15$, $n_{\mathrm{channels}} = 3$), with the
+default inner Dirichlet wall $R_{\min} = 0.1$~bohr.
 Exact He: $-2.9037$~Ha.}
 \label{tab:coupled_convergence}
 \begin{ruledtabular}
@@ -1657,36 +1644,19 @@ Exact He: $-2.9037$~Ha.}
 \end{ruledtabular}
 \end{table}
 
-The $P$-only coupled result (without $Q$) and the full $P{+}Q$
-result bracket the exact energy from below and above, respectively,
-at all $l_{\max}$.  This bounding property provides a practical
-error estimate.
+The overcorrection at $l_{\max} = 0$ ($1.1\%$) is dominated by the
+diagonal DBOC, which cannot be reduced by improving the $Q$-matrix
+alone.  At $l_{\max} \ge 1$, the tabulated error decreases
+monotonically toward $0.21\%$.
 
-The overcorrection at $l_{\max} = 0$ ($1.1\%$) is structural:
-it is dominated by the diagonal DBOC, which cannot be reduced by
-improving the $Q$-matrix alone.  At $l_{\max} \ge 1$, the
-coupled-channel error decreases monotonically, converging
-algebraically as $\sim l_{\max}^{-2}$ toward a structural floor
-of $0.19$--$0.20\%$.
-
-Table~\ref{tab:coupled_convergence} presents the definitive
-characterization of this convergence ceiling:
-\begin{itemize}
-  \item The convergence rate is algebraic ($\sim l_{\max}^{-2}$),
-    not exponential---consistent with the polynomial decay of
-    angular correlation contributions.
-  \item Three coupled channels are sufficient: increasing
-    $n_{\mathrm{channels}}$ from 3 to 5 changes the energy by
-    $< 0.001\%$.
-  \item The $n_{\mathrm{basis}}$ and radial grid parameters are
-    fully converged (sensitivity checks confirm $< 0.001\%$
-    dependence).
-  \item The $0.19$--$0.20\%$ floor is set by the adiabatic
-    channel truncation inherent to the coupled-channel $P{+}Q$
-    formalism.  Sub-$0.1\%$ accuracy requires the variational
-    2D solver (Paper~15~\cite{loutey_paper15}) to bypass the adiabatic
-    approximation entirely.
-\end{itemize}
+That apparent limit is the inner wall, not the coupled-channel
+formalism.  Moving the Dirichlet wall from $R_{\min} = 0.1$ to
+$0.02$~bohr takes the $l_{\max} = 3$ error from $0.220\%$ to
+$0.0075\%$, and at $R_{\min} = 0.02$ the $l_{\max} = 5$ energy lies
+$0.0022\%$ \emph{below} exact;\ so the $P{+}Q$ result is not an
+upper bound once the wall is converged.  Three coupled channels are
+sufficient:\ increasing $n_{\mathrm{channels}}$ from 3 to 5 changes
+the energy by $< 0.001\%$.
 
 The exact $Q$-matrix is computed algebraically via
 $Q_{\mu\nu} = \sum_\kappa P_{\mu\kappa}P_{\kappa\nu}
@@ -1720,10 +1690,10 @@ point improvement over the FD results at every $l_{\max} > 0$.
 The coupled-channel extension confirms that the adiabatic
 approximation---not the angular basis---is the dominant error source:
 single-channel error diverges with $l_{\max}$, while coupled-channel
-error with exact $Q$-matrix converges algebraically
-($\sim l_{\max}^{-2}$) from $0.31\%$ at $l_{\max} = 1$ to $0.21\%$
-at $l_{\max} = 5$, asymptoting to a structural floor of
-$0.19$--$0.20\%$ set by the adiabatic channel truncation.
+error with exact $Q$-matrix decreases from $0.31\%$ at
+$l_{\max} = 1$ to $0.21\%$ at $l_{\max} = 5$ on the default
+$R_{\min} = 0.1$~bohr wall, and to $|{\rm error}| < 0.01\%$ at
+$l_{\max} = 3$ and $5$ with $R_{\min} = 0.02$~bohr.
 
 \subsection{Spectral Laguerre hyperradial solver}
 \label{sec:spectral_radial}
@@ -1761,7 +1731,8 @@ sufficient for full convergence (Table~\ref{tab:spectral_radial_convergence}).
 
 \begin{table}[h]
 \caption{Convergence of the spectral Laguerre hyperradial solver with
-$n_{\mathrm{basis}}$ (single-channel, algebraic angular input, $l_{\max} = 0$).
+$n_{\mathrm{basis}}$ (single-channel, algebraic angular input, $l_{\max} = 0$,
+inner wall $R_{\min} = 0.05$~bohr; every converged entry ($n_{\mathrm{basis}} \ge 10$) lies below the exact $-2.9037$~Ha).
 FD reference: $E = -2.90425$~Ha at $N_R = 2000$.}
 \label{tab:spectral_radial_convergence}
 \begin{ruledtabular}
@@ -1941,14 +1912,14 @@ The hyperspherical adiabatic solver obtains $E = -2.9052$~Ha for the
 helium ground-state energy using a single adiabatic channel, a
 $600 \times 600$ sparse matrix, and $\sim$3~seconds of runtime.
 This nominal 0.05\% result is non-variational---the energy lies below
-the exact value due to fortuitous cancellation between the adiabatic
-approximation error and the finite-difference discretization error
-(see Note added v2.6.0).  A 2D variational solver treating
+the exact value because the single-channel adiabatic approximation
+omits the positive diagonal Born--Oppenheimer correction
+(Sec.~\ref{sec:dboc});\ the finite-difference-free spectral solver
+also lands below exact.  A 2D variational solver treating
 hyperradius and hyperangle simultaneously achieves a properly
 variational $0.022\%$ raw at $l_{\max} = 7$ (above the exact
-energy); the Schwartz cusp correction at $l_{\max} = 4$ is an
-\emph{extrapolation} that reaches $0.004\%$ but lies marginally
-below the exact energy (non-variational).
+energy);\ adding the Schwartz partial-wave tail at $l_{\max} = 4$
+gives $0.020\%$, still above the exact energy.
 
 The hyperspherical lattice extends the natural geometry principle to
 multi-particle systems: it is structurally the same kind of object
@@ -1963,7 +1934,7 @@ problems are linked by the non-adiabatic coupling $P_{\nu\mu}(R)$.
 Combined with the prolate spheroidal electron lattice and the nuclear
 lattice, the GeoVac framework produces ab initio rovibrational
 frequencies for H$_2$ from first principles: $\omega_e =
-4435$~cm$^{-1}$ ($+0.8\%$), $B_e = 59.5$~cm$^{-1}$ ($-2.2\%$),
+4396$~cm$^{-1}$ ($-0.1\%$), $B_e = 59.3$~cm$^{-1}$ ($-2.6\%$),
 with no experimental spectroscopic input at any stage.  The path
 forward is clear: improve the electronic PES with larger CI spaces,
 and add coupled channels for sub-0.1\% atomic accuracy (the Level~4
@@ -1972,18 +1943,18 @@ constructed, Paper~15).
 
 \paragraph{Note added v2.6.0.}
 The adiabatic result $E = -2.9052$~Ha reported in the abstract is
-non-variational: it lies below the exact energy $-2.903724$~Ha due to
-fortuitous cancellation between the adiabatic approximation error
-(which raises the energy) and the finite-difference discretization
-error (which lowers it).  A 2D variational solver treating
+non-variational: it lies below the exact energy $-2.903724$~Ha
+because the single-channel adiabatic approximation omits the positive
+diagonal Born--Oppenheimer correction (Sec.~\ref{sec:dboc}).  A 2D
+variational solver treating
 $(R_e, \alpha)$ simultaneously (\texttt{level3\_variational.py})
 yields a properly variational $0.022\%$ raw at $l_{\max} = 7$
-(above exact); the Schwartz cusp correction at $l_{\max} = 4$ is
-an extrapolation reaching $0.004\%$ that lies marginally below the
-exact energy (non-variational; recomputed $0.0035\%$,
-$E_{\rm corr} = -2.90383$~Ha vs exact $-2.90372$~Ha).  The
-adiabatic structural floor of 0.19--0.20\%
-(Sec.~XI) is broken at $l_{\max} \geq 2$ (0.053\% raw).  The
+(above exact).  At $l_{\max} = 4$ the raw energy is
+$-2.902939$~Ha ($0.027\%$);\ adding the Schwartz tail
+$-A\sum_{l>4}(l+\tfrac12)^{-4}$ with the He coefficient
+$A = 0.074226$~Ha~\cite{BromleyMitroy2006} ($-0.194$~mHa) gives
+$E_{\rm corr} = -2.903133$~Ha, $0.020\%$ above exact.  At
+$l_{\max} = 2$ the 2D solver gives $0.053\%$ raw.  The
 convergence bottleneck is the per-channel angular basis size, not the
 partial-wave truncation.
 
@@ -2151,6 +2122,12 @@ G.~Herzberg,
 National Institute of Standards and Technology,
 ``Diatomic Spectral Database --- H$_2$,''
 \url{https://www.nist.gov/pml/diatomic-spectral-database}.
+
+\bibitem{PachuckiKomasa2009}
+K.~Pachucki and J.~Komasa, arXiv:0811.4355.
+
+\bibitem{BromleyMitroy2006}
+M.~W.~J. Bromley and J.~Mitroy, arXiv:physics/0601049.
 
 \bibitem{Madden1963}
 R.~P.~Madden and K.~Codling,

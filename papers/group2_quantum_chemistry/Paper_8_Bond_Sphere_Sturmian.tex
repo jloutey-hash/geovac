@@ -28,9 +28,9 @@ their Natural Sturmian Basis}
 A diatomic molecule is geometrically a single three-sphere $S^3$ with two
 weighted poles---the \emph{bond sphere}---in which the internuclear distance
 $R$ encodes as a polar angle $\gamma$ via
-$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$ and all cross-atom matrix
-elements are $SO(4)$ Wigner $D$-matrix elements evaluated at the bond
-rotation $e^{i\gamma A_y}$.
+$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$ and, in a single-$n$ model,
+the cross-atom matrix elements are taken to be $SO(4)$ Wigner $D$-matrix
+elements evaluated at the bond rotation $e^{i\gamma A_y}$.
 \emph{Positive results:}
 The bond sphere geometry is consistent, with the $\gamma(R)$ encoding,
 heteronuclear egg metric, and Runge--Lenz alignment following from $SO(4)$
@@ -41,15 +41,17 @@ unverified.)
 The $D$-matrix enforces selection rules for $\sigma$-bonds:
 $D^2_{10,10}(\gamma) = 1$ and $D^2_{00,10}(\gamma) = 0$ for all $\gamma$.
 \emph{Negative theorem:}
-In the molecular Sturmian basis with shared momentum scale $p_0$, the
+In the molecular Sturmian basis with shared momentum scale $p_0$, with the
+between-centre overlap and potential blocks both taken as single-$n$
+$D$-matrix elements and the same-centre blocks held constant, the
 one-electron Hamiltonian and overlap obey the two-term identity
 $H_{ij} = -\tfrac{1}{2}p_0^2 S_{ij} + (1-\beta_j)V_{ij}$, and their entire
 $R$-dependence is a single orthogonal $SO(4)$ congruence $D^{(n)}(\gamma(R))$
 that cancels in the generalized eigenvalue problem: the eigenvalues are
 independent of $R$.  In this single-$n$, shared-$p_0$ form, binding would require the
 $R$-dependent prolate spheroidal spectrum $\beta_k(R)$;\ but the genuine
-cross-$n$ Coulomb--Sturmian overlap couples $n$, escapes the theorem, and
-supplies that $R$-dependence algebraically via Shibuya--Wulfman
+cross-$n$ Coulomb--Sturmian overlap and potential couple $n$, escape the
+theorem, and supply that $R$-dependence algebraically via Shibuya--Wulfman
 (Remark~\ref{rem:overlap_imposed}), so what is ruled out is this approximation,
 not Sturmian molecular binding.  The continuous-geometry route---working in the
 label set and channel structure of prolate spheroidal coordinates, where the
@@ -91,8 +93,9 @@ bonding region.
 This paper proposes the resolution: the \emph{bond sphere}.  A diatomic
 molecule is described by a single $S^3$ with two weighted poles, one per
 nucleus.  The atomic $S^3$ manifolds are the $R \to \infty$ limit.
-Cross-atom matrix elements that are currently approximated become exact
-$SO(4)$ Wigner $D$-matrix elements.  The natural basis for this geometry
+Cross-atom matrix elements that are currently approximated become
+$SO(4)$ Wigner $D$-matrix elements in a single-$n$ model
+(Sec.~\ref{sec:sturmian}).  The natural basis for this geometry
 is the Sturmian basis, in which all functions share a single momentum
 parameter $p_0$ and therefore live on the same $S^3$ by construction.
 The $\beta_k$ eigenvalues that encode nuclear attraction are determined
@@ -151,8 +154,8 @@ De~Fazio, Cavalli, and Aquilanti~\cite{DeFazio2003} developed the
 on $S^3$ via hyperspherical harmonics---arriving at sparse discrete
 Hamiltonians from the continuous side, converging with GeoVac's
 label-first construction (see Sec.~\ref{sec:multi_electron}).
-Avery~\cite{Avery2004} formulated the generalized Sturmian secular
-equation for multi-electron atoms using configuration-dependent
+Avery and Avery~\cite{Avery2004} applied the generalized Sturmian secular
+equation to multi-electron atoms using configuration-dependent
 scaling parameters.
 
 \item \textit{$SO(4)$ representation theory}~\cite{Bander1966,%
@@ -211,9 +214,11 @@ one-electron $(H,S)$ obey the two-term identity
 $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and share a single
 $SO(4)$ congruence $D^{(n)}(\gamma(R))$, so the eigenvalues are independent
 of the bond angle $\gamma$ and hence of $R$.  The genuine cross-$n$
-Coulomb--Sturmian overlap escapes the theorem and binds, supplying the
+Coulomb--Sturmian overlap escapes the theorem, supplying the
 $R$-dependence algebraically through the Shibuya--Wulfman overlap
-(Corollary~\ref{cor:binding}), but its non-orthogonality mixes $l$ across
+(Corollary~\ref{cor:binding}), and a validated two-centre
+Coulomb--Sturmian H$_2$ CI binds (Paper~60~\cite{loutey_paper60}), but its
+non-orthogonality mixes $l$ across
 centres and hits an $l$-mixing qubit-encoding wall (orthogonalization
 destroys the Gaunt $l$-sparsity).
 
@@ -330,16 +335,18 @@ At $R \to 0$: $\gamma \to \pi$ (antipodal poles, united-atom limit).
 
 \subsection{Eigenfunctions as $SO(4)$ Wigner $D$-Matrix Elements}
 
-When a second pole is introduced at angle $\gamma$, the cross-center
-matrix elements are
+When a second pole is introduced at angle $\gamma$, the $SO(4)$
+rotation matrix elements are
 \begin{equation}
 \braket{n', l', m' | U(g(\gamma)) | n, l, m}
 = D^{(n)}_{(l'm'),(lm)}(g(\gamma)),
 \label{eq:D_matrix}
 \end{equation}
 where $g(\gamma)$ is the $SO(4)$ rotation that maps one pole to the
-other.  The current Mulliken/Fourier/bridge cross-atom terms are
-approximations to these exact $D$-matrix elements.
+other.  The bond-sphere model takes the cross-center matrix elements to be
+these $D$-matrix elements;\ like the current Mulliken/Fourier/bridge
+cross-atom terms, this is an approximation to the genuine cross-center
+integrals, which couple different $n$ (see below).
 
 \subsection{The Bond-Sphere Lattice}
 
@@ -644,8 +651,8 @@ Sturmian functions satisfy
   = \frac{p_0}{n}\,\delta_{nn'}\,\delta_{ll'}\,\delta_{mm'}.
 \label{eq:sturmian_orthog}
 \end{equation}
-The $1/r$-weighted completeness precisely matches the Coulomb kernel
-in cross-center integrals, making the two-center problem exact.
+The $1/r$-weighted completeness matches the Coulomb kernel of the
+same-center potential.
 
 \subsection{Geometric Inconsistency of the Hydrogenic Basis}
 
@@ -660,24 +667,31 @@ a lowest-order correction for this geometric mismatch.
 
 In the Sturmian basis, the mismatch is zero by construction.
 
-\subsection{SW Integrals Are Exact in the Sturmian Basis}
+\subsection{The Single-$n$ $D$-Matrix Model of the SW Integrals}
 
-This is the central result.  In the Sturmian basis:
+In the Sturmian basis the bond-sphere model takes
 \begin{equation}
-\boxed{
 \left\langle S^A_{n'l'm'}\left| -\frac{Z_B}{r_B}\right|
 S^A_{nlm}\right\rangle
 = -\frac{Z_B}{p_0}\, D^{(n)}_{(l'm'),(lm)}(\gamma),
-}
 \label{eq:sw_exact}
 \end{equation}
-exactly, with no form factor.
+with no form factor.
 
-The derivation: the cross-center Coulomb potential is related to the
-same-center potential by an $SO(4)$ rotation (Eq.~\eqref{eq:D_matrix}).
-Using Sturmian orthogonality (Eq.~\eqref{eq:sturmian_orthog}), the
-$1/r_A$ matrix element collapses to a Kronecker delta, and the sum
-over intermediate states reduces to a single $D$-matrix element.
+The model treats the cross-center Coulomb potential as the
+same-center potential carried by the $SO(4)$ bond rotation
+(Eq.~\eqref{eq:D_matrix}).  Sturmian orthogonality
+(Eq.~\eqref{eq:sturmian_orthog}) then collapses the $1/r_A$ matrix
+element to a Kronecker delta, and the sum over intermediate states
+reduces to a single $D$-matrix element.  The genuine cross-center
+potential is a translation on the Fock sphere, not a rotation
+(Sec.~\ref{sec:bond_sphere}), and Eq.~\eqref{eq:sw_exact} is a model,
+not an identity.  At $p_0 = Z_A = Z_B = 1$ the model gives
+$\langle 1s^A|1/r_B|1s^A\rangle = 1$ at every $R$ ($D^{(1)} = 1$), while
+the direct integral $1/R - (1+1/R)e^{-2R}$ is $0.896$, $0.610$, $0.328$
+and $0.125$ at $R = 0.5$, $1.4$, $3.015$ and $8$~bohr;\ and
+$\langle 1s^A|1/r_B|2s^A\rangle$, which the block-diagonal $D^{(n)}$ sets
+to zero, is nonzero.
 
 When the same calculation is attempted with hydrogenic eigenstates of
 different $p_0$ values, the orthogonality does not apply, and one
@@ -813,7 +827,8 @@ lives on the bond sphere rather than on a single-center sphere.
 
 \begin{theorem}[Atom-centered Sturmian failure]
 \label{thm:failure}
-For a heteronuclear diatomic with $Z_A/Z_B = k > 1$, there is no
+In the single-$n$ $D$-matrix model (Eq.~\eqref{eq:sw_exact}), for a
+heteronuclear diatomic with $Z_A/Z_B = k > 1$, there is no
 atom-centered Sturmian basis with shared $p_0$ that simultaneously
 binds both centers.
 \end{theorem}
@@ -831,7 +846,8 @@ $p_0 \approx \sqrt{-2E_A}$ of the heavier atom with $Z_A \gg Z_B$,
 this condition is generically satisfied.
 
 The cross-nuclear correction from $Z_A$ on the $B$-center $1s$ function,
-evaluated in the atom-centered Sturmian basis, is
+evaluated in the atom-centered Sturmian basis with the single-$n$
+model of Eq.~\eqref{eq:sw_exact}, is
 $\Delta\varepsilon = -(Z_A/p_0) D^{(1)}(\gamma)$.  For $n = 1$,
 $D^{(1)} = 1$, so $\Delta\varepsilon = -Z_A/p_0$.  The total diagonal
 becomes
@@ -843,7 +859,7 @@ For binding: $\varepsilon_1^{\text{tot}} < 0$, i.e.,
 $\beta_{\text{eff}} > p_0/(2Z_B)$.  But the atom-centered $\beta_1 = p_0/Z_B$
 gives $\varepsilon_1 = p_0^2/2 - Z_B p_0$ plus the cross-nuclear
 $-Z_A/p_0$.  At $p_0 = 3.168$ (LiH): $\varepsilon_1^{\text{tot}} =
-5.02 - 3.17 - 0.95 = +0.85$~Ha---still positive.
+5.02 - 3.17 - 0.95 = +0.90$~Ha---still positive.
 
 The cross-nuclear correction is insufficient because the atom-centered
 function has the wrong spatial extent: it was defined against $Z_B$
@@ -946,13 +962,15 @@ bond geometry appears in the coupling structure.
 \label{sec:structural_theorem}
 %% ========================================================================
 
-The computational diagnostic arc v0.9.20--v0.9.34 (29~versions) exhaustively
+The computational diagnostic arc v0.9.20--v0.9.34 (15~versions) exhaustively
 tested the Sturmian bond sphere for LiH.  Every variant failed.  This section
 distills the failure into a single structural theorem that explains why the
 Sturmian basis, despite its geometric elegance, cannot produce
 geometry-dependent binding in this single-$n$ approximation without solving a
 continuous PDE at every~$R$---while the genuine cross-$n$ Coulomb--Sturmian
-overlap escapes the theorem and binds (Remark~\ref{rem:overlap_imposed}), so the
+overlap escapes the theorem (Remark~\ref{rem:overlap_imposed}) and a
+validated two-centre Coulomb--Sturmian H$_2$ CI binds
+(Paper~60~\cite{loutey_paper60}), so the
 obstruction is to the approximation, not to Sturmian molecular binding.
 
 \begin{theorem}[Sturmian structural theorem]
@@ -968,8 +986,8 @@ where $S_{ij}=\langle S_i|S_j\rangle$ is the overlap matrix,
 $V_{ij}=\langle S_i|V_{\mathrm{mol}}|S_j\rangle$ is the nuclear-attraction
 matrix, and $\beta_j$ is the Sturmian eigenvalue (effective-charge
 multiplier, $\beta_n = p_0 n/Z$) of orbital~$j$.  The Hamiltonian is
-\emph{not} a scalar multiple of $S$; rather, in the bond-sphere
-construction both $S$ and $V$ (hence $H$) carry their \emph{entire}
+\emph{not} a scalar multiple of $S$; rather, in the single-$n$ bond-sphere
+model both $S$ and $V$ (hence $H$) carry their \emph{entire}
 $R$-dependence through the same $SO(4)$ Wigner $D$-matrix
 $D^{(n)}(\gamma(R))$: within-center blocks are $R$-independent
 (orthonormal Sturmians, $S=\mathbb{1}$; uniform self-attraction,
@@ -1023,12 +1041,14 @@ decreasing pure-$1/R$ curve with no interior minimum (no bound state).
 \begin{remark}[Scope: the overlap premise is imposed, not generic]
 \label{rem:overlap_imposed}
 The congruence hinges on \emph{both} cross-blocks being the orthogonal
-$D^{(n)}(\gamma)$.  For the cross-nuclear \emph{potential}
-$\langle S^A|{-}Z_B/r_B|S^A\rangle$ this holds exactly
-(Eq.~\eqref{eq:sw_exact}: the $1/r$ weight invokes Sturmian orthogonality,
-collapsing the sum to a single $D$-matrix element).  The cross-center
-\emph{overlap} $\langle S^A_{nlm}|S^B_{n'l'm'}\rangle$ carries no such
-$1/r$ weight and does \emph{not} collapse: as a translation on the Fock
+$D^{(n)}(\gamma)$, with the same-centre blocks held constant.  Neither
+holds as an identity for the genuine potential:\ the same-centre element
+$\langle S^A|{-}Z_B/r_B|S^A\rangle$ varies with $R$ and couples $1s$ to
+$2s$ (Sec.~\ref{sec:sturmian}; Eq.~\eqref{eq:sw_exact} is its single-$n$
+model, and for $n \ge 2$ that model's $\gamma$-dependence lies outside the
+theorem's constant same-centre blocks).  The
+cross-center \emph{overlap} $\langle S^A_{nlm}|S^B_{n'l'm'}\rangle$
+does not collapse either:\ as a translation on the Fock
 sphere it couples different~$n$ (Sec.~\ref{sec:heteronuclear} above and
 the SW literature~\cite{Avery2004IJQC,RedWeatherford2004}).  A direct
 evaluation confirms it---for shared $p_0$, e.g.\
@@ -1036,14 +1056,17 @@ $\langle\chi^A_{1s}|\chi^B_{2s}\rangle = -0.47$ and
 $\langle\chi^A_{1s}|\chi^B_{2p_0}\rangle = -0.52$ at $R=3.015$, both
 larger than the within-$n$ diagonal $\langle\chi^A_{1s}|\chi^B_{1s}\rangle
 = +0.35$.  The backing test therefore \emph{imposes} $S_{AB} = f\,D^{(n)}$
-by construction rather than computing the genuine overlap; the
+and $V_{AB}\propto D^{(n)}$ by construction rather than computing the
+genuine integrals; the
 geometry-independence it verifies is a property of the bond-sphere
 $D$-matrix \emph{model}, not of the genuine cross-$n$ Coulomb--Sturmian
 basis.  Because a cross-$n$ overlap breaks the shared congruence
 ($S$ and $H$ no longer pull back to the same $R$-independent forms),
-binding is \emph{not} excluded for the genuine basis---consistent with published Coulomb--Sturmian Hartree--Fock
-calculations~\cite{HerbstAveryDreuw2019} (there for atoms; the molecular
-cross-$n$ binding is the escape this Remark establishes).  The theorem thus
+binding is \emph{not} excluded for the genuine basis, and a validated
+two-centre Coulomb--Sturmian H$_2$ CI binds (Paper~60~\cite{loutey_paper60});
+the cross-$n$ overlap structure is that of published Coulomb--Sturmian
+Hartree--Fock calculations~\cite{HerbstAveryDreuw2019}, which are for
+atoms.  The theorem thus
 delimits a specific approximation; it is not a no-go for Sturmian molecular
 binding.  (Backing: \texttt{tests/test\_paper8\_overlap\_cross\_n.py}.)
 \end{remark}
@@ -1076,17 +1099,18 @@ scale separation that was the motivation for the extension.
 \paragraph{Sturmian basis for heteronuclear systems.}
 The Sturmian basis resolves the geometric mismatch between $n$-shells by
 placing all orbitals on a single $S^3$ with shared momentum scale $p_0$.
-In this basis the cross-nuclear potential $-Z_B/r_B$ reduces exactly to
-a single $D$-matrix element (Eq.~\eqref{eq:sw_exact}), while different
-Sturmian $n$-shells genuinely couple through the Shibuya--Wulfman
-cross-center \emph{overlap} (Remark~\ref{rem:overlap_imposed})---in
+The single-$n$ model takes the cross-nuclear potential $-Z_B/r_B$ to be
+a single $D$-matrix element (Eq.~\eqref{eq:sw_exact}), while in the
+genuine basis different Sturmian $n$-shells couple through the
+cross-nuclear potential and the Shibuya--Wulfman cross-center
+\emph{overlap} (Remark~\ref{rem:overlap_imposed})---in
 contrast to the hydrogenic basis, where the block-diagonality constraint
 forbids cross-$n$ coupling.
 
 However, the Sturmian approach fails for heteronuclear molecules (e.g.,
 LiH) because no single $p_0$ simultaneously satisfies the
 self-consistency condition $p_0 = \sqrt{-2E}$ for both atoms
-(Corollary~\ref{cor:dual_p0}).  Twenty-nine diagnostic versions
+(Corollary~\ref{cor:dual_p0}).  Fifteen diagnostic versions
 (v0.9.20--34) explored Sturmian-based molecular Hamiltonians; all
 exhibited pathological behavior for LiH due to this $p_0$
 incompatibility.  The heteronuclear problem thus remains open.
@@ -1124,8 +1148,8 @@ converge to it).  Aquilanti and collaborators proceed continuous
 $\to$ discrete: the hyperquantization
 algorithm~\cite{DeFazio2003,AquilantiCapecchi2000} discretizes continuous
 scattering problems on~$S^3$ via harmonic analysis and discrete
-polynomials.  Avery~\cite{Avery2004} formulated the generalized Sturmian
-secular equation for multi-electron systems, using
+polynomials.  Avery and Avery~\cite{Avery2004} applied the generalized
+Sturmian secular equation to multi-electron systems, using
 configuration-dependent scaling parameters that are closely related to
 the $\beta_k$ eigenvalues of Sec.~\ref{sec:beta}.  Neither group
 previously combined these bases with qubit encoding for quantum
@@ -1254,7 +1278,7 @@ canonical structures, arrived at independently from both directions;
 (c)~Gaunt selection rule sparsity is basis-independent, depending only
 on the angular quantum numbers, not on radial functions;
 (d)~L\"owdin orthogonalization inflates the Pauli 1-norm by
-$3$--$5\times$, making nonorthogonal bases structurally disadvantaged
+$2.4$--$3.3\times$, making nonorthogonal bases structurally disadvantaged
 for qubit Hamiltonians.
 
 
@@ -1336,12 +1360,13 @@ poles.
 \paragraph{Positive structural results.}
 The bond sphere geometry is consistent and theoretically motivated.
 The internuclear distance encodes as a polar angle $\gamma$ via
-$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$, and all cross-atom
-matrix elements are $SO(4)$ Wigner $D$-matrix elements evaluated at the
-bond rotation $e^{i\gamma A_y}$ (Eq.~\eqref{eq:D_matrix}).  The
+$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$, and in the single-$n$
+model the cross-atom matrix elements are taken to be $SO(4)$ Wigner
+$D$-matrix elements evaluated at the bond rotation $e^{i\gamma A_y}$
+(Eqs.~\eqref{eq:D_matrix} and~\eqref{eq:sw_exact}).  The
 Runge--Lenz alignment argument (Sec.~\ref{sec:runge_lenz}) shows that
-$s$--$p$ hybridization is a dynamical consequence of the two-center
-potential.  For heteronuclear molecules, the bond sphere becomes an
+the bond rotation is generated by the Runge--Lenz component $A_y$
+perpendicular to the bond.  For heteronuclear molecules, the bond sphere becomes an
 egg---a prolate spheroid whose asymmetry encodes bond polarity
 (Sec.~\ref{sec:heteronuclear}).  The kinetic membrane
 (Sec.~\ref{sec:membrane}) is proposed as a combinatorial analog of Bader's
@@ -1356,7 +1381,10 @@ proofs and the kinetic scale factor $-1/16$ are unchanged.
 
 \paragraph{Negative theorem: Sturmian basis limits.}
 The Sturmian structural theorem (Theorem~\ref{thm:structural}) proves
-that in the shared-$p_0$ Sturmian basis, the one-electron $(H,S)$ obey the
+that in the shared-$p_0$ Sturmian basis, with the between-centre overlap
+and potential blocks taken as single-$n$ $D$-matrix elements and the
+same-centre blocks constant, the one-electron
+$(H,S)$ obey the
 two-term identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and
 carry their entire $R$-dependence in a single orthogonal $SO(4)$ congruence,
 making the generalized eigenvalues independent of the bond angle $\gamma$
@@ -1367,21 +1395,19 @@ algebraically (Corollary~\ref{cor:binding}), so what is ruled out is this
 approximation, not Sturmian molecular binding.
 For heteronuclear diatomics, no shared $p_0$ simultaneously represents
 both atomic length scales (Corollary~\ref{cor:dual_p0}).  This theorem
-was verified computationally across 29~diagnostic versions
+was verified computationally across 15~diagnostic versions
 (v0.9.20--v0.9.34), all of which failed for LiH by the predicted
 mechanism.
 
 \paragraph{Computational path forward.}
 The bond sphere is geometrically consistent but its computational
 implementation requires either the full LCAO architecture---which
-preserves atom-specific length scales and produces a vertical binding
-energy $D_e^{\text{CP}} = 0.110$~Ha at nmax$= 3$ ($\sim 20\%$ error
-vs.\ experiment, with the $R$-independent graph-Laplacian kinetic energy
-giving a monotonically attractive PES with no equilibrium geometry,
-documented in the companion paper~\cite{loutey_fci})---or a non-Sturmian
-basis that
-avoids the $SO(4)$-congruence (geometry-blind) constraint of
-Theorem~\ref{thm:structural}.
+preserves atom-specific length scales but has an $R$-independent
+one-electron block, giving a monotonically attractive PES with no
+equilibrium geometry (documented in the companion
+paper~\cite{loutey_fci})---or a basis outside the single-$n$
+$D$-matrix model of Theorem~\ref{thm:structural} (non-Sturmian, or the
+genuine cross-$n$ Coulomb--Sturmian basis, Paper~60~\cite{loutey_paper60}).
 The LCAO path is superseded (FCI-M:\ no equilibrium geometry;\ the
 architecture moved to natural geometries);\ the bond sphere geometry
 remains a theoretical frame for reading those results.
@@ -1450,8 +1476,9 @@ J. Chem. Phys. \textbf{85}, 1362--1375 (1986).
 
 \bibitem{Aquilanti1990}
 V.~Aquilanti, S.~Cavalli, C.~Coletti, and G.~Grossi,
-``Alternative Sturmian bases and momentum space applications,''
-Chem. Phys. \textbf{209}, 405--416 (1996).
+``Alternative Sturmian bases and momentum space orbitals: an application
+to the hydrogen molecular ion,''
+Chem. Phys. \textbf{209}, 405--419 (1996).
 
 \bibitem{Aquilanti2001}
 V.~Aquilanti, A.~Caligiana, S.~Cavalli, and C.~Coletti,
@@ -1512,6 +1539,13 @@ J.~Loutey,
 ``The Molecular Fock Projection: Diatomic Molecules as Prolate
 Spheroidal Lattices,''
 GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper60}
+J.~Loutey,
+``The Generalized-Sturmian Secular Equation Block-Encodes Without a
+Metric: A Quantum-Algorithm Analysis, Metric-Free for Atoms and a
+Conditioning Frontier for Molecules,''
+GeoVac Paper~60 (2026).
 
 \bibitem{loutey_paper14}
 J.~Loutey,

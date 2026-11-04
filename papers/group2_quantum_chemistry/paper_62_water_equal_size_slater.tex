@@ -52,7 +52,7 @@ Hartree--Fock gain is two opposite pieces that cancel on water.
 twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107\,382}$ terms on
 46 frozen-core qubits, because in canonical orbitals without degenerate
 pairs it is fixed by the orbital count and the $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
-across the kits.  \emph{Caps.}  One geometry and one method per molecule;
+across the kits other than the one-scale Sturmian.  \emph{Caps.}  One geometry and one method per molecule;
 the ladder and the native kits are water only.
 The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
 below the best atom-set rung, and $21.7$~mHa below once the $3d$ is also set
@@ -267,7 +267,7 @@ bought by the number of correlating functions, which is the same in
 both bases.  That the mean-field advantage of Slater functions exists
 is textbook; what is measured here is its size at equal count under an
 identical design rule, and the fact that the correlated advantage is
-less than a third of it.
+$0.41$ of it.
 
 \section{The framework's own exponential kits, negative}
 \label{sec:native}
@@ -587,7 +587,7 @@ Basis & $Q$ fc & $N_{\rm Pauli}$ fc & \multicolumn{1}{c}{$\lambda$ fc} &
 $Q$ ae & $N_{\rm Pauli}$ ae & \multicolumn{1}{c}{$\lambda$ ae} &
 \multicolumn{1}{c}{CCSD(T) fc} \\
 \hline
-Slater DZP & 46 & \gvq{h2o_ccpvdz_pauli}{107\,382} & \gvq{p62_dzp_lambda_fc}{706.3} & 48 & 128\,793 & 754.6 & -76.2817 \\
+Slater DZP & 46 & \gvq{p62_dzp_pauli}{107\,382} & \gvq{p62_dzp_lambda_fc}{706.3} & 48 & 128\,793 & 754.6 & -76.2817 \\
 cc-pVDZ & 46 & \gvq{h2o_ccpvdz_pauli}{107\,382} & \gvq{p62_ccpvdz_lambda_fc}{674.3} & 48 & 128\,793 & 717.0 & -76.2410 \\
 cc-pVTZ & 114 & 3\,983\,652 & 7\,653.5 & 116 & 4\,281\,643 & 7\,858.6 & -76.3322 \\
 \end{tabular}
@@ -636,7 +636,7 @@ relative to the Slater DZP's, positive above.}
 Basis & Fns & CCSD(T) fc & vs DZP (mHa) & $N_{\rm Pauli}$ fc ($Q$) & $\lambda$ fc \\
 \hline
 cc-pVDZ & 24 & $-76.2410$ & $+40.7$ & 107\,382 (46) & 674.3 \\
-Slater DZP & 24 & $-76.2817$ & $0$ & \gvq{h2o_ccpvdz_pauli}{107\,382} (46) & \gvq{p62_dzp_lambda_fc}{706.3} \\
+Slater DZP & 24 & $-76.2817$ & $0$ & \gvq{p62_dzp_pauli}{107\,382} (46) & \gvq{p62_dzp_lambda_fc}{706.3} \\
 cc-pVDZ+TZpol & 35 & \gvq{p62_tzpol_fc}{$-76.2665$} & $+\gvq{p62_tzpol_above_dzp_mha}{15.2}$ & \gvq{p62_tzpol_pauli_fc}{505\,467} (68) & \gvq{p62_tzpol_lambda_fc}{1\,814.9} \\
 aug-cc-pVDZ & 41 & \gvq{p62_aug_fc}{$-76.2737$} & $+\gvq{p62_aug_above_dzp_mha}{8.0}$ & \gvq{p62_aug_pauli_fc}{982\,785} (80) & \gvq{p62_aug_lambda_fc}{1\,901.1} \\
 cc-pVTZ & 58 & $-76.3322$ & $-50.5$ & 3\,983\,652 (114) & 7\,653.5 \\
@@ -665,7 +665,7 @@ near $2\,700$~Ha and about 85 qubits, which is 13 times the terms and
 3.8 times the 1-norm; that interpolation is a reading of two measured
 rungs, not a measurement of any basis.  The qubit statement of this
 paper is thus a matched-accuracy one: at matched or better accuracy on
-water, the Gaussian basis costs at least nine times the Pauli terms and
+water, the Gaussian bases of the tested ladder cost at least nine times the Pauli terms and
 2.7 times the 1-norm of the Slater DZP, and the equal-size result of
 Table~\ref{tab:qubit} is its lower rung.
 
@@ -784,9 +784,9 @@ cc-pVDZ forms.  The cause is the ring's degenerate orbital pairs:\ the
 solver returns an arbitrary rotation inside each pair, and that moves
 integrals across the tolerance.  In a fixed symmetry-adapted labelling the
 counts are identical for the Slater and Gaussian bases:\ $149\,591$ in ring
-labels and $653\,971$ in site labels, the two labellings described next.  Water and hydrogen
-fluoride have no degenerate orbitals, which is why their canonical counts
-matched.  The registered prediction of equal canonical counts missed.
+labels and $653\,971$ in site labels, the two labellings described next.  Water has no degenerate orbitals, which is why its canonical counts
+matched;\ hydrogen fluoride's $\pi$ orbitals are degenerate pairs, so its matching
+canonical counts are an observation this mechanism does not explain.  The registered prediction of equal canonical counts missed.
 
 Two labellings of the same orbital space were also compared, registered in
 the same record.  \emph{Site} labels are orthogonalized local functions;\
@@ -946,7 +946,7 @@ that the framework's fixed-exponent rules do not buy it.
 
 At twenty-four functions on water, a Slater-type basis built by
 cc-pVDZ's own rule is $41$~mHa lower at frozen-core CCSD(T), mostly at
-the mean-field level, for the same Pauli count and five percent more
+the mean-field level, for the same Pauli count in canonical orbitals and five percent more
 1-norm.  The gain is exponent choice: the one-centre framework's
 fixed-exponent rules, hydrogenic $Z/n$ and single-scale Sturmian, lose
 by $0.2$ to more than $1$~Ha at the same size, and the hydrogenic loss is
@@ -1076,8 +1076,8 @@ J.\ Chem.\ Theory Comput.\ \textbf{17}, 5080 (2021),
 doi:10.1021/acs.jctc.1c00308.
 
 \bibitem{rico2004}
-J.~Fern\'andez Rico, R.~L\'opez, I.~Ema, and G.~Ram\'irez, ``Reference
-calculations with Slater-type orbitals: forces,'' Int.\ J.\ Quantum
+J.~Fern\'andez Rico, R.~L\'opez, I.~Ema, and G.~Ram\'irez, ``Accuracy of the
+electrostatic theorem for high-quality Slater and Gaussian basis sets,'' Int.\ J.\ Quantum
 Chem.\ \textbf{100}, 221 (2004), doi:10.1002/qua.20088.
 
 \bibitem{helgaker1997}
@@ -1102,8 +1102,8 @@ Prolate Spheroidal Grids,'' arXiv:2510.15204 (2025).
 
 \bibitem{lesiuk2015}
 M.~Lesiuk, M.~Przybytek, M.~Musia\l, B.~Jeziorski and R.~Moszynski,
-``Calculation of two-centre two-electron integrals over Slater-type
-orbitals revisited. III. Case study of the beryllium dimer,''
+``Reexamination of the calculation of two-center, two-electron integrals
+over Slater-type orbitals. III. Case study of the beryllium dimer,''
 Phys.\ Rev.\ A \textbf{91}, 012510 (2015), arXiv:1410.6176.
 
 \bibitem{nemec2010}
@@ -1181,7 +1181,7 @@ Kernbewegung bei dreiatomigen, stabf\"ormigen Molek\"ulen,''
 
 \bibitem{encinosa2022}
 M.~Encinosa and J.~Williamson, ``Electron gases in toroidal shells: mode
-coupling and state functions,'' Physica E (2022),
+coupling and state functions,'' Physica E \textbf{146}, 115558 (2023),
 doi:10.1016/j.physe.2022.115558; arXiv:2207.01745.
 
 \bibitem{manrique2020}

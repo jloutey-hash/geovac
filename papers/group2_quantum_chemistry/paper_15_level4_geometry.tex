@@ -30,46 +30,43 @@ label set of the $S^3$ harmonics, not an edge-Laplacian discretization,
 which does not converge), prolate spheroidal for H$_2^+$ (Paper~11),
 and hyperspherical for helium (Paper~13).
 The two-center, two-electron molecule H$_2$ combines all five Coulomb
-singularities and has resisted a single natural coordinate system.
-We introduce \emph{molecule-frame hyperspherical coordinates}
+singularities; its leading geometry is prolate spheroidal (Paper~12).
+As the structural $N$-electron generalization, we introduce
+\emph{molecule-frame hyperspherical coordinates}
 $(R_e,\alpha,\theta_1,\theta_2,\Phi)$ parameterized by the
 dimensionless ratio $\rho = R/(2R_e)$, where $R$ is the internuclear
 distance and $R_e$ the electronic hyperradius.
 The electron--electron cusp appears at $\alpha=\pi/4$, $\theta_{12}=0$,
 independent of molecular geometry, where in prolate spheroidal
 coordinates the same locus is not a coordinate surface.  That is a
-structural difference in where the cusp sits, and---see the scope
-note below---it does not translate into an accuracy advantage.
-The angular eigenvalue problem depends on $(R,R_e)$ only through $\rho$,
-collapsing a two-dimensional parameter sweep to one dimension.
+structural difference in where the cusp sits, and---see
+below---it does not translate into an accuracy advantage.
+The molecular charge function depends on $(R,R_e)$ only through $\rho$,
+so it can be cached on a one-dimensional $\rho$ grid;\ the angular
+eigenvalues themselves depend on both $\rho$ and $R_e$.
 A coupled-channel expansion in body-frame partial waves
 $(l_1,m_1,l_2,m_2)$ with $l_1+l_2$ even (gerade symmetry) and
-$m_1+m_2=0$, solved with a variational two-dimensional
+$m_1+m_2=0$, solved with a two-dimensional
 $(R_e,\alpha)$ solver that avoids the adiabatic approximation,
 recovers 96.0\% of the exact dissociation energy $D_e$ at
-$l_{\max}=6$ with $\sigma$ and $\pi$ channels and a Schwartz cusp correction
-(61~channels, CBS extrapolation ${\sim}97\%$;\ the pure-variational
-value is ${\sim}95$--$96\%$, this paper's two estimates of the cusp
-contribution being unreconciled).
-\textbf{[SCOPE]} This figure was previously compared against the
-92.4\% of the prolate spheroidal CI with algebraic Neumann integrals
-(Paper~12) and the difference read as an advantage of hyperspherical
-coordinates.  That comparison was not like-for-like:\ Paper~12's
-92.4\% is a $\sigma$-only result, its basis carrying no azimuthal
-dependence, whereas the Level~4 figure includes $\pi$ channels.  Nor
-is a corrected comparison available in the other direction:\ Paper~12's
-own basis with $|m| \le 1$ reaches $99.1\%$, but that figure and the
-ones here differ in truncation, cusp treatment and solver class alike,
+$l_{\max}=6$ with $\sigma$ and $\pi$ channels (61~channels) on a
+hyperradial grid with inner wall $R_{e,\min} = 0.3$~bohr;\ the
+Schwartz cusp tail at this truncation is $0.03$~mHa ($0.02$
+percentage points).  That wall is not converged:\ at $l_{\max}=4$
+moving it to $0.05$~bohr raises the recovered $D_e$ from $94.1\%$ to
+$96.9$--$97.3\%$, depending on the hyperradial grid.
+The $96.0\%$ is not compared against Paper~12:\ Paper~12's
+$\sigma$-only $92.4\%$ lacks the $\pi$ channels included here, and its
+$|m| \le 1$ result ($99.1\%$) differs from the ones here in truncation,
+cusp treatment and solver class alike,
 so no coordinate-system advantage is claimed in either direction.
-The framework extends to heteronuclear diatomics (HeH$^+$,
+The framework is extended to heteronuclear diatomics (HeH$^+$,
 $Z_A=2$, $Z_B=1$) via a charge-center origin shift and removal of the
-gerade constraint; the adiabatic solver recovers 93.1\% of the exact
-$D_e$ at $l_{\max}=4$ ($\sigma{+}\pi$, 57~channels), but---unlike
-H$_2$---a consistent 2D variational treatment at the same truncation
+gerade constraint; the adiabatic solver gives 93.1\% of the exact
+$D_e$ at $l_{\max}=4$ ($\sigma{+}\pi$, 57~channels), a non-variational
+over-binding:\ the 2D treatment at the same truncation and inner wall
 recovers only ${\sim}5\%$, the absolute energy error ($2.4\%$) being
-comparable to the small $0.075$~Ha binding.  The He-like ($Z=2$) core
-and charge asymmetry thus converge substantially more slowly than
-H$_2$, and the adiabatic value is a non-variational over-binding.
+comparable to the small $0.075$~Ha binding.
 The solver has a double-adiabatic coupled-channel structure---nuclear
 coordinates as outer slow variable, hyperradius as inner slow variable,
 angular channels as fast variables---generalizing the single-adiabatic
@@ -109,13 +106,16 @@ Three levels of this hierarchy have been established and validated:
 \item[Level~3] \emph{One-center, two-electron} (He).  Hyperspherical
   coordinates $(R_e,\alpha,\hat r_1,\hat r_2)$ resolve the
   electron--electron cusp $1/r_{12}$ as a boundary condition at
-  $\alpha=\pi/4$, $\theta_{12}=0$.  Paper~13~\cite{paper13} achieves
-  0.05\% error for He with a single-channel adiabatic lattice.
+  $\alpha=\pi/4$, $\theta_{12}=0$.  Paper~13~\cite{paper13} obtains a
+  nominal, non-variational 0.05\% for He with a single-channel
+  adiabatic lattice, and a variational 0.022\% with a two-dimensional
+  solver.
 \end{description}
 
 Level~4---the two-center, two-electron molecule H$_2$---is the first
-system requiring \emph{simultaneous} resolution of nuclear ($1/r_{iA}$,
-$1/r_{iB}$) and electron--electron ($1/r_{12}$) singularities.
+two-center, two-electron system treated in hyperspherical form, which
+resolves nuclear ($1/r_{iA}$, $1/r_{iB}$) and electron--electron
+($1/r_{12}$) singularities simultaneously.
 Paper~12~\cite{paper12} demonstrated that prolate spheroidal CI with
 algebraic Neumann $V_{ee}$ integrals saturates at 92.4\% of the exact
 dissociation energy $D_e$ \emph{in a $\sigma$-only basis}.  That
@@ -129,11 +129,12 @@ hyperspherical coordinates that resolve the $e$--$e$ cusp while retaining
 the anisotropic nuclear field through a coupled partial-wave expansion.
 We demonstrate that this approach recovers 96.0\% of $D_e$ at
 $l_{\max}=6$ with $\sigma{+}\pi$ channels (61~channels) using a
-variational 2D solver with Schwartz cusp correction.  \textbf{[SCOPE]}
-Earlier versions read this as exceeding Paper~12 and confirming a
-cusp-resolution advantage for hyperspherical coordinates;\ since the
-Paper~12 figure it was compared against is $\sigma$-only, that
-inference is withdrawn.  The Level~4 result stands on its own terms
+2D solver on a hyperradial grid with inner wall
+$R_{e,\min} = 0.3$~bohr, a figure that depends on that wall
+(Sec.~\ref{sec:2d_solver}).  It does not exceed Paper~12, whose
+$\sigma$-only figure lacks the $\pi$ channels included here, and it
+implies no cusp-resolution advantage for hyperspherical coordinates.
+The Level~4 result stands on its own terms
 as a coupled-channel treatment of the two-center, two-electron
 problem.
 
@@ -338,12 +339,13 @@ eigenvalue problem is
   \label{eq:angular}
 \end{equation}
 
-The key simplification: since $C_{\rm mol}$ depends on $(R,R_e)$
-only through $\rho = R/(2R_e)$, the angular eigenstates and eigenvalues
-at different $(R,R_e)$ pairs sharing the same $\rho$ are related by a
-simple $R_e$-rescaling.  This collapses the \emph{a priori}
-two-dimensional $(R,R_e)$ sweep to a one-dimensional $\rho$-sweep,
-with substantial computational savings.
+The key simplification: $C_{\rm mol}$ depends on $(R,R_e)$
+only through $\rho = R/(2R_e)$, so its matrix elements can be built
+on a one-dimensional $\rho$ grid and reused across $(R,R_e)$ pairs.
+The eigenvalues are not functions of $\rho$ alone:\ because
+$\Lambda^2/2$ does not scale with $R_e$, $\mu_\nu$ depends on both
+$\rho$ and $R_e$, and a diagonalization is still needed at each
+$(\rho, R_e)$.
 
 \subsection{Liouville substitution}
 
@@ -615,7 +617,8 @@ non-adiabatic kinetic energy cost ignored by the adiabatic solver.
 \begin{table}[h]
 \caption{Convergence with partial-wave truncation.
   $\sigma$~channels have $m=0$ only; $\sigma{+}\pi$ includes
-  $|m| \le 1$.  The 2D solver is variational; the adiabatic solver
+  $|m| \le 1$.  The 2D solver avoids the adiabatic approximation
+  (inner wall $R_{e,\min} = 0.3$~bohr); the adiabatic solver
   systematically overestimates $D_e$ by ${\sim}11\%$.
   $D_e^{\rm exact} = 0.174475$~Ha~\cite{kolos1968}.}
 \label{tab:convergence}
@@ -635,7 +638,7 @@ $l_{\max}$ & $m_{\max}$ & \multicolumn{1}{c}{$N_{\rm ch}$}
 \end{tabular}
 \end{ruledtabular}
 {\footnotesize ${}^*$Adiabatic variational violation; the 2D result
-is the correct variational bound.}
+does not exceed the exact $D_e$.}
 \end{table}
 
 \paragraph{Extended $l_{\max}$ convergence study.}
@@ -660,8 +663,7 @@ $\pi$~channels, independent of $l_{\max}$.
   neither alone;\ the two are different calculations, not a
   discrepancy.
   $\delta$~channels ($m_{\max} = 2$) are shown at $l_{\max} = 4$ only.
-  $\Delta_{\rm step}$ is the gain from each $l_{\max}$ increment.
-  CBS extrapolation via $(l+1/2)^{-2}$ fit to $l_{\max} = 4$--$6$.}
+  $\Delta_{\rm step}$ is the gain from each $l_{\max}$ increment.}
 \label{tab:extended_convergence}
 \begin{ruledtabular}
 \begin{tabular}{cdddd}
@@ -677,8 +679,6 @@ $l_{\max}$
 4 &  87.0 & +6.78 & 93.6 &  29 \\
 5 &  87.1 & +0.08 & 93.7 &  42 \\
 6 &  88.8 & +1.69 & 96.0 &  61 \\
-\hline
-CBS &  \multicolumn{1}{c}{---}  & & \multicolumn{1}{c}{${\sim}97$} & \\
 \hline
 4 ($\delta$) & 87.6 & \multicolumn{1}{c}{$+0.65^{\dagger}$} & --- & 37 \\
 \end{tabular}
@@ -765,8 +765,8 @@ factor.
 \label{sec:2d_solver}
 
 The adiabatic approximation (Eq.~\ref{eq:radial}) neglects kinetic
-coupling between angular channels as $R_e$ varies.  To obtain
-rigorous variational bounds, we solve the full two-dimensional
+coupling between angular channels as $R_e$ varies.  To avoid
+it, we solve the full two-dimensional
 $(R_e,\alpha)$ problem directly, building the sparse Hamiltonian
 \begin{equation}
   H_{\rm 2D} = T_{R_e} \otimes I_{\rm ang}
@@ -785,7 +785,15 @@ The 2D solver consistently gives $D_e$ approximately 11\% lower
 than the adiabatic solver (Table~\ref{tab:convergence}), confirming
 that the adiabatic approximation systematically overestimates binding
 by neglecting the kinetic energy cost of angular wavefunction
-variation with $R_e$.
+variation with $R_e$.  The 2D energies are finite-difference values,
+not strict upper bounds, and they depend on the inner Dirichlet wall
+$R_{e,\min} = 0.3$~bohr used throughout.  At $l_{\max}=4$
+($\sigma{+}\pi$) the recovered $D_e$ is $94.1\%$ at
+$R_{e,\min} = 0.3$, and $97.3\%$ ($N_{R_e} = 120$) or $96.9\%$
+($N_{R_e} = 200$) at $R_{e,\min} = 0.05$~bohr;\ the grid refinement
+raises the energy by $0.7$~mHa.  For the adiabatic $\sigma$ solver at
+$l_{\max}=2$ the same wall move takes $D_e$ from $90.0\%$ to
+$92.9\%$.
 
 \subsection{HeH\texorpdfstring{$^+$}{+} convergence}
 \label{sec:heh_results}
@@ -851,8 +859,8 @@ so the lowest channel with non-zero nuclear coupling to (0,0) is at
 $l_{\max} = 2$.  This explains three features of the convergence:
 
 \begin{enumerate}
-  \item The $l_{\max}=0$ result (31\%) is far below He's 99.95\% at
-    $l_{\max}=0$---isotropic averaging destroys bonding information.
+  \item The $l_{\max}=0$ result (31\%) is low---isotropic averaging
+    destroys bonding information.
   \item The $l_{\max}=1$ improvement is minimal (31\% $\to$ 37\%)
     because (1,1) has no nuclear coupling to (0,0).
   \item The $l_{\max}=2$ jump is dramatic (37\% $\to$ 88\%) as the
@@ -974,39 +982,20 @@ The cost increase is $8.7\times$ due to the larger matrix dimension.
 $\delta$ channels are therefore not cost-effective for production
 calculations.
 
-\subsection{The remaining gap and CBS extrapolation}
+\subsection{The remaining gap}
 
 At $l_{\max} = 6$ with $\sigma{+}\pi$ channels (61~channels,
-${\sim}754$~seconds per PES point), the 2D+cusp solver recovers
-96.0\% of the exact $D_e$.  The CBS extrapolation from $l_{\max} =
-4$--$6$ using the $(l + 1/2)^{-2}$ partial-wave convergence formula
-yields ${\sim}97\%$.
-
-The remaining ${\sim}3\%$ gap has two identified sources:
-\begin{enumerate}
-  \item \textbf{Adiabatic--2D gap.}  A constant ${\sim}10$~percentage-point
-    gap persists between adiabatic and 2D results across all $l_{\max}$,
-    reflecting the kinetic energy cost of non-adiabatic coupling.  The
-    2D solver captures this correctly; the adiabatic solver overestimates
-    $D_e$ by this amount.
-  \item \textbf{Higher $m$ channels.}  $\delta$ channels ($m_{\max} = 2$)
-    add $+0.65$~pp at $l_{\max} = 4$ but at $8.7\times$ cost.
-    \textbf{[WITHDRAWN 2026-09-14]}
-    [retracted 2026-09-14: p15-delta-cbs-above-97]  Earlier versions carried
-    that gain into this budget and concluded that CBS extrapolation including
-    $\delta$ ``would push the limit above 97\%''.  The $+0.65$~pp was
-    measured against $\sigma$-only, not against the $\sigma{+}\pi$
-    baseline this budget uses, so the transfer is invalid;\ and the row
-    it comes from is itself unreconciled (see the $\delta$-channel cost
-    paragraph above).  No $\delta$ contribution to the $\sigma{+}\pi$
-    gap is claimed here.
-\end{enumerate}
-
-Reaching $> 99\%$ along this route would need higher $m$ channels
-($m_{\max} \ge 2$) at extended $l_{\max}$, where the cost scaling
-becomes impractical.  That is an extrapolation from the CBS estimate
-rather than a proven necessity, and it is not a necessity in general:\
-Paper~12 reaches $99.1\%$ at $|m| \le 1$ in a different geometry.
+${\sim}754$~seconds per PES point), the 2D solver recovers
+96.0\% of the exact $D_e$ on the $R_{e,\min} = 0.3$~bohr grid.
+No complete-basis extrapolation is given:\ the partial-wave law of
+Eq.~(\ref{eq:schwartz}) decays as $(l+\tfrac12)^{-4}$, its tail at
+$l_{\max}=6$ is only $0.02$~pp, and the remaining ${\sim}4\%$ gap is
+not apportioned.  One measured contribution is the inner wall, worth
+${\sim}3$~pp at $l_{\max}=4$ (Sec.~\ref{sec:2d_solver});\ the rest
+lies in the partial-wave, azimuthal ($\pi$ channels frozen at
+$l_{\max}=2$, no $\delta$ channels) and hyperradial truncations.
+Whether $> 99\%$ is reachable along this route is not established
+here;\ Paper~12 reaches $99.1\%$ at $|m| \le 1$ in a different geometry.
 
 \paragraph{Dissociation limit.}
 The hyperradial solver does not converge at large $R$
@@ -1052,10 +1041,13 @@ extending the single-adiabatic expansion of Paper~13:
 \medskip
 \noindent
 The non-adiabatic coupling $P_{\nu\mu}$ encodes how the angular
-channel functions change as $R_e$ varies.  Since the angular problem
-depends on $R_e$ only through $\rho$, this coupling can be computed
-as $P_{\nu\mu} = -(R/2R_e^2)\braket{\Phi_\nu|\partial_\rho|\Phi_\mu}$
-via the Hellmann--Feynman theorem.
+channel functions change as $R_e$ varies.  At fixed $R$ the angular
+Hamiltonian $\tfrac12\Lambda^2 + R_e C_{\rm mol}(\rho)$ depends on
+$R_e$ both explicitly and through $\rho$, so
+$\partial_{R_e} H_{\rm ang} = C_{\rm mol} - \rho\,\partial_\rho C_{\rm mol}$,
+and the Hellmann--Feynman theorem gives
+$P_{\nu\mu} = \braket{\Phi_\nu|C_{\rm mol} - \rho\,\partial_\rho C_{\rm mol}|\Phi_\mu}
+/(\mu_\mu - \mu_\nu)$ for $\nu \ne \mu$.
 
 \paragraph{Fiber bundle interpretation.}
 Mathematically, each adiabatic layer has the structure of a fiber
@@ -1083,8 +1075,9 @@ electronic problem itself.
 
 \subsection{Heteronuclear systems and the charge-center origin}
 
-The HeH$^+$ results demonstrate that the Level~4 framework
-generalizes naturally to heteronuclear diatomics.  The key
+The HeH$^+$ calculations carry the Level~4 formalism over to
+heteronuclear diatomics;\ at the truncation reached here they do not
+yet bind HeH$^+$ variationally (below).  The key
 structural change is the loss of inversion symmetry, which doubles
 the channel count and activates odd-$k$ multipole coupling.
 
@@ -1108,12 +1101,11 @@ the entire $0.075$~Ha binding.  The adiabatic solver's apparent
 $93.1\%$ is therefore a non-variational over-binding coincidence
 (the same mechanism that produces the spurious He adiabatic
 ``$0.05\%$'' of Paper~13), not a genuine partial-wave convergence.
-Contrary to a naive H$_2$ parity, the heteronuclear $Z=2$ system
-converges \emph{substantially more slowly} than H$_2$: the charge
-asymmetry spreads angular weight across many channels (only $26\%$
-in $(0,0)$ for a $6{:}1$ ratio) and the He-like core demands both
-higher $l_{\max}$ and a finer hyperradial grid than the
-H$_2$-matched parameters used here.
+About $0.040$~Ha of the $0.071$~Ha variational error is removed by
+moving the inner hyperradial wall from $R_{e,\min} = 0.3$ to
+$0.05$~bohr;\ the remainder reflects the charge asymmetry, which spreads
+angular weight across many channels (only $26\%$ in $(0,0)$ for a
+$6{:}1$ ratio).
 
 \paragraph{Heteronuclear convergence and the composed-geometry
 boundary.}
@@ -1128,8 +1120,9 @@ The angular wavefunction spreading that necessitates high
 $l_{\max}$ is entirely nuclear in origin: removing all
 electron--electron off-diagonal coupling leaves
 $w(0{,}0) = 0.9998$, while removing the nuclear coupling yields
-$w(0{,}0) = 0.243$.  Thus the Level~4 solver itself converges
-well for asymmetric bonds; the $R_{\rm eq}$ divergence reported
+$w(0{,}0) = 0.243$.  Thus the angular eigenvalue converges well at
+fixed geometry for asymmetric bonds (the total energy does not yet:\
+its 2D value recovers only ${\sim}5\%$ of $D_e$);\ the $R_{\rm eq}$ divergence reported
 in Paper~17~\cite{paper17} is a property of the composed geometry
 framework (specifically, the Phillips--Kleinman pseudopotential),
 not of the Level~4 coordinate system.
@@ -1215,11 +1208,11 @@ Casimir: $\nu(\nu+4)/2$ for angular momentum quantum number~$\nu$.
 We use Jacobi polynomials as the spectral basis, with these Casimir
 eigenvalues as the free spectrum.  The electron--electron coupling
 matrix $V_{ee}$ is precomputed once via Gaunt-type angular integrals
-(independent of~$\rho$), while the nuclear coupling $V_{\rm nuc}$
-scales linearly with~$\rho$.  At each sweep point, the full angular
+(independent of~$\rho$), while the nuclear coupling $V_{\rm nuc}(\rho)$
+is rebuilt at each $\rho$ through its split-region factors.  At each sweep point, the full angular
 Hamiltonian is assembled as
 \begin{equation}
-  H_{\rm ang}(\rho) = H_{\rm free} + \rho \, V_{\rm nuc} + V_{ee}
+  H_{\rm ang}(\rho, R_e) = H_{\rm free} + R_e\bigl[V_{\rm nuc}(\rho) + V_{ee}\bigr]
 \end{equation}
 and diagonalized.
 
@@ -1274,8 +1267,9 @@ converges as
   \Delta E_l \sim -\frac{A}{(l + \tfrac{1}{2})^4}
   \label{eq:schwartz}
 \end{equation}
-where $A = (10/\pi)\langle\delta^3(\bm{r}_{12})\rangle$ depends on
-the coalescence density.  The cumulative correction
+where, for an atom, $A = 6\pi^2\int_0^\infty |\Psi(r,r,0)|^2 r^5\,dr$
+(Hill~\cite{hill1985});\ for the exact He ground state
+$A = 0.074226$~Ha~\cite{bromley_mitroy2006}.  The cumulative correction
 \begin{equation}
   \Delta E_{\rm cusp}(l_{\max})
     = -\sum_{l > l_{\max}} \frac{A}{(l + \tfrac{1}{2})^4}
@@ -1284,38 +1278,28 @@ the coalescence density.  The cumulative correction
 can be applied as a post-processing correction to the variationally
 computed energy at any $l_{\max}$.
 
-For He (Level~3), the cusp correction breaks through the
-0.19--0.20\% adiabatic floor: at $l_{\max} = 2$, the corrected
-error is 0.10\% (from 0.24\% uncorrected).  At $l_{\max} = 0$,
-the correction overcorrects (1.6\% vs 1.1\% uncorrected)
-because the adiabatic approximation error dominates.
+For He (Level~3), adding this tail to the 2D variational energy at
+$l_{\max} = 4$ gives $0.020\%$ above exact (Paper~13).
 
-For H$_2$ (Level~4), the correction is $R$-dependent: largest at
-short $R$ (${\sim}2.5$~mHa at $R = 1.0$~bohr) and vanishing at
-dissociation, where the coalescence density goes to zero.  The
-$D_e$ differential correction is ${\sim}1.7$~mHa, contributing
-${\sim}1.0$~percentage point of $D_e$ recovery.
+For H$_2$ (Level~4) no tabulated coefficient exists, and the
+correction is a model:\ $A(R) = A_{\rm He}\,
+\langle\delta^3(\bm r_{12})\rangle(R)/\langle\delta^3(\bm r_{12})\rangle_{\rm He}$,
+with the coalescence density interpolated as
+$\langle\delta^3\rangle_{\rm He}\exp[-\beta R^2/(1+\gamma R)]$.
+The two parameters $\beta = 0.60$ and $\gamma = 0.3$ are set by hand
+against the Gaussian-geminal H$_2$ coalescence density, not derived.
+The correction is largest at short $R$ ($0.55$~mHa at $R = 1.0$~bohr,
+$l_{\max}=2$) and vanishes at dissociation.  At $R = 1.4$~bohr it is
+$0.085$~mHa ($0.05$~pp of $D_e$) at $l_{\max}=4$ and $0.031$~mHa
+($0.02$~pp) at $l_{\max}=6$, so the $96.0\%$ headline does not
+depend on it at the $0.1$~pp level.
 
 \paragraph{Solver independence.}
-A comparison of the cusp correction applied to the adiabatic and 2D
-variational solvers at the same $l_{\max}$ confirms that the
-correction magnitude is solver-independent: both solvers produce
-identical correction values at each $l_{\max}$.  The correction
-scales as ${\sim}1/(l_{\max} + 1/2)^4$, consistent with Eq.~(\ref{eq:schwartz}).
-At $l_{\max} = 4$, the correction differential (between $R_{\rm eq}$ and
-dissociation) is 0.39~mHa.  The cusp correction is a property of the
-partial-wave basis truncation, not of the hyperradial solution method.
-
-\textbf{[UNRECONCILED 2026-09-14]} That measurement and the
-${\sim}1.7$~mHa / ${\sim}1.0$~percentage-point figure quoted above do
-not sit together under this paper's own $1/(l_{\max} + 1/2)^4$
-scaling:\ propagating $0.39$~mHa from $l_{\max} = 4$ gives
-${\approx}0.09$~mHa, or ${\approx}0.05$~pp, at $l_{\max} = 6$---not
-$1.0$~pp.  The abstract's pure-variational ``${\sim}95\%$'' is obtained
-by subtracting the $1.0$~pp figure from $96.0\%$;\ under the scaling
-law it would instead be ${\approx}96.0\%$.  One of the two figures is
-wrong.  Which one is not settled here, and the pure-variational value
-should be read as uncertain over ${\sim}95$--$96\%$ until it is.
+The correction depends only on $R$ and $l_{\max}$, so it is the same
+for the adiabatic and 2D solvers by construction:\ it is a property of
+the partial-wave truncation, not of the hyperradial solution method.
+At $l_{\max} = 4$ its differential between $R_{\rm eq}$ and
+dissociation is $0.085$~mHa.
 
 \paragraph{Transcorrelated alternative (explored; dead end).}
 A complementary approach attempts to remove the cusp algebraically rather than
@@ -1388,8 +1372,9 @@ The main results are:
   \item The electron--electron cusp at $\alpha = \pi/4$,
     $\theta_{12} = 0$ is $R$-independent, resolving it as a boundary
     condition for all molecular geometries.
-  \item The angular eigenvalue problem depends on $(R,R_e)$ only through
-    $\rho$, collapsing a 2D parameter sweep to 1D.
+  \item The molecular charge function depends on $(R,R_e)$ only through
+    $\rho$, so it can be cached on a 1D grid;\ the angular eigenvalues
+    depend on both $\rho$ and $R_e$.
   \item The gerade--quadrupole constraint explains the dramatic jump at
     $l_{\max}=2$ (31\% $\to$ 80\%): the first nuclear coupling from
     the $(0,0)$ channel requires $\Delta l = 2$.
@@ -1400,17 +1385,20 @@ The main results are:
     comparisons between the two geometries are meaningful only at
     matched $m_{\max}$, and at matched $m_{\max}$ this paper claims
     no advantage over Paper~12.
-  \item A variational 2D solver avoids the ${\sim}11\%$ systematic
-    overestimate of the adiabatic approximation, giving rigorous
-    bounds.
-  \item The framework extends to heteronuclear diatomics (HeH$^+$)
+  \item A 2D solver avoids the ${\sim}11\%$ systematic
+    overestimate of the adiabatic approximation.  Its finite-difference
+    energies are not strict upper bounds:\ at $l_{\max}=4$ refining
+    the hyperradial grid from 120 to 200 points raises the energy by
+    $0.7$~mHa, and the inner wall $R_{e,\min} = 0.3$~bohr depresses
+    $D_e$ by ${\sim}3$ percentage points (Sec.~\ref{sec:2d_solver}).
+  \item The formalism is extended to heteronuclear diatomics (HeH$^+$)
     by removing the gerade constraint, activating odd-$k$ multipole
     coupling, and shifting the origin to the charge center
-    (Eq.~\ref{eq:charge_center}), recovering 93.1\% of the exact
-    $D_e$ at $l_{\max} = 4$ with $\sigma{+}\pi$ channels in the
-    \emph{adiabatic} treatment---a non-variational over-binding figure
-    (the consistent 2D-variational value is only $\sim\!5\%$ of $D_e$,
-    not parity with the variational H$_2$ result).
+    (Eq.~\ref{eq:charge_center}).  The adiabatic treatment gives
+    93.1\% of the exact $D_e$ at $l_{\max} = 4$ with $\sigma{+}\pi$
+    channels, a non-variational over-binding figure;\ the 2D value is
+    only $\sim\!5\%$ of $D_e$, so HeH$^+$ is not yet bound
+    variationally at this truncation.
 \end{enumerate}
 
 The natural geometry hierarchy is now:
@@ -1421,26 +1409,26 @@ Level & System & Geometry & Best $D_e$ \\
 \midrule
 1 & H       & $S^3$ (Fock)        & exact on the labels (diagonal Casimir $n^2-1$); graph $\lambda_{\max}$ matched by construction \\
 2 & H$_2^+$ & Prolate spheroid    & machine precision (spectral) \\
-3 & He      & Hyperspherical      & 0.05\% error (adiabatic FD; non-variational, error cancellation) \\
-4 & H$_2$   & Mol.-frame hypersp. & 96.0\% \\
-4 & HeH$^+$ & Mol.-frame hypersp. & 93.1\% (adiabatic; ${\sim}5\%$ variational) \\
+2 & H$_2$   & Prolate spheroid    & 99.97\% (explicit $r_{12}$, Paper~12) \\
+3 & He      & Hyperspherical      & 0.022\% error (2D variational, Paper~13) \\
+4 & H$_2$   & Mol.-frame hypersp. & 96.0\% ($R_{e,\min} = 0.3$~bohr grid) \\
+4 & HeH$^+$ & Mol.-frame hypersp. & 93.1\% (adiabatic; ${\sim}5\%$ in 2D) \\
 \bottomrule
 \end{tabular}
 \end{center}
+H$_2$'s natural geometry is Level~2 (prolate spheroidal), where its
+best result is obtained;\ Level~4 is the structural $N$-electron
+generalization that Levels~4N and~5 build on.
 
 The extended convergence study through $l_{\max} = 6$ with
-$\sigma{+}\pi$ channels and Schwartz cusp correction achieves 96.0\%
-$D_e$ (61~channels), with CBS extrapolation to ${\sim}97\%$.
+$\sigma{+}\pi$ channels achieves 96.0\%
+$D_e$ (61~channels) on the $R_{e,\min} = 0.3$~bohr grid.
 The even-odd staircase (Sec.~\ref{sec:staircase}) reflects the
 gerade--quadrupole constraint on nuclear coupling.
 $\pi$ channels contribute a near-constant ${\sim}6.6$~pp offset
-across $\sigma$ $l_{\max}$, rising to $7.2$~pp at $l_{\max} = 6$.
-\textbf{[WITHDRAWN 2026-09-14]}
-[retracted 2026-09-14: p15-sigma-pi-decoupled]  Earlier versions read this
-as consistent with complete $\sigma$--$\pi$ decoupling;\ the two sectors
-are coupled through the $e$--$e$ multipole expansion, and the
-regularity is reported here as an observation without that
-explanation.
+across $\sigma$ $l_{\max}$, rising to $7.2$~pp at $l_{\max} = 6$;\
+the two sectors are coupled through the $e$--$e$ multipole expansion,
+and the regularity is an observation without a derived explanation.
 
 \paragraph{The locked-core boundary.}
 Extension to systems with core electrons (e.g., LiH) presents a
@@ -1459,7 +1447,7 @@ treatment with no locked core, which would involve an 8-dimensional
 angular eigenvalue problem, or (b)~identification of the natural graph
 structure that connects atomic core geometry ($S^3$) to molecular valence
 geometry (hyperspherical), preserving discrete topology throughout.
-HeH$^+$ succeeds because it has no core electrons; the two active
+HeH$^+$ avoids the locked core because it has no core electrons; the two active
 electrons live entirely in the molecular geometry.
 
 \paragraph{Level~4N generalization.}
@@ -1557,7 +1545,7 @@ Channel Graphs'' (Paper~13 in the Geometric Vacuum series).
 \bibitem{paper17}
 J.~Loutey,
 ``Composed Natural Geometries for Core-Valence Diatomics:
-LiH and BeH$^+$ from Discrete Graph Topology''
+LiH and BeH$^+$ from Natural-Geometry Solvers''
 (Paper~17 in the Geometric Vacuum series).
 
 \bibitem{bishop1977}
@@ -1569,6 +1557,13 @@ J.~Mol.\ Spectrosc.\ \textbf{75}, 462 (1979).
 C.~Schwartz,
 ``Importance of angular correlations between atomic electrons,''
 Phys.\ Rev.\ \textbf{126}, 1015 (1962).
+
+\bibitem{hill1985}
+R.~N. Hill,
+J.\ Chem.\ Phys.\ \textbf{83}, 1173 (1985).
+
+\bibitem{bromley_mitroy2006}
+M.~W.~J. Bromley and J.~Mitroy, arXiv:physics/0601049.
 
 \bibitem{loutey_paper11}
 J.~Loutey,
