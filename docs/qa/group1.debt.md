@@ -19,6 +19,32 @@ Owner of this list: the PM. SMALLs here are fixed in one scheduled sweep outside
 
 ## Guards owed (separate activity; fire-test each against the wrong answer it excludes)
 
+**Guard pass 2026-11-03 (v6.1.3): all seven written and fire-tested** (P29 3/3 incl. the global-recipe
+plant in `is_ramanujan`; P53 3/3; P40 3/3; P45 4/4; P50 4/4; P39 2/2; P32 2/2), then independently
+reviewed. Scope limits kept honest: P45 spatial window fixed at j <= 1 (rate in n_max untested); P50
+pins the printed S^7 / S^11 scalar relations (S^9 and the Dirac ladder not pinned). The list below is
+the original order.
+
+Independent review (2026-11-03) of the seven: 5 SOUND, 2 rebuilt. P45 had used the driver's
+(2j+1)-weighted kernel, not Paper 38's sqrt(2j+1) one, and accepted a symbol/moment mismatch; rebuilt
+on Paper 38's kernel with exact band symbols (sqrt2+sqrt6)/6, (5+2 sqrt3)/18 and the temporal
+symbol-kernel pairing, fire-tested 4/4. P32 G4a pinned a module artifact (below); rebuilt on the
+measured facts, fire-tested 3/3. Found by the review, still owed:
+- **[FIXED 2026-11-03, PI: fix prose, G3 open; C16 `p32-product-grading-zero-yukawa-only`] OWNER-LARGE (Paper 32 G3 + G4a, trunk).** The SM modules twist D_F by the diagonal
+  chirality label chi, which COMMUTES with D_GV. With the untwisted sum or the grading-twisted product
+  (sigma_x (x) D_F), sigma_x (x) gamma_F anticommutes with D at every Yukawa and J D = +D J holds
+  (n_max <= 3; `tests/test_paper32_g4a_grading.py`). Paper 32 L3370-3372 ("fails at nonzero Yukawa"),
+  L3862-3866 ("untested") and L4040-4041 ("zero Yukawa only, as in G3") describe the module's twist,
+  not a structural limit. The "34, 104, 220" norms are the identity 2||D_GV|| sqrt(32).
+- **Paper 29 (fixed 2026-11-03):** both crossings are real non-trivial eigenvalues; the non-real
+  spectrum stays inside sqrt(q_max) as Kotani-Sunada's theorem requires; abstract, RH-D and synthesis
+  reworded. Guard owed: pin the real / non-real split (S^5 N=5: 3.969 vs 2.997; Dirac B n=4: 5.653 vs
+  4.029, against 3.317 and 4.123).
+- **Weighted Ramanujan near the boundary (pre-existing).** Paper 29 (iv) "crosses for any alpha > 0"
+  is true (deviation ~ +5.47e-3 alpha^2 at 40 dps), but float `is_weighted_ramanujan` returns the
+  wrong verdict at alpha = 1e-3 (defective boundary eigenvalue, error ~ sqrt(eps)); no test asserts (iv).
+- P40: the per-Lambda and per-n tests share the gamma(512), gamma(1024) data (one assertion in two forms).
+
 - `tests/test_paper53_height_constant.py`: analytic tail; pin every printed L_s entry (7.10, 3.29, 2.03, 1.42, 1.23, 1.09, 1.02, 1.0045); drop the slow marker.
 - `tests/test_paper29_bound_crossing.py` + `geovac/ihara_zeta.is_ramanujan`: non-trivial spectrum per connected component; S^3 must NOT cross through n_max = 5; pin S^5 N = 5 (+0.65) and Dirac-B n = 4 (+1.53).
 - `tests/test_wh7_b1_joint.py`: Paper 45 product-carrier smoothing bound with the proposition's kernels at >= 2 cutoffs, defect falling; dual arrow.
@@ -29,7 +55,7 @@ Owner of this list: the PM. SMALLs here are fixed in one scheduled sweep outside
 
 ## Completeness-critic gaps (2026-11-03)
 
-- `docs/qa/group1.done.md` C8 text stale: "Paper 40 = 4/pi rate universal" (now: kernel constant; group-independence OPEN) and Paper 50 "bit-exact" framing; criteria are frozen during a run -- PI to approve the C8 update.
+- [CLOSED 2026-11-03, PI-approved] `docs/qa/group1.done.md` C8 restated to the current owner headlines.
 - Claim-test matrix rows missing: P29 obs:ramanujan, cor:pi_free, obs:galois, prop:reflection, prop:galois, obs:chirality_obstruction, obs:no_selberg; P39 thm:main, L2-T, L4-T, lem:lifted_state-T, L5-T; P44 thm:witness_pair, prop:wedge_restriction, prop:paper32_prop; P45 L2/L4, App. A, the Q1 block (~320 lines, test_wh7_b3_* family); P50 thm:mellin_decomp, thm:log3_cancellation, prop:dual_basis_S5, prop:F_vs_S_decomposition, prop:RT_blocked, prop:bulk_blocked.
 - Wildcard backing pointers: P42 L1962 `tests/test_*.py`, P53 L733 `tests/test_paper53_*`, P50 L877 bare `geovac/`.
 - Docstrings of `geovac/ihara_zeta_weighted.py`, `hp_operator.py`, `su2_wilson_gauge.py` (cited by P29) unchecked; `gh_convergence_tensor.py` l.2026 4/pi string without the kernel-constant qualifier.

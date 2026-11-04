@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.1.3] - 2026-11-03
+
+Guard pass for the group1 /qa remediation (PI-approved: "do all the decision recommendations then guard
+pass"). Guards written as their own activity, each fire-tested against the wrong answer it excludes, then
+reviewed independently (Opus code-reviewer asked "what wrong answer would this accept?"). Also: group1.done.md
+C8 restated to the current owner headlines (PI-approved, between runs; landed in v6.1.2).
+
+### Fixed (code)
+- `geovac/ihara_zeta.is_ramanujan` and `geovac/ihara_zeta_weighted.is_weighted_ramanujan` judge the bound per
+  connected component (own Perron value and q_max each). The global recipe dropped only the largest component's
+  Perron value; that produced the withdrawn Paper 29 S^3 n_max = 5 crossing. Connected graphs unchanged; Ihara
+  suites 42 passed, Dirac suite passing.
+
+### Guards (seven owed by v6.1.2)
+- P29 `test_paper29_bound_crossing.py` rewritten: own non-backtracking builder, per-component deviations pinned
+  for all four families, agreement with `is_ramanujan`; fires 3/3 incl. the global-recipe plant.
+- P53 `test_paper53_height_constant.py`: analytic |J| tail + closed-form denominator; every printed L_s pinned to
+  half a unit in its last digit; slow marker dropped; fires 3/3.
+- P40 `test_paper40_universal_rate.py`: SU(2) per-Lambda slope 2/pi (Lemma L2(d), Lambda^2 = j(j+1)) and per-n
+  4/pi (Paper 38), 1.5%; the G2 "Reading A over B" assertion withdrawn with that verdict; fires 3/3.
+- P45 `test_wh7_b1_joint.py`: part (iii) at Paper 38's kernel (sqrt(2j+1) weights; exact band symbols
+  (sqrt2+sqrt6)/6, (5+2 sqrt3)/18; moment = production gamma_3) and the temporal symbol-kernel pairing at
+  K = 2, 4, 8, 16; fires 4/4. Review caught the first version using the driver's (2j+1) kernel.
+- P50 `test_paper50_f_ladder_odd_spheres.py` (new): printed S^7 and S^11 scalar zeta'(0) relations recomputed by an
+  independent binomial-Hurwitz route to 60 digits, S^3 KPS positive control; fires 4/4. Paper 50 tags updated.
+- P39 `test_paper39_real_structure.py` re-pointed from the doubled full-Dirac model to the true CH window; fires 2/2.
+- P32 `test_paper32_g4a_grading.py` (new): see the finding below; fires 3/3.
+
+### Found by the review
+- **Paper 32 G3 / G4a (trunk; OWNER-LARGE; PI decision "fix prose, G3 open").** The SM modules twist D_F by
+  sign(D_GV) (the diagonal chirality label), which commutes with D_GV. With the untwisted sum or the grading-twisted
+  (Dabrowski-Dossena) product, sigma_x (x) gamma_F anticommutes with D at every Yukawa and J D = +D J holds
+  (n_max <= 3). Four loci (G3 item, G3 sprint verdict, the electroweak paragraph, G4a closure) said "fails at nonzero
+  Yukawa" / "zero Yukawa only" / "untested"; restated to name the twist, G3 open on identifying gamma_GV with weak
+  isospin. C16 `p32-product-grading-zero-yukawa-only` registered gate-first (4 hits before, 0 after). Code unchanged.
+  The 34, 104, 220 norms now carry their identity 2||D_GV|| sqrt(32).
+- **Paper 29 (fixed):** both crossings are real non-trivial eigenvalues; the non-real spectrum stays inside
+  sqrt(q_max) as Kotani-Sunada's theorem requires. Abstract, RH-D and the group1 synthesis reworded.
+- C22 caught claim-matrix row 285 still describing the retracted three-family crossing; rewritten.
+
 ## [v6.1.2] - 2026-11-03
 
 `/qa group1` FULL (incremental), PI-invoked as the next target of the 2026-11-03 sequence, plus the

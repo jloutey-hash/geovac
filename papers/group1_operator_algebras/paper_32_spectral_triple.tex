@@ -3367,9 +3367,16 @@ Sprint~G3 (Sec.~\ref{sec:g3}) tested whether $\gamma_{\mathrm{GV}}$
 and $\gamma_F$ are the same operator on $\mathcal{H}_{\mathrm{GV}}
 \otimes \mathcal{H}_F$;\ they are not, by construction (operator-norm
 residual exactly~$2$ at every $n_{\max} \in \{1, 2, 3\}$).  The product
-grading $\gamma_{\mathrm{GV}} \otimes \gamma_F$ grades the combined Dirac
-at zero Yukawa and fails at nonzero Yukawa;\ whether some other grading
-compatible with both exists there is untested, so G3 stays open.
+grading $\gamma_{\mathrm{GV}} \otimes \gamma_F$ anticommutes with the
+combined Dirac at every Yukawa when that Dirac is the untwisted sum
+$D_{\mathrm{GV}} \otimes \mathbb{1} + \mathbb{1} \otimes D_F$ or the
+grading-twisted $D_{\mathrm{GV}} \otimes \mathbb{1} + \gamma_{\mathrm{GV}}
+\otimes D_F$, with $JD = +DJ$ in both, and only at zero Yukawa for the
+$\mathrm{sign}(D_{\mathrm{GV}})$-twisted Dirac of \S\ref{sec:higgs_h1}
+\textbf{[MEASURED]} ($n_{\max} \le 3$,
+\texttt{tests/test\_paper32\_g4a\_grading.py}).  What stays open is the
+identification of $\gamma_{\mathrm{GV}}$ with the weak-isospin chirality,
+so G3 stays open.
 \item[\textbf{G4}] (Cross-manifold obstruction, the dominant gap.)\
 Connes' SM uses a \emph{single} spectral triple
 $(\mathcal{A}_{\mathrm{SM}}, \mathcal{H}_{\mathrm{SM}},
@@ -3444,8 +3451,9 @@ $U_e \in \mathrm{SU}(2) \times U(1)$ and a chosen embedding of
 hypercharge as the $U(1)$ phase.  Whether such a construction
 admits a Higgs-style inner fluctuation through an
 almost-commutative extension (closing G2 within the electroweak
-sector) is an open structural question, and so is whether a grading
-compatible with weak isospin exists at nonzero Yukawa (\S\ref{sec:g3}).
+sector) is an open structural question, and so is whether
+$\gamma_{\mathrm{GV}}$ can be identified with the weak-isospin chirality
+(\S\ref{sec:g3}).
 The almost-commutative lift of Paper~30's
 $\mathrm{SU}(2)$ Wilson instance is a clean $S^3$-only target that does not require any
 progress on the $S^5$ side. It is not by itself an electroweak
@@ -3859,10 +3867,11 @@ $\mathcal{H}_F$ and $\gamma_F$ acts as identity on
 $\mathcal{H}_{\mathrm{GV}}$, so $\Delta \neq 0$ for any such pair and
 the test could not have come out positive.  It rules out equating the
 two operators, not a grading compatible with both:\ the product
-$\gamma_5$ grades the combined Dirac at zero Yukawa, and whether a
-compatible grading exists at nonzero Yukawa (for instance under the
-graded product of~\cite{dabrowski_dossena2011}, which the paper does
-not use) is untested.
+$\gamma_5$ grades the untwisted and the grading-twisted combined Dirac
+(the latter the graded product of~\cite{dabrowski_dossena2011}) at every
+Yukawa, with $JD = +DJ$, and grades the $\mathrm{sign}(D_{\mathrm{GV}})$-twisted
+Dirac of \S\ref{sec:higgs_h1} only at zero Yukawa \textbf{[MEASURED]}
+($n_{\max} \le 3$, \texttt{tests/test\_paper32\_g4a\_grading.py}).
 
 \paragraph{Files.}  Modules
 \texttt{geovac/chirality\_grading.py} (G3-A, 50/50 tests) and the
@@ -4036,9 +4045,15 @@ the gauge census still returns $\mathrm{U}(1) \times \mathrm{SU}(2)
 antiquark block); and the combined grading
 $s_{\mathrm{GV}} \otimes \gamma_F$ built from $s_{\mathrm{GV}} =
 \mathrm{sign}(D_{\mathrm{GV}})$ does \emph{not} anticommute with $D$
-($\|\{\gamma, D\}\|_F = 34, 104, 220$ at $n_{\max} = 1, 2, 3$);\ with the
+($\|\{\gamma, D\}\|_F = 34, 104, 220$ at $n_{\max} = 1, 2, 3$, identically
+$2\|D_{\mathrm{GV}}\|_F\sqrt{32}$ since $s_{\mathrm{GV}}$ commutes with
+$D_{\mathrm{GV}}$);\ with the
 production grading $\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}$
-the anticommutator vanishes at zero Yukawa only, as in G3.
+the product $\gamma_{\mathrm{GV}} \otimes \gamma_F$ anticommutes with this
+$D$ only at zero Yukawa, because its Yukawa term is twisted by
+$s_{\mathrm{GV}}$;\ with the untwisted or the grading-twisted product it
+anticommutes at every Yukawa (G3,
+\texttt{tests/test\_paper32\_g4a\_grading.py}).
 Inner fluctuations decompose into
 $\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$
 gauge 1-forms plus a Higgs scalar that is non-trivial whenever the

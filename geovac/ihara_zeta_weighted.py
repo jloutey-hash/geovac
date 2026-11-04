@@ -121,6 +121,7 @@ from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import sympy as sp
+from scipy.sparse.csgraph import connected_components
 
 from geovac.dirac_matrix_elements import DiracLabel, kappa_to_l
 from geovac.ihara_zeta import _count_components, _degree_sequence
@@ -364,25 +365,34 @@ def is_weighted_ramanujan(
     """
     M = _require_symmetric(A_w)
     V = M.shape[0]
-    # Weighted q_max = max row sum of A_w, minus 1.
-    row_sums = [float(sum(M[i, j] for j in range(V)).evalf()) for i in range(V)]
-    q_max_w = max(row_sums) - 1.0
+    W = np.array(M.evalf().tolist(), dtype=float)
 
-    T = weighted_hashimoto_matrix(M)
-    if T.size == 0:
-        return True, 0.0, "trivial: zero-edge graph"
-    ev = np.linalg.eigvals(T)
-    mags = np.abs(ev)
-    rho = float(mags.max())
-    non_trivial = mags < rho - tol
-    mu_nt_max = float(mags[non_trivial].max()) if non_trivial.any() else 0.0
+    # Judged per connected component, as in ihara_zeta.is_ramanujan: each
+    # component has its own Perron value and its own weighted q_max.
+    n_comp, labels = connected_components((W != 0).astype(int), directed=False)
+    worst = None  # (deviation, rho, mu_nt_max, bound)
+    for c in range(n_comp):
+        sel = np.where(labels == c)[0]
+        Wc = W[np.ix_(sel, sel)]
+        if int((Wc != 0).sum()) // 2 < len(sel):
+            continue
+        T = weighted_hashimoto_matrix(sp.Matrix(M.extract(list(sel), list(sel))))
+        mags = np.abs(np.linalg.eigvals(T))
+        rho_c = float(mags.max())
+        non_trivial = mags < rho_c - tol
+        mu_c = float(mags[non_trivial].max()) if non_trivial.any() else 0.0
+        bound_c = float(np.sqrt(max(float(Wc.sum(axis=1).max()) - 1.0, 0.0)))
+        if worst is None or mu_c - bound_c > worst[0]:
+            worst = (mu_c - bound_c, rho_c, mu_c, bound_c)
+    if worst is None:
+        return True, 0.0, "trivial: no component carries a cycle"
 
-    bound = float(np.sqrt(max(q_max_w, 0.0)))
-    deviation = mu_nt_max - bound
+    deviation, rho, mu_nt_max, bound = worst
+    q_max_w = bound ** 2
     is_ram = deviation <= tol
 
     text = (
-        f"V={V}, 2E={T.shape[0]}, "
+        f"V={V}, 2E={int((W != 0).sum())}, components={n_comp}, worst component: "
         f"q_max_w={q_max_w:.6f}, sqrt(q_max_w)={bound:.6f}, "
         f"rho(T_w)={rho:.6f}, max|mu_nontrivial|={mu_nt_max:.6f}, "
         f"deviation={deviation:+.6f} "

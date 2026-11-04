@@ -13,6 +13,11 @@ must genuinely satisfy KO-3 for the product to satisfy KO-6 at all.
 
 Convention: an antilinear J = U·K (K = complex conjugation) satisfies
 `J X = s · X J` as operators iff `U conj(X) = s · X U`.
+
+Each factor is the TRUE Camporesi–Higuchi window (complete Dirac eigenspaces,
+|lambda| <= n_max + 1/2), with D, J and the multipliers compressed into it
+(builders of tests/test_true_window_real_structure.py); re-pointed from the
+doubled full-Dirac model on 2026-11-03.
 """
 
 from __future__ import annotations
@@ -20,11 +25,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from geovac.full_dirac_operator_system import (
-    camporesi_higuchi_full_dirac_matrix,
-    full_dirac_basis,
-)
-from geovac.real_structure import build_J_full_dirac
+from test_true_window_real_structure import _setup
 
 SIGMA = {
     "1": np.eye(2, dtype=complex),
@@ -35,11 +36,14 @@ SIGMA = {
 
 
 def _single_factor(n_max: int):
-    """(D, U) for one CH factor: D self-adjoint, J = U·K at KO-3."""
-    basis = full_dirac_basis(n_max)
-    D = np.asarray(camporesi_higuchi_full_dirac_matrix(basis), dtype=complex)
-    U = np.asarray(build_J_full_dirac(n_max).U, dtype=complex)
-    return D, U
+    """(D, U) for one true-window CH factor: D self-adjoint, J = U·K at KO-3."""
+    S = _setup(n_max)
+    return S["Dc"], S["Jw"]
+
+
+def _multipliers(n_max: int):
+    """The truncated multipliers P f P on the true window."""
+    return list(_setup(n_max)["Ts"])
 
 
 def _kron3(A, B, C):
@@ -174,7 +178,6 @@ def test_dirac_squares_block_diagonal() -> None:
 # vanishes -- so the continuum claim rests on commutativity of the limit
 # algebra (Paper 32), and these tests guard the corrected facts.
 
-from geovac.full_dirac_operator_system import FullDiracTruncatedOperatorSystem
 from geovac.connes_axiom_audit_31 import verify_order_zero, verify_order_one
 
 
@@ -182,17 +185,16 @@ def test_order01_residual_grows_not_vanishes() -> None:
     """REJECTS: the claim that the finite-cutoff order-0/1 residual vanishes.
 
     The truncated operator system is NOT an algebra, and the max order-0/1
-    residual GROWS with n_max (measured 0.055->0.078 order-0, 0.101->0.203
-    order-1 from n=2 to n=3).  The continuum object satisfies order-0/1 for a
+    residual GROWS with n_max on the true window (Paper 39 quotes the
+    ambient-basis maxima 1/2, 5/9, 11/16 and 3/4, 5/3, 21/8, pinned in
+    tests/test_true_window_real_structure.py).  The continuum object satisfies order-0/1 for a
     different reason (its limit algebra is commutative, Paper 32), NOT because
     this residual shrinks.  A future edit asserting the residual vanishes would
     fail here.
     """
     def resid(n):
-        ops = FullDiracTruncatedOperatorSystem(n)
-        A = ops.multiplier_matrices
-        U = np.asarray(build_J_full_dirac(n).U, dtype=complex)
-        D, _ = _single_factor(n)
+        A = _multipliers(n)
+        D, U = _single_factor(n)
         _, _, m0 = verify_order_zero(U, A, tol=1e-9)
         _, _, m1 = verify_order_one(U, A, D, tol=1e-9)
         return m0, m1
@@ -216,15 +218,15 @@ def test_cross_factor_order_conditions_vanish() -> None:
     na = nb = 2
     D_a, U_a = _single_factor(na)
     D_b, U_b = _single_factor(nb)
-    Ma = FullDiracTruncatedOperatorSystem(na).multiplier_matrices
-    Mb = FullDiracTruncatedOperatorSystem(nb).multiplier_matrices
+    Ma = _multipliers(na)
+    Mb = _multipliers(nb)
     Ia, Ib = np.eye(D_a.shape[0]), np.eye(D_b.shape[0])
     s1, s2 = SIGMA["x"], SIGMA["y"]
     U_ab = _kron3(U_a, s1, U_b)
     D_ab = _kron3(D_a, s1, Ib) + _kron3(Ia, s2, D_b)
 
     def order_res(a, b):
-        JbJ = U_ab @ b.conj() @ U_ab.T            # verifier's convention U conj(b) U^T
+        JbJ = U_ab @ b.conj() @ U_ab.conj().T     # J b J^{-1} = U conj(b) U^dagger
         o0 = np.max(np.abs(a @ JbJ - JbJ @ a))
         Da = D_ab @ a - a @ D_ab
         o1 = np.max(np.abs(Da @ JbJ - JbJ @ Da))

@@ -90,6 +90,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import sympy as sp
+from scipy.sparse.csgraph import connected_components
 
 
 # ----------------------------------------------------------------------------
@@ -309,6 +310,14 @@ def is_ramanujan(
 
     A graph is called **(q_max-)Ramanujan** if mu_max_nt <= sqrt(q_max).
 
+    A disconnected graph is judged per connected component: each component
+    with a cycle has its own Perron value, its own trivial pair and its own
+    q_max, and the reported deviation is the worst component's.  (A global
+    recipe drops only the largest component's Perron value and counts the
+    others' as non-trivial; that is the artifact behind the withdrawn
+    Paper 29 S^3 n_max = 5 "crossing".)  Tree components carry no cycles
+    (nilpotent Hashimoto operator) and are skipped.
+
     Parameters
     ----------
     adjacency
@@ -330,32 +339,38 @@ def is_ramanujan(
     q_min = int(d.min()) - 1
     regular = (d.min() == d.max())
 
-    T = hashimoto_matrix(A)
-    ev = np.linalg.eigvals(T.astype(float))
-    mags = np.abs(ev)
+    n_comp, labels = connected_components(A, directed=False)
 
     # The "trivial" eigenvalues of T lie on |mu| = 1 (from dead-ends /
     # leaves) and at mu = +/-Perron eigenvalue.  For a connected graph
     # of Perron spectral radius rho(T), the two sharpest trivial values
     # are +rho and -rho (for bipartite graphs, both; for non-bipartite,
-    # only +rho is certain).  We identify "trivial" as: eigenvalues
-    # whose |mu| matches max |mu| within tol.  All other eigenvalues
-    # are "non-trivial".
-    rho_T = float(mags.max())
-    non_trivial_mask = mags < rho_T - tol
-    if non_trivial_mask.any():
-        mu_nt_max = float(mags[non_trivial_mask].max())
-    else:
-        mu_nt_max = 0.0
+    # only +rho is certain).  Per component, we identify "trivial" as:
+    # eigenvalues whose |mu| matches that component's max |mu| within
+    # tol.  All other eigenvalues are "non-trivial".
+    worst = None  # (deviation, rho_T, mu_nt_max, bound) of the worst component
+    for c in range(n_comp):
+        sel = np.where(labels == c)[0]
+        Ac = A[np.ix_(sel, sel)]
+        if int(Ac.sum()) // 2 < len(sel):
+            continue
+        mags = np.abs(np.linalg.eigvals(hashimoto_matrix(Ac).astype(float)))
+        rho_c = float(mags.max())
+        non_trivial_mask = mags < rho_c - tol
+        mu_c = float(mags[non_trivial_mask].max()) if non_trivial_mask.any() else 0.0
+        bound_c = float(np.sqrt(max(int(Ac.sum(axis=1).max()) - 1, 0)))
+        if worst is None or mu_c - bound_c > worst[0]:
+            worst = (mu_c - bound_c, rho_c, mu_c, bound_c)
+    if worst is None:
+        worst = (-float(np.sqrt(max(q_max, 0))), 0.0, 0.0, float(np.sqrt(max(q_max, 0))))
 
-    bound = float(np.sqrt(max(q_max, 0)))
-    deviation = mu_nt_max - bound
+    deviation, rho_T, mu_nt_max, bound = worst
     is_ram = deviation <= tol
 
     text = (
-        f"V={A.shape[0]}, E={A.sum()//2}, regular={regular}, "
+        f"V={A.shape[0]}, E={A.sum()//2}, components={n_comp}, regular={regular}, "
         f"q_max={q_max}, q_min={q_min}, "
-        f"rho(T)={rho_T:.6f} (Perron), "
+        f"worst component: rho(T)={rho_T:.6f} (Perron), "
         f"max|mu_nontrivial|={mu_nt_max:.6f}, "
         f"sqrt(q_max)={bound:.6f}, "
         f"deviation={deviation:+.6f} "

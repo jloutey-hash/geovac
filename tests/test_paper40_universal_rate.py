@@ -1,36 +1,33 @@
-"""Genuine backing for Paper 40's universal 4/pi Fejer-moment constant (a kernel constant, not a convergence rate).
+"""Backing for Paper 40's leading Fejer-moment constant (a kernel constant, not a convergence rate).
 
-WHAT IS ROBUST (and tested here, DEFAULT-collected):
-  * rank-1 (SU(2)): the doubling estimator of the closed-form sum-rule
-    converges to 4/pi (production code geovac.central_fejer_su2; Paper 38's
-    Fejer-moment constant, [INTERNAL THEOREM + MEASURED]).
+WHAT IS TESTED (DEFAULT-collected):
+  * SU(2), Paper 40 Lemma L2(d): gamma_Lambda(SU(2)) = (2/pi) log Lambda / Lambda
+    + O(1/Lambda) in Paper 40's own variable Lambda (Cas(j) = j(j+1) <= Lambda^2,
+    so Lambda = sqrt(j(j+1)) ~ n/2 for the shell n = 2j + 1).  This is the same
+    function as Paper 38's (4/pi) log n / n in the shell index n; both are pinned
+    from production code (geovac.central_fejer_su2), and the per-Lambda slope is
+    measured directly against Lambda, so the retracted reading "4/pi per Lambda"
+    fails.
   * the general-G Dirac-triangle inequality (DT): for SU(3), Sp(2) and G2,
     |D(lambda) - D(lambda')| <= sqrt(C(sigma)) for every sigma in
     lambda (x) lambda'^* across a reduced dominant-weight panel (fail_count = 0,
     sup ratio < 1).  (DT) is a representation-theoretic inequality; it is NOT
     a check of the Lipschitz constant C_3 (= 1 by compression, Paper 40 Lemma
-    L3) and the 4/pi universality does not ride on it (an earlier header
-    called it "the L3 / Dirac-triangle keystone ... the content the
-    universality rides on"; withdrawn 2026-10-02).  It was previously
-    verified only by an UNCALLED driver on a pruning-scheduled path (fixed
-    v4.44.0 -- /qa group1 batch3 Flavor-B backfill).
+    L3) and no statement about the leading constant rides on it.
   * rank-2 machinery correctness: the generic compact-Lie Weyl-integration
     used for SU(3)/Sp(2)/G2 integrates Haar to 1.0.
-  * the A-over-B discrimination (G2, |W|=12): the extracted Fejer-moment constant sits
-    decisively closer to Reading A (c = 4/pi ~ 1.273) than Reading B
-    (c = 2|W|/pi^r = 24/pi^2 ~ 2.432).  [@slow, full panel]
 
-WHAT IS NOT a robust theorem (honest scope; calibrated in Paper 40 prose):
-  the *exact* value c(G) = 4/pi at rank >= 2.  The leading-constant extraction
-  is fit-sensitive -- 2-param vs 3-param Stein-Weiss fits and the min_L cut
-  scatter the raw constant (Sp(2) 3-param across cuts: 3.12, 1.67, 0.73, 0.13,
-  -0.64).  The clean table values (SU(3) 1.243, Sp(2) 1.087, G2 1.177) come from
-  a specific 2-param fit + generic->canonical rescaling; a small live panel gives
-  a larger raw c_can ~ 1.1-1.8.  The full rank-uniform analytical proof is a
-  named gap; see Paper 40 Theorem (universality).
+WHAT IS NOT TESTED, and why: whether the leading constant is the same for every
+compact simple G is [OPEN] (Paper 40, Remark thm:universal_constant).  The
+rank-2 extraction pipeline divides by sqrt(C_gen(ad)/h^vee) while leaving the
+distances unscaled; on SU(2) that convention gives (2/pi)/sqrt2 ~ 0.450, not the
+anchor 2/pi, so its rank-2 outputs (SU(3) 1.243, Sp(2) 1.087, G2 1.177) are in a
+mismatched convention and discriminate neither for nor against a
+group-independent constant.  The former G2 "Reading A over Reading B" assertion
+was withdrawn with that verdict (2026-11-03); no rank-2 constant is asserted here
+until a consistent-convention recomputation exists.
 
-Backing drivers (permanent): tests/rank2_rate_support/ (moved out of the prunable
-debug/qa/_resurrected/ on 2026-06-23, v4.44.0).
+Backing drivers (permanent): tests/rank2_rate_support/.
 """
 import math
 import os
@@ -40,20 +37,35 @@ import pytest
 
 
 # ---------------------------------------------------------------------------
-# rank-1 anchor: SU(2) Fejer-moment constant is 4/pi exactly (production code)
+# rank-1 anchor: SU(2), production code
 # ---------------------------------------------------------------------------
 
-def test_su2_rate_constant_is_4_over_pi():
-    """SU(2) doubling estimator a_n -> 4/pi (the derived rank-1 case)."""
+def _lam(n: int) -> float:
+    """Paper 40's Lambda for the SU(2) shell n = 2j + 1: Lambda^2 = j(j + 1)."""
+    return math.sqrt((n * n - 1) / 4.0)
+
+
+def test_su2_constant_is_2_over_pi_per_lambda():
+    """Lemma L2(d): the slope of Lambda * gamma against log Lambda is 2/pi.
+
+    Rejects the retracted "4/pi per Lambda" (off by a factor 2) and any
+    normalisation error above ~1.5% (e.g. 3.9/pi-type scale slips)."""
+    from geovac.central_fejer_su2 import gamma_n_via_sum_rule
+    n1, n2 = 512, 1024
+    g1, g2 = float(gamma_n_via_sum_rule(n1)), float(gamma_n_via_sum_rule(n2))
+    slope = (_lam(n2) * g2 - _lam(n1) * g1) / (math.log(_lam(n2)) - math.log(_lam(n1)))
+    assert abs(slope / (2 / math.pi) - 1) < 0.015, f"per-Lambda slope {slope:.5f}"
+
+
+def test_su2_constant_is_4_over_pi_per_shell_index():
+    """Paper 38's form of the same function: the doubling estimator in the
+    shell index n converges to 4/pi (monotone, within 1.5% at n = 512)."""
     from geovac.central_fejer_su2 import doubling_estimator
-    import mpmath as mp
-    target = 4 / mp.pi
-    a_small = doubling_estimator(64)
-    a_large = doubling_estimator(512)
-    # converges to 4/pi from above, monotone improving
-    assert a_large < a_small
+    a_small = float(doubling_estimator(64))
+    a_large = float(doubling_estimator(512))
+    target = 4 / math.pi
     assert abs(a_large - target) < abs(a_small - target)
-    assert abs(a_large - target) < 0.05  # within 5% by n=512 (slow log convergence)
+    assert abs(a_large / target - 1) < 0.015, f"doubling estimator {a_large:.5f}"
 
 
 # ---------------------------------------------------------------------------
@@ -179,28 +191,3 @@ def test_rank2_weyl_integration_haar_n_quad_80(_rank2):
     for label, la, _rank in _groups(_rank2):
         haar, _ = _rank2["verify_haar"](la, n_quad=80)
         assert abs(float(haar) - 1.0) < 1e-6, f"{label}: Haar = {float(haar)}"
-
-
-@pytest.mark.slow
-def test_g2_rate_reading_A_over_B(_rank2):
-    """G2 is the cleanest A-vs-B discriminator (|W|=12).  The extracted rate
-    constant (canonical normalisation c_can = c_generic/sqrt(6)) is monotone
-    decreasing toward Reading A (4/pi ~ 1.273) and sits decisively below
-    Reading B (24/pi^2 ~ 2.432), i.e. closer to A than B.
-
-    This tests the robust universality content (A over B), NOT the exact value
-    4/pi (which is fit-sensitive -- see module docstring)."""
-    g2 = _rank2["build_G2"]()
-    rows, _ = _rank2["rate_run_panel"](g2, "G2", [48, 84, 144, 240, 420, 600])
-    sqrt6 = math.sqrt(6.0)
-    c_can = [r["L*gamma/log(L)"] / sqrt6 for r in rows]
-    A = 4 / math.pi          # 1.273
-    B = 24 / math.pi ** 2    # 2.432
-    # rate vanishes (gamma decreasing)
-    gammas = [r["gamma"] for r in rows]
-    assert gammas[-1] < gammas[0]
-    # tail constant decreasing toward A, and decisively below B
-    assert c_can[-1] < c_can[2]
-    assert c_can[-1] < 2.0 < B
-    # closer to A than to B
-    assert abs(c_can[-1] - A) < abs(c_can[-1] - B)
