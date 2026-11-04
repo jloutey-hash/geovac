@@ -143,10 +143,9 @@ residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
 TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $\nmax \in \{2, 3, 4\}$. The
 G4-Inj block ($2{,}904$ of these) holds by construction (multiplicativity
 of a ring map, a coproduct identity on the \textsc{GeoVac} side, the
-condition $\det g = 1$ on its $SL_{2}$ panel, and panel-size bookkeeping)
-and was written for an earlier form of the comparison theorem whose arrow
-was reversed;\ those residuals certify neither that form nor a closed
-immersion (Theorem~\ref{thm:injection_g4}).
+condition $\det g = 1$ on its $SL_{2}$ panel, and panel-size bookkeeping),
+so those residuals do not certify the comparison theorem
+(Theorem~\ref{thm:injection_g4}).
 The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 
 \medskip
@@ -160,8 +159,7 @@ Deligne 2010 + Glanois 2015 \emph{into} the abelian factor
 $\Ga^{3N}$ of \textsc{GeoVac}'s group, factoring through
 $\mathcal{U}_{4}^{\mathrm{ab}}$, with image of dimension at most $2$ per
 weight (Section~\ref{sec:injection_g4},
-Theorem~\ref{thm:injection_g4}). An earlier form stated the arrow the other
-way, $\Ustar_{GV} \to \mathcal{G}_{4}$;\ that form is withdrawn. The proof uses the % [retracted 2026-11-03: p56-comparison-arrow-reversed]
+Theorem~\ref{thm:injection_g4}). The proof uses the
 Eskandari--Murty--Nemoto 2025 level-4 placement of $G$ + the
 Deligne 2010 faithful action (level~4) on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$. Depth-$\ge 2$ content, which a
@@ -1281,18 +1279,13 @@ parity-blind restriction has rank~$1$. The M1 and M2 columns contribute
 nothing. The Gram rank is computed on the real periods, so it bounds the
 motivic rank from above and does not compute it.
 \end{enumerate}
-\emph{Withdrawn (2026-11-03).} An earlier form of this theorem stated that
-the period map $\pi$ dualises to a homomorphism $\Ustar_{GV} \to % [retracted 2026-11-03: p56-comparison-arrow-reversed]
-\mathcal{G}_{4}$. The arrow was reversed:\ affine group schemes and
-commutative Hopf algebras are anti-equivalent, so a Hopf map out of $\HGV$
-dualises to a homomorphism \emph{into} $\mathrm{Spec}\,\HGV$. Moreover
+The full group $\mathcal{G}_{4}$ admits no such comparison:\
 $\mathrm{Hom}(\mathcal{G}_{4}, \Ga) = 0$ ($\Gm$ acts on
 $\mathcal{U}_{4}^{\mathrm{ab}}$ with non-zero weights only, and
 $\mathrm{Hom}(\Gm, \Ga) = 0$), so $\mathcal{O}(\mathcal{G}_{4})$ has no
 non-zero primitives to receive $V$;\ and the M1 and M2 values are not
 primitive ($\Delta \pi^{2j} = \pi^{2j} \otimes 1$ in Brown's coaction), so
-the depth-1 compatibility held for the M3 column only, and their former
-``rank-1 per weight'' is rank~$0$ in $\mathcal{A}^{(4)}$.
+they have rank~$0$ in $\mathcal{A}^{(4)}$.
 \end{theorem}
 
 \begin{proof}
@@ -1448,8 +1441,7 @@ driver, data, memo, and regression tests are:
   \texttt{debug/sprint\_injection\_nmax\_extension\_memo.md} (this section's extension to $\nmax \in \{3, 4\}$).
 \end{itemize}
 
-The panels were built for the withdrawn reversed-arrow form of the
-theorem. The (C1) and (C2) panels below hold by definition and test
+The (C1) and (C2) panels below hold by definition and test
 nothing about the motivic side, and the (C3) $\det g = 1$ panel bears on no
 part of the restated theorem;\ only the (C4) Gram rank does. The four
 panels have closed-form per-cutoff residual counts that
@@ -1867,7 +1859,7 @@ TC-2a & Finite-cutoff equality on abelian factor at $\nmax = 2$ & 16 \\
 TC-2b & $SL_{2}$-factor equality (Sym$^{2}$ + det + decomp + dim) & 17 \\
 TC-2c & Per-cutoff equality at $\nmax = 3, 4$ ($\Phi$-recovery + dim + $\eta_{T}$) & 73 \\
 TC-2d & Cofiltered coherence (panel + transitivity + group-hom) & 243 \\
-G4-Inj & Panel of the withdrawn reversed-arrow form (by construction; $\nmax = 2$) & 261 \\
+G4-Inj & Comparison panels C1--C4, by construction ($\nmax = 2$) & 261 \\
 G4-Inj & Same panel at $\nmax = 3$ & 789 \\
 G4-Inj & Same panel at $\nmax = 4$ & 1854 \\
 \midrule
@@ -1972,9 +1964,7 @@ to the depth-1 de Rham classes of their level-4 motivic periods and M1, M2
 generators to $0$ gives a Hopf map $\HGV \to \mathcal{A}^{(4)}$, dually a
 homomorphism $\mathcal{U}_4 \to \Ga^{3N}$ that factors through
 $\mathcal{U}_4^{\mathrm{ab}}$, with image of dimension at most $2$ per
-weight (Theorem~\ref{thm:injection_g4}). The earlier statement
-$\Ustar_{GV} \to \mathcal{G}_4$ ``closed at theorem grade'' had the arrow % [retracted 2026-11-03: p56-comparison-arrow-reversed]
-reversed and is withdrawn.
+weight (Theorem~\ref{thm:injection_g4}).
 
 \textbf{Open question (depth $\ge 2$).}\ Whether an enriched \textsc{GeoVac}
 Hopf structure (non-primitive, e.g.\ the shuffle algebra $T(V)$) receives
@@ -2036,7 +2026,7 @@ deconcatenation-pair (Reading B). Sprint memo
 \texttt{debug/sprint\_q5p\_na1\_non\_abelian\_probe\_memo.md}.
 
 \paragraph{Reading A in the even flavour only (Sprint JLO-Depth2,
-2026-06-07; scoped 2026-11-03).}  The naive Mellin-trace test above turns out to be
+2026-06-07).}  The naive Mellin-trace test above turns out to be
 \emph{structurally insensitive} to the A/B distinction.  Sprint NA-1
 (2026-06-06) demonstrated that the depth-2 joint Mellin transform
 $J(s_1, s_2)$ collapses bit-exactly to a depth-1 parity-graded
