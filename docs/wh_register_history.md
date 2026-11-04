@@ -120,3 +120,7 @@ Reason: the line presented (4/π) log n/n as the convergence rate. It is the Fej
 ## WH7 — superseded status sentence (moved 2026-10-16, v5.20.18)
 
 Superseded text (CLAUDE.md §1.7 WH7, in force 2026-09-06 → 2026-10-16): "**Claim-level restatement is a PI call.**" Replaced when the PI directed the restatement: Paper 35 §XIV.B and abstract now state the finite-real-time-window = periodic-Euclidean-circle identification as adopted rather than derived, with the interval/circle and Euclidean/real-time caveats and Kempf 2010 cited. See CHANGELOG v5.20.18.
+
+## WH7 — superseded attribution clause (moved 2026-11-03, v6.1.4)
+
+Superseded text (CLAUDE.md §1.7 WH7 Status, in force 2026-09-06 → 2026-11-03): "Rovelli's RQM Postulate 1 ("relevant information is finite for a system with compact phase space" ⇒ "the characteristic discreteness of quantum theory", IJTP 35, 1637) anticipates the compactness→discreteness chain generally." Replaced because the quoted wording is from Rovelli's Stanford Encyclopedia of Philosophy entry "Relational Quantum Mechanics" (§2.1), not the 1996 IJTP paper (found by the /qa group3 citation reviewer; PM-verified against both sources). The organizing-observation paragraph's credit line cites the same IJTP paper for the postulate itself, which is correct and unchanged.

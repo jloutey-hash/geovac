@@ -435,7 +435,7 @@ for one physical domain transfer directly to others at matched
 $l_{\max}$, without re-analysis of the interaction potential.
 
 \subsection{Composed architectures: exactly $Q$-linear Pauli counts
-for arbitrary spherical potentials}
+(Coulomb; expected for other spherical potentials)}
 
 The angular sparsity of Theorem~2 applies to single-center orbital
 bases.  In the GeoVac composed architecture~\cite{GeoVac_Paper14,
@@ -475,7 +475,9 @@ integrals $R^k$ merely renormalize the coefficients of surviving
 Pauli strings.  Since the Pauli count is determined by which strings
 have nonzero coefficient, the count is potential-independent; the
 Pauli 1-norm $\lambda$ and the QWC group count may differ, but the
-number of terms and the linear coefficient match.  \hfill$\square$
+number of terms and the linear coefficient are expected to match.  The
+sketch neglects cancellations among Pauli-string coefficients after the
+Jordan--Wigner mapping, which is why the statement says ``expected''.
 
 This corollary means that the angular selection-rule sparsity
 \emph{pattern} of the GeoVac composed architecture---the density that
@@ -636,14 +638,16 @@ content of the basis, not on the specific radial potential:
 \item Gaunt-selection-rule sparsity $D(l_{\max})$ (Theorem~3).
 \item Reduction from the generic single-center $O(Q^4)$ two-body
   term count to the exactly $Q$-linear composed Pauli count
-  (Corollary~1; the retired pair-diagonal rule gave $O(Q^{2.5})$).
+  (Corollary~1, measured on the Coulomb library and expected beyond
+  it;\ the retired pair-diagonal rule gave $O(Q^{2.5})$).
 \item Bit-identical zero patterns across Coulomb, harmonic,
   Woods--Saxon, square well, and Yukawa potentials
   (Table~\ref{tab:sparsity}).
 \end{itemize}
 These properties hold for any central two-body interaction and any
 radial single-particle potential that produces a complete orbital
-basis.
+basis, except the composed Pauli coefficient of Corollary~1, which is
+measured on the Coulomb library and only expected beyond it.
 
 \medskip
 \noindent\textbf{Coulomb-specific.}
@@ -714,9 +718,10 @@ systems;\ the exactly $Q$-linear Pauli count of composed block
 architectures ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis)
 is expected, but not here proven, to carry over beyond
 the Coulomb composed library (Corollary~1).  The
-$S^3$ Fock projection, the diagonal $SO(4)$ Casimir on the labels,
-and the integer spectrum of the unperturbed hydrogen problem are
-Coulomb-specific (the edge Laplacian $D-A$ of the label lattice is
+$S^3$ Fock projection, the spectrum's being a function of the diagonal
+$SO(4)$ Casimir on the labels (the Casimir itself is representation
+theory), and the integer spectrum of the unperturbed hydrogen problem
+are Coulomb-specific (the edge Laplacian $D-A$ of the label lattice is
 potential-independent and does not converge to $\Delta_{S^3}$,
 Paper~0 \S VI) and break under any modification of the radial
 potential~\cite{GeoVac_Paper23}.  Sparsity-aware quantum simulation

@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.1.4] - 2026-11-03
+
+`/qa group3` FULL (incremental; first whole-group cert), PI-invoked as the next target of the 2026-11-03 sequence.
+Unseeded; standing calibration record cited (FULL #2 19/21 seeds, 0/8 FP; DELTA #1 9/9; DELTA #2 8/9). Snapshot
+7727c540 (`refs/qa/group3-full-2026-11-03`); one worktree per code reviewer. Trunk Papers 0/1/7 are in the target but
+were reviewed whole in the trunk run the same day; they keep their trunk stamps. **Verdict: FAIL. RESEARCH-GRADE not
+earned.** **Coverage 0/389 -> 214/389 (55%)** (prose 210/365, cite 4/12, code 0/12: every code unit has an open owner
+finding or changed backing).
+
+### Panel
+- Deterministic, whole group3 + synthesis + corpus: C5/C12, C10, C11, C13, C14, C15, C16, C17, C18, C19, C20, C21,
+  C22, C24, C25 PASS after remediation. Before: C22 caught matrix row 285 (retracted P29 crossing) -> fixed in v6.1.3.
+- Claims 4 chunks (Opus), citations 2 (Opus; 306 bibitems), code 7 (Opus on 18, 55, 56, 57+61; Sonnet on 22+54, 24,
+  31), synthesis C9 1, completeness critic 1. Every MATERIAL finding PM-verified against the text or recomputed
+  (S_min^(S5) by nsum; the two-body tensor's support; SL_2 perfect vs G_4 solvable; Rovelli source; Deligne 2010).
+
+### Owner fixes (LARGE)
+- **Paper 18:** Theorem 3: B and F share the (2nd-order, scalar) cell; operator order the discriminant only for D vs
+  D^2 (nabla*nabla excepted); zeta(3)/G/beta diagnostic scoped to the dictionary; mu(rho,R) piecewise-algebraic
+  throughout; eta theorem kills the signed trace, not M3; K's match "suggestive only" (Observation); ac_factorization
+  scoped to a grading anticommuting with D_GV (fails for the production sign(D_GV) twist, holds for the graded
+  product).
+- **Paper 22:** Corollary 1 (Q-linear coefficient beyond Coulomb) expected, not proven; the SO(4) Casimir is
+  representation theory.
+- **Paper 31:** the gauged two-body fluctuation is direct-diagonal, a strict subset of the Coulomb channels; the 28
+  projections are classified (17 by construction, 4 by inheritance, 7 exercised), not "empirically verified";
+  Paper 24's rigidity converse conditional.
+- **Paper 54:** same two-body correction throughout; the product formula holds for the heat trace only; the
+  resolvent route was tested negative (not open); the mismatch is not explained by heat-kernel vs Green's function;
+  Paper 38's theorem is on the true window; Coulomb-only element counts 82 / 3604 (not 240 / 15168).
+- **Paper 55:** k = 3: all level-2 depth-2 generators cancel; S_min^(S5) = 0.0401823251474 (0.03996 was the K = 500
+  partial sum); 4/pi universality open.
+- **Paper 56:** G_4 is solvable and SL_2 perfect, so the comparison map is trivial on SL_2 and its codomain is U_4
+  (abelianized image in U_4^ab; no "x| SL_2" target, no surjectivity onto G_m); level-4 faithfulness credited to
+  Deligne 2010, not Deligne-Goncharov 2005; GeoVac's image, not GeoVac, is the strict subgroup; the G4-Inj 2,904 of the
+  5,864 residuals hold by construction; conductor 4 is spin-forced on S^3 only.
+- **Paper 57:** C9's period class is M3 (identified 2026-06-11): P2 88.3% / 7, P4 98.3% / 1; 4/pi universality open;
+  P5 cannot become an independent discriminator.
+- **Synthesis / seam doc:** flow is a calibration sub-case; abelianized image, not "the abelianization"; packing gives
+  counts; L_0 not the matter propagator; Paper 54 consistent with, not deriving, selection rules; seam C7 row.
+
+### Gates
+- C16: 19 entries added (two-body family, P54 product formula / resolvent, P31 28/28 and rigidity, P56 SL_2 /
+  Deligne-Goncharov / subgroup, P18 x4, P57 C9, P22 Cor 1, P55 x2, synthesis x3), 2 widened (p40 4/pi; L_0
+  matter-propagator spelling). Each fires on HEAD text and is silent on the fix (26 checks).
+- C25 p40-general-g-conditional overclaim widened ("reports it universal", "universal over compact simple", "reported
+  rank-invariant"); fires on the old seam line, passes now.
+- Claim-test matrix row 88 (P22 footnote) rewritten: the routine computes the global-M_L D since 2026-08-29.
+
+### Self-check
+- R1: 6 LARGE (residue beside correct fixes) -> fixed. R2 (last): 1 SURFACE-LARGE (P31 L1460) -> fixed after the last
+  round, so that unit is unreviewed and unstamped. Paper 56's period-map dualisation direction flagged for the PI.
+
+### Not fixed here (in `docs/qa/group3.debt.md`)
+- Owed guards (OWNER-LARGE by "test proves less than the prose / no test"): P54 angular audit and heat table; P55 JLO
+  and NA-1 theorems, tautological M1/M2 witnesses; P56 C1-C3 panels and matrix row 119; P57 Table I vs the seam
+  register; P61 64-digit negative, Stokes, co-area and diagonal-A tests (open since 2026-09-07); P18 ac_factorization
+  and modular-residual guards; P22 sign-holonomy pins; P24 56/165.
+- Paper 28's "descent 4 -> 2" reading (restated in P18, P32, P55) routed to the group5 run.
+
+### Also
+- CLAUDE.md §1.7 WH7 status: the Rovelli quotes are attributed to his SEP entry "Relational Quantum Mechanics"
+  (§2.1), not IJTP 35, 1637; superseded clause moved to `docs/wh_register_history.md`. Paper 18's own cite stays in the
+  SMALL list.
+- About 120 SMALLs; completeness-critic gaps.
+
 ## [v6.1.3] - 2026-11-03
 
 Guard pass for the group1 /qa remediation (PI-approved: "do all the decision recommendations then guard

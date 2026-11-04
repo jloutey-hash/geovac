@@ -124,6 +124,17 @@ claim restates them (C7).
 - **No branch-specific C14+** (no DESCOPED/PARTIAL papers in group3 scope).
 
 ## Change log
+- 2026-11-03 — **FULL (incremental, first cert of the whole group) = FAIL -> REMEDIATED** (v6.1.4, PI-invoked
+  in the planned sequence). Unseeded; standing calibration record cited. Snapshot 7727c540
+  (`refs/qa/group3-full-2026-11-03`); trunk Papers 0/1/7 left to their trunk stamps. Owner LARGE in Papers 18
+  (Thm 3 cells; operator-order scope; zeta(3) diagnostic; mu(rho,R) tiers; eta corollary; ac_factorization on the
+  sign(D_GV) twist), 22 (Cor 1 beyond Coulomb), 31 (two-body "precisely Coulomb"; 28/28 "empirical"), 54
+  (fluctuation is direct-diagonal; product formula only for exp; resolvent negative shown open), 55 (k = 3 depth;
+  S_min^(S5) partial sum), 56 (SL_2 maps trivially into the solvable G_4; Deligne 2010 not Deligne-Goncharov;
+  closed-immersion residue; 5,864 residuals mostly by construction) and 57 (C9 now M3: P2 88.3%, P4 98.3%); surface
+  LARGE in 31, 54, 55, 56, 57, the seam doc and the synthesis. 19 C16 entries added, 2 widened; C25 p40 widened.
+  Self-check R1 6 LARGE, R2 1 SURFACE-LARGE (fixed after the last round, unstamped). Coverage 0/389 -> 214/389.
+  RESEARCH-GRADE not earned (owed guards). Paper 28's "descent 4 -> 2" routed to group5. Debt: `docs/qa/group3.debt.md`.
 - 2026-06-15 — DRAFTED, then FROZEN (PI-confirmed). Bite 1 = Papers 22/24/31.
 - 2026-06-16 — bite 1 = **PASS** (`/qa group3` run #7, v4.18.0).
 - 2026-06-16 — **slimmed to a profile** (criteria → `docs/qa/criteria.md`, no

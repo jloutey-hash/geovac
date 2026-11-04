@@ -45,8 +45,8 @@ arc---the packing construction, the discrete
 graph and its dynamics, the conformal equivalence with the unit $S^3$,
 the exchange constant taxonomy, the angular sparsity theorem, the
 Bargmann--Segal lattice, and the universal/Coulomb partition, together
-with the \emph{reconvergence} node where these threads cohere (two-body
-selection rules from the tensor-product triple, the period
+with the \emph{reconvergence} node where these threads cohere (the
+tensor-product triple's two-body interaction and where it stops, the period
 census, the Tannakian substrate and cosmic-Galois comparison homomorphism, and
 the forced/free seam)---into a single coherent narrative.  The arc has a
 dependency structure worth naming:\ a single taproot (the packing
@@ -202,12 +202,13 @@ Bargmann--Segal lattice and the Coulomb/HO asymmetry (seven layers catalogued, f
 Paper~31~\cite{loutey_paper31} states the $\mathcal{A}/D$
 universal/Coulomb partition in spectral-triple language.  \emph{The
 reconvergence} (where the branches loop back to a unified foundational
-statement, \S\ref{sec:reconvergence}):\ Paper~54~\cite{loutey_paper54} derives two-body
-selection rules from the tensor-product triple, Paper~55~\cite{loutey_paper55} places
+statement, \S\ref{sec:reconvergence}):\ Paper~54~\cite{loutey_paper54} gauges the
+tensor-product triple into a two-body interaction consistent with the
+selection rules but only their monopole, direct subset, Paper~55~\cite{loutey_paper55} places
 the transcendentals in the census of GeoVac spectral data in
 cyclotomic mixed-Tate periods at level $\le 4$,
 Paper~56~\cite{loutey_paper56} constructs the cosmic-Galois comparison map $U^*_{\mathrm{GV}}
-\to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (a homomorphism, not a closed immersion), and Paper~57~\cite{loutey_paper57}
+\to \mathcal{U}_4^{\mathrm{ab}}$ (a homomorphism, not a closed immersion), and Paper~57~\cite{loutey_paper57}
 catalogues the forced/free seam;\ Paper~61~\cite{loutey_paper61}
 develops the arithmetic of the elliptic layer (\S\ref{sec:reconvergence}).  An $O(V)$ time-evolution engine
 (Paper~6~\cite{loutey_paper6}, now an archived standalone tool)
@@ -262,7 +263,8 @@ distinct type for $B$, $F$, and $\Delta$}.
 
 GeoVac's discrete lattice is constructed by a packing argument that is
 prior to the Schr\"odinger equation~\cite{loutey_paper0}.  Two axioms
-suffice.
+suffice, together with the construction's structural choices
+(motivated, not forced).
 
 \medskip
 \noindent\textbf{Axiom 1 (binary distinguishability).}  A minimum of
@@ -549,8 +551,9 @@ GeoVac's substrate exhibits an analogous property at the
 \emph{geometric / mathematical} layer, prior to physics.  The packing
 construction (Paper~0~\cite{loutey_paper0}) takes a circle of diameter
 $d_0$ (the fundamental scale, with no specific physical value
-assigned) and outputs a graph whose nodes carry the labels of the eigenspaces of the
-continuum $S^3$ operator (the integer eigenvalues $n^2 - 1$ belong
+assigned) and outputs node counts equal to the dimensions of the
+eigenspaces of the continuum $S^3$ operator (attaching the labels
+$(\ell, m)$ to the nodes is a labelling choice, Paper~0) (the integer eigenvalues $n^2 - 1$ belong
 to that continuum operator, carried on the labels as the diagonal
 $SO(4)$ Casimir; the graph spectrum is not a level-by-level
 copy of it, Paper~7), the
@@ -940,8 +943,10 @@ matches the band edge to the ground state $-\tfrac12$ (an Observation);
 the hydrogenic levels come from Fock's projection, where the $S^3$
 Coulomb kernel's eigenvalue forces $p_0 = Z/n$ and the energy shell
 then gives $E_n$.  On
-the Bargmann--Segal lattice, $L_0$ is the matter-propagator operator,
-not the Hamiltonian: the spectrum comes from the diagonal Euler
+the Bargmann--Segal lattice, as on $S^3$, $L_0$ encodes transitions
+only and is not the Hamiltonian (the Wilson reading of $L_0$ as the
+matter propagator's inverse does not hold, Paper~24): the spectrum
+comes from the diagonal Euler
 operator $\hbar \omega(\hat{N} + 3/2)$, and the graph adjacency
 encodes dipole transitions only.
 
@@ -1143,8 +1148,8 @@ of Paper~34's classification, with the Drake--Swainson structural
 denominator combinatorial-rational (Paper~36);\ multi-loop UV-renormalization
 counterterms remain external input (Paper~36), not inner-factor input data.
 (Paper~34's ``flow'' tag has no separate entry in Paper~18's six-tier list;
-Paper~18's operator-order table files that content as ``flow /
-composition''.)
+Paper~18 files that content as the infinite-spectral-sum sub-case of the
+calibration tier, which earlier drafts called ``flow''.)
 
 \subsection*{The master Mellin engine}
 
@@ -1211,9 +1216,9 @@ rational entries, algebraic eigenvalues) versus a finite family of named project
 (Layer~2) that add specific variables, dimensions, and transcendentals
 when the graph is mapped to a physical observable.  Paper~34
 documents 28~projections to date; each appears in the taxonomy of
-Paper~18 as either an intrinsic, calibration, embedding,
-algebraic-implicit, composition (under which Paper~18's operator-order
-table files Paper~34's ``flow'' tag), or inner-factor input data
+Paper~18 as either an intrinsic, calibration (whose
+infinite-spectral-sum sub-case takes Paper~34's ``flow'' tag), embedding,
+algebraic-implicit, composition, or inner-factor input data
 mechanism, or in the algebraic (no-exchange) case.  The two papers are complementary: Paper~18 organizes by
 type of compactness mismatch (what \emph{kind} of transcendental
 appears), and Paper~34 organizes by named mechanism (\emph{which}
@@ -1356,28 +1361,28 @@ tensor-product spectral triple $\mathcal{T}_{S^3} \otimes
 generates the inter-particle Coulomb interaction from the framework's
 own structure.  The free tensor-product Dirac $D_{\mathrm{total}} = D_1
 \otimes I + \gamma_1 \otimes D_2$ satisfies $\{D, \gamma\} = 0$ exactly,
-so the free spectral action factorizes and contains no
+so the free heat trace factorizes and the free spectral action has no
+cross term and contains no
 interaction---the correct statement that free particles do not interact.
 \textbf{[MEASURED]} Gauging via the inner fluctuation of the truncated operator-system
 algebra produces a genuine, non-factorizable two-body interaction
 (connected fraction $77\%$ at $n_{\max} = 2$, falling to $32\%$ at $n_{\max} = 3$---
-cutoff-sensitive, and measured at only two cutoffs).  \textbf{[PANEL-VERIFIED]} Its angular structure is
-exactly what the universal sector predicts:\ $100\%$ $m$-conserving,
-$100\%$ Gaunt-compatible, pure $k = 0$ monopole at both tested cutoffs.
+cutoff-sensitive, and measured at only two cutoffs).  \textbf{[MEASURED]} It is
+supported only on the direct (density--density) elements, so it is
+$m$-conserving, $\Delta l = 0$ and pure $k = 0$ by construction:\ a
+strict subset of the Coulomb channels, with no exchange or $k > 0$ term.
 Its radial weights, however, are \emph{not} proportional to the Coulomb
 $1/r_{12}$ kernel (Pearson $r = 0.41$--$0.58$, \emph{decreasing} with
 $n_{\max}$;\ Paper~54 reads this as structural rather than finite-size,
 an inference from the same two cutoffs).  This delineates the
-partition at the two-body level:\ the algebra $\mathcal{A}$ determines
-\emph{which} channels couple (angular selection rules, universal across
-central potentials by Paper~22), and the Dirac operator / metric
-determines \emph{how strongly} (radial coupling strengths,
-potential-specific).  The recurring ``multi-focal composition wall''
-sits exactly on this $\mathcal{A}/D$ boundary, and the reason is
-mathematical:\ the spectral action computes Seeley--DeWitt heat-kernel
-coefficients (metric curvature), while $1/r_{12}$ is a Green's-function
-kernel; the Coulomb potential enters through the Fock projection's
-chordal-distance identity (Paper~7), not through the spectral action.
+partition at the two-body level:\ the angular algebra determines
+\emph{which} channels may couple (universal across central potentials
+by Paper~22), and the Dirac operator / metric determines \emph{how
+strongly} (potential-specific).  The recurring ``multi-focal
+composition wall'' sits on this $\mathcal{A}/D$ boundary;\ the
+heat-kernel versus Green's-function contrast does not explain it, since
+the resolvent route fails the same way (Papers~31, 54), and the
+mismatch is attributed to the Fock projection's conformal factor.
 
 \subsection{Periods (Paper~55)}
 The master Mellin engine of Paper~18 indexes the framework's
@@ -1425,8 +1430,7 @@ and an explicit inclusion of the candidate cosmic-Galois group
 $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3N} \rtimes SL_2$ into
 $\mathrm{Aut}^{\otimes}(\omega)$.  \textbf{[INTERNAL THEOREM]} The load-bearing result is the
 \emph{cosmic-Galois comparison homomorphism}
-$U^*_{\mathrm{GV}} \rightarrow \mathcal{U}_4^{\mathrm{ab}}
-\rtimes SL_2$ from the framework's finite-cutoff Galois group to the
+$U^*_{\mathrm{GV}} \rightarrow \mathcal{U}_4^{\mathrm{ab}}$ from the framework's finite-cutoff Galois group to the
 abelianization of the unipotent radical of the level-4 motivic Galois
 group $\mathcal{G}_4 = \mathcal{G}_{\mathrm{MT}(\mathbb{Z}[i, 1/2])}$
 (Deligne~\cite{deligne2010}, Glanois~\cite{glanois2015}).  It is \emph{not injective}:\ its image
@@ -1442,8 +1446,9 @@ is mixed Tate over $\mathbb{Q}(i)$ but not over $\mathbb{Q}$;\ the level-4 place
 $G = \mathrm{Im}\,\mathrm{Li}_2(i)$ in Deligne's $N = 4$ setting.  That $G$ is \emph{not} a period of $\mathrm{MT}(\mathbb{Z})$
 is expected but not proven, so this motivates the refinement rather than
 forcing it.
-Two scope qualifiers are essential and stated honestly:\ (i) GeoVac
-\emph{realizes the abelianization} of the level-4 cosmic Galois group
+Two scope qualifiers are essential and stated honestly:\ (i) GeoVac's
+comparison map lands in an \emph{abelianized image} inside the level-4
+cosmic Galois group, of positive codimension at each weight
 (Reading~A)---its primitive Hopf substrate is cocommutative, confirmed
 bit-exact at the JLO entire-cyclic-cocycle level at depth~2, so the
 image lands in $\mathcal{U}_4^{\mathrm{ab}} \cong \mathbb{G}_a^\infty$

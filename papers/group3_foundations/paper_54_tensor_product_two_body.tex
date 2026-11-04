@@ -36,17 +36,18 @@ inner fluctuation $A = \sum_i a_i^\dagger [D, a_i]$ from the truncated
 operator system $\mathcal{O}_{n_{\max}}$ produces a genuine two-body
 interaction: the connected (non-factorizable) fraction of $\{D, A\}$ is
 $77\%$ at $n_{\max} = 2$ and $32\%$ at $n_{\max} = 3$
-(Proposition~\ref{prop:connected}). The angular decomposition of this
-interaction is $100\%$ $m$-conserving, $100\%$ Gaunt-compatible, and
-pure $k = 0$ monopole at both cutoffs
-(Theorem~\ref{thm:angular_structure}). However, the radial matrix
+(Proposition~\ref{prop:connected}). This interaction is supported
+only on the direct (density--density) elements $\langle ab|\cdot|ab
+\rangle$, so it is $m$-conserving, $\Delta l = 0$ and pure $k = 0$ by
+construction (Theorem~\ref{thm:angular_structure});\ the exchange and
+$k > 0$ channels of $1/r_{12}$ are absent. The radial matrix
 element ratios do not match the Coulomb $1/r_{12}$ kernel: the
 coefficient of variation exceeds $1600\%$ and the Pearson correlation
 is $0.41$--$0.58$ (Proposition~\ref{prop:radial_negative}). These
 results precisely delineate Paper~31's universal/Coulomb partition at
-the two-body level: the \emph{algebra} determines which channels
-couple (angular selection rules); the \emph{metric} determines how
-strongly (radial coupling strengths). The multi-focal composition wall
+the two-body level: the gauged \emph{algebra} yields a monopole,
+density--density subset of the Coulomb channels;\ the \emph{metric}
+determines the coupling strengths. The multi-focal composition wall
 identified across six independent observables in the GeoVac programme
 is structurally located at this algebra/metric boundary.
 \end{abstract}
@@ -63,11 +64,12 @@ $(\mathcal{A}, \mathcal{H}, D)$ on the Fock-projected
 three-sphere~\cite{paper7,paper32}: the algebra $\mathcal{A}$ of
 truncated multipliers on $S^3$, the Hilbert space $\mathcal{H}$ of
 Fock-projected states, and the Camporesi--Higuchi Dirac operator $D$.
-This single-particle spectral triple has been shown to converge to the
+Truncations of the true Camporesi--Higuchi window converge to the
 continuum $S^3$ in the van~Suijlekom state-space
-Gromov--Hausdorff distance~\cite{paper38}, and the spectral action
-$\mathrm{Tr}\,f(D^2/\Lambda^2)$ reproduces the correct gravity sector
-at one loop~\cite{paper51}.
+Gromov--Hausdorff distance~\cite{paper38} (the chirality-doubled model
+used below is not the object of that theorem), and the spectral action
+$\mathrm{Tr}\,f(D^2/\Lambda^2)$ reproduces the standard continuum
+Chamseddine--Connes behaviour~\cite{paper51}.
 
 A central open question is whether the framework can derive
 \emph{inter-particle interactions} from its own structure, rather than
@@ -87,10 +89,11 @@ for two particles, each on a copy of the truncated $S^3$, and compute
 the gauged spectral action to determine what interaction, if any,
 emerges from the algebra's inner fluctuations.
 
-The results are sharp: the algebra produces the correct angular
-selection rules (Gaunt compatibility, $m$-conservation, monopole
-dominance), but the radial coupling strengths are not proportional to
-the Coulomb kernel. This places the multi-focal wall precisely at the
+The results are sharp: the gauged interaction is consistent with the
+angular selection rules but reproduces only their monopole,
+density--density subset ($m$-conserving, $\Delta l = 0$, $k = 0$), and
+its radial coupling strengths are not proportional to the Coulomb
+kernel. This places the multi-focal wall precisely at the
 boundary between the algebra $\mathcal{A}$ (which determines angular
 structure) and the Dirac operator $D$ (which determines radial
 couplings) --- the universal/Coulomb partition of
@@ -164,9 +167,11 @@ consequence,
   D_{\mathrm{total}}^2 = D_1^2 \otimes I_2 + I_1 \otimes D_2^2,
   \label{eq:D2_factorizes}
 \end{equation}
-and the spectral action $\mathrm{Tr}\,f(D_{\mathrm{total}}^2/\Lambda^2)
-= \mathrm{Tr}\,f(D_1^2/\Lambda^2) \cdot \mathrm{Tr}\,
-f(D_2^2/\Lambda^2)$ factorizes exactly at every cutoff $\Lambda$.
+so the heat trace factorizes exactly,
+$\mathrm{Tr}\,e^{-tD_{\mathrm{total}}^2} = \mathrm{Tr}\,e^{-tD_1^2}
+\cdot \mathrm{Tr}\,e^{-tD_2^2}$ for every $t > 0$;\ for a general
+cutoff function $f$ the spectral action is a sum of $f$ over sums of
+single-particle eigenvalues, with no cross term.
 \end{theorem}
 
 \begin{proof}
@@ -279,18 +284,21 @@ $1.0$ & $0.956832$ & $0.185405$ \\
 \begin{theorem}[Angular structure of the connected interaction]
 \label{thm:angular_structure}
 The connected two-body interaction $V_{\mathrm{conn}}$ from the
-rotationally invariant gauge field~\eqref{eq:A_full} satisfies:
+rotationally invariant gauge field~\eqref{eq:A_full} is supported only
+on the direct elements $V_{\mathrm{conn}}[a, b, a, b]$ at $n_{\max} \in
+\{2, 3\}$ \textbf{[MEASURED]}, so items (i)--(iii) hold for it
+automatically; they show that it is consistent with the Coulomb
+selection rules, not that it generates them. It satisfies:
 \begin{enumerate}
 \item[(i)] \textbf{$m$-conservation:} $m_1 + m_2 = m_1' + m_2'$ for
   all nonzero matrix elements --- structural for all $n$ (the
   $M^\dagger \cdot [D, M]$ conjugate pairing forces the gauge field's
   total $M = 0$), confirmed numerically at $n_{\max} \in \{2, 3\}$.
 \item[(ii)] \textbf{Gaunt compatibility:} $|\Delta l_1| = |\Delta
-  l_2| = k$ for all nonzero $(l_1, l_2) \to (l_1', l_2')$ channels ---
-  structural for all $n$ via the $3$-$Y$ selection rules of the
-  multiplier algebra (consistent with the potential-independent angular
-  sparsity theorem of Paper~22~\cite{paper22}), confirmed at
-  $n_{\max} \in \{2, 3\}$.
+  l_2| = k$ for all nonzero $(l_1, l_2) \to (l_1', l_2')$ channels,
+  with $k = 0$ on the direct support (consistent with the
+  potential-independent angular sparsity theorem of
+  Paper~22~\cite{paper22}), confirmed at $n_{\max} \in \{2, 3\}$.
 \item[(iii)] \textbf{Pure monopole:} $100\%$ of $\|V\|^2$ is in the
   $k = 0$ multipole channel, \emph{verified at $n_{\max} \in \{2, 3\}$}
   (computational; not asserted beyond the tested cutoffs).
@@ -305,8 +313,8 @@ c, d]$ extracted from the positive-chirality sector at $n_{\max} = 2$
 ($N = 5$, $25$ nonzero elements) and $n_{\max} = 3$ ($N = 14$, $196$
 nonzero elements). The $m$-conservation is enforced by the $M^\dagger
 \cdot [D, M]$ conjugate pairing, which ensures the total $M$ quantum
-number of the gauge field is zero. The Gaunt compatibility follows
-from the $3$-$Y$ selection rules of the multiplier algebra. All four
+number of the gauge field is zero. Every nonzero element is direct,
+$[a, b, a, b]$, so (ii) and (iii) hold with $\Delta l = 0$. All four
 items (m-conservation, Gaunt compatibility, $100\%$ $k=0$ monopole, and
 the connected-fraction proposition above) are regression-pinned in
 \texttt{tests/test\_paper31\_two\_body.py} (\texttt{test\_spectral\_action\_two\_body\_nmax2}
@@ -317,10 +325,9 @@ radial-vs-Coulomb Pearson decreasing with $n_{\max}$.
 \begin{remark}
 The $k = 0$ monopole channel corresponds to the $F^0$ Slater integral
 in the Neumann expansion of $1/r_{12}$
-(Paper~12~\cite{paper12}). Higher multipoles $k = 1, 2, \ldots$ would
-appear at larger $n_{\max}$ or in the full spinor sector. The
-\emph{absence} of the $k = 1$ dipole is correct for identical
-particles by parity.
+(Paper~12~\cite{paper12}). The exchange and higher-multipole channels
+of $1/r_{12}$, already present at these cutoffs, are absent from
+$V_{\mathrm{conn}}$, which is direct-diagonal.
 \end{remark}
 
 %% =====================================================================
@@ -341,19 +348,19 @@ $54\%$.
 The spectral-action interaction is a strict \emph{subset} of the
 Coulomb matrix elements: all nonzero spectral elements also appear in
 the Coulomb matrix ($0$ spectral-only entries), but the Coulomb matrix
-has many additional nonzero elements ($240$ at $n_{\max} = 2$,
-$15\,168$ at $n_{\max} = 3$) that are zero in the spectral
-interaction. The Pearson correlation \emph{decreases} with $n_{\max}$,
-indicating this is structural rather than a finite-size artifact.
+has many additional nonzero elements ($82$ at $n_{\max} = 2$,
+$3\,604$ at $n_{\max} = 3$, against $25$ and $196$ spectral ones) that
+are zero in the spectral interaction. The Pearson correlation
+\emph{decreases} from $n_{\max} = 2$ to $3$, consistent with a
+structural rather than a finite-size mismatch.
 
 \begin{remark}
 The $1/r_{12}$ Coulomb kernel in the Fock-projected basis arises from
 the chordal distance identity under stereographic projection
 (Paper~7~\cite{paper7}). This is a \emph{metric} property of $S^3$,
-not a spectral-action property. The spectral action
-$\mathrm{Tr}\,f(D^2/\Lambda^2)$ computes heat-kernel coefficients
-(Seeley--DeWitt), while $1/r_{12}$ is a Green's function kernel ---
-fundamentally different objects at the mathematical level.
+not a spectral-action property. The heat-kernel versus
+Green's-function contrast does not explain the radial mismatch, however:\
+the resolvent route fails the same way (Sec.~\ref{sec:discussion}).
 \end{remark}
 
 %% =====================================================================
@@ -400,8 +407,9 @@ the inter-particle interaction splits as
       strengths}}_{\text{from } D / \text{metric}}.
   \label{eq:AD_split}
 \end{equation}
-The first factor is framework-native (derived from inner
-fluctuations). The second factor is calibration data (the Slater
+The first factor is the angular algebra's (Paper~22~\cite{paper22});\
+the inner fluctuation here populates only its monopole, direct subset
+and does not generate it. The second factor is calibration data (the Slater
 integrals $R^k$ of Paper~12~\cite{paper12}).
 \end{corollary}
 
@@ -416,9 +424,10 @@ The result vindicates the composed-geometry architecture of
 Paper~17~\cite{paper17}: the Gaunt selection rules that give the
 exactly $Q$-linear composed Pauli count
 ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis) of
-Paper~14~\cite{paper14} are
-not ad hoc --- they emerge from the tensor-product algebra's inner
-fluctuations. The radial Slater integrals that complete the
+Paper~14~\cite{paper14} are those of the angular algebra
+(Paper~22~\cite{paper22});\ the tensor-product inner fluctuation is
+consistent with them but reproduces only their monopole, direct
+subset. The radial Slater integrals that complete the
 Hamiltonian are the irreducible calibration content, consistent with
 Paper~18's exchange-constant taxonomy~\cite{paper18} (calibration
 tier).
@@ -491,11 +500,10 @@ but not the NN force strength.
 The gravity sector (Paper~51~\cite{paper51}) is special: the spectral
 action directly gives metric properties (Einstein--Hilbert action,
 Newton's constant, cosmological constant) because gravity \emph{is}
-the metric. The two-body Coulomb interaction is a Green's function
-kernel, not a heat-kernel coefficient, so it lives on the other side
-of the $\mathcal{A}/D$ boundary. This structural difference explains
-why gravity results are bit-exact while inter-particle interactions
-require imported potentials.
+the metric. The two-body Coulomb interaction lives on the other side
+of the $\mathcal{A}/D$ boundary, consistent with the gravity sector
+being reproduced at the continuum level (Paper~51) while
+inter-particle interactions require imported potentials.
 
 %% =====================================================================
 \section{Discussion}
@@ -503,14 +511,15 @@ require imported potentials.
 %% =====================================================================
 
 The tensor-product spectral action generates genuine two-body physics:
-a non-factorizable interaction with the correct angular selection
-rules. That the radial weights do not match Coulomb is not a failure
-of the framework but a structural theorem about \emph{what spectral
-actions can compute}: heat-kernel coefficients (metric curvature, not
-Green's functions). The Coulomb potential is the Green's function of
-the Laplacian, $\nabla^2 G = -4\pi\delta^{(3)}$; it requires solving
-a differential equation on the manifold, not tracing over the
-spectrum.
+a non-factorizable interaction consistent with the angular selection
+rules, populating only their monopole, direct subset. That the radial weights do not match Coulomb is a measured
+negative \textbf{[MEASURED]} (one gauge construction, $n_{\max} = 2,
+3$). It is not explained by heat-kernel versus Green's-function
+structure:\ the resolvent route, which supplies a Green's function,
+fails the same way (Paper~31~\cite{paper31}, two-body section;\
+best Pearson $0.85$, falling with $n_{\max}$), and the mismatch is
+attributed to the Fock projection's conformal factor, a function rather
+than a constant.
 
 The practical consequence is that inter-particle radial integrals
 (Slater $R^k$, Minnesota form factors, Clementi--Raimondi screening)
@@ -523,12 +532,10 @@ a spectral triple.
 
 \emph{Open question.} Whether the Green's function kernel can be
 recovered from the spectral triple by a construction other than the
-spectral action --- for example, via the resolvent $(D - z)^{-1}$ or
-the Connes distance function --- remains an open problem. The
-resolvent naturally gives the propagator $\langle x | (D-z)^{-1} |
-y\rangle$, which in the continuum limit reproduces the Green's
-function. A resolvent-based derivation of $1/r_{12}$ from the
-tensor-product spectral triple would close the multi-focal wall.
+spectral action --- for example via the Connes distance function ---
+remains an open problem. The resolvent $(D^2)^{-1}$ has been tested and
+does not reproduce $1/r_{12}$ (four weightings, Pearson at most $0.85$
+and falling with $n_{\max}$;\ Paper~31~\cite{paper31}).
 
 \begin{acknowledgments}
 This work was performed using AI-augmented research methods.

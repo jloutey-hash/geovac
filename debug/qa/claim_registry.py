@@ -244,7 +244,9 @@ CLAIMS = {
                   r"universal\s+(?:across|over)\s+(?:the\s+)?compact\s+(?:connected\s+)?(?:\*\*)?semisimple|"
                   r"rigorous\s+(?:at\s+)?rank|"
                   r"4/\\pi\$?[^.;]{0,40}universal|universal[^.;]{0,30}\$?4/\\pi|"
-                  r"numerically\s+supported[^.;]{0,30}rank\s*\$?\\ge\s*2",
+                  r"numerically\s+supported[^.;]{0,30}rank\s*\$?\\ge\s*2|"
+                  r"reports\s+it\s+universal|universal\s+(?:across|over)\s+compact\s+simple|"
+                  r"reported\s+rank-invariant",
         load_bearing=True, changed="2026-11-03"),
     "p1-ladder-exact": dict(
         statement="Paper 1's ladder operators reproduce n on INTERIOR shells and l(l+1) on every shell "

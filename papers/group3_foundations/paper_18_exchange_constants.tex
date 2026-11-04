@@ -51,8 +51,10 @@ Sec.~\ref{sec:observable_classification}).
 
 Beyond the basis-level catalog, three theorems classify the
 spectral content of operators on round~$S^3$:
-\textbf{(Theorem~1)} operator order is the primary discriminant
-of transcendental class---the squared Dirac operator $D^2$ produces
+\textbf{(Theorem~1)} for the Camporesi--Higuchi $D$ against $D^2$,
+operator order is the primary discriminant of transcendental class
+(not for every second-order operator:\ $\nabla^*\nabla$ fails)---the
+squared Dirac operator $D^2$ produces
 $\pi^{\mathrm{even}}$ exclusively at every integer~$s$, while the
 first-order Dirac operator~$D$ produces odd-zeta content
 $\zeta_R(2k{+}1)$ at odd~$s$ (conjecturally outside $\mathbb{Q}(\pi)$;\
@@ -65,8 +67,10 @@ quarter-integer Hurwitz shift);
 \textbf{(Theorem~3)} the three components of the
 fine-structure-constant combination $K = \pi(B + F - \Delta)$ of
 Paper~2~\cite{loutey_paper2} have spectral homes of distinct type (finite Casimir trace, infinite Dirichlet series at
-the packing exponent, Dirac mode degeneracy on the spinor bundle),
-each in a distinct cell of the three-axis grid.  The combination
+the packing exponent, Dirac mode degeneracy on the spinor bundle);\
+$B$ and $F$ share the (second-order, scalar) cell of the three-axis
+grid and differ by finite versus infinite summation, and $\Delta$ sits
+in the (first-order, spinor) cell.  The combination
 rule---$K$ matches $\alpha^{-1}$ to $4.8\times10^{-7}$ relative, and
 $\alpha$ approximately satisfies the cubic $\alpha^3 - K\alpha + 1 = 0$
 to $8.8\times10^{-8}$---remains a numerical Observation
@@ -76,7 +80,8 @@ A complementary \textbf{Observation (structural incommensurability)}
 catalogues the meta-pattern: GeoVac observables that look unitary
 at the surface ($K$ itself; two-loop QED on~$S^3$; zero structure
 of the GeoVac zeta) resolve under structural analysis into objects
-from different cells of the three-axis grid.  No further unification
+of different type (not always different cells of the three-axis grid:\
+$K$'s $B$ and $F$ share one).  No further unification
 is currently visible.  The taxonomy is read (a census and a reading,
 not a classification) in terms of Mellin transforms of heat kernels: the free heat kernel produces
 $\pi^{\mathrm{even}}$ in its integer-$s$ spectral-zeta values (for
@@ -498,8 +503,9 @@ content inherited from the angular coupling integrals.
 
 At Level~4 the compact product basis (prolate spheroidal CI) is fully
 algebraic in its $\sigma$ sector, and the non-compact mol-frame
-hyperspherical reparameterization introduces $\mu(\rho,R)$ as the
-transcendental cost of that reparameterization.
+hyperspherical reparameterization introduces the piecewise-algebraic
+$\mu(\rho,R)$ (no global characteristic polynomial) as the cost of that
+reparameterization.
 
 \textbf{[WITHDRAWN 2026-09-14]} Earlier versions of this subsection said
 more:\ that the product basis is \emph{structurally incomplete}, that
@@ -598,7 +604,8 @@ non-Hermiticity (Sec.~\ref{sec:taxonomy}).
 The mol-frame hyperspherical reparameterization (Paper~15) introduces
 coordinates $(\rho, R, \alpha)$ where $\rho$ is the electron hyperradius
 and $\alpha$ the hyperangle.  The angular eigenvalues $\mu(\rho, R)$ are
-a transcendental function of \emph{two} continuous parameters.  That
+a function of \emph{two} continuous parameters (piecewise-algebraic,
+below).  That
 solver achieves $94.1\%$ $D_e$ at $l_{\max} = 4$ with $\sigma$ and $\pi$
 channels.  \textbf{[SCOPE]} Earlier versions read this as ``surpassing the
 prolate CI ceiling.''  It is not a matched comparison---the $94.1\%$
@@ -1951,10 +1958,12 @@ exclusive: no other projection in the catalogue introduces odd-zeta
 content into the transcendental signature, and the spinor-lift
 projection is the lone bridge between the calibration-tier
 ($\pi^{\text{even}}$) world of second-order Riemannian operators and
-the odd-zeta world of first-order Dirac operators.  Equivalently:
-seeing $\zeta_R(3)$, Catalan's $G$, or any Dirichlet-$\beta$ value in
-a GeoVac observable is diagnostic of the spinor-lift projection
-having been invoked at some step in the chain.
+the odd-zeta world of first-order Dirac operators.  Within that
+dictionary, seeing $\zeta_R(3)$, Catalan's $G$, or a Dirichlet-$\beta$
+value is diagnostic of the spinor-lift projection;\ outside it the
+diagnostic does not hold, since scalar routes also carry odd zeta
+values (the oscillator's Euler ladder carries $\zeta(3)$ at $s = 4$,
+Paper~24;\ scalar round-sphere determinants carry $\zeta(\text{odd})$).
 
 
 \paragraph{Operator-order $\times$ bundle classification.}
@@ -1976,7 +1985,7 @@ having been invoked at some step in the chain.
   Embedding         & $e^a E_1(a)$, $1/r_{12}$
                     & ---
                     & basis $\to$ $\mathbb{R}^3$ \\
-  Alg.-implicit / composition & $\mu(\rho,R)$, PK
+  Alg.-implicit / composition & $\mu(R)$;\ $\mu(\rho,R)$ (piecewise);\ PK
                     & ---
                     & multi-geometry \\
   Odd-zeta          & $\zeta_R(3), \zeta_R(5), \dots$
@@ -2038,7 +2047,8 @@ odd-zeta content not present in any integer-$s$ value of $\zeta_{D^2}$
 $\zeta_{D^2}(5/2)$).
 \end{enumerate}
 Operator order---first vs.\ second---is therefore the primary
-transcendental discriminant on round~$S^3$ (the separation of the two
+transcendental discriminant between $D$ and $D^2$ on round~$S^3$ (not
+for every second-order operator, below;\ the separation of the two
 classes is conditional on the period conjecture, $\zeta_R(2k{+}1) \notin
 \mathbb{Q}(\pi)$).  Bundle type modulates
 degeneracies, eigenvalue lattices, and rational coefficients, but
@@ -2514,9 +2524,11 @@ $\{\gamma_F, D_F\} = 0$ implies, for every odd $k \in \mathbb{N}$,
   \mathrm{Tr}\bigl(D_F^k \cdot e^{-t D_F^2}\bigr) \;\equiv\; 0,
   \qquad t > 0.
 \end{equation}
-In particular, the M3 sub-mechanism (vertex-parity Hurwitz, $k=1$)
-of the master Mellin engine vanishes identically on any
-Connes--Chamseddine-compatible inner factor.
+In particular, the signed $k = 1$ trace of the master Mellin engine
+vanishes identically on any Connes--Chamseddine-compatible inner
+factor, as it does on the outer Camporesi--Higuchi spectrum;\ the M3
+reading through the absolute sum and its parity grading
+(Eq.~\eqref{eq:m3_gammaP_slot}) is not covered by this theorem.
 \end{theorem}
 
 \begin{proof}
@@ -2531,8 +2543,9 @@ forces zero. $\square$
 spectral action]
 \label{thm:ac_factorization}
 For the combined Dirac $D = D_{\mathrm{GV}} \otimes 1_F + \gamma_{\mathrm{GV}}
-\otimes D_F$ with $\gamma_{\mathrm{GV}}$ the outer chirality
-grading,
+\otimes D_F$ with $\gamma_{\mathrm{GV}}$ an outer grading that
+anticommutes with $D_{\mathrm{GV}}$ ($\sigma_x \otimes 1$ on the
+chirality-doubled model;\ the true window is odd and has none),
 \begin{equation}\label{eq:d_squared_factorize}
   D^2 \;=\; D_{\mathrm{GV}}^2 \otimes 1_F + 1_{\mathrm{GV}}
             \otimes D_F^2,
@@ -2549,6 +2562,13 @@ outer chirality anticommutation.  Consequently
 and the master Mellin engine on the combined triple factorizes as
 (outer M$_i$ ring)~$\times$~(inner Yukawa Dirichlet ring).
 \end{theorem}
+
+\noindent The production combined Dirac (Paper~32, Sprint~H1) twists
+$D_F$ by $\mathrm{sign}(D_{\mathrm{GV}})$, which commutes with
+$D_{\mathrm{GV}}$, so the hypothesis fails there and the factorization
+does not hold at nonzero Yukawa \textbf{[MEASURED]} ($n_{\max} = 2$);\ it
+holds for the graded product $D_{\mathrm{GV}} \otimes \gamma_F + 1
+\otimes D_F$ on the same data.
 
 The Mellin output of the inner factor is a generalized Dirichlet
 series in the eigenvalues $\{y_i\}$ of $D_F$ (the Yukawa parameters,
@@ -2588,7 +2608,7 @@ GeoVac's taxonomy provides no derivation principle for them.
 The framework controls the outer factor's transcendental content
 via M1/M2/M3; the inner factor controls the SM-distinguishing
 parameters via Eq.~(\ref{eq:inner_dirichlet}); the two tensor
-cleanly by Theorem~\ref{thm:ac_factorization}, and neither
+cleanly for a graded product (Theorem~\ref{thm:ac_factorization}), and neither
 determines the other.
 
 The structural separation is consistent with the
@@ -2739,8 +2759,8 @@ The structure of $K$ is thus: the 2D ball volume $\omega_2 = \pi$
 fixes Paper~0's packing-plane prefactor $\sigma_0 = \pi d_0^2 / 2$)
 multiplying a sum of the $S^2$ Casimir trace ($B$, discrete),
 half the $S^1$ spectral zeta value ($F$, transcendental), and an
-$S^3$ boundary term ($\Delta$, mixed).  This is a Weyl-type
-formula that converts between the discrete bundle
+$S^3$ boundary term ($\Delta$, mixed).  Read this way, it would be a
+Weyl-type formula converting between the discrete bundle
 (representation labels on $S^3$) and the continuous coupling
 (the electromagnetic interaction strength measured in
 $\mathbb{R}^3$).
@@ -2779,9 +2799,9 @@ prefactor $\sigma_0 = \pi d_0^2 / 2$ in Paper~0, with $S^2$ the
 Hopf base).  This is precisely the pattern identified throughout this
 paper: a transcendental conversion factor mediating between
 discrete and continuous descriptions of the same geometry.
-The structural match is evidence---not proof---that the
-combination rule is an instance of the exchange constant pattern
-rather than numerology.
+The structural match is suggestive only:\ the combination rule
+remains an Observation (Paper~2), a numerical coincidence with
+structural support, and no derivation exists.
 \end{observation}
 
 \begin{proposition}[The cubic's root is transcendental]
@@ -2932,11 +2952,11 @@ $n_{\mathrm{CH}} = 3$; algebraic class: rational, finite, on the
 The three objects are of distinct type:
 $B$ is a finite combinatorial sum, $F$ is an infinite arithmetic
 series, $\Delta$ is a finite boundary degeneracy on a different
-bundle (spinor vs.\ scalar).  Each lives in a distinct cell of the
-operator-order $\times$ bundle classification of
-Theorem~\ref{thm:operator_order} ($B$: 2nd-order / scalar /
-finite-truncation; $F$: 2nd-order / scalar / infinite-Dirichlet;
-$\Delta$: 1st-order / spinor / boundary).
+bundle (spinor vs.\ scalar).  In the operator-order $\times$ bundle
+classification of Theorem~\ref{thm:operator_order}, $B$ and $F$ share
+the 2nd-order / scalar cell and are distinguished by finite truncation
+versus the infinite Dirichlet series;\ $\Delta$ is 1st-order / spinor /
+boundary.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -3369,9 +3389,9 @@ continuous parameters:
     the same statement to the Level-4 angular eigenvalues $\mu(\rho,R)$.
     It does not carry over as written:\ the construction above is a linear
     matrix pencil $H_0 + R \cdot V_C$, which is what supplies the single
-    global $P(R,\mu) = 0$, and the Level-4 sweep is not of that form.
-    What the Level-4 eigenvalues are instead is not settled here---see
-    Sec.~\ref{sec:mu_level4}.
+    global $P(R,\mu) = 0$, and the Level-4 sweep is not of that form:\
+    the Level-4 eigenvalues are piecewise-algebraic with no global
+    characteristic polynomial (Sec.~\ref{sec:mu_level4}).
   \item \textbf{Matched scale:} $\kappa = -1/16$ is rational
     (Sec.~\ref{sec:kappa_derivation}); it is matched to the graph band
     edge, not a calibration constant --- the calibration content of
@@ -3539,9 +3559,10 @@ Across the framework, single-observable statements
 ``$K = \pi(B + F - \Delta)$'',
 ``zero structure of the GeoVac zeta'')
 have repeatedly resolved under structural analysis into sums or
-superpositions of objects from categorically different cells of the
-operator-order $\times$ bundle $\times$ topology classification of
-Theorem~\ref{thm:three_axis}.  The objects at each cell are what they
+superpositions of objects of categorically different type (finite
+traces, infinite Dirichlet series, boundary degeneracies;\ for $K$,
+$B$ and $F$ share a cell of the classification of
+Theorem~\ref{thm:three_axis}).  The objects at each cell are what they
 are, not derivations of each other; the appropriate taxonomy is
 three-axis, not single-generator.  The status is empirical at three
 documented instances; it may sharpen if further framework observables
@@ -3642,8 +3663,10 @@ a polynomial in~$\pi^2$ at every integer~$s \ge 2$
 (Eq.~\ref{eq:zeta_d2}); the first-order Dirac operator has
 spectral zeta containing odd-zeta content $\zeta_R(2k{+}1)$ at
 odd~$s$, conjecturally outside $\mathbb{Q}(\pi)$
-(Eq.~\ref{eq:hurwitz_discriminant}).  Operator order is the primary
-transcendental discriminant (conditional on the period conjecture);
+(Eq.~\ref{eq:hurwitz_discriminant}).  Between $D$ and $D^2$, operator
+order is the primary transcendental discriminant (conditional on the
+period conjecture;\ $\nabla^*\nabla$, also second order, does not
+follow it, Paper~28);
 bundle type modulates rational
 coefficients only.  Loop-order reading (consistent with the known
 coefficients, not a prediction made in advance): no odd zeta in the
@@ -3684,8 +3707,9 @@ look unitary at the surface
 (``$K = \pi(B + F - \Delta)$'';
 ``two-loop QED on $S^3$'';
 ``zero structure of the GeoVac zeta'')
-resolve under structural analysis into objects from different cells
-of the operator-order $\times$ bundle $\times$ topology grid.
+resolve under structural analysis into objects of different type
+(not always different cells of the operator-order $\times$ bundle
+$\times$ topology grid:\ $K$'s $B$ and $F$ share one).
 Observation~\ref{obs:incommensurability} catalogues three independent
 instances; no further unification is currently visible.
 

@@ -772,7 +772,9 @@ sub-sectors:
     $1/4, 3/4, 5/4$.
   \item \textbf{Depth-$k$ loop tower.}  At loop order $k \ge 2$ on the
     iterated sunset with vertex restriction, the M3 sector contributes
-    an element at depth $\le k$ in $\MT(\Z[1/2])$ at level~2.
+    an element at depth $\le k$ in $\MT(\Z[1/2])$ at level~2
+    (verified at $k = 2, 3$;\ for general $k$ a prediction,
+    \S\ref{subsec:m3_depth_k_witness}).
     Loop order bounds the depth of the classical multiple-$t$-value
     content; it does not automatically mint new irreducibles.
     The $k = 2$ instance $S_{\min}$
@@ -782,10 +784,11 @@ sub-sectors:
     is depth~$\le 1$, giving
     $S_{\min} \in \Q[\pi^2, \ln 2, \zeta(3), \zeta(5)]$ in closed form
     --- a \emph{level drop} (level~2 vs the $\le 4$ bound from
-    sub-sector~2) \emph{and} a depth drop.  The first genuine depth-2
-    generators appear at $k = 3$ ($t(5,3)$, $t(5,1)$; three-loop
-    decomposition program).  The prior ``PSLQ-irreducible'' label was a
-    basis-coverage artifact.
+    sub-sector~2) \emph{and} a depth drop.  At $k = 3$ every level-2
+    depth-2 generator cancels in the full assembly, and the only depth-2
+    constant is the level-1 $\zeta(5,3)$
+    (\S\ref{sec:open}).  The prior ``PSLQ-irreducible'' label was
+    a basis-coverage artifact.
 \end{enumerate}
 The classification is a direct application of Deligne
 2010~\cite{deligne2010} and Glanois 2015~\cite{glanois2015} to the
@@ -1167,8 +1170,9 @@ T_5(k) := \tfrac{1}{3}\zeta(2, k + \tfrac{5}{2})
         - \tfrac{5}{6}\zeta(4, k + \tfrac{5}{2})
         + \tfrac{3}{16}\zeta(6, k + \tfrac{5}{2}),
 \]
-truncates to $S_{\min}^{(\sfive)} \approx 0.0399612091165\ldots$ at
-$K_{\max} = 500$, $50$ dps.  The natural verification target is the
+converges to $S_{\min}^{(\sfive)} = 0.0401823251474\ldots$
+(\textsc{mpmath} \texttt{nsum});\ the $K_{\max} = 500$ partial sum,
+$0.0399612091165\ldots$, is short by the tail, about $1/(9K)$.  The natural verification target is the
 decomposition-first pipeline that identified the $\sthree$ case
 (round-2 dossier, 2026-06-11):\ weight-grade the object, expand into
 Hoffman $t$-values at half-integer shift, apply stuffle and parity
@@ -1452,7 +1456,7 @@ shuffle-Hopf / deconcatenation-pair signature.
 \textbf{No empirical demand} from the JLO probe for the beyond-sprint-scale
 follow-on to cofree-cocommutative shuffle Hopf algebra $T(V)$
 enrichment of the substrate.  The comparison homomorphism
-$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$
+$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}}$
 of Paper~56 (Theorem~\texttt{thm:injection\_g4}, 2026-06-06;\ \emph{not}
 injective --- the M3 column has rank~$2$, far below the sector count) is
 the structurally correct statement:\ it factors through the
@@ -1468,7 +1472,7 @@ the inner factor as calibration data, not autonomously generated
 by the GeoVac outer triple, so the non-commutative enrichment
 question is not a sprint-scale follow-on.  (ii) How large the image of
 the comparison homomorphism $\Phi^{\mathrm{inj}}$ is inside
-$\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (Paper~56, 2026-06-06) ---
+$\mathcal{U}_4^{\mathrm{ab}}$ (Paper~56, 2026-06-06) ---
 since the map is not injective, this is a question about its image,
 not an isomorphism --- remains the named open forward research question, testable
 by exhausting GeoVac's M3 sector at depth $\ge 2$ for level-$4$
@@ -1663,8 +1667,8 @@ state-space Gromov--Hausdorff distance of truncated
 Camporesi--Higuchi spectral triples (a kernel constant, not the
 convergence rate;\ Paper~38 Lemma~L2,
 \cite{loutey_paper38};\ convergence extended to compact semisimple Lie
-groups in Paper~40, \cite{loutey_paper40}, with the constant $4/\pi$
-reported on simple groups only) is read (a reading, not a
+groups in Paper~40, \cite{loutey_paper40}, where whether the constant
+is the same for every simple $G$ is open) is read (a reading, not a
 derivation;\ Paper~38) as an M1 expression:
 \begin{equation}
 \label{eq:propinquity_rate_M1}

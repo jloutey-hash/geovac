@@ -410,7 +410,9 @@ Each of these results was originally derived in the Coulomb context,
 but the derivation never used a Coulomb-specific feature of $D$
 beyond the spherical-harmonic basis decomposition.  They transfer to
 any new central potential without re-derivation, contingent only on
-the new system having the same basis.
+the new system having the same basis --- except the composed Pauli
+coefficient $27.90$, which Paper~22 (Corollary~1) measures on the
+Coulomb library and only expects to carry over.
 
 \medskip\noindent\textbf{Practical consequence.}  When extending the
 GeoVac framework to a new physical system (nuclear shell model,
@@ -484,7 +486,8 @@ of Paper~22, and it transfers to any central potential.
 Paper~24~\cite{paper24} establishes the structural dual of
 Theorem~\ref{thm:fock_rigidity}.
 
-\begin{theorem}[Bargmann--Segal rigidity for the 3D HO, Paper~24]
+\begin{theorem}[Bargmann--Segal rigidity for the 3D HO, Paper~24;\
+\textbf{[CONDITIONAL]} on the imported $\mathrm{SU}(3)$-closure converse]
 \label{thm:bs_rigidity}
 The three-dimensional isotropic harmonic oscillator
 $V(r) = \tfrac{1}{2} m\omega^2 r^2$ is the unique central-field
@@ -494,8 +497,10 @@ irreducible representations $(N, 0)$ of $\mathrm{SU}(3)$.
 \end{theorem}
 
 The proof has three classical inputs~\cite{paper24}:
-Jauch--Hill~\cite{jauchhill1940} (the 3D isotropic HO is the unique
-central potential with $\mathrm{SU}(3)$ dynamical symmetry);
+Jauch--Hill~\cite{jauchhill1940} (the 3D isotropic HO has
+$\mathrm{SU}(3)$ dynamical symmetry;\ the converse, that $\mathrm{SU}(3)$
+closure forces $V \propto r^2$, is imported and not confirmed in
+Paper~24);
 Borel--Weil~\cite{borelweil} (the symmetric $(N, 0)$ irreps coincide
 with the homogeneous degree-$N$ subspaces of $H^2(S^5)$); and
 Bargmann--Segal--Hall~\cite{bargmann1961,hall1994} (the unique
@@ -1140,7 +1145,8 @@ contain the SU(2) angular sparsity theorem, the composed-block
 exactly $Q$-linear Pauli count, the Wigner~$3j$ / $D$ algebra, and
 the selection rules.  Adding the signature axis to the partition
 framework reveals that these results transfer not only across central
-potentials at fixed signature but also across signatures themselves.
+potentials at fixed signature (the composed Pauli coefficient only as
+expected, Paper~22 Corollary~1) but also across signatures themselves.
 The framework's structural-skeleton-scope reading (CLAUDE.md~\S2
 sprint-of-2026-05-07 pattern crystallization) survives the $(3, 1)$
 extension at $75\%$ of the projection dictionary
@@ -1220,13 +1226,15 @@ classification with actual computations;\ at the present stage of
 documentation only, this section records the audit verdict and
 identifies the sequencing.
 
-\subsection{Empirical verification of the partition by Sprints L1 + L2
-(2026-05-16/17)}
+\subsection{Bucket classification of the 28 projections by Sprints L1 + L2
+(2026-05-16/17;\ seven exercised at finite cutoff)}
 \label{sec:sig_l2_verification}
 
 The four-bucket classification above was an a priori prediction at
-the time of Sprint L0 (May~2026).  Subsequent computational sprints
-have verified the partition empirically at $28/28$ projections:
+the time of Sprint L0 (May~2026).  Subsequent sprints have classified
+all $28$ projections into these buckets;\ seventeen rows hold by
+construction and four by prior-art inheritance, so only seven are
+exercised at finite cutoff:
 
 \begin{itemize}\setlength{\itemsep}{2pt}
 \item Seventeen \textsc{transfers freely} projections inherit
@@ -1277,14 +1285,15 @@ content requires Lorentzian re-derivation while remaining in
 $\mathbb{Q}(\alpha)$.
 \end{itemize}
 
-The empirical verification of the a priori partition at $28/28$ is the
-direct operational payoff of the Sig/Op framing introduced here:\ the
-$28/28$ figure certifies the \emph{bucket classification} (which
-projections transfer freely, which require system-specific
-re-derivation), not a Lorentzian closure.
+The complete classification of the $28$ projections is the direct
+operational payoff of the Sig/Op framing introduced here:\ it
+certifies the \emph{bucket classification} (which projections transfer
+freely, which require system-specific re-derivation), not a Lorentzian
+closure.
 The signature partition, like the central-potential partition that is
-the main topic of this paper, is now an empirically-verified
-classification of GeoVac's projection inventory.  At the
+the main topic of this paper, is now a complete classification of
+GeoVac's projection inventory, seven of whose $28$ rows are exercised
+at finite cutoff.  At the
 operator-system / finite-cutoff level neither closure is established:\
 the \emph{Riemannian} period closure is automatic for a posited
 generator (the derivation of the wedge modular Hamiltonian from a
@@ -1404,12 +1413,14 @@ produces a genuine two-body interaction: the connected
 (non-factorizable) fraction of $\{D, A\}$ is $77\%$ at
 $n_{\max} = 2$ and $32\%$ at $n_{\max} = 3$.
 
-The angular decomposition of this interaction is $100\%$
-$m$-conserving, $100\%$ Gaunt-compatible, and pure $k = 0$ monopole
-at both cutoffs --- precisely the selection rules of the Coulomb
-$1/r_{12}$ kernel.  However, the radial matrix element ratios do not
-match Coulomb: the Pearson correlation is $0.41$--$0.58$ and
-decreases with $n_{\max}$.
+This interaction is supported only on the direct (density--density)
+elements $\langle ab|\cdot|ab\rangle$ ($25$ and $196$ nonzeros, against
+$107$ and $3800$ for $1/r_{12}$), so it is $m$-conserving, $\Delta l =
+0$ and pure $k = 0$ by construction:\ a strict subset of the Coulomb
+selection rules, with no exchange or $k > 0$ channel
+\textbf{[MEASURED]}.  Its radial matrix elements do not match Coulomb
+either:\ on the shared support the Pearson correlation is
+$0.41$--$0.58$ and decreases with $n_{\max}$.
 
 \subsection{Resolvent construction}
 
@@ -1447,9 +1458,9 @@ $G_{\mathrm{Gaunt}} \times R^k_{\mathrm{Slater}}$: the same Gaunt
 coefficient times the flat-space Slater integral with the
 $r_<^k / r_>^{k+1}$ kernel.
 
-The \textbf{angular} Gaunt part is shared --- hence the $100\%$
-$m$-conservation and correct selection rules from both the spectral
-action and the resolvent.  The \textbf{radial} parts are structurally
+The \textbf{angular} Gaunt part is shared --- hence both routes are
+consistent with the Coulomb selection rules (the spectral action
+populating only their monopole, direct subset).  The \textbf{radial} parts are structurally
 different: the Gegenbauer triple integral on $S^3$ versus the Slater
 integral in flat Euclidean coordinates.  The conversion between them
 is the Fock projection (Paper~7~\cite{paper7}), specifically the
@@ -1468,7 +1479,9 @@ precisely at the $\mathcal{A}/D$ boundary:
     (potential-specific)}}.
   \label{eq:two_body_AD}
 \end{equation}
-The algebra determines which channels couple.  The Dirac operator
+The angular algebra determines which channels may couple (Paper~22);\
+the gauged fluctuation populates only their monopole, direct subset.
+The Dirac operator
 --- through the Fock projection that maps its eigenvalues to
 physical coordinates --- determines how strongly.
 
@@ -1485,7 +1498,8 @@ sector --- containing angular sparsity bounds, composed-block Pauli
 scaling, selection rules, and the $jj$-coupled spinor extension ---
 depends only on the algebra $\mathcal{A}$ and the angular structure
 of its basis.  These results transfer to any spherical-fermion system
-without re-derivation.  The potential-specific sector --- containing
+without re-derivation (the composed Pauli coefficient is expected, not
+proven, to carry over;\ Paper~22, Corollary~1).  The potential-specific sector --- containing
 the spectrum, the calibration $\kappa$, the transcendental content,
 the rigidity theorems, and the $\alpha$-combination Observation --- depends on
 the explicit form of $D$.  These results must be re-derived for each

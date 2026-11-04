@@ -122,8 +122,8 @@ closed-form dimension $\dim = \sum_{j \le i \le \nmax}(i + 1)(j + 1)$.
 representation category $\Repcat(\HGV(\nmax))$ is an abelian, symmetric
 monoidal, rigid $\Q$-linear category (axioms TC-1a, TC-1b, TC-1c
 bit-exact); the no-op forgetful $\fibfun :\ \Repcat \to \Vecbf_{\Q}$ is a
-faithful exact $\otimes$-functor (TC-1d); and the pro-unipotent factor
-of the cosmic Galois group $\Ulev = \Ga^{3 N(\nmax)} \rtimes \SL_{2}$
+faithful exact $\otimes$-functor (TC-1d); and the candidate
+cosmic-Galois group $\Ulev = \Ga^{3 N(\nmax)} \rtimes \SL_{2}$
 admits an \emph{explicit inclusion}
 \[
    \Phimap :\ \Ulev(\Q) \longrightarrow \Aut^{\otimes}(\fibfun),
@@ -141,8 +141,12 @@ $t_{g} = 0$.
 \noindent\emph{Total bit-exact verification panel:\ $5{,}864$ zero
 residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
 TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $\nmax \in \{2, 3, 4\}$. The
-G4-Inj C4 sub-block is panel-size bookkeeping for the \emph{abelianized}
-image:\ its \emph{full} M3-column injectivity is \emph{refuted} (the
+G4-Inj block ($2{,}904$ of these) holds by construction:\ C1 is the
+multiplicativity of a ring map, C2 a coproduct identity on the
+\textsc{GeoVac} side, C3 the condition $\det g = 1$ that defines its
+$SL_{2}$ panel, and C4 is panel-size bookkeeping for the
+\emph{abelianized} image, whose \emph{full} M3-column injectivity is
+\emph{refuted} (the
 $\chi_{-4}$-enriched Gram is rank~$2 \ll N$), so those residuals do not
 certify a closed immersion (Theorem~\ref{thm:injection_g4}).
 The fourteenth math.OA standalone in the \textsc{GeoVac} series.
@@ -150,16 +154,16 @@ The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 \medskip
 \noindent\emph{Cosmic-Galois comparison homomorphism.} We close the
 \emph{comparison direction} $\Ustar_{GV} \to
-\mathcal{U}_{4} \rtimes SL_{2}$ into the (abelianization of the)
+\mathcal{U}_{4}$ into the (abelianization of the)
 unipotent radical of the level-4 motivic Galois group
 $\mathcal{G}_{4} = \mathcal{G}_{\mathrm{MT}(\Z[i, 1/2])}$ of
 Deligne 2010 + Glanois 2015, with four structural compatibilities
-(multiplicativity, depth-1 coproduct, $SL_{2}$-to-Levi via
-cyclotomic $\chi_{4}$, abelianized image via Glanois basis;\
+(multiplicativity, depth-1 coproduct, $SL_{2}$ mapping trivially into
+the solvable $\mathcal{G}_{4}$, abelianized image via Glanois basis;\
 Section~\ref{sec:injection_g4},
 Theorem~\ref{thm:injection_g4}). The proof uses the
 Eskandari--Murty--Nemoto 2025 level-4 placement of $G$ + the
-Goncharov--Deligne 2005 faithful action on
+Deligne 2010 faithful action (level~4) on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$. Equality / surjectivity
 on the depth-$\ge 2$ content is the named long-range forward
 research question.
@@ -233,8 +237,9 @@ The Tannakian reconstruction direction $\Aut^{\otimes}(\fibfun) =
 (Theorems~\ref{thm:tc2a_equality}, \ref{thm:tc2b_sl2_equality},
 \ref{thm:tc2c_higher_cutoff}, \ref{thm:tc2d_cofiltered_coherence}).
 What is \emph{not} closed by this paper is the \emph{inverse-limit
-identification} of $\Aut^{\otimes}(\fibfun)^{(\infty)} = \Ga^{\infty}
-\rtimes SL_{2}$ with the motivic Galois group on the mixed-Tate
+identification} of the unipotent part $\Ga^{\infty}$ of
+$\Aut^{\otimes}(\fibfun)^{(\infty)} = \Ga^{\infty} \rtimes SL_{2}$ with
+the motivic Galois group on the mixed-Tate
 period ring of v3.66.0 FO3 Interpretation C on $\Ginf$ (PS-3) ---
 this requires the pro-finite Tannakian theorem
 \cite{deligne1990,brown2012} coherent with the period content and
@@ -263,8 +268,7 @@ finite-cutoff reconstruction in Sections~\ref{sec:tc2a_equality}
 \ref{sec:tc2c_higher_cutoff} (higher cutoffs), and
 \ref{sec:tc2d_cofiltered_coherence} (cofiltered coherence).
 Section~\ref{sec:injection_g4} closes the comparison in the
-$\Ustar_{GV} \to \mathcal{U}_{4} \rtimes
-SL_{2}$ direction into the (abelianization of the) unipotent radical of the
+$\Ustar_{GV} \to \mathcal{U}_{4}$ direction into the (abelianization of the) unipotent radical of the
 level-4 motivic Galois group $\mathcal{G}_{4}$
 (Theorem~\ref{thm:injection_g4}).
 Section~\ref{sec:verification} catalogues the
@@ -1151,8 +1155,10 @@ full long-range reconstruction is the pro-finite Tannakian theorem
 \cite{deligne1990,brown2012} coherent with v3.66.0 FO3
 Interpretation C at the period level on $\Ginf$ (PS-3) of
 Section~\ref{sec:inverse_limit} --- a structural identification between
-$\Ga^{\infty} \rtimes SL_{2}$ and the motivic Galois group on the
-mixed-Tate period ring $F(s)$ of $\Ginf$.
+the unipotent part $\Ga^{\infty}$ of $\Ga^{\infty} \rtimes SL_{2}$ and
+the motivic Galois group on the mixed-Tate period ring $F(s)$ of
+$\Ginf$ ($SL_{2}$, being perfect, maps trivially into a solvable
+group).
 \end{corollary}
 
 % =====================================================================
@@ -1167,7 +1173,7 @@ closes that comparison in the $\Ustar_{GV} \to \mathcal{U}_{4}$
 direction:\ we
 exhibit an explicit homomorphism of pro-algebraic groups
 $\Phi^{\mathrm{inj}}:\ \Ustar_{GV} = \Ga^{\infty} \rtimes SL_{2}
-\rightarrow \mathcal{U}_{4} \rtimes SL_{2}$ onto the \emph{abelianized}
+\rightarrow \mathcal{U}_{4}$ onto the \emph{abelianized}
 level-4 image (Reading~A; not a closed immersion --- see
 Theorem~\ref{thm:injection_g4}), where $\mathcal{U}_{4}$
 is the pro-unipotent radical of the level-4 motivic Galois group
@@ -1288,10 +1294,9 @@ $(\pi \otimes \pi)(\Delta x) = \Delta^{\mathrm{mot}}_{\mathrm{depth} = 1}
 decoration $V_{\mathrm{PW}}$) maps to $\mathcal{G}_{4}$ via the
 trivial composition $SL_{2} \xrightarrow{\det \equiv 1} \Gm
 \hookrightarrow \mathcal{G}_{4}$ on the reductive factor.
-Equivalently, the $SL_{2}$-content of $\Ustar_{GV}$ sits entirely
-inside the unipotent radical $\mathcal{U}_{4}$ at the level of
-periods (the $\Gm$-weight grading is fixed under
-$\Phi^{\mathrm{inj}}(SL_{2})$). The non-trivial $SL_{2}$ action on
+Since $\mathcal{G}_{4}$ is solvable and $SL_{2}$ is perfect,
+$\Phi^{\mathrm{inj}}|_{SL_{2}}$ is in fact trivial:\ the comparison
+map factors through $\Ga^{\infty} \to \mathcal{U}_{4}$. The non-trivial $SL_{2}$ action on
 $\mathrm{Sym}^{k} V_{\mathrm{fund}}$ is detected at the
 representation level (Theorem~\ref{thm:sl2_pw}), not at the
 period-grading level.
@@ -1353,25 +1358,23 @@ $\mathrm{Sym}^{k}$ action (Theorem~\ref{thm:sl2_pw});\ the
 composition $SL_{2} \xrightarrow{\det} \Gm$ is trivial because
 $\det(g) = 1$ for all $g \in SL_{2}(\Q)$. Hence
 $\chi_{4} \circ \Phi^{\mathrm{inj}}|_{SL_{2}} \equiv 1$, i.e.\ the
-$SL_{2}$-image preserves the $\Gm$-weight grading. By the Levi
-decomposition $\mathcal{G}_{4} = \Gm \ltimes \mathcal{U}_{4}$, an
-element acting trivially on the reductive factor sits in the
-unipotent radical $\mathcal{U}_{4}$ (or its commutant);\ since
-$SL_{2}$ also acts non-trivially via $\mathrm{Sym}^{k}$, the image
-is genuinely inside $\mathcal{U}_{4} \rtimes SL_{2}$ where the
-semidirect product structure is induced by the natural action of
-$SL_{2}$ on the $\mathrm{Sym}^{k}$ decomposition of the depth-1
-motivic Lie algebra.
+$SL_{2}$-image preserves the $\Gm$-weight grading, so by the Levi
+decomposition $\mathcal{G}_{4} = \Gm \ltimes \mathcal{U}_{4}$ it lies in
+the unipotent radical $\mathcal{U}_{4}$. A homomorphism from the
+perfect group $SL_{2}$ to a unipotent group is trivial, so
+$\Phi^{\mathrm{inj}}|_{SL_{2}}$ is trivial;\ the $\mathrm{Sym}^{k}$ action
+is a representation-level statement (Theorem~\ref{thm:sl2_pw}) and does
+not enter the image.
 
 \emph{(C4) Abelianized image via Glanois basis (not a closed
 immersion).} The Glanois 2015 explicit basis
 $\mathcal{B}^{4}$~\cite{glanois2015} stratifies
 $\mathrm{Lie}(\mathcal{U}_{4})$ by depth and weight. \textsc{GeoVac}'s
 image at weight $w$ and depth $d = 1$ is spanned by the M3 column
-generators $\{\pi(x_{(n, l), 1})\}$. The Goncharov--Deligne 2005
-faithfulness result~\cite{goncharov_deligne2005} would ensure that
+generators $\{\pi(x_{(n, l), 1})\}$. The Deligne 2010
+faithfulness result at level~4~\cite{deligne2010} would ensure that
 distinct M3 generators map to $\Q$-linearly independent periods
-\emph{provided} the per-sector M3 evaluation were rank $\ge 2$.
+\emph{provided} the per-sector M3 evaluation were rank $N$.
 However, the only concrete per-sector M3 content the corpus supplies is
 the single scalar $\eta_{(n,l)}$ (Paper~55), so the parity-blind
 restriction has all period vectors collinear:\ its Gram is rank~1
@@ -1455,7 +1458,7 @@ Its parity-blind per-sector content is the single scalar
 $\eta_{(n,l)}$ (Paper~55), under which each sector's period vector is
 $\eta_{(n,l)}$ times a shared Hurwitz block --- collinear, Gram rank~1,
 det~0 (\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}). The
-faithful Goncharov--Deligne 2005 action on
+faithful Deligne 2010 action on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would give \emph{full}
 injectivity only for a rank-$N$ M3 period map. The \emph{enriched} map
 (Definition~\ref{def:period_map}) adds the proven $\chi_{-4}$ vertex
@@ -1510,8 +1513,8 @@ $\chi_{-4}$ difference) in the sum/difference basis. Second --- sharpening the f
 hope that ``rank-$\ge 2 \Rightarrow$ injectivity'' --- the parity route is
 \emph{capped} at rank $2$ (there are only two parity classes), so it
 \emph{cannot} deliver a faithful closed immersion (rank $N$) for $N > 2$:\
-\textsc{GeoVac} is a strict, \emph{rank-2} abelianized subgroup, neither rank-1
-nor faithful.
+\textsc{GeoVac}'s abelianized image is strict and \emph{rank-2}, neither
+rank-1 nor faithful.
 
 \emph{Scope.} The $\chi_{-4}$-graded trace
 $\mathrm{Tr}((-1)^{N} D\,e^{-tD^2})$ is admitted into the period map
@@ -1558,7 +1561,7 @@ refuted).} For each of the $N(\nmax)$ M3-column generators of
 $\HGV(\nmax)$ (the $k = 1$ Mellin slot), the period-side image is the
 single per-sector scalar $\eta_{(n,l)}$ (Paper~55) times the shared
 Hurwitz block in $\{\zeta(s, 1/4), \zeta(s, 3/4), \zeta(s, 5/4)\}$.
-Goncharov--Deligne 2005 faithfulness on
+Deligne 2010 faithfulness on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply \emph{full}
 $\Q$-linear independence of all $N$ generators only for a rank-$N$
 per-sector map;\ the $\chi_{-4}$-enriched content is rank $2$
@@ -1614,9 +1617,11 @@ $\nmax \in \{1, 2, 3, 4\}$. The sum over the production grid
 $\{2, 3, 4\}$ contributes $2{,}904$ residuals to the master
 verification panel (Table~\ref{tab:verification});\ the C4 row counts
 the \emph{abelianized} M3 panel (its closed-immersion injectivity is
-refuted --- Theorem~\ref{thm:injection_g4}). Every count is
-the explicit symbolic-zero output of
-\texttt{tests/test\_paper56\_injection\_g4.py}; the closed-form
+refuted --- Theorem~\ref{thm:injection_g4}). The counts are the
+symbolic outputs of \texttt{tests/test\_paper56\_injection\_g4.py};\ the
+checks behind them hold by construction (C1--C3) or count the panel
+(C4), so the block is bookkeeping for the homomorphism, not an
+independent test of it. The closed-form
 $R^{\mathrm{G4\text{-}Inj}}(\nmax) = 9 N(\nmax)^{2} + 6 N(\nmax) + 6$
 matches each row bit-exact.}
 \label{tab:g4_inj_panel}
@@ -1625,10 +1630,8 @@ matches each row bit-exact.}
 The extension from $\nmax = 2$ to $\nmax \in \{3, 4\}$ is structural
 rather than merely numerical:\ the closed-form per-cutoff identity
 makes the panel size depend on $N(\nmax)$ only, with no
-$\nmax$-specific structural surprises. The four compatibilities
-remain bit-exact at every cutoff in the test grid, confirming that
-Theorem~\ref{thm:injection_g4} is robust under refinement of the
-substrate cutoff. The pattern is $\nmax$-uniform, mirroring the
+$\nmax$-specific structural surprises. The four compatibilities hold
+at every cutoff in the test grid, as they must by construction. The pattern is $\nmax$-uniform, mirroring the
 cofiltered coherence of TC-2d
 (Theorem~\ref{thm:tc2d_cofiltered_coherence}).
 
@@ -1636,8 +1639,7 @@ cofiltered coherence of TC-2d
 
 The comparison homomorphism $\Phi^{\mathrm{inj}}$ of Theorem~\ref{thm:injection_g4}
 realises the \emph{image} of the abelianization
-$(U^*_{GV})^{\mathrm{ab}}$ inside $\mathcal{U}_4^{\mathrm{ab}} \rtimes
-SL_2$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself, and the
+$(U^*_{GV})^{\mathrm{ab}}$ inside $\mathcal{U}_4^{\mathrm{ab}}$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself, and the
 abelianization is not identified with a subgroup --- the
 M3 column is rank~$2$, $\ll N$, so the map has a large kernel there).  The motivic Galois
 group $\mathcal{G}_4$ admits multiple realisations --- Betti,
@@ -1676,7 +1678,7 @@ realisations are unreachable from GeoVac's data.
 \end{enumerate}
 
 The level-$4$ comparison homomorphism $\Phi^{\mathrm{inj}}: U^*_{GV} \to
-\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ of
+\mathcal{U}_4^{\mathrm{ab}}$ of
 Theorem~\ref{thm:injection_g4} is therefore to be read as an
 \emph{abelianized} Hodge / Hodge-de-Rham homomorphism (Reading~A; not a
 closed immersion --- the M3 column is rank~$2$, $\ll N$).  The Hain--Brown
@@ -1743,7 +1745,7 @@ $\beta$-values), not modular --- exactly the negative observed at
 $\Sym^2$ depth $1$ and depth $2$.
 \end{remark}
 
-\begin{remark}[The $\Q(i)$ triangulation is spin-forced]
+\begin{remark}[On $S^3$ the $\Q(i)$ triangulation is spin-forced]
 \label{rem:qi_triangulation}
 The CM field $\Q(i)$ coincides with the level-$4$ field $\Q(\mu_4)$ of
 $\mathcal{G}_4 = \mathcal{G}_{MT(\Z[i, 1/2])}$ and with the field of
@@ -1751,8 +1753,10 @@ GeoVac's period content (Catalan $G$ mixed-Tate over $\Q(i)$,
 Eskandari--Murty--Nemoto 2025~\cite{eskandari_murty_nemoto2025}).  A
 structural audit
 (\texttt{debug/sprint\_hodge\_sl2\_audit\_qi\_triangulation.py}) shows
-this is not a coincidence:\ both the Hodge CM field and the level-$4$
-period content are gated by the half-integer spin structure.  The complex
+this is not a coincidence on $S^3$:\ both the Hodge CM field and the
+level-$4$ period content are gated there by the half-integer spin
+structure (the conductor-$4$ periods also arise from the metaplectic
+shift on $S^5$ without spin, Remark~\ref{rem:kms_hodge_circle}).  The complex
 structure exists iff $\varepsilon = (-1)^{2j} = -1$ (spinor;\ scalar
 $(-1)^{2l} = +1$ gives no complex structure), and the $\beta$/Catalan
 period content carries conductor $4 = |\mathrm{disc}\,\Q(i)|$ via the
@@ -1915,16 +1919,16 @@ the generic Hain--Brown locus remains open.
 Theorem~\ref{thm:injection_g4} closes the \emph{comparison direction}
 of the conjecture in Section~\ref{sec:open_g4}. The complementary
 \emph{equality direction} --- whether $\Phi^{\mathrm{inj}}$ is
-surjective onto $\mathcal{G}_{4}$ at the depth-graded level (or
-onto $\mathcal{U}_{4}^{\mathrm{ab}} \rtimes \Gm$ at the
-abelianization) --- requires exhibiting (or ruling out) every level-4
+surjective onto $\mathcal{U}_{4}^{\mathrm{ab}}$ (it cannot reach the
+$\Gm$ factor, since it factors through $\Ga^{\infty} \to
+\mathcal{U}_{4}$) --- requires exhibiting (or ruling out) every level-4
 cyclotomic motivic MZV as a \textsc{GeoVac} observable. At depth 1
 all required Hurwitz values do appear in the M3 column;\ at
 depth $\ge 2$ no \textsc{GeoVac} computation has yet produced an
 irreducible level-4 motivic MZV that is not reducible to depth-1
 products. Whether this absence is structural (\textsc{GeoVac}'s abelianized image
-is a strict, i.e.\ proper, sub-pro-algebraic subgroup of
-$\mathcal{G}_{4}$) or empirical (we have not looked hard enough) is the long-range
+is a strict, i.e.\ proper, subgroup of
+$\mathcal{U}_{4}^{\mathrm{ab}}$) or empirical (we have not looked hard enough) is the long-range
 forward research question --- and it is testable in finite
 sprint-scale steps by exhaustion at increasing loop order in the
 master Mellin engine.
@@ -2048,8 +2052,8 @@ mixed Tate after base change to $\Q(i)$---which is where $G$ is known to
 live, and matters here because GeoVac's M3 vertex-parity sector produces $G$
 in QED vertex sums.  (The stronger statement, that $G$ is not a period of
 \emph{any} mixed Tate motive over $\Q$, is expected but open, so this
-motivates rather than forces the level.)\ And the Goncharov--Deligne 2005 faithfulness
-of $\mathcal{G}_N$-action on $\pi_1^{\mathrm{mot}}(\Gm - \mu_N)$
+motivates rather than forces the level.)\ And Deligne 2010's faithfulness
+of the level-4 action on $\pi_1^{\mathrm{mot}}(\Gm - \mu_4)$
 supplies the faithful action underlying the level-4 comparison.  (Injectivity
 of that comparison would require a rank-$N$ M3 period map, which Theorem~\ref{thm:injection_g4}
 refutes;\ the $\chi_{-4}$ vertex parity caps the rank at $2$.)
@@ -2057,25 +2061,24 @@ refutes;\ the $\chi_{-4}$ vertex parity caps the rank at $2$.)
 \begin{quote}
 \textbf{Theorem (cosmic-Galois comparison homomorphism, this paper).}\ The
 comparison direction is an \emph{abelianized homomorphism}
-$\Ustar_{GV} \rightarrow \mathcal{U}_4 \rtimes SL_2$ --- \emph{not}
+$\Ustar_{GV} \rightarrow \mathcal{U}_4$ --- \emph{not}
 an injective closed immersion (the M3 column is rank~$2$, capped,
 $\ll N$) --- realising the abelianized image as a closed subgroup at the
 abelianization-of-unipotent level; this is now
 \emph{closed at theorem grade}:\ see Theorem~\ref{thm:injection_g4} in
 Section~\ref{sec:injection_g4} for the explicit period map, the
 four structural compatibilities (multiplicativity, depth-1
-coproduct compatibility, $SL_{2}$-to-Levi via $\chi_{4}$,
+coproduct compatibility, $SL_{2}$ mapping trivially,
 abelianized image via Glanois basis), with the M3 column at rank~$2$
 ($\ll N$) so the map is the abelianized homomorphism rather than an
-injective closed immersion (Goncharov--Deligne 2005 faithfulness on
+injective closed immersion (Deligne 2010 faithfulness on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would apply only to a
-sector-resolved rank-$\ge 2$ M3 period map;\ the $\chi_{-4}$ vertex
+sector-resolved rank-$N$ M3 period map;\ the $\chi_{-4}$ vertex
 parity now supplies one at rank~2, capped there, so it refines but does
 not reach a closed immersion --- Remark~\ref{rem:m3_parity_rank}).
 
 \textbf{Remaining conjecture (equality / exhaustion).}\ Equality
-$\Phi^{\mathrm{inj}}(\Ustar_{GV}) = \mathcal{U}_{4}^{\mathrm{ab}}
-\rtimes SL_{2}$ holds iff every level-4 cyclotomic motivic MZV at
+$\Phi^{\mathrm{inj}}(\Ustar_{GV}) = \mathcal{U}_{4}^{\mathrm{ab}}$ holds iff every level-4 cyclotomic motivic MZV at
 depth $\ge 2$ is realised by some \textsc{GeoVac} observable.
 \end{quote}
 
@@ -2084,8 +2087,8 @@ The comparison direction is now a theorem
 direction is the long-range forward research question:\ no
 depth-$\ge 2$ level-4 cyclotomic MZV has yet been observed in any
 \textsc{GeoVac} computation. Whether this is because we have not
-looked, or because \textsc{GeoVac} is structurally a strict
-sub-pro-algebraic group of $\mathcal{U}_{4}^{\mathrm{ab}}$, is the
+looked, or because \textsc{GeoVac}'s abelianized image is structurally a
+strict closed subgroup of $\mathcal{U}_{4}^{\mathrm{ab}}$, is the
 named open content past the comparison homomorphism (Remark
 \ref{rem:injection_honest_scope} delimits scope).
 
@@ -2118,7 +2121,7 @@ structural readings remain consistent with current evidence:
 
 \begin{itemize}
 \item \textbf{Reading A (abelianization).} \textsc{GeoVac} respects
-the primitive coproduct, and $\Ustar_{GV}$ is the
+the primitive coproduct, and the image of $\Ustar_{GV}$ lies in the
 \emph{abelianization} of the motivic free non-abelian unipotent ---
 a specific weight-only geometric realisation that drops the
 depth/iteration content.
@@ -2183,10 +2186,11 @@ $S_3$-cocommutativity is strictly stronger than what those weaker
 arguments give.
 
 \textbf{Strategic implication.}  On the natural substrate, GeoVac's
-JLO-cocycle-level content maps onto the
-abelianisation-by-Cartier--Milnor--Moore of the cosmic-Galois universe.
+JLO-cocycle-level content maps into the
+abelianisation-by-Cartier--Milnor--Moore of the cosmic-Galois universe
+(surjectivity is the open equality direction).
 The map of Theorem~\ref{thm:injection_g4},
-$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$, is the
+$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}}$, is the
 \emph{structurally correct} statement of what is available---not a
 partial version of a closed immersion.  It is emphatically \emph{not}
 injective on the sector-indexed generators (the M3 column is rank~$2$,
@@ -2197,13 +2201,14 @@ no sprint-scale follow-on to a substantial free non-abelian
 Tannakian closure is empirically demanded.  Two open questions
 remain:\ (i) non-commutative inner-factor enrichment of $\mathcal{A}$
 could expose Reading B content at higher Mellin slot indices, but
-Sprint H1's Yukawa-non-selection theorem (\S\ref{sec:open_g4_hodge}
-above and Paper~32~\cite{paper32}~\S{}VIII.C)
-already classifies the inner factor as calibration data, not
-autonomously generated by the GeoVac outer triple, so this is not
+Sprint H1's Yukawa-non-selection theorem
+(Paper~32~\cite{paper32}~\S{}VIII.C) already classifies the Yukawa
+\emph{point} as calibration data (the moduli space and its dimension are
+forced;\ Paper~57), not autonomously generated by the GeoVac outer
+triple, so this is not
 a sprint-scale follow-on;\ (ii) the equality direction of
 Theorem~\ref{thm:injection_g4} (whether $\Phi^{\mathrm{inj}}$ is
-surjective onto $\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$) remains
+surjective onto $\mathcal{U}_4^{\mathrm{ab}}$) remains
 the named long-range forward research question (\S\ref{sec:equality_multi_year}),
 testable by exhausting GeoVac's M3 sector for level-$4$ cyclotomic
 motivic MZVs at depth $\ge 2$.
@@ -2213,9 +2218,11 @@ motivic MZVs at depth $\ge 2$.
 The full long-range content of the cosmic-Galois closure is the
 pro-finite Tannakian theorem coherent with v3.66.0 FO3
 Interpretation~C at the period level on $\Ginf$ (PS-3,
-Theorem~\ref{thm:inverse_limit}). This identifies the inverse-limit
-$\Aut^{\otimes}(\fibfun_{\Ginf}) = \Ga^{\infty} \rtimes SL_{2}$
-with (a sub-quotient of) $\mathcal{G}_4$ at the period level, in
+Theorem~\ref{thm:inverse_limit}). It would relate the inverse-limit
+$\Aut^{\otimes}(\fibfun_{\Ginf}) = \Ga^{\infty} \rtimes SL_{2}$ to
+$\mathcal{G}_4$ at the period level through its unipotent part
+$\Ga^{\infty}$ (the perfect $SL_{2}$ cannot map non-trivially into the
+solvable $\mathcal{G}_4$), in
 the spirit of Brown 2012~\cite{brown2012}, Deligne
 2010~\cite{deligne2010}, and Glanois 2015~\cite{glanois2015}.
 
@@ -2373,11 +2380,10 @@ A.~B.~Goncharov, \emph{Periods and mixed motives}, preprint
 arXiv:math/0202154 (2002);\ see also P.~Deligne and A.~B.~Goncharov,
 \emph{Groupes fondamentaux motiviques de Tate mixte},
 \textit{Ann. Sci. \'Ecole Norm. Sup.}~(4) \textbf{38}, 1--56 (2005).
-The Goncharov--Deligne 2005 result establishes the faithful action of
-the motivic Galois group $\mathcal{G}_{\mathrm{MT}(\mathcal{O}_N[1/N])}$
-on the motivic fundamental group
-$\pi_1^{\mathrm{mot}}(\mathbb{G}_m - \mu_N)$, used here as the
-comparison-direction backbone for the level-4 period comparison.
+The mixed-Tate category $\mathrm{MT}(\mathcal{O}_N[1/N])$ and the motivic
+fundamental group $\pi_1^{\mathrm{mot}}(\mathbb{G}_m - \mu_N)$;\ the faithfulness
+of the level-$N$ action used in this paper is Deligne 2010~\cite{deligne2010}
+($N \in \{2,3,4,6,8\}$), not this work.
 
 \bibitem{cartier_milnor_moore}
 J.~W.~Milnor and J.~C.~Moore, \emph{On the structure of Hopf algebras},

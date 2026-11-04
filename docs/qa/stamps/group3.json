@@ -1,0 +1,1075 @@
+{
+ "target": "group3",
+ "units": {
+  "cite:papers/group3_foundations/paper_18_exchange_constants.tex": {
+   "date": "2026-11-03",
+   "hash": "ad674bedbddddb19",
+   "run": "group3-full-2026-11-03"
+  },
+  "cite:papers/group3_foundations/paper_22_angular_sparsity.tex": {
+   "date": "2026-11-03",
+   "hash": "21d6022a41b6f84f",
+   "run": "group3-full-2026-11-03"
+  },
+  "cite:papers/group3_foundations/paper_24_bargmann_segal.tex": {
+   "date": "2026-11-03",
+   "hash": "64dd538066153f69",
+   "run": "group3-full-2026-11-03"
+  },
+  "cite:papers/group3_foundations/paper_61_bessel_moment_periods.tex": {
+   "date": "2026-11-03",
+   "hash": "105d1722f7ddda54",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Catalog of Exchange Constants": {
+   "date": "2026-11-03",
+   "hash": "85d892b64ebc8592",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Catalog of Exchange Constants / Level 1: the energy shell p_0 and the matched = -1/16 ( S^3 R ^3 )": {
+   "date": "2026-11-03",
+   "hash": "76ca057db5fa88e2",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Catalog of Exchange Constants / Level 2: e^a E_1(a) (Laguerre basis prolate spheroid)": {
+   "date": "2026-11-03",
+   "hash": "fc8374a7b7d80d52",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Catalog of Exchange Constants / Level 3: (R) ( S^3 S^3 hyperspherical)": {
+   "date": "2026-11-03",
+   "hash": "b736c15b528efcf6",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Catalog of Exchange Constants / Level 5: Spectral-side exchange constants on S^3": {
+   "date": "2026-11-03",
+   "hash": "afc19e557401f561",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Catalog of Exchange Constants / Taxonomic placement of the Level-5 realizations": {
+   "date": "2026-11-03",
+   "hash": "db72acf5c92f8950",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Discussion": {
+   "date": "2026-11-03",
+   "hash": "ed27754aea04566c",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Discussion / Exchange constants are computationally cheap": {
+   "date": "2026-11-03",
+   "hash": "94571be0dbeeed5e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Discussion / Structural parallels": {
+   "date": "2026-11-03",
+   "hash": "08af6c683438cdda",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Discussion / The hierarchy of transcendence": {
+   "date": "2026-11-03",
+   "hash": "66a7f46abf6c6d37",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Discussion / Transcendence and the label-set design principle": {
+   "date": "2026-11-03",
+   "hash": "2d892c73eadb7df1",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Discussion / Two routes to the value of = -1/16": {
+   "date": "2026-11-03",
+   "hash": "df3df6969b7e184d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "7f5354a349cacf79",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Observable Classification by Transcendental Content": {
+   "date": "2026-11-03",
+   "hash": "96d0ade47fdeb3e9",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Observable Classification by Transcendental Content / Boundary cases": {
+   "date": "2026-11-03",
+   "hash": "c23809b09d605270",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Observable Classification by Transcendental Content / Example 1: Hydrogen energy levels (Class S)": {
+   "date": "2026-11-03",
+   "hash": "4316377d11dd9204",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Observable Classification by Transcendental Content / Example 2: Electron density (Class P)": {
+   "date": "2026-11-03",
+   "hash": "47f94c87d3b1e81f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::Observable Classification by Transcendental Content / Example 3: Helium ground state energy (Class C)": {
+   "date": "2026-11-03",
+   "hash": "5a789d191970eff6",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::The Pattern: Weyl--Selberg Exchange": {
+   "date": "2026-11-03",
+   "hash": "ab49828d1366373e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::The Pattern: Weyl--Selberg Exchange / Compactness as the source of discreteness": {
+   "date": "2026-11-03",
+   "hash": "a17e67c70cb57a75",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::The Pattern: Weyl--Selberg Exchange / The Mellin transform as the taxonomic engine": {
+   "date": "2026-11-03",
+   "hash": "9937afb46301a0b9",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::The Pattern: Weyl--Selberg Exchange / The Selberg trace formula": {
+   "date": "2026-11-03",
+   "hash": "c8fd7e6c991798ea",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::The Pattern: Weyl--Selberg Exchange / Weyl's law": {
+   "date": "2026-11-03",
+   "hash": "bda028c1af376034",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_18_exchange_constants.tex::The Pattern: Weyl--Selberg Exchange / as the founding example": {
+   "date": "2026-11-03",
+   "hash": "5f5ad603e99e17df",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::ERI Density Bounds": {
+   "date": "2026-11-03",
+   "hash": "21f87d628a076d37",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Implications for Quantum Simulation": {
+   "date": "2026-11-03",
+   "hash": "ee52a724a2b4ee62",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Implications for Quantum Simulation / Non-central interactions": {
+   "date": "2026-11-03",
+   "hash": "78b29f9294b014ca",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Implications for Quantum Simulation / Selection-rule sparsity and the Monte Carlo sign problem": {
+   "date": "2026-11-03",
+   "hash": "c05de7697e2bcc3b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Implications for Quantum Simulation / Universal resource bound": {
+   "date": "2026-11-03",
+   "hash": "37531615bcd59f8c",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Implications for Quantum Simulation / Z _2 tapering from Gaunt parity": {
+   "date": "2026-11-03",
+   "hash": "332508d4c8ad01ad",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "c0a50553f76a9c1e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Numerical Verification": {
+   "date": "2026-11-03",
+   "hash": "2ed83a98b8e06c41",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Rank-2 extension: Breit interaction": {
+   "date": "2026-11-03",
+   "hash": "5e863550510cf372",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity": {
+   "date": "2026-11-03",
+   "hash": "896c9ff10bca6273",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Implementation and verification": {
+   "date": "2026-11-03",
+   "hash": "e0d199b8da8d158d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Numerical values of d_ spinor (l_ )": {
+   "date": "2026-11-03",
+   "hash": "ac7693c4c7156780",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Restatement in the spinor basis": {
+   "date": "2026-11-03",
+   "hash": "e00b6186e514e498",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Sharpened universal/Coulomb-specific partition": {
+   "date": "2026-11-03",
+   "hash": "f6392b0c1050f739",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Structural interpretation": {
+   "date": "2026-11-03",
+   "hash": "98c694a42cc2b242",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Two-Body Matrix Element Factorization": {
+   "date": "2026-11-03",
+   "hash": "f53ba928025004b5",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::front": {
+   "date": "2026-11-03",
+   "hash": "816bd5645c0e6dee",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::Conclusion": {
+   "date": "2026-11-03",
+   "hash": "5a40fc279134574a",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::Implications": {
+   "date": "2026-11-03",
+   "hash": "a7c139e3b89d0647",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::Implications / For nuclear quantum simulation": {
+   "date": "2026-11-03",
+   "hash": "3fa36eae6ac2353f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::Implications / For the fine-structure constant Observation": {
+   "date": "2026-11-03",
+   "hash": "8c61714903c662e4",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::Implications / The universal / Coulomb-specific partition completed": {
+   "date": "2026-11-03",
+   "hash": "c06408be35b42b12",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "3c114d51c98507e3",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann graph": {
+   "date": "2026-11-03",
+   "hash": "b9539a56db32f0be",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann graph / A spin-side entrance: the large-spin contraction": {
+   "date": "2026-11-03",
+   "hash": "3b8eead0ceab5436",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann graph / Graph construction": {
+   "date": "2026-11-03",
+   "hash": "0cc95118d8e93c31",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann graph / Hamiltonian and graph Laplacian roles": {
+   "date": "2026-11-03",
+   "hash": "0c08a916f7a2d9a3",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann graph / The -free certificate": {
+   "date": "2026-11-03",
+   "hash": "7833a524dddb9c0d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann--Segal construction": {
+   "date": "2026-11-03",
+   "hash": "fabb76907ece7707",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann--Segal construction / The Bargmann transform": {
+   "date": "2026-11-03",
+   "hash": "77a2f2ca1b427c42",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann--Segal construction / The Euler operator": {
+   "date": "2026-11-03",
+   "hash": "02e3731934788e4f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Bargmann--Segal construction / The S^5 Hardy space and SU(3) symmetric representations": {
+   "date": "2026-11-03",
+   "hash": "14005f315ac9bc65",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Coulomb / HO asymmetry": {
+   "date": "2026-11-03",
+   "hash": "eb6405f5ff8460d1",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Coulomb / HO asymmetry / Fourth layer: wedge-generator Pythagorean": {
+   "date": "2026-11-03",
+   "hash": "44616ad391bcb7e7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Coulomb / HO asymmetry / The Kustaanheimo--Stiefel frame": {
+   "date": "2026-11-03",
+   "hash": "6df8f27f1feeefde",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Coulomb / HO asymmetry / The causal chain": {
+   "date": "2026-11-03",
+   "hash": "1f407389ca1d4c53",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The Coulomb / HO asymmetry / The exchange constant taxonomy on both sides": {
+   "date": "2026-11-03",
+   "hash": "07deb4bcd4216344",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The harmonic oscillator rigidity theorem": {
+   "date": "2026-11-03",
+   "hash": "70ac4f472c61f4d2",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The harmonic oscillator rigidity theorem / Gauge-structure corollary: reduced Wilson content on S^5": {
+   "date": "2026-11-03",
+   "hash": "4c62fa2f314dd088",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The harmonic oscillator rigidity theorem / Spinor-Lichnerowicz corollary: the operator-order discriminant": {
+   "date": "2026-11-03",
+   "hash": "b3843b3c369362b6",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The harmonic oscillator rigidity theorem / Two-fermion entanglement rigidity --- retracted": {
+   "date": "2026-11-03",
+   "hash": "ec493a65260d420c",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::front": {
+   "date": "2026-11-03",
+   "hash": "a983b8fe8dd34b30",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Implications": {
+   "date": "2026-11-03",
+   "hash": "c24ce5cef89b9cbb",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Implications / The parametric / central sector (Track TS-C, 2026-05-04)": {
+   "date": "2026-11-03",
+   "hash": "c05633efd9e87e30",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Implications / What is currently unknown": {
+   "date": "2026-11-03",
+   "hash": "f06c5297bd9c597f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Implications / What requires per-system rederivation": {
+   "date": "2026-11-03",
+   "hash": "2c8e8d14e65fd3b4",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Implications / What transfers for free": {
+   "date": "2026-11-03",
+   "hash": "faddef9a9d634128",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "f87b6d87b621ff45",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Open Questions": {
+   "date": "2026-11-03",
+   "hash": "896fd526dc24fc70",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Open Questions / Does the partition predict ?": {
+   "date": "2026-11-03",
+   "hash": "739669ff68585cea",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Open Questions / Is the partition exhaustive?": {
+   "date": "2026-11-03",
+   "hash": "922d8a2f8665268a",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Open Questions / What is the universal/specific partition for non-central": {
+   "date": "2026-11-03",
+   "hash": "7108e7f5619fe4df",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Setup: GeoVac as a Discrete Spectral Triple": {
+   "date": "2026-11-03",
+   "hash": "b470cdbfb02a1485",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Layer Sharpening (Sprint 5)": {
+   "date": "2026-11-03",
+   "hash": "bc32d858b5486d5d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Layer Sharpening (Sprint 5) / The layer table": {
+   "date": "2026-11-03",
+   "hash": "5791e5572ad19457",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Layer Sharpening (Sprint 5) / The structural layers": {
+   "date": "2026-11-03",
+   "hash": "3b6aeb0c3acd62f7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Layer Sharpening (Sprint 5) / Why the discriminators are independent": {
+   "date": "2026-11-03",
+   "hash": "0b0c5ee7dae6e239",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Potential-Specific Sector: Two Rigidity Theorems": {
+   "date": "2026-11-03",
+   "hash": "5abdea30e5af5fdb",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Potential-Specific Sector: Two Rigidity Theorems / Fock projection rigidity": {
+   "date": "2026-11-03",
+   "hash": "7f26783310edf438",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Potential-Specific Sector: Two Rigidity Theorems / The shared structure: rigidity as D -dependence": {
+   "date": "2026-11-03",
+   "hash": "39d30cb17fee530e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026)": {
+   "date": "2026-11-03",
+   "hash": "c0ef3d6abf415cec",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026) / Named blockers": {
+   "date": "2026-11-03",
+   "hash": "bb7f89a6567da9b5",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026) / Sequencing recommendation": {
+   "date": "2026-11-03",
+   "hash": "0a076b8e5f430e41",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026) / The four-bucket classification": {
+   "date": "2026-11-03",
+   "hash": "9b29bc56f67d3eee",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026) / The predicted trivial closure at (3, 1) (tested: falsified)": {
+   "date": "2026-11-03",
+   "hash": "22df6e6c664c8089",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Universal Sector: Angular Sparsity": {
+   "date": "2026-11-03",
+   "hash": "76736562df5b15b1",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Universal Sector: Angular Sparsity / Restatement of the angular sparsity theorem": {
+   "date": "2026-11-03",
+   "hash": "eaedf7e19488c4d5",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Universal Sector: Angular Sparsity / Spectral-triple reading": {
+   "date": "2026-11-03",
+   "hash": "dbeb991aa34c6bc8",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Two-body verification of the partition": {
+   "date": "2026-11-03",
+   "hash": "1fc46f21e2c98eae",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Two-body verification of the partition / Resolvent construction": {
+   "date": "2026-11-03",
+   "hash": "e3a45d64fbc31cfb",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Where Enters": {
+   "date": "2026-11-03",
+   "hash": "c23fb9d5dc20c6cd",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Where Enters / Operator order and projection type": {
+   "date": "2026-11-03",
+   "hash": "c368253efd3e57c8",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Where Enters / Spectral sums carry on both sides": {
+   "date": "2026-11-03",
+   "hash": "66ad0c499863b32a",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::Where Enters / Where does and does not appear": {
+   "date": "2026-11-03",
+   "hash": "945b2de57216c505",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::front": {
+   "date": "2026-11-03",
+   "hash": "46f91956cdd92d16",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Gauged interaction": {
+   "date": "2026-11-03",
+   "hash": "747e23b92fd3de20",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Implications": {
+   "date": "2026-11-03",
+   "hash": "58ec8c3583608357",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Implications / Connection to double factorization and tensor": {
+   "date": "2026-11-03",
+   "hash": "d1f1d6d817160690",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Implications / For nuclear structure": {
+   "date": "2026-11-03",
+   "hash": "3eefe4233476ffb0",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Setup": {
+   "date": "2026-11-03",
+   "hash": "33c7965348dbd867",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Setup / Single-particle spectral triple": {
+   "date": "2026-11-03",
+   "hash": "357343fb2aec5e6c",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_54_tensor_product_two_body.tex::Setup / Tensor-product Dirac": {
+   "date": "2026-11-03",
+   "hash": "cf50c7f305003fdf",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Conclusion": {
+   "date": "2026-11-03",
+   "hash": "13925727d29089da",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "f00ffdfe48e96ad2",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Introduction / Background: GeoVac and the transcendental-to-periods question": {
+   "date": "2026-11-03",
+   "hash": "adef5827b55f9b72",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Introduction / Result: a period-ring stratification of the master Mellin": {
+   "date": "2026-11-03",
+   "hash": "4f2f0feb6eac0c61",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Introduction / Structure": {
+   "date": "2026-11-03",
+   "hash": "40a813c840dcaa82",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Joint engagement and physical observables": {
+   "date": "2026-11-03",
+   "hash": "6d8f5a3c9928d4c3",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Joint engagement and physical observables / Canonical example 1: the K-formula": {
+   "date": "2026-11-03",
+   "hash": "c098f2b58034610e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Joint engagement and physical observables / Canonical example 2: Paper 50 F-theorem coefficients": {
+   "date": "2026-11-03",
+   "hash": "d3f2e929e0330271",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Joint engagement and physical observables / Joint-engagement modes": {
+   "date": "2026-11-03",
+   "hash": "1233404dbd0b4c34",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Joint engagement and physical observables / Role-disjointness vs set-theoretic overlap": {
+   "date": "2026-11-03",
+   "hash": "cae83b720775183e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Joint engagement and physical observables / Tate-weight bookkeeping": {
+   "date": "2026-11-03",
+   "hash": "9cfd43fcc6d98847",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M1: the volume-slot sub-mechanism": {
+   "date": "2026-11-03",
+   "hash": "709a0a9c82d233cf",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M1: the volume-slot sub-mechanism / Convention-freeness": {
+   "date": "2026-11-03",
+   "hash": "243d65530f11335e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M1: the volume-slot sub-mechanism / Period-ring statement": {
+   "date": "2026-11-03",
+   "hash": "bb7b46a16fc90075",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M1: the volume-slot sub-mechanism / Witnesses": {
+   "date": "2026-11-03",
+   "hash": "075fd32575af2932",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M2: the Seeley--DeWitt sub-mechanism": {
+   "date": "2026-11-03",
+   "hash": "836832bb9fd4c2a9",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M2: the Seeley--DeWitt sub-mechanism / Period-ring statement": {
+   "date": "2026-11-03",
+   "hash": "1d54ec70816ad0a2",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M2: the Seeley--DeWitt sub-mechanism / Volume-normalisation convention": {
+   "date": "2026-11-03",
+   "hash": "751d3153031c3f0a",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M2: the Seeley--DeWitt sub-mechanism / Witnesses": {
+   "date": "2026-11-03",
+   "hash": "6c1020cfa4c5b245",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M3: vertex parity, Hurwitz at quarter-integer shifts, and": {
+   "date": "2026-11-03",
+   "hash": "addebbbe9c897979",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M3: vertex parity, Hurwitz at quarter-integer shifts, and / Arithmetic stratification": {
+   "date": "2026-11-03",
+   "hash": "d5324f69138c2eac",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M3: vertex parity, Hurwitz at quarter-integer shifts, and / The Deligne--Glanois Galois descent identification": {
+   "date": "2026-11-03",
+   "hash": "404a9575399f37b8",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::M3: vertex parity, Hurwitz at quarter-integer shifts, and / Witness panel": {
+   "date": "2026-11-03",
+   "hash": "d9e77ec9ea55ad4b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions": {
+   "date": "2026-11-03",
+   "hash": "be10ff93f6edf548",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Cross-manifold extension to Bargmann--Segal: M2": {
+   "date": "2026-11-03",
+   "hash": "456c03d2ebc575f6",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Inhomogeneous extension: three sub-cases": {
+   "date": "2026-11-03",
+   "hash": "62588bf9835c5b21",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Inner-factor Yukawa content: closed by factorisation +": {
+   "date": "2026-11-03",
+   "hash": "671d86fb7bb23520",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / M3 on : structural closure, empirical PSLQ deferred": {
+   "date": "2026-11-03",
+   "hash": "c95568f47d949b10",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Open Q5': a possible deeper M2/M3 cyclotomic unification": {
+   "date": "2026-11-03",
+   "hash": "503af3531b89174b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Specific motivic identification of the depth- k tower": {
+   "date": "2026-11-03",
+   "hash": "631d24964feee403",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::The Bost--Connes / scaling-site substrate as arithmetic-side analog": {
+   "date": "2026-11-03",
+   "hash": "f8586f0a52e72797",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::The master Mellin engine on Camporesi--Higuchi": {
+   "date": "2026-11-03",
+   "hash": "203fca62511e2d51",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::The master Mellin engine on Camporesi--Higuchi / The Camporesi--Higuchi spectrum": {
+   "date": "2026-11-03",
+   "hash": "6391cf13eccbd159",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::The master Mellin engine on Camporesi--Higuchi / The case-exhaustion theorem": {
+   "date": "2026-11-03",
+   "hash": "a388c0d8b8da8719",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::The master Mellin engine on Camporesi--Higuchi / The master Mellin engine": {
+   "date": "2026-11-03",
+   "hash": "6dd61c6aea348cc7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::front": {
+   "date": "2026-11-03",
+   "hash": "92ba1c057128c446",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Acknowledgements": {
+   "date": "2026-11-03",
+   "hash": "f8d2f8735dcf08e5",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Introduction": {
+   "date": "2026-11-03",
+   "hash": "0be4625d2d77e617",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Introduction / Related work": {
+   "date": "2026-11-03",
+   "hash": "7a3202d7f683641b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Introduction / The question": {
+   "date": "2026-11-03",
+   "hash": "9df75c7d54756d5d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Open questions and frontier": {
+   "date": "2026-11-03",
+   "hash": "b60b840e9af4738d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Open questions and frontier / Sprint-scale follow-ons": {
+   "date": "2026-11-03",
+   "hash": "d73413cc1295fa04",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Open questions and frontier / The converse direction --- closed at finite cutoff (TC-2)": {
+   "date": "2026-11-03",
+   "hash": "e72ae25ccf52f584",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion": {
+   "date": "2026-11-03",
+   "hash": "3ca5a26d898c33a6",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Finite-cutoff equality on the SL_ 2 factor (TC-2b)": {
+   "date": "2026-11-03",
+   "hash": "9cb2a3c35d61a926",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Finite-cutoff equality on the abelian factor (TC-2a)": {
+   "date": "2026-11-03",
+   "hash": "417d8bd93a26bb40",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Full-panel injectivity at = 2 (TC-1f)": {
+   "date": "2026-11-03",
+   "hash": "c615c79748ea6c42",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Higher cutoffs and the -uniform pattern (TC-2c)": {
+   "date": "2026-11-03",
+   "hash": "b653eb9871c59858",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Inclusion summary": {
+   "date": "2026-11-03",
+   "hash": "0f28743d25048c50",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / The _ 2 factor (TC-1f)": {
+   "date": "2026-11-03",
+   "hash": "7c0a81cdb4296cbf",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / The pro-unipotent factor (TC-1e)": {
+   "date": "2026-11-03",
+   "hash": "7a5c3d911813e084",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The fiber functor (TC-1d)": {
+   "date": "2026-11-03",
+   "hash": "609734197331dd77",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The level-4 cosmic-Galois comparison homomorphism / The period map": {
+   "date": "2026-11-03",
+   "hash": "cac5156e03f3c1b1",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half": {
+   "date": "2026-11-03",
+   "hash": "6442a9d9ee2fd7e4",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half / -equivariance (PS-2)": {
+   "date": "2026-11-03",
+   "hash": "fee9e47244afc253",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half / Endomorphism rigidity (PS-4)": {
+   "date": "2026-11-03",
+   "hash": "7a3ebaa27c2e7243",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half / Pro-system half summary": {
+   "date": "2026-11-03",
+   "hash": "b2b594b80ecbc88f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half / The cutoff Hopf algebra ( )": {
+   "date": "2026-11-03",
+   "hash": "65411911dd1d179d",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half / The inverse limit (PS-3)": {
+   "date": "2026-11-03",
+   "hash": "420b54998f6e4536",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The pro-system half / Transition maps and the cofiltered axiom (PS-1)": {
+   "date": "2026-11-03",
+   "hash": "29e1a4cdf33b184b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The representation category ( ( ))": {
+   "date": "2026-11-03",
+   "hash": "d65fead33a8c5831",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The representation category ( ( )) / Abelian (TC-1a)": {
+   "date": "2026-11-03",
+   "hash": "5509f959eccf4164",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The representation category ( ( )) / Finite-dimensional Hopf representations": {
+   "date": "2026-11-03",
+   "hash": "02bc5c6e0cda55f7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The representation category ( ( )) / Rigid (TC-1c)": {
+   "date": "2026-11-03",
+   "hash": "59f5fa09056ce165",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The representation category ( ( )) / Symmetric monoidal (TC-1b)": {
+   "date": "2026-11-03",
+   "hash": "bce3d12fe1027dac",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::Verification panel": {
+   "date": "2026-11-03",
+   "hash": "3aa070e852709122",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Candidate discriminator principles: a preliminary probe": {
+   "date": "2026-11-03",
+   "hash": "1e632ea4c55d7df9",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Candidate discriminator principles: a preliminary probe / Candidate P1: multi-focal depth": {
+   "date": "2026-11-03",
+   "hash": "156e6c85bf86d28a",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Candidate discriminator principles: a preliminary probe / Candidate P3: dimensional character": {
+   "date": "2026-11-03",
+   "hash": "3886f31447297ea7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Candidate discriminator principles: a preliminary probe / Candidate P5: packing-reachability": {
+   "date": "2026-11-03",
+   "hash": "4f3edf0ad4c7e3ff",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Cross-domain unity: the multi-focal-composition wall": {
+   "date": "2026-11-03",
+   "hash": "39cc72f477678fd5",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Cross-domain unity: the multi-focal-composition wall / Operational consequence": {
+   "date": "2026-11-03",
+   "hash": "84b1d6215d05d744",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Cross-domain unity: the multi-focal-composition wall / The seven instances": {
+   "date": "2026-11-03",
+   "hash": "af20ca2bdcf0b6df",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Cross-domain unity: the multi-focal-composition wall / The unifying statement": {
+   "date": "2026-11-03",
+   "hash": "4d71baa65f764256",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Cross-references": {
+   "date": "2026-11-03",
+   "hash": "1cbb07b0391bd14b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Introduction: the seam and why naming it matters": {
+   "date": "2026-11-03",
+   "hash": "306828122b7dcb1f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions": {
+   "date": "2026-11-03",
+   "hash": "ad3c5b94856801ae",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / A Bohr-site partial meta-theorem (Sprint Topos-1)": {
+   "date": "2026-11-03",
+   "hash": "2a603f1cac16b91e",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / Higgs direction and the Hopf base": {
+   "date": "2026-11-03",
+   "hash": "cf9fd7b353270f98",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / P5 and the tautology question (resolved)": {
+   "date": "2026-11-03",
+   "hash": "c2a6ac10838c03bf",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / Relationship to Connes--Marcolli calibration data in NCG-SM": {
+   "date": "2026-11-03",
+   "hash": "b296ca3160ce9228",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / Sprints C3 + F3 closure: four proof-by-argument inner-factor results": {
+   "date": "2026-11-03",
+   "hash": "6e980973ca3a4b2a",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / The ``second packing axiom'' status": {
+   "date": "2026-11-03",
+   "hash": "4324dde2b91fa6ca",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::Open questions / The chemistry-side -trivialization analog": {
+   "date": "2026-11-03",
+   "hash": "a69fc4160822a720",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side": {
+   "date": "2026-11-03",
+   "hash": "1d397b5935431a59",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / Catalogue": {
+   "date": "2026-11-03",
+   "hash": "823e9cfe5d0898db",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / Chemistry / quantum computing scaling (H)": {
+   "date": "2026-11-03",
+   "hash": "e5e8eff96a303ae7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / Foundations / skeleton (A)": {
+   "date": "2026-11-03",
+   "hash": "9d3766babee0f9d3",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / Gauge structure (B)": {
+   "date": "2026-11-03",
+   "hash": "c3e0c1bc85e3816b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / Gravity (D)": {
+   "date": "2026-11-03",
+   "hash": "c6754f2ea4317031",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / QED and the coincidence (E)": {
+   "date": "2026-11-03",
+   "hash": "05ea67f2bb63985b",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The forced side / Released axes: the decompactification doors (J)": {
+   "date": "2026-11-03",
+   "hash": "57e89732e4596307",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side": {
+   "date": "2026-11-03",
+   "hash": "d8e116b0e5c29846",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Chemistry-side inner-factor input data (H6--H7)": {
+   "date": "2026-11-03",
+   "hash": "4c227ca29dfa38c7",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Foundational calibration (Class 1; I)": {
+   "date": "2026-11-03",
+   "hash": "42da000eade98cad",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Gravity calibration (D5--D6)": {
+   "date": "2026-11-03",
+   "hash": "ed96cffb46f61015",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Multi-focal-composition walls (G; cf. sec:unity )": {
+   "date": "2026-11-03",
+   "hash": "b5ff5df80350cc19",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Standard Model inner factor (F)": {
+   "date": "2026-11-03",
+   "hash": "ae42283f17715a8f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Two structurally distinct families on the free side": {
+   "date": "2026-11-03",
+   "hash": "87fe7543b52235b8",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::front": {
+   "date": "2026-11-03",
+   "hash": "bc7467a6c5e1a20f",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_61_bessel_moment_periods.tex::Introduction: the object, and the tower above it": {
+   "date": "2026-11-03",
+   "hash": "256b126fa6e52854",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_61_bessel_moment_periods.tex::The Bessel-moment period algebra: master family and quadratic": {
+   "date": "2026-11-03",
+   "hash": "16c4f17c16654272",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_61_bessel_moment_periods.tex::The modular structure and its cosmic-Galois periods": {
+   "date": "2026-11-03",
+   "hash": "810fa6e20e715583",
+   "run": "group3-full-2026-11-03"
+  },
+  "prose:papers/group3_foundations/paper_61_bessel_moment_periods.tex::front": {
+   "date": "2026-11-03",
+   "hash": "2ccfe66c5a7054a0",
+   "run": "group3-full-2026-11-03"
+  }
+ }
+}
