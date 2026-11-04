@@ -248,3 +248,103 @@ def test_native_signs_not_better_than_random_n3():
         dr.append(_e0(D + M + M.T) - e_st)
     native = _e0(H) - e_st
     assert native > 1.5 * float(np.mean(dr))
+
+
+# ===================================================================
+# Pins to the PRINTED numbers of sec:sign_holonomy (added 2026-11-03,
+# group3 guard pass; the tests above assert looser "> 10x" bounds and leave
+# n_max = 4 log-only).  Seeds are the driver's: full rotations
+# default_rng(1000 + s), s = 0..4; random signs default_rng(20260925 + n_max),
+# first five draws on the M_L = 0 ground-state sector.
+# ===================================================================
+
+# full singlet space (all M_L): cycle rank native -> rotated,
+# "6, 404, 7037 to 91, 5356, 107,416 at n_max = 2, 3, 4"
+CYCLE_RANK = {2: (6, 91), 3: (404, 5356), 4: (7037, 107416)}
+# "raises Delta by 43--48x at n_max = 3, 4" (mean over the five rotations)
+DELTA_RATIO_ROUNDED = {3: 43, 4: 48}
+# "the native Delta is 2.5--3.2x larger than that of random signs"
+RAND_RATIO_1DP = {3: 3.2, 4: 2.5}
+# tab:sign Delta_rand column (two significant figures)
+TAB_DELTA_RAND = {2: 1.8e-3, 3: 7.1e-3, 4: 1.4e-2}
+# tab:sign n_max = 4 row: dim, E, pos., beta, frustr., Delta
+TAB_ROW4 = dict(dim=57, edges=1418, posfrac=0.52, beta=1362, frust=760,
+                delta=3.42e-2)
+
+
+def _rotation_panel(nmax):
+    """Native and five fully rotated full-singlet-space statistics."""
+    h, V, orbs, _ = _phys(nmax)
+    native = _stats(_singlet(h, V, orbs, ml0=False))
+    rot = []
+    for s in range(5):
+        U = _random_orth(len(orbs), np.random.default_rng(1000 + s))
+        hr, Vr = _rotate(h, V, U)
+        rot.append(_stats(_singlet(hr, Vr, orbs, ml0=False)))
+    return native, rot
+
+
+def _random_sign_delta(H, seed, n_rand=5):
+    """Mean stoquastic gap with random signs on the same graph."""
+    r, c, w = _edges(H)
+    D = np.diag(np.diag(H))
+    e_st = _e0(_stoq(H))
+    rng = np.random.default_rng(seed)
+    out = []
+    for _ in range(n_rand):
+        M = np.zeros_like(H)
+        M[r, c] = rng.choice([-1.0, 1.0], size=w.size) * np.abs(w)
+        out.append(_e0(D + M + M.T) - e_st)
+    return float(np.mean(out))
+
+
+def _check_rotation(nmax):
+    native, rot = _rotation_panel(nmax)
+    b_nat, b_rot = CYCLE_RANK[nmax]
+    assert native["beta"] == b_nat
+    assert all(g["beta"] == b_rot for g in rot), [g["beta"] for g in rot]
+    for g in rot:                         # a basis change: same spectrum
+        assert g["E0"] == pytest.approx(native["E0"], abs=1e-9)
+    # "about 15x" (measured 15.2 / 13.3 / 15.3)
+    assert 13.0 <= b_rot / b_nat <= 16.0
+    ratio = np.mean([g["delta"] for g in rot]) / native["delta"]
+    if nmax in DELTA_RATIO_ROUNDED:
+        assert round(ratio) == DELTA_RATIO_ROUNDED[nmax], ratio
+    return native, rot
+
+
+def _check_random_signs(nmax):
+    H = _gs_sector(_phys(nmax)[3])
+    native = _e0(H) - _e0(_stoq(H))
+    rand = _random_sign_delta(H, 20260925 + nmax)
+    assert float(f"{rand:.2g}") == TAB_DELTA_RAND[nmax], rand
+    if nmax in RAND_RATIO_1DP:
+        assert round(native / rand, 1) == RAND_RATIO_1DP[nmax], native / rand
+
+
+@pytest.mark.parametrize("nmax", [2, 3])
+def test_rotation_cycle_rank_and_delta_pins(nmax):
+    """Cycle ranks exactly as printed; Delta ratio rounds to 43 at n_max=3."""
+    _check_rotation(nmax)
+
+
+@pytest.mark.parametrize("nmax", [2, 3])
+def test_random_sign_baseline_pins(nmax):
+    """tab:sign Delta_rand and the native/random ratio (3.2 at n_max=3)."""
+    _check_random_signs(nmax)
+
+
+def test_nmax4_pins():
+    """n_max = 4: tab:sign row, cycle ranks 7037 -> 107,416, Delta ratio 48,
+    '0.034 vs 1.47--1.71 Ha', and native/random 2.5x (was log-only)."""
+    g = _stats(_gs_sector(_phys(4)[3]))
+    for k in ("dim", "edges", "beta", "frust"):
+        assert g[k] == TAB_ROW4[k], (k, g[k])
+    assert round(g["npos"] / g["edges"], 2) == TAB_ROW4["posfrac"]
+    assert float(f"{g['delta']:.3g}") == TAB_ROW4["delta"], g["delta"]
+
+    native, rot = _check_rotation(4)
+    assert round(native["delta"], 3) == 0.034
+    d = [g["delta"] for g in rot]
+    assert (round(min(d), 2), round(max(d), 2)) == (1.47, 1.71), d
+    _check_random_signs(4)

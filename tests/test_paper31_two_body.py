@@ -15,9 +15,24 @@ Two constructions are pinned:
      fluctuation A = sum_i sum_j (M_i^dag (x) M_j^dag)[D_total, M_i (x) M_j]):
        - connected (non-factorizable) fraction of {D, A}: 77% (n_max=2),
          32% (n_max=3)
-       - angular part: 100% m-conserving, 100% Gaunt, pure k=0 monopole
+       - support (Paper 54 thm:angular_structure): EXACTLY the direct
+         elements V[a,b,a,b] -- all N^2 of them nonzero (25 at n_max=2,
+         196 at n_max=3), nothing else; so m-conservation, Delta l = 0 and
+         the pure k=0 monopole hold automatically.  The Coulomb tensor has
+         82 / 3604 further nonzero elements (exchange and k>0 channels
+         included) that are absent from the spectral support, and no
+         spectral element lies outside the Coulomb support.
+         (Replaces a Frobenius-weighted "Gaunt / k=0" audit that passed for
+         ANY direct-diagonal tensor -- planting `if True:` in its Gaunt
+         branch did not fire; /qa group3 2026-11-03.)
        - radial Pearson vs exact Coulomb Slater: 0.58 (n_max=2),
          0.41 (n_max=3), decreasing with n_max
+
+  Paper 54 thm:free_factorization + tab:heat are pinned here too:
+  {D, gamma} = 0 exactly, the free heat-trace ratio is 1 at
+  t in {0.1, 0.5, 1, 2}, 4 of 14 / 29 of 55 multipliers have a nonzero
+  [D, M], and the gauged heat-trace ratios of tab:heat (t = 0.5) match to
+  the printed six decimals.
 
   2. Resolvent construction V^res_abcd = sum_NLM M[a,c] conj(M[d,b]) w(N):
        - Dirac resolvent w=1/(N+1/2)^2: Pearson 0.846 (n_max=2),
@@ -38,6 +53,8 @@ only on the shipped package, not on the `debug/` diagnostic drivers
 `paper54_recompute_both_constructions.py` / `resolvent_two_body_diagnostic.py`
 (which it bit-reproduces).
 """
+import functools
+
 import numpy as np
 import pytest
 
@@ -154,12 +171,21 @@ def _embedded_multipliers(basis, dim, N, n_max):
     return out
 
 
-def _spectral_action_connected(n_max):
-    """Build the double-sum gauged spectral action {D_total, A}, return
-    (connected_fraction, connected_pp_tensor, basis).
+def _commutator_count(n_max):
+    """(number of multipliers with nonzero [D, M], number of multipliers)."""
+    basis, N, dim, D1, _ = _single_particle_scalar(n_max)
+    mults = _embedded_multipliers(basis, dim, N, n_max)
+    nz = sum(1 for M in mults if np.linalg.norm(D1 @ M - M @ D1) > 1e-14)
+    return nz, len(mults)
+
+
+@functools.lru_cache(maxsize=None)
+def _gauged_build(n_max):
+    """Double-sum gauge field. Returns (D_total, A, D1, basis, N, dim).
 
     A = sum_i sum_j (M_i^dag (x) M_j^dag) [D_total, M_i (x) M_j]
     D_total = D_1 (x) I + gamma_1 (x) D_2
+    Cached: the n_max = 3 build is ~45 s and is shared by several tests.
     """
     basis, N, dim, D1, g1 = _single_particle_scalar(n_max)
     d = dim
@@ -178,6 +204,20 @@ def _spectral_action_connected(n_max):
             fluct = np.kron(ci, Mj) + np.kron(g1 @ Mi, cj)
             A += np.kron(Mi.conj().T, Mj.conj().T) @ fluct
     A = ((A + A.conj().T) / 2).real
+    return D_total, A, D1, basis, N, d
+
+
+def _heat_ratio(D_total, A, D1, eps, t):
+    """Tr e^{-t (D_total + eps A)^2} / (Tr e^{-t D_1^2})^2 (tab:heat)."""
+    z1 = float(np.sum(np.exp(-t * np.linalg.eigvalsh(D1) ** 2)))
+    lam = np.linalg.eigvalsh(D_total + eps * A)
+    return float(np.sum(np.exp(-t * lam ** 2))) / (z1 * z1)
+
+
+def _spectral_action_connected(n_max):
+    """Return (connected_fraction, connected_pp_tensor, basis) of
+    {D_total, A} for the double-sum gauge field."""
+    D_total, A, _, basis, N, d = _gauged_build(n_max)
 
     DA = D_total @ A + A @ D_total
 
@@ -203,53 +243,78 @@ def _spectral_action_connected(n_max):
     return frac, V, basis
 
 
-def _angular_audit(V, basis):
-    """Return (gaunt_pct, mcons_pct, multipole_k_dict) by Frobenius weight."""
-    g_ok = g_bad = m_ok = m_bad = 0.0
-    by_k = {}
+SUPPORT_TOL = 1e-12  # smallest direct |V| is ~1e-2; largest off-direct ~1e-16
+
+
+def _support_audit(V, C, basis):
+    """Support of V against the direct set {[a,b,a,b]} and against Coulomb C.
+
+    Returns a dict of integer counts.  This is the content of Paper 54
+    thm:angular_structure: the spectral support IS the direct set, and the
+    Coulomb-only elements (82 / 3604) are absent from it.
+    """
     N = len(basis)
-    for a in range(N):
-        for b in range(N):
-            for c in range(N):
-                for d in range(N):
-                    v = V[a, b, c, d]
-                    if abs(v) < 1e-12:
-                        continue
-                    dl1 = abs(basis[a].l - basis[c].l)
-                    dl2 = abs(basis[b].l - basis[d].l)
-                    if dl1 == dl2:
-                        g_ok += v * v
-                        by_k[dl1] = by_k.get(dl1, 0.0) + v * v
-                    else:
-                        g_bad += v * v
-                    if basis[a].m + basis[b].m == basis[c].m + basis[d].m:
-                        m_ok += v * v
-                    else:
-                        m_bad += v * v
-    tg, tm, tk = g_ok + g_bad, m_ok + m_bad, sum(by_k.values())
-    gaunt = 100 * g_ok / tg if tg else None
-    mcons = 100 * m_ok / tm if tm else None
-    kdict = {int(k): 100 * v / tk for k, v in by_k.items()} if tk else {}
-    return gaunt, mcons, kdict
+    i = np.arange(N)
+    direct = np.zeros(V.shape, dtype=bool)
+    direct[i[:, None], i[None, :], i[:, None], i[None, :]] = True
+    spec = np.abs(V) > SUPPORT_TOL
+    coul = np.abs(C) > SUPPORT_TOL
+    coul_only = coul & ~spec
+    l = np.array([b.l for b in basis])
+    # Coulomb-only elements in a channel the spectral V cannot reach:
+    # exchange [a,b,b,a] (a != b) and a multipole k > 0 (l_a != l_c)
+    exch = np.zeros(V.shape, dtype=bool)
+    exch[i[:, None], i[None, :], i[None, :], i[:, None]] = True
+    exch &= ~direct
+    lac_differs = (l[:, None, None, None] != l[None, None, :, None])
+    return {
+        "n_spec": int(spec.sum()),
+        "n_direct": int(direct.sum()),
+        "n_direct_nonzero": int((spec & direct).sum()),
+        "n_off_direct": int((spec & ~direct).sum()),
+        "n_coul": int(coul.sum()),
+        "n_coul_only": int(coul_only.sum()),
+        "n_spec_only": int((spec & ~coul).sum()),
+        "n_coul_only_exchange": int((coul_only & exch).sum()),
+        "n_coul_only_k_pos": int((coul_only & lac_differs).sum()),
+    }
+
+
+def _assert_direct_support(V, C, basis, n_paper, n_coul_only_paper):
+    s = _support_audit(V, C, basis)
+    N = len(basis)
+    # support is EXACTLY the direct set: every direct element nonzero ...
+    assert s["n_direct"] == N * N == n_paper, s
+    assert s["n_direct_nonzero"] == n_paper, s
+    # ... and nothing else (a non-direct element, even m-conserving with
+    # Delta l = 0, is the wrong answer the retired audit accepted)
+    assert s["n_off_direct"] == 0, s
+    assert s["n_spec"] == n_paper, s
+    # strict subset of Coulomb: 0 spectral-only, 82 / 3604 Coulomb-only
+    assert s["n_spec_only"] == 0, s
+    assert s["n_coul_only"] == n_coul_only_paper, s
+    assert s["n_coul"] == n_paper + n_coul_only_paper, s
+    # the Coulomb-only set contains exchange and k > 0 channels (the remark
+    # after thm:angular_structure)
+    assert s["n_coul_only_exchange"] > 0 and s["n_coul_only_k_pos"] > 0, s
 
 
 def test_spectral_action_two_body_nmax2():
     """Paper 31 §sec:two_body, gauged spectral action at n_max=2.
 
-    connected fraction ~ 77%; angular 100% m-conserving / 100% Gaunt /
-    pure k=0; radial Pearson ~ 0.58.
+    connected fraction ~ 77%; support exactly the 25 direct elements
+    (Paper 54 thm:angular_structure), 82 Coulomb-only elements absent;
+    radial Pearson ~ 0.58.
     """
     frac, V, basis = _spectral_action_connected(2)
-    gaunt, mcons, kdict = _angular_audit(V, basis)
-    pearson = _radial_pearson(V, _coulomb_tensor(basis))
+    C = _coulomb_tensor(basis)
+    pearson = _radial_pearson(V, C)
 
     # connected (non-factorizable) fraction: paper says 77%
     assert frac == pytest.approx(0.767, abs=0.01), f"conn frac {frac}"
-    # angular selection rules: exact Coulomb match
-    assert mcons == pytest.approx(100.0, abs=1e-6), f"m-cons {mcons}"
-    assert gaunt == pytest.approx(100.0, abs=1e-6), f"Gaunt {gaunt}"
-    assert set(round(k) for k in kdict) == {0}, f"multipole {kdict}"
-    assert kdict[0] == pytest.approx(100.0, abs=1e-6)
+    # angular structure: direct-only support (implies m-conservation,
+    # Delta l = 0 and the pure k = 0 monopole)
+    _assert_direct_support(V, C, basis, n_paper=25, n_coul_only_paper=82)
     # radial: structurally different from Coulomb (Pearson well below 1)
     assert pearson == pytest.approx(0.58, abs=0.02), f"Pearson {pearson}"
     assert pearson < 0.9
@@ -267,16 +332,93 @@ def test_spectral_action_two_body_nmax3_decreasing():
     pearson2 = _radial_pearson(V2, _coulomb_tensor(basis2))
 
     frac3, V3, basis3 = _spectral_action_connected(3)
-    gaunt3, mcons3, kdict3 = _angular_audit(V3, basis3)
-    pearson3 = _radial_pearson(V3, _coulomb_tensor(basis3))
+    C3 = _coulomb_tensor(basis3)
+    pearson3 = _radial_pearson(V3, C3)
 
     assert frac3 == pytest.approx(0.324, abs=0.01), f"conn frac {frac3}"
-    assert mcons3 == pytest.approx(100.0, abs=1e-6), f"m-cons {mcons3}"
-    assert gaunt3 == pytest.approx(100.0, abs=1e-6), f"Gaunt {gaunt3}"
-    assert set(round(k) for k in kdict3) == {0}, f"multipole {kdict3}"
+    _assert_direct_support(V3, C3, basis3, n_paper=196, n_coul_only_paper=3604)
     assert pearson3 == pytest.approx(0.41, abs=0.02), f"Pearson {pearson3}"
     # the load-bearing negative: radial correlation DECREASES with n_max
     assert pearson3 < pearson2
+
+
+# ---------------------------------------------------------------------------
+# 1b. Paper 54 thm:free_factorization, the commutator counts, tab:heat
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("n_max", [2, 3])
+def test_free_factorization_anticommutator_and_heat_ratio(n_max):
+    """Paper 54 thm:free_factorization: {D, gamma} = 0 exactly for the
+    chirality-doubled CH Dirac and the swap grading; hence D_total^2 has no
+    cross term and the free heat-trace ratio is 1 at t in {0.1, 0.5, 1, 2}
+    ("Numerical verification" paragraph).
+
+    Wrong answer rejected: a non-chiral D (both copies +(n+1/2)), for which
+    the swap grading commutes with D, the cross term 2 D gamma (x) D
+    survives, and the heat trace does not factorize.
+    """
+    basis, N, dim, D, gamma = _single_particle_scalar(n_max)
+    anti = D @ gamma + gamma @ D
+    assert np.max(np.abs(anti)) == 0.0
+    # gamma is a grading: involutive and not the identity
+    assert np.array_equal(gamma @ gamma, np.eye(dim))
+    assert not np.array_equal(gamma, np.eye(dim))
+
+    D_total = np.kron(D, np.eye(dim)) + np.kron(gamma, D)
+    D2_sum = np.kron(D @ D, np.eye(dim)) + np.kron(np.eye(dim), D @ D)
+    assert np.max(np.abs(D_total @ D_total - D2_sum)) < 1e-12
+
+    zero = np.zeros_like(D_total)
+    for t in (0.1, 0.5, 1.0, 2.0):
+        r = _heat_ratio(D_total, zero, D, 0.0, t)
+        assert r == pytest.approx(1.0, abs=1e-12), (t, r)
+
+
+@pytest.mark.parametrize("n_max,n_nonzero,n_total", [(2, 4, 14), (3, 29, 55)])
+def test_commutator_counts(n_max, n_nonzero, n_total):
+    """Paper 54 sec:gauged: at n_max = 2 four of 14 multiplier generators
+    have [D, M] != 0; at n_max = 3, 29 of 55.
+
+    Wrong answer rejected: a D that is not constant on n-shells (e.g. graded
+    by l), which changes which multipliers commute with it.
+    """
+    nz, total = _commutator_count(n_max)
+    assert (nz, total) == (n_nonzero, n_total)
+
+
+# tab:heat, t = 0.5, printed to six decimals
+TAB_HEAT = {
+    2: {0.0: 1.000000, 0.1: 0.995465, 0.5: 0.977815, 1.0: 0.956832},
+    3: {0.0: 1.000000, 0.1: 0.838438, 0.5: 0.410165, 1.0: 0.185405},
+}
+
+
+def _check_heat_table(n_max):
+    D_total, A, D1, _, _, _ = _gauged_build(n_max)
+    got = {eps: _heat_ratio(D_total, A, D1, eps, 0.5) for eps in TAB_HEAT[n_max]}
+    for eps, ref in TAB_HEAT[n_max].items():
+        # half a unit in the sixth decimal (display rounding)
+        assert got[eps] == pytest.approx(ref, abs=5.01e-7), (n_max, eps, got[eps])
+    # "departs from the factorized value monotonically with eps"
+    vals = [got[e] for e in sorted(got)]
+    assert all(x > y for x, y in zip(vals, vals[1:])), vals
+
+
+def test_heat_table_nmax2():
+    """Paper 54 tab:heat, n_max = 2 column, for the DOUBLE-sum gauge field.
+
+    Wrong answer rejected: the single-sum (diagonal NLM = N'L'M') gauge
+    field, which gives 0.998862 / 0.994340 / 0.988757.
+    """
+    _check_heat_table(2)
+
+
+@pytest.mark.slow
+def test_heat_table_nmax3():
+    """Paper 54 tab:heat, n_max = 3 column (slow: ~45 s double-sum build,
+    shared with test_spectral_action_two_body_nmax3_decreasing)."""
+    _check_heat_table(3)
 
 
 # ---------------------------------------------------------------------------

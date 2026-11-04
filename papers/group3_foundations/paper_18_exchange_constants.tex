@@ -753,9 +753,9 @@ weighted Ihara zeta $\zeta_G^w(s)$ living in the ring
 $\mathbb{Q}(\alpha^2)[s]$ --- an explicit realization of the
 spinor-intrinsic tier without the $\gamma = \sqrt{1 - (Z\alpha)^2}$
 radical (\texttt{geovac/ihara\_zeta\_weighted.py}; the module's 14 tests
-cover the weighted-Ihara infrastructure, not the degree-44 / $-35/648$
-values below, which are module-computed but not yet regression-tested ---
-a coverage gap logged in \texttt{docs/claim\_test\_matrix.md}).
+cover the weighted-Ihara infrastructure;\ the degree-44 / $-35/648$
+values below are checked by an independent modular determinant in
+\texttt{tests/test\_paper18\_computed\_pins.py}).
 For Rule-A at $n_{\max}=3$, the inverse zeta expands as a polynomial
 in $\alpha$ of degree 44, with $\alpha^2$ coefficient carrying
 the clean rational prefactor $-35/648$. The coefficient is a
@@ -2885,9 +2885,8 @@ coincides with the Fock Jacobian $1/16$.  The identity
 (\ref{eq:kappa_B_identity}) is exact-rational with no fitted parameters
 (the arithmetic closes:\ $9/4 + 51/16 + 165/16 = 63/4 = 6\,B\,|\kappa|$);
 the six Fock-weight values of Eq.~(\ref{eq:fock_weight_values}) are
-stated here, and a regression test deriving them from the Fock weight and
-checking the identity is a logged coverage gap
-(\texttt{docs/claim\_test\_matrix.md}).
+derived from the Fock weight by exact Beta integrals, and the identity
+checked, in \texttt{tests/test\_paper18\_computed\_pins.py}.
 
 \paragraph{2. A Dirichlet identity for $F$.}
 Define the Dirichlet series of the $S^3$ Fock shell degeneracy

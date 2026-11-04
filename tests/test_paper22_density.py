@@ -288,43 +288,76 @@ def test_potential_independence_lmax2():
     bit-identical-mask statement is the actual content of Theorem 2 and holds
     at matched orbitals, which is precisely what restricting to the common
     set enforces.
+
+    Tightened 2026-11-03 (group3 guard pass).  The mask/uniform-density
+    comparison alone accepts a wrong answer: a radial defect that zeroes the
+    same channel for EVERY potential (e.g. all k > 0 Slater integrals lost)
+    leaves the masks bit-identical and the densities uniform.  So, per
+    panel and per potential, this also asserts
+      * radial_zero == 0 (no surviving angular channel is zeroed radially),
+      * the realized nonzero count equals the count predicted by the exact
+        sympy global-M_L Gaunt rule on the panel's (l, m) labels weighted by
+        their radial multiplicities -- on the single-shell panel
+        {n_r = 0, l <= 2} that is D(2) = 559 / 6561 = 8.5200% itself;
+    and it runs at radial n_max = 2 as well as 1 (Theorem 2's independence
+    of the radial quantum numbers).
     """
+    from collections import Counter
+
     from geovac.nuclear.potential_sparsity import (
         DEFAULT_POTENTIALS,
         compute_eri_tensor,
         radial_wavefunctions_for_potential,
     )
 
-    n_max, l_max = 1, 2
+    l_max = 2
+    # one radial solve at n_r <= 2; each (n_r, l) state is solved
+    # independently, so the n_r <= 1 panel is a subset of it
     wfs_all = {
-        name: radial_wavefunctions_for_potential(name, params, n_max, l_max)
+        name: radial_wavefunctions_for_potential(name, params, 2, l_max)
         for name, params in DEFAULT_POTENTIALS.items()
     }
     common_keys = set.intersection(*(set(w.keys()) for w in wfs_all.values()))
-    assert len(common_keys) >= 5, common_keys
+    panels = {
+        "single_shell": {k for k in common_keys if k[0] == 0},
+        "n_r<=1": {k for k in common_keys if k[0] <= 1},
+        "n_r<=2": set(common_keys),
+    }
+    assert panels["single_shell"] == {(0, 0), (0, 1), (0, 2)}
+    assert len(panels["n_r<=2"]) > len(panels["n_r<=1"]) > 3
 
-    masks = {}
-    densities = {}
-    for name, wfs in wfs_all.items():
-        wfs_common = {k: v for k, v in wfs.items() if k in common_keys}
-        eri, stats = compute_eri_tensor(wfs_common, threshold=1e-10)
-        masks[name] = (np.abs(eri) > 1e-10)
-        densities[name] = stats["eri_density_pct"]
+    # exact angular survivors on the (l, m) labels, once
+    orbs = _shell(l_max)
+    survivors = [
+        (la, lb, lc, ld)
+        for (la, ma) in orbs for (lb, mb) in orbs
+        for (lc, mc) in orbs for (ld, md) in orbs
+        if _global_nonzero(la, ma, lc, mc, lb, mb, ld, md, use_float=False)
+    ]
+    assert len(survivors) == GLOBAL_D[l_max][1]
 
-    ref_mask = masks["coulomb"]
-    for name, mask in masks.items():
-        assert mask.shape == ref_mask.shape, name
-        assert np.array_equal(mask, ref_mask), (
-            f"angular zero pattern for {name} differs from coulomb"
-        )
-
-    # Radial zeros contribute nothing: the realized density is identical
-    # across all five potentials (bit-identical to the Coulomb value).
-    ref_density = densities["coulomb"]
-    for name, dens in densities.items():
-        assert abs(dens - ref_density) < 1e-9, (
-            f"{name}: density {dens}% != coulomb {ref_density}%"
-        )
+    for pname, keys in panels.items():
+        mult = Counter(l for (_, l) in keys)
+        predicted = sum(mult[a] * mult[b] * mult[c] * mult[d]
+                        for (a, b, c, d) in survivors)
+        n_orb = sum(mult[l] * (2 * l + 1) for l in mult)
+        masks = {}
+        for name, wfs in wfs_all.items():
+            eri, stats = compute_eri_tensor(
+                {k: v for k, v in wfs.items() if k in keys}, threshold=1e-10)
+            assert stats["total_elements"] == n_orb ** 4, (pname, name)
+            assert stats["radial_zero"] == 0, (pname, name, stats["radial_zero"])
+            assert stats["combined_nonzero"] == predicted, (
+                pname, name, stats["combined_nonzero"], predicted)
+            masks[name] = np.abs(eri) > 1e-10
+        if pname == "single_shell":
+            assert predicted == GLOBAL_D[l_max][1]
+            assert _pct_string(predicted, n_orb ** 4) == GLOBAL_D[l_max][2]
+        ref_mask = masks["coulomb"]
+        for name, mask in masks.items():
+            assert np.array_equal(mask, ref_mask), (
+                f"{pname}: angular zero pattern for {name} differs from coulomb"
+            )
 
 
 # ---------------------------------------------------------------------------

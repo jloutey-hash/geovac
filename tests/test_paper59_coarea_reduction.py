@@ -12,7 +12,10 @@ Backed facts (self-contained, no debug/ import):
       halves are equal, giving the single (16/pi) int_0^1 form;
   (B) the leading Fourier-Whittaker (log) coefficient A = J(1/4,1/4,1)/4 -- the fibre value at
       the DIAGONAL c_s=c_t (the genus-0 degenerate cusp), one transcendence level below T2;
-  (C) the reduction reproduces the frozen anchor (coarse grid here; the driver reaches 2.2e-9).
+  (C) the reduction reproduces the frozen anchor (coarse grid, 5e-3);
+  (C') the same reduction on a finer grid (Nk=90, Nu=64/130, Nrho=48) reproduces the certified 66-digit T2 to the
+      prose's 2.2e-9 (asserted < 3e-9; added 2026-11-03); the symmetry (A) is asserted at the
+      prose's 5e-29 level (< 5e-28, roundoff at 30 digits).
 """
 import mpmath as mp
 from mpmath import legendre
@@ -103,7 +106,11 @@ def test_paper59_coarea_symmetry_and_A():
     for rho in [mp.mpf('0.5'), mp.mpf('0.35')]:
         lhs = _Phi(rho, Nu, Nk)
         rhs = _Phi(1 / rho, Nu, Nk) / rho ** 2
-        assert abs(lhs - rhs) < mp.mpf(10) ** -8, (rho, abs(lhs - rhs))
+        # Paper 61 prose: symmetry to 5e-29 at 30 digits.  The sin^2 u-map sends the rho and
+        # 1/rho node sets onto each other with (c_s, c_t) swapped, so the identity holds at
+        # the discrete level and only roundoff remains: any error in the Jacobian, the branch
+        # set or the s<->t symmetry of the fibre shows up at O(1e-3), not 1e-29.
+        assert abs(lhs - rhs) < mp.mpf('5e-28'), (rho, abs(lhs - rhs))
     a_gl, a_quad = _A(80)
     assert abs(a_gl - a_quad) < mp.mpf(10) ** -10, (a_gl, a_quad)
     # A is the LOG coefficient: Phi(rho) + A ln(1-rho) stays finite (converges to C) as rho->1
@@ -130,3 +137,33 @@ def test_paper59_coarea_reduction_reproduces_T2():
         bracket += (w / 2) * integ
     T2_recon = (16 / mp.pi) * (A + bracket)
     assert abs(T2_recon - T2_FROZEN) < mp.mpf('5e-3'), (T2_recon, abs(T2_recon - T2_FROZEN))
+
+
+# ----------------------------------------------------------------------------------------------
+# (C') the reduction at the prose's precision (2026-11-03, group3 guard pass).  Paper 61 states
+# "reduction 2.2e-9 vs the anchor"; the coarse (C) above only asserted 5e-3.  This is the
+# configuration that produced the 2.2e-9 (sprint record, CHANGELOG fourth T2 track): the same
+# decay-map fibre as above at Nk = 90, Nu = 64 (130 near the rho = 1 cusp, v < 0.35), Nrho = 48,
+# 26 digits, compared to the certified 66-digit T2.
+# ----------------------------------------------------------------------------------------------
+
+from benchmarks.certified_reference.entries_t2 import T2_VALUE_66  # noqa: E402
+
+
+@pytest.mark.slow
+def test_paper59_coarea_reduction_at_prose_precision():
+    """(C') T2 = (16/pi)[A + int (Phi + A ln(1-rho)) drho] reproduces the certified T2 to the
+    prose's 2.2e-9 (asserted < 3e-9)."""
+    mp.mp.dps = 26
+    Nk = 90
+    A = _A(Nk)[0]
+    xs, ws = _gl(48)
+    bracket = mp.mpf(0)
+    for x, w in zip(xs, ws):
+        v = (x + 1) / 2
+        rho = 1 - v * v
+        Nu = 130 if v < mp.mpf('0.35') else 64
+        bracket += (w / 2) * (_Phi(rho, Nu, Nk) + A * 2 * mp.log(v)) * 2 * v
+    T2_recon = (16 / mp.pi) * (A + bracket)
+    err = abs(T2_recon - mp.mpf(T2_VALUE_66))
+    assert err < mp.mpf('3e-9'), (mp.nstr(T2_recon, 20), mp.nstr(err, 4))

@@ -1194,8 +1194,10 @@ natural Camporesi--Higuchi diagonal substrate.
 
 \begin{theorem}[NA-1 diagonal-collapse identity]
 \label{thm:na1_diagonal_collapse}
-Let $D$ be the Camporesi--Higuchi Dirac on $\sthree$ and
-$\gamma_P |n, \chi, m_l\rangle := (-1)^n |n, \chi, m_l\rangle$ the
+Let $D$ be the Camporesi--Higuchi Dirac on $\sthree$ restricted to one
+chirality (equivalently, replace $D$ by $|D|$;\ with both chiralities
+$\pm\lambda_n$ the integrand below is odd in $D$ and $J \equiv 0$), and
+$\gamma_P |n, m_l\rangle := (-1)^n |n, m_l\rangle$ the
 vertex-parity grading on the eigenshells. For every integer
 $s_1 + s_2 \ge 3$,
 \begin{equation}
@@ -1386,27 +1388,26 @@ verifies the trace-functional collapse bit-exactly even in the
 genuinely non-commuting case.
 \end{remark}
 
-\begin{theorem}[JLO depth-$2$ cocommutativity --- Reading A
-empirical close]
+\begin{theorem}[JLO depth-$2$ swap symmetry --- even-flavour
+$S_3$ invariance]
 \label{thm:jlo_depth2_reading_A}
 Let $\chi_D(a_0, a_1, a_2; t) = \sum_{m \ge 0} t^m\, c_m(a_0, a_1, a_2)$
 be the JLO depth-$2$ entire cyclic cocycle on the truncated
 Camporesi--Higuchi spectral triple at $n_{\max} \in \{2, 3\}$, with
 the sector-idempotent algebra
 $\mathcal{A} = \mathbb{C}\langle e_0, \ldots, e_{N - 1}\rangle$
-($N = N(n_{\max}) = 5, 9$ respectively).  Then $\chi_D(a_0, a_1, a_2; t)$
-is bit-exactly invariant under the full $S_3$ permutation action on
-$(a_0, a_1, a_2)$ at both leading order ($t^0$) and the next order
-($t^1$), in both the even (chirality-graded) and odd (plain trace)
-flavours.  Concretely, on the $25$-pair $\{1, e_s, e_t\}$ panel at
-$n_{\max} = 2$, the swap-asymmetric residual
-$\chi_D(1, e_s, e_t) - \chi_D(1, e_t, e_s)$ vanishes identically in
-\texttt{sympy}-rational arithmetic across all $10$ unordered pairs $\times$
-$2$ orders $\times$ $2$ flavours = $40$ bit-exact zeros; the full
-$S_3$-orbit test on $\chi_D(e_0, e_1, e_2)$ returns the same value
-across all six permutations.  The depth-$2$ content sits entirely
-in the \emph{symmetric} sector of $S_3 \curvearrowright \mathcal{A}^{\otimes 3}$,
-with zero antisymmetric / shuffle-Hopf content.
+($N = N(n_{\max}) = 5, 9$ respectively).  Then the swap-asymmetric
+residual $\chi_D(1, e_s, e_t) - \chi_D(1, e_t, e_s)$ vanishes identically
+in \texttt{sympy}-rational arithmetic at $n_{\max} = 2$ across all $10$
+unordered pairs $\times$ $2$ orders ($t^0$, $t^1$) $\times$ $2$ flavours
+(even, chirality-graded;\ odd, plain trace) $= 40$ bit-exact zeros.  In
+the \emph{even} flavour the full $S_3$-orbit of $\chi_D(e_0, e_1, e_2)$ at
+$t^1$ is the single value $-13/98304$ across all six permutations.  In the
+\emph{odd} flavour it is not $S_3$-invariant:\ the orbit takes the two
+values $\pm 13/98304$, changing sign when $a_0$ moves.  So the depth-$2$
+content of the even flavour sits in the symmetric sector of
+$S_3 \curvearrowright \mathcal{A}^{\otimes 3}$;\ the odd flavour carries
+antisymmetric content.
 \end{theorem}
 
 \begin{proof}[Proof sketch and honest scope]
@@ -1414,54 +1415,59 @@ The cocycle values are computed bit-exactly via the $t$-power-series
 expansion of the JLO simplex integral (driver
 \texttt{debug/sprint\_jlo\_depth2\_compute.py}).  Bit-exact swap symmetry on the $10$-pair $\times$ $2$-order $\times$
 $2$-flavour panel = $40$ zero residuals computed in \texttt{sympy}
-rational arithmetic; bit-exact $S_3$-orbit invariance on
-$\chi_D(e_0, e_1, e_2)$ across all $6$ permutations.
+rational arithmetic; in the even flavour, bit-exact $S_3$-orbit
+invariance on $\chi_D(e_0, e_1, e_2)$ across all $6$ permutations (the
+debug driver computed only this flavour's orbit).
 
 The honest scope caveat:\ since
 $\mathcal{A} = \mathbb{C}\langle e_0, \ldots, e_{N - 1}\rangle$ is
 commutative ($[e_s, e_t] = 0$), trace cyclicity plus commutativity
 of $\mathcal{A}$ alone would force \emph{cyclic invariance modulo
 explicit coboundary terms}, which is weaker than the bit-exact
-full $S_3$-cocommutativity verified here.  The operator-level
+swap symmetry verified here.  The operator-level
 commutators that would have to vanish to reduce $S_3$ invariance
 to cyclicity (e.g.\ $[\gamma, [D, e_s]]$ and
 $[[D, e_s], [D, e_t]]$) are
 \emph{non-zero} on this substrate (e.g.\ $\|[\gamma, D]\| = \sqrt{13}/4$,
-$\|[[D, e_0], [D, e_1]]\| = 3/64$ at $n_{\max} = 2$), so the
-$S_3$-invariance is strictly stronger than what commutativity of
-$\mathcal{A}$ or cyclicity of the trace alone would give.  See
+$\|[[D, e_0], [D, e_1]]\| = 3/64$ at $n_{\max} = 2$).  The extra
+ingredient is that $D$ is \emph{real} symmetric on this substrate:\ the
+swap zeros hold for a random real-symmetric $D$ and fail for a random complex
+Hermitian one
+(\texttt{tests/test\_paper55\_jlo\_depth2\_reading\_A.py}), so the swap
+symmetry is a consequence of the reality of $D$ rather than independent
+evidence.  See
 \texttt{debug/sprint\_jlo\_depth2\_memo.md}~\S4.3 for the explicit
 non-vanishing operator commutators.
 
 The verdict is stable across cutoff:\ spot-checks at
-$n_{\max} = 3$ reproduce bit-exact swap symmetry and bit-exact
-$S_3$-orbit invariance on the tested arguments.
+$n_{\max} = 3$ reproduce bit-exact swap symmetry and, in the even
+flavour, bit-exact $S_3$-orbit invariance on the tested arguments.
 \end{proof}
 
 \begin{remark}[Strategic implication for the cosmic-Galois
 positioning]
 \label{rem:reading_A_strategic}
-Theorem~\ref{thm:jlo_depth2_reading_A} closes the depth-$2$ Reading
-A/B question on the natural Camporesi--Higuchi substrate at the
-JLO cocycle level.  On this computation GeoVac is consistent with
+Theorem~\ref{thm:jlo_depth2_reading_A} does \emph{not} close the depth-$2$
+Reading A/B question:\ the even flavour is $S_3$-symmetric, the odd flavour is
+not, and the swap symmetry follows from the reality of $D$.  In the even
+flavour GeoVac is consistent with
 the abelianisation-by-Cartier--Milnor--Moore of the cosmic-Galois
 universe at depth $2$:\ the depth-$2$ cocycle
 carries genuinely new content not derivable from depth-$1$
 (depth-$1$ JLO vanishes identically on commutative $\mathcal{A}$,
 v3.59.0 Sprint Q5'-Stage1-Arc), but that new content sits entirely
 in the symmetric / primitive-product sector of
-$S_3 \curvearrowright \mathcal{A}^{\otimes 3}$, with zero
-shuffle-Hopf / deconcatenation-pair signature.
+$S_3 \curvearrowright \mathcal{A}^{\otimes 3}$;\ the odd flavour's
+antisymmetric content is unexplained.
 
-\textbf{No empirical demand} from the JLO probe for the beyond-sprint-scale
+\textbf{No decision} from the JLO probe on the beyond-sprint-scale
 follow-on to cofree-cocommutative shuffle Hopf algebra $T(V)$
-enrichment of the substrate.  The comparison homomorphism
-$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}}$
-of Paper~56 (Theorem~\texttt{thm:injection\_g4}, 2026-06-06;\ \emph{not}
-injective --- the M3 column has rank~$2$, far below the sector count) is
-the structurally correct statement:\ it factors through the
-abelianization, and GeoVac realises the abelianised image, not a
-partial achievement.
+enrichment of the substrate.  The comparison homomorphism of Paper~56
+(Theorem~\texttt{thm:injection\_g4}) runs \emph{from} the level-4
+unipotent radical $\mathcal{U}_4$ \emph{into} the abelian factor of
+GeoVac's group, factors through $\mathcal{U}_4^{\mathrm{ab}}$, and has
+image of dimension at most $2$ per weight (the M3 column;\ M1 and M2
+contribute nothing).
 
 Two open questions remain.  (i) Non-commutative inner-factor
 enrichment of $\mathcal{A}$ would expose Reading B content sitting
@@ -1470,15 +1476,11 @@ theorem (Paper~32~\cite{loutey_paper32} \S~VIII.C;
 \texttt{memory/sprint\_h1\_positive\_thin.md}) already classifies
 the inner factor as calibration data, not autonomously generated
 by the GeoVac outer triple, so the non-commutative enrichment
-question is not a sprint-scale follow-on.  (ii) How large the image of
-the comparison homomorphism $\Phi^{\mathrm{inj}}$ is inside
-$\mathcal{U}_4^{\mathrm{ab}}$ (Paper~56, 2026-06-06) ---
-since the map is not injective, this is a question about its image,
-not an isomorphism --- remains the named open forward research question, testable
+question is not a sprint-scale follow-on.  (ii) Whether depth-$\ge 2$
+level-4 content reaches an enriched GeoVac Hopf structure (Paper~56)
+remains the named open forward research question, testable
 by exhausting GeoVac's M3 sector at depth $\ge 2$ for level-$4$
-cyclotomic motivic MZVs.  Today's verdict eliminates one structural
-ambiguity (primitive vs shuffle) on the GeoVac side without
-advancing the equality direction itself.
+cyclotomic motivic MZVs.
 \end{remark}
 
 % =====================================================================

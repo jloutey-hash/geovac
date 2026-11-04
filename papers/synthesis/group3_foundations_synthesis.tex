@@ -207,8 +207,9 @@ tensor-product triple into a two-body interaction consistent with the
 selection rules but only their monopole, direct subset, Paper~55~\cite{loutey_paper55} places
 the transcendentals in the census of GeoVac spectral data in
 cyclotomic mixed-Tate periods at level $\le 4$,
-Paper~56~\cite{loutey_paper56} constructs the cosmic-Galois comparison map $U^*_{\mathrm{GV}}
-\to \mathcal{U}_4^{\mathrm{ab}}$ (a homomorphism, not a closed immersion), and Paper~57~\cite{loutey_paper57}
+Paper~56~\cite{loutey_paper56} constructs a depth-1 cosmic-Galois comparison, a homomorphism
+from the level-4 unipotent radical $\mathcal{U}_4$ into GeoVac's abelian factor, through
+$\mathcal{U}_4^{\mathrm{ab}}$, and Paper~57~\cite{loutey_paper57}
 catalogues the forced/free seam;\ Paper~61~\cite{loutey_paper61}
 develops the arithmetic of the elliptic layer (\S\ref{sec:reconvergence}).  An $O(V)$ time-evolution engine
 (Paper~6~\cite{loutey_paper6}, now an archived standalone tool)
@@ -1428,37 +1429,32 @@ finite-cutoff Hopf-algebra truncations, an abelian symmetric-monoidal
 rigid representation category, a faithful exact $\otimes$-fiber functor,
 and an explicit inclusion of the candidate cosmic-Galois group
 $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3N} \rtimes SL_2$ into
-$\mathrm{Aut}^{\otimes}(\omega)$.  \textbf{[INTERNAL THEOREM]} The load-bearing result is the
-\emph{cosmic-Galois comparison homomorphism}
-$U^*_{\mathrm{GV}} \rightarrow \mathcal{U}_4^{\mathrm{ab}}$ from the framework's finite-cutoff Galois group to the
-abelianization of the unipotent radical of the level-4 motivic Galois
-group $\mathcal{G}_4 = \mathcal{G}_{\mathrm{MT}(\mathbb{Z}[i, 1/2])}$
-(Deligne~\cite{deligne2010}, Glanois~\cite{glanois2015}).  It is \emph{not injective}:\ its image
-has rank~2 (the M3 column;\ rank~1 for M1, M2 and for the parity-blind
-per-sector restriction), far below the sector count $N$, so it factors
-through the abelianization and is neither an injection nor a closed
-immersion (Paper~56's theorem is titled the level-4 cosmic-Galois
-``comparison homomorphism'';\ only its label and the symbol
-$\Phi^{\mathrm{inj}}$ keep the older ``injection'' name).  The comparison target is the
+$\mathrm{Aut}^{\otimes}(\omega)$.  The cosmic-Galois comparison is
+\textbf{[INTERNAL THEOREM]} at depth~1 only:\ sending each M3 generator to the
+depth-1 de Rham class of its level-4 motivic period, and each M1, M2 generator
+to $0$, gives a homomorphism $\mathcal{U}_4 \to \mathbb{G}_a^{3N}$ \emph{from} the
+unipotent radical of the level-4 motivic Galois group
+$\mathcal{G}_4 = \mathcal{G}_{\mathrm{MT}(\mathbb{Z}[i, 1/2])}$
+(Deligne~\cite{deligne2010}, Glanois~\cite{glanois2015}) \emph{into} GeoVac's abelian
+factor, factoring through $\mathcal{U}_4^{\mathrm{ab}}$, with image of dimension at
+most 2 per weight.  Paper~56's earlier statement, a homomorphism
+$U^*_{\mathrm{GV}} \to \mathcal{G}_4$, had the arrow reversed and is withdrawn % [retracted 2026-11-03: p56-comparison-arrow-reversed]
+(2026-11-03);\ only its label and the symbol $\Phi^{\mathrm{inj}}$ keep the older
+``injection'' name.  The comparison group is the
 \emph{level-4} group, not Brown's $\mathcal{G}_{\mathrm{MT}(\mathbb{Z})}$:\
 Eskandari--Murty--Nemoto~\cite{eskandari_murty_nemoto2025} construct a motive with period $G$ that
 is mixed Tate over $\mathbb{Q}(i)$ but not over $\mathbb{Q}$;\ the level-4 placement is the classical
 $G = \mathrm{Im}\,\mathrm{Li}_2(i)$ in Deligne's $N = 4$ setting.  That $G$ is \emph{not} a period of $\mathrm{MT}(\mathbb{Z})$
 is expected but not proven, so this motivates the refinement rather than
 forcing it.
-Two scope qualifiers are essential and stated honestly:\ (i) GeoVac's
-comparison map lands in an \emph{abelianized image} inside the level-4
-cosmic Galois group, of positive codimension at each weight
-(Reading~A)---its primitive Hopf substrate is cocommutative, confirmed
-bit-exact at the JLO entire-cyclic-cocycle level at depth~2, so the
-image lands in $\mathcal{U}_4^{\mathrm{ab}} \cong \mathbb{G}_a^\infty$
-rather than the full free non-abelian unipotent; (ii) \emph{infinite-cutoff
-equality is not claimed}---the comparison homomorphism and its
-abelianized image are closed at theorem grade at finite cutoff, while the
-converse equality on depth-$\ge 2$ content is the named deep forward
-question.
+Two scope qualifiers are essential:\ (i) the comparison sees only
+$\mathcal{U}_4^{\mathrm{ab}}$ (Reading~A)---GeoVac's primitive Hopf substrate is
+cocommutative by construction; at the JLO entire-cyclic-cocycle level at depth~2
+only the even flavour is $S_3$-symmetric, so the probe does not decide the
+reading---and M1, M2 drop out; (ii) depth-$\ge 2$ level-4 content, which a primitive
+substrate cannot receive, is the named deep forward question.
 
-\emph{The elliptic layer (Papers~59 and~61~\cite{loutey_paper59,loutey_paper61}).}  The comparison homomorphism above lands in the
+\emph{The elliptic layer (Papers~59 and~61~\cite{loutey_paper59,loutey_paper61}).}  The comparison above is with the
 \emph{mixed-Tate} (genus-zero) cosmic Galois;\ the elliptic (genus-one) layer
 that Paper~56 reaches for---a Hain--Brown mixed-elliptic-motive
 target~\cite{hain2014,brown2014_mmv}---came
@@ -1635,7 +1631,7 @@ sharpen the open-question boundary of the framework.
 
 \subsection*{The elliptic layer of the cosmic Galois}
 
-\textbf{[OPEN]} Paper~56's cosmic-Galois comparison homomorphism lands in the mixed-Tate (genus-zero) group
+\textbf{[OPEN]} Paper~56's cosmic-Galois comparison is with the mixed-Tate (genus-zero) group
 $\mathcal{G}_4$;\ the elliptic (genus-one) layer it reaches for---the
 Hain--Brown mixed-elliptic-motive target over $M_{1,1}$---came back negative,
 because GeoVac's periods are $\mathbb{Q}(i)$-CM-pure rather than generically

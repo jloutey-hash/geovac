@@ -5,41 +5,38 @@ Owner of this list: the PM. SMALLs here are fixed in one scheduled sweep outside
 Source run: `/qa group3` FULL (incremental, first cert), 2026-11-03, snapshot 7727c540
 (`refs/qa/group3-full-2026-11-03`).
 
-## Owed guards (separate activity; fire-test each against the wrong answer it excludes)
+## Owed guards -- CLOSED 2026-11-03 (v6.1.5 guard pass)
 
-These are OWNER-LARGE "test proves less than the prose / no test" findings. The prose was not
-changed where it is true (re-derived by the reviewers); the owner units stay unstamped until the
-guard exists.
+All items below were written as their own activity, fire-tested against a named wrong answer and
+independently reviewed; rows in `docs/claim_test_matrix.md` ("group3 guard pass"). Files:
+`tests/test_paper31_two_body.py` (P54 support + free factorization + tab:heat + counts),
+`tests/test_paper22_density.py`, `tests/test_paper22_sign_holonomy.py`,
+`tests/test_paper24_bargmann_certificate.py`, `tests/test_paper55_jlo_depth2_reading_A.py`,
+`tests/test_paper55_na1_trace_collapse.py`, `tests/test_paper55_witness_panels_computed.py`,
+`tests/test_paper18_ac_factorization.py`, `tests/test_paper18_computed_pins.py`,
+`tests/test_paper61_t2_ring_negative.py`, `tests/test_paper61_stokes_amplitude.py`,
+`tests/test_paper59_coarea_reduction.py`, `tests/test_routeC_momentum.py::test_paper59_diagonal_A`,
+`tests/test_paper57_principle_table.py`, and the P56 PS-4 guard.
 
-- **Paper 54** `thm:angular_structure` and `tests/test_paper31_two_body.py::_angular_audit`: the
-  Gaunt / k = 0 checks pass for any direct-diagonal tensor (plant `if True:` did not fire). Rewrite
-  to assert the support is exactly {[a,b,a,b]} (25, 196) and that the 82 / 3604 Coulomb-only
-  elements are absent; drop the "Gaunt" label.
-- **Paper 54** `thm:free_factorization` + `tab:heat`: no test of {D, gamma} = 0, the heat-trace ratio,
-  the table values, or "4 of 14 / 29 of 55".
-- **Paper 55** `thm:jlo_depth2_reading_A` (40 zero residuals; Paper 56's Reading A rests on it),
-  `thm:na1_diagonal_collapse`, `thm:m3_gammaP_closed_form`, `thm:na1_trace_functional_collapse`:
-  debug-only backing. Reviewer re-derived M3^{gammaP}(s) = 2^{2s-3}(beta(2s-1) - beta(2s-3)) at
-  s = 2..6 to 1e-70.
-- **Paper 55** M1 / M2 witness panels are tautological (plants 17 pi^8 -> 16, 4/pi -> 3/pi did not
-  fire); S^(3) definitional tie only ~4 digits (independent extrapolation 31.5725612075).
-- **Paper 56** C1-C3 checks cannot fail (C1 plant F4 did not fire; C3 is det g = 1 on the panel);
-  claim-test matrix row 119 "BACKED-SOUND (real det computation)" is wrong; no test of the dual Hopf
-  map. PS-4 End_compat = block-lower-triangular has no test (exact solve confirms 4, 19, 55, 125).
-- **Paper 57** 98.3% / Table I: no test; `debug/principle_hunt_audit.py` hard-codes a stale catalogue
-  (B6 128, H2 11.10 x Q, C9 outside). Gate the table against `docs/forced_free_seam.md`.
-- **Paper 61** (open since 2026-09-07): the weight <= 3, 64-digit negative has no test (reviewer:
-  negative holds to height 100, control recovered); `test_paper61_stokes_amplitude.py` covers one point
-  at 3.5% vs the prose's four at ~4e-4; `test_paper59_coarea_reduction.py` asserts 5e-3 / 1e-8 vs the
-  prose's 2.2e-9 / 5e-29; `test_paper59_diagonal_A` PSLQ basis omits 1, K0, K1, E1 (full ring negative
-  to height 100).
-- **Paper 18** `thm:ac_factorization`: only a debug toy; `eq:dirac_modular_residual` guard asserts
-  dict literals (plant 2 m^2 -> 3 m^2 did not fire; formula true to 1e-40). Upgrade-ready: kappa-B
-  weights {7/16, 5/8, 3/8, 5/8, 17/32, 11/32} sum 63/4; alpha^2-Ihara degree 44 / -35/648.
-- **Paper 22**: assert radial_zero == 0 and density == D(l_max) in the potential-independence test;
-  n_max >= 2 independence; sign-holonomy numbers looser than prose (13.3x asserted > 10x; Delta 43-48x
-  and 2.5-3.2x unpinned; n_max = 4 log-only).
-- **Paper 24**: assert 56 nodes / 165 edges at N_max = 5.
+Independent review (fresh code-reviewer): 2 escapes (P61 T2 ring generators unpinned; P59 diagonal-A
+control gave E1 and e^-a zero weight) -> fixed and re-fired. WEAK, open: the P18 ac_factorization
+holds-direction and the P54 free-factorization identity are inline constructions (true by design,
+not production regressions); P22 composed-LiH (27,405 -> 9,190; beta 36, Delta 4.3 mHa) and
+Gaunt-preserving-rotation (~9x, 0.56x) figures untested; no ERI sign-order guard beside the P22
+density test; P55 witness PANEL literals copied, not parsed from the .tex; P57 Table I Family
+columns unchecked; several files set mp.dps globally without restoring.
+
+Owner defects the guards found (fixed in v6.1.5, C16-registered):
+- **Paper 55 `thm:jlo_depth2_reading_A`:** full S_3 invariance holds in the even flavour only (odd orbit
+  +-13/98304); the 40 swap zeros follow from D being real symmetric. Reading B is not ruled out
+  (Paper 56 and the synthesis restated). `p55-jlo-s3-both-flavours`.
+- **Paper 55 `thm:na1_diagonal_collapse`:** holds per chirality (|D|); with both chiralities J == 0.
+  `p55-na1-collapse-both-chiralities`.
+
+Paper 56 comparison theorem (the round-2 PI item): **arrow reversed, independently verified, theorem
+restated** (v6.1.5): the depth-1 comparison runs U_4 -> G_a^{3N} through U_4^ab with image <= 2 per
+weight; M1/M2 drop out (rank 0); Hom(G_4, G_a) = 0. `p56-comparison-arrow-reversed`. The C1-C3
+panels hold by definition and are now described as such in-paper.
 
 ## Routed to another target
 
@@ -50,6 +47,15 @@ guard exists.
   not graded LARGE here; the group5 run must check the reading at its owner.
 
 ## SMALL sweep (edit bar) -- OPEN
+- From the guard pass (2026-11-03): P61 Stokes "monotonically from below" holds for the leading +
+  1/n fit only (the ~4e-4 figure needs the 1/n^2 term, from above); P61 co-area "2.2e-9" is a
+  single-grid agreement (analytic-tail driver gives 5.7e-8); P61 T2 negative stated to height 10,
+  holds to 100; P55 M3^{gammaP} lies in the Q-span of pi^odd (two powers), not "pi^odd Q"; P22
+  random-baseline Delta values are 5-draw means (seed-dependent), unstated; P56 L1511 "level-2
+  un-restricted D(s)" (the routed P28 descent reading).
+  P56 thm:endo_rigidity: "for m, k <= n_max" should read the algebra-level P_{n_max,k}, k < n_max;
+  its 872 PS-4 residuals come from a driver that checks an assumed shape (now solved in
+  `tests/test_paper56_endo_compat_solve.py`).
 
 - **Paper 18.** Extra "tiers" vs the six-tier headline (L714, L1905, L2281; chi_-4 "calibration-tier"
   L761 vs "beyond calibration" L2281); algebraic numbers called "transcendental" (L717, L775); "only
@@ -116,7 +122,7 @@ restatements; P54 heat-kernel explanation x2; P56 surjectivity onto G_4 / G_m an
 identified with a sub-quotient of G_4; synthesis "derives selection rules" + heat-kernel reason) ->
 all fixed. Round 2 (last): 1 SURFACE-LARGE (P31 L1460 "correct selection rules from both routes")
 -> fixed after the last round, so that unit is unreviewed and stays unstamped. Round-2 SMALLs, open:
-- **PI item / possible OWNER-LARGE (Paper 56, pre-existing):** Definition `def:period_map` gives
+- **[RESOLVED v6.1.5: arrow reversed, theorem restated] PI item / possible OWNER-LARGE (Paper 56, pre-existing):** Definition `def:period_map` gives
   pi: H_GV -> periods, but a homomorphism U* -> G_4 dualises from a Hopf map O(G_4) -> H_GV; and (C2)
   checks only depth-1 coproduct compatibility, which supports at most a map into U_4^ab. Check against
   the primary math (Deligne-Milne Thm 2.11 direction) before the next group3 run.

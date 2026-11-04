@@ -1355,13 +1355,37 @@ def test_paper59_diagonal_A():
         r = mp.sqrt(t * t + 4 * b * b)
         assert abs(lhs - 2 * t * mp.besselk(1, r) / r) < mp.mpf(10) ** -25
 
-    # (3) guarded PSLQ negative in the weight-1 ring at args {2, 2 sqrt2}
-    a2 = 2 * mp.sqrt(2)
-    basis = [mp.pi, mp.e ** -2, mp.e ** (-a2)]
-    decoy = A * mp.mpf('1.0000000000031415926535') + mp.mpf('1e-9')
-    rel = mp.pslq([A] + basis, tol=mp.mpf(10) ** -26, maxcoeff=10 ** 6, maxsteps=10 ** 6)
-    reld = mp.pslq([decoy] + basis, tol=mp.mpf(10) ** -26, maxcoeff=10 ** 6, maxsteps=10 ** 6)
-    ht = None if rel is None else max(abs(c) for c in rel)
-    htd = None if reld is None else max(abs(c) for c in reld)
-    # negative: no relation, or A's relation is no smaller than the decoy's (basis-coverage artifact)
-    assert ht is None or (htd is not None and ht >= htd / 10)
+    # (3) guarded PSLQ negative in the FULL weight-1 two-center ring of the paper,
+    #     {1, pi, e^-a, K0(a), K1(a), E1(a)} at a in {2, 2 sqrt2} (10 elements), to height 100.
+    #     Widened 2026-11-03 (group3 guard pass): the earlier basis {pi, e^-2, e^-2sqrt2} omitted
+    #     1, K0, K1, E1, so it could not see the ring the paper names.  A is recomputed at 50
+    #     digits (two quadrature splits must agree) so the false-positive height 10^(50/10) > 100.
+    mp.mp.dps = 50
+    A50 = mp.quad(integ, [0, 1, 2, 4, 8, 16, mp.inf]) / 4
+    A50b = mp.quad(integ, [0, mp.mpf(3) / 2, 3, 6, 12, 24, mp.inf]) / 4
+    assert abs(A50 - A50b) < mp.mpf(10) ** -46
+    assert abs(A50 - A) < mp.mpf(10) ** -30
+    ring = [mp.mpf(1), +mp.pi]
+    for a in (mp.mpf(2), 2 * mp.sqrt(2)):
+        ring += [mp.e ** (-a), mp.besselk(0, a), mp.besselk(1, a), mp.e1(a)]
+    assert mp.mpf(10) ** (mp.mpf(50) / len(ring)) > 100
+    tol = mp.mpf(10) ** -46
+
+    def _rel(x):
+        return mp.pslq([x] + ring, tol=tol, maxcoeff=100, maxsteps=10 ** 6)
+
+    # positive control: a height-<=10 element of the same ring with EVERY generator at a
+    # nonzero coefficient, so a ring with any generator dropped or swapped fails
+    planted = [7, 3, -2, 1, 5, 2, -3, -1, -4, 1, 2]        # 7*x = 3 - 2 pi + e^-2 + 5 K0(2) + ...
+    r8 = 2 * mp.sqrt(2)
+    # built from the named constants, NOT from `ring` (E1 by its integral definition)
+    def _E1(z):
+        return mp.quad(lambda t: mp.e ** (-t) / t, [z, mp.inf])
+    ctrl = (3 - 2 * mp.pi + mp.e ** -2 + 5 * mp.besselk(0, 2) + 2 * mp.besselk(1, 2)
+            - 3 * _E1(mp.mpf(2)) - mp.e ** (-r8) - 4 * mp.besselk(0, r8)
+            + mp.besselk(1, r8) + 2 * _E1(r8)) / 7
+    relc = _rel(ctrl)
+    assert relc is not None and (relc == [planted[0]] + [-c for c in planted[1:]]
+                                 or relc == [-planted[0]] + planted[1:]), relc
+    # negative: no relation of height <= 100 for A in the full ring
+    assert _rel(A50) is None

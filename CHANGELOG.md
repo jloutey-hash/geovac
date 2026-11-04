@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.1.5] - 2026-11-03
+
+group3 guard pass + Paper 56 comparison theorem restated (PI-approved recommendations of the v6.1.4 verdict).
+
+### Changed (owner LARGE)
+- **Paper 56 `thm:injection_g4`: arrow reversed, restated.** A Hopf map out of the GeoVac Hopf algebra H_GV = Sym(V)
+  dualises to a homomorphism INTO Spec H_GV, so the comparison is a homomorphism U_4 -> G_a^{3N} from the level-4
+  unipotent radical into GeoVac's abelian factor, through U_4^ab, image <= 2 per weight (the M3 column). The former
+  U*_GV -> G_4 is withdrawn: Hom(G_4, G_a) = 0 (G_m acts on U_4^ab with nonzero weights) and the M1/M2 values are not
+  primitive (Delta pi^{2j} = pi^{2j} (x) 1; zeta^a(2) = 0), so their "rank-1 per weight" is rank 0. PM derivation,
+  independently verified by a fresh claims-reviewer against Deligne-Milne / Brown. The C1-C3 panels (2,904 residuals)
+  are described as holding by definition. Restatements fixed in Paper 55 and the group3 synthesis (its
+  [INTERNAL THEOREM] tag now scoped to depth 1).
+- **Paper 55 `thm:jlo_depth2_reading_A`:** full S_3 invariance holds in the even flavour only (odd orbit +-13/98304);
+  the 40 swap zeros follow from D being real symmetric. Reading B is not ruled out (Paper 56, synthesis restated).
+- **Paper 55 `thm:na1_diagonal_collapse`:** per chirality (|D|); with both chiralities J == 0.
+- Paper 18: two stale "not yet regression-tested" notes now cite the new tests.
+
+### Added (guards; each fire-tested against a named wrong answer, then reviewed by a fresh code-reviewer)
+- P54: support exactly the direct elements 25 / 196, Coulomb-only 82 / 3604 absent; free factorization, tab:heat,
+  4-of-14 / 29-of-55 (`test_paper31_two_body.py`; the weighted "Gaunt" audit that passed any direct tensor removed).
+- P22: potential independence asserts radial_zero = 0 and the exact Gaunt count; sign-holonomy pins.
+- P24: 56 / 165 exact-rational certificate. P56: End_compat solved exactly (dims 4/19/55/125/245, block-lower-triangular).
+- P55: JLO, NA-1 and M3^{gammaP} recomputations; witness panels computed from the spectrum (S^(3) to 1e-11).
+- P18: ac_factorization both directions; modular residual, Fock weights / 63/4, alpha^2-Ihara degree 44 / -35/648.
+- P61: T2 weight <= 3 ring negative to height 100 with control; Stokes at all four points; co-area at prose
+  precision; diagonal-A full ring. P57: Table I recomputed from the seam register.
+- Review found 2 escapes (P61 T2 ring generators unpinned; P59 diagonal-A control with zero E1 / e^-a weight): fixed,
+  re-fired.
+- C16: `p56-comparison-arrow-reversed`, `p55-jlo-s3-both-flavours`, `p55-na1-collapse-both-chiralities`; each fires
+  on the v6.1.4 text (8/1/2, 2/3, 1 loci) and is silent now. Claim-test matrix rows added / corrected (row 119 was
+  wrong: "real det computation").
+
+### Open (`docs/qa/group3.debt.md`)
+- WEAK guard notes from the review; P61/P55/P22/P56 wording SMALLs; the group3 owner units stay unstamped until the
+  next group3 run.
+
 ## [v6.1.4] - 2026-11-03
 
 `/qa group3` FULL (incremental; first whole-group cert), PI-invoked as the next target of the 2026-11-03 sequence.
