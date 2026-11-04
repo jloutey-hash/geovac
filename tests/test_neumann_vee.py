@@ -149,14 +149,17 @@ class TestBlTable:
             assert abs(B0[p] - val) < 1e-10, f"B_0({p}) failed"
 
     def test_Bl_against_quad(self):
-        """B_l vs a fresh quad of the SAME lqmn integrand.
+        """INDEPENDENT check: closed-form B_l vs scipy quad of the defining integral.
 
-        NOTE: This is only a table-assembly / indexing / cache consistency
-        check — it re-runs the *identical* scipy.quad+lqmn integrand that
-        compute_Bl_table uses internally, so it cannot detect an error in the
-        integrand definition itself (it would be tautological as a correctness
-        proof). The genuine, integrand-independent correctness checks are
-        test_Bl_recurrence, test_B0_closed_form, and test_Bl_Q1_identity below.
+        compute_Bl_table is now closed form (closed-form l = 0, 1 seeds in
+        E_1 / Euler gamma / ln plus the forward l-recurrence, evaluated in
+        mpmath; neumann_vee_general_m._B_table) and calls no quadrature, so
+        this quad of int_1^inf xi^p e^{-alpha xi} Q_l(xi) dxi (scipy lqmn) is
+        a genuinely independent route, not a re-run of the code's integrand.
+        (Before the closed form the table was built from this same
+        quad + lqmn integrand and this test was only a consistency check.)
+        test_paper12_bl_no_quadrature.py guards that the closed form stays
+        quadrature-free.
         """
         alpha = 2.0
         Bl = compute_Bl_table(4, 3, alpha)

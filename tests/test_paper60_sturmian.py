@@ -173,8 +173,9 @@ def test_paper60_single_config_helium_variational():
 
 # --------------------------------------------------------------------------
 # eq:sublinear — multi-config lowers E and the 1-norm grows more slowly
-# than K over the computed window (0.84 fitted on K = 74..164; NOT an
-# asymptotic regime -- see the split test below for which block carries it)
+# than K over the computed window (0.8193 on K = 74..164 on a converged box
+# R_MAX >= 3 n_max^2, pinned in test_paper60_owed_guards.py; NOT an asymptotic
+# regime -- see the split test below for which block carries it)
 # --------------------------------------------------------------------------
 def _he_secular(r, dr, nmax, Z=2.0):
     def ov(a, b):
@@ -410,8 +411,10 @@ def test_paper60_lgt0_angular_correlation_and_sublinear():
     assert Esp < Es - 1e-3, f"p-channel did not lower E: {Es} -> {Esp}"
     assert Esp < -2.88            # heads toward exact -2.90372, past the s-limit
     # the block-encoding 1-norm grows more slowly than K through the full s+p+d+f
-    # basis (eq:sublinear).  >=5 points; the fitted exponent sits in the paper's
-    # 0.78 (s-only) .. 0.84 (full basis) band and is robustly below 1.
+    # basis (eq:sublinear).  >=5 points; the fitted exponent is robustly below 1.
+    # This band does NOT pin the paper's values: the converged-box exponents
+    # 0.7261 (s-only) and 0.8193 (spdf) on n_max = 7..10 are pinned at +-0.005 in
+    # test_paper60_owed_guards.py (the 0.78 / 0.84 once quoted here are retired).
     # NOT an asymptote (corrected 2026-09-07; direction re-measured 2026-09-08
     # [retracted 2026-09-12: p60-tprime-superlinear]): the exponent is a WINDOW
     # fit, and on a CONVERGED box the local slope FALLS monotonically -- 0.827 at
@@ -426,7 +429,7 @@ def test_paper60_lgt0_angular_correlation_and_sublinear():
         Mx = _build_M_l(r, dr, cfg)
         sizes.append(len(cfg)); norms.append(np.abs(Mx).sum())
     p = np.polyfit(np.log(sizes), np.log(norms), 1)[0]
-    assert 0.6 < p < 0.95, f"atomic 1-norm exponent outside the sublinear 0.78-0.84 band: {p}"
+    assert 0.6 < p < 0.95, f"atomic 1-norm exponent outside the sublinear band (0.6, 0.95): {p}"
 
 
 @pytest.mark.slow

@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.2.1] - 2026-11-04
+
+group2 guard pass (PI-approved plan after v6.2.0). Guards written as their own activity, each fire-tested against
+the wrong answer it excludes, then reviewed by a fresh code-reviewer asking what wrong answer each would accept.
+
+### Added (guards)
+- Paper 11: E(R=2) vs Peek 1965 to 1e-12; R_eq by Brent minimisation vs 1.99719 to 1e-5 (the old test accepted the
+  retired 0.0002% offset).
+- Paper 17: channel-blind LiH R_eq within the printed 6.9% (3.2216), omega_e 1465 +- 1, l-dependent 5.3% (slow); the old
+  2.5-4.0 band accepted the rejected median B formula (3.75 bohr).
+- Paper 19: the three non-balanced schemes' h1 and ERIs bit-identical between R = 2 and 8 (control: V_NN moves);
+  balanced n_max = 3 energy on the corrected phase, -8.0545 (slow).
+- Paper 58: the ERI nonzero pattern equals the real-Cartesian symmetry count, 2976, element by element (was a 25-35%
+  band).
+- FCI-molecules: physical-h1 n_max = 2 LiH PES, Table I, BSSE -0.0884 R-independent, lambda = 0.1 minimum; fires on
+  the hop-on build. FCI-atoms: Table III NNZ by production and an independent Slater-Condon count.
+- Paper 8: the genuine <1s|1/r_B|1s> is R-dependent (0.896/0.610/0.328/0.125); the never-collected
+  `geovac_paper8_tests.py` renamed `test_paper8_so4_algebra.py`.
+- Paper 13: Schwartz coefficient from the solver's own partial-wave increments (extrapolates to 0.0741); R_min wall
+  sign flip and the coupled-channel 0.22% -> 0.0075%; Li nu0 = 2 by exact character count; rovibrational constants
+  (independent Morse fit + direct nuclear solve); spectral radial test un-skipped.
+- Paper 15: R_e,min wall dependence; Hellmann-Feynman P formula vs eigenvector finite differences.
+- Paper 12: no quadrature on the B_l path (attribute spy + profiler spy); numerical comparator N = 27 (slow).
+- Paper 59: eq:pf exact identity (sympy); dictionary at five points; position-space fibre (~1e-15).
+- Paper 60: converged-box 1-norm exponents 0.8193 / 0.7261; conditioning numbers.
+- Paper 62: JW counts 107,382 for Slater DZP and cc-pVDZ, lambda 706.3 / 674.3 (slow); registry cross-check.
+- C25 `he-bracket` fire-tested against the v6.1.5 text.
+
+### Review
+- Escapes found and fixed: the Paper 12 quadrature spy missed a name bound before the patch (profiler spy added);
+  the Paper 17 windows passed a 2% change of the PK width (tightened to printed precision; re-fired). C22 caught a
+  debug/ import in the Paper 62 paper-backing test (cross-check moved to `test_registry_crosscheck_p62.py`).
+- WEAK notes recorded in `docs/qa/group2.debt.md`.
+
+### Changed
+- `tests/test_composed_cusp.py` archived to `tests/_archive/superseded/` (its solver keyword was removed in v2.7.0).
+- `docs/claim_test_matrix.md` rows for every guard; `docs/qa/group2.debt.md` owed-guards section closed.
+
 ## [v6.2.0] - 2026-11-04
 
 `/qa group2` FULL (incremental; first whole-group cert under stamps; 14 documents incl. Papers 58-62), PI-invoked as

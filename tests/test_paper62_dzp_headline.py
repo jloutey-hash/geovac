@@ -32,7 +32,12 @@ DZP_RHF, DZP_FC = -76.055573, -76.281739            # p62_dzp_rhf, p62_dzp_fc (1
 DZP16_RHF, DZP16_FC = -76.055644, -76.281811        # the 16 G row
 CCPVDZ_RHF, CCPVDZ_FC = -76.026795, -76.241025      # p62_ccpvdz_fc
 GAP_MHA, GAP_SCF_MHA = 40.7, 28.8
+# Paper 62 Table tab:resources (fc, Q = 46): Pauli terms identity INCLUDED, lambda identity EXCLUDED
+DZP_PAULI_FC, DZP_LAMBDA_FC = 107382, 706.3          # p62_dzp_pauli, p62_dzp_lambda_fc
+CCPVDZ_PAULI_FC, CCPVDZ_LAMBDA_FC = 107382, 674.3    # h2o_ccpvdz_pauli, p62_ccpvdz_lambda_fc
+Q_FC = 46
 _CACHE = {}
+_JW = {}
 
 
 def contracted_ex(d):
@@ -51,8 +56,16 @@ def energies(name, ng=12, ng_pol=8):
             fns, T = w.gaussian_basis(DZ_BASIS, nuc)
         assert T.shape[1] == 24
         S, h, g = w.ao_integrals(fns, nuc, T)
-        r = w.run(S, h, g, 10, w.vnn(nuc), frozen_core=1)
+        enuc = w.vnn(nuc)
+        r = w.run(S, h, g, 10, enuc, frozen_core=1)
         _CACHE[key] = (float(r['RHF']), float(r['CCSD(T)']))
+        # fc Jordan-Wigner cost over RHF canonical orbitals (the route of test_paper62_matched_accuracy.water_run)
+        _, _, C = w.rhf(S, h, g, 10, enuc)
+        hm = C.T @ h @ C
+        gm = np.einsum('pqrs,pa,qb,rc,sd->abcd', g, C, C, C, C, optimize=True)
+        hh, gg, ecore = w.freeze_core(hm, gm, 1)
+        st = w.jw_pauli_stats(hh, gg, enuc + ecore)
+        _JW[key] = (2 * hh.shape[0], int(st['n_pauli']), float(st['one_norm']))
     return _CACHE[key]
 
 
@@ -83,6 +96,19 @@ def test_dzp_and_ccpvdz_recompute_and_the_headline_gap_follows():
     assert abs(c_rhf - CCPVDZ_RHF) < 1e-6 and abs(c_fc - CCPVDZ_FC) < 1e-6, (c_rhf, c_fc)
     assert abs(1000 * (c_fc - d_fc) - GAP_MHA) < 0.05
     assert abs(1000 * (c_rhf - d_rhf) - GAP_SCF_MHA) < 0.05
+    # Qubit cost, Table tab:resources (owed guard, group2 /qa FULL 2026-11-03/04): the Slater DZP JW count was
+    # registered from a reviewer recomputation only.  Recomputed here, and the 'same count in every 24-function
+    # basis' claim checked as an equality of two independent builds.
+    # Wrong answers rejected: an identity-excluded count (107381), the all-electron count (Q = 48, 128 793), a
+    # Slater DZP count that differs from cc-pVDZ's, and the cc-pVDZ 1-norm (674.3) in the DZP row.
+    dq, dn, dl = _JW[('dzp', 12, 8)]
+    cq, cn, cl = _JW[('ccpvdz', 12, 8)]
+    assert dq == Q_FC and cq == Q_FC, (dq, cq)
+    assert dn == DZP_PAULI_FC, dn
+    assert cn == CCPVDZ_PAULI_FC, cn
+    assert dn == cn
+    assert abs(dl - DZP_LAMBDA_FC) < 0.05, dl
+    assert abs(cl - CCPVDZ_LAMBDA_FC) < 0.05, cl
 
 
 @pytest.mark.slow

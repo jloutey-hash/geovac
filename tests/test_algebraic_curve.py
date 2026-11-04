@@ -922,15 +922,14 @@ class TestAlgebraicHeEnergy:
     """Test He ground state energy with algebraic V_eff."""
 
     def test_energy_matches_quadrature_solver(self):
-        """Algebraic He energy should match quadrature-based solver."""
-        import pytest
-        pytest.skip(
-            "solve_radial_spectral was removed during the v2.7.0 PK/composed-qubit "
-            "refactor; the algebraic-He-energy quadrature reference path is no "
-            "longer reachable. test_energy_physical and test_energy_variational "
-            "below remain green and cover the algebraic content directly."
-        )
-        from geovac.hyperspherical_radial import solve_radial_spectral  # type: ignore[attr-defined]
+        """Algebraic He energy should match quadrature-based solver.
+
+        Reference: the angular eigenvalue solved pointwise (AlgebraicAngularSolver,
+        n_basis = 1) fed to geovac.hyperspherical_radial.solve_radial_spectral.
+        (Re-enabled 2026-11-04: the skip claimed solve_radial_spectral had been
+        removed; it exists.  Measured difference 9e-8 Ha.)
+        """
+        from geovac.hyperspherical_radial import solve_radial_spectral
         from geovac.algebraic_angular import AlgebraicAngularSolver
 
         n_basis = 25
@@ -961,8 +960,9 @@ class TestAlgebraicHeEnergy:
         )
 
         diff = abs(E_alg - E_quad[0])
-        # Tolerance limited by Stieltjes recurrence at small a=0.15
-        assert diff < 0.01, (
+        # Measured 9.1e-8 Ha (2026-11-04); 1e-6 leaves room for the Stieltjes
+        # recurrence at small a = 0.15.
+        assert diff < 1e-6, (
             f"Energy mismatch: algebraic={E_alg:.8f}, "
             f"quadrature={E_quad[0]:.8f}, diff={diff:.2e}"
         )

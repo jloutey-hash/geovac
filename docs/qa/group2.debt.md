@@ -5,45 +5,31 @@ bar, `docs/qa/criteria.md`). Guards are written as their own activity and fire-t
 Source run: `/qa group2` FULL (incremental, first whole-group cert under stamps), 2026-11-03/04,
 snapshot 706c5317 (`refs/qa/group2-full-2026-11-03`).
 
-## Owed guards (separate activity; fire-test each against the wrong answer it excludes)
+## Owed guards -- CLOSED 2026-11-04 (v6.2.1 guard pass)
 
-OWNER-LARGE "test proves less than the prose / no test" findings and the guards the remediation
-needs. The owner units stay unstamped until the guard exists.
+Written as their own activity, fire-tested against a named wrong answer, then independently reviewed (fresh
+code-reviewer). Files: `test_paper11_h2plus_pins.py`, `test_paper17_lih_headline_pins.py`,
+`test_paper19_scheme_r_dependence.py`, `test_paper58_eri_census.py` (exact 2976),
+`test_fcim_physical_h1_pes.py`, `test_fci_atoms_nnz_table3.py`, `test_paper8_sw_model_vs_genuine.py`,
+`test_paper8_so4_algebra.py` (renamed; now collected), `test_paper13_schwartz_coefficient.py`,
+`test_paper13_wall_and_li_nu0.py`, `test_h2_rovib_morse.py`, `test_algebraic_curve.py` (spectral un-skipped),
+`test_paper15_wall_and_hf_coupling.py`, `test_paper12_bl_no_quadrature.py`, `test_paper59_pf_dictionary_guards.py`,
+`test_paper60_owed_guards.py`, `test_paper62_dzp_headline.py` + `test_registry_crosscheck_p62.py`; C25
+`he-bracket` fire-tested against the v6.1.5 text. Rows in `docs/claim_test_matrix.md`.
 
-- **Paper 8:** pin <1s|1/r_B|1s> R-dependence (0.896/0.610/0.328/0.125) and <1s|1/r_B|2s> != 0, so
-  "exact" cannot return. `tests/geovac_paper8_tests.py` is never collected (name) — rename.
-- **Paper 11:** pin |E(R=2) - (-0.6026342144949)| < 1e-12 at n_basis=20 and R_eq vs 1.99719 at 1e-4
-  (current test: 0.01% / 1%; fire_test +1.21e-6 did not fire).
-- **Paper 12:** quad-spy guard on `neumann_vee.compute_Bl_table`; update `test_Bl_against_quad`
-  docstring (now an independent check); the 79.6/80.1% numerical comparator (open since
-  2026-09-19); the r12^{0-1} grid table; HeH+ R_eq.
-- **Paper 13:** He Schwartz coefficient vs Bromley-Mitroy; wall-converged coupled channel
-  (R_min = 0.02); Li nu0 = 2; `test_h2_rovib_morse` bands/docstring to the recomputed values; the
-  spectral radial test skipped although `solve_radial_spectral` exists (un-skip).
-- **Paper 15:** Level-4 R_e,min wall dependence; Hellmann-Feynman P formula; 96.0% (no test since
-  2026-09-14).
-- **Paper 17:** `test_ab_initio_pk_v2` band 2.5-4.0 -> pin 3.222 +- 0.01 and omega 1465 (fire_test
-  B inv2 -> median did not fire); l-dependent 3.176; Outlook l_max 3-4 (slow); tab:B candidates;
-  4N 63.5% unbound (asserts has_minimum only).
-- **Paper 19:** R-independence of the three non-balanced schemes; n_max = 3 energy on the corrected
-  phase (-8.054515).
-- **Paper 58:** `test_paper58_eri_census` density band 25-35 -> exact nz == 2976 against a real-basis
-  symmetry count (fire_test -400 did not fire).
-- **Paper 59:** eq:pf exact identity (sympy: integrand = -d/dx[sqrt(Q) e^{-Dx}]); euclidean dictionary
-  at five points; the 1.8e-10 position-space fibre.
-- **Paper 60:** 1-norm exponents 0.8193 / 0.7261 on the converged box (bands only; docstring cites
-  the retired 0.842 / 0.78); conditioning numbers (1.47e6, N^1.57, 4.2x); preconditioner lemma guard.
-- **Paper 62:** JW Pauli count 107,382 for an exponential basis (registry `p62_dzp_pauli`); HF
-  canonical count equality; kit 1-norms 405/511/620.
-- **FCI-M / FCI-A:** physical-h1 n_max = 2 LiH PES pin (monotonic, E(8) < E_sep - 0.2, BSSE -0.0884
-  R-independent), fire-tested against a hop-on build; lambda = 0.1 interior minimum; zeta_B
-  relaxation; Hypothesis-2 shifts; FCI-A NNZ vs Table III.
-- **C25 `he-bracket`** was edited by a fixer in the remediation pass (anchor 0.020%, overclaim
-  0.004|marginally below|bracket): review it as a guard and fire-test against the v6.1.5 text.
+Review escapes fixed and re-fired: the Paper 12 quadrature spy missed a name bound before the monkeypatch (a
+profiler spy added); the Paper 17 windows (+-0.01 bohr / +-10 cm^-1) passed a 2 % change of the PK width
+(tightened to the printed precision). C22 caught a debug/ import in the Paper 62 paper-backing test (moved).
+
+WEAK, open: `test_paper8_so4_algebra.py` is tautological (Pauli-matrix construction, no geovac import);
+`test_paper8_sw_model_vs_genuine.py` hard-codes the model side; the FCI-M monotone / E(8) subtests hold for the
+hop-on build too (physics checks, not discriminators); Paper 15's spectral 92.66 is a code value, not printed;
+Paper 60 conditioning guards exercise test-file helpers; C25 `he-bracket` row-6 qualifier satisfied by the
+raw-figure clause, owner window +-1 line.
 
 ## Pre-existing test rot (found, not caused, by this run)
 
-- `tests/test_composed_cusp.py` (slow, 9 errors): passes `cusp_correction=` to
+- [RESOLVED v6.2.1: archived to tests/_archive/superseded/, feature removed in v2.7.0] `tests/test_composed_cusp.py` (slow, 9 errors): passes `cusp_correction=` to
   `ComposedDiatomicSolver`, which no longer takes it (both files last touched 2026-06-05).
 
 ## Routed / PI
@@ -60,6 +46,13 @@ needs. The owner units stay unstamped until the guard exists.
   prediction-before-results protocol (PI raised 2026-11-04).
 
 ## SMALL sweep (edit bar) -- OPEN
+- From the guard pass (2026-11-04): Paper 11 R_eq 1.9973 is a quadratic-fit bias (Brent minimizer 1.9971933, 2e-6
+  relative — the prose understates); Paper 58 "29.8% measured vs 29.4% counted" -> exact 2976 = 2976 in matched
+  real-Cartesian bases (also the test docstring); Paper 59 position-space fibre 1.8e-10 -> ~1e-15; Paper 60 "~4x the SW
+  prefactor" is a condition-number ratio (prefactor ratio 9.2) and SW N^1.80 vs prose 1.85; Paper 12 Table I E_num
+  N=27 -1.138836 vs recomputed -1.1388188; Paper 19 `build_balanced_hamiltonian` nuclear_repulsion carries the Li+ core
+  energy (-7.2799) while all four electrons are explicit (disclosed offset; double-count-shaped convention, code
+  review owed).
 
 - Paper 8: body L418/L466 s-p mixing vs thm:selection; two beta conventions (thm:uniform vs
   corollary); thm:lih_beta is a measurement labelled Theorem, values drift (1.0306/1.9480/1.9732);

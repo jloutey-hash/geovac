@@ -119,6 +119,23 @@ def _invariance_residual(orbs, recipes, shapes, theta, g):
     return worst
 
 
+def _real_cartesian_permitted_mask(recipes, side) -> np.ndarray:
+    """Symmetry-permitted (ij|kl) pattern from labels alone (no integrals)."""
+    m = len(recipes)
+    lmn = [r[3] if sum(r[3]) == 1 else (0, 0, 0) for r in recipes]
+    mask = np.zeros((m, m, m, m), dtype=bool)
+    for idx in np.ndindex(m, m, m, m):
+        nx = sum(lmn[a][0] for a in idx)
+        ny = sum(lmn[a][1] for a in idx)
+        nzc = sum(lmn[a][2] for a in idx)
+        if nx % 2 or ny % 2:
+            continue
+        if len({side[a] for a in idx}) == 1 and nzc % 2:
+            continue
+        mask[idx] = True
+    return mask
+
+
 @pytest.mark.slow
 def test_paper58_eri_density_matches_symmetry_count():
     """Permitted ERI entries are generically nonzero: 29.8% vs 29.4% counted.
@@ -132,11 +149,28 @@ def test_paper58_eri_density_matches_symmetry_count():
     g = _eri_tensor(orbs)
     m = len(orbs)
 
-    nz = int(np.sum(np.abs(g) > TOL))
-    density = 100.0 * nz / m ** 4
-    assert 25.0 < density < 35.0, (
-        f"measured ERI density {density:.1f}% is far from the paper's counted "
-        "29.4%; either the count or this evaluation is wrong"
+    nz_mask = np.abs(g) > TOL
+    nz = int(np.sum(nz_mask))
+
+    # Owed guard (/qa group2 FULL 2026-11-03): the old band 25 < density < 35
+    # accepted ~400 permitted entries going missing.  Pin the nonzero PATTERN
+    # against an independent real-Cartesian symmetry count, built from
+    # orbital labels only (no ERI evaluated):
+    #   (a) C2v reflections x -> -x, y -> -y: #px and #py both even;
+    #   (b) all four indices on one centre: inversion through that centre
+    #       (one-centre Gaunt parity) also forces #pz even.
+    # (AA|BB) entries need no extra rule here: every parity-allowed one-centre
+    # pair distribution shares an axial component with its partner.
+    permitted = _real_cartesian_permitted_mask(_rec, side)
+    n_permitted = int(np.sum(permitted))
+    assert n_permitted == 2976, f"symmetry count {n_permitted} != 2976"
+    assert nz == n_permitted, (
+        f"measured nonzeros {nz} != symmetry-permitted {n_permitted} "
+        f"(density {100.0 * nz / m ** 4:.2f}% vs 29.76%)"
+    )
+    assert np.array_equal(nz_mask, permitted), (
+        f"{int(np.sum(nz_mask & ~permitted))} forbidden entries nonzero, "
+        f"{int(np.sum(permitted & ~nz_mask))} permitted entries zero"
     )
 
     # Cross-center classes dominate, which is the paper's point: binding lives

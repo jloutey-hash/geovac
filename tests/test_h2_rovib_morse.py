@@ -1,22 +1,26 @@
 """Backing test for Paper 13 Section IX H2 rovibrational spectroscopy.
 
-Closes the NO-TEST gap flagged in the /qa group2 re-cert (2026-06-27): Section IX
-reports omega_e = 4435 cm-1 (+0.8%), nu_01 = 4157 cm-1 (-0.1%), B_e = 59.5 cm-1
-(-2.2%) for H2 from the Neumann V_ee PES (Paper 12), with zero experimental
-spectroscopic input.
+Paper 13 Sec. IX (tab:morse, tab:rovib) reports, from the Neumann V_ee PES of
+Paper 12 (benchmarks/ab_initio_nuclear/h2_neumann_pes.txt) with a Morse fit
+over the near-minimum range R in [1.0, 2.0] and zero experimental
+spectroscopic input: D_e = 0.1613 Ha, R_e = 1.420 bohr, omega_e = 4396 cm-1
+(-0.1%), B_e = 59.26 cm-1 (-2.6%), nu_01 = 4123 cm-1 (-0.9%).  (The earlier
+4435 / 59.5 / 4157 figures in this docstring were stale; recomputed
+2026-11-04 from the same PES file.)
 
-The re-cert investigation established that the apparent "+11.7% omega_e"
-discrepancy in benchmarks/ab_initio_nuclear/results.md is a Morse FIT-RANGE
-artifact, NOT a PES-quality problem:
-  * the SAME Neumann PES (D_e ~ 0.161 Ha, 92% of exact) gives
-  * omega_e = 4396 cm-1 (-0.1%) when fit over the near-minimum range R in [1.0, 2.0]
-    (the Section IX recipe -- omega_e/B_e are curvature-at-minimum quantities), but
-  * omega_e = 4918 cm-1 (+11.7%) when fit over the wide range R in [0.8, 6.0],
-    because the poorly-described dissociation tail (R > 4 bohr, 2x2 CI failure)
-    distorts the well curvature.
+Pins, each with a route that does not reuse the benchmark fitter:
+  * the benchmark fitter (benchmarks/ab_initio_nuclear/morse_fit.py) gives
+    the tabulated values to the printed precision;
+  * an independent Morse least-squares fit written here, with its own
+    constants, reproduces them;
+  * nu_01 from the Morse levels, omega_e - 2 omega_e x_e, agrees within 2%
+    with a direct finite-difference solve of the J = 0 nuclear Schroedinger
+    equation on a cubic spline of the PES (no Morse form at all).
 
-This test pins both readings so the fit-range dependence can never silently
-re-surface as a "PES is wrong" claim.
+The fit-range artifact stays pinned: the same PES fitted over R in [0.8, 6.0]
+inflates omega_e to ~+11% because the poorly described dissociation tail
+(R > 4 bohr) distorts the well curvature; that is a fit-range effect, not a
+different PES.
 """
 import os
 import numpy as np
@@ -57,25 +61,82 @@ def test_neumann_pes_present_and_92pct():
 
 
 def test_near_minimum_fit_reproduces_section_ix():
-    """Near-minimum Morse fit R in [1.0, 2.0] reproduces Paper 13 Section IX.
+    """Near-minimum Morse fit R in [1.0, 2.0] gives Paper 13 tab:morse/tab:rovib.
 
-    omega_e ~ 4435 (+0.8%), B_e ~ 59.5 (-2.2%), R_e ~ 1.418 -- the
-    spectroscopically correct fit (curvature at the minimum).
+    omega_e = 4396, B_e = 59.26, R_e = 1.420, D_e = 0.1613, nu_01 = 4123.
     """
     R, E = _load_pes()
     res, npts = _fit(R, E, 1.0, 2.0)
     assert npts >= 5, f"need >=5 near-min points, got {npts}"
     omega_e = res["omega_e_cm"]
     B_e = res["B_e_cm"]
-    R_e = res["R_e"]
-    # omega_e within 2% of experiment (Section IX claims +0.8%)
-    assert abs(omega_e - EXP_OMEGA_E) / EXP_OMEGA_E < 0.02, \
-        f"near-min omega_e = {omega_e:.1f} cm-1 (expt {EXP_OMEGA_E})"
-    # B_e within 3.5% (Section IX claims -2.2%)
-    assert abs(B_e - EXP_B_E) / EXP_B_E < 0.035, \
-        f"near-min B_e = {B_e:.2f} cm-1 (expt {EXP_B_E})"
-    assert abs(R_e - EXP_R_E) / EXP_R_E < 0.02, \
-        f"near-min R_e = {R_e:.4f} bohr (expt {EXP_R_E})"
+    nu01 = omega_e - 2.0 * res["omega_e_xe_cm"]
+    assert abs(omega_e - 4396.0) < 1.0, f"omega_e = {omega_e:.2f} cm-1"
+    assert abs(B_e - 59.26) < 0.01, f"B_e = {B_e:.4f} cm-1"
+    assert abs(res["R_e"] - 1.420) < 0.001, f"R_e = {res['R_e']:.5f}"
+    assert abs(res["D_e"] - 0.1613) < 0.0001, f"D_e = {res['D_e']:.5f}"
+    assert abs(nu01 - 4123.0) < 1.0, f"nu_01 = {nu01:.2f} cm-1"
+    # error signs/magnitudes quoted in the paper
+    assert abs((omega_e - EXP_OMEGA_E) / EXP_OMEGA_E * 100 - (-0.1)) < 0.05
+    assert abs((B_e - EXP_B_E) / EXP_B_E * 100 - (-2.6)) < 0.05
+
+
+# Independent constants (CODATA 2018 / AME 2016), not imported from morse_fit.
+_HARTREE_CM = 219474.6313632
+_ME_PER_U = 1822.888486209
+_M_H_U = 1.00782503223
+_MU_H2 = _M_H_U / 2.0 * _ME_PER_U  # reduced mass, electron masses
+
+
+def _own_morse_fit(R, E):
+    from scipy.optimize import least_squares
+    m = (R >= 1.0) & (R <= 2.0)
+
+    def resid(p):
+        D, a, Re = p
+        return D * (1.0 - np.exp(-a * (R[m] - Re))) ** 2 - D - (E[m] + 1.0)
+
+    D, a, Re = least_squares(resid, [0.15, 1.2, 1.4]).x
+    omega = a * np.sqrt(2.0 * D / _MU_H2)          # Ha
+    omega_xe = omega ** 2 / (4.0 * D)
+    return {
+        "D_e": D, "R_e": Re,
+        "omega_e_cm": omega * _HARTREE_CM,
+        "B_e_cm": _HARTREE_CM / (2.0 * _MU_H2 * Re ** 2),
+        "nu01_cm": (omega - 2.0 * omega_xe) * _HARTREE_CM,
+    }
+
+
+def test_independent_morse_fit_agrees():
+    """A Morse fit written here (own optimizer, own constants) agrees."""
+    R, E = _load_pes()
+    own = _own_morse_fit(R, E)
+    assert abs(own["omega_e_cm"] - 4396.0) < 1.0, own
+    assert abs(own["B_e_cm"] - 59.26) < 0.01, own
+    assert abs(own["nu01_cm"] - 4123.0) < 1.0, own
+
+
+def test_nu01_against_direct_nuclear_solve():
+    """nu_01 from the Morse levels vs a Morse-free nuclear FD solve on the PES.
+
+    J = 0 radial equation -1/(2 mu) chi'' + V(R) chi = E chi on a cubic
+    spline of the 12 PES points, Dirichlet box [0.85, 3.5] bohr.  The two
+    must agree within 2% (measured: 4081 vs 4123, -1.0%), so the tabulated
+    nu_01 reflects the PES, not the Morse form.
+    """
+    from scipy.interpolate import CubicSpline
+    from scipy.linalg import eigh_tridiagonal
+    R, E = _load_pes()
+    cs = CubicSpline(R, E)
+    x = np.linspace(0.85, 3.5, 4000)
+    h = x[1] - x[0]
+    diag = 1.0 / (_MU_H2 * h * h) + cs(x)
+    off = -1.0 / (2.0 * _MU_H2 * h * h) * np.ones(len(x) - 1)
+    ev = eigh_tridiagonal(diag, off, select="i", select_range=(0, 1))[0]
+    nu01_fd = (ev[1] - ev[0]) * _HARTREE_CM
+    nu01_morse = _own_morse_fit(R, E)["nu01_cm"]
+    assert abs(nu01_fd - nu01_morse) / nu01_morse < 0.02, (nu01_fd, nu01_morse)
+    assert 4000.0 < nu01_fd < 4161.0, nu01_fd
 
 
 def test_wide_range_fit_is_the_inflated_artifact():

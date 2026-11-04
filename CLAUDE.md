@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.2.0 (November 4, 2026)
+**Version:** v6.2.1 (November 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **group2 guard pass (2026-11-04, v6.2.1, PI-approved):** ~20 guards fire-tested + reviewed; 2 escapes fixed (P12 quad spy, P17 windows); 3 old guards could not fail (P11, P17, P58). CHANGELOG v6.2.1.
 - **/qa group2 FULL incremental = FAIL, remediated (2026-11-04, v6.2.0, PI-invoked, MINOR):** He cusp 0.004%->0.020% (4.6x coefficient); FCI-M hop-era tables; P17 PK selection disclosed; 3 retitles; coverage 227/379. CHANGELOG v6.2.0.
 - **group3 guard pass; Paper 56 arrow reversed (2026-11-03, v6.1.5, PI-approved):** comparison is U_4 -> G_a^{3N}, M1/M2 rank 0; P55 JLO S_3 even flavour only; 16 guards fire-tested, reviewed. CHANGELOG v6.1.5.
 - **/qa group3 FULL incremental = FAIL, remediated (2026-11-03, v6.1.4, PI-invoked):** owner LARGE in P18/22/31/54/55/56/57 (P56 SL_2 trivial into solvable G_4); 19 C16 entries; coverage 214/389. CHANGELOG v6.1.4.

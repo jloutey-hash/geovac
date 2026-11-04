@@ -1,4 +1,12 @@
 """
+ARCHIVED 2026-11-04 (superseded; group2 /qa pre-existing test rot).
+The cusp_correction= kwarg and the per-fiber delta_cusp post-processing in
+ComposedDiatomicSolver.scan_pes were removed in v2.7.0 (commit 8d692a0d) with
+no replacement; under --slow this file raised 9 errors.  The three standalone
+cusp_correction_h2_point checks it carried (negative, smaller at large R,
+smaller at higher l_max) are duplicated in tests/test_cusp_correction.py
+(TestCuspCorrectionH2), which stays live.
+
 Tests for cusp correction wiring in the composed-geometry pipeline (Track AB).
 
 Validates that the Schwartz partial-wave cusp correction (Track X) is correctly

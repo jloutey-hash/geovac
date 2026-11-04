@@ -101,7 +101,9 @@ def test_onenorm_sublinear() -> None:
     # Core claim: strictly sublinear.
     assert p < 1.0, f"||M||_1 exponent {p:.3f} is not sublinear"
     # Defensible band bracketing the measured value (0.842 on this box; converged
-    # window fit 0.82).  Deliberately a band: there is no asymptote to pin.
+    # window fit 0.82).  Deliberately a band: there is no asymptote to pin.  The
+    # converged-box WINDOW value (0.8193, n_max = 7..10) is pinned separately at
+    # +-0.005 in test_paper60_owed_guards.py.
     assert 0.6 < p < 0.95, f"||M||_1 exponent {p:.3f} outside expected sublinear band"
 
 
