@@ -76,12 +76,13 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
      (retired: $O(Q^{2.5})$); Paper 20 two-point ($n_{\max}=1,2$) $\alpha = 2.816$ **identically across
      all six molecules** (retired: $2.21 \pm 0.02$), forced by $1 + \log_5 18.6$; $N_{\rm Pauli} =
      27.90\,Q$ main-group / $30.03\,Q$ $d$-block (retired: $11.10$ / $9.23$). The 1-norm and QWC exponents WERE re-derived under the exact
-     rule (2026-08-30): $\lambda \sim O(Q^{1.77})$ ($1.774$, $R^2=0.9997$) and $N_{QWC} \sim O(Q^{4.01})$
-     ($4.013$), pinned by `test_paper14_scaling.py` with the retired pair-diagonal $1.69$/$3.36$
+     rule: $\lambda \sim O(Q^{1.78})$ ($1.784$) and $N_{QWC} \sim O(Q^{4.05})$
+     ($4.049$) [criteria-currency 2026-11-04: Paper 14's live values; the 1.774/4.013 of 2026-08-30 are
+     the retired graph-hop-era figures, Paper 14 L781], pinned by `test_paper14_scaling.py` with the retired pair-diagonal $1.69$/$3.36$
      **explicitly excluded** from the asserted bands. (Updated 2026-09-20, /qa DELTA — the earlier
      "UNVERIFIED" note is superseded; the paper + test win per §1 Authoritative Source Rule.)
    - **Absolute multipliers / market-test lines** — sensitive as before. LiH re-prices 333→837;
-     equal-qubit H$_2$O $54\times$–$317\times$ (retired: $51\times$–$1712\times$); cc-pVDZ $76\times$
+     equal-qubit H$_2$O $51\times$–$317\times$ (Paper 14 tab:equal_qubit 51/297/317; retired upper end $1712\times$); cc-pVDZ $76\times$
      (retired: $190\times$); the $d$-block coefficient $9.23 \to 30.03$, becoming **denser** than
      main-group's $27.90$ — the "$d$ sparser" claim REVERSES.
    - **Reviewer instruction.** Any exponent or multiplier stated as MEASURED without being
@@ -122,7 +123,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
    projection (Fock rigidity theorem: $S^3$ is unique to Coulomb, does not extend to HO/
    Woods–Saxon). Any claim that GeoVac *predicts* nuclear structure is MATERIAL.
 
-5. **Periodicity honesty (Paper 16).** The four-type ($A/B/C/D$) classification and
+5. **Periodicity honesty (Paper 16).** The five-type ($A/B/C/D/E$) classification and
    $\nu_{\min}=E(n_\uparrow)+E(n_\downarrow)$ (corrected 2026-09-28; the universal $\nu=N-2$ is retracted) **map onto, rather than predict, the known periodic table** — stated as such
    (no claim that GeoVac *derives* the periodic law). The Dirac instability is a **metric**
    singularity on $S^{3N-1}$, not a topological one; the topology is smooth through
@@ -130,6 +131,23 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
    inputs, labeled as such — C5).
 
 ### Per-criterion watch-notes
+
+- **Paper 23 finite-nucleus block (criteria-currency 2026-11-04):** `sec:finite_nucleus` (the -(2/5)(ZR)^2
+  defect, the Zemach logarithm, the Dirac radius past Z alpha = 1) is in Paper 23's abstract; grade it as a
+  headline (claim-test matrix rows ~215-219).
+- **Owner updates since the last cert that group4 papers restate (added 2026-11-04, v6.2.1; same pattern the PI
+  approved for group2 — current owner values, nothing relaxed).** Grade restatements against these:
+  - **Paper 17 (group2, v6.2.0):** retitled "...from Natural-Geometry Solvers"; channel-blind LiH re-measured **3.22
+    bohr / 6.9%**, omega_e 1465 (4.2%); l-dependent **5.3%**; the PK uses the NIST ionization energy and a B
+    formula chosen against LiH R_eq (disclosed) — a group4 sentence calling the composed PK "zero-parameter" or
+    "derived entirely from the core" is now STALE. The matched-qubit caveat's "5.3-19.4%" range stays valid.
+  - **Paper 19 (group2):** the three non-balanced schemes are unbound by construction; no D_e; the 0.20% energy is
+    the corrected-phase value; best LiH energy -8.05851 Ha.
+  - **Paper 13 (group2):** He cusp-corrected 0.020% (above exact), not 0.004%.
+  - **FCI-molecules / FCI-atoms (group2):** retitled; FCI-M results on the physical h1 (hop-era tables retired).
+  - **Paper 20 bullet below:** the "11.10 Q / 9.23 d-block" and "O(Q^2.5)" it lists are RETIRED (canonical 27.90 Q /
+    30.03 Q; within-molecule 3.17 small-basis fit) — they are listed so a reviewer can recognise a zombie, not as
+    criteria.
 
 - **C8 (headline honesty), per-paper — the enumerated headlines + tiers.**
   *(⚑ marked the old CF-1 "pending FREEZE disposition" tier. CF-1 is DISSOLVED — see item 3 —
@@ -142,11 +160,12 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     the *spread* claim is also retired: the Paper 20 two-point exponent is now $2.816$
     **identically**, spread $0.000$); $N_{\rm Pauli}=27.90\,Q$ exact, $30.03\,Q$ $d$-block
     (retired: $11.10$ / $9.23$); per-block $279$ non-identity Pauli from $107$ ERIs
-    (retired: $111$ / $65$); ERI density $\sim 1/M$ (corrected v4.54.0).
-    **QWC groups $O(Q^{4.01})$ ($4.013$) and 1-norm $\lambda\ O(Q^{1.77})$ ($1.774$), $R^2=0.9997$ —
+    (retired: $111$ / $65$); ERI density $\approx M^{-0.49}$ (two-point $M=5\to30$ endpoint slope; four-point fit
+    $M^{-0.46}$) — "$\sim 1/M$" is the retired pair-diagonal-era decay and is now a zombie marker.
+    **QWC groups $O(Q^{4.05})$ ($4.049$) and 1-norm $\lambda\ O(Q^{1.78})$ ($1.784$) —
     re-derived under the exact rule 2026-08-30, pinned by `test_paper14_scaling.py` (retired
     pair-diagonal $3.36$/$1.69$ excluded from the bands; updated 2026-09-20, /qa DELTA).** ⚑ equal-qubit advantage
-    $54\times$–$317\times$ (retired: "two-or-more orders of magnitude / 51×–1712×"); the
+    $51\times$–$317\times$ (retired: "two-or-more orders of magnitude / 51×–1712×"); the
     "$d$-block sparser" claim **REVERSES** ($30.03 > 27.90$); matched-qubit-not-accuracy caveat
     MANDATORY.
   - **Paper 16:** $\mu_{\rm free}=\nu(\nu+3N-2)/2$ (SO(3N) Casimir); [2026-09-28: the universal $\nu=N-2$ is RETRACTED; C16 `p16-nu-universal-n-minus-2`; the headline is now the Pauli-filling $\nu_{\min}$] $\nu=N-2$ universal for
@@ -157,7 +176,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     counts, and $3.0\times$ MORE than the qubit-reduced 276 (retired: "334 Pauli, 13× fewer QWC",
     which read as a decisive win; under the exact rule the decisive wins are instead the exact
     $Q$-linearity and the $76\times$ cc-pVDZ reduction); balanced coupled (PK-free)
-    binds LiH at **$R_{\rm eq}=3.227$ bohr computed (7.0% above the experimental 3.015), 878 Pauli @ 30q, 0.20%** single-point energy at
+    binds LiH at **$R_{\rm eq}=3.227$ bohr computed (7.0% above the experimental 3.015), 2{,}726 Pauli @ 30q (878 is the retired pair-diagonal count), 0.20%** single-point energy at
     the minimum; **row-conditional** chemistry-accuracy (first-row binds; second-row NaH↓
     monotone overattraction — the honest §scope_boundary); library **37 systems** (35 composed
     + He + H2, $Z=1$–56 H–Ba; decided 2026-06-28, this watch-note synced 2026-07-01); $O(Q^{2.5})$ (retired-rule vintage 2026-08-29) universal vs
@@ -192,7 +211,8 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
 - **C7 (trunk-dependent status).** Where a group4 paper restates Fock $S^3$, $\kappa=-1/16$,
   the angular-sparsity theorem (Paper 22), or the natural-geometry hierarchy, it states the
   current tier (Paper 7 = 18 symbolic proofs; $\kappa$ = Observation; Paper 22 angular
-  sparsity = potential-independent theorem, density 6.06% universal / 1.44% pair-diagonal).
+  sparsity = potential-independent theorem, global-$M_L$ density 6.06%; the 1.44% pair-diagonal figure is
+  retired, not an alternative).
 - **C9 — the new group4 synthesis** is the synthesis-faithfulness target (separate
   claims-reviewer dispatch): every claim traces to one of the 4 papers; the QC-resource
   spine (encoding 14 → resources 20 → periodicity foundation 16 → nuclear extension 23) is
@@ -274,6 +294,8 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   fresh group → smaller remediation cycles), though at 4 papers whole-group is also tractable.
 
 ## Change log
+- 2026-11-04 — **Owner-update block added before the /qa group4 FULL run** (v6.2.1): restatement targets from the
+  group2 v6.2.0 results; Paper 20's retired coefficients flagged as zombie markers. Criteria otherwise unchanged.
 - 2026-06-28 — **DRAFTED** by PM for PI freeze (fifth pre-registered `/qa` target; first
   QC branch). Inherits criteria.md C1–C16. Branch-defining risk = QC-resource-claim honesty.
   The CF-1 "disposition" question is CLOSED — dissolved 2026-08-29, the pair-diagonal rule being

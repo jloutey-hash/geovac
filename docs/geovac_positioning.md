@@ -2,7 +2,7 @@
 
 ## What GeoVac Does
 
-GeoVac is a discretization framework that exploits the natural geometry of quantum systems (hyperspherical coordinates, prolate spheroidal coordinates, composed fiber bundles) to produce qubit Hamiltonians with far fewer Pauli terms than standard Gaussian-basis Jordan-Wigner encodings. The sparsity is structural -- it comes from angular momentum selection rules baked into the basis, not from post-hoc truncation or compression. The result is a direct reduction in the measurement budget for variational quantum eigensolvers (VQE) and other near-term quantum algorithms.
+GeoVac is a discretization framework that exploits the natural geometry of quantum systems (hyperspherical coordinates, prolate spheroidal coordinates, composed fiber bundles) to produce qubit Hamiltonians with fewer Pauli terms than standard Gaussian-basis Jordan-Wigner encodings, never at matched accuracy, by a factor that depends on the comparison: from 0.28× (H2O against minimal-basis STO-3G at 12 qubits vs GeoVac's 70, i.e. denser) to 317× at the most favourable equal-qubit point (Paper 20). The sparsity is structural -- it comes from angular momentum selection rules baked into the basis, not from post-hoc truncation or compression. The result is a direct reduction in the measurement budget for variational quantum eigensolvers (VQE) and other near-term quantum algorithms.
 
 ## The Headline Numbers
 
@@ -13,12 +13,12 @@ bug, corrected 2026-08-29) and before the He one-body hop was removed
 (2026-09-25). Current values live in Paper 14 (authoritative) and the numeric
 registry (`composed_coeff`, `lih_composed_pauli`, `lih_sto3g_raw`,
 `lih_ccpvdz_pauli`, `lih_composed_lambda`). Under the exact rule the Pauli
-count is exactly linear in Q across molecules, composed LiH is near parity
-with STO-3G on raw counts, and the decisive reduction is against cc-pVDZ.
+count is exactly linear in Q across molecules, composed LiH has 1.33× more
+raw Pauli terms than STO-3G, and the decisive reduction is against cc-pVDZ.
 
 ## Why It's Sparse
 
-GeoVac's composed architecture assigns each electron group (core pair, bond pair, lone pair) its own natural coordinate system, then couples them via screened Coulomb integrals and Phillips-Kleinman pseudopotentials. Within each block, the angular basis is built from spherical harmonics on the natural geometry, so Gaunt integral selection rules enforce exact zeros in the electron repulsion integrals. The result is block-diagonal ERIs with no cross-block two-electron terms. This structural sparsity is intrinsic to the basis and survives all downstream transformations (Jordan-Wigner encoding, qubit tapering, measurement grouping, tensor factorization).
+GeoVac's composed architecture assigns each electron group (core pair, bond pair, lone pair) its own natural coordinate system, then couples them via screened Coulomb integrals and Phillips-Kleinman pseudopotentials. Within each block, the angular basis is built from spherical harmonics on the natural geometry, so Gaunt integral selection rules enforce exact zeros in the electron repulsion integrals. The result is block-diagonal ERIs with no cross-block two-electron terms. This structural sparsity is intrinsic to the basis, survives Jordan-Wigner encoding, and is compatible with qubit tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (Paper 14).
 
 ## Where It Fits
 
@@ -61,7 +61,7 @@ The `geovac-hamiltonians` package is a standalone wheel with no heavy dependenci
 - **Resource estimation:** End-to-end fault-tolerant resource estimates (T-count, logical qubit count) comparing GeoVac Hamiltonians to DF/THC Gaussian Hamiltonians at matched accuracy.
 - **Hardware demonstrations:** VQE or ADAPT-VQE runs on current hardware using GeoVac's compact Hamiltonians. H2 at 10 qubits and LiH at 30 qubits are natural targets.
 - **Measurement optimization:** Benchmarking classical shadows, derandomized shadows, or other measurement protocols on GeoVac's structurally sparse Hamiltonians.
-- **Extending the molecule set:** The composed architecture is systematic (core pairs + bond pairs + lone pairs) and now covers 30 molecules. New molecules require only a `MolecularSpec` definition and atomic classifier entry.
+- **Extending the molecule set:** The composed architecture is systematic (core pairs + bond pairs + lone pairs) and now covers 35 molecules. New molecules require only a `MolecularSpec` definition and atomic classifier entry.
 - **Improving classical accuracy:** The 5.3-19.4% equilibrium bond length errors are dominated by basis truncation (l_max=2) and the pseudopotential approximation. The balanced coupled architecture (Paper 19) achieves 0.20% energy error at n_max=3 for LiH (at n_max=4 it crosses past exact, so the error is not monotonically improvable).
 
 ## Papers and Citation

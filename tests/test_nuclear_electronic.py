@@ -241,12 +241,8 @@ def test_nuclear_sector_projection_matches_fci():
     # Matrix form: build the no-coupling composed Hamiltonian and check that
     # the bottom of its spectrum equals the deuteron FCI eigenvalues plus
     # the hydrogen 1s electronic ground state (-0.5 Ha) on each level.
-    #
-    # NOTE: the Pauli dict path through `pauli_dict_to_sparse_sector` is
-    # bypassed here because the deuteron's Pauli encoding (Track NE) has a
-    # known sign issue in the off-diagonal one-body terms (see
-    # nuclear_electronic.py section 8b for details). The H_matrix from
-    # build_deuteron_hamiltonian is unaffected and is the source of truth.
+    # (The Pauli dict is checked against this matrix form in
+    # test_composed_pauli_spectrum_matches_matrix_form.)
     mat = build_deuterium_composed_matrix(
         N_shells=2, hw=10.0,
         include_finite_size=False, include_hyperfine=False,
@@ -284,7 +280,7 @@ def test_nuclear_sector_projection_matches_fci():
 
 def test_full_diagonalization_no_coupling():
     """Eigenvalues of H_nuc + H_elec are sums of block eigenvalues."""
-    # Matrix form (source of truth, bypasses the deuteron Pauli sign bug)
+    # Matrix form
     mat = build_deuterium_composed_matrix(
         N_shells=2, hw=10.0,
         include_finite_size=False, include_hyperfine=False,
@@ -386,3 +382,25 @@ def test_validate_composed_deuterium_runs():
     # Finite-size shift close to (2/5) R^2
     fr = result['finite_size']['ratio']
     assert 0.99 < fr < 1.01
+
+
+@pytest.mark.parametrize("hyperfine", [False, True])
+def test_composed_pauli_spectrum_matches_matrix_form(hyperfine):
+    """The 26-qubit Pauli Hamiltonian, projected to the (1p, 1n, 1e) sector,
+    has the spectrum of the matrix-form composed Hamiltonian.
+
+    Tolerance: the entries reach ~5e5 Ha, so float64 roundoff is ~1e-10
+    relative; 1e-7 Ha absolute (2e-13 relative) is far below the ~1e-1 Ha
+    errors an incorrect off-diagonal encoding produces.
+    """
+    from geovac.nuclear.nuclear_electronic import pauli_dict_to_sparse_sector
+    res = build_deuterium_composed_hamiltonian(
+        include_finite_size=False, include_hyperfine=hyperfine)
+    M = pauli_dict_to_sparse_sector(
+        res['pauli_terms'], res['Q_nuc'], res['Q_elec'],
+        res['nuclear_block'], res['electronic_block'])
+    assert np.abs(M - M.conj().T).max() < 1e-9
+    mat = build_deuterium_composed_matrix(
+        include_finite_size=False, include_hyperfine=hyperfine)['H_matrix']
+    err = float(np.abs(np.linalg.eigvalsh(M) - np.linalg.eigvalsh(mat)).max())
+    assert err < 1e-7, f"composed Pauli vs matrix form: max error {err:.3e} Ha"

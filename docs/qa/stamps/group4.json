@@ -1,0 +1,290 @@
+{
+ "target": "group4",
+ "units": {
+  "cite:papers/group4_quantum_computing/paper_14_qubit_encoding.tex": {
+   "date": "2026-11-04",
+   "hash": "1b6bb685f3c5852b",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems": {
+   "date": "2026-11-04",
+   "hash": "f2ba3fbdf165a6c4",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Balanced coupled variant": {
+   "date": "2026-11-04",
+   "hash": "58abe62c8292dd2a",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Compact nested encoding": {
+   "date": "2026-11-04",
+   "hash": "a1d0109249d45f3e",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Comparison with Gaussian bases": {
+   "date": "2026-11-04",
+   "hash": "67b69e6cc852462f",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Composition principle": {
+   "date": "2026-11-04",
+   "hash": "448784af81efb466",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Limitations of the composed-system analysis": {
+   "date": "2026-11-04",
+   "hash": "06a066f90056acd2",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Multi-center molecules": {
+   "date": "2026-11-04",
+   "hash": "6223af223b4435e9",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Scaling results": {
+   "date": "2026-11-04",
+   "hash": "851155a5084195ac",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / Second-row molecules via frozen-core composition": {
+   "date": "2026-11-04",
+   "hash": "4f005974f0e124ea",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Composed Systems / d-Orbital blocks and transition metal hydrides": {
+   "date": "2026-11-04",
+   "hash": "63d55d32a620130d",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "7b58eebfeb96465f",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Discussion / Connection to other sparse approaches": {
+   "date": "2026-11-04",
+   "hash": "6e0d39c9e6ea21a1",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Methods": {
+   "date": "2026-11-04",
+   "hash": "fc6c1c0251c5d3f9",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Methods / Comparison methodology": {
+   "date": "2026-11-04",
+   "hash": "3535d934822442e2",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Methods / GeoVac lattice Hamiltonians": {
+   "date": "2026-11-04",
+   "hash": "27a8311e2ab4c5c6",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Methods / Jordan--Wigner transformation": {
+   "date": "2026-11-04",
+   "hash": "ed1d13445adbb5da",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Results": {
+   "date": "2026-11-04",
+   "hash": "7f5e836fa0b9734d",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Results / Gaussian baselines from published integrals": {
+   "date": "2026-11-04",
+   "hash": "5aa70761ec0d7217",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Results / Measurement cost: QWC grouping": {
+   "date": "2026-11-04",
+   "hash": "4ed2f2644497804e",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Results / Recoupling sparsity in H-set coupled bases": {
+   "date": "2026-11-04",
+   "hash": "f6dd6652473371a2",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Results / The retired pair-diagonal ERI rule: a sign error, not an approximation": {
+   "date": "2026-11-04",
+   "hash": "f14f79736eafbb41",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Spinor composed encoding": {
+   "date": "2026-11-04",
+   "hash": "175f6511b081b1ff",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Spinor composed encoding / Angular sparsity at the spinor level": {
+   "date": "2026-11-04",
+   "hash": "0c4ac3e6ed3b2ef2",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Spinor composed encoding / Construction": {
+   "date": "2026-11-04",
+   "hash": "b6c59aa3fdab8525",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Spinor composed encoding / Paper 18 taxonomic classification": {
+   "date": "2026-11-04",
+   "hash": "57337a15722883fd",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_14_qubit_encoding.tex::Spinor composed encoding / Resource metrics for LiH, BeH, CaH": {
+   "date": "2026-11-04",
+   "hash": "d61763adb1e3e0c6",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::Discussion": {
+   "date": "2026-11-04",
+   "hash": "ed27754aea04566c",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::Discussion / Transition metals and Hund's rule": {
+   "date": "2026-11-04",
+   "hash": "b9d90a86637d62cb",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::Structure Type Classification / Type A: Trivial ( N = 1 )": {
+   "date": "2026-11-04",
+   "hash": "5f7ab2bf94faab77",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::Structure Type Classification / Type D: Alkaline earth (core + pair)": {
+   "date": "2026-11-04",
+   "hash": "707c6ab4331c4d5e",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::The Formula": {
+   "date": "2026-11-04",
+   "hash": "db00fc593d89ec1e",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::The Hyperspherical Framework": {
+   "date": "2026-11-04",
+   "hash": "918e1cffcaef5382",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::The Hyperspherical Framework / Configuration space and angular dynamics": {
+   "date": "2026-11-04",
+   "hash": "1732e59ba13a4da5",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::The Hyperspherical Framework / Fermionic antisymmetry and S_N irreps": {
+   "date": "2026-11-04",
+   "hash": "7a641682cd892a18",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::The Hyperspherical Framework / The minimum angular quantum number": {
+   "date": "2026-11-04",
+   "hash": "171b2d5691b3e0d6",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::Topology versus Metric: Two-Level Structure / Three limits on the periodic table": {
+   "date": "2026-11-04",
+   "hash": "1218333ace99045a",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::What is New vs. What is Known": {
+   "date": "2026-11-04",
+   "hash": "8ed0ab5e7c5f6f4b",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_16_periodicity.tex::What is New vs. What is Known / Known results": {
+   "date": "2026-11-04",
+   "hash": "d9aa6e2b3750b7ab",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Accuracy Benchmarks": {
+   "date": "2026-11-04",
+   "hash": "0c264a5101f6acc1",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Available Systems": {
+   "date": "2026-11-04",
+   "hash": "7be6ba13066259f5",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Available Systems / Installation and usage": {
+   "date": "2026-11-04",
+   "hash": "b76ade17ab2e14c5",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Available Systems / Nuclear scaling: linearity in qubit count": {
+   "date": "2026-11-04",
+   "hash": "ed0488196d7dbc28",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Available Systems / The retired pair-diagonal ERI rule: a sign error, not an approximation": {
+   "date": "2026-11-04",
+   "hash": "38d708a65ddd20d2",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Quantum Resource Comparison": {
+   "date": "2026-11-04",
+   "hash": "570048134e432bc8",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::Quantum Resource Comparison / Scaling exponents": {
+   "date": "2026-11-04",
+   "hash": "251ddbd021993d6e",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::The Hamiltonian": {
+   "date": "2026-11-04",
+   "hash": "5f9c7f392559c568",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::The Hamiltonian / How it works (brief)": {
+   "date": "2026-11-04",
+   "hash": "c22878846be3370b",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::The Hamiltonian / Two architectures": {
+   "date": "2026-11-04",
+   "hash": "c29b345f1feeec15",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_20_resource_benchmarks.tex::The Hamiltonian / What the user receives": {
+   "date": "2026-11-04",
+   "hash": "cb9f86ebc1d9c280",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::Composed Nuclear--Electronic Deuterium / Multi-scale precision problem": {
+   "date": "2026-11-04",
+   "hash": "a99007947b35bc5c",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::Composed Nuclear--Electronic Deuterium / Positioning in the noncommutative-geometry literature": {
+   "date": "2026-11-04",
+   "hash": "0230d42c60fc81a8",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::Cross-register V_ eN and operator-level magnetization-density / Cross-register V_ eN on the joint Sturmian register": {
+   "date": "2026-11-04",
+   "hash": "683ad912871243f4",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::Nuclear Shell Model on the Hyperspherical Lattice": {
+   "date": "2026-11-04",
+   "hash": "837f8d414de11f92",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::Nuclear Shell Model on the Hyperspherical Lattice / Harmonic oscillator basis and shell closures": {
+   "date": "2026-11-04",
+   "hash": "2e14803fc5a95c47",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::Nuclear Shell Model on the Hyperspherical Lattice / Spin--orbit term and the real magic numbers": {
+   "date": "2026-11-04",
+   "hash": "f7ebc3eae1a6cf60",
+   "run": "group4-full-2026-11-04"
+  },
+  "prose:papers/group4_quantum_computing/paper_23_nuclear_shell.tex::The Fock Projection Rigidity Theorem / A finite nucleus: n released from integrality": {
+   "date": "2026-11-04",
+   "hash": "4c08a2482df3a6a2",
+   "run": "group4-full-2026-11-04"
+  }
+ }
+}

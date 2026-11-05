@@ -7,6 +7,93 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.3.0] - 2026-11-04
+
+`/qa group4` FULL (incremental; first whole-group cert of group4 under stamps; Papers 14, 16, 20, 23 + the group4
+synthesis), PI-invoked as the next target of the 2026-11-03 sequence. MINOR bump (PI-approved): published numbers
+move. The nuclear Pauli Hamiltonians were wrong. The minimal-basis baseline that the LiH market test rests on was
+unreproducible. Paper 14 is retitled. Unseeded; standing calibration record cited. Snapshot c613a229
+(`refs/qa/group4-full-2026-11-04`); four reviewer worktrees.
+**Verdict: FAIL. RESEARCH-GRADE not earned.** **Coverage 0/133 -> 57/133 (43%)** (prose 56/125, cite 1/4, code 0/4).
+
+### Panel
+- Deterministic (group4, synthesis, groups 1/2/3/6, trunk, corpus): C5/C12, C10, C11, C13-C22, C24, C25 all PASS
+  after remediation. C22 caught four stale claim-matrix rows, which are fixed.
+- Code, claims, citations and synthesis reviewers, plus a completeness critic. Every MATERIAL finding was verified by
+  the PM against text or code, or recomputed by an independent agent.
+
+### Owner fixes (LARGE)
+- **Paper 23 nuclear encoder (code defect, PI-approved "fix code, restate"):**
+  - `geovac/nuclear/nuclear_hamiltonian.py` wrote the Jordan-Wigner XY/YX coefficients of a+_p a_q as real +-1/4
+    instead of +-i/4, and dropped terms that were more than 1% imaginary. The exported deuteron and He-4 Pauli sums
+    therefore had the wrong spectra, off by 5-77 MeV from the FCI matrix they were meant to encode.
+  - Coefficients are now complex through every product. A new `_finalize_hermitian_pauli` raises on a residual
+    imaginary part, and a new `pauli_sector_matrix` lets tests compare the Pauli sum against FCI in the
+    particle-number sector.
+  - Minnesota V_S is corrected from -91.4 to the standard -91.85 MeV.
+  - Proton finite-size radius corrected: `R_PROTON_SPHERE_BOHR` = sqrt(5/3) r_p, the equivalent uniform-sphere radius.
+  - Re-measured: deuteron 688 terms / 383.87 MeV; He-4 904 terms (was 828), 641.39 / 632.19 MeV (was 511.8 / 507.2);
+    composed 26-qubit Hamiltonian 710 terms.
+  - Prose: "1.31x" replaces the sub-linear angular-selection-rule reading. The Fock rigidity theorem is tagged
+    [PRIOR ART]. lambda_n and omega_magn are stated as calibrated. The +44 ppm and 327.339 MHz figures are removed.
+    r_Z(D) is cited to Friar-Sick 2004. The "known limitation" section and the "first" claim are deleted.
+- **LiH STO-3G baseline (PI-approved "correct everywhere"):**
+  - The raw-JW baseline 907 terms / 273 QWC / 34.3 Ha had no artifact. Recomputed from STO-3G integrals at
+    R = 3.015: 631 terms (identity included), 179 QWC, lambda 16.48 Ha (12.34 non-identity).
+  - Composed LiH (838 / 64 / 34.0) has 1.33x MORE terms than raw STO-3G and about twice its 1-norm. "Near parity" is
+    retired across Papers 14, 19 and 20, the syntheses, the field guide and the front door.
+- **Paper 14 (retitled "Structurally Sparse Qubit Hamiltonians from Natural-Geometry Hydrogenic Bases", PI-approved;
+  22 citing bibitems updated):**
+  - He accuracy table re-measured on the physical h1 (2.43 / 2.10 / 1.99 / 1.93%); the old table was hop-era.
+  - MPO profile {16,15,8,15,20,19,10,5}, balanced chi {17,32}, DF rank 15; the old data were pair-diagonal era.
+  - Standard FCI converges 5.3 -> 2.0%, so the "TC eliminates a basis divergence" claim is removed.
+  - The He 2^3P Breit-Pauli rationals are stated as a fit to NIST.
+  - Per-block Z2 tapering (~49%) is attributed to the zeroed cross-block ERIs, not the Hopf bundle.
+  - Chawla comparison corrected. Pair-diagonal scaling remnants removed.
+  - Self-check fixes: the conclusion credited Paper 19's balanced 0.20% to the composed Hamiltonian; the
+    qubitization extrapolation used a stale exponent gap (now Q^0.2+, about 3x at Q = 110, at least 4.5x at
+    Q = 1000).
+- **Paper 20:**
+  - The balanced LiH curve has no D_e (Paper 19).
+  - Only LiH has a computed PES.
+  - Composed errors are intrinsic to the approximation.
+  - Matched-qubit caveats added; tab:pes_nmax2 live values; tapering 54%.
+- **Paper 16:**
+  - Structure types are the S_N irrep plus empirical shell occupancy. The periodic law is recast, not derived, and
+    Paper 0 does not derive the 2n^2 grouping. Section retitled "The Periodic Law as a Type Sequence".
+  - Self-check fixes: ionization energy is a Level-2 Coulomb effect, not an irrep property; Na2+ is Type E; the
+    "fractal" section is restated as S_N > S_{N-1} branching. These were fixed after round 2, so those units stay
+    unstamped.
+- **Papers 24, 27 and the group6 synthesis (follow-through of V_S = -91.85):**
+  - HO two-fermion entropies 0.0692 / 0.0736 / 0.0850 at N_max = 2/3/4 (was 0.0833 at 4); commutators
+    0.75 / 0.64 / 0.67.
+  - Singlet matrix elements at b = 1 are +17.2 / -0.81 MeV, about 21x; at production b the ratio is 0.48x.
+  - The 2026-08-29 adjudication that "-0.81 reproduces under no convention" was wrong: it was judged against the
+    -91.4 build, and -0.81 is the standard-parameter value. The clause is deleted.
+  - `debug/data/ep2b_ho_two_fermion.json` regenerated.
+
+### Surface fixes
+- group4 synthesis and the positioning page no longer say "every comparison is at matched qubit count". The
+  STO-3G and cc-pVDZ market tests use different qubit counts, and no comparison is at matched accuracy.
+- One-pager, INDEX, README, claims register, field guide bibitem and CLAUDE.md §2 market-test line updated.
+
+### Gates
+- C16: 16 new group4 entries; each fires on HEAD and is silent now.
+- C17: `p27-ep2b-*` families re-pinned; new `p27-ep2b-vs914-retired`; `p27-minnesota-contrast` inverted.
+- C21: registry keys `lih_sto3g_raw`, `lih_sto3g_qwc`, `lih_sto3g_lambda(_ni)`, `p23_*`; retired values blocked.
+
+### Tests
+- Nuclear and entropy tests plus the 18 S3 proofs: 97 passed, 2 skipped.
+- New spectrum-vs-FCI tests for the deuteron and He-4, a composed Pauli-vs-matrix test, and an OpenFermion round
+  trip. Guard review is owed.
+
+### Open (`docs/qa/group4.debt.md`)
+- Owed guards: P23 encoder pins, P14 MPO JSON regeneration, the STO-3G artifact, P20 slow pins, P16 tautological
+  tests, and the P27 C17 exemption weakness.
+- The round-1 SMALL sweep.
+- Paper 34's He 2^3P entry rests on Paper 14's fitted rationals (route to group6).
+- PI item: the CLAUDE.md §1.5 market-test and "zero-parameter" sentences (drafts given).
+
 ## [v6.2.1] - 2026-11-04
 
 group2 guard pass (PI-approved plan after v6.2.0). Guards written as their own activity, each fire-tested against

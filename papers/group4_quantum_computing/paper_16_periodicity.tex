@@ -54,22 +54,23 @@ equals $N-2$ exactly when both columns lie in the first two oscillator
 shells ($1 \le n_\downarrow \le n_\uparrow \le 4$; at lowest spin, for
 $2 \le N \le 8$), and grows as $N^{4/3}$; the ground-state orbital
 angular momentum and parity can raise it further (lithium's ${}^2S$
-needs $\nu = 2$, not~1).  The $S_N$ irrep structure yields a
-classification of atoms into five types---A (trivial), B~(noble gas),
-C~(alkali), D~(alkaline earth), E~(open shell)---that recasts the periodic
-table's group structure in representation-theoretic language.  The periodic law
-corresponds to the repetition of the $S_N$ irrep sequence
-$\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$ within each
-period.  This classification maps onto, rather than predicts, the
+needs $\nu = 2$, not~1).  The $S_N$ irrep depends only on $N$ and $S$,
+so it cannot by itself separate the chemical groups (noble gases and
+alkaline earths share an irrep, and every doublet shares the alkali
+shape); together with the shell occupancy, an empirical configuration
+input, it yields a classification of atoms into five types---A (trivial),
+B~(noble gas), C~(alkali), D~(alkaline earth), E~(open shell)---that
+recasts the periodic table's group structure in representation-theoretic
+language.  The periodic law corresponds to the repetition of the type
+sequence $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$ within
+each period.  This classification maps onto, rather than predicts, the
 known periodic table structure; its value lies in providing a
 unified group-theoretic framework for a pattern that is usually
-described empirically.  (An earlier version of this paper claimed a
-universal $\nu = N-2$, $\mufree = 2(N-2)(N-1)$, and a limit of
-4~units per electron pair; all three are withdrawn,
-Sec.~\ref{sec:nu_gs}.)  We show that the topological
-structure ($\nu$, $\mufree$) is smooth through $Z = 1/\alpha \approx
-137$ and that the Dirac instability is a \emph{metric} singularity on
-$S^{3N-1}$, not a topological one.
+described empirically.  The angular quantities ($\nu$, $\mufree$) are
+integers defined for every $N$, with nothing special at
+$Z = 1/\alpha \approx 137$; we read the Dirac instability as a
+\emph{metric} rather than a topological effect (an interpretive
+observation, not derived here).
 \end{abstract}
 
 \maketitle
@@ -116,15 +117,15 @@ hypersphere $S^{3N-1}$.  The key results are:
   \item The Pauli centrifugal cost $\mufree = \nu_{\min}(\nu_{\min} +
     3N-2)/2$ grows as $N^{8/3}$, faster than the number of electron
     pairs (Sec.~\ref{sec:mu_formula}).
-  \item The shape of the $S_N$ irrep classifies atoms into chemical
-    types that recast the group structure of the periodic table in
-    representation-theoretic language
+  \item The $S_N$ irrep, together with the empirical shell occupancy,
+    sorts atoms into chemical types that recast the group structure of
+    the periodic table in representation-theoretic language
     (Sec.~\ref{sec:classification}).
-  \item The periodic law corresponds to the repetition of $S_N$ irrep
-    sequences (Sec.~\ref{sec:periodic_law}).
-  \item The Dirac instability at $Z\alpha \to 1$ is a metric
-    singularity, not a topological one; the representation theory
-    is smooth through $Z = 137$
+  \item The periodic law corresponds to the repetition of the type
+    sequence (Sec.~\ref{sec:periodic_law}).
+  \item We read the Dirac instability at $Z\alpha \to 1$ as a metric
+    rather than a topological effect (an interpretive observation);
+    the representation theory has nothing special at $Z = 137$
     (Sec.~\ref{sec:topology_vs_metric}).
 \end{enumerate}
 
@@ -209,15 +210,16 @@ important to distinguish them from the new contributions.
     withdrawn.)
 
   \item \textbf{The five-type classification (A/B/C/D/E).}  The
-    observation that the $S_N$ irrep shape naturally partitions atoms
-    into types that map onto the periodic table's group structure
-    provides a group-theoretic reformulation of the empirical pattern.
+    $S_N$ irrep together with the shell occupancy (an empirical input;
+    the irrep alone depends only on $N$ and $S$) partitions atoms
+    into types that map onto the periodic table's group structure,
+    a group-theoretic reformulation of the empirical pattern.
 
   \item \textbf{The Dirac instability as metric vs.\ topological
-    singularity.}  The analysis showing that $\nu$, $\mufree$, and
-    the $S_N$ irrep are smooth through $Z = 137$ while the metric
-    diverges clarifies the nature of the upper limit on the periodic
-    table.
+    effect.}  An interpretive observation, not derived here:\ $\nu$,
+    $\mufree$, and the $S_N$ irrep have nothing special at $Z = 137$,
+    while the relativistic correction for the innermost electron
+    diverges there.
 \end{enumerate}
 
 %% ========================================================================
@@ -490,8 +492,9 @@ $\nu_{\min}$ from Eq.~(\ref{eq:nu_min}), $\mufree$ from
 Eq.~(\ref{eq:mu_formula}).  For $N \le 12$ the $\nu_{\min}$ values are
 exact character counts (Table~\ref{tab:nu_verified}); for $N \ge 18$
 they are Eq.~(\ref{eq:nu_min}) with $S = 0$.  Imposing the ground
-term's $L$ and parity can raise $\nu_{\min}$ (Li: 2, $\mufree = 9$;
-N: 7, $\mufree = 91$).}
+term's $L$ and parity can raise $\nu_{\min}$ (N: 7, $\mufree = 91$).
+$^\dagger$Spin-only value, which belongs to a ${}^2P$ state; lithium's
+${}^2S$ ground state needs $\nu = 2$, $\mufree = 9$.}
 \label{tab:mu_values}
 \begin{tabular}{lrrrrrc}
 \toprule
@@ -499,7 +502,7 @@ Atom & $N$ & $S^{3N-1}$ & $\nu_{\min}$ & $\mufree$ & $\mufree/N^2$ & Type \\
 \midrule
 H     &   1 & $S^2$    &   0 &       0 & 0.00 & A \\
 He    &   2 & $S^5$    &   0 &       0 & 0.00 & B \\
-Li    &   3 & $S^8$    &   1 &       4 & 0.44 & C \\
+Li    &   3 & $S^8$    &   $1^\dagger$ &       $4^\dagger$ & 0.44 & C \\
 Be    &   4 & $S^{11}$ &   2 &      12 & 0.75 & D \\
 N     &   7 & $S^{20}$ &   6 &      75 & 1.53 & E \\
 Ne    &  10 & $S^{29}$ &  10 &     190 & 1.90 & B \\
@@ -521,12 +524,13 @@ Og    & 118 & $S^{353}$& 456 &  184224 & 13.2 & B \\
 \section{Structure Type Classification}
 \label{sec:classification}
 
-Beyond the numbers $\nu_{\min}$ and $\mufree$, which depend only on
-$N$ and $S$, the \emph{shape} of the $S_N$ irrep varies with the
-electron configuration.  This shape encodes the internal structure of the
-atom---how the $N$~electrons partition into core and valence.
-
-We define five structure types based on the spatial Young diagram:
+Like $\nu_{\min}$ and $\mufree$, the \emph{shape} of the $S_N$ irrep
+depends only on $N$ and $S$ (Lemma~\ref{thm:lambda1}), so it cannot by
+itself say how the $N$~electrons partition into core and valence:\
+noble gases and alkaline earths share $[2^{N/2}]$, and every $S = 1/2$
+atom, alkali or open-shell (B, F), has the shape $[2^{(N-1)/2}, 1]$.
+We define five structure types from the spatial Young diagram together
+with the shell occupancy, an empirical configuration input:
 
 \subsection{Type A: Trivial ($N = 1$)}
 
@@ -542,11 +546,10 @@ diagram is $[N/2,\, N/2]$ and the spatial irrep is its conjugate:
 $[2, 2, \ldots, 2]$ ($N/2$ rows of length~2).
 
 This is the most \emph{democratic} irrep: all columns have the same
-height.  No electron is distinguished.  The wavefunction has the full
-point-group symmetry of the Young diagram, and ionization requires
-breaking this symmetry---a costly operation reflected in the high
-ionization energies of noble gases (He:~$24.6\eV$, Ne:~$21.6\eV$,
-Ar:~$15.8\eV$).
+height.  No electron is distinguished.  The high noble-gas ionization
+energies (He:~$24.6\eV$, Ne:~$21.6\eV$, Ar:~$15.8\eV$) are a Level-2
+Coulomb effect (Eq.~\ref{eq:ionization_surgery}); Type~D shares this
+irrep at far lower ionization energy.
 
 \subsection{Type C: Alkali metal (hierarchical structure)}
 
@@ -554,17 +557,18 @@ Alkali metals have one valence electron outside a noble-gas core, with
 $S = 1/2$.  The spin diagram is $[(N+1)/2, \,(N-1)/2]$ and the
 spatial irrep is $[2, 2, \ldots, 2, 1]$ ($= [2^{(N-1)/2}, 1]$).
 
-This is a \emph{hierarchical} irrep: one column (the valence electron)
-is shorter than the rest.  The wavefunction has a natural
-decomposition into a symmetric core and a weakly bound valence
-electron.  Ionization removes the short column---a topologically clean
-surgery on $S^{3N-1}$:
+This is a \emph{hierarchical} irrep: one column is one box shorter than
+the other (the unpaired electron), a shape it shares with every
+open-shell doublet; the occupancy (one electron in a new shell) is what
+singles out the alkali.  Ionization removes one electron---a
+topologically clean surgery on $S^{3N-1}$:
 \begin{equation}
   S^{3N-1} \to S^{3(N-1)-1} \times \mathbb{R}.
   \label{eq:ionization_surgery}
 \end{equation}
-The low cost of this surgery explains the low ionization energies
-of alkali metals (Li:~$5.4\eV$, Na:~$5.1\eV$, K:~$4.3\eV$).
+The surgery is the same for every atom; the low ionization energies
+of alkali metals (Li:~$5.4\eV$, Na:~$5.1\eV$, K:~$4.3\eV$) are a
+Level-2 effect.
 
 \subsection{Type D: Alkaline earth (core + pair)}
 
@@ -582,16 +586,16 @@ distinguishable from the core).
 
 Atoms with a partially filled $p$ shell (boron through fluorine) or
 $d$ shell (the transition metals) carry an open valence shell with
-$S > 0$ but $S < N/2$.  The spatial irrep is neither the democratic
-$[2^{N/2}]$ of Type~B/D nor the single-defect $[2^{(N-1)/2},1]$ of
-Type~C, but an intermediate shape with several columns of unequal
-height set by the open-shell occupancy and Hund's rule.  This is the
+$S > 0$ but $S < N/2$.  The spatial irrep is the two-column diagram of
+Lemma~\ref{thm:lambda1} for the Hund's-rule spin; for doublets (B, F)
+it is the Type~C shape $[2^{(N-1)/2},1]$, and for higher spins the two
+columns differ by $2S$ boxes.  What makes the type is the open-shell
+occupancy, not the irrep.  This is the
 broadest class and the one where intra-shell exchange coupling is
 strongest; the composed-builder implementation refines it further into
 a $p$-block dispatch (type~E) and a separate $d$-block dispatch
-(type~F) because the angular machinery differs, but at the
-representation-theory level both are open-shell instances of the same
-intermediate-irrep family.  Ionization energies span the widest range
+(type~F) because the angular machinery differs, but both are
+open-shell occupancy classes.  Ionization energies span the widest range
 (B:~$8.3\eV$ to F:~$17.4\eV$), tracking the filling of the open shell.
 
 Table~\ref{tab:types} summarizes the classification.
@@ -599,7 +603,9 @@ Table~\ref{tab:types} summarizes the classification.
 \begin{table}[h]
 \centering
 \caption{Structure type classification.  The spatial Young diagram is
-the conjugate of the spin diagram.  IE$_1$ is the first ionization
+the conjugate of the spin diagram, fixed by $N$ and $S$; B and D share
+an irrep and open-shell doublets share C's, so each type is the irrep
+together with the shell occupancy.  IE$_1$ is the first ionization
 energy (experimental).}
 \label{tab:types}
 \begin{tabular}{cllcr}
@@ -610,20 +616,21 @@ A & $[1]$       & Monatomic       & H            & $13.6\eV$ \\
 B & $[2^{N/2}]$ & Noble gas       & He, Ne, Ar   & $15$--$25\eV$ \\
 C & $[2^{(N-1)/2}, 1]$ & Alkali  & Li, Na, K    & $4$--$5\eV$ \\
 D & $[2^{N/2}]$ & Alkaline earth  & Be, Mg, Ca   & $6$--$9\eV$ \\
-E & Various     & Open shell      & B--F, d-block& $8$--$17\eV$ \\
+E & Two-column  & Open shell      & B--F, d-block& $8$--$17\eV$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 %% ========================================================================
-%% V. THE PERIODIC LAW AS IRREP SEQUENCE
+%% V. THE PERIODIC LAW AS A TYPE SEQUENCE
 %% ========================================================================
 
-\section{The Periodic Law as Irrep Sequence}
+\section{The Periodic Law as a Type Sequence}
 \label{sec:periodic_law}
 
-The periodic table's group structure arises because the sequence of
-$S_N$ structure types \emph{repeats} with each period.  Within a given
+The periodic table's group structure corresponds to the
+\emph{repetition} of the sequence of structure types with each
+period.  Within a given
 period (defined by the outermost principal quantum number $n$), the
 element sequence is:
 \begin{equation}
@@ -640,8 +647,9 @@ In group-theoretic language, the periodic law can be understood as
 follows:
 \begin{quote}
 \emph{The chemical properties of elements are periodic functions of
-atomic number because the sequence of $S_N$ spatial irreps repeats
-whenever a new principal shell begins filling.}
+atomic number because the sequence of structure types (spatial irrep
+plus shell occupancy) repeats whenever a new principal shell begins
+filling.}
 \end{quote}
 This is a reformulation, not a derivation from first principles: the
 shell-filling order itself (which determines where the sequence
@@ -699,12 +707,13 @@ The preceding analysis reveals a clean two-level separation:
 \begin{itemize}
   \item \textbf{Level 1 (Topological).}  The quantities
     $\nu_{\min}$ and $\mufree$ in their $S_N$-only form
-    (Eq.~(\ref{eq:nu_min})), the $S_N$ irrep, and the structure type
+    (Eq.~(\ref{eq:nu_min})) and the $S_N$ irrep
     depend only on the electron count $N$ and the total spin $S$.
     They are independent of $Z$ and of all details of the
     electron--electron interaction.  (Adding the ground term's $L$
     and parity, Table~\ref{tab:nu_verified}, is still
-    $Z$-independent but no longer a function of $N$ and $S$ alone.)
+    $Z$-independent but no longer a function of $N$ and $S$ alone;
+    the structure type adds the shell occupancy, an empirical input.)
 
   \item \textbf{Level 2 (Perturbative/Metric).}  The binding energy,
     ionization energy, electron configuration, and Hund's rules all
@@ -725,12 +734,12 @@ cost.
 % lambda_1 = 2 for all spatial irreps with S < N/2, the angular quantum
 % number nu = N - 2 is independent of the spin value."
 
-\subsection{The Dirac limit as metric singularity}
+\subsection{The Dirac limit as a metric effect}
 \label{sec:dirac_limit}
 
-The Dirac equation for hydrogen-like atoms predicts that the 1s
-binding energy diverges at $Z\alpha = 1$ ($Z \approx 137$ for a point
-nucleus):
+The Dirac equation for hydrogen-like atoms gives a 1s energy that
+reaches $-mc^2$ at $Z\alpha = 1$ ($Z \approx 137$ for a point
+nucleus) and ceases to be real beyond it:
 \begin{equation}
   E_{\mathrm{1s}}^{\mathrm{Dirac}}
     = mc^2 \left(\sqrt{1 - (Z\alpha)^2} - 1\right).
@@ -748,24 +757,25 @@ the singlet); nothing happens at $N = 137$.
 % N = 137: nu = 135, mu_free = 36,720, nu/(3N-2) = 0.3301 "approaches
 % 1/3 from below".
 
-The Dirac instability is instead a \emph{metric} effect.  The
-non-relativistic Fock projection yields the round metric on $S^3$.
-Relativistic corrections warp this metric by a conformal factor
+We read the Dirac instability instead as a \emph{metric} effect
+(an interpretive observation, not derived here).  The
+non-relativistic Fock projection yields the round metric on $S^3$, and
+we take the indicator
 \begin{equation}
   \delta_{\mathrm{1s}} = \frac{(Z\alpha)^2}{1 - (Z\alpha)^2},
   \label{eq:metric_correction}
 \end{equation}
-which diverges at $Z\alpha \to 1$.  This ``pinch'' is a conical
-singularity at the nuclear pole of $S^{3N-1}$---the geometric avatar
-of the Dirac dive.  The topology ($S_N$ irrep, $\nu$, $\mufree$)
-is oblivious; the metric (curvature, conformal factor) is singular.
+which diverges at $Z\alpha \to 1$, as a measure of how far relativity
+departs from that round geometry for the innermost electron.  No
+conformal factor or singularity on $S^{3N-1}$ is derived from it.  The
+topology ($S_N$ irrep, $\nu$, $\mufree$) is oblivious to $Z$.
 
 Table~\ref{tab:metric} quantifies the transition from perturbative
 to singular.
 
 \begin{table}[h]
 \centering
-\caption{Relativistic metric correction $\delta_{1\mathrm{s}} =
+\caption{Relativistic indicator $\delta_{1\mathrm{s}} =
 (Z\alpha)^2/[1 - (Z\alpha)^2]$ for the innermost electron.  The
 non-relativistic $\mufree$ formula becomes unreliable when
 $\delta \gtrsim 1$.}
@@ -779,7 +789,7 @@ $Z$ & $(Z\alpha)^2$ & $\delta_{1\mathrm{s}}$ & Regime \\
  47 & 0.118   & 0.133   & Relativistic \\
  79 & 0.332   & 0.498   & Strongly relativistic \\
 118 & 0.741   & 2.87    & Near-singular \\
-137 & 0.999   & $\sim 10^3$ & Conical singularity \\
+137 & 0.999   & $\sim 10^3$ & Singular \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -809,12 +819,12 @@ nuclear physics ($Z \lesssim 130$), not by electronic topology.
 
 \subsection{Connection to Paper 0's orbital counting}
 
-Paper~0~\cite{loutey_paper0} derived the $2n^2$ orbital degeneracy
-from the geometric packing of nodes on the discrete $S^3$ lattice.
-The present result extends this: the $S_N$ representation theory on
-$S^{3N-1}$ yields not just the orbital counting but the
-\emph{chemical classification} of atoms.  Where Paper~0 derived the $2n^2$ counting from geometric packing,
-the present analysis provides a group-theoretic framework for
+Paper~0~\cite{loutey_paper0} gives a geometric packing of nodes on the
+discrete $S^3$ lattice whose cumulative label count matches the $2n^2$
+orbital degeneracy; the shell grouping that produces it corresponds to,
+but is not derived from, the packing axioms.  The present analysis
+recasts, with the shell occupancy as input, the
+\emph{chemical classification} of atoms, and provides a group-theoretic framework for
 understanding why filling those shells produces the periodic pattern
 $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$.
 
@@ -855,35 +865,34 @@ determine which one is the ground state.
 The structure type classification connects naturally to familiar
 chemical trends:
 \begin{itemize}
-  \item \textbf{Ionization energy} correlates with the topological
-    cost of surgery on $S^{3N-1}$.  Type~B (noble gas) has the highest
-    surgery cost; Type~C (alkali) has the lowest.
+  \item \textbf{Ionization energy} is a Level-2 quantity: the surgery
+    of Eq.~(\ref{eq:ionization_surgery}) is the same for every atom, so
+    the high noble-gas and low alkali values are set by the Coulomb
+    energetics, not by the irrep.
   \item \textbf{Atomic radius} correlates with the location of the
     surgery: Type~C atoms have a weakly bound outer electron (large
     radius), while Type~B atoms are compact.
   \item \textbf{Electronegativity} increases across a period
-    ($\mathrm{C} \to \mathrm{B}$), mirroring the transition from
-    hierarchical to democratic irreps.
+    ($\mathrm{C} \to \mathrm{B}$), as the valence shell fills from one
+    electron to closed.
   \item \textbf{The periodic law} can be understood as the
-    repetition of the $S_N$ irrep sequence whenever a new principal
+    repetition of the structure-type sequence whenever a new principal
     shell begins to fill.
 \end{itemize}
 
-\subsection{Fractal structure: core and valence at every scale}
+\subsection{Ionization as $S_N \supset S_{N-1}$ branching}
 
-A striking feature of the classification is its \emph{scale
-invariance}.  The core--valence decomposition at each ionization step
-produces the same Types~B/C/D structure at every level:
+Each ionization step is a branching $S_N \supset S_{N-1}$, and the
+core--valence decomposition recurs at every step:
 \begin{align*}
   \text{Na} &\to \text{Na}^+ + e^-
     & (\text{C} &\to \text{B} + \text{A}), \\
   \text{Na}^+ &\to \text{Na}^{2+} + e^-
-    & (\text{B} &\to \text{C} + \text{A}).
+    & (\text{B} &\to \text{E} + \text{A}).
 \end{align*}
-Each ionization peels off one column from the Young diagram,
-converting one type into another in a predictable sequence.  This
-self-similar structure is a direct consequence of the recursive
-nature of $S_N \supset S_{N-1}$ representations.
+Each ionization removes one box from the spatial Young diagram
+($S_N \supset S_{N-1}$ branching); which type results depends on the
+shell occupancy of the ion, an empirical input.
 
 %% ========================================================================
 %% VIII. CONCLUSION
@@ -894,8 +903,9 @@ nature of $S_N \supset S_{N-1}$ representations.
 
 We have shown that the group structure of the periodic table---the
 classification of elements into noble gases, alkali metals, alkaline
-earths, and open-shell atoms---follows from the $S_N$ representation
-theory of fermionic wavefunctions on the hypersphere $S^{3N-1}$.  The
+earths, and open-shell atoms---can be recast in the $S_N$ representation
+theory of fermionic wavefunctions on the hypersphere $S^{3N-1}$,
+supplemented by the empirical shell occupancy.  The
 key results are:
 
 \begin{enumerate}
@@ -912,11 +922,12 @@ key results are:
     term's $L$ and parity can raise it (Li ${}^2S$: 2).  The Pauli
     centrifugal cost $\mufree$ grows as $N^{8/3}$.
 
-  \item The shape of the $S_N$ spatial irrep classifies atoms into
+  \item The $S_N$ spatial irrep, which depends only on $N$ and $S$,
+    together with the shell occupancy sorts atoms into
     types (A/B/C/D/E) that recast the chemical group structure in
     representation-theoretic language.
 
-  \item The periodic law corresponds to the repetition of the irrep
+  \item The periodic law corresponds to the repetition of the type
     sequence $\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to
     \mathrm{B}$ within each period.
 
@@ -924,14 +935,14 @@ key results are:
     Level~2 perturbative effects; the Level~1 cost rises with spin,
     so exchange must overcome it.
 
-  \item The Dirac instability at $Z\alpha \to 1$ is a metric
-    singularity on $S^{3N-1}$, not a topological one; the
-    representation theory is smooth through all $N$.
+  \item We read the Dirac instability at $Z\alpha \to 1$ as a metric
+    rather than a topological effect (an interpretive observation);
+    the representation theory is defined for all $N$.
 \end{enumerate}
 
 The approach separates the periodic table into a universal
-\emph{topological skeleton} (Level~1: $\nu$, $\mufree$, structure
-type) and a chemistry-specific \emph{metric flesh} (Level~2: $Z$,
+\emph{topological skeleton} (Level~1: $\nu$, $\mufree$, the $S_N$
+irrep) and a chemistry-specific \emph{metric flesh} (Level~2: $Z$,
 $\alpha$, Coulomb integrals).  This separation provides a
 group-theoretic framework for the periodic table's structure
 (topology) while leaving the element-specific chemistry to

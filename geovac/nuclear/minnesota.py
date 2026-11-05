@@ -53,7 +53,7 @@ def minnesota_params() -> Dict[str, float]:
     return {
         'V_R': 200.0,        # MeV
         'kappa_R': 1.487,    # fm^-2
-        'V_S': -91.4,        # MeV  (singlet, weaker)
+        'V_S': -91.85,       # MeV  (singlet, weaker)
         'kappa_S': 0.465,    # fm^-2
         'V_T': -178.0,       # MeV  (triplet, stronger — binds the deuteron)
         'kappa_T': 0.639,    # fm^-2

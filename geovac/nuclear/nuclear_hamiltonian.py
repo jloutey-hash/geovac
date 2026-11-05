@@ -293,19 +293,22 @@ def _number_op_pauli(q: int, n_qubits: int) -> Dict[str, float]:
     return {I_str: 0.5, Z_str: -0.5}
 
 
-def _one_body_pauli(p: int, q: int, n_qubits: int) -> Dict[str, float]:
+def _one_body_pauli(p: int, q: int, n_qubits: int) -> Dict[str, complex]:
     """
     JW encoding of a^dag_p a_q on a single-species register.
 
     For p == q: number operator (I - Z)/2.
-    For p != q: (XX + YY)/4 * Z-string (real part only; imaginary parts
-    cancel in Hermitian Hamiltonian when summing V_{ijkl} + V_{klij}).
+    For p != q (Z-string on the qubits strictly between p and q):
+        p < q:  (XX + YY)/4 + i (XY - YX)/4
+        p > q:  (XX + YY)/4 - i (XY - YX)/4
+    The coefficients are complex; the imaginary parts cancel only in the
+    final Hermitian sum, so products must be formed before discarding them.
     """
     if p == q:
         return _number_op_pauli(p, n_qubits)
 
     mn, mx = min(p, q), max(p, q)
-    result: Dict[str, float] = {}
+    result: Dict[str, complex] = {}
 
     for pauli_pair, coeff in [('XX', 0.25), ('YY', 0.25)]:
         s = ['I'] * n_qubits
@@ -316,10 +319,9 @@ def _one_body_pauli(p: int, q: int, n_qubits: int) -> Dict[str, float]:
         key = ''.join(s)
         result[key] = result.get(key, 0.0) + coeff
 
-    # For p < q: add imaginary part XY - YX
-    # For p > q: subtract (conjugate)
+    # For p < q: + i (XY - YX)/4; for p > q: the conjugate
     sign = 1.0 if p < q else -1.0
-    for pauli_pair, coeff in [('XY', sign * 0.25), ('YX', -sign * 0.25)]:
+    for pauli_pair, coeff in [('XY', sign * 0.25j), ('YX', -sign * 0.25j)]:
         s = ['I'] * n_qubits
         s[mn] = pauli_pair[0]
         s[mx] = pauli_pair[1]
@@ -332,11 +334,11 @@ def _one_body_pauli(p: int, q: int, n_qubits: int) -> Dict[str, float]:
 
 
 def _tensor_product_pauli(
-    pauli_p: Dict[str, float],
-    pauli_n: Dict[str, float],
-) -> Dict[str, float]:
+    pauli_p: Dict[str, complex],
+    pauli_n: Dict[str, complex],
+) -> Dict[str, complex]:
     """Tensor product of Pauli dicts from proton and neutron registers."""
-    result: Dict[str, float] = {}
+    result: Dict[str, complex] = {}
     for sp, cp in pauli_p.items():
         for sn, cn in pauli_n.items():
             key = sp + sn
@@ -347,13 +349,72 @@ def _tensor_product_pauli(
 
 
 def _add_pauli(
-    target: Dict[str, float],
-    source: Dict[str, float],
+    target: Dict[str, complex],
+    source: Dict[str, complex],
     scale: float = 1.0,
 ) -> None:
     """Add scaled Pauli terms from source to target dict."""
     for key, val in source.items():
         target[key] = target.get(key, 0.0) + scale * val
+
+
+def _finalize_hermitian_pauli(
+    H: Dict[str, complex],
+    tol: float = 1e-12,
+) -> Dict[str, float]:
+    """
+    Return the real coefficients of a Hermitian Pauli sum.
+
+    Every Pauli string is Hermitian, so a Hermitian operator has real
+    coefficients; any surviving imaginary part above ``tol`` (relative to
+    the largest coefficient) signals a non-Hermitian assembly and raises.
+    Terms with |c| <= tol are dropped.
+    """
+    if not H:
+        return {}
+    scale = max(1.0, max(abs(v) for v in H.values()))
+    max_imag = max(abs(complex(v).imag) for v in H.values())
+    if max_imag > tol * scale:
+        raise ValueError(
+            f"Pauli sum is not Hermitian: max imaginary coefficient "
+            f"{max_imag:.3e}")
+    return {k: float(complex(v).real) for k, v in H.items()
+            if abs(complex(v).real) > tol}
+
+
+def pauli_sector_matrix(
+    H_pauli: Dict[str, float],
+    basis_bits: List[Tuple[int, ...]],
+) -> np.ndarray:
+    """
+    Matrix of a Pauli sum on the span of occupation-number basis states.
+
+    ``basis_bits`` lists occupation tuples (one 0/1 entry per qubit, qubit 0
+    first).  Used to check the encoded Hamiltonian against the FCI matrix
+    in a fixed particle-number sector.
+    """
+    index = {tuple(b): r for r, b in enumerate(basis_bits)}
+    dim = len(basis_bits)
+    M = np.zeros((dim, dim), dtype=complex)
+    for pstr, coeff in H_pauli.items():
+        for col, occ in enumerate(basis_bits):
+            new = list(occ)
+            phase: complex = 1.0
+            for q, c in enumerate(pstr):
+                if c == 'I':
+                    continue
+                bit = occ[q]
+                if c == 'Z':
+                    phase *= -1.0 if bit else 1.0
+                elif c == 'X':
+                    new[q] = 1 - bit
+                else:  # 'Y': Y|0> = i|1>, Y|1> = -i|0>
+                    phase *= -1j if bit else 1j
+                    new[q] = 1 - bit
+            row = index.get(tuple(new))
+            if row is not None:
+                M[row, col] += coeff * phase
+    return M
 
 
 def _embed_single_species(
@@ -408,7 +469,7 @@ def build_deuteron_hamiltonian(
     tbme = compute_tbme(states_p, states_n, spec)
 
     # Build Pauli Hamiltonian using tensor-product JW
-    H_pauli: Dict[str, float] = {}
+    H_pauli: Dict[str, complex] = {}
 
     # One-body: proton
     for i in range(n_p):
@@ -434,8 +495,8 @@ def build_deuteron_hamiltonian(
         pn_pauli = _tensor_product_pauli(pauli_p, pauli_n)
         _add_pauli(H_pauli, pn_pauli, v)
 
-    # Clean up small terms
-    H_pauli = {k: v for k, v in H_pauli.items() if abs(v) > 1e-12}
+    # Hermitian sum: imaginary parts cancel; drop numerically-zero terms
+    H_pauli = _finalize_hermitian_pauli(H_pauli)
 
     # Build full matrix for diagonalization
     H_matrix = _build_fci_matrix(states_p, states_n, h1_p, h1_n, tbme)
@@ -1257,8 +1318,8 @@ def build_he4_hamiltonian(
     H_matrix = _build_he4_fci_matrix(
         states_p, states_n, h1_p, h1_n, tbme_pp, tbme_nn, tbme_pn)
 
-    # Build Pauli Hamiltonian
-    H_pauli: Dict[str, float] = {}
+    # Build Pauli Hamiltonian (complex accumulation; real after the sum)
+    H_pauli: Dict[str, complex] = {}
 
     # One-body: proton
     for i in range(n_p):
@@ -1281,15 +1342,8 @@ def build_he4_hamiltonian(
         pauli_2b = _two_body_pauli_same_species(i, j, k, l, n_p)
         # Embed in full register (proton part only)
         for pstr, coeff in pauli_2b.items():
-            full_coeff = 0.25 * v * coeff
-            if abs(full_coeff) < 1e-15:
-                continue
-            # Only keep real part (imaginary parts cancel for Hermitian H)
-            if abs(full_coeff.imag if isinstance(full_coeff, complex) else 0) > abs(full_coeff.real if isinstance(full_coeff, complex) else full_coeff) * 0.01:
-                continue
-            real_coeff = full_coeff.real if isinstance(full_coeff, complex) else full_coeff
             full_str = pstr + 'I' * n_n
-            H_pauli[full_str] = H_pauli.get(full_str, 0.0) + real_coeff
+            H_pauli[full_str] = H_pauli.get(full_str, 0.0) + 0.25 * v * coeff
 
     # Two-body: nn (antisymmetrized), factor of 1/4
     for (i, j, k, l), v in tbme_nn.items():
@@ -1297,14 +1351,8 @@ def build_he4_hamiltonian(
             continue
         pauli_2b = _two_body_pauli_same_species(i, j, k, l, n_n)
         for pstr, coeff in pauli_2b.items():
-            full_coeff = 0.25 * v * coeff
-            if abs(full_coeff) < 1e-15:
-                continue
-            if abs(full_coeff.imag if isinstance(full_coeff, complex) else 0) > abs(full_coeff.real if isinstance(full_coeff, complex) else full_coeff) * 0.01:
-                continue
-            real_coeff = full_coeff.real if isinstance(full_coeff, complex) else full_coeff
             full_str = 'I' * n_p + pstr
-            H_pauli[full_str] = H_pauli.get(full_str, 0.0) + real_coeff
+            H_pauli[full_str] = H_pauli.get(full_str, 0.0) + 0.25 * v * coeff
 
     # Two-body: pn (direct, cross-species tensor product)
     for (i, j, k, l), v in tbme_pn.items():
@@ -1315,8 +1363,8 @@ def build_he4_hamiltonian(
         pn_pauli = _tensor_product_pauli(pauli_p, pauli_n)
         _add_pauli(H_pauli, pn_pauli, v)
 
-    # Clean up small terms and imaginary residuals
-    H_pauli = {k: v for k, v in H_pauli.items() if abs(v) > 1e-12}
+    # Hermitian sum: imaginary parts cancel; drop numerically-zero terms
+    H_pauli = _finalize_hermitian_pauli(H_pauli)
 
     sds_p = _enumerate_slater_dets(n_p, 2)
     sds_n = _enumerate_slater_dets(n_n, 2)

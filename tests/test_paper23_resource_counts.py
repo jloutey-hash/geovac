@@ -7,20 +7,50 @@ the live code (deuteron 227->342 MeV; He-4 557/552->467/462 MeV) without detecti
 
 These pin the reproducible code values at the paper's hw=10 MeV, N_shells=2.
 
-Updated 2026-08-22 (v5.0.0 retraction): the term counts moved when the undocumented
-N_tot truncation was removed from geovac/nuclear/moshinsky.py (see the Paper 24
-retraction). The current deuteron structure is 688 non-I (80 Z-only + 608 XY) and
-He-4 is 828; the 1-norms are 383.7 / 511.8 / 507.2 MeV. (The pre-retraction values
-592 / 512 / 712 and the earlier drifted 1-norms 227 / 557 / 552 -> 342 / 467 / 462
-MeV are retained here only as the history that motivated pinning these.)
+The deuteron structure is 688 non-I (80 Z-only + 608 XY) and He-4 is 904; the
+1-norms are 383.9 / 641.4 / 632.2 MeV (Minnesota V_S = -91.85 MeV).  Counts alone
+cannot catch a wrong encoding (a real-coefficient XY/YX encoding had the same 688
+terms and the wrong spectrum), so every Pauli Hamiltonian here is also checked
+against its FCI matrix in the physical particle-number sector.
 """
 from __future__ import annotations
+from itertools import combinations
+
+import numpy as np
 import pytest
 
 from geovac.nuclear.nuclear_hamiltonian import (
     build_deuteron_hamiltonian,
     build_he4_hamiltonian,
+    pauli_sector_matrix,
 )
+
+
+def _sector_basis(n_p, n_n, N_p, N_n):
+    """Occupation tuples with N_p protons and N_n neutrons (proton qubits first)."""
+    out = []
+    for pp in combinations(range(n_p), N_p):
+        for nn in combinations(range(n_n), N_n):
+            occ = [0] * (n_p + n_n)
+            for a in pp:
+                occ[a] = 1
+            for b in nn:
+                occ[n_p + b] = 1
+            out.append(tuple(occ))
+    return out
+
+
+def _spectrum_error(data, N_p, N_n):
+    """Max |eigenvalue difference| between the Pauli sum (sector) and the FCI matrix."""
+    M = pauli_sector_matrix(
+        data['H_pauli'], _sector_basis(data['Q_p'], data['Q_n'], N_p, N_n))
+    assert np.abs(M - M.conj().T).max() < 1e-10, "sector matrix not Hermitian"
+    H = data['H_matrix']
+    H = H.toarray() if hasattr(H, 'toarray') else np.asarray(H)
+    ev_pauli = np.linalg.eigvalsh(M)
+    ev_fci = np.linalg.eigvalsh(H)
+    assert ev_pauli.shape == ev_fci.shape
+    return float(np.abs(ev_pauli - ev_fci).max())
 
 
 def _split(H_pauli):
@@ -42,37 +72,44 @@ def _split(H_pauli):
 
 
 def test_deuteron_resource_counts():
-    """Deuteron at hw=10: 688 non-I Pauli (80 Z-only + 608 XY), 1-norm ~384 MeV.
-
-    Updated 2026-08-22: the previously published 592/512/342.2 were
-    produced by an undocumented N_tot truncation in
-    geovac/nuclear/moshinsky.py that zeroed every two-body element
-    between states of different total HO quantum number. See the
-    Paper 24 retraction. Qubit count is unchanged.
-    """
+    """Deuteron at hw=10: 688 non-I Pauli (80 Z-only + 608 XY), 1-norm ~383.9 MeV."""
     H = build_deuteron_hamiltonian(N_shells=2, hw=10.0)['H_pauli']
     n_nonid, z_only, xy, l1 = _split(H)
     assert n_nonid == 688, f"deuteron non-I Pauli: expected 688, got {n_nonid}"
     assert z_only == 80, f"deuteron Z-only: expected 80, got {z_only}"
     assert xy == 608, f"deuteron XY: expected 608, got {xy}"
-    # Paper 23 Table I (corrected 2026-08-22): 1-norm (non-I) ~= 383.7 MeV
-    assert abs(l1 - 383.7) < 1.0, f"deuteron 1-norm: expected ~383.7 MeV, got {l1:.2f}"
+    # Paper 23 Table I: 1-norm (non-I) ~= 383.9 MeV
+    assert abs(l1 - 383.87) < 0.05, f"deuteron 1-norm: expected ~383.87 MeV, got {l1:.2f}"
 
 
 def test_he4_resource_counts_no_coulomb():
-    """He-4 at hw=10, no Coulomb: 828 non-I Pauli, 1-norm ~512 MeV."""
+    """He-4 at hw=10, no Coulomb: 904 non-I Pauli, 1-norm ~641.4 MeV."""
     H = build_he4_hamiltonian(N_shells=2, hw=10.0, include_coulomb=False)['H_pauli']
     n_nonid, _, _, l1 = _split(H)
-    assert n_nonid == 828, f"He-4 non-I Pauli: expected 828, got {n_nonid}"
-    assert abs(l1 - 511.8) < 1.0, f"He-4 (no Coul) 1-norm: expected ~511.8 MeV, got {l1:.2f}"
+    assert n_nonid == 904, f"He-4 non-I Pauli: expected 904, got {n_nonid}"
+    assert abs(l1 - 641.39) < 0.05, f"He-4 (no Coul) 1-norm: expected ~641.39 MeV, got {l1:.2f}"
 
 
 def test_he4_resource_counts_with_coulomb():
-    """He-4 at hw=10, with Coulomb: 828 non-I Pauli, 1-norm ~507 MeV."""
+    """He-4 at hw=10, with Coulomb: 904 non-I Pauli, 1-norm ~632.2 MeV."""
     H = build_he4_hamiltonian(N_shells=2, hw=10.0, include_coulomb=True)['H_pauli']
     n_nonid, _, _, l1 = _split(H)
-    assert n_nonid == 828, f"He-4 non-I Pauli: expected 828, got {n_nonid}"
-    assert abs(l1 - 507.2) < 1.0, f"He-4 (Coul) 1-norm: expected ~507.2 MeV, got {l1:.2f}"
+    assert n_nonid == 904, f"He-4 non-I Pauli: expected 904, got {n_nonid}"
+    assert abs(l1 - 632.19) < 0.05, f"He-4 (Coul) 1-norm: expected ~632.19 MeV, got {l1:.2f}"
+
+
+def test_deuteron_pauli_spectrum_matches_fci():
+    """The encoded deuteron reproduces the 64-dim (1p, 1n) FCI spectrum."""
+    err = _spectrum_error(build_deuteron_hamiltonian(N_shells=2, hw=10.0), 1, 1)
+    assert err < 1e-9, f"deuteron Pauli vs FCI spectrum: max error {err:.3e} MeV"
+
+
+@pytest.mark.parametrize("coulomb", [False, True])
+def test_he4_pauli_spectrum_matches_fci(coulomb):
+    """The encoded He-4 reproduces the 784-dim (2p, 2n) FCI spectrum."""
+    data = build_he4_hamiltonian(N_shells=2, hw=10.0, include_coulomb=coulomb)
+    err = _spectrum_error(data, 2, 2)
+    assert err < 1e-9, f"He-4 Pauli vs FCI spectrum (Coulomb={coulomb}): max error {err:.3e} MeV"
 
 
 def test_he4_coulomb_reduces_1norm():

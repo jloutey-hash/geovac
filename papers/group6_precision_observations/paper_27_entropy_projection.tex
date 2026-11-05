@@ -653,16 +653,14 @@ $n \neq n'$ ones --- the radial off-diagonal of $V$ in the relative
 coordinate --- and they are nonzero.  For the Minnesota singlet at
 $b=1$,
 $\langle n_{\mathrm{rel}}{=}0, l{=}0 \lvert V \rvert
- n_{\mathrm{rel}}{=}1, l{=}0 \rangle = +17.3$~MeV against a diagonal
-$\langle 0,0 \lvert V \rvert 0,0 \rangle = -0.55$~MeV (both at the
-$b{=}1$ relative-frame convention of the backing test; corrected
-2026-08-29 --- an earlier version printed $-0.81$, which reproduces
-under no convention of the production Minnesota code).  A magnitude
-caveat, same date:\ the $b{=}1$ contrast is convention-sensitive (the
+ n_{\mathrm{rel}}{=}1, l{=}0 \rangle = +17.2$~MeV against a diagonal
+$\langle 0,0 \lvert V \rvert 0,0 \rangle = -0.81$~MeV (both at the
+$b{=}1$ relative-frame convention of the backing test).  A magnitude
+caveat:\ the $b{=}1$ contrast is convention-sensitive (the
 diagonal sits near a zero crossing); at the production convention
 ($b = 2.0364$, $\hbar\omega = 10$~MeV) the coupling is $0.48\times$ the
 diagonal.  The load-bearing evidence is the convention-independent
-commutator ($0.74$) and the nonzero corrected entropies, not the ratio.
+commutator ($0.75$) and the nonzero corrected entropies, not the ratio.
 
 The paper's own contrast should have caught this.  The Interpretation
 paragraph argued that the Coulomb kernel is different because it ``does
@@ -700,9 +698,9 @@ $N_{\max}$ & \multicolumn{1}{c}{$E_{\mathrm{full}}$ (MeV)}
             & \multicolumn{1}{c}{$\lVert[H_{HO},V]\rVert_F/\lVert H_{HO}\rVert_F$}
             & \multicolumn{1}{c}{$n_0$} \\
 \hline
-2 &  21.6538 & 30.000 & 0.0671 & 0.74 & 1.9800 \\
-3 &  21.6279 & 30.000 & 0.0716 & 0.63 & 1.9791 \\
-4 &  21.5442 & 30.000 & 0.0833 & 0.67 & 1.9764 \\
+2 &  21.5437 & 30.000 & 0.0692 & 0.75 & 1.9793 \\
+3 &  21.5182 & 30.000 & 0.0736 & 0.64 & 1.9784 \\
+4 &  21.4363 & 30.000 & 0.0850 & 0.67 & 1.9758 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1243,7 +1241,7 @@ test in the codebase.
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak
     test\_paper27\_ep2c\_dimensionless\_power\_law},
     data in \texttt{debug/data/ep2c\_entropy\_vs\_vee\_offdiag.json}.
-  \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0671/0.0716/0.0833$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}, data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
+  \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0692/0.0736/0.0850$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}, data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
   \item Section~\ref{sec:cusp} entropy--cusp co-location
     ($58.5\%$ of $S$ on the hottest $V_{ee}$ edge at $n_{\max}=3$,
     $54.1\%$ at $n_{\max}=4$; zero from a comparably large
@@ -1315,8 +1313,8 @@ GeoVac Technical Report (2025).
 
 \bibitem{GeoVac_Paper14}
 J.~Loutey,
-``Structurally Sparse Qubit Hamiltonians from Spectral Graph
-Theory,''
+``Structurally Sparse Qubit Hamiltonians from Natural-Geometry Hydrogenic
+Bases,''
 GeoVac Technical Report (2025).
 
 \bibitem{GeoVac_Paper18}

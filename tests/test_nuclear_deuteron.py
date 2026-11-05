@@ -42,7 +42,7 @@ class TestMinnesotaPotential:
         p = minnesota_params()
         assert p['V_R'] == 200.0, "V_R should be 200.0 MeV"
         assert p['kappa_R'] == 1.487, "kappa_R should be 1.487 fm^-2"
-        assert p['V_S'] == -91.4, "V_S should be -91.4 MeV (singlet, weaker)"
+        assert p['V_S'] == -91.85, "V_S should be -91.85 MeV (singlet, weaker)"
         assert p['kappa_S'] == 0.465, "kappa_S should be 0.465 fm^-2"
         assert p['V_T'] == -178.0, "V_T should be -178.0 MeV (triplet, stronger)"
         assert p['kappa_T'] == 0.639, "kappa_T should be 0.639 fm^-2"
@@ -65,9 +65,9 @@ class TestMinnesotaPotential:
         V_singlet = minnesota_potential(r, S=0)
         V_triplet = minnesota_potential(r, S=1)
         # The repulsive core V_R=200 MeV dominates at r->0
-        # V_S = -178, V_T = -91.4, but exp(-kappa*r^2) -> 1 for all terms
-        # V(0, S=0) = 200 + (-178) = 22 MeV > 0
-        # V(0, S=1) = 200 + (-91.4) = 108.6 MeV > 0
+        # V_T = -178, V_S = -91.85, but exp(-kappa*r^2) -> 1 for all terms
+        # V(0, S=0) = 200 + (-91.85) = 108.15 MeV > 0
+        # V(0, S=1) = 200 + (-178) = 22 MeV > 0
         assert V_singlet[0] > 0, f"Singlet at r~0 should be repulsive, got {V_singlet[0]:.2f}"
         assert V_triplet[0] > 0, f"Triplet at r~0 should be repulsive, got {V_triplet[0]:.2f}"
 
@@ -267,56 +267,34 @@ class TestDeuteronHamiltonian:
 
     @pytest.mark.slow
     def test_export_round_trip(self):
-        """Export to OpenFermion format; sanity-check the spectrum (finite).
+        """Export to OpenFermion; its (1p, 1n) sector spectrum equals the FCI spectrum.
 
-        The FCI-eigenvalue match is INFORMATIONAL only: the Pauli export
-        carries the disclosed off-diagonal sign limitation (paper
-        subsec:known_limitation), so an exact match is not asserted; the
-        matrix path is the source of truth (test_nuclear_electronic).
+        Independent route: OpenFermion builds the 2^Q sparse operator from the
+        exported Pauli strings (its qubit 0 is the most significant bit), the
+        64 one-proton/one-neutron basis states are selected, and the sector
+        spectrum is compared with the FCI matrix eigenvalues.
         """
         try:
-            from openfermion import QubitOperator
+            from openfermion import QubitOperator, get_sparse_operator
         except ImportError:
             pytest.skip("OpenFermion not installed")
 
         data = build_deuteron_hamiltonian(N_shells=2, hw=10.0)
-        H_pauli = data['H_pauli']
-        Q = data['Q']
+        Q, n_p, n_n = data['Q'], data['Q_p'], data['Q_n']
 
-        # Build OpenFermion QubitOperator
         qop = QubitOperator()
-        for pstr, coeff in H_pauli.items():
-            if abs(coeff) < 1e-12:
-                continue
-            # Convert string to OpenFermion format
-            of_terms = []
-            for q, c in enumerate(pstr):
-                if c != 'I':
-                    of_terms.append((q, c))
-            qop += QubitOperator(tuple(of_terms), coeff)
+        for pstr, coeff in data['H_pauli'].items():
+            of_terms = tuple((q, c) for q, c in enumerate(pstr) if c != 'I')
+            qop += QubitOperator(of_terms, coeff)
+        H_sparse = get_sparse_operator(qop, n_qubits=Q).tocsr()
 
-        # Compare to matrix eigenvalue
-        from openfermion import get_sparse_operator
-        H_sparse = get_sparse_operator(qop, n_qubits=Q)
-        H_dense = H_sparse.toarray()
+        idx = []
+        for i in range(n_p):
+            for j in range(n_n):
+                idx.append((1 << (Q - 1 - i)) | (1 << (Q - 1 - (n_p + j))))
+        H_sector = H_sparse[idx][:, idx].toarray()
 
-        # Find ground state in the 1p+1n sector
-        evals_of = np.sort(np.linalg.eigvalsh(H_dense.real))
-
-        # The FCI matrix eigenvalue
-        result = diagonalize_deuteron(N_shells=2, hw=10.0)
-        E_gs_fci = result['E_gs']
-
-        # The OpenFermion Hamiltonian acts on the full 2^Q Hilbert space,
-        # so its ground state may be in a different particle number sector.
-        # We should find E_gs_fci among the OF eigenvalues.
-        # Check that the FCI ground state energy appears in the OF spectrum
-        found = False
-        for e in evals_of:
-            if abs(e - E_gs_fci) < 1.0:  # within 1 MeV
-                found = True
-                break
-        # `found` is informational (disclosed sign limitation, see docstring);
-        # deliberately NOT asserted. Sanity: spectrum finite.
-        _ = found
-        assert np.isfinite(evals_of[0]), "OF eigenvalues should be finite"
+        evals_of = np.linalg.eigvalsh(H_sector)
+        evals_fci = np.linalg.eigvalsh(np.asarray(data['H_matrix']))
+        err = float(np.abs(evals_of - evals_fci).max())
+        assert err < 1e-9, f"OpenFermion sector spectrum vs FCI: max error {err:.3e} MeV"

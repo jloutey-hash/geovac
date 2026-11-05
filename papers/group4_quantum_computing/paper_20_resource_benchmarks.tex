@@ -44,28 +44,28 @@ that are structurally sparser than conventional Gaussian-basis alternatives
 across a range that depends strongly on the comparison:\ from
 $0.28\times$ (H$_2$O against minimal-basis STO-3G, i.e.\ \emph{denser})
 through $55$--$76\times$ against cc-pVDZ, to $317\times$ at the most
-favourable equal-qubit point.  (Corrected 2026-08-30:\ the retired
-pair-diagonal rule supported a blanket ``one to three orders of
-magnitude''; it does not survive at either end.)
+favourable equal-qubit point.  None of these is a matched-accuracy
+comparison.
 The Hamiltonians are constructed from
 a spectral graph theory framework (GeoVac) that exploits natural coordinate
 separations in molecular electronic structure, producing block-diagonal
 electron repulsion integrals and Gaunt-enforced selection rules that persist
 through Jordan-Wigner encoding. For the composed architecture (PK-partitioned),
-the composed LiH Hamiltonian is near parity with minimal-basis STO-3G on
-Pauli count (\gvq{lih_composed_pauli}{838} vs.\ STO-3G's \gvq{lih_sto3g_raw}{907} raw; $3.0\times$ more than the 276
-reduced) while using more qubits; the decisive resource advantages are the
+the composed LiH Hamiltonian has $1.33\times$ \emph{more} Pauli terms than
+raw minimal-basis STO-3G (\gvq{lih_composed_pauli}{838} vs.\ \gvq{lih_sto3g_raw}{631}; $3.0\times$ more than the 276
+reduced) and about twice its 1-norm, with $2.8\times$ fewer
+qubit-wise-commuting measurement groups, while using more qubits; the decisive resource advantages are the
 exact linearity of the Pauli count in~$Q$ across molecules at fixed basis
-and a 76$\times$ reduction versus cc-pVDZ.  (All counts corrected
-2026-08-29 to the exact global-$M_L$ ERI rule; see
-Sec.~\ref{sec:eri_rule}.)
-The balanced coupled architecture (PK-free) binds LiH with an FCI minimum
+and a 76$\times$ reduction versus cc-pVDZ (all counts under the exact
+global-$M_L$ ERI rule, Sec.~\ref{sec:eri_rule}).
+The balanced coupled architecture (PK-free) gives a LiH FCI
+potential-energy-surface (PES) minimum
 at a computed $R_{\mathrm{eq}} = 3.227$~bohr (7.0\% above the experimental
 3.015~bohr) at $n_{\max}=2$ (\gvq{lih_balanced_pauli}{2{,}726} Pauli terms, 30 qubits); a single-point
 evaluation at the experimental geometry reaches 0.20\% energy error at
 $n_{\max}=3$ (84 qubits) when solved exactly.  Chemistry-accuracy scope at $n_{\max}=2$ is
-\emph{row-conditional}: first-row hydrides (LiH, BeH$_2$, H$_2$O, $\ldots$)
-bind with documented potential-energy-surface (PES) topology, while
+\emph{row-conditional}: LiH, the one first-row hydride with a computed
+PES, has an interior minimum, while
 second-row hydrides (NaH and below) exhibit monotone overattraction under
 every tested configuration --- frozen-core balanced, multi-zeta valence,
 screened cross-center, explicit-core Hartree--Fock --- with no interior PES
@@ -135,10 +135,12 @@ The result is a Pauli count exactly linear in~$Q$ across molecules at
 fixed basis (within-molecule basis exponent $3.17$), with
 $51$--$317\times$ fewer terms than Gaussian raw
 Jordan-Wigner baselines at comparable qubit counts~\cite{GeoVac_Paper14}
-(exact-rule numbers, 2026-08-29).
-This structural sparsity is compatible with all downstream optimizations
-(tapering, grouping, tensor factorization) and is basis-intrinsic rather
-than compression-dependent.
+(matched qubits, not matched accuracy).
+This structural sparsity is compatible with tapering and tensor
+factorization and is basis-intrinsic rather than compression-dependent;
+it does not carry over into a measurement-grouping scaling advantage
+(the QWC group-count exponent sits inside, not below, the Gaussian
+band~\cite{GeoVac_Paper14}).
 
 The relationship to numerical factorization techniques can be sharpened.
 Double factorization~\cite{vonBurg2021} applied to a GeoVac ERI tensor
@@ -249,13 +251,13 @@ for $n_{\max}=2$ ($Q=30$ qubits, 15 spatial orbitals, FCI dimension
 \begin{tabular}{ccccc}
 $R$ (bohr) & $E_{\text{FCI}}$ (Ha) & $\Delta E$ (mHa) & Error (\%) \\
 \colrule
-2.0  & $-7.8246$ & 181 & 2.3 \\
-2.5  & $-7.8940$ & 164 & 2.1 \\
-3.0  & $-7.9290$ & 142 & 1.8 \\
-3.015 & $-7.9294$ & 141 & 1.8 \\
-3.5  & $-7.9273$ & 137 & 1.7 \\
-4.0  & $-7.8952$ & 157 & 2.0 \\
-5.0  & $-7.7716$ & 254 & 3.3 \\
+2.0  & $-7.8260$ & 182 & 2.3 \\
+2.5  & $-7.8935$ & 164 & 2.0 \\
+3.0  & $-7.9277$ & 143 & 1.8 \\
+3.015 & $-7.9282$ & 142 & 1.8 \\
+3.5  & $-7.9258$ & 138 & 1.7 \\
+4.0  & $-7.8935$ & 159 & 2.0 \\
+5.0  & $-7.7697$ & 256 & 3.2 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -275,35 +277,39 @@ Table~\ref{tab:convergence} summarizes the basis convergence.
 \begin{tabular}{cccccc}
 $n_{\max}$ & $Q$ & $E_{\text{FCI}}$ (Ha) & Error (\%) & $R_{\text{eq}}$ (bohr) & $R_{\text{eq}}$ err \\
 \colrule
-2 & 30  & $-7.929$ & 1.8 & 3.227 & 7.0\% \\
+2 & 30  & $-7.928$ & 1.8 & 3.227 & 7.0\% \\
 3 & 84  & $-8.055$ & 0.20 & 3.28 & 8.8\% \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The 9$\times$ improvement in energy error from $n_{\max}=2$ to
-$n_{\max}=3$ demonstrates rapid basis convergence. The equilibrium
-geometry drifts by $+0.053$~bohr per unit increase in $n_{\max}$,
-approximately 3$\times$ smaller than the drift observed with the
-PK pseudopotential~\cite{GeoVac_Paper19}. The energy error at
-$n_{\max}=3$ (0.20\%) is competitive with Gaussian double-zeta
-bases for single-point calculations.
+The energy error decreases $9\times$ from $n_{\max}=2$ to
+$n_{\max}=3$; at $n_{\max}=4$ the model crosses past the exact energy
+(over-binding), so the fixed-geometry error is not monotonically
+improvable~\cite{GeoVac_Paper19}.  The equilibrium geometry drifts
+outward, by $+0.053$~bohr from $n_{\max}=2$ to~3 and $+0.023$~bohr
+from 3 to~4; the PK pseudopotential's drift is in a different
+truncation parameter ($l_{\max}$) and is not directly
+comparable~\cite{GeoVac_Paper19}.
 
-\subsection{Multi-geometry FCI: solver vs.\ Hamiltonian accuracy}
+\subsection{Multi-geometry FCI: composed vs.\ balanced}
 
-The 5.3--19.4\% equilibrium geometry errors reported in the classical
-solver literature for GeoVac~\cite{GeoVac_Paper17} arise from the
-classical solver (adiabatic approximation, PK overcounting), not from
-the Hamiltonian operator itself. When the balanced coupled Hamiltonian
-is solved exactly via FCI:
+The 5.3--19.4\% equilibrium geometry errors of the composed
+architecture~\cite{GeoVac_Paper17} are intrinsic to the composed
+approximation (the core/valence separation with $Z_{\mathrm{eff}}$
+injection and PK exclusion), and the composed LiH qubit Hamiltonian
+does not bind under FCI either (Table~\ref{tab:scope}). When the
+balanced coupled Hamiltonian is solved exactly via FCI:
 
 \begin{itemize}
 \item The energy error at equilibrium drops from 15\% (composed + PK)
   to 1.8\% ($n_{\max}=2$) or 0.20\% ($n_{\max}=3$).
-\item The balanced coupled configuration is the \emph{only} one that
-  produces a bound LiH molecule in 4-electron FCI---decoupled (no
-  cross terms), composed with PK, and coupled without cross-center
-  V$_{ne}$ all give unbound results~\cite{GeoVac_Paper19}.
+\item The balanced coupled configuration is the \emph{only} one whose
+  4-electron FCI PES has a minimum.  This is by construction: in the
+  decoupled, composed-with-PK and coupled-without-cross-center-V$_{ne}$
+  schemes the one-body and electron-repulsion integrals do not change
+  with $R$, so their energies are a constant plus $3/R$ and cannot
+  bind~\cite{GeoVac_Paper19}.
 \item The variational bound is respected at all geometries tested
   ($E_{\text{FCI}} > E_{\text{exact}}$ everywhere).
 \end{itemize}
@@ -313,13 +319,8 @@ is solved exactly via FCI:
 For BeH$_2$ ($Q=50$), the balanced coupled 4-electron FCI gives
 $E=-14.146$~Ha (10.7\% error), compared to $-11.497$~Ha (27.4\%)
 for composed with PK.  The balanced 1-norm ($323.4$~Ha) is 14\% lower
-than composed with PK in-Hamiltonian ($374.9$~Ha; re-measured 2026-09-01
-at BeH$_2$'s own $R = 2.502$~bohr --- the 2026-08-30 pass had evaluated
-it at LiH's $3.015$, giving $328.1$ and ``12\%''
-under the exact global-$M_L$ rule --- the retired figures were $306.4$ /
-$373.4$ / ``18\%'', and an earlier $354.9$ came from the deprecated legacy
-BeH$_2$ builder path; the live values are pinned by
-\texttt{tests/test\_paper20\_library.py}),
+than composed with PK in-Hamiltonian ($374.9$~Ha; both at BeH$_2$'s own
+$R = 2.502$~bohr under the exact global-$M_L$ rule),
 demonstrating that the PK-free architecture is cheaper in the QPE
 regime, where PK must be encoded; with PK partitioned classically (the
 VQE default), the composed electronic-only 1-norm ($68.8$~Ha,
@@ -344,11 +345,10 @@ energy accuracy at $n_{\max}=3$.
 
 The Hamiltonian is \emph{not} designed for computing dissociation curves
 or reaction energies between different molecular species.  The
-cross-center $V_{ne}$ multipole expansion includes a monopole ($1/R$)
-component that decays slowly, causing the electronic energy to remain
-unconverged even at $R = 100$~bohr.  The practical dissociation energy
-computed from the PES well depth ($D_e = 0.161$~Ha at $n_{\max}=2$)
-overestimates the experimental value (0.092~Ha) by 75\%.  Users
+balanced electron-repulsion integrals are built $R$-independent, so
+past the minimum the curve keeps rising (by more than 1~Ha at
+$R = 20$~bohr) instead of approaching the separated-atom energy, and no
+dissociation energy can be read off~\cite{GeoVac_Paper19}.  Users
 requiring dissociation energies should use Gaussian-basis methods for
 the dissociation limit and GeoVac Hamiltonians for single-point
 calculations at experimentally known or DFT-optimized geometries.
@@ -356,10 +356,10 @@ calculations at experimentally known or DFT-optimized geometries.
 \subsection{Chemistry-accuracy scope boundary}
 \label{subsec:scope_boundary}
 
-The framework's PES-topology accuracy is row-conditional.  For first-row
-hydrides (Z = 3--9 + H), the balanced coupled Hamiltonian binds at the
-correct equilibrium geometry with documented overbinding magnitude.  For
-second-row and below (Z $\ge$ 11), it does not.  (For what the
+The framework's PES-topology accuracy is row-conditional.  For LiH, the
+one first-row hydride with a computed PES, the balanced coupled
+Hamiltonian has an interior minimum, 7\% outside the experimental
+equilibrium.  For second-row and below (Z $\ge$ 11), it has none.  (For what the
 library's fixed-exponent radial rules cost against a tuned exponential
 basis at equal size, measured on water outside the library, see
 Paper~62: the hydrogenic $Z/n$ kit is about $0.2$~Ha above cc-pVDZ at
@@ -389,7 +389,7 @@ summarises the verdicts.
     balanced (frozen-core, Path A) & yes ($R_{\mathrm{eq}}=3.227$, 7\% high) & no \\
     balanced + multi-zeta valence & N/A (Z $<$ 11) & no \\
     balanced + screened cross-center & yes (unchanged) & no \\
-    balanced + cross-block h1 & catastrophic (D$_e$ = 1.1 Ha) & N/A \\
+    balanced + cross-block h1 & catastrophic (unphysical 1.1 Ha over-binding) & N/A \\
     explicit-core HF (12 electrons NaH; 4 e LiH cross-check) & yes (binds) & no \\
     \bottomrule
   \end{tabular}
@@ -416,11 +416,10 @@ to set the scope boundary at the second-row hydride threshold:
     \emph{not} the wall; the structural gap survives un-freezing.
 \end{itemize}
 
-\paragraph{Implication for users.}  Users running the framework for
-first-row hydride chemistry can expect bound PES with quantitative
-overbinding (the 0.20\% single-point / $D_e$ overestimated by
-$\sim$75\% vs.\ experiment pattern documented in
-\S\ref{sec:applicability}).  Users running second-row or below should
+\paragraph{Implication for users.}  Users running the framework on LiH
+can expect a PES with an interior minimum and accurate single-point
+energies (0.20\% at $n_{\max}=3$), but no dissociation energy
+(\S\ref{sec:applicability}).  Users running second-row or below should
 treat the qubit Hamiltonian as a \emph{resource-estimation target}
 only, not as a chemistry-accuracy Hamiltonian.  The Pauli counts,
 1-norm bounds, and the Paper~38 GH bound metadata are correct in either
@@ -429,7 +428,8 @@ fidelity;\ the GH bound is a property of the $S^3$ spectral triple, not
 of the molecular Hamiltonian), so
 algorithm research that benchmarks against scaling behaviour transfers
 cleanly across the scope boundary.  Algorithm research that wants
-ground-state energies should stay in the first-row library.
+ground-state energies should stay with first-row systems, where only
+LiH's PES has been characterized.
 
 \paragraph{Structural reason.}  The scope boundary has a structural
 origin in the framework's NCG composition operation.  We verified
@@ -439,9 +439,9 @@ one-body Hamiltonian is bit-exactly (residual $9.7 \times 10^{-18}$) a
 Marcolli--van Suijlekom 2014 gauge network~\cite{marcolli_vs2014} on
 the molecular bond quiver, with atomic Camporesi--Higuchi Dirac data
 at vertices and multipole-V$_{ne}$ bimodules on edges.  The
-scope-boundary structural mechanism --- why first-row binds and
-second-row does not --- is the chemistry-side instance of the
-calibration-data partition documented in Paper~18, \S~IV.6.  A
+scope-boundary structural mechanism --- why LiH has a PES minimum and
+the second-row hydrides do not --- is the W1e wall documented in
+Paper~19~\cite{GeoVac_Paper19}.  A
 forthcoming math.OA paper formalises the NCG correspondence; the
 present paper takes the structural framing as a given and documents
 the empirical scope.
@@ -458,24 +458,24 @@ Gaussian raw Jordan-Wigner baselines.
 \begin{table*}[t]
 \caption{Quantum resource comparison: GeoVac vs.\ Gaussian raw JW.
   GeoVac composed values use PK classical partitioning
-  (electronic-only 1-norm); the GeoVac--Gaussian Pauli/QWC multipliers
-  (e.g.\ $2.7\times$) use the pair-diagonal ERI rule (Sec.~\ref{sec:eri_rule})
-  and re-price toward parity under the exact rule.  \textbf{Qubit-reduction
-  convention:} the LiH STO-3G count (\gvq{lih_sto3g_raw}{907}, $Q=12$) is the \emph{raw} JW
+  (electronic-only 1-norm); all GeoVac counts are under the exact
+  global-$M_L$ ERI rule (Sec.~\ref{sec:eri_rule}), and no row is at
+  matched accuracy.  \textbf{Qubit-reduction
+  convention:} the LiH STO-3G count (\gvq{lih_sto3g_raw}{631}, $Q=12$) is the \emph{raw} JW
   Hamiltonian, matched against the raw (un-tapered) GeoVac composed count
   (838, $Q=30$); the larger-basis LiH counts and all H$_2$O Gaussian counts
   apply the standard 2-qubit reduction (the $Q=20,36,12,46$ sizes are the
   reduced sizes, matching \texttt{GAUSSIAN\_LIH\_PUBLISHED}).  Under a
-  uniform 2-qubit-reduced convention the headline LiH multiplier narrows
-  (qubit-reduced STO-3G LiH is 276 at $Q=10$ vs.\ GeoVac
-  composed 838, i.e.\ $3.0\times$ \emph{more}); the raw-vs-raw and
-  reduced-vs-reduced comparisons bracket
-  the genuine position: near parity raw, unfavorable reduced.  The \emph{2-qubit-reduced} Gaussian Pauli counts
+  uniform 2-qubit-reduced convention qubit-reduced STO-3G LiH is 276 at
+  $Q=10$ vs.\ GeoVac composed 838, i.e.\ $3.0\times$ \emph{more}; raw
+  vs.\ raw GeoVac has $1.33\times$ more, so the minimal-basis Pauli
+  comparison is unfavorable in either convention.  The \emph{2-qubit-reduced} Gaussian Pauli counts
   (LiH 6-31G/cc-pVDZ and all H$_2$O entries) are the published values of
   Trenev et al.~\cite{Trenev2025} (Table~5, Appendix~B; Jordan--Wigner with
   2-qubit reduction; their reduced STO-3G LiH value is 276 at $Q=10$); the
-  raw STO-3G LiH count (\gvq{lih_sto3g_raw}{907}, $Q=12$) used as the matched-raw market-test
-  baseline is the raw-JW value, not a Trenev-reduced count.  The
+  raw STO-3G LiH row (\gvq{lih_sto3g_raw}{631} terms, \gvq{lih_sto3g_lambda}{16.48}~Ha,
+  \gvq{lih_sto3g_qwc}{179} QWC groups, $Q=12$) is our own Jordan--Wigner build from
+  STO-3G integrals at $R=3.015$~bohr, not a Trenev-reduced count.  The
   $Q^{3.9\text{--}4.3}$ Gaussian-scaling exponents are GeoVac's own log-log
   fit of the published reduced counts.
   ``---'' indicates data not available.}
@@ -488,7 +488,7 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
 \multirow{5}{*}{LiH}
  & GeoVac composed & 30 & 838 & 34.0 & 64 & --- \\
  & GeoVac balanced & 30 & \gvq{lih_balanced_pauli}{2{,}726} & 78.2 & 629 & --- \\
- & Gaussian STO-3G & 12 & \gvq{lih_sto3g_raw}{907} & 34.3 & 273 & $1.08\times$ Pauli, $4.3\times$ QWC \\
+ & Gaussian STO-3G & 12 & \gvq{lih_sto3g_raw}{631} & \gvq{lih_sto3g_lambda}{16.5} & \gvq{lih_sto3g_qwc}{179} & $0.75\times$ Pauli, $2.8\times$ QWC \\
  & Gaussian 6-31G  & 20 & 5{,}851 & --- & --- & $7.0\times$ Pauli \\
  & Gaussian cc-pVDZ & 36 & \gvq{lih_ccpvdz_pauli}{63{,}519} & --- & --- & $76\times$ Pauli \\
 \colrule
@@ -503,30 +503,27 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
  & GeoVac balanced & 50 & 8{,}868 & 323.4 & 1{,}220 & --- \\
 \end{tabular}
 \end{ruledtabular}
-\raggedright\footnotesize{$^a$Ratio of Gaussian to GeoVac composed Pauli terms.
+\raggedright\footnotesize{$^a$Ratio of Gaussian to GeoVac composed Pauli terms
+(QWC groups where marked).
 Values $> 1$ favor GeoVac; values $< 1$ favor Gaussian.
-\emph{Convention (declared 2026-08-30):} the GeoVac Pauli counts and
+\emph{Convention:} the GeoVac Pauli counts and
 1-norms in this table \emph{include} the identity term, matching the raw
 JW totals the Gaussian baselines are quoted at --- which is what makes the
-LiH $34.0$ vs.\ $34.3$~Ha comparison like-for-like.  The balanced 1-norms
-were previously printed non-identity in this same column ($75.2$ / $286.9$
-/ $1{,}440$), mixing two conventions in one column; they are now
-identity-included ($78.2$ / $323.4$ / $1{,}612$).  For the
+LiH $34.0$ vs.\ $16.5$~Ha comparison like-for-like.  For the
 simulation-relevant non-identity $\lambda_{\mathrm{ni}}$ see
 Table~\ref{tab:molecules}.}
 \end{table*}
 
-For the small-molecule minimal-basis case, the composed LiH Hamiltonian is
-near parity with Gaussian STO-3G on Pauli count---\gvq{lih_composed_pauli}{838} terms vs.\ STO-3G's
-\gvq{lih_sto3g_raw}{907} (raw JW), $3.0\times$ more than the 276 (qubit-reduced), with a nearly
-identical electronic
-1-norm (34.0 vs.\ 34.3~Ha)---while using more qubits (30 vs.\ 10--12).  The
-favorable $2.7\times$/$13\times$ multipliers hold only against the
-un-reduced raw-\gvq{lih_sto3g_raw}{907} baseline and under the pair-diagonal ERI rule
-(Sec.~\ref{sec:eri_rule}); they are not the framework's load-bearing
-advantage.  That advantage appears against larger Gaussian bases, where the
-gap widens decisively: $76\times$ fewer Pauli terms than cc-pVDZ
-(exact rule; the retired pair-diagonal figure was $190\times$).
+For the small-molecule minimal-basis case, the composed LiH Hamiltonian
+has more Pauli terms than Gaussian STO-3G---\gvq{lih_composed_pauli}{838} terms vs.\ STO-3G's
+\gvq{lih_sto3g_raw}{631} (raw JW, $1.33\times$ more) and $3.0\times$ more than the 276
+(qubit-reduced)---and about twice its 1-norm (34.0 vs.\ \gvq{lih_sto3g_lambda}{16.5}~Ha),
+while using more qubits (30 vs.\ 10--12).  It needs $2.8\times$ fewer
+QWC measurement groups (64 vs.\ \gvq{lih_sto3g_qwc}{179}).  The minimal-basis comparison is
+therefore not the framework's load-bearing advantage.  That advantage
+appears against larger Gaussian bases, where the gap widens decisively:
+$76\times$ fewer Pauli terms than cc-pVDZ, at comparable qubit counts
+(30 vs.\ 36) rather than matched accuracy.
 
 For H$_2$O, the composed Hamiltonian has \emph{more} Pauli terms than
 STO-3G (1{,}954 vs.\ 551, advantage $0.28\times$) because the GeoVac
@@ -645,8 +642,9 @@ $N_{\rm active}$ lift admits a factor-of-2 tightening for
 antisymmetric ERIs (Paper~22 Gaunt sparsity).  Sharpening each
 is a multi-step research target rather than a sprint-scale fix.
 Details: \texttt{debug/sprint\_trotter\_propinquity\_memo.md}.}
-At matched accuracy (GeoVac balanced $n_{\max}=3$ vs.\ Gaussian
-cc-pVTZ), the 1-norm comparison is less favorable due to the larger
+At larger basis (GeoVac balanced $n_{\max}=3$ vs.\ Gaussian
+cc-pVTZ, not established as matched accuracy), the 1-norm comparison
+is expected to be less favorable due to the larger
 qubit count of the GeoVac encoding (84 vs.\ 54 qubits for LiH).
 However, published double-factorization or THC $\lambda$ values for
 molecules at $Q < 100$ do not exist in the literature~\cite{Lee2021,
@@ -711,19 +709,13 @@ Reading Table~\ref{tab:paper20_tier2}:
 
 \begin{itemize}
   \item At $n_{\max}=2$, all GeoVac molecules sit at
-    $0.075$--$0.11\times$ the Chawla RaH-18q Pauli count at native
-    $Q \in \{20, 30\}$, an $8.4$--$12.6\times$ advantage.
-    \emph{The former matched-$Q$ projection to $17\times$--$32\times$ is
-    withdrawn} (2026-08-30), in step with Paper~14: it combined the retired
-    O($Q^{2.5}$) composed scaling law with a $\sim 4.2\times$ rel/scalar
-    multiplier drawn from the ``scalar'' column this table's caption
-    removes as never having been a scalar comparator.  Both inputs are
-    gone and neither has a corrected replacement, so no projection is
-    reported.  The surviving comparison is at native $Q$, and it is not
+    $0.079$--$0.120\times$ the Chawla RaH-18q Pauli count at native
+    $Q \in \{20, 30\}$, an $8.4$--$12.6\times$ advantage.  No matched-$Q$
+    projection is reported.  The comparison is at native $Q$, and it is not
     species-matched---RaH ($Z=88$) differs from LiH/BeH/CaH, and the
     per-species Chawla cells are deferred (cf.\ Paper~14).
   \item At $n_{\max}=3$, the absolute GeoVac Pauli count overtakes
-    Chawla et al.\ at matched $Q$ (LiH/BeH reach 7.1$\times$ of the RaH-18q
+    Chawla et al.\ (LiH/BeH reach 7.177$\times$ the RaH-18q
     number at $Q = 84$; CaH sits at $4.783\times$ at $Q = 56$). This
     is the expected sparsity-exponent regime: as $l_{\max}$ grows,
     the composed architecture's per-block sparsity advantage narrows.
@@ -1119,17 +1111,15 @@ commodity hardware); the four-axis Z$_2$ tapering of
 $33\%$ on LiH ($30 \to 20$) and $31\%$ on CH$_4$ ($90 \to 62$),
 materially closing the practical-scale gap for
 classical-statevector simulation in the
-$\sim Q = 30$--$100$ qubit regime.  The previously-reported
-$\sim 12.6\%$ Pauli reduction (Hopf only) is now $\sim 30\%$ at
-the production API level.
+$\sim Q = 30$--$100$ qubit regime.  The same mode cuts the Pauli
+count by $54\%$ (LiH $838 \to 382$; CH$_4$ $2{,}512 \to 1{,}144$).
 
 \paragraph{Honest scope.}  The FCIDUMP exporter writes the
 $(h_1, \mathrm{eri}, e_{\rm core})$ tensors that
 \texttt{build\_composed\_hamiltonian} and
 \texttt{build\_balanced\_hamiltonian} construct.  For systems
-where the composed/balanced builder produces a binding PES
-under qubit/composed FCI (H$_2$, BeH$_2$, multi-center
-diatomics where the multipole expansion terminates exactly),
+where the builder produces a PES minimum under qubit FCI
+(balanced LiH at $n_{\max}=2$, the one such PES computed),
 downstream consumers receive an integral set that reproduces
 the framework's qubit-level energetics.  For systems where
 the composed Hamiltonian itself does not bind under qubit FCI
@@ -1140,7 +1130,7 @@ non-binding PES; classical correlation methods consuming the
 same FCIDUMP cannot close that gap because the wall is at
 the projection step from continuous Level 4 to
 second-quantized integrals, not at the determinant-expansion
-level (cf.~\cite{GeoVac_Paper18}, \S{}IV.6).  The interface
+level (cf.~\cite{GeoVac_Paper19}).  The interface
 ships honestly; consumers can use it to confirm or falsify
 the projection-step localization on systems of interest.
 
@@ -1156,7 +1146,8 @@ correlations beyond those captured by the cross-block Coulomb and
 cross-center nuclear attraction integrals are neglected.  For LiH,
 the full 4-electron treatment in the same angular basis gives 63.5\%
 $R_{\text{eq}}$ error (angular basis limited), while the composed
-partition gives 7.0--8.8\% (basis more efficient but inter-group
+partition gives 6.9\% with the channel-blind PK and 5.3\% with the
+$l$-dependent PK (basis more efficient but inter-group
 antisymmetry approximate)~\cite{GeoVac_Paper17}.
 
 \paragraph{Basis completeness.}
@@ -1164,21 +1155,21 @@ At $n_{\max}=2$ (the production operating point for composed
 Hamiltonians), single-point energies have 1.8\% error for LiH.
 At $n_{\max}=3$, this improves to 0.20\%, but at the cost of
 $84$ qubits and $127{,}855$ Pauli terms (balanced coupled) or
-$42{,}535$ (composed) under the exact global-$M_L$ rule.  The $n_{\max}=3$ basis approaches
-chemical accuracy for single-point energies but not for
-potential energy surfaces (8.8\% $R_{\text{eq}}$ error persists
+$42{,}535$ (composed) under the exact global-$M_L$ rule.  At
+$n_{\max}=3$ the single-point error is 0.20\% ($\sim$16~mHa, outside
+chemical accuracy), and the PES does not improve with it
+(8.8\% $R_{\text{eq}}$ error persists
 due to structural drift in the composed partition).
 
 \paragraph{Dissociation limit.}
 The dissociation limit is not converged (see Sec.~\ref{sec:applicability}).
 
-\paragraph{Classical solver accuracy.}
-The classical (non-quantum) solver results reported in
-Refs.~\cite{GeoVac_Paper17,GeoVac_Paper19} (5.3--19.4\% $R_{\text{eq}}$
-error) reflect classical solver limitations, not Hamiltonian quality.
-FCI on the balanced coupled Hamiltonian gives substantially better
-energies (0.20\% at $n_{\max}=3$), validating the Hamiltonian for
-quantum simulation use.
+\paragraph{Composed accuracy.}
+The composed architecture's 5.3--19.4\% $R_{\text{eq}}$
+errors~\cite{GeoVac_Paper17} are intrinsic to the composed
+approximation, and the composed LiH qubit Hamiltonian does not bind
+under FCI.  FCI on the balanced coupled Hamiltonian gives substantially
+better single-point energies (0.20\% at $n_{\max}=3$).
 
 \paragraph{Scope.}
 First-row ($Z=1$--10) and second-row ($Z=11$--18) atoms are fully
@@ -1201,8 +1192,9 @@ the He and H$_2$ reference atoms).
 
 \paragraph{Qubit count.}
 GeoVac Hamiltonians use more qubits than Gaussian alternatives at the
-same basis quality (30 vs.\ 12 for LiH at STO-3G--equivalent accuracy).
-The advantage is in Pauli count and measurement cost, not qubit economy.
+small-molecule scale (30 vs.\ 12 for LiH against STO-3G).
+The advantage, against larger Gaussian bases, is in Pauli count and
+measurement cost, not qubit economy.
 For near-term hardware where measurement budget (not qubit count) is
 the bottleneck, this tradeoff is favorable.
 
@@ -1224,16 +1216,13 @@ topologies, independent of the core treatment (Level~3-solved or frozen).
 The composed Pauli count is exactly linear in $Q$ (coefficient
 $27.90$), meaning that adding atoms to a molecule increases
 quantum cost linearly.
-For LiH, this yields near parity on Pauli terms
-($1.08\times$ fewer, raw-vs-raw) and 4.3$\times$ fewer measurement
-groups than Gaussian STO-3G (QWC 64 vs.\ 273), growing
-to 76$\times$ fewer terms against cc-pVDZ.  All multipliers
-are realized under the exact global-$M_L$ rule
-(Sec.~\ref{sec:eri_rule}); the LiH
-small-molecule count is near parity with STO-3G (838 vs.\ \gvq{lih_sto3g_raw}{907}), while the
-\emph{scaling} advantage (linear vs.\ $O(Q^{4})$) and the large-system
-multipliers are unaffected.  For first-row hydrides
-at fixed equilibrium geometries, the balanced coupled architecture
+For LiH against Gaussian STO-3G the composed Hamiltonian has
+$1.33\times$ \emph{more} Pauli terms (838 vs.\ \gvq{lih_sto3g_raw}{631}, raw vs.\ raw) and about
+twice the 1-norm, with $2.8\times$ fewer measurement groups (QWC 64
+vs.\ \gvq{lih_sto3g_qwc}{179}); against cc-pVDZ it has $76\times$ fewer terms.  All counts
+are under the exact global-$M_L$ rule (Sec.~\ref{sec:eri_rule}), and
+none of these comparisons is at matched accuracy.  For LiH
+at a fixed equilibrium geometry, the balanced coupled architecture
 achieves 0.20\% single-point energy error at FCI; for second-row
 hydrides, the qubit Hamiltonian's potential-energy surface does not
 exhibit an interior minimum at $n_{\max}=2$ under any of the engineering

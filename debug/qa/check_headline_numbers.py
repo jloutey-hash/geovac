@@ -725,11 +725,13 @@ REGISTRY = [
         "scope": "group6",
         "severity": "fail",
         "canonical_note": "Paper 27 tab:ep2b commutator column (and Paper 24 copy): "
-                          "CANONICAL 0.74 / 0.63 / 0.67 at N_max = 2/3/4.  RETIRED/WRONG: "
+                          "CANONICAL 0.75 / 0.64 / 0.67 at N_max = 2/3/4 (standard Minnesota "
+                          "V_S = -91.85 MeV, 2026-11-04).  RETIRED/WRONG: "
                           "0.47 (a cert-2 digit transposition that the S-column-only family "
-                          "missed).  Backed by the per-N_max pins in "
+                          "missed) and 0.74 / 0.63 (the non-standard V_S = -91.4 values).  "
+                          "Backed by the per-N_max pins in "
                           "tests/test_paper24_ho_entropy.py + tests/test_paper27_entropy.py.",
-        "pattern": r"\b0\.47\b",
+        "pattern": r"\b(0\.47|0\.74|0\.63)\b",
         "require_nearby": r"commutator|N_\{?\\?max|H_\{?HO|rel_norm|ep2b",
         "exempt_if_nearby": r"retired|corrected|transposition|previously|withdrawn",
         "files": [
@@ -743,12 +745,16 @@ REGISTRY = [
         "scope": "group6",
         "severity": "fail",
         "canonical_note": "Minnesota relative-frame contrast (retraction record): CANONICAL "
-                          "<00|V|10> = +17.3 MeV vs diagonal <00|V|00> = -0.55 MeV at S=0, b=1 "
-                          "(ratio ~31x).  RETIRED/WRONG: +17.2 / -0.81 / ~20x (reproduced under "
-                          "no convention of the production code; PM-adjudicated 2026-08-29).",
-        "pattern": r"(-0\.81\$?~?MeV|\+17\.2\$?~?MeV|0,0 \\lvert V \\rvert 0,0 \\rangle = -0\.81)",
+                          "(2026-11-04, standard Minnesota V_S = -91.85 MeV) "
+                          "<00|V|10> = +17.2 MeV vs diagonal <00|V|00> = -0.81 MeV at S=0, b=1 "
+                          "(ratio ~21x; 0.48x at the production b = 2.0364).  RETIRED/WRONG: "
+                          "+17.3 / -0.55 / ~31x, the values of the non-standard V_S = -91.4. "
+                          "(The 2026-08-29 adjudication that -0.81 'reproduces under no "
+                          "convention' was made against the -91.4 code; -0.81 is the "
+                          "standard-parameter value.)",
+        "pattern": r"(-0\.55\$?~?MeV|\+17\.3\$?~?MeV|0,0 \\lvert V \\rvert 0,0 \\rangle = -0\.55|31\\times)",
         "require_nearby": r"MeV|Minnesota|diagonal|n_\{?\\?mathrm\{rel",
-        "exempt_if_nearby": r"corrected|earlier version|retired|withdrawn",
+        "exempt_if_nearby": WITHDRAWAL_MARKER,
         "files": [
             "papers/group6_precision_observations/paper_27_entropy_projection.tex",
             "papers/group3_foundations/paper_24_bargmann_segal.tex",
@@ -796,9 +802,9 @@ REGISTRY = [
         "id": "p27-ep2b-entropy-nmax2",
         "scope": "group6",
         "severity": "fail",
-        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL S_full = 0.0671 / 0.0716 / 0.0833 nats at N_max = 2 / 3 / 4, with E_full = 21.6538 / 21.6279 / 21.5442 MeV and commutator 0.74 / 0.63 / 0.67. RETIRED and now WRONG: S = 0 (identically zero) and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
-        "capture": r"21.6538\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
-        "canonical": "0.0671",
+        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL (2026-11-04, standard Minnesota V_S = -91.85 MeV) S_full = 0.0692 / 0.0736 / 0.0850 nats at N_max = 2 / 3 / 4, with E_full = 21.5437 / 21.5182 / 21.4363 MeV and commutator 0.75 / 0.64 / 0.67. RETIRED and now WRONG: S = 0 (identically zero), the V_S = -91.4 values (family p27-ep2b-vs914-retired), and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
+        "capture": r"21.5437\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
+        "canonical": "0.0692",
         "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|previously|retired|superseded|artifact|N_tot",
         "files": [
             "papers/group6_precision_observations/paper_27_entropy_projection.tex",
@@ -810,9 +816,9 @@ REGISTRY = [
         "id": "p27-ep2b-entropy-nmax3",
         "scope": "group6",
         "severity": "fail",
-        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL S_full = 0.0671 / 0.0716 / 0.0833 nats at N_max = 2 / 3 / 4, with E_full = 21.6538 / 21.6279 / 21.5442 MeV and commutator 0.74 / 0.63 / 0.67. RETIRED and now WRONG: S = 0 (identically zero) and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
-        "capture": r"21.6279\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
-        "canonical": "0.0716",
+        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL (2026-11-04, standard Minnesota V_S = -91.85 MeV) S_full = 0.0692 / 0.0736 / 0.0850 nats at N_max = 2 / 3 / 4, with E_full = 21.5437 / 21.5182 / 21.4363 MeV and commutator 0.75 / 0.64 / 0.67. RETIRED and now WRONG: S = 0 (identically zero), the V_S = -91.4 values (family p27-ep2b-vs914-retired), and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
+        "capture": r"21.5182\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
+        "canonical": "0.0736",
         "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|previously|retired|superseded|artifact|N_tot",
         "files": [
             "papers/group6_precision_observations/paper_27_entropy_projection.tex",
@@ -824,9 +830,9 @@ REGISTRY = [
         "id": "p27-ep2b-entropy-nmax4",
         "scope": "group6",
         "severity": "fail",
-        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL S_full = 0.0671 / 0.0716 / 0.0833 nats at N_max = 2 / 3 / 4, with E_full = 21.6538 / 21.6279 / 21.5442 MeV and commutator 0.74 / 0.63 / 0.67. RETIRED and now WRONG: S = 0 (identically zero) and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
-        "capture": r"21.5442\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
-        "canonical": "0.0833",
+        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL (2026-11-04, standard Minnesota V_S = -91.85 MeV) S_full = 0.0692 / 0.0736 / 0.0850 nats at N_max = 2 / 3 / 4, with E_full = 21.5437 / 21.5182 / 21.4363 MeV and commutator 0.75 / 0.64 / 0.67. RETIRED and now WRONG: S = 0 (identically zero), the V_S = -91.4 values (family p27-ep2b-vs914-retired), and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
+        "capture": r"21.4363\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
+        "canonical": "0.0850",
         "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|previously|retired|superseded|artifact|N_tot",
         "files": [
             "papers/group6_precision_observations/paper_27_entropy_projection.tex",
@@ -835,27 +841,55 @@ REGISTRY = [
         ],
     },
     {
+        "id": "p27-ep2b-vs914-retired",
+        "scope": "group3 group6",
+        "severity": "fail",
+        "canonical_note": "Paper 24 sec:entanglement-rigidity table and "
+                          "Paper 27 tab:ep2b, RETIRED values (2026-11-04): "
+                          "the HO two-fermion figures computed with the "
+                          "non-standard Minnesota singlet V_S = -91.4 MeV -- "
+                          "E_full 21.6538 / 21.6279 / 21.5442 MeV, S_full "
+                          "0.0671 / 0.0716 / 0.0833 nats, commutator "
+                          "0.7387 / 0.6302 / 0.6725, n_0 1.9800 / 1.9791 / "
+                          "1.9764. CANONICAL at the standard V_S = -91.85 "
+                          "(Thompson-LeMere-Tang 1977): see the "
+                          "p27-ep2b-entropy-nmax* families. Any occurrence "
+                          "in a paper is live (no exemption vocabulary). "
+                          "Backed by tests/test_paper24_ho_entropy.py and "
+                          "tests/test_paper27_entropy.py.",
+        "pattern": r"\b(21\.6538|21\.6279|21\.5442|0\.0671|0\.0716|"
+                   r"0\.0833|0\.7387|0\.6302|0\.6725|1\.9800|1\.9791|"
+                   r"1\.9764)\b",
+        "exempt_if_nearby": WITHDRAWAL_MARKER,
+        "files": [
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/*.tex",
+        ],
+    },
+    {
         "id": "p23-nuclear-resource-counts",
         "scope": "group3 group4",
         "severity": "fail",
-        "canonical_note": "Paper 23 nuclear qubit Hamiltonians, corrected "
-                          "2026-08-22 after the N_tot truncation was removed "
-                          "from geovac/nuclear/moshinsky.py (see the Paper 24 "
-                          "retraction). CANONICAL: deuteron 688 non-I Pauli "
-                          "(80 Z-only + 608 XY), 1-norm 383.7 MeV; He-4 828 "
-                          "non-I Pauli, 1-norm 511.8 MeV (no Coulomb) / 507.2 "
-                          "MeV (with). Qubit counts UNCHANGED at 16. The "
-                          "structural claim survives exactly: 828/688 = "
-                          "+20.3%, identical to the retired 712/592 = +20.3%. "
-                          "RETIRED and now WRONG: 592, 712, 512 XY, 614 "
-                          "(the composed nuclear-electronic total, now 710 = "
-                          "688+10+12, measured + pinned), 342.2, "
-                          "466.9, 462.4, and the HO ground-state energy "
-                          "22.185 MeV (corrected to 21.6538 / 21.6279 / "
-                          "21.5442 at N_max = 2 / 3 / 4). Backed by "
+        "canonical_note": "Paper 23 nuclear qubit Hamiltonians (N_shells=2, "
+                          "hw=10). CANONICAL (2026-11-04, complex-JW encoder "
+                          "fix + Minnesota V_S = -91.85 MeV): deuteron 688 "
+                          "non-I Pauli (80 Z-only + 608 XY), 1-norm 383.9 "
+                          "MeV; He-4 904 non-I Pauli, 1-norm 641.4 MeV (no "
+                          "Coulomb) / 632.2 MeV (with), ratio 1.31; composed "
+                          "nuclear-electronic 710 = 688+10+12. Every encoded "
+                          "Hamiltonian reproduces its FCI spectrum in the "
+                          "physical sector. RETIRED and now WRONG: the "
+                          "real-coefficient XY/YX encoding values He-4 828, "
+                          "511.8, 507.2 (ratio 1.20 / +20%) and deuteron "
+                          "1-norm 383.7; the pre-2026-08-22 N_tot-truncation "
+                          "values 592, 712, 512 XY, 614, 342.2, 466.9, 462.4, "
+                          "and the HO ground-state energy 22.185 MeV "
+                          "(corrected to 21.5437 / 21.5182 / 21.4363 at "
+                          "N_max = 2 / 3 / 4). Backed by "
                           "tests/test_paper23_resource_counts.py and "
                           "tests/test_paper24_ho_entropy.py.",
-        "pattern": r"\b(592|712|614|466\.9|462\.4|342\.2|22\.185)\b",
+        "pattern": r"\b(592|712|614|466\.9|462\.4|342\.2|22\.185|828|511\.8|507\.2|383\.7)\b",
         "require_nearby": r"Pauli|1-norm|\$1\$-norm|deuteron|He-?4|"
                           r"helium|MeV|non-I|qubit|E_?0|ground[- ]state",
         "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|"

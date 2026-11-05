@@ -28,7 +28,7 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 | Library | **37 systems** via the `hamiltonian()` API (35 composed molecules + He + H₂), three periodic-table rows |
 | Pauli count | **N_Pauli = 27.90 × Q**, exactly linear across molecules at fixed basis (30.03 × Q d-block); within-molecule basis exponent 3.17 (small-basis fit; local slope ~3.8 by n_max = 4) |
 | Advantage vs Gaussian | **51×–317×** fewer Pauli terms at equal qubits (H₂O, n_max = 1–3); **76×** vs cc-pVDZ (LiH) |
-| LiH vs STO-3G | near parity on raw counts: 838 Pauli @ Q = 30 vs 907 raw (3.0× MORE than STO-3G's 276 reduced); 1-norm 34.0 vs 34.3 Ha |
+| LiH vs STO-3G | unfavourable on raw counts: 838 Pauli @ Q = 30 vs 631 raw @ Q = 12 (1.33× MORE; 3.0× MORE than STO-3G's 276 reduced); 1-norm 34.0 vs 16.5 Ha (about twice, identity included); 2.8× fewer QWC groups (64 vs 179) |
 | He accuracy | **0.022%** raw (2D variational, properly variational); **0.020%** with the Schwartz cusp tail, still above exact; zero free parameters |
 | H₂ accuracy | **99.97% D_e** (0.053 mHa; prolate explicit-r₁₂ CI, exact integrals, Paper 12); 96.0% via the Level-4 hyperspherical treatment on an unconverged inner hyperradial wall (Paper 15) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |
@@ -38,9 +38,9 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 
 ## Why This Matters for Quantum Computing
 
-The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with all downstream optimizations (tapering, grouping, tensor factorization). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
+The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (the QWC group-count exponent sits inside the Gaussian band, Paper 14). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
 
-**Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 828 Pauli); the conformal machinery does not.
+**Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 904 Pauli); the conformal machinery does not.
 
 **The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. In the Kustaanheimo–Stiefel frame the Coulomb problem is itself a constrained 4D oscillator, and π enters both sides the same ways (a measure and spectral sums), so the two differ in representation theory and arithmetic, not in where π enters.
 
@@ -80,8 +80,9 @@ The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count
 
 | Metric | GeoVac LiH (Q=30) | Gaussian STO-3G | Comparison |
 |--------|:-----------------:|:---------------------:|:---------:|
-| Pauli terms | 838 | 907 raw / 276 reduced | near parity raw; 3.0× more than reduced |
-| 1-norm (λ) | 34.0 Ha | 34.3 Ha | 0.99× (match) |
+| Pauli terms | 838 | 631 raw / 276 reduced | 1.33× more than raw; 3.0× more than reduced |
+| QWC groups | 64 | 179 | 2.8× fewer |
+| 1-norm (λ, identity included) | 34.0 Ha | 16.5 Ha | ~2× higher |
 
 The decisive wins are the exact Q-linearity across molecules and the 76× reduction vs cc-pVDZ, not the comparison with minimal-basis STO-3G (all counts under the exact global-M_L rule, 2026-08-29).
 
@@ -105,8 +106,8 @@ Isostructural invariance: molecules with the same block topology produce identic
 | System | Qubits | Pauli terms | 1-norm | Notes |
 |:-------|:------:|:-----------:|:------:|:------|
 | Deuteron (1p+1n) | 16 | 688 | see Paper 23 | Minnesota potential, two-species JW |
-| He-4 (2p+2n) | 16 | 828 | see Paper 23 | Same Q, 12.25× Hilbert space |
-| Composed deuterium (1p+1n+1e) | 26 | 710 | see Paper 23 | Nuclear + electronic block architecture |
+| He-4 (2p+2n) | 16 | 904 | see Paper 23 | Same Q, 12.25× Hilbert space |
+| Composed nuclear-electronic (deuteron block + 1e) | 26 | 710 | see Paper 23 | Nuclear + electronic block architecture; proton-spin hyperfine inputs |
 
 (Counts corrected 2026-08-22, v5.0.0; the earlier 592 / 712 / 614 carried a Moshinsky N_tot guard.)
 
@@ -231,12 +232,12 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 - **Block-diagonal ERIs:** Gaunt selection rules enforce basis-intrinsic sparsity
 - **Classical benchmarks:** H₂ 99.97% D_e (Paper 12), LiH R_eq +0.2% (Route C, Paper 19), He 0.022% raw / 0.020% with the cusp tail (still above exact)
 - **Algebraic Slater integrals:** Exact hypergeometric R^k evaluator eliminates grid quadrature (machine precision, 8x speedup)
-- **Zero molecular fitting parameters** — all from nuclear charges and geometry (disclosed exception: Paper 17's PK barrier-width formula was chosen against the LiH bond length)
+- **Zero molecular fitting parameters** — all from nuclear charges and geometry, plus one empirical atomic input to the composed PK (the first ionization energy) (disclosed exception: Paper 17's PK barrier-width formula was chosen against the LiH bond length)
 
 ### Current Limitations
 - **Classical PES accuracy:** R_eq errors of 5.3-19.4% for composed molecules (PK structural overcounting). Optimal for fixed-geometry quantum simulation, not geometry optimization.
 - **Transition metals:** Full first series implemented as hydrides (v2.8.0); non-hydride TM molecules not yet built
-- **Polyatomic accuracy:** H₂O R_eq 19.4% (composed, zero parameters)
+- **Polyatomic accuracy:** H₂O R_eq 19.4% (composed; PK with one empirical atomic input)
 
 ### What GeoVac Does NOT Replace
 - Production quantum chemistry for general molecules

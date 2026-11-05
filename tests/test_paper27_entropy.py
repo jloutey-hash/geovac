@@ -302,17 +302,18 @@ def test_paper27_ep2b_ho_kinetic_interaction_does_not_commute():
     geovac/nuclear/moshinsky.py, removed 2026-08-22.
 
     Paper 27 sec:pred1 (RETRACTED); Paper 24 sec:entanglement-rigidity.
+    The pinned value follows the standard Minnesota V_S = -91.85 MeV.
     """
     data = _ep2b_nmax2()
     H_kin = data['H_h1_diag'] + data['H_h1_offdiag']
     H_vee = data['H_vee_full']
     C = H_kin @ H_vee - H_vee @ H_kin
     rel_norm = np.linalg.norm(C) / np.linalg.norm(H_kin)
-    # Corrected Paper 27 tab:ep2b: 0.74 at N_max=2 (0.63/0.67 at 3/4).
+    # Corrected Paper 27 tab:ep2b: 0.75 at N_max=2 (0.64/0.67 at 3/4).
     # PINNED (cert-2: the old 0.3-1.2 band could not discriminate the
-    # 0.47 digit transposition from the true 0.74).
-    assert rel_norm == pytest.approx(0.7387, abs=0.01), \
-        f'[H_HO, V_NN] / ||H_HO|| = {rel_norm:.4f} != 0.74'
+    # 0.47 digit transposition from the true value).
+    assert rel_norm == pytest.approx(0.7531, abs=0.01), \
+        f'[H_HO, V_NN] / ||H_HO|| = {rel_norm:.4f} != 0.75'
 
 
 def test_paper27_ep2b_ho_gs_is_not_a_single_determinant():
@@ -323,7 +324,8 @@ def test_paper27_ep2b_ho_gs_is_not_a_single_determinant():
     hundredths of a nat and GROWS with basis size, the leading natural
     occupation is below 2, and E_full DECREASES with N_max (the old
     "basis-independent 22.185 at both N_max" was the guard's signature,
-    not a projection property).
+    not a projection property). The pinned values follow the standard
+    Minnesota V_S = -91.85 MeV.
     """
     from geovac.nuclear.ho_two_fermion import build_decomposed_ho_hamiltonians
     from debug.archive.misc.entanglement_geometry import (
@@ -331,8 +333,8 @@ def test_paper27_ep2b_ho_gs_is_not_a_single_determinant():
         compute_entanglement_measures,
     )
     # Corrected Paper 27 tab:ep2b (E_full MeV, S_full nats, occ0).
-    expected = {2: (21.6538, 0.0671, 1.9800),
-                3: (21.6279, 0.0716, 1.9791)}
+    expected = {2: (21.5437, 0.0692, 1.9793),
+                3: (21.5182, 0.0736, 1.9784)}
 
     energies, entropies = [], []
     for N_max in (2, 3):

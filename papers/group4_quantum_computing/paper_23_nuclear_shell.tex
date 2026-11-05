@@ -18,6 +18,10 @@
   xrightmargin=0.5em,
 }
 
+% \gvq{registry-key}{value}: renders the value; the key points into
+% debug/qa/numeric_registry.py (CLAUDE.md SS15).
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice}
@@ -31,30 +35,36 @@
 We present structurally sparse qubit Hamiltonians for the nuclear shell
 model, constructed by applying the GeoVac angular-sparsity framework to
 the harmonic oscillator (HO) single-particle basis with a Mayer--Jensen
-spin--orbit term. The HO shell closures $2, 8, 20, 40, 70, 112$ emerge
-directly from graph state counting, and the physical magic numbers
+spin--orbit term. The HO shell closures $2, 8, 20, 40, 70, 112$ follow
+from state counting on the oscillator labels, and the physical magic numbers
 $2, 8, 20, 28, 50, 82, 126$ are recovered with a spin--orbit strength
 $v_{ls}/\hbar\omega \approx 0.17$ and a Nilsson $\ell(\ell+1)$ correction
-$d_{\ell\ell}/\hbar\omega \approx 0.02$. We build the first two-species
-qubit encoding for the deuteron ($1p+1n$, $16$ qubits, $688$ non-identity
+$d_{\ell\ell}/\hbar\omega \approx 0.02$. We build a two-species
+qubit encoding for the deuteron ($1p+1n$, $16$ qubits, \gvq{p23_deuteron_pauli}{688} non-identity
 Pauli terms, $1$-norm $\approx 384$~MeV) using the Minnesota
 nucleon--nucleon potential and Moshinsky--Talmi brackets, and extend the
-architecture to helium-4 ($2p+2n$, $16$ qubits, $828$ Pauli terms) with
-intra-species antisymmetrization and proton--proton Coulomb repulsion.
-Despite a Hilbert-space dimension $12.25\times$ larger than the deuteron,
-He-4 requires only $1.20\times$ more Pauli terms --- a direct consequence
-of the angular selection rules that carry through to multi-particle
-systems. A composed nuclear--electronic deuterium encoding ($26$ qubits)
-validates the multi-block architecture and quantifies the
+architecture to helium-4 ($2p+2n$, $16$ qubits, \gvq{p23_he4_pauli}{904} Pauli terms) with
+intra-species antisymmetrization and proton--proton Coulomb repulsion;\
+each encoded Hamiltonian reproduces its full-CI spectrum in the physical
+particle-number sector to $2\times 10^{-12}$~MeV.
+He-4 has \gvq{p23_he4_deuteron_pauli_ratio}{1.31}$\times$ the deuteron's Pauli terms, the added
+proton--proton and neutron--neutron channels;\ its $12.25\times$ larger
+Hilbert space costs no terms, because at fixed qubit count the
+Jordan--Wigner term set does not depend on the particle number.
+A composed nuclear--electronic encoding ($26$ qubits), a deuteron
+nuclear block coupled to a hydrogen-like electron through a proton-spin
+hyperfine term, exercises the multi-block architecture and quantifies the
 $\sim 10^{13}$ coefficient ratio between nuclear, electronic, and
 hyperfine scales. We state and apply the Fock projection rigidity
-theorem: the $S^3$ conformal projection that makes electronic Hamiltonians
+theorem: the $S^3$ conformal projection that makes the one-electron
+Coulomb Hamiltonian
 equivalent to the $S^3$ Laplace--Beltrami operator (whose harmonics the
-GeoVac lattice's nodes label) is unique to the Coulomb potential and
+GeoVac lattice's nodes label) requires the hydrogenic spectrum, and
 does \emph{not} extend to HO or Woods--Saxon systems. A finite nucleus breaks it in a controlled way:\ the labels survive, $n$ is released from being a whole number, and the $s$-wave quantum defect $-(2/5)(ZR)^2$ is the same for every $n$ and continues across threshold, moments of the nuclear charge being consumed as the matching coefficients of an effective theory;\ a finite magnetization is priced the same way, the Zemach moment first, with a logarithm set by the charge alone;\ in the Dirac equation near and past $Z\alpha = 1$ the radius becomes compulsory (Sec.~\ref{sec:finite_nucleus}). For nuclear
 Hamiltonians, the GeoVac contribution is therefore the angular machinery
 and qubit encoding, not the conformal projection. All nuclear physics
-inputs (Minnesota parameters, spin--orbit strength, $\hbar\omega$)
+inputs (Minnesota strengths and ranges, used without the potential's
+space-exchange mixture;\ spin--orbit strength, $\hbar\omega$)
 follow the standard shell-model literature; the quantitative binding
 energies at $N_{\mathrm{shells}}=2$ are far from experiment and should
 be read as encoding-validation benchmarks, not as a nuclear-structure
@@ -83,8 +93,10 @@ hardware feasibility.
 
 The GeoVac framework~\cite{Paper14,Paper22} exploits angular-momentum
 selection rules to produce structurally sparse qubit Hamiltonians for
-molecular electronic structure, with Pauli counts that are orders of
-magnitude below Gaussian-basis baselines for the same system size. The
+molecular electronic structure, with Pauli counts that, at equal qubit
+count, range from above minimal-basis STO-3G to two orders of magnitude
+below larger Gaussian bases (Paper~20~\cite{Paper20};\ a matched-qubit,
+not matched-accuracy, comparison). The
 angular selection rules, which are derived from Wigner $3j$ symbols and
 the Gaunt integral, are \emph{independent of the radial potential}:
 they depend only on the single-particle angular basis, not on whether
@@ -96,12 +108,15 @@ We report three results. First, the harmonic oscillator shell closures
 and the Mayer--Jensen magic numbers are reproduced on the GeoVac
 $(n_r, \ell, m_\ell, \sigma)$ graph via an explicit spin--orbit term.
 Second, the deuteron and He-4 qubit Hamiltonians, built from the
-Minnesota NN potential using Moshinsky--Talmi brackets, exhibit Pauli
-counts that grow sub-linearly in the Hilbert-space dimension --- the
-deuteron has $16$ qubits and $688$ Pauli terms, while He-4 has the
-same $16$ qubits but only $828$ Pauli terms despite a $12.25\times$
-larger Hilbert space. Third, a composed nuclear--electronic encoding
-for deuterium demonstrates that the block architecture used for
+Minnesota NN potential using Moshinsky--Talmi brackets, reproduce
+their full-CI spectra --- the deuteron has $16$ qubits and
+\gvq{p23_deuteron_pauli}{688} Pauli terms, and He-4 the same $16$ qubits and
+\gvq{p23_he4_pauli}{904}, the
+difference being the proton--proton and neutron--neutron channels (the
+Hilbert-space dimension, $12.25\times$ larger for He-4, does not enter
+the term count at fixed qubit number). Third, a composed
+nuclear--electronic encoding, a deuteron nuclear block with a
+hydrogen-like electron, demonstrates that the block architecture used for
 core--valence molecular systems extends to nucleon--electron systems,
 though the $10^{13}$ coefficient ratio between nuclear-scale and
 hyperfine terms makes a single-pass quantum simulation impractical
@@ -265,28 +280,30 @@ that are elementary but worth stating precisely. We summarize the
 result as
 
 \textbf{Theorem (Fock projection rigidity).}
-\emph{The $S^3$ Fock projection $p_0 = \sqrt{-2 E_n}$ maps a one-particle
-central-field Hamiltonian onto the free Laplacian on $S^3$ if and only
-if the spectrum $E_{n\ell}$ is independent of $\ell$ within each $n$.
-The Coulomb potential $-Z/r$ is the unique central potential exhibiting
-this accidental degeneracy, as a consequence of its hidden SO(4)
-symmetry (the Runge--Lenz vector). Any deformation
-$V(r) = -Z/r + \delta V(r)$ with $\delta V \not\equiv 0$ lifts the
-$\ell$-degeneracy, breaking the conformal equivalence between the
-radial Schr\"odinger problem and the $S^3$ Laplace--Beltrami operator.}
+\emph{For the $S^3$ Fock projection $p_0 = \sqrt{-2 E}$ to carry the
+bound spectrum of a one-particle central-field Hamiltonian
+$p^2/2 + V(r)$ onto the $S^3$ Laplace--Beltrami operator (the SO(4)
+Casimir $n^2 - 1$ on the $(n,\ell,m)$ labels), two properties are
+needed:\ (i) $E_{n\ell}$ independent of $\ell$ within each $n$, and
+(ii) $E_n \propto -1/n^2$. Up to an additive constant in $V$ and the
+value of $Z$, the Coulomb potential $-Z/r$ is the only central
+potential with both, as a consequence of its hidden SO(4) symmetry
+(the Runge--Lenz vector). A deformation
+$V(r) = -Z/r + \delta V(r)$ that is not a constant or a change of $Z$
+violates (i) or (ii), and the conformal equivalence between the
+radial Schr\"odinger problem and the $S^3$ Laplace--Beltrami operator
+is lost.}
 
-The proof is standard and amounts to observing that Fock's
-stereographic construction in momentum space requires the hydrogenic
-relation $E_n \propto -1/n^2$ with no $\ell$-dependence; this fails for
-any potential that does not have the SO(4) symmetry of the pure Coulomb
-problem~\cite{Bander1966}. The consequence for the GeoVac lattice is
+\textbf{[PRIOR ART]} The result is classical:\ Fock's stereographic
+construction in momentum space~\cite{Fock1935} uses the hydrogenic
+relation $E_n \propto -1/n^2$ with no $\ell$-dependence, and its group
+theory is reviewed by Bander and Itzykson~\cite{Bander1966};\ it is
+stated here for its consequence, not proved anew. The consequence for
+the GeoVac lattice is
 that the diagonal node weights, which depend only on $n$ in the Coulomb
 case (as the exact $S^3$ operator on the labels, the SO(4) Casimir
 $n^2-1$, does), would have to carry an $\ell$-dependent correction;\ the
-labels then index a spectrum with no $S^3$ counterpart.  (An earlier
-version framed this through the off-diagonal adjacency, which never
-carried the $S^3$ spectrum:\ the edge Laplacian does not converge to
-$\Delta_{S^3}$, Paper~7.)
+labels then index a spectrum with no $S^3$ counterpart.
 
 The relevant central potentials for nuclear physics --- the 3D
 harmonic oscillator, the Woods--Saxon well, the square well, and the
@@ -366,7 +383,7 @@ the factor being Paper~7's continuum factor. \textbf{[MEASURED]} At $ZR = 10^{-3
 \emph{The price.} The release consumes numbers of the nucleus, and no label fixes them:\ the mean square radius at leading order, the Friar moment at the next, then $\langle r^4\rangle$ and a log-moment constant together at fourth order;\ for the hyperfine factor, the Zemach moment of the charge and magnetization together, then the magnetic radius and a joint constant. They carry whatever number class the profile carries (rational for the sphere and the shell, $\pi^{-1/2}$ for a Gaussian);\ no $\pi$ enters from the electron's side at leading order. From fourth order a logarithm of $ZR$ enters, its coefficient fixed by lower orders and a profile-dependent constant beside it ($\ln 2 + 2\gamma_E$ plus a rational for the sphere), the weight-one class of the two-centre seed set of Paper~18~\cite{Paper18}. So the labels survive and the moments are consumed:\ a released axis whose price is calibration data, as the two-focal-length picture of Sec.~\ref{sec:cross-register} expects. \textbf{[PRIOR ART]} The mechanism is the matching statement of nonrelativistic QED~\cite{HillPaz2011}:\ a structured nucleus enters only through the coefficients of contact operators, one new number for each independent operator at each order, and each logarithm comes from iterating lower-order contacts, so lower orders fix its coefficient. Karshenboim computed the hyperfine terms this way~\cite{Karshenboim1997,Karshenboim2001}, and the energy terms through $(Z\alpha)^6$ are in~\cite{PPY2025}. The physics is textbook (Foldy;\ Friar~\cite{Friar1979};\ Seaton~\cite{Seaton1983});\ the contribution is the accounting on the electron's labels. Guards:\ \texttt{tests/test\_paper23\_finite\_nucleus\_door.py}, \texttt{tests/test\_paper23\_nuclear\_profiles.py}, \texttt{tests/test\_paper23\_relativistic\_nucleus.py}, \texttt{tests/test\_paper23\_hyperfine\_door.py}, \texttt{tests/test\_paper23\_defect\_n4.py}.
 
 %% =====================================================================
-\section{The Deuteron: First Two-Species Nuclear Qubit Hamiltonian}
+\section{The Deuteron: A Two-Species Nuclear Qubit Hamiltonian}
 \label{sec:deuteron}
 %% =====================================================================
 
@@ -379,15 +396,22 @@ of the small binding; the deuteron wavefunction extends well beyond
 the range of the nuclear force, and accurate binding-energy
 calculations require oscillator bases with many major shells. We use
 the Minnesota potential~\cite{Thompson1977}, a phenomenological
-soft-core central interaction composed of three Gaussian terms:
+soft-core central interaction composed of three Gaussian terms. We use
+it in the form
 \begin{equation}
-  V_{\mathrm{NN}}(r) = \sum_{i=1}^{3} V_i \, e^{-\kappa_i r^2}
-  \left[\tfrac{1}{2}(u + (2 - u) P^\sigma)\right],
+  V_{\mathrm{NN}}(r) = V_R\, e^{-\kappa_R r^2}
+  + V_T\, e^{-\kappa_T r^2}\, P_{S=1}
+  + V_S\, e^{-\kappa_S r^2}\, P_{S=0},
 \label{eq:minnesota}
 \end{equation}
-with $(V_R, V_T, V_S) = (200, -178, -91.4)$ MeV and the standard
-$u$ and range parameters of Ref.~\cite{Thompson1977}. The operator
-$P^\sigma$ is the spin exchange. The two-body matrix elements in the
+with $(V_R, V_T, V_S) = (200, -178, -91.85)$~MeV and
+$(\kappa_R, \kappa_T, \kappa_S) = (1.487, 0.639, 0.465)$~fm$^{-2}$
+from Ref.~\cite{Thompson1977}, and $P_{S=1}$, $P_{S=0}$ the spin-triplet
+and spin-singlet projectors. The published potential multiplies each
+term by the space-exchange mixture $\tfrac12[u + (2-u)P^r]$;\ the form
+used here has no space-exchange factor, which is the $u = 2$ member of
+that family (full strength in odd as well as even relative partial
+waves), not the usual $u \approx 1$. The two-body matrix elements in the
 HO basis are computed by transforming the antisymmetrized
 two-nucleon wavefunction to relative and center-of-mass coordinates
 using Moshinsky--Talmi brackets~\cite{Moshinsky1959,Talmi1952}.
@@ -453,7 +477,7 @@ off-diagonal angular couplings generated by the Minnesota operator.
     Non-$I$ Pauli terms & $688$ \\
     $Z$-only terms & $80$ \\
     $XY$-containing terms & $608$ \\
-    $1$-norm (non-$I$) & $\approx 383.7$ MeV \\
+    $1$-norm (non-$I$) & $\approx \gvq{p23_deuteron_lambda}{383.9}$ MeV \\
     Hilbert dim. ($1p+1n$) & $64$ \\
   \end{tabular}
   \end{ruledtabular}
@@ -472,10 +496,17 @@ calculations require $N_{\mathrm{shells}} \gtrsim 6$--$8$. We therefore
 emphasize that the results in Table~\ref{tab:deuteron} are
 \emph{encoding-validation} benchmarks, not nuclear-structure
 predictions. The Pauli count and $1$-norm characterize the cost of
-the qubit Hamiltonian; the FCI validation is performed on the matrix
-representation (the source of truth), while the Pauli-string export is
-validated structurally, subject to the off-diagonal sign limitation
-disclosed in Sec.~\ref{subsec:known_limitation}. Recent
+the qubit Hamiltonian. The encoding is validated against the FCI
+matrix:\ the Pauli sum restricted to the $64$ one-proton, one-neutron
+basis states has the FCI spectrum to $2\times 10^{-13}$~MeV, both by
+direct evaluation of the Pauli strings and through OpenFermion's
+operator construction
+(\texttt{tests/test\_paper23\_resource\_counts.py},
+\texttt{tests/test\_nuclear\_deuteron.py}). The off-diagonal one-body
+pieces $a^\dagger_{p,i} a_{p,k}$ that each two-body term factorizes
+into carry the Jordan--Wigner coefficients $\pm i/4$ on their $XY$ and
+$YX$ strings;\ these are kept complex through every product, and only
+the final Hermitian sum is real. Recent
 deuteron-targeted quantum-resource
 work~\cite{SarmaStevenson2025,PillaiRamanan2025} provides direct
 comparison points at comparable qubit count for the encoding cost
@@ -499,7 +530,7 @@ changes:
     matrix elements in addition to the $pn$ cross-species terms.
   \item Coulomb repulsion between the two protons, added as a
     conventional two-body Coulomb matrix element in the HO basis
-    (approximately $0.7$ MeV for the ground state).
+    (approximately $0.6$ MeV for the ground state).
 \end{enumerate}
 
 Both changes leave the number of qubits unchanged ($Q = 16$) because
@@ -509,16 +540,20 @@ occupies a $2$-particle subspace of dimension $\binom{8}{2} = 28$, and
 similarly for $nn$, so the full He-4 Hilbert space has dimension
 $28 \times 28 = 784$.
 
-Table~\ref{tab:he4} compares He-4 to the deuteron. The key observation
-is that the Pauli count grows by only $20\%$ ($688 \rightarrow 828$)
-even though the Hilbert-space dimension grows by a factor of
-$784/64 = 12.25$. The angular selection rules responsible for the
-deuteron sparsity carry over to the antisymmetrized pairs without
-introducing new classes of terms; only the $pp$ and $nn$ blocks are
-added, and those blocks share the same angular structure as the $pn$
-block. The Coulomb correction is a small additional contribution that
-does not add any new Pauli terms (it modifies only the existing $pp$
-coefficients).
+Table~\ref{tab:he4} compares He-4 to the deuteron. The Pauli count
+grows by $31\%$ (\gvq{p23_deuteron_pauli}{688}~$\rightarrow$~\gvq{p23_he4_pauli}{904}), while the Hilbert-space
+dimension grows by a factor of $784/64 = 12.25$. The two numbers are
+not related:\ at fixed $Q$ the Jordan--Wigner operator, and so its
+term set, does not depend on how many particles occupy the register,
+and the $12.25\times$ is the growth of the particle-number sector the
+operator is restricted to. The added terms are the $pp$ and $nn$
+two-body channels, absent from the deuteron, which has one nucleon of
+each species. The Coulomb correction does not add any new Pauli terms
+(it modifies only the existing $pp$ coefficients). As for the
+deuteron, the encoded He-4 Hamiltonian restricted to the $784$
+two-proton, two-neutron basis states has the FCI spectrum, to
+$2\times 10^{-12}$~MeV with and without Coulomb
+(\texttt{tests/test\_paper23\_resource\_counts.py}).
 
 \begin{table}[t]
   \centering
@@ -531,27 +566,23 @@ coefficients).
   \begin{tabular}{lrrr}
     System & $Q$ & Pauli & Hilbert dim. \\
     \hline
-    Deuteron ($1p+1n$)       & 16 & 688 & 64 \\
-    He-4 ($2p+2n$, no Coulomb) & 16 & 828 & 784 \\
-    He-4 ($2p+2n$, + Coulomb)  & 16 & 828 & 784 \\
+    Deuteron ($1p+1n$)       & 16 & \gvq{p23_deuteron_pauli}{688} & 64 \\
+    He-4 ($2p+2n$, no Coulomb) & 16 & \gvq{p23_he4_pauli}{904} & 784 \\
+    He-4 ($2p+2n$, + Coulomb)  & 16 & \gvq{p23_he4_pauli}{904} & 784 \\
   \end{tabular}
   \end{ruledtabular}
 \end{table}
 
 The $1$-norm of the He-4 Hamiltonian at $\hbar\omega = 10$ MeV is
-$\approx 512$ MeV (without Coulomb) and $\approx 507$ MeV (with
-Coulomb), reflecting the dominance of the HO diagonal piece. The
+$\approx \gvq{p23_he4_lambda_nocoul}{641}$ MeV (without Coulomb) and $\approx \gvq{p23_he4_lambda_coul}{632}$ MeV (with
+Coulomb), about $70\%$ of it in the diagonal ($Z$-only) terms. The
 ground-state energy from FCI diagonalization is far from the
 experimental $-28.296$ MeV at $N_{\mathrm{shells}}=2$, for the same
 reason as in the deuteron: the HO basis is too small to describe the
 $\alpha$-particle charge distribution. Converged Minnesota
 calculations of He-4 require $N_{\mathrm{shells}} \gtrsim 6$. As with
 the deuteron, we emphasize that Table~\ref{tab:he4} is an
-encoding-validation benchmark. The physical result of interest is the
-sub-linear Pauli scaling, which is a direct consequence of the
-angular-sparsity theorem of Paper~22~\cite{Paper22} and confirms that
-the theorem applies to multi-particle systems beyond the single-nucleon
-case.
+encoding-validation benchmark.
 
 %% =====================================================================
 \section{Composed Nuclear--Electronic Deuterium}
@@ -564,7 +595,12 @@ nuclear--electronic case: the nuclear block is the deuteron
 Hamiltonian from Sec.~\ref{sec:deuteron}, the electronic block is a
 single-electron hydrogen Hamiltonian on the $(n, \ell, m)$ lattice at
 $n_{\max}=2$, and the coupling between them is given by two
-one-body-like operators.
+one-body-like operators. The couplings take proton inputs:\ the proton
+charge radius, and a hyperfine term coupling the spin of the proton's
+$0s$ orbital to the electron with the hydrogen constant. They are
+hydrogen's couplings placed on a deuteron nuclear block, not those of
+deuterium (nuclear spin $I = 1$, charge radius $\approx 2.13$~fm,
+ground-state splitting $327.4$~MHz), which the code does not build.
 
 \subsection{Blocks and couplings}
 
@@ -581,15 +617,17 @@ $-0.5$ Ha.
 
 \textbf{Finite-size coupling.} A one-body operator on the electronic
 register shifts the $1s$ energy by the finite nuclear-size correction
-$\Delta E_{1s} = (2/5) Z^4 R_{\mathrm{nuc}}^2 / n^3$
-\cite{Foldy1958,Friar1979}. At the proton charge radius
-$R_{\mathrm{nuc}} = 0.8414$ fm, the shift is
-$\Delta E \approx 1.01 \times 10^{-10}$ Ha, far below the subtraction
+$\Delta E_{ns} = (2/3) Z^4 \langle r^2\rangle / n^3$
+\cite{Foldy1958,Friar1979}, which for a uniformly charged sphere of
+radius $R$ is $(2/5) Z^4 R^2 / n^3$. At the proton rms charge radius
+$\langle r^2\rangle^{1/2} = 0.8414$ fm, the $1s$ shift is
+$\Delta E \approx 1.69 \times 10^{-10}$ Ha, far below the subtraction
 precision of float$64$ arithmetic when combined with the nuclear-scale
 terms. The shift is reported analytically rather than by numerical
 subtraction.
 
-\textbf{Hyperfine coupling.} The proton spin $\mathbf{I}$ couples to
+\textbf{Hyperfine coupling.} The spin $\mathbf{I}$ of the proton's $0s$
+orbital couples to
 the electron spin $\mathbf{S}$ via
 $H_{\mathrm{hf}} = A_{\mathrm{hf}} \, \mathbf{I}\cdot\mathbf{S}$, where
 the hyperfine constant for the hydrogen $21$-cm transition is
@@ -616,7 +654,11 @@ $688$ come from the nuclear block, $10$ from the electronic block
 diagonal (one $Z$ per spin-orbital plus the absorbed finite-size
 shift), and $12$ from the cross-register hyperfine operator. The
 finite-size shift is absorbed into the diagonal electronic terms and
-does not add new Pauli strings.
+does not add new Pauli strings. Restricted to the one-proton,
+one-neutron, one-electron sector, the Pauli sum has the spectrum of
+the same Hamiltonian assembled directly as a matrix, to float$64$
+roundoff ($10^{-8}$~Ha on entries of $5\times 10^5$~Ha;\
+\texttt{tests/test\_nuclear\_electronic.py}).
 
 The coefficient hierarchy spans $\sim 13$ orders of magnitude
 (Table~\ref{tab:ne-scales}): the nuclear diagonal dominates at
@@ -642,7 +684,7 @@ relative to the nuclear-scale diagonal.
     Hyperfine coeff (per Pauli)  & $\sim 10^{-8}$ \\
     Finite-size shift (analytic) & $\sim 10^{-10}$ \\
     \hline
-    Pauli coeff ratio max/min    & $\sim 2 \times 10^{13}$ \\
+    Pauli coeff ratio max/min    & $\sim 4 \times 10^{13}$ \\
   \end{tabular}
   \end{ruledtabular}
 \end{table}
@@ -674,25 +716,6 @@ Hamiltonian on a single qubit register, verify correctness by
 comparison with the block decomposition, and reason about the cost
 of adding cross-block couplings, even if the single-pass solution is
 not practical.
-
-\subsection{Known limitation}
-\label{subsec:known_limitation}
-
-The Pauli encoding of the off-diagonal one-body terms in the deuteron
-builder of Sec.~\ref{sec:deuteron} carries a known sign issue: the
-$a^\dagger_i a_j$ operator for $i \neq j$ is currently encoded using
-$XY - YX$ with a real coefficient, which yields the Hermitian
-combination $A \otimes A - C \otimes C$ rather than the expected
-$A \otimes A + C \otimes C$. This affects only the off-diagonal piece
-of the single-particle Hamiltonian, which in the HO basis is
-identically zero for the diagonal kinetic term, so the deuteron FCI
-spectrum is unaffected. The cross-register hyperfine term in the
-composed Hamiltonian is built via the matrix-form code path in
-\texttt{nuclear\_electronic.py}, which bypasses the Pauli builder and
-yields the correct spectrum directly. We report this as a known issue;
-it does not affect the Pauli counts or the $1$-norms reported in
-Tables~\ref{tab:deuteron}--\ref{tab:ne-scales}, which are read from
-the term list of the encoded Hamiltonian.
 
 \subsection{Positioning in the noncommutative-geometry literature}
 
@@ -769,9 +792,9 @@ to the hydrogen 1s energy at $2.86\%$, and follow-up symbolic analysis
 basis-truncation artifact of the $1s \times 1s$ Sturmian representation,
 not a missing physical sub-leading correction. $\omega_{\mathrm{magn}}$
 reproduces the Eides Tab.~7.3 leading-order Zemach shift at
-$0.012\%$ residual without any external scalar substitution: the
-first radial moment $M_1[\rho_M] = r_Z$ enters automatically through the
-operator construction. The structural interpretation is that the
+$0.012\%$ residual, with its profile $\rho_M$ calibrated so that the
+first radial moment is $M_1[\rho_M] = r_Z$;\ the agreement checks the
+operator construction, not the value of $r_Z$. The structural interpretation is that the
 framework computes the operator action given a fixed $\rho_M$, and the
 calibration ($r_Z$ value, profile family) remains a Layer-2 input from
 QCD/scattering data, consistent with the structural-skeleton scope
@@ -879,8 +902,8 @@ leading-order term of the Pachucki--Patkó\v{s}--Yerokhin 2018
 Foldy--Wouthuysen-reduced two-particle
 Hamiltonian~\cite{Pachucki2018}.
 
-The choice $\lambda_n = 2\sqrt{M_p/m_e}$ is structural rather than
-fitted: the value is determined by requiring the leading
+The value $\lambda_n = 2\sqrt{M_p/m_e}$ is calibrated:\ it is fixed by
+requiring the leading
 $O(1/\lambda_n^2)$ Roothaan term in Eq.~\eqref{eq:roothaan-J0} to match
 the reduced-mass leading-order shift,
 \[
@@ -936,8 +959,8 @@ correct. At larger $Z$ where the next-order recoil grows as $Z^5$,
 the fortuitous cancellation degrades.
 
 The structural conclusion is sharper than the numerical one: the
-cross-register $V_{eN}$ at $n_{\max} = 1$ matches Pachucki~2018
-\emph{leading-order verbatim}, with sub-leading content
+cross-register $V_{eN}$ at $n_{\max} = 1$ reproduces the leading order
+of Pachucki~2018 by the calibration of $\lambda_n$, with sub-leading content
 \emph{basis-truncation-bounded}; closing the next-order sign
 disagreement structurally requires multi-shell expansion to
 $n_{\max} \geq 2$ on both registers, which is named as the natural
@@ -989,11 +1012,12 @@ leading multipole $L = 0$ collapses to
   = r_Z + O(r_Z/a_0)^2.
 \label{eq:rZ-collapse}
 \end{equation}
-The Eides scalar substitution emerges automatically: the first radial
-moment of the magnetization density \emph{is} the Zemach radius by the
-Eides definition, and the operator-level construction recovers it
-through the standard hydrogenic 1s contact integral, with no external
-substitution required. Higher-order corrections in $r_Z/a_0$ are the
+The Eides scalar substitution is recovered because the profile is
+calibrated to it:\ $\rho_M$ is chosen with first radial moment equal to
+$r_Z$ (standing in for the charge--magnetization convolution of
+Eq.~\eqref{eq:eides-zemach}), and the operator-level construction
+returns that moment through the standard hydrogenic 1s contact
+integral. Higher-order corrections in $r_Z/a_0$ are the
 Friar moment $\langle r^2 \rangle_{\rho_M}$ and beyond, suppressed by
 $\sim 7.8 \times 10^{-6}$ relative to the leading shift on hydrogen.
 
@@ -1098,7 +1122,7 @@ $496.5$~ppm; $I=1/2$ nuclei were unaffected, so the H and T
 cross-checks did not expose it.)
 
 The leading-order Zemach correction with $r_Z(D) = 2.593$~fm
-(Friar--Payne~1997~\cite{FriarPayne1997}) gives
+(Friar--Sick~\cite{FriarSick2004}) gives
 $\Delta\nu_Z/\nu_F = -98.0$~ppm at the operator level via
 \texttt{geovac.magnetization\_density.hydrogen\_zemach\_eides\_leading\_order},
 matching the analytic Eides $-2 Z m_e r_Z$ to floating-point precision.
@@ -1106,13 +1130,12 @@ Profile (Gaussian vs.\ exponential) independence is preserved at
 leading order, identical to the hydrogen regression of
 Sec.~\ref{ssec:omega-magn}. The cumulative chain
 (BF + recoil + Schwinger $a_e$ + leading Zemach) lands at $327.3153$~MHz
-with $-211$~ppm residual against experiment.  The chain sits below the
-Pachucki--Yerokhin / Karshenboim total theory ($327.339$~MHz), the
-expected direction for a chain omitting the
-deuteron polarizability ($+44$~ppm,
-Pachucki~2011~\cite{PachuckiYerokhin2010}, QCD-internal NN
-dynamics) plus multi-loop QED (LS-8a wall, $\sim$few ppm) plus
-recoil~NLO and finite-size charge corrections.
+with $-211$~ppm residual against experiment.  The chain omits the
+deuteron's nuclear-structure corrections beyond the leading Zemach
+term (the inelastic, polarizability contribution among them) plus
+multi-loop QED (LS-8a wall, $\sim$few ppm) plus recoil~NLO and
+finite-size charge corrections;\ the residual is not apportioned among
+them here.
 
 \paragraph{Multi-focal architecture verdict at $I=1$.}
 The Bohr--Fermi residual of $-456$~ppm is the cleanest framework-native
@@ -1158,14 +1181,14 @@ together close the operator-level scaffolding of two of the multi-focal
 walls (W1a and W1b) named in the May~2026 sprint sequence. The honest
 verdicts are scope-bounded:
 \begin{itemize}
-  \item $V_{eN}$: leading-order Bethe--Salpeter recoil verbatim
-    (calibration-fixed); sub-leading content basis-truncation-bounded
+  \item $V_{eN}$: leading-order Bethe--Salpeter recoil to $2.86\%$, its
+    scale fixed by calibrating $\lambda_n$; sub-leading content basis-truncation-bounded
     at $n_{\max} = 1$, with the $2.86\%$ drift identified as the
     half-integer-mass-ratio artifact tower (structurally absent in
     Pachucki~2018). Multi-shell $n_{\max} \geq 2$ on both registers is
     the structural follow-up for higher-order recoil.
-  \item $\omega_{\mathrm{magn}}$: Eides~Tab.~7.3 leading-order verbatim
-    at $0.012\%$ residual, with profile independence at leading order
+  \item $\omega_{\mathrm{magn}}$: Eides~Tab.~7.3 leading order
+    at $0.012\%$ residual, with $\rho_M$ calibrated to $M_1 = r_Z$, profile independence at leading order
     and shape dependence appearing only at the Friar moment
     $\langle r^2\rangle_{\rho_M}$. Higher-order Eides corrections
     (polarizability $\Delta_{\mathrm{pol}}$, recoil-corrected Zemach,
@@ -1237,8 +1260,8 @@ produce structurally sparse qubit Hamiltonians for simple nuclei.
 
 \emph{Directions for follow-up work.} (i) Larger
 $N_{\mathrm{shells}}$ for converged binding energies; the interesting
-physics question is whether the sub-linear Pauli scaling persists as
-the basis grows, or whether the Minnesota potential's short range
+physics question is how the Pauli count grows with $Q$ as
+the basis grows, and whether the Minnesota potential's short range
 eventually fills in the angular zeros. (ii) Three-body forces (chiral
 EFT at N$^2$LO); these introduce new classes of Pauli terms beyond
 the two-body pattern studied here, and their effect on sparsity is an
@@ -1266,13 +1289,15 @@ lattice, whose edge Laplacian does not converge to $\Delta_{S^3}$
 
 We have constructed qubit Hamiltonians for the nuclear shell model on
 the GeoVac hyperspherical lattice. The HO shell closures and
-Mayer--Jensen magic numbers are reproduced from the graph spectrum with
-standard spin--orbit and orbital-correction parameters. The deuteron
-and He-4 qubit Hamiltonians, built from the Minnesota potential via
-Moshinsky--Talmi brackets, show sub-linear Pauli scaling: He-4 requires
-only $20\%$ more Pauli terms than the deuteron despite a $12.25\times$
-larger Hilbert space. The composed nuclear--electronic deuterium
-encoding demonstrates that the multi-block architecture extends to
+Mayer--Jensen magic numbers are reproduced from the single-particle
+spectrum with standard spin--orbit and orbital-correction parameters.
+The deuteron and He-4 qubit Hamiltonians, built from the Minnesota
+potential via Moshinsky--Talmi brackets, reproduce their full-CI
+spectra;\ at the same $16$ qubits He-4 has $31\%$ more Pauli terms
+than the deuteron, its added $pp$ and $nn$ channels, while its
+$12.25\times$ larger Hilbert space costs no terms. The composed
+nuclear--electronic encoding, with proton-spin hyperfine and proton-radius
+couplings, demonstrates that the multi-block architecture extends to
 nucleon--electron systems but faces a $\sim 10^{13}$ coefficient ratio that
 requires block-partitioned simulation. The Fock projection rigidity
 theorem precisely delineates which parts of the GeoVac framework
@@ -1454,11 +1479,15 @@ J.~Loutey, ``GeoVac Paper 7: The Dimensionless Vacuum: Recovering the Schr\"odin
 technical report, Zenodo (2026).
 
 \bibitem{Paper14}
-J.~Loutey, ``GeoVac Paper 14: Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory,''
+J.~Loutey, ``GeoVac Paper 14: Structurally Sparse Qubit Hamiltonians from Natural-Geometry Hydrogenic Bases,''
 technical report, Zenodo (2026).
 
 \bibitem{Paper17}
 J.~Loutey, ``GeoVac Paper 17: Composed Natural Geometries for Core-Valence Diatomics: LiH and BeH$^+$ from Natural-Geometry Solvers,'' technical report, Zenodo (2026).
+
+\bibitem{Paper20}
+J.~Loutey, ``GeoVac Paper 20: Structurally Sparse Molecular Hamiltonians for Near-Term Quantum Simulation,''
+technical report, Zenodo (2026).
 
 \bibitem{Paper22}
 J.~Loutey, ``GeoVac Paper 22: Potential-Independent Angular Sparsity for Qubit Hamiltonians in Spherical Fermion Systems,''
@@ -1524,22 +1553,11 @@ D.~J.~Wineland and N.~F.~Ramsey,
 ``Atomic Deuterium Maser,''
 Phys.~Rev.~A \textbf{5}, 821 (1972).
 
-\bibitem{FriarPayne1997}
-J.~L.~Friar and G.~L.~Payne,
-``Higher-order nuclear-size corrections in atomic hydrogen,''
-\emph{Phys.~Rev.~A} \textbf{56}, 5173 (1997); deuteron Zemach radius
-$r_Z(D) = 2.593(16)$~fm.
-
-\bibitem{PachuckiYerokhin2010}
-K.~Pachucki,
-``Nuclear Structure Corrections in Muonic Deuterium,''
-\emph{Phys.~Rev.~Lett.} \textbf{106}, 193007 (2011).
-[Replaces an earlier mis-attributed bibitem (PRL 104, 070403 (2010)
-resolved to a heliumlike-ions fine-structure paper, not deuterium
-HFS). Web-verified 2026-06-03: PRL 106, 193007 (2011), K.~Pachucki,
-``Nuclear Structure Corrections in Muonic Deuterium'' is a real,
-topical reference, cited here for the deuteron-polarizability
-contribution to deuterium HFS.]
+\bibitem{FriarSick2004}
+J.~L.~Friar and I.~Sick,
+``Zemach moments for hydrogen and deuterium,''
+\emph{Phys.~Lett.~B} \textbf{579}, 285 (2004), arXiv:nucl-th/0310043;\
+deuteron Zemach radius $r_Z(D) = 2.593(16)$~fm.
 
 \bibitem{SprintHF}
 J.~Loutey, ``Sprint HF: Hydrogen 21 cm Hyperfine Multi-Focal Precision

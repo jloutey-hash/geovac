@@ -24,7 +24,7 @@ COUPLES different relative-n: the bra bracket forces
 2n + l + 2N_CM + Lam = N_bra and the ket bracket forces
 2n' + l + 2N_CM + Lam = N_ket, so n - n' = (N_bra - N_ket)/2.  The
 N-changing elements are exactly the n != n' ones, and they are large --
-<0,0|V|1,0> = +17.3 MeV against a -0.55 MeV diagonal for the Minnesota
+<0,0|V|1,0> = +17.2 MeV against a -0.81 MeV diagonal for the Minnesota
 singlet at b=1.
 
 Paper 24's own text should have exposed this: it argued the Coulomb
@@ -48,14 +48,14 @@ predicts only "small" or "weakly dependent", is a reason to ask what
 has been restricted.
 
 Corrected reference values (frozen, hbar*omega = 10 MeV, Minnesota
-singlet):
-    N_max = 2:  n_spatial=10, n_configs=15, E0=21.6538 MeV, S=0.0671
-    N_max = 3:  n_spatial=20, n_configs=42, E0=21.6279 MeV, S=0.0716
-    N_max = 4:                              E0=21.5442 MeV, S=0.0833
+singlet at the standard Thompson-LeMere-Tang V_S = -91.85 MeV):
+    N_max = 2:  n_spatial=10, n_configs=15, E0=21.5437 MeV, S=0.0692
+    N_max = 3:  n_spatial=20, n_configs=42, E0=21.5182 MeV, S=0.0736
+    N_max = 4:                              E0=21.4363 MeV, S=0.0850
     (spatial trace-1 1-RDM, natural log, nats -- the same
     convention and the bit-identical builder used by Paper 27
-    tab:ep2b; occupations (1.9800, 0.00666, ...) at N_max=2)
-    rel commutator norm ~ 0.74 / 0.63 / 0.67 at N_max = 2 / 3 / 4
+    tab:ep2b; occupations (1.9793, 0.00691, ...) at N_max=2)
+    rel commutator norm ~ 0.7531 / 0.6379 / 0.6748 at N_max = 2 / 3 / 4
 
 The pi-freeness results of Paper 24 are unaffected -- they concern the
 graph's eigenvalues and adjacency weights, not the interacting
@@ -140,13 +140,14 @@ def _von_neumann_entropy(rho: np.ndarray) -> Tuple[float, np.ndarray]:
     return float(S), occ
 
 
-# Frozen reference values (hbar*omega = 10 MeV, Minnesota NN singlet).
+# Frozen reference values (hbar*omega = 10 MeV, Minnesota NN singlet;
+# the values follow the standard Minnesota V_S = -91.85 MeV).
 _REFERENCE = {
     # E0 CORRECTED 2026-08-22: the published 22.185 (identical at both
     # N_max) came from the N_tot truncation in moshinsky.py. See the
     # Paper 24 retraction.
-    2: {'n_spatial': 10, 'n_configs': 15, 'E0_MeV': 21.6538},
-    3: {'n_spatial': 20, 'n_configs': 42, 'E0_MeV': 21.6279},
+    2: {'n_spatial': 10, 'n_configs': 15, 'E0_MeV': 21.5437},
+    3: {'n_spatial': 20, 'n_configs': 42, 'E0_MeV': 21.5182},
 }
 
 
@@ -164,7 +165,7 @@ def test_paper24_ho_entanglement_is_nonzero(N_max):
     undocumented N_tot guard in geovac/nuclear/moshinsky.py, not by
     physics. A central V(r_rel) is diagonal in the CM quantum numbers
     but couples different relative-n, and those couplings are large
-    (+17.3 MeV off-diagonal against a -0.55 MeV diagonal).
+    (+17.2 MeV off-diagonal against a -0.81 MeV diagonal at b = 1).
     """
     data = _build(N_max)
     ref = _REFERENCE[N_max]
@@ -201,11 +202,12 @@ def test_paper24_ho_entanglement_is_nonzero(N_max):
 
     # CORRECTED 2026-08-22. The published S = 0 was an artifact of an
     # undocumented N_tot truncation in moshinsky.py (Paper 24 retraction).
-    # Measured with the correct two-body element: 0.0671 (N_max=2),
-    # 0.0716 (3), 0.0833 (4) -- nonzero and slowly INCREASING with
-    # basis. Band pinned tight enough to fail on the retracted zero
-    # AND on a drift of more than ~40%.
-    expected_S = {2: 0.0671, 3: 0.0716, 4: 0.0833}
+    # Measured with the correct two-body element and the standard
+    # Minnesota V_S = -91.85 MeV: 0.0692 (N_max=2), 0.0736 (3),
+    # 0.0850 (4) -- nonzero and slowly INCREASING with basis. Band
+    # pinned tight enough to fail on the retracted zero AND on a drift
+    # of more than ~40%.
+    expected_S = {2: 0.0692, 3: 0.0736, 4: 0.0850}
     assert S == pytest.approx(expected_S[N_max], abs=2e-3), \
         f'S_full = {S:.4f} != {expected_S[N_max]} at N_max={N_max}'
 
@@ -236,9 +238,10 @@ def test_paper24_ho_kinetic_interaction_do_not_commute(N_max):
     C = H_kin @ H_vee - H_vee @ H_kin
     rel_norm = np.linalg.norm(C) / np.linalg.norm(H_kin)
     # CORRECTED 2026-08-22: H_HO and V do NOT commute. Measured ratio
-    # 0.74 / 0.63 / 0.67 at N_max = 2 / 3 / 4; pinned per-N_max
+    # 0.75 / 0.64 / 0.67 at N_max = 2 / 3 / 4 (standard Minnesota
+    # V_S = -91.85 MeV); pinned per-N_max
     # (cert-2: the 0.3-1.2 band admitted the 0.47 transposition).
-    expected_comm = {2: 0.7387, 3: 0.6302, 4: 0.6725}
+    expected_comm = {2: 0.7531, 3: 0.6379, 4: 0.6748}
     assert rel_norm == pytest.approx(expected_comm[N_max], abs=0.01), \
         f'|| [H_HO, V] ||_F / || H_HO ||_F = {rel_norm:.3e} ' \
         f'exceeds noise floor at N_max={N_max}'
@@ -259,7 +262,7 @@ def test_paper24_ho_gs_energy_is_variational():
     # CORRECTED 2026-08-22. E0 basis-INdependence was the truncation's
     # own signature: the ground state was frozen inside one N_tot block.
     # Corrected, E0 DECREASES with basis size, as a variational
-    # calculation must (21.6538 -> 21.6279 -> 21.5442 MeV).
+    # calculation must (21.5437 -> 21.5182 -> 21.4363 MeV).
     assert e3 < e2, \
         f'GS energy basis-dependent: N_max=2 -> {e2:.6f}, ' \
         f'N_max=3 -> {e3:.6f} MeV'

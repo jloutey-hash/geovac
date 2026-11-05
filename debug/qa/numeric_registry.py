@@ -1431,6 +1431,34 @@ MEASURED = {
     "p62_hf_aug_lambda_fc": dict(
         value=1169.9, convention="non-identity 1-norm (Ha), HF aug-cc-pVDZ fc Q=62",
         provenance="MEASURED 2026-10-31 (record HS, docs/predictions/2026-10-31_hf_slater_second_molecule.md)"),
+
+    # ---- Paper 23 nuclear qubit Hamiltonians (N_shells=2, hw=10 MeV, Minnesota V_S=-91.85) ----
+    # Complex JW encoding (+-i/4 on XY/YX); every Pauli sum reproduces its FCI
+    # spectrum in the physical particle-number sector to <2e-12 MeV
+    # (tests/test_paper23_resource_counts.py; OpenFermion second route in
+    # tests/test_nuclear_deuteron.py::test_export_round_trip).
+    "p23_deuteron_pauli": dict(
+        value=688, convention="non-identity Pauli, deuteron 1p+1n, Q=16 (80 Z-only + 608 XY)",
+        provenance="MEASURED 2026-11-04, geovac.nuclear.nuclear_hamiltonian.build_deuteron_hamiltonian"),
+    "p23_deuteron_lambda": dict(
+        value=383.87, convention="non-identity 1-norm (MeV), deuteron, Q=16",
+        provenance="MEASURED 2026-11-04, same builder (V_S = -91.85 MeV)"),
+    "p23_he4_pauli": dict(
+        value=904, convention="non-identity Pauli, He-4 2p+2n, Q=16 (136 Z-only + 768 XY), with or without Coulomb",
+        provenance="MEASURED 2026-11-04, build_he4_hamiltonian; matches the /qa group4 reviewer's OpenFermion encoding"),
+    "p23_he4_lambda_nocoul": dict(
+        value=641.39, convention="non-identity 1-norm (MeV), He-4, no pp Coulomb",
+        provenance="MEASURED 2026-11-04, build_he4_hamiltonian(include_coulomb=False)"),
+    "p23_he4_lambda_coul": dict(
+        value=632.19, convention="non-identity 1-norm (MeV), He-4, with pp Coulomb",
+        provenance="MEASURED 2026-11-04, build_he4_hamiltonian(include_coulomb=True)"),
+    "p23_he4_e0_coul": dict(
+        value=-15.918, convention="FCI ground-state energy (MeV, HO zero point included), He-4 with Coulomb",
+        provenance="MEASURED 2026-11-04, diagonalize_he4(hw=10); the Pauli sum gives the same value"),
+    "p23_composed_pauli": dict(
+        value=710, convention="non-identity Pauli, composed nuclear-electronic register Q=26 (688 + 10 + 12)",
+        provenance="MEASURED 2026-11-04, build_deuterium_composed_hamiltonian; sector spectrum = matrix form "
+                   "to float64 roundoff (tests/test_nuclear_electronic.py)"),
 }
 
 # ---------------------------------------------------------------------------
@@ -1449,10 +1477,19 @@ CITED = {
                             source="same", identity=None),
     "he_ccpvtz_lambda": dict(value=530.47, convention="1-norm (Ha)",
                              source="same", identity=None),
-    "lih_sto3g_raw": dict(value=907, convention="raw JW Pauli, LiH STO-3G",
-                          source="recomputed from published integrals", identity=None),
-    "lih_sto3g_lambda": dict(value=34.3, convention="1-norm (Ha)",
-                             source="same", identity=None),
+    "lih_sto3g_raw": dict(value=631, convention="raw JW Pauli, LiH STO-3G, Q=12",
+                          source="recomputed 2026-11-04 (/qa group4 code review): STO-3G integrals "
+                                 "(geovac/noci_engine) at R=3.015, RHF E=-7.8620, OpenFermion JW; 631 is the "
+                                 "standard literature count and matches geovac/composed_qubit.py "
+                                 "_GAUSSIAN_LIH_DATA['sto-3g']. The 907 printed before had no artifact. Count includes the identity term.",
+                          identity=None),
+    "lih_sto3g_qwc": dict(value=179, convention="QWC groups, LiH STO-3G raw JW (count_qwc_groups)",
+                          source="same recompute as lih_sto3g_raw", identity=None),
+    "lih_sto3g_lambda": dict(value=16.48, convention="1-norm (Ha), LiH STO-3G raw JW, identity included",
+                             source="same recompute as lih_sto3g_raw", identity=None),
+    "lih_sto3g_lambda_ni": dict(value=12.34, convention="non-identity 1-norm (Ha), LiH STO-3G raw JW",
+                                source="same recompute as lih_sto3g_raw (identity coefficient -4.134 Ha; "
+                                       "16.477 - 4.134 = 12.342)", identity=None),
     "h2o_sto3g_pauli": dict(value=551, convention="Pauli, H2O STO-3G Q=12",
                             source="same", identity=None),
     "lih_ccpvdz_pauli": dict(value=63519, convention="Pauli, LiH cc-pVDZ",
@@ -1473,6 +1510,8 @@ CITED = {
 # ---------------------------------------------------------------------------
 
 DERIVED = {
+    "p23_he4_deuteron_pauli_ratio": ("p23_he4_pauli / p23_deuteron_pauli", 0.005,
+                                     "He-4 / deuteron Pauli count at fixed Q=16"),
     "p60_exc_ratio_k452":   ("p60_exc_gap_k452 / chem_accuracy_mha", 0.005,
                              "He 2^1S error at K=452, in units of chemical accuracy"),
     "p60_gnd_ratio_k452":   ("p60_gnd_gap_k452 / chem_accuracy_mha", 0.005,
@@ -1568,6 +1607,12 @@ DERIVED = {
 # ---------------------------------------------------------------------------
 
 RETIRED = {
+    # LiH STO-3G market-test baseline printed before 2026-11-04 (no artifact; recomputed 631 / 179 / 16.48).
+    907:     ("lih_sto3g_raw",      r"STO-3G|STO\\text\{-\}3G|Pauli|terms", None),
+    # Paper 23 He-4 values from the real-coefficient XY/YX encoding (2026-11-04: 904 / 641.39 / 632.19).
+    828:     ("p23_he4_pauli",      r"He-?4|helium|Pauli", None),
+    511.8:   ("p23_he4_lambda_nocoul", r"He-?4|helium|1-norm|norm", None),
+    507.2:   ("p23_he4_lambda_coul",   r"He-?4|helium|1-norm|norm", None),
     # value: (replacement key, REQUIRED context, FORBIDDEN context or None)
     #
     # Context is mandatory.  Several of these numerals are common in other

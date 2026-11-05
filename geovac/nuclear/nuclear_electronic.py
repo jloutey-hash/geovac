@@ -57,6 +57,11 @@ HA_PER_MEV: float = 1.0e6 * HA_PER_EV              # 1 MeV in Ha (~ 36749.32)
 # Hartree atomic time).  Canonical value: 6.4465e-6 Ha? No --- the splitting
 # is ~5.87 microeV ~ 2.16e-7 Ha. Compute directly: 1.420405e9 Hz * h_ha
 # with h in Hartree*s = 1.519829846e-16.
+# Radius of the uniformly charged sphere with the proton's rms charge radius
+# (<r^2> = (3/5) R^2).  finite_size_correction takes the SPHERE radius, so
+# (2/5) Z^4 R_sphere^2 = (2/3) Z^4 <r^2>.
+R_PROTON_SPHERE_BOHR: float = float(np.sqrt(5.0 / 3.0)) * R_PROTON_BOHR
+
 HZ_PER_HA: float = 1.0 / 1.519829846e-16            # Hartree frequency (s^-1)
 HF_HYDROGEN_HZ: float = 1.420405751768e9            # CODATA 21cm line
 HF_HYDROGEN_HA: float = HF_HYDROGEN_HZ / HZ_PER_HA  # ~2.16e-7 Ha
@@ -221,14 +226,16 @@ def finite_size_coupling_pauli(
     Q_elec: int,
     nuclear_block: Dict[str, Any],
     electronic_block: Dict[str, Any],
-    R_nuc: float = R_PROTON_BOHR,
+    R_nuc: float = R_PROTON_SPHERE_BOHR,
     Z: int = 1,
 ) -> Dict[str, float]:
     """
     Finite-size correction as a one-body operator on the electronic register.
 
     Closed form (Paper 18, form_factor.py):
-        delta E_1s = (2/5) Z^4 R_nuc^2      (leading order)
+        delta E_1s = (2/5) Z^4 R_nuc^2 = (2/3) Z^4 <r^2>   (leading order;
+                     R_nuc = uniform-sphere radius, default from the
+                     proton rms radius)
 
     In second quantization, the correction couples to the electronic 1s
     number operator:
@@ -518,7 +525,7 @@ def build_deuterium_composed_hamiltonian(
     N_shells: int = 2,
     hw: float = 10.0,
     n_max_elec: int = 2,
-    R_nuc: float = R_PROTON_BOHR,
+    R_nuc: float = R_PROTON_SPHERE_BOHR,
     include_finite_size: bool = True,
     include_hyperfine: bool = True,
     Z: int = 1,
@@ -851,30 +858,23 @@ def pauli_dict_to_sparse_sector(
 
 
 # ---------------------------------------------------------------------------
-# 8b. Matrix-form composed Hamiltonian (physical sector, source of truth)
+# 8b. Matrix-form composed Hamiltonian (physical sector)
 # ---------------------------------------------------------------------------
 #
-# The Pauli dict from `build_deuteron_hamiltonian` has a known sign issue
-# in its off-diagonal one-body encoding (Track NE legacy). Specifically,
-# the helper `_one_body_pauli` stores XY-YX terms with real coefficients,
-# which produces an A(p)A(n) - C(p)C(n) cross-product instead of the correct
-# A(p)A(n) + C(p)C(n) Hermitian symmetrization. The deuteron's H_matrix
-# (FCI form) is unaffected and remains the source of truth for spectra.
-#
-# For Track NI, we therefore build the composed Hamiltonian directly as a
-# matrix in the physical sector |p_i, n_j, e_k> (dim n_p * n_n * n_e),
-# combining the deuteron H_matrix, the diagonal electronic Hamiltonian,
-# and explicit matrix forms for the hyperfine and finite-size couplings.
-# The Pauli dict from `build_deuterium_composed_hamiltonian` is retained
-# for resource counts (Pauli term count, 1-norm, QWC groups) since the
-# bug affects only the spectral content of the off-diagonal one-body
-# pieces, not the term count.
+# The composed Hamiltonian is also built directly as a matrix in the
+# physical sector |p_i, n_j, e_k> (dim n_p * n_n * n_e), combining the
+# deuteron H_matrix, the diagonal electronic Hamiltonian, and explicit
+# matrix forms for the hyperfine and finite-size couplings.  It is an
+# independent check on the Pauli dict of
+# `build_deuterium_composed_hamiltonian`: projected to the same sector,
+# the two have the same spectrum to float64 roundoff
+# (tests/test_nuclear_electronic.py).
 
 def build_deuterium_composed_matrix(
     N_shells: int = 2,
     hw: float = 10.0,
     n_max_elec: int = 2,
-    R_nuc: float = R_PROTON_BOHR,
+    R_nuc: float = R_PROTON_SPHERE_BOHR,
     include_finite_size: bool = True,
     include_hyperfine: bool = True,
     Z: int = 1,
@@ -1090,7 +1090,7 @@ def validate_composed_deuterium(
     mat_fs = build_deuterium_composed_matrix(
         N_shells=N_shells, hw=hw,
         include_finite_size=True, include_hyperfine=False,
-        R_nuc=R_PROTON_BOHR,
+        R_nuc=R_PROTON_SPHERE_BOHR,
     )
     H_fs = mat_fs['H_matrix']
     H_fs = (H_fs + H_fs.T) / 2.0
@@ -1099,8 +1099,8 @@ def validate_composed_deuterium(
     # subtracting two matrices is meaningless. Report the analytical value
     # from the closed-form perturbation formula directly. The existing
     # test_finite_size_coupling_magnitude validates the formula independently.
-    fs_shift = finite_size_correction(Z=1.0, R_nuc=R_PROTON_BOHR, n=1, l=0)
-    fs_expected = (2.0 / 5.0) * (R_PROTON_BOHR ** 2)
+    fs_shift = finite_size_correction(Z=1.0, R_nuc=R_PROTON_SPHERE_BOHR, n=1, l=0)
+    fs_expected = (2.0 / 3.0) * (R_PROTON_BOHR ** 2)  # (2/3) Z^4 <r^2>, rms radius
 
     results = {
         'nuclear_only': {

@@ -436,7 +436,7 @@ cross-center nuclear attraction.  If the two-center integral expansion
 converges in $L_{\max} \le 3$ angular terms at molecular bond lengths,
 the coupled Hamiltonian should have $\lesssim 4.5\times$ the composed
 count for LiH at $n_{\max} = 2$, remaining below the full Level~4N
-count of 3{,}288 and potentially below the Gaussian STO-3G count of 907
+count of 3{,}288 and potentially below the Gaussian STO-3G count of 631
 after the PK one-body terms are removed.  (As originally framed under
 the retired pair-diagonal rule this read $\lesssim 1{,}500$ against a
 composed count of 334; the \emph{ratio} is the rule-independent
@@ -523,8 +523,8 @@ the four coupling schemes at LiH $n_{\max} = 2$, $Q = 30$.
 $Q = 30$.  All values from Jordan--Wigner encoding, re-measured
 2026-09-01 under the exact global-$M_L$ rule.  Pauli counts include
 the identity term; 1-norms exclude it.  The Gaussian
-STO-3G baseline ($Q = 12$) is included for reference.  Retired
-pair-diagonal figures: $334/37.3/21$, $878/74.1/87$, $854/85.7/88$.}
+STO-3G baseline ($Q = 12$, our own raw Jordan--Wigner build from
+STO-3G integrals at $R = 3.015$~bohr) is included for reference.}
 \label{tab:resources}
 \begin{ruledtabular}
 \begin{tabular}{lddd}
@@ -533,7 +533,7 @@ Configuration & \multicolumn{1}{c}{Pauli} & \multicolumn{1}{c}{1-norm (Ha)} & \m
 Composed (PK)      & 838  & 38.3 & 64  \\
 Balanced (CD)      & 2726 & 75.2 & 629 \\
 Coupled (CB)       & 2702 & 80.5 & 630 \\
-Gaussian STO-3G    & 907  & 34.3 & 273 \\
+Gaussian STO-3G    & 631  & 12.3 & 179 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -542,12 +542,11 @@ The balanced Hamiltonian has 2{,}726 Pauli terms, confirming the
 ratio form of Conjecture~\ref{conj:sparsity} ($3.25\times$ the composed
 838, under the conjectured $4.5\times$) but not its absolute form:
 2{,}726 exceeds both the $\sim 1{,}500$ the ratio implied at the
-retired composed count and the STO-3G count of 907.  The 1-norm of the balanced
+retired composed count and the STO-3G count of 631.  The 1-norm of the balanced
 Hamiltonian (75.2~Ha) is \emph{lower} than the coupled CB value
 (80.5~Ha) because the attractive cross-center $V_{ne}$ partially
 cancels the repulsive cross-block $V_{ee}$.  The QWC group count
-(629; 87 under the retired pair-diagonal rule) no longer sits below
-the Gaussian baseline (273).
+(629) sits well above the Gaussian baseline (179).
 
 \emph{The prolate route, counted.}  The all-electron prolate treatment of the
 well-shape subsection (``Route~C'') is the most accurate LiH construction here,
@@ -1261,7 +1260,7 @@ The balanced Hamiltonian has 2{,}726 Pauli terms.  The conjecture's
 rule-independent content --- $\lesssim 4.5\times$ the composed count
 --- holds at $3.25\times$.  Its absolute legs do not: 2{,}726 exceeds
 the ${\sim}1{,}500$ that ratio implied at the retired composed count
-of 334, and exceeds the STO-3G count of 907.  It stays below the
+of 334, and exceeds the STO-3G count of 631.  It stays below the
 Level~4N count of 3{,}288, but by 17\% rather than the $3.7\times$
 the retired figures showed.
 
@@ -2569,8 +2568,8 @@ J.~Loutey, ``Algebraic Two-Electron Integrals on the Prolate
   Spheroidal Lattice,'' GeoVac Paper~12 (2026).
 
 \bibitem{loutey_paper14}
-J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral
-  Graph Theory,'' GeoVac Paper~14 (2026).
+J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Natural-Geometry
+  Hydrogenic Bases,'' GeoVac Paper~14 (2026).
 
 \bibitem{loutey_paper17}
 J.~Loutey, ``Composed Natural Geometries for Core-Valence Diatomics:
