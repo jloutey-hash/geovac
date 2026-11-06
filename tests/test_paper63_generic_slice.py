@@ -1,4 +1,4 @@
-"""Paper 59 sec:three_electron, the second slice of the chain fibre: scales (t;1,2).
+"""Paper 63 sec:three_electron, the second slice of the chain fibre: scales (t;1,2).
 
 Record docs/predictions/2026-10-21_generic_slice.md (GS1-GS5, committed a606d28f before computing).
 Written as a separate step from the result, self-contained (no debug/ import); the exact gauge found by
@@ -25,7 +25,7 @@ t, u, z, s, y = sp.symbols("t u z s y")
 DATA = json.loads((Path(__file__).parent / "data" / "paper59_ladder_2026_10_21.json").read_text())["generic_slice"]
 B_SCALE = sp.Integer(2)
 
-# The registered b = 1 slice operator (tests/test_paper59_chain_slater_slice.py, eq:chain_slater_slice)
+# The registered b = 1 slice operator (tests/test_paper63_chain_slater_slice.py, eq:chain_slater_slice)
 QG1 = [-4 * (u - 5) * (u - 3) * (u - 1) ** 2 * (u + 1) * (u + 2) * (u + 5),
        (u - 3) * (u - 1) * (u + 1) * (u + 2) * (5 * u**3 + 88 * u**2 + 460 * u + 708),
        -(u - 1) * (u + 2) * (u**5 + 36 * u**4 + 463 * u**3 + 2718 * u**2 + 7396 * u + 7680),

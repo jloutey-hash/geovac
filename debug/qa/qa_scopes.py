@@ -108,8 +108,10 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
     # 61 added 2026-09-07: it is the periods/Tannakian arc (siblings 55, 56,
     # 57 are all here) and lives in papers/group3_foundations/, but was in no
     # group scope, so `/qa group3` walked past it.
+    # 63 added 2026-11-06: the density-graph ladder lifted out of Paper 59 (PI-approved split);
+    # it lives in group3_foundations/ beside 57 and 61.
     "group3": {
-        "papers": [18, 22, 24, 31, 54, 55, 56, 57, 61],
+        "papers": [18, 22, 24, 31, 54, 55, 56, 57, 61, 63],
         "extra": ["synthesis/group3_foundations_synthesis.tex"],
     },
     # docs/qa/group4.done.md: Papers 14, 16, 20, 23 + synthesis.
@@ -159,6 +161,10 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
                  "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
     "paper_62": {"papers": [62],
                  "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
+    # Paper 63 (2026-11-06) is the density-graph ladder lifted out of Paper 59; its only
+    # synthesis footprint is the group3 one (the group2 synthesis keeps a one-line pointer).
+    "paper_63": {"papers": [63],
+                 "extra": ["synthesis/group3_foundations_synthesis.tex"]},
     "paper_60": {"papers": [60],
                  "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
     # Paper 61 was split out of Paper 59 on 2026-09-06 and belonged to NO
@@ -181,6 +187,7 @@ ALIASES = {
     "paper 59": "paper_59", "paper59": "paper_59", "p59": "paper_59",
     "paper 60": "paper_60", "paper60": "paper_60", "p60": "paper_60",
     "paper 62": "paper_62", "paper62": "paper_62", "p62": "paper_62",
+    "paper 63": "paper_63", "paper63": "paper_63", "p63": "paper_63",
 }
 
 _NUM_RE = re.compile(r"(?:^|/)[Pp]aper_(\d+)_")

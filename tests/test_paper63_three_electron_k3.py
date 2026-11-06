@@ -1,4 +1,4 @@
-"""Paper 59 -- the three-electron chain integral is a K3 whose period is
+"""Paper 63 -- the three-electron chain integral is a K3 whose period is
 "elliptic squared" (Bailey), and its one-centre limit is rational.
 
 Backs the pre-registered predictions P3a/P3b/P3c/P3d of

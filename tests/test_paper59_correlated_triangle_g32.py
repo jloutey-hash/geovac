@@ -16,8 +16,8 @@ from pathlib import Path
 import pytest
 import sympy as sp
 
-import test_paper59_density_ring as DR
-import test_paper59_generic_slice as GS
+import test_paper63_density_ring as DR
+import test_paper63_generic_slice as GS
 
 t, u = GS.t, GS.u
 x = sp.Symbol("x")

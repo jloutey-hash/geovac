@@ -1,4 +1,4 @@
-"""Guard for Paper 59 sec:density_ring, "the operators are also evaluators" (record
+"""Guard for Paper 63 sec:density_ring, "the operators are also evaluators" (record
 docs/predictions/2026-10-26_operator_evaluator.md, OE1-OE2).
 
 The off-slice kite phi(z) at (1, 2; 3/2, 3) from its exact order-11 operator (tests/data/paper59_ib_2026_10_24.json,

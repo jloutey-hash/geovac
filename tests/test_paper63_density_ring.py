@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring -- a ring of three densities does not climb the period ladder.
+"""Paper 63 sec:density_ring -- a ring of three densities does not climb the period ladder.
 
 Record: docs/predictions/2026-10-17_density_loop.md (committed before the computation).
 Each test names the wrong answer it rejects.

@@ -1,4 +1,4 @@
-"""Paper 59 sec:four_density -- four linked densities give the first rung beyond elliptic.
+"""Paper 63 sec:four_density -- four linked densities give the first rung beyond elliptic.
 
 Guards (each names the wrong answer it rejects):
   * tree identity eq:tree at n = 4, star and chain: rejects a shape-dependent or mis-normalised

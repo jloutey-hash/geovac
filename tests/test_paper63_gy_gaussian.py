@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: the Gaussian geminal exp(-r^2) on both edges of the correlated triangle (GY1-GY3).
+"""Paper 63 sec:density_ring: the Gaussian geminal exp(-r^2) on both edges of the correlated triangle (GY1-GY3).
 
 Record docs/predictions/2026-10-23_gaussian_geminal_triangle.md (committed b84e1231 before computing).
 Written as a separate step from the result; no debug/ import.  Data tests/data/paper59_gy_2026_10_24.json.

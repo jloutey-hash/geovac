@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: why the correlated triangle drops at gamma = 1 (equal masses, not colliding
+"""Paper 63 sec:density_ring: why the correlated triangle drops at gamma = 1 (equal masses, not colliding
 thresholds).
 
 Record docs/predictions/2026-10-23_gamma1_mechanism.md (MG1-MG3, committed 037c1ea2 before computing).

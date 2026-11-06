@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: one function, L(a, b; c) = int_0^oo K0(ax) K0(bx) cos(cx) dx
+"""Paper 63 sec:density_ring: one function, L(a, b; c) = int_0^oo K0(ax) K0(bx) cos(cx) dx
 = pi^2 P_(-1/2)(z) / (4 sqrt(ab)), z = (a^2 + b^2 + c^2)/(2ab), carries both elliptic pieces.
 
 Written as a separate step from the paper paragraph; no debug/ import.  Claims guarded:

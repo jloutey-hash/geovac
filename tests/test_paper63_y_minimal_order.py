@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: the minimal operator of the off-slice correlated triangle Y, and its K3 piece.
+"""Paper 63 sec:density_ring: the minimal operator of the off-slice correlated triangle Y, and its K3 piece.
 
 Records docs/predictions/2026-10-23_price_formula_slots.md (addenda 6, 7), 2026-10-25_geometric_route_y.md and
 2026-10-25_tetrahedron_route_y.md.  Written as a separate step from the results; no debug/ import.  Data

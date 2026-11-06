@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: the cusp-correct geminal f = r e^{-gamma r} on both edges at gamma = 2 brings
+"""Paper 63 sec:density_ring: the cusp-correct geminal f = r e^{-gamma r} on both edges at gamma = 2 brings
 no new type (GA3).
 
 Record docs/predictions/2026-10-23_geminal_shapes_g2.md (committed 037c1ea2 before computing).

@@ -1,10 +1,10 @@
-"""Paper 59 sec:four_density, the real three-dimensional four-density star.
+"""Paper 63 sec:four_density, the real three-dimensional four-density star.
 
 Record docs/predictions/2026-10-21_four_density_star.md (FD1-FD3, committed 9a33fbef before computing).
 Written as a separate step from the result; no debug/ import.  The exact pieces found by search (the
 order-one piece X1, the order-four piece R4pp and the gauge A from F_4's operator) are loaded from
 tests/data/paper59_ladder_2026_10_21.json and re-verified here.  Shared operator helpers come from
-tests/test_paper59_generic_slice.py.
+tests/test_paper63_generic_slice.py.
 
 At the fingerprint fibre on the slice (t;1,1,1), S(t) = (16/pi^4) t^3 int_0^oo chi(x)^3 K0(t x) dx / x,
 chi = int_0^x s K1(s) ds.  Its Mellin operator L has order 19, and W8 = R4pp o X1 o E2 o (theta - 3)
@@ -21,7 +21,7 @@ import mpmath as mp
 import pytest
 import sympy as sp
 
-import test_paper59_generic_slice as GS
+import test_paper63_generic_slice as GS
 
 t, u, z, y = GS.t, GS.u, GS.z, GS.y
 DATA = json.loads((Path(__file__).parent / "data" / "paper59_ladder_2026_10_21.json").read_text())["star"]

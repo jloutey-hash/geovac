@@ -1,4 +1,4 @@
-"""Guards for Paper 59 sec:density_ring, the kite at a blind second point and its ninth singular point
+"""Guards for Paper 63 sec:density_ring, the kite at a blind second point and its ninth singular point
 (records docs/predictions/2026-10-26_parametric_kite_operator.md, 2026-10-26_kite_ninth_point.md,
 2026-10-27_kite_ninth_point_origin.md).  Data: tests/data/paper59_kite_p2_2026_10_27.json, built by
 debug/build_kite_guard_data_2026_10_27.py (a copy of stored results; no debug/ import here).

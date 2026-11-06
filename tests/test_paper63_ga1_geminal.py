@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: the cusp-correct geminal r e^{-gamma r} brings no new type at gamma = 3/2.
+"""Paper 63 sec:density_ring: the cusp-correct geminal r e^{-gamma r} brings no new type at gamma = 3/2.
 
 Record docs/predictions/2026-10-22_geminal_shapes.md (GA1, committed 5e40da9a before computing).  Written as a
 separate step from the result; no debug/ import.  The order-two composition factor of Y_lin's annihilator (theta

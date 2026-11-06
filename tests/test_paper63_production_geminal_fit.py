@@ -1,4 +1,4 @@
-"""Guard for Paper 59 sec:density_ring, a production geminal fit priced on Y (record
+"""Guard for Paper 63 sec:density_ring, a production geminal fit priced on Y (record
 docs/predictions/2026-10-26_production_geminal_fit.md, PG1-PG3).
 
 Y at density scales (1, 2) and apex t, with exp(-gamma r) geminals on the two edges (gamma = 3/2, 3), replaced by a

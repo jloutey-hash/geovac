@@ -1,4 +1,4 @@
-"""Paper 59 -- the genus ladder stops at one for the four-centre ERI (XY|ZW).
+"""Paper 63 -- the genus ladder stops at one for the four-centre ERI (XY|ZW).
 
 Backs the pre-registered prediction P1 of
 docs/predictions/2026-10-13_four_centre_genus.md (registered 2026-10-13

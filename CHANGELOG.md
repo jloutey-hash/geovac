@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.3.1] - 2026-11-06
+
+**Paper 63 split off Paper 59; the ladder made orbital-independent (PI-approved plan, 2026-11-06).** The
+QA sequence (group5, group6, synthesis still open) is paused for this; it resumes at group5. Patch bump by
+default; a paper-series reorganization is a PI minor-bump call and is flagged as such.
+
+### Added
+- **`papers/group3_foundations/paper_63_density_graph_ladder.tex`** -- "Linked Electron Densities Climb
+  the Banana Ladder: Period Classes of Molecular Integrals over Exponential-Type Orbitals". Paper 59's
+  section "Beyond the third center" (four_centre, three_electron, four_density, density_ring; ~1,050 lines)
+  and its "Read as a Feynman graph" paragraph moved verbatim (labels kept; six in-block references to
+  Paper 59's sections rewritten as text pointers; eq:curve and eq:period restated in the introduction).
+  New: abstract, introduction, **sec:dictionary**, **sec:conjecture**, **sec:placement**, scope,
+  conclusion; 46 references (39 pruned as uncited).
+- **The dictionary (sec:dictionary) [SYMBOLIC PROOF + PRIOR ART]:** every exponential-type orbital on a
+  centre is a polynomial differential operator in its exponent and centre, coefficients rational in the
+  exponent, applied to the 1s Yukawa (Hobson + zeta-derivatives; l = 1 inversion
+  Y_10 e^{-zeta s} = -zeta^-1 [T_2 + zeta^-1 T_1], l = 2 inversion zeta^-2 U_3 + 3 zeta^-3 U_2 + 3 zeta^-4 U_1);
+  so every multi-density integral is that operator applied to the 1s integral of its density graph, its
+  D-module is a quotient of the 1s one and its rung is at most the 1s rung of its graph. At the fibre
+  every weight is an Euler-operator image: Delta^-(2m+1) = (1 + 2/(2m-1) c d/dc) Delta^-(2m-1),
+  L^2 Delta^-j = (Delta^-(j-2) - Delta^-j)/c. **[MEASURED]** two-density images of K(m)/sqrt(c_max) at
+  1e-25 (only K and E appear); three-density fibre with Delta^-3 / Delta^-5 weights equals the tree
+  identity with weights 2 x c^-1 K_1 and (4/3) x c^-1 K_1 + (2/3) x^2 c^-3/2 K_0, to 2e-9 at three
+  triples. Stated honestly as an UPPER bound on the rung (a derivative can land in a submodule); the
+  3-D-reduction and fibre-vs-value caps are inherited from Paper 59 unchanged.
+- **The graph reading as a bounded conjecture (sec:conjecture):** (i) trees at rung n with nothing above
+  F_n; (ii) the rung names an operator, not a finite period basis (the P3e-2 null is the stated test);
+  (iii) Coulomb loops that integrate out by uniqueness lower the rung, geminal loops do not; (iv) the
+  integrated value sits at or below its fibre. Each part labelled proved / measured / open.
+- **Placement (sec:placement):** the Averys' route (monograph Ch. 9 / App. B, avery2013, avery_avery2015,
+  avery_avery_4center) re-expands two-centre densities in a 2k Coulomb-Sturmian basis -- a series, not an
+  identity, non-sparse, ill-conditioned at short range by overcompleteness (Monkhorst-Jeziorski 1979 is
+  the older prior art); it reaches the genus-zero class only by an infinite series and contains neither the
+  Bessel-moment reduction nor the ladder. **Verified against the PI's copy of the book source** (no K_0,
+  no int prod K_0, no elliptic integral, no Broadhurst/BBBG/Vanhove in its bibliography); the published
+  2018 book is cited, the draft never.
+- `tests/test_paper63_dictionary.py` (29 checks, 8 s; each names the wrong answer it rejects).
+- `docs/qa/paper_63.done.md` DRAFT for PI co-write; `qa_scopes.py` gains Paper 63 in group3 and a
+  `paper_63` single-paper target.
+- Avery reading map (`docs/outreach/avery_hyperspherical_map.{tex,pdf}`): new open item "The rungs
+  beyond, and a question for you" (does his generalized SW/HH expansion contain Eq. tree in another form?);
+  Paper 63 in the chain item and the papers list. Sending remains the PI's.
+
+### Changed
+- **Paper 59** trimmed to the three-centre result (2,634 -> 1,522 lines): abstract, literature, geminal
+  section, scope and conclusion carry pointer sentences to Paper 63; 28 uncited bibitems pruned;
+  `\bibitem{loutey_paper63}` added. Title unchanged.
+- 20 tests renamed `test_paper59_X` -> `test_paper63_X` (`git mv`; map in the commit); cross-imports
+  updated; `test_paper59_h2_geminal_master.py` stays (shared). Paper 63's `\texttt{}` references follow.
+- Re-pointed to Paper 63: `docs/claim_test_matrix.md` (rows for the moved sections + the new dictionary
+  row), `debug/qa/claim_registry.py` (7 owners; `p59-coulomb-ring-elliptic` anchor re-pointed to the
+  abstract), `docs/atlas.md`, `docs/forced_free_seam.md`, `docs/walls/register.md` (PERIODS-TRANSCENDENCE
+  home and guards; walls-edit rule: PI told), Paper 57 J4/J7/J10/J11 + `\bibitem{paper63}`, Paper 18
+  sec:level2_genus pointer, `papers/INDEX.md` (new row; 59's trimmed), CLAUDE.md Sec. 6 group3 count
+  12 -> 13. The group2 synthesis's ladder paragraph moved verbatim into the group3 synthesis as
+  "The density-graph ladder (Paper 63)" with its four `\gvc` spans; one pointer sentence left behind.
+- C16: no new entries needed (the moved-section entries use the `papers/group*/*.tex` glob).
+
+### Gates (end state)
+- C11 group2/group3 PASS after one fix (Paper 63's Paper 57 bibitem title); C13, C16, C22, C25 PASS;
+  compiles: Papers 59, 63, 57, 18, both syntheses three-pass, zero undefined references.
+
+### Owed
+- Fire-test of `test_paper63_dictionary.py` with `fire_test.py` (guard rule: separate step).
+- A pre-registration not run: the Slater-weight three-electron slice G(a;b,c) should equal an explicit
+  Euler operator applied to the fingerprint-weight slice; a prospective check of the dictionary on Paper
+  59's own data.
+- `/qa paper_63` (PI-invoked) once the done-file is co-written; then the Avery message (PI sends).
+- `docs/qa/paper_59.done.md` items 10-15 now describe Paper 63's sections (dated record; superseded-by
+  note owed). Dated records (`docs/predictions/*`, CHANGELOG, debt files, `debug/` scripts importing old
+  test names) deliberately untouched.
+
 ## [v6.3.0] - 2026-11-04
 
 `/qa group4` FULL (incremental; first whole-group cert of group4 under stamps; Papers 14, 16, 20, 23 + the group4

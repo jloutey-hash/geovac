@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring -- the chain at the Slater weights (eq:chain_slater_slice).
+"""Paper 63 sec:density_ring -- the chain at the Slater weights (eq:chain_slater_slice).
 
 Record: docs/predictions/2026-10-19_p3e2_widened.md, P3e-3 (committed bb3ffe11 before computing).
 Written as a separate step from the result.  Each test names the wrong answer it rejects.
@@ -224,7 +224,7 @@ def test_w_annihilates_g(tv):
 # Record docs/predictions/2026-10-20_slice_artanh.md (SA1, SA2; committed cffafc1d before computing).
 # Written as a separate step from the result.  Work in x = t^2 (the paper's w), delta = x d/dx (theta = 2 delta), with
 # the chain guard's exact delta-form machinery; operators are lists [c_0, c_1, ...], functions on the left.
-import test_paper59_density_ring as DR  # noqa: E402
+import test_paper63_density_ring as DR  # noqa: E402
 
 X_ = DR.x_
 Rat = sp.Rational

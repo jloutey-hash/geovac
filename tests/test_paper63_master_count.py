@@ -1,4 +1,4 @@
-"""Guard for Paper 59 sec:density_ring, the master count of the one-mass slice and the two-offset fibre (record
+"""Guard for Paper 63 sec:density_ring, the master count of the one-mass slice and the two-offset fibre (record
 docs/predictions/2026-10-27_master_count_tabulation.md, MC0-MC2b, MC6).
 
 Masters are counted as critical points of the twisted one-form (Euler characteristic), excluding removed points.

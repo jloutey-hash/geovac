@@ -346,7 +346,7 @@ CLAIMS = {
         statement="The general four-centre Slater ERI (XY|ZW) lives on a genus-one curve: a fourth "
                   "distinct centre adds no genus (no genus two) [MEASURED; agrees with an independent "
                   "McMurchie-Davidson evaluation]. Pre-registered 2026-10-13.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"A fourth distinct center adds no genus", owner_tier=r"\[MEASURED\]",
         tier="MEASURED", owner_window=4,
         mention=r"four[- ]cent(er|re)[^.;]{0,80}(genus|elliptic|period|ERI)|fourth (distinct )?cent(er|re)",
@@ -360,7 +360,7 @@ CLAIMS = {
                   "periods at equal scales (evidence); at generic scales a PSLQ search at one mass triple finds no "
                   "relation in a K3 + elliptic + Tate basis (evidence, not proof); Calabi-Yau n-folds for longer "
                   "trees are OPEN.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"A three-electron chain lives on a K3", owner_tier=r"\[MEASURED / classical\]",
         tier="MEASURED / classical", owner_window=20,
         mention=r"Calabi.{0,3}Yau[^.;|]{0,15}folds?|generic (chain )?(fibre|fiber)|longer (trees|chains)",
@@ -386,7 +386,7 @@ CLAIMS = {
         load_bearing=True, changed="2026-10-16"),
     "seam-j4-j7-forced": dict(
         statement="Seam rows J4 (fourth centre: genus one) and J7 (three-electron chain: K3, elliptic "
-                  "squared) are F (forced) as of 2026-10-15, on Paper 59 sec:beyond; J2 (front) and J8 "
+                  "squared) are F (forced) as of 2026-10-15, on Paper 63 sec:beyond; J2 (front) and J8 "
                   "(r12 bridge, a validated reduction) and J9 (the rung rule, re-tiered F -> Obs 2026-10-16) are "
                   "Obs; J3/J6 (closed forms of the three-centre radial core) are W. J10 (four linked densities) is F as of 2026-10-16; J11 (a ring of three densities) is F as of "
                   "2026-10-17. Totals 41 F / 4 Obs / 1 A / 25 C / 3 W = 74.",
@@ -405,8 +405,8 @@ CLAIMS = {
                   "at one centre it carries dilogarithms where the chain is rational [SYMBOLIC + MEASURED]. "
                   "Scope: Coulomb kernels; the drop is the exact (unique) integration of the loop, and the "
                   "correlated (geminal) triangle does not drop.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
-        owner_anchor=r"A fourth finds that a Coulomb ring of three densities does not climb", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
+        owner_anchor=r"Coulomb ring of three densities does not climb", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
         tier="SYMBOLIC + MEASURED", owner_window=1,
         mention=r"ring of three|rings? (does|do) not climb|Coulomb (ring|triangle)|"
                 r"triangle of three\s+densit|loop (lowers|integrates out)|ring behaves|"
@@ -429,7 +429,7 @@ CLAIMS = {
                   "gamma = 3/2 it reaches the K3 rung by local data mod p plus Levelt rigidity, and whether it climbs further is open. "
                   "The cusp-correct shape r e^(-gamma r) brings no new type at gamma = 3/2 and 2 (Paper 59). "
                   "The registered elliptic prediction (QG2) was falsified.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"the correlated triangle does not drop", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
         tier="SYMBOLIC + MEASURED", owner_window=1,
         mention=r"correlated (\(geminal\) )?triangle|geminal triangle|geminals on (the )?two edges|"
@@ -447,7 +447,7 @@ CLAIMS = {
                   "c_{6,0} = 108 pi^2 L(g,4)) are PRIOR ART (BBBG; Lim-Tu-Yu); c_{8,0} fits no single "
                   "L-value tried, so the searches give parity no support as a rule for values; c_{5,0}, c_{7,0} fit no tested "
                   "lower basis at a stated bound. What the ladder adds is the threshold reading.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"At \$t=1\$ the ladder is the Ising class", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
         tier="SYMBOLIC + MEASURED (thresholds); PRIOR ART (values)", owner_window=1,
         mention=r"Ising[- ]class|c_\{?[3-8],0\}?|even moments|parity (rule|heuristic)",
@@ -464,7 +464,7 @@ CLAIMS = {
                   "exact arithmetic for n = 2 to 5 [SYMBOLIC]; n = 4 is AESZ #58 and n = 5 the operator "
                   "printed with #39 (prior art: Almkvist-Zudilin; the tables). F_n is irreducible for "
                   "n = 2..5 by local exponents and Fuchs' relation.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"So the tree ladder is tied to the banana ladder", owner_tier=r"\[SYMBOLIC\]",
         tier="SYMBOLIC (n = 2..5) + PRIOR ART", owner_window=0,
         mention=r"banana ladder|Hadamard product",
@@ -485,7 +485,7 @@ CLAIMS = {
                   "the chain at the fingerprint fibre (WG3). One cap: the standard Mellin contour shift "
                   "(cited, not tested). Analyticity alone does not force it. Scope: one slice; the generic "
                   "fibre stays evidence.",
-        owner="papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"Both annihilations are derived", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
         tier="SYMBOLIC + MEASURED (derived, with the Mellin contour shift cited)", owner_window=36,
         mention=r"artanh|order[- ](four|4)\s+(\$?P\b|factor|membership)|Slater slice|chain_slater_slice|"

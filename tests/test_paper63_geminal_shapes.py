@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: geminal shapes on the one-function reading.
+"""Paper 63 sec:density_ring: geminal shapes on the one-function reading.
 
 Record docs/predictions/2026-10-22_geminal_shapes.md (GA1-GA2, committed 5e40da9a before computing); GA2 and the
 unregistered slot diagnostic are guarded here.  Written as a separate step; no debug/ import.

@@ -1,0 +1,1733 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{observation}{Observation}
+
+% Numeric-registry citation macro (CLAUDE.md SS15): renders the literal
+% only; the key is a foreign key into debug/qa/numeric_registry.py.
+\newcommand{\gvq}[2]{#2}
+
+\begin{document}
+
+\title{Linked Electron Densities Climb the Banana Ladder:\\
+Period Classes of Molecular Integrals over Exponential-Type Orbitals}
+\thanks{Paper 63 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{November 6, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+Paper~59 read the radial core of the three-center electron-repulsion
+integral over $1s$ Slater orbitals as an elliptic Bessel moment:\ two
+two-center densities coupled by a Coulomb kernel build a genus-one curve.
+This paper asks two questions that result leaves open.  How does the class
+climb when an integral links more densities?  And how far does the reading
+reach past $1s$ orbitals?  \textbf{[SYMBOLIC PROOF + PRIOR ART]} The
+second is answered first, by a dictionary.  Every exponential-type orbital
+on a center is a polynomial differential operator in its exponent and its
+center coordinate, with coefficients rational in the exponent, applied to
+the $1s$ Yukawa function on that center;\ at the fibre, where the centers
+coincide, the operator acts on the density scales alone, and every density
+weight is a polynomial in the Euler operators $c\,\partial_c$ applied to the
+$1s$ weight.  So every multi-density integral with rational kernels is that
+operator applied to the $1s$ integral of the same density graph, its
+$D$-module is a quotient of the $1s$ one, and its rung is at most the $1s$
+rung of its graph.  The ladder below is therefore a property of the graph,
+not of the orbitals on it.  \textbf{[SYMBOLIC + MEASURED]} On the graph the
+rung is read off the holomorphic period.  Any tree of $n$ linked
+two-center densities has the same period, a Bessel moment in $n$ scales;\
+its one-scale family is annihilated by an operator of order $n$ that is the
+Hadamard product of the Legendre operator with the operator of the equal-mass
+banana integral with $n-1$ propagators:\ $n=2$ is Legendre's $K$, $n=3$
+Clausen's elliptic square (a K3 surface), $n=4$ entry \#58 of the
+Calabi--Yau tables, the first period not built from elliptic ones, and $n=5$
+brings no new type.  The real three-dimensional star and path of four
+densities reduce onto that operator with no K3 piece.  A fourth distinct
+center adds no genus \textbf{[MEASURED]}.  \textbf{[SYMBOLIC + MEASURED]} A
+Coulomb ring of three densities does not climb:\ its loop integrates out by
+the three-dimensional uniqueness relation and it sits on the elliptic rung,
+below the chain of three;\ the correlated triangle of explicitly correlated
+methods, with exponential geminals on two edges, sits with the chain on the
+K3 rung, its geminal acting as an imaginary external momentum, and its
+operators follow from integration by parts on the kite and the tetrahedron.
+A Gaussian geminal leaves the ladder for exponential periods.
+\textbf{[OBSERVATION]} Read as a Feynman graph, every instance fits one
+pattern:\ the class is set by the shape of the density graph and the masses
+on its lines.  We state it as a bounded conjecture.  Trees sit at rung
+$n$;\ the rung names an operator and not a finite set of numbers, since on
+every slice tested the three-electron fibre is a K3 function integrated
+once and at generic scales it has no relation to the K3 and elliptic periods
+in any basis tried;\ rings are ordered by uniqueness, not by count;\ and the
+integrated value sits at or below its fibre.  The caps are stated:\ the
+three-dimensional reduction is shown through four densities, the only ring
+tested is the triangle, and the generic fibre's content is evidence.
+\textbf{[PRIOR ART]} The operators are known in the mathematics of Bessel
+moments and banana integrals;\ the Averys' momentum-space treatment of these
+same integrals re-expands every two-center density in a one-center basis and
+reaches the genus-zero class only through an infinite, non-sparse series.
+What is new is the route from molecular integrals to the ladder, the
+dictionary that makes the ladder orbital-independent, and the prospective
+record on which the rungs were called before they were computed.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ========================================================================
+
+Two-center electron-repulsion integrals over exponential-type orbitals close
+in elementary functions together with the exponential integral, the
+logarithm and Euler's constant:\ a genus-zero class, weight one, settled by
+Roothaan and Ruedenberg.  Paper~59~\cite{loutey_paper59} read the genuine
+three-center integral $(XY|XZ)$ in momentum space, where each center is a
+phase and the two two-center densities carry Fock dispersion roots
+$\Delta_i=\sqrt{c_ik^2+1}$ with different scales, and found its radial core
+on the elliptic curve
+%
+\begin{equation}
+  y^{2} = (c_{1}k^{2}+1)(c_{2}k^{2}+1),
+  \label{eq:curve}
+\end{equation}
+%
+whose period at zero separation is a complete elliptic integral,
+%
+\begin{equation}
+  \int_{0}^{\infty}\!\frac{dk}{\sqrt{(c_{1}k^{2}+1)(c_{2}k^{2}+1)}}
+  = \frac{1}{\sqrt{c_{\max}}}\,K(m),\qquad m=1-\frac{c_{\min}}{c_{\max}},
+  \label{eq:period}
+\end{equation}
+%
+degenerating to the elementary $\pi/(2\sqrt c)$ only at equal scales.  That
+paper's object was one integral.  This paper's object is the \emph{ladder}:\
+what happens to the class as an integral links more electron densities, and
+whether the reading depends on the $1s$ orbitals it was found on.
+
+The answer to the second question is a dictionary
+(Sec.~\ref{sec:dictionary}), and it is classical in its parts.  Every
+exponential-type orbital is a derivative of the $1s$ Yukawa function in its
+exponent and its center;\ so every integral over such orbitals is a
+derivative of the $1s$ integral of the same \emph{density graph}, the graph
+whose lines are the orbitals and the kernels and whose vertices are the
+electrons and the nuclei.  Derivatives in the parameters of a period stay in
+its $D$-module.  The rung is therefore a property of the graph.  The answer
+to the first question (Sec.~\ref{sec:beyond}) was found on $1s$ orbitals and,
+by the dictionary, holds for all of them:\ for a tree of $n$ linked densities
+the holomorphic period depends only on $n$, and the operators of the one-scale
+family for $n=2,\dots,5$ are, under one exact Hadamard product, the operators
+of the equal-mass banana Feynman integrals, which carry Calabi--Yau
+$(n-2)$-folds~\cite{bonisch2021}.  The Coulomb ring of three does not climb,
+the correlated triangle does, and a Gaussian geminal leaves the ladder.
+
+The reading that organizes these facts is a Feynman-graph one
+(Sec.~\ref{sec:conjecture}):\ densities and kernels are lines, exponents and
+geminal decays are masses, and the class is set by the shape of the graph and
+the masses on its lines.  We state it as a bounded conjecture with its
+falsifiers, and we record the one place its naive form fails:\ the rung names
+an operator, not a finite basis of periods.  In the transcendence bookkeeping
+of the Geometric Vacuum program (Paper~18~\cite{loutey_paper18}) this gives the
+many-electron integrals a second coordinate beside the Tate weight of the
+one-body and spectral projections:\ the Calabi--Yau dimension of the density
+graph's banana.  The seam catalogue (Paper~57~\cite{loutey_paper57}) records
+the rows;\ the number-theoretic structure of the first rung is the companion
+Paper~61~\cite{loutey_paper61}.
+
+Most of the mathematics below is prior art, and Sec.~\ref{sec:placement}
+says whose.  The route from a molecular integral to it was not found in a
+targeted search, and the rungs were called in committed records before they
+were computed (Sec.~\ref{sec:beyond} names each record).  The caps are
+stated in Sec.~\ref{sec:scope}.
+
+%% ========================================================================
+\section{The dictionary:\ every exponential-orbital integral is a derivative of a $1s$ Yukawa integral}
+\label{sec:dictionary}
+%% ========================================================================
+
+\emph{Setting.}  An exponential-type orbital on a center $\bm A$ is a finite
+sum of terms $|\bm r-\bm A|^{j}\,e^{-\zeta|\bm r-\bm A|}\,\mathcal{Y}_{\ell m}(\bm r-\bm A)$
+with $j\ge0$ an integer and $\mathcal{Y}_{\ell m}$ a regular solid harmonic
+(homogeneous of degree $\ell$).  Slater orbitals are the single terms
+$j=n-1-\ell$;\ hydrogenic and Coulomb--Sturmian orbitals, a Laguerre
+polynomial times an exponential, are such finite sums.  The $1s$ seed is the
+Yukawa function $g_\zeta(s)=e^{-\zeta s}/s$, $s=|\bm r-\bm A|$, the
+three-dimensional Green's function of $-\nabla^2+\zeta^2$, whose Fourier
+transform is $4\pi/(p^2+\zeta^2)$.  A \emph{density graph} $\Gamma$ has a
+vertex for every electron (integrated) and every nucleus (fixed), a line of
+mass $\zeta$ from a nucleus to an electron for every orbital, and a line
+between two electrons for every kernel:\ massless for the Coulomb kernel,
+mass $\gamma$ for a Slater geminal $e^{-\gamma r_{12}}$, which is itself
+$-\partial_\gamma$ of the Yukawa line.  The \emph{$1s$ integral of $\Gamma$},
+$I^{(1s)}_\Gamma(\zeta_e;\bm X_v)$, is the integral with every orbital line
+the Yukawa $g_{\zeta_e}$.
+
+\begin{lemma}[orbital level; prior art]
+\label{lem:orbital}
+Every exponential-type orbital on $\bm A$ is
+$\mathcal{D}(\partial_\zeta,\nabla_{\!\bm A})\,g_\zeta(|\bm r-\bm A|)$ for a
+polynomial differential operator $\mathcal{D}$ whose coefficients are
+rational in $\zeta$.
+\end{lemma}
+
+\textbf{[SYMBOLIC PROOF]} Two identities do it.  Powers are
+$\zeta$-derivatives, $s^{j}e^{-\zeta s}=(-\partial_\zeta)^{j+1}g_\zeta(s)$.
+Solid harmonics are center derivatives:\ by Hobson's theorem,
+$\mathcal{Y}_{\ell m}(\nabla)F(s)=\mathcal{Y}_{\ell m}(\bm r-\bm A)\,(s^{-1}d/ds)^{\ell}F(s)$
+for any radial $F$, and $\nabla=-\nabla_{\!\bm A}$ on a function of
+$\bm r-\bm A$.  Applied to $F=s^{m-1}e^{-\zeta s}$ this gives
+$\mathcal{Y}_{\ell m}(\bm r-\bm A)\,e^{-\zeta s}\sum_{i=0}^{\ell}a_i(m,\ell)\,\zeta^{\,i}\,s^{m-1-2\ell+i}$
+with $a_\ell=(-1)^\ell$;\ the system in $m$ is triangular in the power of $s$
+with leading coefficient $(-\zeta)^{\ell}\neq0$, so every
+$\mathcal{Y}_{\ell m}(\bm r-\bm A)\,s^{j}e^{-\zeta s}$ is a combination of the
+$\mathcal{Y}_{\ell m}(-\nabla_{\!\bm A})(-\partial_\zeta)^{m}g_\zeta$ with
+coefficients in $\mathbb{Q}[\zeta,\zeta^{-1}]$.  (For $\ell=1$:\
+$\mathcal{Y}_{1m}e^{-\zeta s}=-\zeta^{-1}[\,T_2+\zeta^{-1}T_1\,]$ with
+$T_m=\mathcal{Y}_{1m}(-\nabla_{\!\bm A})(-\partial_\zeta)^{m}g_\zeta$.)
+In momentum space the same statement reads:\ the transform of every
+exponential-type orbital is $e^{-i\bm p\cdot\bm A}\,\mathcal{Y}_{\ell m}(i\bm p)\,R(p^2,\zeta)$
+with $R$ rational, since $\mathcal{Y}_{\ell m}(i\nabla_{\!\bm p})$ acting on a
+rational function of $p^2$ gives $\mathcal{Y}_{\ell m}(i\bm p)$ times a
+rational function.  \textbf{[PRIOR ART]} Both halves are classical:\ the
+rational momentum-space form of exponential-type orbitals is Steinborn and
+Filter's~\cite{weniger2005}, generating angular momentum by differentiating
+in the nuclear coordinates is standard~\cite{weniger2005}, and the
+$\zeta$-derivative is the device Paper~59 already uses to restore a Slater
+orbital from a Yukawa.  Guard:\ \texttt{tests/test\_paper63\_dictionary.py}
+(the $\ell=1$ inversion and the $\ell=2$ triangular system in exact
+arithmetic;\ the rational momentum-space form for $(n,\ell)$ up to $(4,3)$).
+
+\begin{lemma}[integral level]
+\label{lem:integral}
+Let $I_\Gamma$ be a multi-density integral over exponential-type orbitals
+with Coulomb or Slater-geminal kernels.  Then
+$I_\Gamma=\prod_e\mathcal{D}_e\;I^{(1s)}_\Gamma$, the operators acting on the
+exponents and centers of the $1s$ integral of the same graph.
+\end{lemma}
+
+\textbf{[SYMBOLIC PROOF]} Insert Lemma~\ref{lem:orbital} for each orbital.
+The $1s$ integrand is bounded by a product of exponentials in the
+$|\bm r_i-\bm X_v|$ times integrable Coulomb singularities, uniformly for
+exponents in a compact subset of $(0,\infty)$ and centers in a compact set, as
+are its derivatives of every order in those parameters;\ dominated convergence
+moves the $\mathcal{D}_e$ outside the integral.  The same holds for the
+momentum form, where the orbital lines are rational and the exponential decay
+of position space becomes the polynomial decay of the integrand in momentum.
+
+\begin{proposition}[the rung is a property of the graph]
+\label{prop:rung}
+Let $\mathcal{M}$ be the holonomic $D$-module generated by $I^{(1s)}_\Gamma$
+over the exponents and centers.  Every $I_\Gamma$ over exponential-type
+orbitals lies in $\mathcal{M}$;\ the composition factors of its minimal
+annihilator in any one parameter are among those of $I^{(1s)}_\Gamma$'s.  At
+the fibre, where the centers coincide and each density enters through its
+dispersion root $\Delta_v=\sqrt{c_vL_v^2+1}$ alone, every density weight
+$P(L_v^2)\,\Delta_v^{-(2m+1)}$ is a polynomial in $c_v$, $c_v^{-1}$ and the
+Euler operator $c_v\partial_{c_v}$ applied to $\Delta_v^{-1}$:
+%
+\begin{equation}
+  \Delta^{-(2m+1)}=\Bigl(1+\tfrac{2}{2m-1}\,c\,\partial_c\Bigr)\Delta^{-(2m-1)},
+  \qquad
+  L^{2}\,\Delta^{-j}=c^{-1}\bigl(\Delta^{-(j-2)}-\Delta^{-j}\bigr).
+  \label{eq:euler_weights}
+\end{equation}
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF]} The first statement is
+Lemma~\ref{lem:integral} read in $\mathcal{M}$:\ a section of a holonomic
+module and its derivatives generate a submodule, so the annihilator of
+$\mathcal{D}\,I^{(1s)}$ contains a left multiple of that of $I^{(1s)}$ and
+its composition factors are a subset.  For the fibre identities,
+$\partial_c\Delta^{-1}=-\tfrac12L^2\Delta^{-3}$ and $L^2=(\Delta^2-1)/c$ give
+$c\,\partial_c\Delta^{-1}=-\tfrac12(\Delta^{-1}-\Delta^{-3})$, which is the
+case $m=1$;\ induction on $m$ gives the rest, and the second identity is
+$L^2=(\Delta^2-1)/c$ again.  \textbf{[MEASURED]} On the two-density rung the
+identities are checked against the period~\eqref{eq:period}:\
+$\int_0^\infty\Delta_1^{-3}\Delta_2^{-3}dk$ and
+$\int_0^\infty\Delta_1^{-5}\Delta_2^{-5}dk$ equal the operators of
+Eq.~\eqref{eq:euler_weights} applied to $K(m)/\sqrt{c_{\max}}$, to $10^{-25}$
+at three scale pairs, and the result is again a combination of $K$ and $E$:\
+the Legendre rung, as the proposition requires.  On the three-density rung
+the Euler operators act under the tree identity (Eq.~\eqref{eq:tree} below):\
+the one-dimensional transform of the $1s$ weight is $2c^{-1/2}K_0(x/\sqrt c)$,
+and Eq.~\eqref{eq:euler_weights} turns it into $2xc^{-1}K_1(x/\sqrt c)$ for
+$\Delta^{-3}$ and $\tfrac43xc^{-1}K_1+\tfrac23x^2c^{-3/2}K_0$ for
+$\Delta^{-5}$, the known transforms of those powers.  The two-dimensional
+fingerprint integral of the chain of three, with $\Delta^{-3}$ or
+$\Delta^{-5}$ on every density, equals $\pi^{-1}\!\int_0^\infty\prod_v w_v(x)\,dx$
+with those weights to $2\times10^{-9}$ at three scale triples, the precision of
+the two-dimensional quadrature;\ the $1s$ weight in place of $w_v$ misses by
+more than a percent.  Guard:\ \texttt{tests/test\_paper63\_dictionary.py}
+(29 checks;\ fire-test owed as its own step).
+
+\emph{What the dictionary does and does not say.}  It lifts every statement
+below from $1s$ orbitals to all exponential-type orbitals \emph{as an upper
+bound}:\ a general-orbital integral cannot climb above the $1s$ integral of
+its graph.  It does not say the rung is attained;\ a derivative can land in a
+submodule.  In every case computed it is attained---Paper~59's chain at the
+Slater weights has the same composition factors as the chain at the
+fingerprint weights (Sec.~\ref{sec:density_ring})---and the proposition is
+why that had to be so or lower, not a proof that it is equal.  Two caps it
+inherits unchanged from Paper~59:\ the rung is read on the fibre and its
+holomorphic period, and the integrated value, over the Feynman parameters
+and separations, may sit lower;\ and the reduction of the real
+three-dimensional integral to the one-dimensional Bessel-moment family, which
+the dictionary does not supply, is shown below for the chain of three and the
+two trees of four only.  Gaussian orbitals and Gaussian geminals are outside
+the lemma:\ $e^{-\alpha r^2}$ is no derivative of a Yukawa, its transform is
+not rational, and Sec.~\ref{sec:density_ring} finds its integrals off the
+ladder.
+
+%% ========================================================================
+\section{The rungs:\ a fourth center, a three-electron chain, four linked densities, and a ring}
+\label{sec:beyond}
+%% ========================================================================
+
+Two results pre-registered on 2026-10-13 (records
+\texttt{docs/predictions/2026-10-13\_four\_centre\_genus.md} and
+\texttt{docs/predictions/2026-10-13\_three\_electron\_k3.md}, each committed
+before its computation) extend the genus reading of
+Paper~59~\cite{loutey_paper59} in two directions:\ more centers, and more Coulomb
+kernels.  A third, registered on 2026-10-16
+(\texttt{docs/predictions/2026-10-16\_linking\_ceiling.md}, written before
+its computation but not committed beforehand), asks how the rung grows with
+the number of linked densities.  A fourth, registered and committed on
+2026-10-17 before its computation
+(\texttt{docs/predictions/2026-10-17\_density\_loop.md}), asks whether a
+ring of linked densities climbs faster than a tree.  A fifth, committed the
+same day before its computation
+(\texttt{docs/predictions/2026-10-17\_ring\_extensions.md}), asks whether the
+correlated triangle, with geminals on two edges, behaves like the Coulomb
+one, and how a ring of four behaves;\ the second test stopped for feasibility.
+A sixth, committed before its computation
+(\texttt{docs/predictions/2026-10-17\_ising\_class.md}), asks where the
+Ising-class moments sit on the ladder.
+
+\subsection{A fourth distinct center adds no genus}
+\label{sec:four_centre}
+
+\textbf{[MEASURED]} The general four-center integral $(XY|ZW)$, four
+distinct centers and $1s$ Slater orbitals, reduces by the same Feynman
+parametrization to one radial $k$-integral over two parameters $(s,t)$
+whose integrand carries exactly the two dispersion roots
+$\Delta_1(s)$, $\Delta_2(t)$ of the curve~\eqref{eq:curve};\ the centers enter
+only through a single phase vector $\bm W(s,t)$ and the two pair
+distances $D_1$, $D_2$.  The reduced formula gives $0.218814149639$
+against $0.218814149425$ from McMurchie--Davidson on sixteen-Gaussian
+fits (the residual is the fit gap), and reproduces the three-center
+value $0.204941652531$ of Paper~59 as a special case.
+There is no genus two at four centers, consistent with the class being
+set by the number of distinct two-center densities the kernel couples,
+not by the number of nuclei;\ this is that rule's first instance beyond
+the one this paper was written on.  Its honest weight is that of a
+corollary of Paper~59's reduction, a calibration rather than a hard
+test.  The momentum form itself is the Averys'
+(Ref.~\cite{avery_avery_4center}, App.~B);\ the genus reading is not in
+it.  Guards:\ \texttt{tests/test\_paper63\_four\_centre\_genus.py} (both
+values recomputed against McMurchie--Davidson;\ the kernel derived
+symbolically as the second $z$-derivative of a Yukawa product;\ the
+integrand's square roots and the dependence on the pair placement
+checked).
+
+\subsection{A three-electron chain lives on a K3 surface}
+\label{sec:three_electron}
+
+\textbf{[SYMBOLIC + MEASURED]} The chain integral
+$\langle \rho_a(1)\rho_b(2)\rho_c(3)/(r_{12}r_{13})\rangle$, three
+two-center $1s$ Slater transition densities (dispersion roots
+$\Delta_b = \sqrt{c_b p^2 + 1}$, $\Delta_c = \sqrt{c_c q^2 + 1}$,
+$\Delta_a = \sqrt{c_a |p+q|^2 + 1}$, scales $a = c_a^{-1/2}$, $b = c_b^{-1/2}$,
+$c = c_c^{-1/2}$) joined by two Coulomb kernels at electron~1, has two momentum integrations and three
+dispersion roots.  The angular integral is elementary (no logarithm);\
+the reduced two-dimensional fibre matches the direct three-dimensional
+one ($10^{-15}$ to $4\times10^{-14}$ in the record, $10^{-9}$ in the
+reduced-precision guard);\ the one-center limit is rational
+($23/54$, $133/144$, $289/225$ at the three registered exponent triples);\
+the branch locus in $\mathbb{P}^2$ is six lines with no four concurrent,
+so the double cover is a K3 surface, and fixed-$p$ slices are
+non-isotrivial genus-one curves.  \textbf{[MEASURED / classical]} The
+holomorphic period reduces by one Fourier transform to the three-scale
+Bessel moment $\bar V_3 = \int_0^\infty K_0(at)K_0(bt)K_0(ct)\,dt$ (the
+notation of Ref.~\cite{bbbg2008}), whose closed form for $c \ge b \ge a > 0$
+is $(2c/\pi)\,\bar V_3 = K(k_-)K(k_+') + K(k_+)K(k_-')$, with the moduli
+$k_\pm$ of Ref.~\cite{bbbg2008} (Eq.~33, obtained there from an identity of
+Bailey~\cite{bailey1936}), checked at four scale triples to $10^{-34}$ in
+the record and at three in the guard to $10^{-17}$.
+The K3's period is therefore ``elliptic squared'':\ it opens no new
+transcendence class, being a sum of products of periods of the genus-one class of Paper~59.
+The reduction from a Slater chain to $\bar V_3$ is this paper's;\ the closed
+form is that of Ref.~\cite{bbbg2008}.  In the language of Paper~59's literature placement, the
+repulsion integral sits on the rung of the two-loop sunrise and the chain
+on the rung of the three-loop banana;\ the families differ, and
+Sec.~\ref{sec:four_density} gives the exact relation.  \textbf{[OBSERVATION, evidence]} At equal scales the
+true fibre at zero separation collapses to two K3 periods (Bessel moments
+of the record) and $\pi^3$.  At four generic scale triples, $(1;2,4)$,
+$(1;3,7)$, $(3;1,7)$ and $(3;4,6)$ with the central density's scale first,
+integer-relation searches at 340 and 400 digits find no relation in five
+bases built from the K3 periods and their scale derivatives, products of
+elliptic periods at the Bailey moduli, residue periods and their
+products, dilogarithms and trilogarithms of scale ratios, the vacuum
+sunrise and its mass derivatives, logarithms times periods, and
+weight-three Tate numbers.  Every basis recovers a planted relation, and
+in every basis the fibre with $\int_0^x K_0$ dropped from each leaf
+reduces onto the K3 periods;\ three of the twenty searches are void, their
+precision cap below the planted relation's height.  Moving the central
+density within the scale set $\{1,3,7\}$ gives no relation either, and the
+fibre does not collapse at the two threshold triples $(2;1,1)$ and
+$(3;1,2)$, where the central scale is the sum of the others.  That is
+evidence, at a sample of triples and with guessed bases, that the generic
+fibre carries content beyond the K3 and elliptic periods, as the banana
+does;\ on a one-parameter slice it is a K3 function integrated once
+(Sec.~\ref{sec:density_ring}), a class no finite basis of periods is
+expected to capture.  \textbf{[SYMBOLIC + MEASURED]} A second slice, with
+scales $(t;1,2)$, passes through two of these triples, $(1;2,4)$ at $t=1/2$
+and the threshold triple $(3;1,2)$ at $t=3$, where the fibre values
+agree with the slice to 20 digits.  Its Mellin operator has order 17 and
+divides exactly over the factor $\theta+2$ and two first-order pieces,
+one for each leaf, which enter together as their least common left
+multiple.  Above them sits a piece of order four, equivalent by an exact
+map with poles only at $t=0,\pm1,\pm3$ to the operator of the three-scale
+moment $\int_0^\infty K_0(tx)K_0(x)K_0(2x)\,dx$.  The composite of order
+seven annihilates the fibre to $5\times10^{-33}$ of its largest term at
+32 digits, the fibre needs the order-four piece, and a search modulo a
+prime finds no rational map splitting it off within the bound set by the
+local exponents, while the same call finds a planted split.  So on this
+slice too the fibre is an elementary function plus a K3 function
+integrated once, which accounts for the null at those two triples
+(record \texttt{docs/predictions/2026-10-21\_generic\_slice.md}).
+Longer trees are taken up in Sec.~\ref{sec:four_density}.
+Guards:\ \texttt{tests/test\_paper63\_three\_electron\_k3.py}
+(the fibre agreement, the elementary angle integral, the rational
+one-center limits, the closed form against quadrature, the K3 period
+against $\bar V_3$, the six-line branch locus, the non-isotrivial slice);\
+\texttt{tests/test\_paper63\_generic\_slice.py} (the second slice);\
+the equal-scale collapse and the generic null are not guarded, and the
+records carry them (\texttt{docs/predictions/2026-10-13\_three\_electron\_k3.md},
+\texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}).
+
+\subsection{Four linked densities:\ the first rung beyond elliptic}
+\label{sec:four_density}
+
+\textbf{[SYMBOLIC + MEASURED]} The holomorphic period of a tree of linked
+densities depends only on how many densities the kernels link, not on the
+pattern of the links;\ a Coulomb ring of three behaves differently
+(Sec.~\ref{sec:density_ring}).  Take $n$ two-center $1s$ densities joined into a tree by $n-1$
+rational kernels, and write the dispersion root of density $v$ at the
+fingerprint fibre as $\Delta_v=\sqrt{c_vL_v^2+1}$, with $L_v$ the signed
+sum of the momenta on the kernels at $v$.  Fourier-transforming each
+$1/\Delta_v$ to $K_0(|y|/\sqrt{c_v})/(\pi\sqrt{c_v})$ turns every momentum
+integration into a delta function that identifies the two ends of its
+kernel, and a tree is connected, so
+\begin{equation}
+  \int_{\mathbb{R}^{n-1}} d^{n-1}k\,\prod_{v=1}^{n}\frac{1}{\Delta_v(L_v(k))}
+  = \frac{2^{n}}{\pi\sqrt{c_1\cdots c_n}}
+    \int_0^\infty \prod_{v=1}^{n} K_0(a_v x)\,dx,
+  \qquad a_v = c_v^{-1/2},
+  \label{eq:tree}
+\end{equation}
+for a star and a chain alike.  At $n=3$ this is the $\bar V_3$ reduction
+of Sec.~\ref{sec:three_electron};\ at $n=2$ it is the elliptic period of
+Eq.~\eqref{eq:period}.  A three-dimensional evaluation of four-density
+stars and chains, with the faster-decaying roots $\Delta_v^{-3}$ to which
+the same argument applies, matches the Bessel-moment side to between
+$4\times10^{-9}$ and $2\times10^{-7}$, the grid's own convergence.  That
+check tests the identity's bookkeeping;\ the real three-dimensional
+integral reduces to moments of the same family with other weights in $x$,
+as shown below for both trees of four densities, the star and the path.
+
+\textbf{[SYMBOLIC]} To read the rung, vary one scale:\
+$F_n(t)=\int_0^\infty K_0(x)^{n-1}K_0(tx)\,dx$.  The Mellin transform of
+$K_0^{\,n-1}$ obeys the recurrence of the $(n-1)$-th symmetric power of the
+Bessel operator, and that of $K_0(tx)$ is $2^{s-2}\Gamma(s/2)^2$, so $F_n$
+satisfies an explicit linear equation in $t$ of order $n$;\
+\textbf{[MEASURED]} each one is checked against direct quadrature of $F_n$
+to $10^{-28}$.  For $n=2$ it is the Legendre equation of $K$.  For $n=3$
+it is the equation of ${}_3F_2(\tfrac12,\tfrac12,\tfrac12;1,1;t^2/4)$,
+Clausen's square of an elliptic period, as Bailey's formula requires.
+For $n=4$, in the variable $x=1/(4t^2)$, it is
+\begin{equation}
+  \theta^4 - x(2\theta+1)^2(10\theta^2+10\theta+3)
+  + 9x^2(2\theta+1)^2(2\theta+3)^2,
+  \qquad \theta = x\,\frac{d}{dx},
+  \label{eq:four_density_op}
+\end{equation}
+which has maximally unipotent monodromy at $x=0$ and conifold points at
+$x=1/36$ and $x=1/4$, with local exponents $(0,1,1,2)$.  Its holomorphic
+solution is $\sum_m B_m (x/4)^m$ with integer
+$B_m=\binom{2m}{m}^2\sum_k\binom{m}{k}^2\binom{2k}{k}$, the term-by-term
+(Hadamard) product of $\binom{2m}{m}^2$ with the Ap\'ery-like sequence of
+the equal-mass sunrise, and its mirror map has integer coefficients.
+
+\textbf{[SYMBOLIC]} Whether a family is built from elliptic periods shows
+in the quadratic relations among the solutions of its equation:\ for
+monodromy of these types, an elliptic family has none, the square of
+one elliptic family or the tensor product of two has one, and the cube of
+one has three.  Counted
+exactly on Taylor bases at two rational points, the numbers are
+$0,1,0,1$ for $n=2,3,4,5$.  For $n=4$ the operator is irreducible, with
+no bound on degrees:\ a right factor of order $k$ would carry, at each
+singular point, $k$ of the operator's local exponents, and Fuchs' relation
+then fails for every $k<4$, however many apparent singularities the factor
+adds.  The same count shows the operators for $n=2,3,5$ irreducible.  Its
+Yukawa coupling,
+$1+16q+1152q^2+99520q^3+\cdots$, is not constant, as it would be for a
+symmetric cube.  An irreducible fourth-order local system with no invariant
+quadric that is not a symmetric cube has differential Galois group $\mathrm{Sp}_4$ or $\mathrm{SL}_4$,
+and neither is a quotient of a product of copies of $\mathrm{SL}_2$.  So
+$F_4$ is not a polynomial in elliptic periods with algebraic moduli, and
+neither is the generic four-scale moment, which restricts to it.  Two
+linked densities give an elliptic period, three give a K3 whose period is
+elliptic squared, and four give the first period of a new kind.  At $n=5$
+the single relation marks an orthogonal structure of rank five, not the
+fourth power of an elliptic period, which would carry six.  That is the
+structure of the exterior square of a fourth-order Calabi--Yau operator,
+and the tables of Ref.~\cite{aesz2005} print the operator of $F_5$
+verbatim, attached to entry \#39, a different operator from the \#58 of
+$n=4$.  So five linked densities give no new type of period:\ the type is
+that of four, in a different family.
+
+\textbf{[OBSERVATION]} Every electron-repulsion integral couples exactly
+two densities, so the integrals of a molecular Hamiltonian stay on the
+elliptic rung however large the molecule.  The class climbs only in
+correlated integrals that link more densities, such as the four-electron
+bridge integrals of explicitly correlated methods taken over two-center
+densities.  Two caps apply.  These are statements about the fibre and
+its holomorphic period, so the integrated value may sit lower, as the
+two-center exchange class does (Paper~59, geminal section).  And the reduction of
+the real three-dimensional integral into the family of
+Eq.~\eqref{eq:tree} is shown only for the chain of three and the two trees
+of four below;\ for five or more densities it is not shown.  \textbf{[SYMBOLIC +
+MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
+$(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
+$\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
+a momentum-space evaluation to $2\times10^{-21}$.  Its Mellin operator, of
+order 19, divides exactly with a piece of order four equivalent to the
+operator~\eqref{eq:four_density_op} by an exact rational map.  An
+order-eight right factor annihilates the star to $3\times10^{-45}$ of its
+largest term at 45 digits;\ its composition factors are that piece, the
+Legendre operator of $F_2$ and two of order one, with no K3 piece, and the
+star needs the top piece.  So the star sits on the rung of four linked
+densities and skips the K3 rung;\ minimality is bounded by a search modulo
+a prime, not proved (record
+\texttt{docs/predictions/2026-10-21\_four\_density\_star.md}).  Guards:\
+\texttt{tests/test\_paper63\_four\_density\_rung.py},
+\texttt{tests/test\_paper63\_four\_density\_star.py}.
+\textbf{[SYMBOLIC + MEASURED]} The path, four densities in a chain,
+reduces the same way.  On the slice $(1,t,1,1)$, with $t$ on an inner
+density, it is
+$(16/\pi^4)\,t^3\int_0^\infty\!\int_0^\infty\min(x,y)\,K_0(tx)\chi(x)\,K_0(y)\chi(y)\,dx\,dy$,
+checked against a momentum-space evaluation to 20 digits.  Its holonomic
+relations give an operator of order 74 with an exact right factor of
+order 12, which annihilates the path to below $10^{-28}$ of its largest
+term at 32 digits and $4\times10^{-56}$ at 60.  That factor splits exactly
+into a piece equivalent to the operator~\eqref{eq:four_density_op}, three
+pieces equivalent to the Legendre operator of $F_2$, and two of order
+one, each equivalence by an exact rational map;\ there is no K3 piece,
+and the path needs the top piece.  So both trees of four densities sit on
+the same rung and skip the K3 rung;\ for the path, minimality is bounded
+by a search modulo a prime up to $t$-degree 260 (record
+\texttt{docs/predictions/2026-10-22\_four\_density\_path.md}).  Guard:\
+\texttt{tests/test\_paper63\_four\_density\_path.py}.
+
+\textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
+Bessel moments;\ what is new here is the route into it from a molecular
+integral.  The operator~\eqref{eq:four_density_op} is entry \#58 of the
+Calabi--Yau tables of Almkvist, van Enckevort, van Straten and
+Zudilin~\cite{aesz2005} (entry 2.9 of the Calabi--Yau operator
+database~\cite{cydb}), listed there as a Hadamard product, with the same
+holomorphic coefficients;\ Gegelia and van
+Straten~\cite{gegelia_vanstraten2024} list it among their conjectural
+sources of paramodular forms, at conductors $2145$ and $2465$ (their
+Table~6;\ their Table~3 lists entry~2.9 at conductors $945$ and $960$).  For every
+$n$ from $2$ to $5$ the holomorphic solution of the equation of $F_n$ at
+$t=\infty$ is $t^{-1}\sum_m\binom{2m}{m}^2W_{n-1}(2m)\,(16t^2)^{-m}$, the
+Hadamard product of $\binom{2m}{m}^2$ with the even moments $W_{n-1}(2m)$
+of the $(n-1)$-step planar random walk.  The Hadamard construction, and the
+tables that place its $n=4$ and $n=5$ cases at entries \#58 and \#39, are
+Almkvist and Zudilin's~\cite{almkvist_zudilin2007};\ the links of $W_N$ to
+Bessel moments, random walks and Calabi--Yau equations are
+Broadhurst's~\cite{broadhurst2009walks};\ Vanhove's operators for the
+equal-mass two-dimensional banana integral with $N$
+propagators~\cite{vanhove2014} annihilate $\sum_k W_N(2k)s^{-k-1}$, checked
+here in exact arithmetic for $N=2$ to $5$, so that series is the banana's
+holomorphic period at large $s$.  The
+alternation of the monodromy, symplectic for $n$ even and orthogonal for
+$n$ odd, matches the self-duality of the symmetric-power Kloosterman
+motives of Fres\'an, Sabbah and Yu~\cite{fresansabbahyu2023}, whose
+pairing is symplectic when the number of Bessel factors is even and
+orthogonal when it is odd.  \textbf{[SYMBOLIC]} So the tree ladder is tied to the banana ladder,
+where an $l$-loop equal-mass banana integral carries a Calabi--Yau
+$(l-1)$-fold~\cite{bonisch2021}, by one exact operation:\ with
+$y=1/(16t^2)$ and $F_n=t^{-1}g(y)$, the operator of $g$ is the Hadamard
+product of the Legendre operator with the operator of the banana with $n-1$
+propagators, checked in exact arithmetic for $n=2$ to $5$.  Since
+$\int_0^\infty J_0(px)\,dp=1/x$, the same fact reads
+$F_n(t)=\int_0^\infty dp\int_0^\infty x\,J_0(px)\,K_0(tx)K_0(x)^{n-1}dx$:\
+$F_n$ is the $n$-propagator banana, with masses $(t,1,\dots,1)$, integrated
+over a line of external momentum.  It sits on the rung of the banana with
+$n+1$ propagators but is not that family:\ its singular values of $t^2$,
+$\{1\},\{4\},\{1,9\},\{4,16\}$ for $n=2,\dots,5$, are the thresholds of the
+banana with $n-1$ propagators.
+
+\textbf{[SYMBOLIC + MEASURED]} At $t=1$ the ladder is the Ising class of
+Bessel moments, $F_n(1)=c_{n,0}=\int_0^\infty K_0(x)^n\,dx$~\cite{bbbg2008}.
+The singular values of $t^2$ are the thresholds $(n-1-2j)^2$ for every $n$
+up to $8$, with no other finite nonzero singular point, so $t=1$ is a singular point
+of $F_n$'s operator exactly when $n$ is even;\ the operators for $n=6$, $7$
+and $8$ are irreducible by the exponent argument above, so these are the
+singular points of $F_n$'s minimal operator.  There one local exponent is
+doubled, while at the thresholds of odd $n$ one is a half-integer.  Since
+$F_n$ is analytic for $t>0$, at a threshold it lies among the solutions
+without the logarithm or the branch.  A prediction registered and committed before the
+computation (\texttt{docs/predictions/2026-10-17\_ising\_class.md}) read
+this as a rule for values:\ odd moments stay on their rung and even ones
+drop.  The registered value cases hold, with moments for $n=2$ to $8$ to
+286 digits by two routes and every informative integer-relation search
+controlled;\ the registered attachment of $c_{4,0}$ to the conifold fibre
+was not tested.  $c_{3,0}$ is a complex-multiplication elliptic value;\
+$c_{5,0}$ and $c_{7,0}$ fit no tested lower basis, at coefficient bounds
+of $10^{14}$ to $10^{17}$ and $10^{7}$ to $10^{9}$;\
+$c_{4,0}=4\pi^2L(f,2)$ with $f=\eta(2\tau)^4\eta(4\tau)^4$ of weight four
+and level eight, checked to $5\times10^{-261}$;\ and
+$c_{6,0}=108\pi^2L(g,4)$ with $g$ of weight six and level 24, to the same
+precision (both on the prediction record's computation, not a regression test).  But $c_{8,0}$ fits no single $L$-value tried, with no Tate
+relation to coefficient bound $10^7$ and none with an $L$-value to
+$10^{12}$, so the $n=8$ search gives parity no support as a rule for values.  \textbf{[PRIOR ART]} The $L$-value forms of $c_{3,0}$ and $c_{4,0}$ are
+collected by Lim, Tu and Yu~\cite{lim_tu_yu2026}, who credit them to earlier
+work, through the hypergeometric forms of Ref.~\cite{bbbg2008};\ the
+numerical form of $c_{6,0}$ is theirs, and in their account of the
+underlying Kloosterman motives the moments at $n=5$, $7$ and $8$ enter
+only through $2\times2$ determinants of periods.  The singular points themselves are the
+thresholds and pseudo-thresholds of the equal-mass banana operator
+(Ref.~\cite{bonisch2021}, Eq.~(3.7));\ the threshold reading of the
+values is what the ladder adds.  In the bookkeeping of Papers~18
+and~34~\cite{loutey_paper18,loutey_paper34} these values lie beyond the
+genus-graded embedding tier:\ $c_{3,0}$ is a rational multiple of $2^{-2/3}\Gamma(1/3)^6/\pi$, a
+complex-multiplication period, and $c_{4,0}$ and, numerically, $c_{6,0}$
+are $\pi^2$ times critical $L$-values of modular forms, periods of the
+Kloosterman motives.  The nearest
+physics analogue of a ceiling set by the calculation rather than the
+system is the bound Bourjaily, McLeod, von Hippel and Wilhelm argue for on the
+rigidity of massless four-dimensional Feynman integrals, $2(L-1)$ at $L$
+loops~\cite{bourjaily2019}:\ there the loop order caps the geometry, here
+the number of densities one integral links.  On the chemistry side,
+one-center three- and four-electron correlated integrals have closed
+forms~\cite{fromm_hill1987,padhy2017}, consistent with the rung needing
+two-center densities.  A targeted search found no source placing a
+molecular integral on these operators;\ that is an absence from a search,
+not a proof of absence.  Matuzas~\cite{matuzas2026} relates one channel of
+a different four-electron correlation integral, a ring of Coulomb links
+with one diagonal over Slater functions, to another Calabi--Yau operator,
+AESZ-330, by an inhomogeneous equation.
+
+\subsection{A ring of three densities:\ the loop does not climb}
+\label{sec:density_ring}
+
+Every rung above is a tree.  An integral sits on a rung when the minimal
+annihilator of its fibre has no composition factor above that rung.  A
+ring of kernels leaves one momentum that the delta functions behind
+Eq.~\eqref{eq:tree} do not remove, and one might expect a loop to raise the
+class faster than a leg does.  The test case is the Coulomb triangle
+$T=\langle\rho_a(1)\rho_b(2)\rho_c(3)/(r_{12}r_{13}r_{23})\rangle$, three
+densities with every pair joined by a kernel.  Its explicitly correlated
+relative $\langle f_{ik}f_{jk}/r_{ij}\rangle$ is the one three-body class of
+the LiH correlated engine that does not separate.  The prediction, written
+and committed on 2026-10-17 before the computation
+(\texttt{docs/predictions/2026-10-17\_density\_loop.md}), was that the loop
+does not climb.
+
+\textbf{[SYMBOLIC + MEASURED]} The loop integrates out exactly.  In three
+dimensions three massless propagators of unit index are unique, and the
+uniqueness (star-triangle) relation gives
+\begin{equation}
+  \int\frac{d^3l}{|l-x_1|^2\,|l-x_2|^2\,|l-x_3|^2}
+  = \frac{\pi^3}{|x_1-x_2|\,|x_2-x_3|\,|x_3-x_1|},
+  \label{eq:star_triangle}
+\end{equation}
+which a Feynman-parameter evaluation confirms at five random triples to
+$1.2\times10^{-12}$.  The triangle becomes an integral over the same two momenta and
+three densities as the three-electron chain.  For spherical densities the
+magnitude measure cancels the weight, and
+\begin{equation}
+  T = \frac{1}{\pi}\int_{|p-q|\le w\le p+q}
+      \tilde\rho_a(p)\,\tilde\rho_b(q)\,\tilde\rho_c(w)\,dp\,dq\,dw .
+  \label{eq:ring_reduced}
+\end{equation}
+
+\textbf{[SYMBOLIC + MEASURED]} At one center, with $1s$ Slater densities,
+Eq.~\eqref{eq:ring_reduced} reproduces Remiddi's closed
+form~\cite{remiddi1991}, as written in Ref.~\cite{ppr2004} and
+differentiated in the exponents, to $2\times10^{-21}$.  Where the chain is
+rational (Sec.~\ref{sec:three_electron}), the triangle carries a
+dilogarithm.  At exponents $(1,1,1)$
+\begin{equation}
+  T = \frac{11}{3}-\frac{\pi^2}{8}-\frac32\,\mathrm{Li}_2\!\left(-\tfrac12\right)
+      -\frac{46}{9}\ln 2-\frac34\ln^2 2+\frac32\ln 2\ln 3 ,
+  \label{eq:ring_one_center}
+\end{equation}
+and at $(1,2,3)$ a 100-digit integer-relation search finds a closed form in
+$\mathrm{Li}_2(1/3)$, $\mathrm{Li}_2(1/5)$, $\mathrm{Li}_2(1/6)$, $\pi^2$
+and products of logarithms.  The ring raises the weight from zero to two.
+In the bookkeeping of Papers~18 and~34 these one-center values are
+embedding-tier constants of weight two, one step above the weight-one
+two-center seed set;\ the $\pi^3$ of Eq.~\eqref{eq:star_triangle} is the
+loop's normalization.
+
+\textbf{[SYMBOLIC + MEASURED]} At the fingerprint fibre,
+$\tilde\rho_v=\Delta_v^{-3}$ with scales $(1,1,t)$, the triangle is a moment
+of three Struve functions,
+\begin{equation}
+  G(t)=\frac{\pi}{2}\,t^2\int_0^\infty x^2\,\psi(x)^2\,\psi(tx)\,dx,
+  \qquad \psi=\mathbf{L}_{-1}-I_1 ,
+  \label{eq:ring_struve}
+\end{equation}
+where $\psi$ is one density with its kernel in position space and solves
+$(\theta^2-1-x^2)\psi=-2/\pi$.  The Mellin route of
+Sec.~\ref{sec:four_density} gives
+\begin{equation}
+  L_G = -4\theta(\theta-3)^2 + t^2\,(5\theta^3-7\theta^2-5\theta+3)
+        - t^4\,\theta(\theta+2)(\theta+3),
+  \qquad L_G\,G = -3t^2 ,
+  \label{eq:ring_op}
+\end{equation}
+with $\theta=t\,d/dt$, checked by quadrature of the Struve form at six
+values of $t$ to 18 digits, and independently on the momentum form, with the
+$t$-derivatives taken analytically.  The source term is the operator applied to a constant:\ $L_G\,1=3t^2$,
+so $L_G(G+1)=0$, and the constant is what the regularized Mellin transform
+cannot see.  This operator factors.
+The solution of $L_G$ regular at $t=0$ is algebraic,
+$(1-t^2/4)^{-3/2}$.  Write $L_G=M\,(\theta-\lambda_G)$ with $\lambda_G=3t^2/(4-t^2)$;\ the
+division is exact.  The quotient $M$ is equivalent to the Legendre equation
+$\theta^2-t^2(\theta+1)^2$ of $F_2$, the two-density period:\ the map
+$f\mapsto t^3(1+\theta)f/(4-t^2)$ sends every solution of the Legendre
+equation to a solution of $M$, an identity checked in exact rational
+arithmetic.  And $G$ needs the elliptic piece:\ $(\theta-\lambda_G)(G+1)$ is a
+nonzero solution of $M$, equal to $-0.161$ at $t=0.5$ and $-2.33$ at
+$t=1.3$.  Neither side has a relation to the K3 family of $F_3$.
+So $G$ is built from an elementary constant, an algebraic function and an elliptic
+period integrated once against an algebraic kernel.  The
+triangle sits on the elliptic rung of a single repulsion integral.  That is
+one rung below the three-density chain.
+
+\textbf{[SYMBOLIC + MEASURED]} The chain $C(t)$ at the same fibre, treated the same
+way, is the control.  The Mellin route gives it an operator of order seven,
+which divides exactly as $N_2\,R_3\,R_1\,(\theta-2)$.  The two lowest pieces
+are elementary:\ $\theta-2$ has the solution $t^2$, and
+$R_1=(\theta-3)-t^2(\theta+1)$ has the solution $t^3/(1-t^2)^2$.  The piece
+$R_3$, of order three, is equivalent to the operator
+$4\theta^3-t^2(\theta+1)^3$ of $F_3$:\ the map
+\begin{equation}
+  f\;\mapsto\;\frac{t^3(t^4-18t^2-4)\,f+t^3(2t^4-43t^2-40)\,\theta f
+  +t(t^6-27t^4-96t^2+32)\,\theta^2 f}{(t^2-4)^2}
+  \label{eq:chain_k3_map}
+\end{equation}
+sends every solution of $F_3$'s operator to a solution of $R_3$, an identity
+checked in exact rational arithmetic.  The top piece $N_2$, of order two, is
+not needed:\ $R_3R_1(\theta-2)$ already annihilates the chain, with a
+residual of at most $2\times10^{-31}$ at 32 digits and $4\times10^{-19}$
+at 20 digits at four values of $t$ between $0.5$ and $3.5$, while changing
+one coefficient of $R_3$ gives residuals from 1.9 to 604.  The chain's only piece beyond the elementary ones is therefore
+the K3 family of $F_3$.  Finer still, $R_3R_1$ splits exactly, so the order-five
+operator is a left multiple of an operator $P$ of order four, and the chain
+satisfies $P$:\ $PC$, divided by the solution $t^3/(1-t^2)^2$ of $R_1$, is
+at most $10^{-23}$ at 20 digits and $10^{-33}$ at 30 digits at four values
+of $t$, and $9\times10^{-45}$ at 40 digits at one, while a $1\%$ change in
+one coefficient gives $0.02$ to $0.07$;\ the next paragraph derives this.  The second solution of
+$R_1(\theta-2)$, which carries $\operatorname{artanh} t$, is absent.  So
+$C=c\,t^2+t^2\int^t s^{-3}(B'f)(s)\,ds$ with $f$ a solution of $F_3$'s
+operator and $B'$ a rational map.  That integral cannot be done inside the
+K3 family:\ no rational map splits the K3 piece off $t^2$.  This is proved
+by bounding the poles and degree of any such map from the local exponents
+and searching that bound exhaustively in exact arithmetic, a search that
+finds every planted split.  Because $F_3$'s operator is irreducible, the
+chain is therefore not a rational combination of $F_3$ and its derivatives
+plus any function without a K3 piece:\ it is a K3 function integrated once
+against an elementary kernel.  So the
+Coulomb ring lowers the rung at the fibre and raises the weight at one
+center.  In neither limit does it climb the period ladder.
+
+\textbf{[SYMBOLIC + MEASURED]} The same holds for the physical weights.
+With the Slater densities of Sec.~\ref{sec:three_electron}, the chain's
+fibre at zero separation, on the slice with scales $(t;1,1)$ and $t$ on
+the central density, is
+\begin{equation}
+  G(t)=\int_0^\infty x\,K_1(tx)\,J(x)^2\,dx,\qquad
+  J=3\int_0^x K_0-3xK_0-x^2K_1 .
+  \label{eq:chain_slater_slice}
+\end{equation}
+The Mellin route gives an operator of order seven, which divides exactly
+as $N_2\,R_3\,R_1\,(\theta+2)$.  The two lowest pieces are elementary:\
+$\theta+2$ has the solution $t^{-2}$, and $R_1=(1-t^2)\theta-(1+7t^2)$ has
+the solution $t/(1-t^2)^4$.  The piece $R_3$, of order three, is
+equivalent to $F_3$'s operator $4\theta^3-t^2(\theta+1)^3$:\ an explicit
+order-two map, rational in $t$ with poles at $t=0,\pm2$, sends every
+solution of $F_3$'s operator to a solution of $N_2R_3$, and $R_3$ is the
+annihilator of the image, both checked in exact rational arithmetic.
+Again $N_2$ is not needed:\ $R_3R_1(\theta+2)$ annihilates $G$ with a
+residual of at most $2\times10^{-31}$ at 32 digits at five values of $t$
+between $0.5$ and $3.5$, while changing one coefficient of $R_3$ by one part
+in 198 gives residuals from $10^3$ to $4\times10^4$.  And $G$ needs the K3
+piece:\ $R_1(\theta+2)G$ is nonzero, $191$ at $t=0.5$ and $8.9$ at $t=3.5$.
+A search modulo a prime finds no rational map that splits the K3 piece
+off, in a box larger than the bound set by the leading terms of the local
+exponents, and the same call finds a planted split.  So $G$ is an
+elementary function plus a K3 function integrated once against an
+elementary kernel.  The second solution of $R_1(\theta+2)$, which carries
+$\operatorname{artanh}t$, is absent, as it is for the chain.  In
+$w=t^2$, $\delta=w\,d/dw$, the exact system $R_1S=1$ modulo $R_3$ has a
+unique rational solution $S=s_0+s_1\delta+s_2\delta^2$ inside the bound
+set by the local exponents, with denominator $w(w-1)^4(2w+7)$.  So
+$R_3R_1(\theta+2)=Q_1P$ with $P=(\theta+2)-S\,R_1(\theta+2)$ of order four,
+and $P$ kills $t^{-2}$.  On $G$, $P$ leaves at most $2\times10^{-26}$ of its
+largest term at 25 digits at $t=1/2$ and $13/10$, while a $1\%$ change in
+$s_0$ gives $10^{-3}$.  Both annihilations are derived, not only measured.
+With $W=R_3R_1(\theta+2)$, the Mellin operator is $N_2W$, and $N_2WG=0$ holds
+with no source term.  Each term $t^{2i}Q_i(\theta)G$ of that operator is an
+integral on the line $\operatorname{Re}s=c-2i$, $2<c<4$;\ moving it to $c$
+crosses the poles of the Mellin transform of $G$ at $s=4,6,8$, which come from
+the series of $J^2$ at $x=0$.  The six residues cancel exactly, though
+none of them vanishes alone.  The recurrence itself has no boundary term, since the
+relation for $J^2$ kills constants.  The same bookkeeping gives the nonzero
+sources $-16/t$ for $\int_0^\infty xK_1(tx)J(x)\,dx$ and $-9216\,t^2$ for
+$\int_0^\infty xK_0(tx)J(x)^2\,dx$, both equal to quadrature at 25 digits.
+So $y=WG$ solves $N_2y=0$.  In the normal form $v''+qv=0$ of $N_2$,
+$q=6-59/(4t^2)+O(t^{-4})$, with $q\ge5$ for $t\ge3.42$ and $q'=O(t^{-3})$.
+So by Sturm comparison every nonzero real solution has infinitely many zeros
+there, and its amplitude does not fall faster than $t^{-1/2}$.  A function
+with an expansion in powers and logarithms of $t$ at infinity has neither
+property, and $y$ has one;\ so $WG=0$.  For the chain the residues at
+$s=0,2,4$ cancel the same way, and $q\to20/9$ with $q\ge2$ for $t\ge5.32$,
+so $WC=0$ for its $W=R_3R_1(\theta-2)$.  Since $R_1S=1+NR_3$ with $N$ rational, $R_1P=-N\,R_3R_1(\theta+2)$, so
+$P$ sends every solution of $R_3R_1(\theta+2)$ to a multiple of
+$t/(1-t^2)^4$, which is odd in $t$.  Near $x=0$, $J$ is a sum of odd powers
+of $x$ times powers of $\log x$.  So to the right of its strip the Mellin
+transform of $G$ has poles only at $s=4,6,8,\dots$, and the expansion of $G$
+at large $t$ has only even powers of $t$, times logarithms.  The
+coefficients of $P$ are rational in $t^2$, so $PG$ has the same property.
+On $t>1$, where $R_1$ is regular, $PG$ is a single multiple of
+$t/(1-t^2)^4$, so that multiple is zero.  Since $G$ is analytic on
+$\operatorname{Re}t>0$ and $P$ has rational coefficients, $PG$ is
+meromorphic there;\ it vanishes on $t>1$, so $PG=0$ for all $t>0$.
+Equivalently, among the solutions of $R_3R_1(\theta+2)$, $\ker P$ is the
+set that are even in $t$ at infinity, and at infinity $P$ keeps exactly the
+integer exponents of $R_3R_1(\theta+2)$, in $w$.  The analyticity of $G$
+at $t=1$ alone, or at $t=2$ alone, does not give $PG=0$:\ $P$ has a solution
+with a logarithm at $t=1$ and one with a half-integer exponent at $t=2$.
+For the chain, $C=(8t^3/\pi^3)\int_0^\infty\chi(x)^2K_0(tx)\,dx$, where
+$\chi=\int_0^x sK_1$ is, near $x=0$, a sum of odd powers of $x$ times powers
+of $\log x$.  So $\int_0^\infty\chi^2K_0(tx)\,dx$ has only odd powers of $t$
+at infinity, times logarithms, and with the factor $t^3$ the function $C$
+has only even ones;\ the same steps then run with the solution
+$t^3/(1-t^2)^2$ of its $R_1$.  The operator $R_3R_1(\theta+2)$ is singular at $t=1$, the equal-scale point where
+the fibre collapses (Sec.~\ref{sec:three_electron});\ its exponent $-3$
+there comes from $R_1$, so the singularity is not apparent.  Caps:\ the
+no-split search is modulo a prime, and its bound rests on the leading-term
+argument rather than the written proof the chain has;\ the annihilation
+and the parity step use the standard Mellin contour shift.  Records:\
+\texttt{docs/predictions/2026-10-19\_p3e2\_widened.md},
+\texttt{docs/predictions/2026-10-20\_slice\_artanh.md},
+\texttt{docs/predictions/2026-10-20\_slice\_parity\_proof.md} and
+\texttt{docs/predictions/2026-10-21\_wg\_closure.md}.  Guard:\
+\texttt{tests/test\_paper63\_chain\_slater\_slice.py}.
+
+\textbf{[SYMBOLIC + MEASURED]} At $\gamma=1$ the correlated triangle does not drop.  Put
+the exponential geminal $f=e^{-\gamma r}$ on the two edges at one density,
+$Y=\langle\rho_i\rho_j\rho_k\,f_{ik}f_{jk}/r_{ij}\rangle$, at the fibre with
+scales $(1,1,t)$ and $t$ on the density that carries both geminals.  The
+registered prediction was that $Y$ stays on the elliptic rung;\ it fails.  The loop is
+still elementary:\ it is a mass derivative of the loop with masses
+$(\gamma,\gamma,0)$, a solid angle,
+$\pi^2\arctan(\sqrt{\det\mathcal{G}}/\mathcal{D})/\sqrt{\det\mathcal{G}}$ in the Gram data $\mathcal{G}$, $\mathcal{D}$ of the masses
+and momenta, matched by direct integration at five triples to
+$3\times10^{-14}$.  But it has no uniqueness step.  The two densities and
+the two geminals around it form a kite, whose Taylor series satisfies an
+order-two operator, measured on 600 coefficients and mapped exactly to the
+Legendre equation:\ the kite is elliptic.  At $\gamma=1$ the minimal
+annihilator of $Y$ has order four and divides exactly as $\tilde R_3\tilde R_1$,
+with factors of orders three and one that are not those of the chain.  The
+piece $\tilde R_1$ has an algebraic solution.  The piece $\tilde R_3$ is the adjoint of an
+operator whose solutions are the image of the solutions of $F_3$'s operator
+under an exact order-two map, and since $F_3$'s operator is anti-self-adjoint,
+$\tilde R_3$ is equivalent to it.  Applied to $Y$, the order-four operator leaves at
+most $2.3\times10^{-26}$ of its largest term at four values of $t$, with no
+source term, and no operator of order three annihilates $Y$:\ an exact
+search within a bound set by the local exponents finds no split.  Attaching the
+last density turns the elliptic kite into the K3 family, a Clausen-type
+step.  So at $\gamma=1$ the correlated triangle sits with the three-density chain, on the
+K3 rung, and not with the Coulomb triangle.  At $\gamma=3/2$ an annihilator of $Y$ of order nine
+has an exact composition series whose pieces have orders one (four of
+them, each with an algebraic solution), two and three.  The order-three
+piece has the local data of $F_3$'s operator twisted by $t$, with genuine
+singular points only at $t=0,\pm2,\infty$, which fixes it up to
+equivalence by Levelt's rigidity, in the form of Beukers and
+Heckman~\cite{beukers_heckman1989};\ an exact order-two map from $F_3$'s
+operator confirms the equivalence.  The order-two piece is elliptic.  In
+$x=t^2$ it is equivalent, by an exact map of order one, to the operator of a
+period of the rational elliptic surface
+$Y^2=X^3-3x^2(16x^2+152x+25)\,X-2x^3(4x-5)(16x^2-616x+25)$, whose
+$j$-invariant is $(16x^2+152x+25)^3/\bigl(x(4x-1)^2(4x-25)^2\bigr)$ and whose
+singular fibres are $I_1^*$, $I_2$, $I_2$, $I_1$ at $x=0,1/4,25/4,\infty$;\ over
+$t$ they are six fibres $I_2$, at $t=0,\pm1/2,\pm5/2,\infty$, that is at
+$t=|1-\gamma|$ and $1+\gamma$.  The monodromy of the piece has integer traces,
+measured at 80 digits, and the map is exact (record
+\texttt{docs/predictions/2026-10-22\_c2b\_identification.md}).
+\textbf{[SYMBOLIC + MEASURED]} The curve is Legendre's, with modulus
+$\lambda=(\gamma^2-(t-1)^2)/(4t)$, so that $\lambda(1-\lambda)$ is
+$-1/(16t^2)$ times the K\"all\'en function of $t^2$, $1$ and $\gamma^2$.
+Twisted by $t$, the Legendre operator of degree $-1/2$ in
+$z=(t^2+1-\gamma^2)/(2t)$ is the period operator above, coefficient for
+coefficient.  \textbf{[PRIOR ART]} The function itself is
+$\pi\bar S_3(a,b,w)$ of Ref.~\cite{bbbg2008} (their Eq.~30), given there
+as a convolution of two square-root propagators,
+$(\pi/4)\int_{-\infty}^{\infty}dk/\sqrt{(k^2+a^2)((k-c)^2+b^2)}$, and as a
+complete elliptic integral of modulus
+$\sqrt{(c^2+(a-b)^2)/(c^2+(a+b)^2)}$;\ the Legendre form, the imaginary
+momentum and the triangle are the readings added here.  It annihilates
+$C(t)=\int_0^\infty K_0(tx)K_0(x)\cosh(\gamma x)\,dx$, which converges for
+$t>\gamma-1$, the pseudo-threshold, to $5\times10^{-41}$ at 40 digits, and $C=\pi^2P_{-1/2}(z)/(4\sqrt t)$ to $2\times10^{-16}$ at
+15 digits:\ the continuation to imaginary momentum of a classical cosine
+transform of $K_0K_0$.  Since $\int dp_2\,e^{ip_2x_2}=2\pi\delta(x_2)$,
+$C$ is $\pi$ times the two-dimensional bubble with masses $t$ and $1$,
+integrated over a line of external momentum moved off the origin by
+$i\gamma$;\ at $\gamma=0$ it is $F_2$.  In the dictionary of
+Sec.~\ref{sec:four_density} the geminal therefore acts as an imaginary
+external momentum, and the singular points are where $\gamma=t+1$ or
+$\gamma=|t-1|$, the bubble's threshold and pseudo-threshold.  The
+registered candidate with $e^{-\gamma x}$ in place of $\cosh(\gamma x)$
+is not a solution, because its sinh part is not (record
+\texttt{docs/predictions/2026-10-22\_c2b\_feynman.md}).  This fixes the
+operator class of the piece, not the component of $Y$ along it.
+\textbf{[SYMBOLIC + MEASURED]} At $\gamma=2$ the reading was registered
+before $Y$ was computed there, and it held piece by piece.  An
+annihilator of order nine, fitted from 800 series coefficients and
+checked on $Y$ to $5\times10^{-26}$, has the same composition series
+as at $\gamma=3/2$.  Its order-two piece is equivalent by an exact map
+to the Legendre operator with $z=(t^2-3)/(2t)$, its order-three piece is
+the twisted K3 piece at $t=\pm2$ again, and its order-one pieces are
+algebraic, branched at $t=2$ and $t=2\gamma=4$ (record
+\texttt{docs/predictions/2026-10-22\_c2b\_feynman\_g2.md}).
+\textbf{[SYMBOLIC + MEASURED]} Why the order drops at $\gamma=1$.  In
+Feynman parameters the kite's density pair enters through
+$M(u)=\sqrt{1+u(1-u)z}$ and its geminal pair through
+$N(v)=\sqrt{\gamma^2+v(1-v)z}$.  At $\gamma=1$ the two are the same
+function:\ the two bubbles have equal masses, and the four pair thresholds
+$t=2$, $2\gamma$, $1+\gamma$, $|1-\gamma|$ fall onto $2$ and $0$.  Two
+readings were registered and separated before computing:\ equal masses,
+or merely colliding thresholds.  At $\gamma=3$ the pseudo-threshold
+$|1-\gamma|$ falls on the density-pair threshold $t=2$ with unequal
+masses.  There the annihilator of $Y$ keeps order nine and the series
+$1,1,1,1,2,3$, the elliptic piece is present, mapped exactly from the
+Legendre operator with $z=(t^2-8)/(2t)$, and the genuine singular points
+are exactly $t=2,4,6$;\ at $t=2$ the K3 piece's half-integer exponents and
+the elliptic piece's $I_2$ fibre sit together, and no factor is lost.  At
+$\gamma=1/2$, before the branch point crosses the contour, the order is
+nine as well, with the Legendre map at $z=(t^2+3/4)/(2t)$ and singular
+points at $t=1/2,1,3/2,2$.  So colliding thresholds remove nothing, and
+the drop at $\gamma=1$ is the equal-mass degeneration, the step that
+makes the equal-mass sunrise special in the Feynman-integral
+literature~\cite{blochvanhove2015}.  The kite's operator in $z$ has order
+six at $\gamma=1/2$, $3/2$, $2$ and $3$, with genuine singular points
+exactly at minus the squared pair masses and at $0$ and $\infty$, and
+order two at $\gamma=1$.  The annihilators are checked on $Y$ to
+$6\times10^{-27}$ at $\gamma=1/2$ and $3\times10^{-24}$ at $\gamma=3$,
+and the maps are exact (record
+\texttt{docs/predictions/2026-10-23\_gamma1\_mechanism.md};\ guard
+\texttt{tests/test\_paper63\_mg\_mechanism.py}).  Cap:\ the
+mechanism is read from the integrand and tested by its consequences at
+two values of $\gamma$;\ no symbolic derivation of the drop from $N=M$ is
+given.
+\textbf{[SYMBOLIC + MEASURED]} The cusp-correct geminal $f=re^{-\gamma r}$
+of the LiH engine, on both edges at $\gamma=3/2$ and $2$, brings no new type, as
+registered before computing from the fact that $re^{-\gamma r}$ is a
+$\gamma$-derivative of the same Yukawa triangle.  Its annihilator of order
+nine, checked on the integral to $10^{-28}$, has the same composition
+series:\ four algebraic pieces, branched at $t=2$ and $3$;\ an order-two
+piece, a different operator from the exponential case's, equivalent by an
+exact map to the same Legendre family;\ and the twisted K3 piece (record
+\texttt{docs/predictions/2026-10-22\_geminal\_shapes.md};\ guard
+\texttt{tests/test\_paper63\_ga1\_geminal.py}).  At $\gamma=2$,
+registered as a check of the rule, the order is nine again with the same
+series and the same degrees, the genuine singular points are exactly
+$t=1,2,3,4$, the order-two piece is again a different operator from the
+exponential case's and maps exactly from the Legendre operator with
+$z=(t^2-3)/(2t)$, and the algebraic pieces carry the exponents $-11/2$ and
+$-13/2$ at $t=2\gamma$ as at $\gamma=3/2$;\ the operator is exact, from
+coefficients modulo twelve primes and rational reconstruction, and leaves
+$2\times10^{-24}$ on the integral at 32 digits (record
+\texttt{docs/predictions/2026-10-23\_geminal\_shapes\_g2.md};\ guard
+\texttt{tests/test\_paper63\_ga3\_geminal.py}).
+\textbf{[SYMBOLIC + MEASURED]} One function carries both elliptic pieces
+met so far.  Write
+$\mathcal{L}(a,b;c)=\int_0^\infty K_0(ax)K_0(bx)\cos(cx)\,dx
+=\pi^2P_{-1/2}(z)/(4\sqrt{ab})$, with $z=(a^2+b^2+c^2)/(2ab)$.  At $c=0$ it
+is the radial core of the three-center integral at zero separation:\
+with $a_i=c_i^{-1/2}$ it reproduces Eq.~\eqref{eq:period} to
+$4\times10^{-31}$ at three pairs of scales.  At $c=i\gamma$ it is $C(t)$
+above.  Zero or real momentum gives $z\ge1$.  Imaginary momentum gives
+$z=\cos\theta$ between the pseudo-threshold and the threshold,
+$|t-1|<\gamma<t+1$, with $\theta$ the angle opposite the side $\gamma$ in
+the triangle with sides $t$, $1$ and $\gamma$, and the modulus is
+$\lambda=\sin^2(\theta/2)$.  The thresholds are the flat triangles, since
+the K\"all\'en function is $-16$ times the squared area.  The slot is not
+a convention:\ with the geminal as a mass and a density scale as the
+momentum, the two other assignments give the families
+$j=4(16x^2+472x+25)^3/\bigl(9x(4x-1)^2(4x-25)^2\bigr)$ and
+$j=4(16x^2-104x+601)^3/\bigl(9(4x-1)^2(4x-25)^2\bigr)$, and neither is
+isogenous to the piece's, since their traces of Frobenius differ at most
+good primes at every rational $x$ tried, while the two solutions of the
+degree-six search agree at every one.  The right angle,
+$\gamma^2=t^2+1$, gives $\lambda=1/2$ and $j=1728$, the same
+complex-multiplication value $K(1/\sqrt2)$ as the three-center fibre at
+$\rho=1/2$.  \textbf{[OBSERVATION]} On this family, then, composing
+unequal decay rates costs one elliptic period:\ at zero momentum its
+modulus is set by their ratio, and equal rates make it elementary, as
+Eq.~\eqref{eq:period} records;\ at imaginary momentum it is set by the
+angle of their triangle, and a flat triangle is singular.  Reading
+one-loop integrals through triangles of masses and momenta is the
+approach of Davydychev and Delbourgo~\cite{davydychev_delbourgo1998};\
+what is added is its appearance in a correlated molecular integral.
+\textbf{[SYMBOLIC + MEASURED]} The shape of the geminal matters at this
+level.  A Gaussian geminal's avatar, $\int_0^\infty K_0(tx)K_0(x)e^{-x^2}dx$,
+is annihilated by $t^4(\theta+1)^2-t^2\theta^2(4\theta+1)+4\theta^2(\theta-2)^2$
+to $10^{-41}$, and its monodromy companion, with $I_0$ for $K_0(tx)$, grows
+like $e^{(t-1)^2/4}$, so every annihilator has an irregular singular point
+at infinity:\ at the level of the one function, Slater geminals stay on the
+ladder of Picard--Fuchs operators and Gaussian ones leave it for exponential
+periods (registered before computing, record
+\texttt{docs/predictions/2026-10-22\_geminal\_shapes.md}).
+\textbf{[SYMBOLIC + MEASURED]} On the full triangle, with $e^{-r^2}$ on
+both edges and scales $(1,1,t)$, the Gaussian shape removes more than the
+elliptic piece.  The minimal annihilator of $Y$ has order nine and
+$x$-degree 13 and splits exactly into two pieces, of orders four and five,
+both irregular at infinity, with formal solutions growing like
+$e^{t^2/4}$ and $e^{t^2/8}$;\ its only genuine finite singular point is
+$t=2$.  No piece is equivalent to $F_3$'s operator, although each keeps
+the K3 piece's Jordan block of size three at $t=0$:\ the K3 rung of the
+Slater triangle is not set by the densities and the Coulomb line alone.
+The prediction that the K3 piece survives failed.  The operator leaves
+$2\times10^{-27}$ on $Y$ at 32 digits, and an independent evaluation of
+$Y$ agrees to $4\times10^{-14}$ (record
+\texttt{docs/predictions/2026-10-23\_gaussian\_geminal\_triangle.md};\ guard
+\texttt{tests/test\_paper63\_gy\_gaussian.py}).
+Caps:\ one value, $\gamma=1$, the equal-mass value, at which the Slater
+triangle has no elliptic piece either, so the comparison of shapes is
+cleanest for the K3 piece;\ the irreducibility of the two pieces and the
+absence of an $F_3$ piece rest on bounded searches;\ and minimality assumes
+that $\sqrt{\pi/2}\,e^{1/2}\operatorname{erfc}(1/\sqrt2)$, the constant
+that enters the Taylor coefficients, is irrational.
+Guards:\ \texttt{tests/test\_paper63\_one\_formula.py},
+\texttt{tests/test\_paper63\_geminal\_shapes.py}.  The order-six right factor below the order-three piece
+leaves between 1.3 and 2.4 times the largest term of $Y$ at three values
+of $t$, so $Y$ needs the K3 piece, and no piece above K3 occurs (record
+\texttt{docs/predictions/2026-10-22\_correlated\_triangle\_g32.md}).  The singular points of $Y$'s annihilator move with
+$\gamma$, to $t=|1-\gamma|,2,1+\gamma,2\gamma$, three of which meet at $t=2$ for
+$\gamma=1$.  \textbf{[OBSERVATION]} The drop of the Coulomb ring is therefore read as a property of
+uniqueness, not of rings:\ both loops integrate out exactly, but only the
+Coulomb one factors into pairwise inverse distances, and only it lowers the rung.
+
+\textbf{[OBSERVATION]} The registered decision rule did not anticipate this
+outcome.  It allowed the Coulomb triangle to land on the chain's rung, with or
+without an elementary term, or to climb;\ it lands below.  By the rule's
+letter $L_G$ is an order-three factor that is not equivalent to the chain's
+operator, which the rule called a climb, but $L_G$ factors into lower pieces,
+so it is not a climb in the sense the record intended.  Two side readings
+failed.  The singular points at $t=\pm1$ were not predicted;\ they belong to
+the elliptic piece.  And a Coulomb ring of three does not sit with the chain of
+three, as the record expected, but lower.  The count of linked densities
+orders the trees, not the rings.  The caps of Sec.~\ref{sec:four_density}
+apply:\ these are fibre statements, and the integrated value may sit lower.
+Further caps:\ for the correlated triangle, the exponential shape at
+five values of $\gamma$, the first the equal-mass value, with $t$ on the
+density carrying both geminals, and the LiH engine's cusp-correct shape at
+$\gamma=3/2$ and $2$ only, and a Gaussian shape at $\gamma=1$ only;\ the kite operators were guessed from series and
+checked on their coefficients, and are now also derived by integration by
+parts (below), and the mechanism of the drop at $\gamma=1$
+is tested by its consequences at two values of $\gamma$, not derived;\ only
+the triangle among rings;\ and that the chain satisfies its own order-four $P$ rests on the
+Mellin contour shift.  The search that excludes a K3 piece
+from the triangle is bounded in degree, unlike the chain's no-split proof,
+but the orders settle it:\ the
+factors found have orders one and two, which leaves no room for the
+order-three K3 factor.
+Guards:\ \texttt{tests/test\_paper63\_density\_ring.py}.
+
+\textbf{[PRIOR ART]} The one-center values are Remiddi's~\cite{remiddi1991}:
+the three-electron correlation integral over Slater functions closes in
+logarithms and dilogarithms, and Fromm and Hill~\cite{fromm_hill1987} treat
+the general case.  The uniqueness relation~\eqref{eq:star_triangle} is
+classical;\ its general-dimension form, which gives the constant $\pi^3$ at
+$D=3$, and the early references are collected by Preti~\cite{preti2018}.
+Under the relation of Sec.~\ref{sec:four_density} to the banana ladder, the
+triangle's elliptic piece is the $n=2$ rung itself.  What is added here is the fibre reading:\ the Struve
+moment~\eqref{eq:ring_struve}, its operator, its place below the chain,
+and the correlated triangle's place with it.  The solid-angle form of the massive loop is Davydychev and Delbourgo's
+(Sec.~5.1 of~\cite{davydychev_delbourgo1998}, which recovers Nickel's
+result~\cite{nickel1978});\ here it also rests on its numerical check.
+No literature search was made for the operator~\eqref{eq:ring_op}.
+
+\textbf{[SYMBOLIC + MEASURED]} The kite operators above were guessed from
+Taylor series.  They also follow from integration by parts, the standard
+reduction of Feynman integrals~\cite{chetyrkin_tkachov1981,laporta2000}.  In
+momentum space the kite is a two-loop integral in $D=3$ with five lines:\ the
+two densities with index $3/2$, the two geminals $(q^2+\gamma^2)^{-2}$ and
+the Coulomb line $q^{-2}$.  A reduction modulo a large prime, sampled at many
+values of $z$, gives the differential system of the master integrals, and
+the kite's cyclic vector in that system gives its operator.  At
+$\gamma=1/2$, $3/2$, $2$ and $3$ the operator has order six and equals the
+guessed one exactly.  At $\gamma=1$ the master integrals drop from nine to
+three and the operator is the Legendre one, so the equal-mass degeneration
+shows in the reduction itself.  On the tetrahedron, the three-loop vacuum
+integral with the apex density of mass $t$, the reduction gives an operator
+for $Y$ of order ten at $\gamma=3/2$, divisible on the right by the
+order-nine operator above.  Off the symmetric slice, at density scales
+$(1,2)$ and geminal exponents $(3/2,3)$, the series route found no operator
+with 260 unknowns or fewer.  The reduction gives one of order eleven and
+degree $113$ in $z$, about 1300 unknowns.  Its integer coefficients reach 565
+bits, but the eighteen-dimensional system behind it needs only 37, so the
+system is rebuilt exactly from two primes and checked on a third, and the
+operator is built from it over $\mathbb{Q}(z)$.  It agrees with the operator
+computed at thirteen primes, and on 300 Taylor coefficients at 280 digits it
+leaves $1.3\times10^{-280}$ of the largest term;\ with one coefficient
+changed by $1/200$ it leaves $4\times10^{-41}$.  Its genuine singular points
+are exactly $z=-1/4,-1,-9/4,-4,-9,-49/4,-16,-81/4$, with $0$ and $\infty$:\
+minus the squares of the two-line cuts through the two densities and through
+the two geminals, and of the three-line cuts that pair each density with the
+geminal on the opposite edge.  The points $z=-25/4$ and $-25$, where a
+pairing of each density with its adjacent geminal would put its cuts, are
+ordinary, and the remaining 92 roots of the leading coefficient are
+apparent.  Controls:\ the one-loop bubble in $D=3$ against its arctan closed
+form, and the kite with the Coulomb line removed, whose exact Taylor series
+is the product of two bubbles (records
+\texttt{docs/predictions/2026-10-24\_ibp\_kite.md} and
+\texttt{docs/predictions/2026-10-23\_price\_formula\_slots.md}).
+\textbf{[SYMBOLIC + MEASURED]} On the tetrahedron at the same point the
+reduction needs 34 masters and gives an operator for $Y/t^3$ in $x=t^2$ of
+order nineteen, exact over $\mathbb{Q}$ (the system rebuilt from two primes
+and checked on a third).  On $Y$ from a 60-digit grid it leaves
+$5\times10^{-55}$ to $3\times10^{-43}$ of the largest term, following the
+quadrature error.  The genuine singular points of $Y$'s minimal operator in
+$x>0$ are the same eight cuts, $x=1/4,1,9/4,4,9,49/4,16,81/4$.  The other
+roots of the leading coefficient are apparent, and at each of the eight some
+analytic continuation of $Y$ changes on a small loop.  The change is the
+same to four digits in 64- and 90-digit arithmetic, and at least $10^{10}$
+times the change on a loop around an ordinary point along a path at least as
+long.  \textbf{[SYMBOLIC + MEASURED]} The order nineteen is not minimal.  The
+reduction treats the two sectors with one geminal and no Coulomb line as
+different, but each is the same sunrise of the three densities times a
+one-line tadpole, so their masters differ by the constant ratio of the
+geminal scales, $\gamma_1/\gamma_2=1/2$.  With that relation imposed the
+operator has order fifteen, exact over $\mathbb{Q}$, and on $Y$ it leaves
+$2\times10^{-56}$ to $4\times10^{-46}$ of the largest term;\ the same
+construction with the ratio $1/3$ leaves $10^{-4}$ to $2\times10^{-2}$.  The
+reduction's system is block triangular in its sectors, so the pieces can be
+read sector by sector, and they are the predicted ones.  The K3 operator of
+the chain of three with scales $(t;1,2)$ is the sunrise sector's own block, and
+it is a left factor.  The Legendre family pulled back to the two crossed
+pairings, $z_1=(4t^2+7)/(16t)$ and $z_2=(t^2-8)/(2t)$, gives the two pieces of
+order two, from the sectors with one geminal and the Coulomb line;\ the direct
+pairings do not occur.  The other seven pieces have order one and algebraic
+solutions, branched at $x=1,9$, at $9/4$ and at $81/4$, and come from the
+sectors with both geminals.  Each of the three identifications is an exact map
+over $\mathbb{Q}(x)$, rebuilt from many primes and checked by exact division.
+$Y$ needs the K3 piece:\ the right factor without it leaves $2\times10^{-4}$ to
+$4\times10^{-3}$ of the largest term.  It needs both elliptic pieces, since its
+minimal operator is genuinely singular at $x=1/4$ and $x=4$ and no other piece
+is singular there.  \textbf{[SYMBOLIC + MEASURED]} The minimal operator of
+$Y$ has order thirteen, exact over $\mathbb{Q}$.  Two of the three order-one
+pieces branched at $x=9/4$ are left factors of the order-fifteen operator.
+The pairing of $Y$ with each of them, the bilinear concomitant, is a constant,
+and on $Y$ it is below $10^{-56}$ of its largest term and grows with the
+quadrature error;\ the same pairing with the K3 piece, the control, is
+$10^{-8}$ of its largest term and does not move at twice the step.  So the
+right factor of order thirteen without those two pieces annihilates $Y$,
+leaving $8\times10^{-57}$ to $2\times10^{-46}$ of the largest term.  Its only
+irreducible left factor is the K3 piece, once, and $Y$ needs that piece, so no
+smaller operator annihilates $Y$.  Its five order-one pieces are branched at
+$x=1,9$ (one), at $9/4$ (one) and at $81/4$ (three).  The K3 piece is
+irreducible:\ its exponents leave no room for a factor of order one or three,
+and its exterior square has no element of the one admissible form, so it has
+no factor of order two.  Its monodromy preserves a symmetric form and no
+alternating one, with reflections at $x=1$ and $x=9$, and its Jordan blocks
+are $2+2$ at $x=0$ and $3+1$ at infinity.  Caps:\ the reduction is new code,
+checked against the guessed operators and the series;\ the two vanishing
+pairings are measured, not proved;\ the left-factor searches behind the order
+thirteen are bounded, with planted controls found;\ and the form, the blocks
+and the irreducibility are computed modulo two primes, the last by searches
+that are complete for its exponents.
+An earlier reading of the order-nineteen operator, as one piece of order twelve
+with none of these pieces at either end, came from a map search whose box was
+too small at the left end, and is withdrawn (records
+\texttt{docs/predictions/2026-10-23\_price\_formula\_slots.md}, addendum 6,
+\texttt{docs/predictions/2026-10-25\_geometric\_route\_y.md} and
+\texttt{docs/predictions/2026-10-25\_tetrahedron\_route\_y.md}).
+\textbf{[PRIOR ART]} Integration by parts on
+this tetrahedron in momentum space is Puchalski, K\c{e}dziera and
+Pachucki's, for the three-electron Slater integral with integer
+indices~\cite{pkp2009}, which they reduce to a differential equation.  What
+is added here is the family with half-integer density lines and the
+geminal's squared lines, and the check against operators found
+independently.  Guards:\ \texttt{tests/test\_paper63\_ib\_kite.py} and
+\texttt{tests/test\_paper63\_y\_minimal\_order.py}.
+
+\textbf{[MEASURED]} The operators are also evaluators.  The kite's operator,
+with the kite's first six Taylor coefficients at $z=0$ as its only input,
+gives the kite at all $247$ nodes of the grid behind $Y$.  It does so by Taylor
+steps along a path that passes above the three apparent singular points on
+the positive axis.  Each step reaches half the distance to the nearest root
+of the leading coefficient, apparent roots included, because rounding
+excites solutions of the recurrence that blow up there.  On one process this
+takes $64$\,s, of which the input takes $1$\,s;\ the quadrature it replaces
+took $7894$\,s on fifteen.  $Y$ from the two routes agrees to
+$2\times10^{-69}$ at four values of $t$, the precision at which the grid is
+stored.  The node error grows towards large $w$, to $3\times10^{-8}$ near
+$w=10^{12}$, but those nodes carry so little weight that no node moves $Y$ by
+more than $1.4\times10^{-68}$.  With the derivation included, the route
+costs about $9300$\,s of processor time, about a thirteenth of the upper
+bound on the quadrature's.  The derivation is three reduction runs on six
+worker processes, one of which was measured at $3065$\,s of processor time,
+and a $13$\,s lift.  Changing
+one operator coefficient by $1/200$ moves $Y$ by $1$ to $7\%$.  $Y$'s own
+operator does not pay in the same way.  From the grid's data at $t=1.7$ it
+reaches five other values of $t$ to $4\times10^{-48}$ or better, but at $4$ to
+$12$\,s per value, against $0.02$\,s for one more grid sum, because once the
+kite is known the outer integral is a cheap sum.  At $60$ digits the structure pays where
+the cost is, in the inner kite.  Caps:\ one parameter set, so a new
+configuration needs a new derivation, which dominates the cost;\ times on one
+machine, with the quadrature's processor time an upper bound;\ the
+comparison is to this paper's own grid, not to a production Slater-integral
+code such as Ref.~\cite{chen2026fourier};\ and no
+certified error bounds, only agreement with the grid (record
+\texttt{docs/predictions/2026-10-26\_operator\_evaluator.md}, registered before
+computing;\ guard \texttt{tests/test\_paper63\_operator\_evaluator.py}).
+\textbf{[MEASURED]} At chemistry precision the comparison reverses.  For $Y$ to $10^{-12}$, a
+double-precision tanh-sinh quadrature of the same two-dimensional integral, graded at the
+ends and split along its ridge, takes $0.033$\,s of processor time on one core.  The
+operator route takes $16$\,s with the operator already given, about $500$ times slower,
+and $3\times10^{5}$ times slower with its derivation counted.  It also cannot run below
+$60$ digits:\ at $20$ to $40$ digits its Taylor walk diverges.  The two routes agree on $Y$
+to $7\times10^{-14}$.  So the operator is an evaluator only where high precision is wanted;\
+for chemistry it is a statement about structure, not a shortcut (record
+\texttt{docs/predictions/2026-10-28\_kite\_speed\_test.md}, registered before timing;\ one
+parameter set, one machine).  \textbf{[PRIOR ART]} Evaluating Feynman integrals by solving
+their differential equations in series is standard in particle
+physics~\cite{moriello2020,hidding2021,liu_ma2023}, and
+Ref.~\cite{pkp2009} reduces the integer-index three-electron integral to such
+an equation.  What is added is the measured cost on this family.
+
+\textbf{[MEASURED]} Most of such an operator's singular points can be read
+off before it is derived, but not all of them.  At a second set of rates,
+chosen blind, $(a,b,\gamma_1,\gamma_2)=(1,3/2,7/3,8/3)$, the kite's operator
+again has eighteen masters and order eleven.  The eight singular points
+predicted from its cuts, at minus the squared sums and differences of the
+rates on each cut, are all genuine and carry the predicted local exponents;
+the pairings of adjacent lines give none.  But a ninth genuine point appears
+at $z=-111/1120$, with exponents $-7/2,0,1,\dots,9$, and the leading Landau
+equations of the kite and of its contractions have no solution there.  A
+count of critical points of the Lee--Pomeransky likelihood, which equals the
+number of masters at a generic point, confirms it:\ $22$ at generic $z$, $21$
+there, at two primes.  The drop is in the full kite only.  Its position has a closed form in the squared rates
+$A=a^2$, $B=b^2$, $G_1=\gamma_1^2$, $G_2=\gamma_2^2$:
+\begin{equation}
+z_9=\frac{(AG_2-BG_1)(A-B-G_1+G_2)}{(A-G_1)(B-G_2)} .
+\label{eq:kite_ninth_point}
+\end{equation}
+It is symmetric under the kite's reflection $(a,\gamma_1)\leftrightarrow
+(b,\gamma_2)$ and under $(a,b)\leftrightarrow(\gamma_1,\gamma_2)$.  Its poles
+lie where an adjacent pair has equal rates, the pairings the cuts ignore.  At
+the original rates $a\gamma_2=b\gamma_1$, so $z_9=0$:\ the ninth point sits on
+$z=0$ there, which accounts for that operator's exponent at $z=0$ that the
+cuts did not explain.  The formula was fitted from $41$ sets of rates, $29$
+unknowns, and passed $18$ held-out sets at two primes;\ it reproduces
+$-111/1120$ at the blind point, and on the family $(1,2,3/2,\gamma_2)$ the
+critical-point count drops from $22$ to $21$ exactly at $z_9$ (record
+\texttt{docs/predictions/2026-10-26\_kite\_ninth\_point.md}, registered before
+computing).  \textbf{[PRIOR ART]} The location is known.  Broadhurst gives
+it, with $s=-z$, as the pole $s_3$ that the two-particle cuts of the kite
+acquire when its rung becomes massless with unequal adjacent masses
+(Ref.~\cite{broadhurst2022kites}, Eqs.~(24)--(25));\ it is the massless-rung
+limit of the anomalous threshold of the triangle formed by the two lines of
+one cut and the rung, the other two lines on shell, which the kite's own
+leading Landau equations do not contain.  \textbf{[MEASURED]} A registered
+test confirms that this is the mechanism here.  With all five lines on shell
+and the loop momenta in one plane, eliminating the equations in components
+gives exactly the factor of Eq.~\eqref{eq:kite_ninth_point} at three sets of
+rates and no other.  The multipliers are all nonzero, and the first Symanzik
+polynomial $U$ vanishes on them, which is why a Landau test that requires
+$U\neq0$ misses the point.  Given a small Coulomb mass, the point does not
+vanish but moves:\ the count drops on a curve through $(z_9,0)$, one of
+Broadhurst's two triangle thresholds, while the other runs to infinity as the
+mass goes to zero.  A scan in $z$ that assumes no location finds, at the blind
+rates, exactly ten drop points:\ $z=0$, $z_9$ and the eight cut values.  Caps:\
+the massive curve is checked modulo two primes at three masses, not over the
+rationals, and the local shape, the drop size on the curve and the escape
+direction were not run (record
+\texttt{docs/predictions/2026-10-27\_kite\_ninth\_point\_origin.md}, registered
+before computing;\ guard \texttt{tests/test\_paper63\_kite\_ninth\_point.py}, which also
+covers the blind point and Eq.~\eqref{eq:kite_ninth_point}).  What is added here is the measurement in this family:\ the
+critical-point drop, the exponent, and the complete drop locus at one set of
+rates.  The operator's degree,
+$120$, exceeds the prediction, and its coefficients needed a fourth prime.
+With $\gamma_2^2$ left free the differential system has degree $16$ in it,
+but the kite written in the masters has degree $26$, so the one-parameter
+family exceeded its registered sample cap and was not built (record
+\texttt{docs/predictions/2026-10-26\_parametric\_kite\_operator.md},
+registered before computing).  \textbf{[PRIOR ART]} Reading singular points
+from cuts is standard Landau and threshold analysis.
+
+\textbf{[MEASURED]} In the molecular calculation the triangle class is a
+modest share of the cost.  In the explicitly correlated LiH calculation of
+Paper~19 at its best truncation, the class that $Y$ models takes $21\%$ of a
+one-process run, third of its four large pieces, behind the electron--nucleus
+and kinetic blocks.  The part an operator evaluator would replace, the
+factorization of the three-body kernels, is $3\%$ of the run;\ the rest of
+the class is about $2.4$ million Coulomb mode solves.  So a free triangle
+class would speed the run by at most $1.27$ times, and a free kernel build by
+$1.03$ times.  Caps:\ one run per truncation on one machine;\ a reduced
+truncation is no proxy, giving $48\%$ (record
+\texttt{docs/predictions/2026-10-26\_lih\_triangle\_share.md}, registered
+before computing).
+
+\textbf{[MEASURED]} Whether the one-mass slice could be tabulated, as Gaussian
+codes tabulate the Boys function, depends on how many master integrals it
+needs and in how many variables.  Counting critical points, as for the kite,
+the slice needs four masters, and the index range the production code uses
+needs a fifth, an antiderivative in $D$ from a pole at $x=0$;\ a scaling
+identity leaves two variables.  By the registered gate this is borderline:\ a
+table is not ruled out, but its speed against a production
+code~\cite{chen2026fourier} is untested.  The physical fibre, with two
+offsets, needs six masters in three variables.  Caps:\ the scaling identity
+missed its registered precision, $2.7\times10^{-25}$ against $10^{-25}$, and
+an unregistered rerun agrees to $1.6\times10^{-37}$;\ these are counts of
+masters, not the cost of a table (record
+\texttt{docs/predictions/2026-10-27\_master\_count\_tabulation.md}, registered
+before computing;\ guard \texttt{tests/test\_paper63\_master\_count.py}).
+
+\textbf{[MEASURED]} Production explicitly correlated codes do not use a
+single Gaussian geminal.  For many integrals they replace $e^{-\gamma r}$ by
+a least-squares fit, six Gaussians by default.  The off-slice triangle above,
+known to about fifty digits, measures that replacement.  With the fit in the
+plain norm $\int_0^\infty r^2(\cdot)^2\,dr$, which at three and six terms gives
+the STO-3G and STO-6G exponents~\cite{hehre1969}, the six-term fit makes $Y$ too small by
+$3.6\times10^{-5}$ at $t=1/2$ down to $2.4\times10^{-6}$ at $t=4$.  The error
+falls like $e^{-b\sqrt{n}}$ in the number of terms $n$, the law the cusp at
+$r=0$ sets for Gaussian expansions of exponentials~\cite{kutzelnigg1994}, proved
+as an upper bound in a weighted norm by Braess~\cite{braess1995};\ the constant
+$b$ on this integral is our measurement.  With an extra weight $e^{-\gamma^2r^2}$ the fit loses its tail, and
+the six-term error is $5.4\times10^{-2}$ to $1.7\times10^{-2}$.  So on this
+integral the error is set by how far out the fit is trusted, not by the cusp.
+Caps:\ the production weight function is not reproduced, so these two weights
+do not price a production fit;\ one configuration, with model densities (record
+\texttt{docs/predictions/2026-10-25\_gaussian\_fit\_geminal.md}, registered
+before computing).
+\textbf{[MEASURED]} A fit that a production code ships, the six-term fit
+written into Psi4's source~\cite{psi4_2020}, is the best of the three at the
+cusp and the worst in the tail.  It is $1.8\%$ low at $r=0$, against $6\%$ for
+the plain fit, and half the true value at $\gamma r=4$.  On the same $Y$ it
+gives an error of $-13\%$ at $t=1/2$ down to $-5.5\%$ at $t=4$, more than three
+thousand times the plain fit's.  The three fits are ordered by their tails,
+not by their cusps.  Caps:\ $Y$ weights the geminal over its whole range,
+while a correlation energy is dominated by short range, so this prices the
+fit on this integral and not on an F12 energy;\ the fit's weight and its
+literature source are not verified, nor which integrals the code uses it for
+(record \texttt{docs/predictions/2026-10-26\_production\_geminal\_fit.md},
+registered before computing;\ guard \texttt{tests/test\_paper63\_production\_geminal\_fit.py}).
+
+
+%% ========================================================================
+\section{The graph reading, as a bounded conjecture}
+\label{sec:conjecture}
+%% ========================================================================
+
+\textbf{[OBSERVATION + PRIOR ART]} Read as a Feynman graph, the cases of Paper~59's geminal section and of
+Sec.~\ref{sec:density_ring} fit one pattern.  The densities and the kernels are the lines;\ a
+Slater geminal is a line whose mass is its exponent $\gamma$, and the Coulomb kernel is a line
+with no mass.  On every instance tested the class is set by the shape of the graph together
+with the masses on its lines.  A massless Coulomb line adds no threshold, so for Coulomb
+integrals the density topology alone sets the rung, as stated above.  A Slater geminal keeps
+the curve the densities build, but it lifts the same-pair master above to genus one, and the
+correlated triangle's operator drops order where the geminal's mass equals that of a density
+pair, $\gamma=1$.  A Gaussian geminal is not a propagator of this kind, and its integrals leave
+the Picard--Fuchs ladder (Sec.~\ref{sec:density_ring}).  That the internal masses set the
+geometry of a Feynman integral is standard:\ the sunset graph with massless lines evaluates in
+Gamma functions, and with massive lines it is elliptic~\cite{blochvanhove2015,vanhove2014}.
+What is recorded here is only that these molecular integrals follow the same dictionary.  The
+nearest theorem in shape is Brown's:\ for massless primitive $\phi^{4}$ graphs in four
+dimensions the set of periods is minor monotone, so a minor-closed class of graphs bounds the
+ring the periods lie in~\cite{brown2009periods}.  That theorem has no masses;\ here the masses
+enter too.  It is
+a pattern across the tested instances, not a derivation.  It would fail on a Coulomb-only
+integral whose class depends on anything but the density topology, or on a Slater-geminal
+integral whose class does not change at an equal-mass value of its exponent (guards
+\texttt{tests/test\_paper59\_h2\_geminal\_master.py},
+\texttt{tests/test\_paper63\_geminal\_shapes.py},
+\texttt{tests/test\_paper63\_gy\_gaussian.py},
+\texttt{tests/test\_paper63\_mg\_mechanism.py}).
+
+
+With the dictionary of Sec.~\ref{sec:dictionary} the pattern can be stated
+for every exponential-type orbital at once, and bounded.
+
+\begin{conjecture}[the density-graph ladder]
+\label{conj:ladder}
+Let $\Gamma$ be a connected density graph over exponential-type orbitals with
+Coulomb or Slater-geminal kernels, and let its fibre be the integral with
+all centers coincident.  Then:\ (i) if $\Gamma$ is a tree of $n$ two-center
+densities, the minimal annihilator of the fibre's one-scale family has, among
+its composition factors, the operator of $F_n$ of
+Sec.~\ref{sec:four_density}---the Hadamard product of the Legendre operator
+with the equal-mass banana with $n-1$ propagators---and nothing above it;\
+(ii) the rung names that operator, not a finite basis of periods:\ the fibre
+is in general an iterated integral of its top piece against elementary
+kernels, and no finite set of periods of the top piece and the rungs below
+it is expected to contain the value;\ (iii) for a Coulomb ring, each loop
+that integrates out exactly by uniqueness lowers the rung by one density, and
+a geminal loop does not;\ (iv) the integrated value over separations and
+Feynman parameters has class at most that of its fibre.
+\end{conjecture}
+
+\emph{What is proved, what is measured, what is open.}  Part (i) is proved
+at the level of the holomorphic period for all $n$ (Eq.~\eqref{eq:tree} and
+the Hadamard relation, Sec.~\ref{sec:four_density}), for every exponential
+orbital by Sec.~\ref{sec:dictionary}, and for the real three-dimensional
+integral at $n=3$ and $n=4$;\ for $n\ge5$ the three-dimensional reduction
+is not shown.  Part (ii) is the lesson of the three-electron chain
+(Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
+K3 periods and $\pi^3$, but at four generic scale triples integer-relation
+searches at 320 to 400 digits in five bases built from the K3 and elliptic
+periods, their derivatives, products, dilogarithms, trilogarithms and Tate
+numbers find nothing while every planted relation is recovered, and on both
+one-parameter slices computed the fibre is provably a K3 function integrated
+once against an elementary kernel.  That null is the conjecture's stated test
+case:\ a relation found in a principled widening of the basis would show the
+fibre sits in a finite period ring after all and part (ii) would be
+withdrawn;\ a relation that needs a new period type would move the chain off
+rung three.  The record is \texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}.
+Part (iii) rests on one ring, the triangle, in which the Coulomb loop drops
+and the geminal loop does not (Sec.~\ref{sec:density_ring});\ the ring of
+four was not computed, and the squashed ring's momentum dies as a power of
+its aspect ratio.  Part (iv) holds in every instance:\ the two-center
+exchange class builds the elliptic fibre and closes at genus zero, and the
+integrated three-center value leaves the two-center class as a function of
+the bond angle (Paper~59).  The conjecture fails on a Coulomb-only integral
+whose class depends on anything but the density graph, on a tree whose
+real three-dimensional reduction brings a piece above $F_n$, or on a
+Slater-geminal integral whose class does not change at an equal-mass value
+of its exponent.  The nearest theorem in shape remains
+Brown's~\cite{brown2009periods}, for massless graphs;\ here the masses enter,
+and a proof would have to run through the Symanzik polynomials of
+$\Gamma$ with the Yukawa masses on its lines, which we have not attempted.
+
+%% ========================================================================
+\section{Placement in the literature}
+\label{sec:placement}
+%% ========================================================================
+
+\textbf{[PRIOR ART]} The operators of the ladder are known.  The Hadamard
+construction and the tables that place $F_4$ and $F_5$ at entries \#58 and
+\#39 are Almkvist and Zudilin's~\cite{almkvist_zudilin2007,aesz2005};\ the
+equal-mass banana operators are Vanhove's~\cite{vanhove2014} and their
+holomorphic periods are Broadhurst's random-walk
+moments~\cite{broadhurst2009walks};\ that an $l$-loop banana carries a
+Calabi--Yau $(l-1)$-fold is B\"onisch, Fischbach, Klemm, Nega and
+Safari's~\cite{bonisch2021};\ the two-scale and three-scale Bessel moments
+are Bailey, Borwein, Broadhurst and Glasser's~\cite{bbbg2008}, and the
+Kloosterman motives behind the Ising class are Fres\'an, Sabbah and
+Yu's~\cite{fresansabbahyu2023}.  Integration by parts on the three-electron
+tetrahedron is Puchalski, K\c{e}dziera and Pachucki's~\cite{pkp2009}, and
+the kite's triangle threshold is Broadhurst's~\cite{broadhurst2022kites}.
+What is new here is the route from molecular integrals to these objects, the
+tree identity that makes the holomorphic period depend on $n$ alone, the
+dictionary that makes the ladder independent of the orbitals, the readings
+of the ring, the geminal and the Gaussian, and the prospective record.
+
+\textbf{[PRIOR ART]} On the chemistry side the closest work is the Averys'
+momentum-space Coulomb--Sturmian program, whose monograph~\cite{avery_avery_book2018}
+and papers~\cite{avery2013,avery_avery2015,avery_avery_4center} treat
+exactly these integrals under the same Fock projection.  Their route to a
+multicenter repulsion integral is to expand each two-center density in a
+one-center Coulomb--Sturmian basis of doubled exponent on its two centers,
+solving a linear system whose matrix is the overlap of that basis;\ the
+expansion is a series rather than an identity, its coefficient matrices are
+not sparse, and at short internuclear separation the system is ill-conditioned
+by the overcompleteness of the basis, which is handled by phasing out its
+small eigenvalues~\cite{avery2013}.  In the language of this paper that route
+reduces every integral to the genus-zero one-center class by an infinite
+series, and the short-range difficulty it meets is where the series
+confronts the genus jump of Eq.~\eqref{eq:curve}:\ an elliptic period is
+not a finite combination of genus-zero terms.  Neither the Bessel-moment
+reduction nor the ladder appears in that program;\ this is an absence from a
+reading of the monograph's chapters on interelectron repulsion and of the
+cited papers, not a proof of absence.  The overcompleteness itself is older
+than either program~\cite{monkhorst_jeziorski1979}.
+
+%% ========================================================================
+\section{Scope, and what is open}
+\label{sec:scope}
+%% ========================================================================
+
+Four caps bound every statement above.  First, the rungs are read on the
+fibre and its holomorphic period;\ the integrated value may sit lower, and
+in one class it does.  Second, the reduction of the real three-dimensional
+integral to the Bessel-moment family is shown for the chain of three and the
+star and path of four;\ for five or more densities the holomorphic-period
+statement stands and the three-dimensional one is not shown.  Third, the
+dictionary gives an upper bound on the rung of a general-orbital integral,
+not its value;\ every computed case attains the bound, and none is a proof
+that it must.  Fourth, among rings only the triangle was computed, and the
+generic three-electron fibre's content beyond the K3 and elliptic periods is
+evidence from integer-relation searches, not a theorem.
+
+What is open is in two layers.  Below the conjecture:\ the three-dimensional
+reduction for $n\ge5$;\ the ring of four;\ whether the rung of a
+general-orbital integral is always attained;\ and the principled widening of
+the P3e-2 basis.  Above it:\ a proof through the Symanzik polynomials that the
+density graph with Yukawa masses has the motive the ladder measures.  The
+finite closed form of the first rung's integrated value is Paper~59's open
+problem and Paper~61's subject, not this paper's.
+
+%% ========================================================================
+\section{Conclusion}
+%% ========================================================================
+
+The class of a molecular integral over exponential-type orbitals is set by
+its density graph.  Every such orbital is a derivative of the $1s$ Yukawa
+function in its exponent and its center, so every integral is a derivative
+of the $1s$ integral of its graph and cannot climb above it;\ the ladder is
+orbital-independent.  On the graph, trees of $n$ linked two-center densities
+share one holomorphic period, a Bessel moment whose one-scale operator is the
+Legendre operator Hadamard the equal-mass banana with $n-1$ propagators:\
+elliptic at two densities, a K3 at three, a Calabi--Yau threefold at four, and
+nothing new at five.  The integrals of a molecular Hamiltonian link two
+densities and stay elliptic at the fibre for every molecule;\ the class
+climbs only in correlated integrals that link more.  A Coulomb ring of three
+does not climb and a geminal ring does, read as uniqueness.  A Slater geminal
+is an imaginary external momentum on this ladder and a Gaussian one leaves
+it.  The operators are known;\ the route from chemistry to them, the tree
+identity, the dictionary and the prospective record are what this paper adds,
+and the conjecture that organizes them is stated with the case that tests
+it:\ the rung names an operator, not a number, and the generic three-electron
+fibre is where that must be decided.
+
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper59}
+J.~Loutey, ``The Three-Center Electron-Repulsion Integral Is an Elliptic
+Bessel Moment:\ A Genus-One Radial Core at the Third Center in Momentum-Space
+Slater Theory,'' GeoVac Paper~59 (2026).
+
+\bibitem{loutey_paper57}
+J.~Loutey, ``Forced and Free Content in the GeoVac Framework:\ An
+Observations Paper,'' GeoVac Paper~57 (2026).
+
+\bibitem{avery_avery_book2018}
+J.~E.~Avery and J.~S.~Avery, \textit{Hyperspherical Harmonics and Their
+Physical Applications} (World Scientific, Singapore, 2018).
+
+\bibitem{monkhorst_jeziorski1979}
+H.~J.~Monkhorst and B.~Jeziorski, ``No linear dependence or many-center
+integral problems in molecular Sturmian calculations,'' \textit{J.\ Chem.\
+Phys.}\ \textbf{71}, 5268--5269 (1979).
+
+
+\bibitem{avery_avery_4center}
+J.~E.~Avery and J.~S.~Avery, ``4-Center STO interelectron repulsion
+integrals with Coulomb Sturmians,'' \textit{Adv.\ Quantum Chem.}\ \textbf{76},
+133--146 (2018).
+
+\bibitem{fromm_hill1987}
+D.~M.~Fromm and R.~N.~Hill, ``Analytic evaluation of three-electron
+integrals,'' \textit{Phys.\ Rev.\ A}\ \textbf{36}, 1013--1044 (1987).
+
+\bibitem{remiddi1991}
+E.~Remiddi, \textit{Phys.\ Rev.\ A}\ \textbf{44}, 5492 (1991).
+
+\bibitem{chetyrkin_tkachov1981}
+K.~G.~Chetyrkin and F.~V.~Tkachov, ``Integration by parts:\ the algorithm
+to calculate $\beta$-functions in 4 loops,'' \textit{Nucl.\ Phys.\ B}
+\textbf{192}, 159 (1981).
+
+\bibitem{laporta2000}
+S.~Laporta, ``High-precision calculation of multi-loop Feynman integrals by
+difference equations,'' \textit{Int.\ J.\ Mod.\ Phys.\ A} \textbf{15}, 5087
+(2000);\ arXiv:hep-ph/0102033.
+
+\bibitem{chen2026fourier}
+W.~Chen, L.~Silberman, U.~Segal and C.~Greif, ``Fourier transform-based
+computation of two-electron four-center Coulomb repulsion integrals,''
+arXiv:2610.12608 (2026).
+
+\bibitem{broadhurst2022kites}
+D.~Broadhurst, ``Multivariate elliptic kites and tetrahedral tadpoles,''
+arXiv:2212.01962 (v2, 2024), to appear in the proceedings of LT-15 (Varna,
+2023).
+
+\bibitem{pkp2009}
+M.~Puchalski, D.~K\c{e}dziera and K.~Pachucki, ``Ground state of Li and
+Be$^+$ using explicitly correlated functions,'' \textit{Phys.\ Rev.\ A}
+\textbf{80}, 032521 (2009);\ arXiv:0909.5542.
+
+\bibitem{moriello2020}
+F.~Moriello, ``Generalised power series expansions for the elliptic planar
+families of Higgs + jet production at two loops,'' \textit{JHEP}
+\textbf{01} (2020) 150;\ arXiv:1907.13234.
+
+\bibitem{hidding2021}
+M.~Hidding, ``DiffExp, a Mathematica package for computing Feynman integrals
+in terms of one-dimensional series expansions,'' \textit{Comput.\ Phys.\
+Commun.}\ \textbf{269}, 108125 (2021);\ arXiv:2006.05510.
+
+\bibitem{liu_ma2023}
+X.~Liu and Y.-Q.~Ma, ``AMFlow:\ a Mathematica package for Feynman integrals
+computation via auxiliary mass flow,'' \textit{Comput.\ Phys.\ Commun.}\
+\textbf{283}, 108565 (2023);\ arXiv:2201.11669.
+
+\bibitem{hehre1969}
+W.~J.~Hehre, R.~F.~Stewart and J.~A.~Pople, ``Self-consistent molecular-orbital methods.
+I.\ Use of Gaussian expansions of Slater-type atomic orbitals,'' \textit{J.\ Chem.\ Phys.}\
+\textbf{51}, 2657 (1969).
+
+\bibitem{kutzelnigg1994}
+W.~Kutzelnigg, ``Theory of the expansion of wave functions in a Gaussian basis,''
+\textit{Int.\ J.\ Quantum Chem.}\ \textbf{51}, 447 (1994).
+
+\bibitem{braess1995}
+D.~Braess, ``Asymptotics for the approximation of wave functions by exponential sums,''
+\textit{J.\ Approx.\ Theory} \textbf{83}, 93 (1995).
+
+\bibitem{weniger2005}
+E.~J.~Weniger, ``The spherical tensor gradient operator,'' arXiv:math-ph/0505018 (2005).
+
+\bibitem{psi4_2020}
+D.~G.~A.~Smith \textit{et al.}, ``PSI4 1.4:\ open-source software for
+high-throughput quantum chemistry,'' \textit{J.\ Chem.\ Phys.}\
+\textbf{152}, 184108 (2020);\ the fit is in
+\texttt{psi4/src/psi4/libmints/integralparameters.cc}, class
+\texttt{FittedSlaterCorrelationFactor}.
+
+\bibitem{ppr2004}
+K.~Pachucki, M.~Puchalski and E.~Remiddi, ``Recursion relations for
+Hylleraas three-electron integral,'' \textit{Phys.\ Rev.\ A} \textbf{70},
+032502 (2004);\ arXiv:physics/0405057.
+
+\bibitem{bbbg2008}
+D.~H.~Bailey, J.~M.~Borwein, D.~Broadhurst, and M.~L.~Glasser, ``Elliptic
+integral evaluations of Bessel moments and applications,''
+\textit{J.\ Phys.\ A}\ \textbf{41}, 205203 (2008); arXiv:0801.0891.
+
+\bibitem{bailey1936}
+W.~N.~Bailey, ``Some infinite integrals involving Bessel functions (II),''
+J.\ London Math.\ Soc.\ \textbf{11}, 16--20 (1936).
+
+\bibitem{brown2009periods}
+F.~C.~S.~Brown, ``On the periods of some Feynman integrals,'' arXiv:0910.0114 (2009).
+
+\bibitem{blochvanhove2015}
+S.~Bloch and P.~Vanhove, ``The elliptic dilogarithm for the sunset graph,''
+\textit{J.\ Number Theory}\ \textbf{148}, 328--364 (2015); arXiv:1309.5865.
+
+\bibitem{fresansabbahyu2023}
+J.~Fres\'an, C.~Sabbah, and J.-D.~Yu, ``Quadratic relations between Bessel
+moments,'' \textit{Algebra Number Theory}\ \textbf{17}, 541--602 (2023);
+arXiv:2006.02702.
+
+\bibitem{avery2013}
+J.~E.~Avery, ``Fast electron repulsion integrals for molecular Coulomb
+Sturmians,'' \textit{Adv.\ Quantum Chem.}\ \textbf{67}, 129--151 (2013).
+
+\bibitem{avery_avery2015}
+J.~E.~Avery and J.~S.~Avery, ``Molecular integrals for exponential-type orbitals
+using hyperspherical harmonics,'' \textit{Adv.\ Quantum Chem.}\ \textbf{70},
+265--324 (2015).
+
+\bibitem{aesz2005}
+G.~Almkvist, C.~van Enckevort, D.~van Straten, and W.~Zudilin, ``Tables of
+Calabi--Yau equations,'' arXiv:math/0507430 (2005).
+
+\bibitem{cydb}
+Calabi--Yau differential operator database, version 3.0,
+\texttt{cydb.mathematik.uni-mainz.de}, entry 2.9 (AESZ \#58).
+
+\bibitem{gegelia_vanstraten2024}
+N.~Gegelia and D.~van Straten, ``Paramodular forms from Calabi--Yau
+operators,'' arXiv:2408.10183 (2024), Tables~3 and~6.
+
+\bibitem{matuzas2026}
+J.~Matuzas, ``A Calabi--Yau period in a four-electron correlation integral:
+modular physical fibre and a hypergeometric endpoint,'' Zenodo,
+doi:10.5281/zenodo.23218203 (2026).
+
+\bibitem{almkvist_zudilin2007}
+G.~Almkvist and W.~Zudilin, ``Differential equations, mirror maps and zeta
+values,'' in \textit{Mirror Symmetry V}, AMS/IP Studies in Advanced
+Mathematics \textbf{38}, 481--515 (2007); arXiv:math/0402386.
+
+\bibitem{vanhove2014}
+P.~Vanhove, ``The physics and the mixed Hodge structure of Feynman
+integrals,'' arXiv:1401.6438 (2014).
+
+\bibitem{beukers_heckman1989}
+F.~Beukers and G.~Heckman, ``Monodromy for the hypergeometric function
+${}_nF_{n-1}$,'' \textit{Invent.\ Math.}\ \textbf{95}, 325--354 (1989).
+
+\bibitem{lim_tu_yu2026}
+Z.~L.~Lim, F.-T.~Tu and J.-D.~Yu, ``Galois representations and modularity
+for twisted moments of Kloosterman sums,'' arXiv:2609.13576 (2026).
+
+\bibitem{davydychev_delbourgo1998}
+A.~I. Davydychev and R.~Delbourgo, ``A geometrical angle on Feynman
+integrals,'' J.~Math.~Phys.~\textbf{39}, 4299 (1998), arXiv:hep-th/9709216.
+
+\bibitem{nickel1978}
+B.~G. Nickel, J.~Math.~Phys.~\textbf{19}, 542 (1978).
+
+\bibitem{preti2018}
+M.~Preti, ``STR:\ a Mathematica package for the method of uniqueness,''
+arXiv:1811.04935 (2018).
+
+\bibitem{broadhurst2009walks}
+D.~Broadhurst, ``Bessel moments, random walks and Calabi--Yau equations,''
+preprint (2009).
+
+\bibitem{bourjaily2019}
+J.~L.~Bourjaily, A.~J.~McLeod, M.~von Hippel, and M.~Wilhelm, ``Bounded
+collection of Feynman integral Calabi--Yau geometries,'' \textit{Phys.\
+Rev.\ Lett.}\ \textbf{122}, 031601 (2019); arXiv:1810.07689.
+
+\bibitem{padhy2017}
+B.~Padhy, ``Analytic evaluation of some three- and four-electron atomic
+integrals involving $s$ STO's and exponential correlation with unlinked
+$r_{ij}$'s,'' arXiv:1701.05701 (2017).
+
+\bibitem{bonisch2021}
+K.~B\"onisch, F.~Fischbach, A.~Klemm, C.~Nega, and R.~Safari, ``Analytic
+structure of all loop banana integrals,'' \textit{J.\ High Energy Phys.}\
+\textbf{05}, 066 (2021); arXiv:2008.10574.
+
+\bibitem{loutey_paper18}
+J.~Loutey, ``Spectral-Geometric Exchange Constants: Projecting Discrete
+Spectra onto Continuous Manifolds,'' Paper~18 in this series.
+
+\bibitem{loutey_paper34}
+J.~Loutey, ``GeoVac as a Two-Layer Framework: Projection Taxonomy and the
+Empirical Matches Catalog,'' Paper~34 in this series.
+
+\bibitem{loutey_paper61}
+J.~Loutey, ``The Bessel-Moment Period Algebra of the Three-Center Coulomb
+Integral: Modular Structure and Cosmic-Galois Placement,'' Paper~61 in this
+series.
+
+\end{thebibliography}
+
+\end{document}

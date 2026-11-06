@@ -1,9 +1,9 @@
-"""Paper 59 sec:four_density, the real three-dimensional path of four densities.
+"""Paper 63 sec:four_density, the real three-dimensional path of four densities.
 
 Record docs/predictions/2026-10-22_four_density_path.md (FP1-FP3, committed 66af9822 before computing).
 Written as a separate step from the result; no debug/ import.  The exact pieces found by search are
 loaded from tests/data/paper59_ladder_2026_10_22.json and re-verified here.  Shared operator helpers
-come from tests/test_paper59_generic_slice.py and tests/test_paper59_four_density_star.py.
+come from tests/test_paper63_generic_slice.py and tests/test_paper63_four_density_star.py.
 
 On the slice (1,t,1,1) the path is P(t) = (16/pi^4) t^3 int_0^oo K0(t x) chi(x) H(x) dx with
 H(x) = int_0^oo min(x,s) K0(s) chi(s) ds.  W12 = Y4 o R8 annihilates P, with R8 = X4 o R3 o (theta - 2),
@@ -21,8 +21,8 @@ import mpmath as mp
 import pytest
 import sympy as sp
 
-import test_paper59_four_density_star as ST
-import test_paper59_generic_slice as GS
+import test_paper63_four_density_star as ST
+import test_paper63_generic_slice as GS
 
 t, u = GS.t, GS.u
 DATA = json.loads((Path(__file__).parent / "data" / "paper59_ladder_2026_10_22.json").read_text())["path"]

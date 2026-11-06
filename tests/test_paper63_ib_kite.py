@@ -1,4 +1,4 @@
-"""Paper 59 sec:density_ring: the kite operators from integration by parts (record IB, 2026-10-24).
+"""Paper 63 sec:density_ring: the kite operators from integration by parts (record IB, 2026-10-24).
 
 Record docs/predictions/2026-10-24_ibp_kite.md (committed e7679061 before computing).  Written as a separate step from
 the result; no debug/ import.  Data tests/data/paper59_ib_2026_10_24.json.

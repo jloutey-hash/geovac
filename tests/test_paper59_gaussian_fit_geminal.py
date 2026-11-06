@@ -13,7 +13,7 @@ Claims guarded, as the paper states them ([MEASURED]):
   * W2 loses its tail, and its six-term error is 5.4e-2 to 1.7e-2;  so the error is set by the tail, not the cusp.
 Data: tests/data/paper59_gf_2026_11_01.json, a copy of debug/data/gf_fits.json and gf_results.json built by
 debug/build_gf_guard_data_2026_11_01.py (no debug/ import here).  Y_exact there is the 60-digit grid's Y, an independent
-route from the Gaussian engine below (a copy of debug/gf_engine.py, as in test_paper59_production_geminal_fit.py).
+route from the Gaussian engine below (a copy of debug/gf_engine.py, as in test_paper63_production_geminal_fit.py).
 Independent recomputations: the published STO-3G/6G tables (Hehre-Stewart-Pople 1969), a from-scratch float refit at
 n = 3 (erfcx moments, Nelder-Mead), re-solved coefficients and gradients at 40 digits, pointwise fit errors,
 the RSS fits, and Y_1 (fast) and Y_6 (slow) through the engine against the exact Y.
