@@ -353,6 +353,11 @@ $\{-\pi,0,2\pi\}$, the exponents $\{0,1,1,2\}$. Answer key →
 the real corpus.
 
 ## Change log
+- 2026-11-06 — **Items 11-14 superseded by `docs/qa/paper_63.done.md`** (v6.4.0, PI-approved split): their
+  sections (`sec:four_centre`, `sec:three_electron`, `sec:four_density`, `sec:density_ring`) moved verbatim to
+  Paper 63 and are certified there, not here. Item 10's graph-reading clause moved too (Paper 63
+  `sec:conjecture`); the rest of item 10 (`sec:f12`) and items 1-9 and 15 stay this paper's. Items above are a
+  dated record and are not edited.
 - 2026-11-02 — **Items 9-15 APPROVED by the PI** ("Approve paper 59 points"). Item 9 (IC) and items 10-15 (every
   claim added after the 2026-08-17 freeze) join the frozen goalposts; items 1-8 unchanged.
 - 2026-08-17 — **DRAFTED + FROZEN** by PM, PI framing approved (three-question freeze):

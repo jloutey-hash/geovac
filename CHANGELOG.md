@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
-## [v6.3.1] - 2026-11-06
+## [v6.4.0] - 2026-11-06
 
 **Paper 63 split off Paper 59; the ladder made orbital-independent (PI-approved plan, 2026-11-06).** The
-QA sequence (group5, group6, synthesis still open) is paused for this; it resumes at group5. Patch bump by
-default; a paper-series reorganization is a PI minor-bump call and is flagged as such.
+QA sequence (group5, group6, synthesis still open) is paused for this; it resumes at group5.
+MINOR bump (PI-approved 2026-11-06): the paper series is reorganized.
 
 ### Added
 - **`papers/group3_foundations/paper_63_density_graph_ladder.tex`** -- "Linked Electron Densities Climb
