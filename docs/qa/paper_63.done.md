@@ -1,18 +1,14 @@
 # Paper 63 (Linked Electron Densities Climb the Banana Ladder) — `/qa` profile
 
-> **DRAFT 2026-11-06 — PI co-write before any /qa run.** Drafted by the PM the day
-> Paper 63 was split out of Paper 59 (the sections `sec:beyond`, `sec:four_centre`,
-> `sec:three_electron`, `sec:four_density`, `sec:density_ring` and the "Read as a
-> Feynman graph" paragraph moved verbatim; the dictionary `sec:dictionary`, the
-> bounded conjecture `sec:conjecture`, the placement `sec:placement` and the caps
-> `sec:scope` are new). Nothing below is frozen. The PI co-writes the branch criterion,
-> the C8 headlines and the seeding plan before the first `/qa paper 63` fires; items
-> the PI has not approved must not be read as goalposts.
+> **FROZEN 2026-11-06 — PI co-write done.** Branch criterion frozen as written (six clauses);
+> all nine C8 headlines frozen; run shape **unseeded** (the standing calibration record is cited;
+> the seed plan below stays on file for a later `seeded` run). The goalposts below are fixed for
+> the first `/qa paper_63` FULL run, which the PI invokes.
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-63 scope + deltas + watch-notes.
 
-> **STATUS: NEVER CERTIFIED.** Paper 63 was created 2026-11-06 (v6.3.x) and has not
+> **STATUS: NEVER CERTIFIED.** Paper 63 was created 2026-11-06 (v6.4.0) and has not
 > been through `/qa`. Its moved content was last exercised by `/qa paper_59` on the
 > 2026-11-02 approval of Paper 59's items 10-15 (`docs/qa/paper_59.done.md`), under
 > Paper 59's goalposts; those items now describe Paper 63's sections and are
@@ -43,7 +39,8 @@ member of `group3`, so `--gate group3` reaches it, unlike Papers 58/59/60 in gro
 
 ## Dimensions to exercise (ALL, one invocation — FULL run, first cert of a fresh target)
 
-- **Code / test-backing (C1–C2)** — `code-reviewer` ×1 (Sonnet-tier; 2 seeds). Map +
+- **Code / test-backing (C1–C2)** — `code-reviewer` ×1 (Opus-tier: the standing calibration record found
+  Sonnet code reviews PARTIAL; 2 seeds if `seeded`). Map +
   **RUN**: `tests/test_paper63_dictionary.py` (the Yukawa-derivative dictionary and the
   Euler-operator weights), `tests/test_paper63_four_centre_genus.py`,
   `tests/test_paper63_three_electron_k3.py`, `tests/test_paper63_generic_slice.py`,
@@ -79,7 +76,7 @@ member of `group3`, so `--gate group3` reaches it, unlike Papers 58/59/60 in gro
   the ids keep their `p59-` prefix as history).
 - **Completeness-critic** ×1 (FULL run).
 
-## Branch-defining criterion (PROPOSED, inherits Paper 59's PI-approved swap): transcendence-tier + open-frontier honesty
+## Branch-defining criterion (FROZEN 2026-11-06, PI-approved; inherits Paper 59's swap): transcendence-tier + open-frontier honesty
 
 Paper 63 is a differential-Galois / period-class paper, so group2's chemistry
 benchmarking criterion is vacuous for it and group3's foundations criterion does not
@@ -110,8 +107,9 @@ verify ALL of:
    MATERIAL (registry `p59-tree-banana-hadamard`).
 4. **The ring drop is uniqueness, not rings.** The Coulomb triangle sits on the elliptic
    rung because its loop integrates out exactly (star-triangle); the correlated triangle
-   with exponential geminals does not drop (K3 rung at $\gamma = 1$, $3/2$, $2$, $1/2$,
-   $3$; the order-four drop at $\gamma = 1$ is the equal-mass degeneration). "Rings never
+   with exponential geminals does not drop (K3 rung at $\gamma = 1$, $3/2$, $2$; order nine
+   also at $\gamma = 1/2$ and $3$; the order-four drop at $\gamma = 1$ is the equal-mass
+   degeneration). "Rings never
    climb" or "every loop lowers the rung" = MATERIAL (registry
    `p59-coulomb-ring-elliptic`, `p59-correlated-triangle-k3`). Only the triangle was
    computed (cap four).
@@ -160,7 +158,7 @@ verify ALL of:
   restatements match the owner's tiers (the F on J10 covers the tree identity and the
   non-elliptic operator only; the star/path reductions are outside the F).
 
-## C8 headlines (enumerated, with tiers — PROPOSED, not frozen)
+## C8 headlines (enumerated, with tiers — FROZEN 2026-11-06, PI-approved)
 
 1. **The dictionary [SYMBOLIC PROOF].** Every exponential-type orbital is a polynomial
    differential operator (coefficients rational in the exponent) in its exponent and
@@ -192,7 +190,7 @@ verify ALL of:
    (star-triangle); at the fibre its operator factors exactly into elementary, algebraic
    and Legendre-equivalent pieces (elliptic rung, below the chain's K3); at one centre
    dilogarithms (Remiddi). The correlated triangle sits on the K3 rung at $\gamma = 1$
-   (exact), $3/2$, $2$, $1/2$, $3$ (composition series, pieces algebraic / elliptic /
+   (exact), $3/2$ and $2$, with order nine also at $1/2$ and $3$ (composition series, pieces algebraic / elliptic /
    K3, the elliptic piece a bubble at imaginary momentum $i\gamma$); the drop at
    $\gamma = 1$ is the equal-mass degeneration; the cusp-correct geminal brings no new
    type; the Gaussian geminal leaves the Fuchsian class. Guards
@@ -227,7 +225,7 @@ verify ALL of:
 - The finite closed form of the first rung's integrated value is Paper 59's open problem
   and Paper 61's subject, not Paper 63's.
 
-## Seeding plan (worktree only; never touches the real corpus) — PROPOSED
+## Seeding plan (worktree only; never touches the real corpus) — ON FILE, NOT USED (first run unseeded, PI 2026-11-06)
 
 K ≈ 6 planted defects, ≥1 catchable by each gating dimension:
 - **code ×2** (in a P63 backing test): (a) a Hadamard/banana check reduced to one $n$ or a
@@ -244,6 +242,10 @@ $2^n/(\pi\sqrt{\prod c})$; AESZ #58 for $n = 4$; the Coulomb triangle's elliptic
 the correlated triangle's K3 rung at $\gamma = 1$; the dictionary's "at most".
 
 ## Change log
+- 2026-11-06 — **FROZEN** by PI co-write: criterion as written, nine headlines, unseeded. PM
+  corrections before the freeze: version v6.4.0; code reviewer Opus-tier (calibration record);
+  the correlated triangle's K3 rung stated at gamma = 1, 3/2, 2 only (order nine at 1/2 and 3),
+  matching the paper and registry `p59-correlated-triangle-k3`.
 - 2026-11-06 — **DRAFTED** by the PM on the day of the split (Paper 59 → Papers 59 + 63);
   not frozen; PI co-write owed before any `/qa paper 63` run. Pointers re-homed the same
   day: the claim matrix rows, the atlas doors 14/17/20/21/27, seam rows J4/J7/J9/J10/J11,
