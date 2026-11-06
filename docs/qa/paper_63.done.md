@@ -86,8 +86,10 @@ verify ALL of:
 
 1. **SYMBOLIC PROOF means a proof.** The dictionary (`sec:dictionary`: every
    exponential-type orbital is a polynomial differential operator in exponent and centre
-   applied to the $1s$ Yukawa function; at the fibre every density weight is a polynomial
-   in the Euler operators applied to the $1s$ weight; so every rational-kernel
+   applied to the $1s$ Yukawa function; at the fibre every $s$-type density weight is a
+   polynomial in the Euler operators applied to the $1s$ weight (for $\ell>0$ the centre
+   derivatives leave momentum factors, covered only by the general $D$-module statement;
+   any restatement extending the Euler identities to $\ell>0$ is MATERIAL); so every rational-kernel
    multi-density integral is that operator applied to the $1s$ integral of its graph and
    its rung is **at most** the $1s$ rung) carries `[SYMBOLIC PROOF]`. The prose may
    assert it as proven only on the strength of the two identities and the lemma; a
@@ -162,8 +164,8 @@ verify ALL of:
 
 1. **The dictionary [SYMBOLIC PROOF].** Every exponential-type orbital is a polynomial
    differential operator (coefficients rational in the exponent) in its exponent and
-   centre applied to the $1s$ Yukawa function; at the fibre every density weight is a
-   polynomial in the Euler operators $c\,\partial_c$ applied to the $1s$ weight; every
+   centre applied to the $1s$ Yukawa function; at the fibre every $s$-type density weight
+   is a polynomial in the Euler operators $c\,\partial_c$ applied to the $1s$ weight; every
    rational-kernel multi-density integral is that operator applied to the $1s$ integral
    of its graph; its $D$-module is a quotient of the $1s$ one and its rung at most the
    $1s$ rung. Guard `tests/test_paper63_dictionary.py`.
@@ -242,6 +244,11 @@ $2^n/(\pi\sqrt{\prod c})$; AESZ #58 for $n = 4$; the Coulomb triangle's elliptic
 the correlated triangle's K3 rung at $\gamma = 1$; the dictionary's "at most".
 
 ## Change log
+- 2026-11-06 (after the freeze) — **Criterion 1 and headline 1 narrowed to match a PM fix in the paper.**
+  The paper's abstract and prop:rung had extended the fibre Euler-weight identities to every
+  orbital; for l > 0 the centre derivatives leave momentum factors, so the identities hold for
+  s-type densities only (the general D-module statement is unchanged). The goalpost is stricter
+  than before, not looser: criterion 1 now names the over-extension as MATERIAL. PI told.
 - 2026-11-06 — **FROZEN** by PI co-write: criterion as written, nine headlines, unseeded. PM
   corrections before the freeze: version v6.4.0; code reviewer Opus-tier (calibration record);
   the correlated triangle's K3 rung stated at gamma = 1, 3/2, 2 only (order nine at 1/2 and 3),

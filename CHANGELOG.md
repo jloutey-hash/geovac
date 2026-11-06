@@ -27,7 +27,7 @@ MINOR bump (PI-approved 2026-11-06): the paper series is reorganized.
   Y_10 e^{-zeta s} = -zeta^-1 [T_2 + zeta^-1 T_1], l = 2 inversion zeta^-2 U_3 + 3 zeta^-3 U_2 + 3 zeta^-4 U_1);
   so every multi-density integral is that operator applied to the 1s integral of its density graph, its
   D-module is a quotient of the 1s one and its rung is at most the 1s rung of its graph. At the fibre
-  every weight is an Euler-operator image: Delta^-(2m+1) = (1 + 2/(2m-1) c d/dc) Delta^-(2m-1),
+  every s-type weight is an Euler-operator image (for l > 0 the centre derivatives leave momentum factors): Delta^-(2m+1) = (1 + 2/(2m-1) c d/dc) Delta^-(2m-1),
   L^2 Delta^-j = (Delta^-(j-2) - Delta^-j)/c. **[MEASURED]** two-density images of K(m)/sqrt(c_max) at
   1e-25 (only K and E appear); three-density fibre with Delta^-3 / Delta^-5 weights equals the tree
   identity with weights 2 x c^-1 K_1 and (4/3) x c^-1 K_1 + (2/3) x^2 c^-3/2 K_0, to 2e-9 at three
@@ -72,9 +72,10 @@ MINOR bump (PI-approved 2026-11-06): the paper series is reorganized.
 
 ### Owed
 - Fire-test of `test_paper63_dictionary.py` with `fire_test.py` (guard rule: separate step).
-- A pre-registration not run: the Slater-weight three-electron slice G(a;b,c) should equal an explicit
-  Euler operator applied to the fingerprint-weight slice; a prospective check of the dictionary on Paper
-  59's own data.
+- (Retired the same day, not run: an s-type Slater-vs-fingerprint slice comparison was first listed here as a
+  prospective test of the dictionary; it follows by differentiating under the integral sign, so it checks
+  bookkeeping only, which the dictionary guard already does. The real open question is attainment of the
+  rung for l > 0 densities, an optional sprint at the PI's call.)
 - `/qa paper_63` (PI-invoked) once the done-file is co-written; then the Avery message (PI sends).
 - `docs/qa/paper_59.done.md` items 10-15 now describe Paper 63's sections (dated record; superseded-by
   note owed). Dated records (`docs/predictions/*`, CHANGELOG, debt files, `debug/` scripts importing old
