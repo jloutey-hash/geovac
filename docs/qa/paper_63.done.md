@@ -244,6 +244,16 @@ $2^n/(\pi\sqrt{\prod c})$; AESZ #58 for $n = 4$; the Coulomb triangle's elliptic
 the correlated triangle's K3 rung at $\gamma = 1$; the dictionary's "at most".
 
 ## Change log
+- 2026-11-06 (first FULL run, remediation) — **PROPOSED, PI co-write owed before the next run; the goalposts
+  above are unchanged for this run.** The run found that the dictionary never proved "rung at most the 1s rung":
+  correctly stated, prop:rung gives only membership of the 1s D-module (code D1, self-check rounds 1-2). The paper
+  is re-tiered to module membership plus "every computed case sits on the 1s rung" (observation). Proposed
+  criterion 1: the [SYMBOLIC PROOF] is module membership; any sentence asserting or relying on a rung bound
+  ("at most", "cannot climb above", "bounds the rung") or on attainment is MATERIAL. Headline 1 accordingly
+  (drop "quotient" and "rung at most"); criterion 5 and the caps list: "the dictionary places, it does not
+  bound"; W1: verify restatements keep module membership and do not claim a bound; seed control "the
+  dictionary's 'at most'" retired. Also proposed for headline 6 and the Hamiltonian observation: "over s-type
+  orbitals (for l > 0 not shown)".
 - 2026-11-06 (after the freeze) — **Criterion 1 and headline 1 narrowed to match a PM fix in the paper.**
   The paper's abstract and prop:rung had extended the fibre Euler-weight identities to every
   orbital; for l > 0 the centre derivatives leave momentum factors, so the identities hold for

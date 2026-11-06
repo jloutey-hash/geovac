@@ -357,8 +357,9 @@ CLAIMS = {
     "p59-three-electron-k3": dict(
         statement="The three-electron chain integral lives on a K3 surface whose holomorphic period is "
                   "a sum of two products of complete elliptic integrals ('elliptic squared'; BBBG 2008 eq. 33, from an identity of Bailey) [MEASURED / classical]; the TRUE fibre collapses to K3 "
-                  "periods at equal scales (evidence); at generic scales a PSLQ search at one mass triple finds no "
-                  "relation in a K3 + elliptic + Tate basis (evidence, not proof); Calabi-Yau n-folds for longer "
+                  "periods at equal scales (evidence); at four generic scale triples integer-relation searches in five "
+                  "bases built from K3 and elliptic periods, polylogarithms and Tate numbers find no relation "
+                  "(evidence, not proof); Calabi-Yau n-folds for longer "
                   "trees are OPEN.",
         owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"A three-electron chain lives on a K3", owner_tier=r"\[MEASURED / classical\]",
@@ -426,8 +427,8 @@ CLAIMS = {
         statement="The correlated triangle (exponential geminals e^(-gamma r) on the two edges at one "
                   "density) sits with the three-density chain on the K3 rung exactly at gamma = 1 "
                   "(annihilator R3 o R1, R3 equivalent to F_3's operator) [SYMBOLIC + MEASURED]; at "
-                  "gamma = 3/2 it reaches the K3 rung by local data mod p plus Levelt rigidity, and whether it climbs further is open. "
-                  "The cusp-correct shape r e^(-gamma r) brings no new type at gamma = 3/2 and 2 (Paper 59). "
+                  "gamma = 3/2 it reaches the K3 rung by local data mod p plus Levelt rigidity, and no piece above K3 occurs. "
+                  "The cusp-correct shape r e^(-gamma r) brings no new type at gamma = 3/2 and 2 (Paper 63). "
                   "The registered elliptic prediction (QG2) was falsified.",
         owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"the correlated triangle does not drop", owner_tier=r"\[SYMBOLIC \+ MEASURED\]",
@@ -458,6 +459,26 @@ CLAIMS = {
                   r"for (every|all) \$?n\$?(?![^.;]{0,15}(up to|\\le|<=))[^.;]{0,40}(singular|threshold)|"
                   r"c_\{?8,0\}?[^.;]{0,40}\b(equals|is)\b[^.;]{0,20}\bL\(",
         load_bearing=True, changed="2026-10-17"),
+    "p63-dictionary-module": dict(
+        statement="Every exponential-type orbital is a polynomial differential operator in its exponent and "
+                  "centre applied to the 1s Yukawa function, so every rational-kernel multi-density integral is "
+                  "that operator applied to the 1s integral of its density graph and lies in that integral's "
+                  "D-module M [SYMBOLIC PROOF + PRIOR ART]. That its fibre stays on the 1s rung is NOT proved (so the "
+                  "dictionary is not a bound on the rung); every computed case sits on the 1s rung (observation). "
+                  "The fibre Euler-operator weight identities hold for s-type densities only.",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
+        owner_anchor=r"What the dictionary does and does not say", owner_tier=r"places every",
+        tier="SYMBOLIC PROOF + PRIOR ART (module membership; rung bound not proved)", owner_window=1,
+        mention=r"orbital-independent|independent of the orbitals|depend on the orbitals|"
+                r"(rung|class|ladder)[^.;|]{0,40}\b(set by|property of|bounded by)\b[^.;|]{0,10}(its|the) (density )?graph|"
+                r"graph-set|derivative of the \$?1s\$? (Yukawa|integral)",
+        qualifier=r"D-module|module|not proved|observed|every (computed )?case computed|computed case",
+        overclaim=r"holds for all of them|does not change the genus|"
+                  r"(?<!cannot )\bdepend on the orbitals|rung is graph-set|"
+                  r"proves the ladder orbital-independent|(rung|ladder)( below)? is (therefore )?a property of the graph|"
+                  r"rung (is )?at most (the|that of)|cannot climb above|no (other )?(exponential-type )?orbital climbs|"
+                  r"bounds every (exponential-type )?orbital",
+        load_bearing=True, changed="2026-11-06"),
     "p59-tree-banana-hadamard": dict(
         statement="The tree ladder's operators are the Hadamard products of the Legendre operator with "
                   "the equal-mass banana operators with n-1 propagators, in y = 1/(16 t^2), checked in "

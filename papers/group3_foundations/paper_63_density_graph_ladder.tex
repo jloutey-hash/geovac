@@ -35,20 +35,20 @@ two-center densities coupled by a Coulomb kernel build a genus-one curve.
 This paper asks two questions that result leaves open.  How does the class
 climb when an integral links more densities?  And how far does the reading
 reach past $1s$ orbitals?  \textbf{[SYMBOLIC PROOF + PRIOR ART]} The
-second is answered first, by a dictionary.  Every exponential-type orbital
+second is answered first, in part, by a dictionary.  Every exponential-type orbital
 on a center is a polynomial differential operator in its exponent and its
 center coordinate, with coefficients rational in the exponent, applied to
 the $1s$ Yukawa function on that center;\ at the fibre, for $s$-type
-densities, every density weight is a polynomial in the Euler operators
-$c\,\partial_c$ applied to the $1s$ weight.  So every multi-density integral with rational kernels is that
-operator applied to the $1s$ integral of the same density graph, its
-$D$-module is a quotient of the $1s$ one, and its rung is at most the $1s$
-rung of its graph.  The ladder below is therefore a property of the graph,
-not of the orbitals on it.  \textbf{[SYMBOLIC + MEASURED]} On the graph the
+densities, every density weight is a polynomial in $c$, $c^{-1}$ and the
+Euler operators $c\,\partial_c$ applied to the $1s$ weight.  So every multi-density integral with rational kernels is that
+operator applied to the $1s$ integral of the same density graph and lies in
+that integral's $D$-module.  In every case
+computed a general-orbital integral sits on the rung of its graph's $1s$
+integral.  \textbf{[SYMBOLIC + MEASURED]} On the graph the
 rung is read off the holomorphic period.  Any tree of $n$ linked
 two-center densities has the same period, a Bessel moment in $n$ scales;\
-its one-scale family is annihilated by an operator of order $n$ that is the
-Hadamard product of the Legendre operator with the operator of the equal-mass
+its one-scale family is annihilated by an operator of order $n$, which for
+$n=2$ to $5$ is the Hadamard product of the Legendre operator with the operator of the equal-mass
 banana integral with $n-1$ propagators:\ $n=2$ is Legendre's $K$, $n=3$
 Clausen's elliptic square (a K3 surface), $n=4$ entry \#58 of the
 Calabi--Yau tables, the first period not built from elliptic ones, and $n=5$
@@ -77,8 +77,9 @@ moments and banana integrals;\ the Averys' momentum-space treatment of these
 same integrals re-expands every two-center density in a one-center basis and
 reaches the genus-zero class only through an infinite, non-sparse series.
 What is new is the route from molecular integrals to the ladder, the
-dictionary that makes the ladder orbital-independent, and the prospective
-record on which the rungs were called before they were computed.
+dictionary that places every orbital's integral in the $D$-module of its
+graph's $1s$ integral, and the prospective records in which most rungs were registered before they were
+computed.
 \end{abstract}
 
 \maketitle
@@ -115,20 +116,22 @@ paper's object was one integral.  This paper's object is the \emph{ladder}:\
 what happens to the class as an integral links more electron densities, and
 whether the reading depends on the $1s$ orbitals it was found on.
 
-The answer to the second question is a dictionary
+The answer to the second question is, in part, a dictionary
 (Sec.~\ref{sec:dictionary}), and it is classical in its parts.  Every
 exponential-type orbital is a derivative of the $1s$ Yukawa function in its
 exponent and its center;\ so every integral over such orbitals is a
 derivative of the $1s$ integral of the same \emph{density graph}, the graph
 whose lines are the orbitals and the kernels and whose vertices are the
 electrons and the nuclei.  Derivatives in the parameters of a period stay in
-its $D$-module.  The rung is therefore a property of the graph.  The answer
-to the first question (Sec.~\ref{sec:beyond}) was found on $1s$ orbitals and,
-by the dictionary, holds for all of them:\ for a tree of $n$ linked densities
-the holomorphic period depends only on $n$, and the operators of the one-scale
-family for $n=2,\dots,5$ are, under one exact Hadamard product, the operators
-of the equal-mass banana Feynman integrals, which carry Calabi--Yau
-$(n-2)$-folds~\cite{bonisch2021}.  The Coulomb ring of three does not climb,
+its $D$-module.  Every such integral therefore lies in the $D$-module of its
+graph's $1s$ integral.  The answer to the first question
+(Sec.~\ref{sec:beyond}) was found on $1s$ orbitals, and every
+general-orbital case computed sits on the same rung:\ for a
+tree of $n$ linked densities the holomorphic period depends only on $n$, and
+the operators of the one-scale family for $n=2,\dots,5$ are, under one exact
+Hadamard product, the operators of the equal-mass banana Feynman integrals;\
+the $n$-density rung is that of the banana carrying a Calabi--Yau
+$(n-1)$-fold~\cite{bonisch2021}.  The Coulomb ring of three does not climb,
 the correlated triangle does, and a Gaussian geminal leaves the ladder.
 
 The reading that organizes these facts is a Feynman-graph one
@@ -139,15 +142,15 @@ falsifiers, and we record the one place its naive form fails:\ the rung names
 an operator, not a finite basis of periods.  In the transcendence bookkeeping
 of the Geometric Vacuum program (Paper~18~\cite{loutey_paper18}) this gives the
 many-electron integrals a second coordinate beside the Tate weight of the
-one-body and spectral projections:\ the Calabi--Yau dimension of the density
-graph's banana.  The seam catalogue (Paper~57~\cite{loutey_paper57}) records
+one-body and spectral projections:\ the dimension of the Calabi--Yau
+variety on whose rung the density graph sits.  The seam catalogue (Paper~57~\cite{loutey_paper57}) records
 the rows;\ the number-theoretic structure of the first rung is the companion
 Paper~61~\cite{loutey_paper61}.
 
 Most of the mathematics below is prior art, and Sec.~\ref{sec:placement}
 says whose.  The route from a molecular integral to it was not found in a
-targeted search, and the rungs were called in committed records before they
-were computed (Sec.~\ref{sec:beyond} names each record).  The caps are
+targeted search, and most rungs were registered in committed records before
+they were computed (Sec.~\ref{sec:beyond} names each record).  The caps are
 stated in Sec.~\ref{sec:scope}.
 
 %% ========================================================================
@@ -199,8 +202,8 @@ exponential-type orbital is $e^{-i\bm p\cdot\bm A}\,\mathcal{Y}_{\ell m}(i\bm p)
 with $R$ rational, since $\mathcal{Y}_{\ell m}(i\nabla_{\!\bm p})$ acting on a
 rational function of $p^2$ gives $\mathcal{Y}_{\ell m}(i\bm p)$ times a
 rational function.  \textbf{[PRIOR ART]} Both halves are classical:\ the
-rational momentum-space form of exponential-type orbitals is Steinborn and
-Filter's~\cite{weniger2005}, generating angular momentum by differentiating
+rational momentum-space form of exponential-type orbitals is
+classical~\cite{weniger2005}, generating angular momentum by differentiating
 in the nuclear coordinates is standard~\cite{weniger2005}, and the
 $\zeta$-derivative is the device Paper~59 already uses to restore a Slater
 orbital from a Yukawa.  Guard:\ \texttt{tests/test\_paper63\_dictionary.py}
@@ -224,19 +227,18 @@ moves the $\mathcal{D}_e$ outside the integral.  The same holds for the
 momentum form, where the orbital lines are rational and the exponential decay
 of position space becomes the polynomial decay of the integrand in momentum.
 
-\begin{proposition}[the rung is a property of the graph]
+\begin{proposition}[every orbital lies in the $1s$ module]
 \label{prop:rung}
 Let $\mathcal{M}$ be the holonomic $D$-module generated by $I^{(1s)}_\Gamma$
-over the exponents and centers.  Every $I_\Gamma$ over exponential-type
-orbitals lies in $\mathcal{M}$;\ the composition factors of its minimal
-annihilator in any one parameter are among those of $I^{(1s)}_\Gamma$'s.  At
+over the exponents $\zeta>0$ and the centers.  Every $I_\Gamma$ over
+exponential-type orbitals lies in $\mathcal{M}$.  At
 the fibre, where the centers coincide, a density built from $s$-type orbitals
 enters through its dispersion root $\Delta_v=\sqrt{c_vL_v^2+1}$ alone, and
 every such weight $P(L_v^2)\,\Delta_v^{-(2m+1)}$ is a polynomial in $c_v$,
 $c_v^{-1}$ and the Euler operator $c_v\partial_{c_v}$ applied to
 $\Delta_v^{-1}$ (for $\ell>0$ the center derivatives of
 Lemma~\ref{lem:orbital} leave polynomial momentum factors at the fibre, which
-the first statement covers and these identities do not):
+only the module statement covers):
 %
 \begin{equation}
   \Delta^{-(2m+1)}=\Bigl(1+\tfrac{2}{2m-1}\,c\,\partial_c\Bigr)\Delta^{-(2m-1)},
@@ -248,9 +250,7 @@ the first statement covers and these identities do not):
 
 \textbf{[SYMBOLIC PROOF]} The first statement is
 Lemma~\ref{lem:integral} read in $\mathcal{M}$:\ a section of a holonomic
-module and its derivatives generate a submodule, so the annihilator of
-$\mathcal{D}\,I^{(1s)}$ contains a left multiple of that of $I^{(1s)}$ and
-its composition factors are a subset.  For the fibre identities,
+module and its derivatives generate a submodule.  For the fibre identities,
 $\partial_c\Delta^{-1}=-\tfrac12L^2\Delta^{-3}$ and $L^2=(\Delta^2-1)/c$ give
 $c\,\partial_c\Delta^{-1}=-\tfrac12(\Delta^{-1}-\Delta^{-3})$, which is the
 case $m=1$;\ induction on $m$ gives the rest, and the second identity is
@@ -260,7 +260,7 @@ $\int_0^\infty\Delta_1^{-3}\Delta_2^{-3}dk$ and
 $\int_0^\infty\Delta_1^{-5}\Delta_2^{-5}dk$ equal the operators of
 Eq.~\eqref{eq:euler_weights} applied to $K(m)/\sqrt{c_{\max}}$, to $10^{-25}$
 at three scale pairs, and the result is again a combination of $K$ and $E$:\
-the Legendre rung, as the proposition requires.  On the three-density rung
+the Legendre rung.  On the three-density rung
 the Euler operators act under the tree identity (Eq.~\eqref{eq:tree} below):\
 the one-dimensional transform of the $1s$ weight is $2c^{-1/2}K_0(x/\sqrt c)$,
 and Eq.~\eqref{eq:euler_weights} turns it into $2xc^{-1}K_1(x/\sqrt c)$ for
@@ -273,14 +273,16 @@ the two-dimensional quadrature;\ the $1s$ weight in place of $w_v$ misses by
 more than a percent.  Guard:\ \texttt{tests/test\_paper63\_dictionary.py}
 (29 checks, fire-tested).
 
-\emph{What the dictionary does and does not say.}  It lifts every statement
-below from $1s$ orbitals to all exponential-type orbitals \emph{as an upper
-bound}:\ a general-orbital integral cannot climb above the $1s$ integral of
-its graph.  It does not say the rung is attained;\ a derivative can land in a
-submodule.  In every case computed it is attained---Paper~59's chain at the
-Slater weights has the same composition factors as the chain at the
-fingerprint weights (Sec.~\ref{sec:density_ring})---and the proposition is
-why that had to be so or lower, not a proof that it is equal.  Two caps it
+\emph{What the dictionary does and does not say.}  It places every
+general-orbital integral in the $D$-module of the $1s$ integral of its graph.
+It does not bound the rung:\ the rung is read on a one-parameter fibre at
+special values of the other parameters, coincident centers and fixed scales,
+where derivatives in those parameters need not stay in the one-parameter
+module of the restricted $1s$ function;\ and it says nothing about
+attainment.  In every case computed
+the general-orbital integral sits on the $1s$ rung:\ the chain at the Slater
+weights has the same composition factors as the chain at the fingerprint
+weights (Sec.~\ref{sec:density_ring}).  Two caps it
 inherits unchanged from Paper~59:\ the rung is read on the fibre and its
 holomorphic period, and the integrated value, over the Feynman parameters
 and separations, may sit lower;\ and the reduction of the real
@@ -500,8 +502,9 @@ $n=4$.  So five linked densities give no new type of period:\ the type is
 that of four, in a different family.
 
 \textbf{[OBSERVATION]} Every electron-repulsion integral couples exactly
-two densities, so the integrals of a molecular Hamiltonian stay on the
-elliptic rung however large the molecule.  The class climbs only in
+two densities, so over $s$-type orbitals the integrals of a molecular
+Hamiltonian stay on the elliptic rung however large the molecule (for
+$\ell>0$ this is not shown).  The class climbs only in
 correlated integrals that link more densities, such as the four-electron
 bridge integrals of explicitly correlated methods taken over two-center
 densities.  Two caps apply.  These are statements about the fibre and
@@ -918,7 +921,10 @@ as at $\gamma=3/2$.  Its order-two piece is equivalent by an exact map
 to the Legendre operator with $z=(t^2-3)/(2t)$, its order-three piece is
 the twisted K3 piece at $t=\pm2$ again, and its order-one pieces are
 algebraic, branched at $t=2$ and $t=2\gamma=4$ (record
-\texttt{docs/predictions/2026-10-22\_c2b\_feynman\_g2.md}).
+\texttt{docs/predictions/2026-10-22\_c2b\_feynman\_g2.md};\ guard
+\texttt{tests/test\_paper59\_c2b\_feynman\_g2.py} for the order-two piece;\
+the algebraic pieces, the order-nine annihilator and the K3 map on the
+record only).
 \textbf{[SYMBOLIC + MEASURED]} Why the order drops at $\gamma=1$.  In
 Feynman parameters the kite's density pair enters through
 $M(u)=\sqrt{1+u(1-u)z}$ and its geminal pair through
@@ -945,7 +951,8 @@ order two at $\gamma=1$.  The annihilators are checked on $Y$ to
 $6\times10^{-27}$ at $\gamma=1/2$ and $3\times10^{-24}$ at $\gamma=3$,
 and the maps are exact (record
 \texttt{docs/predictions/2026-10-23\_gamma1\_mechanism.md};\ guard
-\texttt{tests/test\_paper63\_mg\_mechanism.py}).  Cap:\ the
+\texttt{tests/test\_paper63\_mg\_mechanism.py} for the order-two pieces,
+the order-nine annihilators and the K3 maps on the record only).  Cap:\ the
 mechanism is read from the integrand and tested by its consequences at
 two values of $\gamma$;\ no symbolic derivation of the drop from $N=M$ is
 given.
@@ -958,7 +965,9 @@ series:\ four algebraic pieces, branched at $t=2$ and $3$;\ an order-two
 piece, a different operator from the exponential case's, equivalent by an
 exact map to the same Legendre family;\ and the twisted K3 piece (record
 \texttt{docs/predictions/2026-10-22\_geminal\_shapes.md};\ guard
-\texttt{tests/test\_paper63\_ga1\_geminal.py}).  At $\gamma=2$,
+\texttt{tests/test\_paper63\_ga1\_geminal.py} for the order-two piece and
+its difference from the exponential case's;\ the algebraic pieces, the
+order-nine annihilator and the K3 map on the record only).  At $\gamma=2$,
 registered as a check of the rule, the order is nine again with the same
 series and the same degrees, the genuine singular points are exactly
 $t=1,2,3,4$, the order-two piece is again a different operator from the
@@ -968,7 +977,9 @@ $-13/2$ at $t=2\gamma$ as at $\gamma=3/2$;\ the operator is exact, from
 coefficients modulo twelve primes and rational reconstruction, and leaves
 $2\times10^{-24}$ on the integral at 32 digits (record
 \texttt{docs/predictions/2026-10-23\_geminal\_shapes\_g2.md};\ guard
-\texttt{tests/test\_paper63\_ga3\_geminal.py}).
+\texttt{tests/test\_paper63\_ga3\_geminal.py} for the order-two piece and
+the algebraic pieces, the order-nine annihilator and the K3 map on the record
+only).
 \textbf{[SYMBOLIC + MEASURED]} One function carries both elliptic pieces
 met so far.  Write
 $\mathcal{L}(a,b;c)=\int_0^\infty K_0(ax)K_0(bx)\cos(cx)\,dx
@@ -1255,12 +1266,14 @@ $-111/1120$ at the blind point, and on the family $(1,2,3/2,\gamma_2)$ the
 critical-point count drops from $22$ to $21$ exactly at $z_9$ (record
 \texttt{docs/predictions/2026-10-26\_kite\_ninth\_point.md}, registered before
 computing).  \textbf{[PRIOR ART]} The location is known.  Broadhurst gives
-it, with $s=-z$, as the pole $s_3$ that the two-particle cuts of the kite
-acquire when its rung becomes massless with unequal adjacent masses
-(Ref.~\cite{broadhurst2022kites}, Eqs.~(24)--(25));\ it is the massless-rung
-limit of the anomalous threshold of the triangle formed by the two lines of
-one cut and the rung, the other two lines on shell, which the kite's own
-leading Landau equations do not contain.  \textbf{[MEASURED]} A registered
+it, with $s=-z$, as the point $s_3$ at which the two-particle cuts of the kite
+are evaluated when its rung becomes massless with unequal adjacent masses
+(Ref.~\cite{broadhurst2022kites}, Eqs.~(24)--(25)), without naming it.  The
+triangles' leading Landau singularities $s_\pm$ are also his (Eq.~(9) there);\
+what is ours is the identification of $s_3$ as the massless-rung limit of one
+of them, for the triangle formed by the two lines of one cut and the rung, the
+other two lines on shell, which the kite's own leading Landau equations do
+not contain.  \textbf{[MEASURED]} A registered
 test confirms that this is the mechanism here.  With all five lines on shell
 and the loop momenta in one plane, eliminating the equations in components
 gives exactly the factor of Eq.~\eqref{eq:kite_ninth_point} at three sets of
@@ -1268,7 +1281,7 @@ rates and no other.  The multipliers are all nonzero, and the first Symanzik
 polynomial $U$ vanishes on them, which is why a Landau test that requires
 $U\neq0$ misses the point.  Given a small Coulomb mass, the point does not
 vanish but moves:\ the count drops on a curve through $(z_9,0)$, one of
-Broadhurst's two triangle thresholds, while the other runs to infinity as the
+Broadhurst's two triangle singularities $s_\pm$, while the other runs to infinity as the
 mass goes to zero.  A scan in $z$ that assumes no location finds, at the blind
 rates, exactly ten drop points:\ $z=0$, $z_9$ and the eight cut values.  Caps:\
 the massive curve is checked modulo two primes at three masses, not over the
@@ -1356,8 +1369,8 @@ Sec.~\ref{sec:density_ring} fit one pattern.  The densities and the kernels are 
 Slater geminal is a line whose mass is its exponent $\gamma$, and the Coulomb kernel is a line
 with no mass.  On every instance tested the class is set by the shape of the graph together
 with the masses on its lines.  A massless Coulomb line adds no threshold, so for Coulomb
-integrals the density topology alone sets the rung, as stated above.  A Slater geminal keeps
-the curve the densities build, but it lifts the same-pair master above to genus one, and the
+integrals the density topology alone sets the rung, as Paper~59 states.  A Slater geminal keeps
+the curve the densities build, but it lifts Paper~59's same-pair master to genus one, and the
 correlated triangle's operator drops order where the geminal's mass equals that of a density
 pair, $\gamma=1$.  A Gaussian geminal is not a propagator of this kind, and its integrals leave
 the Picard--Fuchs ladder (Sec.~\ref{sec:density_ring}).  That the internal masses set the
@@ -1377,8 +1390,9 @@ integral whose class does not change at an equal-mass value of its exponent (gua
 \texttt{tests/test\_paper63\_mg\_mechanism.py}).
 
 
-With the dictionary of Sec.~\ref{sec:dictionary} the pattern can be stated
-for every exponential-type orbital at once, and bounded.
+The pattern is conjectured for every exponential-type orbital;\ the
+dictionary of Sec.~\ref{sec:dictionary} places each in its graph's $1s$
+module, and the conjecture is bounded.
 
 \begin{conjecture}[the density-graph ladder]
 \label{conj:ladder}
@@ -1398,32 +1412,38 @@ a geminal loop does not;\ (iv) the integrated value over separations and
 Feynman parameters has class at most that of its fibre.
 \end{conjecture}
 
-\emph{What is proved, what is measured, what is open.}  Part (i) is proved
-at the level of the holomorphic period for all $n$ (Eq.~\eqref{eq:tree} and
-the Hadamard relation, Sec.~\ref{sec:four_density}), for every exponential
-orbital by Sec.~\ref{sec:dictionary}, and for the real three-dimensional
-integral at $n=3$ and $n=4$;\ for $n\ge5$ the three-dimensional reduction
-is not shown.  Part (ii) is the lesson of the three-electron chain
+\emph{What is proved, what is measured, what is open.}  For $1s$ orbitals
+part (i) is proved at the level of the holomorphic period for all $n$
+(Eq.~\eqref{eq:tree}), with the operator identified as the Hadamard product
+for $n=2$ to $5$ (Sec.~\ref{sec:four_density});\ for every other exponential
+orbital Sec.~\ref{sec:dictionary} places the integral in the same $D$-module
+but does not prove it stays on the rung, and every case computed does;\ the
+real three-dimensional integral reduces onto $F_n$ at $n=3$, derived on the
+Slater slice under the Mellin contour shift and shown on $(t;1,2)$ by
+numerical annihilation and a search modulo a prime, and at $n=4$ by
+numerical annihilation and bounded searches;\ for $n\ge5$ the
+three-dimensional reduction is not shown.  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
 K3 periods and $\pi^3$, but at four generic scale triples integer-relation
-searches at 320 to 400 digits in five bases built from the K3 and elliptic
+searches at 340 and 400 digits in five bases built from the K3 and elliptic
 periods, their derivatives, products, dilogarithms, trilogarithms and Tate
 numbers find nothing while every planted relation is recovered, and on both
-one-parameter slices computed the fibre is provably a K3 function integrated
-once against an elementary kernel.  That null is the conjecture's stated test
+one-parameter slices computed the fibre is a K3 function integrated once
+against an elementary kernel, proved at the fingerprint weights and shown
+elsewhere by a bounded search modulo a prime.  That null is the conjecture's stated test
 case:\ a relation found in a principled widening of the basis would show the
 fibre sits in a finite period ring after all and part (ii) would be
 withdrawn;\ a relation that needs a new period type would move the chain off
 rung three.  The record is \texttt{docs/predictions/2026-10-19\_p3e2\_widened.md}.
 Part (iii) rests on one ring, the triangle, in which the Coulomb loop drops
 and the geminal loop does not (Sec.~\ref{sec:density_ring});\ the ring of
-four was not computed, and the squashed ring's momentum dies as a power of
-its aspect ratio.  Part (iv) holds in every instance:\ the two-center
+four was not computed.  Part (iv) is consistent with every instance:\ the two-center
 exchange class builds the elliptic fibre and closes at genus zero, and the
 integrated three-center value leaves the two-center class as a function of
 the bond angle (Paper~59).  The conjecture fails on a Coulomb-only integral
 whose class depends on anything but the density graph, on a tree whose
-real three-dimensional reduction brings a piece above $F_n$, or on a
+real three-dimensional reduction brings a piece above $F_n$, on a
+general-orbital fibre with a factor above its graph's $1s$ rung, or on a
 Slater-geminal integral whose class does not change at an equal-mass value
 of its exponent.  The nearest theorem in shape remains
 Brown's~\cite{brown2009periods}, for massless graphs;\ here the masses enter,
@@ -1447,10 +1467,11 @@ are Bailey, Borwein, Broadhurst and Glasser's~\cite{bbbg2008}, and the
 Kloosterman motives behind the Ising class are Fres\'an, Sabbah and
 Yu's~\cite{fresansabbahyu2023}.  Integration by parts on the three-electron
 tetrahedron is Puchalski, K\c{e}dziera and Pachucki's~\cite{pkp2009}, and
-the kite's triangle threshold is Broadhurst's~\cite{broadhurst2022kites}.
+the location of the kite's ninth singular point is
+Broadhurst's~\cite{broadhurst2022kites}.
 What is new here is the route from molecular integrals to these objects, the
 tree identity that makes the holomorphic period depend on $n$ alone, the
-dictionary that makes the ladder independent of the orbitals, the readings
+dictionary that places every orbital in its graph's $1s$ module, the readings
 of the ring, the geminal and the Gaussian, and the prospective record.
 
 \textbf{[PRIOR ART]} On the chemistry side the closest work is the Averys'
@@ -1484,15 +1505,16 @@ in one class it does.  Second, the reduction of the real three-dimensional
 integral to the Bessel-moment family is shown for the chain of three and the
 star and path of four;\ for five or more densities the holomorphic-period
 statement stands and the three-dimensional one is not shown.  Third, the
-dictionary gives an upper bound on the rung of a general-orbital integral,
-not its value;\ every computed case attains the bound, and none is a proof
+dictionary places a general-orbital integral in the $D$-module of its graph's
+$1s$ integral but does not show that its fibre stays on the $1s$ rung;\ every computed case sits on that rung, and none is a proof
 that it must.  Fourth, among rings only the triangle was computed, and the
 generic three-electron fibre's content beyond the K3 and elliptic periods is
 evidence from integer-relation searches, not a theorem.
 
 What is open is in two layers.  Below the conjecture:\ the three-dimensional
-reduction for $n\ge5$;\ the ring of four;\ whether the rung of a
-general-orbital integral is always attained;\ and the principled widening of
+reduction for $n\ge5$;\ the ring of four;\ whether a general-orbital fibre
+stays on its graph's $1s$ rung, which would make the dictionary a bound on
+the rung;\ and the principled widening of
 the P3e-2 basis.  Above it:\ a proof through the Symanzik polynomials that the
 density graph with Yukawa masses has the motive the ladder measures.  The
 finite closed form of the first rung's integrated value is Paper~59's open
@@ -1502,18 +1524,20 @@ problem and Paper~61's subject, not this paper's.
 \section{Conclusion}
 %% ========================================================================
 
-The class of a molecular integral over exponential-type orbitals is set by
-its density graph.  Every such orbital is a derivative of the $1s$ Yukawa
-function in its exponent and its center, so every integral is a derivative
-of the $1s$ integral of its graph and cannot climb above it;\ the ladder is
-orbital-independent.  On the graph, trees of $n$ linked two-center densities
-share one holomorphic period, a Bessel moment whose one-scale operator is the
-Legendre operator Hadamard the equal-mass banana with $n-1$ propagators:\
+Every exponential-type orbital is a derivative of the $1s$ Yukawa function
+in its exponent and its center, so every molecular integral over such
+orbitals is a derivative of the $1s$ integral of its density graph and lies
+in that integral's $D$-module;\ in every case computed it sits on that
+integral's rung.  On the graph, trees of $n$ linked two-center
+densities share one holomorphic period, a Bessel moment whose one-scale
+operator, for $n=2$ to $5$, is the Legendre operator Hadamard the equal-mass
+banana with $n-1$ propagators:\
 elliptic at two densities, a K3 at three, a Calabi--Yau threefold at four, and
 nothing new at five.  The integrals of a molecular Hamiltonian link two
-densities and stay elliptic at the fibre for every molecule;\ the class
+densities and, over $s$-type orbitals, stay elliptic at the fibre for every
+molecule;\ the class
 climbs only in correlated integrals that link more.  A Coulomb ring of three
-does not climb and a geminal ring does, read as uniqueness.  A Slater geminal
+does not climb and the correlated triangle does, read as uniqueness.  A Slater geminal
 is an imaginary external momentum on this ladder and a Gaussian one leaves
 it.  The operators are known;\ the route from chemistry to them, the tree
 identity, the dictionary and the prospective record are what this paper adds,

@@ -286,6 +286,8 @@ def selftest() -> int:
                                  "In the Ising class t = 1 is a threshold exactly for even n up to 8, and parity is not the rule for values."),
         "p59-tree-banana-hadamard": ("The banana ladder relation holds for all $n$.",
                                      "The tree ladder is tied to the banana ladder by a Hadamard product, checked for n = 2 to 5."),
+        "p63-dictionary-module": ("By the dictionary every integral is a derivative of the 1s integral of its graph, so its rung is at most the 1s rung.",
+                                  "By the dictionary every integral lies in the D-module of its graph's 1s integral; staying on the 1s rung is not proved."),
         "p59-slater-slice-membership": ("On the Slater slice, P G = 0 follows from the measured annihilation by W.",
                                         "On the Slater slice both annihilations are derived, with the Mellin contour shift as the one cap."),
         "p59-operator-clause-scope": ("The difficulty of a two-electron integral lives entirely in the densities, never in the operator between them.",

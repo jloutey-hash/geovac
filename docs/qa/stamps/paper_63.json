@@ -1,0 +1,20 @@
+{
+ "target": "paper_63",
+ "units": {
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit": {
+   "date": "2026-11-06",
+   "hash": "1c8fa357eb6fd173",
+   "run": "paper_63 FULL #1 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A fourth distinct center adds no genus": {
+   "date": "2026-11-06",
+   "hash": "7ee7e783333caa3d",
+   "run": "paper_63 FULL #1 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A three-electron chain lives on a K3 surface": {
+   "date": "2026-11-06",
+   "hash": "5ad28c9a486259be",
+   "run": "paper_63 FULL #1 2026-11-06"
+  }
+ }
+}

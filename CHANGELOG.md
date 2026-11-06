@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.4.1] - 2026-11-06
+
+**/qa paper_63 FULL (first cert, unseeded, PI-invoked) = FAIL, remediated.** Snapshot 5a1a5b17
+(worktree `../geovac-qa-p63`). Deterministic gates all green before and after (C25 corpus-wide; W5 pre-run check:
+the retired-wording entries `p59-y-order12-block` and `correlated-triangle-gamma-scope` fire on Paper 63, by
+planting). Panel: code (Opus), claims (Opus), citations (Sonnet; 46 bibitems), synthesis (Opus), completeness
+critic. **Coverage 0/14 -> 3/14 owner units** (the remediation reopened the rest). Calibration: unseeded; standing record (trunk FULL #2 19/21, DELTA #1 9/9, DELTA #2 8/9, 0 FP). Every
+guard fired (dictionary 4/4 new plants; four_density_rung 3/3; Bailey, kite ninth point, ring map); every
+re-derived constant held (tree constant, Delta transforms, Euler identities, l = 1/2 inversions, n = 3 Hadamard,
+AESZ #58 recurrence to m < 30, BBBG eq. 33).
+
+### Changed (OWNER-LARGE, Paper 63)
+- **The dictionary is module membership, not a bound on the rung.** prop:rung said the one-parameter
+  composition factors of a general-orbital integral are among those of the 1s integral's; that fails at special
+  parameter values (f = g + u h at u = 0; the fibre and the slices are such values), and the restriction-based
+  restatement fails at the fibre too (singular locus). Retained [SYMBOLIC PROOF + PRIOR ART]: every
+  exponential-orbital integral lies in the D-module of its graph's 1s integral. Withdrawn: "rung at most the 1s
+  rung", "cannot climb above it", "D-module is a quotient of the 1s one" (a submodule). Every computed
+  general-orbital case sits on the 1s rung (observation). The missing step is owed (debt file, PI call).
+- **Conjecture status paragraph re-tiered:** part (i) proved for 1s at the holomorphic-period level for all n; the
+  Hadamard identification n = 2..5; other orbitals module membership only; 3-D reduction at n = 3 derived on the
+  Slater slice under the contour-shift cap and shown on (t;1,2) by annihilation + a mod-p search, at n = 4
+  measured. "Provably a K3 function integrated once on both slices" -> proved at the fingerprint weights, a bounded
+  mod-p search elsewhere. The squashed-ring clause (Paper 62's ring of nuclei, not a density ring) removed.
+- **Hadamard/banana identification scoped to n = 2..5** in the abstract and conclusion.
+- **Summary surfaces read the bound as equality** ("holds for all of them", "the rung is a property of the
+  graph", "orbital-independent", "set by its density graph"): restated.
+- **Hamiltonian ERIs stay elliptic** scoped to s-type orbitals (for l > 0 not shown); field guide re-pointed to
+  Paper 63.
+- **Headline 6 guard clauses** now say what each guard covers (order-two / algebraic pieces) and what is on the
+  record only (order-nine annihilators, K3 maps).
+- **Broadhurst credit:** s_3 (Eqs. 24-25) and the triangle singularities s_pm (Eq. 9) are his; the identification
+  of s_3 as the massless-rung limit of one of them is Paper 63's.
+- Intro: the n-density rung is a Calabi-Yau (n-1)-fold (was "(n-2)"); "most rungs were registered" (was "the
+  rungs were called"); "320 to 400 digits" -> 340 and 400; "Part (iv) holds" -> "is consistent with every
+  instance"; rational momentum-space form credited to the Weniger review (was Steinborn-Filter).
+
+### Changed (surfaces)
+- Paper 59 abstract and intro pointers; group3 synthesis (gvc span `p63-dictionary-module`; triangle singular-point
+  cuts; Broadhurst); field guide; `docs/outreach/avery_hyperspherical_map.{tex,pdf}` (three loci; the PI's Avery
+  message attaches this PDF); `papers/INDEX.md` row 63; claim matrix row; C25 statements of
+  `p59-correlated-triangle-k3` and `p59-three-electron-k3` brought current.
+
+### Added
+- C16 families (each discrimination-tested two ways, dependents stamped): `p63-dictionary-attainment`,
+  `p63-dictionary-rung-bound`, `p63-hadamard-all-n`, `p63-slices-provably-k3`, `p63-one-parameter-factors`.
+  C25 claim `p63-dictionary-module` (load-bearing; selftest probe).
+- `docs/qa/paper_63.debt.md`: the owed rung-bound argument, owed guards (headline 6 K3 maps; the dictionary's
+  three-density Euler image), the SMALL sweep, the completeness critic's unguarded numbers, UNVERIFIABLE citations.
+
+### Self-check
+- Round 1: 1 OWNER-LARGE (the rung bound, exposed by the D1 fix) + 5 SMALL. Round 2: 3 OWNER-LARGE (the
+  Hamiltonian claim's s-type scope; the restriction clause's gap at the singular locus, deleted; Broadhurst's
+  Eq. 9) + 2 SURFACE-LARGE (Avery map; the frozen done-file) + 4 SMALL. **Self-check closed with an open owner
+  fix:** the round-2 fixes are applied but unreviewed; their units stay unstamped. The done-file's criterion 1,
+  criterion 5, headline 1, W1 and caps still assert the withdrawn bound; a re-tier is PROPOSED in its change log,
+  PI co-write owed before the next run.
+
 ## [v6.4.0] - 2026-11-06
 
 **Paper 63 split off Paper 59; the ladder made orbital-independent (PI-approved plan, 2026-11-06).** The
