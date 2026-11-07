@@ -42,9 +42,10 @@ the $1s$ Yukawa function on that center;\ at the fibre, for $s$-type
 densities, every density weight is a polynomial in $c$, $c^{-1}$ and the
 Euler operators $c\,\partial_c$ applied to the $1s$ weight.  So every multi-density integral with rational kernels is that
 operator applied to the $1s$ integral of the same density graph and lies in
-that integral's $D$-module.  In every case
-computed a general-orbital integral sits on the rung of its graph's $1s$
-integral.  \textbf{[SYMBOLIC + MEASURED]} On the graph the
+that integral's $D$-module.  For a tree of $s$-type densities on its
+one-scale slice the period is a differential operator applied to the $1s$
+period, so it sits at or below the $1s$ rung;\ in every case computed a
+general-orbital integral sits on that rung.  \textbf{[SYMBOLIC + MEASURED]} On the graph the
 rung is read off the holomorphic period.  Any tree of $n$ linked
 two-center densities has the same period, a Bessel moment in $n$ scales;\
 its one-scale family is annihilated by an operator of order $n$, which for
@@ -124,8 +125,10 @@ derivative of the $1s$ integral of the same \emph{density graph}, the graph
 whose lines are the orbitals and the kernels and whose vertices are the
 electrons and the nuclei.  Derivatives in the parameters of a period stay in
 its $D$-module.  Every such integral therefore lies in the $D$-module of its
-graph's $1s$ integral.  The answer to the first question
-(Sec.~\ref{sec:beyond}) was found on $1s$ orbitals, and every
+graph's $1s$ integral, and on the one-scale slice of a tree of $s$-type
+densities it is a differential operator applied to the $1s$ period, at or
+below its rung (Proposition~\ref{prop:tree_bound}).  The answer to the first
+question (Sec.~\ref{sec:beyond}) was found on $1s$ orbitals, and every
 general-orbital case computed sits on the same rung:\ for a
 tree of $n$ linked densities the holomorphic period depends only on $n$, and
 the operators of the one-scale family for $n=2,\dots,5$ are, under one exact
@@ -275,11 +278,51 @@ more than a percent.  Guard:\ \texttt{tests/test\_paper63\_dictionary.py}
 
 \emph{What the dictionary does and does not say.}  It places every
 general-orbital integral in the $D$-module of the $1s$ integral of its graph.
-It does not bound the rung:\ the rung is read on a one-parameter fibre at
-special values of the other parameters, coincident centers and fixed scales,
-where derivatives in those parameters need not stay in the one-parameter
-module of the restricted $1s$ function;\ and it says nothing about
-attainment.  In every case computed
+That alone does not bound the rung:\ the rung is read on a one-parameter fibre
+at special values of the other parameters, coincident centers and fixed
+scales, where derivatives in those parameters need not stay in the
+one-parameter module of the restricted $1s$ function.  For a tree of $s$-type
+densities on its one-scale slice the bound holds, by the next proposition;\
+for rings, for $\ell>0$ and on other slices it is not shown, and the
+dictionary says nothing about attainment.
+
+\begin{proposition}[the tree bound]
+\label{prop:tree_bound}
+On the slice $(t;1,\dots,1)$ of a tree of $n$ linked $s$-type densities, the
+holomorphic period of the integral is $E\,F_n$, with
+$F_n(t)=\int_0^\infty K_0(tx)K_0(x)^{n-1}dx$ and $E$ a differential operator in
+$t$ with Laurent-polynomial coefficients.  Its composition factors are among
+those of the operator of $F_n$, so it sits at or below rung $n$.
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF]} The derivation of the tree identity,
+Eq.~\eqref{eq:tree} below, holds for any radial density weight, with each
+weight's one-dimensional transform in place of $K_0(a_vx)$;\ by
+Eq.~\eqref{eq:euler_weights} the $s$-type transforms at unit scale are
+combinations, with coefficients polynomial in $x^2$, of $K_0(x)$ and
+$xK_1(x)$.  With $\theta=x\,d/dx$, $\theta K_0=-xK_1$ and
+$\theta(xK_1)=-x^2K_0$, so
+\begin{equation}
+  \theta\bigl(x^{2k}K_0^{a+1}(xK_1)^{b-1}\bigr)
+  =2k\,x^{2k}K_0^{a+1}(xK_1)^{b-1}-(a+1)\,x^{2k}K_0^{a}(xK_1)^{b}
+  -(b-1)\,x^{2k+2}K_0^{a+2}(xK_1)^{b-2},
+  \label{eq:tree_bound_recursion}
+\end{equation}
+and recursion on $b$ writes every product $x^{2k}K_0^a(xK_1)^b$, $a+b=n-1$,
+as $Q(x^2,\theta)K_0^{n-1}$, dividing only by $a+1\le n-1$.  Against
+$K_0(tx)$, integration by parts turns $\theta$ into $-(1+\theta_t)$, the
+boundary terms vanishing (logarithmic at $0$ times $x$, exponential at
+infinity), and $x^2K_0(tx)=t^{-2}(\theta^2K_0)(tx)=t^{-2}\theta_t^2K_0(tx)$;\
+the scaled density's weights are images of $K_0(tx)$ under $\theta_t$, since
+$(tx)K_1(tx)=-\theta_tK_0(tx)$.  So the period is $E\,F_n$, and the module it
+generates is a quotient of that of $F_n$.  \textbf{[MEASURED]} For $n=3$ and
+$4$ and nine products, with operators of up to six terms, the identity holds
+at three values of $t$ each to $4\times10^{-38}$, against a quarter to four
+fifths for a recursion with one wrong denominator (record
+\texttt{docs/predictions/2026-11-06\_rung\_bound\_trees.md}, registered before
+computing;\ guard \texttt{tests/test\_paper63\_tree\_bound.py}).
+
+In every case computed
 the general-orbital integral sits on the $1s$ rung:\ the chain at the Slater
 weights has the same composition factors as the chain at the fingerprint
 weights (Sec.~\ref{sec:density_ring}).  Two caps it
@@ -1416,8 +1459,10 @@ Feynman parameters has class at most that of its fibre.
 part (i) is proved at the level of the holomorphic period for all $n$
 (Eq.~\eqref{eq:tree}), with the operator identified as the Hadamard product
 for $n=2$ to $5$ (Sec.~\ref{sec:four_density});\ for every other exponential
-orbital Sec.~\ref{sec:dictionary} places the integral in the same $D$-module
-but does not prove it stays on the rung, and every case computed does;\ the
+orbital Sec.~\ref{sec:dictionary} places the integral in the same $D$-module,
+and for $s$-type densities on the one-scale slice
+Proposition~\ref{prop:tree_bound} proves the holomorphic period sits at or
+below rung $n$, without proving it reaches $F_n$ (every case computed does);\ the
 real three-dimensional integral reduces onto $F_n$ at $n=3$, derived on the
 Slater slice under the Mellin contour shift and shown on $(t;1,2)$ by
 numerical annihilation and a search modulo a prime, and at $n=4$ by
@@ -1506,15 +1551,16 @@ integral to the Bessel-moment family is shown for the chain of three and the
 star and path of four;\ for five or more densities the holomorphic-period
 statement stands and the three-dimensional one is not shown.  Third, the
 dictionary places a general-orbital integral in the $D$-module of its graph's
-$1s$ integral but does not show that its fibre stays on the $1s$ rung;\ every computed case sits on that rung, and none is a proof
-that it must.  Fourth, among rings only the triangle was computed, and the
+$1s$ integral;\ it keeps the fibre at or below the $1s$ rung only for trees of
+$s$-type densities on the one-scale slice, and every computed case sits on
+that rung, with none a proof that it must.  Fourth, among rings only the triangle was computed, and the
 generic three-electron fibre's content beyond the K3 and elliptic periods is
 evidence from integer-relation searches, not a theorem.
 
 What is open is in two layers.  Below the conjecture:\ the three-dimensional
 reduction for $n\ge5$;\ the ring of four;\ whether a general-orbital fibre
-stays on its graph's $1s$ rung, which would make the dictionary a bound on
-the rung;\ and the principled widening of
+stays at or below its graph's $1s$ rung beyond $s$-type trees on the one-scale
+slice, and whether it reaches that rung;\ and the principled widening of
 the P3e-2 basis.  Above it:\ a proof through the Symanzik polynomials that the
 density graph with Yukawa masses has the motive the ladder measures.  The
 finite closed form of the first rung's integrated value is Paper~59's open
@@ -1527,8 +1573,9 @@ problem and Paper~61's subject, not this paper's.
 Every exponential-type orbital is a derivative of the $1s$ Yukawa function
 in its exponent and its center, so every molecular integral over such
 orbitals is a derivative of the $1s$ integral of its density graph and lies
-in that integral's $D$-module;\ in every case computed it sits on that
-integral's rung.  On the graph, trees of $n$ linked two-center
+in that integral's $D$-module;\ for $s$-type trees on the one-scale slice it
+sits at or below that integral's rung, and in every case computed on it.  On
+the graph, trees of $n$ linked two-center
 densities share one holomorphic period, a Bessel moment whose one-scale
 operator, for $n=2$ to $5$, is the Legendre operator Hadamard the equal-mass
 banana with $n-1$ propagators:\

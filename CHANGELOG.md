@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.4.2] - 2026-11-06
+
+**The rung bound restored for s-type trees (record RB, pre-registered, GO); /qa paper_63 criteria re-frozen
+(PI co-write).** PI: "I agree with your suggestions. Let's start working them." (the three recommendations of the
+v6.4.1 report: run the rung-bound sprint, re-freeze the criteria after it, keep v6.4.1 a patch).
+
+### Added
+- **Paper 63 prop:tree_bound [SYMBOLIC PROOF + MEASURED].** On the one-scale slice (t;1,...,1) of a tree of n
+  linked s-type densities the holomorphic period is E F_n, E a differential operator with Laurent-polynomial
+  coefficients, so it sits at or below rung n. Proof: the s-type weights' 1-D transforms are combinations of
+  x^(2k) K0^a (xK1)^b; theta K0 = -x K1, theta(x K1) = -x^2 K0 give a triangular recursion
+  (eq:tree_bound_recursion) writing each as Q(x^2, theta) K0^(n-1), dividing only by a + 1 <= n - 1; integration
+  by parts against K0(tx) turns theta into -(1 + theta_t) and x^2 into t^-2 theta_t^2. No Mellin contour shift.
+  Record `docs/predictions/2026-11-06_rung_bound_trees.md` (committed e6c68d5b before scoring): 27 cases, n = 3
+  and 4, worst 3.8e-38 at 40 digits; controls measured first (quadrature 40 vs 60 digits to 1e-39; a planted
+  wrong denominator misses by 0.25 to 0.80). Driver `debug/rung_bound_trees.py`.
+- **Guard `tests/test_paper63_tree_bound.py`** (written as its own pass): exact operators for K0 (xK1) and
+  x^2 K0^2 and (xK1)^2, numeric identities (one fast, three slow), the scaled-leaf sign. Fire-tested 6/6 on the
+  default fast set: wrong denominator, the untransposed theta, t^-1 for t^-2, a dropped t-power, the numeric
+  denominator, the leaf sign. The first draft could not catch a broken x^2 rule without --slow; the exact x^2
+  checks were added for that.
+
+### Changed
+- Paper 63 abstract, introduction, "what the dictionary does and does not say", conjecture status, scope cap
+  three, open list and conclusion: module membership in general; the rung bound in prop:tree_bound's scope;
+  attainment observed, never proved. Still open (debt file): rings, l > 0, other slices, the 3-D integral.
+- Group3 synthesis gvc span, Avery reading map (tex + pdf), INDEX row 63, claim matrix row, C25
+  `p63-dictionary-module` statement: the scoped bound added.
+- `docs/qa/paper_63.done.md` RE-FROZEN (PI co-write): criterion 1, criterion 5, headline 1, W1, caps and seed
+  controls carry module membership plus the scoped tree bound; any wider bound or attainment claim is MATERIAL.
+
 ## [v6.4.1] - 2026-11-06
 
 **/qa paper_63 FULL (first cert, unseeded, PI-invoked) = FAIL, remediated.** Snapshot 5a1a5b17

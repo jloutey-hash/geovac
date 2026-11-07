@@ -463,8 +463,10 @@ CLAIMS = {
         statement="Every exponential-type orbital is a polynomial differential operator in its exponent and "
                   "centre applied to the 1s Yukawa function, so every rational-kernel multi-density integral is "
                   "that operator applied to the 1s integral of its density graph and lies in that integral's "
-                  "D-module M [SYMBOLIC PROOF + PRIOR ART]. That its fibre stays on the 1s rung is NOT proved (so the "
-                  "dictionary is not a bound on the rung); every computed case sits on the 1s rung (observation). "
+                  "D-module M [SYMBOLIC PROOF + PRIOR ART]. For a tree of s-type densities on the one-scale slice "
+                  "the holomorphic period is E F_n, at or below rung n (prop:tree_bound, SYMBOLIC PROOF + MEASURED, "
+                  "record RB 2026-11-06); for rings, l > 0 and other slices the bound is NOT shown; every computed "
+                  "case sits on the 1s rung (observation; attainment never proved). "
                   "The fibre Euler-operator weight identities hold for s-type densities only.",
         owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"What the dictionary does and does not say", owner_tier=r"places every",

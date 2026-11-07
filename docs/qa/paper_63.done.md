@@ -1,6 +1,6 @@
 # Paper 63 (Linked Electron Densities Climb the Banana Ladder) — `/qa` profile
 
-> **FROZEN 2026-11-06 — PI co-write done.** Branch criterion frozen as written (six clauses);
+> **RE-FROZEN 2026-11-06 after FULL #1 (see the change log); first frozen 2026-11-06 — PI co-write done.** Branch criterion frozen as written (six clauses);
 > all nine C8 headlines frozen; run shape **unseeded** (the standing calibration record is cited;
 > the seed plan below stays on file for a later `seeded` run). The goalposts below are fixed for
 > the first `/qa paper_63` FULL run, which the PI invokes.
@@ -42,7 +42,8 @@ member of `group3`, so `--gate group3` reaches it, unlike Papers 58/59/60 in gro
 - **Code / test-backing (C1–C2)** — `code-reviewer` ×1 (Opus-tier: the standing calibration record found
   Sonnet code reviews PARTIAL; 2 seeds if `seeded`). Map +
   **RUN**: `tests/test_paper63_dictionary.py` (the Yukawa-derivative dictionary and the
-  Euler-operator weights), `tests/test_paper63_four_centre_genus.py`,
+  Euler-operator weights), `tests/test_paper63_tree_bound.py` (prop:tree_bound; run with
+  `--slow`, three of its cases are slow), `tests/test_paper63_four_centre_genus.py`,
   `tests/test_paper63_three_electron_k3.py`, `tests/test_paper63_generic_slice.py`,
   `tests/test_paper63_four_density_rung.py` (tree identity, the order-$n$ operators,
   the Hadamard/banana identity for $n = 2..5$, Fuchs irreducibility, the Ising
@@ -87,15 +88,16 @@ verify ALL of:
 1. **SYMBOLIC PROOF means a proof.** The dictionary (`sec:dictionary`: every
    exponential-type orbital is a polynomial differential operator in exponent and centre
    applied to the $1s$ Yukawa function; at the fibre every $s$-type density weight is a
-   polynomial in the Euler operators applied to the $1s$ weight (for $\ell>0$ the centre
-   derivatives leave momentum factors, covered only by the general $D$-module statement;
-   any restatement extending the Euler identities to $\ell>0$ is MATERIAL); so every rational-kernel
-   multi-density integral is that operator applied to the $1s$ integral of its graph and
-   its rung is **at most** the $1s$ rung) carries `[SYMBOLIC PROOF]`. The prose may
-   assert it as proven only on the strength of the two identities and the lemma; a
-   `[SYMBOLIC PROOF]` tag resting on the numerical check alone is an overclaim =
-   MATERIAL. The dictionary is an **upper bound** on the rung (cap three); any sentence
-   reading it as "the rung equals the $1s$ rung" is MATERIAL.
+   polynomial in $c$, $c^{-1}$ and the Euler operators applied to the $1s$ weight (for
+   $\ell>0$ the centre derivatives leave momentum factors; any restatement extending the
+   Euler identities to $\ell>0$ is MATERIAL); so every rational-kernel multi-density
+   integral is that operator applied to the $1s$ integral of its graph and **lies in its
+   $D$-module**) carries `[SYMBOLIC PROOF]`. The **rung bound** is proved only by
+   prop:tree_bound, for trees of $s$-type densities on the one-scale slice at the
+   holomorphic-period level. Any sentence asserting or relying on a rung bound outside
+   that scope (rings, $\ell>0$, other slices, the integrated value), or on attainment
+   ("the rung equals the $1s$ rung", "orbital-independent" read as equality), is MATERIAL.
+   A `[SYMBOLIC PROOF]` tag resting on a numerical check alone is MATERIAL.
 2. **A rung is an operator, not a number.** The tree ladder names the operator of the
    one-scale family (Legendre ⋆ equal-mass banana; $n = 4$ AESZ #58). The generic
    three-electron fibre is a K3 function integrated once on every slice tested, with no
@@ -118,7 +120,8 @@ verify ALL of:
 5. **The conjecture stays bounded.** `sec:conjecture` is `[OBSERVATION + PRIOR ART]`: a
    pattern across the tested instances with its four caps stated (fibre vs integrated
    value; the three-dimensional reduction shown only through four densities; the
-   dictionary an upper bound; one ring, and the generic fibre's content evidence). The
+   dictionary a bound only for $s$-type trees on the one-scale slice, attainment never
+   proved; one ring, and the generic fibre's content evidence). The
    nearest theorem (Brown, massless graphs) is cited as such; the Symanzik-polynomial
    proof is explicitly not attempted. Any "theorem", "derived" or "proved" on the
    conjecture = MATERIAL.
@@ -131,10 +134,11 @@ verify ALL of:
 ## Paper-63-specific watch-notes (the risk surface — ranked)
 
 - **W1 — the dictionary's reach [HIGHEST RISK; criteria 1, 5].** The abstract,
-  introduction and conclusion restate "the ladder is a property of the graph, not of the
-  orbitals". Verify each restatement keeps "at most" (upper bound) and that the
-  conjecture's cap three ("every computed case attains the bound, and none is a proof
-  that it must") survives in every summary surface.
+  introduction, conjecture status, scope and conclusion restate the dictionary. Verify
+  each keeps module membership as the general statement, scopes any rung bound to
+  $s$-type trees on the one-scale slice (prop:tree_bound), and never claims attainment;
+  and that cap three survives in every summary surface (Paper 59 pointers, the syntheses,
+  the field guide, the Avery reading map, INDEX).
 - **W2 — the K3 claims at generic scales [criterion 2].** `sec:three_electron` and the
   group3 synthesis both carry the P3e-2 negative. Verify neither reads the K3 fibre as
   the K3 period of the integrated value; verify the second slice (t;1,2) and the Slater
@@ -165,10 +169,13 @@ verify ALL of:
 1. **The dictionary [SYMBOLIC PROOF].** Every exponential-type orbital is a polynomial
    differential operator (coefficients rational in the exponent) in its exponent and
    centre applied to the $1s$ Yukawa function; at the fibre every $s$-type density weight
-   is a polynomial in the Euler operators $c\,\partial_c$ applied to the $1s$ weight; every
-   rational-kernel multi-density integral is that operator applied to the $1s$ integral
-   of its graph; its $D$-module is a quotient of the $1s$ one and its rung at most the
-   $1s$ rung. Guard `tests/test_paper63_dictionary.py`.
+   is a polynomial in $c$, $c^{-1}$ and the Euler operators $c\,\partial_c$ applied to the
+   $1s$ weight; every rational-kernel multi-density integral is that operator applied to
+   the $1s$ integral of its graph and lies in its $D$-module. **The tree bound [SYMBOLIC
+   PROOF + MEASURED]:** on the one-scale slice of a tree of $n$ linked $s$-type densities
+   the holomorphic period is $E\,F_n$, at or below rung $n$ (record
+   `docs/predictions/2026-11-06_rung_bound_trees.md`). Guards
+   `tests/test_paper63_dictionary.py`, `tests/test_paper63_tree_bound.py`.
 2. **The tree identity [SYMBOLIC + MEASURED].** The holomorphic period of any tree of
    $n$ linked two-centre densities is $2^n/(\pi\sqrt{\prod c_v})\int\prod_v K_0(a_v x)\,dx$,
    shape-independent. Guard `tests/test_paper63_four_density_rung.py`.
@@ -220,8 +227,9 @@ verify ALL of:
   class).
 - The three-dimensional reduction is shown for the chain of three and the star and path
   of four only; for $n \ge 5$ the holomorphic-period statement stands alone.
-- The dictionary bounds the rung from above; attainment is observed in every computed
-  case and proved in none.
+- The dictionary places every orbital in the $1s$ module; it bounds the rung only for
+  $s$-type trees on the one-scale slice; attainment is observed in every computed case and
+  proved in none.
 - Among rings only the triangle was computed; the generic three-electron fibre's content
   is evidence from integer-relation searches.
 - The finite closed form of the first rung's integrated value is Paper 59's open problem
@@ -241,11 +249,17 @@ K ≈ 6 planted defects, ≥1 catchable by each gating dimension:
 
 M ≈ 5 known-good controls that must NOT be flagged: the tree identity's constant
 $2^n/(\pi\sqrt{\prod c})$; AESZ #58 for $n = 4$; the Coulomb triangle's elliptic rung;
-the correlated triangle's K3 rung at $\gamma = 1$; the dictionary's "at most".
+the correlated triangle's K3 rung at $\gamma = 1$; prop:tree_bound's scope (s-type trees,
+one-scale slice).
 
 ## Change log
-- 2026-11-06 (first FULL run, remediation) — **PROPOSED, PI co-write owed before the next run; the goalposts
-  above are unchanged for this run.** The run found that the dictionary never proved "rung at most the 1s rung":
+- 2026-11-06 (after FULL #1 and the RB sprint) — **RE-FROZEN, PI co-write ("I agree with your suggestions",
+  approving the proposal below).** Criterion 1, criterion 5, headline 1, W1, the caps and the seed controls now
+  carry module membership as the general statement and the rung bound only in prop:tree_bound's scope (s-type
+  trees, one-scale slice, holomorphic period), proved after the run by record RB
+  (`docs/predictions/2026-11-06_rung_bound_trees.md`, GO). `tests/test_paper63_tree_bound.py` joins the code list.
+  These goalposts govern the next run (the claim-search DELTA, then the certifying FULL).
+- 2026-11-06 (first FULL run, remediation) — **PROPOSED (superseded by the entry above).** The run found that the dictionary never proved "rung at most the 1s rung":
   correctly stated, prop:rung gives only membership of the 1s D-module (code D1, self-check rounds 1-2). The paper
   is re-tiered to module membership plus "every computed case sits on the 1s rung" (observation). Proposed
   criterion 1: the [SYMBOLIC PROOF] is module membership; any sentence asserting or relying on a rung bound

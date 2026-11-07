@@ -7,13 +7,12 @@ Source run: `/qa paper_63` FULL (first cert, unseeded), 2026-11-06, snapshot 5a1
 
 ## Owed mathematics (PI call)
 
-- **The dictionary as a bound on the rung (self-check round 1, F1).** prop:rung, correctly stated, puts a
-  general-orbital integral in the D-module M of its graph's 1s integral and bounds its one-parameter factors by
-  those of M's RESTRICTION to the line. The missing step that would restore "rung at most the 1s rung": the
-  restriction of the tree family's module to the one-scale line has no composition factor above F_n (for trees
-  plausibly because K_0^(n-1) is a cyclic vector of the symmetric-power Bessel module, so every x^k K_0^a K_1^b
-  weight lies in the module it generates, and the K_0(tx) transform carries that to F_n's module). Not argued in
-  the paper; the claim is re-tiered to module membership plus "every computed case sits on the 1s rung".
+- **The dictionary as a bound on the rung (self-check round 1, F1).** RESOLVED for trees of s-type densities on
+  the one-scale slice (holomorphic period): prop:tree_bound, record RB 2026-11-06 GO, guard
+  `tests/test_paper63_tree_bound.py` (fire-tested 6/6). Still open: rings (the triangle's fibre is not a 1-D moment),
+  l > 0 (momentum factors carry directions), other slices (distinct fixed scales give a tensor product of Bessel
+  modules; cyclicity of the product K_0(b_2 x)...K_0(b_n x) is the step to check), the real 3-D integral, and
+  attainment.
 
 ## Owed guards (separate activity; fire-test each against the wrong answer it excludes)
 

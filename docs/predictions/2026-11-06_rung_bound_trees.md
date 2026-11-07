@@ -63,4 +63,9 @@ theta_t^m F_n evaluated as int (theta^m K0)(tx) K0^(n-1) dx). Cases: n = 3, sect
 
 ## Disposition
 
-(appended after scoring)
+**Scored 2026-11-06 (driver sha256 prefix 8c06bdfc9f54d1aa, committed e6c68d5b before scoring): RB1 GO, RB2 met.**
+All 27 cases satisfy g_T = R F_n: worst relative 3.8e-38 (n = 4, (xK1)^3, t = 2.5); n = 3 worst 1.0e-39. Cases with
+b = 0 (and some k = 1 cases) agree to 0.0 at 40 digits because x^2 K0(tx) = t^-2 (theta^2 K0)(tx) pointwise, so both
+sides integrate the same integrand; the integration-by-parts step is exercised by every b >= 1 case (9 of 9 at
+k = 0 agree to 1e-38..1e-40), against 0.25..0.80 for the planted recursion. The operator sizes (1 to 6 terms) are
+recorded in the driver output. The argument stands as written; Paper 63 restates the bound in the registered scope.
