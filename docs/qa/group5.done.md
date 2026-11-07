@@ -124,6 +124,43 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   check the paper states the continuum resolution]; K_var(r_h→0) = K_cone
   bit-exact; a₀ = 1.992 (99.6%) sweet-spot; replica-weight theorem (L6).
 
+### Criteria currency (added 2026-11-06 before the /qa group5 FULL incremental run; PI-approved; current owner values, nothing relaxed)
+
+The July criteria above are superseded where they conflict with the items below. Grade restatements against these.
+
+- **Paper 2.** $K = 137.036064$ agrees with $\alpha^{-1}$ to $4.8\times10^{-7}$; the root of the cubic
+  $1/\alpha = K-\alpha^2$ (137.036011) agrees to $8.8\times10^{-8}$; any sentence attaching $8.8\times10^{-8}$ to $K$
+  itself is STALE (C16 `k-equals-alpha-inverse-to-cubic-precision`). $\alpha$ "approximately satisfies" the cubic (an
+  Observation). The $p = 5.2\times10^{-9}$ statistic is per draw, does not account for the unregistered search that
+  produced it and **does not establish non-accidentality** (the July "supporting evidence for non-accident" is
+  superseded). The ingredients each have an **identified home**, and the choice of these three is the open gap
+  (PI ruling 2026-11-06: grade against the paper's wording; a restatement calling them "derived" is STRONGER); F is
+  half the S¹ fibre's spectral zeta at s = 1. The circulant **realizes, does not select** (C16 `circulant-explains-cubic`).
+  The Seeley-DeWitt cancellation / supertrace theorem is **withdrawn** (v5.19.2); the twelve eliminated mechanisms stay
+  visible. The cubic's root is proved transcendental (v5.17.10).
+- **Paper 28.** T9 is a two-term $\pi^2$ polynomial **at every integer s**; half-integer $s\ge5/2$ carries odd zeta
+  values (C16 `t9-half-integer-claims`). The parity discriminant is conditional on the period conjecture
+  ($\zeta(2k+1)\notin\mathbb{Q}(\pi)$), odd $s\ge5$. "Every second-order operator gives $\pi^{\rm even}$" is false (only
+  $\Delta_{LB}$ and $D^2$). Two-term exactness is credited to Chamseddine-Connes. New since July: the "descent 4->2"
+  (Deligne-Glanois) reading, routed here by v6.1.4 — grade its tier.
+- **Paper 33.** Furry's mechanism is **m_l conservation, not Hermiticity** ("Hermiticity alone does not suffice");
+  criterion 2.1's "V(a,a)=0 by Hermiticity" is superseded. The S² Hopf base is radius 1/2, area π; the 1/(4π)
+  normalisation is radius-independent. The VQ-1..5 and co-exact negatives live in Paper 28.
+- **Paper 36.** Of the −5.65 MHz residual only ~+1.20 MHz is multi-loop; ~+4.4 MHz is non-loop (recoil, finite
+  nuclear size, hyperfine averaging) (LS-7). Criterion 4's "honest two-loop-scale gap" is superseded.
+- **Paper 51.** The Möbius α/(2α−1) form is a finite-a substrate artifact and the mechanism is **RESOLVED (B4)**;
+  the earlier arXiv ID "turned out to be a different paper" (the July "fabricated ... mechanism OPEN" is superseded).
+  L6 stands as [INTERNAL THEOREM] on two lemmas; its propinquity-backbone lemma is **[OPEN]**, and the earlier
+  interior-positivity, rate and boundary-obstruction claims are withdrawn (2026-09-29): "the arc's one verified
+  theorem" needs that scope. State-space GH, propinquity not claimed; KO-dimension is a sign triple, no KO label.
+- **Paper 25.** The Hopf-fibre U(1) reading is **one-centre** (a second nucleus keeps only L_z; the Hopf U(1)
+  breaks, v5.21.26); the "discrete Hopf quotient" is a stand-in (rotation-multiplet grouping, not the fibre circle).
+  The node Laplacian does not converge to the S³ Laplacian (n_max disconnected l-blocks). The asymmetry has seven
+  layers, five standing (L₀ spectrum-computing and calibration π withdrawn).
+- **Corpus-wide since July (check restatements):** the graph -> S³ convergence refuted (2026-09-25); the
+  graph/kappa "carries the spectrum" family retired; "propinquity" not claimed; 4/π is a kernel constant, not a GH
+  rate; the calibration-π layer withdrawn (2026-10-19).
+
 ### Known logged gaps at freeze (not blockers; verify still-logged)
 
 - Matrix has **zero group5 rows** (the group4 pre-work state) — the first cert's
@@ -134,6 +171,10 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   P28-adjacent files — C14 reports advisory, not blocking.
 
 ## Change log
+- 2026-11-06 — **Criteria-currency block added before the /qa group5 FULL incremental run (PI-approved).** Built from a
+  headline-by-headline diff against the current papers (11 superseded criterion items; Furry's mechanism would have
+  graded the correct Paper 33 wrong). PI ruling: Paper 2's ingredients are graded against "identified home", not
+  "derived". Criteria otherwise unchanged.
 - 2026-07-04 — **Certifying FULL run = PASS → group5 CERTIFIED ✅ (v4.66.0).**
   19 agents (~3.9M tokens): 8 Sonnet code (1/paper) + 4 Opus claims + 2 Sonnet citation +
   Opus synthesis + 2 recovery re-dispatches + rescan + completeness-critic + gap-closure.
