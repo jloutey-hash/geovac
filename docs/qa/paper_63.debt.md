@@ -89,6 +89,38 @@ Source run: `/qa paper_63` FULL (first cert, unseeded), 2026-11-06, snapshot 5a1
   - The tree identity with non-1s weights is guarded only for the chain of three (Delta^-3, Delta^-5); prop:tree_bound
     uses it at every n (the derivation is generic; no n >= 4 non-1s guard).
 
+- From FULL #2 (2026-11-06), SMALL/NIT, not fixed in-cycle (edit bar: no LARGE opened these units):
+  - Abstract: the "in every case computed" attainment clause sits under [SYMBOLIC PROOF + PRIOR ART] (an
+    observation; owner :326 is [MEASURED]); "every general-orbital case computed" (abstract, intro :137) — every case
+    computed is s-type, say so; "The caps are stated:" lists three of the four; the correlated triangle "sits with the
+    chain on the K3 rung" drops the gamma scope.
+  - Conjecture status :1467-1469: on (t;1,2) the piece is equivalent to the three-scale moment, so "onto the
+    Bessel-moment family", not "onto F_n"; :407 "[MEASURED / classical]" is not a registry tier ([MEASURED + PRIOR
+    ART]); :1460 calls eq:tree proved while its tag is [SYMBOLIC + MEASURED] (tag upgrade); :1505 "The operators of the
+    ladder are known" unscoped (true for F_n's operators; only the Hadamard identification is n = 2..5).
+  - Pricing block: :1380-1381 / :1396-1397 the fit errors 3.6e-5..2.4e-6 are RELATIVE (record E_n = Y_n/Y - 1); say so
+    (read as absolute, "three thousand times" would be false). :1375-1391 does not disclose that GF1 MISSED its
+    registered 1e-3 ceiling (C5 scorecard; compare :1075, :1369 which disclose). The fit-law paragraph cites no guard;
+    the evaluator "thirteenth" and the ~500x speed test have no guard (tagged [MEASURED], one machine).
+  - :1087-1090 the g32 sentence ("so Y needs the K3 piece, and no piece above K3 occurs") sits after the Gaussian
+    paragraph, which says the K3 prediction failed; move it back to the gamma = 3/2 paragraph (~:933).
+  - sec:placement :1534-1538: "the short-range difficulty it meets is where the series confronts the genus jump" is
+    GeoVac's causal reading inside a [PRIOR ART] block, untagged; tag [OBSERVATION] or drop the causal clause.
+    :1519-1520 "depend on n alone" without 1s. Paper 18 :407 "the rungs beyond the third centre" (index by densities).
+  - prop:rung :240-242 "every such weight P(L^2) Delta^-(2m+1)" needs deg P <= m (L^2 Delta^-1 = Delta^+1 leaves the
+    orbit); :525 quadric counts "at two rational points" (guard checks one); :1032 "three pairs to 4e-31" (guard: two
+    pairs to 1e-20).
+  - Guard: `test_paper63_four_density_rung.py::test_fn_operators_irreducible_by_fuchs` accepts a strict-inequality
+    Fuchs bound (plant `<=` -> `<` did not fire); add an equality-margin control. Cheap guard owed: the F_5 operator on
+    quadrature (`_annihilation_residual(5, ...)`), re-verified by FULL #2 to 1e-15/4e-20.
+  - Synthesis: group2 synthesis :848-851 "correlated integrals that link more densities climb further" (owner: trees
+    and the correlated triangle; the Coulomb ring does not climb); field guide :967-970 reading path omits Paper 63 for
+    the K3 rung; `docs/forced_free_seam.md` :145 "a K3 period for a three-electron chain" (holomorphic period);
+    `docs/claims_register.md` has no Paper 63 line.
+  - Citations: remiddi1991 bibitem lacks its title ("Analytic value of the atomic three-electron correlation integral
+    with Slater wave functions", PRA 44, 5492). Lim-Tu-Yu attribution CONFIRMED by the PM from the PDF (footnote 3,
+    eq. 44, the 2x2 determinants).
+
 ## Citations left UNVERIFIABLE (not fetched; never upgraded on plausibility)
 
 Bonisch et al. 2021 "Eq. (3.7)"; Fresan-Sabbah-Yu parity of the pairing; Avery & Avery 4-centre "App. B" and the

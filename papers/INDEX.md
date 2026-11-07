@@ -40,6 +40,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | group2 | 8, 11, 12, 13, 15, 17, 19, FCI-A, FCI-M, 58, 59, 60, 62 | OWED — He retirement, Paper 11 label, LiH −8.0585 (v5.20.6) |
 | group3 | 18, 22, 24, 31, 54, 55, 56, 57, 61 + group3 synthesis | OWED |
 | group4 | 14, 16, 20, 23 + group4 synthesis | OWED |
+| paper_63 | 63 + group3 synthesis (ladder subsection) | RESEARCH-GRADE — FULL #2 (v6.4.4, 2026-11-06): 0 OWNER-LARGE, 2 SURFACE-LARGE fixed + C16; coverage 14/14; SMALL debt `docs/qa/paper_63.debt.md` |
 | group5 | 2, 25, 28, 30, 33, 36, 41, 51 | OWED |
 | group6 | 26, 27, 34, 35 | OWED |
 | synthesis | field guide + group syntheses | OWED |

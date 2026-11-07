@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.4.4] - 2026-11-06
+
+**/qa paper_63 FULL #2 (final certifying run, incremental, unseeded, PI-invoked) = FAIL on SURFACE findings;
+RESEARCH-GRADE EARNED.** Snapshot 21ed8de7 (worktree `../geovac-qa-p63f`). Criteria: the re-frozen done-file.
+Panel: claims (Opus; six NEW prose units + AUDIT three_electron, four_density), code (Opus; all 22 test_paper63_* +
+six test_paper59_*: 151 pass / 47 skip default, 198 pass with --slow), citations (Sonnet; 46 bibitems), synthesis
+(Opus; group2/group3 syntheses, field guide, INDEX, atlas, seam, Avery map), completeness critic (Opus).
+Deterministic gates all green incl. C25. Calibration: standing record (trunk FULL #2 19/21, DELTA #1 9/9, DELTA #2
+8/9, 0 FP). **Coverage 6/14 -> 14/14 owner units** (the code unit stamped directly: its 30 inputs are identical to
+the reviewed commit; `--unchanged-since` never stamps code units by design).
+
+### Results
+- **OWNER-LARGE: 0.** prop:tree_bound re-derived independently by claims and code (sympy recursion residual 0 at 165
+  digits; operators for n = 3, 4, 5 by a Chebyshev finite-difference route). Criteria 1-5 pass. One candidate
+  (Lim-Tu-Yu credit, citation UNVERIFIABLE from HTML) was checked by the PM against the paper's PDF and CONFIRMED:
+  footnote 3 credits BBBG (47), (73) and AMNT26/Zagier for c_{3,0}, c_{4,0}; their eq. (44) gives
+  int K0^6 = 108 pi^2 L(f24.6.a.a, 4) numerically; the periods enter through determinants.
+- **SURFACE-LARGE: 2, fixed** (synthesis dimension): atlas door 27 listed as owed two guards that exist
+  (`test_paper59_gaussian_fit_geminal.py`; `test_paper63_y_minimal_order.py`, `test_paper59_offslice_y_operator.py`);
+  atlas door 19 and seam J9 named only Paper 59 as the rung rule's home (now + Paper 63 sec:conjecture). C16
+  `p63-stale-owed-and-rung-rule-home` (fires 3/3 on the retired text, silent on the corrected).
+- **SMALL: ~25** (all in `docs/qa/paper_63.debt.md`): incl. the pricing fit errors are relative (say so), GF1's
+  registered miss undisclosed, a misplaced gamma = 3/2 sentence after the Gaussian paragraph, an untagged causal
+  reading in sec:placement, the Fuchs guard's strict/non-strict blind spot, Monkhorst-Jeziorski and Remiddi titles.
+- **Upgrade raised to the PI (not applied):** with F_n's operator irreducible for n <= 8 (proved in the paper), a
+  nonzero E F_n generates F_n's whole module, so attainment holds at the holomorphic-period level for s-type trees,
+  n <= 8 — against the re-frozen cap "attainment proved in none".
+- **Coverage gap for the PI:** headline 6's gamma = 2 K3 map and the order-nine annihilators at gamma = 1/2, 2, 3
+  are record-only (disclosed inline); no recorded PI disposition.
+
 ## [v6.4.3] - 2026-11-06
 
 **/qa paper_63 claim-search DELTA (PI-invoked, unseeded, against the re-frozen criteria) = DEFECTS, remediated.**

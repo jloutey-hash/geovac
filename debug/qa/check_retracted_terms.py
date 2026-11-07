@@ -9604,6 +9604,25 @@ REGISTRY = [
         },
     },
     {
+        "id": 'p63-stale-owed-and-rung-rule-home',
+        "pattern": 'Owed:\\s+guards\\s+for\\s+the\\s+Gaussian-geminal\\s+fit\\s+\\(GF\\)\\s+and\\s+the\\s+off-slice\\s+Y\\s+operator|\\|\\s+Paper\\s+59\\s+`sec:f12`\\s+\\||Paper\\s+59\\s+`sec:f12`,\\s+`sec:momentum`,\\s+`sec:genus`;\\s+CHANGELOG\\s+v5\\.20\\.14\\.',
+        "exempt_if_nearby": withdrawal_marker('p63-stale-owed-and-rung-rule-home'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": 'Registered 2026-11-06 (/qa paper_63 FULL #2, synthesis findings 3-4). Atlas door 27 listed guards for the Gaussian-geminal fit and the off-slice Y operator as owed; both exist (tests/test_paper59_gaussian_fit_geminal.py; tests/test_paper63_y_minimal_order.py, tests/test_paper59_offslice_y_operator.py). Atlas door 19 and seam J9 named only Paper 59 as the rung rule\'s home; its bounded form is Paper 63 sec:conjecture (conj:ladder).',
+        "files": [
+            'docs/atlas.md',
+            'docs/forced_free_seam.md',
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'papers/INDEX.md',
+        ],
+        "cited_by": {
+            "docs/atlas.md": "remediated + reviewed 2026-11-06 (/qa paper_63 FULL #2) -- door 27 guards listed; door 19 owner adds Paper 63 sec:conjecture",
+            "docs/forced_free_seam.md": "remediated + reviewed 2026-11-06 (/qa paper_63 FULL #2) -- J9 owner adds Paper 63 sec:conjecture",
+        },
+    },
+    {
         "id": 'p63-slices-provably-k3',
         "pattern": 'provably\\s+a\\s+K3\\s+function\\s+integrated\\s+once|squashed\\s+ring\'s\\s+momentum\\s+dies',
         "exempt_if_nearby": withdrawal_marker('p63-slices-provably-k3'),

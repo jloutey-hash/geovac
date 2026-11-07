@@ -8,8 +8,11 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-63 scope + deltas + watch-notes.
 
-> **STATUS: NEVER CERTIFIED.** Paper 63 was created 2026-11-06 (v6.4.0) and has not
-> been through `/qa`. Its moved content was last exercised by `/qa paper_59` on the
+> **STATUS: RESEARCH-GRADE (FULL #2, 2026-11-06, v6.4.4).** Primary verdict FAIL on two
+> SURFACE-LARGE (fixed, C16 `p63-stale-owed-and-rung-rule-home`) and SMALLs (debt file); 0
+> OWNER-LARGE; every dimension exercised; gates green incl. C25; coverage 14/14. Not PASS.
+> History: FULL #1 FAIL (v6.4.1), RB sprint (v6.4.2), claim-search DELTA DEFECTS (v6.4.3).
+> Paper 63 was created 2026-11-06 (v6.4.0). Its moved content was last exercised by `/qa paper_59` on the
 > 2026-11-02 approval of Paper 59's items 10-15 (`docs/qa/paper_59.done.md`), under
 > Paper 59's goalposts; those items now describe Paper 63's sections and are
 > superseded here, not re-certified.

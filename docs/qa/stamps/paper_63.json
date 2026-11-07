@@ -1,35 +1,75 @@
 {
  "target": "paper_63",
  "units": {
+  "cite:papers/group3_foundations/paper_63_density_graph_ladder.tex": {
+   "date": "2026-11-06",
+   "hash": "ffdfd2c4911a1aaa",
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
+  "code:papers/group3_foundations/paper_63_density_graph_ladder.tex": {
+   "date": "2026-11-06",
+   "hash": "dc215f9ff756d743",
+   "run": "paper_63 FULL #2 2026-11-06 (code; 30 inputs identical to 21ed8de7)"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Conclusion": {
+   "date": "2026-11-06",
+   "hash": "05f8824241843d1e",
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Introduction": {
+   "date": "2026-11-06",
+   "hash": "d9ccbb224e4870a7",
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Placement in the literature": {
    "date": "2026-11-06",
    "hash": "018f784a974c7a93",
-   "run": "paper_63 claim-search DELTA 2026-11-06"
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Scope, and what is open": {
+   "date": "2026-11-06",
+   "hash": "e86f04fb1fa341e1",
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The dictionary: every exponential-orbital integral is a derivative of ": {
+   "date": "2026-11-06",
+   "hash": "c32378dff7842a98",
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The graph reading, as a bounded conjecture": {
+   "date": "2026-11-06",
+   "hash": "f489b4050d4537fd",
+   "run": "paper_63 FULL #2 2026-11-06"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit": {
    "date": "2026-11-06",
    "hash": "1c8fa357eb6fd173",
-   "run": "paper_63 claim-search DELTA 2026-11-06"
+   "run": "paper_63 FULL #2 2026-11-06"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A fourth distinct center adds no genus": {
    "date": "2026-11-06",
    "hash": "7ee7e783333caa3d",
-   "run": "paper_63 claim-search DELTA 2026-11-06"
+   "run": "paper_63 FULL #2 2026-11-06"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A ring of three densities: the loop does not climb": {
    "date": "2026-11-06",
    "hash": "31b707e3d9070953",
-   "run": "paper_63 claim-search DELTA 2026-11-06"
+   "run": "paper_63 FULL #2 2026-11-06"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A three-electron chain lives on a K3 surface": {
    "date": "2026-11-06",
    "hash": "5ad28c9a486259be",
-   "run": "paper_63 claim-search DELTA 2026-11-06"
+   "run": "paper_63 FULL #2 2026-11-06"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / Four linked densities: the first rung beyond elliptic": {
    "date": "2026-11-06",
    "hash": "9e4bfdd8b8c0b175",
-   "run": "paper_63 claim-search DELTA 2026-11-06"
+   "run": "paper_63 FULL #2 2026-11-06"
+  },
+  "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::front": {
+   "date": "2026-11-06",
+   "hash": "fa688e7b4ec7a230",
+   "run": "paper_63 FULL #2 2026-11-06"
   }
  }
 }
