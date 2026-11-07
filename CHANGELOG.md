@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.5.1] - 2026-11-07
+
+**group5 PI decisions applied + group5 guard pass.** PI: "I'll take your recommendations on all decisions and we
+can proceed to the next items when you're ready."
+
+### Decisions (PI, on PM recommendation)
+- **Retitles.** Paper 33 -> "... Graph Topology, Angular Momentum, and the Diagonal alpha_z Vertex"; Paper 36 ->
+  "Bound-State QED on S^3: The Leading One-Loop Hydrogen Lamb Shift"; Paper 41 -> "... Compatibility with Compact
+  U(1) on a Non-Cubic Substrate, Including Monopole-Density and Polyakov-Loop Diagnostics". Bibitems in Papers 7,
+  32 and the group5 synthesis updated; new C16 entry `g5-retired-titles-33-36-41` (discrimination 8/8; two
+  version-history comments in Paper 41 marked).
+- The 1/(24 pi t) criteria amendment confirmed; the v6.5.0 MINOR bump confirmed.
+
+### Guard pass (separate from the v6.5.0 fixes; each guard fire-tested, 22/22 plants fire)
+- Five tests that pinned withdrawn values rebuilt from independent routes:
+  - `test_paper51_dS_vacuum.py`: the density is summed over the Camporesi-Higuchi spectrum (rank-4 trace) and
+    fitted; s_min = -Lambda/(6 sqrt6) is read off. Rejects -Lambda/(12 sqrt6).
+  - `test_paper51_cutoff_mellin.py`: G_eff = 3 pi/(phi(1) Lambda^2) and Lcc from the summed spectrum for two
+    smooth cutoffs (agreement ~1e-12); the 4D cigar tip (r_h^2 Lambda^2/3) phi(1) - f(0)/18 against the S^2 Dirac
+    spectrum for three Laplace-convention cutoffs (one with f(0) = 1/2). 6 pi / 36 pi constants replaced.
+  - `test_paper51_replica_sbh.py`: action-route G equals entropy-route G = 3 pi/Lambda^2 (the 'factor of 2'
+    test removed).
+  - `test_su2_wilson_gauge.py`: the 4-plaquettes are a cycle basis (rank = count = beta_1 at n_max = 3, 4, 5); the
+    one-plaquette Haar integral equals I2/I1 and Paper 30's printed 0.124/0.240/0.433/0.719, with the weight tied
+    to `wilson_action`; Schur factorization of a two-plaquette loop. The >20% MC band test removed.
+  - `test_paper41_wilson_witnesses.py`: the paper's estimator passes 3 (3.04, 3.15 at n_max = 8, 9); fixed-band
+    d_s flat with a ~0.45 gap over the scalar graph; centre symmetry (Delta S = 0, P -> e^{i phi} P) recomputed;
+    <|P_lat|> archive values and the random-phase baseline. The 'climbs toward 3' and 'CONFINED' pins removed.
+- New backing tests: `test_paper2_dirac_cumulative.py` (closed forms from SU(2)xSU(2) dimensions; the m = 3
+  coincidence is unique), `test_paper36_a50_term.py` (A50 ~ 9.29, ~ +6.9 MHz at 2S), `test_paper51_tt_heat_trace.py`.
+- Independent review (one Opus code reviewer): 0 LARGE, 9 SMALL; 7 fixed (stale 6 pi comments, test header
+  overcredit, an f(0) != 1 cutoff, Haar weight tied to the action, V_B derived, input disclosures, the fixed
+  window). Paper 41 now states its fixed band (0.1 < P - c/V < 0.5) and prints 2.14 (was 2.16, which the band
+  does not give). Two left in `docs/qa/group5.debt.md` (P30 lattice 6-cycle; long-chain MC values).
+
 ## [v6.5.0] - 2026-11-07
 
 **/qa group5 FULL (incremental, whole target, unseeded; snapshot 99cd34bf) = FAIL, remediated.** PI: "Go ahead

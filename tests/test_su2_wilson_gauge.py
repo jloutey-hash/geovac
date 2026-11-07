@@ -614,16 +614,93 @@ class TestCertRunCoverageClosures:
         cnt = Counter(len(p) for p in plaqs)
         assert (cnt[4], cnt[6], cnt[8]) == (8, 7, 18)
 
-    def test_mc_vs_leading_order_character_expansion_band(self):
-        """Result 3: the four MC means sit within 40% of the
-        leading-order character expectation I_2(beta)/I_1(beta)
-        (measured deviations 1.8/34/23/5.3% -- the corrected 2--35%
-        characterization; an earlier printing said '~20%')."""
+    # Rebuilt 2026-11-07 (group5 guard pass).  The former test here pinned
+    # a >20% MC-vs-character-expansion deviation that came from an
+    # unconverged chain; Paper 30 now states <W> = I_2/I_1 EXACTLY because
+    # the 4-plaquettes form a cycle basis of each planar l-block.  The two
+    # tests below back those two facts separately.
+
+    @pytest.mark.parametrize("max_n", [3, 4, 5])
+    def test_plaquettes_form_cycle_basis(self, max_n):
+        """The 4-cycle plaquettes are linearly independent in the cycle
+        space and span it: rank = number of plaquettes = beta_1 =
+        E - V + c = sum_l 2l(max_n - l - 1).  Rejects a dependent
+        plaquette set (the 'shared-edge correlation' reading) and a
+        deficient one (cycles not tiled by plaquettes)."""
+        from scipy.sparse.csgraph import connected_components
+        lat = GeometricLattice(max_n=max_n)
+        A = lat.adjacency.toarray()
+        V = lat.num_states
+        c = int(connected_components(lat.adjacency, directed=False)[0])
+        edges = sorted({(min(i, j), max(i, j)) for i, j in zip(*np.nonzero(A))})
+        col = {e: k for k, e in enumerate(edges)}
+        beta1 = len(edges) - V + c
+        assert beta1 == sum(2 * l * (max_n - l - 1) for l in range(max_n))
+        plaqs = enumerate_plaquettes(A, max_length=4, both_orientations=False)
+        M = np.zeros((len(plaqs), len(edges)))
+        for r, P in enumerate(plaqs):
+            for e in P:
+                a, b = e.source, e.target
+                M[r, col[(min(a, b), max(a, b))]] += 1.0 if a < b else -1.0
+        # each row is a cycle (boundary-free): B^T-incidence times row = 0
+        Binc = np.zeros((V, len(edges)))
+        for k, (a, b) in enumerate(edges):
+            Binc[a, k], Binc[b, k] = -1.0, 1.0
+        assert np.allclose(Binc @ M.T, 0.0)
+        rank = np.linalg.matrix_rank(M)
+        assert rank == len(plaqs) == beta1, (rank, len(plaqs), beta1)
+
+    def test_single_plaquette_expectation_is_I2_over_I1_exactly(self):
+        """With independent plaquettes, <W_P> is the one-plaquette Haar
+        integral with weight exp((beta/2) tr U):
+            int cos(psi) e^{beta cos psi} sin^2 psi / int e^{beta cos psi} sin^2 psi
+          = I_2(beta)/I_1(beta).
+        Computed by quadrature, then compared with Paper 30's printed
+        values 0.124, 0.240, 0.433, 0.719 (beta = 0.5, 1, 2, 5); the
+        withdrawn MC column (0.126, 0.158, 0.332, 0.681) is rejected."""
+        from scipy import integrate
         from scipy.special import iv
-        table = {0.5: 0.126, 1.0: 0.158, 2.0: 0.332, 5.0: 0.681}
-        devs = []
-        for beta, mc in table.items():
-            lo = iv(2, beta) / iv(1, beta)
-            devs.append(abs(mc - lo) / lo)
-            assert abs(mc - lo) / lo < 0.40, (beta, mc, lo)
-        assert max(devs) > 0.20   # the beta=1 row genuinely exceeds 20%
+        # tie the weight to the production action: a plaquette of eigenangle
+        # psi (tr U_P = 2 cos psi) costs beta (1 - cos psi), so its Boltzmann
+        # weight is exp(beta cos psi) up to a constant
+        lat = GeometricLattice(max_n=3)
+        A = lat.adjacency.toarray()
+        P = enumerate_plaquettes(A, max_length=4, both_orientations=False)[0]
+        for psi, beta in ((0.7, 1.0), (2.1, 5.0)):
+            links = {(min(e.source, e.target), max(e.source, e.target)): np.eye(2, dtype=complex)
+                     for e in P}
+            e0 = P[0]
+            links[(min(e0.source, e0.target), max(e0.source, e0.target))] = \
+                su2_from_angle_axis(2.0 * psi, [0.0, 0.0, 1.0])
+            S = wilson_action([P], links, beta)
+            assert abs(S - beta * (1.0 - np.cos(psi))) < 1e-12, (S, psi, beta)
+        printed = {0.5: 0.124, 1.0: 0.240, 2.0: 0.433, 5.0: 0.719}
+        for beta, val in printed.items():
+            num, _ = integrate.quad(
+                lambda p: np.cos(p) * np.exp(beta * np.cos(p)) * np.sin(p) ** 2, 0, np.pi)
+            den, _ = integrate.quad(
+                lambda p: np.exp(beta * np.cos(p)) * np.sin(p) ** 2, 0, np.pi)
+            haar = num / den
+            assert abs(haar - iv(2, beta) / iv(1, beta)) < 1e-12
+            assert abs(haar - val) < 5e-4, (beta, haar, val)
+
+    def test_two_plaquette_loop_factorizes(self):
+        """Area law from independence: for a loop U_1 g U_2 g^-1 with U_1,
+        U_2 independent class-function-distributed plaquettes, Schur
+        orthogonality gives <W> = <W_1><W_2>, so an area-A contractible
+        loop has (I_2/I_1)^A.  Checked by averaging over Haar g."""
+        rng = np.random.default_rng(11)
+        # same-axis rotations: W(U1 U2) = cos(1.4/2) = 0.765 differs from
+        # W(U1) W(U2) = 0.879 by 0.11, so the conjugation average is resolved
+        U1 = su2_from_angle_axis(0.6, [0.0, 0.0, 1.0])
+        U2 = su2_from_angle_axis(0.8, [0.0, 0.0, 1.0])
+        assert abs(0.5 * np.trace(U1 @ U2).real
+                   - 0.25 * np.trace(U1).real * np.trace(U2).real) > 0.1
+        acc = 0.0
+        N = 40000
+        for _ in range(N):
+            g = su2_random(rng)
+            acc += 0.5 * np.trace(U1 @ g @ U2 @ g.conj().T).real
+        lhs = acc / N
+        rhs = (0.5 * np.trace(U1).real) * (0.5 * np.trace(U2).real)
+        assert abs(lhs - rhs) < 2e-2, (lhs, rhs)

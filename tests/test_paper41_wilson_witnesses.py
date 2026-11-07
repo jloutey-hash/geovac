@@ -25,9 +25,14 @@ Pin strategy (per witness):
                              carries fixed seeds 42/43.
   W7 Polyakov loop        -- homological class RECOMPUTED (H^1 defect
                              E - V + 1 - rank(d_1): 0 at N_t=2, 1 at N_t>=3,
-                             product-graph counts); confinement verdict pinned
-                             from the archived seeded JSON; reduced-stat seeded
-                             MC smoke verifies <P> ~ 0 + determinism.
+                             product-graph counts); centre symmetry (Delta S = 0,
+                             P -> e^{i phi} P) RECOMPUTED, so <P> = 0 is forced;
+                             the order parameter <|P_lat|> pinned from the
+                             archived seeded JSON (the 'confined' reading is
+                             withdrawn, 2026-11-07).
+  W1 note (2026-11-07): the sliding-window d_s passes 3 at n_max = 8; the
+                             fixed-scale gap over the scalar graph is the
+                             witness content, not a trend toward 3.
 
 Paper anchors: papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex
 (sec:spectral_dim, sec:mk_rg, sec:gaussian_wilson, sec:strong_coupling,
@@ -146,23 +151,58 @@ def test_witness1_spectral_dimension_rule_b(n_max):
     assert abs(d_W - dw_exp) < 0.02, f"d_W({n_max}) = {d_W}"
 
 
-def test_witness1_ds_monotone_toward_3_scalar_plateaus():
-    """The witness content: Rule B d_s climbs monotonically toward 3 while the
-    scalar Fock graph plateaus near 2."""
+def _return_probability(build, n_max):
+    L, A, V = build(n_max)
+    c = sdim.count_components(A)
+    ev = np.clip(np.linalg.eigvalsh(L), 0.0, None)
+    _, P = sdim.heat_kernel_return_probability(ev, V, T_GRID)
+    return P, c, V
+
+
+def test_witness1_paper_estimator_passes_3():
+    """Rebuilt 2026-11-07 (group5 guard pass; the former test asserted a
+    monotone climb TOWARD 3, which Paper 41 withdraws as an estimator
+    artifact).  With the paper's own sliding-window estimator, Rule B's d_s
+    keeps rising past 3: 2.74, 2.89, 3.04, 3.15 at n_max = 6..9.  Rejects
+    'd_s saturates at 3'."""
+    printed = {6: 2.74, 7: 2.89, 8: 3.04, 9: 3.15}
+    for n_max, val in printed.items():
+        P, c, V = _return_probability(sdim.build_rule_b_laplacian, n_max)
+        d_s = sdim.extract_spectral_dimension(T_GRID, P, c, V)["d_s_window"]
+        assert abs(d_s - val) < 0.01, (n_max, d_s)
+    assert d_s > 3.1
+
+
+def _ds_fixed_window(P, c, V, lo=0.1, hi=0.5):
+    """d_s fitted over a FIXED return-probability band lo < P - c/V < hi
+    (the same diffusion scale at every graph size)."""
+    dP = P - c / V
+    m = (dP > lo) & (dP < hi)
+    assert m.sum() >= 10
+    return -2.0 * np.polyfit(np.log(T_GRID[m]), np.log(dP[m]), 1)[0]
+
+
+def test_witness1_fixed_scale_gap_no_trend():
+    """Paper 41 W1 reading: at fixed diffusion scale Rule B is nearly flat
+    (~2.15 -> 2.30 for n_max = 3..8) and sits about 0.45 above the scalar
+    Fock graph (~1.7 -> 1.8).  Rejects a trend toward 3 (Rule B would rise
+    by far more than 0.2) and a vanishing or reversed gap.  The band is the
+    one Paper 41 states (sec:spectral_dim, 'Reading')."""
     ds_b, ds_s = [], []
+    for n_max in range(3, 9):
+        ds_b.append(_ds_fixed_window(*_return_probability(sdim.build_rule_b_laplacian, n_max)))
+        ds_s.append(_ds_fixed_window(*_return_probability(sdim.build_scalar_laplacian, n_max)))
+    ds_b, ds_s = np.array(ds_b), np.array(ds_s)
+    assert np.all((ds_b > 2.10) & (ds_b < 2.35)), ds_b
+    assert ds_b.max() - ds_b.min() < 0.2, ds_b
+    assert np.all((ds_s > 1.65) & (ds_s < 1.85)), ds_s
+    gap = float(np.mean(ds_b - ds_s))
+    assert 0.35 < gap < 0.55, gap
+    # scalar paper-estimator values (Paper 41 W1 table)
     for n_max in (3, 4, 5):
-        for build, acc in ((sdim.build_rule_b_laplacian, ds_b),
-                           (sdim.build_scalar_laplacian, ds_s)):
-            L, A, V = build(n_max)
-            c = sdim.count_components(A)
-            ev = np.clip(np.linalg.eigvalsh(L), 0.0, None)
-            _, P = sdim.heat_kernel_return_probability(ev, V, T_GRID)
-            acc.append(sdim.extract_spectral_dimension(T_GRID, P, c, V)["d_s_window"])
-    assert ds_b[0] < ds_b[1] < ds_b[2] < 3.0
-    for n_max, ds in zip((3, 4, 5), ds_s):
-        assert abs(ds - SCALAR_DS[n_max]) < 0.02
-    assert ds_s[2] < 2.0  # scalar plateaus below 2
-    assert ds_b[2] > ds_s[2] + 0.5  # Rule B decisively above scalar
+        P, c, V = _return_probability(sdim.build_scalar_laplacian, n_max)
+        d_s = sdim.extract_spectral_dimension(T_GRID, P, c, V)["d_s_window"]
+        assert abs(d_s - SCALAR_DS[n_max]) < 0.02
 
 
 # =====================================================================
@@ -392,28 +432,58 @@ def test_witness7_polyakov_homological_class():
         assert (gs["V"], gs["E"], gs["P"]) == counts_exp[gs["N_t"]]
 
 
-def test_witness7_polyakov_confinement_archive():
-    """Archived seeded MC: |<P>| = 0 within noise at all 6 non-degenerate
-    (N_t, beta) cells; N_t=2 flagged DEGENERATE (P == 1 identically);
-    seventh witness PASS."""
+def test_witness7_centre_symmetry_forces_P_zero():
+    """Rebuilt 2026-11-07 (group5 guard pass; the former test pinned the
+    driver's 'CONFINED' labels, a reading Paper 41 withdraws).  Shifting
+    every temporal link on one time slice by phi leaves the Wilson action
+    unchanged and multiplies every Polyakov loop by e^{i phi}; hence
+    <P> = 0 at every beta in finite volume and carries no phase information.
+    Rejects '<P> = 0 => confined'."""
+    rng = np.random.default_rng(3)
+    for N_t in (3, 4, 8):
+        g = poly.build_product_graph(2, N_t)
+        d_1, path = g["d_1"], g["polyakov_path"]
+        theta = rng.uniform(-np.pi, np.pi, d_1.shape[1])
+        phi = 0.731
+        shifted = theta.copy()
+        for v in range(len(path)):
+            e_idx, sign = path[v][0]          # the temporal edge on slice 0
+            shifted[e_idx] += sign * phi
+        S0 = np.sum(np.cos(poly.plaquette_angles(d_1, theta)))
+        S1 = np.sum(np.cos(poly.plaquette_angles(d_1, shifted)))
+        assert abs(S1 - S0) < 1e-10, (N_t, S1 - S0)
+        P0 = poly.measure_polyakov(theta, path)
+        P1 = poly.measure_polyakov(shifted, path)
+        assert np.allclose(P1, np.exp(1j * phi) * P0)
+
+
+def test_witness7_order_parameter_rises_with_beta():
+    """Paper 41's stored order parameter <|P_lat|> (archived seeded MC):
+    N_t = 4: 0.285, 0.498, 0.833; N_t = 8: 0.285, 0.341, 0.691 at
+    beta = 0.3, 1, 3.  The beta = 0.3 value is the independent-random-phase
+    value on V_B = 10 sites (~sqrt(pi/40)), recomputed here.  Rejects
+    'persistent confinement' (<|P_lat|> pinned at the random-phase value)."""
     d = _load("xcwg_polyakov_loop.json")
-    assert d["seventh_witness_pass"] is True
-    n_confined = n_degenerate = 0
-    for row in d["verdict_summary"]:
-        if row["degenerate_N_t_2"]:
-            assert row["N_t"] == 2
-            assert row["abs_P_mean"] == 1.0  # P == 1 kinematic identity
-            n_degenerate += 1
-        else:
-            assert row["verdict_label"] == "CONFINED"
-            n_confined += 1
-    assert n_confined == 6 and n_degenerate == 3
+    printed = {(4, 0.3): 0.285, (4, 1.0): 0.498, (4, 3.0): 0.833,
+               (8, 0.3): 0.285, (8, 1.0): 0.341, (8, 3.0): 0.691}
+    got = {(r["N_t"], r["beta"]): r["abs_lat_avg_mean"] for r in d["all_results"]
+           if r["N_t"] in (4, 8)}
+    for key, val in printed.items():
+        assert abs(got[key] - val) < 5e-4, (key, got[key])
+    V_B = len(poly.build_product_graph(2, 4)["polyakov_path"])
+    assert V_B == 10
+    rng = np.random.default_rng(5)
+    rand = np.abs(np.exp(1j * rng.uniform(0, 2 * np.pi, (200000, V_B))).mean(axis=1)).mean()
+    assert abs(rand - got[(4, 0.3)]) < 0.012, rand
+    for N_t in (4, 8):
+        assert got[(N_t, 0.3)] < got[(N_t, 1.0)] < got[(N_t, 3.0)]
+        assert got[(N_t, 3.0)] > rand + 0.3
 
 
 def test_witness7_polyakov_mc_smoke_seeded():
     """Reduced-stat seeded MC at (N_t=4, beta=1.0): Re<P>, Im<P> within 3 sigma
-    of zero (persistent confinement).  Fixed seed => deterministic; verified
-    bit-identical on rerun."""
+    of zero, as centre symmetry requires (not a confinement signal).  Fixed
+    seed => deterministic; verified bit-identical on rerun."""
     g = poly.build_product_graph(2, 4)
 
     def run():
@@ -424,7 +494,6 @@ def test_witness7_polyakov_mc_smoke_seeded():
     r = run()
     assert abs(r["re_P_mean"]) <= 3 * r["re_P_se"]
     assert abs(r["im_P_mean"]) <= 3 * r["im_P_se"]
-    assert r["abs_P_mean"] < 0.2  # far from the deconfined |<P>| ~ 1
     r2 = run()
     assert r2["re_P_mean"] == r["re_P_mean"]
     assert r2["abs_P_mean"] == r["abs_P_mean"]
@@ -472,9 +541,10 @@ def test_witness6_perimeter_dominance_from_numeric_fields():
 
 
 def test_witness7_confinement_from_numeric_fields():
-    """W7 re-derived from the archived JSON's numeric fields: every
+    """W7 table from the archived JSON's numeric fields: every
     non-degenerate (N_t, beta) cell has Re<P> and Im<P> zero within
-    2 sigma (paper: all 6 cells within 2 sigma).  Added 2026-07-04."""
+    2 sigma (paper: all 6 cells within 2 sigma), as centre symmetry
+    forces; this carries no confinement information.  Added 2026-07-04."""
     d = _load("xcwg_polyakov_loop.json")
     checked = 0
     for row in d["verdict_summary"]:

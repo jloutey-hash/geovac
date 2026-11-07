@@ -2,14 +2,23 @@
 Verification of Paper 51 §G8 + §G4-5 theorems:
 
   thm:cutoff_dep  (Theorem, §G8)
-    G_eff(f, Lambda)  = 6 pi / (phi(1) * Lambda^2)
+    G_eff(f, Lambda)  = 3 pi / (phi(1) * Lambda^2)
     Lambda_cc(f, Lambda) = 6 * phi(2)/phi(1) * Lambda^2
     R_crit * Lambda  = sqrt( phi(1) / (6 * phi(2)) )
 
-  thm:sector_mellin  (Theorem, §G4-5)
+  thm:sector_mellin  (Theorem, §G4-5; Laplace convention f = L[g])
     cosmological-constant sector  <->  phi(2)
     Einstein-Hilbert sector       <->  phi(1)
-    topological tip sector        <->  phi(0)
+    4D cigar tip                  <->  (r_h^2 Lambda^2/3) phi(1) - f(0)/18
+    (phi(0)_reg belongs to the proper-time estimator of rem. cor:phi0_ratio)
+
+Rebuilt 2026-11-07 (group5 guard pass): the rank-2 constants 6 pi and
+36 pi are withdrawn (Paper 51 traces G2 over the rank-4 bundle).  The
+load-bearing checks are now test_direct_spectral_sum_gives_G_and_Lcc, which
+derives G_eff and Lambda_cc from Tr f(D^2/Lambda^2) summed over the CH
+spectrum, and test_cigar_tip_laplace_convention, which evaluates the tip
+sector against the actual S^2 Dirac spectrum.  Both reject the rank-2
+values and the proper-time phi(0) reading of the spectral action.
 
 Paper file: papers/group5_qed_gauge/paper_51_gravity_arc.tex
   (note: the prompt said group3_foundations, but the actual location is
@@ -31,8 +40,10 @@ Tests:
   (2) Compute phi(0), phi(1), phi(2) (phi(0) only as a sanity check; the
       regulated phi(0) is what the tip sector uses).
 
-  (3) Verify the closed-form formulas G_eff, Lambda_cc, R_crit * Lambda
-      reproduce a direct heat-kernel evaluation
+  (3) [Internal-consistency only: the closed forms against themselves and
+      the table.  The theorem itself is backed by
+      test_direct_spectral_sum_gives_G_and_Lcc.]  Original plan: a direct
+      heat-kernel evaluation
         S = int_0^infty (dt/t) f_tilde(t * Lambda^2) K(t)
       truncated at the two leading Seeley-DeWitt coefficients in d=4.
       Concretely:
@@ -125,7 +136,7 @@ ANALYTIC_MOMENTS = {
 # ---------------------------------------------------------------------------
 
 def G_eff_predicted(phi1, Lambda):
-    return 6.0 * math.pi / (phi1 * Lambda ** 2)
+    return 3.0 * math.pi / (phi1 * Lambda ** 2)
 
 
 def Lambda_cc_predicted(phi1, phi2, Lambda):
@@ -202,7 +213,7 @@ def test_thm_cutoff_dep_closed_form_consistency(Lambda):
     """
     For each Lambda, verify the closed-form predictions of G_eff, Lambda_cc,
     R_crit*Lambda for all three paper cutoffs and the prompt's polynomial.
-    Internal consistency: G_eff * Lambda_cc = 36 * pi * phi(2) / phi(1)^2,
+    Internal consistency: G_eff * Lambda_cc = 18 * pi * phi(2) / phi(1)^2,
     R_crit * Lambda = sqrt( phi(1) / (6 phi(2)) ).
     """
     for name in ["gaussian", "polynomial_paper", "sharp", "polynomial_prompt"]:
@@ -213,24 +224,15 @@ def test_thm_cutoff_dep_closed_form_consistency(Lambda):
         Lc = Lambda_cc_predicted(phi1, phi2, Lambda)
         RL = Rcrit_Lambda_predicted(phi1, phi2)
 
-        # Internal consistency: product check
-        product_predicted = 36.0 * math.pi * phi2 / phi1 ** 2 / Lambda ** 2
-        product_computed  = G * Lc / Lambda ** 4 * Lambda ** 2
-        # G * Lambda^2 = 6 pi/phi1; Lc / Lambda^2 = 6 phi2/phi1
-        # product (G * Lambda^2) * (Lc / Lambda^2) = 36 pi phi2 / phi1^2
+        # G * Lambda^2 = 3 pi/phi1; Lc / Lambda^2 = 6 phi2/phi1
+        # product (G * Lambda^2) * (Lc / Lambda^2) = 18 pi phi2 / phi1^2
         prod_lhs = (G * Lambda ** 2) * (Lc / Lambda ** 2)
-        prod_rhs = 36.0 * math.pi * phi2 / phi1 ** 2
+        prod_rhs = 18.0 * math.pi * phi2 / phi1 ** 2
         assert abs(prod_lhs - prod_rhs) < 1e-12 * abs(prod_rhs), (
             f"{name}: product check failed at Lambda={Lambda}"
         )
 
-        # R_crit * Lambda from G_eff and Lambda_cc:
-        # R_crit^2 = G_eff / Lambda_cc (definition: extremum of Newton vs CC scales)
-        # => (R_crit * Lambda)^2 = G_eff * Lambda^2 / (Lambda_cc / Lambda^2)
-        #                        = (6pi/phi1) / (6 phi2/phi1) = pi / phi2
-        # But the paper's formula is R_crit * Lambda = sqrt(phi1 / (6 phi2)),
-        # so R_crit^2 = phi1 / (6 phi2 Lambda^2) (NOT G_eff/Lambda_cc).
-        # We just verify the paper's stated identity holds for the predicted RL.
+        # R_crit is the extremum of the action in R, not G_eff/Lambda_cc.
         assert abs(RL - math.sqrt(phi1 / (6.0 * phi2))) < 1e-14
 
 
@@ -276,18 +278,18 @@ def test_paper_table_R_crit_Lambda_values():
 def test_paper_table_G_eff_Lambda2_and_Lambda_cc_Lambda2():
     """
     Verify Table tab:g8_cutoffs columns G_eff*Lambda^2 and Lambda_cc/Lambda^2:
-      Gaussian:   G_eff Lambda^2 = 6pi,     Lambda_cc/Lambda^2 = 6
-      Polynomial: G_eff Lambda^2 = 12 sqrt(pi), Lambda_cc/Lambda^2 = 6/sqrt(pi)
-      Sharp:      G_eff Lambda^2 = 6pi,     Lambda_cc/Lambda^2 = 3
+      Gaussian:   G_eff Lambda^2 = 3pi,     Lambda_cc/Lambda^2 = 6
+      Polynomial: G_eff Lambda^2 = 6 sqrt(pi), Lambda_cc/Lambda^2 = 6/sqrt(pi)
+      Sharp:      G_eff Lambda^2 = 3pi,     Lambda_cc/Lambda^2 = 3
     """
     for name, (G_target, Lc_target) in {
-        "gaussian":         (6.0 * math.pi,                      6.0),
-        "polynomial_paper": (12.0 * math.sqrt(math.pi),          6.0 / math.sqrt(math.pi)),
-        "sharp":            (6.0 * math.pi,                      3.0),
+        "gaussian":         (3.0 * math.pi,                      6.0),
+        "polynomial_paper": (6.0 * math.sqrt(math.pi),           6.0 / math.sqrt(math.pi)),
+        "sharp":            (3.0 * math.pi,                      3.0),
     }.items():
         a = ANALYTIC_MOMENTS[name]
-        # G_eff * Lambda^2 = 6 pi / phi1
-        G_Lambda2 = 6.0 * math.pi / a["phi1"]
+        # G_eff * Lambda^2 = 3 pi / phi1
+        G_Lambda2 = 3.0 * math.pi / a["phi1"]
         # Lambda_cc / Lambda^2 = 6 phi2 / phi1
         Lc_Lambda2 = 6.0 * a["phi2"] / a["phi1"]
         assert abs(G_Lambda2 - G_target) < 1e-12, (
@@ -371,20 +373,12 @@ def test_mellin_plancherel_identity(name, f, upper, Lambda):
 # Sector Mellin moment map (thm:sector_mellin)
 # ---------------------------------------------------------------------------
 #
-# The theorem says:
-#   Lambda_cc sector  <->  phi(2)   [coefficient of Lambda^4 in S]
-#   G_eff sector      <->  phi(1)   [coefficient of Lambda^2 * R in S]
-#   tip sector        <->  phi(0)   [log-regulated tip integral]
-#
-# The first two are direct consequences of the Mellin-Plancherel identity
-# applied to Seeley-DeWitt coefficients a_0 (n=0) and a_2 (n=2) in d=4.
-# This is exactly what test_mellin_plancherel_identity already verifies at
-# s=1 (EH/phi(1)) and s=2 (CC/phi(2)).
-#
-# Below we verify the tip-sector phi(0) claim by checking that the
-# replica-tip integrand t^0 -- a constant in t -- when integrated against
-# the cutoff f, gives phi(0)_reg with the regulating substrate cutoffs as
-# the integration limits.
+# The theorem's (i)/(ii) are checked against the CH spectrum in
+# test_direct_spectral_sum_gives_G_and_Lcc and its (iii) in
+# test_cigar_tip_laplace_convention (below).  The two tests that follow
+# concern the PROPER-TIME estimator of remark cor:phi0_ratio, which weights
+# a constant tip by (dt/t) f(t Lambda^2) and so gives phi(0)_reg; that is a
+# property of the substrate estimator, not of the spectral action.
 
 @pytest.mark.parametrize("Lambda", [1.0, 2.0])
 def test_thm_sector_mellin_tip_phi0(Lambda):
@@ -477,60 +471,118 @@ def test_sector_mellin_ordering_qualitative():
 
 
 # ---------------------------------------------------------------------------
-# Direct heat-kernel evaluation with explicit Seeley-DeWitt in d=4
+# Direct evaluation from the CH spectrum (the load-bearing check)
 # ---------------------------------------------------------------------------
 #
-# To make "verify closed-forms reproduce direct heat-kernel-with-cutoff" as
-# concrete as possible, we synthesize a toy d=4 Seeley-DeWitt kernel
-#   K(t) = a_0 / t^2 + a_2 / t
-# with a_0 = 1, a_2 = R/6 (the scalar-Laplacian heat-kernel small-t expansion
-# on a 4-manifold of scalar curvature R). The spectral action is
-#   S(Lambda) = int_0^infty (dt/t) f_tilde(t * Lambda^2) K(t)
-#             = a_0 * Lambda^4 * phi(2) + a_2 * Lambda^2 * phi(1) + ...
-# This corresponds to Wilson coefficients
-#   c_4 = a_0 * phi(2)     [cosmological-constant coefficient]
-#   c_2 = a_2 * phi(1)     [Einstein-Hilbert coefficient]
-# in the action S = c_4 Lambda^4 + c_2 Lambda^2 R + ...
-# The Einstein-Hilbert action is -(1/16 pi G) int R, with appropriate
-# d=4 volume normalization (4pi^2 from the leading volume of S^3 etc).
-# Following the paper's normalization (Sec G7), one finds
-#   G_eff = 6 pi / (phi(1) * Lambda^2)
-#   Lambda_cc = 6 phi(2)/phi(1) * Lambda^2
-#
-# We verify the *structure* of S as a function of phi(1), phi(2) by
-# computing it via the Mellin-Plancherel identity at the relevant Wilson
-# coefficients. This is operationally equivalent to a direct heat-kernel
-# evaluation, since the Mellin-Plancherel identity IS the heat-kernel
-# evaluation.
+# The rank-4 bundle C^2 (x) C^2 is the paper's input (Paper 51 sec:g2):
+# _sigma_space_rank reads the multiplicity 2 off D^2 for that bundle, so it
+# documents the trace rather than testing the bundle choice.
 
-def test_heat_kernel_to_wilson_coefficients():
+def _sigma_space_rank() -> int:
+    """dim of the sigma factor, read off D^2 for D = D3 (x) s1 + I (x) s2 p."""
+    s1 = np.array([[0, 1], [1, 0]], dtype=complex)
+    s2 = np.array([[0, -1j], [1j, 0]], dtype=complex)
+    lam, p = 1.3, 0.8
+    D2 = (lam * s1 + p * s2) @ (lam * s1 + p * s2)
+    assert np.allclose(D2, (lam ** 2 + p ** 2) * np.eye(2))
+    return int(round(np.trace(D2).real / (lam ** 2 + p ** 2)))
+
+
+def _density_from_spectrum(f, R, Lambda, nmax=4000):
+    """Tr f(D^2/Lambda^2) per unit Euclidean time on S^3_R x R_tau.
+
+    CH spectrum |lambda_n| = (n + 3/2)/R, multiplicity 2(n+1)(n+2) (both
+    signs), tau-momentum integrated, traced over the rank-4 bundle.
     """
-    Verify that the Wilson coefficients c_4 = phi(2), c_2 = phi(1) (with
-    a_0 = 1, a_2 = 1/6 for the scalar Laplacian on a 4-manifold of unit
-    scalar curvature) reproduce the paper's formulas. We compute c_4 and
-    c_2 from a direct integral and check the implied G_eff and Lambda_cc.
+    rank = _sigma_space_rank()
+    total = 0.0
+    for n in range(nmax):
+        l2 = ((n + 1.5) / R) ** 2
+        if l2 / Lambda ** 2 > 60.0:
+            break
+        half, _ = integrate.quad(lambda w: f((l2 + w * w) / Lambda ** 2), 0.0, np.inf, limit=200)
+        total += 2 * (n + 1) * (n + 2) * 2.0 * half / (2.0 * math.pi)
+    return rank * total
+
+
+@pytest.mark.parametrize(
+    "name,f",
+    [("gaussian", f_gauss), ("polynomial_paper", f_poly_paper)],
+)
+def test_direct_spectral_sum_gives_G_and_Lcc(name, f):
     """
-    # Use the Mellin-Plancherel identity directly:
-    # c_4 = phi(2), c_2 = (1/6) * phi(1) for unit R
-    # Then G_eff = 1/(16 pi c_2 / R) ... but the absolute proportionality
-    # depends on the volume factors from S^3 x S^1_beta, which the paper
-    # collects into the constant 6 pi (G_eff) and 6 (Lambda_cc / phi(2)/phi(1)).
-    # Here we just verify the SHAPE: G_eff is proportional to 1/phi(1),
-    # Lambda_cc is proportional to phi(2)/phi(1).
-    for name in ["gaussian", "polynomial_paper", "sharp", "polynomial_prompt"]:
-        a = ANALYTIC_MOMENTS[name]
-        phi1, phi2 = a["phi1"], a["phi2"]
-        Lambda = 2.0  # arbitrary
+    thm:cutoff_dep from the spectrum, not from its own closed form.
 
-        # Paper's closed form
-        G  = G_eff_predicted(phi1, Lambda)
-        Lc = Lambda_cc_predicted(phi1, phi2, Lambda)
+    s(R) = A R^3 + B R is fitted to the summed spectral action at two radii,
+    then matched to Einstein--Hilbert + cosmological constant on S^3_R x R:
+      -(1/16 pi G) * (6/R^2) * 2 pi^2 R^3 = B R      =>  G = -3 pi / (4 B)
+      (Lcc / 8 pi G) * 2 pi^2 R^3          = A R^3    =>  Lcc = 4 G A / pi
+    and compared with 3 pi/(phi(1) Lambda^2) and 6 phi(2)/phi(1) Lambda^2.
+    Rejects the rank-2 values (G Lambda^2 = 6 pi/phi(1)).  The sharp cutoff
+    is not tested: Theorem thm:cutoff_dep is stated for smooth f.
+    """
+    Lambda = 8.0
+    R1, R2 = 1.0, 2.0
+    s1 = _density_from_spectrum(f, R1, Lambda)
+    s2 = _density_from_spectrum(f, R2, Lambda)
+    A, B = np.linalg.solve(np.array([[R1 ** 3, R1], [R2 ** 3, R2]]), np.array([s1, s2]))
+    G = -3.0 * math.pi / (4.0 * B)
+    Lcc = 4.0 * G * A / math.pi
+    a = ANALYTIC_MOMENTS[name]
+    assert abs(G * Lambda ** 2 - 3.0 * math.pi / a["phi1"]) < 1e-6 * 3.0 * math.pi, (
+        f"{name}: G Lambda^2 = {G * Lambda ** 2}"
+    )
+    assert abs(Lcc / Lambda ** 2 - 6.0 * a["phi2"] / a["phi1"]) < 1e-6, (
+        f"{name}: Lcc/Lambda^2 = {Lcc / Lambda ** 2}"
+    )
+    RL = math.sqrt(-B / (3.0 * A)) * Lambda
+    assert abs(RL - math.sqrt(a["phi1"] / (6.0 * a["phi2"]))) < 1e-7
 
-        # Verify the proportionality structure (shape)
-        # G_eff * phi(1) * Lambda^2 = 6 pi    (Lambda- and cutoff-independent)
-        # Lambda_cc * phi(1) / phi(2) / Lambda^2 = 6
-        assert abs(G * phi1 * Lambda ** 2 - 6.0 * math.pi) < 1e-12 * 6.0 * math.pi
-        assert abs(Lc * phi1 / phi2 / Lambda ** 2 - 6.0) < 1e-12 * 6.0
+
+# Laplace-convention cutoffs f = L[g] with known g, phi(1) and f(0).
+#   g(s) = s e^{-s}         -> f(x) = (1+x)^-2, phi(1) = 1,   f(0) = 1
+#   g(s) = s^2 e^{-s} / 2   -> f(x) = (1+x)^-3, phi(1) = 1/2, f(0) = 1
+#   g(s) = 2 s e^{-2s}      -> f(x) = 2/(2+x)^2, phi(1) = 1, f(0) = 1/2
+#   (the last separates -f(0)/18 from an f-independent -1/18)
+LAPLACE_CUTOFFS = [
+    (lambda s: s * np.exp(-s), 1.0, 1.0),
+    (lambda s: 0.5 * s * s * np.exp(-s), 0.5, 1.0),
+    (lambda s: 2.0 * s * np.exp(-2.0 * s), 1.0, 0.5),
+]
+
+
+def _s2_dirac_heat_trace(t, r_h):
+    """K_{S^2}(t) = sum_m 4 m exp(-m^2 t / r_h^2), the S^2 Dirac spectrum,
+    summed until the terms are below e^-60."""
+    mmax = int(r_h * math.sqrt(60.0 / t)) + 10
+    m = np.arange(1, mmax + 1, dtype=float)
+    return float(np.sum(4.0 * m * np.exp(-m * m * t / r_h ** 2)))
+
+
+@pytest.mark.parametrize("g,phi1,f0", LAPLACE_CUTOFFS)
+def test_cigar_tip_laplace_convention(g, phi1, f0):
+    """
+    thm:sector_mellin (iii): the replica tip on the 4D cigar is
+    (1/6) K_{S^2}(t); in the spectral action S = int g(s) K(s/Lambda^2) ds it
+    gives (r_h^2 Lambda^2/3) phi(1) - f(0)/18.  K_{S^2} is summed from the
+    S^2 Dirac spectrum here, not taken from its asymptotic form.
+    Rejects the reading 'tip <-> phi(0)' (phi(0) diverges for these f) and
+    a missing or mis-signed subleading -f(0)/18.
+    """
+    # The remainder is the O(t) heat-trace term, of order 1/(r_h Lambda)^2;
+    # at r_h Lambda = 30 it is ~1e-5, well below the f(0)/18 = 0.056 tested.
+    r_h, Lambda = 3.0, 10.0
+    val, _ = integrate.quad(
+        lambda s: g(s) * _s2_dirac_heat_trace(s / Lambda ** 2, r_h) / 6.0,
+        1e-9, 80.0, limit=400, points=[1.0, 5.0, 20.0],
+    )  # g(s) < 1e-30 beyond s = 80; [0, 1e-9] contributes < 1e-12
+    predicted = r_h ** 2 * Lambda ** 2 / 3.0 * phi1 - f0 / 18.0
+    assert abs(val - predicted) < 1e-3, (val, predicted)
+    # and the subleading term is resolved: dropping it misses by f(0)/18
+    assert abs(val - (predicted + f0 / 18.0)) > 0.02
+    # and it scales with f(0): an f-independent -1/18 misses when f(0) != 1
+    if f0 != 1.0:
+        assert abs(val - (predicted + f0 / 18.0 - 1.0 / 18.0)) > 0.02
 
 
 # ---------------------------------------------------------------------------
@@ -580,7 +632,7 @@ def test_summary_verdict_print():
     for name in ["gaussian", "polynomial_paper", "polynomial_prompt", "sharp"]:
         a = ANALYTIC_MOMENTS[name]
         phi1, phi2 = a["phi1"], a["phi2"]
-        G_L2  = 6.0 * math.pi / phi1
+        G_L2  = 3.0 * math.pi / phi1
         Lc_L2 = 6.0 * phi2 / phi1
         RL    = math.sqrt(phi1 / (6.0 * phi2))
         print(f"{name:<22} {phi1:>10.6f} {phi2:>10.6f} "

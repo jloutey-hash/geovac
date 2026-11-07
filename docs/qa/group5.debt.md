@@ -5,19 +5,14 @@ Verdict FAIL, remediated (CHANGELOG v6.5.0). This file holds what the remediatio
 close: owed computations (PI-approved "re-tier now, owe sprints"), owed guards for the
 guard pass, PI decisions outstanding, and SMALL findings not fixed on sight.
 
-## PI decisions outstanding
+## PI decisions (resolved 2026-11-07, all on PM recommendation)
 
-1. **Retitles.** Three titles now overstate their papers:
-   - Paper 36 "One-Loop Closure of the Hydrogen Lamb Shift" (the headline is the leading
-     one-loop assembly with literature Bethe logs; the residual is unattributed).
-     Bibitems citing this title: Paper 7, Paper 32, group5 synthesis. C16 entry
-     `g5-p36-lamb-closure-and-ls7` deliberately does not match the title until the PI rules.
-   - Paper 33 "The 1+6+1 Partition ... the Dirac Spinor Phase Constraint" (Tier III is an
-     alpha_z vertex-model identity).
-   - Paper 41 "... Structural Compatibility with 3D Compact U(1) ..." (no 3D-vs-4D
-     discrimination).
-2. **The 1/(24 pi t) criteria amendment** in `group5.done.md` is PM-verified, not yet
-   PI-confirmed (the rank clause next to it is PI-approved).
+1. Retitles applied: Paper 33 "... Graph Topology, Angular Momentum, and the Diagonal alpha_z Vertex";
+   Paper 36 "Bound-State QED on S^3: The Leading One-Loop Hydrogen Lamb Shift"; Paper 41 "... Compatibility
+   with Compact U(1) on a Non-Cubic Substrate, Including Monopole-Density and Polyakov-Loop Diagnostics".
+   Bibitems updated (Papers 7, 32, group5 synthesis); old titles blocked by C16 `g5-retired-titles-33-36-41`.
+2. The 1/(24 pi t) criteria amendment is PI-confirmed.
+3. MINOR bump v6.5.0 confirmed.
 
 ## Owed computations (pre-register before running)
 
@@ -38,33 +33,27 @@ guard pass, PI decisions outstanding, and SMALL findings not fixed on sight.
 - **P51 sector-wise Mellin (iii)** re-scoped to the bare 2D tip (phi(0)) vs the 4D cigar's
   leading phi(1); re-check the empirical F14 "sub-5%" claim against this split.
 
-## Owed guards (guard pass; each fire-tested against the wrong answer it excludes)
+## Guards (guard pass DONE 2026-11-07, v6.5.1)
 
-Priority -- tests that currently pin RETIRED values (they pass but assert what the papers
-now withdraw):
-- `tests/test_paper51_dS_vacuum.py`: hard-codes s = (R^3/4)L^4 - (R/8)L^2 and s_min = -L/(12 sqrt6).
-  Rebuild from the CH spectrum with the rank-4 trace (factor 2) -> -L/(6 sqrt6); fire against rank 2.
-- `tests/test_paper51_cutoff_mellin.py`: G_eff = 6 pi/(phi(1) L^2) and the 36 pi product -> 3 pi, 18 pi.
-- `tests/test_paper51_replica_sbh.py::test_g7_factor_of_two_bookkeeping`: asserts the factor 2;
-  replace with action-route G == entropy-route G (3 pi/L^2) under the rank-4 trace.
-- `tests/test_su2_wilson_gauge.py::test_mc_vs_leading_order_character_expansion_band`: asserts
-  max deviation > 20% (an unconverged chain). Replace with: plaquettes form a cycle basis of each
-  l-block (rank = beta_1 at n_max = 3, 4, 5) and <W> = I2/I1 exactly (Haar integral).
-- `tests/test_paper41_wilson_witnesses.py`: W1 trend test (`ds_b[2] < 3.0`, "climbs") and the W7
-  "|<P>| = 0 => confined" tests. Replace with the fixed-window gap (~0.45) and the centre-symmetry
-  identity plus the stored <|P_lat|> values.
+Rebuilt (each fire-tested against the retired value; 22/22 plants fire; independent review 0 LARGE / 9 SMALL,
+7 fixed): `test_paper51_dS_vacuum.py` (from the CH spectrum, rank-4 trace), `test_paper51_cutoff_mellin.py`
+(direct spectral sum -> G_eff, Lcc; Laplace-convention cigar tip incl. f(0) != 1), `test_paper51_replica_sbh.py`
+(action-route G == entropy-route G), `test_su2_wilson_gauge.py` (cycle basis at n_max = 3, 4, 5; Haar I2/I1 tied
+to `wilson_action`; Schur factorization), `test_paper41_wilson_witnesses.py` (paper estimator passes 3; fixed-band
+gap; centre symmetry; <|P_lat|>). New: `test_paper2_dirac_cumulative.py`, `test_paper36_a50_term.py`,
+`test_paper51_tt_heat_trace.py`.
 
-New numbers printed in papers that need a backing test:
-- P30: <W> = (I2/I1)^Area on planar l-blocks; beta_1 = sum_l 2l(n_max - l - 1); long-chain MC values.
-- P51: continuum tip = 1/6 at t/R^2 = 0.01, 0.02, 0.05 (exact Bessel zeros); a0 continuum 1.888
-  at R=10, t=0.1; K_TT from m^2-3, multiplicity 2(m^2-4); B4 error ratio -> sqrt2.
-- P41: d_s at n_max = 6..9 with the paper's estimator; fixed-window d_s; <|P_lat|> archive values;
-  centre-symmetry Delta S = 0; correlator normalization (1/800).
+Still owed (backing for printed numbers, not pins of retired values):
+- P30: long-chain MC values (0.232-0.249, 0.429-0.452, three 20 000-sample chains) have no test; the area-2 loop
+  check uses the Schur identity on hand-picked matrices, not the lattice's actual 6-cycle.
+- P51: continuum tip = 1/6 at t/R^2 = 0.01, 0.02, 0.05 (exact Bessel zeros); a0 continuum 1.888 at R=10, t=0.1;
+  B4 error ratio -> sqrt2. The rank-4 bundle and the total-spinor cone coefficient 1/12 are inputs no test checks.
+  Possible naming SMALL: the TT spectrum m^2 - 3 is labelled 'Lichnerowicz' (verify the -nabla^2 vs Delta_L
+  convention on unit S^3).
+- P41: correlator normalization (1/800); centre-symmetry and P_lat now backed.
 - P33: diagonal-current M1 projection (-4/3 for the ground state, fg = 1).
 - P28: physical-vertex coupling at q = n1+n2+1 (vertex_amp_polarized nonzero for 0 -> 0 at q = 1).
-- P36: A50 = 4 pi (139/128 - ln2/2) and its ~ +6.9 MHz 2S contribution; native-log Lamb ~1055.6;
-  2S acceleration-form N=50 residual +2.98%.
-- P2: Dirac/Weyl cumulative degeneracy closed forms (corrected).
+- P36: native-log Lamb ~1055.6; 2S acceleration-form N=50 residual +2.98% (A50 now backed).
 
 Code defects found (not fixed in this run; production code):
 - `tests/wilson_rule_b_support/xcwg_polyakov_loop.py:617-618` divides the correlator by n_sample twice.

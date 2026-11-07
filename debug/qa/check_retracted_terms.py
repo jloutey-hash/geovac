@@ -9994,6 +9994,33 @@ REGISTRY = [
             'papers/group3_foundations/paper_57_forced_free_seam.tex': 'remediated + reviewed 2026-11-07 (/qa group5 FULL, self-check round 2) -- free-gravity paragraph',
         },
     },
+    {
+        "id": 'g5-retired-titles-33-36-41',
+        "pattern": 'One-Loop\\s+Closure\\s+of\\s+the\\s+Hydrogen|Angular\\s+Momentum,\\s+and\\s+the\\s+Dirac\\s+Spinor\\s+Phase\\s+Constraint|Compatibility\\s+with\\s+3D\\s+Compact|Polyakov\\s+Monopole-Density\\s+Signature',
+        "exempt_if_nearby": withdrawal_marker('g5-retired-titles-33-36-41'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": "Registered 2026-11-07 (PI-approved retitles after /qa group5 FULL #1). Paper 33 Tier III is a diagonal alpha_z vertex-model identity, not a Dirac spinor phase constraint; Paper 36's headline is the leading one-loop assembly, not a closure; Paper 41 has no 3D-versus-4D discrimination and its Polyakov-loop confinement reading is withdrawn. Retired: the three old titles.",
+        "files": [
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/forced_free_seam.md',
+            'docs/atlas.md',
+            'docs/claims_register.md',
+            'docs/topic_to_paper_lookup.md',
+            'docs/validation_benchmarks.md',
+            'README.md',
+            'papers/INDEX.md',
+        ],
+        "cited_by": {
+            'papers/group5_qed_gauge/paper_33_qed_selection_rules.tex': 'retitled + reviewed 2026-11-07 (PI-approved) -- owner title',
+            'papers/group5_qed_gauge/paper_36_bound_state_qed.tex': 'retitled + reviewed 2026-11-07 (PI-approved) -- owner title',
+            'papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex': 'retitled + reviewed 2026-11-07 (PI-approved) -- owner title',
+            'papers/synthesis/group5_qed_gauge_synthesis.tex': 'bibitems updated + reviewed 2026-11-07 -- loutey_paper33/36/41',
+            'papers/group1_operator_algebras/paper_32_spectral_triple.tex': 'bibitem updated + reviewed 2026-11-07 -- paper36',
+            'papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex': 'bibitem updated + reviewed 2026-11-07 -- loutey_paper36',
+        },
+    },
 ]
 
 
