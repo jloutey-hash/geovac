@@ -57,22 +57,22 @@ plus the discrete-substrate opening G4-3, all completed
 three-sphere $\sthree$ the Camporesi--Higuchi spinor spectrum
 $|\lambda_n| = n + 3/2$ with multiplicity $2(n+1)(n+2)$ produces a
 spectral zeta identity $\zeta_{\rm unit}(-k) = 0$ for every
-$k \geq 0$, which forces the Chamseddine--Connes spectral action on
-$\sthree_R$ to be \emph{exactly} two-term at every cutoff and
-extremize at $u_{\rm crit} = R\Lambda = 1/\sqrt{6}$ (G1). This
-extends the ``remarkable cancellations'' that Chamseddine and
-Connes~\cite{chamseddine_connes2008_uncanny} observed on $\sthree$
-and $\sthree \times S^1$ from an asymptotic phenomenon to an exact
-structural identity at every order, with the Bernoulli identity
-$B_{2k+1}(3/2) = (2k{+}1)/4^k$ supplying the algebraic mechanism;
-the present paper's contribution is the mechanism, not the
-observation. The two-term exactness propagates to
+$k \geq 0$, so the Chamseddine--Connes spectral action on
+$\sthree_R$ is two-term up to exponentially small corrections, and its
+two-term form has a formal extremum at $u_{\rm crit} = R\Lambda =
+1/\sqrt{6}$ (G1; the exact action is monotonic in $R$). Chamseddine and
+Connes~\cite{chamseddine_connes2008_uncanny} already showed that the
+expansion terminates after two terms at every order, up to rapidly
+decaying corrections (``all higher order terms vanish'' on
+$\sthree \times S^1$); the present paper's contribution is an
+alternative algebraic proof of the vanishing, through the Bernoulli
+identity $B_{2k+1}(3/2) = (2k{+}1)/4^k$. The two-term exactness propagates to
 $\sthree \times S^{1}_{\beta}$ by
 heat-kernel factorization, recovering Einstein--Hilbert plus a
 cosmological constant with no higher-curvature corrections at any
 order (G2), and survives the $\beta \to \infty$ decompactification
 to a zero-temperature de Sitter vacuum on $\sthree \times \mathbb{R}_\tau$
-with closed-form minimum action density $s_{\min} = -\Lambda/(12\sqrt{6})$
+with closed-form minimum action density $s_{\min} = -\Lambda/(6\sqrt{6})$
 (G5). The two-term exactness is spinor-bundle-specific: scalar and
 transverse-traceless tensor heat traces inherit the standard
 Connes--Chamseddine infinite Seeley--DeWitt expansion (G3,
@@ -95,12 +95,13 @@ The Fierz--Pauli decomposition (TT vs.\ trace vs.\ longitudinal)
 therefore requires the metric identification $\delta D \leftrightarrow
 \delta g_{\mu\nu}$, not just the spectral action.
 The Newton constant
-$\Geff = 6\pi/\Lambda^2$ and the cosmological constant $\Lcc = 6\Lambda^2$
-emerge from the G2 coefficients (G7), with the standard
+$\Geff = 3\pi/\Lambda^2$ and the cosmological constant $\Lcc = 6\Lambda^2$
+emerge from the G2 coefficients (G7), traced over the rank-4 Dirac
+spinor bundle; $\Geff$ then equals the entropy-route $G_N$ of G4-2, with the standard
 cosmological-constant-scale gap inherited from Connes--Chamseddine.
 For an arbitrary cutoff function $f$ with Mellin moments
 $\phi(s) = \int_0^\infty f(x) x^{s-1} dx$, the gravity predictions
-generalize to $\Geff = 6\pi/(\phi(1) \Lambda^2)$,
+generalize to $\Geff = 3\pi/(\phi(1) \Lambda^2)$,
 $\Lcc = 6 \phi(2)/\phi(1) \cdot \Lambda^2$, and
 $\Rcrit \Lambda = \sqrt{\phi(1)/(6\phi(2))}$; \emph{no} simple
 combination is cutoff-independent, classifying the cutoff function as
@@ -110,9 +111,11 @@ $\mathcal{G}_{\rm cigar} = \mathbb{Z}_+(a)|_{N_\rho} \times \mathbb{Z}/N_\phi
 \times \mathrm{Fock}(S^2, l_{\max})$ is operational at sprint scale
 through five closed sub-sprints (G4-3a / cleanup / b / c / d, plus
 the G4-3d-UV extension): Hermitian polar Laplacian built, variable
-warp realized, and the continuum Weyl law $K(t) \sim A/(4\pi t)$
-verified within $1\%$ at the sweet-spot $t \approx 0.1$,
-$N_\phi = 192$. The wedge-lattice proper conical-defect test
+warp realized, and the leading Weyl term $K(t) \sim A/(4\pi t)$
+reproduced at the scale of the boundary correction (the $1\%$
+agreement once quoted at $t \approx 0.1$, $N_\phi = 192$ compared
+against the bulk term alone and omitted the $\sim 5.6\%$ Dirichlet
+perimeter term). The wedge-lattice proper conical-defect test
 (G4-3c-proper) has the correct sign at every apex angle $\alpha$
 but shows that on the \emph{scalar} side the literal Sommerfeld--Cheeger
 $(1/12)(1/\alpha - \alpha)$ extraction sits below the bulk-subtraction
@@ -122,9 +125,10 @@ the situation reverses dramatically: the G4-4 sub-sprint sequence
 (14 sub-sprints across G4-4a/b/c/d/e/f) closes the warped Dirac
 program at sprint scale, identifying the spinor conical-defect tip
 coefficient $\Delta_K^{\rm Dirac, tip}(\alpha) =
--(1/12)(1/\alpha - \alpha)$ at \emph{5 significant figures}
-(opposite sign from scalar SC, identical magnitude; sweet spot
-$\alpha = 2/5$, $t = 2.0$, rel.\ err.\ $2.1 \times 10^{-5}$) and
+-(1/12)(1/\alpha - \alpha)$ (opposite sign from scalar SC, identical
+magnitude), with the discrete value converging to it as $a \to 0$
+(the $2.1 \times 10^{-5}$ agreement at $\alpha = 2/5$, $t = 2.0$ is
+the point where a radial sweep crosses the target) and
 extracting the replica-method derivative
 $d \Delta_K^{\rm Dirac}/d\alpha|_{\alpha = 1} = +1/6$ at 96.69\%
 recovery. The half-integer angular momentum + anti-periodic spinor
@@ -192,8 +196,11 @@ The continuum arc produces the following structural results.
         spectral action on $\sthree_R$ becomes
         $S(R, \Lambda) = \phi(3/2)(\Lambda R)^3 - \frac{1}{4}\phi(1/2)
         (\Lambda R) + O(e^{-\Lambda^2 R^2})$, with no higher-curvature
-        power corrections at any order. The action extremizes at
-        $\Rcrit \Lambda = 1/\sqrt{6}$ (formal de Sitter selection).
+        power corrections at any order (all-order vanishing first
+        shown by Chamseddine--Connes; the Bernoulli route is an
+        alternative proof). The two-term form has a formal extremum at
+        $\Rcrit \Lambda = 1/\sqrt{6}$; the exact action is monotonic in
+        $R$.
         (SYMBOLIC PROOF;
         \texttt{tests/test\_paper51\_zeta\_unit\_neg\_k.py}.)
 
@@ -224,17 +231,17 @@ The continuum arc produces the following structural results.
         Sommerfeld--Cheeger conical-defect contribution
         $(1/12)(1/\alpha - \alpha)$ at the cigar tip, the replica
         method gives $S_{\BH} = A \Lambda^2/(12\pi)$, with Newton
-        constant $G_N = 3\pi/\Lambda^2$ (Planck-scale; the factor of
-        $2$ relative to G7 is a \emph{forced bookkeeping artifact}, not
-        calibration, by Wald's theorem in the two-term-exact
-        Einstein-gravity sector --- see \S\ref{sec:g4}).
+        constant $G_N = 3\pi/\Lambda^2$ (Planck-scale; equal to the
+        action-route $\Geff$ of G7 once the G2 trace is taken over the
+        rank-4 Dirac bundle, as Wald's theorem requires in the
+        two-term-exact Einstein-gravity sector --- see \S\ref{sec:g4}).
         (INTERNAL THEOREM, continuum-level.)
 
   \item \textbf{Decompactified de Sitter vacuum} (G5): the
         $\beta \to \infty$ decompactification of the G2 product
         gives a zero-temperature de Sitter vacuum on
         $\sthree \times \mathbb{R}_\tau$ with closed-form minimum
-        action density $s_{\min} = -\Lambda/(12\sqrt{6})$.
+        action density $s_{\min} = -\Lambda/(6\sqrt{6})$.
         (SYMBOLIC PROOF;
         \texttt{tests/test\_paper51\_dS\_vacuum.py}.)
 
@@ -262,14 +269,14 @@ The continuum arc produces the following structural results.
         \texttt{tests/test\_paper51\_j\_blindness.py}.)
 
   \item \textbf{Newton constant and cosmological constant} (G7):
-        $\Geff = 6\pi/\Lambda^2$ and $\Lcc = 6\Lambda^2$ for Gaussian
+        $\Geff = 3\pi/\Lambda^2$ and $\Lcc = 6\Lambda^2$ for Gaussian
         cutoff. The cosmological-constant-scale gap of $\sim 10^{120}$
         between predicted $\Lcc/M_{\rm Planck}^2 = 6$ and observed
         $\sim 10^{-120}$ is the standard Connes--Chamseddine issue,
         inherited not GeoVac-specific. (INTERNAL THEOREM.)
 
   \item \textbf{Cutoff dependence} (G8): for arbitrary cutoff $f$,
-        $\Geff = 6\pi/(\phi(1) \Lambda^2)$,
+        $\Geff = 3\pi/(\phi(1) \Lambda^2)$,
         $\Lcc = 6 \phi(2)/\phi(1) \cdot \Lambda^2$,
         $\Rcrit \Lambda = \sqrt{\phi(1)/(6 \phi(2))}$. No simple
         combination is cutoff-independent. The cutoff function is
@@ -430,11 +437,12 @@ so $\Rcrit \Lambda = 1/\sqrt{6}$.
 \begin{remark}[Relation to Chamseddine--Connes 2008]
 \label{rem:cc_uncanny}
 Chamseddine and Connes~\cite{chamseddine_connes2008_uncanny}
-observed that $a_4$ and $a_6$ vanish on $\sthree$ (and all higher
-$a_{2n}$ on $\sthree \times S^1$), calling these ``remarkable
-cancellations.'' The Bernoulli mechanism in
-Theorem~\ref{thm:zeta_unit_neg_k} identifies the algebraic
-origin of these cancellations at all orders: the identity
+showed that the spectral action on $\sthree$ and $\sthree \times S^1$
+is given by two terms up to rapidly decaying corrections, so that all
+higher Seeley--DeWitt terms vanish (checking $a_4$, $a_6$ against the
+heat-kernel expansion as ``remarkable cancellations''). The Bernoulli
+argument of Theorem~\ref{thm:zeta_unit_neg_k} is an alternative
+algebraic proof of the same all-order vanishing: the identity
 $B_{2k+1}(3/2) = (2k{+}1)/4^k$ (from $B_{2k+1}(1/2) = 0$ plus
 the shift formula) forces exact pairwise cancellation in the
 Hurwitz decomposition at every non-positive integer.
@@ -490,12 +498,16 @@ as a classical action selection.
 % =====================================================================
 
 The Euclidean thermal product geometry $\sthree \times S^{1}_{\beta}$
-has Dirac operator $D = D_{\sthree} \otimes I + \gamma_{\sthree}
-\otimes (-i \partial_\tau)$ with $\tau \in [0, \beta)$. Its heat
-kernel factorizes:
+has Dirac operator $D = D_{\sthree} \otimes \sigma_1 + I \otimes
+\sigma_2\,(-i \partial_\tau)$ with $\tau \in [0, \beta)$, acting on
+the rank-4 bundle $\mathbb{C}^2 \otimes \mathbb{C}^2$ (two-component
+$\sthree$ spinors tensored with $\mathbb{C}^2$; odd-dimensional
+$\sthree$ has no chirality operator, so a rank-2 product is not a
+Dirac operator). Then $D^2 = D_{\sthree}^2 \otimes I - \partial_\tau^2$
+and the heat kernel factorizes with a factor $2$:
 \begin{equation}
-  K_{\sthree \times S^1}(t) = K_{\sthree}(t) \cdot K_{S^1}(t)
-                            = K_{\sthree}(t) \cdot \frac{\beta}{\sqrt{4\pi t}}.
+  K_{\sthree \times S^1}(t) = 2\,K_{\sthree}(t) \cdot K_{S^1}(t)
+                            = 2\,K_{\sthree}(t) \cdot \frac{\beta}{\sqrt{4\pi t}}.
 \end{equation}
 
 \begin{corollary}[4D spectral action with exact two-term structure ---
@@ -504,8 +516,8 @@ INTERNAL THEOREM]
 The Chamseddine--Connes spectral action on $\sthree_R \times S^1_\beta$
 for Gaussian cutoff equals
 \begin{equation}
-  S(R, \beta, \Lambda) = \frac{\beta R^3}{4} \Lambda^4
-                       - \frac{\beta R}{8} \Lambda^2
+  S(R, \beta, \Lambda) = \frac{\beta R^3}{2} \Lambda^4
+                       - \frac{\beta R}{4} \Lambda^2
                        + O(\text{exp small}).
   \label{eq:4D_action}
 \end{equation}
@@ -514,7 +526,7 @@ constant form, with no higher-curvature corrections at any order.
 \end{corollary}
 
 The classical de Sitter extremum (varying $R$ at fixed $\Lambda$ and
-$\beta$) gives $\frac{d}{dR}[\beta R^3/4 \cdot \Lambda^4 - \beta R/8
+$\beta$) gives $\frac{d}{dR}[\beta R^3/2 \cdot \Lambda^4 - \beta R/4
 \cdot \Lambda^2] = 0$, yielding $\Rcrit \Lambda = 1/\sqrt{6}$ exactly
 as in G1. The matching against Einstein--Hilbert plus cosmological
 constant identifies the two terms with the GeoVac-determined values
@@ -574,9 +586,10 @@ heat trace has the form
                               - 4\sqrt{\pi} t^{-1/2} + 4\right]
                + 6 e^{2t} + O(e^{-\pi^2/t}),
 \end{align}
-which mixes half-integer Jacobi $\vartheta_2$ content (from spinor-like
-half-shifts in the parts of the spectrum) with integer $\vartheta_3$
-content (from integer-spaced multiplicities) and discrete corrections.
+which is pure integer $\vartheta_3$ content: writing the spectrum as
+$m^2 - 3$ ($m \ge 3$) with multiplicity $2(m^2-4)$, the full-lattice
+sum is a $\vartheta_3$ series, and the $+4$ and $6e^{2t}$ terms are the
+excluded $m = 1, 2$ modes.
 
 \begin{remark}[Structural distinction]
 The two-term exactness theorem holds only for the Dirac sector (half-integer
@@ -666,13 +679,16 @@ with horizon area $A = 4 \pi r_h^2$.
 \begin{equation}
   G_N = \frac{3 \pi}{\Lambda^2},
 \end{equation}
-Planck-scale Newton constant. This differs by a factor of $2$ from the
-$\Geff = 6\pi/\Lambda^2$ of the Einstein--Hilbert route (G7,
-\S\ref{sec:g7}).
+Planck-scale Newton constant. For the Gaussian cutoff this equals the
+$\Geff = 3\pi/\Lambda^2$ of the Einstein--Hilbert route (G7,
+\S\ref{sec:g7}) once the G2 trace is taken over the rank-4 Dirac
+bundle.
 
-\begin{remark}[The factor of $2$ is Wald-forced, not a cone coefficient]
-A natural first reading attributes this factor to a scalar-vs-Dirac
-conical-defect coefficient. That reading is \emph{incorrect}: the 2D
+\begin{remark}[The former factor of $2$ was the G2 spinor rank]
+An earlier printing traced G2 over a rank-2 bundle, giving
+$\Geff = 6\pi/\Lambda^2$, twice the entropy-route value; the rank-4 % [retracted 2026-11-07: g5-geff-rank2-6pi]
+Dirac trace removes the factor. A first reading had attributed it to a
+scalar-vs-Dirac conical-defect coefficient. That reading was \emph{incorrect}: the 2D
 Dirac and scalar cones share the conical-coefficient \emph{magnitude}
 $(1/12)\,|1/\alpha - \alpha|$ (the discrete spinor extraction carries
 the opposite sign in the anti-periodic convention; \S\ref{sec:g4_4}),
@@ -680,21 +696,16 @@ confirmed three independent ways --- by
 central charge ($c = 1$ for both a free 2D Dirac fermion and a free
 real scalar), by Fursaev--Miele~\cite{fursaev_miele1996} (``spin $1/2$
 resembles the scalar case''), and by the discrete-substrate spinor
-extraction of G4-4 ($-1/12$, bit-exact, the anti-periodic half-integer
-spectrum being structurally essential). The factor of $2$ is instead
-\emph{forced to be a bookkeeping artifact} by Wald's
-theorem~\cite{wald1993}: the Dirac-sector spectral action is two-term
-exact (G1--G2: Einstein--Hilbert plus cosmological constant, no higher
-curvature), so the geometry is pure Einstein gravity, where the $G$ in
-the action and the $G$ in $S_{\BH} = A/(4G)$ are \emph{identically
-equal}. The action-route $G$ (G7, the $\phi(1)$ Mellin channel) and the
-entropy-route $G$ (G4-2, the $\phi(0)$ channel) are therefore not
-independent calibration data; their discrepancy is a normalization
-mismatch between the 4D-bulk ($\sthree \times S^1$) and factorized
-2D$\times$2D ($D^2 \times S^2$) spectral-action setups --- most
-plausibly the distribution of the 4D Dirac spinor trace
-$a_0 = 4 = 2 \otimes 2$ across the factorized product --- and closing it
-is a convention-alignment computation, not a free choice. The
+extraction of G4-4 ($-1/12$, approached as $a \to 0$, the anti-periodic half-integer
+spectrum being structurally essential). Wald's
+theorem~\cite{wald1993} required the two routes to agree: the
+Dirac-sector spectral action is two-term exact (G1--G2:
+Einstein--Hilbert plus cosmological constant, no higher curvature), so
+the geometry is pure Einstein gravity, where the $G$ in the action and
+the $G$ in $S_{\BH} = A/(4G)$ are \emph{identically equal}. The
+mismatch was the 4D Dirac spinor trace $a_0 = 4 = 2 \otimes 2$, which
+G4-2's factorized $D^2 \times S^2$ setup carried and the earlier G2
+trace did not; with it the two routes agree for the Gaussian cutoff. The
 load-bearing structural finding remains the emergence of $A \Lambda^2$
 from the conical tip via the replica method.
 \end{remark}
@@ -709,7 +720,7 @@ The $\beta \to \infty$ decompactification of G2 sends $S^1_{\beta} \to
 $K_{\mathbb{R}}(t) = 1/(2\sqrt{\pi t})$, matching $K_{S^1}/\beta$ in
 the limit. The spectral action density becomes
 \begin{equation}
-  s(R, \Lambda) = \frac{R^3}{4} \Lambda^4 - \frac{R}{8} \Lambda^2,
+  s(R, \Lambda) = \frac{R^3}{2} \Lambda^4 - \frac{R}{4} \Lambda^2,
 \end{equation}
 with extremum at $\Rcrit \Lambda = 1/\sqrt{6}$ (same as G1, G2).
 
@@ -718,7 +729,7 @@ SYMBOLIC PROOF; \texttt{tests/test\_paper51\_dS\_vacuum.py}]
 \label{thm:dS_vacuum}
 The minimum action density at the de Sitter extremum is
 \begin{equation}
-  s_{\min} = -\frac{\Lambda}{12 \sqrt{6}}
+  s_{\min} = -\frac{\Lambda}{6 \sqrt{6}}
   \quad (\text{at } \Rcrit = 1/(\sqrt{6} \Lambda)).
 \end{equation}
 \end{theorem}
@@ -912,9 +923,10 @@ The $J$-blindness theorem draws a sharp scope boundary:
         the metric identification $\delta D \leftrightarrow \delta g_{\mu\nu}$
         (inner fluctuation / Connes--Chamseddine dictionary), which breaks
         $SO(4) \to SO(3)$ and distinguishes symmetric from antisymmetric
-        perturbations. On the discrete substrate, this identification emerges
-        in the state-space Gromov--Hausdorff limit (Paper~38;\
-        propinquity is not claimed).
+        perturbations. Whether this identification arises on the
+        discrete substrate is not shown here; Paper~38's state-space
+        Gromov--Hausdorff convergence concerns the commutative factor
+        and does not supply it.
 \end{itemize}
 
 The theorem unifies three earlier diagnostics:
@@ -949,7 +961,7 @@ $\mathrm{Vol} = 2 \pi^2 R^3 \beta$ and
 $\int R_{\rm scalar} \sqrt{g} = 12 \pi^2 R \beta$, the coefficient
 matching gives
 \begin{align}
-  \Lambda^2 \text{ term}: &\quad \Geff = 6 \pi / \Lambda^2, \\
+  \Lambda^2 \text{ term}: &\quad \Geff = 3 \pi / \Lambda^2, \\
   \Lambda^4 \text{ term}: &\quad \Lcc = 6 \Lambda^2.
 \end{align}
 
@@ -957,7 +969,7 @@ matching gives
 INTERNAL THEOREM]
 \label{prop:newton_cc}
 The GeoVac spectral action on $\sthree_R \times S^1_\beta$ with
-Gaussian cutoff produces Newton constant $\Geff = 6 \pi / \Lambda^2$
+Gaussian cutoff produces Newton constant $\Geff = 3 \pi / \Lambda^2$
 (Planck-scale) and cosmological constant $\Lcc = 6 \Lambda^2$.
 \end{proposition}
 
@@ -1003,7 +1015,7 @@ For arbitrary smooth positive cutoff $f$ with finite Mellin moments
 $\phi(1), \phi(2)$, the GeoVac spectral action on $\sthree_R \times
 S^1_\beta$ produces
 \begin{align}
-  \Geff(f, \Lambda) &= \frac{6 \pi}{\phi(1)\, \Lambda^2}, \\
+  \Geff(f, \Lambda) &= \frac{3 \pi}{\phi(1)\, \Lambda^2}, \\
   \Lcc(f, \Lambda) &= \frac{6\, \phi(2)}{\phi(1)}\, \Lambda^2, \\
   \Rcrit\, \Lambda &= \sqrt{\frac{\phi(1)}{6\, \phi(2)}}.
 \end{align}
@@ -1024,12 +1036,12 @@ S^1_\beta$ produces
       & $\Rcrit \Lambda$ \\
     \midrule
     Gaussian $e^{-x}$
-      & $1$ & $1$ & $6\pi$ & $6$ & $1/\sqrt{6}$ \\
+      & $1$ & $1$ & $3\pi$ & $6$ & $1/\sqrt{6}$ \\
     Polynomial $e^{-x^2}$
-      & $\sqrt{\pi}/2$ & $1/2$ & $12\sqrt{\pi}$ & $6/\sqrt{\pi}$
+      & $\sqrt{\pi}/2$ & $1/2$ & $6\sqrt{\pi}$ & $6/\sqrt{\pi}$
       & $\sqrt{\sqrt{\pi}/6} \approx 0.544$ \\
     Sharp $\Theta(1-x)$
-      & $1$ & $1/2$ & $6\pi$ & $3$ & $1/\sqrt{3}$ \\
+      & $1$ & $1/2$ & $3\pi$ & $3$ & $1/\sqrt{3}$ \\
     \bottomrule
   \end{tabular}
   \label{tab:g8_cutoffs}
@@ -1039,9 +1051,9 @@ S^1_\beta$ produces
 on Theorem~\ref{thm:cutoff_dep} shows that every combination of
 $\Geff$ and $\Lcc$ depends on $\phi(1)$ and/or $\phi(2)/\phi(1)$:
 \begin{itemize}
-  \item $\Geff \cdot \Lambda^2 = 6\pi/\phi(1)$ (depends on $\phi(1)$)
+  \item $\Geff \cdot \Lambda^2 = 3\pi/\phi(1)$ (depends on $\phi(1)$)
   \item $\Lcc / \Lambda^2 = 6\, \phi(2)/\phi(1)$ (depends on ratio)
-  \item $\Geff \cdot \Lcc = 36 \pi\, \phi(2)/(\phi(1)^2 \Lambda^2)$
+  \item $\Geff \cdot \Lcc = 18 \pi\, \phi(2)/\phi(1)^2$
         (depends on both)
   \item $\Rcrit \Lambda = \sqrt{\phi(1)/(6\, \phi(2))}$ (depends on
         ratio)
@@ -1162,9 +1174,11 @@ Status as of this version of the paper:
         UV regime saturated by angular truncation
         (\textsc{done, positive-IR}).
   \item \textbf{G4-3d-UV}: same $a$-sweep substrate refined in
-        $N_\phi \in \{24, 48, 96, 144, 192\}$. Weyl law recovers
-        within 1\% at $t = 0.1$, $N_\phi = 192$; within 7\% across
-        $t \in [0.01, 0.1]$ at the finest grid. The G4-3d Sec.~5
+        $N_\phi \in \{24, 48, 96, 144, 192\}$. The bulk Weyl term is
+        matched within 1\% at $t = 0.1$, $N_\phi = 192$ and within
+        7\% across $t \in [0.01, 0.1]$, a comparison that omits the
+        Dirichlet perimeter term (about $5.6\%$ at $R = 10$,
+        $t = 0.1$). The G4-3d Sec.~5
         prediction that the small-$t$ saturation is angular
         truncation (NOT Hermiticity) is confirmed quantitatively at
         the $3\times$ gain factor on the $N_\phi = 96$ vs
@@ -1200,8 +1214,9 @@ Five of seven sub-sprints in the G4-3 sequence
 closed at sprint scale. The substrate is intact and operational:
 constant-warp factorization at the operator level holds by
 construction, variable-warp tip-regular substrate built, conical-defect
-parameterization defined via $N_\phi(\alpha)$ wedge lattice, continuum
-Weyl law verified at finer than $1\%$ in the UV sweet spot. The
+parameterization defined via $N_\phi(\alpha)$ wedge lattice, leading
+Weyl term reproduced at the level of the omitted boundary
+correction. The
 remaining sub-sprints G4-4, G4-5, G4-6 form the
 \emph{extended commitment} to derive $S_{\BH}$ from the discrete
 substrate.
@@ -1243,13 +1258,14 @@ substrate, with three target identifications:
 The $\Lambda^2$ prefactor in $S_{\BH}$ was naively expected to inherit
 G8's cutoff dependence as $\propto \phi(2)/\phi(1)$ for arbitrary
 cutoff; the G4-5d measurement REJECTED that prediction (65\% deviation
-across three cutoff families) --- the tip term lives at the
-log-regulated $\phi(0)$ Mellin moment, per the sector-wise map
-tip$\,\leftrightarrow\,\phi(0)$ / EH$\,\leftrightarrow\,\phi(1)$ /
+across three cutoff families) --- under the proper-time estimator the 2D
+tip follows the log-regulated $\phi(0)$, while in the spectral action the
+4D cigar's leading tip term carries $\phi(1)$, per the sector-wise map
+2D tip$\,\leftrightarrow\,\phi(0)$ / EH$\,\leftrightarrow\,\phi(1)$ /
 $\Lambda_{\rm cc}\,\leftrightarrow\,\phi(2)$
-(Theorem~\ref{thm:sector_mellin}). The cutoff dependence is
-structural, not a feature of G4-3 specifically, but it enters at
-$\phi(0)$, not $\phi(2)$.
+(Theorem~\ref{thm:sector_mellin}). In the spectral action the
+$\Lambda^2$ prefactor of $S_{\BH}$ carries $\phi(1)$, not $\phi(2)$;
+$\phi(0)$ belongs to the proper-time estimator used on the substrate.
 
 % =====================================================================
 \section{G4-4: sprint-scale closure of the warped Dirac program}
@@ -1310,15 +1326,16 @@ grading), F3 (continuum recovery at small $t$) closed at sprint scale:
         at the operator level on every Fourier block of the explicit
         linear Dirac (canonical chirality-graded $\sqrt{L}$
         construction).
-  \item F3 spinor Weyl ratio at the sweet spot $t = 0.1$,
-        $N_\phi = 192$: $R_{\rm Dirac}(0.1) = 0.996$ (within
-        \textbf{0.4\%} of continuum); rank-2 ratio
+  \item F3 spinor Weyl ratio at $t = 0.1$, $N_\phi = 192$:
+        $R_{\rm Dirac}(0.1) = 0.996$ against the bulk term; the
+        continuum value of the same ratio, perimeter term included, is
+        $0.944$, so the substrate sits about $5.5\%$ above it; rank-2 ratio
         $K^{\rm Dirac}/K^{\rm scalar} = 1.9998$ bit-essentially-exact.
 \end{itemize}
 (MEASURED, sprint-scale; F1--F7 are exercised as a live panel in
-\texttt{tests/test\_paper51\_L6\_full.py}, and the F3 sweet-spot value
-is pinned --- as $a_0^{\rm Dirac} = 2 R_{\rm Dirac}(0.1) = 1.992$ ---
-in \texttt{tests/test\_paper51\_g44\_headlines.py}.)
+\texttt{tests/test\_paper51\_L6\_full.py}, and the F3 value is pinned
+--- as $a_0^{\rm Dirac} = 2 R_{\rm Dirac}(0.1) = 1.992$ --- in
+\texttt{tests/test\_paper51\_g44\_headlines.py}.)
 
 The lowest-mode validation $|\lambda_{\min}^{\rm Dirac}|$ converges to
 $\pi/R$ (the half-integer angular momentum Bessel zero
@@ -1363,7 +1380,8 @@ apex regardless of $r_h$. The CORRECT saturation is the
   K^{\rm Dirac}_{\rm var}(t; r_h \to 0)
   = K^{\rm Dirac}_{\rm cone}(t),
 \end{equation}
-verified bit-exact to 6+ digits at $r_h = 10^{-3}$. This is a
+to 6+ digits at $r_h = 10^{-3}$ (by construction: the lattice excludes
+$\rho = 0$, so $\sqrt{\rho^2 + r_h^2} \to \rho$). This is a
 substantive structural finding: \textbf{the discrete-substrate gravity
 has two scales} --- the substrate UV $a$ and the warp scale $r_h$ ---
 and the asymptotic-free condition is local (holds at large $\rho$,
@@ -1396,7 +1414,8 @@ G4-3c-proper scalar wedge. At $\alpha = 1$, the wedge-Dirac reduces
 bit-exact to G4-4a's disk-Dirac.
 
 \paragraph{The headline structural identification.} The spinor
-conical-defect tip coefficient is identified at bit-exact precision:
+conical-defect tip coefficient is identified, with the discrete value
+converging to it as the radial mesh refines:
 \begin{equation}
   \boxed{\;
   \Delta_K^{\rm Dirac, tip}(\alpha)
@@ -1457,13 +1476,11 @@ in \texttt{tests/test\_paper51\_g44\_headlines.py}.)
 \paragraph{$\alpha > 1$ structural asymmetry.} A clean negative
 landed: at $\alpha > 1$ (excess-angle / saddle-cone), the recovery
 plateaus at \textbf{bit-identical 67.88\% across $N_0 \in \{120, 240, 480\}$}
---- UV refinement does NOT help. The 32\% gap is structural, not
-numerical. At large $t$ (before the IR cutoff intrudes) recovery
-improves to 73--89\% but does not reach 100\%. Sub-leading
-corrections to the continuum SC formula at large $\alpha$ (excess-angle
-regime, where the apex has negative curvature concentrated) or a
-different effective tip coefficient at excess angles --- open
-analytical question.
+--- azimuthal refinement does NOT help. Radial refinement does: the B4
+$a \to 0$ diagnostic (\S\ref{subsec:g4_5_followon}) shows the recovery
+climbing toward $1$ as the radial mesh refines, so the gap is a
+finite-$a$ artifact and the continuum slope at $\alpha > 1$ is the plain
+Sommerfeld--Cheeger continuation.
 
 \subsection{G4-4d, G4-4e, G4-4f: Seeley-DeWitt, BC sectors,
 replica derivative}
@@ -1475,8 +1492,13 @@ Three brief sprints validating cross-cutting structural quantities.
 $t = 0.1$, $N_\phi = 192$:
 \begin{equation}
   a_0^{\rm Dirac} = 1.992
-  \quad\text{(continuum: 2.0, recovery \textbf{99.6\%})}.
+  \quad\text{(bulk term: 2.0; continuum with perimeter term: 1.888)}.
 \end{equation}
+The comparison with $2.0$ omits the Dirichlet perimeter term; against
+the continuum value of the same estimator ($1.888$ at $R = 10$,
+$t = 0.1$) the substrate is $5.5\%$ high, and its $a \to 0$ sweep at
+$N_\phi = 192$ ($2.024, 1.992, 1.979, 1.973$) has not reached it, so
+$1.992$ is a crossing of the bulk value, not a $99.6\%$ recovery.
 (MEASURED; recomputed at the paper's own substrate
 $N_\rho = 200$, $a = 0.05$, $N_\phi = 192$, $t = 0.1$ and pinned in
 \texttt{tests/test\_paper51\_g44\_headlines.py}.)
@@ -1525,8 +1547,9 @@ The load-bearing quantities for this calculation are:
   \item The cutoff regularization function $f(t \Lambda^2)$
         (Class~1 calibration, \S\ref{sec:g8}).
 \end{enumerate}
-Items 1 and 2 are now \emph{quantitatively validated} on the discrete
-substrate at sub-percent precision. Item 3 is the standard
+Items 1 and 2 are approached on the discrete substrate: the tip
+coefficient converges as the radial mesh refines, and the replica
+derivative is extracted at $96.69\%$. Item 3 is the standard
 Connes--Chamseddine cutoff issue, structural to the framework and
 external to the discrete substrate.
 
@@ -1537,9 +1560,8 @@ G4-4 scoping) rested on an architectural sketch. \textbf{The remaining
 program work is integration over $t$ with proper cutoff
 regularization, not foundational uncertainty}; the load-bearing
 quantities (tip coefficient $-1/12$ and replica derivative $+1/6$)
-are extracted to sub-percent precision at sprint scale and reduce to
-their continuum counterparts at the optimal discretization
-point.
+are approached at sprint scale, the first converging as $a \to 0$ and
+the second extracted at $96.69\%$.
 
 \subsection{G4-5: discrete replica method for $S_{\BH}$}
 \label{subsec:g4_5}
@@ -1666,10 +1688,11 @@ at $r_h = 2$:
 \end{center}
 
 The $\Lambda$-monotone descent of the ratio (29.1 $\to$ 5.81 $\to$ 0.85) is the substrate-UV/IR signature: at $\Lambda \cdot R \lesssim 1$, the Gaussian $e^{-t \Lambda^2}$ does not fully suppress large-$t$ (IR) contributions and the integral over-counts.
-\textbf{At $\Lambda = 2$, the discrete extraction lands within the factor-2 band of the continuum $r_h^2 \Lambda^2/3$ prediction, recovery $= 0.85$}. This confirms G4-2's continuum derivation
-(Sec.~\ref{sec:g4}) on the discrete substrate at the UV cell. The
-$\alpha > 1$ branch open question from G4-4c is inherited but does
-not affect $\alpha = 1$ extraction.
+\textbf{At $\Lambda = 2$, the discrete extraction lands within the factor-2 band of the continuum $r_h^2 \Lambda^2/3$ prediction, recovery $= 0.85$}. This is consistent with G4-2's
+continuum derivation (Sec.~\ref{sec:g4}) at one $\Lambda$ cell; the
+recovery is $\Lambda$-dependent (29.1, 5.81, 0.85) and not converged.
+The $\alpha > 1$ branch (a finite-$a$ artifact, B4) does not affect
+the $\alpha = 1$ extraction.
 
 \subsubsection{G4-5d: cutoff dependence and sector-wise Mellin moment map}
 \label{subsubsec:g4_5d}
@@ -1698,9 +1721,11 @@ ordering (which would be sharp = polynomial = $0.5 \cdot$ Gaussian).
 
 \paragraph{The structural reframing.} The topological tip contribution
 to $S_{\BH}$ is dimensionless and $R$-independent, so it inherits no
-polynomial $x^k$ weight from the heat-kernel expansion. The relevant
-Mellin moment is therefore $\phi(0)$ (logarithmically regulated), not
-$\phi(2)$. The empirical ordering
+polynomial $x^k$ weight from the heat-kernel expansion. Under the
+proper-time estimator used on the substrate the relevant moment is
+therefore $\phi(0)$ (logarithmically regulated), not $\phi(2)$; in the
+spectral action the 4D tip carries $\phi(1)$
+(Theorem~\ref{thm:sector_mellin}). The empirical ordering
 $S_{\rm sharp} > S_{\rm poly} > S_{\rm Gauss}$ matches the qualitative
 $\phi(0)$ ordering exactly: sharp gives log-divergent
 $\phi_{\rm sharp}(0) \to \infty$ regulated by the UV cutoff at
@@ -1718,13 +1743,13 @@ This promotes G8 from a single Mellin-scaling law to a
     \midrule
     Bulk $R^0$ (cosmological constant) & $\Lambda_{\rm cc}$ & $\phi(2)$ \\
     Bulk $R^1$ (Einstein--Hilbert) & $G_{\rm eff}^{-1}$ & $\phi(1)$ \\
-    \textbf{Topological tip ($S_{\BH}$)} & (tip coeff $1/12$) & $\boldsymbol{\phi(0)}$ \\
+    \textbf{2D tip, proper-time estimator} & (tip coeff $1/12$) & $\boldsymbol{\phi(0)}$ \\
     \bottomrule
   \end{tabular}
 \end{center}
 
-\textbf{This is a structurally substantive refinement of G8.} G7's
-$G_{\rm eff} = 6\pi/(\phi(1)\Lambda^2)$ is the $\phi(1)$-moment
+\textbf{This is a refinement of G8 for the proper-time estimator used on the substrate}; in the spectral action itself the 4D tip carries $\phi(1)$ (Theorem~\ref{thm:sector_mellin}). G7's
+$G_{\rm eff} = 3\pi/(\phi(1)\Lambda^2)$ is the $\phi(1)$-moment
 result; G7's $\Lambda_{\rm cc} = 6 \phi(2)/\phi(1) \Lambda^2$ is the
 $\phi(2)$-moment result; G4-5d adds the $\phi(0)$-moment result for
 $S_{\BH}$. \textbf{The cutoff-function calibration data (Class~1 per
@@ -1746,70 +1771,52 @@ by a single Mellin index $k$:
   \item[\emph{(ii)}] The Einstein--Hilbert sector (proportional to
     $a_2 \sim t^{-(d-2)/2}$) scales with $\phi((d-2)/2) = \phi(1)$ in $d=4$.
   \item[\emph{(iii)}] The topological tip sector (the
-    Sommerfeld--Cheeger contribution, $t$-independent at the apex)
-    scales with $\phi(0)$ (the zeroth moment, log-regulated by
-    substrate UV/IR cutoffs).
+    Sommerfeld--Cheeger contribution).  On the bare 2D cone the tip
+    term is $t$-independent, so in the spectral action it contributes
+    $\tfrac16 f(0)$, independent of the Mellin moments.  On the 4D cigar
+    it multiplies the Dirac transverse kernel
+    $K_{S^2}(t) = 2r_h^2/t - 1/3 + O(t)$, so its leading contribution to
+    $S_{\BH}$ is $(r_h^2\Lambda^2/3)\,\phi(1)$, the Einstein--Hilbert
+    moment, and the subleading piece is $-f(0)/18$.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-The spectral action $S = \mathrm{Tr}\, f(D^2 / \Lambda^2)$ has heat-kernel
-representation $S = \int_0^\infty (dt/t)\, \tilde{f}(t\Lambda^2)\, K(t)$,
-where $\tilde{f}$ is the inverse Mellin transform of $f$ and $K(t) =
-\mathrm{Tr}\, e^{-tD^2}$. On a $d$-dimensional manifold the Seeley--DeWitt
-expansion $K(t) \sim \sum_n a_n\, t^{(n-d)/2}$ gives
-\[
-  S \;\sim\; \sum_n a_n \int_0^\infty \frac{dt}{t}\, f(t\Lambda^2)\, t^{(n-d)/2}
-  \;=\; \sum_n a_n\, \Lambda^{d-n} \phi\!\left(\tfrac{d-n}{2}\right),
-\]
-proving (i) and (ii) for the $n=0$ and $n=2$ bulk coefficients.
+Write the cutoff as a Laplace transform, $f(x) = \int_0^\infty
+e^{-sx} g(s)\,ds$, so that $S = \mathrm{Tr}\, f(D^2/\Lambda^2) =
+\int_0^\infty g(s)\, K(s/\Lambda^2)\, ds$ with $K(t) = \mathrm{Tr}\,
+e^{-tD^2}$.  A heat-trace term $c\,t^{-\beta}$ with $\beta > 0$
+contributes $c\,\Lambda^{2\beta} \int_0^\infty g(s) s^{-\beta} ds
+= c\,\Lambda^{2\beta}\phi(\beta)/\Gamma(\beta)$, and a $t^0$ term
+contributes $c\,f(0)$.  The Seeley--DeWitt expansion
+$K(t) \sim \sum_n a_n\, t^{(n-d)/2}$ then gives (i) and (ii) for the
+$n=0$ and $n=2$ bulk coefficients.
 
 For the replica tip sector: the Sommerfeld--Cheeger contribution to the
 heat trace on a cone of apex angle $2\pi\alpha$ is a
 \emph{topological} correction
-\[
-  \Delta K^{\rm SC}(\alpha, t) = c(\alpha) \cdot K_{S^{d-2}}(t)
-\]
+$\Delta K^{\rm SC}(\alpha, t) = c(\alpha) \cdot K_{S^{d-2}}(t)$,
 where $c(\alpha) = (1/12)(1/\alpha - \alpha)$ for spinors and
-$K_{S^{d-2}}(t)$ is the transverse-sphere heat kernel. The entropy
-derivative $(d/d\alpha)|_{\alpha=1}\, c(\alpha) = 1/6$ is a
-\emph{constant}, independent of $t$. At the apex (the fixed point
-of the conical action), the transverse heat-kernel density
-contributes a factor of $1$ per unit area, so the
-replica-differentiated tip integrand is
-\[
-  \text{tip}(t) := \left.\frac{d}{d\alpha}\right|_{\alpha=1}
-  \Delta K^{\rm SC}(\alpha, t) \;=\; \frac{1}{6}
-  + O(t^{-1})\text{\ (bulk leakage)}.
-\]
-The leading constant part integrates against the cutoff as
-\[
-  S_{\BH}^{\rm tip} = \frac{1}{6} \int_0^\infty \frac{dt}{t}\,
-  f(t\Lambda^2) = \frac{1}{6}\, \phi(0)_{\rm reg},
-\]
-where $\phi(0)_{\rm reg} = \int_{u_{\rm UV}}^{u_{\rm IR}}
-f(u)\, du/u$ is regulated by the substrate's UV cutoff
-$t_{\rm UV} = a^2$ and IR cutoff $t_{\rm IR}$. The $O(t^{-1})$ bulk
-leakage integrates to terms proportional to $\phi(1)$ and higher,
-which belong to the EH sector by (ii). \qed
+$K_{S^{d-2}}(t)$ is the transverse-sphere heat kernel; its replica
+derivative is the constant $1/6$.  On the bare 2D cone the tip term is
+$t^0$ and contributes $f(0)/6$.  On the 4D cigar,
+$\tfrac16 (2r_h^2/t - 1/3)$ contributes
+$\tfrac13 r_h^2\Lambda^2\phi(1) - f(0)/18$; the leading term is the
+$A\Lambda^2/(12\pi)$ of G4-2 at the Gaussian cutoff. \qed
 \end{proof}
 
-\begin{corollary}[Cutoff-function ratio test]
+\begin{remark}[The substrate's cutoff ordering]
 \label{cor:phi0_ratio}
-For any two cutoff functions $f_1, f_2$ with the same UV/IR
-regulation,
-\[
-  \frac{S_{\BH}^{\rm tip}(f_1)}{S_{\BH}^{\rm tip}(f_2)}
-  = \frac{\phi(0)_{\rm reg}[f_1]}{\phi(0)_{\rm reg}[f_2]}
-  + O\!\left(\frac{\phi(1)}{\phi(0)_{\rm reg}}\right).
-\]
-Empirically confirmed at sub-5\% across 9 channels
-(Gaussian/sharp/polynomial $\times$ $\Lambda \in \{0.5, 1, 2\}$;
-see \S\ref{subsubsec:g4_5_v3_20_followon}, F14 closure --- archived
-sprint measurement; the live regression
-\texttt{tests/test\_paper51\_cutoff\_mellin.py} pins the qualitative
-moment ordering).
-\end{corollary}
+The G4-5d measurement weighted the discrete substrate's tip with the
+proper-time functional $\int (dt/t)\, f(t\Lambda^2)\,\text{tip}(t)$,
+which for a constant tip is the log-regulated $\phi(0)_{\rm reg}$ and
+orders the cutoffs sharp $>$ polynomial $>$ Gaussian (sub-5\% across 9
+channels, archived sprint measurement; the qualitative ordering is
+pinned in \texttt{tests/test\_paper51\_cutoff\_mellin.py}).  That is a
+property of this estimator, not of the spectral action, in which the
+continuum 2D tip carries $f(0)$ and the 4D leading tip carries
+$\phi(1)$.
+\end{remark}
 
 \subsubsection{G4-5 headline closure and implications for G4-6}
 \label{subsec:g4_5_implications}
@@ -1829,10 +1836,10 @@ load-bearing reductions bit-exact in both reduction directions.
   \item The bulk $\Lambda^4$ cosmological term is structurally
         \emph{absent} in 2D and emerges only in the 4D cigar embedding
         (G4-5b).
-  \item The topological tip lives at the $\phi(0)$ Mellin moment;
-        Einstein--Hilbert at $\phi(1)$; cosmological constant at
-        $\phi(2)$. G7 and G8 are sector-specific instances of this
-        sector-wise moment map (G4-5d).
+  \item On the 4D cigar the leading tip contribution to $S_{\BH}$
+        carries $\phi(1)$, like Einstein--Hilbert; the cosmological
+        constant is at $\phi(2)$; the bare 2D tip carries $f(0)$
+        (Theorem~\ref{thm:sector_mellin}).
 \end{enumerate}
 
 \paragraph{Implications for G4-6 (full $S_{\BH}$ closure).} The
@@ -1842,14 +1849,15 @@ remaining program work for G4-6 is:
         continuum extrapolation;
   \item Subleading $O(r_h^2/R^2)$ IR corrections via boundary
         regularization;
-  \item Closure of the $\alpha > 1$ structural asymmetry (G4-4c open);
+  \item (Resolved since by B4: the $\alpha > 1$ asymmetry is a
+        finite-$a$ artifact.)
   \item Refinement of the azimuthal discretization (DST/Fourier) to
         close the T2 high-$m$ overshoot in the tip-recovery diagnostic.
 \end{itemize}
 
-The end-to-end G4-6 commitment shrank further after the v3.19.0
-post-G4-5 follow-on push closed the $\alpha > 1$ structural asymmetry
-at the analytical level (see Sec.~\ref{subsec:g4_5_followon} below).
+The end-to-end G4-6 commitment shrank further once the $\alpha > 1$
+asymmetry was traced to a finite-$a$ artifact (B4,
+Sec.~\ref{subsec:g4_5_followon} below).
 The end-to-end $S_{\BH}$ program is now
 substantially smaller than the original G4-4 scoping estimate
 because the structural quantities have crystallized
@@ -1858,30 +1866,29 @@ into a single sector-wise moment map.
 \paragraph{The structural-skeleton-scope reading at G4-5 closure.}
 The framework predicts the structural form of $S_{\BH}$:
 \begin{equation}
-  S_{\BH}^{\rm structural} = \frac{r_h^2 \Lambda^2}{3} \cdot M_{\rm tip}[f]
+  S_{\BH}^{\rm structural} = \frac{r_h^2 \Lambda^2}{3} \cdot \phi(1)[f]
 \end{equation}
-where $M_{\rm tip}[f]$ is the $\phi(0)$ Mellin moment of the cutoff
-function $f$ (log-regulated topological piece). $M_{\rm tip}$ is
-\emph{not} $\phi(2)$ --- this is the substantive reframing of G8.
+at leading order, with a subleading $-f(0)/18$. The cutoff moment is \emph{not} $\phi(2)$,
+which is what G4-5d rejected.
 The framework predicts the $r_h^2 \Lambda^2 / 3$ \emph{structural
 form}; it does NOT predict $M_{\rm tip}$ (cutoff function calibration
 data, Class~1). Consistent with the structural-skeleton-scope reading
 elsewhere in the framework~\cite{paper34, paper35}.
 
-\subsubsection{Post-G4-5 follow-on push (v3.19.0): $\alpha > 1$ closed
-form and Mellin map empirical confirmation}
+\subsubsection{Post-G4-5 follow-on push (v3.19.0): the $\alpha > 1$
+M\"obius form (a finite-$a$ artifact) and the Mellin map}
 \label{subsec:g4_5_followon}
 
 A second 5-agent parallel dispatch following the v3.18.0 G4-5 closure
 landed five non-overlapping tracks targeting open issues plus the
-extended G4-6 scoping. The substantive new content is one
-analytical closed form (the $\alpha > 1$ Möbius modification) and one
-empirical confirmation (the sector-wise Mellin moment map).
+extended G4-6 scoping. The new content is one fixed-$a$ closed form
+(the $\alpha > 1$ Möbius form, later shown to be a finite-$a$ artifact)
+and one empirical cutoff ordering (the sector-wise Mellin moment map).
 
 \paragraph{The $\alpha > 1$ Möbius modification.} The G4-4c week 2
 result (N$_0$-independent $67.88\%$ recovery at $\alpha > 1$,
-Sec.~\ref{subsec:g4_4c}) is structurally resolved. The discrete
-wedge-Dirac substrate at excess angles satisfies the closed form
+Sec.~\ref{subsec:g4_4c}) is fitted, at fixed radial spacing $a$, by
+the closed form
 \begin{equation}
   \mathrm{slope}^{\rm Dirac, ex}(\alpha) \;=\; -\frac{1}{12}\cdot\frac{\alpha}{2\alpha - 1}
   \qquad (\alpha > 1),
@@ -1901,7 +1908,7 @@ transformation with three structural features:
   \item $F'(1)$ finite (smooth at the deficit/excess transition).
 \end{enumerate}
 
-\paragraph{Mechanism: open structural question.} A literature grounding
+\paragraph{Literature check.} A literature grounding
 sprint (task \#26 of the post-v3.19.0 follow-on queue,
 2026-05-29) found that the Möbius factor $F(\alpha) = \alpha/(2\alpha - 1)$
 has no analog in the standard published spinor-on-cone literature
@@ -1932,8 +1939,8 @@ azimuthal discretisation, $R$; all at fixed $a\approx0.05$) never varied. At
 $\alpha=2$, $t=1$, the recovery climbs monotonically away from the Möbius value
 $\alpha/(2\alpha-1)=0.667$ toward the Sommerfeld--Cheeger value $1$ as
 $N_\rho=200\to3200$ ($0.675, 0.769, 0.837, 0.885, 0.919$), with
-$(1-\mathrm{recovery})\sim\sqrt{a}$ \emph{exactly} (error ratio bit-stable at
-$\sqrt2=1.416$ over four halvings). The $\sqrt a$ rate is the signature of the
+$(1-\mathrm{recovery})\sim\sqrt{a}$ (error ratio $1.4085, 1.4143, 1.4164$
+over successive halvings, approaching $\sqrt2=1.4142$). The $\sqrt a$ rate is the signature of the
 genuine cone singularity at $\alpha\ne1$ (a true deficit/excess-angle apex),
 contrasting the smooth-apex $O(a)$ at $\alpha=1$. Thus
 $\mathrm{recovery}=1-C\sqrt a\to1$: the continuum excess-angle slope is the
@@ -1966,11 +1973,12 @@ value). Three structural consequences: $F(1) = 1$; $F(F(\alpha)) = \alpha$
 algebraically equivalent to the spinor-double-cover sketch
 $\alpha_{\rm eff} = 2\alpha - 1$ via $F = \alpha/\alpha_{\rm eff}$, but
 gives an additional constraint --- the harmonic mean of base and effective
-angles equals the smooth-disk angle --- that may be the structural
-origin of the mechanism. Mechanism identification at theorem-grade
-remains open.
+angles equals the smooth-disk angle. It is an algebraic property of the
+fitted fixed-$a$ form; since that form is a finite-$a$ artifact (B4),
+there is no continuum mechanism behind it.
 
-\paragraph{Substrate-level mechanism identification.} A subsequent
+\paragraph{Substrate-level soft-IR identity (a $t \approx 1$
+coincidence).} A subsequent
 production-code mode-decomposition diagnostic (Task 25 of the
 post-v3.20.0 continuation threads, 2026-05-29; memo
 \texttt{debug/sprint\_moebius\_mode\_decomposition\_memo.md})
@@ -2000,10 +2008,10 @@ wedge at apex $2\pi\alpha$ is $1/(2\alpha)$ (anti-periodic BC), the
 lowest-mode heat-trace contribution at intermediate $t$ varies slowly
 with $\alpha$, and the total heat trace scales linearly with $\alpha$
 (mode count $\alpha N_0$), so the soft-IR mass fraction scales as
-$1/(2\alpha)$ asymptotically, structurally producing the Möbius
-modification. This sharpens the mechanism from ``completely open'' to
-``substrate-level identified.'' A first-principles continuum derivation
-(lifting from substrate to theorem-grade) remains open.
+$1/(2\alpha)$ asymptotically, reproducing the Möbius form. The
+identity holds only near $t \approx 1$ (GD-2 audit below) and the form
+itself disappears as $a \to 0$ (B4), so it is a property of the fixed-$a$
+substrate, not a mechanism.
 
 \paragraph{$t$-robustness audit (Sprint GD-2, 2026-05-29) --- form
 robust, coefficient and soft-IR identity $t\!\approx\!1$-tuned.}
@@ -2029,10 +2037,10 @@ not a $t$-robust coefficient, and the soft-IR identity
 Eq.~\eqref{eq:soft_IR_frac_asymptotic} is a $t\approx1$ coincidence
 rather than a structural mechanism.
 \end{itemize}
-This is consistent with the per-$t$ UV structure $1/(24\pi t)$
-(Sec.~\ref{subsubsec:g4_5_v3_20_followon}): the substrate's tip
-extraction is genuinely $t$-dependent, and clean continuum coefficients
-appear only at a sweet-spot $t$. Net: the Möbius \emph{functional form}
+The continuum tip is $t$-independent ($1/6$;
+Sec.~\ref{subsubsec:g4_5_v3_20_followon}), so the $t$-dependence of the
+substrate's tip extraction is a finite-$a$ effect, and clean continuum
+coefficients appear only at a sweet-spot $t$. Net: the Möbius \emph{functional form}
 is robust at fixed substrate spacing $a$; the exact coefficient and the
 soft-IR ``mechanism'' are sweet-spot artifacts, and the B4 $a \to 0$
 diagnostic (above) subsequently resolved the form itself as a
@@ -2041,20 +2049,21 @@ the plain Sommerfeld--Cheeger continuation, leaving no continuum
 Möbius mechanism to seek. A companion Reading-B test (Sprint GD-3) further
 finds the form \emph{discretization}-robust: the FD-azimuthal and
 exact-spectral wedge substrates give Möbius-shaped slopes agreeing to
-$\sim 4$ significant figures at every tested $(\alpha, t)$ --- so the
-form is substrate-class-universal (set by the anti-periodic spinor BC +
-discrete radial structure + $\alpha$-scaling), not a discretization
-artifact, consistent with the literature's absence of a continuum
-Möbius (Reading B). A further probe (Sprint GD-6) rules out a
+$\sim 4$ significant figures at every tested $(\alpha, t)$ --- so at
+fixed radial spacing the form does not depend on the azimuthal
+discretization; it is set by the discrete radial structure, which B4
+shows is where it comes from, consistent with the literature's absence
+of a continuum Möbius (Reading B). A further probe (Sprint GD-6) rules out a
 subtraction-convention origin: sweeping the radial extent $R = N_\rho a
 \in \{5, 7.5, 10, 15\}$ leaves the slope \emph{bit-identical}
 (slope/Möbius $= 1.012, 0.977, 0.977$ at $\alpha = 2,3,5$ for every $R$),
 so the $\Delta_K = K_{\rm wedge} - \alpha K_{\rm disk}$ subtraction
 cleanly isolates an $R$-independent tip (bulk $R^2$ and perimeter $R$
-cancel) --- the Möbius is a genuine tip effect, not an edge/convention
-artifact. The form is thus robust on three independent axes ($t$,
-discretization, $R$); only the exact-coefficient match to
-$\alpha/(2\alpha-1)$ is $t\!\approx\!1$-sharp. Drivers
+cancel) --- at fixed $a$ the Möbius is a tip effect, not an
+edge/convention artifact. The form is thus robust in $t$, azimuthal
+discretization and $R$ at fixed $a$, but not under radial refinement
+(B4); the exact-coefficient match to $\alpha/(2\alpha-1)$ is
+$t\!\approx\!1$-sharp. Drivers
 \texttt{debug/sprint\_gd2\_moebius\_t\_robustness.py},
 \texttt{debug/sprint\_gd2\_moebius\_slope\_t.py},
 \texttt{debug/sprint\_gd3\_reading\_b\_substrate.py},
@@ -2108,11 +2117,10 @@ $\alpha$ & v3.19.0 reported & spectral substrate (fresh) & rel.\ diff \\
 \bottomrule
 \end{tabular}
 \end{center}
-This bit-exact reproduction confirms that the substrate-level Möbius
-identification (Eqs.~\eqref{eq:moebius_substrate_identification},
-\eqref{eq:soft_IR_frac_asymptotic}) is substrate-discretization-invariant
-(matches FD and spectral substrates identically) and convention-clean
-(matches v3.19.0 ansatz driver bit-exactly). A complementary direct
+This reproduction to four decimal places confirms the measurement
+convention and its independence of the azimuthal discretization at fixed
+$a$; it says nothing about the $a \to 0$ limit, in which the form
+disappears (B4). A complementary direct
 derivative diagnostic ($d\Delta_K/d\alpha$ at $\alpha=2$, on both FD and
 spectral substrates at $N_\rho \in \{100, 200, 400, 600\}$) gives a
 $N_\rho$-stable value $+0.052$, structurally consistent with the
@@ -2145,9 +2153,8 @@ $\alpha = 1$.} \emph{Unchanged.} The
 $\partial_\alpha I_E^{\rm conical}|_{\alpha = 1}$ derivative in the
 G4-2 replica derivation is taken from the deficit side
 ($\alpha \le 1$), where the standard $-(1/12)(1/\alpha - \alpha)$
-formula holds. The Möbius modification affects sub-leading quantum
-corrections at $\alpha \ne 1$ --- structurally interesting but
-non-blocking for $S_{\BH}$ closure at $\alpha = 1$.
+formula holds. The Möbius form is a finite-$a$ artifact (B4) and
+carries no continuum correction at $\alpha \ne 1$.
 
 \paragraph{Sector-wise Mellin moment map empirical confirmation.} The
 G4-5d structural reframing (Sec.~\ref{subsubsec:g4_5d}) was retested
@@ -2164,7 +2171,7 @@ to $18\%$ under the $\phi(0)$ prediction. The sector-wise moment map
 \toprule
 Sector & Mellin moment \\
 \midrule
-Topological tip ($S_{\BH}$) & $\boldsymbol{\phi(0)}$ \\
+2D tip, proper-time estimator & $\boldsymbol{\phi(0)}$ \\
 Bulk $\Lambda^1$ (Einstein--Hilbert) & $\phi(1)$ \\
 Bulk $\Lambda^0$ (cosmological constant) & $\phi(2)$ \\
 \bottomrule
@@ -2174,17 +2181,17 @@ is the substantive empirical confirmation. A 20-point quadrature
 follow-on would close the residual sharp-cutoff channel mismatch and
 upgrade the PARTIAL result to POSITIVE.
 
-\paragraph{FD/spectral azimuthal bracketing of the true UV target.}
+\paragraph{FD/spectral azimuthal discretizations at the lattice scale.}
 Replacing the finite-difference azimuthal Laplacian (edge eigenvalue
 ratio $4/\pi^2 \approx 0.405$) with a spectral DST/Fourier
 discretization (exact $m_{\rm eff}$) shifts the per-$t$ tip recovery
 at $t = a^2 = 0.0025$ from $1.31\%$ (FD undershoot, G4-5a-refined) to
-$813.4\%$ (spectral overshoot). The FD and spectral results
-\emph{bracket} the true UV target; neither hits it. The $+1/6$
-continuum value is the IR Lichnerowicz coefficient, not the per-$t$
-UV target. Identifying the correct UV target requires a
-wedge-spectral-density heat-kernel expansion --- a named follow-on
-for the extended G4-6 program.
+$813.4\%$ (spectral overshoot) of the continuum value $+1/6$. That value
+is the per-$t$ target at every $t$: the continuum cone tip term is
+$t$-independent (the area and perimeter terms are linear in $\alpha$
+and cancel in the replica derivative). At $t = a^2$ both schemes are
+inside the lattice scale and fail in opposite directions; the
+discrepancy is a UV discretization failure, not a missing target.
 
 \paragraph{IR cutoff cure clean negative.} Three cutoff variants
 (Gaussian, polynomial, sharp) tested across six $\Lambda \in
@@ -2203,12 +2210,12 @@ recovery from $0.85$ to $\textbf{1.96}$, identifying $\Lambda \in
 [2, 3]$ as the valid extraction window at the current substrate.
 
 \paragraph{Net effect on the G4-6 estimate.} Three of the four G4-6
-target structural closures now have empirical evidence in hand:
-$\alpha > 1$ closed analytically (Track 5);
-FD/spectral UV bracketing identifies the structural gap (Track 2);
-sector-wise moment map empirically confirmed (Track 1). The G4-6
-estimate sharpens further as
-the $\alpha > 1$ sub-sprint is removed from the sequence.
+target structural closures have evidence in hand, each re-read since:
+the $\alpha > 1$ Möbius form is a finite-$a$ artifact (B4, below), not
+an analytic closure; the per-$t$ tip recovery at the lattice scale fails
+in both directions against the $t$-independent target $1/6$; and the
+2D-substrate cutoff ordering follows $\phi(0)$ under the proper-time estimator, which is the moment of
+the bare 2D tip, not of the 4D $S_{\BH}$ (Theorem~\ref{thm:sector_mellin}).
 
 % ---------------------------------------------------------------------
 \subsubsection{Post-v3.19.0 follow-on thread (v3.20.0): closed-form per-$t$
@@ -2226,28 +2233,21 @@ with three sharp-edge anchors at $t = 1/\Lambda^2$, and explicit
 analytical edge insertion at the sharp-cutoff discontinuity. Maximum
 deviation dropped to $4.82\%$, mean $2.67\%$ across nine channels (3
 cutoffs $\times$ 3 $\Lambda$). The sector-wise Mellin moment map
-$\{\text{tip} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
+$\{\text{2D tip (proper-time estimator)} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
 is now empirically closed at strict sub-5\% across the panel; F14
 graduates from PARTIAL to POSITIVE.
 
-\paragraph{Per-$t$ UV target identified.} The standard continuum
-expansion of the spinor heat kernel on a 2D cone~\cite{dowker1994,
-cheeger1983} gives
-\begin{equation}
-  \text{tip}^{\rm cont}(t) \;=\; \frac{1}{24\pi t} \;+\; \text{constant} \;+\; O(t),
-  \label{eq:per_t_uv_target}
-\end{equation}
-where the leading $1/(24\pi t)$ coefficient is the derivative of the
-Sommerfeld--Cheeger spinor coefficient $-(1/12)(1/\alpha - \alpha)$ at
-$\alpha = 1$, combined with the $1/(4\pi t)$ planar prefactor. The
-constant part is the Lichnerowicz / Seeley--DeWitt content $\sim +1/6$
-that dominates at intermediate $t$. The v3.19.0 ``spectral overshoot''
-($813\%$ at $t = a^2$ vs the $+1/6$ baseline) is a normalization
-artifact: the true UV target at $t = a^2 = 0.0025$ is $5.305$ (not
-$0.167$), and \emph{all three} discretization schemes
-(FD: 0.04\%; GM: 11.2\%; spectral: 25.6\% of UV target) undershoot.
-The discrete-substrate UV recovery is therefore the G4-6a target:
-substrate refinement $a \to a/2$ is the structural fix.
+\paragraph{Per-$t$ UV target (withdrawn).} An earlier printing posited
+a continuum target $\text{tip}^{\rm cont}(t) = 1/(24\pi t) + \text{const}$
+on the 2D cone, built by combining the dimensionless Sommerfeld--Cheeger
+derivative with a $1/(4\pi t)$ planar prefactor. That combination is
+dimensionally inconsistent: the Sommerfeld--Cheeger term is the $t^0$
+coefficient of the 2D heat trace, and the exact continuum tip (Bessel
+zeros on the disk, $\alpha \in \{1/2, 2/3, 3/2, 2\}$,
+$t/R^2 \in \{0.01, 0.02, 0.05\}$) is $0.166667$ at every $t$. The
+continuum per-$t$ target is therefore $1/6$, the ``$5.305$'' target
+and the ``all schemes undershoot'' reading are withdrawn, and the
+spectral scheme's $813\%$ at $t = a^2$ is an overshoot of $1/6$.
 
 \paragraph{Möbius $\alpha > 1$ extrapolation lock at $\alpha = 10$.}
 Eq.~\eqref{eq:moebius_excess_angle} extrapolated to $\alpha \in
@@ -2464,9 +2464,15 @@ drops out of $\mathrm{tip}=dK/d\alpha-K_{\rm disk}$); the sign flip at
 $a=0.00625$ confirms the sub-leading $O(a^2)$ correction has opposite sign. The joint rate is
 gated by the lattice / Paper-47 norm-resolvent rate, \emph{not} degraded by the
 replica weight.
-\emph{(iv) Commute.} $\lim_n\frac{dK_n}{d\alpha}=41.501652$ (per-mode analytic)
-vs $\frac{d}{d\alpha}\lim_n K_n=41.501681$ (finite difference on the converged
-$K$) agree to $2.9\times10^{-5}$.
+\emph{(iv) Derivative consistency.} At a single truncation the per-mode
+analytic $dK_n/d\alpha = 41.501652$ and a finite difference of $K_n$,
+$41.501681$, agree to $2.9\times10^{-5}$. This checks the derivative
+implementation at fixed $n$; it does not test the interchange of
+$\lim_n$ with $d/d\alpha$, which rests on the proof of
+Theorem~\ref{thm:L6} (the assembly also needs the per-mode derivative
+convergence to be locally uniform in the mode index, which
+Lemma~\ref{lem:L6_rate}, pointwise in $\alpha$, does not by itself
+supply).
 
 \paragraph{Backbone (Layer 1, prop=2).} The disk truncated operator system
 $O_n=P_n C(\mathrm{disk})P_n$, built from compressed disk monomials
@@ -2590,7 +2596,7 @@ predictions in the strong sense:
 \end{itemize}
 
 \paragraph{Numerical gravity predictions} (G7): specific values of
-$\Geff = 6\pi/\Lambda^2$, $\Lcc = 6\Lambda^2$. These depend on the
+$\Geff = 3\pi/\Lambda^2$, $\Lcc = 6\Lambda^2$. These depend on the
 Gaussian cutoff choice, and G8 shows they generalize cleanly to
 arbitrary cutoff with $\phi$-moment-dependent prefactors.
 
@@ -2653,10 +2659,9 @@ continuum limit.
 
 \paragraph{Empirical verification at G4-3 closure.} The G4-3d-UV
 sweep (Section~\ref{subsec:g4_3_sequence}) demonstrates that the
-discrete substrate recovers the continuum Weyl law within $1\%$ at the
-sweet-spot $t \approx 0.1$ when $N_\phi$ is refined into the UV regime.
-This is the first quantitative bridge from the discrete substrate to a
-continuum-gravity prediction. The slight overshoot at fine $N_\phi$
+discrete substrate reproduces the leading Weyl term at
+$t \approx 0.1$ when $N_\phi$ is refined into the UV regime, at the
+level of the Dirichlet perimeter correction that the comparison omits. The slight overshoot at fine $N_\phi$
 and small $t$ is identified as a structural artifact of the
 azimuthal FD discretization (ratio $4/\pi^2 \approx 0.405$ between
 discrete and continuum angular Laplacian at the truncation edge), not
@@ -2668,11 +2673,9 @@ discretization choices are properly characterized.
 (Section~\ref{sec:g4_4}) extends this empirical verification from the
 Weyl law to the load-bearing quantities for $S_{\BH}$. The headline:
 the spinor conical-defect tip coefficient $-\tfrac{1}{12}(1/\alpha - \alpha)$
-is identified at \textbf{5 significant figures} on the discrete
-substrate (\S\ref{subsec:g4_4c}); the replica derivative $+1/6$ is
-extracted at \textbf{96.69\%} (\S\ref{subsec:g4_4def}). The structural
-quantities for the extended $S_{\BH}$ derivation are quantitatively
-validated on the discrete substrate at sub-percent precision. Both
+is approached by the discrete substrate as $a \to 0$
+(\S\ref{subsec:g4_4c}); the replica derivative $+1/6$ is extracted at
+\textbf{96.69\%} (\S\ref{subsec:g4_4def}). Both
 results land at sprint scale on the same UV-refined panels that
 verified the Weyl law --- there is one substrate, and the bridges to
 continuum gravity are layered on top.
@@ -2687,8 +2690,8 @@ discretization, biasing the scalar SC extraction by $\sim 34\%$ in
 the same regime where the spinor extracts cleanly. \textbf{This is
 consistent with continuum NCG expectations} (the Dirac operator with
 its half-integer spinor bundle is the natural object on a spectral
-triple, not the scalar Laplacian) but is here verified
-\emph{quantitatively on the discrete substrate} for the first time.
+triple, not the scalar Laplacian), here seen on the discrete
+substrate.
 
 % =====================================================================
 \section{Open questions}
@@ -2707,31 +2710,24 @@ target, not sprint-scale'') was correct for the \emph{scalar}
 wedge-lattice diagnostic (G4-3c-proper, T1), where the discretization
 floor exceeds the SC tip term. However, on the \emph{spinor} wedge
 (G4-4c), the SC tip coefficient $-(1/12)(1/\alpha - \alpha)$ is
-extracted to 5 significant figures at sprint scale on the same
-substrate. The half-integer angular momentum + anti-periodic BC of
+approached as the radial mesh refines on the same substrate. The half-integer angular momentum + anti-periodic BC of
 the spinor sector cleanly extracts the conical-defect tip term where
 the integer scalar sector does not. This refines Q1: G4-5/G4-6 builds
 on a quantitatively validated foundation, not on a sketch.
 
-\textbf{Open beyond sprint scale:} (i) the $\alpha > 1$ structural
-asymmetry (recovery N$_0$-independent at 67.88\%, suggesting
-sub-leading corrections to the continuum SC at excess angles, or a
-different effective tip coefficient at saddle cones); (ii) the joint
+\textbf{Open beyond sprint scale:} (i) resolved: the $\alpha > 1$
+recovery deficit is a finite-$a$ artifact (B4); (ii) the joint
 variable-warp + conical-defect Dirac (cigar with conical singularity,
 not addressed in any of G4-4a/b/c separately); (iii) the integration
 over $t$ with cutoff regularization (G4-5 + G4-6, the standard
 Connes--Chamseddine integration).
 
-\paragraph{Q2.} The factor of 2 between G7's
-$\Geff = 6 \pi / \Lambda^2$ and G4-2's $G_N = 3\pi/\Lambda^2$ is a
-\emph{forced bookkeeping artifact} by Wald's theorem in the
-two-term-exact Einstein sector (see the G4-2 remark): the scalar and
-Dirac cones share the conical-coefficient magnitude, so the factor
-does NOT come from a scalar-vs-Dirac coefficient calibration --- that
-first reading was rejected 2026-05-30 (an earlier printing of this
-question carried it). What remains open is the convention-alignment
-computation locating the mismatch in the 4D-bulk vs factorized
-2D$\times$2D normalization.
+\paragraph{Q2 (resolved).} The factor of 2 once found between G7's
+$\Geff$ and G4-2's $G_N = 3\pi/\Lambda^2$ was the G2 spinor rank: the
+earlier G2 trace ran over a rank-2 bundle, and the rank-4 Dirac trace
+gives $\Geff = 3\pi/\Lambda^2$, as Wald's theorem requires in the
+two-term-exact Einstein sector (see the G4-2 remark). It never came
+from a scalar-vs-Dirac cone coefficient.
 
 \paragraph{Q3.} The cosmological-constant-scale gap of $\sim 10^{120}$
 is inherited from standard CC. Whether the discrete-substrate program
@@ -2741,11 +2737,11 @@ be substantial.
 
 \paragraph{Q3 sharpened (post-G4-5 sector-wise Mellin moment map).}
 The sector-wise Mellin moment map
-$\{\text{tip} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
+$\{\text{2D tip (proper-time estimator)} \leftrightarrow \phi(0),\ \text{EH} \leftrightarrow \phi(1),\ \Lambda_{cc} \leftrightarrow \phi(2)\}$
 allows a precise framework-internal statement of the CC problem. From
 \S\ref{sec:g7}, the dimensionless cosmological constant in Planck units
-is $\Lcc \cdot \Geff = 36\pi\, \phi(2)/\phi(1)^2$. For Gaussian
-($\phi(1) = \phi(2) = 1$), this is $36\pi \approx 113$; for polynomial
+is $\Lcc \cdot \Geff = 18\pi\, \phi(2)/\phi(1)^2$. For Gaussian
+($\phi(1) = \phi(2) = 1$), this is $18\pi \approx 57$; for polynomial
 or sharp cutoffs, $O(1)$. Observation requires
 $\Lcc \cdot \Geff \sim 10^{-122}$. \emph{The precise framework-internal
 statement of the cosmological-constant problem is therefore the

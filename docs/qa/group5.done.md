@@ -13,7 +13,11 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group5-specific scope + deltas + the branch watch-notes.
 
-> **STATUS: CERTIFIED ✅ 2026-07-04** (certifying FULL run PASS after in-run
+> **CURRENT STATUS (2026-11-07): NOT RESEARCH-GRADE.** `/qa group5` FULL #1 (incremental, v6.5.0) = FAIL,
+> remediated; self-check bounded at 2 rounds; coverage 300/300; FULL #2 or a claim-search DELTA owed.
+> Debt: `docs/qa/group5.debt.md`. The 2026-07-04 record below is historical.
+
+> **STATUS (historical): CERTIFIED ✅ 2026-07-04** (certifying FULL run PASS after in-run
 > loop-until-dry convergence; 5th certified branch, after group3/group1/group2/group4.
 > Run notes: `debug/qa/group5_cert_run_notes.md`.) Originally drafted 2026-07-02
 > (sixth pre-registered `/qa` target; the HEP/gauge-theory branch). Inherits criteria.md C1–C17 + the v4.62.1 run-shapes
@@ -80,9 +84,13 @@ locus: Möbius α/(2α−1) = **finite-a substrate artifact, not continuum physi
 continuum α>1 = plain SC −1/12); soft_IR_frac=1/(2α) demoted to a t≈1 sweet-spot
 coincidence; the "Fursaev–Solodukhin" attribution was a **fabricated arXiv ID**
 (mechanism OPEN — and this paper's citations therefore get the deepest C4 scrutiny
-in the sweep); A = 1/(24π) supplied ANALYTICALLY by Theorem 1 (the numerical
-extraction diverges — single-axis and isotropic refinement both negative); the
-G7/G4-2 factor of 2 = forced Wald bookkeeping, NOT a cone-coefficient; scalar-BC
+in the sweep); [amended 2026-11-07 mid-run — the rank clause PI-approved; the 1/(24π)
+clause a PM-verified dimensional error, flagged to the PI for confirmation: the "A = 1/(24π) supplied
+analytically" target is WITHDRAWN — the continuum cone tip term is t-independent (1/6),
+so the per-t 1/(24πt) target was dimensionally wrong and the "divergent extraction"
+negatives chased a nonexistent term; the G7/G4-2 factor of 2 was the G2 spinor rank
+(rank-4 trace gives G_eff = 3π/Λ² = G_N), NOT Wald bookkeeping and NOT a
+cone-coefficient — a restatement of either old form is STALE]; scalar-BC
 SC extraction structurally requires anti-periodic/half-integer (spinor); S_BH's
 sector-wise Mellin map (tip↔φ(0), EH↔φ(1), Λ_cc↔φ(2)) with the naive φ(2)
 prediction REJECTED; the replica-weight theorem (L6) is the arc's one verified
@@ -146,8 +154,12 @@ The July criteria above are superseded where they conflict with the items below.
 - **Paper 33.** Furry's mechanism is **m_l conservation, not Hermiticity** ("Hermiticity alone does not suffice");
   criterion 2.1's "V(a,a)=0 by Hermiticity" is superseded. The S² Hopf base is radius 1/2, area π; the 1/(4π)
   normalisation is radius-independent. The VQ-1..5 and co-exact negatives live in Paper 28.
-- **Paper 36.** Of the −5.65 MHz residual only ~+1.20 MHz is multi-loop; ~+4.4 MHz is non-loop (recoil, finite
-  nuclear size, hyperfine averaging) (LS-7). Criterion 4's "honest two-loop-scale gap" is superseded.
+- **Paper 36 (amended 2026-11-07 mid-run, PI-approved).** The headline is textbook one-loop arithmetic with
+  literature Bethe logarithms; the LS-7 decomposition (+1.20 loop / +4.4 non-loop) is WITHDRAWN pending an
+  order-by-order budget from Eides–Grotch–Shelyuto (its rows do not sum to its stated totals, and the one-loop
+  α(Zα)⁵ A₅₀ term is not visibly accounted for). A restatement presenting the split or "one-loop closure" as
+  standing is STALE. Criterion 4's "honest two-loop-scale gap" reading is not reinstated either; the residual's
+  attribution is OPEN.
 - **Paper 51.** The Möbius α/(2α−1) form is a finite-a substrate artifact and the mechanism is **RESOLVED (B4)**;
   the earlier arXiv ID "turned out to be a different paper" (the July "fabricated ... mechanism OPEN" is superseded).
   L6 stands as [INTERNAL THEOREM] on two lemmas; its propinquity-backbone lemma is **[OPEN]**, and the earlier

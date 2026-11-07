@@ -7,6 +7,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.5.0] - 2026-11-07
+
+**/qa group5 FULL (incremental, whole target, unseeded; snapshot 99cd34bf) = FAIL, remediated.** PI: "Go ahead
+and start /qa group5". Panel: 5 claims (Opus), 8 code (Opus P28/P41/P51, Sonnet P2/P25/P30/P33/P36), 2 citation
+(Opus), 1 synthesis, completeness critic; deterministic gates C10-C25 green throughout. Every MATERIAL finding was
+checked against primary text or recomputed before acceptance. PI decisions (all with recommendations, all accepted):
+re-tier now and owe the computations; Paper 28 Theorem 4 re-tiered to its vertex model; the criteria-currency block
+amended to drop the LS-7 split; the Paper 51 spinor-rank correction made now. MINOR because retractions move
+published numbers (G_eff, the Lamb budget, Wilson-loop values); the bump is the PI's to confirm.
+
+### Changed (owner corrections)
+- **Paper 28.** The vertex rule q <= n1+n2 is the scalar-harmonic triangle, a vertex model: the physical vector
+  vertex allows q = n1+n2+1 and couples the ground state at q = 1 (Killing spinor x left-invariant coframe witness).
+  Theorem 4 (Sigma(0) = 0) holds in the model only; Table 3's self-energy values could not be reproduced and are
+  withdrawn. The 1.084 anomalous-moment ratio divides a coupling-free sum by the CODATA alpha/(2 pi): [OBSERVATION],
+  the Parker-Toms closeness a coincidence, c3 not separable from c2 at one curvature value, the flat-space limit not
+  computed. Two-term exactness credited to Chamseddine-Connes (a property of the round-sphere spectrum, not of a
+  truncated substrate); the sharp cutoff excluded; graviton positivity only for Lambda^2 < 2 lambda_min^2; the
+  plaquette "recovery" of the GS zero is a tree artifact (every s-edge is a bridge); census table aligned to Paper 33's
+  R1-R8; rank-4 gravity constants.
+- **Paper 51.** The G2 trace on S3 x S1 was rank 2; the rank-4 Dirac trace gives action beta R^3 L^4/2 - beta R L^2/4,
+  G_eff = 3 pi/L^2 (= G4-2's G_N; Q2 resolved: the factor of 2 was the spinor rank), s_min = -L/(6 sqrt6),
+  G Lambda_cc = 18 pi phi(2)/phi(1)^2. The per-t UV target 1/(24 pi t) was dimensionally wrong: the continuum cone
+  tip is t-independent (1/6; exact Bessel-zero computation re-run by the PM). Sector-wise Mellin theorem restated in
+  the Laplace convention: the 2D tip contributes f(0), the 4D cigar's leading tip (Dirac S^2 kernel 2r_h^2/t - 1/3)
+  contributes (r_h^2 L^2/3) phi(1); phi(0) belongs to the proper-time estimator used on the substrate. a0 = 1.992
+  compared against 2.0 omitted the Dirichlet perimeter term (continuum 1.888); "bit-exact"/"5 s.f."/"sub-percent"
+  crossings reworded to convergence as a -> 0; Moebius residue re-read as a finite-a artifact; Chamseddine-Connes
+  credited with the all-order two-term vanishing; the L6 commute check relabelled; K_TT mechanism corrected.
+- **Paper 30.** The two plaquettes form a cycle basis, so <W> = I2(beta)/I1(beta) exactly; every l-block is a planar
+  grid whose unit squares form a cycle basis, so <W> = (I2/I1)^Area at every n_max [INTERNAL THEOREM]. The MC table's
+  deviations were an unconverged 2000-sample chain (three 20000-sample chains scatter about the exact values); the
+  shared-edge explanation and "2-35%/~20%" are withdrawn.
+- **Paper 33.** A census of eight rules (five standard, three S3-specific) in a vertex model; the Dirac Furry score is
+  an alpha_z-vs-scalar-harmonic identity (the physical diagonal magnetic vertex is nonzero: ground-state projection
+  -4/3 with fg = 1, re-run by the PM); production code imposes V(a,a) = 0; the 1/(4 pi) proof formula corrected
+  (G_e and the sum over b); "stronger than C" and the literature-novelty claim removed.
+- **Paper 36.** The 1052.19 MHz headline is the leading one-loop assembly with literature Bethe logs; it omits the
+  one-loop alpha(Z alpha)^5 term (A50 = 9.29, ~ +6.9 MHz). The LS-7 residual decomposition is withdrawn (rows did not
+  sum; the "hyperfine averaging" row had no source); the 2S N = 40 Bethe log is a crossing; the muonium Karshenboim
+  comparison is withdrawn (figures not in the cited source).
+- **Paper 41.** Compatible with compact U(1); no 3D-vs-4D discrimination (no 4D control). W1's climb toward 3 was
+  estimator drift (d_s = 3.04 at n_max = 8, re-run); W2 holds for any k_eff > 1; W3's perimeter law is 3D-or-4D; W5
+  spans 3.7 decades below the 4D beta_c; W6's rate mismatch is open (the "5e-9" was rho_M, not sigma); W7's
+  confinement reading withdrawn (<P> = 0 forced by centre symmetry; stored <|P_lat|> rises 0.285 -> 0.833); the
+  correlator table carried a double normalization and is withdrawn.
+- **Paper 2.** Cumulative Dirac/Weyl degeneracy closed forms corrected; the calibration-pi reading withdrawn (an
+  escape of the 2026-10-19 C16 entry); Wyler's precision ~6e-7. K = pi(B+F-Delta) stays an Observation.
+- **Paper 25.** SU(3) question answered (ST-SU3); "intrinsic spectral invariants"/"not numerology" softened; the
+  plaquette QED role and the continuum-limit question removed; Delta's mode count is both chiralities.
+
+### Changed (dependents and front door)
+- Papers 34 (Lamb autopsy: the +1.20 and +5.00 rows withdrawn, sum of listed terms 1049.93, residual unattributed;
+  muonium convention entry withdrawn; Parker-Toms "verified" removed), 35 (LS-7 paragraph), 18 (Furry tier), 32, 57
+  (seam counts 43 F / 5 Obs; Paper 28 sentence; Chamseddine-Connes credit), the field guide, the group5 synthesis
+  (abstract, intro, gauge, QED, alpha, precision, gravity, scope).
+- `docs/forced_free_seam.md` (E1/E2 re-scoped to the vertex model; E4 F -> Obs; D1/D3/D7), claims register row 7,
+  topic lookup, validation benchmarks, `papers/INDEX.md` rows 28/33/36/41/51.
+- `docs/qa/group5.done.md`: two mid-run amendments (Paper 36 currency line, PI-approved; the factor-of-2 rank clause,
+  PI-approved; the 1/(24 pi t) clause PM-verified, flagged for PI confirmation).
+- CLAUDE.md section 3 and the ledger: RE-INTERPRETATION of the two A-coefficient rows (append-only).
+
+### Added
+- 12 C16 entries (`g5-*`), each discrimination-tested both ways (fire on the retired wording, silent on the corrected),
+  with `cited_by` stamps; patterns widened after the self-check. `docs/qa/group5.debt.md`: PI decisions (retitles of
+  Papers 33, 36, 41), owed computations, owed guards (five tests that currently pin retired values are priority),
+  code defects found, SMALLs, and the recorded guard escape.
+
+### Self-check
+- Round 1 (two fresh Opus reviewers): 15 LARGE, 14 of them residue next to edited hunks and one introduced error (the
+  Paper 51 sector-Mellin proof mixed Mellin conventions); all fixed. Round 2 (one fresh Opus reviewer, the bounded
+  last round): 9 LARGE, 7 residue in dependents (Papers 34, 35, 32, 57, the group6 synthesis; P28 Layer 3; P51 stale
+  s_min) and one pre-existing error (Paper 36's muonium HFS itemization added positive terms to a positive residual;
+  withdrawn); all fixed, with the escapes added to C16 (new entry `g5-p51-tip-phi0-spectral-action`). Per the
+  bounded-self-check rule no third round was run; the verdict stays FAIL-remediated, not RESEARCH-GRADE.
+- Stamps: coverage 300/300 owner units (cite 8, code 8, prose 284). Also fixed: Paper 36 cited 'Mariam 1982' without a
+  bibitem (C20; now points to Paper 34); a pre-existing `test_numeric_registry` failure (the `p23_he4_e0_coul`
+  convention string, from v6.3.0) reworded to a parsed kind.
+
 ## [v6.4.5] - 2026-11-06
 
 **Paper 63: attainment proved at the holomorphic-period level for n <= 8; the SMALL sweep; the Avery message

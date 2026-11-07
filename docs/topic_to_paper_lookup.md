@@ -313,7 +313,7 @@
 | 1-7-8 selection rule partition | 18, 28 | §vector_photon_qed | Core/Observation |
 | Furry's theorem: scalar obstruction, Dirac resolution | 28 | §vector_photon_qed | Observation |
 | Dirac spinor phase constraint (V(a,a)=0) | 28 | §vector_photon_qed | Observation |
-| Scalar 7/8 vs Dirac 8/8 selection rules (vector QED) | 28 | §vector_photon_qed | Observation |
+| Scalar 7/8 vs Dirac 8/8 selection-rule census in a vertex model (vector QED; not the physical vertex) | 28, 33 | §vector_photon_qed | Observation |
 | GeoVac spectral triple (A_GV, H_GV, D_GV) construction | 32 | Sec III | Synthesis |
 | Connes axiom audit (real, odd, KO-dim 3) | 32 | Sec IV | Synthesis |
 | Marcolli–vS gauge-network lineage placement (WH1) | 32 | Sec VII | Synthesis |
@@ -390,11 +390,11 @@
 | Algebraic / observation split (Layer 1 π-free, Layer 2 introduces π through observation) | 35, 34 | Sec I-VII (Paper 35) | Observation |
 | Stefan-Boltzmann π²/90 from Matsubara projection | 35 | Sec V.A | Observation |
 | Conformal coupling integer collapse (m²=1 on unit S³, ω_n = n+1) | 35 | Sec III | Observation |
-| Hydrogen Lamb shift one-loop closure on Dirac-S³ (1052.19 MHz, −0.534%) | 36 | Sec V-VI | Observation |
+| Hydrogen Lamb shift at leading one-loop order (1052.19 MHz, −0.534%, literature Bethe logs); GeoVac Bethe logarithms | 36 | Sec V-VI | Observation |
 | LS-6a Uehling-kernel double-counting fix (+27.13 MHz = 4/15 × α³Z⁴/πn³) | 36, 34 | Sec V (Paper 36), Table 2 (Paper 34) | Observation |
 | Acceleration-form Bethe log in Sturmian basis (LS-3, 3.3× tighter for s-states) | 36 | Sec IV | Observation |
 | Bound-state QED one-loop architecture (Fock + Camporesi-Higuchi + Sturmian + Drake-Swainson + Eides) | 36 | Sec II-V | Observation |
-| Multi-loop test target sharpened to ~+1.20 MHz (LS-7 reframing of LS-6a residual decomposition) | 36, 35 | Sec VII (Paper 36) | Observation |
+| Lamb-shift residual not attributed (LS-7 decomposition withdrawn 2026-11-07; one-loop α(Zα)⁵ term omitted) | 36, 35 | Sec VII (Paper 36) | Observation |
 | Two-loop SE prefactor (α/π)²·(Zα)⁴/n³ from iterated CC spectral action on Dirac-S³ (LS-7) | 36, 35, 28 | Sec VI (Paper 36), Sec VII.3 (Paper 35) | Observation |
 | LS-7 residual decomposition: +1.20 MHz multi-loop QED + ~+4.4 MHz non-loop (recoil/FNS/hyperfine) | 36 | Sec VI (Paper 36) | Observation |
 | Hydrogen 21 cm hyperfine multi-focal precision test (Sprint HF) | 28, 34, 36 | Sprint HF, debug/sprint_hf_track*_memo.md | Observation |

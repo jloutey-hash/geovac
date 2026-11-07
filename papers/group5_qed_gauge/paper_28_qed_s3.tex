@@ -42,17 +42,20 @@ $\pi^{\mathrm{even}}$, odd $s \ge 5$ produces $\zeta(3)$, $\zeta(5)$, etc.
 $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) -
 \beta(s{-}2))$ at every integer $s \ge 2$, a concrete spectral-zeta
 to Dirichlet-$L$ bridge (Theorem~\ref{thm:chi4}).
-(4)~\textbf{Self-energy structural zero:} the one-loop electron
-self-energy on $S^3$ vanishes identically at the ground state
-$n_{\mathrm{ext}}=0$ as a consequence of vertex parity
-(Theorem~\ref{thm:self_energy_zero}).
-(5)~\textbf{Anomalous magnetic moment:} the one-loop vertex correction
-with a $q=1$ probe photon yields $F_2 / [\alpha/(2\pi)] = 1.084$ at the
-lowest external mode ($n_{\mathrm{ext}}=1$), approximately 8.4\% above
-the flat-space Schwinger value, matching the Parker--Toms leading
-curvature correction within 0.4\%.  The next-order coefficient
-$c_3 = -5.946(3) \times 10^{-7}$ is nonzero at $200.9\,\sigma$, so the
-curvature expansion does not terminate at second order
+(4)~\textbf{Self-energy zero of the vertex model:} with the
+scalar-harmonic triangle rule of Eq.~\eqref{eq:vertex_rule} the
+one-loop self-energy vanishes at the ground state $n_{\mathrm{ext}}=0$
+(Theorem~\ref{thm:self_energy_zero}).  The rule is the scalar
+triangle; the physical vector-photon vertex also allows
+$q = n_1 + n_2 + 1$ and couples the ground state at $q = 1$, so the
+zero is a property of the model, not of QED on $S^3$.
+(5)~\textbf{Anomalous-moment ratio [OBSERVATION]:} the one-loop vertex
+sum with a $q=1$ probe photon, divided by the CODATA value of
+$\alpha/(2\pi)$, gives $1.084$ at $n_{\mathrm{ext}}=1$.  The sum
+carries no coupling constant, so the ratio is not a normalized
+$F_2/[\alpha/(2\pi)]$; its closeness to the Parker--Toms curvature
+correction is a numerical coincidence, and with one curvature value
+the next-order coefficient cannot be separated from the second
 (Sec.~\ref{sec:curvature_coefficients}).
 (6)~\textbf{Depth-$k$ tower:} loop order bounds the motivic depth of
 the level-2 (alternating-MZV) content; it does not automatically mint
@@ -71,8 +74,8 @@ mode degeneracy $g_n^{\mathrm{Dirac}} = 2n(n+1)$ satisfy
 $\mathcal{S}(n) + g_n^{\mathrm{Dirac}} = 9n^2/2$ exactly, so the
 Dirichlet series identity
 $D_{\mathcal{S}}(s) + D_{g}(s) = \tfrac{9}{2}\,\zeta(s{-}2)$ holds
-for all~$s$: the $\zeta(s{-}1)$ terms---all odd-zeta content---cancel
-identically (Theorem~\ref{thm:zeta3_complement}).
+for all~$s$: the $\zeta(s{-}1)$ terms cancel identically, so at even
+$s$ the sum is free of odd zeta (Theorem~\ref{thm:zeta3_complement}).
 (8)~\textbf{Fine-structure Euler sum cancellation and product survival
 rule:} the degeneracy-weighted Dirichlet sums $D_p$ at order
 $(Z\alpha)^{2p}$ in the exact Dirac hydrogen spectrum, computed through
@@ -80,8 +83,9 @@ $D_6$ ($(Z\alpha)^{12}$, weight~11), satisfy a product survival rule:
 $\zeta(2) \times \zeta(\mathrm{odd})$ cancels algebraically at every
 order, while exactly $\max(0, \lfloor(2p{-}5)/2\rfloor)$ products
 survive (Observations~\ref{obs:euler_cancel},~\ref{obs:product_rule}).
-The cancellation mechanism is the $n^2$ Fock degeneracy --- the same
-weighting that produces $F = \zeta(2) = D_{n^2}(4)$ in Paper~2.
+We read the cancellation as tied to the $n^2$ Fock degeneracy, the
+weighting that also produces $F = \zeta(2) = D_{n^2}(4)$ in Paper~2
+(a reading through $D_6$, not derived).
 However, PSLQ finds no small-coefficient $\mathbb{Q}$-linear relation
 between Paper~2's $K = \pi(B + F - \Delta)$ and $D_2, \ldots, D_6$:\ $K$
 lies in $\mathbb{Q}[\pi]$ ($B$ a rational Casimir trace, $F = \zeta(2)$,
@@ -94,57 +98,41 @@ sums, regularization, or renormalization.  All graph-native QED
 quantities are $\pi$-free (algebraic); the projection exchange constant
 relating graph and continuum VP is \emph{rational} at every finite
 truncation, confirming Paper~18's calibration-tier classification.
-The continuum self-energy structural zero (Theorem~\ref{thm:self_energy_zero})
-is broken on the finite graph: the pendant-edge theorem
+The vertex model's ground-state zero (Theorem~\ref{thm:self_energy_zero})
+is not reproduced on the finite graph: the pendant-edge theorem
 (Proposition~\ref{prop:pendant_edge}) proves
 $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max} \to 2$
-exactly, never healing in the graph limit.  The root cause is that the
-graph photon is a scalar 1-cochain, lacking the spin-1 vector structure
-whose SO(4) selection rules enforce the continuum zero.
+exactly.
 The graph-native anomalous moment $F_2(t)$ is an even rational function
 of the hopping coupling~$t$ over $\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{6})$,
 with $F_2(\kappa)$ decreasing as a power law $\sim 3.5\, n_{\max}^{-0.57}$
 ($F_2 = 2.353, 1.873, 1.589, 1.396, 1.253$ at $n_{\max} = 2, \ldots, 6$).
-A systematic selection rule census shows that only 1~of~8 continuum QED
-selection rules survives on the scalar Fock graph (Gaunt/CG sparsity).
-Building QED on the native Dirac graph with $(n, \kappa, m_j)$ node
-labels recovers 4~of~8 rules, establishing a three-tier partition:
-1~always survives, 3~are spinor-recoverable (intrinsic to spinor quantum
-numbers), and 4~require vector photon structure (calibration tier).
-A five-track vector QED sprint (VQ-1--5) confirms this partition from a
-complementary direction: neither Pauli spin matrices at the vertex, nor
-direction-resolved edge Hodge decomposition, nor their combination
-recovers any of the 4~vector-required rules.
-However, the transverse photon propagator $G_T = (d_1 d_1^\top)^+$
-built from Paper~30's plaquette boundary operator \emph{does} recover
-the ground-state structural zero ($\Sigma_T(\mathrm{GS}) = 0$ exactly),
-refining the partition to 1+3+1+3: the plaquette-recoverable tier is
-topological (pendant-edge exclusion from closed walks), requiring no
-photon quantum numbers.
-Adding explicit vector photon quantum numbers $(q, m_q)$ with
-Clebsch--Gordan vertex coupling recovers 7~of~8 continuum selection
-rules for scalar electrons and \textbf{8~of~8 for Dirac electrons}
-(Sec.~\ref{sec:vector_photon_qed}).  The calibration cost is exactly
-one transcendental per loop: $\pi$, entering as the $S^2$ Weyl
-exchange constant $1/(4\pi)$ from Paper~18's taxonomy.  For scalar
-electrons, the sole failure is Furry's theorem; for Dirac electrons,
-the diagonal vertex coupling $V(a, a, q, m_q) = 0$ vanishes
-identically by the \emph{Dirac spinor phase constraint}: the
-$\alpha$-matrix is off-diagonal in large/small component space, and
-for $a = b$ the cross terms combine, via Hermiticity and the
-$i$-factor on the small component, into an imaginary part that
-$m_l$ conservation forces to vanish.  This is a kinematic identity of
-the single-particle vertex, not the field-theoretic charge conjugation
-mechanism.  For Dirac electrons, the 8~rules partition as
-$1$--$7$--$8$: graph topology $\to$ angular momentum conservation
-$\to$ Dirac spinor phase constraint (zero additional cost).
+A census against a list of eight selection rules (Paper~33; the list
+includes three rules specific to the $S^3$ construction) finds 1~of~8
+on the scalar Fock graph and 4~of~8 on the native Dirac graph with
+$(n, \kappa, m_j)$ node labels, of which four hold by the definition of
+that graph's edges.  A five-track vector QED sprint (VQ-1--5) finds that
+neither Pauli spin matrices at the vertex, nor direction-resolved edge
+Hodge decomposition, nor their combination recovers further rules.
+The transverse propagator $G_T = (d_1 d_1^\top)^+$ built from
+Paper~30's plaquettes gives $\Sigma_T(\mathrm{GS}) = 0$, but for every
+$s$-state alike (each $s$-edge is a bridge), so it is not a
+ground-state selection rule.  Adding photon quantum numbers $(q, m_q)$
+with Clebsch--Gordan vertex coupling scores 7~of~8 for scalar electrons
+and 8~of~8 for Dirac electrons (Sec.~\ref{sec:vector_photon_qed}),
+within the vertex model: the ground-state rule is the scalar-triangle
+zero above, and the Dirac diagonal-vertex zero $V(a, a, q, m_q) = 0$
+is shown for $\alpha_z$ against scalar harmonics only (the diagonal
+magnetic coupling of a physical vector photon does not vanish;
+Paper~33).  The vertex normalization contributes exactly $1/(4\pi)$
+per loop; reading it as the $S^2$ Weyl exchange constant of Paper~18 is
+an Observation.
 The VP projection constant $C$ does \emph{not} serve as a universal
 graph-to-continuum projector: $C \times F_2$ diverges from
 $\alpha/(2\pi)$, confirming that different diagram topologies require
 independent projection factors.
-Comprehensive transcendental tables for $D(s)$, $D_{\mathrm{even}}(s)$,
-$D_{\mathrm{odd}}(s)$, and the one-loop self-energy are presented, all
-backed by the test suite.
+Transcendental tables for $D(s)$, $D_{\mathrm{even}}(s)$ and
+$D_{\mathrm{odd}}(s)$ are presented, backed by the test suite.
 \end{abstract}
 
 % ===================================================================
@@ -259,17 +247,30 @@ $\Delta_1 = \nabla^*\nabla + \mathrm{Ric}$ on $S^3$
 There are no zero modes ($\beta_1 = 0$ for $S^3$).
 
 \subsection{Vertex selection rule}
+\label{sec:setup}
 
-The QED vertex on $S^3$ couples spinor harmonics at levels $n_1, n_2$
-to a vector harmonic at level $q$ with the SO(4) selection rule:
+The spectral sums of this paper couple spinor harmonics at levels
+$n_1, n_2$ to a photon mode at level $q$ under the selection rule
 \begin{equation}
   |n_1 - n_2| \le q \le n_1 + n_2, \qquad
   n_1 + n_2 + q \;\text{is odd}.
   \label{eq:vertex_rule}
 \end{equation}
-The parity constraint arises from the $\gamma^\mu$ coupling, which
-flips the chirality representation of $\mathrm{SO}(4)
-= \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$.
+This is a \emph{vertex model}, not the vertex of QED on $S^3$.  The
+triangle bound is the one for scalar harmonics; the transverse vector
+harmonics at level $q$ carry $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$
+content $((q\pm1)/2, (q\mp1)/2)$, and the standard coupling rules for
+those allow $q = n_1 + n_2 + 1$ as well.  In particular the physical
+vertex couples the ground state to itself at $q = 1$: a Killing spinor
+(constant in the left-invariant frame) paired with a left-invariant
+coframe 1-form, a coclosed $q = 1$ eigenform, gives
+$\langle \chi' | \sigma^b | \chi \rangle\,\mathrm{Vol}(S^3) \ne 0$.  The
+parity clause is imposed as part of the model.  Statements below that
+depend on Eq.~\eqref{eq:vertex_rule} (the ground-state zero, the
+parity discriminant's physical reading, the self-energy and vertex
+sums) are statements about this model; the spectral-zeta identities
+of Theorems~\ref{thm:T9} and~\ref{thm:chi4} are statements about the
+sums as defined and are unaffected.
 
 The SO(4) Clebsch--Gordan channel count $W(n_1, n_2, q) \in \{0,1,2\}$
 weights each allowed triple by the number of independent coupling
@@ -624,10 +625,11 @@ photon mode $q$ subject to the vertex selection
 rule~\eqref{eq:vertex_rule}, $s_e = 2$ (so $|\lambda|^4$ in the
 denominator), $s_\gamma = 1$, and $W$ is the SO(4) channel count.
 
-\begin{theorem}[Self-energy structural zero]
+\begin{theorem}[Self-energy zero of the vertex model]
 \label{thm:self_energy_zero}
-$\Sigma(0) = 0$ exactly.  The one-loop self-energy vanishes
-identically at the Dirac ground state $n_{\mathrm{ext}} = 0$.
+Under the selection rule~\eqref{eq:vertex_rule}, $\Sigma(0) = 0$
+exactly: the model's one-loop self-energy vanishes identically at the
+Dirac ground state $n_{\mathrm{ext}} = 0$.
 \end{theorem}
 
 \begin{proof}
@@ -640,42 +642,18 @@ integer $n_{\mathrm{int}}$.  Therefore $W(0, n_{\mathrm{int}}, q) = 0$
 for all $(n_{\mathrm{int}}, q)$, and the sum is empty.
 \end{proof}
 
-\noindent This is the $S^3$ analog of the fact that the ground state
-of a compact system cannot emit into a vacuum mode: the vertex parity
-constraint is a spectral selection rule, not a dynamical cancellation.
+\noindent The zero is a consequence of the model's triangle bound,
+which is the scalar one: with the vector-photon rule the $q = 1$
+channel at $n_{\mathrm{int}} = 0$ is open and the ground-state
+self-energy does not vanish.
 
 \subsection{Self-energy for excited states}
 
-For $n_{\mathrm{ext}} \ge 1$, the self-energy is nonzero and
-convergent.  We compute $\Sigma(n_{\mathrm{ext}})$ at physical
-propagator powers ($s_e = 2$, $s_\gamma = 1$) for $n_{\mathrm{ext}}
-= 0, 1, \ldots, 5$ at cutoff $n_{\max} = 30$.
-
-\begin{table}[h]
-\centering
-\caption{One-loop self-energy $\Sigma(n_{\mathrm{ext}})$ on $S^3$,
-$n_{\max} = 30$.}
-\label{tab:self_energy}
-\begin{tabular}{@{}cl@{}}
-\toprule
-$n_{\mathrm{ext}}$ & $\Sigma(n_{\mathrm{ext}})$ \\
-\midrule
-0 & $0$ (exact, Theorem~\ref{thm:self_energy_zero}) \\
-1 & 1.2854 \\
-2 & 1.7862 \\
-3 & 2.0843 \\
-4 & 2.2884 \\
-5 & 2.4398 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent The self-energy increases monotonically with
-$n_{\mathrm{ext}}$, consistent with stronger coupling at higher
-momentum shells.  At $n_{\mathrm{ext}} = 1$, PSLQ at 50 dps
-identifies $\Sigma(1)$ as containing $\pi^{\mathrm{even}}$ and
-Catalan $G$ components (vertex parity active on the asymmetric
-coupling to the $n_{\mathrm{ext}} = 1$ shell).
+For $n_{\mathrm{ext}} \ge 1$, the model self-energy is nonzero and
+convergent at physical propagator powers ($s_e = 2$, $s_\gamma = 1$),
+and increases monotonically with $n_{\mathrm{ext}}$.  (A table of
+values printed in an earlier version could not be reproduced by the
+module \texttt{geovac/qed\_self\_energy.py} and is withdrawn.)
 
 \subsection{Vertex correction}
 
@@ -831,8 +809,9 @@ $n_{\mathrm{ext}} = 1$.
 \centering
 \caption{Per-level contributions to the anomalous magnetic moment on
 $S^3$.  External state $n_{\mathrm{ext}} = 1$, $j = 1/2$.
-The $n_{\mathrm{int}} = 0$ contribution vanishes by the self-energy
-structural zero (Theorem~\ref{thm:self_energy_zero}).
+The $n_{\mathrm{int}} = 0$ contribution vanishes in the vertex model
+(Theorem~\ref{thm:self_energy_zero}); with the vector-photon rule the
+$q = 1$ channel there is open.
 Contributions drop by approximately $100\times$ per successive allowed
 level pair.}
 \label{tab:g_minus_2}
@@ -841,7 +820,7 @@ level pair.}
 $n_{\mathrm{int}}$ & $\Delta B$ & $B_{\mathrm{cumul}}$
   & $F_2 / [\alpha/(2\pi)]$ & Status \\
 \midrule
-0 & $0$     & $0$           & ---     & $\Sigma(0)=0$ structural zero \\
+0 & $0$     & $0$           & ---     & closed in the vertex model \\
 1 & $6.96 \times 10^{-4}$  & $6.96 \times 10^{-4}$  & 1.074  & 99\% of final \\
 2 & $3.76 \times 10^{-6}$  & $7.00 \times 10^{-4}$  & 1.080  & \\
 3 & $2.85 \times 10^{-6}$  & $7.02 \times 10^{-4}$  & 1.084  & \\
@@ -859,17 +838,17 @@ Three structural features are visible:
 \item \textbf{Rapid convergence.}  The $n_{\mathrm{int}} = 1$ level
       contributes 99\% of the final value.  Each subsequent allowed level
       pair contributes roughly $100\times$ less than the previous one.
-\item \textbf{Vertex parity filtering.}
-      The $n_{\mathrm{int}} = 0$ contribution vanishes by
-      Theorem~\ref{thm:self_energy_zero} (the loop-photon vertex at
+\item \textbf{Vertex parity filtering (model).}
+      The $n_{\mathrm{int}} = 0$ contribution vanishes by the model
+      rule~\eqref{eq:vertex_rule} (the loop-photon vertex at
       $n_{\mathrm{ext}} = 1$, $n_{\mathrm{int}} = 0$ requires
       $q_{\mathrm{loop}} = 1$ and $1 + 0 + 1 = 2$ is even, forbidden).
       The dominant contribution comes from $n_{\mathrm{int}} = 1$
       (the nearest allowed level to the external state).
       Higher even-$n_{\mathrm{int}}$ levels contribute but are
       suppressed relative to odd-$n_{\mathrm{int}}$ neighbors.
-\item \textbf{Curvature correction.}  The ratio
-      $F_2 / [\alpha/(2\pi)]$ converges to $1.084$, not to~$1$.
+\item \textbf{The ratio.}  The ratio $B/V_{\mathrm{mag}}$ divided by
+      the CODATA value of $\alpha/(2\pi)$ converges to $1.084$.
 \end{enumerate}
 
 \subsection{Headline result}
@@ -883,14 +862,19 @@ already stable at $n_{\max} = 8$):
 with $B = 7.027 \times 10^{-4}$ and
 $V_{\mathrm{magnetic}} = 0.5579$.
 
-The anomalous magnetic moment on unit $S^3$ exceeds the flat-space
-Schwinger value by approximately 8.4\%.  This excess is a
-curvature correction: on a three-sphere of radius~$R$, the electron
-propagator samples a compact geometry where the shortest-wavelength
-virtual photon modes are modified relative to flat space.  In the
-flat-space limit $R \to \infty$, the curvature correction vanishes
-and $F_2 / [\alpha/(2\pi)] \to 1$, recovering the Schwinger
-result~\cite{schwinger1948} exactly.
+\noindent\textbf{Normalization [OBSERVATION].}  $B$ and
+$V_{\mathrm{mag}}$ are sums of Clebsch--Gordan products over spectral
+denominators with unit coupling: neither carries $e^2$, a loop measure
+or the harmonic normalization on $S^3$.  The ratio
+$F_2 = B/V_{\mathrm{mag}} = 1.2596 \times 10^{-3}$ is therefore not an
+anomalous moment in units of $\alpha$, and Eq.~\eqref{eq:F2_ratio}
+divides it by the CODATA value of $\alpha/(2\pi)$; the coupling does
+not cancel.  The value $1.084$, its closeness to $1 + 2/25$, and the
+curvature coefficients extracted from it below are numerical
+observations about this unnormalized ratio, computed moreover in the
+vertex model (the $n_{\mathrm{int}} = 0$, $q = 1$ channel that the
+physical vertex opens is closed).  The flat-space limit
+$R \to \infty$ is not computed here (see the open questions).
 
 \subsection{Mode dependence}
 \label{sec:mode_dependence}
@@ -916,7 +900,7 @@ all expressions are sums of square roots with rational coefficients
 \toprule
 $n_{\mathrm{ext}}$ & $\lambda_{\mathrm{ext}}$
   & $V_{\mathrm{mag}}$ & $B$
-  & $F_2 / [\alpha/(2\pi)]$ & vs.\ Schwinger \\
+  & ratio to CODATA $\alpha/(2\pi)$ & ratio $-1$ \\
 \midrule
 1 & $5/2$   & $0.5579$ & $7.027 \times 10^{-4}$ & $1.084$ & $+8.4\%$ \\
 2 & $7/2$   & $0.3893$ & $2.772 \times 10^{-4}$ & $0.613$ & $-39\%$ \\
@@ -939,9 +923,10 @@ curvature scale ($\lambda = n + 3/2$ sets the effective mass), and
 the loop integral is progressively suppressed.
 
 \medskip
-\noindent\textbf{Comparison with Parker--Toms.}
-The leading curvature correction to the anomalous magnetic moment in a
-general curved spacetime is~\cite{parker1980}:
+\noindent\textbf{Comparison with a curvature ansatz.}
+We compare against the leading curvature correction
+(motivated by the curved-space formalism of~\cite{parker1980}, where
+we have not found it stated as a theorem for $g-2$ on $S^3$)
 \begin{equation}
   \frac{F_2}{\alpha/(2\pi)} = 1 + \frac{R_{\mathrm{scalar}}}{12\,|\lambda|^2}
   + O(|\lambda|^{-4}),
@@ -950,7 +935,8 @@ general curved spacetime is~\cite{parker1980}:
 where $R_{\mathrm{scalar}} = 6$ on unit $S^3$ and $|\lambda|$ is the
 Dirac eigenvalue of the external state.  At $n_{\mathrm{ext}} = 1$
 ($|\lambda| = 5/2$), this predicts $1 + 6/(12 \cdot 25/4) = 1 + 2/25
-= 1.080$, which matches the computed $1.084$ within 0.4\%.  The
+= 1.080$, within 0.4\% of the computed $1.084$; given the
+normalization above this agreement is a numerical coincidence.  The
 expansion parameter is
 $\xi = R_{\mathrm{scalar}}/(12\,|\lambda|^2) \approx 0.08$ at
 $n_{\mathrm{ext}} = 1$, small enough for the leading term to dominate.
@@ -981,8 +967,9 @@ pulling the effective exponent above $-2$.  Whether the true asymptotic
 exponent is exactly $-2$ (with finite-curvature corrections) or a
 distinct value remains an open question.
 
-The power law implies $F_2 \to 0$ as $|\lambda| \to \infty$ on unit $S^3$.
-This is not inconsistent with the flat-space Schwinger limit: the
+The power law implies that the ratio tends to $0$ as
+$|\lambda| \to \infty$ on unit $S^3$.  Its relation to the flat-space
+Schwinger value is not established (the ratio is not normalized); the
 flat-space limit is $R \to \infty$ at fixed physical mass (requiring
 $n \sim m R \to \infty$ simultaneously), not $|\lambda| \to \infty$ on
 a fixed-size sphere.  Taking $|\lambda|$ large at fixed $R = 1$
@@ -1010,8 +997,8 @@ Writing
   \label{eq:curvature_expansion}
 \end{equation}
 at $n_{\mathrm{ext}} = 1$ ($|\lambda| = 5/2$), the leading coefficient
-$c_1 = R_{\mathrm{scalar}}/12 = 1/2$ follows from the Parker--Toms
-theorem~\cite{parker1980} for a Dirac field on unit~$S^3$.
+is set to $c_1 = R_{\mathrm{scalar}}/12 = 1/2$ by the ansatz of
+Eq.~\eqref{eq:parker_toms}.
 
 The converged $n_{\mathrm{ext}}=1$ spectral sum ($n_{\mathrm{int}} = 0
 \ldots 25$ with power-law tail correction, 13 significant figures)
@@ -1020,16 +1007,14 @@ $\delta \equiv F_2/[\alpha/(2\pi)] - 1 = 0.0844529226552$.
 Subtracting the leading term $c_1 x = 0.08$ and dividing by~$x^2$:
 \begin{equation}
   c_2^{\mathrm{apparent}} = \frac{\delta - c_1 x}{x^2}
-  = 0.173942291220598 \pm 10^{-12}.
+  = 0.173942291220598
   \label{eq:c2_apparent}
 \end{equation}
 We take $c_2 = a + b\pi^2$ for rationals~$a$, $b$ as a PSLQ ansatz.
 (T9, Theorem~\ref{thm:T9}, constrains only the integer-$s$ values of
 $\zeta_{D^2}$;\ it does not constrain every one-loop quantity on $S^3$ ---
 the one-loop determinant $\zeta'_{D^2}(0) = 3\zeta(3)/(4\pi^2) + \tfrac12\ln 2$
-is a counterexample, and so (by a PSLQ identification, Sec.~\ref{sec:self_energy};\
-no regression test pins it) is the one-loop self-energy $\Sigma(1)$,
-reported to carry Catalan $G$;\ beyond one loop, so
+is a counterexample;\ beyond one loop, so
 are the vertex-parity-restricted sums of Theorem~3 (two-loop sunset),
 which carry $G$ and $\beta(4)$ --- so the ansatz is not a T9 consequence.)
 
@@ -1073,13 +1058,13 @@ $-2.44 \times 10^{-9}$, yielding
        = -5.946(3) \times 10^{-7},
   \label{eq:c3_numerical}
 \end{equation}
-nonzero at $200.9\,\sigma$ (uncertainty from the tail-correction power-law
-fit).  The convergence is slow: the estimate drifts by $\sim 10^{-8}$
-per five internal levels at $n_{\mathrm{int}}=50$, so the true asymptote
-lies near $-5.95$ to $-5.97 \times 10^{-7}$.  The ratio
-$|c_3 x^3| / |c_2 x^2| \approx 5.4 \times 10^{-6}$ confirms the
-expansion is rapidly converging but \emph{does not} terminate at
-second order.  PSLQ identification against the Paper-2 invariant basis
+with only one curvature value $x = 4/25$, $c_3$ is the residual of
+the PSLQ value of $c_2$ divided by $x^3$, so it cannot be separated
+from $c_2$: a nonzero $c_3$ says only that the PSLQ $c_2$ and the
+truncation at second order are not both exact.  It says nothing about
+whether the expansion terminates.  (The quoted uncertainty, $3 \times
+10^{-10}$, is also smaller than the stated drift of $\sim 10^{-8}$ per
+five internal levels.)  PSLQ identification against the Paper-2 invariant basis
 $\{1, \pi^2, \pi^4, B\Delta, F\Delta, F/B, c_2, c_2^2, c_1 c_2,
 \Delta, \Delta^2, B\Delta^2, F\Delta^2, F^2/B\}$
 at $n_{\mathrm{int}}=50$ finds no relation with integer coefficients
@@ -1103,10 +1088,11 @@ $n_{\mathrm{ext}} = 1$, where $j = 1/2$ is the unique sector.
 \medskip
 \noindent\textbf{Paper~2 invariants in $c_2$: a numerical coincidence,
 not a derivation.}
-Since $\alpha$ cancels in the ratio $F_2/[\alpha/(2\pi)]$, $c_2$ is a
-pure geometric invariant of the Dirac spectral sum on~$S^3$, fitted in
-the ansatz form $a + b\pi^2$ with rationals~$a, b$ (an ansatz, not a T9
-consequence;\ see above).  The PSLQ identification
+The coupling does not cancel in the ratio (see the normalization note
+above): $c_2^{\mathrm{apparent}}$ inherits the CODATA value of $\alpha$,
+so it is not a geometric invariant of the Dirac spectral sum, and its
+fit in the ansatz form $a + b\pi^2$ (not a T9 consequence;\ see above)
+is a fit to a number that moves with $\alpha$.  The PSLQ identification
 (Eq.~\ref{eq:c2_identification}) writes $a$ and $b$ as a small-integer
 combination of $B$, $F$, $\Delta$, but this should be read with
 caution.
@@ -1120,9 +1106,9 @@ size; the cross-invariant beats the next-best PSLQ candidate
 $(6\pi^2 - 58)/7$ by roughly 2.4~digits, which is suggestive but not
 conclusive.
 
-Second, and decisively: the \emph{same} form does not predict $c_3$.
-Eq.~\eqref{eq:c3_numerical} measures $c_3 = -5.946(3)\times 10^{-7}$ at
-$200\sigma$, and the extended Paper-2 invariant basis
+Second: the \emph{same} form does not predict the residual
+$c_3 = -5.946(3)\times 10^{-7}$ of Eq.~\eqref{eq:c3_numerical}, and the
+extended Paper-2 invariant basis
 $\{1, \pi^2, \pi^4, B\Delta, F\Delta, F/B, c_2, c_2^2, c_1 c_2,
 \Delta, \Delta^2, B\Delta^2, F\Delta^2, F^2/B\}$ admits no
 PSLQ relation at integer coefficients bounded by $10^4$.  A genuine
@@ -1275,10 +1261,13 @@ in \texttt{sympy} for $k = 0, 1, 2, 3, 4, 5$.
 \end{proof}
 
 \paragraph{Exact two-term spectral action on $S^3_R$.}
-For any cutoff $f$ with Mellin transform $\phi(s) = \int_0^\infty f(x)\,
-x^{s-1}\,dx$ that is meromorphic with poles only at non-positive
-integers (e.g.\ Gaussian $e^{-x}$, polynomial $e^{-x^2}$, sharp
-$\Theta(1-x)$), the spectral action on $S^3_R$ is
+For any smooth, rapidly decaying cutoff $f$ with Mellin transform
+$\phi(s) = \int_0^\infty f(x)\, x^{s-1}\,dx$ meromorphic with poles
+only at non-positive integers (e.g.\ Gaussian $e^{-x}$, polynomial
+$e^{-x^2}$; not the sharp $\Theta(1-x)$, whose remainder is not
+exponentially small --- at $\Lambda_\infty$ the sharp count is $40$
+while the two-term formula gives about $32.2$), the spectral action
+on $S^3_R$ is
 \begin{equation}
   S(R, \Lambda) := \operatorname{Tr} f(D^2/\Lambda^2)
   = \phi(3/2)\,(\Lambda R)^3
@@ -1332,12 +1321,13 @@ $u_{\rm crit} \sim 0.4$--$0.5$ sits in the IR regime where the
 asymptotic does NOT faithfully represent the QM exact sum.
 
 Under the CC spectral-action reading (asymptotic = classical action),
-GeoVac on $S^3_R$ reproduces CC-style Einstein--Hilbert + cosmological
-constant with a stronger structural result: \emph{the asymptotic
-terminates at two terms with no higher-curvature corrections at any
-order}, by Theorem~\ref{thm:zeta_unit_neg_k}. CC's continuum spectral
-action on a generic 4-manifold has higher-curvature corrections at
-every order; the GeoVac substrate eliminates them structurally.
+the round $S^3_R$ gives Einstein--Hilbert + cosmological constant with
+the asymptotic terminating at two terms, as Chamseddine and
+Connes~\cite{chamseddine_connes_uncanny} showed;
+Theorem~\ref{thm:zeta_unit_neg_k} is an alternative proof.  This is a
+property of the continuum round-sphere Dirac spectrum, not of a
+truncated substrate: a finite sum $\sum g_n e^{-t\lambda_n^2}$ is
+entire in $t$ and has every Taylor coefficient.
 Sprint G1 driver: \texttt{debug/g1\_spectral\_action\_S3\_radius.py}
 and memo \texttt{debug/g1\_spectral\_action\_S3\_radius\_memo.md}.
 
@@ -1358,7 +1348,7 @@ $\{\gamma^0, D_{S^3}\} = 0$, so $D^2 = D_{S^3}^2 \otimes I + I \otimes (-\partia
 The heat kernel factorizes:
 \begin{equation}
   \operatorname{Tr} e^{-tD^2}\big|_{S^3_R \times S^1_\beta}
-  = K_{S^3}(t, R) \cdot K_{S^1}(t, \beta).
+  = 2\,K_{S^3}(t, R) \cdot K_{S^1}(t, \beta),
   \label{eq:K_factorize_4D}
 \end{equation}
 $K_{S^3}(t, R) = K_{\rm unit}(t/R^2)$ has the two-term form
@@ -1375,8 +1365,8 @@ Poisson resummation:
 clean asymptotic expansions modulo exp-small. Multiplying:
 \begin{equation}
   \operatorname{Tr} e^{-tD^2}\big|_{S^3_R \times S^1_\beta}
-  = \frac{\beta R^3}{4}\, t^{-2}
-   - \frac{\beta R}{8}\, t^{-1}
+  = \frac{\beta R^3}{2}\, t^{-2}
+   - \frac{\beta R}{4}\, t^{-1}
    + O\!\left(\text{exp small in }\min(R^2/t, \beta^2/t)\right).
   \label{eq:K_two_term_4D}
 \end{equation}
@@ -1405,19 +1395,19 @@ asymptotic to bit-exact precision at large $\Lambda$:
 \begin{equation}
   S(R, \beta, \Lambda)
   = \operatorname{Tr} e^{-D^2/\Lambda^2}
-  = \frac{\beta R^3}{4}\, \Lambda^4
-   - \frac{\beta R}{8}\, \Lambda^2
+  = \frac{\beta R^3}{2}\, \Lambda^4
+   - \frac{\beta R}{4}\, \Lambda^2
    + O(\text{exp small}).
   \label{eq:S_action_4D}
 \end{equation}
 This is the standard 4D CC form: $\Lambda^4$ cosmological constant +
 $\Lambda^2$ Einstein--Hilbert.
 \begin{itemize}
-\item $\Lambda^4$ coefficient: $\beta R^3 / 4 =
-      \operatorname{Vol}(S^3_R \times S^1_\beta) / (8\pi^2)$ where
+\item $\Lambda^4$ coefficient: $\beta R^3 / 2 =
+      \operatorname{Vol}(S^3_R \times S^1_\beta) / (4\pi^2)$ where
       $\operatorname{Vol} = 2\pi^2 R^3 \beta$.
-\item $\Lambda^2$ coefficient: $-\beta R / 8 =
-      -\frac{1}{96\pi^2} \int R_{\rm scalar}\sqrt{g}\,d^4x$ where
+\item $\Lambda^2$ coefficient: $-\beta R / 4 =
+      -\frac{1}{48\pi^2} \int R_{\rm scalar}\sqrt{g}\,d^4x$ where
       $\int R_{\rm scalar} \sqrt{g}\,d^4 x = 12\pi^2 R \beta$ (only
       $S^3$ contributes; $S^1$ is flat).
 \item Higher $\Lambda$ powers: exactly zero by
@@ -1425,7 +1415,7 @@ $\Lambda^2$ Einstein--Hilbert.
 \end{itemize}
 
 \paragraph{Formal extremum and de Sitter vacuum.} The asymptotic
-$S(R, \beta, \Lambda) = (\beta R^3/4)\Lambda^4 - (\beta R/8)\Lambda^2$
+$S(R, \beta, \Lambda) = (\beta R^3/2)\Lambda^4 - (\beta R/4)\Lambda^2$
 has $\partial S/\partial R = 0$ at $R_{\rm crit}\Lambda = 1/\sqrt{6}$
 (identical to the one-parameter G1 extremum). At $R = R_{\rm crit}$,
 $\partial S/\partial \beta < 0$, so the joint minimum is at
@@ -1566,9 +1556,9 @@ with corrections at every order, NOT the clean two-term form of the
 Dirac sector.
 
 This is consistent with the framework's structural-skeleton scope:
-clean structure lives in the Dirac sector sourced by the Fock
-projection (Paper 23 rigidity), with gravity-side coupling constants
-remaining external calibration data.
+the clean two-term structure belongs to the round-$S^3$ Dirac
+spectrum, with gravity-side coupling constants remaining external
+calibration data.
 
 Sprint G3 driver: \texttt{debug/g3\_graviton\_lichnerowicz\_S3.py}
 and memo \texttt{debug/g3\_graviton\_lichnerowicz\_S3\_memo.md}.
@@ -1608,7 +1598,7 @@ for $n \geq 1$.
 \label{prop:graviton_physical}
 At every $n_{\max} \geq 1$, the second variation $S^{(2)}$ has
 PHYSICAL (within-sector) eigenmodes carrying $(j_L, j_R) = (1, 1)$
-irrep content with POSITIVE eigenvalue
+irrep content with eigenvalue
 \begin{equation}
   A_\lambda = a_\lambda \!\left(\frac{4\lambda^2}{\Lambda^4} -
   \frac{2}{\Lambda^2}\right), \quad
@@ -1628,15 +1618,17 @@ $9/2$ & $S_7 \otimes S_7$, $S_8 \otimes S_8$ & $+0.066$ \\
 \hline
 \end{tabular}
 \end{center}
-Eigenvalues are stable across $n_{\max}$ (no sign changes), and the
-$|\lambda|$-dependence reflects the standard Gaussian-regulated kinetic
-behavior of the CC spectral action.
+$A_\lambda$ is positive exactly when $\lambda^2 > \Lambda^2/2$.  At
+$\Lambda^2 = 6$ every block is positive, as tabulated, and the values
+are stable across $n_{\max}$; for $\Lambda^2 > 2\lambda_{\min}^2 = 12.5$
+the lowest $(1,1)$ block has negative eigenvalue.
 \end{proposition}
 
 \paragraph{Honest scope.} Proposition~\ref{prop:graviton_physical}
-establishes the NECESSARY condition for graviton dynamics on the
-discrete substrate: physical (1, 1)-irrep eigenmodes exist and
-propagate with positive kinetic eigenvalue. SUFFICIENT conditions ---
+establishes that physical (1, 1)-irrep eigenmodes exist, with
+positive kinetic eigenvalue only for $\Lambda^2 < 2\lambda_{\min}^2$
+(the infrared side; at larger $\Lambda$ the lowest block is
+negative). SUFFICIENT conditions ---
 Fierz--Pauli kinetic structure separating TT graviton (2 polarizations)
 from longitudinal/scalar modes (7 of the 9 within $(1, 1)$), gauge
 invariance of the TT projector, propagator structure, and continuum
@@ -1652,13 +1644,13 @@ direct metric perturbations.
 \emph{Structural reading.} Sprint G3 (\S\ref{sec:spinor_specificity})
 established that the spin-2 sector inherits standard CC continuum
 expansion. Sprint G6-Diag-Full establishes that this expansion's
-graviton modes are accessible on the discrete substrate at the
-necessary-condition level. The clean structure of G1/G2
+graviton modes are accessible on the discrete substrate, with positive
+kinetic eigenvalue only on the infrared side ($\Lambda^2 < 2\lambda_{\min}^2$). The clean structure of G1/G2
 (Einstein--Hilbert + cosmological constant exactly on Dirac sector)
 does NOT extend to gravitons; gravitons inherit CC continuum behavior
 with infinite higher-curvature corrections. Substrate-level
-existence of $(1, 1)$ modes confirms gravitons are not structurally
-blocked.
+existence of $(1, 1)$ modes shows that graviton candidates exist on
+the substrate.
 
 \paragraph{DOF count is a continuum-limit statement (Sprint GD-1).}
 The reduction of the $9$-dimensional $(1,1)$ irrep to the $2$
@@ -1810,7 +1802,7 @@ This matches $K_{S^1}(t, \beta)/\beta$ from \S\ref{sec:parametric_spectral_actio
 in the $\beta \to \infty$ limit. Combined with the two-term exactness
 of $K_{S^3}$:
 \begin{equation}
-  K_{\rm full}(t, R) = \frac{R^3}{4}\,t^{-2} - \frac{R}{8}\,t^{-1}
+  K_{\rm full}(t, R) = \frac{R^3}{2}\,t^{-2} - \frac{R}{4}\,t^{-1}
                        + O(\text{exp small}).
   \label{eq:K_decompactified}
 \end{equation}
@@ -1819,7 +1811,7 @@ Two-term exactness propagates to the decompactified case.
 \paragraph{Spectral action density.} For Gaussian cutoff $f(x) = e^{-x}$:
 \begin{equation}
   s(R, \Lambda) := K_{\rm full}(1/\Lambda^2, R)
-                = \frac{R^3}{4}\Lambda^4 - \frac{R}{8}\Lambda^2.
+                = \frac{R^3}{2}\Lambda^4 - \frac{R}{4}\Lambda^2.
   \label{eq:s_dS}
 \end{equation}
 
@@ -1831,15 +1823,16 @@ Two-term exactness propagates to the decompactified case.
 identical to G1 (\S\ref{sec:parametric_spectral_action}). Minimum
 action density:
 \begin{equation}
-  s_{\rm min} = s(R_{\rm crit}, \Lambda) = -\frac{\Lambda}{12\sqrt{6}}.
+  s_{\rm min} = s(R_{\rm crit}, \Lambda) = -\frac{\Lambda}{6\sqrt{6}}.
   \label{eq:s_min_dS}
 \end{equation}
-Symbolically verified (sympy, $-\sqrt{6}\Lambda/72 = -\Lambda/(12\sqrt{6})$,
+Symbolically verified (sympy, $-\sqrt{6}\Lambda/36 = -\Lambda/(6\sqrt{6})$,
 residual exact zero).
 
-\paragraph{Physical reading.} The framework's preferred zero-temperature
-de Sitter vacuum has Planck-scale radius $R_{\rm crit} \sim 1/\Lambda$
-and vacuum action density $-\Lambda/(12\sqrt{6})$. This is the
+\paragraph{Physical reading.} The formal extremum (in the IR, where
+the asymptotic expansion is not faithful; see the G1 caveat) is a
+zero-temperature de Sitter configuration with Planck-scale radius
+$R_{\rm crit} \sim 1/\Lambda$ and action density $-\Lambda/(6\sqrt{6})$. This is the
 standard CC spectral-action-principle prediction, with the well-known
 cosmological-constant-scale gap. The decompactification is clean:
 G2's $\beta \to \infty$ minimum is manifest in G5 as the
@@ -1866,14 +1859,15 @@ vanishes exactly:
   = 0.
   \label{eq:extremality_check}
 \end{equation}
-This confirms the standard background-extremality condition: the
-spectral action is stationary at the CH Dirac background, with
-sub-leading perturbations giving the actual graviton kinetic
-structure. Sympy-verified.
+This is an integral of second-variation coefficients, not a first
+variation, so it does not establish that the spectral action is
+stationary at the CH Dirac background (along scaling it is stationary
+only at $R_{\rm crit}$, G1); it shows only that the coefficients change
+sign across the spectrum. Sympy-verified.
 
 \paragraph{Newton constant and cosmological constant from G2.}
 Matching G2's spectral action coefficients
-$(\beta R^3/4)\Lambda^4 - (\beta R/8)\Lambda^2$
+$(\beta R^3/2)\Lambda^4 - (\beta R/4)\Lambda^2$
 \eqref{eq:S_action_4D} against the standard Einstein--Hilbert +
 cosmological constant action
 $S_{EH} = -(1/16\pi G_{\rm eff})\int(R_{\rm scalar}
@@ -1886,14 +1880,14 @@ and $\int R_{\rm scalar}\sqrt{g} = 12\pi^2 R\beta$:
 The Gaussian-cutoff spectral action on $S^3_R \times S^1_\beta$
 identifies the framework's effective gravitational parameters as
 \begin{equation}
-  G_{\rm eff} = \frac{6\pi}{\Lambda^2}, \qquad
+  G_{\rm eff} = \frac{3\pi}{\Lambda^2}, \qquad
   \Lambda_{cc} = 6\Lambda^2.
   \label{eq:newton_cc}
 \end{equation}
 \end{proposition}
 
 \paragraph{Planck-scale identification.} Setting $\Lambda \to M_{\rm Planck}$:
-$G_{\rm eff} = 6\pi/M_{\rm Planck}^2 = 6\pi G_{\rm Newton}$ (Planck-scale
+$G_{\rm eff} = 3\pi/M_{\rm Planck}^2 = 3\pi G_{\rm Newton}$ (Planck-scale
 Newton's constant); $\Lambda_{cc} = 6 M_{\rm Planck}^2 = 6/G_{\rm eff}$
 (Planck-scale cosmological constant).
 
@@ -1995,9 +1989,9 @@ heat-kernel asymptotic structure. The load-bearing piece for $A/(4G)$
 remains the horizon boundary $a_2$ coefficient
 (\S\ref{sec:cigar_BH_entropy}).
 
-The framework's clean two-term exactness is \emph{specific to the $S^3$
-substrate sourced by the Fock projection}. It does not extend to
-other dimensions or the gravity arc's cigar geometry.
+The clean two-term exactness belongs to the round odd-sphere Dirac
+spectrum (Chamseddine--Connes on $S^3$); it does not extend to the
+gravity arc's cigar geometry or to $S^2$.
 
 Sprint G4-1 driver: \texttt{debug/g4\_1\_S2\_dirac.py} and memo
 \texttt{debug/g4\_1\_S2\_dirac\_memo.md}.
@@ -2063,18 +2057,16 @@ where $A = 4\pi r_h^2$. Matching to $S_{BH} = A/(4G_N)$ gives
 $G_N = 3\pi/\Lambda^2$.
 \end{proposition}
 
-\paragraph{Factor-of-2 calibration with G7.} The Newton constant from
-\S\ref{sec:newton_cc_extremality} (G2's spectral action matching) is
-$G_{\rm eff} = 6\pi/\Lambda^2$. The factor-of-2 difference from
-$G_N = 3\pi/\Lambda^2$ is \emph{not} a scalar-vs-Dirac conical-defect
-coefficient (the 2D Dirac and scalar cones share the coefficient
-$(1/12)(1/\alpha - \alpha)$; Fursaev--Miele 1996, confirmed by the
-G4-4c discrete extraction): it is a bookkeeping artifact forced by
-Wald's theorem --- two-term exactness implies pure Einstein gravity,
-so action-$G$ and entropy-$G$ are the \emph{same} constant, and the 2
-lives in a 4D-bulk vs factorized-$2\mathrm{D}\times 2\mathrm{D}$
-normalization mismatch to be closed by convention audit (Paper~51,
-Wald-forces-entropy-relation remark). The structural emergence of
+\paragraph{Agreement with G7.} The Newton constant from
+\S\ref{sec:newton_cc_extremality} (G2's spectral action matching over
+the rank-4 Dirac bundle) is $G_{\rm eff} = 3\pi/\Lambda^2$, equal to
+$G_N$ for the Gaussian cutoff, as Wald's theorem requires once
+two-term exactness makes the geometry pure Einstein gravity. An
+earlier printing traced G2 over a rank-2 bundle and found a factor of
+2 here; it was the spinor rank, not a cone coefficient (the 2D Dirac
+and scalar cones share the coefficient magnitude
+$(1/12)|1/\alpha - \alpha|$, with opposite signs; Fursaev--Miele 1996;
+Paper~51). The structural emergence of
 $A \cdot \Lambda^2$ from the conical tip is the load-bearing finding;
 the precise prefactor calibration is downstream.
 
@@ -2097,7 +2089,7 @@ Sprint G4-2 driver: \texttt{debug/g4\_2\_conical\_replica.py} and memo
             (Sprint G8)}
 \label{subsec:g8_cutoff_dependence}
 
-Sprints G2 and G7 derived $G_{\rm eff} = 6\pi/\Lambda^2$ and
+Sprints G2 and G7 derived $G_{\rm eff} = 3\pi/\Lambda^2$ (rank-4 trace) and
 $\Lambda_{cc} = 6\Lambda^2$ assuming the Gaussian cutoff
 $f(x) = e^{-x}$. Sprint G8 generalizes these to arbitrary cutoff
 functions and identifies which framework predictions are
@@ -2117,12 +2109,12 @@ The relevant moments for spectral action matching are $\phi(1)$
 \paragraph{General formulas.}
 From the G2 spectral action on $S^3_R \times S^1_\beta$,
 \begin{equation}
-  S(R, \beta, \Lambda) = \phi(2)\cdot \frac{\beta R^3}{4}\Lambda^4
-                       - \phi(1)\cdot \frac{\beta R}{8}\Lambda^2,
+  S(R, \beta, \Lambda) = \phi(2)\cdot \frac{\beta R^3}{2}\Lambda^4
+                       - \phi(1)\cdot \frac{\beta R}{4}\Lambda^2,
 \end{equation}
 matching against Einstein-Hilbert plus cosmological constant gives:
 \begin{equation}
-  G_{\rm eff}(f, \Lambda) = \frac{6\pi}{\phi(1)\,\Lambda^2},
+  G_{\rm eff}(f, \Lambda) = \frac{3\pi}{\phi(1)\,\Lambda^2},
   \quad
   \Lambda_{cc}(f, \Lambda) = \frac{6\,\phi(2)}{\phi(1)}\,\Lambda^2,
   \label{eq:g8_general}
@@ -2146,13 +2138,13 @@ matching against Einstein-Hilbert plus cosmological constant gives:
     \midrule
     Gaussian $e^{-x}$
       & $1$ & $1$
-      & $6\pi$ & $6$ \\
+      & $3\pi$ & $6$ \\
     Polynomial $e^{-x^2}$
       & $\sqrt{\pi}/2$ & $1/2$
-      & $12\sqrt{\pi}$ & $6/\sqrt{\pi}$ \\
+      & $6\sqrt{\pi}$ & $6/\sqrt{\pi}$ \\
     Sharp $\Theta(1-x)$
       & $1$ & $1/2$
-      & $6\pi$ & $3$ \\
+      & $3\pi$ & $3$ \\
     \bottomrule
   \end{tabular}
   \label{tab:g8_cutoffs}
@@ -2163,12 +2155,12 @@ Direct algebra on \eqref{eq:g8_general}--\eqref{eq:g8_r_crit} shows
 that every combination of $G_{\rm eff}$ and $\Lambda_{cc}$ depends
 on $\phi(1)$ and/or $\phi(2)/\phi(1)$:
 \begin{itemize}
-  \item $G_{\rm eff}\cdot\Lambda^2 = 6\pi/\phi(1)$
+  \item $G_{\rm eff}\cdot\Lambda^2 = 3\pi/\phi(1)$
         (depends on $\phi(1)$)
   \item $\Lambda_{cc}/\Lambda^2 = 6\,\phi(2)/\phi(1)$
         (depends on ratio)
-  \item $G_{\rm eff}\cdot\Lambda_{cc} = 36\pi\,\phi(2)/(\phi(1)^2
-        \Lambda^2)$ (depends on both)
+  \item $G_{\rm eff}\cdot\Lambda_{cc} = 18\pi\,\phi(2)/\phi(1)^2$
+        (dimensionless; depends on both)
   \item $R_{\rm crit}\Lambda = \sqrt{\phi(1)/(6\,\phi(2))}$
         (depends on ratio)
 \end{itemize}
@@ -2202,8 +2194,9 @@ input, the framework determines the structural shape.
 
 \paragraph{Structural vs numerical scope.}
 Sprints G1, G2, G3, G4, G5, G6-Diag-Full produced
-\emph{structural} findings (closed forms, theorems, mechanisms)
-that are cutoff-independent. Sprint G7 produced
+\emph{structural} findings (closed forms, theorems, mechanisms),
+largely cutoff-independent in form, though some quantities (G1's
+$u_{\rm crit}$, G6's $A_\lambda$) depend on the cutoff. Sprint G7 produced
 \emph{numerical} predictions (specific values of $G_{\rm eff}$,
 $\Lambda_{cc}$) that depend on the Gaussian cutoff choice.
 Sprint G8 clarifies that the framework's gravity-arc
@@ -2814,8 +2807,8 @@ At $k$ loops on $S^3$ with vertex restrictions and CG weights:
 \begin{itemize}
 \item $k = 1$: free (unrestricted) integer-$s$ traces of $D^2$
       (equivalently $D(s)$ at even $s$) give $\pi^{\mathrm{even}}$ only
-      (Theorem~\ref{thm:T9}, proven);\ vertex-restricted one-loop
-      quantities need not (the self-energy $\Sigma(1)$ is PSLQ-identified as carrying $G$).
+      (Theorem~\ref{thm:T9}, proven);\ vertex-restricted quantities
+      need not (see $k = 2$).
 \item $k = 2$ (vertex-parity sums):\ the two-loop sunset vertex
       restriction brings $G$ and $\beta(4)$ ($\beta(4)$ first enters here among the identified quantities;\ the $\chi_{-4}$ theorem).
 \item $k = 2$ (CG-weighted):\ $S_{\min}$ is an identified element of $\MT(\Z[1/2])$
@@ -3154,12 +3147,12 @@ form $\zeta(a)\zeta(b)$ with $a + b = 2p{-}1$, $a$ odd $\ge 3$,
 $b$ even $\ge 4$.
 \end{observation}
 
-Verified through $D_6$ ($p = 6$, weight~11).  The systematic expulsion
-of $\zeta(2)$ products is driven by the $n^2$ Fock degeneracy that
-weights the Sommerfeld sums.  This is the same $n^2$ that produces
+Verified through $D_6$ ($p = 6$, weight~11).  We read the systematic
+expulsion of $\zeta(2)$ products as tied to the $n^2$ Fock degeneracy
+that weights the Sommerfeld sums, the same $n^2$ that produces
 $F = \zeta(2) = D_{n^2}(4)$ in the Phase~4F identification
-(Paper~2~\cite{paper2}): the Fock degeneracy protects its own Dirichlet
-evaluation from cross-contamination with odd-zeta products.
+(Paper~2~\cite{paper2}); this is a reading of the pattern through $D_6$
+[OBSERVATION], with no derivation or counterfactual test.
 
 \subsection{Transcendental structure}
 
@@ -3175,10 +3168,10 @@ This is a three-tier decomposition: $\pi^6$ (weight-6 even-zeta),
 $\zeta(7)$ (weight-7 odd-zeta), and the mixed product
 $\pi^4 \cdot \zeta(3)$ (weight-4 even $\times$ weight-3 odd).
 In Paper~18's operator-order taxonomy, $\pi^{\mathrm{even}}$ comes
-from 2nd-order operators and $\zeta(\mathrm{odd})$ from 1st-order
-operators.  The mixed product $\pi^4 \cdot \zeta(3)$ is the first
-instance in the framework where these two tiers appear multiplicatively
-in a single observable.
+from $\Delta_{\mathrm{LB}}$ and $D^2$ (not from every second-order
+operator; Theorem~\ref{thm:T9}'s scope) and $\zeta(\mathrm{odd})$ from
+first-order operators; the mixed product $\pi^4 \cdot \zeta(3)$ has
+both tiers multiplicatively in a single observable.
 
 The $\zeta(2)\zeta(5)$ cancellation is non-trivial: four of the five
 contributing Euler sums carry nonzero $\zeta(2)\zeta(5)$ coefficients
@@ -3211,14 +3204,12 @@ $K \in \mathbb{Q}[\pi]$ (directly, not via T9).  The Sommerfeld $D_p$, by contra
 $H_{n-1}^{(r)}$, which access the full Euler--Zagier MZV ring including
 irreducible odd-zeta at every order.
 
-The $\zeta(2)$ cancellation mechanism is nonetheless a genuine bridge:
-the $n^2$ Fock degeneracy that generates $F = \zeta(2)$ simultaneously
-drives the systematic expulsion of $\zeta(2) \times \zeta(\text{odd})$
-products from the Sommerfeld sums.  The Fock degeneracy organizes both
-$K$ (through $F$) and the $D_p$ (through the cancellation pattern),
-but (conditional on the period conjecture) the operator/energy
-distinction keeps $K$ from being a Sommerfeld functional;\ no
-small-coefficient relation was found.
+The same $n^2$ weighting appears in $F = \zeta(2)$ and in the
+Sommerfeld sums whose $\zeta(2) \times \zeta(\text{odd})$ products
+cancel; whether it drives the cancellation is a reading, not shown.
+Conditional on the period conjecture, the operator/energy distinction
+keeps $K$ from being a Sommerfeld functional;\ no small-coefficient
+relation was found.
 
 % ===================================================================
 \section{Flat-Space Consistency}
@@ -3245,17 +3236,15 @@ anomalous magnetic moment $a_2 = 197/144 + \pi^2/12 + 3\zeta(3)/4 -
 \pi^2\ln 2/2$~\cite{petermann1957,sommerfield1957} requires matching
 specific diagram topologies and renormalization subtractions, which is
 beyond the scope of spectral sums.  At one loop, the $S^3$
-computation (Sec.~\ref{sec:anomalous_moment}) gives
-$F_2/[\alpha/(2\pi)] = 1.084$ at $n_{\mathrm{ext}} = 1$ on unit~$S^3$,
-matching the Parker--Toms leading curvature correction
-$1 + R/(12|\lambda|^2) = 1.080$ within 0.4\%.  The 5-point
+computation (Sec.~\ref{sec:anomalous_moment}) gives the unnormalized
+ratio $1.084$ at $n_{\mathrm{ext}} = 1$ on unit~$S^3$ (a sum without a
+coupling constant divided by the CODATA $\alpha/(2\pi)$; its closeness
+to $1 + R/(12|\lambda|^2) = 1.080$ is a numerical coincidence).  The 5-point
 mode-dependent curve ($n_{\mathrm{ext}} = 1, \ldots, 5$) follows
 a power law $\approx 5.91\,|\lambda|^{-1.84}$
 (Table~\ref{tab:mode_dependence}), consistent with the flat-space
 limit being $R \to \infty$ at fixed physical mass, not
-$|\lambda| \to \infty$ at fixed~$R$.  In the proper flat-space limit,
-the curvature excess vanishes, recovering the Schwinger
-value~\cite{schwinger1948}.
+$|\lambda| \to \infty$ at fixed~$R$; that limit is not computed here.
 
 The sunset sum scales exactly as $R^{2s_1 + 2s_2 + 2p}$ (power $= 10$
 at default parameters), with the ratio $S(R)/R^{\mathrm{power}}$
@@ -3549,8 +3538,9 @@ sequences track within $<0.1\%$ and converge to the same graph limit.
 \label{sec:broken_structural_zero}
 
 Theorem~\ref{thm:self_energy_zero} states that $\Sigma(n_{\mathrm{ext}} = 0)
-= 0$ in the continuum, by vertex parity impossibility.  On the finite
-graph, this structural zero is \textbf{broken}:
+= 0$ in the continuum vertex model, by vertex parity impossibility (a
+property of that model, not of the physical vector vertex).  On the
+finite graph the model zero is not reproduced:
 \[
   \Sigma_{\text{graph}}^{\text{GS}} =
   \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}
@@ -3558,7 +3548,7 @@ graph, this structural zero is \textbf{broken}:
 \]
 The CG projection maps Dirac $(n,\kappa,m_j)$ states onto Fock
 $(n,l,m)$ nodes, opening vertex couplings invisible to the SO(4)
-channel count that enforces the continuum selection rule.
+channel count that enforces the model's selection rule.
 
 A three-layer investigation reveals the complete mechanism.
 
@@ -3613,8 +3603,8 @@ $m_j = \pm 1/2$ ground-state components.  In particular,
   \;\neq\; 0.
   \label{eq:pendant_limit}
 \end{equation}
-The structural zero of Theorem~\ref{thm:self_energy_zero} is never
-recovered in the graph limit.
+The model zero of Theorem~\ref{thm:self_energy_zero} is not
+reproduced in the graph limit.
 \end{proposition}
 
 \begin{proof}
@@ -3646,47 +3636,31 @@ formula itself is proven in the theorem above for all $n_{\max}$.
 
 \subsubsection{Layer 3: Selection-rule gap}
 
-The continuum possesses \emph{two} independent protection mechanisms
-that enforce $\Sigma(n_{\mathrm{ext}} = 0) = 0$:
+The continuum vertex model (Eq.~\eqref{eq:vertex_rule}) has \emph{two}
+mechanisms that enforce its $\Sigma(n_{\mathrm{ext}} = 0) = 0$:
 \begin{enumerate}
-\item \textbf{Vertex parity.}  The selection rule requires
-  $n_1 + n_2 + q$ odd (Eq.~\eqref{eq:vertex_rule}).  At
-  $n_{\mathrm{ext}} = 0$, the triangle inequality forces
+\item \textbf{Vertex parity.}  The model rule requires
+  $n_1 + n_2 + q$ odd.  At $n_{\mathrm{ext}} = 0$ its triangle forces
   $q = n_{\mathrm{int}}$, so the sum is $2\,n_{\mathrm{int}}$
   (always even).  No allowed triple exists.
-\item \textbf{SO(4) channel count.}  The CG multiplicity
-  $W(0, n_{\mathrm{int}}, q) = 0$ for all~$q$.  The ground state has
-  $j_R = 0$ in the $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$
-  decomposition; the right-factor triangle degenerates (one component
-  fails the $\mathrm{SU}(2)_R$ triangle; the other passes all
-  triangles but is killed by parity).
+\item \textbf{The model's channel count.}  $W(0, n_{\mathrm{int}}, q) = 0$
+  for all~$q$ under the same rule.
 \end{enumerate}
-The finite graph has \emph{neither} mechanism.  The graph photon lives
-on edges---it is a 1-cochain, not a vector field.  The CG projection
-is scalar $\mathrm{SU}(2)$, not the $\mathrm{SU}(2)_L \times
-\mathrm{SU}(2)_R$ double triangle of SO(4) vector harmonics.  Both
-protection mechanisms arise from the \emph{spin-1 vector nature} of
-the continuum photon, which is absent on the graph.
+The finite graph has \emph{neither} mechanism: its photon is a
+1-cochain, not a vector field.  Neither mechanism is a property of the
+physical vector photon, whose coupling rules allow
+$q = n_1 + n_2 + 1$ and couple the ground state at $q = 1$
+(Sec.~\ref{sec:setup}).
 
-\subsubsection{Interpretation: scalar vs.\ vector QED}
+\subsubsection{Interpretation: scalar graph photon vs.\ vertex model}
 
 The graph-native QED of this section is a \emph{scalar} QED: the
 photon carries no spin-1 structure on the graph (it is a 1-cochain in
-the Hodge complex, not a vector field on the manifold).  The continuum
-QED adds vector structure via $\mathrm{SO}(4) = \mathrm{SU}(2)_L
-\times \mathrm{SU}(2)_R$, and Theorem~\ref{thm:self_energy_zero}
-is a vector-QED selection rule that scalar QED does not possess.
-
-In Paper~18's exchange-constant taxonomy~\cite{paper18}, the photon's
-spin-1 vector nature is a \textsc{calibration} exchange constant:
-it is injected when projecting from the algebraic graph to the
-continuous manifold.  The pendant-edge theorem
-(Proposition~\ref{prop:pendant_edge}) quantifies the cost of this
-omission: a ground-state self-energy of~$2$ (in graph units) that the
-continuum's vector selection rules eliminate exactly.  The structural
-zero is not a fine cancellation that the finite graph misses due to
-truncation---it is a \emph{qualitative} selection rule tied to the
-photon's vector character, which the graph does not encode.
+the Hodge complex, not a vector field on the manifold).  The pendant-edge
+theorem (Proposition~\ref{prop:pendant_edge}) gives a ground-state
+self-energy of~$2$ (in graph units) where the continuum vertex model
+gives $0$; whether the physical vector vertex gives zero is not shown
+here, and the witness of Sec.~\ref{sec:setup} says it does not.
 
 \paragraph{Independent reading: Connes--van~Suijlekom operator-system gap.}
 The same broken structural zero admits a parallel structural
@@ -3887,7 +3861,8 @@ polynomial rather than from CG coefficients.
 \subsubsection{Interpretation: spinor barrier and vector barrier}
 
 The Dirac graph is an \emph{intermediate} construction between the
-scalar Fock graph (1/8~rules) and continuum vector QED (8/8~rules).
+scalar Fock graph (1/8~rules) and the vector-photon vertex model
+(8/8~rules).
 The spinor-recoverable rules (3~rules) are \textsc{intrinsic} to the
 electron's spinor quantum numbers---they are restored simply by using
 Dirac $(n, \kappa, m_j)$ nodes instead of scalar $(n, l, m)$ Fock
@@ -3991,7 +3966,7 @@ photon propagator is its pseudoinverse:
   \label{eq:transverse_propagator}
 \end{equation}
 
-\subsubsection{Ground-state protection recovered}
+\subsubsection{Transverse propagator at the ground state}
 
 Computing the self-energy $\Sigma_T[a,b] = \sum_{e,e'} V_e G_T[e,e'] V_{e'}^\top$
 with the transverse propagator:
@@ -4005,10 +3980,9 @@ $n_{\max}$ & $\Sigma_{\mathrm{scalar}}(\mathrm{GS})$ & $\Sigma_T(\mathrm{GS})$ &
 \hline
 \end{tabular}
 \end{center}
-The transverse propagator recovers the structural zero of
-Theorem~\ref{thm:self_energy_zero} at machine precision ($< 10^{-16}$)
-while the scalar (longitudinal) propagator breaks it via the pendant-edge
-theorem (Proposition~\ref{prop:pendant_edge}).
+The transverse propagator gives $\Sigma_T(\mathrm{GS}) = 0$ at machine
+precision ($< 10^{-16}$), while the scalar (longitudinal) propagator
+gives the pendant-edge value (Proposition~\ref{prop:pendant_edge}).
 
 \subsubsection{Mechanism: pendant-edge exclusion from plaquettes}
 
@@ -4024,41 +3998,32 @@ through~$e_0$, the self-energy vanishes:
   \Sigma_T(\mathrm{GS}) = 0 \qquad \text{(topological, exact at all $n_{\max}$)}.
 \end{equation}
 
-This is the graph analog of the continuum vertex-parity argument:
-vertex parity ($n_1 + n_2 + q$ odd) with $n_2 = 0$ forces $2n_1$ odd
-(impossible); plaquette exclusion of pendant edges with pendant GS
-forces $G_T[e_0, :] = 0$ (topological).  Both mechanisms protect the
-ground state from self-energy corrections, but via structurally
-different routes.
+This is not a ground-state selection rule.  The $l = 0$ block of the
+Fock graph is a path, so every $s$-edge is a bridge, lies in no closed
+walk, and carries $G_T = 0$; hence $\Sigma_T(n\mathrm{S}) = 0$ for
+every $n$, while the continuum self-energy at $n_{\mathrm{ext}} \ge 1$
+is nonzero.  It says only that tree components of the graph carry no
+transverse modes, and the continuum zero it was once compared with is
+itself a property of the scalar-triangle vertex model
+(Theorem~\ref{thm:self_energy_zero}).
 
-\subsubsection{Refined selection rule partition}
+\subsubsection{Selection rule partition}
 
-The three-tier partition of Table~\ref{tab:dirac_selection_rules}
-is refined to four tiers:
-\begin{enumerate}
-\item \textbf{Always survives} (1 rule): Gaunt/CG angular sparsity.
-\item \textbf{Spinor-recoverable} (3 rules): $\Delta m_j$
-  conservation, spatial parity, Furry's theorem---from Dirac graph
-  node labels.
-\item \textbf{Plaquette-recoverable} (1 rule): ground-state structural
-  zero---from co-exact Hodge topology of the face structure.
-\item \textbf{Vector-quantum-number-required} (3 rules): SO(4) channel
-  count, Ward identity, charge conjugation---requiring explicit $(L, M_L)$
-  labeling of co-exact modes.
-\end{enumerate}
-
-The boundary between ``graph-intrinsic'' and ``calibration'' has
-shifted: ground-state protection is recoverable from the graph's own
-Hodge structure (plaquettes from Paper~30), not requiring any photon
-angular momentum quantum numbers.
+The partition of Table~\ref{tab:dirac_selection_rules} is not refined
+by the plaquettes: the transverse zero above holds for every $s$-state
+and so does not recover a ground-state rule.  (An earlier version
+listed a four-tier ``1+3+1+3'' partition; it also counted Furry's
+theorem and charge conjugation as separate rules although Paper~33's
+table lists them as one, and omitted two rules, so it did not
+partition the eight.)
 
 \subsubsection{Mode-resolved analysis: why the final 3 rules require calibration}
 
-The co-exact eigenvalues $\mu_k$ of $d_1 d_1^\top$ approach the continuum
-photon eigenvalues $q(q+2)$ for low-lying modes (e.g.\ $\mu = 15.0 = 3 \times 5$
-at $n_{\max} = 3$ matches $q = 3$ exactly; $\mu = 48.0 = 6 \times 8$ at
-$n_{\max} = 4$ matches $q = 6$).  However, the \emph{eigenvectors} have the
-wrong support.  Testing the SO(4) triangle inequality
+Two co-exact eigenvalues of $d_1 d_1^\top$ coincide with integers of
+the form $q(q+2)$ ($\mu = 15 = 3 \times 5$ at $n_{\max} = 3$;
+$\mu = 48 = 6 \times 8$ at $n_{\max} = 4$); the full co-exact spectrum
+has not been compared with the continuum photon spectrum, and the
+\emph{eigenvectors} have the wrong support.  Testing the SO(4) triangle inequality
 $|n_1 - n_2| \leq q \leq n_1 + n_2 - 2$ on the mode-resolved self-energy
 $\Sigma_k[a,b] = \sum_{e,e'} V_e \, v_k v_k^\top G_T[e,e'] \, V_{e'}^\top$:
 
@@ -4264,7 +4229,7 @@ poles of the $n_{\max} = 3$ rational function are farther from the
 origin, yielding better convergence of the Taylor series at
 $t = \kappa$.
 
-\subsection{Vector-photon QED: 7/8 scalar, 8/8 Dirac selection rules recovered}
+\subsection{Vector-photon QED: 7/8 scalar, 8/8 Dirac selection rules scored in the vertex model}
 \label{sec:vector_photon_qed}
 
 The preceding graph-native QED sections treat the photon as a scalar
@@ -4273,8 +4238,8 @@ in $\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$ but recovers
 only 1~of~8 continuum QED selection rules (Gaunt/CG sparsity on the
 scalar Fock graph) or 4~of~8 on the native Dirac graph (Rule~B).  The
 transverse photon from Wilson plaquettes
-(Sec.~\ref{sec:transverse_photon}) recovers the ground-state structural
-zero, bringing the count to 5~of~8.
+(Sec.~\ref{sec:transverse_photon}) gives a zero ground-state self-energy,
+but for every $s$-state alike, so it adds no ground-state rule.
 
 \subsubsection{Pre-investigation: $L_1$ block-diagonalization}
 
@@ -4328,9 +4293,12 @@ where $G_e(b)$ is the electron propagator.
 
 \begin{table}[h]
 \centering
-\caption{Selection rule recovery with vector photon quantum numbers.
-Scalar electrons recover 7~of~8 rules; Dirac electrons recover
-\textbf{8~of~8} at $n_{\max} = 2$.}
+\caption{Selection rule census with vector photon quantum numbers, at
+$n_{\max} = 2$, within the vertex model: scalar electrons score 7~of~8,
+Dirac electrons 8~of~8.  Rule~2 is the scalar-triangle zero
+(Theorem~\ref{thm:self_energy_zero}); rule~7 for Dirac electrons is
+shown for $\alpha_z$ against scalar harmonics only, and the code
+imposes the diagonal zero.  Rules are numbered as in Paper~33.}
 \label{tab:vector_selection_rules}
 \begin{tabular}{clccl}
 \toprule
@@ -4341,9 +4309,9 @@ Scalar electrons recover 7~of~8 rules; Dirac electrons recover
 3 & SO(4) channel count & PASS & PASS & triangle ineq. \\
 4 & $\Delta m_j$ conservation & PASS & PASS & 3$j$ $m$-rule \\
 5 & Spatial parity & PASS & PASS & E1 parity \\
-6 & Furry's theorem & FAIL & PASS & Dirac spinor phase \\
-7 & Ward identity & PASS${}^a$ & PASS${}^a$ & $\Sigma$ block-diag. \\
-8 & Charge conjugation & PASS & PASS & $\Sigma$ Hermiticity \\
+6 & Ward identity & PASS${}^a$ & PASS${}^a$ & $\Sigma$ block-diag. \\
+7 & Charge conjugation (Furry) & FAIL & PASS & $\alpha_z$ diagonal identity \\
+8 & Triangle inequality on $n$ & PASS & PASS & vertex-tensor support \\
 \bottomrule
 \end{tabular}
 \raggedright ${}^a$ Ward identity passes at $n_{\max} = 2$;
@@ -4351,29 +4319,22 @@ truncation artifacts at $n_{\max} \geq 3$ (ratio $0.61$ Dirac,
 $3.1$ scalar).
 \end{table}
 
-\subsubsection{Ground-state structural zero: angular momentum mechanism}
+\subsubsection{Ground-state zero of the vertex model}
 
 $\Sigma(\mathrm{GS}, \mathrm{GS}) = 0$ exactly (machine precision) at
-all tested $n_{\max}$.  The mechanism: for the ground state with $l = 0$,
-the triangle inequality forces $q = l_{\mathrm{int}}$, and the parity
-rule requires $l_{\mathrm{int}} + l_{\mathrm{int}} + q =
-2l_{\mathrm{int}} + q$ odd.  With $q = l_{\mathrm{int}}$, this gives
-$3l_{\mathrm{int}}$ odd --- but more precisely, with $l_{\mathrm{ext}} = 0$:
-$l_{\mathrm{int}} + q$ odd, and the triangle with $l_{\mathrm{ext}} = 0$
-gives $q = l_{\mathrm{int}}$, so $2l_{\mathrm{int}}$ must be odd.
-Impossible for any integer.
-
-This is the rule broken by the pendant-edge theorem on the scalar graph
-($\Sigma_{\mathrm{scalar}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max} \to 2$).
-The vector photon restores it through angular momentum conservation alone.
+all tested $n_{\max}$.  The mechanism: with $l_{\mathrm{ext}} = 0$ the
+triangle gives $q = l_{\mathrm{int}}$, and the parity rule then
+requires $2l_{\mathrm{int}}$ odd, impossible for any integer.  This is
+the scalar-triangle zero of Theorem~\ref{thm:self_energy_zero} again;
+a vector-photon vertex with the physical coupling rules does not
+enforce it.
 
 \subsubsection{Calibration exchange constant: $1/(4\pi)$}
 
 The $l = 1$ self-energy at $n_{\max} = 2$ is \textbf{exactly} $1/(4\pi)$
-to machine precision.  This is the Weyl exchange constant for~$S^2$
-(the density-of-states constant for the 2-sphere), entering through the
-normalization of the vector spherical harmonics:
-$\sqrt{(2l+1)(2q+1)(2l'+1)/(4\pi)}$ in the vertex coupling.
+to machine precision, entering through the normalization
+$\sqrt{(2l+1)(2q+1)(2l'+1)/(4\pi)}$ of the vertex coupling.  Reading it
+as the Weyl exchange constant of~$S^2$ is an Observation.
 
 The entire scalar graph QED is $\pi$-free
 ($\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$).  The vector
@@ -4384,7 +4345,7 @@ enters: the $1 \to 7$ transition from graph topology to angular momentum
 conservation costs exactly one transcendental ($\pi$, via $1/(4\pi)$
 per loop).
 
-\subsubsection{Furry's theorem: scalar obstruction, Dirac resolution}
+\subsubsection{The diagonal vertex: scalar obstruction, $\alpha_z$ identity (vertex model)}
 
 For \textbf{scalar electrons}, Furry's theorem fails: the diagonal vertex
 coupling $V(a, a, q, m_q)$ is nonzero when $q$ is odd
@@ -4406,22 +4367,28 @@ $V_{LS} + V_{SL} \propto f g \,\mathrm{Im}\,
 \rangle$, and $m_l$ conservation forces that imaginary part to
 vanish --- the mechanism is $m_l$ conservation, not Hermiticity
 alone (Paper~33's mechanism remark; sympy-exact in
-\texttt{tests/test\_paper33\_furry\_derivation.py}).  The cross terms
-cancel exactly, making $V(a, a, q, m_q) = 0$ for all $q$ and $m_q$.
+\texttt{tests/test\_paper33\_furry\_derivation.py}).  That derivation
+covers the vertex model used here, $\alpha_z$ against the scalar
+harmonic $Y_q^{m_q}$.  It does not cover a physical vector photon:
+an $m_q = 0$ vector harmonic also has $m = \pm 1$ spherical components,
+which couple through $\alpha_\pm$, and the diagonal magnetic coupling
+of a Dirac state (its magnetic moment) is nonzero.  In the production
+code the diagonal zero is imposed by setting $V(a, a) = 0$.
 
 This is \emph{not} Furry's theorem in the field-theoretic sense.  In
 continuum QED, Furry works because for every electron loop there is a
 positron loop that exactly cancels --- charge conjugation symmetry of
 the \emph{field}, not the \emph{state labels}.  The Dirac spinor phase
-constraint is a kinematic identity of the single-particle vertex: it
-kills the tadpole at the vertex level, before any loop sum is
-performed.  The two mechanisms are independent, and the Dirac constraint
-is the stronger one.
+constraint is a kinematic identity of the single-particle vertex in
+this model: it kills the tadpole at the vertex level, before any loop
+sum is performed.  Field-theoretic Furry cancels odd-photon loops to all
+orders; the model identity removes only the diagonal tadpole.
 
-\subsubsection{The $1$--$7$--$8$ partition}
+\subsubsection{Tally by mechanism (vertex model)}
 
-The 8~continuum QED selection rules partition cleanly into three tiers.
-The partition depends on whether the electron basis is scalar or Dirac:
+Within the vertex model the eight rules of Paper~33's list group as
+follows; the grouping depends on whether the electron basis is scalar
+or Dirac:
 
 \begin{center}
 \begin{tabular}{crll}
@@ -4442,52 +4409,42 @@ entering as $1/(4\pi)$ per loop from the $S^2$ solid angle
 normalization.  For \textbf{scalar electrons}, the $7 \to 8$ transition
 requires the full field-theoretic structure of charge conjugation ---
 a categorically different ingredient that is absent from the graph/vector
-construction.  For \textbf{Dirac electrons}, the $7 \to 8$ transition
-is closed by the Dirac spinor phase constraint at zero additional cost:
-the off-diagonal $\alpha$-matrix combined with the $i$-factor on the
-small component reduces $V(a, a, q, m_q)$ to an imaginary part that
-$m_l$ conservation forces to zero identically, killing the
-tadpole at the vertex level.  No second-quantized field theory is needed.
+construction.  For \textbf{Dirac electrons} the model closes it through
+the $\alpha_z$ diagonal identity above; for a physical vector photon
+the diagonal coupling does not vanish, so this is not a recovery of
+Furry's theorem.
 
 % ===================================================================
 \section{Discussion}
 \label{sec:discussion}
 % ===================================================================
 
-The five theorems, two propositions, and two observations of this paper,
-together with the anomalous magnetic moment computation
-(Sec.~\ref{sec:anomalous_moment}), the graph-native QED infrastructure
-(Sec.~\ref{sec:graph_native_qed}), and the vector-photon QED construction
-(Sec.~\ref{sec:vector_photon_qed}), complete the first comprehensive
-treatment of perturbative QED on~$S^3$ in both the continuum spectral-sum
-and finite-graph formulations.  The vector-photon construction recovers
-7~of~8 continuum selection rules for scalar electrons and
-\textbf{8~of~8 for Dirac electrons}, with a single transcendental cost
-($1/(4\pi)$ per loop).  For Dirac electrons, the $1$--$7$--$8$
-partition closes entirely at the kinematic level: graph topology $\to$
-angular momentum conservation $\to$ Dirac spinor phase constraint.
+The theorems, propositions and observations of this paper, together
+with the anomalous-moment ratio (Sec.~\ref{sec:anomalous_moment}), the
+graph-native QED infrastructure (Sec.~\ref{sec:graph_native_qed}), and
+the vector-photon QED construction (Sec.~\ref{sec:vector_photon_qed}),
+treat spectral sums for QED on~$S^3$ in a vertex model whose selection
+rule is the scalar triangle (Sec.~\ref{sec:setup}), in both continuum
+and finite-graph formulations.  The vector-photon construction scores
+7~of~8 rules of Paper~33's list for scalar electrons and 8~of~8 for
+Dirac electrons within that model, with the vertex normalization
+contributing $1/(4\pi)$ per loop.
 The three-axis taxonomy extends Paper~18's exchange-constant
 classification~\cite{paper18} from free propagators to interaction
 vertices: \emph{diagram topology} is an independent source of
 transcendental content beyond operator order and bundle type.
 
-The self-energy structural zero (Theorem~\ref{thm:self_energy_zero})
-and the anomalous magnetic moment extraction are the first
-physical-process QED results in the GeoVac framework, complementing
-the vacuum diagrams of the prior QED modules.  The self-energy
-demonstrates that the vertex parity selection rule has direct
-consequences for scattering processes on~$S^3$.
-The pendant-edge theorem (Proposition~\ref{prop:pendant_edge})
-sharpens the broken-structural-zero finding: the graph ground-state
+The model self-energy zero (Theorem~\ref{thm:self_energy_zero}) and
+the anomalous-moment ratio are the framework's first one-loop
+process-level sums, complementing the vacuum diagrams of the prior QED
+modules; neither is yet a physical QED result (vertex model;
+unnormalized ratio).
+The pendant-edge theorem (Proposition~\ref{prop:pendant_edge}) gives the
+graph ground-state
 self-energy $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}$
 is an exact rational expression that converges to~$2$, not~$0$, as
-$n_{\max} \to \infty$.  This is not a finite-size artifact that heals
-in the continuum limit; it reflects a qualitative difference between
-graph QED (scalar, 1-cochain photon) and continuum QED (vector,
-$\mathrm{SO}(4) = \mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ photon).
-The photon's spin-1 vector nature is thereby classified as a
-\textsc{calibration} exchange constant in Paper~18's
-taxonomy~\cite{paper18}.  The selection rule survival census
+$n_{\max} \to \infty$; the vertex model's continuum zero, which it does
+not reproduce, is itself not a property of the physical vector vertex.  The selection rule survival census
 (Table~\ref{tab:selection_rules}) makes this classification precise:
 of 8~continuum QED selection rules, only Gaunt/CG sparsity survives on
 the scalar Fock graph; the 7~broken rules partition cleanly into
@@ -4502,19 +4459,12 @@ parity, SO(4), Ward, charge conjugation).  The vector-photon QED
 construction (Sec.~\ref{sec:vector_photon_qed}) then recovers 7~of~8
 for scalar electrons and \textbf{8~of~8 for Dirac electrons}
 by adding explicit photon angular momentum labels $(q, m_q)$ with
-Clebsch--Gordan vertex coupling and E1 parity enforcement.  The path
-from graph to continuum QED has three distinct barriers: the spinor
-barrier (crossed by adopting Dirac labels, zero cost), the angular
-momentum barrier (crossed by promoting the photon from scalar 1-cochain
-to vector harmonic, calibration cost $1/(4\pi)$ per loop), and ---
-for scalar electrons only --- the field-theory barrier (requiring
-second-quantized charge conjugation for Furry's theorem).  For Dirac
-electrons, no field-theory barrier exists: the Dirac spinor phase
-constraint ($V(a, a, q, m_q) = 0$ identically from the off-diagonal
-$\alpha$-matrix, the $i$-factor on the small component, and $m_l$
-conservation) closes the
-$7 \to 8$ gap at the single-particle vertex level, without invoking
-particle--antiparticle cancellation.
+Clebsch--Gordan vertex coupling and E1 parity enforcement, within the
+vertex model (the ground-state rule is the scalar-triangle zero, and
+the Dirac diagonal-vertex zero is shown for $\alpha_z$ against scalar
+harmonics only).  Whether the field-theory barrier (second-quantized
+charge conjugation for Furry's theorem) can be avoided for a physical
+vector photon is not shown.
 The vector QED sprint (Sec.~\ref{sec:vq_sprint}) provides five
 independent negative results confirming the three-tier selection rule
 partition from a complementary direction: neither Pauli spin matrices at
@@ -4550,39 +4500,24 @@ topology-of-diagram effect), and one vertex-specific tier for $F_2$
 (requiring the full vertex correction projection).
 The extended $F_2$ convergence data
 (Table~\ref{tab:f2_convergence}) confirms this picture: $F_2(\kappa)$
-decreases as a slow power law $\sim n_{\max}^{-0.57}$, with Richardson
-extrapolation giving an unphysical negative limit, confirming $F_2 \to
-0$ rather than converging to $\alpha/(2\pi)$.  The graph-native
-anomalous moment vanishes in the infinite-graph limit; the physical
-Schwinger value requires both the coupling constant~$\alpha$ and the
-vector photon selection rules, neither of which is present on the
-finite graph.
+decreases as a slow power law $\sim n_{\max}^{-0.57}$ through
+$n_{\max} = 6$ (fit-based, not derived; Richardson extrapolation gives
+an unphysical negative limit), suggesting but not proving that $F_2$
+does not converge to $\alpha/(2\pi)$; the physical Schwinger value
+would in any case require the coupling constant~$\alpha$ and the
+vector-photon vertex, neither present on the finite graph.
 
-The anomalous
-magnetic moment ($F_2 / [\alpha/(2\pi)] = 1.084$ at
-$n_{\mathrm{ext}} = 1$) provides the first quantitative curvature
-correction to a measurable QED observable in the framework, matching the
-Parker--Toms prediction within 0.4\%.
-
-The curvature coefficient identification
-$c_2 = (2 - B\Delta - F\Delta - F/B)/5$
-(Sec.~\ref{sec:curvature_coefficients}) is the first concrete
-numerical bridge between Papers~2 and~28 (a numerical coincidence,
-not a derivation --- \S\ref{sec:curvature_coefficients}): the three
-spectral objects
-$B = 42$, $F = \pi^2/6$, $\Delta = 1/40$ that compose the
-$\alpha$~construction $K = \pi(B + F - \Delta)$ also appear as the
-geometric invariants controlling the second curvature correction to the
-anomalous magnetic moment on~$S^3$.  Since $\alpha$ cancels in the ratio
-$F_2/[\alpha/(2\pi)]$, this is a statement about the spectral geometry
-of the Dirac operator on~$S^3$, not about QED per se.  The high-precision
-$n_{\mathrm{int}}=50$ extraction (Sec.~\ref{sec:curvature_coefficients})
-gives $c_3 = -5.946(3) \times 10^{-7}$ at $200.9\,\sigma$, confirming the
-expansion does not terminate at second order; the ratio
-$|c_3 x^3| / |c_2 x^2| \approx 5.4 \times 10^{-6}$ indicates rapid but
-non-terminating convergence.  Its closed-form identification remains
-open (a $\pi^{\mathrm{even}}$-polynomial form is an ansatz, not a T9
-consequence).
+The anomalous-moment ratio ($1.084$ at $n_{\mathrm{ext}} = 1$) divides
+a coupling-free sum by the CODATA $\alpha/(2\pi)$; it is not yet a
+curvature correction to a measurable observable, and its closeness to
+$1 + 2/25$ is a numerical coincidence [OBSERVATION].  The PSLQ fit of
+$c_2^{\mathrm{apparent}}$ to $(2 - B\Delta - F\Delta - F/B)/5$, built
+from the ingredients of the combination $K = \pi(B + F - \Delta)$, is
+likewise a numerical coincidence, not a derivation, and since the
+ratio carries the CODATA $\alpha$ it is not a statement about the
+spectral geometry alone (\S\ref{sec:curvature_coefficients}); with a
+single curvature value the residual $c_3$ cannot be separated from
+$c_2$.
 
 The 5-point mode-dependent curve
 (Table~\ref{tab:mode_dependence}) reveals that the anomalous moment on
@@ -4623,9 +4558,9 @@ Secs.~\ref{sec:T9}--\ref{sec:chi4} to the \emph{interacting} Dirac
 hydrogen spectrum.  The product survival rule --- $\zeta(2) \times
 \zeta(\text{odd})$ cancelled at every order, with exactly
 $\max(0, \lfloor(2p{-}5)/2\rfloor)$ products surviving --- is verified
-through $D_6$ and driven by the same $n^2$ Fock degeneracy that produces
-$F = \zeta(2)$ in Paper~2~\cite{paper2}.
-Despite this structural link, PSLQ finds no small-coefficient relation
+through $D_6$; we read it as tied to the same $n^2$ Fock degeneracy
+that produces $F = \zeta(2)$ in Paper~2~\cite{paper2} (a reading, not
+derived).  PSLQ finds no small-coefficient relation
 placing $K/\pi$ in the $\mathbb{Q}$-span of $\{D_2, \ldots, D_6\}$:\ $K$
 lies in $\mathbb{Q}[\pi]$, while the Sommerfeld sums carry odd-zeta
 content from the Euler--Zagier MZV algebra at every order.
@@ -4671,30 +4606,19 @@ of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
       the $k \ge 5$ continuation remain open.
 \item Is there a Picard--Fuchs interpretation of $S_{\min}$, analogous
       to Ap\'ery's recurrence for $\zeta(3)$~\cite{apery1979}?
-\item Can the self-energy structural zero at $n_{\mathrm{ext}} = 0$
-      be lifted by going to higher loop order, or does vertex parity
-      enforce $\Sigma^{(k)}(0) = 0$ at every order?
-      \textbf{Partial resolution:}
-      The structural zero is broken on the finite graph
-      (Sec.~\ref{sec:broken_structural_zero}): the pendant-edge theorem
-      (Proposition~\ref{prop:pendant_edge}) proves
-      $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}
-      \to 2$ exactly, never healing.  The root cause is that the graph
-      photon is a scalar 1-cochain lacking the spin-1 vector selection
-      rules (vertex parity + SO(4) channel count) that enforce the
-      continuum zero.
-      \textbf{Further resolution:}
-      Adding explicit vector photon quantum numbers $(q, m_q)$
-      (Sec.~\ref{sec:vector_photon_qed}) recovers the GS structural
-      zero exactly through angular momentum conservation alone
-      ($2l_{\mathrm{int}}$ odd is impossible), confirming that the
-      broken zero was due to the scalar photon, not a fundamental graph
-      obstruction.
-      The continuum question at higher loop order remains open.
-\item The three-loop CG-weighted sum at physical exponents has
-      convergence rate $\alpha \approx -1.31$.  Is there a
-      resummation technique (e.g., Pad\'e, conformal mapping) that can
-      extract more digits from the partial sums?
+\item What is the one-loop self-energy and vertex sum on $S^3$ with
+      the vector-photon vertex rule (which allows $q = n_1 + n_2 + 1$
+      and couples the ground state at $q = 1$) in place of the
+      scalar-triangle model of Eq.~\eqref{eq:vertex_rule}?  The model's
+      ground-state zero (Theorem~\ref{thm:self_energy_zero}) is not a
+      property of the physical vertex; the graph value
+      $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}$
+      (Proposition~\ref{prop:pendant_edge}) and the vector-photon
+      graph model's zero (Sec.~\ref{sec:vector_photon_qed}, the
+      scalar-triangle rule again) do not settle it.
+\item (Closed.) The three-loop sum now has a closed form
+      (Sec.~\ref{subsec:s3_closure}); the earlier convergence-rate
+      exponent was an artifact.
 \item The 5-point mode-dependent curve
       $F_2 / [\alpha/(2\pi)] \approx 5.91\,|\lambda|^{-1.84 \pm 0.06}$
       has an effective exponent $2.8\sigma$ from $-2$.  The dominant
@@ -4720,19 +4644,12 @@ of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
       as $n \sim m R$ to keep the physical mass fixed?
 \item The curvature coefficient identification
       $c_2 = (2 - B\Delta - F\Delta - F/B)/5$ matches the spectral sum
-      to 8~digits (Sec.~\ref{sec:curvature_coefficients}).
-      \textbf{RESOLVED (partially):}
-      Extending to $n_{\mathrm{int}}=50$ confirms $c_2$ and gives
-      $c_3 = -5.946(3) \times 10^{-7}$ at $200.9\,\sigma$.
-      Deriving $c_2$ analytically from the Schwinger--DeWitt heat kernel
-      remains open.
-\item \textbf{RESOLVED.}
-      $c_3 = -5.946(3) \times 10^{-7}$ from $n_{\mathrm{int}}=50$,
-      nonzero at $200.9\,\sigma$.  The curvature expansion does not
-      terminate at second order; the ratio $|c_3 x^3|/|c_2 x^2|
-      \approx 5.4 \times 10^{-6}$ shows rapid but non-terminating
-      convergence.  The closed-form identification of $c_3$ (a
-      $\pi^{\mathrm{even}}$-polynomial ansatz) remains open.
+      to 8~digits (Sec.~\ref{sec:curvature_coefficients}); since the
+      ratio carries the CODATA $\alpha$, this is a numerical coincidence.
+      Deriving a normalized $F_2$ and its curvature coefficients
+      analytically from the Schwinger--DeWitt heat kernel is open; with a
+      single curvature value the residual $c_3$ cannot be separated from
+      $c_2$.
 \item The multi-$n_{\mathrm{ext}}$ extraction of curvature coefficients
       requires Wigner--Eckart decomposition into multipole form factors
       for higher-$j$ sectors.  At $n_{\mathrm{ext}} \ge 2$, the $j = 1/2$
@@ -4750,10 +4667,9 @@ of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
       (weight~9): $\zeta(2)\zeta(7)$ cancels while $\zeta(3)\zeta(6)$
       and $\zeta(4)\zeta(5)$ survive
       (Observation~\ref{obs:product_rule}).  The product survival rule
-      $\max(0, \lfloor(2p{-}5)/2\rfloor)$ is verified through $p = 5$.
-      The $S_N$-symmetry origin remains open, but the mechanism is
-      identified: the $n^2$ Fock degeneracy weight systematically
-      expels $\zeta(2)$ products via Euler sum reflection identities.
+      $\max(0, \lfloor(2p{-}5)/2\rfloor)$ is verified through $p = 6$.
+      The origin remains open; the $n^2$ Fock degeneracy weight is a
+      candidate, through Euler sum reflection identities, not shown.
 \end{enumerate}
 
 % ===================================================================

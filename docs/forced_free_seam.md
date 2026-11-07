@@ -75,22 +75,22 @@ For each entry we record three properties to be tested in the paper §5 candidat
 
 | # | Name | Status | Mechanism / Witness | Domain | MF | P | Dim |
 |---|------|:------:|---------------------|--------|:--:|:--:|:--:|
-| D1 | Spectral action two-term-exact on $S^3$ | **F** | Bernoulli identity $\zeta_{\rm unit}(-k) = 0$; Paper 51 | Gravity | 1 | M2 | dimensionless |
+| D1 | Spectral action two-term-exact on $S^3$ | **F** | Chamseddine–Connes (all-order vanishing); alternative proof via the Bernoulli identity $\zeta_{\rm unit}(-k) = 0$, Paper 51 | Gravity | 1 | M2 | dimensionless |
 | D2 | $S_{\rm BH} = A\Lambda^2/(12\pi)$; $G_N = 3\pi/\Lambda^2$ | **F** | Closed form; Paper 51 §G4 | Gravity | 1 | M1 | dimensionful |
-| D3 | Cone coefficient $-1/12$ (Sommerfeld–Cheeger) | **F** | Bit-exact discrete extraction; Paper 51 G4-4c | Gravity | 1 | M2 | dimensionless |
+| D3 | Cone coefficient $-1/12$ (Sommerfeld–Cheeger) | **F** | Continuum value (exact Bessel-zero computation); the discrete extraction converges to it as a → 0; Paper 51 G4-4c | Gravity | 1 | M2 | dimensionless |
 | D4 | Replica derivative $d\Delta_K/d\alpha\rvert_{\alpha=1} = +1/6$ | **F** | Closed form; Paper 51 G4-4f | Gravity | 1 | M2 | dimensionless |
 | D5 | Cutoff function $f$ moments $\varphi(0), \varphi(1), \varphi(2)$ | **C** | No autonomous selection; CC fine-tuning $\varphi(2)/\varphi(1)^2 \approx 10^{-124}$ required | Gravity | >1 | outside | dimensionful |
 | D6 | Cosmological constant value $\Lambda_{cc}$ | **C** | Inherits D5 | Gravity | >1 | outside | dimensionful |
-| D7 | Relations among $G_N, \Lambda_{cc}, S_{\rm BH}$ (action-$G \equiv$ entropy-$G$) | **F** | Wald forces; two-term-exactness $\Rightarrow$ pure Einstein | Gravity | 1 | M1 | dimensionless |
+| D7 | Relations among $G_N, \Lambda_{cc}, S_{\rm BH}$ (action-$G \equiv$ entropy-$G$) | **F** | Wald forces; two-term-exactness $\Rightarrow$ pure Einstein; with the rank-4 Dirac trace both routes give $3\pi/\Lambda^2$ (Gaussian cutoff; the former factor of 2 was the G2 spinor rank, 2026-11-07) | Gravity | 1 | M1 | dimensionless |
 
 ## E. QED and the $\alpha$ coincidence
 
 | # | Name | Status | Mechanism / Witness | Domain | MF | P | Dim |
 |---|------|:------:|---------------------|--------|:--:|:--:|:--:|
-| E1 | Self-energy structural zero $\Sigma(n_{\rm ext}=0) = 0$ | **F** | Proven; Paper 28 | QED | 1 | none | dimensionless |
-| E2 | Selection rules 8/8 (1+6+1 partition) | **F** | Paper 33; vector-photon promotion at $1/(4\pi)$ per loop | QED | 1 | M1 | dimensionless |
+| E1 | Self-energy zero $\Sigma(n_{\rm ext}=0) = 0$ of the scalar-triangle vertex model | **F** | Proven relative to the model's selection rule (Paper 28 Thm 4, re-scoped 2026-11-07); the physical vector vertex couples the ground state at $q=1$, so this is not a property of QED on $S^3$ | QED | 1 | none | dimensionless |
+| E2 | Selection-rule census 8/8 (1+6+1) in the vertex model | **F** | Paper 33, relative to the vertex model ($\alpha_z$ against scalar harmonics; the physical diagonal magnetic vertex is nonzero); five standard rules + three $S^3$-specific; vector-photon promotion at $1/(4\pi)$ per loop | QED | 1 | M1 | dimensionless |
 | E3 | $F_2 = 5\sqrt{2}/3$ graph-native ($\pi$-free) | **F** | Paper 33 graph-native QED | QED | 1 | none | dimensionless |
-| E4 | $F_2/(\alpha/2\pi) = 1.084$ Parker–Toms ($R/12$ curvature) | **F** | Bit-exact; 0.5% match | QED | 1 | M2 | dimensionless |
+| E4 | Anomalous-moment ratio $1.084$ vs $1 + R/(12\lvert\lambda\rvert^2) = 1.080$ | **Obs** | Re-classified F$\to$Obs 2026-11-07 (/qa group5): the spectral sum carries no coupling constant and is divided by the CODATA $\alpha/(2\pi)$, so the 0.4% closeness is a numerical coincidence; Paper 28 | QED | 1 | M2 | dimensionless |
 | E5 | $B = 42$ (Casimir), $F = \pi^2/6$ (Fock Dirichlet), $\Delta = 1/40$ ($g_3^{\rm Dirac}$) | **F** | Three distinct spectral homes (distinct type proven); no common generator found [OBSERVATION]; 12 mechanisms eliminated | $\alpha$ | 1 | M1/M2/M2 | dimensionless |
 | E6 | Combination rule $K = \pi(B + F - \Delta)$ for $\alpha^{-1}$ | **C** (an Observation, consumed as calibration) | Numerical coincidence: $K$ matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$ (its cubic's root to $8.8 \times 10^{-8}$); no derivation; stays an Observation per CLAUDE.md §13.5 | $\alpha$ | >1 | M1+M2 | dimensionless |
 | E7 | Two-loop SE counterterms $Z_2, \delta m$ | **C** | LS-8a wall: framework cannot generate autonomous renormalization | QED | >1 | outside | dimensionful |
@@ -167,8 +167,8 @@ Each row is one axis released from the compact skeleton toward the continuum, wi
 
 ## Summary counts
 
-- **Forced (F):** 44 entries (several relative to a named organizing reading / adopted axiom, or CONDITIONAL, as marked in the rows)
-- **Observation (Obs):** 4 entries (A3 κ, re-classified from F on 2026-10-02; J2, a measured front; J8, a validated reduction without a derivation; J9, the rung rule, a pattern across the tested instances)
+- **Forced (F):** 43 entries (several relative to a named organizing reading / adopted axiom, or CONDITIONAL, as marked in the rows)
+- **Observation (Obs):** 5 entries (A3 κ, re-classified from F on 2026-10-02; E4, the anomalous-moment ratio, re-classified from F on 2026-11-07; J2, a measured front; J8, a validated reduction without a derivation; J9, the rung rule, a pattern across the tested instances)
 - **Admitted (A):** 1 entry
 - **Calibration (C):** 27 entries
 - **Wall (W):** 3 entries (A6, J3, J6)

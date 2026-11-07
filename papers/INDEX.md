@@ -41,7 +41,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | group3 | 18, 22, 24, 31, 54, 55, 56, 57, 61 + group3 synthesis | OWED |
 | group4 | 14, 16, 20, 23 + group4 synthesis | OWED |
 | paper_63 | 63 + group3 synthesis (ladder subsection) | RESEARCH-GRADE — FULL #2 (v6.4.4, 2026-11-06): 0 OWNER-LARGE, 2 SURFACE-LARGE fixed + C16; coverage 14/14; SMALL debt `docs/qa/paper_63.debt.md` |
-| group5 | 2, 25, 28, 30, 33, 36, 41, 51 | OWED |
+| group5 | 2, 25, 28, 30, 33, 36, 41, 51 | NOT RESEARCH-GRADE — FULL #1 (v6.5.0, 2026-11-07) = FAIL, remediated (owner LARGE in P28/P30/P33/P36/P41/P51/P2; self-check 2 rounds); coverage 300/300; a FULL #2 or claim-search DELTA owed; debt `docs/qa/group5.debt.md` |
 | group6 | 26, 27, 34, 35 | OWED |
 | synthesis | field guide + group syntheses | OWED |
 
@@ -122,12 +122,12 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 |:------|:------:|:----------|
 | 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α to 4.8×10⁻⁷ (the cubic's root to 8.8×10⁻⁸); combination rule labeled an **Observation**, never derived (12 mechanisms eliminated) |
 | 25 `paper_25_hopf_gauge_structure.tex` | OBSERVATION | Hopf graph as discrete lattice-gauge structure |
-| 28 `paper_28_qed_s3.tex` | ACTIVE | QED on S³: 5 theorems; S_min identified in closed form (the earlier 'irreducible at 200 digits' was a basis-coverage artifact) |
+| 28 `paper_28_qed_s3.tex` | ACTIVE | QED spectral sums on S³: T9, parity, χ₋₄ theorems; S_min identified in closed form; the ground-state self-energy zero is a property of a scalar-triangle vertex model, and the 1.084 anomalous-moment ratio is an unnormalized coincidence (re-scoped 2026-11-07) |
 | 30 `paper_30_su2_wilson.tex` | ACTIVE | SU(2) Wilson gauge on S³ = SU(2); Paper 25 is its maximal torus |
-| 33 `paper_33_qed_selection_rules.tex` | OBSERVATION | 1+6+1 partition of QED selection rules |
-| 36 `paper_36_bound_state_qed.tex` | ACTIVE | Hydrogen Lamb shift at −0.534% at one loop, no fits; two-loop wall named |
-| 41 `paper_41_rule_b_wilson_u1.tex` | ACTIVE | Wilson U(1) on the Dirac Rule-B graph; seven-witness compatibility |
-| 51 `paper_51_gravity_arc.tex` | ACTIVE | Gravity from the spectral action; two-term exactness; J-blindness theorem |
+| 33 `paper_33_qed_selection_rules.tex` | OBSERVATION | 1+6+1 census of eight selection rules (five standard, three S³-specific) in a vertex model; the Dirac Furry score is an α_z identity, not Furry for a physical vector photon |
+| 36 `paper_36_bound_state_qed.tex` | ACTIVE | GeoVac Bethe logarithms for the hydrogen Lamb shift (2P, 3D reproduced; 2S not converged); the −0.534% headline is the leading one-loop assembly with literature logs; two-loop wall named |
+| 41 `paper_41_rule_b_wilson_u1.tex` | ACTIVE | Wilson U(1) on the Dirac Rule-B graph; compatible with compact U(1), no 3D-vs-4D discrimination (re-scoped 2026-11-07) |
+| 51 `paper_51_gravity_arc.tex` | ACTIVE | Gravity from the spectral action; two-term exactness (Chamseddine–Connes; alternative proof); G_eff = 3π/Λ² (rank-4 trace); J-blindness theorem |
 
 ## Group 6 — Precision / observations (`group6_precision_observations/`)
 

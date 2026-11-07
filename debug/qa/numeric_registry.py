@@ -1453,7 +1453,7 @@ MEASURED = {
         value=632.19, convention="non-identity 1-norm (MeV), He-4, with pp Coulomb",
         provenance="MEASURED 2026-11-04, build_he4_hamiltonian(include_coulomb=True)"),
     "p23_he4_e0_coul": dict(
-        value=-15.918, convention="FCI ground-state energy (MeV, HO zero point included), He-4 with Coulomb",
+        value=-15.918, convention="FCI total energy of the ground state (MeV, HO zero point included), He-4 with Coulomb",
         provenance="MEASURED 2026-11-04, diagonalize_he4(hw=10); the Pauli sum gives the same value"),
     "p23_composed_pauli": dict(
         value=710, convention="non-identity Pauli, composed nuclear-electronic register Q=26 (688 + 10 + 12)",

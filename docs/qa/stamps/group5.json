@@ -1,0 +1,1505 @@
+{
+ "target": "group5",
+ "units": {
+  "cite:papers/group5_qed_gauge/Paper_2_Alpha.tex": {
+   "date": "2026-11-07",
+   "hash": "501eaa24b9037e14",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": {
+   "date": "2026-11-07",
+   "hash": "29770e4de58a11ff",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_28_qed_s3.tex": {
+   "date": "2026-11-07",
+   "hash": "6533c0b447dee849",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_30_su2_wilson.tex": {
+   "date": "2026-11-07",
+   "hash": "5cf1955790a6c7f3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex": {
+   "date": "2026-11-07",
+   "hash": "d73e6e17daaeab53",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_36_bound_state_qed.tex": {
+   "date": "2026-11-07",
+   "hash": "812863b34d7f2025",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": {
+   "date": "2026-11-07",
+   "hash": "0d8db44c8553b38f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "cite:papers/group5_qed_gauge/paper_51_gravity_arc.tex": {
+   "date": "2026-11-07",
+   "hash": "a63b7e8aebb50788",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/Paper_2_Alpha.tex": {
+   "date": "2026-11-07",
+   "hash": "0fdd8654e1e6beca",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": {
+   "date": "2026-11-07",
+   "hash": "9a08fb8c8d5ca064",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_28_qed_s3.tex": {
+   "date": "2026-11-07",
+   "hash": "1edb63ed9f6fb941",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_30_su2_wilson.tex": {
+   "date": "2026-11-07",
+   "hash": "22fbe7b2d2a5e180",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex": {
+   "date": "2026-11-07",
+   "hash": "0386709e775f3750",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_36_bound_state_qed.tex": {
+   "date": "2026-11-07",
+   "hash": "306cacc9efb77a8b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": {
+   "date": "2026-11-07",
+   "hash": "1cbdf8929e20199f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "code:papers/group5_qed_gauge/paper_51_gravity_arc.tex": {
+   "date": "2026-11-07",
+   "hash": "ef6f013a5af1722e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Conclusion": {
+   "date": "2026-11-07",
+   "hash": "2ad2b9800fba936f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion": {
+   "date": "2026-11-07",
+   "hash": "bec795d4d4c9299f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / A second pointer to n_ = 3 (Observation)": {
+   "date": "2026-11-07",
+   "hash": "759bc83af6f41abd",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / Algebraic structure of the cubic's root": {
+   "date": "2026-11-07",
+   "hash": "e9244e2dc1e286b6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / Comparison with Wyler's formula": {
+   "date": "2026-11-07",
+   "hash": "288f4172d720ee3e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / Comparison with previous approach": {
+   "date": "2026-11-07",
+   "hash": "acf95050b6b3e268",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / Open questions": {
+   "date": "2026-11-07",
+   "hash": "d28001d0535c8ad3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / S^3 specificity": {
+   "date": "2026-11-07",
+   "hash": "c45b9811c8d7418c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / Spectral determinant near-miss": {
+   "date": "2026-11-07",
+   "hash": "a1fc28268e1299d0",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Discussion / Transition operators and the Hopf geometry": {
+   "date": "2026-11-07",
+   "hash": "35195f815cf171f4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "b339afac27c5b15c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Spectral Invariants of the Bundle": {
+   "date": "2026-11-07",
+   "hash": "14930ddb9df28b13",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Spectral Invariants of the Bundle / Base manifold S^2 : Casimir trace": {
+   "date": "2026-11-07",
+   "hash": "6a03292bac675859",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Spectral Invariants of the Bundle / Fiber S^1 : Spectral zeta function": {
+   "date": "2026-11-07",
+   "hash": "c45493da058c9ce3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Spectral Invariants of the Bundle / Selection principle": {
+   "date": "2026-11-07",
+   "hash": "aabed135f076ab5b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Spectral Invariants of the Bundle / Total space S^3 : Boundary correction": {
+   "date": "2026-11-07",
+   "hash": "7fab15a435d8a197",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Spectral Invariants of the Bundle / Triple selection at n_ =3": {
+   "date": "2026-11-07",
+   "hash": "bdc576b0a6da5894",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Statistical Validation": {
+   "date": "2026-11-07",
+   "hash": "401fb83c998b64eb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Statistical Validation / Results": {
+   "date": "2026-11-07",
+   "hash": "b9b5bc7f74457934",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::Statistical Validation / Search space": {
+   "date": "2026-11-07",
+   "hash": "927cf9d55a77413d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Circulant Structure": {
+   "date": "2026-11-07",
+   "hash": "50d99533d4af9ffa",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Circulant Structure / Circulant eigenvalue equation": {
+   "date": "2026-11-07",
+   "hash": "5e7f93361557b88d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Circulant Structure / Forced Hermiticity and the physical phase": {
+   "date": "2026-11-07",
+   "hash": "f5680bc25d531d3d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Circulant Structure / Physical interpretation": {
+   "date": "2026-11-07",
+   "hash": "53a4f5d6344d7d5f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Circulant Structure / Self-referential property": {
+   "date": "2026-11-07",
+   "hash": "0f04e96f4cb14319",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Circulant Structure / Structural content and limitations": {
+   "date": "2026-11-07",
+   "hash": "47c29d0a077af46f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Formula and its Three Homes": {
+   "date": "2026-11-07",
+   "hash": "905f600670b34be3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Formula and its Three Homes / An aside: (3) in the Dirac sector": {
+   "date": "2026-11-07",
+   "hash": "9eb84722783d7ee0",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Formula and its Three Homes / Closure of the structural decomposition program": {
+   "date": "2026-11-07",
+   "hash": "7b4a20772aa84945",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Formula and its Three Homes / Connection to the framework's rigidity theorems": {
+   "date": "2026-11-07",
+   "hash": "858cb12d2fb6f7e9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Formula and its Three Homes / The structural question and the verdict of the Phase 4B--4I": {
+   "date": "2026-11-07",
+   "hash": "83f3314b21ab6ab0",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Formula and its Three Homes / The three obstructions to unification": {
+   "date": "2026-11-07",
+   "hash": "b352b5dcd72b8702",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Hopf Bundle as Electron--Photon Geometry": {
+   "date": "2026-11-07",
+   "hash": "7561285f2bd665e7",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::The Hopf Bundle as Electron--Photon Geometry / Spectral-triple setting and published lineage": {
+   "date": "2026-11-07",
+   "hash": "860e74c1e2851d2b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::What Is and Is Not Established": {
+   "date": "2026-11-07",
+   "hash": "30093470daa6688b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/Paper_2_Alpha.tex::front": {
+   "date": "2026-11-07",
+   "hash": "f6397d253cbb4aa7",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Conclusion": {
+   "date": "2026-11-07",
+   "hash": "d8a0bf47504f41b9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools": {
+   "date": "2026-11-07",
+   "hash": "b7bfd211fe399b81",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Discrete Hodge decomposition": {
+   "date": "2026-11-07",
+   "hash": "422fd511fdd300ba",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Incidence matrix and boundary operators": {
+   "date": "2026-11-07",
+   "hash": "a9e0620a18833e1a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Lattice gauge theory dictionary": {
+   "date": "2026-11-07",
+   "hash": "b89a4c0b67b1df03",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Node and edge Laplacians": {
+   "date": "2026-11-07",
+   "hash": "c27c44c68f19e73a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Node versus edge spectra": {
+   "date": "2026-11-07",
+   "hash": "b5d7998a4a8b7f27",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "75ca13b123014b5e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions": {
+   "date": "2026-11-07",
+   "hash": "ec5e30dedb99adf9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions / Gauge structure on the Bargmann--Segal S^5 lattice: answered (mixed)": {
+   "date": "2026-11-07",
+   "hash": "0a2d15721a377007",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions / Observables beyond": {
+   "date": "2026-11-07",
+   "hash": "e3ce81e44c748bf1",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions / Rank-2 Breit tensor: a 2-form gauge structure?": {
+   "date": "2026-11-07",
+   "hash": "bda55fc5a90634db",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work": {
+   "date": "2026-11-07",
+   "hash": "2b4d804005239ce8",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Conformal Maxwell theory and the AdS/CFT boundary": {
+   "date": "2026-11-07",
+   "hash": "3e7f69d1d47e3b00",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Graph Hodge theory": {
+   "date": "2026-11-07",
+   "hash": "8740087225b23375",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Lattice gauge theory on curved manifolds": {
+   "date": "2026-11-07",
+   "hash": "23f1ee93c7dbcdb1",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Why the gap remained": {
+   "date": "2026-11-07",
+   "hash": "ece133f26beb0ada",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized": {
+   "date": "2026-11-07",
+   "hash": "8c5db671b060dc60",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / Circulant structure reread": {
+   "date": "2026-11-07",
+   "hash": "98120faf20482cfe",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / What the framework observation claims": {
+   "date": "2026-11-07",
+   "hash": "d53cb58c817805fe",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / Where Paper 2's (B, F, ) live in this frame": {
+   "date": "2026-11-07",
+   "hash": "cd5c19624546ef13",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph": {
+   "date": "2026-11-07",
+   "hash": "6ba45bc6d8da09b2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / Node and edge Laplacians of the GeoVac graph": {
+   "date": "2026-11-07",
+   "hash": "894d06299e5776b5",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / Nodes and edges": {
+   "date": "2026-11-07",
+   "hash": "ecabd54bf0d0a18f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / The Hopf quotient: S^3 S^2": {
+   "date": "2026-11-07",
+   "hash": "c20d67367b6e3f77",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / The matter and gauge propagators": {
+   "date": "2026-11-07",
+   "hash": "92879662a09cfd7c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / U(1) phase on edges": {
+   "date": "2026-11-07",
+   "hash": "9824c654dad0695f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not": {
+   "date": "2026-11-07",
+   "hash": "79f3d960c2ab97a0",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not / What the framework observation does make available": {
+   "date": "2026-11-07",
+   "hash": "b4d4f38d8df6c727",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not / What this does not produce": {
+   "date": "2026-11-07",
+   "hash": "3f41f85edd09ae98",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::front": {
+   "date": "2026-11-07",
+   "hash": "824ca8ededc655fd",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3": {
+   "date": "2026-11-07",
+   "hash": "d8e57ddb3cd7f7b5",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Convergence and results": {
+   "date": "2026-11-07",
+   "hash": "89c126cc5b2193c3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Curvature expansion coefficients": {
+   "date": "2026-11-07",
+   "hash": "7d93c1718060975c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Headline result": {
+   "date": "2026-11-07",
+   "hash": "8aaf1f1ea5904f8e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Mode dependence": {
+   "date": "2026-11-07",
+   "hash": "af56498ae36d67e5",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Three-point vertex correction with probe photon": {
+   "date": "2026-11-07",
+   "hash": "6992463cf3a485ae",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Tree-level normalization": {
+   "date": "2026-11-07",
+   "hash": "043dda9a1b6fe0d3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Anomalous Magnetic Moment on S^3 / Why the two-point vertex correction gives B = 0": {
+   "date": "2026-11-07",
+   "hash": "f8f4c0bd33374994",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Comprehensive Transcendental Tables": {
+   "date": "2026-11-07",
+   "hash": "5ffe71c3c2e71eb2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Depth- k Tower": {
+   "date": "2026-11-07",
+   "hash": "15d81ccfa672e719",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Discussion": {
+   "date": "2026-11-07",
+   "hash": "903c4e085d75b362",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Discussion / Open questions": {
+   "date": "2026-11-07",
+   "hash": "23c06517c91cd4d4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation": {
+   "date": "2026-11-07",
+   "hash": "5acd55cd2d749399",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / (3) complementarity": {
+   "date": "2026-11-07",
+   "hash": "f7fc4f6114f43a6d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / Closed forms for c_p(n)": {
+   "date": "2026-11-07",
+   "hash": "56d9db7f6fb6f21c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / D_4 at weight 7: product zeta survives": {
+   "date": "2026-11-07",
+   "hash": "719cb9c6e3b01001",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / D_5 at weight 9: product survival rule": {
+   "date": "2026-11-07",
+   "hash": "35833ae5c370e937",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / D_6 at weight 11: product survival rule extended": {
+   "date": "2026-11-07",
+   "hash": "806403a654a5be96",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / K--Sommerfeld structural separation": {
+   "date": "2026-11-07",
+   "hash": "8a781c702f02ff3f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / Setup": {
+   "date": "2026-11-07",
+   "hash": "bd9b824dda4efd50",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Fine-Structure Euler Sum Cancellation / Transcendental structure": {
+   "date": "2026-11-07",
+   "hash": "eaaa8131c58d8aa9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Flat-Space Consistency": {
+   "date": "2026-11-07",
+   "hash": "288f0895f57cfd7d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED": {
+   "date": "2026-11-07",
+   "hash": "d8fb45ef08c05bcb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Broken structural zero and the pendant-edge theorem": {
+   "date": "2026-11-07",
+   "hash": "357fe6537b491194",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Construction": {
+   "date": "2026-11-07",
+   "hash": "ea182960cb2c0f0b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Continuum bridge and projection exchange constant": {
+   "date": "2026-11-07",
+   "hash": "7921741a73b6ebac",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Native Dirac graph QED": {
+   "date": "2026-11-07",
+   "hash": "33d036f0433a4f79",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Neumann series structure of the electron propagator": {
+   "date": "2026-11-07",
+   "hash": "c292f014127a6efd",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Selection rule survival census": {
+   "date": "2026-11-07",
+   "hash": "e5f0a8a44961fb36",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Self-energy and vertex correction": {
+   "date": "2026-11-07",
+   "hash": "8f7e844d708b6c6a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Transcendental certificate": {
+   "date": "2026-11-07",
+   "hash": "fbf40520495b6b22",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Transverse photon sector from plaquettes": {
+   "date": "2026-11-07",
+   "hash": "148602e06fec81ca",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Vacuum polarization": {
+   "date": "2026-11-07",
+   "hash": "8f198ef13ea750f6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Vector QED sprint: five negative results": {
+   "date": "2026-11-07",
+   "hash": "54c3a959944dc7c2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Graph-Native QED / Vector-photon QED: 7/8 scalar, 8/8 Dirac selection rules scored in the": {
+   "date": "2026-11-07",
+   "hash": "af8b332a2f2dd348",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "1ff1a95aadae3ee5",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure": {
+   "date": "2026-11-07",
+   "hash": "f1f4e2374777d3bb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Cigar spectral action and Bekenstein--Hawking entropy": {
+   "date": "2026-11-07",
+   "hash": "d32b4e4a242bef37",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Conical defect / replica method for BH entropy": {
+   "date": "2026-11-07",
+   "hash": "d0b51b70e43dd8a4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Cutoff-function dependence of the gravity predictions": {
+   "date": "2026-11-07",
+   "hash": "5f9bc499397fa9b7",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Decompactified S^3 R _ and de Sitter vacuum": {
+   "date": "2026-11-07",
+   "hash": "1b70204e8def11f6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Discrete warped-product substrate for the cigar": {
+   "date": "2026-11-07",
+   "hash": "4123bdaeafcfdea4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Extension to S^3_R S^1_ : factorization and 4D CC structure": {
+   "date": "2026-11-07",
+   "hash": "03758d860e3a71e2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Graviton diagnostic: physical (1, 1) modes on the truncated substrate": {
+   "date": "2026-11-07",
+   "hash": "aac6f03bf57f968a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Newton constant, cosmological constant, and background extremality": {
+   "date": "2026-11-07",
+   "hash": "0fc28457eb1b86d8",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Parametric spectral action on S^3_R and _ unit (-k) = 0": {
+   "date": "2026-11-07",
+   "hash": "0a9cff6c7393c9ba",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / SD two-term exactness for the Dirac heat kernel": {
+   "date": "2026-11-07",
+   "hash": "ef077d33f917e842",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / S^2 Dirac and the cigar's spatial spinor structure": {
+   "date": "2026-11-07",
+   "hash": "10b0fbb04664e38e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::One-Loop Vacuum Structure / Spinor-bundle specificity: scalar and TT-tensor heat traces": {
+   "date": "2026-11-07",
+   "hash": "e90c53ba3424fc76",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Spectral Data on S^3": {
+   "date": "2026-11-07",
+   "hash": "23719e8d8aed90fe",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Spectral Data on S^3 / Dirac spectrum": {
+   "date": "2026-11-07",
+   "hash": "4525ee5a93e51e86",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Spectral Data on S^3 / Hodge-1 (photon) spectrum": {
+   "date": "2026-11-07",
+   "hash": "93328b575a36855e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Spectral Data on S^3 / Vertex selection rule": {
+   "date": "2026-11-07",
+   "hash": "dc468877e16cab95",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 1: Squared Dirac Spectral Zeta (T9)": {
+   "date": "2026-11-07",
+   "hash": "c5525fea36cead0f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 2: Even/Odd Parity Discriminant": {
+   "date": "2026-11-07",
+   "hash": "045a6b288ba3b358",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 3: The _ -4 Identity": {
+   "date": "2026-11-07",
+   "hash": "f73efb76c6018f28",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 3: The _ -4 Identity / Three-axis taxonomy": {
+   "date": "2026-11-07",
+   "hash": "cc479fd62966ac97",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 3: The _ -4 Identity / Vertex-parity decomposition at s = 4": {
+   "date": "2026-11-07",
+   "hash": "3fe8502aa2ac5168",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 4: Self-Energy Structural Zero": {
+   "date": "2026-11-07",
+   "hash": "82ab2534301dfc05",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 4: Self-Energy Structural Zero / Self-energy for excited states": {
+   "date": "2026-11-07",
+   "hash": "3a5f6e9971523305",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Theorem 4: Self-Energy Structural Zero / Vertex correction": {
+   "date": "2026-11-07",
+   "hash": "28761e790d4d5c76",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Three-Loop Results": {
+   "date": "2026-11-07",
+   "hash": "ad90f05fba9093d6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Three-Loop Results / Convergence analysis (corrected 2026-06-11)": {
+   "date": "2026-11-07",
+   "hash": "82bcb2a28339164c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Three-Loop Results / Decomposition closure: the four trailing- 1": {
+   "date": "2026-11-07",
+   "hash": "c88013170e80754a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Three-Loop Results / Factorized O(N^3) algorithm": {
+   "date": "2026-11-07",
+   "hash": "b754002eb35b552e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Three-Loop Results / PSLQ identification attempts (historical)": {
+   "date": "2026-11-07",
+   "hash": "a9f1b0be94eca06d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Two-Loop Identified Constant: S_": {
+   "date": "2026-11-07",
+   "hash": "7770d63f8cdd3e90",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Two-Loop Identified Constant: S_ / 200-digit computation": {
+   "date": "2026-11-07",
+   "hash": "729490a115541b30",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Two-Loop Identified Constant: S_ / Exact sunset relation": {
+   "date": "2026-11-07",
+   "hash": "2acfe1a60d8db142",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Two-Loop Identified Constant: S_ / Inner photon sum: closed-form channel count": {
+   "date": "2026-11-07",
+   "hash": "8e3b08c61167b63e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::Two-Loop Identified Constant: S_ / Motivic identification: Hoffman double t -values": {
+   "date": "2026-11-07",
+   "hash": "a6d4efb61ecd58c9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_28_qed_s3.tex::front": {
+   "date": "2026-11-07",
+   "hash": "34d2d24dbb6e5f8c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Character Expansion on SU(2)": {
+   "date": "2026-11-07",
+   "hash": "88c47d40e5840f97",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Conclusion": {
+   "date": "2026-11-07",
+   "hash": "4d87a859a634aeb9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "5561edb74592e5a9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions": {
+   "date": "2026-11-07",
+   "hash": "67cd750fc0a29d62",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / Continuum limit": {
+   "date": "2026-11-07",
+   "hash": "2cdac29ce769aab3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / Larger graphs and the confinement diagnostic": {
+   "date": "2026-11-07",
+   "hash": "6e44819f1555f396",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / Matter coupling: Dirac fermions on the Hopf graph": {
+   "date": "2026-11-07",
+   "hash": "09d6da6f71bd5e4d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / Plaquettes as the transverse photon sector": {
+   "date": "2026-11-07",
+   "hash": "6047477840710e51",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / SU(2) analog of Paper 2's K = (B + F - )": {
+   "date": "2026-11-07",
+   "hash": "59c9e9ac414832c6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / SU(2) analog of the Ihara zeta": {
+   "date": "2026-11-07",
+   "hash": "62764e6dd7b52a4e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Open Questions / SU(3) Wilson sibling on S^5": {
+   "date": "2026-11-07",
+   "hash": "0d0323aa883f6a1d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Principle of Least Action: A Framework-Wide Synthesis": {
+   "date": "2026-11-07",
+   "hash": "dcde4b4f33775600",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Recap: The GeoVac Hopf Graph as a Lattice Gauge Structure": {
+   "date": "2026-11-07",
+   "hash": "dad67bf5b8d9a98f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::SU(2) Link Variables and the Wilson Action": {
+   "date": "2026-11-07",
+   "hash": "682e9eeb4d2859d8",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::SU(2) Link Variables and the Wilson Action / Gauge transformation": {
+   "date": "2026-11-07",
+   "hash": "9bffe528bcecc4fb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::SU(2) Link Variables and the Wilson Action / Link variables": {
+   "date": "2026-11-07",
+   "hash": "d3e391dd0b637ac2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::SU(2) Link Variables and the Wilson Action / Partition function": {
+   "date": "2026-11-07",
+   "hash": "9552e0a827c27c07",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::SU(2) Link Variables and the Wilson Action / Plaquette holonomy": {
+   "date": "2026-11-07",
+   "hash": "7060d041893e091a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::SU(2) Link Variables and the Wilson Action / Wilson action": {
+   "date": "2026-11-07",
+   "hash": "47fffba95489e6cc",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Three Structural Results": {
+   "date": "2026-11-07",
+   "hash": "19a19e3244503409",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Three Structural Results / Result 1: U(1) reduction to Paper 25 is exact": {
+   "date": "2026-11-07",
+   "hash": "86346c1c9d5c4c8c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Three Structural Results / Result 2: the weak-coupling kinetic term completes": {
+   "date": "2026-11-07",
+   "hash": "16988207897f28e5",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Three Structural Results / Result 3: Plaquette counts and Wilson-loop data": {
+   "date": "2026-11-07",
+   "hash": "56c0624e49941103",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::Yang--Mills Adjacency: What Is and Is Not Claimed": {
+   "date": "2026-11-07",
+   "hash": "85252492c0d83c14",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_30_su2_wilson.tex::front": {
+   "date": "2026-11-07",
+   "hash": "d2df2c91cea87cec",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Conclusion": {
+   "date": "2026-11-07",
+   "hash": "16c265a0d1d838b8",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Connections to Other Papers": {
+   "date": "2026-11-07",
+   "hash": "02b2d4e2053389b7",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Connections to Other Papers / Paper 18 (exchange constant taxonomy)": {
+   "date": "2026-11-07",
+   "hash": "006b047584c9cc90",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Connections to Other Papers / Paper 22 (angular sparsity theorem)": {
+   "date": "2026-11-07",
+   "hash": "d6e1fd3fb92fb56b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Connections to Other Papers / Paper 28 (QED on S^3 )": {
+   "date": "2026-11-07",
+   "hash": "623ca82cc70bb994",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Connections to Other Papers / Paper 32 (spectral triple synthesis)": {
+   "date": "2026-11-07",
+   "hash": "3f1ed2f8a6641707",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "2109e7b126c6667e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Open Questions": {
+   "date": "2026-11-07",
+   "hash": "b0de406ddfd9e7b6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The 1 + 6 + 1 Partition Theorem": {
+   "date": "2026-11-07",
+   "hash": "44f1589d391155d4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The 1/(4 ) Calibration Exchange Constant": {
+   "date": "2026-11-07",
+   "hash": "073cf211252b9889",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The 1/(4 ) Calibration Exchange Constant / Why 1/(4 )": {
+   "date": "2026-11-07",
+   "hash": "0171d35ac523fd8f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The Dirac Graph: 4/8": {
+   "date": "2026-11-07",
+   "hash": "bb3c06aa78756c10",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The Dirac Graph: 4/8 / What is not": {
+   "date": "2026-11-07",
+   "hash": "6ca4603c65d048ff",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The Dirac Graph: 4/8 / What is recovered": {
+   "date": "2026-11-07",
+   "hash": "aa6af9fcc9ca2bb7",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The Graph-Native Baseline: 1/8": {
+   "date": "2026-11-07",
+   "hash": "2f2ceacb5ec03261",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The Graph-Native Baseline: 1/8 / What does not": {
+   "date": "2026-11-07",
+   "hash": "facca8f6f38455f4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::The Graph-Native Baseline: 1/8 / What survives": {
+   "date": "2026-11-07",
+   "hash": "5c1e7bf346170232",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Vector-Photon Promotion: 7/8 (Scalar) and 8/8 (Dirac)": {
+   "date": "2026-11-07",
+   "hash": "55794c968c0143bb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Vector-Photon Promotion: 7/8 (Scalar) and 8/8 (Dirac) / Construction": {
+   "date": "2026-11-07",
+   "hash": "1f37f2ca110095d6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Vector-Photon Promotion: 7/8 (Scalar) and 8/8 (Dirac) / Selection rules recovered for scalar electrons": {
+   "date": "2026-11-07",
+   "hash": "4ccc23a4ec255737",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::Vector-Photon Promotion: 7/8 (Scalar) and 8/8 (Dirac) / The diagonal _z vertex and Rule 7": {
+   "date": "2026-11-07",
+   "hash": "844e6c02e659fad4",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_33_qed_selection_rules.tex::front": {
+   "date": "2026-11-07",
+   "hash": "03a2defb56276a45",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection": {
+   "date": "2026-11-07",
+   "hash": "e916afde0476bd9c",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection / The Coulomb Sturmian projection at = Z/n": {
+   "date": "2026-11-07",
+   "hash": "1f48d15c89be3131",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection / The Dirac- S^3 spectrum": {
+   "date": "2026-11-07",
+   "hash": "42df54b2a0bb89cf",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Conclusion": {
+   "date": "2026-11-07",
+   "hash": "1fbe4d2631e07d68",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "407d29c7bbfd7a1f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Introduction / Sprint provenance": {
+   "date": "2026-11-07",
+   "hash": "6468e55228929a7b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test": {
+   "date": "2026-11-07",
+   "hash": "9cd33dae34fe1242",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Muonium catalogue closure: triple completes at the LS-8a wall": {
+   "date": "2026-11-07",
+   "hash": "73a9281f66bfe289",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint LS-8a result: WEAK verdict, structural confirmation": {
+   "date": "2026-11-07",
+   "hash": "6d8605e047efd245",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint MH Track A: Muonic Hydrogen via the Rest-Mass": {
+   "date": "2026-11-07",
+   "hash": "59ffeb6ff19c5601",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint Mu Lamb: Muonium Lamb Shift at Leading One-Loop Order": {
+   "date": "2026-11-07",
+   "hash": "cb803ab3ab27fdc1",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown": {
+   "date": "2026-11-07",
+   "hash": "541a8d9288d2402e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / Numerical result": {
+   "date": "2026-11-07",
+   "hash": "0d1898c2c1c6e53a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / Sprint LS-7: structural confirmation of two-loop projection": {
+   "date": "2026-11-07",
+   "hash": "9303983aff8a83a6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / The remaining -5.65 MHz": {
+   "date": "2026-11-07",
+   "hash": "c4631bfc22e05e14",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / What -content the calculation introduces": {
+   "date": "2026-11-07",
+   "hash": "9704d82f76c6bf9f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson": {
+   "date": "2026-11-07",
+   "hash": "96fb46afb699dcf9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / Acceleration form for s -states": {
+   "date": "2026-11-07",
+   "hash": "e749784ba45d96ab",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / The Drake--Swainson asymptotic-subtraction projection (LS-4)": {
+   "date": "2026-11-07",
+   "hash": "b46f812b8ba848ba",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / Velocity form: 2S works, 2P diverges": {
+   "date": "2026-11-07",
+   "hash": "43cebb042b9fa086",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a)": {
+   "date": "2026-11-07",
+   "hash": "8b968cd9bc808576",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a) / Sprint LS-5: scoping the multi-loop test target": {
+   "date": "2026-11-07",
+   "hash": "7ca1e9d819bd9460",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a) / Sprint LS-6a: identifying the Uehling double-counting": {
+   "date": "2026-11-07",
+   "hash": "41a34ddeffb2e4c2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::front": {
+   "date": "2026-11-07",
+   "hash": "f3eb9c4cd6737f31",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Acknowledgements": {
+   "date": "2026-11-07",
+   "hash": "93ddb1868283b17f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "b0a68e75a84fc25d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow": {
+   "date": "2026-11-07",
+   "hash": "bff74f1b5783667b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Adaptation to an irregular graph": {
+   "date": "2026-11-07",
+   "hash": "8043d3b66d598c67",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Flow direction and absence of non-trivial fixed point": {
+   "date": "2026-11-07",
+   "hash": "20e13b347b96b652",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Reading: consistent with permanent confinement": {
+   "date": "2026-11-07",
+   "hash": "aaa5dfb9a20e1adf",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Strong/weak-coupling asymptotics": {
+   "date": "2026-11-07",
+   "hash": "89fc7fcaa7829505",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Outlook": {
+   "date": "2026-11-07",
+   "hash": "67fbc860e47f0a06",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Seven-witness structural verdict": {
+   "date": "2026-11-07",
+   "hash": "9a2884831a0e44e6",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension": {
+   "date": "2026-11-07",
+   "hash": "5ea7c886182513fe",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Method": {
+   "date": "2026-11-07",
+   "hash": "eac4ed46416a7ec9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Numerical results": {
+   "date": "2026-11-07",
+   "hash": "f5eb47f324a93df7",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Reading": {
+   "date": "2026-11-07",
+   "hash": "054528ad22b5e723",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph": {
+   "date": "2026-11-07",
+   "hash": "bd4902ab2b5e9cd3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Bipartiteness and girth": {
+   "date": "2026-11-07",
+   "hash": "0f73b5e2b3505274",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Comparison to the scalar Fock graph": {
+   "date": "2026-11-07",
+   "hash": "949a9a74f850dea8",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Graph properties": {
+   "date": "2026-11-07",
+   "hash": "96dbe7216cda47da",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Plaquette signatures": {
+   "date": "2026-11-07",
+   "hash": "6896e64313bcbca3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Spectral genealogy": {
+   "date": "2026-11-07",
+   "hash": "c49863b8e7752801",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Vertex and edge data": {
+   "date": "2026-11-07",
+   "hash": "82da804653984363",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B": {
+   "date": "2026-11-07",
+   "hash": "400323a82204f3ba",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Link variables and gauge transformation": {
+   "date": "2026-11-07",
+   "hash": "0bc774f7633b1bd8",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Plaquette counts and the structural difference from Paper 25": {
+   "date": "2026-11-07",
+   "hash": "8ef2614c59a53124",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Quadratic expansion and the weak-coupling kinetic term": {
+   "date": "2026-11-07",
+   "hash": "b6f624da813b8d66",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Signed incidence and the two Laplacians": {
+   "date": "2026-11-07",
+   "hash": "933bd9ab86c4a3eb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / The plaquette boundary operator and the correct Wilson kinetic": {
+   "date": "2026-11-07",
+   "hash": "5ed6cbe1894a0c5a",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Wilson action": {
+   "date": "2026-11-07",
+   "hash": "eb825fcabd0168fb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics": {
+   "date": "2026-11-07",
+   "hash": "1e7e71e7d4d97d7e",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Full Monte Carlo Wilson loops": {
+   "date": "2026-11-07",
+   "hash": "4dfdb23300e5d9cc",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Gaussian (free-photon) Wilson loops": {
+   "date": "2026-11-07",
+   "hash": "76c43dda427bd154",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / NLO character expansion and structural cycle content": {
+   "date": "2026-11-07",
+   "hash": "8a0148252f0bbc62",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov dilute monopole gas via DeGrand--Toussaint construction": {
+   "date": "2026-11-07",
+   "hash": "35d0e17c0bfcf46b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov loops via Euclidean-time compactification": {
+   "date": "2026-11-07",
+   "hash": "495f540e62a4908d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov-rate resolution and non-cubic dual-lattice structure": {
+   "date": "2026-11-07",
+   "hash": "2fba8e02e4290393",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Strong-coupling character expansion": {
+   "date": "2026-11-07",
+   "hash": "fca44aa980b938e5",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::front": {
+   "date": "2026-11-07",
+   "hash": "f6c2995aadd80a32",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Acknowledgments": {
+   "date": "2026-11-07",
+   "hash": "4cc5794d44c74492",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Bekenstein--Hawking entropy from the conical defect (G4-1, G4-2)": {
+   "date": "2026-11-07",
+   "hash": "846548a9bfd4c999",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Bekenstein--Hawking entropy from the conical defect (G4-1, G4-2) / Conical-defect / replica method (G4-2)": {
+   "date": "2026-11-07",
+   "hash": "e5fc21f3c0f208df",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Bekenstein--Hawking entropy from the conical defect (G4-1, G4-2) / S^2 Dirac structural analysis (G4-1)": {
+   "date": "2026-11-07",
+   "hash": "7f3157c5b8e6ef64",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Bundle-specific two-term exactness (G3)": {
+   "date": "2026-11-07",
+   "hash": "5b7ceb0e36b049bd",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Cutoff-function dependence (G8)": {
+   "date": "2026-11-07",
+   "hash": "2587c7b72645d226",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Decompactified de Sitter vacuum on R _ (G5)": {
+   "date": "2026-11-07",
+   "hash": "076d5f289882bd27",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3)": {
+   "date": "2026-11-07",
+   "hash": "62d5c9d697140eb9",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3) / Connection to G4-2 continuum derivation": {
+   "date": "2026-11-07",
+   "hash": "9652b964633b1f19",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3) / Connection to G8 cutoff dependence": {
+   "date": "2026-11-07",
+   "hash": "a8b52acdf8fc8863",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3) / Constant-warp factorization": {
+   "date": "2026-11-07",
+   "hash": "1c863a921263f9a2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3) / Discrete substrate": {
+   "date": "2026-11-07",
+   "hash": "e2f4012e3886e494",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3) / Honest scope at G4-3 closure": {
+   "date": "2026-11-07",
+   "hash": "ebd99d27800051e2",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discrete-substrate program (G4-3) / Sub-sprint sequence (updated)": {
+   "date": "2026-11-07",
+   "hash": "97e79b195c50f946",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Discussion: structural-skeleton-scope reading": {
+   "date": "2026-11-07",
+   "hash": "b107dec73ea8aad3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Fierz--Pauli decomposition within (1, 1) (G6-FP)": {
+   "date": "2026-11-07",
+   "hash": "3237831c7433d619",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Fierz--Pauli decomposition within (1, 1) (G6-FP) / Dimensions": {
+   "date": "2026-11-07",
+   "hash": "35edd41a71ad322d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Fierz--Pauli decomposition within (1, 1) (G6-FP) / Implications for graviton physics": {
+   "date": "2026-11-07",
+   "hash": "9c0970f1d442b83f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Fierz--Pauli decomposition within (1, 1) (G6-FP) / J-blindness theorem": {
+   "date": "2026-11-07",
+   "hash": "dbae1d3ef37323ac",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program": {
+   "date": "2026-11-07",
+   "hash": "d8766d87874e3432",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / Architectural inputs from G4-3": {
+   "date": "2026-11-07",
+   "hash": "31ebbfca293f9856",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / G4-4a: constant-warp Dirac": {
+   "date": "2026-11-07",
+   "hash": "4ccf0953dd8815c3",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / G4-4b: variable-warp Dirac": {
+   "date": "2026-11-07",
+   "hash": "5b680f9d3b0aa33f",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / G4-4c: conical-defect spinor and the headline tip": {
+   "date": "2026-11-07",
+   "hash": "3ca94944422d6615",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / G4-4d, G4-4e, G4-4f: Seeley-DeWitt, BC sectors,": {
+   "date": "2026-11-07",
+   "hash": "affb818850ebae37",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / G4-5: discrete replica method for S_": {
+   "date": "2026-11-07",
+   "hash": "b4b3cc23f2bb1f1d",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::G4-4: sprint-scale closure of the warped Dirac program / Implications for the extended S_ program": {
+   "date": "2026-11-07",
+   "hash": "a0196cc87208486b",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Graviton diagnostic on the (1,1) irrep (G6-Diag-Full)": {
+   "date": "2026-11-07",
+   "hash": "27b6147ac3874278",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Graviton diagnostic on the (1,1) irrep (G6-Diag-Full) / Setup": {
+   "date": "2026-11-07",
+   "hash": "382cf4e657135f53",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Graviton diagnostic on the (1,1) irrep (G6-Diag-Full) / Verification": {
+   "date": "2026-11-07",
+   "hash": "742f80680a7b53a0",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Introduction": {
+   "date": "2026-11-07",
+   "hash": "9470518966d23049",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Newton constant and cosmological constant from G2 (G7)": {
+   "date": "2026-11-07",
+   "hash": "fb6d9d8919da0004",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Open questions": {
+   "date": "2026-11-07",
+   "hash": "03cc8b1dff4727d1",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::R2: replica-weight-harmless convergence of the cigar-tip": {
+   "date": "2026-11-07",
+   "hash": "52b63312dd1dea44",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Spectral action on _R : two-term exactness (G1)": {
+   "date": "2026-11-07",
+   "hash": "864b1b0cba6fb4cb",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::The GeoVac substrate": {
+   "date": "2026-11-07",
+   "hash": "e85b47584d141b81",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::Thermal product on S^ 1 _ (G2)": {
+   "date": "2026-11-07",
+   "hash": "1248ed4fdb715441",
+   "run": "group5 FULL #1 (v6.5.0)"
+  },
+  "prose:papers/group5_qed_gauge/paper_51_gravity_arc.tex::front": {
+   "date": "2026-11-07",
+   "hash": "8c5b29cc4bd60caa",
+   "run": "group5 FULL #1 (v6.5.0)"
+  }
+ }
+}

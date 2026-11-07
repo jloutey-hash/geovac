@@ -54,17 +54,18 @@ single, physically motivated discretization.  Under the proposed
 interpretation of Paper~2, in which the bundle
 $S^1 \to S^3 \to S^2$ is read as
 (gauge phase)--(electron states)--(photon momenta), the
-combinatorial formula $K = \pi(B + F - \Delta)$ becomes a
-cross-sector spectral invariant of this lattice gauge structure.  We
+combinatorial formula $K = \pi(B + F - \Delta)$ can be read as a
+cross-sector combination of spectral quantities of this lattice gauge structure.  We
 do not claim a derivation of the fine-structure constant (none exists).  We do
-claim that the Paper~2 Observation belongs inside an established
-mathematical frame---one that makes its components
-(selection principle, combination rule, circulant Hermiticity) into
-gauge-theoretic statements rather than free-floating numerology.  We
-close with open questions: whether the $S^5$ Bargmann--Segal lattice
-of the 3D harmonic oscillator admits an analogous SU(3) gauge
-structure, and whether the rank-2 Breit extension of Paper~22 lifts
-the $U(1)$ 1-form picture to a higher-form gauge theory.
+claim that the Paper~2 Observation can be stated inside an established
+mathematical frame, which gives its components (selection principle,
+combination rule, circulant Hermiticity) a lattice-gauge vocabulary;
+this is a reading, and the combination remains a numerical Observation.
+The $S^5$ Bargmann--Segal lattice of the 3D harmonic oscillator carries
+a pure-gauge SU(3) Wilson structure whose natural matter coupling
+fails (Sprint ST-SU3, Paper~30); whether the rank-2 Breit extension of
+Paper~22 lifts the $U(1)$ 1-form picture to a higher-form gauge theory
+is open.
 \end{abstract}
 
 \maketitle
@@ -281,10 +282,10 @@ $L_1 = B^\top B = d_0 d_0^*$ is available.  The co-exact part requires
 faces (2-cells) to define a boundary operator $d_1$;
 Paper~30~\cite{paper30} provides precisely these faces via plaquette
 enumeration, giving the co-exact Laplacian
-$L_1^{\mathrm{co}} = d_1 d_1^\top$.  Paper~28~\cite{paper28} shows
-that the transverse propagator $(d_1 d_1^\top)^+$ recovers the
-continuum self-energy structural zero that $L_1^+$ alone cannot,
-establishing a concrete QED role for the face structure.
+$L_1^{\mathrm{co}} = d_1 d_1^\top$.  (Paper~28 finds that the
+transverse propagator $(d_1 d_1^\top)^+$ gives a zero ground-state
+self-energy, but for every $s$-state alike, since each $s$-edge is a
+bridge; it is not a recovered selection rule.)
 
 \subsection{Node versus edge spectra}
 
@@ -607,7 +608,7 @@ Track SM-D result~\cite{Paper2} is that
   = 2(n+1)(n+2)\bigg|_{n=3} = 40.
 \label{eq:Delta_dirac}
 \end{equation}
-This is the single-chirality Dirac mode count of the third
+This is the Dirac mode count (both chiralities, $20 + 20$) of the third
 Camporesi--Higuchi eigenspace on the unit $S^3$.  In
 lattice-gauge-coupled-to-matter language, $\Delta$ is a
 \emph{boundary-mode correction} counting the charged-spinor states at
@@ -626,8 +627,9 @@ combination rule $K = \pi(B + F - \Delta)$ is an additive combination
 of (i)~a finite matter-operator trace on the $S^2$ base, (ii)~an
 infinite gauge-field spectral zeta on the Fock lattice, and (iii)~a
 boundary-mode count on the charged-spinor spectrum.  All three
-quantities are intrinsic spectral invariants of the discrete
-lattice-gauge structure of the Hopf graph.
+quantities can be computed from spectral data of the Hopf graph and
+its continuum operators; placing them in this frame is a reading, not
+a derivation of the combination.
 \end{observation}
 
 \begin{observation}[What the framework observation does \emph{not}
@@ -727,7 +729,9 @@ $\mathcal{H}^2(S^5)$ of the holomorphic SU(3) $(N, 0)$
 representations.  $S^5 \to \mathbb{CP}^2$ is the next complex Hopf
 fibration after $S^3 \to S^2 = \mathbb{CP}^1$.  Does the
 Bargmann--Segal graph carry an analogous SU(3) non-abelian gauge
-structure?  Candidate check: the SU(3) Casimir values on the
+structure?  (Answered since by Sprint ST-SU3: a pure-gauge SU(3)
+Wilson construction exists, and its natural matter coupling fails;
+see below and Paper~30.)  Candidate check: the SU(3) Casimir values on the
 $(N, 0)$ irreps, weighted by fiber dimensions and summed under an
 analogous selection principle, produce a non-abelian analog of
 $B = 42$.  Paper~24's $\pi$-free certificate~\cite{Paper24} already
@@ -995,10 +999,8 @@ $g_N^{\text{HO}} = (N+1)(N+2)/2$ and packing exponent
 $d_{\max} = \dim \mathbb{C}^3 = 6$ evaluates to
 $\tfrac{1}{2}[\zeta_R(4) + 3\zeta_R(5) + 2\zeta_R(6)]$, a mixed
 even/odd-zeta combination with no clean $\zeta_R(2) = \pi^2/6$
-projection.  The analogs of $B$ and $\Delta$ are
-spectrum-computing-tied (both rely on the Coulomb projection),
-which Paper~23's Fock projection rigidity theorem restricts to
-$S^3$ alone.  Together with Phase~4H's SM-running negative
+projection.  The analogs of $B$ (a label-level Casimir trace) and
+$\Delta$ have no evident counterpart selection on $S^5$.  Together with Phase~4H's SM-running negative
 result~\cite{Paper2} for alternative origins of $\Delta$, the
 combined picture is that the $S^5$ graph is a lattice gauge
 structure with abelian $U(1)$ content but without $\alpha$-like
@@ -1176,8 +1178,8 @@ what makes the geometry change rather than vanish.  So the surviving
 $U(1)$ of a diatomic is the rotation about the bond axis, which has
 fixed points, not the free fibre, and the identification of the gauge
 phase with the fibre does not transfer to two centres.
-The Paper~2 combination rule $K = \pi(B + F - \Delta)$ becomes a
-cross-sector spectral invariant of the lattice-gauge structure:
+The Paper~2 combination rule $K = \pi(B + F - \Delta)$ can be read as a
+cross-sector combination of spectral quantities of the lattice-gauge structure:
 $B$ is a Casimir-weighted matter trace on the $S^2$ base, $F$ is a
 spectral zeta of the photon-sector modes in the infinite-shell
 limit, and $\Delta$ is a Dirac-mode boundary count.  The additive
@@ -1198,10 +1200,10 @@ Paper~2's proposed interpretation.
 The framework observation does not resolve the open problem of why
 $K = \pi(B + F - \Delta)$ reproduces $\alpha^{-1}$.  It does locate
 the three quantities in a single mathematical context, and it does
-point to natural next questions: continuum-limit convergence of the
-edge Laplacian, non-abelian generalizations on the Bargmann--Segal
-$S^5$ lattice, higher-form analogs via the Breit rank-2 tensor, and
-independent observables beyond $\alpha$.  These are the tractable
+point to natural next questions: higher-form analogs via the Breit
+rank-2 tensor and independent observables beyond $\alpha$.  (The edge
+Laplacian has no continuum limit to converge to, as noted above, and
+the $S^5$ non-abelian question is answered by Sprint ST-SU3.)  These are the tractable
 research directions that the observational synthesis makes
 well-posed.
 

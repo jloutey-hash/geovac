@@ -455,3 +455,15 @@ theory on a fixed spectral window with a nontrivial local gauge group. Cluster c
 order-zero and order-one defect of the true window (Paper 32, `tests/test_true_window_real_structure.py`). Scope:
 commutative-factor compression only; WH1's almost-commutative convergence and Paper 32's H1 theorem are untouched.
 Drivers `debug/graded_ac/`; CHANGELOG v5.21.27.
+
+### RE-INTERPRETATION of "Single-axis N_φ-sweep for G4-6a refined A-coefficient extraction (2026-05-29)" and "Isotropic multi-axis refinement for A-coefficient extraction (2026-05-31)" (/qa group5, 2026-11-07) | 0 (the UV-recovery negatives stand; the target they were graded against is withdrawn)
+
+Both rows graded the discrete cone-tip extraction against a per-t continuum target tip(t) = 1/(24 pi t) + const,
+built by combining the dimensionless Sommerfeld-Cheeger derivative with a 1/(4 pi t) planar prefactor. That target
+is dimensionally wrong: the Sommerfeld-Cheeger term is the t^0 coefficient of the 2D heat trace, and the exact
+continuum tip (Bessel zeros on the unit disk, alpha in {1/2, 2/3, 3/2, 2}, t/R^2 in {0.01, 0.02, 0.05}) is 0.166667
+at every t, against 1.49, 0.83, 0.43 from the withdrawn formula. So the lesson "A = 1/(24 pi) supplied analytically by
+Theorem 1" is withdrawn: there is no A coefficient to extract. What stands: the discrete per-t tip recovery at the
+lattice scale fails (FD undershoots and the spectral scheme overshoots the t-independent 1/6), and refinement in the
+azimuthal direction does not cure it. Paper 51's per-t UV-target paragraph is withdrawn; record CHANGELOG v6.5.0.
+

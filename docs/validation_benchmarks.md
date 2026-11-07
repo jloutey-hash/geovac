@@ -335,12 +335,12 @@
 | Triangle inequality modes q=5,6 (n_max=4) | 63-86% violations | High-q structural negative |
 | Ward identity ||[Σ_T,H₀]||/||Σ_T|| | ~0.58 | Non-diagonal (calibration needed) |
 | Vector QED scalar+vector 7/8 rules | 7 of 8 PASS | Vector photon selection rule recovery |
-| Vector QED Dirac+vector 8/8 rules | 8 of 8 PASS | Dirac spinor phase constraint recovers Furry |
-| Vector QED GS structural zero | Σ(GS) = 0 exactly | Angular momentum GS protection |
-| Vector QED l=1 self-energy at n_max=2 | exactly 1/(4π) | S² Weyl calibration exchange constant |
+| Vector QED Dirac+vector 8/8 rules (vertex model) | 8 of 8 PASS | α_z diagonal identity; not Furry for a physical vector photon |
+| Vector QED GS zero (vertex model) | Σ(GS) = 0 exactly | Scalar-triangle rule; the physical vector vertex couples the GS at q=1 |
+| Vector QED l=1 self-energy at n_max=2 | exactly 1/(4π) | vertex normalization (read as S² Weyl constant: Observation) |
 | Vector QED Furry scalar FAIL | nonzero odd-q diagonal | Scalar electrons: no spinor phase constraint |
-| Vector QED Furry Dirac PASS | tadpole = 0 exactly | Dirac spinor phase constraint: V(a,a)=0 |
-| Vector QED scalar ≠ Dirac rules | 7/8 vs 8/8 | Dirac spinor phase recovers Furry |
+| Vector QED Furry Dirac PASS (vertex model) | tadpole = 0 exactly | α_z diagonal identity V(a,a)=0; imposed in code |
+| Vector QED scalar ≠ Dirac rules (vertex model) | 7/8 vs 8/8 | α_z diagonal identity |
 | L₁ non-block-diag by (q,m_q) | cross-sector 20% | Photon QN are transitions, not conserved |
 | Vector QED tests | 99 pass | Full vector QED pipeline |
 | Operator system tests | 24 pass | Truncated O_{n_max} construction, *-closure, witness pair, propagation number |

@@ -649,10 +649,10 @@ strictly positive for every $k \geq 0$. Cumulative Dirac/Weyl traces
 therefore have closed forms
 \begin{equation}
   \sum_{n=0}^{N} g_n^{\text{Dirac}}
-  \;=\; \frac{(N+1)(N+2)(2N+3)}{3},
+  \;=\; \frac{2(N+1)(N+2)(N+3)}{3},
   \qquad
   \sum_{n=0}^{N} g_n^{\text{Weyl}}
-  \;=\; \frac{(N+1)(N+2)(2N+3)}{6},
+  \;=\; \frac{(N+1)(N+2)(N+3)}{3},
 \end{equation}
 neither of which carries the $(m-1)$ factor of $B(m)$. The cleanest
 single-point coincidence is at Paper~2's cutoff $m=3$:
@@ -1216,7 +1216,8 @@ about the sum, not a derivation about the parts.
 \subsection{Comparison with Wyler's formula}
 
 Wyler's 1969 formula~\cite{wyler1969} also invokes symmetric spaces
-and achieves $\sim 10^{-5}$ precision. However, Wyler's derivation
+and gives $\alpha^{-1} = 137.03608$, within about $6 \times 10^{-7}$ of
+the measured value, comparable to the agreement of $K$ here. However, Wyler's derivation
 was criticized for lacking a physical mechanism connecting the
 symmetric space volumes to electromagnetic
 coupling~\cite{robertson1971}. The present work improves on this
@@ -1387,9 +1388,9 @@ satisfies $K_{\mathrm{quat}}/K_{\mathrm{em}} \approx 7.08 \approx
 \dim(S^7)$, but the $1.1\%$ deviation from~7 and the absence of any
 coupling at $\alpha_W \approx 1/29.5$ rule out a weak-interaction
 interpretation. The representation-theoretic obstructions above
-explain why: without the $SO(4)$ product structure, the
-branching-based $B$ that makes the formula work has no natural
-generalization.
+show that without the $SO(4)$ product structure the branching-based
+$B$ has no natural generalization; they do not explain why the
+combination takes the value it does, which remains an Observation.
 
 \textit{Dynamical specificity: the Fock projection rigidity theorem.}
 The representation-theoretic arguments above show that the
@@ -1433,20 +1434,14 @@ therefore cannot be expected to produce the same combinatorial
 constants as the Coulomb-specific calculation.
 
 The Bargmann--Segal lattice for the harmonic oscillator (Paper~24,
-\cite{paper24_bargmann}) sharpens this further: the harmonic
-oscillator's natural discretization on the Hardy space of $S^5$ is
-demonstrably $\pi$-free in exact rational arithmetic, with a linear
-projection $E_N = \hbar\omega(N + 3/2)$ that requires no calibration
-exchange constant. The harmonic oscillator's complex / first-order
-geometry produces no spectral zeta corrections at all, so no
-$\pi$-class transcendental enters its graph-to-physics map. The
-appearance of $\pi$ in $K = \pi(B + F - \Delta)$ is therefore not a
-generic feature of quantum discretization but a specific consequence
-of the Coulomb potential's $S^3$ Riemannian (second-order) character;
-the harmonic oscillator's $S^5$ complex (first-order) character has
-no analog. Any future derivation of the combination rule must rely on
-the Riemannian/$SO(4)$ structure that distinguishes Coulomb from
-every other central potential.
+\cite{paper24_bargmann}) has a natural discretization on the Hardy space
+of $S^5$ that is $\pi$-free in exact rational arithmetic, with a linear
+projection $E_N = \hbar\omega(N + 3/2)$; the Coulomb label lattice is
+$\pi$-free too.  Whether the $\pi$ in
+$K = \pi(B + F - \Delta)$ tracks the Coulomb/oscillator difference is
+not established: the Kustaanheimo--Stiefel lift shows $\pi$ entering
+both sides through a measure and spectral sums (Paper~24), so the
+calibration-$\pi$ reading once given here is withdrawn.
 
 
 \subsection{Transition operators and the Hopf geometry}

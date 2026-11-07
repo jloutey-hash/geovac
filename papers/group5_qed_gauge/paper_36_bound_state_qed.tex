@@ -1,19 +1,8 @@
-% Paper 36: Bound-State QED on S^3 -- One-Loop Closure of the Hydrogen Lamb Shift
-% GeoVac Project, May 2026
-% v0.1 (initial draft).  Standalone observation paper.
-%
-% Headline: the GeoVac framework reproduces the hydrogen 2S_{1/2} - 2P_{1/2}
-% Lamb shift at sub-percent accuracy (1052.19 MHz vs. experimental
-% 1057.845 MHz; residual -0.534%) using only one-loop QED on Dirac-S^3,
-% with no fits and no calibration against multi-loop literature.  The
-% LS-1..LS-6a sprint sequence (May 2026) closed the bound-state Bethe-log
-% structural floor (LS-3 acceleration form + LS-4 Drake-Swainson
-% asymptotic subtraction) and identified a one-loop double-counting bug
-% in the original LS-1 implementation (LS-6a Eides convention fix).  The
-% remaining -5.65 MHz residual decomposes per LS-7 into ~+1.20 MHz
-% multi-loop plus ~+4.4 MHz non-loop pieces (the original "genuine
-% alpha^5 multi-loop ceiling" reading was revised by LS-7; see the
-% revised-decomposition subsection).
+% Paper 36: Bound-State QED on S^3 -- the hydrogen Lamb shift at one loop
+% GeoVac Project, May 2026.  Standalone observation paper.
+% Headline (re-scoped 2026-11-07, /qa group5): 1052.19 MHz is the leading
+% one-loop assembly with literature Bethe logs; GeoVac content = the
+% Bethe-log machinery.  LS-7 residual decomposition withdrawn.
 
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
@@ -39,19 +28,28 @@ One-Loop Closure of the Hydrogen Lamb Shift}
 % ===================================================================
 \begin{abstract}
 % ===================================================================
-The hydrogen 2$S_{1/2}$~--~2$P_{1/2}$ Lamb shift is computed within
-the GeoVac framework on Dirac-$S^3$ at one loop, with no fits and no
-calibration against multi-loop literature, and matches the experimental
-value 1057.845~MHz at sub-percent accuracy: predicted 1052.19~MHz,
-residual $-5.65$~MHz~$/-0.534\%$.
+The hydrogen 2$S_{1/2}$~--~2$P_{1/2}$ Lamb shift at leading one-loop
+order, $\alpha(Z\alpha)^4$, assembled in the Eides--Grotch--Shelyuto
+\S\,3.2 convention with the Drake--Swainson tabulated Bethe
+logarithms, is 1052.19~MHz, against the experimental 1057.845~MHz
+(residual $-5.65$~MHz, $-0.534\%$).  This headline is textbook
+one-loop arithmetic with literature inputs; the GeoVac content is the
+framework's own Bethe logarithms, which reproduce the tabulated 2$P$
+and 3$D$ values to $2.4\%$ and $0.07\%$, while the 2$S$
+acceleration-form value is not yet converged (with them the total
+would be about 1055.6~MHz).  The one-loop $\alpha(Z\alpha)^5$ term
+($A_{50} = 4\pi(139/128 - \tfrac12\ln 2) \approx 9.29$, about
+$+6.9$~MHz) is not included, so the residual is not a measure of
+missing multi-loop physics.
 
-The result is the closure of a six-sprint sequence (LS-1 through LS-6a,
-May~2026) that progressively eliminated three structural obstructions.
+The Bethe-logarithm machinery came out of a six-sprint sequence (LS-1
+through LS-6a, May~2026) that removed three structural obstructions.
 \textbf{LS-3} replaced the velocity-form Bethe-logarithm spectral sum,
 which diverges for $\ell > 0$ states because the closure
 $\sum_m |\langle 2P|p|m\rangle|^2 (E_m - E_{2P}) \to 0$ vanishes
 exactly at $\ell > 0$ (the wavefunction at the origin vanishes), with
-the acceleration form, tightening 2$S$ accuracy by $3.3\times$ but
+the acceleration form for 2$S$ (whose agreement with the tabulated
+value at $N = 40$, $-0.92\%$, is a crossing: $+2.98\%$ at $N = 50$),
 leaving 2$P$ structurally divergent.  \textbf{LS-4} closed the 2$P$
 divergence by introducing the Drake--Swainson asymptotic-subtraction
 projection (Paper~34's 13th projection), producing $K$-independent
@@ -67,37 +65,20 @@ contribution.  The convention fix is exactly the Uehling kernel,
 shifting the predicted Lamb shift by $+27.13$~MHz at $n=2$, $Z=1$.
 
 Sprint LS-7 (May 2026) made a first pass at the two-loop self-energy
-on Dirac-$S^3$ via iterated CC spectral action and produced two
-results.  The structural pre-factor
-$(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ for the dominant two-loop SE
-piece emerges natively from iterated proper-time integration,
-confirming Paper~35's Prediction~1 at the structural level (the
-$1/\pi^2$ comes from two iterated temporal integrations).  Critically,
-LS-7 also reframed the residual decomposition: the
-Eides--Grotch--Shelyuto 2001 Table~7.3 ($\alpha^5$ multi-loop QED
-proper) contributes only $\sim +1.20$~MHz of the $-5.65$~MHz
-residual; the remaining $\sim +4.4$~MHz is non-loop physics (recoil
-$-2.40$, finite nuclear size $+1.18$, hyperfine averaging
-$\sim +5.0$).  The framework's one-loop QED machinery on $S^3$ is
-therefore even more complete than the raw residual suggests, and the
-genuine multi-loop test target for Paper~35's Prediction~1 in the
-multi-loop sector is sharpened to $\sim +1.20$~MHz.  The remaining
-non-loop sectors are within scope for the Paper~34~\S\,III.14
-rest-mass projection and Paper~23's nuclear-electronic composed
-Hamiltonian.
+on Dirac-$S^3$ via iterated CC spectral action: the pre-factor
+$(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ of the dominant two-loop SE piece
+emerges from iterated proper-time integration, consistent with Paper~35's
+Prediction~1 at the structural level.  An LS-7 decomposition of the
+residual into multi-loop and non-loop pieces is withdrawn: its rows do
+not sum to its stated totals and it omits the one-loop
+$\alpha(Z\alpha)^5$ term; the residual's attribution is open.
 
-The structural reading is sharper than the numerical agreement.  The
-framework's bound-state QED machinery is built from three projections
-that each have a literature precedent: the Camporesi--Higuchi spinor
-lift on $S^3$ (Paper~28), the Coulomb Sturmian basis at exponent
-$\lambda = Z/n$ (which the LS-2 sprint identified as the Fock
-label set re-parameterized for bound-state space; Paper~7), and the
-Drake--Swainson asymptotic-subtraction projection (Paper~34
-\S\,III.13).  The standard Eides~\S\,3.2 one-loop convention sits on
-top.  No GeoVac-specific fitting parameter enters; the framework
-reproduces the hydrogen Lamb shift at one loop because the label set
-and its selection rules are right and the projections that turn them
-into a physical observable are standard.
+The framework's Bethe-logarithm machinery is built from projections
+that each have a literature precedent: the Coulomb Sturmian basis at
+exponent $\lambda = Z/n$ (the Fock label set re-parameterized for
+bound-state space; Paper~7) and the Drake--Swainson
+asymptotic-subtraction projection (Paper~34 \S\,III.13).  No
+GeoVac-specific fitting parameter enters.
 \end{abstract}
 
 % ===================================================================
@@ -117,11 +98,10 @@ $10^7$, requiring two-loop and three-loop self-energy contributions
 that have been the subject of dedicated computational efforts since
 the 1950s~\cite{mohr_plunien_soff}.
 
-This paper documents the GeoVac framework's reproduction of the
-hydrogen Lamb shift at one loop, on the Dirac-$S^3$ infrastructure
-established in Paper~28~\cite{paper28}.  The result is sub-percent
-without any fitting parameter or calibration against multi-loop
-literature.
+This paper documents the GeoVac framework's one-loop Bethe-logarithm
+machinery for the hydrogen Lamb shift.  The headline number is the
+leading-order one-loop assembly with literature Bethe logarithms; the
+framework's own logarithms are compared with them.
 
 \paragraph*{Scope of the claim.}
 $-0.534\%$ ($-5.65$~MHz) is roughly three orders of magnitude looser
@@ -130,17 +110,13 @@ the same observable with multi-loop self-energy and recoil
 corrections~\cite{eides2001, yerokhin2024_two_loop_se}. The claim
 here is therefore not that the GeoVac framework competes with
 precision-QED compilations on the absolute number --- it does not
---- but that the framework's label set and its selection rules plus three
-standard projections (Fock, Camporesi--Higuchi spinor lift,
-Drake--Swainson asymptotic subtraction) plus the canonical
-Eides~\S\,3.2 one-loop convention reproduces the Lamb shift at
-sub-percent without any GeoVac-specific input. The interest is not
-in the absolute number --- one-loop QED on flat-space hydrogen also
-gives sub-percent --- but in \emph{how} the framework reproduces
-it: which projections are required, which projections turn out to
-be unnecessary, and what specific structural pieces had to be added
-during the LS-1 through LS-6a sprint sequence to close the
-calculation.
+--- and not that the 1052.19~MHz headline is a GeoVac computation:
+it is the textbook leading one-loop assembly with the Drake--Swainson
+tabulated Bethe logarithms, and it omits the one-loop
+$\alpha(Z\alpha)^5$ term.  The GeoVac content is the Bethe-logarithm
+machinery (Sturmian basis at $\lambda = Z/n$, acceleration form,
+Drake--Swainson asymptotic subtraction), which reproduces the tabulated
+2$P$ and 3$D$ logarithms and, for 2$S$, has not yet converged.
 
 The bound-state Lamb shift on Dirac-$S^3$ uses three standard
 projections in addition to the label set:
@@ -285,7 +261,7 @@ technique originates with Schwartz~\cite{schwartz1961} (for the
 helium ground state) and was extended to hydrogen $p$-states by
 Drake--Swainson~\cite{drake_swainson}.
 
-\subsection{Acceleration form: 3.3$\times$ tighter for $s$-states}
+\subsection{Acceleration form for $s$-states}
 
 Sprint LS-3 implemented the acceleration form, replacing $\vec{p}$
 in the matrix elements with the Coulomb acceleration
@@ -294,8 +270,10 @@ satisfies a different sum rule and is non-vanishing for $s$-states
 (it inherits $\sim Z^6 \langle r^{-4}\rangle$).  At $N = 40$:
 \begin{itemize}
 \setlength\itemsep{0pt}
-\item $\ln k_0(2S) = 2.786$, residual $-0.92\%$ (LS-2 was $-3.1\%$;
-$3.3\times$ tighter).
+\item $\ln k_0(2S) = 2.786$, residual $-0.92\%$, a crossing rather than
+a converged value: at $N = 50$ the residual is $+2.98\%$.  (An earlier
+``$3.3\times$ tighter'' than the velocity form compared values at % [retracted 2026-11-07: g5-p36-lamb-closure-and-ls7]
+different $N$; at equal $N$ the two forms are comparable.)
 \item $\ln k_0(1S) = 3.002$, residual $+0.60\%$ --- at $N = 20$, not
 $N = 40$: the 2026-07-02 recompute
 (\texttt{tests/test\_paper36\_lamb\_chain.py}) showed the $1S$
@@ -491,8 +469,9 @@ Residual & $-32.78$ ($-3.10\%$) & $-5.65$ ($-0.534\%$) & \\
 \end{center}
 
 The LS-6a residual is a $5.8\times$ improvement over LS-1 in absolute
-error.  It is the converged one-loop value; no truncation or
-finite-$N$ artifact survives.
+error.  It is the leading-order ($\alpha(Z\alpha)^4$) one-loop value
+with tabulated Bethe logarithms; the one-loop $\alpha(Z\alpha)^5$ term is
+not included (Section~\ref{sec:residual}).
 
 \paragraph{Continuous verification vs archived record.}
 The chain above is continuously verified (added 2026-07-02):
@@ -511,64 +490,23 @@ $N = 55$ 2$P$ value $-0.0304$ ($|{-}1.24\%|$, re-validated
 2026-07-02 at $62$~s runtime) --- stay archived-measured in the LS
 sprint record.
 
-\subsection{The remaining $-5.65$~MHz: revised decomposition (LS-7)}
+\subsection{The remaining $-5.65$~MHz}
+\label{sec:residual}
 
-The LS-5 / LS-6a memos initially attributed the $-5.65$~MHz residual
-to ``$\alpha^5$ multi-loop QED in the Eides--Grotch--Shelyuto 2001
-Table~7.4 band $[+3.5, +10.7]$~MHz.''  Sprint LS-7 (May 2026)
-identified that this attribution was a misreading of which Eides
-table contains the proper multi-loop QED total.  Eides~\S~7
-distinguishes \emph{$\alpha^5$ multi-loop QED contributions} (Table
-7.3, the diagrams that genuinely require two-loop spectral-action
-machinery) from \emph{cumulative $\alpha^5$ contributions of all
-kinds} (Table 7.4, including non-loop sectors).  The correct
-decomposition of the $+5.65$~MHz needed to close the LS-6a residual
-is:
-
-\begin{center}
-\begin{tabular}{l r l}
-\toprule
-Contribution & Value (MHz) & Sector \\
-\midrule
-$\alpha^5$ multi-loop QED (Eides Tab.~7.3) & $+1.20$ & loop QED \\
-Recoil corrections & $-2.40$ & non-loop, mass-dependent \\
-Finite nuclear size & $+1.18$ & non-loop, nuclear input \\
-Hyperfine averaging & $\sim +5.0$ & non-loop, spin-state mixing \\
-\midrule
-Sum & $+4.98$ & \\
-Observed LS-6a residual & $+5.65$ & \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-The reading inverts the original interpretation in two structurally
-important ways.  \emph{First}, the framework's one-loop closure is
-even cleaner than originally framed: only $\sim +1.20$~MHz of the
-$-5.65$~MHz residual is missing-multi-loop physics, with the rest
-($\sim +4.4$~MHz) being non-loop sectors that the GeoVac framework
-already has scope for through Paper~23 (nuclear-electronic composed
-Hamiltonian and hyperfine $I \cdot S$ coupling) and the rest-mass
-projection of Paper~34~\S\,III.14 (recoil from finite-mass
-corrections to $\omega_n$).  \emph{Second}, the multi-loop test
-target for Paper~35's Prediction~1 in the multi-loop sector is
-sharpened to $\sim +1.20$~MHz, not $\sim +5.65$~MHz, with the
-specific decomposition into Karplus--Sachs $+0.16$~MHz, mixed
-SE$\times$VP $-0.06$~MHz, two-photon vertex $+0.27$~MHz, two-loop
-$B_{60}$ self-energy $+0.86$~MHz, and Wichmann--Kroll $-0.025$~MHz
-remaining as the per-piece testable subset.
-
-\begin{remark}[Cleaner closure than initially framed]
-\label{rem:cleaner_closure}
-The LS-7 reframing means that the GeoVac one-loop bound-state QED on
-$S^3$ matches all the standard one-loop contributions (Bethe log
-plus Eides $10/9$ self-energy plus Uehling vacuum polarization plus
-$2P_{1/2}$ $-1/6$) to better than the precision at which non-loop
-sectors (recoil, finite nuclear size, hyperfine) are included
-elsewhere in the framework.  The $-5.65$~MHz residual is not
-``missing physics'' from the one-loop QED side; it is the sum of
-known sectors that the framework has not yet wired together for
-this observable.
-\end{remark}
+The residual is not attributed here.  The one-loop assembly above is the
+leading $\alpha(Z\alpha)^4$ order only; it omits the one-loop
+$\alpha(Z\alpha)^5$ term, $A_{50} = 4\pi(139/128 - \tfrac12\ln 2)
+\approx 9.29$, which contributes about $+6.9$~MHz to the 2$S$ level and
+by itself exceeds the residual, besides recoil, finite nuclear size and
+multi-loop terms of either sign.  An earlier LS-7 decomposition of the
+residual (about $+1.20$~MHz multi-loop QED plus about $+4.4$~MHz of
+recoil, nuclear size and ``hyperfine averaging'') is withdrawn: its
+rows sum to $+4.98$~MHz and its non-loop rows to $+3.78$~MHz, neither
+matching the totals it stated; it did not include $A_{50}$; and the
+measured 1057.845~MHz interval is already defined between hyperfine
+centroids, so a $+5$~MHz ``hyperfine averaging'' row has no source.  An
+order-by-order budget from Eides--Grotch--Shelyuto is owed before any
+attribution.
 
 \subsection{Sprint LS-7: structural confirmation of two-loop projection}
 
@@ -620,19 +558,15 @@ provenance.
 \label{sec:outlook}
 % ===================================================================
 
-The remaining $-5.65$~MHz residual is now decomposed
-(Section~\ref{sec:result}) into a $\sim +1.20$~MHz multi-loop QED
-piece plus a $\sim +4.4$~MHz bundle of non-loop physics (recoil,
-finite nuclear size, hyperfine averaging).  The natural follow-on
-sprints split along this line:
+The remaining $-5.65$~MHz residual is not attributed
+(Section~\ref{sec:residual}); an order-by-order budget, starting with
+the one-loop $\alpha(Z\alpha)^5$ term, is owed first.  The follow-on
+sprints were planned along these lines:
 
 \begin{itemize}
 \setlength\itemsep{0pt}
-\item \textbf{Multi-loop QED sprints (LS-8a, LS-8b, LS-8c).}  Test
-target: $\sim +1.20$~MHz total, decomposed as Karplus--Sachs
-$+0.16$~MHz, mixed SE$\times$VP $-0.06$~MHz, two-photon vertex
-$+0.27$~MHz, two-loop $B_{60}$ self-energy $+0.86$~MHz,
-Wichmann--Kroll $-0.025$~MHz.  These are the contributions for which
+\item \textbf{Multi-loop QED sprints (LS-8a, LS-8b, LS-8c).}  These are
+the contributions for which
 Paper~35's Prediction~1 in the multi-loop sector is directly testable
 via iterated CC spectral action.
 \item \textbf{Non-loop sprints (LS-8d, LS-8e).}  Recoil and
@@ -641,7 +575,7 @@ finite-nuclear-size corrections via the rest-mass projection
 machinery of Paper~23.  Hyperfine averaging via the $I \cdot S$
 hyperfine coupling already implemented in Paper~23 (the $3 A_\text{hf}/4
 = 1.62 \times 10^{-7}$~Ha singlet-triplet gap that reproduces the
-21~cm line).  Test target: $\sim +4.4$~MHz total.
+21~cm line).
 \end{itemize}
 
 \begin{proposition}[LS-7 multi-loop test, sharpened]
@@ -650,8 +584,8 @@ The two-loop Connes--Chamseddine spectral action on the
 Dirac-$S^3$ spectrum, with bound-state Sturmian projection at
 $\lambda = Z/n$ and Drake--Swainson regularization on inner spectral
 sums for $\ell_\text{internal} > 0$, should reproduce the
-$\alpha^5$ multi-loop QED contribution to the 2$S$ Lamb shift at
-$\sim +1.20$~MHz total.  The structural pre-factor
+two-loop self-energy contribution to the 2$S$ Lamb shift.  The
+structural pre-factor
 $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ for the dominant two-loop SE
 piece was confirmed at LS-7; the strong test is the native derivation
 of the dimensionless bracket coefficient $C_{2S} = +3.63$ (current
@@ -757,23 +691,24 @@ extraction requires field-theoretic renormalization counterterms
 Paper~35 Prediction~1 is consistent at the structural level
 (the $\pi$ content of the prefactor traces to two iterated
 photon proper-time integrations) but is not strongly tested at
-two loops within the bare framework.  The remaining $+1.20$~MHz
-multi-loop QED contribution to the H~$2S$ Lamb shift cannot be
-derived natively from GeoVac without an LS-8a-renorm sprint
-implementing $Z_2$ and $\delta m$ at the spectral level.
+two loops within the bare framework.  The multi-loop QED contribution
+to the H~$2S$ Lamb shift cannot be derived natively from GeoVac without
+an LS-8a-renorm sprint implementing $Z_2$ and $\delta m$ at the
+spectral level.
 \end{proposition}
 
 This is honest scope.  GeoVac-internal projections (Paper~34's
 twenty-eight) handle the \emph{finite} parts of one-loop bound-state QED
-via Drake--Swainson + Eides~\S\,3.2 conventions (closed at sub-percent
-in Paper~36).  They do NOT autonomously regularize the multi-loop
+via Drake--Swainson + Eides~\S\,3.2 conventions (the leading one-loop
+order; the $\alpha(Z\alpha)^5$ term is not included).  They do NOT autonomously regularize the multi-loop
 UV divergences; renormalization counterterms remain external input.
 The structural reading is that GeoVac controls the divergence
 \emph{structure} of multi-loop QED faithfully but does not generate
 the renormalization counterterms that produce finite multi-loop
 predictions.  This places a clean scope boundary on the framework
-between ``one-loop closure'' (achieved) and ``two-loop closure''
-(requires renormalization machinery as separate input).
+between the finite one-loop Bethe-logarithm sector (in reach) and
+multi-loop QED (requires renormalization machinery as separate
+input).
 
 % -------------------------------------------------------------------
 \subsection{Sprint MH Track A: Muonic Hydrogen via the Rest-Mass
@@ -781,7 +716,7 @@ Projection}
 \label{sec:sprint_mh_track_a}
 % -------------------------------------------------------------------
 
-The one-loop architecture closes on muonic hydrogen ($\mu p$) under the
+The leading one-loop assembly transfers to muonic hydrogen ($\mu p$) under the
 rest-mass projection (Paper~34 \S~III.14), which swaps
 $m_e \to m_\mu = 206.7682830\, m_e$ in the lepton register.  The
 CREMA~2010 measurement [Antognini et al.\ 2013] provides a precision-
@@ -862,10 +797,9 @@ on a precision physics observable.  Three takeaways: (i) the rest-mass
 projection works at the architectural level (clean transfer);
 (ii) the multi-focal architecture handles the muonic regime where the
 Bohr scale and electron Compton scale overlap, via the full Uehling
-integral; (iii) the framework reproduces precision QED to sub-percent,
-with the residual decomposing exactly into the LS-8a wall plus
-leading-order $m_\text{red}$ approximations --- exactly the structure
-predicted by Sprint H1 and Sprint LS-8a.
+integral; (iii) the leading one-loop assembly transfers under the
+rest-mass projection, with a sub-percent residual that is not
+attributed.
 
 Sprint provenance: the driver is preserved durably at
 \texttt{tests/paper36\_precision\_support/sprint\_mh\_track\_a.py}
@@ -876,13 +810,12 @@ original sprint memo and JSON in the \texttt{debug/} clean-room
 record.
 
 % -------------------------------------------------------------------
-\subsection{Sprint Mu Lamb: Muonium Fine Structure Closes at $+0.013\%$}
+\subsection{Sprint Mu Lamb: Muonium Lamb Shift at Leading One-Loop Order}
 \label{sec:sprint_mu_lamb}
 % -------------------------------------------------------------------
 
-The bound-state QED architecture also closes at sub-percent on muonium
-(Mu = $e^- \mu^+$) under the rest-mass projection, completing the
-$e/\mu/p$ mass-hierarchy matrix at four distinct operating points.
+The leading one-loop assembly also transfers to muonium
+(Mu = $e^- \mu^+$) under the rest-mass projection.
 
 \paragraph{Architecture transfer.}  Muonium has electron-as-lepton and
 antimuon-as-nucleus: $m_\text{red}(e\mu^+) = 0.995169\, m_e$, ratio to
@@ -896,34 +829,25 @@ The full Uehling kernel and the contact form agree to $\sim 0.24$~MHz
 \paragraph{Numerical result.}  Framework-native one-loop QED at
 $m_\text{red}(e\mu^+)$:
 
-\begin{tabular}{lcc}
+\begin{tabular}{lc}
 \toprule
-Component & Framework (MHz) & Karshenboim 2005~\cite{karshenboim2005} (MHz) \\
+Component & Framework (MHz) \\
 \midrule
-SE($2S$) Eides \S\,3.2 & $+1061.31$ & --- \\
-SE($2P$) Eides \S\,3.2 & $-12.82$ & --- \\
-Lamb$_\text{SE}$ & $+1074.13$ & $+1085.84$ \\
-VP full Uehling Lamb & $-26.50$ & $-27.20$ \\
+SE($2S$) Eides \S\,3.2 & $+1061.31$ \\
+SE($2P$) Eides \S\,3.2 & $-12.82$ \\
+Lamb$_\text{SE}$ & $+1074.13$ \\
+VP full Uehling Lamb & $-26.50$ \\
 \midrule
-Framework total & $+1047.63$ & --- \\
-Karshenboim theory total & --- & $+1047.49(5)$ \\
+Framework total & $+1047.63$ \\
 \bottomrule
 \end{tabular}
 
-\noindent The framework total $+1047.63$~MHz vs Karshenboim's
-theoretical reference $+1047.49(5)$~MHz: residual $+0.135$~MHz / $+0.013\%$.
-\textbf{This is the cleanest one-loop QED match in the catalogue at this
-mass-hierarchy operating point.}
-
-\paragraph{The recoil-absorption observation.}  The component-by-component
-comparison reveals that Karshenboim's ``SE one-loop $+1085.84$~MHz''
-implicitly includes the leading recoil-mixing terms that he separately
-itemizes as ``Recoil NLO $-11.30$~MHz''.  The framework's pure Eides
-\S\,3.2 bracket gives $+1074.13$~MHz, which equals
-Karshenboim's SE-minus-recoil to within $\sim 0.4$~MHz.  Effectively,
-\textbf{the framework's $m_\text{red}$ rescaling absorbs Karshenboim's
-itemized recoil at the bracket level}; naively adding ``$-11.30$~MHz of
-recoil'' to the framework total double-counts.
+\noindent An earlier version compared this total with a muonium Lamb
+theory reference attributed to Karshenboim 2005 ($+1047.49(5)$~MHz,
+with component values and a recoil itemization); those figures could
+not be located in that source, so the comparison, the ``$+0.013\%$''
+residual and the recoil-absorption reading built on it are withdrawn
+until a verifiable reference is supplied.
 
 \paragraph{Pure rest-mass rescaling cross-check.}  A trivial
 multiplication of the Paper~36 normal-H framework value $1052.19$~MHz
@@ -947,29 +871,13 @@ $m_\text{red} \approx 186$, $m_n \approx 1836$ & $-0.92\%$ \\
 Mu 1$S$-2$S$ (Track 1) & $m_\text{red} \approx 1$, $m_n \approx 207$ &
 $-0.11$ ppm \\
 Mu 2$S$-2$P$ Lamb (this) & $m_\text{red} \approx 1$, $m_n \approx 207$ &
-$\mathbf{+0.013\%}$ \\
+(reference withdrawn) \\
 \bottomrule
 \end{tabular}
 
-\paragraph{Why Mu Lamb shift is the cleanest.}  Five reasons combine:
-(i) no FNS ($\mu^+$ is a point lepton); (ii) no QCD polarizability;
-(iii) Uehling regime $\beta = 275$ stays in the contact-form sweet
-spot; (iv) $m_\text{red} \approx 1$ keeps the Eides bracket at its
-calibration point; (v) the recoil mixing is absorbed into the
-$m_\text{red}$ rescaling.  The only Layer-2 multi-loop input
-(Karshenboim $\alpha^2(Z\alpha)^4$ at $+0.20$~MHz) is within the
-$+0.13$~MHz native residual --- the framework's one-loop QED
-\emph{is sufficient} to reproduce Mu Lamb shift theory at sub-$0.05\%$
-in this regime.
-
-\paragraph{Structural reading.}  Across the four mass-hierarchy points
-the framework closes at sub-percent, with the residual decomposing
-exactly into LS-8a-class multi-loop QED (consistent with Paper~35's
-Refined Prediction~1) and the rest-mass projection's leading-order
-absorption of recoil-mixing.  The bound-state QED architecture's
-\emph{native scope} is the one-loop sector; the four-system catalogue
-demonstrates that this scope is robust under the rest-mass projection
-across the full $e/\mu/p$ swap matrix.  Sprint provenance: the driver
+\paragraph{Structural reading.}  Across the mass-hierarchy points the
+leading one-loop assembly transfers under the rest-mass projection;
+the residuals are not attributed term by term.  Sprint provenance: the driver
 is preserved durably at
 \texttt{tests/paper36\_precision\_support/precision\_catalogue\_muonium\_lamb.py}
 (resurrected 2026-07-04; archived-measured, not yet regression-gated),
@@ -981,8 +889,8 @@ with the memo and JSON in the \texttt{debug/} record.
 The muonium catalogue closes with the third QED-channel test: the
 ground-state hyperfine splitting $\nu_\text{HFS}(\text{Mu})$.  Together
 with Track~1 (1S--2S, $-0.11$ ppm vs Mu-MASS) and the 2$S$--2$P$ Lamb
-shift just established (\S\ref{sec:sprint_mu_lamb}, $+0.013\%$ vs
-Karshenboim 2005), this completes a three-channel test of the framework
+shift (\S\ref{sec:sprint_mu_lamb}, whose theory reference is
+withdrawn), this completes a three-channel test of the framework
 under the rest-mass projection (lepton unchanged, nucleus
 $m_p \to m_\mu$) with point-leptonic ``nucleus'' (no QCD budget):
 
@@ -993,7 +901,7 @@ Channel & Framework value & Residual \\
 \midrule
 1S--2S transition  & $2{,}455{,}528{,}721$ MHz (rest-mass rescaling) & $-0.11$ ppm \\
 1S--2S transition  & $2{,}455{,}528{,}394$ MHz (BF $+$ SE $+$ recoil) & $-0.25$ ppm \\
-2$S$--2$P$ Lamb shift & $1047.63$ MHz (one-loop QED full Uehling) & $+0.013\%$ \\
+2$S$--2$P$ Lamb shift & $1047.63$ MHz (one-loop QED full Uehling) & $-0.6\%$ vs experiment (Paper~34) \\
 1S hyperfine & $4464.1905$ MHz (BF $+$ Schwinger one-loop) & $+199$ ppm \\
 \bottomrule
 \end{tabular}
@@ -1024,13 +932,12 @@ multi-loop QED $+$ recoil NLO alone, without any QCD competing budget.
 Hydrogen 21~cm has Zemach + multi-loop; muonic hydrogen HFS has
 electron-VP-in-muonic-potential; deuterium HFS has nuclear polarizability.
 Mu HFS has \emph{none of these}.  The $+199$ ppm framework residual
-(BF $+$ Schwinger one-loop, no Layer-2 input) is therefore the
-empirical depth of the LS-8a wall at $\alpha^2(Z\alpha)$ for
-Bohr--Fermi-class observables in clean isolation.  Karshenboim 2005
-itemizes the missing corrections as $\alpha^2(Z\alpha) \sim +0.17$ MHz
-(two-loop), $\alpha(Z\alpha)^2(m/M)^2 \sim +0.7$ MHz (recoil $+$ QED),
-hadronic VP $\sim +0.2$ MHz; adding these closes agreement to
-$<1$ ppm.
+(BF $+$ Schwinger one-loop, no Layer-2 input) is not attributed: the
+omitted corrections include the leading recoil term, which is negative
+and of comparable size, as well as higher-order QED.  An itemization of
+the missing corrections attributed to Karshenboim 2005, with all terms
+positive and said to close agreement to $<1$ ppm, is withdrawn: adding
+positive terms to a positive residual cannot close it.
 
 \paragraph{Mass-hierarchy $\otimes$ Layer-2-content matrix.}
 Combining Mu HFS with the existing catalogue rows establishes a
@@ -1067,13 +974,13 @@ with the memo and JSON in the \texttt{debug/} record.
 \label{sec:conclusion}
 % ===================================================================
 
-The hydrogen Lamb shift is reproduced on the GeoVac framework at one
-loop at sub-percent accuracy without fits or external calibration.
-The result is the closure of a six-sprint sequence (LS-1 through
-LS-6a) whose three structural innovations are:
+The leading one-loop assembly of the hydrogen Lamb shift, with
+literature Bethe logarithms, gives 1052.19~MHz ($-0.534\%$); the
+GeoVac content is the Bethe-logarithm machinery built in a six-sprint
+sequence (LS-1 through LS-6a), whose three pieces are:
 (i) the acceleration-form Bethe logarithm in the Sturmian basis at
-$\lambda = Z/n$ (LS-3, $3.3\times$ tighter than velocity form for
-$s$-states); (ii) the Drake--Swainson asymptotic-subtraction
+$\lambda = Z/n$ (LS-3; for 2$S$ not yet converged, its $-0.92\%$ at
+$N = 40$ being a crossing); (ii) the Drake--Swainson asymptotic-subtraction
 projection that closes the $\ell > 0$ structural floor (LS-4,
 Paper~34's 13th projection, with structural denominator
 $D_\text{drake} = 2(2\ell + 1)Z^4/n^3$ in the combinatorial-rational
@@ -1083,14 +990,11 @@ implementation had inadvertently subtracted the Uehling kernel
 constant $4/15$ from the canonical $10/9$, double-counting Uehling
 as a separate VP contribution).
 
-The remaining $-5.65$~MHz residual decomposes, per the corrected
-reading of \S 5.2, into $\approx +1.20$~MHz of genuine multi-loop QED
-plus $\approx +4.4$~MHz of non-loop sectors (the earlier
-``Table~7.4 multi-loop band'' attribution was a misreading of which
-Eides table carries the multi-loop total).  Sprint LS-7/LS-8a
-(\S 6.1) tested the two-loop leg and returned a WEAK verdict at the
-renormalization wall; the residual remains the standing target for
-Paper~35's Prediction~1 in the multi-loop sector.
+The remaining $-5.65$~MHz residual is not attributed: the one-loop
+$\alpha(Z\alpha)^5$ term alone is about $+6.9$~MHz, and an earlier
+decomposition into multi-loop and non-loop pieces is withdrawn
+(Section~\ref{sec:residual}).  Sprint LS-7/LS-8a tested the two-loop
+leg and returned a WEAK verdict at the renormalization wall.
 
 The structural reading is that the framework's bound-state QED
 machinery on Dirac-$S^3$ is built from three Paper~34 projections
@@ -1099,12 +1003,9 @@ reparameterization), one new projection added during the sprint
 sequence (Drake--Swainson asymptotic subtraction, Paper~34
 \S\,III.13), and one standard textbook convention (Eides~\S\,3.2
 self-energy organization).  No GeoVac-specific fitting parameter
-enters; sub-percent agreement with experimental Lamb shift follows
-from the label set and its selection rules being right and the standard
-projections turning them into a physical observable.  The closure of
-the bound-state QED arc at one loop confirms the framework's internal
-consistency for QED on $S^3$ in a regime where the answer is known
-independently to high precision.
+enters.  The test of the framework here is its Bethe logarithms
+against the tabulated ones; the sub-percent headline itself is
+standard one-loop QED.
 
 % ===================================================================
 \begin{thebibliography}{99}

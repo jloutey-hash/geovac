@@ -79,8 +79,10 @@ with chain depth; the May~2026 synthesis pass falsified the depth
 form on the catalogue itself (depth-3 chains exist at residual~$0$
 and at $-211$~ppm; depth-4 chains exist at $+2$~ppm and at
 $-0.534\%$).  The Lamb shift example (depth-4 chain, $-0.534\%$
-residual at converged basis) is consistent with the framework's
-one-loop QED basis-quality limit; the H~1S polarizability example
+residual) is the leading one-loop assembly with tabulated Bethe
+logarithms, truncated before the one-loop $\alpha(Z\alpha)^5$ term
+(Paper~36), so its residual measures an order truncation, not a basis
+limit; the H~1S polarizability example
 (depth-3 chain, residual $0$) is consistent with the
 zero-Layer-2-input class for rational-analytic-answer
 observables.
@@ -690,8 +692,8 @@ values).  The combined hydrogen Lamb shift via this projection
 chained with Sturmian and spectral-action gives $-0.39\%$ residual at
 the sweet-spot $N=40$ (transient cancellation; converges to LS-1
 baseline $-3.10\%$ at $N \to \infty$ --- the pre-LS-6a convention,
-superseded by the LS-6a fix at $-0.534\%$; and per Sprint LS-7 the
-residual is not primarily an $\alpha^5$ multi-loop ceiling).  The projection is structurally a
+superseded by the LS-6a fix at $-0.534\%$, whose residual is not
+attributed; Paper~36).  The projection is structurally a
 sibling of the Schwartz~(1961) integral form, simplified to act on
 the discrete Sturmian pseudostate basis directly.
 
@@ -2290,7 +2292,7 @@ the projection dictionary, and the entry must be tagged as such.
 
 The framework has \emph{not} been tested across gauges.  Every
 production calculation in Papers~28, 30, 33, and the Sprint~HF /
-Sprint~LS-1..LS-7 / Lamb-shift sub-percent closure of Paper~36 runs
+Sprint~LS-1..LS-7 / leading one-loop Lamb-shift assembly of Paper~36 runs
 implicitly in Coulomb gauge: the photon is represented as a Hodge
 $1$-cochain on the GeoVac edge complex, the propagator is
 $G_\gamma = L_1^+$ (the transverse pseudoinverse of the edge
@@ -3731,7 +3733,7 @@ $Z, \alpha$ & energy & $\pi^2{\cdot}\mathbb{Q}$ & $<1\%$ \\
 $g_p$) & spinor lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass
 projection ($m_p$, proton) & $\alpha, g_p, m_e/m_p$ & energy &
 $\alpha^2{\cdot}\mathbb{Q}$ & $-1102$ ppm ($\approx -a_e$) \\
-21~cm hyperfine $A_\text{HF} = 1420.488$ MHz $+$ Parker--Toms $a_e$
+21~cm hyperfine $A_\text{HF} = 1420.488$ MHz $+$ Schwinger $a_e$
 (HF-2, $+$ external $g_p$) & spinor lift (Fermi-contact vertex) $\circ$
 Fock $\circ$ rest-mass projection ($m_p$, proton) $\circ$ spectral
 action (curvature expansion) & $\alpha, g_p, m_e/m_p$ & energy &
@@ -3808,7 +3810,7 @@ Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb shift $1047.63$ MHz (framework one-loop
 QED with full Uehling, sprint precision-catalogue 2026-05-08) &
 Fock $\circ$ spectral action $\circ$ Sturmian $\circ$ rest-mass projection
 & $\alpha, m_e, m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
-$+0.013\%$ vs Karshenboim 2005 theory $1047.49(5)$ MHz \\
+$-0.6\%$ vs Mariam 1982 experiment $1054(22)$ MHz (a theory comparison is withdrawn) \\
 Bethe log $\ln k_0(2S) = 2.786$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $-0.92\%$ \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
@@ -4048,8 +4050,8 @@ $12.7\times$ overshoot at $n_\text{max}=3$ & C & Vector promotion
 gets $3.6\times$ closer to scalar baseline but does not close
 projection mismatch (sprint VP-1). \\
 Bethe logarithm $\ln k_0(2S) = 2.812$ & Sturmian (acc.) $\circ$ Fock &
-$-0.92\%$ at $N=40$ & T & Acceleration form $3.3\times$ tighter than
-LS-2 velocity at $N=50$; sprint LS-3. \\
+$-0.92\%$ at $N=40$ & T & Acceleration form; the $N=40$ value is a crossing
+($+2.98\%$ at $N=50$), so it is not yet converged; sprint LS-3. \\
 Bethe logarithm $\ln k_0(1S) = 2.984$ & Sturmian (acc.) $\circ$ Fock &
 $+0.60\%$ at $N=20$ & T & Acceleration form crosses Drake at smaller $N$
 than velocity; sprint LS-3. \\
@@ -4079,12 +4081,12 @@ coefficient (Uehling already enters separately as a VP contribution).
 The convention fix supersedes this row: see the LS-6a row below for
 the clean result. The $\sim +32.78$~MHz residual that had been
 classified A is structurally a $\sim +27.13$~MHz one-loop convention
-correction (\textbf{C} resolved), leaving the genuine A-tier
-multi-loop residual of $\sim +5.65$~MHz. \\
+correction (\textbf{C} resolved), leaving a $\sim +5.65$~MHz residual
+that is not attributed (Paper~36). \\
 Lamb shift $1057.85$ MHz (LS-6a, Eides \S~3.2 convention) & Fock
 $\circ$ spectral action $\circ$ Sturmian (acc.) $\circ$ (Drake--Swainson,
-$\ell=1$) & $-0.534\%$ (LS-6a prediction $1052.19$~MHz) & A (small) +
-non-loop sectors (reframed by LS-7) & Eides \S~3.2 canonical one-loop
+$\ell=1$) & $-0.534\%$ (LS-6a prediction $1052.19$~MHz) & residual not
+attributed (one-loop $\alpha(Z\alpha)^5$ omitted) & Eides \S~3.2 canonical one-loop
 SE convention.  Convention shift from LS-1: $+27.13$~MHz, exactly
 $(4/15) \cdot \alpha^3 Z^4 / (\pi n^3) \cdot \text{Ha-to-MHz}$ at
 $n=2$, $Z=1$ (the Uehling kernel constant $10/9 - 38/45 = 4/15$).
@@ -4094,25 +4096,7 @@ SE 2$P_{1/2}$ $-12.88$~MHz; VP 2$P_{1/2}$ $0$.  $5.8\times$
 reduction in absolute error vs the LS-1 one-loop ceiling
 ($-32.78$~MHz); vs LS-3 ($-28.85$~MHz) the reduction is $5.1\times$.
 (Baseline label corrected 2026-08-28: the factor $5.8$ is the ratio
-to LS-1, not to LS-3.)  \textbf{Sprint LS-7 reframed
-the residual decomposition}: the LS-5 / LS-6a attribution to
-``multi-loop QED in Eides Tab.~7.4 band $[+3.5, +10.7]$~MHz'' was a
-misreading of which Eides table is the proper multi-loop reference.
-Eides Tab.~7.3 ($\alpha^5$ multi-loop QED proper) totals only
-$\sim +1.20$~MHz; the remaining $\sim +4.4$~MHz of the $-5.65$~MHz
-residual is non-loop physics (recoil $-2.40$, finite nuclear size
-$+0.138$, hyperfine averaging $\sim +5.0$; these three sum to
-$\sim +2.74$, and together with the $\sim +1.20$~MHz multi-loop term
-the four itemized contributions total $\sim +3.94$~MHz against the
-$-5.65$~MHz residual, i.e.\ $\sim 70\%$ closure rather than the
-$\sim 88\%$ implied by the retired $+1.18$~MHz finite-size entry,
-which is the 1S value; see \S\ref{sec:autopsy_lamb}).  The
-framework's one-loop QED machinery on $S^3$ is therefore even more
-complete than originally framed: the multi-loop test target for
-Paper~35 Prediction~1 is sharpened to $\sim +1.20$~MHz, with the
-non-loop sectors covered by the Paper~34~\S\,III.14 rest-mass
-projection and Paper~23's nuclear-electronic composed Hamiltonian
-(not a test of Paper~35).  Sprint provenance:
+to LS-1, not to LS-3.)  The residual is not attributed.  An LS-7 decomposition into about $+1.20$~MHz of multi-loop QED and about $+4.4$~MHz of non-loop physics is withdrawn (/qa group5, 2026-11-07): its itemized entries reached only about $70\%$ of the residual, it omitted the one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx 9.29$, about $+6.9$~MHz on 2S, by itself larger than the residual), and its ``hyperfine averaging'' row had no source, since the measured interval is defined between hyperfine centroids (Paper~36).  Sprint provenance:
 \texttt{debug/ls6a\_eides\_convention\_memo.md},
 \texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
 Two-loop SE prefactor $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ on
@@ -4161,10 +4145,10 @@ $g_e = 2$ (no anomalous moment).  Residual is $\approx a_e \approx
 21~cm $A_\text{HF} = 1420.488$ MHz (HF-2, $+a_e$ Schwinger, $+$ external
 $g_p$) & HF-1 chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A
 & Schwinger
-asymptote $a_e = \alpha/(2\pi)$ recovered in the continuum flat-space limit $F_2/[\alpha/(2\pi)] \to 1$ (Paper~28;\ the graph-native $F_2$ stays $O(1)$ above it);
-\textbf{Parker--Toms first-order curvature correction $c_1 = R/12 = 1/2$
-verified at $0.5\%$ precision against the spectral sum}, no fits.  See
-Paper~28 (curvature coefficients).  Residual $+58$ ppm is
+value $a_e = \alpha/(2\pi)$ taken as input (the flat-space limit of Paper~28's spectral sums is not computed there;\ the graph-native $F_2$ stays $O(1)$ above it);
+a Paper~28 spectral-sum ratio lies $0.4\%$ from the first-order curvature
+form $1 + R/(12|\lambda|^2)$, a numerical coincidence of an unnormalized
+ratio (Paper~28, curvature coefficients).  Residual $+58$ ppm is
 recoil + Zemach + multi-loop. \\
 21~cm $A_\text{HF} = 1420.432$ MHz (HF-4, $+r_Z$ external) & HF-2 chain
 $+$ Zemach Layer-2 input ($r_Z = 1.045$ fm) & $+18$ ppm & A + S(Zemach)
@@ -4193,7 +4177,7 @@ $\mu$H 1S HFS $\nu_\text{HFS}(\mu p) = 181.32$ meV (BF + Schwinger +
 leading Zemach, Sprint MH Track B) & rest-mass projection $\circ$
 spinor $\circ$ Fermi contact $\circ$ Fock; magnetization-density
 Layer-2 input $r_Z = 1.045$~fm & $-7689$ ppm vs Krauth full theory
-182.725 meV & A (one-loop closure only) + S (LS-8a wall, muonic regime)
+182.725 meV & A (leading one-loop order only) + S (LS-8a wall, muonic regime)
 & Dominant residual is electron-VP (Uehling) in the muonic potential,
 the leading muonic QED correction (Eides Tab.~7.4 / Karshenboim 2005:
 $\Delta_\text{el-VP} \approx +1.5$ meV).  Same LS-8a wall as HF-5; in
@@ -4328,15 +4312,11 @@ Compton wavelength.  Sprint MH Track A, 2026-05-08. \\
 Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb $1047.63$ MHz vs Mariam~1982 experiment
 $1054(22)$ MHz & Fock $\circ$ spectral action $\circ$ Sturmian $\circ$
 rest-mass projection & $-0.6\%$ (within $\pm 22$ MHz exp uncertainty)
-& A & Framework-native at $+0.013\%$ vs Karshenboim~2005 theory
-$1047.49(5)$~MHz; $-0.6\%$ residual against Mariam dominated by 1982-era
-experimental uncertainty, not framework limitation.  Karshenboim's
-``Recoil NLO $-11.30$ MHz'' is absorbed into the framework's
-$m_\text{red}$ Eides bracket (the $+1074.13$ MHz framework SE differs
-from Karshenboim's $+1085.84$ MHz SE itemization by approximately the
-recoil NLO ($11.71$ vs $11.30$~MHz)).  Naively adding Karshenboim's recoil to the framework total
-double-counts.  See \S~\ref{sec:convention_exposures} for catalogue
-context (entry \S~\ref{sec:conv_karshenboim_recoil}).
+& A & $-0.6\%$ residual against Mariam, within the 1982-era
+experimental uncertainty.  A comparison with a muonium theory value
+attributed to Karshenboim~2005 is withdrawn: its figures could not be
+located in that source (Paper~36; entry
+\S~\ref{sec:conv_karshenboim_recoil}).
 Sprint precision-catalogue, 2026-05-08. \\
 He$^+$ 2$S_{1/2}$-2$P_{1/2}$ Lamb $14041.13(17)$ MHz (van
 Wijngaarden--Holuj--Drake 2000) & Fock $\circ$ spectral action $\circ$
@@ -4884,24 +4864,17 @@ SE 2$P_{1/2}$ & $+12.88$ &
 $\circ$ \S\ref{sec:proj_drake_swainson} & FN \\
 VP 2$P_{1/2}$ & $0$ &
 \S\ref{sec:proj_fock} (parity zero) & FN \\
-$\alpha^5$ multi-loop QED & $+1.20$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
-$(\S\ref{sec:proj_spectral_action})^2$ $\circ$ \S\ref{sec:proj_spinor}
-$+$ Layer-2 $C_{2S}$ & L2 \\
 FNS $r_p$ contribution & $+0.138$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \textbf{\S\ref{sec:proj_charge_density}} $+$ Layer-2 $r_p$ & L2 \\
 Recoil NLO (beyond reduced-mass) & $-2.40$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_restmass} $\circ$
 \S\ref{sec:proj_breit_retardation} $+$ Layer-2 $R_{nl}$ & L2 \\
-Hyperfine averaging (F-state mixing) & $\sim +5.00$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
-\S\ref{sec:proj_3j} $\circ$ \S\ref{sec:proj_restmass} & FN \\
+One-loop $\alpha(Z\alpha)^5$ ($A_{50}$) & $\approx +6.9$ (not included) & --- & --- \\
 \midrule
-\textbf{Sum} & $+1056.13$ & & \\
+\textbf{Sum of listed terms} & $+1049.93$ & & \\
 Experimental & $+1057.845(9)$ & & \\
-\textbf{Residual} & $+1.72$ & (was $+0.68$ at the retired FNS value;
-the ``within quoting precision'' reading no longer follows) & \\
+\textbf{Residual} & $+7.92$ & (not attributed; budget owed) & \\
 \bottomrule
 \end{tabular}
 \caption{Hydrogen $2S_{1/2}-2P_{1/2}$ Lamb shift Roothaan autopsy.
@@ -4921,48 +4894,22 @@ $=$ framework-native; L2 $=$ Layer-2 input.  Source memo:
 \label{tab:autopsy_lamb}
 \end{table}
 
-\textbf{Framework-native subtotal:} $+1057.19$ MHz ($99.9\%$ of
-measurement).  \textbf{Layer-2 net:} $+1.20 + 0.138 - 2.40 \approx
--1.06$ MHz.  \textbf{The Layer-2 inputs do \emph{not} cancel in this
-observable.}  Until 2026-08-28 this paragraph reported a net of
-$\approx -0.02$~MHz and called it an ``empirical near-cancellation''; that
-reading was an artifact of the retired $+1.18$~MHz FNS entry and is
-\textbf{withdrawn}.  The framework-native components alone still reproduce
-the measurement at $\approx 6 \times 10^{-4}$ precision --- that claim is
-independent of the FNS row, which is a Layer-2 entry and does not enter
-the framework-native subtotal.
+\textbf{Framework-native subtotal:} $+1052.19$ MHz, the leading one-loop
+assembly ($-0.534\%$).  An earlier version of this table also listed an
+``$\alpha^5$ multi-loop QED'' row of $+1.20$~MHz and a ``hyperfine
+averaging'' row of $\sim +5.00$~MHz, giving a framework-native subtotal of
+$+1057.19$~MHz ($99.9\%$); both rows are withdrawn (/qa group5,
+2026-11-07): the first came from the withdrawn LS-7 decomposition, and the
+second had no source, since the measured interval is defined between
+hyperfine centroids.  The one-loop $\alpha(Z\alpha)^5$ term
+($A_{50}\approx 9.29$, about $+6.9$~MHz) is not in the assembly, so the
+listed terms do not form a complete budget and the residual is not
+attributed (Paper~36).
 
-\textbf{Multi-focal-composition wall visible.}  The two non-cancelling
-Layer-2 components correspond to:
-\begin{itemize}\setlength\itemsep{0pt}
-\item Component 5 (multi-loop QED) is the LS-8a renormalization-gap
-wall (CLAUDE.md \S~1.7 LS-8a entry).  The framework reproduces the
-two-loop SE structural prefactor $(\alpha/\pi)^2 (Z\alpha)^4/n^3$
-but cannot autonomously generate the $Z_2/\delta m$ counterterms.
-\item Component 7 (recoil NLO) is the
-\S\ref{sec:proj_breit_retardation} two-body kinematic wall.  The
-framework's Breit retardation projection produces the $\alpha^4$
-kinematic structure but the $R_{nl}$ coefficients enter as
-Layer-2 input.
-\item Component 6 (FNS) is \emph{framework-native at the
-operator level} (the \S\ref{sec:proj_charge_density} promotion);
-the remaining Layer-2 input is the scalar $r_p$ value, not the
-operator structure consuming it.  (This bullet previously called it
-``the cleanest beneficiary'' of that promotion; at $+0.138$~MHz rather
-than the retired $+1.18$~MHz it is a small contributor, and the
-showcase claim is withdrawn.)
-\end{itemize}
-
-\textbf{Structural reading.}  The autopsy demonstrates Paper~34
-\S\ref{sec:layer2}'s reach at finer grain than single-row catalogue
-entries: eight components, eight different projection chains, every
-Eides Tab.~7.3 row reproduced.  The structural-skeleton scope
-statement is made concrete --- framework-native pieces reproduce the
-observable to $\approx 6 \times 10^{-4}$, with the Layer-2 inputs
-(renormalization, Component 5; two-body kinematics, Component 7; FNS,
-Component 6) netting to $-1.06$~MHz --- they do not cancel, per the
-withdrawal note above --- and FNS now stated in projection-chain
-language rather than as a black-box external constant.
+\textbf{Structural reading.}  The autopsy tags each listed component to its
+projection chain; FNS is stated in projection-chain language rather than as
+a black-box external constant.  A complete order-by-order budget is owed
+before the components can be compared with the measurement.
 
 \subsubsection{Hydrogen 21~cm hyperfine autopsy}
 \label{sec:autopsy_21cm}
@@ -4979,7 +4926,7 @@ Component & MHz & Projection chain & Status \\
 Bohr--Fermi Dirac (point nucleus, $g_e=2$, no recoil) & $+1421.1595$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_3j} & FN \\
-$+$ Schwinger $a_e$ (Parker--Toms-verified at $+0.5\%$) & $\times (1+\alpha/2\pi)$ &
+$+$ Schwinger $a_e$ (flat-space value) & $\times (1+\alpha/2\pi)$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_spectral_action} & FN (with calibration) \\
 $+$ Reduced-mass $(1+m_e/m_p)^{-3}$ & $\times 0.998366$ &
@@ -5616,7 +5563,7 @@ Bohr--Fermi Dirac (point nucleus, $g_e=2$, no recoil), I=1
 multiplicity 3/2 & $+327.234993$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_3j} ($\hat{I}\cdot\hat{S}$, 3/2 from CG) & FN \\
-$+$ Schwinger $a_e$ (Parker--Toms-verified at $+0.5\%$) &
+$+$ Schwinger $a_e$ (flat-space value) &
 $\times (1+\alpha/2\pi)$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_spectral_action} & FN (with calibration) \\
@@ -5884,7 +5831,7 @@ Bohr--Fermi Dirac (point nucleus, $g_e=2$, no recoil), I=1/2
 multiplicity 1 & $+1515.865482$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_3j} ($\hat{I}\cdot\hat{S}$, multiplicity 1 for I=1/2) & FN \\
-$+$ Schwinger $a_e$ (Parker--Toms-verified at $+0.5\%$) &
+$+$ Schwinger $a_e$ (flat-space value) &
 $\times (1+\alpha/2\pi)$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \S\ref{sec:proj_spectral_action} & FN (with calibration) \\
@@ -7744,11 +7691,9 @@ absorption of higher-order VP into one-loop line vs separate
 $\sim 100$ ppm in per-component split (totals agree) &
 Sprint MH Track A / Calc-muH Lamb autopsy v1 \\
 \S\ref{sec:conv_karshenboim_recoil} & $\mu$ Lamb shift SE bracket &
-Framework Eides~\S 3.2 vs Karshenboim~2005 &
-$m_\text{red}$ rescaling absorbs recoil NLO at bracket level vs
-separately-itemized ``Recoil NLO'' line &
-$\sim 11$ MHz at $\mu$ Lamb (match within bracket-evaluation precision, $0.4$~MHz, between framework
-$+1074.13$ and Karshenboim $+1085.84 - 11.30$) &
+(withdrawn) &
+comparison figures not located in the cited source &
+--- &
 Sprint precision-catalogue Mu Lamb 2026-05-08 \\
 \S\ref{sec:conv_friar_profile} & $\mu$H Friar moment &
 Eides Eq.~2.35 closed-form vs operator-level
@@ -7795,7 +7740,7 @@ Multi-focal-composition wall taxonomy (CLAUDE.md \S~1.7) &
 Single-observation reading vs.\ Hilbert $C^*$-bimodule reading
 (Latr\'emoli\`ere modular propinquity) &
 Wall splits into bimodule cross-shifts (HANDLED: HF-3 recoil, HF-4
-Zemach, HF-5 Parker--Toms, cross-register $V_{eN}$, FNS) vs.\
+Zemach, cross-register $V_{eN}$, FNS) vs.\
 module endomorphisms (NOT HANDLED: LS-8a $Z_2-1$, $\delta m$;
 Sprint H1 Yukawa; inner-factor calibration data).  \emph{Architecture
 class (iv) exposure}, framework-level structural taxonomy refinement &
@@ -7931,42 +7876,14 @@ Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md} (LCM tag).
 \subsubsection{$\mu$ Lamb shift SE-recoil aggregation (framework vs Karshenboim)}
 \label{sec:conv_karshenboim_recoil}
 
-\textbf{Observable.}  Muonium 2$S_{1/2}$-2$P_{1/2}$ Lamb shift
-self-energy bracket.  Documented in the \S\ref{sec:offprecision} row
-``Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb $1047.63$~MHz vs Mariam~1982
-experiment $1054(22)$~MHz.''
-
-\textbf{Source compilations.}  Framework Eides~\S 3.2 SE bracket
-(used in this paper's $\mu$ Lamb-shift framework calculation) and
-Karshenboim~2005 (the canonical muonium-Lamb reference).
-
-\textbf{Convention difference.}  The framework's $m_\text{red}$
-rescaling at the Eides bracket level absorbs the leading
-recoil-correction beyond reduced-mass automatically, giving
-SE bracket $= +1074.13$~MHz.  Karshenboim itemizes ``SE one-loop''
-at $+1085.84$~MHz with a separately-itemized ``Recoil NLO''
-line at $-11.30$~MHz.  The two reach exact agreement at the bracket
-level: $+1085.84 - 11.30 = +1074.54$~MHz vs framework $+1074.13$~MHz
-(within bracket-evaluation precision).
-
-\textbf{Magnitude.}  $\sim 11$~MHz on the $\mu$ Lamb-shift SE bracket
-($\sim 1\%$ of the SE component, $\sim 0.01$ of the total Lamb shift);
-the difference is exactly the recoil-NLO itemization line.
-
-\textbf{Sprint reference and closure.}  Sprint precision-catalogue
-2026-05-08 (Mu Lamb shift row, \S\ref{sec:offprecision}) operationally
-surfaced this: the framework total at $1047.63$~MHz matches
-Karshenboim~2005 theory at $1047.49(5)$~MHz to $+0.013\%$.  Naively
-adding Karshenboim's separately-itemized ``Recoil NLO $-11.30$~MHz''
-to the framework total double-counts the same recoil correction that
-the framework's $m_\text{red}$ rescaling already absorbs.
-\textbf{Closure verdict:} resolved by recognizing the framework's
-$m_\text{red}$-bracket convention is structurally equivalent to
-Karshenboim's SE one-loop $+$ Recoil NLO sum, and not adding the
-recoil NLO twice.
-
-\textbf{Cross-references.}  Originating documentation:
-\S\ref{sec:offprecision} Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb row.
+\textbf{Withdrawn (2026-11-07).}  This entry compared the framework's
+muonium Lamb-shift self-energy bracket with a theory itemization
+attributed to Karshenboim~2005 (an SE one-loop value, a recoil NLO line
+and a total of $1047.49(5)$~MHz).  Those figures could not be located in
+that source, so the comparison and the recoil-absorption reading built
+on it are withdrawn until a verifiable reference is supplied (Paper~36).
+The framework total, $1047.63$~MHz, stands against the Mariam~1982
+experiment $1054(22)$~MHz (\S\ref{sec:offprecision}).
 
 \subsubsection{Friar moment profile convention (Eides closed-form vs operator-level)}
 \label{sec:conv_friar_profile}
@@ -8355,8 +8272,7 @@ each instance as an independent kernel-approximation gap; the bimodule
 reading splits the wall cleanly into two structural pieces:
 \emph{bimodule cross-shifts} (the framework's production code does
 compose them: HF-3 recoil via \texttt{geovac/cross\_register\_vne.py},
-HF-4 Zemach via \texttt{geovac/magnetization\_density.py}, HF-5
-Parker--Toms first-order curvature on Dirac-$S^3$, FNS via Foldy--Friar,
+HF-4 Zemach via \texttt{geovac/magnetization\_density.py}, FNS via Foldy--Friar,
 cross-register $V_{eN}$) versus \emph{module endomorphisms} (the
 framework does NOT compose them: LS-8a renormalization counterterms
 $Z_2-1$ and $\delta m$, Sprint H1 Yukawa $Y$, inner-factor calibration
@@ -8824,8 +8740,8 @@ The exposures partition into \emph{four} structural classes.
 \S\ref{sec:conv_karshenboim_recoil}, \S\ref{sec:conv_d_polarizability},
 \S\ref{sec:conv_he_bethe_log},
 \S\ref{sec:conv_d_polarizability_mud_lamb}):
-six of the nine exposures
-are between Friar--Payne~2005, Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Krauth~2017, Karshenboim~2005,
+six of the nine exposures (one of them, the muonium recoil
+aggregation, now withdrawn) are between Friar--Payne~2005, Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Krauth~2017, Karshenboim~2005,
 Drake~1990 / Drake--Yan~1995, Pachucki--Yerokhin~2009/2010,
 Antognini~2013, Carlson--Gorchtein--Vanderhaeghen~2014 / Carlson--Vanderhaeghen~2011 compilations on items at
 sub-percent precision.  The pattern is consistent: most precision-physics
@@ -9582,8 +9498,9 @@ ordering:
 run from machine-exact (Stefan--Boltzmann $\pi^2/90$ at depth~3,
 hydrogen $1S$ static polarizability $\tfrac{9}{2}a_0^3$ at depth~3,
 spatial $S^3$ Casimir $1/240$ at depth~2) to converged-basis
-ceilings ($-0.534\%$ for the H Lamb shift one-loop closure,
-$\approx 0.024\%$ for He NR variational).  The residual is bounded
+ceilings ($\approx 0.024\%$ for He NR variational; the H Lamb shift's
+$-0.534\%$ is an order truncation with tabulated Bethe logarithms, not a
+basis ceiling, Paper~36).  The residual is bounded
 by basis quality alone --- error code~B in the
 \S~\ref{sec:offprecision} system --- when the chain consumes no
 external Layer-2 input.
@@ -9692,7 +9609,7 @@ framework-native ($+64.75$~ppm), D HFS Bohr--Fermi strict
 ($-456$~ppm; the $+40$~ppm quoted here until 2026-08-28 was an artifact
 of the retired baseline), and the He oscillator strength ($+3.4\%$).  At depth~4
 the catalogue contains $\mu$H Bohr--Fermi ($+2$~ppm) and the H
-Lamb shift one-loop closure ($-0.534\%$).  Residuals at every
+Lamb shift at leading one-loop order ($-0.534\%$).  Residuals at every
 depth $\geq 2$ are scattered across more than four orders of
 magnitude.  Depth correlates with \emph{opportunity} for
 compounding when Layer-2 inputs are consumed, but the residual is
@@ -9953,12 +9870,10 @@ chained projection (Fock + spectral action + Sturmian +
 Drake--Swainson) achieves $-0.39\%$ residual at the sweet-spot
 $N=40$.  At converged $N$, the LS-4 result reverts to the LS-1
 ceiling $-3.10\%$ (LS-4, pre-LS-6a convention); the LS-6a fix supersedes this with $-0.534\%$.  Under
-Prediction~\ref{pred:l2_presence} the $-0.534\%$ is the
-$\epsilon_\text{basis}(\text{H one-loop QED Lamb})$ value and is
-the framework's converged-basis quality limit at zero Layer-2
-inputs; the $-0.39\%$ at $N=40$ is a transient finite-basis
-cancellation, not a genuine reduction of the basis-quality
-limit.  Prediction~\ref{pred:l2_presence} applies to
+Prediction~\ref{pred:l2_presence} the $-0.534\%$ is \emph{not} a
+basis-quality value: the assembly uses tabulated Bethe logarithms and
+stops before the one-loop $\alpha(Z\alpha)^5$ term (Paper~36); the
+$-0.39\%$ at $N=40$ is a transient finite-basis cancellation.  Prediction~\ref{pred:l2_presence} applies to
 converged-basis residuals.
 
 \item \textbf{$K = \pi(B + F - \Delta) \approx 1/\alpha$.}

@@ -1355,10 +1355,11 @@ exist (\texttt{qed\_two\_loop.py}, \texttt{qed\_self\_energy.py}, the
 LS-3/LS-4 bound-state Sturmian projection); the work is additive
 rather than blocked, with an estimate of $\sim$8 follow-on sprints
 to close the multi-loop ceiling.  \emph{Second}, the original test
-target was misidentified.  The genuine two-loop $\alpha^5$ multi-loop
-contribution to the 2$S$ Lamb shift is approximately $+7.10$~MHz
-(Eides--Grotch--Shelyuto 2001 Table 7.4 cumulative central value),
-not the $\sim +29$~MHz LS-3 residual.  Sprint LS-6a (May 2026)
+target was misidentified.  The $\alpha^5$-order contributions of all
+kinds to the 2$S$ Lamb shift total approximately $+7.10$~MHz
+(Eides--Grotch--Shelyuto 2001 Table 7.4 cumulative central value), most
+of it the one-loop $\alpha(Z\alpha)^5$ term (about $+6.9$~MHz), not
+the $\sim +29$~MHz LS-3 residual.  Sprint LS-6a (May 2026)
 confirmed the reframing: re-deriving the same one-loop physics in the
 Eides \S~3.2 canonical convention identified that the original LS-1
 implementation had inadvertently subtracted the Uehling kernel
@@ -1377,41 +1378,10 @@ SE prefactor $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ emerges with the
 $1/\pi^2$ tracing to two iterated Schwinger proper-time integrations,
 exactly as Prediction~\ref{pred:pi_iff_temporal} specifies; weak test
 because the same prefactor appears in flat-space two-loop QED.
-\emph{Critical residual reframing}: the $-5.65$~MHz LS-6a residual
-is \emph{not primarily multi-loop QED}.  The
-Eides--Grotch--Shelyuto 2001 Table~7.3 ($\alpha^5$ multi-loop QED
-proper) totals only $\sim +1.20$~MHz; the remaining
-$\sim +4.4$~MHz of the residual must be non-loop physics; the itemized
-non-loop entries are recoil
-$-2.40$~MHz, finite nuclear size $+0.138$~MHz (the 2S value; the
-retired $+1.18$ is the 1S shift), hyperfine averaging
-$\sim +5.0$~MHz.  These three sum to $\sim +2.74$~MHz; adding the
-$\sim +1.20$~MHz multi-loop term gives $\sim +3.94$~MHz for the four
-itemized contributions against the $-5.65$~MHz residual --- $\sim
-70\%$ closure, not a match to within the literature precision.
-(Corrected 2026-08-29: an earlier correction note printed
-$+3.78$/$+4.98$ --- sums still computed with the retired $+1.18$~MHz
-finite-size entry; the $+0.138$~MHz 2S value gives $+2.74$/$+3.94$,
-in agreement with Paper~34's Lamb autopsy.  Cross-check: $5.65 -
-3.94 = 1.71$~MHz reproduces Paper~34's tabulated $+1.72$~MHz
-Lamb-autopsy residual --- the unattributed remainder IS the autopsy
-residual.)
-The earlier LS-5 / LS-6a memos had used Eides Table~7.4 (cumulative
-$\alpha^5$ contributions of all kinds) as the multi-loop reference;
-this was a misreading.  Implications: (i) the framework's one-loop
-closure is even cleaner than originally framed --- only
-$\sim +1.20$~MHz of the residual is missing-multi-loop physics;
-(ii) the genuine multi-loop test target for
-Prediction~\ref{pred:pi_iff_temporal} is sharpened to
-$\sim +1.20$~MHz, not $\sim +5.65$~MHz; (iii) the strong test
-(sprint LS-8a) is the native derivation of the dimensionless bracket
-coefficient $C_{2S} = +3.63$ from iterated CC spectral action plus
-bound-state Sturmian projection, with the literature bracket value
-used as a check rather than as input.  The remaining $\sim +4.4$~MHz
-of non-loop physics is within scope for the rest-mass projection
-(Paper~34~\S\,III.14) and Paper~23's nuclear-electronic composed
-Hamiltonian, but is not itself a test of
-Prediction~\ref{pred:pi_iff_temporal}.
+The residual is not attributed.  An LS-7 decomposition into about $+1.20$~MHz of multi-loop QED and about $+4.4$~MHz of non-loop physics is withdrawn (/qa group5, 2026-11-07): its itemized entries reached only about $70\%$ of the residual, it omitted the one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx 9.29$, about $+6.9$~MHz on 2S, by itself larger than the residual), and its ``hyperfine averaging'' row had no source, since the measured interval is defined between hyperfine centroids (Paper~36).  The strong test (sprint LS-8a) is the native derivation of the
+dimensionless bracket coefficient $C_{2S} = +3.63$ from iterated CC
+spectral action plus bound-state Sturmian projection, with the
+literature bracket value used as a check rather than as input.
 
 Sprint LS-8a (May 2026) closed the strong-test attempt at $C_{2S}$
 extraction with a clean structural verdict.  The bare iterated
@@ -1432,9 +1402,10 @@ diagram), and Drake--Swainson asymptotic subtraction
 divergences.  Finite extraction of $C_{2S}$ requires $Z_2$ and
 $\delta m$ renormalization counterterms which are
 \emph{not generated} by the bare CC spectral action.  This places
-a clean scope boundary between one-loop closure (achieved at
-sub-percent in Paper~36 via Drake--Swainson plus the Eides~\S\,3.2
-canonical convention) and two-loop closure (requires renormalization
+a clean scope boundary between the finite one-loop Bethe-logarithm
+sector (Paper~36, whose sub-percent headline is the leading one-loop
+assembly with literature logarithms, the one-loop $\alpha(Z\alpha)^5$
+term not included) and multi-loop QED (requires renormalization
 machinery the framework does not natively produce).
 \textbf{Refined Prediction~1:} the GeoVac framework controls the
 $\pi$ content of the \emph{finite parts} of any QED observable; UV
