@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.4.4 (November 6, 2026)
+**Version:** v6.4.5 (November 6, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Paper 63 attainment + SMALL sweep (2026-11-06, v6.4.5, PI-directed):** s-type tree period on rung n for n <= 8 when nonzero (irreducibility); ~30 SMALLs swept; Avery message drafted (send = PI). CHANGELOG v6.4.5.
 - **/qa paper_63 FULL #2 = FAIL (surface), RESEARCH-GRADE earned (2026-11-06, v6.4.4, PI-invoked):** 0 OWNER-LARGE; 2 SURFACE-LARGE fixed + C16; ~25 SMALL to debt; attainment upgrade raised to PI; coverage 14/14. CHANGELOG v6.4.4.
 - **/qa paper_63 claim-search DELTA = DEFECTS, remediated (2026-11-06, v6.4.3, PI-invoked):** tree bound is holomorphic-period only (5 loci + INDEX + Avery); field guide re-homed; atlas Broadhurst credit; self-check 0 LARGE round 1; coverage 6/14. CHANGELOG v6.4.3.
 - **Rung bound restored for s-type trees (2026-11-06, v6.4.2, pre-registered RB GO):** P63 prop:tree_bound, period = E F_n by integration by parts, 27 cases to 4e-38; guard fire-tested 6/6; P63 criteria re-frozen (PI). CHANGELOG v6.4.2.

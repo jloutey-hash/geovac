@@ -129,6 +129,21 @@ def test_section_is_operator_on_F_n(n: int, k: int, a: int, b: int, ts: tuple) -
             assert abs(lhs - rhs) / abs(lhs) < mp.mpf("1e-15"), (n, k, a, b, t_str)
 
 
+def test_pure_power_transform_is_positive_basset() -> None:
+    """prop:tree_bound's attainment clause needs a nonzero period; with pure-power weights it is positive because
+    int_0^oo cos(kx) (1+k^2)^-(m+1/2) dk = sqrt(pi) (x/2)^m K_m(x) / Gamma(m+1/2) > 0 (Basset).
+    Rejects the exponent m+1 for m+1/2, the order K_{m+1} for K_m, and a dropped (x/2)^m."""
+    with mp.workdps(20):
+        for m in (0, 1, 2, 3):
+            for xs in ("0.5", "2"):
+                x = mp.mpf(xs)
+                lhs = mp.quadosc(lambda k: mp.cos(k * x) * (1 + k**2) ** (-(m + mp.mpf(1) / 2)), [0, mp.inf],
+                                 omega=x)
+                rhs = mp.sqrt(mp.pi) * (x / 2) ** m * mp.besselk(m, x) / mp.gamma(m + mp.mpf(1) / 2)
+                assert rhs > 0
+                assert abs(lhs / rhs - 1) < mp.mpf("1e-12"), (m, xs)
+
+
 @pytest.mark.slow
 def test_scaled_leaf_is_theta_image() -> None:
     """Pointwise identity (tx) K1(tx) = -theta_t K0(tx); the integral check only exercises _theta_pow_K0(1)."""

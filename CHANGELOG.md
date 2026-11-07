@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.4.5] - 2026-11-06
+
+**Paper 63: attainment proved at the holomorphic-period level for n <= 8; the SMALL sweep; the Avery message
+drafted.** PI: "Agree with you decision recommendations. Let's work through that list." (the FULL #2 report's three
+recommendations).
+
+### Added
+- **prop:tree_bound attainment clause [SYMBOLIC PROOF].** F_n's operator is irreducible for n = 2..8 (Sec.
+  four_density; guarded by `test_fn_operators_irreducible_by_fuchs` and
+  `test_ising_operators_irreducible_by_fuchs_n_6_to_8`), so D F_n is simple and a nonzero period E F_n generates it:
+  its minimal operator is equivalent to F_n's, on rung n. Pure-power weights Delta^-(2m+1) give a positive period,
+  since their 1-D transforms are positive multiples of x^m K_m (Basset). Summary surfaces (abstract, intro, the
+  dictionary paragraph, conjecture status, scope cap three, conclusion), the group3 synthesis gvc span, INDEX row 63,
+  the Avery reading map, the claim matrix and the C25 statement scoped to the holomorphic period, n <= 8, a nonzero
+  period; fibre attainment stays observed, not proved. Criteria amended (PI-approved; done-file change log).
+  Independent check: sound; one ambiguous "only there" clause reworded.
+- Guard (own pass): `test_pure_power_transform_is_positive_basset`; fire-tested 3/3 (exponent m+1, order K_{m+1},
+  dropped (x/2)^m). A drafted positivity test that could not fail on any nameable wrong answer was removed.
+
+### Changed (SMALL sweep, outside the cert cycle)
+- Paper 63: Monkhorst-Jeziorski and Remiddi titles; the Ising L-values cited as guarded; three-electron tier
+  [MEASURED + PRIOR ART] (C25 `p59-three-electron-k3` owner tier updated first) and "the holomorphic period opens no
+  new transcendence class"; the gamma = 3/2 sentence moved back to its paragraph; pricing errors "relative" and GF1's
+  registered miss disclosed; conjecture (i) "for n <= 5 the Hadamard product"; status "onto the Bessel-moment
+  family"; placement "1s" and [OBSERVATION] on the causal reading; prop:rung deg P <= m; abstract gamma scope,
+  [MEASURED] on the attainment observation, "all s-type", the dictionary cap; split leftovers.
+- Paper 59 :869 re-pointed to its sec:genus; Paper 18 and the group2 synthesis "rungs of more linked densities";
+  group2 synthesis "climb further" scoped; group3 synthesis "1s densities" and the gamma = 1 mechanism cap; field
+  guide reading path -> Paper 63; Paper 57 J8/J10 and seam md J8/J10/header "1s" and the path reduction; matrix
+  Hamiltonian row "over s-type orbitals". Still-open items and the guard-pass list: `docs/qa/paper_63.debt.md`.
+- Headline 6's gamma = 2 coverage gap: PI disposition recorded (accepted, guard owed to the guard pass).
+- Avery message drafted for the PI (scratchpad `avery_message_draft_2026_11_06.md`); cites the tree identity as
+  Eq. 5 (checked from the compiled aux) and only the published 2018 book. Sending is the PI's.
+- Coverage note: the sweep and the attainment clause changed owner units, so the next run reviews them.
+
 ## [v6.4.4] - 2026-11-06
 
 **/qa paper_63 FULL #2 (final certifying run, incremental, unseeded, PI-invoked) = FAIL on SURFACE findings;

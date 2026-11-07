@@ -99,7 +99,9 @@ verify ALL of:
    prop:tree_bound, for trees of $s$-type densities on the one-scale slice at the
    holomorphic-period level. Any sentence asserting or relying on a rung bound outside
    that scope (rings, $\ell>0$, other slices, the integrated value), or on attainment
-   ("the rung equals the $1s$ rung", "orbital-independent" read as equality), is MATERIAL.
+   beyond prop:tree_bound's clause (holomorphic period, $n\le8$, period not identically
+   zero; "the rung equals the $1s$ rung" for fibres, "orbital-independent" read as
+   equality), is MATERIAL.
    A `[SYMBOLIC PROOF]` tag resting on a numerical check alone is MATERIAL.
 2. **A rung is an operator, not a number.** The tree ladder names the operator of the
    one-scale family (Legendre ⋆ equal-mass banana; $n = 4$ AESZ #58). The generic
@@ -123,8 +125,8 @@ verify ALL of:
 5. **The conjecture stays bounded.** `sec:conjecture` is `[OBSERVATION + PRIOR ART]`: a
    pattern across the tested instances with its four caps stated (fibre vs integrated
    value; the three-dimensional reduction shown only through four densities; the
-   dictionary a bound only for $s$-type trees on the one-scale slice, attainment never
-   proved; one ring, and the generic fibre's content evidence). The
+   dictionary a bound only for $s$-type trees on the one-scale slice, attainment proved
+   only there, at the holomorphic-period level for $n\le8$; one ring, and the generic fibre's content evidence). The
    nearest theorem (Brown, massless graphs) is cited as such; the Symanzik-polynomial
    proof is explicitly not attempted. Any "theorem", "derived" or "proved" on the
    conjecture = MATERIAL.
@@ -139,7 +141,8 @@ verify ALL of:
 - **W1 — the dictionary's reach [HIGHEST RISK; criteria 1, 5].** The abstract,
   introduction, conjecture status, scope and conclusion restate the dictionary. Verify
   each keeps module membership as the general statement, scopes any rung bound to
-  $s$-type trees on the one-scale slice (prop:tree_bound), and never claims attainment;
+  $s$-type trees on the one-scale slice (prop:tree_bound), and claims attainment only in
+  its $n\le8$ nonzero-period clause;
   and that cap three survives in every summary surface (Paper 59 pointers, the syntheses,
   the field guide, the Avery reading map, INDEX).
 - **W2 — the K3 claims at generic scales [criterion 2].** `sec:three_electron` and the
@@ -231,8 +234,9 @@ verify ALL of:
 - The three-dimensional reduction is shown for the chain of three and the star and path
   of four only; for $n \ge 5$ the holomorphic-period statement stands alone.
 - The dictionary places every orbital in the $1s$ module; it bounds the rung only for
-  $s$-type trees on the one-scale slice; attainment is observed in every computed case and
-  proved in none.
+  $s$-type trees on the one-scale slice; attainment is proved there at the
+  holomorphic-period level for $n\le8$ (nonzero period) and observed, not proved, for every
+  computed fibre.
 - Among rings only the triangle was computed; the generic three-electron fibre's content
   is evidence from integer-relation searches.
 - The finite closed form of the first rung's integrated value is Paper 59's open problem
@@ -256,6 +260,12 @@ the correlated triangle's K3 rung at $\gamma = 1$; prop:tree_bound's scope (s-ty
 one-scale slice).
 
 ## Change log
+- 2026-11-06 (after FULL #2) — **AMENDED, PI-approved ("Agree with you decision recommendations").** FULL #2's
+  claims reviewer showed attainment follows at the holomorphic-period level: F_n's operator is irreducible for
+  n = 2..8 (guarded), so a nonzero E F_n generates F_n's simple module; pure-power weights give a positive period
+  (Basset's integral, checked m = 0..3). prop:tree_bound now states it. Criterion 1, criterion 5, W1 and the caps
+  move "attainment never proved" to "proved at the holomorphic-period level for n <= 8 (nonzero period); not for
+  fibres". Governs the next run.
 - 2026-11-06 (after FULL #1 and the RB sprint) — **RE-FROZEN, PI co-write ("I agree with your suggestions",
   approving the proposal below).** Criterion 1, criterion 5, headline 1, W1, the caps and the seed controls now
   carry module membership as the general statement and the rung bound only in prop:tree_bound's scope (s-type

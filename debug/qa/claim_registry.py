@@ -356,14 +356,14 @@ CLAIMS = {
         load_bearing=True, changed="2026-10-15"),
     "p59-three-electron-k3": dict(
         statement="The three-electron chain integral lives on a K3 surface whose holomorphic period is "
-                  "a sum of two products of complete elliptic integrals ('elliptic squared'; BBBG 2008 eq. 33, from an identity of Bailey) [MEASURED / classical]; the TRUE fibre collapses to K3 "
+                  "a sum of two products of complete elliptic integrals ('elliptic squared'; BBBG 2008 eq. 33, from an identity of Bailey) [MEASURED + PRIOR ART]; the TRUE fibre collapses to K3 "
                   "periods at equal scales (evidence); at four generic scale triples integer-relation searches in five "
                   "bases built from K3 and elliptic periods, polylogarithms and Tate numbers find no relation "
                   "(evidence, not proof); Calabi-Yau n-folds for longer "
                   "trees are OPEN.",
         owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
-        owner_anchor=r"A three-electron chain lives on a K3", owner_tier=r"\[MEASURED / classical\]",
-        tier="MEASURED / classical", owner_window=20,
+        owner_anchor=r"A three-electron chain lives on a K3", owner_tier=r"\[MEASURED \+ PRIOR ART\]",
+        tier="MEASURED + PRIOR ART", owner_window=20,
         mention=r"Calabi.{0,3}Yau[^.;|]{0,15}folds?|generic (chain )?(fibre|fiber)|longer (trees|chains)",
         qualifier=r"OPEN|\bopen\b|conjectur|hunch|untested|not tested|no relation|evidence",
         overclaim=r"generic (fibre|fiber)[^.;]{0,40}\b(is|are|reduces to|lies in)\b[^.;]{0,20}\bK3\b|"
@@ -465,8 +465,9 @@ CLAIMS = {
                   "that operator applied to the 1s integral of its density graph and lies in that integral's "
                   "D-module M [SYMBOLIC PROOF + PRIOR ART]. For a tree of s-type densities on the one-scale slice "
                   "the holomorphic period is E F_n, at or below rung n (prop:tree_bound, SYMBOLIC PROOF + MEASURED, "
-                  "record RB 2026-11-06); for rings, l > 0 and other slices the bound is NOT shown; every computed "
-                  "case sits on the 1s rung (observation; attainment never proved). "
+                  "record RB 2026-11-06), and ON rung n for n <= 8 when the period is not identically zero (F_n's "
+                  "operator irreducible for n = 2..8); for rings, l > 0, other slices and the fibre the bound is NOT "
+                  "shown; every computed fibre sits on the 1s rung (observation; fibre attainment not proved). "
                   "The fibre Euler-operator weight identities hold for s-type densities only.",
         owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"What the dictionary does and does not say", owner_tier=r"places every",

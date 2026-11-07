@@ -7,119 +7,60 @@ Source run: `/qa paper_63` FULL (first cert, unseeded), 2026-11-06, snapshot 5a1
 
 ## Owed mathematics (PI call)
 
-- **The dictionary as a bound on the rung (self-check round 1, F1).** RESOLVED for trees of s-type densities on
-  the one-scale slice (holomorphic period): prop:tree_bound, record RB 2026-11-06 GO, guard
-  `tests/test_paper63_tree_bound.py` (fire-tested 6/6). Still open: rings (the triangle's fibre is not a 1-D moment),
-  l > 0 (momentum factors carry directions), other slices (distinct fixed scales give a tensor product of Bessel
-  modules; cyclicity of the product K_0(b_2 x)...K_0(b_n x) is the step to check), the real 3-D integral, and
-  attainment.
+- **The rung bound beyond s-type trees.** RESOLVED for trees of s-type densities on the one-scale slice at the
+  holomorphic-period level: prop:tree_bound (record RB 2026-11-06, guard `tests/test_paper63_tree_bound.py`), with
+  attainment for n <= 8 when the period is nonzero (PI-approved 2026-11-06 after FULL #2; Basset guard). Still open:
+  rings, l > 0 (momentum factors carry directions), other slices (cyclicity of K_0(b_2 x)...K_0(b_n x) in the tensor
+  product of Bessel modules), the fibre, the real 3-D integral.
 
-## Owed guards (separate activity; fire-test each against the wrong answer it excludes)
+## Owed guards (the planned guard pass; fire-test each against the wrong answer it excludes)
 
-- **Headline 6, record-only clauses (code D4; raised to the PI as a C1 gap on a headline).** The correlated
-  triangle's order-nine annihilators, composition series and K3 maps at gamma = 2 (exponential), gamma = 1/2 and 3
-  (mechanism), and for the cusp-correct geminal at gamma = 3/2 and 2, are on the record only; the guards
-  (`test_paper63_{ga1_geminal,ga3_geminal,mg_mechanism}.py`, `test_paper59_c2b_feynman_g2.py`) cover the order-two
-  and algebraic pieces. The paper now says so inline. Owed: a K3-map guard per gamma, or a guard on the stored
-  annihilator's composition series. The K3 rung at gamma = 1 and 3/2 is guarded (slow).
-- **Dictionary three-density check (code D7).** `tests/test_paper63_dictionary.py` `_w` hard-codes the Delta^-3 and
-  Delta^-5 weights instead of applying eq:euler_weights to 2 c^-1/2 K_0; the two-density test does apply the
-  operators. Owed: compute the Euler image in the three-density test. The "contains only K and E" assertion is
-  automatic (derivatives of K are K and E) and carries no evidence.
+- **Headline 6, record-only clauses. PI disposition 2026-11-06: accepted as a disclosed coverage gap; the guard is
+  written in the guard pass.** The order-nine annihilators, composition series and K3 maps at gamma = 2
+  (exponential), 1/2 and 3 (mechanism), and for the cusp-correct geminal at 3/2 and 2 are on the record only (said
+  inline); the K3 rung at gamma = 1 and 3/2 is guarded (slow). Owed: a K3-map guard per gamma.
+- **Dictionary three-density check (code D7).** `_w` hard-codes the Delta^-3 / Delta^-5 weights; compute the Euler
+  image instead. The "contains only K and E" assertion is automatic.
+- **Fuchs bound equality** (`test_fn_operators_irreducible_by_fuchs`): a `<=` -> `<` plant does not fire; add a control
+  at margin 0.
+- **F_5 operator on quadrature** (`_annihilation_residual(5, ...)`), re-verified by FULL #2 to 1e-15 / 4e-20.
+- **Six `tests/test_paper59_*` guards backing Paper 63** (`correlated_triangle_g32`, `c2b_elliptic`,
+  `offslice_y_operator`, `gaussian_fit_geminal`, `c2b_feynman`, `c2b_feynman_g2`): rename or re-point their
+  docstrings ("Paper 59 sec:density_ring") and cite them in the prose they back (code D5).
+- The tree identity with non-1s weights is guarded only for the chain of three; prop:tree_bound uses it at every n.
+- Pricing: the evaluator's "a thirteenth" and the ~500x speed test, the fit law, the plain/weighted fit numbers have no
+  guard (tagged [MEASURED], one machine).
 
 ## SMALL sweep
 
-- Paper 63 bibitem `monkhorst_jeziorski1979`: title is "No linear dependence and multi-center integral problems in
-  momentum space quantum chemistry" (J. Chem. Phys. 71, 5268), not "... molecular Sturmian calculations".
-- Paper 63 four-density section (~:606): "(both on the prediction record's computation, not a regression test)" is
-  wrong for c_{4,0} and c_{6,0}, which `test_ising_moments_are_the_registered_values` guards to 1e-25; only the
-  5e-261 precision is record-only (code D6, an upgrade).
-- Paper 63 three-electron section (~:369-371): "opens no new transcendence class" — scope to the holomorphic period
-  (claims S8).
-- Paper 63 four-centre section (~:334-335): "the one this paper was written on" is a split leftover (Paper 59's).
-- Paper 63 sec:scope (~:1496): "the P3e-2 basis" is an undefined insider label.
-- Paper 63 lem:integral proof (~:220-227): "derivatives of every order in those parameters" dominated termwise fails
-  for l >= 3 and for centre derivatives of the Yukawa (distributional terms); the lemma is classical (Weniger); the
-  justification needs replacing with a correct one, not a hedge (code D1, SMALL part). Blocked on writing that
-  argument carefully.
-- Paper 63 conclusion: carries cap three only; caps two (3-D reduction through four densities), four (only the
-  triangle among rings) and five are in sec:scope and the abstract (claims S7).
-- Done-file headline 1 says "polynomial in the Euler operators"; the paper now says "in c, c^-1 and the Euler
-  operators" (code D8). The done-file is frozen for this run; carry the wording at the next co-write.
-- Six guards backing Paper 63 keep `test_paper59_*` names and docstrings pointing at "Paper 59 sec:density_ring"
-  (`correlated_triangle_g32`, `c2b_elliptic`, `offslice_y_operator`, `gaussian_fit_geminal`, `c2b_feynman`,
-  `c2b_feynman_g2`); rename or re-point, and cite them in the prose they back (code D5).
-- group3 synthesis (derived): lines ~1537-1539 drop the gamma = 1 mechanism cap and the BBBG Eq. 30 credit (F3);
-  the pricing sentences drop the one-machine / own-grid caps (F4); "elliptic squared" and the Calabi-Yau operator
-  carry no Bailey/BBBG/AESZ credit (F5); the intro roster of reconvergence papers (~:205-214) omits Paper 63.
-- group2 synthesis :827 "The rungs beyond the third center" — the owner indexes rungs by linked densities (F6).
+**Swept 2026-11-06 (v6.4.5):** Monkhorst-Jeziorski title; Remiddi title; Ising L-values now cited as guarded;
+"opens no new transcendence class" scoped to the holomorphic period; "the one this paper was written on";
+[MEASURED / classical] -> [MEASURED + PRIOR ART]; quadric counts "one in the guard"; bubble check "two in the
+guard"; the g32 sentence moved back to the gamma = 3/2 paragraph; pricing fit errors "relative"; GF1's miss
+disclosed; conjecture (i) appositive scoped to n <= 5; status "onto the Bessel-moment family"; placement "1s" and
+[OBSERVATION] on the causal reading; "the P3e-2 basis"; prop:rung deg P <= m; abstract correlated-triangle gamma
+scope, [MEASURED] on the attainment observation, "all s-type", the dictionary cap; intro "all s-type"; group2
+synthesis "climb further" scoped and "rungs of more linked densities"; field guide reading path -> Paper 63; group3
+synthesis "1s densities" and the gamma = 1 mechanism cap; Paper 18 "rungs of more linked densities"; Paper 59 :869
+re-pointed to its sec:genus; Paper 57 J8 and J10 "1s" and the path reduction; seam md J8, J10 and the header;
+matrix Hamiltonian row "over s-type orbitals".
 
-- Completeness critic, unguarded or unrun body numbers: the kite's Lee-Pomeransky critical-point counts (22 generic,
-  21 at z_9; ten drop points) and the "41 sets / 29 unknowns / 18 held-out" fit vs the guard's 53 rate sets; the
-  count's relation to the eighteen masters needs one sentence (sector convention, record 2026-10-26 l.43); the
-  ring's -0.161 / -2.33, 191 / 8.9 and the -9216 t^2 source; the two rejected j-families and the Frobenius-trace
-  non-isogeny (~:987-991); the pricing figures (slow operator_evaluator and production_geminal_fit not run this
-  cycle); the Gegelia-van Straten conductors (2145/2465, 945/960) were confirmed by the citation reviewer but are
-  not in the guard set.
-- C5 scorecard reconciliation not audited this run: confirm every registered gate that missed (MP1-2, PF1/3/4, GF1,
-  GR1/4 partial; GY3 disclosed) is disclosed where its result is stated.
-- Paper 57 J4 "(F, pre-registered and confirmed)" against the owner's "a calibration rather than a hard test": the
-  same row says "nearly a corollary of Paper 59"; judged faithful, recorded.
-
-- From the claim-search DELTA (2026-11-06), NIT/SMALL, not fixed in-cycle:
-  - "the holomorphic period of a tree ... depends only on how many densities it links" without "1s": group3
-    synthesis ~1521, Paper 57 J10 (:171), `docs/forced_free_seam.md` J10 (:158); Paper 63 :469 leads with it and adds
-    1s only at :472.
-  - J8 (Paper 57 :169, seam md :156): "its holomorphic period sits on / is the four-density rung" — attainment over
-    unspecified orbitals; say "for 1s densities". Same rows say "J10's assumed three-dimensional reduction", which is
-    now shown for the path (numerical annihilation + bounded search): an understatement.
-  - Tier tags: the tree bound is "[SYMBOLIC PROOF]" in the group3 synthesis gvc span and the matrix row (owner:
-    SYMBOLIC PROOF + MEASURED); Paper 63 abstract's tree-bound and "in every case computed" sentences sit inside the
-    [SYMBOLIC PROOF + PRIOR ART] block.
-  - `docs/claim_test_matrix.md` ~:179: "the Hamiltonian-stays-elliptic consequence is [OBSERVATION]" lacks "over
-    s-type orbitals".
-  - Conjecture (i) appositive names the Hadamard product for every n (the status paragraph scopes it to 2..5).
-  - Abstract "on every slice tested the three-electron fibre is a K3 function integrated once" drops the
-    proved / mod-p split.
-  - Paper 59 :868 cites "(Paper 63, the dictionary)" for "not the genus of the curve"; re-point to Paper 59's own
-    :311-313.
-  - Guard clauses: mg_mechanism also guards the kite operator's order and pair-mass singular points (understated).
-  - Test docstrings `tests/test_paper59_{c2b_elliptic,c2b_feynman_g2,correlated_triangle_g32,offslice_y_operator}.py`
-    say "Paper 59 sec:density_ring".
-  - The tree identity with non-1s weights is guarded only for the chain of three (Delta^-3, Delta^-5); prop:tree_bound
-    uses it at every n (the derivation is generic; no n >= 4 non-1s guard).
-
-- From FULL #2 (2026-11-06), SMALL/NIT, not fixed in-cycle (edit bar: no LARGE opened these units):
-  - Abstract: the "in every case computed" attainment clause sits under [SYMBOLIC PROOF + PRIOR ART] (an
-    observation; owner :326 is [MEASURED]); "every general-orbital case computed" (abstract, intro :137) — every case
-    computed is s-type, say so; "The caps are stated:" lists three of the four; the correlated triangle "sits with the
-    chain on the K3 rung" drops the gamma scope.
-  - Conjecture status :1467-1469: on (t;1,2) the piece is equivalent to the three-scale moment, so "onto the
-    Bessel-moment family", not "onto F_n"; :407 "[MEASURED / classical]" is not a registry tier ([MEASURED + PRIOR
-    ART]); :1460 calls eq:tree proved while its tag is [SYMBOLIC + MEASURED] (tag upgrade); :1505 "The operators of the
-    ladder are known" unscoped (true for F_n's operators; only the Hadamard identification is n = 2..5).
-  - Pricing block: :1380-1381 / :1396-1397 the fit errors 3.6e-5..2.4e-6 are RELATIVE (record E_n = Y_n/Y - 1); say so
-    (read as absolute, "three thousand times" would be false). :1375-1391 does not disclose that GF1 MISSED its
-    registered 1e-3 ceiling (C5 scorecard; compare :1075, :1369 which disclose). The fit-law paragraph cites no guard;
-    the evaluator "thirteenth" and the ~500x speed test have no guard (tagged [MEASURED], one machine).
-  - :1087-1090 the g32 sentence ("so Y needs the K3 piece, and no piece above K3 occurs") sits after the Gaussian
-    paragraph, which says the K3 prediction failed; move it back to the gamma = 3/2 paragraph (~:933).
-  - sec:placement :1534-1538: "the short-range difficulty it meets is where the series confronts the genus jump" is
-    GeoVac's causal reading inside a [PRIOR ART] block, untagged; tag [OBSERVATION] or drop the causal clause.
-    :1519-1520 "depend on n alone" without 1s. Paper 18 :407 "the rungs beyond the third centre" (index by densities).
-  - prop:rung :240-242 "every such weight P(L^2) Delta^-(2m+1)" needs deg P <= m (L^2 Delta^-1 = Delta^+1 leaves the
-    orbit); :525 quadric counts "at two rational points" (guard checks one); :1032 "three pairs to 4e-31" (guard: two
-    pairs to 1e-20).
-  - Guard: `test_paper63_four_density_rung.py::test_fn_operators_irreducible_by_fuchs` accepts a strict-inequality
-    Fuchs bound (plant `<=` -> `<` did not fire); add an equality-margin control. Cheap guard owed: the F_5 operator on
-    quadrature (`_annihilation_residual(5, ...)`), re-verified by FULL #2 to 1e-15/4e-20.
-  - Synthesis: group2 synthesis :848-851 "correlated integrals that link more densities climb further" (owner: trees
-    and the correlated triangle; the Coulomb ring does not climb); field guide :967-970 reading path omits Paper 63 for
-    the K3 rung; `docs/forced_free_seam.md` :145 "a K3 period for a three-electron chain" (holomorphic period);
-    `docs/claims_register.md` has no Paper 63 line.
-  - Citations: remiddi1991 bibitem lacks its title ("Analytic value of the atomic three-electron correlation integral
-    with Slater wave functions", PRA 44, 5492). Lim-Tu-Yu attribution CONFIRMED by the PM from the PDF (footnote 3,
-    eq. 44, the 2x2 determinants).
+**Still open:**
+- lem:integral proof (~:220-227): termwise dominated convergence fails for l >= 3 and centre derivatives of the
+  Yukawa; the lemma is classical (Weniger); replace the justification with a correct one (blocked on writing it).
+- Conclusion carries caps one and three; caps two, four and five are in sec:scope and the abstract.
+- :1460 calls eq:tree proved while its tag is [SYMBOLIC + MEASURED] (tag upgrade candidate); :1517 "The operators
+  of the ladder are known" unscoped (true for F_n's operators).
+- Abstract "on every slice tested the three-electron fibre is a K3 function integrated once" drops the proved /
+  mod-p split.
+- mg_mechanism guards more than its clause says (kite order, pair-mass singular points).
+- The kite's critical-point counts (22 / 21 / ten drop points) and their relation to the eighteen masters (one
+  sentence owed); the 41/29/18 fit vs the guard's 53 rate sets; the ring's -0.161 / -2.33, 191 / 8.9, -9216 t^2;
+  the rejected j-families and the Frobenius non-isogeny.
+- C5 scorecard: GY3 and GF1 now disclosed; MP1-2, PF1/3/4, GR1/4 not yet reconciled.
+- group3 synthesis: pricing sentences drop the one-machine / own-grid caps; "elliptic squared" and the CY operator
+  carry no Bailey/BBBG/AESZ credit; the intro roster of reconvergence papers omits Paper 63.
+- `docs/claims_register.md` has no Paper 63 line.
 
 ## Citations left UNVERIFIABLE (not fetched; never upgraded on plausibility)
 
