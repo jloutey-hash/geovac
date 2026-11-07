@@ -481,6 +481,19 @@ CLAIMS = {
                   r"rung (is )?at most (the|that of)|cannot climb above|no (other )?(exponential-type )?orbital climbs|"
                   r"bounds every (exponential-type )?orbital",
         load_bearing=True, changed="2026-11-06"),
+    "p63-hamiltonian-elliptic-stype": dict(
+        statement="Every electron-repulsion integral couples two densities, so over s-type orbitals the integrals "
+                  "of a molecular Hamiltonian stay on the elliptic rung at the fibre however large the molecule "
+                  "[OBSERVATION; the s-type case follows from prop:tree_bound at n = 2]; for l > 0 it is not shown.",
+        owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
+        owner_anchor=r"Every electron-repulsion integral couples exactly", owner_tier=r"\[OBSERVATION\]",
+        tier="OBSERVATION (s-type)", owner_window=1,
+        mention=r"molecular Hamiltonian[^.;|]{0,80}(stay|elliptic)|Hamiltonian ERIs stay|"
+                r"stay (on the )?elliptic[^.;|]{0,40}(any|every) molecule",
+        qualifier=r"\$?s\$?-type|1s|\\ell>0|l > 0",
+        overclaim=r"Hamiltonian ERIs stay elliptic for (any|every) (orbital|basis)|"
+                  r"for (every|all) (orbitals|exponential-type orbitals)[^.;]{0,40}stay elliptic",
+        changed="2026-11-06"),
     "p59-tree-banana-hadamard": dict(
         statement="The tree ladder's operators are the Hadamard products of the Legendre operator with "
                   "the equal-mass banana operators with n-1 propagators, in y = 1/(16 t^2), checked in "

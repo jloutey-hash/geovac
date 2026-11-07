@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.4.3] - 2026-11-06
+
+**/qa paper_63 claim-search DELTA (PI-invoked, unseeded, against the re-frozen criteria) = DEFECTS, remediated.**
+Snapshot ec72cac8 (worktree `../geovac-qa-p63d`). Panel: owner read in full (Papers 63 and 59, Opus); claim search
+A (dictionary/tree bound + Hamiltonian s-type, Opus); claim search B (Hadamard scope, conjecture tiers, K3-slice
+tier, Broadhurst credit, Opus); code (the new guard, Opus). No citation reviewer (Paper 63's bibliography
+unchanged). Gate-first: C25 `p63-hamiltonian-elliptic-stype` registered before dispatch. Calibration: standing
+record. **Coverage 3/14 -> 6/14 owner units.**
+
+### Changed (OWNER-LARGE, Paper 63)
+- **The tree bound is a holomorphic-period statement.** Five summary sentences (intro, dictionary paragraph, scope
+  cap three, open list, conclusion) and two surfaces (INDEX row 63, the Avery reading map) carried prop:tree_bound to
+  the fibre or the integral; the fibre is not E F_n (the fingerprint chain is not a rational combination of F_3 and
+  its derivatives plus a K3-free function). All now say holomorphic period; the fibre bound is open even for s-type
+  trees.
+- **Intro colon** attached "the holomorphic period depends only on n" to general orbitals; split, with "1s
+  densities" and "for those n" (the Hadamard scope).
+- Ride-along SMALLs: "quotient" -> "submodule" in prop:tree_bound's proof; the K3-slice clause carries the Mellin
+  contour-shift cap and the three void searches.
+
+### Changed (SURFACE-LARGE)
+- Field guide: four pointers to Paper 59's "closing section" / "three-electron section" / "tests only the ring"
+  re-homed to Paper 63; the Bessel-moment closed form credited to BBBG Eq. 33 (bibitem added).
+- Atlas door 27 and two claim-matrix rows: the massless-rung identification moved out of Broadhurst's PRIOR ART
+  clause; "GO (derived)" -> record GO, [MEASURED] in Paper 63; Eqs. 24-25.
+
+### Added
+- C16 families (discrimination-tested two ways; dependents stamped): `p63-tree-bound-level`,
+  `p63-split-stale-p59-home`, `p63-ninth-point-credit-tier`. C25 `p63-hamiltonian-elliptic-stype`.
+- Guard pass on `tests/test_paper63_tree_bound.py` (code reviewer SMALLs): fast exact assertion for the recursion's
+  2k term (previously only a slow case caught it); mp.workdps instead of a global dps; the pointwise scaled-leaf
+  check moved to slow; fast tier 6 s. Re-fired: 2k -> k, (b-1) sign, untransposed theta, all on the fast tier.
+- Code dimension BACKED-SOUND: recursion, transpose with boundary terms, x^2 rule and the leaf identity re-derived
+  in sympy; operators re-derived by hand and checked by finite differences at t = 0.8, 3.3 for n = 3, 4, 5.
+
+### Self-check
+- Round 1: 0 OWNER-LARGE, 0 SURFACE-LARGE, 1 SMALL (field-guide BBBG credit) + 1 NIT (Eqs. 24-25), both fixed. Loop
+  closed at round 1. NITs and SMALLs not fixed in-cycle: `docs/qa/paper_63.debt.md`.
+
 ## [v6.4.2] - 2026-11-06
 
 **The rung bound restored for s-type trees (record RB, pre-registered, GO); /qa paper_63 criteria re-frozen

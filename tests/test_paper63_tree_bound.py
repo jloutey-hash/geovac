@@ -110,23 +110,31 @@ def test_x2_weight_maps_to_t_minus2_theta2() -> None:
                                     (-2, 2): Fraction(-1)}
 
 
-@pytest.mark.parametrize("n,k,a,b", [(3, 0, 1, 1), pytest.param(3, 0, 0, 2, marks=pytest.mark.slow),
-                                     pytest.param(3, 1, 1, 1, marks=pytest.mark.slow),
-                                     pytest.param(4, 0, 0, 3, marks=pytest.mark.slow)])
-def test_section_is_operator_on_F_n(n: int, k: int, a: int, b: int) -> None:
-    mp.mp.dps = 20
-    R = _section(n, k, a, b)
-    for ts in ("0.5", "2.5"):
-        t = mp.mpf(ts)
-        lhs = _direct(n, k, a, b, t)
-        rhs = _apply(n, R, t)
-        assert abs(lhs - rhs) / abs(lhs) < mp.mpf("1e-15"), (n, k, a, b, ts)
+def test_2k_term_exact() -> None:
+    """x^2 K0 (xK1) -> (2k + 1 + theta) t^-2 theta^2 / 2 with k = 1; rejects k for 2k (gives 1/4 + 1/2 theta)."""
+    assert _section(3, 1, 1, 1) == {(-2, 2): Fraction(1, 2), (-2, 3): Fraction(1, 2)}
 
 
+@pytest.mark.parametrize("n,k,a,b,ts", [(3, 0, 1, 1, ("2.5",)),
+                                        pytest.param(3, 0, 0, 2, ("0.5", "2.5"), marks=pytest.mark.slow),
+                                        pytest.param(3, 1, 1, 1, ("0.5", "2.5"), marks=pytest.mark.slow),
+                                        pytest.param(4, 0, 0, 3, ("0.5", "2.5"), marks=pytest.mark.slow)])
+def test_section_is_operator_on_F_n(n: int, k: int, a: int, b: int, ts: tuple) -> None:
+    with mp.workdps(20):
+        R = _section(n, k, a, b)
+        for t_str in ts:
+            t = mp.mpf(t_str)
+            lhs = _direct(n, k, a, b, t)
+            rhs = _apply(n, R, t)
+            assert abs(lhs - rhs) / abs(lhs) < mp.mpf("1e-15"), (n, k, a, b, t_str)
+
+
+@pytest.mark.slow
 def test_scaled_leaf_is_theta_image() -> None:
-    mp.mp.dps = 20
-    t = mp.mpf("1.5")
-    lhs = mp.quad(lambda x: (t * x) * mp.besselk(1, t * x) * mp.besselk(0, x) ** 2, _BREAKS)
-    rhs = -_theta_F(3, 1, t)
-    assert abs(lhs - rhs) / abs(lhs) < mp.mpf("1e-15")
-    assert abs(lhs - _theta_F(3, 1, t)) / abs(lhs) > mp.mpf("0.5")  # the sign matters
+    """Pointwise identity (tx) K1(tx) = -theta_t K0(tx); the integral check only exercises _theta_pow_K0(1)."""
+    with mp.workdps(20):
+        t = mp.mpf("1.5")
+        lhs = mp.quad(lambda x: (t * x) * mp.besselk(1, t * x) * mp.besselk(0, x) ** 2, _BREAKS)
+        rhs = -_theta_F(3, 1, t)
+        assert abs(lhs - rhs) / abs(lhs) < mp.mpf("1e-15")
+        assert abs(lhs - _theta_F(3, 1, t)) / abs(lhs) > mp.mpf("0.5")  # the sign matters

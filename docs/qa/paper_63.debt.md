@@ -66,6 +66,29 @@ Source run: `/qa paper_63` FULL (first cert, unseeded), 2026-11-06, snapshot 5a1
 - Paper 57 J4 "(F, pre-registered and confirmed)" against the owner's "a calibration rather than a hard test": the
   same row says "nearly a corollary of Paper 59"; judged faithful, recorded.
 
+- From the claim-search DELTA (2026-11-06), NIT/SMALL, not fixed in-cycle:
+  - "the holomorphic period of a tree ... depends only on how many densities it links" without "1s": group3
+    synthesis ~1521, Paper 57 J10 (:171), `docs/forced_free_seam.md` J10 (:158); Paper 63 :469 leads with it and adds
+    1s only at :472.
+  - J8 (Paper 57 :169, seam md :156): "its holomorphic period sits on / is the four-density rung" — attainment over
+    unspecified orbitals; say "for 1s densities". Same rows say "J10's assumed three-dimensional reduction", which is
+    now shown for the path (numerical annihilation + bounded search): an understatement.
+  - Tier tags: the tree bound is "[SYMBOLIC PROOF]" in the group3 synthesis gvc span and the matrix row (owner:
+    SYMBOLIC PROOF + MEASURED); Paper 63 abstract's tree-bound and "in every case computed" sentences sit inside the
+    [SYMBOLIC PROOF + PRIOR ART] block.
+  - `docs/claim_test_matrix.md` ~:179: "the Hamiltonian-stays-elliptic consequence is [OBSERVATION]" lacks "over
+    s-type orbitals".
+  - Conjecture (i) appositive names the Hadamard product for every n (the status paragraph scopes it to 2..5).
+  - Abstract "on every slice tested the three-electron fibre is a K3 function integrated once" drops the
+    proved / mod-p split.
+  - Paper 59 :868 cites "(Paper 63, the dictionary)" for "not the genus of the curve"; re-point to Paper 59's own
+    :311-313.
+  - Guard clauses: mg_mechanism also guards the kite operator's order and pair-mass singular points (understated).
+  - Test docstrings `tests/test_paper59_{c2b_elliptic,c2b_feynman_g2,correlated_triangle_g32,offslice_y_operator}.py`
+    say "Paper 59 sec:density_ring".
+  - The tree identity with non-1s weights is guarded only for the chain of three (Delta^-3, Delta^-5); prop:tree_bound
+    uses it at every n (the derivation is generic; no n >= 4 non-1s guard).
+
 ## Citations left UNVERIFIABLE (not fetched; never upgraded on plausibility)
 
 Bonisch et al. 2021 "Eq. (3.7)"; Fresan-Sabbah-Yu parity of the pairing; Avery & Avery 4-centre "App. B" and the

@@ -288,6 +288,8 @@ def selftest() -> int:
                                      "The tree ladder is tied to the banana ladder by a Hadamard product, checked for n = 2 to 5."),
         "p63-dictionary-module": ("By the dictionary every integral is a derivative of the 1s integral of its graph, so its rung is at most the 1s rung.",
                                   "By the dictionary every integral lies in the D-module of its graph's 1s integral; staying on the 1s rung is not proved."),
+        "p63-hamiltonian-elliptic-stype": ("Hamiltonian ERIs stay elliptic for every basis, whatever the orbitals.",
+                                           "Over s-type orbitals the integrals of a molecular Hamiltonian stay elliptic at the fibre."),
         "p59-slater-slice-membership": ("On the Slater slice, P G = 0 follows from the measured annihilation by W.",
                                         "On the Slater slice both annihilations are derived, with the Mellin contour shift as the one cap."),
         "p59-operator-clause-scope": ("The difficulty of a two-electron integral lives entirely in the densities, never in the operator between them.",
