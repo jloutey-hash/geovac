@@ -658,6 +658,42 @@ MEASURED = {
         provenance="derived ingredient (Paper 2); = pi^2/6 = 1.6449340668.",
         aliases={1.6449: "4 dp"}),
 
+    # ---- Paper 2 formula and look-elsewhere count (registered 2026-11-07, guard pass) ----
+    "alpha_k_value": dict(
+        value=137.0360644144815,
+        convention="constant: K = pi(42 + pi^2/6 - 1/40) (Paper 2 eq:K; an Observation, not derived)",
+        q=None,
+        provenance="DERIVED closed form, 50-digit mpmath; tests/test_paper2_owed_guards.py",
+        aliases={137.036064: "6 dp"}),
+    "alpha_cubic_root_inv": dict(
+        value=137.0360111631364,
+        convention="constant: 1 / (smallest positive root of a^3 - K a + 1 = 0) (Paper 2 sec:formula)",
+        q=None,
+        provenance="DERIVED, 30 digits by contraction + polyroots; tests/test_paper2_owed_guards.py",
+        aliases={137.036011: "6 dp"}),
+    "p2_search_n": dict(
+        value=1921873520,
+        convention="constant: formula count of the Paper 2 look-elsewhere search, 2 * 14 * C(745, 3)",
+        q=None,
+        provenance="exact count from the deduplicated 743-term pool; "
+                   "tests/test_paper2_owed_guards.py::test_search_space_size",
+        aliases={1.92e9: "printed 1.92 x 10^9"}),
+    "p2_chance_count": dict(
+        value=10,
+        convention="constant: formulas strictly closer to alpha than the cubic reading (Paper 2 eq:chance_count)",
+        q=None,
+        provenance="MEASURED 2026-11-07 by full enumeration; "
+                   "tests/test_paper2_owed_guards.py::test_search_rank_and_chance_count",
+        aliases={}),
+    # ---- Paper 36 one-loop assembly (registered 2026-11-07, guard pass) ----
+    "lamb_1loop_mhz": dict(
+        value=1052.1934513,
+        convention="constant: H 2S-2P leading one-loop alpha(Z alpha)^4 assembly at m_r = m (Paper 36 sec:result)",
+        q=None,
+        provenance="MEASURED, 40-digit route with Drake-Swainson ln k0; two unit routes agree to 2e-8; "
+                   "tests/test_paper36_owed_guards.py::test_paper36_lamb_assembly_two_unit_routes_agree",
+        aliases={1052.19: "2 dp"}),
+
     # ---- TC composed (electronic-only, PK classically partitioned) ------
     # The TC/standard Pauli ratio is 1.616 to three decimals for all three
     # molecules -- the cross-molecule uniformity survived the exact-rule
@@ -1469,6 +1505,12 @@ MEASURED = {
 # these are other groups' numbers and none of the sources state whether the
 # identity term is counted.  Check E skips unknowns rather than assuming.
 CITED = {
+    "codata2018_alpha_inv": dict(value=137.035999084, convention="constant: 1/alpha, CODATA 2018",
+                                 source="Tiesinga et al., Rev. Mod. Phys. 93, 025010 (2021)", identity=None),
+    "lamb_exp_lp81": dict(value=1057.845, convention="constant: H 2S-2P Lamb shift (MHz), +-0.009",
+                          source="Lundeen & Pipkin, PRL 46, 232 (1981)", identity=None),
+    "lamb_exp_bezginov19": dict(value=1057.8298, convention="constant: H 2S-2P Lamb shift (MHz), +-0.0032",
+                                source="Bezginov et al., Science 365, 1007 (2019)", identity=None),
     "he_ccpvdz_pauli": dict(value=156, convention="Pauli, He cc-pVDZ Q=10",
                             source="recomputed Gaussian baseline, Paper 14", identity=None),
     "he_ccpvdz_lambda": dict(value=42.95, convention="1-norm (Ha)",
@@ -1510,6 +1552,16 @@ CITED = {
 # ---------------------------------------------------------------------------
 
 DERIVED = {
+    "alpha_k_rel_err":      ("(alpha_k_value - codata2018_alpha_inv) / codata2018_alpha_inv", 0.05,
+                             "Paper 2: K vs CODATA 2018 alpha^-1 (4.8e-7)"),
+    "alpha_cubic_rel_err":  ("(alpha_cubic_root_inv - codata2018_alpha_inv) / codata2018_alpha_inv", 0.05,
+                             "Paper 2: cubic root vs CODATA 2018 (8.8e-8)"),
+    "p2_search_p":          ("p2_chance_count / p2_search_n", 0.05,
+                             "Paper 2: p per formula (5.2e-9); N p equals the hit count by construction"),
+    "lamb_resid_lp81":      ("lamb_1loop_mhz - lamb_exp_lp81", 0.005,
+                             "Paper 36 residual vs Lundeen-Pipkin (-5.65 MHz)"),
+    "lamb_resid_bezginov19": ("lamb_1loop_mhz - lamb_exp_bezginov19", 0.005,
+                              "Paper 36 residual vs Bezginov 2019 (-5.64 MHz)"),
     "p23_he4_deuteron_pauli_ratio": ("p23_he4_pauli / p23_deuteron_pauli", 0.005,
                                      "He-4 / deuteron Pauli count at fixed Q=16"),
     "p60_exc_ratio_k452":   ("p60_exc_gap_k452 / chem_accuracy_mha", 0.005,

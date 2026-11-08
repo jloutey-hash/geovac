@@ -404,6 +404,41 @@ class TestSunsetRelation:
         assert abs(S_sunset - 2 * mpmath.mpf(FROZEN_80)) < mpmath.mpf(10) ** -30
         assert abs(S_sunset - mpmath.mpf(self.S_SUNSET_45)) < mpmath.mpf(10) ** -30
 
+    def test_sunset_value_from_cg_count(self) -> None:
+        """Paper 28 subsec:smin_sunset, eq:sunset_relation: the printed sunset
+        decimal 4.9598738760684451... is reached when the a, b <= N = 30
+        block uses the real CG channel count (geovac so4_channel_count);
+        beyond N the tail is the 2 min model, not the count.  So the
+        count-dependent content is the same as the sibling exact identity
+        test_sunset_relation_exact_truncated (count = 2 min through N = 30);
+        what this test adds is that the decimal is reached with that block.
+
+        Rejects: the old-count sunset 3.89451620519784 (= 2 S_min - P^2 - Q,
+        I = 2 min - 1 - [n1=n2]); planting the old count into
+        so4_channel_count moves the CG partial sum by -(P_N^2 + Q_N) ~ -1.06.
+        It does not test the count beyond N = 30.
+
+        Route: exact Fraction partial sum of I_geovac(a,b) phi(a) phi(b) over
+        a, b <= N = 30, plus the infinite min-weighted tail
+        2 (S_min - S_min(N)), with S_min = sum_k T(k)^2 by Levin over Hurwitz
+        tails and S_min(N) the exact truncated min-weight sum (no geovac).
+        """
+        N = 30
+        ph = {n: phi_frac(n) for n in range(N + 1)}
+        partial = sum(I_channel_geovac(a, b) * ph[a] * ph[b]
+                      for a in range(N + 1) for b in range(N + 1))
+        smin_N = sum(min(a, b) * ph[a] * ph[b]
+                     for a in range(1, N + 1) for b in range(1, N + 1))
+        with mpmath.workdps(self.DPS):
+            S_min = mpmath.nsum(
+                lambda k: T_tail(int(k)) ** 2, [1, mpmath.inf], method="levin"
+            )
+            tail = 2 * (S_min - mpmath.mpf(smin_N.numerator) / smin_N.denominator)
+            total = mpmath.mpf(partial.numerator) / partial.denominator + tail
+            assert abs(total - mpmath.mpf(self.S_SUNSET_45)) < mpmath.mpf(10) ** -30
+            # and it is not the old-count value
+            assert abs(total - mpmath.mpf("3.89451620519784")) > 1
+
     def test_P_definition(self) -> None:
         """P = D(4) - 64/81 where D(4) = pi^2 - pi^4/12."""
         mpmath.mp.dps = self.DPS

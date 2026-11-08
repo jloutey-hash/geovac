@@ -599,7 +599,7 @@ class TestPaper25S5Pins:
 
 
 class TestPaper25CP2Quotient:
-    """Archived Paper 25 Sec. VII.A (not carried into a live paper), negative result: the m_l-quotient of the
+    """Paper 24 "Reduced content (no CP^2 base spectrum)" (from archived Paper 25 Sec. VII.A), negative result: the m_l-quotient of the
     Bargmann graph at N_max = 5 is NOT a CP^2 discretization.
 
     Pins (a) the 12-sector quotient Laplacian spectrum (multiplicity

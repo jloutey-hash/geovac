@@ -297,6 +297,51 @@ class TestEulerMaclaurinTail:
             f"(ratio {ratio:.3f}) -- if genuinely fixed, update Paper 28 "
             f"and CLAUDE.md sec. 3 before trusting it")
 
+    def test_true_tail_literals_pinned(self):
+        """The two literals in true_tail above, backed (Paper 28 eq:s3_value
+        and tab:three_loop_convergence, N = 20 row).
+
+        Rejects: the old-count pair 31.5726 / 7.8719 (and any S(20) that the
+        module computes with the old channel count, which gives 7.8719).
+        The ratio test above passed with the old literals too, so on its
+        own it does not see the channel count.
+
+        Route: S(20) = sum_{m<=20} phi(m) L(m)^2, L(m) = 2 sum_{n<=20}
+        min(n,m) phi(n), in exact Fraction arithmetic (no geovac), against
+        the literal and against the module's factorized sum (which calls
+        so4_channel_count).  S_inf against the 25-term closed form
+        eq:s3_closed_form is backed in tests/test_s3_decomposition.py; here
+        it is checked against the rigorous direct-sum bracket at N = 2000
+        (lower = partial sum, upper = partial + 32[(ln N+1)^2+2(ln N+1)+2]/N).
+        """
+        from fractions import Fraction
+        import math
+
+        def phi(n):
+            o = 2 * n + 3
+            return Fraction(8 * (o * o - 1), o ** 4)
+        N = 20
+        ph = [phi(n) for n in range(N + 1)]
+        exact = sum(ph[m] * (2 * sum(min(n, m) * ph[n] for n in range(N + 1))) ** 2
+                    for m in range(N + 1))
+        assert abs(float(exact) - 12.8365763232) < 1e-10
+        assert abs(float(three_loop_factorized(N)["value_float"])
+                   - float(exact)) < 1e-10
+        # S_inf literal inside a rigorous bracket (float64 is ample here)
+        Nb = 2000
+        phs = [8 * ((2 * m + 3) ** 2 - 1) / (2 * m + 3) ** 4 for m in range(Nb + 1)]
+        P_inf = math.pi ** 2 - math.pi ** 4 / 12
+        head, cum_phi, cum_nphi = 0.0, 0.0, 0.0
+        for m in range(Nb + 1):
+            A = cum_nphi + m * (P_inf - cum_phi)
+            head += phs[m] * (2 * A) ** 2
+            cum_phi += phs[m]
+            cum_nphi += m * phs[m]
+        u = math.log(Nb) + 1
+        hi = head + 32 * (u * u + 2 * u + 2) / Nb
+        assert head < 40.6553875636 < hi
+        assert not (head < 31.5726 < hi)
+
     def test_tail_correction_finite(self):
         """Tail correction returns a finite value."""
         tail = three_loop_euler_maclaurin_tail(n_max=15, n_em_terms=5, a=4, p=1)
@@ -326,8 +371,11 @@ class TestDecomposeMZV:
         """A known pi^{even} value should be identified."""
         # D(4) = pi^2 - pi^4/12, a simple weight-4 pi^{even} value
         from geovac.qed_three_loop import _dirac_D
-        D4 = _dirac_D(4)
-        result = decompose_three_loop_mzv(D4, n_digits=50)
+        # Local precision: under xdist an earlier test may have lowered the
+        # global mp.dps, and D(4) at 15 digits cannot be identified at 50.
+        with mpmath.workdps(60):
+            D4 = _dirac_D(4)
+            result = decompose_three_loop_mzv(D4, n_digits=50)
         assert result["identified"], "Failed to identify D(4)"
         assert result["basis_tier"] == 0
 

@@ -77,15 +77,13 @@ proxy that fails in both directions.
 This replaces an earlier naive form that scaled residual linearly
 with chain depth; the May~2026 synthesis pass falsified the depth
 form on the catalogue itself (depth-3 chains exist at residual~$0$
-and at $-211$~ppm; depth-4 chains exist at $+2$~ppm and at
-$-0.534\%$).  The Lamb shift example (depth-4 chain, $-0.534\%$
-residual) is the leading one-loop assembly with tabulated Bethe
-logarithms, truncated before the one-loop $\alpha(Z\alpha)^5$ term
-(Paper~36), so its residual measures an order truncation, not a basis
-limit; the H~1S polarizability example
+and at $-211$~ppm; a depth-4 chain exists at $+2$~ppm).  The
+H~1S polarizability example
 (depth-3 chain, residual $0$) is consistent with the
 zero-Layer-2-input class for rational-analytic-answer
-observables.
+observables.  The hydrogen Lamb shift is outside the catalogue's
+projection chains: it is a textbook one-loop assembly with tabulated
+Bethe logarithms (Paper~36).
 
 Apart from Remarks~\ref{rem:minimal_presentation} and
 \ref{rem:ee_partial_split}, which report new measurements with
@@ -635,10 +633,12 @@ Paper~33; the physical vertex is Clifford multiplication by a coclosed
 1-form, also Paper~33).\\
 \textbf{Variables introduced:} none (combinatorial labels).\\
 \textbf{Dimension introduced:} dimensionless.\\
-\textbf{Transcendental signature:} $1/(4\pi)$, the normalization of
-spherical harmonics on the unit $S^2$ that the model's angular vertex
-carries (Paper~33: $\Sigma_{l=1} = 1/(4\pi)$ at $n_{\max} = 2$); the
-physical vertex, normalized to volume one on $S^3$, does not carry it.\\
+\textbf{Transcendental signature:} $1/(4\pi)$, a vertex-model
+normalization: the normalization of spherical harmonics on the unit
+$S^2$ that the model's angular vertex carries (Paper~33:
+$\Sigma_{l=1} = 1/(4\pi)$ at $n_{\max} = 2$).  The physical vertex,
+normalized to volume one on $S^3$, does not carry it, so no
+transcendental of the physical promotion is identified.\\
 \textbf{Used in:} Paper~33 (the vertex-model column of its eight-rule
 census), sprint VP-1 (vertex correction calibration).
 
@@ -657,21 +657,24 @@ preserve rationality at the angular level.\\
 \textbf{Used in:} Paper~15 (Level~4), Paper~17 (composed geometry),
 all H$_2$/HeH$^+$/H$_2$O calculations.
 
-\subsection{Drake--Swainson asymptotic subtraction}
+\subsection{Drake--Swainson normalization of Bethe-log sums}
 \label{sec:proj_drake_swainson}
-\textbf{Source:} finite-basis Coulomb-Sturmian pseudostate sum
-$J_v(nl)$ for the Bethe logarithm of an $\ell > 0$ state, where the
-velocity-form sum rule $I_v(nl) = (2Z^4/n^3)\,\delta_{\ell,0}$ vanishes
-for $\ell > 0$.\\
+\textbf{Source:} the Bethe-logarithm spectral sum (the numerator of
+the definition in Paper~36~\S~5.1), evaluated as a finite-basis Coulomb-Sturmian
+pseudostate sum $J_v(n,\ell)$.\\
 \textbf{Target:} the value
 $\ln k_0(n,\ell) = J_v(n,\ell) / D_{\text{drake}}(n,\ell)$ in the uniform
-normalization of the Drake--Swainson table, with
+normalization of the Drake--Swainson table: the sum is divided by
+$2Z^4/n^3$ for every $\ell$.  For $s$-states this denominator equals the
+velocity-form sum rule; for $\ell > 0$ that sum rule vanishes while the
+numerator stays finite, and the same denominator is kept.  The code also
+sums the numerator over initial magnetic substates, which multiplies it
+by $2\ell+1$, so it divides by
 \[
   D_{\text{drake}}(n,\ell) = \frac{2(2\ell + 1)\,Z^4}{n^3};
 \]
-the factor $2\ell+1$ is the code's sum over initial magnetic substates
-(Paper~36~\S~5.1).  For $\ell > 0$ the velocity-form numerator converges
-directly in the basis, so there is no $0/0$.\\
+the factor $2\ell+1$ is that bookkeeping and nothing more
+(Paper~36~\S~5.1).\\
 \textbf{Variables introduced:} none.\\
 \textbf{Dimension introduced:} none; $\ln k_0$ is dimensionless.\\
 \textbf{Transcendental signature:} flow tier (Paper~18 \S~IV).
@@ -680,12 +683,9 @@ transcendental content sits in $J_v$, in the spectral-sum
 logarithms $\ln |\Delta E_m / \mathrm{Ry}|$.\\
 \textbf{Used in:} Paper~36~\S~5 (Bethe logs for 2P at $+2.40\%$ with
 40 functions and $+1.24\%$ with 55, 3D at $+0.07\%$ with 40, versus
-Drake--Swainson 1990 tabulated values).  The combined hydrogen Lamb shift via this projection
-chained with Sturmian and spectral-action gives $-0.39\%$ residual at
-the sweet-spot $N=40$ (transient cancellation; converges to LS-1
-baseline $-3.10\%$ at $N \to \infty$ --- the pre-LS-6a convention,
-superseded by the LS-6a fix at $-0.534\%$, whose residual is not
-attributed; Paper~36).
+Drake--Swainson 1990 tabulated values).  The hydrogen Lamb shift of
+Paper~36 does not use these computed values: it is assembled with the
+tabulated Bethe logarithms.
 
 \subsection{Rest-mass projection}
 \label{sec:proj_restmass}
@@ -795,9 +795,9 @@ follow-up beyond sprint scale.
 
 \subsection{Two-body Dirac / Breit retardation}
 \label{sec:proj_breit_retardation}
-\textbf{Source:} framework-native single-particle Eides~\S~3.2
-self-energy / Lamb-shift bracket on the Sturmian-reparameterized
-Fock graph, valid in the $\lambda_l \ll \lambda_n$ hierarchy where the
+\textbf{Source:} the textbook single-particle one-loop
+self-energy / Lamb-shift bracket of Eides \emph{et al.}\ (Paper~36),
+valid in the $\lambda_l \ll \lambda_n$ hierarchy where the
 $1/M_\text{nucleus}$ recoil expansion is regular.\\
 \textbf{Target:} full two-body Breit / Bethe--Salpeter Hamiltonian for
 the bound state at order $\alpha^4$, retaining all retardation and
@@ -1127,8 +1127,8 @@ dimension as its argument.  The valence reference $E_v$ and the
 core eigenvalues $E_c$ carry energy, but they were already part of the
 spectrum-of-states ledger before the projection was applied.  In this
 sense Phillips--Kleinman is in the same dimensionless class as
-Drake--Swainson asymptotic subtraction (\S\ref{sec:proj_drake_swainson})
---- both are bookkeeping projections that re-organize an already-
+the Drake--Swainson normalization of Bethe-log sums
+(\S\ref{sec:proj_drake_swainson}) --- both are bookkeeping projections that re-organize an already-
 dimensioned quantity rather than introduce a new physical scale.\\
 \textbf{Transcendental signature:} ring-preserving.  No transcendental
 is injected beyond what the source spectrum already carries.  In the
@@ -2321,29 +2321,24 @@ projection operates on the projected vector-photon Hilbert space
 data and does not move the chain across the
 \S~\ref{sec:layer2_boundary} boundary.
 
-This is the \emph{second independence witness} in the
-(no-variable, no-dimension, transcendental-only) corner of the
-variable/dimension/transcendental axis grid.  Until Sprint~2 the only
-witness in that corner was \S~\ref{sec:proj_vector_photon} (vector-photon
-promotion, which introduces $1/(4\pi)$ without any new variable or
-dimension); the gauge-choice projection is its structural sibling.
-Both witnesses operate on the same object (the framework's $U(1)$
-connection) at successive structural steps: vector-photon promotion
-transforms the scalar $1$-cochain into a vector harmonic with
-$(q, m_q)$ labels, and the present projection fixes a specific gauge
-representative of the resulting connection before propagators are
-computed.  The fact that the two witnesses are \emph{both
-gauge-related} sharpens the V/D-correlation observation of
-\S~\ref{sec:dictionary} and \S~\ref{sec:axiomatization}: the
-transcendental-only corner of the axis grid is the gauge sector of the
-framework.  It is not an accident that the only two projections
-preserving both V and D while moving the transcendental axis are
-gauge-construction steps; the structural content of that corner is
-``add transcendental content to the gauge sector without adding any
-physical variable or dimension.''
+The projection is \emph{not} a witness of the (no-variable,
+no-dimension, transcendental-only) corner of the
+variable/dimension/transcendental axis grid.  It preserves V and D, but
+the transcendental axis has not been seen to move: the one factor
+identified in Coulomb gauge, $1/(4\pi)$, is the vertex model's
+unit-$S^2$ normalization, which the physical vertex does not carry
+(Paper~33), and no Lorenz- or Feynman-gauge content has been computed.
+Vector-photon promotion (\S~\ref{sec:proj_vector_photon}) carries the
+same $1/(4\pi)$ and the same caveat, so the corner is not the gauge
+sector of the framework.  The corner's occupants in the dictionary are
+volume factors of the $k = 0$ volume slot: the base-sphere factor
+$\pi = \mathrm{Vol}(S^2)/4$ of the Hopf bundle (\S~\ref{sec:proj_hopf}) and the
+$2\pi = \mathrm{Vol}(S^1)$ of the Euclidean time circle under Wick
+rotation (\S~\ref{sec:proj_wick_rotation}, counting its binary signature
+index, like a gauge selection, as no physical variable).
 
 Categorically distinct from \S~\ref{sec:proj_vector_photon} despite
-the shared axis pattern: vector-photon promotion is the structural
+the shared V/D pattern: vector-photon promotion is the structural
 \emph{construction} of the gauge sector (it builds the vector-harmonic
 photon from a scalar $1$-cochain), while the gauge-choice projection
 is the \emph{selection} of a representative within the already-built
@@ -2364,21 +2359,18 @@ contracts against.  Both are necessary to reach a computable
 amplitude; both preserve the V/D axes; neither introduces a Layer-2
 input.
 
-Sibling in the calibration tier of Paper~18: the $1/(4\pi)$
+Relation to the calibration tier of Paper~18: the $1/(4\pi)$
 of the vertex model is the normalization of spherical harmonics on the
-unit $S^2$ (Paper~33), which the physical vertex does not carry.
-Under the master-Mellin reading of Paper~32~\S~VIII and
-Paper~18~\S~III.7, this calibration $\pi$ is the M1 sub-mechanism
-signature ($\mathrm{Vol}(S^2)/4$, the $k = 0$ volume slot).  A
-Lorenz-gauge calculation, if performed, would produce different
-intermediate $\pi$-content (retardation kernels rather than static
-Hopf-base normalisations) but would necessarily land on the same
-physical observable.  The gauge-choice projection therefore sits at
-the interface of the framework's gauge construction
-(\S~\ref{sec:proj_vector_photon} +
-\S~\ref{sec:proj_wilson}) and the framework's transcendental taxonomy
-(Paper~18), and it is the structural step at which a Layer-2 chain
-commits to a specific way of accumulating $\pi$ at each loop.
+unit $S^2$ (Paper~33), which the physical vertex does not carry, so it
+is not a per-loop factor of Coulomb gauge.  A Lorenz-gauge calculation,
+if performed, would produce different intermediate $\pi$-content
+(retardation kernels) but would necessarily land on the same physical
+observable.  Whether the choice of gauge changes the intermediate
+transcendental content of a framework computation is therefore open;
+the projection sits at the interface of the framework's gauge
+construction (\S~\ref{sec:proj_vector_photon} +
+\S~\ref{sec:proj_wilson}) and the transcendental taxonomy (Paper~18)
+without, so far, any measured transcendental of its own.
 
 Open question (flagged for a future sprint): a serious test of the
 gauge-choice projection would compute a sample observable (e.g.\ the
@@ -2389,10 +2381,10 @@ and verify gauge invariance to the precision of the framework
 hyperfine contact terms).  If gauge invariance fails at framework
 precision, the failure localises a specific Layer-2 calibration
 content that the Coulomb-gauge construction is silently encoding;
-if it succeeds, the gauge-choice projection is verified as a
-genuine independence witness in the sense of
-Observation~\ref{obs:axes_correlated} rather than a tautological
-relabelling.
+if it succeeds and the intermediate transcendental content differs
+between the gauges, the gauge-choice projection becomes a witness of
+the transcendental-only corner in the sense of
+Observation~\ref{obs:axes_correlated} rather than a relabelling.
 
 \subsection{Wick rotation / signature change}
 \label{sec:proj_wick_rotation}
@@ -3162,10 +3154,12 @@ $\mathbb{Q}[\sqrt{2k{+}1}]_k$ \\
 Wigner $D$ rotation & $\vec{R}_{AB}$ & length &
 $\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}]$ \\
 Wilson plaquette & $\beta = 1/g^2$ & dimensionless & SU(2) Haar \\
-Vector-photon promotion & none & dimensionless & $1/(4\pi)$ per loop \\
+Vector-photon promotion & none & dimensionless & $1/(4\pi)$, a
+vertex-model normalization (absent from the physical vertex) \\
 Molecule-frame hypersph. & $R$ & length & piecewise-smooth in $R$ \\
-Drake--Swainson asymptotic subtraction & none & dimensionless &
-flow tier; $D_{\text{drake}} = 2(2\ell+1)Z^4/n^3$ rational \\
+Drake--Swainson normalization of Bethe-log sums & none & dimensionless &
+rational normalization $2Z^4/n^3$ (code: $2(2\ell+1)Z^4/n^3$); flow-tier
+logarithms sit in the sum it normalizes \\
 Rest-mass projection & $m$ & mass &
 \textit{trivial} (ring-preserving for $m^2 \in \mathbb{Q}$) \\
 Observation / temporal-window & $\beta$ (or $T = 1/\beta$) & time &
@@ -3203,9 +3197,9 @@ algebraic-implicit at Level~3 (over $\mathbb{Q}(\pi,\sqrt{2})$);
 piecewise-smooth at Level~4 \\
 Gauge choice (Coulomb / Lorenz / Feynman) &
 none (selection of representative) & preserves &
-gauge-dependent at intermediate-propagator level
-($1/(4\pi)$ per loop in Coulomb gauge = M1 volume slot);
-gauge-invariant on physical observables (Ward identity) \\
+gauge-dependent at intermediate-propagator level in QED; none measured
+in the framework (the Coulomb-gauge $1/(4\pi)$ is the vertex model's
+normalization); gauge-invariant on physical observables (Ward identity) \\
 Wick rotation / signature change &
 signature (Euclidean $\leftrightarrow$ Lorentzian; binary discrete
 choice) & preserves &
@@ -3223,8 +3217,8 @@ construction that introduces specific physical content into Layer~1
 graph data.  The fourth column is the transcendental signature in
 the sense of Paper~18; the second and third columns are the new
 axes proposed by this paper.  The thirteenth row (Drake--Swainson
-asymptotic subtraction) was added in sprint LS-4 for the $\ell > 0$
-Bethe logarithms; the fourteenth and
+normalization of Bethe-log sums) was added in sprint LS-4 for the
+$\ell > 0$ Bethe logarithms; the fourteenth and
 fifteenth rows (rest-mass and observation/temporal-window) were
 added in sprint KG / Paper~35 (May~2026) to resolve the
 mass-vs-observation ambiguity that had been bundled with other
@@ -3247,9 +3241,8 @@ structures, closing the textbook-completeness gap.  Sprint~2
 (2026-05-15) added the final three rows (gauge choice
 Coulomb/Lorenz/Feynman; Wick rotation / signature change; apparatus
 identity / state-side reduction) as axis-completeness additions:
-gauge choice is the second independence witness in the
-transcendental-only corner alongside vector-photon promotion, Wick
-rotation promotes the Bisognano--Wichmann reading from a \S~VIII
+gauge choice preserves V and D with no transcendental measured in the
+framework, Wick rotation promotes the Bisognano--Wichmann reading from a \S~VIII
 open-question candidate to a named §III slot, and apparatus identity
 opens the state-side complement of the dictionary (PSLQ-disjoint
 from the master Mellin engine per Sprint TD Track~5).}
@@ -3265,7 +3258,8 @@ and each projection's transcendental signature is a specific Paper~18
 tier:
 \begin{itemize}\setlength\itemsep{0pt}
 \item Calibration $\pi^{2k}$ tier $\leftrightarrow$ spectral action /
-Hopf bundle / vector-photon promotion projections.
+Hopf bundle projections (vector-photon promotion carries only the
+vertex model's $1/(4\pi)$ normalization).
 \item Spinor-intrinsic $(Z\alpha)$ tier $\leftrightarrow$
 Camporesi--Higuchi spinor lift.
 \item Odd-$\zeta$ tier $\leftrightarrow$ Camporesi--Higuchi spinor
@@ -3276,9 +3270,10 @@ with Camporesi--Higuchi at quarter-integer Hurwitz shift.
 or non-trivial bound-state coupling.
 \item Combinatorial-rational tier $\leftrightarrow$
 Wigner $3j$ / $D$ alone (no projection beyond Layer~1).
-\item Flow tier (Paper~18 \S~IV) $\leftrightarrow$ Drake--Swainson
-asymptotic subtraction.  The flow content sits in the logarithms
-$\ln|\Delta E_m/\mathrm{Ry}|$ of the Bethe-logarithm spectral sum.
+\item Flow tier (Paper~18 \S~IV) $\leftrightarrow$ the Bethe-logarithm
+spectral sum that the Drake--Swainson normalization divides.  The flow
+content sits in the logarithms $\ln|\Delta E_m/\mathrm{Ry}|$ of that
+sum; the normalization itself is rational.
 \item \emph{Trivial / ring-preserving tier} $\leftrightarrow$
 rest-mass projection.  The mass projection introduces a parameter
 without introducing a transcendental: the bare-graph algebraic
@@ -3291,16 +3286,17 @@ Klein-Gordon spectrum on $S^3 \times \mathbb{R}$.
 $\leftrightarrow$ observation / temporal-window projection.  This is
 the categorical home of $\pi$ in the framework: the $\pi$ in the
 spectral and temporal observables catalogued here traces to one of (a)~an M1 ($k = 0$ volume slot) volume factor (e.g.\
-$\mathrm{Vol}(S^3) = 2\pi^2$, or the vector-photon $1/(4\pi)$
-unit-$S^2$ Weyl normalisation), (b)~spectral-action even-zeta content
+$\mathrm{Vol}(S^3) = 2\pi^2$, or the vertex model's $1/(4\pi)$
+unit-$S^2$ normalization), (b)~spectral-action even-zeta content
 $\pi^{2k}\cdot\mathbb{Q}$ at integer~$s$ (the $\sqrt{\pi}$ of the
 heat-trace coefficients is a normalisation removed by $\Gamma(s)$, not
 ring content), (c)~the M3 vertex-parity Hurwitz / Dirichlet-$L$
 channel (\S~\ref{sec:proj_spinor} with vertex restriction), or
 (d)~a temporal Matsubara $2\pi/\beta$ (this projection);\ $\pi$ also
 enters through embedding-tier routes outside this list (e.g.\ the
-Feynman-parameter denominators of the Lorenz-gauge computation, and the
-genus-one elliptic periods of the embedding tier).  The
+genus-one elliptic periods of the embedding tier; a covariant-gauge
+computation would add Feynman-parameter denominators, but none has
+been performed in the framework).  The
 Casimir constant on $S^3 \times S^1_\beta$ is the cleanest
 illustration: spatial-only Casimir is $1/240$ (rational, no $\pi$);
 adding $S^1_\beta$ injects $\pi$ exactly through the Matsubara
@@ -3341,22 +3337,25 @@ by stereographic and molecule-frame hyperspherical projections.
 The three Sprint~2 additions
 (\S\S~\ref{sec:proj_gauge_choice}--\ref{sec:proj_apparatus_identity})
 further strengthen the V/D-correlation observation: gauge choice and
-Wick rotation both preserve V and D while moving the transcendental
-axis (joining vector-photon promotion in the (no-variable,
-no-dimension, transcendental-only) corner --- giving \emph{three}
-independent witnesses there, all gauge-related or signature-related;
-the structural content of that corner is the gauge-and-signature
-sector of the framework), and apparatus identity introduces $\rho$ as
-the first state-side variable while preserving dimension.  The
-transcendental axis remains the only genuinely independent axis; V/D
-are still perfectly correlated.  The three intra-nuclear projections of
+Wick rotation both preserve V and D, and apparatus identity introduces
+$\rho$ as the first state-side variable while preserving dimension.
+Of these, only Wick rotation moves the transcendental axis
+($2\pi = \mathrm{Vol}(S^1)$); gauge choice has no transcendental
+measured in the framework (\S~\ref{sec:proj_gauge_choice}).  The
+(no-variable, no-dimension, transcendental-only) corner is witnessed by
+volume factors of the $k = 0$ volume slot --- the base-sphere factor
+$\mathrm{Vol}(S^2)/4$ of the Hopf bundle and the Wick-rotation time
+circle --- not by the gauge sector: the
+$1/(4\pi)$ of vector-photon promotion is a vertex-model normalization
+(Paper~33).  The transcendental axis remains the only genuinely
+independent axis; V/D are still perfectly correlated.  The three intra-nuclear projections of
 \S~\ref{sec:proj_charge_density}, \S~\ref{sec:proj_magnetization_density},
 and \S~\ref{sec:proj_tensor_multipole} preserve this V/D
 correlation: each adds an intra-nuclear focal length together with
 its associated dimension ($[L]$, $[L]$, $[L]^2$ respectively).  The transcendental axis is the only one that admits an
-independence witness --- vector-photon promotion (\S~\ref{sec:layer2},
-projection~11) introduces $1/(4\pi)$ without introducing any new
-variable or dimension.  This is the structural content of
+independence witness --- the Hopf bundle (\S~\ref{sec:proj_hopf},
+projection~2) introduces $\pi = \mathrm{Vol}(S^2)/4$ without
+introducing any new variable or dimension.  This is the structural content of
 Section~\ref{sec:axiomatization} (Theorem~3 composition table):
 of the three axes, only the transcendental axis is genuinely
 independent of the other two.  The sixteenth projection
@@ -3418,9 +3417,8 @@ Vector-photon promotion & none & dim'less & none & pure \\
 Mol-frame hyperspherical & $R$ & $[L]$ & new $[L]$ scale
 (internuclear distance; same physical length as $|\vec{R}_{AB}|$) &
 scale-extension \\
-Drake--Swainson & $K$ (cancels) & $[E]$ & transient $[E]$ scale
-(cancels in $\beta_\text{low}(K) + \beta_\text{high}(K)$) &
-scale-extension (transient) \\
+Drake--Swainson normalization & none & dim'less & none (rational
+normalization $2Z^4/n^3$ of a dimensionless sum) & pure \\
 Rest-mass & $m$ & $[M]$ & first $[M]$ scale beyond foundational
 $m_e = 1$; one projection per particle species &
 scale-extension (new base) \\
@@ -3493,11 +3491,9 @@ nuclear quadrupole moment $Q_N$ at rank-2 leading; higher-rank
 multipoles ($L \geq 3$) follow at higher $[L]^L$.  Categorically
 distinct from scalar $[L]$ injections: the operator is tensorial
 and requires $l \geq 1$ on the electronic side.
-\item $[E]$: \emph{four} projections.  Fock or Bargmann--Segal
+\item $[E]$: \emph{three} projections.  Fock or Bargmann--Segal
 anchors the foundational energy (Ry or $\hbar\omega$); spectral
-action introduces UV cutoff $\Lambda$; Drake--Swainson introduces a
-transient subtraction scale $K$ (which cancels in the regularized
-result); two-body Breit retardation introduces $\alpha^4 \cdot
+action introduces UV cutoff $\Lambda$; two-body Breit retardation introduces $\alpha^4 \cdot
 \mathrm{Ry}$ as a correction-energy scale, where $\alpha^4$ is
 dimensionless and Ry is foundationally anchored.
 \item $[M]$: \emph{one} projection (rest-mass).  Each particle
@@ -3521,15 +3517,15 @@ foundational atomic-units anchor.  After the addition of the three
 intra-nuclear projections (charge-density, magnetization-density,
 tensor multipole), the asymmetry is no longer symmetric: $[L]$
 admits \emph{six} scalar instances plus one rank-2 tensor instance,
-while $[E]$ admits four.  The framework records more length scales
+while $[E]$ admits three.  The framework records more length scales
 (atomic, internuclear, polyatomic, and three intra-nuclear
 distribution scales) than energy scales (Rydberg, UV cutoff,
-multi-loop subtraction, two-body Breit correction).  The structural
+two-body Breit correction).  The structural
 reason: every distinct spatial structure introduces an independent
 focal length because different intra-nuclear and intra-molecular
 geometries enter different Hamiltonian operators with different
 selection rules; spectral content has fewer distinct roles
-(foundational, regulator, subtraction, correction).  The conjugate
+(foundational, regulator, correction).  The conjugate
 pair $[L] \leftrightarrow [E]$ remains the only multi-instance
 axis, but $[L]$ now dominates: physics has more places to put
 length scales than to put energy scales.
@@ -3611,8 +3607,8 @@ anchored instances would refine the structural prediction.
 
 This decomposition sharpens
 Remark~\ref{rem:vd_correlation}: V--D correlation holds at the
-compound dimension level, but at the base-unit level $[L]$ and
-$[E]$ each admit four instances while $[M]$, $[T]$ admit one each
+compound dimension level, but at the base-unit level $[L]$ admits
+six scalar instances and $[E]$ three, while $[M]$, $[T]$ admit one each
 and $[Q]$ enters only as an integer label.  The base-unit
 decomposition is a finer falsifiable test than the compound
 dimension alone: an observable that depends on multiple length
@@ -3783,11 +3779,12 @@ cross-register recoil) & Fock $\circ$ spectral action $\circ$ rest-mass
 projection $\circ$ cross-register $V_{eN}$ (Roothaan) & $\alpha, m_e,
 m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
 $-0.25$ ppm vs Mu-MASS \\
-Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb shift $1047.63$ MHz (framework one-loop
-QED with full Uehling, sprint precision-catalogue 2026-05-08) &
-Fock $\circ$ spectral action $\circ$ Sturmian $\circ$ rest-mass projection
+Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb shift $1047.63$ MHz (the Paper~36
+leading one-loop assembly with full Uehling, at the muonium reduced
+mass; sprint precision-catalogue 2026-05-08) &
+textbook assembly (tabulated Bethe logarithms) $\circ$ rest-mass projection
 & $\alpha, m_e, m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
-$-0.6\%$ vs Mariam 1982 experiment $1054(22)$ MHz (a theory comparison is withdrawn) \\
+$+0.04\%$ vs Mu-MASS~\cite{ohayon2022} $1047.2(2.3)(1.1)$ MHz; not attributed \\
 Bethe log $\ln k_0(2S) = 2.786$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
 dimensionless & calibration & $-0.92\%$ \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
@@ -3844,12 +3841,7 @@ $\circ$ Fock & $Z$ & dimensionless & flow & $+2.4\%$ at $N=40$ \\
 Bethe log $\ln k_0(3P) = -0.0406$ (LS-4) & Drake--Swainson $\circ$ Sturmian
 $\circ$ Fock & $Z$ & dimensionless & flow & $+6.3\%$ at $N=40$ \\
 Bethe log $\ln k_0(3D) = -0.005236$ (LS-4) & Drake--Swainson $\circ$ Sturmian
-$\circ$ Fock & $Z$ & dimensionless & flow & $-0.24\%$ at $N=40$ \\
-Lamb shift $1054$ MHz (LS-4 N=40 sweet spot) & Fock $\circ$ spectral action
-$\circ$ Sturmian $\circ$ Drake--Swainson & $Z, \alpha$ & energy & calibration
-$+$ flow & $-0.39\%$ (T$+$A cancellation) \\
-Lamb shift $1029$ MHz (LS-3) & Fock $\circ$ spectral action $\circ$
-Sturmian (acc.) & $Z, \alpha$ & energy & calibration & $-2.77\%$ (T$+$A)\\
+$\circ$ Fock & $Z$ & dimensionless & flow & $+0.07\%$ at $N=40$ \\
 $\mu$H 2$S$--2$P$ Lamb shift $202.17$ meV (framework $+$ literature,
 Sprint MH Track A) & Fock $\circ$ spectral action $\circ$ Sturmian
 $\circ$ Drake--Swainson $\circ$ rest-mass projection ($m_e \to m_\mu$)
@@ -3917,10 +3909,9 @@ Theorem~\ref{thm:dimensional_consistency}'s signature consistency is
 a type-level statement: chains that produce the same signature can
 produce wildly different numerical values.  For example, the
 hydrogen Bohr level $E_n = -Z^2/(2n^2)$ (Fock alone, signature
-$\{$energy, no~$\pi\}$) and the hydrogen Lamb shift (Fock $+$
-spectral action $+$ Sturmian $+$ Drake--Swainson, signature
-$\{$energy, $\pi\}$) both have dimension $\{$energy$\}$, yet differ
-by 13 orders of magnitude.  The Layer-2-presence bound of
+$\{$energy, no~$\pi\}$) and the $2S$ Uehling shift (entered $\Pi$
+$\circ$ Fock, signature $\{$energy, $\pi\}$) both have dimension
+$\{$energy$\}$, yet differ by seven to eight orders of magnitude.  The Layer-2-presence bound of
 \S~\ref{sec:prediction} addresses the value-level question;
 signature arithmetic addresses only the type-level question.
 \end{remark}
@@ -4042,40 +4033,21 @@ monotonic: $+2.4\%$ at $N=40 \to +1.24\%$ at $N=55$. \\
 Bethe logarithm $\ln k_0(3P) = -0.0406$ & Drake--Swainson $\circ$
 Sturmian $\circ$ Fock & $+6.3\%$ at $N=40$ & T & Slowest-converging
 $\ell>0$ case; sprint LS-4. \\
-Lamb shift $1057.85$ MHz & Fock $\circ$ spectral action $\circ$
-Sturmian (acc.) $\circ$ (Drake--Swainson, l=1) & $-0.39\%$ at LS-4
-sweet spot $N=40$ & T cancels A & At $N=40$, $T_{2S} = +28.8$~MHz
-truncation cancels $A = -32.78$~MHz one-loop ceiling; converges to
-LS-1 baseline $-3.10\%$ at $N\to\infty$ (pre-LS-6a convention;
-superseded by LS-6a at $-0.534\%$).  Sprint LS-4. \\
-Lamb shift $1057.85$ MHz (LS-3 baseline) & Fock $\circ$ spectral action
-$\circ$ Sturmian (acc.) & $-2.77\%$ (LS-3 prediction $1029$ MHz) &
-\textbf{C} (resolved by LS-6a) $+$ A & Sprint LS-6a (May 2026)
-re-derived the same one-loop physics in the Eides \S~3.2 canonical
-convention and found the LS-1 implementation had inadvertently
-subtracted the Uehling kernel constant from the canonical $10/9$ SE
-coefficient (Uehling already enters separately as a VP contribution).
-The convention fix supersedes this row: see the LS-6a row below for
-the clean result. The $\sim +32.78$~MHz residual that had been
-classified A is structurally a $\sim +27.13$~MHz one-loop convention
-correction (\textbf{C} resolved), leaving a $\sim +5.65$~MHz residual
-that is not attributed (Paper~36). \\
-Lamb shift $1057.85$ MHz (LS-6a, Eides \S~3.2 convention) & Fock
-$\circ$ spectral action $\circ$ Sturmian (acc.) $\circ$ (Drake--Swainson,
-$\ell=1$) & $-0.534\%$ (LS-6a prediction $1052.19$~MHz) & residual not
-attributed (one-loop $\alpha(Z\alpha)^5$ omitted) & Eides \S~3.2 canonical one-loop
-SE convention.  Convention shift from LS-1: $+27.13$~MHz, exactly
-$(4/15) \cdot \alpha^3 Z^4 / (\pi n^3) \cdot \text{Ha-to-MHz}$ at
-$n=2$, $Z=1$ (the Uehling kernel constant $10/9 - 38/45 = 4/15$).
-Components: SE 2$S_{1/2}$ $+1066.44$~MHz (Bethe $+953.40$~MHz +
-canonical $10/9$ piece $+113.04$~MHz); VP 2$S_{1/2}$ $-27.13$~MHz;
-SE 2$P_{1/2}$ $-12.88$~MHz; VP 2$P_{1/2}$ $0$.  $5.8\times$
-reduction in absolute error vs the LS-1 one-loop ceiling
-($-32.78$~MHz); vs LS-3 ($-28.85$~MHz) the reduction is $5.1\times$.
-(Baseline label corrected 2026-08-28: the factor $5.8$ is the ratio
-to LS-1, not to LS-3.)  The residual is not attributed.  An LS-7 decomposition into about $+1.20$~MHz of multi-loop QED and about $+4.4$~MHz of non-loop physics is withdrawn (/qa group5, 2026-11-07): its itemized entries reached only about $70\%$ of the residual, it omitted the one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx 9.29$, about $+6.9$~MHz on 2S, by itself larger than the residual), and its ``hyperfine averaging'' row had no source, since the measured interval is defined between hyperfine centroids (Paper~36).  Sprint provenance:
-\texttt{debug/ls6a\_eides\_convention\_memo.md},
-\texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
+Lamb shift $1057.85$ MHz (leading one-loop assembly, Paper~36) &
+textbook assembly: one-loop expressions of Eides \emph{et al.}\ with
+tabulated Drake--Swainson Bethe logarithms; no GeoVac projection enters
+& $-0.534\%$ (assembly $1052.19$~MHz) & residual not
+attributed (one-loop $\alpha(Z\alpha)^5$ omitted) & Components:
+SE 2$S_{1/2}$ $+1066.44$~MHz (Bethe $+953.40$~MHz + canonical $10/9$
+piece $+113.04$~MHz); VP 2$S_{1/2}$ $-27.13$~MHz; SE 2$P_{1/2}$
+$-12.88$~MHz; VP 2$P_{1/2}$ $0$.  An earlier assembly used the
+constant $38/45$ in place of $10/9$ and double-counted the Uehling
+term; the correction is exactly $(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha
+$= +27.13$~MHz (Paper~36).  The residual is not attributed: the
+one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx 9.29$, about
+$+6.9$~MHz on 2S) is by itself larger than it, and an earlier
+decomposition into multi-loop and non-loop pieces is withdrawn
+(Paper~36). \\
 Two-loop SE prefactor $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ on
 Dirac-$S^3$ (LS-7, structural) & Fock $\circ$ spectral action
 $\circ$ Sturmian (acc.) $\circ$ Camporesi--Higuchi $\circ$ iterated
@@ -4154,9 +4126,9 @@ leading Zemach, Sprint MH Track B) & rest-mass projection $\circ$
 spinor $\circ$ Fermi contact $\circ$ Fock; magnetization-density
 Layer-2 input $r_Z = 1.045$~fm & $-7689$ ppm vs Krauth full theory
 182.725 meV & A (leading one-loop order only) + S (LS-8a wall, muonic regime)
-& Dominant residual is electron-VP (Uehling) in the muonic potential,
-the leading muonic QED correction (Eides Tab.~7.4 / Karshenboim 2005:
-$\Delta_\text{el-VP} \approx +1.5$ meV).  Same LS-8a wall as HF-5; in
+& Dominant residual is expected to be electron-VP (Uehling) in the
+muonic potential, the leading muonic QED correction (the size of that
+correction is not sourced here).  Same LS-8a wall as HF-5; in
 muonic atoms the electron loop is enhanced because the muonic Bohr
 radius probes the electron Compton wavelength.  Inner-factor input
 data tier per Paper~18 \S~IV.6.  Sprint MH Track B, 2026-05-08. \\
@@ -4285,27 +4257,29 @@ in muonic potential.  Plus literature-input total: $-0.10\%$ vs CREMA.
 (rather than contact-density approximation) handles the muonic
 $\beta = 2 m_e a_\mu = 1.475$ regime where Bohr radius $\sim$ electron
 Compton wavelength.  Sprint MH Track A, 2026-05-08. \\
-Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb $1047.63$ MHz vs Mariam~1982 experiment
-$1054(22)$ MHz & Fock $\circ$ spectral action $\circ$ Sturmian $\circ$
-rest-mass projection & $-0.6\%$ (within $\pm 22$ MHz exp uncertainty)
-& A & $-0.6\%$ residual against Mariam, within the 1982-era
-experimental uncertainty.  A comparison with a muonium theory value
+Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb $1047.63$ MHz vs Mu-MASS experiment
+$1047.2(2.3)(1.1)$ MHz~\cite{ohayon2022} & textbook assembly (Paper~36, tabulated Bethe logarithms)
+$\circ$ rest-mass projection & $+0.04\%$ (within the experimental
+uncertainty) & A & The leading one-loop assembly at the muonium reduced
+mass; it omits the one-loop $\alpha(Z\alpha)^5$ term and recoil, each
+larger than the $+0.4$~MHz difference, so the agreement is not
+attributed.  A comparison with a muonium theory value
 attributed to Karshenboim~2005 is withdrawn: its figures could not be
 located in that source (entry
 \S~\ref{sec:conv_karshenboim_recoil}).
 Sprint precision-catalogue, 2026-05-08. \\
 He$^+$ 2$S_{1/2}$-2$P_{1/2}$ Lamb $14041.13(17)$ MHz (van
-Wijngaarden--Holuj--Drake 2000) & Fock $\circ$ spectral action $\circ$
-Sturmian $\circ$ (Drake--Swainson, $\ell=1$) $\circ$
-\S\ref{sec:proj_charge_density} & $-1.29\%$ (framework $+$ Drake-Yan
-Layer-2 lit total $13\,859.58$ MHz; framework-native $13\,841.11$ MHz at
+Wijngaarden--Holuj--Drake 2000) & textbook assembly (Paper~36,
+tabulated Bethe logarithms) $\circ$
+\S\ref{sec:proj_charge_density} & $-1.29\%$ (assembly $+$ Drake-Yan
+Layer-2 lit total $13\,859.58$ MHz; assembly alone $13\,841.11$ MHz at
 $-1.42\%$) & A & \textbf{Z-scaling test of the Paper~36
-one-loop assembly (Z=1 $\to$ Z=2)}.  Framework's projection-chain machinery $Z$-portable:
-three Z-scaling structural tests pass (Lamb$_\text{SE}$ ratio $13.21$
+one-loop assembly (Z=1 $\to$ Z=2)}.  The implementation is $Z$-portable:
+three Z-scaling tests pass (Lamb$_\text{SE}$ ratio $13.21$
 matches Eides bracket prediction $13.18$; Lamb$_\text{VP}$ ratio $15.71$
 against $Z^4 = 16$ contact-density (kernel-mixed, see autopsy); Lamb$_\text{FNS}$ ratio $63.60$
 match to $0.12\%$ against $Z^4 \times (r_E({}^4\text{He})/r_p)^2 = 63.52$).  The
-$-1.42\%$ framework-native residual is structurally the Z-amplified analog
+$-1.42\%$ assembly residual is structurally the Z-amplified analog
 of Paper~36's $-0.534\%$ at Z=1: the $\alpha^3$ Eides-bracket truncation
 amplifies by $Z^4 \times \ln$-factor to $\sim -200$ MHz at Z=2.  Dominant
 Layer-2 input is Drake--Yan 1992 $\alpha(Z\alpha)^6 \ln(Z\alpha)^{-2}$
@@ -4829,17 +4803,13 @@ collected separately in \S~\ref{sec:convention_exposures}.
 Component & MHz & Projection chain & Status \\
 \midrule
 SE 2$S_{1/2}$ (Bethe + Eides 10/9) & $+1066.44$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
-\S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_drake_swainson}
-& FN \\
+textbook (Eides one-loop; tabulated Bethe log) & TA \\
 VP 2$S_{1/2}$ (Uehling) & $-27.13$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action} & FN \\
+textbook (Uehling $-4/15$) & TA \\
 SE 2$P_{1/2}$ & $+12.88$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
-\S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_spinor}
-$\circ$ \S\ref{sec:proj_drake_swainson} & FN \\
+textbook (Eides one-loop; tabulated Bethe log) & TA \\
 VP 2$P_{1/2}$ & $0$ &
-\S\ref{sec:proj_fock} (parity zero) & FN \\
+textbook (zero at this order) & TA \\
 FNS $r_p$ contribution & $+0.138$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \textbf{\S\ref{sec:proj_charge_density}} $+$ Layer-2 $r_p$ & L2 \\
@@ -4860,20 +4830,23 @@ $2S$ value is $+0.138$~MHz at $r_p = 0.8409$~fm, an $n^3 = 8$ factor
 smaller.  The error was visible inside this paper: the He$^+$ autopsy
 (\S\ref{sec:autopsy_he_plus_lamb}) uses a Lamb$_\text{FNS}$ ratio of
 $63.599$, which implies an H reference of $8.7913/63.599 = 0.13823$~MHz.
-Each component is
-tagged to its \S\ref{sec:layer2} projection chain.  All entries are
+The four leading one-loop rows are the textbook assembly of Paper~36:
+the one-loop expressions of Eides \emph{et al.}\ with the tabulated
+Drake--Swainson Bethe logarithms, and no GeoVac projection enters them
+($S^3$ never enters the number; the Coulomb-Sturmian basis of Paper~36
+is a numerical device for computing Bethe logarithms, not used here).
+All entries are
 contributions to the $2S_{1/2}-2P_{1/2}$ splitting: the $2P_{1/2}$
 self-energy is a $-12.88$~MHz level shift, entering the splitting as
-$+12.88$~MHz.  Status: FN
-$=$ framework-native; L2 $=$ Layer-2 input.  Source memo:
+$+12.88$~MHz.  Status: TA $=$ textbook assembly; L2 $=$ Layer-2 input.  Source memo:
 \texttt{debug/calc\_track\_LAR\_lamb\_autopsy\_memo.md}.}
 \label{tab:autopsy_lamb}
 \end{table}
 
-\textbf{Framework-native subtotal:} $+1052.19$ MHz, the leading one-loop
+\textbf{One-loop subtotal:} $+1052.19$ MHz, the leading one-loop
 assembly ($-0.534\%$).  An earlier version of this table also listed an
 ``$\alpha^5$ multi-loop QED'' row of $+1.20$~MHz and a ``hyperfine
-averaging'' row of $\sim +5.00$~MHz, giving a framework-native subtotal of
+averaging'' row of $\sim +5.00$~MHz, giving a subtotal of
 $+1057.19$~MHz ($99.9\%$); both rows are withdrawn (/qa group5,
 2026-11-07): the first came from the withdrawn LS-7 decomposition, and the
 second had no source, since the measured interval is defined between
@@ -4882,10 +4855,11 @@ hyperfine centroids.  The one-loop $\alpha(Z\alpha)^5$ term
 listed terms do not form a complete budget and the residual is not
 attributed (Paper~36).
 
-\textbf{Structural reading.}  The autopsy tags each listed component to its
-projection chain; FNS is stated in projection-chain language rather than as
-a black-box external constant.  A complete order-by-order budget is owed
-before the components can be compared with the measurement.
+\textbf{Structural reading.}  The leading one-loop components carry no
+GeoVac projection chain; only the FNS and recoil rows are stated in
+projection-chain language, as Layer-2 inputs.  A complete order-by-order
+budget is owed before the components can be compared with the
+measurement.
 
 \subsubsection{Hydrogen 21~cm hyperfine autopsy}
 \label{sec:autopsy_21cm}
@@ -5258,7 +5232,7 @@ Convention $E(2S_{1/2}) - E(2P_{1/2}) > 0$ matches Paper~36 normal-H.
 
 The He$^+$ Lamb shift is the cleanest $Z$-scaling test of the Paper~36
 one-loop assembly (\S\ref{sec:autopsy_lamb}): identical lepton
-(electron), identical projection chains, only the nuclear charge $Z=2$
+(electron), identical assembly, only the nuclear charge $Z=2$
 and the nuclear input parameters $m_\alpha = 7294.30\,m_e$, $r_E({}^4\text{He})
 = 1.6755$ fm change.  ${}^4$He has $I=0$, so the entire
 \S\ref{sec:proj_magnetization_density} channel is identically zero ---
@@ -5271,10 +5245,10 @@ to $\sim$ppm and the full Uehling kernel matches contact form at 0.5\%.
 \centering\small
 \caption{Five-component Roothaan decomposition of the He$^+$
 2$S_{1/2}$--2$P_{1/2}$ Lamb shift (normal-H convention
-$E(2S_{1/2}) - E(2P_{1/2})$).  The framework-native subtotal
-$+13\,841.11$ MHz comes from the same projection-chain machinery that
-closed the H Lamb shift (\S\ref{sec:autopsy_lamb}) with $Z = 2$
-substituted throughout: Bohr-Fock Dirac (zero by 2$S_{1/2}=2P_{1/2}$
+$E(2S_{1/2}) - E(2P_{1/2})$).  The subtotal $+13\,841.11$ MHz
+(components 1--4) is the textbook one-loop assembly of the H Lamb shift
+(\S\ref{sec:autopsy_lamb}; Paper~36), in which no GeoVac projection
+enters the one-loop terms, with $Z = 2$ substituted throughout: Bohr-Fock Dirac (zero by 2$S_{1/2}=2P_{1/2}$
 degeneracy), one-loop self-energy via Eides Sec.~3.2 bracket, one-loop
 vacuum polarization via full Uehling kernel, and Foldy-Friar finite
 nuclear size via \S\ref{sec:proj_charge_density}.  The $-200$~MHz
@@ -5292,12 +5266,11 @@ Component & Value (MHz) & Projection chain & Status \\
 1.~Bohr-Fock Dirac baseline & $+0.0000$ &
 \S\ref{sec:proj_fock} & FN (zero by Dirac 2$S_{1/2}=2P_{1/2}$ degeneracy) \\
 2.~One-loop SE (Eides Sec.~3.2 bracket) & $+14\,258.5252$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian} $\circ$
-\S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_drake_swainson}
-& FN ($\alpha^3 Z^4$ truncation) \\
+textbook (Eides one-loop; tabulated Bethe logs)
+& TA ($\alpha^3 Z^4$ truncation) \\
 3.~One-loop VP (full Uehling kernel) & $-426.2096$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action}
-& FN ($\beta = 137$, contact form $0.5\%$ check) \\
+textbook (Uehling kernel)
+& TA ($\beta = 137$, contact form $0.5\%$ check) \\
 4.~Foldy/Friar FNS ($r_E({}^4$He$)^2$) & $+8.7913$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_charge_density} $+$
 Layer-2 $r_E$ & FN \\
@@ -5312,8 +5285,8 @@ Layer-2 input & W1a sub-leading \\
 7.~${}^4$He polarizability & $+0.06$ &
 Layer-2 input & W3 inner-factor (smallest in catalogue) \\
 \midrule
-\textbf{Framework-native subtotal} & \textbf{+13\,841.11} & (1+2+3+4) & \\
-Framework $+$ literature total & $+13\,859.58$ & (1+2+3+4+5a+5b+5c+6+7) & \\
+\textbf{One-loop assembly subtotal} & \textbf{+13\,841.11} & (1+2+3+4) & \\
+Assembly $+$ literature total & $+13\,859.58$ & (1+2+3+4+5a+5b+5c+6+7) & \\
 \textbf{Experimental} & \textbf{+14\,041.13(17)} & van Wijngaarden 2000 & \\
 \textbf{Theory} & \textbf{+14\,041.18(13)} & Pachucki 2001 & \\
 \textbf{Residual (framework$+$lit)} & $\mathbf{-181.55}$ MHz / $-1.29\%$
@@ -5323,8 +5296,8 @@ Framework $+$ literature total & $+13\,859.58$ & (1+2+3+4+5a+5b+5c+6+7) & \\
 \end{table}
 
 \textbf{Z-scaling structural verification (the load-bearing test).}
-Three component ratios He$^+$/H test whether the projection-chain
-machinery transfers cleanly Z=1 $\to$ Z=2:
+Three component ratios He$^+$/H test whether the implementation
+transfers cleanly Z=1 $\to$ Z=2:
 
 \begin{itemize}\setlength\itemsep{0pt}
 \item Lamb$_\text{SE}$ ratio = $13.211$ (vs naive $Z^4 = 16$).  The
@@ -5348,13 +5321,13 @@ Matches to $0.12\%$, confirming the
 architectural modification.
 \end{itemize}
 
-All three structural tests pass.  The projection chains are
-\textbf{$Z$-portable}: substituting $Z=2$ into the existing pipeline
-gives He$^+$ with no architectural changes.  This is what Paper~34's
-projection taxonomy was designed to guarantee --- projections describe
-physics, not specific $Z$ values.
+All three tests pass: substituting $Z=2$ into the existing pipeline
+gives He$^+$ with no architectural changes.  For the SE and VP rows this
+checks the implementation of textbook formulas, whose $Z$-dependence is
+known in closed form; only the FNS row tests a Paper~34 projection
+(\S\ref{sec:proj_charge_density}).
 
-\textbf{Residual attribution.}  The framework-native subtotal is
+\textbf{Residual attribution.}  The assembly subtotal is
 $-200.02$ MHz / $-1.42\%$ below experiment, which is structurally the
 same as Paper~36's $-5.65$ MHz / $-0.534\%$ at Z=1 amplified by
 $Z^4 \times \ln$-amplification.  The dominant Layer-2 contribution is
@@ -5394,12 +5367,12 @@ total, different per-component itemization.  See
 \S~\ref{sec:convention_exposures} for catalogue context.
 
 \textbf{Structural reading.}  The autopsy demonstrates three things.
-First, the framework's projection-chain machinery is \emph{Z-portable}
-at the structural level: all three Z-scaling tests pass cleanly, with
+First, the implementation is \emph{Z-portable}: all three Z-scaling
+tests pass cleanly, with
 the SE bracket's logarithmic Z-dependence reproduced to $0.3\%$
 (a matching test, not an exactness claim; the VP ratio is
 kernel-mixed, see above).
-Second, the $-1.42\%$ native residual is the Z-amplified analog of
+Second, the $-1.42\%$ assembly residual is the Z-amplified analog of
 Paper~36's $-0.534\%$ Z=1 residual --- same physical content ($\alpha^3$
 leading-order truncation), different size by $Z^4 \times \ln$.
 Third, He$^+$ joins the multi-focal precision catalogue as the cleanest
@@ -7868,8 +7841,10 @@ attributed to Karshenboim~2005 (an SE one-loop value, a recoil NLO line
 and a total of $1047.49(5)$~MHz).  Those figures could not be located in
 that source, so the comparison and the recoil-absorption reading built
 on it are withdrawn until a verifiable reference is supplied.
-The framework total, $1047.63$~MHz, stands against the Mariam~1982
-experiment $1054(22)$~MHz (\S\ref{sec:offprecision}).
+The assembly total, $1047.63$~MHz (recomputed by
+\texttt{tests/paper36\_precision\_support/precision\_catalogue\_muonium\_lamb.py}),
+lies $+0.04\%$ from the Mu-MASS measurement $1047.2(2.3)(1.1)$~MHz
+(\S\ref{sec:offprecision}).
 
 \subsubsection{Friar moment profile convention (Eides closed-form vs operator-level)}
 \label{sec:conv_friar_profile}
@@ -9092,7 +9067,7 @@ rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}
 10 & Wilson plaquette & M. & M & Combinatorial vocab T.F.; Marcolli-vS $=$ YM E.S. \\
 11 & Vector-photon promotion & W.M.F. & M & $1/(4\pi)$, the unit-$S^2$ harmonic normalization of the vertex model (Paper~33). \\
 12 & Mol-frame hyperspherical & T.F. & MH & Angular separation on $\mathcal{A}$. \\
-13 & Drake--Swainson asymptotic subtraction & T.F. & H & Central tier (Paper~31 TS-C); signature-blind. \\
+13 & Drake--Swainson normalization of Bethe-log sums & T.F. & H & Central tier (Paper~31 TS-C); signature-blind. \\
 14 & Rest-mass & T.F. & H & $D^2 \to D^2 + m^2\mathbb{1}$ central; signature-blind. \\
 15 & Observation / temporal-window & W.M.F. & H & The Wick-engine: Matsubara $2\pi k/\beta$. \\
 16 & Two-body Dirac / Breit retardation & M. & M & Angular T.F.; kinematic needs Lorentzian re-derivation. \\
@@ -9105,7 +9080,7 @@ rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}
 23 & Symmetry / Young tableau & T.F. & H & $S_N$ rep theory; signature-blind. \\
 24 & Adiabatic / Born-Oppenheimer & T.F. & MH & Scale separation; relativistic BO well-defined. \\
 25 & Coupled-channel / adiabatic curve & T.F. & M & ODE machinery; transcendental inherits from Fock. \\
-26 & Gauge choice (Coulomb/Lorenz/Feynman) & W.M.F. & MH & Coulomb-gauge $1/(4\pi) = $ M1; Ward identity holds. \\
+26 & Gauge choice (Coulomb/Lorenz/Feynman) & W.M.F. & MH & Coulomb-gauge $1/(4\pi)$ is the vertex model's normalization (Paper~33); Ward identity is standard QED, not established on the graph. \\
 27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; Krein-space period closure bit-exact but signature-blind --- Lorentzian ``literal identification'' withdrawn 2026-06 (compact-boost / $K^+$ descope; \S~\ref{sec:proj_wick_rotation}). \\
 28 & Apparatus identity / state-side & T.F. & MH & State-side; PSLQ-disjoint from master Mellin engine. \\
 \bottomrule
@@ -9270,9 +9245,11 @@ the constituent $P_i$:
    = \bigcup_{i=1}^{n} \mathrm{sig}(P_i).
 \]
 The catalogue rows of \S~\ref{sec:catalog} satisfy this consistency
-check across all eight fully-tagged entries with non-trivial chains
-(Lamb shift, the Paper~2 $\alpha$ Observation row, Stefan-Boltzmann, He CI,
-hydrogen $E_n$, scalar/Dirac spatial Casimir, Uehling VP).
+check across all seven fully-tagged entries with non-trivial chains
+(the Paper~2 $\alpha$ Observation row, Stefan-Boltzmann, He CI,
+hydrogen $E_n$, scalar/Dirac spatial Casimir, Uehling VP).  The
+hydrogen Lamb shift is not among them: it is a textbook assembly with
+no GeoVac projection chain (Paper~36).
 \end{theorem}
 
 The theorem is true by construction at the level of the dictionary
@@ -9280,7 +9257,7 @@ metadata: each projection's signature is fixed in
 \S~\ref{sec:layer2}, so set/list union is a tautology.  Its
 non-trivial content is the empirical check that the catalogue's
 expected target signature matches the chain signature; this passes
-for all eight tested rows.
+for all seven tested rows.
 
 \begin{theorem}[Weak Minimality]
 \label{thm:minimality}
@@ -9355,9 +9332,9 @@ After the addition of \texttt{breit\_retardation}
 (\S~\ref{sec:proj_breit_retardation}), \emph{two} projections now
 have input\_layer = output\_layer = 2: Drake--Swainson and Breit
 retardation.  The structurally distinguishing fact is that they
-operate on disjoint Layer-2 content (Drake--Swainson regularizes
-divergent Bethe-log spectral sums; Breit retardation adds two-body
-kinematic content to the framework's single-particle Lamb-shift
+operate on disjoint Layer-2 content (Drake--Swainson normalizes
+Bethe-log spectral sums; Breit retardation adds two-body
+kinematic content to the single-particle Lamb-shift
 bracket), so they commute as a $(P_1, P_2)$ pair; their
 non-uniqueness on the layer index is harmless for signature
 arithmetic.
@@ -9436,9 +9413,12 @@ twenty-eight projections by axis-flag pattern, no projection adds a
 dimension without also adding the variable that carries it (perfect
 V/D correlation, 12/12); zero projections fall into the
 $(\text{D-only})$ bucket.  The transcendental axis admits an
-independence witness: vector-photon promotion (\S~\ref{sec:layer2},
-projection~11) introduces $1/(4\pi)$ without adding any variable
-or dimension.  Two projections (\texttt{spectral\_action},
+independence witness: the Hopf bundle (\S~\ref{sec:proj_hopf},
+projection~2) introduces $\pi = \mathrm{Vol}(S^2)/4$ without adding any
+variable or dimension, and Wick rotation does the same with
+$2\pi = \mathrm{Vol}(S^1)$.  Vector-photon promotion is not a witness:
+it carries only the vertex model's $1/(4\pi)$ normalization
+(Paper~33).  Two projections (\texttt{spectral\_action},
 \texttt{observation\_window}) move all three axes; these are the
 ``heavy'' projections, carrying the most physical content per step.
 The newly added \texttt{breit\_retardation}
@@ -9485,8 +9465,9 @@ run from machine-exact (Stefan--Boltzmann $\pi^2/90$ at depth~3,
 hydrogen $1S$ static polarizability $\tfrac{9}{2}a_0^3$ at depth~3,
 spatial $S^3$ Casimir $1/240$ at depth~2) to converged-basis
 ceilings ($\approx 0.024\%$ for He NR variational; the H Lamb shift's
-$-0.534\%$ is an order truncation with tabulated Bethe logarithms, not a
-basis ceiling, Paper~36).  The residual is bounded
+$-0.534\%$ is not in this class: it is a textbook one-loop assembly with
+tabulated Bethe logarithms and no GeoVac projection chain, Paper~36).
+The residual is bounded
 by basis quality alone --- error code~B in the
 \S~\ref{sec:offprecision} system --- when the chain consumes no
 external Layer-2 input.
@@ -9594,10 +9575,9 @@ $\pi^2/90$ (Sprint TD Track~1, residual $0$), positronium 1S--2S
 framework-native ($+64.75$~ppm), D HFS Bohr--Fermi strict
 ($-456$~ppm; the $+40$~ppm quoted here until 2026-08-28 was an artifact
 of the retired baseline), and the He oscillator strength ($+3.4\%$).  At depth~4
-the catalogue contains $\mu$H Bohr--Fermi ($+2$~ppm) and the H
-Lamb shift at leading one-loop order ($-0.534\%$).  Residuals at every
-depth $\geq 2$ are scattered across more than four orders of
-magnitude.  Depth correlates with \emph{opportunity} for
+the catalogue contains $\mu$H Bohr--Fermi ($+2$~ppm).  Residuals at
+depth~3 alone are scattered across more than four orders of
+magnitude, from exact to percent level.  Depth correlates with \emph{opportunity} for
 compounding when Layer-2 inputs are consumed, but the residual is
 controlled by the Layer-2-presence count and the framework's
 basis-quality limit, not by depth itself.
@@ -9700,8 +9680,8 @@ matches do not.
 \setlength\itemsep{0pt}
 
 \item \textbf{Closure of the projection list.}  Twenty-eight projections
-are now documented.  The thirteenth (Drake--Swainson asymptotic
-subtraction) was added in sprint LS-4 for the $\ell > 0$ Bethe
+are now documented.  The thirteenth (Drake--Swainson normalization of
+Bethe-log sums) was added in sprint LS-4 for the $\ell > 0$ Bethe
 logarithms.  The fourteenth (rest-mass projection) and
 fifteenth (observation / temporal-window projection) were added in
 sprint KG / Paper~35 (May~2026) after verifying that the bare
@@ -9746,8 +9726,10 @@ gauge choice / Coulomb-Lorenz-Feynman; Wick rotation / signature
 change; apparatus identity / state-side reduction) were added in the
 Sprint~2 axis-completeness sprint of 2026-05-15.  These three close
 the V/D/transcendental axis-grid completeness identified by the
-TX-A audit: gauge choice provides a second independence witness next
-to vector-photon promotion in the transcendental-only corner; Wick
+TX-A audit: gauge choice fills the no-variable, no-dimension row
+beside vector-photon promotion (neither carries a transcendental of
+physical content: the $1/(4\pi)$ they share is the vertex model's
+normalization, Paper~33); Wick
 rotation promotes the metric-functional-level content of the
 Bisognano--Wichmann reading (Sprint TD Track~4 + Sprint Unruh-pendant,
 May~2026) from a §VIII open-question candidate to a named §III
@@ -9839,8 +9821,7 @@ depth-vs-residual prediction (see
 Remark~\ref{rem:depth_falsification}).  Outstanding work:
 (i)~quantify the framework's basis-quality residual
 $\epsilon_\text{basis}(\text{framework})$ for each major chain
-class (one-loop QED Lamb-shift class, NR variational class,
-graph-native CI class) so that the L2-count $= 0$ side of the
+class (NR variational class, graph-native CI class) so that the L2-count $= 0$ side of the
 prediction has a per-class quantitative bound; (ii)~test whether
 multi-Layer-2 chains are dominated by the largest single
 Layer-2 input (the prediction's claim) versus quadrature-sum or
@@ -9851,16 +9832,12 @@ Remark~\ref{rem:depth_refinement}) is a sub-class of L2-count $=
 ``irrational analytic content'' that lands at the
 basis-quality limit.
 
-The LS-4 Lamb shift datapoint adds historical context.  The LS-4
-chained projection (Fock + spectral action + Sturmian +
-Drake--Swainson) achieves $-0.39\%$ residual at the sweet-spot
-$N=40$.  At converged $N$, the LS-4 result reverts to the LS-1
-ceiling $-3.10\%$ (LS-4, pre-LS-6a convention); the LS-6a fix supersedes this with $-0.534\%$.  Under
-Prediction~\ref{pred:l2_presence} the $-0.534\%$ is \emph{not} a
-basis-quality value: the assembly uses tabulated Bethe logarithms and
-stops before the one-loop $\alpha(Z\alpha)^5$ term (Paper~36); the
-$-0.39\%$ at $N=40$ is a transient finite-basis cancellation.  Prediction~\ref{pred:l2_presence} applies to
-converged-basis residuals.
+The hydrogen Lamb shift is not a datapoint for
+Prediction~\ref{pred:l2_presence}: its $-0.534\%$ is a textbook
+one-loop assembly with tabulated Bethe logarithms that stops before the
+one-loop $\alpha(Z\alpha)^5$ term, and no GeoVac projection chain
+enters it (Paper~36).  Prediction~\ref{pred:l2_presence} applies to
+converged-basis residuals of projection chains.
 
 \item \textbf{$K = \pi(B + F - \Delta) \approx 1/\alpha$.}
 The Paper~2 Observation is the most extreme multi-projection
@@ -9919,8 +9896,9 @@ unit-rescaling that introduces a length scale without a coordinate
 variable).  Whether such projections are structurally absent from the
 GeoVac framework, or merely absent from the current implementation,
 is open.  Two candidate additions surfaced by the TX-A axiomatization
-sprint: (a)~a gauge-choice projection (Coulomb vs Lorenz) that would
-sit in the pure-transcendental bucket alongside vector-photon, (b)~a
+sprint: (a)~a gauge-choice projection (Coulomb vs Lorenz), since added
+as \S~\ref{sec:proj_gauge_choice}, which preserves V and D but has no
+transcendental measured in the framework, (b)~a
 spin-statistics projection that splits boson/fermion Matsubara
 content out of observation/temporal-window.  Neither is forced by
 current data.
@@ -10372,7 +10350,7 @@ table.  The 2026-05-09 addition of three intra-nuclear projections
 tensor multipole) extends the dictionary further to nineteen, and
 sharpens the $L$--$E$ asymmetry of \S~\ref{sec:base_units}: $[L]$
 admits six scalar instances plus one rank-2 tensor instance, while
-$[E]$ admits four.  Sprint~1 (2026-05-15) added six more
+$[E]$ admits three.  Sprint~1 (2026-05-15) added six more
 projections that the framework had been using implicitly
 (\S\S~\ref{sec:proj_phillips_kleinman}--\ref{sec:proj_coupled_channel}:
 Phillips--Kleinman / core--valence orthogonality, multipole expansion
@@ -10383,9 +10361,12 @@ adiabatic curve), closing the textbook-completeness gap.  Sprint~2
 (\S\S~\ref{sec:proj_gauge_choice}--\ref{sec:proj_apparatus_identity}:
 gauge choice / Coulomb-Lorenz-Feynman; Wick rotation / signature
 change; apparatus identity / state-side reduction), closing the
-axis-grid completeness gap: gauge choice provides a second
-independence witness in the transcendental-only corner of the
-V/D/transcendental grid, Wick rotation promotes the
+axis-grid completeness gap: gauge choice preserves V and D with no
+transcendental measured in the framework (the transcendental-only corner
+is witnessed by volume-slot factors, the base-sphere $\mathrm{Vol}(S^2)/4$
+of the Hopf bundle and the Wick-rotation time circle, not by the gauge
+sector), Wick rotation
+promotes the
 Bisognano--Wichmann reading of the M1 mechanism from a \S~VIII
 open-question candidate to a named §III slot, and apparatus identity
 opens the state-side complement of the dictionary (which Sprint TD
@@ -10757,6 +10738,11 @@ At.\ Data Nucl.\ Data Tables \textbf{14}, 177 (1974).
 D.~J. Wineland and N.~F. Ramsey,
 ``Atomic deuterium maser,''
 Phys.\ Rev.\ A \textbf{5}, 821 (1972).
+
+\bibitem{ohayon2022}
+B.~Ohayon \emph{et al.} (Mu-MASS),
+``Precision measurement of the Lamb shift in muonium,''
+Phys.\ Rev.\ Lett.\ \textbf{128}, 011802 (2022).
 
 \bibitem{lundeen_pipkin1981}
 S.~R. Lundeen and F.~M. Pipkin,

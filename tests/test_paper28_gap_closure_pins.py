@@ -102,6 +102,32 @@ class TestThreeLoopConvergenceTable:
         assert abs(three_loop_factorized(N)["value_float"]
                    - float(exact)) < 1e-12
 
+    @pytest.mark.parametrize("n_max,expected", [
+        (10, 6.835894215630362),
+        (15, 10.18138493281675),
+        (20, 12.83657632322071),
+        (50, 21.58072389337666),
+    ])
+    def test_paper28_convergence_row_literal_independent(self, n_max,
+                                                         expected) -> None:
+        """tab:three_loop_convergence: every frozen row literal (including the
+        slow N = 50 row) re-derived inline, exactly, without geovac.
+
+        Rejects: the old-count rows 3.5721 / 5.9083 / 7.8719 / 14.7984, and a
+        literal copied from the module's own output with no second route.
+        Route: S(N) = sum_{m<=N} phi(m) L_N(m)^2, L_N(m) = 2 sum_{n<=N}
+        min(n,m) phi(n), Fraction arithmetic."""
+        from fractions import Fraction
+
+        def phi(n):
+            o = 2 * n + 3
+            return Fraction(8 * (o * o - 1), o ** 4)
+        ph = [phi(n) for n in range(n_max + 1)]
+        exact = sum(ph[m] * (2 * sum(min(n, m) * ph[n]
+                                     for n in range(n_max + 1))) ** 2
+                    for m in range(n_max + 1))
+        assert abs(float(exact) - expected) < 1e-12
+
     @pytest.mark.slow
     def test_paper28_convergence_row_n50(self) -> None:
         r = three_loop_factorized(50)

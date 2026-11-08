@@ -7,12 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
-## [v6.5.2] - 2026-11-07
+## [v6.6.0] - 2026-11-07
 
 **group5 restructured after the advisory pass; the physical vector vertex (VV stage A); the SO(4) channel
-count corrected.** PI: "Ok, do stage A", then "Approve everything. Please proceed." The PM recommends a
-MINOR bump for this entry (a reorganization of the paper series plus a correction that moves published
-numbers); committed as a patch pending that call.
+count corrected.** PI: "Ok, do stage A", then "Approve everything. Please proceed." MINOR bump (PI: "I go with all
+recommendations"): a reorganization of the paper series plus a correction that moves published numbers.
+The restructure was committed first as d0d110b8 (labelled v6.5.2, untagged); this entry and tag cover both commits.
 
 ### VV stage A (pre-registered, `docs/predictions/2026-11-07_physical_vector_vertex.md`): GO
 - The Clifford vertex between Camporesi-Higuchi spinors and coclosed 1-forms on round S^3, computed
@@ -88,6 +88,43 @@ numbers); committed as a patch pending that call.
 - Everything removed from a paper is in `docs/chronicles/paper{2,28,30,33,36,51}_*.md`, verbatim.
 - Citer sweeps across about 35 documents (papers, syntheses, INDEX, README, claims register, topic
   lookup, atlas, seam, claim matrix, docstrings) re-pointed and, where an owner narrowed, rewritten.
+
+### Guard pass (separate from the fixes; every guard fire-tested; independent review)
+- New backing tests: `test_paper33_physical_vertex.py` (+ `tests/paper33_vertex_support/`, both stage-A
+  routes ported; rule on 896 cells, 9j on 896, Ward-Takahashi on 384 pairs, Sigma_phys(0) at n_max 3-12),
+  `test_paper2_owed_guards.py` (the full 1.92e9-formula search counted exactly in 0.7 s: rank 11, tab:hits,
+  27 beat K), `test_paper30_owed_guards.py` (Z, U(1) and SU(2) area laws by raw-link Monte Carlo; Hodge
+  rank; cubic term; Rule-B 2-cycle geometry), `test_paper36_owed_guards.py`, `test_paper51_owed_guards.py`
+  (B1, B2, B4, the continuum tip, odd spheres, rank-4 trace), `test_paper28_euler_sum_derivation.py` (c2-c6,
+  D2-D6, Theorem 5, all 18 S_{r,s} rows), `test_paper28_s3_closed_form_bracket.py`.
+- The W-pins from the fix pass reviewed against the old channel count: four were asleep or circular and
+  gained independent siblings. Over 100 plants, all fired; the independent reviewer's 18 plants, 17 fired
+  (one was an equivalent mutant). Review: 1 LARGE (a Paper 51 citation of an unguarded panel; guarded), 14
+  SMALL (closed).
+- Owner defects the guards found, fixed: Paper 2 mechanism row 9 said the Dirac Seeley-DeWitt terms on S^3 are
+  all positive (the heat trace is (sqrt pi/2) t^-3/2 - (sqrt pi/4) t^-1/2; the elimination stands on two terms
+  of signs + and -); Paper 30's Rule-B 2-cycles at n_max = 3 are 3342, not 80 (a run capped at 200 of 994
+  plaquettes; the n_max = 3 monopole fit and the n_max = 4 Monte Carlo are now disclosed as truncated);
+  Paper 24's CP^2 residual is 40.8% (least squares; 38.4% minimax bound), not 24.98%; Paper 51's B2 t = 10 sign
+  change was a finite alpha-step artifact (exact derivative: -5.32 ... -0.42% against 1/6, converging from below
+  to the finite-disk value 0.166520), and the tip equals 1/6 only at small t/R^2; Paper 51's two-point tip
+  0.166654 (was 0.166656); Paper 36's old slope 3.3 (was 3.4); Paper 2 row 7 (8/3 per generation).
+- Tests whose claims were cut: `TestMonteCarloWilsonLoop` -> `tests/_archive/superseded/`; LS-7 literature-target
+  and verdict tests -> `tests/_archive/diagnostics/`; the slow C_2S ratio test re-anchored to C(4) = 40.78.
+  Flaky precision fixed in `test_qed_three_loop.py` (local workdps).
+- Registry (C21): alpha_k_value, alpha_cubic_root_inv, p2_search_n, p2_chance_count, lamb_1loop_mhz (MEASURED);
+  codata2018_alpha_inv, lamb_exp_lp81, lamb_exp_bezginov19 (CITED); alpha_k_rel_err, alpha_cubic_rel_err,
+  p2_search_p, lamb_resid_lp81, lamb_resid_bezginov19 (DERIVED). C16 `g5-guard-pass-retired-values`
+  (fire-tested; a false positive on "1280 at n_max = 3" caught and fixed by a lookbehind). 20 claim-matrix rows.
+
+### PI rulings on the carry-forward (all on PM recommendation)
+- Paper 34 owner pass: projection 13 renamed "Drake-Swainson normalization of Bethe-log sums" (count 28 kept);
+  the gauge sector no longer witnesses the transcendental-only corner (its 1/(4 pi) is the vertex model's
+  normalization; the corner's witnesses are now the Hopf and Wick volume slots); the hydrogen Lamb rows are a
+  textbook assembly, so the composition theorem has 7 tested rows, not 8; the muonium row's experiment was
+  Mariam et al. 1982, a hyperfine measurement, now Mu-MASS (Ohayon et al., PRL 128, 011802 (2022)), residual
+  +0.04%, not attributed; the unverifiable "Eides Tab. 7.4" citation dropped (Paper 35's copy corrected too).
+- Seam E2 period class M1 -> none; Paper 18 Theorem 2's rescoped wording reviewed; Paper 33 cites its tests.
 
 ### Gates
 - New C16 entries (each fire-tested on retired and corrected wording): `g5-retired-titles-2026-11-07`,

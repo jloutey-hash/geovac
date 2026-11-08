@@ -220,7 +220,8 @@ are linear in $\alpha$, the replica combination
   \label{eq:tip_def}
 \end{equation}
 keeps only the apex term, and for the spinor it equals
-$c_{1/2}'(1) = +1/6$ at every $t$.
+$c_{1/2}'(1) = +1/6$ at small $t/R^2$ (to $2\times10^{-8}$ for
+$t/R^2 \le 0.05$; at $t/R^2 = 0.1$ the finite-disk value is $0.166520$).
 
 \paragraph{Discrete.} The discrete cone used here has radial sites
 $\rho_i = ia$, $i = 1, \dots, N_\rho$, with $R = N_\rho a$ and a Dirichlet
@@ -261,10 +262,10 @@ recovery plateaus near $67.9\%$, independent of the azimuthal count.
 Refining the radial mesh removes it: at $\alpha = 2$, $t = 1$, the
 recovery rises as $N_\rho = 200 \to 3200$ ($0.675, 0.769, 0.837, 0.885,
 0.919$), with $1 - \text{recovery} \propto \sqrt{a}$ (successive error
-ratios $1.4085, 1.4143, 1.4164$, approaching $\sqrt{2}$). The continuum
+ratios $1.4085, 1.4143, 1.4164$, near $\sqrt{2}$). The continuum
 excess-angle coefficient is therefore the plain continuation of
 Eq.~\eqref{eq:spinor_sc_tip}, and the fixed-$a$ plateau is a
-discretization artifact. (MEASURED; no live test, owed, \S\ref{sec:open}.)
+discretization artifact (\texttt{tests/test\_paper51\_owed\_guards.py}).
 
 % =====================================================================
 \section{Theorem L6: the replica weight is harmless}
@@ -448,14 +449,15 @@ wall at $(N_\rho+1)a = R+a$, displaced by $O(a)$. Two checks confirm it: the
 case $m=\tfrac12$, where the centrifugal term vanishes, still converges at
 $O(a)$; and the grid $a=R/(N_\rho+1)$, with the wall exactly at $R$, restores
 $O(a^2)$ (error ratio $4$). \emph{(B2, target.)} Linear extrapolation in $a$
-of the tip gives $0.166656$ (two points) and $0.166582$ (least squares),
-against $1/6 = 0.166667$, that is $-0.006\%$ and $-0.05\%$. On a separate
-panel at $t = 10$ ($a\in\{0.1,0.05,0.025,0.0125,0.00625\}$) the tip's error
-changes sign between the last two spacings ($-0.30\%$, then $+0.045\%$), so
-it approaches $1/6$ from both sides; there the effective order rises from
-about $1.1$ to about $1.7$, because the leading $O(a)$ error is
-$\alpha$-independent and cancels in the replica combination. (MEASURED;
-B1 and B2 have no live test and are owed, \S\ref{sec:open}.)
+of the tip gives $0.166654$ (two points) and $0.166582$ (least squares),
+against $1/6 = 0.166667$, that is $-0.008\%$ and $-0.05\%$, with the
+$\alpha$-derivative taken exactly (Hellmann--Feynman). On a separate panel at
+$t = 10$ ($a\in\{0.1,0.05,0.025,0.0125,0.00625\}$) the tip's error against $1/6$ is
+$-5.32$, $-2.73$, $-1.41$, $-0.75$, $-0.42\%$, converging from below to the
+finite-disk continuum value at $t/R^2 = 0.1$, $0.166520$ ($-0.088\%$ from
+$1/6$); a central difference in $\alpha$ with step $0.1$ biases the tip by
+$+0.5\%$ and would show a spurious sign change
+(\texttt{tests/test\_paper51\_owed\_guards.py}).
 
 % =====================================================================
 \section{Spectral action on $\sthree_R$: two-term exactness}
@@ -564,7 +566,7 @@ spectral actions~\cite{fathizadeh_marcolli2016} (Paper~32~\cite{paper32},
 \label{rem:two_term_uniqueness}
 The identity $\zeta_{\rm unit}(-k) = 0$ also holds for the
 Camporesi--Higuchi spectra of $S^5$ and $S^7$, checked symbolically
-through $k = 7$ (MEASURED; no live test, owed). The mechanism is the same:
+through $k = 7$ (\texttt{tests/test\_paper51\_owed\_guards.py}). The mechanism is the same:
 the degeneracy polynomials (degree 4 and 6) are even in the shifted
 eigenvalue $n + d/2$, and the Bernoulli multi-step formula
 $B_{2m+1}(p + 1/2) = (2m{+}1)\sum_{l=0}^{p-1}(l+1/2)^{2m}$ produces the
@@ -1166,29 +1168,12 @@ mechanism examined here selects one, and none produces the
 $\phi(2)/\phi(1)^2 \approx 10^{-124}$ that the observed cosmological
 constant would need.
 
-\paragraph{Owed tests.} The following measured claims have no live test:
-\begin{itemize}
-  \item B1: the eigenvalue order $q = 1.00$ at
-        $m \in \{\tfrac12, \tfrac32, \tfrac52\}$, the tip order $p = 0.97$,
-        and the restoration of $O(a^2)$ on the boundary-corrected grid;
-  \item B2: the linear extrapolation of the tip to $0.166656$ /
-        $0.166582$, and the sign change of the tip error at $t = 10$;
-  \item B4: the excess-angle recovery climbing as $N_\rho = 200 \to 3200$,
-        with $1 - \text{recovery} \propto \sqrt{a}$;
-  \item the continuum tip $1/6$ at every $t$ (exact Bessel zeros at
-        $t/R^2 = 0.01, 0.02, 0.05$), and the continuum $a_0 = 1.888$ at
-        $R = 10$, $t = 0.1$;
-  \item the coefficient of variation $1.3\%$ of the discretization error
-        across $\alpha$;
-  \item propagation number $2$ of the compressed disk operator system;
-  \item the odd-sphere identity on $S^5$ and $S^7$
-        (Remark~\ref{rem:two_term_uniqueness});
-  \item the rank-4 bundle and the total-trace cone coefficient are inputs
-        that no test checks; \texttt{tests/test\_paper51\_replica\_sbh.py}
-        pins the entropy algebra with the scalar-sign coefficient and
-        $S = -dI/d\alpha$, which gives the same value as the convention of
-        \S\ref{subsec:entropy_route} but not the same intermediate signs.
-\end{itemize}
+\paragraph{Owed tests.} Two measured claims have no live test: the
+coefficient of variation $1.3\%$ of the discretization error across
+$\alpha$, and propagation number $2$ of the compressed disk operator system.
+B1, B2, B4, the continuum tip and $a_0$, the odd-sphere identity, the rank-4
+trace and the total-trace cone coefficient are backed by
+\texttt{tests/test\_paper51\_owed\_guards.py}.
 
 % =====================================================================
 \section*{Acknowledgments}

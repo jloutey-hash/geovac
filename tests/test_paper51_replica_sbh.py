@@ -9,16 +9,35 @@ replica algebra had no test anywhere in the suite.  The former
 'factor of 2' between the G7 and G4-2 routes was the rank-2 G2 trace and
 is withdrawn (2026-11-07); test_action_route_G_equals_entropy_route_G now
 pins the equality from both spectra.  These pins are pure sympy; the
-Sommerfeld--Cheeger tip coefficient (1/12)(1/alpha - alpha) is the
-classical INPUT (cited, not derived here); what is pinned is the
-paper's algebra downstream of it.
+Sommerfeld--Cheeger tip coefficient is the classical INPUT (cited, not
+derived here); what is pinned is the paper's algebra downstream of it.
+(Its spectral backing is tests/test_paper51_owed_guards.py, from exact
+Bessel zeros.)
+
+Sign convention (docstrings corrected 2026-11-07; the assertions and
+values are unchanged).  Paper 51 subsec:entropy_route uses one set:
+the spinor coefficient c_{1/2}(alpha) = -(1/12)(1/alpha - alpha)
+(eq:spinor_sc_tip), the tip action
+I_E^tip = c_{1/2}(alpha) * 2 r_h^2 Lambda^2 phi(1)
+        = -(r_h^2 Lambda^2/6)(1/alpha - alpha),
+and S = (alpha d/dalpha - 1) I_E at alpha = 1, i.e. S = +dI_E^tip/dalpha
+(the tip term vanishes at alpha = 1).  The code below writes the tip
+action with the OPPOSITE overall sign, +(r_h^2 Lambda^2/6)(1/alpha - alpha)
+(the scalar-sign form), and pairs it with S = -dI/dalpha.  The two sign
+flips cancel, so S_BH = +r_h^2 Lambda^2/3 is the same; the intermediate
+I_conical is the negative of the paper's I_E^tip.  Do not copy the
+intermediate sign into prose.
 """
 
 import sympy as sp
 
 
 def test_replica_sbh_closed_form():
-    """eq:S_BH: S_BH = -dI_E/dalpha|_1 = r_h^2 Lambda^2/3 = A Lambda^2/(12 pi)."""
+    """eq:S_BH: S_BH = r_h^2 Lambda^2/3 = A Lambda^2/(12 pi).
+
+    I_conical below is MINUS the paper's I_E^tip and S is taken as
+    -dI_conical/dalpha|_1, which equals the paper's +dI_E^tip/dalpha|_1
+    (see the module docstring)."""
     alpha, rh, Lam = sp.symbols("alpha r_h Lambda", positive=True)
     I_conical = (rh ** 2 * Lam ** 2 / 6) * (1 / alpha - alpha)
     S_BH = -sp.diff(I_conical, alpha).subs(alpha, 1)
@@ -52,15 +71,20 @@ def test_action_route_G_equals_entropy_route_G():
       action route  -- Tr exp(-D^2/Lambda^2) per unit time on S^3_R x R,
                        CH spectrum, rank-4 bundle, matched to
                        -(1/16 pi G) int R_scalar  =>  G = -3 pi / (4 B);
-      entropy route -- S_BH = -(d/dalpha) of (1/12)(1/alpha - alpha) times
+      entropy route -- S_BH = +(d/dalpha) at alpha = 1 of the tip action
+                       c_{1/2}(alpha) = -(1/12)(1/alpha - alpha) times
                        the S^2 Dirac heat trace's leading coefficient, read
                        off the spectrum sum_m 4 m exp(-m^2 t / r_h^2);
                        A / (4 G) = S_BH.
     Rejects the withdrawn bookkeeping ratio 2 (the rank-2 G2 trace).
     Inputs, not tested here: the rank-4 bundle of sec:g2, and the cone
-    coefficient (1/12)(1/alpha - alpha) as the TOTAL for the 2D Dirac spinor
-    (c = 1; Paper 51's remark on the former factor of 2).  A per-component
-    reading would restore the factor 2; the equality rests on it.
+    coefficient -(1/12)(1/alpha - alpha) as the TOTAL for the 2D Dirac
+    spinor (Paper 51's remark on the former factor of 2).  A per-component
+    reading would restore the factor 2; the equality rests on it.  Both
+    inputs are now derived from spectra in
+    tests/test_paper51_owed_guards.py (test_paper51_rank4_trace_is_derived,
+    test_paper51_total_trace_cone_coefficient,
+    test_paper51_G_routes_agree_from_tested_inputs).
     """
     import numpy as np
     from scipy import integrate
@@ -94,8 +118,10 @@ def test_action_route_G_equals_entropy_route_G():
     # K = c r_h^2/t + d: two-point solve
     c_rh2, _d = np.linalg.solve(np.array([[1 / ts[0], 1.0], [1 / ts[1], 1.0]]), np.array(K))
     # Gaussian cutoff: t^-1 -> Lambda^2 phi(1) = Lambda^2
-    I_coeff = (1.0 / 12.0) * c_rh2 * Lam ** 2      # I(alpha) = I_coeff (1/alpha - alpha)
-    S_BH = 2.0 * I_coeff                            # -(d/dalpha)(1/alpha - alpha) at 1 = 2
+    # Paper convention: I_E^tip(alpha) = -I_coeff (1/alpha - alpha) and
+    # S = +dI_E^tip/dalpha|_1 = -I_coeff * (-2) = 2 I_coeff.
+    I_coeff = (1.0 / 12.0) * c_rh2 * Lam ** 2
+    S_BH = 2.0 * I_coeff
     A = 4.0 * np.pi * r_h ** 2
     G_entropy = A / (4.0 * S_BH)
 

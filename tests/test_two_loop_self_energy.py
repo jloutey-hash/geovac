@@ -13,32 +13,20 @@ import pytest
 
 from geovac.two_loop_self_energy import (
     ALPHA,
-    C_2S_LITERATURE,
-    LS7_REFERENCE_2S_MHZ,
     c_2s_convergence,
     c_2s_native,
     crossed_se_spectral_sum,
     iterated_se_dimensionless,
     ls8a_prefactor_MHz,
     rainbow_se_spectral_sum,
-    verdict,
 )
 
 
 def test_prefactor_matches_LS7():
-    """LS-7 prefactor 0.2363 MHz/dim for Z=1, n=2."""
+    """LS-7 prefactor (alpha/pi)^2 (Z alpha)^4 / n^3 = 0.2363 MHz per unit
+    coefficient for Z=1, n=2 (cited by Paper 34's two-loop row and Paper 35)."""
     pref = ls8a_prefactor_MHz(n=2, Z=1)
     assert abs(float(pref) - 0.2363) < 1e-3
-
-
-def test_C_2S_literature_target():
-    """Literature C_2S = +3.6266 from Eides 2001 Tab. 7.3."""
-    assert abs(float(C_2S_LITERATURE) - 3.6266) < 1e-3
-
-
-def test_LS7_reference_2S_MHz():
-    """Eides 2001 Tab. 7.3 two-loop SE 2S = +0.857 MHz."""
-    assert abs(float(LS7_REFERENCE_2S_MHZ) - 0.857) < 1e-3
 
 
 def test_alpha_value():
@@ -124,6 +112,52 @@ def test_spectral_sum_diverges_with_n_max():
     assert math.log(sums[2] / sums[1]) / math.log(5 / 4) > 2.5
 
 
+def _raw_total_independent(n_max: int, n_ext: int = 1):
+    """Rainbow + crossed raw two-loop SE sum by an independent exact route
+    (no geovac import): W = 2 on every window triple (|a-b| <= q <= a+b,
+    a+b+q odd, q >= 1), photon factor d_T/mu = 1, electron factor
+    g_n/lambda_n^2 = 2(n+1)(n+2) / ((2n+3)/2)^2."""
+    from fractions import Fraction
+
+    def win(a, b, q):
+        return q >= 1 and abs(a - b) <= q <= a + b and (a + b + q) % 2 == 1
+
+    def e(n):
+        return Fraction(8 * (n + 1) * (n + 2), (2 * n + 3) ** 2)
+    rng = range(n_max + 1)
+    qs = range(1, 2 * n_max + 2)
+    tot = Fraction(0)
+    for n1 in rng:
+        for n2 in rng:
+            for n3 in rng:
+                w = e(n1) * e(n2) * e(n3) * 16
+                # rainbow: q_out at (ext,n1),(n3,ext); q_in at (n1,n2),(n2,n3)
+                a = sum(1 for q in qs if win(n_ext, n1, q) and win(n3, n_ext, q))
+                b = sum(1 for q in qs if win(n1, n2, q) and win(n2, n3, q))
+                # crossed: q1 at (ext,n1),(n2,n3); q2 at (n1,n2),(n3,ext)
+                c = sum(1 for q in qs if win(n_ext, n1, q) and win(n2, n3, q))
+                d = sum(1 for q in qs if win(n1, n2, q) and win(n3, n_ext, q))
+                tot += w * (a * b + c * d)
+    return tot
+
+
+def test_raw_totals_match_independent_route():
+    """LS-8a raw totals (Paper 36 tab:ls8a_native; the pins in
+    test_spectral_sum_diverges_with_n_max), backed inline.
+
+    Rejects: the old-count totals (W in {0,1,2} with the mixed-sign
+    pairing; e.g. W(1,1,1) = 0), and any frozen literal that drifts from
+    the definition.  Route: exact Fraction sum over the window with W = 2
+    (no geovac), against the frozen literals and against c_2s_native
+    (which calls so4_channel_count)."""
+    expected = {3: 2994.777739248162, 4: 6439.294240027892}
+    for n_max, lit in expected.items():
+        ind = float(_raw_total_independent(n_max))
+        assert abs(ind - lit) < 1e-9 * lit
+        got = float(c_2s_native(n_max=n_max)["raw_total"])
+        assert abs(got - ind) < 1e-9 * ind
+
+
 def test_c_2s_convergence_helper():
     """Sweep across n_max values returns ordered list."""
     results = c_2s_convergence(n_max_values=[2, 3])
@@ -156,40 +190,6 @@ def test_invalid_norm_raises():
 
 
 # ---------------------------------------------------------------------------
-# Verdict logic
-# ---------------------------------------------------------------------------
-
-def test_verdict_positive_tier():
-    v = verdict(C_2S_LITERATURE * mpmath.mpf("1.05"))
-    assert v["sign_correct"]
-    assert "POSITIVE" in v["verdict_tier"]
-
-
-def test_verdict_mixed_tier():
-    v = verdict(C_2S_LITERATURE * mpmath.mpf("1.30"))
-    assert v["sign_correct"]
-    assert "WEAK: structural form correct" in v["verdict_tier"]  # renamed from MIXED, 1st-cert 2026-07-03
-
-
-def test_verdict_weak_tier():
-    """C_2S off by factor of ~5 lands in WEAK tier (within order of magnitude)."""
-    v = verdict(C_2S_LITERATURE * mpmath.mpf("5.0"))
-    assert "WEAK" in v["verdict_tier"]
-
-
-def test_verdict_negative_tier():
-    """C_2S off by 100x lands in NEGATIVE tier."""
-    v = verdict(C_2S_LITERATURE * mpmath.mpf("100"))
-    assert "NEGATIVE" in v["verdict_tier"]
-
-
-def test_verdict_sign_check():
-    """Verdict catches sign errors."""
-    v = verdict(-C_2S_LITERATURE)
-    assert not v["sign_correct"]
-
-
-# ---------------------------------------------------------------------------
 # Cross-validation against existing one-loop self-energy infrastructure
 # ---------------------------------------------------------------------------
 
@@ -201,16 +201,17 @@ def test_n_ext_zero_rainbow_well_defined():
 
 
 @pytest.mark.slow
-def test_c_2s_at_n_max_4_within_factor_of_2():
-    """At n_max=4 with hopf_4pi_squared, C_2S ~ 4.82.
+def test_c_2s_native_at_n_max_4():
+    """Paper 36 tab:ls8a_native, n_max = 4: C = raw total / (4 pi)^2 = 40.78.
 
-    NOT sub-percent agreement.  Slow because n_max=4 takes ~15s with the
-    5-fold spectral sum.  This test documents the n_max=4 numerical value
-    for regression purposes; it is NOT a claim of physical agreement.
+    Rejects: the pre-correction 4.82 (old channel count) and any literature
+    ratio (Paper 36 makes no literature comparison for the model sum).
+    Route: the exact Fraction total of _raw_total_independent (no geovac).
     """
     r = c_2s_native(n_max=4, norm_convention="hopf_4pi_squared")
-    # At n_max=4: C_2S = 4.82, ratio over literature = 1.33
-    assert abs(float(r["ratio_native_over_lit"]) - 1.33) < 0.10
+    expected = float(_raw_total_independent(4)) / float((4 * mpmath.pi) ** 2)
+    assert abs(float(r["c_2s_native"]) - expected) < 1e-9 * expected
+    assert abs(expected - 40.78) < 0.01
 
 
 # ---------------------------------------------------------------------------

@@ -190,3 +190,45 @@ TestPaper25S5Pins / TestPaper25CP2Quotient; the LS-7 prefactor tests in test_two
 (back Paper 32/35 citers only); test_qed_flat_limit, test_qed_vacuum_polarization and the graph-QED
 trace tests (test_graph_qed_*), which no longer back Paper 28 text; test_vector_qed's 7/8 tallies
 and the rule-6 proxy (now back only Paper 33's footnote e).
+
+## Guard pass (DONE 2026-11-07, v6.6.0) and PI rulings on the carry-forward
+
+PI: "I go with all recommendations." Applied: MINOR (v6.6.0); Paper 2 mechanism count 8 + 1 + 3 kept;
+Paper 33 ACTIVE kept; seam E2 P -> none; Paper 18 Theorem 2 wording reviewed (sound; the axis still
+carries the name "diagram topology", SMALL); the done-file amendments wait for the next /qa freeze.
+Paper 34 owner pass done: projection 13 renamed "Drake-Swainson normalization of Bethe-log sums" (count 28
+kept); the gauge sector no longer witnesses the transcendental-only corner (witnesses now the Hopf and Wick
+volume slots); the hydrogen Lamb rows are textbook assembly, so the composition theorem has 7 tested rows,
+not 8; the muonium row's experiment was Mariam 1982, an HFS measurement (now Mu-MASS, Ohayon et al. PRL 128,
+011802 (2022), residual +0.04%, not attributed); "Eides Tab. 7.4" dropped. Chronicle:
+docs/chronicles/paper34_owner_pass_cut.md.
+
+Guards: new test_paper33_physical_vertex.py (+ support), test_paper2_owed_guards.py, test_paper30_owed_guards.py,
+test_paper36_owed_guards.py, test_paper51_owed_guards.py, test_paper28_euler_sum_derivation.py,
+test_paper28_s3_closed_form_bracket.py; four asleep W-pins rebuilt with siblings; every guard fire-tested
+(plants recorded in the agent reports, CHANGELOG v6.6.0); independent review 1 LARGE (a Paper 51 citation of
+an unguarded panel, closed by a new guard) and 14 SMALL (closed). Owner defects the guards found and the PM
+fixed: Paper 2 row 9 ("all-positive" Seeley-DeWitt terms; the Dirac trace has two terms, signs + and -);
+Paper 30 Rule-B 2-cycles at n_max = 3 (3342, not the capped 80; Monte Carlo truncation disclosed); Paper 24
+CP^2 residual (40.8% least squares, 38.4% minimax, not 24.98%); Paper 51 B2 t = 10 sign change (a finite
+alpha-step artifact; exact derivative converges from below to 0.166520) and "1/6 at every t"; small numerics
+in Papers 2, 36, 51. Tests whose claims were cut: TestMonteCarloWilsonLoop -> tests/_archive/superseded/; the
+LS-7 literature-target and verdict tests -> tests/_archive/diagnostics/; the slow C_2S ratio test re-anchored
+to C(4) = 40.78.
+
+**Still owed.**
+- PI call: Paper 34 Thm. 1's Uehling row uses the chain fock o spectral_action for Pi = 1/(48 pi^2), while
+  Paper 34's own catalogue enters Pi as the flat-space value; if the row has no chain the count falls to 6.
+- Paper 34, same pattern, not yet done: the muH, mud and muHe+ Lamb rows still tagged Fock o SA o Sturmian o
+  DS "framework-native"; "Eides Tab. 7.3" (~l.3721, 4794, 4917) and "Tab. 7.6" (He+) use non-existent
+  numbering; "Eides Sec. 3.2" vs Paper 36's Sec. VIII.A; the 3P Bethe log (+6.3%) has no owner.
+- Paper 30: rerun the n_max = 3 monopole fit and the n_max = 3, 4 Monte Carlo on the full plaquette sets
+  (994 and 5047); the printed fits are for truncated actions.
+- Paper 51: the alpha coefficient of variation 1.3% and propagation number 2 have no test.
+- Test docstring re-anchors: test_paper34_projection_spot_checks.py l.46-48, _batch1 l.11, 295-360, _batch2
+  l.765-780 (old projection-13 name, per-loop 1/(4 pi) reading); tests/paper36_precision_support/
+  precision_catalogue_muonium_lamb.py (Mariam as the Lamb reference); test_paper41_wilson_witnesses cut asserts
+  (W1 d_W, W2 MK accuracies, W4 large-beta, V5 dual graph) to trim and re-anchor to Paper 30 Sec. 5.2;
+  test_su3_wilson_s5::TestPaper25S5Pins census tests -> diagnostics (keep the n_max = 5 counts, anchor Paper 24).
+- TX-A metadata (debug/tx_a_signature_arithmetic.py, tx_a_projection_table.json) still gives Hopf the variable
+  alpha, Drake-Swainson K_subtract and a Lamb chain.

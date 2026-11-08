@@ -373,7 +373,7 @@
 | Error compounds with projection depth (falsifiable prediction) | 34 | Sec VI | Observation |
 | Where physics enters the dimensionless graph | 34 | Sec II-III | Observation |
 | Physical variables and units in GeoVac | 34 | Sec III, Table 1 | Observation |
-| Drake-Swainson asymptotic subtraction (13th projection) | 34 | Sec III.13 | Observation |
+| Drake-Swainson normalization of Bethe-log sums (13th projection) | 34 | Sec III.13 | Observation |
 | Bound-state QED Lamb shift on Dirac-S³ | 34 | Sec V (LS-1..LS-4 rows) | Observation |
 | Sturmian basis as Fock-graph reparameterization (λ=Z/n) | 34 | Sec III.5 | Observation |
 | Bethe logarithm derivation (acceleration form, Drake regularization) | 34 | Sec III.5, V | Observation |

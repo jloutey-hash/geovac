@@ -10152,6 +10152,31 @@ REGISTRY = [
             'papers/synthesis/group1_operator_algebras_synthesis.tex': 'reviewed 2026-11-07 (group5 restructure; owner rewrite + citer sweep)',
         },
     },
+    {
+        "id": 'g5-guard-pass-retired-values',
+        "pattern": 'all-positive\\s+Seeley|(?<![\\d.])\\$?(?<![\\d.])80\\$?\\s+at\\s+\\$?n_\\{?\\\\?max\\}?\\s*=\\s*3\\$?|24\\.98\\s*\\\\?%|\\+0\\.045\\s*\\\\?%',
+        "exempt_if_nearby": withdrawal_marker('g5-guard-pass-retired-values'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": "Registered 2026-11-07 (guard pass). Retired, each found by a new guard: 'all-positive Seeley-DeWitt terms' for the Dirac operator on S^3 (the heat trace is (sqrt pi/2) t^-3/2 - (sqrt pi/4) t^-1/2; Paper 2 row 9); '80 at n_max = 3' Rule-B 2-cycles (3342; the 80 was a capped run; Paper 30); '24.98%' CP^2 residual (40.8% least squares, 38.4% minimax; Paper 24); the '+0.045%' t = 10 tip sign change (a finite alpha-step artifact; Paper 51).",
+        "files": [
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/forced_free_seam.md',
+            'docs/atlas.md',
+            'docs/claims_register.md',
+            'docs/topic_to_paper_lookup.md',
+            'docs/validation_benchmarks.md',
+            'README.md',
+            'papers/INDEX.md',
+        ],
+        "cited_by": {
+            'papers/group5_qed_gauge/Paper_2_Alpha.tex': 'reviewed 2026-11-07 (group5 guard pass; owner fix)',
+            'papers/group5_qed_gauge/paper_30_su2_wilson.tex': 'reviewed 2026-11-07 (group5 guard pass; owner fix)',
+            'papers/group3_foundations/paper_24_bargmann_segal.tex': 'reviewed 2026-11-07 (group5 guard pass; owner fix)',
+            'papers/group5_qed_gauge/paper_51_gravity_arc.tex': 'reviewed 2026-11-07 (group5 guard pass; owner fix)',
+        },
+    },
 ]
 
 
