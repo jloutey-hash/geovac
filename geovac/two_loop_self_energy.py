@@ -3,10 +3,16 @@ C_2S from iterated Connes-Chamseddine spectral action on Dirac-S^3.
 
 GOAL
 ----
-Derive the dimensionless coefficient C_2S = +3.63 (Eides 2001 Tab. 7.3
-two-loop SE 2S contribution +0.857 MHz divided by the LS-7 structural
-prefactor 0.2363 MHz/dim) from spectral data alone, with no empirical
-input from multi-loop QED literature.
+Derive the dimensionless two-loop coefficient C_2S (in units of the LS-7
+structural prefactor alpha^2 (Z alpha)^4 m / (pi^2 n^3) = 0.2363 MHz at n = 2)
+from spectral data alone, with no empirical input from multi-loop QED
+literature.  Literature target: the two-loop S-state coefficient
+B_40 = 0.538 95 of Eides, Grotch and Shelyuto, Phys. Rep. 342, 63 (2001),
+Eq. (59) (Table II; 0.127 MHz at 2S).  B_40 is the full alpha^2 (Z alpha)^4
+coefficient, two-loop vacuum polarization included; the self-energy-only
+share is not separated here.  (The earlier target, C_2S = 3.63 from
+"+0.857 MHz, Eides 2001 Tab. 7.3", had no source and was retired
+2026-11-08.)
 
 ARCHITECTURE
 ------------
@@ -67,14 +73,14 @@ Honest framing: this normalization is the natural choice from
 dimensional analysis of the LS-7 prefactor structure.  An
 alternative normalization (e.g., 1/(2 pi)^2 or omitting the 1/(4 pi))
 would shift C_2S by a factor of 4 or 16.  The verdict structure
-("hits 3.63 +/- few" vs "off by orders of magnitude") is robust
+("hits B_40 +/- few" vs "off by orders of magnitude") is robust
 to this choice; the numerical value is convention-dependent and we
 report alternatives.
 
 VERDICT TIERS
 -------------
-  - Sub-percent (within +/- 10% of 3.63): two-loop QED closes natively
-  - Order of magnitude (within +/- 50% of 3.63): structural form
+  - Sub-percent (within +/- 10% of B_40): two-loop QED closes natively
+  - Order of magnitude (within +/- 50% of B_40): structural form
     correct, calibration off
   - Off by 10x or more: spectral action insufficient at two loops
 """
@@ -108,8 +114,8 @@ __all__ = [
 
 ALPHA = mpmath.mpf(1) / mpmath.mpf("137.035999084")
 HA_TO_MHZ = mpmath.mpf("6579683920.502")  # Hartree frequency in MHz
-C_2S_LITERATURE = mpmath.mpf("3.626642")  # 0.857 MHz / 0.2363 MHz (LS-7)
-LS7_REFERENCE_2S_MHZ = mpmath.mpf("0.857")  # Eides 2001 Tab. 7.3
+C_2S_LITERATURE = mpmath.mpf("0.53895")  # B_40, Eides et al. Phys. Rep. 342 (2001) Eq. (59)
+LS7_REFERENCE_2S_MHZ = mpmath.mpf("0.12736")  # B_40 x 0.23631 MHz at 2S (Table II sum 0.127 MHz)
 
 
 def ls8a_prefactor_MHz(n: int = 2, Z: int = 1) -> mpmath.mpf:
@@ -390,7 +396,7 @@ def verdict(c_2s_value: mpmath.mpf) -> Dict[str, object]:
         tier = ("WEAK: structural form correct, calibration off "
                 "(the paper's LS-8a WEAK verdict band)")
     elif rel_err < mpmath.mpf("9.0"):
-        # Within an order of magnitude (3.63 +/- factor of 10)
+        # Within an order of magnitude (B_40 +/- factor of 10)
         tier = "WEAK: order of magnitude, framework needs refinement"
     else:
         tier = "NEGATIVE: spectral action insufficient at two loops"

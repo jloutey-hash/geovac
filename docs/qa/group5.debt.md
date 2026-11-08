@@ -283,3 +283,21 @@ Every "Still owed" item above is closed. Two of them changed printed results.
 - Paper 30 abstract and the group5 synthesis say the area coefficient is consistent with zero "at n_max = 2";
   true, and n_max = 4 now agrees in substance (the beta = 3 value is -0.0005(1), small but not zero).
 
+## Follow-ons worked (2026-11-08, v6.7.0, MINOR)
+
+The "Still owed (new)" list above is closed except as noted. Primary sources read (Phys. Rep. 342 PDF text; Friar-Sick
+arXiv record); full account in CHANGELOG v6.7.0. The Paper 34 Calc-rZG fit is withdrawn (circular H point, unsourced D
+budgets); D HFS re-sourced to Friar-Sick 2004 and Eq. (414); the 21 cm residual is unattributed with sourced
+magnitudes for scale; "Eq. 2.35" -> Eq. (158); the LS-8a code target -> B_40 = 0.53895; the "Three-projection" row
+and the mu4He+ transport sentence fixed; the axes observation left as is (Drake-Swainson's tag in tab:projection_axes
+is "none", so it is not a transcendental-only witness; the driver's stale "flow" tag was the defect).
+
+**Still owed.**
+- "Friar moment" used for the leading (Z alpha)^4 <r^2> term (~15 loci in Paper 34); SMALL terminology sweep.
+- A Zemach-radius extraction with sourced Layer-2 budgets; a complete hydrogen 21 cm budget.
+- V.D.N exposure IDs now skip V.D.1 (kept stable rather than renumbering ~15 loci); Pattern C narrative at n = 5 needs
+  an owner re-read at the next /qa.
+- TX-A driver tags vector_photon as transcendental-only (one_over_4pi), which the paper's observation rejects; the
+  driver's axis printout is not cited, so left.
+- debug/ top-level file count (2680 vs 600): archive sweep is a PI decision.
+

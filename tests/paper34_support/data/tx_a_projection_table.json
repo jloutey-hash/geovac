@@ -233,7 +233,7 @@
       "variables_added": [],
       "dimensions_added": [],
       "transcendental_class": [
-        "flow"
+        "rational"
       ],
       "signature_pi_intrinsic": false,
       "graded": true,
@@ -553,7 +553,7 @@
       "axes_active": {
         "variable": false,
         "dimension": false,
-        "transcendental_nontrivial": true,
+        "transcendental_nontrivial": false,
         "transcendental_injects_pi": false
       }
     },

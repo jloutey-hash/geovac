@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.0] - 2026-11-08
+
+**MINOR (PI-approved, on recommendation): covers v6.6.1 (published numbers moved: Paper 30's sigma = -0.080 and
+c = 8.95) and the owed follow-ons below, which withdraw a Paper 34 fit and re-source its HFS budgets.** A citation
+reviewer read Eides, Grotch and Shelyuto, Phys. Rep. 342, 63 (2001) (arXiv hep-ph/0002158) and the deuterium sources
+directly; the PM re-checked every value used here against the PDF text or the arXiv record.
+
+### Changed (owner corrections, Paper 34)
+- **Calc-rZG global Zemach-radius fit withdrawn.** Its hydrogen Layer-2 input (-18.5 ppm) was the framework residual
+  evaluated at the literature radius, so that point returned the literature radius by construction; its deuterium
+  Layer-2 input (first -150 ppm, then -286 ppm) had no source. The fit results (r_Z(p) = 1.180(166) and 1.257(51) fm,
+  r_Z(D) = 2.583(1588) fm, chi^2 0.43/1) and the "kernel-limited" conclusion are cut; an extraction with sourced
+  budgets is owed. The convention exposure built on the same numbers (V.D.1, conv_rZG_DHFS) is removed; the exposure
+  catalogue goes from nine entries to eight, Pattern C is restated at n = 5, and the deuteron-polarizability
+  convention prediction is NOT CONFIRMED (no Pachucki-Yerokhin deuterium itemization exists; that pair's 2009/2010
+  papers are helium fine structure).
+- **Deuterium HFS re-sourced:** Zemach -98.0(6) ppm at r_Z(D) = 2.593(16) fm (Friar and Sick, PLB 579, 285 (2004),
+  new bibitem); nuclear effects about +138 ppm (ibid.); experiment minus nonrecoil theory 45.2 kHz (Phys. Rep. Eq. (414)).
+- **Hydrogen 21 cm residual (+18.4 ppm) is no longer attributed.** The "+12 to +18 ppm itemized band", the
+  decomposition into multi-loop QED (~+6 ppm), Bodwin-Yennie recoil (~+6 ppm), polarizability and hadronic VP, and
+  the "about 73% itemized" structural reading had no source. In Eides' review the two-loop alpha^2 (Z alpha) E_F term
+  is about +0.1 ppm, recoil is +5.22 ppm, polarizability is bounded by 4 ppm and hadronic VP is +0.03 ppm; positive
+  omitted terms cannot explain a positive residual. The paper now gives these sourced magnitudes and Eq. (409)
+  (complete theory without polarizability minus experiment, -4.5(1.1) ppm) for scale, and says a budget is owed.
+- **"Eides Eq. 2.35" (8 loci) -> Phys. Rep. Eq. (158)**, the leading finite-size term.
+- Smaller: the muH Lamb row moved from "Three-projection chain" to "Single-projection" (its one projection is
+  rest-mass); the mu4He+ "III.14 transports the entire Eides-bracket machinery" sentence restated as the textbook
+  Z / reduced-mass / radius scalings; r_Z(D) = 2.593 fm attributed to Friar-Sick, not Friar-Payne.
+
+### Changed (code)
+- `geovac/two_loop_self_energy.py`: the LS-8a literature target C_2S = 3.63 ("+0.857 MHz, Eides 2001 Tab. 7.3") had
+  no source; replaced by B_40 = 0.538 95 (Phys. Rep. Eq. (59); 0.127 MHz at 2S, matching the Table II sum). B_40 is
+  the full two-loop coefficient; the self-energy-only share is not separated. No paper states the LS-8a verdict
+  against this target (Paper 34 reports that the native sum diverges), so no paper changes.
+- TX-A driver: Drake-Swainson's transcendental tag aligned with tab:projection_axes ("none"; the flow-tier logs
+  belong to the sum it divides). Counts unchanged; guards pass.
+
+### Housekeeping
+- CLAUDE.md Sec. 2 compaction round 9: 43 bullets (v5.20.12 and older) moved verbatim to
+  `docs/development_frontier_archive.md` (conservation-checked); CLAUDE.md 152 KB -> 141 KB.
+- C16 `g5-carry-forward-2026-11-08` widened (fire-tested: 18 retired forms fire, 19 corrected or nearby forms silent).
+
+### Still owed
+- The "Friar moment" label is used for the leading (Z alpha)^4 <r^2> term at ~15 loci in Paper 34; the Friar term
+  proper is the (Z alpha)^5 <r^3>_(2) term (Phys. Rep. Eq. (168)). Terminology sweep, SMALL.
+- A Zemach-radius extraction with sourced Layer-2 budgets; a complete hydrogen 21 cm budget.
+- `debug/` holds 2680 top-level files (budget 600); an archive sweep is a separate PI decision.
+
 ## [v6.6.1] - 2026-11-08
 
 **group5 carry-forward worked (PI: "take your recommendations and work the carry-forward items").** Two Paper 30

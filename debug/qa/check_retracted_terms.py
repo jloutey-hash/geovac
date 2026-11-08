@@ -10179,11 +10179,11 @@ REGISTRY = [
     },
     {
         "id": 'g5-carry-forward-2026-11-08',
-        "pattern": r'Eides[~\s]*(?:\\S[~\s]*)?Tab\.?[~\s]*7\.\d|Tab\.?[~\s]*7\.[36]\b|39\.500\b|metadata-level\s+test\s+correctly\s+flags|\\sim\s*196\$?\s+commute|all\s+seven\s+tested\s+rows|\$?8\.95\$?\s+at\s+\$?n_|=\s*-0\.080\s*\\pm|1500\$?\s+of\s+the\s+\$?5047',
+        "pattern": r'Eides[~\s]*(?:\\S[~\s]*)?Tab\.?[~\s]*7\.\d|Tab\.?[~\s]*7\.[36]\b|39\.500\b|metadata-level\s+test\s+correctly\s+flags|\\sim\s*196\$?\s+commute|all\s+seven\s+tested\s+rows|\$?8\.95\$?\s+at\s+\$?n_|=\s*-0\.080\s*\\pm|1500\$?\s+of\s+the\s+\$?5047|Eides[~\s]*Eq\.?[~\s]*2\.35|itemized\s+\$?\+12\$?--|\\approx\s*73\\%\$?\s+itemized|1\.180\(166\)|2\.583\(1588\)|1\.257\(51\)|\$-286\$~?\s*ppm|Layer-2\$?_D\$?\s*=\s*\$-150\$',
         "exempt_if_nearby": withdrawal_marker('g5-carry-forward-2026-11-08'),
         "severity": 'fail',
         "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
-        "note": "Registered 2026-11-08 (group5 carry-forward). Retired: 'Eides Tab. 7.x' pointers for hydrogen, deuterium and He+ budgets (Ch. 7 of the 2007 book is the muonic-atom Lamb shift; pointers now name sections of Ch. 3, 6, 11, 12); the '-39.500 ppm' Eides Zemach reference (no source; the closed form -2 Z alpha m_e r_Z gives -39.495 ppm, which the operator reproduces); Paper 34 TX-A: the uncomputed 16x16 counts ('~196 commute'), the metadata 'correctly flags' (hopf, spinor_lift) claim (it came from the withdrawn Hopf variable alpha), and 'seven tested rows' (the Uehling row enters Pi as an input; six rows). Paper 30 Monte Carlo on truncated complexes: the n_max = 3 monopole fit 'c = 8.95 at n_max = 2,3' (full complex: c = 22.9, R^2 = 0.935) and the n_max = 4 joint-fit 'sigma = -0.080 +- 0.002' on '1500 of the 5047' plaquettes (full complex: -0.0043 +- 0.0015).",
+        "note": "Registered 2026-11-08 (group5 carry-forward). Retired: 'Eides Tab. 7.x' pointers for hydrogen, deuterium and He+ budgets (Ch. 7 of the 2007 book is the muonic-atom Lamb shift; pointers now name sections of Ch. 3, 6, 11, 12); the '-39.500 ppm' Eides Zemach reference (no source; the closed form -2 Z alpha m_e r_Z gives -39.495 ppm, which the operator reproduces); Paper 34 TX-A: the uncomputed 16x16 counts ('~196 commute'), the metadata 'correctly flags' (hopf, spinor_lift) claim (it came from the withdrawn Hopf variable alpha), and 'seven tested rows' (the Uehling row enters Pi as an input; six rows). Paper 30 Monte Carlo on truncated complexes: the n_max = 3 monopole fit 'c = 8.95 at n_max = 2,3' (full complex: c = 22.9, R^2 = 0.935) and the n_max = 4 joint-fit 'sigma = -0.080 +- 0.002' on '1500 of the 5047' plaquettes (full complex: -0.0043 +- 0.0015). Follow-on (v6.7.0, primary sources read): 'Eides Eq. 2.35' (the leading finite-size term is Phys. Rep. 342 Eq. (158)); the H 21 cm '+12--+18 ppm' itemized band and '~73% itemized' attribution (no source; Phys. Rep. Eq. (409) gives -4.5(1.1) ppm); the Calc-rZG fit results 1.180(166), 1.257(51), 2.583(1588) fm (H Layer-2 circular, D Layer-2 unsourced; fit withdrawn); the D HFS '-286 ppm' and '-150 ppm' Layer-2 budgets (no source; Friar-Sick 2004 Zemach -98.0(6) ppm, nuclear ~138 ppm).",
         "files": [
             'papers/group*/*.tex',
             'papers/synthesis/*.tex',
@@ -10199,6 +10199,7 @@ REGISTRY = [
             'papers/group6_precision_observations/paper_34_projection_taxonomy.tex': 'reviewed 2026-11-08 (group5 carry-forward; owner fix)',
             'papers/group4_quantum_computing/paper_23_nuclear_shell.tex': 'reviewed 2026-11-08 (group5 carry-forward; Zemach reference re-sourced)',
             'papers/group5_qed_gauge/paper_30_su2_wilson.tex': 'reviewed 2026-11-08 (group5 carry-forward; full-complex reruns, owner fix)',
+            'papers/synthesis/group6_precision_observations_synthesis.tex': 'reviewed 2026-11-08 (follow-on; rZG exposure cut)',
         },
     },
 ]

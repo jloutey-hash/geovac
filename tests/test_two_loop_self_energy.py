@@ -2,7 +2,7 @@
 
 These tests verify the structural properties of the iterated CC
 spectral action two-loop SE on Dirac-S^3.  They do NOT assert
-agreement with the literature value C_2S = +3.63 because the bare
+agreement with the literature value B_40 = 0.539 (Eides 2001, Eq. (59)) because the bare
 spectral sum is UV-divergent — see debug/ls8a_two_loop_self_energy_memo.md
 for the WEAK verdict.
 """

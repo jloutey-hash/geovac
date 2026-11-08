@@ -967,3 +967,538 @@ working-tree state immediately before this pass (the `+` lines are the replaceme
 +projection chain) closes by Antognini~2013 multi-loop QED
 +plus proton polarizability plus recoil~NLO with the K\"all\'en--
 ```
+
+## 2026-11-08: rZG fit withdrawn, D HFS re-sourced
+
+Owner pass (PI-approved follow-on). The Calc-rZG global Zemach-radius fit is
+withdrawn (circular hydrogen Layer-2; unsourced deuterium Layer-2 budgets of
+-150 and -286 ppm; unsourced +-25 ppm Eides vs Pachucki--Yerokhin drift).
+D HFS re-sourced to Friar--Sick, Phys. Lett. B 579, 285 (2004) (r_Z(D) =
+2.593(16) fm, Zemach -98.0(6) ppm, nuclear effects about 138 ppm) and Eides
+et al., Phys. Rep. 342, 63 (2001), Eq. (414) (45.2 kHz). Verbatim before
+(-) / after (+) of every cut or rewritten passage, as unified diffs with
+zero context; line numbers refer to the pre-edit / post-edit files.
+
+### papers/group6_precision_observations/paper_34_projection_taxonomy.tex
+
+```diff
+@@ -989,7 +989 @@ overshoot at LO-only).  $r_Z$ values themselves are Layer-2 inputs
+-lattice or atomic spectroscopy).  The W1b recoil-mixing extension
+-sprint (May 2026, see \texttt{debug/w1b\_recoil\_mixing\_extension\_memo.md})
+-showed that this kernel improvement does NOT close the $\sim 0.22$~fm
+-muH-alone vs Eides offset diagnosed by Sprint Calc-rZG-extended;
+-that offset is now attributable to Layer-2 itemization-convention
+-mismatch between Krauth~2017, Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, and Antognini-Krauth-Pohl~2015,
+-not to kernel approximation.  Operator-level verified at I=1 in
++lattice or atomic spectroscopy).  Operator-level verified at I=1 in
+@@ -4167,7 +4161,8 @@ Cumulative residual $-211$ ppm (corrected 2026-08-28; see
+-\S\ref{sec:autopsy_d_hfs}).  The framework chain now sits $\sim 72$~ppm
+-\emph{below} the Pachucki--Yerokhin~2010 / Karshenboim~2005 total theory
+-($327.339$~MHz), the expected direction for a chain that omits deuteron
+-polarizability (total TPE $44.5$~kHz $= +136$~ppm, QCD-internal;
+-corrected 2026-08-29 from a $+44$~ppm unit slip), multi-loop QED ($\sim$few ppm,
+-LS-8a wall), recoil NLO and finite-size charge --- but the itemization
+-does \emph{not} close at the $\pm 25$~ppm level and is an open item.
++\S\ref{sec:autopsy_d_hfs}).  The negative sign is the expected one for a
++chain that omits deuteron polarizability: the total nuclear-structure
++effect is positive, about $+138$~ppm (Friar--Sick~2004~\cite{friar_sick2004};
++total TPE $44.5$~kHz $= +136$~ppm, QCD-internal; experiment exceeds
++nonrecoil theory by $45.2$~kHz, Eides et al.\ Phys.\ Rep.\ Eq.~(414)).
++The chain also omits multi-loop QED ($\sim$few ppm, LS-8a wall), recoil
++NLO and finite-size charge; the itemization does \emph{not} close and is
++an open item.
+@@ -4187,4 +4182,2 @@ the PY~2010 budget magnitude, are \textbf{withdrawn} --- they rested on
+-a baseline that was high by $496.5$~ppm).  Polarizability
+-sub-component convention exposure (Friar--Payne~2005 vs Pachucki--Yerokhin
+-2010+) catalogued in V.D.5 (\S\ref{sec:conv_d_polarizability}; V.D-prediction
+-sprint, 2026-05-10), refining \S\ref{sec:conv_rZG_DHFS}. \\
++a baseline that was high by $496.5$~ppm).  The omitted polarizability
++channel is recorded in V.D.5 (\S\ref{sec:conv_d_polarizability}). \\
+@@ -4382,2 +4375 @@ Source: \texttt{debug/hylleraas\_r12\_track1\_memo.md} \S3. \\
+-Self-consistent $r_Z$ global extraction (Sprint Calc-rZG, 2026-05-09;
+-Layer-2 corrected 2026-05-09; extended-fit diagnostic 2026-05-09)
++Self-consistent $r_Z$ global extraction (Sprint Calc-rZG, 2026-05-09)
+@@ -4385,22 +4377,8 @@ Layer-2 corrected 2026-05-09; extended-fit diagnostic 2026-05-09)
+-$\mu$H 1S HFS $+$ D 1S HFS & \emph{Original 3-obs fit} (Layer-2 corrected,
+-$\sigma_{\mu H}$=1500 ppm, ``LS-8a wall scale''): $r_Z(p) = 1.180(166)$ fm
+-[$+0.80\sigma$ above Eides $1.045(20)$, $+1.00\sigma$ above lattice
+-$1.013(10)(12)$], $r_Z(D) = 2.583(1588)$ fm [$-0.01\sigma$ from
+-Friar--Payne $2.593(16)$], $\chi^2/\text{dof} = 0.43/1$.
+-\emph{Extended-fit diagnostic} (sprint Calc-rZG-extended, $\sigma_{\mu H}$
+-hardened to literature kernel scale ${\sim}367$ ppm): $r_Z(p) =
+-1.257(51)$~fm, $\sigma$ closes to $51$~mfm but extracted central
+-value sits $+3.85\sigma$ above Eides and $+4.55\sigma$ above lattice.
+-& C & \textbf{Framework $r_Z(p)$ extraction is currently kernel-limited,
+-not Layer-2-itemization-limited}.  Original 3-obs fit at $\sigma=166$~mfm
+-(driven by $\sigma_{\mu H}=1500$~ppm conservative) lands within $1\sigma$
+-of all three literature determinations after Layer-2 budget correction
+-(2026-05-09 bug fix; original rZG memo specified Layer-2$_D$ = $-150$ ppm
+-based on a mis-itemization, corrected to $-286$ ppm per Pachucki--Yerokhin
+-2010 + Friar--Payne 2005 closure analysis; Layer-2$_H$ tightened from
+-$0$ to $-18.5$ ppm); $\chi^2/\text{dof} = 0.43/1$
+-confirms internal fit consistency.  \textbf{The original $r_Z(D) = 6.18$
+-fm artifact was traced to a Layer-2 budget misspecification, NOT to a
+-recoil double-counting in the production cross-register $V_{eN}$
+-kernel.}  Diagnostic verification
+-(\texttt{debug/rzg\_bug\_diagnosis\_compute.py}): the production
++$\mu$H 1S HFS $+$ D 1S HFS & \textbf{Withdrawn}: no extracted radius
++stands & C & The global fit is withdrawn.  Its hydrogen Layer-2 term
++was the framework residual evaluated at the literature radius
++$r_Z(p) = 1.045$~fm, so the hydrogen point returned that radius by
++construction, and its deuterium Layer-2 budget had no source.  A radius
++extraction with sourced Layer-2 budgets is owed (the sourced deuterium
++inputs are collected in \S\ref{sec:autopsy_d_hfs}).  Independent of
++the fit, a code check stands: the production
+@@ -4410,34 +4388,4 @@ hydrogen, $2.03\%$ for deuterium, and $8.18\%$ for muonium without
+-any species-specific code path; it is species-agnostic and
+-correct.  Six new D and muonium tests added to
+-\texttt{tests/test\_cross\_register\_vne.py} document and protect
+-this property going forward.  \textbf{Extended-fit diagnostic
+-finding (2026-05-09 follow-on)}: tightening $\sigma_{\mu H}$ from
+-1500~ppm to either 150~ppm (Krauth 2017 multi-loop QED itemization) or
+-to 367~ppm (5\% kernel approximation in muonic systems) drives
+-$\sigma(r_Z(p))$ below 50 mfm but extracts a central value
+-$r_Z(p)\sim 1.18$--$1.26$~fm, INCONSISTENT with both Eides
+-$1.045(20)$ and lattice $1.013(16)$ at $>3.85\sigma$.  The +0.22~fm
+-offset between the muH-alone extraction ($r_Z=1.265$~fm) and Eides
+-($1.045$~fm) is the structural fingerprint of recoil-mixing in the
+-literature Zemach formula that the framework's leading-order Eides
+-kernel $-2Zm_\text{red}r_Z$ does not yet capture
+-(Sprint MH Track B \S2.4--2.5 W1b operator-level extension point).
+-\textbf{Verdict: framework currently \emph{cannot} resolve the
+-Eides-vs-lattice 30~mfm tension at the operator-level precision of
+-the leading-order Eides Zemach kernel.}  Path to sub-30~mfm: extend
+-\texttt{magnetization\_density.py} to include recoil-mixing
+-(Friar--Payne 2005 \S III treatment), expected to close the +0.22~fm
+-muH-alone offset and bring $\sigma(r_Z(p))$ to ${\sim}30$~mfm.
+-\textbf{Genuine prospective contribution}: §III.18-based global fit
+-operator-level-localizes the ``Layer-2 itemization is the load-bearing
+-systematic for atomic $r_Z$ extraction'' finding --- a unified
+-analytical lens not currently produced by standard atomic-physics
+-compilations.  Note that the diagnostic exposes a SECOND load-bearing
+-systematic: the kernel approximation order of the framework's W1b
+-operator dominates over Layer-2 itemization in muonic regime
+-extraction.  §III.18 itself reproduces Eides analytical
+-$-2 Z\alpha m_e r_Z$ to floating-point precision.  Source memos:
+-\texttt{debug/calc\_track\_rZG\_global\_zemach\_memo.md},
+-\texttt{debug/rzg\_bug\_diagnosis\_memo.md} (bug fix),
+-\texttt{debug/calc\_track\_rZG\_extended\_memo.md} (extended-fit
+-diagnostic).  \textbf{Sprint W1b recoil-mixing extension
++any species-specific code path (\texttt{tests/test\_cross\_register\_vne.py}).
++\S III.18 itself reproduces Eides analytical
++$-2 Z\alpha m_e r_Z$ to floating-point precision.
++\textbf{Sprint W1b recoil-mixing extension
+@@ -4452,14 +4400 @@ fm reproduces Krauth~2017's full-theory line to $\sim 1\%$ (vs $\sim
+-3\%$ overshoot at LO).  \textbf{rZG-extended-v2 fit result}: with
+-NLO kernel and Layer-2 re-anchored at the Eides reference,
+-$\sigma(r_Z(p))$ tightens from 51~mfm to \textbf{16~mfm} (below the
+-30~mfm Eides-vs-lattice gap), but the central value \emph{remains}
+-at $r_Z(p) \approx 1.286$~fm --- only $\sim 10\%$ of the v1
+-$+0.22$~fm offset closes.  \textbf{Diagnostic verdict revised}: the
+-$+0.22$~fm offset is NOT kernel-approximation; it is a Layer-2
+-itemization-convention mismatch between Krauth~2017 (used for muH
+-Layer-2) and Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007} Ch.~11 (used for H~21cm Layer-2), with
+-the convention difference at $\sim 0.01\%$ of $\nu_F$ propagating
+-to $\sim 25$~mfm in extracted $r_Z(p)$.  Next-step recommendation:
+-Layer-2 convention reconciliation sprint, NOT further kernel
+-extensions.  See \S~\ref{sec:convention_exposures} for catalogue
+-context (entry \S~\ref{sec:conv_rZG_DHFS}).  Source memo:
++3\%$ overshoot at LO).  Source memo:
+@@ -5195,3 +5130,2 @@ V.D-prediction candidate}, class~(i) inter-compilation itemization,
+-sibling to \S\ref{sec:conv_d_polarizability} (which addresses
+-sub-component itemization of deuteron HFS polarizability across
+-Friar--Payne~2005 and Pachucki--Yerokhin~2010+).
++sibling to \S\ref{sec:conv_d_polarizability} (which records the
++deuteron polarizability channel of the D HFS).
+@@ -5597,4 +5531,3 @@ Cross-anchoring the three baselines against each other now reproduces T
+-to $0.02$~ppm.  \textbf{The prior claim that the $+285.6$~ppm residual
+-matched the $-286$~ppm PY 2010 Layer-2 budget magnitude is withdrawn};
+-the itemization does not close at the $\pm 25$~ppm level.  What replaces
+-it is a sharper structural statement.
++to $0.02$~ppm.  The corrected residual does not close against the
++sourced nuclear-structure budget; what it yields instead is a sharper
++structural statement.
+@@ -5692,6 +5625,8 @@ cited Layer-2 evaluation; the $+23.0$~ppm attribution to higher-order
+-QED is an inference from the H parallel, not an itemization.  The Layer-2 inputs are the scalar
+-$r_Z(D)$ value; the PY 2010 budget itemization
+-\textbf{[2026-08-28: listed here historically, but the chain does not
+-consume it --- the only Layer-2 scalar entering is $r_Z(D)$.  This
+-matters for Prediction~\ref{pred:l2_presence}: with $r_Z(D)$ alone as
+-the input, the corrected $-210.9$~ppm residual is not bounded by
++QED is an inference from the H parallel, not an itemization.  The only
++Layer-2 scalar the chain consumes is $r_Z(D) = 2.593(16)$~fm, whose
++Zemach term is $-98.0(6)$~ppm (Friar--Sick~2004~\cite{friar_sick2004});
++the same source puts the total nuclear effects at about $+138$~ppm,
++consistent with the $+135.9$~ppm TPE total above and with the
++$45.2$~kHz by which experiment exceeds nonrecoil theory (Eides et al.\
++Phys.\ Rep.\ Eq.~(414)).  With $r_Z(D)$ alone as the input, the
++$-210.9$~ppm residual is not bounded by
+@@ -5699,4 +5634,2 @@ $\max(\varepsilon_\text{basis}, |L_2|)$ on the ppm-class reading, so this
+-row is an open case for that Prediction rather than a supporting one.]}
+-($-286$~ppm convention; alternate Eides \S~12.2.2 gives $-150$~ppm,
+-the source of the well-known $\sim 5$~fm extraction artifact in the
+-global rZG fit, see \S\ref{sec:conv_rZG_DHFS}).  The operator
++row is an open case for Prediction~\ref{pred:l2_presence} rather than a
++supporting one.  The operator
+@@ -5707,16 +5640,7 @@ autopsy.
+-\textbf{Why D Layer-2 is deeper than H Layer-2.}  The cumulative
+-residual was itemized per Pachucki--Yerokhin~2010 as follows.
+-\textbf{[Withdrawn 2026-08-28: these entries sum to $\approx +285$~ppm,
+-the retired residual.  The corrected residual is $-210.9$~ppm and the
+-itemization does not close; the list is retained only as the historical
+-budget it was matched against.  The $+200$~ppm polarizability entry
+-below has since been re-sourced (2026-08-29): its near-coincidence with
+-the $+210.9$~ppm requirement was accidental, and the primary value is
+-$+336.5$~ppm with the \emph{total} TPE at $+135.9$~ppm.]}
+-\begin{itemize}\setlength\itemsep{0pt}
+-\item Deuteron polarizability ($\sim +200$~ppm) is the dominant
+-component, $\sim 30\times$ the proton's contribution.
+-\textbf{[Re-sourced 2026-08-29: the primary value is
+-$+110.16(38)$~kHz $= +336.5$~ppm (Bonilla \emph{et al.},
+-arXiv:2508.18776); the $\sim +200$ figure is neither that nor the
+-$+135.9$~ppm total.  Dominance and sign stand; the magnitude does not.]}  This is
++\textbf{Why D Layer-2 is deeper than H Layer-2.}  The sourced budget is
++the one above: Zemach $-98.0(6)$~ppm at $r_Z(D) = 2.593(16)$~fm and
++total nuclear effects of about $+138$~ppm
++(Friar--Sick~2004~\cite{friar_sick2004}; Eides et al.\ Phys.\ Rep.\
++Eq.~(414)), with the deuteron polarizability channel ($+110.16(38)$~kHz
++$= +336.5$~ppm, Bonilla \emph{et al.}, arXiv:2508.18776) dominant and
++opposite in sign to the elastic terms.  Polarizability is
+@@ -5725,15 +5649,5 @@ fundamentally because the deuteron is a weakly bound n+p system
+-with much larger spatial extent ($r_Z(D) = 2.5\,r_Z(p)$).
+-\item Multi-loop QED ($\alpha^2(Z\alpha)$, $\sim +40$~ppm) is the
+-LS-8a renormalization gap, $\sim 7\times$ H scaling because of the
+-larger nuclear extent's $\langle r\rangle$ couplings.
+-\item Recoil NLO beyond reduced-mass ($\sim +30$~ppm) is the W1a-D
+-Roothaan kernel-level recoil-mixing wall.
+-\item Finite-size charge ($\sim +10$~ppm) and higher Friar moments
+-($\sim +5$~ppm) are Layer-2 inputs via \S\ref{sec:proj_charge_density}
+-and \S\ref{sec:proj_magnetization_density} NLO opt-in.
+-\item Zemach NLO recoil-mixing $m_e/(m_e+m_d) \approx 2.7 \times 10^{-4}$
+-is structural noise in the electronic regime ($+0.028$~ppm).
+-\item Convention drift ($\pm 25$~ppm; Eides \S~12.2.2 vs Pachucki--Yerokhin
+-2010) is the largest pre-existing literature-itemization
+-sensitivity, documented in \S\ref{sec:conv_rZG_DHFS}.
+-\end{itemize}
++with much larger spatial extent ($r_Z(D) = 2.5\,r_Z(p)$).  The Zemach
++NLO recoil-mixing factor $m_e/(m_e+m_d) \approx 2.7 \times 10^{-4}$
++is structural noise in the electronic regime ($+0.028$~ppm).  The
++remaining omitted components (multi-loop QED, recoil beyond reduced
++mass, finite-size charge) are not itemized here from a sourced budget.
+@@ -5747,2 +5661,3 @@ adding one qubit and 7 Pauli terms to the I·S encoding), (c) the
+-Layer-2 budget magnitude ($-286$ ppm vs $-18$ ppm, scaling with the
+-nuclear extent and complexity).  The operator-level autopsy verifies
++nuclear-structure budget (about $+138$~ppm in total for D, sign-reversed
++by polarizability, against a Zemach-dominated negative correction for
++H, scaling with the nuclear extent and complexity).  The operator-level autopsy verifies
+@@ -5758,2 +5673,2 @@ sentence below refers only to the itemization axis surveyed here.]}
+-No new convention mismatch
+-surfaced beyond the pre-existing \S\ref{sec:conv_rZG_DHFS} exposure.
++No convention mismatch
++surfaced on that axis.
+@@ -7601 +7516 @@ compilations (Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Kar
+-Pachucki--Yerokhin~2010, Antognini~2013, Friar--Payne~2005)
++Pachucki--Yerokhin~2009, Antognini~2013)
+@@ -7605,2 +7520,2 @@ inputs in their native conventions cannot expose these mismatches
+-structurally.  This subsection consolidates the nine exposures
+-catalogued to date (V.D.1--V.D.4 from the 2026-05-09 multi-track
++structurally.  This subsection consolidates the eight exposures
++catalogued to date (V.D.2--V.D.4 from the 2026-05-09 multi-track
+@@ -7616 +7531 @@ Convention difference~$|$~Magnitude~$|$~Sprint reference $+$ Closure verdict.}
+-\caption{Literature convention exposures catalogued to date (V.D.1--V.D.6
++\caption{Literature convention exposures catalogued to date (V.D.2--V.D.6
+@@ -7629,5 +7543,0 @@ Magnitude & Sprint ref. \\
+-\S\ref{sec:conv_rZG_DHFS} & D 1S HFS Layer-2 budget &
+-Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007} \S~12.2.2 vs Pachucki--Yerokhin~2010 &
+-itemization of recoil NLO + multi-loop QED + finite-size correction &
+-$\sim 0.01\%$ of $\nu_F$ $\to$ $\sim 25$ mfm in $r_Z(p)$ &
+-Calc-rZG (\S\ref{sec:offprecision}) \\
+@@ -7653,4 +7563,4 @@ Sprint MH / Calc-muH Lamb autopsy v1 \\
+-\S\ref{sec:conv_d_polarizability} & D 1S HFS polarizability sub-component &
+-Friar--Payne~2005 vs Pachucki--Yerokhin~2010+ &
+-low-energy aggregate (FP) vs explicit polarizability $+$ Zemach split (PY) &
+-$\sim 240$~ppm of $E_F$; $\sim 80$~kHz absolute &
++\S\ref{sec:conv_d_polarizability} & D 1S HFS polarizability channel &
++Bonilla \emph{et al.}~2025~\cite{bonilla2025} (single evaluation) &
++none established; the channel is not consumed by the chain &
++$+336.5$~ppm polarizability vs $+135.9$~ppm TPE total &
+@@ -7702,80 +7611,0 @@ Sub-sprint M-Z, 2026-05-23 \\
+-\subsubsection{D 1S HFS Layer-2 itemization (Eides vs Pachucki--Yerokhin)}
+-\label{sec:conv_rZG_DHFS}
+-
+-\textbf{Observable.}  Deuterium 1S hyperfine splitting
+-$\nu_\text{HFS}(D) = 327\,384\,352.522$~Hz (Wineland--Ramsey 1972),
+-used in the Sprint Calc-rZG global fit (\S\ref{sec:offprecision}, row
+-``Self-consistent $r_Z$ global extraction'') to extract
+-$r_Z(D)$ via the framework's \S\ref{sec:proj_magnetization_density}
+-operator.
+-
+-\textbf{Source compilations.}  Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007} Ch.~11 (used as the
+-canonical Layer-2 budget for H 21cm in this paper) and
+-Pachucki--Yerokhin~2010 (the standard atomic-physics itemization for
+-deuterium HFS).
+-
+-\textbf{Convention difference.}  The two compilations use different
+-groupings for the recoil-NLO + multi-loop QED + finite-size
+-contributions to $\nu_F^D$.  Eides \S~12.2.2 itemizes the leading
+-Zemach line at $-150$~ppm; Pachucki--Yerokhin~2010, when fully
+-expanded with the Friar--Payne~2005 closure analysis, places the
+-itemization at $-286$~ppm.  Both compilations close to the same
+-total $\nu_\text{HFS}(D)$ at the precision the deuterium HFS
+-measurement reports; the difference is in how sub-leading recoil and
+-multi-loop contributions are aggregated.
+-
+-\textbf{Magnitude.}  $\sim 0.01\%$ of $\nu_F$, propagating to
+-$\sim 25$~mfm in extracted $r_Z(p)$ via the global fit.
+-
+-\textbf{Sprint reference and closure.}  The original Sprint Calc-rZG
+-fit (2026-05-09 morning) used the Eides $-150$~ppm itemization for
+-deuterium; this gave $r_Z(D) = 6.18(132)$~fm, the well-known
+-$\sim 5$~fm artifact.  The diagnostic memo
+-\texttt{debug/rzg\_bug\_diagnosis\_memo.md} verified that the
+-production cross-register $V_{eN}$ kernel
+-(\texttt{geovac.cross\_register\_vne}) reproduces leading-order
+-Bethe--Salpeter recoil at $2.86\%$ for hydrogen, $2.03\%$ for
+-deuterium, and $8.18\%$ for muonium, species-agnostically and
+-correctly.  The artifact came from the Layer-2 budget specification
+-for D HFS, not from the framework kernel.  Re-anchoring to the
+-Pachucki--Yerokhin~2010 budget at $-286$~ppm closed the extraction
+-to $r_Z(D) = 2.583(1588)$~fm (within $0.01\sigma$ of Friar--Payne
+-$2.593(16)$~fm).  \textbf{Closure verdict:} resolved by Layer-2
+-budget re-anchoring.  The original ``recoil double-counting''
+-diagnosis was a misdiagnosis; the issue was Layer-2 itemization
+-specification, not a kernel bug.
+-
+-\textbf{Operator-level autopsy refinement (May 9 2026).}  The Track 5
+-operator-level autopsy of D 1S HFS (\S\ref{sec:autopsy_d_hfs})
+-operates exclusively at the Pachucki--Yerokhin~2010 / Friar--Payne~2005
+-$-286$~ppm Layer-2 budget convention.  Component-by-component the
+-framework reproduces (a) the $\hat{I}\cdot\hat{S}$ Hamiltonian at I=1
+-on the 6-dim joint nuclear-electronic Hilbert space at machine
+-precision (multiplicity ratio D/H $= 3/2$ to 12 digits); (b) the
+-\S\ref{sec:proj_magnetization_density} operator-level Zemach at
+-$r_Z(D) = 2.593$~fm to $\sim 1.45 \times 10^{-14}\%$ of the LO shift;
+-and (c) the cumulative chain residual, corrected on 2026-08-28 to
+-$-210.9$~ppm.  \textbf{The previously reported match between a
+-$+285.6$~ppm residual and the $-286$~ppm PY 2010 Layer-2 budget
+-magnitude is withdrawn}: it rested on a Bohr--Fermi baseline that was
+-high by $496.5$~ppm (\S\ref{sec:autopsy_d_hfs}).  With the corrected
+-baseline the residual changes sign and the budget itemization does not
+-close; whether it closes under either compilation's convention is now
+-an open item.  No new convention mismatch surfaced at the operator level.  This sharpens the $\sim 0.01\%$ /
+-$\sim 25$~mfm magnitude estimate to: framework-side architecture is
+-identical for H and D (same operators, same chains, same scope
+-boundaries); the Layer-2 budget magnitudes differ by $\sim 16\times$
+-because the deuteron's nuclear-structure complexity (NN binding
+-dynamics inside a weakly bound n+p system) makes its polarizability,
+-multi-loop QED, and recoil NLO contributions much larger than the
+-proton's at the same precision.  The convention exposure is
+-intrinsically a Layer-2 itemization split, NOT a framework
+-architecture issue.
+-
+-\textbf{Cross-references.}  Originating documentation:
+-\S\ref{sec:offprecision} Sprint Calc-rZG row.  Operator-level
+-elaboration: \S\ref{sec:autopsy_d_hfs}.  Source memos:
+-\texttt{debug/calc\_track\_rZG\_global\_zemach\_memo.md},
+-\texttt{debug/rzg\_bug\_diagnosis\_memo.md},
+-\texttt{debug/d\_hfs\_autopsy\_track5\_memo.md}.
+-
+@@ -7889 +7719 @@ Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md}
+-\subsubsection{D 1S HFS polarizability sub-component (Friar--Payne vs Pachucki--Yerokhin)}
++\subsubsection{D 1S HFS polarizability channel}
+@@ -7894,41 +7724,18 @@ $\nu_\text{HFS}(D) = 327\,384\,352.522$~Hz, with focus on the
+-\emph{deuteron polarizability} sub-component of the Layer-2 budget
+-entering the framework's $-210.9$~ppm chain residual
+-(\S\ref{sec:autopsy_d_hfs} Track~5 autopsy).  This refines the broader
+-\S\ref{sec:conv_rZG_DHFS} entry to the dominant polarizability piece.
+-
+-\textbf{Source compilations.}  Friar--Payne~2005 (PRC \textbf{72},
+-014002; building on Friar~1979 PRC \textbf{20}, 325) versus
+-Pachucki--Yerokhin~2010 (the modern itemization framework adopted in
+-Kalinowski--Pachucki--Yerokhin~2018 PRA \textbf{98}, 062513 for
+-muonic D and applied analogously for electronic D), and the recent
+-Bonilla et al.~2025 chiral-EFT deuteron nuclear-structure update
+-(arXiv:2508.18776).
+-
+-\textbf{Convention difference.}  Friar--Payne~2005 aggregates the
+-``low-energy nuclear-structure $+$ polarizability $+$ dispersion $+$
+-Friar-moment recoil'' contributions into a single low-energy
+-aggregate term (e.g., $\delta E_\text{Low}(eD) = 87.3$~kHz in
+-Friar--Payne's reporting style).  Pachucki--Yerokhin~2010+ separates
+-polarizability ($\sim +240 \times 10^{-6}\,E_F \approx +78.6$~kHz)
+-and Zemach ($\sim -100 \times 10^{-6}\,E_F \approx -32.7$~kHz)
+-explicitly as distinct itemized lines, using chiral-EFT-derivable
+-nuclear-structure operators rather than Friar--Payne effective
+-Friar moments.  Both compilations close to similar bottom-line
+-totals at the experimental precision (Wineland--Ramsey~1972 $\sim$few
+-ppb), but per-component itemization differs structurally.  The
+-disagreement reaches operational consequences: Bonilla et al.
+-2024/2025 documents a $5\sigma$ disagreement with previous
+-calculations on muonic D HFS, while the underlying convention
+-difference applies to electronic D HFS as well.
+-
+-\textbf{Magnitude.}  $\sim 240$~ppm of $E_F$ for the polarizability
+-term in the PY itemization \textbf{[note 2026-08-29: the chiral-EFT
+-evaluation of Bonilla \emph{et al.}\ gives the polarizability channel
+-as $+110.16(38)$~kHz $= +336.5$~ppm and the \emph{total} TPE as
+-$44.5(1.1)$~kHz $= +135.9$~ppm; the spread between these itemizations
+-is exactly the convention exposure this entry documents, and the
+-\emph{total} is the convention-independent quantity]}; the convention split (bundled-vs-separated) is
+-$\sim$tens-to-hundreds of ppm of the observable; $\sim 80$~kHz
+-absolute on the 327~MHz observable.  Comparable to V.D.1's
+-$\sim 25$~mfm in $r_Z(p)$ precedent; both at the $10^{-4}$ to
+-$10^{-3}$ relative scale.
++\emph{deuteron polarizability} channel of the nuclear-structure budget
++behind the framework's $-210.9$~ppm chain residual
++(\S\ref{sec:autopsy_d_hfs} Track~5 autopsy).
++
++\textbf{Sources.}  Bonilla \emph{et al.}~2025~\cite{bonilla2025}
++chiral-EFT deuteron nuclear-structure evaluation (arXiv:2508.18776);
++Friar--Sick~2004~\cite{friar_sick2004} for the Zemach radius and the
++total nuclear effects; Eides et al.\ Phys.\ Rep.\ Eq.~(414) for the
++difference between experiment and nonrecoil theory.
++
++\textbf{Convention difference.}  None is established: no second
++sourced itemization of this channel for electronic D HFS is available
++here to compare against.  What is sourced is a single decomposition:
++polarizability $+110.16(38)$~kHz $= +336.5$~ppm against a TPE total
++of $44.5(1.1)$~kHz $= +135.9$~ppm (Bonilla \emph{et al.}), the total
++consistent with the $\approx +138$~ppm of
++Friar--Sick~2004~\cite{friar_sick2004} and with the $45.2$~kHz of
++Eides et al.\ Phys.\ Rep.\ Eq.~(414).
+@@ -7937,3 +7744,2 @@ $10^{-3}$ relative scale.
+-(\texttt{debug/v\_d\_prediction\_sprint\_memo.md} Candidate~A); refines
+-\S\ref{sec:conv_rZG_DHFS} to the polarizability-specific sub-component,
+-addressing the dominant Layer-2 budget item.  \textbf{Closure verdict \textnormal{(corrected 2026-08-29)}:}
++(\texttt{debug/v\_d\_prediction\_sprint\_memo.md} Candidate~A).
++\textbf{Closure verdict \textnormal{(corrected 2026-08-29)}:}
+@@ -7944,2 +7750,2 @@ $-210.9$~ppm and why this row is an open case for
+-Prediction~\ref{pred:l2_presence}.  The convention choice documented
+-here therefore does not yet propagate into the residual; it becomes
++Prediction~\ref{pred:l2_presence}.  The channel's itemization therefore
++does not yet propagate into the residual; it becomes
+@@ -7948,4 +7754 @@ the itemization spread ($+336.5$~ppm inelastic vs the $+135.9$~ppm
+-total) is the leading systematic on the input.  Currently anchored to Pachucki--Yerokhin~2010+
+-itemization (matching the framework's Track~5 autopsy assumption); the
+-Friar--Payne~2005 convention would shift the budget bucketing without
+-changing bottom-line totals.
++total) is the leading systematic on the input.
+@@ -7953,3 +7756 @@ changing bottom-line totals.
+-\textbf{Cross-references.}  Originating documentation: this sprint memo.
+-Refines \S\ref{sec:conv_rZG_DHFS} (broader D HFS itemization) to the
+-polarizability-specific axis.  Cross-references
++\textbf{Cross-references.}  Cross-references
+@@ -7959,9 +7759,0 @@ paragraph (deuteron polarizability is the dominant component there).
+-\textbf{Honest caveat: overlap with V.D.1.}  V.D.1 documents the
+-broader Eides \S~12.2.2 vs Pachucki--Yerokhin~2010 D HFS itemization
+-mismatch.  V.D.5 refines V.D.1 to the polarizability-specific
+-sub-component on a distinct convention axis (Friar--Payne~2005 vs
+-Pachucki--Yerokhin~2010+).  The two entries differ in which
+-compilation pair they compare; kept separate per V.D protocol since
+-the convention axes differ.  Future audit may merge V.D.5 into V.D.1
+-as a sub-paragraph if the two axes prove operationally equivalent.
+-
+@@ -8078 +7870 @@ distinct from \S\ref{sec:conv_d_polarizability} (deuteron HFS
+-polarizability sub-component, Friar--Payne vs Pachucki--Yerokhin):
++polarizability channel, no convention claim):
+@@ -8080,2 +7872 @@ this entry is between two QCD nuclear-structure evaluations of
+-the deuteron polarizability rather than between atomic-physics
+-itemization frameworks.  Cross-references the
++the deuteron polarizability.  Cross-references the
+@@ -8155 +7946 @@ architecture limitation}, distinct from class~(i) inter-compilation
+-itemization (entries V.D.1, V.D.2, V.D.3, V.D.5, V.D.6, V.D.7)
++itemization (entries V.D.2, V.D.3, V.D.6, V.D.7)
+@@ -8688,2 +8479,2 @@ The exposures partition into \emph{four} structural classes.
+-\S\ref{sec:conv_rZG_DHFS}, \S\ref{sec:conv_muH_VP},
+-\S\ref{sec:conv_karshenboim_recoil}, \S\ref{sec:conv_d_polarizability},
++\S\ref{sec:conv_muH_VP},
++\S\ref{sec:conv_karshenboim_recoil},
+@@ -8692,3 +8483,3 @@ The exposures partition into \emph{four} structural classes.
+-six of the nine exposures (one of them, the muonium recoil
+-aggregation, now withdrawn) are between Friar--Payne~2005, Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Krauth~2017, Karshenboim~2005,
+-Drake~1990 / Drake--Yan~1995, Pachucki--Yerokhin~2009/2010,
++four of the eight exposures (one of them, the muonium recoil
++aggregation, now withdrawn) are between Krauth~2017, Karshenboim~2005,
++Drake~1990 / Drake--Yan~1995, Pachucki--Yerokhin~2009,
+@@ -8743,2 +8534 @@ itemization choices that single-observable analyses cannot see.
+-(D HFS polarizability sub-component) is HFS-class, consistent with the
+-original four entries.  V.D.6 (He $2{}^3P$ relativistic Bethe-log) is
++(D HFS polarizability channel) is HFS-class.  V.D.6 (He $2{}^3P$ relativistic Bethe-log) is
+@@ -8748 +8538 @@ observables with multi-component Layer-2 decomposition'' rather than
+-``HFS-only.''  All six entries remain in the same general category:
++``HFS-only.''  All five entries (V.D.2--V.D.6) remain in the same general category:
+@@ -8774 +8564 @@ exposures.} % Source: synthesis pass §3.4 Pattern C predictions.
+-The four entries above all involve hyperfine-class or muonic-Lamb
++The original entries all involve hyperfine-class or muonic-Lamb
+@@ -8779 +8569 @@ polarizability, hadronic VP), each compiled differently across
+-Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2017, Pachucki--Yerokhin~2010,
++Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2017
+@@ -8788,2 +8578,4 @@ polarizability contribution to D HFS.  Expected magnitude: tens of
+-ppm.  \textbf{Verdict (V.D-prediction sprint, 2026-05-10):
+-CONFIRMED $\to$ V.D.5 (\S\ref{sec:conv_d_polarizability}).}
++ppm.  \textbf{Verdict: NOT CONFIRMED} --- no Pachucki--Yerokhin
++itemization of D HFS could be sourced (their 2009--2010 papers treat
++helium fine structure); the sourced polarizability channel is recorded
++in V.D.5 (\S\ref{sec:conv_d_polarizability}) without a convention claim.
+@@ -8820 +8612 @@ The protocol classifies entries by predicted observable class:
+-class-(i) literature-itemization (V.D.1, V.D.2, V.D.3, V.D.5, V.D.6
++class-(i) literature-itemization (V.D.2, V.D.3, V.D.6
+@@ -8826,2 +8618,2 @@ should tag which class the new entry falls under.
+-6/6 of the \emph{then-catalogued} \S~V.D entries (V.D.1--V.D.6; the
+-2026-08 catalogue has nine, and the later architecture/wall-class
++5/5 of the \emph{then-catalogued} \S~V.D entries (V.D.2--V.D.6; the
++2026-08 catalogue has eight, and the later architecture/wall-class
+@@ -8829 +8621 @@ additions are not spectroscopy observables, so Pattern~C is a statement
+-about the original six) are precision-spectroscopy class observables
++about these five) are precision-spectroscopy class observables
+@@ -8831 +8623 @@ about the original six) are precision-spectroscopy class observables
+-\textbf{CONFIRMED at n=6 and STRENGTHENED}; the pattern broadens
++\textbf{CONFIRMED at n=5 and STRENGTHENED}; the pattern broadens
+@@ -10417,0 +10210 @@ Friar--Payne~2005~\cite{friar_payne2005},
++Friar--Sick~2004~\cite{friar_sick2004},
+@@ -10431,9 +10224,3 @@ that the autopsies of \S\ref{sec:autopsies} actually consume.
+-still lack bibliography entries.  Two deserve naming because they are
+-load-bearing and ambiguous rather than merely unlisted.  (i)~The
+-``Pachucki--Yerokhin~2010'' itemization invoked for the deuterium
+-hyperfine budget: that author pair's 2009/2010 papers are helium
+-fine-structure calculations, and the modern deuterium-HFS itemization is
+-Kalinowski--Pachucki--Yerokhin~2018 (and now
+-Bonilla~\emph{et al.}~2025~\cite{bonilla2025}), so the attribution needs
+-re-sourcing rather than a bibitem transcribed from it.  (ii)~The
+-$-(11/48)$ positronium Breit coefficient: the section anchor is now
++still lack bibliography entries.  One deserves naming because it is
++load-bearing and ambiguous rather than merely unlisted: the
++$-(11/48)$ positronium Breit coefficient.  Its section anchor is now
+@@ -10700,0 +10488,5 @@ Phys.\ Rev.\ C \textbf{72}, 014002 (2005).
++\bibitem{friar_sick2004}
++J.~L. Friar and I. Sick,
++``Zemach moments for hydrogen and deuterium,''
++Phys.\ Lett.\ B \textbf{579}, 285 (2004), nucl-th/0310043.
++
+```
+
+### papers/synthesis/group6_precision_observations_synthesis.tex
+
+```diff
+@@ -440,2 +440,2 @@ differences between independent precision compilations
+-(Eides, Karshenboim, Krauth, Pachucki--Yerokhin, Antognini,
+-Friar--Payne) at the sub-percent level the framework operates at.  Nine
++(Eides, Karshenboim, Krauth, Pachucki--Yerokhin, Antognini)
++at the sub-percent level the framework operates at.  Eight
+@@ -443,3 +443 @@ exposures are catalogued (the later entries include architecture-class
+-exposures beyond the convention class), including:\ the $\sim0.01\%$-of-$\nu_F$ recoil/multi-loop
+-itemization difference that propagates to $\sim25$~mfm in an extracted
+-Zemach radius; the Friar-moment convention difference between an RMS
++exposures beyond the convention class), including:\ the Friar-moment convention difference between an RMS
+```
+
+### tests/test_cross_register_vne.py
+
+```diff
+@@ -928,2 +928,3 @@ class TestSprintMHTrackDDualExpansion:
+-# extraction was traced to the rZG global fit's Layer-2 budget for D HFS
+-# (-150 ppm specified vs ~-286 ppm correct), NOT to a bug in this module.
++# extraction came from the rZG global fit's Layer-2 budgets, NOT from a bug
++# in this module. Those budgets (-150 and -286 ppm for D HFS) were
++# unsourced, and the fit is withdrawn (Paper 34).
+```

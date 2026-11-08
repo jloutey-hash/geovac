@@ -218,7 +218,7 @@ PROJECTIONS = [
         "section": "III.13",
         "variables_added": [],  # Paper 34 sec:proj_drake_swainson: none
         "dimensions_added": [],  # ln k_0 is dimensionless
-        "transcendental_class": ["flow"],
+        "transcendental_class": ["rational"],  # tab:projection_axes: normalization 2Z^4/n^3 is rational; the flow logs belong to the sum it divides
         "signature_pi_intrinsic": False,
         "graded": True,
         "idempotent": True,  # subtracting twice = subtracting once

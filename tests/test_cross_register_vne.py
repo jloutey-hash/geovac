@@ -925,8 +925,9 @@ class TestSprintMHTrackDDualExpansion:
 # lam_n = 2*sqrt(M_n) by construction (1/lam_n^2 = 1/(4 M_n)).
 #
 # Sprint rZG bug diagnosis (2026-05-09): the +5 fm artifact in r_Z(D)
-# extraction was traced to the rZG global fit's Layer-2 budget for D HFS
-# (-150 ppm specified vs ~-286 ppm correct), NOT to a bug in this module.
+# extraction came from the rZG global fit's Layer-2 budgets, NOT from a bug
+# in this module. Those budgets (-150 and -286 ppm for D HFS) were
+# unsourced, and the fit is withdrawn (Paper 34).
 # The production cross_register_vne kernel is species-agnostic and
 # correct; these tests document and protect that property going forward.
 
