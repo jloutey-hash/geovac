@@ -765,7 +765,8 @@ def test_paper34_III26_gauge_choice_no_variable_introduced():
     Coulomb-gauge constant 1/(4 pi) being a fixed rational-pi number
     -- it carries no free parameter).
     """
-    # The 1/(4 pi) Coulomb-gauge per-loop constant is independent of any
+    # The vertex model's 1/(4 pi) constant (not a per-loop factor of the
+    # physical vertex, Paper 34 sec:proj_gauge_choice) is independent of any
     # physical scale (no Z, no n, no Lambda, no t). This is the test of
     # "no variable introduced": the projection's output transcendental
     # signature is invariant under (Z, n) parametrization.
@@ -787,7 +788,7 @@ def test_paper34_III26_gauge_choice_no_variable_introduced():
 
     Z, nq, Lam, tt = sp.symbols('Z n Lambda t', positive=True)
 
-    # production leg: the per-loop factor IS 1/Vol(S^2).  VOL_S2 is a float,
+    # production leg: the vertex-model factor IS 1/Vol(S^2).  VOL_S2 is a float,
     # so compare numerically -- tightly enough that a corrupted constant
     # (e.g. 2*pi instead of 4*pi) cannot pass.
     assert math.isclose(1.0 / VOL_S2, 1.0 / (4.0 * math.pi), rel_tol=1e-12), (

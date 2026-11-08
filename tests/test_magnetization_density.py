@@ -3,7 +3,7 @@ Tests for the operator-level magnetization-density module (Phase C-W1b-operator)
 
 Validates:
 - Eides leading-order regression (Taylor expansion recovers -2 Z m_e r_Z)
-- Quantitative -39.5 ppm Eides Tab. 7.3 reproduction at r_Z = 1.045 fm
+- Quantitative -39.5 ppm Eides Sec. 11.1.1 reproduction at r_Z = 1.045 fm
 - Hermiticity of the resulting Pauli string sum
 - Delta-function profile recovers point-nucleus contact (no shift)
 - Symmetry under proton-spin reflection
@@ -122,10 +122,10 @@ class TestEidesLeadingOrderRegression:
         assert delta_ppm == pytest.approx(-39.5, rel=1e-3)
 
     def test_residual_within_eides_budget(self) -> None:
-        """Residual against Eides Tab. 7.3 must be < 1 ppm at leading order."""
+        """Residual against Eides Sec. 11.1.1 must be < 1 ppm at leading order."""
         result = hydrogen_zemach_eides_leading_order()
         residual = abs(result['residual_ppm'])
-        # Eides Tab. 7.3 expected residual budget is +12 to +18 ppm (multi-loop
+        # Eides Ch. 11 expected residual budget is +12 to +18 ppm (multi-loop
         # QED + nuclear polarizability).  Operator-level leading order should
         # be well below that.
         assert residual < 1.0

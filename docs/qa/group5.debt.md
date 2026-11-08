@@ -232,3 +232,54 @@ to C(4) = 40.78.
   test_su3_wilson_s5::TestPaper25S5Pins census tests -> diagnostics (keep the n_max = 5 counts, anchor Paper 24).
 - TX-A metadata (debug/tx_a_signature_arithmetic.py, tx_a_projection_table.json) still gives Hopf the variable
   alpha, Drake-Swainson K_subtract and a Lamb chain.
+
+## Carry-forward worked (2026-11-08, v6.6.1; PI: "take your recommendations and work the carry-forward")
+
+Every "Still owed" item above is closed. Two of them changed printed results.
+- **Paper 30 full-complex reruns** (`debug/p30_full_complex_rerun.py`, settings as printed, caps lifted; JSONs
+  archived in tests/wilson_rule_b_support/data/). n_max = 4 Wilson loops on all 5047 plaquettes: joint-fit
+  sigma = -0.0043(15), -0.0006(7), -0.0005(1) vs mu = 0.022, 0.0058, 0.0020 at beta = 0.3, 1, 3. The printed
+  -0.080(2) at beta = 0.3 was the 1500-plaquette truncation, not the cluster construction; no area law at
+  n_max = 4 either. n_max = 3 monopoles on 994 plaquettes and all 3342 2-cycles: c = 22.9, R^2 = 0.935 on
+  0.05-0.5, a two-decade drop between beta = 0.1 and 0.2, zero from 0.7; the printed c = 8.95 (R^2 0.981) was
+  the truncated action. Paper 30 (5) and (6) rewritten; the 1.196 / 1.242 rates now say n_max = 2. Pins in
+  test_paper41_wilson_witnesses moved to the full-complex JSONs.
+- **Paper 34 TX-A** (PI call taken on recommendation: Uehling row out, six tested rows). The driver moved to
+  tests/paper34_support/ and its metadata matched to the paper (Hopf adds no variable; projection 13 renamed,
+  no variable; Lamb and Uehling examples removed). Theorem 3's 16x16 counts were never computed and the driver
+  could not return an inverse pair; replaced by the computed 15x15 table (186 commute; 22 one-way, all involving
+  Drake-Swainson; 2 conflicts, spectral action <-> spinor lift; 3 idempotent; 12 self-compose). The "metadata
+  correctly flags (hopf, spinor_lift)" claim came only from the withdrawn Hopf variable alpha; both orderings
+  are now stated as operator-level / semantic, as Weak Minimality already said.
+- **Eides pointers** (citation reviewer, primary sources): the 2007 book's Ch. 7 is the muonic-atom Lamb
+  shift, so all 19 "Tab. 7.3"/"Tab. 7.6" loci for H Lamb, H HFS, D HFS, He+ and multi-loop budgets were wrong;
+  re-pointed to sections (6.1, 3.2-3.5, Ch. 11, 11.1.1, 11.1.3, 7.5, 12.1.5, 12.1.8, 12.2.2) in Paper 34 and
+  Paper 23. The "Eides -39.500 ppm" Zemach reference had no source: the closed form -2 Z alpha m_e r_Z gives
+  -39.4953 ppm, which the operator reproduces; the "0.012% residual" claim is gone (Papers 34, 23). "Eides
+  Sec. 3.2" pointers are correct (Sec. 3.2.1; Phys. Rep. Sec. VIII.A Eq. (40)). Code comments re-pointed.
+- **Paper 34 muonic Lamb rows** (agent owner pass, chronicle appended): muH, mud, mu4He+ Uehling / Eides SE /
+  closed-form Friar are textbook assembly (TA), finite-size rows L2; Uehling chains "entered Pi o Fock o
+  rest-mass". Also the Ps structural reading, the He+ Foldy status (FN -> L2), "proton" (not deuteron)
+  polarizability for muH, and the muH row's stray "flow" class.
+- **3P Bethe log** reproduces by the 2P/3D route: -0.0405950 at N = 40, +6.30% vs Drake-Swainson; guarded.
+- **Paper 51**: the 1.3% CV is at t = 10 (both routes, 1.35%); 0.23% at t = 1; paper now states the t. Both owed
+  measurements guarded (propagation number 2 ported from debug/l6_disk_prop2.py).
+- **Test re-anchors**: Paper 34 spot-check docstrings; muonium driver to Mu-MASS 1047.2(2.3)(1.1) MHz; Paper 41
+  witness file trimmed of Paper 41-only asserts (d_W, MK accuracies, large-beta sigma, dual-graph counts) and
+  anchored to Paper 30 sec:ruleb; the ST-SU3 census -> tests/_archive/diagnostics/test_su3_s5_plaquette_census.py
+  (the n_max = 5 counts stay live as TestPaper24S5GraphCounts).
+- C16 `g5-carry-forward-2026-11-08` (fire-tested: 11 retired forms fire, 13 corrected/near forms silent).
+
+**Still owed (new, found on the way).**
+- Paper 34: figures attributed to the old "Tab. 7.3" (D HFS Zemach -150 ppm, the +12 to +18 ppm and -18.5 ppm
+  H HFS bands) are not verified against any table; the book's list of tables was behind authentication.
+- Paper 34: "Eides Eq. 2.35" (7 loci) for the Friar/Foldy closed form; the book's Ch. 2 is six pages of general
+  features, so this is probably wrong (UNVERIFIABLE without the book). geovac/two_loop_self_energy.py comments
+  cite "Eides 2001 Tab. 7.3" for C_2S.
+- Paper 34: the "Three-projection chain" heading still holds the muH 202.17 row; the "III.14 transports the
+  Eides-bracket machinery verbatim" sentence in the mu4He+ Z-scaling paragraph is the same overclaim, mild.
+- Paper 34 observation obs:axes_correlated cross-tabulates 28 projections by hand; the computed table covers 15,
+  and in it Drake-Swainson is also a transcendental-only projection (flow tier), which the observation omits.
+- Paper 30 abstract and the group5 synthesis say the area coefficient is consistent with zero "at n_max = 2";
+  true, and n_max = 4 now agrees in substance (the beta = 3 value is -0.0005(1), small but not zero).
+

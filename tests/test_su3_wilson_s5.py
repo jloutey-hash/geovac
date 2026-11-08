@@ -546,56 +546,14 @@ def _graph_counts(N_max):
     return V, E, c, E - V + c
 
 
-class TestPaper25S5Pins:
-    """Pins the ST-SU3 graph/plaquette census used by the archived Paper 25
-    Sec. VII.A (7,765 plaquettes at N_max = 3)."""
-
-    def test_graph_counts(self):
-        # (V, E, c, beta_1) per debug/data/st_su3_plaquettes.json
-        assert _graph_counts(2) == (10, 15, 1, 6)
-        assert _graph_counts(3) == (20, 42, 1, 23)
-        assert _graph_counts(4) == (35, 90, 1, 56)
+class TestPaper24S5GraphCounts:
+    """Paper 24 sec:gauge-structure-reduced: at N_max = 5 the Bargmann graph
+    has 56 nodes, 165 edges, beta_1 = 110.  (The ST-SU3 plaquette census of
+    the archived Paper 25 Sec. VII.A moved to
+    tests/_archive/diagnostics/test_su3_s5_plaquette_census.py, 2026-11-08.)"""
 
     def test_graph_counts_nmax5(self):
-        """Paper 24 sec:gauge-structure-reduced: at N_max = 5 the Bargmann graph has
-        56 nodes, 165 edges, beta_1 = 110."""
         assert _graph_counts(5) == (56, 165, 1, 110)
-
-    def test_plaquette_census_nmax2(self):
-        from collections import Counter
-        A = bargmann_adjacency_dense(2)
-        pl = enumerate_plaquettes(A, max_length=8, both_orientations=False)
-        cnt = Counter(len(P) for P in pl)
-        assert dict(cnt) == {4: 15, 6: 21, 8: 146}
-        assert len(pl) == 182
-
-    def test_plaquette_census_nmax3(self):
-        """N_max = 3, lengths <= 8: 88 + 526 + 7151 = 7,765 plaquettes --
-        the count quoted in Paper 30's higher-rank remark (Cartan
-        reduction verified 'at 7,765 plaquettes')."""
-        from collections import Counter
-        A = bargmann_adjacency_dense(3)
-        pl = enumerate_plaquettes(A, max_length=8, both_orientations=False)
-        cnt = Counter(len(P) for P in pl)
-        assert dict(cnt) == {4: 88, 6: 526, 8: 7151}
-        assert len(pl) == 7765
-
-    def test_plaquette_census_nmax4_short(self):
-        from collections import Counter
-        A = bargmann_adjacency_dense(4)
-        pl = enumerate_plaquettes(A, max_length=6, both_orientations=False)
-        cnt = Counter(len(P) for P in pl)
-        assert dict(cnt) == {4: 272, 6: 2934}
-
-    @pytest.mark.slow
-    def test_plaquette_census_nmax4_full(self):
-        """N_max = 4 up to L = 8 (about 40 s)."""
-        from collections import Counter
-        A = bargmann_adjacency_dense(4)
-        pl = enumerate_plaquettes(A, max_length=8, both_orientations=False)
-        cnt = Counter(len(P) for P in pl)
-        assert dict(cnt) == {4: 272, 6: 2934, 8: 64021}
-        assert len(pl) == 67227
 
 
 class TestPaper25CP2Quotient:

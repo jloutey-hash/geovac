@@ -36,10 +36,12 @@ For Mu under the rest-mass projection theorem:
     Lamb_Mu_framework = Lamb_H_framework * (m_red(eMu) / m_red(ep))
                       = 1052.19 * 0.995729
                       = ~1047.70 MHz
-    Lamb_Mu_exp = 1042(22) MHz (Mariam 1982) or 1047.49 MHz (Karshenboim 2005 theory)
+    Lamb_Mu_exp = 1047.2(2.3)(1.1) MHz (Mu-MASS, Ohayon et al. 2022)
+                  or 1047.49 MHz (Karshenboim 2005 theory)
 
-The native framework prediction at ~1047.7 MHz vs experimental ~1042-1054 MHz
-is well within the 22 MHz experimental uncertainty.  The theoretical reference
+The experimental reference is Mu-MASS (Paper 34 muonium row).  Mariam et al.
+1982, cited here before 2026-11-08, measured the muonium hyperfine splitting,
+not the Lamb shift.  The theoretical reference
 1047.49 MHz (Eides-Grotch-Shelyuto 2001 / Karshenboim 2005 for Mu specifically)
 serves as a sharper benchmark.
 
@@ -60,7 +62,8 @@ What the framework does NOT compute natively
 
 Experimental and theoretical references
 ----------------------------------------
-- Mariam, Egan, Hughes, et al. PRL 49, 993 (1982): Mu Lamb shift = 1054(20) MHz
+- Ohayon et al. (Mu-MASS), PRL 128, 011802 (2022): Mu Lamb shift
+    = 1047.2(2.3)(1.1) MHz
 - Karshenboim, Phys. Rep. 422, 1 (2005), Table 22.2:
     Mu 2S-2P_{1/2} Lamb shift theory = 1047.49 MHz
   (Decomposed: SE ~1085 MHz; VP ~-27 MHz; recoil ~-9 MHz; ...)
@@ -70,7 +73,7 @@ Experimental and theoretical references
 Exit criteria
 -------------
 - Bears fruit if framework lands sub-1% on Lamb_Mu vs theory reference 1047.49 MHz
-  (or sub-1% on Lamb_Mu vs Mariam 1054 MHz within experimental uncertainty)
+  (or sub-1% on Lamb_Mu vs Mu-MASS 1047.2 MHz within experimental uncertainty)
 - Documents wall otherwise.
 
 Provenance
@@ -119,8 +122,8 @@ LAMBDA_C_E_FM: float = 386.15926764
 
 # Reference experimental and theoretical Lamb shifts for Mu
 # (E(2S_{1/2}) - E(2P_{1/2}) > 0 in normal-H convention)
-LAMB_MU_EXP_MHZ: float = 1054.0          # Mariam 1982 / Hughes-Williams 1990 area
-LAMB_MU_EXP_UNCERTAINTY_MHZ: float = 22.0
+LAMB_MU_EXP_MHZ: float = 1047.2          # Mu-MASS, Ohayon et al., PRL 128, 011802 (2022)
+LAMB_MU_EXP_UNCERTAINTY_MHZ: float = 2.55  # (2.3) stat and (1.1) syst in quadrature
 LAMB_MU_THEORY_MHZ: float = 1047.49      # Karshenboim 2005 Phys.Rep.422 Tab.22.2
 LAMB_MU_THEORY_UNCERTAINTY_MHZ: float = 0.05
 
@@ -394,7 +397,7 @@ def main() -> Dict[str, Any]:
     framework_plus_lit = framework_native_total + multi_loop_lit + recoil_lit
     print(f"\n  Framework + literature total   = {framework_plus_lit:+.4f} MHz")
     print(f"  Karshenboim 2005 theory total  = {LAMB_MU_THEORY_MHZ:+.4f} MHz")
-    print(f"  Mariam 1982 experimental       = {LAMB_MU_EXP_MHZ:+.0f} +- {LAMB_MU_EXP_UNCERTAINTY_MHZ:.0f} MHz")
+    print(f"  Mu-MASS 2022 experimental      = {LAMB_MU_EXP_MHZ:+.1f} +- {LAMB_MU_EXP_UNCERTAINTY_MHZ:.2f} MHz")
 
     # Residuals
     res_vs_theory_MHz = framework_plus_lit - LAMB_MU_THEORY_MHZ
@@ -409,8 +412,8 @@ def main() -> Dict[str, Any]:
           f"({res_native_vs_theory_pct:+.4f}%)")
     print(f"    Framework + lit   vs theory:  {res_vs_theory_MHz:+.4f} MHz "
           f"({res_vs_theory_pct:+.4f}%)")
-    print(f"    Framework + lit   vs Mariam:  {res_vs_exp_MHz:+.1f} MHz "
-          f"(within +-{LAMB_MU_EXP_UNCERTAINTY_MHZ:.0f} MHz exp uncertainty: "
+    print(f"    Framework + lit   vs Mu-MASS: {res_vs_exp_MHz:+.1f} MHz "
+          f"(within +-{LAMB_MU_EXP_UNCERTAINTY_MHZ:.2f} MHz exp uncertainty: "
           f"{'YES' if abs(res_vs_exp_MHz) < LAMB_MU_EXP_UNCERTAINTY_MHZ else 'NO'})")
 
     # ---- Step 4: pure rest-mass projection rescaling sanity check ----

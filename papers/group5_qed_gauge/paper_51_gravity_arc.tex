@@ -330,7 +330,7 @@ Paper~53~\cite{paper53} proves state-space convergence on the flat plane
 by a positive squared-window reconstruction and translation invariance,
 and leaves the disk and the cone open; the cone $\alpha\ne1$ has no
 translation group. The compressed disk operator system has propagation
-number $2$ at the truncations tested (MEASURED; no live test). The lemma
+number $2$ at the truncations tested (MEASURED). The lemma
 would certify faithfulness at each $\alpha$; it says nothing about the
 $\alpha$-derivative, which is what Theorem~\ref{thm:L6} needs.
 
@@ -429,10 +429,9 @@ $j{=}64$, and the azimuthal partial sum reaches the total to machine precision
 by $K_{\rm az}\approx48$ (tail/total $=4\times10^{-13}$).
 \emph{(ii) Uniformity.} The envelope slope across $\alpha\in[0.9,1.1]$ lies in
 $[-0.01134,-0.01123]$, so the domination is uniform in $\alpha$. The ratio
-$(K_{\rm fine}-K_{\rm coarse})/K_{\rm coarse}$ at $(a,a')=(0.05,0.025)$ varies
-by $1.3\%$ (coefficient of variation) across
-$\alpha\in\{0.90,0.95,1.00,1.05,1.10\}$. (The envelope slope and its
-$\alpha$-uniformity are tested; the coefficient of variation is not.)
+$(K_{\rm fine}-K_{\rm coarse})/K_{\rm coarse}$ at $(a,a')=(0.05,0.025)$ and
+$t=10$ varies by $1.3\%$ (coefficient of variation; $0.23\%$ at $t=1$) across
+$\alpha\in\{0.90,0.95,1.00,1.05,1.10\}$.
 \emph{(iii) Derivative consistency.} At a single truncation the per-mode
 analytic $dK_n/d\alpha = 41.501652$ and a finite difference of $K_n$,
 $41.501681$, agree to $2.9\times10^{-5}$. This checks the derivative
@@ -1146,7 +1145,7 @@ claims only the continuum Eq.~\eqref{eq:S_BH} and the convergence of the
 replica derivative at fixed $t$.
 
 % =====================================================================
-\section{Open questions and owed tests}
+\section{Open questions}
 \label{sec:open}
 % =====================================================================
 
@@ -1168,11 +1167,11 @@ mechanism examined here selects one, and none produces the
 $\phi(2)/\phi(1)^2 \approx 10^{-124}$ that the observed cosmological
 constant would need.
 
-\paragraph{Owed tests.} Two measured claims have no live test: the
-coefficient of variation $1.3\%$ of the discretization error across
-$\alpha$, and propagation number $2$ of the compressed disk operator system.
-B1, B2, B4, the continuum tip and $a_0$, the odd-sphere identity, the rank-4
-trace and the total-trace cone coefficient are backed by
+\paragraph{Tests.} B1, B2, B4, the continuum tip and $a_0$, the
+odd-sphere identity, the rank-4 trace, the total-trace cone coefficient,
+the coefficient of variation of the discretization error across $\alpha$
+($1.3\%$ at $t=10$, $0.23\%$ at $t=1$) and propagation number $2$ of the
+compressed disk operator system are backed by
 \texttt{tests/test\_paper51\_owed\_guards.py}.
 
 % =====================================================================

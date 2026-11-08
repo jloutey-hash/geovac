@@ -40,8 +40,8 @@
       "bargmann_segal": "commute",
       "stereographic": "commute",
       "sturmian": "commute",
-      "spectral_action": "variable_conflict",
-      "spinor_lift": "variable_conflict",
+      "spectral_action": "commute",
+      "spinor_lift": "commute",
       "wigner_3j": "commute",
       "wigner_D": "commute",
       "wilson_plaquette": "commute",
@@ -104,7 +104,7 @@
     },
     "spectral_action": {
       "fock_conformal": "commute",
-      "hopf_bundle": "variable_conflict",
+      "hopf_bundle": "commute",
       "bargmann_segal": "commute",
       "stereographic": "commute",
       "sturmian": "commute",
@@ -121,7 +121,7 @@
     },
     "spinor_lift": {
       "fock_conformal": "commute",
-      "hopf_bundle": "variable_conflict",
+      "hopf_bundle": "commute",
       "bargmann_segal": "commute",
       "stereographic": "commute",
       "sturmian": "commute",
@@ -275,10 +275,10 @@
   },
   "summary_counts": {
     "self_compose": 12,
-    "commute": 182,
+    "commute": 186,
     "one_way_BA": 11,
-    "variable_conflict": 6,
     "idempotent": 3,
+    "variable_conflict": 2,
     "one_way_AB": 11
   }
 }

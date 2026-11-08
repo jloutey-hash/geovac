@@ -683,3 +683,287 @@ index fc8ae9de..f0ab0ad7 100644
 +such a chain: it is a textbook assembly with tabulated Bethe
 +logarithms, Paper~36);
 ```
+
+## 2026-11-08: muonic Lamb rows (textbook assembly)
+
+Owner pass on Paper 34 applying the hydrogen Lamb ruling above (item 3) to the three muonic
+Lamb-shift entries (muonic hydrogen, muonic deuterium, muonic helium-4 ion): the one-loop Uehling
+term (flat-space vacuum-polarization function entered as an input) and the Eides one-loop
+self-energy bracket are a textbook assembly (TA), not framework-native (FN); closed-form
+Friar/Foldy finite-size rows keep their charge-density chain with the radius as a Layer-2 input
+(L2), as the hydrogen FNS row does.  No number changed.  Loci: tab:catalog (muonic Uehling, mu-d
+Lamb, mu-H Lamb 202.17 rows), tab:offprecision (mu-H Lamb 200.50 and mu-4He+ Lamb rows), the three
+autopsy subsections (captions, Status/chain columns, headline and structural-reading paragraphs),
+and the L2-count >= 2 item of the Layer-2-presence section (also corrected "deuteron
+polarizability" to "proton polarizability" for mu-H, per its own autopsy table).  Every removed
+line is preserved verbatim below as the `-` lines of a zero-context unified diff against the
+working-tree state immediately before this pass (the `+` lines are the replacements).
+
+```diff
+--- a/papers/group6_precision_observations/paper_34_projection_taxonomy.tex
++++ b/papers/group6_precision_observations/paper_34_projection_taxonomy.tex
+@@ -3736 +3736 @@ $\mu$H 2$S$--2$P$ Uehling $+205.0074$ meV full kernel
+-(Sprint MH Track A) & spectral action $\circ$ Fock $\circ$ rest-mass
++(Sprint MH Track A) & entered $\Pi$ (flat-space) $\circ$ Fock $\circ$ rest-mass
+@@ -3739 +3739 @@ $\pi^2{\cdot}\mathbb{Q}$ & $<1$ ppm vs Antognini~2013 \\
+-$\mu$d 2$S$--2$P$ Lamb $+202.63$ meV framework $+$ Layer-2
++$\mu$d 2$S$--2$P$ Lamb $+202.63$ meV textbook assembly $+$ Layer-2
+@@ -3741,2 +3741,2 @@ $\mu$d 2$S$--2$P$ Lamb $+202.63$ meV framework $+$ Layer-2
+-Roothaan autopsy in \S\ref{sec:autopsy_mud_lamb}) & spectral action
+-$\circ$ Fock $\circ$ rest-mass projection ($m_e \to m_\mu$, nucleus
++Roothaan autopsy in \S\ref{sec:autopsy_mud_lamb}) & entered $\Pi$
++(flat-space) $\circ$ Fock $\circ$ rest-mass projection ($m_e \to m_\mu$, nucleus
+@@ -3756 +3756 @@ $\mu^4$He$^+$ 2$S$--2$P$ Uehling $+1665.77$ meV full kernel
+-autopsy in \S\ref{sec:autopsy_muhe4_lamb}) & spectral action $\circ$
++autopsy in \S\ref{sec:autopsy_muhe4_lamb}) & entered $\Pi$ (flat-space) $\circ$
+@@ -3845,3 +3845,3 @@ $\circ$ Fock & $Z$ & dimensionless & flow & $+0.07\%$ at $N=40$ \\
+-$\mu$H 2$S$--2$P$ Lamb shift $202.17$ meV (framework $+$ literature,
+-Sprint MH Track A) & Fock $\circ$ spectral action $\circ$ Sturmian
+-$\circ$ Drake--Swainson $\circ$ rest-mass projection ($m_e \to m_\mu$)
++$\mu$H 2$S$--2$P$ Lamb shift $202.17$ meV (textbook assembly $+$ literature,
++Sprint MH Track A) & textbook assembly (entered flat-space $\Pi$, Eides
++self-energy bracket, closed-form Friar) $\circ$ rest-mass projection ($m_e \to m_\mu$)
+@@ -4245,3 +4245,3 @@ Sprint precision-catalogue, 2026-05-08.  \\
+-$\mu$H 2$S$--2$P$ Lamb framework-native $200.50$ meV (no literature
+-inputs, Sprint MH Track A) & Fock $\circ$ spectral action $\circ$
+-Sturmian $\circ$ Drake--Swainson $\circ$ rest-mass projection
++$\mu$H 2$S$--2$P$ Lamb one-loop assembly $200.50$ meV (no literature
++inputs, Sprint MH Track A) & textbook assembly (entered flat-space
++$\Pi$, Eides self-energy bracket, closed-form Friar) $\circ$ rest-mass projection
+@@ -4250,2 +4250,2 @@ Sturmian $\circ$ Drake--Swainson $\circ$ rest-mass projection
+-& Framework reproduces dominant Uehling at $<1$ ppm vs Antognini and
+-Friar moment leading-order at $4.3\%$.  $-0.92\%$ residual decomposes to within $0.20$~meV into missing K\"all\'en--Sabry two-loop VP ($+1.51$ meV),
++& The full Uehling kernel integration reproduces Antognini at $<1$ ppm and the
++closed-form Friar moment leading order at $4.3\%$.  $-0.92\%$ residual decomposes to within $0.20$~meV into missing K\"all\'en--Sabry two-loop VP ($+1.51$ meV),
+@@ -4715 +4715 @@ HFS (closes Li atomic accuracy floor $1.10\%$ $\to$ sub-$0.1\%$
+-$\mu^4$He$^+$ 2$S$--2$P$ Lamb $+1358.66$ meV framework $+$ Layer-2
++$\mu^4$He$^+$ 2$S$--2$P$ Lamb $+1358.66$ meV textbook assembly $+$ Layer-2
+@@ -4718,2 +4718,2 @@ $\mu^4$He$^+$ 2$S$--2$P$ Lamb $+1358.66$ meV framework $+$ Layer-2
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action}
+-$\circ$ \S\ref{sec:proj_sturmian} $\circ$ \S\ref{sec:proj_restmass}
++textbook assembly (entered flat-space $\Pi$, Eides self-energy
++bracket) $\circ$ \S\ref{sec:proj_restmass}
+@@ -4731 +4731 @@ mass-hierarchy $\times$ Z combination tested: $m_\text{red} \sim
+-at $\mu$d).  Framework-native VP at $-0.032\%$ vs Diepold 2018
++at $\mu$d).  Full-kernel Uehling VP at $-0.032\%$ vs Diepold 2018
+@@ -4969,3 +4969,2 @@ Pohl~et~al.; muonic convention $E(2P_{1/2}) - E(2S_{1/2})$).
+-The CREMA 2010 muonic hydrogen Lamb shift decomposes under five
+-named projection-chain components plus three companion Layer-2
+-inputs.
++The CREMA 2010 muonic hydrogen Lamb shift decomposes into five
++named components plus three companion Layer-2 inputs.
+@@ -4977,9 +4976,9 @@ Lamb shift (muonic convention $E(2P_{1/2}) - E(2S_{1/2})$).  The
+-framework-native subtotal $+200.50$ meV comes from full Uehling
+-integration via \S\ref{sec:proj_spectral_action}, the self-energy
+-bracket under rest-mass projection
+-(\S\ref{sec:proj_restmass}~+~\S\ref{sec:proj_sturmian}), and the
+-operator-level Friar moment via the magnetization-density module
+-(\S\ref{sec:proj_magnetization_density}; cf.\
+-\S\ref{sec:proj_charge_density} for the parent charge-density
+-projection).  The $+1.67$ meV gap to the $+202.17$ meV
+-framework-plus-literature total is closed by Antognini~2013
++subtotal $+200.50$ meV is a textbook assembly in which no GeoVac
++projection enters the one-loop terms: the full Uehling integration with
++the flat-space vacuum-polarization function $\Pi$ entered as an input,
++the Eides one-loop self-energy bracket at the muonic reduced mass, and
++the closed-form Friar moment (Eides Eq.~2.35) with $r_p$ a Layer-2
++input (the operator-level Friar route via
++\S\ref{sec:proj_magnetization_density} is compared below).
++The $+1.67$ meV gap to the $+202.17$ meV
++assembly-plus-literature total is closed by Antognini~2013
+@@ -4988 +4987,2 @@ mixed VP-VP/VP-SE, $\alpha^7$) and QCD-internal proton
+-polarizability (W3 inner-factor).  Source memo:
++polarizability (W3 inner-factor).  Status: TA $=$ textbook assembly;
++L2 $=$ Layer-2 input.  Source memo:
+@@ -4996,2 +4996,2 @@ Component & Value (meV) & Projection chain & Status \\
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action}
+-& FN ($-0.10$ ppm vs Antognini) \\
++textbook (full Uehling kernel; entered flat-space $\Pi$)
++& TA ($-0.10$ ppm vs Antognini) \\
+@@ -4999,3 +4999,2 @@ Component & Value (meV) & Projection chain & Status \\
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian}
+-$\circ$ \S\ref{sec:proj_restmass}
+-& FN ($+24\%$ vs Antognini, recoil-mixing gap) \\
++textbook (Eides one-loop bracket at $m_{\text{red},\mu}$)
++& TA ($+24\%$ vs Antognini, recoil-mixing gap) \\
+@@ -5004,2 +5003,2 @@ $\circ$ \S\ref{sec:proj_restmass}
+-$/$ \S\ref{sec:proj_magnetization_density}
+-& FN ($-4.3\%$ vs Antognini) \\
++$+$ Layer-2 $r_p$
++& L2 ($-4.3\%$ vs Antognini) \\
+@@ -5019 +5018 @@ vs CREMA $+202.3706(23)$ meV} \\
+-\textbf{Headline framework computation.}  The full Uehling integration
++\textbf{Headline computation.}  The full Uehling integration
+@@ -5046 +5045 @@ as ``VP-VP mixed'' ($+0.150$~meV), with one-loop reported at
+-$+205.0074$~meV.  The framework's $-0.10$~ppm match against Antognini
++$+205.0074$~meV.  The full-kernel $-0.10$~ppm match against Antognini
+@@ -5074,12 +5073,11 @@ calibration for the HFS Zemach channel.  See
+-\textbf{Structural reading.}  The autopsy realizes the
+-structural-skeleton-scope statement at the operator level for a
+-cross-register multi-focal observable in the muonic regime.  Three
+-framework-native components reproduce $+200.50$ meV (the
+-five-projection-chain skeleton); three Layer-2 inputs close the
+-remaining $+1.67$ meV gap, attributable cleanly to LS-8a multi-loop
+-renormalization (Component 4) and W3 inner-factor (Component 5).
+-The same architecture that closes the H 1S Lamb shift at
+-\S\ref{sec:autopsy_lamb} closes $\mu$H 2$S$--2$P$ here, with
+-Uehling-kernel kinematics (contact-form $\to$ full kernel) and
+-Friar-profile calibration (first moment $\to$ RMS) being the only
+-two ingredients that change between regimes.
++\textbf{Structural reading.}  Components 1--3 are a textbook
++assembly, $+200.50$ meV: the flat-space $\Pi$ is entered rather than
++produced by the spectral-action projection, the self-energy is the
++Eides one-loop bracket, and the Friar term is closed-form with $r_p$ a
++Layer-2 input; $S^3$ never enters these numbers.  Three Layer-2 inputs
++close the remaining $+1.67$ meV gap, attributable cleanly to LS-8a
++multi-loop renormalization (Component 4) and W3 inner-factor
++(Component 5).  Relative to the electronic one-loop assembly of
++\S\ref{sec:autopsy_lamb}, Uehling-kernel kinematics (contact-form
++$\to$ full kernel) and Friar-profile calibration (first moment $\to$
++RMS) are the only two ingredients that change between regimes.
+@@ -5109,7 +5107,7 @@ deuterium Lamb shift (muonic convention $E(2P_{1/2})-E(2S_{1/2})$).
+-The framework-native subtotal $+198.91$ meV comes from full Uehling
+-integration via \S\ref{sec:proj_spectral_action}, the self-energy
+-bracket under rest-mass projection
+-(\S\ref{sec:proj_restmass}~+~\S\ref{sec:proj_sturmian}), and the
+-closed-form Friar moment at the deuteron's measured RMS charge
+-radius via \S\ref{sec:proj_charge_density}.  The $+3.71$ meV gap
+-to the $+202.63$ meV framework-plus-literature total is closed by
++The subtotal $+198.91$ meV is a textbook assembly in which no GeoVac
++projection enters the one-loop terms: the full Uehling integration with
++the flat-space $\Pi$ entered as an input, the Eides one-loop
++self-energy bracket at the muonic reduced mass, and the closed-form
++Friar moment at the deuteron's measured RMS charge radius (a Layer-2
++input; \S\ref{sec:proj_charge_density}).  The $+3.71$ meV gap
++to the $+202.63$ meV assembly-plus-literature total is closed by
+@@ -5120 +5118,2 @@ contribution---deuteron polarizability (Carlson--Gorchtein--
+-Vanderhaeghen 2014).  Source memo:
++Vanderhaeghen 2014).  Status: TA $=$ textbook assembly; L2 $=$
++Layer-2 input.  Source memo:
+@@ -5128,2 +5127,2 @@ Component & Value (meV) & Projection chain & Status \\
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action}
+-& FN ($-0.50\%$ vs Krauth) \\
++textbook (full Uehling kernel; entered flat-space $\Pi$)
++& TA ($-0.50\%$ vs Krauth) \\
+@@ -5131,3 +5130,2 @@ Component & Value (meV) & Projection chain & Status \\
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian}
+-$\circ$ \S\ref{sec:proj_restmass}
+-& FN ($+41\%$ vs Krauth, same recoil-mixing gap as $\mu$H widened
++textbook (Eides one-loop bracket at $m_{\text{red},\mu d}$)
++& TA ($+41\%$ vs Krauth, same recoil-mixing gap as $\mu$H widened
+@@ -5137 +5135,2 @@ at heavier nucleus) \\
+-& FN ($+0.024\%$ vs Krauth at $r_d$, bit-tight) \\
++$+$ Layer-2 $r_d$
++& L2 ($+0.024\%$ vs Krauth at $r_d$, bit-tight) \\
+@@ -5153 +5152 @@ $-0.12\%$ vs CREMA $+202.8785(34)$ meV} \\
+-\textbf{Headline framework computation.}  The Friar moment leading
++\textbf{Headline computation.}  The Friar moment leading
+@@ -5156 +5155 @@ tabulated leading line at the deuteron's measured radius at
+-$+0.024\%$ --- the cleanest framework-vs-literature match for the
++$+0.024\%$ --- the cleanest match for the
+@@ -5165 +5164 @@ The scaling
+-is reproduced by the framework's bare Eides calculation to 4 digits.
++is reproduced by the bare Eides calculation to 4 digits.
+@@ -5208,4 +5207,5 @@ Friar--Payne~2005 and Pachucki--Yerokhin~2010+).
+-\textbf{Structural reading.}  The autopsy validates the multi-focal
+-architecture under nuclear-isotope substitution at the sub-percent
+-precision level on a precision-frontier observable.  Three
+-framework-native components reproduce $+198.91$ meV; four Layer-2
++\textbf{Structural reading.}  Components 1--3 are the same textbook
++assembly as at $\mu$H (entered flat-space $\Pi$, Eides one-loop
++bracket, closed-form Friar with a Layer-2 radius), $+198.91$ meV; no
++GeoVac projection chain produces them and $S^3$ never enters these
++numbers.  Four Layer-2
+@@ -5216,2 +5216,2 @@ multi-loop QED that dominated at $\mu$H.  The rest-mass projection
+-(\S\ref{sec:proj_restmass}) transports the entire skeleton (Uehling
+-integrator, SE bracket, Friar leading) verbatim; only the nuclear
++(\S\ref{sec:proj_restmass}) carries the assembly (Uehling
++integrator, SE bracket, Friar leading) over unchanged; only the nuclear
+@@ -5219 +5219 @@ charge-radius input ($r_p \to r_d$) and the polarizability
+-Layer-2 input change between isotopes.  Same architecture, same
++Layer-2 input change between isotopes.  Same assembly, same
+@@ -6983,6 +6983,6 @@ ion Lamb shift (muonic convention $E(2P_{1/2})-E(2S_{1/2})$).  The
+-framework-native subtotal $+1358.24$ meV comes from full Uehling
+-integration via \S\ref{sec:proj_spectral_action}, the self-energy
+-bracket under rest-mass projection
+-(\S\ref{sec:proj_restmass}~+~\S\ref{sec:proj_sturmian}), and the
+-closed-form Foldy charge-density at the $\alpha$-particle's measured
+-RMS charge radius via \S\ref{sec:proj_charge_density}.  No
++subtotal $+1358.24$ meV is a textbook assembly in which no GeoVac
++projection enters the one-loop terms: the full Uehling integration with
++the flat-space $\Pi$ entered as an input, the Eides one-loop
++self-energy bracket at the muonic reduced mass, and the
++closed-form Foldy charge-density term at the $\alpha$-particle's measured
++RMS charge radius (a Layer-2 input; \S\ref{sec:proj_charge_density}).  No
+@@ -6994 +6994,2 @@ CREMA 2021 measurement modulo two convention surfaces (SE bracket
+-recoil-mixing, Friar HO absorption) documented below.  Source memo:
++recoil-mixing, Friar HO absorption) documented below.  Status: TA $=$
++textbook assembly; L2 $=$ Layer-2 input.  Source memo:
+@@ -7002,2 +7003,2 @@ Component & Value (meV) & Projection chain & Status \\
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spectral_action}
+-& FN ($-0.032\%$ vs Diepold 2018) \\
++textbook (full Uehling kernel; entered flat-space $\Pi$)
++& TA ($-0.032\%$ vs Diepold 2018) \\
+@@ -7005,3 +7006,2 @@ Component & Value (meV) & Projection chain & Status \\
+-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_sturmian}
+-$\circ$ \S\ref{sec:proj_restmass}
+-& FN ($+8.4\%$ vs Diepold, recoil-mixing gap shrunken at higher Z) \\
++textbook (Eides one-loop bracket at $m_{\text{red},\mu^4\text{He}}$)
++& TA ($+8.4\%$ vs Diepold, recoil-mixing gap shrunken at higher Z) \\
+@@ -7010,2 +7010,2 @@ $\circ$ \S\ref{sec:proj_restmass}
+-$\circ$ \S\ref{sec:proj_restmass}
+-& FN ($+2.9\%$ vs Diepold leading, $+4.0\%$ vs Diepold full FNS) \\
++$\circ$ \S\ref{sec:proj_restmass} $+$ Layer-2 $r_\alpha$
++& L2 ($+2.9\%$ vs Diepold leading, $+4.0\%$ vs Diepold full FNS) \\
+@@ -7027 +7027 @@ $-1.44\%$ vs CREMA $+1378.521(48)$ meV (Krauth 2021)} \\
+-\textbf{Headline framework computation.}  The full Uehling integration
++\textbf{Headline computation.}  The full Uehling integration
+@@ -7032,3 +7032,2 @@ the catalogue at heavy-Z, transporting bit-identical kernel
+-infrastructure from the $\mu$H regime to the $\mu^4$He$^+$ regime.
+-This is the architectural transport theorem of the muonic Lamb
+-catalogue: the same Uehling-kernel integral closes verbatim under
++infrastructure from the $\mu$H regime to the $\mu^4$He$^+$ regime:
++the same Uehling-kernel integral closes verbatim under
+@@ -7129,5 +7128,6 @@ leading directly.
+-\textbf{Structural reading.}  The autopsy validates the multi-focal
+-architecture under the most extreme mass-hierarchy / Z combination in
+-the precision catalogue.  Three framework-native components reproduce
+-$+1358.24$ meV; four Layer-2 inputs (one less than $\mu$H since no
+-Zemach is needed) close the remaining gap, with component-level
++\textbf{Structural reading.}  Components 1--3 are the same textbook
++assembly as at $\mu$H and $\mu$d (entered flat-space $\Pi$, Eides
++one-loop bracket, closed-form Foldy term with a Layer-2 radius),
++$+1358.24$ meV; no GeoVac projection chain produces them and $S^3$
++never enters these numbers.  Four Layer-2 inputs close the remaining
++gap, with component-level
+@@ -7136,2 +7136,2 @@ mixing $+0.92$ meV; r$_\alpha$ extraction signal $\sim 7$ meV) summing
+-to the $-19.86$ meV residual within 1 meV.  None of these is a framework
+-architectural failure; all are documented convention surfaces with sibling
++to the $-19.86$ meV residual within 1 meV.  All are documented
++convention surfaces with sibling
+@@ -7139,2 +7139,2 @@ entries in $\mu$H and $\mu$d.  The rest-mass projection
+-(\S\ref{sec:proj_restmass}) transports the entire five-projection-chain
+-skeleton bit-identically; only the nuclear charge ($Z = 1 \to 2$), nuclear
++(\S\ref{sec:proj_restmass}) carries the assembly over unchanged; only
++the nuclear charge ($Z = 1 \to 2$), nuclear
+@@ -7143,7 +7143,3 @@ r_\alpha$) inputs change between the muonic catalogue entries.  The
+-spinless-nucleus simplification eliminates one projection
+-(\S\ref{sec:proj_magnetization_density}) entirely; the remaining four
+-projections give the same architecture at all three muonic systems.
+-The same architecture that closes the H 1S Lamb shift at
+-\S\ref{sec:autopsy_lamb} closes the muonic Lamb shifts at
+-\S\ref{sec:autopsy_muh_lamb}, \S\ref{sec:autopsy_mud_lamb}, and
+-$\mu^4$He$^+$ here, with full Uehling kernel kinematics (contact-form
++spinless nucleus removes the magnetization-density channel
++(\S\ref{sec:proj_magnetization_density}) entirely.  Across the three
++muonic systems, full Uehling kernel kinematics (contact-form
+@@ -7151 +7147 @@ $\to$ full kernel) and Foldy r$^2$ scaling ($r_p \to r_d \to r_\alpha$)
+-being the only two ingredients that change between the muonic regimes.
++are the only two ingredients that change.
+@@ -9473,2 +9469,3 @@ closed by the $\alpha^4$ Breit Layer-2 input as the
+-$\mu$H Lamb at $-0.10\%$ closes by Antognini~2013 multi-loop QED
+-plus deuteron polarizability plus recoil~NLO with the K\"all\'en--
++$\mu$H Lamb at $-0.10\%$ (a textbook one-loop assembly, not a
++projection chain) closes by Antognini~2013 multi-loop QED
++plus proton polarizability plus recoil~NLO with the K\"all\'en--
+```

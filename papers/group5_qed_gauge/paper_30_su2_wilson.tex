@@ -574,16 +574,18 @@ any plaquette complex and says nothing outside the strong-coupling regime.
 
 \paragraph{(5) Monopole density.}
 With the DeGrand--Toussaint construction~\cite{degrand_toussaint1980} on the
-three-plaquette closed 2-cycles (all $60$ at $n_{\max}=2$; at $n_{\max}=3$ the run
-used $200$ of the $994$ plaquettes and $80$ of the $3342$ 2-cycles),
+three-plaquette closed 2-cycles (all $60$ at $n_{\max}=2$, all $3342$ at
+$n_{\max}=3$),
 each plaquette angle is split as $\theta_P=\bar\theta_P+2\pi m_P$ with
 $\bar\theta_P\in(-\pi,\pi]$, and the integer charge on a 2-cycle $S$ is
 $m_S=\sum_{P\in S}\pm m_P$.  Metropolis Monte Carlo of~(\ref{eq:u1_action})
-gives a density $\rho_M(\beta)$ that falls roughly exponentially on
-$0.05\le\beta\le1.0$; the fit $\rho_M=a\,e^{-c\beta}$ gives $c=9.40$ and
-$8.95$ at $n_{\max}=2,3$ ($R^2=0.981$ both; the second is for the truncated
-action).  Above $\beta=1$ the density is
-below the detection floor.  Exponential suppression in $\beta$ is generic to
+gives a density $\rho_M(\beta)$ that falls with $\beta$.  At $n_{\max}=2$ it
+falls roughly exponentially on $0.05\le\beta\le1.0$, with $c=9.40$ in
+$\rho_M=a\,e^{-c\beta}$ ($R^2=0.981$), and above $\beta=1$ it is below the
+detection floor.  At $n_{\max}=3$ it falls faster and less cleanly: it drops
+by two orders of magnitude between $\beta=0.1$ and $0.2$, is below the floor
+from $\beta=0.7$, and a single exponential on $0.05\le\beta\le0.5$ gives
+$c=22.9$ with $R^2=0.935$.  Exponential suppression in $\beta$ is generic to
 compact $U(1)$, and the measured range lies below the four-dimensional
 $\beta_c$, where the four-dimensional theory also confines; in four
 dimensions the monopole currents are closed loops that percolate in the
@@ -597,10 +599,11 @@ $\ln\langle W\rangle$ against $A$ alone gives a positive, decreasing slope
 ($0.377$, $0.011$, $0.003$ at $\beta=0.1$, $3$, $10$, $n_{\max}=2$), but a
 joint fit $\ln W=-\sigma A-\mu L+\mathrm{const}$ gives an area coefficient
 $|\sigma|<0.05$ with $\mu>5|\sigma|$ at every $\beta$ at $n_{\max}=2$: the loops are
-perimeter dominated and no area law is resolved.  At $n_{\max}=4$, on a run using $1500$ of the $5047$ plaquettes, the joint
-fit gives $\sigma=-0.080\pm0.002$ at $\beta=0.3$, which we attribute to the
-cluster construction, in which the minimal perimeter is not monotone in the
-area.  The exponential rate of the area-only slope, $1.196$, matches that of
+perimeter dominated and no area law is resolved.  At $n_{\max}=4$ (all
+$5047$ plaquettes) the joint fit gives $\sigma=-0.0043\pm0.0015$,
+$-0.0006\pm0.0007$ and $-0.0005\pm0.0001$ against $\mu=0.022$, $0.0058$ and
+$0.0020$ at $\beta=0.3$, $1$, $3$: again no area law is resolved.  At
+$n_{\max}=2$ the exponential rate of the area-only slope, $1.196$, matches that of
 the perimeter coefficient, $1.242$, so the area-only fit measures the
 perimeter term; its disagreement with the dilute-gas prediction
 $c/2=4.70$ for a string tension~\cite{polyakov1977} is open.

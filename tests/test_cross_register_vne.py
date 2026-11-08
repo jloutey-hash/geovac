@@ -438,14 +438,14 @@ class TestZemachSketch:
     """W1b magnetization-density sketch (downstream of W1a)."""
 
     def test_eides_2024_calibration(self) -> None:
-        """At r_Z = 1.045 fm, Zemach correction is ~ -39.5 ppm (Eides Tab. 7.3)."""
+        """At r_Z = 1.045 fm, Zemach correction is ~ -39.5 ppm (Eides Sec. 11.1.1)."""
         spec = CrossRegisterVneSpec(
             lam_e=1.0, n_max_e=1,
             lam_n=LAM_NUCLEUS_DEFAULT, n_max_n=1,
             Z_nuc=1.0,
         )
         zem = zemach_magnetization_correction_pauli(spec, r_Z_bohr=1.045 / A0_FM)
-        # Eides Tab. 7.3: -39.5 ppm
+        # Eides Sec. 11.1.1: -39.5 ppm
         assert zem['delta_ppm'] == pytest.approx(-39.5, rel=0.05)
 
     def test_r_Z_conversion(self) -> None:

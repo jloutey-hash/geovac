@@ -16,7 +16,7 @@ dimension_signature: tuple of (mass, length, time, charge, temperature)
                      convertible, or as a "soft dimension" tag.
 transcendental_signature: a frozenset of named transcendental tiers.
 
-Run: python debug/tx_a_signature_arithmetic.py
+Run: python tests/paper34_support/tx_a_signature_arithmetic.py
 """
 import json
 from itertools import combinations, permutations
@@ -57,7 +57,7 @@ PROJECTIONS = [
         "id": "hopf_bundle",
         "name": "Hopf bundle",
         "section": "III.2",
-        "variables_added": ["alpha"],
+        "variables_added": [],  # Paper 34 sec:proj_hopf: none (alpha is not attached to the fibration)
         "dimensions_added": [],
         "transcendental_class": ["pi_hopf_base"],  # pi = Vol(S^2)/4
         "signature_pi_intrinsic": True,
@@ -214,10 +214,10 @@ PROJECTIONS = [
     },
     {  # 13
         "id": "drake_swainson",
-        "name": "Drake-Swainson asymptotic subtraction",
+        "name": "Drake-Swainson normalization of Bethe-log sums",
         "section": "III.13",
-        "variables_added": ["K_subtract"],  # transient
-        "dimensions_added": [],  # transient energy via K, cancelled
+        "variables_added": [],  # Paper 34 sec:proj_drake_swainson: none
+        "dimensions_added": [],  # ln k_0 is dimensionless
         "transcendental_class": ["flow"],
         "signature_pi_intrinsic": False,
         "graded": True,
@@ -286,17 +286,6 @@ def signature_sum(projection_ids):
 
 # Worked examples for Theorem 1
 EXAMPLES = {
-    "hydrogen_lamb_shift_LS6a": {
-        "chain": [
-            "fock_conformal",
-            "spectral_action",
-            "sturmian",
-            "drake_swainson",
-        ],
-        "target_observable": "Lamb shift, energy units, contains pi^2",
-        "expected_dimensions": {"energy"},
-        "expected_pi": True,
-    },
     "K_alpha_three_sector": {
         "chain": ["fock_conformal", "hopf_bundle", "spinor_lift"],
         "target_observable": "K = pi(B+F-Delta) ~= 1/alpha (dimensionless)",
@@ -333,13 +322,11 @@ EXAMPLES = {
         "expected_dimensions": {"energy"},
         "expected_pi": False,
     },
-    "uehling_VP": {
-        "chain": ["fock_conformal", "spectral_action"],
-        "target_observable": "VP coefficient Pi = 1/(48 pi^2)",
-        "expected_dimensions": {"energy"},  # carried by Lambda
-        "expected_pi": True,
-    },
 }
+# Not chains, so not examples: the hydrogen Lamb shift is a textbook
+# assembly (Paper 36), and the Uehling row enters the flat-space Pi as an
+# input (Paper 34 tab:catalog, "entered Pi o Fock"); no projection here
+# produces its pi.
 
 
 def test_theorem_1():

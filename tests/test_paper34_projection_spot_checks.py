@@ -43,9 +43,9 @@ Projections covered by batch 1 / 2 / 3 (22 of 28; A9 closed 2026-06-04):
   §III.5  Sturmian (sec:proj_sturmian) -- Bethe log calibration tier, heavy
   §III.9  Wigner D-matrix rotation (sec:proj_wignerD) -- non-collinear l>=2
   §III.10 Wilson plaquette (sec:proj_wilson) -- SU(2) Haar, distinct sprint
-  §III.11 Vector-photon promotion (sec:proj_vector_photon) -- 1/(4 pi) per loop
+  §III.11 Vector-photon promotion (sec:proj_vector_photon) -- the vertex model's 1/(4 pi)
   §III.12 Mol-frame hyperspherical (sec:proj_molframe) -- Level-4 solver
-  §III.13 Drake-Swainson asymptotic subtraction (sec:proj_drake_swainson)
+  §III.13 Drake-Swainson normalization of Bethe-log sums (sec:proj_drake_swainson)
           -- LS-4 calibration tier
   §III.15 Observation / temporal-window (sec:proj_observation) -- Matsubara sum,
           related to but distinct from §III.27

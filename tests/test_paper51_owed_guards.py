@@ -19,6 +19,12 @@ Loci backed (paper labels):
     panel (a = 0.1 ... 0.00625, Hellmann--Feynman tip errors -5.32 ...
     -0.42% against 1/6, converging from below to 0.166520) with the +0.5%
     bias and spurious sign change of a step-0.1 central difference in alpha;
+  * sec:L6 "Numerical verification" (ii): the coefficient of variation of
+    (K_fine - K_coarse)/K_coarse across alpha, 1.3% at t = 10 and 0.23% at
+    t = 1, by the lean solver and the production class (2026-11-08);
+  * the reconstruction paragraph before lem:L6_rate: propagation number 2 of
+    the compressed disk operator system at (K, J) in {2,3}^2 (2026-11-08;
+    driver code ported, not imported from debug/);
   * rem:two_term_uniqueness: the S^5 / S^7 identity and m+1 power terms;
   * subsec:entropy_route: the rank-4 trace and the total-trace cone
     coefficient as tested inputs to G_action = G_entropy.
@@ -393,6 +399,167 @@ def test_paper51_b2_t10_central_difference_artifact() -> None:
     assert abs(err_cd[-2] - (-0.30)) < 0.005 and abs(err_cd[-1] - 0.045) < 0.0005, err_cd
     assert err_cd[-1] > 0 > err_cd[-2]
     assert np.all(hf < SIXTH)
+
+
+# ---------------------------------------------------------------------------
+# sec:L6 "Numerical verification" (ii) Uniformity: coefficient of variation
+# ---------------------------------------------------------------------------
+
+CV_ALPHAS = (0.90, 0.95, 1.00, 1.05, 1.10)
+CV_PRINTED = {10.0: 1.3, 1.0: 0.23}   # percent, as printed
+
+
+def _cv_pct(ratios: np.ndarray) -> float:
+    """Coefficient of variation in percent: population std / |mean|."""
+    return 100.0 * float(np.std(ratios)) / abs(float(np.mean(ratios)))
+
+
+def _disc_ratio_lean(alpha: float, t: float) -> float:
+    """(K_fine - K_coarse)/K_coarse at (a, a') = (0.05, 0.025), R = 10."""
+    Kc = _K_disc(alpha, 10.0, 200, t)
+    Kf = _K_disc(alpha, 10.0, 400, t)
+    return (Kf - Kc) / Kc
+
+
+def test_paper51_uniformity_cv_of_discretization_ratio() -> None:
+    """sec:L6 (ii) Uniformity: the ratio (K_fine - K_coarse)/K_coarse at
+    (a, a') = (0.05, 0.025), R = 10, across alpha in {0.90, ..., 1.10} has
+    coefficient of variation 1.3% at t = 10 (measured 1.3476%) and 0.23% at
+    t = 1 (measured 0.2257%); population std over |mean|.  The ratio is
+    negative and shrinks in magnitude monotonically with alpha at both t.
+
+    Rejects: 1.3% attributed to t = 1, and the two t values swapped (the
+    t = 1 CV is about six times smaller than the t = 10 one)."""
+    cv = {}
+    for t in (10.0, 1.0):
+        r = np.array([_disc_ratio_lean(al, t) for al in CV_ALPHAS])
+        assert np.all(r < 0) and np.all(np.diff(r) > 0), (t, r)
+        cv[t] = _cv_pct(r)
+    assert abs(cv[10.0] - 1.3476) < 5e-4, cv
+    assert abs(cv[1.0] - 0.2257) < 5e-4, cv
+    assert round(cv[10.0], 1) == CV_PRINTED[10.0], cv
+    assert round(cv[1.0], 2) == CV_PRINTED[1.0], cv
+    assert cv[10.0] > 5 * cv[1.0], cv
+
+
+@pytest.mark.slow
+def test_paper51_uniformity_cv_production_route() -> None:
+    """Second route for the (ii) Uniformity ratio: the production class
+    geovac.gravity.warped_dirac.DiscreteWedgeDiracSpectral with
+    N_phi = round(120 alpha), alpha = N_phi/120, gives every K to 1e-9
+    relative of the lean solver (measured <= 2e-11), and the same CV at
+    t = 10 and t = 1.
+
+    Rejects: a CV that is an artifact of the lean solver (e.g. its
+    exact-momentum azimuthal sum) rather than of the production substrate."""
+    from geovac.gravity.warped_dirac import DiscreteWedgeDiracSpectral
+    for t in (10.0, 1.0):
+        rp = []
+        for al in CV_ALPHAS:
+            Np = round(120 * al)
+            Kc = DiscreteWedgeDiracSpectral(N_rho=200, a=0.05, N_phi=Np,
+                                            alpha=Np / 120).heat_trace(t)
+            Kf = DiscreteWedgeDiracSpectral(N_rho=400, a=0.025, N_phi=Np,
+                                            alpha=Np / 120).heat_trace(t)
+            assert abs(Kc / _K_disc(Np / 120, 10.0, 200, t) - 1) < 1e-9, (al, t)
+            assert abs(Kf / _K_disc(Np / 120, 10.0, 400, t) - 1) < 1e-9, (al, t)
+            rp.append((Kf - Kc) / Kc)
+        assert round(_cv_pct(np.array(rp)), 2 if t == 1.0 else 1) == CV_PRINTED[t], (t, rp)
+
+
+# ---------------------------------------------------------------------------
+# sec:L6: propagation number 2 of the compressed disk operator system
+# (ported from the L6 Track 1 driver; tests must not import debug/)
+# ---------------------------------------------------------------------------
+
+PROP_R, PROP_N_RHO, PROP_MAX_DEG = 8.0, 120, 8
+PROP_GRID = ((2, 2), (2, 3), (3, 2), (3, 3))
+
+
+def _disk_operator_system(K: int, J: int, R: float = PROP_R,
+                          N_rho: int = PROP_N_RHO,
+                          max_deg: int = PROP_MAX_DEG):
+    """Generators of O_n = P_n C(disk) P_n on the modes k in {-K..K-1}
+    (fermionic, m = |k + 1/2|), radial j < J: the identity and the
+    compressed monomials z^a zbar^b = rho^{a+b} e^{i(a-b)phi},
+    1 <= a+b <= max_deg.  Radial modes: lowest J eigenvectors of
+    -u'' + (m^2 - 1/4)/rho^2 on rho_i = i R/N_rho (measure d rho)."""
+    ks = list(range(-K, K))
+    n = len(ks) * J
+    a = R / N_rho
+    rho = np.arange(1, N_rho + 1) * a
+    vecs = {}
+    for k in ks:
+        m = abs(k + 0.5)
+        _, v = eigh_tridiagonal(2.0 / a ** 2 + (m * m - 0.25) / rho ** 2,
+                                -np.ones(N_rho - 1) / a ** 2,
+                                select="i", select_range=(0, J - 1))
+        vecs[k] = v
+
+    def mult(p: int, q: int) -> np.ndarray:
+        M = np.zeros((n, n), dtype=complex)
+        for k in ks:
+            kp = k + q
+            if kp not in vecs:
+                continue
+            ov = (vecs[kp] * (rho ** p * a)[:, None]).T @ vecs[k]
+            i0, j0 = (kp + K) * J, (k + K) * J
+            M[i0:i0 + J, j0:j0 + J] = ov
+        return M
+
+    gens = [np.eye(n, dtype=complex)]
+    seen = set()
+    for aa in range(max_deg + 1):
+        for bb in range(max_deg + 1):
+            p, q = aa + bb, aa - bb
+            if p == 0 or p > max_deg or abs(q) >= 2 * K or (p, q) in seen:
+                continue
+            seen.add((p, q))
+            gens.append(mult(p, q))
+    return gens, n
+
+
+def _prop(gens, max_k: int = 6, tol: float = 1e-9):
+    """Route 1 (the driver's): smallest k with dim(O^k) = N^2, via
+    geovac.operator_system's rank and basis extraction."""
+    from geovac.operator_system import _extract_matrix_basis, operator_system_dim
+    N = gens[0].shape[0]
+    dims = [operator_system_dim(gens, tol=tol)]
+    if dims[0] == N * N:
+        return 1, dims
+    cur = list(gens)
+    for k in range(2, max_k + 1):
+        basis = _extract_matrix_basis(cur, tol=tol)
+        cur = [A @ B for A in basis for B in gens]
+        dims.append(operator_system_dim(cur, tol=tol))
+        if dims[-1] == N * N:
+            return k, dims
+        if dims[-1] == dims[-2]:
+            return -1, dims
+    return -1, dims
+
+
+def test_paper51_disk_operator_system_propagation_two() -> None:
+    """sec:L6 / the reconstruction paragraph: the compressed disk operator
+    system has propagation number 2 at (K, J) in {(2,2), (2,3), (3,2),
+    (3,3)} (R = 8, N_rho = 120, monomial degree <= 8): dim O < N^2 and
+    dim O^2 = N^2.  Second route, sharing no rank code with the first: O
+    has fewer generators (27 or 37) than N^2 (64 ... 324), so prop 1 is
+    impossible by counting; and the singular values of the vec-stack of ALL
+    products g h (no basis extraction) have the N^2-th above 1e-11 of the
+    largest (measured 1.3e-10 ... 3e-7 relative), so O^2 spans M_N.
+
+    Rejects: prop 1 (O already full), prop 3 (O^2 short of M_N), and a
+    non-full saturation (dim O^k stalling below N^2)."""
+    for K, J in PROP_GRID:
+        gens, N = _disk_operator_system(K, J)
+        prop, dims = _prop(gens)
+        assert prop == 2, (K, J, dims)
+        assert dims[0] < N * N and dims[1] == N * N, (K, J, dims)
+        assert len(gens) < N * N        # independent of rank: O cannot be full
+        V2 = np.array([(A @ B).reshape(-1) for A in gens for B in gens]).T
+        s = np.linalg.svd(V2, compute_uv=False)
+        assert s[N * N - 1] / s[0] > 1e-11, (K, J, s[N * N - 1] / s[0])
 
 
 # ---------------------------------------------------------------------------

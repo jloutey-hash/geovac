@@ -7,16 +7,17 @@ pattern, CLAUDE.md v4.49.1).  Archived production JSON lives in
 tests/wilson_rule_b_support/data/.
 
 Pin strategy (per witness):
-  W1 spectral dimension   -- RECOMPUTED (heat-kernel d_s + Weyl d_W, <1 s).
+  W1 spectral dimension   -- RECOMPUTED (heat-kernel d_s, <1 s).
   W2 Migdal-Kadanoff RG   -- RECOMPUTED (k_eff, no fixed point, monotone flow).
   W3 Gaussian Wilson loop -- RECOMPUTED at n_max=2 (full enumeration,
                              deterministic); JSON band-pin at n_max=3,4,5.
   W4 strong-coupling      -- RECOMPUTED (sigma(beta) = -ln(I1/I0) positivity +
-                             both asymptotic limits) + JSON cross-check.
+                             the small-beta limit) + JSON cross-check.
   W5 monopole density     -- structural facts RECOMPUTED (k_delta=3, 60
                              elementary sites, P=44); production MC fit values
-                             (c=9.40/8.95, R^2=0.981) pinned from the archived
-                             seeded JSON; reduced-stat seeded MC smoke verifies
+                             (n_max=2: c=9.40, R^2=0.981; n_max=3 full
+                             complex: c=22.9, R^2=0.935) pinned from the
+                             archived seeded JSON; reduced-stat seeded MC smoke verifies
                              the exponential-suppression signal + determinism.
   W6 full-MC Wilson loops -- structural setup + archived seeded-JSON pins
                              (sigma_ens > 0 monotone; WEAK-PASS flags).  The
@@ -34,8 +35,12 @@ Pin strategy (per witness):
                              fixed-scale gap over the scalar graph is the
                              witness content, not a trend toward 3.
 
-Paper anchors: papers/archive/paper_41_rule_b_wilson_u1.tex (archived;
-successor papers/group5_qed_gauge/paper_30_su2_wilson.tex Sec. 2.3, 5)
+Paper anchors: papers/group5_qed_gauge/paper_30_su2_wilson.tex sec:ruleb
+("Seven diagnostics"), which absorbed the archived
+papers/archive/paper_41_rule_b_wilson_u1.tex.  Asserts backing Paper 41
+claims that Paper 30 did not keep (the Weyl dimension d_W, the MK asymptotic
+accuracies, the large-beta limit of sigma, the dual-graph counts) were
+removed 2026-11-08.  Archived Paper 41 section labels:
 (sec:spectral_dim, sec:mk_rg, sec:gaussian_wilson, sec:strong_coupling,
 sec:monopole_density, sec:full_mc_wilson, sec:polyakov_loop,
 sec:seven_witness).
@@ -135,21 +140,19 @@ def test_l4_plaquette_counts(n_max, n_plaq):
 T_GRID = np.logspace(-2.5, 2.5, 200)  # production grid of the driver
 
 # Paper 41 seven-witness table: d_s 1.86 -> 2.27 -> 2.54, d_W 2.48 -> 3.46 -> 3.72
-RULE_B_DIMS = {3: (1.86, 2.48), 4: (2.27, 3.46), 5: (2.54, 3.72)}
+RULE_B_DS = {3: 1.86, 4: 2.27, 5: 2.54}
 SCALAR_DS = {3: 1.68, 4: 1.76, 5: 1.79}
 
 
 @pytest.mark.parametrize("n_max", [3, 4, 5])
 def test_witness1_spectral_dimension_rule_b(n_max):
-    ds_exp, dw_exp = RULE_B_DIMS[n_max]
+    ds_exp = RULE_B_DS[n_max]
     L, A, V = sdim.build_rule_b_laplacian(n_max)
     c = sdim.count_components(A)
     ev = np.clip(np.linalg.eigvalsh(L), 0.0, None)
     _, P = sdim.heat_kernel_return_probability(ev, V, T_GRID)
     d_s = sdim.extract_spectral_dimension(T_GRID, P, c, V)["d_s_window"]
-    d_W = sdim.weyl_dimension(ev, V, c)["d_W"]
     assert abs(d_s - ds_exp) < 0.02, f"d_s({n_max}) = {d_s}"
-    assert abs(d_W - dw_exp) < 0.02, f"d_W({n_max}) = {d_W}"
 
 
 def _return_probability(build, n_max):
@@ -211,11 +214,9 @@ def test_witness1_fixed_scale_gap_no_trend():
 # =====================================================================
 
 def test_witness2_mk_k_eff_and_flow():
-    """k_eff (mean plaquettes per edge) = 8.8 at n_max=2, 37.509... at n_max=3
-    (archived JSON k_eff_canonical); MK flow monotone to beta=0; no fixed point
-    in (0, 100); strong-coupling limit matched to 0.25% at beta=0.03 and
-    weak-coupling limit to 2% at beta=200 (8.6% at beta=50 -- the O(1/beta)
-    approach; matches the archived JSON beta_eff_table bit-for-bit)."""
+    """Paper 30 sec:ruleb (2): k = <q_e> (mean plaquettes per edge) = 8.8 at
+    n_max=2, 37.51 at n_max=3 (tab. of Rule-B counts); MK flow monotone to
+    beta=0; no fixed point in (0, 100)."""
     for n_max, k_exp in ((2, 8.8), (3, 994 * 4 / 106)):
         A, _, _, _ = build_dirac_s3_graph(n_max, "B")
         cycles = mk.primitive_4_plaquettes(A)
@@ -232,16 +233,6 @@ def test_witness2_mk_k_eff_and_flow():
     fp = mk.find_fixed_points(k_eff, beta_lo=1e-3, beta_hi=100.0, n_grid=301)
     assert fp["n_sign_changes"] == 0
     assert fp["fixed_points"] == []
-    # strong-coupling limit: <= 0.25% at beta = 0.03 (paper sec MK asymptotics)
-    assert abs(mk.beta_eff_mk(0.03, k_eff)
-               / mk.strong_coupling_limit(0.03, k_eff) - 1.0) < 0.0025
-    # weak-coupling limit: O(1/beta) approach -- 8.6% at beta=50 (the archived
-    # JSON value), crossing <= 2% at beta = 200
-    err_50 = abs(mk.beta_eff_mk(50.0, k_eff)
-                 / mk.weak_coupling_limit(50.0, k_eff) - 1.0)
-    assert abs(err_50 - 0.0861) < 0.001
-    assert abs(mk.beta_eff_mk(200.0, k_eff)
-               / mk.weak_coupling_limit(200.0, k_eff) - 1.0) < 0.02
 
 
 # =====================================================================
@@ -293,16 +284,14 @@ def test_witness3_alpha_band_all_nmax_from_archive():
 
 def test_witness4_strong_coupling_sigma():
     """sigma(beta) = -ln(I1(beta)/I0(beta)) > 0 at every beta > 0, monotone
-    decreasing, with both asymptotic limits: sigma -> ln(2/beta) (small beta)
-    and sigma -> 1/(2 beta) (large beta, 5e-4 rel. at beta = 1000)."""
+    decreasing, with the strong-coupling limit sigma -> ln(2/beta) (Paper 30
+    sec:ruleb (4))."""
     betas = np.geomspace(0.005, 1000.0, 60)
     sig = np.array([scw.sigma_beta(b) for b in betas])
     assert (sig > 0).all()
     assert (np.diff(sig) < 0).all()
     # strong-coupling limit
     assert abs(scw.sigma_beta(0.01) / np.log(2 / 0.01) - 1.0) < 1e-5
-    # weak-coupling limit (paper: 5e-4 at the JSON's beta = 1000 check)
-    assert abs(scw.sigma_beta(1000.0) / (1 / 2000.0) - 1.0) < 6e-4
     # values pinned in the archived JSON verdict
     d = _load("xcwg_strong_coupling_wilson.json")["verdict_witness_2"]
     assert d["sigma_all_positive"] and d["sigma_monotone_decreasing_with_beta"]
@@ -343,20 +332,30 @@ def test_witness5_monopole_structural_recompute():
 
 
 def test_witness5_monopole_dilute_gas_fit_archive():
-    """Archived seeded MC (seeds 42/43): Polyakov dilute-gas fit
-    rho_M = A exp(-c beta) with c = 9.40 (n_max=2) / 8.95 (n_max=3),
-    R^2 = 0.981 both; fifth witness PASS."""
+    """Paper 30 sec:ruleb (5), archived seeded MC.  n_max = 2 (seed 42, all
+    60 sites): rho_M = A exp(-c beta) with c = 9.40, R^2 = 0.981.  n_max = 3
+    on the full complex (seed 43, 994 plaquettes, all 3342 sites;
+    debug/p30_full_complex_rerun.py): c = 22.9, R^2 = 0.935 on
+    0.05 <= beta <= 0.5, zero from beta = 0.7.  The retired n_max = 3 fit
+    (c = 8.95, R^2 = 0.981) came from 200 plaquettes and 80 sites."""
     d = _load("xcwg_monopole_density.json")
     f2 = d["n_max_2"]["polyakov_dilute_gas_fit"]
-    f3 = d["n_max_3"]["polyakov_dilute_gas_fit"]
     assert abs(f2["c"] - 9.40) < 0.01
-    assert abs(f3["c"] - 8.95) < 0.01
-    assert f2["r_squared"] > 0.98 and f3["r_squared"] > 0.98
-    assert d["n_max_2"]["rng_seed"] == 42 and d["n_max_3"]["rng_seed"] == 43
-    assert d["n_max_2"]["k_delta"] == 3 and d["n_max_3"]["k_delta"] == 3
+    assert f2["r_squared"] > 0.98
+    assert d["n_max_2"]["rng_seed"] == 42
+    assert d["n_max_2"]["k_delta"] == 3
     assert d["n_max_2"]["n_elementary_monopole_sites"] == 60
-    assert d["n_max_3"]["n_elementary_monopole_sites"] == 80
-    assert d["composite_verdict"]["fifth_witness_pass"] is True
+    d3 = _load("p30_full_complex_mono3.json")
+    assert (d3["P"], d3["n_elementary_monopole_sites"], d3["k_delta"],
+            d3["rng_seed"]) == (994, 3342, 3, 43)
+    f3 = d3["polyakov_dilute_gas_fit"]
+    assert abs(f3["c"] - 22.86) < 0.01
+    assert abs(f3["r_squared"] - 0.935) < 0.001
+    assert (f3["beta_min_fit"], f3["beta_max_fit"]) == (0.05, 0.5)
+    rho = {r["beta"]: r["rho_M_mean"] for r in d3["scan_results"]}
+    assert rho[0.5] > 0.0 and all(rho[b] == 0.0 for b in (0.7, 1.0, 2.0, 5.0, 30.0))
+    assert rho[0.1] / rho[0.2] > 50.0   # the two-decade drop between 0.1 and 0.2
+    assert abs(f3["c"] - 8.95) > 5.0   # the retired truncated-complex fit
 
 
 def test_witness5_monopole_mc_smoke_seeded():
@@ -557,34 +556,31 @@ def test_witness7_confinement_from_numeric_fields():
     assert checked == 6
 
 
-def test_v5_nmax4_sigma_comb_pins():
-    """Paper 41 sec 6.5 (XCWG-G n_max=4): graph V=60/E=312/beta_1=253;
-    joint-fit sigma_comb at beta=0.3 is -0.080 +/- 0.002 with z = -48
-    (the statistically-NEGATIVE structural surprise the paper reports).
-    Added 2026-07-04 (this v5 subsection had zero regression backing)."""
-    d = _load("xcwg_full_mc_wilson_loops_nmax4.json")
-    n4 = d["n_max_4"]
-    assert (n4["V"], n4["E"], n4["beta_1_graph"]) == (60, 312, 253)
-    rows = {r["beta"]: r for r in d["verdict"]["per_beta_status"]}
-    r03 = rows[0.3]
-    assert abs(r03["sigma_comb"] - (-0.0803)) < 0.0005
-    assert abs(r03["sigma_comb_se"] - 0.00166) < 0.0002
-    assert abs(r03["z_score"] - (-48.3)) < 0.5
-    assert d["verdict"]["outcome"].startswith("NEGATIVE_SIGMA_COMB")
+def test_nmax4_full_complex_sigma_comb_pins():
+    """Paper 30 sec:ruleb (6): at n_max = 4 on all 5047 plaquettes the joint
+    fit gives sigma = -0.0043(15), -0.0006(7), -0.0005(1) against
+    mu = 0.022, 0.0058, 0.0020 at beta = 0.3, 1, 3 (archived seeded run,
+    debug/p30_full_complex_rerun.py, seed 44).  The retired -0.080 at
+    beta = 0.3 came from a run on 1500 of the 5047 plaquettes."""
+    d = _load("p30_full_complex_wilson4.json")
+    assert (d["V"], d["E"], d["beta_1_graph"], d["P"]) == (60, 312, 253, 5047)
+    rows = {r["beta"]: r for r in d["sigma_results"]}
+    for beta, sig, se, mu in ((0.3, -0.0043, 0.0015, 0.0220),
+                              (1.0, -0.0006, 0.0007, 0.0058),
+                              (3.0, -0.0005, 0.0001, 0.0020)):
+        r = rows[beta]
+        assert abs(r["sigma_MC_combined"] - sig) < 5e-5, (beta, r)
+        assert abs(r["sigma_MC_combined_se"] - se) < 5e-5, (beta, r)
+        assert abs(r["mu_MC_combined"] - mu) < 5e-5, (beta, r)
+    # the retired truncated-complex value is far outside the full-complex fit
+    assert abs(rows[0.3]["sigma_MC_combined"] - (-0.080)) > 0.05
 
 
 def test_v5_polyakov_rate_resolution_pins():
-    """Paper 41 sec 6.7 (XCWG-J): dual graph V=60/E=288/avg degree 9.60/
-    lambda_2 = 2.138; rate-constant resolution c_sigma_ens = 1.196 vs
-    c_mu_comb = 1.242 (4% agreement).  Added 2026-07-04 (zero
-    regression backing before)."""
+    """Paper 30 sec:ruleb (6): at n_max = 2 the exponential rate of the
+    area-only slope, c_sigma_ens = 1.196, matches that of the perimeter
+    coefficient, c_mu_comb = 1.242 (4% agreement)."""
     d = _load("xcwg_polyakov_rate_refinement.json")
-    n2 = d["n_max_2"]
-    dg = n2["dual_graph_unweighted"]
-    assert (dg["V_dual"], dg["E_dual"]) == (60, 288)
-    assert abs(dg["avg_degree"] - 9.60) < 0.01
-    assert abs(n2["dual_spectrum_unweighted"]["spectral_gap_lambda2"]
-               - 2.138) < 0.001
     m = d["n_max_2_what_measured"]
     assert abs(m["c_sigma_ens"] - 1.196) < 0.001
     assert abs(m["c_mu_comb"] - 1.242) < 0.001

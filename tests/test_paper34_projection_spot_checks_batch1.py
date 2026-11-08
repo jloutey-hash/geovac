@@ -8,7 +8,7 @@ followon_register.md A9 batch 1:
   §III.1   Fock conformal (sec:proj_fock)
   §III.5   Sturmian (sec:proj_sturmian)
   §III.11  Vector-photon promotion (sec:proj_vector_photon)
-  §III.13  Drake--Swainson asymptotic subtraction (sec:proj_drake_swainson)
+  §III.13  Drake--Swainson normalization of Bethe-log sums (sec:proj_drake_swainson)
   §III.16  Two-body Dirac / Breit retardation (sec:proj_breit_retardation)
   §III.17  Foldy/Friar charge density (sec:proj_charge_density)
   §III.18  Zemach magnetization density (sec:proj_magnetization_density)
@@ -322,7 +322,7 @@ def test_paper34_III5_sturmian_iv_closure_at_ell0(n):
 
 
 # ----------------------------------------------------------------------------
-# §III.11 Vector-photon promotion: 1/(4 pi) per loop is S^2 Weyl factor
+# §III.11 Vector-photon promotion: the vertex model's 1/(4 pi) is 1/Vol(S^2)
 # ----------------------------------------------------------------------------
 
 def test_paper34_III11_vector_photon_1_over_4pi():
@@ -351,13 +351,14 @@ def test_paper34_III11_vector_photon_1_over_4pi():
     assert sp.simplify(1 / vol_S2_sym - sp.Rational(1, 4) / sp.pi) == 0
 
     # 2026-08-28 audit: the checks above only relate two spellings of 4 pi.
-    # The projection claim is that the 1/(4 pi) the framework carries PER
-    # LOOP is this same S^2 measure factor.  Read it off the PRODUCTION
-    # vertex amplitude: geovac.vector_qed.vertex_coupling returns
+    # The projection claim is that the 1/(4 pi) of the vertex model's
+    # angular vertex is this same S^2 measure factor (Paper 33; the physical
+    # vertex, normalized on S^3, does not carry it).  Read it off the
+    # PRODUCTION vertex-model amplitude: geovac.vector_qed.vertex_coupling
+    # returns
     #   sqrt((2l_a+1)(2q+1)(2l_b+1)/(4 pi)) * (-1)^(l_a-m_a) * 3j,
     # so squaring and dividing out the (integer) degeneracy product and the
-    # (algebraic) 3j^2 must leave exactly 1/Vol(S^2) -- one factor of
-    # 1/(4 pi) per closed vertex pair, i.e. per loop.
+    # (algebraic) 3j^2 must leave exactly 1/Vol(S^2).
     from sympy.physics.wigner import wigner_3j
     from geovac.vector_qed import vertex_coupling
 

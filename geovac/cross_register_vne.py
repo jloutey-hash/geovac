@@ -1007,7 +1007,7 @@ def zemach_magnetization_correction_pauli(
 
     For hydrogen 21cm: r_Z ≈ 1.045 fm = 1.974e-5 bohr, alpha ≈ 1/137,
     m_e = 1 (a.u.), Z = 1, giving Delta_Z / nu_F ≈ -39.5 ppm (matching
-    Eides Tab. 7.3 to leading order).
+    Eides Sec. 11.1.1 to leading order).
 
     This function returns the leading-order coefficient as a Pauli term
     on the proton 0s spin pair × electron 1s spin pair. For full closure
@@ -1034,7 +1034,7 @@ def zemach_magnetization_correction_pauli(
 
     # Eides §7.2 leading-order Zemach correction.
     # In atomic units (m_e = 1, e = 1, hbar = 1), the canonical form
-    # reproducing Eides Tab. 7.3 (~ -39.5 ppm at r_Z = 1.045 fm for hydrogen)
+    # reproducing Eides Sec. 11.1.1 (~ -39.5 ppm at r_Z = 1.045 fm for hydrogen)
     # is the "smeared Fermi contact" identity
     #
     #     Delta nu_Z / nu_F = -2 Z m_e r_Z  (atomic units; r_Z in bohr)

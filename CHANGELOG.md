@@ -7,6 +7,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.6.1] - 2026-11-08
+
+**group5 carry-forward worked (PI: "take your recommendations and work the carry-forward items").** Two Paper 30
+Monte Carlo results did not survive a rerun on the full plaquette complexes, and Paper 34's TX-A theorems and
+Eides pointers were brought into line with what is computed and what the sources contain. Patch bump; the PM
+recommends MINOR, since published numbers moved (PI call).
+
+### Changed (owner corrections)
+- **Paper 30 sec:ruleb (5), (6): full-complex reruns** (`debug/p30_full_complex_rerun.py`, printed settings with the
+  caps lifted). n_max = 4 Wilson loops on all 5047 plaquettes: joint-fit sigma = -0.0043(15), -0.0006(7), -0.0005(1)
+  against mu = 0.022, 0.0058, 0.0020 at beta = 0.3, 1, 3, so no area law resolved; the printed -0.080(2) came from
+  the 1500-plaquette run. n_max = 3 monopole density on 994 plaquettes and all 3342 2-cycles: a two-decade drop
+  between beta = 0.1 and 0.2, zero from 0.7, single-exponential fit c = 22.9 (R^2 = 0.935); the printed c = 8.95
+  (R^2 = 0.981) was the truncated action. The 1.196 / 1.242 rate match is now stated at n_max = 2, where it was
+  measured.
+- **Paper 34 TX-A (sec:axiomatization).** Theorem 1 has six tested rows: the Uehling row's pi is the entered
+  flat-space Pi, not a projection (PI call, on recommendation). Theorem 3's 16x16 counts were never computed and
+  the driver could not return an inverse pair; replaced by the computed 15x15 table (186 commute; 22 one-way,
+  every one through Drake-Swainson; 2 conflicts, spectral action and spinor lift; 3 idempotent; 12
+  self-compose). The "metadata correctly flags (hopf, spinor_lift)" claim rested on the withdrawn Hopf variable
+  alpha; that ordering, like rest-mass before Breit, is operator-level or semantic. Conclusion matched. The
+  driver moved to `tests/paper34_support/` with its metadata matched to the paper.
+- **Eides pointers (Papers 34, 23).** Ch. 7 of the 2007 book is the muonic-atom Lamb shift, so the 19 "Tab. 7.3" /
+  "Tab. 7.6" pointers for hydrogen Lamb, H and D HFS, He+ and multi-loop budgets were wrong; each now names the
+  book section (verified against the book's table of contents and the Phys. Rep. review by a citation reviewer).
+  The "-39.500 ppm" Eides Zemach reference had no source; the closed form -2 Z alpha m_e r_Z gives -39.495 ppm,
+  which the operator reproduces, and the "0.012% residual" is gone.
+- **Paper 34 muonic Lamb rows** (owner pass; chronicle `docs/chronicles/paper34_owner_pass_cut.md`): muH, mud and
+  mu4He+ Uehling, Eides self-energy and closed-form Friar terms are textbook assembly; finite-size rows are
+  Layer-2; Uehling chains read "entered Pi o Fock o rest-mass". Also the Ps structural reading, the He+ Foldy
+  status, "proton" polarizability for muH, and a stray "flow" class.
+- **Paper 51:** the 1.3% coefficient of variation is at t = 10 (0.23% at t = 1); both owed measurements now have
+  tests, and the section is "Open questions".
+
+### Added (guard pass, separate from the fixes; every guard fire-tested)
+- `tests/test_paper34_carry_forward_guards.py`: six TX-A guards (six chains; Uehling not a chain; Hopf adds no
+  variable; 15x15 counts by two routes; archived tables match) and the 3P Bethe log (-0.0405950 at N = 40,
+  +6.30% vs Drake-Swainson; slow).
+- `tests/test_paper51_owed_guards.py`: CV of the discretization ratio (lean and production routes, agreeing to
+  2e-11) and propagation number 2 (ported from the debug driver; second route by SVD rank).
+- Paper 30 pins moved to the archived full-complex JSONs (`tests/wilson_rule_b_support/data/p30_full_complex_*.json`),
+  each fire-tested against the retired value.
+- C16 `g5-carry-forward-2026-11-08` (fire-tested: 11 retired forms fire, 13 corrected or nearby forms silent).
+
+### Changed (tests and support)
+- Docstring re-anchors in the Paper 34 spot-check files (projection-13 name; the vertex model's 1/(4 pi)); the
+  muonium driver uses Mu-MASS 1047.2(2.3)(1.1) MHz; `test_paper41_wilson_witnesses.py` trimmed of Paper 41-only
+  asserts (Weyl d_W, MK asymptotic accuracies, large-beta sigma, dual-graph counts) and anchored to Paper 30;
+  the ST-SU3 plaquette census moved to `tests/_archive/diagnostics/test_su3_s5_plaquette_census.py` (the
+  N_max = 5 counts stay live, anchored to Paper 24). Code comments citing "Eides Tab. 7.3" for the Zemach term
+  re-pointed.
+
+### Still owed
+- Figures once attributed to "Tab. 7.3" (D HFS Zemach -150 ppm; H HFS +12 to +18 and -18.5 ppm bands) are
+  unverified; "Eides Eq. 2.35" (7 loci) is probably wrong. Full list: `docs/qa/group5.debt.md`.
+
 ## [v6.6.0] - 2026-11-07
 
 **group5 restructured after the advisory pass; the physical vector vertex (VV stage A); the SO(4) channel

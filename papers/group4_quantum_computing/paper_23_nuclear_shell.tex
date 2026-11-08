@@ -791,8 +791,8 @@ to the hydrogen 1s energy at $2.86\%$, and follow-up symbolic analysis
 (Sec.~\ref{ssec:cross-bethe}) shows that this residual is a
 basis-truncation artifact of the $1s \times 1s$ Sturmian representation,
 not a missing physical sub-leading correction. $\omega_{\mathrm{magn}}$
-reproduces the Eides Tab.~7.3 leading-order Zemach shift at
-$0.012\%$ residual, with its profile $\rho_M$ calibrated so that the
+reproduces the closed-form leading-order Zemach shift
+$-2Z\alpha\, m_e r_Z$ (Eides \S~11.1.1), with its profile $\rho_M$ calibrated so that the
 first radial moment is $M_1[\rho_M] = r_Z$;\ the agreement checks the
 operator construction, not the value of $r_Z$. The structural interpretation is that the
 framework computes the operator action given a fixed $\rho_M$, and the
@@ -991,7 +991,7 @@ convolution. Sprint HF-4 (Sec.~\ref{sec:ne}, footnote;
 Sprint HF~\cite{SprintHF} for the original 21\,cm precision test) closed
 the framework's residual to the 21\,cm transition by treating $r_Z$ as
 a Layer-2 external input scalar; that closure landed at $+18$~ppm,
-consistent with the Eides~Tab.~7.3 budget for multi-loop QED plus
+consistent with the Eides~Ch.~11 budget for multi-loop QED plus
 nuclear polarizability.
 
 The construction reported here promotes the scalar substitution to an
@@ -1040,11 +1040,9 @@ $= 1.974 \times 10^{-5}$\,bohr, the operator-level construction gives
   \frac{\Delta\nu_Z}{\nu_F}\Big|_{\mathrm{operator}}
   = -39.495\,\mathrm{ppm},
 \end{equation}
-versus the Eides~Tab.~7.3 reference $-39.500$\,ppm, a residual of
-$+0.005$~ppm or $0.012\%$ of the Eides shift. The residual is
-consistent with the rounding of the bohr-to-fermi conversion constant
-$a_0 = 52917.72108$\,fm in the input scalar; with a sharper conversion
-the agreement lands at machine precision. Profile independence at
+which equals the closed-form leading Zemach term
+$-2Z\alpha\, m_e r_Z$ (Eides \S~11.1.1) at $r_Z = 1.045$\,fm to the
+printed digits. Profile independence at
 leading order is verified to machine precision: Gaussian and
 exponential profiles, both calibrated to the same $r_Z$, produce
 identical leading-order shifts. They differ at order~2 by $\sim 13\%$
@@ -1187,8 +1185,8 @@ verdicts are scope-bounded:
     half-integer-mass-ratio artifact tower (structurally absent in
     Pachucki~2018). Multi-shell $n_{\max} \geq 2$ on both registers is
     the structural follow-up for higher-order recoil.
-  \item $\omega_{\mathrm{magn}}$: Eides~Tab.~7.3 leading order
-    at $0.012\%$ residual, with $\rho_M$ calibrated to $M_1 = r_Z$, profile independence at leading order
+  \item $\omega_{\mathrm{magn}}$: the closed-form leading-order
+    Zemach term (Eides~\S~11.1.1), with $\rho_M$ calibrated to $M_1 = r_Z$, profile independence at leading order
     and shape dependence appearing only at the Friar moment
     $\langle r^2\rangle_{\rho_M}$. Higher-order Eides corrections
     (polarizability $\Delta_{\mathrm{pol}}$, recoil-corrected Zemach,
@@ -1525,7 +1523,7 @@ M.~I.~Eides, H.~Grotch, and V.~A.~Shelyuto,
 % Eides2024 bibitem removed (2026-06-03): arXiv:2306.13369 is
 % Krachkov--Lee, ``Two-loop corrections to Lamb shift and hyperfine
 % splitting in hydrogen via multi-loop methods'' (JHEP 07 (2023) 211),
-% NOT Eides--Shelyuto. The Zemach / Tab.~7.3 content cited in text is
+% NOT Eides--Shelyuto. The Zemach content cited in text is
 % carried by EidesGrotchShelyuto2007; the two co-citations and the
 % prose ``Eides~2024 calibration'' have been redirected accordingly.
 

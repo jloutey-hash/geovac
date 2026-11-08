@@ -25,9 +25,7 @@
       "id": "hopf_bundle",
       "name": "Hopf bundle",
       "section": "III.2",
-      "variables_added": [
-        "alpha"
-      ],
+      "variables_added": [],
       "dimensions_added": [],
       "transcendental_class": [
         "pi_hopf_base"
@@ -230,11 +228,9 @@
     },
     {
       "id": "drake_swainson",
-      "name": "Drake-Swainson asymptotic subtraction",
+      "name": "Drake-Swainson normalization of Bethe-log sums",
       "section": "III.13",
-      "variables_added": [
-        "K_subtract"
-      ],
+      "variables_added": [],
       "dimensions_added": [],
       "transcendental_class": [
         "flow"
@@ -289,39 +285,6 @@
     }
   ],
   "examples_with_signatures": {
-    "hydrogen_lamb_shift_LS6a": {
-      "chain": [
-        "fock_conformal",
-        "spectral_action",
-        "sturmian",
-        "drake_swainson"
-      ],
-      "signature": {
-        "variables": [
-          "E",
-          "K_subtract",
-          "Lambda",
-          "Z",
-          "alpha"
-        ],
-        "dimensions": [
-          "energy",
-          "energy"
-        ],
-        "transcendentals": [
-          "flow",
-          "pi2k_rational",
-          "rational",
-          "rational_kappa",
-          "sqrt_pi"
-        ],
-        "pi_intrinsic": true
-      },
-      "target_observable": "Lamb shift, energy units, contains pi^2",
-      "consistent_dims": true,
-      "consistent_pi": true,
-      "verdict": "PASS"
-    },
     "K_alpha_three_sector": {
       "chain": [
         "fock_conformal",
@@ -474,34 +437,6 @@
       "consistent_dims": true,
       "consistent_pi": true,
       "verdict": "PASS"
-    },
-    "uehling_VP": {
-      "chain": [
-        "fock_conformal",
-        "spectral_action"
-      ],
-      "signature": {
-        "variables": [
-          "E",
-          "Lambda",
-          "Z",
-          "alpha"
-        ],
-        "dimensions": [
-          "energy",
-          "energy"
-        ],
-        "transcendentals": [
-          "pi2k_rational",
-          "rational_kappa",
-          "sqrt_pi"
-        ],
-        "pi_intrinsic": true
-      },
-      "target_observable": "VP coefficient Pi = 1/(48 pi^2)",
-      "consistent_dims": true,
-      "consistent_pi": true,
-      "verdict": "PASS"
     }
   },
   "axis_independence": [
@@ -517,7 +452,7 @@
     {
       "id": "hopf_bundle",
       "axes_active": {
-        "variable": true,
+        "variable": false,
         "dimension": false,
         "transcendental_nontrivial": true,
         "transcendental_injects_pi": true
@@ -616,7 +551,7 @@
     {
       "id": "drake_swainson",
       "axes_active": {
-        "variable": true,
+        "variable": false,
         "dimension": false,
         "transcendental_nontrivial": true,
         "transcendental_injects_pi": false
@@ -642,42 +577,6 @@
     }
   ],
   "theorem_1_results": {
-    "hydrogen_lamb_shift_LS6a": {
-      "chain": [
-        "fock_conformal",
-        "spectral_action",
-        "sturmian",
-        "drake_swainson"
-      ],
-      "signature": {
-        "variables": [
-          "E",
-          "K_subtract",
-          "Lambda",
-          "Z",
-          "alpha"
-        ],
-        "dimensions": [
-          "energy",
-          "energy"
-        ],
-        "transcendentals": [
-          "flow",
-          "pi2k_rational",
-          "rational",
-          "rational_kappa",
-          "sqrt_pi"
-        ],
-        "pi_intrinsic": true
-      },
-      "expected_dims": [
-        "energy"
-      ],
-      "expected_pi": true,
-      "consistent_dims": true,
-      "consistent_pi": true,
-      "verdict": "PASS"
-    },
     "K_alpha_three_sector": {
       "chain": [
         "fock_conformal",
@@ -847,52 +746,9 @@
       "consistent_dims": true,
       "consistent_pi": true,
       "verdict": "PASS"
-    },
-    "uehling_VP": {
-      "chain": [
-        "fock_conformal",
-        "spectral_action"
-      ],
-      "signature": {
-        "variables": [
-          "E",
-          "Lambda",
-          "Z",
-          "alpha"
-        ],
-        "dimensions": [
-          "energy",
-          "energy"
-        ],
-        "transcendentals": [
-          "pi2k_rational",
-          "rational_kappa",
-          "sqrt_pi"
-        ],
-        "pi_intrinsic": true
-      },
-      "expected_dims": [
-        "energy"
-      ],
-      "expected_pi": true,
-      "consistent_dims": true,
-      "consistent_pi": true,
-      "verdict": "PASS"
     }
   },
   "theorem_2_results": {
-    "hydrogen_lamb_shift_LS6a": {
-      "chain": [
-        "fock_conformal",
-        "spectral_action",
-        "sturmian",
-        "drake_swainson"
-      ],
-      "all_perms_same_signature": true,
-      "non_commuting_pairs": [],
-      "n_permutations": 24,
-      "verdict": "PASS"
-    },
     "K_alpha_three_sector": {
       "chain": [
         "fock_conformal",
@@ -900,12 +756,7 @@
         "spinor_lift"
       ],
       "all_perms_same_signature": true,
-      "non_commuting_pairs": [
-        [
-          "hopf_bundle",
-          "spinor_lift"
-        ]
-      ],
+      "non_commuting_pairs": [],
       "n_permutations": 6,
       "verdict": "PASS"
     },
@@ -933,16 +784,6 @@
       "chain": [
         "fock_conformal",
         "spinor_lift"
-      ],
-      "all_perms_same_signature": true,
-      "non_commuting_pairs": [],
-      "n_permutations": 2,
-      "verdict": "PASS"
-    },
-    "uehling_VP": {
-      "chain": [
-        "fock_conformal",
-        "spectral_action"
       ],
       "all_perms_same_signature": true,
       "non_commuting_pairs": [],

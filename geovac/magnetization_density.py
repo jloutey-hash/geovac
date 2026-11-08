@@ -29,7 +29,7 @@ the canonical hydrogen-21cm form is
 
     Delta nu_Z / nu_F = -2 Z m_e r_Z (a.u.; r_Z in bohr)
 
-reproducing Eides Tab. 7.3 -39.5 ppm at r_Z = 1.045 fm verbatim.
+reproducing Eides Sec. 11.1.1 -39.5 ppm at r_Z = 1.045 fm verbatim.
 
 The operator-level construction promotes r_Z from a classical scalar to an
 operator-valued matrix element on the (electron register) x (proton register)
@@ -215,7 +215,7 @@ from geovac.shibuya_wulfman import _hydrogenic_poly_coeffs_lam
 R_Z_EIDES_2024_FM: float = 1.045
 R_Z_EIDES_2024_BOHR: float = R_Z_EIDES_2024_FM / A0_FM  # ~ 1.974e-5
 
-# The Eides Tab. 7.3 leading-order Zemach shift on 21cm line (in ppm)
+# The Eides Sec. 11.1.1 leading-order Zemach shift on 21cm line (in ppm)
 DELTA_NU_ZEMACH_EIDES_PPM: float = -39.5
 
 # Default nucleon mass for the recoil-mixing extension (May 2026).
@@ -260,7 +260,7 @@ class MagnetizationDensitySpec:
     lepton_mass : float
         Lepton mass scaling factor in electron-mass atomic units (m_e = 1).
         Default 1.0 reproduces the infinite-proton-mass electronic case
-        (Eides Tab. 7.3 -39.5 ppm at r_Z = 1.045 fm, the historical
+        (Eides Sec. 11.1.1 -39.5 ppm at r_Z = 1.045 fm, the historical
         framework regression).  For physical electronic-H reduced mass set
         lepton_mass = M_RED_EP ~ 0.99946; for muonic-H set lepton_mass =
         M_RED_MUP ~ 185.84 (Sprint MH Track C, May 2026).  The Eides
@@ -277,7 +277,7 @@ class MagnetizationDensitySpec:
         and the Friar moment correction in the operator output.  Default
         ``False`` preserves the Eides leading-order formula bit-identical
         for backward compatibility with the existing electronic
-        regression and the calibrated -39.5 ppm Eides Tab. 7.3 target.
+        regression and the calibrated -39.5 ppm Eides Sec. 11.1.1 target.
 
         When ``True`` the operator-level shift becomes (May 2026 extension):
 
@@ -824,7 +824,7 @@ def taylor_zemach_around_zero(
     if order >= 2:
         total += order_2
 
-    # Reference: Eides Tab. 7.3 at r_Z = 1.045 fm
+    # Reference: Eides Sec. 11.1.1 at r_Z = 1.045 fm
     eides_ref_ppm = -2.0 * Z * m_e * R_Z_EIDES_2024_BOHR * 1.0e6  # ~ -39.5
 
     return {
