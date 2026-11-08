@@ -1,3 +1,55 @@
+# Paper 36 narrowing (2026-11-07): material cut, verbatim
+
+Paper 36 (`papers/group5_qed_gauge/paper_36_bound_state_qed.tex`) was narrowed on
+2026-11-07 (PI-approved, after the group5 advisory pass) to an exact assembly and
+validation of the leading one-loop hydrogen Lamb shift with Bethe logarithms.
+This file preserves the pre-narrowing source **verbatim** (snapshot = the working
+tree at commit 8c8d2e73, before the narrowing edit), so nothing cut is lost.
+Line numbers below are those of the original file; the verbatim copy at the end
+of this file starts on the line after the opening ````latex fence.
+
+## What was cut or moved (line ranges in the verbatim copy)
+
+| Lines | Material | Disposition |
+|:------|:---------|:------------|
+| 1-5, 20-23 | Header comment; title "Bound-State QED on $S^3$: The Leading One-Loop Hydrogen Lamb Shift" | Replaced (new title has no "on $S^3$"; $S^3$ never enters the number) |
+| 29-82 | Abstract (LS-1..LS-6a narrative, K-plateau, "structural denominator", LS-7 two-loop paragraph, projections paragraph) | Rewritten |
+| 121-165 | Intro: the "three standard projections + fourth + fifth" framing (Fock, Camporesi-Higuchi, Sturmian, Drake-Swainson, Eides) and the sprint-provenance paragraph citing `debug/` | Cut (no step of the number uses Fock or the CH spectrum) |
+| 167-223 | Sec. "Architecture: Dirac-$S^3$ plus Sturmian projection" (Dirac-$S^3$ spectrum subsection; "Sturmian basis = the Fock label set re-parameterized" LS-2 reading) | Cut; the Sturmian basis definition is restated in the new Sec. 2 |
+| 240-242 | "$I_v(nS) = (Z^4/n^3)$ ... including the spin factor of 2" | Corrected: the closure is $2Z^4/n^3$, no spin factor (the code gives $I_v(2S) \to 0.25$) |
+| 246-250 | LS-2 velocity-form values at $N=50$ (2S 2.726, $-3.1\%$; 1S 2.924, $-2.0\%$) | Cut (archived-measured, no backing test) |
+| 252-262, 286-288 | "structural floor" reading of the vanishing $\ell>0$ sum rule | Rewritten: for $\ell>0$ the standard definition normalizes by $2Z^4/n^3$, so there is no 0/0 |
+| 275-276 | Retracted "3.3x tighter" remark | Cut |
+| 282-284 | "The 2S value at N=40 is the converged production number" (stale) | Deleted; the 2S value is a crossing |
+| 290-313 | LS-4 $K$-split, eq. (drake_split), "plateau of 3.6 orders of magnitude", "structural denominator" eq. (drake_denom) | Cut: the durable code evaluates the convergent $\ell>0$ sum directly; no $K$-sweep exists in `tests/` |
+| 324-326 | "would close to $<1\%$ at $N=100$" | Deleted (extrapolation) |
+| 328-342 | Remark "The Drake denominator is combinatorial-rational" (spin x angular degeneracy reading; flow/calibration tier) | Cut; the factor $2\ell+1$ is bookkeeping for the code's sum over initial magnetic substates |
+| 344-353 | Remark "Drake-Swainson is structurally a sibling of the Schwartz integral form" | Cut (unbacked equivalence claim) |
+| 360-384 | LS-4 "complete/converged" opening and LS-5 subsection (Eides "Table 7.4", "$\alpha^5$ multi-loop $+7.10$ MHz", LS-1 footnote quote) | Cut; the $+7.13$ MHz figure is the one-loop $\alpha(Z\alpha)^5$ total of Eides Table III, not multi-loop |
+| 431-442 | Observation "LS-6a: Uehling kernel double-counting" ("identified structurally rather than fitted") | Rewritten as a plain erratum statement |
+| 476-491 | "Continuous verification vs archived record" paragraph | Rewritten |
+| 511-529 | Subsec. "Sprint LS-7: structural confirmation of two-loop projection" | Cut |
+| 531-554 | Subsec. "What $\pi$-content the calculation introduces" (pi-provenance) | Cut |
+| 556-617 | Sec. "Outlook: LS-7 and the multi-loop test", incl. Proposition "LS-7 multi-loop test, sharpened" (prop:ls7_sharpened) with target $C_{2S} = +3.63$ | Cut. The $+3.63$ target could not be traced to a primary source: Eides-Grotch-Shelyuto Table II gives $+0.366$ MHz for the two-loop self-energy on 2S ($C = 1.551$ in this normalization) and $+0.127$ MHz with the two-loop polarization ($C = 0.539 = B_{40}$) |
+| 619-711 | Subsec. "Sprint LS-8a result" with its table, Proposition "LS-7 multi-loop test, finalized" and "honest scope" paragraph | Rewritten as Sec. 6 (the model's divergence only; table recomputed under the corrected $W$) |
+| 713-810 | Subsec. "Sprint MH Track A: Muonic Hydrogen" | Moved to Paper 34 (Sec. "Muonic hydrogen 2S-2P Lamb shift autopsy", which already carried the same component table). The per-level values $\Delta E_U(2S) = -210.59$, $\Delta E_U(2P) = -5.59$ meV were NOT moved: the driver gives $-219.58$ and $-14.58$ meV (same difference, $+205.007$ meV) |
+| 812-884 | Subsec. "Sprint Mu Lamb: Muonium Lamb Shift" (incl. the mass-hierarchy matrix) | Cut |
+| 886-970 | Subsec. "Muonium catalogue closure" (incl. the $-0.6\%$ zombie row, Mu HFS "cleanest LS-8a isolation" and "structurally novel" claims, the mass-hierarchy x Layer-2 matrix) | Cut |
+| 972-1008 | Conclusion | Rewritten |
+| 1014-1064, 1075-1087 | Bibitems paper7/14/18/28/34/35, the six `debug/` sprint-memo bibitems (C14), karshenboim2005, codata2018, pdg2024, antognini2013, camporesi_higuchi, mohr_plunien_soff | Removed or replaced as needed |
+
+## Tests whose claims left Paper 36
+
+- `tests/test_two_loop_self_energy.py` backed the LS-7 prefactor and the LS-8a table; the
+  prefactor claim is cut. (The file is unchanged; note `test_spectral_sum_diverges_with_n_max`
+  fails under the corrected channel count of 2026-11-07, see the PM report.)
+- `tests/paper36_precision_support/precision_catalogue_muonium_lamb.py` and
+  `precision_catalogue_muonium_hfs.py` (archived-measured drivers, not tests) now back no
+  Paper 36 text. `sprint_mh_track_a.py` backs the Paper 34 muonic-hydrogen autopsy.
+
+## Verbatim pre-narrowing source
+
+````latex
 % Paper 36: Bound-State QED on S^3 -- the hydrogen Lamb shift at one loop
 % GeoVac Project, May 2026.  Standalone observation paper.
 % Headline (re-scoped 2026-11-07, /qa group5): 1052.19 MHz is the leading
@@ -1117,3 +1169,4 @@ operator on spheres and real hyperbolic spaces,''
 \end{thebibliography}
 
 \end{document}
+````

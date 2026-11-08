@@ -79,9 +79,9 @@
 | Bond sphere theory | 8-9 | All | Core |
 | Sturmian structural theorem | 8-9 | Sec IV | Core |
 | SO(4) selection rules | 8-9 | Sec III | Core |
-| Fine structure alpha (Hopf bundle) | 2 | Sec 3-5 | Observation |
-| Hopf fibration spectral invariants | 2 | Sec 3 | Observation |
-| Cubic self-consistency (alpha) | 2 | Sec 4 | Observation |
+| Fine structure α observation K = π(B+F−Δ) on S³ | 2 | sec:ingredients, sec:formula, sec:statistical | Observation |
+| Scope of a Hopf-fibration reading (rotation vs chiral-factor grouping; one-centre fibre) | 2 | sec:scope | Observation |
+| Cubic self-consistency (alpha) | 2 | sec:formula | Observation |
 | Spectral dimension d_s | 3 | Sec 4 | Conjecture |
 | Holographic entropy S | 3 | Sec 5 | Conjecture |
 | Central charge c | 3 | Sec 6 | Conjecture |
@@ -133,19 +133,16 @@
 | FCI basis invariance | 7, 13, 18 | Note added v2.6.0 | Core |
 | Three-layer exchange structure (He) | 18, 21 | Note added v2.6.0 | Core |
 | Molecular limitation (honest assessment) | 21 | Sec VIII | Synthesis |
-| Hopf graph as lattice gauge structure (synthesis) | 25 | All | Synthesis |
-| Graph Hodge theory (node/edge Laplacian, Betti numbers) | 25 | Sec II | Synthesis |
-| Edge Laplacian L₁ = B^T B as gauge propagator (conjecture) | 25 | Sec III, IV | Synthesis |
-| S² Hopf quotient graph (lattice gauge base) | 25 | Sec III.B | Synthesis |
-| U(1) gauge phases from ladder operators | 25 | Sec III.C | Synthesis |
-| (B, F, Δ) as gauge-theoretic invariants (reframing) | 25 | Sec IV.A | Synthesis |
-| Wilson/graph-Hodge dictionary | 25 | Sec II.E | Synthesis |
-| Lattice gauge theory on Fock-projected S³ | 25 | Sec III, VI | Synthesis |
-| Why the lattice-gauge / graph-Hodge gap remained | 25 | Sec VI.D | Synthesis |
+| Wilson lattice gauge theory on the label graphs (scalar and Dirac Rule-B) | 30 | All | Active |
+| Graph Hodge theory (node/edge Laplacian, Betti numbers, plaquette complex) | 30 | Sec 2.2 | Active |
+| Hodge-1 Laplacian B^T B + B₂B₂^T as gauge-fixed propagator; curl form at weak coupling | 30 | Sec 3.4, 4.2 | Active |
+| (n,l)-sector quotient graph and its spectrum; dependence on the grouping | 30, 2 | Sec 4.3 (Paper 30); sec:scope (Paper 2) | Active/Observation |
+| Compact U(1) from the SU(2) maximal-torus reduction | 30 | Sec 4.1 | Active |
+| Wilson/graph-Hodge dictionary | 30 | Sec 4.2 | Active |
+| SU(2) Wilson exact factorization on the scalar label graph | 30 | Sec 3 | Active |
 | Connes Standard Model (full SM on T_{S³}) | 32 | Sec VIII.C (G4a) | On-topic |
 | SM gauge group U(1)×SU(2)×SU(3) from inner fluctuations | 32 | Sec VIII.C (G4a) | On-topic |
-| SU(3) gauge on Bargmann-Segal S⁵ (open question) | 25 | Sec VII.A | Synthesis |
-| Rank-2 Breit as 2-form gauge (open question) | 25 | Sec VII.B | Synthesis |
+| SU(3) Wilson Cartan reduction on the Bargmann–Segal graph | 30, 24 | Sec 4.1 (Paper 30) | Active |
 | Potential-independent angular sparsity | 22 | All | Core |
 | ERI density vs l_max (theorem + data) | 22 | Sec III, IV | Core |
 | Universal vs Coulomb-specific partition | 22 | Sec VI; 23 | Core |
@@ -183,16 +180,14 @@
 | DUCC downfolding (core potential) | 17, 18 | — | Core |
 | PK l_max divergence root cause | 17, 18 | — | Core |
 | Energy graph for V_ee on S³ (characterization) | 18 | Note added v2.9.1 | Core |
-| Dirac-on-S³ infrastructure (Camporesi-Higuchi spectrum, spinor harmonics) | 2 (§IV rewrite), 23 | — | Observation/Applications |
-| Camporesi-Higuchi spectrum on S³ | 2, 23 | §IV | Observation |
-| Spinor spherical harmonics on S³ | 2 | §IV | Observation |
-| π-free certificate for Dirac-on-S³ | 2 | §IV | Observation |
-| Orduz Hopf-equivariant Dirac decomposition | 2 | §IV | Observation |
-| 20⊕20 charge-parity split of Δ⁻¹ | 2 | §IV | Observation |
-| ζ(3) in the Dirac sector at s = d_max | 2 | §IV.5 (new) | Observation |
-| Odd-zeta vs even-zeta content (spinor vs scalar Laplacian) | 2 | §IV.5 | Observation |
-| Three-homes theorem for B, F, Δ | 2 | §IV.1 (new) | Observation |
-| Cross-sector structural coincidence (K combination rule) | 2 | §IV.6 | Observation |
+| Dirac-on-S³ infrastructure (Camporesi-Higuchi spectrum, spinor harmonics) | 2 (sec:obstructions), 23 | — | Observation/Applications |
+| Camporesi-Higuchi spectrum on S³ | 2, 23 | Δ subsection, sec:obstructions | Observation |
+| Orduz Hopf-equivariant Dirac decomposition | 2 | sec:obstructions (obstruction 3) | Observation |
+| 20⊕20 charge-parity split of Δ⁻¹ | 2 | sec:obstructions (obstruction 3) | Observation |
+| ζ(3) in the Dirac sector at s = d_max | 2 | sec:obstructions (obstruction 2) | Observation |
+| Odd-zeta vs even-zeta content (spinor vs scalar Laplacian) | 2 | sec:obstructions (obstruction 2) | Observation |
+| Three-homes proposition for B, F, Δ | 2 | sec:mechanisms (prop. thm:three_homes) | Observation |
+| Cross-sector structural coincidence (K combination rule) | 2 | sec:mechanisms (obs:cross_sector) | Observation |
 | Dirac Fock rigidity (deferred) | 23 | — | Applications |
 | First-order vs second-order spectral operators (π content) | 24 | §IV-V | Core |
 | Spinor composed encoding (Tier 2) | 14 | §V (new) | Core |
@@ -222,22 +217,22 @@
 | Operator-order transcendental discriminant | 18, 24 | §IV, §V | Core |
 | Dirac fine-structure formula | 14 | §V | Core |
 | Kramers-Pasternak direct integration | 14, 18 | §V, §IV | Core |
-| Vacuum polarization Π = 1/(48π²) (standard flat-space value, entered; not from S³ data) | 28 | §One-Loop Vacuum Structure | Core |
+| Vacuum polarization Π = 1/(48π²) (standard flat-space value, entered; not from S³ data) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Core |
 | Seeley-DeWitt heat kernel coefficients | 18 | §IV | Core |
-| QED beta function (standard flat-space value, entered; not from S³ spectral data) | 28 | §V | Core |
+| QED beta function (standard flat-space value, entered; not from S³ spectral data) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Core |
 | Motivic weight and operator order | 18 | §IV (new) | Core |
 | ζ(3) as period of Q(−3) | 18 | §IV | Core |
 | Zagier dimension conjecture | 18 | §IV | Core |
 | Catalan constant G from vertex parity | 18 | §IV (new) | Core |
 | Dirichlet beta function β(s) on S³ | 18 | §IV (new) | Core |
-| Vertex parity selection rule (two-loop sunset) | 18 | §IV (new) | Core |
+| Parity restriction of the Dirac spectrum (the vertex model's parity clause read as one) | 18, 28 | Paper 18 §IV; Paper 28 Theorem 3 | Core |
 | Two-loop sunset diagram on S³ | 18 | §IV (new) | Core |
 | Three-axis transcendental taxonomy | 18 | §IV (new) | Core |
 | Dirichlet L-function L(s, χ₋₄) | 18 | §IV (new) | Core |
 | Master Mellin engine M1/M2/M3 trinity (single owner of the slot table + ring homes: Paper 18 §III.7; census: Paper 55; every other locus points, 2026-10-15 sweep) | 18, 32, 55 | Paper 18 §III.7 `sec:mellin`; Paper 32 §VIII `thm:pi_source_case_exhaustion` + `cor:m1`/`m2`/`m3`; Paper 55 §2–5 | Core |
 | Period-ring stratification (M1 ⊂ ℚ[π, π⁻¹]; M2 ⊂ ⊕π^{2k}ℚ; M3 ⊂ MT(ℤ[i, 1/2]) level ≤ 4) | 18, 32, 55 | Paper 18 §III.7 `eq:m_engine_period_stratification`; Paper 32 §VIII corollaries; Paper 55 §3/§4/§5 | Core |
 | Cyclotomic mixed-Tate at level 4 (Deligne–Glanois) | 32, 55 | Paper 32 §VIII `cor:m3_cyclotomic_mixed_tate`; Paper 55 §5 | Core |
-| Vertex-parity = χ₋₄ as Deligne–Glanois Galois descent | 28, 32, 55 | Paper 28 `rem:chi4_motivic`; Paper 32 §VIII `cor:m3`; Paper 55 §5 | Core |
+| χ₋₄ parity split as Deligne–Glanois Galois descent (vertex parity as χ₋₄ only a reading of the vertex model) | 28, 32, 55 | Paper 28 `rem:chi4_motivic`; Paper 32 §VIII `cor:m3`; Paper 55 §5 | Core |
 | Fathizadeh–Marcolli mixed-Tate inheritance (pure-Tate refinement on S³) | 18, 32, 55 | Paper 18 §III.7; Paper 32 §VIII `cor:m2_mixed_tate`; Paper 55 §4 | Core |
 | Localised pure-Tate ring ℚ[π, π⁻¹] (M1, the k=0 volume slot; the earlier "Hopf-base" label is retired) | 18, 32, 55 | Paper 18 §III.7 M1 closure paragraph; Paper 32 §VIII `cor:m1_pure_tate`; Paper 55 §3 | Core |
 | Kontsevich–Zagier periods (motivic placement) | 18, 55 | Paper 55 §1, §3–5 | Core |
@@ -258,72 +253,72 @@
 | Universal S_B(w̃_B/δ_B) scaling | 27 | Sec VII.B | Core |
 | Cusp hot-node concentration | 27 | Sec IV | Core |
 | n^4 area-law as pair-counting | 27 | Sec III | Core |
-| One-loop self-energy on S³ | 28 | §6 | Observation |
-| Self-energy structural zero theorem | 28 | §6 (Theorem 4) | Observation |
-| Vertex correction / anomalous magnetic moment | 28 | §6 | Observation |
-| Curvature expansion c₂ = (2-BΔ-FΔ-F/B)/5 (Paper 2 bridge) | 28 | §6.6 | Observation |
-| Three-loop O(N³) factorization | 28 | §9 | Observation |
-| S_min closed-form identification (Hoffman t-values) | 28 | §S_min | Result |
-| Depth-k tower (reframed as depth bound, 2026-06-11) | 28 | §10 | Observation |
-| Graph-native QED construction (finite graph formulation) | 28 | §graph_native_qed | Observation |
-| Graph-native vacuum polarization (Π as finite matrix trace) | 28 | §graph_native_qed.2 | Observation |
-| Graph-native self-energy and vertex correction | 28 | §graph_native_qed.3 | Observation |
-| Graph-native broken structural zero (CG opens couplings) | 28 | §graph_native_qed.4 | Observation |
-| Graph-native continuum bridge / projection exchange constant | 28 | §graph_native_qed.5 | Observation |
-| Graph-native π-free certificate (all QED algebraic) | 28 | §graph_native_qed.6 | Observation |
-| Fock graph Hodge theory (GN-1) | 25, 28 | §graph_native_qed | Observation |
-| Graph QED propagators (GN-2, electron + photon) | 28 | §graph_native_qed | Observation |
-| F₂(t) even rational function | 28 | §f2_even | Observation |
-| F₂(κ) convergence table | 28 | §f2_convergence | Observation |
-| Selection rule survival census (1/8 survives) | 28 | §selection_rule_census | Observation |
-| Topology-dependent projection (C×F₂ diverges) | 28 | §topology_dependent_projection | Observation |
-| Native Dirac graph QED (4/8 selection rules recovered) | 28 | §dirac_graph_qed | Observation |
-| Spinor-recoverable vs vector-photon-required partition | 18, 28 | §dirac_graph_qed, §IV | Core/Observation |
-| Dirac graph Hodge decomposition (Rule A/B) | 25, 28 | §dirac_graph_qed | Observation |
-| GS pendant status (scalar vs Dirac graph) | 28 | §dirac_graph_qed | Observation |
-| Furry's theorem recovery on Dirac graph | 28 | §dirac_graph_qed | Observation |
-| F₂ power-law convergence (n_max=2..6) | 28 | §f2_convergence | Observation |
-| F₂(t) even rational function structure | 28 | §f2_even, §f2_convergence | Observation |
-| Pendant-edge theorem (n_max=2..6) | 28 | §pendant_edge | Observation |
-| F₂(κ) vs F₂(0) sign flip at n_max=5 | 28 | §f2_convergence | Observation |
-| Self-energy trace Tr(Σ)/N_dirac scaling | 28 | §f2_convergence | Observation |
-| Three-diagram projection constants (C_VP, C_SE, C_F2) | 28 | §three_diagram_projection | Observation |
-| VP/SE constant ratio (two-tier calibration) | 28 | §three_diagram_projection | Observation |
-| Per-mode topological gap (graph vs continuum self-energy) | 28 | §three_diagram_projection | Observation |
-| Catalan/β from graph parity (clean negative) | 28 | §three_diagram_projection | Observation |
-| Vector QED sprint (VQ-1 through VQ-5) | 28 | §vq_sprint | Observation |
-| σ-weighted vertex (Pauli trace identity 3×) | 28 | §vq_sprint | Observation |
-| Direction-resolved Hodge decomposition (T vs L channels) | 28 | §vq_sprint | Observation |
-| Spectral anisotropy (T/L different L₁ spectra) | 28 | §vq_sprint | Observation |
-| Cross-channel coupling in photon propagator | 28 | §vq_sprint | Observation |
-| Three-tier selection rule partition (graph/spinor/vector) | 28 | §vq_sprint | Observation |
-| Full vector QED (direction × σ_μ, 15 configs) | 28 | §vq_sprint | Observation |
-| Transverse photon propagator from plaquettes | 28, 30 | §transverse_photon | Observation |
-| Pendant-edge exclusion mechanism (GS protection) | 28, 30 | §transverse_photon | Observation |
-| Plaquette-recoverable selection rule (GS zero) | 28 | §transverse_photon | Observation |
-| Four-tier selection rule partition (1+3+1+3) | 28 | §transverse_photon | Observation |
-| Mode-resolved self-energy (co-exact eigenvectors) | 28 | §transverse_photon | Observation |
-| Triangle inequality test on co-exact modes | 28 | §transverse_photon | Observation |
-| Tier 1/2 boundary (topological vs geometric) | 18, 28 | §transverse_photon | Core/Observation |
-| Vector-photon QED (7/8 selection rules) | 28 | §vector_photon_qed | Observation |
-| Photon (q, m_q) quantum numbers and CG vertex | 28 | §vector_photon_qed | Observation |
-| L₁ non-block-diagonalization by photon QN | 28 | §vector_photon_qed | Observation |
-| GS structural zero from angular momentum | 28 | §vector_photon_qed | Observation |
-| 1/(4π) calibration exchange constant | 18, 28 | §vector_photon_qed | Core/Observation |
-| 1-7-8 selection rule partition | 18, 28 | §vector_photon_qed | Core/Observation |
-| Furry's theorem: scalar obstruction, Dirac resolution | 28 | §vector_photon_qed | Observation |
-| Dirac spinor phase constraint (V(a,a)=0) | 28 | §vector_photon_qed | Observation |
-| Scalar 7/8 vs Dirac 8/8 selection-rule census in a vertex model (vector QED; not the physical vertex) | 28, 33 | §vector_photon_qed | Observation |
+| One-loop self-energy on S³ (vertex model) | 28 | §6 | Observation |
+| Self-energy structural zero theorem (vertex model; fails for the physical vertex, Paper 33 `cor:ground_state`) | 28 | §6 (Theorem 4) | Observation |
+| Vertex correction / one-loop magnetic-moment ratio (vertex model, unnormalized) | 28 | §6–7 | Observation |
+| Curvature expansion c₂ = (2-BΔ-FΔ-F/B)/5 (Paper 2 bridge) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Three-loop O(N³) factorization | 28 | §10 | Observation |
+| S_min closed-form identification (Hoffman t-values) | 28 | §9 | Result |
+| Depth-k tower (reframed as depth bound, 2026-06-11) | 28 | §11 (`prop:depth_k`) | Observation |
+| Graph QED construction (finite graph formulation) | 33 | §4 (moved from Paper 28, condensed, 2026-11-07) | Observation |
+| Graph-native vacuum polarization (Π as finite matrix trace) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Graph-native self-energy and vertex correction | 33 | §4 (ground-state self-energy only: `prop:pendant_edge`); the rest cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Graph-native broken structural zero (ground state couples on the graph) | 33 | §4 `prop:pendant_edge` | Observation |
+| Graph-native continuum bridge / projection exchange constant | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Graph-native π-free certificate (all QED algebraic) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Fock graph Hodge theory (GN-1) | 30, 33 | Sec 2.2 (Paper 30); §4 (Paper 33) | Observation |
+| Graph QED propagators (GN-2, electron + photon) | 33 | §4 (G_γ = L₁⁺) | Observation |
+| F₂(t) even rational function | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| F₂(κ) convergence table | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Selection rule survival census (scalar graph 1/8) | 33 | §4–5 (`tab:census`) | Observation |
+| Topology-dependent projection (C×F₂ diverges) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG); CLAUDE.md §3 row | Observation |
+| Native Dirac graph QED (4/8 by the definition of the rule-B edges) | 33 | §4–5 | Observation |
+| Spinor-recoverable vs vector-photon-required partition | 18, 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG); does not survive the physical vertex (Paper 33) | Core/Observation |
+| Dirac graph Hodge decomposition (Rule A/B) | 30, 33 | Sec 2.3 (Paper 30); §4 `obs:L1` (Paper 33) | Observation |
+| GS pendant status (scalar graph) | 33 | §4 `prop:pendant_edge`; the Dirac-graph comparison cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Furry graph analog on the Dirac graph (identity-vertex tadpole vanishes by construction) | 33 | §4–5 | Observation |
+| F₂ power-law convergence (n_max=2..6) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| F₂(t) even rational function structure | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Pendant-edge theorem (every n_max ≥ 2) | 33 | §4 `prop:pendant_edge` | Observation |
+| F₂(κ) vs F₂(0) sign flip at n_max=5 | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Self-energy trace Tr(Σ)/N_dirac scaling | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Three-diagram projection constants (C_VP, C_SE, C_F2) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| VP/SE constant ratio (two-tier calibration) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Per-mode topological gap (graph vs continuum self-energy) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Catalan/β from graph parity (clean negative) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Vector QED sprint (VQ-1 through VQ-5) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG); CLAUDE.md §3 row | Observation |
+| σ-weighted vertex (Pauli trace identity 3×) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Direction-resolved Hodge decomposition (T vs L channels) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Spectral anisotropy (T/L different L₁ spectra) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Cross-channel coupling in photon propagator | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Three-tier selection rule partition (graph/spinor/vector) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Full vector QED (direction × σ_μ, 15 configs) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Transverse photon propagator from plaquettes | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Pendant-edge exclusion mechanism (GS protection) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Plaquette-recoverable selection rule (GS zero) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Four-tier selection rule partition (1+3+1+3) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Mode-resolved self-energy (co-exact eigenvectors) | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Triangle inequality test on co-exact modes | 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Observation |
+| Tier 1/2 boundary (topological vs geometric) | 18, 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG) | Core/Observation |
+| Vector-photon vertex model ((q, m_q) labels; the 7/8 theorem is cut) | 33 | §3 (vertex model) | Observation |
+| Photon (q, m_q) quantum numbers and CG vertex (vertex model) | 33 | §3 | Observation |
+| L₁ non-block-diagonalization by photon QN | 33 | §4 `obs:L1` | Observation |
+| GS structural zero of the vertex model (fails for the physical vertex) | 28, 33 | Paper 28 Theorem 4; Paper 33 `cor:ground_state` | Observation |
+| Σ_{l=1} = 1/(4π) normalization identity (the exchange-constant / S² Weyl reading is cut) | 33 | §3 `prop:1_over_4pi` | Observation |
+| 1-7-8 selection rule partition | 18, 28 (cut) | cut from Paper 28 2026-11-07 (record: CHANGELOG); does not survive the physical vertex (Paper 33) | Core/Observation |
+| Diagonal α_z identity of the vertex model (not Furry's theorem) | 33 | §3 `thm:alpha_z` | Observation |
+| Dirac spinor phase constraint V(a,a)=0 (vertex model, α_z only; the physical V(a,a) ≠ 0) | 33 | §3 `thm:alpha_z`; §2 `prop:diagonal` | Observation |
+| Three-way selection-rule census (graph, vertex model, physical vertex; the 7/8 vs 8/8 theorem is cut) | 33 | §5 `tab:census` | Observation |
 | GeoVac spectral triple (A_GV, H_GV, D_GV) construction | 32 | Sec III | Synthesis |
 | Connes axiom audit (real, odd, KO-dim 3) | 32 | Sec IV | Synthesis |
 | Marcolli–vS gauge-network lineage placement (WH1) | 32 | Sec VII | Synthesis |
-| Papers 25/28/30/31 as triple sub-sectors | 32 | Sec V | Synthesis |
+| Papers 28/30/31 as triple sub-sectors | 32 | Sec V | Synthesis |
 | Three-sector reading of K = π(B+F−Δ) | 32 | Sec VI | Synthesis |
 | Coulomb/HO asymmetry in spectral-triple language | 32 | Sec VI | Synthesis |
 | Connes-vS spectral truncation framework | 32 | Sec III remark + new | Synthesis |
 | Truncated operator system O_{n_max} on Fock-projected S³ | 32 | §III rem:operator_system | Synthesis |
 | Propagation number prop(O_{n_max}) = 2 (Toeplitz S¹ match) | 32 | §III prop=2 result | Synthesis |
-| C*-envelope vs operator system distinction | 32, 28 | §III rem; §broken_structural_zero cross-ref | Synthesis/Observation |
+| C*-envelope vs operator system distinction | 32, 33 | §III rem (Paper 32); §4 `prop:pendant_edge` cross-ref (Paper 33) | Synthesis/Observation |
 | Circulant-vs-spectral truncation falsification | 32 | §III cor:structural_specificity + rem:two_sided_alignment | Synthesis |
 | Connes distance on truncated operator system (SDP framework) | 32 | §III rem:connes_distance | Synthesis |
 | SO(3) m-reflection forced zero in Connes metric | 32 | §III rem:connes_distance | Synthesis |
@@ -342,14 +337,15 @@
 | Spectral-action Dirac vs modular-Hamiltonian generator distinction | 42 | §7.2 (II), open question O3 | Standalone |
 | Nieuviarts twist-morphism NO-GO for odd-dim S³ (KO-dim 3) | 42 | §3.2 footnote | Standalone |
 | Lorentzian transfer audit (28 projections, 4 buckets) | 42, 34, 31 | §3 (Paper 42), §V.E (Paper 34), §8 (Paper 31) | Standalone/Observation/Core |
-| 1+6+1 QED selection rule partition theorem | 33 | Sec V | Observation |
-| Tier I (graph-topological) selection rules | 33 | Sec II | Observation |
-| Tier II (angular-momentum, vector photon promotion) | 33 | Sec IV | Observation |
-| Tier III (Dirac kinematic, Furry) | 33 | Sec IV.C | Observation |
-| 1/(4π) per-loop calibration as S² Weyl exchange constant | 33 | Sec VI | Observation |
-| Furry from single-particle Dirac spinor phase (not C-symmetry) | 33 | Sec IV.C, Remark 1 | Observation |
-| Pendant-edge theorem (graph-native baseline GS nonzero) | 33 | Sec II.A | Observation |
-| Selection-rule census across four construction tiers | 33 | Table 2 | Observation |
+| 1+6+1 QED selection rule partition (vertex-model tally; does not survive the physical vertex) | 33 | §5 | Observation |
+| Graph scores of the eight rules (scalar 1/8, Dirac 4/8) | 33 | §4 | Observation |
+| Vertex-model scores of the eight rules | 33 | §3, §5 | Observation |
+| Dirac α_z identity of the vertex model (not Furry) | 33 | §3 `thm:alpha_z` | Observation |
+| Σ_{l=1} = 1/(4π) as the unit-S² harmonic normalization (the per-loop S² Weyl reading is cut) | 33 | §3 `prop:1_over_4pi` | Observation |
+| Diagonal-vertex zero from the single-particle Dirac spinor phase (not Furry; Furry undecided for the physical vertex) | 33 | §3 `thm:alpha_z` and remark | Observation |
+| Pendant-edge theorem (graph-native baseline GS nonzero) | 33 | §4 `prop:pendant_edge` | Observation |
+| Selection-rule census across four constructions (scalar graph, Dirac graph, vertex model, physical vertex) | 33 | §5 `tab:census` | Observation |
+| Physical vector-photon vertex rule on S³ (Spin(4) representation theory; two exact routes; ground state couples; Ward–Takahashi exact) | 33 | §2 `thm:physical_rule`, `cor:ground_state`, `prop:ward` | Result |
 | Two-layer framework (bare graph + projection family) | 34 | Sec I-II | Observation |
 | Projection taxonomy (twenty-eight projections, three-axis tagging) | 34 | Sec III-IV | Observation |
 | Two-body Dirac / Breit retardation (16th projection) | 34 | Sec III.16 | Observation |
@@ -390,15 +386,13 @@
 | Algebraic / observation split (Layer 1 π-free, Layer 2 introduces π through observation) | 35, 34 | Sec I-VII (Paper 35) | Observation |
 | Stefan-Boltzmann π²/90 from Matsubara projection | 35 | Sec V.A | Observation |
 | Conformal coupling integer collapse (m²=1 on unit S³, ω_n = n+1) | 35 | Sec III | Observation |
-| Hydrogen Lamb shift at leading one-loop order (1052.19 MHz, −0.534%, literature Bethe logs); GeoVac Bethe logarithms | 36 | Sec V-VI | Observation |
-| LS-6a Uehling-kernel double-counting fix (+27.13 MHz = 4/15 × α³Z⁴/πn³) | 36, 34 | Sec V (Paper 36), Table 2 (Paper 34) | Observation |
-| Acceleration-form Bethe log in Sturmian basis (LS-3, 3.3× tighter for s-states) | 36 | Sec IV | Observation |
-| Bound-state QED one-loop architecture (Fock + Camporesi-Higuchi + Sturmian + Drake-Swainson + Eides) | 36 | Sec II-V | Observation |
-| Lamb-shift residual not attributed (LS-7 decomposition withdrawn 2026-11-07; one-loop α(Zα)⁵ term omitted) | 36, 35 | Sec VII (Paper 36) | Observation |
-| Two-loop SE prefactor (α/π)²·(Zα)⁴/n³ from iterated CC spectral action on Dirac-S³ (LS-7) | 36, 35, 28 | Sec VI (Paper 36), Sec VII.3 (Paper 35) | Observation |
-| LS-7 residual decomposition: +1.20 MHz multi-loop QED + ~+4.4 MHz non-loop (recoil/FNS/hyperfine) | 36 | Sec VI (Paper 36) | Observation |
-| Hydrogen 21 cm hyperfine multi-focal precision test (Sprint HF) | 28, 34, 36 | Sprint HF, debug/sprint_hf_track*_memo.md | Observation |
-| Parker-Toms first-order curvature correction c_1 = R/12 reproduced on Dirac-S³ at 0.5% | 28 | New observation candidate, Paper 28 §curved_qed | Observation |
+| Hydrogen Lamb shift at leading one-loop order (1052.19 MHz, −0.534%, literature Bethe logs); Coulomb-Sturmian Bethe logarithms | 36 | Sec 2, 4, 5 | Observation |
+| LS-6a Uehling-kernel double-counting fix (+27.13 MHz = 4/15 × α³Z⁴/πn³) | 36, 34 | Sec 3 (Paper 36), Table 2 (Paper 34) | Observation |
+| Acceleration-form Bethe log in Sturmian basis (not converged for s-states; the N = 40 agreements are crossings) | 36 | Sec 5 | Observation |
+| Lamb-shift residual not attributed (the omitted one-loop α(Zα)⁵ term alone exceeds it) | 36 | Sec 4.1 | Observation |
+| Two-loop negative: a model two-loop self-energy sum on the S³ Dirac spectrum grows without bound with its cutoff (LS-8a) | 36 | Sec 6 | Observation |
+| Hydrogen 21 cm hyperfine multi-focal precision test (Sprint HF) | 28, 34 | Sprint HF, debug/sprint_hf_track*_memo.md | Observation |
+| Parker–Toms first-order curvature form vs the vertex-model magnetic-moment ratio (0.4% closeness, a numerical coincidence of an unnormalized ratio) | 28 | §7.6 (mode dependence) | Observation |
 | Multi-focal-composition wall (5 independent observables, same structural reason) | 32, 34 | Sec VIII.C (Paper 32 candidate addendum), Multi-focal projection family (Paper 34) | Observation |
 | Discrete labels couple cleanly via Wigner symbols; Fock projection couples space; no native composition theorem for multiple projections | 32, 34 | Sprint HF synthesis | Observation |
 | Cross-register architecture couples spin labels but not spatial coordinates (Track NI diagnostic) | 23, 32 | HF-3 negative result | Observation |

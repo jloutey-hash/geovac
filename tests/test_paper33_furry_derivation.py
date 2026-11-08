@@ -1,9 +1,10 @@
 """
-Symbolic derivation of Paper 33 Theorem 2 (Dirac 8/8): Furry's theorem
-from the Dirac spinor phase constraint.
+Symbolic derivation of Paper 33 Theorem 2 (thm:alpha_z): the diagonal alpha_z
+vertex of the vertex model vanishes by the Dirac spinor phase constraint
+(not Furry's theorem; Paper 33 rem:not_C).
 
 Paper 33 claims V(a, a, q, m_q) = 0 identically for the diagonal Dirac
-vertex element.  The mechanism (Theorem thm:dirac_8_of_8, Steps 1-4):
+vertex element.  The mechanism (Theorem thm:alpha_z, proof):
 
     psi_a = (f * Omega_kappa, i * g * Omega_{-kappa})^T
     alpha_z = ((0, sigma_z), (sigma_z, 0))
@@ -128,7 +129,7 @@ class TestFurryBilinearVanishesPointwise:
 
 
 class TestFurryMechanismIsMlConservation:
-    """Paper 33 Remark rem:mechanism: the cancellation is Im M == 0 via
+    """Paper 33 Theorem 2 proof: the cancellation is Im M == 0 via
     m_l conservation, NOT mere Hermiticity of alpha_z."""
 
     @pytest.mark.parametrize("kappa,m_j", DIAGONAL_CASES)

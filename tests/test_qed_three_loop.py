@@ -279,16 +279,18 @@ class TestEulerMaclaurinTail:
 
     def test_tail_estimate_wrong_at_physical_exponents(self):
         """Documented failure, pinned: at n_max=20, a=4, p=1 the estimate
-        (~0.35) undershoots the true remaining tail S_inf - S(20) =
-        31.5726... - 7.8719... ~ 23.7 by ~67x (and overshoots ~3.7x at
-        n_max=50).  The estimator must NOT be trusted at the physical
+        (~0.47) undershoots the true remaining tail S_inf - S(20) =
+        40.6554... - 12.8366... ~ 27.8 by ~60x (and overshoots ~2.3x at
+        n_max=50).  Corrected W, 2026-11-07 (old-count tail 31.5726 -
+        7.8719).  The estimator must NOT be trusted at the physical
         exponents; the S^(3) headline uses the decomposition route."""
         import warnings as _w
         with _w.catch_warnings():
             _w.simplefilter("ignore", RuntimeWarning)
             tail = three_loop_euler_maclaurin_tail(
                 n_max=20, n_em_terms=5, a=4, p=1)
-        true_tail = 31.5726 - 7.8719
+        # corrected W (2026-11-07): Paper 28 eq:s3_value minus the N=20 row
+        true_tail = 40.6553875636 - 12.8365763232
         ratio = float(tail) / true_tail
         assert ratio < 1.0 / 3.0 or ratio > 3.0, (
             f"estimator unexpectedly accurate at the physical exponents "

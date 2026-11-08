@@ -1,0 +1,887 @@
+# Paper 33 rebuild (2026-11-07): material cut, verbatim
+
+Paper 33 (`papers/group5_qed_gauge/paper_33_qed_selection_rules.tex`, filename kept) was rebuilt
+on 2026-11-07 (PI-approved) as the selection-rules paper around the exact physical vector-photon
+vertex on S^3 (prediction record `docs/predictions/2026-11-07_physical_vector_vertex.md`, stage A,
+scored GO). Old title: "The 1+6+1 Partition of QED Selection Rules on S^3: Graph Topology, Angular
+Momentum, and the Diagonal alpha_z Vertex" (the v6.5.1 retitle). New title: "Selection Rules of the
+Vector-Photon Vertex on S^3: the Physical Vertex, the Vertex Model and the Graph". This file preserves
+the pre-rebuild source **verbatim** (= HEAD 8c8d2e73, git blob 15260e7194f86a01df629f402a159b947557ba9f).
+Line numbers below are those of that source; the verbatim copy at the end starts on the line after
+the opening ````latex fence.
+
+## What was cut, kept or replaced (line ranges in the verbatim copy)
+
+| Lines | Material | Disposition |
+|:------|:---------|:------------|
+| 1-7, 22-25 | Header comment ("Standalone observation paper ... 1/(4 pi) as the per-loop calibration exchange constant from the Hopf S^2 base"); title; date | Replaced |
+| 30-74 | Abstract (the 1+6+1 tally; "recovers six angular-momentum rules at once"; "costing exactly 1/(4 pi) per loop"; test counts) | Rewritten around the physical vertex and the three-way census |
+| 81-115 | Introduction and tab:eight_rules | Rules kept; rule 8 restated in Camporesi-Higuchi 0-based labels (old: 1-based Fock form \|n1-n2\| <= n_gamma <= n1+n2-2, unlabelled); rule 3 restated without "W-coefficients of the CH spinor decomposition" |
+| 125-134 | "Why this matters" (spectral-action reading; universal vs Coulomb-specific; "the 1+6+1 partition is the empirical answer") | Cut |
+| 136-146 | Scope paragraph | Rewritten |
+| 149-214 | Sec. "The Graph-Native Baseline: 1/8" incl. Prop. pendant_edge | Kept (Prop. and proof); "Rules 2-8 fail" narrative condensed into Sec. "QED on the Graph" |
+| 217-273 | Sec. "The Dirac Graph: 4/8" | Condensed into the graph scores paragraph (R4, R5, graph-R7 by edge definition) |
+| 276-359 | Sec. "Vector-Photon Promotion" Defs. 1-2 and Theorem "Scalar 7/8" with its mechanism-by-rule proof (incl. R2 "Hermiticity of Sigma produces Sigma(GS) = 0", R6 "Ward identity holds exactly at n_max = 2" via the commutator ratio) | Definitions merged into Def. "Vertex model"; the 7/8 theorem cut. The rule-6 "Ward identity" was the n-block-diagonality proxy \|\|[Sigma, H0]\|\|/\|\|Sigma\|\|, which fails at n_max = 3; replaced by the Ward-Takahashi identity of the physical vertex, the proxy kept only as a footnote of the census |
+| 361-476 | Theorem dirac_8_of_8 (alpha_z identity), Remarks mechanism and not_C | Kept as Theorem "Diagonal alpha_z vertex vanishes" (mathematics, model coupling) with the mechanism folded in; Remark not_C kept and tied to the stage-A diagonal vertex; "8/8 at n_max = 2" scoring cut |
+| 479-570 | Sec. "The 1+6+1 Partition Theorem" (Theorem partition; cost(8/8) = n_loops/(4 pi); tab:partition) | Cut. The partition does not survive the physical vertex; replaced by the three-way census (tab:census) and a paragraph saying so |
+| 573-630 | Sec. "The 1/(4 pi) Calibration Exchange Constant": Prop. 1_over_4pi (kept); "Why 1/(4 pi)" (Hopf base S^2, Weyl Hodge-star, a_2 heat-kernel coefficient readings); Observation paper18_calibration | Prop. kept as a normalization identity of the model; the Hopf-base / Weyl / a_2 readings and the Observation cut |
+| 633-699 | Sec. "Connections to Other Papers" (Papers 18, 22, 28, 32 mappings: "maps cleanly onto Paper 18's three tiers", "only one selection rule is truly potential-independent", "Tier II enforced by the rank-1 vector-bundle promotion ... inner fluctuation ... a_2 coefficient", "the present paper is the spectral-action selection-rule audit of the triple") | Cut (unhedged readings flagged by the advisory pass) |
+| 702-738 | Open questions Q1-Q4 (per-loop 1/(4 pi) at two and three loops; Tier II splitting; census with the physical vertex; Paper 31 correspondence) | Q3 answered by the rebuild; Q1, Q2, Q4 cut with the partition; new open questions are stage B |
+| 741-764 | Conclusion | Rewritten |
+| 769-823 | Bibliography (jeffrey2010, chamseddine_connes2010, paper2, paper7, paper14, paper18, paper22, paper24, paper25, paper30, paper31, paper32) | Replaced (camporesi1996, ikeda1978, ward1950, takahashi1957, furry1937, paper28) |
+
+## Moved in from Paper 28 (condensed)
+
+From Paper 28's graph-native and vector-photon block (Paper 28 chronicle, lines 3366-4449): the
+L1 block-diagonalization finding (now Observation "L1 does not block-diagonalize by (q, m_q)",
+20% / 57% cross-sector Frobenius fractions), the census scores of tab:selection_rules /
+tab:dirac_selection_rules (now the graph columns of tab:census), and the vertex-model construction
+of sec:vector_photon_qed. Everything else of that block stays in the Paper 28 chronicle.
+
+## Tests whose claims left Paper 33
+
+Unchanged files:
+- `tests/test_vector_qed.py`: the scalar 7/8 and Dirac 8/8 aggregate tallies and the
+  `6_ward_identity` commutator-proxy tests now back only footnote (e) and the model column of
+  tab:census, not a Ward-identity claim; the 1/(4 pi) test still backs Prop. 1_over_4pi; the 1/8 and
+  4/8 aggregates back the graph columns.
+- `tests/test_paper33_furry_derivation.py` backs Theorem "Diagonal alpha_z vertex vanishes".
+- `tests/test_graph_qed_self_energy.py` backs the pendant-edge Proposition.
+
+## Owed tests (not written, by instruction)
+
+- `tests/test_paper33_physical_vertex.py`: port of the stage-A checks (controls C1-C4, SA1-SA5,
+  the 9j closed form, m conservation in both factors, the Ward-Takahashi identity on route 2).
+- A test for Observation "L1 does not block-diagonalize by (q, m_q)" (the 20% / 57% fractions).
+
+## Verbatim pre-rebuild source
+
+````latex
+% Paper 33: The 1-6-1 Partition of QED Selection Rules on S^3
+% GeoVac Project, May 2026
+% v1.0 -- Standalone observation paper. Documents the three-tier
+% selection-rule partition (1 graph-topological + 6 angular-momentum
+% + 1 Dirac-kinematic) recovered by vector-photon QED on S^3, and
+% identifies 1/(4 pi) as the per-loop calibration exchange constant
+% from the Hopf S^2 base.
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{observation}{Observation}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\title{The $1{+}6{+}1$ Partition of QED Selection Rules on $S^3$:\\
+Graph Topology, Angular Momentum, and the Diagonal $\alpha_z$ Vertex}
+\author{GeoVac Project}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We classify a list of eight QED selection rules --- five standard
+rules of perturbative QED and three specific to $S^3$ and the
+Camporesi--Higuchi construction --- according to which structural
+ingredient is required to recover them on the GeoVac graph, within a
+vertex model (Wigner-$3j$ coupling to scalar photon harmonics with an
+imposed parity rule; Paper~28).  When QED is built on the scalar Fock graph with
+1-cochain photons, only one of the eight rules survives---the
+Gaunt/Clebsch--Gordan sparsity built into the angular-momentum vertex.
+Building on the native Dirac graph with $(n, \kappa, m_j)$ node labels
+scores three more ($\Delta m_j$ conservation, spatial parity, and a
+graph analog of Furry's theorem) for a total of 4/8; these hold by the
+definition of that graph's edges.  Promoting the photon from a scalar 1-cochain to a vector
+harmonic with explicit $(q, m_q)$ angular labels and Wigner~$3j$
+vertex coupling recovers six angular-momentum rules at once
+(vertex parity, $\mathrm{SO}(4)$ channel count, the triangle inequality
+on $n$, $\Delta m_j$, spatial parity, Ward identity), with the vertex normalization contributing exactly $1/(4\pi)$ per loop
+(reading it as the $S^2$ Weyl exchange constant of the Hopf base is an
+Observation).  This scores 7/8 for scalar electrons; the vertex-parity
+rule is the scalar-triangle zero of Paper~28's model, not a property
+of the physical vector vertex.  The eighth rule is scored for Dirac
+electrons through a diagonal-vertex identity: for $\alpha_z$ against
+the scalar harmonic $Y_q^{m_q}$, the off-diagonal $\alpha$-matrix and
+the $i$ phase on the small component reduce
+$V(a, a, q, m_q) = V_{LS} + V_{SL}$ to an imaginary part that $m_l$
+conservation forces to vanish.  This identity does not hold for a
+physical vector photon, whose $\alpha_\pm$ components give a nonzero
+diagonal (magnetic-moment) coupling, so it is not a recovery of
+Furry's theorem; in the production code the diagonal zero is imposed.
+The resulting tally, within the model, is $1{+}6{+}1$:
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item[]\textbf{1.} Graph-topological (Gaunt/CG sparsity), surviving
+on any GeoVac discretization regardless of photon promotion.
+\item[]\textbf{6.} Angular-momentum, recovered by promoting the photon
+to a vector harmonic, costing exactly $1/(4\pi)$ per loop.
+\item[]\textbf{1.} Dirac-kinematic (the $\alpha_z$ diagonal-vertex
+identity), at no additional cost.
+\end{itemize}
+The tally is independent of the Paper~2 fine-structure-constant
+observation and is an observation [MEASURED, $n_{\max} = 2$] about this
+vertex model, not a recovery of QED's selection rules on $S^3$.  All claims are verified by 103 tests in
+\texttt{tests/test\_vector\_qed.py} (including aggregate tallies of all
+four census columns) plus the 21-test symbolic Furry derivation in
+\texttt{tests/test\_paper33\_furry\_derivation.py}.
+\end{abstract}
+
+% ===================================================================
+\section{Introduction}
+\label{sec:intro}
+% ===================================================================
+
+The census uses the eight selection rules of
+Table~\ref{tab:eight_rules}: five standard rules of perturbative QED
+and three specific to the $S^3$ construction.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\# & Rule & Mechanism \\
+\midrule
+1 & Gaunt / CG sparsity & 3$j$ symbols and triangle inequality on
+$|l_1 - l_2| \le l_\gamma \le l_1 + l_2$ \\
+2 & Vertex parity / GS structural zero & $l_a + l_b + l_\gamma$ odd at
+the $\bar{\psi} \gamma^\mu \psi A_\mu$ vertex \\
+3 & $\mathrm{SO}(4)$ channel count & $W$-coefficients of the
+Camporesi--Higuchi spinor decomposition vanish on disallowed triples \\
+4 & $\Delta m_j$ conservation & Magnetic quantum number addition rule
+$m_a + m_\gamma = m_c$ \\
+5 & Spatial parity (E1) & Photon is a vector field, parity~$-1$;
+matrix element vanishes between same-parity states \\
+6 & Ward identity & $k_\mu \mathcal{M}^\mu = 0$, gauge invariance \\
+7 & Charge conjugation (Furry) & Closed fermion loops with odd number
+of vertices vanish under $C$ \\
+8 & Triangle inequality on $\mathrm{SO}(4)$ &
+$|n_1 - n_2| \le n_\gamma \le n_1 + n_2 - 2$ \\
+\bottomrule
+\end{tabular}
+\caption{The eight rules of this census.  Rules 1, 4, 5, 6, 7 are
+standard rules of perturbative QED; rules 2, 3, 8 are specific to
+$S^3$ and the Camporesi--Higuchi construction, and rule~2 is the
+ground-state zero of Paper~28's vertex model (the physical vector
+vertex does not enforce it).}
+\label{tab:eight_rules}
+\end{table}
+
+When QED is constructed on the GeoVac graph
+(Paper~28~\cite{paper28}~\S graph\_native\_qed,
+Sec.~\ref{sec:graph_native_baseline} below), only Rule~1 survives by
+default.  Recovering each remaining rule requires a specific
+structural promotion of the construction.  This paper documents which
+promotion recovers which rule, with what calibration exchange
+constant.
+
+\paragraph{Why this matters.}  In the spectral-triple framework
+(Paper~32~\cite{paper32}), QED on $S^3$ is the spectral action of the
+GeoVac Dirac operator $D_{\mathrm{GV}}$.  The census asks which
+structural feature of the construction scores each rule in the vertex
+model.  Cataloguing
+which rules require which features clarifies which selection rules are
+\emph{universal} (Paper~22~\cite{paper22} sense, depending only on
+$\mathcal{A}$) and which are \emph{Coulomb-specific}
+(Paper~31~\cite{paper31} sense, depending on $D$).  The 1+6+1
+partition is the empirical answer.
+
+\paragraph{Scope.}  This is an observation paper about a vertex
+model.  Five of the eight rules are standard; the GeoVac-specific
+content is which structural promotion scores which rule in the model,
+the per-loop $1/(4\pi)$, and the $\alpha_z$ diagonal-vertex identity,
+which is not Furry's theorem for a physical vector photon.  No new physics, no
+fitting parameters; the result follows from explicit construction in
+\texttt{geovac/vector\_qed.py} and verification in
+\texttt{tests/test\_vector\_qed.py} (103 tests, including aggregate
+tallies of all four census columns) and
+\texttt{tests/test\_paper33\_furry\_derivation.py} (the symbolic Furry
+derivation, 21 tests).
+
+% ===================================================================
+\section{The Graph-Native Baseline: 1/8}
+\label{sec:graph_native_baseline}
+% ===================================================================
+
+The graph-native QED construction of
+Paper~28~\cite{paper28}~\S graph\_native\_qed builds all one-loop
+diagrams as finite matrix traces on the Fock graph.  Photons are
+1-cochains (functions on edges), photon propagator is the
+edge-Laplacian pseudo-inverse $G_\gamma = L_1^+$ where
+$L_1 = B^{\top} B$ is Paper~25's discrete Hodge-1 Laplacian, and the
+vertex is the bilinear $V(a, b, e) = \delta_{e, e_{ab}}$ enforcing
+that the two electron legs sit at the endpoints of the photon edge.
+
+\subsection{What survives}
+
+The only rule that survives this baseline is the Gaunt/CG sparsity of
+the angular-momentum vertex, which is built into the discrete edge
+set: the Fock graph has edges between $(n, l, m_l)$ and
+$(n', l', m_l')$ only if the standard ladder-operator selection rules
+are satisfied, which are exactly the Gaunt/CG triangle conditions for
+the $\bar{\psi} \psi$ matrix element of an angular-momentum-1 vector
+field.  This is Rule~1 in Table~\ref{tab:eight_rules}.
+
+\subsection{What does not}
+
+Rules 2--8 fail on the graph-native baseline.  In particular:
+
+\begin{proposition}[Pendant-edge theorem]
+\label{prop:pendant_edge}
+Let $\Sigma_{\mathrm{graph}}(\mathrm{GS})$ denote the one-loop electron
+self-energy on the scalar Fock graph evaluated at the ground state
+$|1, 0, 0\rangle$.  Then for every $n_{\max} \ge 2$,
+\[
+   \Sigma_{\mathrm{graph}}(\mathrm{GS}) = \frac{2(n_{\max} - 1)}{n_{\max}}
+   \xrightarrow{n_{\max} \to \infty} 2.
+\]
+In particular $\Sigma_{\mathrm{graph}}(\mathrm{GS}) \ne 0$ at every
+finite $n_{\max}$ and in the limit, in contrast to the ground-state
+zero of Paper~28's vertex model (Paper~28~\cite{paper28} Theorem~4),
+which is itself not a property of the physical vector vertex.
+\end{proposition}
+
+\begin{proof}[Mechanism.]
+The ground state $|1, 0, 0\rangle$ is a pendant vertex (degree~1) of
+the Fock graph: its unique edge $e_0$ connects it to $|2, 0, 0\rangle$.
+The path-graph Laplacian inverse evaluated at this leaf edge gives
+$G_\gamma[e_0, e_0] = (n_{\max} - 1)/n_{\max}$ exactly, and the vertex
+bilinear contributes a factor of~2; this is the only contribution to
+$\Sigma(\mathrm{GS})$.  Continuously verified in
+\texttt{tests/test\_graph\_qed\_self\_energy.py}: at $n_{\max} = 2$ in
+exact rational arithmetic (the GS block is $[[1,1],[1,1]]$), and at
+$n_{\max} = 3, 4$ numerically to $10^{-10}$
+(\texttt{TestPendantEdgeSweep}, added 2026-07-03 after the
+\texttt{graph\_qed\_photon} $n_{\max} \ge 4$ eigenvalue-sort crash fix;
+the exact-\texttt{sympy} pseudoinverse at $n_{\max} \ge 3$ exceeds any
+reasonable test budget, so those points are numeric).  The closed form
+itself holds for all $n_{\max}$ by the path-graph Laplacian identity
+above.
+\end{proof}
+
+The model's mechanism (vertex parity: $l_a + l_b + l_\gamma$ odd
+forces zero at the GS because both electron legs are $l = 0$) does
+not act on the scalar 1-cochain photon, which has no angular-momentum
+quantum number.
+
+\paragraph{Conclusion.}  The graph-native baseline recovers 1/8 rules.
+
+% ===================================================================
+\section{The Dirac Graph: 4/8}
+\label{sec:dirac_graph}
+% ===================================================================
+
+The native Dirac graph (CLAUDE.md~\S 2, May~2026) replaces the scalar
+Fock node labels $(n, l, m_l)$ with the relativistic
+Camporesi--Higuchi labels $(n_{\mathrm{D}}, \kappa, m_j)$, with two
+candidate adjacency rules: Rule~A ($\kappa$-preserving) and Rule~B
+(E1 dipole, $\Delta l = \pm 1$).  Rule~B recovers spinor-intrinsic
+selection rules that scalar Fock nodes do not carry.
+
+\subsection{What is recovered}
+
+Three additional rules are recovered:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item[(\textbf{R4})] $\Delta m_j$ conservation: built into the
+relativistic node label $m_j = m_l + m_s$, which is conserved at
+every electron--photon vertex with diagonal-in-$m_j$ couplings.
+\item[(\textbf{R5})] Spatial parity (E1): the parity of a Dirac
+spinor is $(-1)^{l(\kappa)}$ where $l(\kappa) = -1 - \kappa$ for
+$\kappa < 0$ and $l(\kappa) = \kappa$ for $\kappa > 0$.  Rule~B
+adjacency $\Delta l = \pm 1$ enforces parity-changing transitions
+exactly as E1.
+\item[(\textbf{R7})] Charge conjugation (Furry): the off-diagonal
+Rule~B vertex makes the identity-vertex tadpole vanish on the Dirac
+graph, which is a graph-level analog of Furry's theorem (the
+single-vertex closed loop is zero by edge-graph antisymmetry).
+\end{itemize}
+
+\subsection{What is not}
+
+Four rules remain unrecovered on the Dirac graph alone:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item[(\textbf{R2})] Vertex parity / GS zero: requires the photon to
+carry an angular-momentum label $l_\gamma$, which the scalar
+1-cochain does not.
+\item[(\textbf{R3})] $\mathrm{SO}(4)$ channel count: requires the
+photon $W$-coefficients of the Camporesi--Higuchi decomposition.
+\item[(\textbf{R6})] Ward identity: requires gauge invariance under
+the $U(1)$ phase of the photon, which the 1-cochain photon has only
+in temporal gauge and only approximately.
+\item[(\textbf{R8})] Triangle inequality: the graph adjacency is
+nearest-neighbor in $n$ ($\Delta n = \pm 1$ only), but the continuum
+triangle allows $|n_1 - n_2| \le n_\gamma \le n_1 + n_2 - 2$ with
+$n_\gamma \ge 2$, exceeding the graph's reach.
+\end{itemize}
+
+\paragraph{Verdict.}  Dirac graph alone scores 4/8 rules.  Of the
+four, R4, R5 and the graph analog of R7 hold by the definition of the
+Rule~B edges ($\Delta l = \pm 1$, $|\Delta m_j| \le 1$, bipartite by
+$l$-parity) and R1 by construction; they are construction-consistency
+checks, not computed recoveries.  Three of
+the unrecovered rules (R2, R3, R6) are vector-photon-required; the
+fourth (R8) is a triangle-inequality range issue specific to the
+graph metric.
+
+% ===================================================================
+\section{Vector-Photon Promotion: 7/8 (Scalar) and 8/8 (Dirac)}
+\label{sec:vector_photon}
+% ===================================================================
+
+We now promote the photon from a scalar 1-cochain to a vector harmonic
+with explicit angular-momentum labels.
+
+\subsection{Construction}
+
+\begin{definition}[Vector photon modes]
+\label{def:vector_photon}
+For a maximum photon angular momentum $q_{\max} \ge 1$, the vector
+photon modes are the triples $(q, m_q)$ with $1 \le q \le q_{\max}$,
+$-q \le m_q \le q$.  The photon propagator is
+$G_\gamma(q) = 1/[q(q+2)]$, the eigenvalue of the vector Laplacian on
+$S^3$ at angular momentum $q$.
+\end{definition}
+
+\begin{definition}[Wigner-3$j$ vertex]
+\label{def:vertex}
+For electron states $a = (n_a, l_a, m_a)$, $b = (n_b, l_b, m_b)$ and
+photon mode $(q, m_q)$, the vertex coupling is
+\begin{equation}
+   V(a, b, q, m_q) = \langle l_a, m_a | l_b, m_b ; q, m_q \rangle_{3j}
+   \cdot \theta(l_a + l_b + q ~ \text{odd}) \cdot R(n_a, n_b, q),
+   \label{eq:vertex}
+\end{equation}
+where the $3j$ Clebsch--Gordan symbol enforces angular-momentum
+addition, $\theta(\cdot)$ is the parity step function (1~if true,
+0~otherwise), and $R(n_a, n_b, q) = 1$ for the present analysis (we
+work at the spinor-amplitude level; radial integrals are absorbed
+into the $3j$).
+\end{definition}
+
+\subsection{Selection rules recovered for scalar electrons}
+
+\begin{theorem}[Scalar 7/8]
+\label{thm:scalar_7_of_8}
+With Definitions~\ref{def:vector_photon}--\ref{def:vertex}, the
+vector-photon QED on the Fock graph satisfies seven of the eight
+selection rules in Table~\ref{tab:eight_rules}, namely Rules~1, 2, 3,
+4, 5, 6, 8.  Rule~7 (Furry's theorem) fails: the vertex
+$V(a, a, q, m_q)$ is nonzero for $l_a \ge 1$ when $q$ is odd, allowing
+nonzero closed-fermion-loop amplitudes with odd vertex count.
+\end{theorem}
+
+\begin{proof}[Mechanism by rule.]
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item[(R1)] Built into the $3j$ symbol on $\langle l_a; l_b, q\rangle$.
+\item[(R2)] The parity step $\theta(l_a + l_b + q ~ \text{odd})$ is
+exactly the vertex parity rule; at the GS $l_a = l_b = 0$, this
+forces $q$ odd, which combined with the magnetic-quantum-number
+constraint $|m_q| \le q$ and the Hermiticity of $\Sigma$ produces
+$\Sigma(\mathrm{GS}) = 0$ exactly.
+\item[(R3)] The triangle inequality on the $3j$ symbol forces
+$|l_a - l_b| \le q \le l_a + l_b$; combined with the vector
+photon's full $\mathrm{SO}(4)$ harmonic content, this reproduces the
+continuum channel-count constraint.  Census check (de-tautologized
+2026-07-03): the per-$(n_a, n_b)$ channel count realized in the
+vertex-tensor support matches the parity + triangle closed form for
+every pair (verified at $n_{\max} = 2, 3$).
+\item[(R4)] The $3j$ symbol enforces $m_a + m_q = m_b$.
+\item[(R5)] Built into the parity step.
+\item[(R6)] At $n_{\max} = 2$ the Ward identity holds exactly
+(commutator ratio $\|[\Sigma, H_0]\| / \|\Sigma\| < 10^{-12}$); at
+$n_{\max} = 3$ it degrades (measured ratio $\approx 3.1$) because
+cross-$n$ couplings break the commutator metric on the truncated
+basis --- the same degradation the Dirac census discloses
+(Theorem~\ref{thm:dirac_8_of_8}).  The census is evaluated at
+$n_{\max} = 2$.  (Corrected 2026-07-03: this item previously claimed
+a $\sim 10^{-3}$ residual at $n_{\max} = 3$, which the production
+diagnostic does not reproduce.)
+\item[(R7)] FAILS: $V(a, a, q, m_q)$ for $a = (n, l \ge 1, m)$ and
+$q$ odd contains terms proportional to
+$\langle l, m | l, m; q, 0 \rangle_{3j} \ne 0$, allowing closed loops
+with odd vertex count.
+\item[(R8)] Verified on the vertex-tensor support: every realized
+coupling satisfies $|n_a - n_b| \le q \le n_a + n_b - 2$ (census
+check \texttt{8\_triangle\_on\_n}, added 2026-07-03).  The upper
+bound follows from the parity step, the $l$-triangle, and
+$l \le n - 1$; the lower bound is contingent and holds at the tested
+truncations $n_{\max} = 2, 3$.
+\end{itemize}
+\end{proof}
+
+\subsection{The diagonal $\alpha_z$ vertex and Rule 7}
+
+\begin{theorem}[Diagonal $\alpha_z$ vertex vanishes]
+\label{thm:dirac_8_of_8}
+Replacing the scalar electron states with Dirac spinors (large/small
+two-component decomposition with the standard $i$-phase on the small
+component, $\psi = (f \Omega_\kappa, i g \Omega_{-\kappa})$) and taking
+the vertex model's coupling, $\alpha_z$ against the scalar harmonic
+$Y_q^{m_q}$, the diagonal vertex bilinear satisfies
+$V(a, a, q, m_q) = 0$ identically.  With it the model's census scores
+8/8 at $n_{\max} = 2$ (the Ward-identity ratio degrades at
+$n_{\max} = 3$).  The identity does not extend to a physical vector
+photon (Remark~\ref{rem:not_C}).
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1: $m_q = 0$ is forced.}  For the diagonal matrix
+element $a = b$ we have $m_{j,a} = m_{j,b}$, and the Wigner-Eckart
+$m$-rule of Definition~\ref{def:vertex} gives $m_q = m_{j,b} -
+m_{j,a} = 0$.  In the vertex model the photon is the scalar harmonic
+$Y_q^{0}$ and only $\alpha_z$ enters; we set
+$\alpha_z = \begin{pmatrix} 0 & \sigma_z \\ \sigma_z & 0
+\end{pmatrix}$.
+
+\textbf{Step 2: bilinear evaluation.}  With the Dirac spinor
+$\psi = (f \Omega_\kappa, i g \Omega_{-\kappa})^{\top}$ and real
+radial functions $f, g$,
+\begin{align*}
+   \alpha_z \psi &= (i g \sigma_z \Omega_{-\kappa},
+                     f \sigma_z \Omega_\kappa)^{\top}, \\
+   \psi^{\dagger} \alpha_z \psi &=
+      f^* \Omega_\kappa^{\dagger} (i g \sigma_z \Omega_{-\kappa})
+      + (-i g^*) \Omega_{-\kappa}^{\dagger} (f \sigma_z \Omega_\kappa) \\
+   &= i fg \bigl[\Omega_\kappa^{\dagger} \sigma_z \Omega_{-\kappa}
+      - \Omega_{-\kappa}^{\dagger} \sigma_z \Omega_\kappa\bigr].
+\end{align*}
+Since $\sigma_z$ is Hermitian, the bracketed quantity equals
+$M - M^*$ where $M = \Omega_\kappa^{\dagger} \sigma_z \Omega_{-\kappa}$,
+giving $\psi^{\dagger} \alpha_z \psi = -2 fg \cdot \Im\,M$.
+
+\textbf{Step 3: $\Im\,M$ vanishes pointwise.}  Expand the spin-spherical
+harmonics in the standard Clebsch--Gordan basis,
+$\Omega_{j, l, m_j} = \sum_{m_s} \langle l, m_l; \tfrac{1}{2}, m_s | j,
+m_j \rangle Y_l^{m_l}(\theta, \phi) \chi_{m_s}$ with $m_l = m_j - m_s$.
+The Pauli matrix $\sigma_z = \mathrm{diag}(+1, -1)$ is real-diagonal in
+the $\chi_{m_s}$ basis and conserves $m_s$.  Therefore
+\[
+   M(\theta, \phi)
+   = \sum_{m_s = \pm 1/2} (\mathrm{sign}\,m_s)
+     \langle l_\kappa, m_l; \tfrac{1}{2}, m_s | j, m_j \rangle
+     \langle l_{-\kappa}, m_l; \tfrac{1}{2}, m_s | j, m_j \rangle
+     Y_{l_\kappa}^{m_l\,*} Y_{l_{-\kappa}}^{m_l},
+\]
+where $m_l = m_j - m_s$ is fixed by $\sigma_z$ conservation and the
+Clebsch--Gordan coefficients are real.  The product
+$Y_{l_\kappa}^{m_l\,*}(\theta, \phi)\, Y_{l_{-\kappa}}^{m_l}(\theta,
+\phi)$ has matched magnetic indices and the $e^{\pm i m_l \phi}$
+phases cancel exactly, leaving
+\[
+   Y_{l_\kappa}^{m_l\,*} Y_{l_{-\kappa}}^{m_l}
+   = N_{l_\kappa, m_l}\, N_{l_{-\kappa}, m_l}\,
+     P_{l_\kappa}^{|m_l|}(\cos\theta)\,
+     P_{l_{-\kappa}}^{|m_l|}(\cos\theta),
+\]
+which is a real function of $\theta$ alone.  Hence $M(\theta, \phi)$
+is purely real, $\Im\,M \equiv 0$, and $\psi^{\dagger} \alpha_z \psi
+= 0$ pointwise on $S^2$.
+
+\textbf{Step 4: integral vanishes.}  Since the integrand is identically
+zero before integration, $V(a, a, q, m_q) = \int_{S^2} \psi^{\dagger}
+\alpha_z \psi \cdot Y_q^0(\theta, \phi)\, d\Omega = 0$ for every
+$q \ge 1$.
+
+The proof is closed.  Six concrete cases at $\kappa \in
+\{-1, +1, -2\}$ and $m_j \in \{\pm 1/2, +3/2\}$ are verified
+symbolically in \texttt{tests/test\_paper33\_furry\_derivation.py}
+(ported 2026-07-03 from the archived sprint driver): the bilinear
+$V_{LS} + V_{SL}$ simplifies to exactly zero pointwise on $S^2$
+(Step~3), $\Im\,M \equiv 0$ with $M \not\equiv 0$ (the mechanism of
+Remark~\ref{rem:mechanism}), and the projected integral
+$V(a, a, q, m_q) = 0$ sympy-exactly in every case.  The derivation is
+independent of the production vertex code, whose diagonal
+short-circuit it backs.
+\end{proof}
+
+\begin{remark}[The mechanism is $m_l$ conservation, not Hermiticity]
+\label{rem:mechanism}
+The cancellation in Step~3 comes from \emph{two} structural inputs:
+(i)~$\sigma_z$ conserves $m_l$ (because $\sigma_z$ acts as a
+real-diagonal in the spin sector, leaving the spatial harmonic
+unchanged), and (ii)~the matched magnetic index $m_l$ on both sides
+of the bilinear forces the $e^{\pm i m_l \phi}$ phases to cancel,
+producing a purely real $\theta$-dependent function.  Hermiticity of
+$\alpha_z$ alone does not suffice: it gives $V_{LS} + V_{SL}
+= 2i\,\Im(V_{LS})$, but to conclude that this vanishes we need the
+\emph{additional} input that $\Im(V_{LS}) = 0$, which is the
+$m_l$-conservation argument above.
+\end{remark}
+
+\begin{remark}[This is not Furry's theorem]
+\label{rem:not_C}
+Theorem~\ref{thm:dirac_8_of_8} is a statement about the model vertex,
+not Furry's theorem.  For a physical vector photon an $m_q = 0$
+harmonic also has $m = \pm 1$ spherical components that couple through
+$\alpha_\pm$, and the diagonal current $\psi^\dagger \boldsymbol{\alpha}
+\psi$ has nonzero azimuthal part: the diagonal magnetic-moment coupling
+is nonzero (for the ground state, $\kappa = -1$, $m_j = 1/2$, the
+projection $\int j_\phi \sin\theta\, d\Omega$ is $-4/3$ with the
+radial factor $fg$ set to $1$).  Moreover, in a closed loop the intermediate
+vertices connect different states, so a diagonal identity removes only
+the tadpole; field-theoretic Furry, from the second-quantized $C$
+operation $\psi \to C \bar{\psi}^T$, cancels odd-photon loops to all
+orders.  In \texttt{geovac/vector\_qed.py} the diagonal zero is imposed
+by setting $V(a, a) = 0$; the symbolic test backs that choice for
+$\alpha_z$ only.
+\end{remark}
+
+% ===================================================================
+\section{The $1{+}6{+}1$ Partition Theorem}
+\label{sec:partition}
+% ===================================================================
+
+Combining Sec.~\ref{sec:graph_native_baseline}--\ref{sec:vector_photon}
+gives the full classification.
+
+\begin{theorem}[$1{+}6{+}1$ tally in the vertex model --- MEASURED at $n_{\max} = 2$]
+\label{thm:partition}
+Within the vertex model, the eight rules of Table~\ref{tab:eight_rules}
+group into three tiers by which ingredient of the GeoVac construction
+scores them.
+
+\begin{description}\setlength{\itemsep}{4pt}
+\item[Tier I (graph topology, 1 rule).]  Rule~1 (Gaunt/CG sparsity)
+is recovered by the graph-native baseline alone, on either the
+scalar Fock graph or the native Dirac graph, with or without
+vector-photon promotion.  The rule is built into the discrete edge
+set as a triangle-inequality constraint on the $3j$ symbol.
+
+\item[Tier II (angular momentum, 6 rules).]  Rules~2, 3, 4, 5, 6, 8
+(vertex parity, $\mathrm{SO}(4)$ channel count, $\Delta m_j$
+conservation, spatial parity, Ward identity, triangle inequality on
+$n$) are recovered \emph{simultaneously} by promoting the photon
+from a scalar 1-cochain to a vector harmonic with explicit
+$(q, m_q)$ labels and Wigner-$3j$ vertex coupling.  This promotion
+contributes exactly one factor of $1/(4\pi)$ per loop (read below,
+Sec.~\ref{sec:calibration}, as the $S^2$ Weyl exchange constant of the
+Hopf base --- an Observation).  Rule~2 is the model's scalar-triangle
+zero.
+
+\item[Tier III (Dirac kinematic, 1 rule).]  Rule~7 is scored by the
+diagonal $\alpha_z$ identity (Theorem~\ref{thm:dirac_8_of_8}): the
+off-diagonal structure of $\boldsymbol{\alpha}$ reduces the diagonal
+bilinear to an imaginary part, and $m_l$ conservation kills it
+(Remark~\ref{rem:mechanism}).  It holds in the model only; for a
+physical vector photon the diagonal coupling is nonzero
+(Remark~\ref{rem:not_C}).
+\end{description}
+
+The total cost of recovering all eight rules from the graph-native
+baseline is:
+\[
+   \text{cost}(8/8) = \underbrace{0}_{\text{Tier I (free)}}
+   + \underbrace{n_{\mathrm{loops}} \cdot \tfrac{1}{4\pi}}_{\text{Tier II (per loop)}}
+   + \underbrace{0}_{\text{Tier III (kinematic)}}
+   = \frac{n_{\mathrm{loops}}}{4\pi}.
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorems~\ref{thm:scalar_7_of_8} and~\ref{thm:dirac_8_of_8},
+together with Proposition~\ref{prop:pendant_edge} and
+Sec.~\ref{sec:dirac_graph}.  Verified numerically in
+\texttt{tests/test\_vector\_qed.py}: each of the four census totals
+$1/8$, $4/8$, $7/8$, $8/8$ is asserted as an aggregate per-rule tally
+(\texttt{TestCensusAggregates}, added 2026-07-03), and the Tier-III
+Furry mechanism is derived symbolically in
+\texttt{tests/test\_paper33\_furry\_derivation.py}.
+\end{proof}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{l c c c c c}
+\toprule
+Rule & Tier &
+Scalar Fock & Dirac graph &
+Vector photon (scalar) & Vector photon (Dirac) \\
+\midrule
+1. Gaunt/CG                 & I   & PASS & PASS & PASS & PASS \\
+2. Vertex parity (GS zero)  & II  & FAIL & FAIL & PASS & PASS \\
+3. $\mathrm{SO}(4)$ count   & II  & FAIL & FAIL & PASS & PASS \\
+4. $\Delta m_j$             & II  & FAIL & PASS & PASS & PASS \\
+5. Parity (E1)              & II  & FAIL & PASS & PASS & PASS \\
+6. Ward                     & II  & FAIL & FAIL & PASS & PASS \\
+7. Furry                    & III & FAIL & PASS\(^*\) & FAIL & PASS \\
+8. Triangle on $n$          & II  & FAIL & FAIL & PASS & PASS \\
+\midrule
+\textbf{Total} & & 1/8 & 4/8 & 7/8 & 8/8 \\
+\bottomrule
+\end{tabular}
+\caption{Selection-rule census across four GeoVac construction tiers.
+\(^*\) On the Dirac graph alone, Furry holds because the off-diagonal
+Rule~B vertex makes the identity-vertex tadpole vanish; this is a
+graph-level analog of Furry, structurally distinct from the
+single-particle Dirac spinor phase constraint of
+Theorem~\ref{thm:dirac_8_of_8}.  Both give a zero tadpole; the
+$\alpha_z$ identity holds in the vertex model only
+(Remark~\ref{rem:not_C}).}
+\label{tab:partition}
+\end{table}
+
+% ===================================================================
+\section{The $1/(4\pi)$ Calibration Exchange Constant}
+\label{sec:calibration}
+% ===================================================================
+
+The Tier-II promotion costs exactly $1/(4\pi)$ per loop.  We read
+this as the $S^2$ Weyl exchange constant of the Hopf base (an
+Observation).
+
+\begin{proposition}[$1/(4\pi)$ identification]
+\label{prop:1_over_4pi}
+The vector-photon $l = 1$ self-energy on $S^3$ at $n_{\max} = 2$
+equals exactly $1/(4\pi)$.
+\end{proposition}
+
+\begin{proof}
+Direct computation in \texttt{geovac/vector\_qed.py}: the $l = 1$
+self-energy is
+\[
+   \Sigma_{l=1}(n_{\max} = 2) = \sum_{b}\sum_{q, m_q}
+   |V(a, b, q, m_q)|^2\, G_e(b)\, G_\gamma(q)
+   = \frac{1}{4\pi},
+\]
+where at $n_{\max} = 2$ only $q = 1$ and the two $2p$ intermediate
+states $b$ contribute, with $4\pi\sum_{m_q}|V|^2 = 9/2$ per $b$,
+$G_e = 1/3$ and $G_\gamma(1) = 1/3$, so the product is
+$2 \cdot \tfrac{9}{2} \cdot \tfrac19 \cdot \tfrac{1}{4\pi}$.  Verified in test
+\texttt{test\_scalar\_l1\_self\_energy\_is\_one\_over\_4pi}
+(\texttt{tests/test\_vector\_qed.py}).
+\end{proof}
+
+\subsection{Why $1/(4\pi)$}
+
+The Hopf base $S^2 = S^3 / S^1$ is a round two-sphere (of radius
+$\tfrac12$ for the unit $S^3$, area $\pi$);\ the solid-angle
+normalisation $1/(4\pi)$ is radius-independent (the unit-$S^2$ area
+is $4\pi$).  Wigner-3$j$ matrix elements integrated
+over the full angular range produce a factor of $1/(4\pi)$ as the
+solid-angle normalization of the Weyl Hodge--star operator on the
+1-form sector of $S^2$~\cite{paper25,jeffrey2010}.  Phrased in the
+spectral-action vocabulary of~\cite{chamseddine_connes2010} (the
+vocabulary, not a theorem of that reference), the per-loop factor
+$1/(4\pi)$ is read as the $a_2$ heat-kernel coefficient of the vector
+Laplacian on $S^2$, appearing as the Hopf-base contribution at
+each gauge-loop integration in the $S^3$ spectral expansion ---
+GeoVac's own identification.
+
+\begin{observation}[Per-loop $1/(4\pi)$ as Paper~18 calibration]
+\label{obs:paper18_calibration}
+The factor $1/(4\pi)$ enters at each loop in the vector-photon
+construction.  We read it as the $S^2$ Weyl exchange constant of the
+Hopf base, in the sense of Paper~18~\cite{paper18} (a reading; the
+value is a vertex-normalization identity): a calibration exchange
+constant introduced by the projection of the spinor bundle onto the
+Hopf base.  It is not derivable from the Coulomb potential alone and
+not derivable from the graph topology alone; it is the structural
+cost of scoring the angular-momentum selection rules in the vertex
+model on a discrete spectral construction.
+\end{observation}
+
+% ===================================================================
+\section{Connections to Other Papers}
+\label{sec:connections}
+% ===================================================================
+
+\subsection{Paper 18 (exchange constant taxonomy)}
+
+The $1{+}6{+}1$ partition of Theorem~\ref{thm:partition} maps cleanly
+onto Paper~18's three-tier exchange-constant taxonomy:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item Tier~I (Gaunt/CG) is \emph{intrinsic}: it lives in the discrete
+graph structure regardless of any continuous-limit choice.
+\item Tier~II (angular momentum, 6 rules, costing $1/(4\pi)$ per
+loop) is \emph{calibration}: the $1/(4\pi)$ is exactly Paper~18's
+characterization of a calibration exchange constant introduced by
+embedding the discrete graph in the continuum.
+\item Tier~III (the $\alpha_z$ diagonal identity) is intrinsic to
+the model's spinor vertex; it is not a property of physical QED.
+\end{itemize}
+
+In Paper~18 language, within the vertex model six of the eight rules
+are calibration content, one is intrinsic to the graph, and one rests
+on the model's spinor vertex.  This parallels the
+universal/Coulomb-specific partition of Paper~31~\cite{paper31}.
+
+\subsection{Paper 22 (angular sparsity theorem)}
+
+Paper~22's angular-sparsity theorem states that ERI density depends
+only on $l_{\max}$, not on the potential $V(r)$.  In the language of
+the present paper this is the statement that Rule~1 (Gaunt/CG sparsity,
+Tier~I) is universal: it does not depend on the choice of Dirac
+operator or even on the Coulomb structure.  Theorem~\ref{thm:partition}
+extends this: in addition to the angular-sparsity rule that Paper~22
+identified, six more rules can be recovered by promotion to vector
+photons, but at the cost of a calibration; only one selection rule is
+truly potential-independent.
+
+\subsection{Paper 28 (QED on $S^3$)}
+
+Paper~28's continuum spectral sums use the same vertex model (its
+Eq.~for the vertex rule).  The pendant-edge theorem
+(Proposition~\ref{prop:pendant_edge}) is Paper~28's
+$\Sigma_{\mathrm{graph}}(\mathrm{GS}) \ne 0$ result; the vector-photon
+score on Rule~2 reproduces the model's
+$\Sigma(n_{\mathrm{ext}} = 0) = 0$, which the physical vector vertex
+does not enforce.
+
+\subsection{Paper 32 (spectral triple synthesis)}
+
+In Paper~32's spectral-triple language, the present partition is the
+statement that:
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item Tier I is enforced by the algebra $\mathcal{A}_{\mathrm{GV}}$ of
+the GeoVac triple.
+\item Tier II is enforced by the rank-1 vector-bundle promotion of
+the photon to a 1-form section of the Hopf base, which is the inner
+fluctuation of $D_{\mathrm{GV}}$ in the abelian extension of
+Paper~25.  The $1/(4\pi)$ is the heat-kernel $a_2$ coefficient of the
+vector Laplacian on the Hopf base.
+\item Whether Tier III has a counterpart in the real structure
+$J_{\mathrm{GV}}$ on $\mathcal{H}_{\mathrm{GV}}$ is not shown; the
+model identity uses only the $i$ phase on the small component and
+$m_l$ conservation.
+\end{itemize}
+
+The present paper is therefore the spectral-action selection-rule
+audit of the GeoVac triple constructed in Paper~32.
+
+% ===================================================================
+\section{Open Questions}
+\label{sec:open}
+% ===================================================================
+
+\paragraph{Q1.  Does the $1/(4\pi)$-per-loop calibration extend to
+two and three loops?}  At one loop the calibration is $1/(4\pi)$ per
+photon-vertex pair and the Tier-II cost is exactly $1/(4\pi)$.  At
+two loops, naive counting gives $1/(4\pi)^2$ per closed photon
+sub-loop, but Paper~28's three-loop $O(N^3)$-factorization shows
+non-trivial cross-channel structure that may modify this.  Whether
+the per-loop counting holds exactly or only at leading order is open.
+
+\paragraph{Q2.  Do all six Tier-II rules cost the \emph{same} factor
+$1/(4\pi)$?}  Theorem~\ref{thm:partition} groups Rules~2--6, 8
+together as Tier~II because they are all recovered by the same
+structural promotion (vector photon).  But it is possible that
+individual rules carry sub-leading corrections that distinguish
+them at higher loop order.  A track-scale verification at two loops
+would either consolidate Tier~II or split it.
+
+\paragraph{Q3.  What does the census give with the physical vertex?}
+With the vector-photon coupling rules (which open $q = n_1 + n_2 + 1$)
+and the full $\boldsymbol{\alpha}$ coupling (which makes the diagonal
+vertex nonzero), rules 2 and 7 would need to be re-scored.  Whether other QED
+selection rules---in higher-rank extensions, or in the rank-2 Breit
+sector flagged in Paper~25~\S VII.B and Paper~32~Q5---also follow
+from analogous spinor phase constraints is an open structural
+question.
+
+\paragraph{Q4.  Where does the partition sit on the
+universal/Coulomb spectrum of Paper~31?}  Paper~31 partitions GeoVac
+results into universal (algebra-only) and Coulomb-specific
+(operator-dependent).  The present 1+6+1 partition has Tier~I
+universal, Tier~II calibration (Coulomb-specific to $S^3$ via the
+Hopf base), and Tier~III a property of the model's spinor vertex.
+The correspondence between the two partitions is clean for Tiers~I and
+II; Tier~III does not carry over to a physical vector photon.
+
+% ===================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ===================================================================
+
+We have tallied eight selection rules (five standard, three specific
+to $S^3$) by which structural ingredient of a GeoVac vertex model
+scores them: one is graph-topological (Tier~I), six are scored
+together by vector-photon promotion with $1/(4\pi)$ per loop (Tier~II,
+the ground-state rule being the model's scalar-triangle zero), and one
+by the $\alpha_z$ diagonal-vertex identity (Tier~III), which is not
+Furry's theorem for a physical vector photon.
+
+The partition is structural and verified by 103 tests in
+\texttt{tests/test\_vector\_qed.py} (each census total asserted as an
+aggregate per-rule tally) together with the symbolic Furry derivation
+in \texttt{tests/test\_paper33\_furry\_derivation.py}.  It does not
+depend on the
+Paper~2 observation about the fine-structure constant; it stands as an
+observation about the cost of recovering each QED selection rule on a
+discrete spectral construction.
+
+Reading the $1/(4\pi)$ as the $S^2$ Weyl exchange constant places the
+model's angular-momentum sector in Paper~18's calibration tier (an
+Observation).  The census with the physical vertex is open (Q3).
+
+% ===================================================================
+\begin{thebibliography}{99}
+
+\bibitem{jeffrey2010}
+A.~Jeffrey and H.-H.~Dai, \textit{Handbook of Mathematical
+Formulas and Integrals}, 4th ed., Academic Press (2008).
+
+\bibitem{chamseddine_connes2010}
+A.~H.~Chamseddine and A.~Connes, ``Noncommutative geometry as a
+framework for unification of all fundamental interactions
+including gravity,'' \textit{Fortsch.~Phys.}\ \textbf{58}, 553--600
+(2010).
+
+\bibitem{paper2}
+GeoVac Project, ``The Fine Structure Constant as a Spectral Coincidence
+on the Hopf Fibration,'' Paper~2 (2025; observation status, May~2026).
+
+\bibitem{paper7}
+GeoVac Project, ``The Dimensionless Vacuum: Recovering the Schr\"odinger
+Equation on a Scale-Invariant Label Lattice,'' Paper~7 (2025).
+
+\bibitem{paper14}
+GeoVac Project, ``Structurally Sparse Qubit Hamiltonians from Natural-Geometry
+Hydrogenic Bases,'' Paper~14 (2025).
+
+\bibitem{paper18}
+GeoVac Project, ``Spectral-Geometric Exchange Constants: Projecting
+Discrete Spectra onto Continuous Manifolds,'' Paper~18 (2026).
+
+\bibitem{paper22}
+GeoVac Project, ``Potential-Independent Angular Sparsity for Qubit
+Hamiltonians in Spherical Fermion Systems,'' Paper~22 (2026).
+
+\bibitem{paper24}
+GeoVac Project, ``The Bargmann--Segal Lattice: $\pi$-Free
+Discretization of the Harmonic Oscillator on $S^5$,'' Paper~24
+(2026).
+
+\bibitem{paper25}
+GeoVac Project, ``The Hopf Graph as a Lattice Gauge Structure: A
+Framework Observation,'' Paper~25 (2026).
+
+\bibitem{paper28}
+GeoVac Project, ``QED on $S^3$: Spectral Geometry of Perturbative
+Transcendentals,'' Paper~28 (2026).
+
+\bibitem{paper30}
+GeoVac Project, ``SU(2) Wilson Lattice Gauge Structure on the GeoVac
+Hopf Graph: The Non-Abelian Sibling of Paper 25,'' Paper~30 (2026).
+
+\bibitem{paper31}
+GeoVac Project, ``The Universal/Coulomb Partition of the GeoVac
+Spectral Triple,'' Paper~31 (2026).
+
+\bibitem{paper32}
+GeoVac Project, ``The GeoVac Spectral Triple: A Synthesis Paper Locking
+the Framework into the Marcolli--van~Suijlekom Gauge-Network Lineage,''
+Paper~32 (2026).
+
+\end{thebibliography}
+
+\end{document}
+````

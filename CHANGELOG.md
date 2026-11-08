@@ -7,6 +7,94 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.5.2] - 2026-11-07
+
+**group5 restructured after the advisory pass; the physical vector vertex (VV stage A); the SO(4) channel
+count corrected.** PI: "Ok, do stage A", then "Approve everything. Please proceed." The PM recommends a
+MINOR bump for this entry (a reorganization of the paper series plus a correction that moves published
+numbers); committed as a patch pending that call.
+
+### VV stage A (pre-registered, `docs/predictions/2026-11-07_physical_vector_vertex.md`): GO
+- The Clifford vertex between Camporesi-Higuchi spinors and coclosed 1-forms on round S^3, computed
+  exactly by two independent routes (SU(2) group theory on 896 cells; R^4 monomial integration on 360
+  cells, agreeing on every common cell). Controls C1-C4 pass; SA1-SA5 all held; no extras, no
+  accidental zeros.
+- Same-sign spinors keep the model window and add q = n1+n2+1; opposite-sign channels open at
+  n1+n2+q even; the ground state couples, also to itself (sum over photon m of |<a|c(A)|a>|^2 = 1 at
+  q = 1); the Ward-Takahashi identity <u, c(df) v> = (lambda_u - lambda_v)<u, f v> holds exactly on
+  384 pairs. Paper 28's Theorem 4 (ground-state zero) is a statement about the vertex model only.
+- Paper 33's eight rules against the physical vertex: 1 and 4 hold; 6 holds in Ward-Takahashi form
+  (the old "Ward" score was a block-diagonality proxy); 2, 5 and 8 fail; 3 holds as representation
+  theory; 7's V(a,a) = 0 mechanism fails and Furry is undecided until stage B.
+
+### Code: the SO(4) channel count (found by stage A)
+- `geovac/qed_vertex.so4_channel_count` paired the + content of n1 with the - content of n2 inside
+  the odd-parity window and had no integrality check, so every unit it counted was empty in
+  representation theory. Corrected to same-sign content with triangle + integrality in both SU(2)
+  factors; the copies in `qed_self_energy`, `dirac_vertex`, `graph_qed_continuum_bridge` and
+  `qed_three_loop` now delegate to it.
+- Corrected W is 0 or 2 inside the window and symmetric; I(n1,n2) = 2 min(n1,n2) (was
+  2 min - 1 - [n1 = n2]). Consequences, each by two routes (memo
+  `debug/sprint_w_channel_count_correction_memo.md`):
+  - sunset = 2 S_min exactly (was 2 S_min - P^2 - Q);
+  - S^(3) = 40.6553875635854... (was 31.5725612...), bracket [40.65339, 40.65578], closed form in
+    Q[pi^2, ln2, zeta(3), zeta(5), zeta(5,3)] with zeta(5,3) still at 6 pi^2 and zeta(7), zeta(9),
+    zeta(11) cancelling; a direct-sum extrapolation reproduces it to 1e-11;
+  - S^(4) = 8 M4, bracket [409.286, 409.425]; realized depth <= k-1 holds at k = 2, 3, 4;
+  - three-loop rows N = 5, 10, 15, 20 = 2.753, 6.836, 10.181, 12.837;
+  - graph-continuum bridge: C_VP(n_max = 3) = 102935584512/1112150703125; C_VP/C_SE = 0.137 (not
+    ~3/29); C x F2 stays near 150 x alpha/2pi instead of growing (the section 3 negative stands;
+    re-interpretation row appended);
+  - Paper 36's LS-8a two-loop model totals all move (n_max = 4: 761.3 -> 6439.3); the divergence
+    stands (local slope 2.8).
+- 20 pinned tests re-pinned to the corrected values; `test_paper55_witness_panels_computed.py`'s
+  chain kernel corrected; `test_s3_w10_identification.py`'s old-weight sum relabelled `S3_oldW`;
+  `test_paper55_m3_cyclotomic_mixed_tate.py` given an autouse 60-dps fixture (the rhJ[5] case was
+  flaky under xdist).
+
+### Papers (PI-approved dispositions)
+- **Paper 28** -> "Periods of Dirac Spectral Sums on S^3" (4872 -> ~1930 lines): T9, the parity and
+  chi_-4 splits, the chain sums (sunset, S^(3), depth), the Sommerfeld products and the zeta(3)
+  complementarity (now Theorem 5). The multi-loop sums are stated as sums on the vertex model. The
+  gravity block is a pointer to Paper 51; the graph-QED block moved, condensed, to Paper 33; the c2 fit,
+  the flat-space section, the Connes-vS / GUE / RH readings are cut; a false chi_-4 zeros corollary is
+  cut. Wang-Xu 2025 credited for the t3(3,4,1) depth reduction.
+- **Paper 33** -> "Selection Rules of the Vector-Photon Vertex on S^3: the Physical Vertex, the Vertex
+  Model and the Graph": rebuilt on stage A, with the eight rules scored on the scalar graph, the Dirac
+  graph, the model and the physical vertex. The 1+6+1 partition and the 7/8 theorem do not survive.
+- **Paper 30** absorbs Paper 41 and Paper 25's dictionary: "Wilson Lattice Gauge Theory on the GeoVac
+  Label Graphs: Exact Factorization on the Scalar Graph and Compact U(1) on the Dirac Rule-B Graph".
+  Plaquettes are the 4-cycles; the cubic term of the Wilson action is nonzero (vertex ~ epsilon^{abc});
+  Rule-B compact U(1) at about 1/8 of Paper 41's length, comparison class mean-field / large d.
+  Papers 25 and 41 archived (SUCCESSOR-COVERED rows in `docs/retired_papers.md`).
+- **Paper 36** -> "The Leading One-Loop Hydrogen Lamb Shift: Assembly, a Convention Erratum, and
+  Coulomb-Sturmian Bethe Logarithms", moved to group6. S^3 never enters the number. Lieber 1968 and
+  Huff 1969 credited; Bezginov 2019 residual added; the C_2S = 3.63 target (no primary source) and the
+  muonium sections cut; Eides citation corrected (Phys. Rep. 342 title and section/table numbers).
+- **Paper 51** -> "A Convergent Discrete Replica Derivative on the Spinor Cone, with the Two-Term
+  Camporesi-Higuchi Spectral Action on S^3xS^1": leads with Theorem L6; S_BH > 0 under Solodukhin's
+  convention with the cone coefficient -(1/12)(1/alpha - alpha); "no higher curvature" scoped to
+  conformally flat S^3 x S^1; action-G = entropy-G is the induced-gravity statement (Susskind-Uglum;
+  Frolov-Fursaev); G5 is the Einstein static universe; the TT operator is the rough Laplacian; GD-1/4/5
+  carried from Paper 28. Sprint chronicle relocated verbatim to `docs/chronicles/paper51_gravity_arc.md`.
+- **Paper 2** -> "The Fine Structure Constant as a Spectral Coincidence on the Three-Sphere" (about 40%
+  length): B is an S^3 scalar-sector trace (the S^2 trace is 36); the expected chance count N p ~ 10
+  printed beside p (the formula ranks 11th); all twelve eliminated mechanisms tabled; a computed-vs-
+  chosen ledger; "Three homes" a Proposition; Paper 25's grouping and one-centre results in a Hopf
+  scope section. K = pi(B+F-Delta) remains an Observation.
+- Six verified errors fixed before the restructure: Paper 30's cubic term; Paper 41's Z^3
+  closed-surface statement; Paper 28's phi(2)/phi(1) (it is phi(1)); Paper 51's spinor-cone sign;
+  Paper 2's "mechanism likely involves SO(4)"; Paper 25's K-as-hypothesis item.
+- Everything removed from a paper is in `docs/chronicles/paper{2,28,30,33,36,51}_*.md`, verbatim.
+- Citer sweeps across about 35 documents (papers, syntheses, INDEX, README, claims register, topic
+  lookup, atlas, seam, claim matrix, docstrings) re-pointed and, where an owner narrowed, rewritten.
+
+### Gates
+- New C16 entries (each fire-tested on retired and corrected wording): `g5-retired-titles-2026-11-07`,
+  `g5-channel-count-2min-minus-1`, `g5-p51-forced-by-wald`, `g5-p2-b-on-s2-base`.
+- Carry-forward (PI calls, owner items, owed tests, tests whose claims were cut):
+  `docs/qa/group5.debt.md`, section "Restructure carry-forward".
+
 ## [v6.5.1] - 2026-11-07
 
 **group5 PI decisions applied + group5 guard pass.** PI: "I'll take your recommendations on all decisions and we

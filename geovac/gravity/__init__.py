@@ -2,7 +2,7 @@
 
 Discrete-substrate gravity-arc infrastructure (sprint sequence G4-3
 through G4-6). The continuum gravity-arc results (G1-G8) are
-captured in Paper 28 ; the discrete-substrate
+captured in Paper 51; the discrete-substrate
 program is the multi-month commitment opened by G4-3.
 
 Modules

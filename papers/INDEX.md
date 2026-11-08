@@ -41,8 +41,8 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | group3 | 18, 22, 24, 31, 54, 55, 56, 57, 61 + group3 synthesis | OWED |
 | group4 | 14, 16, 20, 23 + group4 synthesis | OWED |
 | paper_63 | 63 + group3 synthesis (ladder subsection) | RESEARCH-GRADE — FULL #2 (v6.4.4, 2026-11-06): 0 OWNER-LARGE, 2 SURFACE-LARGE fixed + C16; coverage 14/14; SMALL debt `docs/qa/paper_63.debt.md` |
-| group5 | 2, 25, 28, 30, 33, 36, 41, 51 | NOT RESEARCH-GRADE — FULL #1 (v6.5.0, 2026-11-07) = FAIL, remediated (owner LARGE in P28/P30/P33/P36/P41/P51/P2; self-check 2 rounds); coverage 300/300; a FULL #2 or claim-search DELTA owed; debt `docs/qa/group5.debt.md` |
-| group6 | 26, 27, 34, 35 | OWED |
+| group5 | 2, 28, 30, 33, 51 | NOT RESEARCH-GRADE — FULL #1 (v6.5.0, 2026-11-07) = FAIL, remediated (owner LARGE in P28/P30/P33/P36/P41/P51/P2; self-check 2 rounds); coverage 300/300; a FULL #2 or claim-search DELTA owed; debt `docs/qa/group5.debt.md` |
+| group6 | 26, 27, 34, 35, 36 | OWED |
 | synthesis | field guide + group syntheses | OWED |
 
 ## Synthesis (`synthesis/`)
@@ -120,14 +120,11 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
-| 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α to 4.8×10⁻⁷ (the cubic's root to 8.8×10⁻⁸); combination rule labeled an **Observation**, never derived (12 mechanisms eliminated) |
-| 25 `paper_25_hopf_gauge_structure.tex` | OBSERVATION | Hopf graph as discrete lattice-gauge structure |
-| 28 `paper_28_qed_s3.tex` | ACTIVE | QED spectral sums on S³: T9, parity, χ₋₄ theorems; S_min identified in closed form; the ground-state self-energy zero is a property of a scalar-triangle vertex model, and the 1.084 anomalous-moment ratio is an unnormalized coincidence (re-scoped 2026-11-07) |
-| 30 `paper_30_su2_wilson.tex` | ACTIVE | SU(2) Wilson gauge on S³ = SU(2); Paper 25 is its maximal torus |
-| 33 `paper_33_qed_selection_rules.tex` | OBSERVATION | 1+6+1 census of eight selection rules (five standard, three S³-specific) in a vertex model; the Dirac Furry score is an α_z identity, not Furry for a physical vector photon |
-| 36 `paper_36_bound_state_qed.tex` | ACTIVE | GeoVac Bethe logarithms for the hydrogen Lamb shift (2P, 3D reproduced; 2S not converged); the −0.534% headline is the leading one-loop assembly with literature logs; two-loop wall named |
-| 41 `paper_41_rule_b_wilson_u1.tex` | ACTIVE | Wilson U(1) on the Dirac Rule-B graph; compatible with compact U(1), no 3D-vs-4D discrimination (re-scoped 2026-11-07) |
-| 51 `paper_51_gravity_arc.tex` | ACTIVE | Gravity from the spectral action; two-term exactness (Chamseddine–Connes; alternative proof); G_eff = 3π/Λ² (rank-4 trace); J-blindness theorem |
+| 2 `Paper_2_Alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α to 4.8×10⁻⁷ (the cubic's root to 8.8×10⁻⁸); B = 42 is an S³ scalar-sector Casimir trace; combination rule labeled an **Observation**, never derived; expected chance count Np ≈ 10 in a 1.92×10⁹-formula search (12 mechanisms eliminated); Hopf-fibration reading scoped (rotation grouping, one centre) |
+| 28 `paper_28_qed_s3.tex` | ACTIVE | Periods of Dirac spectral sums on S³: T9, parity and χ₋₄ theorems; ζ(3) complementarity (Theorem 5); S_min and S^(3) in closed form, realized depth ≤ k−1 through four loops; the multi-loop sums are defined on a vertex model, and the ground-state zero and the 1.084 magnetic-moment ratio are model statements; heat trace / spectral action moved to Paper 51, graph-native QED to Paper 33 (narrowed 2026-11-07) |
+| 30 `paper_30_su2_wilson.tex` | ACTIVE | Wilson lattice gauge theory on the label graphs: on the scalar graph the plaquettes (4-cycles) are independent, so SU(2) and compact U(1) are exactly solvable and ⟨W⟩ carries no confinement information; compact U(1) on the Dirac Rule-B graph is compatible with compact U(1) and discriminates no dimension (absorbed Papers 41 and 25's Wilson dictionary) |
+| 33 `paper_33_qed_selection_rules.tex` | ACTIVE | Selection rules of the physical vector-photon vertex on S³ (Spin(4) representation theory, two exact routes; the ground state couples, V(a,a) ≠ 0, Ward–Takahashi exact), with the eight rules scored on the scalar and Dirac graphs, in the vertex model and with the physical vertex; the 1+6+1 partition does not survive; pendant-edge value and α_z identity kept (rebuilt 2026-11-07) |
+| 51 `paper_51_gravity_arc.tex` | ACTIVE | A convergent discrete replica derivative on the spinor cone (Theorem L6, new); two-term exactness of the Camporesi–Higuchi spectral action on S³ and S³×S¹ (Chamseddine–Connes; alternative proof); G = 3π/(φ(1)Λ²) from the rank-4 trace, agreeing with the entropy route (induced gravity, prior art); J-blindness |
 
 ## Group 6 — Precision / observations (`group6_precision_observations/`)
 
@@ -137,6 +134,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 27 `paper_27_entropy_projection.tex` | **KEYSTONE** | Entropy as projection artifact; EP-2b HO zero-entropy rigidity RETRACTED v5.0.0; block-entropy scaling |
 | 34 `paper_34_projection_taxonomy.tex` | ACTIVE | **Living catalogue**: 28 named projections — where physics enters the graph |
 | 35 `paper_35_time_as_projection.tex` | ACTIVE | π enters exactly at temporal compactification (Matsubara); falsifiable prediction |
+| 36 `paper_36_bound_state_qed.tex` | ACTIVE | Leading one-loop hydrogen Lamb shift assembled from standard expressions (1052.19 MHz, −0.534%; not a GeoVac computation, S³ never enters); Uehling double-count erratum; Coulomb-Sturmian Bethe logarithms (2P, 3D reproduced; 2S not converged); two-loop negative |
 
 ## Archive (`archive/`) — HISTORICAL, load on request
 
@@ -155,3 +153,5 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | 47 `paper_47_two_rate_hybrid_convergence.tex` | **Archived 2026-09-14.** Propinquity arrow descoped. *Survives:* the norm-resolvent arrow and the three-carrier identification. |
 | 48 `paper_48_krein_ms_bridge.tex` | **Archived 2026-09-14.** Metric-level theorems open pending a repair the register records as closed. *Survives:* the bridge's categorical design. |
 | 49 `paper_49_oslpls_strong_form_bridge.tex` | **Archived 2026-09-14.** Λ inheritance descoped. *Survives:* the cocycle-deficit / TICI algebra. |
+| 25 `paper_25_hopf_gauge_structure.tex` | **Archived 2026-11-07** (merged). K as a lattice-gauge invariant, Δ as vacuum polarization and F as a photon partition function withdrawn; S⁵ material not carried. *Survives* in Paper 30 Sec. 4.2–4.3 (Wilson/graph-Hodge dictionary, n_max = 3 spectra) and Paper 2's Hopf-scope section (rotation vs chiral-factor grouping, one-centre fibre). |
+| 41 `paper_41_rule_b_wilson_u1.tex` | **Archived 2026-11-07** (merged). The 3D/4D reading, "permanent confinement" and the Polyakov-rate resolution withdrawn. *Survives* in Paper 30 Sec. 2.3 and Sec. 5 (compact U(1) on the Rule-B graph, compatibility only). |

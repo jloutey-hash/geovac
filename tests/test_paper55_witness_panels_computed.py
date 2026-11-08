@@ -27,8 +27,8 @@ M2 panel (Paper 55 sec:m2 Witnesses)
 S^(3) (Paper 55 tab. depth-k; Paper 28)
   The factorised-chain definition S^(3) = sum_m phi(m) L(m)^2 summed directly
   to N = 48000 and extrapolated in the Euler-Maclaurin basis
-  {ln^k N / N^j}; pins the canonical 31.5725612075120... to < 1e-11, where the
-  previous definitional tie was the rigorous bracket [31.57063, 31.57300]
+  {ln^k N / N^j}; pins the canonical 40.6553875635854... to < 1e-11, where the
+  previous definitional tie was the rigorous bracket [40.65339, 40.65578]
   (about 4 digits).  Independent of the t-value decomposition.
 """
 from __future__ import annotations
@@ -56,7 +56,7 @@ PANEL_M2_ZETA = {
     5: "pi**8*(306 - 31*pi**2)/5670",
 }
 # Paper 28 / Paper 55 canonical S^(3) (first 30 digits)
-S3_CANONICAL = "31.5725612075120227547619295450"
+S3_CANONICAL = "40.6553875635854225477443399691"  # corrected W (2026-11-07)
 
 
 def _val(expr: str, **subs) -> mp.mpf:
@@ -200,7 +200,7 @@ def test_s3_definition_pins_canonical_value():
         x2 = mp.mpf(2 * m + 3) ** 2
         pm = 8 * (x2 - 1) / (x2 * x2)
         A = cum_nphi + m * (P - cum_phi)       # sum_n min(n, m) phi(n), full range
-        L = 2 * A - P - pm
+        L = 2 * A                              # I(n, m) = 2 min(n, m) (corrected W)
         head += pm * L * L
         cum_phi += pm
         cum_nphi += m * pm

@@ -614,7 +614,7 @@ class TestStructuralProperties:
 
 
 # ===========================================================================
-# Pendant-edge closed form sweep (Paper 28 prop:pendant_edge / Paper 33)
+# Pendant-edge closed form sweep (Paper 33 prop:pendant_edge)
 # ===========================================================================
 
 class TestPendantEdgeSweep:

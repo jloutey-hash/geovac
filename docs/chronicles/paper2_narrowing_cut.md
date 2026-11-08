@@ -1,0 +1,1783 @@
+# Paper 2 narrowing: removed text (verbatim)
+
+Narrowing of `papers/group5_qed_gauge/paper_2_alpha.tex` to about 40% of its length, PI-approved 2026-11-07. Every line of the pre-narrowing file (1787 lines, the working copy of 2026-11-07 including the PM's deletion of the Link-3 "mechanism likely involves SO(4)" sentence earlier that day) that does not survive verbatim in the narrowed paper is reproduced below, in source order, with its original line numbers. Lines that were rewritten rather than dropped appear here in their old form; their replacement is in the paper. Generated mechanically by a line diff, so nothing removed is omitted.
+
+Main cut families: the Hopf-roles interpretation (Sec. II), the spectral-triple lineage paragraph, the triple-selection list, the Fock-coupling, APS, supertrace and Euler-Maclaurin readings of Delta, the volume reading of the external pi, the four positive identifications (kappa-B link, zeta(3) in the Dirac sector), the rigidity-connection and zeta(3) asides, the closure narrative, the circulant section (Hermiticity, phase, self-reference), the derivation-chain table (replaced by the computed-versus-chosen ledger), the Connes-Chamseddine Lambda paragraph, the symplectic-impedance comparison table, the spectral-determinant near-miss, the quaternionic/octonionic Hopf values and S^3-specificity list, the Fock-rigidity and nuclear-analog paragraphs, the transition-operator analogy, the second pointer to n_max = 3, the open questions (including the pi^3 alpha^3 residual and the other cubic roots), and unused bibliography entries.
+
+Removed or rewritten lines: 1610 of 1787.
+
+## Old lines 3-4
+
+```latex
+\usepackage{amsthm} % for theorem environment used in §IV (three-homes theorem)
+\newtheorem{theorem}{Theorem}
+```
+
+## Old lines 18-54
+
+```latex
+We observe that the fine structure constant $\alpha$ approximately
+satisfies (to $8.8\times10^{-8}$ relative; an Observation) the cubic
+equation $\alpha^3 - K\alpha + 1 = 0$, where the coefficient
+$K = \pi(42 + \pi^2/6 - 1/40) = 137.036064$ is constructed from
+spectral invariants of the Hopf fibration $S^1 \to S^3 \to S^2$: the
+degeneracy-weighted Casimir trace of the $S^2$ base ($B = 42$), half the
+spectral zeta function of the $S^1$ fiber at $s = 1$, i.e.\ its $k > 0$
+modes ($F = \zeta(2) = \pi^2/6$),
+and a boundary correction from the $S^3$ total space
+($\Delta = 1/40$). The selection principle $B/N = \dim(S^3) = 3$ is
+proven algebraically to select $n_{\max} = 3$ uniquely. The resulting
+$\alpha^{-1} = 137.036011$ agrees with experiment to
+$8.8 \times 10^{-8}$ relative error with zero free parameters. In a
+combinatorial search over $1.92 \times 10^9$ formulas built from the
+same spectral ingredients, the formula ranks among the top $\sim\!10$
+($p = 5.2 \times 10^{-9}$ per draw); this statistic does not account
+for the unregistered search that produced the formula and does not
+establish non-accidentality. The cubic can be realized as the
+characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
+circulant matrix (any depressed cubic with unit constant term can, so
+this realizes the form without selecting it).
+However, the combination rule $K = \pi(B + F - \Delta)$ is a
+numerical observation, not a conjecture: an empirical coincidence with
+structural support, not a first-principles derivation. An internal Sprint-A structural check
+(2026-04-18; see \S\ref{sec:spectral_triple}, \S\ref{sec:triple_selection},
+and the residual discussion in the Open Questions) sharpens three
+features: the external $\pi$ prefactor is the volume factor
+$\mathrm{Vol}(S^2)/4 = \mathrm{Vol}(S^3)/\mathrm{Vol}(S^1)$; the cutoff
+$n_{\max} = 3$ is triply selected (the $B/N = \dim(S^3)$ principle, the
+unique $(+,+,-)$ sign pattern, and the agreement of two independent
+canonical $\Delta$ forms at the same integer); and the $(+,+,-)$ pattern
+is shape-compatible with Atiyah--Patodi--Singer eta-invariant boundary
+subtraction but is not derivable from any specific
+spectral-action functional~\cite{alpha_sprint_a_memo}. The working
+hypothesis that emerges is that $\alpha$ is a \emph{projection constant}
+between three structurally distinct spectral regimes, rather than a
+quantity derivable from a single principle.
+```
+
+## Old lines 63-112
+
+```latex
+Richard Feynman called the fine structure constant
+$\alpha = e^2/(4\pi\epsilon_0\hbar c) \approx 1/137.036$ ``one of the
+greatest damn mysteries of physics''~\cite{feynman1985}. Despite a
+century of quantum theory, $\alpha$ remains an unexplained input to
+the Standard Model. Attempts to derive it
+numerically---from~$\pi$,~$e$, prime numbers, or Platonic
+solids---have uniformly failed~\cite{eddington1935,barrow2002}.
+Eddington's ``proton--electron mass ratio'' argument and Wyler's
+symmetric-space formula~\cite{wyler1969} both achieved suggestive
+precision but were criticized for lacking a physical mechanism
+connecting the mathematical structure to electromagnetic
+coupling~\cite{robertson1971}.
+
+The present work is situated within the GeoVac program, whose
+discrete lattice for hydrogen has as nodes exactly the labels
+$(n,l,m)$ of the harmonics of the Laplace--Beltrami operator on the
+unit three-sphere~$S^3$, which is related to the Schr\"odinger
+equation via Fock's 1935 stereographic projection~\cite{paper7}.  (The
+lattice's edge Laplacian is not mathematically equivalent to that
+operator and does not converge to it;\ on the labels the $S^3$ operator
+is the diagonal $SO(4)$ Casimir, Paper~7, corrected 2026-09-25.) The electron's
+bound-state problem is conformally equivalent to free motion on~$S^3$
+(Fock's result), a chain Paper~7 verifies with 18 symbolic checks, several
+of them definitional or limiting-case~\cite{paper7}.
+
+This three-sphere carries a unique fiber bundle structure: the Hopf
+fibration~\cite{hopf1931,urbantke2003}
+\begin{equation}\label{eq:hopf}
+  S^1 \;\longrightarrow\; S^3 \;\longrightarrow\; S^2.
+\end{equation}
+The base $S^2$ parametrizes photon propagation directions, while the
+fiber $S^1$ encodes the $U(1)$ electromagnetic gauge phase. We
+identify a formula for $\alpha$ built entirely from the spectral
+invariants of these three manifolds, validate it statistically against
+a large space of alternative formulas, and give a structural
+realization (a $\mathbb{Z}_3$-symmetric circulant matrix) of the cubic
+form, which realizes rather than selects it. We also characterize precisely what remains
+unestablished.
+
+We state clearly at the outset: \textit{this is an empirical formula
+with structural support, not a first-principles derivation.} The
+combination rule that assembles the spectral invariants into the
+coupling constant $K$ is observed, not derived.
+
+An earlier version of this work~\cite{paper2_old} attempted to extract
+$\alpha$ from a ``symplectic impedance'' ratio on the electron
+lattice, achieving $6.2 \times 10^{-5}$ relative error with a fitted
+helical pitch. The present result eliminates all fitted parameters;\
+$K$ itself agrees with $\alpha^{-1}$ about $130\times$ more closely, and
+the cubic's root about $700\times$.
+```
+
+## Old lines 116-116
+
+```latex
+\section{The Hopf Bundle as Electron--Photon Geometry}
+```
+
+## Old lines 119-198
+
+```latex
+Fock's 1935 stereographic projection maps the hydrogen momentum
+eigenvalue problem onto the unit three-sphere~\cite{fock1935}. The
+eigenvalues of the Laplace--Beltrami operator on $S^3$ are
+\begin{equation}\label{eq:s3eig}
+  \lambda_n = -(n^2 - 1), \qquad n = 1, 2, 3, \ldots
+\end{equation}
+with degeneracy $g_n = n^2$, reproducing the hydrogen spectrum upon
+projection to flat space via the energy-shell constraint
+$p_0^2 = -2E$~\cite{paper7}, the conformal chain being verified by 18
+symbolic checks~\cite{paper7}. On the discrete lattice this operator is
+exact at every cutoff as the diagonal $SO(4)$ Casimir $n^2-1$ on the
+labels $(n,l,m)$;\ the lattice's edge Laplacian does \emph{not} converge
+to it (it preserves $l$ and splits into disconnected blocks, Paper~7;\
+corrected 2026-09-25 from ``exact in the continuum limit:\ the graph
+Laplacian \ldots converges to the continuum operator'').
+
+The three-sphere admits a unique fiber bundle structure, the Hopf
+fibration~(\ref{eq:hopf}). Concretely, the map
+$\pi: S^3 \to S^2$ sends each point $(z_1, z_2) \in \mathbb{C}^2$
+with $|z_1|^2 + |z_2|^2 = 1$ to the ratio $z_1/z_2 \in S^2$. Each
+fiber $\pi^{-1}(p)$ is a great circle $S^1 \subset S^3$.
+
+We interpret the three components physically:
+\begin{itemize}
+\item \textbf{Total space $S^3$:} The manifold onto which Fock's
+  projection maps the electron bound-state problem.
+\item \textbf{Base $S^2$:} The photon momentum sphere, parametrizing
+  propagation directions of the electromagnetic field.
+\item \textbf{Fiber $S^1$:} The $U(1)$ gauge phase of the
+  electromagnetic potential.
+\end{itemize}
+
+This identification is natural: the Hopf fibration is the geometric
+expression of $U(1)$ gauge symmetry acting on the electron's state
+space. Electromagnetic coupling is the ``cost'' of projecting $S^3$
+onto~$S^2$---the information lost in the fiber.
+
+
+\subsection{Spectral-triple setting and published lineage}\label{sec:spectral_triple}
+
+The graph-spectral construction used below places naturally in the
+framework of \emph{finite spectral triples on graphs} developed by
+Marcolli and van Suijlekom~\cite{marcolli_vs_2014}. In their framework
+a \emph{gauge network} is a finite spectral triple whose algebra is a
+direct sum of matrix algebras indexed by the vertices of a graph, with
+a connection variable assigned to each edge; the spectral action
+$\mathrm{Tr}\,f(D/\Lambda)$ on such a spectral triple reproduces Wilson
+lattice gauge theory on the underlying graph. The discrete $S^3$ Hopf
+graph of Paper~7, with the $U(1)$ and $SU(2)$ gauge extensions
+developed elsewhere in the GeoVac corpus, is a specific instance of
+this general construction. The Perez-S\'anchez
+correction~\cite{perez_sanchez_2024_comment}
+clarifies that the continuum limit of the original gauge networks is
+Yang--Mills without Higgs (the companion quiver
+extension~\cite{perez_sanchez_2024} obtains Yang--Mills--Higgs for
+its own enlarged construction).
+
+The present paper does not derive $\alpha$: it reports a numerical
+observation within the published graph-spectral-triple lineage. The
+three ingredients $B$, $F$, $\Delta$ each have a spectral home, the
+three of distinct type; what is GeoVac-specific is that their combination by the single
+rule $K = \pi(B + F - \Delta)$ lands on $\alpha^{-1}$. The
+\emph{machinery} is established; the \emph{observation} is this paper's
+contribution. We claim no derivation of the combination rule: the open
+questions of \S\ref{sec:statistical}--\S VII ask why the cross-sector
+sum closes, not whether such a framework exists.
+
+
+%======================================================================
+\section{Spectral Invariants of the Bundle}
+%======================================================================
+
+Each component of the Hopf bundle carries intrinsic spectral data. We
+extract one canonical invariant from each.
+
+\subsection{Base manifold $S^2$: Casimir trace}
+
+The eigenvalues of the Laplacian on $S^2$ are $l(l+1)$ with
+degeneracy $2l+1$. These are the Casimir eigenvalues of $SO(3)$. We
+define the \textit{degeneracy-weighted Casimir trace} as
+```
+
+## Old lines 201-201
+
+```latex
+  (2l+1)\,l(l+1),
+```
+
+## Old lines 203-209
+
+```latex
+where the outer sum runs over principal shells (each shell $n$
+contains angular momenta $l = 0, \ldots, n-1$). This is the total
+angular momentum content of all electron states up to
+shell~$n_{\max}$, weighted by the magnetic degeneracy of each
+subshell.
+
+At $n_{\max} = 3$, the explicit computation gives
+```
+
+## Old lines 215-215
+
+```latex
+       &= 42,
+```
+
+## Old lines 217-226
+
+```latex
+where subscripts denote $(n, l)$ pairs.
+
+
+\subsection{Selection principle}
+
+The total number of states through shell $n_{\max}$ is
+$N(n_{\max}) = \sum_{n=1}^{n_{\max}} n^2 = n_{\max}(n_{\max}+1)(2n_{\max}+1)/6$.
+We prove that the ratio
+\begin{equation}\label{eq:selection}
+  \frac{B(n_{\max})}{N(n_{\max})} = \dim(S^3) = 3
+```
+
+## Old lines 228-232
+
+```latex
+is satisfied uniquely at $n_{\max} = 3$.
+
+The inner sum in Eq.~(\ref{eq:casimir}) has a closed form:
+\begin{equation}\label{eq:innersum}
+  \sum_{l=0}^{n-1}(2l+1)\,l(l+1) = \frac{n^2(n^2-1)}{2}.
+```
+
+## Old lines 234-235
+
+```latex
+Therefore $B(m) = \sum_{n=1}^{m} n^2(n^2-1)/2$, which, using the
+standard power-sum identities $\sum n^2$ and $\sum n^4$, evaluates to
+```
+
+## Old lines 239-239
+
+```latex
+The ratio simplifies by cancellation:
+```
+
+## Old lines 243-249
+
+```latex
+Setting $B/N = 3$ gives $(m+2)(m-1) = 10$, i.e.,
+$m^2 + m - 12 = (m+4)(m-3) = 0$,
+whose unique positive root is $m = 3$. This completes the algebraic
+proof: $n_{\max} = 3$ is the \textit{only} positive integer at which
+the selection principle holds.
+
+\begin{table}[h]
+```
+
+## Old lines 262-263
+
+```latex
+\caption{The selection principle $B/N = 3$ is satisfied uniquely at
+$n_{\max} = 3$, as proven algebraically via
+```
+
+## Old lines 268-276
+
+```latex
+This result connects to the Casimir structure of $SO(4)$. In the
+Peter--Weyl decomposition of $L^2(S^3)$, each shell~$n$ carries the
+$(j,j)$ representation of $SO(4) \cong (SU(2) \times SU(2))/\mathbb{Z}_2$
+with $j = (n-1)/2$. The $SO(3) \subset SO(4)$ Casimir has per-shell
+average
+\begin{equation}\label{eq:casimir_identity}
+  \langle C_3 \rangle_n
+  = \frac{1}{n^2}\sum_{l=0}^{n-1}(2l+1)\,l(l+1)
+  = \frac{n^2-1}{2} = C_4(n),
+```
+
+## Old lines 278-286
+
+```latex
+which equals the $SO(4)$ Casimir eigenvalue. The selection principle
+$B/N = 3$ is therefore equivalent to requiring that the
+degeneracy-weighted average of the $SO(4)$ Casimir over shells
+$1 \leq n \leq n_{\max}$ equals $\dim(S^3)$.
+
+The base manifold invariant is
+\begin{equation}\label{eq:base}
+  \boxed{B = \sum_{n=1}^{3}\sum_{l=0}^{n-1}(2l+1)\,l(l+1) = 42.}
+  \vphantom{\Bigg|}
+```
+
+## Old lines 288-344
+
+```latex
+
+\emph{Verification.}  The ingredient identities of this section are
+pinned by exact symbolic tests (no floats):
+\texttt{tests/test\_paper2\_ingredients.py} recomputes $B(3) = 42$
+term-by-term from Eq.~(\ref{eq:casimir}), proves the closed forms
+(\ref{eq:innersum})--(\ref{eq:ratioclosed}) symbolically, and
+confirms that the selection $B/N = 3$ holds at $n_{\max} = 3$ and
+fails at $n_{\max} \in \{1, 2, 4, 5\}$ (Table~\ref{tab:selection}).
+The generalized $S^d$ identity of \S\ref{sec:s3_specificity} is
+pinned separately in \texttt{tests/test\_paper2\_corrections.py}.
+
+
+\subsection{Triple selection at $n_{\max}=3$}\label{sec:triple_selection}
+
+The Sprint-A internal verification~\cite{alpha_sprint_a_memo} makes an
+observation that sharpens the selection principle above. The cutoff
+$n_{\max} = 3$ is selected not by one independent condition but by
+three mutually independent ones, all converging at the same integer:
+\begin{enumerate}
+  \item The Casimir selection principle
+    $B(m)/N(m) = \dim(S^3) = 3$, proven above
+    (Eq.~\ref{eq:ratioclosed} and Table~\ref{tab:selection}).
+  \item The sign pattern of the combination rule. The eight sign
+    assignments $\pi(\pm B \pm F \pm \Delta)$ at $m = 3$ give
+    relative errors from $\alpha^{-1}$ spanning seven orders of
+    magnitude; the $(+,+,-)$ pattern uniquely hits $\alpha^{-1}$
+    within $4.8 \times 10^{-7}$ relative, with the next-best
+    $(+,+,+)$ pattern at $1.1 \times 10^{-3}$---a separation of
+    $3.5$ orders of magnitude at $m = 3$, and no analogous
+    sign-pattern hit at any other integer $m$.
+  \item The agreement of two canonical $\Delta$ forms. The boundary
+    product $\Delta(m) = 1/(|\lambda_m| \cdot N(m-1))$ used below
+    and the Dirac single-level degeneracy form
+    $\Delta(m) = 1/g_m^{\mathrm{Dirac}} = 1/[2(m+1)(m+2)]$ identified
+    in Phase~4H (see \S\ref{sec:formula}) are in general distinct
+    rational functions of $m$; they agree at $m = 3$ (both giving
+    $1/40$) and at no other integer cutoff.
+\end{enumerate}
+
+These three mechanisms are independent: the first is
+representation-theoretic; the second is numerical and uses all three
+$K$-ingredients; the third tests agreement of two independently derived
+invariants. Their convergence at a single finite integer is stronger
+support for the selection of $n_{\max} = 3$ than any one alone. It
+does not, however, derive the combination rule
+$K = \pi(B + F - \Delta)$ itself, which remains a numerical observation
+(Observation~\ref{obs:cross_sector}).
+
+
+\subsection{Fiber $S^1$: Spectral zeta function}
+
+The eigenvalues of the Laplacian on $S^1$ (a circle of circumference
+$2\pi$) are $k^2$ for $k \in \mathbb{Z}$. The spectral zeta function
+is
+\begin{equation}
+  \zeta_{S^1}(s) = 2\sum_{k=1}^{\infty} k^{-2s}
+                 = 2\,\zeta_R(2s),
+```
+
+## Old lines 346-957
+
+```latex
+where $\zeta_R$ is the Riemann zeta function. At $s = 1$, $\zeta_{S^1}(1) = 2\zeta_R(2)$, and $F$ is its $k > 0$ half:
+\begin{equation}\label{eq:fiber}
+  F = \tfrac12\,\zeta_{S^1}(1) = \zeta_R(2) = \frac{\pi^2}{6}.
+\end{equation}
+This is the zeta-regularized spectral invariant of the photon gauge
+phase circle. Equivalently, $F$ is a Dirichlet series of the Fock
+shell degeneracy,
+$F = D_{n^2}(d_{\max}) := \sum_{n\geq 1} n^2\, n^{-d_{\max}} =
+\zeta_R(2)$, where $n^2$ is the $n$-th $S^3$ shell degeneracy and
+$d_{\max}=4$ is the packing lattice maximum degree (Paper~0),
+linking $F$ to both the Fock projection and the packing axioms.
+
+
+\subsection{Total space $S^3$: Boundary correction}
+
+The total space $S^3$ contributes a finite-size correction from
+the interplay of its eigenvalue spectrum~(\ref{eq:s3eig}) with the
+cumulative state count. At the selected cutoff $n_{\max} = 3$, the
+highest eigenvalue is $\lambda_3 = -(3^2 - 1) = -8$ and the
+cumulative state count through the first non-trivial shell is
+$N(2) = \sum_{n=1}^{2} n^2 = 1 + 4 = 5$. The boundary term is
+\begin{equation}\label{eq:boundary}
+  \boxed{\Delta = \frac{1}{|\lambda_3| \times N(2)}
+                = \frac{1}{8 \times 5} = \frac{1}{40}.}
+                \vphantom{\Bigg|}
+\end{equation}
+The physical significance of this boundary term is not established.
+It may be suggestive of UV/IR mixing on the compact manifold, but
+this interpretation is speculative.
+
+\emph{Fock coupling connection.}  The inter-shell coupling of $\cos\chi$
+in the Gegenbauer eigenbasis (Paper~7) is
+$c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$, and the fourth power of the
+inverse Fock conformal factor is $1/\Omega^4(0) = 1/16$.  At the first shell \emph{outside}
+the $n_{\max} = 3$ cutoff ($n = 4$, $l = 3$; the truncation itself keeps
+$l \le 2$) the Casimir factor is
+$1 - 12/20 = 2/5$, and $(2/5)/\Omega^4(0) = 1/40 = \Delta$.  The
+boundary term thus equals a composite of two geometric quantities just
+beyond the angular-momentum edge of the Paper~2 truncation (an
+Observation; the coupling itself is $c^2(4,3) = 1/10$).
+
+\emph{APS-shape observation.} The minus sign on $\Delta$ in
+$K = \pi(B + F - \Delta)$ is the only sign-flipped boundary-type
+correction appearing in any standard heat-kernel or index-theory
+decomposition on $S^3$~\cite{alpha_sprint_a_memo}. The standard
+Connes--Chamseddine bulk expansion
+$\mathrm{Tr}\,f(D/\Lambda) \sim \sum_k f_k\,\Lambda^{d-k}\,a_k$
+produces an all-positive Seeley--DeWitt sequence on round $S^3$
+(positive cutoff moments $f_k$, positive bulk curvature invariants
+$a_k$); the only rule in the heat-kernel / index-theory literature
+surveyed (Vassilevich, Connes--Chamseddine, van Suijlekom,
+Connes--van Suijlekom spectral truncations) that puts a $(-)$ next
+to bulk $(+)$ contributions is the Atiyah--Patodi--Singer
+eta-invariant boundary subtraction. Paper~2's
+$\Delta^{-1} = g_3^{\mathrm{Dirac}} = 40$ is
+\emph{shape-compatible} with APS-style boundary subtraction (a
+finite Dirac mode count at a cutoff) but is not literally an APS
+eta-invariant: the $\eta$-invariant of the Camporesi--Higuchi Dirac
+operator on $S^3$ vanishes by symmetry. The APS match is therefore
+a shape-level structural hint, not a derivation.
+
+\emph{Supertrace sign rule.}  The sign structure of
+$K = \pi(B + F - \Delta)$ has a cleaner reading: in the
+Connes--Chamseddine spectral-action framework, the
+\emph{supertrace} $\mathrm{Str} = \mathrm{Tr}_{S} - \mathrm{Tr}_{D}/4$
+(the $1/4$ is a leading-order normalisation only;\ at the exact $S^3$
+traces the bracket does not cancel beyond order zero, Paper~18, and the
+sign reading below does not depend on it) assigns opposite signs to bosonic (scalar Laplace--Beltrami) and
+fermionic (Dirac) contributions via the standard $(-1)^{F}$ grading.
+$B$ and $F$ are both scalar-sector objects (finite Casimir trace and
+Fock-degeneracy Dirichlet series, respectively) and enter with~$(+)$.
+$\Delta$ is a spinor-sector object (Dirac mode-count boundary term)
+and enters with~$(-)$.  The $(+,+,-)$ sign pattern is thus
+consistent with the $(-1)^{F}$ grading (a reading, not a derivation).
+
+\emph{Euler--Maclaurin boundary reading.}  The identification
+$\Delta^{-1} = g_{3}^{\mathrm{Dirac}} = 40$ (Phase~4H, SM-D) gains a
+sharper reading from the Euler--Maclaurin (EM) decomposition of the
+Dirac mode-count sum.  For any cutoff $N$,
+$\sum_{n=0}^{N} g_{D}(n) = \text{integral} + [g_{D}(0) + g_{D}(N)]/2
++ \text{Bernoulli corrections}$; the upper boundary term is
+$g_{D}(N)/2 = (N+1)(N+2)$.  At $N = n_{\mathrm{CH}} = 3$ this equals
+$4 \cdot 5 = 20 = \Delta^{-1}/2$ (corrected 2026-07-03: an earlier
+printing equated the half-degeneracy boundary term with the full
+$\Delta^{-1} = 40$).
+The EM boundary correction thus supplies the single-level degeneracy
+only up to a factor of $2$; the reading is suggestive --- the boundary
+of the spectral-action sum at the selection-principle cutoff --- but
+the identification $\Delta^{-1} = g_{3}^{\mathrm{Dirac}} = 40$ itself
+rests on the Phase~4H closed form, not on Euler--Maclaurin.
+
+\section{The Formula and its Three Homes}\label{sec:formula}
+%======================================================================
+
+Combining the three spectral invariants of the previous section, we
+define the \textit{coupling constant}:
+\begin{equation}\label{eq:K}
+  K = \pi\!\left(B + F - \Delta\right)
+    = \pi\!\left(42 + \frac{\pi^2}{6} - \frac{1}{40}\right).
+\end{equation}
+Numerically,
+\begin{equation}
+  K = \pi\,(42 + 1.644934 - 0.025000)
+    = \pi \times 43.619934
+    = 137.036064.
+\end{equation}
+
+\emph{Structural home of the external $\pi$.} The external $\pi$
+prefactor in Eq.~(\ref{eq:K}) has a volume-factor
+identification~\cite{alpha_sprint_a_memo}:
+\begin{equation}\label{eq:pi_hopf_measure}
+  \pi \;=\; \frac{\mathrm{Vol}(S^2)}{4}
+         \;=\; \frac{\mathrm{Vol}(S^3)}{\mathrm{Vol}(S^1)}
+         \;=\; a_0^{2},
+\end{equation}
+where $a_0 = \sqrt{\pi}$ is the zeroth Seeley--DeWitt coefficient on
+unit $S^3$ in the four-component spinor normalisation ($\dim_S = 4$;\
+with Paper~28's two-component multiplicity it is $\sqrt{\pi}/2$). The three forms are algebraically equivalent via the
+Hopf submersion identity
+$\mathrm{Vol}(S^3) = \tfrac{1}{4}\,\mathrm{Vol}(S^2) \cdot \mathrm{Vol}(S^1)$
+($2\pi^2 = \tfrac14 \cdot 4\pi \cdot 2\pi$).
+The reading is ``unit-sphere solid angle per chiral charge'':
+$\mathrm{Vol}(S^2) = 4\pi$ is the area of the unit two-sphere (not a
+Hopf-base quantity), normalized by the Dirac chirality count;\ the
+quotient is $\pi = \mathrm{Vol}(S^3)/\mathrm{Vol}(S^1)$. This identification
+categorically separates the external $\pi$ (the $k = 0$ volume slot,
+M1) from the internal $\pi^2$ of $F = \zeta_R(2)$ (second-order
+Riemann-zeta sector) and from the absence of $\pi$ in $B$ and
+$\Delta$ (rational sectors). It is an entry \emph{inside} Paper~18's
+master-Mellin grid (the $k = 0$ slot of
+$\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$, Paper~18~\S III.7 and
+Paper~55), not a new entry outside it.
+
+The physical $\alpha$ approximately satisfies (to $8.8\times10^{-8}$
+relative; an Observation) the self-consistency condition
+\begin{equation}\label{eq:selfconsistent}
+  \frac{1}{\alpha} + \alpha^2 = K,
+\end{equation}
+which, upon multiplication by $\alpha$, yields the depressed cubic
+\begin{equation}\label{eq:cubic}
+  \boxed{\alpha^3 - K\alpha + 1 = 0.}
+\end{equation}
+This cubic has three real roots (discriminant $4K^3 - 27 > 0$). The
+physical root is the smallest positive one, corresponding to
+perturbative QED ($\alpha \ll 1$).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline\hline
+Quantity & Value & Source \\
+\hline
+$K$ & $137.036064$ & Eq.~(\ref{eq:K}) \\
+$\alpha^{-1}$ (formula) & $137.036011$ & Eq.~(\ref{eq:cubic}) \\
+$\alpha^{-1}$ (CODATA 2018) & $137.035999\ldots$ & Experiment \\
+\hline
+Relative error & $8.8 \times 10^{-8}$ & \\
+\hline\hline
+\end{tabular}
+\caption{Comparison of the Hopf bundle formula with the experimental
+value.}
+\label{tab:comparison}
+\end{table}
+
+%----------------------------------------------------------------------
+\subsection{The structural question and the verdict of the Phase 4B--4I
+program}\label{sec:structural_question}
+%----------------------------------------------------------------------
+
+The three ingredients $B = 42$, $F = \pi^2/6$, and $\Delta = 1/40$ enter
+Eq.~(\ref{eq:K}) as an additive combination. A natural question is
+whether they share a common spectral generator: a single construction
+on the geometry of the electron (here, a sector of $S^3$) that
+simultaneously produces all three. Over the period 2025--2026 we
+carried out an extended structural-decomposition program, documented in
+detail in the project's change log, to test this hypothesis across a
+wide range of spectral-theoretic mechanisms.
+
+The program ran for eight phases (4B through 4I), plus the Sprint-A
+and Sprint K-CC follow-ons, and eliminated twelve
+distinct mechanisms:
+Hopf-twist spectral comparison on $S^1 \times S^2$;
+packing-$\pi$ hypothesis with $\pi$ forced by Paper~0 axioms;
+scalar Hopf graph morphism between $S^3$ and $S^2$;
+$S^1$ fiber Fock-weight traces (discrete and continuous);
+$S^5$ spectral geometry;
+$\zeta$-combination search for $\Delta$;
+the Standard-Model running / one-loop vacuum polarization origin for
+$\Delta$;
+and most recently, the Dirac-on-$S^3$ lift of $B$, $F$, and $\Delta$ as
+a common generator (Tier 1, 2026).
+
+The program produced four positive structural identifications, each of
+which resolves the internal content of one of the three ingredients but
+does not unify them:
+\begin{enumerate}
+  \item $\kappa \leftrightarrow B$ via the Fock momentum-space weight
+    (Phase 4B track~$\alpha$-C): the value $1/16$ of the matched
+    kinetic scale $\kappa$ of Paper~7 enters an exact rational identity
+    with the Casimir trace $B$ at the selection cutoff $m=3$ (an
+    arithmetic identity in the number $1/16$;\ $\kappa$ itself only
+    matches the graph's band edge, and its coincidence with the Fock
+    Jacobian $1/16$ is an Observation).
+  \item $F$ as the scalar Fock-degeneracy Dirichlet series at the
+    packing exponent (Phase 4F track~$\alpha$-J): with $g_n = n^2$ the
+    degeneracy of the $n$-th $S^3$ shell,
+    \begin{equation}\label{eq:F_dirichlet}
+      F \;=\; D_{n^2}(s)\Big|_{s = d_{\max}}
+        \;=\; \sum_{n\geq 1}\,\frac{n^2}{n^{s}}\Bigg|_{s=4}
+        \;=\; \zeta_R(2) \;=\; \frac{\pi^2}{6},
+    \end{equation}
+    where $d_{\max}=4$ is the maximum degree in Paper~0's packing
+    axioms.
+  \item $\Delta^{-1}$ as a single-level Dirac degeneracy on $S^3$
+    (Phase 4H track SM-D): with the Camporesi--Higuchi spectrum
+    $|\lambda_n|_{\text{Dirac}} = n + 3/2$ and degeneracy
+    $g_n^{\text{Dirac}} = 2(n+1)(n+2)$ on unit $S^3$,
+    \begin{equation}\label{eq:Delta_dirac}
+      \Delta^{-1} \;=\; g_3^{\text{Dirac}} \;=\; 2 \cdot 4 \cdot 5 \;=\; 40,
+    \end{equation}
+    with the Paper-2 cutoff value $n=3$ being the unique integer at
+    which this identity holds.
+  \item $\zeta(3)$ natively in the Dirac sector at $s = d_{\max}$
+    (Tier 1 track~D3, 2026): the Dirac analog of
+    Eq.~(\ref{eq:F_dirichlet}) evaluates to
+    \begin{equation}\label{eq:D_dirac_zeta3}
+      D_{g_n^{\text{Dirac}}}^{\text{Fock}}(4)
+      \;=\; \sum_{m\geq 1}\frac{2m(m+1)}{m^4}
+      \;=\; 2\,\zeta_R(2) + 2\,\zeta_R(3)
+      \;=\; \frac{\pi^2}{3} + 2\,\zeta_R(3),
+    \end{equation}
+    a closed form mixing $F$ with the Apéry constant $\zeta(3)$. We
+    return to this in \S\ref{sec:zeta3_aside}.
+\end{enumerate}
+
+The combined verdict of Phases 4B--4I is stated in the following
+summary.
+
+\begin{theorem}[Three homes]\label{thm:three_homes}
+The three ingredients $B$, $F$, $\Delta$ of the combination rule
+(an Observation;\ Eq.~\eqref{eq:K}) have the following canonical
+spectral homes on $S^3$:
+\begin{itemize}
+  \item[$(B)$] Finite truncated Casimir trace on the scalar
+    Laplace--Beltrami spectrum at the selection cutoff $m = 3$, with
+    degeneracy weight $(2l+1)\,l(l+1)$.
+  \item[$(F)$] Infinite Dirichlet series of the scalar Fock-shell
+    degeneracy at the packing exponent,
+    $F = \sum_{n} n^2 \cdot n^{-d_{\max}} = \zeta_R(2)$.
+  \item[$(\Delta)$] Reciprocal of the single-level Dirac degeneracy at
+    the selection cutoff, $\Delta^{-1} = g_3^{\text{Dirac}} = 40$.
+\end{itemize}
+These three objects live in two different spectral sectors of $S^3$ (the
+scalar and spinor Laplace--Beltrami sectors); they are three different
+object types (finite trace, infinite Dirichlet series, single-level
+degeneracy).
+\end{theorem}
+\noindent \textbf{[OBSERVATION]} No single spectral construction on $S^3$ generating all
+three has been exhibited:\ twelve single-mechanism derivations have been
+eliminated (an empirical record, not a theorem;\ cf.\ the E6 scope
+remark of Paper~32).
+
+\begin{observation}[Cross-sector sum]\label{obs:cross_sector}
+% [retracted 2026-09-29: k-match-inside-theorem] -- the numerical match of
+% the combination rule previously sat inside the theorem environment; it is
+% an Observation and is stated here, outside the theorem.
+The combination rule $K = \pi(B + F - \Delta)$ is therefore a
+\emph{cross-sector sum} of three ingredients with separate algebraic
+origins. Its approximate validity (to $4.8\times 10^{-7}$ for $K$
+itself;\ to $8.8\times 10^{-8}$ through the cubic's root) is a
+structural mystery, in the sense that the sum $B + F - \Delta$ comes
+within that margin of $\alpha^{-1}/\pi$ through no currently known
+common-generator mechanism. This is a numerical observation, not a
+consequence of Theorem~\ref{thm:three_homes}.
+\end{observation}
+
+Theorem~\ref{thm:three_homes} is a structural statement about how each
+ingredient arises, not a proof of Eq.~(\ref{eq:K}). The combination
+rule itself \emph{remains a numerical observation}. What the Phase 4B--4I program
+has achieved is to move the open question from ``how is each piece
+derived'' (answered by the four positive identifications above) to
+``why does the cross-sector sum close to $\alpha^{-1}/\pi$.''
+
+%----------------------------------------------------------------------
+\subsection{The three obstructions to unification}\label{sec:obstructions}
+%----------------------------------------------------------------------
+
+The Tier 1 Dirac-on-$S^3$ sprint of 2026 (tracks D1--D5) was the last of
+the twelve mechanisms tested. Because the Dirac sector was the most
+structurally promising (it already contained $\Delta^{-1} = 40$ as a
+clean identity), a detailed record of why it also fails to lift $B$ and
+$F$ is worth inlining. The arguments are short and closed-form.
+
+\paragraph{Obstruction 1 (to lifting $B$).}
+The scalar Laplacian on $S^3$ has a zero mode at $(n=1, l=0)$ whose
+Casimir weight $l(l+1)$ vanishes. This gives the closed-form identity
+\begin{equation}\label{eq:Bclosed_repeat}
+  B(m) \;=\; \frac{m(m-1)(m+1)(m+2)(2m+1)}{20},
+\end{equation}
+with an explicit factor $(m-1)$ enforced by the zero mode. The Dirac
+operator on $S^3$ has no zero mode: $|\lambda_n| = n+3/2 \geq 3/2$, and
+the ground-level contribution $g_0^{\text{Weyl}}\cdot|\lambda_0|^k$ is
+strictly positive for every $k \geq 0$. Cumulative Dirac/Weyl traces
+therefore have closed forms
+\begin{equation}
+  \sum_{n=0}^{N} g_n^{\text{Dirac}}
+  \;=\; \frac{2(N+1)(N+2)(N+3)}{3},
+  \qquad
+  \sum_{n=0}^{N} g_n^{\text{Weyl}}
+  \;=\; \frac{(N+1)(N+2)(N+3)}{3},
+\end{equation}
+neither of which carries the $(m-1)$ factor of $B(m)$. The cleanest
+single-point coincidence is at Paper~2's cutoff $m=3$:
+$|\lambda_{m-1}|\cdot g_{m-1}^{\text{Weyl}} = (7/2)\cdot 12 = 42 = B(3)$,
+which holds because $(m-1)(m+2) = 10$ at $m=3$ and at no other integer
+$m$.
+
+Paper 2's $B = 42$ therefore lives on the scalar Laplace--Beltrami
+sector of $S^3$ and does not lift to the Dirac spectrum as a universal
+identity. The single-point hit at $m=3$ is a consequence of the
+elementary identity $(m-1)(m+2) = 10$, not a spectral theorem.
+
+\paragraph{Obstruction 2 (to lifting $F$).}
+The Dirac-sector Dirichlet series at $s = d_{\max}=4$ has the closed
+form of Eq.~(\ref{eq:D_dirac_zeta3}), which mixes $F = \zeta_R(2)$
+additively with $\zeta_R(3)$. The mechanism is that the Dirac degeneracy
+factorizes as a mixture of two homogeneity classes,
+\begin{equation}
+  g_m^{\text{Dirac}} \;=\; 2\,m^2 \;+\; 2\,m,
+\end{equation}
+and at $s = 4$ the $m^2$ subchannel produces $2\zeta(2) = 2F$ (the
+scalar F content) while the $m$ subchannel produces $2\zeta(3)$ (a
+channel absent from the scalar degeneracy). $\zeta_R(2)$ and
+$\zeta_R(3)$ are conjecturally $\mathbb{Q}$-linearly independent (open:\
+Apéry's theorem gives only the irrationality of $\zeta_R(3)$);\ granting
+that, no rational combination of Dirac-sector Dirichlet series collapses
+to a rational multiple of $F$.
+The only way to isolate $F$ from the Dirac Dirichlet series is to
+subtract the $2\zeta(3)$ channel by hand, which is equivalent to
+projecting onto the $m^2$ sub-weight, i.e.\ returning to the scalar
+sector.
+
+An equivalent restatement in the Camporesi--Higuchi half-integer index:
+the Hurwitz-regularized Dirac spectral zeta at $s=4$ evaluates to
+\begin{equation}\label{eq:D_dirac_ch}
+  D_{\text{dirac}}^{\text{CH}}(4)
+  \;=\; \sum_{n\geq 0}\frac{2(n+1)(n+2)}{(n+3/2)^{4}}
+  \;=\; \pi^{2} - \frac{\pi^{4}}{12},
+\end{equation}
+an inseparable mixture of $\pi^{2}$ and $\pi^{4}$ with no rational
+multiple of $F$ extractable.
+
+Paper 2's $F = \pi^{2}/6$ therefore lives on the scalar Fock-degeneracy
+arithmetic at the packing exponent and does not lift to the Dirac
+Dirichlet series.
+
+\paragraph{Obstruction 3 (to unifying $\Delta$ with $B$ or $F$).}
+The Orduz $S^{1}$-equivariant decomposition of the Dirac spinor bundle
+over the Hopf fibration $S^{1} \to S^{3} \to S^{2}$ (2026, Tier 1 track
+D4) gives, at the Paper-2 cutoff $n_{\text{CH}} = 3$, a 40-dimensional
+spin-Dirac level with a clean charge-parity factorization
+\begin{equation}\label{eq:Delta_hopf}
+  \Delta^{-1} \;=\; g_{3}^{\text{Dirac}} \;=\; 40
+  \;=\; \underbrace{4 \cdot 5}_{\text{half-integer charges}}
+      + \underbrace{5 \cdot 4}_{\text{integer charges}}
+  \;=\; \underbrace{20}_{(+)\,\text{chirality}}
+      + \underbrace{20}_{(-)\,\text{chirality}}.
+\end{equation}
+This is structurally cleaner than Paper~2's scalar factorization
+$\Delta^{-1} = |\lambda_{3}|\cdot N(2) = 8 \cdot 5$: the Dirac
+decomposition is a single polynomial $g_{n}^{\text{Dirac}} = 2(n+1)(n+2)$
+at a single level, whereas the scalar factorization is a product of two
+distinct cumulative objects. However, the Dirac refinement does not
+produce $B$ or $F$, and the scalar ``8'' in Paper~2's factorization is
+an eigenvalue of $-\Delta_{\text{LB}}$, not a Dirac/spinor quantity.
+The two factorizations of 40 are structurally distinct and
+noncombinable.
+
+Together, obstructions 1--3 close the Dirac-on-$S^{3}$ avenue for
+unifying the three ingredients of $K$. All supporting computations are
+exact sympy symbolic identities; no floating-point evaluation enters
+the arguments above. The base spectrum/degeneracy functions live in
+the tested production module; the obstruction-specific identities
+themselves were computed in the archived sprint drivers and are
+recorded in the memos (they are not implemented in the production
+module). Sources:
+\texttt{geovac/dirac\_s3.py},
+\texttt{debug/dirac\_d2\_memo.md},
+\texttt{debug/dirac\_d3\_memo.md},
+\texttt{debug/dirac\_d4\_memo.md},
+\texttt{docs/dirac\_s3\_verdict.md}.
+
+%----------------------------------------------------------------------
+\subsection{Connection to the framework's rigidity theorems}\label{sec:rigidity_connection}
+%----------------------------------------------------------------------
+
+Theorem~\ref{thm:three_homes} is consistent with, and sharpens, three
+established results elsewhere in the GeoVac framework:
+
+\begin{itemize}
+  \item \textbf{Paper~7 (S$^{3}$ scalar check chain):} the 18 symbolic
+    checks of Paper~7 validate the scalar Laplace--Beltrami on $S^{3}$
+    as the geometric home of the Coulomb spectrum. $B$ and $F$ both
+    live on this sector, reinforcing that Paper~7's $S^{3}$ machinery
+    is the ingredient-generating geometry for two of the three pieces
+    of $K$.
+  \item \textbf{Paper~23 (Fock projection rigidity theorem):} the $S^{3}$
+    conformal projection is unique to the $-Z/r$ potential because only
+    $-Z/r$ produces an $l$-independent spectrum within each $n$-shell.
+    Paper~23 deferred the Dirac-sector analog as an explicit open
+    problem (Explorer Gap \#1, Tier 1 scoping). Theorem~\ref{thm:three_homes}
+    is \emph{compatible} with that rigidity theorem but independent of
+    it: $\Delta$ lives on the spinor spectrum as a single-level
+    degeneracy, not as a manifestation of a Dirac Fock projection.
+    A Dirac analog of the Fock rigidity theorem remains open and is
+    deferred to Tier 2 or beyond.
+  \item \textbf{Paper~24 (HO rigidity theorem):} the Bargmann--Segal
+    lattice is bit-exactly $\pi$-free in rational arithmetic, and
+    Paper~24 finds that $\pi$ enters the Coulomb and the HO side the
+    same two ways, through a measure and through spectral sums, so its
+    placement does not separate them. The Dirac-on-$S^{3}$
+    spectrum of Camporesi--Higuchi is \emph{also} bit-exactly $\pi$-free
+    in rational arithmetic (Tier 1 D1 module, 51/51 symbolic tests),
+    and the $\pi$ content in Eqs.~(\ref{eq:D_dirac_zeta3})
+    and~(\ref{eq:D_dirac_ch}) enters only through the infinite-sum
+    analysis, not through the spectrum itself. The Dirac sector on
+    $S^{3}$ is therefore a \emph{structural twin} of the
+    Bargmann--Segal HO lattice in its rational-arithmetic certification,
+    and the $\pi$ in $K = \pi(B + F - \Delta)$ is read (a reading, not a
+    derivation) as the $M_1$ volume content of $S^3$;\ Paper~24 gives it
+    no Coulomb-specific support.
+\end{itemize}
+
+%----------------------------------------------------------------------
+\subsection{An aside: $\zeta(3)$ in the Dirac sector}\label{sec:zeta3_aside}
+%----------------------------------------------------------------------
+
+Eq.~(\ref{eq:D_dirac_zeta3}) is the first appearance of the Apéry
+constant $\zeta_R(3)$ as a structural object in the GeoVac framework.
+It is produced natively by the weight-$m$ subchannel of the Dirac
+degeneracy $g_{m}^{\text{Dirac}} = 2m(m+1)$ at the Paper-0 packing
+exponent $d_{\max} = 4$.
+
+We emphasize that $\zeta(3)$ is \emph{not} part of the $K$ combination
+rule. It is a \emph{byproduct} of the Dirac sector — a transcendental
+that appears when one asks ``what is the Dirac analog of $F$?'' and
+receives the answer ``$F$ plus $\zeta(3)$, inseparably.''
+
+Structurally, $\zeta(3)$ has the following features within the
+framework:
+
+\begin{itemize}
+  \item It is irrational (Apéry 1978);\ its transcendence and its
+    algebraic independence from $\pi$ are open.
+  \item It is not reachable as an additive term alongside a rational
+    from scalar Laplace--Beltrami spectral constructions on
+    odd-dimensional spheres, as found in Phase~4E track~$\alpha$-I:
+    round-sphere spectral invariants produce
+    integer powers of $\pi$ in volumes, pure rationals in Seeley--DeWitt
+    coefficients and heat-kernel expansions, and $\zeta_{R}(\text{odd})
+    + \log 2$ in spectral determinants, but $\pi^{2}$ and $\zeta(3)$
+    never appear \emph{additively alongside a rational}.
+  \item It first appears additively alongside $\pi^2$ (i.e.\ alongside $F$) in the framework in
+    Eq.~(\ref{eq:D_dirac_zeta3}) as the weight-$m$ subchannel of the
+    Dirac degeneracy series in the integer Fock label $m$ at the packing
+    exponent (the Camporesi--Higuchi series $D(4)$ carries no $\zeta(3)$;\
+    it first appears at $D(5)$).
+\end{itemize}
+
+This suggests — and we flag for future work — that the Paper~18
+exchange-constant taxonomy (intrinsic / calibration / embedding /
+algebraic-implicit / composition / inner-factor input)
+may benefit from a distinction between \emph{even-zeta content} (arising
+from second-order Laplace--Beltrami operators through Jacobi-$\theta$
+inversion, which systematically lowers the power of $\pi$ by $1/2$ at
+each asymptotic order) and \emph{odd-zeta content} (arising from
+first-order spectral operators through half-integer Hurwitz
+identities). We do not add a tier to Paper~18 here; we simply record
+the phenomenology.
+
+$\zeta(3)$ has no role in reproducing $\alpha^{-1}$. Its inclusion in
+the present section is for completeness: the Dirac-on-$S^{3}$ sector
+carries new content beyond what $K$ uses, and that content is worth
+naming.
+
+%----------------------------------------------------------------------
+\subsection{Closure of the structural decomposition program}\label{sec:closure}
+%----------------------------------------------------------------------
+
+With Theorem~\ref{thm:three_homes} and the three obstructions of
+\S\ref{sec:obstructions}, the structural-decomposition program for
+$\alpha$ that began in 2025 and ran through Phases 4B--4I reaches its
+natural stopping point. The program has achieved:
+
+\begin{enumerate}
+  \item A canonical spectral home for each of $B$, $F$, $\Delta$,
+    established in closed form.
+  \item An enumeration of twelve tested mechanisms by which these three
+    ingredients might share a common spectral generator, all eliminated
+    (an empirical record, not an exhaustion).
+  \item Identification of $\zeta(3)$ as a new framework transcendental
+    in the Dirac sector, distinct from the Riemann-zeta-at-even-integer
+    content of the scalar sector.
+  \item The three ingredients of $K/\pi = B + F - \Delta$ are not
+    Seeley--DeWitt coefficients of the perturbative spectral action
+    (the T9 obstruction): $B$ is a finite Casimir trace, $F$ is an arithmetic
+    Dirichlet series, and $\Delta$ is a Dirac mode-count boundary quantity
+    ($\Delta^{-1} = g_3^{\mathrm{Dirac}}$, twice the Euler--Maclaurin
+    boundary term).  (An earlier ``Seeley--DeWitt cancellation
+    theorem'' --- a coefficient ratio of $\dim(S)$ at every order and a
+    vanishing perturbative supertrace --- is withdrawn, 2026-10-02:\ the
+    exact $S^3$ heat traces give ratios $2$, $-1$, $0,\ldots$;\ Paper~18,
+    Note on the Seeley--DeWitt comparison.  The conclusion that $K/\pi$
+    lives entirely in the non-perturbative sector rested on it and is
+    withdrawn with it.)
+% [retracted 2026-10-02: sd-ratio-four]
+\end{enumerate}
+
+The program has \emph{not} achieved a derivation of Eq.~(\ref{eq:K})
+from first principles. The agreement of
+\begin{equation}
+  \pi\!\left(42 + \frac{\pi^{2}}{6} - \frac{1}{40}\right)
+\end{equation}
+with $\alpha^{-1}$ to $4.8 \times 10^{-7}$ relative, and of the cubic's
+root ($1/\alpha = K - \alpha^2$) with $\alpha^{-1}$ to $8.8 \times 10^{-8}$ — that is, about 7 significant figures,
+which no other physically-motivated formula reproduces in the extensive combinatorial search of
+\S\ref{sec:statistical} — remains a structural coincidence of unknown
+origin. We have made the mystery sharper (three spectral homes across
+two sectors of $S^{3}$), but we have not resolved it.
+
+Accordingly, the combination rule retains its status as a
+\emph{numerical observation}. Future work on the structural origin of $\alpha$ within the
+geometric-vacuum framework is, at the time of this writing, on hold.
+The next research direction in the project is the spin-full
+generalization of the composed qubit encoding (Paper~14), which builds
+on the Dirac-on-$S^{3}$ infrastructure developed in the Tier 1 sprint
+but is independent of the $\alpha$ program. That direction has a clean
+engineering motivation (heavy-element relativistic chemistry) and does
+not require the $\alpha$ observation to be explained.
+
+%======================================================================
+% End of Paper 2 §IV rewrite (Tier 1 closure, 2026-04-15)
+%======================================================================
+
+%======================================================================
+\section{Statistical Validation}\label{sec:statistical}
+%======================================================================
+
+A formula involving $\pi$, $42$, and $\pi^2/6$ matching $\alpha^{-1}$
+to $4.8 \times 10^{-7}$ (its cubic's root to $8.8 \times 10^{-8}$)
+could in principle be a numerical
+coincidence. To test this, we performed a systematic combinatorial
+search~\cite{phase2_audit}.
+
+\subsection{Search space}
+
+The search considers formulas of the form $\alpha^{-1} = T(A + B + C)$
+or, equivalently, the cubic $\alpha^3 - T(A+B+C)\alpha + 1 = 0$,
+where:
+\begin{itemize}
+\item $A$, $B$, $C$ are drawn from a pool of spectral quantities:
+  eigenvalues $|\lambda_n|$, degeneracies $n^2$ and $2l+1$, Casimir
+  values $l(l+1)$, cumulative counts $N(n)$, their pairwise products
+  up to~50, and the transcendentals $\zeta(2)$, $\zeta(3)$, $\zeta(4)$,
+  $\ln 2$, $\pi$, $\pi^2$ (743 unique term values total).
+\item $T$ ranges over 14 transcendental prefactors: $\pi$, $2\pi$,
+  $\pi^2$, $\pi/2$, $4\pi$, $4\pi^2$, $1/(2\pi)$, $1$, $2$,
+  $1/2$, $\pi/4$, $\pi/6$, $1/\pi$, $\sqrt{\pi}$.
+\end{itemize}
+
+Both linear ($\alpha^{-1} = T \cdot S$) and cubic
+($\alpha^3 - T \cdot S \cdot \alpha + 1 = 0$) interpretations are
+tested, giving $1.92 \times 10^9$ total formulas.
+
+\subsection{Results}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrr}
+\hline\hline
+Threshold & Hits & Fraction \\
+\hline
+$10^{-2}$          & 1{,}283{,}592  & $6.7 \times 10^{-4}$ \\
+$10^{-3}$          &   125{,}027    & $6.5 \times 10^{-5}$ \\
+$10^{-4}$          &    14{,}476    & $7.5 \times 10^{-6}$ \\
+$10^{-5}$          &       682      & $3.5 \times 10^{-7}$ \\
+$10^{-6}$          &        37      & $1.9 \times 10^{-8}$ \\
+$10^{-7}$          &        11      & $5.7 \times 10^{-9}$ \\
+$8.8\times 10^{-8}$ &       10      & $5.2 \times 10^{-9}$ \\
+\hline\hline
+\end{tabular}
+\caption{Hit distribution across precision thresholds. The hit
+fraction scales approximately linearly with threshold, consistent with
+a uniform distribution in $\alpha^{-1}$ space.}
+\label{tab:hits}
+\end{table}
+
+At the paper's precision of $8.8 \times 10^{-8}$, only 10 formulas
+out of $1.92 \times 10^9$ match as well or better, yielding
+\begin{equation}
+  \boxed{p\text{-value} = 5.2 \times 10^{-9}.}
+\end{equation}
+The 10 formulas that beat the paper's precision involve combinations
+such as $4\pi(5/49 + 14/15 + \pi^2)$ that lack physical
+interpretation in the Hopf bundle context. The paper's formula is the
+only one among the top matches with a coherent geometric narrative.
+
+The formula thus ranks among the top $\sim\!10$ of a
+$1.92\times10^{9}$-formula search ($p = 5.2\times10^{-9}$ per draw).
+This statistic does not account for the unregistered search that
+produced the formula in the first place, and it does not establish
+non-accidentality; it is not a derivation.
+```
+
+## Old lines 961-961
+
+```latex
+\section{The Circulant Structure}
+```
+
+## Old lines 964-974
+
+```latex
+The cubic $\alpha^3 - K\alpha + 1 = 0$ can be realized as the
+characteristic polynomial of a traceless $3 \times 3$ circulant matrix
+(any depressed cubic with unit constant term can be so realized, so the
+realization does not by itself select this cubic).
+
+\subsection{Circulant eigenvalue equation}
+
+Consider the traceless circulant
+\begin{equation}\label{eq:circulant}
+  M = \begin{pmatrix} 0 & b & c \\ c & 0 & b \\ b & c & 0
+      \end{pmatrix},
+```
+
+## Old lines 976-979
+
+```latex
+which has $\mathbb{Z}_3$ symmetry (invariance under cyclic permutation
+of rows and columns). Its characteristic polynomial is
+\begin{equation}
+  \det(M - sI) = -s^3 + 3bc\,s + (b^3 + c^3) = 0.
+```
+
+## Old lines 981-1294
+
+```latex
+Setting $bc = K/3$ and $b^3 + c^3 = -1$ (equivalently,
+$\det M = -1$), this becomes
+\begin{equation}
+  s^3 - Ks + 1 = 0,
+\end{equation}
+which is \textit{exactly} the paper's cubic with $s = \alpha$. The
+eigenvalues of $M$ are the three roots of the cubic.  (The
+characteristic-polynomial shape, the tracelessness, the determinant
+identity $\det M = b^3 + c^3$, and the substitution to
+$s^3 - Ks + 1$ are verified symbolically in
+\texttt{tests/test\_paper2\_ingredients.py}, alongside the $SU(2)$
+structure-constant analog below.)
+
+\subsection{Physical interpretation}
+
+The $\mathbb{Z}_3$ symmetry of the circulant represents
+\textit{democratic coupling}: each of the three objects (labeled $1$,
+$2$, $3$) interacts equally with the other two. In the Hopf bundle
+context, the three objects are the fiber $S^1$, the base $S^2$, and
+the total space $S^3$. Each component contributes a spectral
+invariant; the circulant structure is consistent with a coupling that
+respects the cyclic symmetry of the bundle decomposition (a reading, since
+any depressed cubic with unit constant term admits such a realization).
+
+The $SU(2)$ structure constants $\varepsilon_{ijk}$ exhibit the same
+$\mathbb{Z}_3$ cyclic symmetry, producing a circulant with $b = c = 1$
+and characteristic polynomial $s^3 - 3s - 2 = 0$. The paper's cubic
+has the \textit{same algebraic structure} with coupling strength
+$K/3 \approx 45.7$ instead of~1.
+
+\subsection{Structural content and limitations}
+
+The circulant interpretation is a \textit{structural} realization:\ it
+realizes the self-consistency equation's form, a depressed cubic with
+unit constant term (a realization, not a derivation). These features follow from
+three conditions:
+\begin{enumerate}
+\item Tracelessness: $\mathrm{tr}(M) = 0$ (eliminates the $s^2$ term).
+\item $\mathbb{Z}_3$ symmetry: only two free parameters ($b$, $c$).
+\item Unit determinant condition: $\det(M) = b^3 + c^3 = -1$ (fixes
+  the constant term).
+\end{enumerate}
+
+The condition $\det(M) = -1$ is consistent with the chirality of the
+Hopf map (linking number $+1$) and with the fermionic sign convention
+($\psi \to -\psi$ under $2\pi$ rotation of the $S^1$ fiber), but
+neither identification constitutes a derivation.
+
+The circulant realizes the cubic form (it does not select it among
+depressed cubics), and does not derive \textit{why this specific~$K$}. The single free parameter $bc = K/3$
+encodes the coupling strength, and its value
+$\pi(42 + \pi^2/6 - 1/40)/3$ is not determined by the circulant
+structure alone.
+
+\subsection{Forced Hermiticity and the physical phase}
+
+The coupling parameters $b$, $c$ are necessarily complex conjugates.
+Setting $s = b + c$ and $p = bc = K/3$, the constraint $b^3 + c^3 = -1$
+reduces to $s^3 - Ks + 1 = 0$---the \textit{same cubic} as for
+$\alpha$. For real $b$ and $c$, one requires $s^2 \geq 4K/3$, but all
+three roots satisfy $s_i^2 < 4K/3 \approx 182.7$ (the largest is
+$s_1^2 \approx 137.1$). Therefore~\cite{phase3_audit}
+\begin{equation}\label{eq:polar}
+  b = \sqrt{K/3}\; e^{i\theta}, \qquad
+  c = \sqrt{K/3}\; e^{-i\theta},
+\end{equation}
+with universal modulus $|b| = |c| = \sqrt{K/3} \approx 6.76$. The
+determinant condition fixes the phase:
+\begin{equation}\label{eq:phase}
+  \cos(3\theta) = -\frac{1}{2(K/3)^{3/2}} \approx -0.00162.
+\end{equation}
+Three solutions separated by ${\sim}120^\circ$ correspond to the
+three roots. The physical root $\alpha$ has $\theta \approx 3\pi/2$
+(nearly pure imaginary coupling: $b \approx -i\sqrt{K/3}$).
+
+The circulant $M$ is therefore \textit{Hermitian}, not real symmetric,
+consistent with the $U(1)$ gauge structure of the Hopf fiber: the
+off-diagonal coupling carries a phase, as a connection on a principal
+$U(1)$-bundle would (a consistency, not a derivation).
+
+\subsection{Self-referential property}
+
+The fact that $b + c$ satisfies the same cubic as $\alpha$ is
+structural, not coincidental. For any circulant of the
+form~(\ref{eq:circulant}), the $k = 0$ discrete Fourier transform (DFT)
+mode is $\lambda_0 = b + c$, which is by construction an eigenvalue
+of~$M$ and therefore satisfies its characteristic polynomial. All three
+eigenvalues of $M$ are the three cubic roots, regardless of which root
+$b + c$ equals~\cite{phase3_audit}.
+
+The circulant decomposition does not factor $K$ into independent
+spectral invariants of individual bundle components. The modulus
+$|b| = \sqrt{K/3}$ and the phase $\theta$ are both determined by $K$
+alone. The irreducible datum remains $K$ itself.
+
+
+%======================================================================
+\section{What Is and Is Not Established}
+%======================================================================
+
+Following the epistemic standards of the GeoVac program, we assess
+each link in the hypothetical derivation chain.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{clc}
+\hline\hline
+Link & Description & Status \\
+\hline
+1 & Hopf bundle as geometric arena & $\checkmark$ \\
+2 & Spectral data $\to$ $B$, $F$, $\Delta$ & $\bullet$\footnotemark[1] \\
+3 & Combination rule $K = \pi(B+F-\Delta)$ & $\times$ \\
+4 & $\mathbb{Z}_3$ circulant $\to$ cubic & $\circ$\footnotemark[2] \\
+5 & $\alpha$ from cubic root & $\checkmark$ \\
+\hline\hline
+\end{tabular}
+\caption{Derivation chain assessment.
+$\checkmark$ = established,
+$\bullet$ = largely established (see footnote),
+$\circ$ = partially established,
+$\times$ = not established.}
+\label{tab:chain}
+\end{table}
+\footnotetext[1]{The selection principle $B/N = 3$ is algebraically
+proven (Sec.~III), and the Casimir identity
+$\langle C_3\rangle_n = C_4(n)$ connects $B$ to the $SO(4)$
+representation theory. The remaining gap: why the degeneracy-weighted
+Casimir trace specifically (rather than some other spectral quantity)
+for each bundle component. The second pointer to $n_{\max} = 3$
+(Sec.~\ref{sec:second_selection}) is an Observation-tier numerical
+coincidence, not independent proof.}
+\footnotetext[2]{The Hermiticity of the circulant follows once all
+three cubic roots satisfy $s_i^2 < 4K/3$ --- verified numerically
+and pinned in \texttt{tests/test\_paper2\_corrections.py} --- making
+$b$ and $c$ necessarily complex conjugates (Sec.~VI\,D). This is
+consistent with $U(1)$ gauge structure but does not yet derive
+$bc = K/3$.}
+
+\textbf{Link~1} (established): The Hopf fibration is the unique
+principal $U(1)$-bundle over $S^2$ with $c_1 = 1$. That the hydrogen
+bound-state problem is conformally equivalent to free motion on $S^3$
+is Fock's result, whose chain Ref.~\cite{paper7} verifies symbolically.
+Using the Hopf bundle as a geometric framework is a natural choice.
+
+\textbf{Link~2} (largely established): The selection principle
+$B/N = 3$ is proven algebraically to select $n_{\max} = 3$ uniquely
+(Sec.~III). The per-shell Casimir identity
+$\langle C_3\rangle_n = C_4(n) = (n^2-1)/2$ establishes that $B$ is
+the trace of the $SO(3)$ Casimir over the truncated Peter--Weyl
+decomposition of $L^2(S^3)$, connecting it to the representation
+theory of $SO(4)$. The remaining gap is the \textit{choice} of which
+spectral quantity to extract from each bundle component: why the
+Casimir trace for the base (not, say, the spectral determinant), why
+$\zeta(2)$ for the fiber (not $\zeta(1)$ or $\zeta(3)$), and why
+$1/(|\lambda_3| \times N(2))$ for the boundary.
+
+\textbf{Link~3} (not established): This is the critical gap. No
+principle selects the specific additive combination
+$K = \pi(B + F - \Delta)$ over alternatives such as
+$K = \pi B + F - \Delta$ or $K = \pi B F / \Delta$. The overall
+prefactor $\pi$ could be argued as natural (it appears in the
+stereographic projection), but the additive structure is unexplained.
+A systematic search over spectral determinants, Ray--Singer analytic
+torsion, Seeley--DeWitt heat kernel coefficients, and
+Atiyah--Patodi--Singer invariants of the three bundle components finds
+no natural combination that reproduces $K$ or $K/\pi$. The spectral
+determinant product
+$\det'(\Delta_{S^1}) \cdot \det'(\Delta_{S^3})/\pi \approx 41.957$
+approaches $B = 42$ to $0.1\%$ (see Sec.~VIII) but the gap is not
+bridgeable by known spectral corrections. The combination rule mixes a
+discrete combinatorial quantity ($B = 42$) with a continuous spectral
+invariant ($F = \zeta(2)$) in a way that has no known precedent in spectral
+geometry.
+
+\textit{Connes--Chamseddine spectral action.}
+The Dirac heat kernel on unit~$S^3$ has a Seeley--DeWitt expansion
+that terminates at exactly two terms (by the Jacobi theta modular
+identity): $K(t) = (\sqrt{\pi}/2)\,t^{-3/2}
+- (\sqrt{\pi}/4)\,t^{-1/2} + O(e^{-\pi^2/t})$, all $a_k = 0$ for
+$k \geq 2$.  Setting
+$\operatorname{Tr} e^{-D^2/\Lambda^2} = K/\pi$ gives the depressed
+cubic $2\Lambda^3 - \Lambda = 4(K/\pi)/\sqrt{\pi}$ with Cardano
+closed form
+$\Lambda = \sqrt[3]{A + \sqrt{A^2 - 1/216}}
++ \sqrt[3]{A - \sqrt{A^2 - 1/216}}$,
+$A = (B + F - \Delta)/\sqrt{\pi}$ (half the right-hand side of the
+monic form $\Lambda^3 - \Lambda/2 = 2(B+F-\Delta)/\sqrt{\pi}$;\ an earlier
+version printed $2(B+F-\Delta)/\sqrt{\pi}$, a typo that did not enter the
+value below), yielding
+$\Lambda_\infty = 3.710245\ldots$ (50~dps).
+A sharp cutoff at this~$\Lambda$ includes exactly
+$40 = \Delta^{-1}$~modes, connecting the spectral action to the
+Euler--Maclaurin boundary reading above.  However, the CC framework
+provides the exact functional form but \emph{not} a mechanism to
+fix~$\Lambda$: any target~$T$ has a unique real root (IVT +
+monotonicity), so the match is tautological.  This confirms
+rather than closes the Link~3 gap.
+
+\textbf{Link~4} (partial): The cubic form can be realized by
+$\mathbb{Z}_3$-symmetric coupling (a realization, not a selection), and the $SU(2)$ structure constants
+share this symmetry. But no derivation connects the Hopf bundle to the
+specific circulant with $bc = K/3$.
+
+\textbf{Link~5} (established): Given the cubic, selecting the smallest
+positive root is pure algebra.
+
+The structural choices that remain underived are:
+\begin{enumerate}
+\item Why additive combination $B + F - \Delta$ (not multiplicative)?
+\item Why $\pi$ as the overall prefactor?
+\item Why $\zeta(2)$ specifically for the fiber (not $\zeta(1)$,
+  $\zeta(3)$, etc.)?
+\item Why $1/(|\lambda_3| \times N(2))$ for the boundary (not other
+  spectral ratios)?
+\item Why $\det(M) = -1$?
+\end{enumerate}
+
+\textit{Three-tier composition.} $K = \pi(B + F - \Delta)$ assembles
+three categorically different objects: $B$ (finite Casimir, rational),
+$F$ (infinite Dirichlet series at the packing exponent,
+transcendental), $\Delta$ (boundary product at the truncation edge,
+rational). Computation identifies each piece but finds no common
+generator. The open question is reframed from ``how is each piece
+derived'' to ``why does their additive combination approximately equal
+$\alpha^{-1}$ (to $4.8\times 10^{-7}$; to $8.8\times 10^{-8}$ through the
+cubic's root)''---a structural conspiracy
+about the sum, not a derivation about the parts.
+
+
+%======================================================================
+\section{Discussion}
+%======================================================================
+
+\subsection{Comparison with Wyler's formula}
+
+Wyler's 1969 formula~\cite{wyler1969} also invokes symmetric spaces
+and gives $\alpha^{-1} = 137.03608$, within about $6 \times 10^{-7}$ of
+the measured value, comparable to the agreement of $K$ here. However, Wyler's derivation
+was criticized for lacking a physical mechanism connecting the
+symmetric space volumes to electromagnetic
+coupling~\cite{robertson1971}. The present work improves on this
+situation in two respects: (i)~$S^3$ is the manifold onto which Fock's
+projection provably maps the hydrogen bound-state problem, which
+supplies a geometric (not yet a coupling) mechanism, and (ii)~the
+formula's rank among a $1.92\times10^{9}$-formula search
+($p = 5.2 \times 10^{-9}$ per draw) is quantified, although that
+statistic does not account for the unregistered search that produced
+the formula and does not establish non-accidentality. However, both approaches share the weakness
+of an unjustified combination rule.
+
+\subsection{Comparison with previous approach}
+
+An earlier attempt by the same author~\cite{paper2_old} modeled
+$\alpha^{-1}$ as a ``symplectic impedance'' ratio on the
+paraboloid lattice, achieving $6.2 \times 10^{-5}$ relative error
+with a fitted helical pitch. The present result achieves
+$8.8 \times 10^{-8}$ via the cubic's root---a ${\sim}700\times$
+improvement (${\sim}130\times$ for $K$ itself, at $4.8\times10^{-7}$)---with
+zero free parameters.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\hline\hline
+Method & Error & Free params & Cutoff \\
+\hline
+Symplectic impedance~\cite{paper2_old} & $6.2\times 10^{-5}$ & 1 & $n=5$ \\
+\textbf{Hopf bundle (this work)} & $\mathbf{8.8\times 10^{-8}}$ & \textbf{0} & $n=3$ \\
+\hline\hline
+\end{tabular}
+\caption{Evolution of the geometric approach.}
+\label{tab:evolution}
+\end{table}
+
+
+\subsection{Spectral determinant near-miss}
+
+The zeta-regularized spectral determinants of the bundle components
+are $\det'(\Delta_{S^1}) = 4\pi^2$,
+$\det'(\Delta_{S^2}) = e^{1/2 - 4\zeta'_R(-1)}$, and
+$\det'(\Delta_{S^3}) = \pi\, e^{\zeta(3)/(2\pi^2)}$. The product
+\begin{equation}
+  \frac{\det'(\Delta_{S^1}) \cdot \det'(\Delta_{S^3})}{\pi}
+  = 4\pi^2 e^{\zeta(3)/(2\pi^2)} \approx 41.957
+\end{equation}
+is $0.1\%$ from $B = 42$. Whether this near-miss reflects a deeper
+connection between the Casimir trace and spectral determinants, or is
+merely a coincidence, remains an open question. If a correction term
+derivable from the fibration geometry could bridge the $0.1\%$ gap
+between $4\pi^2 e^{\zeta(3)/(2\pi^2)}$ and~$42$, it would provide a
+path from standard spectral determinants to the Casimir trace,
+potentially grounding Link~2 of the derivation chain
+(Table~\ref{tab:chain}) in established spectral geometry. Replacing $B = 42$
+with this determinant product makes the agreement with CODATA
+$11{,}000\times$ \textit{worse}, confirming that the integer Casimir
+trace is the correct object, not the spectral determinant.
+
+A systematic search over additive corrections to the spectral
+determinant product finds the best candidates to be $+\pi/72$ (0.002\%
+residual) and $+1/24$ (0.003\% residual), but neither is derivable from
+first principles~\cite{phase2_kappa}. The quantity $\pi/72 =
+\pi/(|\lambda_3| \cdot n_{\max}^2)$ could be a finite-size correction,
+and $1/24$ appears in heat kernel coefficients, but both remain
+\textit{ad hoc}. A broader search over simple arithmetic combinations of
+spectral determinants and fibration data finds no exact bridge. This
+strengthens the conclusion that the integer Casimir trace $B = 42$---not
+the spectral determinant---is the correct object for the base invariant.
+
+
+\subsection{Algebraic structure of the cubic's root}
+
+% [retracted 2026-09-29: alpha-cubic-stated-as-law] -- earlier wording made
+% the physical alpha algebraic over Q(pi) and inferred transcendence from
+% that membership; the statement concerns the cubic's root only.
+```
+
+## Old lines 1320-1328
+
+```latex
+\subsection{$S^3$ specificity}\label{sec:s3_specificity}
+
+\textit{A universal algebraic identity.}
+For any round sphere $S^d$, define the \textit{formal} spectral moment
+\begin{equation}\label{eq:B_formal}
+  B_{\mathrm{formal}}(m) \;=\;
+  \tfrac{1}{2}\sum_{k=0}^{m} g_k\,|\lambda_k|,
+  \qquad
+  N(m) \;=\; \sum_{k=0}^{m} g_k,
+```
+
+## Old lines 1330-1337
+
+```latex
+where $\lambda_k = -k(k+d-1)$ and
+$g_k = \binom{k+d}{d} - \binom{k+d-2}{d}$ are the eigenvalues and
+degeneracies of the Laplace--Beltrami operator on $S^d$. At $m = 2$
+these evaluate to $B_{\mathrm{formal}}(2) = \tfrac{1}{2}(d+1)d(d+4)$
+and $N(2) = (d+1)(d+4)/2$, giving
+\begin{equation}\label{eq:universal_identity}
+  \frac{B_{\mathrm{formal}}(2)}{N(2)} \;=\; d
+  \qquad\text{for all } d \geq 1.
+```
+
+## Old lines 1339-1488
+
+```latex
+Setting $B_{\mathrm{formal}}(m)/N(m) = d$ yields the quadratic
+$m^2 + dm - 2(d+2) = 0$, whose unique positive root is $m = 2$
+regardless of~$d$. The dimension-matching condition is therefore a
+universal property of eigenvalue moments on round spheres, not a
+selection principle specific to~$S^3$.
+
+\textit{Why the formula is specific to $S^3$.}
+The quantity $B$ appearing in the formula (Sec.~\ref{sec:triple_selection})
+is \textit{not} $B_{\mathrm{formal}}$. It is the
+degeneracy-weighted trace of the $SO(3)$ \textit{sub}-Casimir
+$l(l+1)$ over the $SO(4) \to SO(3)$ branching of each $S^3$ shell:
+\begin{equation}\label{eq:B_branch}
+  B \;=\; \sum_{n=1}^{m}\sum_{l=0}^{n-1}(2l+1)\,l(l+1).
+\end{equation}
+For $S^3$, $B = B_{\mathrm{formal}}$ because the diagonal
+$SO(3) \subset SO(4)$ embedding has index~1, giving the identity
+$\langle C_{SO(3)}\rangle_n = n(n+2)/2 = |\lambda_n|/2$. For all
+other spheres $S^d$ with $d \neq 3$, $B \neq B_{\mathrm{formal}}$
+and $B/N = d$ has no solution at any integer~$m$.
+
+Three independent properties of $S^3$ underlie this coincidence:
+\begin{enumerate}
+\item $SO(4) \cong (SU(2) \times SU(2))/\mathbb{Z}_2$ is a product
+  group, yielding the clean Clebsch--Gordan branching
+  $l = 0, \ldots, n{-}1$ within each shell. No analogous product
+  structure exists for $SO(d{+}1)$ with $d \neq 3$.
+\item $S^3 \cong SU(2)$ is the only sphere of dimension $\ge 2$ that is a Lie group,
+  enabling the Peter--Weyl decomposition that makes $B$ computable
+  as a representation-theoretic trace.
+\item The embedding index of diagonal $SO(3) \subset SO(4)$ is~1.
+  For the quaternionic Hopf fibration, the corresponding
+  $SO(5) \subset SO(8)$ embedding through $Sp(2) \times Sp(1)$ has
+  index ratio $5/14$, which would give $B/N = 5 \neq 7$ if used as
+  the branching factor.
+\end{enumerate}
+The formula is not one instance of a family parametrized by $d$; it
+exists only for~$S^3$.
+
+\textit{Quaternionic and octonionic Hopf fibrations.}
+Applying the combination rule $K = \pi(B + F - \Delta)$ formally to
+all four Hopf fibrations
+($S^0 \to S^1 \to S^1$, $S^1 \to S^3 \to S^2$,
+$S^3 \to S^7 \to S^4$, $S^7 \to S^{15} \to S^8$) yields
+$1/\alpha \approx 15.4$, $137.036$, $970.0$, and $7164.1$
+respectively~\cite{phase6_hopf}. Only the complex Hopf value matches
+a known coupling constant. The quaternionic value $K/\pi \approx 309$
+satisfies $K_{\mathrm{quat}}/K_{\mathrm{em}} \approx 7.08 \approx
+\dim(S^7)$, but the $1.1\%$ deviation from~7 and the absence of any
+coupling at $\alpha_W \approx 1/29.5$ rule out a weak-interaction
+interpretation. The representation-theoretic obstructions above
+show that without the $SO(4)$ product structure the branching-based
+$B$ has no natural generalization; they do not explain why the
+combination takes the value it does, which remains an Observation.
+
+\textit{Dynamical specificity: the Fock projection rigidity theorem.}
+The representation-theoretic arguments above show that the
+\textit{algebraic structure} of $B = 42$ is unique to $S^3$. An
+independent \textit{dynamical} argument reaches the same conclusion
+from the Fock projection itself, rather than from the $SO(4)$
+branching combinatorics. The rigidity theorem (established in the
+nuclear extension of the GeoVac framework) states that the
+stereographic projection $p_0 = \sqrt{-2 E_n}$ maps a one-electron
+central-field Hamiltonian onto the free Laplacian on $S^3$ if and
+only if the spectrum $E_{nl}$ is independent of $l$ within each
+shell~$n$. The Coulomb potential $-Z/r$ is the unique central
+potential exhibiting this accidental degeneracy, by the $SO(4)$
+symmetry generated by the Runge--Lenz vector. Any deformation
+$V(r) = -Z/r + \delta V(r)$ with $\delta V \not\equiv 0$ lifts the
+$l$-degeneracy and breaks the conformal equivalence between the
+radial Schr\"odinger problem and the $S^3$ Laplace--Beltrami operator.
+The harmonic oscillator, Woods--Saxon, square well, and Yukawa
+potentials all share the angular momentum algebra ($SO(3)$ Gaunt
+selection rules) of the Coulomb problem, but none of them carries
+the Fock projection because none has the $SO(4)$ accidental
+degeneracy. The angular sparsity of the GeoVac
+framework~\cite{paper22_sparsity} is universal across spherical
+fermion systems; the $S^3$ conformal projection and the Hopf bundle
+structure built upon it are Coulomb-specific.
+
+The implication for the present observation is that any derivation of
+$\alpha$ from spectral geometry must use the Coulomb-specific
+features of $S^3$ --- the accidental degeneracy, the Runge--Lenz
+vector, and the conformal weight assignments that the Fock projection
+imposes --- not merely the $SO(3)$ angular momentum structure that
+$S^3$ shares with other manifolds. As a numerical check on this
+narrowing, the analog of $B = 42$ in the nuclear shell model
+($j$-coupled $(2j+1)\,j(j+1)$ trace at the same truncation
+$n_{\max} = 3$) evaluates to $103.5$ and shows no coincidence with
+any quantity in $K = \pi(B + F - \Delta)$ at the $p < 10^{-3}$
+level~\cite{track_nj_alpha_memo}. This is consistent with the
+structural argument: nuclear shell model angular momentum lives on
+$SO(3)$ with broken $SO(4)$, lacks the Fock projection, and
+therefore cannot be expected to produce the same combinatorial
+constants as the Coulomb-specific calculation.
+
+The Bargmann--Segal lattice for the harmonic oscillator (Paper~24,
+\cite{paper24_bargmann}) has a natural discretization on the Hardy space
+of $S^5$ that is $\pi$-free in exact rational arithmetic, with a linear
+projection $E_N = \hbar\omega(N + 3/2)$; the Coulomb label lattice is
+$\pi$-free too.  Whether the $\pi$ in
+$K = \pi(B + F - \Delta)$ tracks the Coulomb/oscillator difference is
+not established: the Kustaanheimo--Stiefel lift shows $\pi$ entering
+both sides through a measure and spectral sums (Paper~24), so the
+calibration-$\pi$ reading once given here is withdrawn.
+
+
+\subsection{Transition operators and the Hopf geometry}
+
+The discrete label lattice (whose edge Laplacian is not a hydrogen
+operator, Paper~7) has two types of lattice
+transitions~\cite{phase2_kappa}: $T_\pm$ (changing $n$ by $\pm 1$,
+preserving $l$ and $m$) and $L_\pm$ (changing $m$ by $\pm 1$, preserving
+$n$ and $l$). We observe that these are suggestive of (by analogy) the Hopf
+fibration:
+\begin{itemize}
+\item $L_\pm$ shifts the magnetic quantum number $m$, the eigenvalue of
+  $L_z$. This is an analogy with the Hopf fiber, not an identification:
+  $L_z$ generates a rotation of a single coordinate plane of
+  $\mathbb{R}^4 \supset S^3$, whereas the Hopf-fiber $U(1)$ is an
+  isoclinic rotation of two orthogonal planes, generated by one chiral
+  factor $J^{L}_z$ (or $J^{R}_z$) of $SO(4) = SU(2)_L\times SU(2)_R$,
+  with $L_z = J^{L}_z + J^{R}_z$.
+\item $T_\pm$ is radial motion on $S^3$, perpendicular to the fiber.
+  Changing $n$ moves between eigenspaces of $\Delta_{S^3}$; in the Fock
+  stereographic picture, this changes the ``latitude'' on~$S^3$.
+\end{itemize}
+The angular momentum $l$ is conserved by both transitions---it labels
+the $SO(3)$ representation within each $SO(4)$ shell but does not
+contribute an independent transition type. The base $S^2$ constrains
+state labeling (which $l$, $m$ values exist) but does not generate
+lattice transitions. The value $d_{\max} = 2 \times 2 = 4$ simply counts
+two motion types $\times$ two directions on each $\ell$-block, which is
+a two-dimensional grid (Paper~0~\S VI);\ it is a property of the chosen
+edge set, not a consequence of the Fock projection collapsing base
+directions (a reading printed here before 2026-09-28, withdrawn:\ the
+$2 d_{\max} = 8$ it feeds is a grid band edge, not an $S^3$ quantity).
+
+
+\subsection{A second pointer to $n_{\max} = 3$ (Observation)}\label{sec:second_selection}
+
+The topological maximum degree $d_{\max} = 4$ gives an asymptotic
+bipartite spectral radius bound of $2 d_{\max} = 8$ for the graph
+Laplacian~\cite{phase1_kappa}.  This bound is the band edge of large
+two-dimensional grids (each $\ell$-block of the lattice is a grid,
+Paper~0~\S VI), not an $S^3$ quantity:\ the graph Laplacian does not
+converge to $\Delta_{S^3}$ (Paper~7).  The continuum $S^3$
+Laplace--Beltrami eigenvalue $|\lambda_n| = n^2 - 1$ numerically equals
+this grid band edge uniquely at $n = 3$:
+\begin{equation}\label{eq:second_selection}
+  n^2 - 1 = 2\,d_{\max} \quad\Longrightarrow\quad n_{\max} = 3.
+```
+
+## Old lines 1490-1593
+
+```latex
+\textbf{[OBSERVATION]} This numerical coincidence gives a second pointer
+to $n_{\max} = 3$, independent of the Casimir selection
+$B/N = \dim(S^3)$;\ it is not a discrete--continuous compatibility
+condition, since it equates a grid band edge with a continuum
+eigenvalue.
+
+We note a subtlety: $d_{\max} = 4$ is the topological maximum degree for
+interior nodes of the lattice class (first realized at $n_{\max} = 4$),
+not the realized maximum at $n_{\max} = 3$ (which is~$3$, since all 14
+nodes are boundary nodes)~\cite{phase2_kappa}. The pointer should be
+read as:\ the continuum $S^3$ eigenvalue at $n_{\max}$ numerically
+matches the \textit{asymptotic} spectral radius bound of the lattice
+topology (a grid band edge).
+
+Relation to $\kappa$: the matched kinetic scale is
+$\kappa = E_1/\lambda_{\max}$ with $\lambda_{\max} \to 2 d_{\max} = 8$,
+and $8 = n^2 - 1$ at $n = 3$, so the coincidence can be restated as
+$\kappa = -1/(2(n^2-1))$ at $n_{\max} = 3$, giving
+$\kappa = -1/16$~\cite{paper7}.  This is the same Observation restated,
+not an independent route to $\kappa$.
+
+\textit{Status:} this is a numerical observation, not a derivation, and
+not a selection principle on a par with the proven $B/N = 3$ result.
+The proven selection ($B/N = 3$) and this second pointer
+($2d_{\max} = n^2 - 1$) are algebraically independent; whether they
+share a common origin in the Hopf fibration geometry is an open
+question.
+
+
+\subsection{Open questions}
+
+\begin{enumerate}
+\item \textit{Derive the combination rule} from a path integral or
+  spectral determinant identity on the Hopf bundle. This is the
+  critical gap (Link~3 in Table~\ref{tab:chain}).  The
+  Connes--Chamseddine spectral action on continuum~$S^3$ provides an
+  exact depressed cubic with Cardano closed form but does not select
+  the cutoff~$\Lambda$ autonomously (see Sec.~VII).
+
+\item \textit{Connect the $\mathbb{Z}_3$ circulant} to the
+  differential geometry of the Hopf connection. The $SU(2)$ structure
+  constants share the cyclic symmetry; can the coupling strength
+  $K/3$ be derived from the connection curvature?
+
+\item \textit{Understand the residual $8.8 \times 10^{-8}$.} Higher-order
+  spectral invariants (e.g., the $\eta$-invariant of $S^3$, which
+  vanishes by symmetry), gravitational corrections, or weak-mixing
+  contributions could account for the discrepancy. One-loop QED
+  running of the formula's $\alpha$ from the electron mass to $1$~TeV
+  shows that the formula's value corresponds to the Thomson limit
+  ($q^2 \to 0$), matching CODATA most closely at $\mu \approx m_e$.
+  The residual is intrinsic to the formula, not explained by
+  renormalization group running.
+
+  An internal structural check~\cite{alpha_sprint_a_memo} finds that the
+  post-cubic residual
+  $R_{\mathrm{res}} = K - \alpha^{-1} - \alpha^{2}$ (where the
+  $\alpha^{2}$ term is the trivial offset from the cubic) matches
+  $\pi^{3} \alpha^{3}$ to within $0.25\%$ at 80-digit precision:
+  $R_{\mathrm{res}} = 1.2079 \times 10^{-5}$,
+  $\pi^{3}\alpha^{3} = 1.2049 \times 10^{-5}$,
+  $R_{\mathrm{predict}}/(\pi^{3}\alpha^{3}) = 1.0025$. The $\pi^{3}$
+  prefactor is uniquely picked out among $\{\pi^{2}, \pi^{3}, \pi^{4}\}$
+  (the other candidates are off by factors of $\sim 3$). A natural
+  structural reading is $\pi^{3} = \mathrm{Vol}(S^{5})$, connecting to
+  the Bargmann--Segal $S^{5}$ lattice of Paper~24~\cite{paper24_bargmann}.
+  An internal cross-check computes the Seeley--DeWitt coefficients
+  $a_{0}, a_{2}, a_{4}$ on round $S^{5}$ (each factorizes as
+  $\pi^{3} \times \text{rational}$) and finds that no such coefficient
+  produces a contribution at order $\alpha^{3}$ structurally against
+  the leading $\alpha^{-1}$ of $K$: the Connes--Chamseddine asymptotic
+  expansion on $d = 5$ is in odd powers of $\Lambda$ only, with no log
+  term, and standard spectral-action truncations fix $\alpha$ once via
+  $a_{0}/a_{4}$ ratios, not at order $\alpha^{3}$. The
+  $\pi^{3}\alpha^{3}$ match is therefore a numerical pattern of
+  unexplained structural origin at this precision---a suggestive hint,
+  not a derivation. Paper~24's $\pi$-free certificate on the discrete
+  Bargmann--Segal graph is reconciled: it applies to the discrete
+  spectrum and edge weights, not to continuum integration measures
+  such as $\mathrm{Vol}(S^{5})$.
+
+\item \textit{The other cubic roots.} The two non-physical roots of
+  Eq.~(\ref{eq:cubic}) satisfy $\alpha \approx \pm 11.7$,
+  corresponding to $1/\alpha \approx \pm 0.085$. A systematic
+  comparison of all natural transformations of these roots (including
+  $r$, $1/r$, $r^2$, $\sin^2(\arctan r)$, etc.) against known
+  Standard Model parameters ($\sin^2\theta_W$, $\alpha_s$, Cabibbo
+  angle, Yukawa couplings, mass ratios) finds no match at the $1\%$
+  level. The other roots do not appear to encode additional coupling
+  constants.
+
+\item \textit{Common origin of the selection and the second
+  pointer.} The second pointer ($2d_{\max} = n^2 - 1$ at $n = 3$, an
+  Observation) and the proven Casimir selection ($B/N = 3$ at $n = 3$)
+  are algebraically independent. Whether they share a common origin in
+  the Hopf fibration geometry is open.
+
+\item \textit{Circulant phase and the Hopf connection.} The
+  Hermiticity of the circulant coupling and its $\theta \approx
+  3\pi/2$ phase at the physical root may encode the $U(1)$ gauge
+  structure. A derivation connecting the circulant phase to the Hopf
+  connection 1-form would ground Link~4 of
+  Table~\ref{tab:chain}.
+\end{enumerate}
+```
+
+## Old lines 1600-1646
+
+```latex
+The fine structure constant approximately satisfies (to
+$8.8\times10^{-8}$ relative; an Observation) the cubic equation
+$\alpha^3 - K\alpha + 1 = 0$, where
+$K = \pi(42 + \pi^2/6 - 1/40)$ is constructed from three spectral
+invariants of the Hopf fibration. The selection principle
+$B/N = \dim(S^3)$ is proven algebraically to select $n_{\max} = 3$
+uniquely, via the closed-form ratio $B/N = 3(m+2)(m-1)/10$; this
+result is specific to~$S^3$: a formal spectral moment
+$B_{\mathrm{formal}}/N = d$ holds universally at $m = 2$ for all
+round spheres (Sec.~\ref{sec:s3_specificity}), but the
+branching-based $B$ that enters the formula coincides with
+$B_{\mathrm{formal}}$ only for $d = 3$, due to the unit embedding
+index of $SO(3) \subset SO(4)$. The quaternionic and octonionic Hopf
+fibrations yield $1/\alpha \approx 970$ and $7164$ respectively,
+matching no known coupling constants. The formula contains no fitted parameters;\ $K$ itself
+agrees with $\alpha^{-1}$ to $4.8 \times 10^{-7}$, and the root of the cubic
+$1/\alpha = K - \alpha^2$ to $8.8 \times 10^{-8}$ relative. In a
+combinatorial search over $1.92 \times 10^9$ formulas the formula ranks
+among the top $\sim\!10$ ($p = 5.2 \times 10^{-9}$ per draw); this
+statistic does not account for the unregistered search that produced it
+and does not establish non-accidentality. The cubic form is the
+characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
+circulant matrix, a circulant realization of the self-consistency
+equation (not a derivation of it).
+
+The circulant coupling is necessarily Hermitian ($b$ and $c$ are
+complex conjugates), with the physical root at phase
+$\theta \approx 3\pi/2$, consistent with $U(1)$ gauge structure. A
+second pointer---the numerical coincidence of the bipartite spectral
+radius bound $2d_{\max} = 8$ (a two-dimensional-grid band edge, not an
+$S^3$ quantity) with the continuum eigenvalue $|\lambda_3| = n^2 - 1 = 8$,
+an Observation---independently points to $n_{\max} = 3$ and relates to
+the matched kinetic scale $\kappa = -1/16$.
+
+The combination rule $K = \pi(B + F - \Delta)$ remains a numerical observation.
+A systematic investigation of spectral determinants, analytic torsion,
+heat kernels, and index-theoretic invariants finds no smooth
+spectral-geometric derivation; the rule mixes discrete
+representation-theoretic data ($B = 42$) with continuous spectral
+invariants ($F = \zeta(2)$) in a way that has no known precedent.
+The formula has the character of a remarkable empirical observation
+with structural support---each spectral ingredient has an identified
+home (the choice of these three remains the open gap, Link~2), the
+cubic form is realizable by a circulant (not selected by it), the
+selection principle is proven, but no
+first-principles derivation of their assembly into $K$ exists;\ the
+combination is a numerical Observation.
+```
+
+## Old lines 1651-1672
+
+```latex
+approach~\cite{paper2_old} by the same author. The evolution from
+fitted to parameter-free is documented for intellectual transparency.
+The four-phase computational audit (arithmetic verification,
+combinatorial $p$-value analysis, cubic structure investigation, and
+derivation chain assessment) that checked the formula's arithmetic and
+identified the circulant structure is available as supplementary
+material~\cite{phase2_audit}. A systematic investigation of spectral
+determinants, analytic torsion, heat kernel expansions, and
+index-theoretic invariants of the Hopf bundle components, documented
+in the project repository, found no derivation of the combination
+rule (Link~3) within standard smooth spectral geometry (a negative
+search, not a proof of impossibility).
+A subsequent three-phase investigation of the kinetic scale factor
+$\kappa = -1/16$ proposed an analogy between the transition operators
+and the Hopf fibration (not an identification), a second pointer to $n_{\max} = 3$ (an Observation)
+from the bipartite spectral radius bound, and the forced Hermiticity of the circulant
+coupling~\cite{phase1_kappa,phase2_kappa,phase3_audit}.
+A further investigation applied the formula's recipe to all four Hopf
+fibrations, discovered the universal algebraic identity
+$B_{\mathrm{formal}}/N = d$, and confirmed the $S^3$ specificity of
+the branching-based selection
+principle~\cite{phase6_hopf}.
+```
+
+## Old lines 1675-1676
+
+```latex
+the author's scientific direction. All results were validated against
+analytical benchmarks.
+```
+
+## Old lines 1697-1709
+
+```latex
+\bibitem{paper22_sparsity}
+J.~Loutey, ``Potential-Independent Angular Sparsity for Qubit
+Hamiltonians in Spherical Fermion Systems,'' GeoVac Paper~22 (2026).
+
+\bibitem{paper24_bargmann}
+J.~Loutey, ``The Bargmann--Segal Lattice: $\pi$-Free Discretization
+of the Harmonic Oscillator on $S^5$,'' GeoVac Paper~24 (2026).
+
+\bibitem{track_nj_alpha_memo}
+J.~Loutey, ``Track NJ: Fine Structure Constant and the Nuclear
+Extension --- Theory Memo,'' GeoVac internal memo (2026). Available
+at \texttt{docs/track\_nj\_alpha\_memo.md} in the project repository.
+
+```
+
+## Old lines 1713-1716
+
+```latex
+
+\bibitem{urbantke2003}
+H.~K. Urbantke, ``The Hopf fibration---seven times in physics,''
+\textit{J.\ Geom.\ Phys.}\ \textbf{46}, 125 (2003).
+```
+
+## Old lines 1745-1759
+
+```latex
+\bibitem{phase1_kappa}
+J.~Loutey, ``$\kappa = -1/16$ Investigation: Phase~1,'' GeoVac
+supplementary material (2026). Available at
+\texttt{debug/kappa\_investigation/} in the project repository.
+
+\bibitem{phase2_kappa}
+J.~Loutey, ``Spectral Determinants \& Second Selection Principle:
+Phase~2,'' GeoVac supplementary material (2026). Available at
+\texttt{debug/kappa\_investigation/phase2/} in the project repository.
+
+\bibitem{phase3_audit}
+J.~Loutey, ``Circulant Structure of the Cubic: Phase~3,'' GeoVac
+supplementary material (2026). Available at
+\texttt{debug/kappa\_investigation/phase3/} in the project repository.
+
+```
+
+## Old lines 1766-1778
+
+```latex
+\bibitem{marcolli_vs_2014}
+M.~Marcolli and W.~D.~van Suijlekom, ``Gauge networks in noncommutative
+geometry,'' \textit{J.\ Geom.\ Phys.}\ \textbf{75}, 71 (2014),
+arXiv:1301.3480.
+
+\bibitem{perez_sanchez_2024}
+C.~I.~Perez-S\'anchez, ``Bratteli networks and the Spectral Action on
+quivers,'' preprint (2024), arXiv:2401.03705. (Extends MvS gauge
+networks to quivers/Bratteli networks; obtains Yang--Mills--Higgs as
+the smooth limit of that extended construction.)
+
+\bibitem{perez_sanchez_2024_comment}
+C.~I.~Perez-S\'anchez, Comment, preprint (2025), arXiv:2508.17338.
+```
+

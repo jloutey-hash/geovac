@@ -157,7 +157,7 @@ def test_depth1_RH_J1_regression():
 def test_smin_value_matches_paper28():
     """Our S_min^total (with asymptotic tail) should match Paper 28's value.
 
-    Paper 28 §IV reports S_min ~ 2.47953699802733387... but that value is
+    Paper 28 §9 reports S_min ~ 2.47953699802733387... but that value is
     a TRUNCATED sum at N=10000 without the correct tail. Our value uses the
     Bernoulli asymptotic expansion and gives ~2.47993693803422..., which
     differs by the true tail ~4e-4.

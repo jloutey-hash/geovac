@@ -1,4 +1,5 @@
-"""Paper 25 Sec. III.B: the base graph under the rotation grouping (the paper's) and a Hopf (chiral) grouping.
+"""Paper 2 sec:scope ("The labelling matters"; carried from the archived Paper 25 Sec. III.B): the base graph
+under the rotation grouping (Paper 30 Sec. 4.3's) and a Hopf (chiral) grouping.
 
 Record: docs/predictions/2026-10-31_hopf_grouping.md (HG, GO).  Written as a separate step after the result
 (CLAUDE.md Sec. 9).  No debug/ import: the SO(4) generators come from tests/test_atlas_so4_commutant.py (rebuilt on
@@ -7,7 +8,7 @@ here from Clebsch-Gordan coefficients.
 
 Hopf group (n, mu): eigenspace of J-_z = (L_z - A_z)/2 in shell n, weight n.  Occupation of node (n, l, m) in it:
 |<j, m - mu; j, mu | l, m>|^2, j = (n - 1)/2.  Base adjacency: off-diagonal part of M^T A M (the occupation rule,
-which equals Paper 25's rule when M is 0/1).
+which equals the quotient rule of Paper 30 Sec. 4.3 when M is 0/1).
 """
 import importlib.util
 import os
@@ -70,11 +71,11 @@ def zero_modes(Lb):
 
 
 def test_rotation_grouping_reproduces_paper25_and_hopf_occupations_are_exact_projectors():
-    """Control: the rotation grouping through this code gives Paper 25's links and spectrum {0,0,0,1,3,6}; the
+    """Control: the rotation grouping through this code gives Paper 30 Sec. 4.3's links and spectrum {0,0,0,1,3,6}; the
     exact CG^2 occupations equal the diagonals of the J-_z eigenprojectors (so the Hopf groups are the fibre
     factor's eigenspaces, not an arbitrary partition).
 
-    Wrong answers rejected: a base rule that is not Paper 25's, and occupations that are not the chiral groups'.
+    Wrong answers rejected: a base rule that is not Paper 30 Sec. 4.3's, and occupations that are not the chiral groups'.
     """
     m = so4(3)
     A = graph(3, m.STATES)

@@ -1,7 +1,7 @@
 # `tests/wilson_rule_b_support/` — permanent backing-support for Paper 41's seven-witness suite
 
 These modules are the **load-bearing computational drivers** for Paper 41
-(*Rule B Wilson U(1)*, `papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex`)
+(*Rule B Wilson U(1)*, `papers/archive/paper_41_rule_b_wilson_u1.tex`)
 — the XCWG sprint sequence (A–H + follow-ons, May 2026) whose seven witnesses
 establish the 3D-compact-U(1) structural verdict:
 

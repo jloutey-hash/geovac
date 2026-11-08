@@ -14,7 +14,7 @@ Theorem at line 344-356, states:
 The witness table in Paper 55 (subsection "Witnesses" of the M1 section)
 lists five M1 observables across the corpus:
 
-    W1: Vol(S^2)/4 = pi                  (Paper 25, quarter unit-sphere area)  pi^{+1}
+    W1: Vol(S^2)/4 = pi                  (Paper 18 M1 volume slot)            pi^{+1}
     W2: 4/pi (Fejer-moment constant of the state-space GH bound)
                                          (Paper 38 sec L2)                     pi^{-1}
     W3: 4/pi (reported universal, compact simple) (Paper 40 Thm 1)             pi^{-1}
@@ -78,7 +78,7 @@ def _compute_witnesses(dps: int):
         "W1_Vol_S2_over_4": (
             mp.mpf(4) * pi / mp.mpf(4),   # Vol(S^2) = 4 pi, divided by 4 = pi
             +1,
-            "Paper 25 sec II.1 unit-sphere volume slot (= pi)",
+            "Paper 18 M1 unit-sphere volume slot (= pi)",
         ),
         "W2_propinquity_4_over_pi": (
             mp.mpf(4) / pi,                # Paper 38 L2 Fejer-moment constant

@@ -1,0 +1,426 @@
+% Paper 36: the leading one-loop hydrogen Lamb shift -- assembly, a
+% convention erratum, and Coulomb-Sturmian Bethe logarithms.
+% GeoVac Project.  Narrowed 2026-11-07 (PI-approved, group5 advisory
+% pass); the cut material is preserved verbatim in
+% docs/chronicles/paper36_narrowing_cut.md.
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{observation}{Observation}
+
+\title{The Leading One-Loop Hydrogen Lamb Shift:\\
+Assembly, a Convention Erratum, and Coulomb-Sturmian Bethe Logarithms}
+\author{J.~Loutey (GeoVac Project)}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+% ===================================================================
+\begin{abstract}
+% ===================================================================
+We assemble the hydrogen $2S_{1/2}$--$2P_{1/2}$ Lamb shift at leading
+one-loop order, $\alpha(Z\alpha)^4$, from the standard expressions
+reviewed by Eides, Grotch and Shelyuto, with the electron mass in
+place of the reduced mass and the Bethe logarithms tabulated by Drake
+and Swainson.  The result is 1052.19~MHz, $5.65$~MHz ($0.534\%$)
+below the Lundeen--Pipkin measurement, 1057.845(9)~MHz, and $5.64$~MHz
+below the 2019 measurement of Bezginov \emph{et al.},
+1057.8298(32)~MHz.  This is textbook arithmetic, and the residual is
+not a measure of missing multi-loop physics: the one-loop
+$\alpha(Z\alpha)^5$ term alone, with coefficient
+$A_{50} = 4\pi(139/128 - \tfrac12\ln 2) \approx 9.29$, adds about
+$+6.9$~MHz, more than the residual.  The paper records three things.
+First, an erratum: an earlier assembly used the self-energy constant
+$38/45$ in place of $10/9$.  The difference is exactly the Uehling
+coefficient $4/15$, which had been subtracted inside the self-energy
+while the Uehling shift was also added separately; restoring $10/9$
+moves the Lamb shift by $+27.13$~MHz.  Second, Bethe logarithms
+computed from scratch in a Coulomb-Sturmian pseudostate basis at
+exponent $Z/n$: $\ln k_0(2P)$ and $\ln k_0(3D)$ reproduce the tabulated
+values to $2.4\%$ and $0.07\%$ with 40 basis functions ($2P$: $1.24\%$
+with 55), while the $2S$ acceleration-form value is not converged
+($-0.92\%$ at 40 functions is a crossing; $+2.98\%$ at 50).  Third, a
+negative result: a model two-loop self-energy sum on the Dirac
+spectrum of the three-sphere grows without bound with its cutoff and
+yields no finite two-loop coefficient without renormalization
+counterterms, which it does not contain.  Evaluating hydrogen Bethe
+logarithms through the dynamical symmetry of the Coulomb problem is
+prior art (Lieber, 1968; Huff, 1969).
+\end{abstract}
+
+% ===================================================================
+\section{Introduction}
+\label{sec:intro}
+% ===================================================================
+
+The $2S_{1/2}$--$2P_{1/2}$ splitting of hydrogen, first measured by
+Lamb and Retherford in 1947 and explained at leading order by Bethe's
+non-relativistic calculation the same year~\cite{bethe1947}, is the
+canonical test of bound-state QED.  The two direct measurements used
+here are Lundeen and Pipkin's, $1057.845(9)$~MHz~\cite{lundeen_pipkin1981},
+and the frequency-offset separated-oscillatory-field measurement of
+Bezginov \emph{et al.}, $1057.8298(32)$~MHz, obtained from a measured
+$2S_{1/2}(F{=}0)$--$2P_{1/2}(F{=}1)$ interval of $909.8717(32)$~MHz
+after removing the hyperfine contribution~\cite{bezginov2019}.  Both are
+intervals between hyperfine centroids.  The modern theory of the
+interval, order by order, is reviewed by Eides, Grotch and
+Shelyuto~\cite{eides2001}; current work on the two-loop self-energy at
+low $Z$ is that of Yerokhin, Harman and
+Keitel~\cite{yerokhin2024_two_loop_se}.
+
+\paragraph*{Scope of the claim.}
+The $1052.19$~MHz headline is the leading one-loop assembly with
+tabulated Bethe logarithms.  It is not a GeoVac computation and does
+not compete with precision theory.  It omits the one-loop
+$\alpha(Z\alpha)^5$ term, the reduced-mass factors $(m_r/m)^3$ of the
+leading terms, recoil, the finite nuclear size, and all two-loop terms;
+the residual is therefore not attributed (Sec.~\ref{sec:residual}).
+Nothing in the number uses the three-sphere: no Fock projection, no
+Dirac spectrum on $S^3$, no GeoVac label set.  What the paper adds is
+(i)~the erratum of Sec.~\ref{sec:eides}, (ii)~the Bethe logarithms of
+Sec.~\ref{sec:bethe}, computed from scratch and checked against the
+Drake--Swainson table~\cite{drake_swainson}, and (iii)~the two-loop
+negative of Sec.~\ref{sec:twoloop}.
+
+\paragraph*{Prior art.}
+The use of the hydrogen atom's dynamical symmetry to evaluate Bethe
+logarithms is due to Lieber, who used the O(4) symmetry together with
+Green's-function methods to obtain a rapidly convergent series and
+values for $1S$, $2S$ and $2P$~\cite{lieber1968}, and to Huff, who
+recast the calculation in the algebra of SO(4,2)~\cite{huff1969}.  The
+Coulomb-Sturmian pseudostate sums of Sec.~\ref{sec:bethe} are a finite
+basis version of the same spectral sums; we make no novelty claim for
+the method.
+
+\paragraph*{Backing.}
+\sloppy
+The assembly and the erratum are recomputed in exact and closed-form
+arithmetic by the test file
+\texttt{tests/test\_paper36\_lamb\_chain.py}, which also recomputes
+(slow-marked) the Bethe logarithms from the Sturmian code in
+\texttt{tests/paper36\_lamb\_support/}.  The $\alpha(Z\alpha)^5$
+estimate is checked by \texttt{tests/test\_paper36\_a50\_term.py}.  The
+two-loop model is \texttt{geovac/two\_loop\_self\_energy.py}.\par
+\fussy
+
+% ===================================================================
+\section{The one-loop expressions}
+\label{sec:oneloop}
+% ===================================================================
+
+At order $\alpha(Z\alpha)^4$ and with $m_r = m$, the self-energy and
+Uehling vacuum-polarization shifts of the $n=2$ levels are, in Hartree
+($\alpha(Z\alpha)^4 m c^2 = \alpha^3 Z^4\,\mathrm{Ha}$),
+\begin{align}
+\label{eq:eides_se}
+\Delta E_\text{SE}(nS_{1/2}) &= \frac{\alpha^3 Z^4}{\pi n^3}
+\Bigl[\tfrac{4}{3} \ln\frac{1}{(Z\alpha)^2}
+- \tfrac{4}{3} \ln k_0(n, 0) + \tfrac{10}{9}\Bigr], \\
+\label{eq:eides_se_2p}
+\Delta E_\text{SE}(2P_{1/2}) &= \frac{\alpha^3 Z^4}{8\pi}
+\Bigl[- \tfrac{4}{3} \ln k_0(2, 1) - \tfrac{1}{6}\Bigr], \\
+\label{eq:uehling_vp}
+\Delta E_\text{VP}(nS) &= -\frac{4}{15}\,\frac{\alpha^3 Z^4}{\pi n^3},
+\end{align}
+with $\Delta E_\text{VP}(2P) = 0$ at this order.  These are the entries
+of Ref.~\cite{eides2001}, Sec.~VIII.A, Eq.~(40) and Table~II, rewritten
+with the common factor $\alpha(Z\alpha)^4 m/(\pi n^3)$: the constant
+$10/9 = 11/18 + 1/2$ is the Dirac form-factor term ($4 \times 11/72$)
+plus the Pauli form-factor term ($4 \times 1/8$); the $2P_{1/2}$
+constant $-1/6$ is the Pauli term $4(j(j+1) - l(l+1) - 3/4)/
+(8l(l+1)(2l+1))$ at $l = 1$, $j = 1/2$; and $-4/15 = 4 \times (-1/15)$
+is the Uehling term.  The Lamb shift is
+$L = [\Delta E_\text{SE} + \Delta E_\text{VP}](2S) -
+\Delta E_\text{SE}(2P_{1/2})$.
+
+% ===================================================================
+\section{The erratum: a double-counted Uehling term}
+\label{sec:eides}
+% ===================================================================
+
+An earlier implementation of Eq.~\eqref{eq:eides_se} used the constant
+$38/45$ in place of $10/9$, and also added the Uehling shift
+\eqref{eq:uehling_vp}.  The difference of the two constants is
+\begin{equation}
+\label{eq:ls1_constant_difference}
+\frac{10}{9} - \frac{38}{45} \;=\; \frac{50 - 38}{45} \;=\; \frac{4}{15},
+\end{equation}
+exactly the Uehling coefficient.  The earlier constant had the Uehling
+term already subtracted inside the self-energy bracket, so with the
+separate Uehling shift the vacuum polarization was counted twice.
+Restoring $10/9$ moves the Lamb shift by
+\begin{equation}
+\label{eq:shift_value}
+\Delta L = +\frac{4}{15} \cdot \frac{\alpha^3 Z^4}{\pi n^3}\,\mathrm{Ha}
+\;=\; +27.13~\text{MHz at } n = 2,\ Z = 1.
+\end{equation}
+
+\begin{observation}[Uehling double counting]
+\label{obs:uehling_double}
+With the self-energy constant $38/45$ and a separate Uehling term the
+leading one-loop Lamb shift is $1025.06$~MHz; with the canonical
+$10/9$ it is $1052.19$~MHz.  The shift is exactly
+$(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha $= +27.13$~MHz.
+\end{observation}
+
+% ===================================================================
+\section{Result}
+\label{sec:result}
+% ===================================================================
+
+With the Drake--Swainson values $\ln k_0(2S) = 2.8117698931$ and
+$\ln k_0(2P) = -0.0300167089$~\cite{drake_swainson}, $\alpha^{-1} =
+137.035999084$ and $1~\mathrm{Ha} = 6\,579\,683\,920.502$~MHz:
+
+\begin{center}
+\begin{tabular}{l r r r}
+\toprule
+Quantity & earlier (MHz) & corrected (MHz) & Shift (MHz) \\
+\midrule
+SE $2S_{1/2}$ constant & $+38/45$ & $+10/9$ & $+4/15$ \\
+SE $2S_{1/2}$ total & $+1039.31$ & $+1066.44$ & $+27.13$ \\
+VP $2S_{1/2}$ (Uehling) & $-27.13$ & $-27.13$ & $0$ \\
+Total $2S_{1/2}$ & $+1012.18$ & $+1039.31$ & $+27.13$ \\
+SE $2P_{1/2}$ & $-12.88$ & $-12.88$ & $0$ \\
+VP $2P_{1/2}$ & $0$ & $0$ & $0$ \\
+\midrule
+\textbf{Lamb shift} & \textbf{$+1025.06$} & \textbf{$+1052.19$} & \textbf{$+27.13$} \\
+\midrule
+Lundeen--Pipkin~\cite{lundeen_pipkin1981} & \multicolumn{2}{c}{$+1057.845(9)$} & \\
+Residual & $-32.78$ ($-3.10\%$) & $-5.65$ ($-0.534\%$) & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Against Bezginov \emph{et al.}~\cite{bezginov2019}
+($1057.8298(32)$~MHz) the corrected residual is $-5.64$~MHz.
+
+\subsection{The residual}
+\label{sec:residual}
+
+The residual is not attributed.  The assembly is the leading
+$\alpha(Z\alpha)^4$ order only, at $m_r = m$.  The one-loop
+$\alpha(Z\alpha)^5$ term,
+\begin{equation}
+\label{eq:a50}
+\Delta E(nS) = \frac{\alpha(Z\alpha)^5}{\pi n^3}\, m c^2\, A_{50},
+\qquad A_{50} = 4\pi\Bigl(\frac{139}{128} - \frac12\ln 2\Bigr) \approx 9.29,
+\end{equation}
+contributes about $+6.9$~MHz to the $2S$ level and by itself exceeds
+the residual; Eides \emph{et al.}\ give $+7.13$~MHz for the complete
+one-loop $\alpha(Z\alpha)^5$ correction to $2S$, including the
+polarization insertions~\cite{eides2001} (Table~III).  Recoil, the
+finite nuclear size, and two-loop terms enter besides, with either
+sign; the two-loop $\alpha^2(Z\alpha)^4$ entries of the same review sum to
+$+0.127$~MHz on $2S$ (Table~II).  An order-by-order budget is owed
+before any attribution.  An earlier decomposition of the residual into
+multi-loop and non-loop pieces is withdrawn.
+
+% ===================================================================
+\section{Bethe logarithms in a Coulomb-Sturmian basis}
+\label{sec:bethe}
+% ===================================================================
+
+\subsection{Definition and normalization}
+
+For a hydrogenic state $|nlm\rangle$ (atomic units),
+\begin{equation}
+\label{eq:bethe_log_def}
+\ln k_0(n, l) = \frac{\sum_{k} |\langle nlm | \vec{p} | k \rangle|^2
+(E_k - E_{n}) \ln \bigl(|E_k - E_{n}| / \mathrm{Ry}\bigr)}
+{2 Z^4 / n^3},
+\end{equation}
+where the sum runs over all intermediate states, bound and continuum,
+and their magnetic substates.  The denominator is the same for every
+$l$.  For $s$-states it equals the sum rule
+$I_v(nS) = \sum_k |\langle nS | \vec{p} | k \rangle|^2 (E_k - E_n) =
+\tfrac12\langle \nabla^2 V \rangle = 2Z^4/n^3$; for $l > 0$ the
+corresponding sum vanishes, because $\psi_{nl}(0) = 0$, while the
+numerator of Eq.~\eqref{eq:bethe_log_def} stays finite.  This uniform
+normalization is the one in which Eq.~\eqref{eq:eides_se_2p} and the
+Drake--Swainson table are written.
+
+In the code the numerator is summed over the initial magnetic
+substates as well, which multiplies it by $2l + 1$; the code therefore
+divides by $D(n,l) = 2(2l+1)Z^4/n^3$.  The factor $2l + 1$ is this
+bookkeeping and nothing more: without it the computed $2P$ logarithm
+would be three times the tabulated one.
+
+\subsection{Basis}
+
+The radial basis is
+$\chi_{k,l}(r) = r^{l+1} e^{-\lambda r} L_k^{(2l+1)}(2 \lambda r)$,
+$k = 0, \ldots, N - 1$, at $\lambda = Z/n$ for target level $n$, which
+contains the exact $n$-th hydrogenic radial function.  All overlap,
+kinetic, potential, dipole and $1/r^2$ matrix elements are exact
+polynomial-times-exponential integrals evaluated at 50 digits; the
+Hamiltonian is diagonalized in the basis after canonical
+orthogonalization, and the pseudostates of the $l \pm 1$ channels
+discretize the intermediate spectrum.
+
+\subsection{\texorpdfstring{Velocity form for $l > 0$}{Velocity form for l > 0}}
+
+With $|\langle nl|\vec p|k\rangle|^2 = (E_k - E_n)^2\, l_>\,
+|\langle nl|r|k\rangle|^2$ (summed over substates) the numerator of
+Eq.~\eqref{eq:bethe_log_def} converges for $l > 0$ and is evaluated
+directly.  Against the Drake--Swainson values~\cite{drake_swainson}:
+\begin{itemize}
+\setlength\itemsep{0pt}
+\item $\ln k_0(2P) = -0.03074$ at $N = 40$, $+2.40\%$ from
+$-0.0300167$; $-0.03039$ at $N = 55$, $+1.24\%$.
+\item $\ln k_0(3D) = -0.005236$ at $N = 40$, $+0.07\%$ from
+$-0.0052321$.
+\end{itemize}
+
+\subsection{\texorpdfstring{Acceleration form for $s$-states}{Acceleration form for s-states}}
+
+For $s$-states the velocity form converges slowly.  The acceleration
+form replaces $\vec p$ by $\nabla V = Z\hat r/r^2$,
+\begin{equation}
+\ln k_0 = \frac{\sum_k |\langle nl|\nabla V|k\rangle|^2
+\ln\bigl(|E_k - E_n|/\mathrm{Ry}\bigr)/(E_k - E_n)}
+{\sum_k |\langle nl|\nabla V|k\rangle|^2/(E_k - E_n)}.
+\end{equation}
+In this basis it does not converge:
+\begin{itemize}
+\setlength\itemsep{0pt}
+\item $\ln k_0(2S) = 2.7858$ at $N = 40$ ($-0.92\%$ from $2.8117699$)
+and $2.8955$ at $N = 50$ ($+2.98\%$); the $N = 40$ agreement is a
+crossing.
+\item $\ln k_0(1S) = 3.0019$ at $N = 20$ ($+0.60\%$ from $2.9841286$)
+and $3.268$ at $N = 40$ ($+9.5\%$); again a crossing.
+\end{itemize}
+A converged from-scratch $2S$ logarithm is therefore not available
+here, and the assembly of Sec.~\ref{sec:result} uses the tabulated
+value.
+
+% ===================================================================
+\section{A two-loop negative}
+\label{sec:twoloop}
+% ===================================================================
+
+A model of the two-loop self-energy was built on the Dirac spectrum
+of the unit three-sphere~\cite{camporesi_higuchi}, $|\lambda_n| = n +
+3/2$ with degeneracy $g_n = 2(n+1)(n+2)$, and transverse photon modes
+of eigenvalue $\mu_q = q(q+2)$ and degeneracy $d_q = q(q+2)$.  For the
+rainbow and crossed topologies it sums
+\begin{equation}
+\Sigma = \sum_{n_1,n_2,n_3,\,q_a,q_b}
+\frac{\bigl(\prod_{i=1}^{4} W_i\bigr)\, g_{n_1} g_{n_2} g_{n_3}\,
+d_{q_a} d_{q_b}}
+{\lambda_{n_1}^2 \lambda_{n_2}^2 \lambda_{n_3}^2\, \mu_{q_a} \mu_{q_b}}
+\end{equation}
+over electron levels $0, \ldots, n_\text{max}$ and photon levels
+allowed at each vertex, where $W_i \in \{0, 2\}$ is an SO(4)
+channel count with the parity rule $n_a + n_b + q$ odd, and the
+external level is $n_\text{ext} = 1$.  No bound-state wavefunction
+enters; the external level stands in for hydrogen $2S$.  The
+dimensionless bracket is $C = \Sigma_\text{total}/(4\pi)^2$.
+
+\begin{table}[ht]
+\caption{The model two-loop sum versus cutoff, with the channel count
+as corrected on 2026-11-07 (an earlier version of the count paired the
+spinor content of opposite signs of the Dirac operator, and every
+entry of the table printed before that date was computed with it).}
+\label{tab:ls8a_native}
+\centering
+\begin{tabular}{c r r r r}
+\toprule
+$n_\text{max}$ & rainbow & crossed & total & $C$ \\
+\midrule
+2 & 587.4 & 467.0 & 1054.4 & 6.68 \\
+3 & 1680.9 & 1313.8 & 2994.8 & 18.96 \\
+4 & 3653.0 & 2786.3 & 6439.3 & 40.78 \\
+5 & 6761.9 & 5140.6 & 11902.5 & 75.37 \\
+6 & 11265.7 & 8507.5 & 19773.2 & 125.22 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The sum grows without bound: between $n_\text{max} = 5$ and $6$ the
+local log-log slope of the total is $2.8$ (it was $3.4$ under the
+earlier count, whose totals were $44.8$, $266.3$, $761.3$, $1657.8$ and
+$3052.8$).  A finite two-loop coefficient requires the
+wave-function and mass renormalization counterterms, $Z_2$ and $\delta
+m$, which the model does not contain.  The negative is about this
+model: it does not show that no spectral construction on $S^3$ can
+produce the two-loop coefficient, and it makes no comparison with the
+literature value, since the model has no finite value to compare.
+
+% ===================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ===================================================================
+
+The leading one-loop assembly of the hydrogen Lamb shift with tabulated
+Bethe logarithms gives $1052.19$~MHz, $0.534\%$ below the
+Lundeen--Pipkin measurement.  The number is standard one-loop QED with
+literature inputs, and the residual is not attributed: the one-loop
+$\alpha(Z\alpha)^5$ term alone is about $+6.9$~MHz.  An earlier
+version of the assembly double-counted the Uehling term, and the
+correction is exactly $(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha
+$= +27.13$~MHz.  Bethe logarithms computed from scratch in a
+Coulomb-Sturmian pseudostate basis reproduce the tabulated $2P$ and
+$3D$ values to $2.4\%$ and $0.07\%$ at 40 functions, while the $2S$
+acceleration-form value has not converged.  A model two-loop
+self-energy sum on the three-sphere Dirac spectrum diverges with its
+cutoff and gives no finite coefficient without renormalization
+counterterms.  The muonic-hydrogen transfer that an earlier version of
+this paper reported is in Paper~34.
+
+% ===================================================================
+\begin{thebibliography}{99}
+% ===================================================================
+
+\bibitem{bethe1947}
+H.~A.~Bethe, ``The Electromagnetic Shift of Energy Levels,''
+\textit{Phys.\ Rev.}\ \textbf{72}, 339 (1947).
+
+\bibitem{lundeen_pipkin1981}
+S.~R.~Lundeen and F.~M.~Pipkin, ``Measurement of the Lamb Shift in
+Hydrogen, $n = 2$,'' \textit{Phys.\ Rev.\ Lett.}\ \textbf{46}, 232--235
+(1981).
+
+\bibitem{bezginov2019}
+N.~Bezginov \textit{et al.}, ``A measurement of the atomic hydrogen
+Lamb shift and the proton charge radius,'' \textit{Science}\
+\textbf{365}, 1007--1012 (2019), doi:10.1126/science.aau7807.
+
+\bibitem{eides2001}
+M.~I.~Eides, H.~Grotch, and V.~A.~Shelyuto, ``Theory of light
+hydrogenlike atoms,'' \textit{Phys.\ Rep.}\ \textbf{342}, 63--261
+(2001); arXiv:hep-ph/0002158 (section, equation and table numbers as
+in the arXiv version).
+
+\bibitem{drake_swainson}
+G.~W.~F.~Drake and R.~A.~Swainson, ``Bethe logarithms for hydrogen
+up to $n=20$, and approximations for two-electron atoms,''
+\textit{Phys.\ Rev.\ A}\ \textbf{41}, 1243--1246 (1990).
+
+\bibitem{lieber1968}
+M.~Lieber, ``O(4) Symmetry of the Hydrogen Atom and the Lamb Shift,''
+\textit{Phys.\ Rev.}\ \textbf{174}, 2037--2054 (1968).
+
+\bibitem{huff1969}
+R.~W.~Huff, ``Simplified Calculation of Lamb Shift Using Algebraic
+Techniques,'' \textit{Phys.\ Rev.}\ \textbf{186}, 1367--1379 (1969).
+
+\bibitem{yerokhin2024_two_loop_se}
+V.~A.~Yerokhin, Z.~Harman, and C.~H.~Keitel,
+``Two-loop electron self-energy for low nuclear charges,''
+\textit{Phys.\ Rev.\ Lett.}\ \textbf{133}, 251803 (2024); arXiv:2411.12459.
+
+\bibitem{camporesi_higuchi}
+R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac
+operator on spheres and real hyperbolic spaces,''
+\textit{J.\ Geom.\ Phys.}\ \textbf{20}, 1 (1996).
+
+\end{thebibliography}
+
+\end{document}

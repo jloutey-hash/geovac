@@ -34,7 +34,8 @@ Pin strategy (per witness):
                              fixed-scale gap over the scalar graph is the
                              witness content, not a trend toward 3.
 
-Paper anchors: papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex
+Paper anchors: papers/archive/paper_41_rule_b_wilson_u1.tex (archived;
+successor papers/group5_qed_gauge/paper_30_su2_wilson.tex Sec. 2.3, 5)
 (sec:spectral_dim, sec:mk_rg, sec:gaussian_wilson, sec:strong_coupling,
 sec:monopole_density, sec:full_mc_wilson, sec:polyakov_loop,
 sec:seven_witness).

@@ -61,7 +61,7 @@ $\zeta_R(2k{+}1)$ at odd~$s$ (conjecturally outside $\mathbb{Q}(\pi)$;\
 Ap\'ery proved only that $\zeta_R(3)$ is irrational);
 \textbf{(Theorem~2)} the full classification is three-axis,
 adding bundle type (scalar vs.\ spinor, modulating coefficients
-only) and diagram topology (free vs.\ vertex-restricted, introducing
+only) and diagram topology (free vs.\ parity-restricted, introducing
 Dirichlet $L$-values $G = \beta(2)$, $\beta(4)$ through the
 quarter-integer Hurwitz shift);
 \textbf{(Theorem~3)} the three components of the
@@ -78,15 +78,15 @@ without first-principles derivation.
 
 A complementary \textbf{Observation (structural incommensurability)}
 catalogues the meta-pattern: GeoVac observables that look unitary
-at the surface ($K$ itself; two-loop QED on~$S^3$; zero structure
+at the surface ($K$ itself; the two-loop Dirac spectral sum on~$S^3$; zero structure
 of the GeoVac zeta) resolve under structural analysis into objects
 of different type (not always different cells of the three-axis grid:\
 $K$'s $B$ and $F$ share one).  No further unification
 is currently visible.  The taxonomy is read (a census and a reading,
 not a classification) in terms of Mellin transforms of heat kernels: the free heat kernel produces
 $\pi^{\mathrm{even}}$ in its integer-$s$ spectral-zeta values (for
-$\Delta_{\mathrm{LB}}$ and $D^2$), the interaction-deformed kernel produces
-$L$-content via vertex parity, and operator order determines whether
+$\Delta_{\mathrm{LB}}$ and $D^2$), restricting the spectrum to one
+parity class produces $L$-content, and operator order determines whether
 the Mellin integrand samples squared or raw eigenvalues.
 The taxonomy is $R$-independent, persisting in the flat-space
 limit via Weyl's law.
@@ -680,8 +680,8 @@ in Sec.~\ref{sec:meta_observation}.
 difference.}  On $S^3$ with the Camporesi--Higuchi Dirac
 spectrum $|\lambda_n| = n + 3/2$ and degeneracy $g_n = 2(n+1)(n+2)$,
 define the Dirac Dirichlet series $D(s) = \sum_n g_n / |\lambda_n|^s$
-and its vertex-parity split $D_{\mathrm{even}}(s)$, $D_{\mathrm{odd}}(s)$
-(Paper~28~\cite{loutey_paper28}, eqs.~(3)--(5)). The difference has
+and its split by the parity of $n$, $D_{\mathrm{even}}(s)$, $D_{\mathrm{odd}}(s)$
+(Paper~28~\cite{loutey_paper28}, Theorem~3). The difference has
 the exact closed form
 \begin{equation}
   D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) \;=\; 2^{s-1}\,\bigl(
@@ -696,11 +696,13 @@ $\zeta(s, 3/4) = \zeta(s, 1/4) - 4^s \beta(s)$.
 Verified by sympy symbolic identity at $s \in \{2, \ldots, 10, 15\}$
 and by PSLQ at 100-digit precision
 (\texttt{debug/spectral\_chi\_neg4\_memo.md}).
-Eq.~(\ref{eq:rh_j_identity}) is the concrete realization of
-Paper~28's qualitative "vertex parity acts as $\chi_{-4}$" statement:
+Eq.~(\ref{eq:rh_j_identity}) is Paper~28's Theorem~3:
 the Dirichlet $L$-content enters the spectral-Dirichlet difference
 as a closed-form linear combination of $\beta(s)$ and $\beta(s-2)$
-with integer prefactor $2^{s-1}$.
+with integer prefactor $2^{s-1}$.  That the parity clause of
+Paper~28's vertex model acts as $\chi_{-4}$ on internal lines is a
+reading of that model, not a property of the physical vertex
+(Paper~33~\cite{loutey_paper33}).
 
 \paragraph{RMT-spacing without critical-line confinement: the
 spectral--Ihara dichotomy.}  The zeros of $D(s)$,
@@ -730,7 +732,7 @@ group $\mathbb{Z}/2$ (abelian); they fingerprint specific graph cycles
 (e.g.~$\Phi_3, \Phi_6 \leftrightarrow$ 3-prism cycles of the $\ell=1$
 Coulomb $S^3$ component). Ramanujan-boundary factors
 $(4s^2+1)^2$ and $(9s^2+1)^4$ live in $\mathbb{Q}(i)$, consistent
-with the Hopf $\mathbb{Z}_2$ $m$-reflection sub-action of the Paper~25
+with the Hopf $\mathbb{Z}_2$ $m$-reflection sub-action of the
 Hopf $U(1)$ (see Observation~2 of~\cite{loutey_paper29}).
 \emph{Bulk} factors have non-abelian Galois groups: $S_3$ for scalar
 $S^3$ cubics; $S_4$ for the Dirac-$S^3$ Rule-A $n_{\max}=3$ quartic;
@@ -1065,7 +1067,7 @@ identity: $\operatorname{Tr} e^{-tD^2}
 the full MZV algebra.)
 
 The Sommerfeld fine-structure sums $D_p = \sum_{n=1}^\infty c_p(n)$
-(Paper~28, Sec.~7~\cite{loutey_paper28}) are precisely the
+(Paper~28, Sec.~12~\cite{loutey_paper28}) are precisely the
 perturbative expansion of this effect.  At each order $p$ in
 $(Z\alpha)^{2p}$, the coefficients $c_p(n)$ involve generalized
 harmonic numbers $H_{n-1}^{(r)}$, which are partial Euler sums that
@@ -1094,32 +1096,13 @@ of $\zeta(2) \times \zeta(\text{odd})$ products at every Sommerfeld
 order---has a natural interpretation in this framework.  The
 $n^2$ Fock degeneracy that weights the Sommerfeld sums is the same
 $n^2$ that produces $F = \zeta_R(2) = D_{n^2}(4)$ in the free-geometry
-Mellin output (Paper~2~\cite{loutey_paper2}, Phase~4F identification).
+Mellin output (Paper~2~\cite{loutey_paper2}).
 When the interaction-deformed Mellin transform generates product
 terms $\zeta(a) \times \zeta(b)$, the Fock-degeneracy weighting
 acts as a selection rule: products involving $\zeta(2)$ are
 systematically expelled because $\zeta(2)$ is already ``used'' as
 the Fock Dirichlet evaluation $F$, and the $n^2$ weighting enforces
 orthogonality between the free and interacting Mellin outputs.
-
-\paragraph{K--Sommerfeld separation as a Mellin consequence.}
-The K--Sommerfeld structural separation
-(Paper~28~\cite{loutey_paper28})---the PSLQ-verified fact that
-$K/\pi$ is not in the $\mathbb{Q}$-span of $\{D_2, \ldots, D_6, 1\}$%
----is a direct consequence of the Mellin framework.
-The ingredients of $K = \pi(B + F - \Delta)$ are all
-\emph{free-geometry} Mellin invariants: $B$ is a truncated
-trace of the free Casimir, $F = \zeta_R(2)$ is the spectral zeta
-of the free Fock-degeneracy Dirichlet series at $s = d_{\max}$,
-and $\Delta^{-1} = g_3^{\text{Dirac}}$ is a single-level mode
-count of the free Dirac operator.  All three live in the
-$\pi$-polynomial ring guaranteed by Eq.~\eqref{eq:zeta_d2}.
-The Sommerfeld $D_p$, by contrast, are Mellin transforms of the
-\emph{Coulomb-perturbed} heat kernel, dressed with harmonic
-numbers that access the full MZV algebra.  The two sets of
-quantities inhabit different rings because they are Mellin
-transforms at different perturbative orders: $K$ at zeroth
-order (free geometry), $D_p$ at $p$-th order (interacting geometry).
 
 \paragraph{Summary.}
 The Mellin transform \eqref{eq:mellin_bridge} is the silent engine
@@ -1218,7 +1201,7 @@ it is the \emph{master} mechanism through which $\pi$ enters where it
 does, with operator order $k$
 selecting the sub-mechanism.  The first-vs.\ second-order axis named
 above (motivic weight) is exactly the $k = 1$ vs.\ $k = 2$ split; the
-$k = 0$ free-Mellin case is the volume slot singled out by Paper~25.
+$k = 0$ free-Mellin case is the volume slot.
 
 \paragraph{Mechanism-as-domain reading (Sprint MR-A/B/C, May~2026).}
 The master Mellin engine reading admits a further refinement when read
@@ -1304,13 +1287,12 @@ observable from which its signature can be extracted:
     convergence; signature $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ (after
     the standard $\sqrt{\pi}$ heat-trace normalisation is divided out)
     throughout the modular residual~\eqref{eq:dirac_modular_residual}.
-  \item $k = 1$ (M3, vertex-topology Hurwitz): vertex-restricted
-    parity-character spectral sums; signature Dirichlet $\beta(s)$
+  \item $k = 1$ (M3, vertex-topology Hurwitz): parity-restricted
+    spectral sums; signature Dirichlet $\beta(s)$
     content via the closed-form identity
     $D_{\rm even}(s) - D_{\rm odd}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$
-    (Paper~28 Theorem~3~\cite{loutey_paper28}); witnessed in
-    Paper~28~\S\,QED-vertex (Catalan $G$, $\beta(4)$) but \emph{not} in
-    state-space GH rates.
+    (Paper~28 Theorem~3~\cite{loutey_paper28}; Catalan $G$, $\beta(4)$
+    at $s = 4$), but \emph{not} in state-space GH rates.
 \end{itemize}
 \end{quote}
 
@@ -1393,7 +1375,7 @@ $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ of even-weight pure Tate
 periods, with no $\zeta(3)$, $\zeta(5)$, or MZV content appearing
 at the SD level. This is sharper than the F--M generic R--W case
 in two ways:\ (i) the GeoVac $S^3$ Dirac SD expansion is two-term
-exact ($a_k = 0$ for $k \ge 2$, Paper~51 Cor.~2.1), not generically
+exact ($a_k = 0$ for $k \ge 2$, Paper~51 Cor.~4.2), not generically
 infinite; (ii) the scalar Laplacian SD coefficients have the
 closed-form geometric-series collapse $a_k^\Delta = 2\pi^2/k!$,
 not the generic R--W expansion. The M3 sub-mechanism
@@ -1611,7 +1593,7 @@ pure-Tate sub-ring $\mathbb{Q}[\pi, \pi^{-1}]$ of mixed Tate periods
 over $\mathbb{Q}$, at depth $0$ and Tate weight $\in \mathbb{Z}$, by
 direct identification of $\pi = \mathrm{Vol}(S^2)/4$ as a weight-$1$
 Tate period (Kontsevich--Zagier 2001).  Every M1 witness logged
-across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (Paper~25;\ a quarter of the unit-sphere area $\mathrm{Vol}(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$)); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
+across the corpus --- $\mathrm{Vol}(S^2)/4 = \pi$ (a quarter of the unit-sphere area $\mathrm{Vol}(S^2) = 4\pi$ (equivalently the full area of the Hopf base $S^2(1/2)$ of the unit $S^3$)); $4/\pi = \mathrm{Vol}(S^2)/\pi^2$
 (Paper~38 §L2 Fej\'er-moment constant;\ dual-Coxeter convention;\ $2/\pi$ on the unit $S^3$;\ its M1 placement a reading); $1/\pi^2$ inside
 $-3\zeta(3)/(16\pi^2)$ (the $\zeta(3)$ term of the free-scalar F-value, Paper~50 §3, an M1$\times$M3
 cross-product;\ a continuum Klebanov--Pufu--Safdi value that Paper~50
@@ -1892,7 +1874,7 @@ even power, and $\zeta_{D^2}(s)$ lies in the pure-Tate ring
 $\bigoplus_k \pi^{2k}\cdot\mathbb{Q}$ at positive integer $s$).  The half-integer eigenvalue $|\lambda_n| = n + 3/2$
 is essential: naive substitution of an integer~$m$ for the eigenvalue
 would predict an even-$s$ odd-zeta witness, contradicting Theorem~1
-part~(2) and Paper~28~\cite{loutey_paper28} Theorem~5 / Eq.~(43).
+part~(2) and Paper~28~\cite{loutey_paper28} Theorem~2.
 The shift~$3/2$ is what cancels the singular $m=1$ term in the
 odd-integer rewrite of the spectral sum.
 
@@ -2195,13 +2177,13 @@ determines the motivic weight of the resulting transcendental content.
 
 \paragraph{Dirichlet $L$-values from vertex topology.}
 The operator-order discriminant classifies free-propagator content.
-A third axis emerges when interaction vertices are included.  The
-QED vertex on~$S^3$ couples Dirac spinor harmonics at levels $n_1$,
-$n_2$ to a transverse vector harmonic at level~$n_\gamma$ with
-SO(4) selection rules requiring $n_1 + n_2 + n_\gamma$ odd (the
-$\gamma^\mu$ coupling flips parity).  When this selection rule is
-imposed on the two-loop sunset diagram, it splits the Dirac Dirichlet
-series into even- and odd-$n$ sub-sums with structurally different
+A third axis emerges when the spectrum is restricted.  The vertex
+model of Paper~28 couples Dirac spinor harmonics at levels $n_1$,
+$n_2$ to a photon level~$n_\gamma$ under the scalar-harmonic triangle
+with the parity clause $n_1 + n_2 + n_\gamma$ odd imposed;\ the
+physical vector-photon vertex obeys a different rule (Paper~33).
+Restricting the Dirac Dirichlet series to its even- and odd-$n$
+sub-sums (Paper~28 Theorem~3) gives structurally different
 transcendental content.  At $s = 4$ (the packing exponent), the
 exact Hurwitz decomposition gives:
 \begin{align}
@@ -2246,9 +2228,12 @@ Modulates rational coefficients, eigenvalue lattices, and
 degeneracies within the same transcendental class fixed by
 axis~A1, but does not change the class.  The (2nd-order, spinor)
 cell is degenerate with scalar calibration.
-\item[(A3)] \emph{Diagram topology} (free vs.\ vertex-restricted).
-Vertex parity selection rules from $\gamma^\mu$ couplings
-($n_1 + n_2 + n_\gamma$ odd) project the Dirichlet sum onto
+\item[(A3)] \emph{Diagram topology} (free vs.\ parity-restricted).
+Restricting the Dirichlet sum to one parity class of $n$ (Paper~28
+Theorem~3; the parity clause $n_1 + n_2 + n_\gamma$ odd of Paper~28's
+vertex model is read as such a restriction, a reading of the model,
+which the physical vector-photon vertex does not obey, Paper~33)
+projects it onto
 quarter-integer Hurwitz shifts $\zeta(s, 3/4)$, $\zeta(s, 5/4)$
 whose difference is $4^s(1 - \beta(s))$, exposing
 $\beta(s) = L(s, \chi_{-4})$.  This
@@ -2259,7 +2244,7 @@ unrestricted free-propagator sums.
 Axes A1, A2, A3 are independent in the sense that no axis can be
 replaced or absorbed by the others: A1 is computational (operator
 $\to$ class), A2 is representation-theoretic (bundle $\to$
-coefficient), A3 is interaction-theoretic (vertex
+coefficient), A3 is a restriction of the spectrum (parity class
 $\to$ character).  Output: the cell at coordinates
 $(\mathrm{order}, \mathrm{bundle}, \mathrm{topology})$ determines
 the transcendental class.
@@ -2275,78 +2260,45 @@ integer~$s \ge 2$.  A3 follows from the Hurwitz quarter-shift
 identities $\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$ and
 $\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$ (so
 $\zeta(s, 5/4) - \zeta(s, 3/4) = 4^s(\beta(s) - 1)$) applied
-to the vertex-parity-restricted sum, giving
+to the parity-restricted sum, giving
 Eqs.~(\ref{eq:d_even4})--(\ref{eq:d_odd4}); the unrestricted sum is
 $D_{\mathrm{even}}(s) + D_{\mathrm{odd}}(s) = D(s)$, in which $G$
 and $\beta(4)$ cancel exactly, so the Dirichlet content is invisible
-without vertex restriction.  Computational verification: PSLQ at
+without the restriction.  Computational verification: PSLQ at
 80-digit precision; 35/35 tests in
 \texttt{tests/test\_qed\_vertex.py}.
 \end{proof}
 
 \paragraph{Remark: Dirichlet $L$-tier as new transcendental class.}
 The Dirichlet $\beta$-values introduced by axis~A3 are a genuinely
-new transcendental class: they arise from the \emph{interaction}
-(how electron and photon modes couple at the vertex), not from the
-free propagators.  In the exchange-constant taxonomy of
+new transcendental class: they arise from restricting the spectrum
+to one parity class of $n$ (Paper~28 Theorem~3), which the vertex
+model's parity clause does on internal lines (a reading of the model),
+and not from the unrestricted sums.  In the exchange-constant taxonomy of
 Sec.~\ref{sec:taxonomy} they constitute a \emph{vertex exchange
 constant} tier living beyond both calibration~$\pi$ and Riemann
 odd-zeta.  This is the entry that the RH-sprint $\chi_{-4}$ identity
 (Sec.~\ref{sec:level5_rh_sprint}, Eq.~\ref{eq:rh_j_identity}) places
 in closed form for the full Dirac Dirichlet difference.
 
-\paragraph{Photon vector structure as a calibration exchange constant.}
-The graph-native QED construction (Paper~28, GN-1 through GN-7)
-computes one-loop QED entirely on the finite Fock graph using exact
-algebraic arithmetic.  On the graph, the photon lives on edges
-(1-cochains) as a \emph{scalar} object---the edge Laplacian
-$L_1 = B^T\!B$ propagates it without reference to any vector
-structure.  In the continuum, the physical photon is a transverse
-vector field on~$S^3$ carrying $\mathrm{SO}(4) = \mathrm{SU}(2)_L
-\times \mathrm{SU}(2)_R$ quantum numbers, and this vector structure
-enforces selection rules (vertex parity, SO(4) channel counting~$W$)
-that are absent on the graph.  Adding explicit photon angular momentum
-labels $(q, m_q)$ with Clebsch--Gordan vertex coupling and E1 parity
-enforcement scores 7~of~8 selection rules for \emph{scalar}
-electrons in a vertex model (Paper~28; the ground-state rule there is
-a scalar-triangle zero that the physical vector vertex does not
-enforce).  The sole failure for scalar electrons is Furry's theorem:
-diagonal vertex couplings $V(a,a,q,m_q) \neq 0$ for $l \geq 1$ when
-$q$ is odd.  For \emph{Dirac} electrons the model scores 8/8 through a
-diagonal $\alpha_z$ identity, which does not hold for a physical vector
-photon (Paper~33).
-
-The calibration cost of the $1 \to 7$ transition is one
-transcendental per loop: $\pi$, entering as $1/(4\pi)$ (read as the
-$S^2$ Weyl exchange constant, an Observation) from the vector spherical
-harmonic normalization
-$\sqrt{(2l+1)(2q+1)(2l'+1)/(4\pi)}$.  This is a concrete instance
-of the calibration exchange constants cataloged in the taxonomy table
-(Table~\ref{tab:taxonomy}): the $S^2$ Weyl constant $\omega_2/(2\pi)^2
-= 1/(4\pi)$ converts the discrete angular momentum quantum numbers
-into the continuous solid angle measure required for vector photon
-normalization.  The entire scalar graph QED is $\pi$-free
-($\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$); the vector
-photon introduces exactly the $\omega_2 = \pi$ entry from the
-Weyl constant table.
-
-In the taxonomy, the photon's angular momentum structure therefore
-sits in the \textbf{calibration} tier, alongside the volume
-normalization $\mathrm{Vol}(S^3) = 2\pi^2$ and the Hurwitz-zeta
-regularization of infinite spectral sums: it is a property of the
-\emph{manifold embedding}, not of the graph.  This sharpens the
-graph/continuum partition for QED: the graph captures the
-algebraic/combinatorial content (rational propagators, algebraic CG
-vertices, $\pi$-free observables), while the continuum projection
-adds three calibration-tier ingredients: (1)~volume normalization,
-(2)~infinite-sum regularization, and (3)~photon vector structure
-(cost: $1/(4\pi)$ per loop).
-In Paper~33's census of eight selection rules (five standard, three
-specific to $S^3$), scored within a vertex model (Paper~28), the rules
-group by transcendental cost: graph topology (1~rule, zero cost), angular
-momentum conservation (6~rules, $1/(4\pi)$ per loop), and an eighth rule
-that scalar electrons fail.  For Dirac electrons the model scores the
-eighth rule through a diagonal-vertex identity.
+\paragraph{Photon vector structure.}
+QED on the finite Fock graph (Paper~33~\cite{loutey_paper33}) puts the
+photon on edges (1-cochains) as a \emph{scalar} object---the edge
+Laplacian $L_1 = B^T\!B$ propagates it without reference to any vector
+structure, and does not block-diagonalize by photon labels
+$(q, m_q)$.  In the continuum the physical photon is a coclosed 1-form
+on~$S^3$ carrying $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ quantum
+numbers.  Its vertex with Dirac eigenspinors, computed exactly in
+Paper~33, keeps triangle sparsity and $\Delta m$ conservation and
+satisfies the Ward--Takahashi identity exactly, while the ground-state
+zero, E1 parity and the level triangle $q \le n_1 + n_2$ fail; the
+$1{+}6{+}1$ grouping of the eight rules that the vertex model of
+Paper~28 gives does not survive it.  The factor $1/(4\pi)$ carried by
+the vertex model's angular vertex is the normalization of spherical
+harmonics on the unit~$S^2$ (Paper~33: $\Sigma_{l=1} = 1/(4\pi)$ at
+$n_{\max} = 2$); the physical vertex, normalized to volume one
+on~$S^3$, does not carry it, so no per-loop transcendental cost of
+photon vector structure is established.
 
 \paragraph{The diagonal-vertex identity (vertex model).}
 When the electron is described by a Dirac spinor
@@ -2713,14 +2665,13 @@ where the coefficient
   = 137.036064
   \label{eq:K}
 \end{equation}
-is constructed from spectral invariants of the Hopf fibration
-$S^1 \to S^3 \to S^2$.  The combination rule
+is constructed from spectral data of the unit three-sphere
+$S^3$.  The combination rule
 $K = \pi(B + F - \Delta)$ is recorded as an Observation---an
 empirical formula with structural support but no first-principles
 derivation.
 
-We observe that this combination rule has precisely the structure
-of a spectral-geometric exchange:
+Its ingredients mix discrete and continuous spectral data:
 \begin{itemize}
   \item $B = 42$ is discrete representation-theoretic data:
     the degeneracy-weighted $\mathrm{SO}(3)$ Casimir trace over
@@ -2731,58 +2682,18 @@ of a spectral-geometric exchange:
   \item $\Delta = 1/40$ is a boundary correction mixing discrete
     eigenvalue data ($|\lambda_3| = 8$) with the cumulative state
     count ($N(2) = 5$).
-  \item The overall factor $\pi$ is $\omega_2 = \pi$, the 2D
-    ball volume, which serves as the numerator of the $S^2$ Weyl
-    density and as the packing-plane prefactor
-    $\sigma_0 = \pi d_0^2 / 2$ in Paper~0 (the base of the Hopf
-    fibration, the photon propagation sphere).
+  \item The overall factor $\pi$ is chosen (Paper~2 lists the
+    weights, signs, prefactor and the cubic as chosen).
 \end{itemize}
-
-The structure of $K$ is thus: the 2D ball volume $\omega_2 = \pi$
-(the numerator of the $S^2$ Weyl density, and the same $\pi$ that
-fixes Paper~0's packing-plane prefactor $\sigma_0 = \pi d_0^2 / 2$)
-multiplying a sum of the $S^2$ Casimir trace ($B$, discrete),
-half the $S^1$ spectral zeta value ($F$, transcendental), and an
-$S^3$ boundary term ($\Delta$, mixed).  Read this way, it would be a
-Weyl-type formula converting between the discrete bundle
-(representation labels on $S^3$) and the continuous coupling
-(the electromagnetic interaction strength measured in
-$\mathbb{R}^3$).
-
-If this identification is correct, then the combination rule
-$K = \pi(B + F - \Delta)$ is not arbitrary numerology but an
-instance of the same spectral-geometric exchange that produces
-the energy-shell scale $p_0$ at Level~1 and $e^a E_1(a)$ at Level~2.
-On that (unproven) reading, the exchange constant for the Hopf
-bundle would be $K$ itself---the
-``cost'' of projecting the $S^3$ electron state space through
-the $S^1$ gauge fiber onto the $S^2$ photon base, measured
-in units of coupling strength.
-
-\begin{observation}[Spectral-geometric reading]
-The combination rule $K = \pi(B + F - \Delta)$ has the shape of a
-spectral-geometric exchange constant for the Hopf fibration,
-analogous to the Weyl--Selberg constants for compact manifolds.
-Whether the specific form---$\pi$ multiplying a sum of Casimir data
-and zeta values---admits a derivation from the spectral geometry
-of $S^1 \to S^3 \to S^2$ (e.g.\ via the heat-kernel expansion or the
-analytic torsion of the Hopf bundle) is an open question; no such
-derivation is known. The combination rule itself remains an Observation.
-\end{observation}
-
-Two additional observations support this identification:
 
 \begin{observation}[Structural match]
 The combination rule $K = \pi(B + F - \Delta)$ mixes discrete
 data ($B = 42$, from representation theory) with continuous
 spectral data ($F = \zeta(2) = \pi^2/6$, half the $S^1$
-spectral zeta function at $s = 1$), multiplied by an overall geometric
-factor ($\omega_2 = \pi$, the 2D ball volume that enters as the
-numerator of the $S^2$ Weyl density and as the packing-plane
-prefactor $\sigma_0 = \pi d_0^2 / 2$ in Paper~0, with $S^2$ the
-Hopf base).  This is precisely the pattern identified throughout this
-paper: a transcendental conversion factor mediating between
-discrete and continuous descriptions of the same geometry.
+spectral zeta function at $s = 1$), multiplied by $\pi$.  This is
+the pattern identified throughout this paper:\ a transcendental
+conversion factor mediating between discrete and continuous
+descriptions of the same geometry.
 The structural match is suggestive only:\ the combination rule
 remains an Observation (Paper~2), a numerical coincidence with
 structural support, and no derivation exists.
@@ -2847,7 +2758,7 @@ rationals whose denominators divide $32 = 2\,d_{\max}^2$:
   \label{eq:fock_weight_values}
 \end{equation}
 for $(n,l) \in \{(1,0),(2,0),(2,1),(3,0),(3,1),(3,2)\}$.  Weighted
-by the Hopf base factor $(2l+1)\,l(l+1)$ and summed,
+by the Casimir factor $(2l+1)\,l(l+1)$ and summed,
 \begin{equation}
   \sum_{n=1}^{3}\sum_{l=0}^{n-1} (2l+1)\,l(l+1)\,
     \langle n,l|w|n,l\rangle_{p_0 = 1}
@@ -2859,9 +2770,9 @@ with $B = 42$ the Casimir trace of Paper~2 and $\kappa = -1/16$
 the calibration constant of Sec.~\ref{sec:kappa_derivation}.
 Equivalently, averaging over the six $(n,l)$ cells gives
 $B\,|\kappa| = 21/8$.  This is an exact rational identity between
-the number $1/16 = 1/d_{\max}^2$ and the Hopf base invariant:\ $1/16$
+the number $1/16 = 1/d_{\max}^2$ and the Casimir trace $B$:\ $1/16$
 appears as the universal denominator factor of the Fock-weight matrix
-elements, while $B$ appears in the Hopf-weighted sum.  It is an
+elements, while $B$ appears in the Casimir-weighted sum.  It is an
 arithmetic identity involving the value $1/16$, not a derivation of
 $\kappa$'s matching role (which fixes only the graph's band edge) and
 not a strengthening of the Observation that the matched $\kappa$
@@ -2970,12 +2881,7 @@ matches $\alpha^{-1}$ to $4.8 \times 10^{-7}$ relative
 positive root of the cubic $\alpha^3 - K\alpha + 1 = 0$, i.e.\
 $1/\alpha = K - \alpha^2$, matches to $8.8\times10^{-8}$, so the
 physical $\alpha$ approximately satisfies that cubic.  No first-principles
-derivation of the combination is known.  In the lattice gauge
-language of Paper~25~\cite{loutey_paper25} and the non-abelian SU(2)
-extension of Paper~30~\cite{loutey_paper30}, $K/\pi$ has the shape
-of a finite-cutoff spectral-action coefficient (matter trace +
-gauge-fiber zeta + Dirac boundary mode count), but the equality with
-$\alpha^{-1}$ is an empirical observation, not a theorem.
+derivation of the combination is known.
 None of the three components is a Seeley--DeWitt coefficient of the
 perturbative Connes--Chamseddine expansion (the T9 obstruction).  An
 earlier inference that $K/\pi$ therefore lives in the non-perturbative
@@ -3032,7 +2938,7 @@ the truncation edge (irreducible to $\zeta$-content within the
 candidate set tested).  The remaining structural question is no
 longer a derivation question about any single component: it is a
 question about why the \emph{additive} combination
-$B + F - \Delta$, multiplied by the overall factor $\omega_2 = \pi$,
+$B + F - \Delta$, multiplied by the prefactor $\pi$,
 approximately equals $\alpha^{-1}$ (to $4.8 \times 10^{-7}$; to
 $8.8\times10^{-8}$ through the cubic's root).  That is a question
 about the conspiracy of three categorically different objects---a
@@ -3538,7 +3444,7 @@ within GeoVac observables}.
 \begin{observation}[Structural incommensurability]
 \label{obs:incommensurability}
 Across the framework, single-observable statements
-(``two-loop QED spectral sum on $S^3$'',
+(``two-loop Dirac spectral sum on $S^3$'',
 ``$K = \pi(B + F - \Delta)$'',
 ``zero structure of the GeoVac zeta'')
 have repeatedly resolved under structural analysis into sums or
@@ -3552,15 +3458,16 @@ documented instances; it may sharpen if further framework observables
 decompose the same way or if a bridge is found that fails cleanly.
 \end{observation}
 
-\paragraph{Instance~1 (QED on $S^3$, Paper~28).}  Perturbative QED
-sums on~$S^3$~\cite{loutey_paper28} produce three transcendental
-classes simultaneously: even-zeta content ($\pi^{\mathrm{even}}$,
+\paragraph{Instance~1 (Dirac spectral sums on $S^3$, Paper~28).}
+Spectral sums over the Camporesi--Higuchi Dirac
+spectrum~\cite{loutey_paper28} produce three transcendental
+classes: even-zeta content ($\pi^{\mathrm{even}}$,
 from second-order Riemannian operators), odd-zeta content
 ($\zeta(3), \zeta(5)$, from first-order Dirac), and Dirichlet-$L$
-content ($G = \beta(2), \beta(4)$, from vertex topology).  These
-three classes appear together in the two-loop sunset sum but are
-discriminated by Theorem~\ref{thm:three_axis}'s three axes
-(operator order $\times$ bundle type $\times$ vertex parity), and
+content ($G = \beta(2), \beta(4)$, from restricting the spectrum to
+one parity class of $n$).  These are discriminated by
+Theorem~\ref{thm:three_axis}'s three axes
+(operator order $\times$ bundle type $\times$ parity restriction), and
 no single mechanism generates all three.
 
 \paragraph{Instance~2 ($\alpha$-combination decomposition).}  By
@@ -3573,11 +3480,7 @@ $d_{\max} = 4$; and $\Delta^{-1} = 40$ is the degeneracy
 $g_3^{\mathrm{Dirac}} = 2 \cdot 4 \cdot 5$ of the third Dirac mode on
 the spinor bundle.  No common generator producing all three has been
 exhibited (twelve candidates eliminated;\ an empirical record, Paper~2); $K$
-assembles three structurally-independent spectral objects.  In the
-gauge-structure language of Paper~25~\cite{loutey_paper25} and the
-SU(2) Wilson extension of Paper~30~\cite{loutey_paper30}, $K/\pi$
-has the shape of a finite-cutoff spectral-action coefficient
-(matter trace + gauge zeta + Dirac boundary mode count).
+assembles three structurally-independent spectral objects.
 
 \paragraph{Instance~3 (Weil dictionary on the GeoVac Hopf graphs,
 Paper~29).}  The Ihara-zeta side (combinatorial, closed
@@ -3601,7 +3504,7 @@ of---the Coulomb/HO asymmetry established in
 Paper~24~\cite{loutey_paper24}: the graph's matrix entries are
 rational/integer on both bundles (its eigenvalues algebraic), but the projection structures (second-order Riemannian
 for the scalar, first-order complex-analytic for the HO holomorphic
-sector, Dirac for the spinor) are categorically different.  Paper~25~\cite{loutey_paper25} sharpens this further:
+sector, Dirac for the spinor) are categorically different.  Paper~24's gauge-structure corollary sharpens this further:
 abelian U(1) Wilson--Hodge structure transfers verbatim from $S^3$
 to the Bargmann--Segal $S^5$ graph, and pure-gauge SU(3) on the $(N,0)$
 irreps is well defined, but its natural coupling to matter fails
@@ -3666,7 +3569,7 @@ half-integer $s$ are outside the statement;\ the operator-order
 separation is conditional on the period conjecture):
 (A1)~operator order (1st vs.\ 2nd) via Theorem~\ref{thm:operator_order};
 (A2)~bundle type (scalar vs.\ spinor) modulating coefficients;
-(A3)~diagram topology (free vs.\ vertex-restricted) introducing
+(A3)~diagram topology (free vs.\ parity-restricted) introducing
 Dirichlet $L$-values ($G = \beta(2)$, $\beta(4)$) through the
 quarter-integer Hurwitz shift.  The taxonomy is $R$-independent:
 $D(s,R)/R^s$ is a structural invariant, and Weyl's law preserves the
@@ -3688,7 +3591,7 @@ numerical Observation without first-principles derivation.
 The three theorems share a meta-pattern: framework observables that
 look unitary at the surface
 (``$K = \pi(B + F - \Delta)$'';
-``two-loop QED on $S^3$'';
+``the two-loop Dirac spectral sum on $S^3$'';
 ``zero structure of the GeoVac zeta'')
 resolve under structural analysis into objects of different type
 (not always different cells of the operator-order $\times$ bundle
@@ -3762,8 +3665,7 @@ ingredients of $K/\pi = B + F - \Delta$ are not Seeley--DeWitt
 coefficients (the T9 obstruction, Paper~2): $B$ is a finite Casimir trace, $F$ is an arithmetic
 Dirichlet series, and $\Delta^{-1} = 40$ is the Dirac mode degeneracy
 $g_3^{\mathrm{Dirac}}$ at $n_{\mathrm{CH}} = 3$ (the Euler--Maclaurin
-upper boundary term of the mode-count sum is half of it, $20$;\
-Paper~2).  The sign on $\Delta$ in the combination rule $K = \pi(B + F -
+upper boundary term of the mode-count sum is half of it, $20$).  The sign on $\Delta$ in the combination rule $K = \pi(B + F -
 \Delta)$ is consistent with the $(-1)^{F}$ grading (a reading, not a
 derivation): $B$ and $F$ are
 scalar-sector (bosonic) quantities that enter with $(+)$, while
@@ -3827,8 +3729,8 @@ GeoVac FCI Paper (2026).
 
 \bibitem{loutey_paper2}
 J.~Loutey,
-``The Fine Structure Constant as a Spectral Coincidence on the Hopf
-Fibration,''
+``The Fine Structure Constant as a Spectral Coincidence on the
+Three-Sphere,''
 GeoVac Paper~2 (2026), \texttt{papers/group5\_qed\_gauge/}.
 
 \bibitem{loutey_paper22}
@@ -3843,11 +3745,6 @@ J.~Loutey,
 Harmonic Oscillator on $S^5$,''
 GeoVac Paper~24 (2026).
 
-\bibitem{loutey_paper25}
-J.~Loutey,
-``The Hopf Graph as a Lattice Gauge Structure: A Framework Observation,''
-GeoVac Paper~25 (2026).
-
 \bibitem{loutey_paper27}
 J.~Loutey,
 ``Entropy as a Projection Artifact: One-Body Operators are
@@ -3856,19 +3753,19 @@ GeoVac Paper~27 (2026).
 
 \bibitem{loutey_paper28}
 J.~Loutey,
-``QED on $S^3$: Spectral Geometry of Perturbative Transcendentals,''
+``Periods of Dirac Spectral Sums on $S^3$,''
 GeoVac Paper~28 (2026).
+
+\bibitem{loutey_paper33}
+J.~Loutey,
+``Selection Rules of the Vector-Photon Vertex on $S^3$: the Physical
+Vertex, the Vertex Model and the Graph,''
+GeoVac Paper~33 (2026).
 
 \bibitem{loutey_paper29}
 J.~Loutey,
 ``Finite-Size Graph-RH for the GeoVac Hopf Graphs: Ihara Zeta, Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen,''
 GeoVac Paper~29 (2026).
-
-\bibitem{loutey_paper30}
-J.~Loutey,
-``SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph:
-The Non-Abelian Sibling of Paper~25,''
-GeoVac Paper~30 (2026).
 
 \bibitem{loutey_paper32}
 J.~Loutey,

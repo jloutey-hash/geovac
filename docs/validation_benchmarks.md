@@ -247,8 +247,8 @@
 | Seeley-DeWitt a₀ on unit S³ | √π (exact sympy) | Heat kernel coefficient from Dirac D² spectrum |
 | Seeley-DeWitt a₁ on unit S³ | −√π/2 (exact sympy; corrected 2026-10-02 from √π, a sign error) | Curvature correction (R/6 + E = −1/2) |
 | Seeley-DeWitt a₂ on unit S³ | 0 (exact; two-term exactness; corrected 2026-10-02) | `tests/test_sd_coefficients_vs_spectrum.py` (independent spectral route) |
-| Vacuum polarization coefficient | 1/(48π²) (exact) | Standard flat-space Dirac fermion VP (entered, not computed from S³ data; Paper 28) |
-| β(α) QED one-loop | 2α²/(3π) (exact) | Standard flat-space value, entered (Paper 28) |
+| Vacuum polarization coefficient | 1/(48π²) (exact) | Standard flat-space Dirac fermion VP (entered, not computed from S³ data) |
+| β(α) QED one-loop | 2α²/(3π) (exact) | Standard flat-space value, entered |
 | ζ_{D²}(s) at integer s is a polynomial in π² | structural theorem (T9) | the one-loop determinant ζ'_{D²}(0) = 3ζ(3)/(4π²) + (ln 2)/2 does carry odd zeta |
 | D_even(4) decomposition | π²/2 − π⁴/24 − 4G + 4β(4) (PSLQ 80 digits) | Vertex parity exposes Catalan G and Dirichlet β(4) |
 | D_odd(4) opposite sign | π²/2 − π⁴/24 + 4G − 4β(4) (PSLQ 80 digits) | Opposite Dirichlet content in odd-n sub-sum |
@@ -300,7 +300,7 @@
 | Graph-native Σ eigenvalues (t=0) | {0(×5), 4/3, 2(×2), 4, 16/3} | Self-energy spectrum |
 | Graph-native VP Π trace (n_max=2) | exactly 32 | Vacuum polarization trace (GN-4) |
 | Graph-native VP Π trace (n_max=3) | exactly 3192/5 | VP extension (GN-6) |
-| Graph-native projection C (n_max=3) | 50471424/1779441125 | Rational projection exchange constant (GN-7) |
+| Graph-native projection C (n_max=3) | 102935584512/1112150703125 (corrected W, 2026-11-07) | Rational projection exchange constant (GN-7) |
 | Graph-native all π-free | structural | All graph QED quantities algebraic, no transcendentals |
 | GN-6 n_max=3 VP tests | 45 pass | Extended VP at n_max=3 |
 | GN-7 continuum bridge tests | 63 pass | Projection exchange constant verification |
@@ -324,7 +324,7 @@
 | Dirac graph Tr(Σ_B) | exactly 103/20 | Exact algebraic trace |
 | Dirac graph Furry recovered | tadpole = 0 | Off-diagonal identity vertex parity |
 | VP/SE projection ratio constant | CV < 1% across n_max=3,4,5 | Two-tier calibration structure |
-| VP/SE ratio ≈ 3/29 | 0.1035 ± 0.0009 | Closest simple rational |
+| VP/SE ratio | 0.137 ± 0.002 (corrected W, 2026-11-07) | No simple rational (the earlier 3/29 used the defective count) |
 | C_F2 exponent matches F₂ | +0.57 vs −0.57 | Complementary scaling |
 | Catalan/β from graph parity | 24 PSLQ null | Clean negative |
 | Per-mode projection topological | ρ varies 0 to 1.66 | Not multiplicative |
@@ -333,11 +333,11 @@
 | Co-exact eigenvalue q=3 match (n_max=3) | exact 15.0 = 3×5 | Transverse mode spectrum |
 | Triangle inequality modes q=3,4 (n_max=4) | 0% violations | Low-q mode-resolved SR test |
 | Triangle inequality modes q=5,6 (n_max=4) | 63-86% violations | High-q structural negative |
-| Ward identity ||[Σ_T,H₀]||/||Σ_T|| | ~0.58 | Non-diagonal (calibration needed) |
-| Vector QED scalar+vector 7/8 rules | 7 of 8 PASS | Vector photon selection rule recovery |
+| Ward proxy ||[Σ_T,H₀]||/||Σ_T|| (a commutator, not a Ward identity; Paper 33) | ~0.58 | Non-diagonal |
+| Vector QED scalar+vector 7/8 rules (vertex model) | 7 of 8 PASS | Vertex-model tally; the 7/8 theorem is cut from the papers and the tally does not survive the physical vertex (Paper 33) |
 | Vector QED Dirac+vector 8/8 rules (vertex model) | 8 of 8 PASS | α_z diagonal identity; not Furry for a physical vector photon |
 | Vector QED GS zero (vertex model) | Σ(GS) = 0 exactly | Scalar-triangle rule; the physical vector vertex couples the GS at q=1 |
-| Vector QED l=1 self-energy at n_max=2 | exactly 1/(4π) | vertex normalization (read as S² Weyl constant: Observation) |
+| Vector QED l=1 self-energy at n_max=2 | exactly 1/(4π) | unit-S² harmonic normalization of the vertex model (Paper 33 Prop. 3) |
 | Vector QED Furry scalar FAIL | nonzero odd-q diagonal | Scalar electrons: no spinor phase constraint |
 | Vector QED Furry Dirac PASS (vertex model) | tadpole = 0 exactly | α_z diagonal identity V(a,a)=0; imposed in code |
 | Vector QED scalar ≠ Dirac rules (vertex model) | 7/8 vs 8/8 | α_z diagonal identity |

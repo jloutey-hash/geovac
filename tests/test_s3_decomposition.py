@@ -5,9 +5,11 @@ decomposition: debug/sprint_s3_decomposition_memo.md).
 
 Five test groups:
   (i)   Chain-collapse identity in exact Fraction arithmetic: the
-        channel-count closed form I(n1,n2) = 2*min-1-[n1=n2] factorizes
-        the three-loop chain cube sum exactly, cross-checked against the
-        real SO(4) CG machinery at small N.
+        channel-count closed form I(n1,n2) = 2*min(n1,n2) (corrected W,
+        2026-11-07; was 2*min-1-[n1=n2]) factorizes the three-loop chain
+        cube sum exactly, cross-checked against the real SO(4) CG
+        machinery at small N, plus the o-space relation
+        S3 = C - 12 P S_min - 9 P^3.
   (ii)  Trailing-1 Abel evaluator vs rigorous direct-sum brackets — the
         precision-contract regression guard (a frozen-precision term
         cache fed to nsum/Levin reproduces the stage-1 mis-convergence;
@@ -19,8 +21,13 @@ Five test groups:
         evaluator errors; with correct values both must pass.
   (v)   Global anchor bracket: rigorous lower bound (positive-term
         partial sum) + integral tail bound must contain the canonical
-        S^(3) value and EXCLUDE both wrong stage-1 figures (30.6154
-        decomposition-with-poisoned-entries, 30.2197 log-blind Levin).
+        S^(3) value and EXCLUDE the old-count value 31.5726 and both
+        wrong stage-1 figures (30.6154, 30.2197).
+  (vi)  w10 stuffle-closure reduction.
+  (vii) Corrected-W closed form (2026-11-07): S^(3) in
+        Q[pi^2, ln2, zeta(3), zeta(5), zeta(5,3)], 25 terms, against the
+        pinned value and against an independent route (old-count value +
+        directly summed correction 2G + 4 P S_min - P^3 - 8PQ - R3).
 
 Runtime: fast groups < 60 s total; group (iv) is marked slow.
 """
@@ -44,9 +51,15 @@ from geovac.qed_vertex import so4_channel_count, _vertex_allowed
 # Pinned constants (closure sprint, debug/data/s3_closure_*.json)
 # ---------------------------------------------------------------------------
 
-# Canonical S^(3) at physical exponents (a=4, p=1), corrected assembly
-# (s3_closure_recompute.py, 200 dps; first 60 digits pinned).
+# Canonical S^(3) at physical exponents (a=4, p=1) with the corrected
+# channel count W (2026-11-07; debug/w_channel_count_correction.py, closed
+# form at 200 dps, independent route agrees to 3e-120; first 60 digits).
 S3_CANONICAL_50 = (
+    "40.6553875635854225477443399691170522400636806408300864521370")
+
+# The old-count value (I = 2 min - 1 - [n1=n2]; s3_closure_recompute.py,
+# 200 dps), now the value of a mis-weighted sum:
+S3_OLD_COUNT = (
     "31.5725612075120227547619295450689833719575844695771941287005")
 
 # The two refuted stage-1 figures (sprint_s3_decomposition_memo.md):
@@ -65,10 +78,8 @@ def phi_frac(n: int) -> Fraction:
 
 
 def I_closed_form(n1: int, n2: int) -> int:
-    m = min(n1, n2)
-    if m == 0:
-        return 0
-    return 2 * m - 1 - (1 if n1 == n2 else 0)
+    """2*min(n1,n2), 0 when min = 0 (corrected W, 2026-11-07)."""
+    return 2 * min(n1, n2)
 
 
 def I_channel_geovac(n1: int, n2: int) -> int:
@@ -196,7 +207,8 @@ class TestChainCollapse:
 
     sum_{n1,n2,n3<=N} I(n1,n2) I(n2,n3) phi(n1) phi(n2) phi(n3)
         == sum_{m<=N} phi(m) * L_N(m)^2,
-    L_N(m) = sum_{n<=N} I(n,m) phi(n) = 2 A_N(m) - P_N - phi(m).
+    L_N(m) = sum_{n<=N} I(n,m) phi(n) = 2 A_N(m)   (corrected W, 2026-11-07;
+    the old count gave 2 A_N(m) - P_N - phi(m)).
     """
 
     def test_factorization_exact_fraction(self) -> None:
@@ -211,9 +223,28 @@ class TestChainCollapse:
         factorized = Fraction(0)
         for m in range(1, N + 1):
             A_N = sum(min(n, m) * phis[n] for n in range(1, N + 1))
-            L_N = 2 * A_N - P_N - phis[m]
+            L_N = 2 * A_N
             factorized += phis[m] * L_N * L_N
         assert direct == factorized
+
+    def test_ospace_relation_exact(self) -> None:
+        """S3(N) == C - 12 P S_min - 9 P^3 in the o-space box o <= 2N+3
+        (corrected W, 2026-11-07; the G core of the old relation
+        S3 = C - 2G - 16 S_min P - 8P^3 + 8PQ + R3 drops out)."""
+        N = 10
+        phis = {n: phi_frac(n) for n in range(1, N + 1)}
+        direct = Fraction(0)
+        for m in range(1, N + 1):
+            L = sum(I_channel_geovac(n, m) * phis[n] for n in range(1, N + 1))
+            direct += phis[m] * L * L
+        P = sum(phis.values())
+        S_min = sum(min(a, b) * phis[a] * phis[b]
+                    for a in phis for b in phis)
+        odds = range(5, 2 * N + 4, 2)
+        ps = {o: Fraction(8 * (o * o - 1), o ** 4) for o in odds}
+        C = sum(min(a, b) * min(b, c) * ps[a] * ps[b] * ps[c]
+                for a in odds for b in odds for c in odds)
+        assert direct == C - 12 * P * S_min - 9 * P ** 3
 
     def test_chain_vs_cg_machinery_small_N(self) -> None:
         """Closed-form chain == real SO(4) CG chain at N=6 (exact)."""
@@ -391,10 +422,11 @@ class TestStuffleWitnesses:
 
 class TestAnchorBracket:
     """Rigorous bracket for S^(3) = sum_m phi(m) L(m)^2 (factorized chain,
-    closed-form full-range L): monotone partial sum (lower) + integral
-    tail bound 32[(ln N+1)^2+2(ln N+1)+2]/N (upper).  Derivations in
-    debug/s3_closure_anchor.py.  Must contain the canonical value and
-    exclude BOTH wrong stage-1 figures."""
+    closed-form full-range L = 2 A(m), corrected W 2026-11-07): monotone
+    partial sum (lower) + integral tail bound 32[(ln N+1)^2+2(ln N+1)+2]/N
+    (upper; L <= 4(ln m + 1), phi <= 2/(m+1)^2).  Must contain the
+    canonical value and exclude the old-count value and BOTH wrong
+    stage-1 figures."""
 
     N = 20000
 
@@ -410,7 +442,7 @@ class TestAnchorBracket:
             x2 = x * x
             pm = 8 * (x2 - 1) / (x2 * x2)
             A = cum_nphi + m * (P - cum_phi)
-            L = 2 * A - P - pm
+            L = 2 * A
             head += pm * L * L
             cum_phi += pm
             cum_nphi += m * pm
@@ -420,7 +452,8 @@ class TestAnchorBracket:
 
     def test_bracket_excludes_stale_figures(self) -> None:
         lo, hi = self._bracket()
-        for stale in (S3_STALE_DECOMPOSITION, S3_STALE_LEVIN_ANCHOR):
+        for stale in (S3_OLD_COUNT, S3_STALE_DECOMPOSITION,
+                      S3_STALE_LEVIN_ANCHOR):
             v = mpmath.mpf(stale)
             assert not (lo <= v <= hi), (
                 "stale figure %s inside bracket [%s, %s]"
@@ -475,3 +508,75 @@ class TestW10Reduction:
         assert abs(lhs - rhs) < self.TOL, (
             "w10 reduction identity residual %s"
             % mpmath.nstr(abs(lhs - rhs), 5))
+
+
+# ===========================================================================
+# Group (vii): corrected-W closed form (2026-11-07)
+# ===========================================================================
+
+def _zeta53_desc():
+    """zeta(5,3) = sum_{m>n>=1} m^-5 n^-3 (log-free, Levin-safe)."""
+    z3v = mpmath.zeta(3)
+    return mpmath.nsum(lambda n: n ** mpmath.mpf(-5) * (z3v - mpmath.zeta(3, n)),
+                       [2, mpmath.inf], method="levin")
+
+
+def _s3_closed_form(z53):
+    """The corrected-W S^(3) closed form (25 terms; Paper 28
+    eq:s3_closed_form), generated by debug/w_channel_count_correction.py
+    as (old-count closed form) + 2G + 4 P S_min - P^3 - 8PQ - R3."""
+    pi, ln2 = mpmath.pi, mpmath.log(2)
+    z3, z5 = mpmath.zeta(3), mpmath.zeta(5)
+    F = lambda a, b: mpmath.mpf(a) / b
+    return (128 * pi**2 * ln2**2 - F(32, 3) * pi**4 * ln2**2
+            + 64 * pi**2 * ln2 - F(304, 3) * pi**4 * ln2 + 16 * pi**6 * ln2
+            - F(2, 3) * pi**8 * ln2
+            - 96 * pi**2 * ln2 * z3 + 16 * pi**4 * ln2 * z3
+            - 80 * pi**2 * ln2 * z5
+            + 20 * pi**2 * z3**2 - 7 * pi**4 * z3**2 + 70 * pi**2 * z3 * z5
+            - 24 * pi**2 * z3 + 40 * pi**4 * z3 - 9 * pi**6 * z3
+            + pi**8 * z3 / 2
+            - 20 * pi**2 * z5 + 30 * pi**4 * z5 - F(5, 2) * pi**6 * z5
+            + 6 * pi**2 * z53
+            + F(8, 3) * pi**4 + F(374, 45) * pi**6 - F(8231, 3780) * pi**8
+            + F(124571, 680400) * pi**10 - pi**12 / 192)
+
+
+class TestCorrectedClosedForm:
+    """Corrected-W S^(3) (2026-11-07).  zeta(7), zeta(9), zeta(11) and all
+    rational constants are absent; zeta(5,3) enters at 6 pi^2, as in the
+    old-count sum (the correction 2G + 4 P S_min - P^3 - 8PQ - R3 is
+    depth <= 1)."""
+
+    def test_closed_form_vs_canonical(self) -> None:
+        mpmath.mp.dps = 70
+        v = _s3_closed_form(_zeta53_desc())
+        assert abs(v - mpmath.mpf(S3_CANONICAL_50)) < mpmath.mpf(10) ** -55
+
+    def test_independent_route(self) -> None:
+        """Old-count value + directly summed correction (no t-value table):
+        G = sum_{o1>=5} psi(o1) sum_{o2>=5} min(o1,o2) psi(o2)^2 by Hurwitz
+        inner tails, S_min by the T(k)^2 tail sum."""
+        mpmath.mp.dps = 45
+        tl = lambda s_, x: mpmath.mpf(2) ** (-s_) * mpmath.zeta(s_, mpmath.mpf(x) / 2)
+        K = 64 * (tl(3, 5) - 2 * tl(5, 5) + tl(7, 5))
+
+        def term(j):
+            o1 = 2 * int(j) + 3
+            Nv = (K - 64 * (tl(3, o1) - 2 * tl(5, o1) + tl(7, o1))
+                  + o1 * 64 * (tl(4, o1) - 2 * tl(6, o1) + tl(8, o1)))
+            return mpmath.mpf(8 * (o1 * o1 - 1)) / mpmath.mpf(o1) ** 4 * Nv
+        G = mpmath.nsum(term, [1, mpmath.inf], method="levin")
+
+        def Tt(k):
+            a = mpmath.mpf(k) + mpmath.mpf(3) / 2
+            return 2 * mpmath.zeta(2, a) - mpmath.zeta(4, a) / 2
+        S_min = mpmath.nsum(lambda k: Tt(int(k)) ** 2, [1, mpmath.inf],
+                            method="levin")
+        h = lambda s_: mpmath.zeta(s_, mpmath.mpf(5) / 2)
+        P = mpmath.pi**2 - mpmath.pi**4 / 12 - mpmath.mpf(64) / 81
+        Q = 4 * h(4) - 2 * h(6) + h(8) / 4
+        R3 = 8 * h(6) - 6 * h(8) + mpmath.mpf(3) / 2 * h(10) - h(12) / 8
+        v = (mpmath.mpf(S3_OLD_COUNT) + 2 * G + 4 * P * S_min - P**3
+             - 8 * P * Q - R3)
+        assert abs(v - mpmath.mpf(S3_CANONICAL_50)) < mpmath.mpf(10) ** -40

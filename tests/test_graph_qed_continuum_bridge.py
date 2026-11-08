@@ -97,6 +97,18 @@ class TestSpectrumHelpers:
             assert _d_q_transverse(q) == _mu_q(q)
 
 
+
+def _vp_independent(n_max_ch):
+    """Corrected-W truncated continuum VP by an independent route
+    (2026-11-07): W = 2 on every window triple, the window holds
+    min(n1, n2) photon levels, so VP = sum 2 min(n1,n2) phi(n1) phi(n2)."""
+    def phi(n):
+        o = 2 * n + 3
+        return Fraction(8 * (o * o - 1), o ** 4)
+    tot = sum(2 * min(a, b) * phi(a) * phi(b)
+              for a in range(n_max_ch + 1) for b in range(n_max_ch + 1))
+    return Rational(tot.numerator, tot.denominator)
+
 # =========================================================================
 # Vertex selection rules
 # =========================================================================
@@ -124,18 +136,19 @@ class TestVertexSelectionRules:
         assert not _vertex_allowed(0, 0, 1)  # q=1 > 0+0=0
         assert not _vertex_allowed(1, 1, 5)  # q=5 > 1+1=2
 
-    def test_w_111_is_zero(self):
-        """W(1,1,1) = 0 even though the triple is parity-allowed."""
+    def test_w_111_is_two(self):
+        """W(1,1,1) = 2: both vector components couple ((1,1/2) x (1,1/2)).
+        Corrected W, 2026-11-07 (the old count gave 0)."""
         assert _vertex_allowed(1, 1, 1)
-        assert _so4_channel_count(1, 1, 1) == 0
+        assert _so4_channel_count(1, 1, 1) == 2
 
-    def test_w_122_is_one(self):
-        """W(1,2,2) = 1."""
-        assert _so4_channel_count(1, 2, 2) == 1
+    def test_w_122_is_two(self):
+        """W(1,2,2) = 2 (corrected W, 2026-11-07; old count gave 1)."""
+        assert _so4_channel_count(1, 2, 2) == 2
 
-    def test_w_212_is_one(self):
-        """W(2,1,2) = 1."""
-        assert _so4_channel_count(2, 1, 2) == 1
+    def test_w_212_is_two(self):
+        """W(2,1,2) = 2 (corrected W, 2026-11-07; old count gave 1)."""
+        assert _so4_channel_count(2, 1, 2) == 2
 
     def test_w_223_is_two(self):
         """W(2,2,3) = 2."""
@@ -191,9 +204,10 @@ class TestContinuumVP:
         """Forbidden triples give zero contribution."""
         assert continuum_vp_mode_contribution(0, 1, 1) == 0
 
-    def test_mode_contribution_w0_is_zero(self):
-        """Allowed triple with W=0 gives zero contribution."""
-        assert continuum_vp_mode_contribution(1, 1, 1) == 0
+    def test_mode_contribution_111_value(self):
+        """(1,1,1) contributes 2 phi(1)^2 = 73728/390625 (corrected W,
+        2026-11-07: W(1,1,1) = 2; the old count gave W = 0 and 0)."""
+        assert continuum_vp_mode_contribution(1, 1, 1) == Rational(73728, 390625)
 
     def test_mode_contribution_122_is_rational(self):
         """(1,2,2) contribution is a nonzero rational."""
@@ -215,8 +229,10 @@ class TestContinuumVP:
         assert continuum_vp_truncated(0) == 0
 
     def test_truncated_nmax_ch_1(self):
-        """Continuum VP at n_max_ch=1 is zero (only triple has W=0)."""
-        assert continuum_vp_truncated(1) == 0
+        """Continuum VP at n_max_ch=1 = 73728/390625 (corrected W,
+        2026-11-07; was 0).  Pinned against the independent route."""
+        assert continuum_vp_truncated(1) == Rational(73728, 390625)
+        assert continuum_vp_truncated(1) == _vp_independent(1)
 
     def test_truncated_nmax_ch_2_nonzero(self):
         """Continuum VP at n_max_ch=2 is nonzero."""
@@ -224,9 +240,17 @@ class TestContinuumVP:
         assert val > 0
 
     def test_truncated_nmax_ch_2_value(self):
-        """Continuum VP at n_max_ch=2 = 538361856/3603000625."""
+        """Continuum VP at n_max_ch=2 = 1097979568128/2251875390625
+        (corrected W, 2026-11-07; was 538361856/3603000625)."""
         val = continuum_vp_truncated(2)
-        assert val == Rational(538361856, 3603000625)
+        assert val == Rational(1097979568128, 2251875390625)
+        assert val == _vp_independent(2)
+
+    def test_truncated_matches_independent_route(self):
+        """Corrected W (2026-11-07): truncated VP == independent 2*min route
+        for n_max_ch = 0..4, exactly."""
+        for n in range(5):
+            assert continuum_vp_truncated(n) == _vp_independent(n), n
 
     def test_truncated_monotone(self):
         """Truncated continuum VP is non-decreasing in n_max_ch."""
@@ -242,10 +266,15 @@ class TestContinuumVP:
 class TestProjectionConstant:
     """Tests for the projection exchange constant."""
 
-    def test_nmax2_continuum_is_zero(self):
-        """At n_max_fock=2, continuum VP is zero."""
+    def test_nmax2_continuum_is_nonzero(self):
+        """At n_max_fock=2 the continuum VP is nonzero and C = 6912/109375
+        (corrected W, 2026-11-07: (1,1,1) has W = 2; the old count made
+        the continuum VP vanish here)."""
         result = compute_projection_constant(n_max_fock=2)
-        assert result['continuum_is_zero']
+        assert not result['continuum_is_zero']
+        assert result['graph_trace'] == '224/75'
+        assert result['projection_constant'] == '6912/109375'
+        assert Rational(6912, 109375) == _vp_independent(1) / Rational(224, 75)
 
     def test_nmax3_continuum_nonzero(self):
         """At n_max_fock=3, continuum VP is nonzero."""
@@ -263,14 +292,19 @@ class TestProjectionConstant:
         assert result['is_rational']
 
     def test_nmax3_value(self):
-        """Projection constant at n_max_fock=3 = 50471424/1779441125."""
+        """Projection constant at n_max_fock=3 = 102935584512/1112150703125
+        (corrected W, 2026-11-07; was 50471424/1779441125)."""
         result = compute_projection_constant(n_max_fock=3)
-        assert result['projection_constant'] == '50471424/1779441125'
+        assert result['projection_constant'] == '102935584512/1112150703125'
+        assert (Rational(102935584512, 1112150703125)
+                == _vp_independent(2) / Rational(3872, 735))
 
-    def test_classify_nmax2_zero_continuum(self):
-        """Classification at n_max_fock=2: continuum is zero."""
+    def test_classify_nmax2_calibration(self):
+        """Classification at n_max_fock=2: rational, CALIBRATION tier
+        (corrected W, 2026-11-07: the continuum VP is no longer zero)."""
         cls = classify_projection_constant(n_max_fock=2)
-        assert 'ZERO' in cls['status'] or 'zero' in cls['status'].lower()
+        assert cls['paper_18_tier'] == 'CALIBRATION'
+        assert cls['projection_constant_value'] == '6912/109375'
 
     def test_classify_nmax3_calibration(self):
         """Classification at n_max_fock=3: CALIBRATION tier."""
@@ -318,11 +352,15 @@ class TestModeDecomposition:
         triples = _enumerate_allowed_triples(2)
         assert len(triples) == 5
 
-    def test_continuum_decomp_nmax1_all_W0(self):
-        """At n_max_ch=1, all allowed triples have W=0."""
+    def test_continuum_decomp_nmax1_all_W2(self):
+        """At n_max_ch=1 the single allowed triple (1,1,1) has W=2
+        (corrected W, 2026-11-07: no allowed triple has W=0 at any
+        truncation; the old count gave W=0 here)."""
         result = continuum_vp_mode_decomposition(1)
-        assert result['n_nonzero_W'] == 0
-        assert result['n_zero_W_but_allowed'] == 1
+        assert result['n_nonzero_W'] == 1
+        assert result['n_zero_W_but_allowed'] == 0
+        for n in range(4):
+            assert continuum_vp_mode_decomposition(n)['n_zero_W_but_allowed'] == 0
 
     def test_continuum_decomp_nmax2_has_nonzero(self):
         """At n_max_ch=2, some triples have W > 0."""

@@ -116,31 +116,9 @@ def _vertex_allowed(n1: int, n2: int, n_gamma: int) -> bool:
 
 
 def _so4_channel_count(n1: int, n2: int, n_gamma: int) -> int:
-    """SO(4) CG channel count (0, 1, or 2). Simplified from qed_vertex.py."""
-    if not _vertex_allowed(n1, n2, n_gamma):
-        return 0
-    from fractions import Fraction
-    j1_L = Fraction(n1 + 1, 2)
-    j1_R = Fraction(n1, 2)
-    j2_L = Fraction(n2, 2)
-    j2_R = Fraction(n2 + 1, 2)
-    q = n_gamma
-    count = 0
-    # Component A: ((q+1)/2, (q-1)/2)
-    jg_L_A = Fraction(q + 1, 2)
-    jg_R_A = Fraction(q - 1, 2)
-    if (jg_R_A >= 0
-            and abs(j1_L - jg_L_A) <= j2_L <= j1_L + jg_L_A
-            and abs(j1_R - jg_R_A) <= j2_R <= j1_R + jg_R_A):
-        count += 1
-    # Component B: ((q-1)/2, (q+1)/2)
-    jg_L_B = Fraction(q - 1, 2)
-    jg_R_B = Fraction(q + 1, 2)
-    if (jg_L_B >= 0
-            and abs(j1_L - jg_L_B) <= j2_L <= j1_L + jg_L_B
-            and abs(j1_R - jg_R_B) <= j2_R <= j1_R + jg_R_B):
-        count += 1
-    return count
+    """SO(4) channel count (0, 1, or 2); single source qed_vertex.so4_channel_count."""
+    from geovac.qed_vertex import so4_channel_count
+    return so4_channel_count(n1, n2, n_gamma)
 
 
 # ---------------------------------------------------------------------------
@@ -665,7 +643,7 @@ def classify_three_loop_transcendentals() -> Dict[str, str]:
         "depth_k_prediction": (
             "At k loops with vertex restrictions and CG weights (Paper 28 "
             "Prop. depth_k): one loop, integer-s traces of D^2 are pi^{even} "
-            "(T9); two loops (sunset vertex restriction adds G, beta(4)), S_min identified "
+            "(T9); two loops (the sunset is 2 S_min; G, beta(4) enter only parity-split sums), S_min identified "
             "at realized depth <= 1; three loops, S^(3) identified at realized "
             "depth <= 2 (sole depth-2 constant zeta(5,3)). The earlier "
             "'depth-k predicted' reading is superseded."
@@ -701,9 +679,10 @@ def three_loop_factorized(
 
     Because the vertex weights and spectrum are the same at both vertices,
     L(n2) and R(n2) have the same functional form but with n2 in the "other"
-    slot. However, the vertex coupling W(n1, n2, q) is NOT symmetric in
-    n1 and n2 in general (the SU(2)_L x SU(2)_R reps differ for the two
-    electron lines). So we compute L(n2) and R(n2) separately.
+    slot. With the corrected channel count (2026-11-07) W(n1, n2, q) is
+    symmetric in n1 and n2 (W = 2 on every allowed triple), so L = R;
+    both are still computed separately, which keeps the factorization a
+    check rather than an assumption.
 
     For the LEFT partial sum, n2 is in position 2 of W(n1, n2, q1):
         L(n2) = sum_{n1} sum_{q1} W(n1, n2, q1) * g(n1) * d_T(q1) / (lam(n1)^a * mu(q1)^p)

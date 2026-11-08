@@ -256,8 +256,7 @@ fibration
   \label{eq:s5-fibration}
 \end{equation}
 is the structural analog of the Hopf fibration $S^1 \to S^3 \to
-S^2$ that played a central role in Paper~7~\cite{paper7} and the
-$\alpha$ Observation of Paper~2~\cite{paper2_alpha}.
+S^2$ of the unit three-sphere (Paper~7~\cite{paper7}).
 
 The CR Laplacian (Kohn Laplacian) $\Box_b$ on the holomorphic
 sector of $S^5$, the Dolbeault Laplacian on $\mathcal{O}(N) \to
@@ -545,7 +544,7 @@ summarizes the comparison.
 \emph{Note on the layer count.}\ The Coulomb/HO asymmetry has been
 refined to seven layers catalogued, five standing (Layer~1 withdrawn
 2026-09-25, Layer~2 withdrawn 2026-10-19) (enumerated in \S\ref{sec:asymmetry_layer4}) across Sprint~5 Track~S5 (gauge-content),
-Paper~30 (SU(2) Wilson on $S^3$), Sprint~ST-SU3 (SU(3) Wilson on
+Paper~30 (SU(2) Wilson on the scalar label graph), Sprint~ST-SU3 (SU(3) Wilson on
 $S^5$), Sprints~L2-E/L2-F.1 (modular wedge), Paper~51 (gravity termination),
 Sprint~Q5$'$-S5 (Mellin parity), and the Hodge-circle
 arithmetic computation (August~2026).  \emph{Layer (i) is withdrawn
@@ -783,7 +782,7 @@ fourth layer at the level of the (posited) wedge generator:
   at even argument, and the projection type depends on which number is
   held fixed;\ Section~\ref{sec:ks_frame}).
 \item Layer~3: Wilson lattice gauge with natural matter coupling
-  (Coulomb-specific, via Papers~25, 30; $S^5$ is gauge-only per
+  (Coulomb-specific, via Paper~30; $S^5$ is gauge-only per
   Sprint~ST-SU3).
 \item Layer~4: Pythagorean orthogonality of the posited wedge
   generator and the wedge Dirac on the hemispheric wedge (its
@@ -793,10 +792,12 @@ fourth layer at the level of the (posited) wedge generator:
   operators rather than a theorem).
 \item Layer~5: spectral-action gravity termination
   (Paper~51). The CH Dirac spectral action on $S^{2m+1}$ terminates
-  at exactly $(m{+}1)$ power-law terms; only $S^3$ ($m=1$) gives
-  \emph{pure Einstein gravity} (2~terms: cosmological $+$ EH, no
-  $R^2$ or higher-curvature corrections). $S^5$ ($m=2$) terminates at
-  3~terms (includes $R^2$ Gauss--Bonnet). The mechanism is the
+  at exactly $(m{+}1)$ power-law terms; only $S^3$ ($m=1$) gives two
+  (the volume and scalar-curvature terms), and on the conformally flat
+  $S^3$ and $S^3 \times S^1$ there are no higher-curvature
+  corrections. $S^5$ ($m=2$) terminates at 3~terms; on a round sphere
+  the term count does not say which curvature invariants a general
+  background would carry. The mechanism is the
   Bernoulli identity for odd polynomials at half-integer shifts.
 \item Layer~6 \emph{(new)}: master Mellin engine chirality-parity
   selection rule (Sprint Q5'-S5-falsifier, June~2026;
@@ -1257,11 +1258,10 @@ Tier~1 Track~D3 ($\zeta(3)$ from first-order Dirac); T9 debug memo
 \subsection{Gauge-structure corollary: reduced Wilson content on $S^5$}
 \label{sec:gauge-structure-reduced}
 
-Paper~25~\cite{paper25} observes that the GeoVac $S^3$ Coulomb graph
-at finite~$n_{\max}$ is simultaneously a Fock discretization of
-$S^3$, a triangle-free simplicial 1-complex with discrete Hodge
-decomposition, and an abelian Wilson-type $U(1)$ lattice gauge
-structure with matter on nodes and a $U(1)$ connection on edges.
+Paper~30~\cite{paper30} (Sec.~4.2) records the dictionary between
+Wilson lattice gauge data and graph-Hodge data on the GeoVac $S^3$
+label graph at finite~$n_{\max}$:\ matter on nodes, a $U(1)$
+connection on edges, and the discrete Hodge decomposition.
 The same three structural layers are available on the
 Bargmann--Segal graph of the present paper, but with reduced
 physical content.  This corollary documents the transfer pattern.
@@ -1284,12 +1284,12 @@ Hodge decomposition
 $\mathbb{R}^{165} = \mathrm{im}\,d_0 \oplus \ker L_1$ and the
 SVD identity between nonzero spectra of $L_0$ and $L_1$ both hold.
 At this level of abstraction, the Bargmann graph is a lattice
-gauge structure in exactly the Paper~25 sense.
+gauge structure in exactly the Paper~30 sense.
 
 \paragraph{Reduced content (no spectrum-computing role for $L_0$).}
 An earlier version of this paragraph stated that on $S^3$ the node
 Laplacian $L_0 = D - A$ is conformally identified with the continuum [retracted 2026-09-25: graph-laplacian-converges-to-s3]
-$S^3$ Laplace--Beltrami operator, so that the Paper~25 Wilson
+$S^3$ Laplace--Beltrami operator, so that the Wilson
 dictionary (which identifies $L_0$ with the matter propagator's
 inverse) carried spectral content there.  That premise is withdrawn
 (2026-09-25):\ $L_0$ on the $(n,l,m)$ lattice preserves $l$, splits
@@ -1362,7 +1362,7 @@ the K\"ahler volume form on $\mathbb{CP}^2$.
 \begin{corollary}[Gauge-structure reduction on the Bargmann graph]
 \label{cor:gauge-structure-reduction}
 The abelian $U(1)$ Wilson--Hodge structure of the $S^3$ Coulomb
-graph (Paper~25) transfers to the Bargmann--Segal $S^5$ graph at
+graph (Paper~30, Sec.~4) transfers to the Bargmann--Segal $S^5$ graph at
 the combinatorial level (incidence matrix, node/edge Laplacians,
 discrete Hodge decomposition, $\beta_1$ Wilson-loop classes), but
 the physical content of the structure is strictly reduced:
@@ -1421,8 +1421,7 @@ $-Z/r$ and has no $S^5$ counterpart, so the $B$ and $\Delta$ analogs
 (both tied to that projection) also do not lift.  The $S^5$ graph is thus a lattice gauge structure with
 abelian $U(1)$ content but without $\alpha$-like spectral content,
 consistent with the operator-order transcendental discriminant of
-Section~\ref{sec:spinor-lichnerowicz}.  Cross-reference: Paper~25
-\S VII.1 (the open question answered here); debug memo
+Section~\ref{sec:spinor-lichnerowicz}.  Debug memo
 \texttt{debug/s5\_gauge\_structure\_memo.md}; numerical data
 \texttt{debug/data/s5\_graph\_spectrum.json}.
 
@@ -1438,22 +1437,22 @@ Paper~2~\cite{paper2_alpha} observes that the fine-structure
 constant approximately satisfies (to $8.8\times10^{-8}$ relative; an
 Observation) the cubic equation $\alpha^3 - K \alpha + 1 = 0$
 with $K = \pi (B + F - \Delta)$, where $B = 42$, $F = \zeta(2) =
-\pi^2/6$, $\Delta = 1/40$ are spectral invariants of the Hopf
-fibration $S^1 \to S^3 \to S^2$.  The plain sum $K =
+\pi^2/6$, $\Delta = 1/40$ are spectral data of the unit
+three-sphere $S^3$.  The plain sum $K =
 137.036064$ matches $1/\alpha$ to $4.8 \times 10^{-7}$;\ the
 $8.8\times10^{-8}$ agreement is that of the cubic's root (Paper~2's
-self-consistency condition).  In a combinatorial search the formula
-ranks among the top $\sim\!10$ of $1.92\times10^{9}$ formulas
-($p = 5.2 \times 10^{-9}$ per draw), a statistic that does not account
-for the unregistered search that produced it.  The combination
+self-consistency condition).  In a search over $1.92\times10^{9}$ formulas
+of the same kind, ten match $\alpha$ more closely
+($p = 5.2 \times 10^{-9}$ per formula, expected chance count
+$Np \approx 10$), and the search was run after the formula was
+found.  The combination
 rule $K = \pi(B + F - \Delta)$ is an empirical Observation.
 
 The Coulomb / HO comparison of Section~\ref{sec:asymmetry} gives no
 structural support to the prefactor $\pi$:\ both sides carry $\pi$ in
 a measure and in spectral sums (Proposition~\ref{thm:asymmetry}), so
 the presence of a $\pi$ in $K$ does not by itself point to the Coulomb
-problem.  On the corpus's accounting the leading $\pi$ is the $M_1$
-volume content of $S^3$ (Papers~31, 55), a reading at Paper~18's tier.
+problem;\ Paper~2 lists the prefactor as chosen.
 Paper~2's combination rule remains an Observation;\ its status is
 unchanged by this paper.
 
@@ -1495,7 +1494,7 @@ Pauli count, $N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis
 Paper~22 results.
 
 \paragraph{Coulomb-specific.}
-The $S^3$ Fock conformal projection; the Hopf bundle structure underlying the
+The $S^3$ Fock conformal projection; the $S^3$ spectral data of the
 $\alpha$ Observation; the matched scale $\kappa = -1/16$ (it matches
 the graph band edge to $-\tfrac12$;\ its coincidence with the
 Fock-Jacobian $1/16$ is an Observation).  These are the Paper~23 / Track NH results
@@ -1680,8 +1679,8 @@ GeoVac Paper~0 (2026).
 
 \bibitem{paper2_alpha}
 J.~Loutey,
-``The Fine Structure Constant as a Spectral Coincidence on the Hopf
-Fibration,''
+``The Fine Structure Constant as a Spectral Coincidence on the
+Three-Sphere,''
 GeoVac Paper~2 (2026). [Observation.]
 
 \bibitem{paper7}
@@ -1728,11 +1727,12 @@ A.~Lichnerowicz,
 \textit{Spineurs harmoniques},
 C.~R.\ Acad.\ Sci.\ Paris \textbf{257}, 7--9 (1963).
 
-\bibitem{paper25}
+\bibitem{paper30}
 J.~Loutey,
-\textit{The Hopf Graph as a Lattice Gauge Structure: A Framework
-Observation}, Paper~25 of the Geometric Vacuum series
-(synthesis, 2026).
+``Wilson Lattice Gauge Theory on the GeoVac Label Graphs: Exact
+Factorization on the Scalar Graph and Compact $U(1)$ on the Dirac
+Rule-B Graph,''
+GeoVac Paper~30 (2026).
 
 \bibitem{paper32}
 J.~Loutey,

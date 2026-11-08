@@ -6,7 +6,7 @@ Verifies:
   2. Plaquette holonomy is in SU(2).
   3. Wilson action is gauge-invariant under U_e -> g_{src} U_e g_{tgt}^dagger.
   4. U(1) reduction: diagonal SU(2) link variables give the U(1) Wilson
-     action of Paper 25.
+     action of Paper 30 Sec. 4.1.
   5. Character expansion coefficients converge and reduce to 1 at
      beta = 0 (d_0 = 1), all d_j vanish for j >= 1.
   6. Plaquette enumeration agrees with Ihara zeta primitive-walk count.
@@ -440,8 +440,8 @@ class TestWeakCouplingKinetic:
         form (beta/8) sum_a ||D A^a||^2 built from the plaquette incidence.
 
         Measured relative deviation (seed 7): 2.0e-3 at eps=0.01 and
-        7.3e-5 at eps=0.005 -- shrinking with eps as the O(A^4) remainder
-        predicts. Assert both, with margin.
+        7.3e-5 at eps=0.005 on independent random draws (the remainder is
+        cubic, O(A^3); the two values are not a scaling measurement). Assert both, with margin.
         """
         from scipy.linalg import expm
         sigma = _pauli_matrices()
@@ -463,12 +463,12 @@ class TestWeakCouplingKinetic:
             rel_diffs.append(abs(S_act - S_quad) / S_quad)
         assert rel_diffs[0] < 5e-3
         assert rel_diffs[1] < 5e-4
-        # O(A^4) remainder: halving eps must shrink the relative deviation
+        # smaller field, smaller relative deviation (independent draws)
         assert rel_diffs[1] < rel_diffs[0]
 
     def test_kinetic_form_is_curl_complement_of_L1(self):
         """The kinetic quadratic form M = B2 B2^T is NOT a scalar multiple
-        of Paper 25's edge Laplacian L1 = B^T B; it is its curl (up-part)
+        of the edge Laplacian L1 = B^T B; it is its curl (up-part)
         complement: rank M = beta_1 = 2 while rank L1 = E - beta_1 = 11,
         and L1 @ B2 = 0 exactly (the plaquette rows span ker L1).
         Together they assemble the full Hodge-1 Laplacian of the 2-complex

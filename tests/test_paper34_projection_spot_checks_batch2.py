@@ -144,7 +144,7 @@ def test_paper34_III9_wigner_d_algebraic_ring(beta_name, beta):
 
 def test_paper34_III10_wilson_su2_maximal_torus_to_u1():
     """Paper 34 §III.10 (sec:proj_wilson): 'in the maximal-torus
-    reduction yields the abelian U(1) content of Paper 25.'
+    reduction yields compact U(1) (Paper 30 S 4).'
 
     Concretely, diagonal SU(2) elements U = diag(e^{i phi}, e^{-i phi})
     are the U(1) maximal torus. The Wilson action 1 - (1/2) Re tr U_P
@@ -722,12 +722,13 @@ def test_paper34_III23_SN_character_table_integer_valued(N):
 # ----------------------------------------------------------------------------
 
 def test_paper34_III26_coulomb_gauge_per_loop_factor():
-    """Paper 34 §III.26 (sec:proj_gauge_choice): in Coulomb gauge the
-    framework's vector-photon per-loop factor is
+    """Paper 34 §III.26 (sec:proj_gauge_choice): the vertex model's
+    angular-vertex factor (Paper 33 Prop. 3; not a per-loop factor of the
+    physical vertex) is
 
       1/(4 pi) = Vol(S^2) / (4 * 4 pi^2) = Vol(S^2) / (2 * Vol(S^3))
 
-    (See Paper 33 Section VI; ties to §III.11 1/(4 pi) signature.)
+    (ties to §III.11 1/(4 pi) signature.)
 
     Verifies the identity Vol(S^2) / (2 Vol(S^3)) = 1/(4 pi)
     symbolically.

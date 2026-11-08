@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.5.1 (November 7, 2026)
+**Version:** v6.5.2 (November 7, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (215 bullets, rounds 2–8; round 8 = everything from v5.15.24 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **group5 restructured; VV stage A GO; channel count fixed (2026-11-07, v6.5.2, PI-approved):** physical vertex couples the ground state; W = 0/2, S^(3) moves; P28 periods, P33 selection rules, P30 absorbs 25/41, P36 to group6. CHANGELOG v6.5.2.
 - **group5 guard pass; P33/P36/P41 retitled (2026-11-07, v6.5.1, PI-approved):** 5 retired-value pins rebuilt from spectra, Haar, centre symmetry; 3 new backing tests; 22/22 plants fire; review 0 LARGE. CHANGELOG v6.5.1.
 - **/qa group5 FULL incremental = FAIL, remediated (2026-11-07, v6.5.0, PI-invoked, MINOR):** P28 GS zero = vertex model, 1.084 Obs; P51 G_eff 3pi (rank 4); P30 <W> exact; P41 no 3D-vs-4D; P36 LS-7 withdrawn. CHANGELOG v6.5.0.
 - **Paper 63 attainment + SMALL sweep (2026-11-06, v6.4.5, PI-directed):** s-type tree period on rung n for n <= 8 when nonzero (irreducibility); ~30 SMALLs swept; Avery message drafted (send = PI). CHANGELOG v6.4.5.
@@ -411,6 +412,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | RE-INTERPRETATION of the native-bricks row (SL, 2026-10-30): the 130 mHa shortfall of the two-scale Sturmian kit was the two-exponent cap, not the primitive family. Five O exponents set on the free atom, nothing tuned on water, land 3 mHa below cc-pVDZ at 24 functions. The lesson stands: the case rests on one-centre structure, not on better bricks | 0 | See `docs/failed_approaches_ledger.md`; record `docs/predictions/2026-10-30_scale_ladder.md`. |
 | Reading the CCM Yukawa coefficient 4 at finite cutoff from the compressed spectral action on the true CH window (YC, 2026-10-29) | 1 | The compression breaks gauge invariance: the pure-gauge companion is an edge-crossing boundary sum that dominates at fixed tau. Known obstruction (Choi; Dong); every known fix changes the object. See `docs/failed_approaches_ledger.md`; record `docs/predictions/2026-10-29_ccm_yukawa_coefficient_window.md`. |
 | RE-INTERPRETATION of the two A-coefficient rows (/qa group5, 2026-11-07): the per-t target 1/(24 pi t) they were graded against was dimensionally wrong; the continuum cone tip is t-independent (1/6). The UV-recovery negatives stand; "A supplied analytically" is withdrawn | 0 | See `docs/failed_approaches_ledger.md`; Paper 51. |
+| RE-INTERPRETATION of the single-constant graph-to-continuum QED projection row (2026-11-07): measured with an SO(4) channel count that paired mixed-sign spinor content; with the corrected count C×F₂ stays near 150× α/(2π) instead of growing, and C_VP/C_SE is 0.137, not ≈ 3/29. The negative (no convergence to α/(2π)) stands | 0 | See `docs/failed_approaches_ledger.md`; Paper 28; `debug/sprint_w_channel_count_correction_memo.md`. |
 
 ---
 
@@ -511,7 +513,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 **Always load** (framework identity): Paper 0 (packing axiom, K = −1/16) · 1 (spectral graph methods) · 7 (S³ proof, 18 symbolic proofs) · 14 (qubit encoding headline) · 16 (S_N periodicity) · 22 (angular sparsity theorem) · 23 (nuclear hub, Fock rigidity) · 24 (Bargmann-Segal S⁵, Coulomb/HO asymmetry) · 27 (entropy as projection) · 31 (universal/Coulomb partition) · 32 (the spectral triple; §VIII theorems).
 
-**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42, 44, 45, 50, 53 (43, 46–49 and 52 archived; 43's surviving content is Paper 42 §11, 52's a remark in Paper 50); foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35.
+**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 28, 30, 33, 51; math.OA arc → 29, 38, 39, 40, 42, 44, 45, 50, 53 (43, 46–49 and 52 archived; 43's surviving content is Paper 42 §11, 52's a remark in Paper 50); foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35, 36.
 
 **GUARDRAIL papers** — MUST load before any investigation in their domain (trigger words and protocol in §3.5): Papers 8–9 (single-center / unified-basis / shared-exponent molecular — Sturmian structural theorem), FCI-M (graph-concatenation molecular), Track DF record (nested hyperspherical).
 
@@ -523,10 +525,10 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | `papers/group2_quantum_chemistry/` | quantum chemists | 13 |
 | `papers/group3_foundations/` | mathematical physicists | 13 |
 | `papers/group4_quantum_computing/` | QC / NISQ / VQE | 4 |
-| `papers/group5_qed_gauge/` | HEP / gauge theory | 8 |
-| `papers/group6_precision_observations/` | precision AMO | 4 |
+| `papers/group5_qed_gauge/` | HEP / gauge theory | 5 |
+| `papers/group6_precision_observations/` | precision AMO | 5 |
 | `papers/synthesis/` | cross-group narratives + field guide | 7 |
-| `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) + retired (43, 46–49, 52; `docs/retired_papers.md`) | 13 |
+| `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) + retired (25, 41, 43, 46–49, 52; `docs/retired_papers.md`) | 15 |
 
 ### Live status flags every agent must know
 

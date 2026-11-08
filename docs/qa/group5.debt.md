@@ -16,9 +16,9 @@ guard pass, PI decisions outstanding, and SMALL findings not fixed on sight.
 
 ## Owed computations (pre-register before running)
 
-- **P28 vector-photon vertex.** Recompute Sigma(n_ext) and the vertex/anomalous-moment sums
-  with the physical vector-photon coupling rules (q up to n1+n2+1; ground state couples at
-  q=1). Settles whether any ground-state zero survives and what the anomalous-moment sum is.
+- **P28 vector-photon vertex.** Selection rule DONE 2026-11-07 (VV stage A, GO; now Paper 33
+  Sec. 2): the ground state couples, Theorem 4 is a model result. Still owed (stage B): the
+  normalized Sigma and vertex sums with the physical rule, gauge sector, C for Furry.
 - **P28 anomalous-moment normalization.** Derive the absolute normalization (e^2, loop
   measure, harmonic normalization on S3) so F2 is a moment in units of alpha, then the
   flat-space limit R -> infinity.
@@ -108,3 +108,85 @@ Code defects found (not fixed in this run; production code):
 - SMALL left: Paper 30 says non-abelian couplings enter at A^3 in one place and A^4 in two; Paper 51 gives the spinor
   coefficient as +(1/12)(1/alpha - alpha) at one locus vs -(1/12)(...) in its abstract (sign convention); Paper 28 c2
   "8-digit" match is about 6.3 digits given the n_int = 50 shift.
+
+## Restructure carry-forward (2026-11-07, PI-approved group5 advisory pass)
+
+Group5 is now Papers 2, 28, 30, 33, 51; Paper 36 moved to group6; Papers 25 and 41 archived
+into Paper 30 (rows in docs/retired_papers.md). The certification stamps of this run predate the
+rewrite, so every rewritten unit is CHANGED for the next /qa plan.
+
+**PI calls.**
+- Paper 2 mechanism count: the historical record gives 9 (Phases 4B-4I) + 1 + 3 in one place
+  and 8 + 1 + 3 in Paper 32; Paper 2 now follows 8 + 1 + 3 with the two fibre rows merged and
+  says so. Confirm.
+- Paper 34's 13th projection is named "Drake-Swainson asymptotic subtraction", but the K-split it
+  named is cut from Paper 36. Rename ("Drake-Swainson normalization of Bethe-log sums") or retire
+  (changes the count of 28). PM recommends the rename.
+- `docs/qa/group5.done.md` criterion 3 and l.118 cite C_VP/C_SE ~ 3/29 as an example; with the
+  corrected channel count the ratio is 0.137 and no simple rational. The criteria file is
+  PI-confirmed, so the PM has not edited it.
+- INDEX QA table is folder-based: Paper 36 now counts under group6 (OWED) though FULL #1 ran under
+  group5.
+- `docs/qa/group5.done.md` and `group6.done.md` still list the old paper sets; `debug/qa/qa_scopes.py`
+  is updated (group5 = 2, 28, 30, 33, 51; group6 adds 36). The done files are PI-confirmed: amend at
+  the next /qa freeze.
+- debug/data/zenodo_manifest.json carries the old paths and titles; regenerate at the next deposit.
+- Seam rows E2/E3 (`docs/forced_free_seam.md`): statuses kept so the gated counts (43 F) don't move.
+  E2's P = M1 rested on the cut per-loop 1/(4 pi) reading (PM recommends "none"); E3 now carries the
+  Paper 33 pendant-edge value in place of the cut graph-native F2 = 5 sqrt2/3 (keep, or retire the row).
+- `papers/INDEX.md`: Paper 33 status set OBSERVATION -> ACTIVE (it now carries thm:physical_rule). Confirm.
+- Paper 18 Theorem 2 (axis A3) was rescoped by the sweep to a parity restriction (it had attributed the
+  odd-parity clause to gamma^mu, which Paper 33 refutes). Owner theorem statement: review the wording.
+- Paper 34's axis-grid argument (~l.2335-2360; tables ~l.3173, 3425; l.3259/3302/3353/3365/9447/9758/9931)
+  still makes vector-photon promotion's "1/(4 pi) per loop" the gauge-sector witness of the
+  transcendental-only corner; the physical vertex does not carry that factor (it is the model's S^2
+  harmonic normalization). Not rewritten: owner call.
+- Version: committed as a patch; the PM recommends MINOR (reorganization of the paper series and
+  a correction that moves published numbers).
+
+**Owner items found by the citer sweeps (not fixed).**
+- Paper 34: hydrogen Lamb rows still tagged Fock o Sturmian o spectral action and "framework-native"
+  (~l.4068-4100, 4856-4866, He+ ~5321; group6 synthesis 427-429), feeding the composition theorem's
+  "eight tested rows", while Paper 36 says S^3 never enters the number; the muonium -0.6% row and
+  "framework total 1047.63 MHz" unverified (~l.4317, 7896); l.4183 "Eides Tab. 7.4 / Karshenboim
+  2005" citation unverified (the same one Paper 36 dropped).
+- Paper 42 l.730: "axis fixed canonically by alignment with the Hopf-base direction" lost its
+  support (archived Paper 25 Sec. V.3); drop "canonically".
+- Paper 29: "the only sub-action of the azimuthal U(1)": an m-reflection is in O(2), not U(1).
+- Paper 32: Cor. cc_fine_tuning_external says 10^-122 where Paper 51 says ~10^-120; the U(1)
+  coefficient 1/4 in tab:unified_gauge has no test.
+- Paper 36: the per-level muonic Uehling values it printed (-210.59 / -5.59 meV) do not reproduce
+  (driver -219.58 / -14.58; same difference 205.007); not carried to Paper 34.
+- Paper 18: the Sec. V Hopf exchange-constant reading of K was cut (it rested on the false S^2
+  attribution of B), removing two of Paper 18's Observations. Reviewed by the sweep, flagged here.
+
+**Owed tests (claims kept, no test).**
+- Paper 33: `tests/test_paper33_physical_vertex.py` porting stage A (C1-C4, SA1-SA5, the 9j closed
+  form, m conservation, Ward-Takahashi on route 2); the L1 cross-sector fractions 20% / 57%.
+- Paper 28: c2(n), c3(n), D2, D3, the zeta(3) complementarity (Theorem 5), the S_{r,s} Euler-sum
+  tables; D4-D6 pinned only to frozen decimals.
+- Paper 30: Z = [2 e^-beta I1/beta]^beta1 at general n_max; the abelian Z and <cos theta_C> =
+  (I1/I0)^A; rank Delta_1 = E at n_max >= 4; the three-plaquette 2-cycle geometry.
+- Paper 51: B1, B2, B4; continuum tip 1/6 at Bessel zeros; a0 = 1.888; alpha-uniformity CV 1.3%;
+  disk propagation 2; the S^5 / S^7 odd-sphere identity; the rank-4 bundle and the total-trace cone
+  coefficient (inputs). test_paper51_replica_sbh.py docstring still uses the retired sign pair.
+- Paper 2: Delta forms equal only at m = 3; B = B_formal only for d = 3; the S^2 trace 36; the
+  8 sign-pattern errors; K's 4.77e-7; CODATA 2022 differences; a reduced deterministic slice of the
+  look-elsewhere search (N p, rank 11, 27 at K precision, 3 distinct values); the obstruction
+  identities; the twelve mechanism rows.
+- Paper 36: 2S acceleration at N = 50 (+2.98%); 2P at N = 55 (+1.24%); residual vs Bezginov
+  (-5.64 MHz); LS-8a totals at n_max = 2, 6 and the local slope 2.8; muonic-H driver pins; the
+  (2l+1) normalization and I_v(2S) -> 2 Z^4/n^3.
+- Registry keys to create (C21): alpha_k_value, alpha_k_rel_err, alpha_cubic_root_inv,
+  alpha_cubic_rel_err, p2_search_n, p2_search_p, p2_chance_count; lamb_1loop_mhz, lamb_exp_lp81,
+  lamb_exp_bezginov19, a50_2s_mhz.
+
+**Tests whose claims were cut (kept, not deleted; retire or re-home in the guard pass).**
+test_paper2_corrections::circulant_hermiticity; test_paper2_ingredients::TestCirculant::
+su2_structure_constant_analog; test_su2_wilson_gauge::TestMonteCarloWilsonLoop; several
+test_paper41_wilson_witnesses witnesses (W1 Weyl d_W, W2 MK accuracies, W4 large-beta, V5 dual
+graph); test_paper25_hopf_grouping (now backs Paper 2's scope section); test_su3_wilson_s5::
+TestPaper25S5Pins / TestPaper25CP2Quotient; the LS-7 prefactor tests in test_two_loop_self_energy
+(back Paper 32/35 citers only); test_qed_flat_limit, test_qed_vacuum_polarization and the graph-QED
+trace tests (test_graph_qed_*), which no longer back Paper 28 text; test_vector_qed's 7/8 tallies
+and the rule-6 proxy (now back only Paper 33's footnote e).

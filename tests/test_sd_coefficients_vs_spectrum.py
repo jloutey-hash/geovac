@@ -1,7 +1,7 @@
 """Independent-route guard: production Seeley-DeWitt coefficients vs the
 exact Camporesi--Higuchi spectrum on the unit S^3.
 
-Backs Paper 28 eq:seeley_dewitt / eq:sd_two_term and the correction of
+Backs the SD coefficients of Paper 51 (Paper 28 eq:sd_two_term is a pointer) and the correction of
 2026-10-02 (/qa trunk DELTA #26): the production function
 `geovac.qed_vacuum_polarization.seeley_dewitt_coefficients_s3` had the
 Lichnerowicz endomorphism with the wrong sign, dropped it from a_1 and

@@ -80,10 +80,10 @@ includes a continuous integration over a temporal or spectral parameter
 that has been promoted from the discrete graph spectrum.}  The discrete
 graph itself is $\pi$-free; the projection that integrates is where
 $\pi$ appears.  Existing GeoVac observables (Pauli counts, magic
-numbers, hydrogenic eigenvalues, Bargmann--Segal lattice, graph-native
-QED) are confirmatory; the canonical $\pi$-bearing observables
+numbers, hydrogenic eigenvalues, Bargmann--Segal lattice, the graph
+QED ground-state self-energy) are confirmatory; the canonical $\pi$-bearing observables
 (vacuum-polarization $\Pi = 1/(48\pi^2)$ and $\beta$-function
-$2\alpha^2/(3\pi)$, the standard flat-space values that Paper~28 enters,
+$2\alpha^2/(3\pi)$, the standard flat-space values,
 and Stefan-Boltzmann) are all evaluated through
 continuous integrations of the temporal kind.
 
@@ -116,19 +116,16 @@ specific dimensions, and a specific transcendental signature.  Paper~18
 intrinsic, calibration, embedding, algebraic-implicit, composition,
 inner-factor input.  Paper~24
 \cite{paper24} establishes the Bargmann--Segal lattice as bit-exactly
-$\pi$-free; Paper~28 \cite{paper28} establishes graph-native QED as
-algebraic in $\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$.
+$\pi$-free.
 
 The natural question, which Paper~34 leaves open and Paper~31
 \cite{paper31} sharpens through the universal/Coulomb partition, is:
 where exactly does $\pi$ enter the framework, and which projections in
 the Layer~2 dictionary are responsible?  Most of the canonical
 $\pi$-bearing observables in GeoVac to date (vacuum polarization,
-$\beta$-functions, Stefan--Boltzmann constants, fine-structure
-calibration $1/(4\pi)$) have been pinned to specific projections
-empirically -- the Hopf bundle for the $\alpha$ Observation, the
-Connes--Chamseddine spectral action for one-loop QED, the vector-photon
-promotion for the $1/(4\pi)$ per-loop Weyl measure on the Hopf base.
+$\beta$-functions, Stefan--Boltzmann constants) have been pinned to
+specific projections empirically -- the
+Connes--Chamseddine spectral action for one-loop QED.
 But there is no single statement of the form ``$\pi$ enters at step $X$,
 and at no other step.''
 
@@ -260,19 +257,17 @@ the same ring.  The mass parameter is, by itself, transcendental-free
 \emph{when supplied as a rational number}; the framework does not
 introduce additional $\pi$ during the parameter projection.
 
-\begin{remark}[Comparison with Paper~24 and Paper~28]
+\begin{remark}[Comparison with Paper~24]
 \label{rem:ring_compare}
 Paper~24's $\pi$-free certificate for the Bargmann--Segal $S^5$ HO
-graph and Paper~28's algebraic-extension certificate for graph-native
-QED were both established at the level of matrix elements of the
-discrete graph operators.  Observation~\ref{obs:ring} extends the same
+graph was established at the level of matrix elements of the
+discrete graph operator.  Observation~\ref{obs:ring} extends the same
 kind of certificate to the relativistic spectrum on $S^3 \times
 \mathbb{R}$, treating the spectrum itself (not just the graph operator)
-as the object certified.  The three certificates partition cleanly:
-Paper~24 covers the bare HO graph adjacency, Paper~28 covers the
-finite-graph QED matrix elements, and the present observation covers
-the relativistic spectrum of a free field on $S^3 \times \mathbb{R}$.
-None of them require $\pi$.
+as the object certified.  The two certificates partition cleanly:
+Paper~24 covers the bare HO graph adjacency, and the present
+observation covers the relativistic spectrum of a free field on
+$S^3 \times \mathbb{R}$.  Neither requires $\pi$.
 \end{remark}
 
 % ===================================================================
@@ -292,9 +287,7 @@ periodically identified with period $\beta$, has the spectrum
 The temporal eigenvalues $\omega^t_k = 2\pi k / \beta$ are the standard
 Matsubara modes; their factor of $2\pi$ is the ratio of one full circle
 ($2\pi$ in radian measure) to the circumference $\beta$ of the
-identified temporal direction.  This factor plays the same structural
-role as the $1/(4\pi)$ unit-$S^2$ Weyl (two-dimensional heat-kernel)
-normalisation of \cite{paper33}: each is an M1 ($k = 0$ volume slot)
+identified temporal direction:\ an M1 ($k = 0$ volume slot)
 volume factor, the calibration constant attached to a
 compact-direction integral measure.
 
@@ -436,7 +429,7 @@ $n^3$, so the $S^5$ Casimir carries \emph{both} $B_6$ ($\zeta(-5) =
 \texttt{sympy}) and, to our knowledge, newly computed; $S^5$ is a GeoVac
 manifold via the Bargmann--Segal lattice (Paper~24). The spreading is
 the same multiplicity mechanism that obstructs the Dirac-zeta
-functional equation (Paper~28's functional-equation obstruction), and the
+functional equation (Paper~29's functional-equation obstruction), and the
 $S^3$/$S^5$ rungs place the framework's Casimirs on the Bernoulli
 ladder of Paper~32 (the two-layer split read as the $\zeta$
 functional-equation reflection $\zeta(s)\leftrightarrow\zeta(1{-}s)$,
@@ -528,7 +521,7 @@ the framework's gravity and thermal sectors realize this two-window
 structure at three rungs, and (ii) the clean boundary against the
 combinatorial core. This sharpens, but does not exceed, the structural
 correspondence of Paper~32's Bernoulli-ladder remark;\ the
-non-trivial zeros remain untouched (Paper~28's functional-equation
+non-trivial zeros remain untouched (Paper~29's functional-equation
 obstruction). As a cross-connection, the
 on-ladder/off-ladder split ($F=\zeta(2)$ on, $B$ and $\Delta$ off) is
 exactly the Phase-4G ``no common generator'' decomposition of
@@ -680,9 +673,9 @@ one); pure integers at every $n$.
 \item \textbf{Bargmann--Segal HO graph} (Paper~24): bit-exactly
 $\pi$-free in exact rational arithmetic at every finite $N_\text{max}$,
 verified for $N_\text{max} \leq 5$.
-\item \textbf{Graph-native QED matrix elements} (Papers~28, 33): every
-matrix element in $\mathbb{Q}[\sqrt{2}, \sqrt{3}, \sqrt{6}, \ldots]$ at
-every finite $n_\text{max}$.
+\item \textbf{Graph QED ground-state self-energy} (Paper~33): the
+pendant-edge value $\Sigma_{\mathrm{graph}}(\mathrm{GS}) =
+2(n_\text{max}-1)/n_\text{max}$, rational at every finite $n_\text{max}$.
 \item \textbf{Spatial Dirac Casimir on unit $S^3$} (Section~\ref{sec:open}~item~1):
 $E^{\text{Dirac}}_\text{Cas} = 17/480$, exact rational, computed in
 sprint KG-5 against the Camporesi--Higuchi spectrum.  Confirms the
@@ -696,15 +689,15 @@ which arise from a temporal or spectral continuous integration:
 
 \begin{enumerate}
 \setlength\itemsep{0pt}
-\item \textbf{Vacuum polarization $\Pi = 1/(48\pi^2)$} (Paper~28):
-standard one-loop QED (the flat-space value, entered in Paper~28, not computed from $S^3$ data), evaluated as a continuous integral over
+\item \textbf{Vacuum polarization $\Pi = 1/(48\pi^2)$}:
+standard one-loop QED (the flat-space value, entered, not computed from $S^3$ data), evaluated as a continuous integral over
 the Schwinger proper time $t \in (0, \infty)$.  The proper-time
 integration is the temporal-projection step; the $\pi^2$ is the
 four-dimensional heat-kernel normalisation $(4\pi)^{-2}$.  (An earlier
 version traced it to an $S^3$ coefficient $a_2 = \sqrt{\pi}/8$, squared;\
 on $S^3$ the Dirac $a_2$ vanishes and that value was a sign error,
-corrected 2026-10-02, Paper~28.)
-\item \textbf{QED $\beta$-function $2\alpha^2/(3\pi)$} (Paper~28):
+corrected 2026-10-02, Paper~51.)
+\item \textbf{QED $\beta$-function $2\alpha^2/(3\pi)$}:
 same provenance:\ the $\pi$ in the denominator comes from the same
 four-dimensional loop normalisation.
 \item \textbf{Stefan-Boltzmann $\pi^2/90$} (Section~\ref{sec:casimir}):
@@ -777,8 +770,8 @@ contains $\pi$ in the denominator, sourced by the Schwinger
 proper-time integration $\int_0^\infty ds/s^3 \, e^{-m^2 s} f(eF, s)$
 --- the canonical example of an observation/temporal-window
 projection.  We did not derive the absolute coefficient natively from
-the GeoVac framework (that would require LS-7-style two-loop SE
-machinery), so this entry is flagged as structural identification
+the GeoVac framework (that would require two-loop SE machinery the
+framework does not have), so this entry is flagged as structural identification
 (error code S in Paper~34's classification): the transcendental class
 matches, the absolute value is from the textbook.  Confirmed at
 structural level.
@@ -1292,8 +1285,7 @@ right-hand side flagged two candidate readings: (i)~$K$ is, despite
 appearances, a single-projection statement of the spectral-action /
 temporal-compactification kind (cf.~the Cardano root $\Lambda_\infty
 = 3.7102\ldots$ from the SD two-term exactness theorem; the $\pi$
-would then be the $k = 0$ volume slot $\mathrm{Vol}(S^2)/4$, identified
-in Sprint~A), or (ii)~the prediction is false in the multi-loop /
+would then be the $k = 0$ volume slot $\mathrm{Vol}(S^2)/4$), or (ii)~the prediction is false in the multi-loop /
 infinite-Dirichlet sector, and the $\pi$ has a non-temporal source
 that the framework has not yet named.  Sprint K-CC (May 2026) tested
 possibility~(i) along three independent axes with a clean triple
@@ -1379,29 +1371,18 @@ $1/\pi^2$ tracing to two iterated Schwinger proper-time integrations,
 exactly as Prediction~\ref{pred:pi_iff_temporal} specifies; weak test
 because the same prefactor appears in flat-space two-loop QED.
 The residual is not attributed.  An LS-7 decomposition into about $+1.20$~MHz of multi-loop QED and about $+4.4$~MHz of non-loop physics is withdrawn (/qa group5, 2026-11-07): its itemized entries reached only about $70\%$ of the residual, it omitted the one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx 9.29$, about $+6.9$~MHz on 2S, by itself larger than the residual), and its ``hyperfine averaging'' row had no source, since the measured interval is defined between hyperfine centroids (Paper~36).  The strong test (sprint LS-8a) is the native derivation of the
-dimensionless bracket coefficient $C_{2S} = +3.63$ from iterated CC
-spectral action plus bound-state Sturmian projection, with the
-literature bracket value used as a check rather than as input.
+dimensionless two-loop bracket coefficient from the iterated CC
+spectral action.
 
-Sprint LS-8a (May 2026) closed the strong-test attempt at $C_{2S}$
-extraction with a clean structural verdict.  The bare iterated
-Connes--Chamseddine spectral action on Dirac-$S^3$ (rainbow plus
-crossed topologies, full $\mathrm{SO}(4)$ vertex selection at four
-vertices, bound-state Sturmian projection at $n_\text{ext} = 1$ for
-hydrogen $2S$) faithfully reproduces the UV-divergent
-\emph{integrand} of two-loop QED: the $(\alpha/\pi)^2 (Z\alpha)^4 /
-n^3$ prefactor emerges as predicted, the sign is correct at every
-$n_\text{max}$, and the sum diverges as
-$\text{raw} \sim 6.6 \cdot N^{3.43}$---power-law UV divergence
-inherited from flat-space QED.  Two natural regularizations
-within the GeoVac toolkit fail: subtracting the disconnected
-$[\Sigma^{1L}]^2$ piece removes ${<}0.1\%$ of the total at every
-$n_\text{max}$ (the divergence sits in the genuine connected
-diagram), and Drake--Swainson asymptotic subtraction
-(Paper~34's 13th projection) does not apply to power-law
-divergences.  Finite extraction of $C_{2S}$ requires $Z_2$ and
-$\delta m$ renormalization counterterms which are
-\emph{not generated} by the bare CC spectral action.  This places
+Sprint LS-8a (May 2026) closed the strong-test attempt with a
+negative.  A model two-loop sum on the Dirac spectrum of $S^3$
+(rainbow plus crossed topologies, $\mathrm{SO}(4)$ channel counts at
+four vertices, external level $n_\text{ext} = 1$ standing in for
+hydrogen $2S$; no bound-state wavefunction enters) grows without bound
+with its cutoff (local log-log slope $2.8$ between $n_\text{max} = 5$
+and $6$; Paper~36~\S~6).  A finite two-loop coefficient requires
+$Z_2$ and $\delta m$ renormalization counterterms, which the model
+does not contain and the bare CC spectral action does not generate.  This places
 a clean scope boundary between the finite one-loop Bethe-logarithm
 sector (Paper~36, whose sub-percent headline is the leading one-loop
 assembly with literature logarithms, the one-loop $\alpha(Z\alpha)^5$
@@ -1453,7 +1434,7 @@ $\pi$ if and only if its evaluation includes a continuous integration
 over a temporal or spectral parameter promoted from the discrete graph
 spectrum.  Existing GeoVac observables uniformly confirm this
 prediction: Pauli counts, magic numbers, hydrogenic eigenvalues,
-Bargmann--Segal lattice, and graph-native QED matrix elements are all
+Bargmann--Segal lattice, and the graph QED ground-state self-energy are all
 $\pi$-free; vacuum polarization, $\beta$-function, and Stefan-Boltzmann
 all contain $\pi$ exactly because their evaluation includes a
 continuous Schwinger-proper-time or Matsubara integration.
@@ -1521,8 +1502,8 @@ GeoVac Project, ``The Bargmann--Segal Lattice: $\pi$-Free Discretization of the 
 (2026).
 
 \bibitem{paper28}
-GeoVac Project, ``QED on $S^3$: Spectral Geometry of Perturbative
-Transcendentals,'' Paper~28 (2026).
+GeoVac Project, ``Periods of Dirac Spectral Sums on $S^3$,''
+Paper~28 (2026).
 
 \bibitem{paper31}
 GeoVac Project, ``The Universal/Coulomb Partition of the GeoVac Spectral Triple,'' Paper~31 (2026).
@@ -1532,8 +1513,8 @@ GeoVac Project, ``The GeoVac Spectral Triple: A Synthesis Paper Locking the Fram
 Paper~32 (2026).
 
 \bibitem{paper33}
-GeoVac Project, ``The 1+6+1 Partition of QED Selection Rules
-on $S^3$,'' Paper~33 (2026).
+GeoVac Project, ``Selection Rules of the Vector-Photon Vertex on $S^3$:
+the Physical Vertex, the Vertex Model and the Graph,'' Paper~33 (2026).
 
 \bibitem{paper34}
 GeoVac Project, ``GeoVac as a Two-Layer Framework: Projection

@@ -95,7 +95,7 @@ References
 - GeoVac graph_qed_photon.py (photon propagator G_gamma = L_1^+)
 - GeoVac graph_qed_propagator.py (electron propagator G_e = D^{-1})
 - GeoVac qed_self_energy.py (continuum spectral-sum self-energy)
-- GeoVac Paper 28 (QED on S^3)
+- GeoVac Paper 33 (graph QED, pendant-edge proposition; moved from Paper 28)
 """
 
 from __future__ import annotations

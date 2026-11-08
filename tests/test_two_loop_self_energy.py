@@ -111,9 +111,17 @@ def test_spectral_sum_diverges_with_n_max():
     # Strictly increasing
     assert sums[1] > sums[0]
     assert sums[2] > sums[1]
-    # By more than a factor of 2 each step (power-law growth)
-    assert sums[1] / sums[0] > 2.0
-    assert sums[2] / sums[1] > 2.0
+    # Corrected W (2026-11-07): the raw totals are pinned exactly against an
+    # independent Fraction route (W = 2 on every window triple;
+    # debug/w_channel_count_correction.py, section E).  The old count gave
+    # step ratios > 2; the corrected ones are 2.15 and 1.85, i.e. local
+    # power-law slopes 2.66 and 2.76 -- growth faster than n_max^2.5.
+    expected = [2994.777739248162, 6439.294240027892, 11902.54730011679]
+    for got, exp in zip(sums, expected):
+        assert abs(got - exp) < 1e-8 * exp
+    import math
+    assert math.log(sums[1] / sums[0]) / math.log(4 / 3) > 2.5
+    assert math.log(sums[2] / sums[1]) / math.log(5 / 4) > 2.5
 
 
 def test_c_2s_convergence_helper():

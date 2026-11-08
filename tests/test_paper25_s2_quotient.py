@@ -1,11 +1,12 @@
 """
-Paper 25 Proposition 1, item 4: the Hopf-quotient S^2 base graph.
+Paper 30 Sec. 4.3 (the n_max = 3 spectra; carried from the archived
+Paper 25 Prop. 1 item 4): the (n, l)-sector quotient base graph.
 
 Collapsing the magnetic fibers {(n, l, m_l) : m_l = -l..l} of the GeoVac
 Hopf graph at n_max = 3 to single (n, l) sectors yields a 6-sector base
 graph whose inter-sector edge weights count the S^3 edges crossing
-between sectors. Paper 25 (Sec. III.B and Prop. 1 item 4, Track alpha-D)
-states its Laplacian spectrum is exactly
+between sectors. Paper 30 Sec. 4.3 states its Laplacian spectrum is
+exactly
 
     {0, 0, 0, 1, 3, 6}
 
@@ -29,9 +30,8 @@ def _quotient_laplacian(max_n: int):
     """Weighted (n,l)-sector Laplacian of the Hopf quotient.
 
     Sector weight W[s, s'] = number of undirected S^3 edges crossing
-    between the m_l-fibers of s and s' (Paper 25 Sec. III.B: 'inter-sector
-    edges of the base graph count the number of S^3 edges crossing
-    between sectors'; intra-sector angular edges collapse into fiber
+    between the m_l-fibers of s and s' (Paper 30 Sec. 4.3: 'edge weights
+    the number of crossing edges'; intra-sector angular edges collapse into fiber
     structure and do not appear).
     """
     lat = GeometricLattice(max_n=max_n)
@@ -56,7 +56,7 @@ def _quotient_laplacian(max_n: int):
 
 class TestS2QuotientNmax3:
     def test_sectors_and_fiber_dims(self):
-        """Six sectors (Paper 25 Eq. s2_sectors) with fiber dims 2l+1."""
+        """Six sectors (n, l) (Paper 30 Sec. 4.3) with fiber dims 2l+1."""
         sectors, _, _ = _quotient_laplacian(3)
         assert sectors == [(1, 0), (2, 0), (2, 1), (3, 0), (3, 1), (3, 2)]
         assert [2 * l + 1 for (n, l) in sectors] == [1, 1, 3, 1, 3, 5]
@@ -102,7 +102,7 @@ class TestS2QuotientNmax3:
 
 
 def test_full_graph_edge_laplacian_golden_spectrum():
-    """Paper 25 Eq. (eq:L1_spectrum): the edge Laplacian L1 = B^T B of
+    """Paper 30 Eq. (eq:L1_spectrum): the edge Laplacian L1 = B^T B of
     the FULL n_max=3 Hopf graph (V=14, E=13) has the exact golden-ratio
     spectrum {0 x2, 3/2-sqrt5/2, 1 x2, 5/2-sqrt5/2, 2, 3/2+sqrt5/2,
     3 x3, 5/2+sqrt5/2, 5}.  Added 2026-07-04 (certifying /qa run:

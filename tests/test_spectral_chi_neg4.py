@@ -11,7 +11,7 @@ is the Dirichlet beta function.
 These tests verify:
   - Numerical agreement at 50+ digit precision across s = 2..10
   - Symbolic polynomial identity in Hurwitz zeta + beta(s) symbols
-  - Reduction to Paper 28 Eq.(4) at s=4: D_even(4) - D_odd(4) = -8G + 8*beta(4)
+  - Reduction to Paper 28 eq:D_even_4 / eq:D_odd_4 at s=4: D_even(4) - D_odd(4) = -8G + 8*beta(4)
   - Special-case identity at s=3 via regularized limit (Hurwitz pole at s-2=1).
 """
 from __future__ import annotations
@@ -166,11 +166,11 @@ def test_rh_j1_symbolic(s):
 
 
 # ----------------------------------------------------------------------
-# Test 4: Paper 28 Eq.(4) consistency at s=4
+# Test 4: Paper 28 eq:D_even_4 / eq:D_odd_4 consistency at s=4
 # ----------------------------------------------------------------------
 
 def test_paper28_eq4_consistency():
-    """Paper 28 Eq.(4) states:
+    """Paper 28 eq:D_even_4 / eq:D_odd_4 state:
         D_even(4) = pi^2/2 - pi^4/24 - 4G + 4*beta(4)
         D_odd(4)  = pi^2/2 - pi^4/24 + 4G - 4*beta(4)
 
@@ -186,7 +186,7 @@ def test_paper28_eq4_consistency():
     assert err < mpmath.mpf('1e-60'), \
         f"Paper 28 Eq.(4) diff inconsistent with RH-J.1: err = {err}"
 
-    # Also verify individual D_even(4), D_odd(4) against Paper 28 Eq.(4)
+    # Also verify individual D_even(4), D_odd(4) against Paper 28 eq:D_even_4 / eq:D_odd_4
     paper_Deven = mpmath.pi ** 2 / 2 - mpmath.pi ** 4 / 24 - 4 * G + 4 * beta4
     paper_Dodd = mpmath.pi ** 2 / 2 - mpmath.pi ** 4 / 24 + 4 * G - 4 * beta4
     assert abs(_dirac_Deven(4) - paper_Deven) < mpmath.mpf('1e-60')

@@ -129,41 +129,9 @@ def _vertex_allowed(n1: int, n2: int, n_gamma: int) -> bool:
 # ---------------------------------------------------------------------------
 
 def _so4_channel_count(n1: int, n2: int, n_gamma: int) -> int:
-    """Count the number of SO(4) vector harmonic components that couple
-    the Dirac spinor at level n1 to level n2 via a photon at level n_gamma.
-
-    Returns 0, 1, or 2. See qed_vertex.so4_channel_count for full docs.
-    """
-    if not _vertex_allowed(n1, n2, n_gamma):
-        return 0
-
-    from fractions import Fraction
-
-    j1_L = Fraction(n1 + 1, 2)
-    j1_R = Fraction(n1, 2)
-    j2_L = Fraction(n2, 2)
-    j2_R = Fraction(n2 + 1, 2)
-
-    count = 0
-    q = n_gamma
-
-    # Component A: ((q+1)/2, (q-1)/2)
-    jg_L_A = Fraction(q + 1, 2)
-    jg_R_A = Fraction(q - 1, 2)
-    if (jg_R_A >= 0
-            and abs(j1_L - jg_L_A) <= j2_L <= j1_L + jg_L_A
-            and abs(j1_R - jg_R_A) <= j2_R <= j1_R + jg_R_A):
-        count += 1
-
-    # Component B: ((q-1)/2, (q+1)/2)
-    jg_L_B = Fraction(q - 1, 2)
-    jg_R_B = Fraction(q + 1, 2)
-    if (jg_L_B >= 0
-            and abs(j1_L - jg_L_B) <= j2_L <= j1_L + jg_L_B
-            and abs(j1_R - jg_R_B) <= j2_R <= j1_R + jg_R_B):
-        count += 1
-
-    return count
+    """SO(4) channel count (0, 1, or 2); single source qed_vertex.so4_channel_count."""
+    from geovac.qed_vertex import so4_channel_count
+    return so4_channel_count(n1, n2, n_gamma)
 
 
 def _weighted_vertex_coupling(n1: int, n2: int, n_gamma: int) -> mpmath.mpf:

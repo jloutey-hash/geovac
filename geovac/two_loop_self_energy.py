@@ -47,7 +47,7 @@ NORMALIZATION DERIVATION
 ------------------------
 For Dirac on unit S^3 (4-component spinors), the heat-kernel expansion is
 two-term exact, a_0 = sqrt(pi), a_1 = -sqrt(pi)/2, a_k = 0 for k >= 2
-(Paper 28; corrected 2026-10-02 from a_0 = a_1 = sqrt(pi),
+(Paper 51; corrected 2026-10-02 from a_0 = a_1 = sqrt(pi),
 a_2 = sqrt(pi)/8, which came from a sign error in the production
 coefficient function).  None of these values enters the code below.  The iterated CC spectral action at
 order (alpha/pi)^2 absorbs two factors of the photon Schwinger phase

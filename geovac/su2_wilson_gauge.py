@@ -19,17 +19,17 @@ integral over SU(2)^|E|:
 Framing
 -------
 
-Paper 25 shows the GeoVac Hopf graph carries an abelian U(1)
-Wilson-Hodge lattice-gauge structure, with the node Laplacian
-L_0 = B B^T as matter propagator and the edge Laplacian L_1 = B^T B as
-discrete Hodge-1 Laplacian. Paper 25 Section VII.1 examined whether a
-non-abelian analog exists on the Bargmann-Segal S^5 graph and found
-it does not (transitions are Clebsch-Gordan intertwiners, not SU(3)
+Paper 30 Sec. 4 records the abelian U(1) Wilson-Hodge dictionary on
+the scalar label graph, with the node Laplacian L_0 = B B^T as matter
+operator and the edge Laplacian L_1 = B^T B as the gradient part of the
+Hodge-1 Laplacian. Paper 24 (sec:gauge-structure-reduced) records
+that on the Bargmann-Segal S^5 graph a matter-coupled non-abelian
+analog does not exist (transitions are Clebsch-Gordan intertwiners, not SU(3)
 group elements).
 
-The S^3 Coulomb graph is different: S^3 is itself the Lie group SU(2),
-so SU(2)-valued link variables are a natural (and structurally correct)
-non-abelian object. This module builds that structure explicitly.
+SU(2)-valued link variables are a natural choice of compact non-abelian
+gauge group on the label graph; no step of the construction uses
+S^3 = SU(2) (Paper 30). This module builds that structure explicitly.
 
 What this IS and what it IS NOT
 -------------------------------
@@ -774,8 +774,8 @@ def u1_action_from_su2(
     With link variables U_e = diag(e^{i phi_e}, e^{-i phi_e}),
     plaquette holonomy is U_P = diag(e^{i sum_e phi_e},
     e^{-i sum_e phi_e}), so (1/2) Re tr U_P = cos(theta_P) with
-    theta_P = sum_{e in P} phi_e.  This matches Paper 25's U(1)
-    Wilson-Hodge construction.
+    theta_P = sum_{e in P} phi_e.  This is Paper 30's maximal-torus
+    reduction (Prop. 3, Sec. 4.1).
 
     Parameters
     ----------

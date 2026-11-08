@@ -3,7 +3,7 @@ Photon propagator for graph-native QED on the S³ Fock scalar graph.
 ====================================================================
 
 The photon is a gauge boson that lives on EDGES of the scalar Fock
-graph (Paper 25's lattice gauge structure). The photon kinetic operator
+graph (links carry the gauge field: Paper 30 Sec. 4.2). The photon kinetic operator
 is the edge Laplacian L₁ = B^T·B, where B is the signed incidence
 matrix of the Fock graph.
 
@@ -111,7 +111,7 @@ unambiguous unit testing.
 
 References
 ----------
-- GeoVac Paper 25 (Hopf gauge structure, L₀ / L₁ / Hodge decomposition)
+- GeoVac Paper 30 Sec. 2.2, 4.2 (L₀ / L₁ / Hodge decomposition, Wilson/graph-Hodge dictionary)
 - GeoVac Paper 7  (Fock scalar graph, S³ equivalence)
 - GeoVac hodge1_s3.py (continuum Hodge-1 spectrum, Ricci shift)
 - D. A. Spielman, "Spectral Graph Theory" (2015) — pseudoinverse / Laplacian
@@ -515,7 +515,7 @@ def gauge_zero_modes(n_max: int) -> List[Matrix]:
     """Compute the kernel of L₁ (gauge zero modes = harmonic 1-forms).
 
     These are the independent cycles of the Fock graph: closed edge
-    configurations with no boundary.  In the U(1) gauge theory (Paper 25),
+    configurations with no boundary.  In the U(1) gauge theory,
     gauge freedom corresponds to shifts along these directions.
 
     Returns
@@ -990,7 +990,7 @@ def _physics_notes(graph: FockGraphData,
             f"{[f'{g:.1f}' for g in gaps_vs_hodge1]} relative to Hodge-1 continuum n(n+2). "
             f"The graph L₁ MATCHES the scalar spectrum (not Hodge-1), confirming "
             f"the absence of the Ricci +2 curvature correction in the combinatorial "
-            f"edge Laplacian (Paper 25 / hodge1_s3.py)."
+            f"edge Laplacian (Paper 30 / hodge1_s3.py)."
         )
 
     notes.append(

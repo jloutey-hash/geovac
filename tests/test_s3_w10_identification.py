@@ -19,6 +19,11 @@ driver debug/s3_w10_ident.py).  Closes the v4.7.0 five-generator block:
         sum_{m>n} m^-5 n^-3) is computed LIVE -- an error in its
         evaluation or its role in the closed form fails the gate.
 
+Scope (2026-11-07): 'S3_oldW' is the chain sum built with the pre-correction
+weight I = 2 min - 1 - [n1 = n2]; the identities here are true for that sum.
+The corrected S^(3) (I = 2 min; value 40.6553875...) is pinned in
+tests/test_s3_decomposition.py and tests/test_paper55_witness_panels_computed.py.
+
 Conventions: t-values/zetas descending (GeoVac/Hoffman), first index on
 the largest summation variable.  All pinned values 195 digits.
 
@@ -46,7 +51,7 @@ PIN = {
     'a(8,2)': "-0.233563963441682925406641612738528039559382035989258319411116771762948041694975930638551195263829120393802185271193800757529836206560688547135143735002734394786479200779928789561333332113950644457",
     'a(7,3)': "-0.0513345410541781283873714166580174676490035408002631678076462337464680455114927527221713871824133154375601636450493335137361083444680913423618965879443508030240661284118160909210277505566156651559",
     'a(6,4)': "-0.0132332547312598284231850248221570285930904276478509083453955261029051383132348039851350580884181382020593983853830567092718450072489514643113336221309244626377077543094472880071257000623730072294",
-    'S3': "31.5725612075120227547619295450689833719575844695771941287005369766388345706854480909447330237578823749984324629677512219546838264469270715404509652942715095183123080504580446671013547025451659223",
+    'S3_oldW': "31.5725612075120227547619295450689833719575844695771941287005369766388345706854480909447330237578823749984324629677512219546838264469270715404509652942715095183123080504580446671013547025451659223",
 }
 
 # ---------------------------------------------------------------------------
@@ -221,7 +226,7 @@ def test_s3_full_closed_form_fast(z53_fast):
     mp.dps = 60
     s3 = IDENT_FORM + 256 * w10_assembly_over_256(
         T3_FORMS['t3(2,4,4)'], T3_FORMS['t3(3,3,4)'])
-    resid = abs(eval_form(s3, z53_fast) - mpf(PIN['S3']))
+    resid = abs(eval_form(s3, z53_fast) - mpf(PIN['S3_oldW']))
     assert resid < mpf(10) ** -50, f"S3 closed form residual {resid}"
 
 
@@ -254,5 +259,5 @@ def test_s3_full_closed_form_200dps():
     z53v = zeta53_desc()
     s3 = IDENT_FORM + 256 * w10_assembly_over_256(
         T3_FORMS['t3(2,4,4)'], T3_FORMS['t3(3,3,4)'])
-    resid = abs(eval_form(s3, z53v) - mpf(PIN['S3']))
+    resid = abs(eval_form(s3, z53v) - mpf(PIN['S3_oldW']))
     assert resid < mpf(10) ** -180, f"S3 closed form residual {resid}"

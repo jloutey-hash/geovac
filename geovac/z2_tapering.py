@@ -4,7 +4,7 @@ Hopf-U(1) Z2 tapering for GeoVac composed qubit Hamiltonians.
 
 Production module for the Hopf-U(1) ``m_l -> -m_l`` reflection tapering
 identified in Paper 29 §5.3 (Observation 5.1) as the only sub-action of
-the continuous Paper 25 Hopf U(1) that commutes with a real-integer
+the continuous Hopf U(1) that commutes with a real-integer
 adjacency.  Together with the standard alpha/beta parity Z-strings this
 gives a tapering qubit reduction of:
 

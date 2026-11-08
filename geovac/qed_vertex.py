@@ -225,25 +225,21 @@ def so4_channel_count(n1: int, n2: int, n_gamma: int) -> int:
 
         V_A = ((q+1)/2, (q-1)/2))    V_B = ((q-1)/2, (q+1)/2))
 
-    The QED vertex psi_bar gamma^mu psi A_mu couples positive-chirality
-    psi(n1) to negative-chirality psi(n2). For each vector component,
-    the coupling requires the SU(2) triangle inequality to be satisfied
-    in BOTH the L and R factors simultaneously:
+    Inside the model window (_vertex_allowed: n1 + n2 + q odd) the coupling
+    is between spinors of the SAME sign of D, both ((n+1)/2, n/2) (the
+    opposite-sign coupling has n1 + n2 + q even and lies outside the
+    window; docs/predictions/2026-11-07_physical_vector_vertex.md). For
+    each vector component the SU(2) triangle AND integrality conditions
+    must hold in both the L and R factors:
 
-        V_A: L: triangle((n1+1)/2, (q+1)/2, n2/2)
-             R: triangle(n1/2, (q-1)/2, (n2+1)/2)
-        V_B: L: triangle((n1+1)/2, (q-1)/2, n2/2)
-             R: triangle(n1/2, (q+1)/2, (n2+1)/2)
+        V_A: L: ((n1+1)/2, (q+1)/2, (n2+1)/2)   R: (n1/2, (q-1)/2, n2/2)
+        V_B: L: ((n1+1)/2, (q-1)/2, (n2+1)/2)   R: (n1/2, (q+1)/2, n2/2)
 
-    The channel count W(n1, n2, q) is 0, 1, or 2 depending on how many
-    of these are satisfied.
-
-    For large n1, n2 with q well inside [|n1-n2|, n1+n2], both components
-    contribute (W=2). At the boundaries (q near |n1-n2| or n1+n2), only
-    one component satisfies the triangles (W=1).
-
-    The exact formula (verified numerically for n1, n2 <= 20):
-        W(n1, n2, q) = 2*min(n1,n2) - 1 - delta_{n1,n2}  when summed over q.
+    The channel count W(n1, n2, q) is 0, 1, or 2 and is symmetric in
+    (n1, n2). Summed over q: 2*min(n1, n2). (Corrected 2026-11-07: the
+    earlier version paired the + content of n1 with the - content of n2
+    and omitted integrality; every unit it counted is empty, and its
+    q-sum was 2*min - 1 - delta.)
 
     Parameters
     ----------
@@ -262,28 +258,18 @@ def so4_channel_count(n1: int, n2: int, n_gamma: int) -> int:
 
     j1_L = Fraction(n1 + 1, 2)
     j1_R = Fraction(n1, 2)
-    j2_L = Fraction(n2, 2)
-    j2_R = Fraction(n2 + 1, 2)
+    j2_L = Fraction(n2 + 1, 2)
+    j2_R = Fraction(n2, 2)
+
+    def _tri(a: Fraction, b: Fraction, c: Fraction) -> bool:
+        return abs(a - b) <= c <= a + b and (a + b + c).denominator == 1
 
     count = 0
     q = n_gamma
-
-    # Component A: ((q+1)/2, (q-1)/2)
-    jg_L_A = Fraction(q + 1, 2)
-    jg_R_A = Fraction(q - 1, 2)
-    if (jg_R_A >= 0
-            and abs(j1_L - jg_L_A) <= j2_L <= j1_L + jg_L_A
-            and abs(j1_R - jg_R_A) <= j2_R <= j1_R + jg_R_A):
-        count += 1
-
-    # Component B: ((q-1)/2, (q+1)/2)
-    jg_L_B = Fraction(q - 1, 2)
-    jg_R_B = Fraction(q + 1, 2)
-    if (jg_L_B >= 0
-            and abs(j1_L - jg_L_B) <= j2_L <= j1_L + jg_L_B
-            and abs(j1_R - jg_R_B) <= j2_R <= j1_R + jg_R_B):
-        count += 1
-
+    for jg_L, jg_R in ((Fraction(q + 1, 2), Fraction(q - 1, 2)),
+                       (Fraction(q - 1, 2), Fraction(q + 1, 2))):
+        if _tri(j1_L, jg_L, j2_L) and _tri(j1_R, jg_R, j2_R):
+            count += 1
     return count
 
 
@@ -333,12 +319,13 @@ def effective_pair_weight(n1: int, n2: int) -> Dict[str, int]:
 
         N_q(n1, n2) = min(n1, n2)    [for n1, n2 >= 1]
 
-    The exact formula (verified for n1, n2 <= 20):
+    The exact formula (W = 2 on every allowed q; proved in
+    so4_channel_count's docstring, corrected 2026-11-07):
 
-        W_total = 2 * min(n1, n2) - 1 - delta_{n1, n2}
+        W_total = 2 * min(n1, n2)
 
-    so the ratio W_total / N_q approaches 2 for large min(n1, n2), with
-    corrections at the boundary.
+    so the ratio W_total / N_q is exactly 2 (the old count gave
+    2 * min - 1 - delta_{n1, n2}).
 
     Parameters
     ----------
@@ -380,17 +367,18 @@ def two_loop_sunset_weighted(
     The key finding: after summing over magnetic quantum numbers, the QED
     vertex on S^3 has coupling strength proportional to the number of
     SO(4) vector components satisfying the triangle inequality in BOTH
-    SU(2) factors simultaneously. This is 1 at the boundaries of the
-    allowed q-range and 2 in the interior.
+    SU(2) factors simultaneously. With the corrected count (2026-11-07)
+    this is 2 on every allowed triple, so the weighted sum is exactly
+    twice the uniform one.
 
-    The weighted sum introduces a min(n1, n2)-weighted double sum that
-    has the structure of a depth-2 multiple Hurwitz zeta value:
+    At s1 = s2 = 2, p = 1 the weighted sum is 2 * S_min, with
 
         S_min = sum_{k=1}^inf T(k)^2
 
     where T(k) = 2*zeta(s-2, k+3/2) - (1/2)*zeta(s, k+3/2) is the
-    Dirac Dirichlet tail. This is NOT identifiable in any standard
-    basis of MZVs, Catalan G, or Dirichlet beta values up to weight 8.
+    Dirac Dirichlet tail.  S_min reduces to depth <= 1 level-2 periods
+    (Paper 28, eq:smin_closed); the PSLQ in this module uses a basis
+    without the level-2 monomials and cannot find it.
 
     Parameters
     ----------

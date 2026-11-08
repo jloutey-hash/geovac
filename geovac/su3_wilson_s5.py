@@ -10,7 +10,7 @@ which built SU(2) Wilson on the S^3 = SU(2) Coulomb graph.
 Framing
 -------
 
-Paper 25 §VII.A flagged as open: does the S^5 Bargmann-Segal graph carry
+The archived Paper 25 (§VII.A) flagged as open: does the S^5 Bargmann-Segal graph carry
 a non-abelian gauge structure?  Sprint 5 Track S5 (debug/s5_gauge_structure_memo.md)
 returned a clean negative for the *adjacency-preserving* SU(3) action: the
 inter-shell transitions (N,0) → (N+1,0) are Clebsch-Gordan intertwiners
@@ -84,9 +84,10 @@ References
 ----------
 
 - Paper 24 (Bargmann-Segal lattice).
-- Paper 25 §VII.A (open question about non-abelian gauge on S^5).
-- Paper 30 (SU(2) Wilson on S^3, the structural sibling).
-- Paper 28 §graph_native_qed (related vertex-coupling analyses).
+- Paper 24 sec:gauge-structure-reduced (reduced Wilson content on S^5).
+- Paper 30 (Wilson theory on the label graphs; Sec. 4.1 records the SU(3)
+  Cartan reduction).
+- Paper 33 §4 (graph QED; related vertex-coupling analyses).
 - Sprint 5 Track S5 memo (debug/s5_gauge_structure_memo.md).
 - Wilson, Phys. Rev. D 10, 2445 (1974).
 - Creutz, "Quarks, Gluons and Lattices" (1983).

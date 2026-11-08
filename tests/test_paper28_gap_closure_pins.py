@@ -68,19 +68,41 @@ class TestSommerfeldDkClosedForms:
 
 class TestThreeLoopConvergenceTable:
     """tab:three_loop_convergence rows (a=4, p=1, CG-weighted),
-    recomputed live.  Fast: n_max=50 takes ~2 s."""
+    recomputed live.  Fast: n_max=50 takes ~2 s.
+
+    Corrected W (2026-11-07): expected values from the independent exact
+    route S(N) = sum_{m<=N} phi(m) L_N(m)^2, L_N(m) = 2 sum_{n<=N}
+    min(n,m) phi(n) (debug/w_channel_count_correction.py, Fraction
+    arithmetic for N <= 20); the old-count rows were 1.0616 / 3.5721 /
+    5.9083 / 7.8719 / 14.7984."""
 
     @pytest.mark.parametrize("n_max,expected", [
-        (5, 1.061627220971082),
-        (10, 3.5720844231573268),
-        (15, 5.908257093542889),
-        (20, 7.871873785801004),
+        (5, 2.753126103511856),
+        (10, 6.835894215630362),
+        (15, 10.18138493281675),
+        (20, 12.83657632322071),
     ])
     def test_paper28_convergence_row(self, n_max, expected) -> None:
         r = three_loop_factorized(n_max)
         assert abs(r["value_float"] - expected) < 1e-9
 
+    def test_paper28_convergence_row_n5_exact(self) -> None:
+        """Independent exact route at N=5 (no geovac call) agrees with the
+        factorized module to 1e-12 (corrected W, 2026-11-07)."""
+        from fractions import Fraction
+
+        def phi(n):
+            o = 2 * n + 3
+            return Fraction(8 * (o * o - 1), o ** 4)
+        N = 5
+        exact = sum(phi(m) * (2 * sum(min(n, m) * phi(n)
+                                      for n in range(N + 1))) ** 2
+                    for m in range(N + 1))
+        assert abs(float(exact) - 2.753126103511856) < 1e-14
+        assert abs(three_loop_factorized(N)["value_float"]
+                   - float(exact)) < 1e-12
+
     @pytest.mark.slow
     def test_paper28_convergence_row_n50(self) -> None:
         r = three_loop_factorized(50)
-        assert abs(r["value_float"] - 14.798403613123499) < 1e-9
+        assert abs(r["value_float"] - 21.58072389337666) < 1e-9

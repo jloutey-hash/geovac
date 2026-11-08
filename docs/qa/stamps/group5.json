@@ -6,7 +6,7 @@
    "hash": "501eaa24b9037e14",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "cite:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": {
+  "cite:papers/archive/paper_25_hopf_gauge_structure.tex": {
    "date": "2026-11-07",
    "hash": "29770e4de58a11ff",
    "run": "group5 FULL #1 (v6.5.0)"
@@ -26,12 +26,12 @@
    "hash": "d73e6e17daaeab53",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "cite:papers/group5_qed_gauge/paper_36_bound_state_qed.tex": {
+  "cite:papers/group6_precision_observations/paper_36_bound_state_qed.tex": {
    "date": "2026-11-07",
    "hash": "812863b34d7f2025",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "cite:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": {
+  "cite:papers/archive/paper_41_rule_b_wilson_u1.tex": {
    "date": "2026-11-07",
    "hash": "0d8db44c8553b38f",
    "run": "group5 FULL #1 (v6.5.0)"
@@ -46,7 +46,7 @@
    "hash": "0fdd8654e1e6beca",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "code:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": {
+  "code:papers/archive/paper_25_hopf_gauge_structure.tex": {
    "date": "2026-11-07",
    "hash": "9a08fb8c8d5ca064",
    "run": "group5 FULL #1 (v6.5.0)"
@@ -66,12 +66,12 @@
    "hash": "0386709e775f3750",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "code:papers/group5_qed_gauge/paper_36_bound_state_qed.tex": {
+  "code:papers/group6_precision_observations/paper_36_bound_state_qed.tex": {
    "date": "2026-11-07",
    "hash": "306cacc9efb77a8b",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "code:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": {
+  "code:papers/archive/paper_41_rule_b_wilson_u1.tex": {
    "date": "2026-11-07",
    "hash": "1cbdf8929e20199f",
    "run": "group5 FULL #1 (v6.5.0)"
@@ -261,157 +261,157 @@
    "hash": "f6397d253cbb4aa7",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Conclusion": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Conclusion": {
    "date": "2026-11-07",
    "hash": "d8a0bf47504f41b9",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools": {
    "date": "2026-11-07",
    "hash": "b7bfd211fe399b81",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Discrete Hodge decomposition": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Discrete Hodge decomposition": {
    "date": "2026-11-07",
    "hash": "422fd511fdd300ba",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Incidence matrix and boundary operators": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Incidence matrix and boundary operators": {
    "date": "2026-11-07",
    "hash": "a9e0620a18833e1a",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Lattice gauge theory dictionary": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Lattice gauge theory dictionary": {
    "date": "2026-11-07",
    "hash": "b89a4c0b67b1df03",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Node and edge Laplacians": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Node and edge Laplacians": {
    "date": "2026-11-07",
    "hash": "c27c44c68f19e73a",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Node versus edge spectra": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Graph Hodge Theory: The Tools / Node versus edge spectra": {
    "date": "2026-11-07",
    "hash": "b5d7998a4a8b7f27",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Introduction": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Introduction": {
    "date": "2026-11-07",
    "hash": "75ca13b123014b5e",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Open Questions": {
    "date": "2026-11-07",
    "hash": "ec5e30dedb99adf9",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions / Gauge structure on the Bargmann--Segal S^5 lattice: answered (mixed)": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Open Questions / Gauge structure on the Bargmann--Segal S^5 lattice: answered (mixed)": {
    "date": "2026-11-07",
    "hash": "0a2d15721a377007",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions / Observables beyond": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Open Questions / Observables beyond": {
    "date": "2026-11-07",
    "hash": "e3ce81e44c748bf1",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Open Questions / Rank-2 Breit tensor: a 2-form gauge structure?": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Open Questions / Rank-2 Breit tensor: a 2-form gauge structure?": {
    "date": "2026-11-07",
    "hash": "bda55fc5a90634db",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Related Work": {
    "date": "2026-11-07",
    "hash": "2b4d804005239ce8",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Conformal Maxwell theory and the AdS/CFT boundary": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Related Work / Conformal Maxwell theory and the AdS/CFT boundary": {
    "date": "2026-11-07",
    "hash": "3e7f69d1d47e3b00",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Graph Hodge theory": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Related Work / Graph Hodge theory": {
    "date": "2026-11-07",
    "hash": "8740087225b23375",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Lattice gauge theory on curved manifolds": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Related Work / Lattice gauge theory on curved manifolds": {
    "date": "2026-11-07",
    "hash": "23f1ee93c7dbcdb1",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::Related Work / Why the gap remained": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::Related Work / Why the gap remained": {
    "date": "2026-11-07",
    "hash": "ece133f26beb0ada",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized": {
    "date": "2026-11-07",
    "hash": "8c5db671b060dc60",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / Circulant structure reread": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / Circulant structure reread": {
    "date": "2026-11-07",
    "hash": "98120faf20482cfe",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / What the framework observation claims": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / What the framework observation claims": {
    "date": "2026-11-07",
    "hash": "d53cb58c817805fe",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / Where Paper 2's (B, F, ) live in this frame": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The Framework Observation, Formalized / Where Paper 2's (B, F, ) live in this frame": {
    "date": "2026-11-07",
    "hash": "cd5c19624546ef13",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph": {
    "date": "2026-11-07",
    "hash": "6ba45bc6d8da09b2",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / Node and edge Laplacians of the GeoVac graph": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / Node and edge Laplacians of the GeoVac graph": {
    "date": "2026-11-07",
    "hash": "894d06299e5776b5",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / Nodes and edges": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / Nodes and edges": {
    "date": "2026-11-07",
    "hash": "ecabd54bf0d0a18f",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / The Hopf quotient: S^3 S^2": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / The Hopf quotient: S^3 S^2": {
    "date": "2026-11-07",
    "hash": "c20d67367b6e3f77",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / The matter and gauge propagators": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / The matter and gauge propagators": {
    "date": "2026-11-07",
    "hash": "92879662a09cfd7c",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / U(1) phase on edges": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::The GeoVac Hopf Graph / U(1) phase on edges": {
    "date": "2026-11-07",
    "hash": "9824c654dad0695f",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not": {
    "date": "2026-11-07",
    "hash": "79f3d960c2ab97a0",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not / What the framework observation does make available": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not / What the framework observation does make available": {
    "date": "2026-11-07",
    "hash": "b4d4f38d8df6c727",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not / What this does not produce": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::What This Predicts, and What It Does Not / What this does not produce": {
    "date": "2026-11-07",
    "hash": "3f41f85edd09ae98",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex::front": {
+  "prose:papers/archive/paper_25_hopf_gauge_structure.tex::front": {
    "date": "2026-11-07",
    "hash": "824ca8ededc655fd",
    "run": "group5 FULL #1 (v6.5.0)"
@@ -1011,302 +1011,302 @@
    "hash": "03a2defb56276a45",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection": {
    "date": "2026-11-07",
    "hash": "e916afde0476bd9c",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection / The Coulomb Sturmian projection at = Z/n": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection / The Coulomb Sturmian projection at = Z/n": {
    "date": "2026-11-07",
    "hash": "1f48d15c89be3131",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection / The Dirac- S^3 spectrum": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Architecture: Dirac- S^3 plus Sturmian projection / The Dirac- S^3 spectrum": {
    "date": "2026-11-07",
    "hash": "42df54b2a0bb89cf",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Conclusion": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Conclusion": {
    "date": "2026-11-07",
    "hash": "1fbe4d2631e07d68",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Introduction": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Introduction": {
    "date": "2026-11-07",
    "hash": "407d29c7bbfd7a1f",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Introduction / Sprint provenance": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Introduction / Sprint provenance": {
    "date": "2026-11-07",
    "hash": "6468e55228929a7b",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test": {
    "date": "2026-11-07",
    "hash": "9cd33dae34fe1242",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Muonium catalogue closure: triple completes at the LS-8a wall": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Muonium catalogue closure: triple completes at the LS-8a wall": {
    "date": "2026-11-07",
    "hash": "73a9281f66bfe289",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint LS-8a result: WEAK verdict, structural confirmation": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint LS-8a result: WEAK verdict, structural confirmation": {
    "date": "2026-11-07",
    "hash": "6d8605e047efd245",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint MH Track A: Muonic Hydrogen via the Rest-Mass": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint MH Track A: Muonic Hydrogen via the Rest-Mass": {
    "date": "2026-11-07",
    "hash": "59ffeb6ff19c5601",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint Mu Lamb: Muonium Lamb Shift at Leading One-Loop Order": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Outlook: LS-7 and the multi-loop test / Sprint Mu Lamb: Muonium Lamb Shift at Leading One-Loop Order": {
    "date": "2026-11-07",
    "hash": "cb803ab3ab27fdc1",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result and component breakdown": {
    "date": "2026-11-07",
    "hash": "541a8d9288d2402e",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / Numerical result": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result and component breakdown / Numerical result": {
    "date": "2026-11-07",
    "hash": "0d1898c2c1c6e53a",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / Sprint LS-7: structural confirmation of two-loop projection": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result and component breakdown / Sprint LS-7: structural confirmation of two-loop projection": {
    "date": "2026-11-07",
    "hash": "9303983aff8a83a6",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / The remaining -5.65 MHz": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result and component breakdown / The remaining -5.65 MHz": {
    "date": "2026-11-07",
    "hash": "c4631bfc22e05e14",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::Result and component breakdown / What -content the calculation introduces": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result and component breakdown / What -content the calculation introduces": {
    "date": "2026-11-07",
    "hash": "9704d82f76c6bf9f",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson": {
    "date": "2026-11-07",
    "hash": "96fb46afb699dcf9",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / Acceleration form for s -states": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / Acceleration form for s -states": {
    "date": "2026-11-07",
    "hash": "e749784ba45d96ab",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / The Drake--Swainson asymptotic-subtraction projection (LS-4)": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / The Drake--Swainson asymptotic-subtraction projection (LS-4)": {
    "date": "2026-11-07",
    "hash": "b46f812b8ba848ba",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / Velocity form: 2S works, 2P diverges": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Bethe logarithm: velocity, acceleration, Drake--Swainson / Velocity form: 2S works, 2P diverges": {
    "date": "2026-11-07",
    "hash": "43cebb042b9fa086",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a)": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a)": {
    "date": "2026-11-07",
    "hash": "8b968cd9bc808576",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a) / Sprint LS-5: scoping the multi-loop test target": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a) / Sprint LS-5: scoping the multi-loop test target": {
    "date": "2026-11-07",
    "hash": "7ca1e9d819bd9460",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a) / Sprint LS-6a: identifying the Uehling double-counting": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The Eides convention reconciliation (LS-6a) / Sprint LS-6a: identifying the Uehling double-counting": {
    "date": "2026-11-07",
    "hash": "41a34ddeffb2e4c2",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_36_bound_state_qed.tex::front": {
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::front": {
    "date": "2026-11-07",
    "hash": "f3eb9c4cd6737f31",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Acknowledgements": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Acknowledgements": {
    "date": "2026-11-07",
    "hash": "93ddb1868283b17f",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Introduction": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Introduction": {
    "date": "2026-11-07",
    "hash": "b0a68e75a84fc25d",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow": {
    "date": "2026-11-07",
    "hash": "bff74f1b5783667b",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Adaptation to an irregular graph": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Adaptation to an irregular graph": {
    "date": "2026-11-07",
    "hash": "8043d3b66d598c67",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Flow direction and absence of non-trivial fixed point": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Flow direction and absence of non-trivial fixed point": {
    "date": "2026-11-07",
    "hash": "20e13b347b96b652",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Reading: consistent with permanent confinement": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Reading: consistent with permanent confinement": {
    "date": "2026-11-07",
    "hash": "aaa5dfb9a20e1adf",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Strong/weak-coupling asymptotics": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Migdal--Kadanoff RG flow / Strong/weak-coupling asymptotics": {
    "date": "2026-11-07",
    "hash": "89fc7fcaa7829505",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Outlook": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Outlook": {
    "date": "2026-11-07",
    "hash": "67fbc860e47f0a06",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Seven-witness structural verdict": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Seven-witness structural verdict": {
    "date": "2026-11-07",
    "hash": "9a2884831a0e44e6",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Spectral dimension": {
    "date": "2026-11-07",
    "hash": "5ea7c886182513fe",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Method": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Method": {
    "date": "2026-11-07",
    "hash": "eac4ed46416a7ec9",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Numerical results": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Numerical results": {
    "date": "2026-11-07",
    "hash": "f5eb47f324a93df7",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Reading": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Spectral dimension / Reading": {
    "date": "2026-11-07",
    "hash": "054528ad22b5e723",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph": {
    "date": "2026-11-07",
    "hash": "bd4902ab2b5e9cd3",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Bipartiteness and girth": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Bipartiteness and girth": {
    "date": "2026-11-07",
    "hash": "0f73b5e2b3505274",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Comparison to the scalar Fock graph": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Comparison to the scalar Fock graph": {
    "date": "2026-11-07",
    "hash": "949a9a74f850dea8",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Graph properties": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Graph properties": {
    "date": "2026-11-07",
    "hash": "96dbe7216cda47da",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Plaquette signatures": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Plaquette signatures": {
    "date": "2026-11-07",
    "hash": "6896e64313bcbca3",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Spectral genealogy": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Spectral genealogy": {
    "date": "2026-11-07",
    "hash": "c49863b8e7752801",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Vertex and edge data": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Dirac-Rule-B graph / Vertex and edge data": {
    "date": "2026-11-07",
    "hash": "82da804653984363",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B": {
    "date": "2026-11-07",
    "hash": "400323a82204f3ba",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Link variables and gauge transformation": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Link variables and gauge transformation": {
    "date": "2026-11-07",
    "hash": "0bc774f7633b1bd8",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Plaquette counts and the structural difference from Paper 25": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Plaquette counts and the structural difference from Paper 25": {
    "date": "2026-11-07",
    "hash": "8ef2614c59a53124",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Quadratic expansion and the weak-coupling kinetic term": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Quadratic expansion and the weak-coupling kinetic term": {
    "date": "2026-11-07",
    "hash": "b6f624da813b8d66",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Signed incidence and the two Laplacians": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Signed incidence and the two Laplacians": {
    "date": "2026-11-07",
    "hash": "933bd9ab86c4a3eb",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / The plaquette boundary operator and the correct Wilson kinetic": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / The plaquette boundary operator and the correct Wilson kinetic": {
    "date": "2026-11-07",
    "hash": "5ed6cbe1894a0c5a",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Wilson action": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::The Wilson U(1) construction on Rule B / Wilson action": {
    "date": "2026-11-07",
    "hash": "eb825fcabd0168fb",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics": {
    "date": "2026-11-07",
    "hash": "1e7e71e7d4d97d7e",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Full Monte Carlo Wilson loops": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Full Monte Carlo Wilson loops": {
    "date": "2026-11-07",
    "hash": "4dfdb23300e5d9cc",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Gaussian (free-photon) Wilson loops": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Gaussian (free-photon) Wilson loops": {
    "date": "2026-11-07",
    "hash": "76c43dda427bd154",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / NLO character expansion and structural cycle content": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / NLO character expansion and structural cycle content": {
    "date": "2026-11-07",
    "hash": "8a0148252f0bbc62",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov dilute monopole gas via DeGrand--Toussaint construction": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov dilute monopole gas via DeGrand--Toussaint construction": {
    "date": "2026-11-07",
    "hash": "35d0e17c0bfcf46b",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov loops via Euclidean-time compactification": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov loops via Euclidean-time compactification": {
    "date": "2026-11-07",
    "hash": "495f540e62a4908d",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov-rate resolution and non-cubic dual-lattice structure": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Polyakov-rate resolution and non-cubic dual-lattice structure": {
    "date": "2026-11-07",
    "hash": "2fba8e02e4290393",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Strong-coupling character expansion": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::Wilson loop diagnostics / Strong-coupling character expansion": {
    "date": "2026-11-07",
    "hash": "fca44aa980b938e5",
    "run": "group5 FULL #1 (v6.5.0)"
   },
-  "prose:papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex::front": {
+  "prose:papers/archive/paper_41_rule_b_wilson_u1.tex::front": {
    "date": "2026-11-07",
    "hash": "f6c2995aadd80a32",
    "run": "group5 FULL #1 (v6.5.0)"

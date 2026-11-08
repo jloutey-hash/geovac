@@ -466,4 +466,4 @@ at every t, against 1.49, 0.83, 0.43 from the withdrawn formula. So the lesson "
 Theorem 1" is withdrawn: there is no A coefficient to extract. What stands: the discrete per-t tip recovery at the
 lattice scale fails (FD undershoots and the spectral scheme overshoots the t-independent 1/6), and refinement in the
 azimuthal direction does not cure it. Paper 51's per-t UV-target paragraph is withdrawn; record CHANGELOG v6.5.0.
-
+| RE-INTERPRETATION of the single-constant graph-to-continuum QED projection row (2026-11-07): measured with an SO(4) channel count that paired mixed-sign spinor content; with the corrected count C×F₂ stays near 150× α/(2π) instead of growing, and C_VP/C_SE is 0.137, not ≈ 3/29. The negative (no convergence to α/(2π)) stands | 0 | See `docs/failed_approaches_ledger.md`; Paper 28; `debug/sprint_w_channel_count_correction_memo.md`. Full: the count W(n1,n2,q) is 0 or 2 inside the model window (I = 2 min); C_VP n_max=2..5 = 0.0632, 0.0926, 0.1098, 0.1195; C_SE = 0.503, 0.671, 0.793, 0.890; C×F₂/(α/2π) = 128.0, 149.3, 150.2, 143.6; graph/continuum VP at n_max=3 ~11× (was ~35×). |

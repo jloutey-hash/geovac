@@ -169,7 +169,7 @@ M3 trivialization prediction (Sprint L0)
 
 Sprint L0 audit (`debug/lorentzian_l0_audit_memo.md` §4) predicted that
 the M3 sub-mechanism of the master Mellin engine (vertex-parity Hurwitz
-/ Dirichlet L from Camporesi-Higuchi vertex sums; Paper 28 §QED-vertex)
+/ Dirichlet L from the parity-split Camporesi-Higuchi sums; Paper 28 Thm 3)
 TRIVIALIZES on the chirality-symmetric Dirac spectrum at signature
 (3, 1) because the BBB (m, n) = (4, 6) chirality grading combined with
 the chirality-symmetric truncation forces D_even = D_odd identically.
@@ -767,7 +767,7 @@ def m3_vertex_parity_sum_riemannian(n_max: int) -> Tuple[float, float, float]:
 
     Per the chirality-symmetric convention here, the parity is based on
     n_fock as the labeling of the shell (the standard Camporesi-Higuchi
-    parity reading from Paper 28 §QED-vertex).
+    parity reading from Paper 28 Thm 3).
 
     Returns
     -------
@@ -819,7 +819,7 @@ def m3_vertex_parity_sum_lorentzian_chirality_symmetric(
 
     For the L0 prediction to hold, we need the parity assignment NOT to
     depend on the chirality.  The Camporesi-Higuchi vertex parity reads
-    parity from the Fock label n_fock (Paper 28 §QED-vertex), which is
+    parity from the Fock label n_fock (Paper 28 Thm 3), which is
     chirality-independent.  Therefore the chirality-symmetric truncation
     sums over BOTH chiralities at each n_fock with the same parity, and
     D_even / D_odd inherit the same parity assignment as the Riemannian
@@ -898,7 +898,7 @@ def verify_m3_trivialization(n_max: int) -> dict:
 
     Computes BOTH readings of the M3 sum:
 
-      Reading A (n_fock-parity, mirroring Paper 28 §QED-vertex):
+      Reading A (n_fock-parity, mirroring Paper 28 Thm 3):
         chirality-symmetric truncation gives D_even - D_odd equal to
         the Riemannian-side value (NOT trivially zero) because parity
         is chirality-independent in the Camporesi-Higuchi vertex sum.
@@ -943,7 +943,7 @@ def verify_m3_trivialization(n_max: int) -> dict:
     if trivializes_B and not trivializes_A:
         verdict = (
             "M3 trivializes under Reading B (chirality-pairing) only.  "
-            "Under Reading A (n_fock-parity, the Paper 28 §QED-vertex "
+            "Under Reading A (n_fock-parity, the Paper 28 Thm 3 parity split "
             "reading), M3 does NOT trivialize at signature (3, 1) on "
             "the chirality-symmetric truncation -- the Lorentzian "
             "D_even - D_odd equals the Riemannian one because parity is "

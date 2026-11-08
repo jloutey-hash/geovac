@@ -1,6 +1,6 @@
 """Paper 36 Lamb-chain reproducibility pins (LS-1 -> LS-6a, 1052.19 MHz).
 
-Backs papers/group5_qed_gauge/paper_36_bound_state_qed.tex (group5 Tier-2
+Backs papers/group6_precision_observations/paper_36_bound_state_qed.tex (group5 Tier-2
 track E build, 2026-07-02).  The original chain lives in archived sprint
 drivers under debug/archive/ (LS-1/LS-4/LS-6a in precision_arc, LS-2/LS-3
 in qed_arc); this test recomputes the durable sub-chains from permanent

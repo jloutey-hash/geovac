@@ -5,11 +5,13 @@ Dossier: debug/smin_dossier_round1_memo.md
 
 Six test groups:
   (i)   Exact Fubini/min-weight interchange identity in Fraction arithmetic.
-  (ii)  Channel-count closed form I(n1,n2) = 2*min(n1,n2) - 1 - [n1=n2]
-        against the real SO(4) CG machinery in geovac/qed_vertex.py.
+  (ii)  Channel-count closed form I(n1,n2) = 2*min(n1,n2) against the
+        real SO(4) CG machinery in geovac/qed_vertex.py (corrected W,
+        2026-11-07; the old count gave 2*min - 1 - [n1=n2]).
   (iii) 8-t-value decomposition of S_min numerically at 50 dps.
   (iv)  t(2,1) and t(2,3) closed-form reductions at 50 dps.
-  (v)   Sunset relation S_sunset = 2*S_min - P^2 - Q.
+  (v)   Sunset relation S_sunset = 2*S_min (corrected W, 2026-11-07;
+        the old count gave 2*S_min - P^2 - Q).
   (vi)  t(4,1), t(4,3) reductions and the assembled S_min closed form
         (Paper 28 eq:t41, eq:t43, eq:smin_closed; added 2026-06-11).
 
@@ -88,11 +90,11 @@ def I_channel_geovac(n1: int, n2: int) -> int:
 
 
 def I_closed_form(n1: int, n2: int) -> int:
-    """Closed-form channel count: 2*min(n1,n2) - 1 - [n1==n2], 0 when min=0."""
-    m = min(n1, n2)
-    if m == 0:
-        return 0
-    return 2 * m - 1 - (1 if n1 == n2 else 0)
+    """Closed-form channel count 2*min(n1,n2) (0 when min=0).
+
+    Corrected W, 2026-11-07: W = 2 on each of the min(n1,n2) window photon
+    levels.  The old count gave 2*min - 1 - [n1==n2]."""
+    return 2 * min(n1, n2)
 
 
 # ===========================================================================
@@ -154,11 +156,13 @@ class TestFubiniInterchange:
 # ===========================================================================
 
 class TestChannelCountClosedForm:
-    """I(n1,n2) = 2*min(n1,n2) - 1 - [n1==n2] vs geovac/qed_vertex.py.
+    """I(n1,n2) = 2*min(n1,n2) vs geovac/qed_vertex.py (corrected W,
+    2026-11-07).
 
-    This is the key structural identity proved in dossier round-1c: the true
-    SO(4) Clebsch-Gordan channel count sums to exactly the min-weight model.
-    Verified against the real CG implementation for n1,n2 <= 8.
+    Proof: inside the window both vector components satisfy triangle and
+    integrality in both SU(2) factors, so W = 2 on each of the min(n1,n2)
+    allowed photon levels.  Verified against the CG implementation for
+    n1,n2 <= 8.
     """
 
     def test_channel_count_closed_form_vs_cg(self) -> None:
@@ -190,11 +194,12 @@ class TestChannelCountClosedForm:
                 )
 
     def test_diagonal_formula(self) -> None:
-        """I(n,n) = 2n - 2 = 2*(n-1) for n >= 1."""
-        for n in range(1, 9):
-            expected = 2 * n - 2
-            assert I_closed_form(n, n) == expected, (
-                "I(%d,%d) = %d, expected %d" % (n, n, I_closed_form(n, n), expected)
+        """I(n,n) = 2n for n >= 0 (corrected W, 2026-11-07; was 2n - 2),
+        checked against the CG machinery."""
+        for n in range(0, 9):
+            expected = 2 * n
+            assert I_channel_geovac(n, n) == expected, (
+                "I(%d,%d) = %d, expected %d" % (n, n, I_channel_geovac(n, n), expected)
             )
 
 
@@ -364,77 +369,40 @@ class TestTValueClosedForms:
 # ===========================================================================
 
 class TestSunsetRelation:
-    """S_sunset = 2*S_min - P^2 - Q, exact via CG channel count closure.
+    """S_sunset = 2*S_min exactly (corrected W, 2026-11-07).
 
     The sunset sum S_sunset = sum_{n1,n2>=0} I(n1,n2) * phi(n1) * phi(n2)
-    where I(n1,n2) is the true SO(4) CG channel count.  The closed form
-    for I gives I = 2*min - 1 - [n1=n2] for n1,n2 >= 1 and 0 otherwise.
-    Substituting:
-        S_sunset = 2*S_min - P^2 - Q
-    where:
-        P = D(4) - phi(0) = D(4) - 64/81   (D(4) = pi^2 - pi^4/12)
-        Q = 4*zeta(4,5/2) - 2*zeta(6,5/2) + (1/4)*zeta(8,5/2)
-          = sum_{n>=1} phi(n)^2
+    where I(n1,n2) is the true SO(4) CG channel count.  With I = 2*min
+    (0 when min = 0) the sunset is twice the min-weighted double sum:
+        S_sunset = 2*S_min = 4.95987387606844510882715900165876...
+    (The old count, I = 2*min - 1 - [n1=n2], gave 2*S_min - P^2 - Q =
+    3.89451620519784...; P = D(4) - 64/81, Q = sum_{n>=1} phi(n)^2.)
     """
 
     DPS = 35
-    TOL_PARTIAL = mpmath.mpf(10) ** -5  # partial sum tolerance (N=30 partial)
-    TOL_RELATION = mpmath.mpf(10) ** -25  # relation tolerance (exact formula)
+    S_SUNSET_45 = "4.959873876068445108827159001658764289375851573"
 
-    def test_sunset_relation_exact(self) -> None:
-        """S_sunset = 2*S_min - P^2 - Q at 35 dps."""
-        mpmath.mp.dps = self.DPS
-        S_min = mpmath.nsum(
-            lambda k: T_tail(int(k)) ** 2, [1, mpmath.inf], method="levin"
-        )
-        D4 = mpmath.pi**2 - mpmath.pi**4 / 12
-        P = D4 - mpmath.mpf(64) / 81
-        Q = (
-            4 * mpmath.zeta(4, mpmath.mpf(5) / 2)
-            - 2 * mpmath.zeta(6, mpmath.mpf(5) / 2)
-            + mpmath.mpf(1) / 4 * mpmath.zeta(8, mpmath.mpf(5) / 2)
-        )
-        S_sunset_formula = 2 * S_min - P**2 - Q
-
-        # Cross-check: partial N=30 CG-exact sum using I_closed_form
+    def test_sunset_relation_exact_truncated(self) -> None:
+        """Exact Fraction identity at N=30 with the real CG machinery:
+        sum I phi phi == 2 sum min phi phi."""
         N = 30
-        S_sunset_partial = sum(
-            I_closed_form(n1, n2) * float(phi_mp(n1)) * float(phi_mp(n2))
-            for n1 in range(0, N + 1)
-            for n2 in range(0, N + 1)
-        )
-        # The partial sum should agree with the formula within the tail truncation error
-        # At N=30, tail is ~O(1/N) but the formula is exact.
-        # We check the formula gives a sensible value (3.89...) and partial sum is close.
-        assert abs(float(S_sunset_formula) - 3.894516) < 1e-4, (
-            "S_sunset formula gives unexpected value: %s" % S_sunset_formula
-        )
+        ph = {n: phi_frac(n) for n in range(N + 1)}
+        lhs = sum(I_channel_geovac(a, b) * ph[a] * ph[b]
+                  for a in range(N + 1) for b in range(N + 1))
+        rhs = 2 * sum(min(a, b) * ph[a] * ph[b]
+                      for a in range(1, N + 1) for b in range(1, N + 1))
+        assert lhs == rhs
 
-    def test_Q_equals_sum_phi_squared(self) -> None:
-        """Q = 4*zeta(4,5/2) - 2*zeta(6,5/2) + (1/4)*zeta(8,5/2) = sum_{n>=1} phi(n)^2."""
+    def test_sunset_value(self) -> None:
+        """S_sunset = 2*S_min at 35 dps: Hurwitz-tail route vs the frozen
+        S_min value and vs the frozen sunset decimal."""
         mpmath.mp.dps = self.DPS
-        Q = (
-            4 * mpmath.zeta(4, mpmath.mpf(5) / 2)
-            - 2 * mpmath.zeta(6, mpmath.mpf(5) / 2)
-            + mpmath.mpf(1) / 4 * mpmath.zeta(8, mpmath.mpf(5) / 2)
-        )
-        # Alternative form via rescaling: sum_{n>=1} phi(n)^2
-        # = sum_{o>=5, odd} (64/o^4 - 128/o^6 + 64/o^8)
-        # = 1024*zeta(4,5/2) - 8192*zeta(6,5/2) + 16384*zeta(8,5/2)
-        # But that != Q_memo as defined above — check numerically:
-        # Actually sum phi^2 uses 64/o^4 - 128/o^6 + 64/o^8 != 4*(2/o)^4 - 2*(2/o)^6 + (1/4)*(2/o)^8
-        # The Q from the memo is a specific Hurwitz combination defined in the paper.
-        # Just verify the sunset value is numerically consistent.
         S_min = mpmath.nsum(
             lambda k: T_tail(int(k)) ** 2, [1, mpmath.inf], method="levin"
         )
-        D4 = mpmath.pi**2 - mpmath.pi**4 / 12
-        P = D4 - mpmath.mpf(64) / 81
-        # S_sunset should be ~ 3.8945...
-        S_sunset = 2 * S_min - P**2 - Q
-        assert abs(S_sunset - mpmath.mpf("3.89451620519784")) < mpmath.mpf(10) ** -12, (
-            "Sunset relation gives wrong value: %s" % mpmath.nstr(S_sunset, 20)
-        )
+        S_sunset = 2 * S_min
+        assert abs(S_sunset - 2 * mpmath.mpf(FROZEN_80)) < mpmath.mpf(10) ** -30
+        assert abs(S_sunset - mpmath.mpf(self.S_SUNSET_45)) < mpmath.mpf(10) ** -30
 
     def test_P_definition(self) -> None:
         """P = D(4) - 64/81 where D(4) = pi^2 - pi^4/12."""

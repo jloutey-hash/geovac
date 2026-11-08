@@ -5,7 +5,8 @@ Hodge decomposition of the S³ Fock scalar graph.
 Constructs the signed incidence matrix B (V×E), the node Laplacian
 L₀ = B·Bᵀ, and the edge Laplacian L₁ = Bᵀ·B for the GeoVac S³ Fock
 scalar graph built by GeometricLattice.  The edge Laplacian is the
-photon kinetic operator of Paper 25 (Hopf gauge structure).
+gradient part of the Hodge-1 Laplacian of Paper 30's Wilson/graph-Hodge
+dictionary (Sec. 4.2).
 
 Graph definition
 ----------------
@@ -70,8 +71,9 @@ tests/test_graph_s3_nonconvergence.py); the exact S³ operator on the
 (n, l, m) labels is the diagonal SO(4) Casimir n²−1, a node weight, not
 an edge Laplacian.
 
-Paper 25 identifies L₁ = BᵀB as the "gauge propagator" — the
-discrete Hodge-1 (photon kinetic) operator.  Its nonzero eigenvalues
+In Paper 30's Wilson/graph-Hodge dictionary (Sec. 4.2) the kinetic
+operator is the curl form B₂B₂ᵀ and the Feynman-gauge propagator is
+(BᵀB + B₂B₂ᵀ)⁻¹; L₁ = BᵀB is its gradient part.  Its nonzero eigenvalues
 are those of L₀ above; there is no level-by-level comparison with the
 continuum Hodge-1 eigenvalues μₙ = n(n+2) (the Ricci shift +2 is a
 continuum curvature effect absent from the combinatorial graph).
@@ -85,7 +87,7 @@ enter.  This is analogous to the Bargmann-Segal graph (Papers 24, 29).
 
 References
 ----------
-- GeoVac Paper 25 (Hopf gauge structure; L₁ = BᵀB as gauge propagator)
+- GeoVac Paper 30 Sec. 2.2, 4.2 (plaquette complex; Wilson/graph-Hodge dictionary)
 - GeoVac Paper 24 §III (π-free certification pattern)
 - GeoVac CLAUDE.md §1.7 WH1 (almost-commutative spectral triple)
 - S. Hoory, N. Linial, A. Wigderson, "Expander graphs and their
@@ -274,7 +276,7 @@ class FockGraphHodge:
     def edge_laplacian(self) -> sp.Matrix:
         """Edge Laplacian L₁ = Bᵀ·B (E×E), entries in ℤ.
 
-        This is the photon kinetic operator of Paper 25.
+        It is the gradient part of the Hodge-1 Laplacian (Paper 30 Sec. 4.2).
         Its nonzero eigenvalues equal those of L₀ (SVD theorem).
         """
         if self._L1_sym is None:

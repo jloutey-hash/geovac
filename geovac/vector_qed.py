@@ -62,7 +62,7 @@ References
 - GeoVac graph_qed_self_energy.py (scalar graph self-energy, comparison)
 - GeoVac qed_self_energy.py (continuum self-energy, selection rules)
 - GeoVac qed_vertex.py (continuum vertex coupling, SO(4) channel count)
-- GeoVac Paper 28 (QED on S^3, selection rule census)
+- GeoVac Paper 33 (selection-rule census: graph, vertex model, physical vertex)
 - GeoVac Paper 18 (exchange constant taxonomy)
 """
 

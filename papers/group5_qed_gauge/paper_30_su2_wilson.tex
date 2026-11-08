@@ -1,6 +1,6 @@
-% Paper 30: SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph
-% GeoVac Project, April 2026
-% v1.0 -- Non-abelian sibling of Paper 25.
+% Paper 30: Wilson lattice gauge theory on the GeoVac label graphs
+% GeoVac Project.  Hosts the former Papers 25 (abelian dictionary) and 41
+% (compact U(1) on the Dirac Rule-B graph), merged 2026-11-07.
 
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
@@ -15,74 +15,55 @@
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 
-\title{SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph:\\
-The Non-Abelian Sibling of Paper 25}
+\title{Wilson Lattice Gauge Theory on the GeoVac Label Graphs:\\
+Exact Factorization on the Scalar Graph and Compact $U(1)$\\
+on the Dirac Rule-B Graph}
 \author{GeoVac Project}
-\date{April 2026}
+\date{2026}
 
 \begin{document}
+\sloppy
 \maketitle
 
 \begin{abstract}
-Paper~25~\cite{paper25} placed the GeoVac Hopf graph inside the
-Wilson--Hodge lattice-gauge vocabulary with a $U(1)$ connection on
-edges, and explicitly left as open (\S VII.A) the question of whether
-a non-abelian gauge structure is natural on the same graph.  This paper
-answers that question for the compact simply-connected non-abelian Lie
-group of rank~1, $\mathrm{SU}(2)$.  The coincidence $S^3 =
-\mathrm{SU}(2)$ (as manifolds) makes this case structurally special:
-the underlying manifold of the GeoVac graph \emph{is} the gauge group.
-Taking link variables $U_e \in \mathrm{SU}(2)$, plaquettes as the
-primitive closed non-backtracking walks of the Ihara zeta
-setup~\cite{paper29}, and the Wilson action
-$S_W[U] = \beta \sum_P \bigl(1 - \tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,
-U_P\bigr)$, we obtain a gauge-invariant finite-dimensional lattice
-gauge theory with Haar-normalizable partition function.
-Three structural results follow.
-(1)~\emph{$U(1)$ reduction to Paper 25.}  The diagonal (maximal-torus)
-sector of $\mathrm{SU}(2)$ link variables reproduces Paper~25's
-$U(1)$ Wilson--Hodge action to machine precision.  Paper~25 is the
-Cartan-subalgebra projection of the present theory; the abelian
-construction it documents is a structural sub-sector of a genuinely
-non-abelian one.
-(2)~\emph{The weak-coupling kinetic term completes the Hodge-1
-Laplacian.}  Linearizing $S_W$ around the trivial vacuum $U_e = I$
-produces, at second order in the gauge field, the plaquette (curl)
-quadratic form $(\beta/8) \sum_a \langle A^a, B_2 B_2^{\top} A^a\rangle$
-on $\mathfrak{su}(2)$-valued $1$-cochains, with per-plaquette
-per-component coefficient $1/8 = 1/(4 N_c)$.  This curl form is
-\emph{not} a scalar multiple of Paper~25's edge Laplacian
-$L_1 = B^{\top} B$ (the two have complementary supports: the plaquette
-columns of $B_2$ span $\ker L_1$ exactly); it is the co-exact part that completes
-$L_1$ to the full discrete Hodge-1 Laplacian
-$B^{\top} B + B_2 B_2^{\top}$ of the 2-complex with the Ihara
-plaquettes attached as faces, exactly the face structure
-Paper~25~\S II anticipates.
-(3)~\emph{Plaquette enumeration and Monte Carlo Wilson-loop data.}
-On the $S^3$ Coulomb graph at $n_{\max} = 2, 3, 4$, the first-Betti
-counts are $\beta_1 = 0, 2, 8$ and the primitive 4-cycle counts are
-$0, 2, 8$; at $n_{\max} = 3$ the two plaquettes form a cycle basis, so
-the plaquette variables are independent Haar elements and the Wilson
-expectation is exactly $\langle W \rangle = I_2(\beta)/I_1(\beta)$
-($0.124, 0.240, 0.433, 0.719$ at $\beta = 0.5, 1, 2, 5$), which long
-Metropolis chains reproduce.
-The scope is a compact-graph non-abelian lattice gauge construction,
-not a Yang--Mills mass-gap claim on $\mathbb{R}^4$; the paper closes
-with a synthesis observation that the GeoVac framework now carries
-\emph{five} action principles---maximum entropy on nodes, Rayleigh--Ritz
-on node-wavefunctions, Wilson action on gauge edges, Ihara path-integral
-on walks, and spectral action on Dirac spectrum---suggesting---though we do not claim---a framework-wide
-organizing principle of least action.
-An $\mathrm{SU}(3)$ sibling on the Bargmann--Segal $S^5$ graph
-(Paper~24) has been constructed in Sprint~ST-SU3
-(\texttt{debug/st\_su3\_wilson\_memo.md}, May~2026), confirming
-Proposition~1's analog (Cartan reduction to $U(1)\times U(1)$) and
-Proposition~2's analog (kinetic coefficient $1/12 = 1/(4 N_c)$) at machine
-precision; matter coupling on $S^5$ encounters the Sprint~5 Track~S5
-Clebsch--Gordan-intertwiner obstruction, so that of Paper~24's
-Coulomb/HO asymmetry layers, Wilson gauge alone is universal while
-Wilson gauge with natural matter coupling is Coulomb-specific (the
-spectrum-computing and calibration-$\pi$ layers are withdrawn).
+The GeoVac label graphs carry Wilson lattice gauge theories, and the two
+graphs studied here sit at opposite ends of solvability.  On the scalar
+label graph, whose vertices are the labels $(n,l,m)$ of the $S^3$
+harmonics, no edge changes $l$, and each $l$-block is a planar
+$(n_{\max}-l)\times(2l+1)$ grid.  Taking the plaquettes to be the graph's
+4-cycles (the unit squares of these grids), the plaquettes form a basis of
+the cycle space at every $n_{\max}$, so after gauge fixing on a spanning
+tree the plaquette holonomies are independent Haar variables.
+$\mathrm{SU}(2)$ Wilson theory on this graph is therefore the exactly
+solvable two-dimensional lattice gauge theory:
+$Z(\beta) = [2e^{-\beta} I_1(\beta)/\beta]^{\beta_1}$, and every closed
+loop enclosing $A$ plaquettes has
+$\langle W \rangle = (I_2(\beta)/I_1(\beta))^{A}$, an area law by
+factorization that carries no information about confinement.  The
+weak-coupling expansion gives the curl form
+$(\beta/8)\sum_a \langle A^a, B_2 B_2^{\top} A^a\rangle$, which is
+supported on the cycle space and completes the edge Laplacian
+$B^{\top}B$ to the full Hodge-1 Laplacian of the plaquette-filled complex;
+the cubic term is nonzero, with a vertex proportional to
+$\epsilon^{abc}$.  Restricting the links to the maximal torus gives compact
+$U(1)$ Wilson theory, with $\langle W\rangle = (I_1/I_0)^A$, and we record
+the abelian dictionary between Wilson and graph-Hodge data together with
+the exact $n_{\max}=3$ edge-Laplacian spectrum.  On the Dirac Rule-B
+graph, whose edges are E1 dipole transitions and all change $l$, the graph
+is connected, its 4-cycles outnumber the independent cycles ($44$ against
+$11$ at $n_{\max}=2$) and close into 2-cycles of three plaquettes, so
+compact $U(1)$ does not factorize.  Seven standard diagnostics are
+compatible with compact $U(1)$ and discriminate no dimension: the
+monopole density falls roughly exponentially in $\beta$ on a range below
+the four-dimensional transition, full Monte Carlo Wilson loops resolve no
+area law (the area coefficient of a joint area-plus-perimeter fit is
+consistent with zero at $n_{\max}=2$), and the Polyakov loop on the
+product graph with a time circle is well defined through one extra
+cohomology class, while its expectation vanishes by centre symmetry.  Each
+Rule-B link lies in many plaquettes ($8.8$ and $37.5$ on average at
+$n_{\max}=2,3$), so the comparison class is mean-field or large-dimension
+lattice gauge theory, not a three-dimensional lattice.  The label graphs
+have no continuum limit, and nothing here bears on one.
 \end{abstract}
 
 % ===================================================================
@@ -90,1059 +71,609 @@ spectrum-computing and calibration-$\pi$ layers are withdrawn).
 \label{sec:intro}
 % ===================================================================
 
-The GeoVac framework places Coulomb bound-state quantum mechanics
-on a finite graph whose nodes are exactly the labels $(n,l,m)$ of the
-unit-three-sphere harmonics~\cite{paper7} (the graph Laplacian itself
-does not converge to the $S^3$ Laplacian:\ it preserves $l$ and splits
-into disconnected blocks, Paper~7).  Paper~25~\cite{paper25} observed
-that the same graph, read through its signed node--edge incidence
-matrix $B$, carries all the combinatorial ingredients of a lattice
-gauge theory: nodes as matter sites, edges as link variables in a
-$U(1)$ connection, node Laplacian $L_0 = B B^{\top}$ as matter
-propagator, edge Laplacian $L_1 = B^{\top} B$ as discrete Hodge-1
-Laplacian.  Section~VII.A of Paper~25 explicitly flagged as open the
-question of whether a non-abelian gauge structure is also natural on
-the same graph, and sharpened the question by an analysis of the
-$S^5$ Bargmann--Segal graph of Paper~24~\cite{paper24} which
-\emph{fails} to admit an $\mathrm{SU}(3)$ lattice gauge analog---the
-$(N, 0)$ representation tower has Clebsch--Gordan intertwiners on
-links, not fixed group elements, so it fails the Wilson
-fixed-group-on-every-link requirement.
+The GeoVac framework works on finite graphs whose vertices are quantum
+numbers.  The scalar label graph has the labels $(n,l,m)$ of the
+unit-three-sphere harmonics as vertices~\cite{paper7}; its edge Laplacian
+preserves $l$, splits into $n_{\max}$ disconnected blocks, and does not
+converge to the $S^3$ Laplacian (\texttt{tests/test\_graph\_s3\_nonconvergence.py}).
+The Dirac Rule-B graph of Paper~29~\cite{paper29} has the Dirac labels
+$(n,\kappa,m_j)$ as vertices and the E1 dipole transitions as edges.  Any
+oriented graph supports a Wilson lattice gauge
+theory~\cite{wilson1974,creutz1983,rothe2012} once a set of plaquettes is
+chosen, and this paper works out what that theory is on these two graphs.
 
-The $S^3$ case is categorically different.  As manifolds,
-$S^3 = \mathrm{SU}(2)$: the underlying manifold of the GeoVac graph
-\emph{is} the gauge group.  Taking $\mathrm{SU}(2)$-valued link
-variables is therefore not a choice made by matching representation
-content across shells; it is the natural object carried by the
-manifold itself.  This is the cleanest geometric setting in which a
-non-abelian Wilson lattice gauge theory can be built on a GeoVac graph.
+The two answers are opposite.  On the scalar graph each $l$-block is a
+planar grid, its unit squares are its 4-cycles, and they form a basis of
+the cycle space.  The theory is then the exactly solvable two-dimensional
+lattice gauge theory~\cite{migdal1975,gross_witten1980,drouffe_zuber1983}:
+plaquette holonomies are independent, the partition function and every
+Wilson loop are products of one-plaquette integrals, and the area law holds
+by factorization at every coupling.  We state this for $\mathrm{SU}(2)$
+(Section~\ref{sec:su2}), give the weak-coupling kinetic term and its place
+in the discrete Hodge decomposition (Section~\ref{sec:weak}), and take the
+abelian section by restricting to the maximal torus
+(Section~\ref{sec:abelian}).  On the Rule-B graph the 4-cycles are far more
+numerous than the independent cycles and satisfy relations, so compact
+$U(1)$ is a genuinely interacting theory there; Section~\ref{sec:ruleb}
+reports seven standard diagnostics, all of which it passes in the sense of
+being compatible with compact $U(1)$, and none of which discriminates a
+dimension.
 
-This paper reports the construction.  The mathematics is
-standard~\cite{wilson1974,creutz1983}\footnote{Concurrent work in
-the Bonn/DESY Hamiltonian-lattice program develops SU(2) Hamiltonian
-lattice gauge theory using discrete partitionings of the gauge group,
-with motivation toward quantum simulation: see
-Garofalo et al.~\cite{garofalo2023_su2_s3} for the SU(2) Hamiltonian
-formulation based on $S_3$ partitionings (here $S_3$ denotes the
-symmetric group, distinct from the manifold $S^3$ used here), and
-Jakobs et al.~\cite{jakobs2025_su2_dynamics} for dynamical
-continuum-limit studies.}: link variables
-$U_e \in \mathrm{SU}(2)$, plaquette holonomies $U_P = \prod_{e \in P}
-U_e$, Wilson action
-$S_W = \beta \sum_P (1 - \tfrac{1}{2} \mathrm{Re}\,\mathrm{tr}\,U_P)$,
-node-local gauge transformations $U_e \mapsto g_{s(e)}^{\phantom{\dagger}}
-U_e\, g_{t(e)}^{\dagger}$, and Haar measure on each link.  What is new
-is (i)~the choice of plaquettes as the primitive closed non-backtracking
-walks of Paper~29~\cite{paper29}'s Ihara zeta machinery, rather than the
-elementary four-cycles of a hypercubic lattice, (ii)~the confirmation
-that the maximal-torus reduction is \emph{exactly} Paper~25's $U(1)$
-construction, and (iii)~the identification of the weak-coupling kinetic term as the
-plaquette (curl) quadratic form that completes Paper~25's edge
-Laplacian $L_1$ to the full discrete Hodge-1 Laplacian of the
-plaquette-filled 2-complex.
-
-\paragraph*{Scope.}  This is an observation paper.  What it establishes
-is a self-consistent non-abelian lattice gauge structure on the finite
-compact GeoVac Hopf graph, together with three structural results.
-What it does \emph{not} establish is a continuum-limit Yang--Mills mass
-gap on $\mathbb{R}^4$, confinement (at the sizes tested the plaquettes
-form a cycle basis, so Wilson loops factorize into independent
-plaquette factors and the area/perimeter-law diagnostic carries no
-dynamical information), or any derivation of $\alpha$ (Paper~2 is an Observation).
-The rhetoric follows the CLAUDE.md~\S1.5 rule: the mathematical
-construction is sharp; the physical interpretation is modest.  The
-construction is a non-abelian instance of the Marcolli--van Suijlekom
-gauge-network framework~\cite{marcolli_vs2014}, which defines finite
-spectral triples on graphs whose spectral action is a Wilson lattice
-gauge theory; Perez-Sanchez~\cite{perez_sanchez2025}
-establishes that the continuum limit in that lineage is Yang--Mills
-without Higgs, consistent with the scope statements of
-Section~\ref{sec:scope}.
-
-\paragraph*{Organization.}  Section~\ref{sec:recap} recaps the
-Paper~25 Wilson--Hodge vocabulary in the form needed.
-Section~\ref{sec:su2} states the $\mathrm{SU}(2)$ link variables,
-plaquette structure, Wilson action, and gauge transformation.
-Section~\ref{sec:characters} gives the character expansion of the
-partition function on $\mathrm{SU}(2)$.  Section~\ref{sec:results}
-reports the three structural results: $U(1)$-reduction exactness,
-the kinetic-term / Hodge-completion result, and plaquette/Wilson-loop
-data.
-Section~\ref{sec:action_principles} places the construction inside a
-framework-wide synthesis: the GeoVac project now exhibits five
-independent action principles, each organizing a different sector of
-its data.  Section~\ref{sec:scope} states explicitly what is and is
-not claimed (Yang--Mills adjacency).  Section~\ref{sec:open} lists
-open questions, and Section~\ref{sec:conclusion} concludes.
+\paragraph*{Scope.}
+The constructions are finite, Euclidean, and Haar-normalizable; no
+renormalization enters.  This paper does not address a Yang--Mills mass gap,
+a continuum limit (the label graphs do not converge to a manifold), or the
+fine-structure constant.  The results on the scalar graph are the textbook
+two-dimensional results applied to a disjoint union of planar grids; what
+the paper adds is the identification of the label graphs' plaquette
+complexes and the measured Rule-B diagnostics.  The construction is an
+instance of the gauge-network framework of Marcolli and van
+Suijlekom~\cite{marcolli_vs2014}, whose spectral action on a graph is a
+Wilson lattice gauge theory; its continuum limit is Yang--Mills without a
+Higgs field~\cite{perez_sanchez2025}.  For $\mathrm{SU}(2)$ Hamiltonian
+lattice gauge theory built for quantum simulation from discrete
+partitionings of the group, see Refs.~\cite{garofalo2023_su2_s3,jakobs2025_su2_dynamics}.
 
 % ===================================================================
-\section{Recap: The GeoVac Hopf Graph as a Lattice Gauge Structure}
-\label{sec:recap}
+\section{The label graphs and their plaquette complexes}
+\label{sec:graphs}
 % ===================================================================
 
-Paper~25~\cite{paper25} specifies the combinatorial data in the form
-required here.  We collect the definitions and fix notation; no new
-claim is made in this section.
+\subsection{The scalar label graph}
+\label{sec:scalar_graph}
 
-The GeoVac graph at cutoff $n_{\max}$ has vertex set $V$ indexed by
-quantum-number triples $(n, l, m_l)$ with $n = 1, \ldots, n_{\max}$,
-$l = 0, \ldots, n-1$, $m_l = -l, \ldots, +l$, and $|V| =
-\sum_{n=1}^{n_{\max}} n^2$.  Edges are of two kinds: $L_{\pm}$
-angular ladders connecting $(n, l, m_l) \leftrightarrow
-(n, l, m_l \pm 1)$ at fixed $(n, l)$, and $T_{\pm}$ radial ladders
-connecting $(n, l, m_l) \leftrightarrow (n', l, m_l)$ for
-$n' = n \pm 1$ (with selection-rule variants~\cite{paper7,paper14}).
-Fix an orientation on each undirected edge; the signed incidence
-matrix $B \in \mathbb{Z}^{|V| \times |E|}$ has $B_{v, e} = +1$ if edge
-$e$ starts at $v$, $-1$ if it ends at $v$, and $0$ otherwise.  The
-combinatorial Hodge Laplacians~\cite{lim2020,schaub2020} are
+The scalar graph at cutoff $n_{\max}$ has vertices $(n,l,m)$ with
+$1\le n\le n_{\max}$, $0\le l\le n-1$, $|m|\le l$, so $|V|=\sum_n n^2$.
+Its edges are the angular ladders $(n,l,m)\leftrightarrow(n,l,m\pm1)$ and
+the radial ladders $(n,l,m)\leftrightarrow(n\pm1,l,m)$.  No edge changes
+$l$, so the graph is the disjoint union
 \begin{equation}
-L_0 = B B^{\top}, \qquad L_1 = B^{\top} B,
-\label{eq:hodge_laplacians}
+G_{\mathrm{scalar}} \;=\; \bigsqcup_{l=0}^{n_{\max}-1}
+  P_{n_{\max}-l}\times P_{2l+1},
+\label{eq:grid_decomposition}
 \end{equation}
-the node and edge Laplacians respectively.  The first Betti number
+where $P_k$ is the path on $k$ vertices and $\times$ is the Cartesian
+product: the $l$-block is a planar grid with rows indexed by
+$n=l+1,\ldots,n_{\max}$ and columns by $m$.  A $k_1\times k_2$ grid has
+$(k_1-1)(k_2-1)$ unit squares, so
 \begin{equation}
-\beta_1 = |E| - |V| + c
-\label{eq:betti1}
+\beta_1 \;=\; |E|-|V|+c \;=\; \sum_{l=0}^{n_{\max}-1} 2l\,(n_{\max}-l-1),
+\label{eq:betti_scalar}
 \end{equation}
-($c$ = number of connected components) equals the kernel dimension of
-$L_1$ and counts the independent cycle classes.
-
-The orienting convention for plaquettes differs here from the ``elementary
-4-cycle'' convention of a hypercubic lattice.  We take plaquettes to be
-the \emph{primitive closed non-backtracking walks} of the graph, i.e.\
-the Ihara cycles of Paper~29~\cite{paper29}.  A primitive closed
-non-backtracking walk on $L$ edges is a sequence $e_1 e_2 \cdots e_L$
-with $\mathrm{head}(e_i) = \mathrm{tail}(e_{i+1})$, no $e_{i+1}$ equal
-to the reverse of $e_i$ (including across the closure $e_L \to e_1$),
-and not a cyclic rotation of a shorter closed walk.  This is the
-natural Wilson generalization on a non-hypercubic graph: primitive
-closed non-backtracking walks are exactly the irreducible ``boundary
-of a disk'' objects whose holonomies enter the Wilson action.
-
-Table~\ref{tab:plaquettes} collects the plaquette counts on the
-$S^3$ Coulomb graph at $n_{\max} = 2, 3, 4$.  At $n_{\max} = 2$
-the graph is a forest ($\beta_1 = 0$), so there are no plaquettes
-and the $\mathrm{SU}(2)$ Wilson theory is trivial ($Z(\beta) = 1$).
-At $n_{\max} = 3$ the theory is non-trivial for the first time: two
-primitive 4-cycles in the $p$-block, one primitive 6-cycle, one
-primitive 8-cycle.  At $n_{\max} = 4$ the graph has
-$\beta_1 = 8$ and a richer plaquette structure.
+with $c=n_{\max}$ components (Table~\ref{tab:scalar_counts}).
 
 \begin{table}[t]
 \centering
-\caption{Plaquette enumeration on the $S^3$ Coulomb graph.  $V, E, c$
-are vertex, edge, and component counts; $\beta_1 = E - V + c$ is the
-first Betti number; $N_L$ is the number of primitive closed
-non-backtracking walks of length $L$ (one representative per
-unoriented class).}
-\label{tab:plaquettes}
-\begin{tabular}{rrrrrrrr}
+\caption{The scalar label graph.  $c$ is the number of components,
+$\beta_1=E-V+c$ the first Betti number, and $N_4$ the number of
+(unoriented) 4-cycles, which equals $\beta_1$ at every cutoff.}
+\label{tab:scalar_counts}
+\begin{tabular}{rrrrrr}
 \toprule
-$n_{\max}$ & $V$ & $E$ & $c$ & $\beta_1$ & $N_4$ & $N_6$ & $N_8$ \\
+$n_{\max}$ & $V$ & $E$ & $c$ & $\beta_1$ & $N_4$ \\
 \midrule
-2 & 5 & 3 & 2 & 0 & 0 & 0 & 0 \\
-3 & 14 & 13 & 3 & 2 & 2 & 1 & 1 \\
-4 & 30 & 34 & 4 & 8 & 8 & 7 & 18 \\
+2 & 5  & 3  & 2 & 0  & 0  \\
+3 & 14 & 13 & 3 & 2  & 2  \\
+4 & 30 & 34 & 4 & 8  & 8  \\
+5 & 55 & 70 & 5 & 20 & 20 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The two primitive 4-cycles at $n_{\max} = 3$ both live in the
-$p$-block.  With the canonical representative of each cycle chosen to
-begin at its lexicographically smallest oriented edge, they are
+At $n_{\max}=3$ the only cycles are the two unit squares of the $p$-block,
 \begin{align}
-P_A & : (2, 1, -1) \to (2, 1, 0) \to (3, 1, 0) \to (3, 1, -1) \to (2, 1, -1),
-\nonumber\\
-P_B & : (2, 1, 0) \to (2, 1, 1) \to (3, 1, 1) \to (3, 1, 0) \to (2, 1, 0).
+P_A &: (2,1,-1)\to(2,1,0)\to(3,1,0)\to(3,1,-1)\to(2,1,-1),\nonumber\\
+P_B &: (2,1,0)\to(2,1,1)\to(3,1,1)\to(3,1,0)\to(2,1,0),
 \label{eq:p_block_plaquettes}
 \end{align}
-These share the undirected edge $\{(2, 1, 0), (3, 1, 0)\}$, but each
-also contains an edge the other lacks, and with $\beta_1 = 2$ they form
-a cycle basis.  Gauge-fixing along a spanning tree therefore makes the
-two plaquette holonomies independent Haar-distributed variables: the
-shared edge introduces no correlation, and the plaquette-independent
-character expansion of Section~\ref{sec:characters} is exact here.
+which share the edge $\{(2,1,0),(3,1,0)\}$.
+
+\subsection{Plaquettes and the Hodge operators}
+\label{sec:hodge}
+
+\begin{definition}[Plaquettes]
+\label{def:plaquettes}
+The plaquette set $\mathcal{P}$ of a label graph is its set of 4-cycles,
+each taken once with a fixed orientation.
+\end{definition}
+
+On the scalar graph the 4-cycles are exactly the unit squares of the grids,
+and $N_4=\beta_1$ (Table~\ref{tab:scalar_counts}).  Longer closed walks add
+nothing to the plaquette set: at $n_{\max}=4$ there are $7$ primitive
+non-backtracking closed walks of length $6$ and $18$ of length $8$ (one per
+unoriented class), and the signed edge vector of every closed walk lies in
+the cycle space, which the 4-cycles span.
+
+Fix an orientation on each edge.  The signed vertex--edge incidence matrix
+$B\in\mathbb{Z}^{V\times E}$ has $B_{v,e}=\pm1$ at the two ends of $e$, and
+the signed edge--plaquette incidence matrix
+$B_2\in\mathbb{Z}^{E\times\mathcal{P}}$ has $(B_2)_{e,P}=\pm1$ according to
+whether $P$ traverses $e$ along or against its orientation.  As maps on
+cochains, $B^{\top}$ is the coboundary from vertex functions to edge
+functions and $B_2^{\top}$ is the coboundary from edge functions to
+plaquette functions: $(B_2^{\top}a)_P=\sum_{e\in P}\pm a_e$ is the
+circulation of $a$ around $P$.  Since every plaquette is closed,
+$BB_2=0$.  The combinatorial Hodge Laplacians~\cite{lim2020,schaub2020}
+are
+\begin{equation}
+L_0 = BB^{\top},\qquad
+L_1 = B^{\top}B,\qquad
+\Delta_1 = B^{\top}B + B_2B_2^{\top}.
+\label{eq:hodge_laplacians}
+\end{equation}
+$L_0=D-A$ is the graph Laplacian; $L_1$ is the edge Laplacian, whose kernel
+is the cycle space $\ker B$, of dimension $\beta_1$; and $\Delta_1$ is the
+Hodge-1 Laplacian of the 2-complex obtained by attaching the plaquettes as
+faces.  The nonzero spectra of $L_0$ and $L_1$ coincide, being the squared
+singular values of $B$.  The kernel of $\Delta_1$ is the first cohomology
+of the 2-complex,
+\begin{equation}
+\dim\ker\Delta_1 \;=\; \beta_1 - \operatorname{rank}B_2,
+\label{eq:h1_defect}
+\end{equation}
+which vanishes exactly when the plaquettes span the cycle space.  When in
+addition $\operatorname{rank}B_2<|\mathcal{P}|$, the plaquettes satisfy
+relations; the kernel of $B_2$, of dimension
+$b_2=|\mathcal{P}|-\operatorname{rank}B_2$, consists of the closed 2-cycles
+of the complex.
+
+On the scalar graph $B_2$ has full rank $|\mathcal{P}|=\beta_1$: the
+plaquettes are a basis of the cycle space and $b_2=0$
+(\texttt{tests/test\_su2\_wilson\_gauge.py}, class
+\texttt{TestCertRunCoverageClosures},
+\texttt{test\_plaquettes\_form\_cycle\_basis}, checked at
+$n_{\max}=3,4,5$).  Every edge of a path-like block ($l=0$, and the
+$l=n_{\max}-1$ block) is a bridge, lying in no plaquette.
+
+\subsection{The Dirac Rule-B graph}
+\label{sec:ruleb_graph}
+
+The Rule-B graph~\cite{paper29} has vertices $(n,\kappa,m_j)$ with
+$1\le n\le n_{\max}$, $\kappa\in\mathbb{Z}\setminus\{0\}$ encoding
+$l=-\kappa-1$ ($\kappa<0$) or $l=\kappa$ ($\kappa>0$) and $j=|\kappa|-\tfrac12$,
+and $|m_j|\le j$; there are $2n^2$ vertices in shell $n$.  Two vertices are
+adjacent when
+\begin{equation}
+|\Delta n|\le1,\quad |\Delta l|=1,\quad |\Delta j|\le1,\quad
+|\Delta m_j|\le1,
+\label{eq:rule_b}
+\end{equation}
+the E1 dipole selection rule.  Every edge changes $l$ by one, so the graph is
+bipartite under $(-1)^l$ and contains no triangles.  It is connected at every
+cutoff tested (Table~\ref{tab:ruleb_counts}), with mean degree $2E/V=4.0$,
+$7.6$, $10.4$, $12.6$ at $n_{\max}=2$--$5$.  Its 4-cycles outnumber its
+independent cycles by a factor that grows with the cutoff, and at
+$n_{\max}=2$, where the scalar graph has no cycles at all, Rule B already has
+$44$ 4-cycles.  The rank of $B_2$ equals $\beta_1=11$ at $n_{\max}=2$, so the
+plaquettes span the cycle space ($\dim\ker\Delta_1=0$) and satisfy
+$b_2=44-11=33$ relations.  The smallest closed 2-cycle consists of three
+plaquettes, each pair sharing two edges, with the six edges each used twice;
+there are $60$ such 2-cycles at $n_{\max}=2$ and $80$ at $n_{\max}=3$.  On the
+hypercubic lattice $\mathbb{Z}^d$, $d\ge3$, the smallest closed 2-surface is
+the six-plaquette boundary of a cube.
+
+\begin{table}[t]
+\centering
+\caption{The Dirac Rule-B graph.  $\langle q_e\rangle$ is the mean number of
+4-cycles through an edge; on $\mathbb{Z}^d$ it is $2(d-1)$.}
+\label{tab:ruleb_counts}
+\begin{tabular}{rrrrrrr}
+\toprule
+$n_{\max}$ & $V$ & $E$ & $c$ & $\beta_1$ & $N_4$ & $\langle q_e\rangle$ \\
+\midrule
+2 & 10  & 20  & 1 & 11  & 44         & 8.80  \\
+3 & 28  & 106 & 1 & 79  & 994        & 37.51 \\
+4 & 60  & 312 & 1 & 253 & 5{,}047    & --    \\
+5 & 110 & 692 & 1 & 583 & 14{,}881   & --    \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 % ===================================================================
-\section{SU(2) Link Variables and the Wilson Action}
+\section{SU(2) Wilson theory on the scalar graph}
 \label{sec:su2}
 % ===================================================================
 
-\subsection{Link variables}
+\subsection{Link variables, action, gauge invariance}
 
-Each undirected edge $\{u, v\}$ with chosen orientation $u \to v$
-carries a link variable $U_{u \to v} \in \mathrm{SU}(2)$.  The reverse
-edge carries
+Each oriented edge $u\to v$ carries $U_{u\to v}\in\mathrm{SU}(2)$, with
+$U_{v\to u}=U_{u\to v}^{\dagger}$.  For a plaquette traversed as
+$e_1e_2e_3e_4$ the holonomy is $U_P=U_{e_1}U_{e_2}U_{e_3}U_{e_4}$, and the
+Wilson action is
 \begin{equation}
-U_{v \to u} = U_{u \to v}^{\dagger},
-\label{eq:reverse_convention}
-\end{equation}
-so that each undirected edge stores one independent $\mathrm{SU}(2)$
-element.  An $\mathrm{SU}(2)$ matrix is parametrized by a unit
-quaternion $(a, b, c, d)$ with $a^2 + b^2 + c^2 + d^2 = 1$ as
-\begin{equation}
-U = \begin{pmatrix} a + i d & c + i b \\ -c + i b & a - i d \end{pmatrix},
-\qquad
-\det U = 1, \quad U U^{\dagger} = I.
-\label{eq:su2_quaternion}
-\end{equation}
-Equivalently, $U = \exp\bigl(i \theta\,\hat{n} \cdot \boldsymbol{\sigma}\bigr)$
-where $\boldsymbol{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ are the
-Pauli matrices, $\hat{n}$ is a unit 3-vector, and $\theta$ is the
-half-rotation angle.
-
-\subsection{Plaquette holonomy}
-
-For a plaquette $P$ traversed in the ordered sequence
-$e_1, e_2, \ldots, e_L$ (each $e_i$ an oriented edge), the plaquette
-holonomy is the ordered product
-\begin{equation}
-U_P = U_{e_1} U_{e_2} \cdots U_{e_L}.
-\label{eq:plaquette_holonomy}
-\end{equation}
-Since $\mathrm{SU}(2)$ is closed under matrix multiplication,
-$U_P \in \mathrm{SU}(2)$.  The plaquette character
-\begin{equation}
-\chi(U_P) = \tfrac{1}{2} \mathrm{Re}\,\mathrm{tr}\,U_P
-= \cos \theta_P,
-\label{eq:plaquette_character}
-\end{equation}
-where $\theta_P$ is the half-angle of $U_P$ in its $\mathrm{SU}(2)$
-rotation parametrization, takes values in $[-1, +1]$ with
-$\chi(U_P) = +1$ iff $U_P = I$.
-
-\subsection{Wilson action}
-
-The Wilson action is
-\begin{equation}
-S_W[U] = \beta \sum_P \bigl(1 - \chi(U_P)\bigr)
-= \beta \sum_P \bigl(1 - \tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,U_P\bigr),
+S_W[U] = \beta\sum_{P\in\mathcal{P}}\Bigl(1-\tfrac12\mathrm{Re}\,\mathrm{tr}\,U_P\Bigr),
+\qquad \beta = 4/g^2 .
 \label{eq:wilson_action}
 \end{equation}
-with the sum ranging over the plaquettes enumerated as in
-Table~\ref{tab:plaquettes}.  The gauge coupling is $\beta = 4/g^2$ in
-Wilson's convention: large~$\beta$ is weak coupling (continuum
-perturbation), small~$\beta$ is strong coupling (strong-lattice
-expansion).  The action is non-negative and vanishes iff every
-plaquette holonomy is the identity (trivial vacuum).
+Under $U_{u\to v}\mapsto g_uU_{u\to v}g_v^{\dagger}$ with $g:V\to\mathrm{SU}(2)$
+each holonomy is conjugated, so $S_W$ is gauge invariant; with random Haar
+links and gauge transformations at $n_{\max}=3$ the change in $S_W$ is at
+machine precision (\texttt{tests/test\_su2\_wilson\_gauge.py}, class
+\texttt{TestGaugeInvariance} and \texttt{test\_s3\_coulomb\_max\_n3\_endtoend},
+which assert $<10^{-13}$).  The partition function is
+$Z(\beta)=\int\prod_e dU_e\,e^{-S_W[U]}$ with normalized Haar measure.
 
-\subsection{Gauge transformation}
-
-A gauge transformation is a map $g: V \to \mathrm{SU}(2)$ acting on
-link variables as
-\begin{equation}
-U_{u \to v} \; \longmapsto \; g_u U_{u \to v} g_v^{\dagger}.
-\label{eq:gauge_transform}
-\end{equation}
-Under this action, the plaquette holonomy of any closed plaquette
-transforms by conjugation, $U_P \mapsto g_{v_0} U_P g_{v_0}^{\dagger}$,
-where $v_0$ is the base vertex.  The trace
-$\mathrm{tr}\,U_P$ is therefore gauge-invariant, and so is the action
-$S_W$.  Numerical verification on $n_{\max} = 3$ with random Haar link
-variables and random Haar gauge transformations gives
-$|S_W[U] - S_W[g U g^{-1}]| \leq 2.7 \times 10^{-15}$ (machine
-precision; worst case over 100 seeded Haar trials, and
-$1.8 \times 10^{-15}$ in the recorded reference run); the committed
-tests assert $< 10^{-13}$ per trial --- see
-\texttt{tests/test\_su2\_wilson\_gauge.py}, class
-\texttt{TestGaugeInvariance} and
-\texttt{test\_s3\_coulomb\_max\_n3\_endtoend}.
-
-\subsection{Partition function}
-
-The partition function is the Haar integral over
-$\mathrm{SU}(2)^{|E|}$,
-\begin{equation}
-Z(\beta) = \int \prod_{e} dU_e \; \exp\bigl(-S_W[U]\bigr),
-\label{eq:partition_function}
-\end{equation}
-with $dU_e$ the normalized bi-invariant Haar measure on
-$\mathrm{SU}(2)$.  This integral is finite-dimensional and
-well-defined for all $\beta \in \mathbb{R}$: no continuum
-renormalization is required.  A direct implementation is via Monte
-Carlo sampling of link variables weighted by $\exp(-S_W)$; an
-analytical approach is via the SU(2) character expansion of
-Section~\ref{sec:characters}.
-
-% ===================================================================
-\section{Character Expansion on SU(2)}
+\subsection{Character expansion}
 \label{sec:characters}
-% ===================================================================
 
-The SU(2) characters of the $(j+1)$-dimensional irreducible
-representations are
+With $\chi_j(U)=\sin((j+1)\theta)/\sin\theta$ the character of the
+$(j+1)$-dimensional irreducible representation at
+$U=e^{i\theta\hat n\cdot\boldsymbol\sigma}$, the one-plaquette Boltzmann
+factor expands as~\cite{menotti_onofri1981,creutz1983}
 \begin{equation}
-\chi_j(U) = \frac{\sin\bigl((j+1)\theta\bigr)}{\sin\theta},
-\qquad U = e^{i\theta\,\hat{n}\cdot\boldsymbol{\sigma}},
-\label{eq:characters}
-\end{equation}
-with the orthogonality $\int dU\, \chi_j(U)\,\overline{\chi_k(U)} =
-\delta_{jk}$.  The Wilson Boltzmann factor expands as a
-Fegan--Menotti--Onofri series~\cite{fegan1983, menotti_onofri1981, creutz1983}
-\begin{equation}
-\exp\bigl(\beta \cdot \tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,U\bigr)
-= \sum_{j=0}^{\infty} d_j(\beta)\,\chi_j(U),
-\qquad
-d_j(\beta) = \frac{2(j+1)}{\beta}\,I_{j+1}(\beta),
+\exp\Bigl(\tfrac{\beta}{2}\mathrm{Re}\,\mathrm{tr}\,U\Bigr)
+=\sum_{j\ge0} d_j(\beta)\,\chi_j(U),\qquad
+d_j(\beta)=\frac{2(j+1)}{\beta}\,I_{j+1}(\beta),
 \label{eq:character_expansion}
 \end{equation}
-where $I_n$ is the modified Bessel function of the first kind.  At
-$\beta = 0$, $d_0 = 1$ and $d_j = 0$ for $j \geq 1$, so $Z(0) = 1$
-(trivially, Haar measure is normalized).  At $\beta \to \infty$,
-$d_j/d_0 = (j+1)\,I_{j+1}(\beta)/I_1(\beta) \to j+1$ for all fixed $j$
-(every character enters with its dimension), and the Gaussian quadratic
-approximation around the trivial vacuum dominates
-(Section~\ref{sec:L1_kinetic}).
+with $I_k$ the modified Bessel function; $d_0(0)=1$ and $d_j(0)=0$ for
+$j\ge1$.
 
-\paragraph*{Coefficient table at $n_{\max} = 3$.}  For the two primitive
-4-cycles of Eq.~(\ref{eq:p_block_plaquettes}), the exact
-partition function (the plaquettes are independent)
-$Z_0(\beta) = e^{-\beta p}\bigl[d_0(\beta)\bigr]^p$ with $p = 2$
-gives, together with the first excited coefficient $d_1(\beta) =
-(4/\beta) I_2(\beta)$,
+\subsection{Exact factorization}
+\label{sec:factorization}
 
-\begin{table}[h]
-\centering
-\caption{Character coefficients and the exact partition function
-on the $n_{\max} = 3$ Hopf graph (the two plaquettes are independent).
-Numerical data:
-\texttt{debug/data/su2\_wilson\_gauge\_results.json}.}
-\label{tab:char_coeffs}
-\begin{tabular}{rrrrr}
-\toprule
-$\beta$ & $Z_0(\beta)$ & $d_0(\beta)$ & $d_1(\beta)$ & $d_1/d_0$ \\
-\midrule
- 0.1 & $8.21\times 10^{-1}$ & $1.0013$ & $0.0500$ & $0.050$ \\
- 0.5 & $3.91\times 10^{-1}$ & $1.0316$ & $0.2552$ & $0.247$ \\
- 1.0 & $1.73\times 10^{-1}$ & $1.1303$ & $0.5430$ & $0.480$ \\
- 2.0 & $4.63\times 10^{-2}$ & $1.5906$ & $1.3779$ & $0.866$ \\
- 5.0 & $4.30\times 10^{-3}$ & $9.7343$ & $14.0045$ & $1.439$ \\
-10.0 & $5.88\times 10^{-4}$ & $534.20$ & $912.61$  & $1.708$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The entries of Table~\ref{tab:char_coeffs} set the scale at which
-higher representations matter in a general partition function.  For
-the single-plaquette Wilson loop on this graph they do not enter:
-because the two plaquettes of Eq.~(\ref{eq:p_block_plaquettes}) are independent,
-$\langle W \rangle = I_2(\beta)/I_1(\beta)$ exactly at every $\beta$
-(Section~\ref{sec:results_MC}).
-
-% ===================================================================
-\section{Three Structural Results}
-\label{sec:results}
-% ===================================================================
-
-\subsection{Result 1: $U(1)$ reduction to Paper 25 is exact}
-\label{sec:u1_reduction}
-
-Paper~25 defines the abelian $U(1)$ Wilson--Hodge action on the same
-graph by assigning a phase $\theta_e \in [0, 2\pi)$ to each oriented
-edge and setting
+\begin{proposition}[Exact solvability on the scalar graph]
+\label{prop:factorization}
+At every $n_{\max}$, with the plaquette set of Definition~\ref{def:plaquettes},
 \begin{equation}
-S_{U(1)}[\theta] = \beta \sum_P \bigl(1 - \cos \theta_P\bigr),
-\qquad
-\theta_P = \sum_{e \in P} \theta_e,
-\label{eq:u1_action}
+Z(\beta) = \Bigl[e^{-\beta}\,\frac{2I_1(\beta)}{\beta}\Bigr]^{\beta_1},
+\label{eq:Z_exact}
 \end{equation}
-with reverse-edge phases negated and node-local gauge shifts
-$\theta_e \mapsto \theta_e + (\chi_{t(e)} - \chi_{s(e)})$.
-
-\begin{proposition}[Maximal-torus reduction]
-\label{prop:u1_reduction}
-Let $\mathrm{T} \subset \mathrm{SU}(2)$ be the maximal torus,
-$\mathrm{T} = \{\mathrm{diag}(e^{i\theta}, e^{-i\theta}) : \theta \in
-[0, 2\pi)\}$.  Restricting the link variables of the
-$\mathrm{SU}(2)$ Wilson action (\ref{eq:wilson_action}) to
-$\mathrm{T}$ yields the $U(1)$ Wilson action of
-Eq.~(\ref{eq:u1_action}):
+and every closed loop $C$ in an $l$-block enclosing $A$ unit squares has
 \begin{equation}
-S_W\bigl[\{U_e = \mathrm{diag}(e^{i\theta_e}, e^{-i\theta_e})\}\bigr]
-= S_{U(1)}[\theta].
-\label{eq:u1_reduction_claim}
+\langle W_C\rangle \equiv
+\Bigl\langle\tfrac12\mathrm{tr}\,U_C\Bigr\rangle
+= \biggl(\frac{I_2(\beta)}{I_1(\beta)}\biggr)^{A}.
+\label{eq:W_exact}
 \end{equation}
 \end{proposition}
 
 \begin{proof}
-A product of diagonal $\mathrm{SU}(2)$ matrices is diagonal; by
-induction on the plaquette length,
-$U_P = \mathrm{diag}(e^{i\theta_P}, e^{-i\theta_P})$ where $\theta_P
-= \sum_{e \in P} \theta_e$ (with reverse-edge phases counted
-negatively, matching the convention $U_{v \to u} = U_{u \to v}^{\dagger}$
-which for diagonal links negates $\theta_e$).  Then
-$\tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,U_P =
-\tfrac{1}{2}(e^{i\theta_P} + e^{-i\theta_P}) = \cos \theta_P$, and
-substitution into (\ref{eq:wilson_action}) yields (\ref{eq:u1_action}).
-\qed
+The argument is the standard two-dimensional one~\cite{drouffe_zuber1983,gross_witten1980}.
+In each grid, fix the gauge $U_e=I$ on a spanning tree.  The remaining
+$\beta_1$ links are in bijection with the unit squares (order the squares so
+that each adds one new non-tree edge), and the change of variables from those
+links to the plaquette holonomies is a product of left translations, which
+preserves Haar measure.  The plaquette holonomies are therefore independent
+Haar variables, and $Z$ is the product of $\beta_1$ one-plaquette integrals
+$e^{-\beta}d_0(\beta)$.  A loop enclosing $A$ squares has holonomy conjugate
+to a product of the $A$ enclosed plaquette holonomies, each conjugated by a
+path holonomy; since each is distributed by a class function, Schur
+orthogonality gives
+$\langle\frac12\mathrm{tr}\,U_C\rangle=\prod\langle\frac12\mathrm{tr}\,U_P\rangle$,
+and the one-plaquette expectation is $d_1/(2d_0)=I_2/I_1$.
 \end{proof}
 
-The proposition is verified numerically in
-\texttt{tests/test\_su2\_wilson\_gauge.py}, class
-\texttt{TestU1Reduction}: for a triangle plaquette with random
-diagonal phases $\{\theta_e\} = \{0.3, 0.7, -0.5\}$ and $\beta = 1.7$,
-the two action evaluations agree to $|S_W - S_{U(1)}| < 10^{-12}$
-(machine precision, 170 lines of test code).  A fuller
-random-Haar-diagonal check at $\beta = 2$ on $n_{\max} = 3$ gives
-$|S_W - S_{U(1)}| = 0$ exactly.
+The cycle-basis property and the one- and two-plaquette identities are tested
+in \texttt{tests/test\_su2\_wilson\_gauge.py}, class
+\texttt{TestCertRunCoverageClosures} (the cycle-basis, single-plaquette and
+two-plaquette tests).  At $n_{\max}=3$,
+$\langle W_{P_A}\rangle=I_2/I_1=0.124$, $0.240$, $0.433$, $0.719$ at
+$\beta=0.5$, $1$, $2$, $5$, and the six-edge loop around $P_A\cup P_B$ has
+$(I_2/I_1)^2$.  The area law~(\ref{eq:W_exact}) holds at every $\beta$ with
+string tension $-\ln(I_2/I_1)$ and no area--perimeter crossover; it is a
+consequence of factorization and carries no information about confinement.
+A confinement diagnostic with dynamical content needs plaquettes that are not
+independent, which the scalar graph does not supply.
 
-\begin{observation}[Paper 25 is the Cartan-subalgebra sector]
-\label{obs:cartan_subalgebra}
-Paper~25's abelian $U(1)$ Wilson--Hodge construction is structurally
-the Cartan-subalgebra projection of the present non-abelian
-$\mathrm{SU}(2)$ theory on the same graph.  The question ``is
-Paper~25 abelian because the underlying geometry forces it to be, or
-because abelian is one choice out of several?'' has a definite
-answer: Paper~25 is the abelian sub-sector of a genuinely
-non-abelian lattice gauge theory on the same graph.  This elevates
-Paper~25's $U(1)$ construction from a freestanding abelian model to
-the commutative-reduction sector of a natural non-abelian one.
-\end{observation}
+\subsection{Weak coupling: the curl form}
+\label{sec:weak}
 
-\begin{remark}[higher-rank generalization]
-\label{rem:higher_rank}
-On a rank-$r$ gauge group with maximal torus $\mathrm{T} = U(1)^r$,
-the analog of Proposition~\ref{prop:u1_reduction} produces $r$
-independent (but coupled, via a $\det = 1$ constraint when present)
-$U(1)$ sectors.  The $\mathrm{SU}(3)$ case ($r = 2$) is computed in
-Sprint~ST-SU3 (May~2026,
-\texttt{debug/st\_su3\_wilson\_memo.md}~\S~3): restricting Wilson
-$\mathrm{SU}(3)$ links on the Bargmann--Segal $S^5$ graph to the
-maximal torus $T \cong U(1) \times U(1)$ produces a coupled
-$U(1) \times U(1)$ Wilson action with character
-$(1/3)\bigl(\cos a_P + \cos b_P + \cos(a_P + b_P)\bigr)$, verified
-at machine precision over random Cartan trials at $N_\text{max} = 2,
-3$ (max $|\Delta S| < 1.5 \times 10^{-11}$ at $7\,765$ plaquettes).
-\end{remark}
-
-The character expansion of Section~\ref{sec:characters} reflects the
-reduction explicitly: the restriction of the $\mathrm{SU}(2)$
-character $\chi_j$ to the maximal torus
-$U = \mathrm{diag}(e^{i\theta}, e^{-i\theta})$ is
+Write $U_e=\exp(\tfrac{i}{2}A_e^a\sigma_a)$ with small real $A_e^a$.  To
+second order the plaquette holonomy is
+$U_P=I+\tfrac{i}{2}\Phi_P^a\sigma_a-\tfrac18\Phi_P^a\Phi_P^a I+\ldots$, where
+$\Phi_P^a=(B_2^{\top}A^a)_P$ is the circulation of $A^a$ around $P$ and the
+omitted terms are traceless at second order.  Hence
 \begin{equation}
-\chi_j\bigl(\mathrm{diag}(e^{i\theta}, e^{-i\theta})\bigr)
-= \frac{\sin\bigl((j+1)\theta\bigr)}{\sin\theta}
-= \sum_{k=0}^{j} e^{i(j - 2k)\theta},
-\label{eq:character_restriction}
-\end{equation}
-a sum of $j+1$ $U(1)$ Fourier modes.  The Fegan--Menotti--Onofri
-expansion (\ref{eq:character_expansion}) therefore restricts to the
-classical Jacobi--Anger expansion of $\exp(\beta \cos \theta)$ on the
-maximal torus---Paper~25's abelian expansion recovered term by term.
-
-\subsection{Result 2: the weak-coupling kinetic term completes
-$L_1 = B^{\top} B$ to the full Hodge-1 Laplacian}
-\label{sec:L1_kinetic}
-
-Paper~25~\S II--III introduces the edge Laplacian $L_1 = B^{\top} B$
-as the ``discrete Hodge-1 Laplacian'' whose kernel dimension equals
-$\beta_1$ and whose nonzero spectrum coincides with the nonzero
-spectrum of $L_0$ (by singular-value decomposition of $B$), and notes
-that on a bare 1-complex only the \emph{exact} part
-$d_0 d_0^*$ of the manifold Hodge-1 operator
-$\Delta_1 = d_0 d_0^* + d_1^* d_1$ is available --- the co-exact part
-requires faces.  The present section identifies the \emph{kinetic
-term} of the $\mathrm{SU}(2)$ Wilson action at weak coupling and
-shows it is exactly that missing co-exact (curl) part, built on the
-Ihara plaquettes as faces.
-
-Write each link variable as an exponential of a
-$\mathfrak{su}(2)$-valued gauge field,
-\begin{equation}
-U_e = \exp\bigl(i\, A_e^{a} \sigma_a / 2\bigr),
-\qquad a = 1, 2, 3,
-\label{eq:link_exponential}
-\end{equation}
-with $A_e^{a} \in \mathbb{R}$ small (weak-coupling regime).  To second
-order,
-\begin{equation}
-U_e = I + \tfrac{i}{2} A_e^{a} \sigma_a - \tfrac{1}{8} A_e^{a} A_e^{b}
-\sigma_a \sigma_b + O(A^3).
-\label{eq:link_expansion}
-\end{equation}
-The plaquette holonomy $U_P$ at second order in $A$ is (using
-$\sigma_a \sigma_b = \delta_{ab} I + i \epsilon_{abc} \sigma_c$ to
-organize the Pauli products)
-\begin{equation}
-U_P = I + \tfrac{i}{2}\Bigl(\sum_{e \in P} A_e^{a}\Bigr) \sigma_a
-- \tfrac{1}{8}\Bigl(\sum_{e \in P} A_e^{a}\Bigr)\Bigl(\sum_{e' \in P}
-  A_{e'}^{a}\Bigr) I + O(A^3) + (\text{commutators}),
-\label{eq:plaquette_expansion}
-\end{equation}
-where the ``commutators'' term is traceless and collects the
-non-abelian corrections $[A_e, A_{e'}]$ that appear at third order
-and higher.  Taking $\tfrac{1}{2} \mathrm{Re}\,\mathrm{tr}$ and
-subtracting $1$ gives
-\begin{equation}
-1 - \tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,U_P
-= \tfrac{1}{8}\Bigl(\sum_{e \in P} A_e^{a}\Bigr)^2 + O(A^4)
-\qquad (\text{sum over }a = 1, 2, 3 \text{ implicit}).
+1-\tfrac12\mathrm{Re}\,\mathrm{tr}\,U_P
+= \tfrac18\sum_a(\Phi_P^a)^2 + O(A^3).
 \label{eq:plaquette_quadratic}
 \end{equation}
-The $O(A^3)$ term vanishes because $\mathrm{tr}\,\sigma_a = 0$.  The
-sum $\sum_{e \in P} A_e^{a}$ is exactly the signed sum of the gauge
-field over the plaquette boundary, which is the action of the
-discrete exterior derivative $d_1 = B^{\top}$ (acting on 1-cochains;
-in fact the $d_1$ that maps 1-cochains to 2-cochains, but on a
-triangle-free 1-complex we can read it as a signed sum over
-plaquettes).  Therefore
-\begin{equation}
-S_W[U] = \frac{\beta}{8} \sum_P \Bigl(\sum_{e \in P} A_e^{a}\Bigr)^2
-+ O(A^4)
-= \frac{\beta}{8}\, A^{a\top} M A^{a} + O(A^4),
-\label{eq:wilson_quadratic}
-\end{equation}
-where $M = B_2 B_2^{\top}$ is the plaquette-incidence bilinear form
-on the edge space, built from the signed edge--face incidence matrix
-$B_2$ whose columns are the (signed) indicator vectors of the Ihara
-plaquettes.  In Hodge terms, $M = d_1^* d_1$ is the \emph{co-exact
-(curl) part} of the Hodge-1 Laplacian of the 2-complex obtained by
-attaching the plaquettes as faces.  It is \emph{not} proportional to
-Paper~25's $L_1 = B^{\top} B = d_0 d_0^*$: the two quadratic forms
-have complementary supports.  On the $n_{\max} = 3$ graph
-($E = 13$, $\beta_1 = 2$) one computes $\operatorname{rank} M = 2 =
-\beta_1$, $\operatorname{rank} L_1 = 11 = E - \beta_1$, and
-$L_1 B_2 = 0$ exactly --- the plaquette columns span $\ker L_1$ (the
-cycle space), which is precisely where the divergence form $L_1$
-vanishes.  Their sum $L_1 + M$ has full rank $E$ and is the complete
-discrete Hodge-1 Laplacian of the plaquette-filled 2-complex
-(verified in \texttt{tests/test\_su2\_wilson\_gauge.py}, class
-\texttt{TestWeakCouplingKinetic}).  The structural statement is:
+The $O(A^3)$ term does not vanish: the commutators $[A_e,A_{e'}]$ in
+$\log U_P$ feed a cubic vertex proportional to $\epsilon^{abc}$.
 
-\begin{proposition}[Wilson kinetic term = co-exact completion of $L_1$]
+\begin{proposition}[Kinetic term]
 \label{prop:L1_kinetic}
-The second-order expansion of the $\mathrm{SU}(2)$ Wilson action
-(\ref{eq:wilson_action}) around the trivial vacuum is
+Around the trivial vacuum,
 \begin{equation}
-S_W[U] = \tfrac{\beta}{8} \sum_a \langle A^{a}, B_2 B_2^{\top} A^{a}\rangle
-+ O(A^4) + (\text{non-abelian})
+S_W[U]=\frac{\beta}{8}\sum_{a=1}^{3}\bigl\langle A^a,\,B_2B_2^{\top}A^a\bigr\rangle
++O(A^3).
 \label{eq:L1_kinetic_form}
 \end{equation}
-where $B_2$ is the signed edge--plaquette incidence matrix (the
-discrete $d_1$-boundary data supplied by the Ihara plaquette
-enumeration).  The kinetic quadratic form $B_2 B_2^{\top}$ is the
-co-exact (curl) part of the discrete Hodge-1 Laplacian of the
-plaquette-filled 2-complex; it is supported exactly on
-$\ker(L_1) = \ker(B^{\top} B)$, the $\beta_1$-dimensional cycle
-space, and together with Paper~25's exact part it assembles the full
-Hodge-1 operator $\Delta_1^{\text{disc}} = B^{\top} B +
-B_2 B_2^{\top}$ (full rank at $n_{\max} = 3$).  The
-$\mathfrak{su}(2)$ components $A^{a}$ ($a = 1, 2, 3$) are
-kinetic-decoupled at quadratic order with the universal per-plaquette
-per-component coefficient $1/8 = 1/(4 N_c)|_{N_c = 2}$; non-abelian
-couplings first enter at order $A^4$.
+The form $B_2B_2^{\top}$ is supported on the cycle space $\ker L_1$
+($L_1B_2=0$), and $L_1+B_2B_2^{\top}=\Delta_1$ is the Hodge-1 Laplacian of the
+plaquette-filled complex, of full rank $E$ on the scalar graph
+(Eq.~(\ref{eq:h1_defect}) with $\operatorname{rank}B_2=\beta_1$).  The three
+components $A^a$ decouple at quadratic order, each with coefficient
+$1/8$ per plaquette.
 \end{proposition}
 
-\textbf{Provenance: MEASURED.}  The $1/8$ coefficient and the
-quadratic form are verified numerically against exact
-matrix-exponential holonomies, both on a triangle plaquette and on
-the full $n_{\max} = 3$ graph (relative deviation $2.0 \times 10^{-3}$
-at $\epsilon = 0.01$ shrinking to $7.3 \times 10^{-5}$ at
-$\epsilon = 0.005$, the $O(A^4)$ remainder), in
-\texttt{tests/test\_su2\_wilson\_gauge.py}::\texttt{TestWeakCoupling%
-Kinetic} --- the $\mathrm{SU}(2)$ mirror of the $\mathrm{SU}(3)$
-$1/12$ test in \texttt{tests/test\_su3\_wilson\_s5.py}.  An earlier
-version of this proposition asserted that the kinetic form
-``coincides with $L_1 = B^{\top} B$ up to a positive scalar
-multiple''; that assertion was wrong (the two forms have
-complementary supports, as the rank computation above shows) and is
-withdrawn --- the correct statement is the completion statement,
-which matches the face-structure reading already recorded in
-Paper~25~\S II.
+At $n_{\max}=3$, $\operatorname{rank}B_2B_2^{\top}=2=\beta_1$,
+$\operatorname{rank}L_1=11=E-\beta_1$, $L_1B_2=0$, and $L_1+B_2B_2^{\top}$ has
+rank $13$; the coefficient $1/8$ is checked against exact
+matrix-exponential holonomies on a triangle and on the full $n_{\max}=3$
+graph, with relative deviation below $5\times10^{-3}$ at field size
+$\epsilon=0.01$ (\texttt{tests/test\_su2\_wilson\_gauge.py}, class
+\texttt{TestWeakCouplingKinetic}).  The edge Laplacian $L_1$ is the exact
+(longitudinal) half of $\Delta_1$, the half a gauge-fixing term supplies;
+the Wilson action supplies only the curl half.  The curl form vanishes on
+bridges, so it gives no weight to the edges of the $l=0$ chain.
 
-\begin{observation}[The Wilson kinetic sector completes the Hodge pair]
-\label{obs:L1_structural}
-At weak coupling the non-abelian Wilson theory contributes the
-co-exact half of the Hodge-1 pair: the free (Gaussian) sector is the
-curl form $B_2 B_2^{\top}$ on the cycle space, while Paper~25's
-$L_1 = B^{\top} B$ is the exact half, whose role is combinatorial
-(divergence / gradient sector) rather than plaquette-kinetic.  The
-non-abelian self-couplings (cubic and quartic $A$-vertices) appear at
-order $A^3$ and $A^4$ in the Wilson action expansion and involve the
-structure constants of $\mathfrak{su}(2)$, namely $\epsilon^{abc}$;
-they are parametrically suppressed at weak coupling.
-\end{observation}
-
-\begin{remark}[universal $\mathrm{SU}(N)$ kinetic coefficient]
+\begin{remark}[$\mathrm{SU}(N_c)$]
 \label{rem:sun_coefficient}
-With generators $T^a = \lambda^a/2$ normalized to
-$\mathrm{tr}(T^a T^b) = \tfrac{1}{2} \delta^{ab}$, the second-order
-expansion of the Wilson action
-$S_W[U] = \beta \sum_P (1 - (1/N_c)\,\mathrm{Re}\,\mathrm{tr}\,U_P)$
-on a general gauge group $\mathrm{SU}(N_c)$ produces a per-plaquette
-per-component coefficient of $1/(4 N_c)$.  The $\mathrm{SU}(2)$ value
-$1/8$ derived above is the $N_c = 2$ specialization, verified
-numerically in \texttt{tests/test\_su2\_wilson\_gauge.py}::%
-\texttt{TestWeakCouplingKinetic::test\_quadratic\_expansion\_numerically}.
-The $\mathrm{SU}(3)$ value $1/12$ is verified independently in
-Sprint~ST-SU3 (\texttt{debug/st\_su3\_wilson\_memo.md}~\S~4)
-symbolically and numerically on the Bargmann--Segal $S^5$ graph
-($120$ degrees of freedom at $N_\text{max} = 2$, relative error
-$\sim O(\epsilon^2)$ consistent with $O(A^4)$ leading correction;
-frozen test \texttt{tests/test\_su3\_wilson\_s5.py}::%
+With generators normalized to $\mathrm{tr}(T^aT^b)=\tfrac12\delta^{ab}$ and
+the action $\beta\sum_P(1-\frac{1}{N_c}\mathrm{Re}\,\mathrm{tr}\,U_P)$, the
+per-plaquette, per-component coefficient is $1/(4N_c)$, the standard
+normalization of the Wilson action's naive continuum
+limit~\cite{rothe2012}.  The $\mathrm{SU}(3)$ value $1/12$ is checked on the
+Bargmann--Segal graph of Paper~24~\cite{paper24}
+(\texttt{tests/test\_su3\_wilson\_s5.py}, class
 \texttt{TestWeakCouplingKinetic}).
-The mechanism: more colors $\Rightarrow$ smaller per-component
-coefficient because the $(1/N_c)\,\mathrm{Re}\,\mathrm{tr}$
-normalization in the Wilson action divides by $N_c$ while the
-trace-of-pair normalization holds $\mathrm{tr}(T^a T^a) = 1/2$ fixed.
-The decoupling of components at quadratic order is a universal
-$\mathrm{SU}(N_c)$ feature; non-abelian self-interactions enter at
-$O(A^4)$ via the structure constants $f^{abc}$ in every case.
 \end{remark}
 
-\subsection{Result 3: Plaquette counts and Wilson-loop data}
-\label{sec:results_MC}
+% ===================================================================
+\section{The abelian section}
+\label{sec:abelian}
+% ===================================================================
 
-Monte Carlo with Metropolis updates on the full
-$\mathrm{SU}(2)^{|E|}$ configuration space provides direct access to
-the Wilson-loop expectation value $\langle W_C \rangle = \bigl\langle
-\tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,U_C \bigr\rangle$.  We run at
-$n_{\max} = 3$ (13 forward links), 2000 samples after 500 thermalization
-steps, seed = 12, for a Wilson loop coinciding with one of the two
-primitive 4-cycles in the $p$-block.
+\subsection{Maximal-torus reduction}
 
-\begin{table}[h]
-\centering
-\caption{Wilson-loop expectation on the $n_{\max} = 3$ Coulomb graph,
-loop = first $p$-block 4-cycle
-[$(2,1,-1) \to (2,1,0) \to (3,1,0) \to (3,1,-1)$].  MC: Metropolis
-sampling, 2000 samples, stderr reported; the seeded chain is
-bit-deterministic but not converged (its deviations from the exact
-column exceed the quoted stderr, which ignores autocorrelation).
-Exact: $\langle W \rangle = I_2(\beta) / I_1(\beta)$, from the
-independence of the two plaquettes.}
-\label{tab:wilson_loop}
-\begin{tabular}{rrrr}
+\begin{proposition}[Maximal-torus reduction]
+\label{prop:u1_reduction}
+Restricting the links of~(\ref{eq:wilson_action}) to the maximal torus,
+$U_e=\mathrm{diag}(e^{i\theta_e},e^{-i\theta_e})$, gives the compact $U(1)$
+Wilson action
+\begin{equation}
+S_{U(1)}[\theta]=\beta\sum_P(1-\cos\theta_P),\qquad
+\theta_P=(B_2^{\top}\theta)_P ,
+\label{eq:u1_action}
+\end{equation}
+with gauge transformations $\theta\mapsto\theta+B^{\top}\chi$.
+\end{proposition}
+
+\begin{proof}
+Products of diagonal matrices are diagonal, so
+$U_P=\mathrm{diag}(e^{i\theta_P},e^{-i\theta_P})$ with reversed edges
+counted negatively, and $\tfrac12\mathrm{Re}\,\mathrm{tr}\,U_P=\cos\theta_P$.
+\end{proof}
+
+The reduction is checked on a triangle plaquette and, with random diagonal
+links at $\beta=2$, on the full $n_{\max}=3$ graph, to machine precision
+(\texttt{tests/test\_su2\_wilson\_gauge.py}, class \texttt{TestU1Reduction}
+and \texttt{test\_u1\_reduction\_full\_graph\_n3\_beta2}).  On the torus the
+character restricts to $\chi_j=\sum_{k=0}^{j}e^{i(j-2k)\theta}$, and the
+expansion~(\ref{eq:character_expansion}) becomes the Jacobi--Anger expansion
+$e^{\beta\cos\theta}=\sum_{n\in\mathbb{Z}}I_n(\beta)e^{in\theta}$.  The
+reduction is a statement about the action, not about the path integral:
+Haar measure on $\mathrm{SU}(2)$ does not restrict to Haar measure on the
+torus, so compact $U(1)$ is a separate theory with the restricted action,
+not a sector of the $\mathrm{SU}(2)$ theory.  It is solved on the scalar
+graph by the same argument: $Z=[e^{-\beta}I_0(\beta)]^{\beta_1}$ and
+$\langle\cos\theta_C\rangle=(I_1(\beta)/I_0(\beta))^{A}$.  At weak coupling
+$S_{U(1)}=\frac{\beta}{2}\langle\theta,B_2B_2^{\top}\theta\rangle+O(\theta^4)$:
+the abelian action is even in $\theta$ and has no cubic term.  The same
+restriction for $\mathrm{SU}(3)$ on the Bargmann--Segal graph gives the
+coupled $U(1)\times U(1)$ character
+$\tfrac13(\cos a_P+\cos b_P+\cos(a_P+b_P))$
+(\texttt{tests/test\_su3\_wilson\_s5.py}, class \texttt{TestCartanReduction}).
+
+\subsection{Dictionary}
+
+The ingredients of Wilson's construction correspond to graph-Hodge data on
+any oriented graph with a chosen plaquette set:
+
+\begin{center}
+\begin{tabular}{lll}
 \toprule
-$\beta$ & $\langle W \rangle_{\mathrm{MC}}$ (2000 samples) & $\pm\,$stderr & $\langle W \rangle_{\text{exact}}$ \\
+Wilson & Graph Hodge & Role \\
 \midrule
-0.5 & $0.126$ & $0.011$ & $0.124$ \\
-1.0 & $0.158$ & $0.011$ & $0.240$ \\
-2.0 & $0.332$ & $0.009$ & $0.433$ \\
-5.0 & $0.681$ & $0.006$ & $0.719$ \\
+Site & vertex $v$ & matter location \\
+Link & oriented edge $e$ & gauge-field location \\
+Link variable & edge phase $e^{i\theta_e}$, $\theta\in C^1$ & connection \\
+Plaquette & 4-cycle $P$, a column of $B_2$ & face \\
+Plaquette angle & $\theta_P=(B_2^{\top}\theta)_P$ & curvature \\
+Wilson loop & $\exp(i\langle c,\theta\rangle)$, $c\in\ker B$ & gauge-invariant observable \\
+Gauge transformation & $\theta\mapsto\theta+B^{\top}\chi$ & coboundary shift \\
+Kinetic operator & $B_2B_2^{\top}$ & curl form (Prop.~\ref{prop:L1_kinetic}) \\
+Gauge-fixed propagator & $\Delta_1^{-1}=(B^{\top}B+B_2B_2^{\top})^{-1}$ & Feynman-gauge photon \\
+Scalar matter operator & $L_0+m^2$, $L_0=BB^{\top}$ & covariant Laplacian at $\theta=0$ \\
+Flat connections mod gauge & $\ker B_2^{\top}/\operatorname{im}B^{\top}$ & $H^1$, Eq.~(\ref{eq:h1_defect}) \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{center}
 
-The exact column follows because $P_A$ and $P_B$ of
-Eq.~(\ref{eq:p_block_plaquettes}) form a cycle basis ($\beta_1 = 2$):
-after gauge-fixing on a spanning tree each plaquette holonomy is an
-independent Haar variable, and
-$\langle \tfrac12 \mathrm{tr}\,U \rangle$ under the weight
-$e^{(\beta/2)\mathrm{tr}\,U}$ is $I_2(\beta)/I_1(\beta)$.  The short
-chain's deviations ($34\%$ at $\beta = 1$, $23\%$ at $\beta = 2$) are
-sampling error, not shared-edge correlation: three independent chains
-of 20\,000 samples give $0.232$--$0.249$ at $\beta = 1$ and
-$0.429$--$0.452$ at $\beta = 2$, scattered about the exact values.
-$\langle W \rangle$ is monotonic in $\beta$, rising from $0$ at strong
-coupling to $1$ at weak coupling.
+\noindent The dictionary is standard and applies to every graph; it is
+recorded here because it fixes the notation for Section~\ref{sec:ruleb}.  On
+the scalar graph $H^1=0$, so every flat connection is pure gauge.
 
-\paragraph*{Confinement diagnostic on a factorizing graph.}
-Confinement in Wilson's sense is the statement that $\langle W_C
-\rangle$ obeys an \emph{area law} $\langle W_C \rangle \sim
-e^{-\sigma \cdot \mathrm{Area}(C)}$ at strong coupling, crossing over
-to a \emph{perimeter law} at weak coupling.  The diagnostic requires
-a family of Wilson loops indexed by a geometric area.  On the
-$n_{\max} = 3$ Coulomb graph the 6-cycle bounding $P_A \cup P_B$ gives
-a loop of area $2$, but because the plaquettes are independent its
-expectation is exactly $(I_2/I_1)^2$: an area law that holds at every
-$\beta$ by factorization, with no dynamical content and no
-area--perimeter crossover.  \emph{This is a structural feature of the
-small graph, not a statement about the field theory}.  It persists at
-every $n_{\max}$: each $l$-block of the Coulomb graph is a planar
-$(n_{\max}-l)\times(2l+1)$ grid whose unit squares form a cycle basis
-($\beta_1 = \sum_l 2l(n_{\max}-l-1)$, giving $2$ and $8$ at
-$n_{\max} = 3, 4$), so with the 4-plaquette action the theory is the
-exactly solvable two-dimensional lattice gauge theory and every
-contractible loop of area $A$ has
-$\langle W \rangle = (I_2/I_1)^{A}$ [INTERNAL THEOREM].  To see
-confinement in the conventional sense, one needs plaquettes that do
-not factorize, which this label graph does not supply.
+\subsection{The $n_{\max}=3$ spectra}
+\label{sec:spectra}
 
-\paragraph*{Consistency with Paper 29's Ihara cycle counts.}  The
-primitive 4-cycle count at $n_{\max} = 3$ ($N_4 = 2$) and the
-higher-length counts ($N_6 = 1$, $N_8 = 1$) match the M\"obius-inverted
-Ihara primitive-walk counts of Paper~29~\cite{paper29} up to the
-orientation factor $N_{\text{M\"obius}}(L) = 2 \cdot N_{\text{unoriented}}(L)$
-(each undirected cycle gives clockwise and counterclockwise primitive
-walks; we keep one representative per unoriented class).  Paper~29's
-plaquette-enumeration machinery is reused here without modification;
-the Ihara cycles of one paper are the Wilson plaquettes of the other.
+The edge Laplacian of the scalar graph is an integer matrix, so its
+eigenvalues are algebraic.  At $n_{\max}=3$ its nonzero spectrum is the union
+of the nonzero Laplacian spectra of the three blocks: the path $P_3$ ($l=0$,
+eigenvalues $1,3$), the grid $P_2\times P_3$ ($l=1$, eigenvalues $1,2,3,3,5$),
+and the path $P_5$ ($l=2$, eigenvalues $2-2\cos(k\pi/5)$, $k=1,\ldots,4$).
+With the two zero modes of the cycle space,
+\begin{equation}
+\mathrm{spec}(L_1)=\Bigl\{0^{(2)},\tfrac{3-\sqrt5}{2},1^{(2)},\tfrac{5-\sqrt5}{2},
+2,\tfrac{3+\sqrt5}{2},3^{(3)},\tfrac{5+\sqrt5}{2},5\Bigr\},
+\label{eq:L1_spectrum}
+\end{equation}
+whose characteristic polynomial splits over $\mathbb{Q}(\sqrt5)$.  Collapsing
+each $m$-multiplet at fixed $(n,l)$ to one vertex, with edge weights the
+number of crossing edges, gives a weighted graph on the six sectors $(n,l)$
+with Laplacian spectrum $\{0,0,0,1,3,6\}$, characteristic polynomial
+$x^3(x-1)(x-3)(x-6)$; this is the base graph used in Paper~2~\cite{paper2}.
+Both spectra are pinned exactly in \texttt{tests/test\_paper25\_s2\_quotient.py}.
 
 % ===================================================================
-\section{Principle of Least Action: A Framework-Wide Synthesis}
-\label{sec:action_principles}
+\section{Compact $U(1)$ on the Rule-B graph}
+\label{sec:ruleb}
 % ===================================================================
 
-The Wilson action of Eq.~(\ref{eq:wilson_action}) organizes the
-gauge-sector dynamics of the GeoVac graph as a variational principle
-on $\mathrm{SU}(2)^{|E|}$.  This is the fifth independent action
-principle in the GeoVac framework, and it is useful to place it in
-context.
+\subsection{Setting and comparison class}
 
-Over the course of the project, variational or action structures have
-emerged on five distinct data sectors of the Hopf graph.  Each is
-tightly localized to one kind of structure and does not substitute
-for any of the others.  We collect them in
-Table~\ref{tab:action_principles}.
+On the Rule-B graph we take the compact $U(1)$ action~(\ref{eq:u1_action})
+with $\mathcal{P}$ the 4-cycles.  The plaquettes span the cycle space but are
+not independent ($b_2>0$), so the theory does not factorize, and the
+minimal closed 2-cycles of three plaquettes are where monopoles can be
+detected.  Two features fix what this theory should be compared with.  Each
+link lies in $8.8$ plaquettes on average at $n_{\max}=2$ and $37.5$ at
+$n_{\max}=3$, against $2(d-1)$ on $\mathbb{Z}^d$, and the mean degree grows
+with the cutoff; and the graph is irregular.  Large plaquette multiplicity is
+the regime in which mean-field and large-dimension treatments of lattice
+gauge theory become controlled~\cite{drouffe_zuber1983}, and irregular
+lattices with plaquettes taken as the smallest loops are the setting of
+random-lattice gauge theory~\cite{christ_friedberg_lee1982}.  Those are the
+natural comparison classes.  No diagnostic below was run against either, and
+none was run against a four-dimensional control; the diagnostics test
+compatibility with compact $U(1)$, which in three dimensions confines at
+every coupling through a dilute monopole plasma~\cite{polyakov1977,banks_myerson_kogut1977}
+and in four dimensions has a Coulomb phase above
+$\beta_c\approx1.01$~\cite{guth1980,degrand_toussaint1980}.
 
-\begin{table}[t]
-\centering
-\small
-\caption{Five action principles in the GeoVac framework.  Each
-organizes a different sector of the graph data.  The Wilson-action
-entry is the contribution of this paper.}
-\label{tab:action_principles}
-\begin{tabular}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.2cm}}
-\toprule
-Principle & Data sector & Extremum principle & Reference \\
-\midrule
-Maximum entropy on packing & Nodes (candidate shell centers) & Maximize entropy under isotropy (Axiom 2) & Paper~0~\cite{paper0} \\
-\addlinespace
-Rayleigh--Ritz on graph Hamiltonian & Node wavefunctions (0-cochains) & Minimize $\langle \psi | H | \psi \rangle / \langle \psi | \psi \rangle$ & Papers~1, 7~\cite{paper7} \\
-\addlinespace
-Wilson lattice gauge action & Edge link variables (1-cochains, SU(2)-valued) & Minimize $S_W[U] = \beta \sum_P (1 - \tfrac{1}{2}\mathrm{Re}\,\mathrm{tr}\,U_P)$ & Paper~25~\cite{paper25} $U(1)$; present paper SU(2) \\
-\addlinespace
-Ihara zeta path integral & Primitive closed non-backtracking walks & $\log \zeta_G(s)^{-1} = \sum_{[C]} s^{\ell(C)}$ as weighted walk sum & Paper~29~\cite{paper29} \\
-\addlinespace
-Spectral action on Dirac spectrum & Spinor-bundle spectrum ($|\lambda_n|, g_n$) & $\mathrm{Tr}\,f\bigl(D / \Lambda\bigr)$ over modes & Paper~28~\cite{paper28} \\
-\bottomrule
-\end{tabular}
-\end{table}
+The archived drivers and data for this section are in
+\texttt{tests/wilson\_rule\_b\_support/}; every number quoted is recomputed or
+pinned by \texttt{tests/test\_paper41\_wilson\_witnesses.py}.
 
-\paragraph*{What each sector is about.}
-The node sector carries the scalar matter content (the wavefunction
-amplitudes) and hosts two action principles: Paper~0's packing
-axioms as a max-entropy statement (``maximize entropy under
-isotropy''), which \emph{builds} the graph, and the Rayleigh--Ritz
-principle on the built graph's Hamiltonian, which computes the
-graph's spectrum.  The edge sector carries gauge content (Paper~25's
-$U(1)$ phases, this paper's SU(2) link variables) and hosts the
-Wilson action.  The walk sector aggregates edge data into
-Ihara-cycle weights and hosts a discrete path integral
-(log-partition function = walk sum).  The Dirac spectrum, finally,
-is the specific data set on which the spectral action of
-noncommutative-geometry type is computed; Paper~28's QED spectral
-sums are literally this.
+\subsection{Seven diagnostics}
 
-\paragraph*{The packing--Wilson duality.}
-Two of the five principles stand out as structural duals.  Paper~0's
-Axiom 2 (geometric indifference) is a max-entropy principle on node
-data: among all candidate discrete packings compatible with Axiom 1
-(binary distinguishability), the entropy-maximizing one is selected.
-The Wilson action is a min-action principle on edge data: among all
-SU(2) link configurations, those minimizing plaquette curvature are
-selected in the continuum ($\beta \to \infty$) limit.  The two
-principles live on complementary cochain degrees (0-form vs 1-form)
-and extremize in opposite directions (max vs min), but they are
-structurally compatible: Paper~0's max-entropy on nodes fixes
-\emph{which} graph the Wilson action lives on, and the Wilson action
-fixes \emph{how} gauge dynamics runs on it.  Nothing in the
-mathematics forbids a joint variational principle on the full
-(node, edge) data; we note this for future work but do not pursue it
-here.
+\paragraph{(1) Spectral dimension.}
+From the heat-kernel return probability of $L_0$, fitted over the same
+fixed band $0.1<P(t)-c/V<0.5$ on both graphs, Rule B has $d_s$ of about
+$2.1$ to $2.3$ for $n_{\max}=3$--$8$, about $0.45$ above the scalar graph
+(about $1.7$ to $1.8$ over the same band), with no trend in $n_{\max}$.  A window that slides with graph
+size gives $1.86$, $2.27$, $2.54$ at $n_{\max}=3,4,5$ and passes $3$ at
+$n_{\max}=8$; that rise is an artifact of the window.  The graph has growing
+degree and is not a lattice approaching a manifold.
 
-\paragraph*{What this section does and does not claim.}
-The observation is descriptive: the GeoVac framework, as it currently
-stands, presents five independent variational structures, each
-localized to a different sector of the graph data.  We do not claim
-that these five can be reduced to a single grand principle, nor that
-one is more fundamental than the others.  Each is a tool matched to a
-data type.  The utility of naming them together is that it makes the
-project's full toolkit visible in one place: the framework is not
-reducible to ``diagonalize a graph Laplacian,'' because its data has
-more kinds of structure than nodes alone.
+\paragraph{(2) Migdal--Kadanoff flow.}
+The bond-moving recursion~\cite{migdal1975,kadanoff1976}
+$I_1(\beta')/I_0(\beta')=[I_1(\beta)/I_0(\beta)]^{k}$ with
+$k=\langle q_e\rangle$ flows to $\beta=0$ with no nontrivial fixed point.
+This holds for any $k>1$, because $I_1/I_0$ increases from $0$ to $1$, so it
+depends on the graph only through $k$.  The recursion misses the
+four-dimensional transition on the hypercubic lattice as well, so the flow
+discriminates nothing.
 
-% ===================================================================
-\section{Yang--Mills Adjacency: What Is and Is Not Claimed}
-\label{sec:scope}
-% ===================================================================
+\paragraph{(3) Gaussian Wilson loops.}
+At weak coupling,
+$\langle W_C\rangle\simeq\exp(-\frac{1}{2\beta}\langle c,(B_2B_2^{\top})^{+}c\rangle)$.
+Averaged over primitive closed non-backtracking walks of length
+$L=4,6,8$, the exponent scales as $L^{\alpha}$ with
+$\alpha\in[0.89,1.18]$ for $n_{\max}=2$--$5$: a perimeter law, as for the
+free photon in three or four dimensions.  This sector does not see
+compactness.
 
-The present paper inherits the language of Wilson lattice gauge theory.
-The rhetoric rule of CLAUDE.md~\S1.5 requires that we be explicit about
-scope.  We enumerate what is done and what is not.
+\paragraph{(4) Strong coupling.}
+At leading order in small $\beta$, a loop bounding a surface of $A$
+plaquettes has $\langle W\rangle=(I_1/I_0)^{A}+\ldots$, with string tension
+$-\ln(I_1/I_0)\simeq\ln(2/\beta)$.  This is a property of the expansion on
+any plaquette complex and says nothing outside the strong-coupling regime.
 
-\paragraph*{What this paper establishes.}  A gauge-invariant, finite,
-Haar-normalizable non-abelian lattice gauge theory on the finite
-compact GeoVac Hopf graph at any $n_{\max}$, with (i) link variables
-in $\mathrm{SU}(2)$, (ii) plaquettes as primitive closed
-non-backtracking walks, (iii) Wilson action and partition function
-well-defined without renormalization, (iv) exact $U(1)$ reduction to
-Paper~25 in the maximal-torus limit, (v) the weak-coupling kinetic
-term identified as the co-exact (curl) completion of
-$L_1 = B^{\top} B$, with universal coefficient $1/8 = 1/(4N_c)$.
-All 36 tests in \texttt{tests/test\_su2\_wilson\_gauge.py} pass,
-including the numerical $U(1)$-reduction test, end-to-end gauge
-invariance at machine precision (asserted $< 10^{-13}$), the kinetic
-quadratic-form tests, and the exact Wilson-loop values $I_2/I_1$.
+\paragraph{(5) Monopole density.}
+With the DeGrand--Toussaint construction~\cite{degrand_toussaint1980} on the
+three-plaquette closed 2-cycles ($60$ at $n_{\max}=2$, $80$ at $n_{\max}=3$),
+each plaquette angle is split as $\theta_P=\bar\theta_P+2\pi m_P$ with
+$\bar\theta_P\in(-\pi,\pi]$, and the integer charge on a 2-cycle $S$ is
+$m_S=\sum_{P\in S}\pm m_P$.  Metropolis Monte Carlo of~(\ref{eq:u1_action})
+gives a density $\rho_M(\beta)$ that falls roughly exponentially on
+$0.05\le\beta\le1.0$; the fit $\rho_M=a\,e^{-c\beta}$ gives $c=9.40$ and
+$8.95$ at $n_{\max}=2,3$ ($R^2=0.981$ both).  Above $\beta=1$ the density is
+below the detection floor.  Exponential suppression in $\beta$ is generic to
+compact $U(1)$, and the measured range lies below the four-dimensional
+$\beta_c$, where the four-dimensional theory also confines; in four
+dimensions the monopole currents are closed loops that percolate in the
+confined phase and become small and sparse in the Coulomb
+phase~\cite{drouffe_zuber1983,degrand_toussaint1980}.  The data do not reach
+the coupling at which the two would differ.
 
-\paragraph*{What this paper does NOT establish.}
-\begin{itemize}
-\item \emph{Yang--Mills mass gap on $\mathbb{R}^4$.}  The Clay
-  Millennium Problem requires a continuum-field-theory construction
-  of pure Yang--Mills on 4D Minkowski or Euclidean space, proof of a
-  positive mass gap, and proof that no interacting scale-invariant
-  continuum limit exists.  Our construction lives on a fixed finite
-  compact graph; there is no continuum limit of $\mathbb{R}^4$ inside
-  it.
-\item \emph{Confinement in the conventional sense.}  As shown in
-  Section~\ref{sec:results_MC}, the plaquettes form a cycle basis of
-  each planar $l$-block at every $n_{\max}$, so Wilson loops obey
-  $\langle W \rangle = (I_2/I_1)^{\mathrm{Area}}$ exactly: an area law
-  by factorization, which says nothing about confinement.
-\item \emph{Lorentzian signature or dynamics.}  This is a Euclidean
-  lattice gauge theory on a spatial slice: no time direction, no
-  Wick rotation, no $S$-matrix, no scattering.  Dynamics in the
-  usual sense is absent.
-\item \emph{Renormalization or continuum limit.}  The bare Wilson
-  action is the whole story on a finite graph.  No continuum SU(2)
-  Yang--Mills limit on $S^3$ is expected: the label graph's edge
-  Laplacian does not converge to the $S^3$ Laplacian.
-\item \emph{No derivation of $\alpha$.}  Paper~2's
-  combination rule $K = \pi(B + F - \Delta)$ is not refined by the
-  present construction.  Paper~25~\S IV read the three ingredients as
-  Casimir-matter trace / Fock-Dirichlet gauge zeta / Dirac-boundary
-  count; the non-abelian SU(2) Wilson structure does not produce a
-  new $K$-like object or a non-abelian ``fine-structure constant''
-  coupling, and we make no claim in that direction.
-\end{itemize}
+\paragraph{(6) Full Monte Carlo Wilson loops.}
+Loops are built as boundaries of clusters of $A$ plaquettes.  A fit of
+$\ln\langle W\rangle$ against $A$ alone gives a positive, decreasing slope
+($0.377$, $0.011$, $0.003$ at $\beta=0.1$, $3$, $10$, $n_{\max}=2$), but a
+joint fit $\ln W=-\sigma A-\mu L+\mathrm{const}$ gives an area coefficient
+$|\sigma|<0.05$ with $\mu>5|\sigma|$ at every $\beta$ at $n_{\max}=2$: the loops are
+perimeter dominated and no area law is resolved.  At $n_{\max}=4$ the joint
+fit gives $\sigma=-0.080\pm0.002$ at $\beta=0.3$, which we attribute to the
+cluster construction, in which the minimal perimeter is not monotone in the
+area.  The exponential rate of the area-only slope, $1.196$, matches that of
+the perimeter coefficient, $1.242$, so the area-only fit measures the
+perimeter term; its disagreement with the dilute-gas prediction
+$c/2=4.70$ for a string tension~\cite{polyakov1977} is open.
 
-\paragraph*{Relationship to the Clay problem.}
-The mathematical vocabulary is shared (lattice gauge theory,
-non-abelian link variables, plaquette action, Wilson loops), but the
-setting differs categorically.  The Clay problem is about continuum
-field theory on a non-compact 4D spacetime; the present construction
-is about discrete gauge theory on a compact 3D-graph spatial slice.
-We use Wilson's formalism because it is the correct tool for
-non-abelian lattice gauge theories on finite graphs; we do not
-imply that the construction transports to $\mathbb{R}^4$.
+\paragraph{(7) Polyakov loops.}
+On the product graph $G_B\times C_{N_t}$ at $n_{\max}=2$, with spatial and
+temporal-rectangle plaquettes, the cohomology defect
+$E-V+1-\operatorname{rank}B_2$ of Eq.~(\ref{eq:h1_defect}) is $1$ for
+$N_t\ge3$ and $0$ for $N_t=2$, where the temporal loop backtracks and
+$P\equiv1$.  The extra class is the temporal winding, so the Polyakov loop
+$P(v)$ is a well-defined observable not generated by plaquettes.  Shifting
+every temporal link of one time slice by $\varphi$ leaves the action
+invariant and multiplies $P$ by $e^{i\varphi}$, so $\langle P\rangle=0$ at
+every $\beta$ in finite volume and carries no phase information.  The order
+parameter $\langle|P_{\mathrm{lat}}|\rangle$, with
+$P_{\mathrm{lat}}=V_B^{-1}\sum_vP(v)$, rises from the random-phase value
+$0.285$ at $\beta=0.3$ to $0.498$ and $0.833$ at $\beta=1$, $3$ ($N_t=4$;
+$0.285$, $0.341$, $0.691$ at $N_t=8$).  On a ten-site spatial graph this
+does not settle the phase, and it does not indicate persistent confinement.
+
+\subsection{Verdict}
+
+Compact $U(1)$ on the Rule-B graph is a well-defined, non-factorizing
+lattice gauge theory.  Its diagnostics are compatible with compact $U(1)$:
+(2)--(4) hold for compact $U(1)$ on any plaquette complex, (1) gives a
+fixed-scale separation from the scalar graph rather than a dimension, (5)
+stops below the coupling where three and four dimensions differ, (6)
+resolves no area law, and (7) supplies a well-defined finite-temperature
+observable whose order parameter orders with $\beta$.  No dimension is
+discriminated.  The sizes are small ($n_{\max}\le4$ for the Monte Carlo,
+$n_{\max}=2$ for the product graph), and the comparisons the graph's high
+plaquette multiplicity calls for, against mean-field, large-dimension and
+random-lattice results, are not made.
 
 % ===================================================================
-\section{Open Questions}
+\section{Open questions}
 \label{sec:open}
 % ===================================================================
 
-\subsection{Matter coupling: Dirac fermions on the Hopf graph}
+\paragraph*{Matter coupling.}  The Rule-B vertices are Dirac labels, so
+covariant hopping $\bar\psi_vU_{vv'}\psi_{v'}$ on its dipole edges is the
+natural first matter-plus-gauge theory on a label graph; on the scalar graph
+matter coupling would only reproduce the factorized two-dimensional
+theories.
 
-The GeoVac framework's Tier-2 relativistic pipeline~\cite{paper14}
-builds spin-ful composed qubit Hamiltonians in the
-$(\kappa, m_j)$ Dirac basis on $S^3$.  These are matter sectors on
-the same graph whose gauge sector we have built here.  Coupling the
-two---Dirac fermion matter on nodes, $\mathrm{SU}(2)$ Wilson gauge on
-edges---would be the first matter$+$gauge lattice theory in the
-GeoVac project.  The construction is standard in principle (covariant
-hopping amplitudes $\bar\psi_i U_{ij} \psi_j$), but on a
-triangle-free simplicial 1-complex with Dirac spinors it would
-require the Szmytkowski angular labels of Paper~14's Tier~2 to be
-reconciled with the Wilson link-variable orientation convention.  A
-clean demonstrator would be: does the spinor spectrum feel the
-non-trivial $\mathrm{SU}(2)$ topology (i.e., is the Dirac operator
-sensitive to the $\beta_1 = 2$ harmonic 1-forms at $n_{\max} = 3$ when
-the gauge field is non-trivially topological)?
+\paragraph*{Comparison controls for Rule B.}  The diagnostics of
+Section~\ref{sec:ruleb} need, in order: mean-field and large-dimension
+predictions at the measured plaquette multiplicities; a four-dimensional
+hypercubic control run through the same code; monopole data above
+$\beta\approx1$; and Wilson loops at fixed perimeter by construction.
 
-\subsection{Larger graphs and the confinement diagnostic}
-
-With the 4-plaquette action this question is closed at every
-$n_{\max}$: the plaquettes form a cycle basis of each planar $l$-block,
-so Wilson loops factorize and obey $(I_2/I_1)^{\mathrm{Area}}$ exactly
-(Section~\ref{sec:results_MC}), with no area--perimeter crossover.  A
-confinement diagnostic with dynamical content needs an action whose
-plaquettes do not factorize; the label graph, whose $l$-blocks are
-disconnected, does not supply one.
-
-\subsection{SU(2) analog of the Ihara zeta}
-
-Paper~29 built the (scalar-valued) Ihara zeta of the GeoVac Hopf
-graphs from primitive closed non-backtracking walk counts.  A natural
-non-abelian generalization would weight each primitive walk $[C]$ by
-a character $\chi_j(U_{[C]})$ of its $\mathrm{SU}(2)$ holonomy,
-producing a character-valued zeta function.  Whether the resulting
-object has a well-defined Ihara--Bass-type determinantal expression,
-or whether it satisfies a graph-Riemann Hypothesis analog, is
-speculative.  We record the question without pursuing it.
-
-\subsection{SU(2) analog of Paper 2's $K = \pi(B + F - \Delta)$}
-
-Paper~25~\S VII.A suggested that a non-abelian analog of the Paper~2
-combination rule might exist on the $S^3$ graph.  The SU(2) Wilson
-structure of the present paper does not by itself produce one; the
-Wilson action is coupling-insensitive in a way that Paper~2's $K$ is
-not.  A more promising route (if any) would couple the SU(2) Wilson
-gauge to Dirac-spinor matter (first open question above) and examine
-the combined spectral-gauge invariants.  We do not claim such a route
-will succeed; we record it as a natural follow-up within the
-Paper-2 observation-tier program.
-
-\subsection{Plaquettes as the transverse photon sector}
-
-The plaquettes enumerated in this paper define a boundary operator
-$d_1\colon C^1 \to C^2$ whose transpose gives the co-exact Laplacian
-$L_1^{\mathrm{co}} = d_1 d_1^\top$ on edges.  This is the
-\emph{transverse} (physical photon) sector of the graph Hodge
-decomposition, complementing the exact (longitudinal) sector
-$L_1^{\mathrm{ex}} = B^\top B$ used in Paper~25 and the graph-native
-QED of Paper~28.
-
-Paper~28's pendant-edge theorem gives
-$\Sigma_{\mathrm{scalar}}(\mathrm{GS}) = 2(n_{\max}-1)/n_{\max}$ for
-the scalar propagator $G = (B^\top B)^+$, while the transverse
-propagator $G_T = (d_1 d_1^\top)^+$ gives $\Sigma_T(\mathrm{GS}) = 0$.
-That zero is not a ground-state selection rule: the $l = 0$ block is a
-path, every $s$-edge is a bridge lying in no closed walk, and $G_T$
-vanishes on all of them, so $\Sigma_T(n\mathrm{S}) = 0$ for every $n$.
-Nor is there a continuum zero for it to recover, since the physical
-vector vertex couples the ground state (Paper~28, Theorem on the
-self-energy, as re-scoped there).  The plaquettes therefore supply the
-transverse sector of the graph Hodge decomposition, but no selection
-rule of continuum QED is recovered through them.
-
-\subsection{Continuum limit}
-
-The continuum limit of lattice gauge theory on refined Alon--Boppana
-sequences of graphs converging to a target manifold is a technical
-question that has been addressed in specific cases (hypercubic
-lattices converging to $\mathbb{R}^4$, spherical lattices converging
-to $S^3$).  The GeoVac label graph is not such a sequence: its edge
-Laplacian splits into $n_{\max}$ disconnected $l$-blocks and does not
-converge to the $S^3$ Laplacian (the documented graph-to-$S^3$ wall),
-so no continuum Yang--Mills limit on $S^3$ is expected from this
-construction.
-
-\subsection{SU(3) Wilson sibling on $S^5$}
-\label{sec:su3_sibling}
-
-Paper~25~\S~VII.A also flagged as open whether a non-abelian extension
-of the GeoVac Hopf $U(1)$ Wilson--Hodge structure transfers to the
-Bargmann--Segal $S^5$ graph (Paper~24).  Sprint~5 Track~S5
-(\texttt{debug/s5\_gauge\_structure\_memo.md}) returned a clean
-negative for the \emph{adjacency-preserving} SU(3) action on the
-$(N, 0)$ representation tower: shell-shifting transitions are
-Clebsch--Gordan intertwiners between distinct SU(3) irreps, not group
-elements, so an SU(3) action on the $(N, 0)$ tower fails the Wilson
-``fixed group on every link'' requirement.
-
-Sprint~ST-SU3 (May~2026,
-\texttt{debug/st\_su3\_wilson\_memo.md}, with module
-\texttt{geovac/su3\_wilson\_s5.py} and tests
-\texttt{tests/test\_su3\_wilson\_s5.py} 49/49 pass, two slow-marked) tested a
-structurally different question: \emph{Wilson lattice gauge theory}
-with link variables $U_e \in \mathrm{SU}(3)$ as external 3$\times$3
-matrices in the fundamental representation, independent of the shell
-index $N$.  The construction parallels the present paper's
-$\mathrm{SU}(2)$ on $S^3$.  Three structural results mirror those of
-the present paper:
-
-\begin{itemize}
-\setlength\itemsep{0pt}
-\item \textbf{Cartan reduction.}  Restricting Wilson SU(3) links to
-the maximal torus $T \cong U(1)\times U(1)$ produces a coupled
-$U(1)\times U(1)$ Wilson action with character
-$(1/3)\bigl(\cos a_P + \cos b_P + \cos(a_P+b_P)\bigr)$ (the third
-phase forced by $\det = 1$).  Verified at machine precision over
-random Cartan trials at $N_\text{max} = 2, 3$
-(max $|\Delta S| < 1.5\times 10^{-11}$ at $7\,765$ plaquettes).
-The rank-2 generalization of Proposition~\ref{prop:u1_reduction} per
-Remark~\ref{rem:higher_rank}.
-\item \textbf{Kinetic coefficient.}  The weak-coupling expansion gives
-$1/12 = 1/(4 \cdot 3)$ per plaquette per generator component, the
-$N_c = 3$ specialization of Remark~\ref{rem:sun_coefficient}'s
-universal $1/(4 N_c)$ formula.  Eight $\mathfrak{su}(3)$ components
-are kinetic-decoupled at quadratic order; non-abelian self-couplings
-enter at $O(A^4)$ via the structure constants $f^{abc}$.
-\item \textbf{Plaquette tabulation.}  $V, E, \beta_1$ at
-$N_\text{max} = 2, 3, 4$ are $(10, 15, 6)$, $(20, 42, 23)$,
-$(35, 90, 56)$, with primitive 4-cycle counts $N_4 = 15, 88, 272$
---- roughly an order of magnitude denser than the $S^3$ graph at
-matched cutoff.  Wilson loops at $N_\text{max} = 2$ with local SU(3)
-updates give $\langle W \rangle = 0.05, 0.10, 0.26, 0.65, 0.89$ at
-$\beta = 0.5, 1, 2, 5, 10$, systematically lower than the present
-paper's SU(2) values at small $\beta$ (consistent with the standard
-$N_c$-color randomization of the trace).
-\end{itemize}
-
-The Sprint~5 Track~S5 Clebsch--Gordan obstruction is \emph{bypassed}
-at the gauge level (Wilson links live in the fundamental SU(3) rep,
-not in the $(N, 0)$ shell rep) but \emph{rediscovered} at the
-matter-coupling level: coupling Wilson SU(3) to natural shell matter
-(in the $(N, 0)$ irreps of growing dimension) requires a CG
-intertwiner from $\textbf{3}\otimes (N, 0)$ to $(N+1, 0)$ that is
-exactly the Sprint~5 obstruction.  Wilson SU(3) on Bargmann is
-therefore a self-consistent \emph{pure-gauge} theory; the natural
-matter sector cannot be coupled in the strict Wilson sense.
-
-The structural reading: $S^3 = \mathrm{SU}(2)$ makes the
-present paper's case special in a way that does not transfer to the
-$\mathrm{SU}(3)$ on $S^5$ analogue.  On $S^3$, matter (spin-$1/2$
-fermions, Paper~14 Tier~2) lives in the same representation as the
-link variables, so the gauge--matter coupling is natural (an argument,
-not yet a coupled construction; Paper~25); on $S^5$,
-the matter representations $(N, 0)$ have dimensions that grow with
-$N$, so a uniform-link-rep coupling is impossible.  This sharpens
-Paper~24's Coulomb/HO asymmetry from three layers
-(spectrum-computing $L_0$ and calibration $\pi$, both since
-withdrawn, and Wilson gauge with matter coupling) plus the universal Wilson--Hodge vocabulary, to
-\emph{four layers}: Wilson gauge alone is universal; only Wilson
-gauge \emph{with natural matter coupling} is Coulomb-specific.
-Sprint~ST-SU3 contributes the third layer on the gauge-with-matter
-side.  The reading of Paper~24 \S~V is updated accordingly.
+\paragraph*{Non-abelian links on Rule B.}  $\mathrm{SU}(2)$ links on the
+Rule-B graph give a non-factorizing non-abelian theory on a label graph; it
+has not been built.
 
 % ===================================================================
 \section{Conclusion}
 \label{sec:conclusion}
 % ===================================================================
 
-Sprint 4 Track RH-Q constructed SU(2) Wilson lattice gauge theory on
-the GeoVac Hopf graph (module \texttt{geovac/su2\_wilson\_gauge.py},
-36 tests passing, 2026-07-04 count).  The present paper formalizes that construction
-and places it in context relative to Paper~25's abelian $U(1)$
-predecessor.
-
-Three structural results summarize the content:
-(1)~the maximal-torus reduction of the $\mathrm{SU}(2)$ Wilson action
-recovers Paper~25's $U(1)$ Wilson--Hodge action exactly, so
-Paper~25 is the Cartan-subalgebra sector of a non-abelian theory;
-(2)~the weak-coupling kinetic term of the non-abelian Wilson action
-is the co-exact (curl) quadratic form on the Ihara plaquettes ---
-coefficient $1/8 = 1/(4N_c)$ per plaquette per
-$\mathfrak{su}(2)$ component --- which completes the edge Laplacian
-$L_1 = B^{\top} B$ that Paper~25 introduced to the full discrete
-Hodge-1 Laplacian, with non-abelian self-interactions entering only
-at quartic order in the gauge field;
-(3)~plaquette enumeration on the $S^3$ Coulomb graph matches
-Paper~29's Ihara cycle counts, and because the plaquettes form a cycle
-basis of each planar $l$-block, Wilson loops factorize exactly,
-$\langle W \rangle = (I_2/I_1)^{\mathrm{Area}}$, which long Monte Carlo
-chains reproduce.
-
-We close with a framework observation.  The $S^3 = \mathrm{SU}(2)$
-coincidence is structurally overdetermined: $S^3$ appears in the
-framework as Fock's projection of the Coulomb problem (Paper~7), as
-the underlying manifold of the $(n, l, m_l)$ Hopf graph (Paper~14),
-as the spin-1/2 carrier of the Dirac sector (Paper~14 Tier-2), and
-now as the gauge group of the non-abelian Wilson construction.  Four
-independent structural roles on the same 3-manifold, each needing
-only the simplest compact simply-connected non-abelian Lie group of
-rank~1.  We do not read this as evidence that $S^3$ is fundamental in
-any ontological sense (CLAUDE.md~\S1.5 rhetoric); we do observe that
-$S^3$ is, in a specific technical sense, the minimal object that
-supports all four roles simultaneously, and we record the convergence
-as a fact.
-
-The project now contains five action principles---Paper~0's
-max-entropy on nodes, Rayleigh--Ritz on the graph Hamiltonian,
-Paper~25's and this paper's Wilson action on edges, Paper~29's Ihara
-zeta path integral on walks, and Paper~28's spectral action on the
-Dirac spectrum---each matched to a distinct sector of the graph
-data.  None reduces to any of the others.  The Wilson action has,
-with this paper, a genuine non-abelian sibling to its $U(1)$
-predecessor; the rest of the table is left as is.
+On the scalar label graph the 4-cycles are the unit squares of planar grids
+and form a cycle basis, so $\mathrm{SU}(2)$ and $U(1)$ Wilson theories are the
+exactly solvable two-dimensional theories,
+$\langle W\rangle=(I_2/I_1)^{A}$ and $(I_1/I_0)^{A}$, at every $n_{\max}$;
+the weak-coupling kinetic term is the curl form $B_2B_2^{\top}$, which
+completes the edge Laplacian to the Hodge-1 Laplacian, with a nonzero cubic
+vertex in the non-abelian case.  On the Dirac Rule-B graph the 4-cycles
+satisfy relations, compact $U(1)$ does not factorize, and seven standard
+diagnostics are compatible with compact $U(1)$ without discriminating a
+dimension; the graph's high plaquette multiplicity places it in the
+mean-field, large-dimension class, against which it has yet to be tested.
 
 % ===================================================================
-% References
-% ===================================================================
-
 \begin{thebibliography}{99}
+% ===================================================================
 
 \bibitem{wilson1974}
 K.~G.~Wilson, ``Confinement of quarks,''
@@ -1152,14 +683,57 @@ K.~G.~Wilson, ``Confinement of quarks,''
 M.~Creutz, \textit{Quarks, Gluons and Lattices},
 Cambridge University Press, Cambridge (1983).
 
+\bibitem{rothe2012}
+H.~J.~Rothe, \textit{Lattice Gauge Theories: An Introduction}, 4th ed.,
+World Scientific Lecture Notes in Physics Vol.~82, World Scientific,
+Singapore (2012).
+
 \bibitem{menotti_onofri1981}
 P.~Menotti and E.~Onofri, ``The action of SU(N) lattice gauge
 theory in terms of the heat kernel on the group manifold,''
 \textit{Nucl.~Phys.~B}\ \textbf{190}, 288--300 (1981).
 
-\bibitem{fegan1983}
-H.~D.~Fegan, ``The heat equation on a compact Lie group,''
-\textit{Trans.~Amer.~Math.~Soc.}\ \textbf{246}, 339--357 (1978).
+\bibitem{migdal1975}
+A.~A.~Migdal, ``Recursion equations in gauge field theories,''
+\textit{Sov.~Phys.~JETP}\ \textbf{42}, 413 (1975)
+[\textit{Zh.~Eksp.~Teor.~Fiz.}\ \textbf{69}, 810 (1975)].
+
+\bibitem{kadanoff1976}
+L.~P.~Kadanoff, ``Notes on Migdal's recursion formulas,''
+\textit{Ann.~Phys.}\ \textbf{100}, 359--394 (1976).
+
+\bibitem{gross_witten1980}
+D.~J.~Gross and E.~Witten, ``Possible third-order phase transition in the
+large-$N$ lattice gauge theory,''
+\textit{Phys.~Rev.~D}\ \textbf{21}, 446--453 (1980).
+
+\bibitem{drouffe_zuber1983}
+J.-M.~Drouffe and J.-B.~Zuber, ``Strong coupling and mean field methods in
+lattice gauge theories,''
+\textit{Phys.~Rep.}\ \textbf{102}, 1--119 (1983).
+
+\bibitem{christ_friedberg_lee1982}
+N.~H.~Christ, R.~Friedberg, and T.~D.~Lee, ``Gauge theory on a random
+lattice,'' \textit{Nucl.~Phys.~B}\ \textbf{210}, 310--336 (1982).
+
+\bibitem{polyakov1977}
+A.~M.~Polyakov, ``Quark confinement and topology of gauge theories,''
+\textit{Nucl.~Phys.~B}\ \textbf{120}, 429--458 (1977).
+
+\bibitem{banks_myerson_kogut1977}
+T.~Banks, R.~Myerson, and J.~Kogut, ``Phase transitions in Abelian lattice
+gauge theories,''
+\textit{Nucl.~Phys.~B}\ \textbf{129}, 493--510 (1977).
+
+\bibitem{guth1980}
+A.~H.~Guth, ``Existence proof of a nonconfining phase in four-dimensional
+$U(1)$ lattice gauge theory,''
+\textit{Phys.~Rev.~D}\ \textbf{21}, 2291--2307 (1980).
+
+\bibitem{degrand_toussaint1980}
+T.~A.~DeGrand and D.~Toussaint, ``Topological excitations and Monte Carlo
+simulation of Abelian gauge theory,''
+\textit{Phys.~Rev.~D}\ \textbf{22}, 2478--2489 (1980).
 
 \bibitem{lim2020}
 L.-H.~Lim, ``Hodge Laplacians on graphs,''
@@ -1194,50 +768,22 @@ and C.~Urbach,
 continuum limit with partitionings of SU(2),''
 arXiv:2503.03397 (2025).
 
-\bibitem{paper0}
-GeoVac Project, ``Counting Angular Momentum Labels by Isotropic Packing,'' Paper~0 (2025).
-
 \bibitem{paper2}
 GeoVac Project, ``The Fine Structure Constant as a Spectral Coincidence
-on the Hopf Fibration,'' Paper~2 (2025).
+on the Three-Sphere,'' Paper~2 (2025).
 
 \bibitem{paper7}
 GeoVac Project, ``The Dimensionless Vacuum: Recovering the Schr\"odinger
 Equation on a Scale-Invariant Label Lattice,'' Paper~7 (2025).
-
-\bibitem{paper14}
-GeoVac Project, ``Structurally Sparse Qubit Hamiltonians from Natural-Geometry
-Hydrogenic Bases,'' Paper~14 (2025).
-
-\bibitem{paper18}
-GeoVac Project, ``Spectral-Geometric Exchange Constants: Projecting
-Discrete Spectra onto Continuous Manifolds,'' Paper~18 (2026).
-
-\bibitem{paper22}
-GeoVac Project, ``Potential-Independent Angular Sparsity for Qubit
-Hamiltonians in Spherical Fermion Systems,'' Paper~22 (2026).
 
 \bibitem{paper24}
 GeoVac Project, ``The Bargmann--Segal Lattice: $\pi$-Free
 Discretization of the Harmonic Oscillator on $S^5$,'' Paper~24
 (2026).
 
-\bibitem{paper25}
-GeoVac Project, ``The Hopf Graph as a Lattice Gauge Structure: A
-Framework Observation,'' Paper~25 (2026).
-
-\bibitem{paper28}
-GeoVac Project, ``QED on $S^3$: Spectral Geometry of Perturbative
-Transcendentals,'' Paper~28 (2026).
-
 \bibitem{paper29}
 GeoVac Project, ``Finite-Size Graph-RH for the GeoVac Hopf Graphs: Ihara Zeta, Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen,'' Paper~29
 (2026).
-
-\bibitem{rh_q_memo}
-GeoVac Project, ``Track RH-Q: SU(2) Wilson Lattice Gauge Theory on
-the $S^3 = \mathrm{SU}(2)$ GeoVac Hopf Graph,''
-\texttt{debug/su2\_wilson\_gauge\_memo.md}, April 2026.
 
 \end{thebibliography}
 

@@ -39,7 +39,7 @@ This test file verifies M2 by three independent paths:
       Lichnerowicz E = R/4. On unit S^3 the integrand is 8/3, so the bare
       a_2^Dirac (= dim_S * (1/360) * 8/3 * Vol) = 32/(360*3/2) * pi^2 ...
       etc. This is NOT zero. The two-term exactness claim is for the
-      ASYMPTOTIC heat-trace expansion (Paper 51 Cor 2.1), which is a
+      ASYMPTOTIC heat-trace expansion (Paper 51 Cor 4.2), which is a
       stronger statement than the standard Branson-Gilkey-Vassilevich a_2.
       We document this convention split and verify the ASYMPTOTIC vanishing
       independently via the Jacobi theta_2 modular identity.
@@ -69,7 +69,7 @@ References
 ----------
 - Paper 55 (Periods of GeoVac), papers/group3_foundations/paper_55_periods_of_geovac.tex,
   Theorem thm:m2_mixed_tate, witness table sec:m2.
-- Paper 51 (Gravity arc) Cor 2.1 (two-term-exact Dirac SD).
+- Paper 51 Cor 4.2 (two-term-exact Dirac SD).
 - Paper 28 (QED on S^3) Theorem T9 (zeta_{D^2}(s) closed form).
 - debug/sprint_mixed_tate_test_memo.md (June 2026).
 - Fathizadeh-Marcolli, Comm. Math. Phys. 357 (2017), arXiv:1611.01815.
@@ -163,7 +163,7 @@ def test_witness_a1_dirac_vol_normalized():
     """Witness: a_1^{D^2} (Dirac SD, vol-norm) = -2 pi^2.
 
     Paper 55 witnesses (vol-normalized SD coefficients) come from the
-    Paper 51 Cor 2.1 ASYMPTOTIC Dirac heat-trace closed form
+    Paper 51 Cor 4.2 ASYMPTOTIC Dirac heat-trace closed form
 
         K_{D^2}(t) = (sqrt(pi)/2) t^{-3/2} - (sqrt(pi)/4) t^{-1/2}
                      + O(e^{-pi^2/t}).
@@ -178,7 +178,7 @@ def test_witness_a1_dirac_vol_normalized():
         a_1 = (-sqrt(pi)/4) * (4 pi)^{3/2}
             = (-sqrt(pi)/4) * 8 * pi^{3/2}
             = -2 pi^2                                          [Paper 55]
-        a_k = 0           for k >= 2 (two-term exactness, Paper 51 Cor 2.1).
+        a_k = 0           for k >= 2 (two-term exactness, Paper 51 Cor 4.2).
 
     NOTE on production code (corrected 2026-10-02): an earlier note here
     explained a mismatch between the production coefficients and this
@@ -189,7 +189,7 @@ def test_witness_a1_dirac_vol_normalized():
     closed form below with the (4 pi)^{-3/2} prefactor.  This test still
     verifies the asymptotic-coefficient identification independently.
     """
-    # Asymptotic Dirac heat trace coefficients (Paper 51 Cor 2.1):
+    # Asymptotic Dirac heat trace coefficients (Paper 51 Cor 4.2):
     raw_a0 = sp.sqrt(pi) / 2
     raw_a1 = -sp.sqrt(pi) / 4
 
@@ -212,7 +212,7 @@ def test_witness_a1_dirac_vol_normalized():
 
 
 def test_dirac_two_term_exactness_via_jacobi_theta2():
-    """Paper 51 Cor 2.1 / Paper 55 witness: a_k^{D^2} = 0 for k >= 2.
+    """Paper 51 Cor 4.2 / Paper 55 witness: a_k^{D^2} = 0 for k >= 2.
 
     Independent verification via Jacobi theta_2 modular identity.
 
@@ -286,7 +286,7 @@ def test_dirac_two_term_exactness_via_jacobi_theta2():
 def test_witness_scalar_ak_closed_form():
     """Witness: a_k^Delta (scalar SD, vol-norm) = 2 pi^2 / k! for all k >= 0.
 
-    This is Paper 51 Thm 3.1. We verify the closed-form a_k = 2 pi^2 / k!
+    This is Paper 51 Thm 6.1. We verify the closed-form a_k = 2 pi^2 / k!
     for k = 0, 1, 2, 3, 4 symbolically and verify M2 membership: each is
     rational * pi^2.
     """

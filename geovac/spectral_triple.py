@@ -99,7 +99,7 @@ References
   spectral triples", J. Math. Phys. 56 (2015) 082301.
 - Connes, van Suijlekom, "Spectral truncations in noncommutative
   geometry and operator systems", Commun. Math. Phys. 383 (2021).
-- GeoVac Paper 25 (Hopf gauge structure on the Fock graph).
+- GeoVac Paper 30 (Wilson lattice gauge theory on the label graphs).
 - GeoVac CLAUDE.md section 1.7 WH1 (almost-commutative spectral triple).
 """
 

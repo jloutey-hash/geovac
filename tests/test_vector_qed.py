@@ -352,12 +352,12 @@ class TestSelectionRules:
         # At n_max=2 with l_max=1, diagonal couplings l=1,l=1,q=1
         # are allowed by parity (1+1+1=3 odd), so tadpole may be nonzero
         rule = rules_n2['7_furry_theorem']
-        # Paper 33 Thm 1 (scalar_7_of_8): Furry is the ONE rule that FAILS
+        # Paper 33 sec. 5 vertex-model column (the former scalar_7_of_8 theorem is cut): Furry is the ONE rule that FAILS
         # for scalar electrons (E-type parity allows diagonal l=l couplings
         # for odd q); the Dirac construction recovers it (test_furry_passes).
         # 8th-cert fix 2026-07-02: this body was a vacuous no-assert stub.
         assert rule['pass'] is False, (
-            "scalar Furry unexpectedly PASSES -- the 7/8 census and Paper 33 "
+            "scalar Furry unexpectedly PASSES -- the graph census and Paper 33 "
             "Thm 1 would both be wrong; investigate before trusting")
 
     def test_triangle_on_n_passes(self, rules_n2):
@@ -954,7 +954,7 @@ class TestScalarDiracComparison:
 
 def _scalar_fock_graph_tally(n_max: int = 2) -> dict:
     """Honest 8-rule tally for the GRAPH-NATIVE scalar-photon construction
-    (Paper 28 / Paper 33 sec. 2: photon = 1-cochain on the Fock graph,
+    (Paper 33 sec. 4: photon = 1-cochain on the Fock graph,
     G_gamma = L_1^+, CG-projected vertex).  Paper 33 Table 1 numbering.
 
     Added 2026-07-03: the 1/8 census leg previously had no aggregate test
@@ -1000,7 +1000,7 @@ def _scalar_fock_graph_tally(n_max: int = 2) -> dict:
     tally[1] = ladder_ok and (len(entries) < N_dirac * N_dirac * E_fock)
 
     # Rule 2 (GS structural zero): Sigma(GS block) == 0?
-    # Pendant-edge theorem (Paper 28 prop): it is NOT (= 2(n_max-1)/n_max).
+    # Pendant-edge theorem (Paper 33 prop:pendant_edge): it is NOT (= 2(n_max-1)/n_max).
     se = gq_self_energy(n_max, t=Rational(0), exact=True)
     tally[2] = bool(se.ground_state_zero)
 
@@ -1068,7 +1068,7 @@ def _scalar_fock_graph_tally(n_max: int = 2) -> dict:
 
 def _native_dirac_graph_tally(n_max: int = 2) -> dict:
     """Honest 8-rule tally for the NATIVE DIRAC GRAPH construction
-    (Paper 33 sec. 3: nodes (n, kappa, m_j), Rule B / E1 adjacency,
+    (Paper 33 sec. 4: nodes (n, kappa, m_j), Rule B / E1 adjacency,
     scalar 1-cochain photon).  Paper 33 Table 1 numbering.
 
     Added 2026-07-03: the 4/8 census leg previously had no aggregate test
@@ -1203,7 +1203,7 @@ class TestCensusAggregates:
     TestScalarDiracComparison / TestDiracSelectionRules)."""
 
     def test_scalar_fock_census_is_1_of_8(self):
-        """Paper 33 sec. 2 / Table tab:partition column 1: the graph-native
+        """Paper 33 sec. 4 / Table tab:census column 1: the graph-native
         scalar-photon baseline recovers EXACTLY 1/8 rules (Gaunt/CG only)."""
         tally = _scalar_fock_graph_tally(2)
         expected = {1: True, 2: False, 3: False, 4: False,
@@ -1212,7 +1212,7 @@ class TestCensusAggregates:
         assert sum(tally.values()) == 1
 
     def test_native_dirac_graph_census_is_4_of_8(self):
-        """Paper 33 sec. 3 / Table tab:partition column 2: the native Dirac
+        """Paper 33 sec. 4 / Table tab:census column 2: the native Dirac
         graph (Rule B) recovers EXACTLY 4/8 rules (Gaunt/CG, Delta m_j,
         spatial parity, Furry)."""
         tally = _native_dirac_graph_tally(2)

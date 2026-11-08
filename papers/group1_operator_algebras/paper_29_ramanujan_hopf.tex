@@ -56,7 +56,7 @@ the $S^5$ $N_{\max}=3$ zeta factors as $(s\pm 1)^{23}\cdot
 P_{12}(s^2)\cdot P_{22}(s^2)$, and the $12+22$ dichotomy is \emph{exactly}
 the $\mathbb{Z}_2$ $m_\ell\to-m_\ell$ block decomposition of the
 node-level Ihara--Bass matrix --- the only sub-action of the
-Paper~25~\cite{paper25} Hopf $U(1)$ that commutes with a real integer
+azimuthal $U(1)$ of the magnetic labels that commutes with a real integer
 adjacency.  The analogous $22+24$ decomposition holds for the
 Dirac-$S^3$ Rule B $n_{\max}=3$ graph under $m_j\to-m_j$; this magnetic
 reflection is a fixed-point-free (Kramers) graph automorphism, whereas
@@ -91,10 +91,10 @@ $\zeta(2)=\pi^2/6$ as a Dirichlet series of the Fock degeneracy lattice
 at the packing exponent $d_{\max}=4$;
 $\zeta(3)$ in the Dirac sector (the integer-$n$ degeneracy series
 $D_g(4) = 2\zeta(2) + 2\zeta(3)$ at $s=d_{\max}$;\ in the
-Camporesi--Higuchi series $D(s)$ it first appears at $D(5)$) and in flat-space QED
-sums~\cite{paper28};
+Camporesi--Higuchi series $D(s)$ it first appears at $D(5)$~\cite{paper28});
 Catalan's constant $G=\beta(2)$ and the Dirichlet $L$-value $\beta(4)$
-from two-loop vertex parity on $S^3$~\cite{paper28}; and
+from restricting the Dirac spectrum on $S^3$ to one parity
+class~\cite{paper28}; and
 the two-loop constant $S_{\min}\approx 2.47994$~\cite{paper28} (resolved in
 closed form in $\mathbb{Q}[\pi^2, \ln 2, \zeta(3), \zeta(5)]$;\ the earlier
 ``irreducible'' label was a basis-coverage artifact).
@@ -220,8 +220,7 @@ bound states, Paper~7~\cite{paper7}) and the five-sphere $S^5$ (the
 Bargmann--Segal projection for the 3D isotropic harmonic oscillator,
 Paper~24~\cite{paper24}).  Both carry Hopf-fibration structure
 ($S^1\hookrightarrow S^3\to S^2$ and $S^1\hookrightarrow S^5\to
-\mathbb{CP}^2$) and are the canonical discretizations referenced by
-Paper~25~\cite{paper25}.  They are the GeoVac instance of the
+\mathbb{CP}^2$).  They are the GeoVac instance of the
 Marcolli--van~Suijlekom gauge-network graph-spectral-triple
 framework~\cite{marcolli_vs2014} (with the Perez-Sanchez
 correction~\cite{perez_sanchez2025} on the continuum
@@ -268,9 +267,10 @@ $S^5$ Bargmann--Segal, $N_{\max}=3$ & 20 & 42 & 1 & 23 & 8 \\
 \caption{Combinatorial data for the graphs tested.  $V$: vertices.
 $E$: edges.  $c$: connected components.  $\beta_1=E-V+c$: first Betti
 number.  $q_{\max}=\max_v(d_v-1)$: Ramanujan bound parameter.  The
-$\beta_1=23$ at $S^5$ $N_{\max}=3$ agrees with the Paper~25 Hodge
+$\beta_1=23$ at $S^5$ $N_{\max}=3$ is consistent with the Hodge
 computation of $\beta_1=110$ for the same graph family at $N_{\max}=5$
-(the growth is roughly quadratic in $N_{\max}$).}
+in Paper~24~\cite{paper24} (the growth is roughly quadratic in
+$N_{\max}$).}
 \label{tab:combinatorics}
 \end{table}
 
@@ -421,8 +421,8 @@ Explicitly, $\det(M_{\text{sym}}) = (s-1)(s+1)\cdot P_{22}(s^2)$ on the
 $13$-dimensional symmetric block (containing the $m_\ell=0$ fixed
 points), and $\det(M_{\text{antisym}}) = P_{12}(s^2)$ on the
 $7$-dimensional antisymmetric block.  The $\mathbb{Z}_2$ $m_\ell$-reflection
-is the only sub-action of the Paper~25~\cite{paper25} Hopf $U(1)$ that
-commutes with a real integer adjacency; the continuous $U(1)$ phase
+is the only sub-action of the azimuthal $U(1)$ of the magnetic labels
+that commutes with a real integer adjacency; the continuous $U(1)$ phase
 rotation reduces to this $\mathbb{Z}_2$ when the data is real.
 The analogous decomposition holds for the Dirac-$S^3$ Rule~B
 $n_{\max}=3$ graph, with the $22+24$ dichotomy corresponding to the
@@ -542,7 +542,7 @@ and~(\ref{eq:s5_nmax3_closed}), with these three classes of findings:
   whose zeros sit exactly on the critical Ramanujan circle
   $|s| = 1/\sqrt{q_{\max}}$, all live in $\mathbb{Q}(i)$. This is
   structurally consistent with the $\mathbb{Z}_2$
-  $m$-reflection sub-action of the Paper~25 Hopf $U(1)$
+  $m$-reflection sub-action of the azimuthal $U(1)$
   (Observation~\ref{obs:12_22}).
 \item Bulk (non-boundary) factors have non-abelian Galois groups:
   $S_3$ for the scalar $S^3$ cubics; $S_4$ for the Dirac-A
@@ -552,7 +552,7 @@ and~(\ref{eq:s5_nmax3_closed}), with these three classes of findings:
   expression over $\mathbb{Q}$. By Kronecker--Weber, these factors
   do not lie inside any cyclotomic field $\mathbb{Q}(\zeta_M)$.
 \end{enumerate}
-In particular, the Hopf $U(1)$ structure controls the $\mathbb{Z}_2$
+In particular, the azimuthal $U(1)$ of the magnetic labels controls the $\mathbb{Z}_2$
 \emph{block split} (Observation~\ref{obs:12_22}) but does not
 abelianize the Galois group inside each block.
 \end{observation}
@@ -721,13 +721,13 @@ is not.
 \label{sec:open_questions}
 % ===================================================================
 
-\paragraph{Extension to $N_{\max}=5$.}  The Paper~25 headline case
-for the $S^5$ Bargmann--Segal graph reports $V=56$, $E=165$,
+\paragraph{Extension to $N_{\max}=5$.}  Paper~24's headline case
+for the $S^5$ Bargmann--Segal graph has $V=56$, $E=165$,
 $\beta_1=110$.  The Hashimoto operator at that size is $2|E|=330$-dimensional
 -- a fully tractable numerical eigensolve.  Extending the Ramanujan
 verdict and the closed-form factorization to $N_{\max}=5$ would give
 three data points on the deviation's growth (already at $-0.357$
-for $N_{\max}=3$) and a headline match to Paper~25's Hodge data.
+for $N_{\max}=3$) and a headline match to Paper~24's Hodge data.
 
 \paragraph{Alon--Boppana asymptotics --- resolved (Sprint~2, RH-D).}
 Extending the Ramanujan verdict to $n_{\max},N_{\max}\in\{4,5\}$ in a
@@ -768,12 +768,12 @@ $m$-reflection block in exact sympy rational arithmetic.  The block
 decomposition reproduces $P_{12}$ and $P_{22}$ (scalar $S^5$
 $N_{\max}=3$) and $P_{22}$ and $P_{24}$ (Dirac-$S^3$ Rule~B
 $n_{\max}=3$) symbolically.  The $\mathbb{Z}_2$ reflection is the only
-sub-action of the Paper~25 Hopf $U(1)$ that commutes with a real
+sub-action of the azimuthal $U(1)$ that commutes with a real
 integer adjacency, and the mechanism is identical in scalar and spinor
 cases.  The Matsuura--Ohta Kazakov--Migdal / Ihara-zeta program on
 generic finite graphs~\cite{matsuura2025,matsuura_ohta2024_phases}
 provides a parallel direction in which gauge-theoretic duality
-structures on the graph may shadow-match the Hopf-$U(1)$ block
+structures on the graph may shadow-match the azimuthal-$U(1)$ block
 decomposition recorded here; the connection is noted as a forward
 pointer, not pursued in the present work.
 
@@ -840,7 +840,7 @@ first. Full sample-size caveats, KS p-values, and pair-correlation
 data in \texttt{debug/spectral\_zero\_stats\_memo.md}. Cross-sprint
 coherence: combined with Sprint~3 RH-J's closed-form identity
 $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$
-(Paper~28~\cite{paper28}, recent subsection), the $\chi_{-4}$
+(Paper~28~\cite{paper28}, Theorem~3), the $\chi_{-4}$
 Dirichlet-$L$ content sits inside a GUE-compatible spectral object.
 
 \paragraph{$\alpha^2$-weighted Ihara zeta on the Dirac-$S^3$ graph
@@ -943,36 +943,29 @@ is under independent verification at the time of writing; the
 irreducibility claim is unaffected either way.
 
 \paragraph{SU(2) Wilson lattice gauge on $S^3 = \mathrm{SU}(2)$
-(Sprint~4, RH-Q).}  A self-consistent non-abelian Wilson lattice
-gauge theory with gauge group $\mathrm{SU}(2)$ was constructed on
-the Fock-projected $S^3$ Coulomb Hopf graph, extending Paper~25's
-$U(1)$ Wilson--Hodge structure.  Link variables $U_e \in
-\mathrm{SU}(2)$ on directed edges; plaquettes are primitive
-closed non-backtracking walks (our Ihara cycles); action
+(Sprint~4, RH-Q).}  A Wilson lattice gauge theory with gauge group
+$\mathrm{SU}(2)$ on the Fock-projected $S^3$ Coulomb graph is worked
+out in Paper~30~\cite{paper30}.  Link variables $U_e \in
+\mathrm{SU}(2)$ sit on directed edges, the plaquettes are the graph's
+4-cycles, and the action is
 $S_W = \beta \sum_{\mathrm{plaq}} (1 - \tfrac{1}{2}\,\mathrm{Re}\,
-\mathrm{Tr}\,U_{\mathrm{plaq}})$; character expansion via
-$\mathrm{SU}(2)$ Haar.  Three structural results: (i)~Paper~25's
-$U(1)$ action is \emph{exactly} the maximal-torus limit of this
-$\mathrm{SU}(2)$ theory (diagonal $U_e$ reduce to $U(1)$ to machine
-precision), elevating the abelian construction to a Cartan
-projection of a genuinely non-abelian theory; (ii)~weak-coupling
-linearization around the trivial vacuum yields exactly the
-discrete Hodge-1 Laplacian $L_1 = B^T B$ of Paper~25 as the
-kinetic term, retroactively identifying $L_1$ as the
-$\mathrm{SU}(2)$ kinetic sector; (iii)~plaquette counts grow
-$(0, 0, 0) \to (2, 1, 1) \to (8, 7, 18)$ at length $(L=4, 6, 8)$
-for $n_{\max} = 2, 3, 4$; Monte-Carlo Wilson loops on $n_{\max}=3$
-at $\beta \in \{0.5, 1, 2, 5\}$ give
-$\langle W \rangle = 0.126, 0.158, 0.332, 0.681$, monotonic but
-without an area/perimeter-law crossover at this size (only one
-plaquette class exists).  This is a gauge-invariant, Haar-normalizable
-non-abelian lattice gauge theory on a compact finite graph; it is
+\mathrm{Tr}\,U_{\mathrm{plaq}})$.  Because the graph's adjacency
+preserves~$\ell$, each $\ell$-block is a planar grid whose 4-cycles form
+a basis of its cycle space, so the plaquette holonomies are independent
+Haar variables and the theory is the exactly solvable two-dimensional
+lattice gauge theory:\ a loop enclosing $A$ plaquettes has
+$\langle W \rangle = (I_2(\beta)/I_1(\beta))^{A}$, an area law by
+factorization that carries no confinement information.  The
+weak-coupling kinetic term is the curl form $B_2 B_2^{\top}$, which
+completes the edge Laplacian $L_1 = B^{\top} B$ to the Hodge-1
+Laplacian, and restricting the links to the maximal torus gives the
+compact $U(1)$ Wilson action (a statement about the action, not about
+the path integral).  This is a gauge-invariant, Haar-normalizable
+lattice gauge theory on a compact finite graph; it is
 \emph{not} a continuum Yang--Mills mass-gap result (the Millennium
 Problem is specifically about $\mathbb{R}^4$ continuum QFT with
-a non-abelian simple gauge group; our construction is a discrete
-compact-graph version).  Module
-\texttt{geovac/su2\_wilson\_gauge.py} (26 tests);
-full analysis in \texttt{debug/su2\_wilson\_gauge\_memo.md}.
+a non-abelian simple gauge group).  Module
+\texttt{geovac/su2\_wilson\_gauge.py}.
 
 % ===================================================================
 \section{Conclusion}
@@ -996,7 +989,7 @@ $n_{\max}=3$ zetas are, by direct verification, the $\mathbb{Z}_2$
 $m$-reflection blocks of the node-level Ihara--Bass matrix
 (Observation~\ref{obs:12_22}); these connect back to Paper~7's SO(4)
 selection rules and to the real-integer-adjacency-compatible
-sub-action of Paper~25's Hopf-$U(1)$ gauge structure.  Neither graph
+sub-action of the azimuthal $U(1)$ of the magnetic labels.  Neither graph
 is regular, so the single-critical-circle Stark--Terras functional
 equation does not apply; what does hold uniformly is the
 $s\mapsto -s$ reflection and Galois closure of the zero set.
@@ -1015,8 +1008,8 @@ these results establish is a concrete bridge at small graph sizes:
 \emph{our} framework has an Euler product, a reflection symmetry
 $s\mapsto -s$ from bipartiteness, a critical region, and zeros that respect
 the Ramanujan bound at $n_{\max},N_{\max}\le 3$, plus a validated
-$\mathbb{Z}_2$ block-decomposition matching the Paper~25 Hopf
-structure.  The Sprint~2 search for a limiting bridge to classical
+$\mathbb{Z}_2$ block-decomposition matching the $m$-reflection of the
+magnetic labels.  The Sprint~2 search for a limiting bridge to classical
 $\zeta(s)$ (Track~RH-G) found that the bipartiteness of the GeoVac
 Hopf graphs blocks any Ihara-side bridge, and Sprint~4 (RH-O,
 \S\ref{sec:open_questions}) closed the direct spectral-side bridge as
@@ -1049,10 +1042,11 @@ Manifolds.}  GeoVac Project, ongoing.
 \bibitem{paper24} GeoVac Project.  \emph{Paper 24: The Bargmann--Segal
 Lattice: $\pi$-Free Discretization of the Harmonic Oscillator on
 $S^5$.}  GeoVac Project, 2026.
-\bibitem{paper25} GeoVac Project.  \emph{Paper 25: The Hopf Graph as a Lattice Gauge
-Structure.}  GeoVac Project, April 2026.
-\bibitem{paper28} GeoVac Project.  \emph{Paper 28: QED on $S^3$:
-Spectral Geometry of Perturbative Transcendentals.}  GeoVac Project,
+\bibitem{paper30} GeoVac Project.  \emph{Paper 30: Wilson Lattice Gauge
+Theory on the GeoVac Label Graphs: Exact Factorization on the Scalar Graph
+and Compact $U(1)$ on the Dirac Rule-B Graph.}  GeoVac Project, 2026.
+\bibitem{paper28} GeoVac Project.  \emph{Paper 28: Periods of Dirac
+Spectral Sums on $S^3$.}  GeoVac Project,
 April 2026.
 \bibitem{fock1935} V. Fock.  Zur Theorie des Wasserstoffatoms.
 \emph{Z.\ Phys.}\ \textbf{98}, 145 (1935).
@@ -1101,7 +1095,7 @@ and duality in the fundamental Kazakov--Migdal model on the graph.
 arXiv:2403.07385 (2024).  Extends the Matsuura--Ohta
 Kazakov--Migdal / Ihara-zeta program to a duality structure on
 generic finite graphs; the duality may shadow-match the
-Hopf-$U(1)$ block decomposition documented in
+azimuthal-$U(1)$ block decomposition documented in
 Section~\ref{sec:closed_forms}.
 
 \bibitem{yakaboylu2024} E. Yakaboylu.  Hamiltonian for the

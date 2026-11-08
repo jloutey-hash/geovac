@@ -408,7 +408,7 @@ the continuum operator, not the graph (Paper~0) --- there are no
 transcendentals.  Matrix elements are rationals (or, at most,
 algebraic over $\Q$).  This has been checked across the corpus:
 verified explicitly on the unit $\sthree$ Coulomb spectrum (Paper~7),
-on the Hopf bundle gauge structure (Paper~25), on the Bargmann--Segal
+on the edge Laplacian of the label graph (Paper~30), on the Bargmann--Segal
 $\sfive$ Hardy lattice (Paper~24), and on the Tier-2 symbolic spin--orbit
 block of the qubit Hamiltonians (Paper~14).  The composed library as a whole
 is not so certified:\ its frozen-core, Phillips--Kleinman and cross-centre
@@ -538,12 +538,15 @@ independent of any empirical input, at the tier stated for each item:
     the Coulomb case) plus the $SO(4)$ hidden symmetry of the Coulomb
     problem (Paper~7).
   \item The Hopf bundle structure $\sthree \to S^2$ is forced by the
-    maximal-torus reduction of $SU(2) = \sthree$
-    (Paper~25)~\cite{loutey_paper25}.
+    maximal-torus reduction of $SU(2) = \sthree$;\ it is a one-centre
+    structure, whose fibre generator a second nucleus breaks
+    (Paper~2)~\cite{loutey_paper2}.
   \item The Camporesi--Higuchi Dirac sector is forced by the
     parallelizability of $\sthree$ (Paper~32)~\cite{loutey_paper32}.
-  \item The Wilson $SU(2)$ gauge structure is forced by the
-    non-abelian generalization of the abelian Hopf structure
+  \item The Wilson $SU(2)$ gauge structure is a natural choice, not a
+    forced one:\ a Wilson theory can be placed on any graph, and $SU(2)$
+    is natural because $\sthree = SU(2)$;\ on the scalar label graph it is
+    the exactly solvable two-dimensional lattice gauge theory
     (Paper~30)~\cite{loutey_paper30}.
   \item \gvc{sm-gauge-group-upgrade-b}{The Standard Model gauge group $U(1) \times SU(2) \times
     SU(3)$, as the truncation at $n \le 3$ of the complex-Hopf tower
@@ -573,8 +576,8 @@ outside any structural derivation it offers:
     $K = \pi(B + F - \Delta)$ have been established (B as Casimir
     trace, $F = \zeta(2)$ as Fock-Dirichlet, $\Delta = 1/40$ as
     Dirac mode degeneracy), but the combination rule itself remains
-    a numerical observation, not derived}.  Paper~2 is in the
-    Observations folder~\cite{loutey_paper2};\ twelve mechanisms
+    a numerical observation, not derived}.  Paper~2 records it as an
+    Observation~\cite{loutey_paper2};\ twelve mechanisms
     have been eliminated for a single-principle derivation of $K$.
   \item The Yukawa coupling values.  A 162-cell PSLQ sweep against
     low-coefficient pure-Tate periods returned zero hits.  The Yukawa Dirichlet ring lives
@@ -589,7 +592,7 @@ outside any structural derivation it offers:
   \item The cosmological constant.  The framework's CC formula
     $\Lambda_{\mathrm{cc}} = 6\phi(2)/\phi(1) \cdot \Lambda^2$
     inherits the standard $\sim 10^{120}$ fine-tuning problem
-    (Paper~51 G7).
+    (Paper~51~\S7.1).
 \end{itemize}
 
 \paragraph{Where the seam is theorem-bound.}
@@ -804,20 +807,21 @@ section gives one-line summaries.
     series (Papers~14/20);\ absolute Pauli
     multipliers are convention-sensitive ($1.33\times$ more than raw STO-3G,
     $76\times$ fewer than cc-pVDZ).
-  \item \textbf{Group~5 --- QED / gauge / SM} ($8$ papers).
-    Headline:\ SU(2) Wilson lattice gauge structure with
-    maximal-torus reduction to the U(1) of Paper~25, and exactly
-    factorizing Wilson loops (Paper~30);\ spectral-zeta theorems for QED
-    sums on $\sthree$ and the two-loop constant $S_{\min}$ identified in
-    closed form (Paper~28; its self-energy zero is a property of a
-    vertex model);\ GeoVac Bethe logarithms for the hydrogen Lamb shift,
-    whose $-0.534\%$ headline is the leading one-loop assembly with
-    literature logarithms (Paper~36).
-  \item \textbf{Group~6 --- Precision observations} ($4$ papers).
+  \item \textbf{Group~5 --- QED / gauge / SM} ($5$ papers).
+    Headline:\ Wilson lattice gauge theory on the label graphs, exactly
+    factorizing $SU(2)$ and compact $U(1)$ on the scalar graph and a
+    non-factorizing compact $U(1)$ on the Dirac Rule-B graph
+    (Paper~30);\ the periods of Dirac spectral sums on $\sthree$, with
+    the two-loop constant $S_{\min}$ identified in closed form (Paper~28;
+    its nested sums use a vertex model);\ the selection rules of the
+    physical vector-photon vertex (Paper~33).
+  \item \textbf{Group~6 --- Precision observations} ($5$ papers).
     Headline:\ five Roothaan autopsies decomposing observables into
     projection-chain contributions (Paper~34);\ time as projection
     (Paper~35);\ universal $S_B$ scaling on sparse lattices
-    (Paper~27).
+    (Paper~27);\ Coulomb-Sturmian Bethe logarithms for the hydrogen Lamb
+    shift, whose $-0.534\%$ headline is the leading one-loop assembly with
+    literature logarithms (Paper~36).
 \end{itemize}
 
 The \texttt{papers/archive/} folder contains historical and
@@ -868,7 +872,7 @@ would require:
     obstruction;\ no line of attack is known.
   \item \textbf{The cosmological constant problem}.  Standard fine-tuning
     $\sim 10^{120}$ inherited from the Connes--Chamseddine spectral
-    action expansion (Paper~51 G7).  No GeoVac-specific resolution
+    action expansion (Paper~51~\S7.1).  No GeoVac-specific resolution
     proposed.
   \item \textbf{The chemistry correlation wall (W1e)}.  Multi-determinant FCI correlation
     in second-row and heavier diatomic binding is below the
@@ -908,7 +912,7 @@ would require:
     substrate or a time-dependent Camporesi--Higuchi spectral triple,
     outside the discrete-substrate principle.  The closest GeoVac
     analog is the discrete-warped-substrate program of
-    Paper~51~\S G4-3 (named follow-on).
+    Paper~51~\S9 (the variable-warp cigar substrate).
   \item \textbf{Full Standard Model spectral triple}.  The Connes
     Standard Model on $\sthree$ alone was closed in May~2026 ---
     positive, but structurally thin;\ the genuine cross-manifold
@@ -977,14 +981,19 @@ observations).  The per-paper entries below are the second step.
     across central potentials);\ Paper~14 is the quantum-computing
     resource benchmarks.
   \item \textbf{The physicist (high-energy, gauge, SM)}.  Read
-    Papers~30, 25, 28, and 36.  Paper~30 is SU(2) Wilson on
-    $\sthree$;\ Paper~25 is the abelian-Hopf reduction;\ Paper~28 is
-    QED on $\sthree$;\ Paper~36 is the bound-state QED arc closing
-    the Lamb shift at $-0.534\%$ one-loop.
+    Papers~30, 28, and 36.  Paper~30 is Wilson lattice gauge theory on
+    the label graphs ($SU(2)$ and compact $U(1)$ on the scalar graph,
+    compact $U(1)$ on the Dirac Rule-B graph);\ Paper~28 determines the
+    periods of Dirac spectral sums on $\sthree$;\ Paper~36 assembles the hydrogen Lamb shift at
+    leading one-loop order ($-0.534\%$; textbook arithmetic, its GeoVac
+    content the Bethe logarithms).
   \item \textbf{The physicist (gravity)}.  Read Paper~51.  Spectral
-    action approach, two-term exact on $\sthree$;\ the
-    $S_{\mathrm{BH}} = A/4$ replica derivation was closed by the
-    replica-weight-harmless theorem.
+    action two-term exact on $\sthree$ (Chamseddine--Connes; an
+    alternative proof);\ the continuum $S_{\mathrm{BH}} = A/(4G)$ with the
+    action-route $G$, the induced-gravity statement of Susskind--Uglum and
+    Frolov--Fursaev;\ the new result is the convergence of the discrete
+    replica derivative on the spinor cone at fixed $t$, and the
+    end-to-end discrete entropy is open.
   \item \textbf{The quantum computing practitioner}.  Read Paper~14
     and Paper~20.  Pauli scaling, OpenFermion/Qiskit/PennyLane
     export, market test against published Gaussian baselines.
@@ -1126,8 +1135,8 @@ J.~Loutey, ``Paper 0: Geometric Packing and the Universal Constant
 $\kappa = -1/16$,'' GeoVac corpus (2026).
 
 \bibitem{loutey_paper2}
-J.~Loutey, ``Paper 2: $\alpha = K^{-1}$ as a spectral coincidence on
-the Fock-projected $\sthree$,'' GeoVac corpus (2026).
+J.~Loutey, ``The Fine Structure Constant as a Spectral Coincidence on
+the Three-Sphere,'' GeoVac Paper~2 (2026).
 
 \bibitem{loutey_paper7}
 J.~Loutey, ``Paper 7: The Dimensionless Vacuum on $\sthree$,''
@@ -1141,13 +1150,10 @@ Hydrogenic Bases,'' GeoVac corpus (2026).
 J.~Loutey, ``Paper 18: Exchange constants and the master Mellin
 engine,'' GeoVac corpus (2026).
 
-\bibitem{loutey_paper25}
-J.~Loutey, ``Paper 25: GeoVac Hopf graphs as discrete lattice-gauge
-structure,'' GeoVac corpus (2026).
-
 \bibitem{loutey_paper30}
-J.~Loutey, ``Paper 30: SU(2) Wilson lattice gauge on $\sthree =
-SU(2)$,'' GeoVac corpus (2026).
+J.~Loutey, ``Wilson Lattice Gauge Theory on the GeoVac Label Graphs:\
+Exact Factorization on the Scalar Graph and Compact $U(1)$ on the Dirac
+Rule-B Graph,'' GeoVac Paper~30 (2026).
 
 \bibitem{loutey_paper32}
 J.~Loutey, ``Paper 32: The GeoVac Spectral Triple,''

@@ -519,7 +519,7 @@ class TestMonteCarlo:
 
 
 # ---------------------------------------------------------------------------
-# 12. Paper 25 Sec. VII.A pins: Bargmann graph counts, plaquette census,
+# 12. Archived Paper 25 Sec. VII.A pins (N_max = 5 counts: Paper 24 sec:gauge-structure-reduced): Bargmann graph counts, plaquette census,
 #     and the CP^2-quotient negative (group5 cert finding E10).
 #     Reference data: debug/data/st_su3_plaquettes.json (Sprint ST-SU3)
 #     and debug/data/s5_graph_spectrum.json (Sprint 5 Track S5).
@@ -547,8 +547,8 @@ def _graph_counts(N_max):
 
 
 class TestPaper25S5Pins:
-    """Pins the ST-SU3 graph/plaquette census used by Paper 25 Sec. VII.A
-    and Paper 30's SU(3) remark (7,765 plaquettes at N_max = 3)."""
+    """Pins the ST-SU3 graph/plaquette census used by the archived Paper 25
+    Sec. VII.A (7,765 plaquettes at N_max = 3)."""
 
     def test_graph_counts(self):
         # (V, E, c, beta_1) per debug/data/st_su3_plaquettes.json
@@ -557,7 +557,7 @@ class TestPaper25S5Pins:
         assert _graph_counts(4) == (35, 90, 1, 56)
 
     def test_graph_counts_nmax5(self):
-        """Paper 25 Sec. VII.A: at N_max = 5 the Bargmann graph has
+        """Paper 24 sec:gauge-structure-reduced: at N_max = 5 the Bargmann graph has
         56 nodes, 165 edges, beta_1 = 110."""
         assert _graph_counts(5) == (56, 165, 1, 110)
 
@@ -599,7 +599,7 @@ class TestPaper25S5Pins:
 
 
 class TestPaper25CP2Quotient:
-    """Paper 25 Sec. VII.A, negative result: the m_l-quotient of the
+    """Archived Paper 25 Sec. VII.A (not carried into a live paper), negative result: the m_l-quotient of the
     Bargmann graph at N_max = 5 is NOT a CP^2 discretization.
 
     Pins (a) the 12-sector quotient Laplacian spectrum (multiplicity
@@ -615,7 +615,7 @@ class TestPaper25CP2Quotient:
     one-sided floor -- the LS fit itself beats it at 40.8%)."""
 
     # From debug/data/s5_graph_spectrum.json (multiplicity scheme),
-    # printed rounded in Paper 25 Sec. VII.A.
+    # printed rounded in the archived Paper 25 Sec. VII.A.
     QUOT_SPECTRUM = [
         0.0, 2.223909298693098, 4.869922893611419, 4.941588428412833,
         11.650776112948813, 12.10849084926421, 18.737405154015647,

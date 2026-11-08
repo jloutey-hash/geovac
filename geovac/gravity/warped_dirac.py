@@ -24,7 +24,7 @@ On flat polar 2D, D_{D^2}^2 = -nabla^2 (x) I_2 (rank-2 spinor bundle).
 The angular sector uses anti-periodic BC (fermionic), so the m_eff
 spectrum is half-integer-shifted.
 
-S^2 spinor spectrum (Camporesi-Higuchi 1996, Paper 28 sec 4.14):
+S^2 spinor spectrum (Camporesi-Higuchi 1996; Paper 51):
 
   |lambda_n^{S^2}| = (n + 1) / r_h
   g_n^Dirac = 4 (n + 1)

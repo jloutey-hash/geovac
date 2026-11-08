@@ -205,12 +205,12 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **20** | Resource Benchmarks | 37-system library, Gaussian comparison, `pip install` |
 | **23** | **Nuclear Shell Hamiltonians** | **Deuteron/He-4 qubit encoding, Fock rigidity theorem** |
 | 21 | Synthesis (archived) | S³ proof chain, exchange constants, research program |
-| **2** | **Fine Structure Constant** | **K = π(B + F − Δ) matches 1/α to 4.8×10⁻⁷ (its cubic's root to 8.8×10⁻⁸); three-sector spectral coincidence; Marcolli-vS gauge-network lineage; the combination rule is an Observation, not derived** |
+| **2** | **Fine Structure Constant** | **K = π(B + F − Δ) matches 1/α to 4.8×10⁻⁷ (its cubic's root to 8.8×10⁻⁸); ingredients are spectral data of S³; in a 1.92×10⁹-formula look-elsewhere search ten formulas match more closely; the combination rule is an Observation, not derived** |
 | 8-9 | Bond Sphere + Sturmian | Structural theorem (guardrail), SO(4) selection rules |
-| 25, 28, 30 | Hopf gauge / QED on S³ / SU(2) Wilson | Discrete lattice-gauge structure on the Hopf graph |
+| 28, 30 | Periods of Dirac spectral sums on S³ / Wilson lattice gauge theory | Wilson theory on the label graphs: exactly solvable on the scalar graph, compact U(1) on the Dirac Rule-B graph (Papers 25 and 41 archived into Paper 30) |
 | 29 | Ramanujan Hopf | Graph-RH for GeoVac Hopf graphs; Ihara zeta closed forms |
 | **32** | **Spectral Triple** | **Explicit construction; §VIII non-selection results and Observations (tally in the paper)** |
-| 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
+| 33, 36 | Selection rules of the vector-photon vertex / Hydrogen Lamb shift | physical vertex rule (ground state couples; Ward–Takahashi exact), the vertex model's 1+6+1 partition does not survive; leading one-loop Lamb shift assembled from standard expressions (−0.534%), Coulomb-Sturmian Bethe logarithms |
 | 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
 | **38** | **SU(2) state-space GH convergence** | **Unconditional for the commutative factor; compression/lifted-state proof, translation seminorm (see claims register)** |
 | 39, 40 | Tensor / Unified convergence | Same-manifold tensor case; extension to compact Lie groups (general-G convergence conditional; whether the Fejér-moment constant is group-independent is open) |
@@ -218,7 +218,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **45** | **Lorentzian degeneracy theorem** | **K⁺ compression annihilates the spatial Dirac; earlier convergence claim retracted 2026-06-09** |
 | 46–49 | Lorentzian metric arc (archived) | Archived 2026-09-14; norm-resolvent arrow + cocycle-deficit algebra survive |
 | 50 | CFT₃ partition function | Closed-form re-derivation of the continuum KPS F-theorem values |
-| 51, 53 | Gravity arc / flat-plane truncations | S³ spectral action two-term-exact; flat-plane state-space GH theorem, disk-with-cone open |
+| 51, 53 | Spinor-cone replica derivative / flat-plane truncations | convergent discrete replica derivative (Theorem L6); S³ spectral action two-term-exact (Chamseddine–Connes; alternative proof); flat-plane state-space GH theorem, disk-with-cone open |
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
 | **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
 | 57 | Forced/free seam | forced/free catalogue (per-entry status and counts: `docs/forced_free_seam.md`; door-indexed view: `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |

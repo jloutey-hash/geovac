@@ -1,7 +1,7 @@
 # Paper 36 Lamb-chain support (durable test backing)
 
 Backing module for `tests/test_paper36_lamb_chain.py`, which pins the
-Paper 36 (`papers/group5_qed_gauge/paper_36_bound_state_qed.tex`)
+Paper 36 (`papers/group6_precision_observations/paper_36_bound_state_qed.tex`)
 LS-1 -> LS-6a Lamb-shift chain (predicted 1052.19 MHz) and the
 GeoVac-native Sturmian Bethe logarithms.
 

@@ -119,14 +119,15 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
         "papers": [14, 16, 20, 23],
         "extra": ["synthesis/group4_quantum_computing_synthesis.tex"],
     },
-    # docs/qa/group5.done.md: Papers 2, 25, 28, 30, 33, 36, 41, 51 + synthesis.
+    # Papers 2, 28, 30, 33, 51 + synthesis (2026-11-07 restructure: 25 and 41 archived
+    # into 30, 36 moved to group6; docs/qa/group5.done.md still lists the old set).
     "group5": {
-        "papers": [2, 25, 28, 30, 33, 36, 41, 51],
+        "papers": [2, 28, 30, 33, 51],
         "extra": ["synthesis/group5_qed_gauge_synthesis.tex"],
     },
-    # docs/qa/group6.done.md: Papers 26, 27, 34, 35 + synthesis.
+    # Papers 26, 27, 34, 35, 36 + synthesis (36 moved from group5 2026-11-07).
     "group6": {
-        "papers": [26, 27, 34, 35],
+        "papers": [26, 27, 34, 35, 36],
         "extra": ["synthesis/group6_precision_observations_synthesis.tex"],
     },
     # docs/qa/synthesis.done.md: the field guide (PRIMARY) + all six group

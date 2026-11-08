@@ -327,8 +327,8 @@ def test_paper34_III5_sturmian_iv_closure_at_ell0(n):
 
 def test_paper34_III11_vector_photon_1_over_4pi():
     """Paper 34 §III.11 (sec:proj_vector_photon): transcendental signature
-    '1/(4 pi) per loop, identified as the S^2 Weyl exchange constant
-    of the Hopf base (Paper 33).'
+    '1/(4 pi), the normalization of spherical harmonics on the unit S^2
+    that the model's angular vertex carries (Paper 33).'
 
     Verifies the structural identity 1/Vol(S^2) = 1/(4 pi), tying this
     projection to the same unit-sphere volume slot as §III.2.

@@ -60,9 +60,9 @@ Consequences per family: rough (connection) eigenvalues are
 k(k+2) - 2 on the exact family and (k+1)^2 - 2 on the coclosed family.
 
 The +2 Ricci shift is a continuum curvature effect. GeoVac's
-combinatorial edge Laplacian L_1 = B^T B (Paper 25) has nonzero
-eigenvalues matching the scalar spectrum n^2 - 1, NOT the Hodge-1
-spectrum. The Ricci shift is absent from the graph.
+combinatorial edge Laplacian L_1 = B^T B has nonzero eigenvalues equal
+to those of the node Laplacian L_0 (algebraic; the n_max = 3 spectrum is
+in Paper 30 Sec. 4.3), NOT the Hodge-1 spectrum. The Ricci shift is absent from the graph.
 
 Radius scaling
 --------------
@@ -100,7 +100,7 @@ References
   on S^n and P^n(C)", Osaka J. Math. 15 (1978) 515-546.
 - R. Camporesi, "Harmonic analysis and propagators on homogeneous
   spaces", Phys. Rep. 196 (1990) 1-134.
-- GeoVac Paper 25 (Hopf gauge structure, edge Laplacian L_1 = B^T B).
+- GeoVac Paper 30 Sec. 4.2-4.3 (Wilson/graph-Hodge dictionary; edge Laplacian spectra).
 - GeoVac Paper 24 section III (pi-free rational certification pattern).
 - GeoVac Paper 18 (exchange constant taxonomy).
 """

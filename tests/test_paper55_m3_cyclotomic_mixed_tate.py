@@ -56,6 +56,16 @@ from geovac.qed_vertex import (
 mpmath.mp.dps = 60
 
 
+@pytest.fixture(autouse=True)
+def _dps60():
+    """Each test starts at 60 dps: the module-level setting is lost when an
+    earlier test in the same xdist worker lowers mp.dps (flaky rhJ[5])."""
+    old = mpmath.mp.dps
+    mpmath.mp.dps = 60
+    yield
+    mpmath.mp.dps = old
+
+
 # ---------------------------------------------------------------------------
 # Tolerance for closed-form numerical equality (relative)
 # ---------------------------------------------------------------------------

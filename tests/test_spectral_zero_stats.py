@@ -43,7 +43,7 @@ def set_precision():
 
 
 def test_D_full_at_s_equal_4():
-    """D(4) = pi^2 - pi^4 / 12 (Paper 28, Table 1)."""
+    """D(4) = pi^2 - pi^4 / 12 (Paper 28, eq:D_full)."""
     val = D_full(4)
     ref = mpmath.pi ** 2 - mpmath.pi ** 4 / 12
     assert abs(val - ref) < 1e-30, \
@@ -61,7 +61,7 @@ def test_D_even_plus_D_odd_equals_D_full():
 
 
 def test_D_even_matches_paper28_formula():
-    """D_even(4) = pi^2/2 - pi^4/24 - 4G + 4*beta(4) (Paper 28 Eq. 13)."""
+    """D_even(4) = pi^2/2 - pi^4/24 - 4G + 4*beta(4) (Paper 28 eq:D_even_4)."""
     val = D_even(4)
     G = mpmath.catalan
     beta4 = (mpmath.hurwitz(4, mpmath.mpf(1) / 4)

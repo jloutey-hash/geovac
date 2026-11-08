@@ -12,13 +12,14 @@ At ANY finite truncation, BOTH the graph VP and the continuum VP are
 rational numbers (no pi).  The graph VP Tr(Pi_graph) is strictly richer
 than the continuum VP Pi_continuum_truncated because the graph CG
 projection from Dirac (n,kappa,m_j) states to Fock (n,l,m) states opens
-coupling channels that the SO(4) channel count W classifies as zero.
-At n_max_fock=2 (n_max_ch=1), the graph has Tr(Pi) = 224/75 while
-the continuum VP is exactly ZERO (the only allowed triple (1,1,1)
-has W=0).
+coupling channels outside the continuum vertex window.
+At n_max_fock=2 (n_max_ch=1), the graph has Tr(Pi) = 224/75 and the
+continuum VP is 73728/390625 (the single allowed triple (1,1,1) has
+W=2; corrected channel count, 2026-11-07 -- the old count gave W=0
+and a zero continuum VP here).
 
-The projection exchange constant at finite truncation (when both are
-nonzero, i.e. n_max_fock >= 3) IS RATIONAL.  Transcendental content
+The projection exchange constant at finite truncation (n_max_fock >= 2)
+IS RATIONAL.  Transcendental content
 (pi) enters ONLY via:
   (1) The infinite-sum regularization (Hurwitz zeta -> pi^{even})
   (2) Vol(S^3) = 2*pi^2 normalization for dimensionful quantities
@@ -116,37 +117,9 @@ def _vertex_allowed(n1: int, n2: int, q: int) -> bool:
 
 
 def _so4_channel_count(n1: int, n2: int, q: int) -> int:
-    """Count SO(4) vector harmonic channels (0, 1, or 2).
-
-    Uses the SU(2)_L x SU(2)_R triangle check consistent with
-    qed_vertex.so4_channel_count.
-    """
-    if not _vertex_allowed(n1, n2, q):
-        return 0
-
-    j1_L = Fraction(n1 + 1, 2)
-    j1_R = Fraction(n1, 2)
-    j2_L = Fraction(n2, 2)
-    j2_R = Fraction(n2 + 1, 2)
-
-    count = 0
-    # Component A: ((q+1)/2, (q-1)/2)
-    jg_L_A = Fraction(q + 1, 2)
-    jg_R_A = Fraction(q - 1, 2)
-    if (jg_R_A >= 0
-            and abs(j1_L - jg_L_A) <= j2_L <= j1_L + jg_L_A
-            and abs(j1_R - jg_R_A) <= j2_R <= j1_R + jg_R_A):
-        count += 1
-
-    # Component B: ((q-1)/2, (q+1)/2)
-    jg_L_B = Fraction(q - 1, 2)
-    jg_R_B = Fraction(q + 1, 2)
-    if (jg_L_B >= 0
-            and abs(j1_L - jg_L_B) <= j2_L <= j1_L + jg_L_B
-            and abs(j1_R - jg_R_B) <= j2_R <= j1_R + jg_R_B):
-        count += 1
-
-    return count
+    """SO(4) channel count (0, 1, or 2); single source qed_vertex.so4_channel_count."""
+    from geovac.qed_vertex import so4_channel_count
+    return so4_channel_count(n1, n2, q)
 
 
 # ---------------------------------------------------------------------------
@@ -224,9 +197,9 @@ def compute_projection_constant(
     At finite truncation, BOTH quantities are rational, so C is rational.
     Pi enters only in the infinite-sum limit.
 
-    NOTE: At n_max_fock=2 the continuum VP is zero (the only allowed
-    triple (1,1,1) has SO(4) channel count W=0), so the ratio is zero.
-    Use n_max_fock >= 3 for a meaningful projection constant.
+    NOTE (corrected channel count, 2026-11-07): at n_max_fock=2 the
+    single allowed triple (1,1,1) has W=2, so C = 6912/109375 there; the
+    old count gave W=0 and C=0.
     """
     n_max_ch = _n_max_ch_from_n_max_fock(n_max_fock)
 
@@ -263,8 +236,8 @@ def classify_projection_constant(n_max_fock: int = 3) -> Dict[str, str]:
 
     The central finding: at finite truncation, the projection constant
     is RATIONAL (no pi).  The graph VP is richer than the continuum VP
-    because the CG projection opens channels that W=0 in the SO(4)
-    channel counting.
+    because the CG projection opens channels outside the continuum
+    vertex window (where W=0).
 
     Pi enters only in:
     1. Infinite-sum regularization (Hurwitz zeta -> pi^{even})
@@ -438,7 +411,8 @@ def mode_ratio_analysis(n_max_fock: int = 3) -> Dict[str, Any]:
     TOTAL (trace) level.
 
     Key finding: at n_max_fock=2, the graph VP = 224/75 while the
-    continuum VP = 0.  This means the graph is strictly richer.
+    continuum VP = 73728/390625 (corrected channel count, 2026-11-07;
+    was 0).  The graph trace exceeds the continuum one.
     """
     n_max_ch = _n_max_ch_from_n_max_fock(n_max_fock)
 

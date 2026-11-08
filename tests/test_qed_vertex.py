@@ -515,12 +515,26 @@ class TestSO4ChannelCount:
         assert so4_channel_count(0, 0, 1) == 0
         assert so4_channel_count(1, 0, 1) == 0  # parity
 
-    def test_dipole_gives_one(self):
-        """Dipole (q=1) coupling has at most 1 channel per triple."""
+    def test_dipole_channel_count(self):
+        """Dipole (q=1): the window forces n1 = n2 >= 1, where both vector
+        components open (W = 2); W = 0 otherwise.  (Corrected W, 2026-11-07:
+        the old count gave W <= 1 here, every unit of it empty.)"""
         for n1 in range(6):
             for n2 in range(6):
                 W = so4_channel_count(n1, n2, 1)
-                assert W <= 1, f"Dipole at ({n1},{n2},1) should have W<=1, got {W}"
+                expected = 2 if (n1 == n2 and n1 >= 1) else 0
+                assert W == expected, f"Dipole at ({n1},{n2},1): W={W}, expected {expected}"
+
+    def test_W_is_twice_the_window(self):
+        """Corrected W (2026-11-07): W = 2 on every window triple and 0 off it.
+        Expected value from an independent window test (no geovac call)."""
+        for n1 in range(10):
+            for n2 in range(10):
+                for q in range(0, n1 + n2 + 3):
+                    win = (q >= 1 and abs(n1 - n2) <= q <= n1 + n2
+                           and (n1 + n2 + q) % 2 == 1)
+                    assert so4_channel_count(n1, n2, q) == (2 if win else 0), \
+                        f"W({n1},{n2},{q})"
 
     def test_higher_multipole_can_give_two(self):
         """Higher multipoles (q>=2) can have W=2."""
@@ -547,17 +561,16 @@ class TestSO4ChannelCount:
 class TestEffectivePairWeight:
     """Tests for the effective pair weight W_total(n1, n2)."""
 
-    def test_formula_2min_minus_1_minus_delta(self):
-        """W_total = 2*min(n1,n2) - 1 - delta_{n1,n2} for n1,n2 >= 1.
+    def test_formula_2min(self):
+        """W_total = 2*min(n1,n2) for all n1, n2 >= 0 (0 when min = 0).
 
-        Verified for all (n1, n2) up to 12.
+        Corrected W, 2026-11-07 (was 2*min - 1 - delta_{n1,n2} under the
+        old count).  Verified for all (n1, n2) up to 12.
         """
-        for n1 in range(1, 13):
-            for n2 in range(1, 13):
+        for n1 in range(0, 13):
+            for n2 in range(0, 13):
                 result = effective_pair_weight(n1, n2)
-                m = min(n1, n2)
-                delta = 1 if n1 == n2 else 0
-                expected = 2 * m - 1 - delta
+                expected = 2 * min(n1, n2)
                 assert result["W_total"] == expected, \
                     f"({n1},{n2}): W_total={result['W_total']}, expected={expected}"
 
@@ -572,7 +585,8 @@ class TestEffectivePairWeight:
     def test_ratio_approaches_two(self):
         """W_total/N_q -> 2 for large min(n1, n2)."""
         result = effective_pair_weight(50, 60)
-        assert abs(result["ratio"] - 2.0) < 0.05
+        # corrected W (2026-11-07): the ratio is exactly 2 at every pair
+        assert result["ratio"] == 2.0
 
 
 class TestWeightedVertex:
