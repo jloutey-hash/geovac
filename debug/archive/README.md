@@ -1,6 +1,7 @@
 # debug/archive/ — closed-arc sprint records
 
-Swept from `debug/` top level on 2026-06-10 (repo-hygiene sprint, v3.110.0). Everything
+Swept from `debug/` top level on 2026-06-10 (repo-hygiene sprint, v3.110.0) and again on 2026-11-08
+(v6.7.2, `archive_sweep_2026_11_08.py`, 2163 files; manifest `sweep_manifest_2026_11_08.json`). Everything
 here is preserved institutional memory: negative results, diagnostic arcs, and drivers
 for results that have since been consolidated into papers. Per CLAUDE.md §13.5, nothing
 in here is ever deleted.

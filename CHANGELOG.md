@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.2] - 2026-11-08
+
+**debug/ archive sweep (PI-directed, the last v6.7.0 owed item).** Repo hygiene only; no physics, paper or code
+change.
+
+### Changed
+- `debug/archive_sweep_2026_11_08.py` re-runs the 2026-06-10 sweep (same arc rules, imported) with cutoff
+  2026-10-28, keeping files referenced from tests/, geovac/, debug/qa/, docs/qa/ and .claude/. 2163 files moved
+  into `debug/archive/<arc>/`; manifest `debug/archive/sweep_manifest_2026_11_08.json` maps every old path.
+- Import-closure pass: 43 moved files were still imported by bare module name (two by `geovac/noci_engine.py`, two by
+  the S^(4) tests) or run by bare filename (six by tests); all moved back. Tests touching them pass (130 passed,
+  13 slow-only skips; Paper 58 NOCI 4/4).
+- debug/ top level 2681 -> 518 files (health budget 600).
+
 ## [v6.7.1] - 2026-11-08
 
 **Owed items from v6.7.0 closed (PI-directed), plus one owner LARGE found on the way.** Primary sources read by the

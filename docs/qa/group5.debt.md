@@ -318,5 +318,5 @@ All five "Still owed" items above are closed; full account in CHANGELOG v6.7.1.
 - Krauth 2017 is cited by name in Paper 34 (convention catalogue) with no bibitem; the -7141 ppm muH Zemach figure in
   the old memos is unverified. Citation hygiene, SMALL.
 - Hydrogen Lamb-shift autopsy (sec:autopsy_lamb) still reads "budget owed" (Paper 36's item, not group5's).
-- debug/ top-level sweep: separate hygiene commit.
+- (closed v6.7.2) debug/ top-level sweep: 2681 -> 518 files.
 
