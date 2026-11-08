@@ -102,3 +102,37 @@ the rule closes: the derivation is wrong) or an accidental zero (a channel the r
   the count.
 - For each of Paper 33's eight rules: holds, fails, or not decidable at stage A, with the triple that decides it.
 - Normalization, alpha, and the flat-space limit are stage B and are not attempted.
+
+## Outcome (scored 2026-11-07)
+
+**Verdict: GO. Controls C1-C4 pass; SA1-SA5 all HELD; no extras, no accidental zeros.** Exact arithmetic
+throughout. Driver `debug/vector_vertex_s3.py` sha256 `3e1284b16f9332f47ffd21995921c50ee777e8f74681c8ccb881a26182a72ef4`
+(route 1 `debug/vector_vertex_s3_route1.py` `eee1123d...cad8bf`; route 2 `debug/vector_vertex_s3_route2.py`
+`daa2296f...dcc1`, imports neither route 1 nor geovac); data `debug/data/vector_vertex_s3.json`; memo
+`debug/sprint_vector_vertex_s3_memo.md`. Re-run by the PM: same hashes, same scores, about 29 s.
+
+- Controls: C1 (route 2 fixes the constant term of D as -3/2, the only symmetric choice); C2 (eigenforms coclosed and
+  tangent by check, not imposition); C3 on the 28 model-window triples with the content `get_photon_channels`' own
+  caller passes; C4 on all 360 common cells (70 open), open/closed and exact sum_m |V|^2 agree. A 9j closed form for
+  sum_m |V|^2 matches brute force on all 896 cells.
+- Census: 168 of 896 cells open (44 ++, 44 --, 40 +-, 40 -+). Of 88 same-sign open cells, 32 lie outside the model
+  window, all at q = n1 + n2 + 1. The rule is invariant under the sign-convention mirror on all 896 cells.
+- SA4: sum over photon m of |<a| c(A) |a>|^2 at q = 1 is 1 for every n = 0 state, both routes.
+- Paper 33's rules against the physical vertex: 1 (triangle sparsity, Spin(4) form) holds; 2 (parity / ground-state
+  zero) fails; 3 (channel count) holds as representation theory, fails as the model W table; 4 (Delta m) holds;
+  5 (E1 parity, literal) fails; 6 (Ward) holds in Ward-Takahashi form <u, c(df) v> = (lambda_u - lambda_v)<u, f v>,
+  exact on 384 pairs; 7 (Furry) the V(a,a) = 0 mechanism fails, Furry itself undecidable at stage A; 8 (triangle
+  <= n1+n2-2) fails.
+- Sigma_phys(n_ext) (reported): the channel-count form converges about like 1/n_max; the squared-amplitude form
+  converges fast (n_ext = 0: 0.2669, 0.2702, 0.2715, 0.2719 at n_max = 3, 5, 8, 12, mu = q(q+2)). Exact rationals in
+  the JSON.
+
+**Found outside the record.** `geovac/qed_self_energy._so4_channel_count`, the W feeding eq:self_energy in code,
+pairs + content for n1 with - content for n2 and omits the integrality clause; inside the model window (n <= 3) it
+disagrees with the physical count at 9 triples, and every unit it counts is empty in representation theory. Theorem 4
+(empty sum) is unaffected; any model Sigma(n >= 1) value computed with it inherits the error. Also, mu_q = q(q+2) in
+eq:self_energy is not the coclosed Hodge eigenvalue (q+1)^2. Both are PM-verified by reading the code.
+
+**Loosely posed (no verdict changes):** the opposite-sign rule stated for (+,-) only ((-,+) is its transpose);
+SA3's vertex slot (scored both); C3's content convention; per-sign degeneracy and mu_q for Sigma; SA4's "an m" needs
+the components summed (for a D = - ground state only component B opens).
