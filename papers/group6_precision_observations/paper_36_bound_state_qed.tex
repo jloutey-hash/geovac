@@ -35,7 +35,9 @@ below the 2019 measurement of Bezginov \emph{et al.},
 not a measure of missing multi-loop physics: the one-loop
 $\alpha(Z\alpha)^5$ term alone, with coefficient
 $A_{50} = 4\pi(139/128 - \tfrac12\ln 2) \approx 9.29$, adds about
-$+6.9$~MHz, more than the residual.  The paper records three things.
+$+6.9$~MHz, more than the residual.  Adding every term the review
+tabulates gives $1057.824$~MHz, $0.020$~MHz below Lundeen--Pipkin and
+$0.005$~MHz below Bezginov \emph{et al.}  The paper records three things.
 First, an erratum: an earlier assembly used the self-energy constant
 $38/45$ in place of $10/9$.  The difference is exactly the Uehling
 coefficient $4/15$, which had been subtracted inside the self-energy
@@ -79,8 +81,8 @@ The $1052.19$~MHz headline is the leading one-loop assembly with
 tabulated Bethe logarithms.  It is not a GeoVac computation and does
 not compete with precision theory.  It omits the one-loop
 $\alpha(Z\alpha)^5$ term, the reduced-mass factors $(m_r/m)^3$ of the
-leading terms, recoil, the finite nuclear size, and all two-loop terms;
-the residual is therefore not attributed (Sec.~\ref{sec:residual}).
+leading terms, recoil, the finite nuclear size, and all two-loop terms,
+which are added from the review's tables in Sec.~\ref{sec:residual}.
 Nothing in the number uses the three-sphere: no Fock projection, no
 Dirac spectrum on $S^3$, no GeoVac label set.  What the paper adds is
 (i)~the erratum of Sec.~\ref{sec:eides}, (ii)~the Bethe logarithms of
@@ -105,7 +107,9 @@ arithmetic by the test file
 \texttt{tests/test\_paper36\_lamb\_chain.py}, which also recomputes
 (slow-marked) the Bethe logarithms from the Sturmian code in
 \texttt{tests/paper36\_lamb\_support/}.  The $\alpha(Z\alpha)^5$
-estimate is checked by \texttt{tests/test\_paper36\_a50\_term.py}.  The
+estimate is checked by \texttt{tests/test\_paper36\_a50\_term.py}, and
+the budget of Table~\ref{tab:budget}, with its closure on the review's
+Table~XX, by \texttt{tests/test\_paper36\_lamb\_budget.py}.  The
 two-loop model is \texttt{geovac/two\_loop\_self\_energy.py}.\par
 \fussy
 
@@ -204,23 +208,59 @@ Residual & $-32.78$ ($-3.10\%$) & $-5.65$ ($-0.534\%$) & \\
 \subsection{The residual}
 \label{sec:residual}
 
-The residual is not attributed.  The assembly is the leading
-$\alpha(Z\alpha)^4$ order only, at $m_r = m$.  The one-loop
+The assembly is the leading $\alpha(Z\alpha)^4$ order only, at
+$m_r = m$.  The terms it omits are all tabulated by Eides
+\emph{et al.}~\cite{eides2001}, and Table~\ref{tab:budget} adds them
+to the $2S_{1/2}$--$2P_{1/2}$ interval.  The largest is the one-loop
 $\alpha(Z\alpha)^5$ term,
 \begin{equation}
 \label{eq:a50}
 \Delta E(nS) = \frac{\alpha(Z\alpha)^5}{\pi n^3}\, m c^2\, A_{50},
 \qquad A_{50} = 4\pi\Bigl(\frac{139}{128} - \frac12\ln 2\Bigr) \approx 9.29,
 \end{equation}
-contributes about $+6.9$~MHz to the $2S$ level and by itself exceeds
-the residual; Eides \emph{et al.}\ give $+7.13$~MHz for the complete
-one-loop $\alpha(Z\alpha)^5$ correction to $2S$, including the
-polarization insertions~\cite{eides2001} (Table~III).  Recoil, the
-finite nuclear size, and two-loop terms enter besides, with either
-sign; the two-loop $\alpha^2(Z\alpha)^4$ entries of the same review sum to
-$+0.127$~MHz on $2S$ (Table~II).  An order-by-order budget is owed
-before any attribution.  An earlier decomposition of the residual into
-multi-loop and non-loop pieces is withdrawn.
+about $+6.9$~MHz on $2S$, or $+7.13$~MHz with the polarization
+insertion (Table~III of the review).  The $2S$ entries are the review's;
+the $2P_{1/2}$ entries are evaluated from its formulas (one-loop and
+anomalous-moment terms of Table~II, $A_{60}$ and the logarithmic
+$\alpha(Z\alpha)^6$ terms of Tables~IV and~V, recoil of Table~VIII,
+and the Barker--Glover $(Z\alpha)^4 (m/M)^2$ term).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l r l}
+\toprule
+Term & MHz & Source in~\cite{eides2001} \\
+\midrule
+One-loop $\alpha(Z\alpha)^4$ at $m_r = m$ (Sec.~\ref{sec:result}) & $+1052.193$ & Table~II \\
+Reduced-mass factors $(m_r/m)^3$ of the same terms & $-1.634$ & Table~II \\
+One-loop $\alpha(Z\alpha)^5$ & $+7.129$ & Table~III \\
+One-loop $\alpha(Z\alpha)^6$ & $-0.416$ & Tables~IV, V \\
+One-loop $\alpha(Z\alpha)^7$ & $+0.002$ & Tables~VI, VII \\
+Two- and three-loop $\alpha^n(Z\alpha)^4$, muonic and hadronic VP & $+0.101$ & Table~II \\
+Two-loop $\alpha^2(Z\alpha)^5$ and $\alpha^2(Z\alpha)^6$ & $-0.041$ & Tables~III, V \\
+Recoil, $(Z\alpha)^5 m/M$ and $(Z\alpha)^4 (m/M)^2$ & $+0.355$ & Table~VIII \\
+Radiative recoil & $-0.002$ & Table~IX \\
+Finite nuclear size, $r_p = 0.8409$~fm & $+0.138$ & Table~X \\
+\midrule
+\textbf{Theory} & $+1057.824$ & \\
+Lundeen--Pipkin~\cite{lundeen_pipkin1981} & $+1057.845(9)$ & \\
+Bezginov \emph{et al.}~\cite{bezginov2019} & $+1057.8298(32)$ & \\
+\bottomrule
+\end{tabular}
+\caption{Order-by-order budget of the $2S_{1/2}$--$2P_{1/2}$ interval.
+At the review's proton radius, $0.862$~fm, the same sum is
+$1057.8315$~MHz against its Table~XX value $1057.833(2)(4)$~MHz.
+Rows are rounded separately; the theory line is the unrounded sum.}
+\label{tab:budget}
+\end{table}
+
+The budget accounts for the residual.  The assembled theory lies
+$0.020$~MHz below Lundeen--Pipkin ($2.3\sigma$) and $0.005$~MHz below
+Bezginov \emph{et al.}\ ($1.7\sigma$); the review's own estimate of the
+uncalculated terms is $\pm 0.002$~MHz, and it predates later work on
+the two-loop terms~\cite{yerokhin2024_two_loop_se}.  None of the added
+terms is a GeoVac computation.  An earlier decomposition of the residual
+into multi-loop and non-loop pieces is withdrawn.
 
 % ===================================================================
 \section{Bethe logarithms in a Coulomb-Sturmian basis}
@@ -361,8 +401,10 @@ literature value, since the model has no finite value to compare.
 The leading one-loop assembly of the hydrogen Lamb shift with tabulated
 Bethe logarithms gives $1052.19$~MHz, $0.534\%$ below the
 Lundeen--Pipkin measurement.  The number is standard one-loop QED with
-literature inputs, and the residual is not attributed: the one-loop
-$\alpha(Z\alpha)^5$ term alone is about $+6.9$~MHz.  An earlier
+literature inputs.  The terms it omits, all tabulated by Eides
+\emph{et al.}, bring it to $1057.824$~MHz, within $0.020$~MHz of
+Lundeen--Pipkin; the one-loop $\alpha(Z\alpha)^5$ term alone is about
+$+7.1$~MHz of that.  An earlier
 version of the assembly double-counted the Uehling term, and the
 correction is exactly $(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha
 $= +27.13$~MHz.  Bethe logarithms computed from scratch in a

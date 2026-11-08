@@ -10226,6 +10226,41 @@ REGISTRY = [
             'papers/synthesis/group6_precision_observations_synthesis.tex': 'reviewed 2026-11-08 (owed items; global-fit framing and finite-size wording)',
         },
     },
+    {
+        "id": 'p36-lamb-budget-2026-11-08',
+        "pattern": r'Recoil\s+NLO\s+\(beyond\s+reduced-mass\)\s*&\s*\$-2\.40|not\s+attributed;\s+budget\s+owed|residual\s+is\s+(therefore\s+)?not\s+attributed|so\s+the\s+residual\s+is\s+not\s*\n?\s*attributed|Eides\s+\\S~?12\.1\.5|residual\s+not\s*\n?\s*attributed\s+\(one-loop',
+        "exempt_if_nearby": withdrawal_marker('p36-lamb-budget-2026-11-08'),
+        "severity": 'fail',
+        "scope": 'group6 synthesis',
+        "note": "Registered 2026-11-08 (owed items). The H 2S1/2-2P1/2 Lamb residual is now itemized from Eides-Grotch-Shelyuto Phys. Rep. 342 Tables II-X (Paper 36 tab:budget; closes on Table XX to 1.5 kHz; theory 1057.824 MHz at r_p = 0.8409 fm, 0.020 MHz below Lundeen-Pipkin). Retired: 'the residual is not attributed' / 'budget owed' for this interval, and Paper 34's 'Recoil NLO (beyond reduced-mass) -2.40 MHz' row, which had no source (its 'Eides Tab. 7.3' does not exist; the tabulated recoil is +0.355 MHz), and the 'Eides 12.1.5' decomposition with a hyperfine-averaging component.",
+        "files": [
+            'papers/group6_precision_observations/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/claims_register.md',
+            'papers/INDEX.md',
+        ],
+        "cited_by": {
+            'papers/group6_precision_observations/paper_34_projection_taxonomy.tex': 'reviewed 2026-11-08 (owed items; autopsy table and catalogue cell)',
+            'papers/group6_precision_observations/paper_35_time_as_projection.tex': 'reviewed 2026-11-08 (owed items; LS-6a residual sentence)',
+            'papers/synthesis/group6_precision_observations_synthesis.tex': 'reviewed 2026-11-08 (owed items; autopsy paragraph)',
+        },
+    },
+    {
+        "id": 'p34-muh-citations-2026-11-08',
+        "pattern": r'Krauth\s+full\s+theory|44\\?,?183|Literature\s+\(Karshenboim--Ivanov\)|Krauth\s+absorbs|Antognini-vs-Krauth|Antognini~?\s*2013\s+vs\s+Krauth|and\s+Krauth~?\s*2017|between\s+Krauth~?\s*2017|Krauth~?\s*2017,|Krauth~?\s*2017\s*\n?\s*and\s+Friar|No\s+reconciliation\s+against\s+Krauth|Friar\s+leading',
+        "exempt_if_nearby": withdrawal_marker('p34-muh-citations-2026-11-08'),
+        "severity": 'fail',
+        "scope": 'group6 synthesis',
+        "note": "Registered 2026-11-08 (owed items; primary sources read: arXiv:1706.00696, arXiv:1208.2637, arXiv:2305.09633, hep-ph/0109128). Retired: 'Krauth 2017' as a muonic-hydrogen itemization (it is a Moriond conference report with no component table); the 205.0282 vs 205.0074 meV VP split as 'Antognini vs Krauth' and unreconciled (both are Pachucki and Borie columns of Antognini 2013 Table I, reconciled there to 0.5 ppm); the muH 1S HFS reference 182.725 meV = 44 183 GHz, attributed to 'Krauth full theory' at one locus and to Karshenboim-Ivanov PLB 524, 259 at another (that paper treats H and He+, not muH; the value had no source; now Hagelstein-Lensky-Pascalutsa 2023, 182.640(18) meV); 'Friar leading' for the leading finite-size term.",
+        "files": [
+            'papers/group6_precision_observations/*.tex',
+            'papers/synthesis/*.tex',
+            'docs/claims_register.md',
+            'docs/atlas.md',
+            'papers/INDEX.md',
+        ],
+        "cited_by": {},
+    },
 ]
 
 

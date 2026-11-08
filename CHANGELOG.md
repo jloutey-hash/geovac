@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.3] - 2026-11-08
+
+**The two remaining owed items closed (PI-directed): the hydrogen Lamb-shift budget and the Krauth citations.** Both
+turned up owner defects. Primary sources read by the PM: Eides, Grotch and Shelyuto, Phys. Rep. 342 (2001) (Tables
+I-X, XX); Antognini et al., Ann. Phys. 331, 127 (2013) (arXiv:1208.2637, Table I and Sec. III A); Krauth et al.,
+arXiv:1706.00696 (2017); Krauth et al., Ann. Phys. 366, 168 (2016) (arXiv:1506.01298); Hagelstein, Lensky and
+Pascalutsa, Eur. Phys. J. C 83, 762 (2023) (arXiv:2305.09633); Karshenboim and Ivanov, Phys. Lett. B 524, 259 (2002)
+(hep-ph/0109128, record).
+
+### Added
+- Paper 36 Sec. "The residual": an order-by-order budget of the H 2S1/2-2P1/2 interval (tab:budget), every 2S entry
+  from Eides' tables and the 2P1/2 entries evaluated from its formulas. Theory 1057.824 MHz at r_p = 0.8409 fm,
+  0.020 MHz (2.3 sigma) below Lundeen-Pipkin and 0.005 MHz (1.7 sigma) below Bezginov; at the review's 0.862 fm the
+  sum is 1057.8315 MHz against its Table XX 1057.833(2)(4). The residual is no longer "not attributed".
+- `tests/test_paper36_lamb_budget.py` + `tests/paper36_lamb_support/lamb_budget.py` (6 tests), written after the fix
+  and fire-tested 6/6 (infinite-mass assembly, 2P alpha(Za)^6 sign, recoil -2.40 MHz, Barker-Glover dropped, 2P
+  anomalous moment dropped, finite size not rescaled).
+- C16 entries `p36-lamb-budget-2026-11-08` (fire 8 / silent 8) and `p34-muh-citations-2026-11-08` (fire 12 /
+  silent 12). Paper 34 bibitems for Antognini 2013 (Ann. Phys.), Krauth 2016, Krauth 2021, Hagelstein-Lensky-Pascalutsa
+  2023.
+
+### Fixed (owner LARGE)
+- Paper 34 tab:autopsy_lamb: the "Recoil NLO (beyond reduced-mass) -2.40 MHz" row had no source (its memo cited an
+  "Eides Tab. 7.3" that does not exist); the tabulated recoil is +0.355 MHz. Row withdrawn; the table now carries the
+  budget rows and closes at +0.020 MHz. The "Eides 12.1.5" decomposition sentence (with a hyperfine-averaging part)
+  replaced.
+- Paper 34 muH 1S HFS reference: 182.725 meV (= 44 183 GHz) was attributed to "Krauth full theory" in one locus and to
+  Karshenboim-Ivanov PLB 524, 259 in another; that paper treats H and 3He+, and no source for the value was found.
+  Re-anchored to Hagelstein-Lensky-Pascalutsa 2023, 182.640(18) meV: offprecision row -7689 -> -7227 ppm, autopsy
+  residual -0.77% -> -0.72%. The caption's claim that this residual is "the same LS-8a + recoil-mixing budget as
+  electronic H 21cm, scaled" is cut (the muonic residual is not itemized; the electron VP enters).
+- Paper 34 convention exposure sec:conv_muH_VP: the 205.0282 vs 205.0074 meV VP split is Borie vs Pachucki, both in
+  Antognini 2013 Table I, which reconciles them (205.0261 vs 205.0262 meV); it was printed as "Antognini vs Krauth 2017"
+  and unreconciled. Krauth 2017 (arXiv:1706.00696) is a conference report with no component table. Rewritten;
+  "Krauth 2017" in the compilation lists replaced by Krauth 2016 (muonic deuterium).
+- Paper 34: "Friar leading" for the muD leading finite-size term (missed by the v6.7.1 sweep).
+
+### Changed
+- Residual wording in Paper 35, the group6 synthesis and claims_register row 7. Claim-matrix rows added (P36, P34).
+
+### Open
+- The v6.7.2 debug/ sweep moved 208 files that papers cite by debug/ path (310 references in 21 papers; the
+  manifest resolves each). Raised to the PI.
+- The convention-exposure section's framing ("exposes itemization choices that single-observable analyses cannot
+  see") no longer holds for sec:conv_muH_VP, whose split is stated and reconciled in its source; owner re-read with
+  Pattern C at the next /qa.
+
 ## [v6.7.2] - 2026-11-08
 
 **debug/ archive sweep (PI-directed, the last v6.7.0 owed item).** Repo hygiene only; no physics, paper or code

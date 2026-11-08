@@ -320,3 +320,16 @@ All five "Still owed" items above are closed; full account in CHANGELOG v6.7.1.
 - Hydrogen Lamb-shift autopsy (sec:autopsy_lamb) still reads "budget owed" (Paper 36's item, not group5's).
 - (closed v6.7.2) debug/ top-level sweep: 2681 -> 518 files.
 
+## Owed items worked (2026-11-08, v6.7.3)
+
+Both items above closed; full account in CHANGELOG v6.7.3.
+- Lamb budget: Paper 36 tab:budget from Phys. Rep. 342 Tables I-X; theory 1057.824 MHz, closes on Table XX. Paper 34's
+  unsourced "recoil NLO -2.40 MHz" row withdrawn (owner LARGE).
+- Krauth: Krauth 2017 is a conference report; the VP split is Pachucki vs Borie inside Antognini 2013 (reconciled
+  there); the muH 1S HFS 182.725 meV had no source (now 182.640(18), Hagelstein-Lensky-Pascalutsa 2023). The -7141 ppm
+  memo figure appears in no paper.
+
+**Still owed.**
+- 208 paper-cited files moved by the v6.7.2 sweep (310 debug/ refs in 21 papers); PI decision.
+- sec:convention_exposures framing vs sec:conv_muH_VP (split stated in its source): owner re-read with Pattern C.
+

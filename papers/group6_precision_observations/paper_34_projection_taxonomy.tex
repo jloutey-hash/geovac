@@ -3740,11 +3740,11 @@ $m_p \to m_d$) $+$ Krauth Layer-2 (multi-loop QED $+$ recoil $+$
 Friar HO $+$ deuteron polarizability) & $Z, \alpha, m_\mu/m_e,
 m_d/m_e, r_d$ & energy & $\pi^2{\cdot}\mathbb{Q}$, calibration &
 $-0.12\%$ vs CREMA~2016 $+202.8785(34)$ meV (Pohl) \\
-$\mu$d 2$S$--2$P$ Friar leading $-27.85$ meV bare Eides at $r_d
+$\mu$d 2$S$--2$P$ leading finite size $-27.85$ meV bare Eides at $r_d
 = 2.1413$ fm (Roothaan Track 1) & Fock $\circ$ charge-density
 (\S\ref{sec:proj_charge_density}) $\circ$ rest-mass projection &
 $Z, \alpha, m_\mu/m_e, m_d/m_e, r_d$ & energy & calibration $+
-\pi^2{\cdot}\mathbb{Q}$ via $(Z\alpha)^4$ & $+0.024\%$ vs Krauth~2016
+\pi^2{\cdot}\mathbb{Q}$ via $(Z\alpha)^4$ & $+0.024\%$ vs Krauth~2016~\cite{krauth2016}
 $-27.84$ meV at $r_d$ (bit-tight; scaling
 $(m_\text{red}/m_e)^3 (r_d/r_p)^2 = 7.577$ reproduced to 4 digits) \\
 $\mu^4$He$^+$ 2$S$--2$P$ Uehling $+1665.77$ meV full kernel
@@ -4027,17 +4027,18 @@ $\ell>0$ case; sprint LS-4. \\
 Lamb shift $1057.85$ MHz (leading one-loop assembly, Paper~36) &
 textbook assembly: one-loop expressions of Eides \emph{et al.}\ with
 tabulated Drake--Swainson Bethe logarithms; no GeoVac projection enters
-& $-0.534\%$ (assembly $1052.19$~MHz) & residual not
-attributed (one-loop $\alpha(Z\alpha)^5$ omitted) & Components:
+& $-0.534\%$ (assembly $1052.19$~MHz) & residual itemized
+from Eides' tables; theory $1057.824$~MHz & Components:
 SE 2$S_{1/2}$ $+1066.44$~MHz (Bethe $+953.40$~MHz + canonical $10/9$
 piece $+113.04$~MHz); VP 2$S_{1/2}$ $-27.13$~MHz; SE 2$P_{1/2}$
 $-12.88$~MHz; VP 2$P_{1/2}$ $0$.  An earlier assembly used the
 constant $38/45$ in place of $10/9$ and double-counted the Uehling
 term; the correction is exactly $(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha
-$= +27.13$~MHz (Paper~36).  The residual is not attributed: the
-one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx 9.29$, about
-$+6.9$~MHz on 2S) is by itself larger than it, and an earlier
-decomposition into multi-loop and non-loop pieces is withdrawn
+$= +27.13$~MHz (Paper~36).  The residual is the terms the assembly
+omits, led by the one-loop $\alpha(Z\alpha)^5$ term ($A_{50} \approx
+9.29$, $+7.13$~MHz on 2S); with all of them from Eides' tables the
+theory is $1057.824$~MHz, $0.020$~MHz below experiment (Paper~36), and
+an earlier decomposition into multi-loop and non-loop pieces is withdrawn
 (Paper~36). \\
 Two-loop SE prefactor $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ on
 Dirac-$S^3$ (LS-7, structural) & Fock $\circ$ spectral action
@@ -4115,8 +4116,8 @@ vertex sector. \\
 $\mu$H 1S HFS $\nu_\text{HFS}(\mu p) = 181.32$ meV (BF + Schwinger +
 leading Zemach, Sprint MH Track B) & rest-mass projection $\circ$
 spinor $\circ$ Fermi contact $\circ$ Fock; magnetization-density
-Layer-2 input $r_Z = 1.045$~fm & $-7689$ ppm vs Krauth full theory
-182.725 meV & A (leading one-loop order only) + S (LS-8a wall, muonic regime)
+Layer-2 input $r_Z = 1.045$~fm & $-7227$ ppm vs the theory value
+$182.640(18)$~meV~\cite{hagelstein_lensky_pascalutsa2023} & A (leading one-loop order only) + S (LS-8a wall, muonic regime)
 & Dominant residual is expected to be electron-VP (Uehling) in the
 muonic potential, the leading muonic QED correction (the size of that
 correction is not sourced here).  Same LS-8a wall as HF-5; in
@@ -4648,7 +4649,7 @@ textbook assembly (entered flat-space $\Pi$, Eides self-energy
 bracket) $\circ$ \S\ref{sec:proj_restmass}
 $\circ$ \S\ref{sec:proj_charge_density}; \emph{no}
 \S\ref{sec:proj_magnetization_density} ($^4$He has $I=0$) &
-$-1.44\%$ vs CREMA 2021 $1378.521(48)$ meV (Krauth 2021,
+$-1.44\%$ vs CREMA 2021 $1378.521(48)$ meV (Krauth 2021~\cite{krauth2021},
 \emph{Nature} \textbf{589}, 527) &
 C (Diepold conventions: Friar HO absorbed into leading
 $\sim +11.4$ meV, $r_\alpha$ extraction $\sim +7$ meV) +
@@ -4694,10 +4695,10 @@ or perturbation order should be added next.
 The matches catalogue rows in \S\ref{sec:catalog} and
 \S\ref{sec:offprecision} each capture a single observable as a
 single row.  For observables that admit a multi-component literature
-decomposition --- e.g.\ Eides \S~12.1.5 for the hydrogen Lamb shift,
-where the standard $1057.85$ MHz value decomposes into one-loop SE,
-one-loop VP, multi-loop QED, finite nuclear size, recoil NLO, and
-hyperfine averaging --- the single-row treatment hides the structure
+decomposition --- e.g.\ the hydrogen Lamb shift, which the tables of
+Eides--Grotch--Shelyuto~2001 decompose into one-loop SE and VP order by
+order in $Z\alpha$, multi-loop QED, recoil, and finite nuclear
+size --- the single-row treatment hides the structure
 that the projection-chain dictionary makes visible.  This subsection
 hosts \emph{Roothaan autopsies}: decomposition tables that show each
 measured observable as a sum of focal-length-tagged components, with
@@ -4742,14 +4743,16 @@ textbook (zero at this order) & TA \\
 FNS $r_p$ contribution & $+0.138$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_spinor} $\circ$
 \textbf{\S\ref{sec:proj_charge_density}} $+$ Layer-2 $r_p$ & L2 \\
-Recoil NLO (beyond reduced-mass) & $-2.40$ &
-\S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_restmass} $\circ$
-\S\ref{sec:proj_breit_retardation} $+$ Layer-2 $R_{nl}$ & L2 \\
-One-loop $\alpha(Z\alpha)^5$ ($A_{50}$) & $\approx +6.9$ (not included) & --- & --- \\
+Reduced-mass factors $(m_r/m)^3$ & $-1.634$ &
+textbook (Eides Table~II) & TA \\
+One-loop $\alpha(Z\alpha)^5$, $\alpha(Z\alpha)^{6,7}$ & $+6.714$ &
+textbook (Eides Tables~III--VII) & TA \\
+Multi-loop & $+0.060$ & textbook (Eides Tables~II, III, V) & TA \\
+Recoil and radiative recoil & $+0.353$ & textbook (Eides Tables~VIII, IX) & TA \\
 \midrule
-\textbf{Sum of listed terms} & $+1049.93$ & & \\
+\textbf{Sum} & $+1057.824$ & & \\
 Experimental & $+1057.845(9)$ & & \\
-\textbf{Residual} & $+7.92$ & (not attributed; budget owed) & \\
+\textbf{Residual} & $+0.020$ & ($2.3\sigma$ of the measurement) & \\
 \bottomrule
 \end{tabular}
 \caption{Hydrogen $2S_{1/2}-2P_{1/2}$ Lamb shift Roothaan autopsy.
@@ -4767,8 +4770,12 @@ is a numerical device for computing Bethe logarithms, not used here).
 All entries are
 contributions to the $2S_{1/2}-2P_{1/2}$ splitting: the $2P_{1/2}$
 self-energy is a $-12.88$~MHz level shift, entering the splitting as
-$+12.88$~MHz.  Status: TA $=$ textbook assembly; L2 $=$ Layer-2 input.  Source memo:
-\texttt{debug/calc\_track\_LAR\_lamb\_autopsy\_memo.md}.}
+$+12.88$~MHz.  The rows below the finite-size row are the order-by-order
+budget of Paper~36 (Sec.~``The residual''), from the tables of
+Eides--Grotch--Shelyuto~2001; rows are rounded separately and the sum is
+unrounded.  An earlier ``recoil NLO'' row of $-2.40$~MHz had no source
+and is withdrawn; the tabulated recoil is $+0.355$~MHz.
+Status: TA $=$ textbook assembly; L2 $=$ Layer-2 input.}
 \label{tab:autopsy_lamb}
 \end{table}
 
@@ -4779,16 +4786,15 @@ averaging'' row of $\sim +5.00$~MHz, giving a subtotal of
 $+1057.19$~MHz ($99.9\%$); both rows are withdrawn (/qa group5,
 2026-11-07): the first came from the withdrawn LS-7 decomposition, and the
 second had no source, since the measured interval is defined between
-hyperfine centroids.  The one-loop $\alpha(Z\alpha)^5$ term
-($A_{50}\approx 9.29$, about $+6.9$~MHz) is not in the assembly, so the
-listed terms do not form a complete budget and the residual is not
-attributed (Paper~36).
+hyperfine centroids.  The terms the one-loop assembly omits, led by
+the one-loop $\alpha(Z\alpha)^5$ term ($A_{50}\approx 9.29$), are all
+tabulated by Eides \emph{et al.}; with them the sum is $1057.824$~MHz,
+$0.020$~MHz below Lundeen--Pipkin and $0.005$~MHz below Bezginov
+\emph{et al.}\ (Paper~36).
 
-\textbf{Structural reading.}  The leading one-loop components carry no
-GeoVac projection chain; only the FNS and recoil rows are stated in
-projection-chain language, as Layer-2 inputs.  A complete order-by-order
-budget is owed before the components can be compared with the
-measurement.
+\textbf{Structural reading.}  No component carries a GeoVac projection
+chain except the finite-size row, stated in projection-chain language
+as a Layer-2 input.  The autopsy closes on textbook bound-state QED.
 
 \subsubsection{Hydrogen 21~cm hyperfine autopsy}
 \label{sec:autopsy_21cm}
@@ -4981,16 +4987,16 @@ $-3.6752$, subtotal $+200.5027$, total $+202.1676$~meV, residual
 $-0.10\%$; contact-form Uehling too large by a factor $3.55$), which is
 archived-measured and not yet regression-gated.
 
-\textbf{Convention-mismatch surface.}  Antognini~2013 and Krauth~2017
-itemizations agree on the bottom-line total but differ at $\sim 100$
-ppm in per-component split (VP one-loop and SE-recoil aggregation).
-Specifically, Krauth absorbs $\sim 0.021$~meV of higher-order VP into the
-one-loop line ($+205.0282$~meV), while Antognini itemizes it separately
-as ``VP-VP mixed'' ($+0.150$~meV), with one-loop reported at
-$+205.0074$~meV.  The full-kernel $-0.10$~ppm match against Antognini
-is $1000\times$ tighter than the $102$~ppm Antognini-vs-Krauth gap.
-At this precision level the choice of Layer-2 reference compilation
-matters; this autopsy anchors throughout to Antognini~2013.  See
+\textbf{Itemization surface.}  Antognini~2013's theory table lists the
+one-loop electron VP by two routes~\cite{antognini2013_theory}:
+Pachucki's perturbative value, $+205.0074$~meV, with the relativistic
+correction listed separately, and Borie's all-order Dirac value,
+$+205.0282$~meV, which contains it.  Antognini reconciles them:
+$205.0074 + 0.018759 = 205.0262$~meV and $205.0282 - 0.002084 =
+205.0261$~meV.  The full-kernel $-0.10$~ppm match is to the perturbative
+line, so a comparison must pair it with that route; this autopsy uses
+it throughout.  (An earlier version attributed the $205.0282$~meV line
+to ``Krauth~2017'', a conference report with no such table.)  See
 \S~\ref{sec:convention_exposures} for catalogue context (entry
 \S~\ref{sec:conv_muH_VP}).
 
@@ -7349,10 +7355,12 @@ arc.
 (first muonic HFS; $r_Z(p)$ cross-link)}
 \label{sec:autopsy_muh_hfs}
 
-\textbf{Reference.}  $E_\text{HFS}(\mu\text{H},\,1S) = 182.725$ meV
-$= 44\,183$~GHz (Karshenboim--Ivanov 2002, \emph{Phys.\ Lett.\ B}
-\textbf{524}, 259; no direct experimental measurement --- muon lifetime
-$\tau_\mu = 2.2\,\mu$s prevents conventional precision HFS spectroscopy).
+\textbf{Reference.}  $E_\text{HFS}(\mu\text{H},\,1S) = 182.640(18)$~meV
+$= 44\,162$~GHz, the theory value of Hagelstein, Lensky and
+Pascalutsa~\cite{hagelstein_lensky_pascalutsa2023}; there is no
+measurement yet.  An earlier version printed $182.725$~meV and attributed
+it to Karshenboim--Ivanov 2002, whose paper treats ordinary hydrogen and
+the helium ion, not muonic hydrogen; the value had no source.
 \textbf{First muonic HFS entry in the catalogue.}  Creates the
 cross-link for $r_Z(p)$ identified in the cross-observable consistency
 matrix (Finding~5, May~31 2026).
@@ -7384,15 +7392,16 @@ $+$ Zemach $r_Z = 1.045$~fm (Eides--Grotch--Shelyuto 2007) & $\times(1 - 7340\te
 \midrule
 \textbf{Final (Eides $r_Z$)} & $+43\,842$ & & \\
 \textbf{Final (Karshenboim $r_Z = 1.054$)} & $+43\,839$ & & \\
-Literature (Karshenboim--Ivanov) & $+44\,183$ & & \\
-\textbf{Residual} & $-341$ & $= -0.77\%$; LS-8a $+$ recoil-mixing budget & \\
+Theory~\cite{hagelstein_lensky_pascalutsa2023} & $+44\,162$ & & \\
+\textbf{Residual} & $-320$ & $= -0.72\%$; not itemized & \\
 \bottomrule
 \end{tabular}
 \caption{Muonic hydrogen 1S HFS Roothaan autopsy.  First muonic HFS
 entry in the catalogue; creates the $r_Z(p)$ cross-link.  The
-$-0.77\%$ residual is the same LS-8a $+$ recoil-mixing budget as
-electronic H 21cm (\S\ref{sec:autopsy_21cm}), scaled to muonic mass.
-Source: \texttt{debug/muh\_hfs\_and\_na\_cliff.py}.}
+$-0.72\%$ residual is not itemized; it is not the electronic 21~cm
+budget scaled to muonic mass, since in the muonic atom the electron
+vacuum polarization enters (row ``$\mu$H 1S HFS'' of
+\S\ref{sec:offprecision}).  Source: \texttt{debug/muh\_hfs\_and\_na\_cliff.py}.}
 \label{tab:autopsy_muh_hfs}
 \end{table}
 
@@ -7531,7 +7540,7 @@ decomposing several observables with a single structural dictionary
 choices in standard-physics compilations that single-observable
 analyses cannot see.  This is the directive's class~(a) finding
 type --- ``literature convention mismatches'' between independent
-compilations (Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2017,
+compilations (Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2016~\cite{krauth2016},
 Pachucki--Yerokhin~2009, Antognini~2013)
 on Layer-2 itemization at the sub-percent precision the framework
 operates at.  Frameworks that consume single-observable Layer-2
@@ -7562,10 +7571,11 @@ ID & Observable & Source compilations & Convention difference &
 Magnitude & Sprint ref. \\
 \midrule
 \S\ref{sec:conv_muH_VP} & $\mu$H 2$S$-2$P$ VP one-loop &
-Antognini~2013 vs Krauth~2017 &
-absorption of higher-order VP into one-loop line vs separate
-``VP-VP mixed'' itemization &
-$\sim 100$ ppm in per-component split (totals agree) &
+Pachucki vs Borie, both in Antognini~2013 &
+relativistic correction listed separately vs contained in the all-order
+Dirac value &
+$\sim 100$ ppm in per-component split (reconciled in the source to
+$0.5$~ppm) &
 Sprint MH Track A / Calc-muH Lamb autopsy v1 \\
 \S\ref{sec:conv_karshenboim_recoil} & $\mu$ Lamb shift SE bracket &
 (withdrawn) &
@@ -7629,7 +7639,7 @@ Sub-sprint M-Z, 2026-05-23 \\
 \end{tabular}
 \end{table}
 
-\subsubsection{$\mu$H 2$S_{1/2}$--2$P_{1/2}$ VP one-loop split (Antognini vs Krauth)}
+\subsubsection{$\mu$H 2$S_{1/2}$--2$P_{1/2}$ VP one-loop split (Pachucki vs Borie)}
 \label{sec:conv_muH_VP}
 
 \textbf{Observable.}  Muonic hydrogen Lamb shift VP one-loop
@@ -7637,34 +7647,31 @@ component, the dominant ($\sim +205$~meV out of $+202.37$~meV total)
 contribution to the CREMA 2010 measurement.  Documented in the
 \S\ref{sec:autopsy_muh_lamb} Roothaan autopsy.
 
-\textbf{Source compilations.}  Antognini~2013 (the canonical
-muonic-hydrogen reference for CREMA Lamb-shift theory; used as the
-Layer-2 anchor in \S\ref{sec:autopsy_muh_lamb}) and Krauth~2017 (the
-canonical muonic-hydrogen reference for the parallel HFS measurement
-and the most thorough recent itemization).
+\textbf{Source compilations.}  Both routes are columns of one table,
+Table~I of Antognini~2013~\cite{antognini2013_theory}: Pachucki's
+perturbative evaluation and Borie's numerical solution of the Dirac
+equation with the Uehling potential.
 
-\textbf{Convention difference.}  Antognini reports VP one-loop at
-$+205.0074$~meV with ``VP-VP mixed'' itemized separately at
-$+0.150$~meV.  Krauth absorbs $\sim 0.021$~meV of higher-order VP
-into the one-loop line and reports $+205.0282$~meV.  Both compilations
-agree on the bottom-line $\mu$H Lamb total to printed precision; the
-difference is in per-component itemization.
+\textbf{Convention difference.}  Pachucki's one-loop line is
+$+205.0074$~meV, with the relativistic correction a separate item;
+Borie's all-order line, $+205.0282$~meV, contains it.  Antognini
+reconciles the two once the relativistic recoil correction is included
+($205.0262$ vs $205.0261$~meV).
 
-\textbf{Magnitude.}  $\sim 100$~ppm in per-component split (totals
-agree at much tighter precision).
+\textbf{Magnitude.}  $\sim 100$~ppm in per-component split; the
+reconciled values agree to $0.5$~ppm.
 
 \textbf{Sprint reference and closure.}  Sprint MH Track A
 (\S\ref{sec:offprecision}, row ``$\mu$H 2$S$--2$P$ Lamb shift'') and
-Sprint Calc-muH Lamb autopsy v1 (\S\ref{sec:autopsy_muh_lamb}) both
-operationally surfaced the convention difference: the framework's
-full-Uehling kernel matches Antognini~2013 at $-0.10$~ppm, which is
-$1000\times$ tighter than the Antognini-vs-Krauth $\sim 100$~ppm
-itemization gap.  This means the framework's match precision is
-sensitive to the choice of reference compilation for Layer-2 inputs.
-\textbf{Closure verdict:} anchored to Antognini~2013 throughout the
-$\mu$H Lamb autopsy.  No reconciliation against Krauth attempted at
-this time; flagged for future sprint if Krauth-anchored cross-checks
-become relevant.
+Sprint Calc-muH Lamb autopsy v1 (\S\ref{sec:autopsy_muh_lamb}) met the
+split because the full-Uehling kernel matches the perturbative line at
+$-0.10$~ppm.  The split and its reconciliation are in the source; the
+autopsy found nothing the source does not state.  An earlier version
+attributed the $205.0282$~meV line to ``Krauth~2017'', a conference
+report (arXiv:1706.00696) with no component table, and called the
+split unreconciled; both are withdrawn.
+\textbf{Closure verdict:} closed in the literature; the $\mu$H Lamb
+autopsy uses the perturbative line.
 
 \textbf{Cross-references.}  Originating documentation:
 \S\ref{sec:autopsy_muh_lamb} Convention-mismatch surface paragraph.
@@ -8501,7 +8508,7 @@ The exposures partition into \emph{four} structural classes.
 \S\ref{sec:conv_he_bethe_log},
 \S\ref{sec:conv_d_polarizability_mud_lamb}):
 four of the eight exposures (one of them, the muonium recoil
-aggregation, now withdrawn) are between Krauth~2017, Karshenboim~2005,
+aggregation, now withdrawn) are between Karshenboim~2005,
 Drake~1990 / Drake--Yan~1995, Pachucki--Yerokhin~2009,
 Antognini~2013, Carlson--Gorchtein--Vanderhaeghen~2014 / Carlson--Vanderhaeghen~2011 compilations on items at
 sub-percent precision.  The pattern is consistent: most precision-physics
@@ -8586,7 +8593,7 @@ observables.  The mechanism is structural: HFS observables decompose
 into many sub-leading Layer-2 corrections at sub-percent precision
 (leading Zemach, recoil, finite-size, multi-loop QED,
 polarizability, hadronic VP), each compiled differently across
-Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2017
+Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2016~\cite{krauth2016}
 and Friar--Payne~2005.  Sub-percent itemization differences
 compound at exactly the precision the framework operates at.  This
 suggests three pre-named candidate observables for the next
@@ -10496,6 +10503,28 @@ A. Antognini \emph{et al.},
 ``Proton structure from the measurement of $2S$--$2P$ transition
 frequencies of muonic hydrogen,''
 Science \textbf{339}, 417 (2013).
+
+\bibitem{antognini2013_theory}
+A. Antognini, F. Kottmann, F. Biraben, P. Indelicato, F. Nez, and R. Pohl,
+``Theory of the $2S$--$2P$ Lamb shift and $2S$ hyperfine splitting in
+muonic hydrogen,''
+Ann.\ Phys.\ \textbf{331}, 127 (2013); arXiv:1208.2637.
+
+\bibitem{krauth2016}
+J.~J. Krauth, M. Diepold, B. Franke, A. Antognini, F. Kottmann, and R. Pohl,
+``Theory of the $n=2$ levels in muonic deuterium,''
+Ann.\ Phys.\ \textbf{366}, 168 (2016); arXiv:1506.01298.
+
+\bibitem{krauth2021}
+J.~J. Krauth \emph{et al.},
+``Measuring the $\alpha$-particle charge radius with muonic helium-4 ions,''
+Nature \textbf{589}, 527 (2021).
+
+\bibitem{hagelstein_lensky_pascalutsa2023}
+F. Hagelstein, V. Lensky, and V. Pascalutsa,
+``Chiral perturbation theory of the hyperfine splitting in (muonic)
+hydrogen,''
+Eur.\ Phys.\ J.\ C \textbf{83}, 762 (2023); arXiv:2305.09633.
 
 \bibitem{friar_payne2005}
 J.~L. Friar and G.~L. Payne,
