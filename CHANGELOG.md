@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.1] - 2026-11-08
+
+**Owed items from v6.7.0 closed (PI-directed), plus one owner LARGE found on the way.** Primary sources read by the
+PM: Eides, Grotch and Shelyuto, Phys. Rep. 342, 63 (2001) (PDF text: Tables XII-XIV, XIX, Eqs. (168), (362), (364),
+(406), (409)) and Maron, Pantak and Pachucki, arXiv:2604.06930 (eqs. (94)-(96), (101)).
+
+### Fixed (owner LARGE: the W1b HFS "NLO" kernel)
+- arXiv:2604.06930 writes the finite-size term with the bare lepton mass, -2 Z alpha m r_Z (eq. 94), and adds
+  +2 Z alpha m r_Z m/(m+M) (eq. 96) "because r_Z is scaled here by the muon mass rather than the reduced mass": the
+  pair is the reduced-mass term. `magnetization_density` applied the factor on top of the reduced mass, so the muonic
+  helper gave -6657 ppm instead of -7340 ppm at r_Z = 1.045 fm. Paper 34's "reproduces Krauth 2017's full-theory
+  Zemach line to ~1% (vs ~3% overshoot at LO)" (two loci) was false: the code was 6.8% under the figure it quoted,
+  and Krauth 2017 has no bibitem. Fixed: the helper passes the bare muon mass with the flag on (both routes give
+  -7339.8 ppm); the flag is documented as bare-mass only; the paper says what the term does.
+- The "+(1/2)(Z alpha m_red)^2 <r^2>_(2) Friar moment correction" (delta_friar, attributed to Friar 1979 and an
+  Eides section) had no source; Phys. Rep. Eq. (364) gives a different (Z alpha)^2 term (log, charge radius,
+  opposite sign). Removed from the code and the paper.
+- Tests: the five tests that pinned the double-counted value or the removed term are replaced by an identity test
+  (bare-mass term + mixing term = reduced-mass term) and a profile-independence test; fire-tested 3/3 (double
+  count, sign flip, the removed term restored). 57 -> 53 tests.
+
+### Changed (owed items)
+- **"Friar moment" terminology swept.** The Friar moment is the third Zemach moment <r^3>_(2) of the (Z alpha)^5
+  term (Phys. Rep. Eq. (168)); Paper 34 used the name for the leading (Z alpha)^4 <r^2> Lamb term at 19 loci (now
+  "leading finite-size term"; the V.D.4 subsection is retitled "Finite-size profile convention"), Paper 23 for the
+  second moment of the magnetization profile (3 loci), the group6 synthesis at 3. Correct uses stand.
+- **Hydrogen 21 cm budget completed** from Phys. Rep. Table XIX. Assembly minus experiment, +18.4 ppm of E_F:
+  Breit factor omitted -79.9; alpha(Z alpha) binding terms omitted +96.2; remaining nonrecoil terms +7.2; a_e beyond
+  Schwinger +1.8; Zemach (1.045 fm kernel vs Table XIX) +2.9; recoil and smaller terms omitted -5.3; theory minus
+  experiment -4.5 (Eq. (409)). The component labelled "Bohr-Fermi Dirac" is nonrelativistic and is relabelled (also in the D, T and Li-7 autopsies); the
+  "Layer-2 net" quantity is cut; the gap-table footnote's "pre-existing inconsistency" was full a_e versus Schwinger.
+  The D HFS "+23.0 ppm to higher-order QED, an inference" now rests on the itemized +25.3 ppm.
+- **Zemach-radius extraction with a sourced budget:** r_Z(p) = 1.00(11) fm from the 21 cm interval (uncertainty =
+  the 4 ppm polarizability bound, Eq. (362)); the kernel equals the closed form, so this is the textbook extraction
+  through the framework's operator. No deuterium extraction: no sourced budget separates Zemach from polarizability.
+- **Pattern C re-read:** the falsifier paragraph contradicted itself (a refinement and a falsification for the same
+  outcome); restated. The V.D.1 gap is stated. The exposures were credited to "multi-observable global fits"; the only
+  global fit is withdrawn, so the wording is now "decomposing several observables" (Paper 34, group6 synthesis).
+- TX-A driver: vector_photon tagged as tab:projection_axes has it (none); only the axis printout moves.
+
+### Added
+- `tests/test_paper34_h21_budget.py` (4 tests): Table XIX closure, the assembly, every budget row from its source, the
+  extraction (rejects the circular 1.045 fm). Fire-tested 8/8.
+- C16 `p34-hfs-kernel-2026-11-08` (fire-tested: 16 retired forms fire, 14 corrected or nearby forms silent).
+
+### Still owed
+- Krauth 2017 is named in Paper 34's convention catalogue with no bibitem (citation hygiene, SMALL).
+- debug/ top-level sweep (separate hygiene commit).
+
 ## [v6.7.0] - 2026-11-08
 
 **MINOR (PI-approved, on recommendation): covers v6.6.1 (published numbers moved: Paper 30's sigma = -0.080 and

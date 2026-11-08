@@ -88,70 +88,36 @@ operators are diagonal in the same (n_e, l_e, m_e) x (n_p, l_p, m_p) Sturmian
 basis, and the joint operator V_eN + omega_magn is hermitian on the joint
 register.
 
-NLO recoil-mixing extension (May 2026, post-rZG-extended)
----------------------------------------------------------
+NLO recoil-mixing extension (May 2026; corrected 2026-11-08)
+-------------------------------------------------------------
 
-The leading-order kernel above is at ~5-10% precision in muonic systems
-because it omits the next-to-leading recoil-mixing term proportional to
-(m_l/m_n) * leading_Zemach.  This is a structural feature: in electronic
-hydrogen m_e/m_p ~ 5e-4 and the recoil-mixing is ~0.05% (negligible
-against the multi-loop QED budget); in muonic hydrogen m_mu/m_p ~ 0.113
-and the recoil-mixing is ~10% — the dominant systematic on the Zemach
-extraction.
+Maron, Pantak and Pachucki, arXiv:2604.06930 ("Recoil corrections to muH
+hyperfine splitting") write the finite-size term with the BARE lepton mass,
 
-The NLO formula, derived in arXiv:2604.06930 eq. (95) (Pachucki-style
-recoil + Zemach mixing) and consistent with Friar 1979 / Eides Tab. 7.4 /
-Karshenboim 2005, is:
+    delta_fns^(1) = -2 Z alpha m r_Z                          (their eq. 94)
 
-    delta_rec^(1) (recoil contribution to total HFS)
-        = (...) + 2 Z alpha m_red r_Z * (m_l / (m_l + m_n))
+and the leading recoil term carries the compensating piece
 
-The "+2 Z alpha m r_Z" term has OPPOSITE sign from the LO Zemach
-delta_fns^(1) = -2 Z alpha m r_Z, so the recoil-mixing PARTIALLY CANCELS
-the LO Zemach correction in the total HFS:
+    delta_rec^(1) = (...) + 2 Z alpha m r_Z * m/(m + M)       (their eq. 96)
 
-    Delta nu_Z^(total) / nu_F  =  Delta nu_Z^(LO) * (1 - m_l/(m_l+m_n))
-                                  + Friar moment correction
+"because r_Z is scaled here by the muon mass rather than the reduced mass".
+The two together are -2 Z alpha m_red r_Z: the mixing term only converts the
+bare-mass leading term to the reduced-mass one.
 
-Equivalently:
+The opt-in flag ``include_recoil_mixing`` adds that term,
+-Delta_LO * m_l/(m_l + m_n), and is meaningful only when ``lepton_mass`` is
+the BARE lepton mass.  With ``lepton_mass`` already the reduced mass the term
+double-counts the reduced-mass factor (the pre-2026-11-08 muonic helper did
+exactly this, giving -6657 ppm instead of -7340 ppm at r_Z = 1.045 fm).
+``muonic_hydrogen_zemach_eides_leading_order(include_recoil_mixing=True)``
+therefore passes the bare muon mass, and returns the reduced-mass result.
 
-    Delta nu_Z^(NLO recoil) / nu_F  =  +|Delta nu_Z^(LO)| * m_l/(m_l+m_n)
-                                    =  -Delta nu_Z^(LO) * m_l/(m_l+m_n)
-
-Cross-check against Krauth 2017 muH 1S HFS Tab. 1: framework LO Zemach
-at r_Z=1.045 fm gives -7340 ppm; Krauth's full Zemach line (which
-absorbs the recoil-mixing) gives -7141 ppm — framework LO OVERSHOOTS by
-~3% in absolute magnitude.  With NLO subtraction (~9% f_recoil in muH),
-framework matches Krauth full Zemach to 0.5% (sub-percent) — the W1b
-structural-extension closure flagged by Sprint Calc-rZG-extended.
-
-The factor m_l/(m_l+m_n) is the lepton mass fraction; for ep this is
-1/(1+M_p) ~ 5.45e-4 (negligible against the +18 ppm Eides multi-loop
-budget), for mup this is m_mu/(m_mu+m_p) = 0.0919 (the dominant
-systematic on the muH 1S HFS Zemach extraction in the LO kernel).
-
-The Friar moment correction (Friar 1979; Eides §6.2) at order (Z*alpha)^2:
-
-    Delta nu_Friar / nu_F  =  + (1/2) (Z alpha m_red)^2 <r^2>_{(2)}
-
-where <r^2>_{(2)} = M_2[rho_M] is the second radial moment of the
-magnetization profile.  For the proton at r_Z = 1.045 fm and Gaussian
-profile, <r^2>_{(2)} ~ 1.5/beta = 1.5 * pi * r_Z^2 / 4 ~ 1.18 r_Z^2.
-The Friar moment is positive, also reducing the absolute Zemach
-magnitude (further sub-leading correction beyond the recoil-mixing).
-
-The NLO extension is gated behind an opt-in flag ``include_recoil_mixing``
-on ``MagnetizationDensitySpec``.  Default ``False`` preserves the
-existing electronic regression bit-identical.  When set to ``True``,
-the operator-level shift becomes:
-
-    Delta nu_Z^total / nu_F = Delta_LO * (1 - f_recoil)
-                              + (1/2)(Z m_red)^2 <r^2>_{(2)}
-
-where f_recoil = m_l/(m_l+m_n).  Both NLO terms are profile-dependent at
-sub-leading order (rho_M's M_2 enters only at NLO and beyond; the LO
-recoil-mixing prefactor itself is profile-independent because it just
-rescales the LO M_1 = r_Z by f_recoil).
+A second term, "+(1/2)(Z alpha m_red)^2 <r^2>_(2)", attributed to Friar 1979
+and an Eides section, was removed 2026-11-08: no source gives it.  The
+(Z alpha)^2 nuclear-size HFS term in the sources has a different form:
+-(2/3)(Z alpha)^2 ln(Z alpha)^(-2) m^2 <r^2> E_F with the charge radius
+(Eides, Grotch and Shelyuto, Phys. Rep. 342, 63 (2001), Eq. (364)), and
+arXiv:2604.06930 eq. (101) for muH.  Neither is implemented here.
 
 Composition with W1a (cross_register_vne) is unchanged: the recoil-mixing
 extension lives inside the magnetization density operator and does NOT
@@ -165,11 +131,10 @@ References
 * Eides, Phys. Lett. B 759, 1 (2016); Eides 2024 PLB updates
   [doi:10.1016/j.physletb.2024.139049]
 * Karshenboim, Phys. Rep. 422, 1 (2005) (review)
-* Friar, Ann. Phys. 122, 151 (1979) (Zemach moment theorem; Friar moment
-  <r^2>_{(2)} convention)
+* Friar, Ann. Phys. 122, 151 (1979) (Zemach moments)
 * Friar & Payne, Phys. Rev. C 72, 014002 (2005) (deuteron r_Z)
-* arXiv:2604.06930 (Pachucki-style recoil + Zemach mixing eq. 93-95;
-  primary NLO reference for the recoil-mixing prefactor m_l/(m_l+m_n))
+* Maron, Pantak, Pachucki, arXiv:2604.06930 (eqs. 94, 96: bare-mass finite-size
+  term and the recoil piece that converts it to the reduced mass)
 * arXiv:2208.04025 (Antognini-Krauth-style recoil-finite-size for muonic H)
 * Bernauer (Mainz) 2014; Lin-Hammer-Meissner 2021 (form-factor parametrization)
 * Krauth et al., Hyperfine Interact. 242, 28 (2021) — full muH HFS theory
@@ -273,30 +238,13 @@ class MagnetizationDensitySpec:
         through the Pauli-string assembly, eliminating the manual scaling
         Track B (May 8, 2026) used in test scripts.
     include_recoil_mixing : bool
-        If True, include the next-to-leading-order recoil-mixing correction
-        and the Friar moment correction in the operator output.  Default
-        ``False`` preserves the Eides leading-order formula bit-identical
-        for backward compatibility with the existing electronic
-        regression and the calibrated -39.5 ppm Eides Sec. 11.1.1 target.
-
-        When ``True`` the operator-level shift becomes (May 2026 extension):
-
-            Delta nu_Z / nu_F  =  -2 Z m_red r_Z * (1 - m_l/(m_l + m_n))
-                                 + (1/2)(Z m_red)^2 <r^2>_{(2)}
-
-        The (1 - f_recoil) factor reflects that recoil-mixing PARTIALLY
-        CANCELS the LO Zemach (opposite-sign contribution to total HFS,
-        per arXiv:2604.06930 eq. 95 sign convention).  Friar moment
-        further reduces |Zemach| at sub-leading order.
-
-        Reference: arXiv:2604.06930 eq. (95) (NLO recoil-mixing prefactor
-        m_l/(m_l + m_n) with cancellation sign convention); Friar 1979 /
-        Eides §6.2 (Friar moment <r^2>_{(2)} coupling).  See module-level
-        docstring "NLO recoil-mixing extension" section.
-
-        Static-nucleus limit: as nucleon_mass -> infinity, m_l/(m_l+m_n) ->
-        0 and the NLO terms vanish, recovering the leading-order kernel
-        bit-identically (verified in tests).
+        If True, add the recoil-mixing term -Delta_LO * m_l/(m_l + m_n)
+        (arXiv:2604.06930 eq. 96), which converts a leading term written with
+        the BARE lepton mass into the reduced-mass form.  Use it only with
+        ``lepton_mass`` set to the bare lepton mass; with the reduced mass it
+        double-counts.  Default ``False`` preserves the leading-order formula
+        bit-identical.  Static-nucleus limit: as nucleon_mass -> infinity the
+        term vanishes (verified in tests).
     nucleon_mass : float, optional
         Nucleon (or generally, "other-register particle") rest mass in
         electron-mass atomic units.  Used only when ``include_recoil_mixing
@@ -308,10 +256,9 @@ class MagnetizationDensitySpec:
         For the canonical electronic-hydrogen case with lepton_mass=1.0
         and nucleon_mass=1836.15, the recoil-mixing factor is
         m_e/(m_e+m_p) = 5.45e-4 — completely negligible.
-        For muonic hydrogen (lepton_mass=m_red(mup)~185.84,
-        nucleon_mass=1836.15) the factor m_mu/(m_mu+m_p) = 0.10124 — the
-        ~10% correction that the leading-order kernel misses, structurally
-        diagnosed by Sprint Calc-rZG-extended (2026-05-09).
+        For muonic hydrogen with the bare muon mass (lepton_mass=206.77)
+        the factor m_mu/(m_mu+m_p) = 0.10124 takes the leading term to
+        the reduced-mass value.
     label : str
         Optional human-readable label.
 
@@ -614,49 +561,25 @@ def compute_magnetization_density_operator(
 
     # Higher moments (for sub-leading corrections; structural)
     M_0 = _rho_M_moment(spec, 0)  # = 1 by normalization
-    M_2 = _rho_M_moment(spec, 2)  # second moment, structural input for
-    # higher-order corrections (Friar moment <r^2> enters at order r_Z/a_0)
+    M_2 = _rho_M_moment(spec, 2)  # second moment (reported, not used)
 
     # ---- Eides leading-order shift (always present) ----
     delta_LO = -2.0 * Z * m_e_au * M_1
 
-    # ---- NLO recoil-mixing + Friar moment (May 2026 extension) ----
-    # Gated behind include_recoil_mixing flag.  Default False preserves
-    # leading-order behaviour bit-identical for backward compatibility.
+    # ---- recoil-mixing (opt-in) ----
+    # arXiv:2604.06930 eqs. 94 and 96: with the BARE lepton mass in delta_LO,
+    # the recoil term +2 Z alpha m r_Z m/(m+M) converts it to the reduced
+    # mass.  Meaningful only when lepton_mass is the bare mass (see the
+    # module docstring).
     if spec.include_recoil_mixing:
-        # Recoil-mixing prefactor m_l / (m_l + m_n).  Static-nucleus limit
-        # m_n -> infinity returns 0 (NLO vanishes; recover leading order).
-        # Reference: arXiv:2604.06930 eq. (95).
         f_recoil = spec.recoil_mixing_factor()
-        # NLO recoil-mixing: arXiv:2604.06930 eq. (95) reads
-        #     δ_rec^(1) = (...) + 2 Z alpha m r_Z * (m/(m+M))
-        # in the convention where δ_rec is the recoil contribution to the
-        # HFS shift TOTAL.  Note the +sign on the second term — opposite
-        # sign from the LO Zemach δ_fns^(1) = -2 Z alpha m r_Z.  So the
-        # recoil-mixing contribution to the *total HFS* is +|δ_LO|·f_recoil
-        # which CANCELS part of the LO Zemach (reduces the absolute Zemach
-        # magnitude by f_recoil).
-        # Equivalently: delta_NLO_recoil = -delta_LO * f_recoil
-        # (i.e., positive value when delta_LO is negative).
-        # Cross-check with Krauth 2017 Tab. 1: framework LO -7340 ppm
-        # vs Krauth full Zemach line -7141 ppm — framework OVERSHOOTS by
-        # 2.7%; recoil-mixing must REDUCE absolute magnitude.
         delta_NLO_recoil = -delta_LO * f_recoil
-
-        # Friar moment correction at order (Z*alpha m_red)^2 <r^2>_{(2)}.
-        # Friar 1979 / Eides §6.2 / Karshenboim 2005.
-        # In atomic units alpha = 1 (the alpha is absorbed into the (Z*m_red)^2
-        # prefactor on the same footing as in the leading-order formula).
-        # Sign: positive (the Friar moment further reduces the absolute
-        # magnitude of the negative Zemach correction at higher order).
-        delta_friar = +0.5 * (Z * m_e_au) ** 2 * M_2
     else:
         f_recoil = 0.0
         delta_NLO_recoil = 0.0
-        delta_friar = 0.0
 
     # Total relative shift
-    delta_nu_over_nu_F = delta_LO + delta_NLO_recoil + delta_friar
+    delta_nu_over_nu_F = delta_LO + delta_NLO_recoil
     delta_ppm = delta_nu_over_nu_F * 1.0e6
 
     # --- Build the matrix elements on (e, p) x (e', p') ---
@@ -672,7 +595,7 @@ def compute_magnetization_density_operator(
     # Diagonal matrix in the joint product basis
     # ME[i, j] = total_shift * delta_{i, k} delta_{j, l}
     # but only on s-states (l_e = 0) for the leading L=0 contribution
-    total_shift = delta_LO + delta_NLO_recoil + delta_friar
+    total_shift = delta_LO + delta_NLO_recoil
     M_diag = np.zeros((N_e, N_p), dtype=float)
     for i, (n_e, l_e, m_e) in enumerate(states_e):
         for j, (n_p, l_p, m_p) in enumerate(states_p):
@@ -738,8 +661,6 @@ def compute_magnetization_density_operator(
         'delta_LO_ppm': delta_LO * 1.0e6,
         'delta_NLO_recoil': delta_NLO_recoil,
         'delta_NLO_recoil_ppm': delta_NLO_recoil * 1.0e6,
-        'delta_friar': delta_friar,
-        'delta_friar_ppm': delta_friar * 1.0e6,
         'recoil_mixing_factor': f_recoil,
         'shifted_A_hf': spec.A_hf_point * (1.0 + delta_nu_over_nu_F),
         'metadata': {
@@ -785,7 +706,7 @@ def taylor_zemach_around_zero(
     spec : MagnetizationDensitySpec
     order : int
         Highest Taylor order to include.  order=1 reproduces Eides
-        leading-order; order=2 includes the Friar moment correction.
+        leading-order; order=2 adds the second-moment Taylor term.
 
     Returns
     -------
@@ -806,7 +727,7 @@ def taylor_zemach_around_zero(
     # Order 1: classical Eides
     order_1 = -2.0 * Z * m_e * r_Z
 
-    # Order 2: Friar moment <r^2> [from the Taylor expansion of the
+    # Order 2: second moment <r^2> [from the Taylor expansion of the
     # electron density |psi_1s(r)|^2 = (lam_e^3/pi) e^(-2 lam_e r) ~
     # (lam_e^3/pi) (1 - 2 lam_e r + 2 lam_e^2 r^2 - ...) at r ~ r_Z.
     # Convolution with rho_M gives the next-order correction
@@ -932,10 +853,9 @@ def hydrogen_zemach_eides_leading_order(
         1.0 (electronic Bohr).  For muonic H, set ~ M_RED_MUP so the
         lepton wavefunction is contracted to the muonic Bohr radius.
     include_recoil_mixing : bool
-        If True, include NLO recoil-mixing and Friar moment corrections
-        per arXiv:2604.06930 eq. (95) and Friar 1979.  Default False
-        preserves the Eides leading-order regression bit-identical.
-        See module docstring "NLO recoil-mixing extension".
+        If True, add the recoil-mixing term (arXiv:2604.06930 eq. 96);
+        lepton_mass must then be the bare lepton mass.  Default False
+        preserves the leading-order regression bit-identical.
     nucleon_mass : float, optional
         Nucleon mass in m_e atomic units (default proton 1836.15).
         Used only when include_recoil_mixing=True.  For deuteron set
@@ -946,9 +866,8 @@ def hydrogen_zemach_eides_leading_order(
     dict with operator_level_delta_ppm and the Eides regression check.
     For lepton_mass != 1, the eides_reference_ppm is rescaled by
     lepton_mass to give the corresponding lepton-system target.
-    With include_recoil_mixing=True, the dict additionally contains
-    'delta_LO_ppm', 'delta_NLO_recoil_ppm', and 'delta_friar_ppm'
-    breakdown components.
+    The dict also carries the 'delta_LO_ppm' and 'delta_NLO_recoil_ppm'
+    components.
     """
     proton_spec = CrossRegisterVneSpec(
         lam_e=lepton_focal_length, n_max_e=1,
@@ -983,7 +902,6 @@ def hydrogen_zemach_eides_leading_order(
         'operator_level_delta_ppm': op['delta_ppm'],
         'delta_LO_ppm': op['delta_LO_ppm'],
         'delta_NLO_recoil_ppm': op['delta_NLO_recoil_ppm'],
-        'delta_friar_ppm': op['delta_friar_ppm'],
         'recoil_mixing_factor': op['recoil_mixing_factor'],
         'eides_reference_ppm': eides_target_ppm,
         'residual_ppm': op['delta_ppm'] - eides_target_ppm,
@@ -1016,12 +934,10 @@ def muonic_hydrogen_zemach_eides_leading_order(
         Muonic-H reduced mass in m_e atomic units.  If None, uses CODATA
         2018 value m_red(mu p) = m_mu m_p / (m_mu + m_p) = 185.840 m_e.
     include_recoil_mixing : bool
-        If True, include NLO recoil-mixing per arXiv:2604.06930 eq. 95.
-        Default False reproduces Sprint MH Track B's manual Track-B
-        scaling (-7339.8 ppm at r_Z = 1.045 fm).  When True, the muonic
-        result includes the ~10% recoil-mixing correction that the LO
-        kernel misses in the muonic regime — closing the +0.22 fm
-        muH-alone offset diagnosed by Sprint Calc-rZG-extended.
+        If True, evaluate the leading term with the bare muon mass and add
+        the recoil-mixing term (arXiv:2604.06930 eqs. 94, 96); the sum
+        equals the reduced-mass leading term.  Default False uses the
+        reduced mass directly (-7339.8 ppm at r_Z = 1.045 fm).
 
     Returns
     -------
@@ -1029,7 +945,8 @@ def muonic_hydrogen_zemach_eides_leading_order(
     check.  At leading order: ~ -7339.8 ppm at r_Z = 1.045 fm, matching
     the Eides muonic target ~ -7300 ppm at the leading order (residual ~
     0.55%, attributable to sub-leading corrections).  With
-    include_recoil_mixing=True: ~ -8092 ppm (LO -7340 + NLO -753).
+    include_recoil_mixing=True: the same -7339.8 ppm (bare-mass LO -8166
+    plus recoil-mixing +827).
     """
     if m_red_mup is None:
         # CODATA 2018: m_mu/m_e = 206.7682830, m_p/m_e = 1836.15267343
@@ -1038,11 +955,22 @@ def muonic_hydrogen_zemach_eides_leading_order(
         m_red_mup = (M_MUON_OVER_M_E * M_PROTON_OVER_M_E_LOCAL) / (
             M_MUON_OVER_M_E + M_PROTON_OVER_M_E_LOCAL
         )
-    return hydrogen_zemach_eides_leading_order(
+    # With recoil-mixing the leading term takes the bare muon mass, and the
+    # mixing term restores the reduced mass (arXiv:2604.06930 eqs. 94, 96).
+    m_mu_bare = m_red_mup * NUCLEON_MASS_PROTON_DEFAULT / (
+        NUCLEON_MASS_PROTON_DEFAULT - m_red_mup
+    )
+    result = hydrogen_zemach_eides_leading_order(
         r_Z_bohr=r_Z_bohr,
         profile=profile,
-        lepton_mass=m_red_mup,
+        lepton_mass=m_mu_bare if include_recoil_mixing else m_red_mup,
         lepton_focal_length=m_red_mup,
         include_recoil_mixing=include_recoil_mixing,
         nucleon_mass=NUCLEON_MASS_PROTON_DEFAULT,
     )
+    # The reference is the reduced-mass leading term in both cases.
+    result['eides_reference_ppm'] = DELTA_NU_ZEMACH_EIDES_PPM * m_red_mup
+    result['residual_ppm'] = (
+        result['operator_level_delta_ppm'] - result['eides_reference_ppm']
+    )
+    return result

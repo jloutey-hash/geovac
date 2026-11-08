@@ -48,7 +48,7 @@ What the framework computes natively
      This is the genuine cross-scale calculation. The integral closes via
      the standard Pachucki form.
 
-3. Finite-size Friar moment: -5.1973 * r_p^2 meV for r_p in fm.
+3. Leading finite-size term: -5.1973 * r_p^2 meV for r_p in fm.
    Layer-2 input via the W1b magnetization-density operator (Phase C-W1b,
    geovac/magnetization_density.py).
 
@@ -361,9 +361,9 @@ def vp_full_uehling_lepton(n: int, l: int, Z: int, m_red_in_me: float) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Section 3: Friar moment finite-size shift
+# Section 3: leading finite-size shift
 # ---------------------------------------------------------------------------
-# The leading-order Friar moment shift on nS_{1/2} (l=0 only) is:
+# The leading finite-size shift on nS_{1/2} (l=0 only) is:
 #     Delta E_FNS(nS) = (2/3) (Z*alpha)^4 m_red^3 / n^3 * <r^2>_p
 # where <r^2>_p = r_p^2 (mean-square charge radius).
 #
@@ -375,7 +375,7 @@ def vp_full_uehling_lepton(n: int, l: int, Z: int, m_red_in_me: float) -> float:
 
 
 def friar_moment_shift_2S(r_p_fm: float, m_red_in_me: float, Z: int = 1) -> float:
-    """Leading-order Friar moment finite-nuclear-size shift on nS in meV.
+    """Leading finite-nuclear-size shift on nS in meV.
 
     Eides Eq. 2.35:
         DeltaE_FNS(nS) = (2 pi Z alpha / 3) * |psi_nS(0)|^2 * <r^2>_p
@@ -495,7 +495,7 @@ def compute_muonic_h_full_uehling() -> dict:
     SE_lamb_muonic = -(SE_2S - SE_2P)         # framework SE
     VP_lamb_muonic = -(VP_2S_full - VP_2P_full)  # framework full Uehling
 
-    # Finite-size (W1b leading-order, Friar moment, Layer-2 input r_p)
+    # Finite-size (leading order, Layer-2 input r_p)
     FNS_2S = friar_moment_shift_2S(R_P_FM, m_red_in_me=m_red, Z=Z)
     FNS_lamb_muonic = -(FNS_2S - 0.0)  # 2P has no contact contribution
 
@@ -603,7 +603,7 @@ def main() -> dict:
     print(f"  Framework-native components (muonic convention E(2P)-E(2S)):")
     print(f"    SE (muon, m_red scaling) = {full['SE_Lamb_muonic_meV']:+10.4f} meV")
     print(f"    VP (full Uehling)        = {full['VP_Lamb_muonic_meV']:+10.4f} meV")
-    print(f"    FNS (Friar moment)       = {full['FNS_Lamb_muonic_meV']:+10.4f} meV")
+    print(f"    FNS (leading)            = {full['FNS_Lamb_muonic_meV']:+10.4f} meV")
     print(f"    Framework total          = {full['framework_native_total_meV']:+10.4f} meV")
     print()
     print(f"  Cross-check vs Antognini 2013:")

@@ -301,3 +301,22 @@ is "none", so it is not a transcendental-only witness; the driver's stale "flow"
   driver's axis printout is not cited, so left.
 - debug/ top-level file count (2680 vs 600): archive sweep is a PI decision.
 
+## Owed items worked (2026-11-08, v6.7.1)
+
+All five "Still owed" items above are closed; full account in CHANGELOG v6.7.1.
+- "Friar moment" for the leading <r^2> Lamb term: swept (Paper 34, 19 loci; Paper 23, 3 loci of the HFS second moment;
+  group6 synthesis, 3; driver comments). Remaining uses name the third Zemach moment, correctly.
+- H 21 cm budget: itemized from Phys. Rep. 342 Table XIX; the +18.4 ppm is the omitted Breit (-79.9) and
+  alpha(Z alpha) binding (+96.2) terms plus small items. Zemach extraction r_Z(p) = 1.00(11) fm; no D extraction.
+- V.D.1 gap stated in the exposure catalogue; Pattern C falsifier paragraph made self-consistent; "global fit" framing
+  of the exposures removed (Paper 34, group6 synthesis).
+- TX-A driver: vector_photon tagged as the paper's axes table has it (none); counts unchanged.
+- Found on the way (owner LARGE): the W1b HFS "NLO" kernel double-counted the reduced mass in muH and carried an
+  unsourced second-moment term; "~1% to Krauth 2017" was false (the code gave 6.8% under). Code fixed, claim cut.
+
+**Still owed.**
+- Krauth 2017 is cited by name in Paper 34 (convention catalogue) with no bibitem; the -7141 ppm muH Zemach figure in
+  the old memos is unverified. Citation hygiene, SMALL.
+- Hydrogen Lamb-shift autopsy (sec:autopsy_lamb) still reads "budget owed" (Paper 36's item, not group5's).
+- debug/ top-level sweep: separate hygiene commit.
+

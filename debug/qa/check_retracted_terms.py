@@ -10202,6 +10202,30 @@ REGISTRY = [
             'papers/synthesis/group6_precision_observations_synthesis.tex': 'reviewed 2026-11-08 (follow-on; rZG exposure cut)',
         },
     },
+    {
+        "id": 'p34-hfs-kernel-2026-11-08',
+        "pattern": r'Krauth~?\s*2017\'s\s+full-theory|Friar\s+moment\s+correction|Friar\s+moment\s+\(closed-form\)|Friar\s+moment\s+leading|closed-form\s+Friar\)|closed-form\s+Friar\s+moment|Friar\s+moment\s+profile\s+convention|Bohr--Fermi\s+Dirac|pre-existing\s+inconsistency\s+this|\+18\.4\$~ppm\s+\(not\s+attributed\)|multi-observable\s+global\s+fits?\b|global\s+fit\s+of\s*\n?\s*several|\bdelta_friar\b|dominant\}?\s+systematic\s+in\s+the\s+muonic',
+        "exempt_if_nearby": withdrawal_marker('p34-hfs-kernel-2026-11-08'),
+        "severity": 'fail',
+        "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
+        "note": "Registered 2026-11-08 (owed items, primary sources read). Retired: the W1b HFS kernel's 'NLO' claims. arXiv:2604.06930 eqs. (94), (96) write the finite-size term with the bare lepton mass and add +2 Z alpha m r_Z m/(m+M), which only converts it to the reduced mass; the code applied that factor on top of the reduced mass (muH -6657 ppm, not -7340), so 'reproduces Krauth 2017's full-theory line to ~1%' was false (the code gave 6.8% under; Krauth 2017 has no bibitem). The '+(1/2)(Z alpha m_red)^2 <r^2>_(2)' 'Friar moment correction' (delta_friar) had no source; Phys. Rep. 342 Eq. (364) gives a different term. 'Friar moment' for the leading (Z alpha)^4 <r^2> Lamb term (the Friar moment is the third Zemach moment, Eq. (168)). H 21 cm: 'Bohr--Fermi Dirac' (the component is nonrelativistic; no Breit factor), the '+18.4 ppm (not attributed)' (now itemized from Table XIX: Breit -79.9, alpha(Z alpha) binding +96.2, ...), the gap-table footnote's 'pre-existing inconsistency' (it was full a_e vs Schwinger). 'multi-observable global fit(s)' as the source of the convention exposures (the only global fit was withdrawn).",
+        "files": [
+            'papers/group*/*.tex',
+            'papers/synthesis/*.tex',
+            'geovac/magnetization_density.py',
+            'tests/test_magnetization_density.py',
+            'docs/forced_free_seam.md',
+            'docs/atlas.md',
+            'docs/claims_register.md',
+            'README.md',
+            'papers/INDEX.md',
+        ],
+        "cited_by": {
+            'papers/group6_precision_observations/paper_34_projection_taxonomy.tex': 'reviewed 2026-11-08 (owed items; owner fix)',
+            'papers/group4_quantum_computing/paper_23_nuclear_shell.tex': 'reviewed 2026-11-08 (owed items; second-moment wording)',
+            'papers/synthesis/group6_precision_observations_synthesis.tex': 'reviewed 2026-11-08 (owed items; global-fit framing and finite-size wording)',
+        },
+    },
 ]
 
 

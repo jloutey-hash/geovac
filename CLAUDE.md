@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.0 (November 8, 2026)
+**Version:** v6.7.1 (November 8, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Owed items closed; HFS kernel double count fixed (2026-11-08, v6.7.1, PI-directed):** 21 cm budget itemized (Table XIX); r_Z(p) = 1.00(11) fm; Friar-moment wording; recoil-mixing restores reduced mass. CHANGELOG v6.7.1.
 - **Follow-ons; P34 rZG fit withdrawn, HFS budgets re-sourced (2026-11-08, v6.7.0, PI-approved, MINOR):** H point circular, D budgets unsourced; 21 cm residual unattributed; Eq. (158) pointers. CHANGELOG v6.7.0.
 - **group5 carry-forward worked (2026-11-08, v6.6.1, PI-approved):** P30 full-complex reruns retire sigma -0.080 and c 8.95; P34 TX-A computed 15x15, six rows; Eides Tab. 7.x pointers fixed. CHANGELOG v6.6.1.
 - **group5 restructured + guard pass; VV stage A GO; channel count fixed (2026-11-07, v6.6.0, PI-approved, MINOR):** ground state couples; W = 0/2, S^(3) moves; P30 absorbs 25/41; guards found 4 owner errors. CHANGELOG v6.6.0.

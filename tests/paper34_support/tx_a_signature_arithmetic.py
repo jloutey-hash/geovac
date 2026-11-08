@@ -190,8 +190,8 @@ PROJECTIONS = [
         "section": "III.11",
         "variables_added": [],
         "dimensions_added": [],  # solid angle, treated as dimensionless
-        "transcendental_class": ["one_over_4pi"],
-        "signature_pi_intrinsic": True,
+        "transcendental_class": ["rational"],  # tab:projection_axes: none; the 1/(4pi) is the vertex model's S^2 normalization, not the physical promotion's
+        "signature_pi_intrinsic": False,
         "graded": True,
         "idempotent": False,
         "has_inverse": False,
