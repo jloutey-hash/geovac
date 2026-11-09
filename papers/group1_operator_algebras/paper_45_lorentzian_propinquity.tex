@@ -24,8 +24,6 @@
 %   debug/l3b_2_sub_sprint_C_berezin_memo.md        (joint L4)
 %   debug/l3b_2_sub_sprint_D_propinquity_memo.md    (joint L5)
 %   debug/l3b_first_move_memo.md                    (L3b foundation)
-%   debug/l3a_1_lorentzian_operator_system_memo.md  (L1' / Paper 44)
-%   debug/l3b_2_preflight_concurrent_work_memo.md   (related-work)
 %
 % Honest scope: K+-restricted weak-form. Strong-form Lorentzian
 % propinquity (Latremoliere metric on Krein-signature spectral triples
@@ -1296,8 +1294,7 @@ seminorm $\opnorm{[\DL, \cdot]}$ is non-degenerate as a map but has
 kernel $30/42$ and $130/275$ — and already $10/14$, $26/55$ at
 $\Nt = 1$ with the truthful chirality-diagonal Camporesi--Higuchi
 spatial Dirac — so the kernel condition fails before restriction as
-well. Driver:\ \texttt{debug/p45\_kplus\_seminorm\_check.py};\ frozen
-regression test:\ \texttt{tests/test\_p45\_kplus\_degeneracy.py}.
+well. Frozen regression test:\ \texttt{tests/test\_p45\_kplus\_degeneracy.py}.
 \end{corollary}
 
 \subsection{Anatomy of the failed assembly}\label{sec:withdrawn_assembly}
@@ -1566,9 +1563,7 @@ cutoff, 2026-09-28.)
 
 \subsection{Verification panel}\label{sec:panel}
 
-The driver
-\texttt{debug/l3b\_2\_sub\_sprint\_D\_compute.py} (project repository)
-evaluates the panel
+A numerical computation evaluates the panel
 \begin{equation*}
    (\nmax, \Nt) \in \{(2, 1), (3, 1), (4, 1),\, (2, 3),\, (3, 5),\, (4, 7)\}
 \end{equation*}
@@ -1586,7 +1581,7 @@ inequalities of \S~\ref{sec:withdrawn_assembly} against the auxiliary
 classical-gradient ball.
 None of (i)--(iv) tests a metric statement;\ the operator-level
 content of the construction is tested instead by the annihilation
-falsifier \texttt{debug/p45\_kplus\_seminorm\_check.py}
+falsifier \texttt{tests/test\_p45\_kplus\_degeneracy.py}
 (Corollary~\ref{cor:annihilation_numerics}).
 
 The numerical results are tabulated in Table~\ref{tab:panel}
@@ -2191,20 +2186,15 @@ coefficient $c_{j'}/Z$. Unitality at $j' = 0$ is $c_{0} = \sum_j
 (2j+1) = Z$. Non-negativity and the upper bound follow since
 $\sigma$ is the symbol of a positive unital map. The $\nmax = 2$
 values are direct, and are verified bit-exactly against independent
-Weyl-integration quadrature in the repository
-(\texttt{debug/p45\_adversarial\_L2\_memo.md}). \qedhere
+Weyl-integration quadrature in the repository. \qedhere
 \end{proof}
 
 % =====================================================================
 \section{Numerical verification panel data}\label{app:panel}
 % =====================================================================
 
-The full numerical panel data tabulated in Table~\ref{tab:panel} is
-reproduced from the project repository
-(\texttt{debug/data/l3b\_2\_sub\_sprint\_D.json});\ the corresponding
-computational driver is
-\texttt{debug/l3b\_2\_sub\_sprint\_D\_compute.py}, and the production
-module is \texttt{geovac/lorentzian\_propinquity\_compact\_temporal.py}
+The production module behind the panel data tabulated in
+Table~\ref{tab:panel} is \texttt{geovac/lorentzian\_propinquity\_compact\_temporal.py}
 (approximately 700 lines, with the
 \texttt{LorentzianTunnelingPair} dataclass, the
 \texttt{LorentzianPropinquityBound} dataclass, the
@@ -2220,8 +2210,7 @@ asymptotic ratio, the $\Kplus$ compression algebra, the $\Nt = 1$
 formula reduction, and the monotone decrease in $\nmax$. The
 operator-level degeneracy of \S~\ref{sec:annihilation} is frozen as a
 separate falsifier in
-\texttt{tests/test\_p45\_kplus\_degeneracy.py} (driver
-\texttt{debug/p45\_kplus\_seminorm\_check.py}).
+\texttt{tests/test\_p45\_kplus\_degeneracy.py}.
 
 \medskip\noindent\textit{Convergence diagnostic.} The ratio
 $\Lprop(4, 7) / \Lprop(2, 3) = 1.3223 / 2.0746 = 0.6374$ matches the

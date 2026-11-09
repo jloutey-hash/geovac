@@ -330,6 +330,7 @@ Both items above closed; full account in CHANGELOG v6.7.3.
   memo figure appears in no paper.
 
 **Still owed.**
-- 208 paper-cited files moved by the v6.7.2 sweep (310 debug/ refs in 21 papers); PI decision.
+- 208 paper-cited files moved by the v6.7.2 sweep (310 debug/ refs in 21 papers): DONE 2026-11-08, v6.7.7 -- the
+  pointers were removed from the papers (CLAUDE.md Sec. 9 policy), not repointed.
 - sec:convention_exposures framing vs sec:conv_muH_VP (split stated in its source): owner re-read with Pattern C.
 

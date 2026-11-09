@@ -1023,29 +1023,7 @@ Eq.~\eqref{eq:pred2_universal} applies when one chooses a
 specific $H_1$ (including its cross-block contributions) and
 tracks both $\tilde{w}_B$ and $\delta_B$ for that choice.
 
-\paragraph*{Implementation.}  Drivers:
-\texttt{debug/ep2c\_entropy\_vs\_vee\_offdiag.py} (single-block
-pilot), \texttt{ep2c\_multi\_block.py} (multi-block),
-\texttt{ep2d\_zrange\_control.py} (Z-range control),
-\texttt{ep2f\_full\_library.py} (library + high-Z),
-\texttt{ep2e\_bond\_block.py} (bond-block divergence),
-\texttt{ep2g\_two\_variable\_scaling.py} (universal $w/\delta$
-scaling), \texttt{ep2h\_universality\_extension.py} (other
-bonds + $n_{\max}$ + bounded-form tests),
-\texttt{ep2i\_deep\_diagnostics.py} (BeH$_2$ cross-block
-decomposition, H$_2$O intrinsic offset,
-$\gamma(Z,n_{\max})$ surface),
-\texttt{ep2j\_li\_be\_extension.py} (3e/4e atoms,
-non-degeneracy qualifier),
-\texttt{ep2k\_heavy\_atom\_bond\_sweep.py} (HF, H$_2$O bond
-R-sweeps), \texttt{ep2L\_nmax5\_gamma.py} ($n_{\max}=5$
-asymptote and Richardson extrapolation),
-\texttt{ep2M\_two\_scale\_bounded.py} (rational, stretched-exp,
-Hill bounded-form fits, all negative),
-\texttt{ep2N\_be\_analytical.py} (Be $3\times 3$
-degenerate-PT diagonalization).  Data under
-\texttt{debug/data/ep2\{c,d,e,f,g,h,i\}\_*.json}; fits
-regression-locked by
+\paragraph*{Implementation.}  Fits are regression-locked by
 \texttt{tests/test\_paper27\_entropy.py::test\_paper27\_ep2c\_dimensionless\_power\_law},
 \texttt{::test\_paper27\_ep2c\_multi\_block\_z\_range\_control},
 \texttt{::test\_paper27\_ep2d\_z\_range\_artifact},
@@ -1062,8 +1040,7 @@ The information-theoretic entropy of \S\ref{sec:operator},
 $S_{\mathrm{full}} = S_{\mathrm{vN}}(\rho_1)$ of the ground state
 with $V_{ee}$ included, is the $T \to 0$ limit of the von Neumann entropy of
 the Gibbs spatial 1-RDM in standard quantum statistical mechanics.
-Sprint TD Track~2 (May 2026,
-\verb|debug/sprint_td_track2_memo.md|) verifies this operationally on
+Sprint TD Track~2 (May 2026) verifies this operationally on
 H, He, and Li$^+$ across 30 log-spaced temperatures spanning
 $0.005\times\mathrm{gap} \leq k_B T \leq 20\times\mathrm{gap}$, using
 the textbook Boltzmann-weighted ensemble over graph-native CI
@@ -1366,8 +1343,7 @@ GeoVac project data file:
 GeoVac project data file:
 \texttt{debug/data/ep2\_coulomb\_vs\_ho\_entropy.json};
 EP-2b follow-on
-\texttt{debug/data/ep2b\_ho\_two\_fermion.json} and driver
-\texttt{debug/ep2b\_ho\_two\_fermion.py}.
+\texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
 
 \bibitem{Moshinsky1996}
 M.~Moshinsky and Yu.~F.~Smirnov,

@@ -293,7 +293,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Computational verification protocol / Wall time and reproducibility": {
    "date": "2026-11-03",
-   "hash": "426143dfc8e7f6b1",
+   "hash": "311a19b2d0406524",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Conclusion and open questions": {
@@ -363,7 +364,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Lorentzian-readiness audit and Riemannian scope / Footnote on the Nieuviarts twist morphism": {
    "date": "2026-11-03",
-   "hash": "51d83a1c04c8df63",
+   "hash": "1f1e0199c46fa49c",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Lorentzian-readiness audit and Riemannian scope / The 28-projection Lorentzian transfer audit": {
@@ -483,7 +485,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Acknowledgments": {
    "date": "2026-11-03",
-   "hash": "1d95b6b09bd1e59b",
+   "hash": "f591da0e18154955",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Appendix: Section reference for the sec:propagation Sec. 5 context cro": {
@@ -538,7 +541,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Open questions (and the descoped Sprint L3b outlook) / Multi-focal-composition wall": {
    "date": "2026-11-03",
-   "hash": "b81656f32f72634b",
+   "hash": "4bab9a574434358b",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Riemannian limit at = 1": {
@@ -653,12 +657,14 @@
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification and Riemannian-limit recovery / Verification panel": {
    "date": "2026-11-03",
-   "hash": "7fd886d8a34c48ee",
+   "hash": "e0db2b00a9f26734",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification panel data": {
    "date": "2026-11-03",
-   "hash": "b771cd1d9f96ec45",
+   "hash": "a646cd47b322270f",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Preliminaries": {
@@ -703,7 +709,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Symbolic Plancherel calculation for the joint Fej 'er symbol": {
    "date": "2026-11-03",
-   "hash": "f0ccc432b1a33301",
+   "hash": "fc3dd7f5ef5dc6b5",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly": {
@@ -718,7 +725,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly / The annihilation theorem": {
    "date": "2026-11-03",
-   "hash": "3eb383b012b0d117",
+   "hash": "5e7b96160e2bfafb",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::The annihilation theorem and the failure of the compression assembly / The spatial convergence statement": {
@@ -798,12 +806,14 @@
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Closed-form match: Dirac": {
    "date": "2026-11-03",
-   "hash": "a239ab1da40a1a98",
+   "hash": "2c699d918d17601b",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Closed-form match: scalar": {
    "date": "2026-11-03",
-   "hash": "7d0da33d1e9a0909",
+   "hash": "cd0c3726f5baebe8",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Partition function: closed-form re-derivation of the KPS values / Continuum reference": {
@@ -858,7 +868,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable / The framework's wedge KMS entropy": {
    "date": "2026-11-03",
-   "hash": "292cda1e0c4a132b",
+   "hash": "5b62dc8a40b08943",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Wedge KMS entropy: state-side observable / Three blockers for literal Ryu--Takayanagi on the framework's graph": {
@@ -868,7 +879,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::front": {
    "date": "2026-11-03",
-   "hash": "e515c7d4f31fad7a",
+   "hash": "6ce38712755d71fc",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_53_disk_propinquity.tex::Acknowledgments": {

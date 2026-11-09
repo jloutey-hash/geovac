@@ -420,17 +420,16 @@ the sixth (and structurally cleanest) instance of the
 multi-focal-composition wall named in CLAUDE.md~\S~2.
 Projections~17--19 (nuclear charge-density / Foldy--Friar,
 magnetization-density / Zemach, and tensor multipole) were added in
-the intra-particle hunting sprint of 2026-05-09, after the audit
-memo \texttt{debug/paper34\_v\_base\_unit\_audit\_memo.md} flagged
+the intra-particle hunting sprint of 2026-05-09, after an audit
+flagged
 magnetization-density as a single 17th-projection candidate and the
 follow-up hunt established that the three mechanisms are
 categorically distinct (different Hamiltonian operators, different
-selection rules; documented in
-\texttt{debug/intra\_particle\_L\_hunting\_memo.md}).  A boundary
+selection rules).  A boundary
 subsection (\S~\ref{sec:layer2_boundary}) names the
 internal-graph-derived vs.\ Layer-2-input distinction, with the
 external-field hunting memo
-(\texttt{debug/external\_field\_hunting\_memo.md}, same date)
+(same date)
 verifying that uniform external classical fields (Zeeman, Stark) are
 Layer-2 inputs rather than \S~\ref{sec:layer2} projections.
 
@@ -767,12 +766,12 @@ extends this to spacetimes with bifurcate Killing horizons, including
 Schwarzschild at $\beta_{\mathrm{cigar}} = 8\pi M$ (for spacetimes
 admitting the requisite analytic continuation;\ the rigorous general
 result is Kay--Wald 1991~\cite{kay_wald1991}).  Sprint TD Track~4
-(\texttt{debug/sprint\_td\_track4\_memo.md}, May 2026) checks that this
+(May 2026) checks that this
 continuum $\beta = 8\pi M$ is consistent with, and re-expressed by, the
 framework's M1 ($k = 0$ volume slot) / $\mathrm{Vol}(S^1_\tau)$ reading;\
 it does not derive it:\ $M$ comes from the Einstein equations, and
 $\beta$ is posited by horizon regularity.  Track~D
-(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May 2026)
+(May 2026)
 documents the structural correspondence between the framework-side
 $2\pi$ and the Lorentzian-side modular-flow / boost-orbit period.
 The algebraic structure underwriting this reading is the
@@ -1074,7 +1073,7 @@ sub-percent reproduction requires a position-space electronic-density
 operator at the deuteron coordinate.  This is the named follow-on
 sprint \texttt{HD-EFG-position-space} (beyond sprint scale; analog of the
 W1a-D Roothaan recoil and \S\ref{sec:proj_magnetization_density}
-operator-level extensions).  Source: \texttt{debug/HD\_rotational\_HFS\_scoping\_track4\_memo.md}.\\
+operator-level extensions).\\
 \textbf{Structural reading.}  Categorically distinct from
 \S~\ref{sec:proj_charge_density} and
 \S~\ref{sec:proj_magnetization_density}: tensor coupling to a
@@ -1521,8 +1520,7 @@ $A_{SS}$ and $A_{SOO}$ are pure rationals at the angular level but
 showed they are convention-dependent identities specific to Drake's
 piecewise $M^K_{\rm dir,I} + M^K_{\rm dir,II}$ basis rather than a
 direct Racah-algebra output (a fully first-principles derivation
-remains open; see \texttt{debug/dd\_drake\_derivation.md} and
-\texttt{debug/dv\_drake\_bipolar\_memo.md}).  The bipolar harmonic
+remains open).  The bipolar harmonic
 projection \emph{itself} is closed; the open question is the basis
 change to Drake's specific $M^K$ partitioning.\\
 \textbf{Structural reading.}  Sibling of \S~\ref{sec:proj_3j}
@@ -2518,8 +2516,7 @@ period closure, not an identification.}\ The L1-named falsifier
 for a wedge-restricted Camporesi--Higuchi state, verify
 $\sigma_{2\pi} = $ identity at finite $n_{\max}$'') remains
 \emph{open}.  Sprint L1
-(\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
-Paper~32~\S~VIII.F, Paper~42~\cite{paper42}) \emph{posits} $K$ on the
+(Paper~32~\S~VIII.F, Paper~42~\cite{paper42}) \emph{posits} $K$ on the
 truncated CH spectral triple
 via the hemispheric-wedge BW-$\alpha$ geometric realization
 ($K = J_{\mathrm{polar}}$ with integer spectrum $\mathrm{two\_m}_j$
@@ -2551,7 +2548,7 @@ operator-system-level Lorentzian extension remains open.
 \textbf{Sprint L1-tighten (2026-05-16 evening):\ unified BW-$\alpha$/BW-$\gamma$
 closure.}\ The L1 closure above is at the geometric BW-$\alpha$ level
 (K = $J_{\mathrm{polar}}$ with integer spectrum). Sprint L1-tighten
-(\texttt{debug/l1\_tighten\_tomita\_results\_memo.md}, Paper~32~\S~VIII.F
+(Paper~32~\S~VIII.F
 extension) extends this to the full Tomita-Takesaki BW-$\gamma$
 construction:\ build $K_{\mathrm{TT}} = -\log \Delta$ from the polar
 decomposition $S = J_{\mathrm{TT}} \Delta^{1/2}$ on the GNS
@@ -2770,7 +2767,7 @@ and conditional on O0) and
 remains open per Paper~32~\S~VIII.D ``frontier-of-field framing.''
 Files:\ \verb|geovac/modular_hamiltonian_lorentzian.py|,
 \verb|tests/test_modular_hamiltonian_lorentzian.py| (74 fast + 3 slow,
-all pass), \verb|debug/l2_e_modular_hamiltonian_lorentzian_memo.md|.
+all pass).
 Paper~32~\S~VIII.E.E and Paper~42~\S~11 carry the synthesis
 writeup;\ the former standalone Paper~43 (Lorentzian-extension math.OA
 paper) was archived 2026-09-28 (\verb|papers/archive/|), and its
@@ -4053,7 +4050,7 @@ level} for two-loop content.  Weak test (the same prefactor appears in
 flat-space two-loop QED); the strong test, LS-8a's native
 derivation of the bracket, failed: the model two-loop sum grows without
 bound with its cutoff and contains no counterterms (Paper~36~\S~6).
-Sprint provenance: \texttt{debug/ls7\_two\_loop\_se\_memo.md}. \\
+\\
 He $2{}^3P_1$--$2{}^3P_2$ small interval $+2{,}231.16$~MHz (Drake-pattern
 Breit--Pauli + spinor; Sprint~3 BF-D + Sprint~4 DD + Sprint~5 CP) &
 spinor lift $\circ$ Wigner $3j$ ($6j$-coupled, Drake) $\circ$ Wigner $3j$
@@ -4265,8 +4262,7 @@ $Z=1$: the one-loop $\alpha(Z\alpha)^5$ term of the H budget, scaled by
 $Z^5$, is about $+228$~MHz at $Z=2$.  $I({}^4\text{He}) = 0$ identically
 zeroes the \S\ref{sec:proj_magnetization_density} channel (no HFS, no
 Zemach).
-Autopsy: \S\ref{sec:autopsy_he_plus_lamb}.  Source memo:
-\texttt{debug/he\_plus\_lamb\_autopsy\_track\_a\_memo.md}.  Sprint:
+Autopsy: \S\ref{sec:autopsy_he_plus_lamb}.  Sprint:
 2026-05-19. \\
 Mu 1S hyperfine framework Bohr--Fermi $+$ Schwinger one-loop
 $4464.1905$ MHz vs Liu~1999 $4463.302765(53)$ MHz & spinor lift
@@ -4344,7 +4340,7 @@ scales without a $\beta t$-dependent factor.  The structural fix is
 the standard \textbf{Hylleraas--Eckart double-zeta} extension (1933);
 catalogue residual stays at $+17.1\%$ (physical Hamiltonian; the
 earlier $+11.86\%$ was the withdrawn hop model) pending that extension.
-Source: \texttt{debug/hylleraas\_r12\_track1\_memo.md} \S3. \\
+\\
 Self-consistent $r_Z$ global extraction (Sprint Calc-rZG, 2026-05-09)
 & §III.18 magnetization-density global fit across H 21cm $+$
 $\mu$H 1S HFS $+$ D 1S HFS & \textbf{Withdrawn}: no extracted radius
@@ -4373,15 +4369,14 @@ Hawking temperature $T_H = 1/(8\pi M)$ on Schwarzschild cigar &
 Fock $\circ$ observation/temporal-window
 (\S~\ref{sec:proj_observation}) at $\beta = 8\pi M$ &
 machinery-witness only & C &
-Sprint TD Track~4 (\texttt{debug/sprint\_td\_track4\_memo.md},
-May~2026) checks the posited $\beta = 8\pi M$ against the M1
+Sprint TD Track~4 (May~2026) checks the posited $\beta = 8\pi M$ against the M1
 ($k = 0$) / $\mathrm{Vol}(S^1_\tau)$ reading; not a derivation (sympy
 residual zero on $\beta = 4M\cdot 2\pi$ cigar regularity, $T_H =
 \kappa_g/(2\pi)$, lowest bosonic Matsubara mode $1/(4M) = \kappa_g$
 surface gravity).  $M$ is external Einstein-equations input, not a
 framework calibration mismatch in the usual sense; the row is a
 machinery-witness, not a precision match.  Track~D
-(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md}, May~2026)
+(May~2026)
 documents the structural correspondence between the framework's M1
 $2\pi$ and the Bisognano--Wichmann modular-flow / Lorentz-boost
 orbit period via the standard Wick-rotation chain (Hartle--Hawking
@@ -4434,8 +4429,7 @@ Modular periodicity $\sigma_{2\pi}(O) = O$ on $\mathcal{T}_{n_{\max}}$ &
 $\beta = 2\pi / \kappa_g$;\ four-witness coincidence (by construction) &
 $1.8\times 10^{-16}$ at $n_{\max}=2$ rising to
 $1.6\times 10^{-15}$ at $n_{\max}=5$ (machine precision) & C &
-Sprint L1 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
-2026-05-16) constructs a posited wedge generator $K$ (O0 open) on the truncated
+Sprint L1 (2026-05-16) constructs a posited wedge generator $K$ (O0 open) on the truncated
 Camporesi--Higuchi spectral triple $\mathcal{T}_{n_{\max}}$ via the
 hemispheric-wedge BW-$\alpha$ geometric realization $K = J_{\mathrm{polar}}$
 and verifies the period closure $\sigma_{2\pi}(O) = O$ to machine
@@ -4465,8 +4459,7 @@ BH area-law entanglement &
 clean negative on naive $S \sim n_{\max}^2$:\
 $S \approx 1.944\, \log(n_{\max}) + 0.565$, $R^2 = 0.99991$ across
 $n_{\max} \in \{2, \dots, 7\}$ & C &
-Sprint BH-Phase0 (\texttt{debug/bh\_phase0\_diagnostic\_memo.md},
-2026-05-22) tests whether the modular-Hamiltonian construction of
+Sprint BH-Phase0 (2026-05-22) tests whether the modular-Hamiltonian construction of
 Papers~42--46 carries a Bekenstein--Hawking area-law signature at
 finite cutoff.  Verdict:\ NO at the wedge KMS state level.  $S(\rho_W)$
 scales logarithmically, NOT polynomially.  Structural reading:\
@@ -4528,9 +4521,7 @@ $+$ S (missing operator).  First molecular precision-catalogue entry.
 \textbf{Named follow-on}:\ Sprint \texttt{HD-EFG-position-space}
 (beyond sprint scale; analog of the W1a-D Roothaan recoil and
 \S~\ref{sec:proj_magnetization_density} operator-level extensions).
-Reference target: the measured value.  Sources:\
-\texttt{debug/HD\_rotational\_HFS\_autopsy\_track4.py},
-\texttt{debug/HD\_rotational\_HFS\_scoping\_track4\_memo.md}.
+Reference target: the measured value.
 See \S~\ref{sec:autopsy_HD_rotational_HFS} for the full autopsy
 table and the named follow-on architecture. \\
 \midrule
@@ -4577,8 +4568,7 @@ every $I$. \textbf{Named follow-on}: ab initio
 \texttt{geovac.neon\_core.screened\_psi\_origin\_squared} on
 no-frozen-core Z=2 system would give the framework-preferred unique
 value within the 10.5\% spread. Autopsy:
-\S\ref{sec:autopsy_he3_hfs}. Source memo:
-\texttt{debug/He3\_HFS\_autopsy\_track3\_memo.md}. \\
+\S\ref{sec:autopsy_he3_hfs}. \\
 \midrule
 Li-7 $2{}^2S_{1/2}$ HFS $\nu_\text{HFS}({}^7\text{Li}) = 289.13$ MHz
 (BF + Schwinger $a_e$ + recoil + leading Zemach with
@@ -4612,8 +4602,7 @@ framework-architecture entry (class~(iii); \S\ref{sec:conv_alkali_hfs}).
 HFS (closes Li atomic accuracy floor $1.10\%$ $\to$ sub-$0.1\%$
 \emph{and} the contact-density cliff simultaneously;
 \texttt{geovac/hylleraas\_r12.py} extension).  Autopsy:
-\S\ref{sec:autopsy_li7_hfs}.  Source memo:
-\texttt{debug/Li7\_HFS\_autopsy\_track5\_memo.md}. \\
+\S\ref{sec:autopsy_li7_hfs}. \\
 \midrule
 $\mu^4$He$^+$ 2$S$--2$P$ Lamb $+1358.66$ meV textbook assembly $+$ Layer-2
 (multi-track sprint Track B, 2026-05-19; full Roothaan autopsy in
@@ -4642,8 +4631,7 @@ Friar HO absorption ($\sim +11.4$ meV; flagged \S~V.D candidate),
 $r_\alpha$ extraction signal ($\sim +7$ meV; Diepold reference 1.681
 fm vs CREMA-extracted $1.67824(13)(82)$ fm), SE bracket recoil-mixing
 ($\sim +0.9$ meV; same Phase C-W1a target as $\mu$H $+24\%$, $\mu$d
-$+41\%$).  Source memo:
-\texttt{debug/mu\_he4\_lamb\_autopsy\_track\_b\_memo.md}. \\
+$+41\%$). \\
 \bottomrule
 \end{longtable}
 }
@@ -4793,8 +4781,7 @@ Experimental & $+1420.4058$ & (12-digit precision) & \\
 \end{tabular}
 \caption{Hydrogen 21~cm hyperfine Roothaan autopsy.  Each component is
 tagged to its \S\ref{sec:layer2} projection chain.  Status: FN $=$
-framework-native; L2 $=$ Layer-2 input.  Source memo:
-\texttt{debug/h21\_autopsy\_v1\_memo.md} (Sprint Calc-H21-Autopsy v1, May~2026).}
+framework-native; L2 $=$ Layer-2 input.}
 \label{tab:autopsy_21cm}
 \end{table}
 
@@ -4905,8 +4892,7 @@ assembly-plus-literature total is closed by Antognini~2013
 literature inputs covering multi-loop QED (K\"all\'en--Sabry,
 mixed VP-VP/VP-SE, $\alpha^7$) and QCD-internal proton
 polarizability (W3 inner-factor).  Status: TA $=$ textbook assembly;
-L2 $=$ Layer-2 input.  Source memo:
-\texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md}.}
+L2 $=$ Layer-2 input.}
 \label{tab:autopsy_muh_lamb}
 \begin{tabular}{p{4.5cm} r p{4.8cm} l}
 \toprule
@@ -5035,8 +5021,7 @@ Krauth~2016 literature inputs covering multi-loop QED
 moments and recoil-mixing, NLO recoil corrections, and---dominant
 contribution---deuteron polarizability ($1.690(20)$~meV of
 Hernandez \emph{et al.}\ 2014, as listed by Krauth~2016).  Status: TA $=$ textbook assembly; L2 $=$
-Layer-2 input.  Source memo:
-\texttt{debug/muD\_Lamb\_autopsy\_track1\_memo.md}.}
+Layer-2 input.}
 \label{tab:autopsy_mud_lamb}
 \begin{tabular}{p{4.7cm} r p{4.8cm} l}
 \toprule
@@ -5297,8 +5282,7 @@ $P_0 - P_2$ & & & & $-64.06$ MHz / $-0.20\%$ & & \\
 The angular content (Drake $J$-pattern, spin reduced m.e., bipolar
 Gaunt selection) is sympy-exact at machine precision; residuals live
 entirely in the radial sector (multi-electron correlation, higher-order
-Breit-Pauli, $\alpha^3/\pi$ QED, recoil).  Source memo:
-\texttt{debug/he\_2\_3P\_autopsy\_v1\_memo.md}.}
+Breit-Pauli, $\alpha^3/\pi$ QED, recoil).}
 \label{tab:autopsy_he_2_3p}
 \end{table}
 
@@ -5396,9 +5380,7 @@ close (see below) & \\
 \end{tabular}
 \caption{Deuterium 1S hyperfine Roothaan autopsy.  Each component
 tagged to its \S\ref{sec:layer2} projection chain. Status: FN $=$
-framework-native; L2 $=$ Layer-2 input.  Source memo:
-\texttt{debug/d\_hfs\_autopsy\_track5\_memo.md} (multi-track sprint
-Track 5, May 9 2026).}
+framework-native; L2 $=$ Layer-2 input.}
 \label{tab:autopsy_d_hfs}
 \end{table}
 
@@ -5642,9 +5624,7 @@ Experimental & $+1516.701471$ & (Mathur et al.\ 1967, 12-digit precision) & \\
 \end{tabular}
 \caption{($^{\ddagger}$ provisional: rests on $r_Z(t) = 1.762$~fm, under review --- see the status note below.)  Tritium 1S hyperfine Roothaan autopsy.  Each component
 tagged to its \S\ref{sec:layer2} projection chain. Status: FN $=$
-framework-native; L2 $=$ Layer-2 input.  Source memo:
-\texttt{debug/T\_HFS\_autopsy\_track2\_memo.md} (multi-track sprint
-Track 2, May 18 2026).}
+framework-native; L2 $=$ Layer-2 input.}
 \label{tab:autopsy_t_hfs}
 \end{table}
 
@@ -5807,8 +5787,7 @@ NOT LS-8a multi-loop QED & \\
 contact density is a sprint-scope placeholder; the actual ab initio
 \S\ref{sec:proj_phillips_kleinman} calculation would give the
 framework-preferred unique value within the 10.5\% spread documented
-below. Source memo: \texttt{debug/He3\_HFS\_autopsy\_track3\_memo.md}
-(multi-track sprint Track 3, 2026-05-18).}
+below.}
 \label{tab:autopsy_he3_hfs}
 \end{table}
 
@@ -6116,9 +6095,7 @@ saturated; the residual $-2\%$ reflects the $\omega_s = 3$, $\omega_p = 2$
 truncation.  Production code: \texttt{geovac/hylleraas\_eckart\_pstate.py}
 (universal SO(3)-averaged 3D quadrature kinetic for the 3 non-trivial
 channel pairs $(-,-)$, $(+,-)$, $(-,+)$, plus the algebraic Hartree
-kinetic for $(+,+)$ from Track 3.5).  Sprint memo:
-\texttt{debug/hylleraas\_eckart\_track5\_closure\_memo.md}.  Driver:
-\texttt{debug/he\_2p\_oscillator\_full\_channel.py}.  Data:
+kinetic for $(+,+)$ from Track 3.5).  Data:
 \texttt{debug/data/he\_2p\_oscillator\_full\_omega3\_2.json}.  Tests:
 \texttt{tests/test\_hylleraas\_eckart\_pstate.py}::\texttt{TestUniversalQuadratureKinetic}
 (6 new), \texttt{TestFullChannelOscillatorStrength} (2 new).
@@ -6246,9 +6223,7 @@ Probe~(e) v2 localizes the cliff onset cleanly at K (Z=19): H Z=1
 ratio $|\psi_\text{FW}(0)|^2 / |\psi_\text{HF lit}(0)|^2 = 0.999$
 (perfect), Na Z=11 = 1.243 (mild over), K Z=19 = 0.309 (3.2$\times$
 under, cliff onset), Rb Z=37 = 0.193 (deepest), Cs Z=55 = 0.625
-(partial recovery).  Source memo:
-\texttt{debug/z\_cliff\_diagnostic\_track2\_memo.md}; probe scripts in
-\texttt{debug/z\_cliff\_probe\_\{a,a\_extended,b,c,d,e,e\_v2\}.py}.
+(partial recovery).
 
 \textbf{BBB93/KTT GO with eyes open}: The Track~2 diagnostic confirms
 the BBB93/Koga-Tatewaki-Thakkar full multi-zeta tabulation IS the
@@ -6277,8 +6252,7 @@ each tied to a different Layer-2 input.  This is the prospective
 catalogue's first heavy-atom test of the framework's projection-chain
 machinery in a regime where simple hydrogenic formulas break down,
 and connects to atomic-clock-grade precision ($10^{-15}$ relative,
-the SI-second definition).  Source memo:
-\texttt{debug/cs\_hfs\_v1\_memo.md}.
+the SI-second definition).
 
 \subsubsection{Lithium-7 $2{}^2S_{1/2}$ hyperfine autopsy (first multi-electron HFS at $I=3/2$)}
 \label{sec:autopsy_li7_hfs}
@@ -6341,8 +6315,7 @@ factor-$3/2$ discrepancy noted in \S\ref{sec:autopsy_he3_hfs}.  Each
 component tagged to its \S\ref{sec:layer2} projection chain.  The
 framework-native chain at hydrogenic-$Z_\text{eff}$ sits $\sim 2.78\times$
 below experiment --- a large cliff, NOT the
-$\sim 1.10\%$ framework atomic accuracy floor (Paper FCI-A).  Source
-memo: \texttt{debug/Li7\_HFS\_autopsy\_track5\_memo.md}.}
+$\sim 1.10\%$ framework atomic accuracy floor (Paper FCI-A).}
 \label{tab:autopsy_li7_hfs}
 \end{table}
 
@@ -6470,8 +6443,7 @@ baseline at $+64.75$~ppm vs Fee 1993; the $+80$~GHz overshoot is the
 missing $\alpha^4$ Breit retardation content (Component 2 = first
 operator-level test of \S~\ref{sec:proj_breit_retardation}).
 Cumulative ($1+2+3+4+5$) closes to $+0.0075$~MHz by construction,
-since Component~2 is calibrated against the complete Ps theory.  Source memo:
-\texttt{debug/ps\_1s2s\_autopsy\_track4\_memo.md}.}
+since Component~2 is calibrated against the complete Ps theory.}
 \label{tab:autopsy_ps_1s2s}
 \begin{tabular}{p{4.6cm} r p{4.5cm} l}
 \toprule
@@ -6685,8 +6657,7 @@ The bare-nuclear-only contribution alone reaches 87\% of experiment
 in magnitude ($|{-}195|$ vs $224$~kHz; the $-2/5$ rotational sign
 carried by the $J{=}1$ column is not resolved against the experimental
 sign convention by this OoM walk); the 40\% residual is the absence of molecular
-bond-charge redistribution from the free-atom electronic picture.
-Source: \texttt{debug/HD\_rotational\_HFS\_autopsy\_track4.py}.}
+bond-charge redistribution from the free-atom electronic picture.}
 \label{tab:autopsy_HD_rotational_HFS}
 \end{table}
 
@@ -6782,8 +6753,7 @@ Diepold~2018 / Krauth~2021 (multi-loop QED, recoil NLO,
 $\alpha$-particle polarizability) close the remaining gap to the
 CREMA 2021 measurement modulo two convention surfaces (SE bracket
 recoil-mixing, Friar HO absorption) documented below.  Status: TA $=$
-textbook assembly; L2 $=$ Layer-2 input.  Source memo:
-\texttt{debug/mu\_he4\_lamb\_autopsy\_track\_b\_memo.md}.}
+textbook assembly; L2 $=$ Layer-2 input.}
 \label{tab:autopsy_muhe4_lamb}
 \begin{tabular}{p{4.7cm} r p{4.8cm} l}
 \toprule
@@ -7499,7 +7469,6 @@ autopsy uses the perturbative line.
 
 \textbf{Cross-references.}  Originating documentation:
 \S\ref{sec:autopsy_muh_lamb} Convention-mismatch surface paragraph.
-Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md} (LCM tag).
 
 \subsubsection{$\mu$ Lamb shift SE-recoil aggregation (framework vs Karshenboim)}
 \label{sec:conv_karshenboim_recoil}
@@ -7562,8 +7531,6 @@ $-2Z\alpha\, m_e r_Z$).  Resolution is mechanical (sprint-scale).
 
 \textbf{Cross-references.}  Originating documentation:
 \S\ref{sec:autopsy_muh_lamb} Operator-level finite-size paragraph.
-Source memo: \texttt{debug/muH\_Lamb\_autopsy\_v1\_memo.md}
-(profile-convention finding).
 
 \subsubsection{D 1S HFS polarizability channel}
 \label{sec:conv_d_polarizability}
@@ -7589,8 +7556,7 @@ consistent with the $\approx +138$~ppm of
 Friar--Sick~2004~\cite{friar_sick2004} and with the $45.2$~kHz of
 Eides et al.\ Phys.\ Rep.\ Eq.~(414).
 
-\textbf{Sprint reference and closure.}  V.D-prediction sprint, 2026-05-10
-(\texttt{debug/v\_d\_prediction\_sprint\_memo.md} Candidate~A).
+\textbf{Sprint reference and closure.}  V.D-prediction sprint, 2026-05-10 (Candidate~A).
 \textbf{Closure verdict \textnormal{(corrected 2026-08-29)}:}
 the framework's projection chain does \emph{not} consume any
 polarizability input --- the only Layer-2 scalar entering the D chain
@@ -7756,8 +7722,7 @@ Sibling closure to the BBB93/KTT multi-zeta tabulation closure for
 the \S\ref{sec:autopsy_cs_hfs} Z\textgreater 20 cliff (also named in
 \S\ref{sec:autopsy_cs_hfs}).
 
-\textbf{Cross-references.}  Originating documentation:
-\texttt{debug/Li7\_HFS\_autopsy\_track5\_memo.md}.  Cross-references
+\textbf{Cross-references.}
 \S\ref{sec:autopsy_li7_hfs} (Li-7 HFS autopsy) and
 \S\ref{sec:autopsy_cs_hfs} (Cs HFS scoping + Z\textgreater 20 cliff
 diagnostic).  Generalizes to Na ($Z=11$), K ($Z=19$), Rb ($Z=37$),
@@ -7804,13 +7769,10 @@ module-endomorphism piece can be invisible at finite basis size when
 the FCI variational state does not occupy the affected subspace.
 
 \textbf{Sprint reference and closure.}
-Sub-sprint M-Z (\texttt{debug/sprint\_modular\_propinquity\_mZ\_bethe\_log\_memo.md},
-2026-05-23) surfaced the bimodule reading; the modular propinquity
+Sub-sprint M-Z (2026-05-23) surfaced the bimodule reading; the modular propinquity
 synthesis memo
-(\texttt{debug/sprint\_modular\_propinquity\_synthesis\_memo.md})
 consolidates it as the load-bearing structural finding of the
 modular sprint's chemistry-side thread.  The Track $\beta$ synthesis
-(\texttt{debug/sprint\_modular\_alpha\_arc\_synthesis\_memo.md})
 extends the consolidation with the W1c Layer~3 finding from the
 follow-on $\alpha$ arc.
 
@@ -7819,7 +7781,7 @@ cross-shift as intermediate class) --- FALSIFIED via NaH max\_n=3 test}
 \label{sec:conv_three_bucket_falsified}
 
 \textbf{Observable.} The W1c $\times$ M-Z partition bridge sprint
-(\texttt{debug/sprint\_w1c\_mz\_partition\_analysis\_memo.md}, 2026-05-23)
+(2026-05-23)
 proposed a three-bucket refinement of the M-Z partition
 (\S\ref{sec:conv_multifocal_bimodule}): cross-shift (handled) /
 \emph{basis-closable cross-shift} (handled at sufficient basis size) /
@@ -7842,7 +7804,7 @@ experimental $D_e \approx 0.075$~Ha), \textbf{P3} (multi-zeta differential
 $\in [0.02, 0.30]$~Ha at $R_\text{eq}$).
 
 \textbf{Convention difference and verdict.} The F1 max\_n=3 sprint
-(\texttt{debug/sprint\_f1\_maxn3\_predictions\_test\_memo.md}, 2026-05-23)
+(2026-05-23)
 returned 1 of 3 predictions passing: P1 FAIL ($R_\text{min} = 2.0$~bohr,
 the smallest tested R, on the exact falsification criterion); P2 FAIL
 (spurious-binding descent depth $D_e^\text{PES} = +0.7097$~Ha, $\sim 10\times$
@@ -7908,19 +7870,13 @@ sharpened to architectural-absence + Pauli-repulsion candidates), and
 Pauli-class constraints (W1e, F4 target via bonding-orbital PK extension).
 See \S\ref{sec:conv_w1c_f2_f3} for the F2+F3 follow-on entry.
 
-\textbf{Sprint reference and closure.} W1c $\times$ M-Z bridge sprint
-(\texttt{debug/sprint\_w1c\_mz\_partition\_analysis\_memo.md}); F1
-max\_n=3 prediction test
-(\texttt{debug/sprint\_f1\_maxn3\_predictions\_test\_memo.md}); Sprint
+\textbf{Sprint reference and closure.} W1c $\times$ M-Z bridge sprint; F1
+max\_n=3 prediction test; Sprint
 $\beta$-neg synthesis (F1-maturity, superseded for framing by the
-full-arc memo)
-(\texttt{debug/sprint\_beta\_neg\_synthesis\_memo.md}); F2
-architectural-absence diagnostic
-(\texttt{debug/sprint\_f2\_cross\_vne\_kernel\_memo.md}); F3 cross-block
-h1 closure
-(\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}); comprehensive
-full-arc synthesis
-(\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}). Cross-references
+full-arc memo); F2
+architectural-absence diagnostic; F3 cross-block
+h1 closure; comprehensive
+full-arc synthesis. Cross-references
 Paper~19 (W1c-residual wall + F1-F2-F3 arc
 extension), CLAUDE.md~\S1.7 (multi-focal-composition wall taxonomy),
 CLAUDE.md~\S3 (dead-ends rows for the three-bucket hypothesis and
@@ -8011,11 +7967,9 @@ analog of refinements that the QED side does not natively support
 (QED endomorphisms strictly external-input via UV-completion physics).
 
 \textbf{Sprint reference and closure.} F2 cross-$V_{ne}$ kernel-shape
-diagnostic (\texttt{debug/sprint\_f2\_cross\_vne\_kernel\_memo.md}); F3
-cross-block h1 architectural extension
-(\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}); comprehensive
-full-arc synthesis
-(\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}). Cross-references
+diagnostic; F3
+cross-block h1 architectural extension; comprehensive
+full-arc synthesis. Cross-references
 Paper~19 (W1c-residual wall + F1-F2-F3 arc
 extension with revised five-sub-layer hierarchy), Paper~17 \S6.10
 (composed-architecture cross-reference, updated to F3 maturity),
@@ -8138,14 +8092,10 @@ correlated [Ne] cores requiring occupancy-restriction FCI
 infrastructure not present in framework).
 
 \textbf{Sprint reference and closure.} F4 bonding-orbital PK
-STOP-at-Step-1
-(\texttt{debug/sprint\_f4\_bonding\_pk\_memo.md}); F5 explicit-core
-Hartree STOP-at-Step-1
-(\texttt{debug/sprint\_f5\_explicit\_core\_memo.md}); F6 max\_n=4
-NaH PARTIAL\_IMPROVEMENT
-(\texttt{debug/sprint\_f6\_maxn4\_nah\_memo.md}); Sprint
-$\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis
-(\texttt{debug/sprint\_beta\_update\_f4f6\_memo.md}).
+STOP-at-Step-1; F5 explicit-core
+Hartree STOP-at-Step-1; F6 max\_n=4
+NaH PARTIAL\_IMPROVEMENT; Sprint
+$\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis.
 Cross-references Paper~19 (W1e refinement, F4--F6)
 (refined six-sub-layer hierarchy with the three W1e
 sub-sub-mechanisms), Paper~17 \S6.10 (composed-architecture
@@ -8235,10 +8185,8 @@ refinement of the framework's structural-skeleton scope statement
 six-observable cross-domain pattern.
 
 \textbf{Sprint reference and closure.} Schmidt orthogonalization
-Day-1 diagnostic STOP
-(\texttt{debug/sprint\_w1e\_schmidt\_diagnostic\_memo.md});
-[Ne] core-correlation literature order-of-magnitude estimate DEFER
-(\texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md}).
+Day-1 diagnostic STOP;
+[Ne] core-correlation literature order-of-magnitude estimate DEFER.
 Cross-references Paper~19's W1e Schmidt / core-correlation closeout section
 (W1e Schmidt + core correlation closeout), Paper~32 \S VIII Sprint
 M-Z addendum (cross-domain wall extension), Paper~17 \S6.10
@@ -8332,8 +8280,7 @@ $\tan(\delta_{CP}) = \pi\cdot\ln(2)$ at $0.02\sigma$ provided a
 striking single-number target.  The aggregate signal was reported as
 approximately $6$--$10\sigma$ above chance for that basis size.  The
 candidate motivated a draft addition to CLAUDE.md~\S 1.7 (WH7) and
-prompted a forward plan in
-\texttt{debug/w3\_forward\_plan\_memo.md} listing six tests.
+prompted a forward plan listing six tests.
 
 \paragraph{Three-track falsification (same evening).}
 The first three tests of the forward plan ran in parallel as
@@ -8649,8 +8596,7 @@ one TRANSFERS\_FREELY row at medium confidence (coupled-channel
 move under finer audit.  The audit explicitly does not assume that
 Nieuviarts~2025's morphism applies cleanly to GeoVac
 $S^3 = \mathrm{SU}(2)$ (odd-dim caveat); that question is the
-L2-Nieuviarts-scoping pass.  The Bekenstein-Hawking entropy sprint
-(\texttt{debug/bekenstein\_hawking\_sprint\_scoping\_memo.md}) is
+L2-Nieuviarts-scoping pass.  The Bekenstein-Hawking entropy sprint is
 correctly DEFERRED and outside the L0/L1/L2/L3 sprint scope:\ BH
 entropy is Euclidean spectral-action work that does not require
 Lorentzian extension.
@@ -8872,7 +8818,7 @@ projection-row level.
 % ===================================================================
 \section{Layer-2-Presence Bound on Catalogue Residuals (Observation)}
 \label{sec:prediction}
-% Source: May 2026 synthesis pass (debug/synthesis_pattern_review_memo.md
+% Source: May 2026 synthesis pass (
 % §2 Pattern B falsification, §2.4 Layer-2-content axis, §2.5 replacement
 % prediction).  The naive depth-vs-residual form was falsified on the
 % catalogue itself; this section now states the replacement
@@ -9333,7 +9279,7 @@ of \S~\ref{sec:proj_wick_rotation}).}
 \medskip
 \noindent\textit{Sprint L0 update (May 2026).}  The May 2026 NO-GO
 scoping on full Lorentzian extension was reopened after a named
-trigger (\texttt{debug/lorentzian\_literature\_update\_2026\_05\_16.md})
+trigger
 fired:\ the Nieuviarts~2025 twisted-spectral-triple morphism
 (arXiv:2502.18105) provides a Riemannian $\to$ pseudo-Riemannian
 construction via Krein-product twist that may significantly shorten
@@ -9355,8 +9301,7 @@ falsifier --- ``compute the modular Hamiltonian $K$ on
 $\mathcal{T}_{n_{\max}}$ for a wedge-restricted Camporesi--Higuchi
 state, verify $\sigma_{2\pi}(O) = O$ at finite $n_{\max}$'' ---
 remains \emph{open} on the Riemannian side
-(\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md},
-Paper~32~\S~VIII.F, Paper~42).  Sprint L1 posits $K$ via the
+(Paper~32~\S~VIII.F, Paper~42).  Sprint L1 posits $K$ via the
 hemispheric-wedge BW-$\alpha$ geometric realization
 ($K = J_{\mathrm{polar}}$ with integer spectrum on the full-Dirac
 basis), verifies the period closure $\sigma_{2\pi}(O) = O$ to machine
@@ -9397,7 +9342,7 @@ automatic for a posited generator (2026-09-28, Paper~42).
 
 % Source: Sprint Lorentz-Boost-Scoping (May 2026, Track B); refines
 % synthesis pass §7 Hunt 4 REQUIRES-EXTENSION verdict with
-% Bisognano-Wichmann reading.  See debug/lorentz_boost_scoping_memo.md.
+% Bisognano-Wichmann reading.  See .
 % Sprint 2 update (2026-05-15): the metric-functional-level content of
 % the Wick-rotation reading has been promoted to §III.27 as
 % \S~\ref{sec:proj_wick_rotation}; this open-question entry recasts
@@ -9599,11 +9544,9 @@ and the entry would need sharpening.  Neither falsifier is
 currently engaged.
 
 \textbf{Track~D documentation closure (May~2026).}\ The Track~B
-scoping pass~(\texttt{debug/lorentz\_boost\_scoping\_memo.md},
-May~2026) recommended a sprint-scale documentation deliverable
+scoping pass~(May~2026) recommended a sprint-scale documentation deliverable
 (Candidate~A) on the Bisognano--Wichmann reading of Sprint~TD
-Track~4.  Track~D~(\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md},
-May~2026) delivered Candidate~A:\ five-section structural analysis
+Track~4.  Track~D~(May~2026) delivered Candidate~A:\ five-section structural analysis
 documenting that the framework's M1 ($k = 0$ volume-slot) reading on
 the cigar's $S^1_\tau$ factor re-expresses the posited $\beta = 8\pi M$
 (a consistency check, not a derivation), and that under the
@@ -9967,29 +9910,27 @@ Paper~35 (2026).
 
 \bibitem{ls1_memo}
 GeoVac Project, ``LS-1 Sprint: Hydrogen Lamb Shift on the Dirac-S$^3$
-Framework,'' \texttt{debug/ls1\_lamb\_shift\_memo.md} (May 2026).
+Framework,'' sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{ls2_memo}
 GeoVac Project, ``LS-2 Sprint: Bethe Logarithm from GeoVac Spectral
-Machinery,'' \texttt{debug/ls2\_bethe\_log\_memo.md} (May 2026).
+Machinery,'' sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{ls3_memo}
 GeoVac Project, ``LS-3 Sprint: Regularized Bethe Logarithm via
-Acceleration Form,'' \texttt{debug/ls3\_bethe\_log\_regularized\_memo.md}
-(May 2026).
+Acceleration Form,'' sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{ls4_memo}
 GeoVac Project, ``LS-4 Sprint: Bethe Logarithm via Schwartz/Drake--Swainson
-Regularization,'' \texttt{debug/ls4\_bethe\_log\_drake\_memo.md} (May 2026).
+Regularization,'' sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{vp1_memo}
 GeoVac Project, ``VP-1 Sprint: Vector-Photon Promotion on the
-Graph-Native QED Pipeline,'' \texttt{debug/vp1\_vector\_graph\_native\_memo.md}
-(May 2026).
+Graph-Native QED Pipeline,'' sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{vp2_memo}
 GeoVac Project, ``VP-2 Sprint: Topology-Specific Projection Theory,''
-\texttt{debug/vp2\_topology\_projections\_memo.md} (May 2026).
+sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{audit_memo}
 GeoVac Project, ``Curve-Fit Audit (2026-05-02),''
@@ -10039,7 +9980,7 @@ quantum fields,'' \textit{J.\ Math.\ Phys.}\ \textbf{17},
 % Title and pagination corrected by Track D verification pass (May 2026):
 % earlier version of this entry mistakenly used the 1975 paper's title
 % (``On the duality condition for a Hermitian scalar field'') for the
-% 1976 paper.  See debug/bisognano_wichmann_track_d_memo.md.
+% 1976 paper.  See .
 
 \bibitem{sewell1982}
 G.~L.~Sewell, ``Quantum fields on manifolds: PCT and gravitationally

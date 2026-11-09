@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.7] - 2026-11-08
+
+**Dead debug/ pointers removed from the papers (PI-directed).** CLAUDE.md Sec. 9: papers cite their own derivation,
+CHANGELOG.md or tests/, never debug/. The 308 pointers left dead by the 2026-06-10 and 2026-11-08 archive sweeps are
+gone (C14 debug-hygiene 308 -> 0). A first attempt that repointed them into debug/archive/ was stopped before commit
+(PI: still a debug/ citation) and fully reverted.
+
+### Changed
+- 21 papers (groups 1-4 and 6). Most pointers were provenance notes ("(memo ...)", "Source memo: ...", "; data ...")
+  and were deleted where the sentence stands on the paper's own derivation or a test; a live debug/ data file in the
+  same note went with it. Whole memo-list paragraphs removed: Paper 19's four "Source documentation" paragraphs and
+  Paper 56's driver/data/memo trail list. Memo bibitems (Papers 29, 34, 35, 50, 57, 23) now read "sprint record in
+  CHANGELOG.md", each checked to have a CHANGELOG entry; a file-name-to-version mapping was tried and rejected as
+  unreliable (later entries list the same file names).
+- Reworded around a removal (no claim changed; listed for a later review): Paper 45 (the annihilation falsifier now
+  named by its frozen test, tests/test_p45_kplus_degeneracy.py; "A numerical computation evaluates the panel"; the
+  panel appendix names the production module), Paper 55 (substrate-audit sentence; Jacobi closed-form sentence),
+  Paper 23 (D HFS autopsy pointed to Paper 34), Paper 35 (KG sprint provenance sentence), Paper 32 (G4b sentence).
+- Review stamps: 31 prose units that were clean at v6.7.6 and changed only by this edit keep their stamps (noted in
+  docs/qa/stamps/*.json); coverage identical to v6.7.6 in every target.
+
+### Remaining
+- 145 live debug/ references in 29 papers still violate the Sec. 9 policy (they resolve, so C14 does not flag them).
+
 ## [v6.7.6] - 2026-11-08
 
 **group6 SMALL sweep (PI-directed).** The v6.7.4 debt list worked through Papers 26, 27, 34, 35, 36, the synthesis,

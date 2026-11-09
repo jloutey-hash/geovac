@@ -157,8 +157,7 @@ compression beyond the bare multipole count is therefore a numerical
 realization of structure already present in the analytic decomposition,
 not a new algebraic substructure.  Double factorization on a GeoVac
 Hamiltonian is, in this precise sense, the multipole expansion accessed
-by SVD rather than by closed form (see Paper~14 \S\ref{sec:intro} and
-\texttt{debug/sprint\_df\_multipole\_lift\_memo.md}).
+by SVD rather than by closed form (see Paper~14 \S\ref{sec:intro}).
 
 This paper presents benchmark data for the GeoVac Hamiltonian library:
 accuracy characterization via full configuration interaction (FCI),
@@ -367,10 +366,7 @@ twenty-four functions, and the loss is the fixed node structure, which
 screening makes worse.)
 
 \paragraph{Empirical evidence.}  The sprint sequence of
-2026-06-07 (project memos
-\texttt{debug/sprint\_w1e\_projection\_audit\_memo.md},
-\texttt{debug/lih\_kwarg\_sweep\_log.txt}, and
-\texttt{debug/sprint\_b1\_nah\_hf\_verdict\_memo.md}) systematically
+2026-06-07 systematically
 tested the chemistry-accuracy scope under every available kwarg
 combination and one architectural extension.  Table~\ref{tab:scope}
 summarises the verdicts.
@@ -433,8 +429,7 @@ LiH's PES has been characterized.
 
 \paragraph{Structural reason.}  The scope boundary has a structural
 origin in the framework's NCG composition operation.  We verified
-empirically on H$_2$ (2026-06-07, project memo
-\texttt{debug/bratteli\_h2\_pilot\_memo.md}) that the Track CD
+empirically on H$_2$ (2026-06-07) that the Track CD
 one-body Hamiltonian is bit-exactly (residual $9.7 \times 10^{-18}$) a
 Marcolli--van Suijlekom 2014 gauge network~\cite{marcolli_vs2014} on
 the molecular bond quiver, with atomic Camporesi--Higuchi Dirac data
@@ -640,8 +635,7 @@ Stein--Weiss rate on the low-harmonic subspace can be much sharper
 than the all-$C^\infty(S^3)$ bound, and (iii) the Duhamel plus
 $N_{\rm active}$ lift admits a factor-of-2 tightening for
 antisymmetric ERIs (Paper~22 Gaunt sparsity).  Sharpening each
-is a multi-step research target rather than a sprint-scale fix.
-Details: \texttt{debug/sprint\_trotter\_propinquity\_memo.md}.}
+is a multi-step research target rather than a sprint-scale fix.}
 At larger basis (GeoVac balanced $n_{\max}=3$ vs.\ Gaussian
 cc-pVTZ, not established as matched accuracy), the 1-norm comparison
 is expected to be less favorable due to the larger

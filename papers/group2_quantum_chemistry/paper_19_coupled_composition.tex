@@ -1558,8 +1558,7 @@ $h_1$ shift cannot affect the descent depth, which is by definition
 an $R$-dependent energy difference. \emph{The W1c-residual wall
 is structurally not a diagonal-h1 problem.}
 
-\textbf{Diagnostic positive identification of the genuine target}
-(\texttt{debug/w1c\_residual\_nah\_track3\_diag.py}): testing the
+\textbf{Diagnostic positive identification of the genuine target}: testing the
 cross-$V_{ne}$ integral with hydrogenic-shape labels at the
 \emph{physical} $n$ (block\_n=1, $l=0$ $\to$ $n_{\rm phys}=3$ hydrogenic 3s
 instead of 1s) shows the framework over-attracts by $0.81$~Ha at
@@ -1624,8 +1623,7 @@ where $d_{L,R}$ are integrated against Gaussian probes centered at
 H ($d_L$) and Na ($d_R$) respectively, identifies the
 \emph{right-action axis} (Na-side wavefunction shape) as the dominant
 carrier of the W1c residual.  The structural prediction $d_R/d_L \gg 1$
-is confirmed numerically by the Track $\alpha$-Diagnostic
-(memo \texttt{debug/sprint\_alpha\_1\_diagnostic\_memo.md}):
+is confirmed numerically by the Track $\alpha$-Diagnostic:
 $d_R/d_L = 3.23$ for the load-bearing (framework hydrogenic) vs.\
 (physical Na 3s) pair at the canonical probe width $\sigma = 1$~bohr,
 and $d_R/d_L \in [1.32, 3.58]$ across $\sigma \in [0.5, 3.0]$~bohr,
@@ -2055,32 +2053,6 @@ F1$\to$F2$\to$F3 arc).}
   the bonding-orbital level, addressed only by F4 architectural extension.
 \end{enumerate}
 
-\paragraph{Source documentation.}
-Track $\alpha$-Diagnostic:
-\texttt{debug/sprint\_alpha\_1\_diagnostic\_memo.md}.
-Track $\alpha$-Multi-zeta:
-\texttt{debug/sprint\_alpha\_2\_multizeta\_memo.md}.
-Track $\alpha$-PES:
-\texttt{debug/sprint\_alpha\_3\_pes\_test\_memo.md}.
-Track $\beta$ synthesis (modular + $\alpha$ arc):
-\texttt{debug/sprint\_modular\_alpha\_arc\_synthesis\_memo.md}.
-F1-P1+P2 unified architecture:
-\texttt{debug/sprint\_f1\_p1p2\_combined\_test\_memo.md}.
-W1c $\times$ M-Z partition bridge:
-\texttt{debug/sprint\_w1c\_mz\_partition\_analysis\_memo.md}.
-F1 max\_n=3 CLEAN NEGATIVE:
-\texttt{debug/sprint\_f1\_maxn3\_predictions\_test\_memo.md}.
-Sprint $\beta$-neg synthesis (F1-maturity, superseded by full-arc memo):
-\texttt{debug/sprint\_beta\_neg\_synthesis\_memo.md}.
-\textbf{F2 cross-$V_{ne}$ kernel-shape diagnostic (KERNEL-NOT-IT +
-architectural-absence finding, W1d named):}
-\texttt{debug/sprint\_f2\_cross\_vne\_kernel\_memo.md}.
-\textbf{F3 cross-block h1 architectural extension (W1d CLOSED + W1e
-newly named):}
-\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}.
-\textbf{Comprehensive full-arc synthesis (F1$\to$F2$\to$F3 at F3 maturity):}
-\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}.
-
 \subsubsection{Refinement of the W1e mechanism after F4--F6}
 \label{sec:w1e_refinement_f4_f6}
 
@@ -2123,8 +2095,7 @@ rank-1 perturbation on the bonding orbital does not lift those
 configurations. \textbf{W1e is therefore NOT a single-particle
 Pauli-orthogonality wall} (the working hypothesis F3 named); it is
 a multi-determinant FCI correlation effect that rank-1 PK cannot
-suppress. F4 STOP-at-Step-1 documented in
-\texttt{debug/sprint\_f4\_bonding\_pk\_memo.md}.
+suppress.
 
 \textbf{F5 --- explicit-core Hartree treatment RULED OUT
 ($25.7\%$ closure ceiling at 2-point level).} The Step~1 algebraic
@@ -2141,8 +2112,6 @@ $D_e \approx 0.075$~Ha, well outside the prespecified
 $2\times$ closure window $[0.0375, 0.150]$~Ha. \textbf{The F4
 precedent applies: F5 saturation at higher Hartree strengths would
 probably reach $30$--$50\%$ closure, structurally insufficient.}
-F5 STOP-at-Step-1 documented in
-\texttt{debug/sprint\_f5\_explicit\_core\_memo.md}.
 W1e reclassified from ``FCI correlation channels addressable by
 explicit cores'' to \textbf{``deep correlation effect beyond
 Hartree-level core-bonding J -- K interaction.''}
@@ -2165,8 +2134,6 @@ finding for future quick-gate testing in this regime: \textbf{the
 this class of monotonically-descending PES; future sprints should
 use PES well depth at $R_\text{min}$ as the load-bearing closure
 metric}, not 2-point energy differentials at fixed reference geometry.
-F6 PARTIAL\_IMPROVEMENT documented in
-\texttt{debug/sprint\_f6\_maxn4\_nah\_memo.md}.
 
 \textbf{Refined six-sub-layer W1c hierarchy after F4--F6.}
 W1e decomposes into three structurally INDEPENDENT sub-sub-mechanisms,
@@ -2219,16 +2186,6 @@ multi-focal-composition wall taxonomy finding (the framework's
 structural-skeleton scope does not autonomously deliver binding
 energetics at this precision).
 
-\paragraph{Source documentation (F4--F6 refinement).}
-F4 bonding-orbital PK STOP-at-Step-1:
-\texttt{debug/sprint\_f4\_bonding\_pk\_memo.md}.
-F5 explicit-core Hartree STOP-at-Step-1:
-\texttt{debug/sprint\_f5\_explicit\_core\_memo.md}.
-F6 max\_n=4 PARTIAL\_IMPROVEMENT:
-\texttt{debug/sprint\_f6\_maxn4\_nah\_memo.md}.
-Sprint $\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis:
-\texttt{debug/sprint\_beta\_update\_f4f6\_memo.md}.
-
 \subsubsection{Closure of the W1e sprint-scale candidate space and cross-domain pattern (Schmidt + core correlation, 2026-05-23)}
 \label{sec:w1e_schmidt_core_correlation}
 
@@ -2257,9 +2214,6 @@ is $\sim 12\times$ below the 100~mHa prespecified GO threshold
 and $\sim 3$--$4\times$ below the 30~mHa BORDERLINE threshold;
 it would close at most $\sim 0.2\%$ of the 4.37~Ha W1e wall depth.
 \textbf{The W1e wall is not a basis-level non-orthogonality wall.}
-Day-1 driver and memo:
-\texttt{debug/sprint\_w1e\_schmidt\_diagnostic\_memo.md},
-\texttt{debug/data/sprint\_w1e\_schmidt\_diagnostic.json}.
 
 \textbf{Fully correlated [Ne] cores (Day-1 literature
 order-of-magnitude estimate, DEFER).} The binding-relevant
@@ -2273,9 +2227,7 @@ active fraction at NaH bond geometry ($0.5$--$2\%$). All three
 sit $14$--$1000\times$ below the prespecified $0.1$~Ha DEFER
 threshold. \textbf{Core correlation is a Layer-2 sub-percent
 effect for Na chemistry; it cannot close a $\sim 3.85$~Ha
-structural wall (scales mismatch by $\sim 10^3$).} Day-1 memo:
-\texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md},
-\texttt{debug/data/sprint\_w1e\_core\_correlation\_estimate.json}.
+structural wall (scales mismatch by $\sim 10^3$).}
 
 \textbf{Net W1e closure verdict: sprint-scale candidate space
 exhausted.} Five independent sprint-scale W1e closure mechanisms
@@ -2315,15 +2267,6 @@ preference for that orbital at the correct $R_\text{eq}$.
 observable'' --- the framework determines the structural skeleton
 across both domains but does not autonomously generate calibration
 data in either.}
-
-\paragraph{Source documentation (W1e Schmidt + core correlation
-closeout).}
-Schmidt orthogonalization Day-1 diagnostic STOP:
-\texttt{debug/sprint\_w1e\_schmidt\_diagnostic\_memo.md},
-\texttt{debug/data/sprint\_w1e\_schmidt\_diagnostic.json}.
-[Ne] core-correlation order-of-magnitude estimate DEFER:
-\texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md},
-\texttt{debug/data/sprint\_w1e\_core\_correlation\_estimate.json}.
 
 \subsubsection{Structural classification of W1e and the
 explicit-core HF decision-gate diagnostic (2026-05-25)}
@@ -2409,13 +2352,6 @@ mean-field Hartree, magnetization extensions) for Class-3 walls --- they
 project onto the zero-entropy density-matrix submanifold and saturate
 below the wall, as F4-F6 + Schmidt + core correlation empirically
 demonstrated.
-
-\paragraph{Source documentation (structural classification + diagnostic).}
-W1e structural reading + closure-prospect classification:
-\texttt{debug/sprint\_chemistry\_position\_w1e\_structural\_memo.md}.
-Modular $\rightarrow$ chemistry clean-negative + three-class partition:
-\texttt{debug/sprint\_chemistry\_modular\_connection\_memo.md}.
-Memory: \texttt{memory/external\_input\_three\_class\_partition.md}.
 
 %% ========================================================================
 \section{Discussion}

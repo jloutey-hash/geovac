@@ -338,7 +338,8 @@
   },
   "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The harmonic oscillator rigidity theorem / Spinor-Lichnerowicz corollary: the operator-order discriminant": {
    "date": "2026-11-03",
-   "hash": "b3843b3c369362b6",
+   "hash": "1faa8f807ed9d8f4",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_24_bargmann_segal.tex::The harmonic oscillator rigidity theorem / Two-fermion entanglement rigidity --- retracted": {
@@ -683,12 +684,14 @@
   },
   "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Inner-factor Yukawa content: closed by factorisation +": {
    "date": "2026-11-03",
-   "hash": "671d86fb7bb23520",
+   "hash": "6c6086cc78e5e224",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / M3 on : structural closure, empirical PSLQ deferred": {
    "date": "2026-11-03",
-   "hash": "c95568f47d949b10",
+   "hash": "c81c72cea0b604a3",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_55_periods_of_geovac.tex::Open questions / Open Q5': a possible deeper M2/M3 cyclotomic unification": {
@@ -1038,7 +1041,8 @@
   },
   "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Standard Model inner factor (F)": {
    "date": "2026-11-03",
-   "hash": "ae42283f17715a8f",
+   "hash": "36ec9990015f2621",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_57_forced_free_seam.tex::The free side / Two structurally distinct families on the free side": {

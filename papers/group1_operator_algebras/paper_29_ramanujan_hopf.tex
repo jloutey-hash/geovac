@@ -475,8 +475,7 @@ $\mathbb{F}_2$ arithmetic
 is a fixed-point-free automorphism at $n_{\max}=2,3$, and the
 $(2\ell+2)$-vs-$2\ell$ block mismatch holds at $n_{\max}=2,3,4$ with
 total $n_{\max}(n_{\max}+1)$.  It supplies the substrate-level reason
-behind the negative relativistic-$\mathbb{Z}_2$ tapering results
-(\texttt{debug/sprint\_mj\_parity\_rotated\_memo.md}): a chirality
+behind the negative relativistic-$\mathbb{Z}_2$ tapering results: a chirality
 sign-count cannot stabilize a Hamiltonian when the underlying
 reflection is not a graph symmetry to begin with.
 
@@ -561,7 +560,6 @@ Observation~\ref{obs:galois} adds a new taxonomic tier to Paper~18's
 exchange-constant hierarchy: \emph{algebraic-but-non-radical}, sitting
 between radical-algebraic and transcendental. The $S^5$ $N_{\max}=3$
 $P_{12}$ zeros are the first explicit GeoVac objects in this tier.
-Full per-factor Galois table in \texttt{debug/galois\_ihara\_memo.md}.
 
 % ===================================================================
 \section{No Functional Equation: Reflection Symmetry from Bipartiteness}
@@ -810,8 +808,7 @@ the GUE value $\approx 0.42$, categorically excluding a direct
 Hilbert--P\'olya identification with $\zeta$ zeros.  The bridge to
 classical $\zeta(s)$, if any, must therefore go through the
 \emph{spectral} zeta (Paper~28's machinery), not through the Ihara
-zeta.  Full obstruction analysis at
-\texttt{debug/riemann\_limit\_memo.md}.
+zeta.
 
 \paragraph{Spectral-side GUE signature (Sprint~3, RH-M).}
 Sprint~3 Track RH-M computed the complex zeros of $D(s)$,
@@ -868,8 +865,7 @@ perturbation-of-boundary effect, not an $\alpha^2$-specific signature.
 The weighted Ihara zeta is therefore a new algebraic object
 (first GeoVac graph observable with genuine $\alpha^2$ content), with
 structural implications for Paper~18's taxonomy and no immediate
-RH-adjacent use. Full analysis in
-\texttt{debug/ihara\_zeta\_weighted\_memo.md}; module
+RH-adjacent use. Module:
 \texttt{geovac/ihara\_zeta\_weighted.py}.
 
 \paragraph{Hilbert--P\'olya operator reconstruction
@@ -892,7 +888,6 @@ the linear $n + 3/2$ growth of the Dirac operator on $S^3$ and
 from the $\log$-density of classical Riemann zeros.  $H^\star$ is
 therefore \emph{not} a small deformation of any native GeoVac
 Hamiltonian.  Module \texttt{geovac/hp\_operator.py} (13 tests);
-full analysis in \texttt{debug/hp\_operator\_memo.md}.
 
 \paragraph{Functional equation hunt on the spectral Dirichlet
 series (Sprint~4, RH-O).}  A systematic grid search was performed
@@ -917,8 +912,7 @@ ingredient of classical RH is therefore \emph{structurally}
 absent from GeoVac's spectral zeta, not merely undiscovered.
 Combined with RH-M's non-critical-line zero distribution and
 RH-N's $\sqrt{n}$ Weyl law, Sprint~4 closes the direct
-spectral-to-classical-RH bridge.  Full analysis in
-\texttt{debug/functional\_equation\_hunt\_memo.md}.
+spectral-to-classical-RH bridge.
 
 \paragraph{Depth-2 $\chi_{-4}$ analog for $S_{\min}$
 (Sprint~4, RH-P).}  The depth-1 identity
@@ -936,8 +930,7 @@ with uniform $2^{2s-1}$ prefactors.  At depth~$2$, $T(k)^2$ is a
 \emph{quadratic} object; the Bernoulli-asymptotic tail coefficients
 scramble the uniform prefactor structure, and $S_{\min}^{\mathrm{even}}$,
 $S_{\min}^{\mathrm{odd}}$ live in a weight-$2$ multiple-zeta-value
-sector not spanned by products of standard Dirichlet-$L$ values.
-Full analysis in \texttt{debug/smin\_chi\_neg4\_memo.md}.  A
+sector not spanned by products of standard Dirichlet-$L$ values.  A
 side-finding concerning the published numerical value of $S_{\min}$
 is under independent verification at the time of writing; the
 irreducibility claim is unaffected either way.
@@ -1017,11 +1010,7 @@ well.  The Ihara zeta therefore terminates as a self-contained
 structural object with validated $\mathbb{Z}_2$ block decomposition.
 
 The computations reported here are recorded in
-\texttt{geovac/ihara\_zeta.py} and \texttt{tests/test\_ihara\_zeta.py},
-with full numerical data in
-\texttt{debug/data/ihara\_zeta\_geovac\_hopf.json} and the
-supporting Wick-rotation memo at
-\texttt{debug/fock\_continuation\_memo.md}.  All Ihara zeta closed
+\texttt{geovac/ihara\_zeta.py} and \texttt{tests/test\_ihara\_zeta.py}.  All Ihara zeta closed
 forms above are exact in \texttt{sympy} rational arithmetic.
 
 % ===================================================================
@@ -1079,7 +1068,7 @@ expanders.  \emph{Combinatorica}\ \textbf{6}, 83 (1986).
 \emph{Groups Acting on Hyperbolic Space: Harmonic Analysis and Number
 Theory.}  Springer, 1998.
 \bibitem{rh_survey} GeoVac Project.  Riemann-Hypothesis literature
-survey, \texttt{debug/rh\_literature\_survey.md}, April 2026.
+survey, sprint record in \texttt{CHANGELOG.md}, April 2026.
 
 \bibitem{matsuura2025} S. Matsuura and K. Ohta.  Kazakov-Migdal model
 on graphs and the Ihara zeta function.  \emph{JHEP}\ \textbf{09}

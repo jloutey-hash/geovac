@@ -898,7 +898,8 @@
   },
   "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The continuous side: the decompactification front": {
    "date": "2026-11-04",
-   "hash": "62c1051cf02d47b9",
+   "hash": "20f2a18d52efc27a",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "qa-group2-full-2026-11-04"
   },
   "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The exact-arithmetic census": {

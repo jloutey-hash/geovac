@@ -147,15 +147,9 @@ axis.  The first is ring-preserving; the second injects $2\pi$.
 The verification computations (KG-1, KG-2,
 KG-3)\footnote{Sprint/track designations are anchors into the
 project's internal chronicle (\texttt{CHANGELOG.md} in the
-repository).} are documented in
-\texttt{debug/kg\_sprint\_memo.md} and the three companion JSON data
-files; the scripts that produced them are
-\texttt{debug/kg1\_algebraic\_ring.py},
-\texttt{debug/kg2\_temporal\_compactification.py}, and
-\texttt{debug/kg3\_casimir\_s3\_s1.py}.  All three completed without
+repository).} all completed without
 blocked items; one minor implementation bug (\texttt{sp.nsimplify}
-mis-rewriting rationals) was identified and fixed during KG-1 and is
-documented in the memo.
+mis-rewriting rationals) was identified and fixed during KG-1.
 
 % ===================================================================
 \section{Klein-Gordon on $S^3 \times \mathbb{R}$: setup}
@@ -436,8 +430,7 @@ ladder of Paper~32 (the two-layer split read as the $\zeta$
 functional-equation reflection $\zeta(s)\leftrightarrow\zeta(1{-}s)$,
 with the transcendental window $\zeta(2k) = \text{rational}\cdot
 \pi^{2k}$ supplying the M2 observables and the negative-integer window
-$\zeta(1{-}2k)$ the $\pi$-free skeleton). Source:
-\texttt{debug/sprint\_gb3\_b6\_rung\_memo.md}.
+$\zeta(1{-}2k)$ the $\pi$-free skeleton).
 \end{observation}
 
 \subsection{The Stefan--Boltzmann constant lives in the temporal projection}
@@ -526,8 +519,7 @@ non-trivial zeros remain untouched (Paper~29's functional-equation
 obstruction). As a cross-connection, the
 on-ladder/off-ladder split ($F=\zeta(2)$ on, $B$ and $\Delta$ off) is
 exactly the Phase-4G ``no common generator'' decomposition of
-$K = \pi(B+F-\Delta)$ viewed from the ladder. Source:
-\texttt{debug/sprint\_gb4\_discriminator\_memo.md}.
+$K = \pi(B+F-\Delta)$ viewed from the ladder.
 \end{observation}
 
 % ===================================================================
@@ -802,8 +794,7 @@ we have not identified.  Either resolution would be informative.
 \subsection{Anchoring in the spectral triple (conditional;\ Sprint TS, May 2026)}
 \label{sec:tsd_promotion}
 
-Track~TS-D of Sprint~TS (May~2026; memo
-\texttt{debug/track\_ts\_d\_paper35\_triple\_test\_memo.md}) tested
+Track~TS-D of Sprint~TS (May~2026) tested
 Prediction~\ref{pred:pi_iff_temporal} against each of Paper~34's
 fifteen then-catalogued projections through the spectral-triple lens of
 Paper~32~\cite{paper32}, and found that every $\pi$-source identifiable
@@ -968,7 +959,7 @@ tests) is the computational anchor.
 \subsection{Bisognano--Wichmann reading of the temporal-window projection}
 \label{subsec:bisognano_wichmann_reading}
 
-Sprint TD Track~4 (\texttt{debug/sprint\_td\_track4\_memo.md}, May~2026)
+Sprint TD Track~4 (May~2026)
 extends the spectrum-level construction of
 \S~\ref{sec:tensor_product_verification} to the Euclidean Schwarzschild
 cigar.  Smoothness at the horizon $r = 2M$ (the standard Hawking--Gibbons
@@ -985,8 +976,7 @@ standard Hawking spectrum bit-identically (lowest bosonic mode $1/(4M) =
 zero on all three identities ($\beta = 8\pi M$,
 $T_H = \kappa_g/(2\pi)$, $\beta = 4M \cdot 2\pi$).
 
-Track~D (\texttt{debug/bisognano\_wichmann\_track\_d\_memo.md},
-May~2026) makes explicit the Bisognano--Wichmann reading of this
+Track~D (May~2026) makes explicit the Bisognano--Wichmann reading of this
 result.  The Bisognano--Wichmann theorem~\cite{bisognano_wichmann1976}
 (see also~\cite{morinelli2024_geometric_aqft} for a contemporary
 geometric perspective in the Morinelli--Neeb--\'Olafsson lineage)
@@ -1052,7 +1042,7 @@ $2\pi$ (this is the principal falsifier, a follow-up beyond sprint
 scale); a
 Lorentzian-signature spectral triple (a major NCG structural
 extension, Track~B
-verdict NO-GO; \texttt{debug/lorentz\_boost\_scoping\_memo.md}); a
+verdict NO-GO); a
 derivation of the cigar geometry from the GeoVac packing axiom (Sprint
 TD Track~4 V3 NEGATIVE; the cigar is forced by Einstein equations +
 Schwarzschild horizon, not by GeoVac); Bekenstein--Hawking entropy
@@ -1305,7 +1295,6 @@ non-predictive at the level of the observed agreement ($K$ to
 $4.8\times10^{-7}$;\ the cubic's root to $8.8\times10^{-8}$).  The K-CC sprint independently
 verified the closed form $\zeta_{D^2}(2) = \pi^2 - \pi^4/12$ as a
 new Paper~28 identity (consistent with $T9$, not previously logged).
-Sprint provenance: \texttt{debug/kcc\_sprint\_memo.md}.
 
 \item \textbf{$\alpha^5$ Lamb shift residual: scoped and reframed.}
 Sprint LS-5 (May 2026) scoped the two-loop QED calculation on the
@@ -1355,11 +1344,7 @@ underlying field theory and renormalized by counterterms that the
 framework does not autonomously generate.  This narrows the original
 Prediction~\ref{pred:pi_iff_temporal}:
 $\pi$ enters via temporal integration; renormalization is a separate
-projection not yet in the Paper~34 catalogue.  Sprint provenance:
-\texttt{debug/ls5\_two\_loop\_scoping\_memo.md},
-\texttt{debug/ls6a\_eides\_convention\_memo.md},
-\texttt{debug/ls7\_two\_loop\_se\_memo.md}, and
-\texttt{debug/ls8a\_two\_loop\_self\_energy\_memo.md}.
+projection not yet in the Paper~34 catalogue.
 
 \item \textbf{Compactification beyond $S^1_\beta$.}  We tested only the
 $S^3 \times S^1_\beta$ compactification.  More general temporal
@@ -1481,7 +1466,7 @@ Taxonomy and the Empirical Matches Catalog,'' Paper~34 (2026).
 \bibitem{kg_sprint_memo}
 GeoVac Project, ``Sprint KG Memo: Klein-Gordon on $S^3 \times
 \mathbb{R}$ -- where does $\pi$ enter?''
-\texttt{debug/kg\_sprint\_memo.md} (May 2026).
+sprint record in \texttt{CHANGELOG.md} (May 2026).
 
 \bibitem{birrell_davies}
 N.~D.~Birrell and P.~C.~W.~Davies,

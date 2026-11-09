@@ -173,7 +173,8 @@
   },
   "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Rigidity Predictions: One Retracted, One Surviving / Operational temperature decoding (Sprint TD Track 2)": {
    "date": "2026-11-08",
-   "hash": "bb53eec22d9e17e9",
+   "hash": "7b3c99450c5b84e9",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Citation status of the Layer-2 inputs": {
@@ -223,7 +224,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family": {
    "date": "2026-11-08",
-   "hash": "3484f141af2f03bd",
+   "hash": "bd69e0a6c7be4dad",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Adiabatic / Born--Oppenheimer projection": {
@@ -243,7 +245,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Bipolar harmonic / Drake combining": {
    "date": "2026-11-08",
-   "hash": "d3da3a0db7ad6d7c",
+   "hash": "d64f257a83c67427",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Boundary of sec:layer2 : internal graph-derived variables": {
@@ -308,12 +311,14 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Nuclear tensor multipole coupling": {
    "date": "2026-11-08",
-   "hash": "e17992733d805c1e",
+   "hash": "71218296057dfa5a",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Observation / temporal-window projection": {
    "date": "2026-11-08",
-   "hash": "d6c4fce9726d0073",
+   "hash": "fa51caab9e8a2059",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Phillips--Kleinman / core--valence orthogonality": {
@@ -353,7 +358,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Wick rotation / signature change": {
    "date": "2026-11-08",
-   "hash": "bf3b6c912f921fac",
+   "hash": "2fcf759a040ab412",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Wigner 3j angular coupling": {
@@ -373,12 +379,14 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer-2-Presence Bound on Catalogue Residuals (Observation)": {
    "date": "2026-11-08",
-   "hash": "1eb799dd032aa5b8",
+   "hash": "30081b64b712522f",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Open Questions": {
    "date": "2026-11-08",
-   "hash": "4b44cffc752bde6b",
+   "hash": "a409aedfbb7db33f",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue": {
@@ -388,7 +396,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Falsified candidate: W3 spectral-zeta identification of": {
    "date": "2026-11-08",
-   "hash": "a7d10239fb714124",
+   "hash": "a7e9cebfd58a2ac9",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-seeded-full-2026-11-08+thirdlook"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Literature itemization notes (running catalogue)": {
@@ -398,7 +407,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Lorentzian transfer audit (Sprint L0, May 2026)": {
    "date": "2026-11-08",
-   "hash": "78444b4bd42fdcf0",
+   "hash": "b184c94f93084030",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-seeded-full-2026-11-08+thirdlook"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Off-precision matches and error-source classification": {
@@ -428,12 +438,14 @@
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Casimir energy on S^3 : a one-projection match (KG-3)": {
    "date": "2026-11-08",
-   "hash": "879f3f9480c89a85",
+   "hash": "7a4b2f0f495d11e8",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Casimir energy on S^3 : a one-projection match (KG-3) / The Stefan--Boltzmann constant lives in the temporal projection": {
    "date": "2026-11-08",
-   "hash": "5474f8ae0476001d",
+   "hash": "81ad6de5fd1e91a0",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Falsifiable prediction / Confirmatory evidence": {
@@ -458,7 +470,8 @@
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Introduction / Sprint provenance": {
    "date": "2026-11-08",
-   "hash": "149ce3311c7345b8",
+   "hash": "4947a8977b322716",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Klein-Gordon on S^3 R : setup": {
@@ -473,7 +486,8 @@
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Bisognano--Wichmann reading of the temporal-window projection": {
    "date": "2026-11-08",
-   "hash": "8eb5a1a3f139a109",
+   "hash": "b8ce5ab59800d83b",
+   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Honest scope": {

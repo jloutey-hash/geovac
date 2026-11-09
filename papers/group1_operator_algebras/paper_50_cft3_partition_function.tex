@@ -24,11 +24,6 @@
 %
 % Status: first draft, May 2026, post-Sprint AdS-Tracks-A+B+C unified
 % (2026-05-25). Built from:
-%   debug/sprint_ads_track_a_partition_function_audit_memo.md
-%   debug/sprint_ads_track_b_entanglement_audit_memo.md
-%   debug/sprint_ads_track_c_modular_jlms_audit_memo.md
-%   debug/ads_track_a_findings_memo.md
-%   debug/ads_unified_synthesis_memo.md
 %
 % Honest scope: (A) boundary F-coefficients computed from the continuum
 % operator spectra (a re-derivation of KPS, not a finite-cutoff result); (B) wedge entropy = a degeneracy count; (C) an analogy.  Bulk side
@@ -431,10 +426,7 @@ $10^{-40}$ finds the integer relation $[8, 2, -3]$:
 \[
 8 \cdot \zeta'_{\Delta}(0) + 2 \log 2 - 3 \cdot \frac{\zeta(3)}{\pi^{2}} = 0,
 \]
-which is exactly the claimed identity. See driver
-\texttt{debug/ads\_track\_a\_scalar\_partition\_function.py} and JSON
-\texttt{debug/data/ads\_track\_a\_scalar\_partition\_function.json}
-for full computation.
+which is exactly the claimed identity.
 \end{proof}
 
 \subsection{Closed-form match: Dirac}
@@ -465,8 +457,7 @@ agreeing symbolically with~(\ref{eq:FD_KPS}).
 
 \begin{proof}
 Direct symbolic computation; \texttt{sympy.simplify(D'(0) - F\_D)}
-returns $0$. See driver
-\texttt{debug/ads\_track\_a\_dirac\_partition\_function.py}.
+returns $0$.
 \end{proof}
 
 \subsection{Master Mellin engine decomposition}
@@ -576,7 +567,7 @@ rejection, in \texttt{tests/test\_paper50\_wedge\_kms.py}). Sprint BH-Phase0
 (2026-05-22)~\cite{debug:bh_phase0} first reported a small-cutoff
 log-linear fit $S(\rhoW) \approx 1.94 \log\nmax + 0.56$ over $\nmax
 \in \{2, \dots, 7\}$. A subsequent re-analysis (forcing-catalogue
-Door~2, 2026-06-01, \texttt{debug/door2\_bw\_entropy\_reread\_memo.md})
+Door~2, 2026-06-01)
 replaced this fit by the exact $\nmax \to \infty$ resummation of the
 closed-form entropy $S = \log Z + \langle \Kalpha \rangle$ (which
 reproduces the direct diagonalization to $\le 4 \times 10^{-16}$).
@@ -1606,11 +1597,11 @@ JHEP \textbf{06} (2015) 149, arXiv:1503.06237.
 
 \bibitem{debug:bh_phase0} GeoVac internal,
 \emph{Sprint BH-Phase0 diagnostic memo},
-\texttt{debug/bh\_phase0\_diagnostic\_memo.md}, 2026-05-22.
+sprint record in \texttt{CHANGELOG.md}, 2026-05-22.
 
 \bibitem{debug:sprint_td_track5} GeoVac internal,
 \emph{Sprint TD Track 5 PSLQ-disjoint correlation entropy},
-\texttt{debug/sprint\_td\_track5\_memo.md}, 2026-05-09.
+sprint record in \texttt{CHANGELOG.md}, 2026-05-09.
 
 \bibitem{debug:external_input_three_class_partition} GeoVac internal,
 \emph{External-input three-class partition},

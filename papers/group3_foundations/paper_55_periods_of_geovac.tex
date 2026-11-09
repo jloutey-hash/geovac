@@ -15,8 +15,6 @@
 %
 % Built from internal sprint memos:
 %   debug/sprint_mixed_tate_test_memo.md (M2)
-%   debug/sprint_m3_cyclotomic_mixed_tate_memo.md (M3)
-%   debug/sprint_m1_pure_tate_memo.md (M1)
 % and the closure paragraphs in Paper 18 §III.7 and Paper 32 §VIII
 % corollaries cor:m1_pure_tate, cor:m2_mixed_tate,
 % cor:m3_cyclotomic_mixed_tate.
@@ -640,8 +638,7 @@ non-trivial primitive Dirichlet character $\chi_{-4}$, with
 $\mathrm{Gal}(\Q(\zeta_4)/\Q)$ acting \emph{non-trivially} via the
 Deligne--Glanois descent from level $4$ to level $2$.  The coincidence of
 fields is at the number-field level only;\ the two motivic Galois actions
-are structurally independent (sprint memo
-\texttt{debug/sprint\_a7\_m2\_m3\_cyclotomic\_memo.md}, June 2026).  The
+are structurally independent (June 2026).  The
 factorisation $[Z_{1, 2n}] = [\mathbb{P}^n] \cdot (1 + \mathbb{L}^n)$
 exhibits the two split-quadric maximal isotropic subspaces over $\Q(i)$ as
 the source of the doubled middle Tate twist $\Z(n)[2n]$, sharpening the
@@ -1184,7 +1181,7 @@ collapsing the realized depth, as at $\sthree$.
 \label{subsec:m3_diagonal_collapse}
 
 The Sprint NA-1 depth-2 Mellin test
-(\texttt{debug/sprint\_na1\_depth2\_mellin\_memo.md}, 2026-06-06)
+(2026-06-06)
 returned a structural identity that refines the M3 picture on the
 natural Camporesi--Higuchi diagonal substrate.
 
@@ -1262,8 +1259,7 @@ $\sum_{u \in \Z + 1/2,\, u \ge 3/2} (-1)^{u - 3/2}
 identity $\sum_{n \ge 0}(-1)^n (n + 3/2)^{-k} = 2^k (1 - \beta(k))$
 to both terms and simplifying gives~\eqref{eq:m3_gammaP_closed}.
 Verified bit-exact at $s \in \{2, 3, 4, 5, 6\}$ via PSLQ at $50$,
-$100$, $200$ dps in
-\texttt{debug/sprint\_na1\_depth2\_mellin\_compute.py}.
+$100$, $200$ dps.
 \end{proof}
 
 \begin{remark}[Relation to the level-$4$ cyclotomic content of
@@ -1376,10 +1372,8 @@ content.  The genuine A/B probe lives at the
 $\chi_D(a_0, a_1, a_2)$ with two non-$D$-functions between
 heat-kernels), where the cocycle structure carries the operator
 ordering algebraically rather than projecting onto the trace
-diagonal.  See
-\texttt{debug/sprint\_na1\_offdiag\_substrate\_memo.md}~(2026-06-06)
-for the substrate audit at $n_{\max} \in \{2, 3\}$ on the
-off-diagonal CH with chirality-flipping $E_1$ entries, which
+diagonal.  The substrate audit (2026-06-06) at $n_{\max} \in \{2, 3\}$ on the
+off-diagonal CH with chirality-flipping $E_1$ entries
 verifies the trace-functional collapse bit-exactly even in the
 genuinely non-commuting case.
 \end{remark}
@@ -1430,9 +1424,7 @@ swap zeros hold for a random real-symmetric $D$ and fail for a random complex
 Hermitian one
 (\texttt{tests/test\_paper55\_jlo\_depth2\_reading\_A.py}), so the swap
 symmetry is a consequence of the reality of $D$ rather than independent
-evidence.  See
-\texttt{debug/sprint\_jlo\_depth2\_memo.md}~\S4.3 for the explicit
-non-vanishing operator commutators.
+evidence.
 
 The verdict is stable across cutoff:\ spot-checks at
 $n_{\max} = 3$ reproduce bit-exact swap symmetry and, in the even
@@ -1794,8 +1786,7 @@ objects.
 The Fathizadeh--Marcolli result holds on $\R \times \sthree$ with
 arbitrary scaling factor $a(t)$;\ the present paper restricts to
 $a(t) \equiv 1$, the closed-point specialisation $\{1\} \times \{0\}^{2n}$
-of \S\ref{sec:m2}.  Scoping (Sprint~A1, 2026-06-03; memo
-\texttt{debug/sprint\_a1\_scoping\_memo.md}) splits ``inhomogeneous
+of \S\ref{sec:m2}.  Scoping (Sprint~A1, 2026-06-03) splits ``inhomogeneous
 extension'' into three structurally distinct sub-cases:
 
 \begin{itemize}
@@ -1813,7 +1804,7 @@ extension'' into three structurally distinct sub-cases:
     substrate $\sthree \times S^1_\beta$, not literally an $a(t)$ in F--M's
     sense) does NOT inject classical odd-zeta $\zeta(2k+1)$ or MZV content
     into the 4D Seeley--DeWitt coefficients.  Sprint A1-Matsubara
-    (2026-06-03, \texttt{debug/sprint\_a1\_matsubara\_memo.md}) computes the
+    (2026-06-03) computes the
     small-$t$ asymptotic of the product heat kernel
     $K_{\sthree \times S^1_\beta}(t) = K_{\sthree}(t) \cdot K_{S^1_\beta}(t)$
     and finds that the temporal factor contributes a single power
@@ -1921,10 +1912,8 @@ single slice $\pi^3\cdot\Q$ (odd-weight pure-Tate slice).  Both rings sit
 in $\Q[\pi] \subset \MT(\Q)$;\ both inherit the F--M
 classification~\cite{fathizadeh_marcolli2016} at the static-substrate
 sub-case $a(t) \equiv 1$.  Closed forms derived by Jacobi $\vartheta_2,
-\vartheta_3$ modular transformation in
-\texttt{debug/sprint\_a2\_s5\_sd\_coefficients.py};\ memo
-\texttt{debug/sprint\_a2\_s5\_mixed\_tate\_memo.md} (June~2026)
-documents the full derivation, numerical verification, and
+\vartheta_3$ modular transformation (June~2026), with the full derivation,
+numerical verification, and
 dimension-parity sharpening.
 
 The M1 volume slot transfers to $\sfive$, whose volumes lie in
@@ -1940,8 +1929,7 @@ sub-question Q3' and closed below.
 
 The structural classification ``does M3 on $\sfive$ admit a parallel
 cyclotomic-mixed-Tate-at-level-$\le 4$ classification?'' is closed
-POSITIVE by \S\ref{subsec:m3_s5} above (Sprint A6, 2026-06-03;\ memo
-\texttt{debug/sprint\_a6\_m3\_s5\_memo.md}).  Corollary
+POSITIVE by \S\ref{subsec:m3_s5} above (Sprint A6, 2026-06-03).  Corollary
 \ref{cor:m3_s5_cyclotomic} states that $M_3^{(\sfive)} \subset
 \MT(\Z[i, 1/2])$ at level $\le 4$, depth bounded by loop order.  The
 remaining empirical target is specific motivic identification of
@@ -1960,8 +1948,7 @@ The almost-commutative extension
 $\mathcal{A}_{\mathrm{GV}} \otimes \mathcal{A}_F$ studied in
 Paper~32 \S~VIII.C~\cite{loutey_paper32} (Sprint H1 closure) admits a
 Higgs structure but does not autonomously select the Yukawa coupling
-matrix.  Scoping (Sprint~A4, 2026-06-03; memo
-\texttt{debug/sprint\_a4\_scoping\_memo.md}) settles the period-theoretic
+matrix.  Scoping (Sprint~A4, 2026-06-03) settles the period-theoretic
 placement using three theorem-grade prior results:
 
 \begin{enumerate}
@@ -1971,8 +1958,7 @@ placement using three theorem-grade prior results:
   \item Paper~18~\S~IV.6 Theorem~\texttt{thm:ac\_factorization}:\ the
     combined heat trace factorises cleanly into an outer (M2 on $\sthree$)
     factor and an inner factor, with no mixing.
-  \item Sprint Yukawa-PSLQ (2026-06-03,
-    \texttt{debug/sprint\_yukawa\_pslq\_memo.md}):\ a 162-cell empirical
+  \item Sprint Yukawa-PSLQ (2026-06-03):\ a 162-cell empirical
     PSLQ sweep at both $\overline{\mathrm{MS}}\,M_Z$ and unification scales
     returned zero hits for Yukawa values in low-coefficient pure-Tate
     periods.
@@ -2010,8 +1996,7 @@ Proposition~\ref{prop:vertex_parity_descent}).  Both occurrences trace
 to the dimension-$3$ parity of $\sthree$:\ M2 via the Euclidean
 signature $(+,+,+,+)$ on $\R^4 \supset \sthree$, M3 via the
 half-integer Camporesi--Higuchi shift $3/2$ on
-$\mathrm{spin}(3) = \mathrm{SU}(2)$.  Sprint A7 (2026-06-03;\ memo
-\texttt{debug/sprint\_a7\_m2\_m3\_cyclotomic\_memo.md}) returns
+$\mathrm{spin}(3) = \mathrm{SU}(2)$.  Sprint A7 (2026-06-03) returns
 HALF-STRUCTURAL:\ the shared field is robust at the number-field
 level, but no shared Tannakian symmetry is known in the published
 periods program (Brown~\cite{brown2012}, Deligne~\cite{deligne2010},
@@ -2079,9 +2064,7 @@ must be constructed.  This is the precise mathematical
 target of the long-range open program.
 
 \emph{Bit-exact finite-cutoff witness of the k-slot factorisation
-(Sprint Q5'-CH-1, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_ch1\_memo.md}, data
-\texttt{debug/data/sprint\_q5p\_ch1\_data.json}).}  The master Mellin
+(Sprint Q5'-CH-1, June 2026).}  The master Mellin
 source $\mathrm{Tr}(D^k\,e^{-tD^2})$ on the truncated Camporesi--Higuchi
 spectral triple at $n_{\max} \in \{2, 3, 4\}$ exhibits a bit-exact
 chirality-parity selection rule:\ plain trace nonzero for $k \in \{0,
@@ -2117,7 +2100,7 @@ on the dg-category is the natural Stage~1 of the substantial open $U^*$
 program;\ the resulting motivic Galois action is Stage~2.
 
 \emph{Continuum M2 verification at integer $s$ (Sprint Q5'-CH-2,
-2026-06-05;\ memo \texttt{debug/sprint\_q5p\_ch2\_memo.md}).}  The
+2026-06-05).}  The
 continuum CH spectral zeta $\zeta_{D^2}(s)$ for $s \in \{1, 2, 3, 4, 5\}$
 sits bit-exactly in $\bigoplus_k \pi^{2k}\Q$ as exactly two non-zero
 $\pi^{2k}$ terms per $s$:\ $-\pi^2/4$, $\pi^2 - \pi^4/12$,
@@ -2133,8 +2116,7 @@ $\zeta_{D^2}(s) = 2\,\zeta(2s-2, 3/2) - (1/2)\,\zeta(2s, 3/2)$ via the
 standard identity $\zeta(s, 1/2) = (2^s - 1)\,\zeta(s)$.
 
 \emph{Continuum M3 verification at integer $s$, with parity-of-$s$
-stratification (Sprint Q5'-CH-3, 2026-06-05;\ memo
-\texttt{debug/sprint\_q5p\_ch3\_memo.md}).}  The Paper~28 Theorem~3
+stratification (Sprint Q5'-CH-3, 2026-06-05).}  The Paper~28 Theorem~3
 closed form $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) =
 2^{s-1}(\beta(s) - \beta(s-2))$ is verified bit-exact at
 $s \in \{4, 5, 6\}$ to residual $< 10^{-80}$ at $80$ dps (numeric
@@ -2156,8 +2138,7 @@ parity-stratified cyclotomic content.  Stage~1 of the cosmic-Galois
 $U^*$ program has its complete symbol-level target.
 
 \emph{Stage~1 reframe from $\mathrm{HP}_*$ to $\mathrm{HP}^*$
-(Sprint Q5'-Stage1-reframe, 2026-06-05;\ memo
-\texttt{debug/sprint\_q5p\_stage1\_reframe\_memo.md}).}  The R3
+(Sprint Q5'-Stage1-reframe, 2026-06-05).}  The R3
 sub-sprint of June~2026 closed the Marcolli--Tabuada
 $\mathrm{HP}_*$-route at source:\ at every finite $n_{\max}$, the
 algebra $\mathcal{A}_{\mathrm{GV}}^{(n_{\max})} \cong \C^{N_{\mathrm{Fock}}}$
@@ -2172,8 +2153,7 @@ symbol data --- $G_0(t)$ landing in M1 with leading
 $\dim\mathcal{H}$, $G_2(t)$ in M2 with leading $\mathrm{Tr}(\Lambda^2)$,
 $S_1(t)$ in M3 with leading $\mathrm{Tr}(\gamma\Lambda)$ --- becomes the
 short-time asymptotic of $\phi_n$ evaluated on the algebra unit.  The
-S5 falsifier sprint (\texttt{debug/sprint\_q5p\_s5\_falsifier\_memo.md},
-2026-06-05) independently confirms that the Camporesi--Higuchi
+S5 falsifier sprint (2026-06-05) independently confirms that the Camporesi--Higuchi
 substrate is the correct target:\ the bit-exact $\Z/2$
 chirality-parity factorization that grounds CH-1 fails structurally
 on Bargmann--Segal Hardy-on-$S^5$ (no $\pm$-symmetric spectrum, no
@@ -2184,8 +2164,7 @@ $U^*$) remains a long-range open program, unchanged in scope.
 
 \emph{Stage~1 explicit $\omega^{\mathrm{tri}}$ symbol at $n_{\max} = 2$
 and cutoff sweep (Sprints Q5'-Stage1-JLO-nmax2 and Q5'-Stage1-2a,
-2026-06-05;\ memos \texttt{debug/sprint\_q5p\_jlo\_nmax2\_memo.md} and
-\texttt{debug/sprint\_q5p\_2a\_jlo\_nmax\_sweep\_memo.md}).}  The JLO
+2026-06-05).}  The JLO
 entire-cyclic cochains $\{\phi_n^{\mathrm{even}},
 \phi_n^{\mathrm{odd}}\}_{n \in \{0, 1, 2\}}$ of the truncated CH
 spectral triple at $n_{\max} = 2$ (dim $\mathcal{H} = 16$, algebra
@@ -2219,8 +2198,7 @@ working cochain-level home of $\omega^{\mathrm{tri}}$;\ the
 single-cocycle vs.\ multi-cocycle distinction between JLO and CM
 is itself Stage-2-relevant.
 
-\emph{Stage~1 Mellin localization (Sprint Q5'-Stage1-2b, 2026-06-05;\
-memo \texttt{debug/sprint\_q5p\_2b\_phi0\_mellin\_memo.md}).}  The
+\emph{Stage~1 Mellin localization (Sprint Q5'-Stage1-2b, 2026-06-05).}  The
 formal Mellin transform of the degree-0 JLO cochain
 $\mathcal{M}[\phi_0^{\mathrm{odd}}(1; t)](s) = \Gamma(s) \cdot
 \zeta_{D^2}(s)$ closes bit-exactly in $\Q[\Gamma(s)]$ at $n_{\max}
@@ -2245,8 +2223,7 @@ cosmic-Galois Stage~2 motivic-Galois action acts at continuum, not
 at finite cutoff;\ this is the explicit boundary.
 
 \emph{Stage~1 bicomplex and $\mathrm{HP}^{\mathrm{even}}$ class
-identification (Sprint Q5'-Stage1-2c, 2026-06-05;\ memo
-\texttt{debug/sprint\_q5p\_2c\_bicomplex\_memo.md}).}  The cyclic
+identification (Sprint Q5'-Stage1-2c, 2026-06-05).}  The cyclic
 $(b, B)$ bicomplex of the truncated Camporesi--Higuchi spectral
 triple at $n_{\max} = 2$ has been constructed bit-exactly in
 \texttt{sympy.Rational}.  The load-bearing degree-1 entire-cyclic
@@ -2282,8 +2259,7 @@ rather than three slots of a single functor.
 
 \emph{Stage~1 second span:\ explicit CM-residue $\eta$-pairing
 bicomplex and CM $\eta$-class identification (Sprint
-Q5'-Stage1-CM-Bicomplex, 2026-06-05;\ memo
-\texttt{debug/sprint\_q5p\_cm\_bicomplex\_memo.md}).}
+Q5'-Stage1-CM-Bicomplex, 2026-06-05).}
 The Connes--Moscovici $\eta$-pairing residue cocycle
 $\psi_n^{\eta}(a_0, \dots, a_n; t)
 = \int_{\Delta_n}\mathrm{Tr}(\gamma D\,a_0\,e^{-s_0 t D^2}\,
@@ -2396,9 +2372,7 @@ The substrate established here is the concrete object that Stage 2's
 long-range program acts on.
 
 \emph{Stage 1 sub-sprint strict-strong-form pro-system functoriality
-diagnostic (Sprint Q5'-Stage1-StrictStrong, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_strict\_strong\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_strict\_strong.json}).}
+diagnostic (Sprint Q5'-Stage1-StrictStrong, June 2026).}
 The v3.60.0 pro-system result that the JLO HP$^{\mathrm{even}}$ class
 and CM-$\eta$ class form a strictly compatible inverse system at the
 level of cocycle CLASSES extends to a sharp dichotomy when probed at
@@ -2425,9 +2399,7 @@ functoriality under algebra truncations, made explicit on the
 truncated CH commutative sub-algebra in the GeoVac substrate.
 
 \emph{Tauberian rate uniformity at $s = 3/2$ closed (Sprint
-Q5'-Stage1-Tauberian, 2026-06-05;\ memo
-\texttt{debug/sprint\_q5p\_tauberian\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_tauberian.json}).}  The Stage-1 named
+Q5'-Stage1-Tauberian, 2026-06-05).}  The Stage-1 named
 follow-on on uniform rate of approach to the M1 Mellin residue at
 $s = 3/2$ is closed at Paper~38 L2 grade.  The four hypotheses of the
 standard uniform Tauberian theorem (Karamata~\cite{karamata1962}
@@ -2445,9 +2417,7 @@ monotonically approaches the predicted $-1/8 = -0.125$, hitting
 $-0.123$ at $n_{\max} = 100$.
 
 \emph{Stage 1 third span:\ continuum M3 Mellin residue and integer-$s$
-panel (Sprint Q5'-Stage1-M3-Continuum, 2026-06-05;\ memo
-\texttt{debug/sprint\_q5p\_m3\_continuum\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_m3\_continuum.json}).}  Closes the
+panel (Sprint Q5'-Stage1-M3-Continuum, 2026-06-05).}  Closes the
 named M3 continuum-residue follow-on of v3.59.0 Track 2 at Paper~38 L2
 grade.  The continuum $\eta$-Dirichlet series
 $\eta_D(s) = \sum_{n \ge 0} g_n |\lambda_n|^{1 - s}$ has the Hurwitz
@@ -2477,9 +2447,7 @@ no $\pi$-power reduction (even the irrationality of $G$ is open).  M1 lives at $
 M3 lives at $k = 1$ depth $1+$ cyclotomic level $4$.
 
 \emph{Substrate enrichment:\ nested-Hopf-tower $J^*(S^3)$ (Sprint
-Q5'-J-Star-S3, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_j\_star\_s3\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_j\_star\_s3.json}).}  A first scoping
+Q5'-J-Star-S3, June 2026).}  A first scoping
 step of the first of three long-range enrichment ingredients flagged
 in the Stage-2 Hopf paragraph above replaces the sector-disjoint
 $\mathbb{C}^{N(n_{\max})}$ substrate with the SU(2) Peter--Weyl
@@ -2501,9 +2469,7 @@ product giving $U^* = \mathbb{G}_a^{3 N} \times SL_2$ (Levi-decomposition
 shape, the right Stage-2 target).
 
 \emph{Substrate enrichment:\ cross-shell off-diagonal Dirac (Sprint
-Q5'-OffDiag-Dirac, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_offdiag\_dirac\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_offdiag\_dirac.json}).}  The first
+Q5'-OffDiag-Dirac, June 2026).}  The first
 scoping step of the second enrichment ingredient (cross-shell
 off-diagonal Dirac perturbation via $E_1$-dipole transition
 generators $T_{s' \to s} := e_s \cdot (\kappa A) \cdot e_{s'}$ in the
@@ -2530,9 +2496,7 @@ $n_{\max}$, closed-form Lie structure constants, bit-exact bridge
 identification.
 
 \emph{Substrate enrichment:\ Cuntz extension is structurally
-incompatible (Sprint Q5'-Cuntz, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_cuntz\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_cuntz.json}).}  Of the three
+incompatible (Sprint Q5'-Cuntz, June 2026).}  Of the three
 substrate-enrichment ingredients flagged in the Stage-2 Hopf paragraph
 above, the first scoping step of the third returns a structural
 negative.  Replacing the commutative algebra $\mathbb{C}^{N(n_{\max})}$
@@ -2588,9 +2552,7 @@ cosmic-Galois $U^*$ acts on $\mathcal{H}_{\mathrm{Levi}}$ in the
 expected way.
 
 \emph{Mellin-slot-decorated Peter--Weyl substrate:\ alternative synthesis
-$U^* = SL_2^3$ (Sprint Q5'-Decorated-PW, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_decorated\_pw\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_decorated\_pw.json}).}  The alternative
+$U^* = SL_2^3$ (Sprint Q5'-Decorated-PW, June 2026).}  The alternative
 synthesis flagged in the J$^*(S^3)$ paragraph above option (b) --- the
 Mellin-slot-decorated Peter--Weyl substrate $\pi^{j, k}_{mn}$ at
 $j_{\max} \in \{1/2, 1\}$ with $n_k = 3$ Mellin slots and
@@ -2613,9 +2575,7 @@ valid candidates;\ the strategic choice is the next sprint-scale
 decision in the long-range Stage-2 program.
 
 \emph{Combined substrate scoping:\ L5 = L1 categorically (Sprint
-Q5'-Combined-Substrate, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_combined\_substrate\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_combined\_substrate.json}).}  The first
+Q5'-Combined-Substrate, June 2026).}  The first
 long-range scoping step of combining the T3a Peter--Weyl substrate and
 the T3b cross-shell off-diagonal Dirac substrate on a SINGLE combined
 substrate closes the categorical question:\ \textbf{at the basic
@@ -2638,9 +2598,7 @@ refinement of the OffDiag basis, sacrificing the v3.61.0 sector
 structure;\ long-range.
 
 \emph{Bridge identity bit-exactly closing the T3b umbrella (Sprint
-Q5'-Bridge-Id, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_bridge\_id\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_bridge\_id.json}).}  The bit-exact
+Q5'-Bridge-Id, June 2026).}  The bit-exact
 bridge identification flagged as a feasible follow-on in the
 Q5'-OffDiag-Dirac paragraph above closes via the single identity
 $\mathrm{drift}_{n_{\max} \ge 3}(e_2, e_3, e_3, e_2) = -\kappa^4
@@ -2663,9 +2621,7 @@ Lie-algebra structure constants, continuum-limit Mellin lift to M3)
 remain open.
 
 \emph{OffDiag algebra-closure dimension scaling at $n_{\max} = 3$
-(Sprint Q5'-OffDiag-Closure-nmax3, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_offdiag\_closure\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_offdiag\_closure.json}).}  The first
+(Sprint Q5'-OffDiag-Closure-nmax3, June 2026).}  The first
 long-range scoping step of OffDiag algebra-closure dimension at general
 $n_{\max}$ closes POSITIVE.  The closure
 $\mathcal{A}_{\mathrm{OD}}^{(n_{\max})}
@@ -2687,9 +2643,7 @@ pro-unipotent factor of the cosmic-Galois $U^*$ Hopf algebra
 (Connes--Marcolli 2007).
 
 \emph{Stage-2 substrate decision via the primitive-space invariant:\
-L1 is forced (Sprint Q5'-L1-vs-L2-Diagnostic, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_l1\_vs\_l2\_diagnostic\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_l1\_vs\_l2\_diagnostic.json}).}  The
+L1 is forced (Sprint Q5'-L1-vs-L2-Diagnostic, June 2026).}  The
 strategic question flagged in the decorated-PW paragraph above and in
 the L1+L5 categorical-reduction paragraph -- whether the v3.61.0
 abelian primitives $x_{(n, l), k}$ carry independent content (so L1's
@@ -2723,9 +2677,7 @@ factor $\mathbb{G}_a^{3 N(n_{\max})}$ in the Connes--Marcolli machinery.
 
 \emph{Closed-form generating function for the chirality-weighted
 two-step path count on the OffDiag substrate (Sprint Q5'-T-Path-Generating
-T2, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_t\_path\_generating\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_t\_path\_generating.json}).}  The
+T2, June 2026).}  The
 chirality-weighted two-step path count
 $N^{(2)}_{s' \to s} := \mathrm{Tr}(\gamma A e_s A e_{s'})/\kappa^2$
 on the v3.62.0 OffDiag substrate is bit-exactly \emph{cutoff-independent}
@@ -2744,9 +2696,7 @@ This closed form unlocks the continuum Mellin lift below.
 
 \emph{Continuum Mellin lift of the discrete bridge identity to the
 spectral zeta side with bit-exact M2/M3 decomposition by shift parity
-(Sprint Q5'-Mellin-Lift-Bridge T1, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_mellin\_lift\_bridge\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_mellin\_lift\_bridge.json}).}  Using
+(Sprint Q5'-Mellin-Lift-Bridge T1, June 2026).}  Using
 T2's quartic closed form, the continuum Mellin lift of the v3.63.0
 L3 discrete bridge identity $\mathrm{drift}_{n_{\max} \ge 3} = -\kappa^4$
 is the generating function
@@ -2774,9 +2724,7 @@ master Mellin engine extends from the trace-evaluation level
 (case-exhaustion theorem in Paper~32 \S VIII) to the substrate-side
 Mellin generating function.
 
-\emph{$m_J$-resolved smash-product foundation:\ bit-exact $\Delta m_J \in \{-1, 0, +1\}$ grading and U(1) z-rotation diagonalisation at $n_{\max} = 2$ (Sprint Q5'-mJ-Smash-Product T4, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_mj\_smash\_product\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_mj\_smash\_product.json}).}  The
+\emph{$m_J$-resolved smash-product foundation:\ bit-exact $\Delta m_J \in \{-1, 0, +1\}$ grading and U(1) z-rotation diagonalisation at $n_{\max} = 2$ (Sprint Q5'-mJ-Smash-Product T4, June 2026).}  The
 $m_J$-resolved refinement of the OffDiag substrate that v3.63.0 L5
 explicitly named as the load-bearing data for a non-trivial smash-product
 admits a bit-exact $\mathbb{Z}_3$-grading by
@@ -2801,9 +2749,7 @@ $\mathcal{A}^{m_J\text{-OD}} \rtimes \mathcal{O}(SL_2)$ — the only path
 to a non-trivial Hopf extension beyond Levi-decomposition.
 
 \emph{L2 substrate extended to $j_{\max} = 3/2$:\ smash-product prerequisite
-closed (Sprint Q5'-FO1 v3.66.0;\ memo
-\texttt{debug/sprint\_q5p\_fo1\_l2\_extension\_jmax32\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_fo1\_l2\_extension\_jmax32.json}).}
+closed (Sprint Q5'-FO1 v3.66.0).}
 The sprint-scale prerequisite identified above is closed bit-exactly:\
 the L2 decorated-PW substrate $\mathcal{H}_{\mathrm{dec}}^{(j_{\max} = 3/2)}$
 has dimension $90 = 3 \cdot 30$ (per-slot dim
@@ -2823,9 +2769,7 @@ construction at the prerequisite level.
 \emph{Interpretation C of cosmic-Galois $U^*$-action closes via
 period-pairing:\ $F(s)$ in MT$(\mathbb{Q}, 1) \subset$
 MT$(\mathbb{Z}[i, 1/2], 4)$ + $\chi, \eta$ at depth 0 (Sprint Q5'-FO2+FO3
-v3.66.0;\ memo
-\texttt{debug/sprint\_q5p\_fo2\_fo3\_mt\_period\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_fo2\_fo3\_mt\_period.json}).}  T5 of v3.65.0
+v3.66.0).}  T5 of v3.65.0
 identified three interpretations of "$U^*$ acts on $\mathcal{H}_{\mathrm{Levi}}$":\
 (A) Hopf-coaction, (B) Hopf-automorphism, (C) period-pairing.
 Interpretation C is the cleanest sprint-scale closure;\ this
@@ -2886,10 +2830,7 @@ rigidity and Tannakian readiness.
 
 \emph{Pro-system lockdown PS-2:\ $U^*$-action compatibility with
 PS-1 transitions (Sprint Q5'-ProSystem-Lockdown, PS-2 sub-track,
-2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_ps2\_ustar\_compatibility\_memo.md};\
-data
-\texttt{debug/data/sprint\_q5p\_ps2\_ustar\_compatibility.json}).}
+2026-06-06).}
 The block-diagonal Hopf-hom lift $\Phi_{m, k}: \mathcal{H}_{\mathrm{GV}}(m)
 \to \mathcal{H}_{\mathrm{GV}}(k)$ of PS-1's $P_{m, k}$ acts on the
 primitive generators by $\Phi(x_{(n, l), s}^{(m)}) = x_{(n, l), s}^{(k)}$
@@ -2928,9 +2869,7 @@ $\mathrm{MT}(\mathbb{Q}, 1)$ odd-zeta classes per v3.66.0 FO2).
 
 \emph{Pro-system lockdown PS-3:\ inverse limit $\mathcal{O}_\infty$
 and the continuum $F(s)$ panel (Sprint Q5'-ProSystem-Lockdown, PS-3
-sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_ps3\_inverse\_limit\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_ps3\_inverse\_limit.json}).}  The
+sub-track, 2026-06-06).}  The
 truncated CH pro-system has a sequential inverse limit
 $\mathcal{O}_\infty = \varprojlim_{n_{\max}} \mathcal{O}_{n_{\max}}
 \cong \mathbb{Q}^{\mathbb{N}_{\mathrm{sec}}}$ where
@@ -2969,9 +2908,7 @@ lockdown sprint's final sub-track.
 
 \emph{Pro-system lockdown PS-4:\ endomorphism rigidity probe and
 Tannakian-readiness gap-list (Sprint Q5'-ProSystem-Lockdown, PS-4
-sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_ps4\_endo\_rigidity\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_ps4\_endo\_rigidity.json}).}
+sub-track, 2026-06-06).}
 $\mathrm{End}_{\mathrm{compat}}(\mathcal{O}_n)$ --- the
 $\mathbb{Q}$-linear endomorphisms of the truncated sector-idempotent
 algebra that admit a compatible family at every lower cutoff
@@ -3045,9 +2982,7 @@ obstruction;\ the closure runs in 0.03 s wall time on a representative
 panel.
 
 \emph{Tannakian closure foundation TC-1b:\ symmetric monoidal
-structure (Sprint Q5'-Tannakian-Closure, TC-1b sub-track, 2026-06-06;\
-memo \texttt{debug/sprint\_q5p\_tc1b\_monoidal\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_tc1b\_monoidal.json}).}  The category
+structure (Sprint Q5'-Tannakian-Closure, TC-1b sub-track, 2026-06-06).}  The category
 $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$
 is symmetric monoidal under $\otimes_\mathbb{Q}$ with the diagonal
 Hopf action
