@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.5] - 2026-11-08
+
+**/qa group6 third look on Paper 34 and the synthesis (PI call).** Closes the open owner fixes from v6.7.4's
+self-check. Three fresh-reviewer passes over the changed text only:
+- **Pass 1 (post-round-2 edits): 3 LARGE.** Paper 34 called PK "essential, not redundant in second quantization" in
+  the composed / balanced architecture, against Paper 19 (antisymmetry role a classical-solver artifact; Track CB an
+  incomplete replacement; balanced is PK-free). Paper 34's abstract and conclusion described the empirical catalogue
+  as machine-precision agreements, while it holds -456 / -551 / +199 ppm rows and two non-converged Bethe logs.
+- **Pass 2 (the fixes): 2 LARGE, both introduced by pass-1 edits.** The synthesis's zero-Layer-2 range lost its
+  converged-basis anchor (He NR ~0.024%, Paper 34 owner text), and obs:single_origin counted textbook-assembly rows
+  as presence-bound inputs.
+- **Pass 3: 0 LARGE.** SMALLs to docs/qa/group6.debt.md.
+
+### Changed
+- Paper 34: PK passage aligned to Paper 19 (PK stands in for omitted cross-block V_ee + cross-center V_ne; Track CB
+  failed as an incomplete replacement; cited to Paper 19, not CLAUDE.md). Catalogue described as comparisons with
+  residuals from machine-exact to non-converged (abstract, conclusion, catalogue opening, off-precision paragraph).
+  Single-projection carve-out names literature inputs and textbook-assembly rows (VP, self-energy, tabulated Bethe
+  logarithms); the bound counts the literature inputs as L_2^(i). Entropy exponent: gamma_inf 1.96-1.97 in the
+  Z:15->30 window, extrapolation-order dependent; at n_max=3 the local exponent bottoms near 1.905 and climbs toward
+  2 (1.93 at Z:10^4->10^5); a limit of 2 is not claimed.
+- Group6 synthesis: same carve-out and exponent wording; zero-Layer-2 chains run from machine-exact to
+  converged-basis ceilings; hydrogen Lamb named; "Most consume external inputs".
+
+### Added
+- C16 entry p34-group6-thirdlook-2026-11-08 (fires 4 on P34 HEAD, 1 on synthesis HEAD, 0 now). On its first gate run
+  it caught the same overclaim in the catalogue opening, which no reviewer had flagged.
+
+### QA record
+- Paper 34 prose stamped (50 units); the two catalogue units edited after stamping stay unstamped.
+  **Coverage 116/142** (prose 112/132, cite 3/5, code 1/5). Synthesis units are derived (contradiction-checked).
+
 ## [v6.7.4] - 2026-11-08
 
 **/qa group6 seeded FULL (incremental plan, all 142 owner units NEW, PI-invoked) = FAIL; RESEARCH-GRADE not earned;

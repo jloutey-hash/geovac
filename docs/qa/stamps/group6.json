@@ -181,6 +181,256 @@
    "hash": "d95cb9ad16c66f10",
    "run": "group6 seeded FULL 2026-11-08"
   },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Citation status of the Layer-2 inputs": {
+   "date": "2026-11-08",
+   "hash": "f362014bf969602a",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Conclusion": {
+   "date": "2026-11-08",
+   "hash": "922dd1001491d578",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Connection to Paper 18 (Transcendentals) and Paper 32 (Spectral Triple": {
+   "date": "2026-11-08",
+   "hash": "bad35a5b9e10e215",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Dimensional Axiomatization": {
+   "date": "2026-11-08",
+   "hash": "9f4e3303837c595c",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Introduction: The Two-Layer Thesis": {
+   "date": "2026-11-08",
+   "hash": "080b6bea3ef9d836",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 1: The Bare Graph": {
+   "date": "2026-11-08",
+   "hash": "4bd0acfc7390ae0e",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 1: The Bare Graph / -free certificate": {
+   "date": "2026-11-08",
+   "hash": "b7edd46268defa5d",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 1: The Bare Graph / Layer-1 observables": {
+   "date": "2026-11-08",
+   "hash": "97c7a74af99930f1",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 1: The Bare Graph / Quantum-number labelling": {
+   "date": "2026-11-08",
+   "hash": "ae1d98f0934621a2",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family": {
+   "date": "2026-11-08",
+   "hash": "3484f141af2f03bd",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Adiabatic / Born--Oppenheimer projection": {
+   "date": "2026-11-08",
+   "hash": "8290a6c2b2fd2554",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Apparatus identity / state-side reduction": {
+   "date": "2026-11-08",
+   "hash": "1470a865b6db2e28",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Bargmann--Segal transform: R ^3 HO S^5 Hardy space": {
+   "date": "2026-11-08",
+   "hash": "ac9ba133842af967",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Bipolar harmonic / Drake combining": {
+   "date": "2026-11-08",
+   "hash": "d3da3a0db7ad6d7c",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Boundary of sec:layer2 : internal graph-derived variables": {
+   "date": "2026-11-08",
+   "hash": "e4436f6193c752f0",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Camporesi--Higuchi spinor lift": {
+   "date": "2026-11-08",
+   "hash": "11680fb014612dde",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Connes--Chamseddine spectral action / heat kernel": {
+   "date": "2026-11-08",
+   "hash": "14444824b92e7e4a",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Coupled-channel / adiabatic curve": {
+   "date": "2026-11-08",
+   "hash": "0e7c5ae47533c9f8",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Drake--Swainson normalization of Bethe-log sums": {
+   "date": "2026-11-08",
+   "hash": "3e30e95f7a15135e",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Fock conformal projection: R ^3 S^3": {
+   "date": "2026-11-08",
+   "hash": "a75d9bd654d018dc",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Gauge choice (Coulomb / Lorenz / Feynman)": {
+   "date": "2026-11-08",
+   "hash": "fa442d0ea23a8c5b",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Hopf bundle: S^3 S^2 S^1 (locally)": {
+   "date": "2026-11-08",
+   "hash": "98b88b693790eff4",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Molecule-frame hyperspherical separation": {
+   "date": "2026-11-08",
+   "hash": "f9153f2431031776",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Multipole expansion / Gaunt termination": {
+   "date": "2026-11-08",
+   "hash": "8bf0c72a6ebdb30a",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Nuclear charge-density correction (Foldy/Friar)": {
+   "date": "2026-11-08",
+   "hash": "90b803fcee244e86",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Nuclear magnetization-density correction (Zemach)": {
+   "date": "2026-11-08",
+   "hash": "13c29dfa08fd2248",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Nuclear tensor multipole coupling": {
+   "date": "2026-11-08",
+   "hash": "e17992733d805c1e",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Observation / temporal-window projection": {
+   "date": "2026-11-08",
+   "hash": "d6c4fce9726d0073",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Phillips--Kleinman / core--valence orthogonality": {
+   "date": "2026-11-08",
+   "hash": "1b97f1eb2fc7a9f2",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Rest-mass projection": {
+   "date": "2026-11-08",
+   "hash": "967ba6dc351116f2",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Stereographic / conformal coordinate change": {
+   "date": "2026-11-08",
+   "hash": "9ba17e704351911d",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Sturmian reparameterization at = Z/n": {
+   "date": "2026-11-08",
+   "hash": "25449f5feff63ca3",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Symmetry projection / Young tableau": {
+   "date": "2026-11-08",
+   "hash": "a0905d5f2b0b6e2a",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Two-body Dirac / Breit retardation": {
+   "date": "2026-11-08",
+   "hash": "95fd5ab5877c2002",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Vector-photon promotion": {
+   "date": "2026-11-08",
+   "hash": "15d8fa85633eb26f",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Wick rotation / signature change": {
+   "date": "2026-11-08",
+   "hash": "02bc08b954d48ffd",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Wigner 3j angular coupling": {
+   "date": "2026-11-08",
+   "hash": "28fdb02529e7a948",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Wigner D -matrix rotation between molecular centers": {
+   "date": "2026-11-08",
+   "hash": "7f14401fcf8951f9",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Wilson plaquette: edge 2-cell": {
+   "date": "2026-11-08",
+   "hash": "7bad821b80c4de52",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer-2-Presence Bound on Catalogue Residuals (Observation)": {
+   "date": "2026-11-08",
+   "hash": "1dc9f284a2a0cab5",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Open Questions": {
+   "date": "2026-11-08",
+   "hash": "062e85fd35e3fa0d",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue": {
+   "date": "2026-11-08",
+   "hash": "909fbcff0ad792ef",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Falsified candidate: W3 spectral-zeta identification of": {
+   "date": "2026-11-08",
+   "hash": "a7d10239fb714124",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Literature itemization notes (running catalogue)": {
+   "date": "2026-11-08",
+   "hash": "df8de3b5dc46b901",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Lorentzian transfer audit (Sprint L0, May 2026)": {
+   "date": "2026-11-08",
+   "hash": "78444b4bd42fdcf0",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Off-precision matches and error-source classification": {
+   "date": "2026-11-08",
+   "hash": "c593b07a06a72080",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Roothaan autopsies: multi-component decompositions": {
+   "date": "2026-11-08",
+   "hash": "7a65b585e2e3adf8",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Three-Axis Dictionary": {
+   "date": "2026-11-08",
+   "hash": "fef5d5e5837bdb87",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Three-Axis Dictionary / Base-unit decomposition of the projection family": {
+   "date": "2026-11-08",
+   "hash": "e1636db17372d69a",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
+  "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::front": {
+   "date": "2026-11-08",
+   "hash": "00901b353a4e93fd",
+   "run": "group6-seeded-full-2026-11-08+thirdlook"
+  },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Casimir energy on S^3 : a one-projection match (KG-3)": {
    "date": "2026-11-08",
    "hash": "2b74c3aa5417ecc3",

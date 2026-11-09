@@ -10321,6 +10321,16 @@ REGISTRY = [
         "files": ['papers/group6_precision_observations/paper_34_projection_taxonomy.tex', 'papers/synthesis/group6_precision_observations_synthesis.tex'],
         "cited_by": {},
     },
+    {
+        "id": 'p34-group6-thirdlook-2026-11-08',
+        "pattern": 'projection is \\\\emph\\{essential\\} --- it is not redundant|match standard known physics values to\\s+machine precision|known machine-precision\\s+agreements with standard physics|returning slowly to~\\$2\\$ as \\$Z\\\\to\\\\infty\\$|returns to \\$2\\$ as\\s+\\$Z \\\\to \\\\infty\\$',
+        "exempt_if_nearby": withdrawal_marker('p34-group6-thirdlook-2026-11-08'),
+        "severity": 'fail',
+        "scope": 'group6 Paper 34 + synthesis',
+        "note": 'group6 third look (2026-11-08): PK is not essential in second quantization (Paper 19: antisymmetry role a classical-solver artifact, Track CB an incomplete replacement); the empirical catalogue is comparisons with residuals from machine-exact to non-converged, not machine-precision agreements; the entropy exponent climbs toward 2 at larger Z (1.93 at n_max=3), a limit of 2 is not established (Paper 27).',
+        "files": ['papers/group6_precision_observations/paper_34_projection_taxonomy.tex', 'papers/synthesis/group6_precision_observations_synthesis.tex'],
+        "cited_by": {},
+    },
 ]
 
 

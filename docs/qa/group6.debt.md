@@ -90,3 +90,15 @@ sweep outside the cycle. Items marked OWED need a computation, a guard, or a sou
   label at L567; residual "cleanly" wording at L4988 / L6201.
 - P35: L1356 "Refined Prediction"; L1400 "uniformly confirm".
 - Synthesis: L426 "focal-length-tagged"; hub value stated member-independent.
+
+### Third-look SMALLs (2026-11-08, unswept)
+- P34 obs:single_origin vs presence bound: the muH Lamb row (textbook assembly) still sits under "L2-count = 2+"
+  while the carve-out says textbook-assembly rows lie outside the bound's chains; move it to an outside-the-bound
+  note as the H Lamb row already is.
+- P34 PK passage: "Paper 19 reads" -> "Paper 19 suggests" (owner hedges twice).
+- P34 entropy restatement drops "on the physical Hamiltonian" (synthesis keeps it).
+- Synthesis L509-512: split the presence-bound parenthetical into its own sentence.
+- Pre-existing: r_Z is both a projection variable (P34 sec:layer2_boundary) and a presence-bound Layer-2 input;
+  one sentence should state the bound counts r_Z's value as an input.
+- P34 l.2834-2836: S_full(He) 0.0408 (hop model) set beside Paper 27's physical S_B 3.77e-2; confirm the two are the
+  same quantity for He.

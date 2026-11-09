@@ -40,8 +40,9 @@ eigenvalues, no physics.  \textbf{Layer~2} is a finite family of named
 projections from the bare graph onto physical settings.  Every
 physical variable, every dimensional unit, and every transcendental
 constant that appears in any GeoVac calculation enters through
-exactly one projection (apart from literature constants entered as external inputs, such as the
-textbook vacuum-polarization rows of the catalogue), and is fully traceable to it.
+exactly one projection (apart from literature inputs and textbook-assembly rows of the
+catalogue---vacuum polarization, self-energy, tabulated Bethe
+logarithms---which enter through no GeoVac projection), and is fully traceable to it.
 
 We catalogue twenty-eight projection mechanisms and tag each one along
 three independent axes: (a)~which physical variables it introduces
@@ -57,8 +58,8 @@ type, and reading the dictionary in either direction recovers the
 other.
 
 We then assemble the empirical matches catalogue: a tagged table of
-GeoVac quantities that match standard known physics values to
-machine precision (or stated uncertainty).  Each row is annotated
+GeoVac quantities compared with standard physics values, with
+residuals ranging from machine-exact to non-converged.  Each row is annotated
 by projection(s), variable(s), dimension, transcendental class, and
 match precision.  Reading the catalogue suggests a structural
 Observation:
@@ -157,7 +158,10 @@ graph data on which it acts.
 Every coupling constant, energy scale, length scale, and
 transcendental constant that appears in any GeoVac computation can
 be traced to exactly one projection in Layer~2, apart from literature
-constants entered as external inputs.  The bare graph
+inputs and textbook-assembly rows that enter through no GeoVac
+projection (the literature inputs are what the presence bound counts
+as its Layer-2 inputs $L_2^{(i)}$; textbook-assembly rows lie outside
+its chains).  The bare graph
 does not contain $\alpha$, $Z$, $\hbar\omega$, $R$, $\Lambda$, $\pi$,
 or $\zeta(2k)$.  These quantities are introduced by, and only by,
 the projection that the calculation invokes.
@@ -1155,20 +1159,18 @@ antisymmetry in the FCI sector.\\
 \textbf{Honest scope.}  Three layers of scope-honesty are required
 here, all flagged for CLAUDE.md~\S~1.5 rhetoric compliance.
 
-First, in the composed / balanced architecture as implemented, the PK
-projection is \emph{essential} --- it is not redundant in second
-quantization.  The Track~CB sprint (CLAUDE.md~\S~3 record, April~2026)
+First, in the composed architecture PK stands in for the core-valence
+interactions the composition omits: Paper~19 \cite{paper19} reads its
+physical content as an incomplete approximation to cross-block $V_{ee}$
+plus cross-center $V_{ne}$, its antisymmetry role being a classical
+solver artifact.  The Track~CB sprint (Paper~19)
 tested whether explicit cross-block ERIs could substitute for the PK
 barrier by carrying core-valence repulsion explicitly; the result was
 that adding cross-block $V_{ee}$ without simultaneously balancing
 cross-center $V_{ne}$ produces a $29\%$ FCI energy error at LiH
-$n_\text{max}=2$ (worst of three tested configurations, CLAUDE.md~\S~3
-record).  The composed orbital basis uses different effective charges
-$Z$ on different blocks, and PK is the infrastructure that handles
-the corresponding orthogonality without requiring two-center one-body
-integrals in a single-center hydrogenic basis.  It is the projection
-that makes the composed architecture's Hilbert-space factorization
-consistent with Pauli exclusion, and it carries calibration content:
+$n_\text{max}=2$ (worst of three tested configurations); the
+failure was an incomplete replacement, not a need for PK.  PK carries
+calibration content:
 one empirical atomic input and a barrier-width formula chosen against
 the LiH bond length (Paper~17).
 
@@ -2853,9 +2855,11 @@ reduced density matrix.  Paper~27 (entropy as projection artifact;
 $S_\mathrm{kin}/S_\mathrm{full} \sim 10^{-14}$ for He at
 $n_{\max}=2,3$; $V_{ee}$-only generation of correlation entropy; the
 universal $S_B = A(\tilde{w}_B/\delta_B)^\gamma$ scaling, whose local
-exponent extrapolates to $\gamma_\infty \approx 1.96$--$1.97$ as
-$n_{\max} \to \infty$ at the large-$Z$ edge and returns to $2$ as
-$Z \to \infty$)
+exponent, in the $Z:15\to30$ window, extrapolates to
+$\gamma_\infty \approx 1.96$--$1.97$ as $n_{\max} \to \infty$ (the
+precise value is extrapolation-order dependent); at $n_{\max}=3$ the
+local exponent bottoms out near $1.905$ ($Z:100\to300$) and climbs back
+toward $2$, reaching $1.93$ at $Z:10^4\to10^5$)
 exercises this projection throughout; the apparatus identity is the
 structural mechanism that makes ``entropy'' a well-defined Layer-2
 observable in the first place.  Sprint~TD Track~2 (apparatus identity
@@ -3615,8 +3619,8 @@ observable.
 \label{sec:catalog}
 % ===================================================================
 
-We list GeoVac quantities that match standard known physics values
-to machine precision or stated uncertainty.  Each row is tagged by
+We list GeoVac quantities compared with standard physics values,
+with residuals ranging from machine-exact to non-converged.  Each row is tagged by
 projection(s), variables involved, dimension, transcendental class,
 and match precision.  This is a structural index, not an exhaustive
 benchmark report; the underlying numerical evidence lives in
@@ -3906,10 +3910,9 @@ signature arithmetic addresses only the type-level question.
 \label{sec:offprecision}
 % -------------------------------------------------------------------
 
-The catalogue above records matches at machine precision or stated
-sub-percent agreement.  Equally informative is the catalogue of
-matches that are \emph{off} precision, classified by the source of
-residual error.  We propose five distinct error sources, each with
+The catalogue above records residuals from machine-exact to
+non-converged.  Equally informative is a classification of the rows
+that are \emph{off} precision by the source of residual error.  We propose five distinct error sources, each with
 its own scaling behaviour and remediation pathway:
 
 \begin{itemize}
@@ -9740,14 +9743,16 @@ physics, no $\pi$.  Layer~2 is a finite family of named projections;
 each adds specific physical variables, specific physical
 dimensions, and specific transcendental content.  Every physical
 quantity in any GeoVac calculation enters through exactly one
-projection in Layer~2 (apart from literature constants entered as external inputs, such as the
-textbook vacuum-polarization rows of the catalogue) and is fully traceable to it.
+projection in Layer~2 (apart from literature inputs and textbook-assembly rows of the
+catalogue---vacuum polarization, self-energy, tabulated Bethe
+logarithms---which enter through no GeoVac projection) and is fully traceable to it.
 
 The dictionary in this paper makes that statement operational.
 Twenty-eight projections are listed, each tagged by variables, dimension,
 and transcendental signature.  An empirical matches catalogue uses
-these tags to organise the framework's known machine-precision
-agreements with standard physics values.  Sprint TX-A's
+these tags to organise the framework's comparisons with standard
+physics values, whose residuals range from machine-exact to
+non-converged.  Sprint TX-A's
 dimensional axiomatization (\S~\ref{sec:axiomatization}) verified
 three structural theorems on this dictionary: dimensional consistency
 holds across all worked examples, weak minimality holds at the

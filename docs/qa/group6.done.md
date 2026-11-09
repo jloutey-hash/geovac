@@ -465,6 +465,13 @@ Run notes: `debug/qa/group6_full_run_2026_08_28_notes.md`.
   (P34 and synthesis unstamped). C16 entries p26/p27/p35/p34/syn6-group6-qa-2026-11-08 and
   p34-group6-selfcheck-2026-11-08, each fire-tested on HEAD text and silent on current text. SMALLs to
   docs/qa/group6.debt.md.
+  **Third look (PI call, 2026-11-08, v6.7.5):** fresh reviewer on the post-round-2 P34 and synthesis edits found
+  3 LARGE (P34 PK "essential" vs Paper 19; catalogue described as machine-precision agreements in abstract and
+  conclusion); fixed; a recheck of the fixes found 2 LARGE introduced by them (synthesis zero-L2 range lost its
+  basis-ceiling anchor; obs:single_origin put textbook rows inside the bound); fixed; a final check found 0 LARGE.
+  P34 prose stamped (50 units); C16 entry p34-group6-thirdlook-2026-11-08 then caught the same overclaim in the
+  catalogue opening and the off-precision paragraph, fixed with the reviewed wording, those 2 units left
+  unstamped. Coverage 116/142.
 - 2026-07-04 — **Certifying FULL run (whole-group) = PASS → group6 CERTIFIED ✅ (6th branch).**
   8-reviewer panel (3 Opus code + 2 Opus claims + Sonnet citation + Opus synthesis) + Opus
   completeness-critic, over the remediated corpus with a fresh 8-seed set (loci/phrasings
