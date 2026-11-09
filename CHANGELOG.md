@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.6] - 2026-11-08
+
+**group6 SMALL sweep (PI-directed).** The v6.7.4 debt list worked through Papers 26, 27, 34, 35, 36, the synthesis,
+the criteria file and a few code docstrings. Four fresh reviewers on the diffs: 1 LARGE, introduced by the sweep
+(Paper 34 said the He-3 -1.28% residual was smaller than muH's -0.72%), plus a wrong Hurwitz shift (a = 0 for the
+S^3 scalar; the paper's indexing gives a = 1, the Riemann zeta). Both fixed; a recheck of the fixes found 0 LARGE.
+
+### Changed
+- Paper 26: retitled "...: Correlation in the Electron Repulsion and Basis-Intrinsic Sparsity" (bibitems in P27 and
+  the synthesis, INDEX row). eq:icv is the bipartite 2 S(rho_1s) the table uses; He 0.751 -> 0.764 (measured).
+  The 40x bond/core ratio is with the PK term off (about 57 with it); the "different electron counts" excuse and the
+  "consistent with Z^-2.52" reading removed. R-independence by construction; hop entropy share layer-attributed
+  (adding it shifts S by 7%); one-body inertness scoped to non-degenerate closed shells; hub shares member-dependent
+  for Z = 5-9; dissociation rises toward ln 2, not "diverges"; cutoff dependence stated.
+- Paper 27: "rigorously recovered" -> "recovered"; gamma window Z:15->30; pair-graph eigenvalues algebraic,
+  transcendental content from the entropy's logarithm; concavity lower bound sum p_n S_n (was max_n S_n); LiH
+  bond-block points use the balanced builder's H_1.
+- Paper 34: catalogue described consistently; external inputs include applied field strengths; abstract depth-3
+  example -456 ppm; hydrogen E_n row Fock (energy shell), not kappa; Schwinger row ~150x; Bethe-log rows print
+  computed values with Drake's beside them; Diepold 2018 and Krauth 2016 comparisons re-pointed after checking both
+  tables (framework = their NR one-loop eVP item 1; -0.031% / -0.50% against their totals); Cs total 1233.6 and the
+  relativistic factor no longer called Bohr-Weisskopf; D/T, He 2^3P and He-3 overclaims removed; muH Lamb row moved
+  outside the presence bound; r_Z(p) kernel systematic (~0.07 fm) stated; "bit-exactly" -> "to machine precision"
+  where residuals are 1e-16..1e-15; history notes removed; V.D "exposure" vocabulary aligned to the rescope;
+  bibitems (Drake-Swainson, Strohmaier, Bonilla authors, Fee 1993 authors, Bonilla Table 3, Nieuviarts years).
+- Paper 35: Paper 34 already carries the rest-mass and temporal-window rows (Projections 14, 15); phantom XIV.A/B
+  refs fixed; the "iff" ring statement made one-directional; Hurwitz shifts a = 1 (scalar) and 3/2 (Dirac, HO);
+  per-degree-of-freedom 7 pi^2/720; "ten" tally dropped; novelty claims removed; "Refined Prediction 1" ->
+  scope of Prediction 1 in QED; "uniformly confirm" -> "consistent with"; Wick-rotation "theorem" -> "reading".
+- Paper 36: the alpha(Z alpha)^5 term "alone" is its self-energy part (+6.9 MHz; +7.13 with VP); CODATA 2018 cited;
+  history sentence removed; Barker-Glover source labelled.
+- Synthesis: Paper 26/27/34 restatements matched; N_Pauli annotated (gvq composed_coeff).
+- Docstrings: thermal_tensor_triple (sign and shift), two_loop_self_energy (attempt, diverges; no bound state),
+  magnetization_density (0.10121, -6665, eq. 96), Paper 26 and Paper 36 tests.
+- docs/qa/group6.done.md: criteria currency fix (HO rigidity listed as retracted; gamma 1.96-1.97; S_HO and P26
+  molecular values). docs/claim_test_matrix.md: three rows.
+
+### QA record
+- **Coverage 110/142** (prose 109/132, cite 1/5, code 0/5): prose up from 64; the cite and code units changed by
+  the bibitem and docstring fixes need citation and code reviewers. Remaining items and two PI calls (P27 and P36
+  retitles, which reach into group1/group3 bibitems) are in docs/qa/group6.debt.md.
+
 ## [v6.7.5] - 2026-11-08
 
 **/qa group6 third look on Paper 34 and the synthesis (PI call).** Closes the open owner fixes from v6.7.4's

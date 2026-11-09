@@ -1,8 +1,8 @@
-# group6 — QA debt (SMALL sweep list and owed items)
+# group6 — QA debt (owed guards and SMALLs left after the sweep)
 
 Opened by the seeded FULL run of 2026-11-08 (FAIL; record `debug/qa/group6_full_run_2026_11_08_notes.md`).
-Edit bar: these SMALLs ride along only when a LARGE fix opens their unit; the rest are fixed in one scheduled
-sweep outside the cycle. Items marked OWED need a computation, a guard, or a source.
+The SMALL sweep list was worked on 2026-11-08 (v6.7.6; CHANGELOG lists what changed). What remains is below.
+Items marked OWED need a computation, a guard, or a source.
 
 ## Owed guards (write and fire-test separately from the fixes)
 
@@ -10,7 +10,11 @@ sweep outside the cycle. Items marked OWED need a computation, a guard, or a sou
   largest in-sector off-vertex edge (expect |dS/S| ~ 0.14 at n_max=3) and fix the runner-up comparison.
 - P27: pin the physical-Hamiltonian commutator (10.6% / 9.3%) and block fractions (0.945 / 0.926); pin the physical
   gamma_inf extrapolation and the large-Z return toward 2 (local slope minimum ~1.905).
+- P27: `test_paper27_commutator_saturates_not_vanishes` reads "saturates" from two cutoffs; the Be S_kin = 1.23 guard
+  pins one LAPACK member of a degenerate ground space.
 - P26: hub migration (Sec. IV) has no test; B and C values are member-dependent.
+- P26 `test_paper26_nof_degeneracy_and_robust_core_closure`: the SUPREMUM assertion (no member exceeds ln 8) keeps an
+  analytic ceiling the paper no longer asserts; decide whether it is a sound bound or drop it.
 - P34 `test_paper34_l2_presence_bound.py`: rebuild to the Observation (D row recorded as a violation; drop the H 21cm
   one-input row or reclassify it; remove the fitted L2_CLASS_SCALE envelope).
 - P34 `test_paper34_autopsy_baselines.py`: read the printed reduced-mass factors; tighten the chain tolerance (a
@@ -18,87 +22,34 @@ sweep outside the cycle. Items marked OWED need a computation, a guard, or a sou
 - P35 `test_paper35_predictions.py`: the aggregate-tally test hard-codes its booleans; the Heisenberg-Euler test asserts
   a constructed pi; the Stefan-Boltzmann guard pins the wrong sign of F.
 - P36 `test_paper36_lamb_budget.py`: Table XX closure is the only source-anchored check (add the 0.805 / 0.891 fm rows
-  and per-formula checks); `_pct` helper is sign-blind; the 0.12 kHz G_SE,7 2P term is unguarded.
+  and per-formula checks); `_pct` helper is sign-blind; the 0.12 kHz G_SE,7 2P term is unguarded; `finite_size` uses
+  Eides' rounded 145 kHz (closed form 145.25 gives 1057.8247).
 
-## SMALL sweep list
+## Left after the 2026-11-08 sweep, with reasons
 
-### Paper 26
-- Docstrings in `tests/test_paper26_entanglement.py` and `tests/test_paper26_molecular_entanglement.py` carry retired
-  numbers (0.303, ~50x, 4/6/4, 2e-3, Z>=5, S~Z^-2.56 as the ion's).
-- eq:icv defines pairwise I_cv while Table II and the test use bipartite 2 S(1s); He 0.751 reproduces in neither.
-- 40x core/bond ratio needs pk_in_hamiltonian=False (default gives ~57); the "different electron counts" explanation is
-  false; "consistent with S~Z^-2.52" (predicts 16).
-- R-independence of S_bond is by construction (tier MEASURED overstates).
-- L493 "holds as a theorem" vs the provenance tier; L47-50 / L668-670 "<0.2%" vs L255 7%; L663-665 unqualified
-  "separable operator cannot entangle"; L723-724 "diverges at dissociation"; L396-407 cutoff dependence; title / INDEX
-  row 133 still headline the decoupling.
-
-### Paper 27
-- Title lacks the non-degeneracy qualifier; L1046 / L1105-1107 "bare-graph ground state" entropy; L1101-1103 wrong
-  concavity bound; L803-805 vs L990-996 composed vs balanced; L583-585 "irrational" tagging; L36 / L432-433 "rigorously
-  recovered" (circular); "saturates, not vanishes" from two points; Be S_kin=1.23 guard pins a LAPACK gauge.
-
-### Paper 34
-- Remaining exposure-class vocabulary at L4586-era rows, L5947, L5979, L6477 ("New V.D-class exposure").
-- He 2^3P autopsy L5447 "same architecture that closes hydrogen Lamb", L5344-5345 "cross-register multi-focal".
-- He-3 structural reading L6094-6100 (stale wall attributions; "50-500x").
-- D/T overclaims (L5692 "reproduces at the depth of the budget"; L5884 "full mass x spin matrix").
-- D autopsy ppm table mixes a_e conventions (L5565-5586).
-- 2S Bethe log listed as a match without "not converged" (L3784); off-precision rows print Drake values as computed.
-- Row "Fock + kappa" for hydrogen E_n (L3651); Schwinger row "33% overshoot" stale; HF-4 error code S.
-- Mu HFS itemization (+4.703 MHz Karshenboim) does not add and the source is unverified; misplaced r_Z(t) caveat.
-- Cs autopsy F_R vs Bohr-Weisskopf conflation; sum 1233.6 not 1233.8.
-- mud "-0.50% vs Krauth" route; muHe "Diepold 1666.305" unverified; Li-7 "confirmed Walls 2003" unverified.
-- Many sentence-level overstatements logged by the claims reviewers (status words "only/every/all four", "bit-exactly"
-  with nonzero residuals, Lorentzian "no structural cost", alkali cliff reason, Ps closure by construction, muHe
-  "close the gap", conclusion universality vs Zeeman/Stark).
-- Bibitems: drake_swainson1990 title, strohmaier2006 title, Fee 1993 author list, Bonilla "Tab. IV" -> Table 3,
-  Nieuviarts years.
-- Abstract "depth-3 at -211 ppm" vs Remark "-456 ppm".
-- `geovac/magnetization_density.py` docstrings (0.10124, -6657 vs -6665.2, eq 95/96); operator-level Zemach is a
-  definitional identity (matrix rows 505, 932 overstate "verifies"); r_Z(p) uncertainty omits the kernel systematic;
-  "remaining +7.2" is a plug.
-
-### Paper 35
-- L254-256 "iff m^2 in the same ring" is false (m^2 = sqrt 2); L755-760 / L923 / L966 / L1450 Hurwitz-3/2 driver
-  claimed for the scalar; L956-966 tally "ten"; L610-617 "Paper 34 is not amended" stale; L1389-1396 refined
-  Prediction 1 overreach; L429 / L752 / L1446 "newly computed" priority unverified; module docstring
-  thermal_tensor_triple.py:394-404 false sign remark; L1425 / L1432 "bare graph" for the continuum spectrum;
-  phantom section refs XIV.A/B; per-Weyl 7 pi^2/720; L1161 "theorem" heading.
-
-### Paper 36
-- Conclusion "alone ... +7.1 MHz" vs abstract "+6.9"; title "Convention Erratum" vs double count; the
-  "An earlier decomposition ... is withdrawn" history sentence; Barker-Glover not in Table VIII; FNS scales rounded
-  145 kHz; "every term the review tabulates" omits ~5 Hz terms; `two_loop_self_energy.py` docstrings; uncited
-  CODATA constants.
-
-### Synthesis
-- N_Pauli = 27.90 x Q unannotated; L376-379 "one-body operator ... cannot entangle orbitals" unqualified;
-  "Six independent instances" of the multi-focal wall vs seven.
-
-### Criteria (docs/qa/group6.done.md)
-- The C8 headline lists for P26 and P27 below the FREEZE carry retired values (gamma 1.93-1.96, edge 42.5/40.0,
-  rho 0.94, S_HO values, 0.3033/49.6, 4/7/6); criterion 4.4 audits the retracted HO rigidity. Currency fix before the
-  next run.
-
-### Self-check round 2 SMALLs (2026-11-08, unswept)
-- P26: step title; hub equation and abstract/conclusion still read the hub value as member-independent; L710 hub
-  "robust" and the conclusion restatement.
-- P27: abstract "large-Z edge" phrasing; L793 "every tabulated slope".
-- P34: Lyman-alpha residual quoted as 35 ppm (recomputation gives 32, within rounding of the NIST inputs); abstract
-  -211 vs body -456 ppm figure; Uehling rows sit under the projection-depth headings; L1849; "Refined Prediction 1"
-  label at L567; residual "cleanly" wording at L4988 / L6201.
-- P35: L1356 "Refined Prediction"; L1400 "uniformly confirm".
-- Synthesis: L426 "focal-length-tagged"; hub value stated member-independent.
-
-### Third-look SMALLs (2026-11-08, unswept)
-- P34 obs:single_origin vs presence bound: the muH Lamb row (textbook assembly) still sits under "L2-count = 2+"
-  while the carve-out says textbook-assembly rows lie outside the bound's chains; move it to an outside-the-bound
-  note as the H Lamb row already is.
-- P34 PK passage: "Paper 19 reads" -> "Paper 19 suggests" (owner hedges twice).
-- P34 entropy restatement drops "on the physical Hamiltonian" (synthesis keeps it).
-- Synthesis L509-512: split the presence-bound parenthetical into its own sentence.
-- Pre-existing: r_Z is both a projection variable (P34 sec:layer2_boundary) and a presence-bound Layer-2 input;
-  one sentence should state the bound counts r_Z's value as an input.
-- P34 l.2834-2836: S_full(He) 0.0408 (hop model) set beside Paper 27's physical S_B 3.77e-2; confirm the two are the
-  same quantity for He.
+- **P27 and P36 retitles (PI call).** P27's title lacks the non-degeneracy qualifier; P36's says "Convention
+  Erratum" for a double count. Both titles are cited in bibitems outside group6 (P18, P24; P32, P57), so a retitle
+  reopens certified cite units in group1/group3. Recommended titles: "...: One-Body Operators are
+  Entanglement-Inert at Non-Degenerate Ground States" and "...: Assembly, a Double-Counting Erratum, and ...".
+- **P36 ln k0(2P) literal.** -0.0300167089 vs the source's -0.030016708630; immaterial at 3e-10, but the literal sits in
+  six test and support modules, so changing it is a guard-pass job.
+- **P34 Lyman-alpha residual** quoted as 35 ppm; a recomputation gives 32, inside the rounding of the NIST inputs.
+- **P34 entered-constant rows** (textbook VP coefficient and Uehling rows) still sit under the projection-depth
+  headings of the catalogue table; moving them is a table restructure.
+- **P34 tritium r_Z(t) caveat** sits in the D-autopsy comparison rather than the T row.
+- **P35 Sprint TD Track 1 tallies.** The by-factor list has 12 entries and the by-mechanism counts sum to 10; the
+  count "ten" was dropped, but which classification is right needs the driver.
+- **P34 sentence-level "only / every / all four" superlatives** beyond the loci fixed: the reviewers listed them as
+  a class without line numbers; a targeted pass is cheaper during the next group6 review.
+- **Claim matrix:** P36 rows (erratum, A50, 2P/3D logs, 1S crossing) are still missing.
+- **Wick-rotation tier (owner call).** Paper 35 now calls the four-witness chain a "reading"; Paper 34 (sec. on the
+  Wick rotation, ~l.2465, 2470, 8666) still says "theorem". Paper 34 owns the tier; align one way.
+- **P34 anomalous-moment row** "C x F_2 ... 41.5x overshoot at n_max=3" sits beside the Schwinger row's "about 150x";
+  re-check the 41.5x row against the corrected channel count (2026-11-07).
+- **P34 Cs C5 row** "Bohr-Weisskopf +1.2% (Roberts-Ginges 2015)": Bohr-Weisskopf for Cs 6s is normally a negative
+  few-tenths-percent correction; check sign and size against the source.
+- **P34 l.4040** "($A_{50} \approx 9.29$, $+7.13$ MHz on 2S)": 9.29 gives 6.9 MHz; 7.13 includes the polarization
+  insertion (Paper 36). **P34 l.5747** item (e) still names μH and l.5957 lists it among single-electron HFS, while the
+  scope sentence (l.5750) lists H, D, T, Mu. **P34 l.5047** "Krauth's ... their" -> "Krauth et al.'s".
+- **Paper 50 l.781** says the period closure holds "bit-exactly"; Paper 34 now says "to machine precision" for the same
+  numerics (the closure is algebraically exact, numerically 1e-16 to 1e-15). Outside group6.

@@ -32,11 +32,11 @@ and Swainson.  The result is 1052.19~MHz, $5.65$~MHz ($0.534\%$)
 below the Lundeen--Pipkin measurement, 1057.845(9)~MHz, and $5.64$~MHz
 below the 2019 measurement of Bezginov \emph{et al.},
 1057.8298(32)~MHz.  This is textbook arithmetic, and the residual is
-not a measure of missing multi-loop physics: the one-loop
-$\alpha(Z\alpha)^5$ term alone, with coefficient
+not a measure of missing multi-loop physics: the self-energy part of
+the one-loop $\alpha(Z\alpha)^5$ term alone, with coefficient
 $A_{50} = 4\pi(139/128 - \tfrac12\ln 2) \approx 9.29$, adds about
-$+6.9$~MHz, more than the residual.  Adding every term the review
-tabulates gives $1057.824$~MHz, $0.020$~MHz below Lundeen--Pipkin and
+$+6.9$~MHz, more than the residual.  Adding the review's other
+tabulated terms down to the kHz level gives $1057.824$~MHz, $0.020$~MHz below Lundeen--Pipkin and
 $0.005$~MHz below Bezginov \emph{et al.}  The paper records three things.
 First, an erratum: an earlier assembly used the self-energy constant
 $38/45$ in place of $10/9$.  The difference is exactly the Uehling
@@ -180,7 +180,8 @@ $(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha $= +27.13$~MHz.
 
 With the Drake--Swainson values $\ln k_0(2S) = 2.8117698931$ and
 $\ln k_0(2P) = -0.0300167089$~\cite{drake_swainson}, $\alpha^{-1} =
-137.035999084$ and $1~\mathrm{Ha} = 6\,579\,683\,920.502$~MHz:
+137.035999084$ and $1~\mathrm{Ha} = 6\,579\,683\,920.502$~MHz
+(CODATA 2018~\cite{codata2018}):
 
 \begin{center}
 \begin{tabular}{l r r r}
@@ -238,7 +239,7 @@ One-loop $\alpha(Z\alpha)^6$ & $-0.416$ & Tables~IV, V \\
 One-loop $\alpha(Z\alpha)^7$ & $+0.002$ & Tables~VI, VII \\
 Two- and three-loop $\alpha^n(Z\alpha)^4$, muonic and hadronic VP & $+0.101$ & Table~II \\
 Two-loop $\alpha^2(Z\alpha)^5$ and $\alpha^2(Z\alpha)^6$ & $-0.041$ & Tables~III, V \\
-Recoil, $(Z\alpha)^5 m/M$ and $(Z\alpha)^4 (m/M)^2$ & $+0.355$ & Table~VIII \\
+Recoil, $(Z\alpha)^5 m/M$ and $(Z\alpha)^4 (m/M)^2$ & $+0.355$ & Table~VIII; Barker--Glover formula via the review \\
 Radiative recoil & $-0.002$ & Table~IX \\
 Finite nuclear size, $r_p = 0.8409$~fm & $+0.138$ & Table~X \\
 \midrule
@@ -259,8 +260,7 @@ $0.020$~MHz below Lundeen--Pipkin ($2.3\sigma$) and $0.005$~MHz below
 Bezginov \emph{et al.}\ ($1.7\sigma$); the review's own estimate of the
 uncalculated terms is $\pm 0.002$~MHz, and it predates later work on
 the two-loop terms~\cite{yerokhin2024_two_loop_se}.  None of the added
-terms is a GeoVac computation.  An earlier decomposition of the residual
-into multi-loop and non-loop pieces is withdrawn.
+terms is a GeoVac computation.
 
 % ===================================================================
 \section{Bethe logarithms in a Coulomb-Sturmian basis}
@@ -403,8 +403,8 @@ Bethe logarithms gives $1052.19$~MHz, $0.534\%$ below the
 Lundeen--Pipkin measurement.  The number is standard one-loop QED with
 literature inputs.  The terms it omits, all tabulated by Eides
 \emph{et al.}, bring it to $1057.824$~MHz, within $0.020$~MHz of
-Lundeen--Pipkin; the one-loop $\alpha(Z\alpha)^5$ term alone is about
-$+7.1$~MHz of that.  An earlier
+Lundeen--Pipkin; the self-energy part of the one-loop $\alpha(Z\alpha)^5$
+term alone is about $+6.9$~MHz of that ($+7.13$~MHz with the polarization insertion).  An earlier
 version of the assembly double-counted the Uehling term, and the
 correction is exactly $(4/15)\,\alpha^3 Z^4/(\pi n^3)$~Ha
 $= +27.13$~MHz.  Bethe logarithms computed from scratch in a
@@ -439,6 +439,11 @@ M.~I.~Eides, H.~Grotch, and V.~A.~Shelyuto, ``Theory of light
 hydrogenlike atoms,'' \textit{Phys.\ Rep.}\ \textbf{342}, 63--261
 (2001); arXiv:hep-ph/0002158 (section, equation and table numbers as
 in the arXiv version).
+
+\bibitem{codata2018}
+E.~Tiesinga, P.~J.~Mohr, D.~B.~Newell, and B.~N.~Taylor,
+``CODATA recommended values of the fundamental physical constants:
+2018,'' Rev.\ Mod.\ Phys.\ \textbf{93}, 025010 (2021).
 
 \bibitem{drake_swainson}
 G.~W.~F.~Drake and R.~A.~Swainson, ``Bethe logarithms for hydrogen

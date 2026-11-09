@@ -3,12 +3,14 @@
 Backs the two composed-architecture claims that had NO test through three
 /qa certifying passes (cert-2 completeness-critic gap G5):
 
-1. eq:rindep -- the composed bond-block entanglement S_bond(R) = 0.303 nats
+1. eq:rindep -- the composed bond-block entanglement S_bond(R) = 0.330 nats
    is R-INDEPENDENT across R in [0.5, 10.0] bohr.  The mechanism is
    architectural, not physical: the composed electronic (h1, eri) blocks do
    not depend on R at all (only the nuclear-repulsion constant does), which
    this file pins directly.
-2. The core/bond entropy ratio ~50x for LiH at R_eq (S_bond/S_core ~ 49.6).
+2. The core/bond entropy ratio ~40x for LiH at R_eq (S_bond/S_core = 40.1,
+   block Hamiltonians without the PK term; with the default PK the bond
+   block gives 0.465 nats and the ratio is ~57).
 
 Driver: debug/archive/chemistry_qc_arc/entanglement_molecular.py (the module
 that wrote debug/data/entanglement_molecular.json; archived without a test).
@@ -53,7 +55,7 @@ def test_paper26_bond_entropy_r_independence():
     out = {R: _s_bond_h2(R) for R in R_values}
     S_vals = [out[R][0] for R in R_values]
 
-    # the paper's quoted value (entanglement_molecular.json: 0.3033139...)
+    # the paper's quoted value, 0.330 nats
     for R, S in zip(R_values, S_vals):
         assert S == pytest.approx(0.3298895, abs=1e-6), f"R={R}: S={S:.7f}"
     # R-independence at floating-point resolution
@@ -75,8 +77,8 @@ def test_paper26_dissociation_does_not_reach_ln2():
 
 
 def test_paper26_lih_core_bond_ratio_50x():
-    """Sec V.C: S_bond/S_core ~ 40 for composed LiH at R_eq = 3.015
-    (JSON: 0.3033139/0.0061155 = 49.6)."""
+    """Sec V.C: S_bond/S_core ~ 40 for composed LiH at R_eq = 3.015,
+    PK term off (0.32989/0.0082183 = 40.1)."""
     from geovac.molecular_spec import lih_spec
     from geovac.composed_qubit import build_composed_hamiltonian
 
@@ -108,4 +110,4 @@ def test_paper26_lih_core_bond_ratio_50x():
     assert S_bond == pytest.approx(0.3298895, abs=1e-5)
     assert S_core == pytest.approx(0.0082183, abs=1e-5)
     ratio = S_bond / S_core
-    assert 39.5 < ratio < 40.8, f"S_bond/S_core = {ratio:.2f} not ~50"
+    assert 39.5 < ratio < 40.8, f"S_bond/S_core = {ratio:.2f} not ~40"

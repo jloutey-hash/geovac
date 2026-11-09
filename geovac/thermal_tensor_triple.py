@@ -392,19 +392,14 @@ def scalar_casimir_S3() -> dict:
               = (1/2) sum_{n>=0} (n+1)^2 (n+1)
               = (1/2) sum_{m>=1} m^3
               = (1/2) zeta_R(-3)
-              = -1/240   (in zeta-regularized form)
+              = +1/240   (zeta_R(-3) = +1/120)
 
-    Wait: this needs care. The correct conformal-coupling Casimir on S^3 is
+    (Paper 35 KG-3; Birrell-Davies 1982 Sec. 6.1.)
 
-        E_Cas^{conformal scalar} = 1/240
-
-    (Paper 35 §V, Camporesi-Higuchi 1996, Birrell-Davies 1982 §6.1).
-
-    The factor of 2 sign depends on regularization convention. Following
-    Paper 35 KG-3 we adopt E_Cas^{conformal scalar} = +1/240 on unit S^3.
-
-    Note this is EXACT RATIONAL — no transcendental. The Hurwitz / Bernoulli
-    structure at the half-integer shift cancels every pi.
+    Note this is EXACT RATIONAL, no transcendental: zeta_R at a negative
+    integer is a rational multiple of a Bernoulli number (zeta_R(-3) =
+    -B_4/4; the spectrum is omega = m with m >= 1, Hurwitz shift a = 1;
+    the Dirac Casimir uses the half-integer shift a = 3/2).
 
     Verified to 40 dps numerically in Paper 35 KG-3.
     """

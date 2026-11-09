@@ -19,7 +19,8 @@ SLOW (pytest --slow, ~60 s total) -- the GeoVac-native Bethe logarithms
   tests/paper36_lamb_support/bethe_log_sturmian.py:
     * LS-4 Drake--Swainson 2P at N=40: ln k0 = -0.0307 (+2.40% vs Drake)
     * LS-4 Drake--Swainson 3D at N=40: ln k0 = -0.005236 (+0.07%)
-    * LS-3 acceleration 2S at N=40:    ln k0 =  2.7858  (-0.92%)
+    * LS-3 acceleration 2S at N=40:    ln k0 =  2.7858  (-0.92%; a crossing,
+      not converged: +2.98% at N=50)
     * LS-3 acceleration 1S:            ln k0 =  3.0019  (+0.60%) at N=20
       -- validated 2026-07-02: the 1S acceleration value is a CROSSING
       point at N=20, not a converged value; by N=40 the form has drifted

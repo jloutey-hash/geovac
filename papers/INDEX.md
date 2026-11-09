@@ -130,7 +130,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
-| 26 `paper_26_entanglement.tex` | ACTIVE | Energy–entanglement decoupling; basis-intrinsic sparsity |
+| 26 `paper_26_entanglement.tex` | ACTIVE | Correlation and entanglement carried by V_ee; basis-intrinsic sparsity; hub migration |
 | 27 `paper_27_entropy_projection.tex` | **KEYSTONE** | Entropy as projection artifact; EP-2b HO zero-entropy rigidity RETRACTED v5.0.0; block-entropy scaling |
 | 34 `paper_34_projection_taxonomy.tex` | ACTIVE | **Living catalogue**: 28 named projections — where physics enters the graph |
 | 35 `paper_35_time_as_projection.tex` | ACTIVE | π enters exactly at temporal compactification (Matsubara); falsifiable prediction |

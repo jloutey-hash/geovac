@@ -23,7 +23,7 @@
 \begin{document}
 
 \title{Entanglement Structure of the Angular Momentum Eigenbasis:\\
-Energy-Entanglement Decoupling and Basis-Intrinsic Sparsity}
+Correlation in the Electron Repulsion and Basis-Intrinsic Sparsity}
 
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
@@ -46,8 +46,9 @@ off-diagonal one-body term; that term is not part of the ion's
 Hamiltonian and the attribution is withdrawn, Sec.~\ref{sec:threelayer}.
 Added to the Hamiltonian as a model perturbation it does illustrate the
 one-body entanglement-inertness theorem of Paper~27: it moves the model
-energy by $10$--$39\%$ of the correlation energy while generating [retracted 2026-09-25: he-graph-native-hop-headline]
-$<0.2\%$ of the entanglement.)
+energy by $10$--$39\%$ of the correlation energy while its layer-attributed [retracted 2026-09-25: he-graph-native-hop-headline]
+share of the entanglement is $<0.2\%$, although adding it changes $S$ at
+$Z=2$ by $7\%$.)
 Second, basis-intrinsic sparsity: for systems with spherical symmetry,
 the angular momentum eigenbasis gives sparse electron repulsion integrals
 (ERIs), and a generic unitary rotation of the orbital indices, no
@@ -59,8 +60,10 @@ is $Z$-independent, confirming that sparsity is purely geometric.
 Third, entanglement network topology: orbital mutual information
 maps reveal a hub migration pattern---$1s \to 2s \to 2p$---that
 tracks the partially filled shell across the first row of the
-periodic table (for $Z = 7$--$9$ both the values and the presence of a
-nonzero valence network are multiplet-member-dependent).
+periodic table (for $Z = 5$--$9$ the ground states are degenerate
+multiplets and the hub shares depend on the member; for $Z = 7$--$9$,
+where members were sampled, the values and even the presence of a
+nonzero valence network do too).
 Fourth, core-valence decoupling: the core-valence mutual
 information falls to $\approx 4\times10^{-3}$ by $Z = 4$, decays
 monotonically through $Z = 6$, and reaches the
@@ -70,8 +73,9 @@ exactly $2$), so it constrains the basis rather than justifying the
 composed fiber bundle factorization used in the GeoVac molecular
 framework.
 In the composed molecular architecture, per-block entanglement is
-$R$-independent, with core/bond entropy ratios of $40\times$ at
-matched qubit count.
+$R$-independent by construction, with a bond/core entropy ratio of
+about $40\times$ (block Hamiltonians without the Phillips--Kleinman
+term; about $57\times$ with it).
 These results establish that the angular momentum eigenbasis
 isolates correlation and entanglement in the two-body $V_{ee}$,
 and that the Gaunt sparsity of the GeoVac qubit Hamiltonians ---
@@ -137,8 +141,9 @@ $Z$-independent nonzero ERI count), the hub-migration pattern, the
 core--valence factorization thresholds, the $Z^{-0.85}$ decay of the
 model hop's energy fraction (\S\ref{sec:threelayer}; a property of the
 model Hamiltonian, not of the ion), and the
-composed per-block $R$-independence with its $\approx 40\times$
-core/bond ratio are MEASURED (computed) results; the $Z \geq 7$
+composed $\approx 40\times$ bond/core ratio are MEASURED (computed)
+results; the composed per-block $R$-independence holds by construction
+(the block integrals do not depend on $R$); the $Z \geq 7$
 core--valence vanishing at $n_{\max} = 2$ is stronger --- a derivation
 from a machine-verified premise (exact core closure).  The reported
 entropy is the von Neumann entropy of the normalized one-body reduced
@@ -177,7 +182,8 @@ attribution is withdrawn.  The three-layer calculation remains a
 correct statement about the \emph{hop-augmented model}
 $H_{\text{diag}} + H_{\text{hop}} + H_{\text{Vee,off}}$, and it is kept
 below in that role:\ a one-body perturbation that visibly moves the
-model energy while generating essentially no entanglement, which is the
+model energy while its own layer carries essentially no entanglement
+(adding it shifts $S$ by $7\%$ at $Z=2$), which is the
 free-fermion theorem of Paper~27~\cite{GeoVac_Paper27} made concrete.
 
 The physically meaningful layers are:
@@ -312,7 +318,7 @@ $U(\theta) = e^{i \theta G}$ to the spatial orbital basis, where
 $G$ is a random anti-Hermitian generator, and computing the number
 of nonzero ERIs as a function of the rotation angle $\theta$.
 
-\subsection{Step-function sparsity transition}
+\subsection{Sparsity transition under a generic rotation}
 
 At $n_{\max} = 2$ (five spatial orbitals: $1s, 2s, 2p_{-1}, 2p_0,
 2p_1$), the graph basis produces \gvq{block_sp_n2_eri}{107} nonzero ERIs out of
@@ -398,7 +404,9 @@ Hamiltonians~\cite{GeoVac_Paper14} is a direct consequence of
 the Gaunt sparsity.  The angular momentum eigenbasis, and every
 basis related to it by a common frame rotation, keeps the ERI tensor
 sparse; a \emph{generic} departure from that family, however small,
-incurs the dense-ERI penalty (Eq.~\ref{eq:step}).
+incurs the dense-ERI penalty at the $10^{-10}$ nonzero-entry cutoff
+used here (Eq.~\ref{eq:step}; the intermediate densities depend on the
+generator and the cutoff, the endpoints do not).
 
 %=================================================================
 \section{Entanglement Network Topology}
@@ -484,8 +492,8 @@ derived ``mutual information'' violated subadditivity on half the
 orbital pairs.  No analytic ceiling is asserted in its place; the
 maxima above are MEASURED.
 
-What \emph{is} degeneracy-robust is the core-valence statement, and it
-holds as a theorem for all three:\ every determinant in each ground
+What \emph{is} degeneracy-robust is the core-valence statement, derived
+for all three from a machine-verified premise:\ every determinant in each ground
 multiplet carries $1s^2$, so $\rho_{1s}$ is pure for any member and
 $I_{\text{cv}} = 0$ exactly.
 
@@ -496,7 +504,8 @@ The pattern is:
   2s \xrightarrow{Z=5} 2p,
   \label{eq:hub}
 \end{equation}
-following the shell-filling sequence.  \emph{Corrected 2026-08-30:} this
+following the shell-filling sequence; for $Z = 5$--$9$ the hub is read
+from the multiplet member the eigensolver returns.  \emph{Corrected 2026-08-30:} this
 equation previously read $1s \to 2s$ at $Z=3$ and $2s \to$ frozen at
 $Z=4$, both of which the $n_{\max}=2$ measurements contradict.
 
@@ -541,13 +550,16 @@ molecular electronic structure into separate fiber bundles for
 core and valence electrons, each in its own natural coordinate
 system.  This factorization assumes that the cross-bundle
 entanglement is negligible.  We test this assumption by computing
-the total core-valence mutual information
+the bipartite core-valence mutual information
 \begin{equation}
-  I_{\text{cv}} = \sum_{i \in \text{core}} \sum_{j \in \text{valence}}
-  I(i, j)
+  I_{\text{cv}} = S(\rho_{\text{core}}) + S(\rho_{\text{val}})
+  - S(\rho) = 2\,S(\rho_{\text{core}})
   \label{eq:icv}
 \end{equation}
-for first-row atoms in the graph eigenbasis.
+for first-row atoms in the graph eigenbasis, where the last equality
+holds because the ground state $\rho$ is pure.  (The pairwise sum
+$\sum_{j}I(1s,j)$ over Eq.~\eqref{eq:mi} gives similar but not equal
+values, e.g.\ $0.230$ for Li.)
 
 Table~\ref{tab:corevalence} presents the results.
 
@@ -560,7 +572,7 @@ orbitals: $1s$.  Valence orbitals: $2s, 2p$.
 \begin{tabular}{cll}
 Atom & $Z$ & $I_{\text{cv}}$ \\
 \hline
-He & 2 & $0.751$ \\
+He & 2 & $0.764$ \\
 Li & 3 & $0.228$ \\
 Be & 4 & $3.7\times10^{-3}$ \\
 B  & 5 & $1.7\times10^{-3}$ \\
@@ -588,7 +600,7 @@ establish it, since the ansatz's content is about the molecular
 setting where the core and valence blocks carry different effective
 charges.
 
-Helium ($I_{\text{cv}} = 0.751$) is the exception: with only two
+Helium ($I_{\text{cv}} = 0.764$) is the exception: with only two
 electrons, there is no core-valence separation, and the entire
 system is entangled.  Lithium ($I_{\text{cv}} = 0.228$) is
 intermediate: the $1s$ core is partially decoupled from the $2s$
@@ -607,9 +619,9 @@ alone, with no dependence on the internuclear distance $R$.
 The nuclear geometry enters only through the nuclear repulsion
 energy, which is a classical constant.
 
-This structural feature implies that the per-block entanglement
-entropy is $R$-independent.  We verify this for the H$_2$ bond
-pair in the composed encoding:
+This structural feature makes the per-block entanglement entropy
+$R$-independent by construction.  For the H$_2$ bond pair in the
+composed encoding:
 \begin{equation}
   S_{\text{bond}}(R) = 0.330 \text{ nats}
   \quad \forall\, R \in [0.5, 10.0] \text{ bohr}.
@@ -626,9 +638,10 @@ bonding state to a multi-reference dissociated state.  The
 composed architecture is designed for single-point energy
 evaluation at fixed geometries, not for dissociation curves.
 
-\subsection{Core/bond entropy ratio}
+\subsection{Bond/core entropy ratio}
 
-For LiH in the composed encoding, the core block
+For LiH in the composed encoding, with the block Hamiltonians built
+without the Phillips--Kleinman term, the core block
 ($Z_{\text{eff}} = 3$) has $S_{\text{core}} = 0.008$ nats, while
 the bond block ($Z_{\text{eff}} = 1$) has
 $S_{\text{bond}} = 0.330$ nats.  The ratio is
@@ -636,11 +649,11 @@ $S_{\text{bond}} = 0.330$ nats.  The ratio is
   \frac{S_{\text{bond}}}{S_{\text{core}}} \approx 40,
   \label{eq:ratio}
 \end{equation}
-consistent with the $S \sim Z^{-2.52}$ scaling law: the core
-electrons at $Z_{\text{eff}} = 3$ are $3^{2.52} \approx 16$ times
-less entangled than the bond electrons at $Z_{\text{eff}} = 1$
-(the discrepancy from the scaling prediction reflects the
-different electron counts in core vs.\ bond blocks).
+(with the default Phillips--Kleinman term in the bond block,
+$S_{\text{bond}} = 0.465$ nats and the ratio is about $57$).  The
+He-like scaling $S \sim Z^{-2.52}$ does not predict it:\ it would give
+$3^{2.52} \approx 16$, and the bond block is a two-centre pair, not a
+He-like ion.
 
 This ratio quantifies the information-theoretic asymmetry between
 core and valence: the core contributes negligible entanglement to
@@ -656,14 +669,16 @@ background with minimal loss of quantum information.
 entanglement in $V_{ee}$}
 
 The structure of Table~\ref{tab:decoupling} has a simple origin.
-The one-body Hamiltonian $h_1$ is a separable operator: it acts
-independently on each electron, and a separable operator cannot
-generate entanglement between orbitals.  In the angular momentum
+The one-body Hamiltonian $h_1$ acts independently on each electron:
+on its own its non-degenerate closed-shell ground state is a single Slater
+determinant, with zero orbital entanglement (Paper~27's
+entanglement-inertness theorem).  In the angular momentum
 eigenbasis at $k = Z$, $h_1$ is exactly diagonal, so it contributes
 neither correlation energy nor entanglement.  The hop-augmented model
 columns show the same theorem from the other side:\ a one-body term
 that does mix single-particle states (there, a non-physical hop) moves
-the energy but still introduces no two-body correlation.
+the energy while its layer-attributed share of the entanglement stays
+below $0.2\%$.
 
 The electron repulsion $V_{ee}$ is the irreducible two-body
 interaction.  It generates entanglement by correlating the
@@ -707,8 +722,9 @@ Several limitations should be noted.
 entanglement network results (Sec.~\ref{sec:network}) use
 $n_{\max} = 2$ (five spatial orbitals).  For $Z \geq 5$, this
 provides only one valence $p$-orbital beyond the $1s$ and $2s$
-shells.  The hub migration pattern is robust across the series,
-but quantitative mutual information values may shift at larger
+shells.  The hub migration pattern is read at this truncation and,
+for $Z = 5$--$9$, from the multiplet member the eigensolver returns;
+quantitative mutual information values may shift at larger
 $n_{\max}$.  The He-like ion results (Table~\ref{tab:decoupling})
 use $n_{\max} = 4$ (30 spatial orbitals) and are well-converged.
 
@@ -716,8 +732,8 @@ use $n_{\max} = 4$ (30 spatial orbitals) and are well-converged.
 $R$-independent block entanglement (Eq.~\ref{eq:rindep}) is a
 structural property of the composed architecture, not a physical
 statement about molecular entanglement.  The true molecular
-ground state has $R$-dependent entanglement that diverges at
-dissociation.  The composed architecture captures the entanglement
+ground state has $R$-dependent entanglement that rises toward
+$\ln 2$ at dissociation.  The composed architecture captures the entanglement
 within each block accurately but does not describe inter-block
 entanglement or bond breaking.
 
@@ -742,7 +758,8 @@ exactly diagonal, so all correlation energy and all entanglement in the
 ground state originate from the off-diagonal electron repulsion; the
 entanglement entropy scales as $S \sim Z^{-2.52}$.  The earlier
 headline---a ``graph Laplacian'' one-body term carrying $10$--$39\%$ of [retracted 2026-09-25: he-graph-native-hop-headline]
-the correlation energy but $< 0.2\%$ of the entanglement---holds only
+the correlation energy but a layer-attributed $< 0.2\%$ of the
+entanglement---holds only
 for a hop-augmented model Hamiltonian that is not the ion's, and is
 retained only as an illustration of one-body entanglement-inertness.
 
@@ -757,7 +774,8 @@ Third, the orbital mutual information network exhibits a hub
 migration pattern---$1s \to 2s \to 2p$---that tracks the
 partially filled shell across the first row.  The migration begins at
 beryllium:\ helium and lithium are both $1s$-anchored, and lithium is
-a $1s$/$2s$ co-hub rather than a $2s$-hub system.
+a $1s$/$2s$ co-hub rather than a $2s$-hub system.  For $Z = 5$--$9$
+the shares depend on the member of the degenerate ground multiplet.
 
 Fourth, core-valence mutual information falls to
 $\approx 4\times10^{-3}$ by $Z = 4$, decays monotonically through

@@ -33,7 +33,7 @@ $V_{ee}$, with the non-degeneracy qualifier essential: open-shell
 and dissociated-bond states escape the floor.  Second, the
 holographic area-law scaling $S_n = k\log A_n$ with
 $A_n\propto n^{4}$, asserted on one-particle grounds in earlier
-framework papers, is rigorously recovered as a pair-counting
+framework papers, is recovered as a pair-counting
 statement: $A_n=g_n^{2}$, where $g_n=2n^{2}$ is the shell
 degeneracy.  The factor of four is the two-body signature.
 Third, in the Coulomb lattice the cusp concentrates as a single
@@ -60,7 +60,7 @@ $\tilde{w}_B$ is the dimensionless $V_{ee}$ mass off-diagonal
 in the one-body eigenbasis and $\delta_B$ the dimensionless
 first $H_1$ gap; the local exponent extrapolates to
 $\gamma_{\infty} \approx 1.96$--$1.97$ in the $n_{\max}\to\infty$ limit
-at the large-$Z$ edge (extrapolated from $n_{\max}=2$--$7$ on helium-like
+in the $Z:15\to30$ window (extrapolated from $n_{\max}=2$--$7$ on helium-like
 ions' physical Hamiltonian; fixed-$n_{\max}$ local slopes reach $1.91$ by
 $Z=100$; an earlier $1.93$--$1.96$ was measured on a hop-augmented model
 one-body operator), slightly below the
@@ -446,7 +446,7 @@ not on the single-particle vertex set of $H_1$.
 \subsection{Reconciliation}
 
 Paper~5 is a predecessor framework synthesis with conjectural
-status.  Its area-law claim is rigorously recovered here as a
+status.  Its area-law claim is recovered here as a
 pair statement.  Two consequences follow:
 \begin{enumerate}
   \item The area law cannot be derived from one-particle
@@ -588,9 +588,12 @@ Entropy fits the framework cleanly as a
     pair-state graph, entropy becomes finite.  Diagonal pair
     entries $V_{ii}$ remain rational
     (Section~\ref{sec:cusp}, \cite{EnergyGraph}); spectral
-    eigenvalues of $V_{ee}$ on the pair graph are irrational,
-    consistent with the embedding-class signature of $1/r_{12}$
-    in Paper~18.
+    eigenvalues of $V_{ee}$ on the pair graph are algebraic
+    (roots of a rational characteristic polynomial, generically
+    irrational), and
+    transcendental content enters through the logarithm in the
+    entropy, consistent with the embedding-class signature of
+    $1/r_{12}$ in Paper~18.
 \end{itemize}
 Entropy is therefore an embedding-class observable in the
 Paper~18 taxonomy.  The combinatorial graph is entropy-blind (in the
@@ -791,7 +794,7 @@ linear-in-$1/n_{\max}^2$ fit gives $1.96$.
 (The earlier text quoted $1.96$ alone without stating the assumed
 order; corrected 2026-08-28.)  The conclusion below $2$ is
 method-independent --- every extrapolation tried lands under $2$,
-as does every tabulated slope.  This is \emph{below} the
+as do the tabulated slopes in the $Z:15\to30$ window.  This is \emph{below} the
 non-degenerate second-order Rayleigh--Schr\"odinger prediction
 $\gamma=2$.  The gap comes from the logarithm in the von Neumann
 entropy.  The correlation weight $\varepsilon = 1-\lambda_0$ (one
@@ -815,8 +818,8 @@ $S_B = \log 2$ (the two-site ceiling).
 
 \paragraph*{Correction (2026-09-25): which $H_1$.}  Every He-like
 number in this subsection was measured with the hop-augmented $H_1$ of
-\S\ref{sec:operator} (the LiH bond-block points use the composed
-builder's $H_1$ and are unaffected).  Re-measured with the physical
+\S\ref{sec:operator} (the LiH bond-block points use the balanced
+builder's two-centre $H_1$ and are unaffected).  Re-measured with the physical
 $H_1$ of Eq.~\eqref{eq:h1_geovac}:\
 (i) at $n_{\max}=3$, $Z\in\{2,3,4,6,8,10\}$, $S_B = 3.77\times10^{-2}$,
 $1.05\times10^{-2}$, $4.78\times10^{-3}$, $1.78\times10^{-3}$,
@@ -1056,8 +1059,8 @@ and
 \label{sec:operational_temp_decoding}
 
 The information-theoretic entropy of \S\ref{sec:operator},
-$S_{\mathrm{full}} = S_{\mathrm{vN}}(\rho_1)$ of the bare-graph
-ground state, is the $T \to 0$ limit of the von Neumann entropy of
+$S_{\mathrm{full}} = S_{\mathrm{vN}}(\rho_1)$ of the ground state
+with $V_{ee}$ included, is the $T \to 0$ limit of the von Neumann entropy of
 the Gibbs spatial 1-RDM in standard quantum statistical mechanics.
 Sprint TD Track~2 (May 2026,
 \verb|debug/sprint_td_track2_memo.md|) verifies this operationally on
@@ -1112,7 +1115,7 @@ In the $T\to\infty$ limit the residual approaches
 $\log(n_{\mathrm{orbitals}}) = \log 14 \approx 2.639$ for both
 $N_e=2$ systems, the standard Boltzmann thermal-mixing limit over
 the graph basis.  Lindblad concavity bounds hold at every $\beta$
-($\max_n S_n \leq S_{\mathrm{vN}}(\rho_1(\beta))
+($\sum_n p_n S_n \leq S_{\mathrm{vN}}(\rho_1(\beta))
    \leq S_{\mathrm{apparatus}} + \sum_n p_n S_n$).
 
 Operationally, this positions the Paper~27 information entropy as
@@ -1352,7 +1355,7 @@ GeoVac Technical Report (2026).
 
 \bibitem{GeoVac_Paper26}
 J.~Loutey,
-``Entanglement Structure of the Angular Momentum Eigenbasis: Energy-Entanglement Decoupling and Basis-Intrinsic Sparsity,''
+``Entanglement Structure of the Angular Momentum Eigenbasis: Correlation in the Electron Repulsion and Basis-Intrinsic Sparsity,''
 GeoVac Technical Report (2026).
 
 \bibitem{EP1_data}

@@ -108,7 +108,7 @@ The opt-in flag ``include_recoil_mixing`` adds that term,
 -Delta_LO * m_l/(m_l + m_n), and is meaningful only when ``lepton_mass`` is
 the BARE lepton mass.  With ``lepton_mass`` already the reduced mass the term
 double-counts the reduced-mass factor (the pre-2026-11-08 muonic helper did
-exactly this, giving -6657 ppm instead of -7340 ppm at r_Z = 1.045 fm).
+exactly this, giving about -6665 ppm instead of -7340 ppm at r_Z = 1.045 fm).
 ``muonic_hydrogen_zemach_eides_leading_order(include_recoil_mixing=True)``
 therefore passes the bare muon mass, and returns the reduced-mass result.
 
@@ -188,8 +188,8 @@ DELTA_NU_ZEMACH_EIDES_PPM: float = -39.5
 # proton case (lepton_mass=1.0, nucleon_mass=M_PROTON_OVER_M_E) the factor is
 # m_e/(m_e + m_p) = 1/(1 + 1836.15) ~ 5.45e-4 — the recoil-mixing is at
 # 0.05% of leading Zemach, well below the +12 to +18 ppm multi-loop budget.
-# For muonic hydrogen (lepton_mass=m_red(mup), nucleon_mass=M_PROTON_OVER_M_E)
-# the factor is m_mu/(m_mu + m_p) = 206.77/(206.77 + 1836.15) = 0.10124 —
+# For muonic hydrogen (lepton_mass = bare m_mu, nucleon_mass=M_PROTON_OVER_M_E)
+# the factor is m_mu/(m_mu + m_p) = 206.77/(206.77 + 1836.15) = 0.10121 —
 # the recoil-mixing is at ~10% of leading Zemach, the dominant systematic.
 NUCLEON_MASS_PROTON_DEFAULT: float = 1836.15267343  # m_p / m_e (CODATA 2018)
 NUCLEON_MASS_DEUTERON_DEFAULT: float = 3670.482967  # m_d / m_e (CODATA 2018)
@@ -257,7 +257,7 @@ class MagnetizationDensitySpec:
         and nucleon_mass=1836.15, the recoil-mixing factor is
         m_e/(m_e+m_p) = 5.45e-4 — completely negligible.
         For muonic hydrogen with the bare muon mass (lepton_mass=206.77)
-        the factor m_mu/(m_mu+m_p) = 0.10124 takes the leading term to
+        the factor m_mu/(m_mu+m_p) = 0.10121 takes the leading term to
         the reduced-mass value.
     label : str
         Optional human-readable label.
@@ -322,9 +322,9 @@ class MagnetizationDensitySpec:
         """Return the dimensionless recoil-mixing factor m_l / (m_l + m_n).
 
         This is the prefactor of the NLO Zemach correction (arXiv:2604.06930
-        eq. 95).  For canonical ep (lepton_mass=1, nucleon_mass~1836)
-        returns ~5.45e-4; for canonical mup (lepton_mass~185.84,
-        nucleon_mass~1836) returns ~0.10124.
+        eq. 96).  For canonical ep (lepton_mass=1, nucleon_mass~1836)
+        returns ~5.45e-4; for muonic hydrogen with the bare muon mass
+        (lepton_mass~206.77, nucleon_mass~1836) returns ~0.10121.
 
         Returns 0.0 in the static-nucleus limit nucleon_mass -> infinity.
         """

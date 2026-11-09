@@ -1,9 +1,14 @@
-"""Sprint LS-8a: Native derivation of the two-loop self-energy bracket
-C_2S from iterated Connes-Chamseddine spectral action on Dirac-S^3.
+"""Sprint LS-8a: attempted native evaluation of the two-loop self-energy
+bracket C_2S from iterated Connes-Chamseddine spectral action on Dirac-S^3.
+
+RESULT (Paper 36): the model sum grows without bound with its cutoff
+(local log-log slope 2.8 between n_max = 5 and 6); no finite C_2S is
+obtained without Z_2 / delta m counterterms, which the model does not
+contain.  The GOAL below records what was attempted.
 
 GOAL
 ----
-Derive the dimensionless two-loop coefficient C_2S (in units of the LS-7
+Attempt to derive the dimensionless two-loop coefficient C_2S (in units of the LS-7
 structural prefactor alpha^2 (Z alpha)^4 m / (pi^2 n^3) = 0.2363 MHz at n = 2)
 from spectral data alone, with no empirical input from multi-loop QED
 literature.  Literature target: the two-loop S-state coefficient
@@ -35,12 +40,9 @@ diagram topologies:
 Each vertex carries an SO(4) selection rule W(n_a, n_b, q) in {0,1,2}
 from the spinor-photon coupling (see geovac/qed_self_energy.py).
 
-The bound-state matrix element <2S|Sigma_2L^SE|2S> is computed by
-projecting onto the Sturmian-bound state at lambda = Z/n.  In the
-LS-3/LS-7 convention, the GeoVac Fock graph at lambda = Z/n IS the
-Coulomb Sturmian basis reparameterized.  Hydrogen 2S has principal
-quantum number n_principal = 2, mapping to Camporesi-Higuchi
-n_CH = n_Fock - 1 = 1.
+No bound-state wavefunction enters: the external line is the
+Camporesi-Higuchi level n_CH = 1 (n_Fock = 2), standing in for hydrogen
+2S, and the sum runs over the Dirac spectrum of S^3.
 
 The dimensionless bracket extracted is:
 

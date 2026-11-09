@@ -63,8 +63,8 @@ constant $\pi^2/90$ appears in the high-temperature expansion of the
 free-energy density on $S^3 \times S^1_\beta$ only via the Matsubara
 sum, exactly through the mechanism of the spectral $\pi$-injection.
 
-We propose a refinement of Paper~34's projection dictionary: the
-implicit ``scalar parameter projection'' should be split into
+Paper~34's projection dictionary splits the implicit ``scalar
+parameter projection'' into
 (i)~a~\emph{rest-mass projection} (introduces $m$, dimension mass,
 transcendental signature trivial, ring-preserving for $m^2 \in
 \mathbb{Q}$) and (ii)~an~\emph{observation / temporal-window projection}
@@ -97,7 +97,7 @@ Its contribution is the structural observation that \emph{time, not
 mass}, is the projection axis along which $\pi$ enters the framework,
 and that the observer's finite-time measurement window, read as a
 periodic Euclidean circle (an identification the paper adopts rather
-than derives;\ \S\,XIV.B), is the formal
+than derives;\ Proposition~\ref{prop:two_rows}), is the formal
 mechanism.
 \end{abstract}
 
@@ -251,9 +251,10 @@ generator in this set.)
 (both irrational), the ring is broken at $n = 1$ and the corresponding
 irrational propagates into $\omega_n^2$ for all $n$.  The mechanism is
 trivial -- the spectrum is a literal sum -- but the observation pins the
-boundary: the Klein-Gordon eigenvalue is in
-$\mathbb{Q}[\sqrt{d_1}, \sqrt{d_2}, \ldots]$ if and only if $m^2$ is in
-the same ring.  The mass parameter is, by itself, transcendental-free
+boundary: the Klein-Gordon eigenvalue lies in
+$\mathbb{Q}[\sqrt{d_1}, \sqrt{d_2}, \ldots]$ when $m^2$ is rational,
+and an irrational $m^2$ such as $\sqrt{2}$ or $1/\pi$ takes it outside
+that field.  The mass parameter is, by itself, transcendental-free
 \emph{when supplied as a rational number}; the framework does not
 introduce additional $\pi$ during the parameter projection.
 
@@ -426,7 +427,7 @@ degeneracy $n^2(n^2{-}1)/12$ spreads $\omega\cdot\deg$ across $n^5$ and
 $n^3$, so the $S^5$ Casimir carries \emph{both} $B_6$ ($\zeta(-5) =
 -1/252$, coefficient $+1/24$) and $B_4$ ($-1/24$), with $B_2$
 \emph{absent}. The value $-31/60480$ is exact (verified in
-\texttt{sympy}) and, to our knowledge, newly computed; $S^5$ is a GeoVac
+\texttt{sympy}); $S^5$ is a GeoVac
 manifold via the Bargmann--Segal lattice (Paper~24). The spreading is
 the same multiplicity mechanism that obstructs the Dirac-zeta
 functional equation (Paper~29's functional-equation obstruction), and the
@@ -543,23 +544,23 @@ Fock-conformal (which carries $Z$ and $E$) or with the spectral action
 coarse: the mass projection is ring-preserving, while the
 observation/temporal-window projection injects $2\pi$ \emph{at the
 spectrum level, not just at the integration level}.  These are
-structurally different and should be split.
+structurally different, and Paper~34 carries them as separate rows.
 
-\begin{proposition}[Two new rows for the Paper~34 projection dictionary]
+\begin{proposition}[Two rows of the Paper~34 projection dictionary]
 \label{prop:two_rows}
-The Paper~34 projection list should include the following two
-explicit rows:
+The Paper~34 projection list includes the following two explicit rows
+(Paper~34 Projections~14 and~15):
 
 \begin{itemize}
 \setlength\itemsep{0pt}
-\item \textbf{Rest-mass projection} (\S\,XIV.A).
+\item \textbf{Rest-mass projection} (Paper~34 Projection~14).
 \textit{Source:} bare KG spectrum on $S^3 \times \mathbb{R}$.
 \textit{Target:} massive KG spectrum
 $\omega_n^2 = n(n+2)/R^2 + m^2$.
 \textit{Variables introduced:} $m$ (mass; equivalently rest-energy
 $mc^2$ at $c=1$).
 \textit{Dimension introduced:} mass = energy at $c = 1$.
-\textit{Transcendental signature:} \emph{trivial}; the bare-graph
+\textit{Transcendental signature:} \emph{trivial}; the bare-spectrum
 algebraic-extension ring is preserved when $m^2 \in \mathbb{Q}$ (or any
 ring extension of $\mathbb{Q}$ already present in the spatial
 spectrum).
@@ -568,7 +569,7 @@ corrections; nuclear-electronic composed Hamiltonian (Paper~23
 hyperfine I.S coupling); any future Klein-Gordon or Dirac-on-$S^3$
 relativistic mass calculation.
 
-\item \textbf{Observation / temporal-window projection} (\S\,XIV.B).
+\item \textbf{Observation / temporal-window projection} (Paper~34 Projection~15).
 \textit{Source:} KG spectrum on $S^3 \times \mathbb{R}$.
 \textit{Target:} KG spectrum on $S^3 \times S^1_\beta$ with periodic
 Euclidean time of period $\beta$, which this paper \emph{reads} as a
@@ -607,15 +608,6 @@ class of the computed observable from rational ($1/240$) to
 $\pi^{2k} \cdot \mathbb{Q}$ (Stefan-Boltzmann), without any change to
 the spatial spectrum.
 
-\begin{remark}[This is a no-edits-yet proposal]
-\label{rem:no_edits}
-Per the Paper~34 maintenance protocol, the addition of two new rows to
-the projection dictionary is a substantive structural change and
-requires PI direction.  The PM may append match rows to Paper~34's
-empirical catalogue autonomously, but new projection-list rows are not
-PM-autonomous.  The present paper records the structural finding and
-the proposal; Paper~34 itself is not amended.
-\end{remark}
 
 % ===================================================================
 \section{Falsifiable prediction}
@@ -749,11 +741,12 @@ Hence
   \;=\; -\tfrac{17}{3840}
   \quad \text{(exact rational, no $\pi$).}
 \]
-This is a clean new closed form, structurally a sibling of KG-3
+This is a clean closed form, structurally a sibling of KG-3
 (scalar $S^3$ Casimir $= 1/240$) and KG-5 (Dirac $S^3$ Casimir
 $= 17/480$).  The shared mechanism across all three sectors ---
-half-integer Hurwitz at shift $a = 3/2$, Bernoulli polynomials at
-$3/2$ rational --- is the universal structural driver: any spectrum
+Hurwitz zeta at a rational shift ($a = 1$, the Riemann zeta, for the $S^3$ scalar,
+$a = 3/2$ for the $S^3$ Dirac and the $S^5$ HO), with Bernoulli
+polynomials rational there --- is the structural driver: any spectrum
 of the form $E_n = n + a$ with $a \in \mathbb{Q}$ and degeneracy
 polynomial in $n$ produces a rational Casimir through
 $\zeta$-regularization, regardless of whether the underlying manifold
@@ -888,8 +881,9 @@ is the $M_2$ Riemann $\zeta(4)$ at the Bose--Einstein integrand.  The
 net $\pi^2$ in $-\pi^2/90$ is the $M_1\times M_2$ product in
 $\pi$-power arithmetic ($\pi^{-2} \cdot \pi^4 = \pi^2$).  For Dirac
 fermions, the same factorisation with the fermionic
-$\eta(4)/\zeta(4) = 7/8$ ratio gives $F/V_{\mathrm{per\text{-}Weyl}}
-= -(7\pi^2/720)\,T^4$, again with residual~$0$.
+$\eta(4)/\zeta(4) = 7/8$ ratio gives $F/V = -(7\pi^2/720)\,T^4$ per
+fermionic degree of freedom (a Weyl fermion carries two), again with
+residual~$0$.
 
 \subsection{Spatial Casimir is rational on both bundles}
 \label{subsec:tensor_spatial_casimir}
@@ -900,8 +894,9 @@ spatial Casimir on $S^3$, recovering Paper~35 KG-3 and KG-5 verbatim:
 E_{\mathrm{Cas}}^{\mathrm{conformal\;scalar},\,S^3} &= \tfrac{1}{240}, \\
 E_{\mathrm{Cas}}^{\mathrm{full\;Dirac},\,S^3} &= \tfrac{17}{480},
 \end{align*}
-both \emph{rational}.  The half-integer Hurwitz / Bernoulli-polynomial
-collapse mechanism noted in §V transports verbatim to the tensor
+both \emph{rational}.  The rational-shift Hurwitz / Bernoulli-polynomial
+collapse mechanism (shift $1$, the Riemann zeta, for the scalar, $3/2$ for the Dirac)
+transports verbatim to the tensor
 product: the spatial factor contributes no $\pi$ at the discrete-mode
 level, and $\pi$ enters only through the Mellin transform on $s$ when
 the heat kernel is evaluated.
@@ -933,8 +928,8 @@ $\sqrt{\pi}/\beta\cdot\mathbb{Q}$ ($M_1$) on the temporal side.
 \subsection{Transcendental audit holds Prediction~1}
 \label{subsec:tensor_audit}
 
-Sprint TD Track~1 audits ten distinct transcendental sources in the
-construction.  By tensor factor: 4 $\pi$-bearing on $S^3$ (volume-slot
+Sprint TD Track~1 audits the transcendental and rational sources in
+the construction.  By tensor factor: 4 $\pi$-bearing on $S^3$ (volume-slot
 factor, $\mathrm{Vol}(S^3)/\pi^2$, $M_2$ modular exponent $\pi^2$,
 $M_2$ Seeley--DeWitt prefactor $\sqrt{\pi}$); 5 on $S^1_\beta$
 (Matsubara modes, Bose--Einstein integrand, theta-inversion prefactor,
@@ -942,16 +937,16 @@ volume-slot factor, fermionic $\eta(4)$ ratio); 3 rational with no
 $\pi$ (scalar Casimir $1/240$, Dirac Casimir $17/480$, fermionic
 $7/8$ ratio).  By mechanism: 3 $M_1$, 4 $M_2$, 0 $M_3$ (no vertex
 coupling in the free thermal partition function), 1 $M_1\times M_2$
-product (Stefan--Boltzmann), 2 rational collapses ($M_2$ at
-half-integer Hurwitz).
+product (Stefan--Boltzmann), 2 rational collapses ($M_2$ Hurwitz at
+shifts $1$ and $3/2$).
 
 Every $\pi$ has a continuous-integration source: Matsubara
 compactification of imaginary time, Weyl-asymptotic spatial
 integration, Mellin transform of the heat-kernel trace, Jacobi-theta
 inversion, anti-periodic boundary condition.  Every rational result
 comes from a discrete spectral evaluation: Bernoulli polynomials at
-$a=3/2$, Dirichlet $\eta(4)/\zeta(4)$ rational ratio, half-integer
-Hurwitz collapse.  \textbf{Prediction~\ref{pred:pi_iff_temporal} holds
+$a=1$ and $a=3/2$, Dirichlet $\eta(4)/\zeta(4)$ rational ratio,
+rational-shift Hurwitz collapse.  \textbf{Prediction~\ref{pred:pi_iff_temporal} holds
 verbatim on the tensor product.}
 
 \subsection{Honest scope}
@@ -1138,13 +1133,13 @@ Unruh analog of Hawking's $\kappa_g$ surface gravity); lowest
 fermionic mode equals $a/2 = \pi T_U$; $T_U$ from $1/\beta_U$
 identifies bit-exactly with $a/(2\pi)$.
 
-\textbf{The unified Wick-rotation theorem.}\ The four-witness chain
+\textbf{The unified Wick-rotation reading.}\ The four-witness chain
 \begin{quote}\itshape
   Hartle--Hawking 1976 path-integral $\to$ Sewell 1982 generalization
   to bifurcate Killing horizons $\to$ Bisognano--Wichmann 1976
   Rindler-wedge modular flow $\to$ Unruh 1976 flat-space limit
 \end{quote}
-is one Wick-rotation theorem with four physical instantiations:\ the
+reads as one Wick-rotation statement with four physical instantiations:\ the
 thermal state of an observer with restricted causal access is
 determined by the regularity period of the Euclidean rotation of
 their causal-domain coordinates, which equals $2\pi$ times
@@ -1353,12 +1348,12 @@ sector (Paper~36, whose sub-percent headline is the leading one-loop
 assembly with literature logarithms, the one-loop $\alpha(Z\alpha)^5$
 term not included) and multi-loop QED (requires renormalization
 machinery the framework does not natively produce).
-\textbf{Refined Prediction~1:} the GeoVac framework controls the
-$\pi$ content of the \emph{finite parts} of any QED observable; UV
+\textbf{Scope of Prediction~1 in QED:} the prediction concerns the
+$\pi$ content of the \emph{finite parts} of QED observables; UV
 divergences of multi-loop contributions are inherited from the
 underlying field theory and renormalized by counterterms that the
-framework does not autonomously generate.  This is consistent with
-and strengthens the original Prediction~\ref{pred:pi_iff_temporal}:
+framework does not autonomously generate.  This narrows the original
+Prediction~\ref{pred:pi_iff_temporal}:
 $\pi$ enters via temporal integration; renormalization is a separate
 projection not yet in the Paper~34 catalogue.  Sprint provenance:
 \texttt{debug/ls5\_two\_loop\_scoping\_memo.md},
@@ -1389,16 +1384,16 @@ $2\pi k / \beta$.  The conformally coupled massless scalar Casimir
 energy on unit $S^3$ is the exact rational $1/240$; the Stefan-Boltzmann
 $\pi^2/90$ enters only through the Matsubara sum.  The structural
 reading is that mass is a parameter projection that preserves the
-algebraic-extension ring of the bare graph; the observation /
+algebraic-extension ring of the bare spectrum; the observation /
 temporal-window projection is the categorically distinct projection
-that introduces $\pi$.  These should be split as separate rows in
-Paper~34's projection dictionary.
+that introduces $\pi$.  Paper~34's projection dictionary carries them
+as separate rows (Projections~14 and~15).
 
 The framework-wide prediction is that a GeoVac observable contains
 $\pi$ if and only if its evaluation includes a continuous integration
 over a temporal or spectral parameter promoted from the discrete graph
-spectrum.  Existing GeoVac observables uniformly confirm this
-prediction: Pauli counts, magic numbers, hydrogenic eigenvalues,
+spectrum.  The GeoVac observables examined so far are consistent
+with this prediction: Pauli counts, magic numbers, hydrogenic eigenvalues,
 Bargmann--Segal lattice, and the graph QED ground-state self-energy are all
 $\pi$-free; vacuum polarization, $\beta$-function, and Stefan-Boltzmann
 all contain $\pi$ exactly because their evaluation includes a
@@ -1406,14 +1401,15 @@ continuous Schwinger-proper-time or Matsubara integration.
 
 With the addition of Sprint TX-B's five-observable falsification
 panel (\S~\ref{sec:tx_b}), the prediction has met no counterexample;
-it remains a structural Observation.  TX-B also produced a new clean
+it remains a structural Observation.  TX-B also computed a clean
 closed form: the spatial Casimir of the 3D HO on the Bargmann--Segal
 $S^5$ lattice is $E_\text{Cas}^{\text{HO}, S^5} = -17/3840$ (exact
 rational), structurally a sibling of the scalar $S^3$ Casimir
 ($1/240$, KG-3) and the Dirac $S^3$ Casimir ($17/480$, KG-5).
-The shared mechanism is half-integer Hurwitz at shift $a = 3/2$, with
-Bernoulli polynomials at $3/2$ rational --- the universal driver of
-rationality across all three Casimir sectors.  The Coulomb/HO/Dirac
+The shared mechanism is Hurwitz zeta at a rational shift ($1$, the
+Riemann zeta, for the scalar, $3/2$ for the Dirac and the HO), with Bernoulli polynomials
+rational there --- the driver of rationality across all three Casimir
+sectors.  The Coulomb/HO/Dirac
 asymmetry of Paper~24 (operator order and Wilson gauge with matter;\ its
 calibration-$\pi$ layer is withdrawn) does not extend to the Casimir transcendental
 class.

@@ -18,6 +18,10 @@
 \newtheorem{prediction}{Prediction}
 
 \newcommand{\gvc}[2]{#2}
+% \gvq{registry-key}{value}: renders the value; the key is a foreign key
+% into debug/qa/numeric_registry.py (CLAUDE.md SS15).
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Observables as Projections of a $\pi$-free Graph:\\
@@ -43,8 +47,9 @@ symbolically---no $\pi$.  \emph{Layer~2} is a finite family of named
 projections from that graph onto continuous physical settings; every
 physical variable, every dimension, and every transcendental constant
 that appears in any GeoVac calculation enters through exactly one
-projection and is traceable to it, apart from literature inputs and
-textbook-assembly rows that enter through no GeoVac projection.  This synthesis assembles the five
+projection and is traceable to it, apart from external inputs (literature
+values and applied field strengths) and textbook-assembly rows that
+enter through no GeoVac projection.  This synthesis assembles the five
 Group~6 papers into a single narrative built on that thesis.  The spine
 is:\ the projection taxonomy and its three-axis tagging
 (Paper~34~\cite{loutey_paper34}); time as the prototype \emph{free-side}
@@ -122,8 +127,9 @@ Observation, asserted at exactly that tier:
 \begin{observation}[Single-projection origin of physical content]
 Every coupling constant, energy scale, length scale, and transcendental
 constant appearing in any GeoVac computation traces to exactly one
-projection in Layer~2, apart from literature inputs and
-textbook-assembly rows that enter through no GeoVac projection.  The bare graph contains none of $\alpha$, $Z$,
+projection in Layer~2, apart from external inputs (literature
+values and applied field strengths) and textbook-assembly rows that
+enter through no GeoVac projection.  The bare graph contains none of $\alpha$, $Z$,
 $\hbar\omega$, $R$, $\Lambda$, $\pi$, or $\zeta(2k)$; these enter by, and
 only by, the projection the calculation invokes.
 \end{observation}
@@ -367,7 +373,7 @@ characterizing \emph{where} the two-body entanglement lives in the
 angular-momentum eigenbasis---the basis of hydrogenic radial functions
 times spherical harmonics labeled by $(n,\ell,m)$.
 
-\paragraph{Energy--entanglement decoupling.}
+\paragraph{Correlation in the electron repulsion.}
 At the fixed exponent $k=Z$ the one-body Hamiltonian of a He-like ion
 is exactly diagonal in this basis, so the off-diagonal electron
 repulsion carries all of the correlation energy and all of the
@@ -380,10 +386,12 @@ hop that is not part of the ion's Hamiltonian, so the attribution is
 withdrawn and the exponent re-measured without it (2026-09-25,
 Paper~26).  Added as a model perturbation, the hop still illustrates
 the one-body entanglement-inertness theorem:\ it moves the model energy
-by $10$--$39\%$ of the correlation energy while generating $<0.2\%$ of [retracted 2026-09-25: he-graph-native-hop-headline]
-the entanglement.
-The structural origin is that a one-body operator is separable and cannot
-entangle orbitals, while $V_{ee}$ is the irreducible two-body interaction;
+by $10$--$39\%$ of the correlation energy while its layer-attributed share of [retracted 2026-09-25: he-graph-native-hop-headline]
+the entanglement is $<0.2\%$ (adding it changes $S$ at $Z=2$ by $7\%$).
+The structural origin is that a one-body operator on its own, when its
+closed-shell ground state is non-degenerate, has a single-determinant
+ground state with zero orbital
+entanglement (Paper~27), while $V_{ee}$ is the irreducible two-body interaction;
 the angular-momentum basis, by nearly diagonalizing the one-body physics,
 isolates the entanglement in $V_{ee}$ alone.
 
@@ -396,7 +404,7 @@ rapid but graded transition at the identity, and the nonzero ERI count
 is $Z$-independent (sparsity is purely geometric).  This MEASURED transition is the entanglement-side
 counterpart of the potential-independent angular-sparsity theorem
 (Paper~22, Group~3) and the structural root of the exactly $Q$-linear
-composed Pauli count ($N_{\mathrm{Pauli}} = 27.90 \times Q$) reported
+composed Pauli count ($N_{\mathrm{Pauli}} = \gvq{composed_coeff}{27.90} \times Q$) reported
 in the quantum-computing arc (Group~4):\ the same
 basis that decouples one-body energy from two-body entanglement is the
 one that produces sparse ERIs.
@@ -404,7 +412,8 @@ one that produces sparse ERIs.
 \paragraph{Network topology and core--valence decoupling.}
 Orbital mutual-information maps exhibit a hub-migration pattern
 ($1s\to2s\to2p$) tracking the partially filled shell across the first
-row, and core--valence mutual information falls to $\approx 4\times10^{-3}$
+row (for $Z=5$--$9$ the ground states are degenerate multiplets and the
+hub shares depend on the member), and core--valence mutual information falls to $\approx 4\times10^{-3}$
 by $Z=4$, decays through $Z=6$, and vanishes exactly for $Z\geq7$ (basis saturation at $n_{\max}=2$).
 The latter is consistent with the composed fiber-bundle factorization
 used in the molecular framework, but does not establish it: at
@@ -412,7 +421,7 @@ $n_{\max}=2$ the core is exactly closed, so the core-valence mutual
 information vanishes by construction (Paper~26 \S V scope note).  Paper~26 states its limitations
 plainly---$n_{\max}=2$ for the first-row network maps, $R$-independence
 is a property of the composed architecture (not of the true molecular
-ground state, whose entanglement diverges at dissociation), and the
+ground state, whose entanglement rises toward $\ln 2$ at dissociation), and the
 $d$-orbital extension is open.
 
 %% ========================================================================
@@ -427,7 +436,7 @@ For observables with a multi-component literature decomposition---the
 hydrogen Lamb shift, the $21$~cm and muonic hyperfine intervals, the
 muonic-deuterium Lamb shift---Paper~34 hosts \emph{Roothaan autopsies}:\
 decomposition tables that present each measured observable as a sum of
-focal-length-tagged components, each carrying its explicit projection
+projection-tagged components, each carrying its explicit projection
 chain and a framework-native (FN) versus Layer-2-input (L2) status.  The
 hydrogen $2S_{1/2}$--$2P_{1/2}$ Lamb-shift autopsy is the limiting
 case:\ its leading components (one-loop self-energy and Uehling
@@ -468,7 +477,7 @@ A structural OBSERVATION emerges from re-tagging the matches
 catalogue by the number of Layer-2 inputs a chain consumes.  An earlier
 form scaled the residual with projection \emph{depth}; the May~2026
 synthesis pass falsified that form on the catalogue itself (depth-3
-chains exist at residual~$0$ and at $-211$~ppm; a depth-4 chain at
+chains exist at residual~$0$ and at $-456$~ppm; a depth-4 chain at
 $+2$~ppm).  The replacement is the \emph{Layer-2-presence
 bound}:\ the residual of a catalogue row is bounded above by the larger
 of the framework's basis-quality residual at zero Layer-2 inputs and the
@@ -508,9 +517,9 @@ The precision comparisons set \emph{framework-native} values against
 measurement; they are not first-principles predictions of the physical
 constants.  Most
 consume external inputs (Zemach radii, $g$-factors, multi-loop
-QED coefficients, nuclear polarizabilities; these are what the presence
-bound counts as Layer-2 inputs) in those inputs' native compilation
-conventions, and the autopsies' value is that they show where the
+QED coefficients, nuclear polarizabilities) in those inputs' native
+compilation conventions; the presence bound counts these as its
+Layer-2 inputs.  The autopsies' value is that they show where the
 framework's leading-order kernels are too coarse---not a replacement for
 the precision compilations.  The block-entropy exponent
 $\gamma_\infty\approx1.96$--$1.97$ is a MEASURED extrapolation, not the exact
@@ -523,7 +532,7 @@ entanglement at dissociation.
 The arc's principal open boundary is the \emph{multi-focal-composition
 wall}:\ the framework couples discrete labels cleanly but has \emph{no}
 native composition theorem for combining multiple Fock-style projections.
-Six independent instances are on record across domains (the Yukawa
+Several independent instances are on record across domains (the Yukawa
 non-selection theorem, the LS-8a renormalization scale, the HF spatial
 recoil/Zemach/multi-loop attempts, the chemistry W1e wall).  This is why
 multi-Layer-2-input observables sit in the residual-dominated regime of
@@ -579,7 +588,7 @@ GeoVac Paper~24 (2026).
 \bibitem{loutey_paper26}
 J.~Loutey,
 ``Entanglement Structure of the Angular Momentum Eigenbasis:\
-Energy-Entanglement Decoupling and Basis-Intrinsic Sparsity,''
+Correlation in the Electron Repulsion and Basis-Intrinsic Sparsity,''
 GeoVac Paper~26 (2026).
 
 \bibitem{loutey_paper27}

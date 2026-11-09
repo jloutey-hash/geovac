@@ -170,16 +170,18 @@ content — strip it and the claim becomes false:
 3. **Entropy is an EMBEDDING-class projection observable**: zero on the
    combinatorial graph, finite only after the metric embedding of 1/r₁₂. Never
    "the graph has entropy."
-4. **The HO rigidity** (Bargmann–Segal two-fermion closed-shell, *any* central
-   potential → entropy ≡ 0 via Moshinsky–Talmi total-quanta conservation) is an
-   INTERNAL THEOREM parallel to the Fock/BS rigidity of Paper 24 — symbolic
-   backing required (C1/C2).
-5. **The block-entropy exponent is γ_∞ ≈ 1.93–1.96** (extrapolated from n_max = 2,3,4,5;
-   the precise value is extrapolation-order dependent, the sub-2 conclusion is not),
-   *below* the second-order RS value 2, with the gap attributed to multi-shell
-   aggregation. Watch for a stale earlier exponent (the raw-w_B / EP-2c 2.383
+4. **The HO entropy rigidity is RETRACTED** (EP-2b, v5.0.0): the claim that a
+   Bargmann–Segal two-fermion closed shell has entropy ≡ 0 for *any* central
+   potential (Moshinsky–Talmi) is withdrawn; S_full = 0.0692/0.0736/0.0850 nats at
+   N_max = 2/3/4 and grows with basis.  A live re-assertion is MATERIAL (currency fix
+   2026-11-08).
+5. **The block-entropy exponent is γ_∞ ≈ 1.96–1.97** in the Z:15→30 window on the
+   physical Hamiltonian (1.93–1.96 was the hop-augmented model; the precise value is
+   extrapolation-order dependent, the sub-2 conclusion is not), *below* the
+   second-order RS value 2, with the gap attributed to the logarithm in the von
+   Neumann entropy (currency fix 2026-11-08). Watch for a stale earlier exponent (the raw-w_B / EP-2c 2.383
    form used dimensional w_B and inverts sign; the paper's live form is the
-   **dimensionless** w̃_B/δ_B with γ_∞ ≈ 1.93–1.96) — a stale 2.383 or a "= 2"
+   **dimensionless** w̃_B/δ_B with γ_∞ ≈ 1.96–1.97) — a stale 2.383 or a "= 2"
    assertion is a number-drift defect.
 
 ### Branch-defining criterion 5: §1.5 interpretive-rhetoric discipline (Papers 35/27/34 — the most interpretive branch)
@@ -252,10 +254,10 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   **A_n = g_n² = (2n²)²**, factor-4 = two-body; cusp = single hot node on **(1s,1s)**;
   **EP-2b RETRACTED (v5.0.0, moshinsky N_tot guard):** the "HO closed-shell
   any-central-potential entropy ≡ 0 (Moshinsky–Talmi)" claim + its mechanism + its
-  INTERNAL THEOREM tier are **WITHDRAWN** — corrected S_full = **0.0671/0.0716/0.0833
+  INTERNAL THEOREM tier are **WITHDRAWN** — corrected S_full = **0.0692/0.0736/0.0850
   nats** (N_max=2/3/4), grows with basis, ground state NOT a single Slater determinant,
-  ‖[H_HO,V]‖ = O(1) (0.74/0.63/0.67); block entropy **S_B = A(w̃_B/δ_B)^γ**, **γ_∞ ≈ 1.93–1.96**
-  (Richardson n_max=2–5, below RS 2). Tier = INTERNAL THEOREM (one-body inertness — valid)
+  ‖[H_HO,V]‖ = O(1) (0.75/0.64/0.67); block entropy **S_B = A(w̃_B/δ_B)^γ**, **γ_∞ ≈ 1.96–1.97**
+  (physical Hamiltonian, Z:15→30 window, below RS 2). Tier = INTERNAL THEOREM (one-body inertness — valid)
   + MEASURED (scaling); the two-fermion HO rigidity corollary is retracted.
   *(Criteria-currency correction 2026-08-24 to the PI-approved retraction — a live
   re-assertion of the ≡0 claim is now MATERIAL, not a headline to protect.)*
@@ -365,9 +367,10 @@ was added and when.
   the attribution is leave-one-edge-out, well-defined but not unique.
 
 - **P26, molecular headline now BACKED (`eq:rindep`, `eq:ratio`).**
-  S_bond = **0.3033139** nats R-independent on [0.5, 10] bohr with the
-  mechanism pinned (composed electronic blocks **bit-identical** across R);
-  S_bond/S_core = **49.6** at LiH R_eq; dissociation does NOT reach ln 2.
+  S_bond = **0.3298895** nats (H2 bond pair; the LiH bond block gives the same) R-independent on [0.5, 10] bohr by construction
+  (composed electronic blocks **bit-identical** across R);
+  S_bond/S_core = **40.1** at LiH R_eq with the PK term off (~57 with it);
+  dissociation does NOT reach ln 2.
   (Previously a C8 headline with no test through three certifying runs.)
 
 - **P34, citation layer (new `sec:citation_status`).**  13 references verified
@@ -472,6 +475,9 @@ Run notes: `debug/qa/group6_full_run_2026_08_28_notes.md`.
   P34 prose stamped (50 units); C16 entry p34-group6-thirdlook-2026-11-08 then caught the same overclaim in the
   catalogue opening and the off-precision paragraph, fixed with the reviewed wording, those 2 units left
   unstamped. Coverage 116/142.
+  **SMALL sweep (2026-11-08, v6.7.6):** debt list worked; four fresh reviewers on the diffs found 1 LARGE introduced
+  by the sweep (P34 He-3 comparison) plus a wrong Hurwitz shift; fixed; recheck 0 LARGE. Prose re-stamped; coverage
+  110/142 (cite and code units reopened by bibitem and docstring fixes).
 - 2026-07-04 — **Certifying FULL run (whole-group) = PASS → group6 CERTIFIED ✅ (6th branch).**
   8-reviewer panel (3 Opus code + 2 Opus claims + Sonnet citation + Opus synthesis) + Opus
   completeness-critic, over the remediated corpus with a fresh 8-seed set (loci/phrasings

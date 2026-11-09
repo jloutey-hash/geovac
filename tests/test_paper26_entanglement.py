@@ -6,19 +6,22 @@ driver debug/archive/misc/energy_entanglement_decoupling.py (the same module
 Paper 27's tests import).  Prior to this file the driver COMPUTED these
 quantities but no test ASSERTED them (a /qa group6 first-cert coverage gap):
 
-1. Energy-entanglement decoupling (abstract + Sec. II, tab:decoupling):
-   the off-diagonal one-body Hamiltonian (graph Laplacian, kappa=-1/16)
-   contributes 10-39% of the correlation energy but < 0.2% of the
-   entanglement entropy; the off-diagonal V_ee contributes ~100%.
-2. Entanglement entropy scaling S ~ Z^{-2.56} across He-like ions.
+1. Hop-augmented MODEL illustration (Sec. II, tab:decoupling): an added
+   one-body hop (1/16)A, which is not part of the ion's Hamiltonian, moves
+   10-39% of the model's correlation energy while its layer-attributed share
+   of the entropy is < 0.2%.  The ion's physical numbers (f_E^h1 == 0,
+   S ~ Z^-2.52) are pinned in tests/test_he_physical_hamiltonian.py.
+2. The hop-model exponent S ~ Z^{-2.56} (quoted in the paper only as the
+   earlier model value).
 3. Basis-intrinsic sparsity (Sec. III): the angular-momentum eigenbasis
    gives ERI density 17.1% (107/625) at n_max=2; any generic (angular-mixing)
    rotation fills to 100% (625/625); the nonzero ERI count is Z-independent.
    (Corrected 2026-08-29 from 42.4%/265 -- the retired figure omitted the
    Coulomb selection rule m_a+m_b = m_c+m_d.)
-4. Core-valence decoupling thresholds + the N/O/F degeneracy caveat
-   (Sec. V): exact core closure at Z>=8 (approximate at N, ~4e-4), the
-   C(4, n_p-2) multiplets, and the member-dependent MI spread.
+4. Core-valence decoupling (Sec. V, tab:corevalence, bipartite 2*S_core
+   convention): monotone decay Be -> B -> C, exact core closure for Z = 7-9,
+   the 4/9/6-fold N/O/F ground multiplets, and the member-dependent MI
+   spread.
    (Corrected 2026-08-29: the retired "exact closure at Z>=5" and the
    "exact MI ceilings ln 8 / ln 16" both fell -- the first to the exact
    Coulomb ERI rule, the second to the diagonal-only entropy routine.)
@@ -84,7 +87,7 @@ def test_paper26_energy_entanglement_decoupling(decoupling):
     assert min(frac_S_vee) > 0.99, \
         f'V_ee S-fraction {min(frac_S_vee):.4f} not ~100%'
 
-    # The decoupling is the > 50x separation between the two channels
+    # The model decoupling is a > 50x separation between the two channels
     # (the guard the assert enforces; most Z sit far above it):
     # h1 moves energy but not entanglement; V_ee moves entanglement.
     for z in _Z_VALUES:
@@ -241,9 +244,10 @@ def test_paper26_eri_count_is_z_independent():
 # ---------------------------------------------------------------------------
 
 def test_paper26_core_valence_decoupling_thresholds():
-    """Core-valence mutual information: ~2e-3 at Z=4 (Be, small-but-nonzero,
-    a genuine measurement -- 1s occ 1.99987), at the ~1e-14 noise floor for
-    Z>=5 via exact core closure (1s occ exactly 2), and O(1) for He/Li (no
+    """Core-valence mutual information (bipartite, 2*S_core): 3.65e-3 at
+    Z=4 (Be, small-but-nonzero, 1s occ 1.99971), decaying monotonically
+    through B (1.71e-3) and C (6.6e-4), at the ~1e-14 noise floor for Z = 7-9
+    via exact core closure (1s occ exactly 2), and O(1) for He/Li (no
     core-valence separation).  Consistent with the composed fiber-bundle
     factorization but NOT establishing it at this basis (Paper 26 Sec V
     scope note, 2026-08-28).  Recomputed from the FCI ground state."""
@@ -252,8 +256,8 @@ def test_paper26_core_valence_decoupling_thresholds():
     # n_max=2 matches the paper's Table II source (debug/data/entanglement_first_row.json).
     def atom(Z, ne):
         return run_atom(Z, ne, 2, 'X')[0]
-    # Be (Z=4): the threshold datum, I_cv ~ 2e-3 -- small but genuinely
-    # NONZERO (the 1s occupation is 1.99987, not exactly 2).
+    # Be (Z=4): I_cv = 3.65e-3 -- small but genuinely NONZERO (the 1s
+    # occupation is 1.99971, not exactly 2).
     r4 = atom(4, 4)
     be = r4['I_core_valence']
     assert be == pytest.approx(0.00365, abs=5e-4), f'Be I_cv = {be:.4e}'
@@ -265,9 +269,9 @@ def test_paper26_core_valence_decoupling_thresholds():
     # core->valence double excitations <1s 1s|2p-1 2p+1> couple the core, so
     # B/C/N are small-but-nonzero measurements rather than exact closures.
     # What replaces the step is a cleaner physical statement: I_cv decays
-    # MONOTONICALLY as the core contracts, hitting the numerical floor at O.
+    # MONOTONICALLY as the core contracts, hitting the numerical floor at N.
     #
-    #   Be 3.65e-3 | B 1.51e-3 | C 1.05e-3 | N 3.72e-4 | O ~0 | F ~0
+    #   Be 3.65e-3 | B 1.71e-3 | C 6.65e-4 | N ~0 | O ~0 | F ~0
     #
     # (Bipartite 2*S_core convention -- the SOUND route.  Not the per-orbital
     # MI matrix, which is separately broken; see the quarantine note below.)
@@ -289,8 +293,7 @@ def test_paper26_core_valence_decoupling_thresholds():
         assert abs(atom(Z, Z)['I_core_valence']) < 1e-12, \
             f'Z={Z}: exact core closure lost'
     # Li (Z=3): still strongly coupled; pin the tabulated bipartite value
-    # 0.213 (2*S_core convention; the pairwise-sum gives 0.429 -- the
-    # convention split the paper flags as an open item).
+    # 0.228 (2*S_core convention, the one tab:corevalence uses).
     li = atom(3, 3)['I_core_valence']
     # 0.2135 -> 0.22713 (corrected 2026-08-29, ERI evaluator fix).
     assert abs(li - 0.2276) < 5e-3, f'Li I_cv = {li:.4e} != 0.228 (bipartite)'
@@ -299,12 +302,14 @@ def test_paper26_core_valence_decoupling_thresholds():
 def test_paper26_nof_degeneracy_and_robust_core_closure():
     """Paper 26 Sec V degeneracy caveat (2026-08-28): the N/O/F ground states are
     degenerate (the 4-, 9- and 6-fold 4S, 3P and 2P LS multiplets), so
-    intra-valence MI is multiplet-member-dependent, ranging from 0 (sector-pure
-    single-determinant members) to near the information-theoretic ceiling.
-    What holds for EVERY member is I_cv = 0 exactly -- a theorem, whose premise
-    (every support determinant carries 1s^2) this test pins sampling-free.
-    Note: icv here is the pairwise-sum definition (eq:icv); the bipartite
-    2*S_core definition also vanishes (rho_1s pure), so both are covered.
+    intra-valence MI is multiplet-member-dependent, ranging from near 0 to
+    sampled maxima of about 0.7 (N), 1.3 (O) and 1.3 (F).
+    What holds for EVERY member is I_cv = 0 exactly -- derived from a
+    machine-verified premise (every support determinant carries 1s^2),
+    which this test pins sampling-free.
+    Note: icv here is the pairwise sum over the MI matrix; the bipartite
+    2*S_core definition of eq:icv also vanishes (rho_1s pure), so both are
+    covered.
     The member spread is wide but atom-dependent (F's corner ratio is 1.48;
     the guard uses 1.2).
 
@@ -440,10 +445,6 @@ def test_paper26_nof_degeneracy_and_robust_core_closure():
         # 4/6/4 verified directly") now holds ONLY at F.  Determinant-
         # eigenstate-ness and core closure are INDEPENDENT properties: O has
         # exact core closure yet a genuinely superposed multiplet.
-        #
-        #   Z=7 (N): deg 4, 28 support dets, residual 8.86e-2 .. 1.000
-        #   Z=8 (O): deg 3,  4 support dets, residual 8.93e-14 .. 7.07e-1
-        #   Z=9 (F): deg 4,  4 support dets, residual ~1e-14 (all exact)
         # Re-measured 2026-11-08 on the full multiplets (dense eigh):
         #   N (Z=7): MIXED -- 2 of 8 support dets exact, max residual 0.82
         #   O (Z=8): MIXED -- 6 of 12 support dets exact, max residual 0.71
