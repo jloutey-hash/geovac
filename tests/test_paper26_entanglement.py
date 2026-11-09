@@ -298,7 +298,7 @@ def test_paper26_core_valence_decoupling_thresholds():
 
 def test_paper26_nof_degeneracy_and_robust_core_closure():
     """Paper 26 Sec V degeneracy caveat (2026-08-28): the N/O/F ground states are
-    degenerate (4-/6-/4-fold = C(4, n_p-2), combinatorial not LS), so
+    degenerate (the 4-, 9- and 6-fold 4S, 3P and 2P LS multiplets), so
     intra-valence MI is multiplet-member-dependent, ranging from 0 (sector-pure
     single-determinant members) to near the information-theoretic ceiling.
     What holds for EVERY member is I_cv = 0 exactly -- a theorem, whose premise
@@ -317,16 +317,18 @@ def test_paper26_nof_degeneracy_and_robust_core_closure():
     from debug.archive.misc.entanglement_first_row import (
         compute_single_orbital_entropies, compute_mutual_information_matrix)
 
-    # CORRECTED 2026-08-29 (ERI evaluator fix): Z=8 moved 6 -> 3.
-    expected_deg = {7: 4, 8: 7, 9: 6}
+    # Dense diagonalization: a Lanczos call asking for fewer states than the
+    # multiplet holds truncates it (it returned 7 of O's 9 members).
+    expected_deg = {7: 4, 8: 9, 9: 6}
     for Z, ne in ((7, 7), (8, 8), (9, 9)):
         rng = np.random.RandomState(Z)  # reseeded per Z: draws are independent
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             li = LatticeIndex(n_electrons=ne, max_n=2, nuclear_charge=Z,
                               vee_method='slater_full')
-        k = min(8, li.n_sd - 1)
-        ev, vec = li.compute_ground_state(n_states=k)
+        H = li.assemble_hamiltonian()
+        H = H.toarray() if hasattr(H, 'toarray') else np.asarray(H)
+        ev, vec = np.linalg.eigh(H)
         deg = int(np.sum(ev - ev[0] < 1e-8))
         assert deg == expected_deg[Z], (
             f"Z={Z}: ground degeneracy {deg} != {expected_deg[Z]}"
@@ -380,7 +382,7 @@ def test_paper26_nof_degeneracy_and_robust_core_closure():
 
         vals = []
         members = [np.eye(deg)[:, j] for j in range(deg)]
-        for _ in range(6):
+        for _ in range(60):
             c = rng.randn(deg)
             c /= np.linalg.norm(c)
             members.append(c)
@@ -442,18 +444,14 @@ def test_paper26_nof_degeneracy_and_robust_core_closure():
         #   Z=7 (N): deg 4, 28 support dets, residual 8.86e-2 .. 1.000
         #   Z=8 (O): deg 3,  4 support dets, residual 8.93e-14 .. 7.07e-1
         #   Z=9 (F): deg 4,  4 support dets, residual ~1e-14 (all exact)
-        # Re-measured 2026-08-29 after the Condon-Shortley order fix:
-        #   N (Z=7): MIXED   -- 3.8e-14 .. 8.2e-1 (some exact, some not)
-        #   O (Z=8): NONE exact -- 3.3e-2 .. 9.6e-1
-        #   F (Z=9): ALL exact  -- ~1e-15
-        if Z == 7:
+        # Re-measured 2026-11-08 on the full multiplets (dense eigh):
+        #   N (Z=7): MIXED -- 2 of 8 support dets exact, max residual 0.82
+        #   O (Z=8): MIXED -- 6 of 12 support dets exact, max residual 0.71
+        #   F (Z=9): ALL exact
+        if Z in (7, 8):
             assert min(resid) < 1e-10 < 1e-2 < max(resid), (
-                f'Z=7: expected a MIXED multiplet; got '
+                f'Z={Z}: expected a MIXED multiplet; got '
                 f'{min(resid):.2e} .. {max(resid):.2e}')
-        elif Z == 8:
-            assert min(resid) > 1e-3, (
-                f'Z=8: expected NO exact-eigenstate determinants; got '
-                f'min residual {min(resid):.2e}')
         else:
             assert max(resid) < 1e-8, (
                 f'Z=9: determinants are no longer exact eigenstates '

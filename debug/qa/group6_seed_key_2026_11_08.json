@@ -1,0 +1,228 @@
+{
+ "target": "group6",
+ "date": "2026-11-08",
+ "mode": "seeded FULL",
+ "seeds": [
+  {
+   "id": "CL-A",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "line": 2922,
+   "class": "S9 status overstatement / self-contradiction",
+   "expected_catcher": "claims P34-A (L1-3617)",
+   "description": "apparatus identity upgraded to 'proven for every spectral triple' while the next sentence says the molecular extension has not been exercised",
+   "seeded_text": "A second honest scope note: the apparatus identity is proven for every\nspectral triple of the framework, and checked numerically on the hydrogen-class systems"
+  },
+  {
+   "id": "CL-B",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "line": 5479,
+   "class": "D autopsy arithmetic",
+   "expected_catcher": "claims P34-B (L3618-7158)",
+   "description": "D HFS reduced-mass factor 0.999183 -> 0.999283; the table's product no longer gives 327.315305 (and (1+m_e/m_d)^-3 = 0.999183)",
+   "seeded_text": "$+$ Reduced-mass $(1+m_e/m_d)^{-3}$ & $\\times 0.999283$ &"
+  },
+  {
+   "id": "CL-C",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "line": 9632,
+   "class": "S5 hard-prohibition touch (K labelled conjecture)",
+   "expected_catcher": "claims P34-C (L7159-end)",
+   "description": "K = pi(B+F-Delta) relabelled 'conjecture' at the catalogue's K item",
+   "seeded_text": "The Paper~2 conjecture is the most extreme multi-projection"
+  },
+  {
+   "id": "CL-D",
+   "file": "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+   "line": 242,
+   "class": "criterion 4.1 non-degeneracy qualifier dropped",
+   "expected_catcher": "claims P26+P27",
+   "description": "S_kin = 0 floor stated for every one-body ground state incl. open-shell/degenerate; contradicts the next sentence and the proposition",
+   "seeded_text": "applies to every one-body ground state, closed- or open-shell,\nwhatever its degeneracy at the\n$h$-eigenbasis level."
+  },
+  {
+   "id": "CL-E",
+   "file": "papers/group6_precision_observations/paper_36_bound_state_qed.tex",
+   "line": 413,
+   "class": "S9 status overstatement (not-converged -> converged)",
+   "expected_catcher": "claims P35+P36",
+   "description": "P36 conclusion says the 2S Bethe log converges to 0.92%; abstract/body say not converged and -0.92% at N=40 is a crossing",
+   "seeded_text": "acceleration-form value converges to within $0.92\\%$."
+  },
+  {
+   "id": "CI-A1",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "line": 10549,
+   "class": "S1 wrong venue (volume)",
+   "expected_catcher": "citation P34",
+   "description": "Wineland-Ramsey 'Atomic deuterium maser' volume 5 -> 6",
+   "seeded_text": "Phys.\\ Rev.\\ A \\textbf{6}, 821 (1972)."
+  },
+  {
+   "id": "CI-A2",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "line": 4802,
+   "class": "C-REF reference value not in source",
+   "expected_catcher": "citation P34 (also claims P34-B via Eq. 406)",
+   "description": "H 21 cm reference 1 420 405 751.768 Hz -> .786 Hz (Hellwig 1970 / Eides Eq. (406) = 1420405.7517667 kHz)",
+   "seeded_text": "\\textbf{Reference.} $\\nu_\\text{HF} = 1\\,420\\,405\\,751.786$~Hz (Hellwig"
+  },
+  {
+   "id": "CI-B1",
+   "file": "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+   "line": 1586,
+   "class": "S1 wrong venue (volume)",
+   "expected_catcher": "citation P26/27/35/36",
+   "description": "Kempf 2010 NJP volume 12 -> 13",
+   "seeded_text": "\\textit{New J.\\ Phys.}~\\textbf{13}, 115001 (2010)."
+  },
+  {
+   "id": "CI-B2",
+   "file": "papers/group6_precision_observations/paper_36_bound_state_qed.tex",
+   "line": 71,
+   "class": "C-REF reference value not in source",
+   "expected_catcher": "citation P26/27/35/36",
+   "description": "Bezginov 2019 measured 2S(F=0)-2P(F=1) interval 909.8717(32) -> 909.8771(32) MHz",
+   "seeded_text": "interval of $909.8771(32)$~MHz"
+  },
+  {
+   "id": "SY-1",
+   "file": "papers/synthesis/group6_precision_observations_synthesis.tex",
+   "line": 431,
+   "class": "S10 mirror-staleness (owner strengthened; synthesis keeps the weak form)",
+   "expected_catcher": "synthesis",
+   "description": "Lamb: owners now close the budget (1057.824 MHz); synthesis says the gap remains unexplained",
+   "seeded_text": "row and a withdrawn multi-loop row, and the gap to experiment left by\nthe one-loop terms remains unexplained by any itemized budget\n(Papers~34, 36)."
+  },
+  {
+   "id": "SY-2",
+   "file": "papers/synthesis/group6_precision_observations_synthesis.tex",
+   "line": 270,
+   "class": "S9 keystone status overstatement (WH7 registered -> established)",
+   "expected_catcher": "synthesis",
+   "description": "WH7 (REGISTERED, not proven) stated as an established Paper 35 result",
+   "seeded_text": "This connects directly to the result, established in Paper~35, that\ntime-discreteness is observer-compactification (WH7)"
+  },
+  {
+   "id": "CO-26a",
+   "file": "tests/test_paper26_molecular_entanglement.py",
+   "line": 54,
+   "class": "S2 vacuous guard",
+   "expected_catcher": "code P26",
+   "description": "R-independence check compares the R=0.5 value with itself four times; max-min < 1e-12 cannot fail",
+   "seeded_text": "    S_vals = [out[R_values[0]][0] for R in R_values]"
+  },
+  {
+   "id": "CO-26b",
+   "file": "debug/archive/misc/entanglement_first_row.py",
+   "line": 295,
+   "class": "S11 restricted evaluation (hidden in the code the test exercises)",
+   "expected_catcher": "code P26",
+   "description": "for Z>=7 the CI vector is projected onto 1s^2 determinants, so the 'exact core closure' guard (I_cv < 1e-12, Z=7,8,9) holds by construction and cannot detect a lost closure",
+   "seeded_text": "        E0 = eigvals[0]\n        ci_vector = eigvecs[:, 0]\n        # Core-excited determinants sit below the eigensolver noise floor\n        # from N onward; drop them so round-off does not leak into t"
+  },
+  {
+   "id": "CO-27a",
+   "file": "tests/test_paper27_entropy.py",
+   "line": 74,
+   "class": "S3 restricted evaluation (one-body H made diagonal)",
+   "expected_catcher": "code P27",
+   "description": "S_kin tested on the diagonal one-body H only; its ground state is a determinant by construction, so S_kin = 0 is not a test of one-body inertness",
+   "seeded_text": "    H_kin  = data['H_h1_diag']\n"
+  },
+  {
+   "id": "CO-27b",
+   "file": "tests/test_paper27_entropy_locus.py",
+   "line": 96,
+   "class": "S2 vacuous guard",
+   "expected_catcher": "code P27",
+   "description": "runner-up margin compares against the LAST (smallest) edge, so it cannot fail",
+   "seeded_text": "    assert top_dS > 1.3 * rows[-1][0], \"top edge not clearly ahead of the runner-up\""
+  },
+  {
+   "id": "CO-34a",
+   "file": "tests/test_paper34_projection_spot_checks_batch2.py",
+   "line": 294,
+   "class": "S2 guard that cannot fail (pi in free_symbols)",
+   "expected_catcher": "code P34",
+   "description": "the pi-free assertion reverted to `sp.pi not in free_symbols`, always True",
+   "seeded_text": "    assert sp.pi not in deltaH.free_symbols, ("
+  },
+  {
+   "id": "CO-34b",
+   "file": "tests/test_paper34_h21_budget.py",
+   "line": 111,
+   "class": "S3 guard accepts the wrong answer",
+   "expected_catcher": "code P34",
+   "description": "the circular-extraction guard now ACCEPTS 1.045 fm (docstring says it rejects it)",
+   "seeded_text": "    assert abs(r_z - 1.045) < 0.06"
+  },
+  {
+   "id": "CO-35a",
+   "file": "tests/test_paper35_kg_panel.py",
+   "line": 97,
+   "class": "S3 sign-blind guard",
+   "expected_catcher": "code P35",
+   "description": "Dirac Casimir pinned with abs(): the retired -17/480 passes",
+   "seeded_text": "    assert abs(val) == sp.Rational(17, 480), f\"Dirac Casimir {val} != +17/480\""
+  },
+  {
+   "id": "CO-35b",
+   "file": "tests/test_paper35_kg_panel.py",
+   "line": 82,
+   "class": "S2 tautology",
+   "expected_catcher": "code P35",
+   "description": "scalar Casimir compared with a second call of the same function; 1/240 no longer pinned",
+   "seeded_text": "    val = scalar_casimir_S3()[\"casimir_energy_unit_S3_conformal_scalar\"]\n    expected = scalar_casimir_S3()[\"casimir_energy_unit_S3_conformal_scalar\"]\n    assert val == expected\n"
+  },
+  {
+   "id": "CO-36a",
+   "file": "tests/test_paper36_owed_guards.py",
+   "line": 107,
+   "class": "S3 sign-blind guard",
+   "expected_catcher": "code P36",
+   "description": "LP residual pinned by magnitude only; docstring says it rejects a wrong-sign residual (pct check still signed, so partly backstopped)",
+   "seeded_text": "    assert abs(abs(r) - mp.mpf(\"5.65\")) < mp.mpf(\"0.005\"), r\n    pct = 100 * r / mp.mpf(LAMB_LP81_MHZ)"
+  },
+  {
+   "id": "CO-36b",
+   "file": "tests/test_paper36_a50_term.py",
+   "line": 22,
+   "class": "S2 tautology",
+   "expected_catcher": "code P36",
+   "description": "A50 'value' test compares the literal 9.29 with 9.29; the closed form 4 pi (139/128 - ln2/2) is no longer checked there",
+   "seeded_text": "A50 = 9.29\n\n\ndef test_a50_value():\n    a50 = A50\n"
+  }
+ ],
+ "controls": [
+  {
+   "id": "K1",
+   "file": "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+   "claim": "scalar S^3 Casimir = 1/240, exact rational, no pi"
+  },
+  {
+   "id": "K2",
+   "file": "papers/group6_precision_observations/paper_36_bound_state_qed.tex",
+   "claim": "erratum shift +27.13 MHz = (4/15) alpha^3/(pi n^3) Ha at n=2"
+  },
+  {
+   "id": "K3",
+   "file": "papers/group6_precision_observations/paper_36_bound_state_qed.tex",
+   "claim": "tab:budget sum 1057.824 MHz; 0.020 below LP (2.3 sigma)"
+  },
+  {
+   "id": "K4",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "claim": "K residual 4.8e-7 plain sum, 8.8e-8 via Paper 2's self-consistency root (catalogue row ~L3882)"
+  },
+  {
+   "id": "K5",
+   "file": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "claim": "D HFS Bohr-Fermi baseline 327.234993 MHz and residual -210.9 ppm"
+  },
+  {
+   "id": "K6",
+   "file": "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+   "claim": "area law A_n = g_n^2 = (2n^2)^2 is a pair count (factor 4 two-body)"
+  }
+ ]
+}

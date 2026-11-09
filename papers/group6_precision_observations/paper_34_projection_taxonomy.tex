@@ -40,7 +40,8 @@ eigenvalues, no physics.  \textbf{Layer~2} is a finite family of named
 projections from the bare graph onto physical settings.  Every
 physical variable, every dimensional unit, and every transcendental
 constant that appears in any GeoVac calculation enters through
-exactly one projection, and is fully traceable to it.
+exactly one projection (apart from literature constants entered as external inputs, such as the
+textbook vacuum-polarization rows of the catalogue), and is fully traceable to it.
 
 We catalogue twenty-eight projection mechanisms and tag each one along
 three independent axes: (a)~which physical variables it introduces
@@ -59,9 +60,9 @@ We then assemble the empirical matches catalogue: a tagged table of
 GeoVac quantities that match standard known physics values to
 machine precision (or stated uncertainty).  Each row is annotated
 by projection(s), variable(s), dimension, transcendental class, and
-match precision.  Reading the catalogue surfaces a falsifiable
-structural prediction:
-\begin{prediction}[Layer-2-presence bound.]
+match precision.  Reading the catalogue suggests a structural
+Observation:
+\begin{observation}[Layer-2-presence bound.]
 The residual error of a catalogue row is bounded above by the
 larger of (i)~the framework's basis-quality residual at zero
 Layer-2 inputs, and (ii)~the largest single Layer-2 input
@@ -73,8 +74,10 @@ The genuine axis ordering catalogue precision is observable-class
 (zero-, one-, multi-Layer-2-input) crossed with the framework's
 basis-quality limit; chained projection depth is a downstream
 proxy that fails in both directions.
-\end{prediction}
-This replaces an earlier naive form that scaled residual linearly
+\end{observation}
+The zero-input rows are consistent with it; the one-input class has no
+clean member, and one row, the corrected D 1S HFS, violates it
+(\S\ref{sec:prediction}).  This replaces an earlier naive form that scaled residual linearly
 with chain depth; the May~2026 synthesis pass falsified the depth
 form on the catalogue itself (depth-3 chains exist at residual~$0$
 and at $-211$~ppm; a depth-4 chain exists at $+2$~ppm).  The
@@ -153,7 +156,8 @@ graph data on which it acts.
 \label{obs:single_origin}
 Every coupling constant, energy scale, length scale, and
 transcendental constant that appears in any GeoVac computation can
-be traced to exactly one projection in Layer~2.  The bare graph
+be traced to exactly one projection in Layer~2, apart from literature
+constants entered as external inputs.  The bare graph
 does not contain $\alpha$, $Z$, $\hbar\omega$, $R$, $\Lambda$, $\pi$,
 or $\zeta(2k)$.  These quantities are introduced by, and only by,
 the projection that the calculation invokes.
@@ -677,7 +681,7 @@ the factor $2\ell+1$ is that bookkeeping and nothing more
 (Paper~36~\S~5.1).\\
 \textbf{Variables introduced:} none.\\
 \textbf{Dimension introduced:} none; $\ln k_0$ is dimensionless.\\
-\textbf{Transcendental signature:} flow tier (Paper~18 \S~IV).
+\textbf{Transcendental signature:} calibration tier, infinite-spectral-sum sub-case (Paper~18).
 $D_{\text{drake}}$ itself is rational ($Z^4 \cdot \mathbb{Q}$); the
 transcendental content sits in $J_v$, in the spectral-sum
 logarithms $\ln |\Delta E_m / \mathrm{Ry}|$.\\
@@ -827,13 +831,12 @@ channel separated as a distinct Layer-2 mechanism); future positronium
 fine-structure tests; future tests of the equal-mass $\mu^+ e^-$
 limit if measured.\\
 \textbf{Empirical anchor:} Ps 1S-2S framework-native at $+64.75$ ppm
-vs Fee~1993 $1{,}233{,}607{,}216.4(3.2)$ MHz; the Layer-2 $\alpha^4$
-Breit input (the standard coefficient $-(11/48)$; Ps theory per
-Karshenboim~2005~\S~9 --- the literal fraction is the framework's own
-reduction, verified numerically at $0.57\%$, its textbook source an
-open verification item;
-complete Ps theory at $m\alpha^6$ from Pachucki--Karshenboim~1998,
-PRL~80, 2101) at the $\sim 80$ GHz scale closes the residual to sub-MHz.\\
+vs Fee~1993 $1{,}233{,}607{,}216.4(3.2)$ MHz; a Layer-2 $\alpha^4$
+Breit input at the $\sim 80$ GHz scale, calibrated against the complete
+Ps theory of Pachucki--Karshenboim~1998 (PRL~80, 2101), closes the
+residual by construction.  Reduced to a coefficient that input is
+$-0.2279$, $0.54\%$ from $-(11/48)$; no textbook source for the literal
+fraction has been located.\\
 \textbf{Honest scope.}  This projection has one empirical anchor as
 of 2026-05-08 (Ps 1S-2S).  Its definition is structural --- the
 construction (single-particle Eides bracket $\to$ full two-body
@@ -867,11 +870,10 @@ element evaluation $\langle\text{Ps}, 1S | H_B | \text{Ps}, 1S\rangle
 two-body Dirac normalization requires the Bethe--Salpeter quasi-energy
 expansion machinery, structurally outside the framework's
 single-particle Eides~\S~3.2 SE bracket; this is the W2a-class
-infrastructure target.  The $\sim 0.57\%$ match between the
+infrastructure target.  The $0.54\%$ agreement between the
 calibration-by-construction Layer-2 input ($-79{,}861.9$ MHz $=$
-$-0.2279 \times m_e c^2 \alpha^4/h$) and the canonical
-Karshenboim~2005~\S~9 closed-form $-(11/48) = -0.2292$ is consistency
-evidence at the magnitude level.\\
+$-0.2279 \times m_e c^2 \alpha^4/h$) and $-(11/48) = -0.2292$ is
+consistency evidence at the magnitude level.\\
 \textbf{Structural reading.}  This is the \emph{structurally cleanest
 known instance} of the multi-focal-composition wall named in
 CLAUDE.md~\S~2.  The wall's other five instances (Sprint H1
@@ -1031,11 +1033,11 @@ step).  Sub-leading corrections involve the same algebraic ring as
 (sub-ppm; \emph{not} load-bearing in current catalogue); future
 molecular HD / D$_2$ rotational hyperfine where electronic
 gradients at the nucleus are nonzero and $Q_d$ couples at the
-percent level (Komasa--Pachucki 2020 sub-percent precision regime);
+percent level;
 future heavy-nucleus hyperfine spectra where $L \geq 1$ valence
 orbitals couple to $Q_N$ at leading order.\\
 \textbf{Empirical anchors:} deuteron quadrupole moment
-$Q_d = 0.285699(15)(18)$ fm$^2$ (Komasa--Pachucki 2020); $^{17}$O
+$Q_d = 0.285699(15)(18)$ fm$^2$ (Puchalski--Komasa--Pachucki 2020~\cite{puchalski_komasa_pachucki2020}); $^{17}$O
 and $^{14}$N quadrupole moments for molecular spectroscopy
 benchmarks; sub-percent precision spectroscopy in HD / D$_2$
 rotational HFS as the load-bearing test.\\
@@ -1050,8 +1052,7 @@ catalogued.\\
 \textbf{Operator-level test status.}  Track~4 of the multi-track
 Roothaan autopsy sprint (2026-05-18) produced an order-of-magnitude
 scoping autopsy on HD molecule $J=1$ deuteron quadrupole coupling
-$\chi_d \approx 224.54$~kHz (Code-Ramsey 1971; Komasa-Pachucki
-2020 ab~initio 224.51(5)~kHz).  Using only quantities the
+$\chi_d \approx 224.54$~kHz (Code-Ramsey 1971).  Using only quantities the
 framework currently exposes analytically (multipole expansion of
 the partner nucleus's bare Coulomb potential at $R_\text{eq} =
 1.4011$~bohr, plus a free-atom 1s electron screening estimate,
@@ -1145,17 +1146,12 @@ cross-center PK barrier
 chemistry where the heavy-atom core is frozen out via a
 \texttt{FrozenCore} potential rather than carried as an explicit
 electron block.\\
-\textbf{Empirical anchor:} LiH balanced-coupled $R_\text{eq}$ at
-$5.3\%$ error with the channel-blind $l$-dependent PK at
-$l_\text{max} = 2$ (Paper~17~\S~IV, Track~CD baseline; the
-PK contribution is necessary --- removing it produces an unbound PES,
-see Track~CB record in CLAUDE.md~\S~3); core-valence
-orthogonality satisfied numerically in the explicit-core architectures
-(LiH balanced-coupled at $n_\text{max}=2$ has the Li-core block
-diagonalized simultaneously with the LiH-bond block; Pauli is
-enforced by Slater-determinant antisymmetry in the FCI sector and the
-PK projector is redundant for the explicit-core slice but
-load-bearing for the frozen-core slice).\\
+\textbf{Empirical anchor:} composed LiH $R_\text{eq}$ at $5.3\%$
+error with the $l$-dependent PK at $l_\text{max} = 2$ ($6.9\%$ with the
+channel-blind PK; Paper~17~\S~IV).  The balanced coupled architecture
+(Paper~19) is PK-free: it carries the Li core as an explicit electron
+block, and Pauli exclusion is enforced by Slater-determinant
+antisymmetry in the FCI sector.\\
 \textbf{Honest scope.}  Three layers of scope-honesty are required
 here, all flagged for CLAUDE.md~\S~1.5 rhetoric compliance.
 
@@ -1170,26 +1166,27 @@ $n_\text{max}=2$ (worst of three tested configurations, CLAUDE.md~\S~3
 record).  The composed orbital basis uses different effective charges
 $Z$ on different blocks, and PK is the infrastructure that handles
 the corresponding orthogonality without requiring two-center one-body
-integrals in a single-center hydrogenic basis.  PK is \emph{not} a
-calibration choice; it is the projection that makes the composed
-architecture's Hilbert-space factorization consistent with Pauli
-exclusion.
+integrals in a single-center hydrogenic basis.  It is the projection
+that makes the composed architecture's Hilbert-space factorization
+consistent with Pauli exclusion, and it carries calibration content:
+one empirical atomic input and a barrier-width formula chosen against
+the LiH bond length (Paper~17).
 
 Second, the same-center PK in
-Paper~17~\S~IV \cite{paper17} closes the
-core-valence-orthogonality problem cleanly at the $l_\text{max} = 2$
-operating point.  Six prior PK modification attempts
-(channel-blind, projector, spectral, self-consistent, $R$-dependent,
-$l$-dependent on the 2D solver; see the
+Paper~17~\S~IV \cite{paper17} is the operating point at
+$l_\text{max} = 2$ ($5.3\%$ $R_\text{eq}$ error); the error grows with
+$l_\text{max}$ ($15.7\%$ at $l_\text{max} = 3$).  The prior PK
+modification attempts (projector, spectral, self-consistent,
+$R$-dependent, $l$-dependent on the 2D solver; see the
 six-row PK modifications digest in the CLAUDE.md~\S~3
 failed-approaches table) all carry the same lesson:
 PK provides coordinate-space exclusion that angular projectors cannot
 replicate.  The $l_\text{max}$ divergence (Paper~17~\S~V
 and outlook section) at higher $l_\text{max}$ is a structural feature
 of the composed architecture's interaction between PK and angular
-basis expansion, not a deficiency of the PK projection itself; the
-2D variational solver reproduces the same drift, confirming that PK
-is not the bottleneck (Paper~17 Track~BQ record).
+basis expansion; the 2D variational solver reproduces the drift, so
+it is not an adiabatic artifact, and Paper~17 locates its source in PK
+overcounting (Track~BQ record).
 
 Third, the cross-center PK barrier
 (Paper~19~\S~6, May~2026) extends the same
@@ -1875,7 +1872,7 @@ respected, $D_e$ unbound) versus the adiabatic solver's $D_e = +0.49$~Ha
 established that the $R_\text{eq}$ drift ($+0.30$--$0.37$~bohr per unit $l_\text{max}$, Paper~17)
 in LiH composed geometry is \emph{not} from the adiabatic
 approximation: both the adiabatic and 2D variational solvers produce
-identical drift, isolating the residual to the composed-geometry PK
+comparable drift, isolating the residual to the composed-geometry PK
 architecture rather than the BO projection itself.  The named extension
 when adiabatic breaks down is therefore the coupled-channel /
 2D-variational sibling at \S~\ref{sec:proj_coupled_channel}.\\
@@ -2826,17 +2823,18 @@ operator-to-number map $\rho \mapsto S(\rho)$.\\
 \textbf{Transcendental signature: von~Neumann class.}  The functional
 $S(\rho) = -\mathrm{Tr}\,\rho\log\rho$ involves the logarithm of an
 operator and is generically transcendental at the value level for any
-non-trivial $\rho$.  Structurally, however, this transcendental class
-is \emph{categorically distinct from the master Mellin engine}
-$M_1 \cup M_2 \cup M_3$ that organises every spectral-side
-transcendental documented in Paper~34 \S\S~\ref{sec:proj_fock}--%
-\ref{sec:proj_wick_rotation} and Paper~32 \S~VIII.  This is not a
-framing claim --- it is a verified PSLQ negative.  Sprint~TD Track~5
-(CLAUDE.md \S2, 2026-05-08) computed the framework's atomic
+non-trivial $\rho$.  No integer relation has been found between it and
+the master Mellin engine $M_1 \cup M_2 \cup M_3$ that organises the
+spectral-side transcendentals of Paper~34
+\S\S~\ref{sec:proj_fock}--\ref{sec:proj_wick_rotation} and Paper~32
+\S~VIII.  Sprint~TD Track~5 (2026-05-08) computed the atomic
 correlation entropies $S_\mathrm{full}(\mathrm{He}) =
 0.040811051\ldots$, $S_\mathrm{full}(\mathrm{Li}^+) =
 0.011211717\ldots$, and $S_\mathrm{full}(\mathrm{He},\, n_{\max}{=}4)
-= 0.041879430\ldots$ to 150 dps, then ran PSLQ at 100 dps against a
+= 0.041879430\ldots$ to 150 dps (on the hop-augmented one-body
+operator of Paper~27; helium's physical Hamiltonian gives
+$3.77\times10^{-2}$ at $n_{\max}=3$, and the search has not been
+repeated there), then ran PSLQ at 100 dps against a
 $12{,}312$-form mechanical basis spanning the M1 ($k = 0$ volume slot),
 M2 (Seeley--DeWitt $\sqrt{\pi}$), and M3 (vertex-parity Hurwitz)
 sub-rings plus algebraic and rational control classes.  Result: zero
@@ -2846,16 +2844,18 @@ $10^6$ against the ten simplest ring elements ($1, \pi, \pi^2, 1/\pi,
 at $10^{-50}$ tolerance.  Cross-system ratios
 $S(\mathrm{He})/S(\mathrm{Li}^+) = 3.6400\ldots$ and the
 $n_{\max}$-ratio $0.9744\ldots$ also null.  Six orders of magnitude in
-coefficient ceiling do not change the verdict.  GeoVac correlation
-entropy is genuinely a state-side von~Neumann quantity with no
+coefficient ceiling do not change the result.  GeoVac correlation
+entropy is a state-side von~Neumann quantity with no
 detected integer relation to the spectral-side Mellin ring (a PSLQ null
 result, not a proof of disjointness;\ both rings contain $\mathbb{Q}$).\\
 \textbf{Used in:} every place the framework computes an entropy or a
 reduced density matrix.  Paper~27 (entropy as projection artifact;
 $S_\mathrm{kin}/S_\mathrm{full} \sim 10^{-14}$ for He at
 $n_{\max}=2,3$; $V_{ee}$-only generation of correlation entropy; the
-universal $S_B = A(\tilde{w}_B/\delta_B)^\gamma$ scaling with
-$\gamma_\infty \approx 1.96$ in the $Z, n_{\max} \to \infty$ limit)
+universal $S_B = A(\tilde{w}_B/\delta_B)^\gamma$ scaling, whose local
+exponent extrapolates to $\gamma_\infty \approx 1.96$--$1.97$ as
+$n_{\max} \to \infty$ at the large-$Z$ edge and returns to $2$ as
+$Z \to \infty$)
 exercises this projection throughout; the apparatus identity is the
 structural mechanism that makes ``entropy'' a well-defined Layer-2
 observable in the first place.  Sprint~TD Track~2 (apparatus identity
@@ -2890,7 +2890,7 @@ state-side reduction rule on the framework's hydrogenic systems
 without anomaly.
 \smallskip
 
-\textit{Master-Mellin-engine disjointness (Sprint~TD Track~5,
+\textit{PSLQ search against the master Mellin engine (Sprint~TD Track~5,
 2026-05-08).}  PSLQ at 100~dps against a $12{,}312$-form mechanical
 basis (frozen before testing, W3-protocol style) returned zero hits
 for $S_\mathrm{full}(\mathrm{He})$, $S_\mathrm{full}(\mathrm{Li}^+)$,
@@ -2898,9 +2898,8 @@ and $S_\mathrm{full}(\mathrm{He},\, n_{\max}{=}4)$.  Twenty random
 comparable targets at coefficient ceiling $100$ also returned zero
 hits (control null distribution genuinely zero).  Stress tests at
 coefficient ceiling up to $10^6$ against the simplest ring elements,
-and against cross-system ratios, also null.  The verdict is clean and
-sharp: the framework's correlation entropies are not algebraic
-combinations of the spectral-side master-Mellin transcendentals.\\
+and against cross-system ratios, also null.  No relation to the
+spectral-side master-Mellin transcendentals was found.\\
 \textbf{Honest scope.}  State-side enumeration is currently
 \emph{incomplete} in Paper~34's dictionary.  This entry is the first
 state-side projection; the natural continuations
@@ -3051,14 +3050,13 @@ number from the system,'' as a structural complement to the
 spectral-side projections that name ``how the framework constructs
 the system in the first place.''  In the master-Mellin-engine
 partition of Paper~32 \S~VIII and Paper~18 \S~III.7, the spectral
-side has three sub-mechanisms (M1, M2, M3); the state-side --- as
-documented by Sprint~TD Track~5's PSLQ negative --- is a fourth
-mechanism class structurally outside the engine.  Whether the
+side has three sub-mechanisms (M1, M2, M3); Sprint~TD Track~5's PSLQ
+negative found no relation between the state-side entropies and them.  Whether the
 state-side admits its own internal sub-mechanism partition
 (analogous to the M1 / M2 / M3 split on the spectral side) is the
 open structural question this entry leaves for future work.  Current
 evidence (one verified entropy class, machine-precision apparatus
-identity, PSLQ-disjoint from spectral side) is consistent with
+identity, a PSLQ null against the spectral side) is consistent with
 either: a single state-side sub-mechanism that produces all
 state-side observables uniformly, or multiple sub-mechanisms whose
 distinctions are not yet operationally visible.  Either outcome would
@@ -3071,8 +3069,8 @@ beyond its current spectral-side-only form.
 The twenty-eight projections enumerated above share a structural
 property worth naming explicitly: each introduces a variable that
 is \emph{internal to the framework's graph and projection structure}
---- a graph-derived integer or rational invariant (such as $Z$, $n$,
-the foundational $\alpha$, or a Wigner $3j$ coefficient), a
+--- a graph-derived integer or rational invariant (such as $n$ or a
+Wigner $3j$ coefficient), a
 continuous parameter that controls a coordinate or focal-length
 choice (such as $\rho$, $R$, $\Lambda$, $\beta$, $m$, $r_E$, $r_Z$,
 $Q_N$), or a function of prior projection variables (compositional
@@ -3082,9 +3080,8 @@ This is structurally distinct from \emph{Layer-2 calibration inputs}
 that the framework consumes from external sources but does not
 autonomously generate.  Examples: nuclear g-factors $g_p, g_d$
 (extracted from precision spectroscopy or QCD lattice), multi-loop
-QED coefficients (Eides \S\S~3.2--3.5; the $\alpha^4$ Breit coefficient
-$-(11/48)$ from Karshenboim 2005~\S~9, with the complete Ps theory at
-$m\alpha^6$ from Pachucki--Karshenboim 1998), Yukawa couplings (per CLAUDE.md
+QED coefficients (the $\alpha^4$ Ps Breit input, calibrated against
+the complete Ps theory at $m\alpha^6$ of Pachucki--Karshenboim 1998), Yukawa couplings (per CLAUDE.md
 \S~1.7 WH5; Sprint H1 verdict), and external classical-field
 strengths (Zeeman $B$, Stark $\vec{\mathcal{E}}$ --- verified by the
 2026-05-09 external-field hunting sprint to be Layer-2 inputs, not
@@ -3149,7 +3146,7 @@ Vector-photon promotion & none & dimensionless & $1/(4\pi)$, a
 vertex-model normalization (absent from the physical vertex) \\
 Molecule-frame hypersph. & $R$ & length & piecewise-smooth in $R$ \\
 Drake--Swainson normalization of Bethe-log sums & none & dimensionless &
-rational normalization $2Z^4/n^3$ (code: $2(2\ell+1)Z^4/n^3$); flow-tier
+rational normalization $2Z^4/n^3$ (code: $2(2\ell+1)Z^4/n^3$); calibration-tier
 logarithms sit in the sum it normalizes \\
 Rest-mass projection & $m$ & mass &
 \textit{trivial} (ring-preserving for $m^2 \in \mathbb{Q}$) \\
@@ -3199,7 +3196,7 @@ same generator as observation/temporal-window, structurally distinct
 mechanism \\
 Apparatus identity / state-side reduction &
 $\rho$ density matrix; or $\beta = 1/T$ Gibbs index & preserves &
-von~Neumann class ($\mathrm{Tr}\,\rho\log\rho$); PSLQ-disjoint from
+von~Neumann class ($\mathrm{Tr}\,\rho\log\rho$); PSLQ null against the
 master Mellin engine $M_1\cup M_2\cup M_3$ (Sprint TD Track~5) \\
 \bottomrule
 \end{tabular}
@@ -3235,8 +3232,8 @@ identity / state-side reduction) as axis-completeness additions:
 gauge choice preserves V and D with no transcendental measured in the
 framework, Wick rotation promotes the Bisognano--Wichmann reading from a \S~VIII
 open-question candidate to a named §III slot, and apparatus identity
-opens the state-side complement of the dictionary (PSLQ-disjoint
-from the master Mellin engine per Sprint TD Track~5).}
+opens the state-side complement of the dictionary (a PSLQ null
+against the master Mellin engine, Sprint TD Track~5).}
 \label{tab:projection_axes}
 \end{table}
 
@@ -3261,9 +3258,10 @@ with Camporesi--Higuchi at quarter-integer Hurwitz shift.
 or non-trivial bound-state coupling.
 \item Combinatorial-rational tier $\leftrightarrow$
 Wigner $3j$ / $D$ alone (no projection beyond Layer~1).
-\item Flow tier (Paper~18 \S~IV) $\leftrightarrow$ the Bethe-logarithm
-spectral sum that the Drake--Swainson normalization divides.  The flow
-content sits in the logarithms $\ln|\Delta E_m/\mathrm{Ry}|$ of that
+\item Calibration tier, infinite-spectral-sum sub-case (Paper~18)
+$\leftrightarrow$ the Bethe-logarithm spectral sum that the
+Drake--Swainson normalization divides.  The transcendental content
+sits in the logarithms $\ln|\Delta E_m/\mathrm{Ry}|$ of that
 sum; the normalization itself is rational.
 \item \emph{Trivial / ring-preserving tier} $\leftrightarrow$
 rest-mass projection.  The mass projection introduces a parameter
@@ -3304,9 +3302,8 @@ control parameter.  In the equal-mass leptonic limit
 $m_l/m_n \to 1$ the standard $1/M_\text{nucleus}$ recoil expansion
 is invalid, and the projection becomes load-bearing for level
 energies at $\alpha^4$.  Empirical anchor: Ps 1S--2S framework-native
-at $+64.75$ ppm in \S~\ref{sec:offprecision}; closure to sub-MHz
-requires the $\alpha^4$ Breit input (canonical coefficient
-$-(11/48)$, Karshenboim~2005~\S~9) as Layer-2~content.
+at $+64.75$ ppm in \S~\ref{sec:offprecision}; closure requires the
+$\alpha^4$ Breit input as Layer-2~content.
 \end{itemize}
 \end{observation}
 
@@ -3696,7 +3693,7 @@ Stefan-Boltzmann $\pi^2/90$ on $S^3 \times S^1_\beta$ (high-$T$) &
 Fock $+$ observation/temporal-window $+$ spectral action
 ($\zeta$-regularization) & $T$ or $\beta$ & energy density &
 $\pi^2 \cdot \mathbb{Q}$ & exact symbolic \\
-Uehling shift $-27.13$ MHz at 2$S$ & entered $\Pi$ (flat-space) $\circ$ Fock &
+Uehling shift $-27.13$ MHz at 2$S$ & textbook flat-space $\Pi$ (no GeoVac projection) &
 $Z, \alpha$ & energy & $\pi^2{\cdot}\mathbb{Q}$ & $<1\%$ \\
 21~cm hyperfine $A_\text{HF} = 1418.84$ MHz Bohr-Fermi (HF-1, $+$ external
 $g_p$) & spinor lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass
@@ -3729,14 +3726,13 @@ $0.55\%$ vs Eides muonic target $-7300$ ppm; bit-identical to Track B
 manual scaling (intrinsic gap is sub-leading Eides corrections, not
 operator construction) \\
 $\mu$H 2$S$--2$P$ Uehling $+205.0074$ meV full kernel
-(Sprint MH Track A) & entered $\Pi$ (flat-space) $\circ$ Fock $\circ$ rest-mass
-projection ($m_e \to m_\mu$) & $Z, \alpha, m_\mu/m_e$ & energy &
+(Sprint MH Track A) & textbook flat-space $\Pi$ at the muon mass (no GeoVac
+projection) & $Z, \alpha, m_\mu/m_e$ & energy &
 $\pi^2{\cdot}\mathbb{Q}$ & $<1$ ppm vs Antognini~2013 \\
 $\mu$d 2$S$--2$P$ Lamb $+202.63$ meV textbook assembly $+$ Layer-2
 (multi-track Roothaan sprint Track~1, 2026-05-18; operator-level
-Roothaan autopsy in \S\ref{sec:autopsy_mud_lamb}) & entered $\Pi$
-(flat-space) $\circ$ Fock $\circ$ rest-mass projection ($m_e \to m_\mu$, nucleus
-$m_p \to m_d$) $+$ Krauth Layer-2 (multi-loop QED $+$ recoil $+$
+Roothaan autopsy in \S\ref{sec:autopsy_mud_lamb}) & textbook flat-space
+$\Pi$ at the muon and deuteron masses $+$ Krauth Layer-2 (multi-loop QED $+$ recoil $+$
 Friar HO $+$ deuteron polarizability) & $Z, \alpha, m_\mu/m_e,
 m_d/m_e, r_d$ & energy & $\pi^2{\cdot}\mathbb{Q}$, calibration &
 $-0.12\%$ vs CREMA~2016 $+202.8785(34)$ meV (Pohl) \\
@@ -3749,9 +3745,8 @@ $-27.84$ meV at $r_d$ (bit-tight; scaling
 $(m_\text{red}/m_e)^3 (r_d/r_p)^2 = 7.577$ reproduced to 4 digits) \\
 $\mu^4$He$^+$ 2$S$--2$P$ Uehling $+1665.77$ meV full kernel
 (multi-track sprint Track B, 2026-05-19; operator-level Roothaan
-autopsy in \S\ref{sec:autopsy_muhe4_lamb}) & entered $\Pi$ (flat-space) $\circ$
-Fock $\circ$ rest-mass projection ($m_e \to m_\mu$, $Z = 1 \to 2$,
-nucleus $m_p \to m_{^4\text{He}}$) & $Z, \alpha, m_\mu/m_e,
+autopsy in \S\ref{sec:autopsy_muhe4_lamb}) & textbook flat-space $\Pi$ at
+the muon and $^4$He masses, $Z=2$ & $Z, \alpha, m_\mu/m_e,
 m_{^4\text{He}}/m_e$ & energy & $\pi^2{\cdot}\mathbb{Q}$ &
 $-0.032\%$ vs Diepold 2018 $+1666.305$ meV at $\beta = 0.682$ (cleanest
 single-component muonic VP match at heavy Z; transports kernel
@@ -3769,12 +3764,12 @@ Mu 1S-2S transition $2{,}455{,}528{,}721$~MHz (rest-mass rescaling
 from H experiment, sprint precision-catalogue 2026-05-08) & Fock $\circ$
 rest-mass projection (lepton-unchanged, nucleus $m_p \to m_\mu$) &
 $\alpha, m_e, m_\mu/m_e$ & frequency &
-$\alpha^2{\cdot}\mathbb{Q}$ & $-0.11$ ppm vs Mu-MASS Crivelli~2018 \\
+$\alpha^2{\cdot}\mathbb{Q}$ & $-0.09$ ppm vs Meyer \emph{et al.}\ 2000 $2{,}455{,}528{,}941.0(9.8)$~MHz \\
 Mu 1S-2S transition $2{,}455{,}528{,}394$~MHz (framework Bohr$+$SE $+$
 cross-register recoil) & Fock $\circ$ spectral action $\circ$ rest-mass
 projection $\circ$ cross-register $V_{eN}$ (Roothaan) & $\alpha, m_e,
 m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
-$-0.25$ ppm vs Mu-MASS \\
+$-0.22$ ppm vs Meyer \emph{et al.}\ 2000 \\
 Mu 2$S_{1/2}$-2$P_{1/2}$ Lamb shift $1047.63$ MHz (the Paper~36
 leading one-loop assembly with full Uehling, at the muonium reduced
 mass; sprint precision-catalogue 2026-05-08) &
@@ -3782,9 +3777,9 @@ textbook assembly (tabulated Bethe logarithms) $\circ$ rest-mass projection
 & $\alpha, m_e, m_\mu/m_e$ & frequency & $\alpha^2{\cdot}\mathbb{Q}$ &
 $+0.04\%$ vs Mu-MASS~\cite{ohayon2022} $1047.2(2.3)(1.1)$ MHz; not attributed \\
 Bethe log $\ln k_0(2S) = 2.786$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
-dimensionless & calibration & $-0.92\%$ \\
+dimensionless & calibration & not converged ($-0.92\%$ at 40 functions is a crossing) \\
 Bethe log $\ln k_0(1S) = 3.002$ (LS-3) & Sturmian (acc.) $\circ$ Fock & $Z$ &
-dimensionless & calibration & $+0.60\%$ \\
+dimensionless & calibration & not converged ($+0.60\%$ at 20 functions, $+9.5\%$ at 40) \\
 D 1S hyperfine $\nu_\text{HFS}(D) = 327.2350$ MHz Bohr--Fermi strict
 (sprint precision-catalogue 2026-05-08, $+$ external $g_d$) & spinor
 lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
@@ -3799,7 +3794,7 @@ T 1S hyperfine $\nu_\text{HFS}(T) = 1515.865$ MHz Bohr--Fermi strict
 $\circ$ Fock $\circ$ rest-mass projection (universal $m_e/m_p$, $g_t$);
 $I=1/2$ multiplicity $1$ shared with H 21cm on
 $A_\text{hf}\,\hat{I}\cdot\hat{S}$ & $\alpha, g_t, m_e/m_p$ & frequency &
-$\alpha^2{\cdot}\mathbb{Q}$ & $-551$ ppm vs Greene 2017
+$\alpha^2{\cdot}\mathbb{Q}$ & $-551$ ppm vs Mathur et al.\ 1967
 $1516.701470773(8)$ MHz; cleanest mass-vs-spin separation in catalogue
 (I=1/2 like H, $m_t \approx 3 m_p$ like D-extended) \\
 Mu 1S hyperfine $\nu_\text{HFS}(\text{Mu}) = 4464.1905$ MHz framework
@@ -3808,7 +3803,7 @@ muonium triple closure) & spinor lift (Fermi-contact vertex) $\circ$ Fock
 $\circ$ rest-mass projection (lepton-unchanged, nucleus $m_p \to m_\mu$);
 leptonic nucleus, no QCD content & $\alpha, m_e, m_\mu/m_e$ & frequency &
 $\alpha^2{\cdot}\mathbb{Q}$ & $+199$ ppm vs Liu 1999 $4463.302765(53)$ MHz;
-residual cleanly LS-8a multi-loop QED $+$ recoil (no QCD competing budget) \\
+residual not itemized (no QCD content) \\
 He $2{}^3P_0$--$2{}^3P_1$ fine structure $+29{,}612.91$ MHz (Sprint~3
 BF-D + Sprint~4 DD; Drake combining $(\tfrac{3}{50},-\tfrac{2}{5},
 \tfrac{3}{2},-1)$, J-pattern from rank-$k$ 6j; sprint precision-catalogue
@@ -3825,7 +3820,7 @@ $-0.20\%$ vs NIST $+31{,}908.131(6)$ MHz; within LS-8a one-loop QED budget \\
 Ps 1S-2S transition $1{,}233{,}687{,}096.1$~MHz (framework-native: Bohr at
 $m_\text{red}(ee) = 0.5$ $+$ Eides~\S\,3.2 SE Lamb-shift differential;
 sprint precision-catalogue 2026-05-08, equal-mass leptonic 1S-2S; $+$
-external $\alpha^4$ Breit, Karshenboim~2005~\S~9) & Fock $\circ$ rest-mass
+external $\alpha^4$ Breit calibrated against Pachucki--Karshenboim 1998) & Fock $\circ$ rest-mass
 projection (equal-mass limit $\lambda_a = \lambda_b = 0.5$) $\circ$
 spectral action (Eides) & $\alpha, m_e$ & frequency &
 $\alpha^2{\cdot}\mathbb{Q}$ & $+64.75$ ppm vs Fee~1993
@@ -3833,23 +3828,22 @@ $1{,}233{,}607{,}216.4(3.2)$~MHz \\
 \midrule
 \textbf{Three-projection chain} & & & & & \\
 Bethe log $\ln k_0(2P) = -0.0307$ (LS-4) & Drake--Swainson $\circ$ Sturmian
-$\circ$ Fock & $Z$ & dimensionless & flow & $+2.4\%$ at $N=40$ \\
+$\circ$ Fock & $Z$ & dimensionless & calibration & $+2.4\%$ at $N=40$ \\
 Bethe log $\ln k_0(3P) = -0.0406$ (LS-4) & Drake--Swainson $\circ$ Sturmian
-$\circ$ Fock & $Z$ & dimensionless & flow & $+6.3\%$ at $N=40$ \\
+$\circ$ Fock & $Z$ & dimensionless & calibration & $+6.3\%$ at $N=40$ \\
 Bethe log $\ln k_0(3D) = -0.005236$ (LS-4) & Drake--Swainson $\circ$ Sturmian
-$\circ$ Fock & $Z$ & dimensionless & flow & $+0.07\%$ at $N=40$ \\
-Heisenberg--Euler 1-loop $\alpha^2/(45\pi m_e^4)$ &
+$\circ$ Fock & $Z$ & dimensionless & calibration & $+0.07\%$ at $N=40$ \\
+Heisenberg--Euler 1-loop $2\alpha^2/(45 m_e^4)$ &
 spectral action (Schwinger Mellin) $+$ vector-photon (one loop)
 & $\alpha, m_e$ & length${}^4 \cdot$ energy${}^{-1}$ &
-$\alpha^2 \cdot \mathbb{Q} / \pi$ & structural (S) \\
+$\alpha^2 \cdot \mathbb{Q}$ (Heaviside--Lorentz; the $\pi$ content is
+convention-dependent) & structural (S) \\
 Lyman $\alpha$ emission $A_{21}(2P{\to}1S) = 6.2683 \times 10^8$~s$^{-1}$
 (Sprint Calc-L, 2026-05-09) & Fock $\circ$ Wigner $3j$ $\circ$
 vector-photon promotion & $Z, \alpha, \omega$ & 1/time &
 $\alpha^3 \cdot \mathbb{Q}[\sqrt{6}]$ & $+0.055\%$ vs NIST
-$6.2649 \times 10^8$~s$^{-1}$; residual is non-relativistic
-(Schr\"odinger vs Dirac at $(Z\alpha)^2 \sim 5\times 10^{-5}$),
-closes by adding Camporesi--Higuchi spinor lift to the chain
-(consistent with the Layer-2-presence bound) \\
+$6.2649 \times 10^8$~s$^{-1}$; the residual is the reduced mass:
+$A \propto \mu$, and $6.2683/(1+m_e/m_p) = 6.2649$ \\
 H 1S static dipole polarizability
 $\alpha_p(\text{H}, 1S) = \tfrac{9}{2}\, a_0^3$
 (Sprint Calc-P, 2026-05-09) & Fock $\circ$ Wigner $3j$ $\circ$
@@ -3862,7 +3856,7 @@ on bare Fock graph plateaus at $\sim 81.25\%$ of $\tfrac{9}{2}$
 (Bethe--Salpeter 1957 partition); the missing 18.75\% continuum
 content is recovered \emph{exactly} by the Sturmian projection.
 \textbf{Cleanest L2-count $= 0$ exact example for
-Prediction~\ref{pred:l2_presence}}: depth-3 chain at exact match
+Observation~\ref{pred:l2_presence}}: depth-3 chain at exact match
 because the analytic answer is rational with finite-Sturmian-basis
 representation; no Layer-2 input is consumed in the chain. \\
 He $2{}^1P \to 1{}^1\!S$ oscillator strength $f = 0.2761$
@@ -3900,8 +3894,8 @@ Theorem~\ref{thm:dimensional_consistency}'s signature consistency is
 a type-level statement: chains that produce the same signature can
 produce wildly different numerical values.  For example, the
 hydrogen Bohr level $E_n = -Z^2/(2n^2)$ (Fock alone, signature
-$\{$energy, no~$\pi\}$) and the $2S$ Uehling shift (entered $\Pi$
-$\circ$ Fock, signature $\{$energy, $\pi\}$) both have dimension
+$\{$energy, no~$\pi\}$) and the $2S$ Uehling shift (textbook flat-space $\Pi$, signature
+$\{$energy, $\pi\}$) both have dimension
 $\{$energy$\}$, yet differ by seven to eight orders of magnitude.  The Layer-2-presence bound of
 \S~\ref{sec:prediction} addresses the value-level question;
 signature arithmetic addresses only the type-level question.
@@ -4067,12 +4061,12 @@ because of the structural cancellation SO ($-58$~GHz) $+$ SS ($-9.5$~GHz)
 $+$ SOO ($+70$~GHz) $\approx +2.2$~GHz.  Residual is below the LS-8a
 $\alpha^3/\pi$ one-loop QED budget on the absolute scale; multi-electron
 SS/SOO higher-order corrections (Drake 1971 \S~IV) are the standard
-remediation.  Sprint precision-catalogue 2026-05-08.  Convention exposure
-on the relativistic Bethe-log sub-component (Drake 1990s vs Pachucki--Yerokhin
-2009) catalogued in V.D.6 (\S\ref{sec:conv_he_bethe_log}; V.D-prediction
-sprint, 2026-05-10): the Drake-vs-PY 3$\sigma$ disagreement on $\nu_{01}$
-sits inside the same $\alpha^3(Z\alpha)^2$ multi-loop budget that this
-row attributes the framework's residual to. \\
+remediation.  Sprint precision-catalogue 2026-05-08.  The relativistic
+Bethe-log sub-component is recorded in V.D.6
+(\S\ref{sec:conv_he_bethe_log}): Pachucki--Yerokhin~2009 report a
+$\sim3\sigma$ theory--experiment difference on $\nu_{01}$, inside the
+same $\alpha^3(Z\alpha)^2$ budget that this row attributes the
+framework's residual to. \\
 Li 2$^2$P doublet (Sprint 5 CP) & Breit--Pauli + Slater $Z_{\text{eff}}$
 & $+8.9\%$ & A & Standard convention with $Z_\text{val}=1$;
 core polarization worsens accuracy (parity-forbidden
@@ -4083,20 +4077,20 @@ projection ($m_p$, proton) & $-1102$ ppm ($\approx -a_e$) & A & Bohr-Fermi level
 $g_e = 2$ (no anomalous moment).  Residual is $\approx a_e \approx
 \alpha/(2\pi)$, addressed by HF-2.  Sprint HF, 2026-05-07. \\
 21~cm $A_\text{HF} = 1420.488$ MHz (HF-2, $+a_e$ Schwinger, $+$ external
-$g_p$) & HF-1 chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A
+$g_p$) & HF-1 chain $+$ Schwinger $a_e$ (input) & $+58$ ppm & A
 & Schwinger
 value $a_e = \alpha/(2\pi)$ taken as input (the flat-space limit of Paper~28's spectral sums is not computed there);
 a Paper~28 vertex-model ratio lies $0.4\%$ from the first-order curvature
 form $1 + R/(12|\lambda|^2)$, a numerical coincidence of an unnormalized
-ratio (Paper~28, Sec.~7).  Residual $+58$ ppm is
-recoil + Zemach + multi-loop. \\
+ratio (Paper~28, Sec.~7).  Residual $+58$ ppm: the omitted Zemach,
+Breit, binding and recoil terms (\S\ref{sec:autopsy_21cm}). \\
 21~cm $A_\text{HF} = 1420.432$ MHz (HF-4, $+r_Z$ external) & HF-2 chain
 $+$ Zemach Layer-2 input ($r_Z = 1.045$ fm) & $+18$ ppm & A + S(Zemach)
 & Convention catch: standard form is $\Delta\nu/\nu = -2 Z\alpha m_e r_Z$
 (natural units), $-2 Z r_Z[\text{bohr}]$ (atomic units), giving
-$-39.5$ ppm at $r_Z = 1.045$ fm.  Framework has no
-magnetization-distribution operator on the proton register
-(structural floor S); $r_Z$ is external focal length.  The final
+$-39.5$ ppm at $r_Z = 1.045$ fm, through the magnetization-density
+projection of \S\ref{sec:proj_magnetization_density} with $r_Z$ an
+external input.  The final
 $+18$ ppm is the omitted Breit and $\alpha(Z\alpha)$ binding terms,
 itemized in \S\ref{sec:autopsy_21cm}. \\
 Recoil from cross-register cross-spatial coupling (HF-3) & Track NI
@@ -4126,7 +4120,7 @@ radius probes the electron Compton wavelength.  Inner-factor input
 data tier per Paper~18 \S~IV.6.  Sprint MH Track B, 2026-05-08. \\
 Ps 1S HFS $116.79$~GHz (Fermi-contact only, framework-native) & spinor
 lift (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
-($m_p \to m_e$, equal-mass limit) & $-42.58\%$ vs Ishida 2014
+($m_p \to m_e$, equal-mass limit) & $-42.58\%$ vs Ritter \emph{et al.}\ 1984
 $203.389$~GHz & A & Framework-native part captures only the magnetic
 dipole-dipole contribution ($4/12$ of $m_e c^2 \alpha^4/h$; the LO
 HFS total is $7/12$).  The
@@ -4140,7 +4134,7 @@ Sprint precision-catalogue, 2026-05-08. \\
 Ps 1S HFS $204.39$~GHz (LO total $= 7/12 \cdot m_e c^2 \alpha^4 / h$,
 framework $+$ Layer-2 annihilation) & spinor lift (Fermi-contact vertex)
 $\circ$ Fock $\circ$ rest-mass projection $+$ Layer-2 annihilation &
-$+0.49\%$ vs Ishida 2014 & A & Residual is multi-loop QED
+$+0.49\%$ vs Ritter \emph{et al.}\ 1984 & A & Residual is multi-loop QED
 (Czarnecki--Melnikov--Yelkhovsky 2000, $\alpha^5 m_e c^2/h$ corrections).
 LS-8a wall confirmed in the equal-mass leptonic regime: same
 renormalization gap as $\mu$H Track A and HF-5.  Sprint precision-catalogue,
@@ -4185,7 +4179,7 @@ $a_e$ $+$ recoil $+$ leading Zemach with $r_Z(t) = 1.762$~fm external;
 multi-track sprint Track 2, 2026-05-18) & Fock $\circ$ spinor (Fermi-contact
 vertex) $\circ$ spectral action ($a_e$) $\circ$ rest-mass projection
 ($m_p \to m_t$) $\circ$ magnetization-density Layer-2 input
-& $-3.0$ ppm vs Greene 2017 $1516.701470773(8)$ MHz & B
+& $-3.0$ ppm vs Mathur et al.\ 1967 $1516.701470773(8)$ MHz & B
 (basis-quality: Zemach scalar $r_Z(t) = 1.762$~fm \textbf{[input under
 review, 2026-08-28: this coincides with the triton \emph{charge} radius
 $1.7591$~fm to $0.2\%$; the proton ratio $r_Z/r_\text{charge}=1.243$ puts
@@ -4202,13 +4196,7 @@ from $-3.0$ to $\approx -22$~ppm.  The Carlson~2008 attribution is also wrong: P
 convention drift claim (formerly ``$\pm 5$~ppm Carlson vs Sick~2014'',
 source unidentified); sub-ppm absolute
 LS-8a $+$ W1a $+$ W3 budget) & \textbf{[provisional, $r_Z(t)$ under
-review] Cleanest LS-8a multi-loop QED
-isolation in the hadronic-nucleus catalogue.}  Tritium polarizability
-$\sim +0.7$~ppm is $\sim 300\times$ smaller than deuteron's
-$\sim +340$~ppm (re-sourced 2026-08-29) because the 2n+1p binding
-($B(t) = 8.482$~MeV) is
-much tighter than the deuteron's n+p binding ($B(d) = 2.225$~MeV),
-making the tritium nucleus essentially compact and rigid.  T fills
+review]}  T fills
 the I=1/2 hadronic non-proton cell of the mass $\times$ spin coverage
 matrix that was previously empty.  Operator-level autopsy in
 \S\ref{sec:autopsy_t_hfs}: $\hat{I}\cdot\hat{S}$ structurally
@@ -4216,22 +4204,19 @@ identical to H~21cm (3 Pauli terms, $X{\otimes}X + Y{\otimes}Y +
 Z{\otimes}Z$); \S\ref{sec:proj_magnetization_density} reproduces
 Eides analytic LO to bit-identical machine precision under both
 Gaussian and exponential profiles; T/H Zemach ratio matches T/H
-radii ratio at machine precision.  Cumulative chain residual sits
-inside$^{\ddagger}$ the projected Karshenboim 2005 Layer-2 budget
-$+12 \pm 5$~ppm (LS-8a $\sim$$+6$ ppm $+$ W1a recoil NLO $\sim$$+3$ ppm
-$+$ W3 polarizability $\sim$$+0.7$ ppm $+$ finite-size $\sim$$+1.5$ ppm,
-sum $\sim$$+12$ ppm, framework gives $-3$~ppm$^{\ddagger}$ --- provisional:
-at the ab-initio $r_Z(t) = 2.27(3)$~fm the residual moves to
-$\approx -22$~ppm, \emph{outside} this band).  The claimed $\pm 5$~ppm
+radii ratio at machine precision.  The chain residual of
+$-3$~ppm$^{\ddagger}$ is provisional: at the ab-initio
+$r_Z(t) = 2.27(3)$~fm it moves to $\approx -22$~ppm.  It is not
+itemized.  The claimed $\pm 5$~ppm
 $r_Z(t)$ ``value drift'' has no identified source: the Carlson~2008
 attribution is wrong (a proton-structure paper) and Sick~2014 covers
 ${}^{3,4}$He, not ${}^3$H. \\
 Mu 1S-2S transition (test of rest-mass projection at unchanged lepton)
-& Fock $\circ$ rest-mass projection (m$_p \to m_\mu$) & $-0.11$ ppm vs
-Mu-MASS & A & Pure $m_\text{red}$ rescaling from H experimental;
+& Fock $\circ$ rest-mass projection (m$_p \to m_\mu$) & $-0.09$ ppm vs
+Meyer \emph{et al.}\ 2000 & A & Pure $m_\text{red}$ rescaling from H experimental;
 sub-ppm verification of the rest-mass projection theorem (Paper~34
 \S~III.14) at varied nucleus mass.  Differential-recoil contribution
-(framework + cross-register $V_{eN}$ Roothaan) closes to $-0.25$ ppm.
+(framework + cross-register $V_{eN}$ Roothaan) gives $-0.22$ ppm.
 Sprint precision-catalogue, 2026-05-08.  \\
 $\mu$H 2$S$--2$P$ Lamb one-loop assembly $200.50$ meV (no literature
 inputs, Sprint MH Track A) & textbook assembly (entered flat-space
@@ -4262,24 +4247,18 @@ Sprint precision-catalogue, 2026-05-08. \\
 He$^+$ 2$S_{1/2}$-2$P_{1/2}$ Lamb $14041.13(17)$ MHz (van
 Wijngaarden--Holuj--Drake 2000) & textbook assembly (Paper~36,
 tabulated Bethe logarithms) $\circ$
-\S\ref{sec:proj_charge_density} & $-1.29\%$ (assembly $+$ Drake-Yan
-Layer-2 lit total $13\,859.58$ MHz; assembly alone $13\,841.11$ MHz at
-$-1.42\%$) & A & \textbf{Z-scaling test of the Paper~36
+\S\ref{sec:proj_charge_density} & $-1.42\%$ (assembly
+$13\,841.11$ MHz) & A & \textbf{Z-scaling test of the Paper~36
 one-loop assembly (Z=1 $\to$ Z=2)}.  The implementation is $Z$-portable:
 three Z-scaling tests pass (Lamb$_\text{SE}$ ratio $13.21$
 matches Eides bracket prediction $13.18$; Lamb$_\text{VP}$ ratio $15.71$
 against $Z^4 = 16$ contact-density (kernel-mixed, see autopsy); Lamb$_\text{FNS}$ ratio $63.60$
 match to $0.12\%$ against $Z^4 \times (r_E({}^4\text{He})/r_p)^2 = 63.52$).  The
-$-1.42\%$ assembly residual is structurally the Z-amplified analog
-of Paper~36's $-0.534\%$ at Z=1: the $\alpha^3$ Eides-bracket truncation
-amplifies by $Z^4 \times \ln$-factor to $\sim -200$ MHz at Z=2.  Dominant
-Layer-2 input is Drake--Yan 1992 $\alpha(Z\alpha)^6 \ln(Z\alpha)^{-2}$
-relativistic-Bethe-log correction ($+14.7$~MHz), below precision visibility
-at Z=1 but structurally visible at Z=2.  Cleanest W3 inner-factor in
-catalogue: ${}^4$He polarizability $+0.06$~MHz / $4.3 \times 10^{-6}$ of the 2S
-Lamb shift (tightly bound nucleus suppresses virtual photonuclear
-excitations).  $I({}^4\text{He}) = 0$ identically zeroes the
-\S\ref{sec:proj_magnetization_density} channel (no HFS, no Zemach).
+$-1.42\%$ residual is the one-loop terms the assembly omits, as at
+$Z=1$: the one-loop $\alpha(Z\alpha)^5$ term of the H budget, scaled by
+$Z^5$, is about $+228$~MHz at $Z=2$.  $I({}^4\text{He}) = 0$ identically
+zeroes the \S\ref{sec:proj_magnetization_density} channel (no HFS, no
+Zemach).
 Autopsy: \S\ref{sec:autopsy_he_plus_lamb}.  Source memo:
 \texttt{debug/he\_plus\_lamb\_autopsy\_track\_a\_memo.md}.  Sprint:
 2026-05-19. \\
@@ -4287,22 +4266,12 @@ Mu 1S hyperfine framework Bohr--Fermi $+$ Schwinger one-loop
 $4464.1905$ MHz vs Liu~1999 $4463.302765(53)$ MHz & spinor lift
 (Fermi-contact vertex) $\circ$ Fock $\circ$ rest-mass projection
 (lepton-unchanged, nucleus $m_p \to m_\mu$) & $+199$ ppm & A &
-\textbf{Cleanest LS-8a isolation in the catalogue}
-\textbf{[provisional: rests on $r_Z(t) = 1.762$~fm, under review ---
-see \S\ref{sec:autopsy_t_hfs}]}: leptonic nucleus
-(point antimuon, no QCD) means residual is purely multi-loop QED $+$
-cross-register recoil NLO, no Zemach / polarizability / hadronic VP
-budget interfering.  Karshenboim 2005 itemized total of corrections
-($+4.703$ MHz, $\sim +1054$ ppm relative to BF strict) decomposes as
-$\alpha^2(Z\alpha) \sim +0.17$ MHz (two-loop QED), $\alpha(Z\alpha)^2(m/M)^2
-\sim +0.7$ MHz (recoil $+$ QED), hadronic VP $\sim +0.2$ MHz, plus the
-dominant Schwinger one-loop already captured by the framework.  The
-$+199$ ppm framework residual is the structural depth of the LS-8a wall
-at $\alpha^2(Z\alpha)$ for Bohr--Fermi-class observables in clean
-isolation: no QCD competing budget, both leptons receiving full
-$\alpha/(2\pi)$ at one loop.  Adding Karshenboim's full Layer-2
-itemization closes the gap to $<1$~ppm.  Sprint precision-catalogue,
-2026-05-08. \\
+Leptonic nucleus (point antimuon, no QCD): the residual is QED and
+recoil beyond Bohr--Fermi plus Schwinger, with no Zemach or nuclear
+polarizability content.  The framework overshoots; the residual is not
+itemized here (an itemization once quoted from Karshenboim 2005 could
+not be located there and does not close an overshoot).  Sprint
+precision-catalogue, 2026-05-08. \\
 Ps 1S-2S framework-native $+64.75$ ppm vs Fee~1993
 $1{,}233{,}607{,}216.4(3.2)$~MHz (sprint precision-catalogue 2026-05-08,
 equal-mass leptonic 1S-2S) & Fock $\circ$ rest-mass projection $\circ$
@@ -4321,10 +4290,10 @@ wall -- isolating two-body-projection failure from renormalization
 failure.  This residual is the empirical anchor for the projection family
 in \S~\ref{sec:proj_breit_retardation} (two-body Dirac / Breit
 retardation, the sixteenth projection, added 2026-05-08 motivated by
-this match).  The Layer-2 $\alpha^4$ Breit input (Karshenboim~2005~\S~9;
-complete Ps theory at $m\alpha^6$ from Pachucki--Karshenboim~1998,
-PRL~80, 2101) closes the chain to sub-MHz; cumulative match is partly
-explained-by-construction (Breit value inferred as residual).  Honest
+this match).  The Layer-2 $\alpha^4$ Breit input, calibrated against
+the complete Ps theory at $m\alpha^6$ of Pachucki--Karshenboim~1998
+(PRL~80, 2101), closes the chain by construction (the Breit value is
+inferred as the residual).  Honest
 verdict: framework-native is at $+65$~ppm; all closure beyond Bohr$+$SE
 Lamb is Layer-2.  Sprint precision-catalogue, 2026-05-08; operator-level
 five-component autopsy (\S\ref{sec:autopsy_ps_1s2s}, 2026-05-09)
@@ -4524,8 +4493,7 @@ $\Lambda^2 \leftrightarrow 1/G$ calibration) remains the longer-route
 alternative (beyond sprint scale).  See Paper~32~\S~VIII
 \texttt{rem:bh\_phase0\_negative} for the spectral-triple-side reading. \\
 HD molecule $J=1$ deuteron quadrupole coupling
-$\chi_d \approx 224.54$~kHz (Code-Ramsey 1971;
-Komasa--Pachucki 2020 ab~initio $224.51(5)$~kHz) &
+$\chi_d \approx 224.54$~kHz (Code-Ramsey 1971) &
 \S~\ref{sec:proj_multipole_gaunt} (multipole at $R_\text{eq}$)
 $\circ$ \S~\ref{sec:proj_3j} ($J=1, m_J=0$ rigid-rotor)
 $\circ$ \S~\ref{sec:proj_tensor_multipole} ($Q_d$ scalar Layer-2 input)
@@ -4555,7 +4523,7 @@ $+$ S (missing operator).  First molecular precision-catalogue entry.
 \textbf{Named follow-on}:\ Sprint \texttt{HD-EFG-position-space}
 (beyond sprint scale; analog of the W1a-D Roothaan recoil and
 \S~\ref{sec:proj_magnetization_density} operator-level extensions).
-Reference target Komasa--Pachucki 2020 ab~initio.  Sources:\
+Reference target: the measured value.  Sources:\
 \texttt{debug/HD\_rotational\_HFS\_autopsy\_track4.py},
 \texttt{debug/HD\_rotational\_HFS\_scoping\_track4\_memo.md}.
 See \S~\ref{sec:autopsy_HD_rotational_HFS} for the full autopsy
@@ -4574,7 +4542,7 @@ factor 1/2) $\circ$ \S\ref{sec:proj_phillips_kleinman} (Slater
 screening of 2s by 1s) $\circ$ \S\ref{sec:proj_spectral_action}
 $\circ$ \S\ref{sec:proj_restmass} ($m_p \to m_\text{He3}$) $\circ$
 \S\ref{sec:proj_magnetization_density} ($Z=2$-scaled) &
-$-1.28\%$ vs Schuessler--Fortson--Dehmelt 1969 / Prior--Wang 1977
+$-1.28\%$ vs Rosner--Pipkin 1970
 $6739.701177(16)$~MHz & C (multi-electron screening prescription,
 PK convention-dependent) + S (multi-electron QED Pachucki--Drachman
 beyond one-loop) &
@@ -4596,10 +4564,10 @@ experiment at $+0.05\%$, anchoring convention.
 \S\ref{sec:proj_magnetization_density} operator at $I=1/2$ He-3
 reproduces Eides LO at machine precision (same operator as H/D HFS;
 $I$- and multi-electron-independent).
-New \S V.D candidate class-(i) convention exposure: Track 5 (D HFS)
-BF formula mass-slot convention is system-dependent (works at I=1
-only); standard convention ($g_N = \mu/I$, $m_p$ in mass slot) is
-required at I=1/2. \textbf{Named follow-on}: ab initio
+The Track 5 (D HFS) Bohr--Fermi mass-slot convention was a driver
+error, high by $496.5$~ppm at $I=1$ (\S\ref{sec:autopsy_d_hfs}); the
+standard convention ($g_N = \mu/I$, $m_p$ in mass slot) is required at
+every $I$. \textbf{Named follow-on}: ab initio
 \S\ref{sec:proj_phillips_kleinman} via
 \texttt{geovac.neon\_core.screened\_psi\_origin\_squared} on
 no-frozen-core Z=2 system would give the framework-preferred unique
@@ -4614,7 +4582,7 @@ $r_Z({}^7\text{Li}) = 3.71$~fm; Track-5, 2026-05-18) &
 \S\ref{sec:proj_3j} ($I=3/2$, mult 2) $\circ$
 \S\ref{sec:proj_spectral_action} $\circ$ \S\ref{sec:proj_restmass}
 $\circ$ \S\ref{sec:proj_magnetization_density} ($Z_\text{eff}$-scaled) &
-$-64.0\%$ vs Beckmann--Boklen--Elke 1974 $803.504086(34)$~MHz &
+$-64.0\%$ vs Beckmann--Boklen--Elke 1974 $803.5040866(10)$~MHz &
 B (single-zeta hydrogenic basis) + S (multi-electron contact-density
 cliff, $\sim 2.8\times$) &
 First multi-electron HFS in catalogue; first $I=3/2$ entry.  Cliff
@@ -4681,8 +4649,7 @@ dictionary.  Truncation (T) errors are properties of the spectral
 sums that the Sturmian or spectral-action projections invoke.
 Calibration mismatch (C) is a property of how multiple projections
 chain.  Structural floors (S) appear where a needed projection is
-absent from Layer~2 entirely.  Approximation order (A) is the
-``flow'' tier of Paper~18: it is the residual after Layer~1 and
+absent from Layer~2 entirely.  Approximation order (A) is the residual after Layer~1 and
 Layer~2 do their work, and it indicates which higher-order projection
 or perturbation order should be added next.
 \end{remark}
@@ -4711,13 +4678,12 @@ closed-form structure.  Applying the same discipline to multi-component
 \emph{observables} makes the projection-chain dictionary's reach
 visible at the observable level, not just at the catalogue-row level.
 The autopsy partitions each component into framework-native (FN ---
-computable from \S~\ref{sec:layer2} projections without external
-numerical constants beyond $\alpha$) versus Layer-2 (L2 --- parameter
-at operator level, projection chain framework-native), giving an
-explicit operator-level reading of the structural-skeleton scope
-statement (CLAUDE.md \S~1.7).  Several autopsies surface
-literature convention mismatches (class~(a) findings of the
-multi-observable focal-length decomposition program); these are
+assembled from \S~\ref{sec:layer2} projection chains with standard
+physical constants as inputs: $\alpha$, mass ratios, nuclear magnetic
+moments, the free-electron anomaly $a_e$) versus Layer-2 (L2 ---
+a nuclear-structure or other external parameter at operator level,
+projection chain framework-native).  Several autopsies meet
+itemization differences between literature compilations; these are
 collected separately in \S~\ref{sec:convention_exposures}.
 
 \subsubsection{Hydrogen $2S_{1/2}-2P_{1/2}$ Lamb shift autopsy}
@@ -4773,20 +4739,13 @@ self-energy is a $-12.88$~MHz level shift, entering the splitting as
 $+12.88$~MHz.  The rows below the finite-size row are the order-by-order
 budget of Paper~36 (Sec.~``The residual''), from the tables of
 Eides--Grotch--Shelyuto~2001; rows are rounded separately and the sum is
-unrounded.  An earlier ``recoil NLO'' row of $-2.40$~MHz had no source
-and is withdrawn; the tabulated recoil is $+0.355$~MHz.
+unrounded.
 Status: TA $=$ textbook assembly; L2 $=$ Layer-2 input.}
 \label{tab:autopsy_lamb}
 \end{table}
 
 \textbf{One-loop subtotal:} $+1052.19$ MHz, the leading one-loop
-assembly ($-0.534\%$).  An earlier version of this table also listed an
-``$\alpha^5$ multi-loop QED'' row of $+1.20$~MHz and a ``hyperfine
-averaging'' row of $\sim +5.00$~MHz, giving a subtotal of
-$+1057.19$~MHz ($99.9\%$); both rows are withdrawn (/qa group5,
-2026-11-07): the first came from the withdrawn LS-7 decomposition, and the
-second had no source, since the measured interval is defined between
-hyperfine centroids.  The terms the one-loop assembly omits, led by
+assembly ($-0.534\%$).  The terms the one-loop assembly omits, led by
 the one-loop $\alpha(Z\alpha)^5$ term ($A_{50}\approx 9.29$), are all
 tabulated by Eides \emph{et al.}; with them the sum is $1057.824$~MHz,
 $0.020$~MHz below Lundeen--Pipkin and $0.005$~MHz below Bezginov
@@ -4914,10 +4873,11 @@ assembly omits, not a framework wall.
 \subsubsection{Muonic hydrogen 2$S_{1/2}$--2$P_{1/2}$ Lamb shift autopsy}
 \label{sec:autopsy_muh_lamb}
 
-\textbf{Reference.} $\Delta E = 202.3706(23)$ meV (CREMA 2010,
-Pohl~et~al.; muonic convention $E(2P_{1/2}) - E(2S_{1/2})$).
+\textbf{Reference.} $\Delta E = 202.3706(23)$ meV (CREMA, Antognini
+\emph{et al.}\ 2013~\cite{antognini2013}; muonic convention
+$E(2P_{1/2}) - E(2S_{1/2})$).
 
-The CREMA 2010 muonic hydrogen Lamb shift decomposes into five
+The CREMA muonic hydrogen Lamb shift decomposes into five
 named components plus three companion Layer-2 inputs.
 
 \begin{table}[h!]
@@ -4952,7 +4912,7 @@ textbook (Eides one-loop bracket at $m_{\text{red},\mu}$)
 3.~Leading finite size (closed-form) & $-3.6752$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_charge_density}
 $+$ Layer-2 $r_p$
-& L2 ($-4.3\%$ vs Antognini) \\
+& L2 ($-0.04\%$ vs Antognini~2013, $-5.1994\,r_p^2$~meV) \\
 4.~K\"all\'en--Sabry 2-loop VP & $+1.5081$ & Layer-2 input &
 LS-8a renormalization wall \\
 5.~Proton polarizability & $+0.0129$ & Layer-2 input &
@@ -4995,8 +4955,7 @@ $+205.0282$~meV, which contains it.  Antognini reconciles them:
 $205.0074 + 0.018759 = 205.0262$~meV and $205.0282 - 0.002084 =
 205.0261$~meV.  The full-kernel $-0.10$~ppm match is to the perturbative
 line, so a comparison must pair it with that route; this autopsy uses
-it throughout.  (An earlier version attributed the $205.0282$~meV line
-to ``Krauth~2017'', a conference report with no such table.)  See
+it throughout.  See
 \S~\ref{sec:convention_exposures} for catalogue context (entry
 \S~\ref{sec:conv_muH_VP}).
 
@@ -5065,8 +5024,8 @@ to the $+202.63$ meV assembly-plus-literature total is closed by
 Krauth~2016 literature inputs covering multi-loop QED
 (K\"all\'en--Sabry, iterated Uehling, $\alpha^7$), higher-Friar
 moments and recoil-mixing, NLO recoil corrections, and---dominant
-contribution---deuteron polarizability (Carlson--Gorchtein--
-Vanderhaeghen 2014).  Status: TA $=$ textbook assembly; L2 $=$
+contribution---deuteron polarizability ($1.690(20)$~meV of
+Hernandez \emph{et al.}\ 2014, as listed by Krauth~2016).  Status: TA $=$ textbook assembly; L2 $=$
 Layer-2 input.  Source memo:
 \texttt{debug/muD\_Lamb\_autopsy\_track1\_memo.md}.}
 \label{tab:autopsy_mud_lamb}
@@ -5144,15 +5103,13 @@ multi-focal-composition wall taxonomy: different observables probe
 different walls at different relative weights, even within the same
 projection chain.
 
-\textbf{Convention-mismatch surface.}  Carlson--Gorchtein--Vanderhaeghen
-2014 catalogues the deuteron polarizability at $+1.690 \pm 0.020$
-meV; the older Carlson--Vanderhaeghen 2011 evaluation reported
-$+1.94$ meV --- a $\sim 13\%$ spread on the \emph{dominant} Layer-2
-line at $\mu$d.  At the framework's $-0.12\%$ Lamb-shift residual
-scale this is the controlling uncertainty.  \emph{Flagged as a new
-V.D-prediction candidate}, class~(i) inter-compilation itemization,
-sibling to \S\ref{sec:conv_d_polarizability} (which records the
-deuteron polarizability channel of the D HFS).
+\textbf{Itemization surface.}  Krauth~2016~\cite{krauth2016} lists
+the deuteron polarizability at $1.690(20)$~meV (Hernandez \emph{et
+al.}\ 2014), $1.941$~meV (Friar 2013~\cite{friar2013}) and $2.01(74)$~meV
+(Carlson--Gorchtein--Vanderhaeghen 2014), and attributes most of the
+spread to a Coulomb-distortion term of $-0.263$~meV that not every
+evaluation includes (with it, the last becomes $1.748$~meV).  This
+autopsy uses $1.690$~meV.
 
 \textbf{Structural reading.}  Components 1--3 are the same textbook
 assembly as at $\mu$H (entered flat-space $\Pi$, Eides one-loop
@@ -5175,9 +5132,7 @@ different dominant Layer-2 wall.
 
 \textbf{Reference.}  $\nu(2S_{1/2} - 2P_{1/2}) = 14\,041.13(17)$ MHz
 (van Wijngaarden--Holuj--Drake, \emph{Phys. Rev. A} \textbf{63}, 012505
-(2000); theoretical reference $14\,041.18(13)$ MHz from
-Pachucki~\emph{Phys. Rev. A} \textbf{63}, 042503 (2001) and Drake--Yan
-\emph{Phys. Rev. A} \textbf{46}, 2378 (1992) consistent to $\sim 50$~kHz).
+(2000)); theory $14\,041.18(13)$ MHz as quoted with that measurement.
 Convention $E(2S_{1/2}) - E(2P_{1/2}) > 0$ matches Paper~36 normal-H.
 
 The He$^+$ Lamb shift is the cleanest $Z$-scaling test of the Paper~36
@@ -5193,54 +5148,35 @@ to $\sim$ppm and the full Uehling kernel matches contact form at 0.5\%.
 
 \begin{table}[h!]
 \centering\small
-\caption{Five-component Roothaan decomposition of the He$^+$
+\caption{Roothaan decomposition of the He$^+$
 2$S_{1/2}$--2$P_{1/2}$ Lamb shift (normal-H convention
-$E(2S_{1/2}) - E(2P_{1/2})$).  The subtotal $+13\,841.11$ MHz
-(components 1--4) is the textbook one-loop assembly of the H Lamb shift
-(\S\ref{sec:autopsy_lamb}; Paper~36), in which no GeoVac projection
-enters the one-loop terms, with $Z = 2$ substituted throughout: Bohr-Fock Dirac (zero by 2$S_{1/2}=2P_{1/2}$
-degeneracy), one-loop self-energy via Eides Sec.~3.2 bracket, one-loop
-vacuum polarization via full Uehling kernel, and Foldy-Friar finite
-nuclear size via \S\ref{sec:proj_charge_density}.  The $-200$~MHz
-deficit against experiment is the Z-amplified bracket-completion gap
-($\alpha^3$ truncation amplified by $Z^4 \times \ln$ from the $-0.55\%$
-residual at Z=1), closed at Layer-2 by Drake-Yan 1992 multi-loop QED
-($\alpha^2(Z\alpha)^4 + \alpha(Z\alpha)^5 + \alpha(Z\alpha)^6
-\ln(Z\alpha)^{-2}$).  Source memo:
-\texttt{debug/he\_plus\_lamb\_autopsy\_track\_a\_memo.md}.}
+$E(2S_{1/2}) - E(2P_{1/2})$).  The subtotal $+13\,841.11$ MHz is the
+textbook one-loop assembly of the H Lamb shift (\S\ref{sec:autopsy_lamb};
+Paper~36), in which no GeoVac projection enters the one-loop terms, with
+$Z = 2$ substituted throughout, plus the Foldy-Friar finite nuclear size
+via \S\ref{sec:proj_charge_density}.  The $-200$~MHz deficit against
+experiment is the one-loop terms the assembly omits (see text).}
 \label{tab:autopsy_he_plus_lamb}
 \begin{tabular}{p{5.5cm} r p{4.7cm} l}
 \toprule
 Component & Value (MHz) & Projection chain & Status \\
 \midrule
-1.~Bohr-Fock Dirac baseline & $+0.0000$ &
+1.~Dirac baseline & $+0.0000$ &
 \S\ref{sec:proj_fock} & FN (zero by Dirac 2$S_{1/2}=2P_{1/2}$ degeneracy) \\
-2.~One-loop SE (Eides Sec.~3.2 bracket) & $+14\,258.5252$ &
+2.~One-loop SE (Eides \emph{et al.}\ one-loop) & $+14\,258.5252$ &
 textbook (Eides one-loop; tabulated Bethe logs)
-& TA ($\alpha^3 Z^4$ truncation) \\
+& TA ($\alpha(Z\alpha)^4$ only) \\
 3.~One-loop VP (full Uehling kernel) & $-426.2096$ &
 textbook (Uehling kernel)
 & TA ($\beta = 137$, contact form $0.5\%$ check) \\
 4.~Foldy/Friar FNS ($r_E({}^4$He$)^2$) & $+8.7913$ &
 \S\ref{sec:proj_fock} $\circ$ \S\ref{sec:proj_charge_density} $+$
 Layer-2 $r_E$ & L2 \\
-5a.~$\alpha^2(Z\alpha)^4$ two-loop QED & $+6.71$ &
-Layer-2 input & LS-8a renormalization wall \\
-5b.~$\alpha(Z\alpha)^5$ higher-order & $+0.18$ &
-Layer-2 input & LS-8a \\
-5c.~$\alpha(Z\alpha)^6 \ln$ relativistic Bethe-log (Drake-Yan)
-& $+14.7$ & Layer-2 input & bracket-completion gap at $Z = 2$ \\
-6.~Recoil NLO $m_e^2/m_\alpha$ & $-3.18$ &
-Layer-2 input & W1a sub-leading \\
-7.~${}^4$He polarizability & $+0.06$ &
-Layer-2 input & W3 inner-factor (smallest in catalogue) \\
 \midrule
 \textbf{One-loop assembly subtotal} & \textbf{+13\,841.11} & (1+2+3+4) & \\
-Assembly $+$ literature total & $+13\,859.58$ & (1+2+3+4+5a+5b+5c+6+7) & \\
 \textbf{Experimental} & \textbf{+14\,041.13(17)} & van Wijngaarden 2000 & \\
-\textbf{Theory} & \textbf{+14\,041.18(13)} & Pachucki 2001 & \\
-\textbf{Residual (framework$+$lit)} & $\mathbf{-181.55}$ MHz / $-1.29\%$
-& Z-amplified bracket-completion gap & \\
+\textbf{Residual} & $\mathbf{-200.02}$ MHz / $-1.42\%$
+& omitted one-loop terms (see text) & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -5261,8 +5197,7 @@ $13.21$ to $0.3\%$.
 ($-426.2096$ full-kernel He$^+$ over $-27.13$ contact-form H; vs naive
 $Z^4 = 16$).  The $1.8\%$ deviation mixes the $\beta$-dependent kernel
 integral structure with a contact-vs-full-kernel mismatch between the
-two rows [corrected 2026-08-29: an earlier version quoted
-$15.878$/$0.8\%$, which does not reproduce from the printed rows].
+two rows.
 
 \item Lamb$_\text{FNS}$ ratio = $63.599$ (vs predicted $Z^4 \times
 (r_E({}^4\text{He})/r_p)^2 = 16 \times (1.9925)^2 = 63.52$).
@@ -5278,57 +5213,20 @@ known in closed form; only the FNS row tests a Paper~34 projection
 (\S\ref{sec:proj_charge_density}).
 
 \textbf{Residual attribution.}  The assembly subtotal is
-$-200.02$ MHz / $-1.42\%$ below experiment, which is structurally the
-same as Paper~36's $-5.65$ MHz / $-0.534\%$ at Z=1 amplified by
-$Z^4 \times \ln$-amplification.  The dominant Layer-2 contribution is
-the $\alpha(Z\alpha)^6 \ln(Z\alpha)^{-2}$ Drake-Yan 1992 relativistic-
-Bethe-log correction ($+14.7$ MHz), which is below precision visibility
-at Z=1 ($\sim +0.05$ MHz, absorbed into Paper~36's residual) but
-structurally visible at Z=2.  The remaining $\sim 180$ MHz of the deficit
-comes from higher-order $\alpha(Z\alpha)^n_{\ln}$ mixed terms that are
-extensively itemized in Drake-Yan 1992 and Pachucki 2001 but live
-below the $\alpha^3$-truncation visibility at H precision.
+$-200.02$ MHz / $-1.42\%$ below experiment.  As at $Z=1$, the deficit
+is the one-loop terms the assembly omits.  Scaling the H budget's
+one-loop $\alpha(Z\alpha)^5$ row (Paper~36, $+7.13$~MHz) by $Z^5$ gives
+about $+228$~MHz at $Z=2$, larger than the deficit; the one-loop
+$\alpha(Z\alpha)^6$ terms, $-0.42$~MHz at $Z=1$, enter with the opposite
+sign and grow faster with $Z$.  A full $Z=2$ budget is not assembled
+here.
 
-\textbf{Cleanest W3 inner-factor contribution in the catalogue.}
-${}^4$He polarizability contributes $+0.06$ MHz / $4.3 \times 10^{-6}$
-of the 2S Lamb shift [corrected 2026-08-29: an earlier version stated
-$4\times10^{-9}$, inconsistent with its own $+0.06$~MHz row by three
-orders], the smallest W3 contribution in the catalogue (cf.\
-$\mu$d Lamb where deuteron polarizability is $+1.69$ meV, the
-dominant Layer-2 line).  Mechanism: ${}^4$He is tightly bound (binding
-energy $\sim 28.3$~MeV total, $7.1$ per nucleon, vs the deuteron's
-$2.2$~MeV total), so virtual
-photonuclear excitations are far above the Lamb-shift scale.  He$^+$
-Lamb is therefore the cleanest QED-at-Z=2 test with nuclear-structure
-contamination at the few-ppm level --- the regime where the
-\S\ref{sec:proj_spectral_action} LS-8a multi-loop QED becomes the
-dominant Layer-2 contribution rather than nuclear-structure
-inputs.
-
-\textbf{Convention-mismatch surface.}  Different compilations
-(Drake-Yan 1992, Pachucki 2001, Eides \S~12.1.8) split the leading
-SE bracket and the higher-order $\alpha(Z\alpha)^n \ln$ corrections
-differently at $Z = 2$.  The framework's $\alpha^3$ Eides bracket is
-unambiguous; what depends on compilation is the partition of the
-Layer-2 residual between ``SE $\alpha^3$ deficit'' (in the
-Pachucki convention) and ``$\alpha(Z\alpha)^6 \ln$ Drake-Yan
-relativistic-Bethe-log correction'' (in the Eides convention).  Same
-total, different per-component itemization.  See
-\S~\ref{sec:convention_exposures} for catalogue context.
-
-\textbf{Structural reading.}  The autopsy demonstrates three things.
-First, the implementation is \emph{Z-portable}: all three Z-scaling
-tests pass cleanly, with
-the SE bracket's logarithmic Z-dependence reproduced to $0.3\%$
-(a matching test, not an exactness claim; the VP ratio is
-kernel-mixed, see above).
-Second, the $-1.42\%$ assembly residual is the Z-amplified analog of
-Paper~36's $-0.534\%$ Z=1 residual --- same physical content ($\alpha^3$
-leading-order truncation), different size by $Z^4 \times \ln$.
-Third, He$^+$ joins the multi-focal precision catalogue as the cleanest
-QED-at-Z=2 test, with nuclear-structure Layer-2 inputs at the
-few-ppm level ($4.3\times10^{-6}$ of the 2S Lamb shift).  This is the canonical Z-scaling validation of the Paper~36
-one-loop assembly.
+\textbf{Structural reading.}  The implementation is \emph{Z-portable}:
+all three Z-scaling tests pass, with the SE bracket's logarithmic
+$Z$-dependence reproduced to $0.3\%$ (a matching test, not an exactness
+claim; the VP ratio is kernel-mixed, see above).  The residual is the
+same omitted one-loop content as at $Z=1$, larger by the extra powers
+of $Z\alpha$.
 
 \subsubsection{Helium $2{}^3P$ fine-structure autopsy (first internal multi-focal entry)}
 \label{sec:autopsy_he_2_3p}
@@ -5419,16 +5317,14 @@ Generic feature of multi-component fine-structure splittings (Li
 $2{}^2P$ and Be $2s2p\,{}^3P$ show analogous partial-cancellation
 amplification, Sprint 5 CP).
 
-\textbf{Three-class diagnosis (per CLAUDE.md \S~1.8 directive).}
-Class A (literature convention mismatch): NEGATIVE at LO Breit-Pauli ---
-Drake (1971) and Pachucki--Yerokhin (2010) agree on leading-order
-Breit-Pauli combining coefficients; \textbf{but POSITIVE at the
-$\alpha^3(Z\alpha)^2$ multi-loop level} (V.D-prediction sprint,
-2026-05-10) where Pachucki--Yerokhin~2009 reevaluated the relativistic
-Bethe-log term to resolve a 3$\sigma$ disagreement on $\nu_{01}$ vs
-Drake's earlier itemization (cross-ref \S\ref{sec:conv_he_bethe_log}).
-The convention exposure sits inside the framework's LS-8a
-$\alpha^3(Z\alpha)^2$ multi-loop wall, NOT at the LO Breit-Pauli sector
+\textbf{Three-class diagnosis.}
+Class A (literature convention mismatch): NEGATIVE --- Drake (1971) and
+Pachucki--Yerokhin (2010) agree on leading-order Breit-Pauli combining
+coefficients; at the $\alpha^3(Z\alpha)^2$ level Pachucki--Yerokhin~2009
+recomputed the relativistic Bethe logarithm and report a $\sim3\sigma$
+theory--experiment difference on $\nu_{01}$
+(\S\ref{sec:conv_he_bethe_log}), inside the framework's LS-8a
+$\alpha^3(Z\alpha)^2$ multi-loop wall, not in the LO Breit-Pauli sector
 that the framework computes sympy-exactly.  Class B (framework gap,
 RADIAL): POSITIVE --- residual
 attributes to (i) multi-electron correlation in the (1s)(2p)
@@ -5655,9 +5551,8 @@ consistent with the $+135.9$~ppm TPE total above and with the
 $45.2$~kHz by which experiment exceeds nonrecoil theory (Eides et al.\
 Phys.\ Rep.\ Eq.~(414)).  With $r_Z(D)$ alone as the input, the
 $-210.9$~ppm residual is not bounded by
-$\max(\varepsilon_\text{basis}, |L_2|)$ on the ppm-class reading, so this
-row is an open case for Prediction~\ref{pred:l2_presence} rather than a
-supporting one.  The operator
+$\max(\varepsilon_\text{basis}, |L_2|)$, so this row violates
+Observation~\ref{pred:l2_presence}.  The operator
 structure consuming the inputs is framework-native via
 \S\ref{sec:proj_magnetization_density}, identical to the H 21cm
 autopsy.
@@ -5702,8 +5597,7 @@ surfaced on that axis.
 \label{sec:autopsy_t_hfs}
 
 \textbf{Reference.}  $\nu_\text{HFS}(T) = 1\,516\,701\,470.773(8)$~Hz
-(Greene 2017 hydrogen-maser update of Mathur, Crampton, Kleppner,
-Ramsey 1967), the most precisely measured I=1/2 atomic HFS transition
+(Mathur, Crampton, Kleppner, Ramsey 1967), the most precisely measured I=1/2 atomic HFS transition
 with a non-proton nucleus.  Distinguished from \S\ref{sec:autopsy_21cm}
 by the mass-hierarchy axis at fixed nuclear-spin slot
 ($m_t \approx 3 m_p$ at I=1/2; H 21cm has I=1/2 at $m_p$).
@@ -5736,9 +5630,8 @@ operator-level & $\times (1 - 66.594 \text{~ppm})$ &
 $+$ L2 ($r_Z(t)$ scalar) \\
 \midrule
 \textbf{Final $\nu_\text{HFS}(T)$} & $+1516.696899$ & & \\
-Experimental & $+1516.701471$ & (Greene 2017, 12-digit precision) & \\
-\textbf{Residual} & $-0.005$ & $= -3.0$~ppm$^{\ddagger}$; inside Karshenboim 2005
-Layer-2 budget $+12 \pm 5$ ppm & \\
+Experimental & $+1516.701471$ & (Mathur et al.\ 1967, 12-digit precision) & \\
+\textbf{Residual} & $-0.005$ & $= -3.0$~ppm$^{\ddagger}$; not itemized & \\
 \bottomrule
 \end{tabular}
 \caption{($^{\ddagger}$ provisional: rests on $r_Z(t) = 1.762$~fm, under review --- see the status note below.)  Tritium 1S hyperfine Roothaan autopsy.  Each component
@@ -5787,13 +5680,11 @@ coefficients differing (proportional to $g_t$ and $r_Z(t)$ rather than
 $g_p$ and $r_Z(p)$).
 
 \textbf{Framework-native subtotal:} $\nu_\text{HFS}^\text{native}(T) =
-1516.6969$~MHz ($99.9997\%$ of measurement).  \textbf{Layer-2 net:}
-$-66.6 + 64.6 \approx -2$~ppm of $\nu_F$, with framework-native
-$-3.0$~ppm residual sitting inside the projected Karshenboim 2005
-Layer-2 budget of $+12 \pm 5$ ppm.  The Layer-2 inputs are the scalar
-$r_Z(t)$ value ($1.762$~fm; the Carlson~2008 attribution is wrong --- that
-paper is proton-structure --- and the true source is unidentified) and the Karshenboim
-2005 itemization for sub-leading multi-loop QED + recoil NLO.  The
+1516.6969$~MHz ($99.9997\%$ of measurement), a residual of
+$-3.0$~ppm that is not itemized.  The Layer-2 input is the
+scalar $r_Z(t)$ value ($1.762$~fm; the Carlson~2008 attribution is
+wrong --- that paper is proton-structure --- and the true source is
+unidentified).  The
 operator structure consuming the inputs is framework-native via
 \S\ref{sec:proj_magnetization_density}, identical to the H 21cm and
 D 1S HFS autopsies.
@@ -5802,37 +5693,8 @@ D 1S HFS autopsies.
 ``cleanest isolation'' reading below both rest on $r_Z(t) = 1.762$~fm,
 an input flagged as under review in \S\ref{sec:offprecision} --- it
 coincides with the triton \emph{charge} radius, and at the ab-initio
-Zemach value $2.27(3)$~fm the residual moves to $\approx -22$~ppm,
-\emph{outside} the quoted $+12\pm5$~ppm band.  Both claims are
-provisional pending that re-sourcing.]}
-
-\textbf{Why T 1S HFS is the cleanest LS-8a isolation in the hadronic
-catalogue.}  The cumulative residual decomposes per Karshenboim 2005:
-\begin{itemize}\setlength\itemsep{0pt}
-\item Multi-loop QED ($\alpha^2(Z\alpha)$, $\sim +6$~ppm) is the
-LS-8a renormalization gap, identical mechanism to H 21cm (both Z=1).
-\item Recoil NLO beyond reduced-mass ($\sim +3$~ppm) is the W1a-D
-Roothaan kernel-level recoil-mixing wall, slightly smaller than H's
-$+5.85$~ppm because the tritium recoil-mixing factor is smaller
-($m_e/(m_e+m_t) \approx 1.82 \times 10^{-4}$ vs H's $5.45 \times 10^{-4}$).
-\item \textbf{Tritium polarizability ($\sim +0.7$~ppm)} is the
-W3 inner-factor calibration tier --- $\sim 300\times$ smaller than
-deuteron's $\sim +340$~ppm (re-sourced 2026-08-29) because the tritium
-2n+1p binding
-($B(t) = 8.482$~MeV) is much tighter than the deuteron's n+p binding
-($B(d) = 2.225$~MeV), making the tritium nucleus essentially compact
-and rigid under external fields.
-\item Hadronic VP $\sim +0.1$~ppm, finite-size charge $\sim +1.5$~ppm,
-higher Friar moments $\sim +0.5$~ppm are Layer-2 inputs via
-\S\ref{sec:proj_charge_density} and \S\ref{sec:proj_magnetization_density}
-NLO opt-in.
-\item Zemach NLO recoil-mixing $m_e/(m_e+m_t) \approx 1.82 \times 10^{-4}$
-is structural noise in the electronic regime ($+0.013$~ppm).
-\item Convention drift (claimed $\pm 5$~ppm; source unidentified ---
-neither Carlson~2008, a proton paper, nor Sick~2014, a ${}^{3,4}$He
-paper, covers ${}^3$H)
-is the largest literature-itemization sensitivity in this observable.
-\end{itemize}
+Zemach value $2.27(3)$~fm the residual moves to $\approx -22$~ppm.
+Both claims are provisional pending that re-sourcing.]}
 
 \textbf{Cleanest mass-vs-spin separation in the catalogue.}  Tritium
 fills the I=1/2 hadronic non-proton cell that was previously empty in
@@ -5854,10 +5716,7 @@ tritium with the cleanest isolation: T and H share the I=1/2
 nuclear-spin axis exactly (identical Pauli encoding, identical I·S
 eigenstructure); T and D share the non-proton nucleus axis (both
 $m_N \neq m_p$); what separates T from BOTH is the combination
-``I=1/2 like H, mass $\sim 3 m_p$ like D-extended''.  This makes T
-1S HFS the cleanest LS-8a multi-loop QED isolation point$^{\ddagger}$ for an
-electron$+$hadronic-nucleus system after Mu 1S HFS (which has no QCD
-nucleus at all).  No new convention mismatch surfaced beyond the
+``I=1/2 like H, mass $\sim 3 m_p$ like D-extended''.  No new convention mismatch surfaced beyond the
 claimed $r_Z(t)$ value drift, whose source is unidentified (neither
 cited work covers ${}^3$H).
 
@@ -5889,8 +5748,7 @@ light-nucleus HFS observables.}
 \label{sec:autopsy_he3_hfs}
 
 \textbf{Reference.} $\nu_\text{HFS}(\text{He-3},\,2{}^3\!S_1) =
-6\,739\,701\,177(16)$~Hz (Schuessler--Fortson--Dehmelt 1969;
-Prior--Wang 1977; Rosner--Pipkin 1970), the F=3/2 to F=1/2 splitting
+6\,739\,701\,177(16)$~Hz (Rosner--Pipkin 1970), the F=3/2 to F=1/2 splitting
 of the metastable $2{}^3\!S_1$ state. \textbf{First multi-electron HFS
 autopsy in the catalogue.} The 2$^3\!S_1$ state has electronic
 configuration (1s, 2s) with triplet coupling (S=1, L=0, J=1), and the
@@ -5932,7 +5790,7 @@ $\times (1-148.5\text{~ppm})$ &
 FN at op-level $+$ L2 ($r_Z$ scalar) \\
 \midrule
 \textbf{Final $\nu_\text{HFS}$(He-3 $2{}^3\!S_1$)} & $+6653.41$ & & \\
-Experimental & $+6739.70$ & (Schuessler/Prior, 14-digit precision) & \\
+Experimental & $+6739.70$ & (Rosner--Pipkin 1970) & \\
 \textbf{Residual} & $-86.29$ & $= -1.28\%$ ($-12\,804$~ppm); dominant
 wall is \S\ref{sec:proj_phillips_kleinman} multi-electron screening,
 NOT LS-8a multi-loop QED & \\
@@ -6091,9 +5949,10 @@ the one-loop closure architecture wall.
 \textbf{Structural reading.} The He-3 2$^3\!S_1$ HFS autopsy
 \emph{restructures the catalogue's understanding of where the structural
 skeleton's residuals sit for HFS observables}. Single-electron HFS
-(H 21cm, D, T, $\mu$H, Mu) all have LS-8a multi-loop QED as the
-dominant Layer-2 wall, with framework residuals ranging from
-$+2$~ppm ($\mu$H) to $-211$~ppm (D). Multi-electron HFS (this entry;
+(H 21cm, D, T, $\mu$H, Mu) have framework residuals from about
+$+18$~ppm (H 21cm, the omitted Breit and binding terms) to $-211$~ppm
+(D, a missing nuclear-structure channel) and $-0.72\%$ ($\mu$H, not
+itemized). Multi-electron HFS (this entry;
 candidate future entries: Li-7, Cs-133) has
 \S\ref{sec:proj_phillips_kleinman} multi-electron screening as the
 dominant wall, with framework residuals 50--500$\times$ deeper
@@ -6419,8 +6278,8 @@ the SI-second definition).  Source memo:
 \label{sec:autopsy_li7_hfs}
 
 \textbf{Reference.}  $\nu_\text{HFS}({}^7\text{Li}, 2{}^2S_{1/2},
-F=2 \leftrightarrow F=1) = 803{,}504{,}086.0(34)$~Hz
-(Beckmann, Boklen, Elke 1974; confirmed Walls 2003).  Nuclear:
+F=2 \leftrightarrow F=1) = 803{,}504{,}086.6(1.0)$~Hz
+(Beckmann, Boklen, Elke 1974, as tabulated by Puchalski--Pachucki).  Nuclear:
 $I=3/2$, $g_{{}^7\text{Li}} = 2.170951(4)$ (CODATA $\mu/I/\mu_N$
 convention), $m_{{}^7\text{Li}} \approx 12{,}786.4\,m_e$.
 
@@ -6531,7 +6390,7 @@ polarization (Lindgren 1985; Yan \& Drake 2003) contributes a further
 $\sim 1$--$2\%$ on top.
 
 \textbf{Why this is not the H/D HFS regime.}  Single-electron HFS
-observables (H 21cm at $+18$~ppm, $\mu$H 1S HFS at $+2$~ppm, D 1S HFS at
+observables (H 21cm at $+18$~ppm, $\mu$H 1S HFS at $-0.72\%$, D 1S HFS at
 $-211$~ppm) hit \emph{nuclear-structure} Layer-2 walls (W3 inner-factor
 deuteron polarizability, multi-loop QED).  Multi-electron HFS hits a
 prior \emph{electronic-structure} wall: the framework's
@@ -6561,8 +6420,8 @@ inverse-$Z$ magnitude reading does not.
 
 
 \textbf{New §V.D-class exposure (class iii).}  This autopsy surfaces
-a new exposure class distinct from the four existing §V.D entries
-(all literature convention mismatches): the \emph{multi-electron
+a new class distinct from the literature itemization entries of
+§V.D: the \emph{multi-electron
 contact-density cliff} is a framework-ARCHITECTURE limitation, not a
 literature convention nor a framework precision ceiling.  Magnitude:
 $\sim 2.8\times$ on $A_\text{hf}$ for Li-7, growing monotonically with
@@ -6594,9 +6453,8 @@ MHz (Fee, Chu, Mills, Mader, Mills, Chichester, \emph{Phys.\ Rev.\ A}
 The first \S~V.C autopsy of an \emph{equal-mass two-body} system, and the
 first operator-level test of the just-added 16th projection
 (\S~\ref{sec:proj_breit_retardation} Breit retardation, added 2026-05-08)
-since its introduction.  Continues the multi-observable focal-length
-decomposition program (\S~1.8 directive) at the cleanest known instance of
-the multi-focal-composition wall.
+since its introduction, at the cleanest known instance of the
+multi-focal-composition wall.
 
 \begin{table}[h!]
 \centering\small
@@ -6606,8 +6464,8 @@ $1{,}233{,}687{,}096.0775$ MHz reproduces the May-8 Ps 1S-2S sprint
 baseline at $+64.75$~ppm vs Fee 1993; the $+80$~GHz overshoot is the
 missing $\alpha^4$ Breit retardation content (Component 2 = first
 operator-level test of \S~\ref{sec:proj_breit_retardation}).
-Cumulative ($1+2+3+4+5$) closes to $+0.0075$~MHz, within Fee 1993
-$\pm 3.2$~MHz uncertainty.  Source memo:
+Cumulative ($1+2+3+4+5$) closes to $+0.0075$~MHz by construction,
+since Component~2 is calibrated against the complete Ps theory.  Source memo:
 \texttt{debug/ps\_1s2s\_autopsy\_track4\_memo.md}.}
 \label{tab:autopsy_ps_1s2s}
 \begin{tabular}{p{4.6cm} r p{4.5cm} l}
@@ -6634,7 +6492,7 @@ Layer-2 input (LS-8a renormalization) & L2 \\
 \textbf{Framework-native subtotal} (1+3) & $+1{,}233{,}687{,}096.08$ &
 \multicolumn{2}{l}{$+64.75$~ppm vs Fee 1993} \\
 \textbf{Cumulative} (1+2+3+4+5) & $+1{,}233{,}607{,}216.41$ &
-\multicolumn{2}{l}{$+5\times 10^{-6}$ ppm; within Fee~1993 $\pm 3.2$ MHz} \\
+\multicolumn{2}{l}{$+5\times 10^{-6}$ ppm (by construction)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -6645,7 +6503,7 @@ $m_\text{red}(ee)/m_\text{red}(ep) = 0.5002723085$ to relative residual
 $0.00 \times 10^{0}$ (bit-identical).  This is the operator-level
 verification of \S~\ref{sec:proj_restmass} ring-preservation in the
 equal-mass limit at the same observable type as Mu 1S-2S (May-8 Track 1
-sprint, $-0.11$ ppm).  Together the two cover the rest-mass projection
+sprint, $-0.09$ ppm).  Together the two cover the rest-mass projection
 across the lepton-mass-ratio axis (Mu, $\lambda_l/\lambda_n \sim 1/207$;
 Ps, $\lambda_l/\lambda_n = 1/1$).
 
@@ -6715,10 +6573,9 @@ requires Bethe--Salpeter machinery as the named extension target.
 \textbf{Layer-2 magnitude consistency check.}  The framework-extracted
 $\alpha^4$ Breit residual (calibrated against the Pachucki--Karshenboim
 1998 complete theoretical value) gives fraction
-$-79{,}861.9 / (m_e c^2 \alpha^4 / h) = -0.2279$, vs canonical
-Karshenboim 2005 \S~9 closed-form $-(11/48) = -0.2292$; agreement
-$0.57\%$.  Match consistent with the calibration-by-construction
-caveat documented in \texttt{debug/precision\_catalogue\_positronium\_1s2s\_memo.md}.
+$-79{,}861.9 / (m_e c^2 \alpha^4 / h) = -0.2279$, vs $-(11/48) =
+-0.2292$; agreement $0.54\%$.  The input is calibrated by
+construction, so the agreement checks magnitude only.
 
 \textbf{Crystallization of the multi-focal-composition wall at $\alpha^4$.}
 This autopsy identifies the operator-level signature of the wall.  The
@@ -6764,9 +6621,7 @@ dominant Layer-2 mechanism shifts cleanly between observable types
 
 \textbf{Reference.}  $\chi_d^\text{HD}(J=1) = 224.540(20)$~kHz
 (Code-Ramsey~1971), the deuteron electric quadrupole coupling in
-HD ground-state vibrational $v=0$ at rotational $J=1$.  Komasa--Pachucki
-2020 ab~initio reference at CCSDT-F12 $+$ nonadiabatic ro-vibrational
-averaging: $224.51(5)$~kHz.  Precision target $\sim 0.02\%$
+HD ground-state vibrational $v=0$ at rotational $J=1$.  Precision target $\sim 0.02\%$
 ($\sim 50$~Hz absolute).
 
 \textbf{First operator-level test of \S\ref{sec:proj_tensor_multipole}
@@ -6787,7 +6642,7 @@ $q_\text{nuc} = 2 Z_H / R^3$ at $R = R_\text{eq} = 1.4011$~bohr.
 \S~\ref{sec:proj_3j}: $\langle V_{zz}\rangle = -(2/5)\,V_{zz}^\text{mol}$
 (Townes--Schawlow standard).
 \item $Q_d = 0.285699(15)(18)$~fm$^2$ as scalar Layer-2 input
-(Komasa--Pachucki 2020), in the same projection class as the
+(Puchalski--Komasa--Pachucki 2020~\cite{puchalski_komasa_pachucki2020}), in the same projection class as the
 $\langle r^2\rangle_E$ and $r_Z$ scalars of \S~\ref{sec:proj_charge_density}
 and \S~\ref{sec:proj_magnetization_density}.
 \item Born--Oppenheimer separation via \S~\ref{sec:proj_adiabatic_BO}.
@@ -6815,7 +6670,6 @@ $-150.52$ & $+60.21$ \\
 \S\ref{sec:proj_3j}) & $+337.61$ & $\mathbf{-135.04}$ \\
 \midrule
 Experimental & $-$ & $+224.54$ \\
-Komasa--Pachucki 2020 ab~initio & $-$ & $+224.51(5)$ \\
 \textbf{Framework OoM residual} & $-$ &
 $\mathbf{-89.5}$~kHz, $\mathbf{-39.9\%}$ \\
 \bottomrule
@@ -6859,12 +6713,11 @@ infrastructure;
 (4) $v=0$ vibrational averaging over Level-4 hyperradial wavefunction;
 (5) $T^{(2)}_{ij}$ rank-2 spin tensor on $|I=1\rangle$ (extension of
 \texttt{hyperfine\_a\_pauli\_for\_atomic\_hfs} from rank-1 to rank-2).
-Reference target: Komasa--Pachucki 2020 (J. Chem. Phys. 152, 154301).
+Reference target: the measured value.
 Realistic accuracy: $\sim 5\%$ at operator-level (sub-percent requires
-CCSDT-F12-class correlation that Level~4 does not provide; the
+explicitly correlated wavefunctions that Level~4 does not provide; the
 residual would then attribute to non-adiabatic / electron-correlation
-Layer-2 input class, in the same way Komasa--Pachucki itemize their
-ab~initio chain).
+Layer-2 input class).
 
 \textbf{Structural reading.}  This is the catalogue's first
 molecular precision-catalogue entry (all prior \S~\ref{sec:autopsies}
@@ -7000,8 +6853,8 @@ $\sim 11.4$ meV (the dominant component of the $-19.86$ meV total
 residual).  The framework's bare leading is structurally complete to
 its operator order ($\propto \langle r^2 \rangle$); the higher-Friar
 absorption is a Layer-2 input that the bare-Eides formula doesn't
-natively generate.  \emph{Flagged as a new V.D-prediction candidate}:
-class-(ii) closed-form-vs-operator-level (Eides bare leading vs
+natively generate.  This is a class-(ii) closed-form-vs-operator-level
+difference (Eides bare leading vs
 Diepold-tabulated FNS-leading-with-absorbed-Friar-HO), sibling to
 \S\ref{sec:conv_friar_profile} (which addresses the magnetization-side
 profile-convention issue).  At Z=2 the higher-Friar piece is 11.4 meV
@@ -7081,9 +6934,9 @@ are the only two ingredients that change.
 \subsubsection{Hydrogen Lyman-$\alpha$ $1\,^{2}S_{1/2} \to 2\,^{2}P$ oscillator strength autopsy}
 \label{sec:autopsy_lyman_alpha}
 
-\textbf{Reference.} NIST tabulates Lyman-$\alpha$ in two fine-structure
-components: $f(1\,S \to 2\,P_{1/2}) = 0.13881$ and
-$f(1\,S \to 2\,P_{3/2}) = 0.27764$, summing to $0.41645$.  The
+\textbf{Reference.} NIST's transition probabilities for the two
+fine-structure components give $f(1\,S \to 2\,P_{1/2}) = 0.13881$ and
+$f(1\,S \to 2\,P_{3/2}) = 0.27760$, summing to $0.41641$.  The
 non-relativistic spin-averaged textbook value is $0.4162$.  The
 framework computes the non-relativistic spin-averaged value
 directly, so the relevant reference is the NIST sum.
@@ -7101,8 +6954,8 @@ intermediate $\sqrt{2}, \sqrt{3}, \sqrt{6}$).
 oscillator strength.  Components~1--4 produce the framework-native
 $f = 2^{13}/3^9 = 0.41620$ exactly.  Component~5 (reduced mass)
 multiplies by $m_e/\mu_{\mathrm{red}} \approx 1.000545$, giving
-$f^{\text{framework}+\mu} = 0.41642$.  Component~6 (LS-8a-class)
-closes the remaining $+64$~ppm to NIST.}
+$f^{\text{framework}+\mu} = 0.41642$, which lies $35$~ppm above the
+NIST sum; this autopsy leaves that residual unexplained.}
 \label{tab:autopsy_lyman_alpha}
 \begin{tabular}{cllll}
 \toprule
@@ -7113,7 +6966,7 @@ closes the remaining $+64$~ppm to NIST.}
 3 & Angular factor $\langle Y_{10}|\cos\theta|Y_{00}\rangle$, $\sum_{m_f}$ & $1/\sqrt{3} \times 3$ & 1 & \S\ref{sec:proj_3j} \\
 4 & Oscillator-strength prefactor $(2/3) \times (1/g_i)$ & $2/3$ & 2 & \S\ref{sec:proj_vector_photon} \\
 5 & Reduced mass $\mu/m_e$ in $m_e \cdot \omega \cdot |\langle r \rangle|^2$ scaling & $+545$ ppm & 2 & \S\ref{sec:proj_restmass} \\
-6 & Relativistic Dirac + radiative QED & $\sim +64$ ppm & 2 & LS-8a class \\
+6 & Residual against NIST & $-35$ ppm & --- & not attributed \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -7141,17 +6994,15 @@ out at the squaring step.
 
 \textbf{Layer-2 residual attribution.}  Reduced-mass scaling
 $f \propto m_e \cdot \omega \cdot |\langle r \rangle|^2 \propto m_e \cdot \mu \cdot (m_e/\mu)^2 = m_e \cdot (m_e/\mu)$
-multiplies the framework value by $m_e/\mu_{\mathrm{red}} = 1 + m_e/m_p \approx 1.000545$.  Framework $+$ reduced mass:\ $0.41642$.  NIST $0.41645$
-gives a residual of $+64$~ppm, attributable to relativistic Dirac
-corrections at order $\alpha^2 Z^2 \approx 5 \times 10^{-5}$
-(about $50$~ppm) plus sub-Lamb radiative content.
+multiplies the framework value by $m_e/\mu_{\mathrm{red}} = 1 + m_e/m_p \approx 1.000545$.  Framework $+$ reduced mass:\ $0.41642$, which
+lies $35$~ppm above the NIST sum $0.41641$; this autopsy leaves the
+residual unexplained.
 
 \textbf{Structural reading.}  This is the cleanest substrate-side
 autopsy in the catalogue.  Layer~1 produces $f = 2^{13}/3^9$ exact
 in $\mathbb{Q}$, with all transcendentals cancelling at the
-squaring step.  Layer~2 contributes $\sim 600$~ppm split between
-reduced mass (\S\ref{sec:proj_restmass}, dominant) and LS-8a-class
-radiative.  The autopsy demonstrates the generic pattern of dipole
+squaring step.  Layer~2 contributes the reduced-mass factor
+(\S\ref{sec:proj_restmass}, $+545$~ppm).  The autopsy demonstrates the generic pattern of dipole
 oscillator strengths in the framework:\ amplitudes can be irrational
 algebraic, but $|\mathrm{amplitude}|^2$ is in $\mathbb{Q}$.
 
@@ -7305,8 +7156,8 @@ further (Drake's exhaustive calculation reaches sub-cm$^{-1}$).
 \textbf{Structural lesson.} $K(1s, 2s)$ is fundamentally a
 \emph{two-exponent problem} because the two electrons see different
 effective nuclear charges.  Single-exponent architectures (A and B)
-fail by factors of $1.1$ (with $\kappa$ adjacency) or $3.1$ (with
-explicit $r_{12}$ correlation).
+fail by $+17\%$ (fixed-$k$ CI) and by a factor of $3.1$ (explicit
+$r_{12}$ correlation).
 Two-exponent architecture (C) succeeds at $1.4\%$.  The framework's
 \texttt{hylleraas\_r12.py} Sprint Calc Track~1 was DEFERRED 2026-05-18
 in favor of Track~5 (oscillator strength); the scoping memo
@@ -7317,8 +7168,7 @@ produces $\Delta E \approx 6{,}331$ cm$^{-1}$ at $\omega = 5$
 basis truncation.  The $1.4\%$ residual is \emph{algorithmic}
 (basis truncation), not calibration --- closeable by increasing
 $\omega$.  This is qualitatively different from Lyman-$\alpha$ and
-H $2P$ FS, where the framework substrate-side value was exact and
-Layer~2 residual was unavoidable LS-8a class.  Here, LS-8a-class
+H $2P$ FS, where the framework substrate-side value was exact.  Here, LS-8a-class
 Layer~2 content (relativistic Breit, radiative QED) is sub-$100$
 ppm --- basis truncation is the dominant residual.
 
@@ -7331,23 +7181,20 @@ Phillips--Kleinman --- because multi-determinant correlation lives
 on the N-representable density-matrix manifold that the substrate's
 spectral-triple machinery does not natively engage.  The He
 $2\,^{1}S - 2\,^{3}S$ autopsy is the same lesson applied to atomic
-precision physics:\ the framework's substrate-level CI fails by
-$+12\%$ because $\kappa$-adjacency cannot capture the differential
-exponent structure; closing to $1.4\%$ requires the architectural
+precision physics:\ the single-exponent CI fails by $+17\%$ because
+one exponent cannot capture the differential exponent structure; closing to $1.4\%$ requires the architectural
 extension (Hylleraas--Eckart double-$\alpha$).  The framework can
 close it, but only by extending the basis architecture, not by
 improving substrate-level CI.
 
 \textbf{Structural reading.}  Canonical ``framework architecture
 choice matters for excited multi-electron states'' autopsy entry.
-Three architectures produce three answers spanning factor $\sim 30$.
-The structural lesson is that excited-state He requires a basis
+Three architectures produce three answers spanning a factor of about
+$3$.  The structural lesson is that excited-state He requires a basis
 that can host two different effective nuclear charges simultaneously
---- single-exponent bases fail by factors of $3$ or $1.1$ depending
-on whether $\kappa$ adjacency or explicit $r_{12}$ correlation is
-included.  This is NOT an LS-8a-class wall:\ the production-architecture
-($-1.4\%$) residual is basis-truncation and would close to sub-cm$^{-1}$
-at $\omega = 8$.  The bridge to the chemistry-side W1e wall is the
+--- single-exponent bases fail by $+17\%$ (fixed-$k$ CI) or a factor
+of $3.1$ (explicit $r_{12}$).  This is NOT an LS-8a-class wall:\ the
+production-architecture ($-1.4\%$) residual is basis truncation.  The bridge to the chemistry-side W1e wall is the
 deepest cross-domain structural pattern in the multi-focal-composition
 arc.
 
@@ -7358,9 +7205,7 @@ arc.
 \textbf{Reference.}  $E_\text{HFS}(\mu\text{H},\,1S) = 182.640(18)$~meV
 $= 44\,162$~GHz, the theory value of Hagelstein, Lensky and
 Pascalutsa~\cite{hagelstein_lensky_pascalutsa2023}; there is no
-measurement yet.  An earlier version printed $182.725$~meV and attributed
-it to Karshenboim--Ivanov 2002, whose paper treats ordinary hydrogen and
-the helium ion, not muonic hydrogen; the value had no source.
+measurement yet.
 \textbf{First muonic HFS entry in the catalogue.}  Creates the
 cross-link for $r_Z(p)$ identified in the cross-observable consistency
 matrix (Finding~5, May~31 2026).
@@ -7411,26 +7256,14 @@ $-39.5$~ppm at electronic mass --- an enhancement factor
 $m_{\text{red},\mu p}/m_{\text{red},ep} = 185.84/0.999 = 186$.  The
 Eides ($r_Z = 1.045$~fm) vs Karshenboim ($r_Z = 1.054$~fm) convention
 split produces a $64$~ppm $= 2{,}792$~MHz difference in the muonic HFS,
-versus $\sim 0.3$~ppm $\approx 0.5$~kHz at electronic H 21cm
-[corrected 2026-08-29: an earlier version printed $56$~kHz, the full
-Zemach line rather than the drift].  \textbf{The
-convention split is resolvable at muonic sensitivity}: $64$~ppm is well
-above any plausible framework residual budget.
+versus $\sim 0.3$~ppm $\approx 0.5$~kHz at electronic H 21cm.
 
 \textbf{Cross-link with H 21cm (\S\ref{sec:autopsy_21cm}).}  The two
 autopsies share the same Layer-2 input ($r_Z(p)$) consumed through the
 same projection (\S\ref{sec:proj_magnetization_density}), at mass ratios
-differing by $186\times$.  A simultaneous fit constraining $r_Z(p)$ from
-both channels would:
-\begin{itemize}\setlength\itemsep{0pt}
-\item resolve the Eides/Karshenboim convention split (currently
-$0.34$~ppm on H 21cm, far below the $+18$~ppm framework residual;
-$\pm 64$~ppm on $\mu$H HFS, resolvable);
-\item test whether the LS-8a multi-loop QED budget scales correctly
-from electronic to muonic mass (same physics, different kinematics);
-\item provide the first muonic-electronic HFS consistency check in
-the precision catalogue.
-\end{itemize}
+differing by $186\times$.  The muonic residual ($-0.72\%$) is not
+itemized, so the muonic channel cannot yet constrain $r_Z(p)$ at the
+$64$~ppm level of the Eides/Karshenboim split.
 
 \textbf{Alkali contact-density cliff: quantitative Z-sequence.}
 The cross-observable consistency analysis (Finding~4, May~31 2026)
@@ -7529,41 +7362,31 @@ The gap between $-47\%$ and $-98.4\%$ at Cs quantifies the partial
 recovery from the \texttt{FrozenCore} infrastructure.
 
 % -------------------------------------------------------------------
-\subsection{Literature convention exposures (running catalogue)}
+\subsection{Literature itemization notes (running catalogue)}
 \label{sec:convention_exposures}
 % -------------------------------------------------------------------
 
-The framework's projection-chain decomposition acts as a unique
-diagnostic instrument for precision atomic and molecular physics:
-decomposing several observables with a single structural dictionary
-(the \S~\ref{sec:layer2} projection family) exposes itemization
-choices in standard-physics compilations that single-observable
-analyses cannot see.  This is the directive's class~(a) finding
-type --- ``literature convention mismatches'' between independent
-compilations (Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2016~\cite{krauth2016},
-Pachucki--Yerokhin~2009, Antognini~2013)
-on Layer-2 itemization at the sub-percent precision the framework
-operates at.  Frameworks that consume single-observable Layer-2
-inputs in their native conventions cannot expose these mismatches
-structurally.  This subsection consolidates the eight exposures
-catalogued to date (V.D.1, built on the withdrawn Zemach-radius fit, is
-retired and the other numbers are kept; V.D.2--V.D.4 from the 2026-05-09 multi-track
-Roothaan autopsy sprint; V.D.5--V.D.6 from the 2026-05-10
-V.D-prediction sprint; V.D.7--V.D.9 subsequently);
-each future sprint that surfaces a
-class~(a) finding adds a new \S~V.D.$N$ subsection with the
-five-element template \emph{Observable~$|$~Source compilations~$|$~
-Convention difference~$|$~Magnitude~$|$~Sprint reference $+$ Closure verdict.}
+Several autopsies met itemization differences in the literature: two
+published evaluations of the same quantity, or two routes inside one
+compilation.  None of these differences was first found by the
+framework; each is stated, and where noted reconciled, in the
+literature.  This subsection records them because a reader comparing a
+framework value with a published component needs to know which route
+that component follows.  It also records framework-internal entries
+(a closed-form versus operator-level convention, basis-architecture
+limitations, and architectural-absence entries) that the same
+comparisons met.  Entry
+V.D.1, built on the withdrawn Zemach-radius fit, is retired and the
+other numbers are kept.  Each entry follows the template
+\emph{Observable~$|$~Source compilations~$|$~Difference~$|$~Magnitude~$|$~Sprint
+reference $+$ Verdict.}
 
 \begin{table}[h]
 \centering\small
-\caption{Literature convention exposures catalogued to date (V.D.2--V.D.6
-through 2026-05-10; V.D.7--V.D.9 subsequently).
-Each row is documented in detail in the indicated subsection
-(originating sprint memo) and cross-references the
-\S~\ref{sec:layer2} projection chain whose operator-level
-decomposition exposed it.  V.D.5 and V.D.6 added 2026-05-10 by the
-V.D-prediction sprint testing Pattern C from the 2026-05-09 synthesis review.}
+\caption{Literature itemization notes and framework-internal entries
+catalogued to date (V.D.2--V.D.9).  Each row is documented in the
+indicated subsection and cross-references the \S~\ref{sec:layer2}
+projection chain whose autopsy met it.}
 \label{tab:convention_exposures}
 \begin{tabular}{p{0.6cm} p{2.6cm} p{3.0cm} p{2.6cm} p{1.6cm} p{1.6cm}}
 \toprule
@@ -7588,7 +7411,7 @@ Eides Phys.\ Rep.\ Eq.~(158) closed-form vs operator-level
 $\langle r^2\rangle^{1/2} = r_p$ (RMS) vs $\langle r\rangle = r_p$
 (first moment) for the Gaussian profile &
 $\langle r^2\rangle/\langle r\rangle^2 = 3\pi/8 \approx 1.178$
-$\to$ $+17.7\%$ on the finite-size term (vs Eides; $+12.7\%$ vs Antognini) &
+$\to$ $+17.7\%$ on the finite-size term (vs Eides and Antognini~2013) &
 Sprint MH / Calc-muH Lamb autopsy v1 \\
 \S\ref{sec:conv_d_polarizability} & D 1S HFS polarizability channel &
 Bonilla \emph{et al.}~2025~\cite{bonilla2025} (single evaluation) &
@@ -7596,18 +7419,17 @@ none established; the channel is not consumed by the chain &
 $+336.5$~ppm polarizability vs $+135.9$~ppm TPE total &
 V.D-prediction sprint, 2026-05-10 \\
 \S\ref{sec:conv_he_bethe_log} & He $2{}^3P$ fine structure (29~GHz; $\alpha$-determination) &
-Drake~1990 / Drake--Yan~1995 vs Pachucki--Yerokhin~2009 (PRA \textbf{79}, 062516) &
-Drake's original relativistic Bethe-log itemization was numerically incorrect; PY reevaluated and resolved a 3$\sigma$ disagreement on $\nu_{01}$ &
+Drake~1990 / Drake--Yan~1995; Pachucki--Yerokhin~2009 (PRA \textbf{79}, 062516) &
+PY 2009 recomputed the relativistic Bethe log; $\nu_{01}$ still differs from experiment by $\sim3\sigma$ (theory vs experiment, not an itemization difference) &
 $\sim$kHz on 29~GHz; $\sim 30$~ppb on $\alpha$ &
 V.D-prediction sprint, 2026-05-10 \\
 \S\ref{sec:conv_d_polarizability_mud_lamb} &
 $\mu$d 2$S$--2$P$ Lamb polarizability &
-Carlson--Gorchtein--Vanderhaeghen~2014 vs Carlson--Vanderhaeghen~2011 &
-2014 evaluation reports nuclear polarizability $+1.690(20)$ meV
-(QCD-internal NN dynamics);
-2011 evaluation reported $+1.94$ meV.
-The two convergent QCD evaluations differ at ~$13\%$ on the
-\emph{dominant} Layer-2 contribution to $\mu$d Lamb shift &
+Hernandez \emph{et al.}\ 2014, Friar 2013~\cite{friar2013}, Carlson--Gorchtein--Vanderhaeghen
+2014, as listed by Krauth~2016 &
+$1.690(20)$, $1.941$ and $2.01(74)$~meV; the spread is mostly
+whether a $-0.263$~meV Coulomb-distortion term is included, as
+Krauth~2016 states &
 $\sim 13\%$ on Layer-2 $\to$ $\sim 0.25$~meV; dominates the
 framework's own $-0.12\%$ residual on the Lamb shift &
 Multi-track Roothaan sprint Track~1, 2026-05-18 \\
@@ -7644,7 +7466,7 @@ Sub-sprint M-Z, 2026-05-23 \\
 
 \textbf{Observable.}  Muonic hydrogen Lamb shift VP one-loop
 component, the dominant ($\sim +205$~meV out of $+202.37$~meV total)
-contribution to the CREMA 2010 measurement.  Documented in the
+contribution to the CREMA measurement.  Documented in the
 \S\ref{sec:autopsy_muh_lamb} Roothaan autopsy.
 
 \textbf{Source compilations.}  Both routes are columns of one table,
@@ -7666,10 +7488,7 @@ reconciled values agree to $0.5$~ppm.
 Sprint Calc-muH Lamb autopsy v1 (\S\ref{sec:autopsy_muh_lamb}) met the
 split because the full-Uehling kernel matches the perturbative line at
 $-0.10$~ppm.  The split and its reconciliation are in the source; the
-autopsy found nothing the source does not state.  An earlier version
-attributed the $205.0282$~meV line to ``Krauth~2017'', a conference
-report (arXiv:1706.00696) with no component table, and called the
-split unreconciled; both are withdrawn.
+autopsy found nothing the source does not state.
 \textbf{Closure verdict:} closed in the literature; the $\mu$H Lamb
 autopsy uses the perturbative line.
 
@@ -7699,8 +7518,8 @@ $(Z\alpha)^4$ finite-nuclear-size correction in the
 \S\ref{sec:autopsy_muh_lamb} Lamb-shift autopsy (Component~3).
 
 \textbf{Source compilations.}  Eides Phys.\ Rep.\ Eq.~(158) closed-form derivation
-(used as the Antognini~2013 reference value $-3.84$~meV at $r_p =
-0.84087$~fm) and the framework's operator-level realization via the
+(the same leading term as Antognini~2013, Eq.~(13): $-5.1994\,r_p^2$~meV,
+$-3.677$~meV at $r_p = 0.8409$~fm) and the framework's operator-level realization via the
 \S\ref{sec:proj_magnetization_density} module
 \texttt{geovac.magnetization\_density}.
 
@@ -7717,19 +7536,17 @@ constant $4/\pi \approx 1.27$].
 
 \textbf{Magnitude.}  $+17.7\%$ overshoot on the finite-size term vs the
 Eides closed form (operator-level $-4.33$~meV vs $-3.68$~meV at fixed
-$r_p$; $+12.7\%$ vs the Antognini itemization value $-3.84$~meV).
+$r_p$).
 This is $(3\pi/8)\times$ the closed-form value to $0.1\%$ relative
 precision.
 
 \textbf{Sprint reference and closure.}  Sprint Calc-muH Lamb autopsy v1
 (2026-05-08, \S\ref{sec:autopsy_muh_lamb} Operator-level finite-size
 paragraph) surfaced the discrepancy by computing the finite-size term
-both ways: closed-form Eides reproduction matches Antognini~2013 at
-$-4.3\%$, while operator-level realization overshoots Antognini by
-$+12.7\%$, with the ratio between the two paths equal to the
-three-dimensional Gaussian profile factor $3\pi/8$ to $0.13\%$
-[corrected 2026-08-29: an earlier version said $4/\pi$ to sub-percent
-precision; $4/\pi$ is the two-dimensional constant and fails by $8\%$].
+both ways: the closed-form Eides reproduction matches Antognini~2013's
+Eq.~(13) to $0.04\%$, while the operator-level realization overshoots
+it by $17.8\%$, with the ratio between the two paths equal to the
+three-dimensional Gaussian profile factor $3\pi/8$ to $0.13\%$.
 \textbf{Closure verdict:} flagged for a sibling
 \texttt{MagnetizationDensitySpec} calibrated to RMS radius for the
 Lamb-shift FNS channel, distinct from the existing first-moment
@@ -7773,12 +7590,10 @@ Eides et al.\ Phys.\ Rep.\ Eq.~(414).
 the framework's projection chain does \emph{not} consume any
 polarizability input --- the only Layer-2 scalar entering the D chain
 is $r_Z(D)$ (\S\ref{sec:autopsy_d_hfs}), which is why the residual is
-$-210.9$~ppm and why this row is an open case for
-Prediction~\ref{pred:l2_presence}.  The channel's itemization therefore
+$-210.9$~ppm and why this row violates
+Observation~\ref{pred:l2_presence}.  The channel's itemization therefore
 does not yet propagate into the residual; it becomes
-live the moment a polarizability channel is added, and at that point
-the itemization spread ($+336.5$~ppm inelastic vs the $+135.9$~ppm
-total) is the leading systematic on the input.
+live the moment a polarizability channel is added.
 
 \textbf{Cross-references.}  Cross-references
 \S\ref{sec:autopsy_d_hfs} ``Why D Layer-2 is deeper than H Layer-2''
@@ -7800,126 +7615,51 @@ $\alpha$ to $\sim 30$~ppb.  Documented in the
 and D.~A.~Micha, Plenum, NY, 1993): original itemization of relativistic
 Bethe-log term and combining coefficients $(3/50, -2/5, 3/2, -1)$
 that GeoVac uses sympy-exactly (Sprint~4 DD).
-Pachucki--Yerokhin~2009 (PRA \textbf{79}, 062516, 2009 ``Reexamination
-of helium fine structure''; cf. Pachucki--Yerokhin~2011 Can.~J.~Phys.
-\textbf{89}, 95, arXiv:1011.1370): reevaluated the relativistic
-Bethe-log term and resolved a 3$\sigma$ disagreement on $\nu_{01}$
-that Drake's earlier itemization had with experiment.
+Pachucki--Yerokhin~2009 (PRA \textbf{79}, 062516, 2009): a more
+accurate calculation of the relativistic correction to the Bethe
+logarithm.
 
-\textbf{Convention difference.}  Pachucki and Yerokhin
-(PRA \textbf{79}, 062516, 2009) explicitly state they ``eliminated this
-[3$\sigma$] disagreement [vs Drake on $\nu_{01}$] by reevaluating the
-relativistic Bethe logarithm term.''  Pachucki and Sapirstein
-``pointed out several computational mistakes and inconsistencies in
-earlier calculations, and eventually the results turned out to be
-consistent after Drake revised the sign'' (per literature retrieval).
-This is a textbook example of inter-compilation itemization correction
-at the $\alpha^3 (Z\alpha)^2$ multi-loop level, sitting inside the
-LS-8a renormalization-wall budget that the framework does not capture.
+\textbf{Difference.}  Earlier calculations by Drake and by
+Pachucki--Yerokhin disagreed with experiment; after the 2009
+recomputation the small interval $\nu_{12}$ agrees with experiment and
+the large interval $\nu_{01}$ still differs by about $3\sigma$
+(Pachucki--Yerokhin~2009, abstract).  This is a theory--experiment
+difference, not an itemization difference between compilations.  It
+lies in the $\alpha^3(Z\alpha)^2$ sector that the framework attributes
+to its LS-8a wall; the framework's residuals are $-0.014\%$ on
+$P_0 - P_1$, $-0.20\%$ on $P_0 - P_2$ and $-2.62\%$ on $P_1 - P_2$
+(\S\ref{sec:autopsy_he_2_3p}).
 
-The relativistic Bethe-log term is part of the $\alpha^3(Z\alpha)^2$
-multi-loop sector that the GeoVac framework attributes to its LS-8a
-structural wall.  The framework's residual on $P_0 - P_1$ is
-$-0.014\%$, on $P_0 - P_2$ is $-0.20\%$, on $P_1 - P_2$ is $-2.62\%$
-from partial-cancellation amplification (see \S\ref{sec:autopsy_he_2_3p}).
-The Drake-vs-Pachucki--Yerokhin convention difference lives inside
-this same budget.
+\textbf{Magnitude.}  Few kHz on the 29~GHz $\nu_{01}$ interval,
+$\sim 0.1$~ppm.
 
-\textbf{Magnitude.}  $\sim$kHz on the 29~GHz $\nu_{01}$ interval
-(Pachucki--Yerokhin's revised value $29\,616\,946.2$~kHz vs Drake's
-older value disagreeing at the 3$\sigma \sim$few~kHz level).  In
-ppm: $\sim 0.1$~ppm on $\nu_{01}$.  In $\alpha$-determination units:
-the helium $2{}^3P$ fine structure determines $\alpha$ to $\sim 27$-$31$~ppb;
-the Bethe-log reevaluation was the load-bearing fix for the discrepancy
-that earlier $\alpha$-determination work had against alternative
-determinations.
-
-\textbf{Sprint reference and closure.}  V.D-prediction sprint, 2026-05-10
-(\texttt{debug/v\_d\_prediction\_sprint\_memo.md} Candidate~C); refines
-the \S\ref{sec:autopsy_he_2_3p} Three-class diagnosis paragraph's
-``Class~A: NEGATIVE'' statement, which was correct at LO Breit-Pauli
-only, not at the $\alpha^3(Z\alpha)^2$ multi-loop level where the
-relativistic Bethe-log reevaluation lives.  \textbf{Closure verdict:}
-this entry is the strongest of the V.D-prediction sprint candidates
-because the literature explicitly documents both the disagreement
-(Drake--Pachucki--Yerokhin original 3$\sigma$ split) and its resolution
-(Pachucki--Yerokhin~2009 Bethe-log reevaluation, with Drake's subsequent
-agreement after sign revision per Pachucki--Sapirstein).  It is not an
-inferred convention split but an explicitly noted correction in the
-published record.
-
-\textbf{Cross-references.}  Originating documentation: this sprint memo.
-Refines \S\ref{sec:autopsy_he_2_3p} ``Three-class diagnosis'' paragraph
-(``Class~A: NEGATIVE'' statement now read as ``Class~A: NEGATIVE at LO
-Breit-Pauli, POSITIVE at $\alpha^3(Z\alpha)^2$ multi-loop level'').
-Cross-references \S\ref{sec:offprecision} He $2{}^3P$ catalogue rows.
+\textbf{Verdict.}  Not a convention exposure; recorded in the literature
+as an open theory--experiment difference.
 
 \subsubsection{$\mu$d 2$S$--2$P$ Lamb deuteron polarizability
-(Carlson--Gorchtein--Vanderhaeghen vs Carlson--Vanderhaeghen)}
+(three evaluations)}
 \label{sec:conv_d_polarizability_mud_lamb}
 
 \textbf{Observable.}  Muonic deuterium 2$S_{1/2}$--2$P_{1/2}$ Lamb
 shift $\Delta E = 202.8785(34)$ meV (Pohl~et~al., CREMA 2016).
 The dominant Layer-2 contribution to the theoretical prediction
-is the deuteron nuclear polarizability, a QCD-internal evaluation
-of virtual photonuclear excitations between the bound $n+p$ system.
+is the deuteron nuclear polarizability.
 
-\textbf{Source compilations.}  Carlson--Gorchtein--Vanderhaeghen 2014
-(\emph{Phys. Rev. A} \textbf{89}, 022504): $+1.690(20)$ meV.
-Carlson--Vanderhaeghen 2011 (earlier evaluation, distinct
-sub-channel decomposition): $+1.94$ meV.  Two distinct QCD-internal
-evaluations, both anchored to deuteron photoabsorption data, with
-the 2014 update including refined sub-leading contributions
-(elastic-inelastic interference, subtraction-function refinement,
-finite-nuclear-size corrections to the polarizability kernel).
+\textbf{Source compilations.}  Krauth~2016~\cite{krauth2016} lists
+three evaluations: Hernandez \emph{et al.}\ 2014, $1.690(20)$~meV;
+Friar 2013~\cite{friar2013}, $1.941$~meV; Carlson--Gorchtein--Vanderhaeghen 2014
+(\emph{Phys. Rev. A} \textbf{89}, 022504), $2.01(74)$~meV.
 
-\textbf{Convention difference.}  The 2014 evaluation explicitly
-splits the nuclear-structure correction into three sub-contributions
-(elastic intermediate states, inelastic photoabsorption, subtraction
-function); the 2011 evaluation used a broader-aggregate treatment
-that produced a $\sim 0.25$~meV larger value.  Both evaluations
-converge to the same physical mechanism (virtual photoabsorption
-between $n+p$ via the muonic Lamb shift kinetic energy); they
-differ in how the QCD content is itemized.
+\textbf{Difference.}  Krauth \emph{et al.}\ attribute most of the
+spread to a Coulomb-distortion term of $-0.263$~meV that not every
+evaluation includes; with it the third value becomes $1.748$~meV.
 
-\textbf{Magnitude.}  $\sim 13\%$ spread on the \emph{dominant}
-Layer-2 contribution at $\mu$d Lamb shift ($+1.69$ meV vs
-$+1.94$ meV; $\sim 0.25$ meV absolute).  At the framework's
-$-0.12\%$ Lamb-shift residual, the convention choice between the
-two QCD evaluations sets whether the framework reads as
-``sub-percent closure'' (with CGV~2014 anchoring, $-0.12\%$) or
-``over-shoots experiment by $+0.12\%$'' (with CV~2011 anchoring,
-$+0.12\%$).  The framework's own residual is at the same precision
-as the spread between the two QCD evaluations.
+\textbf{Magnitude.}  $\sim 0.25$~meV between the extremes.  The
+framework's $-0.12\%$ Lamb-shift residual uses $1.690$~meV; with
+$1.941$~meV in its place the residual closes to $\sim 0$.
 
-\textbf{Three-class tag.}  Class~(i) inter-compilation itemization,
-distinct from \S\ref{sec:conv_d_polarizability} (deuteron HFS
-polarizability channel, no convention claim):
-this entry is between two QCD nuclear-structure evaluations of
-the deuteron polarizability.  Cross-references the
-\S\ref{sec:autopsy_mud_lamb} ``Convention-mismatch surface''
-paragraph and W3 inner-factor wall (CLAUDE.md~\S1.7).
-
-\textbf{Verdict (multi-track Roothaan sprint Track~1, 2026-05-18):
-CONFIRMED.}  The two QCD evaluations explicitly disagree at $\sim
-13\%$ on the dominant Layer-2 line of a precision-frontier
-observable.  This is the first explicit Class~(i) convention
-exposure originating in a QCD-internal sub-component evaluation
-rather than an atomic-physics itemization compilation.  Refines
-the broader W3 inner-factor calibration question to a specific
-operational instance: until the deuteron polarizability convention
-is reconciled at the framework-residual scale, multi-observable
-extractions involving the deuteron ($\mu$d Lamb, D 1S HFS,
-isotope-shift extractions of $r_d$) cannot reach beyond the
-$\sim 13\%$ Layer-2-determined precision.
-
-\textbf{Cross-references.}  Originating documentation:
-\texttt{debug/muD\_Lamb\_autopsy\_track1\_memo.md}.  Refines
-\S\ref{sec:autopsy_mud_lamb} ``Convention-mismatch surface''
-paragraph.  Sibling to \S\ref{sec:conv_d_polarizability}
-(D HFS polarizability sub-component; different observable, same
-W3 inner-factor wall).  Cross-references CLAUDE.md~\S1.7
-multi-focal-composition wall taxonomy W3.
+\textbf{Verdict.}  Stated and explained in the literature
+(Krauth~2016); the autopsy adds no finding.
 
 \subsubsection{Alkali $n$s valence HFS multi-electron contact-density
 cliff (class~(iii): framework architecture)}
@@ -7927,7 +7667,7 @@ cliff (class~(iii): framework architecture)}
 
 \textbf{Observable.}  Alkali-atom ground-state hyperfine splittings on
 single-zeta hydrogenic basis; concretely Li-7 $2{}^2S_{1/2}$
-HFS = $803.504086(34)$~MHz (Beckmann--Boklen--Elke 1974), with
+HFS = $803.5040866(10)$~MHz (Beckmann--Boklen--Elke 1974), with
 generalization to Na, K, Rb, Cs (all alkali $n$s valence HFS share
 the same mechanism).  Originating sprint: multi-track Roothaan
 sprint Track~5, 2026-05-18 (\S\ref{sec:autopsy_li7_hfs}).
@@ -7970,7 +7710,8 @@ every alkali valence HFS, with the deficit increasing along the series.
 
 \textbf{Class.}  This is a class~(iii) exposure --- \emph{framework
 architecture limitation}, distinct from class~(i) inter-compilation
-itemization (entries V.D.2, V.D.3, V.D.6, V.D.7)
+itemization (entries V.D.2 and V.D.7; V.D.3 is withdrawn and V.D.6 is a
+theory--experiment difference)
 and class~(ii) closed-form vs operator-level convention (entry V.D.4
 Friar profile RMS-vs-first-moment).  Class~(iii) exposes a structural
 property of the GeoVac graph-native basis choice (single-zeta
@@ -8501,22 +8242,17 @@ correlation closeout), and CLAUDE.md~\S1.7 multi-focal-composition
 wall taxonomy.
 
 \paragraph{Cross-pattern observation.}
-The exposures partition into \emph{four} structural classes.
+The entries partition into structural classes.
 \emph{Class~(i) inter-compilation itemization} (entries
 \S\ref{sec:conv_muH_VP},
 \S\ref{sec:conv_karshenboim_recoil},
 \S\ref{sec:conv_he_bethe_log},
 \S\ref{sec:conv_d_polarizability_mud_lamb}):
-four of the eight exposures (one of them, the muonium recoil
-aggregation, now withdrawn) are between Karshenboim~2005,
-Drake~1990 / Drake--Yan~1995, Pachucki--Yerokhin~2009,
-Antognini~2013, Carlson--Gorchtein--Vanderhaeghen~2014 / Carlson--Vanderhaeghen~2011 compilations on items at
-sub-percent precision.  The pattern is consistent: most precision-physics
-compilations agree on bottom-line totals but differ in itemization at
-the $10^{-4}$ to $10^{-3}$ level.  This is exactly the precision range
-the framework's projection-chain decomposition operates at, hence the
-surface contact between the framework's diagnostic instrument and
-the literature compilations.  \emph{Class~(ii) closed-form vs
+four entries, one of them (the muonium recoil aggregation) withdrawn
+and one (He $2{}^3P$) a theory--experiment difference rather than an
+itemization one.  The remaining two are stated in their sources:
+Antognini~2013 reconciles its two routes, and Krauth~2016 explains the
+deuteron polarizability spread.  \emph{Class~(ii) closed-form vs
 operator-level convention} (entry \S\ref{sec:conv_friar_profile}):
 one exposure is between Eides closed-form derivation (which assumes
 RMS-radius input) and the framework's operator-level realization
@@ -8552,114 +8288,14 @@ is a diagnosis, not a framework prediction --- it consumes $\nu$ from
 the measured ionization energy, so it is a Layer-2-fed account of the
 cliff's size, and its value is that it identifies \emph{which}
 structural quantity the basis is missing.
-All four classes vindicate the directive's finding types (class~(iv),
-the architectural-absence family, is tagged row-by-row in the table):
-decomposing several observables with a single dictionary exposes
-itemization choices that single-observable analyses cannot see.
 
-\textbf{Pattern broadening (V.D-prediction sprint, 2026-05-10).}  V.D.5
-(D HFS polarizability channel) is HFS-class.  V.D.6 (He $2{}^3P$ relativistic Bethe-log) is
-\emph{Lamb-class precision spectroscopy}, NOT strictly HFS.  The
-running pattern is therefore best read as ``precision-spectroscopy
-observables with multi-component Layer-2 decomposition'' rather than
-``HFS-only.''  All five entries (V.D.2--V.D.6) remain in the same general category:
-observables where the framework operates at sub-percent precision and
-where multiple independent compilations exist with potentially different
-itemizations.  The next falsifier-test for this pattern is to attempt
-\S~V.D entries on (a) heavy-atom HFS at coarse experimental precision
-(Cs, Rb), (b) molecular vibrational/rotational spectroscopy, or (c)
-non-precision atomic spectra.  If 0 of those land class-(i), Pattern C
-tightens to ``exclusive to high-precision atomic spectroscopy with
-multi-loop QED $+$ nuclear-structure budgets.''
-
-\paragraph{Protocol for adding new exposures.}
-Each future sprint that surfaces a class~(a) finding adds a new
-\S~V.D.$N$ subsection following the five-element template:
-\emph{Observable~$|$~Source compilations~$|$~Convention difference~$|$
-~Magnitude~$|$~Sprint reference $+$ Closure verdict.}  The exposure
-is also added as a row to Table~\ref{tab:convention_exposures}.
+\paragraph{Protocol for adding new entries.}
+Each new entry adds a \S~V.D.$N$ subsection following the five-element
+template above and a row in Table~\ref{tab:convention_exposures}.
 Each entry should cross-reference the \S~\ref{sec:layer2} projection
 chain whose operator-level decomposition surfaced the convention
 difference, and the originating documentation in the catalogue
 (\S\ref{sec:catalog}, \S\ref{sec:offprecision}, or \S\ref{sec:autopsies}).
-The catalogue is a running register; expect it to grow as the
-multi-observable focal-length decomposition program (CLAUDE.md
-\S~1.8) advances.
-
-\paragraph{Predictive refinement: where to look for the next
-exposures.} % Source: synthesis pass §3.4 Pattern C predictions.
-The original entries all involve hyperfine-class or muonic-Lamb
-observables.  The mechanism is structural: HFS observables decompose
-into many sub-leading Layer-2 corrections at sub-percent precision
-(leading Zemach, recoil, finite-size, multi-loop QED,
-polarizability, hadronic VP), each compiled differently across
-Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007}, Karshenboim~2005, Krauth~2016~\cite{krauth2016}
-and Friar--Payne~2005.  Sub-percent itemization differences
-compound at exactly the precision the framework operates at.  This
-suggests three pre-named candidate observables for the next
-class~(a) findings, in decreasing prior probability:
-\begin{enumerate}\setlength\itemsep{0pt}
-\item \textbf{Deuteron polarizability convention.}  Pachucki--Yerokhin
-2010 versus Friar--Payne~2005 itemization of the deuteron
-polarizability contribution to D HFS.  Expected magnitude: tens of
-ppm.  \textbf{Verdict: NOT CONFIRMED} --- no Pachucki--Yerokhin
-itemization of D HFS could be sourced (their 2009--2010 papers treat
-helium fine structure); the sourced polarizability channel is recorded
-in V.D.5 (\S\ref{sec:conv_d_polarizability}) without a convention claim.
-\item \textbf{Positronium HFS annihilation channel itemization.}
-Czarnecki--Melnikov--Yelkhovsky~2000 versus Karshenboim~2005
-itemization of the $\alpha^5$ corrections to the Ps 1S annihilation
-contribution.  Expected magnitude: $\sim 100$ ppm of LO HFS.
-\textbf{Verdict (V.D-prediction sprint, 2026-05-10): INCONCLUSIVE} ---
-the three relevant compilations (CMY 2000, Karshenboim 2005,
-Adkins--Czarnecki 2014) operate at three different orders of the
-expansion (m$\alpha^6$, review-aggregate, m$\alpha^7$) and are not
-in convention conflict at the sprint scope; flagged for follow-up
-PDF-level diagnostic (sprint-scale) on Karshenboim 2005 \S~6.2-6.5
-[section anchor under re-verification 2026-08-29: the review's TOC
-places positronium in \S~9 and \S~6 covers light hydrogen-like HFS;
-cf.\ the \S~4$\to$\S~9 correction]
-vs CMY 2000 vs Adkins--Czarnecki 2014.
-\item \textbf{Helium fine-structure $\alpha^3 (Z\alpha)^2$
-itemization.}  Drake~1971 versus Pachucki--Yerokhin~2010
-itemization of higher-order Breit--Pauli plus multi-electron
-spin-spin / spin-other-orbit content.  Expected magnitude: tens of
-MHz on GHz-scale intervals.  This is the only Lamb-class candidate
-in the predicted set; the other two are HFS-class.
-\textbf{Verdict (V.D-prediction sprint, 2026-05-10): CONFIRMED $\to$
-V.D.6 (\S\ref{sec:conv_he_bethe_log})} --- Pachucki--Yerokhin~2009
-(PRA \textbf{79}, 062516) explicitly resolved a 3$\sigma$ disagreement
-with Drake on $\nu_{01}$ by reevaluating the relativistic Bethe-log
-term, with magnitude $\sim$kHz on the 29~GHz observable
-($\sim 30$~ppb on $\alpha$ determination).  This is the strongest of
-the three V.D-prediction sprint candidates because the literature
-explicitly documents both the disagreement and its resolution.
-\end{enumerate}
-The protocol classifies entries by predicted observable class:
-class-(i) literature-itemization (V.D.2, V.D.3, V.D.6
-of the existing catalogue) versus class-(ii) closed-form-vs-operator-level
-(V.D.4 of the existing catalogue).  Future sprints adding entries
-should tag which class the new entry falls under.
-
-\textbf{Pattern C status (2026-05-10).}  After the V.D-prediction sprint:
-5/5 of the \emph{then-catalogued} \S~V.D entries (V.D.2--V.D.6; the
-2026-08 catalogue has eight, and the later architecture/wall-class
-additions are not spectroscopy observables, so Pattern~C is a statement
-about these five) are precision-spectroscopy class observables
-(HFS, muonic-Lamb, or Lamb-class fine structure).  Pattern C is
-\textbf{CONFIRMED at n=5 and STRENGTHENED}; the pattern broadens
-slightly from ``HFS-only'' to ``precision-spectroscopy with
-multi-component Layer-2 decomposition'' (V.D.6 is Lamb-class He
-$2{}^3P$ fine structure, not strictly HFS).
-
-\textbf{What would falsify Pattern C.}  Pattern C says class-(i)
-entries arise only from precision spectroscopy.  A class-(i) entry on
-heavy-atom HFS at coarse experimental precision (Cs, Rb), molecular
-vibrational/rotational spectroscopy, or non-precision atomic spectra
-falsifies it.  If those observables are examined and none yields a
-class-(i) entry, the pattern tightens to ``exclusive to high-precision
-atomic spectroscopy with multi-loop QED $+$ nuclear-structure
-budgets''.
 
 % -------------------------------------------------------------------
 \subsection{Falsified candidate: W3 spectral-zeta identification of
@@ -8886,7 +8522,7 @@ rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}
 25 & Coupled-channel / adiabatic curve & T.F. & M & ODE machinery; transcendental inherits from Fock. \\
 26 & Gauge choice (Coulomb/Lorenz/Feynman) & W.M.F. & MH & Coulomb-gauge $1/(4\pi)$ is the vertex model's normalization (Paper~33); Ward identity is standard QED, not established on the graph. \\
 27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; Krein-space period closure bit-exact but signature-blind --- Lorentzian ``literal identification'' withdrawn 2026-06 (compact-boost / $K^+$ descope; \S~\ref{sec:proj_wick_rotation}). \\
-28 & Apparatus identity / state-side & T.F. & MH & State-side; PSLQ-disjoint from master Mellin engine. \\
+28 & Apparatus identity / state-side & T.F. & MH & State-side; PSLQ null against the master Mellin engine. \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -9229,8 +8865,7 @@ transcendental side.  See Remark~\ref{rem:vd_correlation} in
 projection-row level.
 
 % ===================================================================
-\section{Falsifiable Prediction: Layer-2-Presence Bound on
-Catalogue Residuals}
+\section{Layer-2-Presence Bound on Catalogue Residuals (Observation)}
 \label{sec:prediction}
 % Source: May 2026 synthesis pass (debug/synthesis_pattern_review_memo.md
 % §2 Pattern B falsification, §2.4 Layer-2-content axis, §2.5 replacement
@@ -9259,29 +8894,28 @@ The residual is bounded
 by basis quality alone --- error code~B in the
 \S~\ref{sec:offprecision} system --- when the chain consumes no
 external Layer-2 input.
-\item \textbf{L2-count $= 1$ (one external scalar).}  Residuals
-tighten to tens of ppm or sub-ppm --- with the known exception of the
-corrected D 1S HFS row at $-210.9$~ppm (\S\ref{sec:autopsy_d_hfs}),
-an open case for this class, and one now diagnosed: the D chain is
-missing a nuclear-structure channel rather than mis-consuming its
-input, and a chain consuming the sourced two-photon-exchange total
-would land at $+23.0$~ppm, inside this class --- (H 21cm HF-4 with Zemach $r_Z$ at
-$+18$~ppm; muonium 1S--2S under rest-mass projection at $-0.11$~ppm;
-$\mu$H 1S Bohr--Fermi at $+2$~ppm).  The single Layer-2 input is
-always a scalar parameter and its uncertainty propagates linearly.
+\item \textbf{L2-count $= 1$ (one external scalar).}  No row in the
+catalogue is at present limited by its one input.  The H~21cm HF-4
+residual of $+18$~ppm is the omitted Breit and binding terms
+(\S\ref{sec:autopsy_21cm}), while its Zemach input moves it by
+$0.34$~ppm; the corrected D 1S HFS row at $-210.9$~ppm exceeds its
+single $r_Z(D)$ input ($98$~ppm) and violates the bound
+(\S\ref{sec:autopsy_d_hfs}); the $\mu$H 1S HFS row at $-0.72\%$ is not
+itemized.  The $\mu$H 1S Bohr--Fermi row at $+2$~ppm checks a formula
+against Eides' Bohr--Fermi value and consumes no input.
 \item \textbf{L2-count $= 2$+ (multi-focal-wall regime).}  Residuals
 are dominated by the largest single Layer-2 contribution.  Mu HFS
-at $+199$~ppm is the cleanest LS-8a-class isolation (no QCD nuclear
-budget); positronium 1S--2S at $+64.75$~ppm framework-native is
-closed by the $\alpha^4$ Breit Layer-2 input as the
-\S~\ref{sec:proj_breit_retardation} sixteenth projection;
+sits at $+199$~ppm with its residual not itemized; positronium 1S--2S
+at $+64.75$~ppm framework-native closes only by construction (its
+$\alpha^4$ Breit input is calibrated against the complete theory), so
+it does not test the bound;
 $\mu$H Lamb at $-0.10\%$ (a textbook one-loop assembly, not a
 projection chain) closes by Antognini~2013 multi-loop QED
 plus proton polarizability plus recoil~NLO with the K\"all\'en--
 Sabry two-loop VP dominating.
 \end{itemize}
 
-\begin{prediction}[Layer-2-presence bound on catalogue residuals]
+\begin{observation}[Layer-2-presence bound on catalogue residuals]
 \label{pred:l2_presence}
 The residual error of a catalogue row is bounded above by the
 larger of (i)~the framework's basis-quality residual at zero
@@ -9299,28 +8933,19 @@ downstream proxy: it correlates with opportunity for compounding
 when the chain consumes Layer-2 inputs, but it fails in both
 directions when the chain does not (deep zero-L2 chains can be
 exact, shallow multi-L2 chains can have large residuals).
-\end{prediction}
+\end{observation}
 
-This is a falsifiable structural claim about the framework, not a
-phenomenological fit.  The catalogue rows above are consistent
-with it, with one known exception introduced by the 2026-08-28
-correction: the D 1S HFS row (\S\ref{sec:autopsy_d_hfs}), whose
-corrected $-210.9$~ppm residual against a single $r_Z(D)$ Layer-2
-input is not bounded on the ppm-class reading, and is therefore an
-open case for this Prediction rather than support for it.
-\emph{Status (2026-08-29):} the exception is now diagnosed rather
-than merely recorded.  It is a \emph{missing-channel} failure, not a
-counterexample to the bound's logic: the D chain omits the
-polarizability channel entirely (\S\ref{sec:autopsy_d_hfs}), and a
-chain consuming the sourced total two-photon-exchange correction
-($44.5(1.1)$~kHz $= +135.9$~ppm; Bonilla \emph{et al.},
-arXiv:2508.18776) would sit at $+23.0$~ppm --- the same sign and
-class as the architecturally identical H~21cm row at $+18.4$~ppm.
-That is a \emph{prediction} of what building the channel should
-produce, and it is the sharpest available test of this Prediction:
-if the channel is built and the row does not land in the
-tens-of-ppm class, the Prediction is falsified on a row that was
-chosen for it in advance.  The bound,
+This is an Observation, not a prediction.  The zero-input class is
+consistent with the catalogue.  The one-input class has no clean
+member, and the corrected D 1S HFS row violates the bound: its
+$-210.9$~ppm residual exceeds its single $r_Z(D)$ input.  The violation
+is diagnosed: the D chain omits the polarizability channel
+(\S\ref{sec:autopsy_d_hfs}), and with the sourced total two-photon-exchange
+correction ($44.5(1.1)$~kHz $= +135.9$~ppm; Bonilla \emph{et al.},
+arXiv:2508.18776) the row would sit at $+23.0$~ppm, which the
+higher-order terms of Table~XIX of Eides \emph{et al.}\ ($+25.3$~ppm)
+account for to $2.3$~ppm.  On the bound's own terms it remains a
+violation.  The bound,
 the depth-linear falsification below, and the
 three exact L2-count~$=0$ anchors (the spatial $S^3$ Casimir
 $\tfrac{1}{240} = \tfrac12\zeta_R(-3)$, the Stefan--Boltzmann
@@ -9330,8 +8955,8 @@ pinned in
 \texttt{tests/test\_paper34\_l2\_presence\_bound.py} (the polarizability
 by a genuine symbolic solve there; the two zeta anchors as identities
 whose from-scratch derivations live in
-\texttt{tests/test\_paper35\_kg\_panel.py}).  Tests for the
-prediction:
+\texttt{tests/test\_paper35\_kg\_panel.py}).  Tests of the
+observation:
 \begin{itemize}\setlength\itemsep{0pt}
 \item Any new framework-native chain (L2-count $= 0$) producing a
 rational-analytic answer should land at residual~$0$ at converged
@@ -9342,8 +8967,10 @@ residual bounded by the uncertainty on that input.
 its residual dominated by the largest single Layer-2 input,
 not by the sum or quadrature.
 \end{itemize}
-A failure of the prediction would take one of three forms:
-(a)~a catalogue row with L2-count $= 0$ and residual greatly
+A failure of the bound would take one of four forms:
+(o)~a row whose residual exceeds
+$\max(\epsilon_\text{basis}, \max_i|L_2^{(i)}|)$ (the D 1S HFS row is
+one); (a)~a catalogue row with L2-count $= 0$ and residual greatly
 exceeding the framework's basis-quality limit (would indicate a
 structural artefact not yet identified); (b)~a catalogue row with
 L2-count $= 2+$ whose residual is smaller than the largest
@@ -9380,7 +9007,7 @@ The H~1S static dipole polarizability calculation (Sprint Calc-P,
 $\alpha_p(1S) = \tfrac{9}{2}\,a_0^3$ \emph{exactly} via a depth-3
 chain (Fock $\circ$ Wigner $3j$ $\circ$ Sturmian), residual~$=~0$.
 Under the Layer-2-presence bound of
-Prediction~\ref{pred:l2_presence} this is the structurally clean
+Observation~\ref{pred:l2_presence} this is the structurally clean
 ``L2-count $= 0$, rational analytic answer in finite-basis span''
 class: there are no external Layer-2 inputs in the chain, the
 analytic answer lies exactly within the framework's truncated
@@ -9398,7 +9025,7 @@ matrix-element machinery (rational arithmetic via
 produces the analytic answer with no truncation residual.
 
 This refines the L2-count $= 0$ class of
-Prediction~\ref{pred:l2_presence} along the transcendental axis:
+Observation~\ref{pred:l2_presence} along the transcendental axis:
 zero-Layer-2-input observables whose analytic answer is a pure
 rational with a closed-form representation in the framework's
 truncated basis land at residual $0$ at finite $n_\text{max}$;
@@ -9426,7 +9053,7 @@ them with a complementary axis.
 
 \paragraph{Versus Paper~18.}  Paper~18 tags the transcendental
 content of GeoVac observables (intrinsic, calibration, embedding,
-flow, composition).  Paper~34 classifies the projections that
+algebraic-implicit, composition).  Paper~34 classifies the projections that
 \emph{produce} that content.  The two classifications are
 duals: Observation~\ref{obs:duality} maps each Paper~18 tier to
 specific Paper~34 projections.  Reading direction~A
@@ -9454,11 +9081,12 @@ triple synthesis.
 partition is the same observation phrased on the algebra/Dirac side:
 features that depend only on $\mathcal{A}$ (e.g.\ angular sparsity)
 are universal, features that depend on $D_{\text{GV}}$ (e.g.\
-calibration $\pi$, the Hopf bundle's projection-$\pi$) are
-potential-specific.  Paper~34's claim is the same in projection
-language: zero-projection matches and Wigner-$3j$-only matches
-transfer between potentials, while spectral-action and Fock-conformal
-matches do not.
+the Fock conformal projection, unique to $-Z/r$) are
+potential-specific; Paper~31 records that $\pi$ enters on both sides,
+so where it enters does not separate them.  Paper~34's claim is the
+same in projection language: zero-projection matches and
+Wigner-$3j$-only matches transfer between potentials, while
+Fock-conformal matches do not.
 
 % ===================================================================
 \section{Open Questions}
@@ -9523,9 +9151,8 @@ rotation promotes the metric-functional-level content of the
 Bisognano--Wichmann reading (Sprint TD Track~4 + Sprint Unruh-pendant,
 May~2026) from a §VIII open-question candidate to a named §III
 projection slot; and apparatus identity opens the state-side
-complement of the dictionary, which Sprint TD Track~5's PSLQ negative
-proved is categorically distinct from the spectral-side master Mellin
-engine.
+complement of the dictionary, for which Sprint TD Track~5's PSLQ
+search found no relation to the spectral-side master Mellin engine.
 
 Sprint~3 (2026-05-15) closed three additional scoping candidates as
 ABSORBED into existing entries rather than promoted to §III slots:
@@ -9604,16 +9231,16 @@ along parities only).
 Decision pending on (a), (b), (e);\ structural progress on (c), (d) named
 in their respective entries below.
 
-\item \textbf{Quantitative form of Prediction~\ref{pred:l2_presence}.}
+\item \textbf{Quantitative form of Observation~\ref{pred:l2_presence}.}
 The Layer-2-presence bound replaces the falsified naive
 depth-vs-residual prediction (see
 Remark~\ref{rem:depth_falsification}).  Outstanding work:
 (i)~quantify the framework's basis-quality residual
 $\epsilon_\text{basis}(\text{framework})$ for each major chain
 class (NR variational class, graph-native CI class) so that the L2-count $= 0$ side of the
-prediction has a per-class quantitative bound; (ii)~test whether
+observation has a per-class quantitative bound; (ii)~test whether
 multi-Layer-2 chains are dominated by the largest single
-Layer-2 input (the prediction's claim) versus quadrature-sum or
+Layer-2 input (the observation's claim) versus quadrature-sum or
 worst-case sum; (iii)~classify whether ``rational analytic answer
 with finite-basis representation'' (Sprint Calc-P,
 Remark~\ref{rem:depth_refinement}) is a sub-class of L2-count $=
@@ -9622,10 +9249,10 @@ Remark~\ref{rem:depth_refinement}) is a sub-class of L2-count $=
 basis-quality limit.
 
 The hydrogen Lamb shift is not a datapoint for
-Prediction~\ref{pred:l2_presence}: its $-0.534\%$ is a textbook
+Observation~\ref{pred:l2_presence}: its $-0.534\%$ is a textbook
 one-loop assembly with tabulated Bethe logarithms that stops before the
 one-loop $\alpha(Z\alpha)^5$ term, and no GeoVac projection chain
-enters it (Paper~36).  Prediction~\ref{pred:l2_presence} applies to
+enters it (Paper~36).  Observation~\ref{pred:l2_presence} applies to
 converged-basis residuals of projection chains.
 
 \item \textbf{$K = \pi(B + F - \Delta) \approx 1/\alpha$.}
@@ -9641,7 +9268,7 @@ the plain sum).  Under
 the (now falsified) naive depth-vs-residual prediction this was
 the central anomaly: a three-projection match carrying
 $10^{-7}$ residual versus $\sim 3\%$ expected.  Under the
-Layer-2-presence bound of Prediction~\ref{pred:l2_presence} the
+Layer-2-presence bound of Observation~\ref{pred:l2_presence} the
 chain has L2-count $= 0$ (no external Layer-2 inputs are consumed),
 so the residual should sit at the framework's basis-quality limit
 for the chain class.  The framework's basis-quality limit for a
@@ -10113,7 +9740,8 @@ physics, no $\pi$.  Layer~2 is a finite family of named projections;
 each adds specific physical variables, specific physical
 dimensions, and specific transcendental content.  Every physical
 quantity in any GeoVac calculation enters through exactly one
-projection in Layer~2 and is fully traceable to it.
+projection in Layer~2 (apart from literature constants entered as external inputs, such as the
+textbook vacuum-polarization rows of the catalogue) and is fully traceable to it.
 
 The dictionary in this paper makes that statement operational.
 Twenty-eight projections are listed, each tagged by variables, dimension,
@@ -10156,9 +9784,8 @@ sector), Wick rotation
 promotes the
 Bisognano--Wichmann reading of the M1 mechanism from a \S~VIII
 open-question candidate to a named §III slot, and apparatus identity
-opens the state-side complement of the dictionary (which Sprint TD
-Track~5's PSLQ negative proved is categorically distinct from the
-master Mellin engine).  These nine additions bring the dictionary
+opens the state-side complement of the dictionary (for which Sprint TD
+Track~5's PSLQ search found no relation to the master Mellin engine).  These nine additions bring the dictionary
 count from nineteen to twenty-eight.  Sprint~3 (2026-05-15) tested
 three further candidates --- Tomita--Takesaki modular flow, loop
 expansion / $\alpha$-power-sorting, heat-kernel regularization / Schwinger
@@ -10188,17 +9815,13 @@ encoded by the current coarse layer-grading (Track TS-C, 2026-05-04);
 refining the output\_layer index to distinguish UV-cutoff, thermal,
 and flow Layer-2 outputs is the natural next step.  Of the three axes, only the
 transcendental axis is genuinely independent --- variable and
-dimension are perfectly correlated.  A falsifiable structural
-prediction (\S~\ref{sec:prediction}) emerges from the depth-grouped
-catalogue: the corrected reading is the Layer-2-presence bound
-articulated in \S\ref{sec:prediction} (the earlier ``error compounds
-with projection depth'' conjecture was falsified by the
-\S\ref{sec:autopsies} autopsy panel and replaced).  The corrected
-prediction is consistent with current data --- with the one known
-exception recorded in \S\ref{sec:prediction}, the corrected D 1S HFS
-row --- including the 208/208-confirmation panel of Paper~35
-Prediction~1 (Sprint TX-B, May~2026), and refinable by future
-calculations.
+dimension are perfectly correlated.  A structural Observation
+emerges from the depth-grouped catalogue: the Layer-2-presence bound
+of \S\ref{sec:prediction} (the earlier ``error compounds with
+projection depth'' reading was falsified by the
+\S\ref{sec:autopsies} autopsy panel and replaced).  The zero-input
+rows are consistent with it, the one-input class has no clean member,
+and the corrected D 1S HFS row violates it.
 
 Apart from Remarks~\ref{rem:minimal_presentation} and
 \ref{rem:ee_partial_split}, added after certification, this paper
@@ -10225,7 +9848,7 @@ Zemach radii credited to a paper that does not contain them (they are
 King~\emph{et al.}~2026), and a coefficient characterised as a source's
 ``closed form'' that does not appear in that source's text.
 
-\textbf{Resolved.}  Thirteen works are now in the bibliography with
+\textbf{Resolved.}  Fourteen works are now in the bibliography with
 volume/page/year verified against the primary text:
 Eides--Grotch--Shelyuto~2007~\cite{eides_grotch_shelyuto2007},
 Karshenboim~2005~\cite{karshenboim2005},
@@ -10247,10 +9870,9 @@ that the autopsies of \S\ref{sec:autopsies} actually consume.
 \textbf{Not yet resolved, and tracked.}  The remaining inline attributions
 still lack bibliography entries.  One deserves naming because it is
 load-bearing and ambiguous rather than merely unlisted: the
-$-(11/48)$ positronium Breit coefficient.  Its section anchor is now
-correct, but the literal fraction does not appear in that section's text
-and is the framework's own reduction, verified numerically at $0.57\%$
-(\S\ref{sec:offprecision}).
+$-(11/48)$ positronium Breit coefficient: no textbook source for the
+literal fraction has been located; the framework's reduction of its
+calibrated input is $-0.2279$, $0.54\%$ away (\S\ref{sec:offprecision}).
 
 The unresolved set is not left to memory: the deterministic check
 \texttt{debug/qa/check\_inline\_attributions.py} enumerates every inline
@@ -10525,6 +10147,18 @@ F. Hagelstein, V. Lensky, and V. Pascalutsa,
 ``Chiral perturbation theory of the hyperfine splitting in (muonic)
 hydrogen,''
 Eur.\ Phys.\ J.\ C \textbf{83}, 762 (2023); arXiv:2305.09633.
+
+\bibitem{puchalski_komasa_pachucki2020}
+M. Puchalski, J. Komasa, and K. Pachucki,
+``Hyperfine structure of the first rotational level in H$_2$, D$_2$ and HD
+molecules and the deuteron quadrupole moment,''
+Phys.\ Rev.\ Lett.\ \textbf{125}, 253001 (2020).
+
+\bibitem{friar2013}
+J.~L. Friar,
+``Nuclear polarization corrections to $\mu$-d atoms in zero-range
+approximation,''
+Phys.\ Rev.\ C \textbf{88}, 034003 (2013).
 
 \bibitem{friar_payne2005}
 J.~L. Friar and G.~L. Payne,

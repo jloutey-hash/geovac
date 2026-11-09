@@ -35,7 +35,41 @@
 > K = π(B+F−Δ) hard prohibition has a *secondary* home here (Paper 34 catalogues
 > it; Paper 2 in group5 is the primary home).
 
-**Scope (non-trunk group6):** the **4 precision/projection papers** —
+## FREEZE 2026-11-08 (PI-confirmed, seeded FULL run; amendments A-D add or correct, relax nothing)
+
+**A. Scope = 5 papers + synthesis:** Papers 26, 27, 34, 35 and **36** (`paper_36_bound_state_qed.tex`,
+moved from group5 2026-11-07; matches `debug/qa/qa_scopes.py`). **P36 C8 headlines:** one-loop
+alpha(Z alpha)^4 assembly at m_r = m, **1052.19 MHz** (-5.65 vs Lundeen-Pipkin, -5.64 vs Bezginov);
+erratum 38/45 -> 10/9 = **+27.13 MHz** = (4/15) alpha^3 Z^4/(pi n^3) Ha exactly; Coulomb-Sturmian Bethe logs
+2P **2.4%** (N=40) / **1.24%** (N=55), 3D **0.07%**, 2S **not converged**; two-loop model sum on the S^3
+Dirac spectrum diverges (negative); order-by-order budget tab:budget **1057.824 MHz**, 0.020 below
+Lundeen-Pipkin, closing on Phys. Rep. 342 Table XX (1057.8315 vs 1057.833(2)(4) at 0.862 fm). Gate: none of
+it may read as a GeoVac computation (S^3 never enters these numbers); Bethe-log method prior art (Lieber 1968,
+Huff 1969) stays inline.
+
+**B. Currency corrections (supersede stale statements below; reviewers check the CURRENT facts):**
+H 21 cm residual is itemized from Table XIX (Breit -79.9, alpha(Z alpha) binding +96.2, ...), Zemach extraction
+r_Z(p) = 1.00(11) fm; the Calc-rZG global fit is withdrawn; the D +23.0 ppm is compared to the +25.3 ppm
+Table XIX higher-order terms (to 2.3 ppm), not to "+18.4 (inference)"; sec:citation_status names the -(11/48)
+coefficient as the open load-bearing item (the "Pachucki-Yerokhin 2010 D-HFS" open item is gone); the muH 1S
+HFS reference is 182.640(18) meV (Hagelstein-Lensky-Pascalutsa 2023); sec:conv_muH_VP is Pachucki vs Borie
+inside Antognini 2013 (reconciled there); the H Lamb autopsy closes on P36 tab:budget; the HFS
+recoil-mixing kernel converts to the reduced mass (no double count); "Friar moment" = the third Zemach
+moment only.
+
+**C. New criterion C-REF (external reference values):** every numeric reference value or Layer-2 input that
+a group6 paper attributes to an external source must appear in that source. Citation reviewers grade each
+CONFIRMED / WRONG / UNVERIFIABLE; anything not fetched is UNVERIFIABLE and never upgraded on plausibility.
+A WRONG on a load-bearing value is OWNER-LARGE. (Motivation: v6.7.0-v6.7.3 found four unsourced or
+misattributed values in P34.)
+
+**D. Autopsy arithmetic:** the claims reviewers recompute the sums/residuals of EVERY P34 Roothaan-autopsy
+table (sec:autopsies) and every catalogue residual cell they read, not a sample. Prior runs listed these as
+spot-checked only.
+
+---
+
+**Scope (historical, pre-2026-11-08):** the **4 precision/projection papers** —
 **Paper 26** (`paper_26_entanglement.tex`, ACTIVE — energy–entanglement
 decoupling, basis-intrinsic ERI sparsity), **Paper 27**
 (`paper_27_entropy_projection.tex`, **KEYSTONE** — entropy as a projection
@@ -187,17 +221,15 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   `he-graph-native-hop-headline`). Re-measured: **S ~ Z^{−2.52}** (was −2.563; the
   old run also had V_ee at half strength); EP-2c **γ = 2.565, A = 16.5**. Confirm
   every P26/P27/P34 locus against CHANGELOG v5.16.0 Retraction 2. V_ee
-  off-diagonal = **100%** of entanglement stands; angular-momentum
-  eigenbasis = the **essentially unique** sparse-ERI basis (up to
-  (l,m)-label-preserving rotations; any generic rotation fills **42%→100%**
-  in a rapid but graded transition — intermediate densities are generator-
-  and cutoff-dependent, the endpoints are not; nonzero ERI count
-  **Z-independent**); hub migration **1s→2s→2p** (N/O/F values are
-  multiplet-member-dependent — ground states **4/7/6**-fold degenerate
-  for N/O/F (MEASURED; corrected 2026-08-30 from a stale "4/6/4 =
-  C(4, n_p−2)" — the combinatorial formula does not reproduce the
-  exact-rule degeneracies, and `tests/test_paper26_entanglement.py` pins
-  {7:4, 8:7, 9:6}); range 0 to the attained ceilings
+  off-diagonal = **100%** of entanglement stands; the angular-momentum
+  eigenbasis is sparse (**17.1%** ERI density at n_max=2) but **not
+  isolated**: a common frame rotation leaves the ERIs unchanged, so the
+  sparse bases form a continuous family; a generic rotation fills
+  **17.1%→100%** (nonzero ERI count **Z-independent**); hub migration
+  **1s→2s→2p** (N/O/F values are multiplet-member-dependent — ground
+  states **4/9/6**-fold degenerate for N/O/F (⁴S, ³P, ²P; MEASURED by dense
+  eigh, `tests/test_paper26_entanglement.py` pins {7:4, 8:9, 9:6}; the
+  earlier 7-fold O was a truncated multiplet); range 0 to the attained ceilings
   no analytic ceiling — the former "ln 8 ≈ 2.08 N/F, ln 16 ≈ 2.77 O"
   ceilings are **RETRACTED** (artifacts of a diagonal-only single-orbital
   entropy routine that discarded spin coherence and so violated
@@ -323,10 +355,12 @@ was added and when.
 
 - **P27, entropy-cusp co-location RESTORED to MEASURED (`sec:cusp`).**
   Edge-resolved leave-one-out decomposition on the pair-state graph:
-  **42.5%** of S on the hottest V_ee edge (1s,1s)<->(1s,2s) at n_max=3,
-  **40.0%** at n_max=4 (same edge); a comparably large non-reference edge
-  costs **-1.7e-15** nats; edge ordering tracks V_ee ordering at Spearman
-  **rho = +0.94** (+0.92 at n_max=4).  Explicitly NOT proportionality (the
+  **58.5%** of S on the hottest V_ee edge (1s,1s)<->(1s,2s) at n_max=3,
+  **54.1%** at n_max=4 (same edge); the largest in-sector off-vertex edge
+  (1s2s)<->(1s3s), half as strong, carries **-14.0%** (-12.5% at n_max=4)
+  — the old -1.7e-15 control was a parity-forbidden edge, a false
+  positive; edge ordering tracks V_ee ordering at Spearman
+  **rho = +0.87** (+0.81 at n_max=4).  (Currency fix 2026-11-08.)  Explicitly NOT proportionality (the
   (2s,2s) edge carries 29.8% on a 6x smaller coupling).  Tier = MEASURED;
   the attribution is leave-one-edge-out, well-defined but not unique.
 
@@ -408,6 +442,29 @@ the remaining 17 §V.C autopsies (never cross-anchored); P34 spot-check batches
 Run notes: `debug/qa/group6_full_run_2026_08_28_notes.md`.
 
 ## Change log
+- 2026-11-08 -- **Seeded FULL run (incremental plan, 142 owner units all NEW) = FAIL; RESEARCH-GRADE not earned.**
+  Panel: 5 Opus code, 5 Opus claims (P34 in three chunks), 2 Opus citation, 1 Opus synthesis, 3 focused
+  re-dispatches, 1 completeness-critic. Calibration: 21 seeds, 18/21 first pass, 21/21 after re-dispatch (P34-A
+  claims, P27 and P36 code each missed one class and recovered it); 6/6 controls clean. Deterministic gates whole-
+  target green (C5 fired on the planted K seed in the worktree). About 30 verified OWNER/SURFACE LARGE, heaviest in
+  P34 (C-REF failures: Lyman-alpha NIST digits flip the residual sign, mud polarizability and He+ Lamb sources
+  misattributed, a Pachucki-Yerokhin quote absent from its source; alpha "graph-derived"; inverted Paper 17 PK
+  restatement; He hop zombie; convention-exposure framing; Layer-2-presence prediction undermined by the 21 cm/D
+  itemization), P26 (uniqueness of the sparse basis false; O multiplet 9-fold), P27 (cusp control edge a parity
+  false positive; gamma_inf limit), P35 (graduation tier; "ready for two-loop QED"), synthesis (P36 absent; stale
+  numbers). P36 owner: no genuine LARGE. Coverage 0/142 (no stamps until remediation + self-check). Record:
+  debug/qa/group6_full_run_2026_11_08_notes.md; seed key debug/qa/group6_seed_key_2026_11_08.json. The FREEZE C8
+  P26/P27 headline lists are themselves stale (critic); multiplet, sparse-basis and cusp-edge items fixed
+  2026-11-08 after remediation.
+  **Remediation + bounded self-check (2026-11-08):** all first-pass LARGEs fixed; PI decisions: P34 V.D rescoped
+  to literature itemization notes, the Layer-2-presence bound downgraded Prediction -> Observation, P35 stays an
+  Observation, the focal-length program aligned to retired. Self-check round 1: 3 LARGE (P27 "Verified" scope,
+  synthesis 208-panel, P34 Mu HFS) fixed; round 2 (final): 5 LARGE (P34 Paper 17 PK restatement, P34 Bethe-log
+  rows vs Paper 36 crossings, P34 stale gamma_inf, P34/synthesis "exactly one projection" vs entered literature
+  constants, synthesis "sub-percent") fixed after the final round, so self-check closed with open owner fixes
+  (P34 and synthesis unstamped). C16 entries p26/p27/p35/p34/syn6-group6-qa-2026-11-08 and
+  p34-group6-selfcheck-2026-11-08, each fire-tested on HEAD text and silent on current text. SMALLs to
+  docs/qa/group6.debt.md.
 - 2026-07-04 — **Certifying FULL run (whole-group) = PASS → group6 CERTIFIED ✅ (6th branch).**
   8-reviewer panel (3 Opus code + 2 Opus claims + Sonnet citation + Opus synthesis) + Opus
   completeness-critic, over the remediated corpus with a fresh 8-seed set (loci/phrasings

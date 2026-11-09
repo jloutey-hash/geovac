@@ -1,0 +1,345 @@
+{
+ "target": "group6",
+ "units": {
+  "cite:papers/group6_precision_observations/paper_26_entanglement.tex": {
+   "date": "2026-11-08",
+   "hash": "d844a1e9466bcfb8",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "cite:papers/group6_precision_observations/paper_27_entropy_projection.tex": {
+   "date": "2026-11-08",
+   "hash": "1c70c9b366ac1f67",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "cite:papers/group6_precision_observations/paper_36_bound_state_qed.tex": {
+   "date": "2026-11-08",
+   "hash": "4991e426d4c2e539",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "code:papers/group6_precision_observations/paper_36_bound_state_qed.tex": {
+   "date": "2026-11-08",
+   "hash": "00c23e318eff753f",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Basis-Intrinsic Sparsity": {
+   "date": "2026-11-08",
+   "hash": "dc0ca89786949e41",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Basis-Intrinsic Sparsity / Z -independence of ERI count": {
+   "date": "2026-11-08",
+   "hash": "1fd96231b4dcc6d1",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Core-Valence Decoupling": {
+   "date": "2026-11-08",
+   "hash": "8d766a25f77b6ba6",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Core-Valence Decoupling / Core-valence mutual information": {
+   "date": "2026-11-08",
+   "hash": "eaaf41d1d5b2d540",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Core-Valence Decoupling / Core/bond entropy ratio": {
+   "date": "2026-11-08",
+   "hash": "00ac895bde7350bf",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Core-Valence Decoupling / Molecular entanglement: R -independence": {
+   "date": "2026-11-08",
+   "hash": "02e959067cc14b3f",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Discussion": {
+   "date": "2026-11-08",
+   "hash": "2d348104ca881355",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Discussion / Connection to quantum simulation resources": {
+   "date": "2026-11-08",
+   "hash": "655e20bac91feb7e",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Discussion / Limitations": {
+   "date": "2026-11-08",
+   "hash": "e681720db8689761",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Discussion / Why the angular momentum eigenbasis isolates": {
+   "date": "2026-11-08",
+   "hash": "d2dcb13bc8ae21c1",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Entanglement Network Topology": {
+   "date": "2026-11-08",
+   "hash": "530339091870a733",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Entanglement Network Topology / Orbital mutual information": {
+   "date": "2026-11-08",
+   "hash": "c8cbdb799d9acf63",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Entanglement Network Topology / Physical interpretation": {
+   "date": "2026-11-08",
+   "hash": "fa295deb2f59ce89",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::Introduction": {
+   "date": "2026-11-08",
+   "hash": "2b29e10bd2763c2b",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::The Layer Decomposition": {
+   "date": "2026-11-08",
+   "hash": "39d461b08d350137",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::The Layer Decomposition / Correlation energy and entanglement": {
+   "date": "2026-11-08",
+   "hash": "dca5139d828381f4",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::The Layer Decomposition / Hamiltonian structure in the angular momentum basis": {
+   "date": "2026-11-08",
+   "hash": "b4f78fcf997eae78",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_26_entanglement.tex::The Layer Decomposition / The withdrawn ``graph validity'' reading": {
+   "date": "2026-11-08",
+   "hash": "f20b38ac94682215",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Area Law as Pair Counting": {
+   "date": "2026-11-08",
+   "hash": "feb278721e4198a5",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Area Law as Pair Counting / Pair counting on shell n": {
+   "date": "2026-11-08",
+   "hash": "d85c5c4daabcbfb1",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Area Law as Pair Counting / Reconciliation": {
+   "date": "2026-11-08",
+   "hash": "3c42475c34001b0a",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Area Law as Pair Counting / The Paper 5 statement": {
+   "date": "2026-11-08",
+   "hash": "b9e177022ba2d8c0",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Exchange-Constant Taxonomy Placement": {
+   "date": "2026-11-08",
+   "hash": "d221f4afca77b31a",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Introduction": {
+   "date": "2026-11-08",
+   "hash": "16a8516e62bbad8d",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Numerical Confirmation": {
+   "date": "2026-11-08",
+   "hash": "8fab0076190cdedc",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Operator-Theoretic Result": {
+   "date": "2026-11-08",
+   "hash": "e9519305c35c0e46",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Operator-Theoretic Result / GeoVac specialization": {
+   "date": "2026-11-08",
+   "hash": "4449e88625df05a5",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Operator-Theoretic Result / Setting": {
+   "date": "2026-11-08",
+   "hash": "66920d244ee37fe3",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Operator-Theoretic Result / Statement": {
+   "date": "2026-11-08",
+   "hash": "d275342222aeadf0",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Rigidity Predictions: One Retracted, One Surviving": {
+   "date": "2026-11-08",
+   "hash": "a8ecaed0931018bb",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Rigidity Predictions: One Retracted, One Surviving / HO zero-entropy theorem for closed-shell": {
+   "date": "2026-11-08",
+   "hash": "523b72eadf40159d",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Rigidity Predictions: One Retracted, One Surviving / Operational temperature decoding (Sprint TD Track 2)": {
+   "date": "2026-11-08",
+   "hash": "d95cb9ad16c66f10",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Casimir energy on S^3 : a one-projection match (KG-3)": {
+   "date": "2026-11-08",
+   "hash": "2b74c3aa5417ecc3",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Casimir energy on S^3 : a one-projection match (KG-3) / The Stefan--Boltzmann constant lives in the temporal projection": {
+   "date": "2026-11-08",
+   "hash": "5474f8ae0476001d",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Falsifiable prediction / Confirmatory evidence": {
+   "date": "2026-11-08",
+   "hash": "5b69f6ffafb7187e",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Falsifiable prediction / Counter-examples (also confirmatory)": {
+   "date": "2026-11-08",
+   "hash": "bf6f7ccb392ea697",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Implications for Paper 34": {
+   "date": "2026-11-08",
+   "hash": "3092d4e4c93f2485",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Introduction": {
+   "date": "2026-11-08",
+   "hash": "9ca0676bb19deb30",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Introduction / Sprint provenance": {
+   "date": "2026-11-08",
+   "hash": "149ce3311c7345b8",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Klein-Gordon on S^3 R : setup": {
+   "date": "2026-11-08",
+   "hash": "d384c626ff6edb93",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_": {
+   "date": "2026-11-08",
+   "hash": "5e2da26cb5800c6e",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Bisognano--Wichmann reading of the temporal-window projection": {
+   "date": "2026-11-08",
+   "hash": "8eb5a1a3f139a109",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Honest scope": {
+   "date": "2026-11-08",
+   "hash": "c995152754abc945",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Modular residual on the tensor product": {
+   "date": "2026-11-08",
+   "hash": "00bf3cb108e861fb",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Spatial Casimir is rational on both bundles": {
+   "date": "2026-11-08",
+   "hash": "393c901746029612",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Stefan--Boltzmann as exact M_1 M_2": {
+   "date": "2026-11-08",
+   "hash": "0d3641ef54b595c2",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Transcendental audit holds Prediction 1": {
+   "date": "2026-11-08",
+   "hash": "b9fbfbc202d7c299",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Unruh pendant: the third Wick-rotation face": {
+   "date": "2026-11-08",
+   "hash": "39379a18779aaadc",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::The algebraic ring (KG-1)": {
+   "date": "2026-11-08",
+   "hash": "c36de465e1a10305",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Where 2 enters (KG-2)": {
+   "date": "2026-11-08",
+   "hash": "53c74dc139de5819",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::front": {
+   "date": "2026-11-08",
+   "hash": "9740ad6947780ad0",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::A two-loop negative": {
+   "date": "2026-11-08",
+   "hash": "2608698c965c102e",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Bethe logarithms in a Coulomb-Sturmian basis": {
+   "date": "2026-11-08",
+   "hash": "5076361fb33520d0",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Bethe logarithms in a Coulomb-Sturmian basis / Acceleration form for s -states Acceleration form for s-states": {
+   "date": "2026-11-08",
+   "hash": "5277f590b5602956",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Bethe logarithms in a Coulomb-Sturmian basis / Basis": {
+   "date": "2026-11-08",
+   "hash": "c4a014dca8d19ac3",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Bethe logarithms in a Coulomb-Sturmian basis / Definition and normalization": {
+   "date": "2026-11-08",
+   "hash": "3900b4b796ae90b4",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Bethe logarithms in a Coulomb-Sturmian basis / Velocity form for l > 0 Velocity form for l > 0": {
+   "date": "2026-11-08",
+   "hash": "c6ed66fa779e98b5",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Conclusion": {
+   "date": "2026-11-08",
+   "hash": "376abe38dcb91aee",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Introduction": {
+   "date": "2026-11-08",
+   "hash": "2e810e3eeac11685",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result": {
+   "date": "2026-11-08",
+   "hash": "a41e200bf2f53da2",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::Result / The residual": {
+   "date": "2026-11-08",
+   "hash": "b95edc8bf7e50493",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The erratum: a double-counted Uehling term": {
+   "date": "2026-11-08",
+   "hash": "7ff654d75476bd76",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::The one-loop expressions": {
+   "date": "2026-11-08",
+   "hash": "b32b97ba0d07cc79",
+   "run": "group6 seeded FULL 2026-11-08"
+  },
+  "prose:papers/group6_precision_observations/paper_36_bound_state_qed.tex::front": {
+   "date": "2026-11-08",
+   "hash": "76e3445beec21446",
+   "run": "group6 seeded FULL 2026-11-08"
+  }
+ }
+}

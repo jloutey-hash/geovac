@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.4] - 2026-11-08
+
+**/qa group6 seeded FULL (incremental plan, all 142 owner units NEW, PI-invoked) = FAIL; RESEARCH-GRADE not earned;
+remediated.** Criteria frozen with amendments A-D (P36 scope and headlines, currency corrections, C-REF, autopsy
+arithmetic). Panel: 5 Opus code, 5 Opus claims (P34 in three chunks), 2 Opus citation, 1 Opus synthesis, 3 focused
+re-dispatches, completeness critic. Calibration: 21 seeds, 18/21 first pass, 21/21 after re-dispatch; 6/6 controls
+clean. Deterministic gates whole-target green. About 30 verified LARGE, heaviest in Paper 34; Paper 36 owner had none.
+Record: debug/qa/group6_full_run_2026_11_08_notes.md; seed key debug/qa/group6_seed_key_2026_11_08.json.
+
+### Changed (owner fixes)
+- Paper 26: the angular-momentum basis is sparse but not isolated (a common frame rotation leaves the ERIs unchanged,
+  so sparse bases form a continuous family); uniqueness claim removed from abstract, body and conclusion. Ground-state
+  multiplets measured by dense eigh: N/O/F 4-, 9-, 6-fold (the 7-fold O was a truncated multiplet); B/C hub values
+  member-dependent; sampled MI maxima about 0.7/1.3/1.3 over 200 members. Test moved to dense eigh, pins {7:4, 8:9,
+  9:6}, Z=7 and Z=8 both MIXED, 60 random members.
+- Paper 27: the cusp control edge was parity-forbidden (a false positive); the largest in-sector off-vertex edge,
+  half as strong, carries -14.0% (-12.5% at n_max=4), so the hot edge carries the largest positive share, not the
+  only one. gamma text: the gap from 2 comes from the logarithm in S ~ eps ln(1/eps); returns to 2 as Z -> infinity.
+  "Verified" scope limited to tab:ep1 and EP-2c.
+- Paper 34: Lyman-alpha against NIST A-values (f = 0.41641; residual +35 ppm, unexplained); He+ Lamb autopsy rebuilt;
+  mud polarizability via Krauth 2016 (Hernandez / Friar / CGV); Pachucki-Yerokhin quote removed; alpha removed from
+  the graph-derived list; textbook vacuum-polarization rows carry no Fock chain; Paper 17 PK restatement aligned
+  (5.3% l-dependent, 6.9% channel-blind, calibration content, balanced is PK-free, Track CB a 29% FCI error); Bethe-log
+  rows marked not converged (Paper 36 crossings); single-projection observation carves out entered literature
+  constants. Sec. V.D rescoped to literature itemization notes (PI); the Layer-2-presence bound downgraded Prediction
+  -> Observation (PI); the focal-length program aligned to retired (PI). C-REF fixes: tritium, Antognini Eq. (13),
+  HD, He-3, Mu 1S-2S, Ps HFS, muH, Li-7. New bibitems incl. Friar 2013 and Puchalski-Komasa-Pachucki 2020.
+- Paper 35: stays an Observation (PI; graduation remark removed); Heisenberg-Euler not counted; LS-5 "ready for
+  two-loop" replaced by the negative LS-8a result; LS-6a is the textbook assembly; Dirac degeneracy per chirality.
+- Group6 synthesis: five papers including Paper 36; sparse-basis and gamma restatements; core-valence MI ~4e-3, exact 0
+  for Z >= 7; "sub-percent / surface convention issues" removed; Layer-2-presence bound an Observation.
+
+### Added
+- C16 entries p26-, p27-, p35-, p34-, syn6-group6-qa-2026-11-08 and p34-group6-selfcheck-2026-11-08, each fire-tested
+  on HEAD text and silent on current text, with cited_by stamps.
+- docs/qa/group6.debt.md (owed guards and the SMALL sweep list).
+
+### QA record
+- Self-check bounded at two rounds: round 1 found 3 LARGE (fixed); round 2 found 5 LARGE, fixed after the final round,
+  so the self-check closed with open owner fixes and Paper 34 plus the synthesis stay unstamped. A third look is a PI
+  call.
+- **Coverage 68/142 owner units** (prose 64/132, cite 3/5, code 1/5).
+
 ## [v6.7.3] - 2026-11-08
 
 **The two remaining owed items closed (PI-directed): the hydrogen Lamb-shift budget and the Krauth citations.** Both

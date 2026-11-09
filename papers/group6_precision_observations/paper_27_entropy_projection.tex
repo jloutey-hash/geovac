@@ -41,8 +41,9 @@ Third, in the Coulomb lattice the cusp concentrates as a single
 since entropy is generated exclusively by $V_{ee}$, this is also the
 locus of entanglement mass: an edge-resolved decomposition puts
 $58.5\%$ of helium's correlation entropy on the single hottest $V_{ee}$
-edge, while an equally large edge away from the cusp vertex carries
-none.  Fourth, a
+edge, though not all of it: removing the largest off-vertex edge in
+the ground state's symmetry sector, half as strong, raises it by
+$14\%$.  Fourth, a
 previously claimed rigidity statement --- that the ground-state
 entropy of any two-fermion closed-shell state on the
 Bargmann--Segal harmonic oscillator lattice interacting via
@@ -64,8 +65,10 @@ ions' physical Hamiltonian; fixed-$n_{\max}$ local slopes reach $1.91$ by
 $Z=100$; an earlier $1.93$--$1.96$ was measured on a hop-augmented model
 one-body operator), slightly below the
 non-degenerate second-order Rayleigh--Schr\"odinger value of
-$2$, with the residual gap attributed to multi-shell
-aggregation in the basis-extension limit.  Entropy is slotted into the
+$2$.  The gap is the logarithm in the von Neumann entropy:
+$S\approx\varepsilon\ln(1/\varepsilon)$ with a correlation weight
+$\varepsilon$ that scales at the second-order rate, so at fixed
+$n_{\max}$ the local exponent returns slowly to $2$ as $Z\to\infty$.  Entropy is slotted into the
 exchange-constant taxonomy as a projection-class observable:
 zero on the combinatorial graph (non-degenerate case), finite only after the metric
 embedding of $1/r_{12}$.
@@ -197,7 +200,11 @@ a basis-projection artifact, not a physical correlation.
 
 The non-degeneracy clause is essential.  An empirical scan
 (EP-2j) at $n_{\max}=3$ in the GeoVac S$^{3}$ basis with
-$N=3,4$ electrons shows two distinct violation modes:
+$N=3,4$ electrons shows two distinct violation modes.  The scan
+used the hop-augmented H$_{1}$ (with the $\kappa$-adjacency hop); the
+numbers below are values of that model.  On the physical H$_{1}$, diagonal at
+$-Z^{2}/2n^{2}$, $2s$ and $2p$ stay degenerate, so the lithium ground
+state below is degenerate too and the first mode does not arise.
 
 \emph{Open-shell single Slater determinant (Li, $^{2}$S
 ground state).}  The H$_{1}$ ground state is non-degenerate
@@ -227,7 +234,8 @@ $2s$ from $2p$, and the $\kappa$-adjacency does not lift it
 in the $M_L=0, M_S=0$ sector).  The H$_{1}$-only ground
 ensemble is mixed, the spatial 1-RDM has fractional
 occupations $(2, 0.76, 0.76, 0.47, 0, \ldots)$, and
-$S_{\mathrm{kin}} = 1.23$ nats $\neq 0$.  V$_{ee}$ lifts the
+$S_{\mathrm{kin}} = 1.23$ nats $\neq 0$ for the ground vector the
+eigensolver returns (the value depends on the member chosen).  V$_{ee}$ lifts the
 degeneracy and \emph{reduces} entropy:
 $S_{\mathrm{full}} = 0.916 < S_{\mathrm{kin}}$.  Here the
 proposition's premise fails outright; the floor is
@@ -496,10 +504,8 @@ $0.892$), and a rotation inside the degenerate eigenspaces moves it in
 the third digit.  So $V_{ee}$ is overwhelmingly block-diagonal in the
 eigenspaces of the one-body operator.  The relative commutator
 $\lVert [H_1, V_{ee}]\rVert_F / \lVert H_1 \rVert_F = 10.6\%$ at
-$n_{\max}=3$, dropping only to $9.3\%$ at $n_{\max}=4$ (earlier $6.1\%$,
-$5.3\%$, with $V_{ee}$ at half strength).  The
-commutator does not vanish with basis size; $H_1$ and $V_{ee}$
-are genuinely non-commuting.  The one-body eigenspaces
+$n_{\max}=3$, dropping only to $9.3\%$ at $n_{\max}=4$; $H_1$ and
+$V_{ee}$ are genuinely non-commuting at both cutoffs.  The one-body eigenspaces
 ``almost'' block-diagonalize the entropy-generating operator, and the
 residual off-diagonal mass is the correlation.  (An earlier sentence
 credited it with driving the ``graph-native'' CI from $\sim\!3\%$ to
@@ -536,16 +542,18 @@ hottest off-diagonal edge of the $V_{ee}$ graph identified above.  At
 $n_{\max}=4$ it is the same edge at $54.1\%$ (earlier $40.0\%$), so the
 co-location is not a small-basis artifact.
 
-Two features make this more than a restatement.  First, the control:
-the largest $V_{ee}$ edge that does \emph{not} touch the reference
-node, $(1s,2p_0)\leftrightarrow(1s,3p_0)$ with $|V|$ half the hot
-edge's, changes the entropy by $\sim\!10^{-15}$ nats --- numerically
-nothing.  So what generates
-entropy is not $V_{ee}$ mass anywhere in the graph, but $V_{ee}$ mass
-\emph{at the cusp vertex}.  Second, the correspondence is graded, not
-merely top-ranked: across all edges out of the reference the entropy
-ordering tracks the $V_{ee}$ ordering at Spearman $\rho = +0.87$
-($+0.81$ at $n_{\max}=4$; earlier $+0.94$, $+0.92$).  It is not
+Two features qualify this.  First, edges away from the reference
+node also move the entropy.  The largest $V_{ee}$ edge in the ground
+state's symmetry sector that does \emph{not} touch the reference,
+$(1s,2s)\leftrightarrow(1s,3s)$ with $|V|$ half the hot edge's,
+carries a share of $-14.0\%$ ($-12.5\%$ at $n_{\max}=4$): removing it
+raises the entropy by that fraction.  The cusp vertex carries the
+largest positive share, not the only one.  (An edge between configurations of
+the other parity, such as $(1s,2p_0)\leftrightarrow(1s,3p_0)$, cannot
+change the ${}^1S$ ground state at all.)  Second, the correspondence
+is graded, not merely top-ranked: across all edges out of the
+reference the entropy ordering tracks the $V_{ee}$ ordering at
+Spearman $\rho = +0.87$ ($+0.81$ at $n_{\max}=4$).  It is not
 proportionality --- the $(2s,2s)$ edge carries $23.5\%$ of the entropy
 on a coupling six times smaller than the top edge's, because the
 attribution weights $V/\Delta E$ rather than $V$ --- but the ranking
@@ -785,11 +793,17 @@ order; corrected 2026-08-28.)  The conclusion below $2$ is
 method-independent --- every extrapolation tried lands under $2$,
 as does every tabulated slope.  This is \emph{below} the
 non-degenerate second-order Rayleigh--Schr\"odinger prediction
-$\gamma=2$.  The persistent gap of $\sim 0.04$--$0.07$ at the basis
-limit is an aggregation effect: with more orbitals available,
-$S_B$ accumulates contributions from many small admixtures
-rather than being dominated by the lowest excitation, and the
-aggregate sum scales with a slightly smaller exponent.
+$\gamma=2$.  The gap comes from the logarithm in the von Neumann
+entropy.  The correlation weight $\varepsilon = 1-\lambda_0$ (one
+minus the largest natural occupation) scales at the second-order
+rate, its local exponent falling from $2.13$ ($Z:15\to30$) to
+$2.0001$ ($Z:10^4\to10^5$) at $n_{\max}=3$ on the physical
+Hamiltonian, while $S\approx\varepsilon\ln(1/\varepsilon)$ carries a
+slowly varying logarithm.  The local exponent of $S$ therefore
+bottoms out near $1.905$ ($Z:100\to300$) and climbs back toward $2$
+($1.930$ at $Z:10^4\to10^5$).  Within the $Z:15\to30$ window the gap
+also widens with $n_{\max}$, which is what the extrapolation above
+measures.
 Finite-window fits give $\gamma \in [2.1, 2.7]$, depending
 monotonically on both $Z$ and $n_{\max}$.  Across $22$ calibration points
 (He-like $Z\in[2,100]$ at $n_{\max}=3$, plus a LiH bond-block
@@ -850,8 +864,7 @@ any finite window picks up a slope that depends on the window.
 (iii) Fixing the Z-window $Z\in\{2,\ldots,30\}$ and sweeping
 $n_{\max}\in\{2,3,4\}$ gives local slopes at large Z of $1.992$,
 $1.976$, and $1.966$ respectively: these lie \emph{below} $2$ and
-decrease further with both $Z$ and $n_{\max}$, i.e.\ they move away
-from $2$ from below.  (It is the \emph{global}-window exponents that approach $2$ from
+decrease further with $n_{\max}$ and, up to $Z\approx 200$, with $Z$.  (It is the \emph{global}-window exponents that approach $2$ from
 above: $2.373, 2.223, 2.182$ over this $Z\in[2,30]$ window
 (Table~\ref{tab:gamma_surface}); $2.63, 2.38, 2.32$ over the
 $\{2,3,4,6,10\}$ window of robustness item~(c).)
@@ -1154,7 +1167,8 @@ factor of four as the two-body signature.  Third, the cusp
 localizes as a single hot node on the $V_{ee}$ pair graph,
 making the loci of energy correlation, entropy generation and cusp
 mass coincident --- established by an edge-resolved entropy
-decomposition on the pair-state graph, not inferred.  Fourth --- and negatively --- the
+decomposition on the pair-state graph, not inferred; the hot edge carries
+the largest positive share, not the only one.  Fourth --- and negatively --- the
 claim that two-fermion closed-shell ground-state entropy on the
 Bargmann--Segal harmonic oscillator lattice is identically zero
 for \emph{any} central two-body potential is \textsc{retracted}
@@ -1169,10 +1183,11 @@ Coulomb lattice, block entropy obeys a universal two-variable
 scaling
 $S_B = A\,(\tilde{w}_B/\delta_B)^{\gamma}$ in the dimensionless
 $V_{ee}$ off-diagonal mass and the first $H_1$ gap, with the
-local exponent extrapolating to $\gamma_{\infty} \approx 1.96$--$1.97$
-as $Z, n_{\max} \to \infty$ on the physical Hamiltonian -- below the naive second-order
-Rayleigh--Schr\"odinger value of $2$, by a residue attributed
-to multi-shell aggregation in the basis-extension limit.
+local exponent in the $Z:15\to30$ window extrapolating to
+$\gamma_{\infty} \approx 1.96$--$1.97$ as $n_{\max} \to \infty$ on the
+physical Hamiltonian -- below the second-order Rayleigh--Schr\"odinger
+value of $2$ because of the logarithm in the von Neumann entropy, and
+returning slowly to $2$ as $Z\to\infty$.
 
 These results place entropy in the exchange-constant
 taxonomy of Paper~18~\cite{GeoVac_Paper18} as a
@@ -1193,8 +1208,7 @@ test in the codebase.
 
 \begin{itemize}
   \item Physical-Hamiltonian re-measurements of 2026-09-25 (Table~\ref{tab:ep1}
-    physical rows, Section~\ref{sec:cusp} diagonal fraction and commutator,
-    the \S\ref{sec:pred2} correction paragraph's EP-2c fit):
+    physical rows and the \S\ref{sec:pred2} correction paragraph's EP-2c fit):
     \textbf{Verified} by \texttt{tests/test\_he\_physical\_hamiltonian.py};
     the hop-augmented model is kept distinct from helium by
     \texttt{tests/test\_he\_hop\_guard.py}.  The items below verify the
@@ -1225,15 +1239,13 @@ test in the codebase.
     relative commutator, hot-node weights): produced by
     \texttt{debug/energy\_graph\_exploration.py}, data in
     \texttt{debug/data/energy\_graph\_nmax\{3,4\}.json}.
-    \textbf{Verified} by
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak
-    test\_paper27\_energy\_graph\_structural\_invariants}
-    (commutator ratio, diagonal fraction, and exact
-    $V_{(1s,1s),(1s,1s)} = 5/8$ at both $n_{\max}=3$ and $4$);
-    non-vanishing of the commutator in the $n_{\max}=3 \to 4$
-    extension is pinned by
+    test\_paper27\_energy\_graph\_structural\_invariants} and
     \texttt{::test\_paper27\_commutator\_saturates\_not\_vanishes}
-    (\texttt{--slow}).
+    (\texttt{--slow}) pin these quantities on the hop-augmented
+    model at unit exponent; the physical-Hamiltonian values quoted in
+    \S\ref{sec:cusp} ($0.945$, $0.926$; $10.6\%$, $9.3\%$) are not yet
+    pinned by a test.
   \item Table~\ref{tab:ep2c} and
     Eq.~\eqref{eq:pred2_universal} (the dimensionless power law
     $S_B = 8.16\,\tilde{w}_B^{2.383}$, $R^{2}=0.998$):
@@ -1244,10 +1256,10 @@ test in the codebase.
   \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0692/0.0736/0.0850$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}, data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
   \item Section~\ref{sec:cusp} entropy--cusp co-location
     ($58.5\%$ of $S$ on the hottest $V_{ee}$ edge at $n_{\max}=3$,
-    $54.1\%$ at $n_{\max}=4$; zero from a comparably large
-    non-reference edge; Spearman $\rho = +0.87$; re-measured
+    $54.1\%$ at $n_{\max}=4$; Spearman $\rho = +0.87$; re-measured
     2026-09-25 on helium's physical Hamiltonian): \textbf{Verified}
-    by \texttt{tests/test\_paper27\_entropy\_locus.py}.
+    by \texttt{tests/test\_paper27\_entropy\_locus.py}.  The
+    $-14.0\%$ off-vertex edge is not yet pinned by a test.
   \item Section~\ref{sec:taxonomy} embedding-class placement:
     diagonal pair-state $V_{ii}$ rationality and spectral
     irrationality verified in EP-3 / energy-graph

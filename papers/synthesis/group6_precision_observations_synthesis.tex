@@ -4,7 +4,7 @@
 % Audience: precision AMO / mathematical-physics readers
 % Spine: two-layer framework (34) -> time as projection (35)
 %        -> entropy as projection (27) -> entanglement (26)
-%        -> multi-observable focal-length program (34 SS V.C/V.D)
+%        -> Roothaan autopsies (34 SS V.C/V.D)
 
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography,nofootinbib]{revtex4-2}
 
@@ -43,7 +43,8 @@ symbolically---no $\pi$.  \emph{Layer~2} is a finite family of named
 projections from that graph onto continuous physical settings; every
 physical variable, every dimension, and every transcendental constant
 that appears in any GeoVac calculation enters through exactly one
-projection and is traceable to it.  This synthesis assembles the four
+projection and is traceable to it, apart from literature constants
+entered as external inputs.  This synthesis assembles the five
 Group~6 papers into a single narrative built on that thesis.  The spine
 is:\ the projection taxonomy and its three-axis tagging
 (Paper~34~\cite{loutey_paper34}); time as the prototype \emph{free-side}
@@ -55,18 +56,20 @@ projection artifact, identically zero on the one-body graph and finite
 only after the metric embedding of the two-body repulsion
 (Paper~27~\cite{loutey_paper27}); and the entanglement structure that
 isolates that repulsion in the angular-momentum eigenbasis
-(Paper~26~\cite{loutey_paper26}).  A multi-observable focal-length
-program closes the arc:\ Roothaan autopsies decompose precision atomic
-observables into projection-chain-tagged components, exposing literature
-convention mismatches and framework kernel gaps that single-observable
-analyses cannot see.  Two disciplines run throughout.  \emph{First},
+(Paper~26~\cite{loutey_paper26}).  Roothaan autopsies close the arc:\
+they decompose precision atomic observables into projection-chain-tagged
+components and locate framework kernel gaps; the hydrogen Lamb shift,
+whose leading one-loop assembly is textbook QED with tabulated Bethe
+logarithms (Paper~36~\cite{loutey_paper36}), is the limiting case.  The
+literature itemization differences the autopsies meet are stated in
+their sources.  Two disciplines run throughout.  \emph{First},
 every transcendental named here is tagged to its projection---$\pi$ via
 the M1 volume slot (unit-sphere and Fock volumes), $\pi^{2k}$ via the spectral action,
 $\zeta(2k)$ via even-zeta Dirichlet series, odd~$\zeta$ via the
 half-integer-Hurwitz spinor lift, Catalan~$G$ via quarter-integer vertex
-parity, $2\pi$ via temporal compactification.  \emph{Second}, the precision matches are sub-percent
-\emph{framework-native} agreements that surface convention and kernel
-issues; they are \emph{not} first-principles predictions of the constants,
+parity, $2\pi$ via temporal compactification.  \emph{Second}, the precision comparisons set framework-native values
+against measurement, some with residuals the autopsies leave
+unexplained; they are \emph{not} first-principles predictions of the constants,
 and the multi-focal-composition wall---the framework has no native theorem
 for composing multiple Fock-style projections---is named as an active
 boundary.  The unifying reading is that compactness forces discreteness
@@ -119,7 +122,8 @@ Observation, asserted at exactly that tier:
 \begin{observation}[Single-projection origin of physical content]
 Every coupling constant, energy scale, length scale, and transcendental
 constant appearing in any GeoVac computation traces to exactly one
-projection in Layer~2.  The bare graph contains none of $\alpha$, $Z$,
+projection in Layer~2, apart from literature constants entered as
+external inputs.  The bare graph contains none of $\alpha$, $Z$,
 $\hbar\omega$, $R$, $\Lambda$, $\pi$, or $\zeta(2k)$; these enter by, and
 only by, the projection the calculation invokes.
 \end{observation}
@@ -131,11 +135,13 @@ oscillator has discrete spectrum on non-compact $\mathbb{R}^3$).  Compact groups
 regime; the continuum---and with it every transcendental---is what remains
 when compactness is released.  Calibration data is continuum (un-packed)
 data, which is why the skeleton is forced and rational while the
-projections are free and transcendental.  The four Group~6 papers make
+projections are free and transcendental.  The five Group~6 papers make
 this concrete:\ Paper~34 catalogues the projections; Paper~35 locates the
 exact step at which the prototype free-side projection (time) injects
 $\pi$; Papers~27 and~26 show entropy and entanglement to be projection
-artifacts, zero on the bare graph and finite only after metric embedding.
+artifacts, zero on the bare graph and finite only after metric embedding;
+Paper~36 records the textbook one-loop Lamb assembly that the autopsies
+use as their reference case.
 
 We hold one framing discipline throughout, following the GeoVac rhetoric
 rule:\ the discrete graph and its continuous projections are dual
@@ -256,9 +262,9 @@ signature $2\pi\cdot\mathbb{Q}$ per mode).  The structural statement is
 that a GeoVac observable contains $\pi$ if and only if its evaluation
 includes a continuous integration over a temporal or spectral parameter
 promoted from the discrete graph spectrum.  This is a structural
-OBSERVATION supported by a symbolic verification panel (the 208-case
-panel that Paper~34's prediction subsection cites as a downstream control);
-it is asserted at that tier, not as a theorem about all observables.
+OBSERVATION supported by Paper~35's confirmatory list, whose 200
+Klein--Gordon cases are instances of one elementary lemma; it is asserted
+at that tier, not as a theorem about all observables.
 Time is, in this reading, the prototype free-side projection:\ the
 observer's finite-time measurement window, \gvc{p35-window-circle-adopted}{read as a periodic Euclidean
 circle (an identification Paper~35 adopts rather than derives;\ a compact
@@ -292,12 +298,12 @@ the graph.
 
 \paragraph{One-body operators are entanglement-inert.}
 The operator-theoretic result is an INTERNAL THEOREM:\ on any finite
-lattice, the von~Neumann entropy of any reduced density matrix derived
+lattice, the von~Neumann entropy of any single-particle reduced density matrix derived
 from a \emph{non-degenerate} ground state of a purely one-body fermionic
 Hamiltonian is identically zero (the ground state is a single Slater
 determinant).  Numerically this is confirmed to machine precision,
-$S_{\mathrm{kin}}/S_{\mathrm{full}}\sim10^{-14}$ for He at
-$n_{\max}=2,3$.  All ground-state entanglement is generated by the
+$S_{\mathrm{kin}}/S_{\mathrm{full}}\sim10^{-14}$ at $n_{\max}=2,3$ on a He
+model whose one-body operator is deliberately non-diagonal.  All ground-state entanglement is generated by the
 two-body interaction $V_{ee}$.  The non-degeneracy qualifier is
 essential---open-shell and dissociated-bond states escape the floor---and
 is stated as such.
@@ -342,12 +348,13 @@ graph, where the spectral eigenvalues of $V_{ee}$ become irrational.  The
 combinatorial graph is entropy-blind; entropy is the price of projecting
 onto the metric continuum.  A measured refinement accompanies the
 placement:\ Coulomb-lattice block entropy obeys a universal two-variable
-scaling $S_B = A\,(\tilde w_B/\delta_B)^\gamma$ whose local exponent
-extrapolates to $\gamma_\infty\approx1.93$--$1.96$ (the precise value is
-extrapolation-order dependent), in every case below the
-non-degenerate second-order Rayleigh--Schr\"odinger value of~$2$---a
-MEASURED extrapolation, reported with its residual gap attributed to
-multi-shell aggregation, not claimed as exactly~$2$.
+scaling $S_B = A\,(\tilde w_B/\delta_B)^\gamma$ whose local exponent,
+in the $Z:15\to30$ window, extrapolates to $\gamma_\infty\approx1.96$--$1.97$
+as $n_{\max}\to\infty$ on the physical Hamiltonian (the precise value is
+extrapolation-order dependent), below the non-degenerate second-order
+Rayleigh--Schr\"odinger value of~$2$ because of the logarithm in the von
+Neumann entropy, and returning slowly to~$2$ as $Z\to\infty$---a
+MEASURED extrapolation, not claimed as exactly~$2$.
 
 %% ========================================================================
 \section{Entanglement structure of the angular-momentum basis (Paper~26)}
@@ -379,12 +386,12 @@ the angular-momentum basis, by nearly diagonalizing the one-body physics,
 isolates the entanglement in $V_{ee}$ alone.
 
 \paragraph{Basis-intrinsic sparsity.}
-Among orbital bases for spherically symmetric systems, the
-angular-momentum eigenbasis is an \emph{isolated} point of ERI sparsity:\
-Any generic (angular-mixing) unitary rotation of orbital indices, however small, fills the ERI
-tensor from $42\%$ to $100\%$ density in a rapid transition at the
-identity, and the nonzero ERI count is $Z$-independent (sparsity is
-purely geometric).  This MEASURED transition is the entanglement-side
+For spherically symmetric systems the angular-momentum eigenbasis, and
+every basis related to it by a common rotation of the coordinate frame,
+gives sparse ERIs; a generic unitary rotation of the orbital indices,
+however small, fills the ERI tensor from $17\%$ to $100\%$ density in a
+rapid but graded transition at the identity, and the nonzero ERI count
+is $Z$-independent (sparsity is purely geometric).  This MEASURED transition is the entanglement-side
 counterpart of the potential-independent angular-sparsity theorem
 (Paper~22, Group~3) and the structural root of the exactly $Q$-linear
 composed Pauli count ($N_{\mathrm{Pauli}} = 27.90 \times Q$) reported
@@ -395,8 +402,8 @@ one that produces sparse ERIs.
 \paragraph{Network topology and core--valence decoupling.}
 Orbital mutual-information maps exhibit a hub-migration pattern
 ($1s\to2s\to2p$) tracking the partially filled shell across the first
-row, and core--valence mutual information falls to $\approx 2\times10^{-3}$
-by $Z=4$ and at the $\sim\!10^{-15}$ noise floor for $Z\geq5$ (basis saturation at $n_{\max}=2$).
+row, and core--valence mutual information falls to $\approx 4\times10^{-3}$
+by $Z=4$, decays through $Z=6$, and vanishes exactly for $Z\geq7$ (basis saturation at $n_{\max}=2$).
 The latter is consistent with the composed fiber-bundle factorization
 used in the molecular framework, but does not establish it: at
 $n_{\max}=2$ the core is exactly closed, so the core-valence mutual
@@ -407,13 +414,11 @@ ground state, whose entanglement diverges at dissociation), and the
 $d$-orbital extension is open.
 
 %% ========================================================================
-\section{The multi-observable focal-length program (Paper~34 \S V)}
+\section{Roothaan autopsies of precision observables (Paper~34 \S V)}
 %% ========================================================================
 
-The arc's most distinctive instrument is the multi-observable
-focal-length decomposition program:\ the finding that decomposing
-several precision observables through one structural dictionary exposes
-systematics that no single-observable analysis can see.
+Paper~34 \S V decomposes several precision observables through one
+structural dictionary.
 
 \paragraph{Roothaan autopsies.}
 For observables with a multi-component literature decomposition---the
@@ -432,32 +437,32 @@ row and a withdrawn multi-loop row.  The terms the assembly omits, led
 by the one-loop $\alpha(Z\alpha)^5$ term, are all tabulated by Eides
 \emph{et al.}; with them the theory is $1057.824$~MHz, $0.020$~MHz below
 experiment, and no GeoVac projection enters any of them (Papers~34,
-36).  The autopsies make the projection-chain
+36).  Paper~36 itself records that assembly, an erratum (the constant
+$38/45$ in place of $10/9$ double-counted the Uehling term, $+27.13$~MHz),
+Coulomb-Sturmian Bethe logarithms ($2P$ and $3D$ reproduced, $2S$ not
+converged; the method is prior art of Lieber and Huff), and a negative
+result:\ a model two-loop sum on the $S^3$ Dirac spectrum grows without
+bound with its cutoff.  The autopsies make the projection-chain
 dictionary's reach, and its limits, visible at the observable level.
 
-\paragraph{Convention exposures versus kernel gaps.}
-The program's signature finding-type is the \emph{literature convention
-exposure}:\ the multi-observable decomposition surfaces itemization
-differences between independent precision compilations
-(Eides, Karshenboim, Krauth, Pachucki--Yerokhin, Antognini)
-at the sub-percent level the framework operates at.  Eight
-exposures are catalogued (the later entries include architecture-class
-exposures beyond the convention class), including:\ the finite-size profile convention difference between an RMS
-radius $\langle r^2\rangle^{1/2}$ and a first moment $\langle r\rangle$
-(a three-dimensional Gaussian-profile factor
-$\langle r^2\rangle/\langle r\rangle^2=3\pi/8 \approx 1.178$, i.e.\
-$+17.7\%$ on the leading finite-size term vs the Eides closed form); and the resolution of
-a $3\sigma$ helium fine-structure disagreement traced to a numerically
-incorrect relativistic Bethe-log itemization in an older compilation.
+\paragraph{Itemization notes versus kernel gaps.}
+The autopsies meet itemization differences between published
+compilations; none was first found by the framework, and each is stated,
+and where noted reconciled, in its source (Paper~34 \S V.D).  The same
+catalogue records framework-internal entries such as the finite-size
+profile convention between an RMS radius $\langle r^2\rangle^{1/2}$ and a
+first moment $\langle r\rangle$ (a three-dimensional Gaussian-profile
+factor $\langle r^2\rangle/\langle r\rangle^2=3\pi/8 \approx 1.178$,
+i.e.\ $+17.7\%$ on the leading finite-size term vs the Eides closed form).
 The complementary finding-type is the \emph{framework kernel gap}:\
 places where the framework's leading-order operator (Eides Zemach,
 Foldy--Friar contact, closed-form leading finite size) is too coarse for the precision
 target.  Each precision tightening tends to relocate the load-bearing
 systematic from one to the other; cataloguing which class a given
-observable lands in is itself the program's output.
+observable lands in is the autopsies' output.
 
-\paragraph{The structural prediction that replaced the naive one.}
-A falsifiable structural PREDICTION emerges from re-tagging the matches
+\paragraph{The structural observation that replaced the naive one.}
+A structural OBSERVATION emerges from re-tagging the matches
 catalogue by the number of Layer-2 inputs a chain consumes.  An earlier
 form scaled the residual with projection \emph{depth}; the May~2026
 synthesis pass falsified that form on the catalogue itself (depth-3
@@ -475,13 +480,11 @@ hydrogen static polarizability $\tfrac92 a_0^3$, $S^3$ Casimir $1/240$) to
 basis-quality ceilings (the one-loop Lamb shift's $-0.534\%$ is not
 such a chain: it is a textbook assembly with tabulated Bethe
 logarithms, Paper~36);
-one-input chains tighten to tens of ppm or below; multi-input chains sit
-in the multi-focal-wall regime, dominated by the largest single input.
-This is a PREDICTION, consistent with the present catalogue with one
-known exception --- the corrected D 1S HFS row, whose $-210.9$~ppm
-residual against a single $r_Z(D)$ Layer-2 input is an open case rather
-than support (Paper~34 \S V.C) --- and
-falsifiable by future calculation, not a phenomenological fit.
+multi-input chains sit in the multi-focal-wall regime.  This is an
+OBSERVATION.  The zero-input rows are consistent with it; the one-input
+class has no clean member, and the corrected D 1S HFS row violates it,
+its $-210.9$~ppm residual exceeding its single $r_Z(D)$ input (Paper~34
+traces the violation to a missing polarizability channel).
 
 %% ========================================================================
 \section{Honest scope and positioning}
@@ -499,15 +502,15 @@ tier and no higher.  The projection dictionary is a concrete, structured
 artifact:\ every transcendental in the arc wears its projection tag.
 
 \paragraph{What is conditional.}
-The precision matches are sub-percent \emph{framework-native} agreements,
-not first-principles predictions of the physical constants.  Each
+The precision comparisons set \emph{framework-native} values against
+measurement; they are not first-principles predictions of the physical
+constants.  Each
 consumes external Layer-2 inputs (Zemach radii, $g$-factors, multi-loop
 QED coefficients, nuclear polarizabilities) in their native compilation
-conventions, and the program's value is precisely that it surfaces
-where those conventions and the framework's leading-order kernels are too
-coarse---a diagnostic instrument for precision systematics, not a
-replacement for the precision compilations.  The block-entropy exponent
-$\gamma_\infty\approx1.93$--$1.96$ is a MEASURED extrapolation, not the exact
+conventions, and the autopsies' value is that they show where the
+framework's leading-order kernels are too coarse---not a replacement for
+the precision compilations.  The block-entropy exponent
+$\gamma_\infty\approx1.96$--$1.97$ is a MEASURED extrapolation, not the exact
 second-order value~$2$.  The entropy area-law and the $R$-independence of
 composed block entanglement are properties of the construction, stated
 with their limitations, not physical statements about molecular
@@ -529,9 +532,8 @@ active boundary, not papered over.
 The natural reading of this arc is as a \emph{vocabulary and a
 diagnostic}.  The two-layer framework gives every GeoVac observable a
 definite answer to ``where does each transcendental enter,'' and the
-multi-observable focal-length program turns that vocabulary into an
-instrument that exposes convention mismatches and kernel gaps in precision
-atomic physics.  The discrete skeleton and its continuous projections are
+Roothaan autopsies apply that vocabulary to precision atomic observables
+and locate the framework's kernel gaps.  The discrete skeleton and its continuous projections are
 dual descriptions; the contribution is structural traceability, not an
 ontological claim and not a derivation of the constants the projections
 consume.
@@ -610,6 +612,12 @@ J.~Loutey,
 ``Time as Projection:\ The Klein--Gordon Spectrum on
 $S^3\times\mathbb{R}$ and the Algebraic / Observation Split,''
 GeoVac Paper~35 (2026).
+
+\bibitem{loutey_paper36}
+J.~Loutey,
+``The Leading One-Loop Hydrogen Lamb Shift:\ Assembly, a Convention
+Erratum, and Coulomb-Sturmian Bethe Logarithms,''
+GeoVac Paper~36 (2026).
 
 \end{thebibliography}
 

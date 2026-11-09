@@ -48,12 +48,13 @@ Added to the Hamiltonian as a model perturbation it does illustrate the
 one-body entanglement-inertness theorem of Paper~27: it moves the model
 energy by $10$--$39\%$ of the correlation energy while generating [retracted 2026-09-25: he-graph-native-hop-headline]
 $<0.2\%$ of the entanglement.)
-Second, basis-intrinsic sparsity: among orbital bases for systems
-with spherical symmetry, the angular momentum eigenbasis is the
-essentially unique basis producing sparse electron repulsion integrals (ERIs) (up to $(l,m)$-label-preserving rotations; generic angular-mixing rotations fill them).
-Any generic (angular-mixing) unitary rotation of orbital indices, no
+Second, basis-intrinsic sparsity: for systems with spherical symmetry,
+the angular momentum eigenbasis gives sparse electron repulsion integrals
+(ERIs), and a generic unitary rotation of the orbital indices, no
 matter how small, fills the ERI tensor from $17\%$ to $100\%$ density
-in a rapid but graded transition at the identity.  The nonzero ERI count
+in a rapid but graded transition at the identity.  The sparse bases
+are not isolated:\ a common rotation of the coordinate frame mixes the
+$m$ labels and leaves every ERI unchanged.  The nonzero ERI count
 is $Z$-independent, confirming that sparsity is purely geometric.
 Third, entanglement network topology: orbital mutual information
 maps reveal a hub migration pattern---$1s \to 2s \to 2p$---that
@@ -290,15 +291,21 @@ is no graph-validity boundary in the ion's Hamiltonian. [retracted 2026-09-25: h
 \label{sec:sparsity}
 %=================================================================
 
-\subsection{The angular momentum eigenbasis as a sparsity-isolated point}
+\subsection{The angular momentum eigenbasis under basis rotations}
 
 Paper~22 established that the angular ERI density is determined
 solely by angular quantum numbers and is independent of the radial
 potential~\cite{GeoVac_Paper22}.  We now ask a sharper question:
 within the space of orbital bases for a spherically symmetric
-system, is the angular momentum eigenbasis an isolated point of
-sparsity, or is it surrounded by a family of bases with comparable
-ERI density?
+system, how does the ERI density change as the basis is rotated
+away from the angular momentum eigenbasis?
+
+The sparse point is not isolated.  A common rotation of the
+coordinate frame, applied as the Wigner matrix $D^{(l)}$ to every
+$(n,l)$ shell, mixes the $m$ labels, yet it leaves every ERI
+unchanged, because $1/r_{12}$ is rotation invariant.  The
+eigenbasis therefore lies on a continuous family of equally sparse
+bases.  The question is what a generic rotation does.
 
 We test this by applying a unitary rotation
 $U(\theta) = e^{i \theta G}$ to the spatial orbital basis, where
@@ -310,21 +317,13 @@ of nonzero ERIs as a function of the rotation angle $\theta$.
 At $n_{\max} = 2$ (five spatial orbitals: $1s, 2s, 2p_{-1}, 2p_0,
 2p_1$), the graph basis produces \gvq{block_sp_n2_eri}{107} nonzero ERIs out of
 $5^4 = 625$ possible four-index combinations, corresponding to an
-ERI density of $17.1\%$.  Rotating the basis by any nonzero angle
-fills the ERI tensor: the density rises to $42.7\%$ at
-$\theta = 10^{-8}$, $70.2\%$ at $10^{-6}$, $83.0\%$ at $10^{-4}$,
-and saturates at $100\%$ ($625/625$) for $\theta \gtrsim 10^{-2}$.
+ERI density of $17.1\%$.  Rotating the basis by a nonzero angle
+along a random generator fills the ERI tensor: the density rises to
+$42.7\%$ at $\theta = 10^{-8}$, $70.2\%$ at $10^{-6}$, $83.0\%$ at
+$10^{-4}$, and saturates at $100\%$ ($625/625$) for
+$\theta \gtrsim 10^{-2}$.
 
-\emph{Corrected 2026-08-29.}  This subsection previously reported
-$265/625 = 42.4\%$.  That count came from an evaluator that omitted
-the Coulomb selection rule $m_a + m_b = m_c + m_d$, so $158$ of the
-$265$ entries ($59.6\%$) were physically zero.  The correction
-\emph{strengthens} the sparsity claim and reverses the basis-size
-trend reported below; the qualitative content --- that the sparse
-point is isolated and any angular-mixing departure is dense --- is
-unchanged.
-
-The discontinuity is at the identity itself; the approach to
+Along a generic generator the discontinuity is at the identity itself; the approach to
 saturation is rapid but graded, not a step at a finite $\theta$:
 \begin{equation}
   D(\theta) =
@@ -368,8 +367,8 @@ $n_{\max} = 4$.  Counting instead over canonical unique tuples
 ($p \le q$, $r \le s$) gives $15{,}293$ of $216{,}225$, a density of
 $7.07\%$ --- and the same improvement is visible within that
 convention alone ($18.2\%$ at $n_{\max} = 2$), so the trend is not
-an artifact of mixing the two counts.  Any rotation again fills the
-tensor to near-complete density.
+an artifact of mixing the two counts.  A generic rotation again
+fills the tensor to near-complete density.
 
 \emph{Corrected 2026-08-29.}  The retired text reported $318{,}720$
 ($39.3\%$) and $79{,}465$ ($36.8\%$) and concluded that the density
@@ -396,15 +395,10 @@ angular integrals vanish.
 
 The Gaunt-driven Pauli sparsity of the GeoVac composed qubit
 Hamiltonians~\cite{GeoVac_Paper14} is a direct consequence of
-the Gaunt sparsity.  The rapid but graded transition
-(Eq.~\ref{eq:step}) shows that this scaling is not continuously
-connected to the $O(Q^{3.9\text{--}4.3})$ scaling of Gaussian
-bases.  The angular momentum eigenbasis sits at a distinguished point
-in the space of orbital bases: an \emph{essentially} unique point where
-angular momentum conservation is exactly respected and the ERI tensor
-is sparse---unique up to $(l,m)$-label-preserving rotations, which
-leave the sparsity intact.  Any \emph{generic} (angular-mixing)
-departure from it, however small, incurs the dense-ERI penalty.
+the Gaunt sparsity.  The angular momentum eigenbasis, and every
+basis related to it by a common frame rotation, keeps the ERI tensor
+sparse; a \emph{generic} departure from that family, however small,
+incurs the dense-ERI penalty (Eq.~\ref{eq:step}).
 
 %=================================================================
 \section{Entanglement Network Topology}
@@ -468,10 +462,11 @@ $p$--$p$ link, $I(2p_{-1}, 2p_{+1}) = 0.202$.
 The hub transitions to the $2p(\pm 1)$ pair, which carries the
 mutual information:\ $I(2p_{-1}, 2p_{+1}) = 0.148$ (N), $1.063$ (O),
 $0.311$ (F) \emph{for the multiplet member the eigensolver returns}.
-These ground states are $4$-, $7$- and $6$-fold degenerate, and the
-value is \emph{member-dependent}:\ it ranges from $0$ on
-single-determinant members up to a sampled maximum of $0.69$ (N),
-$1.34$ (O), $1.32$ (F).  The quoted values are therefore
+These ground states are the $4$-, $9$- and $6$-fold degenerate
+${}^4S$, ${}^3P$ and ${}^2P$ multiplets, and the
+value is \emph{member-dependent}:\ it ranges from near $0$ up to
+sampled maxima of about $0.7$ (N), $1.3$ (O) and $1.3$ (F) over $200$
+random members of each multiplet.  The quoted values are therefore
 eigensolver-dependent, not basis constants, and even the qualitative
 reading ``the valence network is alive'' is member-dependent.
 
@@ -510,9 +505,10 @@ Measured shares of the total mutual information:\ $1s$ carries $99.0\%$ at
 $Z=2$ and is still at $89.8\%$ at $Z=3$ (alongside $2s$ at $91.2\%$)---at
 lithium the two are co-hubs of a single dominant pair, and $1s$ is not
 frozen.  It collapses only at $Z=4$ ($0.5\%$), where $2s$ becomes the hub
-at $65.1\%$; thereafter $2s$ itself freezes progressively ($19.0\%$ at
-$Z=5$, $3.7\%$ at $Z=6$) as the strongest correlation moves to the
-$2p$--$2p$ pair ($I = 0.537$ at $Z=5$, $1.393$ at $Z=6$).
+at $65.1\%$; thereafter the strongest correlation moves to the
+$2p$--$2p$ pair.  The B and C ground states are the $6$- and $9$-fold
+degenerate ${}^2P$ and ${}^3P$ multiplets, so their shares, like those
+of N--F, depend on the multiplet member.
 
 \subsection{Physical interpretation}
 
@@ -750,12 +746,12 @@ the correlation energy but $< 0.2\%$ of the entanglement---holds only
 for a hop-augmented model Hamiltonian that is not the ion's, and is
 retained only as an illustration of one-body entanglement-inertness.
 
-Second, among orbital bases for spherically symmetric systems,
-the angular momentum eigenbasis is an essentially isolated point of
-ERI sparsity---isolated up to $(l,m)$-label-preserving rotations.  Any
-\emph{generic} (angular-mixing) unitary rotation of the orbital indices,
-no matter how small, fills the ERI tensor from $17.1\%$ to $100\%$
-density in a rapid but graded transition at the identity.
+Second, for spherically symmetric systems the angular momentum
+eigenbasis gives sparse ERIs, and a \emph{generic} unitary rotation of
+the orbital indices, no matter how small, fills the ERI tensor from
+$17.1\%$ to $100\%$ density in a rapid but graded transition at the
+identity.  The sparse bases are not isolated:\ a common rotation of the
+coordinate frame leaves every ERI unchanged.
 
 Third, the orbital mutual information network exhibits a hub
 migration pattern---$1s \to 2s \to 2p$---that tracks the
