@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.10] - 2026-11-10
+
+**Backing restored for the five claims v6.7.9 left on prose alone (PI-directed, pre-release).** The old backing was
+in debug/archive/; papers may not cite debug/, so each claim now has a test in tests/ (or, for the two frozen
+prediction files, a home in docs/predictions/) and the paper cites it. Every new or tightened guard was fire-tested
+against the wrong answer it rejects. Rows in docs/claim_test_matrix.md ("Backing restored ...").
+
+### Changed
+- Paper 44 Thm 8.1 table: the witness-pair residuals reproduce exactly (0.381246 at n_max = 2 for N_t = 1, 3, 5;
+  0.358913 at n_max = 3). New `test_witness_pair_nmax_3_Nt_1`; the two n_max = 2 tests are pinned to 0.3812 at 4
+  decimals (their 0.30-0.45 band accepted either value, and one comment named 0.3589 for an n_max = 2 cell). The
+  proof cites all three tests.
+- Paper 50 S^5: already backed by tests/test_paper50_f_theorem.py (S^5 block, 40 digits, recomputed from the
+  spectrum since v4.22.1); the v6.7.9 entry's "covers S^3, S^7, S^11 only" looked at the wrong file. The S^5 section
+  now cites the test. Fire-tested 2/2 (wrong Dirac multiplicity coefficient; the historical 4x scalar over-count).
+- Paper 35 convention line: new tests derive 17/480, 17/960 and 17/1920 each from its own multiplicity (Bernoulli
+  at 3/2), and the Dowker-Altaie density 17/(1920 pi^2 a^4) to the energy 17/(960 a); cited inline. Fire-tested 3/3.
+- Paper 34: new test of the muH Bohr-Fermi nu_F(mu p) = 182.4433 meV by two routes (atomic-unit Fermi contact;
+  textbook energy form), +2 ppm vs Eides 182.443; cited at the catalogue row and at the alkali-table footnote (that
+  table was already covered by tests/test_paper34_autopsy_baselines.py). The 185.94x Zemach factor was already
+  tested (tests/test_magnetization_density.py; 185.84 there is m_red/m_e, 185.94 the ratio to the ep reduced mass).
+- Frozen predictions moved by git mv to docs/predictions/: 2026-05-04_tx_b_predictions.json (Paper 35) and
+  2026-05-23_w1c_mz_partition_predictions.json (Papers 19, 34); the three papers name them again. Caveat recorded in
+  the matrix: each file is unchanged since its first commit, but that commit also carried the results, so git alone
+  does not show the predictions came first.
+- Papers 19, 34, 35, 44, 50 recompiled three-pass clean; C13 (group1/2/6), C14, C19 PASS; plain debug/ grep over
+  the live papers still empty. Two group1 review stamps carried; the changed group2/group6 units were already
+  unstamped or stale.
+- Version 6.7.10 in CITATION.cff, .zenodo.json, README and the uploader's CORPUS_VERSION.
+
 ## [v6.7.9] - 2026-11-09
 
 **Live debug/ references removed from the papers (PI-directed, pre-release).** CLAUDE.md Sec. 9: papers cite their

@@ -595,8 +595,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::The witness pair": {
    "date": "2026-11-03",
-   "hash": "185617bac994d184",
-   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
+   "hash": "1e638e25dfae689a",
+   "note": "hash carried 2026-11-10 (v6.7.10): backing-test citation added, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Acknowledgments": {
@@ -785,7 +785,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit": {
    "date": "2026-11-03",
-   "hash": "d9c997d3c3b27312",
+   "hash": "f53423aeab9c7e26",
+   "note": "hash carried 2026-11-10 (v6.7.10): backing-test citation added, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit / Closed forms on S^ 5 (PSLQ-identified)": {

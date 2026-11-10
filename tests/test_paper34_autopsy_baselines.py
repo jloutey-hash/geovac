@@ -419,3 +419,31 @@ def test_paper34_alkali_cliff_closed_form():
     psi_need = [cliff[i] * psi_cr67[i] for i in range(5)]
     assert all(b > a for a, b in zip(psi_need, psi_need[1:])), (
         f"the NEEDED density must be smooth/monotone: {psi_need}")
+
+
+def _muh_bohr_fermi_mev(m_red_mev: float, m_mu_mev: float) -> tuple[float, float]:
+    """muH 1S Bohr-Fermi energy (g_mu = 2, point proton) by two routes.
+
+    Route 1: Fermi contact in atomic units, (8 pi/3)(m_e/m_mu)(g_p/2)(m_e/m_p)
+    alpha^2 |psi(0)|^2 with |psi(0)|^2 = (m_red/m_e)^3/pi, times E_h.
+    Route 2: textbook energy form E_F = (4/3) alpha^4 g_p m_red^3/(m_mu m_p).
+    """
+    alpha, m_e, m_p, g_p = 7.2973525693e-3, 0.51099895000, 938.27208816, 5.5856946893
+    psi0 = (m_red_mev / m_e) ** 3 / math.pi
+    r1 = ((8 * math.pi / 3) * (m_e / m_mu_mev) * (g_p / 2) * (m_e / m_p)
+          * alpha ** 2 * psi0 * 27211.386245988)
+    r2 = 4 / 3 * alpha ** 4 * g_p * m_red_mev ** 3 / (m_mu_mev * m_p) * 1e9
+    return r1, r2
+
+
+def test_paper34_muh_bohr_fermi_182_4433_mev():
+    """Paper 34 catalogue row: nu_F(mu p) = 182.4433 meV, +2 ppm vs the Eides
+    pure-QED 182.443 meV. Both routes must agree, with the muon-proton REDUCED
+    mass (using the muon mass instead moves nu_F by ~38%)."""
+    m_mu, m_p = 105.6583755, 938.27208816
+    m_red = m_mu * m_p / (m_mu + m_p)
+    r1, r2 = _muh_bohr_fermi_mev(m_red, m_mu)
+    assert abs(r1 - r2) < 1e-6 * r1, (r1, r2)
+    assert round(r1, 4) == 182.4433, r1
+    ppm = (r1 / 182.443 - 1) * 1e6
+    assert 1.0 < ppm < 3.0, ppm

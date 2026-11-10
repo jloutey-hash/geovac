@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.9 (November 9, 2026)
+**Version:** v6.7.10 (November 10, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Backing restored for five prose-only claims (2026-11-10, v6.7.10, PI-directed):** P44 n_max=3 residual, P35 Casimir conventions, P34 muH nu_F tests, fire-tested; P50 cited; predictions to docs/predictions/. CHANGELOG v6.7.10.
 - **Live debug/ references removed from papers (2026-11-09, v6.7.9, PI-directed):** 145 + 16 uncounted, 30 papers; plain grep clean; 29 stamps carried; five only-backing gaps raised. CHANGELOG v6.7.9.
 - **Release metadata refreshed (2026-11-09, v6.7.8, PI-approved):** `.zenodo.json` description rewritten from owner wording (was v4.76.0, retired claims); CITATION.cff, README versions; P30/P51 PDFs. CHANGELOG v6.7.8.
 - **Dead debug/ pointers removed from papers (2026-11-08, v6.7.7, PI-directed):** 308 in 21 papers; deleted or CHANGELOG sprint record; C14 hygiene 0; 145 live debug/ refs remain. CHANGELOG v6.7.7.

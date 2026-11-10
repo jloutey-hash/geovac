@@ -360,10 +360,8 @@ def test_witness_pair_nmax_2_Nt_1():
         f"Witness pair unexpectedly in O^L "
         f"(residual {residual:.3e})"
     )
-    # Significant residual, pinned to the paper's ~38% non-closure (Thm 8.1: 0.3812)
-    assert 0.30 < residual < 0.45, (
-        f"ab residual {residual:.4f} should be ~0.38 (the paper's ~38% non-closure)"
-    )
+    # Paper 44 Thm 8.1 table: 0.3812 at (n_max, N_t) = (2, 1)
+    assert abs(residual - 0.3812) < 5e-5, f"ab residual {residual:.6f} != 0.3812"
 
 
 def test_witness_pair_components_in_O_L():
@@ -387,7 +385,20 @@ def test_witness_pair_nmax_2_Nt_3():
     assert a is not None
     in_O_L, residual = test
     assert not in_O_L
-    assert 0.30 < residual < 0.45  # paper Thm 8.1: ~0.3589 at N_t=3
+    assert abs(residual - 0.3812) < 5e-5  # paper Thm 8.1 table: 0.3812, N_t-independent
+
+
+def test_witness_pair_nmax_3_Nt_1():
+    """At n_max = 3 the same witness label gives the smaller residual 0.3589
+    (Paper 44 Thm 8.1 table): the truncation reaches one shell higher."""
+    O = LorentzianTruncatedOperatorSystem(n_max=3, N_t=1)
+    a, b, ab, test = witness_pair_lorentzian(
+        O, N_target=2, L_target=1, M_target=0, p_target=0
+    )
+    assert a is not None
+    in_O_L, residual = test
+    assert not in_O_L
+    assert abs(residual - 0.3589) < 5e-5, f"ab residual {residual:.6f} != 0.3589"
 
 
 # ---------------------------------------------------------------------------

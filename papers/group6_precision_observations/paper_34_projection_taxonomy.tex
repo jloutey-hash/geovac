@@ -3710,7 +3710,8 @@ $\alpha^2{\cdot}\mathbb{Q}, c_1 \cdot \mathbb{Q}$ & $+58$ ppm \\
 magnetization-density (\S~\ref{sec:proj_magnetization_density}) &
 $r_Z$ & energy & calibration & $+18$ ppm  \\
 $\mu$H 1S Bohr--Fermi $\nu_F(\mu p) = 182.4433$ meV (Sprint MH Track B,
-$+$ external $g_p$) & spinor lift (Fermi-contact vertex) $\circ$ Fock
+$+$ external $g_p$; \texttt{tests/test\_paper34\_autopsy\_baselines.py})
+& spinor lift (Fermi-contact vertex) $\circ$ Fock
 $\circ$ rest-mass projection ($m_\mu$, muon, lepton swap) $\circ$
 rest-mass projection ($m_p$, proton) & $\alpha, g_p, m_\mu/m_e, m_e/m_p$
 & energy & $\alpha^2 \cdot \mathbb{Q}$ &
@@ -7274,7 +7275,8 @@ tell was the three identical $0.3$~MHz entries for K, Rb and Cs.  This is
 the mass-slot half of the same convention defect corrected in
 \S\ref{sec:autopsy_d_hfs} and \S\ref{sec:autopsy_li7_hfs}; the corrected
 Li-7 row now agrees with that autopsy's independently corrected residual,
-which it did not before.}
+which it did not before. Recomputed in
+\texttt{tests/test\_paper34\_autopsy\_baselines.py}.}
 \label{tab:alkali_cliff_sequence}
 \end{table}
 
@@ -7789,7 +7791,9 @@ at max\_n=2 due to dimensional poverty alone.
 \textbf{Source compilations / framing perspectives.} Bridge sprint's
 three-bucket hypothesis (the refinement to test) vs.\ the
 original two-bucket M-Z partition (the null hypothesis). Three
-falsifiable predictions for NaH max\_n=3 were prespecified and frozen before the test ran (curve-fit-audit discipline at inter-sprint scope):
+falsifiable predictions for NaH max\_n=3 were prespecified and frozen
+into \texttt{docs/predictions/2026-05-23\_w1c\_mz\_partition\_predictions.json}
+before the test ran (curve-fit-audit discipline at inter-sprint scope):
 \textbf{P1} (internal PES minimum at $R_\text{eq} \in [3.0, 4.5]$~bohr),
 \textbf{P2} (binding $D_e \in [0.0375, 0.150]$~Ha within $2\times$
 experimental $D_e \approx 0.075$~Ha), \textbf{P3} (multi-zeta differential

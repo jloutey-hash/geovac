@@ -23,6 +23,7 @@ from __future__ import annotations
 import os
 import sys
 
+import pytest
 import sympy as sp
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -150,6 +151,52 @@ def test_paper35_dirac_casimir_derived_from_bernoulli():
     # discrimination guard: the derivation rejects a mis-transcribed Bernoulli
     bad = 4 * (-sp.Rational(127, 241) / 4 - sp.Rational(1, 4) * zh_m1)
     assert -sp.Rational(1, 2) * bad != E, "derivation insensitive to B_4 corruption"
+
+
+def _casimir_from_multiplicity(mult_per_level):
+    """E = -(1/2) sum_n g(n) |lambda_n|, |lambda_n| = n + 3/2 on unit S^3,
+    zeta-regularised: g is rewritten as a polynomial in u = n + 3/2 and each
+    power u^j contributes zeta_H(-1-j, 3/2) = -B_{j+2}(3/2)/(j+2)."""
+    import sympy as sp
+
+    n, u = sp.symbols("n u")
+    g = sp.Poly(sp.expand(mult_per_level(n).subs(n, u - sp.Rational(3, 2))), u)
+    zeta_m1 = sum(c * (-sp.bernoulli(j + 2, sp.Rational(3, 2)) / (j + 2))
+                  for (j,), c in g.terms())
+    return -sp.Rational(1, 2) * zeta_m1
+
+
+@pytest.mark.parametrize("label,mult,expect", [
+    # full Dirac: 2 chiralities x 2 signs, (n+1)(n+2) each
+    ("full Dirac", lambda n: 4 * (n + 1) * (n + 2), (17, 480)),
+    # one Weyl chirality, both signs (= one Majorana's real d.o.f. count)
+    ("single Weyl, both signs", lambda n: 2 * (n + 1) * (n + 2), (17, 960)),
+    ("single chirality, single sign", lambda n: (n + 1) * (n + 2), (17, 1920)),
+])
+def test_paper35_dirac_casimir_convention_translations(label, mult, expect):
+    """Paper 35 KG-5 convention line: 17/480 (full), 17/960 (single Weyl
+    chirality with both signs; single Majorana), 17/1920 (single chirality,
+    single sign), each derived from its own multiplicity, not by dividing the
+    printed full value."""
+    import sympy as sp
+
+    E = _casimir_from_multiplicity(mult)
+    assert E == sp.Rational(*expect), f"{label}: {E} != {expect[0]}/{expect[1]}"
+
+
+def test_paper35_dowker_altaie_density_to_energy():
+    """Dowker-Altaie <T_00> = 17/(1920 pi^2 a^4), integrated over
+    Vol(S^3) = 2 pi^2 a^3, is E = 17/(960 a): it matches the single-Weyl line
+    (17/960), NOT the single-chirality-single-sign 17/1920 that shares its
+    density numeral (the identification Paper 35 warns against)."""
+    import sympy as sp
+
+    a = sp.Symbol("a", positive=True)
+    E = sp.simplify(sp.Rational(17, 1920) / (sp.pi**2 * a**4) * 2 * sp.pi**2 * a**3)
+    single_weyl = _casimir_from_multiplicity(lambda n: 2 * (n + 1) * (n + 2))
+    single_sign = _casimir_from_multiplicity(lambda n: (n + 1) * (n + 2))
+    assert sp.simplify(E * a - single_weyl) == 0, E
+    assert sp.simplify(E * a - single_sign) != 0
 
 
 def test_paper35_kg2_seventh_eigenvalue_is_2pi():
