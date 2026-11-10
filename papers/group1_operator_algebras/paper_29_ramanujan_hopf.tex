@@ -470,8 +470,7 @@ substrate, while the magnetic $m_j$ reflection thrives.
 
 Observation~\ref{obs:chirality_obstruction} was verified in exact
 $\mathbb{F}_2$ arithmetic
-(\texttt{tests/test\_spin\_structure\_obstruction.py},
-\texttt{debug/spin\_structure\_moduli\_memo.md}): the $m_j$ permutation
+(\texttt{tests/test\_spin\_structure\_obstruction.py}): the $m_j$ permutation
 is a fixed-point-free automorphism at $n_{\max}=2,3$, and the
 $(2\ell+2)$-vs-$2\ell$ block mismatch holds at $n_{\max}=2,3,4$ with
 total $n_{\max}(n_{\max}+1)$.  It supplies the substrate-level reason
@@ -756,8 +755,7 @@ graph-RH for GeoVac is a finite-size statement, secured for
 $n_{\max},N_{\max}\le 3$ and failing asymptotically for the two
 families that cross.  The finite-size sign flip (Ramanujan at small size,
 crossing at $V\approx 30$--$60$) is recomputed from the live graph
-spectra in \texttt{tests/test\_paper29\_bound\_crossing.py}; full data
-at \texttt{debug/data/alon\_boppana\_sweep.json}.
+spectra in \texttt{tests/test\_paper29\_bound\_crossing.py}.
 
 \paragraph{Hopf-quotient block decomposition --- validated (Sprint~2, RH-E).}
 Observation~\ref{obs:12_22} has been verified by direct restriction of
@@ -833,8 +831,7 @@ are \emph{not} on a single critical line (they are scattered in
 $\mathrm{Re}(s) \in [2.02, 3.42]$), so the GUE signature is spacing-only,
 not an RH-style line constraint. Classical $\zeta$ has RMT spacing
 \emph{and} zeros-on-$\Re s = 1/2$ simultaneously; GeoVac has only the
-first. Full sample-size caveats, KS p-values, and pair-correlation
-data in \texttt{debug/spectral\_zero\_stats\_memo.md}. Cross-sprint
+first.  Cross-sprint
 coherence: combined with Sprint~3 RH-J's closed-form identity
 $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$
 (Paper~28~\cite{paper28}, Theorem~3), the $\chi_{-4}$

@@ -304,7 +304,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Four witnesses, one construction (by construction)": {
    "date": "2026-11-03",
-   "hash": "4560e330431b4f82",
+   "hash": "e62903dc737d44c0",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Krein-carrier extension at finite cutoff": {
@@ -370,12 +371,14 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Lorentzian-readiness audit and Riemannian scope / The 28-projection Lorentzian transfer audit": {
    "date": "2026-11-03",
-   "hash": "e7c82edfe8bd16e9",
+   "hash": "edd6f36f6efbd24f",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::Related work and scope": {
    "date": "2026-11-03",
-   "hash": "cd0c91f868e2c1c3",
+   "hash": "467358595ac2e322",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Bisognano--Wichmann modular structure at finite cutoff": {
@@ -405,7 +408,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / Bit-exact period closure at the Tomita level": {
    "date": "2026-11-03",
-   "hash": "836f1068a8565f53",
+   "hash": "f1e83882215edbee",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The Tomita--Takesaki construction (BW- ) / Spectrum of K_": {
@@ -440,7 +444,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- ) / Operator-system non-leakage": {
    "date": "2026-11-03",
-   "hash": "cabb75fe32c7aa58",
+   "hash": "ef4c2b86cca497ae",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- ) / The geometric generator": {
@@ -450,7 +455,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The geometric construction (BW- ) / The geometric modular flow": {
    "date": "2026-11-03",
-   "hash": "01ed0c4ab2c49e76",
+   "hash": "aa44ac3e45b80e5c",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex::The truncated Camporesi--Higuchi spectral triple": {
@@ -491,7 +497,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Appendix: Section reference for the sec:propagation Sec. 5 context cro": {
    "date": "2026-11-03",
-   "hash": "1cbb462ab77adf60",
+   "hash": "44c633dac961721a",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Connection to the Krein hemispheric wedge of Paper 42": {
@@ -511,7 +518,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Introduction": {
    "date": "2026-11-03",
-   "hash": "b7eb1bb1fa75f83f",
+   "hash": "67d22132fad4da30",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::Introduction / Outline": {
@@ -587,7 +595,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex::The witness pair": {
    "date": "2026-11-03",
-   "hash": "9c09ce0bf2b5724d",
+   "hash": "185617bac994d184",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Acknowledgments": {
@@ -657,8 +666,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification and Riemannian-limit recovery / Verification panel": {
    "date": "2026-11-03",
-   "hash": "e0db2b00a9f26734",
-   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
+   "hash": "f0cdd04d09797bbc",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex::Numerical verification panel data": {
@@ -786,7 +795,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit / Implementation effort and continuation pattern": {
    "date": "2026-11-03",
-   "hash": "19333eccb4373a77",
+   "hash": "42f927db2c24375f",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group1 FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_50_cft3_partition_function.tex::Extension to S^ 5 : structural refinement of the dual-basis decomposit / Log 3 cancellation theorem": {

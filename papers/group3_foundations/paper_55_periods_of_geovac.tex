@@ -13,9 +13,7 @@
 % which closed the master Mellin engine trinity at the Paper 32 §VIII
 % corollary level.
 %
-% Built from internal sprint memos:
-%   debug/sprint_mixed_tate_test_memo.md (M2)
-% and the closure paragraphs in Paper 18 §III.7 and Paper 32 §VIII
+% Built from the closure paragraphs in Paper 18 §III.7 and Paper 32 §VIII
 % corollaries cor:m1_pure_tate, cor:m2_mixed_tate,
 % cor:m3_cyclotomic_mixed_tate.
 % =====================================================================
@@ -1226,8 +1224,7 @@ $J(s_1, s_2) = \sum_n (-1)^n g_n\, \lambda_n^{3 - 2 s_{\mathrm{tot}}}$.
 Setting $|\lambda_n| = (2n + 3)/2$ and $g_n = (n + 1)(n + 2)$ and
 identifying with $M_3^{\gamma_P}(s_{\mathrm{tot}} - 1)$ gives the
 claimed termwise algebraic identity. Bit-exact numerical
-verification at $s_{\mathrm{tot}} \in \{3, 4, 5, 6, 7\}$, $200$ dps,
-recorded in \texttt{debug/data/na1\_depth2\_mellin\_results.json}.
+verification at $s_{\mathrm{tot}} \in \{3, 4, 5, 6, 7\}$, $200$ dps.
 \end{proof}
 
 The depth-$2$ joint Mellin transform of an M2 $\times$ M3 pair, on
@@ -1402,8 +1399,7 @@ antisymmetric content.
 
 \begin{proof}[Proof sketch and honest scope]
 The cocycle values are computed bit-exactly via the $t$-power-series
-expansion of the JLO simplex integral (driver
-\texttt{debug/sprint\_jlo\_depth2\_compute.py}).  Bit-exact swap symmetry on the $10$-pair $\times$ $2$-order $\times$
+expansion of the JLO simplex integral.  Bit-exact swap symmetry on the $10$-pair $\times$ $2$-order $\times$
 $2$-flavour panel = $40$ zero residuals computed in \texttt{sympy}
 rational arithmetic; in the even flavour, bit-exact $S_3$-orbit
 invariance on $\chi_D(e_0, e_1, e_2)$ across all $6$ permutations.
@@ -2295,9 +2291,7 @@ residue framework" is hereby upgraded to a theorem-grade closure
 at the bicomplex-cocycle-class level.
 
 \emph{Stage~1 pro-system functoriality across cutoffs (Sprint
-Q5'-Stage1-Prosystem, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_prosystem\_memo.md}, data
-\texttt{debug/data/sprint\_q5p\_prosystem.json}).}
+Q5'-Stage1-Prosystem, June 2026).}
 The Stage-1 cocycle classes form a strictly compatible inverse system
 across $n_{\max} \in \{1, 2, 3, 4\}$.  Sector idempotents at cutoff
 $n_{\max}$ are indexed by $(n, l)$ with $1 \le n \le n_{\max}$ and
@@ -2331,9 +2325,7 @@ Connes 1994 Ch.~IV and Loday \S~1.4 remains open, orthogonal to and
 independent of the Stage-1 class-level closure documented here.
 
 \emph{Stage 2 first scoping step:\ candidate Hopf algebra
-$\mathcal{H}_{\mathrm{GV}}$ (Sprint Q5'-Stage2-Hopf, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_stage2\_hopf\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_stage2\_hopf.json}).}  Building on the
+$\mathcal{H}_{\mathrm{GV}}$ (Sprint Q5'-Stage2-Hopf, June 2026).}  Building on the
 pro-system substrate above, the first scoping step of Stage 2 produces
 a concrete bit-exact finite-cutoff candidate Hopf algebra
 \[
@@ -2521,9 +2513,7 @@ two preserve the Hopf-algebra category and are correspondingly more
 tractable.}  Long-range continuation via Pimsner--Voiculescu sequence.
 
 \emph{Stage 2 HEADLINE substrate:\ Levi-decomposition tensor synthesis
-(Sprint Q5'-Levi-Synthesis, June 2026;\ memo
-\texttt{debug/sprint\_q5p\_levi\_synthesis\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_levi\_synthesis.json}).}  Combining the
+(Sprint Q5'-Levi-Synthesis, June 2026).}  Combining the
 v3.61.0 abelian primitive substrate with the v3.62.0 Peter--Weyl
 substrate via tensor product
 $\mathcal{H}_{\mathrm{GV}}^{\mathrm{Levi}, (n_{\max}, j_{\max})}
@@ -2797,9 +2787,7 @@ this sprint) remain open as named follow-ons.
 
 \emph{Pro-system lockdown PS-1:\ transition maps as closed-form
 algebra homomorphisms with bit-exact cofiltered axiom (Sprint
-Q5'-ProSystem-Lockdown, PS-1 sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_ps1\_transitions\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_ps1\_transitions.json};\ module
+Q5'-ProSystem-Lockdown, PS-1 sub-track, 2026-06-06;\ module
 \texttt{geovac/pro\_system.py}).}  The transition maps
 $P_{m, k}: \mathcal{O}_m \to \mathcal{O}_k$ between truncated
 sector-idempotent algebras are realised as closed-form
@@ -2949,9 +2937,7 @@ is now fully named.
 
 \emph{Tannakian closure foundation TC-1a:\
 $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}})$ is abelian
-(Sprint Q5'-Tannakian-Closure, TC-1a sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_tc1a\_abelian\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_tc1a\_abelian.json}).}  The category
+(Sprint Q5'-Tannakian-Closure, TC-1a sub-track, 2026-06-06).}  The category
 $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$
 of finite-dim rational representations of the v3.61.0 Track A
 abelian primitive Hopf algebra
@@ -3009,9 +2995,7 @@ Tannakian-closure prerequisites named by PS-4 (v3.69.0).  TC-1c
 first stone) opens the heart of Tannakian closure.
 
 \emph{Tannakian closure foundation TC-1c:\ rigidity (Sprint
-Q5'-Tannakian-Closure, TC-1c sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_tc1c\_rigidity\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_tc1c\_rigidity.json}).}  The category
+Q5'-Tannakian-Closure, TC-1c sub-track, 2026-06-06).}  The category
 $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))$
 is \emph{rigid}.  Every finite-dim rep $V$ admits a dual
 $V^\vee = \mathrm{Hom}_\mathbb{Q}(V, \mathbb{Q})$ with the
@@ -3042,9 +3026,7 @@ strict equality.  TC-1c closes the THIRD of four sprint-scale
 Tannakian-closure prerequisites named by PS-4 (v3.69.0).
 
 \emph{Tannakian closure foundation TC-1d:\ fiber functor $\omega$
-(Sprint Q5'-Tannakian-Closure, TC-1d sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_tc1d\_fiber\_functor\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_tc1d\_fiber\_functor.json}).}
+(Sprint Q5'-Tannakian-Closure, TC-1d sub-track, 2026-06-06).}
 The forgetful functor $\omega:
 \mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(n_{\max}))
 \to \mathrm{Vec}_\mathbb{Q}$ sending a representation
@@ -3078,9 +3060,7 @@ at $n_{\max} = 2$) opens the heart of Tannakian closure.
 
 \emph{Tannakian closure foundation TC-1e:\ first stone of the
 long-range wall (Sprint Q5'-Tannakian-Closure, TC-1e sub-track,
-2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_tc1e\_aut\_inclusion\_memo.md};\ data
-\texttt{debug/data/sprint\_q5p\_tc1e\_aut\_inclusion.json}).}
+2026-06-06).}
 The pro-unipotent factor $\mathbb{G}_a^{3 N(n_{\max})}(\mathbb{Q})$
 of $U^*_{\mathrm{GeoVac}, \mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})}
 \rtimes SL_2$ maps explicitly into the natural
@@ -3118,9 +3098,7 @@ is bit-exact.
 
 \emph{Tannakian closure foundation TC-1f:\ explicit $\mathbb{G}_a
 \times SL_2$ inclusion + full-panel injectivity (Sprint
-Q5'-Tannakian-Closure, TC-1f sub-track, 2026-06-06;\ memo
-\texttt{debug/sprint\_q5p\_tc1f\_sl2\_inclusion\_memo.md};\ data
-\texttt{debug/data/q5p\_tc1f\_sl2\_inclusion.json}).}
+Q5'-Tannakian-Closure, TC-1f sub-track, 2026-06-06).}
 The $SL_2$ factor of $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})}
 \rtimes SL_2$ is realised on the Peter--Weyl panel
 $\{V_{\mathrm{triv}}, V_{\mathrm{fund}} = \mathbb{Q}^2, \mathrm{Sym}^2

@@ -453,7 +453,8 @@
   },
   "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Adiabatic Potential Curves": {
    "date": "2026-11-04",
-   "hash": "6ca27b5386054bb3",
+   "hash": "7a422b3e37674eb2",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "qa-group2-full-2026-11-04"
   },
   "prose:papers/group2_quantum_chemistry/paper_13_hyperspherical.tex::Algebraic Angular Solver and Coupled-Channel Convergence": {
@@ -1004,7 +1005,8 @@
   },
   "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::The molecular frontier: Shibuya--Wulfman conditioning": {
    "date": "2026-11-04",
-   "hash": "451562b5c4e254cd",
+   "hash": "e9ed42d789a43208",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "qa-group2-full-2026-11-04"
   },
   "prose:papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex::The quantum algorithm and its novelty": {

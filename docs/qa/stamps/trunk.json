@@ -78,7 +78,8 @@
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Real structure": {
    "date": "2026-11-03",
-   "hash": "ac0d92214121e6c0",
+   "hash": "0452388cf227d16e",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "trunk FULL incremental 2026-11-03"
   },
   "prose:papers/group1_operator_algebras/paper_32_spectral_triple.tex::Axiom Audit / Summary": {

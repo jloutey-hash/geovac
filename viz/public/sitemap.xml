@@ -8,11 +8,9 @@
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_39_tensor_propinquity_convergence.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_40_unified_propinquity_convergence.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_42_modular_hamiltonian_four_witness.html</loc></url>
-  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_43_lorentzian_extension.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_44_lorentzian_operator_system.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_45_lorentzian_propinquity.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_50_cft3_partition_function.html</loc></url>
-  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_52_category_iii_correspondence.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_53_disk_propinquity.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_11_prolate_spheroidal.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_12_algebraic_vee.html</loc></url>
@@ -23,6 +21,7 @@
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_58_abelian_residue.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_59_elliptic_bessel_moment.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_60_sturmian_secular_quantum.html</loc></url>
+  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_62_water_equal_size_slater.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/Paper_8_Bond_Sphere_Sturmian.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_fci_atoms.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_fci_molecules.html</loc></url>
@@ -37,23 +36,22 @@
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_56_tannakian_substrate.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_57_forced_free_seam.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_61_bessel_moment_periods.html</loc></url>
+  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_63_density_graph_ladder.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/Paper_7_Dimensionless_Vacuum.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_14_qubit_encoding.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_16_periodicity.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_20_resource_benchmarks.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_23_nuclear_shell.html</loc></url>
-  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_25_hopf_gauge_structure.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_28_qed_s3.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_2_alpha.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_30_su2_wilson.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_33_qed_selection_rules.html</loc></url>
-  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_36_bound_state_qed.html</loc></url>
-  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_41_rule_b_wilson_u1.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_51_gravity_arc.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_26_entanglement.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_27_entropy_projection.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_34_projection_taxonomy.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_35_time_as_projection.html</loc></url>
+  <url><loc>https://jloutey-hash.github.io/geovac/papers/paper_36_bound_state_qed.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/geovac_field_guide.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/group1_operator_algebras_synthesis.html</loc></url>
   <url><loc>https://jloutey-hash.github.io/geovac/papers/group2_quantum_chemistry_synthesis.html</loc></url>

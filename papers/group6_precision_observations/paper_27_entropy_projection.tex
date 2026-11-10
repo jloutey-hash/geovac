@@ -337,16 +337,14 @@ We diagonalize each in the $M_L=0$ singlet sector by full
 configuration interaction, build the spatial 1-RDM, and report
 its von Neumann entropy in nats.
 
-Table~\ref{tab:ep1} reproduces the EP-1 data
-file~\cite{EP1_data}.
+Table~\ref{tab:ep1} reproduces the EP-1 data~\cite{EP1_data}.
 
 \begin{table}
 \caption{One-body vs.\ full ground-state entropy for He on the
 $S^{3}$ angular lattice.  $S_{\mathrm{full}}$ and
 $S_{\mathrm{kin}}$ are the single-orbital von Neumann entropies
 of the FCI ground states of $H_{\mathrm{full}}$ and
-$H_{\mathrm{kin}}$, respectively.  Data from
-\texttt{debug/data/ep1\_entropy\_partition.json}~\cite{EP1_data}.
+$H_{\mathrm{kin}}$, respectively.
 \label{tab:ep1}}
 \begin{ruledtabular}
 \begin{tabular}{cdddd}
@@ -876,8 +874,7 @@ $\{2,3,4,6,10\}$ window of robustness item~(c).)
 \caption{EP-2c pilot data, \emph{hop-augmented model} (helium-like
 physical values are given in the 2026-09-25 correction paragraph of
 \S\ref{sec:pred2}): He-like isoelectronic sequence at
-$n_{\max}=3$.  Full data in
-\texttt{debug/data/ep2c\_entropy\_vs\_vee\_offdiag.json}.
+$n_{\max}=3$.
 $\delta_B \approx 0.20$ (constant to $1\%$) across the entire
 table.}
 \label{tab:ep2c}
@@ -1073,8 +1070,7 @@ $\sim 3\times10^{-10}$ (not bit-exactly; the corpus reserves
 ``bit-exact'' for machine-precision skeleton identities):
 \begin{table}[h]
 \caption{Sprint TD Track~2: $T\to 0$ residual matches
-$S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator}.  Data
-\texttt{debug/data/sprint\_td\_track2.json}.}
+$S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator}.}
 \label{tab:track2_residual}
 \begin{ruledtabular}
 \begin{tabular}{cdd}
@@ -1193,7 +1189,7 @@ test in the codebase.
     the hop-augmented model is kept distinct from helium by
     \texttt{tests/test\_he\_hop\_guard.py}.  The items below verify the
     model values.
-  \item Table~\ref{tab:ep1}: \texttt{debug/data/ep1\_entropy\_partition.json}.
+  \item Table~\ref{tab:ep1}:
     \textbf{Verified} by
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak
     test\_paper27\_table1\_ep1\_reproduction}, which re-runs the
@@ -1216,9 +1212,7 @@ test in the codebase.
     Hand-tabulation in EP-3 analysis~\cite{EP3_data}.
   \item Section~\ref{sec:cusp} numerical values
     ($\lVert V_{ee}^{\mathrm{diag}\,(H_1)}\rVert_F/\lVert V_{ee}\rVert_F$,
-    relative commutator, hot-node weights): produced by
-    \texttt{debug/energy\_graph\_exploration.py}, data in
-    \texttt{debug/data/energy\_graph\_nmax\{3,4\}.json}.
+    relative commutator, hot-node weights):
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak
     test\_paper27\_energy\_graph\_structural\_invariants} and
     \texttt{::test\_paper27\_commutator\_saturates\_not\_vanishes}
@@ -1231,9 +1225,8 @@ test in the codebase.
     $S_B = 8.16\,\tilde{w}_B^{2.383}$, $R^{2}=0.998$):
     \textbf{Verified} by
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak
-    test\_paper27\_ep2c\_dimensionless\_power\_law},
-    data in \texttt{debug/data/ep2c\_entropy\_vs\_vee\_offdiag.json}.
-  \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0692/0.0736/0.0850$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}, data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
+    test\_paper27\_ep2c\_dimensionless\_power\_law}.
+  \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0692/0.0736/0.0850$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}.
   \item Section~\ref{sec:cusp} entropy--cusp co-location
     ($58.5\%$ of $S$ on the hottest $V_{ee}$ edge at $n_{\max}=3$,
     $54.1\%$ at $n_{\max}=4$; Spearman $\rho = +0.87$; re-measured
@@ -1336,14 +1329,7 @@ J.~Loutey,
 GeoVac Technical Report (2026).
 
 \bibitem{EP1_data}
-GeoVac project data file:
-\texttt{debug/data/ep1\_entropy\_partition.json}.
-
-\bibitem{EP2_data}
-GeoVac project data file:
-\texttt{debug/data/ep2\_coulomb\_vs\_ho\_entropy.json};
-EP-2b follow-on
-\texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
+GeoVac Project, EP-1 entropy partition, sprint record in \texttt{CHANGELOG.md}.
 
 \bibitem{Moshinsky1996}
 M.~Moshinsky and Yu.~F.~Smirnov,
@@ -1351,13 +1337,10 @@ M.~Moshinsky and Yu.~F.~Smirnov,
 (Harwood Academic, 1996).
 
 \bibitem{EP3_data}
-GeoVac project memo:
-\texttt{debug/data/ep3\_area\_law\_analysis.md}.
+GeoVac Project, EP-3 area-law analysis, internal working note (2026).
 
 \bibitem{EnergyGraph}
-GeoVac v2.9.1 energy-graph characterization:
-\texttt{debug/energy\_graph\_exploration.md},
-\texttt{debug/data/energy\_graph\_nmax\{3,4\}.json}.
+GeoVac v2.9.1 energy-graph characterization, sprint record in \texttt{CHANGELOG.md}.
 
 \end{thebibliography}
 

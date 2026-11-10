@@ -18,12 +18,7 @@
 % (Lorentzian operator-system substrate).
 %
 % Status: first draft, May 2026, post-Sprint-L3b-2 closure
-% (2026-05-18). Built from internal sprint memos:
-%   debug/l3b_2_sub_sprint_A_lichnerowicz_memo.md   (joint L3)
-%   debug/l3b_2_sub_sprint_B_cb_norm_memo.md        (joint L2)
-%   debug/l3b_2_sub_sprint_C_berezin_memo.md        (joint L4)
-%   debug/l3b_2_sub_sprint_D_propinquity_memo.md    (joint L5)
-%   debug/l3b_first_move_memo.md                    (L3b foundation)
+% (2026-05-18).
 %
 % Honest scope: K+-restricted weak-form. Strong-form Lorentzian
 % propinquity (Latremoliere metric on Krein-signature spectral triples
@@ -1513,9 +1508,7 @@ verbatim;\ the temporal factor is the Toeplitz algebra of
 Q1(i), for which the translation seminorm equals the continuum
 Lipschitz constant \emph{exactly} on single modes,
 $L(S_{q}) = 2\pi q / T$, at every finite window (the
-Connes--van~Suijlekom $\Sone$ pattern~\cite{connes_vs2021};\ driver
-\texttt{debug/wh7\_toeplitz\_temporal\_probe.py}, max error
-$1.4\times10^{-14}$). The frozen falsifier
+Connes--van~Suijlekom $\Sone$ pattern~\cite{connes_vs2021};\ \texttt{tests/test\_wh7\_toeplitz\_temporal.py}). The frozen falsifier
 \texttt{tests/test\_wh7\_b1\_joint.py} checks, at the single cutoff of a
 $j \le 1$ Peter--Weyl window tensored with a $K = 2$ Fourier window:\
 Peter--Weyl orthonormality of the quadrature at $10^{-15}$;\
@@ -1585,9 +1578,7 @@ falsifier \texttt{tests/test\_p45\_kplus\_degeneracy.py}
 (Corollary~\ref{cor:annihilation_numerics}).
 
 The numerical results are tabulated in Table~\ref{tab:panel}
-(data and driver in the project repository,
-\texttt{debug/data/l3b\_2\_sub\_sprint\_D.json};\ see
-Appendix~\ref{app:panel} for full data).
+(see Appendix~\ref{app:panel} for full data).
 
 \begin{table}[t]
 \centering

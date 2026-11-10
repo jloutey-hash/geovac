@@ -12,11 +12,7 @@
 % Paper 40 (compact Lie groups; Fejer-moment constant group-independence open).
 %
 % Status: first draft, May 2026, post-Sprint-L0 / L1 / L1-tighten
-% closure (2026-05-16). Built from internal sprint memos:
-%   debug/lorentzian_l0_audit_memo.md
-%   debug/l1_modular_hamiltonian_architecture_memo.md
-%   debug/l1_infrastructure_audit_memo.md
-%   debug/l1_witness_spec_memo.md
+% closure (2026-05-16).
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -319,8 +315,7 @@ continuum / Lorentzian-propinquity-rate extension is \emph{not} closed
 by this paper (the named open target, and Paper~45's degeneracy theorem
 closes off the natural Lorentzian-propinquity route). Sprint L0 of
 the present author's framework documentation
-(\texttt{debug/lorentzian\_l0\_audit\_memo.md},
-Paper~31~\S~8, Paper~34~\S~V.E) audits the 28 projections of the
+(Paper~31~\S~8, Paper~34~\S~V.E) audits the 28 projections of the
 framework's projection taxonomy and predicts that the M3
 sub-mechanism of the master Mellin engine becomes trivially empty at
 signature $(3, 1)$ on chirality-symmetric spectrum, leaving the M1
@@ -595,8 +590,7 @@ spectral object in Krein signature.
 \label{sec:l0_audit}
 
 The present author's Sprint L0 audit
-(\texttt{debug/lorentzian\_l0\_audit\_memo.md}, Paper~31~\S~8,
-Paper~34~\S~V.E) classifies the 28 projections of the framework's
+(Paper~31~\S~8, Paper~34~\S~V.E) classifies the 28 projections of the framework's
 projection taxonomy into four buckets:
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item[(T)] \emph{TRANSFERS\_FREELY:}\ signature-blind, lives on the
@@ -729,8 +723,7 @@ spectrum of $\mathrm{two}\_m_j$ on this axis).
 
 \begin{remark}[On the choice of wedge]\label{rem:wedge_choice}
 Three candidates for the wedge sub-system were named in the architectural
-scoping (\texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}
-\S 3):\ (W1) the hemispheric wedge of Definition~\ref{def:wedge};
+scoping:\  (W1) the hemispheric wedge of Definition~\ref{def:wedge};
 (W2) the $\kappa$-preserving block of Paper~29's Dirac graph Rule A;
 (W3) the pendant-vertex-free subgraph of the scalar Fock graph.
 Candidate W1 is the cleanest Riemannian-side analog of the Wightman
@@ -952,8 +945,7 @@ $O(\sqrt{\dim \Hilb_{\nmax}} \cdot \varepsilon_{\mathrm{machine}})$,
 i.e., pure round-off accumulation with no structural drift. The
 verdict column reproduces the supporting module's label;\ it records
 that the automatic closure was reproduced, not an identification
-(Remark~\ref{rem:bw_alpha_automatic}). Source
-data:\ \texttt{debug/data/l1\_modular\_hamiltonian\_results.json}.}
+(Remark~\ref{rem:bw_alpha_automatic}).}
 \label{tab:bw_alpha_residuals}
 \begin{tabular}{rrrcc}
 \toprule
@@ -979,9 +971,7 @@ $\nmax$ for the integer-spectrum reason above.
 
 \subsection{Operator-system non-leakage}\label{sec:os_leakage}
 
-A separate concern flagged in the architectural scoping
-(\texttt{debug/l1\_modular\_hamiltonian\_architecture\_memo.md}
-\S 10a) is that the truncated operator system $\Op_{\nmax}$ is
+A separate concern flagged in the architectural scoping is that the truncated operator system $\Op_{\nmax}$ is
 $*$-closed but not multiplicatively closed:\ the modular flow
 $\sigma_t^{\alpha}$ acts on all of $B(\Hilb_W)$, and its restriction
 to $\Op_{W, \nmax}$ might leak out. The integer-spectrum closure
@@ -1184,8 +1174,7 @@ $\dim_W^2 \times \dim_W^2 = 4900 \times 4900$ matrix diagonalisation
 of $\Delta$ with extreme eigenvalue ratios
 $\lambda_i / \lambda_j$;\ no structural drift. $^{*}$Module label,
 reproduced as computed;\ it records the automatic closure, not an
-identification (the state is built from the posited generator). Source data:\
-\texttt{debug/data/l1\_tighten\_tomita\_results.json}.}
+identification (the state is built from the posited generator).}
 \label{tab:bw_gamma_residuals}
 \begin{tabular}{rrrcc}
 \toprule
@@ -1472,9 +1461,7 @@ is the following corollary.
 Cross-consistency residual is the difference between the period
 residual of each witness and the BW-witness period residual at the
 same $\nmax$:\ exactly $0$ across all six witnesses
-at every tested $\nmax$. Source data:\
-\texttt{debug/data/l1\_modular\_hamiltonian\_results.json},
-\texttt{debug/data/l1\_tighten\_tomita\_results.json}.}
+at every tested $\nmax$.}
 \label{tab:cross_witness}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{4pt}
@@ -1660,7 +1647,7 @@ never a BBB $(m, n)$ label.) The Bizi--Brouder--Besnard signs there (their
 Table~1 and eq.~(3)) make $J$ anticommute with the chirality, which leads to the
 present author's Sprint L0 prediction that the M3 sub-mechanism of
 the master Mellin engine trivialises at $(t, s) = (1, 3)$ on chirality-symmetric
-spectrum (\texttt{debug/lorentzian\_l0\_audit\_memo.md} \S 3).
+spectrum.
 The Krein-space lift and the replication of the present modular
 construction at $(t, s) = (1, 3)$ are carried out at finite cutoff in
 \S\ref{sec:lorentzian_closure};\ the M3 prediction there turns out to be
@@ -2576,8 +2563,7 @@ withdrawn, 2026-09-28).
 The Wick rotation projection in the present author's projection
 taxonomy~\cite{paper34} is the structural mechanism through which the
 framework's Euclidean spectral content is read as a Lorentzian
-physical observable. The Sprint L0 audit
-(\texttt{debug/lorentzian\_l0\_audit\_memo.md}) classifies this
+physical observable. The Sprint L0 audit classifies this
 projection in the WICK\_MAP\_FREE bucket at the metric-functional
 level. The present paper does not change that status:\ its
 finite-cutoff period closure is automatic for the posited generator,

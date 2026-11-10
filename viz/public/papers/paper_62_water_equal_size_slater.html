@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Central result. At a fixed basis size of twenty-four functions, the size of cc-pVDZ on water, we ask how much of the Gaussian basis&#x27;s correlated energy a one-centre Slater-type design recovers when its exponents are set on the free atoms, and what that costs in qubit resources. [MEASURED] A Slater…">
+<title>Water at Twenty-Four Functions: Slater-Type Bases Set on the Free Atom Against cc-pVDZ, With the Qubit Cost — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Water at Twenty-Four Functions: Slater-Type Bases Set on the Free Atom Against cc-pVDZ, With the Qubit Cost</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 62 · Quantum Chemistry
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">Central result. At a fixed basis size of twenty-four functions, the size of cc-pVDZ on water, we ask how much of the Gaussian basis&#x27;s correlated energy a one-centre Slater-type design recovers when its exponents are set on the free atoms, and what that costs in qubit resources. [MEASURED] A Slater double-zeta-plus-polarization basis built by cc-pVDZ&#x27;s own design rule sits $\gvq{p62_dzp_vs_ccpvdz_mha}{40.7}\mHa$ below cc-pVDZ at frozen-core CCSD(T), of which $\gvq{p62_dzp_vs_ccpvdz_scf_mha}{28.8}\mHa$ is self-consistent field. [MEASURED, negative] Every exponential kit with fixed or shared exponents loses: the hydrogenic $Z/n$ rule by $\gvq{p62_hyd_above_ccpvdz_mha}{196}\mHa$, a single Coulomb–Sturmian scale per atom by more than one hartree, and a two-scale Sturmian kit by $\gvq{p62_two_scale_above_ccpvdz_mha}{130}\mHa$; the hydrogenic loss is the fixed radial node structure, not the decay rate. [MEASURED, pre-registered] Releasing the oxygen exponents one at a time, every value set by the free oxygen atom&#x27;s radial Hartree–Fock energy with nothing tuned on water, closes that gap: with five oxygen exponents the water energy lands $\gvq{p62_r5_below_ccpvdz_mha}{3.1}\mHa$ below cc-pVDZ, and $\gvq{p62_r5h_below_ccpvdz_mha}{7.0}\mHa$ below with hydrogen exponents set on H$_2$. The split of the $2p$ from the $3p$ exponent carries $\gvq{p62_sl1_ratio}{0.900}$ of the water gain, as it carries $0.902$ of the atom&#x27;s; the water gain is $\gvq{p62_sl2_ratio}{0.516}$ of the atom&#x27;s. Both were predicted before the water energies were computed. The one non-monotone rung is diagnosed: its correlation loss transfers from the atom one to one and is mostly a $3d$ exponent the atomic objective never sees, while its Hartree–Fock gain is two opposite pieces that cancel on water. [MEASURED] The Jordan–Wigner Pauli count is the same for every twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107 382}$ terms on 46 frozen-core qubits, because in canonical orbitals without degenerate pairs it is fixed by the orbital count and the $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706 Ha across the kits other than the one-scale Sturmian. Caps. One geometry and one method per molecule; the ladder and the native kits are water only. The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$ below the best atom-set rung, and $21.7$ mHa below once the $3d$ is also set on the atom&#x27;s correlated energy (pre-registered; water then lands $19.0$ mHa below cc-pVDZ). [MEASURED, pre-registered] The matched-accuracy comparison brackets the Gaussian cost from both sides: aug-cc-pVDZ at 41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$ short of the Slater DZP while already costing $\gvq{p62_aug_pauli_ratio}{9.2}×$ the Pauli terms and $\gvq{p62_aug_lambda_ratio}{2.7}×$ the 1-norm on 80 qubits against 46, and the crossing lies between it and cc-pVTZ. [MEASURED, pre-registered] The same rule on hydrogen fluoride, a second molecule, repeats both findings: the Slater DZP is $\gvq{p62_hf_dzp_vs_ccpvdz_mha}{59.5}\mHa$ below cc-pVDZ at nineteen functions with the same Pauli count, and aug-cc-pVDZ is still short at $\gvq{p62_hf_aug_pauli_ratio}{9.3}×$ the terms. [MEASURED, pre-registered; STOP] A ring of six hydrogens, with no core, does not: the Slater DZP is only $3.5$ mHa below cc-pVDZ at thirty functions, and one more Gaussian polarization shell at 48 functions already beats it, so the matched-accuracy margin is a property of these two molecules, not of exponential functions. Nothing here is a GeoVac lattice structure: the bases are tuned exponential functions evaluated through Gaussian fits, and the angular sparsity of the one-centre framework does not enter.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.18738360">10.5281/zenodo.18738360</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

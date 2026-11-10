@@ -21,13 +21,13 @@ PAPER_DIRS = sorted(ROOT.glob("papers/group*_*")) + [ROOT / "papers" / "synthesi
 OUT_PATH = ROOT / "debug" / "data" / "zenodo_manifest.json"
 
 BASE_KEYWORDS = [
-    "GeoVac", "spectral graph theory", "graph Laplacian", "quantum chemistry",
+    "GeoVac", "spectral graph theory", "quantum chemistry",
     "Fock projection", "hyperspherical harmonics",
 ]
 GROUP_KEYWORDS: Dict[str, List[str]] = {
     "group1_operator_algebras": [
         "noncommutative geometry", "spectral triple", "operator systems",
-        "Gromov-Hausdorff propinquity", "spectral truncation",
+        "spectral truncation",
     ],
     "group2_quantum_chemistry": [
         "electronic structure", "Sturmian basis", "molecular Hamiltonians",
@@ -43,7 +43,7 @@ GROUP_KEYWORDS: Dict[str, List[str]] = {
     ],
     "group5_qed_gauge": [
         "quantum electrodynamics", "gauge theory", "spectral action",
-        "fine structure constant", "lattice QED",
+        "lattice QED",
     ],
     "group6_precision_observations": [
         "precision spectroscopy", "hyperfine structure", "Lamb shift",
@@ -157,6 +157,10 @@ def paper_number(stem: str) -> Optional[str]:
     return m.group(1) if m else None
 
 
+# record/page keys fixed at first deposit (2026-07-09); keep them stable
+ID_ALIASES = {"Paper_2_Alpha": "paper_2_alpha"}
+
+
 def main() -> None:
     entries: List[Dict[str, object]] = []
     for d in PAPER_DIRS:
@@ -173,7 +177,7 @@ def main() -> None:
             if not pdf_path.exists():
                 flags.append("NO_PDF")
             entries.append({
-                "id": stem,
+                "id": ID_ALIASES.get(stem, stem),
                 "group": group,
                 "paper_no": paper_number(stem),
                 "title": meta["title"],

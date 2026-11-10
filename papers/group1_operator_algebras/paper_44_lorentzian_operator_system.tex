@@ -12,9 +12,7 @@
 % identification, 2026-09-28); its Sec. 11 absorbs the former Paper 43
 % (Krein-carrier extension; archived 2026-09-28).
 %
-% Status: first draft, May 2026, post-Sprint-L3a-1 (2026-05-17). Built
-% from internal sprint memos:
-%   debug/l3_scoping_memo.md
+% Status: first draft, May 2026, post-Sprint-L3a-1 (2026-05-17).
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -180,7 +178,7 @@ matching the Connes--vS worked example on the Toeplitz operator
 system $C(S^1)^{(n)}$ verbatim~\cite{connes_vs2021}. This was the
 strongest single quantitative alignment between GeoVac and the
 published Connes--vS framework as of the Round-2 sprint
-(\texttt{debug/wh1\_round2\_propagation\_memo.md}, 2026-05-03).
+(2026-05-03).
 
 Section~11 of the companion Paper~42~\cite{paper42} (which absorbs the
 former Paper~43, archived 2026-09-28) carries
@@ -971,7 +969,7 @@ scalar-multiplier closure on the chirality-doubled spinor bundle —
 the Paper~32 reading transports verbatim:\ the witness pair of
 Theorem~\ref{thm:witness_pair} exhibits closure failure at
 $\sim 38\%$ relative Frobenius residual at $\nmax = 2$ ($35.89\%$ at
-$\nmax = 3$, \texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json}),
+$\nmax = 3$),
 yet $\dim((\Op^L)^2) = \dim_\achievable$ exactly
 (Theorem~\ref{thm:prop_envelope_dependent} eq.~\eqref{eq:prop_ach}).
 The operator system is ``informative'' in the Connes--vS sense
@@ -1148,8 +1146,7 @@ truncation~$P_{\nmax}$. Paper~32~\S~III reports a Frobenius residual
 of $\sim 14.9\%$ at $\nmax = 2$ for the Weyl-sector witness; the
 chirality-doubled FullDirac version inherits the same residual
 structure with an arithmetic increase due to the doubled spatial
-dimension, yielding the $0.3812$ value at $\nmax = 2$ recorded in
-\texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json}. The
+dimension, yielding the $0.3812$ value at $\nmax = 2$. The
 residual is independent of $\Nt$ at this label because $I_{\Nt}^2 =
 I_{\Nt}$ is itself in $\mathcal{D}_{\Nt}$ (the constant temporal
 multiplier), so the residual is purely spatial.
@@ -1161,26 +1158,8 @@ higher, partially absorbing the raise-then-lower correction. This
 is the expected $\nmax$-scaling of the boundary deficit. The
 verification is recorded in
 \texttt{tests/test\_operator\_system\_lorentzian.py::%
-test\_witness\_pair\_nmax\_2\_Nt\_1},
-\texttt{::test\_witness\_pair\_nmax\_2\_Nt\_3}, and (for $\nmax = 3$)
-\texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json}.
+test\_witness\_pair\_nmax\_2\_Nt\_1} and \texttt{::test\_witness\_pair\_nmax\_2\_Nt\_3}.
 \end{proof}
-
-\begin{remark}[Memo--JSON discrepancy at $\nmax = 3$]
-\label{rem:nmax3_residual}
-The Sprint L3a-1 memo~\S~5 quotes the witness-pair residual as
-$0.381$ ``identical across $\Nt$ values'' across a panel that
-includes $\nmax = 3, \Nt = 1$. The supporting JSON data
-\texttt{debug/data/l3a\_1\_lorentzian\_operator\_system.json},
-panel cell $(\nmax, \Nt) = (3, 1)$, records $0.3589$ instead. The
-discrepancy is purely a memo bookkeeping issue;\ the JSON and tests
-agree that the $\nmax = 2$ cells give $0.3812$ and the $\nmax = 3$
-cell gives $0.3589$, with the slightly lower number reflecting the
-expected boundary-deficit attenuation at the larger Fock cutoff. We
-report both the $\nmax = 2$ ($0.3812$) and $\nmax = 3$ ($0.3589$)
-values explicitly in Theorem~\ref{thm:witness_pair} per the JSON,
-which is the data of record.
-\end{remark}
 
 % =====================================================================
 \section{Connection to the Krein hemispheric wedge of Paper~42}\label{sec:wedge}
@@ -1310,8 +1289,7 @@ architecture and was \emph{withdrawn} on 2026-09-03 when its height leg
 was refuted;\ it is not available as a template. The
 $\sthree \times \R$ analog requires the construction of a joint
 compact $\times$ non-compact Fejér kernel and a Krein-positive
-propinquity definition, both of which are mathematically open
-(\texttt{debug/l3\_scoping\_memo.md}~\S~4, Q1 and Q4). As of May 2026,
+propinquity definition, both of which are mathematically open. As of May 2026,
 no published Lorentzian propinquity has been constructed:\
 Latr\'emoli\`ere's 2018~\cite{latremoliere2018} and
 2017/2023~\cite{latremoliere_metric_st_2017} works are strictly
@@ -1328,7 +1306,7 @@ producing a joint compact $\SU(2) \times S^1_T$ group manifold on
 which Peter--Weyl analysis applies in both factors. The L2 central
 spectral Fejér kernel then transports via a product construction with
 an explicit joint rate. This reduces L3b to a tractable bounded
-sprint (\texttt{debug/l3\_scoping\_memo.md}~\S~6). The
+sprint. The
 compactified-temporal target is then the natural setting for a
 Lorentzian-propinquity assembly that inherits the surviving Paper~38
 lemmas factor-by-factor, modulo Krein-positivity conventions at the
@@ -1790,8 +1768,7 @@ $4$ & $30$ & $900$ & $140$ & $900$ & $0.156$ \\
 reproduced from Paper~32~\S~III, \texttt{prop:propagation\_number}.
 The result is robust under three SO(4) radial-overlap convention
 choices (including the indicator-only convention, which retains only
-the support pattern of the matrix-element bookkeeping; see
-\texttt{debug/wh1\_round2\_propagation\_memo.md}, 2026-05-03). The
+the support pattern of the matrix-element bookkeeping). The
 present paper's Theorem~\ref{thm:prop_envelope_dependent} inherits
 this robustness verbatim:\ the achievable-envelope propagation number
 $\prop_\achievable = 2$ is the same SO(4) selection-rule structural

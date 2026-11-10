@@ -13,6 +13,15 @@ Safety model:
                  creating/completing any missing drafts first
   --sandbox      target sandbox.zenodo.org instead (separate token required)
   --only SUBSTR  restrict to manifest ids containing SUBSTR (test one first)
+  --update       for manifest entries that already have a PUBLISHED record:
+                 open a NEW VERSION of that record (same concept DOI), replace
+                 its PDF and metadata, leave it as a draft (or publish it with
+                 --publish). Entries with no record get a new record as usual.
+                 Without --update, published entries are skipped.
+  --retire       for records in the results file whose paper is no longer in
+                 the manifest (archived papers): edit the published record's
+                 metadata to say it is retired (PDF unchanged). Dry-run unless
+                 --execute; Zenodo applies a metadata edit only on re-publish.
 
 Auth: set the ZENODO_TOKEN environment variable (personal access token with
 deposit:write + deposit:actions scopes).
@@ -48,7 +57,7 @@ CREATOR = {"name": "Loutey, Josh",
            "affiliation": "Independent Researcher, Kent, Washington"}
 REPO_URL = "https://github.com/jloutey-hash/geovac"
 CORPUS_DOI = "10.5281/zenodo.18738360"
-CORPUS_VERSION = "v4.76.0"
+CORPUS_VERSION = "v6.7.9"  # bump to the release tag before running
 RETRIES = 5
 
 GROUP_LABEL = {
@@ -153,12 +162,41 @@ def build_metadata(entry: Dict[str, Any], today: str) -> Dict[str, Any]:
     }
 
 
+RETIRED_URL = REPO_URL + "/blob/main/docs/retired_papers.md"
+RETIRED_ON = {  # docs/retired_papers.md, "Retired" column
+    "paper_25_hopf_gauge_structure": "2026-11-07",
+    "paper_41_rule_b_wilson_u1": "2026-11-07",
+    "paper_43_lorentzian_extension": "2026-09-28",
+    "paper_46_strong_form_lorentzian_propinquity": "2026-09-14",
+    "paper_47_two_rate_hybrid_convergence": "2026-09-14",
+    "paper_48_krein_ms_bridge": "2026-09-14",
+    "paper_49_oslpls_strong_form_bridge": "2026-09-14",
+    "paper_52_category_iii_correspondence": "2026-09-29",
+}
+
+
+def retire_metadata(meta: Dict[str, Any], pid: str) -> Dict[str, Any]:
+    """Prefix a retirement notice to an existing record's description."""
+    note = (f"<p><strong>Retired from the live GeoVac corpus on "
+            f"{RETIRED_ON[pid]}.</strong> This record is kept as deposited. "
+            f"The reason and any successor document are listed in "
+            f'<a href="{RETIRED_URL}">docs/retired_papers.md</a>.</p>')
+    out = dict(meta)
+    desc = out.get("description", "")
+    if not desc.startswith("<p><strong>Retired"):
+        out["description"] = note + desc
+    for k in ("doi", "prereserve_doi"):
+        out.pop(k, None)
+    return out
+
+
 def save(results: Dict[str, Any]) -> None:
     RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False),
                        encoding="utf-8")
 
 
 def main() -> None:
+    sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--execute", action="store_true",
                     help="create draft depositions (default is dry-run)")
@@ -166,6 +204,10 @@ def main() -> None:
                     help="publish depositions (mints DOIs; implies --execute)")
     ap.add_argument("--sandbox", action="store_true",
                     help="target sandbox.zenodo.org")
+    ap.add_argument("--update", action="store_true",
+                    help="new version of already-published records")
+    ap.add_argument("--retire", action="store_true",
+                    help="mark records of archived papers as retired")
     ap.add_argument("--only", default=None,
                     help="only manifest ids containing this substring")
     args = ap.parse_args()
@@ -185,9 +227,46 @@ def main() -> None:
     print(f"{len(entries)} selected | mode: {mode}"
           f"{' [sandbox]' if args.sandbox else ''}")
 
+    live = {e["id"] for e in json.loads(MANIFEST.read_text(encoding="utf-8"))}
+    if args.retire:
+        gone = sorted(k for k in results if k not in live)
+        unknown = [k for k in gone if k not in RETIRED_ON]
+        if unknown:
+            sys.exit(f"no retirement date for: {unknown}")
+        print(f"{len(gone)} records to mark retired")
+        for k in gone:
+            print(f"  {k}: deposition {results[k]['deposition_id']} "
+                  f"(retired {RETIRED_ON[k]})"
+                  f"{' [already marked]' if results[k].get('retired') else ''}")
+        if not args.execute:
+            return
+        token = os.environ.get("ZENODO_TOKEN", "")
+        if not token:
+            sys.exit("ZENODO_TOKEN environment variable is not set.")
+        for k in gone:
+            if results[k].get("retired"):
+                continue
+            dep_id = results[k]["deposition_id"]
+            api(base, f"/deposit/depositions/{dep_id}/actions/edit", token,
+                "POST", payload={})
+            dep = api(base, f"/deposit/depositions/{dep_id}", token)
+            api(base, f"/deposit/depositions/{dep_id}", token, "PUT",
+                payload={"metadata": retire_metadata(dep["metadata"], k)})
+            api(base, f"/deposit/depositions/{dep_id}/actions/publish", token,
+                "POST", payload={})
+            results[k]["retired"] = RETIRED_ON[k]
+            save(results)
+            print(f"  {k}: marked retired")
+            time.sleep(1)
+        return
+
     if not args.execute and not args.publish:
         for e in entries:
             state = results.get(e["id"], {}).get("state", "new")
+            if state == "published":
+                cur = results[e["id"]].get("version") == CORPUS_VERSION
+                state = ("current" if cur else
+                         "NEW VERSION" if args.update else "published, skip")
             pdf = ROOT / e["pdf"]
             print(f"  [{state}] {e['title'][:75]}")
             print(f"      pdf: {e['pdf']} ({pdf.stat().st_size // 1024} KB)")
@@ -207,8 +286,41 @@ def main() -> None:
 
     for i, e in enumerate(entries, 1):
         rec = results.get(e["id"], {})
-        if rec.get("state") == "published":
+        if rec.get("state") == "published" and (
+                not args.update or rec.get("version") == CORPUS_VERSION):
             print(f"[{i}/{len(entries)}] {e['id']}: already published, skip")
+            continue
+        if rec.get("state") in ("published", "version_draft") and args.update:
+            print(f"[{i}/{len(entries)}] {e['id']} (new version)")
+            new_id = rec.get("draft_id")
+            if new_id is None:
+                nv = api(base, f"/deposit/depositions/{rec['deposition_id']}"
+                         "/actions/newversion", token, "POST", payload={})
+                new_id = int(nv["links"]["latest_draft"].rstrip("/")
+                             .rsplit("/", 1)[1])
+                rec.update(state="version_draft", draft_id=new_id)
+                results[e["id"]] = rec
+                save(results)
+            dep = api(base, f"/deposit/depositions/{new_id}", token)
+            for f in dep.get("files", []):  # carried over from the old version
+                api(base, f"/deposit/depositions/{new_id}/files/{f['id']}",
+                    token, "DELETE")
+            api(base, f"/deposit/depositions/{new_id}", token, "PUT",
+                payload={"metadata": build_metadata(e, today)})
+            upload_file(dep["links"]["bucket"], ROOT / e["pdf"], token)
+            print(f"    version draft complete (deposition {new_id})")
+            if args.publish:
+                pub = api(base, f"/deposit/depositions/{new_id}"
+                          "/actions/publish", token, "POST", payload={})
+                prev = rec.get("previous", []) + [rec["deposition_id"]]
+                results[e["id"]] = {
+                    "deposition_id": new_id, "state": "published",
+                    "title": e["title"], "doi": pub.get("doi"),
+                    "url": pub.get("links", {}).get("record_html"),
+                    "version": CORPUS_VERSION, "previous": prev}
+                save(results)
+                print(f"    PUBLISHED new version: DOI {pub.get('doi')}")
+            time.sleep(1)
             continue
         print(f"[{i}/{len(entries)}] {e['id']}")
         pdf = ROOT / e["pdf"]
@@ -248,7 +360,7 @@ def main() -> None:
             pub = api(base, f"/deposit/depositions/{dep_id}/actions/publish",
                       token, "POST", payload={})
             results[e["id"]].update(
-                state="published", doi=pub.get("doi"),
+                state="published", doi=pub.get("doi"), version=CORPUS_VERSION,
                 url=pub.get("links", {}).get("record_html"))
             save(results)
             print(f"    PUBLISHED: DOI {results[e['id']]['doi']}")

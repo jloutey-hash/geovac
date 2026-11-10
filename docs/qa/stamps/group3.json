@@ -193,7 +193,8 @@
   },
   "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Implementation and verification": {
    "date": "2026-11-03",
-   "hash": "e0d199b8da8d158d",
+   "hash": "2b1e01e03c715341",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_22_angular_sparsity.tex::Spinor-block angular sparsity / Numerical values of d_ spinor (l_ )": {
@@ -459,7 +460,8 @@
   },
   "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026) / The four-bucket classification": {
    "date": "2026-11-03",
-   "hash": "9b29bc56f67d3eee",
+   "hash": "e14770185e91dfa5",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_31_universal_coulomb_partition.tex::The Signature Partition (Sprint L0, May 2026) / The predicted trivial closure at (3, 1) (tested: falsified)": {
@@ -776,12 +778,14 @@
   },
   "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Finite-cutoff equality on the SL_ 2 factor (TC-2b)": {
    "date": "2026-11-03",
-   "hash": "9cb2a3c35d61a926",
+   "hash": "bfc8fc885b7064c8",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Finite-cutoff equality on the abelian factor (TC-2a)": {
    "date": "2026-11-03",
-   "hash": "417d8bd93a26bb40",
+   "hash": "e93208da1ac7b0e5",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Full-panel injectivity at = 2 (TC-1f)": {
@@ -791,7 +795,8 @@
   },
   "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Higher cutoffs and the -uniform pattern (TC-2c)": {
    "date": "2026-11-03",
-   "hash": "b653eb9871c59858",
+   "hash": "6fc1b953fe764ac9",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group3-full-2026-11-03"
   },
   "prose:papers/group3_foundations/paper_56_tannakian_substrate.tex::The explicit ^ 3N _ 2 inclusion / Inclusion summary": {
@@ -1072,7 +1077,8 @@
   },
   "prose:papers/group3_foundations/paper_61_bessel_moment_periods.tex::front": {
    "date": "2026-11-03",
-   "hash": "2ccfe66c5a7054a0",
+   "hash": "c66af8d0e96bce05",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group3-full-2026-11-03"
   }
  }

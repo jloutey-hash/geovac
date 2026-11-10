@@ -150,19 +150,47 @@ def orphan_stems(entries, existing_stems):
     return {s for s in existing_stems if s != "index" and s not in live_ids}
 
 
+def tombstone_page(pid: str, rec: Dict[str, Any]) -> str:
+    """A retired paper whose Zenodo record still exists: keep its URL alive,
+    say it is retired, point at the register. noindex; not in index/sitemap."""
+    title = rec.get("title") or pid
+    doi = rec.get("doi")
+    doi_line = (f' · DOI: <a href="https://doi.org/{doi}">{doi}</a>'
+                if doi else "")
+    body = f"""<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>{html.escape(title)}</h1>
+<p class="meta">{AUTHOR}{doi_line}</p>
+<p><strong>Retired.</strong> This paper is no longer part of the live GeoVac
+corpus. Its Zenodo record is kept as deposited. The reason and any successor
+document are listed in
+<a href="{REPO_URL}/blob/main/docs/retired_papers.md">docs/retired_papers.md</a>.</p>
+"""
+    out = page(f"{title} (retired) — GeoVac", "Retired GeoVac paper.", body)
+    return out.replace("<head>\n", '<head>\n<meta name="robots" content="noindex">\n', 1)
+
+
 def main() -> None:
     entries: List[Dict[str, Any]] = json.loads(
         MANIFEST.read_text(encoding="utf-8"))
     dois: Dict[str, str] = {}
+    retired: Dict[str, Dict[str, Any]] = {}
     if RESULTS.exists():
         results = json.loads(RESULTS.read_text(encoding="utf-8"))
         dois = {k: v["doi"] for k, v in results.items() if v.get("doi")}
+        live_ids = {e["id"] for e in entries}
+        # a published record of a paper no longer in the manifest = archived;
+        # its DOI still resolves, so its page becomes a tombstone, not a 404
+        retired = {k: v for k, v in results.items()
+                   if k not in live_ids and v.get("doi")}
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for e in entries:
         (OUT_DIR / f"{e['id']}.html").write_text(
             paper_page(e, dois.get(e["id"])), encoding="utf-8")
     (OUT_DIR / "index.html").write_text(index_page(entries), encoding="utf-8")
+    for pid, rec in retired.items():
+        (OUT_DIR / f"{pid}.html").write_text(tombstone_page(pid, rec),
+                                             encoding="utf-8")
 
     # Prune pages whose paper is no longer in the manifest (added 2026-09-14,
     # after archiving Papers 46-49 left four orphan pages behind).  The builder
@@ -175,7 +203,8 @@ def main() -> None:
     if not entries:
         print("WARNING: manifest is empty; skipping prune to avoid wiping pages")
     existing = {p.stem for p in OUT_DIR.glob("*.html")}
-    pruned = sorted(orphan_stems(entries, existing))
+    pruned = sorted(orphan_stems(entries + [{"id": k} for k in retired],
+                                 existing))
     for stem in pruned:
         (OUT_DIR / f"{stem}.html").unlink()
     if pruned:
@@ -196,6 +225,8 @@ def main() -> None:
     print(f"sitemap ({len(urls)} URLs) + robots.txt -> "
           f"{PUBLIC_DIR.relative_to(ROOT)}")
     print(f"DOI links: {len(dois)} (re-run after zenodo_upload.py --publish)")
+    if retired:
+        print(f"tombstone pages ({len(retired)}): {', '.join(sorted(retired))}")
 
 
 def _selftest() -> int:

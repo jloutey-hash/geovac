@@ -138,7 +138,8 @@
   },
   "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Numerical Confirmation": {
    "date": "2026-11-08",
-   "hash": "8fab0076190cdedc",
+   "hash": "d6072af3109619fe",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Operator-Theoretic Result": {
@@ -173,13 +174,14 @@
   },
   "prose:papers/group6_precision_observations/paper_27_entropy_projection.tex::Rigidity Predictions: One Retracted, One Surviving / Operational temperature decoding (Sprint TD Track 2)": {
    "date": "2026-11-08",
-   "hash": "7b3c99450c5b84e9",
-   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
+   "hash": "69e940af1e0ba836",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Citation status of the Layer-2 inputs": {
    "date": "2026-11-08",
-   "hash": "f362014bf969602a",
+   "hash": "ca1fa84e725ed03c",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Conclusion": {
@@ -261,7 +263,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Connes--Chamseddine spectral action / heat kernel": {
    "date": "2026-11-08",
-   "hash": "0eda22d8ff9d71f9",
+   "hash": "d5b356645386905d",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Coupled-channel / adiabatic curve": {
@@ -317,8 +320,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Observation / temporal-window projection": {
    "date": "2026-11-08",
-   "hash": "fa51caab9e8a2059",
-   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
+   "hash": "dc20d5ec729bcd69",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Layer 2: The Projection Family / Phillips--Kleinman / core--valence orthogonality": {
@@ -385,8 +388,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::Open Questions": {
    "date": "2026-11-08",
-   "hash": "a409aedfbb7db33f",
-   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
+   "hash": "45c72a6fb5dc0505",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue": {
@@ -396,8 +399,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Falsified candidate: W3 spectral-zeta identification of": {
    "date": "2026-11-08",
-   "hash": "a7e9cebfd58a2ac9",
-   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
+   "hash": "88147b8d2815ee0e",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-seeded-full-2026-11-08+thirdlook"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Literature itemization notes (running catalogue)": {
@@ -407,8 +410,8 @@
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Lorentzian transfer audit (Sprint L0, May 2026)": {
    "date": "2026-11-08",
-   "hash": "b184c94f93084030",
-   "note": "hash carried 2026-11-08 (v6.7.7): dead debug/ provenance pointers removed, no claim changed",
+   "hash": "cde1ee093104d85c",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-seeded-full-2026-11-08+thirdlook"
   },
   "prose:papers/group6_precision_observations/paper_34_projection_taxonomy.tex::The Empirical Matches Catalogue / Off-precision matches and error-source classification": {
@@ -517,7 +520,8 @@
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::Tensor-product verification on T_ S^3 T_ S^1_ / Unruh pendant: the third Wick-rotation face": {
    "date": "2026-11-08",
-   "hash": "d59dbd57d4966fd9",
+   "hash": "26cb596f83bd1ca6",
+   "note": "hash carried 2026-11-09 (v6.7.9): live debug/ references removed, no claim changed",
    "run": "group6-small-sweep-2026-11-08"
   },
   "prose:papers/group6_precision_observations/paper_35_time_as_projection.tex::The algebraic ring (KG-1)": {

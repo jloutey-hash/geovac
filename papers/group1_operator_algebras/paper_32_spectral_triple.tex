@@ -394,7 +394,7 @@ data thrown away by the envelope construction.  Constructing
 $\mathcal{O}_{n_{\max}}$ explicitly in $\mathcal{B}(\mathcal{H}_{\mathrm{GV}})$
 and computing its propagation number and Connes distance on
 node-evaluation states is the deliverable of the WH1 round-2 sprint
-(see \texttt{debug/wh1\_connes\_vs\_mapping\_memo.md}, 2026-05-03).
+(2026-05-03).
 The present subsection retains the
 $\mathcal{A}_{\mathrm{GV}} = \mathbb{C}^{V_{\mathrm{Fock}}}$ definition
 because (a) it matches the Marcolli--van~Suijlekom gauge-network
@@ -490,9 +490,7 @@ $\mathrm{prop} = 2$ is robust: it is invariant under the choice of
 SO(4) radial-overlap placeholder (verified across three placeholders
 including a pure indicator that retains only the support pattern), so
 \eqref{eq:prop_two} does not depend on the radial value
-convention (it is the generic value, see the remark below).  See \texttt{debug/wh1\_round2\_propagation\_memo.md}
-(2026-05-03) for the full computational record, including the explicit
-witness pair $a = M_{2,1,0}$ at $n_{\max} = 2$ for which $a^2 \notin
+convention (it is the generic value, see the remark below).  The computational record (2026-05-03) includes the explicit witness pair $a = M_{2,1,0}$ at $n_{\max} = 2$ for which $a^2 \notin
 \mathcal{O}_{n_{\max}}$ (Frobenius residual $\approx 14.9\%$), with
 the deficit concentrated on the top-shell diagonal entries.
 \end{proof}
@@ -580,10 +578,7 @@ $\dim(A_{\mathrm{circ}, N}^k) = N$ for every $k$ (commutativity is
 preserved under self-products), so no finite $k$ achieves
 saturation; $\mathrm{prop} = \infty$ in this ambient-envelope
 extension of Connes--van~Suijlekom's Definition~2.39 (their definition
-uses the $C^*$-envelope, which here gives the intrinsic value $1$).  See
-\texttt{debug/wh1\_round3\_falsification\_memo.md} (2026-05-03) for
-the full record, including the verbatim Connes--van~Suijlekom Outlook~\S6
-contrast (lines 2611--2618 of arXiv:2004.14115v2) between
+uses the $C^*$-envelope, which here gives the intrinsic value $1$).  Compare the Connes--van~Suijlekom Outlook~\S6 contrast (lines 2611--2618 of arXiv:2004.14115v2) between
 spectral and circulant truncations on~$S^1$, of which
 Eq.~\eqref{eq:prop_circulant} is the verbatim $S^3$ analog.
 \end{proof}
@@ -719,8 +714,7 @@ sign} at $n_{\max} = 3$: Pearson goes from $+0.14$ (placeholder)
 to $-0.36$ (physical), Spearman from $+0.18$ to $-0.33$.  The
 optimistic ``slow trend toward correlation'' reading is
 retracted; under physical values the metric is
-\emph{anti-correlated} with the Fock-graph distance.  Memo:
-\texttt{debug/wh1\_r31\_avery\_wen\_avery\_memo.md}.
+\emph{anti-correlated} with the Fock-graph distance.  
 
 \paragraph{R3.2 (spinor lift, scalar Fock $\to$ Weyl spinor on
 $S^3$).}  The construction extends to the Weyl sector of the
@@ -757,8 +751,7 @@ the $n$-degeneracy, the metric remains anti-correlated} with the
 Fock-graph distance: Pearson nz $-0.36$ at $n_{\max} = 2$,
 $-0.26$ at $n_{\max} = 3$.  The non-monotonicity is therefore
 robust under both the placeholder $\to$ Avery upgrade (R3.1)
-\emph{and} the scalar $\to$ spinor lift (R3.2).  Memo:
-\texttt{debug/wh1\_r32\_spinor\_lift\_memo.md}.
+\emph{and} the scalar $\to$ spinor lift (R3.2).  
 
 \paragraph{Disambiguation settled.}  The round-3 \S 5.4
 two-reading question (``placeholder artifact'' vs
@@ -1125,8 +1118,7 @@ convention $\sigma(l, m_j) = i^{2 m_j} (-1)^l$ giving
 $\sigma_a \overline{\sigma_{J(a)}} = -1$ on every basis label.
 Implementation in \texttt{geovac/real\_structure.py};
 verification in \texttt{tests/test\_real\_structure.py}
-(44 tests passing); raw audit data
-\texttt{debug/data/wh1\_real\_structure\_audit.json}.
+(44 tests passing).
 The audit verdict for the four Connes-axiom conditions involving $J$
 at finite $n_{\max}$ on the truthful Camporesi--Higuchi Dirac is as
 follows;\ items~1--5 are measured on the Fock/Weyl and chirality-doubled
@@ -2413,8 +2405,7 @@ lives in cyclotomic mixed Tate at level $4$ (mixed Tate over
 $\mathbb{Z}[i]$, not over $\mathbb{Q}$) and does \emph{not}
 contaminate the SD coefficients, by the operator-order partition
 of Paper~18~\cite{paper18} \S~III.7 ($k=2$ for SD vs $k=1$ for
-vertex parity). Sprint Mixed-Tate Test (June~2026, memo
-\texttt{debug/sprint\_mixed\_tate\_test\_memo.md}).
+vertex parity). Sprint Mixed-Tate Test (June~2026).
 \end{corollary}
 
 \begin{corollary}[M3 sub-mechanism inherits Deligne--Glanois
@@ -2582,9 +2573,7 @@ asymptotic-expansion coefficients along subsequent analytical
 pipelines. Within each domain the engine organizes the observed
 values (for $k = 0$ the domain is the Fej\'er kernel's moment, read
 as M1, not the GH convergence rate;\ Paper~38).
-Source: \texttt{debug/mr\_a\_dirac\_propinquity\_*},
-\texttt{debug/mr\_b\_spectral\_action\_rate\_*},
-\texttt{debug/mr\_c\_l2\_subleading\_*}.
+
 \end{remark}
 
 \paragraph{The Q$5'$ cochain-level record.}  The Stage-1/Stage-2 Q$5'$
@@ -2736,7 +2725,7 @@ not a derivation) is carried out in the Unruh paragraph below.
 
 \textbf{Unruh pendant (May 2026).}\ The Track~D~\S 5.4 follow-up was
 executed as a pendant
-sprint~(\texttt{debug/unruh\_pendant\_memo.md}, May 2026).  Wick-rotating
+sprint~(May 2026).  Wick-rotating
 Rindler coordinates $(\eta, \rho)$ for an observer at proper acceleration
 $a$ produces Euclidean polar $(\eta_E, \rho)$ with conical regularity at
 $\rho = 0$ forcing $\eta_E$-period $2\pi$, hence proper-time period
@@ -3194,7 +3183,7 @@ the single construction unifying the three sectors at the kinetic level.
 
 The $\mathrm{SU}(3)$ row of Table~\ref{tab:unified_gauge} requires a
 specific clarification, because an earlier Sprint~5 Track~S5
-(April~2026, memo \texttt{debug/s5\_gauge\_structure\_memo.md})
+(April~2026)
 returned a clean negative when asking whether the $S^5$
 Bargmann--Segal lattice carries a non-abelian gauge structure
 analogous to the $U(1)$ of the $S^3$ label graph.  The two findings are not in tension:\
@@ -3468,9 +3457,7 @@ explicitly at finite $n_{\max}$, and ask whether the off-diagonal
 $\mathbb{C} \leftrightarrow \mathbb{H}$ Yukawa block of the finite
 Dirac $D_F$ that turns Marcolli--vS-without-Higgs into a Higgs
 construction can be \emph{selected from GeoVac structure} rather
-than imposed.  This is the H1 sprint reported in
-\texttt{debug/h1\_ac\_extension\_memo.md}; we summarize its content
-here.
+than imposed.  This is the H1 sprint; we summarize its content here.
 
 \paragraph{Construction.}  Following Connes--Marcolli 2008
 Ch.~1~\S 13 (the finite noncommutative
@@ -3581,8 +3568,7 @@ $y_e = 0.3$, $y_\nu = 0.2$ & $0.171$--$0.271$ & $0.000$--$0.580$ & FAILS \\
 \end{tabular}
 \end{center}
 
-(50 random generators per cell; data
-\texttt{debug/data/h1\_falsifier.json}).
+(50 random generators per cell).
 
 \paragraph{Verdict:\ positive-thin.}  The Higgs construction is
 \emph{well-defined} on the GeoVac AC extension at finite $n_{\max}$:
@@ -3595,12 +3581,11 @@ is non-trivial whenever the imposed Yukawa $Y$ is non-zero.
 
 \emph{However}, GeoVac structure does \textbf{not autonomously
 select} a non-trivial $Y$.  Two candidate sources for $D_F$
-off-diagonal data were flagged in the H1 scoping memo
-(\texttt{debug/almost\_commutative\_scoping\_memo.md}~\S 3.3):\
+off-diagonal data were flagged at the H1 scoping stage:\ 
 candidate~A used the offdiag CH chirality bridging variant of
-the GeoVac Dirac, but Track~2 (\texttt{debug/real\_structure\_finite\_nmax\_memo.md}~\S 3.D) ruled this out by showing $J D = +D J$ fails at residual~$\sim 2.0$ on offdiag CH; candidate~B was a Sturmian / DUCC inter-shell coupling whose physical interpretation as a Yukawa is itself speculative and was not pursued.
+the GeoVac Dirac, but Track~2 ruled this out by showing $J D = +D J$ fails at residual~$\sim 2.0$ on offdiag CH; candidate~B was a Sturmian / DUCC inter-shell coupling whose physical interpretation as a Yukawa is itself speculative and was not pursued.
 
-The strong falsifier of the scoping memo~\S 5
+The strong falsifier set at the scoping stage
 (``every Hermitian $D_F$ derivable from GeoVac structure forces
 the Higgs sector to vanish'') therefore does not fire as a clean
 negative.  The construction admits a Higgs given any $Y$; the
@@ -3665,9 +3650,7 @@ the Yukawa is not derived from GeoVac structure.
 \paragraph{Files.}  Implementation
 \texttt{geovac/almost\_commutative.py};\ tests
 \texttt{tests/test\_almost\_commutative.py} (56 passing as of
-2026-09-03);\ data
-\texttt{debug/data/h1\_falsifier.json};\ memo
-\texttt{debug/h1\_ac\_extension\_memo.md}.
+2026-09-03).
 
 \paragraph{Follow-on records.}  The follow-on sprint records attached
 to this section --- the thermal extension of the H1 verdict (Sprint~TD
@@ -3788,8 +3771,7 @@ $\gamma_F$ (G3-B, KO-dim~6).  Operator norm is exactly~$2$ at every
 $n_{\max}$; eigenvalue spectrum is $\{-2, 0, +2\}$ with
 multiplicities in ratio $1{:}2{:}1$, $n_{\max}$-independent.
 Frobenius norm scales as
-$\sqrt{2 \cdot \dim \mathcal{H}_{\mathrm{total}}}$ exactly.  Data
-\texttt{debug/data/g3c\_tensor\_chirality.json}.}
+$\sqrt{2 \cdot \dim \mathcal{H}_{\mathrm{total}}}$ exactly.}
 \label{tab:g3c_residual}
 \end{table}
 

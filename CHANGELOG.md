@@ -7,6 +7,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.9] - 2026-11-09
+
+**Live debug/ references removed from the papers (PI-directed, pre-release).** CLAUDE.md Sec. 9: papers cite their
+own derivation, CHANGELOG.md or tests/, never debug/. The 145 live references the v6.7.7 entry left (plus 16 lines
+the counter missed: brace/glob paths, a directory, an `\includegraphics`) are gone from 30 papers; a plain `debug/`
+grep over the live papers returns nothing. Same treatment as v6.7.7; nothing repointed into debug/archive/.
+
+### Changed
+- Provenance notes ("memo ...", "data ...", "driver ...", "Source: ...", "Files: ...", header comments listing sprint
+  memos) deleted where the sentence stands on the paper's own derivation or a test: Papers 14, 18, 19, 22, 24, 27, 29,
+  31, 32, 34, 35, 40, 42, 44, 45, 50, 55, 56. Papers 55 and 56 keep sprint name, date, module and tests in their
+  paragraph headers.
+- Pointed at a permanent home instead: Paper 60 cites the promoted module `geovac/sturmian_sigma_basis.py` (backed by
+  tests/test_paper60_sigma_basis.py) at both loci; Paper 45 cites tests/test_wh7_toeplitz_temporal.py for the
+  single-mode identity L(S_q) = 2 pi q/T, and the "max error 1.4e-14" figure is dropped (the test asserts 1e-10);
+  Paper 34 names gate C20 (docs/qa/criteria.md) instead of the checker script; Paper 13's He adiabatic-curves figure
+  moved to papers/group2_quantum_chemistry/figures/ (git mv).
+- Bibitems: Paper 27 EP-1 and v2.9.1 energy-graph items read "sprint record in CHANGELOG.md" (both have entries);
+  EP-3 has no CHANGELOG entry and reads "internal working note"; the uncited EP2_data item is deleted. Paper 2 Sprint
+  A reads "Sprint record in CHANGELOG.md"; the Phase-2 audit keeps its tests/paper2_support pointer; Phase 6 and
+  Papers 31/40 memo items lose only the path (no CHANGELOG entry found for them).
+- Registry-path comments (`\gvq` macro definitions in 12 files) now say "the project's numeric registry".
+- Reworded around a removal (no claim changed; listed for a later review): Paper 32 (Prop. witness-pair proof
+  "The computational record (2026-05-03) includes ..."; circulant proof "Compare the Connes--van Suijlekom Outlook
+  Sec. 6 contrast ..."; H1 "flagged at the H1 scoping stage", "The strong falsifier set at the scoping stage"),
+  Paper 35 (convention translations stated inline), Paper 26 header comment (points to the CHANGELOG incident record),
+  Paper 44 (the "Memo--JSON discrepancy" remark, internal bookkeeping with no references to it, deleted).
+- Review stamps: 29 units changed only by this edit keep their stamps (trunk 1, group1 11, group2 2, group3 6,
+  group6 9; noted in docs/qa/stamps/*.json).
+
+### Per-paper Zenodo records and paper pages prepared (PI-chosen full refresh; nothing uploaded)
+- `debug/zenodo_manifest_build.py` and `debug/zenodo_upload.py` restored from debug/archive/misc/ (their repo-root
+  path was wrong there). Builder: "graph Laplacian", "Gromov-Hausdorff propinquity" and "fine structure constant"
+  dropped from the keyword lists (as in v6.7.8's `.zenodo.json`); Paper 2 keeps its record key `paper_2_alpha`.
+- Manifest regenerated from the current .tex: 57 live papers, 0 flagged; every PDF newer than its source.
+- Uploader: `--update` opens a new version of each published record (same concept DOI; replaces PDF and metadata)
+  instead of matching by title, which would have duplicated every retitled paper; `--retire` prepends a retirement
+  notice, with the date from docs/retired_papers.md, to the 8 records of archived papers (25, 41, 43, 46-49, 52);
+  CORPUS_VERSION v6.7.9; results record the version deposited. Dry runs: 51 new versions, 6 new records (Papers
+  58-63), 8 retirement notes.
+- `debug/build_paper_pages.py`: archived papers that have a DOI get a short noindex "retired" page (kept out of the
+  index and sitemap) instead of being pruned, so their DOIs do not land on a 404. Pages regenerated: 57 live (6 new),
+  8 retired, sitemap 59 URLs; the wipe-guard self-test passes. Re-run after publishing to pick up the new DOIs.
+- `CITATION.cff`, `.zenodo.json` and README version strings set to 6.7.9 (date 2026-11-09 unchanged).
+- Uploading and publishing are the PI's action (ZENODO_TOKEN): `python debug/zenodo_upload.py --update --execute`,
+  review drafts on zenodo.org, then `--update --publish`; `--retire --execute`; then rebuild the pages.
+
+### Raised to the PI (claims whose only backing was the removed debug/ file)
+- Paper 44: the n_max = 3 witness-pair residual 0.3589 has no test (the cited tests are n_max = 2).
+- Paper 50: the S^5 closed form; tests/test_paper50_f_ladder_odd_spheres.py covers S^3, S^7, S^11 only.
+- Paper 35: the kg5 convention-translation values (17/960, 17/1920) and the TX-B a-priori prediction file.
+- Papers 19 and 34: the frozen W1c prediction file is no longer named (the pre-registration claim stands on prose).
+- Paper 34: muH HFS table coverage by tests/test_paper34_autopsy_baselines.py not confirmed (the alkali-cliff table is).
+
 ## [v6.7.8] - 2026-11-09
 
 **Release metadata refreshed ahead of a Zenodo release (PI-approved).** The repo-level Zenodo metadata was last
