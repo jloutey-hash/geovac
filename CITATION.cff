@@ -13,14 +13,14 @@ authors:
 repository-code: https://github.com/jloutey-hash/geovac
 url: https://github.com/jloutey-hash/geovac
 license: MIT
-version: 4.76.0
-date-released: 2026-07-09
+version: 6.7.8
+date-released: 2026-11-09
 doi: 10.5281/zenodo.18738360
 keywords:
   - GeoVac
   - Geometric Vacuum
   - spectral graph theory
-  - graph Laplacian
+  - label lattice
   - quantum chemistry
   - qubit Hamiltonian
   - quantum computing
@@ -29,20 +29,22 @@ keywords:
   - hyperspherical harmonics
   - noncommutative geometry
   - spectral triple
-  - almost-commutative geometry
-  - Gromov-Hausdorff propinquity
+  - Gromov-Hausdorff convergence
   - Camporesi-Higuchi
-  - Lorentzian spectral triple
+  - Krein spectral triple
   - periods
   - mixed Tate motives
   - cosmic Galois
   - Marcolli-van Suijlekom
-  - fine structure constant
+  - Bessel moments
+  - Calabi-Yau periods
+  - exponential-type orbitals
+  - negative results
 references:
   - type: article
     title: >-
       The Dimensionless Vacuum: Recovering the Schrodinger
-      Equation from Scale-Invariant Graph Topology
+      Equation on a Scale-Invariant Label Lattice
     authors:
       - given-names: Josh
         family-names: Loutey
@@ -50,8 +52,8 @@ references:
     notes: GeoVac Paper 7
   - type: article
     title: >-
-      Structurally Sparse Qubit Hamiltonians from the
-      Hyperspherical Harmonic Basis
+      Structurally Sparse Qubit Hamiltonians from
+      Natural-Geometry Hydrogenic Bases
     authors:
       - given-names: Josh
         family-names: Loutey
@@ -59,7 +61,8 @@ references:
     notes: GeoVac Paper 14
   - type: article
     title: >-
-      The GeoVac Spectral Triple
+      The GeoVac Spectral Triple: A Synthesis Paper Locking the
+      Framework into the Marcolli-van Suijlekom Gauge-Network Lineage
     authors:
       - given-names: Josh
         family-names: Loutey
@@ -67,8 +70,8 @@ references:
     notes: GeoVac Paper 32
   - type: article
     title: >-
-      SU(2) Propinquity Convergence on the Camporesi-Higuchi
-      Spectral Triple
+      State-space Gromov-Hausdorff convergence of truncated
+      Camporesi-Higuchi spectral triples on S^3
     authors:
       - given-names: Josh
         family-names: Loutey

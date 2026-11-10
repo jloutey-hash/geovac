@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.8] - 2026-11-09
+
+**Release metadata refreshed ahead of a Zenodo release (PI-approved).** The repo-level Zenodo metadata was last
+written at v4.76.0 and still carried claims the corpus has since withdrawn. No paper claim changes in this entry.
+
+### Changed
+- `.zenodo.json`: description rewritten from owner wording (README headline table, `docs/claims_register.md`,
+  `docs/geovac_onepager.md`, the Paper 55 and Paper 63 abstracts). Dropped: the graph Laplacian stated as equivalent
+  to the Schrodinger equation, "18/18 symbolic proofs", the O(Q^2.5) scaling and 51x-1712x reduction, the
+  38-molecule library, He at 0.019%, and the almost-commutative triple stated as established unconditionally. Added:
+  the matched-qubits caveat, the unfavourable STO-3G comparison, the composed bond-length errors, the Paper 45
+  retraction, Papers 59 and 63. The draft was run through the C16, C17 and C25 patterns before writing (0 hits; the
+  old text 5). Version 4.76.0 -> 6.7.8; keywords updated ("graph Laplacian", "Gromov-Hausdorff propinquity",
+  "Lorentzian spectral triple", "almost-commutative geometry", "fine structure constant" out).
+- `CITATION.cff`: version and date-released; the same keyword changes; the Paper 7, 14, 32 and 38 reference titles
+  now match the papers' current titles.
+- `README.md`: version badge (was 5.21.15) and bibtex version (was 5.20.2).
+- Papers 30 and 51: PDFs rebuilt from the v6.6.1-v6.7.1 sources (three passes, 0 undefined references).
+
+### Not done
+- The 59 per-paper Zenodo records and the generated paper pages are untouched (Papers 58-63 have none; several
+  papers are retitled). `CITATION.cff` says MIT and `.zenodo.json` CC-BY-4.0; left as is.
+
 ## [v6.7.7] - 2026-11-08
 
 **Dead debug/ pointers removed from the papers (PI-directed).** CLAUDE.md Sec. 9: papers cite their own derivation,
