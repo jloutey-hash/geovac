@@ -75,3 +75,24 @@ Gate: GO if AM1 and AM2 both hold.
 - AM2 fails: the ANO crossing lies beyond 41 functions and the cc-pV statement stands for both families.
 
 Scored by: `python debug/ano_matched_accuracy.py water A35` and `... water A41`.
+
+## Outcome (scored 2026-11-11, after registration commit 49c51a5e)
+
+Rows: `debug/data/ano_matched_accuracy/` (same driver, solver and Pauli counter as records MA and SZ).
+
+| Rung | Functions | RHF | fc-CCSD(T) | vs D (mHa) | vs cc-pVDZ (mHa) | Pauli (fc) | Qubits | 1-norm (fc) |
+|:--|:--:|:--|:--|:--:|:--:|:--:|:--:|:--|
+| A35 | 35 | -76.053557 | -76.287896 | -6.2 | -46.9 | 505,467 | 68 | 1632.93 |
+| A41 | 41 | -76.057955 | -76.312401 | -30.7 | -71.4 | 982,785 | 80 | 2639.94 |
+
+- **AM1 MISSED.** W(A35) = -76.287896 < D: the 35-function ANO rung already reaches the Slater DZP, by 6.2 mHa.
+  The neon transfer read 25.6 to 38.4 mHa below cc-pVDZ; the measured step is 46.9 (transfer 1.36, outside the
+  0.74-1.11 range taken from other bases).
+- **AM2 HELD.** W(A41) = -76.312401, 30.7 mHa below D.
+- **AM3 HELD.** 505,467 terms on 68 qubits and 982,785 on 80, equal to the cc-pV rungs of the same shell composition.
+- **AM4 HELD.** A35 is 21.4 mHa below cc-pVDZ+TZpol; A41 is 38.7 mHa below aug-cc-pVDZ.
+
+**Gate: not GO (AM1 failed).** Per the pre-registered reading: the matched-accuracy Gaussian cost is at most 4.7x the
+Pauli terms of the Slater DZP (505,467 / 107,382), not at least 9.2x; the crossing in the ANO family lies between 24
+and 35 functions and is not located more finely here. Paper 62's matched-accuracy headline is to be restated at that
+figure; raised to the PI.
