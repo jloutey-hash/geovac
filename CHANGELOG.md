@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.11] - 2026-11-10
+
+**Full test baseline (PI-directed, pre-release).** The single 8-worker run was stopped for low memory at about 93%,
+so the suite ran in six round-robin batches of 93 files, 4 workers each (558 files, 15,170 s wall): 10,048 passed,
+851 skipped, 4 xfailed, 4 failed. All four failures were test-side; no production code or paper changed.
+
+### Changed
+- tests/test_qed_self_energy.py `test_unrestricted_factorizes` and tests/test_qed_three_loop.py
+  `test_decompose_rational`: both relied on the global mpmath precision their modules set at import, which an earlier
+  test on the same xdist worker can lower (rel_err 3.4e-20 against a 1e-25 tolerance; the rational is not identified
+  below 40 digits). Each now sets its own precision with `mpmath.workdps`, as its neighbour
+  `test_decompose_known_pi_even` already did. Reproduced with a plugin forcing a low global precision: the old tests
+  fail (at 15 and 20 digits), the new ones pass.
+- tests/test_ibm_quantum_demo.py: the GeoVac H2 demo asserted 112 Pauli terms and 21 QWC groups, the retired rule-A
+  counts the 2026-08-29 sweep missed here (tests/test_h2_bond_pair_qubit.py was updated then). Now 280 and 64, as
+  measured; the one-norm (8.307) was already inside the test's window. demo/IBM_QUANTUM_SETUP.md carried the same
+  counts at five places; updated. Its VQE error and wall-time rows were measured on the old Hamiltonian and were not
+  re-run.
+- Tests again rewrote four tracked debug/data JSONs (composed BeH2/H2O/LiH Pauli analyses, LiH scaling sweep);
+  restored, not committed.
+- Version 6.7.11 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.10] - 2026-11-10
 
 **Backing restored for the five claims v6.7.9 left on prose alone (PI-directed, pre-release).** The old backing was

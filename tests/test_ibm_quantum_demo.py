@@ -43,7 +43,7 @@ class TestHamiltonianBuilders:
             spo, info = demo.build_geovac_h2()
 
         assert info['n_qubits'] == 10
-        assert info['n_terms'] == 112
+        assert info['n_terms'] == 280  # exact rule 2026-08-29; rule-A was 112
         assert abs(info['one_norm'] - 8.17) < 0.5
         assert spo.num_qubits == 10
 
@@ -83,14 +83,14 @@ class TestHamiltonianBuilders:
         assert abs(exact) < 100  # sanity bound
 
     def test_qwc_groups_geovac(self) -> None:
-        """GeoVac H2 has ~21 QWC groups."""
+        """GeoVac H2 has 64 QWC groups."""
         demo = _import_demo()
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             _, info = demo.build_geovac_h2()
 
         assert info['n_qwc_groups'] is not None
-        assert info['n_qwc_groups'] == 21
+        assert info['n_qwc_groups'] == 64  # exact rule 2026-08-29; rule-A was 21
 
 
 # ---------------------------------------------------------------------------

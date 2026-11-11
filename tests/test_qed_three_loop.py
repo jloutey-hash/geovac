@@ -388,8 +388,10 @@ class TestDecomposeMZV:
 
     def test_decompose_rational(self):
         """A rational number should be identified as such."""
-        val = mpmath.mpf("42") / mpmath.mpf("17")
-        result = decompose_three_loop_mzv(val, n_digits=50)
+        # Local precision, as in test_decompose_known_pi_even.
+        with mpmath.workdps(60):
+            val = mpmath.mpf("42") / mpmath.mpf("17")
+            result = decompose_three_loop_mzv(val, n_digits=50)
         assert result["identified"]
         assert "1" in result.get("components", {})
 

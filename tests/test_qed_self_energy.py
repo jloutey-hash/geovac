@@ -226,17 +226,20 @@ class TestUnrestricted:
     def test_unrestricted_factorizes(self) -> None:
         """Unrestricted sum = D_electron * D_photon (by construction)."""
         n_max = 10
-        sigma_unr = self_energy_unrestricted(n_max=n_max)
-
-        # Verify by direct double sum
         from geovac.qed_self_energy import (
             _g_n_dirac, _lambda_n, _d_q_transverse, _mu_q)
 
-        total_direct = mpmath.mpf(0)
-        for n_int in range(n_max + 1):
-            for q in range(1, 2 * n_max + 1):
-                total_direct += (_g_n_dirac(n_int) * _d_q_transverse(q)
-                                 / (_lambda_n(n_int) ** 4 * _mu_q(q)))
+        # Local precision: under xdist an earlier test may have lowered the
+        # global mp.dps below the 1e-25 tolerance.
+        with mpmath.workdps(50):
+            sigma_unr = self_energy_unrestricted(n_max=n_max)
+
+            # Verify by direct double sum
+            total_direct = mpmath.mpf(0)
+            for n_int in range(n_max + 1):
+                for q in range(1, 2 * n_max + 1):
+                    total_direct += (_g_n_dirac(n_int) * _d_q_transverse(q)
+                                     / (_lambda_n(n_int) ** 4 * _mu_q(q)))
 
         rel_err = float(abs(sigma_unr - total_direct) / abs(sigma_unr))
         assert rel_err < 1e-25, f"Factorization mismatch: rel_err = {rel_err}"

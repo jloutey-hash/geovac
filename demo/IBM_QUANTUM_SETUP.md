@@ -9,7 +9,7 @@ No IBM account required. Runs entirely on your machine.
 python demo/ibm_quantum_demo.py
 ```
 
-This runs VQE on the GeoVac H2 bond-pair Hamiltonian (10 qubits, 112 Pauli
+This runs VQE on the GeoVac H2 bond-pair Hamiltonian (10 qubits, 280 Pauli
 terms) using statevector simulation with COBYLA optimization.
 
 ## Requirements
@@ -53,7 +53,7 @@ python demo/ibm_quantum_demo.py --compare-gaussian --shots 10000
 ```
 
 Runs VQE on both:
-- GeoVac H2 bond-pair encoding (10 qubits, 112 Pauli terms)
+- GeoVac H2 bond-pair encoding (10 qubits, 280 Pauli terms)
 - Gaussian STO-3G baseline (4 qubits, 15 Pauli terms)
 
 ### IBM Quantum hardware
@@ -86,7 +86,7 @@ python demo/ibm_quantum_demo.py --restarts 1 --maxiter 100    # quick test
 1. **Builds H2 Hamiltonian** via `geovac.ecosystem_export.hamiltonian('H2')`
    - Bond-pair encoding at Z_eff=1, max_n=2
    - Jordan-Wigner transformation to 10-qubit Pauli Hamiltonian
-   - 112 Pauli terms, 21 QWC measurement groups
+   - 280 Pauli terms, 64 QWC measurement groups
 
 2. **Exports to Qiskit** SparsePauliOp format
 
@@ -101,8 +101,8 @@ python demo/ibm_quantum_demo.py --restarts 1 --maxiter 100    # quick test
 | Metric          | GeoVac H2    | Gaussian STO-3G |
 |:----------------|:-------------|:----------------|
 | Qubits          | 10           | 4               |
-| Pauli terms     | 112          | 15              |
-| QWC groups      | 21           | 5               |
+| Pauli terms     | 280          | 15              |
+| QWC groups      | 64           | 5               |
 | VQE error       | ~10-15 mHa (5 restarts) | < 1 mHa |
 | Wall time       | ~30-60 s     | ~5-20 s         |
 
