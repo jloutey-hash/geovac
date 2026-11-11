@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.14] - 2026-11-11
+
+**Paper 62's matched-accuracy headline restated: at most 4.7x the Pauli terms, not at least 9.2x (pre-registered AM,
+PI-approved).** Record docs/predictions/2026-11-11_ano_matched_accuracy.md, registered (49c51a5e) before either
+scored run and scored (f80b0999). The rungs are ANO-R2 kept to its first contracted functions per shell (ANO-R1 is
+the 24-function truncation).
+
+### Changed
+- Water fc-CCSD(T): the 35-function rung (O[3s2p2d]/H[2s2p]) is -76.287896, 6.2 mHa below the Slater DZP, at
+  505,467 Pauli terms on 68 qubits (4.7x) and 1-norm 1632.9 Ha (2.3x). AM1 (it falls short, p = 0.75) MISSED: the
+  neon-scaled step was 26-38 mHa below cc-pVDZ, the measured step 46.9 (transfer 1.36, outside 0.74-1.11). The
+  41-function rung is -76.312401 (AM2 held); Pauli counts equal the cc-pV rungs of the same shell make-up (AM3
+  held); each ANO rung is below the cc-pV rung of its size, by 21.4 and 38.7 mHa (AM4 held).
+- Paper 62: abstract, Sec. matched (new paragraph "The ANO family" and Table ano; "at least nine times" removed),
+  Sec. hf (cc-pV scope), limitations, conclusion, Backing, bibitem am_record. The measured matched-accuracy cost is
+  more than the equal-size count and at most 4.7x it; the ANO crossing between 24 and 35 functions is not located.
+  The group2 synthesis and papers/INDEX.md move with it. Recompiled three-pass clean.
+- Registry: p62_a35_fc, p62_a41_fc, p62_a35_pauli_fc, p62_a35_lambda_fc, p62_a41_lambda_fc; derived
+  p62_a35_below_dzp_mha, p62_a41_below_dzp_mha, p62_a35_pauli_ratio, p62_a35_lambda_ratio. C21 PASS, and fires on a
+  planted 9.2 in place of the 4.7 ratio.
+- New guard tests/test_paper62_ano_matched_accuracy.py (2 fast, 2 slow), written after the paper fix: rebuilds the
+  truncations from the stored ANO-R2 file, checks A24 against ANO-R1, recomputes the A35 water run end to end.
+- Version 6.7.14 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.13] - 2026-11-11
 
 **Paper 62's equal-size result tested against other Gaussian bases of the same size (pre-registered SZ,

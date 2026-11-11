@@ -65,18 +65,24 @@ The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
 below the best atom-set rung, and $21.7$~mHa below once the $3d$ is also set
 on the atom's correlated energy (pre-registered;\ water then lands $19.0$~mHa
 below cc-pVDZ, still $\gvq{p62_r5h3d_above_anor1_mha}{4.7}\mHa$ above
-ANO-R1).  \textbf{[MEASURED, pre-registered]} Within the cc-pV family, the
-matched-accuracy comparison brackets the Gaussian cost from both sides:
-aug-cc-pVDZ at 41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$
-short of the Slater DZP while already costing
-$\gvq{p62_aug_pauli_ratio}{9.2}\times$ the Pauli terms and
-$\gvq{p62_aug_lambda_ratio}{2.7}\times$ the 1-norm on 80 qubits against
-46, and the crossing lies between it and cc-pVTZ.
+ANO-R1).  \textbf{[MEASURED, pre-registered]} At matched accuracy the
+Gaussian cost depends on the family.  In the cc-pV family aug-cc-pVDZ at
+41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$ short of the
+Slater DZP while already costing $\gvq{p62_aug_pauli_ratio}{9.2}\times$
+the Pauli terms.  In the ANO family a 35-function truncation of ANO-R2
+is $\gvq{p62_a35_below_dzp_mha}{6.2}\mHa$ below it, at
+$\gvq{p62_a35_pauli_ratio}{4.7}\times$ the Pauli terms and
+$\gvq{p62_a35_lambda_ratio}{2.3}\times$ the 1-norm on 68 qubits against
+46 (registered as falling short; the prediction missed).  The measured
+matched-accuracy cost is therefore at most $4.7\times$ the terms;
+ANO-R1 at 24 functions falls short, and the crossing between 24 and 35
+functions was not located.
 \textbf{[MEASURED, pre-registered]} The same rule on hydrogen fluoride,
-a second molecule, repeats both findings: the Slater DZP is
+a second molecule, repeats both cc-pV findings: the Slater DZP is
 $\gvq{p62_hf_dzp_vs_ccpvdz_mha}{59.5}\mHa$ below cc-pVDZ at nineteen
 functions with the same Pauli count, and aug-cc-pVDZ is still short at
-$\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the terms.
+$\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the terms; the ANO family was
+not run there.
 \textbf{[MEASURED, pre-registered; STOP]} A ring of six hydrogens, with no
 core, does not:\ the Slater DZP is only $3.5$~mHa below cc-pVDZ at thirty
 functions, and one more Gaussian polarization shell at 48 functions already
@@ -726,14 +732,61 @@ against 46.  Read linearly in energy between the bracketing rungs, the
 matched-accuracy Gaussian cost is near $1.4$ million terms, a 1-norm
 near $2\,700$~Ha and about 85 qubits, which is 13 times the terms and
 3.8 times the 1-norm; that interpolation is a reading of two measured
-rungs, not a measurement of any basis.  The qubit statement of this
-paper is thus a matched-accuracy one: at matched or better accuracy on
-water, the Gaussian bases of the tested ladder cost at least nine times the Pauli terms and
-2.7 times the 1-norm of the Slater DZP, and the equal-size result of
-Table~\ref{tab:qubit} is its lower rung.  The ladder is the cc-pV family
-only.  ANO-R1 already closes more than half the equal-size gap
-(Table~\ref{tab:samesize}), so the larger members of the ANO family may
-reach the Slater DZP at lower cost;\ that comparison has not been run.
+rungs, not a measurement of any basis.  This bracket is for the cc-pV
+family only, and it is not the cheapest Gaussian route.
+
+\paragraph*{The ANO family.}  ANO-R1 already closes more than half the
+equal-size gap (Table~\ref{tab:samesize}), so the ANO family was run at
+matched accuracy too, with the outcome registered first
+\cite{am_record}.  ANO-R1 is a column truncation of the larger ANO-R2
+\cite{zobel2020}:\ the same primitives, with ANO-R1's contractions equal
+to ANO-R2's first contracted functions on every shell.  Each rung is
+ANO-R2 kept to its first contracted functions per shell, which is how
+ANO sets are meant to be used;\ the truncations are ours.  The rung with
+24 functions reproduces ANO-R1's water energy to $3\times10^{-7}$~Ha.
+The 35-function rung, O $[3s2p2d]$ and H $[2s2p]$, has the shell
+make-up of cc-pVDZ+TZpol, and the 41-function rung, O $[4s3p2d]$ and H
+$[3s2p]$, that of aug-cc-pVDZ.  On the neon atom, measured first, the
+35-function rung is $34.6$~mHa below cc-pVDZ;\ scaled to water by the
+neon-to-water ratios measured on four other bases ($0.74$ to $1.11$),
+that put it $26$ to $38$~mHa below cc-pVDZ, short of the Slater DZP's
+$40.7$.  The gated predictions were that the 35-function rung does not
+reach the Slater DZP and the 41-function rung does.
+
+\begin{table}[t]
+\caption{Matched accuracy in the ANO family:\ ANO-R2 truncated to its
+first contracted functions per shell.  Same geometry, solver and counter
+as Table~\ref{tab:matched}; ``vs DZP'' positive above.}
+\label{tab:ano}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrr}
+Basis & Fns & CCSD(T) fc & vs DZP (mHa) & $N_{\rm Pauli}$ fc ($Q$) & $\lambda$ fc \\
+\hline
+ANO-R1 & 24 & \gvq{p62_anor1_fc}{$-76.2647$} & $+\gvq{p62_dzp_vs_anor1_mha}{17.1}$ & 107\,382 (46) & \gvq{p62_anor1_lambda_fc}{625.4} \\
+ANO-R2 [35] & 35 & \gvq{p62_a35_fc}{$-76.2879$} & $-\gvq{p62_a35_below_dzp_mha}{6.2}$ & \gvq{p62_a35_pauli_fc}{505\,467} (68) & \gvq{p62_a35_lambda_fc}{1\,632.9} \\
+ANO-R2 [41] & 41 & \gvq{p62_a41_fc}{$-76.3124$} & $-\gvq{p62_a41_below_dzp_mha}{30.7}$ & 982\,785 (80) & \gvq{p62_a41_lambda_fc}{2\,639.9} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, pre-registered; first prediction MISSED]}
+Table~\ref{tab:ano}.  The 35-function rung reaches the Slater DZP:\ it is
+$\gvq{p62_a35_below_dzp_mha}{6.2}\mHa$ below it, $46.9$~mHa below
+cc-pVDZ, a neon-to-water ratio of $1.36$, outside the range the
+prediction used.  The other clauses held:\ the 41-function rung is
+$\gvq{p62_a41_below_dzp_mha}{30.7}\mHa$ below the Slater DZP, the Pauli
+counts equal those of the cc-pV bases with the same shell make-up, and
+each ANO rung is below the cc-pV rung of its size, by $21.4$~mHa at 35
+functions and $38.7$~mHa at 41.  The qubit statement of this paper is
+therefore a matched-accuracy one with a measured ceiling:\ the cheapest
+Gaussian basis measured that reaches the Slater DZP costs
+$\gvq{p62_a35_pauli_ratio}{4.7}\times$ the Pauli terms and
+$\gvq{p62_a35_lambda_ratio}{2.3}\times$ the 1-norm, on 68 qubits against
+46.  ANO-R1 at 24 functions falls short, so the ANO crossing lies
+between 24 and 35 functions and the matched-accuracy cost is more than
+the equal-size count and at most $4.7$ times it;\ no rung between 24 and
+35 functions was run.  The equal-size result of Table~\ref{tab:qubit}
+is the lower rung of that bracket.
 
 Two things the angular sparsity of the one-centre framework
 \cite{paper22} would have added, and does not here.  Multi-centre
@@ -796,6 +849,7 @@ aug-cc-pVDZ already costs $\gvq{p62_hf_aug_pauli_ratio}{9.3}\times$ the
 Pauli terms and $\gvq{p62_hf_aug_lambda_ratio}{2.7}\times$ the 1-norm on
 62 qubits against 36.  The two molecules give nearly the same two
 ratios; that was reported, not predicted, and is not read as a law.
+Both are cc-pV ratios;\ the ANO family was not run on hydrogen fluoride.
 
 \subsection{A third system: a ring of six hydrogens}
 \label{sec:hring}
@@ -985,11 +1039,12 @@ basis.  Exact Slater integrals on three centres exist in the series
 standard Gaussian bases as published against the Slater DZP as built,
 with its water-optimized polarization; cc-pVDZ's own re-optimized
 polarization is worth $1.2$~mHa and does not change the bracket.  The
-35-function intermediate basis is our construction.  The interpolated
-matched-accuracy cost is a reading between two measured rungs.  The
-matched-accuracy ladder is the cc-pV family only;\ at equal size ANO-R1
-is $23.6$~mHa below cc-pVDZ (Sec.~\ref{sec:dzp}), and the ANO family has
-not been run at matched accuracy.
+35-function cc-pV intermediate basis and the ANO-R2 truncations are our
+construction.  The interpolated cc-pV cost is a reading between two
+measured rungs.  The matched-accuracy ceiling of $4.7\times$ the terms
+is the ANO family's 35-function rung;\ the ANO crossing between 24 and 35
+functions was not located, and no other family (pcseg-$n$, def2) was run
+at matched accuracy.  The ANO family was run on water only.
 \item The $3d$ exponent on the ladder is tied to the $3p$, and
 Sec.~\ref{sec:r3} shows that tie to be the ladder's one design flaw.
 Setting the $3d$ by an atomic correlated criterion is Dunning's
@@ -1028,13 +1083,16 @@ tenths of the gain on both the atom and the molecule, and the gain
 transfers at about half, all as predicted before the energies were
 computed.  The one rung that went the wrong way is a $3d$ passenger the
 atomic objective cannot see, plus two mean-field pieces that cancel on
-water and not on the atom.  At matched accuracy within the cc-pV family
-the comparison turns around: aug-cc-pVDZ at 41 functions is still $8$~mHa short of the
-Slater DZP and already costs nine times the Pauli terms and 2.7 times
-the 1-norm, and the crossing lies between it and cc-pVTZ.  Hydrogen
-fluoride, built by the same rule and registered in advance, repeats
-both the equal-size gap ($59.5$~mHa, mostly mean-field, same Pauli
-count) and the matched-accuracy bracket.  A ring of six hydrogens, with no
+water and not on the atom.  At matched accuracy the cost depends on the
+Gaussian family.  In the cc-pV family aug-cc-pVDZ at 41 functions is
+still $8$~mHa short of the Slater DZP at nine times the Pauli terms, but
+a 35-function truncation of ANO-R2 passes it by $6.2$~mHa at $4.7$ times
+the terms and $2.3$ times the 1-norm, against a registered prediction
+that it would fall short.  The measured matched-accuracy cost is
+therefore at most $4.7$ times the terms, and more than the equal-size
+count.  Hydrogen fluoride, built by the same rule and registered in
+advance, repeats both the equal-size gap ($59.5$~mHa, mostly mean-field,
+same Pauli count) and the cc-pV matched-accuracy bracket.  A ring of six hydrogens, with no
 core, does not:\ there the Slater DZP is $3.5$~mHa ahead at equal size and
 one extra Gaussian shell overtakes it, so the matched-accuracy margin is
 not general to exponential functions.  Setting the $3d$ on the atom's
@@ -1073,6 +1131,13 @@ The same-size guard, \texttt{tests/test\_paper62\_samesize\_gaussian.py},
 recomputes the ANO-R1, pcseg-1 and def2-SVP water runs end to end from
 basis files stored beside it; its record is
 \texttt{docs/predictions/2026-11-11\_samesize\_gaussian\_control.md}.
+The ANO-family matched-accuracy record, with its neon and truncation
+controls and its outcome:\
+\texttt{docs/predictions/2026-11-11\_ano\_matched\_accuracy.md}; its
+guard, \texttt{tests/test\_paper62\_ano\_matched\_accuracy.py}, rebuilds
+the truncations from the stored ANO-R2 file, checks the 24-function one
+against ANO-R1, and recomputes the 35-function water run end to end,
+energy and Jordan--Wigner cost.
 The hydrogen ring, hydrogen torus and squashed ring records, each with its
 controls and disposition:\ \texttt{docs/predictions/2026-11-01\_hydrogen\_ring.md},
 \texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md} and
@@ -1264,6 +1329,13 @@ Paper~62's water result (SZ),''
 \texttt{docs/predictions/2026-11-11\_samesize\_gaussian\_control.md},
 this repository, registered and committed 2026-11-11 before any scored
 water energy was computed; disposition appended the same day.
+
+\bibitem{am_record}
+J.~Loutey, pre-registered record ``The ANO-family matched-accuracy
+ladder for water (AM),''
+\texttt{docs/predictions/2026-11-11\_ano\_matched\_accuracy.md}, this
+repository, registered and committed 2026-11-11 before either scored
+water energy was computed; outcome appended the same day.
 
 \bibitem{jensen2014}
 F.~Jensen, ``Unifying general and segmented contracted basis sets.

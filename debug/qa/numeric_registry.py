@@ -1443,6 +1443,22 @@ MEASURED = {
     "p62_r5h3d_fc": dict(
         value=-76.260011, convention="total energy, Ha, water fc-CCSD(T), ladder rung R5H with the 3d set on the atom's fc-CCSD(T)",
         provenance="MEASURED 2026-11-01 (record docs/predictions/2026-11-01_scale_ladder_3d.md); Paper 62 Sec. r3"),
+    # ANO-family matched accuracy (record AM, 2026-11-11, pre-registered 49c51a5e, scored f80b0999)
+    "p62_a35_fc": dict(
+        value=-76.287896, convention="total energy, Ha, water fc-CCSD(T), ANO-R2 truncated to O[3s2p2d]/H[2s2p] (35 fns, our truncation)",
+        provenance="MEASURED 2026-11-11 (record docs/predictions/2026-11-11_ano_matched_accuracy.md)"),
+    "p62_a41_fc": dict(
+        value=-76.312401, convention="total energy, Ha, water fc-CCSD(T), ANO-R2 truncated to O[4s3p2d]/H[3s2p] (41 fns, our truncation)",
+        provenance="MEASURED 2026-11-11 (record AM)"),
+    "p62_a35_pauli_fc": dict(
+        value=505467, convention="Pauli, water ANO A35 fc Q=68 (identity included)",
+        provenance="MEASURED 2026-11-11 (record AM, AM3), jw_pauli_stats"),
+    "p62_a35_lambda_fc": dict(
+        value=1632.9, convention="non-identity 1-norm (Ha), water ANO A35 fc Q=68",
+        provenance="MEASURED 2026-11-11 (record AM; raw 1632.930), jw_pauli_stats"),
+    "p62_a41_lambda_fc": dict(
+        value=2639.9, convention="non-identity 1-norm (Ha), water ANO A41 fc Q=80",
+        provenance="MEASURED 2026-11-11 (record AM; raw 2639.937), jw_pauli_stats"),
     # second molecule (record HS, 2026-10-31, pre-registered b5ccf2ff); H-F 1.7325 bohr, F 1s frozen
     "p62_hf_dzp_fc": dict(
         value=-100.287713, convention="total energy, Ha, HF fc-CCSD(T), Slater DZP by Paper 62's rule (19 fns)",
@@ -1665,6 +1681,14 @@ DERIVED = {
                                   "best atom-set Slater rung above ANO-R1, mHa"),
     "p62_dzp_vs_anor1_lambda_pct": ("100 * (p62_dzp_lambda_fc / p62_anor1_lambda_fc - 1)", 0.05,
                                   "Slater DZP 1-norm over ANO-R1's, percent"),
+    "p62_a35_below_dzp_mha":     ("1000 * (p62_dzp_fc - p62_a35_fc)", 0.05,
+                                  "AM1 (missed): ANO A35 below the Slater DZP, mHa"),
+    "p62_a41_below_dzp_mha":     ("1000 * (p62_dzp_fc - p62_a41_fc)", 0.05,
+                                  "AM2: ANO A41 below the Slater DZP, mHa"),
+    "p62_a35_pauli_ratio":       ("p62_a35_pauli_fc / h2o_ccpvdz_pauli", 0.05,
+                                  "ANO A35 Pauli terms over the 24-function count: the measured matched-accuracy ceiling"),
+    "p62_a35_lambda_ratio":      ("p62_a35_lambda_fc / p62_dzp_lambda_fc", 0.05,
+                                  "ANO A35 1-norm over the Slater DZP's"),
     "p62_hf_dzp_vs_ccpvdz_mha":  ("1000 * (p62_hf_ccpvdz_polopt_fc - p62_hf_dzp_fc)", 0.05,
                                   "HS1: HF Slater DZP below re-optimized cc-pVDZ, mHa"),
     "p62_hf_scf_share":          ("(p62_hf_ccpvdz_polopt_rhf - p62_hf_dzp_rhf) / (p62_hf_ccpvdz_polopt_fc - p62_hf_dzp_fc)", 0.0005,
