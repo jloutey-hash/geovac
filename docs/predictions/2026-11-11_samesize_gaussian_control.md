@@ -75,3 +75,26 @@ Known: W(DZP) = 40.7, W(R5H) = 7.0, W(R5) = 3.1.
 - SZ5 fails: the Pauli-count statement in Paper 62 is wrong as stated; raised to the PI.
 
 Scored by: `python debug/samesize_gaussian_control.py water {pcseg1,def2svp,anor1}`.
+
+## Scored (2026-11-11, after the registration commit e00868ff)
+
+Rows: `debug/data/samesize_control/matched_accuracy.jsonl`. W = mHa below cc-pVDZ's fc-CCSD(T) -76.241025.
+
+| Basis | RHF | fc-CCSD(T) | W (mHa) | RHF part (mHa) | Pauli (fc, 46 qubits) | 1-norm (Ha) |
+|:--|:--|:--|:--:|:--:|:--:|:--:|
+| pcseg-1 | -76.003683 | -76.217263 | -23.8 | -23.1 | 107,382 | 674.10 |
+| def2-SVP | -75.961010 | -76.174699 | -66.3 | -65.8 | 107,382 | 677.37 |
+| ANO-R1 | -76.047820 | -76.264667 | +23.6 | +21.0 | 107,382 | 625.36 |
+| (cc-pVDZ, control) | -76.026795 | -76.241025 | 0 | 0 | 107,382 | 674.29 |
+| (Slater DZP, Paper 62) | -76.055573 | -76.281739 | +40.7 | +28.8 | 107,382 | 706.3 |
+| (R5H, Paper 62) | | -76.248015 | +7.0 | | | |
+
+- **SZ1 HELD.** pcseg-1 -23.8, def2-SVP -66.3; both worse than cc-pVDZ, def2-SVP the worse.
+- **SZ2 HELD, at the edge.** ANO-R1 +23.6 in [5, 25]. The central guess (about 12) missed: the neon-to-water
+  transfer is about 1.1, not 0.5-0.65.
+- **SZ3 HELD.** DZP - ANO-R1 = 17.1 mHa > 10. The Slater DZP's margin over the best same-size Gaussian tested is
+  17.1 mHa, not the 40.7 measured against cc-pVDZ.
+- **SZ4 HELD.** ANO-R1 beats R5H by 16.6 mHa: the rung set on free atoms is below cc-pVDZ but above ANO-R1.
+- **SZ5 HELD.** 107,382 Pauli terms in every basis.
+- **Unregistered observation.** ANO-R1 is more accurate than cc-pVDZ with a lower 1-norm (625 vs 674 Ha), so Paper
+  62's "the 1-norm rises with accuracy" holds across its own kits but not across Gaussian families.
