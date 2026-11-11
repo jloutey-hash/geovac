@@ -27,6 +27,7 @@ Date: March 2026
 
 import functools
 import json
+import os
 import time
 from math import factorial
 from pathlib import Path
@@ -38,6 +39,15 @@ from scipy.special import genlaguerre
 from openfermion import jordan_wigner
 
 from geovac.qubit_encoding import build_fermion_op_from_integrals
+
+
+def _debug_data_path(name: str) -> Path:
+    """Where analysis reports are saved: debug/data/, unless the
+    GEOVAC_DEBUG_DATA_DIR environment variable names another directory
+    (tests/conftest.py sets it so test runs leave tracked files alone)."""
+    override = os.environ.get('GEOVAC_DEBUG_DATA_DIR')
+    base = Path(override) if override else Path(__file__).parent.parent / 'debug' / 'data'
+    return base / name
 
 
 # ---------------------------------------------------------------------------
@@ -1235,7 +1245,7 @@ def build_composed_lih(
     }
 
     # Save JSON report
-    out_path = Path(__file__).parent.parent / 'debug' / 'data' / 'composed_lih_pauli_analysis.json'
+    out_path = _debug_data_path('composed_lih_pauli_analysis.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)
@@ -1415,8 +1425,7 @@ def composed_lih_scaling_sweep(
         'gaussian_lih_sto3g': {'Q': 12, 'N_pauli': 631},
     }
 
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_lih_scaling_sweep.json')
+    out_path = _debug_data_path('composed_lih_scaling_sweep.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(output, f, indent=2)
@@ -1502,8 +1511,7 @@ def composed_lih_full_analysis(
         },
     }
 
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_lih_scaling_analysis.json')
+    out_path = _debug_data_path('composed_lih_scaling_analysis.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(analysis, f, indent=2)
@@ -1845,8 +1853,7 @@ def build_equal_qubit_comparison_v3() -> Dict[str, Any]:
         ],
     }
 
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_lih_scaling_sweep_v3.json')
+    out_path = _debug_data_path('composed_lih_scaling_sweep_v3.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(output, f, indent=2)
@@ -2234,8 +2241,7 @@ def build_composed_beh2(
     }
 
     # Save JSON report
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_beh2_pauli_analysis.json')
+    out_path = _debug_data_path('composed_beh2_pauli_analysis.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     json_results = {k: v for k, v in results.items()
                     if not isinstance(v, np.ndarray)}
@@ -2429,8 +2435,7 @@ def compare_lih_beh2_scaling(
         'gaussian_exponent': 4.25,
     }
 
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_beh2_pauli_analysis.json')
+    out_path = _debug_data_path('composed_beh2_pauli_analysis.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(output, f, indent=2, default=str)
@@ -2831,8 +2836,7 @@ def build_composed_h2o(
     }
 
     # Save JSON report
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_h2o_pauli_analysis.json')
+    out_path = _debug_data_path('composed_h2o_pauli_analysis.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     json_results = {k: v for k, v in results.items()
                     if not isinstance(v, np.ndarray)}
@@ -3053,8 +3057,7 @@ def compare_all_molecules_scaling(
         'reference': _TRENEV_REFERENCE,
     }
 
-    out_path = (Path(__file__).parent.parent
-                / 'debug' / 'data' / 'composed_h2o_pauli_analysis.json')
+    out_path = _debug_data_path('composed_h2o_pauli_analysis.json')
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(output, f, indent=2, default=str)

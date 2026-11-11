@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.12] - 2026-11-11
+
+**Test runs no longer rewrite tracked files in debug/data/ (PI-approved).** Every full run had rewritten four tracked
+JSON reports (composed BeH2/H2O/LiH Pauli analyses, LiH scaling sweep), which then had to be restored by hand.
+
+### Changed
+- geovac/composed_qubit.py: new `_debug_data_path(name)`; the eight places that saved a report to debug/data/ now call
+  it. It returns debug/data/<name> as before, unless the GEOVAC_DEBUG_DATA_DIR environment variable names another
+  directory. Behaviour outside pytest is unchanged (checked: default path debug/data/, override honoured).
+- tests/conftest.py: `pytest_configure` sets GEOVAC_DEBUG_DATA_DIR to a fresh temp directory unless already set.
+- Checked with the 30 composed_qubit consumer test files plus the 18 symbolic S^3 proofs (-n 4, 902 s): 567 passed,
+  132 skipped, 1 xfailed, 0 failed; the four reports landed in the temp directory and the tracked files stayed clean.
+- Version 6.7.12 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.11] - 2026-11-10
 
 **Full test baseline (PI-directed, pre-release).** The single 8-worker run was stopped for low memory at about 93%,

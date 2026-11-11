@@ -81,3 +81,8 @@ def pytest_configure(config):
     """
     if getattr(config.option, "numprocesses", None) and getattr(config.option, "dist", None) == "load":
         config.option.dist = "loadgroup"
+    # Analysis reports that geovac.composed_qubit saves to debug/data/ go to a
+    # temp dir under pytest, so test runs leave those tracked files alone.
+    if "GEOVAC_DEBUG_DATA_DIR" not in os.environ:
+        import tempfile
+        os.environ["GEOVAC_DEBUG_DATA_DIR"] = tempfile.mkdtemp(prefix="geovac_debug_data_")
