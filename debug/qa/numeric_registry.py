@@ -1427,6 +1427,22 @@ MEASURED = {
     "p62_aug_lambda_fc": dict(
         value=1901.1, convention="non-identity 1-norm (Ha), water aug-cc-pVDZ fc Q=80",
         provenance="MEASURED 2026-10-31 (record MA), jw_pauli_stats"),
+    # same-size Gaussian control (record SZ, 2026-11-11, pre-registered e00868ff); 24 fns, published bases
+    "p62_anor1_fc": dict(
+        value=-76.264667, convention="total energy, Ha, water fc-CCSD(T), ANO-R1 (24 fns, as published)",
+        provenance="MEASURED 2026-11-11 (record docs/predictions/2026-11-11_samesize_gaussian_control.md)"),
+    "p62_pcseg1_fc": dict(
+        value=-76.217263, convention="total energy, Ha, water fc-CCSD(T), pcseg-1 (24 fns, as published)",
+        provenance="MEASURED 2026-11-11 (record SZ)"),
+    "p62_def2svp_fc": dict(
+        value=-76.174699, convention="total energy, Ha, water fc-CCSD(T), def2-SVP (24 fns, as published)",
+        provenance="MEASURED 2026-11-11 (record SZ)"),
+    "p62_anor1_lambda_fc": dict(
+        value=625.36, convention="non-identity 1-norm (Ha), water ANO-R1 fc Q=46",
+        provenance="MEASURED 2026-11-11 (record SZ), jw_pauli_stats"),
+    "p62_r5h3d_fc": dict(
+        value=-76.260011, convention="total energy, Ha, water fc-CCSD(T), ladder rung R5H with the 3d set on the atom's fc-CCSD(T)",
+        provenance="MEASURED 2026-11-01 (record docs/predictions/2026-11-01_scale_ladder_3d.md); Paper 62 Sec. r3"),
     # second molecule (record HS, 2026-10-31, pre-registered b5ccf2ff); H-F 1.7325 bohr, F 1s frozen
     "p62_hf_dzp_fc": dict(
         value=-100.287713, convention="total energy, Ha, HF fc-CCSD(T), Slater DZP by Paper 62's rule (19 fns)",
@@ -1641,6 +1657,14 @@ DERIVED = {
                                   "aug-cc-pVDZ Pauli terms over the 24-function count"),
     "p62_aug_lambda_ratio":      ("p62_aug_lambda_fc / p62_dzp_lambda_fc", 0.05,
                                   "aug-cc-pVDZ 1-norm over the Slater DZP's"),
+    "p62_anor1_vs_ccpvdz_mha":   ("1000 * (p62_ccpvdz_fc - p62_anor1_fc)", 0.05,
+                                  "SZ2: ANO-R1 below cc-pVDZ at 24 functions, mHa"),
+    "p62_dzp_vs_anor1_mha":      ("1000 * (p62_anor1_fc - p62_dzp_fc)", 0.05,
+                                  "SZ3: Slater DZP below ANO-R1, the best same-size Gaussian tested, mHa"),
+    "p62_r5h3d_above_anor1_mha": ("1000 * (p62_r5h3d_fc - p62_anor1_fc)", 0.05,
+                                  "best atom-set Slater rung above ANO-R1, mHa"),
+    "p62_dzp_vs_anor1_lambda_pct": ("100 * (p62_dzp_lambda_fc / p62_anor1_lambda_fc - 1)", 0.05,
+                                  "Slater DZP 1-norm over ANO-R1's, percent"),
     "p62_hf_dzp_vs_ccpvdz_mha":  ("1000 * (p62_hf_ccpvdz_polopt_fc - p62_hf_dzp_fc)", 0.05,
                                   "HS1: HF Slater DZP below re-optimized cc-pVDZ, mHa"),
     "p62_hf_scf_share":          ("(p62_hf_ccpvdz_polopt_rhf - p62_hf_dzp_rhf) / (p62_hf_ccpvdz_polopt_fc - p62_hf_dzp_fc)", 0.0005,

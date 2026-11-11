@@ -29,7 +29,12 @@ resources.  \textbf{[MEASURED]} A Slater double-zeta-plus-polarization
 basis built by cc-pVDZ's own design rule sits
 $\gvq{p62_dzp_vs_ccpvdz_mha}{40.7}\mHa$ below cc-pVDZ at frozen-core
 CCSD(T), of which $\gvq{p62_dzp_vs_ccpvdz_scf_mha}{28.8}\mHa$ is
-self-consistent field.  \textbf{[MEASURED, negative]} Every exponential
+self-consistent field.  \textbf{[MEASURED, pre-registered]} cc-pVDZ is
+built for systematic convergence, not for the lowest energy at its size;
+of three published Gaussian bases of the same size, ANO-R1 is
+$\gvq{p62_anor1_vs_ccpvdz_mha}{23.6}\mHa$ below cc-pVDZ, and the Slater
+DZP's margin over it is $\gvq{p62_dzp_vs_anor1_mha}{17.1}\mHa$.
+\textbf{[MEASURED, negative]} Every exponential
 kit with fixed or shared exponents loses: the hydrogenic $Z/n$ rule by
 $\gvq{p62_hyd_above_ccpvdz_mha}{196}\mHa$, a single Coulomb--Sturmian
 scale per atom by more than one hartree, and a two-scale Sturmian kit
@@ -51,13 +56,16 @@ Hartree--Fock gain is two opposite pieces that cancel on water.
 \textbf{[MEASURED]} The Jordan--Wigner Pauli count is the same for every
 twenty-four-function basis, $\gvq{h2o_ccpvdz_pauli}{107\,382}$ terms on
 46 frozen-core qubits, because in canonical orbitals without degenerate
-pairs it is fixed by the orbital count and the $C_{2v}$ pattern; the 1-norm rises with accuracy, from 405 to 706~Ha
-across the kits other than the one-scale Sturmian.  \emph{Caps.}  One geometry and one method per molecule;
+pairs it is fixed by the orbital count and the $C_{2v}$ pattern; across
+this paper's own kits the 1-norm rises with accuracy, from 405 to 706~Ha
+(the one-scale Sturmian aside), but not across Gaussian families:\ ANO-R1
+is more accurate than cc-pVDZ at 625~Ha.  \emph{Caps.}  One geometry and one method per molecule;
 the ladder and the native kits are water only.
 The water-tuned Slater basis stays $\gvq{p62_dzp_below_r5h_mha}{34}\mHa$
 below the best atom-set rung, and $21.7$~mHa below once the $3d$ is also set
 on the atom's correlated energy (pre-registered;\ water then lands $19.0$~mHa
-below cc-pVDZ).  \textbf{[MEASURED, pre-registered]} The
+below cc-pVDZ, still $\gvq{p62_r5h3d_above_anor1_mha}{4.7}\mHa$ above
+ANO-R1).  \textbf{[MEASURED, pre-registered]} Within the cc-pV family, the
 matched-accuracy comparison brackets the Gaussian cost from both sides:
 aug-cc-pVDZ at 41 functions stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$
 short of the Slater DZP while already costing
@@ -269,6 +277,54 @@ is textbook; what is measured here is its size at equal count under an
 identical design rule, and the fact that the correlated advantage is
 $0.41$ of it.
 
+\paragraph{Against other Gaussian bases of the same size.}  cc-pVDZ is
+the natural comparison for a basis built by its design rule, but it is
+built so that the DZ, TZ, QZ sequence converges systematically, not to
+give the lowest energy at its size.  Three other published Gaussian
+bases of twenty-four functions on water were therefore scored, with the
+outcomes registered before any water energy was computed
+\cite{sz_record}:\ Jensen's segmented polarization-consistent pcseg-1
+\cite{jensen2014}, Weigend and Ahlrichs's def2-SVP \cite{weigend2005},
+and ANO-R1, contracted to atomic natural orbitals
+\cite{zobel2020}, all taken from the Basis Set Exchange
+\cite{pritchard2019} and used as published, with no exponent tuned on
+water.  Neon was the measured control:\ there pcseg-1 and def2-SVP sit
+$56$ and $114$~mHa above cc-pVDZ at frozen-core CCSD(T), and ANO-R1
+$21$~mHa below.
+
+\begin{table}[t]
+\caption{Water at 24 functions in five bases, same geometry, solver and
+counter as Table~\ref{tab:dzp}.  ``vs cc-pVDZ'' is the frozen-core
+CCSD(T) energy relative to cc-pVDZ's, positive above.  Every row has
+$107\,382$ Pauli terms on 46 qubits; $\lambda$ is the frozen-core 1-norm
+in hartree.}
+\label{tab:samesize}
+\begin{ruledtabular}
+\begin{tabular}{lrrrr}
+Basis & \multicolumn{1}{c}{RHF} & \multicolumn{1}{c}{CCSD(T) fc} &
+vs cc-pVDZ (mHa) & \multicolumn{1}{c}{$\lambda$ fc} \\
+\hline
+def2-SVP & -75.961010 & \gvq{p62_def2svp_fc}{-76.174699} & $+66.3$ & 677.4 \\
+pcseg-1 & -76.003683 & \gvq{p62_pcseg1_fc}{-76.217263} & $+23.8$ & 674.1 \\
+cc-pVDZ & -76.026795 & \gvq{p62_ccpvdz_fc}{-76.241025} & $0$ & \gvq{p62_ccpvdz_lambda_fc}{674.3} \\
+ANO-R1 & -76.047820 & \gvq{p62_anor1_fc}{-76.264667} & $-\gvq{p62_anor1_vs_ccpvdz_mha}{23.6}$ & \gvq{p62_anor1_lambda_fc}{625.4} \\
+Slater DZP & \gvq{p62_dzp_rhf}{-76.055573} & \gvq{p62_dzp_fc}{-76.281739} & $-\gvq{p62_dzp_vs_ccpvdz_mha}{40.7}$ & \gvq{p62_dzp_lambda_fc}{706.3} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED, pre-registered]}  Table~\ref{tab:samesize}.  All five
+registered predictions held.  pcseg-1 and def2-SVP land above cc-pVDZ,
+as on neon.  ANO-R1 is $\gvq{p62_anor1_vs_ccpvdz_mha}{23.6}\mHa$ below
+it, $21.0$~mHa of that at RHF, and the Slater DZP stays
+$\gvq{p62_dzp_vs_anor1_mha}{17.1}\mHa$ below ANO-R1.  So against the
+strongest same-size Gaussian basis tested the equal-size margin is
+$17.1$~mHa, not the $40.7$ measured against cc-pVDZ.  The registered band
+for ANO-R1's gain, $5$ to $25$~mHa, held at its edge; the central
+estimate from neon, about $12$~mHa, was low by half.  The Slater DZP's
+polarization exponents were set on water and ANO-R1's were not; on
+cc-pVDZ that re-optimization is worth $1.2$~mHa (Table~\ref{tab:dzp}).
+
 \section{The framework's own exponential kits, negative}
 \label{sec:native}
 
@@ -367,7 +423,9 @@ what Sec.~\ref{sec:ladder} tests.
 function kits other than the one-scale Sturmian, the frozen-core
 1-norm rises with accuracy: $405$, $511$, $620$, $674$, $706$~Ha.  A
 low 1-norm at equal size here tracks a worse description, not a cheaper
-one.  Sec.~\ref{sec:qubit} returns to this.
+one.  It does not hold across Gaussian families:\ ANO-R1 is
+$23.6$~mHa more accurate than cc-pVDZ at a 1-norm of $625$~Ha
+(Table~\ref{tab:samesize}).  Sec.~\ref{sec:qubit} returns to this.
 
 \section{The scale ladder: how many oxygen exponents, set on the atom}
 \label{sec:ladder}
@@ -561,8 +619,10 @@ $R2$, as predicted:\ the $3d$ share of its loss is gone on both rungs, and
 what remains is the part that does not transfer.  On the two largest
 moves the water RHF part rises instead of falling, so there the total is
 carried by correlation alone.  The best atom-set rung is now $R5H$ at
-$-76.260011$~Ha, $19.0$~mHa below cc-pVDZ and $21.7$~mHa above the
-water-tuned Slater DZP.
+\gvq{p62_r5h3d_fc}{$-76.260011$}~Ha, $19.0$~mHa below cc-pVDZ and $21.7$~mHa above the
+water-tuned Slater DZP;\ against the published ANO-R1 basis of the same
+size it is $\gvq{p62_r5h3d_above_anor1_mha}{4.7}\mHa$ above
+(Table~\ref{tab:samesize}).
 
 \section{The qubit cost}
 \label{sec:qubit}
@@ -605,6 +665,9 @@ term.
 \item The 1-norm is $\gvq{p62_lambda_ratio_pct}{4.7}\%$ higher for the
 Slater DZP than for cc-pVDZ.  So the $41$~mHa of Sec.~\ref{sec:dzp}
 costs about five percent in 1-norm and nothing in qubits or terms.
+Against ANO-R1, the strongest same-size Gaussian tested, the
+$17.1$~mHa margin costs $\gvq{p62_dzp_vs_anor1_lambda_pct}{12.9}\%$ in
+1-norm.
 \item cc-pVTZ, the next Gaussian rung, costs $37\times$ the terms and
 $11\times$ the 1-norm for the remaining $55\%$ of the correlated gap.
 \end{enumerate}
@@ -667,7 +730,10 @@ rungs, not a measurement of any basis.  The qubit statement of this
 paper is thus a matched-accuracy one: at matched or better accuracy on
 water, the Gaussian bases of the tested ladder cost at least nine times the Pauli terms and
 2.7 times the 1-norm of the Slater DZP, and the equal-size result of
-Table~\ref{tab:qubit} is its lower rung.
+Table~\ref{tab:qubit} is its lower rung.  The ladder is the cc-pV family
+only.  ANO-R1 already closes more than half the equal-size gap
+(Table~\ref{tab:samesize}), so the larger members of the ANO family may
+reach the Slater DZP at lower cost;\ that comparison has not been run.
 
 Two things the angular sparsity of the one-centre framework
 \cite{paper22} would have added, and does not here.  Multi-centre
@@ -920,7 +986,10 @@ standard Gaussian bases as published against the Slater DZP as built,
 with its water-optimized polarization; cc-pVDZ's own re-optimized
 polarization is worth $1.2$~mHa and does not change the bracket.  The
 35-function intermediate basis is our construction.  The interpolated
-matched-accuracy cost is a reading between two measured rungs.
+matched-accuracy cost is a reading between two measured rungs.  The
+matched-accuracy ladder is the cc-pV family only;\ at equal size ANO-R1
+is $23.6$~mHa below cc-pVDZ (Sec.~\ref{sec:dzp}), and the ANO family has
+not been run at matched accuracy.
 \item The $3d$ exponent on the ladder is tied to the $3p$, and
 Sec.~\ref{sec:r3} shows that tie to be the ladder's one design flaw.
 Setting the $3d$ by an atomic correlated criterion is Dunning's
@@ -947,7 +1016,8 @@ that the framework's fixed-exponent rules do not buy it.
 At twenty-four functions on water, a Slater-type basis built by
 cc-pVDZ's own rule is $41$~mHa lower at frozen-core CCSD(T), mostly at
 the mean-field level, for the same Pauli count in canonical orbitals and five percent more
-1-norm.  The gain is exponent choice: the one-centre framework's
+1-norm.  Against ANO-R1, the strongest of three other published Gaussian
+bases of the same size, the margin is $17.1$~mHa.  The gain is exponent choice: the one-centre framework's
 fixed-exponent rules, hydrogenic $Z/n$ and single-scale Sturmian, lose
 by $0.2$ to more than $1$~Ha at the same size, and the hydrogenic loss is
 the node structure the fixed exponents impose, which screening makes
@@ -958,8 +1028,8 @@ tenths of the gain on both the atom and the molecule, and the gain
 transfers at about half, all as predicted before the energies were
 computed.  The one rung that went the wrong way is a $3d$ passenger the
 atomic objective cannot see, plus two mean-field pieces that cancel on
-water and not on the atom.  At matched accuracy the comparison turns
-around: aug-cc-pVDZ at 41 functions is still $8$~mHa short of the
+water and not on the atom.  At matched accuracy within the cc-pV family
+the comparison turns around: aug-cc-pVDZ at 41 functions is still $8$~mHa short of the
 Slater DZP and already costs nine times the Pauli terms and 2.7 times
 the 1-norm, and the crossing lies between it and cc-pVTZ.  Hydrogen
 fluoride, built by the same rule and registered in advance, repeats
@@ -971,8 +1041,8 @@ not general to exponential functions.  Setting the $3d$ on the atom's
 correlated energy too, Dunning's rule, run as its own registered ladder,
 puts water $19.0$~mHa below cc-pVDZ, with every rung's change predicted
 from the atom to within $15\%$.  The water-tuned basis stays $21.7$~mHa
-ahead of that best atom-set rung, and nothing here is a property of the
-lattice.
+ahead of that best atom-set rung, which is itself $4.7$~mHa behind
+ANO-R1, and nothing here is a property of the lattice.
 
 \section*{Backing}
 
@@ -999,6 +1069,10 @@ The hydrogen fluoride guard,
 free fluorine atom's design step and the cc-pVDZ and aug-cc-pVDZ runs end
 to end; the Slater DZP and the other two rungs are read as registered
 values.
+The same-size guard, \texttt{tests/test\_paper62\_samesize\_gaussian.py},
+recomputes the ANO-R1, pcseg-1 and def2-SVP water runs end to end from
+basis files stored beside it; its record is
+\texttt{docs/predictions/2026-11-11\_samesize\_gaussian\_control.md}.
 The hydrogen ring, hydrogen torus and squashed ring records, each with its
 controls and disposition:\ \texttt{docs/predictions/2026-11-01\_hydrogen\_ring.md},
 \texttt{docs/predictions/2026-11-02\_hydrogen\_torus.md} and
@@ -1183,6 +1257,35 @@ Kernbewegung bei dreiatomigen, stabf\"ormigen Molek\"ulen,''
 M.~Encinosa and J.~Williamson, ``Electron gases in toroidal shells: mode
 coupling and state functions,'' Physica E \textbf{146}, 115558 (2023),
 doi:10.1016/j.physe.2022.115558; arXiv:2207.01745.
+
+\bibitem{sz_record}
+J.~Loutey, pre-registered record ``Same-size Gaussian control for
+Paper~62's water result (SZ),''
+\texttt{docs/predictions/2026-11-11\_samesize\_gaussian\_control.md},
+this repository, registered and committed 2026-11-11 before any scored
+water energy was computed; disposition appended the same day.
+
+\bibitem{jensen2014}
+F.~Jensen, ``Unifying general and segmented contracted basis sets.
+Segmented polarization consistent basis sets,'' J.\ Chem.\ Theory
+Comput.\ \textbf{10}, 1074 (2014), doi:10.1021/ct401026a.
+
+\bibitem{weigend2005}
+F.~Weigend and R.~Ahlrichs, ``Balanced basis sets of split valence,
+triple zeta valence and quadruple zeta valence quality for H to Rn:\
+Design and assessment of accuracy,'' Phys.\ Chem.\ Chem.\ Phys.\
+\textbf{7}, 3297 (2005), doi:10.1039/b508541a.
+
+\bibitem{zobel2020}
+J.~P.~Zobel, P.-O.~Widmark, and V.~Veryazov, ``The ANO-R basis set,''
+J.\ Chem.\ Theory Comput.\ \textbf{16}, 278 (2020),
+doi:10.1021/acs.jctc.9b00873;\ correction \textbf{17}, 3233 (2021).
+
+\bibitem{pritchard2019}
+B.~P.~Pritchard, D.~Altarawy, B.~Didier, T.~D.~Gibson, and
+T.~L.~Windus, ``New Basis Set Exchange:\ An open, up-to-date resource
+for the molecular sciences community,'' J.\ Chem.\ Inf.\ Model.\
+\textbf{59}, 4814 (2019), doi:10.1021/acs.jcim.9b00725.
 
 \bibitem{manrique2020}
 D.~Z.~Manrique, I.~T.~Khan, K.~Yamamoto, V.~Wichitwechkarn, and

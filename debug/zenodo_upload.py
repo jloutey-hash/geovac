@@ -57,7 +57,7 @@ CREATOR = {"name": "Loutey, Josh",
            "affiliation": "Independent Researcher, Kent, Washington"}
 REPO_URL = "https://github.com/jloutey-hash/geovac"
 CORPUS_DOI = "10.5281/zenodo.18738360"
-CORPUS_VERSION = "v6.7.12"  # bump to the release tag before running
+CORPUS_VERSION = "v6.7.13"  # bump to the release tag before running
 RETRIES = 5
 
 GROUP_LABEL = {

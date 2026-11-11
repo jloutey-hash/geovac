@@ -98,3 +98,9 @@ Rows: `debug/data/samesize_control/matched_accuracy.jsonl`. W = mHa below cc-pVD
 - **SZ5 HELD.** 107,382 Pauli terms in every basis.
 - **Unregistered observation.** ANO-R1 is more accurate than cc-pVDZ with a lower 1-norm (625 vs 674 Ha), so Paper
   62's "the 1-norm rises with accuracy" holds across its own kits but not across Gaussian families.
+
+**Correction (2026-11-11, same day, after scoring).** SZ4 was registered against R5H (7.0 mHa below cc-pVDZ), but
+Paper 62's best atom-set rung is R5H with the 3d also set on the atom (record
+`docs/predictions/2026-11-01_scale_ladder_3d.md`): -76.260011, 19.0 mHa below cc-pVDZ. Against that rung ANO-R1 is
+ahead by 4.7 mHa, not 16.6. SZ4 holds as registered; the PM's first report to the PI quoted the 16.6 figure and was
+corrected in the same session. Paper 62 carries the 4.7 mHa figure.

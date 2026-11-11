@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.13] - 2026-11-11
+
+**Paper 62's equal-size result tested against other Gaussian bases of the same size (pre-registered SZ,
+PI-directed).** Paper 62 compared its 24-function Slater bases with the cc-pV family only; cc-pVDZ is built for
+systematic convergence, not for the lowest energy at its size. Record
+docs/predictions/2026-11-11_samesize_gaussian_control.md, registered (e00868ff) before any scored run; all five
+predictions held.
+
+### Changed
+- Water at 24 functions, fc-CCSD(T), same solver: ANO-R1 -76.264667 (23.6 mHa below cc-pVDZ, 21.0 of it RHF),
+  pcseg-1 -76.217263 (23.8 above), def2-SVP -76.174699 (66.3 above); 107,382 Pauli terms on 46 qubits in every
+  basis. The Slater DZP's margin over the strongest same-size Gaussian tested is 17.1 mHa, not the 40.7 against
+  cc-pVDZ. The best atom-set Slater rung (3d set on the atom, -76.260011) is 4.7 mHa above ANO-R1.
+- ANO-R1 is more accurate than cc-pVDZ at a lower 1-norm (625.36 vs 674.3 Ha), so Paper 62's "the 1-norm rises with
+  accuracy" is scoped to its own kits (unregistered observation).
+- Paper 62: abstract, Sec. dzp (new paragraph and Table samesize), the 1-norm observation, Sec. r3 best-rung
+  sentence, qubit fact 2 (12.9% 1-norm against ANO-R1), the matched-accuracy subsection and limitations (the ladder
+  is the cc-pV family only), conclusion, Backing; bibitems for the SZ record, Jensen 2014, Weigend-Ahlrichs 2005,
+  Zobel et al. 2020 and the Basis Set Exchange (citations checked against the BSE reference records). The group2
+  synthesis and papers/INDEX.md move with it. Recompiled three-pass clean.
+- Registry: p62_anor1_fc, p62_pcseg1_fc, p62_def2svp_fc, p62_anor1_lambda_fc, p62_r5h3d_fc; derived
+  p62_anor1_vs_ccpvdz_mha, p62_dzp_vs_anor1_mha, p62_r5h3d_above_anor1_mha, p62_dzp_vs_anor1_lambda_pct. C21 PASS,
+  and fires on a planted wrong margin.
+- New guard tests/test_paper62_samesize_gaussian.py (5 slow tests), written after the fix and fire-tested 6/6. A
+  first exponent plant (1e-7 relative) moved the energy below tolerance and was replaced by a 7% move; recorded.
+- Correction carried: the PM first told the PI the atom-set rung was 16.6 mHa behind ANO-R1, using R5H without the
+  atom-set 3d; the right figure is 4.7. The record carries the correction.
+- The PM had also told the PI that energy-built Gaussian bases "routinely" beat cc-pVDZ on total energy; the neon
+  control showed two of three do not. Disclosed in the record.
+- Follow-up registered, not scored: record AM (docs/predictions/2026-11-11_ano_matched_accuracy.md, 49c51a5e), the
+  ANO family at 35 and 41 functions against the Slater DZP, with neon and truncation controls (ANO-R1 is a column
+  truncation of ANO-R2; the truncation reproduces ANO-R1 to 3e-7).
+- Version 6.7.13 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.12] - 2026-11-11
 
 **Test runs no longer rewrite tracked files in debug/data/ (PI-approved).** Every full run had rewritten four tracked
