@@ -124,3 +124,7 @@ Superseded text (CLAUDE.md §1.7 WH7, in force 2026-09-06 → 2026-10-16): "**Cl
 ## WH7 — superseded attribution clause (moved 2026-11-03, v6.1.4)
 
 Superseded text (CLAUDE.md §1.7 WH7 Status, in force 2026-09-06 → 2026-11-03): "Rovelli's RQM Postulate 1 ("relevant information is finite for a system with compact phase space" ⇒ "the characteristic discreteness of quantum theory", IJTP 35, 1637) anticipates the compactness→discreteness chain generally." Replaced because the quoted wording is from Rovelli's Stanford Encyclopedia of Philosophy entry "Relational Quantum Mechanics" (§2.1), not the 1996 IJTP paper (found by the /qa group3 citation reviewer; PM-verified against both sources). The organizing-observation paragraph's credit line cites the same IJTP paper for the postulate itself, which is correct and unchanged.
+
+## WH1 — superseded rate clause (moved 2026-11-12)
+
+Superseded text (CLAUDE.md §1.7 WH1 Status, in force 2026-10-03 → 2026-11-12): "a tapered amplitude gives d = O(1/n) [MEASURED; proof and optimal constant OPEN]". Replaced when the rate was proved (Paper 38, Eq. korovkin_rate: a sine taper gives d_GH ≤ π²/(n+1), dual-Coxeter), the bound's best constant identified as 2λ₂ of (−Δ)^{1/2} on an interval (MEASURED), and a lower bound left OPEN.

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.17] - 2026-11-12
+
+**Record HP scored STOP; Paper 38's tapered rate proved, d_GH <= pi^2/(n+1) (PI-directed).**
+
+### Added
+- Paper 38, Eq. (korovkin_rate): with a sine-tapered amplitude a_k = sin(pi k/(n+1)) the truncated round S^3 is
+  within d_GH <= 2 pi sin(pi/(2(n+1))) <= pi^2/(n+1) (dual-Coxeter; pi^2/(2(n+1)) on the unit S^3) at every cutoff.
+  Proof: theta <= pi sin(theta/2), Cauchy-Schwarz, and the Korovkin maximum of <cos theta> over amplitudes.
+  The O(1/n) rate moves from MEASURED to INTERNAL THEOREM (six loci in Paper 38, both group1 and group3
+  syntheses, INDEX, claims register, claim registry `p38-rate-constant`, CLAUDE.md WH1 status).
+- Measured: the bound's best constant, n min_a gamma(a) -> 2 lambda_2 = 5.5095, lambda_2 = 2.7547547 the second
+  Dirichlet eigenvalue of (-Delta)^(1/2) on (-1,1) (Richardson 2.75475475; independent Galerkin 2.7547547422;
+  Kwasnicki, J. Funct. Anal. 262 (2012) 2379, Table 2). The discrete-to-continuum limit is not proved; a lower
+  bound d_GH >= c/n is OPEN. Prior-art scan: no O(1/n) rate stated for S^3 in the van Suijlekom line.
+- `tests/test_p38_korovkin_rate.py` (47 tests), fire-tested 7/7 (normalisation slip, unit-sphere constant,
+  Fejer amplitude a_k = sqrt(k) obeying the bound, lambda_1 or 7 pi/8 for lambda_2). Claims-reviewer: proof
+  correct, 0 LARGE; its Fejer-amplitude estimate was wrong (the amplitude breaks the bound at n = 400, 11.72 vs 9.85).
+- `debug/p38_rate_reduction.py`, `debug/p38_cauchy_interval_check.py`, `debug/p38_rate_extrapolate.py`.
+- `debug/df_lambda_water.py`, `debug/df_lambda_water_build.py`, `debug/df_lambda_reiher_check.py` with their
+  JSON outputs (water lambda_DF controls for Record HP; `geovac/df_lambda.py` validated against Lee et al. 2021
+  Reiher FeMoco); BSE downloads `debug/lit_scan/dl_bse_{panel,samesize}/`.
+
+### Closed
+- Record HP (`docs/predictions/2026-11-12_heavy_atom_panel.md`, scored in d5de0ae9): atom-set Slater basis on
+  CH4, NH3, H2O, HF = STOP. Every molecule lands below cc-pVDZ (11.0 to 27.3 mHa) but ANO-R1 lands lower on all
+  four (by 1.0 to 4.7 mHa) at a 1.19x to 1.42x larger double-factorized 1-norm; the atoms' 15.3 mHa spread of
+  margins compresses to 3.7 mHa in molecules. HP1, HP2 missed; HP3 split; HP4, HP5 held. Ledger row added.
+  PI reading: GeoVac's value is not in molecular basis sets.
+
+### Changed
+- `.gitignore`: `debug/data/df_water_*_mo.npz` (15 MB, regenerable by `debug/df_lambda_water_build.py`).
+- Version 6.7.17 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.16] - 2026-11-11
 
 **Site: Hamiltonian downloads page; QC dashboard data refreshed off the retired rule (PI-directed).**

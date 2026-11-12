@@ -109,8 +109,7 @@ state-space Gromov--Hausdorff sense --- for the commutative ($S^3$)
 factor on the true Camporesi--Higuchi window;\ convergence of the
 almost-commutative extension is \textbf{[OPEN]}} --- \gvc{p38-rate-constant}{with the Fej\'er-kernel bound
 $d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \gamma_{\nmax}$,
-$\gamma_{\nmax} \sim (4/\pi)\log\nmax/\nmax$, and a measured $O(1/\nmax)$ under a
-tapered amplitude (Paper~38, main theorem;\ $4/\pi$ in the dual-Coxeter
+$\gamma_{\nmax} \sim (4/\pi)\log\nmax/\nmax$, and a proved $O(1/\nmax)$, at most $\pi^2/(\nmax+1)$, under a tapered amplitude (Paper~38, main theorem;\ $4/\pi$ in the dual-Coxeter
 normalisation of the $\SU(2)$ metric, $2/\pi$ on the unit $S^3$)}.
 Third, Paper~40 extends the convergence to compact connected
 semisimple Lie groups (conditionally for general $G$);\ whether the
@@ -274,7 +273,7 @@ d_{\mathrm{GH}}(\Tcal_{\nmax}, \Tcal_{\sthree})
 \label{eq:headline_2}
 \end{equation}
 Here $\gamma_{\nmax}$ is the first moment of the central Fej\'er kernel;\ a
-tapered amplitude gives a measured $O(1/\nmax)$, so $4/\pi$ is the kernel's
+tapered amplitude gives a proved $O(1/\nmax)$, so $4/\pi$ is the kernel's
 constant, not the convergence rate (Paper~38, main theorem).  That constant is
 the sphere-volume quotient
 $2\Vol(S^{2})/\Vol(\sthree)$ at unit radius (numerically $\Vol(S^{2})/\pi^{2}$)
@@ -595,9 +594,7 @@ n \,\gamma_{n} \;\sim\; (4/\pi)\,\log n
 \end{equation}
 \textbf{[MEASURED]} A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$
 holds on the checked sample of $n \ge 2$ (not proved for all $n$).
-\textbf{[MEASURED]} With a Ces\`aro-tapered amplitude in place of the
-Fej\'er one, $d_{\mathrm{GH}} = O(1/\nmax)$ (proof and optimal constant
-\textbf{[OPEN]});\ $4/\pi$ is the Fej\'er kernel's constant, not the rate.
+\textbf{[INTERNAL THEOREM]} With a sine-tapered amplitude in place of the Fej\'er one, $d_{\mathrm{GH}} \le \pi^2/(\nmax+1)$ (the bound's best constant is measured;\ a matching lower bound is \textbf{[OPEN]});\ $4/\pi$ is the Fej\'er kernel's constant, not the rate.
 \end{theorem}
 
 The proof is the \emph{lifted-state} construction, which uses the L2

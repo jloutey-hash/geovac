@@ -1,0 +1,319 @@
+{
+    "molssi_bse_schema": {
+        "schema_type": "complete",
+        "schema_version": "0.1"
+    },
+    "revision_description": "Data from Frank Jensen (2014)",
+    "revision_date": "2019-01-07",
+    "elements": {
+        "1": {
+            "electron_shells": [
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.122518E+02",
+                        "0.186871E+01",
+                        "0.418208E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "0.233371E-01",
+                            "0.159150E+00",
+                            "0.500000E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.106100E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        1
+                    ],
+                    "exponents": [
+                        "0.100000E+01"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "reference_description": "Segmented contracted version of the pc-1 basis",
+                    "reference_keys": [
+                        "jensen2014a"
+                    ]
+                }
+            ]
+        },
+        "8": {
+            "electron_shells": [
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.228864E+04",
+                        "0.344416E+03",
+                        "0.782538E+02",
+                        "0.217195E+02",
+                        "0.655907E+01"
+                    ],
+                    "coefficients": [
+                        [
+                            "0.585468E-02",
+                            "0.437333E-01",
+                            "0.194796E+00",
+                            "0.500000E+00",
+                            "0.484614E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.104656E+02",
+                        "0.964351E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "-0.713343E-01",
+                            "0.500000E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.285127E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        1
+                    ],
+                    "exponents": [
+                        "0.170590E+02",
+                        "0.368999E+01",
+                        "0.992996E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "0.474439E-01",
+                            "0.242689E+00",
+                            "0.500000E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        1
+                    ],
+                    "exponents": [
+                        "0.244924E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto_spherical",
+                    "region": "valence",
+                    "angular_momentum": [
+                        2
+                    ],
+                    "exponents": [
+                        "0.100000E+01"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "reference_description": "Segmented contracted version of the pc-1 basis",
+                    "reference_keys": [
+                        "jensen2014a"
+                    ]
+                }
+            ]
+        },
+        "10": {
+            "electron_shells": [
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.365269E+04",
+                        "0.549598E+03",
+                        "0.124889E+03",
+                        "0.347693E+02",
+                        "0.105643E+02"
+                    ],
+                    "coefficients": [
+                        [
+                            "0.575083E-02",
+                            "0.430203E-01",
+                            "0.192958E+00",
+                            "0.500000E+00",
+                            "0.487878E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.172034E+02",
+                        "0.159348E+01"
+                    ],
+                    "coefficients": [
+                        [
+                            "-0.722200E-01",
+                            "0.500000E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        0
+                    ],
+                    "exponents": [
+                        "0.464939E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        1
+                    ],
+                    "exponents": [
+                        "0.275577E+02",
+                        "0.605034E+01",
+                        "0.162110E+01"
+                    ],
+                    "coefficients": [
+                        [
+                            "0.496379E-01",
+                            "0.250893E+00",
+                            "0.500000E+00"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto",
+                    "region": "valence",
+                    "angular_momentum": [
+                        1
+                    ],
+                    "exponents": [
+                        "0.390181E+00"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                },
+                {
+                    "function_type": "gto_spherical",
+                    "region": "valence",
+                    "angular_momentum": [
+                        2
+                    ],
+                    "exponents": [
+                        "0.120000E+01"
+                    ],
+                    "coefficients": [
+                        [
+                            "1.0000000"
+                        ]
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "reference_description": "Segmented contracted version of the pc-1 basis",
+                    "reference_keys": [
+                        "jensen2014a"
+                    ]
+                }
+            ]
+        }
+    },
+    "version": "1",
+    "function_types": [
+        "gto",
+        "gto_spherical"
+    ],
+    "names": [
+        "pcseg-1"
+    ],
+    "tags": [],
+    "family": "jensen",
+    "description": "Segmented contracted version of the pc-1 basis",
+    "role": "orbital",
+    "auxiliaries": {
+        "admmfit": "admm-1"
+    },
+    "name": "pcseg-1"
+}

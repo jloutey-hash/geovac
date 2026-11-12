@@ -152,3 +152,5 @@ debug/data/basis/_ccpvdz_polopt_tmp.json
 
 # Record HP molecular integrals (51 MB, regenerable by debug/heavy_atom_panel.py)
 debug/data/heavy_atom_panel/mo_*.npz
+# df_lambda water MO integrals (15 MB, regenerable by debug/df_lambda_water_build.py)
+debug/data/df_water_*_mo.npz

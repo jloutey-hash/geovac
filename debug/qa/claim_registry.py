@@ -112,8 +112,9 @@ CLAIMS = {
         statement="4/pi is the asymptotic constant of the FEJER amplitude's moment, gamma_n = (4/pi) "
                   "log n/n [INTERNAL THEOREM + MEASURED] (dual-Coxeter; 2/pi unit S^3; 2 sqrt2/pi Kac). It is "
                   "NOT the convergence rate: the lifted-state bound holds for any real central amplitude, "
-                  "a Cesaro taper gives d_GH = O(1/n) [MEASURED], proof and optimal constant OPEN "
-                  "(re-priced 2026-10-03, FULL #12).",
+                  "a sine (Korovkin) taper gives d_GH <= pi^2/(n+1) [INTERNAL THEOREM] (2026-11-12); the bound's "
+                  "best constant 2 lambda_2 (Cauchy-process interval eigenvalue) is MEASURED; a lower bound "
+                  "d_GH >= c/n is OPEN (re-priced 2026-10-03, FULL #12; rate proved 2026-11-12).",
         owner=P38, owner_anchor=r"4/\\pi",
         owner_tier=r"INTERNAL THEOREM \+ MEASURED", tier="INTERNAL THEOREM + MEASURED",
         mention=r"4/π.{0,40}log|\(4/\\pi\)|4/π\)·log|rate .{0,15}4/π|c = 4/π|4/\\pi\$?\s*(rate|asymptotic constant)",
@@ -123,7 +124,7 @@ CLAIMS = {
                   r"converges? at (the )?rate[^.;]{0,10}4/(π|\\pi)|"
                   r"rate at which[^.;]{0,60}converge[^.;]{0,40}carries|"
                   r"4/(π|\\pi)\$?[^.;]{0,25}\b(sharp|optimal|forced)\b",
-        load_bearing=True, changed="2026-10-03"),
+        load_bearing=True, changed="2026-11-12"),
     "graph-s3-wall": dict(
         statement="The lattice edge Laplacian D-A does NOT converge to Delta_{S^3} (n_max disconnected "
                   "l-blocks; WALL); what is exact is the (n,l,m) label set + diagonal SO(4) Casimir.",

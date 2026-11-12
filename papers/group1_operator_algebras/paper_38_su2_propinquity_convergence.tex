@@ -87,7 +87,7 @@ distance~\cite{vs2021_jgp}:\ the bound $d_{\mathrm{GH}} \le \gamma_{\nmax}$, wit
 \gamma_{\nmax}
 = (4/\pi + o(1)) \log \nmax / \nmax
 \)
-(dual-Coxeter normalisation of the $\SU(2)$ metric;\ $2/\pi$ on the unit round $\sthree$) is \textbf{[INTERNAL THEOREM + MEASURED]} (Appendix~\ref{app:stein_weiss}).  The proof uses the Fej\'er amplitude only as a real central amplitude in the spinor window, so any such amplitude gives the same bound with its own moment;\ \textbf{[MEASURED]} a Ces\`aro-tapered amplitude gives $d_{\mathrm{GH}} = O(1/\nmax)$.  The constant $4/\pi$ therefore belongs to the Fej\'er kernel, not to the convergence rate;\ a proof of the $O(1/\nmax)$ rate and its optimal constant are \textbf{[OPEN]}.
+(dual-Coxeter normalisation of the $\SU(2)$ metric;\ $2/\pi$ on the unit round $\sthree$) is \textbf{[INTERNAL THEOREM + MEASURED]} (Appendix~\ref{app:stein_weiss}).  The proof uses the Fej\'er amplitude only as a real central amplitude in the spinor window, so any such amplitude gives the same bound with its own moment;\ \textbf{[INTERNAL THEOREM]} a sine-tapered amplitude gives $d_{\mathrm{GH}} \le \pi^2/(\nmax+1)$, so $d_{\mathrm{GH}} = O(1/\nmax)$.  The constant $4/\pi$ therefore belongs to the Fej\'er kernel, not to the convergence rate;\ \textbf{[MEASURED]} the best constant this bound admits is $2\lambda_2$, with $\lambda_2$ the second Dirichlet eigenvalue of $(-\Delta)^{1/2}$ on an interval, and a matching lower bound on $d_{\mathrm{GH}}$ is \textbf{[OPEN]}.
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
@@ -136,7 +136,8 @@ fibration's base-to-total ratio (\S\ref{sec:L2}). The $\log\nmax$
 factor is the first-moment logarithm of the Fej\'er-type
 (squared-Dirichlet;\ on the circle, the Ces\`aro-1 Fej\'er) kernel, which the circle's Fej\'er kernel already carries
 (Remark~\ref{rem:circle_fejer});\ it is a property of the kernel, not of
-the convergence, and a tapered amplitude removes it \textbf{[MEASURED]}.
+the convergence, and a tapered amplitude removes it \textbf{[INTERNAL THEOREM]}
+(Eq.~\eqref{eq:korovkin_rate}).
 State-space Gromov--Hausdorff convergence of scalar truncations for
 compact metric groups with bi-invariant metric — including $\SU(2)$ — is
 established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\
@@ -271,8 +272,9 @@ $\SU(2)$ given by Lemma~\ref{lem:L2}, whose asymptotics are
 The unconditional statement is
 Theorem~\ref{thm:main_unconditional}, which also shows that the Fej\'er
 amplitude is one admissible choice among the real central amplitudes in
-the window:\ \textbf{[MEASURED]} a Ces\`aro-tapered amplitude gives
-$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) = O(1/\nmax)$, so the constant
+the window:\ \textbf{[INTERNAL THEOREM]} a sine-tapered amplitude gives
+$\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le \pi^2/(\nmax+1)$
+(Eq.~\eqref{eq:korovkin_rate}), so the constant
 $4/\pi$ in \eqref{eq:main_rate} is the Fej\'er kernel's, not the rate of
 convergence.  The constant is $4/\pi$ in the dual-Coxeter normalisation
 of \S\ref{sec:ch_triple} (distance = rotation angle $\chi$) and $2/\pi$
@@ -303,7 +305,7 @@ quotient (a reading, not a derivation) as the volume slot of the master Mellin e
 $\Tr (D^k e^{-tD^2})$ at $k = 0$ (M1)~\cite{paper18}.  The reading
 concerns the Fej\'er kernel's constant;\ it says nothing about the rate
 of convergence, which a tapered amplitude makes $O(1/\nmax)$
-\textbf{[MEASURED]}.
+\textbf{[INTERNAL THEOREM]} (Eq.~\eqref{eq:korovkin_rate}).
 
 \paragraph{Outline.}
 Section~\ref{sec:setup} sets up the round $\sthree$
@@ -534,16 +536,45 @@ below use the Fej\'er amplitude only as a real central amplitude in the
 window:\ for any $h_a = \sum_{j \le J} a_j \chi_j$ with real $a_j$,
 (a)--(c) hold verbatim with $|h_a|^2/\sum_j a_j^2$ in place of
 $\KS_{\nmax}$, so $d_{\mathrm{GH}} \le \gamma(a) := \int d(e, g)\,
-|h_a(g)|^2\, dg / \sum_j a_j^2$.  \textbf{[MEASURED]} The Ces\`aro taper
-$a_j = \sqrt{2j+1}\,(1 - 2j/(\nmax+1))$ gives
-$\nmax\,\gamma(a) = 6.35, 6.60, 6.75, 6.82, 6.86$ at
-$\nmax = 25, 50, 100, 200, 400$, below the Fej\'er moment at each
-(\texttt{gamma\_rate(use\_cesaro=True)} in
-\texttt{geovac/central\_fejer\_su2.py};\ independent-route check
-\texttt{tests/test\_p38\_tapered\_amplitude.py}):\ the state-space GH distance is
-$O(1/\nmax)$ on this evidence, a proof is owed, and the optimal constant
-is \textbf{[OPEN]}.  The constant $4/\pi$ is the Fej\'er amplitude's, not
-the convergence rate's.
+|h_a(g)|^2\, dg / \sum_j a_j^2$.  \textbf{[INTERNAL THEOREM]} The rate
+is $O(1/\nmax)$, without the logarithm.  Write $\theta = \chi/2$ and
+$p(\theta) = \sum_{k=1}^{\nmax} a_k \sin k\theta$ with $k = 2j+1$;\ the
+Weyl factor turns $|h_a|^2\, dg$ into $(2/\pi)\,|p|^2\, d\theta$ on
+$[0,\pi]$, so $\gamma(a) = 2\langle\theta\rangle$, the mean taken
+against the probability density $(2/\pi)|p|^2/\sum_k a_k^2$.  Since
+$\theta \le \pi \sin(\theta/2)$ on $[0,\pi]$, Cauchy--Schwarz gives
+$\langle\theta\rangle \le \pi \langle \sin^2(\theta/2)\rangle^{1/2}
+= \pi \bigl((1 - \langle\cos\theta\rangle)/2\bigr)^{1/2}$, and
+$\langle\cos\theta\rangle = \sum_k a_k a_{k+1} / \sum_k a_k^2$ is
+maximised, at $\cos(\pi/(\nmax+1))$, by $a_k = \sin(\pi k/(\nmax+1))$
+(the standard positive-kernel estimate;\ cf.~\cite{korovkin1960}).  For
+that amplitude, for every $\nmax \ge 1$,
+\begin{equation}\label{eq:korovkin_rate}
+d_{\mathrm{GH}} \;\le\; \gamma(a) \;\le\; 2\pi \sin\frac{\pi}{2(\nmax+1)}
+\;\le\; \frac{\pi^2}{\nmax+1}
+\end{equation}
+in the dual-Coxeter normalisation ($\pi^2/(2(\nmax+1))$ on the unit
+$\sthree$;\ \texttt{tests/test\_p38\_korovkin\_rate.py}).
+\textbf{[MEASURED]} The best amplitude is the bottom
+eigenvector of the form $\gamma(a) = a^{\mathsf T} A\, a / a^{\mathsf T}
+a$, $A_{kl} = \pi\delta_{kl} - (4/\pi)\bigl[(k-l)^{-2} -
+(k+l)^{-2}\bigr]$ for $k - l$ odd and $A_{kl} = 0$ for $k \ne l$ with
+$k - l$ even.  $\nmax \min_a \gamma(a)$ rises towards $2\lambda_2$, where
+$\lambda_2 = 2.7547547$ is the second Dirichlet eigenvalue of
+$(-\Delta)^{1/2}$ on $(-1,1)$~\cite{kwasnicki2012}:\ multiplication by
+$\theta$ on band-limited sine series is $(-\Delta)^{1/2}$ on the
+frequency interval, and sine series are its odd sector.  Extrapolation
+from $\nmax \le 6400$ and an independent Galerkin computation of
+$\lambda_2$ agree (to $2 \times 10^{-6}$ in the frozen test,
+\texttt{tests/test\_p38\_korovkin\_rate.py});\ the discrete-to-continuum
+limit is not proved here.  This is, numerically, the optimal constant over
+real central amplitudes in the window of the bound $d_{\mathrm{GH}} \le
+\gamma(a)$, not of $d_{\mathrm{GH}}$:\ a matching lower bound
+$d_{\mathrm{GH}} \ge c/\nmax$ is \textbf{[OPEN]}.  (The Ces\`aro taper
+$a_j = \sqrt{2j+1}\,(1 - 2j/(\nmax+1))$ gives $\nmax\,\gamma(a) = 6.35,
+6.60, 6.75, 6.82, 6.86$ at $\nmax = 25, 50, 100, 200, 400$;\
+\texttt{tests/test\_p38\_tapered\_amplitude.py}.)  The constant $4/\pi$
+is the Fej\'er amplitude's, not the convergence rate's.
 \end{theorem}
 
 \begin{proof}
@@ -1211,7 +1242,7 @@ together change both the kernel and the constant, while preserving
 the leading $\log n / n$ behaviour that the Fej\'er (on the circle,
 Ces\`aro-1) first moment already has there.  The $\log n$ factor is
 therefore a property of the kernel, not a non-abelian slowdown, and a
-tapered amplitude removes it \textbf{[MEASURED]} (Theorem~\ref{thm:main_unconditional}).
+tapered amplitude removes it \textbf{[INTERNAL THEOREM]} (Eq.~\eqref{eq:korovkin_rate}).
 \end{remark}
 
 \begin{remark}[The volume ratio behind the constant]
@@ -1579,8 +1610,8 @@ metrization of \S~\ref{sec:named_gaps}:
 equivalently $(2/\pi)\log\nmax/\nmax + O(1/\nmax)$ on the unit
 $\sthree$;\ the asymptotic constant of the Fej\'er moment is
 \textbf{[INTERNAL THEOREM + MEASURED]} (Lemma~\ref{lem:L2}(d.ii)), and
-with a tapered amplitude the distance is \textbf{[MEASURED]}
-$O(1/\nmax)$ (Theorem~\ref{thm:main_unconditional}). \textbf{[MEASURED]} A uniform bound
+with a tapered amplitude the distance is \textbf{[INTERNAL THEOREM]}
+at most $\pi^2/(\nmax+1)$ (Eq.~\eqref{eq:korovkin_rate}). \textbf{[MEASURED]} A uniform bound
 $\gamma_{\nmax} \le 6 \log \nmax / \nmax$
 holds on the finite range checked (Lemma~\ref{lem:L2}(d.iii));\ it is not
 proved for all $\nmax \ge 2$.
@@ -1678,8 +1709,8 @@ Peter--Weyl decomposition.
 The $\log n$ factor in $\gamma_n$ is the first-moment logarithm of the
 Fej\'er-type (squared-Dirichlet) kernel, which the circle already carries
 (Remark~\ref{rem:circle_fejer});\ it reflects the kernel choice, not
-non-abelianness, and a tapered amplitude removes it \textbf{[MEASURED]}
-(Theorem~\ref{thm:main_unconditional}). \textbf{[OBSERVATION]} In the
+non-abelianness, and a tapered amplitude removes it \textbf{[INTERNAL THEOREM]}
+(Eq.~\eqref{eq:korovkin_rate}). \textbf{[OBSERVATION]} In the
 dual-Coxeter normalisation the Fej\'er constant $4/\pi$ is twice the
 circle Fej\'er first-moment constant $2/\pi$; on the unit $\sthree$ the
 two coincide, the factor $2$ being the metric scale
@@ -1753,10 +1784,11 @@ present paper.
 
 \subsection{Open questions}\label{sec:open}
 
-\textbf{(i) The optimal rate.} \textbf{[OPEN]} A tapered amplitude gives
-$d_{\mathrm{GH}} = O(1/\nmax)$ on the evidence of
-Theorem~\ref{thm:main_unconditional};\ a proof, and the optimal constant
-over real central amplitudes in the window, are open.  For the Fej\'er
+\textbf{(i) The optimal rate.} \textbf{[OPEN]} A sine-tapered amplitude
+gives $d_{\mathrm{GH}} \le \pi^2/(\nmax+1)$ (Eq.~\eqref{eq:korovkin_rate});\
+whether $d_{\mathrm{GH}} \ge c/\nmax$, and a proof that the best constant of
+that bound is $2\lambda_2$ (measured, Theorem~\ref{thm:main_unconditional}),
+are open.  For the Fej\'er
 kernel itself, $\gamma_{\nmax} \sim (4/\pi) \log \nmax / \nmax$, and
 \textbf{[MEASURED]} numerical doubling-estimator data suggests
 $\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(\log\nmax/\nmax)$
@@ -2189,6 +2221,16 @@ Discrete Spectra onto Continuous Manifolds. Master Mellin engine
 \S III.7},
 \newblock GeoVac internal preprint, papers/group3\_foundations (2026),
 DOI via Zenodo.
+
+\bibitem[Korovkin(1960)]{korovkin1960}
+P.~P.~Korovkin,
+\newblock \emph{Linear Operators and Approximation Theory},
+\newblock Hindustan Publishing Corp., Delhi, 1960 (transl.\ from the Russian, 1959).
+
+\bibitem[Kwa\'snicki(2012)]{kwasnicki2012}
+M.~Kwa\'snicki,
+\newblock \emph{Eigenvalues of the fractional Laplace operator in the interval},
+\newblock J.~Funct.~Anal. \textbf{262} (2012), 2379--2402.
 
 \bibitem[Perez-Sanchez(2025)]{perez_sanchez2025}
 C.~I.~Perez-Sanchez,
