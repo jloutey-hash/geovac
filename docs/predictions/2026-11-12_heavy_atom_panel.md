@@ -162,3 +162,36 @@ corrected (+0.2 to +0.1). Recipe, driver scoring logic, arithmetic and geometrie
 
 Scored by: `python debug/heavy_atom_panel.py mol {CH4,NH3,H2O,HF} {slater,ccpvdz,anor1}`, then
 `geovac.df_lambda.df_lambda` on the saved active-space integrals.
+
+## Disposition (scored 2026-11-12): STOP
+
+**Controls: all passed.** Water through this driver: -76.260011 (Slater), -76.264667 (ANO-R1), -76.241025
+(cc-pVDZ), each to 1e-6. HF cc-pVDZ: -100.228146 and 63,535 Pauli terms. Every molecular RHF matched its
+perturbed-start check (largest difference 4e-11 Ha, CH4). lambda_DF water cc-pVDZ 311.59, ANO-R1 279.00.
+
+| Molecule | W(Slater) | W(ANO-R1) | M | lambda_DF cc / ANO / Slater | Slater / ANO | Pauli (fc) | qubits |
+|:--|--:|--:|--:|:--|--:|--:|--:|
+| CH4 | 10.95 | 14.78 | **-3.83** | 538.0 / 517.6 / 616.4 | 1.19 | 1,576,784 | 66 |
+| NH3 | 14.62 | 18.98 | **-4.36** | 425.4 / 395.0 / 492.9 | 1.25 | 769,657 | 56 |
+| H2O (control) | 18.99 | 23.64 | -4.66 | 311.6 / 279.0 / 369.4 | 1.32 | 107,382 | 46 |
+| HF | 27.31 | 28.30 | **-0.99** | 211.7 / 183.1 / 259.7 | 1.42 | 63,535 | 36 |
+
+W, M in mHa (fc-CCSD(T), below cc-pVDZ); lambda_DF in Ha at threshold 1e-3. The three bases have equal function
+counts, so the Pauli counts are equal across bases for each molecule (HP6).
+
+- **HP1 MISSED.** Observed order: M(H2O) -4.66 < M(NH3) -4.36 < M(CH4) -3.83 < M(HF) -0.99.
+  Only the informative clause, HF above water, held; CH4 and NH3 sit above water, not below it.
+- **HP2 MISSED.** M(HF) = -0.99, inside the band [-3, +4] but not above zero.
+- **HP3 split.** M(NH3) = -4.36 in [-14, -2], held. M(CH4) = -3.83 outside [-30, -8], missed on the favourable
+  side: the carbon atom's -14.5 mHa deficit did not carry into the molecule.
+- **HP4 HELD.** The atom-set Slater kit beats cc-pVDZ on all three, by 11.0, 14.6 and 27.3 mHa.
+- **HP5 HELD.** lambda_DF(Slater) exceeds lambda_DF(ANO-R1) on every molecule, by 19-42%; no molecule passes the
+  1.10 lambda test.
+- **HP6 reported** (table).
+
+**Gate: STOP.** M <= 0 on all three scored molecules. The fixed, atom-set exponential basis does not beat the
+best same-size Gaussian (ANO-R1) on energy anywhere on the panel, and it costs more in the fault-tolerant 1-norm
+on every molecule. It does beat cc-pVDZ everywhere. Paper 62's statements stand unchanged (they already place the
+atom-set rung behind ANO-R1 on water). Finding outside the predictions: the atom margins did not transfer one
+to one. Over C, N, O, F the atom margins A(X) ran -14.5 to +0.8, a 15.3 mHa spread; the molecular M (CH4, NH3,
+H2O, HF) ran -4.7 to -1.0, a 3.7 mHa spread, compressed toward a roughly constant few-mHa deficit.

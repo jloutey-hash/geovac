@@ -149,3 +149,6 @@ debug/data/water_mo_*.npz
 debug/data/basis/_ccpvdz_polopt_tmp.json
 # the site's Hamiltonian downloads page (benchmarks/build_site_downloads.py); same unanchored-rule trap as lib/
 !viz/public/downloads/
+
+# Record HP molecular integrals (51 MB, regenerable by debug/heavy_atom_panel.py)
+debug/data/heavy_atom_panel/mo_*.npz
