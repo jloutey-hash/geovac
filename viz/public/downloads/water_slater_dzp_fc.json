@@ -1,0 +1,32 @@
+{
+  "name": "Water (H2O), Slater DZP basis, frozen-core",
+  "paper": "Paper 62 (papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex), Table tab:resources",
+  "geometry": {
+    "R_OH_bohr": 1.809,
+    "HOH_angle_deg": 104.5
+  },
+  "basis": "Slater DZP, 24 functions; O exponents set on the free atom, polarization set on water (Paper 62)",
+  "orbitals": "RHF canonical; O 1s frozen; 23 active spatial orbitals",
+  "n_qubits": 46,
+  "n_electrons_active": 8,
+  "n_pauli_terms_identity_included": 107382,
+  "one_norm_identity_excluded_Ha": 706.280943,
+  "identity_coefficient_Ha": 7.459059397864018,
+  "ecore_Ha": -52.12295359489848,
+  "e_nuc_Ha": 9.194228534925594,
+  "e_rhf_Ha": -76.05557279300442,
+  "e_fc_ccsdt_Ha": -76.28173940271711,
+  "encoding": "Jordan-Wigner; spin-orbital index 2p+sigma (alpha even, beta odd); chemist (pq|rs)",
+  "fcidump": {
+    "file": "water_slater_dzp_fc.fcidump",
+    "n_orbitals": 23,
+    "n_electrons": 8,
+    "n_one_body_terms": 98,
+    "n_two_body_terms": 10398,
+    "ecore": -52.12295359489848
+  },
+  "pauli_file": "water_slater_dzp_fc_pauli.txt.gz",
+  "generator": "benchmarks/export_paper62_water_hamiltonian.py",
+  "checks": "Pauli count by two routes (closed form, explicit operator) = 107,382; 1-norm 706.3 Ha; fc-CCSD(T) -76.281739 Ha; FCIDUMP read back bit-close",
+  "note": "Not a GeoVac lattice Hamiltonian: tuned exponential functions in a standard molecular-orbital encoding (Paper 62)."
+}

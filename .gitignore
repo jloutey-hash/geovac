@@ -147,3 +147,5 @@ debug/data/pairgem_*_lm_s*.npz
 # every call of debug/water_sto_exponents.py.
 debug/data/water_mo_*.npz
 debug/data/basis/_ccpvdz_polopt_tmp.json
+# the site's Hamiltonian downloads page (benchmarks/build_site_downloads.py); same unanchored-rule trap as lib/
+!viz/public/downloads/

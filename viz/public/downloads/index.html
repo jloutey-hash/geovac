@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoVac Hamiltonian downloads</title>
+<meta name="description" content="Downloadable qubit Hamiltonians and integral files from the GeoVac papers.">
+<link rel="canonical" href="https://jloutey-hash.github.io/geovac/downloads/index.html">
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem; font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; } h1 { font-size: 1.5rem; } h2 { font-size: 1.15rem; margin-top: 2rem; }
+.meta { color: #777; font-size: 0.9rem; } li { margin: 0.4rem 0; } code { font-size: 0.9em; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+</style></head><body>
+<nav><a href="../">GeoVac</a> · <a href="../papers/index.html">Papers</a></nav>
+<h1>Hamiltonian downloads</h1>
+<p>Each Hamiltonian is given two ways: its one- and two-electron integrals as an FCIDUMP file, which classical
+chemistry codes read directly, and its qubit form after the Jordan-Wigner mapping, as a list of Pauli strings with
+coefficients in hartree. Every number on this page is read from the metadata file next to it, written by a script
+that checks it against the paper.</p>
+<section><h2>Lithium hydride (LiH), GeoVac composed builder</h2><p class="meta">Papers 14 and 17; library entry hamiltonian(&#x27;LiH&#x27;)</p><p>composed hydrogenic blocks at the library defaults (max_n = 2), with the Phillips-Kleinman core term. 30 qubits; 838 Pauli terms (identity included); 1-norm 27.7 Ha (identity excluded).</p><p>The same Hamiltonian the site&#x27;s qubit-resource dashboard shows (the dashboard&#x27;s 1-norm includes the constant identity term; the figure here leaves it out). Matched qubits, not matched accuracy: the composed builder is a fast, cheap estimator (Paper 17 documents its accuracy).</p><ul><li><a href="lih_composed.fcidump">lih_composed.fcidump</a> (5 kB): FCIDUMP integrals (Knowles-Handy; reads into PySCF, Block2, Molpro)</li><li><a href="lih_composed_pauli.txt.gz">lih_composed_pauli.txt.gz</a> (4 kB): qubit Hamiltonian, one Pauli string per line (gzip text)</li><li><a href="lih_composed.json">lih_composed.json</a> (1 kB): metadata (counts, energies, conventions)</li></ul><p class="meta">Built by <code>benchmarks/build_site_downloads.py</code>; checks: Pauli count 838 (identity included) and 1-norm 27.715 Ha against the numeric registry; FCIDUMP read back.</p></section><section><h2>Water (H2O), Slater DZP basis, frozen-core</h2><p class="meta">Paper 62 (papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex), Table tab:resources</p><p>Slater DZP, 24 functions; O exponents set on the free atom, polarization set on water (Paper 62). 46 qubits; 107,382 Pauli terms (identity included); 1-norm 706.3 Ha (identity excluded); frozen-core CCSD(T) energy -76.281739 Ha.</p><p>Not a GeoVac lattice Hamiltonian: tuned exponential functions in a standard molecular-orbital encoding (Paper 62).</p><ul><li><a href="water_slater_dzp_fc.fcidump">water_slater_dzp_fc.fcidump</a> (472 kB): FCIDUMP integrals (Knowles-Handy; reads into PySCF, Block2, Molpro)</li><li><a href="water_slater_dzp_fc_pauli.txt.gz">water_slater_dzp_fc_pauli.txt.gz</a> (948 kB): qubit Hamiltonian, one Pauli string per line (gzip text)</li><li><a href="water_slater_dzp_fc.json">water_slater_dzp_fc.json</a> (1 kB): metadata (counts, energies, conventions)</li></ul><p class="meta">Built by <code>benchmarks/export_paper62_water_hamiltonian.py</code>; checks: Pauli count by two routes (closed form, explicit operator) = 107,382; 1-norm 706.3 Ha; fc-CCSD(T) -76.281739 Ha; FCIDUMP read back bit-close.</p></section>
+<p class="meta">Source: <a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a>.</p>
+</body></html>

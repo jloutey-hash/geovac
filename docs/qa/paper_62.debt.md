@@ -32,6 +32,13 @@ NITs: abstract L60-61 the 405-706 Ha 1-norm range includes cc-pVDZ's 674 without
   RHF energies (fire-test plants on those were asleep); the 21.0 mHa ANO-R1 RHF gap is unpinned.
 - The "equal cc-pV Pauli counts" clause for the A35/A41 rungs is untested; A41 is pinned by C21 only (disclosed).
 
+## OpenFermion accumulation drop (found 2026-11-11, v6.7.16)
+
+- `jordan_wigner(build_fermion_op_from_integrals(...))` loses coefficients assembled from pieces below OpenFermion's
+  `EQ_TOLERANCE` (1e-8): water Slater DZP 107,378 vs the true 107,382. Paper 62's counts use the closed form and
+  stand; the library's composed LiH/H2O are unaffected. Audit any other registered Pauli count produced through
+  OpenFermion on a large Gaussian-basis Hamiltonian (rebuild at a 2^20 scale and compare). PI call on scope.
+
 ## Surface staleness outside the paper (corpus-wide; PI call on scheduling)
 
 - `viz/public/papers/*.html`: Paper 62's page was rebuilt 2026-11-11; the other 65 were last built 2026-11-09 and

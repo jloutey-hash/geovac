@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.16] - 2026-11-11
+
+**Site: Hamiltonian downloads page; QC dashboard data refreshed off the retired rule (PI-directed).**
+
+### Added
+- `viz/public/downloads/`: Paper 62's water Hamiltonian in the Slater DZP basis (frozen O 1s, 46 qubits) and the
+  library's composed LiH (30 qubits), each as a Knowles-Handy FCIDUMP, a gzipped Pauli-string list and a metadata
+  JSON; `index.html` lists them, every numeral read from the metadata. Linked from the site's home page and nav.
+- `benchmarks/export_paper62_water_hamiltonian.py`: builds the water files with Paper 62's own machinery and refuses
+  to write unless the Pauli count is 107,382 by two routes (closed form and explicit operator), the 1-norm 706.3 Ha,
+  fc-CCSD(T) -76.281739 Ha, and the FCIDUMP reads back. `benchmarks/build_site_downloads.py`: the LiH files (838
+  terms, 1-norm 27.715 Ha, registry) and the page.
+- `tests/test_viz_downloads_current.py` (fast, 7 tests): committed downloads against the registry; fire-tested
+  against the retired LiH count 334 (fires).
+
+### Changed
+- `viz/public/data/qc/`: regenerated with `python -m geovac.viz_export`. All 37 systems had been exported on
+  2026-07-06, before the 2026-08-29 global-M_L correction, so the live dashboard showed retired counts (LiH 334
+  Pauli terms, now 838; H2O 778, now 1954; H2 112, now 280). Lattice and spectrum files unchanged.
+  `tests/test_viz_data_current.py --slow` run before commit (see below).
+- `.gitignore`: `!viz/public/downloads/` (the unanchored `downloads/` rule swallowed the directory).
+
+### Found
+- OpenFermion drops small terms during accumulation: `SymbolicOperator` deletes any coefficient below
+  `EQ_TOLERANCE` = 1e-8 as it adds terms, so a coefficient assembled from smaller pieces can vanish. On the water
+  Slater DZP Hamiltonian `jordan_wigner(build_fermion_op_from_integrals(...))` gave 107,378 terms; the four missing
+  strings are XYYX/YXXY on two same-spin quadruples with coefficient (b - c)/4 = 3.5e-8, recovered exactly by
+  building at a 2^20 scale. Paper 62's 107,382 (closed form, `jw_pauli_stats`) stands. The library's composed
+  LiH (838) and H2O (1954) are unchanged under the same test. Any other large Pauli count built through OpenFermion
+  is a candidate; listed in `docs/qa/paper_62.debt.md`.
+- Version 6.7.16 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.15] - 2026-11-11
 
 **/qa paper_62 claim-search DELTA = DEFECTS, remediated (PI-invoked; unseeded, standing calibration record).**

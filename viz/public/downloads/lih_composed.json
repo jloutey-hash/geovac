@@ -1,0 +1,23 @@
+{
+  "name": "Lithium hydride (LiH), GeoVac composed builder",
+  "paper": "Papers 14 and 17; library entry hamiltonian('LiH')",
+  "basis": "composed hydrogenic blocks at the library defaults (max_n = 2), with the Phillips-Kleinman core term",
+  "n_qubits": 30,
+  "n_electrons_active": 4,
+  "n_pauli_terms_identity_included": 838,
+  "one_norm_identity_excluded_Ha": 27.714858,
+  "ecore_Ha": -6.284875124378109,
+  "encoding": "Jordan-Wigner, the library's ordering",
+  "fcidump": {
+    "file": "lih_composed.fcidump",
+    "n_orbitals": 15,
+    "n_electrons": 4,
+    "n_one_body_terms": 15,
+    "n_two_body_terms": 84,
+    "ecore": -6.284875124378109
+  },
+  "pauli_file": "lih_composed_pauli.txt.gz",
+  "generator": "benchmarks/build_site_downloads.py",
+  "checks": "Pauli count 838 (identity included) and 1-norm 27.715 Ha against the numeric registry; FCIDUMP read back",
+  "note": "The same Hamiltonian the site's qubit-resource dashboard shows (the dashboard's 1-norm includes the constant identity term; the figure here leaves it out). Matched qubits, not matched accuracy: the composed builder is a fast, cheap estimator (Paper 17 documents its accuracy)."
+}

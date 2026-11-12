@@ -53,6 +53,16 @@ function Landing() {
             fits, and per-system detail with export code.
           </p>
         </div>
+        <div className="card module-card">
+          <h2>
+            <a href="downloads/index.html">Hamiltonian downloads →</a>
+          </h2>
+          <p className="secondary">
+            Ready-to-use files: Paper 62&apos;s water Hamiltonian in its Slater
+            basis and the library&apos;s lithium hydride, each as FCIDUMP
+            integrals and as a list of Pauli strings.
+          </p>
+        </div>
       </div>
     </div>
   )
@@ -76,6 +86,9 @@ export default function App() {
           href="#/qc"
         >
           Qubit Hamiltonians
+        </a>
+        <a className="navlink" href="downloads/index.html">
+          Downloads
         </a>
       </nav>
       <main className="main">
