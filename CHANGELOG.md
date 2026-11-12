@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.15] - 2026-11-11
+
+**/qa paper_62 claim-search DELTA = DEFECTS, remediated (PI-invoked; unseeded, standing calibration record).**
+Paper 62 has never had a FULL run, so a DELTA cannot certify it. Reviewers: owner full read, two claim searches,
+code, citations. The numbers held: every ratio and gap recomputed, `pytest tests/test_paper62_samesize_gaussian.py
+tests/test_paper62_ano_matched_accuracy.py --slow` 9 passed. The defects were scope wording left over from the cc-pV-only
+reading. 2 OWNER-LARGE, 3 SURFACE-LARGE, about 9 SMALL, about 6 NIT.
+
+### Changed
+- Paper 62 (OWNER-LARGE 1): the "crossing ... lower bound needs no interpolation: aug-cc-pVDZ already costs 9.2x"
+  paragraph of Sec. matched now opens "In the cc-pV family", and its interpolated cost is "the cc-pV matched-accuracy
+  Gaussian cost"; read alone it had stated a 9.2x lower bound against the paper's "at most 4.7x".
+- Paper 62 (OWNER-LARGE 2): the H6-ring contrast is cc-pV only (on water the 35-function ANO rung, one more
+  polarization level, already passes the DZP). "cc-pV" added in the abstract, Sec. hring, Limitations (both clauses)
+  and the conclusion; the three summary loci carry `\gvc{p62-hring-contrast}`.
+- Paper 62 (SURFACE-LARGE): conclusion "within 15%" -> "within 16%" (body band 15.6%). Recompiled three-pass clean.
+- `docs/predictions/2026-10-31_matched_accuracy_gaussian.md` (SURFACE-LARGE): dated addendum withdrawing its closing
+  "at least nine times" sentence and pointing to the AM record; the measurements stand.
+- `viz/public/papers/paper_62_water_equal_size_slater.html` (SURFACE-LARGE) and its manifest entry rebuilt from the
+  current abstract (it carried the pre-SZ/AM abstract). Only Paper 62's page was rebuilt.
+- `debug/zenodo_manifest_build.py`: `detex` now unwraps `\gvq{key}{literal}` and `\gvc{id}{span}` to their
+  rendered argument and expands `\mHa`; six public pages and Zenodo descriptions (Papers 12, 14, 20, 23, 60, 62)
+  showed the raw macro text. The other five are not regenerated yet (debt).
+- C25: new entry `p62-hring-contrast` (qualifier "cc-pV" not followed by a letter, so "cc-pVDZ" does not count);
+  discrimination 9/9 on the stale and corrected wordings, including a wrapped mention. Selftest probes added for the
+  two Paper 62 entries registered earlier in this run (`p62-matched-accuracy-ceiling`, `p62-samesize-margin`): the
+  C25 selftest had been FAILING on their absence while the main C25 run reported PASS. Now 37 claims, PASS;
+  selftest PASS.
+- Deterministic gates C11, C5, C13, C14, C16, C17, C18, C19, C15, C20, C21, C22, C24, C10 exit 0.
+- Self-check (fresh Opus reviewer on the changed owner units: abstract, Sec. matched, Sec. hring, Limitations,
+  Conclusion): 0 LARGE in round 1.
+- SMALLs, NITs, owed guards (pcseg-1/def2-SVP counts and 1-norms; the 21.0 mHa ANO-R1 RHF gap) and the corpus-wide
+  viz staleness are listed in the new `docs/qa/paper_62.debt.md`.
+- Version 6.7.15 (CLAUDE.md, CHANGELOG, CITATION.cff, .zenodo.json, README, uploader CORPUS_VERSION).
+
 ## [v6.7.14] - 2026-11-11
 
 **Paper 62's matched-accuracy headline restated: at most 4.7x the Pauli terms, not at least 9.2x (pre-registered AM,

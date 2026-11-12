@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.14 (November 11, 2026)
+**Version:** v6.7.15 (November 11, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa paper_62 claim-search DELTA = DEFECTS, remediated (2026-11-11, v6.7.15, PI-invoked):** numbers held; cc-pV scope on 9.2x bracket and H6 contrast; P62 page rebuilt; C25 selftest gap fixed; self-check 0 LARGE. CHANGELOG v6.7.15.
 - **Paper 62 matched accuracy restated (2026-11-11, v6.7.14, pre-registered AM, PI-approved):** 35-function ANO-R2 truncation passes the Slater DZP (AM1 missed); cost at most 4.7x terms, not at least 9.2x. CHANGELOG v6.7.14.
 - **Paper 62 same-size Gaussian control (2026-11-11, v6.7.13, pre-registered SZ, PI-directed):** ANO-R1 23.6 mHa below cc-pVDZ; Slater DZP margin 17.1 not 40.7; atom-set rung 4.7 behind; AM registered. CHANGELOG v6.7.13.
 - **Test runs leave debug/data alone (2026-11-11, v6.7.12, PI-approved):** composed_qubit's eight report writes honour GEOVAC_DEBUG_DATA_DIR; tests/conftest.py points it at a temp dir. CHANGELOG v6.7.12.

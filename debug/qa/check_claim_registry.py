@@ -294,6 +294,12 @@ def selftest() -> int:
                                         "On the Slater slice both annihilations are derived, with the Mellin contour shift as the one cap."),
         "p59-operator-clause-scope": ("The difficulty of a two-electron integral lives entirely in the densities, never in the operator between them.",
                                       "At the level of the curve, the class is governed not by the operator but by the density topology."),
+        "p62-matched-accuracy-ceiling": ("At matched accuracy the Slater DZP needs at least nine times fewer Pauli terms than aug-cc-pVDZ.",
+                                         "The measured matched-accuracy cost of the Slater DZP is at most 4.7x the terms (ANO family)."),
+        "p62-samesize-margin": ("a Slater DZP is 40.7 mHa below every same-size Gaussian basis",
+                                "a Slater DZP is 40.7 mHa below cc-pVDZ; against ANO-R1 the margin is 17.1 mHa"),
+        "p62-hring-contrast": ("so the matched-accuracy margin is a property of these two molecules, not of exponential functions",
+                               "so the cc-pV matched-accuracy margin is a property of these two molecules, not of exponential functions"),
     }
     missing = set(R.CLAIMS) - set(probes) - {"pi-source-case-exhaustion"} | (set(probes) - set(R.CLAIMS))
     if missing - {"pi-source-case-exhaustion"}:

@@ -556,6 +556,48 @@ CLAIMS = {
         overclaim=r"(entirely|only)\s+in\s+the\s+densities,?\s+never\s+in\s+the\s+operator|"
                   r"never\s+by\s+the\s+operator",
         changed="2026-10-27"),
+    "p62-matched-accuracy-ceiling": dict(
+        statement="Water, fc-CCSD(T): the matched-accuracy Pauli cost of reaching the Slater DZP depends on the "
+                  "Gaussian family. cc-pV: aug-cc-pVDZ (41 fns) is still 8.0 mHa short at 9.2x the terms. ANO: the "
+                  "35-function ANO-R2 truncation is 6.2 mHa below the DZP at 4.7x the terms and 2.3x the 1-norm "
+                  "(68 vs 46 qubits); the measured cost is AT MOST 4.7x (the ANO crossing between 24 and 35 "
+                  "functions is not located). Registered AM1 (falls short) MISSED. HF repeats the cc-pV finding only.",
+        owner="papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex",
+        owner_anchor=r"matched-accuracy cost is therefore at most", owner_tier=r"\[MEASURED, pre-registered\]",
+        tier="MEASURED, pre-registered (AM1 missed)", owner_window=10,
+        mention=r"matched[- ]accuracy(?:[^.;|]|\.\d){0,120}(Slater|Paper[~ ]?62|DZP|ANO|aug-cc-pVDZ)|"
+                r"(Slater|Paper[~ ]?62|DZP)(?:[^.;|]|\.\d){0,120}matched[- ]accuracy",
+        qualifier=r"at most|4\.7|ANO|family|cc-pV|aug-cc-pVDZ",
+        overclaim=r"at least\s+(nine|9(\.\d)?)\b|at least\s+\$?\\gvq\{p62_aug_pauli_ratio\}|"
+                  r"(nine|9(\.\d)?)\s*(times|\\times|×|x)\s+(fewer|cheaper|more)[^.;|]{0,40}matched|"
+                  r"matched[- ]accuracy (cost|advantage|margin)[^.;|]{0,30}\b(nine|9(\.\d)?)\s*(times|\\times|×|x)",
+        load_bearing=True, changed="2026-11-11"),
+    "p62-samesize-margin": dict(
+        statement="Water at 24 functions, fc-CCSD(T): the Slater DZP is 40.7 mHa below cc-pVDZ, but against "
+                  "ANO-R1, the best of three other published same-size Gaussian bases tested (pre-registered SZ), "
+                  "the margin is 17.1 mHa; the DZP's polarization exponents were set on water and ANO-R1's were "
+                  "not; the atom-set rung R5H-3d is 4.7 mHa above ANO-R1.",
+        owner="papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex",
+        owner_anchor=r"strongest same-size Gaussian basis tested the equal-size margin",
+        owner_tier=r"\[MEASURED, pre-registered\]", tier="MEASURED, pre-registered", owner_window=6,
+        mention=r"40\.7\s*(~|\s)?mHa|41 mHa below cc-pVDZ|equal[- ]size margin",
+        qualifier=r"ANO|17\.1|same-size Gaussian",
+        overclaim=r"(below|beats|ahead of|better than)\s+(every|all|any|the best)\s+(published\s+)?(same-size\s+)?Gaussian|"
+                  r"best\s+(same-size\s+)?Gaussian[^.;|]{0,30}40\.7",
+        load_bearing=False, changed="2026-11-11"),
+    "p62-hring-contrast": dict(
+        statement="The H6-ring contrast (one extra Gaussian polarization shell overtakes the Slater DZP on the "
+                  "ring, while on water and HF it does not) holds for the cc-pV family only: on water the "
+                  "35-function ANO-R2 truncation, one more polarization level, already passes the DZP.",
+        owner="papers/group2_quantum_chemistry/paper_62_water_equal_size_slater.tex",
+        owner_anchor=r"margins at matched accuracy are not a property",
+        owner_tier=r"\[MEASURED, pre-registered; STOP\]", tier="MEASURED, pre-registered (HR STOP)", owner_window=10,
+        mention=r"margins?(?:[^.;|]|\.\d){0,60}(property of|general to)\s+(these two molecules|exponential functions)|"
+                r"margins?\s+at\s+matched\s+accuracy(?:[^.;|]|\.\d){0,40}(not|property)",
+        qualifier=r"cc-pV(?![A-Za-z])",
+        overclaim=r"(water|hydrogen fluoride|HF)(?:[^.;|]|\.\d){0,60}margins?(?:[^.;|]|\.\d){0,40}"
+                  r"(survives?|persists?|holds?)\s+(against\s+)?(every|all|any)\s+Gaussian",
+        load_bearing=False, changed="2026-11-11"),
 }
 
 TIER_TAGS = ["SYMBOLIC PROOF", "MEASURED", "PANEL-VERIFIED", "INTERNAL THEOREM", "CONDITIONAL",

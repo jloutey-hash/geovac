@@ -98,6 +98,43 @@ MACROS = [  # NB: (?![a-zA-Z]) not \b — macros may abut _, digits, unicode.
 ]
 
 
+def _braced(s: str, i: int) -> int:
+    """Index just past the brace group opening at s[i] == '{' (balanced, escapes skipped)."""
+    depth, j = 1, i + 1
+    while j < len(s) and depth:
+        if s[j] == "\\":
+            j += 2
+            continue
+        depth += {"{": 1, "}": -1}.get(s[j], 0)
+        j += 1
+    return j
+
+
+def unwrap_registry_macros(s: str) -> str:
+    """\\gvq{key}{literal} and \\gvc{id}{span} render their second argument
+    only (the papers define them as {#2}); keep exactly that.  Added
+    2026-11-11: the abstracts of six papers reached the public pages and the
+    Zenodo descriptions with the raw macro text, e.g. "gvq{p62_...}{40.7}"."""
+    out, i = [], 0
+    rx = re.compile(r"\\gv[qc](?![a-zA-Z])\s*\{")
+    while True:
+        m = rx.search(s, i)
+        if not m:
+            out.append(s[i:])
+            return "".join(out)
+        out.append(s[i:m.start()])
+        k = _braced(s, m.end() - 1)          # past the key/id argument
+        while k < len(s) and s[k].isspace():
+            k += 1
+        if k >= len(s) or s[k] != "{":       # malformed: leave untouched
+            out.append(s[m.start():k])
+            i = k
+            continue
+        e = _braced(s, k)
+        out.append(unwrap_registry_macros(s[k + 1:e - 1]))
+        i = e
+
+
 def detex(s: str, title_mode: bool = False) -> str:
     """Lightly flatten LaTeX prose for Zenodo title/description fields.
 
@@ -105,6 +142,8 @@ def detex(s: str, title_mode: bool = False) -> str:
     braces so record titles are plain searchable text; abstracts keep
     their $...$ inline math (readable, and Zenodo renders MathJax).
     """
+    s = unwrap_registry_macros(s)
+    s = re.sub(r"\\mHa(?![a-zA-Z])", r"\\,\\mathrm{mHa}", s)
     s = re.sub(r"\\texorpdfstring\{([^{}]*)\}\{[^{}]*\}", r"\1", s)
     s = re.sub(r"\\thanks\{[^{}]*\}", "", s)
     # unwrap one level of styling macros, repeatedly for nesting

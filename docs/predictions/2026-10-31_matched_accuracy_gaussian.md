@@ -137,3 +137,11 @@ Scope, stated so it is not over-read: one geometry, one method, standard Gaussia
 Slater DZP as built (water-optimized polarization). The interpolation is a reading. The result upgrades Paper 62's
 qubit statement from equal-size to matched-accuracy: at matched or better accuracy the Gaussian basis costs at least
 nine times the Pauli terms and 2.7 times the 1-norm.
+
+## Addendum (2026-11-11): the "at least nine times" reading is superseded
+
+The bracket above is for the cc-pV family only. A later registered run on the ANO family
+(`docs/predictions/2026-11-11_ano_matched_accuracy.md`, record AM) found a 35-function truncation of ANO-R2
+that is 6.2 mHa below the Slater DZP at 4.7 times its Pauli terms and 2.3 times its 1-norm. The matched-accuracy
+cost is therefore at most 4.7 times the terms, not at least nine. The measurements above stand; only the closing
+"at least nine times" sentence is withdrawn. Paper 62, Sec. "Matched accuracy", is the current statement.

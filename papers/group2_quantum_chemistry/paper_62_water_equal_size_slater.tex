@@ -86,8 +86,8 @@ not run there.
 \textbf{[MEASURED, pre-registered; STOP]} A ring of six hydrogens, with no
 core, does not:\ the Slater DZP is only $3.5$~mHa below cc-pVDZ at thirty
 functions, and one more Gaussian polarization shell at 48 functions already
-beats it, so the matched-accuracy margin is a property of these two
-molecules, not of exponential functions.  Nothing here is a
+beats it, so \gvc{p62-hring-contrast}{the cc-pV matched-accuracy margin is a property of these two
+molecules, not of exponential functions}.  Nothing here is a
 GeoVac lattice structure: the
 bases are tuned exponential functions evaluated through Gaussian fits,
 and the angular sparsity of the one-centre framework does not enter.
@@ -723,13 +723,13 @@ order; those were the reported clauses, and they held too.  The
 aug-cc-pVDZ energy agrees with the commonly quoted value near
 $-76.274$~Ha, which is an orientation check and not a cited reference.
 
-The crossing therefore lies between aug-cc-pVDZ and cc-pVTZ, $0.14$ of
+In the cc-pV family the crossing therefore lies between aug-cc-pVDZ and cc-pVTZ, $0.14$ of
 the way in energy.  The lower bound needs no interpolation: aug-cc-pVDZ,
 still $8$~mHa short of the Slater DZP, already costs
 $\gvq{p62_aug_pauli_ratio}{9.2}\times$ the Pauli terms,
 $\gvq{p62_aug_lambda_ratio}{2.7}\times$ the 1-norm, and 80 qubits
 against 46.  Read linearly in energy between the bracketing rungs, the
-matched-accuracy Gaussian cost is near $1.4$ million terms, a 1-norm
+cc-pV matched-accuracy Gaussian cost is near $1.4$ million terms, a 1-norm
 near $2\,700$~Ha and about 85 qubits, which is 13 times the terms and
 3.8 times the 1-norm; that interpolation is a reading of two measured
 rungs, not a measurement of any basis.  This bracket is for the cc-pV
@@ -894,9 +894,9 @@ turns over.  One more Gaussian polarization shell, cc-pVDZ+TZpol at 48
 functions, is already $3.6$~mHa below the Slater DZP, and aug-cc-pVDZ is
 $1.1$~mHa below.  So the crossing lies between 30 and 48 functions, and the
 cheapest Gaussian basis that beats the Slater DZP costs $6.3\times$ the
-Pauli terms and $3.6\times$ the 1-norm.  The water and hydrogen fluoride
+Pauli terms and $3.6\times$ the 1-norm.  \gvc{p62-hring-contrast}{The water and hydrogen fluoride cc-pV
 margins at matched accuracy are not a property of exponential functions in
-general;\ on this ring they shrink to one shell.
+general};\ on this ring they shrink to one shell.
 
 The ring also qualifies the Pauli-count statement.  Over canonical orbitals
 the three 30-function counts differ by up to $1.4\%$, even between the two
@@ -1020,10 +1020,10 @@ rung where the ratio has the wrong sign.
 
 \begin{itemize}
 \item One geometry and one method per system, and three systems.  The
-equal-size and matched-accuracy findings are checked on hydrogen
+cc-pV equal-size and matched-accuracy findings are checked on hydrogen
 fluoride (Sec.~\ref{sec:hf}), and they fail on the H$_6$ ring
 (Sec.~\ref{sec:hring}):\ the equal-size gap shrinks to $3.5$~mHa and the
-matched-accuracy margin to one shell.  The native kits, the ladder and the
+cc-pV matched-accuracy margin to one shell.  The native kits, the ladder and the
 $R3$ diagnosis are water only.  No potential energy surface, no basis-set
 limit.  The ladder frees
 exponents in one order and does not test every partition of five
@@ -1094,11 +1094,11 @@ count.  Hydrogen fluoride, built by the same rule and registered in
 advance, repeats both the equal-size gap ($59.5$~mHa, mostly mean-field,
 same Pauli count) and the cc-pV matched-accuracy bracket.  A ring of six hydrogens, with no
 core, does not:\ there the Slater DZP is $3.5$~mHa ahead at equal size and
-one extra Gaussian shell overtakes it, so the matched-accuracy margin is
-not general to exponential functions.  Setting the $3d$ on the atom's
+one extra Gaussian shell overtakes it, so \gvc{p62-hring-contrast}{the cc-pV matched-accuracy margin is
+not general to exponential functions}.  Setting the $3d$ on the atom's
 correlated energy too, Dunning's rule, run as its own registered ladder,
 puts water $19.0$~mHa below cc-pVDZ, with every rung's change predicted
-from the atom to within $15\%$.  The water-tuned basis stays $21.7$~mHa
+from the atom to within $16\%$.  The water-tuned basis stays $21.7$~mHa
 ahead of that best atom-set rung, which is itself $4.7$~mHa behind
 ANO-R1, and nothing here is a property of the lattice.
 
