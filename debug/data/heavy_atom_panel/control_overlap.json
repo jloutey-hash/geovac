@@ -1,0 +1,42 @@
+{
+ "C_ccpvdz": {
+  "nbf": 14,
+  "max_diag_dev": 2.220446049250313e-16,
+  "max_offdiag": 0.9381073859670642
+ },
+ "C_anor1": {
+  "nbf": 14,
+  "max_diag_dev": 3.3306690738754696e-16,
+  "max_offdiag": 3.61255767054175e-11
+ },
+ "N_ccpvdz": {
+  "nbf": 14,
+  "max_diag_dev": 3.3306690738754696e-16,
+  "max_offdiag": 0.9358503989337237
+ },
+ "N_anor1": {
+  "nbf": 14,
+  "max_diag_dev": 2.220446049250313e-16,
+  "max_offdiag": 1.549937400646684e-10
+ },
+ "O_ccpvdz": {
+  "nbf": 14,
+  "max_diag_dev": 3.3306690738754696e-16,
+  "max_offdiag": 0.9333237202898537
+ },
+ "O_anor1": {
+  "nbf": 14,
+  "max_diag_dev": 3.3306690738754696e-16,
+  "max_offdiag": 5.29948168681571e-11
+ },
+ "F_ccpvdz": {
+  "nbf": 14,
+  "max_diag_dev": 3.3306690738754696e-16,
+  "max_offdiag": 0.9314806966371403
+ },
+ "F_anor1": {
+  "nbf": 14,
+  "max_diag_dev": 2.220446049250313e-16,
+  "max_offdiag": 6.864880712498247e-11
+ }
+}
