@@ -325,12 +325,12 @@ Gaussian & H$_2$ STO-3G &   2 &   4 &          15 & 50.0 \\
 Gaussian & 6-31G$^\dagger$ &   4 &   8 &         201 & 50.0 \\
 Gaussian & He cc-pVDZ &   5 &  10 &         \gvq{he_ccpvdz_pauli}{156} & 100.0 \\
 Gaussian & cc-pVDZ$^\dagger$ &  10 &  20 &      23{,}189 & 100.0 \\
-Gaussian & He cc-pVTZ &  14 &  28 &      \gvq{he_ccpvtz_pauli}{21{,}607} & 100.0 \\
+Gaussian & He cc-pVTZ &  14 &  28 &      \gvq{he_ccpvtz_pauli}{21{,}623} & 100.0 \\
 \hline
 GeoVac   & $n_{\max}{=}2$ &   5 &  10 &         \gvq{he_n2_pauli}{280} & 17.1 \\
 GeoVac   & $n_{\max}{=}3$ &  14 &  28 &      \gvq{he_n3_pauli}{14{,}047} & 9.9 \\
-GeoVac   & $n_{\max}{=}4$ &  30 &  60 &     \gvq{he_n4_pauli}{250{,}323} & 7.1 \\
-GeoVac   & $n_{\max}{=}5$ &  55 & 110 & \gvq{he_n5_pauli}{2{,}434{,}282}\textsuperscript{b} & 5.7 \\
+GeoVac   & $n_{\max}{=}4$ &  30 &  60 &     \gvq{he_n4_pauli}{250{,}467} & 7.1 \\
+GeoVac   & $n_{\max}{=}5$ &  55 & 110 & \gvq{he_n5_pauli}{2{,}445{,}970}\textsuperscript{b} & 5.7 \\
 \hline
 GeoVac   & H$_2$ $n_{\max}{=}2$\textsuperscript{c} & 10 & 20 &   391 & 1.9 \\
 \end{tabular}
@@ -338,8 +338,16 @@ GeoVac   & H$_2$ $n_{\max}{=}2$\textsuperscript{c} & 10 & 20 &   391 & 1.9 \\
 {\footnotesize \textsuperscript{a}\emph{Convention:} the Pauli-term
 column includes the identity term throughout, on both the Gaussian and
 GeoVac sides.  The non-identity counts are one lower
-($279$ / $14{,}046$ / $250{,}322$ / $2{,}434{,}281$), and it is those that
+($279$ / $14{,}046$ / $250{,}466$ / $2{,}445{,}969$), and it is those that
 the scaling fits and 1-norm comparisons elsewhere in this paper use.
+\emph{Corrected 2026-11-13:} the He cc-pVTZ, $n_{\max}=4$ and $n_{\max}=5$
+counts previously read $21{,}607$, $250{,}323$ and $2{,}434{,}282$, because
+OpenFermion deletes a term whenever its running coefficient falls below
+$10^{-8}$ while terms are summed, which loses real terms whose partial sums
+cross that threshold; the 1-norms are unchanged at the printed precision.
+With them the $n_{\max}=4$ QWC count (Table~\ref{tab:qwc}) moved from
+$86{,}249$ to $86{,}251$ and the Pauli exponents of Eq.~(\ref{eq:exact_exponents})
+by $+0.002$ (four points) and $+0.0003$ (three points).
 \textsuperscript{b}The exact-rule Jordan--Wigner
 transform over the corrected $519{,}585$ ERIs is computationally heavy
 but completed; the retired pair-diagonal count was
@@ -364,7 +372,7 @@ at identical qubit counts, and under the exact rule the small-basis
 comparison is \textbf{unfavorable}: at $Q = 10$, GeoVac He
 ($n_{\max} = 2$) produces \gvq{he_n2_pauli}{280}~Pauli terms versus \gvq{he_ccpvdz_pauli}{156} for Gaussian He
 cc-pVDZ---$1.8\times$ \emph{more}.  At $Q = 28$, GeoVac He
-($n_{\max} = 3$) produces \gvq{he_n3_pauli}{14{,}047}~terms versus \gvq{he_ccpvtz_pauli}{21{,}607} for Gaussian
+($n_{\max} = 3$) produces \gvq{he_n3_pauli}{14{,}047}~terms versus \gvq{he_ccpvtz_pauli}{21{,}623} for Gaussian
 He cc-pVTZ---a $1.5\times$ reduction.
 These are matched-qubit, not matched-accuracy, comparisons, and at
 matched qubits the fixed-exponent GeoVac basis is the \emph{less}
@@ -387,9 +395,10 @@ modest there.
   number of qubits~$Q$.  Red squares: Gaussian basis sets (STO-3G, 6-31G,
   cc-pVDZ).  Blue circles: GeoVac lattice ($n_{\max} = 2$--$5$).  Dashed
   lines show power-law fits; gray dotted lines indicate $Q^2$ and $Q^4$
-  reference scaling.  The GeoVac exponent ($\alpha = 3.78$, four-point fit
+  reference scaling.  The GeoVac exponent ($\alpha = 3.79$, four-point fit
   of the plotted identity-inclusive counts; corrected 2026-08-29,
-  re-measured 2026-09-25 with the physical one-body operator) sits just below the $Q^{3.9}$--$Q^{4.3}$ Gaussian molecular
+  re-measured 2026-09-25 with the physical one-body operator and
+  2026-11-13 with the full $n_{\max}=4,5$ operators) sits just below the $Q^{3.9}$--$Q^{4.3}$ Gaussian molecular
   range (specific exponents $\alpha = 3.92$--$4.25$, our log-log fit
   of the published Pauli counts of Trenev~\textit{et al.}~\cite{trenev2025}).}
   \label{fig:pauli_scaling}
@@ -622,7 +631,7 @@ Table~\ref{tab:qwc} reports the results.
 \caption{Qubitwise-commuting (QWC) measurement groups for GeoVac He
 ($Z = 2$, 2~electrons) and Gaussian baselines.  The groups/terms ratio
 measures how efficiently terms pack into simultaneous-measurement sets.
-QWC grouping for $n_{\max} = 5$ was omitted ($\gvq{he_n5_pauli}{2{,}434{,}281}$ terms
+QWC grouping for $n_{\max} = 5$ was omitted ($\gvq{he_n5_pauli}{2{,}445{,}969}$ terms
 under the exact rule; the $O(N^2)$ grouping algorithm is prohibitively slow
 at this scale, and the correction made it more so---the retired
 pair-diagonal count was 227{,}338).
@@ -642,7 +651,7 @@ System & $Q$ & Pauli terms & QWC groups & Groups/terms \\
 \hline
 GeoVac $n_{\max}{=}2$ &  10 &         \gvq{he_n2_pauli}{279} &      \gvq{he_n2_qwc}{63} & 0.226 \\
 GeoVac $n_{\max}{=}3$ &  28 &      \gvq{he_n3_pauli}{14{,}046} &  \gvq{he_n3_qwc}{5{,}574} & 0.397 \\
-GeoVac $n_{\max}{=}4$ &  60 &     \gvq{he_n4_pauli}{250{,}322} & \gvq{he_n4_qwc}{86{,}249} & 0.345 \\
+GeoVac $n_{\max}{=}4$ &  60 &     \gvq{he_n4_pauli}{250{,}466} & \gvq{he_n4_qwc}{86{,}251} & 0.344 \\
 \hline
 Gauss He STO-3G   &   2 &           4 &       1 & 0.250 \\
 Gauss H$_2$ STO-3G &  4 &          15 &       5 & 0.333 \\
@@ -661,7 +670,7 @@ retired pair-diagonal rule this exponent read $3.36$---below the term
 exponent and well below the Gaussian regime---so the measurement-grouping
 advantage reported there does not survive the correction.  The groups-per-term ratio
 is higher at every basis than under the retired rule:\
-$0.226 / 0.397 / 0.345$ at $n_{\max}=2,3,4$ against the retired
+$0.226 / 0.397 / 0.344$ at $n_{\max}=2,3,4$ against the retired
 $0.208 / 0.297 / 0.329$.  The sequence is not monotone in the basis, so no
 trend is claimed; what the correction establishes is that grouping is
 uniformly \emph{less} efficient than previously reported, and the earlier
@@ -742,7 +751,7 @@ Eqs.~\eqref{eq:onenorm_exp}--\eqref{eq:trotter6_exp} and the QWC exponent of
 Eq.~\eqref{eq:qwc_scaling} were originally fitted under the retired
 pair-diagonal ERI rule.  Re-fitting the same He series under the exact rule gives
 \begin{equation}
-  N_{\mathrm{Pauli}} \sim Q^{\gvq{exp_pauli_4pt}{3.785}},\qquad
+  N_{\mathrm{Pauli}} \sim Q^{\gvq{exp_pauli_4pt}{3.787}},\qquad
   \lambda \sim Q^{\gvq{exp_lambda_4pt}{1.784}},\qquad
   N_{\mathrm{QWC}} \sim Q^{\gvq{exp_qwc_3pt}{4.049}},
   \label{eq:exact_exponents}
@@ -764,9 +773,9 @@ measurement-group scaling advantage claimed under the retired rule does not
 survive.
 
 The fourth point confirms rather than moves the fit:\ on three points
-($Q \le 60$) the same series gives $\gvq{exp_pauli_3pt}{3.795}$ and
+($Q \le 60$) the same series gives $\gvq{exp_pauli_3pt}{3.796}$ and
 $\gvq{exp_lambda_3pt}{1.802}$, so adding
-$Q = 110$ shifts the exponents by $0.010$ and $0.018$.  The
+$Q = 110$ shifts the exponents by $0.009$ and $0.018$.  The
 $\lambda$-derived Trotter-step columns of Table~\ref{tab:onenorm} were
 recomputed 2026-09-25 from the tabulated $\lambda$ as
 $r = \lceil \lambda / \sqrt{2\epsilon}\,\rceil$ (they had previously
@@ -903,7 +912,7 @@ is unchanged and remains a retired-vintage value.}
 \begin{tabular}{ld{2.3}d{2.4}}
 Metric & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c}{$R^2$} \\
 \hline
-Pauli terms      & \gvq{exp_pauli_4pt}{3.785} & 1.0000 \\
+Pauli terms      & \gvq{exp_pauli_4pt}{3.787} & 1.0000 \\
 QWC groups$^{\ddagger}$ & \gvq{exp_qwc_3pt}{4.049} & 0.9972 \\
 1-norm $\lambda$  & \gvq{exp_lambda_4pt}{1.784} & 0.9997 \\
 Trotter $r(10^{-3})$ & 1.784 & 0.9997 \\
@@ -951,9 +960,9 @@ Specifically:
   $[3s2p1d]$ basis with cached computed integrals.  FCI energy
   $-2.9003$~Ha (full CI in the contracted cc-pVTZ basis;
   basis-set-limited, above the exact $-2.903724$~Ha).  Produces
-  21{,}607~Pauli terms at 100\% ERI density, $\lambda = 530.47$.
+  \gvq{he_ccpvtz_pauli}{21{,}623}~Pauli terms at 100\% ERI density, $\lambda = 530.47$.
   At the same qubit count, GeoVac $n_{\max} = 3$ produces
-  \gvq{he_n3_pauli}{14{,}046}~terms ($1.5\times$ fewer) with $\lambda = \gvq{he_n3_lambda}{72.58}$
+  \gvq{he_n3_pauli}{14{,}047}~terms ($1.5\times$ fewer) with $\lambda = \gvq{he_n3_lambda}{72.58}$
   ($7.3\times$ lower), at a GeoVac FCI energy of $-2.8427$~Ha (58~mHa
   above cc-pVTZ).  (Corrected 2026-08-30: the retired
   pair-diagonal rule gave 2{,}659~terms, $8.1\times$ fewer, and
@@ -3419,7 +3428,7 @@ steps at $Q = 60$; that table predates the live 1-norms and has not been
 re-derived, so its exponent ($1.47$) is not compared with the live
 $\lambda$ exponent.
 The commutator sweep covers $n_{\max} = 2$--$4$ (three data points);
-the $n_{\max} = 5$ system ($N = \gvq{he_n5_pauli}{2{,}434{,}281}$ terms) requires
+the $n_{\max} = 5$ system ($N = \gvq{he_n5_pauli}{2{,}445{,}969}$ terms) requires
 an $N \times N$ anticommutativity matrix of order $10^{12}$ entries
 ($\sim\!6$~TB as bytes) and was not computed.
 

@@ -32,12 +32,11 @@ NITs: abstract L60-61 the 405-706 Ha 1-norm range includes cc-pVDZ's 674 without
   RHF energies (fire-test plants on those were asleep); the 21.0 mHa ANO-R1 RHF gap is unpinned.
 - The "equal cc-pV Pauli counts" clause for the A35/A41 rungs is untested; A41 is pinned by C21 only (disclosed).
 
-## OpenFermion accumulation drop (found 2026-11-11, v6.7.16)
+## OpenFermion accumulation drop (found 2026-11-11, v6.7.16; CLOSED 2026-11-13, v6.7.23)
 
-- `jordan_wigner(build_fermion_op_from_integrals(...))` loses coefficients assembled from pieces below OpenFermion's
-  `EQ_TOLERANCE` (1e-8): water Slater DZP 107,378 vs the true 107,382. Paper 62's counts use the closed form and
-  stand; the library's composed LiH/H2O are unaffected. Audit any other registered Pauli count produced through
-  OpenFermion on a large Gaussian-basis Hamiltonian (rebuild at a 2^20 scale and compare). PI call on scope.
+- Audited corpus-wide and fixed in `geovac/qubit_encoding.py` (`exact_jordan_wigner`); three He counts in Paper 14
+  corrected; everything else clean. Remaining: the `geovac-hamiltonians/` mirror still has the old code, and
+  Paper 20's balanced QWC counts depend on round-off tie-breaks in `qwc_groups` (PI call). CHANGELOG v6.7.23.
 
 ## Surface staleness outside the paper (corpus-wide; PI call on scheduling)
 

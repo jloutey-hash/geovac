@@ -890,14 +890,15 @@ MEASURED = {
         provenance=PROV_HE + " exactly (14046)",
         aliases={14047: "including identity"}),
     "he_n4_pauli": dict(
-        value=250322, convention="non-identity Pauli terms", q=60,
-        provenance="MEASURED 2026-09-25 debug/library_he_fix.py (physical h1)",
-        aliases={250323: "including identity"}),
+        value=250466, convention="non-identity Pauli terms", q=60,
+        provenance="MEASURED 2026-11-13 debug/library_he_fix.py (physical h1); two routes agree "
+                   "(2^20-scaled build; 1e-13 OpenFermion tolerance). %s; 250322 had lost 144 terms" % "OpenFermion 1e-8 accumulation drop fixed 2026-11-13, v6.7.23",
+        aliases={250467: "including identity"}),
     "he_n5_pauli": dict(
-        value=2434281, convention="non-identity Pauli terms", q=110,
-        provenance="MEASURED 2026-09-25 debug/library_he_fix.py (physical h1; "
-                   "~65 min build under load)",
-        aliases={2434282: "including identity"}),
+        value=2445969, convention="non-identity Pauli terms", q=110,
+        provenance="MEASURED 2026-11-13, two routes agree (2^20-scaled build; 1e-13 OpenFermion "
+                   "tolerance). %s; 2434281 had lost 11688 terms" % "OpenFermion 1e-8 accumulation drop fixed 2026-11-13, v6.7.23",
+        aliases={2445970: "including identity"}),
 
     # lambda: each value = retired hop-model value - E/8 exactly (E = 3, 13,
     # 34, 70 lattice edges), an analytic cross-check the build reproduces.
@@ -920,8 +921,9 @@ MEASURED = {
                                  "order-sensitive)"),
     "he_n3_qwc": dict(value=5574, convention="greedy QWC groups", q=28,
                       provenance="MEASURED 2026-09-25 (physical h1)"),
-    "he_n4_qwc": dict(value=86249, convention="greedy QWC groups", q=60,
-                      provenance="MEASURED 2026-09-25 (physical h1), ~115 min"),
+    "he_n4_qwc": dict(value=86251, convention="greedy QWC groups", q=60,
+                      provenance="MEASURED 2026-11-13 debug/library_he_fix.py 4 library --qwc "
+                                 "(physical h1, full operator after the v6.7.23 drop fix), ~65 min"),
 
     # ---- He fixed-k=Z hydrogenic CI with the PHYSICAL h1 (2026-09-25) ----
     # Replaces the retired "graph-native CI 0.216% (n_max=7)" headline, which
@@ -1011,9 +1013,9 @@ MEASURED = {
 
     # ---- fitted exponents.  The point range is part of the identity. ----
     "exp_pauli_4pt": dict(
-        value=3.7851, convention="log-log exponent, 4 points Q=10..110",
-        provenance="MEASURED 2026-09-25 debug/library_he_fits.py (physical h1); "
-                   "R^2 1.0000, max|log resid| 0.0125"),
+        value=3.7868, convention="log-log exponent, 4 points Q=10..110",
+        provenance="MEASURED 2026-11-13 (physical h1; counts after the v6.7.23 drop fix); "
+                   "R^2 1.0000, max|log resid| 0.0116"),
     "exp_lambda_4pt": dict(
         value=1.784, convention="log-log exponent, 4 points Q=10..110",
         provenance="MEASURED 2026-09-25 (physical h1); R^2 0.9997, "
@@ -1023,8 +1025,8 @@ MEASURED = {
         provenance="MEASURED 2026-09-25 (physical h1); R^2 0.9972.  Q=110 "
                    "infeasible: 2.4M terms against O(N^2) greedy grouping"),
     "exp_pauli_3pt": dict(
-        value=3.7954, convention="log-log exponent, 3 points Q=10..60",
-        provenance="MEASURED 2026-09-25 (physical h1); the subset the slow "
+        value=3.7957, convention="log-log exponent, 3 points Q=10..60",
+        provenance="MEASURED 2026-11-13 (physical h1; counts after the v6.7.23 drop fix); the subset the slow "
                    "tests compute"),
     "exp_lambda_3pt": dict(
         value=1.802, convention="log-log exponent, 3 points Q=10..60",
@@ -1547,8 +1549,10 @@ CITED = {
                             source="recomputed Gaussian baseline, Paper 14", identity=None),
     "he_ccpvdz_lambda": dict(value=42.95, convention="1-norm (Ha)",
                              source="same", identity=None),
-    "he_ccpvtz_pauli": dict(value=21607, convention="Pauli, He cc-pVTZ Q=28",
-                            source="same", identity=None),
+    "he_ccpvtz_pauli": dict(value=21623, convention="Pauli, He cc-pVTZ Q=28",
+                            source="recomputed 2026-11-13 (OpenFermion 1e-8 accumulation drop fixed, "
+                                   "v6.7.23; 21607 had lost 16 terms); closed-form jw_pauli_stats agrees",
+                            identity=None),
     "he_ccpvtz_lambda": dict(value=530.47, convention="1-norm (Ha)",
                              source="same", identity=None),
     "lih_sto3g_raw": dict(value=631, convention="raw JW Pauli, LiH STO-3G, Q=12",
@@ -1773,6 +1777,14 @@ RETIRED = {
     2434441: ("he_n5_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
     2434442: ("he_n5_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
     86224:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|hop|hybrid"),
+    # Retired 2026-11-13: counts that lost terms to OpenFermion's 1e-8 accumulation drop.
+    250322:  ("he_n4_pauli",        r"Pauli|terms",            r"retired|lost|drop"),
+    250323:  ("he_n4_pauli",        r"Pauli|terms",            r"retired|lost|drop"),
+    2434281: ("he_n5_pauli",        r"Pauli|terms",            r"retired|lost|drop"),
+    2434282: ("he_n5_pauli",        r"Pauli|terms",            r"retired|lost|drop"),
+    21607:   ("he_ccpvtz_pauli",    r"Pauli|terms|cc-pVTZ",    r"retired|lost|drop"),
+    86249:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|lost|drop"),
+    3.7851:  ("exp_pauli_4pt",      r"exponent|alpha|scaling", r"retired|lost|drop"),
     5569:    ("he_n3_qwc",          r"QWC|measurement group",  r"retired|hop|hybrid"),
     3.773:   ("exp_pauli_4pt",      r"exponent|alpha|scaling", r"retired|hop|hybrid"),
     1.774:   ("exp_lambda_4pt",     r"exponent|alpha|scaling", r"retired|hop|hybrid"),

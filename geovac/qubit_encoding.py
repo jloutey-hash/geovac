@@ -33,6 +33,39 @@ except ImportError:
         "Install with: pip install openfermion"
     )
 
+# OpenFermion deletes a term whenever its running coefficient falls below
+# EQ_TOLERANCE (1e-8) while operators are added, so a term assembled from
+# pieces near that size can vanish, and a single integral below it is
+# dropped outright (He cc-pVTZ lost 16 terms, He n_max=4 lost 144;
+# CHANGELOG v6.7.23).  The builders below accumulate fermion coefficients
+# in a dict, and exact_jordan_wigner transforms at a power-of-two scale
+# (bit-exact in floating point) and scales back.
+_JW_SCALE = 2.0 ** 20
+JW_CUTOFF = 1e-11  # final-coefficient cutoff; round-off of exact cancellations sits below 1e-14
+
+
+def _fermion_op_from_dict(constant: float, terms: Dict[tuple, float]) -> FermionOperator:
+    """FermionOperator holding ``terms`` verbatim (no tolerance deletions)."""
+    op = FermionOperator((), constant)
+    for key, val in terms.items():
+        if val != 0.0:
+            op.terms[key] = val
+    return op
+
+
+def exact_jordan_wigner(fermion_op: FermionOperator,
+                        cutoff: float = JW_CUTOFF) -> QubitOperator:
+    """Jordan-Wigner transform without OpenFermion's 1e-8 accumulation drop.
+
+    Transforms ``2**20 * fermion_op`` and divides by 2**20, then keeps the
+    terms whose final |coefficient| exceeds ``cutoff``.
+    """
+    scaled = jordan_wigner(fermion_op * _JW_SCALE)
+    out = QubitOperator()
+    out.terms = {k: v / _JW_SCALE for k, v in scaled.terms.items()
+                 if abs(v) > cutoff * _JW_SCALE}
+    return out
+
 
 @dataclass
 class PauliAnalysis:
@@ -131,7 +164,7 @@ class JordanWignerEncoder:
         # Extract ERI dictionary
         eri_dict = li._eri
 
-        fermion_op = FermionOperator((), self._v_nn)
+        acc: Dict[tuple, float] = {}
 
         # One-body: H1[p,q] -> sum_sigma a+_{2p+sigma} a_{2q+sigma}
         for p in range(n_spatial):
@@ -142,9 +175,8 @@ class JordanWignerEncoder:
                 for sigma in range(2):
                     sp_p = 2 * p + sigma
                     sp_q = 2 * q + sigma
-                    fermion_op += FermionOperator(
-                        ((sp_p, 1), (sp_q, 0)), h1_val
-                    )
+                    key = ((sp_p, 1), (sp_q, 0))
+                    acc[key] = acc.get(key, 0.0) + h1_val
 
         # Two-body: GeoVac ERI in physicist notation <ab|cd>
         # OpenFermion: 0.5 * <ab|cd> * sum_{sigma,tau} a+_a,s a+_b,t a_d,t a_c,s
@@ -160,11 +192,10 @@ class JordanWignerEncoder:
                     sp_d = 2 * d + tau
                     if sp_a == sp_b:
                         continue  # Pauli exclusion
-                    fermion_op += FermionOperator(
-                        ((sp_a, 1), (sp_b, 1), (sp_d, 0), (sp_c, 0)),
-                        coeff,
-                    )
+                    key = ((sp_a, 1), (sp_b, 1), (sp_d, 0), (sp_c, 0))
+                    acc[key] = acc.get(key, 0.0) + coeff
 
+        fermion_op = _fermion_op_from_dict(self._v_nn, acc)
         self._fermion_op = fermion_op
         return fermion_op
 
@@ -181,7 +212,7 @@ class JordanWignerEncoder:
             return self._qubit_op
 
         fermion_op = self.build_fermion_operator()
-        self._qubit_op = jordan_wigner(fermion_op)
+        self._qubit_op = exact_jordan_wigner(fermion_op)
         return self._qubit_op
 
     def count_pauli_terms(self) -> int:
@@ -278,7 +309,7 @@ def build_fermion_op_from_integrals(
         Second-quantized Hamiltonian.
     """
     n_spatial = h1.shape[0]
-    fermion_op = FermionOperator((), nuclear_repulsion)
+    acc: Dict[tuple, float] = {}
 
     # One-body
     for p in range(n_spatial):
@@ -288,9 +319,8 @@ def build_fermion_op_from_integrals(
             for sigma in range(2):
                 sp_p = 2 * p + sigma
                 sp_q = 2 * q + sigma
-                fermion_op += FermionOperator(
-                    ((sp_p, 1), (sp_q, 0)), h1[p, q]
-                )
+                key = ((sp_p, 1), (sp_q, 0))
+                acc[key] = acc.get(key, 0.0) + h1[p, q]
 
     # Two-body: chemist notation (pq|rs)
     for p in range(n_spatial):
@@ -308,12 +338,10 @@ def build_fermion_op_from_integrals(
                             sp_s = 2 * s + tau
                             if sp_p == sp_r:
                                 continue
-                            fermion_op += FermionOperator(
-                                ((sp_p, 1), (sp_r, 1), (sp_s, 0), (sp_q, 0)),
-                                coeff,
-                            )
+                            key = ((sp_p, 1), (sp_r, 1), (sp_s, 0), (sp_q, 0))
+                            acc[key] = acc.get(key, 0.0) + coeff
 
-    return fermion_op
+    return _fermion_op_from_dict(nuclear_repulsion, acc)
 
 
 def fit_pauli_scaling(

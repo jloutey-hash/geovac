@@ -29,9 +29,7 @@ from typing import Dict, Any, Tuple
 
 import numpy as np
 
-from openfermion import jordan_wigner
-
-from geovac.qubit_encoding import build_fermion_op_from_integrals
+from geovac.qubit_encoding import build_fermion_op_from_integrals, exact_jordan_wigner
 
 
 # ---------------------------------------------------------------------------
@@ -336,7 +334,8 @@ def he_cc_pvtz() -> Dict[str, Any]:
     Gaussian integral engine).
 
     FCI energy (exact within basis): -2.9002 Ha.
-    21,607 Pauli terms after Jordan-Wigner encoding.
+    21,623 Pauli terms after Jordan-Wigner encoding (21,607 before the
+    v6.7.23 fix of OpenFermion's 1e-8 accumulation drop).
 
     Returns
     -------
@@ -415,6 +414,6 @@ def build_qubit_hamiltonian(
         system['eri'],
         system['nuclear_repulsion'],
     )
-    qubit_op = jordan_wigner(fermion_op)
+    qubit_op = exact_jordan_wigner(fermion_op)
     n_pauli_terms = len(qubit_op.terms)
     return fermion_op, qubit_op, n_pauli_terms

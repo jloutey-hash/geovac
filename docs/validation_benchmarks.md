@@ -25,7 +25,7 @@
 | JW eigenvalue consistency | < 1e-4 Ha | Qubit encoding correctness |
 | H2 STO-3G Pauli terms | exactly 15 | Gaussian reference validation |
 | He cc-pVDZ Pauli terms | exactly 156 | Computed Gaussian baseline |
-| He cc-pVTZ Pauli terms | exactly 21,607 | Computed Gaussian baseline |
+| He cc-pVTZ Pauli terms | exactly 21,623 | Computed Gaussian baseline |
 | He cc-pVDZ FCI energy | < 0.001 Ha vs published | Integral engine validation |
 | He cc-pVTZ FCI energy | < 0.0002 Ha vs published | Integral engine validation |
 | QWC grouping correctness | 0 violations | Measurement group integrity |

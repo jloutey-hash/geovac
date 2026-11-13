@@ -42,10 +42,12 @@ GEOVAC_POINTS = [
     # (hamiltonian('He'); debug/library_he_fix.py), identity INCLUDED to
     # match Paper 14 Table I.  Retired graph-hop values were
     # 288/14079/250403/2434442 (this list had carried 288/14211/252095/None).
+    # n_max = 4, 5 corrected 2026-11-13 (v6.7.23): 250323/2434282 had lost terms
+    # to OpenFermion's 1e-8 accumulation drop.
     (r'$n_{\max}{=}2$',  5,  10,     280, 17.1),
     (r'$n_{\max}{=}3$', 14,  28,   14047,  9.9),
-    (r'$n_{\max}{=}4$', 30,  60,  250323,  7.1),
-    (r'$n_{\max}{=}5$', 55, 110, 2434282,  5.7),
+    (r'$n_{\max}{=}4$', 30,  60,  250467,  7.1),
+    (r'$n_{\max}{=}5$', 55, 110, 2445970,  5.7),
 ]
 
 

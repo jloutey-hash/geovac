@@ -394,7 +394,9 @@ class TestHeCcPvtz:
         )
 
     def test_pauli_term_count(self) -> None:
-        """cc-pVTZ He produces 21,607 Pauli terms (14 spatial, 28 qubits)."""
+        """cc-pVTZ He produces 21,623 Pauli terms (14 spatial, 28 qubits).
+
+        21,607 before v6.7.23: OpenFermion's 1e-8 accumulation drop lost 16 real terms."""
         sys = he_cc_pvtz()
         _, _, n_pauli = build_qubit_hamiltonian(sys)
-        assert n_pauli == 21607, f"Expected 21607 Pauli terms, got {n_pauli}"
+        assert n_pauli == 21623, f"Expected 21623 Pauli terms, got {n_pauli}"

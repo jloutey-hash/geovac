@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.23] - 2026-11-13
+
+**OpenFermion's small-term drop: audited, fixed at the source, three helium counts corrected (PI-directed).**
+
+### Found
+- OpenFermion's `SymbolicOperator.__iadd__` deletes a term whenever its running coefficient falls below
+  `EQ_TOLERANCE` = 1e-8, and a single added term below 1e-8 never enters (the v6.7.16 finding, now scoped).
+  Audit (`debug/openfermion_tolerance_audit.py`, `debug/openfermion_tolerance_audit_extra.py`): every registered
+  Pauli count built through OpenFermion, rebuilt with the threshold lowered to 1e-13 and compared term by term
+  (positive control: a planted pair of 6e-9 pieces is lost at 1e-8 and kept at 1e-13).
+- Clean, bit-identical: all 37 `hamiltonian()` systems; TC LiH/BeH2/H2O; relativistic LiH n_max = 2, 3 and CaH;
+  balanced LiH/BeH2/H2O; He cc-pVDZ; He n_max = 2, 3.
+- Short: He cc-pVTZ 21,607 -> 21,623 (16 real terms, up to 7.8e-8); He n_max = 4 250,322 -> 250,466
+  non-identity (144); He n_max = 5 2,434,281 -> 2,445,969 (11,688; real terms reach 1e-10 there). Each confirmed
+  by two routes: the 1e-13 tolerance build and a 2^20-scaled build (cc-pVTZ also by the closed-form
+  `jw_pauli_stats`). Every case has an empty band between round-off (<= 1.4e-13) and the smallest real term
+  (>= 1e-10). 1-norms move by <= 1.2e-6 Ha (n_max = 5: 781.257194), unchanged at the printed precision.
+- He n_max = 4 QWC groups 86,249 -> 86,251 (greedy, full operator; groups/terms 0.345 -> 0.344). Exponents:
+  Pauli 4-point 3.7851 -> 3.7868, 3-point 3.7954 -> 3.7957; lambda and QWC exponents unchanged.
+- Not a drop, a fragility (PI call): Paper 20's balanced QWC counts move by 3-12 groups when coefficients
+  move by ~1e-10 (HCl, H2S, HBr, H2Se, AsH3 under the lowered tolerance, term sets identical), because
+  `qwc_groups` sorts by |coefficient| and symmetry-equal coefficients are ordered by round-off.
+
+### Changed
+- `geovac/qubit_encoding.py`: `build_fermion_op_from_integrals` and `JordanWignerEncoder.build_fermion_operator`
+  accumulate coefficients in a dict (no deletions); new `exact_jordan_wigner` transforms at 2^20 and scales
+  back (bit-exact), cutoff 1e-11; used by `JordanWignerEncoder` and `geovac/gaussian_reference.py`. The 37
+  library systems re-audited after the change: bit-identical.
+- Registry (`debug/qa/numeric_registry.py`): he_ccpvtz_pauli, he_n4_pauli, he_n5_pauli, he_n4_qwc,
+  exp_pauli_4pt, exp_pauli_3pt; the old values registered as retired. Paper 14: tab:pauli, tab:qwc, the
+  equal-qubit comparison, the exponent equations and table, the scope sentence on n_max = 5, and a dated
+  correction note in the tab:pauli footnote. `tests/test_gaussian_reference.py` pin 21607 -> 21623;
+  `docs/validation_benchmarks.md`; `gaussian_reference.py` docstring. Paper 14 compiles three-pass, 0 undefined.
+- `tests/test_openfermion_exact_jw.py` (9 tests, 1 slow; written as a separate step): sub-tolerance pieces,
+  a lone sub-tolerance integral, count and 1-norm vs the closed form on 1e-10..1e-6 integrals for both
+  `build_fermion_op_from_integrals` and `JordanWignerEncoder` (stub index), bit-identity on clean inputs, He
+  cc-pVTZ. Fire-tested 7/7: unscaled JW, fermion-side deletion, cutoff 1e-8, scale 3^13, Gaussian builder
+  reverted, encoder JW reverted, encoder += restored.
+- Self-check round 1: 2 LARGE, both fixed: Paper 14's fig:pauli_scaling caption read alpha = 3.78 (now 3.79;
+  `benchmarks/qubit_encoding/generate_paper14_figures.py` data and `pauli_scaling.png` regenerated), and the
+  encoder path had no guard (added above). SMALL fixed: exp_pauli_3pt provenance; the cc-pVTZ comparison in
+  the Gaussian-baseline list now pairs identity-inclusive counts (14,047); the correction footnote names the
+  QWC and exponent moves.
+
+### Not changed (flagged)
+- `geovac-hamiltonians/` (the frozen pip mirror, last synced v5.20.0) carries the old `_qubit_encoding.py` and
+  `_gaussian_reference.py`; its composed systems are unaffected. `docs/market_test_results.md` is a dated
+  historical record already carrying retired counts; left as is.
+
 ## [v6.7.22] - 2026-11-13
 
 **Paper 63: Coulomb stars reach their rung (PI-directed, item #3 option A; pre-registered SA, BORDERLINE).**
