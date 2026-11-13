@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.18] - 2026-11-12
+
+**Paper 38 matrix-valued extension: C(S^3) (x) M_k converges at the same rate (PI-directed, item #2).**
+
+### Added
+- Paper 38, Prop. matrix_extension [INTERNAL THEOREM]: with G = SU(2)_L x SU(2)_R acting by
+  Ad W_(g,h) (x) Ad pi_k(h) (pi_k irreducible) and the max metric on G, (a) the Lipschitz seminorm has scalar kernel
+  on the truncation and the continuum (Rieffel 1998 for the continuum Lip-norm); (b) d_GH <= gamma(a) <= pi^2/(n+1)
+  uniformly in k (the smoothing runs over SU(2)_L only; the matrix factor is never truncated, so adds no error);
+  (c) a commutator seminorm with any finite Dirac D_F on C^k vanishes on 1 (x) {D_F}', of dimension sum m_i^2 >= k,
+  so it cannot metrize the factor. Rem. matrix_extension_scope: the gauge sector (inner fluctuations) stays OPEN.
+  New bibitem Rieffel, Doc. Math. 3 (1998) 215 (verified). Abstract, L5 parenthetical, sec:marcolli_vs and open
+  question (iv) updated.
+- `tests/test_p38_matrix_extension.py` (23 tests): kernels k^2 / 1 / k at n_max = 1, 2 and k = 2, 3; degenerate
+  D_F diag(1,1,2) -> 5; [P_n, W] = [D, W] = 0; Ad W preserves O_n. Fire-tested 8/8. Part (b) rests on the proof;
+  the test does not check the bound.
+- `debug/p38_ac_extension_check.py` (the kernel probe the test freezes).
+- Prior-art scan: PARTIAL. Kaad arXiv:2304.03979 (tensor products of compact quantum metric spaces, static);
+  Leimbach arXiv:2409.16698 (Peter-Weyl truncations); neither covers truncation convergence of C(S^3) (x) M_k.
+
+### Changed
+- Claims-reviewer on the proposition: proof of (a), (b) correct, 0 LARGE; SMALL S1-S5 applied (commutant
+  dimension, k = 1 normalisation, abstract scope, qualifier, tag).
+- WH1 status (CLAUDE.md; old text to `docs/wh_register_history.md`), group1 synthesis, INDEX, README (also the
+  missed rate tier: at most pi^2/(n+1), INTERNAL THEOREM), claim registry `wh1-p38-gh-convergence`,
+  claim-test matrix row.
+
 ## [v6.7.17] - 2026-11-12
 
 **Record HP scored STOP; Paper 38's tapered rate proved, d_GH <= pi^2/(n+1) (PI-directed).**

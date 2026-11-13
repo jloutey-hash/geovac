@@ -146,9 +146,12 @@ Camporesi--Higuchi spinor substrate and the closed-form Fej\'er
 moment. The construction supplies
 quantitative convergence data toward the continuum target $\sthree$,
 the commutative factor that almost-commutative spectral-triple
-constructions hosted on $\sthree$~\cite{marcolli_vs2014} take as input;\
-convergence of an almost-commutative structure itself is not treated
-here and is \textbf{[OPEN]}.
+constructions hosted on $\sthree$~\cite{marcolli_vs2014} take as input.
+\textbf{[INTERNAL THEOREM]} The bound extends, uniformly in $k$, to
+$C(\sthree) \otimes M_k(\C)$, metrized by letting the right $\SU(2)$
+also rotate the matrices;\ a commutator with a finite Dirac operator
+$D_F$ on $\C^k$ cannot metrize that factor. Convergence of the gauge sector (inner fluctuations) of an
+almost-commutative structure is \textbf{[OPEN]}.
 \end{abstract}
 
 \bigskip\noindent
@@ -633,6 +636,105 @@ injectivity of the compression on the Camporesi--Higuchi window, and the
 closed-form Fej\'er moment. All
 assembly steps above are proved self-contained.
 \end{remark}
+
+\begin{proposition}[matrix-valued extension;\ \textbf{[INTERNAL THEOREM]}]
+\label{prop:matrix_extension}
+Fix $k \ge 1$ and let $\pi_k$ be the irreducible $k$-dimensional
+representation of $\SU(2)$. Let $G = \SU(2)_L \times \SU(2)_R$ act on
+the spinor space by its isometries $W_{(g,h)}$ (left translation by $g$,
+right translation by $h$ with the matching rotation of the spinor slot),
+and on $B(\Hilb_{\nmax}) \otimes M_k(\C)$ and $C(\sthree) \otimes
+M_k(\C)$ by
+$\tau_{(g,h)} = \mathrm{Ad}\,W_{(g,h)} \otimes \mathrm{Ad}\,\pi_k(h)$.
+With $d_\times((g,h),(g',h')) = \max\{d(g,g'), d(h,h')\}$ set
+\begin{equation*}
+L^{(k)}(T) := \sup_{(g,h) \ne e}
+\frac{\norm{\tau_{(g,h)}(T) - T}}{d_\times(e,(g,h))}
+\end{equation*}
+on $\Op_{\nmax} \otimes M_k(\C)$ and on $C(\sthree) \otimes M_k(\C)$.
+Then:
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item[(a)] $L^{(k)}(T) = 0$ if and only if $T \in \C 1$, on both sides.
+\item[(b)] For every real central amplitude $a$ in the window,
+\begin{equation*}
+d_{\mathrm{GH}}\Bigl(\bigl(S(\Op_{\nmax} \otimes M_k),
+\mathrm{MK}_{L^{(k)}}\bigr),\,
+\bigl(S(C(\sthree) \otimes M_k), \mathrm{MK}_{L^{(k)}}\bigr)\Bigr)
+\le \gamma(a),
+\end{equation*}
+so $d_{\mathrm{GH}} \le \pi^2/(\nmax+1)$ by Eq.~\eqref{eq:korovkin_rate},
+uniformly in $k$. (At $k = 1$ the continuum seminorm is $2L$, since
+$g^{-1} x h$ can move $x$ twice as far as $d_\times$;\ this is the
+metric of Theorem~\ref{thm:main_unconditional} rescaled by $\tfrac12$,
+for which that theorem gives the sharper $\gamma(a)/2$.)
+\item[(c)] The finite Dirac operator cannot replace $\pi_k$:\ for
+$M_k(\C)$ acting on $\C^k$ and any Hermitian $D_F$ on $\C^k$, the
+seminorm $\max\{\opnorm{[\DCH \otimes 1, T]}, \opnorm{[1 \otimes D_F,
+T]}\}$ vanishes on $1 \otimes \{D_F\}'$, which has dimension at least
+$k$, so for $k \ge 2$ it is not a norm modulo scalars.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The isometries $W_{(g,h)}$ commute with $\DCH$, hence with
+$P_{\nmax}$, so $\tau$ preserves $\Op_{\nmax} \otimes M_k$ and the
+compression $S_k = S \otimes \mathrm{id}$ is $\tau$-equivariant;\
+multipliers are spin-blind, so $\mathrm{Ad}\,W_{(g,h)}(P M_f P) = P
+M_{f'} P$ with $f'(x) = f(g^{-1} x h)$.
+(a) $\tau_{(g,e)} = \rho_g \otimes \mathrm{id}$, so invariance under
+$\SU(2)_L$ forces every matrix entry of $T$ into $\C 1$
+(Proposition~\ref{prop:kernel_condition};\ transitivity on the continuum
+side), i.e.\ $T = 1 \otimes b$;\ then $\tau_{(e,h)}(1 \otimes b) = 1
+\otimes \pi_k(h) b \pi_k(h)^*$, and invariance forces $b \in
+\pi_k(\SU(2))' = \C$ (Schur). On the continuum side $L^{(k)}$ is the
+Lipschitz seminorm of an ergodic compact-group action with a
+length function, hence a Lip-norm~\cite{rieffel1998}.
+(b) Let $\upsilon_k = \upsilon \otimes \mathrm{id}$, with $\upsilon$
+the dual map of Lemma~\ref{lem:lifted_state} built from $h_a$.
+$\upsilon$ is a pointwise vector-state compression, hence completely
+positive and unital, so $\upsilon_k$ is contractive. On $T = S_k(F)$,
+$\upsilon_k(T) = K_a * F$ entrywise ($K_a = |h_a|^2/\sum a_j^2$, left
+convolution);\ since $K_a$ is central, convolution commutes with left
+and right translation, and $\mathrm{Ad}\,\pi_k(h)$ acts on the other
+tensor factor, so $\upsilon_k$ is $\tau$-equivariant ($S_k$ is onto).
+Then (i) $L^{(k)}(S_k F) \le L^{(k)}(F)$ and (ii)
+$L^{(k)}(\upsilon_k T) = \sup \norm{\upsilon_k(\tau T - T)}/d_\times
+\le L^{(k)}(T)$. For (iii)--(iv) the smoothing runs over $\SU(2)_L$
+only:\ $S_k \upsilon_k(T) = \int \tau_{(g,e)}(T)\, K_a(g)\, dg$ and
+$\upsilon_k S_k(F) = \int \tau_{(g,e)}(F)\, K_a(g)\, dg$, and
+$d_\times(e,(g,e)) = d(e,g)$, so both defects are at most $\gamma(a)$
+times $L^{(k)}$, by the estimate of (iv) in the proof of
+Theorem~\ref{thm:main_unconditional} (a Bochner integral, valid in any
+Banach space). The four-pair correspondence then gives the bound, with
+no dependence on $k$.
+(c) $1 \otimes b$ commutes with $\DCH \otimes 1$, and with $1 \otimes
+D_F$ whenever $[D_F, b] = 0$;\ the commutant of a Hermitian matrix with
+eigenvalue multiplicities $m_i$ is $\bigoplus_i M_{m_i}(\C)$, of
+dimension $\sum_i m_i^2 \ge \sum_i m_i = k$. The same holds for the
+product operator $\DCH \otimes 1 + 1 \otimes D_F$, whose commutator with
+$1 \otimes b$ is $1 \otimes [D_F, b]$.
+\textbf{[MEASURED]} The three kernel statements, at $\nmax = 1, 2$ and
+$k = 1, 2, 3$ (kernel $k^2$ under $\SU(2)_L$ alone, $1$ under $G$, $k$
+under $\DCH$ and a generic $D_F$, $\sum_i m_i^2$ for a degenerate one),
+$[P_{\nmax}, W] = 0$, and $\mathrm{Ad}\,W(\Op_{\nmax}) \subseteq
+\Op_{\nmax}$:\ \texttt{tests/test\_p38\_matrix\_extension.py}. Part~(b)
+rests on the proof above;\ the test does not check the bound.
+\end{proof}
+
+\begin{remark}[what the extension does and does not cover]
+\label{rem:matrix_extension_scope}
+The matrix factor is never truncated, so it adds no error:\ the content
+of Proposition~\ref{prop:matrix_extension} is that the $\sthree$
+symmetry, letting $\SU(2)_R$ rotate the matrices through $\pi_k$, metrizes
+$C(\sthree) \otimes M_k(\C)$ with no input beyond the round metric.
+This covers a fixed finite factor with a symmetry-built seminorm. It
+does not cover the gauge sector of an almost-commutative spectral
+triple, the inner fluctuations $\DCH \otimes 1 + A$ with $A = \sum_i
+a_i [D, b_i]$, whose convergence under truncation would be a
+statement about Dirac operators (spectral propinquity) rather than state
+spaces;\ that is \textbf{[OPEN]}.
+\end{remark}
+
 
 \begin{remark}[the Dirac-commutator seminorm:\ doubled model versus true window]
 \label{rem:dirac_degeneracy}
@@ -1570,8 +1672,8 @@ whose third and fourth arguments are the refuted $\mathrm{height}_B \le
 survives is Theorem~\ref{thm:main_unconditional}, which bounds the same
 state-space GH distance by $\gamma_{\nmax}$ using reach-type estimates alone
 and no height constituent --- so the \emph{statement} of
-Theorem~\ref{thm:main} stands, by that route (convergence of the almost-commutative
-structure is open, \S\ref{sec:marcolli_vs}).
+Theorem~\ref{thm:main} stands, by that route (convergence of the gauge sector of an
+almost-commutative structure is open, \S\ref{sec:marcolli_vs}).
 \end{proof}
 
 \begin{remark}[On the height term]\label{rem:height_definition}
@@ -1722,8 +1824,9 @@ two coincide, the factor $2$ being the metric scale
 The convergence theorem
 \ref{thm:main} is a statement about the continuum target $\sthree$ ---
 the commutative factor that almost-commutative spectral triple
-constructions hosted on $\sthree$ take as input;\ convergence of the
-almost-commutative extension itself is open (below). The
+constructions hosted on $\sthree$ take as input;\ a fixed finite matrix
+factor is covered by Proposition~\ref{prop:matrix_extension}, and the
+gauge sector is open (below). The
 Marcolli--van~Suijlekom gauge-network
 framework~\cite{marcolli_vs2014}, with the
 Perez-Sanchez~\cite{perez_sanchez2025} continuum-limit
@@ -1743,9 +1846,13 @@ whose spectral-action expansion is computable --- against which a
 gauge-network construction on $\sthree$ can be compared;\ whether any
 such construction converges to it is \textbf{[OPEN]}.
 
-The natural next question --- whether the almost-commutative extension
-$\Tcal_{\sthree} \otimes \Tcal_F$ for a finite spectral triple
-$\Tcal_F$ admits an analogous convergence statement --- is open.
+For the algebra $C(\sthree) \otimes M_k(\C)$ the convergence holds at
+the same rate (Proposition~\ref{prop:matrix_extension}), under a
+seminorm built from the $\sthree$ symmetry rather than from a finite
+Dirac operator, which cannot metrize the factor
+(part~(c)). Whether the almost-commutative spectral triple
+$\Tcal_{\sthree} \otimes \Tcal_F$ with its inner fluctuations admits a
+convergence statement is open.
 \textbf{[OBSERVATION]} Inner-fluctuation analysis of the truncated AC
 extension at finite $\nmax$ has been carried out in supporting work by
 the present author on the chirality-doubled Fock model of the operator
@@ -1872,9 +1979,11 @@ rest), whose bridge to the commutator norm is the per-harmonic step refuted here
 seminorm.} \textbf{[OPEN]} Theorem~\ref{thm:main_unconditional} proves
 state-space convergence of the commutative factor on the true window
 under the translation seminorm.  Convergence in the Dirac-commutator
-seminorm, and convergence of an almost-commutative (gauge-network,
-$\mathcal{A} \otimes M_n(\mathbb{C})$) structure built on it
-(\S\ref{sec:marcolli_vs}), are not proved here.
+seminorm, and convergence of the gauge sector (inner fluctuations) of an
+almost-commutative structure built on it (\S\ref{sec:marcolli_vs}), are
+not proved here;\ the algebra $\mathcal{A} \otimes M_n(\mathbb{C})$
+itself converges at the same rate under the symmetry-built seminorm of
+Proposition~\ref{prop:matrix_extension}, not a Dirac seminorm.
 
 % =====================================================================
 \appendix
@@ -2221,6 +2330,10 @@ Discrete Spectra onto Continuous Manifolds. Master Mellin engine
 \S III.7},
 \newblock GeoVac internal preprint, papers/group3\_foundations (2026),
 DOI via Zenodo.
+
+\bibitem[Rieffel(1998)]{rieffel1998}
+M.~A.~Rieffel, \emph{Metrics on states from actions of compact groups},
+Doc.\ Math.\ \textbf{3} (1998), 215--229.
 
 \bibitem[Korovkin(1960)]{korovkin1960}
 P.~P.~Korovkin,

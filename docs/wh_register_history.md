@@ -128,3 +128,10 @@ Superseded text (CLAUDE.md §1.7 WH7 Status, in force 2026-09-06 → 2026-11-03)
 ## WH1 — superseded rate clause (moved 2026-11-12)
 
 Superseded text (CLAUDE.md §1.7 WH1 Status, in force 2026-10-03 → 2026-11-12): "a tapered amplitude gives d = O(1/n) [MEASURED; proof and optimal constant OPEN]". Replaced when the rate was proved (Paper 38, Eq. korovkin_rate: a sine taper gives d_GH ≤ π²/(n+1), dual-Coxeter), the bound's best constant identified as 2λ₂ of (−Δ)^{1/2} on an interval (MEASURED), and a lower bound left OPEN.
+
+## WH1 status, superseded 2026-11-12 (matrix-valued extension, Paper 38 Prop. matrix_extension)
+
+Replaced clauses, verbatim:
+
+- "The almost-commutative extension's convergence is OPEN.**"
+- "and so is convergence of the gauge-network / A ⊗ M_n(ℂ) structure the WH names — Paper 38 proves the commutative factor only."

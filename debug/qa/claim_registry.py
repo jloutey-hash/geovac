@@ -96,8 +96,10 @@ CLAIMS = {
         load_bearing=True, changed="2026-09-30"),
     "wh1-p38-gh-convergence": dict(
         statement="Truncations of the TRUE Camporesi-Higuchi window converge to the round-S^3 triple "
-                  "in state-space GH (translation seminorm): COMMUTATIVE FACTOR ONLY; the almost-"
-                  "commutative extension and Dirac-seminorm convergence are OPEN.",
+                  "in state-space GH (translation seminorm): COMMUTATIVE FACTOR, plus the algebra C(S^3) (x) M_k "
+                  "at the same rate when SU(2)_R also rotates the matrices (Prop. matrix_extension, "
+                  "2026-11-12); the almost-commutative gauge sector (inner fluctuations) and "
+                  "Dirac-seminorm convergence are OPEN.",
         owner=P38, owner_anchor=r"label\{thm:main_unconditional\}",
         owner_tier=r"\[INTERNAL THEOREM", tier="INTERNAL THEOREM", owner_window=3,
         mention=r"Paper[~ ]?38\b.{0,60}convergence|discrete.?→.?continuum convergence|"
@@ -107,7 +109,7 @@ CLAIMS = {
                   r"almost[- ]commutative[^.;]{0,60}\b(proved|proven)\s+(likewise|too|as well)|"
                   r"\b(proves|proved)\s+(the\s+)?(convergence\s+(of|for)\s+the\s+)?(almost[- ]commutative|non-?commutative gauge)|"
                   r"graph.{0,30}converges? to|\\le\s*C_\{?3\}?\s*(\\cdot\s*)?\\gamma",
-        load_bearing=True, changed="2026-09-29"),
+        load_bearing=True, changed="2026-11-12"),
     "p38-rate-constant": dict(
         statement="4/pi is the asymptotic constant of the FEJER amplitude's moment, gamma_n = (4/pi) "
                   "log n/n [INTERNAL THEOREM + MEASURED] (dual-Coxeter; 2/pi unit S^3; 2 sqrt2/pi Kac). It is "
