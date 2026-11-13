@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-6.7.18-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-6.7.19-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -50,7 +50,7 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 
 Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc lives in `papers/group1_operator_algebras/` and its synthesis; highlights:
 
-- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2) (Paper 38, main theorem: Fejér-kernel bound with constant 4/π, a kernel constant; O(1/n), at most π²/(n+1), [INTERNAL THEOREM] with a tapered amplitude) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window, and for a fixed matrix factor C(S³)⊗M_k at the same rate; the gauge sector of the almost-commutative extension is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
+- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2) (Paper 38, main theorem: Fejér-kernel bound with constant 4/π, a kernel constant; O(1/n), at most π²/(n+1), [INTERNAL THEOREM] with a tapered amplitude) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window, and for a fixed matrix factor C(S³)⊗M_k at the same rate; a band-limited gauge field's truncated spectrum converges, its metric convergence is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
 - **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
 - **Papers 46–49** (Lorentzian metric-level claims built on the retracted quantity) are archived in `papers/archive/` (2026-09-14; see `docs/retired_papers.md`); the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive
 - **Paper 50** Re-derives the Klebanov–Pufu–Safdi continuum F-theorem values on S³ + S⁵ in closed Hurwitz form (continuum spectra; the truncation never enters)
@@ -253,7 +253,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
   author    = {J. Loutey},
   title     = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
   year      = {2026},
-  version   = {6.7.18},
+  version   = {6.7.19},
   doi       = {10.5281/zenodo.18738360},
   url       = {https://github.com/jloutey-hash/geovac}
 }

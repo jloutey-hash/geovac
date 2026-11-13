@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.19] - 2026-11-12
+
+**Paper 38 gauge fields (inner fluctuations) on the true window (PI-directed, gauge layer items 1-2).**
+
+### Added
+- Paper 38, Prop. gauge_window, for D_w = D_CH (x) 1 + c(omega) truncated to A_n = P D_w P:
+  (a) [INTERNAL THEOREM] a pure gauge transformation u with entries of spin <= J reproduces every Dirac level
+  m <= n - 1 - 2J with at least its continuum multiplicity (exactly, MEASURED n <= 4; the top level is broken,
+  errors 1/3 to 3); (b) [INTERNAL THEOREM] for a field moving |lambda| by at most b, a two-sided factorial
+  spectral bound eps_q = beta (beta/b)^q / q!; gauge-equivalent truncations share the limit and differ at finite n
+  (MEASURED n = 4, 6); (c) 1 (x) b lies in the compressed kernel when b commutes with omega's values
+  [INTERNAL THEOREM]; kernels generic / abelian / pure gauge = 1 / 2 / 1 at n = 1..3, k = 2 [MEASURED], although
+  the pure-gauge continuum kernel is 4. Rem. gauge_window_scope: compression breaks covariance (Paper 32's term);
+  for pure gauge the continuum distance is infinite while the measured truncations are finite, so metric
+  convergence is not posed there; for irreducible holonomy it is OPEN. New bibitem Martinetti, CMP 265 (2006).
+- `tests/test_p38_gauge_window.py` (15 tests): exact pure-gauge levels and counts, broken top level, decay
+  4.7e-1 -> 7.7e-6 at n = 2..6, the factorial bound on a 0.3-strength field (loose: errors below
+  (eps_q/beta)^8; vacuous at unit strength, beta/b ~ 1.25), covariance lag, kernels, commuting constants.
+  Fire-tested; stronger-bound plants do not fire because the bound is loose (stated in the docstring).
+- Prior-art scan: continuum kernel PARTIAL (Martinetti 2006 Prop. III.3); spectral convergence near-standard
+  (Lewin-Sere 2010); gauge covariance under truncation not found (Dong 2022, Choi 1974 related).
+
+### Changed
+- Claims-reviewer: math of (a), (b), proved half of (c) correct; 3 LARGE fixed (abstract called a measured
+  result a theorem; "exactly gauge covariant"; "every truncation finite" contradicted (c)); SMALL S1-S5 applied.
+- WH1 status (CLAUDE.md; old clauses to `docs/wh_register_history.md`), group1 synthesis, INDEX, README, claim
+  registry `wh1-p38-gh-convergence`, claim-test matrix row.
+
 ## [v6.7.18] - 2026-11-12
 
 **Paper 38 matrix-valued extension: C(S^3) (x) M_k converges at the same rate (PI-directed, item #2).**

@@ -150,8 +150,11 @@ constructions hosted on $\sthree$~\cite{marcolli_vs2014} take as input.
 \textbf{[INTERNAL THEOREM]} The bound extends, uniformly in $k$, to
 $C(\sthree) \otimes M_k(\C)$, metrized by letting the right $\SU(2)$
 also rotate the matrices;\ a commutator with a finite Dirac operator
-$D_F$ on $\C^k$ cannot metrize that factor. Convergence of the gauge sector (inner fluctuations) of an
-almost-commutative structure is \textbf{[OPEN]}.
+$D_F$ on $\C^k$ cannot metrize that factor. \textbf{[INTERNAL THEOREM]} For band-limited gauge fields (inner
+fluctuations) the truncated spectrum converges at a factorial rate, and a pure gauge transformation of
+spin $J$ reproduces every Dirac level below the window's top $2J$;\ \textbf{[MEASURED]} ($k = 2$,
+$\nmax \le 3$) a generic non-abelian field metrizes the matrix factor on the window. Convergence of the
+fluctuated metric is \textbf{[OPEN]}.
 \end{abstract}
 
 \bigskip\noindent
@@ -732,8 +735,113 @@ does not cover the gauge sector of an almost-commutative spectral
 triple, the inner fluctuations $\DCH \otimes 1 + A$ with $A = \sum_i
 a_i [D, b_i]$, whose convergence under truncation would be a
 statement about Dirac operators (spectral propinquity) rather than state
-spaces;\ that is \textbf{[OPEN]}.
+spaces;\ its spectrum and kernel are treated in
+Proposition~\ref{prop:gauge_window}, and its metric convergence is
+\textbf{[OPEN]}.
 \end{remark}
+
+\begin{proposition}[gauge fields on the window]
+\label{prop:gauge_window}
+Let $\omega$ be a smooth $\mathfrak{u}(k)$-valued $1$-form on $\sthree$,
+$c(\omega)$ its Clifford multiplication on $L^2(S) \otimes \C^k$, and
+$D_\omega = \DCH \otimes 1 + c(\omega)$, with truncation
+$A_{\nmax} = P D_\omega P$, $P = P_{\nmax} \otimes 1$, $\Lambda =
+\nmax + \tfrac12$. Write $E_{>L}$ for the spectral projection of
+$\DCH \otimes 1$ onto $|\lambda| > L$.
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item[(a)] \textbf{[INTERNAL THEOREM]} \emph{Pure gauge.} Let $u$ be a
+unitary in $C(\sthree) \otimes M_k(\C)$ whose entries are harmonics of
+spin at most $J$, and $\omega^u$ the pure gauge field with
+$D_{\omega^u} = u (\DCH \otimes 1) u^*$. Every Dirac level
+$\pm(m + \tfrac32)$ with $m \le \nmax - 1 - 2J$ is an eigenvalue of
+$A_{\nmax}$ with multiplicity at least $k(m+1)(m+2)$, its continuum
+multiplicity.
+\item[(b)] \textbf{[INTERNAL THEOREM]} \emph{Band-limited fields.}
+Suppose $c(\omega)$ moves $|\lambda|$ by at most $b$, i.e.\
+$E_{>L+b}\, c(\omega)\, (1 - E_{>L}) = 0$ for all $L$, and set $\beta =
+\opnorm{c(\omega)}$, $\epsilon_q = \beta\,(\beta/b)^q/q!$. Every
+eigenvalue $\mu$ of $D_\omega$ lies within $\epsilon_q /
+(1 - \epsilon_q/\beta)$ of the spectrum of $A_{\nmax}$, with $q =
+\lfloor (\Lambda - |\mu|)/b \rfloor$, for $|\mu| \le \Lambda$;\ every
+eigenvalue $\nu$ of $A_{\nmax}$ with $|\nu| \le \Lambda - b$ lies within
+$\epsilon_{q'}$ of the spectrum of $D_\omega$, with $q' = \lfloor
+(\Lambda - b - |\nu|)/b \rfloor$. Since $D_\omega$
+and $D_{\omega^u}$ are unitarily equivalent, the truncations of two
+gauge-equivalent band-limited fields have spectra converging to the
+same limit at this factorial rate;\ at finite $\nmax$ they differ
+(\textbf{[MEASURED]}, $\nmax = 4, 6$).
+\item[(c)] \emph{Kernel.} \textbf{[INTERNAL THEOREM]} The compressed
+seminorm $T \mapsto \opnorm{[A_{\nmax}, T]}$ on $\Op_{\nmax} \otimes
+M_k(\C)$ vanishes on $1 \otimes b$ whenever $b$ commutes with every
+value of $\omega$. \textbf{[MEASURED]} At $\nmax = 1, 2, 3$, $k = 2$,
+the kernel is exactly the scalars for a generic non-abelian field and
+the diagonal matrices for an abelian one;\ for the pure gauge field of
+$u = \pi_2$ it is the scalars, although the continuum kernel is
+$u (1 \otimes M_2) u^*$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Multiplication by a spin-$J$ harmonic changes the Peter--Weyl spin
+$j$ and the coupled spin $j \pm \tfrac12$ of $J_R + \sigma/2$ by at most
+$J$ each, so it moves a vector of level $m$ into levels $\le m + 2J$.
+For $v$ in level $m \le \nmax - 1 - 2J$, $uv$ therefore lies in the
+window, and $A_{\nmax} uv = P u (\DCH \otimes 1) u^* u v = \lambda_m
+uv$. Since $u$ is unitary, $v \mapsto uv$ is injective on the level.
+(b) Let $D_\omega x = \mu x$, $\norm{x} = 1$. For $L \ge |\mu|$,
+$E_{>L+b}(\DCH \otimes 1 - \mu) x = -E_{>L+b}\, c(\omega)\, E_{>L} x$,
+and $\DCH \otimes 1 - \mu$ is at least $L + b - |\mu|$ in norm on the
+range of $E_{>L+b}$, so $\norm{E_{>L+b} x} \le \beta \norm{E_{>L} x}/
+(L + b - |\mu|)$;\ from $L = |\mu|$ this gives $\norm{E_{>|\mu| + i \cdot b}
+x} \le (\beta/b)^i/i!$. Then $(A_{\nmax} - \mu) P x = -P\, c(\omega)\,
+E_{>\Lambda} x$ has norm at most $\epsilon_q$, and $\norm{Px} \ge 1 -
+\epsilon_q/\beta$. For an eigenvector $y$ of $A_{\nmax}$ the same
+recursion runs inside the window, and $(D_\omega - \nu) y = (1 - P)\,
+c(\omega)\, E_{>\Lambda - b}\, y$ has norm at most $\epsilon_{q'}$;\
+$D_\omega$ is self-adjoint, so the distance to its spectrum is at most
+the residual. (c) $P$ commutes with $1 \otimes b$, and so does
+$c(\omega)$ when $b$ commutes with the values of $\omega$. In the
+continuum $[D_\omega, a] = c(\nabla a)$ with $\nabla a = da + [\omega,
+a]$, and $c$ is injective, so the kernel of $[D_\omega, \cdot\,]$ is the
+parallel sections, $u (1 \otimes M_k) u^*$ for a pure gauge field;\
+states they separate are at infinite distance (Prop.~III.3
+of~\cite{martinetti2006}). \textbf{[MEASURED]} For $u = \pi_2$ ($J = \tfrac12$)
+at $\nmax = 2, 3, 4$ the levels $m \le \nmax - 2$ are reproduced to
+$10^{-9}$ with exactly their multiplicity, and at $\nmax = 1, \dots, 4$
+the top level is not (errors $\tfrac13$ to $3$). For $\omega = \sum_a f_a\, \theta^a \otimes
+X_a$ with $f_a$ real spin-$\tfrac12$ harmonics, the largest error on
+the eigenvalues with $|\mu| < 2.6$, measured against the $\nmax = 7$
+truncation, falls as $4.7 \times 10^{-1}$,
+$5.2 \times 10^{-2}$, $7.9 \times 10^{-3}$, $4.9 \times 10^{-4}$, $7.7
+\times 10^{-6}$ at $\nmax = 2, \dots, 6$, and its gauge transform by
+$\pi_2$ lags about one level behind ($2.7 \times 10^{-2}$ at $\nmax =
+4$, $2.9 \times 10^{-4}$ at $\nmax = 6$). For this field $b = 2$ and
+$\beta/b \approx 1.25$, so the bound of (b) is vacuous at these
+$\nmax$;\ at strength $0.3$ it holds at every non-vacuous check and is
+far from tight (errors below $(\epsilon_q/\beta)^8$). In (c) the pure gauge field's smallest
+nonzero singular value is $2$, $4/3$, $\sqrt5/2$ at $\nmax = 1, 2, 3$.
+\texttt{tests/test\_p38\_gauge\_window.py}.
+\end{proof}
+
+\begin{remark}[what Proposition~\ref{prop:gauge_window} settles]
+\label{rem:gauge_window_scope}
+Compression breaks gauge covariance (Paper~32 measures the resulting
+term in the spectral action). For a pure gauge transformation of
+$\DCH$ of spin $J$, every level below the top $2J$ of the window is
+reproduced (\textbf{[MEASURED]}:\ with exactly its multiplicity,
+$\nmax \le 4$);\ for a general field the transform still lags at
+finite $\nmax$ (proof of (b)). A generic non-abelian field metrizes the
+matrix factor on the window (\textbf{[MEASURED]}, $k = 2$, $\nmax \le
+3$), which a finite Dirac operator cannot
+(Proposition~\ref{prop:matrix_extension}(c)). The truncation can
+metrize more than the continuum:\ for a pure gauge field the continuum
+Connes distance is infinite between states separated by $u (1 \otimes
+M_k) u^*$~\cite{martinetti2006}, while the truncations measured ($\nmax
+\le 3$) give a finite one, so state-space convergence of the fluctuated
+metric is not posed there. For irreducible holonomy it is
+\textbf{[OPEN]}.
+\end{remark}
+
 
 
 \begin{remark}[the Dirac-commutator seminorm:\ doubled model versus true window]
@@ -1672,7 +1780,7 @@ whose third and fourth arguments are the refuted $\mathrm{height}_B \le
 survives is Theorem~\ref{thm:main_unconditional}, which bounds the same
 state-space GH distance by $\gamma_{\nmax}$ using reach-type estimates alone
 and no height constituent --- so the \emph{statement} of
-Theorem~\ref{thm:main} stands, by that route (convergence of the gauge sector of an
+Theorem~\ref{thm:main} stands, by that route (metric convergence of the gauge sector of an
 almost-commutative structure is open, \S\ref{sec:marcolli_vs}).
 \end{proof}
 
@@ -1825,8 +1933,9 @@ The convergence theorem
 \ref{thm:main} is a statement about the continuum target $\sthree$ ---
 the commutative factor that almost-commutative spectral triple
 constructions hosted on $\sthree$ take as input;\ a fixed finite matrix
-factor is covered by Proposition~\ref{prop:matrix_extension}, and the
-gauge sector is open (below). The
+factor is covered by Proposition~\ref{prop:matrix_extension}, the
+gauge sector's spectrum by Proposition~\ref{prop:gauge_window}, and its
+metric convergence is open (below). The
 Marcolli--van~Suijlekom gauge-network
 framework~\cite{marcolli_vs2014}, with the
 Perez-Sanchez~\cite{perez_sanchez2025} continuum-limit
@@ -1850,9 +1959,12 @@ For the algebra $C(\sthree) \otimes M_k(\C)$ the convergence holds at
 the same rate (Proposition~\ref{prop:matrix_extension}), under a
 seminorm built from the $\sthree$ symmetry rather than from a finite
 Dirac operator, which cannot metrize the factor
-(part~(c)). Whether the almost-commutative spectral triple
-$\Tcal_{\sthree} \otimes \Tcal_F$ with its inner fluctuations admits a
-convergence statement is open.
+(part~(c)). With band-limited inner fluctuations the truncated spectrum
+converges, and a pure gauge transformation of spin $J$ reproduces every
+level below the window's top $2J$
+(Proposition~\ref{prop:gauge_window});\ whether the almost-commutative
+spectral triple $\Tcal_{\sthree} \otimes \Tcal_F$ with its inner
+fluctuations converges as a metric space is open.
 \textbf{[OBSERVATION]} Inner-fluctuation analysis of the truncated AC
 extension at finite $\nmax$ has been carried out in supporting work by
 the present author on the chirality-doubled Fock model of the operator
@@ -1979,8 +2091,9 @@ rest), whose bridge to the commutator norm is the per-harmonic step refuted here
 seminorm.} \textbf{[OPEN]} Theorem~\ref{thm:main_unconditional} proves
 state-space convergence of the commutative factor on the true window
 under the translation seminorm.  Convergence in the Dirac-commutator
-seminorm, and convergence of the gauge sector (inner fluctuations) of an
-almost-commutative structure built on it (\S\ref{sec:marcolli_vs}), are
+seminorm, and metric convergence of the gauge sector (inner fluctuations)
+of an almost-commutative structure built on it (\S\ref{sec:marcolli_vs};\
+its spectrum converges, Proposition~\ref{prop:gauge_window}), are
 not proved here;\ the algebra $\mathcal{A} \otimes M_n(\mathbb{C})$
 itself converges at the same rate under the symmetry-built seminorm of
 Proposition~\ref{prop:matrix_extension}, not a Dirac seminorm.
@@ -2263,6 +2376,11 @@ M.~Leimbach and W.~D.~van~Suijlekom,
 \newblock \emph{Gromov--Hausdorff convergence of spectral truncations
 for tori},
 \newblock Adv.~Math. \textbf{439} (2024), Paper No.~109496.
+
+\bibitem[Martinetti(2006)]{martinetti2006}
+P.~Martinetti, \emph{Carnot--Carath\'eodory metric and gauge fluctuation
+in noncommutative geometry}, Commun.\ Math.\ Phys.\ \textbf{265} (2006),
+585--616.
 
 \bibitem[Marcolli \& van~Suijlekom(2014)]{marcolli_vs2014}
 M.~Marcolli and W.~D.~van~Suijlekom,

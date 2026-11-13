@@ -98,8 +98,8 @@ CLAIMS = {
         statement="Truncations of the TRUE Camporesi-Higuchi window converge to the round-S^3 triple "
                   "in state-space GH (translation seminorm): COMMUTATIVE FACTOR, plus the algebra C(S^3) (x) M_k "
                   "at the same rate when SU(2)_R also rotates the matrices (Prop. matrix_extension, "
-                  "2026-11-12); the almost-commutative gauge sector (inner fluctuations) and "
-                  "Dirac-seminorm convergence are OPEN.",
+                  "2026-11-12); a band-limited gauge field's truncated spectrum converges (Prop. gauge_window), "
+                  "but its metric convergence and Dirac-seminorm convergence are OPEN.",
         owner=P38, owner_anchor=r"label\{thm:main_unconditional\}",
         owner_tier=r"\[INTERNAL THEOREM", tier="INTERNAL THEOREM", owner_window=3,
         mention=r"Paper[~ ]?38\b.{0,60}convergence|discrete.?→.?continuum convergence|"

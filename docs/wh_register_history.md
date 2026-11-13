@@ -135,3 +135,10 @@ Replaced clauses, verbatim:
 
 - "The almost-commutative extension's convergence is OPEN.**"
 - "and so is convergence of the gauge-network / A ⊗ M_n(ℂ) structure the WH names — Paper 38 proves the commutative factor only."
+
+## WH1 status, superseded 2026-11-12 (gauge fields on the window, Paper 38 Prop. gauge_window)
+
+Replaced clauses, verbatim:
+
+- "A fixed matrix factor converges at the same rate; the almost-commutative gauge sector is OPEN.**"
+- "and so is convergence of the gauge sector (inner fluctuations) the WH names."

@@ -8,7 +8,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 1. `synthesis/geovac_field_guide.tex` — what GeoVac is, as a story (10 pp)
 2. [`docs/claims_register.md`](../docs/claims_register.md) — every headline claim + its verification tier + falsifier
 3. `group3_foundations/Paper_7_Dimensionless_Vacuum.tex` — the S³ equivalence (the theoretical foundation)
-4. `group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` — convergence of the true-window Camporesi–Higuchi truncations to the round-S³ triple (state-space GH; unconditional for the commutative factor, and for a fixed matrix factor C(S³)⊗M_k at the same rate — the gauge sector of the almost-commutative extension is open) <!-- gvc:wh1-p38-gh-convergence -->
+4. `group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` — convergence of the true-window Camporesi–Higuchi truncations to the round-S³ triple (state-space GH; unconditional for the commutative factor, and for a fixed matrix factor C(S³)⊗M_k at the same rate — a band-limited gauge field's truncated spectrum converges, its metric convergence is open) <!-- gvc:wh1-p38-gh-convergence -->
 5. `group4_quantum_computing/paper_14_qubit_encoding.tex` — the headline computational result
 
 ## Status legend
