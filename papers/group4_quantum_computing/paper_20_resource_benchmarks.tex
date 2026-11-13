@@ -327,7 +327,7 @@ Table~\ref{tab:resources}) is far lower.
 
 For H$_2$O ($Q=70$), FCI is infeasible (10 electrons), but the
 Hamiltonian metrics are available: $19{,}742$ Pauli terms,
-$1{,}612.0$~Ha 1-norm, $1{,}494$ QWC groups (re-measured 2026-08-30; the
+$1{,}612.0$~Ha 1-norm, $1{,}525$ QWC groups (re-measured 2026-08-30, grouping 2026-11-13; the
 retired pre-exact-rule figures were $5{,}798$ / $1{,}511$ / $168$, the
 Pauli count low by $3.4\times$).  The balanced 1-norm is $0.057\times$ the
 composed total (which is dominated by the PK barrier at $Z_{\text{eff}}=6$),
@@ -472,7 +472,10 @@ Gaussian raw Jordan-Wigner baselines.
   \gvq{lih_sto3g_qwc}{179} QWC groups, $Q=12$) is our own Jordan--Wigner build from
   STO-3G integrals at $R=3.015$~bohr, not a Trenev-reduced count.  The
   $Q^{3.9\text{--}4.3}$ Gaussian-scaling exponents are GeoVac's own log-log
-  fit of the published reduced counts.
+  fit of the published reduced counts.  Balanced QWC counts re-measured
+  2026-11-13 with a deterministic tie-break (Table~\ref{tab:molecules});
+  they were 629/1{,}494/1{,}220.  The STO-3G group count was not
+  re-measured (its build is not on file).
   ``---'' indicates data not available.}
 \label{tab:resources}
 \begin{ruledtabular}
@@ -482,20 +485,20 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
 \colrule
 \multirow{5}{*}{LiH}
  & GeoVac composed & 30 & 838 & 34.0 & 64 & --- \\
- & GeoVac balanced & 30 & \gvq{lih_balanced_pauli}{2{,}726} & 78.2 & 629 & --- \\
+ & GeoVac balanced & 30 & \gvq{lih_balanced_pauli}{2{,}726} & 78.2 & 631 & --- \\
  & Gaussian STO-3G & 12 & \gvq{lih_sto3g_raw}{631} & \gvq{lih_sto3g_lambda}{16.5} & \gvq{lih_sto3g_qwc}{179} & $0.75\times$ Pauli, $2.8\times$ QWC \\
  & Gaussian 6-31G  & 20 & 5{,}851 & --- & --- & $7.0\times$ Pauli \\
  & Gaussian cc-pVDZ & 36 & \gvq{lih_ccpvdz_pauli}{63{,}519} & --- & --- & $76\times$ Pauli \\
 \colrule
 \multirow{4}{*}{H$_2$O}
  & GeoVac composed & 70 & 1{,}954 & 372 & 64 & --- \\
- & GeoVac balanced & 70 & 19{,}742 & 1{,}612 & 1{,}494 & --- \\
+ & GeoVac balanced & 70 & 19{,}742 & 1{,}612 & 1{,}525 & --- \\
  & Gaussian STO-3G & 12 & 551 & --- & --- & $0.28\times$ Pauli \\
  & Gaussian cc-pVDZ & 46 & \gvq{h2o_ccpvdz_pauli}{107{,}382} & --- & --- & $55\times$ Pauli \\
 \colrule
 \multirow{2}{*}{BeH$_2$}
  & GeoVac composed & 50 & 1{,}396 & 68.8 & 64 & --- \\
- & GeoVac balanced & 50 & 8{,}868 & 323.4 & 1{,}220 & --- \\
+ & GeoVac balanced & 50 & 8{,}868 & 323.4 & 1{,}251 & --- \\
 \end{tabular}
 \end{ruledtabular}
 \raggedright\footnotesize{$^a$Ratio of Gaussian to GeoVac composed Pauli terms
@@ -672,7 +675,9 @@ the single calibrated Chawla RaH-18q cell~\cite{Chawla2024}.
 \emph{Re-measured 2026-08-30} under the corrected Condon--Shortley angular
 factor order (retired values: $1{,}413$ / $942$ / $89{,}226$ / $59{,}484$
 and $\lambda = 40.59$ / $143.96$ / $18.68$ / $218.78$ / $413.90$ /
-$125.36$).  The former ``scalar'' column is \emph{removed}, not re-priced:\
+$125.36$).  QWC re-measured 2026-11-13 with a deterministic tie-break
+(Table~\ref{tab:molecules}; were $142$ and $11{,}938$/$11{,}948$/$11{,}925$).
+The former ``scalar'' column is \emph{removed}, not re-priced:\
 it evaluated the relativistic spec with the spinless builder, which returns
 the same count as the relativistic builder, so it was never a scalar
 comparator and the ratios drawn from it measured nothing.}
@@ -681,18 +686,18 @@ comparator and the ratios drawn from it measured nothing.}
 \begin{tabular}{ccccccc}
 Molecule & $n_{\max}$ & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $\lambda_{\mathrm{ni}}$ (Ha) & QWC & Chawla ratio \\
 \hline
-LiH & 2 & 30 &  1\,501 &  39.53 &     142 & 0.120$\times$ \\
-LiH & 3 & 84 & 90\,114 & 208.79 & 11\,938 & 7.177$\times$ \\
-BeH & 2 & 30 &  1\,501 & 142.52 &     142 & 0.120$\times$ \\
-BeH & 3 & 84 & 90\,114 & 400.01 & 11\,948 & 7.177$\times$ \\
-CaH & 2 & 20 &     998 &  17.91 &     142 & 0.079$\times$ \\
-CaH & 3 & 56 & 60\,060 & 119.35 & 11\,925 & 4.783$\times$ \\
-SrH & 2 & 20 &     998 &  17.91 &     142 & 0.079$\times$ \\
-BaH & 2 & 20 &     998 &  17.91 &     142 & 0.079$\times$ \\
+LiH & 2 & 30 &  1\,501 &  39.53 &     140 & 0.120$\times$ \\
+LiH & 3 & 84 & 90\,114 & 208.79 & 11\,940 & 7.177$\times$ \\
+BeH & 2 & 30 &  1\,501 & 142.52 &     140 & 0.120$\times$ \\
+BeH & 3 & 84 & 90\,114 & 400.01 & 11\,935 & 7.177$\times$ \\
+CaH & 2 & 20 &     998 &  17.91 &     140 & 0.079$\times$ \\
+CaH & 3 & 56 & 60\,060 & 119.35 & 11\,935 & 4.783$\times$ \\
+SrH & 2 & 20 &     998 &  17.91 &     140 & 0.079$\times$ \\
+BaH & 2 & 20 &     998 &  17.91 &     140 & 0.079$\times$ \\
 \hline\hline
 \multicolumn{7}{l}{\footnotesize Chawla RaH-18q~\cite{Chawla2024}: 12\,556 Pauli (rel), 2\,740 Pauli (non-rel) (47\,099 / 4\,249 two-electron integrals), $Q = 18$.} \\
 \multicolumn{7}{l}{\footnotesize SrH, BaH added Sprint 3 (v2.14.0) via [Kr] and [Xe] frozen cores (\texttt{geovac/neon\_core.py}).} \\
-\multicolumn{7}{l}{\footnotesize CaH/SrH/BaH at $Q=20$ bit-identical ($N_{\mathrm{Pauli}}^{\mathrm{rel}} = \gvq{cah_rel_n2_pauli}{998}$, $\lambda_{\mathrm{ni}} = 17.91$, QWC $= 142$): isostructural invariance.} \\
+\multicolumn{7}{l}{\footnotesize CaH/SrH/BaH at $Q=20$ bit-identical ($N_{\mathrm{Pauli}}^{\mathrm{rel}} = \gvq{cah_rel_n2_pauli}{998}$, $\lambda_{\mathrm{ni}} = 17.91$, QWC $= 140$): isostructural invariance.} \\
 \multicolumn{7}{l}{\footnotesize Sprint 4 Track TR (v2.15.0): rel Pauli counts corrected 1.76$\times$ (n=2) / 1.92$\times$ (n=3) upward via missing jj reduced-matrix-element phase fix.  A second correction (2026-08-30) fixed the Condon--Shortley factor order; the values above are post-both.} \\
 \multicolumn{7}{l}{\footnotesize Chawla et al.\ SI Tables S1--S3 (per-molecule matched-$Q$ data): accessibility \textbf{deferred}.} \\
 \end{tabular}
@@ -804,13 +809,21 @@ $d$-orbital valence blocks spanning $Z = 21$--30.
   $\lambda_{\text{ni}}$ is the non-identity 1-norm (simulation-relevant);
   the Pauli column, by contrast, \emph{includes} the identity term.
   Isostructural pairs (rows 2--3) produce identical Pauli counts --- but
-  \emph{not} identical QWC group counts (MgH$_2$ $903$ vs.\ CaH$_2$ $898$;
-  SiH$_4$ $1{,}566$ vs.\ GeH$_4$ $1{,}562$; only NaH/KH tie).  The greedy
-  grouper sorts terms by descending $|$coefficient$|$ before insertion
-  (\texttt{geovac/measurement\_grouping.py}), so partners with identical
-  Pauli \emph{support} but different coefficients are visited in different
-  orders.  The invariance is a property of the support, and QWC grouping
-  is not a function of the support alone.
+  \emph{not} identical QWC group counts (MgH$_2$ $875$ vs.\ CaH$_2$ $873$;
+  SiH$_4$ $1{,}577$ vs.\ GeH$_4$ $1{,}568$; only NaH/KH and H$_2$S/H$_2$Se
+  tie).  The greedy grouper sorts terms by descending $|$coefficient$|$
+  before insertion (\texttt{geovac/measurement\_grouping.py}), so partners
+  with identical Pauli \emph{support} but different coefficients are visited
+  in different orders.  The invariance is a property of the support, and QWC
+  grouping is not a function of the support alone.
+  \emph{QWC re-measured 2026-11-13:} coefficients equal by symmetry differ
+  only by float round-off, and the grouper had visited them in round-off
+  order, so a $10^{-13}$ relative perturbation moved these counts by as much
+  as $13\%$ (balanced NaH, $69 \to 78$) and $19\%$ (composed rows, $64 \to 76$).  Ties are now broken by the Pauli string and the counts are
+  invariant to it (\texttt{tests/test\_measurement\_grouping.py}).  The
+  round-off-ordered values were $69$/$903$/$1{,}173$/$1{,}264$/$1{,}427$/$1{,}566$
+  (Ne rows) and $69$/$898$/$1{,}176$/$1{,}264$/$1{,}468$/$1{,}562$ (Ar rows); the
+  composed rows stay at $64$.
   The \texttt{hamiltonian()} API currently returns composed encoding
   for all rows; balanced data shown here are from Paper~19's
   \texttt{build\_balanced\_hamiltonian()} (every cell pinned by
@@ -846,19 +859,19 @@ HF       & He   & 60 & 1.733 & 1{,}675 & 232.7 & 64 \\
 NH$_3$   & He   & 80 & 1.912 & 2{,}233 & 158.0 & 64 \\
 CH$_4$   & He   & 90 & 2.050 & 2{,}512 & 135.4 & 64 \\
 \colrule
-NaH      & Ne   & 20 & 3.566 &    575 &  19.6 &    69 \\
-MgH$_2$  & Ne   & 40 & 3.261 & 4{,}861 & 111.8 &   903 \\
-HCl      & Ne   & 50 & 2.409 & 9{,}824 & 866.1 & 1{,}173 \\
-H$_2$S   & Ne   & 60 & 2.534 & 13{,}863 & 873.6 & 1{,}264 \\
-PH$_3$   & Ne   & 70 & 2.680 & 18{,}854 & 889.3 & 1{,}427 \\
-SiH$_4$  & Ne   & 80 & 2.800 & 24{,}745 & 909.2 & 1{,}566 \\
+NaH      & Ne   & 20 & 3.566 &    575 &  19.6 &    68 \\
+MgH$_2$  & Ne   & 40 & 3.261 & 4{,}861 & 111.8 &   875 \\
+HCl      & Ne   & 50 & 2.409 & 9{,}824 & 866.1 & 1{,}212 \\
+H$_2$S   & Ne   & 60 & 2.534 & 13{,}863 & 873.6 & 1{,}295 \\
+PH$_3$   & Ne   & 70 & 2.680 & 18{,}854 & 889.3 & 1{,}486 \\
+SiH$_4$  & Ne   & 80 & 2.800 & 24{,}745 & 909.2 & 1{,}577 \\
 \colrule
-KH       & Ar   & 20 & 4.243 &    575 &  28.1 &    69 \\
-CaH$_2$  & Ar   & 40 & 3.807 & 4{,}861 & 123.8 &   898 \\
-HBr      & Ar$d$ & 50 & 2.670 & 9{,}824 & 875.3 & 1{,}176 \\
-H$_2$Se  & Ar$d$ & 60 & 2.760 & 13{,}863 & 883.4 & 1{,}264 \\
-AsH$_3$  & Ar$d$ & 70 & 2.820 & 18{,}854 & 885.2 & 1{,}468 \\
-GeH$_4$  & Ar$d$ & 80 & 2.870 & 24{,}745 & 874.8 & 1{,}562 \\
+KH       & Ar   & 20 & 4.243 &    575 &  28.1 &    68 \\
+CaH$_2$  & Ar   & 40 & 3.807 & 4{,}861 & 123.8 &   873 \\
+HBr      & Ar$d$ & 50 & 2.670 & 9{,}824 & 875.3 & 1{,}207 \\
+H$_2$Se  & Ar$d$ & 60 & 2.760 & 13{,}863 & 883.4 & 1{,}295 \\
+AsH$_3$  & Ar$d$ & 70 & 2.820 & 18{,}854 & 885.2 & 1{,}487 \\
+GeH$_4$  & Ar$d$ & 80 & 2.870 & 24{,}745 & 874.8 & 1{,}568 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1010,7 +1023,7 @@ The library is available at
 \url{https://github.com/jloutey-hash/geovac}
 and can be installed via:
 \begin{lstlisting}[language=bash]
-pip install geovac-hamiltonians
+pip install "geovac-hamiltonians @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"
 \end{lstlisting}
 or from source:
 \begin{lstlisting}[language=bash]

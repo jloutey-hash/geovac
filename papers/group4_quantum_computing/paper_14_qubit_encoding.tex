@@ -44,7 +44,7 @@ the $M = 5 \to 30$ endpoint slope is $M^{\gvq{eri_decay_2pt}{-0.49}}$), while
 Gaussian ERI tensors remain near-dense at $O(1)$.
 Beyond term counts, we quantify two operationally relevant cost metrics:
 the number of qubitwise-commuting (QWC) measurement groups scales as
-$O(Q^{4.05})$, and the Pauli 1-norm
+$O(Q^{4.04})$, and the Pauli 1-norm
 $\lambda = \sum_i |c_i|$---which controls both Trotter step counts and
 qubitization query complexity---scales as $O(Q^{1.78})$, $R^2 = 0.9997$.
 The 1-norm is strongly sub-quadratic and its equal-qubit advantage is
@@ -346,7 +346,8 @@ OpenFermion deletes a term whenever its running coefficient falls below
 $10^{-8}$ while terms are summed, which loses real terms whose partial sums
 cross that threshold; the 1-norms are unchanged at the printed precision.
 With them the $n_{\max}=4$ QWC count (Table~\ref{tab:qwc}) moved from
-$86{,}249$ to $86{,}251$ and the Pauli exponents of Eq.~(\ref{eq:exact_exponents})
+$86{,}249$ to $86{,}251$ (and to $86{,}222$ under the deterministic tie-break of
+Sec.~\ref{sec:measurement}) and the Pauli exponents of Eq.~(\ref{eq:exact_exponents})
 by $+0.002$ (four points) and $+0.0003$ (three points).
 \textsuperscript{b}The exact-rule Jordan--Wigner
 transform over the corrected $519{,}585$ ERIs is computationally heavy
@@ -624,7 +625,12 @@ and reducing it lowers the total shot budget.
 
 We partition each qubit Hamiltonian into QWC groups using greedy
 sorted insertion (largest $|c_i|$ first), following the algorithm of
-Verteletskyi, Yen, and Izmaylov~\cite{verteletskyi2020}.
+Verteletskyi, Yen, and Izmaylov~\cite{verteletskyi2020}.  Coefficients
+within $10^{-9}$ (relative) of one another are taken in Pauli-string
+order: coefficients equal by symmetry differ only by float round-off, and
+without this tie-break the greedy count follows the round-off (a
+$10^{-13}$ relative perturbation moved composed LiH from 64 to 76 groups;
+\texttt{tests/test\_measurement\_grouping.py}).
 Table~\ref{tab:qwc} reports the results.
 
 \begin{table}[t]
@@ -643,15 +649,17 @@ The groups/terms ratio rises at all three points, so the exact rule makes
 measurement grouping \emph{less} efficient, not more.
 All three GeoVac rows re-measured again 2026-09-25 with the physical
 one-body operator (Sec.~\ref{sec:geovac}); the retired graph-hop values
-were 287/67/0.233, 14{,}078/5{,}569/0.396 and 250{,}402/86{,}224/0.344.}
+were 287/67/0.233, 14{,}078/5{,}569/0.396 and 250{,}402/86{,}224/0.344.
+QWC re-measured 2026-11-13 with the deterministic tie-break described
+above (were 63/0.226, 5{,}574/0.397 and 86{,}251/0.344).}
 \label{tab:qwc}
 \begin{ruledtabular}
 \begin{tabular}{lrrrr}
 System & $Q$ & Pauli terms & QWC groups & Groups/terms \\
 \hline
-GeoVac $n_{\max}{=}2$ &  10 &         \gvq{he_n2_pauli}{279} &      \gvq{he_n2_qwc}{63} & 0.226 \\
-GeoVac $n_{\max}{=}3$ &  28 &      \gvq{he_n3_pauli}{14{,}046} &  \gvq{he_n3_qwc}{5{,}574} & 0.397 \\
-GeoVac $n_{\max}{=}4$ &  60 &     \gvq{he_n4_pauli}{250{,}466} & \gvq{he_n4_qwc}{86{,}251} & 0.344 \\
+GeoVac $n_{\max}{=}2$ &  10 &         \gvq{he_n2_pauli}{279} &      \gvq{he_n2_qwc}{64} & 0.229 \\
+GeoVac $n_{\max}{=}3$ &  28 &      \gvq{he_n3_pauli}{14{,}046} &  \gvq{he_n3_qwc}{5{,}558} & 0.396 \\
+GeoVac $n_{\max}{=}4$ &  60 &     \gvq{he_n4_pauli}{250{,}466} & \gvq{he_n4_qwc}{86{,}222} & 0.344 \\
 \hline
 Gauss He STO-3G   &   2 &           4 &       1 & 0.250 \\
 Gauss H$_2$ STO-3G &  4 &          15 &       5 & 0.333 \\
@@ -661,7 +669,7 @@ Gauss H$_2$ STO-3G &  4 &          15 &       5 & 0.333 \\
 
 A power-law fit over the GeoVac He data ($n_{\max} = 2$--$4$) gives
 \begin{equation}
-  N_{\mathrm{QWC}} \sim Q^{\gvq{exp_qwc_3pt}{4.05}}, \quad R^2 = 0.997,
+  N_{\mathrm{QWC}} \sim Q^{\gvq{exp_qwc_3pt}{4.04}}, \quad R^2 = 0.997,
   \label{eq:qwc_scaling}
 \end{equation}
 slightly \emph{above} the Pauli term exponent of $\gvq{exp_pauli_4pt}{3.79}$, and inside
@@ -670,7 +678,7 @@ retired pair-diagonal rule this exponent read $3.36$---below the term
 exponent and well below the Gaussian regime---so the measurement-grouping
 advantage reported there does not survive the correction.  The groups-per-term ratio
 is higher at every basis than under the retired rule:\
-$0.226 / 0.397 / 0.344$ at $n_{\max}=2,3,4$ against the retired
+$0.229 / 0.396 / 0.344$ at $n_{\max}=2,3,4$ against the retired
 $0.208 / 0.297 / 0.329$.  The sequence is not monotone in the basis, so no
 trend is claimed; what the correction establishes is that grouping is
 uniformly \emph{less} efficient than previously reported, and the earlier
@@ -753,11 +761,13 @@ pair-diagonal ERI rule.  Re-fitting the same He series under the exact rule give
 \begin{equation}
   N_{\mathrm{Pauli}} \sim Q^{\gvq{exp_pauli_4pt}{3.787}},\qquad
   \lambda \sim Q^{\gvq{exp_lambda_4pt}{1.784}},\qquad
-  N_{\mathrm{QWC}} \sim Q^{\gvq{exp_qwc_3pt}{4.049}},
+  N_{\mathrm{QWC}} \sim Q^{\gvq{exp_qwc_3pt}{4.039}},
   \label{eq:exact_exponents}
 \end{equation}
-with $R^2 = 1.0000$, $0.9997$ and $0.9972$ (maximum $|\log|$ residuals
-$0.013$, $0.043$, $0.220$), against the retired $3.15$, $1.69$ and $3.36$.
+with $R^2 = 1.0000$, $0.9997$ and $0.9974$ (maximum $|\log|$ residuals
+$0.013$, $0.043$, $0.214$), against the retired $3.15$, $1.69$ and $3.36$
+(the QWC fit re-done 2026-11-13 under the deterministic tie-break of
+Sec.~\ref{sec:measurement}; it was $4.049$).
 The first two are four-point fits over $n_{\max} = 2$--$5$
 ($Q = 10$--$110$); the QWC exponent has three points, because greedy
 grouping is $O(N^2)$ and the $n_{\max}=5$ system carries $2.4$~million
@@ -905,7 +915,9 @@ were $3.773$, $4.013$ and $1.774$); the retired
 pair-diagonal values were $3.147$, $3.355$ and $1.694$ (Pauli, QWC,
 $\lambda$).  The Pauli and $\lambda$ fits use four points; the QWC fit uses
 three ($\ddagger$), since greedy grouping is $O(N^2)$ and the $n_{\max}=5$
-system carries $2.4$~million Pauli terms.  The commutator bound ($\dagger$)
+system carries $2.4$~million Pauli terms; it was re-fitted 2026-11-13 under
+the deterministic tie-break of Sec.~\ref{sec:measurement} (was $4.049$,
+$R^2 = 0.9972$).  The commutator bound ($\dagger$)
 is unchanged and remains a retired-vintage value.}
 \label{tab:scaling_summary}
 \begin{ruledtabular}
@@ -913,7 +925,7 @@ is unchanged and remains a retired-vintage value.}
 Metric & \multicolumn{1}{c}{$\alpha$} & \multicolumn{1}{c}{$R^2$} \\
 \hline
 Pauli terms      & \gvq{exp_pauli_4pt}{3.787} & 1.0000 \\
-QWC groups$^{\ddagger}$ & \gvq{exp_qwc_3pt}{4.049} & 0.9972 \\
+QWC groups$^{\ddagger}$ & \gvq{exp_qwc_3pt}{4.039} & 0.9974 \\
 1-norm $\lambda$  & \gvq{exp_lambda_4pt}{1.784} & 0.9997 \\
 Trotter $r(10^{-3})$ & 1.784 & 0.9997 \\
 Trotter $r(10^{-6})$ & 1.784 & 0.9997 \\
@@ -1829,7 +1841,10 @@ for six second-row molecules at $n_{\max} = 2$.
   molecule, because the balanced builder defaulted to that value and
   ignored the spec's geometry.  Retired cells: $\lambda_{\text{ni}}$
   $20.6/110.5/869.7/879.6/895.3/914.1$ and QWC $1{,}282/1{,}477/1{,}551$
-  for H$_2$S/PH$_3$/SiH$_4$.)}
+  for H$_2$S/PH$_3$/SiH$_4$.  QWC re-measured 2026-11-13 with ties in
+  $|$coefficient$|$ broken by the Pauli string, so the count no longer
+  depends on float round-off (Sec.~\ref{sec:measurement}); the
+  round-off-ordered values were $69$/$903$/$1{,}173$/$1{,}264$/$1{,}427$/$1{,}566$.)}
 \label{tab:second_row}
 \begin{ruledtabular}
 \begin{tabular}{lrrrrrr}
@@ -1837,12 +1852,12 @@ Molecule & $Q$ & $R$ (bohr) & \multicolumn{2}{c}{Pauli terms}
   & $\lambda_{\text{ni}}$ (Ha) & QWC \\
   & & & Comp. & Bal. & Bal. & Bal. \\
 \hline
-NaH      &  20 & 3.566 &    559 &    575 &  19.6 &    69 \\
-MgH$_2$  &  40 & 3.261 & 1{,}117 & 4{,}861 & 111.8 &   903 \\
-HCl      &  50 & 2.409 & 1{,}396 & 9{,}824 & 866.1 & 1{,}173 \\
-H$_2$S   &  60 & 2.534 & 1{,}675 & 13{,}863 & 873.6 & 1{,}264 \\
-PH$_3$   &  70 & 2.680 & 1{,}954 & 18{,}854 & 889.3 & 1{,}427 \\
-SiH$_4$  &  80 & 2.800 & 2{,}233 & 24{,}745 & 909.2 & 1{,}566 \\
+NaH      &  20 & 3.566 &    559 &    575 &  19.6 &    68 \\
+MgH$_2$  &  40 & 3.261 & 1{,}117 & 4{,}861 & 111.8 &   875 \\
+HCl      &  50 & 2.409 & 1{,}396 & 9{,}824 & 866.1 & 1{,}212 \\
+H$_2$S   &  60 & 2.534 & 1{,}675 & 13{,}863 & 873.6 & 1{,}295 \\
+PH$_3$   &  70 & 2.680 & 1{,}954 & 18{,}854 & 889.3 & 1{,}486 \\
+SiH$_4$  &  80 & 2.800 & 2{,}233 & 24{,}745 & 909.2 & 1{,}577 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -2144,7 +2159,9 @@ $\lambda_{\mathrm{ni}}$ is the non-identity 1-norm;
 grouping). ``scalar'' columns repeat the spinless encoding of
 \S\ref{sec:composed} at the same spec topology for reference.
 Counts are non-identity Pauli terms; $\lambda_{\mathrm{ni}}$ is the
-  corresponding 1-norm; QWC groups are greedy.  \emph{Re-measured
+  corresponding 1-norm; QWC groups are greedy (re-measured 2026-11-13
+  with a deterministic tie-break, Sec.~\ref{sec:measurement}; were $142$
+  and $11{,}938$/$11{,}948$/$11{,}925$).  \emph{Re-measured
   2026-08-30} under the corrected Condon--Shortley angular factor order
   (retired values: $N_{\mathrm{Pauli}} = 1{,}413$ / $942$ / $89{,}226$ /
   $59{,}484$ and $\lambda = 40.59$ / $143.96$ / $18.68$ / $218.78$ /
@@ -2169,12 +2186,12 @@ $n_{\max}$ & Mol. & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $\lambda_{\mathr
 1 & LiH &  6 &        9 &  10.15 &      1 \\
 1 & BeH &  6 &        9 &  63.44 &      1 \\
 1 & CaH &  4 &        6 &   2.03 &      1 \\
-2 & LiH & 30 &  1{,}501 &  39.53 &    142 \\
-2 & BeH & 30 &  1{,}501 & 142.52 &    142 \\
-2 & CaH & 20 &      998 &  17.91 &    142 \\
-3 & LiH & 84 & 90{,}114 & 208.79 & 11{,}938 \\
-3 & BeH & 84 & 90{,}114 & 400.01 & 11{,}948 \\
-3 & CaH & 56 & 60{,}060 & 119.35 & 11{,}925 \\
+2 & LiH & 30 &  1{,}501 &  39.53 &    140 \\
+2 & BeH & 30 &  1{,}501 & 142.52 &    140 \\
+2 & CaH & 20 &      998 &  17.91 &    140 \\
+3 & LiH & 84 & 90{,}114 & 208.79 & 11{,}940 \\
+3 & BeH & 84 & 90{,}114 & 400.01 & 11{,}935 \\
+3 & CaH & 56 & 60{,}060 & 119.35 & 11{,}935 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -2186,7 +2203,7 @@ Three observations on Table~\ref{tab:spinor_resource}:
     $n_{\max}$, LiH and BeH give \emph{identical} Pauli counts
     ($9$, $1{,}501$, $90{,}114$ at $n_{\max}=1,2,3$) despite different
     nuclear charges and valence configurations, and the QWC counts agree
-    across all three molecules at each basis ($1$, $142$, $\approx\!11.9$k)
+    across all three molecules at each basis ($1$, $140$, $\approx\!11.9$k)
     even where $Q$ differs (CaH at $Q=20$ against $Q=30$).  This is what the
     general scaling law of \S\ref{sec:composed} predicts:\ the composed
     count depends on $Q$ and on the angular structure, not on nuclear
@@ -2215,7 +2232,7 @@ The relativistic non-identity 1-norm $\lambda_{\mathrm{ni}}$ is
     $\lambda$ dominates query complexity~\cite{ChildsBerry}.
 
   \item \emph{QWC grouping cost grows sharply with basis.} The
-    relativistic LiH encoding produces $1$, $142$ and $11{,}938$ QWC groups
+    relativistic LiH encoding produces $1$, $140$ and $11{,}940$ QWC groups
     at $n_{\max}=1,2,3$ (Table~\ref{tab:spinor_resource}) --- roughly two
     orders of magnitude per basis step.  No scalar-versus-relativistic
     multiplier is quoted here, for the reason given in observation~2; the
@@ -2786,7 +2803,7 @@ The results of Secs.~\ref{sec:measurement}--\ref{sec:onenorm}
 show that the three cost metrics---term count, measurement groups,
 and 1-norm---respond differently to the selection-rule sparsity.  Only the
 term count and the 1-norm benefit; the measurement-group count does not,
-its exponent ($4.05$) exceeding the term exponent ($3.79$) and lying inside
+its exponent ($4.04$) exceeding the term exponent ($3.79$) and lying inside
 the Gaussian $O(Q^{4\text{--}5})$ band.  For first-order Trotterization, the gate count per
 step scales as $O(N_{\mathrm{Pauli}} \cdot \bar{w})$ where $\bar{w}$
 is the average Pauli weight~\cite{childs2021}, but the
@@ -2798,7 +2815,7 @@ suggest.
 
 For VQE on near-term hardware, the shot budget scales with the number
 of QWC measurement groups (Sec.~\ref{sec:measurement}).  The
-$O(Q^{4.05})$ group scaling (re-measured 2026-08-30; retired:
+$O(Q^{4.04})$ group scaling (re-measured 2026-08-30; retired:
 $O(Q^{3.36})$), combined with the coefficient
 concentration noted above, implies that the GeoVac lattice basis
 provides a 1-norm advantage but \emph{not} a measurement-group one:\
@@ -3460,7 +3477,7 @@ across three operationally relevant cost metrics:
   retired exponent $3.15$ gave $Q^{1.0\text{--}1.5}$).  The load-bearing
   advantage is the exact $Q$-linearity across molecules, not this
   within-molecule margin.
-\item \textbf{QWC measurement groups:} $O(Q^{4.05})$, slightly steeper
+\item \textbf{QWC measurement groups:} $O(Q^{4.04})$, slightly steeper
   than the term count, so the shot budget for variational algorithms is
   \emph{not} a source of advantage under the exact rule (re-measured
   2026-08-30; the retired pair-diagonal fit gave $O(Q^{3.36})$, below the

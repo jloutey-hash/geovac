@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.24] - 2026-11-13
+
+**Greedy QWC counts made independent of round-off (pre-registered QT); `geovac-hamiltonians` turned into a front
+door to `geovac` (PI-directed).**
+
+### Found
+- `measurement_grouping.qwc_groups` sorted terms by |coefficient| alone, so coefficients equal by symmetry were
+  visited in round-off order and the greedy count followed it: a 1e-13 relative perturbation moved composed LiH
+  64 -> 76 groups, NaH 69 -> 78, H2O balanced 1,494 -> 1,401. The old order moves on 38 of the 43 audited systems.
+- `geovac-hamiltonians` (the package the README tells people to install) carried its own copy of the builder,
+  last synced at v5.20.0 and still on the retired pair-diagonal ERI rule: LiH 334 terms (library 838), BeH2 556,
+  H2O 778, He 120, five systems only. The v6.7.23 note that its systems were "unaffected" was true only of the
+  OpenFermion drop.
+
+### Changed
+- `geovac/measurement_grouping.py`: `_insertion_order` -- descending |coefficient|, every run within 1e-9
+  (relative) of its largest treated as a tie and ordered by Pauli string. Pre-registered as a 10-significant-digit
+  key (`docs/predictions/2026-11-13_qwc_tiebreak.md`); that key failed QT1 because composed coefficients are exact
+  binary fractions (0.12158203125) sitting halfway at the 10th digit, so the run-based order replaced it.
+  Scored: QT1 MISSED as registered / HELD for the shipped order (all 43 systems invariant), QT2 MISSED (PH3
+  +4.1%, HCl +3.3%, MgH2 -3.1%; registered bound 3%), QT3 HELD (composed rows stay 64), QT4 HELD (He exponent
+  4.049 -> 4.039).
+- Re-measured (`debug/qwc_tiebreak_audit.py`, `debug/data/qwc_tiebreak_audit.json`): balanced NaH/KH 69 -> 68,
+  MgH2 903 -> 875, CaH2 898 -> 873, HCl 1,173 -> 1,212, HBr 1,176 -> 1,207, H2S/H2Se 1,264 -> 1,295, PH3
+  1,427 -> 1,486, AsH3 1,468 -> 1,487, SiH4 1,566 -> 1,577, GeH4 1,562 -> 1,568, LiH 629 -> 631, BeH2
+  1,220 -> 1,251, H2O 1,494 -> 1,525; coupled LiH 630 -> 634; relativistic n_max = 2 142 -> 140 (all five), n_max = 3
+  LiH 11,938 -> 11,940, BeH 11,948 -> 11,935, CaH 11,925 -> 11,935; He n_max = 2, 3, 4 63 -> 64, 5,574 -> 5,558,
+  86,251 -> 86,222; He QWC exponent 4.049 -> 4.039 (R^2 0.9974; abstract Q^4.05 -> Q^4.04). Unchanged: every
+  composed row (64), the STO-3G H2/He rows, relativistic n_max = 1.
+- Papers 14 (abstract, tab:qwc, sec:measurement method, eq:qwc_scaling, eq:exact_exponents, tab:scaling_summary,
+  tab:second_row, tab:spinor_resource and its observations, discussion and conclusion), 19 (tab:resources and
+  text), 20 (tab:resources, tab:paper20_tier2, tab:molecules with a dated note, the H2O text) and the group-4
+  synthesis; each table carries a dated note with the old values. Registry: he_n2/3/4_qwc, nah/mgh2/sih4
+  balanced_qwc (sih4 had held the retired LiH-geometry 1551 while the papers carried 1566), exp_qwc_3pt; 5574,
+  86251, 4.049, 1551 registered as retired (each fires on the old wording; C21 PASS on the papers).
+  `tests/test_paper20_balanced_lambda.py` pins updated. All four papers compile three-pass, 0 undefined.
+- `tests/test_measurement_grouping.py::TestDeterministicOrder` (4 tests, written as a separate step): composed
+  LiH count invariant under three 1e-13 perturbations, groups independent of dict order. Fire-tested: size-only
+  order fails 4/4 (76/71/75), the 10-digit key 3/4 (69/70/68).
+- `geovac-hamiltonians` 0.3.0: the seven vendored modules removed (in git history); `__init__.py` re-exports
+  `geovac.ecosystem_export.hamiltonian`/`GeoVacHamiltonian` and `geovac.pk_partitioning.pk_classical_energy`;
+  `pyproject.toml` depends on `geovac @ git+https://github.com/jloutey-hash/geovac.git` (wrong repository URLs
+  fixed); README rewritten without the retired figures (Q^2.5, "190x", "integer eigenvalues"); its own tests
+  reduced to smoke tests. Guard `tests/test_geovac_hamiltonians_shim.py` (3 tests) fire-tested 3/3 against the
+  0.2.0 package. Paper 20's install line (`pip install geovac-hamiltonians`, not on PyPI) and
+  `docs/geovac_positioning.md` ("standalone wheel with no heavy dependencies") corrected.
+
+### Not changed (flagged)
+- LiH STO-3G 179 groups (Papers 19, 20, synthesis): its build script is not on file and was not re-measured;
+  the OpenFermion-cached LiH STO-3G (1.45 A) gives 631 terms but 175/178 groups, so it is not the source.
+  Paper 19's prolate Route C (2,810 groups) has no script either. He n_max = 4 invariance not run (~1 h).
+- Installing the shim from GitHub pulls `geovac` from the pushed `main`, so it serves the old code until a push.
+
 ## [v6.7.23] - 2026-11-13
 
 **OpenFermion's small-term drop: audited, fixed at the source, three helium counts corrected (PI-directed).**

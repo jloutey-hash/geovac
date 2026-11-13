@@ -51,22 +51,25 @@ def _n_pauli_nonid(res: dict) -> int:
 # 32.2 / 128.0 / 877.0 / 877.3, QWC 1282 / 1477 / 1551 / 1175.
 # See debug/qa/balanced_lambda_geometry_finding.md.
 #
+# QWC pinned 2026-11-13 under the deterministic tie-break (v6.7.24; the
+# round-off-ordered values were 69/903/1173/1264/1427/1566 and
+# 69/898/1176/1264/1468/1562).
 # QWC is pinned here too, but it is NOT a structural quantity: the greedy
 # grouper's count moves with geometry (unlike the Pauli count, which does
 # not).  See tests/test_paper20_geometry_independence.py.
 _BALANCED_TABLE = [
-    ('NaH',  nah_spec,  None,    575,  19.6,   69),
-    ('MgH2', mgh2_spec, None,   4861, 111.8,  903),
-    ('HCl',  hcl_spec,  None,   9824, 866.1, 1173),
-    ('H2S',  h2s_spec,  None,  13863, 873.6, 1264),
-    ('PH3',  ph3_spec,  None,  18854, 889.3, 1427),
-    ('SiH4', sih4_spec, None,  24745, 909.2, 1566),
-    ('KH',   kh_spec,   None,    575,  28.1,   69),
-    ('CaH2', cah2_spec, None,   4861, 123.8,  898),
-    ('HBr',  hbr_spec,  None,   9824, 875.3, 1176),
-    ('H2Se', h2se_spec, None,  13863, 883.4, 1264),
-    ('AsH3', ash3_spec, None,  18854, 885.2, 1468),
-    ('GeH4', geh4_spec, None,  24745, 874.8, 1562),
+    ('NaH',  nah_spec,  None,    575,  19.6,   68),
+    ('MgH2', mgh2_spec, None,   4861, 111.8,  875),
+    ('HCl',  hcl_spec,  None,   9824, 866.1, 1212),
+    ('H2S',  h2s_spec,  None,  13863, 873.6, 1295),
+    ('PH3',  ph3_spec,  None,  18854, 889.3, 1486),
+    ('SiH4', sih4_spec, None,  24745, 909.2, 1577),
+    ('KH',   kh_spec,   None,    575,  28.1,   68),
+    ('CaH2', cah2_spec, None,   4861, 123.8,  873),
+    ('HBr',  hbr_spec,  None,   9824, 875.3, 1207),
+    ('H2Se', h2se_spec, None,  13863, 883.4, 1295),
+    ('AsH3', ash3_spec, None,  18854, 885.2, 1487),
+    ('GeH4', geh4_spec, None,  24745, 874.8, 1568),
 ]
 
 # Retired rule-A cells (must never re-surface as live values): NaH/KH 239,

@@ -14,14 +14,14 @@ global-M_L ERI rule AND helium's physical (diagonal) one-body operator,
 re-measured 2026-09-25 (fit over n_max=2..5, Q=10..110):
     N_Pauli ~ Q^3.785 (R^2 1.0000, 4 pts)
     lambda  ~ Q^1.784 (R^2 0.9997, 4 pts)
-    QWC     ~ Q^4.049 (R^2 0.9972, 3 pts -- the Q=110 point carries 2.4M
+    QWC     ~ Q^4.039 (R^2 0.9974, 3 pts; 4.049 before the v6.7.24 tie-break -- Q=110 carries 2.4M
               Pauli terms against an O(N^2) grouping and is infeasible)
 Retired: 3.773 / 1.774 / 4.013 (the +1/16 graph-hop 'hybrid' h1,
 2026-08-30..09-25); 3.15 / 1.69 / 3.36 (pair-diagonal sign error).  The QWC
 exponent sits ABOVE the Pauli exponent and inside the Gaussian O(Q^4-5)
 band, so no measurement-group scaling advantage is claimed.
 Recomputed 3-point (n_max=2..4) subset, which is what these tests run:
-N_Pauli ~ Q^3.795, 1-norm ~ Q^1.802, QWC ~ Q^4.049
+N_Pauli ~ Q^3.795, 1-norm ~ Q^1.802, QWC ~ Q^4.039
 (see debug/data/library_he_fix.jsonl, debug/library_he_fits.py).  The
 n_max=5 point (Q=110) is omitted here: its build alone is ~28-65 min.
 
@@ -149,7 +149,7 @@ def test_one_norm_scaling_exponent(he_sweep):
 
 @pytest.mark.slow
 def test_qwc_group_scaling_exponent(he_sweep):
-    """QWC groups ~ Q^alpha, exact rule: 4.013 (3 pts).
+    """QWC groups ~ Q^alpha, exact rule: 4.039 (3 pts; 4.013 under the retired hop h1).
 
     Retired pair-diagonal value 3.36.  The band moved by more than its own
     width, which is why this test had to be re-centred rather than widened:

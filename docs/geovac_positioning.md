@@ -53,7 +53,7 @@ print(f"{H.n_terms} Pauli terms, {H.n_qubits} qubits")
 qiskit_op = H.to_qiskit()  # SparsePauliOp for VQE
 ```
 
-The `geovac-hamiltonians` package is a standalone wheel with no heavy dependencies. Export to OpenFermion, Qiskit, and PennyLane is available. The full `geovac` package supports all 30 molecules with `hamiltonian('LiH', R=3.015)` API.
+The `geovac-hamiltonians` package is a front door to the full `geovac` package (it installs it and re-exports its `hamiltonian()`), so it covers the whole 37-system library, e.g. `hamiltonian('LiH', R=3.015)`. Export to OpenFermion, Qiskit, and PennyLane is available.
 
 ## Collaboration Opportunities
 

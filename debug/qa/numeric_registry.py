@@ -793,17 +793,20 @@ MEASURED = {
         provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
         aliases={}),
     "nah_balanced_qwc": dict(
-        value=69, convention="QWC groups, balanced", q=20,
-        provenance="MEASURED 2026-08-30; KH ties at 69 (the only "
-                   "isostructural pair that does)",
+        value=68, convention="QWC groups, balanced", q=20,
+        provenance="MEASURED 2026-11-13 debug/qwc_tiebreak_audit.py (deterministic tie-break, v6.7.24); "
+                   "KH ties at 68, as do H2S/H2Se",
         aliases={}),
     "mgh2_balanced_qwc": dict(
-        value=903, convention="QWC groups, balanced", q=40,
-        provenance="MEASURED 2026-08-30; CaH2 partner is 898, NOT equal",
+        value=875, convention="QWC groups, balanced", q=40,
+        provenance="MEASURED 2026-11-13 debug/qwc_tiebreak_audit.py (deterministic tie-break, v6.7.24); "
+                   "CaH2 partner is 873, NOT equal",
         aliases={}),
     "sih4_balanced_qwc": dict(
-        value=1551, convention="QWC groups, balanced", q=80,
-        provenance="MEASURED 2026-08-30; GeH4 partner is 1562, NOT equal",
+        value=1577, convention="QWC groups, balanced", q=80,
+        provenance="MEASURED 2026-11-13 debug/qwc_tiebreak_audit.py (deterministic tie-break, v6.7.24; "
+                   "the 1551 held here before was the retired LiH-geometry value, the papers carried 1566); "
+                   "GeH4 partner is 1568, NOT equal",
         aliases={}),
 
     # ---- composed / balanced 1-norms, exact global-M_L rule -------------
@@ -915,15 +918,16 @@ MEASURED = {
         value=781.257, convention="non-identity 1-norm (Ha)", q=110,
         provenance="MEASURED 2026-09-25 debug/library_he_fix.py (781.25697)"),
 
-    "he_n2_qwc": dict(value=63, convention="greedy QWC groups", q=10,
-                      provenance="MEASURED 2026-09-25 debug/library_he_fix.py "
-                                 "(physical h1; composed route 64 -- greedy is "
-                                 "order-sensitive)"),
-    "he_n3_qwc": dict(value=5574, convention="greedy QWC groups", q=28,
-                      provenance="MEASURED 2026-09-25 (physical h1)"),
-    "he_n4_qwc": dict(value=86251, convention="greedy QWC groups", q=60,
+    "he_n2_qwc": dict(value=64, convention="greedy QWC groups", q=10,
+                      provenance="MEASURED 2026-11-13 debug/qwc_tiebreak_audit.py (physical h1; "
+                                 "deterministic tie-break, v6.7.24; 63 under round-off order)"),
+    "he_n3_qwc": dict(value=5558, convention="greedy QWC groups", q=28,
+                      provenance="MEASURED 2026-11-13 debug/qwc_tiebreak_audit.py (physical h1; "
+                                 "deterministic tie-break, v6.7.24)"),
+    "he_n4_qwc": dict(value=86222, convention="greedy QWC groups", q=60,
                       provenance="MEASURED 2026-11-13 debug/library_he_fix.py 4 library --qwc "
-                                 "(physical h1, full operator after the v6.7.23 drop fix), ~65 min"),
+                                 "(physical h1, full operator after the v6.7.23 drop fix; deterministic "
+                                 "tie-break, v6.7.24; 86251 under round-off order), ~60 min"),
 
     # ---- He fixed-k=Z hydrogenic CI with the PHYSICAL h1 (2026-09-25) ----
     # Replaces the retired "graph-native CI 0.216% (n_max=7)" headline, which
@@ -1021,8 +1025,9 @@ MEASURED = {
         provenance="MEASURED 2026-09-25 (physical h1); R^2 0.9997, "
                    "max|log resid| 0.0433"),
     "exp_qwc_3pt": dict(
-        value=4.049, convention="log-log exponent, 3 points Q=10..60",
-        provenance="MEASURED 2026-09-25 (physical h1); R^2 0.9972.  Q=110 "
+        value=4.03946, convention="log-log exponent, 3 points Q=10..60",
+        provenance="MEASURED 2026-11-13 from he_n2/3/4_qwc = 64/5558/86222 (deterministic tie-break, "
+                   "v6.7.24; 4.049 under round-off order); R^2 0.9974.  Q=110 "
                    "infeasible: 2.4M terms against O(N^2) greedy grouping"),
     "exp_pauli_3pt": dict(
         value=3.7957, convention="log-log exponent, 3 points Q=10..60",
@@ -1784,6 +1789,11 @@ RETIRED = {
     2434282: ("he_n5_pauli",        r"Pauli|terms",            r"retired|lost|drop"),
     21607:   ("he_ccpvtz_pauli",    r"Pauli|terms|cc-pVTZ",    r"retired|lost|drop"),
     86249:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|lost|drop"),
+    # Retired 2026-11-13 (v6.7.24): greedy QWC counts under the round-off insertion order.
+    5574:    ("he_n3_qwc",          r"QWC|measurement group",  r"retired|round-off|tie"),
+    86251:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|round-off|tie|86\{?,\}?249"),
+    4.049:   ("exp_qwc_3pt",        r"exponent|alpha|scaling|QWC", r"retired|round-off|tie|was"),
+    1551:    ("sih4_balanced_qwc",  r"QWC|measurement group",  r"retired|geometry|3\.015"),
     3.7851:  ("exp_pauli_4pt",      r"exponent|alpha|scaling", r"retired|lost|drop"),
     5569:    ("he_n3_qwc",          r"QWC|measurement group",  r"retired|hop|hybrid"),
     3.773:   ("exp_pauli_4pt",      r"exponent|alpha|scaling", r"retired|hop|hybrid"),

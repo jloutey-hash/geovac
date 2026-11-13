@@ -11,7 +11,8 @@ of QWC groups determines the minimum number of distinct measurement
 circuits needed to estimate all expectation values.
 
 Algorithm: greedy sorted insertion (Verteletskyi et al., JCP 152,
-124114, 2020).  Terms are sorted by descending |coefficient| and
+124114, 2020).  Terms are sorted by descending |coefficient| (ties
+broken by the Pauli string, so the count does not depend on round-off) and
 inserted into the first compatible existing group.  This is O(N^2)
 in the number of Pauli terms but fast enough for Q < 200.
 
@@ -110,6 +111,33 @@ def _qwc_compatible_with_group(
 # Greedy sorted-insertion QWC grouping
 # ---------------------------------------------------------------------------
 
+QWC_TIE_RTOL = 1e-9
+
+
+def _insertion_order(
+    terms: List[Tuple[PauliTerm, complex]],
+) -> List[Tuple[PauliTerm, complex]]:
+    """Greedy insertion order: descending |coefficient|, with every run of
+    magnitudes within QWC_TIE_RTOL (relative) of the run's largest treated as
+    a tie and ordered by the Pauli string.
+
+    Symmetry-equal coefficients differ only by float round-off, so without the
+    tie-break their order -- and the greedy count -- follows the round-off.
+    Runs rather than decimal rounding: many coefficients are exact binary
+    fractions sitting on a decimal rounding boundary (0.12158203125)."""
+    by_size = sorted(terms, key=lambda x: -abs(x[1]))
+    out: List[Tuple[PauliTerm, complex]] = []
+    i = 0
+    while i < len(by_size):
+        head = abs(by_size[i][1])
+        j = i + 1
+        while j < len(by_size) and head - abs(by_size[j][1]) <= QWC_TIE_RTOL * head:
+            j += 1
+        out.extend(sorted(by_size[i:j], key=lambda x: x[0]))
+        i = j
+    return out
+
+
 def qwc_groups(
     qubit_op: QubitOperator,
 ) -> List[List[Tuple[PauliTerm, complex]]]:
@@ -117,7 +145,7 @@ def qwc_groups(
     Partition a QubitOperator into qubitwise-commuting (QWC) groups.
 
     Uses greedy sorted insertion: terms are sorted by descending
-    |coefficient|, then each is placed into the first existing group
+    |coefficient| (ties, to relative QWC_TIE_RTOL, by Pauli string), then each is placed into the first existing group
     where it is QWC-compatible.  If no group fits, a new group is created.
 
     Parameters
@@ -135,9 +163,7 @@ def qwc_groups(
     ----------
     Verteletskyi, Yen & Izmaylov, JCP 152, 124114 (2020).
     """
-    # Extract and sort terms by descending |coefficient|
-    terms = list(qubit_op.terms.items())
-    terms.sort(key=lambda x: abs(x[1]), reverse=True)
+    terms = _insertion_order(list(qubit_op.terms.items()))
 
     # Groups: list of (term_list, merged_ops_dict)
     groups: List[Tuple[List[Tuple[PauliTerm, complex]], Dict[int, str]]] = []

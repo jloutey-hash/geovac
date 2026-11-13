@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "geovac-hamiltonians"
-version = "0.2.0"
-description = "Structurally sparse qubit Hamiltonians from geometric quantum chemistry"
+version = "0.3.0"
+description = "Qubit Hamiltonians from the GeoVac library (front door to the geovac package)"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
@@ -32,8 +32,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
 ]
 dependencies = [
-    "numpy>=1.22",
-    "scipy>=1.8",
+    "geovac @ git+https://github.com/jloutey-hash/geovac.git",
     "openfermion>=1.5",
 ]
 
@@ -43,8 +42,8 @@ pennylane = ["pennylane>=0.33"]
 all = ["qiskit>=1.0", "pennylane>=0.33"]
 
 [project.urls]
-Homepage = "https://github.com/jlouthan/geometric-vacuum"
-Documentation = "https://github.com/jlouthan/geometric-vacuum"
+Homepage = "https://github.com/jloutey-hash/geovac"
+Documentation = "https://github.com/jloutey-hash/geovac"
 
 [tool.setuptools.packages.find]
 where = ["src"]

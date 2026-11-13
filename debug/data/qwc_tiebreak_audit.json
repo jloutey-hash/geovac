@@ -1,0 +1,432 @@
+{
+ "lib_LiH": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 838,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 0.2
+ },
+ "lib_H2O": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 1954,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 1.0
+ },
+ "h2_sto3g": {
+  "published": 5,
+  "locus": "P14 tab:qwc",
+  "n_terms": 15,
+  "old": 5,
+  "new": 5,
+  "old_perturbed": 5,
+  "new_perturbed": 5,
+  "seconds": 0.0
+ },
+ "he_sto3g": {
+  "published": 1,
+  "locus": "P14 tab:qwc",
+  "n_terms": 4,
+  "old": 1,
+  "new": 1,
+  "old_perturbed": 1,
+  "new_perturbed": 1,
+  "seconds": 0.0
+ },
+ "he_n2": {
+  "published": 63,
+  "locus": "P14 tab:qwc",
+  "n_terms": 280,
+  "old": 63,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 0.1
+ },
+ "lih_sto3g_of_cache": {
+  "published": 179,
+  "locus": "registry lih_sto3g_qwc (source unconfirmed)",
+  "n_terms": 631,
+  "old": 175,
+  "new": 178,
+  "old_perturbed": 177,
+  "new_perturbed": 178,
+  "seconds": 0.2
+ },
+ "bal_nah": {
+  "published": 69,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 575,
+  "old": 69,
+  "new": 68,
+  "old_perturbed": 78,
+  "new_perturbed": 68,
+  "seconds": 0.3
+ },
+ "bal_kh": {
+  "published": 69,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 575,
+  "old": 69,
+  "new": 68,
+  "old_perturbed": 78,
+  "new_perturbed": 68,
+  "seconds": 0.3
+ },
+ "rel_lih_n1": {
+  "published": 1,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 10,
+  "old": 1,
+  "new": 1,
+  "old_perturbed": 1,
+  "new_perturbed": 1,
+  "seconds": 0.1
+ },
+ "rel_lih_n2": {
+  "published": 142,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 1502,
+  "old": 142,
+  "new": 140,
+  "old_perturbed": 147,
+  "new_perturbed": 140,
+  "seconds": 0.4
+ },
+ "rel_cah_n2": {
+  "published": 142,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 999,
+  "old": 142,
+  "new": 140,
+  "old_perturbed": 145,
+  "new_perturbed": 140,
+  "seconds": 0.2
+ },
+ "lib_BeH2": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 1396,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 0.6
+ },
+ "lib_HF": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 1675,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 1.2
+ },
+ "lib_NH3": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 2233,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 2.4
+ },
+ "lib_CH4": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 2512,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 3.3
+ },
+ "lib_LiF": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 1954,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 1.6
+ },
+ "lib_CO": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 2791,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 4.5
+ },
+ "lib_N2": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 2791,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 4.1
+ },
+ "lib_F2": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 2791,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 4.4
+ },
+ "lib_NaCl": {
+  "published": 64,
+  "locus": "P20 tab:molecules/tab:multicenter",
+  "n_terms": 1396,
+  "old": 64,
+  "new": 64,
+  "old_perturbed": 76,
+  "new_perturbed": 64,
+  "seconds": 1.0
+ },
+ "bal_mgh2": {
+  "published": 903,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 4861,
+  "old": 903,
+  "new": 875,
+  "old_perturbed": 902,
+  "new_perturbed": 875,
+  "seconds": 6.6
+ },
+ "bal_cah2": {
+  "published": 898,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 4861,
+  "old": 898,
+  "new": 873,
+  "old_perturbed": 908,
+  "new_perturbed": 873,
+  "seconds": 6.2
+ },
+ "bal_hcl": {
+  "published": 1173,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 9824,
+  "old": 1173,
+  "new": 1212,
+  "old_perturbed": 1218,
+  "new_perturbed": 1212,
+  "seconds": 14.4
+ },
+ "bal_hbr": {
+  "published": 1176,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 9824,
+  "old": 1176,
+  "new": 1207,
+  "old_perturbed": 1219,
+  "new_perturbed": 1207,
+  "seconds": 14.3
+ },
+ "bal_h2s": {
+  "published": 1264,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 13863,
+  "old": 1264,
+  "new": 1295,
+  "old_perturbed": 1342,
+  "new_perturbed": 1295,
+  "seconds": 22.1
+ },
+ "bal_h2se": {
+  "published": 1264,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 13863,
+  "old": 1264,
+  "new": 1295,
+  "old_perturbed": 1342,
+  "new_perturbed": 1295,
+  "seconds": 22.0
+ },
+ "bal_ph3": {
+  "published": 1427,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 18854,
+  "old": 1427,
+  "new": 1486,
+  "old_perturbed": 1491,
+  "new_perturbed": 1486,
+  "seconds": 31.0
+ },
+ "bal_ash3": {
+  "published": 1468,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 18854,
+  "old": 1468,
+  "new": 1487,
+  "old_perturbed": 1487,
+  "new_perturbed": 1487,
+  "seconds": 29.7
+ },
+ "bal_sih4": {
+  "published": 1566,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 24745,
+  "old": 1566,
+  "new": 1577,
+  "old_perturbed": 1642,
+  "new_perturbed": 1577,
+  "seconds": 40.8
+ },
+ "bal_geh4": {
+  "published": 1562,
+  "locus": "P20 tab:molecules; P14 tab:second_row",
+  "n_terms": 24745,
+  "old": 1562,
+  "new": 1568,
+  "old_perturbed": 1652,
+  "new_perturbed": 1568,
+  "seconds": 41.9
+ },
+ "bal_lih": {
+  "published": 629,
+  "locus": "P19 tab:resources",
+  "n_terms": 2726,
+  "old": 629,
+  "new": 631,
+  "old_perturbed": 634,
+  "new_perturbed": 631,
+  "seconds": 3.1
+ },
+ "bal_h2o": {
+  "published": 1494,
+  "locus": "P20 sec H2O",
+  "n_terms": 19742,
+  "old": 1494,
+  "new": 1525,
+  "old_perturbed": 1401,
+  "new_perturbed": 1525,
+  "seconds": 33.0
+ },
+ "coupled_lih": {
+  "published": 630,
+  "locus": "P19 tab:resources",
+  "n_terms": 2702,
+  "old": 630,
+  "new": 634,
+  "old_perturbed": 634,
+  "new_perturbed": 634,
+  "seconds": 2.6
+ },
+ "rel_beh_n1": {
+  "published": 1,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 10,
+  "old": 1,
+  "new": 1,
+  "old_perturbed": 1,
+  "new_perturbed": 1,
+  "seconds": 0.1
+ },
+ "rel_cah_n1": {
+  "published": 1,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 7,
+  "old": 1,
+  "new": 1,
+  "old_perturbed": 1,
+  "new_perturbed": 1,
+  "seconds": 0.0
+ },
+ "rel_beh_n2": {
+  "published": 142,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 1502,
+  "old": 142,
+  "new": 140,
+  "old_perturbed": 147,
+  "new_perturbed": 140,
+  "seconds": 0.5
+ },
+ "rel_srh_n2": {
+  "published": 142,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 999,
+  "old": 142,
+  "new": 140,
+  "old_perturbed": 145,
+  "new_perturbed": 140,
+  "seconds": 0.4
+ },
+ "rel_bah_n2": {
+  "published": 142,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 999,
+  "old": 142,
+  "new": 140,
+  "old_perturbed": 145,
+  "new_perturbed": 140,
+  "seconds": 0.3
+ },
+ "he_n3": {
+  "published": 5574,
+  "locus": "P14 tab:qwc",
+  "n_terms": 14047,
+  "old": 5574,
+  "new": 5558,
+  "old_perturbed": 5575,
+  "new_perturbed": 5558,
+  "seconds": 29.2
+ },
+ "rel_lih_n3": {
+  "published": 11938,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 90115,
+  "old": 11938,
+  "new": 11940,
+  "old_perturbed": 11935,
+  "new_perturbed": 11940,
+  "seconds": 514.3
+ },
+ "rel_beh_n3": {
+  "published": 11948,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 90115,
+  "old": 11948,
+  "new": 11935,
+  "old_perturbed": 11937,
+  "new_perturbed": 11935,
+  "seconds": 506.6
+ },
+ "rel_cah_n3": {
+  "published": 11925,
+  "locus": "P14 tab:spinor_resource; P20 tab:paper20_tier2",
+  "n_terms": 60061,
+  "old": 11925,
+  "new": 11935,
+  "old_perturbed": 11937,
+  "new_perturbed": 11935,
+  "seconds": 354.4
+ },
+ "bal_beh2": {
+  "published": 1220,
+  "locus": "P20 tab:resources",
+  "n_terms": 8868,
+  "old": 1220,
+  "new": 1251,
+  "old_perturbed": 1163,
+  "new_perturbed": 1251,
+  "seconds": 11.2
+ }
+}

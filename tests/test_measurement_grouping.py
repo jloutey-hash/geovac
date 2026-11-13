@@ -334,3 +334,49 @@ class TestScaling:
             f"{a3.n_qwc_groups} groups for {a3.n_pauli_terms} terms "
             f"(ratio {ratio3:.4f})"
         )
+
+
+# ---------------------------------------------------------------------------
+# Deterministic insertion order (v6.7.24, pre-registration QT)
+# ---------------------------------------------------------------------------
+
+def _roundoff_perturbed(qop: QubitOperator, seed: int = 0) -> QubitOperator:
+    """Every coefficient times (1 + 1e-13 u), u ~ U[-1, 1]: a change at the
+    level of float round-off, nothing physical."""
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    keys = sorted(qop.terms)
+    out = QubitOperator()
+    out.terms = {k: qop.terms[k] * (1 + 1e-13 * u)
+                 for k, u in zip(keys, rng.uniform(-1, 1, len(keys)))}
+    return out
+
+
+class TestDeterministicOrder:
+    """Symmetry-equal coefficients differ only by round-off; the greedy
+    count must not follow it.  Composed LiH (838 terms, published 64
+    groups) is the probe: its coefficients are exact binary fractions such
+    as 0.12158203125, which sit on a decimal rounding boundary."""
+
+    @pytest.fixture(scope="class")
+    def lih(self):
+        from geovac.ecosystem_export import hamiltonian
+        return hamiltonian('LiH')._qubit_op
+
+    @pytest.mark.parametrize("seed", [0, 1, 2])
+    def test_count_invariant_under_roundoff(self, lih, seed):
+        """64 groups before and after a 1e-13 relative perturbation.
+        Rejects the size-only sort (76 at seed 0) and a 10-significant-digit
+        rounding key (69 at seed 0: halfway values split by round-off)."""
+        assert count_qwc_groups(lih) == 64
+        assert count_qwc_groups(_roundoff_perturbed(lih, seed)) == 64
+
+    def test_groups_independent_of_dict_order(self, lih):
+        """Same groups, term for term, when the operator's terms are stored
+        in reverse order.  Rejects any order that falls back on insertion
+        order for ties (Python's sort is stable)."""
+        rev = QubitOperator()
+        rev.terms = dict(reversed(list(lih.terms.items())))
+        a = [[t for t, _ in g] for g in qwc_groups(lih)]
+        b = [[t for t, _ in g] for g in qwc_groups(rev)]
+        assert a == b
