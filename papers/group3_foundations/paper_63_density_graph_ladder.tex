@@ -72,8 +72,9 @@ every slice tested the three-electron fibre is a K3 function integrated
 once and at generic scales it has no relation to the K3 and elliptic periods
 in any basis tried;\ rings are ordered by uniqueness, not by count;\ and the
 integrated value sits at or below its fibre.  The caps are stated:\ the
-rung of the three-dimensional integral is computed only through four
-densities (every $s$-type tree's reduces to one dimension), the
+three-dimensional fibre of a Coulomb tree at the fingerprint weights has
+composition factors of order at most $n$ for every $n$, but is shown to reach
+rung $n$ only through four densities, the
 dictionary's rung bound only for $s$-type trees on the one-scale slice, the
 only ring tested is the triangle, and the generic fibre's content is
 evidence.
@@ -348,8 +349,10 @@ holomorphic period, and the integrated value, over the Feynman parameters
 and separations, may sit lower;\ and the real three-dimensional integral of
 every tree reduces to one-dimensional Bessel integrals
 (Proposition~\ref{prop:tree_reduction}), which the dictionary does not
-supply, while the rung of the reduced integral is computed below for the
-chain of three and the two trees of four only.  Gaussian orbitals and Gaussian geminals are outside
+supply, and with Coulomb kernels at the fingerprint weights its
+composition factors have order at most $n$
+(Proposition~\ref{prop:tree_rung}), while that it reaches the rung is computed
+below for the chain of three and the two trees of four only.  Gaussian orbitals and Gaussian geminals are outside
 the lemma:\ $e^{-\alpha r^2}$ is no derivative of a Yukawa, its transform is
 not rational, and Sec.~\ref{sec:density_ring} finds its integrals off the
 ladder.
@@ -573,9 +576,11 @@ densities.  Two caps apply.  These are statements about the fibre and
 its holomorphic period, so the integrated value may sit lower, as the
 two-center exchange class does (Paper~59, geminal section).  And the real
 three-dimensional integral of every tree reduces to one-dimensional Bessel
-integrals (Proposition~\ref{prop:tree_reduction} below), but its rung is
-computed only for the chain of three and the two trees of four;\ for five or
-more densities it is not.  \textbf{[SYMBOLIC +
+integrals (Proposition~\ref{prop:tree_reduction} below), with Coulomb
+kernels at the fingerprint weights its composition factors have order at most
+$n$ (Proposition~\ref{prop:tree_rung}), and that it
+reaches rung $n$ is computed only for the chain of three and the two trees of
+four.  \textbf{[SYMBOLIC +
 MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
 $(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
 $\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
@@ -657,8 +662,77 @@ agree with a Monte Carlo evaluation of the full three-dimensional integral,
 $2\times10^7$ samples with no reduction, within four standard errors (relative
 standard errors below $5\times10^{-3}$).  Guard:\
 \texttt{tests/test\_paper63\_tree\_reduction.py}.  The proposition reduces
-the integral;\ it does not give the rung of the reduced integral, which is
-computed above for $n=3,4$ only.
+the integral;\ the next one bounds its rung.
+
+\begin{proposition}[the rung bound for the three-dimensional tree]
+\label{prop:tree_rung}
+Take a tree of $n$ densities with Coulomb kernels at the fingerprint weights,
+on the slice $(t;1,\dots,1)$.  Let $\mathcal{A}=\mathbb{C}[r^2]\langle\theta\rangle$,
+$\theta=r\,d/dr$, let $L_m\in\mathcal{A}$ be the annihilator of $K_0(r)^m$,
+monic in $\theta$ of order $m+1$, and let $\phi$ be the homomorphism with
+$\phi(r^2)=t^{-2}\theta_t^2$ and $\phi(\theta)=-1-\theta_t$.  Every
+composition factor of the minimal operator of the fibre is of order one or
+is a composition factor of $\phi(L_m(\theta-\lambda))$ for some $0\le m\le
+n-1$ and integer $\lambda$;\ that operator has order at most $m+1$ and
+annihilates $\int_0^\infty K_0(tx)\,x^{\lambda}K_0(x)^m\,dx$ where the integral
+converges.  So every composition factor has order at most $n$.  For even
+$\lambda$ and $m+1\le8$, $\phi(L_m(\theta-\lambda))$ is equivalent to the
+operator of $F_{m+1}$.
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF]} \emph{The pieces.}  Grade $\mathcal{A}$ by
+$\deg\theta=1$, $\deg r^2=2$.  The Bessel module
+$B=\mathcal{A}/\mathcal{A}(\theta^2-r^2)$ is free over $\mathbb{C}[r^2]$ on
+$K_0,\theta K_0$, and on its symmetric power $\mathrm{Sym}^mB$, with basis
+$K_0^{m-a}(\theta K_0)^a$, $\theta$ raises the degree by one;\ so
+$\theta^a K_0^m=m(m-1)\cdots(m-a+1)K_0^{m-a}(\theta K_0)^a+\dots$ has a nonzero
+integer pivot, $K_0^m$ is a cyclic vector,
+$\mathrm{Sym}^mB\cong\mathcal{A}/\mathcal{A}L_m$, and $L_m$ is homogeneous of
+degree $m+1$.  A term $r^{2k}\theta^j$ of $L_m(\theta-\lambda)$ has $2k+j\le
+m+1$, and $\phi$ sends it to an operator of order $2k+j$.  \emph{The tree.}
+By Eq.~\eqref{eq:tree_reduction} a Coulomb potential obeys the radial
+Poisson equation $\theta(\theta+1)\,\Phi_eW=-4\pi r^2W$.  So if $W$ lies in
+the module $N_W$ of its subtree, $\Phi_eW$ lies in
+$r^2N_W+\mathcal{A}\,\Phi_eW$, whose quotient by $r^2N_W$ is killed by
+$\theta(\theta+1)$, an extension of pieces
+$\mathcal{A}/\mathcal{A}(\theta-\mu)$, $\mu\in\{0,-1\}$, that is
+$\mathrm{Sym}^0B$ times $r^{\mu}$;\ multiplying by $r^2$ shifts $\lambda$ by
+two.  Products of functions are images of tensor
+products over $\mathbb{C}[r^2]$, and
+$0\to\mathrm{Sym}^{a-1}B\otimes\mathrm{Sym}^{b-1}B\otimes\Lambda^2B\to\mathrm{Sym}^aB\otimes\mathrm{Sym}^bB\to\mathrm{Sym}^{a+b}B\to0$
+is exact (it is defined over $\mathbb{Q}$ and split there as
+$\mathrm{GL}_2$-representations) and commutes with
+$\theta$;\ $\Lambda^2B$ is trivial, since the Wronskian
+$y_1\theta y_2-y_2\theta y_1$ of $\theta^2y=r^2y$ is constant.  Each density
+brings one $K_0$.  By induction from the leaves, the image of the tensor product at
+the root, a module of functions containing $H=r^2\prod_w\Phi_{e}W_w$, has a
+filtration whose pieces are quotients of
+$\mathcal{A}/\mathcal{A}L_m(\theta-\lambda)$, $m\le n-1$, $\lambda\in\mathbb{Z}$,
+each piece generated by one function $h$ with $L_m(\theta-\lambda)h$ in the
+piece below.  \emph{The transfer.}  The fibre is $t^3T(H)$ with
+$T(g)=\int_0^\infty K_0(tr)\,g(r)\,dr$.  Integration by parts gives
+$T(\theta g)=-(1+\theta_t)T(g)$, and $(tr)^2K_0(tr)=\theta_t^2K_0(tr)$ gives
+$T(r^2g)=t^{-2}\theta_t^2T(g)$;\ the boundary terms vanish, since every
+function in the module carries the factor $r^2$ at $0$ and $K_0(tr)$ decays at
+infinity.  So $T(ag)=\phi(a)T(g)$, and the images of the filtration filter
+the module of the fibre with pieces that are quotients of
+$\mathcal{D}_t/\mathcal{D}_t\phi(L_m(\theta-\lambda))$, where
+$\mathcal{D}_t=\mathbb{C}(t)\langle\theta_t\rangle$.  \emph{Even $\lambda$.}
+From $r^2L_m(\theta-\lambda)=L_m(\theta-\lambda-2)\,r^2$,
+$\phi(L_m(\theta-\lambda-2))\,t^{-2}\theta_t^2=t^{-2}\theta_t^2\,\phi(L_m(\theta-\lambda))$,
+which defines a nonzero map between the two modules, of equal dimension.  If
+$\phi(L_m)$, the operator of $F_{m+1}$, is irreducible, as it is for $m+1\le8$
+(Proposition~\ref{prop:tree_bound}), these maps are isomorphisms for every even
+$\lambda$, up and down from $\lambda=0$.  \textbf{[MEASURED]} $\phi(L_2)$ is
+$4\theta^3-t^2(\theta+1)^3$ and $\phi(L_3)$ is
+Eq.~\eqref{eq:four_density_op}, exactly;\ for $m\le4$, $\phi(L_m)$ annihilates
+$F_{m+1}$ and $\phi(L_m(\theta-1))$ annihilates the odd moment
+$\int_0^\infty xK_0(tx)K_0(x)^m\,dx$ to $10^{-27}$ at 30 digits.  The
+composition factors computed above at $n=3,4$ (chain, star, path) are those
+of $F_k$, $k\le n$, and pieces of order one, inside the bound;\ none comes from
+an odd moment.  Guard:\ \texttt{tests/test\_paper63\_tree\_rung.py}.  The
+proposition bounds the fibre;\ that the piece of $F_n$ is present is computed
+for $n=3,4$ only.
 
 
 \textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
@@ -1549,8 +1623,11 @@ one-dimensional Bessel integrals
 has the composition factors of part (i) at $n=3$, derived on the
 Slater slice under the Mellin contour shift and shown on $(t;1,2)$ by
 numerical annihilation and a search modulo a prime, and at $n=4$ by
-numerical annihilation and bounded searches;\ for $n\ge5$ the
-rung of the reduced three-dimensional integral is not computed.  Part (ii) is the lesson of the three-electron chain
+numerical annihilation and bounded searches;\ for every $n$, at the
+fingerprint weights with Coulomb kernels, its composition factors have order
+at most $n$ and come from the moments of at most $n$ Bessel functions
+(Proposition~\ref{prop:tree_rung}), which is the order bound of ``nothing above
+it'' in part (i) there;\ for $n\ge5$ whether the piece of $F_n$ is present is not computed.  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
 K3 periods and $\pi^3$, but at four generic scale triples integer-relation
 searches at 340 and 400 digits in five bases built from the K3 and elliptic
@@ -1571,15 +1648,18 @@ exchange class builds the elliptic fibre and closes at genus zero, and the
 integrated three-center value leaves the two-center class as a function of
 the bond angle (Paper~59).  The conjecture fails on a Coulomb-only integral
 whose class depends on anything but the density graph, on a tree whose
-real three-dimensional reduction brings a piece above $F_n$, on a
+real three-dimensional reduction brings a piece above $F_n$ (one of order above
+$n$ is excluded for Coulomb trees at the fingerprint weights by
+Proposition~\ref{prop:tree_rung}), on a
 general-orbital fibre with a factor above its graph's $1s$ rung, or on a
 Slater-geminal integral whose class does not change at an equal-mass value
 of its exponent.  The nearest results in shape remain
 Brown's, a theorem for massless graphs~\cite{brown2009periods} and a
 conjecture for generic masses in even dimension~\cite{brown2015coaction};\
-here the masses are special and the dimension is three.  For trees the
-reduction to one dimension is Proposition~\ref{prop:tree_reduction};\ a proof
-of the rest would have to run through the Symanzik polynomials of
+here the masses are special and the dimension is three.  For Coulomb trees
+the reduction to one dimension and the bound are
+Propositions~\ref{prop:tree_reduction} and~\ref{prop:tree_rung};\ a proof of
+the rest would have to run through the Symanzik polynomials of
 $\Gamma$ with the Yukawa masses on its lines, which we have not attempted.
 
 %% ========================================================================
@@ -1637,10 +1717,10 @@ Four caps bound every statement above.  First, the rungs are read on the
 fibre and its holomorphic period;\ the integrated value may sit lower, and
 in one class it does.  Second, the real three-dimensional integral of every
 tree of $s$-type densities reduces to one-dimensional Bessel integrals
-(Proposition~\ref{prop:tree_reduction}), but the rung of the reduced integral
-is computed for the chain of three and the star and path of four only;\ for
-five or more densities the holomorphic-period statement stands and the rung
-of the three-dimensional one is not shown.  Third, the
+(Proposition~\ref{prop:tree_reduction}), at the fingerprint weights with Coulomb
+kernels its composition factors have order at most $n$ for every tree
+(Proposition~\ref{prop:tree_rung}), and that it reaches rung $n$ is computed
+for the chain of three and the star and path of four only.  Third, the
 dictionary places a general-orbital integral in the $D$-module of its graph's
 $1s$ integral;\ it keeps the holomorphic period at or below the $1s$ rung
 only for trees of $s$-type densities on the one-scale slice, and on it there
@@ -1649,8 +1729,9 @@ that every computed fibre sits on the $1s$ rung is observed, not proved.  Fourth
 generic three-electron fibre's content beyond the K3 and elliptic periods is
 evidence from integer-relation searches, not a theorem.
 
-What is open is in two layers.  Below the conjecture:\ the rung of the reduced
-three-dimensional integral for $n\ge5$;\ the ring of four;\ whether a general-orbital fibre
+What is open is in two layers.  Below the conjecture:\ whether the
+three-dimensional fibre reaches rung $n$ for $n\ge5$, and the bound for Slater
+weights and geminal kernels;\ the ring of four;\ whether a general-orbital fibre
 stays at or below its graph's $1s$ rung, which is open even for $s$-type
 trees, and whether it reaches that rung;\ and the principled widening of
 the basis of the generic-fibre searches.  Above it:\ a proof through the Symanzik polynomials that the

@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.21] - 2026-11-12
+
+**Paper 63: the three-dimensional tree fibre is bounded by the n-Bessel moments (PI-directed, item #3, option A).**
+
+### Added
+- Paper 63, Prop. tree_rung [SYMBOLIC PROOF]: for a Coulomb tree of n densities at the fingerprint weights on the
+  slice (t;1,...,1), every composition factor of the fibre's minimal operator is of order one or a factor of
+  phi(L_m(theta - lambda)), m <= n - 1, lambda an integer, where L_m annihilates K0^m in C[r^2]<theta> and
+  phi(r^2) = t^-2 theta_t^2, phi(theta) = -1 - theta_t is the integration-by-parts map of int K0(tr) g dr. So
+  every factor has order at most n (the order form of part (i)'s "nothing above it"). For even lambda and
+  m + 1 <= 8 the piece is equivalent to F_{m+1}'s operator. Proof: grading and the cyclic vector K0^m; the radial
+  Poisson equation theta(theta+1) Phi W = -4 pi r^2 W; Clebsch-Gordan with trivial Wronskian for products; the
+  transfer T(a g) = phi(a) T(g); an intertwiner by t^-2 theta^2 for even shifts. Attainment (the F_n piece
+  present) for n >= 5, odd-shift pieces, Slater weights and geminal kernels stay OPEN.
+- [MEASURED] phi(L_2), phi(L_3) are exactly F_3's operator and eq:four_density_op; for m <= 4 phi(L_m) annihilates
+  F_{m+1} and phi(L_m(theta-1)) the odd moment int x K0(tx) K0^m to 1e-27 at 30 digits.
+- `tests/test_paper63_tree_rung.py` (22 tests, written as a separate step, fire-tested 7/7).
+
+### Changed
+- Caps at abstract, sec:dictionary, sec:four_density, sec:conjecture, sec:scope, open list; group3 synthesis
+  clause; claim-test matrix row.
+- Self-check round 1: proof confirmed, 0 LARGE; 3 SMALL fixed (the induction names the subtree's product module;
+  abstract and conjecture read the result as an order bound, not a rung bound; scope qualifiers) + nits.
+
 ## [v6.7.20] - 2026-11-12
 
 **Paper 63: every tree of s-type densities reduces to one dimension (PI-directed, item #3, tree-reduction target).**
