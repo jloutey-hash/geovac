@@ -72,7 +72,8 @@ every slice tested the three-electron fibre is a K3 function integrated
 once and at generic scales it has no relation to the K3 and elliptic periods
 in any basis tried;\ rings are ordered by uniqueness, not by count;\ and the
 integrated value sits at or below its fibre.  The caps are stated:\ the
-three-dimensional reduction is shown through four densities, the
+rung of the three-dimensional integral is computed only through four
+densities (every $s$-type tree's reduces to one dimension), the
 dictionary's rung bound only for $s$-type trees on the one-scale slice, the
 only ring tested is the triangle, and the generic fibre's content is
 evidence.
@@ -344,10 +345,11 @@ weights has the same composition factors as the chain at the fingerprint
 weights (Sec.~\ref{sec:density_ring}).  Two caps it
 inherits unchanged from Paper~59:\ the rung is read on the fibre and its
 holomorphic period, and the integrated value, over the Feynman parameters
-and separations, may sit lower;\ and the reduction of the real
-three-dimensional integral to the one-dimensional Bessel-moment family, which
-the dictionary does not supply, is shown below for the chain of three and the
-two trees of four only.  Gaussian orbitals and Gaussian geminals are outside
+and separations, may sit lower;\ and the real three-dimensional integral of
+every tree reduces to one-dimensional Bessel integrals
+(Proposition~\ref{prop:tree_reduction}), which the dictionary does not
+supply, while the rung of the reduced integral is computed below for the
+chain of three and the two trees of four only.  Gaussian orbitals and Gaussian geminals are outside
 the lemma:\ $e^{-\alpha r^2}$ is no derivative of a Yukawa, its transform is
 not rational, and Sec.~\ref{sec:density_ring} finds its integrals off the
 ladder.
@@ -569,10 +571,11 @@ correlated integrals that link more densities, such as the four-electron
 bridge integrals of explicitly correlated methods taken over two-center
 densities.  Two caps apply.  These are statements about the fibre and
 its holomorphic period, so the integrated value may sit lower, as the
-two-center exchange class does (Paper~59, geminal section).  And the reduction of
-the real three-dimensional integral into the family of
-Eq.~\eqref{eq:tree} is shown only for the chain of three and the two trees
-of four below;\ for five or more densities it is not shown.  \textbf{[SYMBOLIC +
+two-center exchange class does (Paper~59, geminal section).  And the real
+three-dimensional integral of every tree reduces to one-dimensional Bessel
+integrals (Proposition~\ref{prop:tree_reduction} below), but its rung is
+computed only for the chain of three and the two trees of four;\ for five or
+more densities it is not.  \textbf{[SYMBOLIC +
 MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
 $(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
 $\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
@@ -604,6 +607,59 @@ the same rung and skip the K3 rung;\ for the path, minimality is bounded
 by a search modulo a prime up to $t$-degree 260 (record
 \texttt{docs/predictions/2026-10-22\_four\_density\_path.md}).  Guard:\
 \texttt{tests/test\_paper63\_four\_density\_path.py}.
+
+\begin{proposition}[every tree reduces to one dimension]
+\label{prop:tree_reduction}
+Let $\Gamma$ be a tree of $n$ densities $\rho_v(|\bm r|)$, radial about the
+common center (the fibre of $s$-type densities), joined by kernels
+$Y_e(|\bm r_u-\bm r_w|)$, each the Coulomb kernel, a Yukawa line or a
+Slater geminal.  Root $\Gamma$ at any density $v_0$ and set
+$W_u=\rho_u\prod_w\Phi_eW_w$, the product over the children $w$ of $u$,
+with $e$ the kernel joining them and
+\begin{equation}
+  (\Phi_ef)(r)=\int_0^\infty k_e(r,s)\,f(s)\,s^2\,ds,\qquad
+  k_e(r,s)=\frac{2\pi}{rs}\int_{|r-s|}^{r+s}Y_e(\varrho)\,\varrho\,d\varrho ,
+  \label{eq:tree_reduction}
+\end{equation}
+so $k_e=4\pi/\max(r,s)$ for the Coulomb kernel.  Then the fibre is
+$4\pi\int_0^\infty W_{v_0}(r)\,r^2\,dr$, the same for every root.  At the
+fingerprint weights, $\rho_v(r)=a_v^3K_0(a_vr)/(2\pi^2)$, a Coulomb leaf of
+scale $a$ contributes the potential $(2/\pi)\,\chi(ar)/r$ with
+$\chi=\int_0^xsK_1(s)\,ds$;\ on a slice that varies the scale $t$ of one
+density, rooted there, the fibre is $t^3\int_0^\infty K_0(tr)\,H(r)\,dr$
+with $H$ independent of $t$.
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF + PRIOR ART]} Induction on $n$.  For a leaf $w$
+joined to $u$, $\int\rho_w(|\bm r_w|)\,Y_e(|\bm r_u-\bm r_w|)\,d^3r_w$ is
+invariant under rotations of $\bm r_u$, so it depends on $r=|\bm r_u|$
+alone;\ in polar coordinates about $\bm r_u$ with $\varrho^2=r^2+s^2-2rs\mu$
+the angular integral $2\pi\int_{-1}^{1}Y_e(\varrho)\,d\mu$ is $k_e(r,s)$.
+The integrand is absolutely integrable (exponentially decaying weights,
+integrable kernel singularities), so Fubini lets the leaf be integrated first:\
+it becomes the radial factor $\Phi_eW_w$ on $\rho_u$, and what remains is a
+tree of $n-1$ radial densities.  For the Coulomb kernel this is Newton's
+shell theorem.  At the fingerprint weights,
+$\int_0^rs^2K_0=\chi(r)-r^2K_1(r)$ and $\int_r^\infty sK_0=rK_1(r)$ give the
+leaf potential.  The chain of three, the star of four and the path of four
+of this paper are the cases $n=3,4$:\ two or three leaf potentials on a
+central density, and for the path two leaf potentials joined by
+$4\pi/\max(r,s)$, which gives the $\min(x,y)$ kernel.  A ring has no leaf:\
+a density on a loop meets two kernels, the angle between them survives, and
+Sec.~\ref{sec:density_ring} integrates that loop by uniqueness instead.
+\textbf{[MEASURED]} The recursion reproduces the star formula at $t=1.6$
+and the chain to $10^{-7}$.  At $n=5$, with scales $(1,0.7,1.3,2,0.9)$, it
+gives the same value from every root to $10^{-9}$ for the star, the path and
+a branched tree, and for the branched tree with one Coulomb kernel replaced
+by a Yukawa line of mass $3/2$ (the Slater geminal is its
+$\gamma$-derivative);\ the star and the branched tree with the Yukawa line
+agree with a Monte Carlo evaluation of the full three-dimensional integral,
+$2\times10^7$ samples with no reduction, within four standard errors (relative
+standard errors below $5\times10^{-3}$).  Guard:\
+\texttt{tests/test\_paper63\_tree\_reduction.py}.  The proposition reduces
+the integral;\ it does not give the rung of the reduced integral, which is
+computed above for $n=3,4$ only.
+
 
 \textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
 Bessel moments;\ what is new here is the route into it from a molecular
@@ -1443,8 +1499,10 @@ Gamma functions, and with massive lines it is elliptic~\cite{blochvanhove2015,va
 What is recorded here is only that these molecular integrals follow the same dictionary.  The
 nearest theorem in shape is Brown's:\ for massless primitive $\phi^{4}$ graphs in four
 dimensions the set of periods is minor monotone, so a minor-closed class of graphs bounds the
-ring the periods lie in~\cite{brown2009periods}.  That theorem has no masses;\ here the masses
-enter too.  It is
+ring the periods lie in~\cite{brown2009periods}.  That theorem has no masses.  Brown's small-graphs principle extends the
+question to generic masses and momenta in even dimension, where it is a
+conjecture with an affine form proved~\cite{brown2015coaction};\ the lines
+here carry special masses in three dimensions, outside both hypotheses.  It is
 a pattern across the tested instances, not a derivation.  It would fail on a Coulomb-only
 integral whose class depends on anything but the density topology, or on a Slater-geminal
 integral whose class does not change at an equal-mass value of its exponent (guards
@@ -1484,13 +1542,15 @@ for $n=2$ to $5$ (Sec.~\ref{sec:four_density});\ for every other exponential
 orbital Sec.~\ref{sec:dictionary} places the integral in the same $D$-module,
 and for $s$-type densities on the one-scale slice
 Proposition~\ref{prop:tree_bound} proves the holomorphic period sits at or
-below rung $n$, and on it for $n\le8$ when it is not identically zero;\ the
-real three-dimensional integral reduces onto the Bessel-moment family at
-$n=3$, derived on the
+below rung $n$, and on it for $n\le8$ when it is not identically zero;\ for every $n$ the
+real three-dimensional integral of a tree of $s$-type densities reduces to
+one-dimensional Bessel integrals
+(Proposition~\ref{prop:tree_reduction}), and the reduced integral's operator
+has the composition factors of part (i) at $n=3$, derived on the
 Slater slice under the Mellin contour shift and shown on $(t;1,2)$ by
 numerical annihilation and a search modulo a prime, and at $n=4$ by
 numerical annihilation and bounded searches;\ for $n\ge5$ the
-three-dimensional reduction is not shown.  Part (ii) is the lesson of the three-electron chain
+rung of the reduced three-dimensional integral is not computed.  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
 K3 periods and $\pi^3$, but at four generic scale triples integer-relation
 searches at 340 and 400 digits in five bases built from the K3 and elliptic
@@ -1514,9 +1574,12 @@ whose class depends on anything but the density graph, on a tree whose
 real three-dimensional reduction brings a piece above $F_n$, on a
 general-orbital fibre with a factor above its graph's $1s$ rung, or on a
 Slater-geminal integral whose class does not change at an equal-mass value
-of its exponent.  The nearest theorem in shape remains
-Brown's~\cite{brown2009periods}, for massless graphs;\ here the masses enter,
-and a proof would have to run through the Symanzik polynomials of
+of its exponent.  The nearest results in shape remain
+Brown's, a theorem for massless graphs~\cite{brown2009periods} and a
+conjecture for generic masses in even dimension~\cite{brown2015coaction};\
+here the masses are special and the dimension is three.  For trees the
+reduction to one dimension is Proposition~\ref{prop:tree_reduction};\ a proof
+of the rest would have to run through the Symanzik polynomials of
 $\Gamma$ with the Yukawa masses on its lines, which we have not attempted.
 
 %% ========================================================================
@@ -1572,10 +1635,12 @@ than either program~\cite{monkhorst_jeziorski1979}.
 
 Four caps bound every statement above.  First, the rungs are read on the
 fibre and its holomorphic period;\ the integrated value may sit lower, and
-in one class it does.  Second, the reduction of the real three-dimensional
-integral to the Bessel-moment family is shown for the chain of three and the
-star and path of four;\ for five or more densities the holomorphic-period
-statement stands and the three-dimensional one is not shown.  Third, the
+in one class it does.  Second, the real three-dimensional integral of every
+tree of $s$-type densities reduces to one-dimensional Bessel integrals
+(Proposition~\ref{prop:tree_reduction}), but the rung of the reduced integral
+is computed for the chain of three and the star and path of four only;\ for
+five or more densities the holomorphic-period statement stands and the rung
+of the three-dimensional one is not shown.  Third, the
 dictionary places a general-orbital integral in the $D$-module of its graph's
 $1s$ integral;\ it keeps the holomorphic period at or below the $1s$ rung
 only for trees of $s$-type densities on the one-scale slice, and on it there
@@ -1584,8 +1649,8 @@ that every computed fibre sits on the $1s$ rung is observed, not proved.  Fourth
 generic three-electron fibre's content beyond the K3 and elliptic periods is
 evidence from integer-relation searches, not a theorem.
 
-What is open is in two layers.  Below the conjecture:\ the three-dimensional
-reduction for $n\ge5$;\ the ring of four;\ whether a general-orbital fibre
+What is open is in two layers.  Below the conjecture:\ the rung of the reduced
+three-dimensional integral for $n\ge5$;\ the ring of four;\ whether a general-orbital fibre
 stays at or below its graph's $1s$ rung, which is open even for $s$-type
 trees, and whether it reaches that rung;\ and the principled widening of
 the basis of the generic-fibre searches.  Above it:\ a proof through the Symanzik polynomials that the
@@ -1733,6 +1798,10 @@ integral evaluations of Bessel moments and applications,''
 \bibitem{bailey1936}
 W.~N.~Bailey, ``Some infinite integrals involving Bessel functions (II),''
 J.\ London Math.\ Soc.\ \textbf{11}, 16--20 (1936).
+
+\bibitem{brown2015coaction}
+F.~Brown, ``Feynman amplitudes, coaction principle, and cosmic Galois
+group,'' arXiv:1512.06409 (2015).
 
 \bibitem{brown2009periods}
 F.~C.~S.~Brown, ``On the periods of some Feynman integrals,'' arXiv:0910.0114 (2009).

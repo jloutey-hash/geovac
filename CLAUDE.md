@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.19 (November 12, 2026)
+**Version:** v6.7.20 (November 12, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Paper 63 trees reduce to one dimension (2026-11-12, v6.7.20, PI-directed):** every s-type tree's 3-D fibre is a 1-D radial recursion (shell theorem), any radial kernel; rung for n >= 5 still open; Brown 2015 cited. CHANGELOG v6.7.20.
 - **Paper 38 gauge fields on the window (2026-11-12, v6.7.19, PI-directed):** pure gauge exact below the top 2J levels; band-limited spectra converge factorially; generic field metrizes M_k (measured); metric OPEN. CHANGELOG v6.7.19.
 - **Paper 38 matrix factor (2026-11-12, v6.7.18, PI-directed):** C(S^3) (x) M_k converges at pi^2/(n+1), uniformly in k, when SU(2)_R rotates the matrices; finite D_F cannot metrize; gauge sector OPEN. CHANGELOG v6.7.18.
 - **HP STOP; Paper 38 rate proved (2026-11-12, v6.7.17, PI-directed):** atom-set Slater below cc-pVDZ on CH4/NH3/H2O/HF but ANO-R1 lower on all four; tapered d_GH <= pi^2/(n+1), best constant measured. CHANGELOG v6.7.17.

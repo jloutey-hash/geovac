@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.20] - 2026-11-12
+
+**Paper 63: every tree of s-type densities reduces to one dimension (PI-directed, item #3, tree-reduction target).**
+
+### Added
+- Paper 63, Prop. tree_reduction [SYMBOLIC PROOF + PRIOR ART]: at the coincident-centre fibre, a tree of n radial
+  densities joined by radial kernels (Coulomb, Yukawa line, Slater geminal) equals a one-dimensional recursion,
+  W_u = rho_u prod_children Phi_e W_w with the spherically averaged kernel k_e(r,s) = (2 pi/(r s)) int Y q dq
+  (4 pi/max(r,s) for Coulomb: Newton's shell theorem), root-independent; at fingerprint weights a Coulomb leaf gives
+  (2/pi) chi(a r)/r and a one-scale slice is t^3 int K0(t r) H(r) dr. The chain of three and the star and path of
+  four (previously derived case by case) are the n = 3, 4 instances; a ring has no leaf, so its angle survives.
+  [MEASURED] n = 5 star, path, branched tree and branched tree with a Yukawa line of mass 3/2: root independence to
+  1e-9; full 3-D Monte Carlo agrees (scratch run 1.5e8 samples within 1.25 SE; guard 2e7 within 4 SE).
+- `tests/test_paper63_tree_reduction.py` (12 tests, written as a separate step, fire-tested 8/8).
+- Brown, arXiv:1512.06409 cited at the two "nearest theorem" loci: the massive small-graphs principle is a
+  conjecture (affine form proved) for generic masses in even dimension; these integrals have special masses in 3-D.
+
+### Changed
+- Caps re-worded at abstract, sec:dictionary, sec:four_density, sec:conjecture, sec:scope: the 3-D reduction is
+  shown for every s-type tree; what stays open for n >= 5 is the rung of the reduced integral. group3 synthesis
+  clause; claim-test matrix row.
+- Prior-art scan (agent, PM-verified on Brown 2015): massive Brown = PARTIAL (Brown 2015, conjectural, even d,
+  generic kinematics); equal-mass drops known case by case (sunrise, banana); 3-D Yukawa graphs NOT COVERED.
+- Self-check round 1: math confirmed; 1 LARGE (dropped t^3 in the slice form) + 4 SMALL (measured figures to the
+  guard's, s-type qualifier at three loci, Fubini by absolute integrability, a locus reference) fixed.
+
 ## [v6.7.19] - 2026-11-12
 
 **Paper 38 gauge fields (inner fluctuations) on the true window (PI-directed, gauge layer items 1-2).**
