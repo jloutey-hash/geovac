@@ -51,3 +51,31 @@ it says nothing against attainment at n = 4, which Paper 63 computed directly.
   amplitude reading does not.
 - **STOP:** SA1 fails (F_5 has no half-integer exponent at -4, so the argument is wrong somewhere), SA2 fails, or
   eps^(1/2) I5 tends to zero.
+
+## Result (scored 2026-11-13, after the record was committed)
+
+Driver `debug/star5_attainment.py`, output `debug/data/star5_attainment.json`.
+
+- **SA1: HELD.** phi(L_4) has leading coefficient -(t-4)(t-2)(t+2)(t+4); its local exponents at t = -4 are
+  0, 1, 3/2, 2, 3 (half-integer 3/2).
+- **SA2: HELD.** No zero of the leading coefficient at t = +-4 for c <= 3, lambda in -6..12.
+- **SA3: MISSED as registered (11.5% at eps = 1e-3, registered 5%); monotone and nonzero.** sqrt(eps) I5 =
+  1.39973, 1.28302, 1.14957, 1.03844, 0.97256 at eps = 1e-1, 3e-2, 1e-2, 3e-3, 1e-3, against C5 = 0.87236. The
+  approach is slower than predicted (an O(eps^(1/2)) relative correction).
+- **SA4: HELD.** phi(L_6) has local exponents 0, 1, 2, 5/2, 3, 4, 5 at t = -6.
+- **Control: HELD.** eps I4 = 0.66981, 0.56026, 0.50219, 0.47243, 0.46110 (C4 = 0.45345, 1.7% at 1e-3);
+  sqrt(eps) I4 grows from 2.12 to 14.58.
+
+**Verdict: BORDERLINE** under the rules: the branch stands (nonzero, monotone, and the even-n control shows a
+pole instead), the amplitude reading at the registered precision does not.
+
+**Post-hoc, not scored.** At eps = 1e-3, 3e-4, 1e-4, sqrt(eps) I5 = 0.97256, 0.92872, 0.90534; a fit linear in
+sqrt(eps) extrapolates to 0.87457, +0.25% from C5. For n = 7 the leading coefficients of phi(L_c), c <= 5, are
+prod (t^2 - (c - 2j)^2) and have no zero at +-6 for any shift lambda in -8..14 (a shift never changes the top
+weight, so this holds for every lambda).
+
+**Post-hoc, not scored (self-check, 2026-11-13).** The reviewer noted that the argument does not need the
+eigenvalue -1: pieces nonsingular at t = -(n-1) form connections there, so any non-holomorphic term forces
+a c = n-1 piece. The R^(n-1) term gives eps^-3/2, eps^-1, eps^-1/2, -log eps, eps^1/2, eps log eps for
+n = 3..8, so Paper 63 states attainment for every star with 3 <= n <= 8 (F_n irreducible there); the
+control's pole is the n = 4 case.

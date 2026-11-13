@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.22] - 2026-11-13
+
+**Paper 63: Coulomb stars reach their rung (PI-directed, item #3 option A; pre-registered SA, BORDERLINE).**
+
+### Added
+- Paper 63, Prop. star_attain [SYMBOLIC PROOF]: for the Coulomb star of n densities at the fingerprint weights on
+  (t;1,...,1), 3 <= n <= 8, the fibre's minimal operator has a composition factor equivalent to F_n's operator.
+  With chi = pi/2 - R, R = int_x^oo s K1, the R^(n-1) term makes the fibre non-holomorphic at t = -(n-1)
+  (eps^-3/2, eps^-1, eps^-1/2, -log eps, eps^1/2, eps log eps for n = 3..8); every other piece of Prop. tree_rung
+  is nonsingular there, so extensions of them are holomorphic, and the surviving order-n piece has an even shift,
+  hence F_n's (irreducible n <= 8). Other trees with n >= 5 stay OPEN.
+- Record `docs/predictions/2026-11-13_star5_attainment.md` (committed before computing). SA1 (F_5 exponents
+  0, 1, 3/2, 2, 3 at -4), SA2 (no lower piece singular at +-4), SA4 (F_7 exponent 5/2 at -6) and the control (star
+  of four: a pole, eps I4 within 1.7% of its constant) HELD; SA3 MISSED as registered (sqrt(eps) I5 = 0.973 at
+  1e-3, 11.5% from pi^2/(8 sqrt 2), bar 5%; monotone, nonzero). Verdict BORDERLINE: the branch stands, the
+  amplitude reading at the registered precision does not. Post-hoc: eps to 1e-4 extrapolates within 0.25%.
+- `debug/star5_attainment.py`, `debug/data/star5_attainment.json`; `tests/test_paper63_star_attainment.py`
+  (10 tests incl. the n = 6 log branch, fire-tested 7/7).
+
+### Changed
+- Self-check round 1: 0 LARGE; the reviewer showed the eigenvalue -1 is not needed (any non-holomorphic term
+  suffices), widening the statement from odd n <= 7 to 3 <= n <= 8; R's module sentence and nits applied.
+- Attainment loci (abstract, sec:dictionary, sec:four_density, sec:conjecture, sec:scope, open list), group3
+  synthesis, claim-test matrix row.
+
 ## [v6.7.21] - 2026-11-12
 
 **Paper 63: the three-dimensional tree fibre is bounded by the n-Bessel moments (PI-directed, item #3, option A).**

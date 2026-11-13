@@ -73,8 +73,8 @@ once and at generic scales it has no relation to the K3 and elliptic periods
 in any basis tried;\ rings are ordered by uniqueness, not by count;\ and the
 integrated value sits at or below its fibre.  The caps are stated:\ the
 three-dimensional fibre of a Coulomb tree at the fingerprint weights has
-composition factors of order at most $n$ for every $n$, but is shown to reach
-rung $n$ only through four densities, the
+composition factors of order at most $n$ for every $n$, and reaches rung $n$
+where computed ($n=3,4$) and for stars of up to eight densities, the
 dictionary's rung bound only for $s$-type trees on the one-scale slice, the
 only ring tested is the triangle, and the generic fibre's content is
 evidence.
@@ -352,7 +352,7 @@ every tree reduces to one-dimensional Bessel integrals
 supply, and with Coulomb kernels at the fingerprint weights its
 composition factors have order at most $n$
 (Proposition~\ref{prop:tree_rung}), while that it reaches the rung is computed
-below for the chain of three and the two trees of four only.  Gaussian orbitals and Gaussian geminals are outside
+below for the chain of three and the two trees of four and proved for stars of up to eight densities (Proposition~\ref{prop:star_attain}).  Gaussian orbitals and Gaussian geminals are outside
 the lemma:\ $e^{-\alpha r^2}$ is no derivative of a Yukawa, its transform is
 not rational, and Sec.~\ref{sec:density_ring} finds its integrals off the
 ladder.
@@ -579,8 +579,8 @@ three-dimensional integral of every tree reduces to one-dimensional Bessel
 integrals (Proposition~\ref{prop:tree_reduction} below), with Coulomb
 kernels at the fingerprint weights its composition factors have order at most
 $n$ (Proposition~\ref{prop:tree_rung}), and that it
-reaches rung $n$ is computed only for the chain of three and the two trees of
-four.  \textbf{[SYMBOLIC +
+reaches rung $n$ is computed for the chain of three and the two trees of four
+and proved for stars of up to eight densities (Proposition~\ref{prop:star_attain}).  \textbf{[SYMBOLIC +
 MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
 $(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
 $\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
@@ -732,7 +732,61 @@ composition factors computed above at $n=3,4$ (chain, star, path) are those
 of $F_k$, $k\le n$, and pieces of order one, inside the bound;\ none comes from
 an odd moment.  Guard:\ \texttt{tests/test\_paper63\_tree\_rung.py}.  The
 proposition bounds the fibre;\ that the piece of $F_n$ is present is computed
-for $n=3,4$ only.
+for $n=3,4$ and proved next for stars of up to eight densities.
+
+\begin{proposition}[stars reach their rung]
+\label{prop:star_attain}
+For the Coulomb star of $n$ densities at the fingerprint weights on the slice
+$(t;1,\dots,1)$, $t$ on the center, with $3\le n\le8$, the minimal operator of
+the fibre has a composition factor equivalent to the operator of $F_n$.
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF]} Write $\chi=\pi/2-R$ with
+$R(x)=\int_x^\infty sK_1(s)\,ds\sim(\pi x/2)^{1/2}e^{-x}$, so the fibre is
+$(2/\pi)^nt^3\int_0^\infty K_0(tx)\,\chi(x)^{n-1}x^{3-n}\,dx$.  Split the
+integral at $x=1$ and expand $\chi^{n-1}$ in powers of $R$.  The part on
+$[0,1]$ is analytic in $t$ away from $t=0$ on every branch.  On $[1,\infty)$
+the terms with $R^k$, $k\le n-2$, carry at most $n-2$ Bessel factors
+($\theta R=r\,\theta K_0$, so $R$ lies in an extension of $r\,B$ by a piece of
+order one and $R^k$ has pieces $r^{\mu}\,\mathrm{Sym}^jB$, $j\le k$);\ by the
+transfer of Proposition~\ref{prop:tree_rung}, with boundary terms at $x=1$ in
+the module of $K_0(t)$, they satisfy equations built from
+$\phi(L_c(\theta-\lambda))$, $c\le n-2$, whose leading coefficient
+$\prod_{0\le j<c/2}\bigl(t^2-(c-2j)^2\bigr)$ (independent of $\lambda$) does not vanish at
+$t=-(n-1)$, so they are analytic there on every branch.  The term $R^{n-1}$
+converges for $\mathrm{Re}\,t>-(n-1)$;\ at $t=-(n-1-\epsilon)+i0$,
+$K_0(-y+i0)=K_0(y)-i\pi I_0(y)$ gives it, up to a nonzero constant, the
+imaginary part
+$-\pi t^3\int_1^\infty I_0((n-1-\epsilon)x)\,R^{n-1}x^{3-n}\,dx$, whose
+integrand is $c_n\,x^{(4-n)/2}e^{-\epsilon x}(1+O(1/x))$ with
+$c_n=(\pi/2)^{(n-1)/2}(2\pi(n-1))^{-1/2}>0$.  The small-$\epsilon$ expansion of
+$\int_1^\infty x^ae^{-\epsilon x}dx$ (an incomplete gamma function), with
+$a=(4-n)/2$, has the leading non-analytic term $\Gamma(a+1)\epsilon^{-a-1}$ for
+$a\notin\{-1,-2\}$, $-\log\epsilon$ for $a=-1$ and $\epsilon\log\epsilon$ for
+$a=-2$:\ $\epsilon^{-3/2},\epsilon^{-1},\epsilon^{-1/2},-\log\epsilon,
+\epsilon^{1/2},\epsilon\log\epsilon$ for $n=3,\dots,8$, each with a nonzero
+coefficient, and the $O(1/x)$ corrections add only higher terms.  So the fibre
+is not holomorphic at $t=-(n-1)$.  In the filtration of
+Proposition~\ref{prop:tree_rung} the pieces with $c\le n-2$ and the pieces of
+order one are nonsingular at $t=-(n-1)$;\ quotients and extensions of such
+modules are connections there, whose solutions are holomorphic on every branch.
+So a piece with $c=n-1$ must survive.  In a star such a piece takes one $K_0$ from
+each of the $n-1$ leaf factors $r^2K_0$ and the root's $r^2$, an even shift, so
+it is equivalent to the operator of $F_n$, irreducible for $n\le8$.  \textbf{[MEASURED]} Record
+\texttt{docs/predictions/2026-11-13\_star5\_attainment.md}, registered before
+computing:\ the operator of $F_5$ has leading coefficient
+$-(t^2-4)(t^2-16)$ and local exponents $0,1,\tfrac32,2,3$ at $t=-4$, that of
+$F_7$ the exponent $\tfrac52$ among $0,\dots,5$ at $t=-6$, and no lower piece is
+singular at $t=\pm4$.  For $n=5$, $\epsilon^{1/2}$ times the integral falls
+monotonically from $1.400$ at $\epsilon=10^{-1}$ to $0.973$ at $10^{-3}$,
+against Watson's constant $c_5\Gamma(\tfrac12)=\pi^2/(8\sqrt2)=0.872$;\ the
+record asked for $5\%$ at $10^{-3}$ and missed (the correction is of relative
+order $\epsilon^{1/2}$), so it scored BORDERLINE, and a fit in $\epsilon^{1/2}$ to
+$\epsilon$ down to $10^{-4}$, made afterwards, extrapolates to within $0.3\%$ of
+it.  The record's control, the star of four, gives the pole the proof
+predicts for $n=4$:\ $\epsilon$ times its
+integral is within $1.7\%$ of $(\pi/2)^{3/2}(6\pi)^{-1/2}$ at $10^{-3}$.  Guard:\
+\texttt{tests/test\_paper63\_star\_attainment.py}.
 
 
 \textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
@@ -1627,7 +1681,8 @@ numerical annihilation and bounded searches;\ for every $n$, at the
 fingerprint weights with Coulomb kernels, its composition factors have order
 at most $n$ and come from the moments of at most $n$ Bessel functions
 (Proposition~\ref{prop:tree_rung}), which is the order bound of ``nothing above
-it'' in part (i) there;\ for $n\ge5$ whether the piece of $F_n$ is present is not computed.  Part (ii) is the lesson of the three-electron chain
+it'' in part (i) there;\ the piece of $F_n$ is present for stars of up to eight densities (Proposition~\ref{prop:star_attain}), and for other trees with $n\ge5$ it
+is not shown.  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
 K3 periods and $\pi^3$, but at four generic scale triples integer-relation
 searches at 340 and 400 digits in five bases built from the K3 and elliptic
@@ -1720,7 +1775,7 @@ tree of $s$-type densities reduces to one-dimensional Bessel integrals
 (Proposition~\ref{prop:tree_reduction}), at the fingerprint weights with Coulomb
 kernels its composition factors have order at most $n$ for every tree
 (Proposition~\ref{prop:tree_rung}), and that it reaches rung $n$ is computed
-for the chain of three and the star and path of four only.  Third, the
+for the chain of three and the star and path of four and proved for stars of up to eight densities (Proposition~\ref{prop:star_attain}).  Third, the
 dictionary places a general-orbital integral in the $D$-module of its graph's
 $1s$ integral;\ it keeps the holomorphic period at or below the $1s$ rung
 only for trees of $s$-type densities on the one-scale slice, and on it there
@@ -1730,7 +1785,8 @@ generic three-electron fibre's content beyond the K3 and elliptic periods is
 evidence from integer-relation searches, not a theorem.
 
 What is open is in two layers.  Below the conjecture:\ whether the
-three-dimensional fibre reaches rung $n$ for $n\ge5$, and the bound for Slater
+three-dimensional fibre reaches rung $n$ for trees with $n\ge5$ other than
+stars of up to eight densities, and the bound for Slater
 weights and geminal kernels;\ the ring of four;\ whether a general-orbital fibre
 stays at or below its graph's $1s$ rung, which is open even for $s$-type
 trees, and whether it reaches that rung;\ and the principled widening of
