@@ -181,6 +181,110 @@ def he_sto3g() -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# LiH STO-3G, built from the project's own Gaussian integral engine
+# ---------------------------------------------------------------------------
+
+# STO-3G (Hehre, Stewart & Pople, JCP 51, 2657 (1969); Basis Set Exchange):
+# exponents, and contraction coefficients on normalized primitives.
+_STO3G_1S_D = np.array([0.15432897, 0.53532814, 0.44463454])
+_STO3G_2S_D = np.array([-0.09996723, 0.39951283, 0.70011547])
+_STO3G_2P_D = np.array([0.15591627, 0.60768372, 0.39195739])
+_STO3G_LI_1S_A = np.array([16.1195750, 2.9362007, 0.7946505])
+_STO3G_LI_2SP_A = np.array([0.6362897, 0.1478601, 0.0480887])
+_STO3G_H_1S_A = np.array([3.42525091, 0.62391373, 0.16885540])
+
+
+def _rhf(s: np.ndarray, h: np.ndarray, g: np.ndarray, n_occ: int,
+         blocks: Tuple[Tuple[int, ...], ...], tol: float = 1e-12,
+         max_iter: int = 500) -> Tuple[np.ndarray, np.ndarray, float]:
+    """Closed-shell RHF (chemist-notation g), Fock diagonalized per symmetry block.
+
+    Returns (C, orbital energies, electronic energy); MOs sorted by energy, ties
+    kept in block order, so a degenerate pair from two blocks stays axis-aligned.
+    """
+    n = h.shape[0]
+    d = np.zeros((n, n))
+    e_old = 0.0
+    for _ in range(max_iter):
+        f = h + np.einsum("pqrs,rs->pq", g, d) - 0.5 * np.einsum("prqs,rs->pq", g, d)
+        cols, eps = [], []
+        for blk in blocks:
+            idx = np.array(blk)
+            sb, fb = s[np.ix_(idx, idx)], f[np.ix_(idx, idx)]
+            w, v = np.linalg.eigh(sb)
+            x = v @ np.diag(w ** -0.5) @ v.T
+            e, u = np.linalg.eigh(x.T @ fb @ x)
+            cb = x @ u
+            for k in range(len(blk)):
+                c = np.zeros(n)
+                c[idx] = cb[:, k]
+                cols.append(c)
+                eps.append(e[k])
+        order = sorted(range(n), key=lambda k: (round(eps[k], 10), k))
+        c_mo = np.array(cols).T[:, order]
+        eps_arr = np.array(eps)[order]
+        d_new = 2.0 * c_mo[:, :n_occ] @ c_mo[:, :n_occ].T
+        e_el = 0.5 * np.sum(d_new * (h + f))
+        if abs(e_el - e_old) < tol and np.max(np.abs(d_new - d)) < 1e-9:
+            d = d_new
+            break
+        d = 0.5 * d + 0.5 * d_new if _ < 5 else d_new
+        e_old = e_el
+    f = h + np.einsum("pqrs,rs->pq", g, d) - 0.5 * np.einsum("prqs,rs->pq", g, d)
+    e_el = 0.5 * np.sum(d * (h + f))
+    return c_mo, eps_arr, float(e_el)
+
+
+def lih_sto3g(R: float = 3.015) -> Dict[str, Any]:
+    """
+    LiH in STO-3G (6 spatial orbitals, Q = 12), all electrons, RHF canonical MOs.
+
+    Li at the origin, H at +R on the z axis (R in bohr).  Integrals come from
+    the McMurchie-Davidson engine in ``geovac.noci_engine``; the Fock matrix is
+    diagonalized in the sigma / p_x / p_y symmetry blocks, so the degenerate pi
+    pair comes out axis-aligned (one pure p_x MO, one pure p_y MO).  Any other
+    orientation inside the pair is a rotation about the bond axis, a symmetry
+    of the molecule, and leaves the MO integrals unchanged.
+
+    Returns the standard reference dict plus ``hf_energy`` (total, Ha),
+    ``mo_energies`` and ``mo_coeff`` (AO order Li 1s, 2s, 2p_x, 2p_y, 2p_z, H 1s).
+    """
+    from geovac.noci_engine import BasisFn, integral_set_md
+
+    li = np.zeros(3)
+    hpos = np.array([0.0, 0.0, float(R)])
+    orbs = [
+        BasisFn(li, (0, 0, 0), _STO3G_LI_1S_A, _STO3G_1S_D),
+        BasisFn(li, (0, 0, 0), _STO3G_LI_2SP_A, _STO3G_2S_D),
+        BasisFn(li, (1, 0, 0), _STO3G_LI_2SP_A, _STO3G_2P_D),
+        BasisFn(li, (0, 1, 0), _STO3G_LI_2SP_A, _STO3G_2P_D),
+        BasisFn(li, (0, 0, 1), _STO3G_LI_2SP_A, _STO3G_2P_D),
+        BasisFn(hpos, (0, 0, 0), _STO3G_H_1S_A, _STO3G_1S_D),
+    ]
+    s, h, g = integral_set_md(orbs, [(li, 3.0), (hpos, 1.0)])
+    v_nn = 3.0 / float(R)
+    blocks = ((0, 1, 4, 5), (2,), (3,))
+    c_mo, eps, e_el = _rhf(s, h, g, n_occ=2, blocks=blocks)
+    h_mo = c_mo.T @ h @ c_mo
+    g_mo = np.einsum("pi,qj,rk,sl,pqrs->ijkl", c_mo, c_mo, c_mo, c_mo, g,
+                     optimize=True)
+    return {
+        'h1': h_mo,
+        'eri': g_mo,
+        'nuclear_repulsion': v_nn,
+        'n_electrons': 4,
+        'n_spatial': 6,
+        'description': f'LiH STO-3G at R={R} bohr (RHF canonical MOs, all electrons)',
+        'hf_energy': e_el + v_nn,
+        'mo_energies': eps,
+        'mo_coeff': c_mo,
+        'literature_energy': None,
+        'source': ('STO-3G: Hehre, Stewart & Pople, JCP 51, 2657 (1969); '
+                   'integrals: geovac.noci_engine McMurchie-Davidson engine'),
+    }
+
+
+# ---------------------------------------------------------------------------
 # H2 6-31G at R = 1.4 bohr — STUB
 # ---------------------------------------------------------------------------
 

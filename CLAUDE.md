@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.24 (November 13, 2026)
+**Version:** v6.7.25 (November 13, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **LiH STO-3G baseline rebuilt (2026-11-13, v6.7.25, pre-registered LB GO, PI-directed):** own integrals match OpenFermion's LiH file; 177 QWC groups, not 179 (round-off order). CHANGELOG v6.7.25.
 - **QWC tie-break; pip shim (2026-11-13, v6.7.24, pre-registered QT, PI-directed):** greedy QWC counts no longer follow round-off (QT2 missed, moves to 4%); geovac-hamiltonians re-exports geovac (was retired rule). CHANGELOG v6.7.24.
 - **OpenFermion small-term drop fixed (2026-11-13, v6.7.23, PI-directed):** He cc-pVTZ 21,623, n_max=4 250,466, n_max=5 2,445,969 (were 16/144/11,688 terms short); library, TC, rel, balanced clean. CHANGELOG v6.7.23.
 - **Paper 63 stars reach their rung (2026-11-13, v6.7.22, pre-registered SA BORDERLINE):** Coulomb stars of 3-8 densities contain F_n's operator (proved); SA amplitude missed its 5% bar. CHANGELOG v6.7.22.

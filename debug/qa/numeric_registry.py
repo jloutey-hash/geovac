@@ -1566,8 +1566,12 @@ CITED = {
                                  "standard literature count and matches geovac/composed_qubit.py "
                                  "_GAUSSIAN_LIH_DATA['sto-3g']. The 907 printed before had no artifact. Count includes the identity term.",
                           identity=None),
-    "lih_sto3g_qwc": dict(value=179, convention="QWC groups, LiH STO-3G raw JW (count_qwc_groups)",
-                          source="same recompute as lih_sto3g_raw", identity=None),
+    "lih_sto3g_qwc": dict(value=177, convention="QWC groups, LiH STO-3G raw JW (count_qwc_groups)",
+                          source="MEASURED 2026-11-13 geovac.gaussian_reference.lih_sto3g(3.015) "
+                                 "(own McMurchie-Davidson integrals, symmetry-blocked RHF, axis-aligned pi "
+                                 "pair) + exact_jordan_wigner + deterministic tie-break (v6.7.24); control at "
+                                 "1.45 A matches OpenFermion's shipped LiH file (178 both). 179 under "
+                                 "round-off order. tests/test_lih_sto3g_baseline.py", identity=None),
     "lih_sto3g_lambda": dict(value=16.48, convention="1-norm (Ha), LiH STO-3G raw JW, identity included",
                              source="same recompute as lih_sto3g_raw", identity=None),
     "lih_sto3g_lambda_ni": dict(value=12.34, convention="non-identity 1-norm (Ha), LiH STO-3G raw JW",
@@ -1791,6 +1795,7 @@ RETIRED = {
     86249:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|lost|drop"),
     # Retired 2026-11-13 (v6.7.24): greedy QWC counts under the round-off insertion order.
     5574:    ("he_n3_qwc",          r"QWC|measurement group",  r"retired|round-off|tie"),
+    179:     ("lih_sto3g_qwc",      r"QWC|measurement group",  r"retired|round-off|tie|were|was"),
     86251:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|round-off|tie|86\{?,\}?249"),
     4.049:   ("exp_qwc_3pt",        r"exponent|alpha|scaling|QWC", r"retired|round-off|tie|was"),
     1551:    ("sih4_balanced_qwc",  r"QWC|measurement group",  r"retired|geometry|3\.015"),

@@ -469,13 +469,13 @@ Gaussian raw Jordan-Wigner baselines.
   Trenev et al.~\cite{Trenev2025} (Table~5, Appendix~B; Jordan--Wigner with
   2-qubit reduction; their reduced STO-3G LiH value is 276 at $Q=10$); the
   raw STO-3G LiH row (\gvq{lih_sto3g_raw}{631} terms, \gvq{lih_sto3g_lambda}{16.48}~Ha,
-  \gvq{lih_sto3g_qwc}{179} QWC groups, $Q=12$) is our own Jordan--Wigner build from
+  \gvq{lih_sto3g_qwc}{177} QWC groups, $Q=12$) is our own Jordan--Wigner build from
   STO-3G integrals at $R=3.015$~bohr, not a Trenev-reduced count.  The
   $Q^{3.9\text{--}4.3}$ Gaussian-scaling exponents are GeoVac's own log-log
   fit of the published reduced counts.  Balanced QWC counts re-measured
   2026-11-13 with a deterministic tie-break (Table~\ref{tab:molecules});
-  they were 629/1{,}494/1{,}220.  The STO-3G group count was not
-  re-measured (its build is not on file).
+  they were 629/1{,}494/1{,}220.  The STO-3G group count, re-measured
+  the same way from a rebuild of its integrals, was 179.
   ``---'' indicates data not available.}
 \label{tab:resources}
 \begin{ruledtabular}
@@ -486,7 +486,7 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
 \multirow{5}{*}{LiH}
  & GeoVac composed & 30 & 838 & 34.0 & 64 & --- \\
  & GeoVac balanced & 30 & \gvq{lih_balanced_pauli}{2{,}726} & 78.2 & 631 & --- \\
- & Gaussian STO-3G & 12 & \gvq{lih_sto3g_raw}{631} & \gvq{lih_sto3g_lambda}{16.5} & \gvq{lih_sto3g_qwc}{179} & $0.75\times$ Pauli, $2.8\times$ QWC \\
+ & Gaussian STO-3G & 12 & \gvq{lih_sto3g_raw}{631} & \gvq{lih_sto3g_lambda}{16.5} & \gvq{lih_sto3g_qwc}{177} & $0.75\times$ Pauli, $2.8\times$ QWC \\
  & Gaussian 6-31G  & 20 & 5{,}851 & --- & --- & $7.0\times$ Pauli \\
  & Gaussian cc-pVDZ & 36 & \gvq{lih_ccpvdz_pauli}{63{,}519} & --- & --- & $76\times$ Pauli \\
 \colrule
@@ -517,7 +517,7 @@ has more Pauli terms than Gaussian STO-3G---\gvq{lih_composed_pauli}{838} terms 
 \gvq{lih_sto3g_raw}{631} (raw JW, $1.33\times$ more) and $3.0\times$ more than the 276
 (qubit-reduced)---and about twice its 1-norm (34.0 vs.\ \gvq{lih_sto3g_lambda}{16.5}~Ha),
 while using more qubits (30 vs.\ 10--12).  It needs $2.8\times$ fewer
-QWC measurement groups (64 vs.\ \gvq{lih_sto3g_qwc}{179}).  The minimal-basis comparison is
+QWC measurement groups (64 vs.\ \gvq{lih_sto3g_qwc}{177}).  The minimal-basis comparison is
 therefore not the framework's load-bearing advantage.  That advantage
 appears against larger Gaussian bases, where the gap widens decisively:
 $76\times$ fewer Pauli terms than cc-pVDZ, at comparable qubit counts
@@ -1226,7 +1226,7 @@ quantum cost linearly.
 For LiH against Gaussian STO-3G the composed Hamiltonian has
 $1.33\times$ \emph{more} Pauli terms (838 vs.\ \gvq{lih_sto3g_raw}{631}, raw vs.\ raw) and about
 twice the 1-norm, with $2.8\times$ fewer measurement groups (QWC 64
-vs.\ \gvq{lih_sto3g_qwc}{179}); against cc-pVDZ it has $76\times$ fewer terms.  All counts
+vs.\ \gvq{lih_sto3g_qwc}{177}); against cc-pVDZ it has $76\times$ fewer terms.  All counts
 are under the exact global-$M_L$ rule (Sec.~\ref{sec:eri_rule}), and
 none of these comparisons is at matched accuracy.  For LiH
 at a fixed equilibrium geometry, the balanced coupled architecture

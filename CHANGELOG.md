@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.25] - 2026-11-13
+
+**LiH STO-3G baseline rebuilt from the project's own integrals (pre-registered LB, GO; PI-directed).**
+
+### Found
+- The raw JW LiH STO-3G row (631 terms, 16.48 Ha, 179 QWC groups at R = 3.015 bohr; Papers 14, 19, 20,
+  group-4 synthesis, README, claims register, one-pager) had no build on file, so v6.7.24 could not
+  re-measure its group count. Rebuilt: 177 groups. The 179 is the round-off insertion order -- the
+  size-only sort on the same build gives exactly 179.
+
+### Changed
+- `geovac/gaussian_reference.py`: `lih_sto3g(R)` -- STO-3G Li/H, `noci_engine` McMurchie-Davidson
+  integrals, RHF with the Fock matrix diagonalized per symmetry block, canonical MOs, all electrons.
+- Control (`debug/lih_sto3g_rebuild.py`, `debug/data/lih_sto3g_rebuild.json`): at 1.45 A the build
+  reproduces OpenFermion's shipped `H1-Li1_sto-3g_singlet_1.45` (RHF energy to 1.7e-10 Ha; 631 terms,
+  1-norm to 8e-8, 178 groups on both operators).
+- Scored (`docs/predictions/2026-11-13_lih_sto3g_rebuild.md`): LB1 RHF -7.862009 HELD; LB2 631 HELD;
+  LB3 16.4768 Ha HELD; LB4 177 in 172-182 HELD; LB5 the "2.8x fewer QWC groups" sentence survives
+  (177/64 = 2.77) HELD. Groups invariant under three 1e-13 perturbations. One construction note in the
+  record was wrong (the pi-pair orientation does not matter: it is a rotation about the bond axis;
+  integrals agree to 1e-16) and is corrected there.
+- Registry `lih_sto3g_qwc` 179 -> 177 with the build as provenance; 179 registered as retired (fired on
+  the five old annotated loci and Paper 19's table; silent on the corrected wording; C21 PASS). Papers
+  14 (1-norm paragraph, dated note), 19 (tab:resources and text, note), 20 (caption, table, two text
+  loci; the "not re-measured" disclosure replaced), group-4 synthesis, README (x2), claims register,
+  one-pager.
+- `tests/test_lih_sto3g_baseline.py` (2 tests, written as a separate step), fire-tested: the size-only
+  QWC order fails both, a 1% error in one Li 2p contraction coefficient fails both.
+
 ## [v6.7.24] - 2026-11-13
 
 **Greedy QWC counts made independent of round-off (pre-registered QT); `geovac-hamiltonians` turned into a front

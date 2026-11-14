@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-6.7.24-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-6.7.25-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -28,7 +28,7 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 | Library | **37 systems** via the `hamiltonian()` API (35 composed molecules + He + H₂), three periodic-table rows |
 | Pauli count | **N_Pauli = 27.90 × Q**, exactly linear across molecules at fixed basis (30.03 × Q d-block); within-molecule basis exponent 3.17 (small-basis fit; local slope ~3.8 by n_max = 4) |
 | Advantage vs Gaussian | **51×–317×** fewer Pauli terms at equal qubits (H₂O, n_max = 1–3); **76×** vs cc-pVDZ (LiH) |
-| LiH vs STO-3G | unfavourable on raw counts: 838 Pauli @ Q = 30 vs 631 raw @ Q = 12 (1.33× MORE; 3.0× MORE than STO-3G's 276 reduced); 1-norm 34.0 vs 16.5 Ha (about twice, identity included); 2.8× fewer QWC groups (64 vs 179) |
+| LiH vs STO-3G | unfavourable on raw counts: 838 Pauli @ Q = 30 vs 631 raw @ Q = 12 (1.33× MORE; 3.0× MORE than STO-3G's 276 reduced); 1-norm 34.0 vs 16.5 Ha (about twice, identity included); 2.8× fewer QWC groups (64 vs 177) |
 | He accuracy | **0.022%** raw (2D variational, properly variational); **0.020%** with the Schwartz cusp tail, still above exact; zero free parameters |
 | H₂ accuracy | **99.97% D_e** (0.053 mHa; prolate explicit-r₁₂ CI, exact integrals, Paper 12); 96.0% via the Level-4 hyperspherical treatment on an unconverged inner hyperradial wall (Paper 15) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |
@@ -81,7 +81,7 @@ The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count
 | Metric | GeoVac LiH (Q=30) | Gaussian STO-3G | Comparison |
 |--------|:-----------------:|:---------------------:|:---------:|
 | Pauli terms | 838 | 631 raw / 276 reduced | 1.33× more than raw; 3.0× more than reduced |
-| QWC groups | 64 | 179 | 2.8× fewer |
+| QWC groups | 64 | 177 | 2.8× fewer |
 | 1-norm (λ, identity included) | 34.0 Ha | 16.5 Ha | ~2× higher |
 
 The decisive wins are the exact Q-linearity across molecules and the 76× reduction vs cc-pVDZ, not the comparison with minimal-basis STO-3G (all counts under the exact global-M_L rule, 2026-08-29).
@@ -253,7 +253,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
   author    = {J. Loutey},
   title     = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
   year      = {2026},
-  version   = {6.7.24},
+  version   = {6.7.25},
   doi       = {10.5281/zenodo.18738360},
   url       = {https://github.com/jloutey-hash/geovac}
 }
