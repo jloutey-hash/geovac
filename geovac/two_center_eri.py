@@ -524,18 +524,56 @@ def e1_moment(n: int, c, a, X):
     debug/inc2_prebuild_diagnostic.py; X = oo collapses to
     (n!/c^{n+1})[ln((a+c)/a) - sum_{j=1}^{n} (1/j)(c/(a+c))^j], the tail of the
     logarithm's own series.
+
+    a < 0 (finite X only). E_1 is then read as its REAL continuation
+    E1r(z) = -Ei(-z) (principal value), which obeys the same two facts the
+    derivation uses -- d/dt E1r(at) = -e^{-at}/t and E1r(at) ~ -gamma - ln|a t|
+    at t -> 0 -- so the formula carries over verbatim with E_1(aX) -> -Ei(|a|X).
+    Reached by the hybrid shell route when the far-centre orbital decays faster
+    than the near one (a_d > a_c). `_ein` was already branch-safe.
+
+    c = 0 (finite X only). v(t) = t^{n+1}/(n+1) and the by-parts integral is
+    elementary:  X^{n+1}/(n+1) E1r(aX) + int_0^X t^n e^{-at} dt / (n+1).
     """
-    pref = sp.factorial(n) / c ** (n + 1)
     if X is sp.oo:
+        pref = sp.factorial(n) / c ** (n + 1)
         assert c > 0, "int_0^oo needs positive decay"
         tail = sum(sp.Rational(1, j) * (c / (a + c)) ** j for j in range(1, n + 1))
         return pref * (sp.log((a + c) / a) - tail)
+    E1aX = -sp.Ei(-a * X) if a.is_negative else sp.E1(a * X)
+    if c == 0:
+        return (X ** (n + 1) * E1aX + _lower_any(n, a, X)) / (n + 1)
+    pref = sp.factorial(n) / c ** (n + 1)
     mu = a + c
     vX = lower_integral(n, c, X)
     body = _ein(mu * X) - _ein(a * X)
     body -= sum(c ** j / sp.factorial(j) * _lower_any(j - 1, mu, X)
                 for j in range(1, n + 1))
-    return vX * sp.E1(a * X) + pref * body
+    return vX * E1aX + pref * body
+
+
+def log_moment_finite(n: int, c, X):
+    """int_0^X t^n e^{-c t} ln t dt, finite X, either sign of c (c = 0 too).
+
+    The a -> 0 member of the e1_moment family: E1r(at) = Ein(at) - gamma
+    - ln|a| - ln t, so at a rate coincidence the E_1 collapses to a bare
+    logarithm. Derived directly (not as a limit), same by-parts with the same
+    v(t), since d/dt ln t = 1/t:
+
+        = v(X) ln X - int_0^X v(t)/t dt
+        = v(X) ln X - (n!/c^{n+1}) [Ein(cX) - sum_{j=1}^{n} c^j/j! int_0^X s^{j-1} e^{-cs} ds]
+
+    (the j = 0 piece of v(t)/t is (1 - e^{-ct})/t, whose integral IS Ein(cX)).
+    c = 0:  X^{n+1}/(n+1) (ln X - 1/(n+1)).
+    """
+    assert X is not sp.oo, "log moment is only needed on a finite range"
+    if c == 0:
+        return X ** (n + 1) / (n + 1) * (sp.log(X) - sp.Rational(1, n + 1))
+    pref = sp.factorial(n) / c ** (n + 1)
+    vX = lower_integral(n, c, X)
+    body = _ein(c * X) - sum(c ** j / sp.factorial(j) * _lower_any(j - 1, c, X)
+                             for j in range(1, n + 1))
+    return vX * sp.log(X) - pref * body
 
 
 def _ein(z):
@@ -615,7 +653,16 @@ def finite_power_exp(p: int, b, lo, hi):
         p == -1: b > 0 -> E_1(b lo) - E_1(b hi)
                  b < 0 -> Ei(|b| hi) - Ei(|b| lo)
         p <= -2: by parts, I(p) = [r^{p+1}e^{-br}/(p+1)] + b/(p+1) * I(p+1)
+
+    b = 0 is the RATE COINCIDENCE a_c = a_d of the hybrid shell route (e.g.
+    Z_B = Z_A with matching principal quantum numbers): pure powers, and at
+    p = -1 a bare logarithm ln(hi) - ln(lo) -- the b -> 0 limit of the E_1 /
+    Ei difference, taken exactly rather than through a 0/0.
     """
+    if b == 0:
+        if p == -1:
+            return sp.log(hi) - sp.log(lo)
+        return (hi ** (p + 1) - lo ** (p + 1)) / (p + 1)
     if p >= 0:
         return upper_integral(p, b, lo) - upper_integral(p, b, hi)
     if p == -1:
@@ -642,6 +689,7 @@ def _canon_e1(expr, v):
         if term == 0:
             continue
         coeff, power, decay, e1 = sp.Integer(1), sp.Integer(0), sp.Integer(0), None
+        kind = None
         for f in sp.Mul.make_args(term):
             if f == v:
                 power += 1
@@ -655,13 +703,26 @@ def _canon_e1(expr, v):
             elif f.func is sp.expint and f.args[0] == 1 and f.args[1].has(v):
                 assert e1 is None, "two E_1 factors in one term"
                 e1 = sp.expand(f.args[1])
+                kind = "E1"
+            # Ei(beta v), beta > 0: the a_d > a_c branch of the shell route.
+            # Ei(beta v) = -E1r(-beta v), E1r the real continuation of E_1.
+            elif isinstance(f, sp.Ei) and f.args[0].has(v):
+                assert e1 is None, "two E_1-type factors in one term"
+                e1 = sp.expand(-f.args[0])
+                kind = "Ei"
+                coeff *= -1
+            # ln v: the rate-coincidence branch (a_c = a_d) of the shell route.
+            elif isinstance(f, sp.log) and f.args[0] == v:
+                assert e1 is None, "two E_1-type factors in one term"
+                e1 = sp.Integer(0)
+                kind = "log"
             # a CONSTANT E_1 -- e.g. E_1(d R) from the outside branch evaluated
             # at the fixed endpoint R -- is part of the coefficient, not the
             # weight. Dispatching on it would give alpha = 0 and divide by zero.
             else:
                 coeff *= f
         assert not coeff.has(v), f"failed to separate {v} in {term}"
-        out.append((coeff, int(power), decay, e1))
+        out.append((coeff, int(power), decay, e1, kind))
     return out
 
 
@@ -676,7 +737,16 @@ def _integrate_with_e1(expr, v, X):
                                  a DIFFERENCE of e1_moment at two upper limits
     """
     total = sp.Integer(0)
-    for coeff, p, d, e1 in _canon_e1(expr, v):
+    for coeff, p, d, e1, kind in _canon_e1(expr, v):
+        if kind == "log":                                # rate coincidence
+            total += coeff * log_moment_finite(p, d, X)
+            continue
+        if kind == "Ei":                                 # E1r, negative rate
+            alpha = sp.simplify(sp.diff(e1, v))
+            assert alpha.is_negative and sp.simplify(e1 - alpha * v) == 0, \
+                f"Ei branch expects a pure negative rate, got {e1}"
+            total += coeff * e1_moment(p, d, alpha, X)
+            continue
         if e1 is None:
             hi_term = 0 if X is sp.oo else upper_integral(p, d, X)
             total += coeff * (upper_integral(p, d, sp.Integer(0)) - hi_term) \
@@ -790,8 +860,11 @@ def hybrid_closed_form_shell(ZA, oa, ob, oc, ZB, od, R=R_s):
                                   x_s, R, branch="lt")
         e_gt = shell_inner_double(ZA, oa, ob, oc, ZB, od, L, Lp, Mp, ld, md,
                                   x_s, R, branch="gt")
-        for e in (e_lt, e_gt):
-            assert not e.atoms(sp.Ei), "Ei reached step 3 -- needs its own moment"
+        # Ei / ln x reach step 3 only on the x < R branch, and only when the
+        # far-centre orbital decays at least as fast as the near one (a_d >= a_c):
+        # Ei(|a_c - a_d| x) for a_d > a_c, ln x at the coincidence a_d = a_c.
+        # `_integrate_with_e1` consumes both on that finite range.
+        assert not e_gt.atoms(sp.Ei), "Ei on the x > R branch -- unexpected"
 
         # Expand in x FIRST. The inside branch carries x^{-(L+1)}, covered by the
         # weight's x^{k+2} with k >= l_a + l_b >= L -- but only once the powers

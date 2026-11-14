@@ -229,7 +229,7 @@
      "t": 0.0
     }
    ],
-   "time": 0.0,
+   "time": 0.01,
    "residual_order": 2,
    "residual_diag": null,
    "adjoint_has_order1": false,
@@ -1520,7 +1520,7 @@
      "t": 0.1
     }
    ],
-   "time": 0.11,
+   "time": 0.12,
    "x_order": 10,
    "x_degree": 41,
    "pass": true
@@ -1929,7 +1929,7 @@
      "t": 0.2
     }
    ],
-   "time": 0.2,
+   "time": 0.21,
    "residual_order": 2,
    "residual_diag": null,
    "adjoint_has_order1": false,
@@ -2513,7 +2513,7 @@
      "t": 0.2
     }
    ],
-   "time": 0.32,
+   "time": 0.33,
    "residual_order": 8,
    "residual_diag": null,
    "adjoint_has_order1": false,
@@ -3204,5 +3204,5 @@
   }
  ],
  "all_pass": true,
- "time": 44.7
+ "time": 45.3
 }

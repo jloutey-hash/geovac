@@ -160,3 +160,52 @@ coefficient below about 1e-2 of the 7/2 term at L = 220 (not fire-tested). NOT F
 Build `debug/aabc_exact.py` (na_exact plus the Yukawa kernel and its mu-derivative), then: P1 at both referee
 points; P2 over L = 0..1000 mod both NA primes; P3a with na_modguess/na_modanalyze; P3b with the K6 instrument;
 P4 with `intclass_score.py`'s pipeline on the mu-carrying components of A1.
+
+## Results (2026-11-14, scored as registered; record text above unchanged)
+
+Engine `debug/aabc_exact.py` (na_exact's Field, Bessel tables, J_n and finite-part rules reused; density factor copied;
+kernels Y = mu(2L+1) i_L k_L and dY/dmu = (2L+1)[(2L+1) i_L k_L + x i_{L+1} k_L - y i_L k_{L+1}]; f = NA - Y + zeta_A dY).
+Self-check: with NA's kernel w_L the engine reproduces `na_exact.coefficients` key-for-key at both cases, over Q and
+mod 2^61 - 1. Drivers `debug/aabc_run.py` (p1p3b, perL, p2 (+ P3a search), p4) and `debug/aabc_p3a_points.py`;
+data `debug/data/aabc_p1p3b_{2000,2600}.json`, `aabc_perL.json`, `aabc_p2_<p>.json`, `aabc_p3a_<case>_<p>.json`,
+`aabc_p3a_points_<case>_<p>[_shift].json`, `aabc_p4_<p>.json` (+ logs), `aabc_ab0_k{5,7}_*.log`.
+
+| Clause | measured | tolerance / criterion | score |
+|:--|:--|:--|:--|
+| AB0 | K5 rerun: (R, Q0) = (8, 31), nullity 1, order 7 none (Q = 106), both primes (260 s, 392 s). K7: ALL PASS on 1073741789 (44 s) and 1073741833 (45 s) | both reproduce | **HELD** |
+| P1 | exact split, 2000 digits, L <= 240 (last term 6e-51 / 2e-61). A1: 0.212864498761243740935; minus stated R2 -3.9e-11 (minus R2 n = 26: +1.5e-12); minus R1 finest +1.56e-9. A2: 0.223136849487580864384; minus stated R2 -1.2e-11 (n = 26: -4.4e-12); minus R1 -1.01e-9. Values identical at 2600 digits | <= 1e-10 (R2), <= 3e-9 (R1), both cases | **HELD** |
+| P1 (reported) | per-L: NA, Y, W separately vs independent quadrature (density multipole by Gauss-Legendre in s = \|r - C\|, mpmath Bessel kernels, W by numerical d/dmu), L = 0, 1, 4, 12, 30, both cases: max relative difference 2.1e-41 | target 1e-40 | met |
+| P2a | L = 2..1000, both cases, both NA primes: the nonzero-coefficient set is the same 21 constants at every L, all inside C (C as listed = 29 keys; 8 unused, e.g. the E1 at D1 with prefactor e^{-zC D1 - mu D2} for the two rates shared with the middle region) | L-independent, inside C | **HELD** |
+| P2b | gamma coefficient zero at every L, both cases, both primes | no gamma | **HELD** |
+| P2c | four logs e^{-zC D1 - mu D2} ln\|b\|, \|b\| = 1/2, 3/2, 21/10, 41/10 (A1) [3/5, 7/5, 9/5, 19/5 (A2)] | >= 1 log | **HELD** |
+| P2d | constants unchanged when zeta_A -> zeta_A + 1/997: exactly NA's six; Y and dY have zero coefficient on e^{+-zC D1} E1((zB + zC) D2) at every L <= 1000 | as stated | **HELD** |
+| P2 | P2a, P2b, P2d | | **HELD** |
+| P3a | generic sequence, both cases, both primes: R_min = 17, Q0 = 48, nullity 1 (trade: no operator for R <= 16). At x* (multiplicity 3): exponents 0..13, 3/2, 7/2, 9/2 -- **no 5/2**. Further finite singular points (linear and degree 2..18 factors) change position when zeta_A -> zeta_A + 1/997, and several carry non-integer exponents (a non-rational root at a moving linear point; non-constant exponent sums at moving higher-degree points), on both primes and both cases. Fixed under the shift: x*, +-1, and one rational point with integer exponents {-2, 0..15} (A1: -179401/179400; A2: 2509/1980) | x* sole non-integer point, no mu-dependent point, exponents include 3/2 and 5/2 | **MISSED** |
+| P3b | K6 instrument on exact F_L, 2000 digits (identical at 2600): beta_eff(220) = **-4.106 (A1), -4.083 (A2)**, monotone toward -4 (A1: -4.82, -4.51, -4.28, -4.19, -4.14, -4.11 at L = 20, 40, 80, 120, 160, 220); F_L > 0 for all L >= 5, both cases | in [-4.3, -3.85], one sign for L >= 20 | **HELD** |
+| P4 | A1, 15 mu-carrying components, IC primes 1073741789 and 1073741833, L = 1200: every component STUCK from both operator sets at the same residual order (order 4: the eight E1 and four ln components; order 5: e^{-162/25}; order 6: e^{-189/50}, e^{-513/50}), but none clean -- every residual carries the flag "lambda edge has 4 roots outside F_p" -> STUCK-UNCONFIRMED; none TRIANGULAR | >= 1 clean STUCK on both primes | **UNDECIDED** (INCOMPLETE) |
+
+**Reported, not scored.** beta_eff(220) of the pieces: NA -2.029 / -2.021, Y alone -2.024 / -2.017 (predicted -2: held),
+W alone -3.057 / -3.043 (A1 / A2). The pieces' 3/2 branch cancels in f; W's leading term is one order weaker than
+Y's. Constant sets: Y and dY each carry 17 constants. Operator search for Y, W alone and the whole-f class verdict not
+run. P4's flag is an instrument cap (the slope-one edge at infinity has rates not in F_p for these primes), not a
+TRIANGULAR finding.
+
+**Gate: GO** (AB0 held, P1 held, P2 held, P3b held; P3a missed and P4 undecided do not move the gate).
+
+**New against Silverstone 1967**: the constants of every Legendre coefficient form one fixed set of 21 (NA's six plus
+15 mu-carrying: 8 E1, 4 logs, 3 exponentials) with rational coefficients, L-independent from L = 2, with no gamma and
+with logs absent from NA; the point-charge branches (x* - x)^{3/2} (and NA's 5/2) cancel and the coefficient decay is
+L^{-4} (leading (x* - x)^{7/2}); the generic sequence has an order-17, degree-48 operator whose only half-integer
+exponents at x* are 3/2, 7/2, 9/2 and which has further, mu-dependent singular points with non-integer exponents.
+
+**Record defects (reported, not fixed).**
+1. "Already known" / P3a's inheritance argument says NA's components appear in f unchanged. Only NA's two E1 components
+   do (P2d); the two exponentials e^{+-zC D1 - (zB+zC) D2} also receive mu-free contributions from Y and W
+   (measured: both Y and dY carry them; e.g. the outer-region endpoint e^{(s mu - mu) D2} with s = +1). The inheritance of
+   NA's 5/2 exponent therefore did not follow from the controls; it is absent.
+2. P3a's "no finite point whose position depends on mu" did not exclude points carried by single components that
+   cancel in f itself (the operator annihilates each component). The clause is scored as written (on the operator).
+3. P4: the record does not anticipate the IC instrument's lambda-outside-F_p flag on these components; scored
+   UNDECIDED per "INCOMPLETE (flags) leaves it UNDECIDED".
+4. The record's control-run outputs `debug/data/aabc_na_posctrl.json` and `intclass_controls_<p>.json` were
+   rewritten by the AB0 reruns (same verdicts; timings differ).

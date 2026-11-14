@@ -1553,7 +1553,7 @@
      "nsol": 2,
      "flags": [],
      "newdeg": 129,
-     "t": 0.0
+     "t": 0.1
     }
    ],
    "time": 0.05,
@@ -1614,7 +1614,7 @@
      "nsol": 1,
      "flags": [],
      "newdeg": 119,
-     "t": 0.0
+     "t": 0.1
     },
     {
      "order": 10,
@@ -1766,7 +1766,7 @@
      "nsol": 1,
      "flags": [],
      "newdeg": 189,
-     "t": 0.1
+     "t": 0.2
     },
     {
      "order": 6,
@@ -1977,7 +1977,7 @@
      "t": 0.3
     }
    ],
-   "time": 0.3,
+   "time": 0.32,
    "residual_order": 2,
    "residual_diag": null,
    "adjoint_has_order1": false,
@@ -2521,7 +2521,7 @@
      "t": 0.2
     }
    ],
-   "time": 0.3,
+   "time": 0.31,
    "residual_order": 8,
    "residual_diag": null,
    "adjoint_has_order1": false,
@@ -3212,5 +3212,5 @@
   }
  ],
  "all_pass": true,
- "time": 43.4
+ "time": 44.3
 }

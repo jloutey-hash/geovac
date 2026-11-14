@@ -1,0 +1,1914 @@
+{
+ "cases": [
+  {
+   "class": "S",
+   "row": "2",
+   "params": "zA=1,zB=1",
+   "atoms": [
+    "-1|1|0"
+   ],
+   "constants": {},
+   "order_QR": 1,
+   "order_KR_consts_in_field": 1,
+   "coeff_degrees": [
+    2,
+    2
+   ],
+   "operator": [
+    "R*(R + 1)",
+    "R**2 + 3*R + 3"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "3*theta",
+   "R0_exponents": {
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "R**2 + 3*R + 3",
+     "multiplicity": 1,
+     "roots": [
+      "-1.5 - 0.866025403784*I",
+      "-1.5 + 0.866025403784*I"
+     ],
+     "exponents": [
+      "1"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "lam + 1",
+   "inf_rates": {
+    "-1": 1
+   },
+   "atom_rates": [
+    "-1"
+   ],
+   "seconds": 0.07
+  },
+  {
+   "class": "T",
+   "row": "2",
+   "params": "zA=1,zB=1",
+   "atoms": [
+    "-1|1|0"
+   ],
+   "constants": {},
+   "order_QR": 1,
+   "order_KR_consts_in_field": 1,
+   "coeff_degrees": [
+    2,
+    2
+   ],
+   "operator": [
+    "R*(R - 5)",
+    "R**2 - 3*R - 3"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-3*theta",
+   "R0_exponents": {
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "R**2 - 3*R - 3",
+     "multiplicity": 1,
+     "roots": [
+      "-0.791287847478",
+      "3.79128784748"
+     ],
+     "exponents": [
+      "1"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "lam + 1",
+   "inf_rates": {
+    "-1": 1
+   },
+   "atom_rates": [
+    "-1"
+   ],
+   "seconds": 0.05
+  },
+  {
+   "class": "V <a|1/r_A|b>",
+   "row": "2",
+   "params": "zA=1,zB=1",
+   "atoms": [
+    "-1|1|0"
+   ],
+   "constants": {},
+   "order_QR": 1,
+   "order_KR_consts_in_field": 1,
+   "coeff_degrees": [
+    1,
+    1
+   ],
+   "operator": [
+    "R",
+    "R + 1"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta",
+   "R0_exponents": {
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-1.00000000000"
+     ],
+     "exponents": [
+      "1"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "lam + 1",
+   "inf_rates": {
+    "-1": 1
+   },
+   "atom_rates": [
+    "-1"
+   ],
+   "seconds": 0.01
+  },
+  {
+   "class": "V <a|1/r_B|a>",
+   "row": "2",
+   "params": "zA=1,zB=1",
+   "atoms": [
+    "0|1|0",
+    "-2|1|0"
+   ],
+   "constants": {},
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    1,
+    2,
+    2
+   ],
+   "operator": [
+    "4*R",
+    "2*(2*R**2 + 2*R + 1)",
+    "R*(2*R + 1)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "2*R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-0.500000000000"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "2*lam*(lam + 2)",
+   "inf_rates": {
+    "-2": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-2",
+    "0"
+   ],
+   "seconds": 0.07
+  },
+  {
+   "class": "(AA|BB) 1s",
+   "row": "3a",
+   "params": "zA=1,zB=1",
+   "atoms": [
+    "0|1|0",
+    "-2|1|0"
+   ],
+   "constants": {},
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    3,
+    4,
+    4
+   ],
+   "operator": [
+    "4*R*(4*R**2 + 6*R + 3)",
+    "2*(8*R**4 + 20*R**3 + 30*R**2 + 30*R + 15)",
+    "R*(8*R**3 + 24*R**2 + 30*R + 15)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "15*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "8*R**3 + 24*R**2 + 30*R + 15",
+     "multiplicity": 1,
+     "roots": [
+      "-1.16109267731",
+      "-0.919453661343 - 0.877190479892*I",
+      "-0.919453661343 + 0.877190479892*I"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "8*lam*(lam + 2)",
+   "inf_rates": {
+    "-2": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-2",
+    "0"
+   ],
+   "seconds": 0.33
+  },
+  {
+   "class": "(AA|AB) 1s [eq]",
+   "row": "3b",
+   "params": "zA=1,zB=1",
+   "atoms": [
+    "-3|1|0",
+    "-1|1|0"
+   ],
+   "constants": {},
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    4,
+    4,
+    4
+   ],
+   "operator": [
+    "R*(96*R**3 + 204*R**2 + 140*R + 35)",
+    "2*(64*R**4 + 184*R**3 + 200*R**2 + 100*R + 25)",
+    "R*(32*R**3 + 100*R**2 + 100*R + 25)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "25*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "32*R**3 + 100*R**2 + 100*R + 25",
+     "multiplicity": 1,
+     "roots": [
+      "-0.371770611186",
+      "-1.37661469441 - 0.454271076041*I",
+      "-1.37661469441 + 0.454271076041*I"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "32*(lam + 1)*(lam + 3)",
+   "inf_rates": {
+    "-1": 1,
+    "-3": 1
+   },
+   "atom_rates": [
+    "-3",
+    "-1"
+   ],
+   "seconds": 0.31
+  },
+  {
+   "class": "S",
+   "row": "2",
+   "params": "zA=1,zB=2",
+   "atoms": [
+    "-2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    2,
+    2,
+    2
+   ],
+   "operator": [
+    "2*R*(3*R + 2)",
+    "9*R**2 + 6*R + 4",
+    "R*(3*R + 2)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "2*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "3*R + 2",
+     "multiplicity": 1,
+     "roots": [
+      "-0.666666666667"
+     ],
+     "exponents": [
+      0,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "3*(lam + 1)*(lam + 2)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1
+   },
+   "atom_rates": [
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.18
+  },
+  {
+   "class": "T",
+   "row": "2",
+   "params": "zA=1,zB=2",
+   "atoms": [
+    "-2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "R*(18*R**2 - 30*R - 55)",
+    "27*R**3 - 45*R**2 - 30*R - 10",
+    "R*(9*R**2 - 15*R - 5)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-5*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "9*R**2 - 15*R - 5",
+     "multiplicity": 1,
+     "roots": [
+      "-0.284700655417",
+      "1.95136732208"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "9*(lam + 1)*(lam + 2)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1
+   },
+   "atom_rates": [
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.19
+  },
+  {
+   "class": "V <a|1/r_A|b>",
+   "row": "2",
+   "params": "zA=1,zB=2",
+   "atoms": [
+    "-2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    2,
+    2,
+    2
+   ],
+   "operator": [
+    "2*R*(3*R + 4)",
+    "9*R**2 + 6*R + 2",
+    "R*(3*R + 1)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "3*R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-0.333333333333"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "3*(lam + 1)*(lam + 2)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1
+   },
+   "atom_rates": [
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.13
+  },
+  {
+   "class": "V <a|1/r_B|a>",
+   "row": "2",
+   "params": "zA=1,zB=2",
+   "atoms": [
+    "0|1|0",
+    "-2|1|0"
+   ],
+   "constants": {},
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    1,
+    2,
+    2
+   ],
+   "operator": [
+    "4*R",
+    "2*(2*R**2 + 2*R + 1)",
+    "R*(2*R + 1)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "2*R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-0.500000000000"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "2*lam*(lam + 2)",
+   "inf_rates": {
+    "-2": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-2",
+    "0"
+   ],
+   "seconds": 0.05
+  },
+  {
+   "class": "(AA|BB) 1s",
+   "row": "3a",
+   "params": "zA=1,zB=2",
+   "atoms": [
+    "0|1|0",
+    "-2|1|0",
+    "-4|1|0"
+   ],
+   "constants": {},
+   "order_QR": 3,
+   "order_KR_consts_in_field": 3,
+   "coeff_degrees": [
+    2,
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "32*(3*R + 1)**2",
+    "2*(144*R**3 + 312*R**2 + 250*R + 81)",
+    "6*(36*R**3 + 57*R**2 + 39*R + 11)",
+    "R*(36*R**2 + 51*R + 22)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "22*theta*(theta - 1)*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "36*R**2 + 51*R + 22",
+     "multiplicity": 1,
+     "roots": [
+      "-0.708333333333 - 0.330718913883*I",
+      "-0.708333333333 + 0.330718913883*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "36*lam*(lam + 2)*(lam + 4)",
+   "inf_rates": {
+    "-2": 1,
+    "-4": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-4",
+    "-2",
+    "0"
+   ],
+   "seconds": 0.37
+  },
+  {
+   "class": "(AA|AB) 1s [a_d>a_c]",
+   "row": "3b",
+   "params": "zA=1,zB=2",
+   "atoms": [
+    "-2|1|0",
+    "-3|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 3,
+   "order_KR_consts_in_field": 3,
+   "coeff_degrees": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "2*(13050*R**3 + 36165*R**2 + 27348*R + 4558)",
+    "47850*R**3 + 106505*R**2 + 84176*R + 24022",
+    "2*(13050*R**3 + 25290*R**2 + 17563*R + 4929)",
+    "R*(4350*R**2 + 7705*R + 3286)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "3286*theta*(theta - 1)*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "4350*R**2 + 7705*R + 3286",
+     "multiplicity": 1,
+     "roots": [
+      "-1.05575586340",
+      "-0.715508504418"
+     ],
+     "exponents": [
+      0,
+      1,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "4350*(lam + 1)*(lam + 2)*(lam + 3)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1,
+    "-3": 1
+   },
+   "atom_rates": [
+    "-3",
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.66
+  },
+  {
+   "class": "S",
+   "row": "2",
+   "params": "zA=2,zB=1",
+   "atoms": [
+    "-2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    2,
+    2,
+    2
+   ],
+   "operator": [
+    "2*R*(3*R + 2)",
+    "9*R**2 + 6*R + 4",
+    "R*(3*R + 2)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "2*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "3*R + 2",
+     "multiplicity": 1,
+     "roots": [
+      "-0.666666666667"
+     ],
+     "exponents": [
+      0,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "3*(lam + 1)*(lam + 2)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1
+   },
+   "atom_rates": [
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.19
+  },
+  {
+   "class": "T",
+   "row": "2",
+   "params": "zA=2,zB=1",
+   "atoms": [
+    "-2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "R*(18*R**2 - 30*R - 55)",
+    "27*R**3 - 45*R**2 - 30*R - 10",
+    "R*(9*R**2 - 15*R - 5)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-5*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "9*R**2 - 15*R - 5",
+     "multiplicity": 1,
+     "roots": [
+      "-0.284700655417",
+      "1.95136732208"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "9*(lam + 1)*(lam + 2)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1
+   },
+   "atom_rates": [
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.19
+  },
+  {
+   "class": "V <a|1/r_A|b>",
+   "row": "2",
+   "params": "zA=2,zB=1",
+   "atoms": [
+    "-1|1|0",
+    "-2|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    2,
+    2,
+    2
+   ],
+   "operator": [
+    "R*(6*R + 5)",
+    "9*R**2 + 6*R + 2",
+    "R*(3*R + 1)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "3*R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-0.333333333333"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "3*(lam + 1)*(lam + 2)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1
+   },
+   "atom_rates": [
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.18
+  },
+  {
+   "class": "V <a|1/r_B|a>",
+   "row": "2",
+   "params": "zA=2,zB=1",
+   "atoms": [
+    "0|1|0",
+    "-4|1|0"
+   ],
+   "constants": {},
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    1,
+    2,
+    2
+   ],
+   "operator": [
+    "16*R",
+    "2*(8*R**2 + 4*R + 1)",
+    "R*(4*R + 1)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "4*R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-0.250000000000"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "4*lam*(lam + 4)",
+   "inf_rates": {
+    "-4": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-4",
+    "0"
+   ],
+   "seconds": 0.07
+  },
+  {
+   "class": "(AA|BB) 1s",
+   "row": "3a",
+   "params": "zA=2,zB=1",
+   "atoms": [
+    "0|1|0",
+    "-2|1|0",
+    "-4|1|0"
+   ],
+   "constants": {},
+   "order_QR": 3,
+   "order_KR_consts_in_field": 3,
+   "coeff_degrees": [
+    2,
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "32*(3*R + 1)**2",
+    "2*(144*R**3 + 312*R**2 + 250*R + 81)",
+    "6*(36*R**3 + 57*R**2 + 39*R + 11)",
+    "R*(36*R**2 + 51*R + 22)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "22*theta*(theta - 1)*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "36*R**2 + 51*R + 22",
+     "multiplicity": 1,
+     "roots": [
+      "-0.708333333333 - 0.330718913883*I",
+      "-0.708333333333 + 0.330718913883*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "36*lam*(lam + 2)*(lam + 4)",
+   "inf_rates": {
+    "-2": 1,
+    "-4": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-4",
+    "-2",
+    "0"
+   ],
+   "seconds": 0.4
+  },
+  {
+   "class": "(AA|AB) 1s [a_d<a_c]",
+   "row": "3b",
+   "params": "zA=2,zB=1",
+   "atoms": [
+    "-6|1|0",
+    "-1|1|0",
+    "-2|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(2)"
+   },
+   "order_QR": 3,
+   "order_KR_consts_in_field": 3,
+   "coeff_degrees": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "4*(231084*R**3 + 385917*R**2 + 173655*R + 19295)",
+    "2*(770280*R**3 + 1170848*R**2 + 695659*R + 159121)",
+    "693252*R**3 + 888153*R**2 + 429496*R + 83082",
+    "R*(77028*R**2 + 90125*R + 27694)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "27694*theta*(theta - 1)*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "77028*R**2 + 90125*R + 27694",
+     "multiplicity": 1,
+     "roots": [
+      "-0.585014540167 - 0.131489872964*I",
+      "-0.585014540167 + 0.131489872964*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "77028*(lam + 1)*(lam + 2)*(lam + 6)",
+   "inf_rates": {
+    "-1": 1,
+    "-2": 1,
+    "-6": 1
+   },
+   "atom_rates": [
+    "-6",
+    "-2",
+    "-1"
+   ],
+   "seconds": 0.7
+  },
+  {
+   "class": "S",
+   "row": "2",
+   "params": "zA=3/2,zB=1",
+   "atoms": [
+    "-3/2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(6)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    2,
+    2,
+    2
+   ],
+   "operator": [
+    "3*R*(5*R + 4)",
+    "25*R**2 + 20*R + 16",
+    "2*R*(5*R + 4)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "8*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "5*R + 4",
+     "multiplicity": 1,
+     "roots": [
+      "-0.800000000000"
+     ],
+     "exponents": [
+      0,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "5*(lam + 1)*(2*lam + 3)",
+   "inf_rates": {
+    "-1": 1,
+    "-3/2": 1
+   },
+   "atom_rates": [
+    "-3/2",
+    "-1"
+   ],
+   "seconds": 0.19
+  },
+  {
+   "class": "T",
+   "row": "2",
+   "params": "zA=3/2,zB=1",
+   "atoms": [
+    "-3/2|1|0",
+    "-1|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(6)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "R*(225*R**2 - 390*R - 806)",
+    "375*R**3 - 650*R**2 - 520*R - 208",
+    "2*R*(75*R**2 - 130*R - 52)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-104*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "75*R**2 - 130*R - 52",
+     "multiplicity": 1,
+     "roots": [
+      "-0.335183758488",
+      "2.06851709182"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "75*(lam + 1)*(2*lam + 3)",
+   "inf_rates": {
+    "-1": 1,
+    "-3/2": 1
+   },
+   "atom_rates": [
+    "-3/2",
+    "-1"
+   ],
+   "seconds": 0.21
+  },
+  {
+   "class": "V <a|1/r_A|b>",
+   "row": "2",
+   "params": "zA=3/2,zB=1",
+   "atoms": [
+    "-1|1|0",
+    "-3/2|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(6)"
+   },
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    2,
+    2,
+    2
+   ],
+   "operator": [
+    "R*(15*R + 16)",
+    "25*R**2 + 20*R + 8",
+    "2*R*(5*R + 2)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "4*theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "5*R + 2",
+     "multiplicity": 1,
+     "roots": [
+      "-0.400000000000"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "5*(lam + 1)*(2*lam + 3)",
+   "inf_rates": {
+    "-1": 1,
+    "-3/2": 1
+   },
+   "atom_rates": [
+    "-3/2",
+    "-1"
+   ],
+   "seconds": 0.14
+  },
+  {
+   "class": "V <a|1/r_B|a>",
+   "row": "2",
+   "params": "zA=3/2,zB=1",
+   "atoms": [
+    "0|1|0",
+    "-3|1|0"
+   ],
+   "constants": {},
+   "order_QR": 2,
+   "order_KR_consts_in_field": 2,
+   "coeff_degrees": [
+    1,
+    2,
+    2
+   ],
+   "operator": [
+    "9*R",
+    "9*R**2 + 6*R + 2",
+    "R*(3*R + 1)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "theta*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "3*R + 1",
+     "multiplicity": 1,
+     "roots": [
+      "-0.333333333333"
+     ],
+     "exponents": [
+      0,
+      "2"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "3*lam*(lam + 3)",
+   "inf_rates": {
+    "-3": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-3",
+    "0"
+   ],
+   "seconds": 0.1
+  },
+  {
+   "class": "(AA|BB) 1s",
+   "row": "3a",
+   "params": "zA=3/2,zB=1",
+   "atoms": [
+    "0|1|0",
+    "-2|1|0",
+    "-3|1|0"
+   ],
+   "constants": {},
+   "order_QR": 3,
+   "order_KR_consts_in_field": 3,
+   "coeff_degrees": [
+    2,
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "36*(5*R + 2)**2",
+    "2*(450*R**3 + 1110*R**2 + 997*R + 375)",
+    "750*R**3 + 1375*R**2 + 1110*R + 372",
+    "R*(150*R**2 + 245*R + 124)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "124*theta*(theta - 1)*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "150*R**2 + 245*R + 124",
+     "multiplicity": 1,
+     "roots": [
+      "-0.816666666667 - 0.399652626943*I",
+      "-0.816666666667 + 0.399652626943*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "150*lam*(lam + 2)*(lam + 3)",
+   "inf_rates": {
+    "-2": 1,
+    "-3": 1,
+    "0": 1
+   },
+   "atom_rates": [
+    "-3",
+    "-2",
+    "0"
+   ],
+   "seconds": 0.72
+  },
+  {
+   "class": "(AA|AB) 1s [a_d<a_c]",
+   "row": "3b",
+   "params": "zA=3/2,zB=1",
+   "atoms": [
+    "-9/2|1|0",
+    "-1|1|0",
+    "-3/2|1|0"
+   ],
+   "constants": {
+    "k0": "sqrt(6)"
+   },
+   "order_QR": 3,
+   "order_KR_consts_in_field": 3,
+   "coeff_degrees": [
+    3,
+    3,
+    3,
+    3
+   ],
+   "operator": [
+    "3*(4786155*R**3 + 10312137*R**2 + 6014344*R + 859192)",
+    "27121545*R**3 + 52053903*R**2 + 38379584*R + 10886312",
+    "4*(3722565*R**3 + 6070636*R**2 + 3734578*R + 922308)",
+    "4*R*(531795*R**2 + 791263*R + 307436)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "1229744*theta*(theta - 1)*(theta + 1)",
+   "R0_exponents": {
+    "-1": 1,
+    "1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "531795*R**2 + 791263*R + 307436",
+     "multiplicity": 1,
+     "roots": [
+      "-0.743954907436 - 0.156974780435*I",
+      "-0.743954907436 + 0.156974780435*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      "3"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "531795*(lam + 1)*(2*lam + 3)*(2*lam + 9)",
+   "inf_rates": {
+    "-1": 1,
+    "-3/2": 1,
+    "-9/2": 1
+   },
+   "atom_rates": [
+    "-9/2",
+    "-3/2",
+    "-1"
+   ],
+   "seconds": 0.9
+  },
+  {
+   "class": "(2p0 2p0|1s 1s_B) [eq]",
+   "row": "3b",
+   "params": "ZA=3,ZB=3",
+   "atoms": [
+    "-6|1|0",
+    "-3|1|0",
+    "-3|E1|3",
+    "-3|log|0",
+    "3|E1|6",
+    "3|E1|9"
+   ],
+   "constants": {
+    "gE": "EulerGamma",
+    "k1": "log(3)",
+    "k2": "log(6)"
+   },
+   "order_QR": 4,
+   "order_KR_consts_in_field": 4,
+   "coeff_degrees": [
+    11,
+    11,
+    11,
+    11,
+    11
+   ],
+   "operator": [
+    "-162*R**3*(28697814*R**8 + 78121827*R**7 + 114791256*R**6 + 111202389*R**5 + 66460743*R**4 + 26651268*R**3 + 3800196*R**2 - 2003040*R - 357344)",
+    "-2324522934*R**11 - 5553027009*R**10 - 7246198035*R**9 - 8734764276*R**8 - 6184201770*R**7 - 3043779120*R**6 - 929335032*R**5 + 39914208*R**4 + 63006336*R**3 + 19438848*R**2 + 3534336*R + 392704",
+    "R*(258280326*R**10 + 1133563653*R**9 + 1922753538*R**8 + 1515787830*R**7 + 1013517036*R**6 + 375516648*R**5 - 9599472*R**4 - 23245056*R**3 - 15020928*R**2 - 3534336*R - 392704)",
+    "R**2*(258280326*R**9 + 789189885*R**8 + 1063413441*R**7 + 1008793116*R**6 + 659577330*R**5 + 261495216*R**4 + 49319280*R**3 - 2829168*R**2 - 3534336*R - 392704)",
+    "R**3*(28697814*R**8 + 87687765*R**7 + 108413964*R**6 + 87996132*R**5 + 43954326*R**4 + 9519768*R**3 + 191160*R**2 - 441792*R - 49088)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-49088*theta*(theta - 2)*(theta + 1)*(theta + 3)",
+   "R0_exponents": {
+    "2": 1,
+    "-1": 1,
+    "-3": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "28697814*R**8 + 87687765*R**7 + 108413964*R**6 + 87996132*R**5 + 43954326*R**4 + 9519768*R**3 + 191160*R**2 - 441792*R - 49088",
+     "multiplicity": 1,
+     "roots": [
+      "-1.52338437360",
+      "-0.714116845954",
+      "-0.128567411412",
+      "0.179941774462",
+      "-0.217363173633 - 0.246051490901*I",
+      "-0.217363173633 + 0.246051490901*I",
+      "-0.217351175894 - 0.763741165848*I",
+      "-0.217351175894 + 0.763741165848*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      2,
+      "4"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "28697814*(lam - 3)*(lam + 3)**2*(lam + 6)",
+   "inf_rates": {
+    "3": 1,
+    "-6": 1,
+    "-3": 2
+   },
+   "atom_rates": [
+    "-6",
+    "-3",
+    "3"
+   ],
+   "seconds": 19.95
+  },
+  {
+   "class": "(2p0 2p0|1s 1s_B) [a_d>a_c]",
+   "row": "3b",
+   "params": "ZA=3,ZB=4",
+   "atoms": [
+    "-4|1|0",
+    "-6|1|0",
+    "-3|1|0",
+    "4|E1|7",
+    "-4|Ei|1",
+    "-4|E1|2",
+    "4|E1|10"
+   ],
+   "constants": {
+    "k0": "log(10)",
+    "k1": "log(2)",
+    "k2": "log(7)",
+    "k3": "sqrt(3)"
+   },
+   "order_QR": 5,
+   "order_KR_consts_in_field": 5,
+   "coeff_degrees": [
+    13,
+    13,
+    13,
+    13,
+    13,
+    13
+   ],
+   "operator": [
+    "-24*R**2*(112116629520000*R**11 + 347493062448000*R**10 + 892418798048400*R**9 + 1425184703453280*R**8 + 1072372649913908*R**7 - 148231711332984*R**6 - 1024386508785430*R**5 - 1049042840949548*R**4 - 690428081460057*R**3 - 303954657842113*R**2 - 79907662567664*R - 10053748776552)",
+    "-8*(252262416420000*R**13 + 721129549518000*R**12 + 1872517974881400*R**11 + 2707359071898180*R**10 + 1919363923532888*R**9 - 143465336858336*R**8 - 1609977584758080*R**7 - 1813592913088928*R**6 - 1274755201578035*R**5 - 574915098828592*R**4 - 164400351588224*R**3 - 29202578539812*R**2 - 1850948522824*R - 30257195952)",
+    "-4*R*(79415945910000*R**12 + 194754130704000*R**11 + 514752065875950*R**10 + 569524263471590*R**9 + 336158897434654*R**8 + 22737051778904*R**7 - 185268404751441*R**6 - 246027053581895*R**5 - 147390655215910*R**4 - 44998222705486*R**3 - 9275500974936*R**2 - 1771967230432*R + 60514391904)",
+    "4*R*(22189749592500*R**12 + 65854964715750*R**11 + 167408593413600*R**10 + 258537201986770*R**9 + 179267284906367*R**8 - 25883621692172*R**7 - 168983617351983*R**6 - 182307214458518*R**5 - 126015073061574*R**4 - 54901126581672*R**3 - 14152194779960*R**2 - 2354109845376*R - 190395279168)",
+    "R**2*(30364920495000*R**11 + 81266007280500*R**10 + 205053019051650*R**9 + 263483574052580*R**8 + 149107348374733*R**7 - 37173575124335*R**6 - 145140973601324*R**5 - 140822005753452*R**4 - 78816820371556*R**3 - 25571381265796*R**2 - 4235182193984*R - 349058011808)",
+    "R**3*(2335763115000*R**10 + 6071557243500*R**9 + 14839223428050*R**8 + 16843531059110*R**7 + 6287171087561*R**6 - 5277648504780*R**5 - 8728852505588*R**4 - 6132310631872*R**3 - 2289102716660*R**2 - 382265908912*R - 31732546528)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-31732546528*theta*(theta - 2)*(theta - 1)*(theta + 1)*(theta + 3)",
+   "R0_exponents": {
+    "2": 1,
+    "1": 1,
+    "-1": 1,
+    "-3": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "2335763115000*R**10 + 6071557243500*R**9 + 14839223428050*R**8 + 16843531059110*R**7 + 6287171087561*R**6 - 5277648504780*R**5 - 8728852505588*R**4 - 6132310631872*R**3 - 2289102716660*R**2 - 382265908912*R - 31732546528",
+     "multiplicity": 1,
+     "roots": [
+      "-0.593796042570",
+      "0.833475842706",
+      "-0.669982958218 - 0.338970137113*I",
+      "-0.669982958218 + 0.338970137113*I",
+      "-0.447574816545 - 1.91834624375*I",
+      "-0.447574816545 + 1.91834624375*I",
+      "-0.180274464515 - 0.620129352471*I",
+      "-0.180274464515 + 0.620129352471*I",
+      "-0.121702224102 - 0.123590812948*I",
+      "-0.121702224102 + 0.123590812948*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      2,
+      3,
+      "5"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "2335763115000*(lam - 4)*(lam + 3)*(lam + 4)**2*(lam + 6)",
+   "inf_rates": {
+    "4": 1,
+    "-3": 1,
+    "-6": 1,
+    "-4": 2
+   },
+   "atom_rates": [
+    "-6",
+    "-4",
+    "-3",
+    "4"
+   ],
+   "seconds": 1652.69
+  },
+  {
+   "class": "(2p0 2p0|1s 1s_B) [a_d<a_c]",
+   "row": "3b",
+   "params": "ZA=3,ZB=2",
+   "atoms": [
+    "-6|1|0",
+    "-2|1|0",
+    "-3|1|0",
+    "-2|E1|4",
+    "2|E1|8",
+    "-2|E1|1",
+    "2|E1|5"
+   ],
+   "constants": {
+    "k0": "log(2)",
+    "k1": "log(5)",
+    "k2": "sqrt(6)"
+   },
+   "order_QR": 5,
+   "order_KR_consts_in_field": 5,
+   "coeff_degrees": [
+    13,
+    13,
+    13,
+    13,
+    13,
+    13
+   ],
+   "operator": [
+    "-24*R**2*(262476288000*R**11 + 378425779200*R**10 + 619223673600*R**9 - 470849111040*R**8 + 234111872800*R**7 + 1269702902192*R**6 + 1973066388746*R**5 + 660427661722*R**4 - 383446383447*R**3 - 468281400177*R**2 - 375536769472*R - 123166605576)",
+    "-8*(787428864000*R**13 + 697816857600*R**12 + 2189904422400*R**11 - 52696974720*R**10 + 594842067040*R**9 + 2134386398416*R**8 + 5078029783698*R**7 + 3677460376267*R**6 + 1266726641279*R**5 - 88264873321*R**4 - 616490741644*R**3 - 350689058001*R**2 - 78320781482*R - 10183928172)",
+    "-2*R*(174984192000*R**12 - 622637107200*R**11 + 3999518592000*R**10 + 3565284919040*R**9 - 635546630080*R**8 - 1788862479712*R**7 + 5507001914556*R**6 + 8246189303320*R**5 + 7127066489599*R**4 + 4587796224557*R**3 + 1701020802564*R**2 + 349656203408*R + 40735712688)",
+    "2*R*(699936768000*R**12 + 659167027200*R**11 - 1055748921600*R**10 - 1457299949440*R**9 + 940145705600*R**8 + 1993509207392*R**7 - 872502404892*R**6 - 2397565995649*R**5 - 2955024954759*R**4 - 2207156582268*R**3 - 924401512220*R**2 - 238611656448*R - 29098461984)",
+    "R**2*(481206528000*R**11 + 256320115200*R**10 - 396104841600*R**9 - 374826343040*R**8 + 598052842960*R**7 + 580418754392*R**6 - 174259874003*R**5 - 849566564973*R**4 - 1010198996671*R**3 - 623357186633*R**2 - 191570209952*R - 26673590152)",
+    "R**3*(43746048000*R**10 + 19324915200*R**9 - 39523152000*R**8 - 23296080640*R**7 + 62839742320*R**6 + 24201822072*R**5 - 29042800585*R**4 - 58751541898*R**3 - 49107878317*R**2 - 16489661980*R - 2424871832)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "-2424871832*theta*(theta - 2)*(theta - 1)*(theta + 1)*(theta + 3)",
+   "R0_exponents": {
+    "2": 1,
+    "1": 1,
+    "-1": 1,
+    "-3": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": false,
+   "lnR_coefficient": "0",
+   "finite_singular": [
+    {
+     "factor": "43746048000*R**10 + 19324915200*R**9 - 39523152000*R**8 - 23296080640*R**7 + 62839742320*R**6 + 24201822072*R**5 - 29042800585*R**4 - 58751541898*R**3 - 49107878317*R**2 - 16489661980*R - 2424871832",
+     "multiplicity": 1,
+     "roots": [
+      "-0.616139362487",
+      "1.12400470279",
+      "-0.925338360103 - 0.639786241671*I",
+      "-0.925338360103 + 0.639786241671*I",
+      "-0.246256307212 - 0.189116769905*I",
+      "-0.246256307212 + 0.189116769905*I",
+      "-0.173619421623 - 0.662445193151*I",
+      "-0.173619421623 + 0.662445193151*I",
+      "0.870405293017 - 0.800739520491*I",
+      "0.870405293017 + 0.800739520491*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      2,
+      3,
+      "5"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "43746048000*(lam - 2)*(lam + 2)**2*(lam + 3)*(lam + 6)",
+   "inf_rates": {
+    "2": 1,
+    "-3": 1,
+    "-6": 1,
+    "-2": 2
+   },
+   "atom_rates": [
+    "-6",
+    "-3",
+    "-2",
+    "2"
+   ],
+   "seconds": 1021.8
+  },
+  {
+   "class": "(AB|AB) 1s",
+   "row": "3c",
+   "params": "zA=zB=1",
+   "atoms": [
+    "-2|1|0",
+    "0|E1|2",
+    "-2|log|0",
+    "2|E1|4"
+   ],
+   "constants": {
+    "gE": "EulerGamma"
+   },
+   "order_QR": 4,
+   "order_KR_consts_in_field": 4,
+   "coeff_degrees": [
+    7,
+    8,
+    8,
+    8,
+    8
+   ],
+   "operator": [
+    "24*R*(32*R**6 + 192*R**5 + 576*R**4 + 1380*R**3 + 2070*R**2 + 1890*R + 945)",
+    "-16*(16*R**8 + 80*R**7 + 72*R**6 - 246*R**5 - 1035*R**4 - 2430*R**3 - 3915*R**2 - 4050*R - 2025)",
+    "-2*R*(64*R**7 + 768*R**6 + 2976*R**5 + 5400*R**4 + 6480*R**3 + 5940*R**2 + 4050*R + 2025)",
+    "2*R**2*(32*R**6 + 64*R**5 - 480*R**4 - 1980*R**3 - 3690*R**2 - 4050*R - 2025)",
+    "R**3*(32*R**5 + 240*R**4 + 720*R**3 + 1260*R**2 + 1350*R + 675)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "675*theta*(theta - 9)*(theta - 4)*(theta + 1)",
+   "R0_exponents": {
+    "9": 1,
+    "4": 1,
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": true,
+   "lnR_coefficient": "2*(R**4 + 6*R**3 + 15*R**2 + 18*R + (-2*R**4 + 6*R**2 + (R**4 - 6*R**3 + 15*R**2 - 18*R + 9)*exp(2*R) - 18)*exp(2*R) + 9)*exp(-2*R)/(15*R)",
+   "finite_singular": [
+    {
+     "factor": "32*R**5 + 240*R**4 + 720*R**3 + 1260*R**2 + 1350*R + 675",
+     "multiplicity": 1,
+     "roots": [
+      "-3.30532205964",
+      "-1.50199850892 - 0.387251914323*I",
+      "-1.50199850892 + 0.387251914323*I",
+      "-0.595340461264 - 1.51592964858*I",
+      "-0.595340461264 + 1.51592964858*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      2,
+      "4"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "32*lam*(lam - 2)*(lam + 2)**2",
+   "inf_rates": {
+    "2": 1,
+    "-2": 2,
+    "0": 1
+   },
+   "atom_rates": [
+    "-2",
+    "0",
+    "2"
+   ],
+   "seconds": 52.25
+  },
+  {
+   "class": "(AB|AB) 1s",
+   "row": "3c",
+   "params": "zA=zB=3/2",
+   "atoms": [
+    "-3|1|0",
+    "0|E1|3",
+    "-3|log|0",
+    "3|E1|6"
+   ],
+   "constants": {
+    "gE": "EulerGamma",
+    "k1": "log(2)",
+    "k2": "log(3)"
+   },
+   "order_QR": 4,
+   "order_KR_consts_in_field": 4,
+   "coeff_degrees": [
+    7,
+    8,
+    8,
+    8,
+    8
+   ],
+   "operator": [
+    "27*R*(27*R**6 + 108*R**5 + 216*R**4 + 345*R**3 + 345*R**2 + 210*R + 70)",
+    "-3*(81*R**8 + 270*R**7 + 162*R**6 - 369*R**5 - 1035*R**4 - 1620*R**3 - 1740*R**2 - 1200*R - 400)",
+    "-3*R*(27*R**7 + 216*R**6 + 558*R**5 + 675*R**4 + 540*R**3 + 330*R**2 + 150*R + 50)",
+    "3*R**2*(9*R**6 + 12*R**5 - 60*R**4 - 165*R**3 - 205*R**2 - 150*R - 50)",
+    "R**3*(9*R**5 + 45*R**4 + 90*R**3 + 105*R**2 + 75*R + 25)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "25*theta*(theta - 9)*(theta - 4)*(theta + 1)",
+   "R0_exponents": {
+    "9": 1,
+    "4": 1,
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": true,
+   "lnR_coefficient": "3*(9*R**4 + 36*R**3 + 60*R**2 + 48*R + (-18*R**4 + 24*R**2 + (9*R**4 - 36*R**3 + 60*R**2 - 48*R + 16)*exp(3*R) - 32)*exp(3*R) + 16)*exp(-3*R)/(40*R)",
+   "finite_singular": [
+    {
+     "factor": "9*R**5 + 45*R**4 + 90*R**3 + 105*R**2 + 75*R + 25",
+     "multiplicity": 1,
+     "roots": [
+      "-2.20354803976",
+      "-1.00133233928 - 0.258167942882*I",
+      "-1.00133233928 + 0.258167942882*I",
+      "-0.396893640843 - 1.01061976572*I",
+      "-0.396893640843 + 1.01061976572*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      2,
+      "4"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "9*lam*(lam - 3)*(lam + 3)**2",
+   "inf_rates": {
+    "3": 1,
+    "-3": 2,
+    "0": 1
+   },
+   "atom_rates": [
+    "-3",
+    "0",
+    "3"
+   ],
+   "seconds": 60.76
+  },
+  {
+   "class": "(AB|AB) 1s",
+   "row": "3c",
+   "params": "zA=zB=2",
+   "atoms": [
+    "-4|1|0",
+    "0|E1|4",
+    "-4|log|0",
+    "4|E1|8"
+   ],
+   "constants": {
+    "gE": "EulerGamma",
+    "k1": "log(2)"
+   },
+   "order_QR": 4,
+   "order_KR_consts_in_field": 4,
+   "coeff_degrees": [
+    7,
+    8,
+    8,
+    8,
+    8
+   ],
+   "operator": [
+    "96*R*(2048*R**6 + 6144*R**5 + 9216*R**4 + 11040*R**3 + 8280*R**2 + 3780*R + 945)",
+    "-16*(4096*R**8 + 10240*R**7 + 4608*R**6 - 7872*R**5 - 16560*R**4 - 19440*R**3 - 15660*R**2 - 8100*R - 2025)",
+    "-2*R*(8192*R**7 + 49152*R**6 + 95232*R**5 + 86400*R**4 + 51840*R**3 + 23760*R**2 + 8100*R + 2025)",
+    "2*R**2*(2048*R**6 + 2048*R**5 - 7680*R**4 - 15840*R**3 - 14760*R**2 - 8100*R - 2025)",
+    "R**3*(1024*R**5 + 3840*R**4 + 5760*R**3 + 5040*R**2 + 2700*R + 675)"
+   ],
+   "verified_symbolic": true,
+   "verified_numeric_rel": 0.0,
+   "R0_fuchsian": true,
+   "R0_indicial": "675*theta*(theta - 9)*(theta - 4)*(theta + 1)",
+   "R0_exponents": {
+    "9": 1,
+    "4": 1,
+    "-1": 1,
+    "0": 1
+   },
+   "f_has_lnR_at_0": true,
+   "lnR_coefficient": "2*(16*R**4 + 48*R**3 + 60*R**2 + 36*R + (-32*R**4 + 24*R**2 + (16*R**4 - 48*R**3 + 60*R**2 - 36*R + 9)*exp(4*R) - 18)*exp(4*R) + 9)*exp(-4*R)/(15*R)",
+   "finite_singular": [
+    {
+     "factor": "1024*R**5 + 3840*R**4 + 5760*R**3 + 5040*R**2 + 2700*R + 675",
+     "multiplicity": 1,
+     "roots": [
+      "-1.65266102982",
+      "-0.750999254458 - 0.193625957162*I",
+      "-0.750999254458 + 0.193625957162*I",
+      "-0.297670230632 - 0.757964824288*I",
+      "-0.297670230632 + 0.757964824288*I"
+     ],
+     "exponents": [
+      0,
+      1,
+      2,
+      "4"
+     ],
+     "apparent": true
+    }
+   ],
+   "inf_char_poly": "1024*lam*(lam - 4)*(lam + 4)**2",
+   "inf_rates": {
+    "4": 1,
+    "-4": 2,
+    "0": 1
+   },
+   "atom_rates": [
+    "-4",
+    "0",
+    "4"
+   ],
+   "seconds": 58.01
+  }
+ ],
+ "cross_checks": {
+  "silverstone_odd": {
+   "odd_coeffs_R1_R3_R5": [
+    "0",
+    "0",
+    "0"
+   ],
+   "R7": "2/315",
+   "R9": "16/14175",
+   "match": true
+  },
+  "pachucki_bessel": {
+   "operator": "R D^2 + D - p^2 R",
+   "R0_indicial": "theta**2",
+   "R0_exponents": "{0: 2} (log solution K_0)",
+   "inf_rates": "+p, -p",
+   "check_K0": true
+  }
+ }
+}

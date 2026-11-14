@@ -1044,6 +1044,27 @@ computing).
 Guessing an operator from many exact terms is standard~\cite{bluemlein2009moments,bostan2009chi5};\ an
 equation in the bond angle for a three-center integral was not found in a literature search.
 Caps:\ $1s$ functions;\ the constants are assumed linearly independent over $\mathbb{Q}$.
+\textbf{[SYMBOLIC + MEASURED]} The other three-center repulsion type, a one-center density
+against a two-center one, $(1s_{\rm A}1s_{\rm A}|1s_{\rm B}1s_{\rm C})$, reduces to the
+one-electron integral above.  The potential of a normalized $1s$ density is
+$V_{\rm A}(s)=1/s-(\zeta_{\rm A}+1/s)e^{-2\zeta_{\rm A}s}$, so the integral is the
+nuclear-attraction integral of $\rho_{\rm BC}$ minus two Yukawa-screened analogues of mass
+$2\zeta_{\rm A}$, channel by channel;\ summed to $\ell=240$ at $2000$ digits it matches an
+independent Gaussian-fit referee to $4\times10^{-11}$ in two geometries.  Every Legendre
+coefficient from $\ell=2$ on is a rational combination of the same $21$ constants:\ the
+six of the one-electron integral and fifteen carrying the screening mass, among them
+four logarithms and no Euler $\gamma$.  The smooth one-center potential removes the
+$(x^{*}-x)^{3/2}$ branch that the bare $1/|\mathbf{r}-Z|$ gives the one-electron
+integral:\ the combined coefficients decay like $\ell^{-4}$ (effective exponent $-4.1$ at
+$\ell=220$) while each piece alone decays like $\ell^{-2}$, so the leading term is
+$(x^{*}-x)^{7/2}$.  Silverstone gave this integral as a Legendre series with each term in
+closed form~\cite{silverstone1967pnas};\ the fixed constant set and the cancellation are
+new.  Two registered clauses failed or stayed open:\ the bond-angle operator, of order
+$17$, has further singular points that move with $\zeta_{\rm A}$ and no $5/2$ exponent at
+$x^{*}$, and whether the screened components leave the two-center class is undecided
+(record \texttt{docs/predictions/2026-11-14\_aa\_bc\_three\_centre.md}, registered before
+computing;\ guard \texttt{tests/test\_paper59\_aa\_bc.py}).  Caps:\ $1s$ functions, two
+geometries.
 Since every channel stays in the two-center class, any higher-class content of the integrated
 value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the
 angle.  A two-center-class form in $w=|Y-Z|$ is a finite sum of rational functions, exponentials

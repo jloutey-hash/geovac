@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.26] - 2026-11-14
+
+**Chemistry period inventory opened; two-centre layer and the (AA|BC) three-centre hole worked (pre-registered AB, GO; PI-directed).**
+
+### Added
+- `docs/chemistry_period_inventory.md`: the bounded thesis (PI-adopted): the period map of the
+  Slater-basis molecular Hamiltonian, one row per integral type, a six-criterion definition of done
+  (class, equation, singular points, tier, prior art, guard). Parked: Gaussian side, field doors,
+  gravitational two-body parallel. Decision recorded: ln R in the hybrid class is the existing E1 seed
+  price, no new rung.
+- Record AB (`docs/predictions/2026-11-14_aa_bc_three_centre.md`, committed 947b6ec0 before computing):
+  (1s_A1s_A|1s_B1s_C), which nothing in the corpus computed. AB0, P1 (exact split NA - Y - zeta_A W,
+  mu = 2 zeta_A, matches the Gaussian referee to 4e-11 in two geometries), P2a-d (same 21 constants at
+  every L from 2 to 1000; four logs; no gamma) and P3b (effective decay -4.1 at L = 220: the smooth
+  one-centre potential cancels the one-electron 3/2 branch, leading 7/2) HELD; P3a MISSED (order-17
+  operator has zeta_A-dependent singular points, no 5/2 at x*); P4 UNDECIDED (IC flags unsplit edge
+  roots). Record defects reported in its Results section. Home: Paper 59 `sec:scope`.
+- R-operators for every two-centre 1s class (`debug/two_centre_r_operators.py`): integer polynomial
+  coefficients, order = number of distinct decay rates (a 1/R tail counts as rate 0); R = 0 Fuchsian,
+  R = infinity irregular rank 1, all other finite points apparent; the (AA|BB) operator alone gives the
+  odd terms 2/315 R^7, 16/14175 R^9; only homonuclear exchange has a log at R = 0,
+  (8/3375) zeta^10 R^9 ln(zeta R). Home: Paper 58 `sec:census`.
+- Guards (each written as a separate pass, fire-tested): `tests/test_paper58_hybrid_domain.py` (4/4
+  plants), `tests/test_paper58_exchange_fast.py` (6/6; first fast exact l > 0 exchange check),
+  `tests/test_paper58_r_operators.py` (26/26), `tests/test_paper59_aa_bc.py` (14/14). Fire-testing
+  found that E1 for -Ei changes only the imaginary part, invisible to a real-part check.
+
+### Changed
+- `geovac/two_center_eri.py`: hybrid (AA|AB) shell route now covers every rate ordering. a_d > a_c
+  carries Ei; a_d = a_c is the exact log limit (gamma_E + ln R, combining with E1 into Ein). The hole
+  was a rate coincidence, not a charge one. Old domain bit-identical; 12 cases (l <= 2) match two
+  independent quadratures to 7e-12.
+- Paper 58: census overlap claim narrowed from "arbitrary (n,l,m,Z)" to the tested hydrogenic
+  n_max = 2 basis; [PRIOR ART] paragraph (Coulomb elementarity and the exchange {E1, ln, gamma} class
+  are known: Lesiuk-Moszynski 2014 I/II, attributing the exchange form to Maslen-Trefry; Sugiura and
+  Ruedenberg for 1s; the hybrid closed form not found stated); abstract "as is classical"; domain
+  paragraph rewritten in rates; class table notes gamma at equal rates; R-operator paragraph; bib
+  lesiuk2014a/b, silverstone1967.
+- Paper 59 `sec:scope`: (AA|BC) paragraph with the failed and open clauses stated.
+- Atlas door 16 retitled to the shared-centre type it covers, with a pointer to (AA|BC).
+
+### Literature checked (primary sources)
+- Lesiuk-Moszynski 2014 I and II (arXiv 1410.6112/6113): verified as above. Silverstone 1967 PNAS:
+  per-term Legendre series for (1s_a1s_a|1s_b1s_c), R > R' only, no closed sum. Silverstone 1967 JCP:
+  abstract only (paywalled); the non-even R family is his, the specific 1s coefficients unchecked.
+  Tai 1992 (PRA 45, 1454) is an overlap paper and was not cited.
+
+### Still owed (inventory)
+- Two-centre: exchange at unequal exponents; orbitals beyond 1s (row 8); the LiH certified-energy
+  regression test.
+
 ## [v6.7.25] - 2026-11-13
 
 **LiH STO-3G baseline rebuilt from the project's own integrals (pre-registered LB, GO; PI-directed).**

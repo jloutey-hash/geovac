@@ -124,7 +124,7 @@ regression test is \textsc{owed}).
 
 A by-product bears on the continuous theory the census borrows from:\ the
 radial integral at the core of the two-center direct-Coulomb $(AA|BB)$
-repulsion closes in elementary form (weight one, $\pi$-free, no
+repulsion closes in elementary form, as is classical (weight one, $\pi$-free, no
 dilogarithm), so that block is not merely counted but \emph{decided}---all $195$
 permitted entries proven nonzero by Lindemann--Weierstrass separation.
 \end{abstract}
@@ -262,7 +262,8 @@ are FCI.  They are reported here as scope, not as a result of this paper.
 
 \subsection{Machinery and certificate}
 
-Two-center overlaps at arbitrary $(n, l, m, Z)$ are computed as exact
+Two-center overlaps of hydrogenic orbitals (exponent $Z/n$) through
+$n_{\max}=2$, the census basis below, are computed as exact
 rationals via the Mulliken auxiliary functions
 $A_n$/$B_n$~\cite{mulliken1949,roothaan1951}---one of several classical
 routes to two-center Slater integrals~\cite{barnett_coulson1951,
@@ -360,11 +361,41 @@ classes therefore have closed-form machinery.
 class & closed form & transcendental content \\
 \hline
 one-center, $(AA|BB)$ & yes & none---elementary \\
-$(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \ln\}$ \\
+$(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \ln\}$; $\gamma$ at equal rates \\
 $(AB|AB)$             & yes & $\{E_1, \ln, \gamma\}$ \\
 \hline\hline
 \end{tabular}
 \end{center}
+
+\textbf{[PRIOR ART]} The first and last rows are known:\ the two-center Coulomb
+integral over Slater orbitals reduces to elementary functions, and the exchange
+integral's closed form carries $E_1$, $\ln$ and Euler's $\gamma$
+(Refs.~\cite{lesiuk2014a,lesiuk2014b}, which attribute the general exchange form to
+Maslen and Trefry;\ for $1s$, Refs.~\cite{sugiura1927,ruedenberg1951}).  Those
+references evaluate the hybrid class by one-dimensional quadrature;\ we did not find
+its closed form stated.  What this paper adds is the census use:\ the
+classes decide which entries vanish.
+
+\textbf{[SYMBOLIC]} Each class also obeys a linear differential equation in $R$
+with integer polynomial coefficients;\ the transcendentals live only in its
+solutions.  For $1s$ orbitals on a panel of exponents, the operator's order is
+the number of distinct decay rates of the closed form, counting the rate $0$ of
+a $1/R$ tail:\ the overlap at $\zeta=1$, $(1+R+R^2/3)e^{-R}$, is annihilated by
+$(R^2+3R+3)\,d/dR+R(R+1)$, and $(AA|BB)$ has order $2$ at equal exponents and
+$3$ otherwise.  In every case $R=0$ is a regular singular point with integer
+exponents, $R=\infty$ is irregular of rank one with the decay rates as its
+characteristic roots, and every other finite singular point is apparent.  The
+solution of the $(AA|BB)$ operator analytic at $R=0$ and normalized to $5/8$
+reproduces, from the operator alone, the odd terms $(2/315)R^7+(16/14175)R^9$, members of the second, non-even
+family of terms that Ref.~\cite{silverstone1967} identified.  Only the homonuclear exchange class has a
+logarithm at $R=0$:\ its operator has order $4$, exponents $\{-1,0,4,9\}$, and
+the integral carries $(8/3375)\,\zeta^{10}R^9\ln(\zeta R)$.  At the hybrid rate
+coincidence the pair $\gamma_E+\ln R$ combines with $E_1$ into the entire
+function $\mathrm{Ein}$, so no logarithm survives there.  Caps:\ $1s$ orbitals,
+plus one $2p$ hybrid family;\ exchange at equal exponents only, since the
+heteronuclear $\tau$-series has no closed form;\ minimality assumes the
+exponential, logarithmic and $E_1$ atoms independent over $\mathbb{Q}(R)$
+(\texttt{tests/test\_paper58\_r\_operators.py}).
 
 The transcendental content grows across the classes, but---and this is the
 structurally important part---it does \emph{not} escalate in weight.  The
@@ -1406,11 +1437,16 @@ minimal-basis H$_2$ CI itself is as old as Sugiura's integral);\ what is new is
 their \emph{status}:\ equilibrium geometry and force constant of a two-electron
 molecule as certified roots of one closed-form expression.
 
-Two engine findings from the build.  (i)~\emph{Domain restriction}
-(measured):\ the shell-route hybrid evaluator with $l_a,l_b>0$ requires
-$Z_B<Z_A$ strictly---at $Z_B=Z_A$ a removable rate coincidence produces
-NaN (the limit exists and matches quadrature), and $Z_B>Z_A$ reaches an
-unimplemented $\mathrm{Ei}$ branch;\ a coverage gap, not a wrong value.
+Two engine findings from the build.  (i)~\emph{Domain} (measured):\ the
+shell-route hybrid evaluator covers every ordering of the decay rates
+$a_c=Z_A/n_c$ and $a_d=Z_B/n_d$.  When $a_d>a_c$ the branch inside $R$ carries
+$\mathrm{Ei}(|a_d-a_c|R)$, the principal-value continuation of $E_1$;\ at the
+coincidence $a_d=a_c$ the $E_1$ collapses exactly to a logarithm and the closed
+form gains the pair $\gamma_E+\ln R$, the regular part of $E_1(\delta R)$ as
+$\delta\to0$.  No function outside $\{E_1,\mathrm{Ei},\ln\}$ and $\gamma_E$
+appears.  Values match two independent quadratures to $\le7\times10^{-12}$
+relative on twelve cases with $l\le2$, and approach the coincidence linearly in
+the rate offset.  (An earlier build stopped at $a_d\ge a_c$, a coverage gap.)
 (ii)~A pre-existing exploratory driver's ``DISAGREE beyond the fit
 floor---investigate'' verdict against a Gaussian reference is resolved
 \emph{against the reference}:\ the $8\times10^{-6}$ gap sits in the Gaussian
@@ -1529,6 +1565,20 @@ numerical tables for overlap integrals,''
 C.~C.~J.~Roothaan, ``A study of two-center integrals useful in
 calculations on molecular structure.\ I,''
 \textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1445--1458 (1951).
+
+\bibitem{silverstone1967}
+H.~J.~Silverstone, ``Series expansion for two-center noninteger-$n$ Coulomb integrals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{46}, 4377--4380 (1967).
+
+\bibitem{lesiuk2014a}
+M.~Lesiuk and R.~Moszynski, ``Calculation of two-centre two-electron integrals
+over Slater-type orbitals revisited.\ I.\ Coulomb and hybrid integrals,''
+\textit{Phys.\ Rev.\ E} \textbf{90}, 063318 (2014), arXiv:1410.6112.
+
+\bibitem{lesiuk2014b}
+M.~Lesiuk and R.~Moszynski, ``Calculation of two-centre two-electron integrals
+over Slater-type orbitals revisited.\ II.\ Neumann expansion of the exchange
+integrals,'' \textit{Phys.\ Rev.\ E} \textbf{90}, 063319 (2014), arXiv:1410.6113.
 
 \bibitem{ruedenberg1951}
 K.~Ruedenberg, ``A study of two-center integrals useful in calculations
