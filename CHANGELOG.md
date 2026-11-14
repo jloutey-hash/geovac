@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.27] - 2026-11-14
+
+**Inventory row 8, part 1: two-centre integrals over p and d orbitals do not climb (pre-registered R8, GO; PI-directed).**
+
+### Added
+- Record R8 (`docs/predictions/2026-11-14_row8_two_centre_l2.md`, committed 7784d751 before computing): a
+  48-case panel of hydrogenic orbitals with l <= 2, n <= 3, m != 0, on either centre: 30 one-electron
+  (S, T, <a|1/r_A|b>, <a|1/r_B|b>), 8 (AA|BB), 10 hybrids (AA|AB) across all rate orderings. Controls
+  passed (dilog and E1^2 refused, genuine pole flagged, planted and exchange ln R detected). R8-0, P1, P2,
+  P3a, P4, P5, P6 HELD; P3b MISSED on one case. Gate GO.
+  - One-electron and (AA|BB): exponentials only; operator order = number of distinct rates, 38/38.
+  - Hybrids: atoms within {1, E1, Ei, ln R}; gamma_E and ln R in exactly the five equal-rate cases; order
+    = rates + 1 exactly where E1 appears.
+  - All 48: R = 0 regular singular with integer exponents, no ln R in the integral at R = 0, every other
+    finite singular point apparent; max numeric diff 1.2e-14 against quadrature.
+  - P3b's miss: H9 = (2s 2s|3d0 3d0_B), a_d > a_c, is elementary. An s-type same-centre pair gives a
+    monopole potential, so no E1 or Ei. The mechanism was already in `geovac/qfd_core.py`'s docstring and
+    the prediction did not use it. Corrected rule: E1 (Ei, gamma + ln R) iff the (ab) pair has an L >= 1
+    multipole; 10/10.
+- `geovac/two_center_one_electron.py`: exact two-centre one-electron integrals over hydrogenic orbitals of
+  any l, in prolate spheroidal coordinates with the Mulliken auxiliaries (equal-m products carry
+  rho^{2|m|}; one 1/r cancels against the volume element). Two kinetic routes (radial Laplacian, eigentrick)
+  agree symbolically; reduces exactly to `qfd_core` at l = 0. Promoted from `debug/row8_one_electron.py`
+  with byte-identical output (the debug file keeps only the quadrature referee).
+- Guard `tests/test_paper58_row8_l2.py`, a separate pass after scoring: s-type limit, self-contained
+  cylindrical quadrature referee (scipy genlaguerre + lpmv), kinetic routes, six frozen operators (E5VB,
+  E4T, F5, C4, H2, H9) for annihilation, minimality, the order rule and singularities, H5's order lower
+  bound, and the function content (s-pair rule, Ei, gamma + ln R, no ln R at 0). Fire-tested 11/11 FIRED.
+  Found while writing it: an operator whose integral carries E1 has exactly one log solution at R = 0
+  (H2; also the v6.7.26 hybrid operators), so log-freeness at 0 belongs to the integral, not to its operator.
+
+### Changed
+- Paper 58 `sec:census`: class table now lists Ei and notes that the hybrid is elementary when the AA pair
+  is s-type; new l <= 2 paragraph (closed forms, order rule, s-pair rule, singular points, the operator's
+  log solution) with [PRIOR ART] (one-electron closed forms Mulliken 1949 / Roothaan 1951, (AA|BB)
+  Lesiuk-Moszynski 2014 I; operator existence automatic for this function class); caps updated; backing
+  table gains a row; its file count corrected (eleven -> fifteen, stale before this change).
+- `docs/chemistry_period_inventory.md`: rows 2, 3a, 3b at l <= 2; row 2 guard MET; row 8 PARTIAL with
+  guard; row 6 guard corrected to MET (its guard `tests/test_paper59_aa_bc.py` shipped in v6.7.26 but the
+  row still said MISSING).
+- `docs/claim_test_matrix.md`: Paper 58 row for the l <= 2 paragraph.
+
+### Still owed (inventory)
+- Row 8 part 2: exchange at l > 0, (AA|BC) with p orbitals (plan: dictionary derivatives inside
+  `debug/aabc_exact.py`), Paper 63's fibre at l > 0. Unchanged from v6.7.26: exchange at unequal exponents,
+  the LiH certified-energy regression test, rows 1, 4, 5, 7 unaudited.
+
 ## [v6.7.26] - 2026-11-14
 
 **Chemistry period inventory opened; two-centre layer and the (AA|BC) three-centre hole worked (pre-registered AB, GO; PI-directed).**

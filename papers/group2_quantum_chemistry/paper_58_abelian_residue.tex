@@ -361,7 +361,7 @@ classes therefore have closed-form machinery.
 class & closed form & transcendental content \\
 \hline
 one-center, $(AA|BB)$ & yes & none---elementary \\
-$(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \ln\}$; $\gamma$ at equal rates \\
+$(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \mathrm{Ei}, \ln\}$; $\gamma$ at equal rates;\ none if the $AA$ pair is $s$-type \\
 $(AB|AB)$             & yes & $\{E_1, \ln, \gamma\}$ \\
 \hline\hline
 \end{tabular}
@@ -391,11 +391,37 @@ family of terms that Ref.~\cite{silverstone1967} identified.  Only the homonucle
 logarithm at $R=0$:\ its operator has order $4$, exponents $\{-1,0,4,9\}$, and
 the integral carries $(8/3375)\,\zeta^{10}R^9\ln(\zeta R)$.  At the hybrid rate
 coincidence the pair $\gamma_E+\ln R$ combines with $E_1$ into the entire
-function $\mathrm{Ein}$, so no logarithm survives there.  Caps:\ $1s$ orbitals,
-plus one $2p$ hybrid family;\ exchange at equal exponents only, since the
-heteronuclear $\tau$-series has no closed form;\ minimality assumes the
-exponential, logarithmic and $E_1$ atoms independent over $\mathbb{Q}(R)$
-(\texttt{tests/test\_paper58\_r\_operators.py}).
+function $\mathrm{Ein}$, so no logarithm survives there.
+
+\textbf{[SYMBOLIC + MEASURED]} The picture carries over to hydrogenic orbitals with
+$l \le 2$, $n \le 3$, on a pre-registered panel of $48$ integrals with $p$ and $d$
+orbitals on either centre and $m \neq 0$:\ $30$ one-electron, $8$ of type $(AA|BB)$ and
+$10$ hybrids.  The one-electron integrals $S$, $T$, $\langle a|1/r_A|b\rangle$ and
+$\langle a|1/r_B|b\rangle$ close in prolate spheroidal coordinates through the same
+auxiliaries $A_n$, $B_n$~\cite{mulliken1949,roothaan1951}, because a product with equal
+$m$ carries $\rho^{2|m|}$, a polynomial, and a single $1/r_A$ or $1/r_B$ cancels against
+the volume element (\texttt{geovac/two\_center\_one\_electron.py};\ it reproduces the
+$s$-type engine exactly and quadrature to $1.2\times10^{-14}$).  These and the $(AA|BB)$
+integrals contain only exponentials, and their operator order is the number of distinct
+decay rates ($38$ of $38$).  A hybrid whose same-centre pair $ab$ is $s$-type is
+elementary as well:\ that pair's potential is its monopole, $1/r_A$ plus exponentials,
+so no $E_1$ arises even when $a_d > a_c$.  Only an $L \ge 1$ multipole of $ab$ brings in
+$E_1$, with $\mathrm{Ei}$ when $a_d > a_c$ and $\gamma_E + \ln R$ when $a_d = a_c$, and
+the order is then the number of rates plus one.  Every operator is regular singular at
+$R = 0$ with integer exponents, irregular of rank one at infinity with the rates as
+characteristic roots, and apparent at every other finite singular point;\ no integral
+carries $\ln R$ at $R = 0$.  The operator of a hybrid that carries $E_1$ does have one
+logarithmic solution there (the $E_1$ atom's own), so the absence of a logarithm is a
+property of the integral, not of its operator.  \textbf{[PRIOR ART]} The one-electron
+closed forms are classical~\cite{mulliken1949,roothaan1951}, as are the $(AA|BB)$
+ones~\cite{lesiuk2014a}, and an operator of this kind exists for any function built from these atoms with
+rational coefficients.  What is measured here is its order and its singularities.
+
+Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ exchange at equal exponents and
+$1s$ only, since the heteronuclear $\tau$-series has no closed form;\ minimality assumes
+the exponential, logarithmic, $E_1$ and $\mathrm{Ei}$ atoms are independent over
+$\mathbb{Q}(R)$ (\texttt{tests/test\_paper58\_r\_operators.py},
+\texttt{tests/test\_paper58\_row8\_l2.py}).
 
 The transcendental content grows across the classes, but---and this is the
 structurally important part---it does \emph{not} escalate in weight.  The
@@ -1484,7 +1510,7 @@ cross-center classes grow with the number of center pairs.
 
 \begin{table}[b]
 \caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in the
-\texttt{tests/test\_paper58\_*} suite (eleven files, plus
+\texttt{tests/test\_paper58\_*} suite (fifteen files, plus
 \texttt{tests/test\_two\_center\_eri\_aabb.py} for the $(AA|BB)$ rows; per-claim mapping in
 \texttt{docs/claim\_test\_matrix.md}).  \textsc{owed} $=$
 result stands on an exploratory driver and must be migrated
@@ -1517,6 +1543,7 @@ NaH atom-only $\zeta$ & MEAS. & \textsc{live} \\
 Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
 QFD 1e closed forms (Sec.~\ref{sec:qfd}) & SYMBOLIC & \textsc{live} \\
+$R$-operators, $l\le2$ panel (Sec.~\ref{sec:census}) & SYMB.\ + MEAS. & \textsc{live} \\
 QFD H$_2$ 60-digit energy & MEASURED & \textsc{live} (fast legs) + certified tables \\
 QFD LiH 30-digit ($\tau$-tail net) & MEASURED & \textsc{owed} (campaign value; fast legs pin one exchange quartet only) \\
 \end{tabular}

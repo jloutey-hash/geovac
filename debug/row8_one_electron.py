@@ -24,115 +24,11 @@ from scipy.special.sph_harm + genlaguerre, sharing no code with the exact route.
 from __future__ import annotations
 
 from fractions import Fraction
-from math import comb, factorial
+from math import factorial
 
-import sympy as sp
-
-from geovac.qfd_core import A_aux, B_aux
-from geovac.two_center_eri import (R_s, _legendre_rational_part, _sph_norm, radial_norm,
-                                   radial_poly)
-
-xi, eta = sp.symbols("xi eta")
-R = R_s
-
-
-def _solid(l, m, z, rho2):
-    """r^l P_l^m(z/r) with rho^{|m|} stripped (signed m, Condon-Shortley in P_l^m)."""
-    w = sp.Symbol("w")
-    out = sp.Integer(0)
-    for (j,), c in sp.Poly(_legendre_rational_part(l, m, w), w).terms():
-        e = l - abs(m) - j
-        assert e >= 0 and e % 2 == 0
-        out += c * z ** j * (rho2 + z ** 2) ** (e // 2)
-    return sp.expand(out)
-
-
-def orbital(orb, radial_override=None):
-    """(poly in xi, eta [no rho^{|m|}], rate, centre).  radial_override: {power: coeff}
-    replacing N * sum c_k r^k (powers may go down to l - 1)."""
-    cen, Z, n, l, m = orb
-    Z = Fraction(Z)
-    c, a = radial_poly(Z, n, l)
-    N = radial_norm(Z, n, l)
-    rad = radial_override if radial_override is not None else {k: N * v for k, v in c.items()}
-    rC = R * (xi + eta) / 2 if cen == "A" else R * (xi - eta) / 2
-    zA = R * (1 + xi * eta) / 2
-    z = zA if cen == "A" else zA - R
-    rho2 = R ** 2 / 4 * (xi ** 2 - 1) * (1 - eta ** 2)
-    ang = _sph_norm(l, m) * _solid(l, m, z, rho2)
-    poly = sp.Integer(0)
-    for k, v in rad.items():
-        e = k - l
-        poly += v * (rC ** e)
-    return sp.expand(poly * ang), a, cen
-
-
-def _integrate(P, p, q):
-    P = sp.Poly(sp.expand(P), xi, eta)
-    tot = sp.Integer(0)
-    for (i, j), c in P.terms():
-        tot += c * A_aux(i, p) * B_aux(j, q)
-    return sp.expand(tot)
-
-
-def _pair(oa, ob, kernel=None, radial_b=None):
-    """int conj(a) [kernel] b d3r."""
-    if oa[4] != ob[4]:
-        return sp.Integer(0)
-    Pa, aa, ca = orbital(oa)
-    Pb, ab, cb = orbital(ob, radial_b)
-    mm = abs(oa[4])
-    W = (xi ** 2 - 1) * (1 - eta ** 2)
-    vol = (xi + eta) * (xi - eta)
-    integrand = Pa * Pb * (R / 2) ** (2 * mm) * W ** mm * vol
-    if kernel == "A":
-        integrand = integrand * 2 / (R * (xi + eta))
-    elif kernel == "B":
-        integrand = integrand * 2 / (R * (xi - eta))
-    integrand = sp.cancel(sp.together(integrand))
-    num, den = sp.fraction(integrand)
-    # any 1/r_C^k with k > 1 left over would show here
-    assert not den.has(xi) and not den.has(eta), den
-    integrand = sp.expand(num / den)
-    # exponent: e^{-aa r_ca - ab r_cb}
-    sa = 1 if ca == "A" else -1
-    sb = 1 if cb == "A" else -1
-    p = (aa + ab) * R / 2
-    q = (sa * aa + sb * ab) * R / 2
-    return sp.expand(2 * sp.pi * (R / 2) ** 3 * _integrate(integrand, p, q))
-
-
-def S(oa, ob):
-    return _pair(oa, ob)
-
-
-def VA(oa, ob):
-    return _pair(oa, ob, "A")
-
-
-def VB(oa, ob):
-    return _pair(oa, ob, "B")
-
-
-def T_lap(oa, ob):
-    cen, Z, n, l, m = ob
-    c, a = radial_poly(Fraction(Z), n, l)
-    N = radial_norm(Fraction(Z), n, l)
-    lap = {}
-    for k, v in c.items():
-        for dk, dc in ((k - 2, sp.Integer(k * (k + 1) - l * (l + 1))),
-                       (k - 1, -2 * a * (k + 1)), (k, a ** 2)):
-            if dc != 0:
-                lap[dk] = lap.get(dk, 0) + N * v * dc
-    lap = {k: -v / 2 for k, v in lap.items() if v != 0}
-    assert min(lap) >= l - 1
-    return _pair(oa, ob, None, lap)
-
-
-def T_eig(oa, ob):
-    cen, Z, n, l, m = ob
-    E = -sp.Rational(Fraction(Z).numerator ** 2, Fraction(Z).denominator ** 2) / (2 * n ** 2)
-    return sp.expand(E * S(oa, ob) + sp.nsimplify(Fraction(Z)) * _pair(oa, ob, cen))
+# The exact engine was promoted to geovac/two_center_one_electron.py (2026-11-14); this driver
+# keeps only the independent numeric referee.
+from geovac.two_center_one_electron import S, T_eig, T_lap, VA, VB, orbital, R  # noqa: F401
 
 
 # ------------------------------------------------------------------ independent numeric

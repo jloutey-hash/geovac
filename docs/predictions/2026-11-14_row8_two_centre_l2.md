@@ -129,3 +129,40 @@ Hydrogenic orbitals only (rate Z/n with the Laguerre polynomial), n <= 3, l <= 2
 l > 0 is not covered (no closed form at unequal exponents; record part 2). The three-centre (AA|BC) with p orbitals and
 the Paper 63 fibre question for l > 0 are part 2, a separate record. The R-operator is read at fixed exponents; nothing
 is claimed about the exponent dependence.
+
+## Results (2026-11-14)
+
+Committed as `7784d751` before the panel ran (the header's "draft" line predates the commit and was left as
+registered). Driver `debug/row8_panel.py`, unchanged; data `debug/data/row8_panel.json`, log
+`debug/data/row8_panel.log`. 48 cases, none identically zero.
+
+| Prediction | verdict | reading |
+|:--|:--|:--|
+| R8-0 instrument | HELD | controls K1-K4 reproduce; 30 row-2 S/VA/VB vs independent quadrature at R = 7/5, max 1.2e-14; T_lap = T_eig for all 6 pairs; all 48 closed forms verified symbolically |
+| P1 row 2 class | HELD | all 30 one-electron integrals: kind "1" only (constants: normalization surds only) |
+| P2 row 3a class | HELD | all 8 (AA\|BB): kind "1" only, no gamma, no log of a number |
+| P3a row 3b class | HELD | all 10 hybrids inside {1, E1, Ei, ln R}; constants gamma, ln 2, 3, 5, 6, 7, 11 and normalization surds |
+| P3b ln/gamma at eq; Ei iff a_d > a_c | MISSED (1 case) | ln R and gamma in exactly the five eq cases (H1, H2, H4, H7, H10), held; Ei in H5 and H8, but not in H9 |
+| P4 no ln R at R = 0 | HELD | 48/48 |
+| P5 singular points | HELD | R = 0 Fuchsian 48/48; every finite nonzero singular point apparent 48/48; rates at infinity among the atom rates 48/48 |
+| P6 order bound (fitted) | HELD | rows 2 and 3a: order = number of distinct rates, 38/38 (orders 1-3); row 3b: orders 3-5, at most rates + 1, 10/10 |
+
+**Gate: GO** (P2, P3a, P4, P5 held). In the two-centre layer, p and d orbitals through n = 3 do not climb: no new
+function type, no genuine finite singular point in R, no logarithm at R = 0 outside exchange.
+
+**P3b's miss has a known mechanism, which the prediction failed to use.** H9 is (2s 2s | 3d0 3d0_B): the one-centre
+pair (ab) is s-type, so its potential is a monopole, V_0 = Q/r - e^{-b r}(poly + c/r), and its product with c_A d_B is
+a one-electron integral with a shifted rate, elementary. E1 and Ei enter the hybrid only through the r^-(L+1) tails of
+the L > 0 multipoles. `geovac/qfd_core.py`'s docstring already states it ("s-type pair: {exp} only"), and the 1s
+hybrids of the v6.7.26 panel are elementary for the same reason. The correct statement: E1 (and Ei when a_d > a_c, ln R
+and gamma when a_d = a_c) appear iff the (ab) pair carries a multipole L >= 1. All ten panel hybrids satisfy it.
+
+**Reported:** row 3b order = rates + 1 exactly where E1 atoms appear (H1-H8, H10); H9 (elementary) has order = rates.
+Every (AA|BB) has R = 0 exponents including a negative one (the 1/R tail).
+
+**Homing (2026-11-14, after scoring).** Engine promoted to `geovac/two_center_one_electron.py` (byte-identical
+output; `debug/row8_one_electron.py` now keeps only the quadrature referee). Guard `tests/test_paper58_row8_l2.py`,
+written as a separate pass, fire-tested 11/11. One thing the guard pass found that the scoring did not ask: an
+operator whose integral carries E1 has exactly one logarithmic solution at R = 0 (H2 here; HYB33/HYB34 of v6.7.26
+too), so "no ln R at R = 0" is a property of the integral, not of its operator. P4 was stated for the integral and
+stands. Paper 58 `sec:census` carries the l <= 2 statements.
