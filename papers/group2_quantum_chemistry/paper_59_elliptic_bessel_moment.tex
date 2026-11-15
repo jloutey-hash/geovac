@@ -1100,16 +1100,42 @@ behaves like the $2p_z$ function:\ the values agree with the Gaussian-fit refere
 referee tolerance of $10^{-10}$ (differences at most $2.3\times10^{-13}$) at two angles per
 geometry, every coefficient from $\ell=1$ to $\ell=1000$ uses the same $21$ constants (modulo two
 primes), and the leading term is $(x^{*}-x)^{7/2}$ (effective exponent $-4.17$ and $-4.14$ at
-$\ell=220$).  The reason, which covers the $2p_z$ case too (derived, not tested;\ the $D_1=D_2$
-check is owed):\ an $m=0$ harmonic of degree $l$ along B--C at C makes the non-analytic part $|\mathbf{a}|^{7}h_l(\mathbf{a})$, $\mathbf{a}=\mathbf{A}-\mathbf{C}$,
+$\ell=220$).  The reason, which covers the $2p_z$ case too (derived;\ tested at equal arms, below):\ an $m=0$ harmonic of degree $l$ along B--C at C makes the non-analytic part $|\mathbf{a}|^{7}h_l(\mathbf{a})$, $\mathbf{a}=\mathbf{A}-\mathbf{C}$,
 and $h_l(\mathbf{a})$ does not vanish at $x^{*}$ unless $D_1=D_2$.  The decay alone cannot tell a
 $d$ function from none;\ the values test the $d$ factor (record
-\texttt{docs/predictions/2026-11-15\_aa\_bc\_d\_orbital.md}, registered before computing).  Caps:\
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_d\_orbital.md}, registered before computing).
+\textbf{[SYMBOLIC + MEASURED]} At equal arms, $D_1=D_2=D$, the reason makes a prediction the $1s$
+case does not share.  The branch point moves to the end $x=1$ of the angle range, where A meets
+C and $|\mathbf{a}|^2=2D^2(1-x)$;\ on that sphere $a_z=-|\mathbf{a}|^2/(2D)$, so $h_1$ and $h_2$
+vanish like $|\mathbf{a}|^2$.  The $1s$ integral then leads with $(1-x)^{7/2}$ and the $2p_z$ and
+$3d_\sigma$ integrals with $(1-x)^{9/2}$, so their Legendre coefficients decay like $\ell^{-8}$ and
+$\ell^{-10}$.  A local expansion about C (the non-analytic part of the B--C density against the odd
+powers of the potential of the A density) gives the leading amplitudes in closed form;\ for
+$2p_z$ three terms combine into a factor proportional to $\zeta_{\rm B}D-9$.  Two registered tests
+at four geometries:\ the values agree with the Gaussian-fit referee within $1.8\times10^{-10}$ (tolerance
+$10^{-10}$ at the first two geometries, $10^{-9}$ and $2\times10^{-10}$ at the last two);\ the effective exponents
+are $-7.98$ and $-9.97$ to $-9.98$ at $\ell=220$ and $-7.993$ and $-9.991$ at $\ell=580$ (a test function with exactly
+these branches gives $-7.993$ and $-9.992$);\ and at the last two geometries the coefficients agree
+with the closed-form amplitudes within $0.04\%$ at $\ell=580$.  At $\zeta_{\rm B}D=9$ (one geometry), where the $(1-x)^{9/2}$ term of the
+$2p_z$ integral cancels, that integral decays like $\ell^{-12}$ (effective exponent $-11.97$ at
+$\ell=220$ and $-11.99$ at $\ell=580$, against $-11.99$ for the $(1-x)^{11/2}$ test function), within
+$0.06\%$ of the next-order amplitude from the same expansion, while the $3d_\sigma$ integral keeps
+$\ell^{-10}$.  The amplitude clause of the first test failed as registered (verdict STOP):\ it gave the Legendre
+coefficients of $(1-x)^{\alpha}$ the sign $(-1)^\ell$, which holds only for $\ell\le\alpha+1$, and
+the magnitudes agreed within $0.2\%$.  The second test used the corrected sign, at two fresh
+geometries;\ its first run was void for floating-point precision, and the re-run at higher
+precision was not blind:\ the void run's valid coefficients at $\ell=220$, $400$ and $580$ had been
+seen (records
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_equal\_arms.md},
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_equal\_arms\_2.md} and
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_equal\_arms\_2b.md}, each registered before computing).
+At each of the first two equal-arm geometries the coefficients from $\ell=2$ to $\ell=1000$ use $17$
+constants (modulo two primes), one fixed set shared by the three integrals.  Caps:\
 one $2p_z$, one in-plane $2p_x$ or one $3d_\sigma$ function at C, or a $2p\sigma$ pair at A;\ two
-geometries, two primes;\ the constants are assumed linearly independent over
+geometries (four at equal arms), two primes;\ the constants are assumed linearly independent over
 $\overline{\mathbb{Q}}$;\ $p_\pi$ and $d$ functions on A, $d$ functions with $m\neq0$ and exchange
-integrals with $\ell>0$ are not covered, and the degree-$l$ pattern is derived for $l\le2$,
-argued beyond, and untested.
+integrals with $\ell>0$ are not covered, and the degree-$l$ pattern is derived for $l\le2$
+(tested at equal arms for $l\le2$ at four geometries), argued beyond, and untested beyond.
 Since every channel stays in the two-center class, any higher-class content of the integrated
 value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the
 angle.  A two-center-class form in $w=|Y-Z|$ is a finite sum of rational functions, exponentials

@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.31] - 2026-11-15
+
+**Inventory row 8: the equal-arm test of the |a|^7 h_l(a) mechanism (records AE STOP, AE2 VOID, AE2b GO; AE2 and
+AE2b PI-chosen follow-ups). At D1 = D2 the 1s integral leads with (1 - x)^{7/2} and 2pz, 3d-sigma with (1 - x)^{9/2};
+the predicted cancellation of 2pz's 9/2 term at zB D = 9 is real.**
+
+### Added
+- Record AE (`docs/predictions/2026-11-15_aa_bc_equal_arms.md`, committed ade542d8 before computing). Cases E1, E2;
+  S, PC = (1s1s|1s 2pz_C), PD = (1s1s|1s 3ds_C). AE0, P1, P2, P3 held (values within 1.4e-12 of the referee;
+  beta_eff(220) -7.981 for S, -9.976..-9.979 for PC, PD; one fixed set of 17 constants per case, L = 2..1000).
+  **Verdict STOP as registered:** the amplitude clause gave the Legendre coefficients of (1 - x)^alpha the sign
+  (-1)^L, which holds only for L <= alpha + 1; PC and PD ratios -0.998 / -0.9996, magnitudes within 0.2%. AE0 (iii)
+  first failed at 80 digits (precision loss, disclosed), passes at 400.
+- Record AE2 (`..._equal_arms_2.md`, 96162847 before computing): fresh cases E3 (zB D = 9, where the closed form
+  says PC's 9/2 coefficient vanishes) and E4; the corrected sign; PC at E3 predicted at (1 - x)^{11/2} from a
+  general local expansion (`debug/aaeq2_local.py`, reviewer-written). **VOID as registered:** the precision gate
+  failed (2000 digits lose the coefficients near L = 580).
+- Record AE2b (`..._equal_arms_2b.md`, f334ab69 before computing; PI-approved precision-only amendment: 3600 / 4400
+  digits, P0 widened to L = 598..600 and full-sum agreement; not blind at L <= 400 and part of 580, disclosed).
+  **GO:** P0 exact to printed digits; P1 12/12 (within 1.8e-10 of R2); beta_eff(580) -7.993 (S), -9.991 (PD, E4 PC),
+  -11.989 for PC at E3 (toy -11.990; drift 0.020); F_580/pred 0.9996..0.9998 for the five leading amplitudes, 0.9994
+  for PC at E3 against the 11/2 amplitude.
+- `debug/aaeq_controls.py`, `debug/aaeq_run.py`, `debug/aaeq2_controls.py`, `debug/aaeq2_local.py`,
+  `debug/aaeq2_run.py` (`p1b`: exact coefficients once, converted per precision); data `debug/data/aaeq*`.
+- Guard `tests/test_paper59_aa_bc_equal_arms.py` (separate pass; 28 tests, ~31 s): sign rule against quadrature,
+  PC bracket proportional to zB D - 9, per-channel direct projection at E1, summed series against the referee,
+  beta_eff(60) near the 7/2, 9/2, 11/2 toys, amplitudes at L = 59..61. Fire-tested 12/12.
+
+### Changed
+- `debug/aapc_exact.py`: D1 = D2 allowed (empty middle region dropped; assert D1 <= D2).
+- Paper 59 `sec:scope`: equal-arm passage; the reason "derived, not tested; the D1 = D2 check is owed" becomes
+  "derived; tested at equal arms"; caps gain four equal-arm geometries. Claims review (fresh): 0 LARGE, 1 SMALL
+  (non-blind caveat understated), 5 NITs, all applied.
+- `docs/chemistry_period_inventory.md` row 8: the D1 = D2 test closed; `docs/claim_test_matrix.md`: Paper 59 row
+  for AE / AE2b.
+
 ## [v6.7.30] - 2026-11-15
 
 **Inventory row 8, part 2b-ii: a d function at C keeps the 1s structure (pre-registered AD, GO; standing
