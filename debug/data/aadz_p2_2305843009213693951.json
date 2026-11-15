@@ -1,0 +1,92 @@
+{
+ "A1": {
+  "seconds": 672,
+  "n_constants_L2": 21,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "first_L_fixed": 1,
+  "n_union": 21,
+  "inside_C": true,
+  "outside_C": [],
+  "gamma_present": [],
+  "sizes_L0_to_3": [
+   7,
+   21,
+   21,
+   21
+  ],
+  "constants": [
+   "(Fraction(-117, 50), '1', None)",
+   "(Fraction(-162, 25), '1', None)",
+   "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+   "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+   "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+   "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+   "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+   "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+   "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+   "(Fraction(-189, 50), '1', None)",
+   "(Fraction(-209, 50), '1', None)",
+   "(Fraction(-389, 50), '1', None)",
+   "(Fraction(-513, 50), '1', None)",
+   "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+   "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+   "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+   "(Fraction(-9, 5), '1', None)",
+   "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+   "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+   "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+   "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+  ],
+  "equals_AB21": true,
+  "vs_AB21": {
+   "missing": [],
+   "extra": []
+  }
+ },
+ "A2": {
+  "seconds": 615,
+  "n_constants_L2": 21,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "first_L_fixed": 1,
+  "n_union": 21,
+  "inside_C": true,
+  "outside_C": [],
+  "gamma_present": [],
+  "sizes_L0_to_3": [
+   7,
+   21,
+   21,
+   21
+  ],
+  "constants": [
+   "(Fraction(-141, 25), '1', None)",
+   "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+   "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+   "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+   "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+   "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+   "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+   "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+   "(Fraction(-147, 50), '1', None)",
+   "(Fraction(-177, 25), '1', None)",
+   "(Fraction(-3, 2), '1', None)",
+   "(Fraction(-387, 50), '1', None)",
+   "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+   "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+   "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+   "(Fraction(-87, 25), '1', None)",
+   "(Fraction(-9, 5), '1', None)",
+   "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+   "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+  ],
+  "equals_AB21": true,
+  "vs_AB21": {
+   "missing": [],
+   "extra": []
+  }
+ }
+}

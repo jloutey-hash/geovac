@@ -95,3 +95,36 @@ fibre at l > 0. The degree-l pattern is argued, not shown, beyond l = 2.
 Add `dens_dz2` to `debug/aapc_exact.py` (integral 'PD'; a multiply-by-t helper applied once and twice; AB's kernel;
 normalization 2 pi N_B N_d), an AD0 driver, and 'PD' scoring in `debug/aapc_run.py`. Then AD0; P1 at 2000 and
 2600 digits; P2a over L <= 1000 mod both primes; P3 as above.
+
+## Results (2026-11-15; appended after scoring, text above unchanged)
+
+**Verdict: GO.** AD0, P1, P2a and P3 held in both cases.
+
+| clause | A1 | A2 |
+|:--|:--|:--|
+| AD0 (i) AB reproduced, Q and mod p | yes | yes |
+| AD0 (ii) F_0, F_2, F_5, F_12 vs direct projection (rel., tol 1e-18) | 2.9e-24, 3.2e-23, 1.6e-23, 3.5e-24 | 9.0e-24, 2.4e-23, 5.5e-23, 1.1e-22 |
+| AD0 (iii) F_L, L <= 220, unchanged at L_max 240 -> 260 | yes | yes |
+| P1: value, first point (x = 1/2; -1/3) | 0.104757560074952 | 0.114237095233031 |
+| P1: minus R2 n = 34 (tol 1e-10) | 2.0e-13 | 2.3e-13 |
+| P1: value, second point (x = 0; 4/5) | 0.119232388104144 | 0.073835256700850 |
+| P1: minus R2 n = 34 (tol 1e-10) | 9.1e-14 | 3.3e-14 |
+| R1 finest, reported (loose 1e-8) | -1.9e-9, -8.6e-11 | -1.9e-9, -9.7e-10 |
+| P2a: set fixed L = 2..1000, both primes | yes, 21 keys | yes, 21 keys |
+| P3: beta_eff(220) (A1 [-4.29, -3.95]; A2 [-4.26, -3.92]) | -4.170 | -4.139 |
+| P3: one sign of F_L for L >= 20 | yes (+) | yes (+) |
+
+- The 2600-digit run reproduces the 2000-digit values to all 30 printed digits and beta_eff(220) to six. Tail
+  terms at L = 240 are below 1e-51.
+- beta_eff approaches -4 from below (A1: -5.71 at L = 20, -4.47 at 80, -4.17 at 220), 0.05 below the toy T at
+  L = 220 in both cases; the earlier records sat within 0.04.
+- P2 reported: exactly AB's 21 at both cases and both primes, complete from L = 1 (L = 0: the 7 exponentials);
+  inside C; no gamma. F_L > 0 for L >= 5.
+- Drivers: `debug/aadz_ap0.py` (log `debug/data/aadz_ap0.log`), `debug/aapc_run.py p1p3d / p2d`, engine path
+  `dens_dz2` in `debug/aapc_exact.py`. Data `debug/data/aadz_p1p3_{2000,2600}.json`,
+  `debug/data/aadz_p2_{2305843009213693951,4611686018427387847}.json`.
+
+**Consequence for inventory row 8.** Part 2b-ii is closed for one d function (3d, m = 0 along B-C, at C): AB's
+21 constants and the 7/2 branch with a nonzero coefficient. The values at four points test the d factor; the decay
+clause does not distinguish it (disclosed above). Owed in 2b: m != 0 d functions, d or p_pi on A, exchange at
+l > 0, Paper 63's fibre at l > 0, and the D1 = D2 test of the |a|^7 h_l(a) mechanism.

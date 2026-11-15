@@ -1094,11 +1094,22 @@ exponent $-5.17$ and $-5.13$ at $\ell=220$;\ in the $P_\ell$ basis of the preced
 would signal a $9/2$ branch).  This is consistent with the same $(x^{*}-x)^{7/2}$ branch, seen in
 the $P_\ell^{1}$ basis, where the coefficients fall one power of $\ell$ faster;\ a test function with
 exactly that branch gives $-5.18$ and $-5.14$ with the same effective-exponent estimate (record
-\texttt{docs/predictions/2026-11-14\_aa\_bc\_ppi.md}, registered before computing).  Caps:\ one
-$2p_z$ function at C, a $2p\sigma$ pair at A, or one in-plane $2p_x$ function at C;\ two
+\texttt{docs/predictions/2026-11-14\_aa\_bc\_ppi.md}, registered before computing).  A $3d$
+function at C, $3d_{\sigma}\propto(3(z-D_1)^2-r_{\rm C}^2)\,e^{-\zeta_{\rm C}r_{\rm C}}$ along B--C,
+behaves like the $2p_z$ function:\ the values agree with the Gaussian-fit referee within the
+referee tolerance of $10^{-10}$ (differences at most $2.3\times10^{-13}$) at two angles per
+geometry, every coefficient from $\ell=1$ to $\ell=1000$ uses the same $21$ constants (modulo two
+primes), and the leading term is $(x^{*}-x)^{7/2}$ (effective exponent $-4.17$ and $-4.14$ at
+$\ell=220$).  The reason, which covers the $2p_z$ case too (derived, not tested;\ the $D_1=D_2$
+check is owed):\ an $m=0$ harmonic of degree $l$ along B--C at C makes the non-analytic part $|\mathbf{a}|^{7}h_l(\mathbf{a})$, $\mathbf{a}=\mathbf{A}-\mathbf{C}$,
+and $h_l(\mathbf{a})$ does not vanish at $x^{*}$ unless $D_1=D_2$.  The decay alone cannot tell a
+$d$ function from none;\ the values test the $d$ factor (record
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_d\_orbital.md}, registered before computing).  Caps:\
+one $2p_z$, one in-plane $2p_x$ or one $3d_\sigma$ function at C, or a $2p\sigma$ pair at A;\ two
 geometries, two primes;\ the constants are assumed linearly independent over
-$\overline{\mathbb{Q}}$;\ $p_\pi$ functions on A, all $d$ functions and exchange integrals with
-$\ell>0$ are not covered.
+$\overline{\mathbb{Q}}$;\ $p_\pi$ and $d$ functions on A, $d$ functions with $m\neq0$ and exchange
+integrals with $\ell>0$ are not covered, and the degree-$l$ pattern is derived for $l\le2$,
+argued beyond, and untested.
 Since every channel stays in the two-center class, any higher-class content of the integrated
 value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the
 angle.  A two-center-class form in $w=|Y-Z|$ is a finite sum of rational functions, exponentials

@@ -267,6 +267,43 @@ def dens_px(L, inner, D1, zC, it, kt, K):
     return d
 
 
+def _dacc(out, dd, w, shift, K):
+    for (e0, b), poly in dd.items():
+        for n, v in poly.items():
+            X._put(out, e0, b, n + shift, w * v)
+
+
+def _tmul(E, L, K):
+    """(T E)_L = [L E_{L-1} + (L+1) E_{L+1}] / (2L+1): multiply by t = cos(theta) in AB's normalization."""
+    out = {}
+    inv = K(1) / K(2 * L + 1)
+    if L >= 1:
+        _dacc(out, E(L - 1), K(L) * inv, 0, K)
+    _dacc(out, E(L + 1), K(L + 1) * inv, 0, K)
+    return out
+
+
+def dens_dz2(L, inner, D1, zC, it, kt, K):
+    """Record AD: multipole L of h2(r - C) e^{-zC r_C}, h2 = (3 r^2 t^2 - r^2 - 4 D1 r t + 2 D1^2)/2 about B."""
+    cache = {}
+
+    def E(k):
+        if k not in cache:
+            cache[k] = X.density(k, inner, D1, zC, it, kt, K)
+        return cache[k]
+
+    def TE(k):
+        return _tmul(E, k, K)
+    out = {}
+    D1q = K(Fraction(D1))
+    half = K(Fraction(1, 2))
+    _dacc(out, _tmul(TE, L, K), K(3) * half, 2, K)       # 3 r^2 T^2
+    _dacc(out, E(L), -half, 2, K)                         # - r^2
+    _dacc(out, TE(L), K(-2) * D1q, 1, K)                  # - 4 D1 r T  (x 1/2)
+    _dacc(out, E(L), D1q * D1q, 0, K)                     # + 2 D1^2   (x 1/2)
+    return out
+
+
 # ---------------------------------------------------------------- radial integration
 
 
@@ -327,9 +364,9 @@ def coefficients(case, Lmax, K, integral, params_override=None, pieces_out=False
             return kernel_eval(L, near, co, it, kt, K, mu, D2, nD2)
         return evaluate(combo(L, near, co, it, kt, K, nD2=nD2), mu, D2, K)
     for L in range(Lmax + 1):
-        dfun = {'PC': dens_pz, 'PX': dens_px}.get(integral, dens_1s)
+        dfun = {'PC': dens_pz, 'PX': dens_px, 'PD': dens_dz2}.get(integral, dens_1s)
         dens = {inner: dfun(L, inner, D1, zC, it, kt, K) for inner in (True, False)}
-        if integral in ('PC', 'AB', 'PX'):
+        if integral in ('PC', 'AB', 'PX', 'PD'):
             co = {'NA': K(1), 'Y': K(-1), 'dY': za}
             kers = {near: kev(L, near, co, 0) for near in (True, False)}
             res = integrate(dens, kers, D1, D2, zB, I, K)
@@ -360,6 +397,8 @@ def twopiN(case, integral):
     import mpmath as mp
     D1, D2, zB, zC, zA = params(case)
     q = lambda v: mp.mpf(v.numerator) / v.denominator  # noqa: E731
+    if integral == 'PD':   # 2 pi N_B N_d, N_d = sqrt(5 (2 zC)^7 / (4 pi 720))
+        return 2 * mp.pi * mp.sqrt(q(zB) ** 3 / mp.pi) * mp.sqrt(5 * (2 * q(zC)) ** 7 / (4 * mp.pi * 720))
     return 2 * mp.sqrt(q(zB) ** 3 * q(zC) ** (5 if integral in ('PC', 'PX') else 3))
 
 

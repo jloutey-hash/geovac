@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.30] - 2026-11-15
+
+**Inventory row 8, part 2b-ii: a d function at C keeps the 1s structure (pre-registered AD, GO; standing
+autonomous-loop authorization). CLAUDE.md size budget raised to 200 KB (PI direction).**
+
+### Added
+- Record AD (`docs/predictions/2026-11-15_aa_bc_d_orbital.md`, committed a423b1ab before computing; a fresh reviewer
+  read the draft cold and its findings were applied: P2a's status made consistent, P3's limits disclosed, an
+  L_max-invariance clause added to AD0, the fit floor's coverage disclosed, per-case bands, sign failures gated).
+  Object (1s_A 1s_A|1s_B 3dsigma_C). AD0, P1, P2a and P3 HELD. Gate GO.
+  - Values agree with the Gaussian-fit referee (n = 34; the d factor needed a larger fit than 2pz: floor 4.2e-10 at
+    n = 26, 1.1e-11 at n = 34) within its 1e-10 uncertainty; differences <= 2.3e-13 at two angles per geometry.
+  - Every F_L, L = 1..1000, mod both primes, uses exactly AB's 21 constants; no gamma.
+  - beta_eff(220) -4.170 / -4.139: the 7/2 branch, coefficient proportional to a_z(x*)^2 (a degree-l harmonic at
+    C gives |a|^7 h_l(a); argued). Disclosed: the decay cannot tell a d factor from none; the values test it.
+- `debug/aadz_controls.py` (d-type Gaussian referee, prolate quadrature, fit floor against geovac's exact
+  (1s1s|1s 3d0)), `debug/aadz_ap0.py`, `dens_dz2` in `debug/aapc_exact.py`, `p1p3d` / `p2d` in `debug/aapc_run.py`;
+  data `debug/data/aadz_*.json`.
+- Guard additions in `tests/test_paper59_aa_bc_p.py` (separate pass): direct projection of h2 per channel, the
+  summed series at two angles, AB's 21 constants plus L_max invariance, beta_eff(40) windows. Fire-tested 17/17.
+  One first-draft plant (a fixed cut `L < 35`) could not trigger in a test that runs to L <= 32; it was replaced by
+  an L_max-dependent truncation, which fires.
+
+### Changed
+- Paper 59 `sec:scope`: the p-orbital paragraph gains the 3d-sigma case and the |a|^7 h_l(a) reason (covering 2pz);
+  caps updated.
+- `debug/repo_health_check.py` and `.claude/commands/checkpoint.md`: CLAUDE.md budget 150 KB -> 200 KB (PI,
+  2026-11-15).
+- `docs/chemistry_period_inventory.md` row 8: part 2b-ii closed for one d function; `docs/claim_test_matrix.md`:
+  Paper 59 row for AD.
+
+### Still owed (inventory)
+- Row 8 part 2b: p_pi and d on A, m != 0 d functions, exchange at l > 0, Paper 63's fibre at l > 0, the D1 = D2
+  test of the |a|^7 h_l(a) mechanism. Unchanged: exchange at unequal exponents, the LiH certified-energy regression
+  test, rows 1, 4, 5, 7 unaudited.
+
 ## [v6.7.29] - 2026-11-14
 
 **Inventory row 8, part 2b-i: an in-plane p_pi function at C keeps the 1s structure (pre-registered AQ, GO;

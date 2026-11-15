@@ -31,7 +31,7 @@ Cut a checkpoint: bump the version, commit, tag. **Stop there unless told to pus
 5. Papers edited → they compile three-pass clean. Confirm.
 6. Production code edited → relevant tests pass (`/regression touched`). Confirm.
 7. Hard-prohibition check (§13.5): nothing in the staged diff violates them.
-8. Repo health gate: `python debug/repo_health_check.py`. On WARN (CLAUDE.md > 150 KB,
+8. Repo health gate: `python debug/repo_health_check.py`. On WARN (CLAUDE.md > 200 KB; raised from 150 KB, PI 2026-11-15;
    debug/ top-level > 600 files, MEMORY.md > 24 KB) report it alongside the checkpoint —
    it doesn't block, but it must be surfaced so bloat never silently regrows.
 

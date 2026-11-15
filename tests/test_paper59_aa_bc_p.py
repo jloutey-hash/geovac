@@ -27,8 +27,13 @@ Record AQ (docs/predictions/2026-11-14_aa_bc_ppi.md), PX = (1s_A 1s_A | 1s_B 2px
     two angles of A1 against the record; AB's 21 constants at L = 1..20; beta_eff(40) near -5.8 (L^-5), windows
     that exclude reading the branch as a P_L series and a cancelled 7/2 coefficient.
 
+Record AD (docs/predictions/2026-11-15_aa_bc_d_orbital.md), PD = (1s_A 1s_A | 1s_B 3dsigma_C):
+(6) per-channel F_L against a direct projection of h2(r - C) as is; the summed series at two angles of A1 (this is
+    what tests the d factor; the decay does not distinguish it); AB's 21 constants; L_max invariance;
+    beta_eff(40) windows excluding a cancelled 7/2 coefficient and a 5/2 branch.
+
 Fire-test plants and outcomes: the comment block at the end of this file (AP 17/17; AQ 9/9 plus one plant that is
-a no-op at A1 and fires at A2; 2026-11-14, separate step).
+a no-op at A1 and fires at A2, 2026-11-14; AD 17/17, 2026-11-15; each a separate step).
 """
 from __future__ import annotations
 
@@ -246,6 +251,43 @@ def dens_px(L, inner, D1, zC, it, kt, K):
     return d
 
 
+def _dacc(out, dd, w, shift):
+    for (e0, b), poly in dd.items():
+        for n, v in poly.items():
+            _put(out, e0, b, n + shift, w * v)
+
+
+def _tmul(E, L, K):
+    """(T E)_L = [L E_{L-1} + (L+1) E_{L+1}] / (2L+1): multiply by t in AB's normalization."""
+    out = {}
+    inv = K(1) / K(2 * L + 1)
+    if L >= 1:
+        _dacc(out, E(L - 1), K(L) * inv, 0)
+    _dacc(out, E(L + 1), K(L + 1) * inv, 0)
+    return out
+
+
+def dens_dz2(L, inner, D1, zC, it, kt, K):
+    """Record AD: multipole of h2(r - C) e^{-zC r_C}, h2 = (3 r^2 t^2 - r^2 - 4 D1 r t + 2 D1^2)/2 about B."""
+    cache = {}
+
+    def E(k):
+        if k not in cache:
+            cache[k] = AB.density(k, inner, D1, zC, it, kt, K)
+        return cache[k]
+
+    def TE(k):
+        return _tmul(E, k, K)
+    out = {}
+    D1q = K(Fraction(D1))
+    half = K(Fraction(1, 2))
+    _dacc(out, _tmul(TE, L, K), K(3) * half, 2)   # 3 r^2 T^2
+    _dacc(out, E(L), -half, 2)                     # - r^2
+    _dacc(out, TE(L), K(-2) * D1q, 1)              # - 4 D1 r T
+    _dacc(out, E(L), D1q * D1q, 0)                 # + 2 D1^2
+    return out
+
+
 def integrate(dens, kers, D1, D2, zB, I, K):
     regions = [(Fraction(0), D1, True, True), (D1, D2, False, True), (D2, None, False, False)]
     res = {}
@@ -290,8 +332,8 @@ def coefficients(case, Lmax, K, integral, path='factored'):
     kev = kernel_factored if path == 'factored' else kernel_symbolic
     out, pieces = [], []
     for L in range(Lmax + 1):
-        if integral in ('PC', 'PX'):
-            dfun = dens_pz if integral == 'PC' else dens_px
+        if integral in ('PC', 'PX', 'PD'):
+            dfun = {'PC': dens_pz, 'PX': dens_px, 'PD': dens_dz2}[integral]
             dens = {inner: dfun(L, inner, D1, zC, it, kt, K) for inner in (True, False)}
             co = {'NA': K(1), 'Y': K(-1), 'dY': za}
             res = integrate(dens, {nr: kev(L, nr, co, it, kt, K, mu, D2, 0) for nr in (True, False)},
@@ -324,6 +366,8 @@ def numeric(Q, case, integral, dps):
     with mp.workdps(dps):
         zB, zC = params(case)[2:4]
         tw = 2 * mp.sqrt(_mf(zB) ** 3 * _mf(zC) ** (3 if integral == 'PA' else 5))  # PX normalization
+        if integral == 'PD':   # 2 pi N_B N_d
+            tw = 2 * mp.pi * mp.sqrt(_mf(zB) ** 3 / mp.pi) * mp.sqrt(5 * (2 * _mf(zC)) ** 7 / (4 * mp.pi * 720))
         keys = set(k for q in Q for k in q)
         cv = {k: AB.const_value(k) for k in keys}
         return [tw * sum((mp.mpf(int(v.p)) / int(v.q) * cv[k] for k, v in q.items()), mp.mpf(0)) for q in Q]
@@ -676,6 +720,96 @@ def test_px_decay_is_L_minus_five():
         assert all(hi[n] > 0 for n in range(5, L + 2)), case
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Record AD: (1s_A 1s_A | 1s_B 3dsigma_C), 3ds = N_d h2(r - C) e^{-zC rC}, PD = sum_L F_L P_L(x)
+# ---------------------------------------------------------------------------------------------------------------
+
+
+def quadrature_FL_d(case, L, dps):
+    """F_L of PD with the density multipole projected directly: h2(r - C) = (3 (r t - D1)^2 - s^2)/2 as is (no T
+    recurrence, no polynomial rearrangement), against v_L of the exact 1s potential."""
+    with mp.workdps(dps):
+        D1, D2, zB, zC, zA = (_mf(v) for v in params(case))
+        NB = mp.sqrt(zB ** 3 / mp.pi)
+        Nd = mp.sqrt(5 * (2 * zC) ** 7 / (4 * mp.pi * 720))
+        nodes = mp.calculus.quadrature.GaussLegendre(mp.mp).calc_nodes(5, mp.mp.prec)
+
+        def ang(func, r, D):
+            a, b = abs(r - D), r + D
+            h, c = (b - a) / 2, (b + a) / 2
+            tot = mp.mpf(0)
+            for u, w in nodes:
+                s_ = c + h * u
+                t = (r * r + D * D - s_ * s_) / (2 * r * D)
+                tot += w * func(s_, t) * s_
+            return tot * h / (r * D)
+
+        def integrand(r):
+            rho = (2 * L + 1) / mp.mpf(2) * NB * Nd * mp.exp(-zB * r) * ang(
+                lambda s_, t: mp.exp(-zC * s_) * (3 * (r * t - D1) ** 2 - s_ * s_) / 2 * _PL_dPL(L, t)[0], r, D1)
+            vL = (2 * L + 1) / mp.mpf(2) * ang(lambda s_, t: AB.potential_1s(s_, zA) * _PL_dPL(L, t)[0], r, D2)
+            return 4 * mp.pi / (2 * L + 1) * r * r * rho * vL
+        return mp.quad(integrand, [0, D1, D2, D2 + 4, mp.inf])
+
+
+@pytest.mark.parametrize('case,L', [('A1', 0), ('A1', 4), ('A2', 2)])
+def test_d_channel_matches_direct_projection(case, L):
+    """F_L of the exact split equals the direct-projection quadrature, relative 1e-18 at 22 digits (record AD0:
+    <= 1.1e-22).  Rejects a wrong h2 coefficient, a single T where T^2 belongs, the 3d normalization."""
+    f, _ = exact(case, 'PD', L)
+    ex = numeric(f, case, 'PD', 80)[L]
+    q = quadrature_FL_d(case, L, 22)
+    with mp.workdps(40):
+        assert abs(q / ex - 1) < mp.mpf('1e-18'), (case, L, mp.nstr(q, 22), mp.nstr(ex, 22))
+
+
+PD_VALUES = {F(1, 2): ('0.104757560074952207333361729138', '0.10475756007475293'),   # record AD: 2000 digits,
+             F(0): ('0.119232388104143576937469926637', '0.1192323881040522')}     # L <= 240; R2 n = 34
+
+
+@pytest.mark.parametrize('xq', [F(1, 2), F(0)])
+def test_d_summed_series_at_two_angles_A1(xq):
+    """Sum_{L <= 60} F_L P_L(x) at A1, x = 1/2 and 0, against the record's 2000-digit values to 1e-14 and the n = 34
+    Gaussian referee within 1e-10.  The values are what tests the d factor (the decay does not)."""
+    f, _ = exact('A1', 'PD', 60)
+    Fv = numeric(f, 'A1', 'PD', 300)
+    with mp.workdps(60):
+        x = _mf(xq)
+        val = sum(Fv[L] * AB._legendre(L, x) for L in range(61))
+        ex, r2 = PD_VALUES[xq]
+        assert abs(val - mp.mpf(ex)) < mp.mpf('1e-14'), mp.nstr(val, 25)
+        assert abs(val - mp.mpf(r2)) < 1e-10
+
+
+@pytest.mark.parametrize('case', ['A1', 'A2'])
+def test_d_constant_set_is_ABs_21_and_Lmax_invariant(case):
+    """Mod 2^61 - 1: no gamma; exactly AB's 21 at L = 1, 2, 3, 7, 20; and F_L for L <= 25 unchanged when the internal
+    L_max goes 30 -> 40 (a truncated top-of-range T^2 recurrence would break it)."""
+    K = Field(PRIME)
+    f = coefficients(case, 20, K, 'PD')
+    ab = AB.EXPECTED_A1 if case == 'A1' else _ab_set(case)
+    for L in (1, 2, 3, 7, 20):
+        S = set(f[L])
+        assert not [k for k in S if k[1] == 'g'], (case, L)
+        assert S == ab, (case, L, sorted(map(repr, S ^ ab)))
+    assert coefficients(case, 30, K, 'PD')[:26] == coefficients(case, 40, K, 'PD')[:26]
+
+
+def test_d_decay_seven_halves_branch():
+    """beta_eff(40) of F_L (record: A1 -4.931, A2 -4.775; toy with the bare 7/2 branch -4.616, -4.500).  Windows A1
+    [-5.1, -4.75], A2 [-4.95, -4.6]: a cancelled 7/2 coefficient (9/2 branch) reads near -5.8 at L = 40, a 5/2
+    branch near -3.6.  One sign for 5 <= L <= 41; dps vs dps + 100 agree to 1e-30."""
+    L = 40
+    for case, (lo_w, hi_w) in (('A1', (-5.1, -4.75)), ('A2', (-4.95, -4.6))):
+        f, _ = exact(case, 'PD', L + 1)
+        lo, hi = numeric(f, case, 'PD', 300), numeric(f, case, 'PD', 400)
+        with mp.workdps(400):
+            bl, bh = _beta(lo, case, L), _beta(hi, case, L)
+            assert abs(bl - bh) < mp.mpf('1e-30')
+        assert lo_w < float(bh) < hi_w, (case, float(bh))
+        assert all(hi[n] > 0 for n in range(5, L + 2)), case
+
+
 # FIRE-TEST PLANTS (python debug/qa/fire_test.py tests/test_paper59_aa_bc_p.py --plant "OLD=>NEW" -k <test>)
 #     node term dropped      "(-K(Fraction(D1)), 0,=>(-K(Fraction(0)), 0,"
 #     recurrence weight      "parts.append((K(L + 1) * inv, 1,=>parts.append((K(L) * inv, 1,"
@@ -694,3 +828,13 @@ def test_px_decay_is_L_minus_five():
 #     PX normalization       "** (3 if integral == 'PA' else 5))  # PX normalization=>** (3 if integral in ('PA', 'PX') else 5))  # PX normalization"
 #     P_L for P_L^1          "val = sum(G[L] * P1[L] for L in range(1, 61))  # series in P_L^1=>val = sum(G[L] * AB._legendre(L, x) for L in range(1, 61))  # series in P_L^1"
 #     shifted recurrence     "(inv, AB.density(L - 1, inner, D1, zC, it, kt, K)),=>(inv, AB.density(L, inner, D1, zC, it, kt, K)),"
+#   record AD (PD):
+#     h2 coefficient         "_dacc(out, _tmul(TE, L, K), K(3) * half, 2)   # 3 r^2 T^2=>_dacc(out, _tmul(TE, L, K), K(2) * half, 2)   # 3 r^2 T^2"
+#     T once for T^2         "_dacc(out, _tmul(TE, L, K), K(3) * half, 2)   # 3 r^2 T^2=>_dacc(out, TE(L), K(3) * half, 2)   # 3 r^2 T^2"
+#     linear-term sign       "_dacc(out, TE(L), K(-2) * D1q, 1)              # - 4 D1 r T=>_dacc(out, TE(L), K(2) * D1q, 1)              # - 4 D1 r T"
+#     constant term dropped  "_dacc(out, E(L), D1q * D1q, 0)                 # + 2 D1^2=>_dacc(out, E(L), 0 * D1q, 0)                 # + 2 D1^2"
+#     3d normalization       "(4 * mp.pi * 720))=>(4 * mp.pi * 600))"
+#     L_max-dependent truncation (two plants, applied together; real newlines):
+#                            "    mu = 2 * zA\n    it, kt = AB.bessel_tables(K, Lmax + 3)=>    mu = 2 * zA\n    globals()['_TOP'] = Lmax - 8\n    it, kt = AB.bessel_tables(K, Lmax + 3)"
+#                            "    _dacc(out, E(L + 1), K(L + 1) * inv, 0)\n    return out=>    if L + 1 <= _TOP:\n        _dacc(out, E(L + 1), K(L + 1) * inv, 0)\n    return out"
+#                            (a fixed cut such as `if L < 35` is not a plant here: it never triggers at L <= 32)

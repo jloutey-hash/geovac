@@ -209,6 +209,80 @@ def p2x(p, Lmax=1000):
         (DATA / f'aaqx_p2_{p}.json').write_text(json.dumps(out, indent=1))
 
 
+# ---------------------------------------------------------------- record AD (docs/predictions/2026-11-15_aa_bc_d_orbital.md)
+REF_PD = {'A1': {'1/2': '0.10475756007475293', '0': '0.1192323881040522'},          # R2 n = 34
+          'A2': {'-1/3': '0.11423709523279987', '4/5': '0.07383525670081686'}}
+R1_PD = {'A1': {'1/2': '0.10475756194191777', '0': '0.1192323881898002'},
+         'A2': {'-1/3': '0.11423709714595878', '4/5': '0.073835257668728'}}
+
+
+def p1p3d(Lmax=240, dps=2000):
+    out = {}
+    K = E.Field(None)
+    for case in P.CASES:
+        D1, D2, zB, zC, zA = P.params(case)
+        t0 = time.time()
+        f = P.coefficients(case, Lmax, K, 'PD')
+        sec = round(time.time() - t0)
+        mp.mp.dps = dps
+        keys = set(k for q in f for k in q)
+        consts = {k: E.value(k, mp) for k in keys}
+        tw = P.twopiN(case, 'PD')
+        F = [tw * sum(mpq(v) * consts[k] for k, v in q.items()) for q in f]
+        vals, diffs = {}, {}
+        for xs_, ref in REF_PD[case].items():
+            xr = mpf_q(Fraction(xs_))
+            Pl = [mp.mpf(1), xr]
+            for L in range(1, Lmax):
+                Pl.append(((2 * L + 1) * xr * Pl[L] - L * Pl[L - 1]) / (L + 1))
+            val = sum(F[L] * Pl[L] for L in range(Lmax + 1))
+            vals[xs_] = mp.nstr(val, 30)
+            diffs[xs_] = dict(R2=float(val - mp.mpf(ref)), R1=float(val - mp.mpf(R1_PD[case][xs_])),
+                              tail=mp.nstr(abs(F[Lmax] * Pl[Lmax]), 5))
+        xsm = mpf_q((D1 ** 2 + D2 ** 2) / (2 * D1 * D2))
+        rho = 1 / (xsm + mp.sqrt(xsm * xsm - 1))
+        G = [F[L] / rho ** L for L in range(Lmax + 1)]
+        beta = {L: float(mp.log(abs(G[L + 1] / G[L - 1])) / mp.log(mp.mpf(L + 1) / (L - 1)))
+                for L in list(range(20, Lmax, 20)) + [Lmax - 20]}
+        rec = dict(values=vals, diffs=diffs, P1=all(abs(d['R2']) <= 1e-10 for d in diffs.values()), beta=beta,
+                   signs_L_ge_20=sorted(set(int(mp.sign(v)) for v in F[20:])),
+                   signs_L_ge_5=sorted(set(int(mp.sign(v)) for v in F[5:])), engine_s=sec, dps=dps, Lmax=Lmax,
+                   F_first=[mp.nstr(v, 15) for v in F[:6]])
+        band = {'A1': (-4.29, -3.95), 'A2': (-4.26, -3.92)}[case]
+        rec['P3'] = (band[0] <= beta[Lmax - 20] <= band[1]) and len(rec['signs_L_ge_20']) == 1
+        out[case] = rec
+        print(case, json.dumps(rec, indent=1), flush=True)
+        (DATA / f'aadz_p1p3_{dps}.json').write_text(json.dumps(out, indent=1))
+
+
+def p2d(p, Lmax=1000):
+    out = {}
+    K = E.Field(p)
+    for case in P.CASES:
+        na_keys = set(k for q in X.pieces(case, 40, K, which=('NA',))['NA'] for k in q)
+        C = ABR.candidate_set(case, na_keys)
+        abf = DATA / f'aabc_p2_{p}.json'
+        ab21 = set(json.loads(abf.read_text())[case]['constants']) if abf.exists() else None
+        t0 = time.time()
+        f = P.coefficients(case, Lmax, K, 'PD')
+        sets = [frozenset(q) for q in f]
+        S0 = sets[2]
+        changes = [L for L in range(3, len(sets)) if sets[L] != S0]
+        union = set().union(*sets[2:])
+        first_full = next((L for L in range(len(sets)) if all(sets[M] == S0 for M in range(L, len(sets)))), None)
+        rec = dict(seconds=round(time.time() - t0), n_constants_L2=len(S0), L_where_set_changes=changes[:20],
+                   P2a=not changes, first_L_fixed=first_full, n_union=len(union), inside_C=not (union - C),
+                   outside_C=sorted(map(repr, union - C)), gamma_present=[repr(k) for k in union if k[1] == 'g'],
+                   sizes_L0_to_3=[len(sets[L]) for L in range(4)], constants=sorted(map(repr, union)))
+        if ab21 is not None:
+            u = set(map(repr, union))
+            rec['equals_AB21'] = u == ab21
+            rec['vs_AB21'] = dict(missing=sorted(ab21 - u), extra=sorted(u - ab21))
+        out[case] = rec
+        print(case, p, json.dumps({k: v for k, v in rec.items() if k != 'constants'}, indent=1), flush=True)
+        (DATA / f'aadz_p2_{p}.json').write_text(json.dumps(out, indent=1))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'p1p3':
@@ -219,3 +293,7 @@ if __name__ == '__main__':
         p1p3x(*(int(a) for a in sys.argv[2:4]))
     elif cmd == 'p2x':
         p2x(int(sys.argv[2]))
+    elif cmd == 'p1p3d':
+        p1p3d(*(int(v) for v in sys.argv[2:4]))
+    elif cmd == 'p2d':
+        p2d(int(sys.argv[2]))
