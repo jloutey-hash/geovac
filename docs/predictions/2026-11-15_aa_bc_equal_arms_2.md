@@ -80,3 +80,27 @@ computed.
 
 `debug/aaeq2_run.py`: registers E3, E4 in its own process, runs AE2-0, then P1/P3/P4 at L <= 600 at 2000 and 2600
 digits, reading predictions from `debug/data/aaeq2_controls.json`.
+
+## Results (scored 2026-11-15)
+
+**Verdict: VOID as registered (P0 failed).** AE2-0 passed (24/24). The precision gate did what it was added for:
+converting the exact rational coefficients to floating point loses more digits as L grows, and 2000 digits are not
+enough at L = 579..581. At 2000 digits F_579..581 are garbage (order 1e+551 to 1e+561, wrong signs) for all six
+integrals; at 2600 digits they are sane for S at both cases and PC, PD at E4, but E3's PC and PD flip sign from
+L = 582 and are already contaminated at 581. The 2000 / 2600 disagreement at L = 579..581 is up to 1e+597 (gate:
+1e-10). P1 fails with it (the sums to L = 600 include the garbage tail at both precisions). No clause is scored.
+
+Data (`debug/data/aaeq2_p1_<dps>_<case>_<name>.json`, logs alongside). Unscored, reported because the files exist
+and were seen: at L = 220 and 400 both precisions agree, and
+
+| | beta(220) | beta(400) | F_220 / pred | F_400 / pred | F_580 / pred, 2600 digits |
+|:--|:--|:--|:--|:--|:--|
+| E3 S | -7.980 | -7.989 | 0.9983 | 0.9995 | 0.9997 |
+| E3 PC | -11.969 | -11.984 | 0.9961 | 0.9988 | 0.9994 (580 sane, 581 not) |
+| E3 PD | -9.974 | -9.987 | 0.9972 | 0.9992 | 0.9996 (580 sane, 581 not) |
+| E4 S | -7.979 | -7.989 | 0.9982 | 0.9995 | 0.9997 |
+| E4 PC | -9.974 | -9.987 | 0.9973 | 0.9992 | 0.9996 |
+| E4 PD | -9.977 | -9.987 | 0.9988 | 0.9996 | 0.9998 |
+
+The toy betas are -7.983 / -7.990, -9.980 / -9.988, -11.977 / -11.986 at L = 220 / 400. F(PC)/F(PD) at E3:
+-2.15e-4 (L = 220), -6.51e-5 (400), ratio 3.30 against (400/220)^2 = 3.31.
