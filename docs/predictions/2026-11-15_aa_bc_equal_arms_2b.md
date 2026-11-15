@@ -43,3 +43,34 @@ The total loss is roughly proportional to L, about 4.5 L digits: 2000 digits are
 L = 579; 2600 digits fail from L = 581 at E3 (PC, PD) and near L = 585 elsewhere (2600 / 580 = 4.5). L = 600 needs
 roughly 2700 digits even if the loss grows like L log L; 3600 leaves about 800 digits of margin and 4400 is the
 check. The gate's sum-agreement clause covers a non-monotone loss at intermediate L.
+
+## Results (scored 2026-11-15)
+
+**Verdict: GO.** Engine files unchanged at scoring (`git diff 95131691` empty). All clauses at 3600 digits.
+
+- **P0 held.** F_579..581 and F_598..600 of all six integrals, and all twelve P1 sums, agree between 3600 and 4400
+  digits in every printed digit (25 significant for F, 30 for the sums).
+- **P1 held (12/12).** Differences from R2 (n = 34): E3 4.2e-11 to 1.8e-10 (tolerance 1e-9); E4 6.7e-13 to 1.6e-11
+  (tolerance 2e-10). R1 (reported): E3 within 4.8e-12, E4 within 7.2e-9.
+- **P3 held (6/6).**
+
+  | | beta(220) | beta(400) | beta(580) | band |
+  |:--|:--|:--|:--|:--|
+  | E3 S | -7.980 | -7.989 | -7.993 | [-8.25, -7.75] |
+  | E3 PC | -11.969 | -11.984 | -11.989 | [-12.3, -11.7] at all three; drift 0.020 < 0.05 |
+  | E3 PD | -9.974 | -9.987 | -9.991 | [-10.25, -9.75] |
+  | E4 S | -7.979 | -7.989 | -7.993 | [-8.25, -7.75] |
+  | E4 PC | -9.974 | -9.987 | -9.991 | [-10.25, -9.75] |
+  | E4 PD | -9.977 | -9.987 | -9.991 | [-10.25, -9.75] |
+
+  Toy at 580: -7.993, -9.992, -11.990.
+- **P4 held (6/6).** F_580 / pred: E3 S 0.99975, PD 0.99960; E4 S 0.99974, PC 0.99961, PD 0.99982 (band [0.98, 1.02]);
+  E3 PC 0.99943 against the (1 - x)^{11/2} amplitude from the local expansion (band [0.9, 1.1]). Ratios rise toward 1
+  with L (L = 220: 0.996 to 0.999).
+
+**Reported, not scored.** F(PC)/F(PD) at E3: -2.147e-4 (L = 220), -6.511e-5 (400), -3.099e-5 (580); the 220 -> 580
+drop is 6.93 against (580/220)^2 = 6.95, the predicted L^-2.
+
+**Reading.** At equal arms the decay exponents, the closed-form amplitudes with the corrected sign rule, and the
+predicted cancellation of PC's (1 - x)^{9/2} term at zB D = 9 all hold at two geometries AE never computed. Caveat
+as registered: the re-run was not blind at L = 220 / 400 (disclosure above).
