@@ -3,6 +3,7 @@ Registers E3, E4 in THIS process only; reuses aaeq_run's AE0 pieces.
 
     python debug/aaeq2_run.py ap0                 : AE2-0 (ii) quadrature, (iii) continuity at 400 digits
     python debug/aaeq2_run.py p1 <case> <name> [Lmax dps] : P1, P3, P4 for one integral at one case
+    python debug/aaeq2_run.py p1b <case> <name> Lmax dps1 dps2 ... : record AE2b; exact coefficients once, p1 at each dps
 """
 import json
 import sys
@@ -59,13 +60,14 @@ def ap0():
     print('AE2-0 self-checks pass:', ok)
 
 
-def p1(case, name, Lmax=600, dps=2000):
+def p1(case, name, Lmax=600, dps=2000, f=None, sec=None):
     ctrl = json.loads((DATA / 'aaeq2_controls.json').read_text())
     integral = INTS[name]
-    K = E.Field(None)
-    t0 = time.time()
-    f = P.coefficients(case, Lmax, K, integral)
-    sec = round(time.time() - t0)
+    if f is None:
+        K = E.Field(None)
+        t0 = time.time()
+        f = P.coefficients(case, Lmax, K, integral)
+        sec = round(time.time() - t0)
     mp.mp.dps = dps
     F = R.numeric(f, case, integral)
     vals, diffs = {}, {}
@@ -91,7 +93,7 @@ def p1(case, name, Lmax=600, dps=2000):
         pred, lo, hi = ctrl['amplitude'][case][name]['pred_F'], 0.98, 1.02
     rec['P4_ratio'] = {L: float(F[int(L)] / mp.mpf(v)) for L, v in pred.items()}
     rec['P4'] = lo <= rec['P4_ratio']['580'] <= hi
-    rec['F_tail'] = {L: mp.nstr(F[L], 25) for L in (220, 400, 579, 580, 581)}   # for PC/PD ratios at E3
+    rec['F_tail'] = {L: mp.nstr(F[L], 25) for L in (220, 400, 579, 580, 581, 598, 599, 600)}   # for PC/PD ratios at E3
     (DATA / f'aaeq2_p1_{dps}_{case}_{name}.json').write_text(json.dumps(rec, indent=1))   # one file per run
     print(case, name, json.dumps(rec, indent=1), flush=True)
 
@@ -100,5 +102,12 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'ap0':
         ap0()
+    elif cmd == 'p1b':   # AE2b: exact coefficients once, evaluated at each listed precision (same output as p1 per dps)
+        case, name, Lmax = sys.argv[2], sys.argv[3], int(sys.argv[4])
+        t0 = time.time()
+        f = P.coefficients(case, Lmax, E.Field(None), INTS[name])
+        sec = round(time.time() - t0)
+        for dps in (int(v) for v in sys.argv[5:]):
+            p1(case, name, Lmax, dps, f=f, sec=sec)
     elif cmd == 'p1':
         p1(sys.argv[2], sys.argv[3], *(int(v) for v in sys.argv[4:6]))
