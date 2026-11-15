@@ -125,9 +125,97 @@ def p2(p, Lmax=1000):
             (DATA / f'aapc_p2_{p}.json').write_text(json.dumps(out, indent=1))
 
 
+# ---------------------------------------------------------------- record AQ (docs/predictions/2026-11-14_aa_bc_ppi.md)
+REF_PX = {'A1': dict(pts={'1/2': '0.04593158474', '0': '0.04139299240'}, R1={'1/2': '0.045931581100779974',
+                                                                           '0': '0.04139299522190369'}),
+          'A2': dict(pts={'-1/3': '0.04785832522', '4/5': '0.05281168761'}, R1={'-1/3': '0.04785832795319986',
+                                                                              '4/5': '0.05281168464597012'})}
+
+
+def mpf_q(q):
+    return mp.mpf(q.numerator) / q.denominator
+
+
+def PL1(Lmax, x):
+    """P_L^1(x) = sqrt(1 - x^2) P_L'(x), L = 0..Lmax (no Condon-Shortley phase)."""
+    P = [mp.mpf(1), x]
+    for L in range(1, Lmax):
+        P.append(((2 * L + 1) * x * P[L] - L * P[L - 1]) / (L + 1))
+    sq = mp.sqrt(1 - x * x)
+    return [mp.mpf(0)] + [sq * L * (x * P[L] - P[L - 1]) / (x * x - 1) for L in range(1, Lmax + 1)]
+
+
+def p1p3x(Lmax=240, dps=2000):
+    out = {}
+    K = E.Field(None)
+    for case in P.CASES:
+        D1, D2, zB, zC, zA = P.params(case)
+        t0 = time.time()
+        f = P.coefficients(case, Lmax, K, 'PX')
+        sec = round(time.time() - t0)
+        mp.mp.dps = dps
+        keys = set(k for q in f for k in q)
+        consts = {k: E.value(k, mp) for k in keys}
+        tw = P.twopiN(case, 'PX')
+        G = [tw * sum(mpq(v) * consts[k] for k, v in q.items()) for q in f]
+        vals, diffs = {}, {}
+        for xs_, ref in REF_PX[case]['pts'].items():
+            xr = mpf_q(Fraction(xs_))
+            Pl = PL1(Lmax, xr)
+            val = sum(G[L] * Pl[L] for L in range(1, Lmax + 1))
+            vals[xs_] = mp.nstr(val, 30)
+            diffs[xs_] = dict(R2=float(val - mp.mpf(ref)), R1=float(val - mp.mpf(REF_PX[case]['R1'][xs_])),
+                              tail=mp.nstr(abs(G[Lmax] * Pl[Lmax]), 5))
+        xs = (D1 ** 2 + D2 ** 2) / (2 * D1 * D2)
+        xsm = mpf_q(xs)
+        rho = 1 / (xsm + mp.sqrt(xsm * xsm - 1))
+        Gs = [G[L] / rho ** L for L in range(Lmax + 1)]
+        beta = {L: float(mp.log(abs(Gs[L + 1] / Gs[L - 1])) / mp.log(mp.mpf(L + 1) / (L - 1)))
+                for L in list(range(20, Lmax, 20)) + [Lmax - 20]}
+        rec = dict(values=vals, diffs=diffs, P1=all(abs(d['R2']) <= 2e-10 for d in diffs.values()),
+                   beta=beta, signs_L_ge_20=sorted(set(int(mp.sign(v)) for v in G[20:])),
+                   signs_L_ge_5=sorted(set(int(mp.sign(v)) for v in G[5:])), engine_s=sec, dps=dps, Lmax=Lmax,
+                   G_first=[mp.nstr(v, 15) for v in G[:6]])
+        rec['P3'] = (-5.35 <= beta[Lmax - 20] <= -5.0) and len(rec['signs_L_ge_20']) == 1
+        out[case] = rec
+        print(case, json.dumps(rec, indent=1), flush=True)
+        (DATA / f'aaqx_p1p3_{dps}.json').write_text(json.dumps(out, indent=1))
+
+
+def p2x(p, Lmax=1000):
+    out = {}
+    K = E.Field(p)
+    for case in P.CASES:
+        na_keys = set(k for q in X.pieces(case, 40, K, which=('NA',))['NA'] for k in q)
+        C = ABR.candidate_set(case, na_keys)
+        abf = DATA / f'aabc_p2_{p}.json'
+        ab21 = set(json.loads(abf.read_text())[case]['constants']) if abf.exists() else None
+        t0 = time.time()
+        f = P.coefficients(case, Lmax, K, 'PX')
+        sets = [frozenset(q) for q in f]
+        S0 = sets[2]
+        changes = [L for L in range(3, len(sets)) if sets[L] != S0]
+        union = set().union(*sets[2:])
+        rec = dict(seconds=round(time.time() - t0), n_constants_L2=len(S0), L_where_set_changes=changes[:20],
+                   P2a=not changes, n_union=len(union), inside_C=not (union - C),
+                   outside_C=sorted(map(repr, union - C)), gamma_present=[repr(k) for k in union if k[1] == 'g'],
+                   set_L1=sorted(map(repr, sets[1])), constants=sorted(map(repr, union)))
+        if ab21 is not None:
+            u = set(map(repr, union))
+            rec['equals_AB21'] = u == ab21
+            rec['vs_AB21'] = dict(missing=sorted(ab21 - u), extra=sorted(u - ab21))
+        out[case] = rec
+        print(case, p, json.dumps({k: v for k, v in rec.items() if k != 'constants'}, indent=1), flush=True)
+        (DATA / f'aaqx_p2_{p}.json').write_text(json.dumps(out, indent=1))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'p1p3':
         p1p3(*(int(a) for a in sys.argv[2:4]))
     elif cmd == 'p2':
         p2(int(sys.argv[2]))
+    elif cmd == 'p1p3x':
+        p1p3x(*(int(a) for a in sys.argv[2:4]))
+    elif cmd == 'p2x':
+        p2x(int(sys.argv[2]))

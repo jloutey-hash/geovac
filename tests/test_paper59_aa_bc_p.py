@@ -22,7 +22,13 @@ Claims guarded (record AP, all clauses held):
 (4) the two kernel paths give identical coefficients (L <= 12, Q and mod p): the factored path that scored P2 is
     the AP0-checked symbolic path.
 
-Fire-test plants and outcomes: the comment block at the end of this file.
+Record AQ (docs/predictions/2026-11-14_aa_bc_ppi.md), PX = (1s_A 1s_A | 1s_B 2px_C), p_x in the ABC plane:
+(5) per-channel G_L against a direct-projection quadrature (no Legendre identity); the series in P_L^1 summed at
+    two angles of A1 against the record; AB's 21 constants at L = 1..20; beta_eff(40) near -5.8 (L^-5), windows
+    that exclude reading the branch as a P_L series and a cancelled 7/2 coefficient.
+
+Fire-test plants and outcomes: the comment block at the end of this file (AP 17/17; AQ 9/9 plus one plant that is
+a no-op at A1 and fires at A2; 2026-11-14, separate step).
 """
 from __future__ import annotations
 
@@ -226,6 +232,20 @@ def dens_pz(L, inner, D1, zC, it, kt, K):
     return d
 
 
+def dens_px(L, inner, D1, zC, it, kt, K):
+    """Record AQ: m = 1 multipole of x e^{-zC r_C}, r (dens_{L-1} - dens_{L+1}) / (2L+1); none at L = 0."""
+    d = {}
+    if L == 0:
+        return d
+    inv = K(1) / K(2 * L + 1)
+    for w, dd in ((inv, AB.density(L - 1, inner, D1, zC, it, kt, K)),
+                  (-inv, AB.density(L + 1, inner, D1, zC, it, kt, K))):  # m = 1 sign
+        for (e0, b), poly in dd.items():
+            for n, v in poly.items():
+                _put(d, e0, b, n + 1, w * v)
+    return d
+
+
 def integrate(dens, kers, D1, D2, zB, I, K):
     regions = [(Fraction(0), D1, True, True), (D1, D2, False, True), (D2, None, False, False)]
     res = {}
@@ -270,8 +290,9 @@ def coefficients(case, Lmax, K, integral, path='factored'):
     kev = kernel_factored if path == 'factored' else kernel_symbolic
     out, pieces = [], []
     for L in range(Lmax + 1):
-        if integral == 'PC':
-            dens = {inner: dens_pz(L, inner, D1, zC, it, kt, K) for inner in (True, False)}
+        if integral in ('PC', 'PX'):
+            dfun = dens_pz if integral == 'PC' else dens_px
+            dens = {inner: dfun(L, inner, D1, zC, it, kt, K) for inner in (True, False)}
             co = {'NA': K(1), 'Y': K(-1), 'dY': za}
             res = integrate(dens, {nr: kev(L, nr, co, it, kt, K, mu, D2, 0) for nr in (True, False)},
                             D1, D2, zB, I, K)
@@ -302,7 +323,7 @@ def _mf(q):
 def numeric(Q, case, integral, dps):
     with mp.workdps(dps):
         zB, zC = params(case)[2:4]
-        tw = 2 * mp.sqrt(_mf(zB) ** 3 * _mf(zC) ** (5 if integral == 'PC' else 3))
+        tw = 2 * mp.sqrt(_mf(zB) ** 3 * _mf(zC) ** (3 if integral == 'PA' else 5))  # PX normalization
         keys = set(k for q in Q for k in q)
         cv = {k: AB.const_value(k) for k in keys}
         return [tw * sum((mp.mpf(int(v.p)) / int(v.q) * cv[k] for k, v in q.items()), mp.mpf(0)) for q in Q]
@@ -539,6 +560,122 @@ def test_factored_kernel_path_equals_symbolic_path(p):
             assert a == b, (case, integral)
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Record AQ: (1s_A 1s_A | 1s_B 2px_C), p_x in the ABC plane, PX = sum_{L >= 1} G_L P_L^1(x)
+# ---------------------------------------------------------------------------------------------------------------
+
+
+def _PL_dPL(L, t):
+    p0, p1 = mp.mpf(1), t
+    if L == 0:
+        return p0, mp.mpf(0)
+    for n in range(1, L):
+        p0, p1 = p1, ((2 * n + 1) * t * p1 - n * p0) / (n + 1)
+    return p1, L * (t * p1 - p0) / (t * t - 1)
+
+
+def _PL1_list(Lmax, x):
+    """P_L^1(x) = sqrt(1 - x^2) P_L'(x), no Condon-Shortley phase."""
+    return [mp.mpf(0)] + [mp.sqrt(1 - x * x) * _PL_dPL(L, x)[1] for L in range(1, Lmax + 1)]
+
+
+def quadrature_GL_px(case, L, dps):
+    """G_L by direct projection: rho^1_L = (2L+1)/(2L(L+1)) int N e^{-zB r} r (1-t^2) P_L'(t) e^{-zC s} dt (no
+    Legendre identity), against v_L of the exact 1s potential, 4 pi/(2L+1) int r^2 rho^1_L v_L dr."""
+    with mp.workdps(dps):
+        D1, D2, zB, zC, zA = (_mf(v) for v in params(case))
+        N = mp.sqrt(zB ** 3 * zC ** 5) / mp.pi
+        nodes = mp.calculus.quadrature.GaussLegendre(mp.mp).calc_nodes(5, mp.mp.prec)
+        fac = mp.mpf(2 * L + 1) / (2 * L * (L + 1))
+
+        def ang(func, r, D):
+            a, b = abs(r - D), r + D
+            h, c = (b - a) / 2, (b + a) / 2
+            tot = mp.mpf(0)
+            for u, w in nodes:
+                s_ = c + h * u
+                t = (r * r + D * D - s_ * s_) / (2 * r * D)
+                tot += w * func(s_, t) * s_
+            return tot * h / (r * D)
+
+        def integrand(r):
+            rho1 = fac * N * mp.exp(-zB * r) * r * ang(
+                lambda s_, t: mp.exp(-zC * s_) * (1 - t * t) * _PL_dPL(L, t)[1], r, D1)
+            vL = (2 * L + 1) / mp.mpf(2) * ang(lambda s_, t: AB.potential_1s(s_, zA) * _PL_dPL(L, t)[0], r, D2)
+            return 4 * mp.pi / (2 * L + 1) * r * r * rho1 * vL
+        return mp.quad(integrand, [0, D1, D2, D2 + 4, mp.inf])
+
+
+@pytest.mark.parametrize('case,L', [('A1', 3), ('A2', 1)])
+def test_px_channel_matches_direct_projection(case, L):
+    """G_L of the exact split equals the direct-projection quadrature, relative 1e-18 at 22 digits (record AQ0:
+    <= 6e-23).  Rejects a lost m = 1 sign (d_{L-1} + d_{L+1}), a shifted recurrence, the 2px normalization."""
+    f, _ = exact(case, 'PX', L)
+    ex = numeric(f, case, 'PX', 80)[L]
+    q = quadrature_GL_px(case, L, 22)
+    with mp.workdps(40):
+        assert abs(q / ex - 1) < mp.mpf('1e-18'), (case, L, mp.nstr(q, 22), mp.nstr(ex, 22))
+
+
+@pytest.mark.slow
+def test_px_channel_high_precision():
+    for case in ('A1', 'A2'):
+        f, _ = exact(case, 'PX', 7)
+        ex = numeric(f, case, 'PX', 80)
+        for L in (2, 7):
+            q = quadrature_GL_px(case, L, 30)
+            with mp.workdps(50):
+                assert abs(q / ex[L] - 1) < mp.mpf('1e-26'), (case, L)
+
+
+# record AQ: 2000-digit values (L <= 240) and the R2 Gaussian-fit referee
+PX_VALUES = {F(1, 2): ('0.0459315847412031954161933793045', '0.04593158474'),
+             F(0): ('0.0413929924096152832160027409986', '0.04139299240')}
+
+
+@pytest.mark.parametrize('xq', [F(1, 2), F(0)])
+def test_px_summed_series_at_two_angles_A1(xq):
+    """Sum_{L <= 60} G_L P_L^1(x) at A1, x = 1/2 and 0 (two angles catch a reduction error smooth in L), against the
+    record's 2000-digit values to 1e-14 and the R2 referee within 2e-10.  Rejects P_L in place of P_L^1."""
+    f, _ = exact('A1', 'PX', 60)
+    G = numeric(f, 'A1', 'PX', 300)
+    with mp.workdps(60):
+        x = _mf(xq)
+        P1 = _PL1_list(60, x)
+        val = sum(G[L] * P1[L] for L in range(1, 61))  # series in P_L^1
+        ex, r2 = PX_VALUES[xq]
+        assert abs(val - mp.mpf(ex)) < mp.mpf('1e-14'), mp.nstr(val, 25)
+        assert abs(val - mp.mpf(r2)) < 2e-10
+
+
+@pytest.mark.parametrize('case', ['A1', 'A2'])
+def test_px_constant_set_is_ABs_21(case):
+    """Mod 2^61 - 1, L = 1, 2, 3, 7, 20: no gamma; exactly AB's 21 at the same case; nothing at L = 0."""
+    K = Field(PRIME)
+    f = coefficients(case, 20, K, 'PX')
+    ab = AB.EXPECTED_A1 if case == 'A1' else _ab_set(case)
+    assert f[0] == {}
+    for L in (1, 2, 3, 7, 20):
+        S = set(f[L])
+        assert not [k for k in S if k[1] == 'g'], (case, L)
+        assert S == ab, (case, L, sorted(map(repr, S ^ ab)))
+
+
+def test_px_decay_is_L_minus_five():
+    """beta_eff(40) of G_L (record: A1 -5.810, A2 -5.658; toy with the bare 7/2 branch: -5.937, -5.766).  Windows
+    A1 [-6.0, -5.6], A2 [-5.85, -5.45].  The same branch read as a P_L series would sit near -4.6; a 9/2 branch
+    (the 7/2 coefficient cancelled) near -7.  One sign for 5 <= L <= 41; dps vs dps + 100 agree to 1e-30."""
+    L = 40
+    for case, (lo_w, hi_w) in (('A1', (-6.0, -5.6)), ('A2', (-5.85, -5.45))):
+        f, _ = exact(case, 'PX', L + 1)
+        lo, hi = numeric(f, case, 'PX', 300), numeric(f, case, 'PX', 400)
+        with mp.workdps(400):
+            bl, bh = _beta(lo, case, L), _beta(hi, case, L)
+            assert abs(bl - bh) < mp.mpf('1e-30')
+        assert lo_w < float(bh) < hi_w, (case, float(bh))
+        assert all(hi[n] > 0 for n in range(5, L + 2)), case
+
+
 # FIRE-TEST PLANTS (python debug/qa/fire_test.py tests/test_paper59_aa_bc_p.py --plant "OLD=>NEW" -k <test>)
 #     node term dropped      "(-K(Fraction(D1)), 0,=>(-K(Fraction(0)), 0,"
 #     recurrence weight      "parts.append((K(L + 1) * inv, 1,=>parts.append((K(L) * inv, 1,"
@@ -551,3 +688,9 @@ def test_factored_kernel_path_equals_symbolic_path(p):
 #     Leibniz weight         "w = a * K(comb(o, k))  # Leibniz=>w = a * K(1)  # Leibniz"
 #     spurious gamma         "out.append({k: v for k, v in res.items() if v != 0})=>res[(Fraction(0), 'g', None)] = K(1); out.append({k: v for k, v in res.items() if v != 0})"
 #     V2 closed form         "+ 6 / (z * s * s)=>+ 5 / (z * s * s)"
+#   record AQ (PX):
+#     m = 1 sign lost        "(-inv, AB.density(L + 1, inner, D1, zC, it, kt, K))):  # m = 1 sign=>(inv, AB.density(L + 1, inner, D1, zC, it, kt, K))):  # m = 1 sign"
+#     (the normalization plant is a no-op at A1, where zC = 1; it fires at A2)
+#     PX normalization       "** (3 if integral == 'PA' else 5))  # PX normalization=>** (3 if integral in ('PA', 'PX') else 5))  # PX normalization"
+#     P_L for P_L^1          "val = sum(G[L] * P1[L] for L in range(1, 61))  # series in P_L^1=>val = sum(G[L] * AB._legendre(L, x) for L in range(1, 61))  # series in P_L^1"
+#     shifted recurrence     "(inv, AB.density(L - 1, inner, D1, zC, it, kt, K)),=>(inv, AB.density(L, inner, D1, zC, it, kt, K)),"

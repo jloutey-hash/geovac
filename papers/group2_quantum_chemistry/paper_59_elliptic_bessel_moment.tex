@@ -1084,10 +1084,21 @@ piece, the one containing the quadrupole (effective exponent $-4.05$ and $-4.03$
 registered clause);\ the other piece
 alone has $-5.17$ and $-5.13$, drifting toward the $-5$ of a $9/2$ branch
 (record \texttt{docs/predictions/2026-11-14\_aa\_bc\_p\_orbitals.md}, registered before
-computing;\ guard \texttt{tests/test\_paper59\_aa\_bc\_p.py}).  Caps:\ one $2p_z$ function at
-C or a $2p\sigma$ pair at A, two geometries, two primes;\ the constants are assumed linearly
-independent over $\overline{\mathbb{Q}}$;\ $p_\pi$ functions, all $d$ functions and exchange
-integrals with $\ell>0$ are not covered.
+computing;\ guard \texttt{tests/test\_paper59\_aa\_bc\_p.py}).  A $p_\pi$ function at C, in the
+plane of the three centers and perpendicular to B--C, gives
+$(1s_{\rm A}1s_{\rm A}|1s_{\rm B}2p_{x,{\rm C}})=\sum_{\ell\ge1}G_\ell\,P_\ell^{1}(x)$:\ only the
+$m=1$ term of the addition theorem survives.  Its coefficients use the same $21$ constants from
+$\ell=1$ to $\ell=1000$ (modulo two primes), the values agree with the Gaussian-fit referee within its
+uncertainty (taken from the $2p_z$ fits;\ differences below $10^{-11}$) at two angles per geometry, and the coefficients decay like $\ell^{-5}$ (effective
+exponent $-5.17$ and $-5.13$ at $\ell=220$;\ in the $P_\ell$ basis of the preceding sentences, $-5$
+would signal a $9/2$ branch).  This is consistent with the same $(x^{*}-x)^{7/2}$ branch, seen in
+the $P_\ell^{1}$ basis, where the coefficients fall one power of $\ell$ faster;\ a test function with
+exactly that branch gives $-5.18$ and $-5.14$ with the same effective-exponent estimate (record
+\texttt{docs/predictions/2026-11-14\_aa\_bc\_ppi.md}, registered before computing).  Caps:\ one
+$2p_z$ function at C, a $2p\sigma$ pair at A, or one in-plane $2p_x$ function at C;\ two
+geometries, two primes;\ the constants are assumed linearly independent over
+$\overline{\mathbb{Q}}$;\ $p_\pi$ functions on A, all $d$ functions and exchange integrals with
+$\ell>0$ are not covered.
 Since every channel stays in the two-center class, any higher-class content of the integrated
 value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the
 angle.  A two-center-class form in $w=|Y-Z|$ is a finite sum of rational functions, exponentials

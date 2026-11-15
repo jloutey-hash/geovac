@@ -252,6 +252,21 @@ def dens_pz(L, inner, D1, zC, it, kt, K):
     return d
 
 
+def dens_px(L, inner, D1, zC, it, kt, K):
+    """Record AQ: m = 1 multipole of x e^{-zC r_C} in AB's normalization, r (dens_{L-1} - dens_{L+1}) / (2L+1),
+    from sqrt(1 - t^2) P_L^1 = L(L+1)/(2L+1) (P_{L-1} - P_{L+1}); the series is in P_L^1(x).  L = 0 is absent."""
+    d = {}
+    if L == 0:
+        return d
+    inv = K(1) / K(2 * L + 1)
+    for w, dd in ((inv, X.density(L - 1, inner, D1, zC, it, kt, K)),
+                  (-inv, X.density(L + 1, inner, D1, zC, it, kt, K))):
+        for (e0, b), poly in dd.items():
+            for n, v in poly.items():
+                X._put(d, e0, b, n + 1, w * v)
+    return d
+
+
 # ---------------------------------------------------------------- radial integration
 
 
@@ -312,9 +327,9 @@ def coefficients(case, Lmax, K, integral, params_override=None, pieces_out=False
             return kernel_eval(L, near, co, it, kt, K, mu, D2, nD2)
         return evaluate(combo(L, near, co, it, kt, K, nD2=nD2), mu, D2, K)
     for L in range(Lmax + 1):
-        dfun = dens_pz if integral == 'PC' else dens_1s
+        dfun = {'PC': dens_pz, 'PX': dens_px}.get(integral, dens_1s)
         dens = {inner: dfun(L, inner, D1, zC, it, kt, K) for inner in (True, False)}
-        if integral in ('PC', 'AB'):
+        if integral in ('PC', 'AB', 'PX'):
             co = {'NA': K(1), 'Y': K(-1), 'dY': za}
             kers = {near: kev(L, near, co, 0) for near in (True, False)}
             res = integrate(dens, kers, D1, D2, zB, I, K)
@@ -345,7 +360,7 @@ def twopiN(case, integral):
     import mpmath as mp
     D1, D2, zB, zC, zA = params(case)
     q = lambda v: mp.mpf(v.numerator) / v.denominator  # noqa: E731
-    return 2 * mp.sqrt(q(zB) ** 3 * q(zC) ** (5 if integral == 'PC' else 3))
+    return 2 * mp.sqrt(q(zB) ** 3 * q(zC) ** (5 if integral in ('PC', 'PX') else 3))
 
 
 # ---------------------------------------------------------------- AP0 self-checks

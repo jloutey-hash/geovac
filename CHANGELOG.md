@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.29] - 2026-11-14
+
+**Inventory row 8, part 2b-i: an in-plane p_pi function at C keeps the 1s structure (pre-registered AQ, GO;
+standing autonomous-loop authorization).**
+
+### Added
+- Record AQ (`docs/predictions/2026-11-14_aa_bc_ppi.md`, committed b2a39405 before computing; a fresh reviewer read
+  the draft cold and its findings were applied: P3 band re-centred on a measured toy control, P3 restated as a test
+  of non-cancellation, P2b/P2c demoted to reported, third referee points added). Object
+  (1s_A 1s_A|1s_B 2px_C), p_x in the ABC plane: only the m = 1 term of the addition theorem survives, so the
+  integral is a series in P_L^1(cos g). AQ0, P1 (two angles per geometry), P2a and P3 HELD. Gate GO.
+  - Values agree with the Gaussian-fit referee within its uncertainty (differences <= 9.6e-12).
+  - Every G_L, L = 1..1000, mod both primes, uses exactly AB's 21 constants; no gamma.
+  - G_L ~ L^-5: beta_eff(220) -5.167 / -5.131, against -5.180 / -5.143 for a toy with the bare 7/2 branch. So
+    the 7/2 coefficient does not cancel; the extra power is the P_L^1 basis.
+- `debug/aaqx_controls.py` (referees, on-axis zero, toy positive control), `debug/aaqx_ap0.py`, `dens_px` in
+  `debug/aapc_exact.py`, `p1p3x` / `p2x` in `debug/aapc_run.py`; data `debug/data/aaqx_*.json`.
+- Guard additions in `tests/test_paper59_aa_bc_p.py` (separate pass): direct-projection quadrature per channel,
+  summed series at two angles, AB's 21 constants, beta_eff(40) windows. Fire-tested 9/9, plus one plant that is a
+  no-op at A1 (zC = 1) and fires at A2. While fire-testing, one plant anchor matched only the plant comment (the
+  code line ends differently); it was corrected and re-fired at every placement.
+
+### Changed
+- Paper 59 `sec:scope`: the p-orbital paragraph gains the in-plane p_pi case; caps updated.
+- `docs/chemistry_period_inventory.md` row 8: part 2b-i closed; `docs/claim_test_matrix.md`: Paper 59 row for AQ.
+
+### Still owed (inventory)
+- Row 8 part 2b: p_pi pairs on A, d functions, exchange at l > 0, Paper 63's fibre at l > 0. Unchanged: exchange
+  at unequal exponents, the LiH certified-energy regression test, rows 1, 4, 5, 7 unaudited.
+
 ## [v6.7.28] - 2026-11-14
 
 **Inventory row 8, part 2a: p orbitals in (AA|BC) keep the 1s structure (pre-registered AP, GO; PI-directed;
