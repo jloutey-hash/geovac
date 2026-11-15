@@ -140,3 +140,58 @@ Extend `debug/aabc_exact.py` (na_exact's Field, Bessel tables, Integrals, value 
 - `boundary_D2`: the jump term of d^2/dD2^2 at r = D2, rho_L(D2) [d_D2 K_near - d_D2 K_far] at r = D2.
 Then: AP0; P1 at both referee points (2000 and 2600 digits); P2 over L <= 1000 mod both primes; P3 with AB's
 instrument on exact F_L at 2000 digits, L <= 240.
+
+## Results (2026-11-14; appended after scoring, text above unchanged)
+
+**Verdict: GO.** AP0, P1, P2 and P3 held in both cases for both integrals.
+
+| clause | A1 PC | A2 PC | A1 PA | A2 PA |
+|:--|:--|:--|:--|:--|
+| P1: exact value (2000 digits, L <= 240) | -0.208962996502063 | -0.218397966426964 | 0.203231256960264 | 0.219525615007203 |
+| P1: minus R2 stated (tol 3e-10 / 2e-10) | -1.2e-11 | 3.0e-12 | 2.6e-13 | -1.3e-11 |
+| P1: minus R1 finest (tol 5e-9 / 3e-10) | -7.2e-10 | 2.8e-9 | -3.5e-11 | 2.6e-11 |
+| P2a: set fixed over L <= 1000 | yes, 21 keys | yes, 21 | yes, 21 | yes, 21 |
+| P2b: inside AB's 29-key C | yes | yes | yes | yes |
+| P2c: no gamma | yes | yes | yes | yes |
+| P3: beta_eff(220), band [-4.3, -3.85] | -4.123 | -4.101 | -4.086 | -4.059 |
+| P3: one sign for L >= 20 | yes (+) | yes (+) | yes (+) | yes (+) |
+
+- **AP0** held (`debug/data/aapc_ap0.log`): AB reproduced key for key over Q and mod 2^61 - 1; mu-jet equals AB's dY
+  kernel; D2-jet against the 2000-digit central difference to 4.7e-604 ... 6.8e-613.
+- **P1.** Tail terms at L = 240 are below 3e-51. Both primes give identical constant sets (P2); the 2600-digit run
+  reproduces the 2000-digit values to all 30 printed digits and beta_eff to six.
+- **P2.** At L = 0 only the 7 pure exponentials appear; from L = 1 on, the set is the full 21 in all four cases,
+  earlier than the predicted L >= 3 (PC) and L >= 2 (PA). Identical mod both primes.
+- **P3.** beta_eff rises toward -4 from below at every L sampled (PC A1: -5.14 at L = 20, -4.33 at 80, -4.12 at
+  220), as for AB. F_L > 0 for L >= 5 in all four.
+
+**Reported, not scored.**
+- PC's set is exactly AB's 21 at both cases (guess 0.55). The factor r cos(theta) removes no E1 or log.
+- PA's set is also exactly AB's 21. It uses none of C's 8 unused keys: the e^{-857/50} candidate does not appear.
+- PA pieces: the d^2/dD2^2 U piece has beta_eff(220) = -4.046 (A1), -4.025 (A2), so it carries the 7/2 branch;
+  the W0 piece has -5.166 (A1), -5.131 (A2), drifting toward -5, the 9/2 branch. This fits the P3 reasoning: the 7/2
+  branch comes from the quadrupole part, which lives in (n.grad)^2 U, while W0 alone has only the monopole-type
+  9/2 branch. The pieces were split as d^2/dD2^2 U versus W0, not with the 1/s^3 term separately, so the predicted
+  cancellation of that term inside the sum was not isolated.
+- Per-piece constant counts and the per-L 1e-40 quadrature check of each piece were not run.
+
+**Disclosed changes to the Phase-2 plan.**
+- Engine speed. The first runs mod the two primes ran 6 h with no case finished (a timing test showed L^3 cost,
+  ~85 h per PA case at L = 1000). The cause was keeping each Y kernel's double Bessel sum symbolic in (mu, D2, r).
+  A factored path (`kernel_eval`: D2 factor and r factor kept apart, mu-derivatives by Leibniz) replaced it before
+  any P2 output existed. It gives identical coefficients to the AP0-checked path for PC, PA and AB, both cases, over
+  Q and mod both primes, L <= 30; AP0 passes on it (`debug/data/aapc_ap0_fast.log`); and the 2600-digit P1/P3 run
+  (fast path) matches the 2000-digit run (old path) at L <= 240. P2 ran on the fast path (~440 s PC, ~870 s PA per
+  case per prime).
+- Files: `debug/aapc_exact.py`, `debug/aapc_run.py`; data `debug/data/aapc_p1p3_{2000,2600}.json`,
+  `debug/data/aapc_p2_{2305843009213693951,4611686018427387847}.json`.
+
+**Consequence for inventory row 8.** Part 2a is closed: a p function at either end of (AA|BC) keeps the 1s constant
+set (21 keys, no gamma, no new E1 or log) and AB's 7/2 branch at x*. Part 2b (p_pi and d functions off the B-C
+axis, exchange at l > 0, Paper 63's fibre at l > 0) remains.
+
+**Found while writing the guard (2026-11-14).** The jump term of d^2/dD2^2 at r = D2 is identically zero (every L
+checked, both cases, over Q and mod p). U has no 1/s singularity (its NA and Y parts cancel at s = 0), so the
+first D2-derivative of its kernel is continuous at r = D2. AP0 (iii), described as "including the jump term",
+therefore checked the volume part alone; the result is unaffected. Guard: `tests/test_paper59_aa_bc_p.py`
+(fire-tested 17/17).

@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.28] - 2026-11-14
+
+**Inventory row 8, part 2a: p orbitals in (AA|BC) keep the 1s structure (pre-registered AP, GO; PI-directed;
+first round under the standing autonomous-loop authorization).**
+
+### Added
+- Record AP (`docs/predictions/2026-11-14_aa_bc_p_orbitals.md`, committed 3914814f before computing):
+  PC = (1s_A 1s_A|1s_B 2pz_C) and PA = (2ps_A 2ps_A|1s_B 1s_C), AB's two geometries. AP0, P1, P2, P3 HELD. Gate GO.
+  - Values: exact split summed to L = 240 at 2000 and 2600 digits matches the Gaussian-fit referee to 1.3e-11
+    (all four).
+  - Constants: mod both primes, every coefficient L = 1..1000 uses exactly AB's 21 constants; no gamma, no new E1
+    or log; none of the 8 unused candidates (e^{-857/50} included).
+  - Branch: beta_eff(220) between -4.06 and -4.12, so (x* - x)^{7/2} as in AB. In PA the second-derivative piece
+    (which carries the quadrupole) holds the 7/2 branch; the W0 piece alone sits near -5 (9/2).
+  - Found while writing the guard: the jump term of PA's d^2/dD2^2 at r = D2 is identically zero (U has no
+    Coulomb tail); AP0 (iii) therefore checked the volume part only. Disclosed in the record.
+- `debug/aapc_exact.py` (engine), `debug/aapc_run.py` (driver). Disclosed engine change: the first mod-p runs were
+  on course for ~85 h per PA case (symbolic double Bessel sums); a factored kernel path (Leibniz in mu) replaced it
+  before any P2 output, identical to the AP0-checked path over Q and mod both primes (L <= 30), and the 2600-digit
+  run on it reproduces the 2000-digit run on the old path.
+- Guard `tests/test_paper59_aa_bc_p.py` (separate pass): per-channel exact split vs independent quadrature (PA
+  against the full 2p-sigma potential, closed forms checked against Gauss's law), summed values vs the record,
+  AB's 21-key set at L = 1..20 for PC/PA x A1/A2, beta_eff(40) windows incl. both PA pieces, the zero jump term,
+  factored path = symbolic path. 15 fast (~34 s) + 2 slow; fire-tested 17/17 FIRED.
+
+### Changed
+- Paper 59 `sec:scope`: new paragraph after the (AA|BC) one (p function at either end; caps 2pz at C or a
+  2p-sigma pair at A, p_pi and d off the B-C axis not covered). Abstract and conclusion unaffected (reread).
+- `docs/chemistry_period_inventory.md` row 8: part 2a closed; `docs/claim_test_matrix.md`: Paper 59 row for AP.
+- Memory: standing PI authorization for the chemistry inventory loop on clean GOs (fresh reviewer before each
+  pre-registration, digest after each checkpoint; non-GO, claim changes, push -> PI).
+
+### Still owed (inventory)
+- Row 8 part 2b: p_pi and d functions off the B-C axis, exchange at l > 0, Paper 63's fibre at l > 0. Unchanged:
+  exchange at unequal exponents, the LiH certified-energy regression test, rows 1, 4, 5, 7 unaudited.
+
 ## [v6.7.27] - 2026-11-14
 
 **Inventory row 8, part 1: two-centre integrals over p and d orbitals do not climb (pre-registered R8, GO; PI-directed).**
