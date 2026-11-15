@@ -1389,3 +1389,10 @@ def test_paper59_diagonal_A():
                                  or relc == [-planted[0]] + planted[1:]), relc
     # negative: no relation of height <= 100 for A in the full ring
     assert _rel(A50) is None
+
+
+# FIRE-TEST PLANTS for test_three_center_kernel_is_elliptic (python debug/qa/fire_test.py <this file> --plant "OLD=>NEW"
+# -k test_three_center_kernel_is_elliptic); 2026-11-15, 3/3 fired (inventory row 5 audit):
+#     wrong modulus            "m = 1 - (a2 / a1) ** 2 =>m = 1 - (a2 / a1) "
+#     wrong prefactor          "closed = (1 / (a1 * mp.sqrt(c1 * c2)))=>closed = (1 / (a2 * mp.sqrt(c1 * c2)))"
+#     wrong genus-0 period     "assert abs(numd - mp.pi / (2 * mp.sqrt(c)))=>assert abs(numd - mp.pi / (2 * c))"

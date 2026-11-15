@@ -256,3 +256,10 @@ def test_paper61_monodromy_lies_in_sp4_Z():
             assert cand.det() != 0                                # nondegenerate => Sp_4(Z)
             return
     assert False, "no nondegenerate integer invariant symplectic form for M0"
+
+
+# FIRE-TEST PLANTS for test_paper59_L4_annihilates_the_physical_master_N (python debug/qa/fire_test.py <this file>
+# --plant "OLD=>NEW" -k test_paper59_L4_annihilates_the_physical_master_N); 2026-11-15, 3/3 fired (row 5 audit):
+#     N''' coefficient         "+ 2 * r * N[3]=>+ 3 * r * N[3]"
+#     N' coefficient           "+ (1 - 2 * r) * N[1]=>+ (1 - 3 * r) * N[1]"
+#     N coefficient            "- D * (1 - r) * N[0])=>- D * (1 + r) * N[0])"
