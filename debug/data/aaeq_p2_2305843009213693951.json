@@ -1,0 +1,198 @@
+{
+ "E1_S": {
+  "seconds": 279,
+  "n_constants_L2": 17,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "gamma_present": [],
+  "sizes_L0_1": [
+   5,
+   17
+  ],
+  "constants": [
+   "(Fraction(-13, 5), '1', None)",
+   "(Fraction(-2, 1), '1', None)",
+   "(Fraction(-2, 1), 'E1', Fraction(23, 5))",
+   "(Fraction(-28, 5), '1', None)",
+   "(Fraction(-28, 5), 'E1', Fraction(-3, 1))",
+   "(Fraction(-28, 5), 'E1', Fraction(1, 1))",
+   "(Fraction(-28, 5), 'E1', Fraction(21, 5))",
+   "(Fraction(-28, 5), 'ln', Fraction(1, 2))",
+   "(Fraction(-28, 5), 'ln', Fraction(21, 10))",
+   "(Fraction(-28, 5), 'ln', Fraction(3, 2))",
+   "(Fraction(-28, 5), 'ln', Fraction(41, 10))",
+   "(Fraction(-33, 5), '1', None)",
+   "(Fraction(-49, 5), '1', None)",
+   "(Fraction(-8, 5), 'E1', Fraction(41, 5))",
+   "(Fraction(2, 1), 'E1', Fraction(23, 5))",
+   "(Fraction(28, 5), 'E1', Fraction(41, 5))",
+   "(Fraction(8, 5), 'E1', Fraction(41, 5))"
+  ],
+  "P2c": true
+ },
+ "E1_PC": {
+  "seconds": 435,
+  "n_constants_L2": 17,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "gamma_present": [],
+  "sizes_L0_1": [
+   5,
+   17
+  ],
+  "constants": [
+   "(Fraction(-13, 5), '1', None)",
+   "(Fraction(-2, 1), '1', None)",
+   "(Fraction(-2, 1), 'E1', Fraction(23, 5))",
+   "(Fraction(-28, 5), '1', None)",
+   "(Fraction(-28, 5), 'E1', Fraction(-3, 1))",
+   "(Fraction(-28, 5), 'E1', Fraction(1, 1))",
+   "(Fraction(-28, 5), 'E1', Fraction(21, 5))",
+   "(Fraction(-28, 5), 'ln', Fraction(1, 2))",
+   "(Fraction(-28, 5), 'ln', Fraction(21, 10))",
+   "(Fraction(-28, 5), 'ln', Fraction(3, 2))",
+   "(Fraction(-28, 5), 'ln', Fraction(41, 10))",
+   "(Fraction(-33, 5), '1', None)",
+   "(Fraction(-49, 5), '1', None)",
+   "(Fraction(-8, 5), 'E1', Fraction(41, 5))",
+   "(Fraction(2, 1), 'E1', Fraction(23, 5))",
+   "(Fraction(28, 5), 'E1', Fraction(41, 5))",
+   "(Fraction(8, 5), 'E1', Fraction(41, 5))"
+  ],
+  "P2c": true
+ },
+ "E1_PD": {
+  "seconds": 626,
+  "n_constants_L2": 17,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "gamma_present": [],
+  "sizes_L0_1": [
+   5,
+   17
+  ],
+  "constants": [
+   "(Fraction(-13, 5), '1', None)",
+   "(Fraction(-2, 1), '1', None)",
+   "(Fraction(-2, 1), 'E1', Fraction(23, 5))",
+   "(Fraction(-28, 5), '1', None)",
+   "(Fraction(-28, 5), 'E1', Fraction(-3, 1))",
+   "(Fraction(-28, 5), 'E1', Fraction(1, 1))",
+   "(Fraction(-28, 5), 'E1', Fraction(21, 5))",
+   "(Fraction(-28, 5), 'ln', Fraction(1, 2))",
+   "(Fraction(-28, 5), 'ln', Fraction(21, 10))",
+   "(Fraction(-28, 5), 'ln', Fraction(3, 2))",
+   "(Fraction(-28, 5), 'ln', Fraction(41, 10))",
+   "(Fraction(-33, 5), '1', None)",
+   "(Fraction(-49, 5), '1', None)",
+   "(Fraction(-8, 5), 'E1', Fraction(41, 5))",
+   "(Fraction(2, 1), 'E1', Fraction(23, 5))",
+   "(Fraction(28, 5), 'E1', Fraction(41, 5))",
+   "(Fraction(8, 5), 'E1', Fraction(41, 5))"
+  ],
+  "P2c": true
+ },
+ "E2_S": {
+  "seconds": 275,
+  "n_constants_L2": 17,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "gamma_present": [],
+  "sizes_L0_1": [
+   5,
+   17
+  ],
+  "constants": [
+   "(Fraction(-12, 5), '1', None)",
+   "(Fraction(-168, 25), '1', None)",
+   "(Fraction(-168, 25), 'E1', Fraction(-108, 25))",
+   "(Fraction(-168, 25), 'E1', Fraction(36, 25))",
+   "(Fraction(-168, 25), 'E1', Fraction(84, 25))",
+   "(Fraction(-168, 25), 'ln', Fraction(19, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(3, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(7, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(9, 5))",
+   "(Fraction(-204, 25), '1', None)",
+   "(Fraction(-24, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(-252, 25), '1', None)",
+   "(Fraction(-72, 25), '1', None)",
+   "(Fraction(-72, 25), 'E1', Fraction(132, 25))",
+   "(Fraction(168, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(24, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(72, 25), 'E1', Fraction(132, 25))"
+  ],
+  "P2c": true
+ },
+ "E2_PC": {
+  "seconds": 429,
+  "n_constants_L2": 17,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "gamma_present": [],
+  "sizes_L0_1": [
+   5,
+   17
+  ],
+  "constants": [
+   "(Fraction(-12, 5), '1', None)",
+   "(Fraction(-168, 25), '1', None)",
+   "(Fraction(-168, 25), 'E1', Fraction(-108, 25))",
+   "(Fraction(-168, 25), 'E1', Fraction(36, 25))",
+   "(Fraction(-168, 25), 'E1', Fraction(84, 25))",
+   "(Fraction(-168, 25), 'ln', Fraction(19, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(3, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(7, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(9, 5))",
+   "(Fraction(-204, 25), '1', None)",
+   "(Fraction(-24, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(-252, 25), '1', None)",
+   "(Fraction(-72, 25), '1', None)",
+   "(Fraction(-72, 25), 'E1', Fraction(132, 25))",
+   "(Fraction(168, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(24, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(72, 25), 'E1', Fraction(132, 25))"
+  ],
+  "P2c": true
+ },
+ "E2_PD": {
+  "seconds": 629,
+  "n_constants_L2": 17,
+  "L_where_set_changes": [],
+  "P2a": true,
+  "gamma_present": [],
+  "sizes_L0_1": [
+   5,
+   17
+  ],
+  "constants": [
+   "(Fraction(-12, 5), '1', None)",
+   "(Fraction(-168, 25), '1', None)",
+   "(Fraction(-168, 25), 'E1', Fraction(-108, 25))",
+   "(Fraction(-168, 25), 'E1', Fraction(36, 25))",
+   "(Fraction(-168, 25), 'E1', Fraction(84, 25))",
+   "(Fraction(-168, 25), 'ln', Fraction(19, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(3, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(7, 5))",
+   "(Fraction(-168, 25), 'ln', Fraction(9, 5))",
+   "(Fraction(-204, 25), '1', None)",
+   "(Fraction(-24, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(-252, 25), '1', None)",
+   "(Fraction(-72, 25), '1', None)",
+   "(Fraction(-72, 25), 'E1', Fraction(132, 25))",
+   "(Fraction(168, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(24, 25), 'E1', Fraction(228, 25))",
+   "(Fraction(72, 25), 'E1', Fraction(132, 25))"
+  ],
+  "P2c": true
+ },
+ "E1_shared": {
+  "S_eq_PC": true,
+  "S_eq_PD": true,
+  "PC_eq_PD": true
+ },
+ "E2_shared": {
+  "S_eq_PC": true,
+  "S_eq_PD": true,
+  "PC_eq_PD": true
+ }
+}

@@ -311,6 +311,8 @@ def integrate(dens, kers, D1, D2, zB, I, K):
     """sum over AB's three regions of -2 int r^2 e^{-zB r} dens(r) K(r) dr -> {key: coef}.
     dens: {inner: {(e0,b):{n:c}}}, kers: {near: {(e0,b):{n:c}}}."""
     regions = [(Fraction(0), D1, True, True), (D1, D2, False, True), (D2, None, False, False)]
+    if D1 == D2:   # record AE: equal arms, the middle region is empty
+        regions = [regions[0], regions[2]]
     res = {}
     m2 = K(-2)
     for (A, B, inner, near) in regions:
@@ -353,7 +355,7 @@ def coefficients(case, Lmax, K, integral, params_override=None, pieces_out=False
     """List over L of {key: q} with F_L = 2 pi N sum q c  (N = N_B N_C of the BC pair; PA's A pair is in V)."""
     D1, D2, zB, zC, zA = params_override or params(case)
     mu = 2 * zA
-    assert D1 < D2
+    assert D1 <= D2
     it, kt = E.bessel_tables(K, Lmax + 3)
     I = E.Integrals(K)
     za = K(Fraction(zA))

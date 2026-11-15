@@ -113,3 +113,39 @@ degree-l pattern tested at l = 1 and 2 only. Constants assumed linearly independ
 In `debug/aapc_exact.py`, allow D1 = D2 (drop the empty middle region; assert D1 <= D2). A driver
 `debug/aaeq_run.py` registers cases E1, E2 in its own process only, runs AE0, P1 at 2000 and 2600 digits, P2 mod
 both primes, and P3.
+
+## Results (2026-11-15; appended after scoring, text above unchanged)
+
+**Verdict as registered: STOP** (P4 fails for PC and PD in both cases: ratio -0.998 / -0.9996, outside [0.5, 2]).
+AE0, P1, P2 and P3 held for all six integral-case pairs. **Diagnosis: the failure is a sign convention in the
+prediction, not in the mechanism.** The magnitudes of all six amplitude ratios are within 0.2% of 1.
+
+| | S E1 | PC E1 | PD E1 | S E2 | PC E2 | PD E2 |
+|:--|:--|:--|:--|:--|:--|:--|
+| P1: max \|value - R2\| at two points (tol 1e-10) | 7.0e-14 | 1.1e-12 | 1.1e-12 | 6.5e-13 | 2.5e-13 | 1.4e-12 |
+| P2a: set fixed L = 2..1000, both primes; P2c no gamma | yes (17) | yes (17) | yes (17) | yes (17) | yes (17) | yes (17) |
+| P3: beta_eff(220) (S [-8.4, -7.6]; PC, PD [-10.4, -9.6]) | -7.981 | -9.976 | -9.979 | -7.981 | -9.976 | -9.978 |
+| P4: F_220 / F_220^pred (registered [0.9, 1.1]) | 0.999 | **-0.998** | **-0.9996** | 0.999 | **-0.998** | **-0.9993** |
+| P4 at L = 219, 221 | -0.999, -0.999 | 0.998, 0.998 | 1.000, 1.000 | -0.999, -0.999 | 0.998, 0.998 | 0.999, 0.999 |
+
+- **The sign error.** The prediction used c_L(alpha) with sign (-1)^L, read off the control's quadrature check at
+  L = 1, 2, 3, 6 ("the coefficients alternate in sign"). For L > alpha + 1 the sign of int (1 - x)^alpha P_L is
+  constant: sign(Gamma(alpha+1)/Gamma(alpha+1-L)) (-1)^L, i.e. + for alpha = 7/2 and - for alpha = 9/2 (checked by
+  quadrature at L = 4..21, 2026-11-15, after scoring). So the registered prediction alternates where the data do not
+  (all F_L > 0 for L >= 3), and S's ratio alternates +-0.999 while PC's and PD's sit at -0.998 at L = 220 and
+  +0.998 at L = 219, 221. With the correct sign rule every ratio is +0.998 to +0.9996 at L = 180..221. That
+  corrected reading is post hoc and is not scored here.
+- **What held, unaffected by the sign.** The exponents sit 0.001 to 0.004 above the toy's -7.983 / -9.980 (S and
+  PC/PD respectively): 1s keeps (1 - x)^{7/2}, and 2pz and 3d-sigma lose it and lead with (1 - x)^{9/2}, as the
+  |a|^7 h_l(a) reason predicts; the beta gap between them is 2.00. The magnitudes of the closed-form amplitudes,
+  including PC's three-term (zB D - 9) combination, agree to 0.04% to 0.2%.
+- **P2 reported:** all six share one set of 17 constants per case (5 at L = 0), identical mod both primes.
+- **AE0 disclosure.** AE0 (iii) (continuity at D1 = D - 1e-40) first ran at 80 digits and failed (differences
+  1e-22 to 1e-30): the D1 < D2 coefficients carry ~1700-digit rational denominators that cancel. At 400 and 1500
+  digits the differences are 1e-41 to 9e-40 and scale linearly with epsilon (1e-20 gives 1e-20). Rerun at 400
+  digits: pass. First run kept in `debug/data/aaeq_ap0_first_run_80digits.log`.
+- Data: `debug/data/aaeq_p1p4_{2000,2600}.json`, `debug/data/aaeq_p2_{2305843009213693951,4611686018427387847}.json`,
+  `debug/data/aaeq_ap0.log`; driver `debug/aaeq_run.py`; engine change (empty middle region at D1 = D2) in
+  `debug/aapc_exact.py`. The 2600-digit run reproduces the values to 30 digits, beta to five, ratios to six.
+
+**Not homed.** Under the standing loop rule a STOP goes to the PI before any paper edit or guard.
