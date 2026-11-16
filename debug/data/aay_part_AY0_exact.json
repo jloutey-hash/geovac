@@ -1,0 +1,81 @@
+{
+ "A1": {
+  "sum_rule_f0": true,
+  "sum_rule_f2": true,
+  "sum_rule_f4": true,
+  "pair_symmetries": true,
+  "m_sets": {
+   "DNX": [
+    0,
+    2
+   ],
+   "DNY": [
+    0,
+    2
+   ],
+   "DXY": [
+    0,
+    4
+   ],
+   "DXX": [
+    0,
+    4
+   ],
+   "DA": [
+    0
+   ]
+  },
+  "DA_keyeq_aaa": true,
+  "PA_keyeq_aaa": true,
+  "PY_PXp_total_vs_AS_rel_j_le_8": {
+   "60": {
+    "PY": "1.5e-15",
+    "PXp": "2.69e-16"
+   },
+   "120": {
+    "PY": "4.83e-27",
+    "PXp": "8.68e-28"
+   }
+  }
+ },
+ "A2": {
+  "sum_rule_f0": true,
+  "sum_rule_f2": true,
+  "sum_rule_f4": true,
+  "pair_symmetries": true,
+  "m_sets": {
+   "DNX": [
+    0,
+    2
+   ],
+   "DNY": [
+    0,
+    2
+   ],
+   "DXY": [
+    0,
+    4
+   ],
+   "DXX": [
+    0,
+    4
+   ],
+   "DA": [
+    0
+   ]
+  },
+  "DA_keyeq_aaa": true,
+  "PA_keyeq_aaa": true,
+  "PY_PXp_total_vs_AS_rel_j_le_8": {
+   "60": {
+    "PY": "1.06e-17",
+    "PXp": "1.63e-18"
+   },
+   "120": {
+    "PY": "7.87e-32",
+    "PXp": "1.21e-32"
+   }
+  }
+ },
+ "total_coeffs_random_check": "2.11e-81"
+}

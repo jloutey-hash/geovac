@@ -1,0 +1,11 @@
+{
+ "hardcoded_equals_derivation": true,
+ "identity_vs_gauss_max_rel": {
+  "DA": 0.0,
+  "DNX": 0.0,
+  "DNY": 0.0,
+  "DXY": 0.0,
+  "DXX": 0.0
+ },
+ "gauss_vs_quadrature_poisson_max_rel": "3.81e-31"
+}

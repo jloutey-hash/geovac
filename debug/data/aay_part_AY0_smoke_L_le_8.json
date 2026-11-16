@@ -1,0 +1,118 @@
+{
+ "A1": {
+  "DNX_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DNX_m2": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DNY_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DNY_m2": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DXY_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DXY_m4": {
+   "all_equal_AB21": true,
+   "L_range": [
+    4,
+    8
+   ]
+  },
+  "DXX_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DXX_m4": {
+   "all_equal_AB21": true,
+   "L_range": [
+    4,
+    8
+   ]
+  }
+ },
+ "A2": {
+  "DNX_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DNX_m2": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DNY_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DNY_m2": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DXY_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DXY_m4": {
+   "all_equal_AB21": true,
+   "L_range": [
+    4,
+    8
+   ]
+  },
+  "DXX_m0": {
+   "all_equal_AB21": true,
+   "L_range": [
+    2,
+    8
+   ]
+  },
+  "DXX_m4": {
+   "all_equal_AB21": true,
+   "L_range": [
+    4,
+    8
+   ]
+  }
+ }
+}
