@@ -2,6 +2,7 @@
     python debug/aapc_run.py p1p3 [Lmax] [dps]   : P1 (value at the referee points) + P3 (decay), PC and PA, both
                                                    cases, exact split at dps digits -> data/aapc_p1p3_<dps>.json
     python debug/aapc_run.py p2 <prime>          : constant sets L = 0..1000 mod prime -> data/aapc_p2_<p>.json
+    (records AQ, AD, AX: p1p3x/p2x, p1p3d/p2d, p1p3dx [Lmax] [dps] / p2dx <prime> -> data/aadx_*.json)
 """
 import json
 import sys
@@ -283,6 +284,107 @@ def p2d(p, Lmax=1000):
         (DATA / f'aadz_p2_{p}.json').write_text(json.dumps(out, indent=1))
 
 
+# ---------------------------------------------------------------- record AX (docs/predictions/2026-11-15_aa_bc_d_mneq0.md)
+REF_AX = {('A1', 'DX'): {'1/2': '-0.03301838760929426', '0': '-0.04177923697376483'},       # R2 n = 34
+          ('A2', 'DX'): {'-1/3': '-0.050507409529967365', '4/5': '-0.018247628218714944'},
+          ('A1', 'DD'): {'1/2': '0.011120171409288062', '0': '0.010679184288401823'},
+          ('A2', 'DD'): {'-1/3': '0.012344129315206417', '4/5': '0.010238840327312952'}}
+R1_AX = {('A1', 'DX'): {'1/2': '-0.033018386169', '0': '-0.041779240945'},                  # finest grid
+         ('A2', 'DX'): {'-1/3': '-0.050507415449', '4/5': '-0.018247629143'},
+         ('A1', 'DD'): {'1/2': '0.011120167897', '0': '0.010679187014'},
+         ('A2', 'DD'): {'-1/3': '0.012344132155', '4/5': '0.010238838445'}}
+BAND_AX = {('A1', 'DX'): (-5.35, -5.01), ('A2', 'DX'): (-5.31, -4.97),
+           ('A1', 'DD'): (-6.43, -6.08), ('A2', 'DD'): (-6.38, -6.03)}
+M_AX = {'DX': 1, 'DD': 2}
+
+
+def PLm(m, Lmax, x):
+    """P_L^m(x) = (1 - x^2)^{m/2} d^m P_L(x), L = 0..Lmax, m = 1, 2 (no Condon-Shortley phase); fixed-m recurrence
+    (L-m+1) Q_{L+1} = (2L+1) x Q_L - (L+m) Q_{L-1} on Q_L = d^m P_L."""
+    out = [mp.mpf(0)] * (Lmax + 1)
+    fac = (1 - x * x) ** (mp.mpf(m) / 2)
+    q0, q1 = mp.mpf(0), mp.mpf(1) if m == 1 else mp.mpf(3)
+    out[m] = fac * q1
+    for L in range(m, Lmax):
+        q0, q1 = q1, ((2 * L + 1) * x * q1 - (L + m) * q0) / (L - m + 1)
+        out[L + 1] = fac * q1
+    return out
+
+
+def p1p3dx(Lmax=240, dps=2000):
+    out = {}
+    K = E.Field(None)
+    for case in P.CASES:
+        D1, D2, zB, zC, zA = P.params(case)
+        for integral in ('DX', 'DD'):
+            m = M_AX[integral]
+            t0 = time.time()
+            f = P.coefficients(case, Lmax, K, integral)
+            sec = round(time.time() - t0)
+            mp.mp.dps = dps
+            keys = set(k for q in f for k in q)
+            consts = {k: E.value(k, mp) for k in keys}
+            tw = P.twopiN(case, integral)
+            F = [tw * sum(mpq(v) * consts[k] for k, v in q.items()) for q in f]
+            vals, diffs = {}, {}
+            for xs_, ref in REF_AX[(case, integral)].items():
+                Pm = PLm(m, Lmax, mpf_q(Fraction(xs_)))
+                val = sum(F[L] * Pm[L] for L in range(m, Lmax + 1))
+                vals[xs_] = mp.nstr(val, 30)
+                diffs[xs_] = dict(R2=float(val - mp.mpf(ref)),
+                                  R1=float(val - mp.mpf(R1_AX[(case, integral)][xs_])),
+                                  tail=mp.nstr(abs(F[Lmax] * Pm[Lmax]), 5))
+            xsm = mpf_q((D1 ** 2 + D2 ** 2) / (2 * D1 * D2))
+            rho = 1 / (xsm + mp.sqrt(xsm * xsm - 1))
+            G = [F[L] / rho ** L for L in range(Lmax + 1)]
+            beta = {L: float(mp.log(abs(G[L + 1] / G[L - 1])) / mp.log(mp.mpf(L + 1) / (L - 1)))
+                    for L in list(range(20, Lmax, 20)) + [Lmax - 20]}
+            rec = dict(values=vals, diffs=diffs, P1=all(abs(d['R2']) <= 1e-10 for d in diffs.values()),
+                       R1_loose=all(abs(d['R1']) <= 1e-8 for d in diffs.values()), beta=beta,
+                       signs_L_ge_20=sorted(set(int(mp.sign(v)) for v in F[20:])),
+                       signs_L_ge_5=sorted(set(int(mp.sign(v)) for v in F[5:])), engine_s=sec, dps=dps, Lmax=Lmax,
+                       basis=f'P_L^{m}', F_first=[mp.nstr(v, 15) for v in F[:6]])
+            band = BAND_AX[(case, integral)]
+            rec['P3'] = (band[0] <= beta[Lmax - 20] <= band[1]) and len(rec['signs_L_ge_20']) == 1
+            out[f'{case}_{integral}'] = rec
+            print(case, integral, json.dumps(rec, indent=1), flush=True)
+            (DATA / f'aadx_p1p3_{dps}.json').write_text(json.dumps(out, indent=1))
+
+
+def p2dx(p, Lmax=1000):
+    out = {}
+    K = E.Field(p)
+    for case in P.CASES:
+        na_keys = set(k for q in X.pieces(case, 40, K, which=('NA',))['NA'] for k in q)
+        C = ABR.candidate_set(case, na_keys)
+        abf = DATA / f'aabc_p2_{p}.json'
+        ab21 = set(json.loads(abf.read_text())[case]['constants']) if abf.exists() else None
+        for integral, L0 in (('DX', 2), ('DD', 3)):
+            t0 = time.time()
+            f = P.coefficients(case, Lmax, K, integral)
+            sets = [frozenset(q) for q in f]
+            S0 = sets[L0]
+            changes = [L for L in range(L0 + 1, len(sets)) if sets[L] != S0]
+            union = set().union(*sets[L0:])
+            first_full = next((L for L in range(len(sets)) if all(sets[M] == S0 for M in range(L, len(sets)))),
+                              None)
+            mfirst = M_AX[integral]
+            rec = dict(seconds=round(time.time() - t0), L0=L0, n_constants_L0=len(S0),
+                       L_where_set_changes=changes[:20], P2a=not changes, first_L_fixed=first_full,
+                       n_union=len(union), inside_C=not (union - C), outside_C=sorted(map(repr, union - C)),
+                       gamma_present=[repr(k) for k in union if k[1] == 'g'],
+                       sizes_L0_to_4=[len(sets[L]) for L in range(5)],
+                       set_first_L=sorted(map(repr, sets[mfirst])), constants=sorted(map(repr, union)))
+            if ab21 is not None:
+                u = set(map(repr, union))
+                rec['equals_AB21'] = u == ab21
+                rec['vs_AB21'] = dict(missing=sorted(ab21 - u), extra=sorted(u - ab21))
+            out[f'{case}_{integral}'] = rec
+            print(case, integral, p, json.dumps({k: v for k, v in rec.items() if k != 'constants'}, indent=1),
+                  flush=True)
+            (DATA / f'aadx_p2_{p}.json').write_text(json.dumps(out, indent=1))
+
+
 if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'p1p3':
@@ -297,3 +399,7 @@ if __name__ == '__main__':
         p1p3d(*(int(v) for v in sys.argv[2:4]))
     elif cmd == 'p2d':
         p2d(int(sys.argv[2]))
+    elif cmd == 'p1p3dx':
+        p1p3dx(*(int(v) for v in sys.argv[2:4]))
+    elif cmd == 'p2dx':
+        p2dx(int(sys.argv[2]))

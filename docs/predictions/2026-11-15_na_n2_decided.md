@@ -97,3 +97,28 @@ python debug/intclass_in_check.py score     # IN-0..IN-3 and the gate -> debug/d
 ```
 About 400 s per run (IC's timing). IN-0 is scored from the four control files above. IN-3 compares against IC's
 `debug/data/intclass_NA_<case>_<p>.json`.
+
+## Results (2026-11-16; appended after scoring, text above unchanged)
+
+**Verdict: GO.** `python debug/intclass_in_check.py score` (`debug/data/intclass_in_score.json`): IN-0, IN-1, IN-2,
+IN-3 held. Instrument files unchanged since this record's commit (247836bc).
+
+| case, prime | components | clean STUCK, A = B, erratum check passed | residual orders (reading) | time |
+|:--|:--:|:--:|:--|:--:|
+| N2, 1073741717 | 6 | 6 | 6, 6 (confluent-genus1-type); 5, 5, 4, 4 (other) | 370 s |
+| N2, 1073741689 | 6 | 6 | same | 406 s |
+| N1, 1073741717 | 6 | 6 | same orders and readings | 401 s |
+| N1, 1073741689 | 6 | 6 | same | 417 s |
+
+- **IN-1 HELD.** N2 is NOT TRIANGULAR: all six components are clean STUCK on both primes, sets A and B agree,
+  and every residual passes the erratum check. No flag anywhere.
+- **IN-2 HELD.** N1 reproduces its IC verdict on the new primes: six clean STUCK, check passed.
+- **IN-3 HELD.** No component is decided differently on any of the four primes where it was decided.
+- **Reported.** The expectation in "Why" held: on both new primes the residuals carry the found rates 0 and +-6/5
+  plus a pair lambda, -lambda in F_p (on 1073741717: 919807549 + 153934168 = p), the split +-sqrt(11)/5 that IC's
+  primes could not see. The minimal orders are as at IC (R0 = 4 to 6). The genus-one readings are the record's
+  classifier, not a proof (IC's caps).
+
+**Consequence for inventory row 4.** The undecided geometry is decided: the one-electron three-centre integral,
+as a function of the bond angle, leaves the triangular (two-centre-type) class at both of IC's geometries, two
+primes each, under the erratum check and Qbar-independence of its six constants.

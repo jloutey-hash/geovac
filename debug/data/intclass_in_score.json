@@ -1,0 +1,133 @@
+{
+ "IN-0": "HELD",
+ "N2": "NOT-TRIANGULAR",
+ "N1": "NOT-TRIANGULAR",
+ "N2_components": {
+  "(Fraction(-87, 25), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-177, 25), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-9, 5), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-9, 5), 'E1', Fraction(132, 25))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(9, 5), 'E1', Fraction(132, 25))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-3, 2), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ]
+ },
+ "N1_components": {
+  "(Fraction(-209, 50), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-389, 50), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(9, 5), 'E1', Fraction(299, 50))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-117, 50), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-9, 5), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-9, 5), 'E1', Fraction(299, 50))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ]
+ },
+ "IN-1": "HELD",
+ "IN-2": "HELD",
+ "IN-3": "HELD",
+ "gate": "GO"
+}

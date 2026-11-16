@@ -1,0 +1,581 @@
+{
+ "case": "N2",
+ "prime": 1073741689,
+ "L": 1200,
+ "components": {
+  "(Fraction(-177, 25), '1', None)": {
+   "R0": 6,
+   "found": {
+    "6": [
+     26,
+     1
+    ],
+    "7": [
+     18,
+     2
+    ],
+    "8": [
+     15,
+     2
+    ],
+    "9": [
+     14,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 12.4
+  },
+  "(Fraction(-3, 2), '1', None)": {
+   "R0": 5,
+   "found": {
+    "5": [
+     18,
+     1
+    ],
+    "6": [
+     13,
+     2
+    ],
+    "7": [
+     11,
+     2
+    ],
+    "8": [
+     10,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 16,
+    "w_degree": 34,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 16,
+    "w_degree": 34,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 9.5
+  },
+  "(Fraction(-87, 25), '1', None)": {
+   "R0": 6,
+   "found": {
+    "6": [
+     26,
+     1
+    ],
+    "7": [
+     18,
+     2
+    ],
+    "8": [
+     15,
+     2
+    ],
+    "9": [
+     14,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 22,
+    "w_degree": 47,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "-6/5",
+       1
+      ],
+      [
+       "6/5",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 12.5
+  },
+  "(Fraction(-9, 5), '1', None)": {
+   "R0": 5,
+   "found": {
+    "5": [
+     15,
+     1
+    ],
+    "6": [
+     11,
+     2
+    ],
+    "7": [
+     9,
+     2
+    ],
+    "8": [
+     8,
+     2
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 13,
+    "w_degree": 30,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 13,
+    "w_degree": 30,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       3
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 9.7
+  },
+  "(Fraction(-9, 5), 'E1', Fraction(132, 25))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     14,
+     1
+    ],
+    "5": [
+     10,
+     2
+    ],
+    "6": [
+     8,
+     1
+    ],
+    "7": [
+     8,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 8.9
+  },
+  "(Fraction(9, 5), 'E1', Fraction(132, 25))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     14,
+     1
+    ],
+    "5": [
+     10,
+     2
+    ],
+    "6": [
+     8,
+     1
+    ],
+    "7": [
+     8,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 13,
+    "w_degree": 29,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "other",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "1005170012",
+       1
+      ],
+      [
+       "68571677",
+       1
+      ],
+      [
+       "0",
+       2
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 8.9
+  }
+ },
+ "coeff_time": 343.6,
+ "time": 405.5
+}

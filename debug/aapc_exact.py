@@ -304,6 +304,53 @@ def dens_dz2(L, inner, D1, zC, it, kt, K):
     return out
 
 
+def _ecache(inner, D1, zC, it, kt, K):
+    cache = {}
+
+    def E(k):
+        if k not in cache:
+            cache[k] = X.density(k, inner, D1, zC, it, kt, K)
+        return cache[k]
+    return E
+
+
+def dens_dxz(L, inner, D1, zC, it, kt, K):
+    """Record AX: m = 1 multipole of x (z - D1) e^{-zC r_C} about B in AB's normalization (the P_L^1 expansion
+    coefficient divided by 2L + 1, as dens_px).  (z - D1) e^{-zC s} has AB-normalized Legendre coefficients
+    g_k = r (T e)_k - D1 e_k; then dens_px's step r (g_{L-1} - g_{L+1}) / (2L+1).  L = 0 is absent."""
+    out = {}
+    if L == 0:
+        return out
+    E = _ecache(inner, D1, zC, it, kt, K)
+    D1q = K(Fraction(D1))
+
+    def g(k):
+        d = {}
+        _dacc(d, _tmul(E, k, K), K(1), 1, K)
+        _dacc(d, E(k), -D1q, 0, K)
+        return d
+    inv = K(1) / K(2 * L + 1)
+    _dacc(out, g(L - 1), inv, 1, K)
+    _dacc(out, g(L + 1), -inv, 1, K)
+    return out
+
+
+def dens_dx2y2(L, inner, D1, zC, it, kt, K):
+    """Record AX: m = 2 multipole of (x^2 - y^2) e^{-zC r_C} = r^2 (1 - t^2) cos(2 phi) e^{-zC s} about B, in AB's
+    normalization (P_L^2 expansion coefficient / (2L+1); P_L^2 = (1 - t^2) P_L'', no Condon-Shortley phase).
+    sqrt(1-t^2) P_l^m = (P_{l+1}^{m+1} - P_{l-1}^{m+1}) / (2l+1) twice, on c_k = (2k+1) e_k:
+        a_L = e_{L-2}/(2L-1) - 2(2L+1) e_L/((2L-1)(2L+3)) + e_{L+2}/(2L+3),   dens = r^2 a_L / (2L+1).
+    L = 0, 1 are absent."""
+    out = {}
+    if L < 2:
+        return out
+    E = _ecache(inner, D1, zC, it, kt, K)
+    _dacc(out, E(L - 2), K(1) / K((2 * L - 1) * (2 * L + 1)), 2, K)
+    _dacc(out, E(L), K(-2) / K((2 * L - 1) * (2 * L + 3)), 2, K)
+    _dacc(out, E(L + 2), K(1) / K((2 * L + 1) * (2 * L + 3)), 2, K)
+    return out
+
+
 # ---------------------------------------------------------------- radial integration
 
 
@@ -366,9 +413,10 @@ def coefficients(case, Lmax, K, integral, params_override=None, pieces_out=False
             return kernel_eval(L, near, co, it, kt, K, mu, D2, nD2)
         return evaluate(combo(L, near, co, it, kt, K, nD2=nD2), mu, D2, K)
     for L in range(Lmax + 1):
-        dfun = {'PC': dens_pz, 'PX': dens_px, 'PD': dens_dz2}.get(integral, dens_1s)
+        dfun = {'PC': dens_pz, 'PX': dens_px, 'PD': dens_dz2, 'DX': dens_dxz,
+                'DD': dens_dx2y2}.get(integral, dens_1s)
         dens = {inner: dfun(L, inner, D1, zC, it, kt, K) for inner in (True, False)}
-        if integral in ('PC', 'AB', 'PX', 'PD'):
+        if integral in ('PC', 'AB', 'PX', 'PD', 'DX', 'DD'):
             co = {'NA': K(1), 'Y': K(-1), 'dY': za}
             kers = {near: kev(L, near, co, 0) for near in (True, False)}
             res = integrate(dens, kers, D1, D2, zB, I, K)
@@ -401,6 +449,10 @@ def twopiN(case, integral):
     q = lambda v: mp.mpf(v.numerator) / v.denominator  # noqa: E731
     if integral == 'PD':   # 2 pi N_B N_d, N_d = sqrt(5 (2 zC)^7 / (4 pi 720))
         return 2 * mp.pi * mp.sqrt(q(zB) ** 3 / mp.pi) * mp.sqrt(5 * (2 * q(zC)) ** 7 / (4 * mp.pi * 720))
+    if integral in ('DX', 'DD'):   # record AX: 2 pi N_B N_Q, N_xz = sqrt(15/(4 pi)) R_n, N_x2y2 = sqrt(15/(16 pi)) R_n
+        Rn = mp.sqrt((2 * q(zC)) ** 7 / 720)
+        ang = mp.sqrt(15 / (4 * mp.pi)) if integral == 'DX' else mp.sqrt(15 / (16 * mp.pi))
+        return 2 * mp.pi * mp.sqrt(q(zB) ** 3 / mp.pi) * ang * Rn
     return 2 * mp.sqrt(q(zB) ** 3 * q(zC) ** (5 if integral in ('PC', 'PX') else 3))
 
 
