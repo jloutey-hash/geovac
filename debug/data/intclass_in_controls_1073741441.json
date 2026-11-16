@@ -1,0 +1,52 @@
+{
+ "nonsquare": {
+  "c": 3,
+  "verdict": "STUCK",
+  "erratum": {
+   "passed": false,
+   "bad": [
+    {
+     "fdeg": 2,
+     "nonint": [
+      "1/2"
+     ],
+     "unaccounted": 0
+    }
+   ]
+  }
+ },
+ "square": {
+  "c": 2,
+  "verdict": "TRIANGULAR"
+ },
+ "k0_nofactor": {
+  "verdict": "STUCK",
+  "erratum": {
+   "passed": true,
+   "bad": []
+  }
+ },
+ "legendre_K": {
+  "c": 3,
+  "verdict": "STUCK",
+  "erratum": {
+   "passed": true,
+   "bad": []
+  }
+ },
+ "euler_irrational": {
+  "c": 3,
+  "verdict": "STUCK",
+  "erratum": {
+   "passed": false,
+   "bad": [
+    {
+     "fdeg": 1,
+     "nonint": [],
+     "unaccounted": 2
+    }
+   ]
+  }
+ },
+ "all_pass": true
+}
