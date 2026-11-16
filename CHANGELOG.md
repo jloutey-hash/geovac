@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.33] - 2026-11-16
+
+**Three owed chemistry items closed (autonomous loop; AX amendments PI-directed): row 4's undecided geometry
+decided (record IN GO), the m != 0 d functions at C (records AX VOID, AX2 VOID, AX2b GO), the LiH certified-energy
+regression test. Guards for both records and the LiH energy, fire-tested.**
+
+### Added
+- Record IN (`docs/predictions/2026-11-15_na_n2_decided.md`, committed 247836bc before computing; scored 9be59d3f).
+  Record IC's one-electron geometry N2 was undecided because its exponential rates +-sqrt(11)/5 do not split
+  modulo IC's primes (11 a non-residue at both). **GO:** on primes 1073741717, 1073741689 (11 and -69 squares)
+  all six components clean STUCK, sets A and B agree, every residual passes an erratum check (no exponent
+  outside F_p at any factor; integer exponents at factors of degree >= 2: a blind spot of IC's search for
+  exponents like +-sqrt(c) at a rational point, found by the cold reviewer, planted and caught); N1 reproduces.
+  NA, as a function of the bond angle, leaves the triangular class at both of IC's geometries.
+- Records AX (`docs/predictions/2026-11-15_aa_bc_d_mneq0.md`), AX2, AX2b (`..._2.md`, `..._2b.md`):
+  (1s_A 1s_A | 1s_B 3d_C) with 3d_xz (m = 1) and 3d_x2-y2 (m = 2). AX VOID: the engine self-check's 22-digit
+  quadrature could not resolve L = 12 (3 of 14 values, 2e-18 vs 1e-18). AX2 VOID: its exact side was evaluated
+  at 80 digits and the split cancels by ~1e65 at L = 20. AX2b (fresh L = 16, 25; both sides measured, bar 1e-38)
+  held, and the P1-P3 outputs, computed out of order under AX2 and frozen unread by sha256, were scored: **GO.**
+  P1 8/8 within 5.2e-13 of R2 (tol 1e-10); P2a AB's 21 constants, L <= 1000, both primes, no gamma; P3
+  beta_eff(220) DX -5.185 / -5.150 in P_L^1, DD -6.241 / -6.190 in P_L^2, within 0.015 of measured toys. With AD,
+  one full 3d shell at C keeps the 1s structure. AX2b-0 ran before its registration commit landed (a gitignored
+  log aborted the first commit); record and driver unchanged since before the run, hashes in the commit message.
+- Guards (separate passes, sub-agents): `tests/test_paper59_na_class.py` (8 fast ~37 s + 2 slow ~16 min; plants
+  all fired); `tests/test_paper59_aa_bc_d_mneq0.py` (AX; 12 fast ~47 s + 2 slow; 27 of 31 plants fired, the 4 others expected or not wrong answers, recorded);
+  `tests/test_paper58_lih_certified.py` (slow ~12 min: the s-only LiH model rebuilt from the closed forms to 30
+  digits, plus the tau-tail bound; 5 wrong answers fired; exchange at a nominal 20 digits did not, because it
+  still computes ~32 digits, recorded).
+
+### Changed
+- Certified reference table: LiH's lambda_min(S) was quoted as 0.594448; it is 0.5944448 = 1 - |(S13, S23)| (6th
+  digit; the amplification 2.830 and the 1.24e-30 Ha bound unchanged). Found by the new guard; corrected in the
+  entry, JSON and markdown; backing test repointed.
+- Paper 59 `sec:scope`: the one-electron integral leaves the class at both geometries (record IN), with the
+  exponents-outside-F_p caveat; a [MEASURED] paragraph on 3d_xz and 3d_x2-y2 at C with both VOIDs disclosed; caps
+  now any 3d at C, m != 0 d on A not covered, the m != 0 equal-arm case derived, untested. Fresh claims review: 0
+  LARGE, 3 SMALL + 4 NIT, all applied.
+- Paper 58 coverage table: the LiH 30-digit row live (was owed).
+- `docs/chemistry_period_inventory.md`: row 3c LiH test done; row 4 Class and Guard MET; row 8 m != 0 d at C
+  closed (owed now: m != 0 d on A, exchange beyond 1s, Paper 63's fibre at l > 0). Claim matrix rows for IN, AX,
+  the LiH energy; IC row's NA wording updated.
+
 ## [v6.7.32] - 2026-11-15
 
 **Inventory row 8 part 2b, the A side (record AS GO, autonomous loop): p_pi and d_sigma pairs on A keep AB's 21

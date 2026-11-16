@@ -1151,13 +1151,30 @@ $-5.13$, consistent with a $(x^{*}-x)^{9/2}$ branch.  The same derivation fixes 
 the two parts' leading amplitudes at $x^{*2}-1$;\ at $\ell=220$ the measured ratio is $1.11$ and
 $1.09$ times that, inside the registered band (record
 \texttt{docs/predictions/2026-11-15\_aa\_bc\_a\_side\_ppi\_d.md}, registered before computing).
+\textbf{[MEASURED]} The rest of the $3d$ shell at C behaves the same way.  With $3d_{xz}$ ($m=1$, in
+the plane of the centers) or $3d_{x^2-y^2}$ ($m=2$) at C, the integral is
+$\sum_\ell G_\ell P_\ell^{1}(x)$ or $\sum_\ell K_\ell P_\ell^{2}(x)$ ($3d_{yz}$ and $3d_{xy}$ give zero
+by reflection in the plane).  The values agree with the Gaussian-fit referee (differences at most
+$5.2\times10^{-13}$, tolerance $10^{-10}$) at two angles per geometry;\ every coefficient from
+$\ell=2$ ($G_\ell$) or $\ell=3$ ($K_\ell$) to $\ell=1000$ uses the same $21$ constants (modulo two
+primes);\ and both keep the $7/2$ branch.  On the null cone the two harmonics reduce to $\pm i\,a_z^{2}$
+and $-a_z^{2}$, nonzero unless the arms are equal (derived before computing), and each order of the
+associated basis costs one power of $\ell$:\ the effective exponents at $\ell=220$ are $-5.19$, $-5.15$
+($P_\ell^{1}$) and $-6.24$, $-6.19$ ($P_\ell^{2}$), within $0.015$ of test functions with exactly that
+branch.  Two earlier registrations of this test were void on the precision of an internal engine
+check;\ no prediction was scored under them.  The scored outputs were computed under the second
+registration before the third was written, frozen by hash and read only after its check passed (records
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_d\_mneq0.md},
+\texttt{docs/predictions/2026-11-16\_aa\_bc\_d\_mneq0\_2.md} and
+\texttt{docs/predictions/2026-11-16\_aa\_bc\_d\_mneq0\_2b.md}, each registered before computing).
 Caps:\
-one $2p_z$, one in-plane $2p_x$ or one $3d_\sigma$ function at C, or a $2p\sigma$, $2p_\pi$ or
+one $2p_z$, one in-plane $2p_x$ or one $3d$ function of any $m$ at C, or a $2p\sigma$, $2p_\pi$ or
 $3d_\sigma$ pair at A;\ two
 geometries (four at equal arms), two primes;\ the constants are assumed linearly independent over
-$\overline{\mathbb{Q}}$;\ $d$ functions with $m\neq0$ and exchange
+$\overline{\mathbb{Q}}$;\ $d$ functions with $m\neq0$ on A and exchange
 integrals beyond $1s$ are not covered, and the degree-$l$ pattern is derived for $l\le2$
-(tested at equal arms for $l\le2$ at four geometries), argued beyond, and untested beyond.
+(tested at equal arms for $m=0$, $l\le2$, at four geometries;\ the $m\neq0$ equal-arm case is
+derived, untested), argued beyond, and untested beyond.
 Since every channel stays in the two-center class, any higher-class content of the integrated
 value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the
 angle.  A two-center-class form in $w=|Y-Z|$ is a finite sum of rational functions, exponentials
@@ -1169,7 +1186,7 @@ of order $6$ with no first-order right factor.  Under the assumption that the 31
 linearly independent over $\overline{\mathbb{Q}}$, the integrated $(XY|XZ)$, as a function of the
 angle, therefore leaves the two-center class, and with it the class of iterated integrals of
 exponentials and rational functions.  The one-electron integral leaves it too:\ at both geometries
-all six of its components stop with no step taken.  At the second geometry two exponential rates,
+all six of its components stop with no factor peeled.  At the second geometry two exponential rates,
 $\pm\sqrt{11}/5$, do not split modulo the first two primes, so the test was first undecided there;\ on
 two further primes in which they split, all six stop, and the first geometry's verdict repeats
 (record \texttt{docs/predictions/2026-11-15\_na\_n2\_decided.md}, registered before computing).  We had
@@ -1182,8 +1199,11 @@ constants~\cite{cluzeau_vanhoeij2004}.  Unsplit exponential rates
 are flagged and such components not counted;\ a planted control shows that unsplit singular points
 can also hide a factor without a flag, and none of the counted components has such a point with a
 fractional exponent.  So can exponents outside the prime field at a rational point;\ the counted
-residuals that were probed have integer exponents at every point, which excludes both.  Caps:\ $1s$ functions, two
-geometries, two primes (four for the one-electron integral's second geometry), minimal operators not
+residuals have no exponent outside the prime field and integer exponents at every singular factor
+of degree two or more (record IC's addendum;\ for the one-electron integral, record IN's check), which
+excludes both.  Caps:\ $1s$ functions, two
+geometries, two primes (for the one-electron integral's second geometry two further primes, the
+first two leaving it undecided), minimal operators not
 certified (record \texttt{docs/predictions/2026-11-01\_integrated\_class.md}, registered before
 computing).  The radial core is a period of an irreducible connection
 (Sec.~\ref{sec:obstruction}, \textbf{[SYMBOLIC + MEASURED]}), so it has no
