@@ -25,7 +25,7 @@ Every ingredient of the matrix is exact:
   * one-body off-diagonal ``kappa * (-A_ij) = +1/16`` on graph edges, with
     ``A`` the binary S^3 lattice adjacency and ``kappa = -1/16``  -- rational;
   * radial Slater integrals ``R^k`` at orbital exponent 1, from
-    ``geovac.hypergeometric_slater.compute_rk_algebraic``          -- rational;
+    ``geovac.hypergeometric_slater.compute_rk_exact``              -- q sqrt(s), exact;
   * the orbital-exponent scaling ``k_orb = Z``                     -- integer;
   * Gaunt angular coefficients, products of two Wigner 3j symbols  -- each of
     the form ``(rational) * sqrt(rational)``;
@@ -156,13 +156,16 @@ def _gaunt_ck_exact(l1: int, m1: int, l2: int, m2: int,
 # ---------------------------------------------------------------------------
 # exact radial Slater integrals
 # ---------------------------------------------------------------------------
-_RK_CACHE: Dict[Tuple[int, ...], Fraction] = {}
+_RK_CACHE: Dict[Tuple[int, ...], Tuple[Fraction, int]] = {}
 
 
-def _rk_exact(*key: int) -> Fraction:
+def _rk_exact(*key: int) -> Tuple[Fraction, int]:
+    """R^k = q sqrt(s) exactly (s square-free; s > 1 when principal quantum numbers mix).
+    Until 2026-11-15 this called compute_rk_algebraic, which returned a double-precision
+    Fraction approximation whenever s > 1."""
     if key not in _RK_CACHE:
-        from geovac.hypergeometric_slater import compute_rk_algebraic
-        _RK_CACHE[key] = compute_rk_algebraic(*key)
+        from geovac.hypergeometric_slater import compute_rk_exact
+        _RK_CACHE[key] = compute_rk_exact(*key)
     return _RK_CACHE[key]
 
 
@@ -182,10 +185,10 @@ def _g_terms_exact(oa, ob, oc, od) -> List[Tuple[Fraction, Fraction]]:
         sb, Cb, Qb = _gaunt_ck_exact(lb, mb, ld, md, k)
         if sb == 0:
             continue
-        R = _rk_exact(na, la, nc, lc, nb, lb, nd, ld, k)
-        if R == 0:
+        Rq, Rs = _rk_exact(na, la, nc, lc, nb, lb, nd, ld, k)
+        if Rq == 0:
             continue
-        out.append((sa * sb * Ca * Cb * R, Qa * Qb))
+        out.append((sa * sb * Ca * Cb * Rq, Qa * Qb * Rs))
     return out
 
 

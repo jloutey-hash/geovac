@@ -1130,11 +1130,33 @@ seen (records
 \texttt{docs/predictions/2026-11-15\_aa\_bc\_equal\_arms\_2.md} and
 \texttt{docs/predictions/2026-11-15\_aa\_bc\_equal\_arms\_2b.md}, each registered before computing).
 At each of the first two equal-arm geometries the coefficients from $\ell=2$ to $\ell=1000$ use $17$
-constants (modulo two primes), one fixed set shared by the three integrals.  Caps:\
-one $2p_z$, one in-plane $2p_x$ or one $3d_\sigma$ function at C, or a $2p\sigma$ pair at A;\ two
+constants (modulo two primes), one fixed set shared by the three integrals.
+\textbf{[MEASURED]} Changing the pair on A instead gives the same picture, with one predicted
+exception.  Against a $1s$ pair at B and C we took a $2p_\pi$ pair at A, out of the plane of the
+centers ($2p_y$) or in it and perpendicular to B--A ($2p_{x'}$), and a $3d_\sigma$ pair along B--A.
+For the $p_\pi$ pairs the integral is $\sum_\ell a_\ell P_\ell(x)+\sum_\ell b_\ell P_\ell^{2}(x)$;\ for
+$2p_y$ this is the split of the pair density into its harmonic parts, and for $2p_{x'}$ only the
+total is used.  The values agree with the Gaussian-fit referee (differences at most
+$2.5\times10^{-13}$, tolerance $10^{-10}$) at two angles per geometry, and every
+coefficient from $\ell=2$ to $\ell=1000$ uses the same $21$ constants (modulo two primes).  The
+$2p_{x'}$ and $3d_\sigma$ integrals keep $(x^{*}-x)^{7/2}$:\ in $P_\ell$ (the $2p_{x'}$ total
+re-expanded), their effective exponents at $\ell=220$ are $-4.21$, $-4.16$ and $-4.15$, $-4.11$.  For $2p_y$ each part
+keeps the $7/2$ branch ($a_\ell$:\ $-4.21$, $-4.17$;\ $b_\ell$, in the $P_\ell^{2}$ basis, where the
+coefficients fall two powers of $\ell$ faster:\ $-6.24$, $-6.19$), but the leading terms cancel in the
+sum:\ the out-of-plane axis is orthogonal to $\mathbf{a}$, and on the null cone of the branch point
+a harmonic built from that axis reduces to terms in $a_y^{2}=0$ or $|\mathbf{a}|^{2}$ (derived before
+computing).  Re-expanded in
+$P_\ell$, the $2p_y$ total decays one half-power faster, with effective exponents $-5.17$ and
+$-5.13$, consistent with a $(x^{*}-x)^{9/2}$ branch.  The same derivation fixes the ratio of
+the two parts' leading amplitudes at $x^{*2}-1$;\ at $\ell=220$ the measured ratio is $1.11$ and
+$1.09$ times that, inside the registered band (record
+\texttt{docs/predictions/2026-11-15\_aa\_bc\_a\_side\_ppi\_d.md}, registered before computing).
+Caps:\
+one $2p_z$, one in-plane $2p_x$ or one $3d_\sigma$ function at C, or a $2p\sigma$, $2p_\pi$ or
+$3d_\sigma$ pair at A;\ two
 geometries (four at equal arms), two primes;\ the constants are assumed linearly independent over
-$\overline{\mathbb{Q}}$;\ $p_\pi$ and $d$ functions on A, $d$ functions with $m\neq0$ and exchange
-integrals with $\ell>0$ are not covered, and the degree-$l$ pattern is derived for $l\le2$
+$\overline{\mathbb{Q}}$;\ $d$ functions with $m\neq0$ and exchange
+integrals beyond $1s$ are not covered, and the degree-$l$ pattern is derived for $l\le2$
 (tested at equal arms for $l\le2$ at four geometries), argued beyond, and untested beyond.
 Since every channel stays in the two-center class, any higher-class content of the integrated
 value must come from the infinite channel sum.  \textbf{[MEASURED]} It does, as a function of the

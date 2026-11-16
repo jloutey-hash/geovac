@@ -11,10 +11,17 @@ for hydrogenic radial functions at unit orbital exponent (k_orb = 1):
 
     R_{nl}(r) = N_{nl} (2r/n)^l exp(-r/n) L_{n-l-1}^{(2l+1)}(2r/n)
 
-All results are exact rational numbers (Python ``Fraction`` objects)
-because the integrands are polynomials × exponentials with rational
-coefficients, and the double integral splits into products of
-incomplete gamma functions evaluated at rational arguments.
+The unnormalized double integral is an exact rational number: the
+integrands are polynomials × exponentials with rational coefficients, and
+it splits into products of incomplete gamma functions at rational
+arguments.  The normalization N1 N3 N2 N4 is the square root of a
+rational, which is NOT always a perfect square: when principal quantum
+numbers mix, R^k is a rational times sqrt(s) with s square-free, e.g.
+R^0(1s 1s; 1s 2s) = 4096 sqrt(2) / 64827.  ``compute_rk_exact`` returns
+(q, s) with R^k = q sqrt(s) exactly; ``compute_rk_algebraic`` returns a
+``Fraction`` only when s = 1 and raises ``ValueError`` otherwise.
+(Until 2026-11-15 the s != 1 case silently returned a double-precision
+approximation dressed as a ``Fraction``.)
 
 The Z-scaling law is: R^k(Z) = Z × R^k(Z=1).
 
@@ -207,7 +214,41 @@ def compute_rk_algebraic(
     n2: int, l2: int, n4: int, l4: int,
     k: int,
 ) -> Fraction:
-    """Compute R^k(n1l1, n3l3; n2l2, n4l4) at k_orb=1 as exact Fraction.
+    """R^k at k_orb = 1 as an exact Fraction, when it is rational.
+
+    Raises ``ValueError`` when the value is irrational (a rational times
+    sqrt(s), s > 1 square-free; see ``compute_rk_exact``).
+    """
+    q, sf = compute_rk_exact(n1, l1, n3, l3, n2, l2, n4, l4, k)
+    if sf != 1:
+        raise ValueError(
+            f"R^{k}{(n1, l1, n3, l3, n2, l2, n4, l4)} = ({q}) * sqrt({sf}) is "
+            "irrational; use compute_rk_exact (exact) or compute_rk_float.")
+    return q
+
+
+def _sqrt_split(f: Fraction) -> Tuple[Fraction, int]:
+    """f = q^2 * s exactly, with q a Fraction and s a square-free positive integer."""
+    if f < 0:
+        raise ValueError(f"Cannot take sqrt of negative Fraction {f}")
+    if f == 0:
+        return Fraction(0), 1
+    from sympy import factorint
+    m = f.numerator * f.denominator          # sqrt(f) = sqrt(m) / den
+    sq, sf = 1, 1
+    for prime, e in factorint(m).items():
+        sq *= prime ** (e // 2)
+        if e % 2:
+            sf *= prime
+    return Fraction(sq, f.denominator), sf
+
+
+def compute_rk_exact(
+    n1: int, l1: int, n3: int, l3: int,
+    n2: int, l2: int, n4: int, l4: int,
+    k: int,
+) -> Tuple[Fraction, int]:
+    """Compute R^k(n1l1, n3l3; n2l2, n4l4) at k_orb=1 exactly, as (q, s): R^k = q sqrt(s).
 
     This is the general formula valid for any (n, l) quantum numbers.
     No table lookup — purely algebraic from the Laguerre expansion and
@@ -228,8 +269,8 @@ def compute_rk_algebraic(
 
     Returns
     -------
-    Fraction
-        Exact rational value at k_orb = 1.
+    (Fraction, int)
+        q and the square-free s with R^k = q sqrt(s) at k_orb = 1 (s = 1 when rational).
     """
     # Expand each pair product as polynomial × exp terms
     terms_13, nsq_13 = _expand_product(n1, l1, n3, l3)
@@ -305,8 +346,9 @@ def compute_rk_algebraic(
     # So: compute nsq_prod = nsq_13 × nsq_24, find its rational sqrt.
 
     nsq_prod = nsq_13 * nsq_24
-    # sqrt of a Fraction: try to see if it's a perfect square
-    norm_factor = _fraction_sqrt(nsq_prod)
+    # The comments above assumed this root is always rational; it is not when principal
+    # quantum numbers mix (e.g. 1s 1s; 1s 2s gives sqrt(2)).  Split it exactly.
+    norm_q, norm_s = _sqrt_split(nsq_prod)
 
     # Compute the integral (without normalization but with scale factors)
     integral = Fraction(0)
@@ -318,15 +360,11 @@ def compute_rk_algebraic(
             # and p24 - k - 1 >= 0 for region I
             integral += c13 * c24 * _T_kernel(p13, p24, alpha13, alpha24, k)
 
-    return norm_factor * integral
+    return norm_q * integral, norm_s
 
 
 def _fraction_sqrt(f: Fraction) -> Fraction:
-    """Compute exact rational square root of a Fraction.
-
-    Raises ValueError if f is not a perfect square.
-    Falls back to high-precision float if exact sqrt is hard to find.
-    """
+    """Exact rational square root of a Fraction; ValueError if it is not a perfect square."""
     if f == 0:
         return Fraction(0)
     if f < 0:
@@ -354,20 +392,7 @@ def _fraction_sqrt(f: Fraction) -> Fraction:
     if sn2 * sn2 == num2 and sd2 * sd2 == den2:
         return Fraction(sn2, sd2)
 
-    # For hydrogenic normalization products, the square root is
-    # guaranteed rational. If we can't find it via isqrt, use
-    # high-precision float and convert back.
-    import decimal
-    decimal.getcontext().prec = 50
-    val = (decimal.Decimal(num) / decimal.Decimal(den)).sqrt()
-    # Convert to Fraction with limited denominator
-    result = Fraction(val).limit_denominator(10**15)
-    # Verify
-    if result * result == f:
-        return result
-    # Last resort: return as float-converted Fraction
-    import math
-    return Fraction(math.sqrt(float(f))).limit_denominator(10**18)
+    raise ValueError(f"{f} is not the square of a rational (use _sqrt_split)")
 
 
 # ---------------------------------------------------------------------------
@@ -687,7 +712,7 @@ def compute_rk_float(
     For ``max(n) <= _FLOAT_PATH_MAX_N`` (currently 4) the fast pure-float
     path is used (bit-identical to the previous implementation, ~0.2 ms
     per call typical).  For larger principal quantum numbers the function
-    dispatches to ``compute_rk_algebraic`` (exact Python ``Fraction``) and
+    dispatches to ``compute_rk_exact`` (exact q sqrt(s)) and
     casts the result to a Python float — the only way to survive the
     catastrophic cancellation between region-I and region-II contributions
     of the T-kernel without arbitrarily-high-precision arithmetic.
@@ -714,8 +739,8 @@ def compute_rk_float(
         # would be zeroed by the angular factor in any physical context.
         # Re-raise any such error with a clearer message.
         try:
-            exact = compute_rk_algebraic(n1, l1, n3, l3,
-                                         n2, l2, n4, l4, k)
+            q_exact, s_exact = compute_rk_exact(n1, l1, n3, l3,
+                                                n2, l2, n4, l4, k)
         except ValueError as exc:
             if "negative" in str(exc).lower():
                 raise ValueError(
@@ -727,7 +752,7 @@ def compute_rk_float(
                     "evaluating R^k."
                 ) from exc
             raise
-        return float(exact)
+        return float(q_exact) if s_exact == 1 else float(q_exact) * math.sqrt(s_exact)
 
     terms_13, nsq_13 = _expand_pair_float(n1, l1, n3, l3)
     terms_24, nsq_24 = _expand_pair_float(n2, l2, n4, l4)

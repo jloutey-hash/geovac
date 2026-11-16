@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.32] - 2026-11-15
+
+**Inventory row 8 part 2b, the A side (record AS GO, autonomous loop): p_pi and d_sigma pairs on A keep AB's 21
+constants; the out-of-plane p_pi total drops to the 9/2 branch by the predicted cancellation. Row 1 closed (PI-approved):
+one-centre Slater integrals are q sqrt(s), not rationals; the certified helium table corrected.**
+
+### Added
+- Record AS (`docs/predictions/2026-11-15_aa_bc_a_side_ppi_d.md`, committed f675ba7f before computing; scored
+  de2631c2). PY = (2p_y,A 2p_y,A | 1s_B 1s_C), PX' (in plane, perpendicular to B-A), DA = (3d_sigma,A pair | 1s 1s).
+  **GO:** P0 exact to printed digits (3000 vs 3600); P1 12/12 within 2.5e-13 of R2; P2 AB's 21 constants to L = 1000
+  at both primes, no gamma; P3 beta_eff(220): PY a -4.21/-4.17, b -6.24/-6.19 (P_L^2 basis), total -5.17/-5.13;
+  PX' total -4.21/-4.16; DA -4.15/-4.11; P4 amplitude ratio 1.108 / 1.087 times x*^2 - 1 (band [0.95, 1.20]).
+  Engine and drivers `debug/aaa_exact.py`, `aaa_symbolic.py`, `aaa_ap0.py`, `aaa_controls.py`, `aaa_run.py`; data
+  `debug/data/aaa_*`.
+- Guard `tests/test_paper59_aa_bc_a_side.py` (separate pass, sub-agent; 11 fast ~72 s + 6 slow ~7 min): A-density
+  multipoles against Gauss's law, PY/DA channels against an independent direct quadrature, summed series against R2
+  and the 3600-digit values, AB's 21 constants for L <= 20, decay windows at L = 40/60 (PY total on 9/2, rejects 7/2),
+  the P4 ratio falling to x*^2 - 1 (extrapolated). Fire-tested 18/18; dropping the parity tail is caught by the
+  summed test, not the decay test (recorded).
+- Guard `tests/test_one_centre_slater_class.py` (separate pass; 8 fast + 6 slow): R^0(1s1s;1s2s) = 4096 sqrt(2)/64827
+  against an in-test quadrature to 1e-22, algebraic path refuses irrational cases, Gaunt factor sqrt(5)/15 at l = 2.
+  Fire-tested 4/4; the certified-table test also fires against reverting the helium fix.
+- Inventory rows 1, 4, 5, 7 audited (commit 070f1741); two row-5 guards fire-tested 3/3 each.
+
+### Changed
+- `geovac/hypergeometric_slater.py`: `compute_rk_exact` returns (q, s) with R^k = q sqrt(s), s square-free;
+  `compute_rk_algebraic` returns a Fraction only when s = 1 and raises otherwise (it returned a double-precision
+  Fraction approximation, error ~7e-17, when n mixed); the n > 4 float path carries the root; `_fraction_sqrt`'s float
+  fallback now raises.
+- Certified reference table (PI-approved, regenerate + disclose): helium `he.gnci.Z2.nmax2..5` regenerated with the
+  exact roots (shifts ~4e-18; previously claimed 35 digits, right to ~17); correction note in the table. No paper
+  cites these values.
+- Paper 58 `sec:census` (PI-approved, scope + state): one-centre integrals are rationals times square roots of
+  rationals (roots from the radial normalizations when n mixes and from Gaunt factors at l >= 2); was "exact
+  rationals". group3 synthesis restated in the same edit.
+- Paper 59 `sec:scope`: the A-side paragraph; caps now cover 2p_pi and 3d_sigma pairs at A; "exchange integrals with
+  ell > 0" corrected to "beyond 1s". Fresh claims review: 0 LARGE, 4 SMALL (mechanism tier, the excess attribution,
+  the PX' split, the caps symbol), all applied.
+- `docs/chemistry_period_inventory.md` row 1 Class/Guard MET, row 8 part 2b A side closed; claim matrix rows for both.
+
 ## [v6.7.31] - 2026-11-15
 
 **Inventory row 8: the equal-arm test of the |a|^7 h_l(a) mechanism (records AE STOP, AE2 VOID, AE2b GO; AE2 and
