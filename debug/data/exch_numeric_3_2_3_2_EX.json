@@ -1,0 +1,42 @@
+{
+ "pair": [
+  "3/2",
+  "3/2"
+ ],
+ "suffix": "EX",
+ "valuation_check": true,
+ "frobenius_terms": 300,
+ "frobenius_time_s": 0.8,
+ "data_orders": [
+  -1,
+  0,
+  4,
+  9
+ ],
+ "root_equations_consistent": true,
+ "frobenius_equals_generator_to_N": true,
+ "generator_N": 120,
+ "1.4": {
+  "frobenius": "0.248863231978961116924632226654450077008410332594509260351861",
+  "exchange_hp_dps50": "0.248863231978961116924632226654450077008410333",
+  "exchange_hp_dps80": "0.248863231978961116924632226654450077008410332594509260351861",
+  "tau_max": 8,
+  "last_terms_max": "0.0",
+  "last_nonzero_tau_term_ratio": "0.004796",
+  "abs_diff_frob_dps50": "1.31e-63",
+  "abs_diff_frob_dps80": "8.18e-91",
+  "abs_diff_dps50_dps80": "1.31e-63"
+ },
+ "3.015": {
+  "frobenius": "0.0112019896522017349974268602105371606045963161357688436108231",
+  "exchange_hp_dps50": "0.0112019896522017349974268602105371606045963161",
+  "exchange_hp_dps80": "0.0112019896522017349974268602105371606045963161357688436108231",
+  "tau_max": 8,
+  "last_terms_max": "0.0",
+  "last_nonzero_tau_term_ratio": "0.015332",
+  "abs_diff_frob_dps50": "1.01e-63",
+  "abs_diff_frob_dps80": "1.22e-86",
+  "abs_diff_dps50_dps80": "1.01e-63"
+ },
+ "time_s": 2.8
+}

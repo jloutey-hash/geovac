@@ -1,0 +1,52 @@
+{
+ "pair": [
+  "3/2",
+  "3/2"
+ ],
+ "suffix": "EX",
+ "run_primes": [
+  33554393,
+  67108859
+ ],
+ "order": 4,
+ "degree": 8,
+ "operator_Q_crt": [
+  "27*R*(27*R**6 + 108*R**5 + 216*R**4 + 345*R**3 + 345*R**2 + 210*R + 70)",
+  "-3*(81*R**8 + 270*R**7 + 162*R**6 - 369*R**5 - 1035*R**4 - 1620*R**3 - 1740*R**2 - 1200*R - 400)",
+  "-3*R*(27*R**7 + 216*R**6 + 558*R**5 + 675*R**4 + 540*R**3 + 330*R**2 + 150*R + 50)",
+  "3*R**2*(9*R**6 + 12*R**5 - 60*R**4 - 165*R**3 - 205*R**2 - 150*R - 50)",
+  "R**3*(9*R**5 + 45*R**4 + 90*R**3 + 105*R**2 + 75*R + 25)"
+ ],
+ "crt_bits": 51,
+ "exact_Q": {
+  "N": 120,
+  "generator_time_s": 1.2,
+  "valuation_check": true,
+  "equations_per_order": 3,
+  "orders_checked": "-4..116",
+  "orders_checked_count": 121,
+  "all_unused": true,
+  "residual_zero": true
+ },
+ "f_log_components_exact": {
+  "1*lnR^1": {
+   "lowest_k": 9,
+   "coeff_exact": "2187/16000"
+  }
+ },
+ "third_prime": {
+  "p": 16777213,
+  "N": 450,
+  "valuation_check": true,
+  "equations_per_order": 3,
+  "unknowns": 45,
+  "fit_equations": 1158,
+  "fit_orders_max": 386,
+  "heldout_orders": 60,
+  "fit_nullity": 1,
+  "fit_matches_crt": true,
+  "crt_kills_all_rows_incl_heldout": true,
+  "time_s": 3.4
+ },
+ "time_s": 4.7
+}

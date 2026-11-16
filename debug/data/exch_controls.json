@@ -1,0 +1,229 @@
+{
+ "C1_equal_zeta_vs_sympy": {
+  "1": {
+   "gen_Q_time_s": 13.63,
+   "sympy_tau10_series_time_s": 1.2,
+   "match_sympy_orders": 150,
+   "match": true,
+   "modp_equals_Q_300": true,
+   "components": [
+    "('1', 0)",
+    "('1', 1)",
+    "('g', 0)",
+    "('l2', 0)"
+   ],
+   "val_check": true,
+   "leading_power": {
+    "('1', 0)": 0,
+    "('g', 0)": 9,
+    "('l2', 0)": 4,
+    "('1', 1)": 9
+   }
+  },
+  "3/2": {
+   "gen_Q_time_s": 16.01,
+   "sympy_tau10_series_time_s": 1.4,
+   "match_sympy_orders": 150,
+   "match": true,
+   "modp_equals_Q_300": true,
+   "components": [
+    "('1', 0)",
+    "('1', 1)",
+    "('g', 0)",
+    "('l2', 0)",
+    "('l3', 0)"
+   ],
+   "val_check": true,
+   "leading_power": {
+    "('1', 0)": 0,
+    "('g', 0)": 9,
+    "('l2', 0)": 4,
+    "('1', 1)": 9,
+    "('l3', 0)": 9
+   }
+  }
+ },
+ "C3_planted": {
+  "LCLM_f1_plus_f2_first_hit": {
+   "r": 8,
+   "d": 20,
+   "nullity": 1
+  },
+  "tan_nonholonomic_hits_r<=10_d<=20": []
+ },
+ "C1u_unequal_assembly_passfail": {
+  "1,3/2": {
+   "tau_le_6_match_sympy_to_R40": true,
+   "val_check": true
+  },
+  "1,2": {
+   "tau_le_6_match_sympy_to_R40": true,
+   "val_check": true
+  }
+ },
+ "C6_unequal_timings": {
+  "1,3/2": {
+   "p67108859": {
+    "time_s": 37.6,
+    "orders": 300,
+    "taus": 151,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_3_2_p67108859.npz",
+    "file_bytes": 3894
+   },
+   "p33554393": {
+    "time_s": 35.5,
+    "orders": 300,
+    "taus": 151,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_3_2_p33554393.npz",
+    "file_bytes": 3800
+   },
+   "Q_N40": {
+    "time_s": 8.9,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_3_2_Q_N40.npz"
+   },
+   "Q_N80": {
+    "time_s": 71.4,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_3_2_Q_N80.npz"
+   }
+  },
+  "1,2": {
+   "p67108859": {
+    "time_s": 32.7,
+    "orders": 300,
+    "taus": 151,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_2_p67108859.npz",
+    "file_bytes": 3337
+   },
+   "p33554393": {
+    "time_s": 33.7,
+    "orders": 300,
+    "taus": 151,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_2_p33554393.npz",
+    "file_bytes": 3259
+   },
+   "Q_N40": {
+    "time_s": 8.7,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_2_Q_N40.npz"
+   },
+   "Q_N80": {
+    "time_s": 71.6,
+    "val_check": "PASS",
+    "file": "debug/data/exch_unequal_SEALED_1_2_Q_N80.npz"
+   }
+  }
+ },
+ "C4_heldout_exact": {
+  "fit_orders_max": 60,
+  "nullity_Q": 1,
+  "equals_OP_EXCH_1_over_Q": true,
+  "heldout_orders": "61..296",
+  "heldout_annihilated": 236,
+  "heldout_total": 236,
+  "z3/2_scaled_op_annihilated_orders": "301/300"
+ },
+ "C2_guess_equal_zeta": {
+  "67108859": {
+   "r3d8": {
+    "nullity": 0,
+    "rows": 1167
+   },
+   "r3d16": {
+    "nullity": 0,
+    "rows": 1167
+   },
+   "r4d7": {
+    "nullity": 0,
+    "rows": 1170
+   },
+   "r4d8": {
+    "nullity": 1,
+    "rows": 1170,
+    "prop_OP_EXCH_1": true
+   },
+   "r4d12": {
+    "nullity": 5,
+    "rows": 1170
+   },
+   "r5d8": {
+    "nullity": 7,
+    "rows": 1172
+   },
+   "z3/2_r4d8": {
+    "nullity": 1,
+    "prop_scaled_OP_EXCH_1": true
+   },
+   "z3/2_r3d16": {
+    "nullity": 0
+   }
+  },
+  "33554393": {
+   "r3d8": {
+    "nullity": 0,
+    "rows": 1167
+   },
+   "r3d16": {
+    "nullity": 0,
+    "rows": 1167
+   },
+   "r4d7": {
+    "nullity": 0,
+    "rows": 1170
+   },
+   "r4d8": {
+    "nullity": 1,
+    "rows": 1170,
+    "prop_OP_EXCH_1": true
+   },
+   "r4d12": {
+    "nullity": 5,
+    "rows": 1170
+   },
+   "r5d8": {
+    "nullity": 7,
+    "rows": 1172
+   },
+   "z3/2_r4d8": {
+    "nullity": 1,
+    "prop_scaled_OP_EXCH_1": true
+   },
+   "z3/2_r3d16": {
+    "nullity": 0
+   }
+  }
+ },
+ "C5_second_route": {
+  "1.4": {
+   "frobenius": "0.323291141553073182385711558934",
+   "exchange_hp_tau12": "0.323291141553073182385711558934",
+   "exchange_value_scipy": "0.3232911415530733",
+   "abs_diff_frob_hp": "8.51e-52",
+   "abs_diff_frob_scipy": "1.31e-16",
+   "ode_from_R0.5": "0.3232911415530731823857116"
+  },
+  "3.015": {
+   "frobenius": "0.0574235317243530071432626243222",
+   "exchange_hp_tau12": "0.0574235317243530071432626243222",
+   "exchange_value_scipy": "0.057423531724355534",
+   "abs_diff_frob_hp": "2.39e-48",
+   "abs_diff_frob_scipy": "2.53e-15",
+   "ode_from_R0.5": "0.05742353172435300714326264"
+  }
+ },
+ "X_building_block_vs_sympy_tau0_10": {
+  "match_all_kernels_tau_0_10": true,
+  "orders_compared": "p^-5..p^17",
+  "logs": [
+   "debug/data/exch_xcheck_tau10.log (tau<=6; tau>=7 reference too shallow)",
+   "debug/data/exch_xcheck_tau6_10.log",
+   "debug/data/exch_xcheck_tau9_10.log"
+  ]
+ },
+ "C1u_numeric_diag": "debug/exch_c1u_diag.py: generator series and sympy-series both equal the tau<=6 closed form at R=0.4 to 1e-50 (both pairs); first C1u FAIL was the sympy reference truncated at relative order 50"
+}

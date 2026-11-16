@@ -1,0 +1,31 @@
+{
+ "pair": [
+  "1",
+  "1"
+ ],
+ "frobenius_terms": 300,
+ "data_orders": [
+  -1,
+  0,
+  4,
+  9
+ ],
+ "root_equations_consistent": true,
+ "frobenius_equals_generator_to_N": true,
+ "generator_N": 120,
+ "1.4": {
+  "frobenius": "0.323291141553073182385711558933670210344170917",
+  "exchange_hp": "0.323291141553073182385711558933670210344170917",
+  "tau_max": 8,
+  "last_terms_max": "0.0",
+  "abs_diff": "8.87e-63"
+ },
+ "3.015": {
+  "frobenius": "0.0574235317243530071432626243221993475294194543",
+  "exchange_hp": "0.0574235317243530071432626243221993475294194543",
+  "tau_max": 8,
+  "last_terms_max": "0.0",
+  "abs_diff": "3.23e-59"
+ },
+ "time_s": 2.4
+}
