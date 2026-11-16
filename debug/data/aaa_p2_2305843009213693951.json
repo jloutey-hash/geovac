@@ -1,0 +1,668 @@
+{
+ "A1_PY": {
+  "seconds": 1983,
+  "Lmax": 1000,
+  "series": {
+   "a": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "b": {
+    "L0": 3,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_3": [
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "a+b": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A1_PXp": {
+  "seconds": 3,
+  "Lmax": 1000,
+  "series": {
+   "a": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "b": {
+    "L0": 3,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_3": [
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "a+b": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A1_DA": {
+  "seconds": 10562,
+  "Lmax": 1000,
+  "series": {
+   "F": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_3": [
+     7,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-117, 50), '1', None)",
+     "(Fraction(-162, 25), '1', None)",
+     "(Fraction(-162, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-162, 25), 'E1', Fraction(189, 50))",
+     "(Fraction(-162, 25), 'ln', Fraction(1, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(21, 10))",
+     "(Fraction(-162, 25), 'ln', Fraction(3, 2))",
+     "(Fraction(-162, 25), 'ln', Fraction(41, 10))",
+     "(Fraction(-189, 50), '1', None)",
+     "(Fraction(-209, 50), '1', None)",
+     "(Fraction(-389, 50), '1', None)",
+     "(Fraction(-513, 50), '1', None)",
+     "(Fraction(-72, 25), 'E1', Fraction(13, 10))",
+     "(Fraction(-72, 25), 'E1', Fraction(369, 50))",
+     "(Fraction(-72, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(299, 50))",
+     "(Fraction(162, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(72, 25), 'E1', Fraction(533, 50))",
+     "(Fraction(9, 5), 'E1', Fraction(299, 50))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_PY": {
+  "seconds": 1257,
+  "Lmax": 1000,
+  "series": {
+   "a": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "b": {
+    "L0": 3,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_3": [
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "a+b": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_PXp": {
+  "seconds": 2,
+  "Lmax": 1000,
+  "series": {
+   "a": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "b": {
+    "L0": 3,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_3": [
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "a+b": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 0,
+    "sizes_L0_to_3": [
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_DA": {
+  "seconds": 5510,
+  "Lmax": 1000,
+  "series": {
+   "F": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_3": [
+     7,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "constants": [
+     "(Fraction(-141, 25), '1', None)",
+     "(Fraction(-141, 25), 'E1', Fraction(-27, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(21, 10))",
+     "(Fraction(-141, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-141, 25), 'ln', Fraction(19, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(3, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(7, 5))",
+     "(Fraction(-141, 25), 'ln', Fraction(9, 5))",
+     "(Fraction(-147, 50), '1', None)",
+     "(Fraction(-177, 25), '1', None)",
+     "(Fraction(-3, 2), '1', None)",
+     "(Fraction(-387, 50), '1', None)",
+     "(Fraction(-51, 25), 'E1', Fraction(36, 25))",
+     "(Fraction(-51, 25), 'E1', Fraction(57, 10))",
+     "(Fraction(-51, 25), 'E1', Fraction(9, 10))",
+     "(Fraction(-87, 25), '1', None)",
+     "(Fraction(-9, 5), '1', None)",
+     "(Fraction(-9, 5), 'E1', Fraction(132, 25))",
+     "(Fraction(141, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(51, 25), 'E1', Fraction(228, 25))",
+     "(Fraction(9, 5), 'E1', Fraction(132, 25))"
+    ],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ }
+}

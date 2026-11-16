@@ -106,3 +106,40 @@ assumed linearly independent over Qbar. d functions with m != 0 on A and exchang
 `python debug/aaa_run.py p1p3 400 3000` and `... 400 3600` (all three integrals; writes `debug/data/aaa_p1p3_<dps>.json`
 with values, diffs, beta for a, b, c, F, the re-expansion check, P4 ratios); `python debug/aaa_run.py p2 2305843009213693951`
 and `... p2 4611686018427387847` (constant sets to L = 1000).
+
+## Results (scored 2026-11-15)
+
+**Verdict: GO.** Engine files and driver unchanged at scoring (`git diff f675ba7f` on all six frozen files empty).
+All clauses at 3600 digits unless stated; data `debug/data/aaa_p1p3_{3000,3600}.json`,
+`debug/data/aaa_p2_{2305843009213693951,4611686018427387847}.json`.
+
+- **P0 held.** The coefficients a, b, c, F at L = 219..221 and 398..400 of all six integrals and all twelve P1 sums
+  agree between 3000 and 3600 digits in every printed digit (25 significant for coefficients, 30 for the sums).
+  `total_reexpansion_check` is at most 4e-3001 at every point where it applies (PY and PX', both points, both
+  cases; DA has no split).
+- **P1 held (12/12).** Differences from R2 (n = 34): 4.2e-14 to 2.5e-13 (tolerance 1e-10).
+- **P2 held.** At both primes, to L = 1000: a and F from L = 2, b from L = 3, and a + b, each use exactly AB's 21
+  constants, the set fixed in L; no Euler gamma; nothing outside the set.
+- **P3 held (10/10).**
+
+  | beta_eff(220) | A1 | A2 | band |
+  |:--|:--|:--|:--|
+  | PY a | -4.209 | -4.167 | [-4.65, -3.6] |
+  | PY b | -6.241 | -6.192 | [-6.8, -5.7] |
+  | PY total c | -5.166 | -5.130 | [-5.7, -4.65] |
+  | PX' total c' | -4.206 | -4.162 | [-4.65, -3.6] |
+  | DA F | -4.151 | -4.107 | [-4.65, -3.6] |
+
+- **P4 held (2/2).** R = (a/ta)/(b/tb) at L = 220: A1 0.15672 = 1.108 (x*^2 - 1); A2 0.25844 = 1.087 (x*^2 - 1)
+  (band [0.95, 1.20]; the reviewer's estimate was about 1.08 and 1.07). R falls with L across 219..221 at both.
+
+**Reported, not scored.** beta_eff at L = 380: PY a -4.121 / -4.097, b -6.141 / -6.112, DA F -4.087 / -4.062 (A1 / A2),
+all still drifting toward the 7/2 branch from below. c_220 / tc_220 for PY: -0.0817 (A1), -0.0320 (A2). Signs at
+L >= 20: PY a, b negative and c positive; PX' the reverse; DA F positive (one sign change below L = 20). Engine time
+(3600 digits): 3 s to 4.2 h per integral.
+
+**Reading.** A p_pi or d_sigma pair on A against a 1s pair at B and C keeps AB's 21 constants and the 7/2 branch, as
+the p and d functions at C did (AP, AQ, AD). The out-of-plane p_pi pair (PY) is the one case where the total loses
+a half-power: its harmonic parts each carry 7/2, and they cancel at the leading order to leave 9/2, as predicted
+from e . a = 0 on the null cone; the in-plane PX' keeps 7/2. The amplitude ratio sits 9-11% above x*^2 - 1, at the
+reviewer's estimate of the 9/2 admixture.
