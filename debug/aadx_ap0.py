@@ -69,11 +69,11 @@ def quad_GL(case, L, integral, dps=22):
         return mp.quad(lambda r: 4 * mp.pi / (2 * L + 1) * r * r * rho(r) * vL(r), [0, D1, D2, D2 + 4, mp.inf])
 
 
-def main(qdps=22, tol='1e-18', extra=(), tol_extra=None):
+def main(qdps=22, tol='1e-18', extra=(), tol_extra=None, edps=80, only=None):
     """AX: main() (22 digits, 1e-18).  AX2 (amendment): main(32, '1e-25', (20,), '1e-23'), see
     docs/predictions/2026-11-16_aa_bc_d_mneq0_2.md."""
     LOG.write_text('')
-    say('quadrature digits', qdps, 'tolerance', tol, 'extra L', extra)
+    say('quadrature digits', qdps, 'tolerance', tol, 'extra L', extra, 'exact-side digits', edps, 'only', only)
     t0 = time.time()
     ok = True
     for p in (None, (1 << 61) - 1):
@@ -86,16 +86,17 @@ def main(qdps=22, tol='1e-18', extra=(), tol_extra=None):
             say(case, 'Q' if p is None else 'p', '(i) AB reproduced:', same)
     K = E.Field(None)
     for case in P.CASES:
-        for integral, Ls in (('DX', (1, 3, 7, 12) + tuple(extra)), ('DD', (2, 5, 12) + tuple(extra))):
+        for integral, Ls in (('DX', tuple(only) if only else (1, 3, 7, 12) + tuple(extra)),
+                             ('DD', tuple(only) if only else (2, 5, 12) + tuple(extra))):
             f = P.coefficients(case, max(Ls), K, integral)
-            mp.mp.dps = 80
+            mp.mp.dps = edps
             tw = P.twopiN(case, integral)
             keys = set(k for q in f for k in q)
             cv = {k: E.value(k, mp) for k in keys}
             for L in Ls:
                 ex = tw * sum(mp.mpf(int(v.p)) / int(v.q) * cv[k] for k, v in f[L].items())
                 q = quad_GL(case, L, integral, dps=qdps)
-                with mp.workdps(max(40, qdps + 18)):
+                with mp.workdps(max(40, qdps + 18, min(edps, 120))):
                     rel = abs(q / ex - 1)
                 good = rel < mp.mpf(tol_extra if (tol_extra and L in extra) else tol)
                 ok &= bool(good)
@@ -115,7 +116,10 @@ def main(qdps=22, tol='1e-18', extra=(), tol_extra=None):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == 'ax2':
+    if len(sys.argv) > 1 and sys.argv[1] == 'ax2b':
+        LOG = HERE / 'data' / 'aadx2b_ap0.log'     # record AX2b: fresh L, both sides measured
+        main(44, '1e-38', edps=300, only=(16, 25))
+    elif len(sys.argv) > 1 and sys.argv[1] == 'ax2':
         LOG = HERE / 'data' / 'aadx2_ap0.log'      # keep AX's log
         main(32, '1e-25', (20,), '1e-23')
     else:
