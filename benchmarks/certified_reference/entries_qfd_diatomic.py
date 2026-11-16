@@ -125,7 +125,7 @@ QUOTED: Dict[str, Dict[str, Any]] = {
         "transcendence_class": "{exp, E_1, ln, gamma}",
         "tau_note": "infinite (q = 3.015 and 0.754); truncated at tau_max = "
                     "20/16/14 per quartet, tail bounded and netted out",
-        "backing_test": "tests/test_paper58_qfd.py::test_heteronuclear_exchange_tau_series + ::test_exchange_hp_matches_symbolic (one exchange quartet and the numeric accumulator; the assembled 30-digit total is campaign-level)",
+        "backing_test": "tests/test_paper58_lih_certified.py (slow, ~12 min: the whole energy rebuilt from the closed forms, the 30 digits and the tau-tail bound; fire-tested 2026-11-16) + tests/test_paper58_qfd.py::test_heteronuclear_exchange_tau_series + ::test_exchange_hp_matches_symbolic (fast legs)",
         "sort_index": 1,
         "method": _METHOD_HETERO,
         "evidence":
@@ -133,7 +133,7 @@ QUOTED: Dict[str, Dict[str, Any]] = {
             "BINDING constraint is the tau tail: per-quartet monotone ratio "
             "bounds sum to 1.95e-32 in the integrals, amplified through the "
             "2-RDM weight (6) times ||S^-1/2||^4 = 2.830 (lambda_min(S) = "
-            "0.594448), rounded up to 64, giving an energy tail bound of "
+            "0.594445), rounded up to 64, giving an energy tail bound of "
             "1.24e-30 Ha -- hence 30 digits claimed (linear-algebra and "
             "accumulator limits sit at 55 and 44 digits).  INDEPENDENT ROUTES: "
             "one-electron integrals vs quadrature at ~1e-23; one-centre ERIs "
