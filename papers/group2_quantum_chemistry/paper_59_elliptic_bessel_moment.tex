@@ -1059,12 +1059,18 @@ integral:\ the combined coefficients decay like $\ell^{-4}$ (effective exponent 
 $\ell=220$) while each piece alone decays like $\ell^{-2}$, so the leading term is
 $(x^{*}-x)^{7/2}$.  Silverstone gave this integral as a Legendre series with each term in
 closed form~\cite{silverstone1967pnas};\ the fixed constant set and the cancellation are
-new.  Two registered clauses failed or stayed open:\ the bond-angle operator, of order
+new.  One registered clause failed:\ the bond-angle operator, of order
 $17$, has further singular points that move with $\zeta_{\rm A}$ and no $5/2$ exponent at
-$x^{*}$, and whether the screened components leave the two-center class is undecided
-(record \texttt{docs/predictions/2026-11-14\_aa\_bc\_three\_centre.md}, registered before
+$x^{*}$.  The screened components leave the two-center class on their own, as functions of
+the angle:\ the test was first undecided, because four exponential rates, the roots of
+$\lambda^4-\tfrac{51}{20}\lambda^2+\tfrac{81}{25}$, do not split modulo its two primes;\ on two
+further primes in which they split, all fifteen stop with no factor peeled and pass the
+one-electron integral's check below (records
+\texttt{docs/predictions/2026-11-14\_aa\_bc\_three\_centre.md} and
+\texttt{docs/predictions/2026-11-16\_aa\_bc\_class\_decided.md}, each registered before
 computing;\ guard \texttt{tests/test\_paper59\_aa\_bc.py}).  Caps:\ $1s$ functions, two
-geometries.
+geometries (the class test at one), the constants assumed linearly independent over
+$\overline{\mathbb{Q}}$, minimal operators not certified.
 \textbf{[SYMBOLIC + MEASURED]} A $p$ function at either end keeps the constant set and the
 leading branch.
 For $(1s_{\rm A}1s_{\rm A}|1s_{\rm B}2p_{z,{\rm C}})$ the factor $z-D_1$ of the $2p$ function

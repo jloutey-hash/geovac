@@ -75,3 +75,27 @@ TRIANGULAR); BORDERLINE otherwise.
   exponential types splitting over F_p, IN's erratum clauses); it is not a proof over Qbar(x).
 - The whole-f verdict follows from NA's components (AB, "Already known"); it is not scored here.
 - The rates' origin (why |lambda|^2 = 9/5 numerically) is not explained and not claimed.
+
+## Results (2026-11-16; appended after scoring, text above unchanged)
+
+Run `python debug/aabc_ak_check.py run <p>` on both primes after the registration commit (9ccbe13f) landed;
+coefficients ~970 s per prime, 10-15 s per component. Data `debug/data/aabc_ak_<p>.json`, score
+`debug/data/aabc_ak_score.json`.
+
+**Verdict: GO.**
+
+| clause | 1073741441 | 1073741381 | outcome |
+|:--|:--|:--|:--|
+| AK-0 controls (IC 21, IN erratum 5) | all pass | all pass | **HELD** |
+| AK-1 clean STUCK, both sets, erratum check passing | 15 of 15 | 15 of 15 | **HELD** |
+| AK-2 15 found, no lambda-edge flag | yes, none | yes, none | **HELD** |
+| AK-3 every component STUCK at AB's residual order | yes | yes | **HELD** |
+
+- Residual orders as in AB's P4: 4 (eight E1 and four ln components), 5 (e^{-162/25}), 6 (e^{-189/50}, e^{-513/50});
+  every residual type "confluent-genus1-type", clean, no flags.
+- **Reported.** Each residual's rates at infinity are the four roots found in F_p plus 0 (e^{-162/25}) or +-9/5
+  (the order-6 pair); the four satisfy lambda^4 - (51/20) lambda^2 + 81/25 = 0 exactly mod p on both primes (sum
+  zero), the edge read before registering.
+- **Consequence for inventory row 6.** As a function of the bond angle, at A1, the screened (mu-carrying) part of
+  (AA|BC) leaves the triangular (two-centre) class on its own, not only through NA's components, under IC's caps
+  (Qbar-independence of the constants; minimal operators not certified) and the instrument's search caps.

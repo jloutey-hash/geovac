@@ -1,0 +1,1519 @@
+{
+ "case": "A1",
+ "prime": 1073741441,
+ "L": 1200,
+ "coeff_time": 972.3,
+ "components": {
+  "(Fraction(-162, 25), '1', None)": {
+   "R0": 5,
+   "found": {
+    "5": [
+     31,
+     1
+    ],
+    "6": [
+     20,
+     2
+    ],
+    "7": [
+     16,
+     3
+    ],
+    "8": [
+     14,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 28,
+    "w_degree": 60,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "0",
+       1
+      ],
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 5,
+    "x_degree": 28,
+    "w_degree": 60,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 5,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "0",
+       1
+      ],
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 12.5
+  },
+  "(Fraction(-162, 25), 'E1', Fraction(-27, 10))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.1
+  },
+  "(Fraction(-162, 25), 'E1', Fraction(13, 10))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.1
+  },
+  "(Fraction(-162, 25), 'E1', Fraction(189, 50))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.1
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(1, 2))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.3
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(21, 10))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 10.8
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(3, 2))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.3
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(41, 10))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.0
+  },
+  "(Fraction(-189, 50), '1', None)": {
+   "R0": 6,
+   "found": {
+    "6": [
+     41,
+     1
+    ],
+    "7": [
+     26,
+     1
+    ],
+    "8": [
+     21,
+     1
+    ],
+    "9": [
+     19,
+     3
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 36,
+    "w_degree": 75,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.1,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-9/5",
+       1
+      ],
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ],
+      [
+       "9/5",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 36,
+    "w_degree": 75,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.1,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-9/5",
+       1
+      ],
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ],
+      [
+       "9/5",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 15.0
+  },
+  "(Fraction(-513, 50), '1', None)": {
+   "R0": 6,
+   "found": {
+    "6": [
+     41,
+     1
+    ],
+    "7": [
+     26,
+     1
+    ],
+    "8": [
+     21,
+     1
+    ],
+    "9": [
+     19,
+     3
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 36,
+    "w_degree": 75,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.1,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-9/5",
+       1
+      ],
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ],
+      [
+       "9/5",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 6,
+    "x_degree": 36,
+    "w_degree": 75,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 6,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "-9/5",
+       1
+      ],
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ],
+      [
+       "9/5",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 14.2
+  },
+  "(Fraction(-72, 25), 'E1', Fraction(13, 10))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.0
+  },
+  "(Fraction(-72, 25), 'E1', Fraction(369, 50))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 10.5
+  },
+  "(Fraction(-72, 25), 'E1', Fraction(9, 10))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.0
+  },
+  "(Fraction(162, 25), 'E1', Fraction(533, 50))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 11.0
+  },
+  "(Fraction(72, 25), 'E1', Fraction(533, 50))": {
+   "R0": 4,
+   "found": {
+    "4": [
+     28,
+     1
+    ],
+    "5": [
+     18,
+     2
+    ],
+    "6": [
+     14,
+     1
+    ],
+    "7": [
+     13,
+     4
+    ]
+   },
+   "A": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "B": {
+    "verdict": "STUCK",
+    "x_order": 4,
+    "x_degree": 26,
+    "w_degree": 55,
+    "steps": 0,
+    "step_flags": [],
+    "time": 0.0,
+    "residual": {
+     "order": 4,
+     "type": "confluent-genus1-type",
+     "clean": true,
+     "flags": [],
+     "lam": [
+      [
+       "856354960",
+       1
+      ],
+      [
+       "639224664",
+       1
+      ],
+      [
+       "434516777",
+       1
+      ],
+      [
+       "217386481",
+       1
+      ]
+     ]
+    },
+    "erratum": {
+     "passed": true,
+     "bad": []
+    }
+   },
+   "verdict": "STUCK",
+   "erratum_pass": true,
+   "time": 10.0
+  }
+ },
+ "time": 1145.3
+}

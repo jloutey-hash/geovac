@@ -1,0 +1,163 @@
+{
+ "AK-0": "HELD",
+ "components": {
+  "(Fraction(-162, 25), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'E1', Fraction(-27, 10))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'E1', Fraction(13, 10))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'E1', Fraction(189, 50))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'ln', Fraction(1, 2))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'ln', Fraction(21, 10))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'ln', Fraction(3, 2))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-162, 25), 'ln', Fraction(41, 10))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-189, 50), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-513, 50), '1', None)": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-72, 25), 'E1', Fraction(13, 10))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-72, 25), 'E1', Fraction(369, 50))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(-72, 25), 'E1', Fraction(9, 10))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(162, 25), 'E1', Fraction(533, 50))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ],
+  "(Fraction(72, 25), 'E1', Fraction(533, 50))": [
+   [
+    "STUCK",
+    true
+   ],
+   [
+    "STUCK",
+    true
+   ]
+  ]
+ },
+ "n_components": 15,
+ "clean_stuck_both": 15,
+ "AK-1": "HELD",
+ "edge_flags": {},
+ "AK-2": "HELD",
+ "order_mismatch": {},
+ "AK-3": "HELD",
+ "gate": "GO"
+}
