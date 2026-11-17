@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.35] - 2026-11-17
+
+**The owed chemistry list worked down again (PI: "do what's owed"). Two pre-registered records GO: MO (the (AA|BC)
+bond-angle operator's minimal order is 14, not 17; its zeta_A-moving points are logarithmic) and EP (exchange with a
+2p orbital keeps the 1s operator shape). Paper 63 gains a proved rung bound for l > 0 densities. The row-7 exact
+recurrence is blocked at a constant-class step. Guards for all three, fire-tested as separate passes.**
+
+### Added
+- Record MO (`docs/predictions/2026-11-17_aa_bc_minimal_operator.md`, registered 56f10c90; scored aa3f4d8a).
+  - The row-6 "S1 per-piece test" was re-aimed by its design pass. Control W0 found that AB's order-17, degree-48
+    operator is not minimal: the gcrd of the annihilators has order 14, degree 111. AB's non-integer "moving" points
+    moved with the random weights, not with zeta_A.
+  - **GO** at A1 and A2, both primes, both weights, base and zeta_A + 1/997:
+    - minimal order 14, degree 111, and AB's search operator is right-divisible by it;
+    - the only non-integer exponents (3/2, 7/2, 9/2) are at x*. A2 (x* = 89/80) was fresh.
+    - 2-4 moving points per run, all with integer exponents {-3, 0..12} and a forced log;
+    - every point is carried by a piece.
+  - Reported: rational positions are one-prime reconstructions; MO4 attribution degrees disagree at A2.
+  - Cold review: 4 MUST-FIX. The main one: MO2 read only the base set, so it could not fail at A1.
+- Record EP (`docs/predictions/2026-11-17_exchange_l1.md`, registered 9b3a9709; scored 3810b84b). The cases are
+  (2p-sigma_A 1s_B|2p-sigma_A 1s_B) and (2p+1 1s|2p-1 1s) at (1,1) and (1,2).
+  - The generator is the frozen EX generator with one function generalised. The equal-exponent order <= 4 was proved
+    before computing.
+  - **GO, all clauses and all reported predictions:**
+    - order exactly 4 at (1,1) and 9 at (1,2); degrees 16/9 and 34/25;
+    - the 1s rate multiset, with no a - b rate; R = 0 Fuchsian;
+    - R^11 ln R, with coefficients 704, 16, 22528 and 512 over 1157625, so the (1,2)/(1,1) ratio is exactly 32;
+    - finite points apparent;
+    - 8-12 primes; exact Q residual zero on >= 121 orders; third prime matches; numeric 6e-79 or better.
+  - Cold review: 4 MUST-FIX. The ladder skipped the second scored prime on failure, the order above the proved bound
+    mapped to BORDERLINE, the frozen table was incomplete, and EP0 had no comparator.
+- Paper 63 `prop:tree_rung_l` [SYMBOLIC PROOF + MEASURED]. The fibre order bound extends to densities that are
+  center (and scale) derivatives of the fingerprint weight, of degree at most two:
+  - the proof steps: Hobson twists, the channel-L Poisson equation, Gaunt channels, and the root transfer with
+    mu >= -2;
+  - the identities are checked to 6e-17 / 4e-31 / 4e-19 (`debug/p63rb_identities.py`);
+  - the p_z-p_z-d chain: roots agree to 1e-15, and a 9-D Monte Carlo agrees within 0.6 SE
+    (`debug/p63rb_chain_check.py`).
+  - The adversarial review found 1 LARGE (the hypothesis was wider than the boundary-term step; restated to
+    degree <= 2) and 3 SMALL, applied.
+- Guards (separate passes, sub-agents; the PM re-fired one plant of each):
+  - `tests/test_paper63_tree_rung_l.py` (16 fast + 1 slow, 19/22; the 3 non-firing plants rescale both roots alike
+    or sit inside the slow Monte Carlo error, and the pin test catches them);
+  - `tests/test_paper59_aa_bc_minimal_operator.py` (24 fast + 16 slow, 16/16, embedded data
+    `tests/data/paper59_mo_2026_11_17.json`);
+  - `tests/test_paper58_exchange_l1.py` (37 fast + 6 slow, 35/37; the 2 non-firing plants are caught elsewhere: the negative control, and the slow tier).
+
+### Changed
+- Paper 59 `sec:scope` (PI-approved): the AB paragraph now names the minimal operator, order 14, instead of the
+  order-17 left multiple. The zeta_A-moving points are stated as logarithmic with integer exponents, and the
+  non-integer exponents are confined to x*.
+- Paper 58: a [SYMBOLIC + MEASURED] paragraph on exchange with a 2p orbital; the caps are widened to match.
+- Paper 63:
+  - `prop:tree_rung_l` added;
+  - the "for l > 0 the bound is unshown" loci are restated (abstract, `sec:dictionary` twice, conclusion);
+  - the fibre's order bound for s-type trees is now acknowledged in the dictionary paragraph, where it was stale.
+- `docs/chemistry_period_inventory.md`:
+  - row 3c: exchange with one 2p on A MET;
+  - row 6: operator order 14 and the singular points restated (MO);
+  - row 7: exact recurrence BLOCKED. The design pass FX found the matched slice zW/zZ = sqrt(a/b) closed for the far-density
+    multipole, but F_L needs depth-2 iterated exponential integrals beyond the current reducer;
+  - row 8: exchange beyond 1s closed for one 2p; the l > 0 rung bound proved.
+- Pre-checkpoint claims review of the three edited units, two rounds.
+  - Round 1: 0 LARGE, 6 SMALL, 3 NIT, all applied. Among them: P58's precision 1e-79 corrected to 6e-79; the a^7b^5
+    scaling restated as suggested, with only its b^5 factor tested; P58's "only the homonuclear exchange class has a log"
+    corrected; P63's abstract no longer calls the p_z chain s-type.
+  - Round 2: 0 LARGE, 2 SMALL, 1 NIT, applied. Both SMALLs came from round-1 edits: a garbled P58 degree sentence,
+    and a [MEASURED] tag on a proved clause in P63's abstract. Stopped at two rounds, as the rule requires.
+- Claim-test matrix rows for prop:tree_rung_l, MO and EP.
+- debug/ archive sweep (repo hygiene, owed from v6.7.34): `debug/archive_sweep_2026_11_17.py` reruns the 2026-11-08 rules
+  with cutoff 2026-11-06 and an automatic import-closure pass. 103 files moved to `debug/archive/<arc>/` (manifest
+  `debug/archive/sweep_manifest_2026_11_17.json`); 13 referenced by bare name from tests/ or geovac/ were moved back by
+  hand. debug/ top level 607 -> 505 files (budget 600). Affected tests rerun: 11 files, 59 passed, 14 slow-only skips.
+
+### Owed
+- Row 7 exact recurrence: needs a new IBP reducer for depth-2 exponential integrals (an engine build, est. 600-900
+  lines); PI call.
+- Exchange with d orbitals or 2p on both centres; odd-lambda pieces in the l > 0 rung bound; attainment for l > 0
+  beyond the p_z-leaf chain.
+
 ## [v6.7.34] - 2026-11-16
 
 **The owed chemistry list worked down (autonomous loop; EXb and the row-7 route PI-approved). Five pre-registered

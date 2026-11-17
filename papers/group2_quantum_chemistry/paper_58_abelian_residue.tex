@@ -387,8 +387,8 @@ exponents, $R=\infty$ is irregular of rank one with the decay rates as its
 characteristic roots, and every other finite singular point is apparent.  The
 solution of the $(AA|BB)$ operator analytic at $R=0$ and normalized to $5/8$
 reproduces, from the operator alone, the odd terms $(2/315)R^7+(16/14175)R^9$, members of the second, non-even
-family of terms that Ref.~\cite{silverstone1967} identified.  Only the homonuclear exchange class has a
-logarithm at $R=0$:\ its operator has order $4$, exponents $\{-1,0,4,9\}$, and
+family of terms that Ref.~\cite{silverstone1967} identified.  Only the exchange class has a
+logarithm at $R=0$;\ at equal exponents its operator has order $4$, exponents $\{-1,0,4,9\}$, and
 the integral carries $(8/3375)\,\zeta^{10}R^9\ln(\zeta R)$.  At the hybrid rate
 coincidence the pair $\gamma_E+\ln R$ combines with $E_1$ into the entire
 function $\mathrm{Ein}$, so no logarithm survives there.
@@ -408,6 +408,23 @@ $a=b$ split, and no rate $\pm(a-b)$ appears (records
 \texttt{docs/predictions/2026-11-16\_exchange\_unequal\_zeta\_b.md}, each registered before
 computing;\ the first was void because four primes could not reconstruct the $(1,3/2)$
 operator, and the second supplied more primes).
+\textbf{[SYMBOLIC + MEASURED]} A $2p$ orbital keeps that shape.  For
+$(2p\sigma_{\rm A}1s_{\rm B}|2p\sigma_{\rm A}1s_{\rm B})$ and
+$(2p_{+1,{\rm A}}1s_{\rm B}|2p_{-1,{\rm A}}1s_{\rm B})$, the radial part of real
+$2p_x$ exchange, the operator has order $4$ at equal exponents, which is the most it can
+have there:\ the Neumann $\tau$-sum stops at $\tau\le3$, so the integral lies in the four-dimensional span of
+$e^{-2p}$, $e^{-2p}(\gamma_E+\ln p)$, $E_1(2p)$ and $e^{2p}E_1(4p)$, which is closed under
+$d/dR$ (shown before computing).  At $(a,b)=(1,2)$ the order is $9$, as for $1s$.  Only the degree rises:\ $16$ and $9$ at $(1,1)$ and $34$ and $25$ at $(1,2)$, against $8$ at
+$(1,1)$ and $16$ at $(1,2)$ for $1s$.  The rates at infinity are the $1s$ ones, with no rate $\pm(a-b)$, and every
+finite nonzero singular point is apparent.  At $R=0$ the logarithm starts at $R^{11}\ln R$,
+and its coefficient at $(1,2)$ is exactly $32$ times that at $(1,1)$ in both families,
+the factor $b^5$ of the scaling $a^7b^5$ suggested before computing ($a=1$ at both
+pairs, so the power of $a$ is untested).  Each operator is reconstructed over
+$\mathbb{Q}$ from $8$ to $12$ primes, annihilates the exact series on at least $121$ orders,
+is recovered on a further prime, and its Frobenius solution matches the integral
+computed independently to $6\times10^{-79}$ or better (record
+\texttt{docs/predictions/2026-11-17\_exchange\_l1.md}, registered before computing;\ guard
+\texttt{tests/test\_paper58\_exchange\_l1.py}).
 
 \textbf{[SYMBOLIC + MEASURED]} The picture carries over to hydrogenic orbitals with
 $l \le 2$, $n \le 3$, on a pre-registered panel of $48$ integrals with $p$ and $d$
@@ -433,8 +450,9 @@ closed forms are classical~\cite{mulliken1949,roothaan1951}, as are the $(AA|BB)
 ones~\cite{lesiuk2014a}, and an operator of this kind exists for any function built from these atoms with
 rational coefficients.  What is measured here is its order and its singularities.
 
-Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ exchange $1s$ only, at equal exponents
-and at two unequal pairs (the Neumann series does not terminate there);\
+Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ exchange $1s$ at equal exponents
+and at two unequal pairs (the Neumann series does not terminate there), and with one $2p$
+orbital on one centre at two pairs;\
 the exchange operator is a common right divisor of found annihilators, not certified minimal, and its
 finite singular points are read modulo primes, with the log test run only on linear factors;\
 $\gamma_E$, $\ln 2$ and $\ln 3$ are assumed independent over $\mathbb{Q}$;\ minimality assumes
