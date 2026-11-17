@@ -1,0 +1,626 @@
+{
+ "A1_DNX": {
+  "seconds": 5966,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f2": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A1_DNY": {
+  "seconds": 7,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f2": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A1_DXY": {
+  "seconds": 6,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f4": {
+    "L0": 4,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 4,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A1_DXX": {
+  "seconds": 5,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f4": {
+    "L0": 4,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 4,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_DNX": {
+  "seconds": 5978,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f2": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_DNY": {
+  "seconds": 4,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f2": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 2,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_DXY": {
+  "seconds": 4,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f4": {
+    "L0": 4,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 4,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ },
+ "A2_DXX": {
+  "seconds": 4,
+  "Lmax": 1000,
+  "series": {
+   "f0": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "f4": {
+    "L0": 4,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 4,
+    "sizes_L0_to_5": [
+     0,
+     0,
+     0,
+     0,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   },
+   "union": {
+    "L0": 2,
+    "n_constants_L0": 21,
+    "L_where_set_changes": [],
+    "fixed": true,
+    "first_L_fixed": 1,
+    "sizes_L0_to_5": [
+     7,
+     21,
+     21,
+     21,
+     21,
+     21
+    ],
+    "n_union": 21,
+    "inside_C": true,
+    "outside_C": [],
+    "gamma_present": [],
+    "equals_AB21": true,
+    "vs_AB21": {
+     "missing": [],
+     "extra": []
+    }
+   }
+  }
+ }
+}

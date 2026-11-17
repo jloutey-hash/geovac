@@ -143,3 +143,46 @@ leading B-gradient order is argued, not derived. Exchange integrals and l > 2 on
 
 `python debug/aay_run.py p1p3 400 3000 3600 A1` and `... A2` (in parallel; `debug/data/aay_p1p3_<case>.json`);
 `python debug/aay_run.py p2 2305843009213693951` and `... p2 4611686018427387847` (`debug/data/aay_p2_<p>.json`).
+
+## Results (scored 2026-11-16; record text above unchanged)
+
+The scored runs were launched after commit e6ecf9cb was verified. The frozen files show no diff against e6ecf9cb at
+scoring. Build times: 11301 s (A1), 6625 s (A2).
+
+**Verdict: GO (P0-P4 all held).**
+
+- **P0 held.** At both cases, the 3000- and 3600-digit evaluations agree exactly on every printed coefficient and
+  value (worst relative difference 0.0 for every integral, DA included). `total_reexpansion_check` is at most 3.5e-3001.
+- **P1 held.** Of the 16 values, the worst |series - R2(n = 34)| is 2.8e-13 (A1 DNX, x = -1/3); every other value is
+  at most 7.8e-14. The bar was 1e-10.
+- **P2 held.** On both primes, to L = 1000, at both cases: every one of the four new integrals has f0 (from L = 2), f2 or f4 (from L = 2, resp. L = 4) and their union using exactly AB's 21 constants (no missing, no extra), the set fixed in L, inside the candidate set, no Euler gamma.
+- **P3 held.** beta_eff(220):
+
+| case | integral | f0 | f2 / f4 | total c | band (c) |
+|:--|:--|:--|:--|:--|:--|
+| A1 | DNX | -4.173 | f2 -6.209 | -4.182 | [-4.65, -3.6] |
+| A1 | DNY | -4.173 | f2 -6.209 | **-5.136** | [-5.7, -4.65] |
+| A1 | DXX | -4.265 | f4 -8.423 | -4.304 | [-4.65, -3.6] |
+| A1 | DXY | -4.265 | f4 -8.423 | **-5.292** | [-5.7, -4.65] |
+| A2 | DNX | -4.127 | f2 -6.157 | -4.135 | [-4.65, -3.6] |
+| A2 | DNY | -4.127 | f2 -6.157 | **-5.097** | [-5.7, -4.65] |
+| A2 | DXX | -4.205 | f4 -8.338 | -4.239 | [-4.65, -3.6] |
+| A2 | DXY | -4.205 | f4 -8.338 | **-5.231** | [-5.7, -4.65] |
+
+  Every f0 lies in [-4.65, -3.6], every f2 in [-6.8, -5.7] and every f4 in [-9.0, -7.85].
+- **P4 held.** Values at L = 220:
+
+| case | ratio | measured | band |
+|:--|:--|:--|:--|
+| A1 | DNY R_2 | 0.15608 = 1.104 (x*^2 - 1) | [0.1344, 0.1839] |
+| A2 | DNY R_2 | 0.25694 = 1.081 (x*^2 - 1) | [0.2258, 0.3090] |
+| A1 | DXY R_4 | -0.023480 = -1.174 (x*^2 - 1)^2 | [-0.0290, -0.0200] |
+| A2 | DXY R_4 | -0.063916 = -1.132 (x*^2 - 1)^2 | [-0.0819, -0.0565] |
+
+**Reported, not scored:**
+- The R values at L = 219 and 221 follow the L = 220 values to within 0.1%.
+- DNX and DXX have R equal to minus the DNY and DXY values, as constructed.
+- c_220/tc_220 is -0.00459 (A1 DNY), 0.00535 (A1 DXY), -0.00163 (A2 DNY) and 0.00186 (A2 DXY). c_220/ta_220 is
+  -0.00406 (A1 DNX), 0.00114 (A1 DXX), -0.00213 (A2 DNX) and 0.00059 (A2 DXX).
+- Cutting the c sum at L = 380 instead of 400 changes it by at most 1.9e-27.
+- DA as a control: its f0 beta_eff(220) is -4.151 at A1 and -4.107 at A2.
