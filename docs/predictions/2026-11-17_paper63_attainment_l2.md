@@ -171,3 +171,36 @@ Environment: Python 3.14.0, mpmath 1.3.0, scipy 1.16.3, numpy 2.4.6, sympy 1.14.
 ## Phase 2 (after this record is committed and the commit verified)
 
 `python debug/p63l2_run.py run`
+
+## Results (scored 2026-11-17; verdict GO, both shapes)
+
+Run: `debug/data/p63l2_run.json` (runtime 6551 s). All 16 frozen files were re-hashed by the PM at scoring, against the Frozen table above, and are unchanged (0 of 16 differ; the frozen files are also unchanged in git at the results commit).
+
+| clause | bar | B1 (d root) | B2 (mixed root) | holds |
+|:--|:--|:--|:--|:--|
+| FB0 float vs referee, max relative | ≤ 1e-9 | 8.4e-14 | 1.3e-12 | yes (joint) |
+| FB1 last-5 log-slope | [-1.55, -1.45] | -1.4993 | | yes |
+| FB2 \|A_fit/A1 - 1\|, smallest 6 | ≤ 1e-5 | 2.3e-10 | | yes |
+| FB3 u² coeff/(A1κ1) (not gating) | [0.95, 1.05] | 0.999997 | | yes |
+| FB4 last-5 log-slope | [-0.75, -0.25] | | -0.5046 | yes |
+| FB5 \|A_fit/A2 - 1\|, smallest 6 | ≤ 1e-4 | | 3.6e-9 | yes |
+| FB6 u² coeff/(A2κ2) (not gating) | [0.9, 1.1] | | 0.99975 | yes |
+
+Reported, not scored:
+- All-9 fits: A ratio 1 + 3.7e-9 (B1) and 1 + 7.0e-8 (B2); u² ratio 0.99998 (B1) and 0.998 (B2).
+- Local slopes approach their limits monotonically: B1 from -1.490 to -1.4998, B2 from -0.524 to -0.503.
+- S > 0 at all 9 points, both shapes.
+- Float-route fits (smallest 6; the full integrand from x = 1, independent of the x > 32 series): A ratio 1 + 2.3e-10 (B1), 1 + 3.6e-9 (B2); u² ratio 0.999997 (B1), 0.99975 (B2).
+- FB0's disagreement for B2 (1.3e-12) is of the size the toy predicted (1.8e-12; expected about 1e-12), far below the 1e-9 bar.
+
+**Reading.** On this chain the branch at t = -2 is attained with the closed-form amplitudes A1 = 1/(12π) and
+A2 = 3/(8π). With the engineered cancelling root the leading ε^{-3/2} term vanishes and the exponent moves by
+one (derived; measured last-5 slope -0.5046) to ε^{-1/2}, with the derived amplitude and, for B1, the derived first correction; for B2 the derived ε (u²) coefficient, the leading u = √ε term being fitted, not derived. Attainment here is the non-vanishing of the leading branch coefficient at t = -2; no operator is computed. Attainment for l > 0 now covers an internal
+p_z density, the L = 2 Gaunt channel and a non-s root, not only the p_z-leaf chain. Caps unchanged: one slice, one
+chain, degree ≤ 2; the general statement of design memo B.0 is not proved by this record.
+
+Cold review of the scoring and the paper text: 2 MUST-FIX (the abstract and conclusion put the ℓ > 0 shapes "on" the
+rung, i.e. operator equivalence, where only the branch at t = -2 is shown), 5 SHOULD-FIX (the float-route amplitudes
+missing from Results; the re-hash had no stated provenance; B2's ε coefficient called the "first correction" though the
+√ε term comes first and is fitted; the scope parenthetical exempted the shapes from the period bound; the honest-weight
+sentence misnamed the comparison), 4 NIT; all applied. Every number and the verdict were confirmed against the run.

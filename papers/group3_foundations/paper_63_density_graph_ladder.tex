@@ -139,7 +139,7 @@ depends only on $n$, and the operators of the one-scale family for
 $n=2,\dots,5$ are, under one exact Hadamard product, the operators of the
 equal-mass banana Feynman integrals;\ for those $n$ the $n$-density rung is
 that of the banana carrying a Calabi--Yau $(n-1)$-fold~\cite{bonisch2021}.
-Every $s$-type general-orbital case computed sits on the same rung;\ one $p_z$-leaf chain reaches it.  The Coulomb ring of three does not climb,
+Every $s$-type general-orbital case computed sits on the same rung;\ three $\ell>0$ shapes reach its branch at $t=-2$ (read from the leading branch coefficient;\ no operator computed), one with a $d$ root and one whose cancelling root moves the branch exponent by one.  The Coulomb ring of three does not climb,
 the correlated triangle does, and a Gaussian geminal leaves the ladder.
 
 The reading that organizes these facts is a Feynman-graph one
@@ -290,12 +290,16 @@ scales, where derivatives in those parameters need not stay in the
 one-parameter module of the restricted $1s$ function.  For a tree of $s$-type
 densities on its one-scale slice the next proposition bounds the holomorphic
 period, not the fibre, and on that slice proves attainment for $n\le8$ when
-the period is not identically zero;\ for rings, for $\ell>0$ (one shape excepted, below) and on other slices
-neither the bound nor attainment is shown, and for the fibre of a tree with Coulomb kernels every composition factor of
+the period is not identically zero;\ for rings, for $\ell>0$ and on other slices
+neither the bound nor attainment is shown (for $\ell>0$ the fibre's factor
+orders are bounded, Proposition~\ref{prop:tree_rung_l}, and three shapes reach
+the $t=-2$ branch, below), and for the fibre of a tree with Coulomb kernels every composition factor of
 order above one is a factor of the operator of some $F_k$, $k\le n$, or, for
 $n\le7$, of a banana operator $V_m$, $m\le n-2$ (Propositions~\ref{prop:tree_rung},
 \ref{prop:tree_rung_l} and~\ref{prop:odd_banana}).
-\textbf{[SYMBOLIC + MEASURED]} One $\ell>0$ shape reaches its rung.  Take a
+\textbf{[SYMBOLIC + MEASURED]} Three $\ell>0$ shapes reach the $n=3$ branch at
+$t=-2$:\ attainment here means that the leading branch coefficient there does
+not vanish;\ no operator is computed.  The first is a
 chain of three whose two leaves are $p_z$ densities, each the center
 derivative of the $s$ leaf, on an $s$-type root.  The leaf potential is
 $g(r)\cos\theta$, the center derivative of the $s$ potential.  The leading
@@ -308,7 +312,30 @@ $-1.4978$ and amplitude within $1.2\times10^{-8}$ of $1/(3\pi^2)$ (record
 \texttt{docs/predictions/2026-11-16\_paper63\_fibre\_l1.md}, registered
 before computing).  This is attainment for that shape only.  At the $s$ root
 only the $L=0$ channel survives, so no $\ell>0$ density sits at an internal
-vertex and no $L=2$ Gaunt channel is exercised.  For $\ell>0$ densities of degree at
+vertex and no $L=2$ Gaunt channel is exercised.  A second chain exercises both:
+the middle density is also $p_z$, so the source at the middle is
+$f_p\,g\cos^2\theta=f_p\,g\,[\tfrac13+\tfrac23P_2]$, and the root is either the
+$d$ function $h_2(\partial)\,t^3K_0(tr)/(2\pi^2)=t^5K_2(tr)P_2/(2\pi^2)$, on
+which only the $L=2$ channel survives, or
+$(\nabla^2-\tfrac52h_2(\partial))\,t^3K_0(tr)/(2\pi^2)$, whose angular weight
+against $\cos^2\theta$ vanishes, so that the leading $e^{-2x}$ amplitude
+cancels.  The branch is read through the integral $S(\varepsilon)$ of the
+$e^{-2x}$ part of the channel potentials against the root at
+$t=-(2-\varepsilon)$.  From the tails alone (derived before computing), the
+$d$ root gives $\varepsilon^{-3/2}$ with amplitude $1/(12\pi)$ and first
+correction $(1+\tfrac{15}{8}\varepsilon)$;\ with the cancelling root the
+$\varepsilon^{-3/2}$ coefficient is exactly zero and the branch moves by one
+to $\varepsilon^{-1/2}$, amplitude $3/(8\pi)$ and relative $\varepsilon$
+coefficient $-\tfrac38$, in an expansion that also carries odd powers of
+$\sqrt\varepsilon$, whose coefficients are fitted.  The computed exponents are $-1.4993$ and $-0.5046$;\ the
+amplitudes agree within $2.3\times10^{-10}$ and $3.6\times10^{-9}$, and the
+derived $\varepsilon$ coefficients within $3\times10^{-6}$ and $2.5\times10^{-4}$ (record
+\texttt{docs/predictions/2026-11-17\_paper63\_attainment\_l2.md}, registered
+before computing).  The referee's integrand beyond $x=32$ is the derivation's
+own input series;\ a second route integrates the direct integrand from $x=1$
+with no series, agrees with the referee's $S$ to $1.3\times10^{-12}$ relative
+or better at every $\varepsilon$, and its own fits give the same amplitudes.  This too is
+attainment for those shapes only.  For $\ell>0$ densities of degree at
 most two the order of every factor of the fibre is bounded by $n$
 (Proposition~\ref{prop:tree_rung_l});\ that the period sits on the rung of
 $F_n$ is not shown.
@@ -853,7 +880,7 @@ no reduction, agrees within $0.6$ standard errors (relative standard errors
 near $3\times10^{-2}$, so the root swap is the sharper check).  Guard:\ \texttt{tests/test\_paper63\_tree\_rung\_l.py}.
 The proposition bounds the order of every factor;\ the pieces with odd
 $\lambda$ are identified next for $m\le5$, and attainment for $\ell>0$ is shown only for
-the $p_z$-leaf chain above.
+the three shapes above (two chains, one with two roots).
 
 \begin{proposition}[odd pieces carry two-dimensional banana operators]
 \label{prop:odd_banana}
@@ -1987,8 +2014,9 @@ in its exponent and its center, so every molecular integral over such
 orbitals is a derivative of the $1s$ integral of its density graph and lies
 in that integral's $D$-module;\ for $s$-type trees on the one-scale slice its
 holomorphic period sits at or below that integral's rung, and on it for
-$n\le8$ when not identically zero;\ in every $s$-type case computed, and one
-$p_z$-leaf chain, the integral sits on it.  On
+$n\le8$ when not identically zero;\ in every $s$-type case computed the
+integral sits on it, and three $\ell>0$ shapes reach its branch at $t=-2$ (no
+operator computed).  On
 the graph, trees of $n$ linked two-center
 densities share one holomorphic period, a Bessel moment whose one-scale
 operator, for $n=2$ to $5$, is the Legendre operator Hadamard the equal-mass
