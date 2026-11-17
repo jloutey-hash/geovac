@@ -140,3 +140,32 @@ scoring driver imports only `fc_engine`.
 ## Phase 2 (after this record is committed and the commit verified)
 
 `python debug/fc_run.py G1` and `python debug/fc_run.py G2`.
+
+## Results (scored 2026-11-16; record text above unchanged)
+
+The scored runs were launched after commit 378fb8ca was verified. The frozen files show no diff at scoring. Each case
+took about 3 minutes.
+
+**Verdict: GO (FC0, FC1, FC2 held).**
+
+- **FC0 held.**
+  - Relative A-B self-difference: at most 2.4e-23 (G1) and 3.2e-23 (G2) at L = 219..221; at most 7.8e-21 and
+    9.1e-21 at L = 258..260.
+  - |beta_eff A - B| at L = 200, 220, 240: at most 2.1e-20.
+  - Every F_L > 0 in both cases.
+- **FC1 held.** beta_eff(220) is **-4.1226** at G1 (band [-4.661, -3.602]; the 7/2 toy gives -4.128) and **-4.2357**
+  at G2 (band [-4.796, -3.688]; toy -4.236).
+- **FC2 held.** beta_eff(200, 240) is -4.1346, -4.1126 at G1 and -4.2584, -4.2166 at G2.
+
+**Reported, not scored:**
+- beta_eff at L = 20, 40, 60, 80, 100, 120, 160:
+  - G1: -5.190, -4.635, -4.429, -4.326, -4.264, -4.221, -4.167;
+  - G2: -5.836, -5.106, -4.789, -4.611, -4.498, -4.421, -4.320.
+- Free-beta fits (level B, L0 = 130 and 173, K = 3): beta = -3.99998 and -3.99999 at G1; -3.99988 and -3.99993 at
+  G2.
+- Amplitudes on F/rho^L with beta fixed at -4 (unnormalised densities): 0.049602 (G1, the W contact) and 1.1669e-4
+  (G2, the Z contact).
+
+Reading: in both cases the decay follows the toy of a pure (x* - x)^{7/2} branch at the predicted rate, L by L, to
+about 0.005 at L = 220. The free fit lands on -4 to 1e-4. Each contact point, Y-W in G1 and Y-Z in G2, is a 7/2
+branch point. This fills row 7's singular-point column for the slice, numerically; no operator is claimed.
