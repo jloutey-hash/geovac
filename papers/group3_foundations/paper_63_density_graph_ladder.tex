@@ -46,7 +46,7 @@ that integral's $D$-module.  For a tree of $s$-type densities on its
 one-scale slice the holomorphic period is a differential operator applied to
 the $1s$ one, so it sits at or below the $1s$ rung, and for $n\le8$, when it
 is not identically zero, on it.  \textbf{[MEASURED]} In every case computed,
-all with $s$-type densities, a general-orbital integral sits on that rung;\ one chain with $p_z$ leaves reaches it (for $\ell>0$ the bound is unshown).  \textbf{[SYMBOLIC + MEASURED]} On the graph the
+all with $s$-type densities, a general-orbital integral sits on that rung;\ one chain with $p_z$ leaves reaches it (for $\ell>0$ densities of degree at most two only the order of each factor of the fibre is bounded).  \textbf{[SYMBOLIC + MEASURED]} On the graph the
 rung is read off the holomorphic period.  Any tree of $n$ linked
 two-center densities has the same period, a Bessel moment in $n$ scales;\
 its one-scale family is annihilated by an operator of order $n$, which for
@@ -291,8 +291,9 @@ scales, where derivatives in those parameters need not stay in the
 one-parameter module of the restricted $1s$ function.  For a tree of $s$-type
 densities on its one-scale slice the next proposition bounds the holomorphic
 period, not the fibre, and on that slice proves attainment for $n\le8$ when
-the period is not identically zero;\ for rings, for $\ell>0$ (one shape excepted, below), on other slices
-and for the fibre itself neither the bound nor attainment is shown.
+the period is not identically zero;\ for rings, for $\ell>0$ (one shape excepted, below) and on other slices
+neither the bound nor attainment is shown, and for the fibre of a tree with Coulomb kernels only the order of
+every composition factor is bounded (Propositions~\ref{prop:tree_rung} and~\ref{prop:tree_rung_l}).
 \textbf{[SYMBOLIC + MEASURED]} One $\ell>0$ shape reaches its rung.  Take a
 chain of three whose two leaves are $p_z$ densities, each the center
 derivative of the $s$ leaf, on an $s$-type root.  The leaf potential is
@@ -306,8 +307,10 @@ $-1.4978$ and amplitude within $1.2\times10^{-8}$ of $1/(3\pi^2)$ (record
 \texttt{docs/predictions/2026-11-16\_paper63\_fibre\_l1.md}, registered
 before computing).  This is attainment for that shape only.  At the $s$ root
 only the $L=0$ channel survives, so no $\ell>0$ density sits at an internal
-vertex and no $L=2$ Gaunt channel is exercised.  The bound for $\ell>0$
-remains unshown.
+vertex and no $L=2$ Gaunt channel is exercised.  For $\ell>0$ densities of degree at
+most two the order of every factor of the fibre is bounded by $n$
+(Proposition~\ref{prop:tree_rung_l});\ that the period sits on the rung of
+$F_n$ is not shown.
 
 \begin{proposition}[the tree bound]
 \label{prop:tree_bound}
@@ -773,6 +776,84 @@ of $F_k$, $k\le n$, and pieces of order one, inside the bound;\ none comes from
 an odd moment.  Guard:\ \texttt{tests/test\_paper63\_tree\_rung.py}.  The
 proposition bounds the fibre;\ that the piece of $F_n$ is present is computed
 for $n=3,4$ and proved next for stars of up to eight densities.
+
+\begin{proposition}[the rung bound for $\ell>0$ densities]
+\label{prop:tree_rung_l}
+Let each density of the tree of Proposition~\ref{prop:tree_rung} be the
+fingerprint weight differentiated in its center and its scale,
+$\rho_v=P_v(\partial,\partial_{a_v})\,a_v^3K_0(a_vr)/(2\pi^2)$ with $P_v$ a
+polynomial, at the fibre, with Coulomb kernels, on the slice
+$(t;1,\dots,1)$, with every $P_v$ of degree at most two in $\partial$ (any
+degree in $\partial_{a_v}$).  Then the conclusion of
+Proposition~\ref{prop:tree_rung} holds unchanged:\ every composition factor of
+the minimal operator of the fibre is of order one or is a composition factor
+of $\phi(L_m(\theta-\lambda))$ for some $0\le m\le n-1$ and integer
+$\lambda$, so it has order at most $n$.
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF]} Three steps of the proof of
+Proposition~\ref{prop:tree_rung} change, and each stays inside its modules.
+\emph{The densities.}  Write $P_v$ as a sum of terms
+$\partial_{a_v}^i\nabla^{2j}h_\ell(\partial)$ with $h_\ell$ harmonic;\ by Hobson's theorem
+$h_\ell(\partial)f(r)=h_\ell(\bm r)\,(r^{-1}d/dr)^\ell f$, and
+$\nabla^2f=r^{-2}\theta(\theta+1)f$ for radial $f$.  Since
+$r^{-1}d/dr=r^{-2}\theta$, every radial part of $\rho_v$ lies in
+$\bigoplus_\lambda r^{\lambda}B$, $\lambda\in\mathbb{Z}$:\ one Bessel factor,
+twisted by an integer power.  \emph{The kernels.}  Expand each Coulomb kernel
+in multipoles.  The channel-$L$ potential of a radial part $W$ is
+$\Phi_LW=\tfrac{4\pi}{2L+1}\int_0^\infty r_<^L r_>^{-L-1}W(s)\,s^2ds$, and the
+radial Poisson equation becomes $(\theta-L)(\theta+L+1)\,\Phi_LW=-4\pi r^2W$.
+So $\Phi_LW$ lies in $r^2N_W+\mathcal{A}\,\Phi_LW$ with a quotient killed by
+$(\theta-L)(\theta+L+1)$:\ pieces of order one, $r^{L}$ and $r^{-L-1}$
+times $\mathrm{Sym}^0B$.  At a vertex the angular factors multiply and
+re-expand by Gaunt coefficients into finitely many channels;\ the radial part
+of each channel is a finite sum of products, with constant coefficients, of
+the radial parts and potentials met there.  The tensor-product step is the
+same, with $r^{\lambda_1}\mathrm{Sym}^aB\otimes r^{\lambda_2}\mathrm{Sym}^bB=
+r^{\lambda_1+\lambda_2}(\mathrm{Sym}^aB\otimes\mathrm{Sym}^bB)$, and each
+density still brings one Bessel factor.  \emph{The root.}  The angular
+integral at the root pairs each channel of $H$ with the matching channel of
+the root density, whose radial part is
+$\sum(tr)^{\lambda}q\bigl((tr)^2,\theta\bigr)K_0(tr)$.  A function of $tr$
+obeys $\theta_r=\theta_t$ and $(tr)^2K_0(tr)=\theta_t^2K_0(tr)$, so each term
+is $E_t\,T(r^{\mu}g)$ with $E_t$ an operator in $t$ with Laurent-polynomial
+coefficients, $\mu\in\mathbb{Z}$ and $g$ in the module.  Applying $E_t$ and
+adding functions give quotients and subquotients of direct sums, which add no
+composition factors.  The integrations by parts need their boundary terms to
+vanish at $0$.  Take the modules generated by the functions themselves,
+$\mathcal{A}\rho_v$ and $\mathcal{A}\,\Phi_LW$, which are submodules of the
+twisted Bessel modules above and so have no new composition factors.
+Every function met has an expansion $\sum c\,r^\alpha\log^jr$ at $0$ (the
+Bessel series, which $\Phi_L$ integrates termwise), and multiplication by
+$r^2$ and $\theta$ do not lower its leading power, so every function in these
+modules is as regular at $0$ as its generator.  At degree at most two the
+twists are $r^{-1}\theta$ ($\ell=1$), $r^{-2}(\theta-2)\theta$ ($\ell=2$) and
+$r^{-2}\theta(\theta+1)$ ($\nabla^2$), so a density is $O(r^{-2}\log r)$ and
+the root's terms have $\mu\ge-2$ one by one;\ by the integral for $\Phi_LW$ a
+potential of such a source is $O(\log^{k+1}r)$ for $L=0$ and $O(\log^kr)$ for
+$L\ge1$.  By induction from the leaves every function in the module of
+$r^{\mu}H$ is $O(\log^{k'}r)$, since $H$ carries the root's $r^2$, so
+$r\,K_0(tr)\,r^{\mu}g(r)\to0$.  At
+infinity the density factors decay exponentially, as before.
+\textbf{[MEASURED]} The three new identities hold numerically:\ the
+channel-$L$ Poisson equation for $L=1,2$ with sources $K_0K_1$ and
+$r^{-1}K_1^2$ at three radii (to $6\times10^{-17}$, the precision of the
+finite-difference check), Hobson's theorem for $r^2P_2$ applied to $K_0$ at an
+off-axis point (to $4\times10^{-31}$), and the transfer for a $d$-type root,
+$b(\rho)=K_0+2K_1/\rho$, whose integral equals
+$t^{-2}(\theta_t-2)\theta_t\,T(r^{-2}g)$ at three scales (to $4\times10^{-19}$).
+The reduction itself is checked on a chain that exercises an internal $\ell>0$
+density and an $L=2$ channel:\ a $p_z$ leaf, a $p_z$ middle density and a root
+$(\partial_z^2-\tfrac12\partial_x^2-\tfrac12\partial_y^2)\,t^3K_0(tr)/(2\pi^2)$.
+Rooted at either end, through different Gaunt coefficients, the radial
+recursion agrees to $10^{-15}$ at $t=0.5$ and $1.3$, and a Monte Carlo
+evaluation of the full nine-dimensional integral, $4\times10^7$ samples with
+no reduction, agrees within $0.6$ standard errors (relative standard errors
+near $3\times10^{-2}$, so the root swap is the sharper check).  Guard:\ \texttt{tests/test\_paper63\_tree\_rung\_l.py}.
+The proposition bounds the order of every factor;\ as in
+Proposition~\ref{prop:tree_rung}, pieces with odd $\lambda$ are bounded but not
+identified with the operators of $F_k$, and attainment for $\ell>0$ is shown
+only for the $p_z$-leaf chain above.
 
 \begin{proposition}[stars reach their rung]
 \label{prop:star_attain}
@@ -1720,7 +1801,8 @@ numerical annihilation and a search modulo a prime, and at $n=4$ by
 numerical annihilation and bounded searches;\ for every $n$, at the
 fingerprint weights with Coulomb kernels, its composition factors have order
 at most $n$ and come from the moments of at most $n$ Bessel functions
-(Proposition~\ref{prop:tree_rung}), which is the order bound of ``nothing above
+(Proposition~\ref{prop:tree_rung}, and Proposition~\ref{prop:tree_rung_l} for center derivatives of
+degree at most two), which is the order bound of ``nothing above
 it'' in part (i) there;\ the piece of $F_n$ is present for stars of up to eight densities (Proposition~\ref{prop:star_attain}), and for other trees with $n\ge5$ it
 is not shown.  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
