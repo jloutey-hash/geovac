@@ -1,0 +1,30 @@
+{
+ "2psig_1_2": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "2.04e-54",
+  "ref_tau12_vs_16": "3.31e-38",
+  "pass_1e-35": true,
+  "time_s": 797.7
+ },
+ "2psig_2_1": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "7.88e-54",
+  "ref_tau12_vs_16": "1.26e-37",
+  "pass_1e-35": true,
+  "time_s": 791.4
+ },
+ "2ppi_1_2": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "7.29e-55",
+  "ref_tau12_vs_16": "1.19e-38",
+  "pass_1e-35": true,
+  "time_s": 223.2
+ },
+ "2ppi_2_1": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "2.92e-54",
+  "ref_tau12_vs_16": "4.78e-38",
+  "pass_1e-35": true,
+  "time_s": 183.3
+ }
+}

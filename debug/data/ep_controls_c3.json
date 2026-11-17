@@ -1,0 +1,22 @@
+{
+ "2psig_1_1": {
+  "valuation_check": true,
+  "taus": 4,
+  "time_s": 3.9
+ },
+ "2psig_1_2": {
+  "valuation_check": true,
+  "taus": 227,
+  "time_s": 488.4
+ },
+ "2ppi_1_1": {
+  "valuation_check": true,
+  "taus": 3,
+  "time_s": 4.2
+ },
+ "2ppi_1_2": {
+  "valuation_check": true,
+  "taus": 226,
+  "time_s": 175.1
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "2psig_1_1": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "2psig_1_2": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "2ppi_1_1": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "2ppi_1_2": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ }
+}

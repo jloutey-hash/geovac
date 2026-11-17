@@ -1,0 +1,24 @@
+{
+ "1s_1_1": {
+  "order": 4,
+  "degree": 8,
+  "first_hit": {
+   "r": 4,
+   "d": 8,
+   "nullity": 1
+  },
+  "equals_frozen_EXS_coeffs_mod_p": true,
+  "time_s": 4.9
+ },
+ "1s_1_2": {
+  "order": 9,
+  "degree": 16,
+  "first_hit": {
+   "r": 9,
+   "d": 16,
+   "nullity": 1
+  },
+  "equals_frozen_EXS_coeffs_mod_p": true,
+  "time_s": 168.8
+ }
+}

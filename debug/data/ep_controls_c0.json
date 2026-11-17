@@ -1,0 +1,23 @@
+{
+ "modp_N450_1_1": {
+  "identical": true,
+  "val_ep": true,
+  "val_exch": true,
+  "time_s": 6.3
+ },
+ "modp_N450_1_2": {
+  "identical": true,
+  "val_ep": true,
+  "val_exch": true,
+  "time_s": 286.1
+ },
+ "modp_N450_1_3/2": {
+  "identical": true,
+  "val_ep": true,
+  "val_exch": true,
+  "time_s": 316.9
+ },
+ "Q_N60_1_3/2": {
+  "identical": true
+ }
+}

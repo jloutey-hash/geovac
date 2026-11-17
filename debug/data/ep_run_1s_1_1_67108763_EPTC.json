@@ -1,0 +1,249 @@
+{
+ "pair": [
+  "1",
+  "1"
+ ],
+ "prime": 67108763,
+ "N": 450,
+ "generator": {
+  "time_s": 4.1,
+  "taus": 3,
+  "valuation_check": true
+ },
+ "RMAX": 14,
+ "DMAX": 60,
+ "HOLD": 40,
+ "components": [
+  "1*lnR^0",
+  "1*lnR^1",
+  "g*lnR^0",
+  "l2*lnR^0"
+ ],
+ "components_dropped_as_duplicates": [
+  "g*lnR^0"
+ ],
+ "equations_per_order": 3,
+ "effective_box": {
+  "N": 450,
+  "HOLD": 40,
+  "MARGIN": 50,
+  "d_box_by_r": {
+   "1": 60,
+   "2": 60,
+   "3": 60,
+   "4": 60,
+   "5": 60,
+   "6": 60,
+   "7": 60,
+   "8": 60,
+   "9": 60,
+   "10": 60,
+   "11": 60,
+   "12": 60,
+   "13": 60,
+   "14": 60
+  },
+  "max_r_testable": 14
+ },
+ "scan": [
+  {
+   "r": 1,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 2,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 3,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 4,
+   "d_box": 60,
+   "hit": true,
+   "d": 8,
+   "nullity": 1,
+   "nullity_fit": 1,
+   "accepted": true
+  }
+ ],
+ "scan_time_s": 0.7,
+ "first_hit": {
+  "r": 4,
+  "d": 8,
+  "nullity": 1
+ },
+ "gcrd_inputs": [
+  {
+   "r": 5,
+   "d": 5,
+   "nullity": 1
+  },
+  {
+   "r": 6,
+   "d": 4,
+   "nullity": 1
+  }
+ ],
+ "minimal_operator": {
+  "order": 4,
+  "degree": 8,
+  "coeff_degrees": [
+   7,
+   8,
+   8,
+   8,
+   8
+  ],
+  "annihilates_all_complete_rows": true,
+  "coeffs_mod_p": [
+   [
+    0,
+    50332281,
+    33555799,
+    33555934,
+    1035,
+    432,
+    144,
+    24
+   ],
+   [
+    33555394,
+    2025,
+    33556339,
+    1215,
+    33554899,
+    123,
+    67108727,
+    67108723,
+    67108755
+   ],
+   [
+    0,
+    46137148,
+    25165533,
+    50331201,
+    67108358,
+    33554044,
+    67108577,
+    67108715,
+    67108759
+   ],
+   [
+    0,
+    0,
+    46137148,
+    25165533,
+    58719937,
+    16777067,
+    67108733,
+    4,
+    2
+   ],
+   [
+    0,
+    0,
+    0,
+    14680063,
+    29360126,
+    58720207,
+    33554404,
+    33554389,
+    1
+   ]
+  ]
+ },
+ "finite_nonzero_points": [
+  {
+   "factor_degree": 5,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "root of degree-5 factor",
+   "verdict": "exponents_only: apparent-type"
+  }
+ ],
+ "R0": {
+  "fuchsian": true,
+  "indicial_degree": 4,
+  "exponents": [
+   [
+    "0",
+    1
+   ],
+   [
+    "-1",
+    1
+   ],
+   [
+    "9",
+    1
+   ],
+   [
+    "4",
+    1
+   ]
+  ],
+  "exponents_not_in_Fp": 0,
+  "log_free_local_solutions": 3,
+  "f_log_components": {
+   "1*lnR^1": {
+    "nonzero": true,
+    "lowest_k": 9,
+    "coeff_mod_p": 54860171,
+    "coeff_ratrec": "8/3375"
+   }
+  },
+  "f_has_lnR": true
+ },
+ "infinity": {
+  "coeff_degrees": [
+   7,
+   8,
+   8,
+   8,
+   8
+  ],
+  "rank_le_1": true,
+  "edge_degree": 4,
+  "rates": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ],
+  "rates_unsplit_degree": 0
+ },
+ "total_time_s": 5.1
+}
