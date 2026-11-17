@@ -1173,11 +1173,27 @@ registration before the third was written, frozen by hash and read only after it
 \texttt{docs/predictions/2026-11-15\_aa\_bc\_d\_mneq0.md},
 \texttt{docs/predictions/2026-11-16\_aa\_bc\_d\_mneq0\_2.md} and
 \texttt{docs/predictions/2026-11-16\_aa\_bc\_d\_mneq0\_2b.md}, each registered before computing).
+\textbf{[MEASURED]} The rest of the $3d$ shell on A follows the same rule.  Take the axis $z'$ along
+B--A, $x'$ in the plane of the centers and $y$ out of it, and pair each of the four $m\neq0$
+functions with itself:\ $3d_{z'x'}$ and $3d_{x'^2-y^2}$ lie in the plane, while $3d_{z'y}$ and
+$3d_{x'y}$ carry the out-of-plane axis.  Each integral is
+$\sum_\ell[f^{(0)}_\ell P_\ell(x)+f^{(m)}_\ell P_\ell^{m}(x)]$, with $m=2$ for $3d_{z'x'}$, $3d_{z'y}$ and
+$m=4$ for $3d_{x'y}$, $3d_{x'^2-y^2}$.  The values agree with the Gaussian-fit referee (differences at
+most $2.8\times10^{-13}$, tolerance $10^{-10}$) at two angles per geometry, and every coefficient
+from $\ell=2$ to $\ell=1000$ uses the same $21$ constants (modulo two primes).  Re-expanded in
+$P_\ell$, the two in-plane totals keep $(x^{*}-x)^{7/2}$ (effective exponents at $\ell=220$:\ $-4.18$,
+$-4.14$ and $-4.30$, $-4.24$).  The two out-of-plane totals cancel to $(x^{*}-x)^{9/2}$ ($-5.14$,
+$-5.10$ and $-5.29$, $-5.23$), as the $2p_y$ argument predicts for any harmonic that carries the
+out-of-plane axis (derived before computing).  The same argument gives the ratio of the parts'
+leading amplitudes as $x^{*2}-1$ for $m=2$ and $-(x^{*2}-1)^2$ for $m=4$.  At $\ell=220$ the
+measured ratios are $1.10$ and $1.08$ times the first, and $1.17$ and $1.13$ times the second
+(record \texttt{docs/predictions/2026-11-16\_aa\_bc\_a\_side\_d\_mneq0.md}, registered before
+computing).  With $3d_\sigma$, all five $3d$ functions on A are covered.
 Caps:\
 one $2p_z$, one in-plane $2p_x$ or one $3d$ function of any $m$ at C, or a $2p\sigma$, $2p_\pi$ or
-$3d_\sigma$ pair at A;\ two
+$3d$ pair (any $m$, each function paired with itself) at A;\ two
 geometries (four at equal arms), two primes;\ the constants are assumed linearly independent over
-$\overline{\mathbb{Q}}$;\ $d$ functions with $m\neq0$ on A and exchange
+$\overline{\mathbb{Q}}$;\ exchange
 integrals beyond $1s$ are not covered, and the degree-$l$ pattern is derived for $l\le2$
 (tested at equal arms for $m=0$, $l\le2$, at four geometries;\ the $m\neq0$ equal-arm case is
 derived, untested), argued beyond, and untested beyond.
