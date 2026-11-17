@@ -1059,9 +1059,14 @@ integral:\ the combined coefficients decay like $\ell^{-4}$ (effective exponent 
 $\ell=220$) while each piece alone decays like $\ell^{-2}$, so the leading term is
 $(x^{*}-x)^{7/2}$.  Silverstone gave this integral as a Legendre series with each term in
 closed form~\cite{silverstone1967pnas};\ the fixed constant set and the cancellation are
-new.  One registered clause failed:\ the bond-angle operator, of order
-$17$, has further singular points that move with $\zeta_{\rm A}$ and no $5/2$ exponent at
-$x^{*}$.  The screened components leave the two-center class on their own, as functions of
+new.  One registered clause failed:\ the bond-angle operator has further singular points
+that move with $\zeta_{\rm A}$, and $x^{*}$ has no $5/2$ exponent.  Its minimal operator,
+modulo two primes at both geometries, has order $14$ (an operator of order $17$ found first
+is a left multiple of it);\ its only non-integer exponents are $3/2$, $7/2$ and $9/2$ at
+$x^{*}$, and the points that move with $\zeta_{\rm A}$ have integer exponents and a forced
+logarithm (record \texttt{docs/predictions/2026-11-17\_aa\_bc\_minimal\_operator.md},
+registered before computing;\ guard
+\texttt{tests/test\_paper59\_aa\_bc\_minimal\_operator.py}).  The screened components leave the two-center class on their own, as functions of
 the angle:\ the test was first undecided, because four exponential rates, the roots of
 $\lambda^4-\tfrac{51}{20}\lambda^2+\tfrac{81}{25}$, do not split modulo its two primes;\ on two
 further primes in which they split, all fifteen stop with no factor peeled and pass the
