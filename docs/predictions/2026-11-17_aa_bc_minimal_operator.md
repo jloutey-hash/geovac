@@ -143,3 +143,36 @@ Environment: Python 3.14.0, python-flint 0.9.0, mpmath 1.3.0.
 ## Phase 2 (after this record is committed and the commit verified)
 
 The commands under Predictions, in parallel pairs (~40 min).
+
+## Results (scored 2026-11-17; record text above unchanged)
+
+The scored run was launched after commit 56f10c90 was verified; the frozen files' sha256 match. Four runs (A1, A2 x two
+primes), about 17 min (A1) and 27 min (A2) each.
+
+**Verdict: GO (MO0, MO1, MO2, MO3 held; no VOID flag; MO4 reported).**
+
+- **MO0 held.** Controls T1-T7, div and N3 pass on both primes. In every run the minimal operator has **order 14,
+  degree 111**, at both cases, both weights, both primes, base and shift; AB's search gives order 17, degree 48 at both
+  cases and is right-divisible by it; x* is a weight-fixed point with a non-integer exponent at base and shift.
+- **MO1 held (A2, fresh).** The only finite point with a non-integer exponent is x* = 89/80, identically under both
+  weights: exponents 0..10 and 3/2, 7/2, 9/2 (mod 1 {0, 1/2}). A1 reads the same at 125/117.
+- **MO2 held.** n_moving = 4, 2 (A1, the two primes) and 2, 4 (A2). Every moving point is linear with exponents
+  {-3, 0, 1, ..., 12} (integers, one forced logarithm). The one fixed extra point has lowest exponent -2 (A2: 2509/1980
+  on both primes).
+- **MO3 held.** Every genuine point is carried by some piece of the right class. The moving points are carried by the
+  zeta_A-carrying pieces (the E1, ln and exponential components sharing one exponential prefactor); x* by mu-free and
+  mu-carrying exponential pieces.
+- **MO4 (reported).** Per-piece carried degrees agree between primes at A1, not at A2.
+
+Readings, not scored:
+- Positions are mod-p roots. Where the driver printed a rational it is a reconstruction on one prime: A1's fixed -2 point
+  reads 20665/15246 on one prime and 21025/14886 on the other, so it is not a small-height rational (A2's 2509/1980
+  agrees on both). The moving points are likewise read mod p.
+- The count of moving points differs between primes (4 vs 2). The plausible reading is that the -3 points are roots of
+  factors of degree above 1 over Q that split on one prime and not the other; unsplit, they are class I and excluded
+  (the cap stated above). The MO4 mismatch at A2 fits the same reading. Neither is measured further here.
+
+Reading: the minimal bond-angle operator of (AA|BC) at both geometries has order 14; its only non-integer exponents are
+at x* (3/2, 7/2, 9/2); the points that move with zeta_A are logarithmic points with integer exponents. The non-integer
+"moving" points of AB's order-17 operator came from its non-minimal left factor (weight-dependent). For the paper and
+the inventory, see "What a GO would change": these go to the PI.
