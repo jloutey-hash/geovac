@@ -7,6 +7,90 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.34] - 2026-11-16
+
+**The owed chemistry list worked down (autonomous loop; EXb and the row-7 route PI-approved). Five pre-registered
+records: AY GO (m != 0 d pairs on A), EX VOID then EXb GO (1s exchange at unequal exponents obeys an order-9
+operator), FC GO (four-centre contact branch points), P63L1 GO (a p_z-leaf chain reaches its rung). Guards for all,
+fire-tested as separate passes.**
+
+### Added
+- Record AY (`docs/predictions/2026-11-16_aa_bc_a_side_d_mneq0.md`, registered e6ecf9cb; scored f2daec7b). The four
+  m != 0 3d pairs on A against 1s_B 1s_C. **GO:**
+  - P0: 3000 vs 3600 digits agree exactly.
+  - P1: within 2.8e-13 of R2 at all 16 points.
+  - P2: AB's 21 constants to L = 1000 at both primes, no gamma.
+  - P3: beta_eff(220) is -4.14..-4.30 for the even totals (7/2) and -5.10..-5.29 for the odd totals (9/2, cancelling
+    as predicted).
+  - P4: amplitude ratios 1.08-1.17 x the derived limits.
+
+  With AS's DA, all five 3d functions on A are covered.
+- Records EX (`docs/predictions/2026-11-16_exchange_unequal_zeta.md`, registered 8676692c; scored 384e2bdb) and EXb
+  (`..._b.md`, PI-approved, registered b0db8bc7).
+  - EX was **VOID**: CRT + rational reconstruction of the (1, 3/2) operator failed with four primes (2^103). Every
+    mod-p clause held at both pairs, and (1, 2) was certified.
+  - EXb ran the frozen driver on 32 primes (all accepted; determinism and reconstruction ladder stable; heights 52/26
+    bits): **GO**.
+  - Exact residual zero on 121 unused orders; third prime passes; numeric 3.7e-91 and 7.9e-88 vs `exchange_hp`;
+    R^9 ln R exactly 9/500.
+  - **EX + EXb = GO for row 3c.** At (1, 3/2) and (1, 2) the operator has order 9 and degree 16. Finite points are
+    apparent. R = 0 exponents are {-1 x2, 0, 1, 2, 3, 4, 6, 9}, with (8/3375) a^5 b^5 R^9 ln R. Rates are -(a+b), 2a,
+    2b, 0, -2a, -2b, with no a - b rate.
+  - Cold reviews: EX had 2 MUST-FIX (heldout rank, frozen outputs); EXb had 3 MUST-FIX (instrument outcomes mapped
+    to STOP/BORDERLINE).
+- Record FC (`docs/predictions/2026-11-16_four_centre_branch_points.md`, registered 378fb8ca; scored 32c5353c). Row 7,
+  PI-chosen numeric route. (XY|ZW) with X, Z, W collinear on one ray and the ray turning against XY.
+  - **GO:** each moving contact (Y-W in G1, Y-Z in G2) is a (x* - x)^{7/2} branch point.
+  - beta_eff(220) is -4.123 / -4.236 against 7/2 toys of -4.128 / -4.236; the free fit gives -4.000.
+  - Engine `debug/fc_engine.py` (arb). Its three-centre limit reproduces AB's exact coefficients to 1.1e-28
+    (L <= 30), and beta_eff to 4e-16 at L <= 220 (K4ext, added after the cold review).
+- Record P63L1 (`docs/predictions/2026-11-16_paper63_fibre_l1.md`, registered e87c1af8; scored 9a6f2f89). A chain of
+  three with p_z leaves (centre derivatives of the s leaf) on an s root.
+  - The L = 1 leaf tail's leading r^{1/2} e^{-r} terms cancel, and sqrt(2/pi) r^{-1/2} e^{-r} survives. The derived
+    branch at t = -2 is eps^{-3/2}, amplitude 1/(3 pi^2), kappa = 47/8.
+  - **GO:** slope -1.4978; amplitude to 1.2e-8; kappa to 5e-5.
+  - Scope: s root, L = 0 channel only; the l > 0 rung bound unshown.
+- Guards (separate passes, sub-agents; the PM re-fired one plant of each):
+  - `tests/test_paper59_aa_bc_a_side_d_mneq0.py` (16 fast + 6 slow, 24/24);
+  - `tests/test_paper63_four_centre_branch_points.py` (10 + 2, 30/34; the four non-firing plants are precision
+    margin or no-ops, recorded);
+  - `tests/test_paper63_fibre_l1.py` (21 + 1, 27/28);
+  - `tests/test_paper58_exchange_unequal.py` (22 fast + 5 slow, 26/28; the two non-firing plants are a symmetric swap and an overall scale, caught elsewhere).
+
+### Changed
+- Paper 59 `sec:scope`: a [MEASURED] paragraph on the m != 0 3d pairs on A, using the reflection-parity criterion
+  (odd in y cancels to 9/2). Caps now cover any 3d pair on A.
+- Paper 58: a [MEASURED] paragraph on exchange at unequal exponents; Caps updated. The abstract's "regression test
+  OWED" for the LiH 30-digit value was stale since v6.7.33 and is now fixed.
+- Paper 63:
+  - `sec:four_centre`: a [MEASURED] paragraph on the two contact branch points.
+  - `sec:dictionary`: a [SYMBOLIC + MEASURED] paragraph on the p_z-leaf chain.
+  - The "all s-type" summary loci in the abstract and introduction, and the l > 0 cap sentence, are updated to match.
+- Pre-checkpoint claims review of the four edited units: 0 LARGE, 6 SMALL, 6 NIT, all applied. The SMALLs were:
+  - P59's "out-of-plane axis" criterion, wrong for 3d_x'2-y2;
+  - P58's "no closed form", which contradicted the paper's own table;
+  - P58's 1e-87, where the worst case is 4.2e-82;
+  - P63's l > 0 cap, which contradicted the new paragraph;
+  - P63's stale "all s-type";
+  - P58's missing mod-p cap.
+
+  Round 2 found 1 LARGE, which round 1's own fix introduced. The P63 abstract and introduction said the p_z chain
+  "sits on" the rung, which is stronger than the owner's attainment-only tier. It is now restated with the owner
+  wording, scoped to s-type at three loci. Two NITs were also applied. The review stopped at two rounds, as the
+  rule requires.
+- `docs/chemistry_period_inventory.md`:
+  - row 3c: operator and singular points MET for 1s at two unequal pairs;
+  - row 6: the mu-moving points are reworded as LCLM pieces [ARGUMENT]; the mu scan was judged poor value, and the
+    S1 per-piece test is on offer;
+  - row 7: singular points PARTIAL (FC); the exact recurrence needs the matched-exponent slice (PI call);
+  - row 8: m != 0 d on A closed, and the l > 0 fibre is attained for one shape.
+- Claim-test matrix rows for AY, FC, P63L1 and EX.
+
+### Owed
+- Row 7 exact recurrence: only the matched-exponent slice zW/zZ = sqrt(a/b) is exact (design pass); PI call.
+- Row 6 S1 per-piece singular-point test (about 1 h), if the cell should read MET.
+- Exchange beyond 1s (l > 0 orbitals); the l > 0 rung bound in Paper 63.
+
 ## [v6.7.33] - 2026-11-16
 
 **Three owed chemistry items closed (autonomous loop; AX amendments PI-directed): row 4's undecided geometry
