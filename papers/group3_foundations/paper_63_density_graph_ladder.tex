@@ -291,8 +291,10 @@ one-parameter module of the restricted $1s$ function.  For a tree of $s$-type
 densities on its one-scale slice the next proposition bounds the holomorphic
 period, not the fibre, and on that slice proves attainment for $n\le8$ when
 the period is not identically zero;\ for rings, for $\ell>0$ (one shape excepted, below) and on other slices
-neither the bound nor attainment is shown, and for the fibre of a tree with Coulomb kernels only the order of
-every composition factor is bounded (Propositions~\ref{prop:tree_rung} and~\ref{prop:tree_rung_l}).
+neither the bound nor attainment is shown, and for the fibre of a tree with Coulomb kernels every composition factor of
+order above one is a factor of the operator of some $F_k$, $k\le n$, or, for
+$n\le7$, of a banana operator $V_m$, $m\le n-2$ (Propositions~\ref{prop:tree_rung},
+\ref{prop:tree_rung_l} and~\ref{prop:odd_banana}).
 \textbf{[SYMBOLIC + MEASURED]} One $\ell>0$ shape reaches its rung.  Take a
 chain of three whose two leaves are $p_z$ densities, each the center
 derivative of the $s$ leaf, on an $s$-type root.  The leaf potential is
@@ -849,10 +851,69 @@ recursion agrees to $10^{-15}$ at $t=0.5$ and $1.3$, and a Monte Carlo
 evaluation of the full nine-dimensional integral, $4\times10^7$ samples with
 no reduction, agrees within $0.6$ standard errors (relative standard errors
 near $3\times10^{-2}$, so the root swap is the sharper check).  Guard:\ \texttt{tests/test\_paper63\_tree\_rung\_l.py}.
-The proposition bounds the order of every factor;\ as in
-Proposition~\ref{prop:tree_rung}, pieces with odd $\lambda$ are bounded but not
-identified with the operators of $F_k$, and attainment for $\ell>0$ is shown
-only for the $p_z$-leaf chain above.
+The proposition bounds the order of every factor;\ the pieces with odd
+$\lambda$ are identified next for $m\le5$, and attainment for $\ell>0$ is shown only for
+the $p_z$-leaf chain above.
+
+\begin{proposition}[odd pieces carry two-dimensional banana operators]
+\label{prop:odd_banana}
+In Propositions~\ref{prop:tree_rung} and~\ref{prop:tree_rung_l}:
+(i) a piece with odd $\lambda$ arises only through an odd number of exterior
+multipole tails $r^{-L-1}$, so it carries at most $n-2$ Bessel factors, and every
+piece with $m=n-1$ has even $\lambda$;
+(ii) the composition factors of order above one of
+$\phi(L_m(\theta-\lambda))$ depend only on the parity of $\lambda$;\ for even
+$\lambda$ they are those of $\phi(L_m)$, the operator of $F_{m+1}$, for every
+$m$;
+(iii) for odd $\lambda$ and $m\le1$ there are none, and for $2\le m\le5$ they are those of $V_m(s=t^2)$,
+Vanhove's operator for the equal-mass two-dimensional banana integral with $m$
+propagators~\cite{vanhove2014}, of order $m-1$.
+So for $n\le7$ a piece with odd $\lambda$ has factors of order above one only
+for $n\ge5$, and then of order at most $n-3$.
+\end{proposition}
+
+\textbf{[SYMBOLIC PROOF]} (i) Track $\lambda$ modulo two through the proof of
+Proposition~\ref{prop:tree_rung_l}.  A term
+$\partial_{a}^i\nabla^{2j}h_\ell(\partial)$ of a density has radial parts in
+$r^{-\ell}\,\mathbb{C}[\theta]\,B$, and $\nabla^2=r^{-2}\theta(\theta+1)$ and
+$a\partial_a=\theta$ keep the parity, so $\lambda\equiv\ell$.  Gaunt
+coefficients vanish unless $L\equiv\ell_v+\sum_wL_w$, the sum over the incoming channels, and products add twists, so in
+every channel $\lambda\equiv L$.  A potential $\Phi_LW$ lies in $r^2N_W$, which
+keeps the parity, plus the order-one pieces $r^{L}$ (parity kept) and
+$r^{-L-1}$ (parity flipped);\ each order-one piece replaces the Bessel content
+of a whole subtree by a power, so it removes at least one Bessel factor.  The
+root pairs channel $L$ with its own radial part $r^{-\ell_0}$, $\ell_0\equiv L$,
+and $H$ carries $r^2$, so without a flip the total twist is even.
+(ii) From $r^2L_m(\theta-\lambda)=L_m(\theta-\lambda-2)r^2$ the operator
+$U=t^{-2}\theta_t^2$ satisfies
+$\phi(L_m(\theta-\lambda-2))\,U=U\,\phi(L_m(\theta-\lambda))$, so $[1]\mapsto[U]$
+maps $\mathcal{D}_t/\mathcal{D}_t\phi(L_m(\theta-\lambda-2))$ to
+$\mathcal{D}_t/\mathcal{D}_t\phi(L_m(\theta-\lambda))$ with a cokernel that is a
+quotient of $\mathcal{D}_t/\mathcal{D}_t\theta_t^2$, whose factors have order
+one.  The adjoint relation gives the map between the dual modules in the
+other direction, with the same kind of cokernel, and dualizing reverses it.  So
+the factors of order above one agree for $\lambda$ and $\lambda+2$.  This
+removes the irreducibility hypothesis of the even case of
+Proposition~\ref{prop:tree_rung} from its statement about factors, though not
+from its statement of equivalence.
+(iii) For $m\le1$ the odd moment is elementary,
+$\int_0^\infty xI_0(tx)K_0(x)\,dx=1/(1-t^2)$, and all factors have order one.  By the transfer rules with $K_0(tr)$ replaced by $I_0(tr)$, which obeys
+the same equation in $\theta$, $\phi(L_m(\theta-1))$ annihilates
+$\int_0^\infty xI_0(tx)K_0(x)^m\,dx$ for $|t|<m$, which up to the factor
+$2^{m-1}$ is the banana integral of~\cite{vanhove2014} at $s=t^2$.
+\textbf{[SYMBOLIC]} In exact arithmetic,
+$\phi(L_m(\theta-1))=(-2)^{m-1}\,U\,V_m$ for $m=2,\dots,5$, with $U=t^{-2}\theta_t^2$
+the operator of part~(ii) and $V_m$ in Vanhove's normalization;\ $U$ has two
+factors of order one, and $V_m$ does not right-divide $\phi(L_m)$.  Guard:\
+\texttt{tests/test\_paper63\_odd\_banana.py}.  \textbf{[MEASURED]} At 30 digits
+$\phi(L_m(\theta-\lambda))$ annihilates $\int_0^\infty x^\lambda I_0(tx)K_0(x)^m\,dx$
+for $\lambda=1,3$ and $m=2,3,4$ to $2\times10^{-31}$, and $V_m$ applied to the
+$\lambda=1$ integral gives the constant $-m!/2^{m-1}$.
+The first odd piece that can carry a factor above order one is the sunrise
+$V_3$, which is irreducible (its periods are elliptic~\cite{blochvanhove2015}), in a fibre of at least five densities;\ $V_3$ is not equivalent to the
+Legendre operator of $F_2$, since it has a logarithmic singular point at
+$t^2=9$, where $F_2$ is regular.  That some fibre carries such a piece is not
+shown, and for $m\ge6$ the odd factors are not identified here.
 
 \begin{proposition}[stars reach their rung]
 \label{prop:star_attain}
