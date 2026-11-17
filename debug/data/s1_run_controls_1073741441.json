@@ -1,0 +1,19 @@
+{
+ "prime": 1073741441,
+ "toy": true,
+ "div": {
+  "min": [
+   3,
+   4
+  ],
+  "ab": [
+   3,
+   7
+  ],
+  "divides": true,
+  "unrelated_divides": false,
+  "pass": true
+ },
+ "n3": true,
+ "time": 345.7
+}
