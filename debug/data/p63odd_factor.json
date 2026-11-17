@@ -1,0 +1,154 @@
+{
+ "E1": {
+  "2": {
+   "remainder_zero": true,
+   "quotient_order": 2,
+   "quotient": {
+    "2": "-2"
+   }
+  },
+  "3": {
+   "remainder_zero": true,
+   "quotient_order": 2,
+   "quotient": {
+    "2": "4",
+    "1": "-16",
+    "0": "16"
+   }
+  },
+  "4": {
+   "remainder_zero": true,
+   "quotient_order": 2,
+   "quotient": {
+    "2": "-8",
+    "1": "32",
+    "0": "-32"
+   }
+  },
+  "5": {
+   "remainder_zero": true,
+   "quotient_order": 2,
+   "quotient": {
+    "2": "16",
+    "1": "-128",
+    "0": "256"
+   }
+  }
+ },
+ "E2": {
+  "2": {
+   "rational_right_factors_theta_minus_r": [
+    "0"
+   ],
+   "splits": true
+  },
+  "3": {
+   "rational_right_factors_theta_minus_r": [
+    "2"
+   ],
+   "splits": true
+  },
+  "4": {
+   "rational_right_factors_theta_minus_r": [
+    "2"
+   ],
+   "splits": true
+  },
+  "5": {
+   "rational_right_factors_theta_minus_r": [
+    "4"
+   ],
+   "splits": true
+  }
+ },
+ "E3": {
+  "2,-3": true,
+  "2,-1": true,
+  "2,1": true,
+  "2,3": true,
+  "2,5": true,
+  "3,-3": true,
+  "3,-1": true,
+  "3,1": true,
+  "3,3": true,
+  "3,5": true,
+  "4,-3": true,
+  "4,-1": true,
+  "4,1": true,
+  "4,3": true,
+  "4,5": true,
+  "5,-3": true,
+  "5,-1": true,
+  "5,1": true,
+  "5,3": true,
+  "5,5": true
+ },
+ "E4": {
+  "2": {
+   "even_piece_divisible_by_V": false
+  },
+  "3": {
+   "even_piece_divisible_by_V": false
+  },
+  "4": {
+   "even_piece_divisible_by_V": false
+  },
+  "5": {
+   "even_piece_divisible_by_V": false
+  }
+ },
+ "N1": {
+  "2": {
+   "1": [
+    0.0,
+    6.129753625618181e-32
+   ],
+   "3": [
+    1.5260976414632571e-31,
+    1.1982225643416145e-31
+   ],
+   "control_even_op_on_odd_fn": 0.6486862669860153
+  },
+  "3": {
+   "1": [
+    5.413117974843565e-32,
+    1.0176539521624827e-31
+   ],
+   "3": [
+    0.0,
+    4.4932278780321044e-32
+   ],
+   "control_even_op_on_odd_fn": 0.13844567648167178
+  },
+  "4": {
+   "1": [
+    2.3705881443188333e-32,
+    6.442410997959198e-33
+   ],
+   "3": [
+    0.0,
+    2.0847971709255696e-31
+   ],
+   "control_even_op_on_odd_fn": 0.02167062022737272
+  }
+ },
+ "N2": {
+  "2": {
+   "V_b_at_t0.5": -1.0,
+   "V_b_at_t0.9": -1.0,
+   "rel_diff": 9.860761315262648e-32
+  },
+  "3": {
+   "V_b_at_t0.5": -1.5,
+   "V_b_at_t0.9": -1.5,
+   "rel_diff": 1.314768175368353e-31
+  },
+  "4": {
+   "V_b_at_t0.5": -3.0,
+   "V_b_at_t0.9": -3.0,
+   "rel_diff": 0.0
+  }
+ },
+ "seconds": 237.62518119812012,
+ "E3_note": "recomputed in the u-form after the first run used a t-normalised form that cannot satisfy the identity"
+}
