@@ -104,3 +104,31 @@ The new driver, plus EX's frozen list (record EX, section "Frozen"; its sha256 t
 ## Phase 2 (after this record is committed and the commit verified)
 
 `python debug/exchb_run.py > debug/data/exchb.out 2>&1`
+
+## Results (scored 2026-11-16; record text above unchanged)
+
+The run was launched after commit b0db8bc7 was verified. The frozen files show no diff at scoring. It took 7996 s:
+about 1 h of prime runs, `heldout` 317 s and `numeric` 4574 s.
+
+**Verdict: GO (EXb0, EXb1, EXb2 held; EXb3 held).** Joint verdict per the gate: **EX + EXb = GO for row 3c.**
+EX's own Results line stays VOID.
+
+- **EXb0 held.** The first 32 candidates were all accepted (no rejections). Determinism holds on all four EXS primes,
+  coefficient for coefficient.
+- **EXb1 held.** Reconstruction succeeds at every rung of the ladder (k = 18, 20, ..., 32; k0 = 18) and gives the same
+  operator each time. The largest reconstructed numerator is 52 bits and the largest denominator 26 bits, so the
+  normalised heights needed about 2^78, just past four primes' 2^103 / 2.
+- **EXb2 held.**
+  - Exact residual over Q: zero on all 121 orders (-9..111), every one unused by the fit.
+  - Third prime 16777213: fit nullity 1, matches the CRT operator, and the CRT operator kills every row including
+    the 60 held out.
+  - `numeric` vs `exchange_hp` at dps 80: 3.7e-91 (R = 1.4), 7.9e-88 (R = 3.015). dps 50 vs 80: 4.2e-63, 1.4e-63.
+    Frobenius equals the generator to N, and the root equations are consistent.
+- **EXb3 held.** The exact-Q ln R part starts at R^9 ln R with coefficient exactly **9/500**.
+
+With EX, at both unequal pairs (1, 3/2) and (1, 2), the 1s two-centre exchange integral obeys an operator in R of
+order 9 and degree 16, certified over Q:
+- every finite nonzero point is apparent (or exponents_only);
+- R = 0 is Fuchsian, with exponents {-1 (x2), 0, 1, 2, 3, 4, 6, 9} and R^9 ln R of coefficient (8/3375) a^5 b^5;
+- the rates at infinity are {-(a+b), 2b, 2a, 0 x2, -2a x2, -2b x2}: six distinct, inside the nine-element set, and no
+  a - b rate.

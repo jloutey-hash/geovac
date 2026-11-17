@@ -120,7 +120,7 @@ $60$ digits with symbolic $\tau$-series termination, its entire potential
 curve $E(R)$ is a single closed-form expression in $\{\exp, E_{1}, \log, \gamma\}$
 with certified $R_{\rm eq}$, $D_{e}$ and $k$, and the heteronuclear LiH case
 reaches $30$ digits net of an explicit tail bound (a campaign value;\ its
-regression test is \textsc{owed}).
+regression test rebuilds it in full, with the tail bound).
 
 A by-product bears on the continuous theory the census borrows from:\ the
 radial integral at the core of the two-center direct-Coulomb $(AA|BB)$
@@ -392,6 +392,22 @@ logarithm at $R=0$:\ its operator has order $4$, exponents $\{-1,0,4,9\}$, and
 the integral carries $(8/3375)\,\zeta^{10}R^9\ln(\zeta R)$.  At the hybrid rate
 coincidence the pair $\gamma_E+\ln R$ combines with $E_1$ into the entire
 function $\mathrm{Ein}$, so no logarithm survives there.
+\textbf{[MEASURED]} At unequal exponents the $1s$ exchange integral has no closed form, but it
+still obeys an equation in $R$.  At $(a,b)=(1,3/2)$ and $(1,2)$ an operator was guessed from
+the exact Neumann series modulo primes and reconstructed over $\mathbb{Q}$.  It has order $9$
+and degree $16$ at both pairs.  It annihilates the exact series on $121$ orders the fit did not
+use, it is recovered by an independent fit on a further prime, and its Frobenius solution
+matches the exchange integral computed independently to $10^{-87}$ at $R=1.4$ and $3.015$.  Its
+singular structure is the equal-exponent one, split.  Every finite nonzero singular point is
+apparent.  $R=0$ is regular singular with exponents $-1$ (twice), $0$, $1$, $2$, $3$, $4$, $6$, $9$, and
+the integral carries $(8/3375)\,a^5b^5R^9\ln R$:\ the equal-exponent coefficient with
+$\zeta^{10}$ replaced by $a^5b^5$ (predicted before computing).  The rates at infinity are
+$-(a+b)$, $2a$, $2b$, $0$ (twice), $-2a$ and $-2b$ (twice each).  The rates that coincide at
+$a=b$ split, and no rate $\pm(a-b)$ appears (records
+\texttt{docs/predictions/2026-11-16\_exchange\_unequal\_zeta.md} and
+\texttt{docs/predictions/2026-11-16\_exchange\_unequal\_zeta\_b.md}, each registered before
+computing;\ the first was void because four primes could not reconstruct the $(1,3/2)$
+operator, and the second supplied more primes).
 
 \textbf{[SYMBOLIC + MEASURED]} The picture carries over to hydrogenic orbitals with
 $l \le 2$, $n \le 3$, on a pre-registered panel of $48$ integrals with $p$ and $d$
@@ -417,8 +433,9 @@ closed forms are classical~\cite{mulliken1949,roothaan1951}, as are the $(AA|BB)
 ones~\cite{lesiuk2014a}, and an operator of this kind exists for any function built from these atoms with
 rational coefficients.  What is measured here is its order and its singularities.
 
-Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ exchange at equal exponents and
-$1s$ only, since the heteronuclear $\tau$-series has no closed form;\ minimality assumes
+Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ exchange $1s$ only, at equal exponents
+and at two unequal pairs (no closed form there, so the operator is the only description);\
+the exchange operator is a common right divisor of found annihilators, not certified minimal;\ minimality assumes
 the exponential, logarithmic, $E_1$ and $\mathrm{Ei}$ atoms are independent over
 $\mathbb{Q}(R)$ (\texttt{tests/test\_paper58\_r\_operators.py},
 \texttt{tests/test\_paper58\_row8\_l2.py}).
