@@ -1,0 +1,141 @@
+{
+ "A5_a_eq_b_noop": {
+  "no_named_base": true,
+  "canonical_is_identity": true
+ },
+ "A1_identity_numeric": {
+  "C1": {
+   "factors_stable_L2_6": true,
+   "n_sets": 38,
+   "max_rel": 3.609643596210204e-60,
+   "n_triples": 6,
+   "n_fp_panel": 10,
+   "n_inf_panel": 6,
+   "pass_1e_50": true,
+   "seconds": 1.3
+  },
+  "C2": {
+   "factors_stable_L2_6": true,
+   "n_sets": 42,
+   "max_rel": 2.4296455768075729e-60,
+   "n_triples": 6,
+   "n_fp_panel": 10,
+   "n_inf_panel": 6,
+   "pass_1e_50": true,
+   "seconds": 1.3
+  }
+ },
+ "A2_planted_route_a": {
+  "C1": {
+   "pos_n_depth2_before": 26,
+   "pos_n_depth2_after": 0,
+   "pos_reduced": true,
+   "neg_n_depth2_after": 1,
+   "neg_survives": true,
+   "pos_value_rel": 0.0,
+   "neg_value_rel": 0.0,
+   "modp_equals_fmpq_mod_p": true,
+   "eliminated": 16
+  },
+  "C2": {
+   "pos_n_depth2_before": 27,
+   "pos_n_depth2_after": 0,
+   "pos_reduced": true,
+   "neg_n_depth2_after": 1,
+   "neg_survives": true,
+   "pos_value_rel": 0.0,
+   "neg_value_rel": 0.0,
+   "modp_equals_fmpq_mod_p": true,
+   "eliminated": 16
+  }
+ },
+ "A4_modp_canonical": {
+  "C1": {
+   "1073741441": true,
+   "1073741381": true
+  },
+  "C2": {
+   "1073741441": true,
+   "1073741381": true
+  }
+ },
+ "A3_engine_value_preserved": {
+  "C1": {
+   "value_preserved": true,
+   "rewrite_exercised": true,
+   "factors_stable": true,
+   "seconds": 19.3,
+   "max_rel": 0.0,
+   "n_eliminated": 64
+  },
+  "C2": {
+   "value_preserved": true,
+   "rewrite_exercised": true,
+   "factors_stable": true,
+   "seconds": 22.0,
+   "max_rel": 3.326e-320,
+   "n_eliminated": 64
+  },
+  "M1": {
+   "value_preserved": true,
+   "rewrite_exercised": true,
+   "factors_stable": true,
+   "seconds": 21.3
+  },
+  "M2r": {
+   "value_preserved": true,
+   "rewrite_exercised": true,
+   "factors_stable": true,
+   "seconds": 21.3
+  }
+ },
+ "B_route_b_lll": {
+  "case": "C1",
+  "dps": 300,
+  "H": 1000000,
+  "panel": [
+   "0",
+   "1"
+  ],
+  "n_canonical_bases": 4,
+  "B1_positive": {
+   "n": 14,
+   "relation_found": true,
+   "equals_identity": true,
+   "seconds": 6.2
+  },
+  "B2_planted": {
+   "n": 14,
+   "relation_found": true,
+   "involves_planted": true,
+   "seconds": 5.9
+  },
+  "B3_negative": {
+   "n": 13,
+   "relation_found": false,
+   "relation_found_dps_plus_100": false,
+   "seconds": 5.8
+  },
+  "seconds": 18.2
+ },
+ "B4_route_b_whole_set": {
+  "case": "C1",
+  "Lb": 6,
+  "dps": 450,
+  "H": 10000,
+  "n": 77,
+  "n_depth2": 16,
+  "B4pos_added_keys": 1,
+  "B4neg": {
+   "relation_found": false,
+   "relation_found_dps_plus_100": false,
+   "seconds": 71.6
+  },
+  "B4pos": {
+   "relation_found": true,
+   "involves_eliminated": true,
+   "seconds": 72.0
+  },
+  "seconds": 143.8
+ }
+}

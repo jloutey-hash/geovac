@@ -1,0 +1,57 @@
+{
+ "fx1": {
+  "L_independent": false,
+  "n_scope": 6,
+  "n_only_L01": 1,
+  "initial": {
+   "(Fraction(1, 1), ())": [
+    2,
+    9
+   ]
+  },
+  "terminal": {
+   "(Fraction(5, 1), ())": [
+    90,
+    100
+   ]
+  },
+  "n_keys_interior": 2,
+  "n_interior_zero_L": 2,
+  "max_interior_run": 1,
+  "interior_sample": {
+   "(Fraction(2, 1), ())": [
+    [
+     50,
+     50
+    ]
+   ],
+   "(Fraction(0, 1), (('B', Fraction(1, 1), ((Fraction(1, 1), Fraction(0, 1)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": [
+    [
+     40,
+     40
+    ]
+   ]
+  }
+ },
+ "fx2": {
+  "holds": false,
+  "n_L_without_depth2": 1,
+  "absent_at_all_L": false,
+  "runs": [
+   [
+    40,
+    40
+   ]
+  ],
+  "n_runs": 1
+ },
+ "old_rule_initial": {},
+ "catches_late_key": true,
+ "catches_terminal_key": true,
+ "sporadic_classified_interior": true,
+ "only_L01_excluded": true,
+ "one_prime_zero_not_absent": true,
+ "fx2_isolated": true,
+ "old_rule_would_miss_late_key": true,
+ "all_pass": true
+}

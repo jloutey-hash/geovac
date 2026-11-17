@@ -1,0 +1,62 @@
+{
+ "C1": {
+  "n_keys": 77,
+  "n_outside": 0,
+  "outside": [],
+  "L_independent": true,
+  "fx1": {
+   "L_independent": true,
+   "n_scope": 77,
+   "n_only_L01": 0,
+   "initial": {},
+   "terminal": {},
+   "n_keys_interior": 0,
+   "n_interior_zero_L": 0,
+   "max_interior_run": 0,
+   "interior_sample": {}
+  },
+  "fx2": {
+   "holds": true,
+   "n_L_without_depth2": 0,
+   "absent_at_all_L": false,
+   "runs": [],
+   "n_runs": 0
+  },
+  "alphabet_sizes": {
+   "B": 107,
+   "E1": 54,
+   "lnp": 7
+  },
+  "seconds": 14.4
+ },
+ "C2": {
+  "n_keys": 79,
+  "n_outside": 0,
+  "outside": [],
+  "L_independent": true,
+  "fx1": {
+   "L_independent": true,
+   "n_scope": 79,
+   "n_only_L01": 0,
+   "initial": {},
+   "terminal": {},
+   "n_keys_interior": 0,
+   "n_interior_zero_L": 0,
+   "max_interior_run": 0,
+   "interior_sample": {}
+  },
+  "fx2": {
+   "holds": true,
+   "n_L_without_depth2": 0,
+   "absent_at_all_L": false,
+   "runs": [],
+   "n_runs": 0
+  },
+  "alphabet_sizes": {
+   "B": 127,
+   "E1": 53,
+   "lnp": 9
+  },
+  "seconds": 13.9
+ }
+}
