@@ -1,0 +1,316 @@
+{
+ "pair": [
+  "1",
+  "1"
+ ],
+ "prime": 33554393,
+ "N": 450,
+ "generator": {
+  "time_s": 3.9,
+  "taus": 4,
+  "valuation_check": true
+ },
+ "RMAX": 14,
+ "DMAX": 60,
+ "HOLD": 40,
+ "components": [
+  "1*lnR^0",
+  "1*lnR^1",
+  "g*lnR^0",
+  "l2*lnR^0"
+ ],
+ "components_dropped_as_duplicates": [
+  "g*lnR^0"
+ ],
+ "equations_per_order": 3,
+ "effective_box": {
+  "N": 450,
+  "HOLD": 40,
+  "MARGIN": 50,
+  "d_box_by_r": {
+   "1": 60,
+   "2": 60,
+   "3": 60,
+   "4": 60,
+   "5": 60,
+   "6": 60,
+   "7": 60,
+   "8": 60,
+   "9": 60,
+   "10": 60,
+   "11": 60,
+   "12": 60,
+   "13": 60,
+   "14": 60
+  },
+  "max_r_testable": 14
+ },
+ "scan": [
+  {
+   "r": 1,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 2,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 3,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 4,
+   "d_box": 60,
+   "hit": true,
+   "d": 16,
+   "nullity": 1,
+   "nullity_fit": 1,
+   "accepted": true
+  }
+ ],
+ "scan_time_s": 0.8,
+ "first_hit": {
+  "r": 4,
+  "d": 16,
+  "nullity": 1
+ },
+ "gcrd_inputs": [
+  {
+   "r": 5,
+   "d": 9,
+   "nullity": 1
+  },
+  {
+   "r": 6,
+   "d": 7,
+   "nullity": 2
+  }
+ ],
+ "minimal_operator": {
+  "order": 4,
+  "degree": 16,
+  "coeff_degrees": [
+   15,
+   16,
+   16,
+   16,
+   16
+  ],
+  "annihilates_all_complete_rows": true,
+  "coeffs_mod_p": [
+   [
+    0,
+    2693521,
+    5387042,
+    13976960,
+    31955995,
+    25812459,
+    29770444,
+    15576,
+    13284843,
+    3560766,
+    6456037,
+    8435325,
+    8398390,
+    1822,
+    300,
+    40
+   ],
+   [
+    21471755,
+    9389117,
+    17631026,
+    373634,
+    19543775,
+    16575516,
+    24406209,
+    28321540,
+    10795631,
+    2531368,
+    5346144,
+    18888833,
+    8389066,
+    25165602,
+    33554291,
+    33554349,
+    33554385
+   ],
+   [
+    0,
+    19797856,
+    6041319,
+    27859563,
+    14109641,
+    7478003,
+    7239014,
+    25129606,
+    18088269,
+    27597602,
+    24014227,
+    32467747,
+    18863854,
+    12580611,
+    33553957,
+    33554323,
+    33554389
+   ],
+   [
+    0,
+    0,
+    24092207,
+    14630021,
+    14537411,
+    20752925,
+    23149012,
+    29794468,
+    7074772,
+    30268915,
+    26424249,
+    19385297,
+    29357425,
+    10485340,
+    16777153,
+    1,
+    2
+   ],
+   [
+    0,
+    0,
+    0,
+    1577031,
+    3154062,
+    28331433,
+    18903057,
+    21598346,
+    1218384,
+    21983095,
+    8796958,
+    6559489,
+    6293124,
+    1048951,
+    25165863,
+    10,
+    1
+   ]
+  ]
+ },
+ "finite_nonzero_points": [
+  {
+   "factor_degree": 3,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "root of degree-3 factor",
+   "verdict": "exponents_only: apparent-type"
+  },
+  {
+   "factor_degree": 10,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "root of degree-10 factor",
+   "verdict": "exponents_only: apparent-type"
+  }
+ ],
+ "R0": {
+  "fuchsian": true,
+  "indicial_degree": 4,
+  "exponents": [
+   [
+    "0",
+    1
+   ],
+   [
+    "-3",
+    1
+   ],
+   [
+    "11",
+    1
+   ],
+   [
+    "4",
+    1
+   ]
+  ],
+  "exponents_not_in_Fp": 0,
+  "log_free_local_solutions": 3,
+  "f_log_components": {
+   "1*lnR^1": {
+    "nonzero": true,
+    "lowest_k": 11,
+    "coeff_mod_p": 22853567,
+    "coeff_ratrec": "-3679/3559"
+   }
+  },
+  "f_has_lnR": true
+ },
+ "infinity": {
+  "coeff_degrees": [
+   15,
+   16,
+   16,
+   16,
+   16
+  ],
+  "rank_le_1": true,
+  "edge_degree": 4,
+  "rates": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ],
+  "rates_unsplit_degree": 0
+ },
+ "total_time_s": 4.9
+}

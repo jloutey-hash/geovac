@@ -1,0 +1,26 @@
+{
+ "suffix": "EPS",
+ "pair": [
+  "1",
+  "2"
+ ],
+ "primes": {
+  "67108859": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  },
+  "33554393": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  }
+ },
+ "gate_pass": true
+}

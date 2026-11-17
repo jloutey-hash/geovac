@@ -1,0 +1,52 @@
+{
+ "case": "2psig",
+ "pair": [
+  "1",
+  "2"
+ ],
+ "suffix": "EPS",
+ "valuation_check": true,
+ "frobenius_terms": 300,
+ "frobenius_time_s": 12.0,
+ "data_orders": [
+  -3,
+  -1,
+  0,
+  1,
+  2,
+  4,
+  6,
+  11
+ ],
+ "root_equations_consistent": true,
+ "frobenius_equals_generator_to_N": true,
+ "generator_N": 120,
+ "1.4": {
+  "tau_max": 32,
+  "last_terms_max": "3.31e-87",
+  "abs_diff_frob_dps50": "1.13e-62",
+  "abs_diff_frob_dps80": "5.83e-91",
+  "abs_diff_dps50_dps80": "1.13e-62",
+  "checks": {
+   "frob_vs_dps80_lt_1e-30": true,
+   "dps50_vs_dps80_lt_1e-35": true,
+   "last_terms_max_lt_1e-40": true,
+   "tau_cap_reached_T_ge_400": false
+  }
+ },
+ "3.015": {
+  "tau_max": 32,
+  "last_terms_max": "2.16e-69",
+  "abs_diff_frob_dps50": "7.93e-64",
+  "abs_diff_frob_dps80": "5.48e-79",
+  "abs_diff_dps50_dps80": "7.93e-64",
+  "checks": {
+   "frob_vs_dps80_lt_1e-30": true,
+   "dps50_vs_dps80_lt_1e-35": true,
+   "last_terms_max_lt_1e-40": true,
+   "tau_cap_reached_T_ge_400": false
+  }
+ },
+ "numeric_pass": true,
+ "time_s": 16710.6
+}
