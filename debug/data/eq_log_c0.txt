@@ -1,0 +1,7 @@
+{'builder': {'1s': {'c_equal': True, 'rexp_equal': True, 'sigma_H_equal': True, 'pref_equal_at_(1,2),(3,5)': True}, '2psig': {'c_equal': True, 'rexp_equal': True, 'sigma_H_equal': True, 'pref_equal_at_(1,2),(3,5)': True}, '2ppi': {'c_equal': True, 'rexp_equal': True, 'sigma_H_equal': True, 'pref_equal_at_(1,2),(3,5)': True}}, '1s_vs_exch_gen_modp_N450_1_1': {'identical': True, 'val': True, 'time_s': 9.5}}
+{'builder': {'1s': {'c_equal': True, 'rexp_equal': True, 'sigma_H_equal': True, 'pref_equal_at_(1,2),(3,5)': True}, '2psig': {'c_equal': True, 'rexp_equal': True, 'sigma_H_equal': True, 'pref_equal_at_(1,2),(3,5)': True}, '2ppi': {'c_equal': True, 'rexp_equal': True, 'sigma_H_equal': True, 'pref_equal_at_(1,2),(3,5)': True}}, '1s_vs_exch_gen_modp_N450_1_1': {'identical': True, 'val': True, 'time_s': 9.5}, '1s_vs_exch_gen_modp_N450_1_2': {'identical': True, 'val': True, 'time_s': 378.3}}
+2psig 1 1 {'identical': True, 'val': True, 'time_s': 9.8}
+2psig 1 2 {'identical': True, 'val': True, 'time_s': 1140.6}
+2ppi 1 1 {'identical': True, 'val': True, 'time_s': 9.7}
+2ppi 1 2 {'identical': True, 'val': True, 'time_s': 542.8}
+debug/data\eq_controls_c0.json

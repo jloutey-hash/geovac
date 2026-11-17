@@ -1,0 +1,18 @@
+{
+ "3dsig_1_2": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "1.16e-51",
+  "ref_tau12_vs_16": "9.57e-36",
+  "pass_1e-35": true,
+  "gen_time_s": 298.2,
+  "time_s": 1662.2
+ },
+ "3dsig_2_1": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "1.79e-50",
+  "ref_tau12_vs_16": "1.46e-34",
+  "pass_1e-35": true,
+  "gen_time_s": 289.3,
+  "time_s": 1538.9
+ }
+}

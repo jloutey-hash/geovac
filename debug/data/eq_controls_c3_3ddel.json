@@ -1,0 +1,12 @@
+{
+ "3ddel_1_1": {
+  "valuation_check": true,
+  "taus": 3,
+  "time_s": 5.4
+ },
+ "3ddel_1_2": {
+  "valuation_check": true,
+  "taus": 226,
+  "time_s": 581.3
+ }
+}

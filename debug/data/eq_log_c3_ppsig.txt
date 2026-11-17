@@ -1,0 +1,4 @@
+ppsig 1 1 {'valuation_check': True, 'taus': 5, 'time_s': 5.4}
+debug/data\eq_controls_c3_ppsig.json
+ppsig 1 2 {'valuation_check': True, 'taus': 228, 'time_s': 477.8}
+debug/data\eq_controls_c3_ppsig.json

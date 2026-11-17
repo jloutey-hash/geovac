@@ -1,0 +1,58 @@
+{
+ "builder": {
+  "1s": {
+   "c_equal": true,
+   "rexp_equal": true,
+   "sigma_H_equal": true,
+   "pref_equal_at_(1,2),(3,5)": true
+  },
+  "2psig": {
+   "c_equal": true,
+   "rexp_equal": true,
+   "sigma_H_equal": true,
+   "pref_equal_at_(1,2),(3,5)": true
+  },
+  "2ppi": {
+   "c_equal": true,
+   "rexp_equal": true,
+   "sigma_H_equal": true,
+   "pref_equal_at_(1,2),(3,5)": true
+  }
+ },
+ "1s_vs_exch_gen_modp_N450_1_1": {
+  "identical": true,
+  "val": true,
+  "time_s": 9.5
+ },
+ "1s_vs_exch_gen_modp_N450_1_2": {
+  "identical": true,
+  "val": true,
+  "time_s": 378.3
+ },
+ "2psig_vs_ep_gen_modp_N450_1_1": {
+  "identical": true,
+  "val": true,
+  "time_s": 9.8
+ },
+ "2psig_vs_ep_gen_modp_N450_1_2": {
+  "identical": true,
+  "val": true,
+  "time_s": 1140.6
+ },
+ "2ppi_vs_ep_gen_modp_N450_1_1": {
+  "identical": true,
+  "val": true,
+  "time_s": 9.7
+ },
+ "2ppi_vs_ep_gen_modp_N450_1_2": {
+  "identical": true,
+  "val": true,
+  "time_s": 542.8
+ },
+ "1s_Q_N60_1_2": {
+  "identical": true
+ },
+ "2ppi_Q_N60_1_2": {
+  "identical": true
+ }
+}

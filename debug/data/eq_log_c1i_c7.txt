@@ -1,0 +1,2 @@
+debug/data\eq_controls_c1i.json
+debug/data\eq_controls_c7.json

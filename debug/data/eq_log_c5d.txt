@@ -1,0 +1,1 @@
+{'first_hit_60': {'r': 10, 'd': 38, 'nullity': 2}, 'first_hit_100': {'r': 9, 'd': 70, 'nullity': 1}, 'shape_60': [9, 70], 'shape_100': [9, 70], 'coeffs_equal': True}

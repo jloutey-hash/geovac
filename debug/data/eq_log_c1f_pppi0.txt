@@ -1,0 +1,4 @@
+pppi0 1 2 {'valuation_check': True, 'abs_diff_R=1/2': '1.86e-51', 'ref_tau12_vs_16': '1.52e-35', 'pass_1e-35': True, 'gen_time_s': 61.7, 'time_s': 356.6}
+debug/data\eq_controls_c1f_pppi0.json
+pppi0 2 1 {'valuation_check': True, 'abs_diff_R=1/2': '1.86e-51', 'ref_tau12_vs_16': '1.52e-35', 'pass_1e-35': True, 'gen_time_s': 69.2, 'time_s': 284.5}
+debug/data\eq_controls_c1f_pppi0.json

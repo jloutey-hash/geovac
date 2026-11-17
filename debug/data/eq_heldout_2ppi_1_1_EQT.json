@@ -1,0 +1,58 @@
+{
+ "pair": [
+  "1",
+  "1"
+ ],
+ "suffix": "EQT",
+ "run_primes": [
+  33554393,
+  67108753,
+  67108757,
+  67108763,
+  67108777,
+  67108819,
+  67108837,
+  67108859
+ ],
+ "order": 4,
+ "degree": 9,
+ "operator_Q_crt": [
+  "24*R*(96*R**7 + 704*R**6 + 3352*R**5 + 12148*R**4 + 26180*R**3 + 36190*R**2 + 34650*R + 17325)",
+  "-8*(96*R**9 + 608*R**8 + 1688*R**7 + 2204*R**6 - 7560*R**5 - 48300*R**4 - 131460*R**3 - 227430*R**2 - 242550*R - 121275)",
+  "-2*R*(192*R**8 + 2656*R**7 + 14192*R**6 + 44240*R**5 + 101640*R**4 + 183960*R**3 + 253680*R**2 + 242550*R + 121275)",
+  "2*R**2*(96*R**7 + 320*R**6 - 1288*R**5 - 9100*R**4 - 25620*R**3 - 45150*R**2 - 48510*R - 24255)",
+  "R**3*(96*R**6 + 896*R**5 + 3640*R**4 + 9100*R**3 + 15330*R**2 + 16170*R + 8085)"
+ ],
+ "crt_bits": 207,
+ "exact_Q": {
+  "N": 120,
+  "generator_time_s": 3.0,
+  "valuation_check": true,
+  "equations_per_order": 3,
+  "orders_checked": "-4..116",
+  "orders_checked_count": 121,
+  "all_unused": true,
+  "residual_zero": true
+ },
+ "f_log_components_exact": {
+  "1*lnR^1": {
+   "lowest_k": 11,
+   "coeff_exact": "16/1157625"
+  }
+ },
+ "third_prime": {
+  "p": 16777213,
+  "N": 450,
+  "valuation_check": true,
+  "equations_per_order": 3,
+  "unknowns": 50,
+  "fit_equations": 1158,
+  "fit_orders_max": 386,
+  "heldout_orders": 60,
+  "fit_nullity": 1,
+  "fit_matches_crt": true,
+  "crt_kills_all_rows_incl_heldout": true,
+  "time_s": 6.6
+ },
+ "time_s": 9.7
+}

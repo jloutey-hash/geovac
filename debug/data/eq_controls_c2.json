@@ -1,0 +1,50 @@
+{
+ "3dsig_1_1": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "3dsig_1_2": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "3ddel_1_1": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "3ddel_1_2": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "ppsig_1_1": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "ppsig_1_2": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "pppi0_1_1": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ },
+ "pppi0_1_2": {
+  "Q_reduced_equals_modp": true,
+  "modp_deterministic": true,
+  "val_Q": true,
+  "val_p": true
+ }
+}

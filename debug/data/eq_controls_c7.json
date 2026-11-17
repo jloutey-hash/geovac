@@ -1,0 +1,14 @@
+{
+ "ppsig": {
+  "f(1,2)==f(2,1)_modp_N200": true
+ },
+ "pppi0": {
+  "f(1,2)==f(2,1)_modp_N200": true
+ },
+ "ppdel": {
+  "f(1,2)==f(2,1)_modp_N200": true
+ },
+ "3dsig_negative_control": {
+  "f(1,2)==f(2,1)_modp_N200": false
+ }
+}

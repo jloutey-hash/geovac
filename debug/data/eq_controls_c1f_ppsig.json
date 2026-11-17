@@ -1,0 +1,18 @@
+{
+ "ppsig_1_2": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "1.01e-50",
+  "ref_tau12_vs_16": "8.29e-35",
+  "pass_1e-35": true,
+  "gen_time_s": 128.5,
+  "time_s": 675.5
+ },
+ "ppsig_2_1": {
+  "valuation_check": true,
+  "abs_diff_R=1/2": "1.01e-50",
+  "ref_tau12_vs_16": "8.29e-35",
+  "pass_1e-35": true,
+  "gen_time_s": 127.8,
+  "time_s": 603.6
+ }
+}

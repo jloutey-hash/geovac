@@ -1,0 +1,4 @@
+pppi0 1 1 {'valuation_check': True, 'taus': 5, 'time_s': 5.5}
+debug/data\eq_controls_c3_pppi0.json
+pppi0 1 2 {'valuation_check': True, 'taus': 228, 'time_s': 297.5}
+debug/data\eq_controls_c3_pppi0.json

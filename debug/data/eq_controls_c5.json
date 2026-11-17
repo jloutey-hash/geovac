@@ -1,0 +1,38 @@
+{
+ "2psig_1_1": {
+  "max_num_bits": 29,
+  "max_den_bits": 10,
+  "M_bits_needed": 60,
+  "primes_2^26_needed": 3,
+  "order": 4,
+  "degree": 16,
+  "crt_bits_used": 207
+ },
+ "2psig_1_2": {
+  "max_num_bits": 92,
+  "max_den_bits": 60,
+  "M_bits_needed": 186,
+  "primes_2^26_needed": 8,
+  "order": 9,
+  "degree": 34,
+  "crt_bits_used": 311
+ },
+ "2ppi_1_1": {
+  "max_num_bits": 16,
+  "max_den_bits": 6,
+  "M_bits_needed": 34,
+  "primes_2^26_needed": 2,
+  "order": 4,
+  "degree": 9,
+  "crt_bits_used": 207
+ },
+ "2ppi_1_2": {
+  "max_num_bits": 66,
+  "max_den_bits": 34,
+  "M_bits_needed": 134,
+  "primes_2^26_needed": 6,
+  "order": 9,
+  "degree": 25,
+  "crt_bits_used": 259
+ }
+}

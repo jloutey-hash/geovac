@@ -1,0 +1,4 @@
+3dsig 1 2 {'valuation_check': True, 'abs_diff_R=1/2': '1.16e-51', 'ref_tau12_vs_16': '9.57e-36', 'pass_1e-35': True, 'gen_time_s': 298.2, 'time_s': 1662.2}
+debug/data\eq_controls_c1f_3dsig.json
+3dsig 2 1 {'valuation_check': True, 'abs_diff_R=1/2': '1.79e-50', 'ref_tau12_vs_16': '1.46e-34', 'pass_1e-35': True, 'gen_time_s': 289.3, 'time_s': 1538.9}
+debug/data\eq_controls_c1f_3dsig.json

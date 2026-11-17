@@ -1,0 +1,12 @@
+{
+ "3dsig_1_1": {
+  "valuation_check": true,
+  "taus": 5,
+  "time_s": 5.5
+ },
+ "3dsig_1_2": {
+  "valuation_check": true,
+  "taus": 228,
+  "time_s": 1013.3
+ }
+}

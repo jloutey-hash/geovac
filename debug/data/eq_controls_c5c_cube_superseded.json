@@ -1,0 +1,30 @@
+{
+ "planted": "(1 + R^2)^3 * f_2ppi(1, 2) (EP: order 9, degree 25)",
+ "runs": [
+  {
+   "p": 67108859,
+   "DMAX": 60,
+   "order": 9,
+   "degree": 43,
+   "first_hit": {
+    "r": 9,
+    "d": 43,
+    "nullity": 1
+   },
+   "time_s": 432.2
+  },
+  {
+   "p": 67108859,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 43,
+   "first_hit": {
+    "r": 9,
+    "d": 43,
+    "nullity": 1
+   },
+   "time_s": 443.3
+  }
+ ],
+ "ladder": {}
+}

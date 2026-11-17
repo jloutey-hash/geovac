@@ -1,0 +1,30 @@
+{'p': 67108859, 'DMAX': 60, 'order': 9, 'degree': 70, 'first_hit': {'r': 10, 'd': 38, 'nullity': 2}, 'time_s': 370.4}
+{'p': 67108859, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 384.3}
+debug/data\eq_controls_c5c.json
+{'p': 67108837, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 363.2}
+debug/data\eq_controls_c5c.json
+{'p': 67108819, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 362.8}
+debug/data\eq_controls_c5c.json
+{'p': 67108777, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 365.7}
+debug/data\eq_controls_c5c.json
+{'p': 67108763, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 363.2}
+debug/data\eq_controls_c5c.json
+{'p': 67108757, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 340.4}
+debug/data\eq_controls_c5c.json
+{'p': 67108753, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 335.6}
+debug/data\eq_controls_c5c.json
+{'p': 67108747, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 329.4}
+debug/data\eq_controls_c5c.json
+{'p': 67108739, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 330.0}
+debug/data\eq_controls_c5c.json
+{'p': 67108729, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 283.1}
+debug/data\eq_controls_c5c.json
+{'p': 67108721, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 308.4}
+debug/data\eq_controls_c5c.json
+{'p': 67108709, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 352.9}
+debug/data\eq_controls_c5c.json
+{'p': 67108693, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 328.7}
+debug/data\eq_controls_c5c.json
+{'p': 67108669, 'DMAX': 100, 'order': 9, 'degree': 70, 'first_hit': {'r': 9, 'd': 70, 'nullity': 1}, 'time_s': 299.0}
+debug/data\eq_controls_c5c.json
+debug/data\eq_controls_c5c.json

@@ -1,0 +1,4 @@
+3ddel 1 1 {'valuation_check': True, 'taus': 3, 'time_s': 5.4}
+debug/data\eq_controls_c3_3ddel.json
+3ddel 1 2 {'valuation_check': True, 'taus': 226, 'time_s': 581.3}
+debug/data\eq_controls_c3_3ddel.json

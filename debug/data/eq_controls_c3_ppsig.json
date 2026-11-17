@@ -1,0 +1,12 @@
+{
+ "ppsig_1_1": {
+  "valuation_check": true,
+  "taus": 5,
+  "time_s": 5.4
+ },
+ "ppsig_1_2": {
+  "valuation_check": true,
+  "taus": 228,
+  "time_s": 477.8
+ }
+}

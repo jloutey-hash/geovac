@@ -1,0 +1,18 @@
+debug/data\eq_run_2ppi_1_1_67108859_EQTC.json
+67108859 accepted
+debug/data\eq_run_2ppi_1_1_33554393_EQTC.json
+33554393 accepted
+debug/data\eq_run_2ppi_1_1_67108837_EQTC.json
+67108837 accepted
+debug/data\eq_run_2ppi_1_1_67108819_EQTC.json
+67108819 accepted
+debug/data\eq_run_2ppi_1_1_67108777_EQTC.json
+67108777 accepted
+debug/data\eq_run_2ppi_1_1_67108763_EQTC.json
+67108763 accepted
+debug/data\eq_run_2ppi_1_1_67108757_EQTC.json
+67108757 accepted
+debug/data\eq_run_2ppi_1_1_67108753_EQTC.json
+67108753 accepted
+debug/data\eq_heldout_2ppi_1_1_EQT.json
+debug/data\eq_numeric_2ppi_1_1_EQT.json

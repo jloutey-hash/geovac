@@ -1,0 +1,4 @@
+ppsig 1 2 {'valuation_check': True, 'abs_diff_R=1/2': '1.01e-50', 'ref_tau12_vs_16': '8.29e-35', 'pass_1e-35': True, 'gen_time_s': 128.5, 'time_s': 675.5}
+debug/data\eq_controls_c1f_ppsig.json
+ppsig 2 1 {'valuation_check': True, 'abs_diff_R=1/2': '1.01e-50', 'ref_tau12_vs_16': '8.29e-35', 'pass_1e-35': True, 'gen_time_s': 127.8, 'time_s': 603.6}
+debug/data\eq_controls_c1f_ppsig.json

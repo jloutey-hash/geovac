@@ -1,0 +1,237 @@
+{
+ "planted": "(1+R)(2+R)(3+R)(4+R)(5+R) * f_2ppi(1, 2) (EP: order 9, degree 25; five new apparent points)",
+ "runs": [
+  {
+   "p": 67108859,
+   "DMAX": 60,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 10,
+    "d": 38,
+    "nullity": 2
+   },
+   "time_s": 370.4
+  },
+  {
+   "p": 67108859,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 384.3
+  },
+  {
+   "p": 67108837,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 363.2
+  },
+  {
+   "p": 67108819,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 362.8
+  },
+  {
+   "p": 67108777,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 365.7
+  },
+  {
+   "p": 67108763,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 363.2
+  },
+  {
+   "p": 67108757,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 340.4
+  },
+  {
+   "p": 67108753,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 335.6
+  },
+  {
+   "p": 67108747,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 329.4
+  },
+  {
+   "p": 67108739,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 330.0
+  },
+  {
+   "p": 67108729,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 283.1
+  },
+  {
+   "p": 67108721,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 308.4
+  },
+  {
+   "p": 67108709,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 352.9
+  },
+  {
+   "p": 67108693,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 328.7
+  },
+  {
+   "p": 67108669,
+   "DMAX": 100,
+   "order": 9,
+   "degree": 70,
+   "first_hit": {
+    "r": 9,
+    "d": 70,
+    "nullity": 1
+   },
+   "time_s": 299.0
+  }
+ ],
+ "ladder": {
+  "2": {
+   "ok": false
+  },
+  "3": {
+   "ok": false
+  },
+  "4": {
+   "ok": false
+  },
+  "5": {
+   "ok": false
+  },
+  "6": {
+   "ok": false
+  },
+  "7": {
+   "ok": false
+  },
+  "8": {
+   "ok": false
+  },
+  "9": {
+   "ok": false
+  },
+  "10": {
+   "ok": false
+  },
+  "11": {
+   "ok": false
+  },
+  "12": {
+   "ok": true,
+   "max_num_bits": 151,
+   "max_den_bits": 35,
+   "op_hash": 824909460324775645
+  },
+  "13": {
+   "ok": true,
+   "max_num_bits": 151,
+   "max_den_bits": 35,
+   "op_hash": 824909460324775645
+  },
+  "14": {
+   "ok": true,
+   "max_num_bits": 151,
+   "max_den_bits": 35,
+   "op_hash": 824909460324775645
+  }
+ },
+ "k0": 12,
+ "stable_after_k0": true
+}

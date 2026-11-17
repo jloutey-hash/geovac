@@ -1,0 +1,9 @@
+3dsig 1 1 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+3dsig 1 2 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+3ddel 1 1 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+3ddel 1 2 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+ppsig 1 1 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+ppsig 1 2 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+pppi0 1 1 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+pppi0 1 2 {'Q_reduced_equals_modp': True, 'modp_deterministic': True, 'val_Q': True, 'val_p': True}
+debug/data\eq_controls_c2.json

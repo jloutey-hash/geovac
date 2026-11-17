@@ -1,0 +1,4 @@
+3ddel 1 2 {'valuation_check': True, 'abs_diff_R=1/2': '1.95e-52', 'ref_tau12_vs_16': '1.7e-36', 'pass_1e-35': True, 'gen_time_s': 61.8, 'time_s': 489.3}
+debug/data\eq_controls_c1f_3ddel.json
+3ddel 2 1 {'valuation_check': True, 'abs_diff_R=1/2': '3.12e-51', 'ref_tau12_vs_16': '2.73e-35', 'pass_1e-35': True, 'gen_time_s': 72.1, 'time_s': 453.7}
+debug/data\eq_controls_c1f_3ddel.json
