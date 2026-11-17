@@ -142,3 +142,32 @@ of 1, gamma, ln 2, ln 3 over Q assumed, standard but unproved for gamma).
 All with `--suffix EXS`. For p in 67108859, 33554393, 67108837, 67108819: `python debug/exch_run.py run 1 1 p`,
 `run 1 3/2 p`, `run 1 2 p`; then `heldout 1 1`, `heldout 1 3/2`, `heldout 1 2`; then `numeric 1 1`, `numeric 1 3/2`,
 `numeric 1 2`.
+
+## Results (scored 2026-11-16; record text above unchanged)
+
+Phase 2 ran as registered (`debug/exch_phase2.sh`, 18 steps, every exit code 0). The frozen code files match their
+sha256 at scoring.
+
+**Verdict: VOID (instrument).** Rational reconstruction of the (1, 3/2) operator failed with all four run primes
+(M ~ 2^103), which is the registered VOID clause under EX1. Its `heldout` and `numeric` steps therefore produced no
+result. Every other clause held. The (1, 2) instrument parts and all mod-p readings at both pairs are reported below.
+
+| clause | (1, 3/2) | (1, 2) |
+|:--|:--|:--|
+| EX0 (equal exponents) | held: `run 1 1` gives order 4, degree 8 on all four primes, coefficients mod p identical to the frozen unsuffixed and `_EX` runs; `heldout 1 1` is the frozen operator up to scale, exact residual zero on orders -4..116, third prime fit nullity 1 and matches; `numeric 1 1` 3.7e-92 (R = 1.4), 1.2e-88 (R = 3.015); valuation check passes in every output | (same gate) |
+| EX1 run, scored primes | accepted, order 9, degree 16 on 67108859 and 33554393 (also on 67108837, 67108819) | accepted, order 9, degree 16 on all four primes |
+| EX1 heldout | **failed: reconstruction with four primes** | exact residual zero on 121 unused orders (-9..111); third prime 16777213: fit nullity 1, matches CRT, CRT operator kills all rows incl. 60 held out |
+| EX1 numeric | not run (no Q operator) | vs `exchange_hp` dps 80: 1.6e-90 (R = 1.4), 4.2e-82 (R = 3.015); dps 50 vs 80: 1.7e-62, 1.6e-64 |
+| EX2 order in (4, 14] | 9 (held mod p) | 9 (held) |
+| EX3 finite points | every factor apparent or exponents_only, all four primes (factor degrees sum to 11) | same |
+| EX4 R = 0 | Fuchsian; exponents {-1 (double), 0, 1, 2, 3, 4, 6, 9}; ln R component nonzero | same exponents; ln R nonzero |
+| EX4b onset, value | R^9 ln R, coefficient 9/500 by ratrec on the scored prime (predicted 9/500) | R^9 ln R, exact 256/3375 (predicted 256/3375) |
+| EX5 rates | {-5/2, 3, 2, 0 (x2), -2 (x2), -3 (x2)}: six distinct, all in {0, +-5/2, +-1/2, +-2, +-3}; rank <= 1 | {-3, 4, 2, 0 (x2), -2 (x2), -4 (x2)}: six distinct, all in {0, +-3, +-1, +-2, +-4} |
+
+Reported, not scored: first hit at r = 9, d = 16 at both unequal pairs (r = 4, d = 8 at equal exponents); gcrd inputs
+(10, 10) and (11, 8); the a - b rates (+-1/2, +-1) do not appear at either pair. Timings: generator ~110 s per prime per
+unequal pair; `heldout 1 2` 372 s; `numeric 1 2` 5855 s.
+
+Reading (not a scored claim, VOID stands): the mod-p evidence at (1, 3/2) agrees clause for clause with the fully
+certified (1, 2) operator. The failure is CRT headroom: the (1, 3/2) coefficients carry powers of 2 from b = 3/2
+beyond 103 bits. A follow-up record with more primes, scoring the instrument parts at (1, 3/2), is the PI's call.
