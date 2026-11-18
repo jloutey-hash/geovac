@@ -1044,6 +1044,39 @@ predicts for $n=4$:\ $\epsilon$ times its
 integral is within $1.7\%$ of $(\pi/2)^{3/2}(6\pi)^{-1/2}$ at $10^{-3}$.  Guard:\
 \texttt{tests/test\_paper63\_star\_attainment.py}.
 
+\begin{conjecture}[trees reach their rung]
+\label{conj:tree_attain}
+Take a Coulomb tree of $n$ densities, $3\le n\le8$, at the fingerprint
+weights, on a slice with $t$ on one vertex (the root) and every other scale
+equal to one, each density a center derivative $P_v$ of degree at most two of
+the fingerprint weight.  Let $\sigma_v(\omega)$ be the principal symbol of
+$P_v$ on the unit sphere ($\partial\to-\omega$, $\nabla^2\to1$).  If
+$\int_{S^2}\prod_v\sigma_v(-\omega)\,d\omega\neq0$, the minimal operator of the
+fibre has a composition factor equivalent to the operator of $F_n$.  In
+particular every $s$-type tree, where $\sigma_v\equiv1$, reaches rung $n$.
+\end{conjecture}
+
+\textbf{[ARGUMENT]} This is not proved.  The reason to expect it is local.
+For a source $e^{-kr}r^{a}\sum_js_jr^{-j}$ in angular channel $L$, the
+exponential part of its Coulomb potential is the formal solution of
+$(\theta-L)(\theta+L+1)\Phi=-4\pi r^2s$, whose leading term $-4\pi s_0/k^2$
+does not depend on $L$.  So the exponential part of every potential in the
+tree is local, and the part of the integrand of order $e^{-(n-1)x}$ has
+leading coefficient a product of nonzero radial constants times the angular
+integral above:\ the limit in which all electrons sit at one far point.  With
+that coefficient nonzero, the proof of Proposition~\ref{prop:star_attain}
+would run as written.  The step not carried out is its first one for a general
+tree:\ the split of the integrand on $[1,\infty)$ into pieces with at most
+$n-2$ Bessel factors, with their boundary terms at $x=1$, and one piece of
+order $e^{-(n-1)x}$.  \textbf{[MEASURED]} The local rule reproduces exactly
+the constants already on record (the $p_z$ chain's $1/(3\pi^2)$, the star of
+five), and it predicted the amplitude $1/(12\pi)$ of the chain with a $d$ root
+before that was computed (the $\ell>0$ shapes above).  The second shape there lies outside
+the conjecture:\ its angular integral vanishes, the leading term cancels, and
+the branch is reached one order lower.  For a star of pure harmonics a
+vanishing angular integral makes the fibre vanish identically.  These records
+read a branch coefficient;\ none computes an operator.
+
 
 \textbf{[PRIOR ART]} Most of this structure is known in the mathematics of
 Bessel moments;\ what is new here is the route into it from a molecular
@@ -1130,8 +1163,7 @@ rigidity of massless four-dimensional Feynman integrals, $2(L-1)$ at $L$
 loops~\cite{bourjaily2019}:\ there the loop order caps the geometry, here
 the number of densities one integral links.  On the chemistry side,
 one-center three- and four-electron correlated integrals have closed
-forms~\cite{fromm_hill1987,padhy2017}, consistent with the rung needing
-two-center densities.  A targeted search found no source placing a
+forms~\cite{fromm_hill1987,padhy2017}.  A targeted search found no source placing a
 molecular integral on these operators;\ that is an absence from a search,
 not a proof of absence.  Matuzas~\cite{matuzas2026} relates one channel of
 a different four-electron correlation integral, a ring of Coulomb links
@@ -1941,7 +1973,7 @@ at most $n$ and come from the moments of at most $n$ Bessel functions
 (Proposition~\ref{prop:tree_rung}), which is the order bound of ``nothing above
 it'' in part (i) there, and the same bound holds for densities that are center
 derivatives of degree at most two (Proposition~\ref{prop:tree_rung_l});\ the piece of $F_n$ is present for stars of up to eight densities (Proposition~\ref{prop:star_attain}), and for other trees with $n\ge5$ it
-is not shown.  Part (ii) is the lesson of the three-electron chain
+is not shown (Conjecture~\ref{conj:tree_attain}).  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
 K3 periods and $\pi^3$, but at four generic scale triples integer-relation
 searches at 340 and 400 digits in five bases built from the K3 and elliptic
