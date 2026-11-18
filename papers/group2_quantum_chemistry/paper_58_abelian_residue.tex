@@ -412,20 +412,30 @@ $a=b$ split, and no rate $\pm(a-b)$ appears (records
 \texttt{docs/predictions/2026-11-16\_exchange\_unequal\_zeta\_b.md}, each registered before
 computing;\ the first was void because four primes could not reconstruct the $(1,3/2)$
 operator, and the second supplied more primes).
-\textbf{[SYMBOLIC PROOF]} At $(a,b)=(1,3/2)$ and $(1,2)$ the order is bounded by a derivation, not
+\textbf{[SYMBOLIC PROOF]} For every $0<a<b$ the order is bounded by a derivation, not
 only by the guess.  Differentiating Pachucki's second-order equation for the two-center master
 integral~\cite{pachucki2009} once in each of the four exponents at the exchange point, where its
 coefficient $p^2$ vanishes to second order, gives inhomogeneous equations whose unique decaying
-solutions lie, by exact linear algebra, in the $\mathbb{Q}(R)$-span of nine functions:\ the master
+solutions lie, by exact linear algebra in the ratio $b/a$, in the $\mathbb{Q}(a,b)(R)$-span of nine functions:\ the master
 integral, $E_1((a+b)R)$, $e^{-(a+b)R}$, $e^{-2aR}$, $e^{-2bR}$, $e^{2aR}E_1(2(a+b)R)$,
 $e^{2bR}E_1(2(a+b)R)$,
 $e^{-2aR}\bigl[\mathrm{Ei}(2(a-b)R)-2\,\mathrm{Ei}((a-b)R)+\ln\tfrac{b-a}{b+a}\bigr]$ and its
-$a\leftrightarrow b$ twin.  The resulting closed form agrees with the independently computed integral
-to $45$ digits or better at three distances.  The order is therefore at most $9$, and the operator
-the closed form yields is the reconstructed one.  That the order is exactly $9$ rests on the guessed
-search, which excluded lower orders up to degree $60$ \textbf{[MEASURED]};\ equal exponents, general
-$a<b$ and the $2p$ and $3d$ cases below are not covered by this derivation (guard
-\texttt{tests/test\_paper58\_pachucki\_exchange.py}).
+$a\leftrightarrow b$ twin.  The span is closed under $d/dR$, so the order is at most $9$.  At
+$(1,3/2)$ and $(1,2)$ the resulting closed form agrees with the independently computed integral
+to $45$ digits or better at three distances, and the operator it yields is the reconstructed one.
+That the order is exactly $9$ rests on the guessed
+search, which excluded lower orders up to degree $60$ \textbf{[MEASURED]}.  As $b\to a$ the
+closed form tends to Sugiura's formula~\cite{sugiura1927}, which recovers the bound $4$ at equal
+exponents.  The same derivation places four integrals of the next two paragraphs in the same span
+for every $0<a<b$:\ $2p\sigma_{\rm A}1s_{\rm B}$, $3d_{0,{\rm A}}1s_{\rm B}$,
+$2p\sigma_{\rm A}2p\sigma_{\rm B}$ and the complex pair $2p_{+1,{\rm A}}2p_{+1,{\rm B}}$.  At
+$(1,2)$ the operators it yields for the first, third and fourth are the reconstructed ones, and
+for $3d_{0}$, which no record computed there, it yields a single operator of order $9$ and degree
+$53$ (that no lower order exists is not checked for $3d_0$).  The $2p_{\pm1}1s$ and
+$3d_{\pm2}1s$ integrals are not covered.  Of real $2p_x2p_x$ exchange only the $\sigma=0$ part, the
+$2p_{+1}2p_{+1}$ integral, is covered;\ its $\sigma=2$ part is the $3d_{\pm2}$ integral up to a
+constant (guards \texttt{tests/test\_paper58\_pachucki\_exchange.py} and
+\texttt{tests/test\_paper58\_pachucki\_extension.py}).
 \textbf{[SYMBOLIC + MEASURED]} A $2p$ orbital keeps that shape.  For
 $(2p\sigma_{\rm A}1s_{\rm B}|2p\sigma_{\rm A}1s_{\rm B})$ and
 $(2p_{+1,{\rm A}}1s_{\rm B}|2p_{-1,{\rm A}}1s_{\rm B})$, the radial part of real
@@ -489,9 +499,11 @@ closed forms are classical~\cite{mulliken1949,roothaan1951}, as are the $(AA|BB)
 ones~\cite{lesiuk2014a}, and an operator of this kind exists for any function built from these atoms with
 rational coefficients.  What is measured here is its order and its singularities.
 
-Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ exchange $1s$ at equal exponents
-and at two unequal pairs (the Neumann series does not terminate there), and with one $2p$
-orbital on one centre at two pairs;\
+Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ for exchange, the bound $9$ on the order is
+derived for every $0<a<b$ for $1s$ and four $\sigma=0$ integrals, while the reconstructed operators
+are at equal exponents (order $4$) and at one or two unequal pairs (order exactly $9$;\
+the Neumann series does not terminate there), for $1s$, one $2p$ or $3d$ orbital against $1s$,
+and $2p$ on both centres;\
 the exchange operator is a common right divisor of found annihilators, not certified minimal, and its
 finite singular points are read modulo primes, with the log test run only on linear factors;\
 $\gamma_E$, $\ln 2$ and $\ln 3$ are assumed independent over $\mathbb{Q}$;\ minimality assumes
@@ -1597,7 +1609,7 @@ cross-center classes grow with the number of center pairs.
 
 \begin{table}[b]
 \caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in the
-\texttt{tests/test\_paper58\_*} suite (fifteen files, plus
+\texttt{tests/test\_paper58\_*} suite (plus
 \texttt{tests/test\_two\_center\_eri\_aabb.py} for the $(AA|BB)$ rows; per-claim mapping in
 \texttt{docs/claim\_test\_matrix.md}).  \textsc{owed} $=$
 result stands on an exploratory driver and must be migrated
@@ -1631,7 +1643,7 @@ Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
 QFD 1e closed forms (Sec.~\ref{sec:qfd}) & SYMBOLIC & \textsc{live} \\
 $R$-operators, $l\le2$ panel (Sec.~\ref{sec:census}) & SYMB.\ + MEAS. & \textsc{live} \\
-exchange order $\le9$, two pairs (Sec.~\ref{sec:census}) & SYMBOLIC & \textsc{live} \\
+exchange order $\le9$, every $0<a<b$, $1s$ and four $\sigma=0$ integrals (Sec.~\ref{sec:census}) & SYMBOLIC & \textsc{live} \\
 QFD H$_2$ 60-digit energy & MEASURED & \textsc{live} (fast legs) + certified tables \\
 QFD LiH 30-digit ($\tau$-tail net) & MEASURED & \textsc{live} (slow:\ full rebuild + tail bound) \\
 \end{tabular}

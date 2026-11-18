@@ -38,7 +38,8 @@ Claims guarded, each with the wrong answer it rejects:
     for NA, {3/2, 5/2, 7/2} with blocks {3/2, 5/2} / {5/2} for f'; compared with the operators (f': recomputed here;
     (AA|BC): record MO's embedded operators, read by the same indicial code; NA and the (AA|BC) blocks: stored
     readings, sha256 pinned).  This is a consistency check of a rule matched on two objects and tested on one; the
-    rule's two steps are not derived, and the guard does not make them so;
+    rule's two steps are not proved, and the guard does not make them so (the mechanism the paper gives for
+    them is guarded separately, tests/test_paper59_pinch_germ.py);
 (6) instrument control: an order-2 operator with solutions (x_t - x)^{3/2}, (x_t - x)^k (x_u - x)^{1/2} is read as
     {3/2, k} for k = 5/2 and 7/2 (rejects a reader that reports a fixed set, or cannot see 5/2 absent);
 (7) decay: slope of F_L / rho^L over L = 200..240 near -3 and on the 5/2 toy, about 1 away from the 3/2 and 7/2 toys;
@@ -793,14 +794,14 @@ def _flat(path):
 
 def test_paper_paragraph_states_the_readings_and_the_caveat():
     """Paper 59 sec:scope, from '[ARGUMENT + MEASURED]} A counting rule' to the record pointer.  Wrong answers
-    rejected: the caveat sentence dropped (the rule's two steps presented as derived); a 9/2 claimed for f'; the
+    rejected: the caveat dropped (the rule's two steps presented as derived or proved); a 9/2 claimed for f'; the
     blocks or the two-geometry / two-prime scope missing; the tier label changed."""
     text = _flat(PAPER)
     start = text.index(r'\textbf{[ARGUMENT + MEASURED]} A counting rule accounts for these exponents.')
     end = text.index(r'(record \texttt{docs/predictions/2026-11-18\_aa\_bc\_operator\_exponents.md}, registered before '
                      'computing', start)
     par = text[start:end]
-    assert len(par) < 2500
+    assert len(par) < 3600
     for phrase in (r'Only five of the $21$ pieces are singular at $x^{*}$',
                    r'$\mu^2e^{-\mu s}/(4\pi s)$, whose potential has an $|\mathbf{s}|$ term',
                    r'exponents $3/2$, $5/2$ and $7/2$ with no $9/2$',
@@ -810,10 +811,12 @@ def test_paper_paragraph_states_the_readings_and_the_caveat():
                    'On this reading no $5/2$ arises because the potential of a bounded density has no $|\\mathbf{s}|$ term',
                    'The rule was read from this integral and from the one-electron one ($3/2$ and $5/2$)',
                    'Two steps of the rule, one branch per group and potential and the resolution of coinciding '
-                   'branches at the next order, are supported by that prediction and not derived'):
+                   'branches at the next order, are accounted for by one mechanism, checked exactly but not proved',
+                   'the check was made after scoring',
+                   'are argued, not proved'):
         assert phrase in par, phrase
-    assert 'derived' not in par.replace('supported by that prediction and not derived', '')
-    assert 'theorem' not in par.lower() and 'proved' not in par.lower()
+    assert 'derived' not in par
+    assert 'theorem' not in par.lower() and 'proved' not in par.lower().replace('not proved', '')
 
 
 def test_record_results_state_the_guarded_readings():
@@ -928,7 +931,8 @@ def test_own_weights_give_the_same_exponents(case, p):
 #   T11 embedded D2 block operator := D1 block operator       blocks FIRED
 #   T12 embedded non-carrier piece operator := a D1 piece's   pieces FIRED
 #   T13 paper: caveat sentence deleted                        FIRED
-#   T14 paper: 'and not derived' => 'and derived'             FIRED
+#   T14 paper: 'but not proved' => 'and proved' (re-fired 2026-11-18 after the sentence was revised; the
+#       earlier plant was 'and not derived' => 'and derived')    FIRED
 #   T15 paper: 'with no $9/2$' => 'and $9/2$'                 FIRED
 #   T16 paper: 'held at two' => 'held at three'               FIRED
 #   T17 Phi5(A1) x (1 + 1e-3), formula check bypassed         FIRED (the fit alone)

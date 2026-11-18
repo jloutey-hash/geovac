@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.38] - 2026-11-18
+
+**The four items left open at v6.7.37, worked through (PI-directed: "Let's do those still open items"; paper changes
+PI-approved). No new pre-registered record.**
+
+### Added
+- Paper 58 [SYMBOLIC PROOF], extended (PI-approved): the order of the 1s exchange operator is at most 9 for every
+  0 < a < b, not only at (1, 3/2) and (1, 2). Exact algebra over Q(t), t = b/a, plus the scaling
+  K(R; a, b) = a K(aR; 1, b/a): all 15 derivative equations of Pachucki's second-order equation solve with zero
+  residual, and K lies in the Q(a,b)(R)-span of the same nine functions, closed under d/dR. As b -> a the closed
+  form tends to Sugiura's formula (prior art; recovers the bound 4). The same holds for four m = 0 integrals with
+  l > 0: 2p-sigma 1s, 3d0 1s, 2p-sigma 2p-sigma and the complex pair 2p+1 2p+1; at (1, 2) the derived operators are
+  the reconstructed ones, and 3d0 gives a single (9, 53). Exactly 9 stays [MEASURED]. Not covered: 2p+-1 1s,
+  3d+-2 1s, the sigma = 2 part of real 2p_x 2p_x exchange. Independent review SOUND WITH CAVEATS (its own
+  integrator matched five cases at a fresh point to 48 digits; the one gap, intermediates' denominators and decay
+  for three cases, was then closed). Guard `tests/test_paper58_pachucki_extension.py` (45 fast + 35 slow),
+  fire-tested 77/82 with the 5 non-fires covered elsewhere. PM re-fired a 2p-sigma 2p-sigma normalisation plant:
+  not caught by the fast tier, caught by three slow tests (the fast tier covers the three largest cases through
+  frozen coefficients).
+- Paper 59 (PI-approved): the caveat "two steps supported, not derived" on the contact-exponent counting rule is
+  replaced by a mechanism, [ARGUMENT + MEASURED], checked exactly but not proved: each endpoint piece's
+  half-integer local solution at x* agrees with the endpoint part of the Landau-pinch germ of the potential it
+  sees, one order past leading. Four or five Taylor coefficients per case, exact modulo two primes, both objects,
+  two geometries each; checked after scoring. Independent review SOUND WITH CAVEATS. Guard
+  `tests/test_paper59_pinch_germ.py` (69 fast + 4 slow).
+- `tests/test_paper63_local_rule.py` (39 fast): the local rule and leading constants behind Paper 63
+  `conj:tree_attain`, which had no test in tests/.
+- Positive geometry, one centre (`debug/lit_scan/2026-11-18_positive_geometry_chain_check_memo.md`): the 1s
+  three-vertex Yukawa/Coulomb chain equals 64 pi^3 d_a d_c of the three-site flat-space wavefunction coefficient,
+  symbolically and numerically, and reproduces Paper 63's one-centre chain values. Corrects the earlier memo:
+  s-type trees are not all rational (a 1s vertex of degree 3 gives logarithms). Not in a paper (PI: hold; the
+  equation number in arXiv:1709.02813 is unconfirmed).
+
+### Changed
+- Paper 58 backing-table row, Caps paragraph and caption follow the extended bound (self-check findings).
+- `docs/claim_test_matrix.md` (two rows), `docs/chemistry_period_inventory.md` rows 3c and 6.
+
+### Notes
+- Pre-checkpoint self-check: round 1 found 2 LARGE, both stale summary surfaces in Paper 58 that understated the
+  new bound (backing table, Caps); fixed with the SMALL items. Round 2: 0 LARGE; two SMALL wording slips fixed.
+- The first positive-geometry run hung for about eight hours on a sympy symbolic integral before it was stopped.
+- Left open: the exchange bound for m != 0 (needs the r12-weighted masters; plan in
+  `debug/pachucki_extension_memo.md`); a proof that the order is exactly 9; order 14 of record MO not
+  independently confirmed.
+
 ## [v6.7.37] - 2026-11-18
 
 **Literature search on both sides of the chemistry / Feynman-integral bridge, and what it led to (PI-directed: "do

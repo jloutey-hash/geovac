@@ -1084,9 +1084,19 @@ prediction, exponents $3/2$, $5/2$ and $7/2$ with no $9/2$, the first group with
 $5/2$, the second with $5/2$ alone, and a leading $(x^{*}-x)^{5/2}$ branch, held at two
 geometries (one not used in reading the rule), modulo two primes.  Two steps of the rule, one
 branch per group and potential and the resolution of coinciding branches at the next order,
-are supported by that prediction and not derived (record
-\texttt{docs/predictions/2026-11-18\_aa\_bc\_operator\_exponents.md}, registered before computing;\ guard
-\texttt{tests/test\_paper59\_operator\_exponents.py}).  The screened components leave the two-center class on their own, as functions of
+are accounted for by one mechanism, checked exactly but not proved:\ the half-integer local
+solution of each endpoint piece at $x^{*}$ agrees with the endpoint part, at the sphere about B
+through C or through A, of the Landau-pinch germ (the local expansion at $x^{*}$ of the pinch
+integral) of the potential that piece sees, computed to one order beyond the leading term.  If so, two potentials at one endpoint differ by the germ of their
+difference, and the two endpoints' germs of one potential differ at the next order by an explicit
+rational, nonzero in the four cases computed.  These parameter-free predictions, four or five
+Taylor coefficients per case, match the operators exactly modulo two primes, for both objects at
+two geometries each;\ the check was made after scoring, and for $(AA|BC)$ on piece operators
+recomputed from that record's sequences.  That each piece has a one-dimensional branch, that the pinch expansion converges, and that
+the identification holds beyond the order checked, are argued, not proved (record
+\texttt{docs/predictions/2026-11-18\_aa\_bc\_operator\_exponents.md}, registered before computing;\ guards
+\texttt{tests/test\_paper59\_operator\_exponents.py} and
+\texttt{tests/test\_paper59\_pinch\_germ.py}).  The screened components leave the two-center class on their own, as functions of
 the angle:\ the test was first undecided, because four exponential rates, the roots of
 $\lambda^4-\tfrac{51}{20}\lambda^2+\tfrac{81}{25}$, do not split modulo its two primes;\ on two
 further primes in which they split, all fifteen stop with no factor peeled and pass the
