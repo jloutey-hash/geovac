@@ -1,0 +1,20 @@
+{
+ "coulomb": {
+  "-1": "0",
+  "1": "0",
+  "3": "2*zeta**4/3",
+  "5": "8*zeta**6/45",
+  "7": "2*zeta**8/105"
+ },
+ "yukawa": {
+  "-1": "0",
+  "1": "0",
+  "3": "2*zeta**4/3",
+  "5": "zeta**4*(kappa**2 + 8*zeta**2)/45",
+  "7": "zeta**4*(kappa**4 + 8*kappa**2*zeta**2 + 48*zeta**4)/2520"
+ },
+ "yukawa_kappa0_minus_coulomb": "0",
+ "yukawa_helmholtz_residual": "0",
+ "note": "(-lap + kappa^2) V = 4 pi rho, rho bounded: s^-1 needs a point charge, s^1 needs rho ~ 1/s; v3 = -4 pi rho_1 / 12 for every kappa",
+ "secs": 1
+}

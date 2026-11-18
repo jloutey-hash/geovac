@@ -96,3 +96,22 @@ Hill are already credited.
 
 Unverified items to close before citing: Kay-Silverstone V volume and pages; Harris 2002 abstract; Byers
 Brown-Steiner abstract wording; Sidi 2011 statement; Podolanski 1931 and Kotani (not reached).
+
+## Corrections after primary-source verification (2026-11-17, citation-reviewer + PM)
+
+- Hannesdottir-Mizera, arXiv:2204.02988, Eq. (7.12): the exponent is called rho, with d defined at Eq. (7.3). The
+  source states the leading form only for rho <= 0 and for isolated non-degenerate saddles, and calls rho > 0
+  non-singular. It gives no support for the positive half-integer exponents at x*; do not cite it for them.
+- The memo's adapted count predicting a 5/2 term in (AA|BC) was wrong: it gave A's density cusp a power 1/2 in the
+  same integral as C's cusp, but that cusp reaches the second electron only through 1/r12. Done correctly the count is
+  the corpus's own segment-average mechanism, and the 5/2 coefficient vanishes identically (the potential of a bounded
+  density has no s^-1 or s^1 term). See `debug/l52_design_memo.md`.
+- Fresan-Sabbah-Yu (Duke Math. J. 171, 2022), Prop. 2.7: Sym^k Kl_2 is irreducible for all k, over C. Nothing found
+  identifies that connection with Paper 63's F_n operator, so it does not lift the n <= 8 limit.
+- Silverstone-Kay III is J. Chem. Phys. 48, 4108-4115 (1968), not 4116. Its abstract gives an infinite series and
+  does not state a constant class.
+- Pachucki 2009/2012 read in full: the exchange integral at any exponents lies inside the master integral, and at
+  exchange exponents the second-order equation has p^2 = 0 (two quadratures of an explicit source). Followed up in
+  `debug/pachucki_exchange_bound_memo.md`.
+- Content not reached (exist as cited; nothing should rest on what they say): Podolanski 1931, Kotani tables,
+  Harris 2002, Kay-Silverstone V, Sidi 2011 full text.
