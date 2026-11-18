@@ -409,6 +409,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | RE-INTERPRETATION of the two A-coefficient rows (/qa group5, 2026-11-07): the per-t target 1/(24 pi t) they were graded against was dimensionally wrong; the continuum cone tip is t-independent (1/6). The UV-recovery negatives stand; "A supplied analytically" is withdrawn | 0 | See `docs/failed_approaches_ledger.md`; Paper 51. |
 | RE-INTERPRETATION of the single-constant graph-to-continuum QED projection row (2026-11-07): measured with an SO(4) channel count that paired mixed-sign spinor content; with the corrected count C×F₂ stays near 150× α/(2π) instead of growing, and C_VP/C_SE is 0.137, not ≈ 3/29. The negative (no convergence to α/(2π)) stands | 0 | See `docs/failed_approaches_ledger.md`; Paper 28; `debug/sprint_w_channel_count_correction_memo.md`. |
 | Fixed atom-set exponential basis vs ANO-R1 on CH4/NH3/H2O/HF (HP, 2026-11-12) | 1 | Below cc-pVDZ everywhere, but ANO-R1 lower on all four at a smaller 1-norm: no separation in the Gaussian pack. See `docs/failed_approaches_ledger.md`; record `docs/predictions/2026-11-12_heavy_atom_panel.md`. |
+| Peeling a found right factor off the hard four-centre key recurrences (C1 diagnostic, 2026-11-18) | 1 | 0 of 63 unfound keys become findable; the quotient's degree inflates, so cost rises. See `docs/failed_approaches_ledger.md`. |
 
 ---
 

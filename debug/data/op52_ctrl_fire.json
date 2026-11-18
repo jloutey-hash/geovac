@@ -1,0 +1,215 @@
+{
+ "all_pass": true,
+ "plants": [
+  {
+   "plant": "baseline",
+   "got": "GO",
+   "want": "GO",
+   "ok": true
+  },
+  {
+   "plant": "control failed",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "hash mismatch",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "exception",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "operator not found, one prime",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "endpoint keys missing",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "seeds disagree",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "primes disagree: full set",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "primes disagree: order",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "primes disagree: D1 block",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "primes disagree: D2 block",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "block seeds disagree (D1)",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "block seeds disagree (D2)",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "rank-2 control fails (controls_pass False)",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "beta precision",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "void beats stop",
+   "got": "VOID",
+   "want": "VOID",
+   "ok": true
+  },
+  {
+   "plant": "5/2 absent (f-like set)",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "3/2 absent",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "5/2 present only at A4",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "no half exponent",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "F1: beta at 3/2 toy",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "F1: beta at 7/2 toy",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "F1: beta 0.15 off",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "case missing",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "prime missing",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "beta missing",
+   "got": "STOP",
+   "want": "STOP",
+   "ok": true
+  },
+  {
+   "plant": "9/2 instead of 7/2 (collision resolves late)",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "extra 9/2 (four branches)",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "only {3/2, 5/2} (D1, D2 branches coincide)",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "D1 block one-dimensional",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "D1 block three branches",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "D2 block at 7/2",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "D2 block two branches",
+   "got": "BORDERLINE",
+   "want": "BORDERLINE",
+   "ok": true
+  },
+  {
+   "plant": "OP5 amplitude off, OP4 non-monotone (reported only)",
+   "got": "GO",
+   "want": "GO",
+   "ok": true
+  },
+  {
+   "plant": "beta 0.09 off (inside tol)",
+   "got": "GO",
+   "want": "GO",
+   "ok": true
+  }
+ ]
+}

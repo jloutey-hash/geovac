@@ -1,0 +1,983 @@
+{
+ "case": "C1",
+ "primes": [
+  1073741441,
+  1073741381
+ ],
+ "by_type": {
+  "single_E1": {
+   "n_unfound": 30,
+   "findable_both": 0,
+   "findable_one": 0
+  },
+  "ln": {
+   "n_unfound": 4,
+   "findable_both": 0,
+   "findable_one": 0
+  },
+  "pure_exp": {
+   "n_unfound": 7,
+   "findable_both": 0,
+   "findable_one": 0
+  },
+  "depth2_B": {
+   "n_unfound": 16,
+   "findable_both": 0,
+   "findable_one": 0
+  },
+  "E1xE1": {
+   "n_unfound": 6,
+   "findable_both": 0,
+   "findable_one": 0
+  }
+ },
+ "classes": {
+  "(Fraction(-103, 20), (('E1', Fraction(-1, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), (('E1', Fraction(-11, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), (('E1', Fraction(98, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), (('ln', Fraction(11, 1)),))": {
+   "type": "ln",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), (('ln', Fraction(2, 1)),))": {
+   "type": "ln",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), (('ln', Fraction(3, 1)),))": {
+   "type": "ln",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), (('ln', Fraction(7, 1)),))": {
+   "type": "ln",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-103, 20), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-113, 20), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-169, 20), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-19, 20), (('E1', Fraction(2, 1)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-19, 20), (('E1', Fraction(203, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-19, 20), (('E1', Fraction(21, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-19, 20), (('E1', Fraction(58, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-327, 100), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-37, 20), (('E1', Fraction(11, 10)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-37, 20), (('E1', Fraction(33, 10)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-41, 20), (('E1', Fraction(18, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('B', Fraction(-1, 2), ((Fraction(23, 10), Fraction(0, 1)),), Fraction(-3, 2), Fraction(1, 1), Fraction(7, 5)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('B', Fraction(-1, 2), ((Fraction(23, 10), Fraction(0, 1)),), Fraction(-3, 2), Fraction(7, 5), Fraction(9, 4)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('B', Fraction(-1, 2), ((Fraction(3, 10), Fraction(0, 1)),), Fraction(-3, 2), Fraction(1, 1), Fraction(7, 5)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('E1', Fraction(14, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('E1', Fraction(28, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('E1', Fraction(4, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-43, 20), (('E1', Fraction(63, 10)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-47, 20), (('E1', Fraction(168, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-59, 20), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-23, 10), ((Fraction(-5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(-15, 4)),), Fraction(0, 1), Fraction(9, 4), None),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(1, 1), Fraction(7, 5)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(7, 5), Fraction(9, 4)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(9, 4), None),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-3, 10), ((Fraction(-5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-3, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('B', Fraction(-3, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(1, 1), Fraction(7, 5)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('E1', Fraction(15, 8)), ('E1', Fraction(207, 40))))": {
+   "type": "E1xE1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('E1', Fraction(21, 50)), ('E1', Fraction(29, 20))))": {
+   "type": "E1xE1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('E1', Fraction(23, 10)), ('E1', Fraction(5, 4))))": {
+   "type": "E1xE1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-7, 5), (('E1', Fraction(3, 10)), ('E1', Fraction(5, 4))))": {
+   "type": "E1xE1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-907, 100), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-91, 50), (('E1', Fraction(29, 20)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-91, 50), (('E1', Fraction(29, 4)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-97, 20), (('E1', Fraction(1, 10)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-97, 20), (('E1', Fraction(18, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-97, 20), (('E1', Fraction(3, 10)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(-99, 20), ())": {
+   "type": "pure_exp",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(103, 20), (('E1', Fraction(54, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(13, 20), (('B', Fraction(-1, 2), ((Fraction(23, 10), Fraction(0, 1)),), Fraction(-3, 2), Fraction(7, 5), Fraction(9, 4)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(13, 20), (('E1', Fraction(63, 10)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(13, 20), (('E1', Fraction(98, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(41, 20), (('E1', Fraction(21, 2)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(41, 20), (('E1', Fraction(36, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(41, 20), (('E1', Fraction(7, 1)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(47, 20), (('E1', Fraction(54, 5)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(-15, 4)),), Fraction(0, 1), Fraction(9, 4), None),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(7, 5), Fraction(9, 4)),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(7, 5), (('B', Fraction(-23, 10), ((Fraction(5, 2), Fraction(15, 4)),), Fraction(0, 1), Fraction(9, 4), None),))": {
+   "type": "depth2_B",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(7, 5), (('E1', Fraction(15, 8)), ('E1', Fraction(207, 40))))": {
+   "type": "E1xE1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(7, 5), (('E1', Fraction(161, 50)), ('E1', Fraction(29, 20))))": {
+   "type": "E1xE1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(97, 20), (('E1', Fraction(203, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(97, 20), (('E1', Fraction(21, 2)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  },
+  "(Fraction(97, 20), (('E1', Fraction(348, 25)),))": {
+   "type": "single_E1",
+   "findable": [
+    false,
+    false
+   ],
+   "hits": [
+    {},
+    {}
+   ],
+   "key_op": [
+    null,
+    null
+   ]
+  }
+ },
+ "n_unfound": 63,
+ "n_findable_both": 0
+}

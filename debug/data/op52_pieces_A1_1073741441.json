@@ -1,0 +1,198 @@
+{
+ "case": "A1",
+ "prime": 1073741441,
+ "xstar": "125/117",
+ "pieces": {
+  "(Fraction(-117, 50), '1', None)": {
+   "order": 5,
+   "degree": 16,
+   "xstar": [
+    "0",
+    "1",
+    "3/2",
+    "2",
+    "3"
+   ]
+  },
+  "(Fraction(-162, 25), '1', None)": {
+   "order": 5,
+   "degree": 28,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'E1', Fraction(-27, 10))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'E1', Fraction(13, 10))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'E1', Fraction(189, 50))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(1, 2))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(21, 10))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(3, 2))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-162, 25), 'ln', Fraction(41, 10))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-189, 50), '1', None)": {
+   "order": 6,
+   "degree": 36,
+   "xstar": [
+    "0",
+    "1",
+    "3/2",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  "(Fraction(-209, 50), '1', None)": {
+   "order": 10,
+   "degree": 76,
+   "xstar": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "7/2",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8"
+   ]
+  },
+  "(Fraction(-389, 50), '1', None)": {
+   "order": 10,
+   "degree": 76,
+   "xstar": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "7/2",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8"
+   ]
+  },
+  "(Fraction(-513, 50), '1', None)": {
+   "order": 6,
+   "degree": 36,
+   "xstar": [
+    "0",
+    "1",
+    "3/2",
+    "2",
+    "3",
+    "4"
+   ]
+  },
+  "(Fraction(-72, 25), 'E1', Fraction(13, 10))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-72, 25), 'E1', Fraction(369, 50))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-72, 25), 'E1', Fraction(9, 10))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(-9, 5), '1', None)": {
+   "order": 5,
+   "degree": 13,
+   "xstar": null
+  },
+  "(Fraction(-9, 5), 'E1', Fraction(299, 50))": {
+   "order": 4,
+   "degree": 13,
+   "xstar": null
+  },
+  "(Fraction(162, 25), 'E1', Fraction(533, 50))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(72, 25), 'E1', Fraction(533, 50))": {
+   "order": 4,
+   "degree": 26,
+   "xstar": null
+  },
+  "(Fraction(9, 5), 'E1', Fraction(299, 50))": {
+   "order": 4,
+   "degree": 13,
+   "xstar": null
+  }
+ },
+ "subsets": {
+  "xstar_carriers": {
+   "n": 5,
+   "order": 13,
+   "degree": 107,
+   "xstar": [
+    "0",
+    "1",
+    "3/2",
+    "2",
+    "3",
+    "7/2",
+    "4",
+    "9/2",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+   ]
+  },
+  "all": {
+   "n": 21,
+   "order": 14,
+   "degree": 111,
+   "xstar": [
+    "0",
+    "1",
+    "3/2",
+    "2",
+    "3",
+    "7/2",
+    "4",
+    "9/2",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+   ]
+  }
+ },
+ "time": 200.9
+}
