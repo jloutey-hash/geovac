@@ -196,3 +196,67 @@ python debug/op52_run.py score --registered       # -> debug/data/op52_score.jso
 plus about 8 min of operators (full operator and both blocks under 2 weights, 21 per-piece operators for OP4):
 about 17 min each, 68 min for four. Each beta run is about 3-4 min of exact split plus evaluation: about 15 min for four. **Total about
 85 min serial, about 45 min with two processes.**
+
+## Results (scored 2026-11-18; `python debug/op52_run.py score --registered` -> `debug/data/op52_score.json`)
+
+**Verdict: GO.** OP0 holds; OP1, OP2 and OP3 hold at A1 and at the fresh A4, on both primes and both weight
+vectors. No VOID flag. The reported clauses OP4 and OP5 hold as well.
+
+**OP0 (instrument).** All controls pass (`controls_pass`), including the independent rank-2 control K6c; the 26
+frozen files hash-match (`hash_ok`); no run carries an error; keys present and distinct in all four runs; the two
+primes and the two weight vectors agree on every reading below; 2000 against 2600 digits give identical beta values.
+Gate fire test 35/35.
+
+| reading | predicted | A1, p1 | A1, p2 | A4, p1 | A4, p2 |
+|:--|:--|:--|:--|:--|:--|
+| full operator (order, degree) | (reported) | (14, 109) | (14, 109) | (14, 109) | (14, 109) |
+| OP1: half-integer exponents at x*, full operator | {3/2, 5/2, 7/2}, 9/2 absent | {3/2, 5/2, 7/2} | same | same | same |
+| OP2: D1 block | {3/2, 5/2} | {3/2, 5/2} | same | same | same |
+| OP2: D2 block | {5/2} | {5/2} | same | same | same |
+
+p1 = 1073741441, p2 = 1073741381; every cell is the same under both weight vectors.
+
+| | A1 | A4 |
+|:--|:--|:--|
+| OP3: beta_eff(220) of f' against the 5/2 toy (tolerance 0.10) | -3.0607 against -3.0697 | -3.0504 against -3.0577 |
+| OP4 (reported): beta falls monotonically toward -3 | yes | yes |
+| OP5 (reported): 5/2 amplitude, predicted Phi5 | -0.810147982236 | -0.228766049949 |
+| OP5: measured / predicted, extrapolated r0 (tolerance 1e-3) | 0.99999926 | 0.99999969 |
+| OP5: raw ratio at L = 240, fitted c1 | 0.99213, -1.82 | 0.99354, -1.50 |
+
+**Reading.**
+- The counting rule read from the (AA|BC) per-piece operators predicted the contact exponents of a different
+  object before it was computed, and every gating clause held at both geometries: with a density on A whose
+  potential has an s^1 term, the minimal bond-angle operator shows 3/2, 5/2 and 7/2 at x* and no 9/2; the near-end
+  block shows 3/2 and 5/2, the far-end block 5/2 alone; and f' itself leads with 5/2. The rule now accounts for
+  three objects: the two it was matched on ((AA|BC), {3/2, 7/2, 9/2}, no 5/2; one-electron NA, {3/2, 5/2}) and one
+  predicted (f', fresh only at A4; A1 is the geometry the rule was matched on, and reads the same).
+- This is consistent with the reading that 5/2 is absent from the (AA|BC) operator because the potential of a
+  bounded density has no s^1 term (derived in L52); f' supplies an s^1 term and 5/2 appears. f' differs from f in
+  more than that term (Y enters without dY, and the far-end jump is V' rather than S), so this is a reading, not
+  an isolated cause.
+- OP5: the segment-average amplitude formula of record L52 holds at p = 1, between L52's gating p = 3 and its
+  p = -1 control: |r0 - 1| is 7.4e-7 and 3.1e-7 with the registered four-term fit, and about 1e-9 with five terms.
+- Caps as registered: 1s functions; two geometries; exponents are candidate indicial roots read mod p on two
+  primes, not certified over Q; the operator is not certified minimal; the 21 constants are assumed linearly
+  independent; the gating decay clause reads beta at L = 220 only; the rule's two matched steps (one branch
+  dimension per endpoint and potential; the collision step) are supported by this prediction, not derived, and
+  the two readings of the collision step coincide on this object, so the data do not tell them apart; one fresh
+  object.
+- Paper consequence as registered for GO: Paper 59 gains one clause at [ARGUMENT + MEASURED] with the rule and the
+  three objects.
+
+**OP4 (reported), in full.** x* is a singular point of exactly the five endpoint pieces: the three D1 pieces have
+orders 5, 6, 6, each with {3/2}; the two D2 pieces have order 10, each with {5/2}. The integer exponents of the full
+operator at x* are 0..10 (all 14 indicial roots are accounted for: 0..10, 3/2, 5/2, 7/2). The D1 block has order 11
+and the D2 block order 10. The full operator has the same order as f's (14) with three half-integer branches in
+both; Y without dY did not add a branch dimension. Its degree is 109 against f's 111; that difference is not
+interpreted. The other singular points of the operator were not recorded.
+
+Cold review of the scoring: 0 MUST-FIX, 5 SHOULD-FIX (the Reading stated a cause the data do not isolate; "three
+objects" now names the two matched ones; four registered caps restored; OP4 reported in full; the OP5 figure
+relabelled), 4 NIT; applied. The reviewer recomputed one case with its own weights and its own indicial reader (all
+14 roots, 9/2 not among them), re-read every gating clause from the raw runs, rechecked the 26 hashes and the file
+times against the registration commit, refitted OP5 with 3 to 6 terms, and confirmed the GO. Its caveat: the
+coefficients and the operator guesser are the same frozen engine; only the weights and the indicial reader were
+independent.
