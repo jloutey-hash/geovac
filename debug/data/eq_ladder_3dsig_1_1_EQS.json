@@ -1,0 +1,129 @@
+{
+ "case": "3dsig",
+ "pair": [
+  "1",
+  "1"
+ ],
+ "accepted": [
+  67108859,
+  33554393,
+  67108837,
+  67108819,
+  67108777,
+  67108763,
+  67108757,
+  67108753,
+  67108747
+ ],
+ "rejected": [],
+ "ladder": {
+  "4": {
+   "ok": false,
+   "error": "rational reconstruction failed with 4 primes (M ~ 2^103)"
+  },
+  "5": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 55,
+   "max_den_bits": 19
+  },
+  "6": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 55,
+   "max_den_bits": 19
+  },
+  "7": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 55,
+   "max_den_bits": 19
+  },
+  "8": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 55,
+   "max_den_bits": 19
+  },
+  "9": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 55,
+   "max_den_bits": 19
+  }
+ },
+ "CAP": 96,
+ "reference_shape": [
+  4,
+  24,
+  [
+   23,
+   24,
+   24,
+   24,
+   24
+  ]
+ ],
+ "scored_shapes": [
+  [
+   4,
+   24,
+   [
+    23,
+    24,
+    24,
+    24,
+    24
+   ]
+  ],
+  [
+   4,
+   24,
+   [
+    23,
+    24,
+    24,
+    24,
+    24
+   ]
+  ]
+ ],
+ "scored_rates": {
+  "67108859": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ],
+  "33554393": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ]
+ },
+ "scored_rates_all_rational": {
+  "67108859": true,
+  "33554393": true
+ },
+ "scored_primes_agree": true,
+ "k0": 5,
+ "k0_plus_4_agrees": true,
+ "time_s": 50.0
+}

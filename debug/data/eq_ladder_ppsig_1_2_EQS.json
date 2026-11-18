@@ -1,0 +1,203 @@
+{
+ "case": "ppsig",
+ "pair": [
+  "1",
+  "2"
+ ],
+ "accepted": [
+  67108859,
+  33554393,
+  67108837,
+  67108819,
+  67108777,
+  67108763,
+  67108757,
+  67108753,
+  67108747,
+  67108739,
+  67108729,
+  67108721,
+  67108709,
+  67108693,
+  67108669,
+  67108667
+ ],
+ "rejected": [],
+ "ladder": {
+  "4": {
+   "ok": false,
+   "error": "rational reconstruction failed with 4 primes (M ~ 2^103)"
+  },
+  "5": {
+   "ok": false,
+   "error": "rational reconstruction failed with 5 primes (M ~ 2^129)"
+  },
+  "6": {
+   "ok": false,
+   "error": "rational reconstruction failed with 6 primes (M ~ 2^155)"
+  },
+  "7": {
+   "ok": false,
+   "error": "rational reconstruction failed with 7 primes (M ~ 2^181)"
+  },
+  "8": {
+   "ok": false,
+   "error": "rational reconstruction failed with 8 primes (M ~ 2^207)"
+  },
+  "9": {
+   "ok": false,
+   "error": "rational reconstruction failed with 9 primes (M ~ 2^233)"
+  },
+  "10": {
+   "ok": false,
+   "error": "rational reconstruction failed with 10 primes (M ~ 2^259)"
+  },
+  "11": {
+   "ok": false,
+   "error": "rational reconstruction failed with 11 primes (M ~ 2^285)"
+  },
+  "12": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 144,
+   "max_den_bits": 93
+  },
+  "13": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 144,
+   "max_den_bits": 93
+  },
+  "14": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 144,
+   "max_den_bits": 93
+  },
+  "15": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 144,
+   "max_den_bits": 93
+  },
+  "16": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 144,
+   "max_den_bits": 93
+  }
+ },
+ "CAP": 96,
+ "reference_shape": [
+  9,
+  53,
+  [
+   51,
+   52,
+   53,
+   53,
+   53,
+   53,
+   53,
+   53,
+   53,
+   53
+  ]
+ ],
+ "scored_shapes": [
+  [
+   9,
+   53,
+   [
+    51,
+    52,
+    53,
+    53,
+    53,
+    53,
+    53,
+    53,
+    53,
+    53
+   ]
+  ],
+  [
+   9,
+   53,
+   [
+    51,
+    52,
+    53,
+    53,
+    53,
+    53,
+    53,
+    53,
+    53,
+    53
+   ]
+  ]
+ ],
+ "scored_rates": {
+  "67108859": [
+   [
+    "-3",
+    1
+   ],
+   [
+    "4",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "0",
+    2
+   ],
+   [
+    "-2",
+    2
+   ],
+   [
+    "-4",
+    2
+   ]
+  ],
+  "33554393": [
+   [
+    "-3",
+    1
+   ],
+   [
+    "4",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "0",
+    2
+   ],
+   [
+    "-2",
+    2
+   ],
+   [
+    "-4",
+    2
+   ]
+  ]
+ },
+ "scored_rates_all_rational": {
+  "67108859": true,
+  "33554393": true
+ },
+ "scored_primes_agree": true,
+ "k0": 12,
+ "k0_plus_4_agrees": true,
+ "time_s": 6182.7
+}

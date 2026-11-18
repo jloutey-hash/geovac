@@ -1,0 +1,124 @@
+{
+ "case": "3ddel",
+ "pair": [
+  "1",
+  "1"
+ ],
+ "accepted": [
+  67108859,
+  33554393,
+  67108837,
+  67108819,
+  67108777,
+  67108763,
+  67108757,
+  67108753
+ ],
+ "rejected": [],
+ "ladder": {
+  "4": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 22,
+   "max_den_bits": 9
+  },
+  "5": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 22,
+   "max_den_bits": 9
+  },
+  "6": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 22,
+   "max_den_bits": 9
+  },
+  "7": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 22,
+   "max_den_bits": 9
+  },
+  "8": {
+   "ok": true,
+   "error": null,
+   "max_num_bits": 22,
+   "max_den_bits": 9
+  }
+ },
+ "CAP": 96,
+ "reference_shape": [
+  4,
+  10,
+  [
+   9,
+   10,
+   10,
+   10,
+   10
+  ]
+ ],
+ "scored_shapes": [
+  [
+   4,
+   10,
+   [
+    9,
+    10,
+    10,
+    10,
+    10
+   ]
+  ],
+  [
+   4,
+   10,
+   [
+    9,
+    10,
+    10,
+    10,
+    10
+   ]
+  ]
+ ],
+ "scored_rates": {
+  "67108859": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ],
+  "33554393": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ]
+ },
+ "scored_rates_all_rational": {
+  "67108859": true,
+  "33554393": true
+ },
+ "scored_primes_agree": true,
+ "k0": 4,
+ "k0_plus_4_agrees": true,
+ "time_s": 41.5
+}

@@ -1,0 +1,55 @@
+{
+ "suffix": "EQS",
+ "DMAX": 60,
+ "runs": {
+  "1s_1_2_67108859": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  },
+  "1s_1_2_33554393": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  },
+  "2ppi_1_1_67108859": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  },
+  "2ppi_1_1_33554393": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  },
+  "2psig_1_2_67108859": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  },
+  "2psig_1_2_33554393": {
+   "order": true,
+   "degree": true,
+   "coeff_degrees": true,
+   "coeffs_mod_p": true,
+   "valuation_check": true,
+   "pass": true
+  }
+ },
+ "gate_pass": true
+}

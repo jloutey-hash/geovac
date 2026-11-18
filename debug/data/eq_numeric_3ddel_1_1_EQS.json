@@ -1,0 +1,48 @@
+{
+ "case": "3ddel",
+ "pair": [
+  "1",
+  "1"
+ ],
+ "suffix": "EQS",
+ "valuation_check": true,
+ "frobenius_terms": 300,
+ "frobenius_time_s": 1.0,
+ "data_orders": [
+  -5,
+  0,
+  4,
+  13
+ ],
+ "root_equations_consistent": true,
+ "frobenius_equals_generator_to_N": true,
+ "generator_N": 120,
+ "1.4": {
+  "tau_max": 8,
+  "last_terms_max": "0.0",
+  "abs_diff_frob_dps50": "1.42e-64",
+  "abs_diff_frob_dps80": "3.61e-93",
+  "abs_diff_dps50_dps80": "1.42e-64",
+  "checks": {
+   "frob_vs_dps80_lt_1e-30": true,
+   "dps50_vs_dps80_lt_1e-35": true,
+   "last_terms_max_lt_1e-40": true,
+   "tau_cap_reached_T_ge_400": false
+  }
+ },
+ "3.015": {
+  "tau_max": 8,
+  "last_terms_max": "0.0",
+  "abs_diff_frob_dps50": "1.86e-64",
+  "abs_diff_frob_dps80": "2.09e-91",
+  "abs_diff_dps50_dps80": "1.86e-64",
+  "checks": {
+   "frob_vs_dps80_lt_1e-30": true,
+   "dps50_vs_dps80_lt_1e-35": true,
+   "last_terms_max_lt_1e-40": true,
+   "tau_cap_reached_T_ge_400": false
+  }
+ },
+ "numeric_pass": true,
+ "time_s": 7.1
+}

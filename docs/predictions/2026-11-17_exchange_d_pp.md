@@ -216,3 +216,76 @@ Environment: Python 3.14.0, mpmath 1.3.0, sympy 1.14.0, python-flint 0.9.0.
 python debug/eq_run.py gate 1s --suffix EQS
 python debug/eq_run.py ladder <case> <a> <b> --suffix EQS   (then heldout, numeric), cases in the scoring order
 ```
+
+## Results (scored 2026-11-17; `python debug/eq_score.py` -> `debug/data/eq_score.json`)
+
+**Verdict: GO.** EQ0 holds and EQ1-EQ5 hold in all seven cases, on both scored primes. No VOID or STOP clause fires.
+
+**EQ0.** `eq_run gate` under suffix EQS and DMAX 60 reproduces the three frozen operators on both scored primes
+(`gate_pass` true). All 18 frozen files hash-match at scoring.
+
+| case | (a, b) | order, degree | k0 (accepted primes) | third prime: equations / unknowns | numeric, worst at dps 80 | finite points | R = 0 exponents (log-free) | rates |
+|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+| pppi0 | (1,1) | 4, 16 | 4 (8) | 1158 / 85 | 2.8e-90 | apparent | 0, -5, 13, 4 (3) | -2, -2, 0, 2 |
+| 3ddel | (1,1) | 4, 10 | 4 (8) | 1158 / 55 | 2.1e-91 | apparent | 0, -5, 13, 4 (3) | -2, -2, 0, 2 |
+| ppsig | (1,1) | 4, 24 | 4 (8) | 1158 / 125 | 1.5e-88 | apparent | 0, -5, 13, 4 (3) | -2, -2, 0, 2 |
+| 3dsig | (1,1) | 4, 24 | 5 (9) | 1158 / 125 | 7.7e-89 | apparent | 0, -5, 13, 4 (3) | -2, -2, 0, 2 |
+| pppi0 | (1,2) | 9, 39 | 11 (15) | 1143 / 400 | 4.8e-77 | apparent | 0, -1, -3, 13, 6, 4, 1, -5² (5) | -4², -3, -2², 0², 2, 4 |
+| 3ddel | (1,2) | 9, 35 | 8 (12) | 1143 / 360 | 4.5e-78 | apparent-type | same as above (5) | same |
+| ppsig | (1,2) | 9, 53 | 12 (16) | 1143 / 540 | 2.4e-75 | apparent | same as above (5) | same |
+
+"apparent" means every finite nonzero point read `apparent` or `exponents_only: apparent-type`; 3ddel (1,2) had only
+the latter. Every third-prime fit clears the determinacy rule (equations >= unknowns + 50) and matches. The exact
+residual over Q is zero in every case. All k0 are well under 92. The numeric clause (Frobenius against `exchange_hp`
+at R = 1.4 and 3.015) passes everywhere; the worst agreement is 2.4e-75 against the 1e-30 bar.
+
+**Clauses.**
+
+| clause | result |
+|:--|:--|
+| EQ1 (existence, seven cases) | holds |
+| EQ2a (order 4 at (1,1), four densities) | holds; no order 5, so the ln 2 coordinate does not decouple |
+| EQ2b (order in [9, 13] at (1,2)) | holds: 9 in all three |
+| EQ3 (no climb) | holds: no `genuine` point on either prime in any case |
+| EQ4 (R = 0) | holds: Fuchsian, integer exponents, log-free solutions 3 of 4 at (1,1) and 5 of 9 at (1,2), ln R present |
+| EQ5 (rates) | holds: rank <= 1 at infinity, all rates rational and equal on both primes; {0, ±2} at (1,1); at (1,2) inside {±3, ±2, ±4, 0, ±1} |
+
+**Reported, not gating.**
+
+| prediction | probability | result |
+|:--|:--|:--|
+| order exactly 9 at (1,2) in all three cases | 0.5 | held |
+| the 1s rate multiset {-3, 4, 2, 0², -2², -4²} at (1,2) | 0.45 | held in all three |
+| no a - b rate | 0.55 | held |
+| onset R^13 ln R in all seven cases | 0.35 | held (lowest k = 13 everywhere) |
+| (1,2)/(1,1) onset ratio 32 for 3ddel | 0.4 | held: (256/93767625)/(8/93767625) = 32 |
+| (1,2)/(1,1) onset ratio 128 for ppsig and pppi0 | 0.3 | held: pppi0 (1024/4465125)/(8/4465125) = 128; ppsig (507904/31255875)/(3968/31255875) = 128 |
+| degree thresholds | 0.65 | held: 3dsig 24 > 16; 3ddel 10 > 9, 35 > 25; pppi0 16 > 9, 39 > 25; ppsig 24 > 16, 53 > 34 |
+| degree above 60 in some (1,2) case | 0.35 | missed: the largest is 53 (ppsig) |
+
+The onset coefficients at (1,1) are 8/4465125 (pppi0), 8/93767625 (3ddel), 3968/31255875 (ppsig) and 1552/31255875
+(3dsig). The PP-family ratio of 128 means the (ξ²η² - 1) factor of ppsig and the H = 1 of pppi0 did not cancel the
+leading term (Derivation 6's caveat).
+
+**Reading.**
+- A 3d orbital on A, against 1s on B, and a 2p orbital on each centre all keep the 1s exchange shape in R. At
+  equal exponents the operator has order 4 with rates {0, ±2} and only apparent finite singular points, as
+  Derivation 2 proves for numeric constants. At (1, 2) the order is 9 with exactly the 1s rate multiset (read mod p on two primes), as EP
+  found for 2p on one centre; the degree differs by case (35, 39, 53).
+- The R = 0 onset is R^13 ln R in all seven cases, and the (1,2)/(1,1) ratios are consistent with the EP split of the coefficient (32 = 2^5, 128 = 2^7; a^9 b^5 for the d cases,
+  a^7 b^7 for PP). One ratio does not establish a monomial coefficient, and with a = 1 in both pairs the power of a is not tested (Caps).
+- Since ppdel = 3(b/a)² 3ddel identically (Derivation 3, control C1i), the 3ddel operator is also ppdel's: the
+  σ = 2 (ppdel) component of real p_x p_x exchange keeps the shape too; the full p_x p_x sum is not scored. 3dpi and 3dsig at (1, 2) are not scored.
+- Singular points are read mod p (factors of degree > 1: exponent test only, no log test), the gcrd is not certified
+  minimal and the constants are formal, as in EX and EP.
+
+**Scorer note.** The cold review found two branches of `eq_score.py` that departed from the registered gate (a
+cross-prime shape mismatch read BORDERLINE instead of VOID; an underdetermined third-prime mismatch read VOID instead
+of BORDERLINE). Neither fires on this data; both were fixed after scoring and the rerun gives the same GO. Three
+registered sub-conditions the scorer reads only through summary flags (`rates_unsplit_degree` = 0; the individual
+numeric bars behind `numeric_pass`; EQ0's hash match and per-run valuation behind `gate_pass`) were verified by hand
+from the raw JSONs.
+
+Cold review of the scoring: 0 MUST-FIX, 4 SHOULD-FIX (the two scorer branches, the unchecked sub-conditions, the
+onset-ratio wording), 4 NIT; all applied. The reviewer re-derived every clause from the raw JSONs, re-checked the 18
+frozen hashes and the 48 h clause (first EQS output 13:35, last 20:23, record committed 13:32), and confirmed the GO.

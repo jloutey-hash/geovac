@@ -1,0 +1,488 @@
+{
+ "EQ0_gate_pass": true,
+ "cases": [
+  {
+   "case": "pppi0_1_1",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    4,
+    16
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 4,
+   "accepted": 8,
+   "crt_bits": 207,
+   "EQ2a": true,
+   "finite_point_verdicts": [
+    "apparent",
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-5",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "4",
+     1
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 3,
+   "rates": [
+    "-2",
+    "-2",
+    "0",
+    "2"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "8/4465125"
+    }
+   },
+   "numeric_worst_dps80": 2.8e-90
+  },
+  {
+   "case": "3ddel_1_1",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    4,
+    10
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 4,
+   "accepted": 8,
+   "crt_bits": 207,
+   "EQ2a": true,
+   "finite_point_verdicts": [
+    "apparent",
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-5",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "4",
+     1
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 3,
+   "rates": [
+    "-2",
+    "-2",
+    "0",
+    "2"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "8/93767625"
+    }
+   },
+   "numeric_worst_dps80": 2.09e-91
+  },
+  {
+   "case": "ppsig_1_1",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    4,
+    24
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 4,
+   "accepted": 8,
+   "crt_bits": 207,
+   "EQ2a": true,
+   "finite_point_verdicts": [
+    "apparent",
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-5",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "4",
+     1
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 3,
+   "rates": [
+    "-2",
+    "-2",
+    "0",
+    "2"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "3968/31255875"
+    }
+   },
+   "numeric_worst_dps80": 1.47e-88
+  },
+  {
+   "case": "3dsig_1_1",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    4,
+    24
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 5,
+   "accepted": 9,
+   "crt_bits": 233,
+   "EQ2a": true,
+   "finite_point_verdicts": [
+    "apparent",
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-5",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "4",
+     1
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 3,
+   "rates": [
+    "-2",
+    "-2",
+    "0",
+    "2"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "1552/31255875"
+    }
+   },
+   "numeric_worst_dps80": 7.7e-89
+  },
+  {
+   "case": "pppi0_1_2",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    9,
+    39
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 11,
+   "accepted": 15,
+   "crt_bits": 389,
+   "EQ2b": true,
+   "finite_point_verdicts": [
+    "apparent",
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-1",
+     1
+    ],
+    [
+     "-3",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "6",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "1",
+     1
+    ],
+    [
+     "-5",
+     2
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 5,
+   "rates": [
+    "-4",
+    "-4",
+    "-3",
+    "-2",
+    "-2",
+    "0",
+    "0",
+    "2",
+    "4"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "1024/4465125"
+    }
+   },
+   "numeric_worst_dps80": 4.84e-77
+  },
+  {
+   "case": "3ddel_1_2",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    9,
+    35
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 8,
+   "accepted": 12,
+   "crt_bits": 311,
+   "EQ2b": true,
+   "finite_point_verdicts": [
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-1",
+     1
+    ],
+    [
+     "-3",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "6",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "1",
+     1
+    ],
+    [
+     "-5",
+     2
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 5,
+   "rates": [
+    "-4",
+    "-4",
+    "-3",
+    "-2",
+    "-2",
+    "0",
+    "0",
+    "2",
+    "4"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "256/93767625"
+    }
+   },
+   "numeric_worst_dps80": 4.51e-78
+  },
+  {
+   "case": "ppsig_1_2",
+   "complete": true,
+   "error_on_scored_prime": [],
+   "order_degree": [
+    9,
+    53
+   ],
+   "shapes_agree": true,
+   "first_hit_null_both": false,
+   "third_prime_determined": true,
+   "EQ1": true,
+   "EQ1_instrument_fail": false,
+   "shape_mismatch": false,
+   "k0": 12,
+   "accepted": 16,
+   "crt_bits": 415,
+   "EQ2b": true,
+   "finite_point_verdicts": [
+    "apparent",
+    "exponents_only: apparent-type"
+   ],
+   "EQ3": true,
+   "genuine_both": false,
+   "genuine_any": false,
+   "R0_exponents": [
+    [
+     "0",
+     1
+    ],
+    [
+     "-1",
+     1
+    ],
+    [
+     "-3",
+     1
+    ],
+    [
+     "13",
+     1
+    ],
+    [
+     "6",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "1",
+     1
+    ],
+    [
+     "-5",
+     2
+    ]
+   ],
+   "EQ4": true,
+   "log_free": 5,
+   "rates": [
+    "-4",
+    "-4",
+    "-3",
+    "-2",
+    "-2",
+    "0",
+    "0",
+    "2",
+    "4"
+   ],
+   "EQ5": true,
+   "lnR_onset": {
+    "1*lnR^1": {
+     "lowest_k": 13,
+     "coeff_exact": "507904/31255875"
+    }
+   },
+   "numeric_worst_dps80": 2.36e-75
+  }
+ ],
+ "verdict": "GO"
+}

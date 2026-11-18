@@ -1,0 +1,58 @@
+{
+ "pair": [
+  "1",
+  "1"
+ ],
+ "suffix": "EQS",
+ "run_primes": [
+  33554393,
+  67108753,
+  67108757,
+  67108763,
+  67108777,
+  67108819,
+  67108837,
+  67108859
+ ],
+ "order": 4,
+ "degree": 10,
+ "operator_Q_crt": [
+  "8*R*(768*R**8 + 7104*R**7 + 46976*R**6 + 228000*R**5 + 684024*R**4 + 1359540*R**3 + 1941030*R**2 + 1891890*R + 945945)",
+  "-8*(256*R**10 + 2112*R**9 + 9920*R**8 + 30432*R**7 + 16584*R**6 - 261324*R**5 - 1243998*R**4 - 3262140*R**3 - 5611410*R**2 - 5970510*R - 2985255)",
+  "-2*R*(512*R**9 + 8320*R**8 + 59200*R**7 + 266048*R**6 + 884016*R**5 + 2287656*R**4 + 4596480*R**3 + 6868260*R**2 + 6855030*R + 3427515)",
+  "2*R**2*(256*R**8 + 1344*R**7 - 1920*R**6 - 34272*R**5 - 143640*R**4 - 366660*R**3 - 625590*R**2 - 663390*R - 331695)",
+  "R**3*(256*R**7 + 3008*R**6 + 16128*R**5 + 54432*R**4 + 128520*R**3 + 211680*R**2 + 221130*R + 110565)"
+ ],
+ "crt_bits": 207,
+ "exact_Q": {
+  "N": 120,
+  "generator_time_s": 1.3,
+  "valuation_check": true,
+  "equations_per_order": 3,
+  "orders_checked": "-4..116",
+  "orders_checked_count": 121,
+  "all_unused": true,
+  "residual_zero": true
+ },
+ "f_log_components_exact": {
+  "1*lnR^1": {
+   "lowest_k": 13,
+   "coeff_exact": "8/93767625"
+  }
+ },
+ "third_prime": {
+  "p": 16777213,
+  "N": 450,
+  "valuation_check": true,
+  "equations_per_order": 3,
+  "unknowns": 55,
+  "fit_equations": 1158,
+  "fit_orders_max": 386,
+  "heldout_orders": 60,
+  "fit_nullity": 1,
+  "fit_matches_crt": true,
+  "crt_kills_all_rows_incl_heldout": true,
+  "time_s": 3.8
+ },
+ "time_s": 5.1
+}

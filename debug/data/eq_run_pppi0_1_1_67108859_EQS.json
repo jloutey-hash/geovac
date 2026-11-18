@@ -1,0 +1,372 @@
+{
+ "pair": [
+  "1",
+  "1"
+ ],
+ "prime": 67108859,
+ "N": 450,
+ "generator": {
+  "time_s": 3.7,
+  "taus": 5,
+  "valuation_check": true
+ },
+ "RMAX": 14,
+ "DMAX": 60,
+ "HOLD": 40,
+ "components": [
+  "1*lnR^0",
+  "1*lnR^1",
+  "g*lnR^0",
+  "l2*lnR^0"
+ ],
+ "components_dropped_as_duplicates": [
+  "g*lnR^0"
+ ],
+ "equations_per_order": 3,
+ "effective_box": {
+  "N": 450,
+  "HOLD": 40,
+  "MARGIN": 50,
+  "d_box_by_r": {
+   "1": 60,
+   "2": 60,
+   "3": 60,
+   "4": 60,
+   "5": 60,
+   "6": 60,
+   "7": 60,
+   "8": 60,
+   "9": 60,
+   "10": 60,
+   "11": 60,
+   "12": 60,
+   "13": 60,
+   "14": 60
+  },
+  "max_r_testable": 14
+ },
+ "scan": [
+  {
+   "r": 1,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 2,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 3,
+   "d_box": 60,
+   "hit": false
+  },
+  {
+   "r": 4,
+   "d_box": 60,
+   "hit": true,
+   "d": 16,
+   "nullity": 1,
+   "nullity_fit": 1,
+   "accepted": true
+  }
+ ],
+ "scan_time_s": 0.8,
+ "first_hit": {
+  "r": 4,
+  "d": 16,
+  "nullity": 1
+ },
+ "gcrd_inputs": [
+  {
+   "r": 5,
+   "d": 9,
+   "nullity": 1
+  },
+  {
+   "r": 6,
+   "d": 7,
+   "nullity": 2
+  }
+ ],
+ "minimal_operator": {
+  "order": 4,
+  "degree": 16,
+  "coeff_degrees": [
+   15,
+   16,
+   16,
+   16,
+   16
+  ],
+  "annihilates_all_complete_rows": true,
+  "coeffs_mod_p": [
+   [
+    0,
+    44243504,
+    21378149,
+    5807044,
+    5479509,
+    17460502,
+    23893255,
+    63486234,
+    37009343,
+    58097407,
+    22078242,
+    549840,
+    42018767,
+    8428,
+    675,
+    40
+   ],
+   [
+    22838758,
+    45677516,
+    62649701,
+    19656808,
+    34026804,
+    7380954,
+    24756134,
+    34448715,
+    27082037,
+    3995548,
+    65739969,
+    56420784,
+    16724189,
+    58710826,
+    67107589,
+    67108740,
+    67108851
+   ],
+   [
+    0,
+    9600267,
+    19200534,
+    62512114,
+    32314657,
+    29285501,
+    35733421,
+    51777329,
+    10306154,
+    49121460,
+    37784166,
+    17182441,
+    56515779,
+    62900313,
+    50330193,
+    33554322,
+    67108855
+   ],
+   [
+    0,
+    0,
+    3093860,
+    6187720,
+    3620239,
+    43729424,
+    536457,
+    49358652,
+    58378792,
+    60650418,
+    60099249,
+    41356477,
+    44035593,
+    27263248,
+    50331783,
+    50331664,
+    2
+   ],
+   [
+    0,
+    0,
+    0,
+    44223596,
+    21338333,
+    63602305,
+    54014260,
+    30881864,
+    31631761,
+    56331110,
+    60785327,
+    47532224,
+    30424075,
+    38799518,
+    50331888,
+    58720271,
+    1
+   ]
+  ]
+ },
+ "finite_nonzero_points": [
+  {
+   "factor_degree": 1,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "F_p:13996365",
+   "log_free_count": 4,
+   "verdict": "apparent"
+  },
+  {
+   "factor_degree": 1,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "F_p:7415307",
+   "log_free_count": 4,
+   "verdict": "apparent"
+  },
+  {
+   "factor_degree": 5,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "root of degree-5 factor",
+   "verdict": "exponents_only: apparent-type"
+  },
+  {
+   "factor_degree": 6,
+   "multiplicity_in_lc": 1,
+   "regular": true,
+   "indicial_degree": 4,
+   "exponents_in_Fp": [
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "2",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ],
+   "exponents_not_in_Fp": 0,
+   "point": "root of degree-6 factor",
+   "verdict": "exponents_only: apparent-type"
+  }
+ ],
+ "R0": {
+  "fuchsian": true,
+  "indicial_degree": 4,
+  "exponents": [
+   [
+    "0",
+    1
+   ],
+   [
+    "-5",
+    1
+   ],
+   [
+    "13",
+    1
+   ],
+   [
+    "4",
+    1
+   ]
+  ],
+  "exponents_not_in_Fp": 0,
+  "log_free_local_solutions": 3,
+  "f_log_components": {
+   "1*lnR^1": {
+    "nonzero": true,
+    "lowest_k": 13,
+    "coeff_mod_p": 5430375,
+    "coeff_ratrec": "None"
+   }
+  },
+  "f_has_lnR": true
+ },
+ "infinity": {
+  "coeff_degrees": [
+   15,
+   16,
+   16,
+   16,
+   16
+  ],
+  "rank_le_1": true,
+  "edge_degree": 4,
+  "rates": [
+   [
+    "0",
+    1
+   ],
+   [
+    "2",
+    1
+   ],
+   [
+    "-2",
+    2
+   ]
+  ],
+  "rates_unsplit_degree": 0
+ },
+ "total_time_s": 4.9
+}
