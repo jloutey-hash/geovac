@@ -225,3 +225,46 @@ python debug/fx_run.py e2e_run 1073741441 ; python debug/fx_run.py e2e_run 10737
 python debug/fx_run.py score {M1,M2r} {1073741441,1073741381} --registered     (4 jobs in parallel)
 python debug/fx_run.py summary                                                  (-> debug/data/fx_run.json)
 ```
+
+## Results (scored 2026-11-17; verdict STOP, both cases, on FX3)
+
+Runs: `debug/data/fx_run_{M1,M2r}_{1073741441,1073741381}.json`, summary `debug/data/fx_run.json`. No instrument
+error on any run; each took about 7000 s (`t_total`; the run files record no launch timestamp, so the 48 h clause is checked from `t_total`). The summary's precedence also has an INCOMPLETE tier, not in the registered gate; it did not fire.
+
+| clause | M1 | M2r |
+|:--|:--|:--|
+| FX0 (gate) | holds: 34/34 mechanical checks, no failures; natural factor sets L-independent (`natural_stable` true, all four runs); no annihilator to check against held-out rows | (joint) |
+| FX1 constant key set, inside alphabet | holds: 67 keys, none absent on an initial or terminal range, no interior zeros, 0 outside | holds: 76 keys, same |
+| FX2 a depth-2 key at every L | holds: 0 L without one | holds: 0 L without one |
+| FX3 recurrence found, R ≤ 32, L ≤ 1300, 200 held out | **misses**: not found on either prime or either seed (2026, 7); every R = 1..32 tried. The degree cap at R = 32 was 35 (`trade`), one more than the "≤ 34" stated at registration; the driver is frozen, so the registered figure was a prose error, and the search covered the registered budget and more | **misses**: same |
+| FX4 7/2 at both contacts | not scorable (no operator); counted as not holding | same |
+| FX5 (outside the gate) | not scorable (no operator); summary field None | same |
+| gate | STOP | STOP |
+
+Landau contacts: M1 x_Z* = 61/60 (dominant), x_W* = 109/60; M2r x_Z* = 829/540, x_W* = 61/60 (dominant).
+
+**Frozen files.** 20 of the 31 frozen files are unchanged, including `fx_runctl_e2e_k4a1.json`, which Phase 2
+rewrites and which came back byte-identical (it has no timing fields). The other 11 are control JSONs that Phase 2
+rewrites (see FX0). Compared field by field with the committed copies, 10 differ only in timing fields. In
+`fx_indep_controls.json` the B-route LLL control chose a different panel this time ([9/4, ∞) instead of [0, 1]) and
+a smaller basis (n 10/10/9 instead of 14/14/13). All of its pass fields are unchanged (B1 equals the identity, B2
+involves the planted constant, B3 finds no relation at either precision, and B4neg/B4pos as committed, n = 77). The
+rerun B3, however, tested a smaller basis on a different panel, so the committed copy remains the reference for
+B1-B3. The panel choice appears to follow set iteration order, so this control is not reproducible run to run;
+reported, not a gate failure.
+
+**Reading.**
+- On the matched slice, at every L from 2 to 1500 some canonical depth-2 exponential-integral key has a nonzero
+  coefficient (mod p, hence over Q), and the key set is the same at every L. Modulo the product-rule family the
+  depth-2 content therefore survives at both geometries. That is the reading the design anticipated, that the
+  integral leaves the AB/NA class; it is not a proof of it. Independence beyond the family was tested only by
+  bounded-height LLL (≤ 1e4) on the unscored geometry C1, with π², Li₂ values and log products outside that basis
+  (B4 cap), and the constants are formal.
+- The recurrence of the generic sequence (a random combination of all 67 or 76 coefficient sequences) is beyond the
+  registered budget. By holonomic closure a recurrence exists (for F_L, and so for the generic combination); this STOP prices it, it does not deny it. The generic
+  combination's order is that of the whole module, which can be much larger than any single key's.
+- FX4 (7/2 at both contacts) is untested, not refuted.
+
+Cold review of the scoring: 1 MUST-FIX (the Reading upgraded the FX2 hit to a class-exit claim), 3 SHOULD-FIX (the
+undisclosed degree-cap difference, a bare FX5 "None", the B-route drift under-described), 4 NIT; all applied. The
+reviewer confirmed the STOP follows the registered gate and that no VOID clause fires.

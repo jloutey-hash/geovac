@@ -1,0 +1,374 @@
+{
+ "case": "M1",
+ "prime": 1073741441,
+ "LMAX": 1500,
+ "HOLD": 200,
+ "RMAX": 32,
+ "instrument_error": null,
+ "landau": {
+  "xZ": "61/60",
+  "xW": "109/60",
+  "dom": "Z"
+ },
+ "n_keys": 67,
+ "zeros": {},
+ "first_nonzero": {
+  "(Fraction(-6, 5), (('E1', Fraction(9, 5)),))": 0,
+  "(Fraction(-24, 5), ())": 0,
+  "(Fraction(-3, 5), (('E1', Fraction(21, 5)),))": 0,
+  "(Fraction(17, 5), (('E1', Fraction(41, 5)),))": 0,
+  "(Fraction(-6, 5), (('E1', Fraction(18, 5)),))": 0,
+  "(Fraction(-33, 10), ())": 0,
+  "(Fraction(-9, 5), (('E1', Fraction(3, 1)),))": 0,
+  "(Fraction(-9, 5), (('E1', Fraction(3, 2)),))": 0,
+  "(Fraction(-53, 10), ())": 0,
+  "(Fraction(-29, 5), (('E1', Fraction(-1, 1)),))": 0,
+  "(Fraction(-29, 5), (('E1', Fraction(-1, 2)),))": 0,
+  "(Fraction(-3, 1), ())": 0,
+  "(Fraction(-84, 25), ())": 0,
+  "(Fraction(-39, 25), (('E1', Fraction(144, 25)),))": 0,
+  "(Fraction(-39, 25), (('E1', Fraction(48, 25)),))": 0,
+  "(Fraction(-183, 25), ())": 0,
+  "(Fraction(-3, 5), (('E1', Fraction(168, 25)),))": 0,
+  "(Fraction(-87, 25), ())": 0,
+  "(Fraction(-3, 5), (('E1', Fraction(27, 10)),))": 0,
+  "(Fraction(-3, 5), (('E1', Fraction(72, 25)),))": 0,
+  "(Fraction(17, 5), (('E1', Fraction(87, 10)),))": 0,
+  "(Fraction(-39, 25), (('E1', Fraction(18, 5)),))": 0,
+  "(Fraction(29, 5), (('E1', Fraction(328, 25)),))": 0,
+  "(Fraction(-58, 5), ())": 0,
+  "(Fraction(29, 5), (('E1', Fraction(232, 25)),))": 0,
+  "(Fraction(29, 5), (('E1', Fraction(87, 5)),))": 0,
+  "(Fraction(-14, 1), ())": 0,
+  "(Fraction(17, 5), (('E1', Fraction(87, 5)),))": 0,
+  "(Fraction(-129, 25), ())": 0,
+  "(Fraction(-17, 5), (('E1', Fraction(41, 5)),))": 0,
+  "(Fraction(-29, 5), (('E1', Fraction(41, 5)),))": 0,
+  "(Fraction(-6, 5), (('B', Fraction(-3, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": 1,
+  "(Fraction(-3, 1), (('E1', Fraction(3, 10)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-3, 10), ((Fraction(-9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": 1,
+  "(Fraction(-3, 1), (('E1', Fraction(23, 10)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(-9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(0, 1), Fraction(1, 1)),))": 1,
+  "(Fraction(-24, 5), (('ln', Fraction(7, 1)),))": 1,
+  "(Fraction(-24, 5), (('ln', Fraction(41, 1)),))": 1,
+  "(Fraction(-24, 5), (('E1', Fraction(-3, 2)),))": 1,
+  "(Fraction(-24, 5), (('E1', Fraction(1, 2)),))": 1,
+  "(Fraction(-3, 1), (('E1', Fraction(9, 25)),))": 1,
+  "(Fraction(-3, 5), (('E1', Fraction(69, 25)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-3, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(1, 1), Fraction(6, 5)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(1, 1), Fraction(6, 5)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-3, 10), ((Fraction(3, 5), Fraction(6, 5)),), Fraction(0, 1), Fraction(1, 1), Fraction(6, 5)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(3, 5), Fraction(6, 5)),), Fraction(0, 1), Fraction(1, 1), Fraction(6, 5)),))": 1,
+  "(Fraction(-24, 5), (('E1', Fraction(63, 25)),))": 1,
+  "(Fraction(-12, 5), (('E1', Fraction(9, 10)),))": 1,
+  "(Fraction(-12, 5), (('E1', Fraction(27, 25)),))": 1,
+  "(Fraction(-12, 5), (('E1', Fraction(29, 10)),))": 1,
+  "(Fraction(6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(6, 5), Fraction(4, 1)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(6, 5), Fraction(4, 1)),))": 1,
+  "(Fraction(-12, 5), (('E1', Fraction(46, 5)),))": 1,
+  "(Fraction(6, 5), (('B', Fraction(-23, 10), ((Fraction(3, 5), Fraction(6, 5)),), Fraction(0, 1), Fraction(6, 5), Fraction(4, 1)),))": 1,
+  "(Fraction(-24, 5), (('E1', Fraction(46, 5)),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(3, 5), Fraction(6, 5)),), Fraction(0, 1), Fraction(6, 5), Fraction(4, 1)),))": 1,
+  "(Fraction(-12, 5), (('E1', Fraction(123, 25)),))": 1,
+  "(Fraction(0, 1), (('E1', Fraction(87, 25)),))": 1,
+  "(Fraction(0, 1), (('E1', Fraction(58, 5)),))": 1,
+  "(Fraction(-12, 5), (('E1', Fraction(58, 5)),))": 1,
+  "(Fraction(6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(4, 1), None),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(18, 5)),), Fraction(0, 1), Fraction(4, 1), None),))": 1,
+  "(Fraction(6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(-18, 5)),), Fraction(0, 1), Fraction(4, 1), None),))": 1,
+  "(Fraction(-6, 5), (('B', Fraction(-23, 10), ((Fraction(9, 5), Fraction(-18, 5)),), Fraction(0, 1), Fraction(4, 1), None),))": 1,
+  "(Fraction(24, 5), (('E1', Fraction(82, 5)),))": 1,
+  "(Fraction(12, 5), (('E1', Fraction(82, 5)),))": 1
+ },
+ "no_depth2_L": [],
+ "natural_stable": true,
+ "outside_alphabet": [],
+ "t_coeffs": {
+  "100": 31.6,
+  "300": 219.2,
+  "600": 887.9,
+  "1000": 2681.2,
+  "1500": 6949.5
+ },
+ "t_canonical": 7.4,
+ "op": {
+  "ops": [
+   {
+    "seed": 2026,
+    "found": false,
+    "trade": {
+     "1": [
+      null,
+      422
+     ],
+     "2": [
+      null,
+      316
+     ],
+     "3": [
+      null,
+      252
+     ],
+     "4": [
+      null,
+      210
+     ],
+     "5": [
+      null,
+      180
+     ],
+     "6": [
+      null,
+      157
+     ],
+     "7": [
+      null,
+      139
+     ],
+     "8": [
+      null,
+      125
+     ],
+     "9": [
+      null,
+      113
+     ],
+     "10": [
+      null,
+      104
+     ],
+     "11": [
+      null,
+      96
+     ],
+     "12": [
+      null,
+      89
+     ],
+     "13": [
+      null,
+      82
+     ],
+     "14": [
+      null,
+      77
+     ],
+     "15": [
+      null,
+      72
+     ],
+     "16": [
+      null,
+      68
+     ],
+     "17": [
+      null,
+      65
+     ],
+     "18": [
+      null,
+      61
+     ],
+     "19": [
+      null,
+      58
+     ],
+     "20": [
+      null,
+      55
+     ],
+     "21": [
+      null,
+      53
+     ],
+     "22": [
+      null,
+      51
+     ],
+     "23": [
+      null,
+      48
+     ],
+     "24": [
+      null,
+      47
+     ],
+     "25": [
+      null,
+      45
+     ],
+     "26": [
+      null,
+      43
+     ],
+     "27": [
+      null,
+      41
+     ],
+     "28": [
+      null,
+      40
+     ],
+     "29": [
+      null,
+      39
+     ],
+     "30": [
+      null,
+      37
+     ],
+     "31": [
+      null,
+      36
+     ],
+     "32": [
+      null,
+      35
+     ]
+    },
+    "seconds": 34.2
+   },
+   {
+    "seed": 7,
+    "found": false,
+    "trade": {
+     "1": [
+      null,
+      422
+     ],
+     "2": [
+      null,
+      316
+     ],
+     "3": [
+      null,
+      252
+     ],
+     "4": [
+      null,
+      210
+     ],
+     "5": [
+      null,
+      180
+     ],
+     "6": [
+      null,
+      157
+     ],
+     "7": [
+      null,
+      139
+     ],
+     "8": [
+      null,
+      125
+     ],
+     "9": [
+      null,
+      113
+     ],
+     "10": [
+      null,
+      104
+     ],
+     "11": [
+      null,
+      96
+     ],
+     "12": [
+      null,
+      89
+     ],
+     "13": [
+      null,
+      82
+     ],
+     "14": [
+      null,
+      77
+     ],
+     "15": [
+      null,
+      72
+     ],
+     "16": [
+      null,
+      68
+     ],
+     "17": [
+      null,
+      65
+     ],
+     "18": [
+      null,
+      61
+     ],
+     "19": [
+      null,
+      58
+     ],
+     "20": [
+      null,
+      55
+     ],
+     "21": [
+      null,
+      53
+     ],
+     "22": [
+      null,
+      51
+     ],
+     "23": [
+      null,
+      48
+     ],
+     "24": [
+      null,
+      47
+     ],
+     "25": [
+      null,
+      45
+     ],
+     "26": [
+      null,
+      43
+     ],
+     "27": [
+      null,
+      41
+     ],
+     "28": [
+      null,
+      40
+     ],
+     "29": [
+      null,
+      39
+     ],
+     "30": [
+      null,
+      37
+     ],
+     "31": [
+      null,
+      36
+     ],
+     "32": [
+      null,
+      35
+     ]
+    },
+    "seconds": 35.3
+   }
+  ],
+  "weight_fixed": [],
+  "genuine_extra": [],
+  "n_weight_moving": null
+ },
+ "t_op": 69.5,
+ "t_total": 7019.5
+}

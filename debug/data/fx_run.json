@@ -1,0 +1,160 @@
+{
+ "FX0": {
+  "holds": true,
+  "failed": [],
+  "checks": {
+   "V1_M1_A_pass_1e_25": true,
+   "V1_M1_B_pass_1e_25": true,
+   "V1_M2r_A_pass_1e_25": true,
+   "V1_M2r_B_pass_1e_25": true,
+   "V2_all_equal_L_le_40": true,
+   "V3_M1": true,
+   "V3_M2r": true,
+   "V3_K4A1": true,
+   "V4_reproduced": true,
+   "A1_C1": true,
+   "A2_C1": true,
+   "A4_C1": true,
+   "A1_C2": true,
+   "A2_C2": true,
+   "A4_C2": true,
+   "A3_C1": true,
+   "A3_C2": true,
+   "A3_M1": true,
+   "A3_M2r": true,
+   "A5": true,
+   "B1_equals_identity": true,
+   "B2_involves_planted": true,
+   "B3_no_relation": true,
+   "B4neg_no_relation": true,
+   "B4pos_involves_eliminated": true,
+   "alphabet_C1": true,
+   "alphabet_C2": true,
+   "posctrl_na_1073741441": true,
+   "posctrl_ab_1073741441": true,
+   "posctrl_k4a1_1073741441": true,
+   "posctrl_na_1073741381": true,
+   "posctrl_ab_1073741381": true,
+   "posctrl_k4a1_1073741381": true,
+   "e2e_k4a1_as_expected": true
+  }
+ },
+ "M1": {
+  "FX1": {
+   "L_independent": true,
+   "n_scope": 67,
+   "n_only_L01": 0,
+   "initial": {},
+   "terminal": {},
+   "n_keys_interior": 0,
+   "n_interior_zero_L": 0,
+   "max_interior_run": 0,
+   "interior_sample": {},
+   "inside_alphabet": true,
+   "n_outside": 0,
+   "holds": true
+  },
+  "FX2": {
+   "holds": true,
+   "n_L_without_depth2": 0,
+   "absent_at_all_L": false,
+   "runs": [],
+   "n_runs": 0
+  },
+  "FX3": {
+   "found_all": false,
+   "verified_all": false,
+   "min_held_out": 0,
+   "minimal_shapes": [
+    "(None, None)"
+   ],
+   "search": [
+    "None"
+   ],
+   "holds": false
+  },
+  "FX4": {
+   "per_run": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "holds": false
+  },
+  "FX5": {
+   "extra": {
+    "1073741441": [],
+    "1073741381": []
+   },
+   "positions": [],
+   "unresolved": false,
+   "in_1_xdom": [],
+   "in_mirror": [],
+   "holds": null,
+   "strict_holds": false
+  },
+  "void_flags": [],
+  "gate": "STOP"
+ },
+ "M2r": {
+  "FX1": {
+   "L_independent": true,
+   "n_scope": 76,
+   "n_only_L01": 0,
+   "initial": {},
+   "terminal": {},
+   "n_keys_interior": 0,
+   "n_interior_zero_L": 0,
+   "max_interior_run": 0,
+   "interior_sample": {},
+   "inside_alphabet": true,
+   "n_outside": 0,
+   "holds": true
+  },
+  "FX2": {
+   "holds": true,
+   "n_L_without_depth2": 0,
+   "absent_at_all_L": false,
+   "runs": [],
+   "n_runs": 0
+  },
+  "FX3": {
+   "found_all": false,
+   "verified_all": false,
+   "min_held_out": 0,
+   "minimal_shapes": [
+    "(None, None)"
+   ],
+   "search": [
+    "None"
+   ],
+   "holds": false
+  },
+  "FX4": {
+   "per_run": [
+    null,
+    null,
+    null,
+    null
+   ],
+   "holds": false
+  },
+  "FX5": {
+   "extra": {
+    "1073741441": [],
+    "1073741381": []
+   },
+   "positions": [],
+   "unresolved": false,
+   "in_1_xdom": [],
+   "in_mirror": [],
+   "holds": null,
+   "strict_holds": false
+  },
+  "void_flags": [],
+  "gate": "STOP"
+ },
+ "overall": "STOP",
+ "overall_rule": "overall = first of INCOMPLETE > VOID > STOP > BORDERLINE > GO held by a case; FX0 failure forces VOID; GO needs every case GO"
+}
