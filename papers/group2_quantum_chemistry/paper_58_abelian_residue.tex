@@ -412,6 +412,20 @@ $a=b$ split, and no rate $\pm(a-b)$ appears (records
 \texttt{docs/predictions/2026-11-16\_exchange\_unequal\_zeta\_b.md}, each registered before
 computing;\ the first was void because four primes could not reconstruct the $(1,3/2)$
 operator, and the second supplied more primes).
+\textbf{[SYMBOLIC PROOF]} At $(a,b)=(1,3/2)$ and $(1,2)$ the order is bounded by a derivation, not
+only by the guess.  Differentiating Pachucki's second-order equation for the two-center master
+integral~\cite{pachucki2009} once in each of the four exponents at the exchange point, where its
+coefficient $p^2$ vanishes to second order, gives inhomogeneous equations whose unique decaying
+solutions lie, by exact linear algebra, in the $\mathbb{Q}(R)$-span of nine functions:\ the master
+integral, $E_1((a+b)R)$, $e^{-(a+b)R}$, $e^{-2aR}$, $e^{-2bR}$, $e^{2aR}E_1(2(a+b)R)$,
+$e^{2bR}E_1(2(a+b)R)$,
+$e^{-2aR}\bigl[\mathrm{Ei}(2(a-b)R)-2\,\mathrm{Ei}((a-b)R)+\ln\tfrac{b-a}{b+a}\bigr]$ and its
+$a\leftrightarrow b$ twin.  The resulting closed form agrees with the independently computed integral
+to $45$ digits or better at three distances.  The order is therefore at most $9$, and the operator
+the closed form yields is the reconstructed one.  That the order is exactly $9$ rests on the guessed
+search, which excluded lower orders up to degree $60$ \textbf{[MEASURED]};\ equal exponents, general
+$a<b$ and the $2p$ and $3d$ cases below are not covered by this derivation (guard
+\texttt{tests/test\_paper58\_pachucki\_exchange.py}).
 \textbf{[SYMBOLIC + MEASURED]} A $2p$ orbital keeps that shape.  For
 $(2p\sigma_{\rm A}1s_{\rm B}|2p\sigma_{\rm A}1s_{\rm B})$ and
 $(2p_{+1,{\rm A}}1s_{\rm B}|2p_{-1,{\rm A}}1s_{\rm B})$, the radial part of real
