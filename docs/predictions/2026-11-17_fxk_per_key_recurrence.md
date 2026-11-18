@@ -231,3 +231,72 @@ that.
 Cost: the controls take about 4 min each. The C1 calibration is a frozen control and is not rerun in Phase 2. A scored job needs no coefficient recompute (it reads the saved
 sequences). Measured on C1, the per-key search over 77 keys took about 2230 s per prime (about 20-40 s per key). That is about
 35-40 min per scored job, and under 1 h wall with 4 parallel jobs. If the sequence files are lost, the fallback recompute is about 7000 s per job.
+
+## Results (scored 2026-11-17; `python debug/fxk_run.py summary` -> `debug/data/fxk_run.json`)
+
+**Verdict: GO** at both M1 and M2r. FXK0 holds, FXK2 and FXK3 hold in both cases on both primes, no VOID flag and
+no STOP reason. Scope, as registered: each contact is a 7/2-type local exponent of some key's D-module. This does not
+show that f_k or F carries a nonzero (1-x)^{7/2} branch on the physical sheet, nor that the branch leads.
+
+**FXK0.** The series, AB and K4A1 controls pass on both primes, including their fire tests (AB recovers (14,111),
+the drop-largest plant moves the LCLM 13 -> 15, 7/2 present at x*). The gate fire test passes 17 of 17. The four
+FX sequence files and the three pinned dependencies (`fx_run.py`, `na_modanalyze.py`, `s1_controls.py`) match their
+sha256 (`dep_sha_ok`). Every found annihilator vanishes on at least 200 held-out rows. No instrument error. The
+scored jobs ran 2018-2265 s each, launched and finished the same evening (48 h clause by hand: holds).
+
+| | M1 | M2r |
+|:--|:--|:--|
+| contacts (dominant first) | x_Z* = 61/60, x_W* = 109/60 | x_W* = 61/60, x_Z* = 829/540 |
+| keys in scope; F_p-rank | 67; 31 | 76; 31 |
+| keys found (both primes, same shape) | 12: 3 pure-exponential, 9 single-E1 | 15: 4 pure-exponential, 11 single-E1 |
+| not found | 55: 16 depth-2, 2 log, 30 single-E1, 7 pure-exponential | 61: 16 depth-2, 4 log, 4 products of two E1 values, 30 single-E1, 7 pure-exponential |
+| shapes found | (6,21)x2, (10,37), (10,44)x6, (11,44), (15,77)x2 | (6,21)x3, (10,44)x8, (11,44)x2, (15,77)x2 |
+| distinct operators; pairwise gcrd orders | 7; 6 or 10 | 7; 6 or 10 |
+| LCLM of the found operators; largest order | 21 (both series points agree); 15 | 22 (agree); 15 |
+| carrier at the dominant contact | key (-84/25, pure exp), (15,77), class M, half-integer roots {7/2} | key (-359/150, pure exp), (15,77), class M, {7/2} |
+| carrier at the other contact | key (-129/25, pure exp), (15,77), class M, {7/2} | key (-476/225, pure exp), (15,77), class M, {7/2} |
+| classes at +1 and -1 | L for every operator | L for every operator |
+
+Each contact is present in exactly one found operator, and in each case that operator's only half-integer candidate
+root there is 7/2. Everything in the table is identical on the two primes.
+
+**Clauses.**
+
+| clause | M1 | M2r |
+|:--|:--|:--|
+| FXK0 (instrument) | holds | holds |
+| FXK1 (coverage; reported) | not complete: 12 of 67 keys, 9 of 31 proportional classes (C1: 10 of 32) | not complete: 15 of 76 keys, 9 of 31 classes |
+| FXK2 (both contacts reached; P 0.75 / 0.6) | holds | holds |
+| FXK3 (7/2 at each; P 0.9) | holds | holds |
+| FXK4 (structure; reported) | LCLM 21, max 15, as expected from C1 (about 20-25, about 15); lowest half-integer root per carrier 7/2 | LCLM 22, max 15; lowest half-integer root per carrier 7/2 |
+
+**Frozen files.** 15 of the 19 frozen files are unchanged at scoring. The other four are the AB and K4A1 positive
+controls, which Phase 2 reruns and overwrites; with timing fields removed they are identical to the committed copies.
+The hashes in the Frozen table are of the working-tree files (CRLF line endings as written on Windows); git stores
+the JSON files with LF, so `git show` copies of the seven control JSONs among the unchanged files (series x2,
+firetest_gate, pilot control, C1 calibration controls x2, C1 summary) hash differently, with content identical after
+CRLF -> LF; the sequence files hash the same.
+
+**Reading.**
+- On FX's matched slice, at both scored geometries, the per-key route reaches both Landau contacts inside FX's
+  budget, through two pure-exponential keys whose minimal operators have order 15 and degree 77. At every contact
+  7/2 is the only half-integer candidate exponent of the operator that carries it, on both primes (its indicial
+  roots there are 0-13 and 7/2). Unfound keys may also be singular at these contacts with other exponents; "only"
+  refers to the found carrier, not to the contact or to F. The licensed Paper 63 sentence is: a key operator has
+  7/2 among its exponents at each contact.
+- FX's question is answered only through the keys. Whether F itself has a nonzero (1-x)^{7/2} branch on the
+  physical sheet, and whether it leads, is not read here; the leading 7/2 rests on FC's numerical GO. The candidate
+  root is a mod-p reading of the indicial equation.
+- The carriers are the same shape as C1's, which is what the calibration predicted; M2r's D1 > b geometry behaved
+  like M1. The informative clause (FXK2) held at both.
+- Coverage stays partial: no depth-2 or log key has an operator at R <= 32, so the LCLM of the found operators
+  (21, 22) bounds nothing about F's operator order, and FX3's negative stands as it was.
+
+Per-key (order, degree) for every key is in `debug/data/fxk_run_<case>_<p>.json`, field `per_key`.
+
+Cold review of the scoring: 0 MUST-FIX, 3 SHOULD-FIX (the CRLF sentence named two files where seven differ; FXK1
+omitted the class counts; "only" in the Reading needed the unfound-key caveat), 5 NIT; applied. The reviewer
+re-derived every gate branch from the four per-prime JSONs, the sha256 values and the control diffs, and confirmed the
+GO. It also flagged that Paper 63's "no product of two factors E1 occurs" read as if no E1 x E1 constant occurs,
+while M2r has four such product keys; the sentence was meant of the depth-2 integrands (each carries a single E1,
+pinned by the guard) and now says so.

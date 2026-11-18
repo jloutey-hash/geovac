@@ -1,0 +1,569 @@
+{
+ "FXK0": {
+  "holds": true,
+  "failed": []
+ },
+ "M1": {
+  "FXK1": {
+   "n_scope": 67,
+   "n_found": [
+    12,
+    12
+   ],
+   "n_found_both": 12,
+   "n_same_shape": 12,
+   "shapes": [
+    {
+     "(10, 37)": {
+      "n_keys": 1,
+      "n_distinct": 1
+     },
+     "(10, 44)": {
+      "n_keys": 6,
+      "n_distinct": 2
+     },
+     "(11, 44)": {
+      "n_keys": 1,
+      "n_distinct": 1
+     },
+     "(15, 77)": {
+      "n_keys": 2,
+      "n_distinct": 2
+     },
+     "(6, 21)": {
+      "n_keys": 2,
+      "n_distinct": 1
+     }
+    },
+    {
+     "(10, 37)": {
+      "n_keys": 1,
+      "n_distinct": 1
+     },
+     "(10, 44)": {
+      "n_keys": 6,
+      "n_distinct": 2
+     },
+     "(11, 44)": {
+      "n_keys": 1,
+      "n_distinct": 1
+     },
+     "(15, 77)": {
+      "n_keys": 2,
+      "n_distinct": 2
+     },
+     "(6, 21)": {
+      "n_keys": 2,
+      "n_distinct": 1
+     }
+    }
+   ],
+   "complete": false
+  },
+  "FXK2": {
+   "n_present": {
+    "xZ": 1,
+    "xW": 1
+   },
+   "holds": true
+  },
+  "FXK3": {
+   "half_roots": {
+    "xZ": [
+     "7/2"
+    ],
+    "xW": [
+     "7/2"
+    ]
+   },
+   "has_7_2": {
+    "xZ": true,
+    "xW": true
+   },
+   "holds": true
+  },
+  "FXK4": {
+   "lclm_orders": [
+    21,
+    21
+   ],
+   "lclm_series_points_agree": [
+    true,
+    true
+   ],
+   "max_orders": [
+    15,
+    15
+   ],
+   "n_distinct": [
+    7,
+    7
+   ],
+   "span": [
+    {
+     "n_keys": 67,
+     "L_used": 1500,
+     "rank": 31,
+     "n_prop_classes": 31,
+     "prop_class_sizes": [
+      12,
+      5,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "n_keys": 67,
+     "L_used": 1500,
+     "rank": 31,
+     "n_prop_classes": 31,
+     "prop_class_sizes": [
+      12,
+      5,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "pm1": [
+    {
+     "6c4ddcc97b51fc39": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "ce7d992971851245": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "555450a7e2d40ddc": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "ac1351ee794b9cb3": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "080ca93654530cae": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "3bf73ab0762bdc95": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "94c73b2db59347ad": {
+      "p1": "L",
+      "m1": "L"
+     }
+    },
+    {
+     "3f94f4a3445a8287": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "56655852ef7ce2cb": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "b74d4fa891f3e1b6": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "d8101df7a0dfcd77": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "bde4ed2caee29068": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "a932eb63a487c0d6": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "e6a9d9118860c1b9": {
+      "p1": "L",
+      "m1": "L"
+     }
+    }
+   ],
+   "contacts": {
+    "xZ": {
+     "present_keys": {
+      "(Fraction(-84, 25), ())": {
+       "shape": [
+        15,
+        77
+       ],
+       "present": true,
+       "cls": "M",
+       "half": [
+        "7/2"
+       ]
+      }
+     },
+     "n_present": 1,
+     "has_7_2": true,
+     "half_roots": [
+      "7/2"
+     ]
+    },
+    "xW": {
+     "present_keys": {
+      "(Fraction(-129, 25), ())": {
+       "shape": [
+        15,
+        77
+       ],
+       "present": true,
+       "cls": "M",
+       "half": [
+        "7/2"
+       ]
+      }
+     },
+     "n_present": 1,
+     "has_7_2": true,
+     "half_roots": [
+      "7/2"
+     ]
+    }
+   }
+  },
+  "void_flags": [],
+  "stop_reason": null,
+  "gate": "GO"
+ },
+ "M2r": {
+  "FXK1": {
+   "n_scope": 76,
+   "n_found": [
+    15,
+    15
+   ],
+   "n_found_both": 15,
+   "n_same_shape": 15,
+   "shapes": [
+    {
+     "(10, 44)": {
+      "n_keys": 8,
+      "n_distinct": 2
+     },
+     "(11, 44)": {
+      "n_keys": 2,
+      "n_distinct": 2
+     },
+     "(15, 77)": {
+      "n_keys": 2,
+      "n_distinct": 2
+     },
+     "(6, 21)": {
+      "n_keys": 3,
+      "n_distinct": 1
+     }
+    },
+    {
+     "(10, 44)": {
+      "n_keys": 8,
+      "n_distinct": 2
+     },
+     "(11, 44)": {
+      "n_keys": 2,
+      "n_distinct": 2
+     },
+     "(15, 77)": {
+      "n_keys": 2,
+      "n_distinct": 2
+     },
+     "(6, 21)": {
+      "n_keys": 3,
+      "n_distinct": 1
+     }
+    }
+   ],
+   "complete": false
+  },
+  "FXK2": {
+   "n_present": {
+    "xZ": 1,
+    "xW": 1
+   },
+   "holds": true
+  },
+  "FXK3": {
+   "half_roots": {
+    "xZ": [
+     "7/2"
+    ],
+    "xW": [
+     "7/2"
+    ]
+   },
+   "has_7_2": {
+    "xZ": true,
+    "xW": true
+   },
+   "holds": true
+  },
+  "FXK4": {
+   "lclm_orders": [
+    22,
+    22
+   ],
+   "lclm_series_points_agree": [
+    true,
+    true
+   ],
+   "max_orders": [
+    15,
+    15
+   ],
+   "n_distinct": [
+    7,
+    7
+   ],
+   "span": [
+    {
+     "n_keys": 76,
+     "L_used": 1500,
+     "rank": 31,
+     "n_prop_classes": 31,
+     "prop_class_sizes": [
+      18,
+      7,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "n_keys": 76,
+     "L_used": 1500,
+     "rank": 31,
+     "n_prop_classes": 31,
+     "prop_class_sizes": [
+      18,
+      7,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    }
+   ],
+   "pm1": [
+    {
+     "4685094885ecac88": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "49d167a832d9a549": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "f7b9164d49ad418f": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "ae5a9902cc027519": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "08afc8dd09afcbad": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "6910605c37db0a1a": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "774c7c6401e1e1a8": {
+      "p1": "L",
+      "m1": "L"
+     }
+    },
+    {
+     "661573727ac3446e": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "d3c52beb7d6bf685": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "648b0ce3b522d735": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "d1bc3a0765da54ae": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "8f65de23843f7aa3": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "4e608c28316b54c6": {
+      "p1": "L",
+      "m1": "L"
+     },
+     "de5a615a1677348e": {
+      "p1": "L",
+      "m1": "L"
+     }
+    }
+   ],
+   "contacts": {
+    "xZ": {
+     "present_keys": {
+      "(Fraction(-476, 225), ())": {
+       "shape": [
+        15,
+        77
+       ],
+       "present": true,
+       "cls": "M",
+       "half": [
+        "7/2"
+       ]
+      }
+     },
+     "n_present": 1,
+     "has_7_2": true,
+     "half_roots": [
+      "7/2"
+     ]
+    },
+    "xW": {
+     "present_keys": {
+      "(Fraction(-359, 150), ())": {
+       "shape": [
+        15,
+        77
+       ],
+       "present": true,
+       "cls": "M",
+       "half": [
+        "7/2"
+       ]
+      }
+     },
+     "n_present": 1,
+     "has_7_2": true,
+     "half_roots": [
+      "7/2"
+     ]
+    }
+   }
+  },
+  "void_flags": [],
+  "stop_reason": null,
+  "gate": "GO"
+ },
+ "overall": "GO"
+}
