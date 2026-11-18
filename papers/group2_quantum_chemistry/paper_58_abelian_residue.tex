@@ -425,6 +425,26 @@ is recovered on a further prime, and its Frobenius solution matches the integral
 computed independently to $6\times10^{-79}$ or better (record
 \texttt{docs/predictions/2026-11-17\_exchange\_l1.md}, registered before computing;\ guard
 \texttt{tests/test\_paper58\_exchange\_l1.py}).
+\textbf{[SYMBOLIC + MEASURED]} So do a $3d$ orbital against $1s$ and a $2p$ orbital on
+each centre.  For $(3d_{0,{\rm A}}1s_{\rm B}|3d_{0,{\rm A}}1s_{\rm B})$,
+$(3d_{+2,{\rm A}}1s_{\rm B}|3d_{-2,{\rm A}}1s_{\rm B})$,
+$(2p\sigma_{\rm A}2p\sigma_{\rm B}|2p\sigma_{\rm A}2p\sigma_{\rm B})$ and
+$(2p_{+1,{\rm A}}2p_{+1,{\rm B}}|2p_{+1,{\rm A}}2p_{+1,{\rm B}})$ the operator has order $4$
+at equal exponents, again the most it can have there (the $\tau$-sum stops at $\tau\le4$;\
+shown before computing).  At $(a,b)=(1,2)$, computed for the last three, the order is $9$.
+The second integral is, up to the constant $3(b/a)^2$, also
+$(2p_{+1,{\rm A}}2p_{-1,{\rm B}}|2p_{-1,{\rm A}}2p_{+1,{\rm B}})$, so its operator serves the
+$\sigma=2$ component of real $2p_x2p_x$ exchange as well.  Again only the degree changes:\
+$24$, $10$, $24$ and $16$ at $(1,1)$, and $35$, $53$ and $39$ at $(1,2)$.  The rates at
+infinity are the $1s$ ones, with no rate $\pm(a-b)$, and every finite nonzero singular point
+reads as apparent.  At $R=0$ the logarithm starts at $R^{13}\ln R$ in all seven cases, and
+its coefficient at $(1,2)$ is $32$ times that at $(1,1)$ for the $3d$ integral and $128$ times
+for the two $2p$--$2p$ integrals, consistent with the factors $b^5$ and $b^7$ of the scalings $a^9b^5$ and
+$a^7b^7$ suggested before computing ($a=1$ at both pairs, so the power of $a$ is untested).
+Each operator is reconstructed over $\mathbb{Q}$ from $8$ to $16$ primes, is recovered on a
+further prime, and its Frobenius solution matches the integral computed independently to
+$3\times10^{-75}$ or better (record
+\texttt{docs/predictions/2026-11-17\_exchange\_d\_pp.md}, registered before computing).
 
 \textbf{[SYMBOLIC + MEASURED]} The picture carries over to hydrogenic orbitals with
 $l \le 2$, $n \le 3$, on a pre-registered panel of $48$ integrals with $p$ and $d$
