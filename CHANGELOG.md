@@ -7,6 +7,68 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.36] - 2026-11-17
+
+**The owed list after v6.7.35, worked through (PI: "push, then work through the owed items"; v6.7.35 pushed first).
+Four pre-registered records scored: P63L2 GO (Paper 63 l > 0 attainment for three shapes), EQ GO (exchange with 3d on
+one centre and 2p on both keeps the 1s operator shape), FX STOP (no l-recurrence for the four-centre matched slice
+within R <= 32; written up per the PI's option A) and its PI-approved follow-up FXK GO (searched key by key, both
+contacts are carried by a key operator with 7/2). Paper 63 gains prop:odd_banana. Guards for all five, each written
+and fire-tested as a separate pass.**
+
+### Added
+- Paper 63 `prop:odd_banana` (a894c424). Odd-lambda pieces need an odd number of exterior tails (m <= n-2); the
+  higher-order factors of phi(L_m(theta-lambda)) depend only on lambda mod 2; odd, 2 <= m <= 5 gives Vanhove's V_m
+  with phi(L_m(theta-1)) = (-2)^(m-1) U V_m exactly. Odd pieces have order <= n-3 for n <= 7. Cold review 0 LARGE.
+  Guard `tests/test_paper63_odd_banana.py`, fire-tested 29/29.
+- Record P63L2 (`docs/predictions/2026-11-17_paper63_attainment_l2.md`, registered a04abc23, scored e4ca16ea): **GO**
+  on both shapes. B1 (d root): eps^{-3/2}, amplitude 1/(12 pi) to 2.3e-10, kappa1 = 15/8. B2 (cancelling root): the
+  eps^{-3/2} coefficient is exactly zero; eps^{-1/2}, amplitude 3/(8 pi) to 3.6e-9, kappa2 = -3/8. Paper 63:
+  "attainment" means the leading branch coefficient at t = -2 does not vanish; no operator is computed. Cold review
+  2 MUST-FIX (an operator-equivalence overclaim; a mislabelled correction), applied. Guard
+  `tests/test_paper63_attainment_l2.py`, fire-tested 38/41 (three non-fires explained in the file).
+- Record FX (`docs/predictions/2026-11-17_four_centre_recurrence.md`, registered 64fdf395, scored d60950da): **STOP**
+  on FX3. On the matched slice (zeta_W/zeta_Z = sqrt(a/b)) at M1 (1, 4, 6/5) and M2r (4/9, 1, 6/5): the canonical
+  key set is constant in l (67 / 76 keys), a depth-2 key has a nonzero coefficient at every l = 2..1500, but no
+  recurrence of order <= 32 (degree cap 35, one above the registered prose figure) annihilates the generic
+  combination on l <= 1300, either prime. FX4 (7/2 at the contacts) untested. Raised to the PI; option A (write up
+  the STOP) and B (register a per-key follow-up) approved. Paper 63 `sec:four_centre` paragraph (e19b3af0); guard
+  `tests/test_paper63_four_centre_matched.py` with FX's saved sequences (e9604c49). Cold reviews removed a
+  class-exit claim and an "Euler gamma" error.
+- Record FXK (`docs/predictions/2026-11-17_fxk_per_key_recurrence.md`, registered 50739bfe, scored 30f5186a).
+  - Design: calibrated first on FX's unscored geometry C1. The first draft's gate (every key found) would have
+    given P(GO) about 0.03, so coverage moved outside the gate. The cold review then added cross-prime VOIDs,
+    widened STOP(b) to FX's own condition, and restricted a GO to "a key operator has 7/2 among its exponents at
+    each contact". Gate fire test 17/17.
+  - **GO** at M1 and M2r, both primes. 12 of 67 and 15 of 76 keys have a recurrence within FX's budget, no depth-2
+    or log key. Each contact is carried by one pure-exponential key's (15,77) operator whose only half-integer
+    exponent there is 7/2. LCLM of the found operators 21 / 22 (bounds nothing). Not a statement about F's own
+    branch.
+  - Paper 63 `sec:four_centre`: the "exponents not read" clause replaced by the per-key reading with its scope
+    disclaimer; "no product of two factors E1 occurs" narrowed to "a single factor E1 in its integrand" (M2r has
+    four E1 x E1 product constants; caught by the scoring review).
+  - Guard `tests/test_paper63_fxk_per_key.py`, 37 fast + 8 slow, fire-tested 15/15. The fast tier recomputes
+    the four carrier operators from FX's sequences; the found counts are recomputed only in the slow tier.
+- Record EQ (`docs/predictions/2026-11-17_exchange_d_pp.md`, registered 71310781, scored a135be90): **GO**, all seven
+  cases, both primes, every reported prediction but one. (3d0 1s|3d0 1s), (3d+2 1s|3d-2 1s), (2p0 2p0|2p0 2p0) and
+  (2p+1 2p+1|2p+1 2p+1): order 4 at (1,1) (at most 4 proved), 9 at (1,2) with the 1s rate multiset; finite points
+  apparent; R^13 ln R onset in all seven; (1,2)/(1,1) ratios 32 (d) and 128 (pp). Missed: no degree above 60
+  (largest 53). Cold review 0 MUST-FIX; two scorer branches aligned with the registered gate after scoring (neither
+  fires). Paper 58 exchange paragraph (f5804bf7); guard `tests/test_paper58_exchange_d_pp.py`, 58 fast + 14 slow,
+  fire-tested 30/32 (470bfddd).
+
+### Changed
+- `docs/chemistry_period_inventory.md`: row 7 (FX STOP, FXK GO), row 8 (P63L2 closed; d orbitals in exchange and
+  2p on both centres closed).
+- `docs/claim_test_matrix.md`: rows for P63L2, odd_banana, FX, FXK, EQ.
+
+### Notes
+- Frozen-file hashes in FX and FXK are of the working-tree files (CRLF as written on Windows); git stores the JSON
+  with LF, so `git show` copies of control JSONs hash differently with identical content. Phase 2 control reruns
+  changed timing fields only.
+- The peeling lever (dividing a hard key's recurrence by an already-found right factor) is described in
+  `debug/fxk_design_memo.md` and not built.
+
 ## [v6.7.35] - 2026-11-17
 
 **The owed chemistry list worked down again (PI: "do what's owed"). Two pre-registered records GO: MO (the (AA|BC)
