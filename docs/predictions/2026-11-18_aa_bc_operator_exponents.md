@@ -263,6 +263,8 @@ independent.
 
 **Added by the guard pass (2026-11-18), not in the scoring above.** The full operator found for the random
 combination annihilates 19 of the 21 pieces individually. The two it does not are non-endpoint pure exponentials,
-regular at x*, the same two at both cases and both primes. (A generic combination of pieces that differ by a
-rational factor has a lower-order annihilator that depends on the weights.) All five endpoint pieces are annihilated,
+regular at x*, the same two at both cases and both primes. (The solution space of a generic sum can be a proper
+subspace of the sum of the pieces' spaces. The PM's first explanation here, that the two pieces differ by a
+rational factor, was a guess and is withdrawn: no polynomial or first-order relation of degree <= 4 and no ratio
+rational in L of degree <= 6 was found, `debug/op52_derivation_memo.md`.) All five endpoint pieces are annihilated,
 so the x* exponents do not depend on the weights; the guard pins this.
