@@ -146,3 +146,51 @@ python debug/l52_run.py score            # -> debug/data/l52_score.json (verdict
 ```
 Estimated 35-55 min total (AB: about 4.5 min per case at L = 240, 2000 digits; the Yukawa piece adds about a third;
 perL and fk about 2 min per case).
+
+## Results (scored 2026-11-17; `python debug/l52_run.py score` -> `debug/data/l52_score.json`)
+
+**Verdict: GO.** P0, P1 and P2a hold; P2b (reported) holds. No VOID condition fires. Scope as registered: function
+level, not operator level.
+
+**P0 (instrument).** AB's stored values reproduced to 1.2e-31 (A1) and 5.8e-32 (A2). 2000 against 2600 digits give
+identical values to all 40 stored significant digits at every L, in all five comparisons. Y_kappa per L against quadrature: at most 4.7e-45 (A1) and
+2.0e-43 (A3). The assembled f_kappa per L against quadrature: at most 1.4e-30 (A1) and 9.9e-31 (A3). Coulomb
+beta_eff(220) against the 7/2 toy: -4.1064 / -4.1186 (A1), -4.0828 / -4.0939 (A2), -4.0860 / -4.1080 (A3), all
+within 0.1; consistent with no singularity nearer than x* at the fresh A3. Gate fire test 23/23. All 17 frozen files
+hash-match at scoring.
+
+| case | x* | clause | predicted amplitude | measured / predicted, extrapolated (r0) | at L = 240 (R_240) | fitted c1 | tolerance |
+|:--|:--|:--|:--|:--|:--|:--|:--|
+| A1 | 125/117 | P1, 7/2 | 0.484067114029 | 0.9999982 | 0.98957 | -2.38 | 1e-3 |
+| A2 | 89/80 | P1, 7/2 | 0.311565741964 | 0.9999993 | 0.99034 | -2.23 | 1e-3 |
+| A3 (fresh) | 13/12 | P1, 7/2 | 2.442611916796 | 0.9999961 | 0.98110 | -4.35 | 1e-3 |
+| A1, kappa = 7/10 | 125/117 | P2a, 9/2 of f_kappa - f | 0.026361899069 | 0.9999975 | 0.98958 | -2.35 | 3e-3 |
+| A3, kappa = 1 | 13/12 | P2a, 9/2 of f_kappa - f | 0.349327010238 | 0.9999948 | 0.98187 | -4.13 | 3e-3 |
+
+The largest P1 deviation is 3.9e-6 (about 260 times inside 1e-3); the largest P2a deviation is 5.2e-6 (about 580
+times inside 3e-3). These are the residuals of the registered four-term fit; they share a sign and move with the
+window, and a five-term fit on the same data gives at most 1e-7, so they are extrapolation bias, not a gap between
+the data and the formula. Three-term and other four-term windows give at most 3.0e-5.
+P2b (reported): the difference's beta_eff(220) is -5.168 against the 9/2 toy's -5.180 (A1) and -5.143 against -5.164
+(A3), so the difference leads with 9/2; a 7/2 admixture would make its ratio grow like L, which the extrapolated r0 of D
+bounds far more tightly than the slope does.
+
+**Reading.**
+- The segment-average formula transfers to (AA|BC) at unequal arms: the amplitude of the (x* - x)^{7/2} branch is
+  the registered closed form at three geometries, one of them fresh, to the registered fit's residual of a few parts
+  in 10^6 (at most 1e-7 with one more correction term). The agreement is
+  reached by extrapolating exact Legendre coefficients in L; at L = 240 the raw ratio is still 1-2% low, as the
+  fitted c1 shows.
+- Replacing the Coulomb line by a Yukawa line leaves the 7/2 amplitude unchanged, and the difference leads with a
+  9/2 branch of the predicted amplitude. As stated at registration, the kappa-independence of the |s|^3 coefficient
+  follows from the Helmholtz equation, so this clause tests the Yukawa assembly and the formula one order up.
+- This is a statement about the function f. It says nothing about which exponents the minimal annihilating operator
+  has at x*; why that operator shows 3/2 but no 5/2 (AB's P3a) stays open.
+- 1s functions only; the weight's analyticity along the complex segment, the convergence of the remainder and the
+  dominance of x* are assumed in the derivation and are consistent with, not proved by, this agreement.
+
+Cold review of the scoring: 0 MUST-FIX, 2 SHOULD-FIX (the few-parts-in-10^6 figure is the four-term fit's bias, now
+labelled; "x* is the nearest singularity at A3" softened to "consistent with"), 4 NIT; applied. The reviewer
+recomputed r0 from the raw coefficients, reproduced the score exactly, tried 3-, 4-, 5- and 6-term fits on several
+windows (all inside the bars), checked T_L against direct Legendre quadrature, every P0 sub-clause and the 17 hashes,
+and confirmed the GO.
