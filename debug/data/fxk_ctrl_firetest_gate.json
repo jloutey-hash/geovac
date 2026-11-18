@@ -1,0 +1,89 @@
+{
+ "go": {
+  "expected": "GO",
+  "got": "GO",
+  "ok": true
+ },
+ "go_incomplete": {
+  "expected": "GO",
+  "got": "GO",
+  "ok": true
+ },
+ "go_two_carriers": {
+  "expected": "GO",
+  "got": "GO",
+  "ok": true
+ },
+ "complete_no_7_2": {
+  "expected": "STOP",
+  "got": "STOP",
+  "ok": true
+ },
+ "one_contact_no_7_2": {
+  "expected": "STOP",
+  "got": "STOP",
+  "ok": true
+ },
+ "no_contact": {
+  "expected": "STOP",
+  "got": "STOP",
+  "ok": true
+ },
+ "one_contact_only": {
+  "expected": "BORDERLINE",
+  "got": "BORDERLINE",
+  "ok": true
+ },
+ "present_L_no_7_2": {
+  "expected": "STOP",
+  "got": "STOP",
+  "ok": true
+ },
+ "present_A_no_7_2": {
+  "expected": "STOP",
+  "got": "STOP",
+  "ok": true
+ },
+ "present_L_with_7_2": {
+  "expected": "GO",
+  "got": "GO",
+  "ok": true
+ },
+ "xZ_p1_only_xW_p2_only": {
+  "expected": "VOID",
+  "got": "VOID",
+  "ok": true
+ },
+ "carrier_shape_differs": {
+  "expected": "VOID",
+  "got": "VOID",
+  "ok": true
+ },
+ "carrier_roots_differ": {
+  "expected": "VOID",
+  "got": "VOID",
+  "ok": true
+ },
+ "carrier_found_one_prime": {
+  "expected": "VOID",
+  "got": "VOID",
+  "ok": true
+ },
+ "noncarrier_shape_differs": {
+  "expected": "GO",
+  "got": "GO",
+  "ok": true
+ },
+ "unverified": {
+  "expected": "VOID",
+  "got": "VOID",
+  "ok": true
+ },
+ "exception": {
+  "expected": "VOID",
+  "got": "VOID",
+  "ok": true
+ },
+ "notes": "present_L_with_7_2 is a consistency case only: s1_controls.points classes a point with a half-integer root as M, so L/A with 7/2 does not arise; the gate reads roots, not classes. Series-point (seed) disagreement of the LCLM is reported in FXK4, not gated.",
+ "all_pass": true
+}

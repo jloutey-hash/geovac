@@ -1,0 +1,124 @@
+{
+ "case": "M1",
+ "prime": 1073741441,
+ "Lmax": 300,
+ "window": 250,
+ "hold": 50,
+ "t_coeff": 212.4,
+ "reproduces_FX_prefix": true,
+ "span": {
+  "n_keys": 67,
+  "L_used": 300,
+  "rank": 31,
+  "n_prop_classes": 31,
+  "prop_class_sizes": [
+   12,
+   5,
+   4,
+   4,
+   4,
+   3,
+   3,
+   3,
+   3,
+   2,
+   2,
+   2,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ]
+ },
+ "n_in_scope": 67,
+ "n_found": 2,
+ "found_shapes": [
+  "(6, 21)",
+  "(6, 21)"
+ ],
+ "found_keys": {
+  "(Fraction(-6, 5), (('E1', Fraction(18, 5)),))": {
+   "order": 6,
+   "degree": 21,
+   "search": [
+    6,
+    24
+   ],
+   "verified": true,
+   "held_out": 50
+  },
+  "(Fraction(-6, 5), (('E1', Fraction(9, 5)),))": {
+   "order": 6,
+   "degree": 21,
+   "search": [
+    6,
+    24
+   ],
+   "verified": true,
+   "held_out": 50
+  }
+ },
+ "n_distinct_found": 1,
+ "lclm_of_found": {
+  "order": 6,
+  "ranks": [
+   6,
+   6
+  ],
+  "agree": true,
+  "sum_orders": 6,
+  "N": 46
+ },
+ "qtop_ceiling_example": {
+  "1": 72,
+  "2": 54,
+  "3": 42,
+  "4": 35,
+  "5": 30,
+  "6": 26,
+  "7": 22,
+  "8": 20,
+  "9": 18,
+  "10": 16,
+  "11": 15,
+  "12": 14,
+  "13": 12,
+  "14": 12,
+  "15": 11,
+  "16": 10,
+  "17": 9,
+  "18": 9,
+  "19": 8,
+  "20": 8,
+  "21": 7,
+  "22": 7,
+  "23": 6,
+  "24": 6,
+  "25": 6,
+  "26": 6,
+  "27": 5,
+  "28": 5,
+  "29": 5,
+  "30": 5,
+  "31": 4,
+  "32": 4
+ },
+ "per_key_seconds": 48.6,
+ "note": "pilot: no singular-point or indicial analysis performed on M1 (FXK4 kept unseen)",
+ "seconds": 261.2
+}

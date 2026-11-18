@@ -1,0 +1,295 @@
+{
+ "FXK1": {
+  "n_scope": 77,
+  "n_found": [
+   14,
+   14
+  ],
+  "n_found_both": 14,
+  "n_same_shape": 14,
+  "shapes": [
+   {
+    "(10, 37)": {
+     "n_keys": 1,
+     "n_distinct": 1
+    },
+    "(10, 44)": {
+     "n_keys": 6,
+     "n_distinct": 2
+    },
+    "(11, 44)": {
+     "n_keys": 2,
+     "n_distinct": 2
+    },
+    "(15, 77)": {
+     "n_keys": 2,
+     "n_distinct": 2
+    },
+    "(6, 21)": {
+     "n_keys": 3,
+     "n_distinct": 1
+    }
+   },
+   {
+    "(10, 37)": {
+     "n_keys": 1,
+     "n_distinct": 1
+    },
+    "(10, 44)": {
+     "n_keys": 6,
+     "n_distinct": 2
+    },
+    "(11, 44)": {
+     "n_keys": 2,
+     "n_distinct": 2
+    },
+    "(15, 77)": {
+     "n_keys": 2,
+     "n_distinct": 2
+    },
+    "(6, 21)": {
+     "n_keys": 3,
+     "n_distinct": 1
+    }
+   }
+  ],
+  "complete": false
+ },
+ "FXK2": {
+  "n_present": {
+   "xZ": 1,
+   "xW": 1
+  },
+  "holds": true
+ },
+ "FXK3": {
+  "half_roots": {
+   "xZ": [
+    "7/2"
+   ],
+   "xW": [
+    "7/2"
+   ]
+  },
+  "has_7_2": {
+   "xZ": true,
+   "xW": true
+  },
+  "holds": true
+ },
+ "FXK4": {
+  "lclm_orders": [
+   22,
+   22
+  ],
+  "lclm_series_points_agree": [
+   true,
+   true
+  ],
+  "max_orders": [
+   15,
+   15
+  ],
+  "n_distinct": [
+   8,
+   8
+  ],
+  "span": [
+   {
+    "n_keys": 77,
+    "L_used": 1500,
+    "rank": 32,
+    "n_prop_classes": 32,
+    "prop_class_sizes": [
+     16,
+     7,
+     6,
+     4,
+     4,
+     3,
+     3,
+     3,
+     3,
+     3,
+     2,
+     2,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   {
+    "n_keys": 77,
+    "L_used": 1500,
+    "rank": 32,
+    "n_prop_classes": 32,
+    "prop_class_sizes": [
+     16,
+     7,
+     6,
+     4,
+     4,
+     3,
+     3,
+     3,
+     3,
+     3,
+     2,
+     2,
+     2,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1
+    ]
+   }
+  ],
+  "pm1": [
+   {
+    "05cd87e0c05f115b": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "fc9f1ffe34268f00": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "b65437bbbe3f6fd6": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "9eefb83318385c02": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "4d6cb8d6d28fefc2": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "6d0a6bfaf34b4093": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "d888073171387502": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "c84497913bece492": {
+     "p1": "L",
+     "m1": "L"
+    }
+   },
+   {
+    "79bb5ae43a2eec02": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "599445c82f44c5b8": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "ca7480a43a676c87": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "38499365d465b886": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "0016736558ae60e6": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "89ec7be2af5f57b9": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "1686cb9765a11d1d": {
+     "p1": "L",
+     "m1": "L"
+    },
+    "88bf724f03029b09": {
+     "p1": "L",
+     "m1": "L"
+    }
+   }
+  ],
+  "contacts": {
+   "xZ": {
+    "present_keys": {
+     "(Fraction(-307, 100), ())": {
+      "shape": [
+       15,
+       77
+      ],
+      "present": true,
+      "cls": "M",
+      "half": [
+       "7/2"
+      ]
+     }
+    },
+    "n_present": 1,
+    "has_7_2": true,
+    "half_roots": [
+     "7/2"
+    ]
+   },
+   "xW": {
+    "present_keys": {
+     "(Fraction(-739, 200), ())": {
+      "shape": [
+       15,
+       77
+      ],
+      "present": true,
+      "cls": "M",
+      "half": [
+       "7/2"
+      ]
+     }
+    },
+    "n_present": 1,
+    "has_7_2": true,
+    "half_roots": [
+     "7/2"
+    ]
+   }
+  }
+ },
+ "void_flags": [],
+ "stop_reason": null,
+ "gate": "GO"
+}

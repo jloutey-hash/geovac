@@ -1,0 +1,73 @@
+{
+ "two_exps": {
+  "expected": 2,
+  "got": {
+   "order": 2,
+   "ranks": [
+    2,
+    2
+   ],
+   "agree": true,
+   "sum_orders": 2,
+   "N": 42
+  },
+  "ok": true
+ },
+ "same": {
+  "expected": 1,
+  "got": {
+   "order": 1,
+   "ranks": [
+    1,
+    1
+   ],
+   "agree": true,
+   "sum_orders": 2,
+   "N": 42
+  },
+  "ok": true
+ },
+ "contained": {
+  "expected": 2,
+  "got": {
+   "order": 2,
+   "ranks": [
+    2,
+    2
+   ],
+   "agree": true,
+   "sum_orders": 3,
+   "N": 43
+  },
+  "ok": true
+ },
+ "legendre_exp": {
+  "expected": 3,
+  "got": {
+   "order": 3,
+   "ranks": [
+    3,
+    3
+   ],
+   "agree": true,
+   "sum_orders": 3,
+   "N": 43
+  },
+  "ok": true
+ },
+ "single_leg": {
+  "expected": 2,
+  "got": {
+   "order": 2,
+   "ranks": [
+    2,
+    2
+   ],
+   "agree": true,
+   "sum_orders": 2,
+   "N": 42
+  },
+  "ok": true
+ },
+ "pass": true
+}
