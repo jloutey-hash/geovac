@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.37] - 2026-11-18
+
+**Literature search on both sides of the chemistry / Feynman-integral bridge, and what it led to (PI-directed: "do
+all the recommendations ... put some work against the not yet verified items"). Two new pre-registered records GO
+(L52, OP52), one derived bound (the order-9 exchange operator, from Pachucki's equation), one conjecture in Paper 63,
+prior-art credits in three papers, and one negative (peeling).**
+
+### Added
+- Literature search, two agents, every load-bearing citation then checked against its primary source
+  (`debug/lit_scan/2026-11-17_{particle,chemistry}_side_memo.md`, each with a corrections section;
+  `2026-11-18_zhou_matuzas_checks_memo.md`; `2026-11-18_positive_geometry_memo.md`).
+  - Not found in the literature: the bond-angle ODEs; the 21-constant set and the 3/2 cancellation; homogeneous
+    R-operators per class with orders 4 / 9 and the R^9, R^11, R^13 ln R onsets; exchange keeping the 1s shape for
+    l > 0; depth-2 iterated exponential integrals at four centres; guessing operators mod primes for molecular
+    integrals.
+  - Corrections the verification forced: Hannesdottir-Mizera's exponent formula covers only rho <= 0 at isolated
+    saddles, so it does not support our positive exponents; Fresan-Sabbah-Yu's irreducibility is for Sym^k Kl_2,
+    not F_n's operator, so the n <= 8 limit stands; Zhou's relations are among odd moments and give no check on the
+    tree rung; one wrong page number.
+  - Credits added (0f5699e1 and later): Paper 58, Pachucki 2009 and Lesiuk-Moszynski II; Paper 59,
+    Chen-Jaroschek-Kauers-Singer and Lairez-Vanhove at the order 17 -> 14 sentence; Paper 63, Matuzas
+    arXiv:2610.00036, Zhou 2022, Rajantie 1996.
+  - Positive geometry: the one-centre two-electron Yukawa integral is (pi/4) d_a d_b of the two-site
+    cosmological-polytope result 1/[(a+b)(a+mu)(b+mu)] (checked symbolically and numerically; probably known);
+    everything two-centre and beyond is analogy only. Not in a paper.
+- Record L52 (`docs/predictions/2026-11-17_aa_bc_contact_amplitudes.md`, registered 230c9944, scored 800efdf3):
+  **GO**. The "5/2" question from the search dissolved in design (the count is the corpus's own segment-average
+  mechanism and the 5/2 coefficient vanishes identically), so the record scores amplitudes. The (x*-x)^{7/2}
+  amplitude of (AA|BC) at unequal arms equals the closed form at A1, A2 and a fresh A3 within 4e-6 (four-term fit;
+  <= 1e-7 with five); a Yukawa line leaves it unchanged and the difference leads with 9/2 at the predicted
+  amplitude. Paper 59 paragraph; guard `tests/test_paper59_contact_amplitudes.py`, fire-tested 33/33.
+- Record OP52 (`docs/predictions/2026-11-18_aa_bc_operator_exponents.md`, registered ca7d10de, scored c6315cfd):
+  **GO** at P(GO) about 0.50. A counting rule read from record MO's per-piece operators (five endpoint pieces; 3/2
+  from single-potential near-end pieces, 7/2 from the full potential, 9/2 from a collision between the two groups,
+  no 5/2 because a bounded density's potential has no s^1 term) predicted, for a density with a 1/s-singular
+  potential, exponents {3/2, 5/2, 7/2} with no 9/2, blocks {3/2, 5/2} and {5/2}, and a leading 5/2 branch. All held
+  at A1 and the fresh A4, both primes, both weights; operator (14, 109). An independent rank-2 instrument control
+  was added at review. Two steps of the rule are supported, not derived. Paper 59 [ARGUMENT + MEASURED] clause;
+  guard `tests/test_paper59_operator_exponents.py` with embedded data, fire-tested.
+- Paper 58 [SYMBOLIC PROOF] (PI-approved): at (1,3/2) and (1,2) the 1s exchange integral lies in the Q(R)-span of
+  nine functions obtained by differentiating Pachucki's second-order equation in the four exponents at the exchange
+  point, where p^2 vanishes to second order. The closed form matches the integral to >= 45 digits at three
+  distances; order <= 9; the derived operator is the reconstructed order-9, degree-16 one. Exactly 9 stays
+  [MEASURED]. Independent review SOUND WITH CAVEATS. Guard `tests/test_paper58_pachucki_exchange.py` (33 fast + 6
+  slow, fire-tested 39/41); the guard corrected the drafted sentence (each Ei bracket carries ln((b-a)/(b+a))).
+- Paper 63 `conj:tree_attain` (PI-approved): a Coulomb tree of n <= 8 densities with nonzero principal-symbol
+  angular integral has the F_n factor; every s-type tree does. Stated with its argument (the local rule), the step
+  not carried out, and the evidence. Claim matrix: CONJECTURE.
+
+### Changed
+- Paper 63: deleted "consistent with the rung needing two-center densities" (PI-approved); abstract now says three
+  l > 0 shapes reach the branch (was a stale "one chain").
+- `docs/chemistry_period_inventory.md` row 6 (L52, OP52); `docs/claim_test_matrix.md` rows for L52, OP52, the
+  Pachucki bound and the conjecture.
+
+### Negative
+- Peeling a found right factor off the hard four-centre key recurrences (diagnostic on FX's unscored C1): controls
+  pass, 0 of 63 unfound keys become findable; the quotient's degree inflates so the cost rises. Ledger row. No
+  published factoriser (Lairez periods, ore_algebra, Maple) runs on this machine or takes mod-p operators, so order
+  14 (record MO) is not independently confirmed.
+
+### Notes
+- Pre-checkpoint self-check: 0 LARGE in one round on Papers 58, 59, 63; SMALL wording fixes applied.
+- Left open: why (AA|BC)'s operator-level rule steps hold (derivation); the l > 0 and general-exponent cases of the
+  Pachucki bound; the local-rule controls behind conj:tree_attain have no test in tests/.
+
 ## [v6.7.36] - 2026-11-17
 
 **The owed list after v6.7.35, worked through (PI: "push, then work through the owed items"; v6.7.35 pushed first).

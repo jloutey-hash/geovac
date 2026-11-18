@@ -260,3 +260,9 @@ relabelled), 4 NIT; applied. The reviewer recomputed one case with its own weigh
 times against the registration commit, refitted OP5 with 3 to 6 terms, and confirmed the GO. Its caveat: the
 coefficients and the operator guesser are the same frozen engine; only the weights and the indicial reader were
 independent.
+
+**Added by the guard pass (2026-11-18), not in the scoring above.** The full operator found for the random
+combination annihilates 19 of the 21 pieces individually. The two it does not are non-endpoint pure exponentials,
+regular at x*, the same two at both cases and both primes. (A generic combination of pieces that differ by a
+rational factor has a lower-order annihilator that depends on the weights.) All five endpoint pieces are annihilated,
+so the x* exponents do not depend on the weights; the guard pins this.
