@@ -362,7 +362,7 @@ class & closed form & transcendental content \\
 \hline
 one-center, $(AA|BB)$ & yes & none---elementary \\
 $(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \mathrm{Ei}, \ln\}$; $\gamma$ at equal rates;\ none if the $AA$ pair is $s$-type \\
-$(AB|AB)$             & yes & $\{E_1, \ln, \gamma\}$ per Neumann term;\ at $a\neq b$ also the master integral \\
+$(AB|AB)$             & yes & $\{E_1, \ln, \gamma\}$ per Neumann term;\ for the seven integrals of the text the sum is weight two at $a<b$ (master integral) \\
 \hline\hline
 \end{tabular}
 \end{center}
@@ -418,7 +418,7 @@ coefficient $p^2$ vanishes to second order, gives inhomogeneous equations whose 
 solutions lie, by exact linear algebra in the ratio $b/a$, in the $\mathbb{Q}(a,b)(R)$-span of nine functions:\ the master
 integral, $E_1((a+b)R)$, $e^{-(a+b)R}$, $e^{-2aR}$, $e^{-2bR}$, $e^{2aR}E_1(2(a+b)R)$,
 $e^{2bR}E_1(2(a+b)R)$,
-$e^{-2aR}\bigl[\mathrm{Ei}(2(a-b)R)-2\,\mathrm{Ei}((a-b)R)+\ln\tfrac{b-a}{b+a}\bigr]$ and its
+$e^{-2aR}\bigl[\mathrm{Ei}(2(a-b)R)-2\,\mathrm{Ei}((a-b)R)+\ln\tfrac{|b-a|}{b+a}\bigr]$ (principal-value $\mathrm{Ei}$) and its
 $a\leftrightarrow b$ twin.  The span is closed under $d/dR$, so the order is at most $9$.  At
 $(1,3/2)$ and $(1,2)$ the resulting closed form agrees with the independently computed integral
 to $45$ digits or better at three distances, and the operator it yields is the reconstructed one.
@@ -438,9 +438,14 @@ $2p\sigma_{\rm A}2p\sigma_{\rm B}$ and the complex pair $2p_{+1,{\rm A}}2p_{+1,{
 $(1,2)$ the operators it yields for the first, third and fourth are the reconstructed ones, and
 for $3d_{0}$, which no record computed there, it yields a single operator of order $9$ and degree
 $53$.  The same independence and the same determinant test give order exactly $9$ for all four
-(for them the determinant at a single $R$ has real zeros $b/a>1$, so several $R$ are needed),
-for every $0<a<b$, where in $2p\sigma_{\rm A}1s_{\rm B}$ and $3d_{0,{\rm A}}1s_{\rm B}$ the $l>0$
-orbital carries the smaller exponent $a$ (the reverse ordering is not covered).
+(for them the determinant at a single $R$ has real zeros $b/a\neq1$, so several $R$ are needed).
+In $2p\sigma_{\rm A}1s_{\rm B}$ and $3d_{0,{\rm A}}1s_{\rm B}$, with $a$ the exponent of the $l>0$
+orbital, the same closed forms hold for $a>b$ on the real branch (principal-value $\mathrm{Ei}$
+and $\ln(|b-a|/(b+a))$), being their analytic continuation in $b/a$ around $b/a=1$;\ they agree
+with the independently computed integral to $34$ digits or better at $a>b$, and the determinant
+test excludes $b/a$ in $(0,1)$ as well, so for these integrals, as for the symmetric ones, the
+order is exactly $9$ for every $a\neq b$ (near $b/a=1$ the closed forms need extra working
+precision, since their coefficients have poles there that cancel).
 \textbf{[SYMBOLIC PROOF]} The integrals with $m\neq0$ against $1s$,
 $(2p_{+1,{\rm A}}1s_{\rm B}|2p_{-1,{\rm A}}1s_{\rm B})$ and
 $(3d_{+2,{\rm A}}1s_{\rm B}|3d_{-2,{\rm A}}1s_{\rm B})$, need the masters weighted by
@@ -451,19 +456,21 @@ inverting the Laplace transform gives, as derived here, a second-order equation
 in $r$ for each weighted master whose only division is by
 $(u_2^2-u_3^2)(w_2^2-w_3^2)=-(a^2-b^2)^2\neq0$.  Solved for its decaying
 solutions by the same exact algebra in $b/a$, it places both integrals in the
-same nine-function span for every $0<a<b$ (the weighted masters add no new
-function), with $2p$ or $3d$ carrying the smaller exponent $a$;\ at $(1,2)$ the
+same nine-function span for every $a\neq b$ (the weighted masters add no new
+function), with $a$ the exponent of the $2p$ or $3d$ orbital and, for $a>b$, the real
+branch as above;\ at $(1,2)$ the
 operators it yields are the reconstructed ones, of orders and degrees $(9,25)$
 and $(9,35)$, and the closed forms agree with the independently computed
 integral to $47$ digits or better at three points, one of them not used in the
 derivation.  The determinant test gives order exactly $9$ for both, for every
-$0<a<b$.  Real $2p_x2p_x$ exchange is the $2p_{+1}2p_{+1}$ integral plus half of
+$a\neq b$.  Real $2p_x2p_x$ exchange is the $2p_{+1}2p_{+1}$ integral plus half of
 the $\sigma=2$ integral, and the latter is $3(b/a)^2$ times the $3d_{\pm2}$
 integral, so it too lies in the nine-function span (order at most $9$;\ guards
 \texttt{tests/test\_paper58\_pachucki\_exchange.py},
 \texttt{tests/test\_paper58\_pachucki\_extension.py},
-\texttt{tests/test\_paper58\_exact\_order.py} and
-\texttt{tests/test\_paper58\_exchange\_m\_nonzero.py}).
+\texttt{tests/test\_paper58\_exact\_order.py},
+\texttt{tests/test\_paper58\_exchange\_m\_nonzero.py} and
+\texttt{tests/test\_paper58\_exchange\_reverse.py}).
 \textbf{[SYMBOLIC + MEASURED]} A $2p$ orbital keeps that shape.  For
 $(2p\sigma_{\rm A}1s_{\rm B}|2p\sigma_{\rm A}1s_{\rm B})$ and
 $(2p_{+1,{\rm A}}1s_{\rm B}|2p_{-1,{\rm A}}1s_{\rm B})$, the radial part of real
@@ -525,10 +532,23 @@ $E_1$, with $\mathrm{Ei}$ when $a_d > a_c$ and $\gamma_E + \ln R$ when $a_d = a_
 second rate coincidence $a_d = a_p + a_c$, with $a_p$ the decay rate of the pair $ab$, $\mathrm{Ei}$ and
 $\gamma_E + \ln R$ appear together.  On the panel and the scan points the order is then the number of distinct rates plus one, so
 each coincidence lowers it by one (for example from $5$ to $4$ for
-$(2p_0 2p_0|1s\,1s_{\rm B})$ at $Z=(3,3)$ and $(3,6)$).  That this order is also the least is
-proved at the exponents computed, not for every ratio:\ the exponential, logarithmic, $E_1$ and
-$\mathrm{Ei}$ atoms are independent over $\mathbb{C}(R)$ for real rates, and an exact minor free of
-$\gamma_E$ and of logarithms is nonzero.  Every operator is regular singular at
+$(2p_0 2p_0|1s\,1s_{\rm B})$ at $Z=(3,3)$ and $(3,6)$).  The exponential, logarithmic, $E_1$ and
+$\mathrm{Ei}$ atoms are independent over $\mathbb{C}(R)$ for real rates.  \textbf{[SYMBOLIC PROOF]}
+That this order is also the least is proved at every $Z_A,Z_B>0$ for the nine hybrids of the
+panel with an $L\ge1$ pair and for $(2p_0 2p_0|1s\,1s_{\rm B})$:\ the order is $5$ away from the
+two coincidences and $4$ at each, with no other exceptional ratio.  The closed forms are built
+with the exponents as symbols, one positive parameter sweeping each region between the
+coincidences;\ the order is the dimension $d_E$ of the span of the coefficients of the $E_1$ and
+$\mathrm{Ei}$ atoms at each exponential shift, summed over shifts, plus the number of rates
+that survive the operator annihilating that part, and in every region $d_E=2$ and three
+rates survive (two at a coincidence), with coefficients that vanish for no parameter value.
+This rests on the independence of the atoms just stated (a hand proof, reviewed once), on
+the counting of the order (a hand proof, reviewed once) and on the parametric closed forms,
+which agree with the evaluator at sample points in every region;\ for four of the ten
+integrals the analysis was reviewed (two of them also against an independent quadrature),
+while for the other six the same pipeline was run without a separate review (guards
+\texttt{tests/test\_paper58\_hybrid\_every\_ratio.py} and
+\texttt{tests/test\_paper58\_hybrid\_every\_ratio\_panel.py}).  Every operator is regular singular at
 $R = 0$ with integer exponents, irregular of rank one at infinity with the rates as
 characteristic roots, and apparent at every other finite singular point;\ no integral
 carries $\ln R$ at $R = 0$.  The operator of a hybrid that carries $E_1$ does have one
@@ -539,14 +559,13 @@ ones~\cite{lesiuk2014a}, and an operator of this kind exists for any function bu
 rational coefficients.  What is measured here is its order and its singularities.
 
 Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ for exchange, the order $9$ is
-derived (bound and minimality) for every $0<a<b$ for $1s$, four $\sigma=0$ integrals and the two
-$m\neq0$ integrals against $1s$ (in the mixed cases with the $l>0$ orbital carrying $a$), while the reconstructed operators
+derived (bound and minimality) for every $a\neq b$ for $1s$, four $\sigma=0$ integrals and the two
+$m\neq0$ integrals against $1s$, while the reconstructed operators
 are at equal exponents (order $4$) and at one or two unequal pairs (order exactly $9$;\
 the Neumann series does not terminate there), for $1s$, one $2p$ or $3d$ orbital against $1s$,
 and $2p$ on both centres;\
-the order is proved least for exchange (exactly $9$ for every $0<a<b$ in the seven cases above,
-exactly $4$ at $a=b$), for every exponential-only integral, and for the hybrids at the exponents
-computed;\ the finite singular points are read modulo primes, with the log test run only on linear
+the order is proved least for exchange (exactly $9$ for every $a\neq b$ in the seven cases above,
+exactly $4$ at $a=b$), for every exponential-only integral, for every $L\ge1$ hybrid of the panel at every exponent;\ the finite singular points are read modulo primes, with the log test run only on linear
 factors (\texttt{tests/test\_paper58\_r\_operators.py},
 \texttt{tests/test\_paper58\_row8\_l2.py}, \texttt{tests/test\_paper58\_exact\_order.py},
 \texttt{tests/test\_paper58\_minimal\_order.py}).
@@ -568,10 +587,27 @@ signs.  Verified to $2.5 \times 10^{-14}$ with no weight-two content at
 any $\sigma$ tested.  So the seed sets above form a weight-one filtration
 for every Neumann term, and for the whole integral at equal exponents, where the
 exchange series stops.  At unequal exponents it does not stop, and the sum
-carries the two-center master integral, which is not a combination of these
-seeds with rational coefficients (its logarithmic part at $R=0$ is no rational
-combination of exponentials;\ Sec.~\ref{sec:census});\ its weight is not
-classified here.
+carries the two-center master integral $f_0$.  \textbf{[SYMBOLIC PROOF]} For $0<a<b$ it is a
+two-fold iterated integral,
+\begin{equation*}
+f_0(R)=c\sum_{i=1}^{6}k_i\int_R^\infty e^{\lambda_is}\,\mathrm{Ei}(\mu_is)\,\frac{ds}{s}
++c\ln\frac{a+b}{b-a}\,\bigl[E_1(2bR)-E_1(2aR)\bigr],\qquad c=\frac{1}{2(a^2-b^2)},
+\end{equation*}
+with the six $(k_i,\lambda_i,\mu_i)$ of Pachucki's equation for its derivative~\cite{pachucki2009},
+and each term has an explicit closed form in $\mathrm{Ein}$, $\sum_k x^k/(k^2k!)$ and the double
+series $\sum_{j\ge0,k\ge1}x^jy^k/(j!\,k\,k!\,(j+k))$, plus a constant in $\gamma_E$, $\pi^2$ and
+dilogarithm values (with $\ln R$ and $\ln^2R$);\ the constants cancel, because $f_0(0)=0$.  It is not a linear
+combination, with coefficients rational in $R$, of $e^{\omega R}$, $e^{\omega R}\ln R$ and
+$e^{\omega R}\mathrm{Ei}(\nu R)$ for any finite sets of complex rates:\ its $\ln R$ coefficient at
+$R=0$ has a derivative whose $e^{2bR}$ part is $-c\,e^{2bR}/R$, which no rational multiple of
+$e^{2bR}$ differentiates to.  As functions of $R$ the exchange integrals whose
+order $9$ is proved above therefore have iterated-integral weight two, not one, for $0<a<b$
+(the same argument on the real branch should cover $a>b$, but that is not checked here).  Whether $f_0$
+has a dilogarithm or product form, and what holds for values at a fixed $R$, is not decided
+here, and the closed form was not compared with the classical unequal-exponent literature
+beyond Refs.~\cite{pachucki2009,lesiuk2014b}.  At $a=b$ the weight-two part degenerates to
+weight one, consistent with Sugiura's formula (guard
+\texttt{tests/test\_paper58\_master\_weight.py}).
 
 \textbf{This does not upgrade the $g$ row}, for two independent reasons.
 First, no re-census has been run with the new machinery, so the counted
@@ -662,13 +698,14 @@ The $g$ row's overall tier is nonetheless unchanged, because $(AA|BB)$ and
 the one-centre classes together are only the $20.5\%$ that carries
 residual $l$-selection.  The three genuinely cross classes---$79.5\%$ of the
 tensor---remain counted, and will until an independence argument over
-$\{E_1, \ln, \gamma\}$ is available.
+$\{E_1, \ln, \gamma\}$ is available (and, for exchange at unequal exponents, over the values
+of the master integral $f_0$, which are not classified here).
 
 We state the outlook carefully, because both natural readings are wrong.
 The pessimistic one---that the seed set escalates---is wrong term by term:\ every
 Neumann term of every class is weight one, and a closed form now exists for every
-class (at unequal exponents the exchange closed form also needs the master
-integral, which lies outside the weight-one seeds).  But the optimistic one---that the remaining independence argument is
+class (at unequal exponents the summed closed forms of the seven exchange integrals of
+Sec.~\ref{sec:census} also need the master integral, a two-fold iterated integral, of weight two for $0<a<b$).  But the optimistic one---that the remaining independence argument is
 therefore \emph{ordinary work}---is wrong too, because \emph{weight one is
 not the same as decidable}.  The $(AA|BB)$ decision went through only because
 that class is the one place $\pi$ cancels \emph{and} no $E_1$, $\ln$ or
@@ -695,7 +732,8 @@ special $R$.  With the Gaussian corroboration above already showing the
 permitted entries generically nonzero, the honest position for the cross
 classes is: functionally nonvanishing (unconditional), generically nonzero
 (measured), and pointwise-\textsc{decidable} only \emph{conditional} on a
-Schanuel-type independence hypothesis for the $E_1$ and $\gamma$ values.  That
+Schanuel-type independence hypothesis for the $E_1$ and $\gamma$ values (and, for exchange at
+unequal exponents, the values of the master integral $f_0$, not classified here).  That
 is materially better than counted, and blocked from decided by open
 transcendence rather than by missing labour.
 
@@ -1691,7 +1729,7 @@ Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
 QFD 1e closed forms (Sec.~\ref{sec:qfd}) & SYMBOLIC & \textsc{live} \\
 $R$-operators, $l\le2$ panel (Sec.~\ref{sec:census}) & SYMB.\ + MEAS. & \textsc{live} \\
-exchange order exactly $9$, every $0<a<b$ (mixed cases: $l>0$ orbital carries $a$), the seven exchange integrals of Sec.~\ref{sec:census};\ exactly $4$ at $a=b$ (Sec.~\ref{sec:census}) & SYMBOLIC & \textsc{live} \\
+exchange order exactly $9$, every $a\neq b$, the seven exchange integrals of Sec.~\ref{sec:census};\ exactly $4$ at $a=b$ (Sec.~\ref{sec:census}) & SYMBOLIC & \textsc{live} \\
 QFD H$_2$ 60-digit energy & MEASURED & \textsc{live} (fast legs) + certified tables \\
 QFD LiH 30-digit ($\tau$-tail net) & MEASURED & \textsc{live} (slow:\ full rebuild + tail bound) \\
 \end{tabular}

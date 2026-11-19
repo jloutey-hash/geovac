@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.40] - 2026-11-19
+
+**The items left open at v6.7.39, worked through under PI standing direction ("go with your recommendations until
+we clear the stack"; "Let's roll through the still open items"). No new pre-registered record.**
+
+### Added
+- Paper 63 [SYMBOLIC PROOF] `prop:tree_attain_hom`: for homogeneous centre-derivative densities (degree <= 2),
+  3 <= n <= 8, t on the root, other scales 1, with a nonzero angular integral, F_n lies in the fibre's D-module. The
+  new step moves the root's derivatives onto the rest of the integrand by 3-D integration by parts (no surface term
+  carries two derivatives on K0). `conj:tree_attain` is narrowed to non-homogeneous densities. Independent review
+  SOUND WITH CAVEATS. Guard `tests/test_paper63_tree_attainment_l.py`.
+- Paper 58 [SYMBOLIC PROOF]: the two-centre master integral is a two-fold iterated integral with an explicit closed
+  form; its dilogarithm constants cancel (f0(0) = 0); it is not a rational-coefficient combination of exponential,
+  logarithmic and exponential-integral atoms for any rates. So for 0 < a < b the exchange integrals of order 9 have
+  iterated-integral weight two as functions of R, replacing "its weight is not classified here". Not claimed: no
+  dilogarithm form, values at fixed R, a > b, novelty against the classical literature. Independent review SOUND.
+  Guard `tests/test_paper58_master_weight.py`.
+- Paper 58 [SYMBOLIC PROOF]: the reverse ordering. The four mixed exchange integrals keep their closed forms for
+  a > b on the real branch (analytic continuation in b/a around 1); order exactly 9 for every a != b. Independent
+  review SOUND WITH CAVEATS. Guard `tests/test_paper58_exchange_reverse.py`.
+- Paper 58 [SYMBOLIC PROOF]: hybrids at every exponent. For the nine panel hybrids with an L >= 1 pair and
+  (2p0 2p0|1s 1s_B) the least order is 5 at every Z_A, Z_B > 0 away from the two rate coincidences and 4 at each, with
+  no other exceptional ratio, via order = d_E + k on parametric closed forms. Four of the ten reviewed (SOUND WITH
+  CAVEATS); the other six run by the same pipeline (the build was optimised and validated by reproducing a finished
+  case exactly) without a separate review. Guards `tests/test_paper58_hybrid_every_ratio.py`,
+  `tests/test_paper58_hybrid_every_ratio_panel.py`.
+
+### Fixed
+- `geovac/two_center_eri.py` (`radial_norm`, `radial_product`) and `geovac/qfd_core.py` (`s_radial`): `sp.nsimplify`
+  applied to exact rationals and surds sometimes returned a different surd (relative error up to ~1.7e-17; e.g. the
+  1s normalisation at Z = 99/100). Found by the reverse-ordering review. Removed; values are now exact. No reported
+  number was at an affected Z. Consumer tests 520 passed; guards in `tests/test_paper58_exchange_reverse.py` (F1-F3)
+  and `tests/test_exact_radial_coefficients.py`. `gaunt_LM`'s nsimplify checked on all 820 cases with l <= 3: exact.
+
+### Changed
+- Paper 63: the [ARGUMENT] sentence "for l > 0 the exponent of the non-holomorphic term shifts by the degrees of the
+  derivatives" was wrong for centre derivatives (h_l(d)K0 has the tail of K0); corrected. The principal-symbol
+  condition is not the leading coefficient for non-homogeneous densities; stated, without claiming a counterexample.
+- Paper 58: decidability conditions for exchange at unequal exponents now include the master integral's values.
+- `docs/claim_test_matrix.md` (four rows), `docs/chemistry_period_inventory.md` row 3c,
+  `tests/test_paper63_local_rule.py` (pins follow the narrowed conjecture).
+
+### Notes
+- Pre-checkpoint self-check: round 1, 1 LARGE (P63 misreported which tree was checked exactly) + 9 SMALL, fixed;
+  round 2, 2 LARGE (P58 panel count; decidability condition stale against the master-integral result) + 5 SMALL,
+  fixed. Round 2 is the last allowed round, so its fixes have not been re-reviewed.
+- Left open: exact checks of the tree operator at n = 7, 8; non-homogeneous and scale-derivative tree densities;
+  weight of the master integral for a > b and at fixed R; whether the six newer hybrid runs need their own review.
+
 ## [v6.7.39] - 2026-11-19
 
 **Hard problems from the chemistry map (PI-directed: "pick one or more hard problems"; PI approved the paper changes,

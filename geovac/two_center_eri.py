@@ -80,7 +80,11 @@ def radial_norm(Z: Fraction, n: int, l: int):
     c, a = radial_poly(Z, n, l)
     s = sum(c1 * c2 * sp.factorial(k1 + k2 + 2) / (2 * a) ** (k1 + k2 + 3)
             for k1, c1 in c.items() for k2, c2 in c.items())
-    return 1 / sp.sqrt(sp.nsimplify(s))
+    # s is an exact Rational; sp.nsimplify must not be applied to it: on some inputs
+    # (e.g. Z = 99/100, n = 1) it returns a wrong surd, off by 1.8e-18 (found 2026-11-19).
+    s = sp.sympify(s)
+    assert s.is_Rational, s
+    return 1 / sp.sqrt(s)
 
 
 def radial_product(Z1, n1, l1, Z2, n2, l2):
@@ -92,7 +96,8 @@ def radial_product(Z1, n1, l1, Z2, n2, l2):
     for k1, v1 in c1.items():
         for k2, v2 in c2.items():
             out[k1 + k2] = out.get(k1 + k2, 0) + N1 * N2 * v1 * v2
-    return {k: sp.nsimplify(v) for k, v in out.items()}, a1 + a2
+    # exact surds already; sp.nsimplify can return a wrong surd (2026-11-19), so it is not applied
+    return {k: sp.sympify(v) for k, v in out.items()}, a1 + a2
 
 
 # --------------------------------------------------------------- angular parts

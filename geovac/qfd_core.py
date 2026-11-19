@@ -71,7 +71,8 @@ def s_radial(Z, n):
     Zf = Z if isinstance(Z, Fraction) else Fraction(Z)
     c, a = radial_poly(Zf, n, 0)
     N = radial_norm(Zf, n, 0)
-    return tuple(sorted((k, sp.nsimplify(N * v)) for k, v in c.items())), a
+    # exact surds already; sp.nsimplify can return a wrong surd (2026-11-19), so it is not applied
+    return tuple(sorted((k, sp.sympify(N * v)) for k, v in c.items())), a
 
 
 def _prod_coeffs(cA, cB):
