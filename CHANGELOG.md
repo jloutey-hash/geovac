@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.42] - 2026-11-19
+
+**Atlas gap check (PI-directed: is the period search from the hydrogen sphere exhausted?).**
+
+### Added
+- `docs/atlas.md` doors 28-32, the basic sphere moves the atlas lacked:
+  - 28, uniform electric field (Stark): FREE (the field is an input); per-order coefficients exact rationals
+    (-9/4, -3555/64, ...); the price is a trans-series (the ionization width e^{-2/(3F)}), not a new period;
+  - 29, uniform magnetic field (Zeeman, diamagnetic term): FREE; rational coefficients, Borel-summable series; the
+    class of a high-field eigenvalue is open;
+  - 30, quotients of the sphere (lens spaces): FORCED as mathematics, not a physical door (a free quotient must act
+    through the Runge-Lenz vector); multiplicities with rational generating functions, spectral sums in Qbar[pi];
+  - 31 and 32, the hydrogen torus and the squashed ring, written up from records TR and SQ (OBS).
+  None climbs the period ladder: geometry alone stops at the elliptic rung (door 13); the climbs come from linking
+  densities (doors 17, 20). Almost all of 28-30 is classical prior art, credited in the rows.
+- `tests/test_atlas_gap_doors.py` + `tests/_atlas_gap_doors.py` (11 fast + 2 slow; fire-tested 28/28; PM re-fired
+  -53/192 -> -53/191: FIRED). Memo `debug/atlas_gap_memo.md`.
+
 ## [v6.7.41] - 2026-11-19
 
 **Last item of the v6.7.39 open list (PI standing direction).**
