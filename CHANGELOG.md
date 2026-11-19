@@ -7,6 +7,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.39] - 2026-11-19
+
+**Hard problems from the chemistry map (PI-directed: "pick one or more hard problems"; PI approved the paper changes,
+then gave standing direction to go with the PM's recommendations until the work stack clears). No new
+pre-registered record.**
+
+### Added
+- Paper 58 [SYMBOLIC PROOF]: the exchange order is EXACTLY 9 for every 0 < a < b, not only at most 9. The nine
+  functions are linearly independent over C(R) (near R = 0 each is A(R) ln R + entire; the eight elementary A's
+  carry the distinct rates 0, +-2a, +-2b; the master integral's A' = -L/R cannot be matched by a rational
+  combination of exponentials), and the coordinate determinant of K..K^(8), as a polynomial in b/a, has a gcd over
+  several R vanishing only at b/a = 0, +-1. At a single R the determinant does have real zeros b/a > 1 for the l > 0
+  cases, so a single-R check is not evidence. Holds for 1s and the four sigma = 0 integrals (mixed cases with the
+  l > 0 orbital carrying a). Independent review SOUND WITH CAVEATS. Guard `tests/test_paper58_exact_order.py`.
+- Paper 58 [SYMBOLIC PROOF]: the m != 0 integrals 2p+-1 1s and 3d+-2 1s, left "not covered" at v6.7.38, are in the
+  same nine-function span for every 0 < a < b, and of order exactly 9. Pachucki's r12 recursion divides by a
+  quantity vanishing at the exchange point; an equation derived here from his label 39 (coefficient of each power
+  of the r12 exponent, inverse Laplace) divides only by -(a^2-b^2)^2. At (1,2) the derived operators equal the
+  committed (9,25) and (9,35); closed forms match the Neumann evaluator to 47-48 digits (and to 30 digits at a pair
+  a reviewer chose). Real 2p_x 2p_x lies in the span (order <= 9; exactness not tested on the sum). Independent
+  review SOUND WITH CAVEATS (it found the derivation memo overstated what one control catches). Guard
+  `tests/test_paper58_exchange_m_nonzero.py`.
+- Paper 58 [SYMBOLIC PROOF]: minimal orders across the two-centre table. Exponential-only integrals: order = number
+  of distinct rates with nonzero coefficient, at every exponent. Equal-exponent exchange, seven integrals: exactly 4.
+  Hybrids: least order proved at the computed exponents only; a second rate coincidence a_d = a_p + a_c (Ei and
+  gamma + ln R together, order drops by one) was missing from the paper and is now named. Caps no longer assumes
+  atom independence. Independent review SOUND WITH CAVEATS. Guard `tests/test_paper58_minimal_order.py`.
+- Paper 63 [SYMBOLIC PROOF]: `prop:star_attain` generalised from stars to every tree of 3 <= n <= 8 s-type
+  densities, t on any vertex: F_n lies in the fibre's D-module (n >= 9: the modules meet). The split on [1, oo)
+  that the paper named as not carried out goes through; the top constant is (-1)^(n-1)(pi/2)^((n-1)/2)/prod k_u^2.
+  `conj:tree_attain` is narrowed to l > 0. Independent review SOUND WITH CAVEATS. Guard
+  `tests/test_paper63_tree_attainment.py`.
+
+### Changed
+- Paper 63: the published star proof's last step ("quotients and extensions of such modules are connections there
+  ... so a piece with c = n-1 must survive") did not follow for even n (composition factors over C(t) do not control
+  singular points; d/dt (t-p) d/dt has the solution log(t-p)). Confirmed by an independent reviewer (GAP REAL); the
+  statement was true, the proof incomplete for n = 4, 6, 8. Replaced, and the paper says so.
+- Paper 58, 59, `docs/certified_reference_values.md`: "the two-centre classes close at weight one" scoped to each
+  Neumann term (and the whole integral at equal exponents). At unequal exponents the exchange sum carries the
+  two-centre master integral, which the new independence proof shows is not a rational combination of the
+  weight-one seeds. Found by the pre-checkpoint self-check (round 2, OWNER-LARGE). Retracted-terms entry
+  `two-centre-weight-one-whole-integral` (fire-tested), dependents stamped.
+- `tests/test_paper58_r_operators.py`: three weaknesses fixed (gamma and logs of numbers treated as independent;
+  E1/Ei redundant spellings counted twice; an order upper bound read from a rank at one point). No panel value was
+  affected.
+- `docs/claim_test_matrix.md` (three rows), `docs/chemistry_period_inventory.md` row 3c.
+
+### Notes
+- Pre-checkpoint self-check: round 1, 2 LARGE (P63 summaries implied l > 0 attainment settled at n = 3, 4; P58 said
+  real 2p_x 2p_x "covered") + 9 SMALL, fixed; round 2, 1 LARGE (the weight-one scope above) + 3 SMALL, fixed.
+- Two API rate-limit interruptions; the cut-off agents resumed from saved state.
+- Left open: l > 0 tree attainment; exact checks of the tree operator at n = 7, 8; hybrids' least order for every
+  ratio; the reverse ordering a > b in the mixed exchange cases; the weight of the two-centre master integral.
+
 ## [v6.7.38] - 2026-11-18
 
 **The four items left open at v6.7.37, worked through (PI-directed: "Let's do those still open items"; paper changes

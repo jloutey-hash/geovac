@@ -73,7 +73,7 @@ in any basis tried;\ rings are ordered by uniqueness, not by count;\ and the
 integrated value sits at or below its fibre.  The caps are stated:\ the
 three-dimensional fibre of a Coulomb tree at the fingerprint weights has
 composition factors of order at most $n$ for every $n$, and reaches rung $n$
-where computed ($n=3,4$) and for stars of up to eight densities, the
+where computed ($n=3,4$) and for every tree of up to eight $s$-type densities on the slice with one free scale, the
 dictionary's rung bound only for $s$-type trees on the one-scale slice, the
 only ring tested is the triangle, and the generic fibre's content is
 evidence.
@@ -398,7 +398,7 @@ every tree reduces to one-dimensional Bessel integrals
 supply, and with Coulomb kernels at the fingerprint weights its
 composition factors have order at most $n$
 (Proposition~\ref{prop:tree_rung}), while that it reaches the rung is computed
-below for the chain of three and the two trees of four and proved for stars of up to eight densities (Proposition~\ref{prop:star_attain}).  Gaussian orbitals and Gaussian geminals are outside
+below for the chain of three and the two trees of four and proved for trees of up to eight $s$-type densities (Proposition~\ref{prop:star_attain}).  Gaussian orbitals and Gaussian geminals are outside
 the lemma:\ $e^{-\alpha r^2}$ is no derivative of a Yukawa, its transform is
 not rational, and Sec.~\ref{sec:density_ring} finds its integrals off the
 ladder.
@@ -699,7 +699,7 @@ integrals (Proposition~\ref{prop:tree_reduction} below), with Coulomb
 kernels at the fingerprint weights its composition factors have order at most
 $n$ (Proposition~\ref{prop:tree_rung}), and that it
 reaches rung $n$ is computed for the chain of three and the two trees of four
-and proved for stars of up to eight densities (Proposition~\ref{prop:star_attain}).  \textbf{[SYMBOLIC +
+and proved for trees of up to eight $s$-type densities (Proposition~\ref{prop:star_attain}).  \textbf{[SYMBOLIC +
 MEASURED]} At the fingerprint fibre on the slice $(t;1,1,1)$ the star is
 $(16/\pi^4)\,t^3\int_0^\infty\chi(x)^3K_0(tx)\,dx/x$, with
 $\chi=\int_0^x sK_1(s)\,ds$ (Sec.~\ref{sec:density_ring}), checked against
@@ -851,7 +851,7 @@ composition factors computed above at $n=3,4$ (chain, star, path) are those
 of $F_k$, $k\le n$, and pieces of order one, inside the bound;\ none comes from
 an odd moment.  Guard:\ \texttt{tests/test\_paper63\_tree\_rung.py}.  The
 proposition bounds the fibre;\ that the piece of $F_n$ is present is computed
-for $n=3,4$ and proved next for stars of up to eight densities.
+for $n=3,4$ and proved next for trees of up to eight $s$-type densities.
 
 \begin{proposition}[the rung bound for $\ell>0$ densities]
 \label{prop:tree_rung_l}
@@ -990,45 +990,102 @@ Legendre operator of $F_2$, since it has a logarithmic singular point at
 $t^2=9$, where $F_2$ is regular.  That some fibre carries such a piece is not
 shown, and for $m\ge6$ the odd factors are not identified here.
 
-\begin{proposition}[stars reach their rung]
+\begin{proposition}[$s$-type trees reach their rung]
 \label{prop:star_attain}
-For the Coulomb star of $n$ densities at the fingerprint weights on the slice
-$(t;1,\dots,1)$, $t$ on the center, with $3\le n\le8$, the minimal operator of
-the fibre has a composition factor equivalent to the operator of $F_n$.
+Take a Coulomb tree of $n$ $s$-type densities at the fingerprint weights, on the
+slice with $t$ on any one vertex (the root) and every other scale equal to one,
+with $3\le n\le8$.  Then $F_n$ lies in the $D$-module of the fibre, so the
+minimal operator of the fibre has a composition factor equivalent to the
+operator of $F_n$.  In particular this holds for the star on
+$(t;1,\dots,1)$, $t$ on the center.  For $n\ge9$ the two modules meet in a
+nonzero submodule.
 \end{proposition}
 
-\textbf{[SYMBOLIC PROOF]} Write $\chi=\pi/2-R$ with
-$R(x)=\int_x^\infty sK_1(s)\,ds\sim(\pi x/2)^{1/2}e^{-x}$, so the fibre is
-$(2/\pi)^nt^3\int_0^\infty K_0(tx)\,\chi(x)^{n-1}x^{3-n}\,dx$.  Split the
-integral at $x=1$ and expand $\chi^{n-1}$ in powers of $R$.  The part on
-$[0,1]$ is analytic in $t$ away from $t=0$ on every branch.  On $[1,\infty)$
-the terms with $R^k$, $k\le n-2$, carry at most $n-2$ Bessel factors
-($\theta R=r\,\theta K_0$, so $R$ lies in an extension of $r\,B$ by a piece of
-order one and $R^k$ has pieces $r^{\mu}\,\mathrm{Sym}^jB$, $j\le k$);\ by the
-transfer of Proposition~\ref{prop:tree_rung}, with boundary terms at $x=1$ in
-the module of $K_0(t)$, they satisfy equations built from
-$\phi(L_c(\theta-\lambda))$, $c\le n-2$, whose leading coefficient
-$\prod_{0\le j<c/2}\bigl(t^2-(c-2j)^2\bigr)$ (independent of $\lambda$) does not vanish at
-$t=-(n-1)$, so they are analytic there on every branch.  The term $R^{n-1}$
-converges for $\mathrm{Re}\,t>-(n-1)$;\ at $t=-(n-1-\epsilon)+i0$,
-$K_0(-y+i0)=K_0(y)-i\pi I_0(y)$ gives it, up to a nonzero constant, the
-imaginary part
-$-\pi t^3\int_1^\infty I_0((n-1-\epsilon)x)\,R^{n-1}x^{3-n}\,dx$, whose
-integrand is $c_n\,x^{(4-n)/2}e^{-\epsilon x}(1+O(1/x))$ with
-$c_n=(\pi/2)^{(n-1)/2}(2\pi(n-1))^{-1/2}>0$.  The small-$\epsilon$ expansion of
-$\int_1^\infty x^ae^{-\epsilon x}dx$ (an incomplete gamma function), with
-$a=(4-n)/2$, has the leading non-analytic term $\Gamma(a+1)\epsilon^{-a-1}$ for
-$a\notin\{-1,-2\}$, $-\log\epsilon$ for $a=-1$ and $\epsilon\log\epsilon$ for
-$a=-2$:\ $\epsilon^{-3/2},\epsilon^{-1},\epsilon^{-1/2},-\log\epsilon,
-\epsilon^{1/2},\epsilon\log\epsilon$ for $n=3,\dots,8$, each with a nonzero
-coefficient, and the $O(1/x)$ corrections add only higher terms.  So the fibre
-is not holomorphic at $t=-(n-1)$.  In the filtration of
-Proposition~\ref{prop:tree_rung} the pieces with $c\le n-2$ and the pieces of
-order one are nonsingular at $t=-(n-1)$;\ quotients and extensions of such
-modules are connections there, whose solutions are holomorphic on every branch.
-So a piece with $c=n-1$ must survive.  In a star such a piece takes one $K_0$ from
-each of the $n-1$ leaf factors $r^2K_0$ and the root's $r^2$, an even shift, so
-it is equivalent to the operator of $F_n$, irreducible for $n\le8$.  \textbf{[MEASURED]} Record
+\textbf{[SYMBOLIC PROOF]} Root the tree at the vertex carrying $t$.  By
+Proposition~\ref{prop:tree_reduction} the fibre is $(2/\pi)^nt^3\,T(H)$ with
+$T(g)=\int_0^\infty K_0(tx)\,g\,dx$ and $H$ equal to $x^2$ times the product of
+the potentials of the root's children;\ in the normalisation $\rho=K_0$ each
+potential solves $\theta(\theta+1)P_u=-x^2W_u$, $W_u$ being $K_0$ times the
+potentials of $u$'s children.  Let $A=\mathbb{C}[z]\langle\theta\rangle$,
+$z=x^2$, act through the transfer $\phi$ of Proposition~\ref{prop:tree_rung},
+$\phi(z)=t^{-2}\theta_t^2$, $\phi(\theta)=-1-\theta_t$, so $T(bH)=\phi(b)T(H)$.
+Give $\theta$ weight one and $z$ weight two;\ then $\phi(b)$ has order equal to
+the weight $w$ of $b$ and leading coefficient $t^{-w}\sigma(b)(1,-t)$, with
+$\sigma$ the top-weight symbol.
+
+(i) \emph{An operator with a good symbol.}  The functions generated by $H$ are
+filtered by the set $S$ of vertices whose potential has been opened by the
+Poisson equation;\ the last piece is the span of the pure products
+$K_0^{n-1-i}(\theta K_0)^i$ over $\mathbb{C}[z]$, and every other piece is a
+twist of $\mathrm{Sym}^kB$ with $k\le n-2$.  On the graded module of such a
+piece $\theta$ acts with characteristic polynomial
+$\chi_k=\prod_{j=0}^{k}(\Theta-(k-2j)X)$, so by Cayley--Hamilton and the
+standard good-filtration argument every element of the piece has an
+annihilator in $A$ with symbol $\chi_k^m$.  Descending the filtration gives
+$a\in A$, a product of such operators, with $aH=q\,K_0^{n-1}$, $q\in A$.  By the
+symbol rule the leading coefficient of $\phi(a)$ is a power of $t$ times
+factors $t+c-2j$ with $c\le n-2$, nonzero at $t=-(n-1)$.
+
+(ii) \emph{The split on $[1,\infty)$.}  For $x>0$ each potential is
+$P_u=Q_u/x+E_u$ with $Q_u=\int_0^\infty W_us^2\,ds$ and $E_u$ its exterior
+tail, which obeys the same Poisson equation.  Expanding every potential gives
+$H=\sum_Sq_SH^S$ with constants $q_S$ and $H^S=O(x^Me^{-|S|x})$.  For
+$|S|\le n-2$, $H^S$ lies in a module of the kind in (i) whose pieces are twists
+of $\mathrm{Sym}^kB$ with $k\le n-2$, so $\int_1^\infty K_0(tx)H^S\,dx$ obeys an
+equation whose leading coefficient vanishes only at $0$ and at integers
+$|t|\le n-2$, with boundary terms at $x=1$ in the module of $K_0(t)$;\ it is
+holomorphic at $t=-(n-1)$ on every branch.  The one term with $S$ all
+non-root vertices is, by Watson's lemma applied at each vertex (a source
+$s_0x^ae^{-kx}(1+O(1/x))$ has exterior tail $-(s_0/k^2)x^ae^{-kx}(1+O(1/x))$, the
+$s$-type case of the local rule stated after Conjecture~\ref{conj:tree_attain}),
+\begin{equation*}
+H^{\rm top}=C\,x^{(5-n)/2}e^{-(n-1)x}\bigl(1+O(1/x)\bigr),\qquad
+C=(-1)^{n-1}\Bigl(\frac{\pi}{2}\Bigr)^{(n-1)/2}\prod_{u\neq{\rm root}}k_u^{-2}\neq0,
+\end{equation*}
+$k_u$ the number of vertices in the subtree of $u$.  At $t=-(n-1-\epsilon)+i0$,
+$K_0(-y+i0)=K_0(y)-i\pi I_0(y)$ gives its transform the imaginary part
+$-\pi\int_1^\infty I_0((n-1-\epsilon)x)H^{\rm top}dx$, whose integrand is
+$C(2\pi(n-1))^{-1/2}x^{(4-n)/2}e^{-\epsilon x}(1+O(1/x))$, of one sign at large
+$x$.  The small-$\epsilon$ expansion of $\int_1^\infty x^ae^{-\epsilon x}dx$, with
+$a=(4-n)/2$, has the leading non-analytic term
+$\epsilon^{-3/2},\epsilon^{-1},\epsilon^{-1/2},-\log\epsilon,\epsilon^{1/2},
+\epsilon\log\epsilon$ for $n=3,\dots,8$, so this integral ($n\le6$) or its first
+$\epsilon$-derivative ($n=7,8$;\ a higher one for $n\ge9$) is unbounded.  The part on $[0,1]$ is analytic
+away from $t=0$.  So $T(H)$, continued from $\mathrm{Re}\,t>0$ through the
+upper half plane, is not holomorphic at $t=-(n-1)$.
+
+(iii) \emph{Conclusion.}  If $\phi(a)T(H)=T(aH)=\phi(q)F_n$ were zero, $T(H)$
+would solve $\phi(a)y=0$, which is regular at $t=-(n-1)$, and would be
+holomorphic there, against (ii).  So $\phi(q)F_n$ is a nonzero element of both
+the module of the fibre and the module of $F_n$.  The latter is simple for
+$n\le8$ (Sec.~\ref{sec:four_density}), so $F_n$ lies in the module of the
+fibre;\ for $n\ge9$ the two meet in a nonzero submodule.  For the star,
+$k_u=1$ for every leaf and $C(2\pi(n-1))^{-1/2}$ is the constant
+$c_n=(\pi/2)^{(n-1)/2}(2\pi(n-1))^{-1/2}$ up to sign.
+
+An earlier version of this proof, for stars only, concluded from (ii) alone
+that a piece with $n-1$ Bessel factors must survive, because pieces regular
+at $t=-(n-1)$ and their extensions have holomorphic solutions.  That does not
+follow:\ composition factors over $\mathbb{C}(t)$ do not control singular
+points ($\partial_t(t-p)\partial_t$ has two factors equivalent to $\partial_t$
+and the solution $\log(t-p)$, and $1/(t-p)$ lies in the trivial module), and
+for $n=4$, $6$, $8$ the step was not supported;\ step (iii) replaces it for every $n$.
+
+\textbf{[SYMBOLIC + MEASURED]} The operator $a$ of (i) was computed exactly
+over $\mathbb{Z}$ for six rooted trees (the stars of three and four, the path of
+three from an end, the path of four from an end and from inside, the path of
+five from an end) and modulo one prime for four more (the tree of five with a
+vertex of degree three, at two roots, the path of five from its center, the path of
+six from an end):\ the roots of its symbol at $(1,-t)$ are integers of absolute
+value at most $n-2$, and $aH$ is pure and nonzero;\ there is none for the
+tree of five rooted at its vertex of degree three.  The identity
+$\phi(a)T(H)=T(aH)$ holds to $2\times10^{-16}$ or better at $40$ digits for the
+stars of three and four, and the constant $C$ agrees with a direct evaluation
+of the top tail to $10^{-11}$ for nine trees with $n=5$ to $8$.  There is no
+exact check of (i) at $n=7,8$;\ the simplicity of the module of $F_n$ for
+$n=6,7,8$ is the exponent argument of Sec.~\ref{sec:four_density}.  Guard:\
+\texttt{tests/test\_paper63\_tree\_attainment.py}.
+\textbf{[MEASURED]} Record
 \texttt{docs/predictions/2026-11-13\_star5\_attainment.md}, registered before
 computing:\ the operator of $F_5$ has leading coefficient
 $-(t^2-4)(t^2-16)$ and local exponents $0,1,\tfrac32,2,3$ at $t=-4$, that of
@@ -1052,11 +1109,11 @@ equal to one, each density a center derivative $P_v$ of degree at most two of
 the fingerprint weight.  Let $\sigma_v(\omega)$ be the principal symbol of
 $P_v$ on the unit sphere ($\partial\to-\omega$, $\nabla^2\to1$).  If
 $\int_{S^2}\prod_v\sigma_v(-\omega)\,d\omega\neq0$, the minimal operator of the
-fibre has a composition factor equivalent to the operator of $F_n$.  In
-particular every $s$-type tree, where $\sigma_v\equiv1$, reaches rung $n$.
+fibre has a composition factor equivalent to the operator of $F_n$.  Its
+$s$-type case, where $\sigma_v\equiv1$, is Proposition~\ref{prop:star_attain}.
 \end{conjecture}
 
-\textbf{[ARGUMENT]} This is not proved.  The reason to expect it is local.
+\textbf{[ARGUMENT]} For $\ell>0$ this is not proved.  The reason to expect it is local.
 For a source $e^{-kr}r^{a}\sum_js_jr^{-j}$ in angular channel $L$, the
 exponential part of its Coulomb potential is the formal solution of
 $(\theta-L)(\theta+L+1)\Phi=-4\pi r^2s$, whose leading term $-4\pi s_0/k^2$
@@ -1064,13 +1121,11 @@ does not depend on $L$.  So the exponential part of every potential in the
 tree is local, and the part of the integrand of order $e^{-(n-1)x}$ has
 leading coefficient a product of nonzero radial constants times the angular
 integral above:\ the limit in which all electrons sit at one far point.  With
-that coefficient nonzero, the proof of Proposition~\ref{prop:star_attain}
-would run as written for $s$-type trees;\ for $\ell>0$ the exponent of the
-non-holomorphic term shifts by the degrees of the derivatives, and the parity
-argument that identifies the surviving piece with $F_n$ is not shown.  The step not carried out is its first one for a general
-tree:\ the split of the integrand on $[1,\infty)$ into pieces with at most
-$n-2$ Bessel factors, with their boundary terms at $x=1$, and one piece of
-order $e^{-(n-1)x}$.  \textbf{[MEASURED]} The local rule reproduces exactly
+that coefficient nonzero, step (ii) of the proof of
+Proposition~\ref{prop:star_attain} would carry over;\ for $\ell>0$ the exponent of the
+non-holomorphic term shifts by the degrees of the derivatives, and a
+root with $\ell>0$ makes the fibre a sum of several transforms, which needs a
+common left multiple with a controlled symbol in step (i).  \textbf{[MEASURED]} The local rule reproduces exactly
 the leading constants already on record (the $p_z$ chain's $1/(3\pi^2)$, the star of
 five), and it predicted the amplitude $1/(12\pi)$ of the chain with a $d$ root
 before that was computed (the $\ell>0$ shapes above).  The second shape there lies outside
@@ -1975,8 +2030,8 @@ fingerprint weights with Coulomb kernels, its composition factors have order
 at most $n$ and come from the moments of at most $n$ Bessel functions
 (Proposition~\ref{prop:tree_rung}), which is the order bound of ``nothing above
 it'' in part (i) there, and the same bound holds for densities that are center
-derivatives of degree at most two (Proposition~\ref{prop:tree_rung_l});\ the piece of $F_n$ is present for stars of up to eight densities (Proposition~\ref{prop:star_attain}), and for other trees with $n\ge5$ it
-is not shown (Conjecture~\ref{conj:tree_attain}).  Part (ii) is the lesson of the three-electron chain
+derivatives of degree at most two (Proposition~\ref{prop:tree_rung_l});\ the piece of $F_n$ is present for trees of up to eight $s$-type densities (Proposition~\ref{prop:star_attain}), and for $\ell>0$ densities it
+is not shown beyond the branch coefficient of three $n=3$ shapes (Conjecture~\ref{conj:tree_attain}).  Part (ii) is the lesson of the three-electron chain
 (Sec.~\ref{sec:three_electron}):\ at equal scales the fibre collapses onto
 K3 periods and $\pi^3$, but at four generic scale triples integer-relation
 searches at 340 and 400 digits in five bases built from the K3 and elliptic
@@ -2073,7 +2128,7 @@ tree of $s$-type densities reduces to one-dimensional Bessel integrals
 kernels its composition factors have order at most $n$ for every tree
 (Proposition~\ref{prop:tree_rung}, and Proposition~\ref{prop:tree_rung_l} for center
 derivatives of degree at most two), and that it reaches rung $n$ is computed
-for the chain of three and the star and path of four and proved for stars of up to eight densities (Proposition~\ref{prop:star_attain}).  Third, the
+for the chain of three and the star and path of four and proved for trees of up to eight $s$-type densities (Proposition~\ref{prop:star_attain}).  Third, the
 dictionary places a general-orbital integral in the $D$-module of its graph's
 $1s$ integral;\ it keeps the holomorphic period at or below the $1s$ rung
 only for trees of $s$-type densities on the one-scale slice, and on it there
@@ -2083,8 +2138,8 @@ generic three-electron fibre's content beyond the K3 and elliptic periods is
 evidence from integer-relation searches, not a theorem.
 
 What is open is in two layers.  Below the conjecture:\ whether the
-three-dimensional fibre reaches rung $n$ for trees with $n\ge5$ other than
-stars of up to eight densities, and the bound for Slater
+three-dimensional fibre reaches rung $n$ for trees of $\ell>0$ densities, and
+for $s$-type trees with $n\ge9$, and the bound for Slater
 weights and geminal kernels;\ the ring of four;\ whether a general-orbital fibre
 stays at or below its graph's $1s$ rung, which is open even for $s$-type
 trees, and whether it reaches that rung;\ and the principled widening of

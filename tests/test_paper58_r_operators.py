@@ -12,15 +12,34 @@ What each test rejects:
   (not by this file's atom calculus), with gamma_E and the logarithms of
   numbers kept as independent symbols, so every coefficient must cancel
   identically -- an exact identity, no tolerance.
-* ``test_*_minimal``: a claimed order r for which an order r-1 operator exists.
+* ``test_*_minimal`` / ``no_lower_order``: a claimed order r for which an order r-1 operator exists.
   f, ..., f^(r-1) are vectors over Q(R) indexed by (atom, constant monomial);
   full rank r at a rational point R0 proves full generic rank (rank can only
   drop under specialisation), hence no order-(r-1) operator over Q(R).
   Assumptions (standard, stated in the paper): the atoms e^{cR}, e^{cR}E1(kR),
   e^{cR}Ei(kR), e^{cR}ln R at distinct (c, k) are linearly independent over
   Q(R); gamma_E and the ln of the integers involved are algebraically
-  independent over Q. The atom-calculus derivative is itself cross-checked
+  independent over Q. (Since 2026-11-18 the second assumption is no longer
+  needed for the conclusion: the true-constant minor below certifies rank r
+  by itself.  The first is Lemma GI of the minimal-order derivation, a hand
+  proof, cold-reviewed.) The atom-calculus derivative is itself cross-checked
   against sympy's derivative (``test_atom_derivative_matches_sympy``).
+* Since 2026-11-18 ``no_lower_order`` ALSO requires an r x r minor that is nonzero at the TRUE constants
+  (interval arithmetic), and ``decompose`` writes Ei(-kR) as -E1(kR) so one function has one label; the
+  one-electron upper bound is a generic rank over Q(R) (``order_at_most``), not a rank at a point.  These close
+  three holes found by the cold review of the two-centre minimal-order memo; section (6) holds a control for each:
+
+    W1  constants as independent symbols: f = (ln 6 - ln 2 - ln 3) R e^{-R} + e^{-2R} (true order 1; also with
+        e^{-R}E1(R)): BEFORE no_lower_order(f, 2) was True; AFTER False (the minor's interval contains 0).
+    W2  redundant spelling: f = e^{-R}E1(2R) + e^{-R}Ei(-2R) + e^{-3R} = e^{-3R}: BEFORE decompose kept two atoms
+        and no_lower_order(f, 2) was True; AFTER one atom e^{-3R}, False.
+    W3  rank at a point as an upper bound: f = e^{-R} + e^{-2R} + (2R/3 + 103/177) e^{-3R} (true order 3) has rank
+        2 at 37/59: BEFORE the one-electron test's idiom accepted "order 2 exists"; AFTER order_at_most(f, 2) is
+        False (generic rank 3).
+
+  The split/spec ranks are kept; the true-constant minor is an extra condition, so no assertion was weakened.
+  For the minimal-order results themselves (orders proved with true constants, Lemma GI) see
+  tests/test_paper58_minimal_order.py.
 * R = 0: exponents from the indicial polynomial; log-freeness of the LOCAL
   SOLUTION SPACE from an exact triangular Frobenius count (dimension of Laurent
   solutions == order  <=>  no log solution, when the exponents are integers);
@@ -37,6 +56,9 @@ from fractions import Fraction
 from functools import lru_cache
 from typing import Dict, List, Tuple
 
+from itertools import combinations
+
+import mpmath as mp
 import pytest
 import sympy as sp
 from sympy.polys.matrices import DomainMatrix
@@ -162,9 +184,13 @@ def decompose(expr: sp.Expr):
             elif isinstance(fct, sp.expint):
                 assert fct.args[0] == 1 and kind == "1", term
                 kind, k = "E1", sp.diff(fct.args[1], R)
+                assert k > 0, fct
             elif isinstance(fct, sp.Ei):
                 assert kind == "1", term
                 kind, k = "Ei", sp.diff(fct.args[0], R)
+                if k < 0:                       # W2: Ei(-kR) = -E1(kR); one label per function
+                    kind, k = "E1", -k
+                    coeff *= -1
             elif fct == sp.log(R):
                 assert kind == "1"
                 kind = "log"
@@ -229,11 +255,91 @@ def rank_at(ds, x0) -> int:
     return DomainMatrix(rows, (len(keys), len(ds)), sp.QQ).rank()
 
 
+def _true_constant_interval(expr: sp.Expr, dps: int = 70):
+    """mpmath interval around the true value of a constant (gamma, log of a number, surd)."""
+    v = sp.N(expr, dps + 15)
+    with mp.workdps(dps + 15):
+        x = mp.mpf(str(v))
+        w = abs(x) * mp.mpf(10) ** (-(dps - 5))
+        lo, hi = x - w, x + w
+    mp.iv.dps = dps
+    return mp.iv.mpf([lo, hi])
+
+
+def true_minor_nonzero(expr: sp.Expr, r: int, points=(sp.Rational(37, 59), sp.Rational(11, 7))) -> bool:
+    """W1: some r x r minor of the coordinates of f, ..., f^(r-1) is nonzero AT THE TRUE CONSTANTS.
+
+    The minor is computed exactly as a polynomial in the constant symbols and then evaluated at the true values
+    of gamma, the logs and the surds in interval arithmetic; it counts only if the interval excludes 0.  Unlike the
+    split/spec modes this assumes nothing about the arithmetic of gamma, ln 2, ln 3, ... (a coefficient such as
+    ln 6 - ln 2 - ln 3, independent as symbols and zero in truth, is refused).  A nonzero value at any one point
+    proves the minor is not identically zero; all row choices are tried.
+    """
+    atoms, reps = decompose(expr)
+    csyms = sorted(set(reps.values()), key=str)
+    true = {v: k for k, v in reps.items()}
+    ds = [to_field(atoms, reps, "split")]
+    for _ in range(r - 1):
+        ds.append(d_atoms(ds[-1]))
+    keys = sorted({a for D in ds for (a, _m) in D}, key=str)
+    if len(keys) < r:
+        return False
+    ivals = {s: _true_constant_interval(true[s]) for s in csyms}
+    for x0 in points:
+        T = []
+        for a in keys:
+            row = []
+            for j in range(r):
+                tot = sp.Integer(0)
+                for (aa, m), w in ds[j].items():
+                    if aa == a:
+                        mono = sp.Integer(1)
+                        for s_, e in zip(csyms, m):
+                            mono *= s_ ** e
+                        tot += sp.Rational(FR.to_sympy(w).subs(R, x0)) * mono
+                row.append(sp.expand(tot))
+            T.append(row)
+        for rows in combinations(range(len(keys)), r):
+            if csyms:
+                dom = sp.QQ[tuple(csyms)]
+                det = sp.Poly(dom.to_sympy(DomainMatrix([[dom.from_sympy(T[i][j]) for j in range(r)] for i in rows],
+                                                        (r, r), dom).det()), *csyms)
+                mp.iv.dps = 70
+                tot = mp.iv.mpf(0)
+                for mono, cf in det.terms():
+                    cf = sp.Rational(cf)
+                    term = mp.iv.mpf(int(cf.p)) / mp.iv.mpf(int(cf.q))
+                    for g, e in zip(det.gens, mono):
+                        if e:
+                            term = term * ivals[g] ** int(e)
+                    tot = tot + term
+                if tot.a > 0 or tot.b < 0:
+                    return True
+            else:
+                M_ = DomainMatrix([[sp.QQ.from_sympy(T[i][j]) for j in range(r)] for i in rows], (r, r), sp.QQ)
+                if M_.det() != 0:
+                    return True
+    return False
+
+
 def no_lower_order(expr: sp.Expr, r: int) -> bool:
-    """True iff f, ..., f^(r-1) are Q(R)-independent (both constant modes)."""
+    """True iff f, ..., f^(r-1) are Q(R)-independent: both constant modes AND the true constants (W1)."""
     x0 = sp.Rational(37, 59)
-    return all(rank_at(deriv_vectors(expr, r - 1, mode), x0) == r
-               for mode in ("split", "spec"))
+    return (all(rank_at(deriv_vectors(expr, r - 1, mode), x0) == r for mode in ("split", "spec"))
+            and true_minor_nonzero(expr, r))
+
+
+def generic_rank(ds) -> int:
+    """W3: rank over Q(R) (not at a point) of the split vectors in ds."""
+    keys = sorted(set().union(*[set(D) for D in ds]), key=str)
+    return int(DomainMatrix([[D.get(kk, FR.zero) for D in ds] for kk in keys], (len(keys), len(ds)), FR).rank())
+
+
+def order_at_most(expr: sp.Expr, r: int) -> bool:
+    """W3: an order-r operator over Q(R) exists iff the split vectors of f..f^(r) have GENERIC rank <= r (a Q(R)
+    relation among split vectors is a relation among the true functions).  A rank at one point only bounds the
+    generic rank from below, so it cannot prove this."""
+    return generic_rank(deriv_vectors(expr, r)) <= r
 
 
 def annihilates(polys: List[sp.Expr], expr: sp.Expr) -> bool:
@@ -443,7 +549,8 @@ def test_one_electron_order_equals_number_of_rates(name, fn, za, zb):
     f = fn(za, zb)
     r = len(atom_rates(f))
     assert no_lower_order(f, r)
-    assert rank_at(deriv_vectors(f, r), sp.Rational(37, 59)) == r     # order-r exists
+    assert order_at_most(f, r)                                         # order-r exists (W3: generic rank)
+    assert rank_at(deriv_vectors(f, r), sp.Rational(37, 59)) == r     # (implied by the two lines above)
     if name != "V_B aa":
         assert r == (1 if za == zb else 2)
 
@@ -565,3 +672,64 @@ def test_atom_derivative_matches_sympy():
         atoms, reps = decompose(sp.diff(f, R))
         a2 = to_field(atoms, reps, "split")
         assert set(a1) == set(a2) and all(a1[k] == a2[k] for k in a1)
+
+
+# ================================================================ (6) controls for the minimality machinery (W1-W3)
+# Added 2026-11-18 after the cold review of the two-centre minimal-order memo found three ways the routines above
+# could accept a wrong order.  Each control is a function whose true order is known by construction.
+
+
+@pytest.mark.parametrize("variant", ["R_exp", "E1"])
+def test_no_lower_order_refuses_dependent_constants(variant):
+    """W1 rejects: gamma / logs of numbers read as independent symbols.  The coefficient ln 6 - ln 2 - ln 3 is
+    ZERO, so f has order 1; the split mode alone reported order >= 2 (review G1, memo K2)."""
+    c = sp.log(6) - sp.log(2) - sp.log(3)
+    f = (c * R * sp.exp(-R) if variant == "R_exp" else c * sp.exp(-R) * sp.expint(1, R)) + sp.exp(-2 * R)
+    assert rank_at(deriv_vectors(f, 1, "split"), sp.Rational(37, 59)) == 2      # the trap: split mode says 2
+    assert not true_minor_nonzero(f, 2)
+    assert not no_lower_order(f, 2)
+    assert no_lower_order(f, 1)
+
+
+def test_no_lower_order_refuses_a_redundant_spelling():
+    """W2 rejects: E1(kR) next to Ei(-kR) kept as two atoms.  f = e^{-R}E1(2R) + e^{-R}Ei(-2R) + e^{-3R} IS
+    e^{-3R}, order 1 (review G3)."""
+    f = sp.exp(-R) * sp.expint(1, 2 * R) + sp.exp(-R) * sp.Ei(-2 * R) + sp.exp(-3 * R)
+    atoms, _ = decompose(f)
+    assert set(atoms) == {(-3, "1", 0)}
+    assert not no_lower_order(f, 2)
+    assert no_lower_order(f, 1)
+
+
+def test_order_upper_bound_is_not_read_at_a_point():
+    """W3 rejects: 'an order-r operator exists' read from a rank at one point.  The plant
+    e^{-R} + e^{-2R} + (2R/3 + 103/177) e^{-3R} has true order 3, but f, f', f'' have rank 2 at R = 37/59, so the
+    old idiom rank_at(..., r) == r accepted order 2 (review G4)."""
+    f = sp.exp(-R) + sp.exp(-2 * R) + (2 * R / 3 + sp.Rational(103, 177)) * sp.exp(-3 * R)
+    assert rank_at(deriv_vectors(f, 2), sp.Rational(37, 59)) == 2            # the trap: point rank says 2
+    assert no_lower_order(f, 2)
+    assert not order_at_most(f, 2)
+    assert order_at_most(f, 3) and true_minor_nonzero(f, 3)    # order exactly 3 (minor nonzero at 11/7)
+    # (no_lower_order(f, 3) itself is False here: its split/spec ranks are read at 37/59 only, where this
+    #  plant is singular -- a false NEGATIVE, never a false positive; the panel cases are regular at 37/59.)
+
+
+# ================================================================ FIRE TESTS (2026-11-18, section (6) and the W fixes)
+# In-memory plants (a pytest plugin in the session scratchpad patched this module after collection; no committed
+# file edited) unless marked [text], which went through debug/qa/fire_test.py (in place, restored from a byte copy).
+# "panel" = test_one_electron_order_equals_number_of_rates with every parametrisation's closed form replaced by the
+# plant and the rate count forced to 2 (the wrong claim "order 2").
+#
+#   plant                                                        -k selector                          result
+#   W1 fix reverted (true_minor_nonzero -> True)                 refuses_dependent_constants          FIRED
+#   W1 fix reverted                                              one_electron/aabb/hybrid_p/exchange  NOT FIRED (expected:
+#                                                                  _operator_order (22 panel tests)     panel constants are
+#                                                                                                       Q-independent)
+#   W1 plant (ln6 - ln2 - ln3) R e^{-R} + e^{-2R} in panel        one_electron_order                   FIRED (no_lower_order)
+#   same, W1 fix reverted                                        one_electron_order                   NOT FIRED (the hole)
+#   W2 plant e^{-R}E1(2R) + e^{-R}Ei(-2R) + e^{-3R} in panel      one_electron_order                   FIRED (no_lower_order)
+#   [text] W2 fix reverted (`if k < 0:` -> `if False:`)          redundant_spelling                   FIRED
+#   W3 plant e^{-R} + e^{-2R} + (2R/3 + 103/177)e^{-3R} in panel  one_electron_order                   FIRED (order_at_most)
+#   same, W3 fix reverted (order_at_most -> point rank)          one_electron_order                   NOT FIRED (the hole)
+#   W3 fix reverted                                              not_read_at_a_point                  FIRED
+# Clean runs after the plants: fast 41 passed, 1 skipped (18 s); --slow 42 passed (49 s).

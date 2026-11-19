@@ -577,8 +577,8 @@ PHRASES = [
     # the conjecture's hypothesis and its s-type case
     r"\int_{S^2}\prod_v\sigma_v(-\omega)\,d\omega\neq0",
     r"($\partial\to-\omega$, $\nabla^2\to1$)",
-    r"In particular every $s$-type tree, where $\sigma_v\equiv1$, reaches rung $n$.",
-    r"\textbf{[ARGUMENT]} This is not proved.",
+    r"$s$-type case, where $\sigma_v\equiv1$, is Proposition~\ref{prop:star_attain}.",
+    r"\textbf{[ARGUMENT]} For $\ell>0$ this is not proved.",
     # (1)
     r"For a source $e^{-kr}r^{a}\sum_js_jr^{-j}$ in angular channel $L$, the exponential part of its Coulomb "
     r"potential is the formal solution of $(\theta-L)(\theta+L+1)\Phi=-4\pi r^2s$, whose leading term "

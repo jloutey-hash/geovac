@@ -8702,6 +8702,35 @@ REGISTRY = [
         },
     },
     {
+        "id": "two-centre-weight-one-whole-integral",
+        # The CLAIM (Paper 58, scoped 2026-11-18): every Neumann term of every two-centre class is weight one
+        # ({E1, ln, gamma}, no dilogarithm), and so is the whole integral at equal exponents, where the exchange
+        # series stops.  Retired: the unscoped "weight-one filtration throughout / at every class" and "every
+        # integral reduces to elementary functions together with E1, ln, gamma" read for the whole integral.
+        # At unequal exponents the exchange integral carries the two-centre master integral, which is not a
+        # C(R)-combination of exp x {E1, Ei, ln} (its log part at R = 0 is no rational combination of exponentials;
+        # independence proof, Paper 58 exchange paragraph).
+        "pattern": r"weight-one\s+filtration\s+throughout"
+                   r"|weight-one\s+filtration\s+at\s+every\s+class"
+                   r"|All\s+of\s+them\s+close\s+at\s+weight\s+one\s+--\s+no\s+dilogarithm\s+appears\s+anywhere"
+                   r"|every\s+integral\s+reduces\s+to\s+elementary\s+functions\s+together\s+with\s+the\s+exponential",
+        "exempt_if_nearby": withdrawal_marker("two-centre-weight-one-whole-integral"),
+        "severity": "fail",
+        "scope": "group2 group3 synthesis",
+        "note": "Registered 2026-11-18 (pre-checkpoint self-check round 2, OWNER-LARGE, v6.7.39). Weight one holds per Neumann term and at equal exponents; the unequal-exponent exchange sum carries the master integral.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "docs/certified_reference_values.md",
+            "docs/chemistry_period_inventory.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex": "remediated + reviewed 2026-11-18 (PM) -- introduction: 'term by term in its Neumann expansion' + master-integral clause; lines on the two-center weight-one closure and the genus-zero K0 read as per-term, reread",
+            "docs/certified_reference_values.md": "remediated + reviewed 2026-11-18 (PM) -- transcendence-class paragraph scoped to Neumann terms; exchange entries are tau = 0 kernels",
+            "docs/chemistry_period_inventory.md": "remediated + reviewed 2026-11-18 (PM) -- row 3c weight-one cell scoped to Neumann terms",
+        },
+    },
+    {
         "id": 'engine-k1-plain-trace',
         "pattern": '\\\\mathrm\\{Tr\\}\\(D\\s*\\\\cdot\\s*e\\^\\{-tD\\^2\\}\\)\\$\\s+produces|arises\\s+by\\s+Mellin\\s+transform\\s+of\\s+\\$\\\\Tr\\(D\\s+e\\^\\{-tD\\^2\\}\\)\\$,\\s+with|\\\\Mcal\\[\\\\Tr\\(D\\s*\\\\cdot\\s*e\\^\\{-tD\\^2\\}\\)\\]\\(s\\)\\$,\\s+extracts|commits\\s+to\\s+the\\s+\\$\\\\eta\\$-invariant\\s+Mellin\\s+family|\\\\Tr\\\\bigl\\(D\\^k\\\\,\\s*e\\^\\{-tD\\^2\\}\\\\bigr\\)\\\\right\\]\\(s\\)|\\\\Mcal\\[\\\\Tr\\(D\\^k\\s*e\\^\\{-tD\\^2\\}\\)\\]|\\\\Mcal\\\\!\\\\left\\[\\\\,\\\\Tr\\\\bigl\\(D\\^k\\\\,\\s*e\\^\\{-tD\\^2\\}\\\\bigr\\)|Mellin\\s+slot\\s+of\\s+\\$\\\\Tr\\(D\\^k\\s+e\\^\\{-tD\\^2\\}\\)\\$|\\\\mathcal\\{M\\}\\[\\\\mathrm\\{Tr\\}\\(D\\^k\\s+e\\^\\{-tD\\^2\\}\\)\\]\\$\\s+at\\s+\\$k|\\\\mathcal\\{M\\}\\[\\\\Tr\\(D\\^\\{k\\}\\s+\\\\cdot\\s+e\\^\\{-t\\s+D\\^\\{2\\}\\}\\)\\]' + r'|\\mathrm\{Tr\}\(D\s*\\cdot\s*e\^\{-t\s*D\^2\}\)\$\.?\s+Produces',
         "exempt_if_nearby": withdrawal_marker('engine-k1-plain-trace'),

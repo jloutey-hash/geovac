@@ -120,8 +120,11 @@ elementary, `{exp, E_1, ln}` means it needs the exponential integral and a
 logarithm, and so on.  For the integral classes below the seed set grows with
 difficulty: `(AA|BB)` is elementary at any angular momentum, the hybrid class
 picks up `E_1` and a logarithm once the one-centre pair has `l > 0`, and the
-exchange class additionally carries Euler's `gamma`.  All of them close at
-weight one -- no dilogarithm appears anywhere.
+exchange class additionally carries Euler's `gamma`.  Term by term in the
+Neumann expansion all of them close at weight one -- no dilogarithm appears in any
+term.  At unequal exponents the exchange series does not stop, and its sum carries
+the two-centre master integral, which is not a combination of these seeds with
+rational coefficients (Paper 58); the exchange-class values below are single terms (tau = 0).
 
 
 ## Contents

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.38 (November 18, 2026)
+**Version:** v6.7.39 (November 19, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Hard problems (2026-11-19, v6.7.39, PI-directed):** exchange order exactly 9, m != 0 covered; minimal orders proved; s-type trees reach their rung; star-proof gap fixed; weight one scoped. CHANGELOG v6.7.39.
 - **v6.7.37 open items worked (2026-11-18, v6.7.38, PI-approved):** exchange order <= 9 derived for every a < b and four m = 0 integrals; counting rule gains a checked mechanism. CHANGELOG v6.7.38.
 - **Literature search and follow-ups (2026-11-18, v6.7.37, L52, OP52 GO):** exchange order <= 9 derived from Pachucki; contact-exponent counting rule predicted; P63 attainment conjecture; peeling negative. CHANGELOG v6.7.37.
 - **Owed list, third pass (2026-11-17, v6.7.36, P63L2, EQ, FXK GO; FX STOP):** l>0 attainment; d and p-p exchange keep 1s shape; four-centre keys carry 7/2, no full recurrence. CHANGELOG v6.7.36.
