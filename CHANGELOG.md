@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.41] - 2026-11-19
+
+**Last item of the v6.7.39 open list (PI standing direction).**
+
+### Added
+- Paper 63 `prop:star_attain` verification: step (i) of the proof checked modulo two primes for nine larger s-type
+  trees, up to n = 8 (the fork of five at its degree-three vertex; three trees of six; the path of seven from an end
+  and its centre; the star of seven; the path and the star of eight). In every case the least-order operator has
+  integer symbol roots of absolute value at most n-2, is nonzero at -(n-1), and aH is pure. The paper previously
+  said there was no check at n = 7, 8; it now says the checks beyond n = 5 are modulo primes, not exact. Two more
+  n = 8 trees passed at one prime; a caterpillar of eight was not computed. Guard
+  `tests/test_paper63_tree_attainment_big.py`.
+
+### Notes
+- Pre-checkpoint self-check: 0 LARGE, 2 SMALL (which operator was computed; "nonzero" is in the module), fixed.
+
 ## [v6.7.40] - 2026-11-19
 
 **The items left open at v6.7.39, worked through under PI standing direction ("go with your recommendations until

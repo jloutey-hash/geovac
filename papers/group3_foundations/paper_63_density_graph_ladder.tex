@@ -1073,20 +1073,24 @@ points ($\partial_t(t-p)\partial_t$ has two factors equivalent to $\partial_t$
 and the solution $\log(t-p)$, and $1/(t-p)$ lies in the trivial module), and
 for $n=4$, $6$, $8$ the step was not supported;\ step (iii) replaces it for every $n$.
 
-\textbf{[SYMBOLIC + MEASURED]} The operator $a$ of (i) was computed exactly
+\textbf{[SYMBOLIC + MEASURED]} An operator $a$ as in (i), the least-order one, was computed exactly
 over $\mathbb{Z}$ for six rooted trees (the stars of three and four, the path of
 three from an end, the path of four from an end and from inside, the path of
 five from an end) and modulo one prime for four more (the tree of five with a
 vertex of degree three, at two roots, the path of five from its center, the path of
 six from an end):\ the roots of its symbol at $(1,-t)$ are integers of absolute
-value at most $n-2$, and $aH$ is pure and nonzero;\ there is none for the
-tree of five rooted at its vertex of degree three.  The identity
+value at most $n-2$, it is nonzero at $t=-(n-1)$, and $aH$ is pure with nonzero coordinates
+in the module (that $aH\neq0$ as a function comes from step (iii), not from this check).  The
+same holds, modulo two primes, for nine larger rooted trees:\ the tree of five rooted at its vertex of degree three, the star
+and two other trees of six, the path of seven from an end and from its center, the star of
+seven, and the path and the star of eight.  The identity
 $\phi(a)T(H)=T(aH)$ holds to $2\times10^{-16}$ or better at $40$ digits for the
 stars of three and four, and the constant $C$ agrees with a direct evaluation
-of the top tail to $10^{-11}$ for nine trees with $n=5$ to $8$.  There is no
-exact check of (i) at $n=7,8$;\ the simplicity of the module of $F_n$ for
+of the top tail to $10^{-11}$ for nine trees with $n=5$ to $8$.  The checks of (i) beyond
+$n=5$ are modulo primes, not exact;\ the simplicity of the module of $F_n$ for
 $n=6,7,8$ is the exponent argument of Sec.~\ref{sec:four_density}.  Guard:\
-\texttt{tests/test\_paper63\_tree\_attainment.py}.
+\texttt{tests/test\_paper63\_tree\_attainment.py} and
+\texttt{tests/test\_paper63\_tree\_attainment\_big.py}.
 \textbf{[MEASURED]} Record
 \texttt{docs/predictions/2026-11-13\_star5\_attainment.md}, registered before
 computing:\ the operator of $F_5$ has leading coefficient
