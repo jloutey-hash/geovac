@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.46] - 2026-11-20
+
+**Plain-language front door (PI-approved draft).**
+
+### Added
+- `docs/geovac_story.md`: the project in plain language, one page, for a reader with no background: the counting,
+  the sphere inside hydrogen, the price of leaving it, the ladder, what the project is not (Paper 62's wording),
+  how the work is done. Restatement only. Linked first in README's "new to all of this" row.
+
+### Notes
+- Environment: Windows Smart App Control had switched on and blocked the unsigned python-flint and gmpy2 extension
+  modules (Code Integrity events 3033/3077), so about twenty flint-dependent test files could not run and mpmath
+  fell back to its pure-Python backend. The PI turned the setting off; both load again and a sample of the affected
+  tests passes. No committed result was affected.
+
 ## [v6.7.45] - 2026-11-20
 
 **The period-ladder front door (PI-approved draft), and the stale statements found while writing it.**

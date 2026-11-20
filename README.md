@@ -12,7 +12,7 @@ Two things this is not. It is not a new foundation for quantum mechanics: the sp
 
 | If you are | Start here | Then |
 |:--|:--|:--|
-| new to all of this | [`papers/synthesis/geovac_field_guide.pdf`](papers/synthesis/geovac_field_guide.pdf), the project as a story | [`papers/INDEX.md`](papers/INDEX.md), the status of every paper |
+| new to all of this | [`docs/geovac_story.md`](docs/geovac_story.md), the project in plain language, one page | [`papers/synthesis/geovac_field_guide.pdf`](papers/synthesis/geovac_field_guide.pdf), the longer story; [`papers/INDEX.md`](papers/INDEX.md), the status of every paper |
 | a quantum chemist (Slater and Sturmian integrals) | Paper 58: exact two-centre integrals, how complex each one is | Papers 59 and 12; certified high-precision values in [`docs/certified_reference_values.md`](docs/certified_reference_values.md) |
 | working on periods or Feynman integrals | [`papers/synthesis/period_ladder.pdf`](papers/synthesis/period_ladder.pdf), nine pages: the integrals of quantum chemistry sorted by the kind of number they make | Paper 63 (the ladder itself); Papers 59 and 61; [`docs/atlas.md`](docs/atlas.md); Papers 55 and 28 for the sphere's own zeta values |
 | after qubit Hamiltonians | *Qubit Hamiltonians* below, and the [downloads page](https://jloutey-hash.github.io/geovac/downloads/index.html) (FCIDUMP and Pauli lists) | Papers 14, 20 and 62; the [resource dashboard](https://jloutey-hash.github.io/geovac/) |
