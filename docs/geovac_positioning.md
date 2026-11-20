@@ -32,7 +32,7 @@ Note on comparisons: density fitting (DF) and tensor hypercontraction (THC) are 
 
 ### Fault-tolerant / QPE
 
-GeoVac's 1-norm scaling and commutator-based Trotter bounds (exponents in Paper 14; the figures once quoted here predate the 2026-08-29 exact rule) suggest competitive resource estimates for fault-tolerant quantum phase estimation. However, block-encoding circuits for the GeoVac Hamiltonian structure have not yet been built. This is a concrete collaboration opportunity: the composed block-diagonal structure should map naturally to LCU or QROM encodings, but the circuit construction and resource estimation remain open.
+GeoVac's 1-norm scaling and commutator-based Trotter bounds (exponents in Paper 14; the figures once quoted here predate the 2026-08-29 exact rule) have not been turned into resource estimates for fault-tolerant quantum phase estimation, and composed LiH's 1-norm is about twice STO-3G's at more qubits, so no advantage is claimed there. Block-encoding circuits for the GeoVac Hamiltonian structure have not yet been built. This is a concrete collaboration opportunity: the composed block-diagonal structure should map naturally to LCU or QROM encodings, but the circuit construction and resource estimation remain open.
 
 ## Honest Limitations
 

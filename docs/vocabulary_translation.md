@@ -8,7 +8,7 @@ responding to external readers. Three columns: Internal term | Standard renderin
 
 | Internal term | Standard rendering | Gloss / caveat |
 |:---|:---|:---|
-| Fock graph / GeoVac graph | Truncated Camporesi–Higuchi spectral triple on SU(2); concretely, the Peter–Weyl basis on S³ truncated at shell n ≤ n_max with shell-adjacency structure | The adjacency is graph-Laplacian; the spectrum reproduces the Coulomb/hydrogen quantum numbers via Fock's 1935 SO(4) symmetry |
+| Fock graph / GeoVac graph | Truncated Camporesi–Higuchi spectral triple on SU(2); concretely, the Peter–Weyl basis on S³ truncated at shell n ≤ n_max with shell-adjacency structure | The label set, degeneracies and selection rules are hydrogen's, via Fock's 1935 SO(4) symmetry; the graph's edge Laplacian does not converge to the sphere's (a documented wall) |
 | Focal length (of a projection) | Scale/projection parameter λ of the stereographic (Fock) projection S³ → ℝ³; fixes the energy shell E = −λ²/2 | Each observable corresponds to a choice of λ; "multi-focal" means multiple λ values used simultaneously |
 | Layer 1 | Combinatorial spectral data of the bare graph: eigenvalues, degeneracies, Gaunt selection rules — all in ℤ or ℚ, no continuum | Synonymous with "discrete substrate" or "skeleton"; no physics input required |
 | Layer 2 | Physical observable obtained by projecting Layer 1 data via a named map (stereographic, Hopf, heat-kernel, etc.) | Where transcendental constants enter; each projection is catalogued in Paper 34 |

@@ -15,7 +15,7 @@
 | CONJECTURE | Stated as such |
 | RETRACTED | Withdrawn claim; retained here so old DOI'd copies resolve to the truth |
 
-**No claim in this register is externally peer-reviewed as of June 2026.** The project's dissemination is GitHub + Zenodo (DOI-stamped releases).
+**No claim in this register is externally peer-reviewed (as of November 2026).** The project's dissemination is GitHub + Zenodo (DOI-stamped releases).
 
 > **Coverage note (2026-09-07).** Rows 22–28 close the register's gap for Papers 58–61, added after the `/qa` runs of that date measured them. **Papers 54–57 (the periods / Tannakian arc) still have no rows** — a deliberate omission rather than an oversight:\ this session did not test their claims, and assigning tiers to untested claims is exactly what this register exists to prevent. They are owed.
 
@@ -54,4 +54,4 @@
 
 ---
 
-*Maintained since 2026-06-10 (Phase 2c of `docs/corpus_accessibility_plan.md`). When a claim's status changes, update the row and record the change in CHANGELOG.md; do not fork the register.*
+*Maintained since 2026-06-10 (Phase 2c of the since-superseded `docs/archive/corpus_accessibility_plan.md`). When a claim's status changes, update the row and record the change in CHANGELOG.md; do not fork the register.*

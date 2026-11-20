@@ -32,12 +32,12 @@ with Anthropic's Claude;\ all claims and their verification status
 are stated below exactly as established, and all errors are the
 author's). Full papers, code, and bit-exact verification scripts:\
 \texttt{https://github.com/jloutey-hash/geovac}.}}
-\date{June 2026}
+\date{June 2026;\ revised November 2026}
 
 \begin{document}
 \maketitle
 
-\noindent This is a three-page summary of two results on
+\noindent This is a short summary of two results on
 Connes--van~Suijlekom spectral truncations
 \cite{CvS2021}, written to ask three concrete questions of
 specialists. Verification status is flagged sentence by
@@ -59,8 +59,8 @@ Gaudillot-Estrada--van~Suijlekom \cite{GEvS2023} extended state-space
 GH convergence to scalar truncations of all compact metric groups ---
 including $\mathrm{SU}(2)$. What the present work adds on the
 Riemannian side is therefore \emph{not} existence of convergence but:\
-the spinor-bundle (Dirac) substrate, an explicit closed-form rate
-moment, and the asymptotic rate constant. On the Lorentzian side it
+the spinor-bundle (Dirac) substrate and a closed-form moment of the
+Fej\'er kernel, with a tapered amplitude giving $O(1/n)$. On the Lorentzian side it
 adds a negative structural theorem.
 
 \section{Construction and rate data}
@@ -98,13 +98,21 @@ rate $\gamma_n$, and Lipschitz-compatible.
 \section{Result A:\ unconditional convergence}
 
 \begin{theorem}
-The truncations of the chirality-doubled Dirac triple above converge
+The truncations of the Dirac triple above (the truncated Hilbert space
+is the span of complete Dirac eigenspaces) converge
 to $\mathcal{T}_{S^3}$ in van~Suijlekom's state-space
 Gromov--Hausdorff distance, with the truncated state spaces metrized
 by the left-translation Lipschitz seminorm
 $L_n(T) = \sup_{g \ne e} \norm{U_g T U_g^* - T} / d(e, g)$ (equal to
 the metric Lipschitz constant on the continuum):
-$d_{\mathrm{GH}} \le \gamma_n = \tfrac{4 \log n}{\pi n} + O(1/n)$.
+$d_{\mathrm{GH}} \le \gamma_n$, with
+$\gamma_n = (4/\pi + o(1)) \log n / n$ in the normalisation of the full
+paper ($2/\pi$ on the unit round $S^3$). The proof uses the Fej\'er
+amplitude only as a real central amplitude in the spinor window;\ a
+sine-tapered amplitude gives $d_{\mathrm{GH}} \le \pi^2/(n+1)$, so
+$d_{\mathrm{GH}} = O(1/n)$. The constant $4/\pi$ therefore belongs to
+the Fej\'er kernel, not to the convergence rate, and a matching lower
+bound on $d_{\mathrm{GH}}$ is open.
 \end{theorem}
 
 \noindent\emph{Proof shape} (self-contained in the full write-up).
@@ -121,13 +129,16 @@ V_{j-1/2})$ and these summands are precisely the Dirac eigenspaces.
 Both almost-inverse defects collapse to Fej\'er smoothing — one on
 functions, one as the operator conjugation-average — at the common
 moment $\gamma_n$, so no partial-inverse or transference estimate
-appears anywhere. The truthful Dirac-\emph{commutator} seminorm, by
-contrast, degenerates at finite cutoff (kernel $10/14$ at $n = 2$,
-$26/55$ at $n = 3$, bit-exact) — it is the wrong finite-cutoff
-metrization, and this degeneracy is quantified in the write-up. The
+appears anywhere. On this window the Dirac-\emph{commutator} seminorm
+also has kernel exactly the scalars at $n \le 3$ (measured, by two
+independent constructions);\ on a doubled Fock model used by the code
+it does not ($10/14$ multipliers at $n = 2$, $26/55$ at $n = 3$).
+Whether the convergence can be proved directly in the Dirac seminorm
+is open;\ the proof uses the translation seminorm because its
+compression estimates close. The
 scalar $C(G)$ pattern is \cite{GEvS2023};\ the contribution here is
-the spinor-window transport, the per-band injectivity, the
-closed-form rate moment, and the $4/\pi$ constant.
+the spinor-window transport, the per-band injectivity and the
+closed-form Fej\'er moment.
 
 \section{Result B:\ a degeneracy theorem for the obvious Lorentzian
 extension}
@@ -186,9 +197,10 @@ once stated, which makes prior art likely;\ we could not locate it.
 \end{question}
 
 \begin{question}
-For Result A:\ is the finite-cutoff degeneracy of the
-Dirac-commutator seminorm — and its repair by the translation
-seminorm — known or recorded? And is the exact-fit spinor-window
+For Result A:\ can the convergence be proved directly in the
+Dirac-commutator seminorm, whose kernel on the window is the scalars
+at the cutoffs we measured, and is the best constant in the $O(1/n)$
+bound known? And is the exact-fit spinor-window
 embedding of the Fej\'er vector state (via
 $V_j \otimes V_{j \pm 1/2}$) the construction you would have used,
 or is there a slicker route to the dual map on bundle-valued

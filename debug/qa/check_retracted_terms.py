@@ -8723,11 +8723,15 @@ REGISTRY = [
             "papers/synthesis/*.tex",
             "docs/certified_reference_values.md",
             "docs/chemistry_period_inventory.md",
+            "docs/atlas.md",
         ],
         "cited_by": {
             "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex": "remediated + reviewed 2026-11-18 (PM) -- introduction: 'term by term in its Neumann expansion' + master-integral clause; lines on the two-center weight-one closure and the genus-zero K0 read as per-term, reread",
             "docs/certified_reference_values.md": "remediated + reviewed 2026-11-18 (PM) -- transcendence-class paragraph scoped to Neumann terms; exchange entries are tau = 0 kernels",
             "docs/chemistry_period_inventory.md": "remediated + reviewed 2026-11-18 (PM) -- row 3c weight-one cell scoped to Neumann terms",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + reviewed 2026-11-19 (PM) -- census paragraph, atlas table row 11 and the ladder paragraph scoped to Neumann terms; missed at v6.7.39, found by the front-door audit",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + reviewed 2026-11-19 (PM) -- two-center engine sentence and genus-zero sentence scoped per term; missed at v6.7.39, found by the front-door audit",
+            "docs/atlas.md": "remediated + reviewed 2026-11-19 (PM) -- period-ladder note and door 11 price cell scoped per term; missed at v6.7.39, found by the front-door audit",
         },
     },
     {

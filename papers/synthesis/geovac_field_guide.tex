@@ -464,9 +464,10 @@ their named period rings).
 above prices the observer doors.  The chemistry program prices the
 geometric doors, and its classes leave the engine's rings
 entirely.  At one centre the two-electron classes are exact rationals;\ a second
-nucleus releases $l$ and the two-centre repulsion integrals close in
-weight one, $\{e^{a}E_1(a), \ln, \gamma_E\}$, with no $\pi$ and no
-dilogarithm (Paper~18~\S III, Paper~12, Paper~58);\ a third nucleus
+nucleus releases $l$ and the two-centre repulsion integrals close, term by
+term in their Neumann expansion, in weight one, $\{e^{a}E_1(a), \ln, \gamma_E\}$,
+with no $\pi$ and no dilogarithm;\ the exchange integral at unequal exponents
+sums to weight two (Paper~18~\S III, Paper~12, Paper~58);\ a third nucleus
 with a shared centre makes the integral's radial core an elliptic period, which
 leaves the polylogarithm tower for the elliptic one, while the integrated value's
 class is open (Paper~59,
@@ -694,7 +695,7 @@ time window.  The verdict vocabulary is the project's internal one
 is a catalogue label, not a claim about what is fundamental.
 
 \paragraph{The table.}
-One row per door, numbered as in \texttt{docs/atlas.md}, which
+A selection of the doors, numbered as in \texttt{docs/atlas.md}, which
 carries for every door what it releases, what survives, the seam row,
 the owning paper label and the frozen falsifier;\ a stale pointer there
 fails \texttt{tests/test\_atlas\_register.py}, which also holds this
@@ -717,7 +718,7 @@ status and counts live in \texttt{docs/forced\_free\_seam.md}.
 7 & time window & $2\pi$ per mode;\ window consumed & obs.\ / free \\
 8 & Born measure & an imported measure & free \\
 9 & $\alpha$ & an Observation;\ value consumed & obs.\ / free \\
-11 & second nucleus & weight one, $\pi$-free & forced \\
+11 & second nucleus & weight one per term, $\pi$-free & forced \\
 12 & front in $R$ & nothing new & obs. \\
 13 & third nucleus & elliptic $K(m)$ & wall (closed form) \\
 14 & fourth centre & nothing new & forced (pre-reg.) \\
@@ -733,7 +734,7 @@ status and counts live in \texttt{docs/forced\_free\_seam.md}.
 
 \paragraph{The ladder, read down the chemistry rows.}
 One centre:\ exact rationals for two-electron integrals.  Two centres:\ weight-one
-logarithms and $E_1$, with no $\pi$.  Three centres:\ an elliptic
+logarithms and $E_1$ term by term, with no $\pi$ (the unequal-exponent exchange sum is weight two).  Three centres:\ an elliptic
 period for the radial core, which leaves the polylogarithm tower;\ the integrated
 value's class is open.  Four centres:\
 nothing new.  A three-electron chain over two-centre densities:\ a K3

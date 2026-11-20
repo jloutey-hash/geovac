@@ -16,8 +16,10 @@ function Landing() {
         <p className="secondary" style={{ maxWidth: '760px' }}>
           GeoVac is a spectral graph approach to computational quantum chemistry:
           quantum states are represented as nodes of a discrete graph labeled by
-          the quantum numbers (n, l, m), and the graph Laplacian is related to
-          the standard continuous operators by proven conformal maps. The
+          the quantum numbers (n, l, m). Those labels, their degeneracies and
+          their selection rules are exactly those of the hydrogen atom, which
+          Fock's 1935 projection places on a three-sphere; the graph's own edge
+          Laplacian does not converge to the sphere's. The
           discrete graph and the continuous description are two views of the same
           mathematics; these pages visualize the graph-side objects and the qubit
           Hamiltonians built from them, whose sparsity comes from the

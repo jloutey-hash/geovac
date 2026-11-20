@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.43] - 2026-11-19
+
+**Front-door audit: corrections and archiving (PI-directed).** A read-only audit found about 30 entry points giving
+five different headlines, with the period ladder told end to end only in material for one outside reader. This
+entry is the correction pass; the redesign (one headline, one routing page, two new doors) is a PI decision still
+open. PI chose the "price list" headline.
+
+### Fixed
+- Website (`viz/src/App.tsx`, `viz/public/papers/index.html`, its generator): the retired "graph Laplacian is
+  conformally equivalent to Schroedinger" headline and "proven GH convergence of the almost-commutative triple"
+  replaced by the current statements. Live on the next push.
+- Summaries the PM had not updated with their papers (v6.7.39-40): group3 synthesis still said attainment is proved
+  "for stars"; the field guide, the group2 synthesis and the atlas still said two-centre integrals close at weight
+  one without the per-term scope. Corrected, and stamped as dependents of the weight-one registry entry.
+- "Competitive" wording without the matched-accuracy caveat: `docs/geovac_positioning.md` (QPE line), group3
+  synthesis. Field guide: its atlas table is "a selection of the doors", not one row per door.
+- `docs/vocabulary_translation.md` (graph-Laplacian row), `docs/claims_register.md` (date line).
+- `docs/atlas.md` door 29: the constant written as 32 pi^(-2k-5/2) instead of (4/pi)^(5/2) pi^(-2k). The C25
+  front-door check read "4/pi" as Paper 38's constant without its qualifier; the check was not run at v6.7.42.
+- `docs/outreach/note_n1_su2_truncations` (first stop for NCG readers): theorem stated on the true Camporesi-Higuchi
+  window, not the doubled model; 4/pi is the Fejer kernel's constant, a tapered amplitude gives pi^2/(n+1); the
+  Dirac-commutator seminorm has kernel the scalars on the true window (n <= 3, measured), where the note had said
+  it degenerates. Wording copied from Paper 38. PDF rebuilt.
+- README: one sentence saying the code is MIT and the Zenodo deposit CC-BY-4.0.
+
+### Changed (archived, nothing deleted)
+- 46 spring-era sprint plans, verdicts and proposals, `docs/releases/` (v0.x notes), the superseded
+  `docs/corpus_accessibility_plan.md`: moved to `docs/archive/`. `ADSCFT/` moved to `docs/archive/ADSCFT/`.
+  `SCOPE_BOUNDARY.md` (v2.12, self-contradicting) moved to `docs/archive/SCOPE_BOUNDARY_v2.12.md`, with a stub at
+  the old path because agent guides name it. Eight design notes that live code or tests point to were kept.
+
+### Notes
+- Not done, raised to the PI: archiving `docs/geovac_onepager.md` (it is named in the /qa front-door list, so
+  removing it changes the gate); version labels in README / CITATION / Zenodo (left for the next Release).
+- Gates after the pass: C14, C16, C21, C25, headline numbers, atlas register: PASS.
+
 ## [v6.7.42] - 2026-11-19
 
 **Atlas gap check (PI-directed: is the period search from the hydrogen sphere exhausted?).**

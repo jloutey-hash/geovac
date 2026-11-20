@@ -121,12 +121,12 @@ def index_page(entries: List[Dict[str, Any]]) -> str:
     body = (
         "<h1>The GeoVac Paper Series</h1>\n"
         "<p>GeoVac is a spectral-graph-theory framework for computational "
-        "quantum chemistry and mathematical physics: the discrete graph "
-        "Laplacian on S³ is conformally equivalent to the Schrödinger "
-        "equation (Fock 1935), and the framework exploits this to build "
-        "structurally sparse qubit Hamiltonians, a discrete almost-"
-        "commutative spectral triple with proven Gromov–Hausdorff "
-        "convergence, and a classification of where transcendental "
+        "quantum chemistry and mathematical physics: its lattice is the "
+        "label set (n, l, m) of the hydrogen atom, which Fock's 1935 "
+        "projection places on the three-sphere. On it the project builds "
+        "structurally sparse qubit Hamiltonians, a truncated spectral "
+        "triple whose commutative part is proved to converge to the "
+        "round three-sphere, and a classification of where transcendental "
         "constants enter physical observables. Abstracts below; PDFs and "
         "code in the repository.</p>\n" + "\n".join(sections))
     return page("The GeoVac Paper Series — abstracts and PDFs",

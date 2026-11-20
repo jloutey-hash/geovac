@@ -267,6 +267,6 @@ If adapting the acknowledgment for academic papers:
 
 ## License
 
-MIT License - See [LICENSE](LICENSE) for details.
+The code is under the MIT License (see [LICENSE](LICENSE)). The Zenodo deposit, which bundles the papers with the code, is released under CC-BY-4.0.
 
 **Contact:** Issues and contributions welcome at [https://github.com/jloutey-hash/geovac/issues](https://github.com/jloutey-hash/geovac/issues)
