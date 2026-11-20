@@ -338,8 +338,8 @@ $(AB|AB)$ & $e^a E_1(a)$, $\ln$, $\gamma_E$ & 1 \\
 \hline
 \end{tabular}
 \end{center}
-The seed set \emph{grows} with class difficulty; the transcendence
-\emph{weight} does not.  Each new object has a structural home rather
+The seed set \emph{grows} with class difficulty; within a term of the
+Neumann expansion the transcendence \emph{weight} does not.  Each new object has a structural home rather
 than being an independent import.  The logarithm is the Neumann kernel
 $Q_0(\xi) = \tfrac12\ln[(\xi{+}1)/(\xi{-}1)]$, i.e.\ the same prolate
 spheroidal curvature seen from the kernel side instead of the moment
@@ -357,8 +357,12 @@ the master Mellin engine's $M_1/M_2/M_3$ sub-mechanisms are simply not
 in this chain.  Second, \textbf{no weight-two object appears} --- no
 dilogarithm, no $\zeta(2)$ --- although the ordered $\xi_< / \xi_>$
 integral is formally an iterated integral over a simplex, exactly the
-shape that generically produces $\mathrm{Li}_2$.  It closes at weight
-one instead.
+shape that generically produces $\mathrm{Li}_2$.  Each Neumann term
+closes at weight one instead, and so does the whole integral wherever the
+series stops (equal exponents).  At unequal exponents the exchange series
+does not stop, and its sum carries the two-centre master integral, a two-fold
+iterated integral of weight two as a function of $R$ (Paper~58, the exchange
+paragraph of its census section).
 
 The two absences together are what make the $(AA|BB)$ class
 \emph{decidable}.  With no $\pi$ and no weight-two content the closed
@@ -372,7 +376,7 @@ licenses an exact zero test downstream.
 \subsubsection{Three centres: the embedding tier is genus-graded}
 \label{sec:level2_genus}
 
-The two-centre weight-one closure is a \emph{genus-zero} fact, and it stops at
+The two-centre term-by-term weight-one closure is a \emph{genus-zero} fact, and it stops at
 two centres.  The two-body three-centre integral $(XY|XZ)$---the first object a
 polyatomic requires, and one no prolate spheroidal system can hold, that
 coordinate having exactly two foci---is naturally evaluated in momentum space,
@@ -865,11 +869,13 @@ Noui~\cite{liu_noui2017}---``the discreteness of the quantum geometry
 $\ldots$ can be interpreted as a direct consequence of the compactness
 (via Harmonic analysis) of the residual symmetry group $SU(2)$''---and
 their same paper exhibits the converse, non-compact $SU(1,1)$ yielding
-continuous time-like area spectra.  Earlier and more generally, Rovelli's
-first postulate for relational quantum mechanics reads ``relevant
+continuous time-like area spectra.  More generally, Rovelli's
+first postulate for relational quantum mechanics, as he states it in his
+encyclopedia entry~\cite{rovelli_sep}, reads ``relevant
 information is finite for a system with compact phase space,'' from which,
 he notes, ``the characteristic discreteness of quantum
-theory'' follows~\cite{rovelli1996}.  In mathematics the statement is older
+theory'' follows;\ the original paper~\cite{rovelli1996} states the postulate
+as a limit on the information a system can carry.  In mathematics the statement is older
 still and owned three times over:\ Pontryagin duality (compact
 $\Leftrightarrow$ discrete dual), Peter--Weyl, and the compact-resolvent
 characterization built into Connes' spectral-triple axioms.
@@ -3858,6 +3864,11 @@ arXiv:1702.06793.
 C.~Rovelli, ``Relational quantum mechanics,''
 \textit{Int.\ J.\ Theor.\ Phys.}\ \textbf{35}, 1637--1678 (1996),
 arXiv:quant-ph/9609002.
+
+\bibitem{rovelli_sep}
+C.~Rovelli, ``Relational quantum mechanics,'' in
+\textit{The Stanford Encyclopedia of Philosophy}, edited by E.~N.~Zalta and
+U.~Nodelman, Sec.~2.1 (revised 2025).
 
 \bibitem{mazya_shubin2005}
 V.~Maz'ya and M.~Shubin, ``Discreteness of spectrum and positivity criteria

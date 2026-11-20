@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v6.7.44 (November 19, 2026)
+**Version:** v6.7.45 (November 20, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (258 bullets, rounds 2–9; round 9 = everything from v5.20.12 back) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Period-ladder front door (2026-11-20, v6.7.45, PI-approved):** `papers/synthesis/period_ladder.tex`, restatement only; weight-one scope fixed in Papers 18/59/63; Rovelli cite. CHANGELOG v6.7.45.
 - **New front page (2026-11-19, v6.7.44, PI-approved):** README leads with the price-list headline and routes five reader types; Papers 58-63 listed. CHANGELOG v6.7.44.
 - **Front-door audit (2026-11-19, v6.7.43, PI-directed):** ~30 entry points, five headlines; stale summaries and website fixed; 48 old docs archived; redesign open (PI chose the price-list headline). CHANGELOG v6.7.43.
 - **Atlas gap check (2026-11-19, v6.7.42, PI-directed):** doors 28-32 (Stark, Zeeman, lens quotients, torus, squashed ring); none climbs; geometry stops at rung 2. CHANGELOG v6.7.42.
@@ -532,7 +533,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 | `papers/group4_quantum_computing/` | QC / NISQ / VQE | 4 |
 | `papers/group5_qed_gauge/` | HEP / gauge theory | 5 |
 | `papers/group6_precision_observations/` | precision AMO | 5 |
-| `papers/synthesis/` | cross-group narratives + field guide | 7 |
+| `papers/synthesis/` | cross-group narratives + field guide + period ladder | 8 |
 | `papers/archive/` | historical (3, 4, 5, 6, 10, 18v1, 21) + retired (25, 41, 43, 46–49, 52; `docs/retired_papers.md`) | 15 |
 
 ### Live status flags every agent must know

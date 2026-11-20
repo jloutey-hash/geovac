@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.45] - 2026-11-20
+
+**The period-ladder front door (PI-approved draft), and the stale statements found while writing it.**
+
+### Added
+- `papers/synthesis/period_ladder.tex` (9 pages): the entry point for readers working on periods and Feynman
+  integrals. One story end to end: the hydrogen sphere, Paper 18's claim that each released axis carries a price,
+  the doors and what each costs, the climb by linking densities up to the banana and Calabi-Yau integrals, two and
+  three centres in detail, what this is not (Paper 62's wording), prior art, open questions, how to check. It makes
+  no claims of its own; every statement restates an owner paper with its tier. A cold reviewer sampled 40 claims
+  against the owners: body held; 3 LARGE (the abstract stated "geometry stops at the elliptic rung" as fact; "what
+  the series adds" overstated the weight-two scope; "every claim has a test" was false) and 16 SMALL, all fixed,
+  including the restored caveat that the molecular integrals sit on the rung of the banana with n+1 propagators
+  but are not that family. Linked from README ("Where to start") and `papers/INDEX.md`.
+
+### Fixed
+- Papers 18, 59, 63: three more unscoped statements that two-centre integrals are weight one for the whole
+  integral (Paper 18 `sec:level2_seed_set` "no weight-two object appears"; Paper 59 abstract; Paper 63
+  introduction), now per Neumann term with the master integral named. Stamped as dependents of the registry entry.
+- Field guide (two loci): "the integrated value's class is open" replaced by Paper 59's wording (it leaves the
+  two-centre class as a function of the bond angle).
+- Paper 18: the Rovelli quotation was attributed to IJTP 35, 1637; it is from his encyclopedia entry (the
+  correction made in CLAUDE.md on 2026-11-03, which had left Paper 18's cite on the SMALL list). Bibitem added.
+- `docs/atlas.md` door 11: the weight-two clause carries its scope (0 < a < b, the seven integrals).
+- `papers/INDEX.md`: the synthesis table listed three of the seven syntheses; all are listed now.
+
+### Notes
+- Gates after the pass: C16, C21, C25, headline numbers, atlas register: PASS.
+- Owed: the mirror direction of the dependents rule keeps biting (an owner strengthened or scoped, citers left
+  behind): five such loci this week were found by audits and by drafting, not by a gate.
+
 ## [v6.7.44] - 2026-11-19
 
 **New front page (PI-approved draft).**

@@ -8732,6 +8732,8 @@ REGISTRY = [
             "papers/synthesis/geovac_field_guide.tex": "remediated + reviewed 2026-11-19 (PM) -- census paragraph, atlas table row 11 and the ladder paragraph scoped to Neumann terms; missed at v6.7.39, found by the front-door audit",
             "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + reviewed 2026-11-19 (PM) -- two-center engine sentence and genus-zero sentence scoped per term; missed at v6.7.39, found by the front-door audit",
             "docs/atlas.md": "remediated + reviewed 2026-11-19 (PM) -- period-ladder note and door 11 price cell scoped per term; missed at v6.7.39, found by the front-door audit",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + reviewed 2026-11-19 (PM) -- sec:level2_seed_set: 'no weight-two object appears' and 'the weight does not grow' scoped to a Neumann term, master integral named; sec:level2_genus opening; found while drafting the period-ladder synthesis",
+            "papers/group3_foundations/paper_63_density_graph_ladder.tex": "remediated + reviewed 2026-11-19 (PM) -- introduction sentence on two-center integrals scoped per term",
         },
     },
     {

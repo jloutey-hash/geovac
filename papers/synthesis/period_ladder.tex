@@ -1,0 +1,1091 @@
+% period_ladder.tex
+% GeoVac synthesis: the period ladder
+% Status: front door for readers of the periods / Feynman-integral literature
+% Audience: number theorists and Feynman-integral practitioners; readable by quantum chemists
+% This document makes no claim of its own: every statement restates a claim
+% owned by a paper of the series, with the owner cited and its tier tag kept.
+
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,booktabs}
+\usepackage{hyperref}
+
+% Claim-registry and numeric-registry citation macros (as in the other
+% syntheses): each renders its literal only; the key is a foreign key.
+\newcommand{\gvc}[2]{#2}
+\newcommand{\gvq}[2]{#2}
+\newcommand{\mHa}{\,\mathrm{mHa}}
+
+\begin{document}
+
+\title{The Period Ladder:\\
+The Integrals of Quantum Chemistry Sorted by the Kind of Number They Make}
+\thanks{A synthesis in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{November 19, 2026}
+
+%% ========================================================================
+\begin{abstract}
+The integrals of molecular quantum chemistry over exponential
+(Slater-type) orbitals can be sorted by the class of number they produce.
+This note tells that sorting end to end, from the hydrogen atom's sphere
+to the banana integrals of quantum field theory, for a reader who works
+on periods and Feynman integrals;\ a quantum chemist should be able to
+follow it too.  It makes no new claim.  Every statement restates a result
+owned by a paper of the Geometric Vacuum series, with the owner cited and
+its tier tag kept.  The story has four steps.  The hydrogen atom, by
+Fock's projection, is a compact problem whose labels and degeneracies are
+integers.  Paper~18's claim is that each released axis carries an
+identifiable transcendental price.  Releasing axes by geometry alone (a
+second nucleus, a third, a fourth, bending, an external field, a change
+of shape) reaches an elliptic period and, across the doors the atlas
+records, stops there (an observation, not a theorem).  The class climbs
+to a higher rung (rung $n$ is the class of the operator of a Bessel
+moment $F_n$) only when one integral links more electron densities:\ a tree of $n$ linked two-center densities has a
+holomorphic period whose one-scale operator, for $n=2$ to $5$, is the
+Hadamard product (the term-by-term product of the coefficients of their
+power-series solutions) of the Legendre operator with the operator of the
+equal-mass banana integral with $n-1$ propagators.  Most of the
+mathematics on the ladder is prior art, credited in
+Sec.~\ref{sec:prior};\ what the series adds is the route from molecular
+integrals to it, listed there with its caps.  The note ends with the open
+questions and with where each claim can be checked.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{The skeleton:\ hydrogen on a sphere}
+\label{sec:skeleton}
+%% ========================================================================
+
+\textbf{[PRIOR ART]} Fock showed in 1935 that stereographic projection
+turns the momentum-space hydrogen Schr\"odinger equation into a
+rotation-invariant integral equation on the unit three-sphere
+$S^3$~\cite{fock1935}.  Its kernel is diagonal on the hyperspherical
+harmonics, the eigenfunctions of the Laplace--Beltrami operator
+$\Delta_{S^3}$ with eigenvalue $-(n^2-1)$, and the bound-state
+Hamiltonian is a function of that operator,
+$H=-\tfrac{Z^2}{2}(1-\Delta_{S^3})^{-1}$, so that $E_n=-Z^2/(2n^2)$
+(Paper~7~\cite{loutey_paper7}).  The sphere is compact, so everything
+that labels a state is a whole number:\ the labels $(n,l,m)$, the
+degeneracy $n^2$ per shell, and the Casimir $n^2-1$ of the symmetry group
+$SO(4)$.  This label set, with the Casimir as a weight on its nodes, is
+what the series calls the skeleton.  Paper~0 reaches the angular part of
+the same label count from a packing construction and its structural
+choices (motivated, not forced) \textbf{[SYMBOLIC PROOF]};\ the grouping of shells into the principal quantum number is an
+\textbf{[OBSERVATION]} there, not forced by its
+axioms~\cite{loutey_paper0}.  The matrix entries, degeneracies and
+coupling coefficients on the skeleton are integers or rationals;\ no
+$\pi$ appears until something is projected off it
+(Paper~18~\cite{loutey_paper18}).
+
+One wall must be stated plainly, because an earlier reading of the
+series said otherwise.  \textbf{[WALL]} \gvc{graph-s3-wall}{The edge
+Laplacian $L=D-A$ of the label lattice does \emph{not} converge to the
+Laplace--Beltrami operator of $S^3$:\ its edges never change $l$, so it
+splits into $n_{\max}$ disconnected $l$-blocks, and its kernel is
+$n_{\max}$-dimensional at every cutoff while $\Delta_{S^3}$ has a single
+zero mode} (Paper~7~\cite{loutey_paper7},
+\texttt{tests/test\_graph\_s3\_nonconvergence.py}).  What is exact at
+every cutoff is the label set and the diagonal Casimir.  The equivalence
+with the Schr\"odinger problem is carried by Fock's continuum projection,
+not by a graph limit.
+
+The energies themselves are not on the sphere.  \textbf{[SYMBOLIC
+PROOF]} The levels $E_n$ enter only through the energy-shell constraint
+$p_0^2=-2E$, which sets the scale of the stereographic map
+(Paper~7~\cite{loutey_paper7}).  That scale is the mass on every orbital
+line of the graphs below.
+
+%% ========================================================================
+\section{Paper~18's claim:\ each released axis carries a price}
+\label{sec:rule}
+%% ========================================================================
+
+A compact group has a discrete spectrum (the Peter--Weyl
+theorem~\cite{peter_weyl1927}).  The reading that compactness is the
+\emph{source} of spectral discreteness is not original to this series,
+and Paper~18 does not claim it:\ it is stated causally for the gauge
+group of loop quantum gravity by Liu and Noui~\cite{liu_noui2017}, and earlier and more generally in Rovelli's relational quantum
+mechanics~\cite{rovelli1996}.  Nor is the converse true.  Maz'ya
+and Shubin give conditions under which a Schr\"odinger operator on
+non-compact $\mathbb{R}^n$ has purely discrete
+spectrum~\cite{mazya_shubin2005};\ a confining potential suffices, and
+the harmonic oscillator is the standing counterexample.  The correct
+general statement is at the level of the operator:\ discrete spectrum
+with finite multiplicities is equivalent to compactness of the resolvent
+(Paper~18~\cite{loutey_paper18}).
+
+What Paper~18 adds is not the mechanism but the \emph{accounting}:\ the
+claim that each released axis carries an identifiable transcendental
+price, and that those prices can be classified.  Transcendental numbers
+enter when the discrete description is projected onto a non-compact
+coordinate system, and the paper sorts them by the kind of mismatch the
+projection mediates.  Its strongest form, that the transcendental content
+of any observable is determined entirely by the type of projection, is
+stated there as a falsifiable claim that is under strain from one
+observable and is not reconciled with the paper's weaker, route-indexed
+form.  We use only the accounting.
+
+Two terms will recur.  A \emph{period}, in the sense of Kontsevich and
+Zagier~\cite{kontsevich_zagier2001}, is a number whose real and imaginary
+parts are integrals of algebraic functions over domains defined by
+polynomial inequalities with rational coefficients.  The \emph{weight} of
+a period of polylogarithm type counts its iterated integrations:\ a
+logarithm has weight one, a dilogarithm or $\pi^2$ weight two.  The
+chemistry integrals below also carry exponentials of the internuclear
+distance and the exponential integral $E_1$, so ``number class'' is used
+in the wider sense of Paper~18:\ the functions and constants a closed
+form needs.
+
+\emph{The sphere's own numbers.}  Before any nucleus is added, an
+observer reading the sphere already pays.  Paper~55 takes a census of the
+spectral-zeta and heat-trace data of $S^3$ and proves, over that census,
+that the transcendentals it identifies sit in three rings:\ $\mathbb{Q}[\pi,\pi^{-1}]$ for the volume slot,
+$\bigoplus_k\pi^{2k}\,\mathbb{Q}$ for the heat-kernel coefficients, and
+cyclotomic mixed-Tate periods at level at most four, with Catalan's
+constant $G=\beta(2)$, for parity-restricted Dirac sums
+(Papers~55 and~28~\cite{loutey_paper55,loutey_paper28}).  The indexing of
+these rings by the slots of one Mellin transform is a reading, not a
+classification, and the paper says that the chemistry-side numbers and
+the elliptic period of Sec.~\ref{sec:three} lie outside its census.
+Those are the subject of the rest of this note.
+
+%% ========================================================================
+\section{The doors:\ what geometry alone can buy}
+\label{sec:doors}
+%% ========================================================================
+
+The series keeps a register, the atlas (\texttt{docs/atlas.md}), with one
+row for each way out of the compact skeleton:\ what the door releases,
+what survives, the number class that enters, and a verdict.  The
+verdicts are catalogue labels:\ \emph{forced} (derived, with a test that
+would fail if it were false), \emph{free} (an input consumed from
+outside, with its number class named), \emph{wall} (a proven
+obstruction), and \emph{observation} (a measured fact with no
+derivation).  They are bookkeeping, not statements about what is
+fundamental.  A \emph{rung} is a class of period named by a differential
+operator:\ rung $n$ is the class of the operator of the Bessel moment
+$F_n$ of Sec.~\ref{sec:climb}, and rung two is the elliptic one.  Table~\ref{tab:doors} selects the doors that change the
+geometry, with the atlas numbers so that a reader can find the full row.
+
+\begin{table*}[t]
+\caption{The geometric doors, selected from the atlas (which has 32
+rows).  ``Price'' is the number class that enters.  Rows 28 to 30 are
+recorded in the atlas and its test only, and almost all of their content
+is classical prior art credited in the atlas rows.  The lower block lists
+the doors that link densities (Sec.~\ref{sec:climb}).}
+\label{tab:doors}
+\small
+\begin{tabular}{@{}rp{3.6cm}p{4.3cm}p{5.3cm}p{2.9cm}@{}}
+\toprule
+\# & Door & What is released & Price (number class) & Verdict \\
+\midrule
+1 & the label set $(n,l,m)$ with the Casimir $n^2-1$ &
+  nothing:\ this is the skeleton &
+  zero:\ integers and rationals & forced \\
+2 & the edge Laplacian as a route to $\Delta_{S^3}$ &
+  a continuum limit was attempted &
+  algebraic numbers, and no limit & wall \\
+11 & a second nucleus &
+  $l$ across centers;\ $m$ survives &
+  weight one per Neumann term, $\pi$-free, no dilogarithm;\ the
+  unequal-exponent exchange sum is weight two for $0<a<b$ (Paper~58) & forced (the $m$ rule) \\
+13 & a third nucleus with a shared center, $(XY|XZ)$ &
+  the third focus &
+  an elliptic period $K(m)$ for the radial core &
+  wall:\ no closed form of the radial core through factorization, and the
+  elliptic-dilogarithm route does not engage;\ a closed form is open \\
+14 & a fourth distinct center, $(XY|ZW)$ &
+  a fourth center &
+  no genus:\ the same genus-one family &
+  forced (pre-registered;\ measured, nearly a corollary) \\
+15 & bending a triatomic &
+  $m$:\ a pair $|m|=\Lambda$ opens at order $s^{2\Lambda}$ &
+  exact rationals for the order and the angular factors;\ the slopes are
+  exponentials in $R$, no $\pi$ & forced (order, labels);\ slopes measured \\
+28 & a uniform electric field on hydrogen &
+  $n$ and $l$:\ levels become resonances;\ $m$ survives &
+  exact rationals order by order, in a divergent series;\ a trans-series
+  price, not a period & free (the field);\ forced (the coefficients) \\
+29 & a uniform magnetic field on hydrogen &
+  the $n$-degeneracy;\ $l$ mixes;\ $m$ and $z$-parity survive &
+  exact rationals order by order, Borel summable;\ the class of an
+  eigenvalue at finite field is open & free (the field);\ high field open \\
+30 & a quotient of the sphere (lens spaces) &
+  nothing physical:\ a symmetry sector is kept &
+  integer multiplicities with a rational generating function;\ spectral
+  sums in $\bar{\mathbb{Q}}[\pi]$ & forced as mathematics;\ not a physical door \\
+31 & curving a tube of hydrogen rings into a torus &
+  the tube winding $m$, leaking as $(r/R)^{|\Delta m|}$ &
+  none measured:\ the leak order is an integer & observation \\
+32 & squashing a hydrogen ring into an ellipse &
+  the ring momentum $k$, at order $\epsilon^{p(c)}$ &
+  none measured:\ the orders are integers & observation \\
+\midrule
+17 & a three-electron chain &
+  a second momentum integration &
+  a K3 surface;\ the holomorphic period is a sum of products of elliptic
+  periods & forced;\ generic content observation \\
+20 & four linked densities &
+  a third momentum integration &
+  on the one-scale slice, a fourth-order Calabi--Yau-type operator (AESZ
+  \#58), not built from elliptic periods & forced \\
+21 & a Coulomb ring of three densities &
+  the loop momentum, which integrates out &
+  the elliptic rung, below the chain;\ at one center, dilogarithms &
+  forced (Coulomb kernels) \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Read the upper block of the table from top to bottom.  One center costs
+nothing.  A second nucleus releases $l$ and keeps $m$, and its price is
+of weight one term by term (Sec.~\ref{sec:two});\ that describes the
+integrated value, while the two-center exchange fibre is already
+elliptic.  A third nucleus brings an elliptic period
+(Sec.~\ref{sec:three}), and a fourth adds no genus:\
+\textbf{[MEASURED]} the general four-center integral $(XY|ZW)$ over $1s$
+Slater orbitals reduces to one radial integral whose integrand carries
+exactly the two dispersion roots of the three-center curve, so a fourth
+distinct center adds no genus (Paper~63~\cite{loutey_paper63}).  Bending
+releases $m$ at a counted order, \textbf{[SYMBOLIC + MEASURED]} with
+exact rational angular prices $6/5$ ($\Lambda=1$) and $5/6$
+($\Lambda=2$) on a single shell and a free coefficient whose radial
+weights carry exponentials in $R$ and no $\pi$;\ this is the Renner
+effect~\cite{renner1934} (Paper~32~\cite{loutey_paper32}).  A uniform
+field is an input from outside the skeleton (Paper~34 classes the Stark
+and Zeeman fields as such inputs~\cite{loutey_paper34}), and its
+perturbation coefficients are rational.  A free quotient of the sphere
+is mathematics, not a physical door.  Curving or squashing a ring of
+hydrogen atoms breaks a winding label as a power of the deformation, and
+the power is an integer \textbf{[MEASURED, pre-registered;\ GO]}
+(Paper~62~\cite{loutey_paper62};\ the curvature coupling is known for
+electrons on a torus~\cite{encinosa2022}).
+
+\textbf{[OBSERVATION]} None of these doors climbs past the third
+nucleus.  Read down the atlas, geometry alone stops at the elliptic
+rung.  The climbs come from somewhere else:\ from linking more densities
+in one integral.
+
+%% ========================================================================
+\section{The climb:\ linking densities}
+\label{sec:climb}
+%% ========================================================================
+
+\emph{Vocabulary.}  A two-center \emph{density} is the product of two
+orbitals on two nuclei.  A \emph{kernel} joins two electrons:\ the
+Coulomb kernel $1/r_{12}$, or a correlation factor (geminal)
+$e^{-\gamma r_{12}}$.  An ordinary electron-repulsion integral links two
+densities by one kernel.  Integrals of explicitly correlated methods link
+more.  Paper~63 draws each integral as a \emph{density graph}:\ a vertex
+for every electron and every nucleus, a line of mass $\zeta$ from a
+nucleus to an electron for every orbital of exponent $\zeta$, and a line
+between two electrons for every kernel, massless for the Coulomb kernel
+and of mass $\gamma$ for a geminal~\cite{loutey_paper63}.  The
+\emph{fibre} of an integral is the integral with all centers coincident;\
+the class is read there, on a family in which one scale $t$ varies, from
+the linear differential operator of least order that annihilates the
+family.  The \emph{holomorphic period} is the period of the curve or
+surface the densities build, the integral of the inverse dispersion roots
+alone (the left side of Eq.~\eqref{eq:tree} below);\ the fibre of the
+real integral carries further weights.  An integral sits on a
+\emph{rung} when that operator has no irreducible piece (composition
+factor) above the rung's.
+
+\emph{The tree identity.}  \textbf{[SYMBOLIC + MEASURED]} Take $n$
+two-center $1s$ densities joined into a tree by $n-1$ rational kernels.
+In momentum space each density carries a dispersion root
+$\Delta_v=\sqrt{c_vL_v^2+1}$, with $c_v$ the density's scale (Feynman)
+parameter and $L_v$ the signed sum of the momenta on the kernels at $v$,
+and Fourier-transforming each $1/\Delta_v$
+turns every momentum integration into a delta function, so
+\begin{equation}
+  \int_{\mathbb{R}^{n-1}}\! d^{n-1}k\,\prod_{v=1}^{n}\frac{1}{\Delta_v}
+  = \frac{2^{n}}{\pi\sqrt{c_1\cdots c_n}}
+    \int_0^\infty \prod_{v=1}^{n} K_0(a_v x)\,dx ,
+  \label{eq:tree}
+\end{equation}
+with $a_v=c_v^{-1/2}$, for a star and a chain alike:\ the holomorphic
+period of a tree depends only on how many densities the kernels link, not
+on the pattern of the links (Paper~63~\cite{loutey_paper63}).  The right
+side is a Bessel moment in $n$ scales.
+
+\emph{The operators.}  \textbf{[SYMBOLIC]} Vary one scale,
+$F_n(t)=\int_0^\infty K_0(x)^{n-1}K_0(tx)\,dx$.  Then $F_n$ satisfies an
+explicit linear equation in $t$ of order $n$, \textbf{[MEASURED]} each
+checked against direct quadrature.  For $n=2$ it is the Legendre equation
+of the complete elliptic integral $K$.  For $n=3$ it is the equation of
+Clausen's square of an elliptic period.  For $n=4$, in $x=1/(4t^2)$ with
+$\theta=x\,d/dx$, it is
+\begin{equation}
+  \theta^4 - x(2\theta+1)^2(10\theta^2+10\theta+3)
+  + 9x^2(2\theta+1)^2(2\theta+3)^2 ,
+  \label{eq:f4}
+\end{equation}
+\textbf{[PRIOR ART]} entry \#58 of the Calabi--Yau tables of Almkvist,
+van Enckevort, van Straten and Zudilin~\cite{aesz2005}.
+\textbf{[SYMBOLIC]} The operator of $F_4$ is irreducible, and $F_4$ is
+not a polynomial in elliptic periods with algebraic moduli:\ two linked
+densities give an elliptic period, three give a K3 surface whose period
+is elliptic squared, and four give the first period of a new kind.  At
+$n=5$ the tables print the operator verbatim, attached to entry \#39, and
+its structure is that of the exterior square of a fourth-order
+Calabi--Yau operator, so five linked densities give no new type of
+period.  The operators of $F_n$ are irreducible for $n=2$ to $8$.
+
+\emph{The banana integrals.}  \textbf{[SYMBOLIC]}
+\gvc{p59-tree-banana-hadamard}{The tree ladder is tied to the banana
+ladder, where an $l$-loop equal-mass banana integral carries a
+Calabi--Yau $(l-1)$-fold~\cite{bonisch2021}, by one exact operation:\
+with $y=1/(16t^2)$ and $F_n=t^{-1}g(y)$, the operator of $g$ is the
+Hadamard product of the Legendre operator with the operator of the banana
+with $n-1$ propagators, checked in exact arithmetic for $n=2$ to $5$}
+(Paper~63~\cite{loutey_paper63}).  The same fact reads:\ $F_n$ is the
+$n$-propagator banana, with masses $(t,1,\dots,1)$, integrated over a
+line of external momentum.  It sits on the rung of the banana with
+$n+1$ propagators but is not that family:\ its singular values of $t^2$,
+$\{1\},\{4\},\{1,9\},\{4,16\}$ for $n=2,\dots,5$, are the thresholds of the
+banana with $n-1$ propagators.  \textbf{[PRIOR ART]} The Hadamard
+construction and the table entries are Almkvist and
+Zudilin's~\cite{almkvist_zudilin2007,aesz2005};\ the operators for the
+equal-mass two-dimensional banana integral are
+Vanhove's~\cite{vanhove2014};\ the links of random-walk
+moments to Bessel moments and Calabi--Yau equations are
+Broadhurst's~\cite{broadhurst2009walks}.  At $t=1$ the ladder is the
+Ising class of Bessel moments, $\int_0^\infty K_0(x)^n\,dx$, whose known values are prior art
+(Bailey, Borwein, Broadhurst and Glasser~\cite{bbbg2008}).
+
+\emph{Three linked densities.}  \textbf{[SYMBOLIC + MEASURED]} The chain
+integral $\langle\rho_a(1)\rho_b(2)\rho_c(3)/(r_{12}r_{13})\rangle$, three
+two-center $1s$ Slater densities joined by two Coulomb kernels at one
+electron, has a branch locus of six lines with no four concurrent, so the
+double cover is a K3 surface.  \textbf{[MEASURED + PRIOR ART]} Its
+holomorphic period reduces to the three-scale Bessel moment
+$\int_0^\infty K_0(at)K_0(bt)K_0(ct)\,dt$, whose closed form, a sum of
+two products of complete elliptic integrals, is Eq.~33 of
+Ref.~\cite{bbbg2008}, obtained there from an identity of
+Bailey~\cite{bailey1936}.  The reduction from a Slater chain to that
+moment is Paper~63's;\ the closed form is not.
+
+\emph{What is proved about trees, and for which.}  Four statements
+should be kept apart (all Paper~63~\cite{loutey_paper63}).
+
+(a) \emph{The dictionary.}  \textbf{[SYMBOLIC PROOF + PRIOR ART]} Every
+exponential-type orbital on a center is a polynomial differential
+operator in its exponent and its center coordinate, applied to the $1s$
+Yukawa function $e^{-\zeta s}/s$ on that center.  So every multi-density
+integral with Coulomb or Slater-geminal kernels is that operator applied
+to the $1s$ integral of the same density graph, and lies in the
+$D$-module that integral generates (the functions reached from it by differentiating in its parameters and
+multiplying by polynomial coefficients).  That alone does not bound the rung.
+
+(b) \emph{The bound for the holomorphic period.}  \textbf{[SYMBOLIC
+PROOF]} On the slice $(t;1,\dots,1)$ (one density's scale $t$ varies and
+every other scale is one) of a tree of $n$ linked $s$-type densities, the holomorphic period is a differential operator applied to
+$F_n$, so it sits at or below rung $n$;\ if $n\le8$ and the period is not
+identically zero, it sits on rung $n$.
+
+(c) \emph{The bound for the three-dimensional fibre.}  \textbf{[SYMBOLIC
+PROOF]} The real three-dimensional integral of every tree of radial
+densities reduces to one-dimensional integrals (for the Coulomb kernel
+this is Newton's shell theorem).  For a Coulomb tree at the weights
+$\rho_v(r)=a_v^3K_0(a_vr)/(2\pi^2)$, on the slice $(t;1,\dots,1)$, every
+composition factor of the fibre's minimal operator has order at most
+$n$, for every $n$;\ the same order bound holds for densities
+differentiated at most twice in their center (and to any degree in their
+scale).
+
+(d) \emph{Attainment.}  \textbf{[SYMBOLIC PROOF]} For a Coulomb tree of
+$n$ $s$-type densities at those weights, on the slice with $t$ on any one
+vertex and every other scale equal to one, with $3\le n\le8$, $F_n$ lies
+in the $D$-module of the fibre, so the minimal operator of the fibre has
+a composition factor equivalent to the operator of $F_n$.  This holds for
+every tree, not only for stars.  For $n\ge9$ the proof gives only that
+the two modules meet in a nonzero submodule.  \textbf{[SYMBOLIC PROOF]}
+The same holds, $3\le n\le8$, for densities that are homogeneous center
+derivatives of degree at most two with a nonzero angular integral.
+\textbf{[SYMBOLIC + MEASURED]} One step of the proof constructs an
+operator with a controlled leading coefficient;\ that operator was
+computed exactly for six rooted trees, modulo one prime for four more,
+and modulo two primes for nine larger ones up to $n=8$.  The checks of
+that step beyond $n=5$ are modulo primes, not exact.  For the
+homogeneous-derivative case only axial densities were computed, nothing
+with $\ell>0$ at $n\ge6$ in that step, and scale derivatives are not
+covered.  Separately, attainment is computed for the chain of three and
+for both trees of four, the star and the path, which sit on the rung of
+four and skip the K3 rung (minimality bounded by a search modulo a prime,
+not proved).
+
+\emph{The rung rule and its caveats.}  \textbf{[OBSERVATION]} Read as a
+Feynman graph, every instance fits one pattern:\ the class is set by the
+shape of the density graph and the masses on its lines, and along a tree
+it is set by the number of distinct two-center densities the kernels
+couple, not by the number of nuclei or electrons.  Paper~63 states this
+as a bounded conjecture with its falsifiers.  It is a pattern across the
+tested instances, not a derivation, and it carries four caveats.
+
+First, the rung names an operator, not a finite set of numbers.
+\textbf{[OBSERVATION, evidence]} At equal scales the three-electron
+fibre collapses to K3 periods and $\pi^3$, but at four generic scale
+triples integer-relation searches at 340 and 400 digits find no relation
+in five bases built from the K3 and elliptic periods, their derivatives
+and products, dilogarithms, trilogarithms and weight-three Tate numbers,
+while every basis recovers a planted relation (three of
+the twenty searches are void);\ on both one-parameter
+slices computed the fibre is a K3 function integrated once.  That is
+evidence that the generic fibre carries content beyond the K3 and
+elliptic periods, not a theorem.
+
+Second, rings are ordered by uniqueness, not by count.
+\textbf{[SYMBOLIC + MEASURED]} A Coulomb ring of three densities, the
+triangle $\langle\rho_a\rho_b\rho_c/(r_{12}r_{13}r_{23})\rangle$, does
+not climb:\ its loop integrates out exactly by the three-dimensional
+uniqueness (star-triangle) relation, and it sits on the elliptic rung,
+below the chain of three.  At one center it reproduces Remiddi's closed
+form~\cite{remiddi1991,ppr2004}, which carries a dilogarithm where the
+chain is rational.  The correlated triangle of explicitly correlated
+methods, with exponential geminals on two edges, does not drop:\ it sits
+with the chain on the K3 rung at $\gamma=1$, $3/2$ and $2$, the geminal
+acting as an imaginary external momentum.  A Gaussian geminal leaves the
+ladder for exponential periods.  Only the triangle was computed;\ the
+ring of four stopped for feasibility.
+
+Third, the rung is read on the fibre and its holomorphic period;\ the
+integrated value, over the separations and Feynman parameters, may sit
+lower, and in one class it does:\ the two-center exchange integral builds the elliptic fibre
+and closes at genus zero.
+
+Fourth, the statements above hold where they are proved:\ for $s$-type
+densities, on one-scale slices, with the weights named.  That every
+computed general-orbital fibre sits on its graph's $1s$ rung is observed,
+not proved.
+
+\emph{What this means for a molecule.}  \textbf{[OBSERVATION]}
+\gvc{p63-hamiltonian-elliptic-stype}{Every electron-repulsion integral
+couples exactly two densities, so over $s$-type orbitals the integrals of
+a molecular Hamiltonian stay on the elliptic rung however large the
+molecule (for $\ell>0$ this is not shown)}.  The class climbs only in
+correlated integrals that link more densities
+(Paper~63~\cite{loutey_paper63}).
+
+%% ========================================================================
+\section{Two centers in detail}
+\label{sec:two}
+%% ========================================================================
+
+The first door of the chemistry is the best understood, and most of it
+is classical.  Paper~58 evaluates all four classes of two-center
+electron-repulsion integral in closed form and records what each closed
+form contains~\cite{loutey_paper58}:
+
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+class & transcendental content \\
+\midrule
+one-center, $(AA|BB)$ & none:\ elementary \\
+$(AA|AB)$, $(AB|BB)$ & $\{E_1,\mathrm{Ei},\ln\}$;\ $\gamma$ at equal rates;\\
+ & none if the $AA$ pair is $s$-type \\
+$(AB|AB)$ & $\{E_1,\ln,\gamma\}$ per Neumann term \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent \textbf{[PRIOR ART]} The first and last rows are known:\ the
+two-center Coulomb integral over Slater orbitals reduces to elementary
+functions, and the exchange integral's closed form carries $E_1$, $\ln$
+and Euler's $\gamma$ (Lesiuk and
+Moszynski~\cite{lesiuk2014a,lesiuk2014b}, who attribute the general
+exchange form to Maslen and Trefry;\ for $1s$, Sugiura and
+Ruedenberg~\cite{sugiura1927,ruedenberg1951}).  Those references evaluate
+the hybrid class by one-dimensional quadrature;\ Paper~58 did not find
+its closed form stated.  No $\pi$ survives in any of them:\ it enters
+through the spherical normalizations and cancels against the $4\pi$ of
+the Coulomb kernel (Paper~18~\cite{loutey_paper18}).
+
+\emph{Weight.}  The exchange integral is computed as a series, the
+Neumann expansion.  Each term is an iterated integral over a simplex, the
+shape that would generically give weight two, and it does not:\
+assembled in closed form, and checked against quadrature, it contains
+only $\exp$, $E_1$, $\ln$ and $\gamma$, so the seed sets form a
+weight-one filtration for every Neumann term, and for the whole integral
+at equal exponents, where the series stops.  At unequal exponents the series does not stop,
+and the sum carries the two-center master integral $f_0$, which Pachucki
+obtained from a second-order differential equation in the internuclear
+distance~\cite{pachucki2009}.  \textbf{[SYMBOLIC PROOF]} For $0<a<b$,
+$f_0$ is a two-fold iterated integral with an explicit closed form;\ its
+dilogarithm constants cancel, because $f_0(0)=0$;\ and it is not a
+combination, with coefficients rational in $R$, of exponentials,
+logarithms and exponential integrals for any finite set of rates.  As
+functions of $R$, the exchange integrals whose order nine is proved
+below therefore have iterated-integral weight two, not one, for $0<a<b$.
+At $a=b$ the weight-two part degenerates to weight one, consistent with
+Sugiura's formula.
+
+\emph{Exact orders.}  \textbf{[SYMBOLIC]} Each class obeys a linear
+differential equation in $R$ with integer polynomial coefficients;\ the
+transcendentals live only in its solutions.  \textbf{[SYMBOLIC PROOF]}
+For an integral that contains only exponentials (the one-electron
+integrals and $(AA|BB)$), the order of the least operator is the number
+of distinct decay rates with a nonzero coefficient, at every choice of
+exponents.  For exchange the order is exactly $4$ at equal exponents and
+exactly $9$ for every $a\neq b$, proved for seven integrals:\ $1s$, four
+integrals with $p$ or $d$ orbitals and $\sigma=0$, and the two $m\neq0$
+integrals against $1s$.  The bound comes from differentiating Pachucki's
+equation at the exchange point (for the two $m\neq0$ integrals, from his
+masters weighted by powers of $r_{12}$), which places each integral in the span
+of nine explicit functions closed under $d/dR$;\ exactness comes from the
+independence of those nine functions and an exact determinant test.  For
+hybrids with a multipole $L\ge1$ on the same-center pair, that the order found is also the least is proved at every $Z_A,Z_B>0$
+for the nine hybrids of the panel with an $L\ge1$ pair and for
+$(2p_0 2p_0|1s\,1s_{\rm B})$:\ the order is $5$ away from the two
+coincidences of decay rates and $4$ at each, with no other exceptional
+ratio.  This rests on the independence of the atoms (a hand proof,
+reviewed once), on the counting of the order (a hand proof, reviewed
+once) and on the parametric closed forms, which agree with the evaluator
+at sample points in every region;\ for four of the ten integrals the
+analysis was reviewed (two of them also against an independent
+quadrature), while for the other six the same pipeline was run without a
+separate review.
+
+\emph{What the closed forms decide.}
+Because the direct Coulomb block is elementary, its entries are not
+merely counted but decided:\ all $195$ permitted entries of that block are proven nonzero by Lindemann--Weierstrass separation.
+\textbf{[SYMBOLIC + MEASURED]} And the
+potential curve of minimal-basis H$_2$ is a single closed-form expression
+in $\{\exp,E_1,\log,\gamma\}$.
+
+\emph{What is open at two centers.}  Whether $f_0$ has a dilogarithm or
+product form, and what holds for its values at a fixed $R$, is not
+decided.  The weight-two argument is given for $0<a<b$;\ the same
+argument on the real branch should cover $a>b$, but that is not checked.
+And Paper~58 states that its closed form for $f_0$ was not compared with
+the classical unequal-exponent literature beyond
+Refs.~\cite{pachucki2009,lesiuk2014b}, so no novelty is claimed for it.
+
+%% ========================================================================
+\section{Three centers, and water}
+\label{sec:three}
+%% ========================================================================
+
+Prolate spheroidal coordinates admit exactly two foci.  Paper~59
+evaluates the two-electron three-center integral $(XY|XZ)$ over $1s$
+orbitals in momentum space, where each center enters as a phase rather
+than a focus~\cite{loutey_paper59}.  There the two densities carry
+dispersion roots with different scales, and their product is the quartic
+\begin{equation}
+  y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1),
+  \label{eq:curve}
+\end{equation}
+an elliptic curve.  \textbf{[MEASURED / classical]} The radial content
+of the integral is a two-scale Bessel moment whose period at zero
+separation is a complete elliptic integral,
+\begin{equation}
+  \int_{0}^{\infty}\!\frac{dk}{\sqrt{(c_{1}k^{2}+1)(c_{2}k^{2}+1)}}
+  =\frac{K(m)}{\sqrt{c_{\max}}},\quad m=1-\frac{c_{\min}}{c_{\max}},
+  \label{eq:period}
+\end{equation}
+verified to 31 digits, degenerating to the elementary two-center case
+exactly on the diagonal $c_1=c_2$.  This is the case $n=2$ of
+Eq.~\eqref{eq:tree}.  \textbf{[SYMBOLIC + MEASURED]} The one-mass slice
+satisfies an explicit fourth-order Picard--Fuchs equation (the linear
+differential equation a family of periods obeys), and its
+connection is irreducible, so no closed form arises through
+factorization.  \textbf{[OPEN]} Paper~59 does not give a finite closed
+form, and shows that the natural route to one, the elliptic-dilogarithm
+mechanism of the unequal-mass sunrise~\cite{blochvanhove2015}, does not
+engage.  The message of that paper is a relocation, not a solution:\ the
+third center raises the radial core's class by one genus.
+
+\emph{The number theory of the radial core.}  Paper~61 develops
+it~\cite{loutey_paper61}.  \textbf{[MEASURED;\ classical]} The elliptic
+family is the Legendre family over the modular curve $X(2)$, and the
+parameter integral passes through complex-multiplication fibres where
+the periods are Chowla--Selberg
+$\Gamma$-values~\cite{chowla_selberg1967}.  \textbf{[SYMBOLIC +
+MEASURED]} The connection has four master periods, and its monodromy
+group lies in $\mathrm{Sp}_4(\mathbb{Z})$.  The paper's guarded searches
+are negative for a clean low-height closed form through weight three,
+and the class of the integrated value remains its open frontier.
+
+\emph{Water, and the bond angle.}  The wall is closed-form, not
+computational.  \textbf{[MEASURED]} On the water geometry, with Slater
+orbitals, seven three-center integrals of both types converge to about
+$10^{-9}$ by $L\approx12$ in the multipole series about the shared
+center (the Barnett--Coulson route~\cite{barnett_coulson1951}).  That
+series is the Legendre series of the integral in the cosine $x$ of the
+bond angle, so the decay of its terms locates the nearest singular point
+of the integral as a function of the angle (all
+Paper~59~\cite{loutey_paper59}):
+
+\begin{itemize}
+\item \textbf{[MEASURED]} At water's equal bond lengths the terms fall
+like $\ell^{-8}$, which puts the singular point where the two hydrogens
+would merge.  Bent water is an ordinary point.
+\item \textbf{[SYMBOLIC + MEASURED]} The singular term is derived.  Only
+the two hydrogen cusps, meeting through $1/r_{12}$, make the integral
+non-analytic in the angle, and the lowest such term is $C\,|Y-Z|^{7}$
+with $C=\zeta_{\rm H}^{5}\zeta_{\rm X}^{3}e^{-\zeta_{\rm
+X}(D_1+D_2)}/630$.  The two-electron term was found first by
+Matuzas~\cite{matuzas2026sc}, whose preprint Paper~59 found only after
+its own work.
+\item \textbf{[SYMBOLIC + MEASURED]} The bond-angle function obeys a
+linear differential equation in $x$.  For the one-electron three-center
+integral it has order $8$ with polynomial coefficients of degree $31$,
+and its only finite singular point with a non-integer exponent is the
+point $x^{*}$ where the two outer centers merge, with exponents $3/2$ and
+$5/2$.  For $(XY|XZ)$ every Legendre coefficient is a rational
+combination of 31 fixed constants, each an exponential times $1$, $E_1$
+or a logarithm, and the coefficients obey a recurrence in $\ell$ of order
+$41$ (one geometry, two primes);\ no differential operator was found
+within the size searched.  The constants are assumed linearly
+independent over $\mathbb{Q}$.  For
+the other three-center type, a one-center density against a two-center
+one, the fixed set has $21$ constants and the minimal operator found (not
+certified) has order $14$, with non-integer exponents $3/2$, $7/2$ and
+$9/2$ at $x^{*}$.
+\item \textbf{[MEASURED]} The integrated three-center value leaves the
+two-center class as a function of the bond angle:\ its bond-angle
+operator keeps a piece of order six with no first-order factor at two
+geometries, where a two-center-class form would factor completely
+(assuming its constants independent;\ the class of the value at one
+geometry is not decided).
+\end{itemize}
+
+\noindent These statements are for $1s$ functions at the geometries and
+exponents each record names.
+
+%% ========================================================================
+\section{What this is not}
+\label{sec:not}
+%% ========================================================================
+
+\emph{It is not faster chemistry.}  Knowing the class of an integral
+does not make a molecular energy more accurate.  Paper~59 says so of its
+own result:\ it does not by itself deliver a polyatomic energy, and what
+the reduction buys is an evaluator and a diagnosis of why the integral
+is hard~\cite{loutey_paper59}.  The series' qubit-resource comparisons
+(Paper~14) are at matched qubit counts, not matched
+accuracy~\cite{loutey_paper14}.
+The one matched-accuracy comparison is Paper~62's, on water with tuned exponential bases, and it depends on the Gaussian family:\
+\textbf{[MEASURED, pre-registered]}
+\gvc{p62-matched-accuracy-ceiling}{at matched accuracy the Gaussian cost
+depends on the family.  In the cc-pV family aug-cc-pVDZ at 41 functions
+stays $\gvq{p62_aug_above_dzp_mha}{8.0}\mHa$ short of the Slater DZP
+while already costing $\gvq{p62_aug_pauli_ratio}{9.2}\times$ the Pauli
+terms.  In the ANO family a 35-function truncation of ANO-R2 is
+$\gvq{p62_a35_below_dzp_mha}{6.2}\mHa$ below it, at
+$\gvq{p62_a35_pauli_ratio}{4.7}\times$ the Pauli terms.  The measured
+matched-accuracy cost is therefore at most $4.7\times$ the terms}
+(Paper~62~\cite{loutey_paper62}).  Hydrogen fluoride, a second molecule,
+repeats the cc-pV finding;\ the ANO family was not run there.  A ring of
+six hydrogens, with no core, does not, so
+\gvc{p62-hring-contrast}{the cc-pV matched-accuracy margin is a property of these two
+molecules, not of exponential functions}.  That paper adds that nothing in it is
+a lattice structure of the series:\ its bases are tuned exponential
+functions evaluated through Gaussian fits.  Paper~18 reads the elliptic
+curve of Sec.~\ref{sec:three} as the reason Gaussian orbitals, whose
+product theorem collapses three centers to one, displaced Slater orbitals
+for polyatomic quantum chemistry~\cite{loutey_paper18}.
+
+\emph{It is not a new foundation.}  The sphere is Fock's.  The
+equivalence between the label set with its Casimir and the
+Schr\"odinger problem is carried by his continuum projection, and
+Paper~7 audits that chain rather than replacing
+it~\cite{loutey_paper7}.  The words ``forced'' and ``price'' are
+catalogue vocabulary.  And the ladder itself is not new mathematics:\
+the operators on it are known (Sec.~\ref{sec:prior}).
+
+%% ========================================================================
+\section{Prior art, and what the series adds}
+\label{sec:prior}
+%% ========================================================================
+
+\emph{The sphere and the rule.}  Fock's projection~\cite{fock1935};\
+the Peter--Weyl theorem~\cite{peter_weyl1927};\ the compactness reading
+of Liu and Noui~\cite{liu_noui2017} and of
+Rovelli~\cite{rovelli1996};\ the failure of its converse, Maz'ya and
+Shubin~\cite{mazya_shubin2005};\ periods as a class of numbers,
+Kontsevich and Zagier~\cite{kontsevich_zagier2001}.
+
+\emph{Two centers.}  Sugiura's $1s$ exchange
+integral~\cite{sugiura1927};\ Roothaan's and Ruedenberg's two-center
+integrals~\cite{roothaan1951,ruedenberg1951};\ the general exchange
+form, attributed by Lesiuk and Moszynski to Maslen and Trefry, and
+Lesiuk and Moszynski's own treatment of the Coulomb, hybrid and exchange
+classes~\cite{lesiuk2014a,lesiuk2014b};\ Pachucki's differential
+equation for the two-center master integral~\cite{pachucki2009}.
+
+\emph{Three centers.}  Shibuya and Wulfman's momentum-space molecular
+orbitals~\cite{shibuya1965};\ the Barnett--Coulson
+expansion~\cite{barnett_coulson1951};\ the Averys' momentum-space
+Coulomb--Sturmian program, which treats exactly these integrals under
+the same Fock projection and reaches them through an infinite series in
+a one-center basis~\cite{avery_avery_book2018,avery2013};\ the elliptic
+dilogarithm of the sunset graph, Bloch and
+Vanhove~\cite{blochvanhove2015}, and the sunrise as a higher normal
+function, Bloch, Kerr and Vanhove~\cite{blochkerrvanhove2015};\ the
+bond-angle cusp term, Matuzas~\cite{matuzas2026sc}.
+
+\emph{The ladder.}  The two-scale and three-scale Bessel moments and
+their elliptic evaluations, Bailey, Borwein, Broadhurst and
+Glasser~\cite{bbbg2008}, on an identity of Bailey~\cite{bailey1936};\
+random-walk moments and Calabi--Yau equations,
+Broadhurst~\cite{broadhurst2009walks};\ the Hadamard construction and
+the Calabi--Yau tables, Almkvist and Zudilin and their
+coauthors~\cite{almkvist_zudilin2007,aesz2005};\ the operators of the
+equal-mass two-dimensional banana integral,
+Vanhove~\cite{vanhove2014};\ the Calabi--Yau $(l-1)$-fold of
+the $l$-loop banana, B\"onisch, Fischbach, Klemm, Nega and
+Safari~\cite{bonisch2021};\ the Kloosterman motives behind the Ising
+class, Fres\'an, Sabbah and Yu~\cite{fresansabbahyu2023};\ the atomic
+three-electron integral, Remiddi~\cite{remiddi1991}.
+The nearest theorem in shape to the rung rule is Brown's:\ for massless
+primitive $\phi^4$ graphs in four dimensions the set of periods is minor
+monotone~\cite{brown2009periods}, with an extension to generic masses in
+even dimension that is a conjecture with an affine form
+proved~\cite{brown2015coaction}.  The lines here carry special masses in
+three dimensions, outside both hypotheses.  Matuzas~\cite{matuzas2026} relates one channel of a different
+four-electron correlation integral, a ring of Coulomb links with one
+diagonal over Slater functions, to another Calabi--Yau operator,
+AESZ-330, by an inhomogeneous equation.
+
+\emph{What the series adds,} as its papers state it:
+\begin{itemize}
+\item the accounting:\ each released axis carries a named number class
+(Paper~18), kept as one register with a test behind each row;
+\item at two centers:\ the use of the closed-form classes to decide
+which integrals vanish;\ the least operator in $R$ of each class, with its order
+proved (exactly $9$ and exactly $4$ for exchange) and its singular points
+read, for $1s$ orbitals plus the $l\le2$ panel;\ and the proof that the
+seven exchange integrals whose order $9$ is proved have weight two as
+functions of $R$ for $0<a<b$ (Paper~58;\ novelty against the classical
+literature is not claimed for the last);
+\item at three centers:\ the reading of the radial core as an elliptic
+Bessel moment, a connection a targeted literature search found unmade in
+either field \textbf{[OBSERVATION]};\ the fixed constant sets of the
+bond-angle series, and its differential equations, which were not found
+in a literature search (Paper~59);
+\item on the ladder:\ the route from molecular integrals to the known
+operators, the tree identity~\eqref{eq:tree}, the dictionary that places every orbital's integral in the $D$-module of
+its graph's $1s$ integral, the readings of the ring, the geminal and the
+Gaussian, and the fact that most rungs were registered in committed
+records before they were computed (Paper~63).  Paper~63 also proves that
+trees of up to eight $s$-type densities reach their rung, on the slices
+and at the weights of Sec.~\ref{sec:climb}.  That no source places a molecular integral on
+these operators is an absence from a targeted search, not a proof of
+absence.
+\end{itemize}
+
+%% ========================================================================
+\section{Open questions}
+\label{sec:open}
+%% ========================================================================
+
+These are handed over as the owning papers leave them.
+
+\begin{enumerate}
+\item \emph{Trees with other densities.}  Whether the three-dimensional
+fibre reaches rung $n$ for trees whose densities are non-homogeneous
+center derivatives, scale derivatives, or have a vanishing angular
+integral.  Paper~63 states the first as a conjecture and gives a local
+argument for it, not a proof.
+\item \emph{Nine or more densities.}  For $n\ge9$ the attainment proof
+gives only a nonzero common submodule, because the irreducibility of the
+operator of $F_n$ is established for $n\le8$.
+\item \emph{The ring of four.}  Among rings only the triangle was
+computed.  Whether each Coulomb loop that integrates out by uniqueness
+lowers the rung by one density, as the conjecture says, has one instance
+behind it.
+\item \emph{The two-center master integral.}  Its weight for $a>b$;\
+whether it has a dilogarithm or product form;\ the class of its values
+at a fixed $R$ (Paper~58).
+\item \emph{The generic three-electron fibre.}  Whether a principled
+widening of the basis finds a relation where the present searches find
+none.  A relation would show that the fibre sits in a finite ring of
+periods after all;\ Paper~63 names this as the case that tests its
+conjecture.
+\item \emph{The first rung's integrated value.}  A finite closed form
+for the three-center integral, or a proof that none exists in a named
+class (Papers~59 and~61).
+\item \emph{The high-field Zeeman class.}  The number class of a
+hydrogen eigenvalue at finite magnetic field (atlas, door 29).
+\item \emph{A proof of the rule.}  Paper~63 expects that a proof would
+run through the Symanzik polynomials of the density graph with the
+Yukawa masses on its lines, and has not attempted it.
+\end{enumerate}
+
+%% ========================================================================
+\section{How to check any of this}
+\label{sec:check}
+%% ========================================================================
+
+Most claims above have a test in the repository's \texttt{tests/}
+directory, and \texttt{docs/claims\_register.md} lists the headline
+claims with their tiers;\ the three-electron equal-scale collapse and
+generic null are carried by prediction records in
+\texttt{docs/predictions/}, not tests.  The skeleton and its wall:\
+\texttt{test\_fock\_projection.py}, \texttt{test\_fock\_laplacian.py},
+\texttt{test\_paper7\_label\_set.py},
+\texttt{test\_graph\_s3\_nonconvergence.py}.  Two centers:\
+\texttt{test\_paper58\_abelian\_residue.py},
+\texttt{test\_paper58\_exact\_order.py},
+\texttt{test\_paper58\_minimal\_order.py},
+\texttt{test\_paper58\_master\_weight.py},
+\texttt{test\_paper58\_exchange\_reverse.py},
+\texttt{test\_paper58\_hybrid\_every\_ratio.py}.  Three centers:\
+\texttt{test\_routeC\_momentum.py},
+\texttt{test\_paper59\_water\_bond\_angle.py},
+\texttt{test\_paper59\_aa\_bc\_minimal\_operator.py}.  The ladder:\
+\texttt{test\_paper63\_dictionary.py},
+\texttt{test\_paper63\_tree\_bound.py},
+\texttt{test\_paper63\_tree\_reduction.py},
+\texttt{test\_paper63\_tree\_rung.py},
+\texttt{test\_paper63\_four\_density\_rung.py},
+\texttt{test\_paper63\_three\_electron\_k3.py},
+\texttt{test\_paper63\_four\_centre\_genus.py},
+\texttt{test\_paper63\_tree\_attainment.py},
+\texttt{test\_paper63\_tree\_attainment\_big.py},
+\texttt{test\_paper63\_tree\_attainment\_l.py},
+\texttt{test\_paper63\_density\_ring.py},
+\texttt{test\_paper63\_gy\_gaussian.py}.  The doors:\
+\texttt{test\_atlas\_register.py},
+\texttt{test\_atlas\_gap\_doors.py},
+\texttt{test\_renner\_teller\_m\_splitting.py},
+\texttt{test\_paper62\_hydrogen\_torus.py},
+\texttt{test\_paper62\_squashed\_ring.py}.  The matched-accuracy
+comparison:\ \texttt{test\_paper62\_matched\_accuracy.py},
+\texttt{test\_paper62\_ano\_matched\_accuracy.py}.  The predictions that
+were written down before their computations are in
+\texttt{docs/predictions/}, each with its outcome, including the ones
+that missed.
+
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper0}
+J.~Loutey, ``Counting Angular Momentum Labels by Isotropic Packing,''
+GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey, ``The Dimensionless Vacuum:\ Recovering the Schr\"odinger
+Equation on a Scale-Invariant Label Lattice,'' GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper14}
+J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Natural-Geometry
+Hydrogenic Bases,'' GeoVac Paper~14 (2026).
+
+\bibitem{loutey_paper18}
+J.~Loutey, ``Spectral-Geometric Exchange Constants:\ Projecting Discrete
+Spectra onto Continuous Manifolds,'' GeoVac Paper~18 (2026).
+
+\bibitem{loutey_paper28}
+J.~Loutey, ``Periods of Dirac Spectral Sums on $S^3$,'' GeoVac Paper~28
+(2026).
+
+\bibitem{loutey_paper32}
+J.~Loutey, ``The GeoVac Spectral Triple:\ A Synthesis Paper Locking the
+Framework into the Marcolli--van~Suijlekom Gauge-Network Lineage,''
+GeoVac Paper~32 (2026).
+
+\bibitem{loutey_paper34}
+J.~Loutey, ``GeoVac as a Two-Layer Framework:\ Projection Taxonomy and
+the Empirical Matches Catalog,'' GeoVac Paper~34 (2026).
+
+\bibitem{loutey_paper55}
+J.~Loutey, ``Periods of GeoVac:\ a cyclotomic mixed-Tate census of the
+master Mellin engine,'' GeoVac Paper~55 (2026).
+
+\bibitem{loutey_paper58}
+J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property:\ The Abelian
+Residue of Multi-Center Bonding,'' GeoVac Paper~58 (2026).
+
+\bibitem{loutey_paper59}
+J.~Loutey, ``The Three-Center Electron-Repulsion Integral Is an Elliptic
+Bessel Moment:\ A Genus-One Radial Core at the Third Center in
+Momentum-Space Slater Theory,'' GeoVac Paper~59 (2026).
+
+\bibitem{loutey_paper61}
+J.~Loutey, ``The Bessel-Moment Period Algebra of the Three-Center Coulomb
+Integral:\ Modular Structure and Cosmic-Galois Placement,'' GeoVac
+Paper~61 (2026).
+
+\bibitem{loutey_paper62}
+J.~Loutey, ``Water at Twenty-Four Functions:\ Slater-Type Bases Set on
+the Free Atom Against cc-pVDZ, With the Qubit Cost,'' GeoVac Paper~62
+(2026).
+
+\bibitem{loutey_paper63}
+J.~Loutey, ``Linked Electron Densities Climb the Banana Ladder:\ Period
+Classes of Molecular Integrals over Exponential-Type Orbitals,'' GeoVac
+Paper~63 (2026).
+
+\bibitem{fock1935}
+V.~Fock, ``Zur Theorie des Wasserstoffatoms,''
+\textit{Z.\ Phys.}\ \textbf{98}, 145--154 (1935).
+
+\bibitem{peter_weyl1927}
+F.~Peter and H.~Weyl,
+``Die Vollst\"andigkeit der primitiven Darstellungen einer
+geschlossenen kontinuierlichen Gruppe,''
+\textit{Math.\ Ann.}\ \textbf{97}, 737--755 (1927).
+
+\bibitem{liu_noui2017}
+C.~Liu and K.~Noui, ``Gravity as an $SU(1,1)$ gauge theory in four
+dimensions,'' \textit{Class.\ Quantum Grav.}\ \textbf{34}, 135008 (2017),
+arXiv:1702.06793.
+
+\bibitem{rovelli1996}
+C.~Rovelli, ``Relational quantum mechanics,''
+\textit{Int.\ J.\ Theor.\ Phys.}\ \textbf{35}, 1637--1678 (1996),
+arXiv:quant-ph/9609002.
+
+\bibitem{mazya_shubin2005}
+V.~Maz'ya and M.~Shubin, ``Discreteness of spectrum and positivity criteria
+for Schr\"odinger operators,''
+\textit{Ann.\ of Math.}\ \textbf{162}, 919--942 (2005).
+
+\bibitem{kontsevich_zagier2001}
+M.~Kontsevich and D.~Zagier, ``Periods,'' in \textit{Mathematics
+Unlimited --- 2001 and Beyond}, B.~Engquist and W.~Schmid, eds.,
+Springer (2001), pp.~771--808.
+
+\bibitem{renner1934}
+R.~Renner, ``Zur Theorie der Wechselwirkung zwischen Elektronen- und
+Kernbewegung bei dreiatomigen, stabf\"ormigen Molek\"ulen,''
+\textit{Z.~Phys.}\ \textbf{92}, 172--193 (1934).
+
+\bibitem{encinosa2022}
+M.~Encinosa and J.~Williamson, ``Electron gases in toroidal shells: mode
+coupling and state functions,'' Physica E \textbf{146}, 115558 (2023),
+doi:10.1016/j.physe.2022.115558; arXiv:2207.01745.
+
+\bibitem{sugiura1927}
+Y.~Sugiura, ``\"Uber die Eigenschaften des Wasserstoffmolek\"uls im
+Grundzustande,'' Z.~Phys.\ \textbf{45}, 484--492 (1927).
+
+\bibitem{roothaan1951}
+C.~C.~J.~Roothaan, ``A study of two-center integrals useful in
+calculations on molecular structure.\ I,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1445--1458 (1951).
+
+\bibitem{ruedenberg1951}
+K.~Ruedenberg, ``A study of two-center integrals useful in calculations
+on molecular structure.\ II.\ The two-center exchange integrals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1459--1477 (1951).
+
+\bibitem{pachucki2009}
+K.~Pachucki, ``Two-center two-electron integrals with exponential functions,''
+\textit{Phys.\ Rev.\ A}\ \textbf{80}, 032520 (2009).
+
+\bibitem{lesiuk2014a}
+M.~Lesiuk and R.~Moszynski, ``Calculation of two-centre two-electron integrals
+over Slater-type orbitals revisited.\ I.\ Coulomb and hybrid integrals,''
+\textit{Phys.\ Rev.\ E} \textbf{90}, 063318 (2014), arXiv:1410.6112.
+
+\bibitem{lesiuk2014b}
+M.~Lesiuk and R.~Moszynski, ``Calculation of two-centre two-electron integrals
+over Slater-type orbitals revisited.\ II.\ Neumann expansion of the exchange
+integrals,'' \textit{Phys.\ Rev.\ E} \textbf{90}, 063319 (2014), arXiv:1410.6113.
+
+\bibitem{shibuya1965}
+T.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum space,''
+\textit{Proc.\ R.\ Soc.\ Lond.\ A}\ \textbf{286}, 376 (1965).
+
+\bibitem{barnett_coulson1951}
+M.~P.~Barnett and C.~A.~Coulson, ``The evaluation of integrals occurring
+in the theory of molecular structure.\ Parts I \& II,''
+\textit{Philos.\ Trans.\ R.\ Soc.\ Lond.\ A}\ \textbf{243}, 221--249 (1951).
+
+\bibitem{avery_avery_book2018}
+J.~E.~Avery and J.~S.~Avery, \textit{Hyperspherical Harmonics and Their
+Physical Applications} (World Scientific, Singapore, 2018).
+
+\bibitem{avery2013}
+J.~E.~Avery, ``Fast electron repulsion integrals for molecular Coulomb
+Sturmians,'' \textit{Adv.\ Quantum Chem.}\ \textbf{67}, 129--151 (2013).
+
+\bibitem{matuzas2026sc}
+J.~Matuzas, ``Single-centre expansions of three-centre 1s Slater integrals:\ convergence rates
+and certified error bounds,'' Zenodo preprint, doi:10.5281/zenodo.23448184 (2026).
+
+\bibitem{chowla_selberg1967}
+A.~Selberg and S.~Chowla, ``On Epstein's zeta-function,''
+\textit{J.\ Reine Angew.\ Math.}\ \textbf{227}, 86 (1967).
+
+\bibitem{blochvanhove2015}
+S.~Bloch and P.~Vanhove, ``The elliptic dilogarithm for the sunset graph,''
+\textit{J.\ Number Theory}\ \textbf{148}, 328--364 (2015); arXiv:1309.5865.
+
+\bibitem{blochkerrvanhove2015}
+S.~Bloch, M.~Kerr, and P.~Vanhove, ``A Feynman integral via higher normal
+functions,'' \textit{Compos.\ Math.}\ \textbf{151}, 2329--2375 (2015);
+arXiv:1406.2664.
+
+\bibitem{bbbg2008}
+D.~H.~Bailey, J.~M.~Borwein, D.~Broadhurst, and M.~L.~Glasser, ``Elliptic
+integral evaluations of Bessel moments and applications,''
+\textit{J.\ Phys.\ A}\ \textbf{41}, 205203 (2008); arXiv:0801.0891.
+
+\bibitem{bailey1936}
+W.~N.~Bailey, ``Some infinite integrals involving Bessel functions (II),''
+J.\ London Math.\ Soc.\ \textbf{11}, 16--20 (1936).
+
+\bibitem{broadhurst2009walks}
+D.~Broadhurst, ``Bessel moments, random walks and Calabi--Yau equations,''
+preprint (2009).
+
+\bibitem{aesz2005}
+G.~Almkvist, C.~van Enckevort, D.~van Straten, and W.~Zudilin, ``Tables of
+Calabi--Yau equations,'' arXiv:math/0507430 (2005).
+
+\bibitem{almkvist_zudilin2007}
+G.~Almkvist and W.~Zudilin, ``Differential equations, mirror maps and zeta
+values,'' in \textit{Mirror Symmetry V}, AMS/IP Studies in Advanced
+Mathematics \textbf{38}, 481--515 (2007); arXiv:math/0402386.
+
+\bibitem{vanhove2014}
+P.~Vanhove, ``The physics and the mixed Hodge structure of Feynman
+integrals,'' arXiv:1401.6438 (2014).
+
+\bibitem{bonisch2021}
+K.~B\"onisch, F.~Fischbach, A.~Klemm, C.~Nega, and R.~Safari, ``Analytic
+structure of all loop banana integrals,'' \textit{J.\ High Energy Phys.}\
+\textbf{05}, 066 (2021); arXiv:2008.10574.
+
+\bibitem{fresansabbahyu2023}
+J.~Fres\'an, C.~Sabbah, and J.-D.~Yu, ``Quadratic relations between Bessel
+moments,'' \textit{Algebra Number Theory}\ \textbf{17}, 541--602 (2023);
+arXiv:2006.02702.
+
+\bibitem{brown2009periods}
+F.~C.~S.~Brown, ``On the periods of some Feynman integrals,'' arXiv:0910.0114 (2009).
+
+\bibitem{brown2015coaction}
+F.~Brown, ``Feynman amplitudes, coaction principle, and cosmic Galois
+group,'' arXiv:1512.06409 (2015).
+
+\bibitem{remiddi1991}
+E.~Remiddi, ``Analytic value of the atomic three-electron correlation
+integral with Slater wave functions,'' \textit{Phys.\ Rev.\ A}\ \textbf{44},
+5492 (1991).
+
+\bibitem{ppr2004}
+K.~Pachucki, M.~Puchalski and E.~Remiddi, ``Recursion relations for
+Hylleraas three-electron integral,'' \textit{Phys.\ Rev.\ A} \textbf{70},
+032502 (2004);\ arXiv:physics/0405057.
+
+\bibitem{matuzas2026}
+J.~Matuzas, ``A Calabi--Yau period in a four-electron correlation integral:
+modular physical fibre and a hypergeometric endpoint,'' Zenodo,
+doi:10.5281/zenodo.23218203 (2026).
+
+\end{thebibliography}
+
+\end{document}

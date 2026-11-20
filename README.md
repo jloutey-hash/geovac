@@ -14,7 +14,7 @@ Two things this is not. It is not a new foundation for quantum mechanics: the sp
 |:--|:--|:--|
 | new to all of this | [`papers/synthesis/geovac_field_guide.pdf`](papers/synthesis/geovac_field_guide.pdf), the project as a story | [`papers/INDEX.md`](papers/INDEX.md), the status of every paper |
 | a quantum chemist (Slater and Sturmian integrals) | Paper 58: exact two-centre integrals, how complex each one is | Papers 59 and 12; certified high-precision values in [`docs/certified_reference_values.md`](docs/certified_reference_values.md) |
-| working on periods or Feynman integrals | Paper 63: molecular integrals on the banana and Calabi–Yau ladder | Papers 59 and 61; [`docs/atlas.md`](docs/atlas.md); Papers 55 and 28 for the sphere's own zeta values |
+| working on periods or Feynman integrals | [`papers/synthesis/period_ladder.pdf`](papers/synthesis/period_ladder.pdf), nine pages: the integrals of quantum chemistry sorted by the kind of number they make | Paper 63 (the ladder itself); Papers 59 and 61; [`docs/atlas.md`](docs/atlas.md); Papers 55 and 28 for the sphere's own zeta values |
 | after qubit Hamiltonians | *Qubit Hamiltonians* below, and the [downloads page](https://jloutey-hash.github.io/geovac/downloads/index.html) (FCIDUMP and Pauli lists) | Papers 14, 20 and 62; the [resource dashboard](https://jloutey-hash.github.io/geovac/) |
 | working in noncommutative geometry | [`docs/outreach/note_n1_su2_truncations.pdf`](docs/outreach/note_n1_su2_truncations.pdf), four pages | Papers 38, 45 and 32 |
 

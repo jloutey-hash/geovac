@@ -52,6 +52,11 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 | `geovac_field_guide.tex` | **KEYSTONE** | The "what is GeoVac" document — packing puzzle → spectral triple → periods → forced/free seam |
 | `group1_operator_algebras_synthesis.tex` | ACTIVE | Narrative of the math.OA arc (Papers 29–49) |
 | `group3_foundations_synthesis.tex` | ACTIVE | Narrative of the foundations arc (Papers 0–31) |
+| `group2_quantum_chemistry_synthesis.tex` | ACTIVE | Narrative of the chemistry arc (natural geometries; Papers 58–60, 62) |
+| `group4_quantum_computing_synthesis.tex` | ACTIVE | Digest of the qubit-Hamiltonian resource results |
+| `group5_qed_gauge_synthesis.tex` | ACTIVE | Digest of the gauge / QED papers |
+| `group6_precision_observations_synthesis.tex` | ACTIVE | Digest of the projection taxonomy and precision papers |
+| `period_ladder.tex` | ACTIVE | The door for periods and Feynman-integral readers: molecular integrals sorted by the class of number they produce, from the hydrogen sphere to the banana integrals; restates Papers 7, 18, 58, 59, 61, 62, 63 and the atlas, no claims of its own |
 
 ## Group 3 — Foundations (`group3_foundations/`)
 
