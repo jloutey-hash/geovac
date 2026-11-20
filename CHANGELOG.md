@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.8.0] - 2026-11-20
+
+**One-pager retired; the QA gate's front-door list changes (MINOR bump by the standing rule, PI-approved).**
+
+### Changed
+- `docs/geovac_onepager.md` moved to `docs/archive/` (it duplicated the positioning page). Nothing is deleted.
+- `/qa` C25 front door (`debug/qa/claim_registry.py` `FRONT_DOOR`): the one-pager leaves, the plain-language
+  story `docs/geovac_story.md` joins (it is the first link for newcomers on README). C25 passes on it. The skill
+  file and `docs/qa/criteria.md` (change log, C25 description) carry the new list. This is why the second
+  version number moves: a PASS from this version on reads a different set of front-door files.
+- C16 and the headline-number check: the retired path removed from 123 + 1 scope lists (it was skipped once
+  the file was gone; removed so the lists name only live files).
+- `docs/visualization_plan.md`: the "for tone" pointer now names the story.
+
+### debug/ sweep
+- `debug/archive_sweep_2026_11_20.py`: 29 top-level files to `debug/archive/` (manifest
+  `debug/archive/sweep_manifest_2026_11_20.json`). The first pass moved 105; 76 of them are named by
+  `docs/predictions/` records or `docs/claim_test_matrix.md`, which the earlier reference set never read, so
+  they were moved back and the script now reads those files.
+- The 600-file budget is not met (658 after the sweep). What remains is recent or named by a permanent record;
+  meeting the budget needs a decision (raise it, or give record drivers their own folder and re-point the
+  records), not another cutoff.
+
+### Notes
+- Gates after the change: C16, C21, C25 (+ selftest), headline numbers, C14, atlas register: see commit.
+
 ## [v6.7.46] - 2026-11-20
 
 **Plain-language front door (PI-approved draft).**

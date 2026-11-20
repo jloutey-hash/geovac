@@ -898,6 +898,9 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-11-20 — **C25 front door: one-pager out, plain-language story in** (v6.8.0, MINOR,
+  PI-approved): `docs/geovac_onepager.md` retired to `docs/archive/`;
+  `docs/geovac_story.md` joins the front door. CHANGELOG v6.8.0.
 - 2026-11-02 — **C25 front door widened; Passes A and B complete** (v6.1.0, MINOR):
   `docs/atlas.md`, `docs/geovac_positioning.md`, `docs/geovac_onepager.md` join the front
   door; line-wrap handling in `--mentions` and in annotated spans. CHANGELOG v6.1.0.
@@ -1293,7 +1296,8 @@ What it FAILs on:
 2. **Front door** -- any line of a file in the registry's `FRONT_DOOR` list
    (`papers/INDEX.md`, `docs/claims_register.md`, `README.md`,
    `docs/forced_free_seam.md`; since 2026-11-02 also `docs/atlas.md`,
-   `docs/geovac_positioning.md`, `docs/geovac_onepager.md`)
+   `docs/geovac_positioning.md`; since 2026-11-20 `docs/geovac_story.md`, which
+   replaced the retired `docs/geovac_onepager.md`)
    that mentions a claim without its qualifier, or with its overclaim
    (negated mentions and `old→new` transition records are exempt).
 3. **Annotated loci** -- `\gvc{<id>}{<text>}` (LaTeX; renders `<text>`, like

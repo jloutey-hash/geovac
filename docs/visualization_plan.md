@@ -216,7 +216,7 @@ tests/test_viz_export.py
 ## 8. Kickoff checklist for the executing PM session
 
 Read, in order: this file → CLAUDE.md §1.5 + §9 (already loaded) →
-`docs/vocabulary_translation.md` → `docs/claims_register.md` → `docs/geovac_onepager.md`
+`docs/vocabulary_translation.md` → `docs/claims_register.md` → `docs/geovac_story.md`
 (for tone) → module sources for the phase at hand (`geovac/lattice.py`,
 `geovac/ecosystem_export.py`, `geovac/measurement_grouping.py`, `geovac/z2_tapering.py`;
 Phase 2+: `geovac/hopf_bundle.py`; Phase 3: `geovac/atomic_classifier.py`,

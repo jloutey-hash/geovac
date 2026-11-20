@@ -70,7 +70,9 @@ FRONT_DOOR = [
     # page still carried the retired "18 symbolic proofs".
     "docs/atlas.md",
     "docs/geovac_positioning.md",
-    "docs/geovac_onepager.md",
+    # 2026-11-20 (MINOR bump v6.8.0, PI-approved): the one-pager is retired to docs/archive/ (it duplicated
+    # the positioning page); the plain-language story, linked first from README, takes its place.
+    "docs/geovac_story.md",
 ]
 
 P32 = "papers/group1_operator_algebras/paper_32_spectral_triple.tex"

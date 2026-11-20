@@ -634,10 +634,9 @@ REGISTRY = [
             # page -- carried O(Q^2.5) / 11.10xQ / 51x-1,712x / 334 live at five loci
             # because it was never in this family's scope.
             "README.md",
-            # Added 2026-10-02 (DELTA #25 self-check #14): the outreach one-pager
-            # headlined 51x-1,712x in its title, and the field guide summarises
-            # the library -- neither was in scope.
-            "docs/geovac_onepager.md",
+            # Added 2026-10-02 (DELTA #25 self-check #14): the field guide summarises
+            # the library and was not in scope. (The outreach one-pager, added with it,
+            # was retired to docs/archive/ on 2026-11-20.)
             "papers/synthesis/geovac_field_guide.tex",
         ],
     },
