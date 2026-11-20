@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.7.44] - 2026-11-19
+
+**New front page (PI-approved draft).**
+
+### Changed
+- `README.md`: new title and opening on the PI-chosen headline ("the price list of leaving a compact world"), a
+  "Where to start" table routing five kinds of reader (newcomer, quantum chemist, periods / Feynman integrals,
+  qubit Hamiltonians, noncommutative geometry), replacing three competing reading lists. Links added to the atlas,
+  the certified reference values, the Hamiltonian downloads and the dashboard, none of which the README reached.
+  Paper table gains Papers 58-63. Every existing section is kept verbatim below the new top, Hamiltonians first.
+- The draft's sentence "at matched accuracy, standard methods do as well or better" was wrong against Paper 62 and
+  was caught by the C25 front-door check before commit. It now carries Paper 62's wording: the composed builder is
+  compared at matched qubits; the one matched-accuracy comparison finds a Gaussian basis costs at most 4.7 times the
+  Pauli terms, depending on the Gaussian family.
+
 ## [v6.7.43] - 2026-11-19
 
 **Front-door audit: corrections and archiving (PI-directed).** A read-only audit found about 30 entry points giving

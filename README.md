@@ -1,6 +1,30 @@
-# GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
+# GeoVac: the price list of leaving a compact world
 
 ![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-6.7.25-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.18738360-blue)](https://doi.org/10.5281/zenodo.18738360)
+
+Inside the hydrogen atom there is a sphere. Fock showed in 1935 that the atom's bound states are the harmonics of a three-dimensional sphere, and on that sphere everything is counted in whole numbers and fractions: the labels (n, l, m), how many states share an energy, which transitions are allowed. GeoVac starts from that exact, compact picture and asks one question of everything it studies: **when you leave it, what does it cost?**
+
+Each way of leaving has a price, and the price is a kind of number. Measuring the sphere costs π. Adding a second nucleus costs logarithms. A third costs elliptic integrals, and there the geometry stops climbing. Linking more electrons together keeps climbing, onto the same K3 and Calabi–Yau integrals that particle physicists meet in Feynman diagrams. The project's record of these prices is [`docs/atlas.md`](docs/atlas.md): one row per way out, with what breaks, what survives and what it costs.
+
+Two things this is not. It is not a new foundation for quantum mechanics: the sphere and the Schrödinger equation are two descriptions of the same mathematics. And it is not a replacement for production quantum chemistry: its own Hamiltonian builder is a fast, cheap estimator, compared with Gaussian bases at matched qubit counts, not at matched accuracy. The one matched-accuracy comparison (Paper 62: water, with a tuned Slater basis) finds that a Gaussian basis reaching the same accuracy costs at most 4.7 times the Pauli terms, and how much depends on the Gaussian family. No result here is externally peer-reviewed; every headline claim, with its evidence and what would refute it, is in [`docs/claims_register.md`](docs/claims_register.md).
+
+## Where to start
+
+| If you are | Start here | Then |
+|:--|:--|:--|
+| new to all of this | [`papers/synthesis/geovac_field_guide.pdf`](papers/synthesis/geovac_field_guide.pdf), the project as a story | [`papers/INDEX.md`](papers/INDEX.md), the status of every paper |
+| a quantum chemist (Slater and Sturmian integrals) | Paper 58: exact two-centre integrals, how complex each one is | Papers 59 and 12; certified high-precision values in [`docs/certified_reference_values.md`](docs/certified_reference_values.md) |
+| working on periods or Feynman integrals | Paper 63: molecular integrals on the banana and Calabi–Yau ladder | Papers 59 and 61; [`docs/atlas.md`](docs/atlas.md); Papers 55 and 28 for the sphere's own zeta values |
+| after qubit Hamiltonians | *Qubit Hamiltonians* below, and the [downloads page](https://jloutey-hash.github.io/geovac/downloads/index.html) (FCIDUMP and Pauli lists) | Papers 14, 20 and 62; the [resource dashboard](https://jloutey-hash.github.io/geovac/) |
+| working in noncommutative geometry | [`docs/outreach/note_n1_su2_truncations.pdf`](docs/outreach/note_n1_su2_truncations.pdf), four pages | Papers 38, 45 and 32 |
+
+> **Coming from Avery & Avery, *Hyperspherical Harmonics and Their Physical Applications* (World Scientific 2017)?** [`docs/outreach/avery_hyperspherical_map.pdf`](docs/outreach/avery_hyperspherical_map.pdf) maps what GeoVac builds on in that book, chapter by chapter: from the S³ label set through Fock's projection to generalized Sturmians, the Shibuya–Wulfman metric, and the quantum encoding of the isoenergetic secular equation.
+
+The repository keeps its negative results and closed dead ends on purpose: [`docs/failed_approaches_ledger.md`](docs/failed_approaches_ledger.md) is part of the record.
+
+---
+
+## Qubit Hamiltonians
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -14,10 +38,6 @@ op_pl = h.to_pennylane()     # qml.Hamiltonian
 
 Install the standalone Hamiltonian package (not on PyPI; installs from this repo):
 `pip install "geovac-hamiltonians @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"`
-
-> **New here? Five documents, in order:** (1) [`papers/synthesis/geovac_field_guide.tex`](papers/synthesis/geovac_field_guide.tex) — what this project is, as a story; (2) [`docs/claims_register.md`](docs/claims_register.md) — every headline claim with its verification tier and falsifier; (3) [`papers/INDEX.md`](papers/INDEX.md) — status map of all ~60 papers (keystone / active / observation / descoped / historical); (4) Paper 7 (the S³ equivalence) and (5) Paper 14 (the headline computational result). The repository deliberately preserves its negative results and closed diagnostic arcs as institutional memory — `debug/archive/` and `papers/archive/` are the record, not the product.
-
-> **Coming from Avery & Avery, *Hyperspherical Harmonics and Their Physical Applications* (World Scientific 2017)?** [`docs/outreach/avery_hyperspherical_map.pdf`](docs/outreach/avery_hyperspherical_map.pdf) maps what GeoVac builds on in that book, chapter by chapter: from the S³ label set through Fock's projection to generalized Sturmians, the Shibuya–Wulfman metric, and the quantum encoding of the isoenergetic secular equation.
 
 ---
 
@@ -33,37 +53,6 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 | H₂ accuracy | **99.97% D_e** (0.053 mHa; prolate explicit-r₁₂ CI, exact integrals, Paper 12); 96.0% via the Level-4 hyperspherical treatment on an unconverged inner hyperradial wall (Paper 15) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |
 | Mathematical foundation | Fock 1935 S³ conformal equivalence, **18 symbolic checks of the continuum chain** (ten limiting-case or definitional) |
-
----
-
-## Why This Matters for Quantum Computing
-
-The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (the QWC group-count exponent sits inside the Gaussian band, Paper 14). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
-
-**Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 904 Pauli); the conformal machinery does not.
-
-**The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. In the Kustaanheimo–Stiefel frame the Coulomb problem is itself a constrained 4D oscillator, and π enters both sides the same ways (a measure and spectral sums), so the two differ in representation theory and arithmetic, not in where π enters.
-
----
-
-## The Math.OA / NCG / Periods Arc
-
-Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc lives in `papers/group1_operator_algebras/` and its synthesis; highlights:
-
-- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2) (Paper 38, main theorem: Fejér-kernel bound with constant 4/π, a kernel constant; O(1/n), at most π²/(n+1), [INTERNAL THEOREM] with a tapered amplitude) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window, and for a fixed matrix factor C(S³)⊗M_k at the same rate; a band-limited gauge field's truncated spectrum converges, its metric convergence is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
-- **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
-- **Papers 46–49** (Lorentzian metric-level claims built on the retracted quantity) are archived in `papers/archive/` (2026-09-14; see `docs/retired_papers.md`); the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive
-- **Paper 50** Re-derives the Klebanov–Pufu–Safdi continuum F-theorem values on S³ + S⁵ in closed Hurwitz form (continuum spectra; the truncation never enters)
-- **Paper 56** Tannakian reconstruction closed at finite cutoff (5,864 bit-exact zero residuals); infinite-cutoff motivic-Galois identification open
-- **Paper 55** A census of the S³ spectral-zeta and heat-trace transcendentals: they sit in pure-Tate / level-4 cyclotomic mixed-Tate rings (chemistry seeds, spectral determinants and Paper 61's elliptic period lie outside the census)
-
-The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count, non-selection results and Observations in Paper 32 §VIII (tally there) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
-
-### Claims and verification status
-
-**No result in this repository is externally peer-reviewed.** Every headline claim, its verification tier (symbolic proof / measured / panel-verified / internal theorem / conditional / observation / retracted), and its falsifier is catalogued in **[`docs/claims_register.md`](docs/claims_register.md)** — start there before citing anything. Project-internal vocabulary is mapped to standard terminology in [`docs/vocabulary_translation.md`](docs/vocabulary_translation.md). Two self-contained front-door notes for external readers: [`docs/outreach/`](docs/outreach/) (a 3-page math.OA summary and a 2-page periods note with ten-minute-checkable identities).
-
-**Reading paths.** Quantum computing / chemistry: Papers 14 → 22 → 20, then `Quick Start` below. Operator algebras / NCG: `docs/outreach/note_n1_su2_truncations.pdf` → Papers 38 → 45 → 32. Periods / number theory: `docs/outreach/note_n2_s3_identities.pdf` → Papers 28 → 55. Project identity and honest scope: the field guide, then `docs/claims_register.md`.
 
 ---
 
@@ -85,6 +74,16 @@ The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count
 | 1-norm (λ, identity included) | 34.0 Ha | 16.5 Ha | ~2× higher |
 
 The decisive wins are the exact Q-linearity across molecules and the 76× reduction vs cc-pVDZ, not the comparison with minimal-basis STO-3G (all counts under the exact global-M_L rule, 2026-08-29).
+
+---
+
+## Why This Matters for Quantum Computing
+
+The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (the QWC group-count exponent sits inside the Gaussian band, Paper 14). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
+
+**Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 904 Pauli); the conformal machinery does not.
+
+**The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. In the Kustaanheimo–Stiefel frame the Coulomb problem is itself a constrained 4D oscillator, and π enters both sides the same ways (a measure and spectral sums), so the two differ in representation theory and arithmetic, not in where π enters.
 
 ---
 
@@ -127,14 +126,6 @@ Isostructural invariance: molecules with the same block topology produce identic
 | BeH₂ (6e) | Composed + exchange coupling | **R_eq 11.7%** | 17 |
 | H₂O (10e) | Composed 5-block | **R_eq 19.4%** | 17 |
 | LiH (4e) | Balanced coupled, n_max=3 | **0.20% energy** (crosses past exact at n_max=4) | 19 |
-
----
-
-## Development Methodology
-
-GeoVac is developed using an **AI-augmented agentic research workflow**. The principal investigator (J. Loutey) provides scientific direction, physical intuition, and quality control. Implementation, numerical exploration, and documentation drafting are performed collaboratively with large language models (Anthropic Claude). All physics results are validated against known analytical solutions, NIST reference data, and a symbolic suite (18 symbolic checks of Fock's S³ conformal chain, ten of them limiting-case or definitional). No result is accepted on the basis of LLM output alone.
-
-This workflow is itself a research contribution — an experiment in whether agentic AI tools can accelerate independent scientific research. The project has no institutional affiliation. Primary dissemination is via GitHub and Zenodo (DOI-stamped releases).
 
 ---
 
@@ -182,6 +173,26 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 
 ---
 
+## The Math.OA / NCG / Periods Arc
+
+Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc lives in `papers/group1_operator_algebras/` and its synthesis; highlights:
+
+- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2) (Paper 38, main theorem: Fejér-kernel bound with constant 4/π, a kernel constant; O(1/n), at most π²/(n+1), [INTERNAL THEOREM] with a tapered amplitude) — **unconditional for the commutative factor** on the true Camporesi–Higuchi window, and for a fixed matrix factor C(S³)⊗M_k at the same rate; a band-limited gauge field's truncated spectrum converges, its metric convergence is open (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
+- **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
+- **Papers 46–49** (Lorentzian metric-level claims built on the retracted quantity) are archived in `papers/archive/` (2026-09-14; see `docs/retired_papers.md`); the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive
+- **Paper 50** Re-derives the Klebanov–Pufu–Safdi continuum F-theorem values on S³ + S⁵ in closed Hurwitz form (continuum spectra; the truncation never enters)
+- **Paper 56** Tannakian reconstruction closed at finite cutoff (5,864 bit-exact zero residuals); infinite-cutoff motivic-Galois identification open
+- **Paper 55** A census of the S³ spectral-zeta and heat-trace transcendentals: they sit in pure-Tate / level-4 cyclotomic mixed-Tate rings (chemistry seeds, spectral determinants and Paper 61's elliptic period lie outside the census)
+
+The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count, non-selection results and Observations in Paper 32 §VIII (tally there) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
+
+### Claims and verification status
+
+**No result in this repository is externally peer-reviewed.** Every headline claim, its verification tier (symbolic proof / measured / panel-verified / internal theorem / conditional / observation / retracted), and its falsifier is catalogued in **[`docs/claims_register.md`](docs/claims_register.md)** — start there before citing anything. Project-internal vocabulary is mapped to standard terminology in [`docs/vocabulary_translation.md`](docs/vocabulary_translation.md). Two self-contained front-door notes for external readers: [`docs/outreach/`](docs/outreach/) (a 3-page math.OA summary and a 2-page periods note with ten-minute-checkable identities).
+
+
+---
+
 ## Paper Series
 
 | # | Title | Key Result |
@@ -222,6 +233,12 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
 | **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
 | 57 | Forced/free seam | forced/free catalogue (per-entry status and counts: `docs/forced_free_seam.md`; door-indexed view: `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
+| **58** | **Two-centre integrals, exactly** | **Every two-centre Slater integral class in closed form; the order of each one's differential equation proved, exchange exactly 9 (4 at equal exponents); unequal-exponent exchange is weight two** |
+| **59** | **Three centres: the elliptic rung** | **The three-centre repulsion integral's radial core is an elliptic Bessel moment; water's bond-angle equations** |
+| 60 | Sturmian secular equation as a quantum algorithm | Metric-free eigenproblem for atoms; two-centre Sturmian H₂ |
+| 61 | Bessel-moment periods | The number theory of the three-centre integral (modular family, CM points) |
+| 62 | Water at equal size | Slater versus Gaussian bases at equal size; the matched-accuracy Pauli cost of a Gaussian basis is at most 4.7×, depending on the Gaussian family |
+| **63** | **The density-graph ladder** | **Trees of n linked densities reach rung n (proved for 3 ≤ n ≤ 8, s-type and homogeneous centre derivatives): elliptic, K3, Calabi–Yau, the banana integrals** |
 
 ---
 
@@ -243,6 +260,14 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 - Production quantum chemistry for general molecules
 - Gaussian basis integral technology for large systems
 - Density functional theory for extended systems
+
+---
+
+## Development Methodology
+
+GeoVac is developed using an **AI-augmented agentic research workflow**. The principal investigator (J. Loutey) provides scientific direction, physical intuition, and quality control. Implementation, numerical exploration, and documentation drafting are performed collaboratively with large language models (Anthropic Claude). All physics results are validated against known analytical solutions, NIST reference data, and a symbolic suite (18 symbolic checks of Fock's S³ conformal chain, ten of them limiting-case or definitional). No result is accepted on the basis of LLM output alone.
+
+This workflow is itself a research contribution — an experiment in whether agentic AI tools can accelerate independent scientific research. The project has no institutional affiliation. Primary dissemination is via GitHub and Zenodo (DOI-stamped releases).
 
 ---
 
