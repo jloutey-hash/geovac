@@ -8590,7 +8590,16 @@ REGISTRY = [
         "pattern": r"weight-one\s+filtration\s+throughout"
                    r"|weight-one\s+filtration\s+at\s+every\s+class"
                    r"|All\s+of\s+them\s+close\s+at\s+weight\s+one\s+--\s+no\s+dilogarithm\s+appears\s+anywhere"
-                   r"|every\s+integral\s+reduces\s+to\s+elementary\s+functions\s+together\s+with\s+the\s+exponential",
+                   r"|every\s+integral\s+reduces\s+to\s+elementary\s+functions\s+together\s+with\s+the\s+exponential"
+                   # widened 2026-11-20 (/qa paper_58 FULL #3): unscoped restatements in citers the first sweep missed
+                   r"|does\s+not:\s+every\s+class\s+closes\s+at\s+transcendence\s+weight"
+                   r"|important\s+part---it\s+does\s+\\emph\{not\}\s+escalate\s+in\s+weight"
+                   r"|weight\s+one\s+and\s+\$\\pi\$-free\s+\(Paper~18\)"
+                   r"|repulsion\s+integrals\s+close\s+in\s+weight\s+one:"
+                   r"|two-center\s+engine\s+is\s+weight\s+one\."
+                   r"|organises\s+them\s+as\s+a\s*\n?\s*closed\s+seed\s+set"
+                   r"|weight\s+one,\s+\u03c0-free,\s+no\s+dilogarithm"
+                   r"|close\s+in\s+the\s*\n?\s*two-cent(?:re|er)\s+seed\s+set",
         "exempt_if_nearby": withdrawal_marker("two-centre-weight-one-whole-integral"),
         "severity": "fail",
         "scope": "group2 group3 synthesis",
@@ -8601,8 +8610,16 @@ REGISTRY = [
             "docs/certified_reference_values.md",
             "docs/chemistry_period_inventory.md",
             "docs/atlas.md",
+            "docs/forced_free_seam.md",
+            "docs/outreach/avery_hyperspherical_map.tex",
+            "docs/walls/register.md",
         ],
         "cited_by": {
+            "docs/walls/register.md": "remediated 2026-11-20 (PM) -- J9 rung-rule clauses scoped term by term (self-check round 1)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated 2026-11-20 (PM, /qa paper_58 FULL #3) -- seed-set paragraph and 'no weight-two object' scoped to a Neumann term; review owed (self-check)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated 2026-11-20 (PM, /qa paper_58 FULL #3) -- sub-domain J ladder sentence and J1 item scoped per term, master integral named; review owed (self-check)",
+            "docs/forced_free_seam.md": "remediated 2026-11-20 (PM, /qa paper_58 FULL #3) -- ladder sentence and J1 row scoped per term",
+            "docs/outreach/avery_hyperspherical_map.tex": "remediated 2026-11-20 (PM, /qa paper_58 FULL #3) -- seed-set bullet scoped per term, master integral named",
             "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex": "remediated + reviewed 2026-11-18 (PM) -- introduction: 'term by term in its Neumann expansion' + master-integral clause; lines on the two-center weight-one closure and the genus-zero K0 read as per-term, reread",
             "docs/certified_reference_values.md": "remediated + reviewed 2026-11-18 (PM) -- transcendence-class paragraph scoped to Neumann terms; exchange entries are tau = 0 kernels",
             "docs/chemistry_period_inventory.md": "remediated + reviewed 2026-11-18 (PM) -- row 3c weight-one cell scoped to Neumann terms",
@@ -8828,7 +8845,7 @@ REGISTRY = [
         "exempt_if_nearby": withdrawal_marker('one-centre-rationals-unscoped'),
         "severity": 'fail',
         "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
-        "note": 'Registered 2026-10-18 (self-check round 1 of the v5.20.21 claim-search DELTA remediation). One-centre TWO-electron classes are exact rationals (Paper 58); the one-centre Coulomb ring of three densities carries dilogarithms (Remiddi; Paper 59 sec:density_ring).',
+        "note": 'Registered 2026-10-18 (self-check round 1 of the v5.20.21 claim-search DELTA remediation). One-centre two-electron integrals are rationals times one square root (Paper 58, restated 2026-11-15; entry one-centre-exact-rationals); the one-centre Coulomb ring of three densities carries dilogarithms (Remiddi; Paper 59 sec:density_ring).',
         "files": [
             'papers/group*/*.tex',
             'papers/synthesis/*.tex',
@@ -8961,7 +8978,7 @@ REGISTRY = [
         "exempt_if_nearby": withdrawal_marker('one-centre-rationals-and-pi'),
         "severity": 'fail',
         "scope": 'trunk group1 group2 group3 group4 group5 group6 synthesis',
-        "note": 'Registered 2026-10-18 (self-check round 2 of the v5.20.21 claim-search DELTA remediation). One-centre two-electron classes are exact rationals (Paper 58 L417).',
+        "note": 'Registered 2026-10-18 (self-check round 2 of the v5.20.21 claim-search DELTA remediation). One-centre two-electron integrals are rationals times one square root (Paper 58, restated 2026-11-15; entry one-centre-exact-rationals).',
         "files": [
             'papers/group*/*.tex',
             'papers/synthesis/*.tex',
@@ -10242,6 +10259,96 @@ REGISTRY = [
         "note": 'group6 third look (2026-11-08): PK is not essential in second quantization (Paper 19: antisymmetry role a classical-solver artifact, Track CB an incomplete replacement); the empirical catalogue is comparisons with residuals from machine-exact to non-converged, not machine-precision agreements; the entropy exponent climbs toward 2 at larger Z (1.93 at n_max=3), a limit of 2 is not established (Paper 27).',
         "files": ['papers/group6_precision_observations/paper_34_projection_taxonomy.tex', 'papers/synthesis/group6_precision_observations_synthesis.tex'],
         "cited_by": {},
+    },
+    {
+        "id": "one-centre-exact-rationals",
+        # The CLAIM (Paper 58 sec:census, restated 2026-11-15, PI-approved): with rational exponents each one-centre
+        # two-electron integral is one rational times one square root (radial normalizations when principal quantum
+        # numbers mix; Gaunt factors from l = 2).  Retired: "one centre: exact rationals" for two-electron integrals.
+        "pattern": r"one\s+centre,\s+exact\s+rationals\s+for\s+two-electron"
+                   r"|two-electron\s+classes\s+are\s+exact\s+rationals"
+                   r"|One\s+centre:\\\s+exact\s+rationals"
+                   r"|exact\s+rationals\s+at\s+one\s+centre"
+                   r"|\*\*One\s+atom:\*\*\s+ordinary\s+fractions",
+        "exempt_if_nearby": withdrawal_marker("one-centre-exact-rationals"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-20 (/qa paper_58 FULL #3, SURFACE-LARGE x6). One-centre two-electron integrals are rationals times one square root (Paper 58); the 2026-11-15 restatement had no entry, so six restatements stayed stale.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "docs/atlas.md",
+            "docs/forced_free_seam.md",
+            "docs/geovac_story.md",
+            "README.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/synthesis/geovac_field_guide.tex": "remediated 2026-11-20 (PM) -- two loci; review owed (self-check)",
+            "docs/atlas.md": "remediated 2026-11-20 (PM) -- period-ladder paragraph",
+            "docs/geovac_story.md": "remediated 2026-11-20 (PM) -- the ladder list",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated 2026-11-20 (PM) -- sub-domain J sentence; review owed (self-check)",
+            "docs/forced_free_seam.md": "remediated 2026-11-20 (PM) -- ladder sentence",
+        },
+    },
+    {
+        "id": "sparsity-basis-intrinsic",
+        # The CLAIM (Paper 58 sec:intro, sec:rereadings; PI decision 2026-11-20): the composed builder's sparsity
+        # comes from its same-centre construction (it neglects cross-centre overlap); the genuine tensor over the
+        # same orbitals is l-dense cross-centre.  Retired: "basis-intrinsic sparsity" for the molecular builder.
+        "pattern": r"basis-intrinsic\s+sparsity\s+\u2014"
+                   r"|enforce\s+basis-intrinsic\s+sparsity"
+                   r"|sparsity\s+is\s+basis-intrinsic"
+                   r"|sparsity\s+is\s+intrinsic\s+to\s+the\s+basis"
+                   r"|and\s+is\s+basis-intrinsic\s+rather\s+than\s+compression"
+                   r"|selection\s+rules\s+of\s+the\s+hyperspherical\s+harmonic\s+basis\s+enforce\s+block-diagonal",
+        "exempt_if_nearby": withdrawal_marker("sparsity-basis-intrinsic"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-20 (/qa paper_58 FULL #3, PI-decided). Atomic (one-centre) Gaunt sparsity, Paper 26, is not affected; the pattern names the molecular-builder phrasings only.",
+        "files": [
+            "README.md",
+            "docs/geovac_positioning.md",
+            "docs/claims_register.md",
+            "papers/group4_quantum_computing/*.tex",
+            "papers/synthesis/*.tex",
+        ],
+        "cited_by": {
+            "README.md": "remediated 2026-11-20 (PM) -- two loci",
+            "docs/geovac_positioning.md": "remediated 2026-11-20 (PM)",
+            "docs/claims_register.md": "remediated 2026-11-20 (PM) -- row 19",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex": "remediated 2026-11-20 (PM) -- introduction sentence; review owed (self-check)",
+        },
+    },
+    {
+        "id": "p58-overclaims-fullqa3",
+        # Owner and surface phrasings corrected by /qa paper_58 FULL #3 (2026-11-20).
+        "pattern": r"are\s+precisely\s+the\s+Shibuya--Wulfman"
+                   r"|one\s+place\s+\$\\pi\$\s+cancels"
+                   r"|even\s+the\s+prefactor\s+\$\\pi\$\s+cancels"
+                   r"|order\s+of\s+each\s+one's\s+differential\s+equation\s+proved"
+                   r"|has\s+no\s*\n?\s*sparsity-preserving\s+closure"
+                   r"|H\S{0,2}\s+(?:FCI\s+to\s+)?84\s+digits"
+                   r"|17\.9\s*\\times|17\.9\u00d7",
+        "exempt_if_nearby": withdrawal_marker("p58-overclaims-fullqa3"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-20 (/qa paper_58 FULL #3). Shibuya-Wulfman: Paper 19 says 'closely related'. pi: normalized two-centre classes are pi-free (Sugiura's formula, matched to 1e-61). README order claim: proved for named subsets only. No sparsity-preserving closure: Paper 58 says only that five tries moved the cost. H2: certified to 60 digits. 17.9x Lowdin: measured against a retired baseline (878; registry lih_balanced_pauli), removed (PI).",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated 2026-11-20 (PM) -- W1e forecast sentence; review owed (self-check)",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated 2026-11-20 (PM) -- Lowdin re-reading; decidability clause; review owed (self-check)",
+            "README.md": "remediated 2026-11-20 (PM) -- Paper 58 row",
+            "docs/walls/register.md": "remediated 2026-11-20 (PM) -- Lowdin row",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex": "remediated 2026-11-20 (PM) -- 'and there alone, even the prefactor pi cancels' removed from the introduction; review owed (self-check)",
+        },
     },
 ]
 

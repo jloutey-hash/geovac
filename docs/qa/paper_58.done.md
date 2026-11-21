@@ -13,7 +13,9 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-58 scope + deltas + watch-notes.
 
-> **STATUS: RE-RUN 2026-09-07 — FAIL, remediated; NOT re-certified.**
+> **STATUS: FULL #3 2026-11-20 (seeded) — FAIL, remediated (v6.8.1); NOT re-certified; RESEARCH-GRADE not earned.** See the change log.
+>
+> *(earlier)* **RE-RUN 2026-09-07 — FAIL, remediated; NOT re-certified.**
 > `/qa` (PI-invoked) over the papers edited in the v5.10.x arc. Deterministic
 > layer green on scope `paper_58` (C5/C10/C11/C13/C14/C15/C16/C17/C18/C19/
 > C20/C21 PASS, C22 PASS corpus-wide; C21 grounded on 10 annotations, C17 on
@@ -152,12 +154,54 @@ zero-parameter asserted as exactly that.
    3 fragment-native determinants; demo forfeits sparsity.
 6. **Tapering [OBSERVATION].** Equivalent-atom-swap reduces the qubit saving
    (BeH₂ 12→9, N₂ 22→19, F₂ 22→15), inflates Pauli 2.3–3.6×.
-7. **Löwdin re-reading [OBSERVATION].** The 17.9× inflation was largely already owed —
+7. **Löwdin re-reading [OBSERVATION].** (Re-frozen 2026-11-20, PI: the 17.9× figure removed.) The density blamed on Löwdin was at least partly already owed —
    genuine tensor inflates ~15× before any transformation.
 8. **H₂ native FCI** = −1.106556606091 Ha (1s-per-centre basis); Gaussian converges onto
    it as the fit deepens (a basis-limited value, NOT the exact H₂ energy — W1).
 9. **Polyatomic (SCOPE, not a result):** BeH₂ +10.0%→+1.4%, H₂O +14.9%→+2.5%, bond
    angle 106.3° vs 104.5°.
+
+## 2026-11-20 re-cert additions (FROZEN with the PI, 2026-11-20)
+
+Since the 2026-09-07 run the census section gained the two-centre operator results (v6.7.26-v6.7.41).
+Headlines 1-9 above stand; these are added. Each is stated at the tier the paper gives it; a reviewer
+grades any locus (owner or derived) that states it more strongly.
+
+10. **Exchange order exactly 9 [SYMBOLIC PROOF].** For every a != b, the seven integrals: 1s;
+    2psigma-1s, 3d0-1s, 2psigma-2psigma, 2p+1-2p+1; 2p+-1-1s, 3d+-2-1s. Bound via Pachucki's equation
+    differentiated in the exponents (and, for m != 0, the r12-weighted masters, derived here); minimality
+    via independence of the nine functions plus a determinant gcd over several R. a > b covered by
+    analytic continuation for the non-symmetric ones. Real 2px2px only "order at most 9".
+11. **Exactly 4 at a = b [SYMBOLIC PROOF]** for 1s and six integrals.
+12. **Reconstructed operators [MEASURED]** at (1,3/2), (1,2), (1,1): orders/degrees, singular structure,
+    rates at infinity, R^9 ln R coefficient "predicted before computing". Pre-registration records named
+    in the text must say what the text says.
+13. **Exponential-only integrals [SYMBOLIC PROOF]:** order = number of distinct rates with nonzero
+    coefficient, every exponent (38/38 on the panel measured).
+14. **Hybrids [SYMBOLIC PROOF, partly reviewed]:** order 5, 4 at a_d = a_c and a_d = a_p + a_c, every
+    Z_A, Z_B, for the nine L >= 1 panel hybrids and (2p0 2p0|1s 1s_B); six of the ten without separate
+    review, said so in the text.
+15. **Master integral f0 [SYMBOLIC PROOF]:** two-fold iterated integral; not in the exp/log/Ei span;
+    so the seven exchange integrals have weight two as functions of R for 0 < a < b. a > b not checked;
+    dilogarithm form and fixed-R values NOT decided.
+16. **One-centre integrals [SYMBOLIC PROOF]:** one rational times one square root at rational exponents.
+17. **Atom independence [SYMBOLIC (proof-by-argument)]:** e^{cR}, e^{cR} ln R, e^{cR} Ei(kR) independent
+    over C(R) for real rates.
+
+Added watch-notes:
+- **W9 - "every a != b" scope.** Only the seven named integrals; nothing about general orbitals.
+- **W10 - weight one is per Neumann term** (C16 entry `two-centre-weight-one-whole-integral`); the whole
+  unequal-exponent exchange integral is weight two for 0 < a < b only.
+- **W11 - proof vs measurement.** SYMBOLIC PROOF sentences must not rest on a sample-point fit; MEASURED
+  sentences must not be read as proofs. "Predicted before computing" must match the dated record.
+- **W12 - prior art.** What is Pachucki's (the equation, the masters) vs derived here (the exponent
+  derivatives at the exchange point, the r12-weighted second-order equation); Lesiuk, Silverstone,
+  Sugiura, Mulliken/Roothaan attributions.
+- **W13 - decidability unchanged.** None of 10-17 upgrades the g row from COUNTED.
+
+C9 derived documents for this run (contradiction check, never stamped): the group2 synthesis, the field
+guide, `papers/synthesis/period_ladder.tex`, `docs/atlas.md`, `docs/chemistry_period_inventory.md`,
+README, `papers/INDEX.md`, `docs/claims_register.md`.
 
 ## Seeding plan (worktree only; never touches the real corpus)
 
@@ -252,3 +296,13 @@ Sonnet) get 2 seeds each. Answer key → `debug/qa/paper_58_seed_key.json`.
   tier-word flip; the tier-word-exhaustive re-dispatch + completeness-critic are what earned the clean. Un-exercised:
   the g-row 80% cross-bulk decidability stays transcendence-BLOCKED (E₁-value + γ open, v4.81 correction) — a proven
   wall, not a coverage gap. Paper 58 remains CERTIFIED; this run re-affirms it over the post-correction text.
+- 2026-11-20 — **FULL #3 (seeded, PI-invoked) = FAIL, remediated (v6.8.1). RESEARCH-GRADE not earned.**
+  Criteria re-frozen with headlines 10-17, W9-W13. Deterministic: 15/15 PASS (scope paper_58). Calibration 14/14
+  plants caught (three on a focused re-dispatch), 0/5 controls false-flagged. 7 OWNER-LARGE: m != 0 tier (then
+  proved, given Pachucki Eq. (16), cold-reviewed); Pachucki Eq. (64) prior art; "does not escalate in weight";
+  QFD opener; "functionally nonvanishing (unconditional)"; many-electron front backing broken; 17.9x on a retired
+  baseline (removed, PI). SURFACE-LARGE converted to C16 entries one-centre-exact-rationals,
+  sparsity-basis-intrinsic (PI-decided), p58-overclaims-fullqa3, and a widened two-centre-weight-one-whole-integral.
+  SMALL debt: `docs/qa/paper_58.debt.md`. Seed key `debug/qa/paper_58_full3_seed_key.json`; worktree removed, no
+  seed in the corpus (grepped). Coverage 0/16 owner units (no stamps this cycle). Path to cert: claim-search DELTA
+  on the remediated families, then the FULL certifying run.

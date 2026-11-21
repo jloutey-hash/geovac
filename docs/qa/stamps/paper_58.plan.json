@@ -1,0 +1,23 @@
+{
+ "target": "paper_58",
+ "date": "2026-11-20",
+ "seed": "2026-11-20",
+ "units": [
+  "cite:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex",
+  "code:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Demonstration: NaH binds with genuine integrals",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Introduction: what the sparsity bought, and what it cost",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Introduction: what the sparsity bought, and what it cost / A change of method, not a refinement",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Mechanism: the abelian residue",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Scope",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The continuous side: the decompactification front",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The exact-arithmetic census",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The exact-arithmetic census / Machinery and certificate",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The exact-arithmetic census / Result",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::The quadrature-free diatomic",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Two re-readings",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Two re-readings / Cost conservation",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::Two re-readings / L \"owdin was paying an honest bill",
+  "prose:papers/group2_quantum_chemistry/paper_58_abelian_residue.tex::front"
+ ]
+}

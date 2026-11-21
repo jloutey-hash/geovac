@@ -1029,7 +1029,7 @@ Total energies of completely specified minimal-basis diatomic models, assembled 
 
 **Method.** root of the exact derivative of the single closed-form expression E(R) (2x2 singlet CI over closed-form MO integrals; minimal 1s/1s basis, zeta = 1), by Newton iteration on symbolic dE/dR at two precisions
 
-**Evidence.** Newton at dps 45 vs 60 agree to 9.5e-46; E(R) equals the 84-digit certified FCI value at R = 1.4 (1e-42) and dissociates to exactly -1 Ha (3e-49), so D_e is itself closed-form; pinned in tests/test_paper58_qfd.py::test_closed_form_pes_equilibrium_constants
+**Evidence.** Newton at dps 45 vs 60 agree to 9.5e-46; E(R) equals the 60-digit certified FCI value at R = 1.4 (1e-42) and dissociates to exactly -1 Ha (3e-49), so D_e is itself closed-form; pinned in tests/test_paper58_qfd.py::test_closed_form_pes_equilibrium_constants
 
 #### `qfd.h2.pes.De`
 
@@ -1047,7 +1047,7 @@ Total energies of completely specified minimal-basis diatomic models, assembled 
 
 **Method.** root of the exact derivative of the single closed-form expression E(R) (2x2 singlet CI over closed-form MO integrals; minimal 1s/1s basis, zeta = 1), by Newton iteration on symbolic dE/dR at two precisions
 
-**Evidence.** Newton at dps 45 vs 60 agree to 9.5e-46; E(R) equals the 84-digit certified FCI value at R = 1.4 (1e-42) and dissociates to exactly -1 Ha (3e-49), so D_e is itself closed-form; pinned in tests/test_paper58_qfd.py::test_closed_form_pes_equilibrium_constants
+**Evidence.** Newton at dps 45 vs 60 agree to 9.5e-46; E(R) equals the 60-digit certified FCI value at R = 1.4 (1e-42) and dissociates to exactly -1 Ha (3e-49), so D_e is itself closed-form; pinned in tests/test_paper58_qfd.py::test_closed_form_pes_equilibrium_constants
 
 #### `qfd.h2.pes.k`
 
@@ -1065,7 +1065,7 @@ Total energies of completely specified minimal-basis diatomic models, assembled 
 
 **Method.** root of the exact derivative of the single closed-form expression E(R) (2x2 singlet CI over closed-form MO integrals; minimal 1s/1s basis, zeta = 1), by Newton iteration on symbolic dE/dR at two precisions
 
-**Evidence.** Newton at dps 45 vs 60 agree to 9.5e-46; E(R) equals the 84-digit certified FCI value at R = 1.4 (1e-42) and dissociates to exactly -1 Ha (3e-49), so D_e is itself closed-form; pinned in tests/test_paper58_qfd.py::test_closed_form_pes_equilibrium_constants
+**Evidence.** Newton at dps 45 vs 60 agree to 9.5e-46; E(R) equals the 60-digit certified FCI value at R = 1.4 (1e-42) and dissociates to exactly -1 Ha (3e-49), so D_e is itself closed-form; pinned in tests/test_paper58_qfd.py::test_closed_form_pes_equilibrium_constants
 
 
 ---

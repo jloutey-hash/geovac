@@ -26,7 +26,7 @@ The repository keeps its negative results and closed dead ends on purpose: [`doc
 
 ## Qubit Hamiltonians
 
-GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
+GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules within each same-centre block of the composed builder enforce block-diagonal electron repulsion integrals, producing Hamiltonians whose Pauli count is **exactly linear in the qubit count across molecules at fixed basis** (N_Pauli = 27.90 × Q main-group, 30.03 × Q d-block) — **51× to 317× fewer Pauli terms** than Gaussian baselines at equal qubits for H₂O (n_max = 1–3; identity-included on both sides), and 76× fewer than cc-pVDZ for LiH (each at its own qubit count: Q = 30 vs 36) (Papers 14, 20). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
 ```python
 from geovac.ecosystem_export import hamiltonian
@@ -79,7 +79,7 @@ The decisive wins are the exact Q-linearity across molecules and the 76× reduct
 
 ## Why This Matters for Quantum Computing
 
-The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (the QWC group-count exponent sits inside the Gaussian band, Paper 14). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
+The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's structural sparsity — from Gaunt selection rules within the composed builder's same-centre blocks, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (the QWC group-count exponent sits inside the Gaussian band, Paper 14). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
 
 **Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 6.06% (global-M_L rule; the earlier 1.44% was the retired pair-diagonal rule) regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 688 Pauli, He-4 16 qubits / 904 Pauli); the conformal machinery does not.
 
@@ -233,7 +233,7 @@ The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4 (a census of S³ spectral data); master Mellin engine census** |
 | **56** | **Tannakian Substrate** | **Finite-cutoff Tannakian reconstruction (5,864 bit-exact residuals); infinite-cutoff motivic-Galois identification open** |
 | 57 | Forced/free seam | forced/free catalogue (per-entry status and counts: `docs/forced_free_seam.md`; door-indexed view: `docs/atlas.md`); P5 packing-reachability is an internal-consistency check, not a discriminator |
-| **58** | **Two-centre integrals, exactly** | **Every two-centre Slater integral class in closed form; the order of each one's differential equation proved, exchange exactly 9 (4 at equal exponents); unequal-exponent exchange is weight two** |
+| **58** | **Two-centre integrals, exactly** | **Every two-centre Slater integral class in closed form, term by term; the order of the equation in R proved least for seven exchange integrals (9 at unequal, 4 at equal exponents), the exponential-only classes and the panel hybrids; those seven are weight two for 0 < a < b** |
 | **59** | **Three centres: the elliptic rung** | **The three-centre repulsion integral's radial core is an elliptic Bessel moment; water's bond-angle equations** |
 | 60 | Sturmian secular equation as a quantum algorithm | Metric-free eigenproblem for atoms; two-centre Sturmian H₂ |
 | 61 | Bessel-moment periods | The number theory of the three-centre integral (modular family, CM points) |
@@ -246,7 +246,7 @@ The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count
 
 ### What GeoVac Does Well
 - **Structurally sparse qubit Hamiltonians:** Pauli count exactly linear in Q across molecules (27.90 × Q), 51×–317× fewer terms than Gaussian at equal qubits (H₂O)
-- **Block-diagonal ERIs:** Gaunt selection rules enforce basis-intrinsic sparsity
+- **Block-diagonal ERIs:** Gaunt selection rules enforce the sparsity within the composed builder's same-centre blocks (the genuine cross-centre tensor is l-dense, Paper 58)
 - **Classical benchmarks:** H₂ 99.97% D_e (Paper 12), LiH R_eq +0.2% (Route C, Paper 19), He 0.022% raw / 0.020% with the cusp tail (still above exact)
 - **Algebraic Slater integrals:** Exact hypergeometric R^k evaluator eliminates grid quadrature (machine precision, 8x speedup)
 - **Zero molecular fitting parameters** — all from nuclear charges and geometry, plus one empirical atomic input to the composed PK (the first ionization energy) (disclosed exception: Paper 17's PK barrier-width formula was chosen against the LiH bond length)

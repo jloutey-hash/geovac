@@ -84,12 +84,10 @@ symmetry descent aimed at the sparsity of the two-center integral tensor
 rather than at spectroscopic level splittings---together with the census
 that quantifies it.
 
-Two re-readings follow.  First, the $17.9\times$ Pauli inflation
-previously attributed to L\"owdin orthogonalization
-(v4.73.1) was not, in the bulk, orthogonalization's price: the genuine
-tensor's own permitted density inflates by the same order ($\sim 15\times$)
-before any transformation, so L\"owdin was paying a bill that was largely
-already owed.  Second \textbf{[OBSERVATION]}, four previously attempted
+Two re-readings follow.  First, the density previously attributed to
+L\"owdin orthogonalization need not have been orthogonalization's price: the
+genuine tensor's own permitted density inflates by $\sim 15\times$ before any
+transformation, so L\"owdin was paying a bill that was at least partly already owed.  Second \textbf{[OBSERVATION]}, four previously attempted
 relocations of the non-orthogonality---into the operator, into a dual
 basis, into a high-symmetry embedding, into device-measured many-body
 overlaps---each moved the cost without reducing it, because the cost
@@ -120,7 +118,9 @@ $60$ digits with symbolic $\tau$-series termination, its entire potential
 curve $E(R)$ is a single closed-form expression in $\{\exp, E_{1}, \log, \gamma\}$
 with certified $R_{\rm eq}$, $D_{e}$ and $k$, and the heteronuclear LiH case
 reaches $30$ digits net of an explicit tail bound (a campaign value;\ its
-regression test rebuilds it in full, with the tail bound).
+regression test rebuilds it in full, with the tail bound).  These are
+minimal-basis numbers:\ what is certified is the assembly and its precision,
+not accuracy.
 
 A by-product bears on the continuous theory the census borrows from:\ the
 radial integral at the core of the two-center direct-Coulomb $(AA|BB)$
@@ -162,8 +162,9 @@ integrals---rather than to the treatment of correlation.
 
 This paper answers the question that localization leaves open.  The
 framework neglects the overlap between orbitals on different centers,
-treating a non-orthogonal basis as though it were orthonormal, and that
-neglect is what preserves the sparsity.  Was there an alternative?  Could
+treating a non-orthogonal basis as though it were orthonormal, and its
+same-center construction, which never forms a two-center product, is what
+preserves the sparsity.  Was there an alternative?  Could
 one keep the genuine cross-center physics \emph{and} the label-generated
 sparsity, by declining to transform the integral tensor at all?
 
@@ -177,7 +178,7 @@ genuine two-center orbital products is, in itself, nothing new:\ it is
 standard Coulomb--Sturmian practice, developed over decades by Avery and
 co-workers on the many-center hyperspherical-harmonic
 foundation~\cite{avery1989, avery2006}, and the framework's cross-center
-one-body couplings are precisely the Shibuya--Wulfman
+one-body couplings are closely related to the Shibuya--Wulfman
 integrals~\cite{shibuya1965} of that theory
 (Paper~19~\cite{loutey_paper19}).  \textsc{GeoVac} adds nothing to that
 continuous apparatus.  What is new is not the integrals but the
@@ -429,7 +430,7 @@ that of the master integral obeys $A'=-L/R$ with $L$ a combination of $e^{\pm2aR
 which no rational combination of exponentials can match (a pole-order argument).  The integral and
 its first eight derivatives span all nine:\ the determinant of their coordinates, cleared of
 denominators, is a polynomial in $b/a$ at each rational $R$, and the gcd of these polynomials over
-five values of $R$ vanishes only at $b/a=0$, $\pm1$ (exact).  No equation of lower order exists, in agreement with the guessed
+three values of $R$ vanishes only at $b/a=0$, $\pm1$ (exact).  No equation of lower order exists, in agreement with the guessed
 search, which excluded lower orders up to degree $60$.  As $b\to a$ the
 closed form tends to Sugiura's formula~\cite{sugiura1927}, which recovers the bound $4$ at equal
 exponents.  The same derivation places four integrals of the next two paragraphs in the same span
@@ -449,12 +450,26 @@ precision, since their coefficients have poles there that cancel).
 \textbf{[SYMBOLIC PROOF]} The integrals with $m\neq0$ against $1s$,
 $(2p_{+1,{\rm A}}1s_{\rm B}|2p_{-1,{\rm A}}1s_{\rm B})$ and
 $(3d_{+2,{\rm A}}1s_{\rm B}|3d_{-2,{\rm A}}1s_{\rm B})$, need the masters weighted by
-powers of $r_{12}$.  Pachucki's recursion for them divides by a quantity that
-vanishes at the exchange point;\ taking instead the coefficient of each power of
-the $r_{12}$ exponent in his differential equation in that exponent and
-inverting the Laplace transform gives, as derived here, a second-order equation
+powers of $r_{12}$.  Pachucki's general recursion for them divides by a quantity that
+vanishes at the exchange point, and for exchanged orbitals he gives a recursion
+obtained from his differential equation in the $r_{12}$ exponent by inverting the
+Laplace transform, whose only division is by $(u^2-w^2)^2$ (Sec.~VII, Eq.~(64) of
+Ref.~\cite{pachucki2009}).  Following his procedure (expand in the $r_{12}$ exponent
+$w_1$, take coefficients, invert the Laplace transform) but taking the coefficient
+of each power of $w_1$ without first dividing by $t^2$ gives a second-order equation
 in $r$ for each weighted master whose only division is by
-$(u_2^2-u_3^2)(w_2^2-w_3^2)=-(a^2-b^2)^2\neq0$.  Solved for its decaying
+$(u_2^2-u_3^2)(w_2^2-w_3^2)=-(a^2-b^2)^2\neq0$;\ at the exchange point it is his
+Eq.~(64) differentiated twice.  That equation is proved here, given his first-order
+equation in $w_1$ (his Eq.~(16)), used as published, for $u_2\neq u_3$, $w_2\neq w_3$:\ for
+$|w_1|$ below half the smallest exponent the Hardy--Littlewood--Sobolev inequality
+bounds the $w_1$-dependent master by a constant times $r$, uniformly, so its Laplace
+transform is holomorphic in $w_1$ with the weighted masters' transforms as Taylor
+coefficients, and Eq.~(16), which holds for $w_1>0$, holds on the whole disc;\ dividing
+the $w_1^m$ coefficient by $t^4$ makes every term the transform of a continuous function
+(the logarithms enter as $\ln(t+c)/t=\mathcal{L}[\ln c+E_1(cr)]$), Lerch's theorem gives
+the integrated identity, and four derivatives on $r>0$ remove exactly the polynomials
+supported at $r=0$, so no derivative of a master at $r=0$ is used.  At the exchange point
+the homogeneous solutions are $A+Br$, so the decaying solution is unique.  Solved for its decaying
 solutions by the same exact algebra in $b/a$, it places both integrals in the
 same nine-function span for every $a\neq b$ (the weighted masters add no new
 function), with $a$ the exponent of the $2p$ or $3d$ orbital and, for $a>b$, the real
@@ -503,7 +518,7 @@ $(2p_{+1,{\rm A}}2p_{-1,{\rm B}}|2p_{-1,{\rm A}}2p_{+1,{\rm B}})$, so its operat
 $\sigma=2$ component of real $2p_x2p_x$ exchange as well.  Again only the degree changes:\
 $24$, $10$, $24$ and $16$ at $(1,1)$, and $35$, $53$ and $39$ at $(1,2)$.  The rates at
 infinity are the $1s$ ones, with no rate $\pm(a-b)$, and every finite nonzero singular point
-reads as apparent.  At $R=0$ the logarithm starts at $R^{13}\ln R$ in all seven cases, and
+reads as apparent.  At $R=0$ the logarithm starts at $R^{13}\ln R$ in all seven computed cases, and
 its coefficient at $(1,2)$ is $32$ times that at $(1,1)$ for the $3d_{\pm2}$ integral and $128$ times
 for the two $2p$--$2p$ integrals, consistent with the factors $b^5$ and $b^7$ of the scalings $a^9b^5$ and
 $a^7b^7$ suggested before computing ($a=1$ at both pairs, so the power of $a$ is untested).
@@ -560,7 +575,7 @@ rational coefficients.  What is measured here is its order and its singularities
 
 Caps:\ $1s$ orbitals plus the $l \le 2$ panel above;\ for exchange, the order $9$ is
 derived (bound and minimality) for every $a\neq b$ for $1s$, four $\sigma=0$ integrals and the two
-$m\neq0$ integrals against $1s$, while the reconstructed operators
+$m\neq0$ integrals against $1s$ (those two given Pachucki's Eq.~(16)), while the reconstructed operators
 are at equal exponents (order $4$) and at one or two unequal pairs (order exactly $9$;\
 the Neumann series does not terminate there), for $1s$, one $2p$ or $3d$ orbital against $1s$,
 and $2p$ on both centres;\
@@ -571,7 +586,7 @@ factors (\texttt{tests/test\_paper58\_r\_operators.py},
 \texttt{tests/test\_paper58\_minimal\_order.py}).
 
 The transcendental content grows across the classes, but---and this is the
-structurally important part---it does \emph{not} escalate in weight.  The
+structurally important part---term by term it does \emph{not} escalate in weight.  The
 ordered radial integral is an iterated integral over a simplex, the shape
 that defines a period, and iterated integrals of weight-one objects
 generically land at weight two (dilogarithms, $\zeta(2)$).  This one does
@@ -610,8 +625,8 @@ weight one, consistent with Sugiura's formula (guard
 \texttt{tests/test\_paper58\_master\_weight.py}).
 
 \textbf{This does not upgrade the $g$ row}, for two independent reasons.
-First, no re-census has been run with the new machinery, so the counted
-figures stand exactly as counted.  Second, and structurally, what the row
+First, no re-census of the cross classes has been run with the new machinery, so
+their counted figures stand exactly as counted.  Second, and structurally, what the row
 needs is zero-\emph{decidability}, and that is available only where a
 closed form exists.
 
@@ -708,7 +723,7 @@ class (at unequal exponents the summed closed forms of the seven exchange integr
 Sec.~\ref{sec:census} also need the master integral, a two-fold iterated integral, of weight two for $0<a<b$).  But the optimistic one---that the remaining independence argument is
 therefore \emph{ordinary work}---is wrong too, because \emph{weight one is
 not the same as decidable}.  The $(AA|BB)$ decision went through only because
-that class is the one place $\pi$ cancels \emph{and} no $E_1$, $\ln$ or
+that class is the one place no $E_1$, $\ln$ or
 $\gamma$ appears: pure $\{e^{-\lambda R}\}$, which Lindemann--Weierstrass
 separates at any algebraic $R$.  The cross classes carry $E_1(\mu R)$ (hybrid
 and exchange) and, for the exchange class, a standalone Euler $\gamma$ that
@@ -726,11 +741,13 @@ independent over $\mathbb{Q}(R)$---\textbf{[SYMBOLIC (proof-by-argument)]} a
 special case of the independence over $\mathbb{C}(R)$, for real rates, of the atoms
 $e^{cR}$, $e^{cR}\ln R$ and $e^{cR}\mathrm{Ei}(\kappa R)$ with distinct labels (a minimal relation
 differentiates to one with constant coefficients, which the divergent asymptotic series of
-$\mathrm{Ei}$ excludes)---so every cross-class entry is nonzero \emph{as a function of $R$}
+$\mathrm{Ei}$ excludes)---so every cross-class entry whose closed form lies in these atoms
+(the hybrid class, and exchange at equal exponents) is nonzero \emph{as a function of $R$}
 unless its grouped coefficients vanish, and any zero is therefore isolated at
-special $R$.  With the Gaussian corroboration above already showing the
+special $R$;\ at unequal exponents the seven exchange integrals of Sec.~\ref{sec:census} lie
+in the nine-function span, whose members are independent, so the same holds for them.  With the Gaussian corroboration above already showing the
 permitted entries generically nonzero, the honest position for the cross
-classes is: functionally nonvanishing (unconditional), generically nonzero
+classes is: functionally nonvanishing (unconditional, within that scope), generically nonzero
 (measured), and pointwise-\textsc{decidable} only \emph{conditional} on a
 Schanuel-type independence hypothesis for the $E_1$ and $\gamma$ values (and, for exchange at
 unequal exponents, the values of the master integral $f_0$, not classified here).  That
@@ -816,8 +833,8 @@ same-center analog vanishes identically.
 
 This does not upgrade the row to \textsc{measured}: Gaussian-fitted floats
 make these threshold decisions rather than decided zeros, so the exact
-statement still awaits the engine.  What it removes is the possibility
-that the counted density was an overcount.
+statement still awaits the engine.  It makes it unlikely that the counted
+density was an overcount.
 
 \emph{The $m$-rule, verified without reference to $m$.}
 Theorem~\ref{thm:abelian_residue}(i) has a basis-free consequence that can
@@ -1178,9 +1195,8 @@ the solver:
   \end{equation}
   under Eq.~\eqref{eq:dlmf_dictionary}.  Measured over nine modes at forty
   values of $c^2 \in [0.25, 60]$, the slope lies in $[0.14, 0.87]$ with no
-  violation.  The decompactification of $l$ therefore proceeds at a rate
-  that is strictly positive and strictly bounded above---it cannot stall,
-  and it cannot outrun $c^2$.
+  violation.  On that grid the decompactification of $l$ proceeds at a rate
+  that is strictly positive and strictly bounded above.
 \item DLMF~(30.3.1), $\lambda^m_m < \lambda^m_{m+1} < \cdots$, holds at
   every $c^2$ tested, and following it to large $c^2$ reaches the
   \emph{other} end of the correlation diagram.  The levels collapse into
@@ -1222,7 +1238,8 @@ asserted but which was not previously tested.  Backing:\
 \textbf{[MEASURED]} For $1s$ tails of different decay lengths
 $\ell_A, \ell_B$ (charges $Z_A \ne Z_B$), the tail-reach front
 $R_{\rm rel}$---the distance at which $|S|$ falls to $|S|_{\max}/\sqrt2$---
-combines the two lengths as a \emph{geometric mean}~\cite{smith1972},
+combines the two lengths as a \emph{geometric mean} (compare the combining rules for
+exponential repulsive potentials~\cite{smith1972}),
 \begin{equation}
   R_{\rm rel} \simeq \gvq{tail_geometric_const}{1.58}\,\sqrt{\ell_A \ell_B},
   \label{eq:tail_geometric}
@@ -1307,26 +1324,18 @@ CHANGELOG v5.10.2.
 
 \subsection{L\"owdin was paying an honest bill}
 
-The corpus previously recorded a $17.9\times$ Pauli inflation from
-retrofitting L\"owdin orthogonalization~\cite{lowdin1950} onto the
-balanced LiH integrals
-(CHANGELOG v4.73.1), and a $14\times$ inflation in the earlier
-heterogeneous-nested experiment.  Both were read as the price of
-orthogonalization, and orthogonalization was accordingly treated as the
-sparsity-destroying move.
+The corpus previously read the Pauli inflation measured when L\"owdin
+orthogonalization~\cite{lowdin1950} was retrofitted onto the balanced LiH
+integrals (CHANGELOG v4.73.1), and the inflation in the earlier
+heterogeneous-nested experiment, as the price of orthogonalization, and
+orthogonalization was accordingly treated as the sparsity-destroying move.
 
-The census shows this reading was wrong in an instructive way.  The
+The census undercuts this reading.  The
 genuine tensor's own permitted-density inflation over the builder is
-$\sim 15\times$---the same order as the $17.9\times$ L\"owdin figure,
-though the two are not commensurable: $17.9\times$ is a Pauli-term count on
-L\"owdin-retrofitted balanced LiH integrals, $15.0\times$ a counted
-permitted-entry ratio on a $Z_A = 3$/$Z_B = 1$ hydrogenic census, and
-neither carries an error bar.  The inference does not need them to agree
-numerically: the \emph{bulk} of that inflation cannot have been
-orthogonalization's price, because the untransformed tensor never possessed
-the sparsity L\"owdin was said to destroy.  ``L\"owdin destroys sparsity''
-and ``the molecular tensor is intrinsically $l$-dense cross-center'' are
-the same fact observed twice, from two sides.
+$\sim 15\times$ (a counted permitted-entry ratio on a $Z_A = 3$/$Z_B = 1$
+hydrogenic census) before any transformation, so that inflation need not
+have been orthogonalization's price:\ the untransformed tensor never
+possessed the sparsity L\"owdin was said to destroy.
 
 This matters because it removes an entire class of proposed remedies.
 Any scheme whose premise is ``avoid the transformation and keep the
@@ -1339,8 +1348,8 @@ sparsity'' is answering a question that was mis-posed.
 Five independent attempts to move the non-orthogonality out of the way
 each succeeded in moving it and failed to reduce it:
 \begin{enumerate}
-\item into the \textbf{operator} (L\"owdin $S^{-1/2}$): operator
-densifies $17.9\times$;
+\item into the \textbf{operator} (L\"owdin $S^{-1/2}$): the operator
+densifies;
 \item into a \textbf{dual basis} (biorthogonal encoding): densifies
 comparably.  The metric provably does not disappear---in the contravariant
 representation it reappears as an $S^{-1}$ contraction, and the dual
@@ -1557,11 +1566,10 @@ corrupting the integrals.
 
 \textbf{[MEASURED + SYMBOLIC]} The engine's classes have now been used
 \emph{end-to-end}:\ complete diatomic FCI energies in which every one- and
-two-electron integral is a closed-form expression---rationals, $\sqrt{\phantom.}$,
-$\pi$, $\exp$, $E_1$, $\log$, $\gamma_E$ (the $\pi$'s are angular-measure and
-normalization prefactors of the \emph{assembled} integrals;\ the radial seed content of
-each class is the $\{\exp,E_1,\ln,\gamma_E\}$ set of the preceding sections, and
-(AA$|$BB) is where even the prefactor $\pi$ cancels)---evaluated to arbitrary precision,
+two-electron integral is a closed-form expression, term by term in the Neumann series
+where the exchange series does not stop (LiH below)---rationals, $\sqrt{\phantom.}$,
+$\exp$, $E_1$, $\log$, $\gamma_E$ (the radial seed content of
+each class is the $\{\exp,E_1,\ln,\gamma_E\}$ set of the preceding sections)---evaluated to arbitrary precision,
 with no quadrature routine anywhere in the production path
 (\texttt{geovac/qfd\_core.py}, \texttt{geovac/qfd\_assemble.py};\
 \texttt{tests/test\_paper58\_qfd.py}).
@@ -1581,7 +1589,7 @@ re-run keeping every factor symbolic (the library entry point casts to float,
 capping certification at $\sim\!16$ digits).
 
 \textbf{[MEASURED]} H$_2$ ($1s$ per center, $\zeta=1$, $R=1.4$):\ the
-homonuclear exchange Neumann $\tau$-series \emph{terminates symbolically} \textbf{[SYMBOLIC]}
+equal-exponent exchange Neumann $\tau$-series \emph{terminates symbolically} \textbf{[SYMBOLIC]}
 ($\tau=1$ and all $\tau>2$ are exact zeros), so the pipeline contains no
 truncation of any kind, and the FCI total energy is certified to \textbf{60
 digits} (under the reference artifact's capping convention---a claim never exceeds the
@@ -1729,7 +1737,7 @@ Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
 QFD 1e closed forms (Sec.~\ref{sec:qfd}) & SYMBOLIC & \textsc{live} \\
 $R$-operators, $l\le2$ panel (Sec.~\ref{sec:census}) & SYMB.\ + MEAS. & \textsc{live} \\
-exchange order exactly $9$, every $a\neq b$, the seven exchange integrals of Sec.~\ref{sec:census};\ exactly $4$ at $a=b$ (Sec.~\ref{sec:census}) & SYMBOLIC & \textsc{live} \\
+exchange order exactly $9$, every $a\neq b$, the seven exchange integrals of Sec.~\ref{sec:census} (the $m\neq0$ pair given Pachucki's Eq.~(16));\ exactly $4$ at $a=b$ (Sec.~\ref{sec:census}) & SYMBOLIC & \textsc{live} \\
 QFD H$_2$ 60-digit energy & MEASURED & \textsc{live} (fast legs) + certified tables \\
 QFD LiH 30-digit ($\tau$-tail net) & MEASURED & \textsc{live} (slow:\ full rebuild + tail bound) \\
 \end{tabular}

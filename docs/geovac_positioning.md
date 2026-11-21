@@ -18,7 +18,7 @@ raw Pauli terms than STO-3G, and the decisive reduction is against cc-pVDZ.
 
 ## Why It's Sparse
 
-GeoVac's composed architecture assigns each electron group (core pair, bond pair, lone pair) its own natural coordinate system, then couples them via screened Coulomb integrals and Phillips-Kleinman pseudopotentials. Within each block, the angular basis is built from spherical harmonics on the natural geometry, so Gaunt integral selection rules enforce exact zeros in the electron repulsion integrals. The result is block-diagonal ERIs with no cross-block two-electron terms. This structural sparsity is intrinsic to the basis, survives Jordan-Wigner encoding, and is compatible with qubit tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (Paper 14).
+GeoVac's composed architecture assigns each electron group (core pair, bond pair, lone pair) its own natural coordinate system, then couples them via screened Coulomb integrals and Phillips-Kleinman pseudopotentials. Within each block, the angular basis is built from spherical harmonics on the natural geometry, so Gaunt integral selection rules enforce exact zeros in the electron repulsion integrals. The result is block-diagonal ERIs with no cross-block two-electron terms. This structural sparsity belongs to the composed builder's same-centre construction (the genuine cross-centre tensor is l-dense, Paper 58), survives Jordan-Wigner encoding, and is compatible with qubit tapering and tensor factorization; it does not carry over into a measurement-grouping scaling advantage (Paper 14).
 
 ## Where It Fits
 

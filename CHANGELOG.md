@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.8.1] - 2026-11-20
+
+**/qa paper_58 FULL #3 (seeded, PI-invoked) = FAIL, remediated; the m != 0 exchange step proved (PI-directed).**
+
+### Run
+- Criteria re-frozen with the PI: headlines 10-17 and watch-notes W9-W13 added for the two-centre operator results
+  (`docs/qa/paper_58.done.md`). Deterministic gates on scope paper_58: all 15 PASS.
+- Seeded: 14 plants (6 code, 4 prose, 2 citation, 2 derived). Calibration 14/14 caught, 0 false positives on five
+  known-good controls; three plants were caught only on a focused re-dispatch (claims chunk B: the hybrid
+  review-status clause; code chunk A: a loosened tolerance and a self-comparison; code chunk B: a dropped universal
+  conjunct). Twelve reviewers plus a completeness critic.
+- Every recomputed number held (60-digit H2 by an independent route; the exact-order calculations; the hybrid
+  forms to 90-100 digits; the decompactification table). Verdict FAIL on labelling, credit and backing.
+  RESEARCH-GRADE not earned (OWNER-LARGE found). Coverage: owner units unstamped this cycle (0/16).
+
+### OWNER-LARGE (7), fixed
+- m != 0 exchange was tagged [SYMBOLIC PROOF] while its inverse-Laplace step was certified, not proved. PI asked
+  for a derivation: proved (memo `debug/pachucki_m_proof_memo.md`, cold-reviewed SOUND WITH CAVEATS), given
+  Pachucki's Eq. (16) used as published, for u2 != u3, w2 != w3 (HLS bound, holomorphy in w1, division by t^4,
+  Lerch, four derivatives; no boundary values used; decaying solution unique at the exchange point). In the paper.
+- Pachucki 2009 Sec. VII Eq. (64) already gives the exchange-case r12 recursion with the (u^2-w^2)^2 denominator
+  (checked in the PDF); "as derived here" removed, his procedure and Eq. (64) credited.
+- "It does not escalate in weight" scoped term by term (the same paragraph proves weight two for 0<a<b).
+- The quadrature-free opener said every integral is a closed form; scoped to Neumann terms where the exchange series
+  does not stop (LiH).
+- "Functionally nonvanishing (unconditional)" for every cross-class entry scoped to integrals whose closed form lies
+  in the atoms, plus the seven exchange integrals (nine independent functions).
+- The many-electron front's only test had errored since v6.7.2 (`debug/aha_t1_core.py` archived; loaded by path,
+  so the sweep's import closure missed it): restored, test passes. Its numbers remain unasserted (guard pass owed).
+- The 17.9x Lowdin figure rested on the retired 878-term baseline (registry `lih_balanced_pauli`) and a run with
+  non-PSD overlap: removed (PI), abstract, sec:rereadings and Obs. cost_conservation reworded from the 15x census.
+
+### SURFACE-LARGE, fixed and converted to C16 entries
+- `one-centre-exact-rationals` (new): field guide x2, atlas, geovac_story, Paper 57, forced_free_seam said one
+  centre gives exact rationals; the owner says rationals times one square root (restated 2026-11-15, never
+  registered). Two older entries' notes named the retired form as correct; fixed.
+- `sparsity-basis-intrinsic` (new, PI-decided): README x2, geovac_positioning, claims_register row 19, Paper 20 said
+  the sparsity is basis-intrinsic; it belongs to the composed builder's same-centre construction (Paper 58).
+- `two-centre-weight-one-whole-integral` (widened): Papers 34, 57, 59, forced_free_seam, the Avery map draft;
+  cited_by extended.
+- `p58-overclaims-fullqa3` (new): Shibuya-Wulfman "precisely" (Paper 19: "closely related"); "(AA|BB) the one place
+  pi cancels" (Papers 58, 59; normalized classes are pi-free, Sugiura's formula has no pi); README's "order of
+  each one's equation proved"; Paper 32 "no sparsity-preserving closure"; "H2 84 digits" (60); 17.9x.
+- Group2 synthesis: decidability clause gains the master-integral condition; "Liouville-Rosenlicht" removed; the
+  mechanism credited (Curie, Bethe). Each new entry fires on the old wording and is silent on the new (tested).
+
+### SMALL
+- Fixed with the LARGE units: Smith 1972 cited for comparison only; DLMF rate bound "on that grid"; gcd over three
+  R (the guarded count); tau termination is equal-exponent, not homonuclear; the Gaussian corroboration "makes it
+  unlikely"; abstract carries "certified is precision, not accuracy"; certified-reference "84-digit" notes.
+- The rest (~40, including guard-precision gaps) listed in `docs/qa/paper_58.debt.md` for one sweep.
+
+### Self-check (bounded, two rounds)
+- Round 1: 1 OWNER-LARGE (the Lowdin re-reading kept "cannot have been" after its figure was removed; now "need not
+  have been", abstract and synthesis to match), 1 SURFACE-LARGE (the J9 rung clause "the exchange class closes in the
+  two-centre seed set" in Papers 57, 59, the seam register and the walls register, now "term by term"; gate entry
+  widened); a Paper 32 sentence the first pass had garbled; README's other basis-sparsity line (gate entry widened).
+- Round 2: the inserted proof block SOUND; 1 OWNER-LARGE (two Lowdin body sentences still at full strength, deleted);
+  SMALL: the intro's "neglect is what preserves the sparsity" (same-centre construction), the caps paragraph gains
+  the Eq. (16) condition, Paper 18 "no weight-two object" scoped per term. Self-check closed with an open owner fix
+  (round-2 fixes not re-reviewed).
+
+### Notes
+- debug/ sweep lesson: a file loaded by path string (importlib) is invisible to the import closure; the record
+  driver `decompactification_correlation_ladder.py` loads `aha_t1_core.py` that way.
+
 ## [v6.8.0] - 2026-11-20
 
 **One-pager retired; the QA gate's front-door list changes (MINOR bump by the standing rule, PI-approved).**

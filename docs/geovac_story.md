@@ -35,7 +35,7 @@ and what kind of number it costs.
 
 Sorted this way, the building blocks of chemistry sit on a ladder.
 
-- **One atom:** ordinary fractions.
+- **One atom:** fractions, and fractions times a square root.
 - **Two atoms:** logarithms and their relatives.
 - **Three atoms:** numbers that come from curves shaped like the surface of a doughnut.
 - **More atoms, bending, squashing, outside fields:** in every case checked so far, nothing higher. Changing the

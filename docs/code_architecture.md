@@ -68,7 +68,7 @@
 | Sturmian molecular block-encoding λ (Paper 60 sec:manyelectron) | `geovac/sturmian_molecular_lambda.py` | `h2_lambda(nmax)`, `lambda_scaling()` (n_orb^2.2; imports the integral engine) |
 | Sturmian SW sigma-spectrum law (Paper 60 eq:sigma_law) | `geovac/sturmian_sigma_law.py` | `sw_cross_block(s,nmax)`, `sigma_spectrum`, `cond_from_sigma`, `commutator_from_sigma/direct`, `gerade_constant()` (N^2 law -- **Kac-Murdock-Szego PRIOR ART, not derived here**; ours is the identification of the SW metric as such a finite section; collapse pi^2/24) |
 | Balanced 4e matrix-free direct CI (Paper 19 n_max=4 decider) | `geovac/balanced_direct_ci.py` | `DirectCI4e(h1,eri,ecore).ground_state()` (string-sigma + Davidson; ~1600x vs assembled matrix; `faithful=` historical pre-fix phase) |
-| Quadrature-free diatomic (Paper 58 sec:qfd) | `geovac/qfd_core.py` + `geovac/qfd_assemble.py` | `build_S_h`, `build_g`, `total_energy(...,dps)` (closed-form S/h/g -> Loewdin -> FCI at any precision; H2 84 digits, LiH 30) |
+| Quadrature-free diatomic (Paper 58 sec:qfd) | `geovac/qfd_core.py` + `geovac/qfd_assemble.py` | `build_S_h`, `build_g`, `total_energy(...,dps)` (closed-form S/h/g -> Loewdin -> FCI at any precision; H2 60 digits, LiH 30) |
 | Certified reference values (Paper 58/59 artifact) | `benchmarks/certified_reference/generate_table.py` | 51-entry table + `--check`; human doc `docs/certified_reference_values.md` |
 | Balanced coupled builder | `geovac/balanced_coupled.py` | `build_balanced_hamiltonian(spec, nuclei)` |
 | Frozen core (Ne-like) | `geovac/neon_core.py` | `FrozenCore(Z)` |

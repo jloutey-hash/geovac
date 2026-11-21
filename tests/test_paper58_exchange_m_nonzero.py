@@ -6,7 +6,7 @@ pass, CLAUDE.md Sec. 9):
     For every real 0 < a < b, the two-centre exchange integrals
         2ppi  = (2p+1_A 1s_B | 2p-1_A 1s_B)    and    3ddel = (3d+2_A 1s_B | 3d-2_A 1s_B)
     lie in the Q(a, b)(R)-span of the same nine functions as the 1s exchange integral, hence satisfy an ODE in R of
-    order <= 9.  The route is an equation derived here from Pachucki's label 39 (arXiv:0905.1635), first order in
+    order <= 9.  The route is an equation derived here from Pachucki's label 39 (his Eq. (42) in the PDF, the u1 = t form of his Eq. (16), which the paper cites) (arXiv:0905.1635), first order in
     the r12 exponent, by the inverse Laplace transform:
         q f_{m+1}'' = c f_{m+1} + m^2 (d^4 - Sig d^2 + e) f_{m-1} + m (m-1)^2 (m-2) f_{m-3}'' + S_m(r)      (**)
     At (a, b) = (1, 2) the derived operators equal the committed ones, (9, 25) and (9, 35).  The sigma = 2 part of
@@ -30,8 +30,9 @@ WHAT THIS FILE TESTS.
      against geovac.qfd_core.exchange_hp (Neumann expansion, no Pachucki equation).
 
 WHAT IT DOES NOT TEST.
-  * (**) as a line-by-line theorem: the termwise inverse Laplace transform is certified, not proved, by the
-    labels 61/63, the exact controls, and the independent numbers.
+  * (**) as a theorem: it is proved in Paper 58 (given Pachucki's Eq. (16), for u2 != u3, w2 != w3; proof memo
+    debug/pachucki_m_proof_memo.md, cold-reviewed 2026-11-20). This file checks its consequences (labels 61/63, the
+    exact controls, the independent numbers), not the proof.
   * Operator equality away from (1, 2); a > b for these mixed cases; anything at a = b beyond the existing guards;
     other (l, m).
   * The independence lemma (tests/test_paper58_exact_order.py).
