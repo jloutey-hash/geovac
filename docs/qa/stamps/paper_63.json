@@ -2,9 +2,9 @@
  "target": "paper_63",
  "units": {
   "cite:papers/group3_foundations/paper_63_density_graph_ladder.tex": {
-   "date": "2026-11-06",
-   "hash": "ffdfd2c4911a1aaa",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "58960e9995132a98",
+   "run": "FULL-2026-11-21"
   },
   "code:papers/group3_foundations/paper_63_density_graph_ladder.tex": {
    "date": "2026-11-06",
@@ -12,19 +12,19 @@
    "run": "paper_63 FULL #2 2026-11-06 (code; 30 inputs identical to 21ed8de7)"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Conclusion": {
-   "date": "2026-11-06",
-   "hash": "05f8824241843d1e",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "13eea44919930d6f",
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Introduction": {
-   "date": "2026-11-06",
-   "hash": "d9ccbb224e4870a7",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "75e890dadb2d507e",
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Placement in the literature": {
-   "date": "2026-11-06",
-   "hash": "018f784a974c7a93",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "4f4964fea961630f",
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::Scope, and what is open": {
    "date": "2026-11-06",
@@ -42,24 +42,24 @@
    "run": "paper_63 FULL #2 2026-11-06"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit": {
-   "date": "2026-11-06",
+   "date": "2026-11-21",
    "hash": "1c8fa357eb6fd173",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A fourth distinct center adds no genus": {
-   "date": "2026-11-06",
-   "hash": "7ee7e783333caa3d",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "ba09f7d197f42736",
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A ring of three densities: the loop does not climb": {
-   "date": "2026-11-06",
-   "hash": "31b707e3d9070953",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "2f1a2998c49bb8e5",
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / A three-electron chain lives on a K3 surface": {
-   "date": "2026-11-06",
-   "hash": "5ad28c9a486259be",
-   "run": "paper_63 FULL #2 2026-11-06"
+   "date": "2026-11-21",
+   "hash": "e7c4dd4429239286",
+   "run": "FULL-2026-11-21"
   },
   "prose:papers/group3_foundations/paper_63_density_graph_ladder.tex::The rungs: a fourth center, a three-electron chain, four linked densit / Four linked densities: the first rung beyond elliptic": {
    "date": "2026-11-06",

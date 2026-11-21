@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v6.8.2] - 2026-11-21
+
+**/qa paper_63 FULL (unseeded, PI-invoked) = FAIL, remediated; attainment extended to every centre derivative with Pi != 0 (PI-directed).**
+
+### Run
+- Criteria re-frozen with the PI: headlines 10-16 and watch-notes W7-W10 (`docs/qa/paper_63.done.md`). Unseeded
+  (PI choice), with the assertion-by-assertion audit built into the code prompts; trust rests on the 2026-11-20
+  seeded Paper 58 run (14/14, 0 FP) plus PM verification of every MATERIAL finding.
+- Deterministic gates on scope paper_63: 15/15 PASS. Eight reviewers plus a completeness critic. All 36 test files
+  run (fast and slow; one ~2000 s FXK search not run). Every recomputed number held (tree reduction by a
+  momentum-space route, path top constants, BBBG eq. 33 at fresh triples, the ninth singular point symbolically).
+- One FALSE POSITIVE, caught by PM verification: the citation reviewer called the Lim-Tu-Yu credit misattributed;
+  the PDF's appendix A.3 (eq. 43-44, footnote 3) contains exactly the Bessel-moment L-values Paper 63 credits. The
+  reviewer and an HTML fetch both missed the appendix. Recorded so the unseeded record shows it.
+
+### OWNER-LARGE (2), fixed
+- l.297-300: "every composition factor ... is a factor of F_k, or, for n <= 7, of a banana operator" read for all n;
+  for n >= 8 the odd pieces are not identified. Scoped to n <= 7 (with the slice and weights).
+- The paper said both that its proof covers non-homogeneous centre derivatives with Pi != 0 and that this case is not
+  proved. PI asked for a derivation: proved (memo `debug/p63_pi_nonzero_memo.md`, cold-reviewed SOUND; the review
+  caught nabla^2 -> 1 at the root, which must be (n-1)^2, confirmed by a computed 5 pi/2 case). prop:tree_attain_hom
+  now covers every centre-derivative P_v of degree <= 2 with Pi != 0; the conjecture is open only for Pi = 0.
+  The mixed-degree checks are records; a guard is owed.
+
+### SURFACE-LARGE, fixed and converted
+- `p63-attainment-scope` (new C16 entry): "up to eight s-type densities" (six loci in Paper 63, the period ladder)
+  and README's "Trees of n linked densities reach rung n" without its conditions; attainment is proved at the
+  fingerprint (1s) weights, 3 <= n <= 8. prop:star_attain retitled accordingly.
+- Claim matrix rows 180-184, 905-910 (withdrawn star mechanism, "OPEN" for proved results); atlas door 20 "Owed:
+  the reduction at five or more densities" and the J8 "assumed reduction"; C25 entry `p63-dictionary-module`
+  statement brought to the proved fibre bound and attainment.
+
+### Self-check (two rounds)
+- Round 1: 1 OWNER-LARGE (the conjecture said its s-type case, sigma = 1, is star_attain; that proposition covers
+  only P_v = 1: root nabla^2 - (n-1)^2 has sigma = 1 and Pi = 0), 1 SURFACE-LARGE (the ladder credited the open
+  Pi = 0 case with the local argument the owner disclaims), ~12 stale "homogeneous" restatements (now the Pi != 0
+  scope). Round 2: 0 OWNER-LARGE; four SMALL fixed (parenthesis, d_0 defined, Pi used before definition, guard
+  pointer). Coverage 8/14 owner units stamped (was 1/14).
+
+### SMALL
+- About 40 in `docs/qa/paper_63.debt.md` (guard precision gaps, record-only mod-p legs, two guards that cannot
+  fail, the stale website page for Paper 63 to rebuild at the next Release, criteria caps to re-freeze).
+
 ## [v6.8.1] - 2026-11-20
 
 **/qa paper_58 FULL #3 (seeded, PI-invoked) = FAIL, remediated; the m != 0 exchange step proved (PI-directed).**

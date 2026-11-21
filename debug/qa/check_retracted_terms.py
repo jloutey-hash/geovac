@@ -10350,6 +10350,33 @@ REGISTRY = [
             "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex": "remediated 2026-11-20 (PM) -- 'and there alone, even the prefactor pi cancels' removed from the introduction; review owed (self-check)",
         },
     },
+    {
+        "id": "p63-attainment-scope",
+        # The CLAIM (Paper 63 prop:star_attain, prop:tree_attain_hom): the fibre reaches rung n for 3 <= n <= 8 for
+        # Coulomb trees of s-type densities AT THE FINGERPRINT (1s) WEIGHTS on the one-free-scale slice, and for
+        # centre derivatives with Pi != 0 (homogeneous: a nonzero angular integral); scale derivatives (2s, 3s
+        # weights) are not covered and Pi = 0 is a conjecture. Retired: "up to eight s-type densities" (drops n >= 3
+        # and the 1s weights) and README's unconditional "Trees of n linked densities reach rung n".
+        "pattern": r"up\s+to\s+eight\s+\$?s\$?-type\s+densities"
+                   r"|Trees\s+of\s+n\s+linked\s+densities\s+reach\s+rung\s+n",
+        "exempt_if_nearby": withdrawal_marker("p63-attainment-scope"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-11-21 (/qa paper_63 FULL, SURFACE-LARGE README + owner-unit restatements). Attainment is proved at the 1s weights, 3 <= n <= 8; centre derivatives need Pi != 0 (homogeneous: a nonzero angular integral.",
+        "files": [
+            "papers/group*/*.tex",
+            "papers/synthesis/*.tex",
+            "README.md",
+            "papers/INDEX.md",
+            "docs/atlas.md",
+            "docs/claims_register.md",
+        ],
+        "cited_by": {
+            "README.md": "remediated 2026-11-21 (PM) -- Paper 63 row",
+            "papers/synthesis/period_ladder.tex": "remediated 2026-11-21 (PM) -- 'what the series adds'",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated 2026-11-21 (PM) -- tree sentence; review owed (self-check)",
+        },
+    },
 ]
 
 

@@ -238,7 +238,7 @@ The "C-arc closure" sprints of June 2026 placed the Forced-Count dimension count
 | 60 | Sturmian secular equation as a quantum algorithm | Metric-free eigenproblem for atoms; two-centre Sturmian H₂ |
 | 61 | Bessel-moment periods | The number theory of the three-centre integral (modular family, CM points) |
 | 62 | Water at equal size | Slater versus Gaussian bases at equal size; the matched-accuracy Pauli cost of a Gaussian basis is at most 4.7×, depending on the Gaussian family |
-| **63** | **The density-graph ladder** | **Trees of n linked densities reach rung n (proved for 3 ≤ n ≤ 8, s-type and homogeneous centre derivatives): elliptic, K3, Calabi–Yau, the banana integrals** |
+| **63** | **The density-graph ladder** | **The fibre of a tree of n linked densities reaches rung n (proved for 3 ≤ n ≤ 8 at the 1s weights, and for centre derivatives with a nonzero leading coefficient Π): elliptic, K3, Calabi–Yau, the banana integrals** |
 
 ---
 

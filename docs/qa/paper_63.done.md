@@ -227,6 +227,44 @@ verify ALL of:
    uniqueness, not count; the integrated value at or below its fibre; four caps stated;
    P3e-2 is its test; the Symanzik-polynomial proof not attempted.
 
+## 2026-11-20 re-cert additions (FROZEN with the PI, 2026-11-20)
+
+Since the 2026-11-06 freeze the paper gained the one-dimensional tree reduction, the rung bounds and the
+attainment results (v6.7.20-v6.7.41). Headlines 1-9 stand (headline 1's tree bound and the attainment cap below
+are superseded where these say more); these are added at the paper's own tiers.
+
+10. **Every tree reduces to one dimension [SYMBOLIC PROOF]** (`prop:tree_reduction`): any tree of radial
+    (s-type) densities joined by Coulomb, Yukawa or Slater kernels is a one-dimensional radial recursion
+    (shell theorem), rooted anywhere.
+11. **Rung bound, three-dimensional tree [SYMBOLIC PROOF]** (`prop:tree_rung`): Coulomb kernels, fingerprint
+    weights, slice (t;1,...,1): every composition factor of the fibre's minimal operator has order <= n.
+12. **Rung bound for l > 0 [SYMBOLIC PROOF]** (`prop:tree_rung_l`): centre derivatives of degree <= 2 (any
+    degree in the scale), same conclusion.
+13. **Odd pieces [SYMBOLIC PROOF, stated range]** (`prop:odd_banana`): odd-lambda pieces carry Vanhove's
+    two-dimensional banana operators for 2 <= m <= 5, order m-1; even pieces those of F_{m+1}.
+14. **s-type trees reach their rung [SYMBOLIC PROOF; step (i) checked exactly for small trees, mod primes beyond
+    n = 5]** (`prop:star_attain`): 3 <= n <= 8, any root; F_n lies in the fibre's D-module; n >= 9 the modules
+    meet nontrivially.
+15. **Homogeneous centre derivatives reach the rung [SYMBOLIC PROOF]** (`prop:tree_attain_hom`), under the
+    nonvanishing sphere-integral condition; the non-homogeneous case is the conjecture (`conj:tree_attain`),
+    [ARGUMENT], not proved.
+16. **l > 0 records [MEASURED]**: P63L1 / P63L2 branch exponents and amplitudes (registered before computing).
+
+Added watch-notes:
+- **W7 — proof vs check.** Which steps of star_attain / tree_attain_hom are exact, which mod a prime, which
+  sampled; the paper's own disclosure ("checks of (i) beyond n = 5 are modulo primes, not exact") must hold at
+  every restatement.
+- **W8 — conjecture stays a conjecture.** conj:tree_attain covers non-homogeneous P_v only as [ARGUMENT];
+  no locus may say "trees reach their rung" without "s-type" or "homogeneous".
+- **W9 — weight one per Neumann term** (C16 `two-centre-weight-one-whole-integral`) in the introduction and
+  anywhere two-centre integrals are restated.
+- **W10 — Vanhove / Bloch-Kerr-Vanhove credit** for the banana operators; Brown 2015 for the tree reduction's
+  prior art where the paper cites it.
+
+C9 derived documents: group3 synthesis, field guide, `papers/synthesis/period_ladder.tex`, `docs/atlas.md`,
+`docs/chemistry_period_inventory.md`, README, `papers/INDEX.md`, `docs/claims_register.md`, `docs/forced_free_seam.md`,
+Paper 57 sub-domain J (as restatement).
+
 ## Caps the reviewers must find intact
 
 - The rungs are read on the fibre; the integrated value may sit lower (and does in one
@@ -260,6 +298,13 @@ the correlated triangle's K3 rung at $\gamma = 1$; prop:tree_bound's scope (s-ty
 one-scale slice).
 
 ## Change log
+- 2026-11-21 — **FULL (unseeded, PI-invoked) = FAIL, remediated (v6.8.2). RESEARCH-GRADE not earned (OWNER-LARGE
+  found).** Criteria re-frozen with headlines 10-16, W7-W10. Deterministic 15/15 PASS. 2 OWNER-LARGE (odd-banana
+  scope; the Pi != 0 contradiction, resolved by a cold-reviewed proof that extends prop:tree_attain_hom). SURFACE-LARGE
+  converted to C16 `p63-attainment-scope`; matrix, atlas and C25 `p63-dictionary-module` brought current. One citation
+  false positive (Lim-Tu-Yu, overturned against the PDF). Self-check: round 1 1 OWNER + 1 SURFACE LARGE, round 2
+  0 OWNER-LARGE. Coverage 8/14. Caps 2 and the fibre half of 3, criterion 5 and W1 are stale against the owner:
+  re-freeze with the PI before the next run. Debt: `docs/qa/paper_63.debt.md`.
 - 2026-11-06 (after FULL #2) — **AMENDED, PI-approved ("Agree with you decision recommendations").** FULL #2's
   claims reviewer showed attainment follows at the holomorphic-period level: F_n's operator is irreducible for
   n = 2..8 (guarded), so a nonzero E F_n generates F_n's simple module; pure-power weights give a positive period

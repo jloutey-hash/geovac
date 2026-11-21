@@ -471,12 +471,15 @@ CLAIMS = {
                   "D-module M [SYMBOLIC PROOF + PRIOR ART]. For a tree of s-type densities on the one-scale slice "
                   "the holomorphic period is E F_n, at or below rung n (prop:tree_bound, SYMBOLIC PROOF + MEASURED, "
                   "record RB 2026-11-06), and ON rung n for n <= 8 when the period is not identically zero (F_n's "
-                  "operator irreducible for n = 2..8); for rings, l > 0, other slices and the fibre the bound is NOT "
-                  "shown; every computed fibre sits on the 1s rung (observation; fibre attainment not proved). "
+                  "operator irreducible for n = 2..8). For the fibre on the slice (t;1,...,1) with Coulomb kernels the "
+                  "order bound is proved (prop:tree_rung; l > 0 to degree 2, prop:tree_rung_l) and attainment for "
+                  "3 <= n <= 8 at the fingerprint (1s) weights (prop:star_attain) and for centre "
+                  "derivatives with Pi != 0 (prop:tree_attain_hom); rings and other slices are "
+                  "not shown, and that every computed general-orbital fibre sits on the 1s rung is observed. "
                   "The fibre Euler-operator weight identities hold for s-type densities only.",
         owner="papers/group3_foundations/paper_63_density_graph_ladder.tex",
         owner_anchor=r"What the dictionary does and does not say", owner_tier=r"places every",
-        tier="SYMBOLIC PROOF + PRIOR ART (module membership; rung bound not proved)", owner_window=1,
+        tier="SYMBOLIC PROOF + PRIOR ART (module membership; fibre bound and attainment as stated)", owner_window=1,
         mention=r"orbital-independent|independent of the orbitals|depend on the orbitals|"
                 r"(rung|class|ladder)[^.;|]{0,40}\b(set by|property of|bounded by)\b[^.;|]{0,10}(its|the) (density )?graph|"
                 r"graph-set|derivative of the \$?1s\$? (Yukawa|integral)",
