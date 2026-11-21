@@ -8,7 +8,9 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-63 scope + deltas + watch-notes.
 
-> **STATUS: RESEARCH-GRADE (FULL #2, 2026-11-06, v6.4.4).** Primary verdict FAIL on two
+> **STATUS (2026-11-21): latest run FULL #3 (v6.8.2) = FAIL, remediated (2 OWNER-LARGE fixed); RESEARCH-GRADE
+> not re-earned; coverage 8/14. RE-FROZEN 2026-11-21 (PI: "Approve as drafted"), governs the next run.**
+> RESEARCH-GRADE was last earned by FULL #2 (2026-11-06, v6.4.4): primary verdict FAIL on two
 > SURFACE-LARGE (fixed, C16 `p63-stale-owed-and-rung-rule-home`) and SMALLs (debt file); 0
 > OWNER-LARGE; every dimension exercised; gates green incl. C25; coverage 14/14. Not PASS.
 > History: FULL #1 FAIL (v6.4.1), RB sprint (v6.4.2), claim-search DELTA DEFECTS (v6.4.3).
@@ -98,10 +100,19 @@ verify ALL of:
    $D$-module**) carries `[SYMBOLIC PROOF]`. The **rung bound** is proved only by
    prop:tree_bound, for trees of $s$-type densities on the one-scale slice at the
    holomorphic-period level. Any sentence asserting or relying on a rung bound outside
-   that scope (rings, $\ell>0$, other slices, the integrated value), or on attainment
-   beyond prop:tree_bound's clause (holomorphic period, $n\le8$, period not identically
-   zero; "the rung equals the $1s$ rung" for fibres, "orbital-independent" read as
-   equality), is MATERIAL.
+   that scope (rings, other slices, the integrated value; the fibre bounds of
+   prop:tree_rung / prop:tree_rung_l are separate, Coulomb kernels at the fingerprint
+   weights), is MATERIAL. **Attainment (re-frozen 2026-11-21) is proved in exactly three
+   clauses:** (a) prop:tree_bound, the holomorphic period, $n\le8$, period not identically
+   zero; (b) prop:star_attain, the fibre of $s$-type trees at the fingerprint ($1s$)
+   weights, $3\le n\le8$, slice with one free scale; (c) prop:tree_attain_hom, centre
+   derivatives of degree $\le2$ (mixed degrees allowed, scale derivatives not covered)
+   with $\Pi\neq0$, $3\le n\le8$, same slice. Any attainment claim outside these ("trees
+   reach their rung" without the $1s$-weight or $\Pi\neq0$ scope, $\Pi=0$, scale
+   derivatives, $n\ge9$, "the rung equals the $1s$ rung" for general fibres,
+   "orbital-independent" read as equality) is MATERIAL. **The odd-piece identification**
+   (every composition factor is a factor of some $F_k$ or of a banana operator) holds for
+   $n\le7$ only; any reading for $n\ge8$ is MATERIAL.
    A `[SYMBOLIC PROOF]` tag resting on a numerical check alone is MATERIAL.
 2. **A rung is an operator, not a number.** The tree ladder names the operator of the
    one-scale family (Legendre ⋆ equal-mass banana; $n = 4$ AESZ #58). The generic
@@ -124,12 +135,15 @@ verify ALL of:
    computed (cap four).
 5. **The conjecture stays bounded.** `sec:conjecture` is `[OBSERVATION + PRIOR ART]`: a
    pattern across the tested instances with its four caps stated (fibre vs integrated
-   value; the three-dimensional reduction shown only through four densities; the
-   dictionary a bound only for $s$-type trees on the one-scale slice, attainment proved
-   only there, at the holomorphic-period level for $n\le8$; one ring, and the generic fibre's content evidence). The
-   nearest theorem (Brown, massless graphs) is cited as such; the Symanzik-polynomial
-   proof is explicitly not attempted. Any "theorem", "derived" or "proved" on the
-   conjecture = MATERIAL.
+   value; the three-dimensional reduction and bounds of prop:tree_reduction /
+   prop:tree_rung(_l), with attainment computed for $n=3,4$ and proved only in clauses
+   (b) and (c) of criterion 1; the dictionary a bound only for $s$-type trees on the
+   one-scale slice, attainment there at the holomorphic-period level for $n\le8$; one
+   ring, and the generic fibre's content evidence). conj:tree_attain is open only for
+   $\Pi=0$ (and scale derivatives are outside it); its [ARGUMENT] paragraph does not reach
+   $\Pi=0$. The nearest theorem (Brown, massless graphs) is cited as such; the
+   Symanzik-polynomial proof is explicitly not attempted. Any "theorem", "derived" or
+   "proved" on the conjecture, on $\Pi=0$ or on scale derivatives = MATERIAL.
 6. **Pricing is pricing.** The operator-evaluator and production-fit results are
    `[MEASURED]` costs on one machine and one configuration, on model densities; the
    operators are "structure, not a shortcut" for chemistry. Any "exact ⇒ faster
@@ -140,9 +154,9 @@ verify ALL of:
 
 - **W1 — the dictionary's reach [HIGHEST RISK; criteria 1, 5].** The abstract,
   introduction, conjecture status, scope and conclusion restate the dictionary. Verify
-  each keeps module membership as the general statement, scopes any rung bound to
-  $s$-type trees on the one-scale slice (prop:tree_bound), and claims attainment only in
-  its $n\le8$ nonzero-period clause;
+  each keeps module membership as the general statement, scopes any dictionary rung bound
+  to $s$-type trees on the one-scale slice (prop:tree_bound), and claims attainment only
+  in the three clauses of criterion 1 (re-frozen 2026-11-21);
   and that cap three survives in every summary surface (Paper 59 pointers, the syntheses,
   the field guide, the Avery reading map, INDEX).
 - **W2 — the K3 claims at generic scales [criterion 2].** `sec:three_electron` and the
@@ -242,20 +256,28 @@ are superseded where these say more); these are added at the paper's own tiers.
     degree in the scale), same conclusion.
 13. **Odd pieces [SYMBOLIC PROOF, stated range]** (`prop:odd_banana`): odd-lambda pieces carry Vanhove's
     two-dimensional banana operators for 2 <= m <= 5, order m-1; even pieces those of F_{m+1}.
-14. **s-type trees reach their rung [SYMBOLIC PROOF; step (i) checked exactly for small trees, mod primes beyond
-    n = 5]** (`prop:star_attain`): 3 <= n <= 8, any root; F_n lies in the fibre's D-module; n >= 9 the modules
-    meet nontrivially.
-15. **Homogeneous centre derivatives reach the rung [SYMBOLIC PROOF]** (`prop:tree_attain_hom`), under the
-    nonvanishing sphere-integral condition; the non-homogeneous case is the conjecture (`conj:tree_attain`),
-    [ARGUMENT], not proved.
+14. **s-type trees at the fingerprint weights reach their rung [SYMBOLIC PROOF; step (i) checked exactly for small
+    trees, mod primes beyond n = 5]** (`prop:star_attain`, retitled 2026-11-21): fingerprint (1s) weights,
+    3 <= n <= 8, any root; F_n lies in the fibre's D-module; n >= 9 the modules meet nontrivially.
+15. **Centre derivatives reach the rung [SYMBOLIC PROOF]** (`prop:tree_attain_hom`, extended 2026-11-21, PI-directed
+    derivation, cold-reviewed): every P_v of degree <= 2, mixed degrees or not, with
+    Pi = <P_0((n-1)w) prod P_v(-w)> != 0 (nabla^2 -> (n-1)^2 at the root, 1 elsewhere), 3 <= n <= 8; for homogeneous
+    P_v, Pi = (-(n-1))^{d_0} times the principal-symbol average; scale derivatives not covered. Pi = 0 is the
+    conjecture (`conj:tree_attain`), not proved. KNOWN COVERAGE GAP (not a new finding): the mixed-degree checks
+    (mod-p step (i) for six trees; the 5 pi/2 top constant) are records, not yet guarded.
 16. **l > 0 records [MEASURED]**: P63L1 / P63L2 branch exponents and amplitudes (registered before computing).
 
 Added watch-notes:
 - **W7 — proof vs check.** Which steps of star_attain / tree_attain_hom are exact, which mod a prime, which
   sampled; the paper's own disclosure ("checks of (i) beyond n = 5 are modulo primes, not exact") must hold at
   every restatement.
-- **W8 — conjecture stays a conjecture.** conj:tree_attain covers non-homogeneous P_v only as [ARGUMENT];
-  no locus may say "trees reach their rung" without "s-type" or "homogeneous".
+- **W8 — conjecture stays a conjecture (re-frozen 2026-11-21).** conj:tree_attain is open only for Pi = 0; no
+  locus may say "trees reach their rung" without the fingerprint (1s) weights or the Pi != 0 scope (C16
+  `p63-attainment-scope`), and no locus may credit the Pi = 0 case to the [ARGUMENT] paragraph.
+- **W11 — dictionary vs fibre attainment (added 2026-11-21).** Scope cap three says the dictionary "bounds no fibre"
+  and that every computed general-orbital fibre on the 1s rung is "observed, not proved", next to the two fibre
+  attainment propositions. Correct as a statement about the dictionary; verify it cannot be read as contradicting
+  prop:star_attain / prop:tree_attain_hom, at the cap and at every restatement.
 - **W9 — weight one per Neumann term** (C16 `two-centre-weight-one-whole-integral`) in the introduction and
   anywhere two-centre integrals are restated.
 - **W10 — Vanhove / Bloch-Kerr-Vanhove credit** for the banana operators; Brown 2015 for the tree reduction's
@@ -269,12 +291,17 @@ Paper 57 sub-domain J (as restatement).
 
 - The rungs are read on the fibre; the integrated value may sit lower (and does in one
   class).
-- The three-dimensional reduction is shown for the chain of three and the star and path
-  of four only; for $n \ge 5$ the holomorphic-period statement stands alone.
-- The dictionary places every orbital in the $1s$ module; it bounds the rung only for
-  $s$-type trees on the one-scale slice; attainment is proved there at the
-  holomorphic-period level for $n\le8$ (nonzero period) and observed, not proved, for every
-  computed fibre.
+- (Re-frozen 2026-11-21, the owner's Scope wording.) Every tree of $s$-type densities
+  reduces to one-dimensional Bessel integrals (prop:tree_reduction); at the fingerprint
+  weights with Coulomb kernels its composition factors have order at most $n$ for every
+  tree (prop:tree_rung; prop:tree_rung_l for centre derivatives of degree $\le2$);
+  reaching rung $n$ is computed for the chain of three and the star and path of four and
+  proved only for $s$-type trees at the $1s$ weights, $3\le n\le8$ (prop:star_attain), and
+  centre derivatives with $\Pi\neq0$, $3\le n\le8$ (prop:tree_attain_hom).
+- The dictionary places every orbital in the $1s$ module; it bounds the holomorphic
+  period only for $s$-type trees on the one-scale slice, on the rung there for $n\le8$
+  (nonzero period); it bounds no fibre, and that every computed general-orbital fibre
+  sits on the $1s$ rung is observed, not proved.
 - Among rings only the triangle was computed; the generic three-electron fibre's content
   is evidence from integer-relation searches.
 - The finite closed form of the first rung's integrated value is Paper 59's open problem
@@ -298,6 +325,12 @@ the correlated triangle's K3 rung at $\gamma = 1$; prop:tree_bound's scope (s-ty
 one-scale slice).
 
 ## Change log
+- 2026-11-21 (after FULL #3) — **RE-FROZEN, PI co-write ("Approve as drafted, write it in").** Brought the goalposts
+  to the owner, nothing relaxed: criterion 1 names the three attainment clauses (tree_bound, star_attain,
+  tree_attain_hom with Pi != 0) and adds the odd-piece n <= 7 rule; criterion 5 moves the open case to Pi = 0 (and
+  scale derivatives); headlines 14-15 retitled to the owner, 15 carries the mixed-degree guard gap as KNOWN; W1, W8
+  updated; W11 added (dictionary "bounds no fibre" next to the fibre attainment propositions); caps 2-3 replaced by
+  the owner's Scope wording; status header current. Governs the next run.
 - 2026-11-21 — **FULL (unseeded, PI-invoked) = FAIL, remediated (v6.8.2). RESEARCH-GRADE not earned (OWNER-LARGE
   found).** Criteria re-frozen with headlines 10-16, W7-W10. Deterministic 15/15 PASS. 2 OWNER-LARGE (odd-banana
   scope; the Pi != 0 contradiction, resolved by a cold-reviewed proof that extends prop:tree_attain_hom). SURFACE-LARGE
